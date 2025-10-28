@@ -4,94 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 544BFCCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:17:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2E80CCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:19:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D921783A2B;
-	Tue, 28 Oct 2025 09:17:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4EC4F839D6;
+	Tue, 28 Oct 2025 09:19:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KLUnTWuR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PyJXzPeB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C103C83A2F; Tue, 28 Oct 2025 09:17:53 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 51C5483A24; Tue, 28 Oct 2025 09:19:56 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 866D8839D6
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:17:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44AD9839A1
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:19:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3ee130237a8so3653620f8f.0
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 01:17:51 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4770c2cd96fso19547445e9.3
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 01:19:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761639471; x=1762244271; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1761639594; x=1762244394; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=aNHa2N6zAWv6SgDziVBmyxMvoQr3fNFPTOREXLvKgY8=;
- b=KLUnTWuRlCD3NNM1bNax9BozaFDMJz42zOCLJquZECq9ZafIkzJN4ux/mzS2fqmFMc
- FMGeA7duVG2ofJzdLoFEK/vI9h42jzX7c6X03O2xEDRvvtO9bNkxJ+Uvb7Rd9kQY7UPL
- xTErR51YJ2ja5rTv5zdhrurWfr5+Ee2wxYNBIfwiCgx2voIKcHaeHu7wdD6C+Q0gLFvN
- TSe+bWkAIgB48RWMvzjkyCtHQ/RCVFlAe7zvWSGKRbWF6b7kGikxLZ/sVuwlf3q+UBXl
- aKE/S9DcR/Mgby/NnWog4xwsep2lW+7FfGjU4y9Nuco4FU035rkA6hVdutN7LxPVjhT6
- +AxQ==
+ :reply-to; bh=BaJt7FXU7tQZ+xYaBA1FppP/Llve2J3rcUdQEUl4/lE=;
+ b=PyJXzPeBHZm9nfrZVExMjA6X3/dBedRwWBYCdZKN0OlKGWw6mdVotLHU65nIF8YYCT
+ RuaAHi2RZG6r5E+p5uzqvuyoyiqQO7jH4eYnHwgKfwWJc3cz4M/pn4cWXcKgOgW1Z1rt
+ O1kG5I1GdKnx02BNmCnQX00XE2GkjXjVVXkCCCtyQtXcG4juelGOnvurWUCsH4jh5uxt
+ XOPwo5Inb5kRnIRKNfYV5PAWTu5Fftj6ICV3WkRKEEMT73ESmSIDOwb0NgxuaN0tB4wq
+ fgUfnNKOZdzB00dj2XbjK6W/ZBHWi1msS9CUFAJBI8+Rm3/aFUUHASalhsBD7R9LLAbO
+ rfvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761639471; x=1762244271;
+ d=1e100.net; s=20230601; t=1761639594; x=1762244394;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=aNHa2N6zAWv6SgDziVBmyxMvoQr3fNFPTOREXLvKgY8=;
- b=vLWViXHVia84r67L8c/XJRgsVQB5qFzXSARDa92x3tdhnA+QphW/0mqoD/QPLpf8nu
- c7Sa0/HpO4vMk4MLLqyqi00ZhaO2jpHN3I54vHDuO+Ekp7gFXtEBO2H8DJ6nIWMfDJhz
- 2wyqohCmfd1uFAdorAT06zv8sNldbLi/OQ0Ernp1CDZvPg5YUsZtqYxWeb0Fg5iRBRMi
- FflhccUDNddQSAPmjyAq5tfRTVxANyNnB3Dp0LfQb4M6vIzw7IlrOodS7wHxzuTzhLLt
- 5F1E5ulCwQ05Y0FAJCavLnc28jF1c0UPOOwZZjgDAuf9i71+oU7HwLK381Qb0EdzJX+k
- NDsA==
+ bh=BaJt7FXU7tQZ+xYaBA1FppP/Llve2J3rcUdQEUl4/lE=;
+ b=BBplVfuj5pkX/M4bIf9kKrhwHWYbPvMrClEMsST2+K/0yB12V8MOmqKQL3f153RbR2
+ RpRfLx5E7jEYTFyNyNf/zEPa8YndmkMs/NYvjNFKgHOxfdpf4KHWRdVSF5l3TlBzLhpW
+ GCWMIY0q3GlRnX7I8iAIQYoypTGiX4iqUGI8pHmfBeK5W/uM/5NwZ2iQtanWx9pO38EO
+ IDgbPz/AEzCcEVzHIMEJKxIXBHiz+O/IOtfW/bKv0A1s/AqKqXBaFcIDz8N5FVa0ciVq
+ 7ZLu/Z5r6QVJgR0uPr+lm4Zpgc9NQKGBnPJaqD+C6ObmNGDtxNc0KgAB7Mnriklwfizi
+ ogUw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWmvyK6INnJ7W6h8sZBDLL6k8vKk6NrTbxGMYDr2vyw2xIB8TMIndtVVcLAj56QfCDJDRuxAJE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwY8anb9VWCoQEC3vHLMQegsWotzo+L+YcTsxYj/kn70qV08jDz
- 6HEj4ipTSfjwQZM1s1va0yLDJc2GUVLNdb5phszppSkKNVf8p40y1mtuz7wT8+4XPXA=
-X-Gm-Gg: ASbGncv77mSvo3iiXj2RSe4pA6u7/1Os7DvF9tsknGJvXz/891ZqMyqyp2cgPXkCVG7
- BcW3YEhEIYVCdOa16YBW0C8binMuirtxN2ZCuPk0wyKRV5+0wnDdLBmCl7zgz93L4VsdfREv6JZ
- NGi482RzQd5DcHJI1qrg634eRZRxcSnoX+J7KKr3wC6441qQ6xlQTylsc/n4NaLQ8GxGcFXFtb7
- TBj06scuMiUQFJim/dI48E58BnnhS1PyHasqucg4fjjxdVL7qCQABb8HxY+l1aMw8Oc/DTLkDNO
- qYvW4+cnCIDb+AG1B+D1GwWOHUjsrTzt61JGuedb8I7fenGJRNLtGQgJ+X5T92zVC6UGtKVVftc
- oeTvW2yNsikI2umy8rdkRAkU7MwIf6eq281gpa+VMY4dPOb4roKLpm/FCWKqe2tDjKfw700CwWb
- 4enkk37WYzMiQUO6Ln8Fsm4z/nWsNXZV4hvDkV4Itt13EHZLqDeaUEwG+NCgra
-X-Google-Smtp-Source: AGHT+IEQpN99M3HfmCnILVfiuFt5M9IOw+UhWvPluEUXd2RPBAbKm3o4LQ7dhsOXAy+ISK8dRZWk7Q==
-X-Received: by 2002:a05:6000:4013:b0:429:8d50:8d2 with SMTP id
- ffacd0b85a97d-429a7e37dfdmr1573217f8f.6.1761639470872; 
- Tue, 28 Oct 2025 01:17:50 -0700 (PDT)
+ AJvYcCUhfEipF4IMpJlHYWb9voZHRS8A2gdT8LMpVh6RafLXYsEC8GfBoiYbyaAjj1aOt9GYXODqpHU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzITI8LY3amuURQzlKNnNzeJr98bPtAnbUk2fYiSgXTBLZuB6/r
+ F74DMiE7XSP6kAdLxr3zUTAhB30pfhpj+qFNJbh4YNpNx9S9MfE3Qn9eVxN5EdIfowc=
+X-Gm-Gg: ASbGncvIU1HCiITgaehLiccnXvYgyWcm5j3RqNwJKql4bhCtvU9/uAY++qUYPflrjYN
+ Dpe2ciuQYEwVGkiWu4zljuBvHbHetIOGuNv97DRuUaOwWB35H3MgT5lWYEmS7ibaUHlc7NVifi4
+ hGISdCGoMYc2y985Zmm/pH48Rr6Wu0T+d/NuoAYps1ZvIiAMdXVOvmonvIhKNBaYADR9qAhRgq7
+ xiRd4uEny5Wu0SRtfs4miRmWNk8QvlCILSVSBrkf/ZKhYv8SeVb7s+FNj3VVbc+q+ftG/W5iuTq
+ aQK3V+TISHyDUROQN8tHauzHjvkCBReB06RiCbAiRuJDU9NDpu7n1GuE9RX52beUp7UiCJvsdsO
+ lYdFTXEyXEMLXVQu5o0ztQP1MM9nu6jMMT0MNq7wGhrGOEtUwKOny8hyz6qZRdQ+L/o1zmikg3d
+ LibxsjhMxnpIKJRWqAI/w7VC7Zmq15jUEcLNgV4vkYlZK7BhzdAg==
+X-Google-Smtp-Source: AGHT+IF20+63K7NQgN50Nhj4+/yOhJuRpHFfbsPyB+jmpFiUCfj9nflK71UJvDQWHSEEcCygTO47Nw==
+X-Received: by 2002:a5d:64c3:0:b0:427:9d7:86f9 with SMTP id
+ ffacd0b85a97d-429a7e8a9c8mr2145492f8f.47.1761639593570; 
+ Tue, 28 Oct 2025 01:19:53 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:cad:2140:ebe6:df10:d28d:aa5?
  ([2a01:e0a:cad:2140:ebe6:df10:d28d:aa5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952df6b9sm19635546f8f.44.2025.10.28.01.17.49
+ 5b1f17b1804b1-475dd47853csm183345875e9.13.2025.10.28.01.19.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Oct 2025 01:17:50 -0700 (PDT)
-Message-ID: <425461f4-8be2-4e47-91a6-7424950afbe1@linaro.org>
-Date: Tue, 28 Oct 2025 09:17:49 +0100
+ Tue, 28 Oct 2025 01:19:53 -0700 (PDT)
+Message-ID: <5e94dba5-b922-4536-aa29-bbdd7aeafb0d@linaro.org>
+Date: Tue, 28 Oct 2025 09:19:52 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 6/6] ufs: Add UFS driver for Renesas R-Car X5H
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Neha Malcom Francis <n-francis@ti.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sumit Garg
- <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot-qcom@groups.io
-References: <20251027170706.29302-1-marek.vasut+renesas@mailbox.org>
- <20251027170706.29302-6-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH RESEND] binman: fix mkmbn integration and tests
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20251023133850.3686431-1-casey.connolly@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -118,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20251027170706.29302-6-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251023133850.3686431-1-casey.connolly@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -138,347 +132,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/27/25 18:06, Marek Vasut wrote:
-> From: Tuyen Dang <tuyen.dang.xa@renesas.com>
+Hi,
+
+On 10/23/25 15:38, Casey Connolly wrote:
+> Add the missing cryptography requirement to binman so that mkmbn
+> will work correctly, fix a pylint error, and adjust mkmbn to properly
+> integrate into binman rather than writing the output file directly.
 > 
-> Add UFS driver for UFS controller present on Renesas R-Car X5H R8A78000.
-> The controller uses different initialization code compared to previous
-> generation UFS controller present in Renesas R-Car S4 R8A779F0, and the
-> majority of the driver is the initialization, hence a new driver.
+> For now skip testing u_boot_mbn since it has some weird requirements due
+> to how mkmbn works and can't be easily integrated into binman.
 > 
-> Signed-off-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-> Signed-off-by: Tuyen Dang <tuyen.dang.xa@renesas.com>
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> [Marek: Clean driver up, add SCMI reset handling, use read_poll_timeout(),
->          pass error values out of ufs_renesas_pre_init(), change the
-> 	compatible string to "renesas,r8a78000-ufs" to align with
-> 	previous generation "renesas,r8a779f0-ufs"]
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
-> Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Neha Malcom Francis <n-francis@ti.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Sumit Garg <sumit.garg@kernel.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>
-> Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-> Cc: u-boot-qcom@groups.io
-> Cc: u-boot@lists.denx.de
+> Resent to fix my name
 > ---
->   drivers/ufs/Kconfig                 |   9 +
->   drivers/ufs/Makefile                |   1 +
->   drivers/ufs/ufs-renesas-rcar-gen5.c | 268 ++++++++++++++++++++++++++++
->   3 files changed, 278 insertions(+)
->   create mode 100644 drivers/ufs/ufs-renesas-rcar-gen5.c
+>   tools/binman/btool/mkmbn.py      | 9 ++-------
+>   tools/binman/etype/u_boot_mbn.py | 5 +++--
+>   tools/binman/main.py             | 4 +++-
+>   tools/binman/requirements.txt    | 1 +
+>   tools/qcom/mkmbn/elf.py          | 6 +++---
+>   5 files changed, 12 insertions(+), 13 deletions(-)
 > 
-> diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-> index 4c6b08ad31c..363f53a6792 100644
-> --- a/drivers/ufs/Kconfig
-> +++ b/drivers/ufs/Kconfig
-> @@ -56,4 +56,13 @@ config UFS_RENESAS
->   	  platform driver. UFS host on Renesas needs some vendor
->   	  specific configuration before accessing the hardware.
+> diff --git a/tools/binman/btool/mkmbn.py b/tools/binman/btool/mkmbn.py
+> index 232e2b442a16..c1439977833e 100644
+> --- a/tools/binman/btool/mkmbn.py
+> +++ b/tools/binman/btool/mkmbn.py
+> @@ -12,18 +12,13 @@ class Bintoolmkmbn(bintool.Bintool):
+>       def __init__(self, name):
+>           super().__init__(name, 'Generate MBN (signed ELF) image for U-Boot')
 >   
-> +config UFS_RENESAS_GEN5
-> +	bool "Renesas R-Car X5H UFS Controller support"
-> +	depends on UFS
-> +	select BOUNCE_BUFFER
-> +	help
-> +	  This selects the Renesas X5H specific additions to UFSHCD
-> +	  platform driver. UFS host on Renesas needs some vendor
-> +	  specific configuration before accessing the hardware.
-> +
->   endmenu
-> diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-> index 2ac410cf7c3..46866260b7b 100644
-> --- a/drivers/ufs/Makefile
-> +++ b/drivers/ufs/Makefile
-> @@ -10,3 +10,4 @@ obj-$(CONFIG_TI_J721E_UFS) += ti-j721e-ufs.o
->   obj-$(CONFIG_UFS_AMD_VERSAL2) += ufs-amd-versal2.o ufshcd-dwc.o
->   obj-$(CONFIG_UFS_PCI) += ufs-pci.o
->   obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
-> +obj-$(CONFIG_UFS_RENESAS_GEN5) += ufs-renesas-rcar-gen5.o
-> diff --git a/drivers/ufs/ufs-renesas-rcar-gen5.c b/drivers/ufs/ufs-renesas-rcar-gen5.c
-> new file mode 100644
-> index 00000000000..3c66022579f
-> --- /dev/null
-> +++ b/drivers/ufs/ufs-renesas-rcar-gen5.c
-> @@ -0,0 +1,268 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Renesas UFS host controller driver
-> + *
-> + * Copyright (C) 2025 Renesas Electronics Corporation
-> + */
-> +
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <ufs.h>
-> +#include <asm/io.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/iopoll.h>
-> +#include <reset.h>
-> +
-> +#include "ufs.h"
-> +
-> +#define UFS_RENESAS_TIMEOUT_US		100000
-> +
-> +struct ufs_renesas_priv {
-> +	struct clk_bulk		clks;
-> +	struct reset_ctl_bulk	resets;
-> +	fdt_addr_t		phy_base;
-> +	/* The hardware needs initialization once */
-> +	bool			initialized;
-> +};
-> +
-> +static void ufs_dme_command(struct ufs_hba *hba, u32 cmd,
-> +			    u32 arg1, u32 arg2, u32 arg3)
-> +{
-> +	ufshcd_writel(hba, arg1, REG_UIC_COMMAND_ARG_1);
-> +	ufshcd_writel(hba, arg2, REG_UIC_COMMAND_ARG_2);
-> +	ufshcd_writel(hba, arg3, REG_UIC_COMMAND_ARG_3);
-> +	ufshcd_writel(hba, cmd, REG_UIC_COMMAND);
-> +}
-> +
-> +static int ufs_renesas_pre_init(struct ufs_hba *hba)
-> +{
-> +	struct ufs_renesas_priv *priv = dev_get_priv(hba->dev);
-> +	u32 val32;
-> +	u16 val16;
-> +	int ret;
-> +
-> +	writew(0x0001, priv->phy_base + 0x20000);
+>       # pylint: disable=R0913
+> -    def run(self, infile: str) -> CommandResult:
+> +    def run(self, infile: str, outfile:  str) -> CommandResult:
+>           """Run mkmbn.py
+>           """
+> -        args = [infile]
+> +        args = ['-o', outfile, infile]
+>           return self.run_cmd_result(*args, raise_on_error=False)
+>   
+>   
+> -    def get_path(self):
+> -        path = super().get_path()
+> -        return path
+> -
+> -
+>       def fetch(self, _method):
+>           return True
+> diff --git a/tools/binman/etype/u_boot_mbn.py b/tools/binman/etype/u_boot_mbn.py
+> index e470b31fa318..6268397fd122 100644
+> --- a/tools/binman/etype/u_boot_mbn.py
+> +++ b/tools/binman/etype/u_boot_mbn.py
+> @@ -31,10 +31,11 @@ class Entry_u_boot_mbn(Entry_blob):
+>       def __init__(self, section, etype, node):
+>           super().__init__(section, etype, node)
+>   
+>       def ObtainContents(self):
+> -        self._pathname = tools.get_input_filename('u-boot.bin')
+> -        res = self.mkmbn.run(self._pathname)
+> +        pathname = tools.get_input_filename('u-boot.bin')
+> +        self._pathname = tools.get_output_filename('u-boot.mbn')
+> +        res = self.mkmbn.run(pathname, self._pathname)
+>           if res is None:
+>               self.Raise('mkmbn not found or failed!')
+>           # Exit code 61 (ENODATA) indicates that an MBN file can't be built
+>           # for this board. This is non-fatal since it may not be required.
+> diff --git a/tools/binman/main.py b/tools/binman/main.py
+> index fa5ad79ca0e8..bfd6e990d2e4 100755
+> --- a/tools/binman/main.py
+> +++ b/tools/binman/main.py
+> @@ -102,9 +102,11 @@ def RunTestCoverage(toolpath, build_dir, args):
+>                'tools/u_boot_pylib/*'],
+>               build_dir, all_set, extra_args or None, args=args,
+>               allow_failures=['tools/binman/btool/cst.py',
+>                               'tools/binman/etype/nxp_imx8mcst.py',
+> -                            'tools/binman/etype/nxp_imx8mimage.py'])
+> +                            'tools/binman/etype/nxp_imx8mimage.py',
+> +                            'tools/binman/etype/u_boot_mbn.py',
+> +                            'tools/binman/btool/mkmbn.py'])
+>   
+>   def RunBinman(args):
+>       """Main entry point to binman once arguments are parsed
+>   
+> diff --git a/tools/binman/requirements.txt b/tools/binman/requirements.txt
+> index 7db72e888e3e..51b8ecd73478 100644
+> --- a/tools/binman/requirements.txt
+> +++ b/tools/binman/requirements.txt
+> @@ -3,4 +3,5 @@ importlib_resources==6.5.2
+>   jsonschema==4.23.0
+>   pycryptodomex==3.21.0
+>   pyelftools==0.31
+>   yamllint==1.35.1
+> +cryptography==46.0.3 # for mkmbn
+> diff --git a/tools/qcom/mkmbn/elf.py b/tools/qcom/mkmbn/elf.py
+> index 86f12d1f4e5d..7737adc6a4e2 100644
+> --- a/tools/qcom/mkmbn/elf.py
+> +++ b/tools/qcom/mkmbn/elf.py
+> @@ -171,11 +171,11 @@ def _align(i: int, alignment: int) -> int:
+>   class Elf:
+>   	ehdr: Ehdr
+>   	phdrs: List[Phdr]
+>   
+> -	def __init__(self):
+> -		self.ehdr = Ehdr()
+> -		self.phdrs: List[Phdr] = []
+> +	def __init__(self, ehdr: Ehdr | None = None, phdrs: List[Phdr] | None = None):
+> +		self.ehdr = ehdr or Ehdr()
+> +		self.phdrs: List[Phdr] = phdrs or []
+>   
+>   	def total_header_size(self):
+>   		return self.ehdr.e_phoff + len(self.phdrs) * self.ehdr.e_phentsize
+>   
 
-The driver looks good, but it's a shame there's not a single
-register or field define to use instead of magic numbers !
+I understand all the changes.. except this last one.
 
+Could you elaborate ?
+
+Thanks,
 Neil
-
-> +	writew(0x005c, priv->phy_base + 0x20212);
-> +	writew(0x005c, priv->phy_base + 0x20214);
-> +	writew(0x005c, priv->phy_base + 0x20216);
-> +	writew(0x005c, priv->phy_base + 0x20218);
-> +	writew(0x036a, priv->phy_base + 0x201d0);
-> +	writew(0x0102, priv->phy_base + 0x201d2);
-> +	writew(0x001f, priv->phy_base + 0x20082);
-> +	writew(0x000b, priv->phy_base + 0x20084);
-> +	writew(0x0126, priv->phy_base + 0x201d2);
-> +	writew(0x01dc, priv->phy_base + 0x20214);
-> +	writew(0x01dc, priv->phy_base + 0x20218);
-> +	writew(0x0000, priv->phy_base + 0x201cc);
-> +	writew(0x0200, priv->phy_base + 0x201ce);
-> +	writew(0x0000, priv->phy_base + 0x20212);
-> +	writew(0x0000, priv->phy_base + 0x20216);
-> +
-> +	ret = readw_poll_timeout(priv->phy_base + 0x201ec, val16,
-> +				 !(val16 & BIT(12)), UFS_RENESAS_TIMEOUT_US);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = readw_poll_timeout(priv->phy_base + 0x201e4, val16,
-> +				 !(val16 & BIT(12)), UFS_RENESAS_TIMEOUT_US);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = readw_poll_timeout(priv->phy_base + 0x201f0, val16,
-> +				 !(val16 & BIT(12)), UFS_RENESAS_TIMEOUT_US);
-> +	if (ret)
-> +		return ret;
-> +
-> +	writew(0x0000, priv->phy_base + 0x20000);
-> +
-> +	ufshcd_writel(hba, BIT(0), REG_CONTROLLER_ENABLE);
-> +
-> +	ret = read_poll_timeout(ufshcd_readl, val32, (val32 & BIT(0)),
-> +				1, UFS_RENESAS_TIMEOUT_US,
-> +				hba, REG_CONTROLLER_ENABLE);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = read_poll_timeout(ufshcd_readl, val32, (val32 & BIT(3)),
-> +				1, UFS_RENESAS_TIMEOUT_US,
-> +				hba, REG_CONTROLLER_STATUS);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/* Skip IE because we cannot handle interrupts here */
-> +	ufs_dme_command(hba, 0x00000002, 0x81010000, 0x00000000, 0x00000005);
-> +	ufs_dme_command(hba, 0x00000002, 0x81150000, 0x00000000, 0x00000001);
-> +	ufs_dme_command(hba, 0x00000002, 0x81180000, 0x00000000, 0x00000001);
-> +	ufs_dme_command(hba, 0x00000002, 0x80090000, 0x00000000, 0x00000000);
-> +	ufs_dme_command(hba, 0x00000002, 0x800a0000, 0x00000000, 0x000000c8);
-> +	ufs_dme_command(hba, 0x00000002, 0x80090001, 0x00000000, 0x00000000);
-> +	ufs_dme_command(hba, 0x00000002, 0x800a0001, 0x00000000, 0x000000c8);
-> +	ufs_dme_command(hba, 0x00000002, 0x800a0004, 0x00000000, 0x00000000);
-> +	ufs_dme_command(hba, 0x00000002, 0x800b0004, 0x00000000, 0x00000064);
-> +	ufs_dme_command(hba, 0x00000002, 0x800a0005, 0x00000000, 0x00000000);
-> +	ufs_dme_command(hba, 0x00000002, 0x800b0005, 0x00000000, 0x00000064);
-> +	ufs_dme_command(hba, 0x00000002, 0xd0850000, 0x00000000, 0x00000001);
-> +
-> +	writew(0x0001, priv->phy_base + 0x20000);
-> +
-> +	clrbits_le16(priv->phy_base + 0x20022, BIT(0));
-> +
-> +	ret = readw_poll_timeout(priv->phy_base + (0x00198 << 1), val16,
-> +				 (val16 & BIT(0)), UFS_RENESAS_TIMEOUT_US);
-> +	if (ret)
-> +		return ret;
-> +
-> +	writew(0x0368, priv->phy_base + 0x201d0);
-> +
-> +	ret = readw_poll_timeout(priv->phy_base + 0x201e4, val16,
-> +				 !(val16 & BIT(11)), UFS_RENESAS_TIMEOUT_US);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = readw_poll_timeout(priv->phy_base + 0x201e8, val16,
-> +				 !(val16 & BIT(11)), UFS_RENESAS_TIMEOUT_US);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = readw_poll_timeout(priv->phy_base + 0x201ec, val16,
-> +				 !(val16 & BIT(11)), UFS_RENESAS_TIMEOUT_US);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = readw_poll_timeout(priv->phy_base + 0x201f0, val16,
-> +				 !(val16 & BIT(11)), UFS_RENESAS_TIMEOUT_US);
-> +	if (ret)
-> +		return ret;
-> +
-> +	priv->initialized = true;
-> +
-> +	return 0;
-> +}
-> +
-> +static int ufs_renesas_init(struct ufs_hba *hba)
-> +{
-> +	hba->quirks |= UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS | UFSHCD_QUIRK_HIBERN_FASTAUTO |
-> +		       UFSHCD_QUIRK_BROKEN_LCC;
-> +
-> +	return 0;
-> +}
-> +
-> +static int ufs_renesas_hce_enable_notify(struct ufs_hba *hba,
-> +					 enum ufs_notify_change_status status)
-> +{
-> +	struct ufs_renesas_priv *priv = dev_get_priv(hba->dev);
-> +	int ret;
-> +
-> +	if (priv->initialized)
-> +		return 0;
-> +
-> +	if (status == PRE_CHANGE) {
-> +		ret = ufs_renesas_pre_init(hba);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	priv->initialized = true;
-> +
-> +	return 0;
-> +}
-> +
-> +static int ufs_renesas_link_startup_notify(struct ufs_hba *hba,
-> +					   enum ufs_notify_change_status status)
-> +{
-> +	if (status == PRE_CHANGE)
-> +		return ufshcd_dme_set(hba, UIC_ARG_MIB(PA_LOCAL_TX_LCC_ENABLE), 0);
-> +
-> +	return 0;
-> +}
-> +
-> +static int ufs_renesas_get_max_pwr_mode(struct ufs_hba *hba,
-> +					struct ufs_pwr_mode_info *max_pwr_info)
-> +{
-> +	max_pwr_info->info.gear_rx = UFS_HS_G5;
-> +	max_pwr_info->info.gear_tx = UFS_HS_G5;
-> +	max_pwr_info->info.pwr_tx = FASTAUTO_MODE;
-> +	max_pwr_info->info.pwr_rx = FASTAUTO_MODE;
-> +	max_pwr_info->info.hs_rate = PA_HS_MODE_A;
-> +
-> +	max_pwr_info->info.lane_rx = 1;
-> +	max_pwr_info->info.lane_tx = 1;
-> +
-> +	dev_info(hba->dev, "Max HS Gear: %d\n", max_pwr_info->info.gear_rx);
-> +
-> +	return 0;
-> +}
-> +
-> +static struct ufs_hba_ops ufs_renesas_vops = {
-> +	.init			= ufs_renesas_init,
-> +	.hce_enable_notify	= ufs_renesas_hce_enable_notify,
-> +	.link_startup_notify	= ufs_renesas_link_startup_notify,
-> +	.get_max_pwr_mode	= ufs_renesas_get_max_pwr_mode,
-> +};
-> +
-> +static int ufs_renesas_pltfm_probe(struct udevice *dev)
-> +{
-> +	struct ufs_renesas_priv *priv = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	priv->phy_base = dev_read_addr_name(dev, "phy");
-> +	if (priv->phy_base == FDT_ADDR_T_NONE)
-> +		return -EINVAL;
-> +
-> +	ret = reset_get_bulk(dev, &priv->resets);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	ret = clk_get_bulk(dev, &priv->clks);
-> +	if (ret < 0)
-> +		goto err_clk_get;
-> +
-> +	ret = clk_enable_bulk(&priv->clks);
-> +	if (ret)
-> +		goto err_clk_enable;
-> +
-> +	reset_assert_bulk(&priv->resets);
-> +	reset_deassert_bulk(&priv->resets);
-> +
-> +	ret = ufshcd_probe(dev, &ufs_renesas_vops);
-> +	if (ret) {
-> +		dev_err(dev, "ufshcd_probe() failed %d\n", ret);
-> +		goto err_ufshcd_probe;
-> +	}
-> +
-> +	return 0;
-> +
-> +err_ufshcd_probe:
-> +	reset_assert_bulk(&priv->resets);
-> +	clk_disable_bulk(&priv->clks);
-> +err_clk_enable:
-> +	clk_release_bulk(&priv->clks);
-> +err_clk_get:
-> +	reset_release_bulk(&priv->resets);
-> +	return ret;
-> +}
-> +
-> +static int ufs_renesas_pltfm_remove(struct udevice *dev)
-> +{
-> +	struct ufs_renesas_priv *priv = dev_get_priv(dev);
-> +
-> +	reset_release_bulk(&priv->resets);
-> +	clk_disable_bulk(&priv->clks);
-> +	clk_release_bulk(&priv->clks);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct udevice_id ufs_renesas_pltfm_ids[] = {
-> +	{ .compatible = "renesas,r8a78000-ufs" },
-> +	{ /* sentinel */ }
-> +};
-> +
-> +U_BOOT_DRIVER(ufs_renesas) = {
-> +	.name		= "ufs-renesas-gen5",
-> +	.id		= UCLASS_UFS,
-> +	.of_match	= ufs_renesas_pltfm_ids,
-> +	.probe		= ufs_renesas_pltfm_probe,
-> +	.remove		= ufs_renesas_pltfm_remove,
-> +	.priv_auto	= sizeof(struct ufs_renesas_priv),
-> +};
-
