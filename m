@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53CC8CCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 09:16:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC8BCCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 09:16:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F32B83AC5;
-	Tue, 28 Oct 2025 10:14:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A575483ACD;
+	Tue, 28 Oct 2025 10:14:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="MEUY8i0A";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="CA1XJnxI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A2B583AA0; Tue, 28 Oct 2025 10:14:20 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id D633683AE4; Tue, 28 Oct 2025 10:14:24 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD67E83AC5
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:14:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07AEA83ACA
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:14:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 5D6DE4E41395;
- Tue, 28 Oct 2025 09:14:18 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id B6A521A16F5;
+ Tue, 28 Oct 2025 09:14:22 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 32F2E606AB;
- Tue, 28 Oct 2025 09:14:18 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 8CB7C60704;
+ Tue, 28 Oct 2025 09:14:22 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 28926102F4A44; Tue, 28 Oct 2025 10:14:12 +0100 (CET)
+ with ESMTPSA id 99A3A102F4A63; Tue, 28 Oct 2025 10:14:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761642856; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1761642861; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=4/4YsYon+hmRBT86CqYej0qXYBTv9p0XexjVa/sUHfA=;
- b=MEUY8i0AdH6xnEevlff1co0LqbTNpNqXfnauVLhOa5Dd9IC0Ng6tj7R4PwWyq7JrPtbeoo
- Why/CIgvqD0/V/pOE/c33WnP0KEHcU0ByFr2ClzQKXnTnUr4ZIE9ppxtPTgBg4Yt9TxlgD
- 1HvYM6iqdJZXwAAwrt5on/xOkb3afLPpSwNLik7Bm+4vawVYWRRaYJ+zZEUTojlR4RldGZ
- q2A45TDZBZJ4V7L+JeFI0jyNbFf9Bq1/29nzciCeSYcG/hlFxopsP66nmQpw75uhIxiGhd
- 0yXVMGfCnPeGZKTV4zZ7eIAABoJJDl64UY6NEgIwp6RcNnfAkv5R9suYVv2LeA==
+ bh=L805paAsADhmeTP+MKe80PJ6gHKIjNPLHH7GPF+AqCo=;
+ b=CA1XJnxIRbwqFA+ZGMJvG0RXpAuz6jumSrBRlZSe2+qieGUONyigNeQ8YE/FlycULtUUnP
+ Dk4XcukwEdsl5xY/ZzbkA2LvDk7YQarJ08CD6qHc7NzbtgGnoFYfbGsctUVM+B4N078Aik
+ F5lDPogVqNcqPp+VTx/1FbFf8CaJfu0QecKTboLKNEoqi6Utlhh5xdZTi3dZgAlb9fTCT9
+ HS0REfvMAgRbwQrvnV7ZiZchu/dzmn3cQAh6rVuHVn9eckvbpkTPkbMzNmAltyvU7Scx1s
+ 0sDfJMGOnIur1uRaJVDB/zV299PAE9iJptoRygjcZ/1RG9jy4Z8SzKgs+Touzg==
 From: Richard Genoud <richard.genoud@bootlin.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -60,10 +60,10 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
  Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v2 17/24] mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and
- NFC_ECC_PAT_FOUND
-Date: Tue, 28 Oct 2025 10:12:38 +0100
-Message-ID: <20251028091256.600992-18-richard.genoud@bootlin.com>
+Subject: [PATCH v2 18/24] mtd: rawnand: sunxi_spl: increase max_oobsize for
+ 2KiB pages
+Date: Tue, 28 Oct 2025 10:12:39 +0100
+Message-ID: <20251028091256.600992-19-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251028091256.600992-1-richard.genoud@bootlin.com>
 References: <20251028091256.600992-1-richard.genoud@bootlin.com>
@@ -86,102 +86,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use defines instead of hardcoded values for NFC_ECC_{ERR_MSK,PAT_FOUND}
+Increase max_oobsize to take into account bigger OOB on 2KiB pages
 
-SPL is using hard coded values for ECC error detection and empty chunk
-detection.
-The H6/H616 registers for that have changed, the pattern found is no
-more in the NFC_REG_ECC_ST register.
+Some NAND chip (e.g. Kioxia TC58NVG1S3HTA00) have a 2KiB page size +
+128 bytes OOB.
+In order to detect them, the max_oobsize has to be increased from 64 to
+128 bytes.
 
-So, don't presume anymore that pattern_found is in NFC_REG_ECC_ST, and
-read the pattern_found register to get this information.
-
-Apart from an additional register reading, no functional change.
+Tested on Kioxia TC58NVG1S3HTA00 NAND chip on Whatsminer H616 board.
 
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 ---
- drivers/mtd/nand/raw/sunxi_nand.h     |  3 +++
- drivers/mtd/nand/raw/sunxi_nand_spl.c | 21 +++++++++++++++------
- 2 files changed, 18 insertions(+), 6 deletions(-)
+ drivers/mtd/nand/raw/sunxi_nand_spl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sunxi_nand.h
-index b5a3800d33d2..25d18eaa0b81 100644
---- a/drivers/mtd/nand/raw/sunxi_nand.h
-+++ b/drivers/mtd/nand/raw/sunxi_nand.h
-@@ -150,6 +150,7 @@
- 
- /* define bit use in NFC_ECC_ST */
- #define NFC_ECC_ERR(x)		BIT(x)
-+#define NFC_ECC_ERR_MSK(nfc)	((nfc)->caps->ecc_err_mask)
- 
- /*
-  * define bit use in NFC_REG_PAT_FOUND
-@@ -177,6 +178,7 @@
-  * @reg_spare_area:	Spare Area Register
-  * @reg_pat_id:		Pattern ID Register
-  * @reg_pat_found:	Data Pattern Status Register
-+ * @ecc_err_mask:	ERR_ERR mask in NFC_ECC_ST register
-  * @pat_found_mask:	ECC_PAT_FOUND mask in NFC_REG_PAT_FOUND register
-  * @ecc_mode_mask:	ECC_MODE mask in NFC_ECC_CTL register
-  * @random_en_mask:	RANDOM_EN mask in NFC_ECC_CTL register
-@@ -190,6 +192,7 @@ struct sunxi_nfc_caps {
- 	unsigned int reg_pat_id;
- 	unsigned int reg_pat_found;
- 	unsigned int pat_found_mask;
-+	unsigned int ecc_err_mask;
- 	unsigned int ecc_mode_mask;
- 	unsigned int random_en_mask;
- };
 diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-index 6b18861541a9..3f668e92728d 100644
+index 3f668e92728d..786c46254838 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
 +++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-@@ -55,6 +55,9 @@ const uint16_t random_seed[128] = {
- __maybe_unused static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
- 	.has_ecc_block_512 = true,
- 	.reg_spare_area = NFC_REG_A10_SPARE_AREA,
-+	.reg_pat_found = NFC_REG_ECC_ST,
-+	.pat_found_mask = GENMASK(31, 16),
-+	.ecc_err_mask = GENMASK(15, 0),
- 	.random_en_mask = BIT(9),
- };
- 
-@@ -213,7 +216,7 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
- 	u16 rand_seed = 0;
- 	int oob_chunk_sz = ecc_bytes[conf->ecc_strength];
- 	int page = offs / conf->page_size;
--	u32 ecc_st;
-+	u32 ecc_st, pattern_found;
- 	int i;
- 
- 	if (offs % conf->page_size || len % conf->ecc_size ||
-@@ -258,15 +261,21 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
- 		ecc_st = readl(SUNXI_NFC_BASE + NFC_REG_ECC_ST);
- 
- 		/* ECC error detected. */
--		if (ecc_st & 0xffff)
-+		if (ecc_st & NFC_ECC_ERR_MSK(conf))
- 			return -EIO;
- 
- 		/*
--		 * Return 1 if the first chunk is empty (needed for
--		 * configuration detection).
-+		 * Return 1 if the first chunk is empty (all 00 or ff)
-+		 * (needed for configuration detection).
- 		 */
--		if (!i && (ecc_st & 0x10000))
--			return 1;
-+		if (!i) {
-+			pattern_found = readl(SUNXI_NFC_BASE +
-+					      conf->caps->reg_pat_found);
-+			pattern_found = field_get(NFC_ECC_PAT_FOUND_MSK(conf),
-+						  pattern_found);
-+			if (pattern_found & NFC_ECC_PAT_FOUND(0))
-+				return 1;
-+		}
- 
- 		/* Retrieve the data from SRAM */
- 		nand_readlcpy((u32 *)data,
+@@ -305,7 +305,7 @@ static int nand_max_ecc_strength(struct nfc_config *conf)
+ 	 */
+ 	switch (conf->page_size) {
+ 	case 2048:
+-		max_oobsize = 64;
++		max_oobsize = 128;
+ 		break;
+ 	case 4096:
+ 		max_oobsize = 256;
 -- 
 2.47.3
 
