@@ -4,70 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA22CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 14:14:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2595FCCD1BF
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 14:23:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3627581D6A;
-	Tue, 28 Oct 2025 15:14:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8F799832AD;
+	Tue, 28 Oct 2025 15:23:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mXKqXT7u";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HcDSVsHJ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KheEpJdS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1754682A9E; Tue, 28 Oct 2025 15:14:07 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 16C0382E34; Tue, 28 Oct 2025 15:23:48 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A32780422
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 15:14:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF8EB80422
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 15:23:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cwsn71N6pz9t7p;
- Tue, 28 Oct 2025 15:14:03 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cwt0K2Cd9z9tTM;
+ Tue, 28 Oct 2025 15:23:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761660843;
+ s=mail20150812; t=1761661425;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lg36i0xoy7uMgfN1ioTOO5qo1HYooFKAMaH7h8TZjPg=;
- b=mXKqXT7uDIcYEqtuZ5QGmPiyfsyC6uoGfWO8J4ojwaOj4i23dZZG996vKITm2s7nPwyNqe
- PEAkAqQJ0u8R29t1pj68YBWlvFWF/NfSufc7ERuVwM0JWQz3O2LkxpV9dfxxzTqOEVhgII
- QLwdGgNVp8ra0BTTM1q1mPRu77PBxdETS35vH22XT9B7FNsiT/EMLNS+/IkAGL6/o6IWke
- OjGaH8PF3lNNdnExaTGlABMSNo5GUIxSOGS7ak/z5CctSDj9XT/aAL8TS38Zp9zkaphuSs
- aoyUw5ft2cIn7Sw99RvIGdlLMNfOtW7jsoKEPPGhQaqNkzpVrdILZk9MAY7M0A==
-Message-ID: <cae0e8cf-5abe-4cb7-b867-a3e314210f4e@mailbox.org>
-Date: Tue, 28 Oct 2025 15:13:58 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH 6/6] ufs: Add UFS driver for Renesas R-Car X5H
-To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
-Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=My8zA2WamrMKMi2o3T1SMCZygeFKs3qx4XgODvZpOoc=;
+ b=HcDSVsHJtf/esdfwJfOFus22UbH9F/hsKd5/2u7u8dvCGsDHXEnO0S4wrkupPsyGk6uoEZ
+ QqVfw5ApKr3TJb4oJtf2+656qmH+NfvUK0WNCKLVInGbpGL1o8vBp6OC9B4Nciv8Bnshzl
+ pG+vDMbsklfoHfIGCiho4EyPqCicZJ5RWlH/VbHmKvQlK1V3fJu2k74MGdS9qCANjcSw4f
+ 5HedW4lB4pdlGZPAf23hO2EOtL/VmAFNikRttgXELB4LSv5bD/6pXpEO9H2LY70ITgLFtI
+ JBxENo9CLRyPIzmvyg2f6KMOA89+A3d9b1U6/KYvrbazz6TOeYlxfLoBFRD+Ag==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761661423;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=My8zA2WamrMKMi2o3T1SMCZygeFKs3qx4XgODvZpOoc=;
+ b=KheEpJdShA7rzh6dhWHkZTma4BTKMuYMs5Qg8iF7pOAwJKl8ZNp4nKxqAh0KAmdCOGF3Jp
+ hmCMKFjRHBC/F2EKqoMRQ8yeifZJhUPsyg8xuWdHDWhX0ASNG8hifqzhIhG3HrsXErw7Nm
+ J/2gTuKKbvwIr2AR0wB2xRUciak2RdzcBIUPvOxBV6vG2QgyrsdvLXBLCrnlty3IIgKvku
+ DJeHyfFisaWj1HsTb2sxgE/qGvvvy+fY7oNnV7SUQusSN+1gP6+YMGkOnEDpiFG0UESyaN
+ JmlUut3RQDX02OyC7kcqZGMAdR47Vj6krMNX2Q7PvX05/MGfaSYLWBmltSpmRA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Casey Connolly <casey.connolly@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Neha Malcom Francis <n-francis@ti.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Sumit Garg
- <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot-qcom@groups.io
-References: <20251027170706.29302-1-marek.vasut+renesas@mailbox.org>
- <20251027170706.29302-6-marek.vasut+renesas@mailbox.org>
- <425461f4-8be2-4e47-91a6-7424950afbe1@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <425461f4-8be2-4e47-91a6-7424950afbe1@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Michal Simek <michal.simek@amd.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Tuyen Dang <tuyen.dang.xa@renesas.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>, u-boot-qcom@groups.io
+Subject: [PATCH v2 1/7] ufs: core: Keep Makefile and Kconfig list sorted
+Date: Tue, 28 Oct 2025 15:22:21 +0100
+Message-ID: <20251028142335.18125-1-marek.vasut+renesas@mailbox.org>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 827dba5599a5d2f42d3
-X-MBO-RS-META: ffac5u4ua1u7edcdkdipmdkzag9d56u6
+X-MBO-RS-ID: 3d93d657257119ebd9b
+X-MBO-RS-META: 695zsgmat1aok7s4birijix486yo4ir3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,19 +91,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/28/25 9:17 AM, Neil Armstrong wrote:
+Sort the Makefile and Kconfig lists alphabetically. No functional change.
 
-Hello Neil,
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Sumit Garg <sumit.garg@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+Cc: u-boot-qcom@groups.io
+Cc: u-boot@lists.denx.de
+---
+V2: Add RB from Neil
+---
+ drivers/ufs/Kconfig  | 38 +++++++++++++++++++-------------------
+ drivers/ufs/Makefile |  2 +-
+ 2 files changed, 20 insertions(+), 20 deletions(-)
 
->> +static int ufs_renesas_pre_init(struct ufs_hba *hba)
->> +{
->> +    struct ufs_renesas_priv *priv = dev_get_priv(hba->dev);
->> +    u32 val32;
->> +    u16 val16;
->> +    int ret;
->> +
->> +    writew(0x0001, priv->phy_base + 0x20000);
-> 
-> The driver looks good, but it's a shame there's not a single
-> register or field define to use instead of magic numbers !
-I'm sorry about that, the init procedure comes from the hardware team.
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index b08ca08b07c..b466374fe40 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -15,17 +15,6 @@ config CADENCE_UFS
+ 	  This selects the platform driver for the Cadence UFS host
+ 	  controller present on present TI's J721e devices.
+ 
+-config UFS_PCI
+-	bool "PCI bus based UFS Controller support"
+-	depends on PCI && UFS
+-	help
+-	  This selects the PCI UFS Host Controller Interface. Select this if
+-	  you have UFS Host Controller with PCI Interface.
+-
+-	  If you have a controller with this interface, say Y here.
+-
+-	  If unsure, say N.
+-
+ config QCOM_UFS
+ 	bool "Qualcomm Host Controller driver for UFS"
+ 	depends on UFS && ARCH_SNAPDRAGON
+@@ -39,6 +28,25 @@ config TI_J721E_UFS
+ 	  This selects the glue layer driver for Cadence controller
+ 	  present on TI's J721E devices.
+ 
++config UFS_AMD_VERSAL2
++	bool "AMD Versal Gen 2 UFS controller platform driver"
++	depends on UFS && ZYNQMP_FIRMWARE
++	help
++	  This selects the AMD specific additions to UFSHCD platform driver.
++	  UFS host on AMD needs some vendor specific configuration before accessing
++	  the hardware.
++
++config UFS_PCI
++	bool "PCI bus based UFS Controller support"
++	depends on PCI && UFS
++	help
++	  This selects the PCI UFS Host Controller Interface. Select this if
++	  you have UFS Host Controller with PCI Interface.
++
++	  If you have a controller with this interface, say Y here.
++
++	  If unsure, say N.
++
+ config UFS_RENESAS
+ 	bool "Renesas specific hooks to UFS controller platform driver"
+ 	depends on UFS
+@@ -48,12 +56,4 @@ config UFS_RENESAS
+ 	  UFS host on Renesas needs some vendor specific configuration before
+ 	  accessing the hardware.
+ 
+-config UFS_AMD_VERSAL2
+-	bool "AMD Versal Gen 2 UFS controller platform driver"
+-	depends on UFS && ZYNQMP_FIRMWARE
+-	help
+-	  This selects the AMD specific additions to UFSHCD platform driver.
+-	  UFS host on AMD needs some vendor specific configuration before accessing
+-	  the hardware.
+-
+ endmenu
+diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
+index 2a378e45111..548306fb99e 100644
+--- a/drivers/ufs/Makefile
++++ b/drivers/ufs/Makefile
+@@ -7,6 +7,6 @@ obj-$(CONFIG_UFS) += ufs.o ufs-uclass.o
+ obj-$(CONFIG_CADENCE_UFS) += cdns-platform.o
+ obj-$(CONFIG_QCOM_UFS) += ufs-qcom.o
+ obj-$(CONFIG_TI_J721E_UFS) += ti-j721e-ufs.o
++obj-$(CONFIG_UFS_AMD_VERSAL2) += ufs-amd-versal2.o ufshcd-dwc.o
+ obj-$(CONFIG_UFS_PCI) += ufs-pci.o
+ obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
+-obj-$(CONFIG_UFS_AMD_VERSAL2) += ufs-amd-versal2.o ufshcd-dwc.o
+-- 
+2.51.0
+
