@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71883CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 18:00:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB992CCD1BF
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 18:00:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6272683966;
+	by phobos.denx.de (Postfix) with ESMTP id 9D41C83987;
 	Tue, 28 Oct 2025 18:59:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fLIPjzIm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="My4BrivW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F6608391C; Tue, 28 Oct 2025 18:59:18 +0100 (CET)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id 447418397A; Tue, 28 Oct 2025 18:59:19 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A48680422
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 18:59:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EB28836F0
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 18:59:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-654ee10146aso1162211eaf.3
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:59:16 -0700 (PDT)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-654f151d223so1880209eaf.2
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:59:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761674355; x=1762279155; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1761674356; x=1762279156; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ApCfxeZjXbLISNYRmSlaI3fL45CkBqSuOc3ZIXYRtak=;
- b=fLIPjzImrNPNPK/ApabRqJifgafFNUAcqrd+k936kCIXK9Pt18SiOI9XJ0VHgWY3qb
- 0t4pDZKoGLwDqCgeKz01x3xyB5PyHhO+OVAySln4lpUUWoeM630isrNO475fYLZWFywC
- oosqRrI6Xo+7Ez4Rhp/RQkCjbpve35PjbgmWU=
+ bh=LbMbBQJgAPf0VIM3iqTMkkRHPgA6dKPRaS+wuq5i8T8=;
+ b=My4BrivW908X7rnCE3JMaO13I3JzkyGa7+dkJNcvisT8xvA+xuHDGudLntNz6tGdaj
+ VXssCajePU5WVSp+Cc9X471xVER1FYlVsDNpEsttC8hDG+UO233iWWlEteJPXE6JhIfO
+ /PEnhIi+aakLTFxQ5ZjmkXM7DXhlbzjHbso/k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761674355; x=1762279155;
+ d=1e100.net; s=20230601; t=1761674356; x=1762279156;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ApCfxeZjXbLISNYRmSlaI3fL45CkBqSuOc3ZIXYRtak=;
- b=hpKWtE3zeFMIjbr+PSrsIBXZinCiQWbQ7w8gqzyywQGhCATfx9vpZ06OqWxRbqvAKG
- BhR2l3vP5TsCclsPpwscb3vUIqIbfvj7L4RmMGGlDy2boiecrQt/FdcYuVTO5gVd3mHf
- HyNzpSnNhQBRa4u+qIvsCL/1V94KdV/59jTZVrCLLNT4xpPCaP1lpDj24Dz1GqWT9qBy
- gCAB5iWP1o0+iiisan6P1Qneovbc3RloxxJI7pfBNEiRWR1WLoWce72j7RsNs8e2PUVZ
- EN/3D3u9a5I4Q2LkBRaYBUpPPFHsL50/y4A55i/hYevS/dBBzmgtARwoZVgfGXTzHhYa
- gf5A==
-X-Gm-Message-State: AOJu0YxwT4hSyNFngXEyllVVWOqlmr5wC52CTxOyYS7NbdPdtU0MpD0Y
- mDypVgrJU44Tmq//zN+2PWt0plwfV0bV6E9hpv5LngT6OPicC5riMIlUfkWr3ohxtEY6hYnE6lz
- atlpo0vkKs2sS
-X-Gm-Gg: ASbGnct3QNFOwIBbyU3O023IREB5rOvDMBuiOCo1W956tHnff2bhnRJJ99SWL3P4hpT
- qmhCDSHvQi8O7/AysBXeZS9z5abOWv023wrLZSifVDLJUpJNIEzpff+t+9vIFpDpYoHxZCLe4mH
- ObkwIEYx0izcBJbAkl9Fq1hwQHdMKFD9GtrMRCyFbs5hWxfVesmiNM2KCl4RXjnIwdLIMhz4STA
- 10hD2T59jMRuLY0SQd27OKHTaOqsiHH/Ju+56Grld2oAL3yL/OUQeFCHbKrfpOQA/xpcfzu6f0K
- 7MZkP7cXASe75W25YwEfWtaLXjZleQNzpuGg5yDF3+WqlRNUuKk4tf9Bf6dD1MxfoClNmLWGFzf
- fuGzH4cEyWIIcASQxQumjBNTYBRLbaHY4kfDs7C8BhzPQEq6ZwhK7LM/G4KrEurB1yqFLjWbu6a
- zPBfGFOglc33VHU85HsXiJbQhUDxT8ztnbrL21Fg==
-X-Google-Smtp-Source: AGHT+IHgyMjHxKhAva0HcnonhWfN8rCeEfWDb8lMmylXpDFBdXQPKydBg+lyrn7BKaXkH2IDlpjw2g==
-X-Received: by 2002:a05:6808:2192:b0:441:8f74:e7c with SMTP id
- 5614622812f47-44f7a8b605fmr103014b6e.54.1761674354849; 
- Tue, 28 Oct 2025 10:59:14 -0700 (PDT)
+ bh=LbMbBQJgAPf0VIM3iqTMkkRHPgA6dKPRaS+wuq5i8T8=;
+ b=svwXh46+2++/ph09zfeg7PVZg7orc4aOq0mpHPSzwlggJ8J/7I6c2+adJu6h4cncee
+ 50X+opqT8WhK1INXqW751qcmHg8IVL044McIgehLD61P8gh40sLrO/SaWGKBWfs0pUk3
+ 9detLNoSVOasdNDp022u+GGLB4oxIFqLp5zdBcHnkUE3/WkzsAFvJaWIjX41ehJNtCn8
+ Hh9+yHLaB6JsFpZF95IhBG5BPUZK0LoTse+eDlTOycHmiNlGG+B5a9BHj0sfCi7supU1
+ 2JPnQ1kuDN8kmfnv1LWMQH4C10boc+Qub88xQMtw+K65Jez6okTAsx/MmQOiFOx2XHt2
+ QY+g==
+X-Gm-Message-State: AOJu0YyWAAQXi0whJI5W2q08YyjsDy27NgUNkKr/mbUXF2RtZkUqKszC
+ UCffLoXtrPSEBKjkhD4aQmFgi8060ckddo6xGZtBXthKW/ds/pm3gH0/z6ogrF6QJEU=
+X-Gm-Gg: ASbGnctrIA3dMTKjMArxwRiugzCHH/u5Q16T+tQ8Rq1kU6uKJWccj8RJwTLynHQ/dXe
+ cB7tcZNMusHefLoOpSCpbJLYO/4z7493XiEe28O8FTCXlW16BT1H4339EFhnT5qYkImZtJNZOZH
+ Z8/LsXY8+R1ovD3i4wSf4JR3mosTz0XDcW5Kxhr1+6yl5NDW/rCGoKQk8GMbAVWGkAi7u8/MnXo
+ i5uVmA4pg8u5stvoMMhjnL1db/h2/rfA7+pso7KQesdMQ5r5LL136t+iQIOtLZc2vgDOMJekj3z
+ Rfdq/DQpo/L3uQ9kjXrmy2oZqJS3Wlt6t2ZjBBrUpQviFVgWv2QZwsI5z6im47+090dxwwmM0ng
+ 2RHaO8bdEdTBdJ/vP7QbKm8PL+94y+YNchRijVAB3Q+1F1maSMhjlgiYngE87CjEabzLzU2EoHv
+ cRFGW/+WWImWpdlrFJNlCNadsM3ImbBz+yusr4CnQMy0ecEeqY
+X-Google-Smtp-Source: AGHT+IEbbreRCUlWEEchrIIC+Qj0oyx07sf70tqgTt07MQfE/KOt3XVEmPBmDEWxy+zZCnT1AlOP7A==
+X-Received: by 2002:a05:6808:4fca:b0:44f:6d9e:61ff with SMTP id
+ 5614622812f47-44f7a509eebmr165810b6e.39.1761674355894; 
+ Tue, 28 Oct 2025 10:59:15 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-654ef2e0d33sm2843926eaf.16.2025.10.28.10.59.13
+ 006d021491bc7-654ef2e0d33sm2843926eaf.16.2025.10.28.10.59.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Oct 2025 10:59:13 -0700 (PDT)
+ Tue, 28 Oct 2025 10:59:15 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, 
  Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20251006-spi_uclass-v1-1-6dec8be15fbe@linaro.org>
-References: <20251006-spi_uclass-v1-1-6dec8be15fbe@linaro.org>
-Subject: Re: [PATCH RESEND] spi: spi-uclass: Use unwind goto
-Message-Id: <176167435363.2025892.7071567580831419954.b4-ty@konsulko.com>
-Date: Tue, 28 Oct 2025 11:59:13 -0600
+In-Reply-To: <20250812-cadence_qspi-v1-0-0d693d810145@linaro.org>
+References: <20250812-cadence_qspi-v1-0-0d693d810145@linaro.org>
+Subject: Re: [PATCH 0/2] spi: cadence_qspi: Fix Smatch reported issues
+Message-Id: <176167435497.2025892.14376274785536173795.b4-ty@konsulko.com>
+Date: Tue, 28 Oct 2025 11:59:14 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,21 +97,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 06 Oct 2025 16:09:25 +0100, Andrew Goodbody wrote:
+On Tue, 12 Aug 2025 12:34:37 +0100, Andrew Goodbody wrote:
 
-> In _spi_get_bus_and_cs the check for stacked parallel support needing
-> multiple chip select support does a direct return on error. Instead it
-> should set the error code in ret and then use the unwind goto.
-> 
-> This issue was found by Smatch.
+> Smatch reported issues with an off by 1 error in a test for a timeout
+> and also an error exit that did not set an error code.
 > 
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] spi: spi-uclass: Use unwind goto
-      commit: f12ca3e2b81beef901c182981bb70b0b2aec8f6c
+[1/2] spi: cadence_qspi: Off by 1 in test for timeout
+      commit: 0ed45794ae9fa3bd8adb1f2d85875f93d94249f8
+[2/2] spi: cadence_qspi: Do not return unset error code
+      commit: 1a5129d3dafda90914972ce78db20f7eb6bc9fde
 -- 
 Tom
 
