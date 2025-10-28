@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB992CCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 18:00:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C0D5CCD1BF
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 19:26:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D41C83987;
-	Tue, 28 Oct 2025 18:59:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BD1FB83885;
+	Tue, 28 Oct 2025 20:26:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="My4BrivW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B1SegVPA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 447418397A; Tue, 28 Oct 2025 18:59:19 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 9F0C583885; Tue, 28 Oct 2025 20:26:40 +0100 (CET)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EB28836F0
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 18:59:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 663FC80422
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 20:26:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-654f151d223so1880209eaf.2
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:59:17 -0700 (PDT)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-654fbeb645bso1295674eaf.2
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 12:26:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761674356; x=1762279156; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LbMbBQJgAPf0VIM3iqTMkkRHPgA6dKPRaS+wuq5i8T8=;
- b=My4BrivW908X7rnCE3JMaO13I3JzkyGa7+dkJNcvisT8xvA+xuHDGudLntNz6tGdaj
- VXssCajePU5WVSp+Cc9X471xVER1FYlVsDNpEsttC8hDG+UO233iWWlEteJPXE6JhIfO
- /PEnhIi+aakLTFxQ5ZjmkXM7DXhlbzjHbso/k=
+ d=konsulko.com; s=google; t=1761679597; x=1762284397; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=tnk6r4cz9vfKtkr6hNJ6G2FfUzSCpD+Cnx7aRlbjC0k=;
+ b=B1SegVPA5wA9i9gSBzHovkZMaqP8BZHT1FsV7PROOPuBKcaOwqfVB8rcf89WYFymPh
+ xtE21WOPHSNG7xOM10kRaUH6DBDeoY3cWoTbcs1FT77jm1WwKBC23LVC3x18A+IjjacO
+ vJlA76AS2owUPy/6OwwyYtzi3VyYbBQmFyqhE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761674356; x=1762279156;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LbMbBQJgAPf0VIM3iqTMkkRHPgA6dKPRaS+wuq5i8T8=;
- b=svwXh46+2++/ph09zfeg7PVZg7orc4aOq0mpHPSzwlggJ8J/7I6c2+adJu6h4cncee
- 50X+opqT8WhK1INXqW751qcmHg8IVL044McIgehLD61P8gh40sLrO/SaWGKBWfs0pUk3
- 9detLNoSVOasdNDp022u+GGLB4oxIFqLp5zdBcHnkUE3/WkzsAFvJaWIjX41ehJNtCn8
- Hh9+yHLaB6JsFpZF95IhBG5BPUZK0LoTse+eDlTOycHmiNlGG+B5a9BHj0sfCi7supU1
- 2JPnQ1kuDN8kmfnv1LWMQH4C10boc+Qub88xQMtw+K65Jez6okTAsx/MmQOiFOx2XHt2
- QY+g==
-X-Gm-Message-State: AOJu0YyWAAQXi0whJI5W2q08YyjsDy27NgUNkKr/mbUXF2RtZkUqKszC
- UCffLoXtrPSEBKjkhD4aQmFgi8060ckddo6xGZtBXthKW/ds/pm3gH0/z6ogrF6QJEU=
-X-Gm-Gg: ASbGnctrIA3dMTKjMArxwRiugzCHH/u5Q16T+tQ8Rq1kU6uKJWccj8RJwTLynHQ/dXe
- cB7tcZNMusHefLoOpSCpbJLYO/4z7493XiEe28O8FTCXlW16BT1H4339EFhnT5qYkImZtJNZOZH
- Z8/LsXY8+R1ovD3i4wSf4JR3mosTz0XDcW5Kxhr1+6yl5NDW/rCGoKQk8GMbAVWGkAi7u8/MnXo
- i5uVmA4pg8u5stvoMMhjnL1db/h2/rfA7+pso7KQesdMQ5r5LL136t+iQIOtLZc2vgDOMJekj3z
- Rfdq/DQpo/L3uQ9kjXrmy2oZqJS3Wlt6t2ZjBBrUpQviFVgWv2QZwsI5z6im47+090dxwwmM0ng
- 2RHaO8bdEdTBdJ/vP7QbKm8PL+94y+YNchRijVAB3Q+1F1maSMhjlgiYngE87CjEabzLzU2EoHv
- cRFGW/+WWImWpdlrFJNlCNadsM3ImbBz+yusr4CnQMy0ecEeqY
-X-Google-Smtp-Source: AGHT+IEbbreRCUlWEEchrIIC+Qj0oyx07sf70tqgTt07MQfE/KOt3XVEmPBmDEWxy+zZCnT1AlOP7A==
-X-Received: by 2002:a05:6808:4fca:b0:44f:6d9e:61ff with SMTP id
- 5614622812f47-44f7a509eebmr165810b6e.39.1761674355894; 
- Tue, 28 Oct 2025 10:59:15 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1761679597; x=1762284397;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tnk6r4cz9vfKtkr6hNJ6G2FfUzSCpD+Cnx7aRlbjC0k=;
+ b=peZJ05j0fwVhqLP6SZ/c2sNSClHLOYrAJNME+Oz7eRFY5+2MasWe/M1DLfQMnUIWun
+ nsK+LdvUx2KQAwGiIylJ+AlwGduHbH6caELXO4Vg4i05Lp6M3C3Mc0+MvsvA1EDSS4E1
+ I/OLgNAmL5XP6X+TKkoZFDjsafnYNyFmp9mCq+fp9ilwwdTKn8wR6LkwQyDLLp3oVpyd
+ VVlB3iuFjv1jDA4ywqVu2AtkS+zjjkZyCD+Q0TXZ+jJ3YEOJdKTItp5UStxcitd9h83K
+ yC1PygUYfOhFJ1UKbiytm/mtmuQejwdp99jYQwxHWcgM+mIGr/oVeGqk47Lt3/tGxpxN
+ bTNg==
+X-Gm-Message-State: AOJu0Yxy/df7RqlpV/+owOXqXKQtd6BIy1YK3pRnScc6UPVrJG2mv0QD
+ bFdDg7tvMIPnzHuvek6/x4SMctSI68fRQjEkmJqsud/vhav9qKAZN21O+q449/tp8MI=
+X-Gm-Gg: ASbGncs+ums950ew9HZxCJ7Wo8flBIDMuv8pMWpIW12nQK2AAarEUxh8c9GNoF1Carl
+ 4V8aTNIKyeZQ5QYEya0y99vIaHsIq5zJyfzFgU2HKISFP80813eFhDUiUBO3oB1GRu0GGSoID/s
+ /MojTVhwtquayfuO635RPhzZXDuiMfo0TUCgWOeAdA9P+oPyGicSG47uFndG6GU+59X8ZKOL6wY
+ mGGUymPz5sXidZVHpho/xvpsH/WuCaknofmd/k7HUjoo/kwq+4ubF8Rm5b8NAJ9CV6Ego6+s1mR
+ NDx7CqH4qCLUVqE3U5+ZdjjJ9e3MfRZt/0yUCwQVHsMcnKFtpTqBi7mgSZ+F1XIdzITX4ZznwKZ
+ 9Q0HSVHhvTfLA1G4p/zZvnfXbKNMbUMyOVs+UHlIT3c1/Q47RDmFzrrZE1nfCFnd7TMmjNo7eKe
+ T3c3ppp8RAgeXiSvbqql1JyH2gBcgcZaO9rB3hN40=
+X-Google-Smtp-Source: AGHT+IHMX4d980ccOZdsUptg7Km6oCh2+OpNczVH5a5FFZHq2nBlls/3o+4bHJYYhmktoFlKe0kyDQ==
+X-Received: by 2002:a05:6820:992:b0:654:d917:63f3 with SMTP id
+ 006d021491bc7-65677ee6465mr303134eaf.3.1761679597048; 
+ Tue, 28 Oct 2025 12:26:37 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-654ef2e0d33sm2843926eaf.16.2025.10.28.10.59.15
+ 006d021491bc7-654ef2c2608sm2907433eaf.14.2025.10.28.12.26.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Oct 2025 10:59:15 -0700 (PDT)
+ Tue, 28 Oct 2025 12:26:36 -0700 (PDT)
+Date: Tue, 28 Oct 2025 13:26:33 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jagan Teki <jagan@amarulasolutions.com>, 
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250812-cadence_qspi-v1-0-0d693d810145@linaro.org>
-References: <20250812-cadence_qspi-v1-0-0d693d810145@linaro.org>
-Subject: Re: [PATCH 0/2] spi: cadence_qspi: Fix Smatch reported issues
-Message-Id: <176167435497.2025892.14376274785536173795.b4-ty@konsulko.com>
-Date: Tue, 28 Oct 2025 11:59:14 -0600
+Subject: Re: [PATCH] clk: Return value calculated by ERR_PTR
+Message-ID: <20251028192633.GH6688@bill-the-cat>
+References: <20250703-clk_uclass_fix-v1-1-9b6cc81c9490@linaro.org>
+ <176167434712.2025892.9174636336405377074.b4-ty@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="txXHX95+orvdJ6vF"
+Content-Disposition: inline
+In-Reply-To: <176167434712.2025892.9174636336405377074.b4-ty@konsulko.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,20 +98,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Aug 2025 12:34:37 +0100, Andrew Goodbody wrote:
 
-> Smatch reported issues with an off by 1 error in a test for a timeout
-> and also an error exit that did not set an error code.
-> 
-> 
+--txXHX95+orvdJ6vF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Tue, Oct 28, 2025 at 11:59:07AM -0600, Tom Rini wrote:
+> On Thu, 03 Jul 2025 15:40:46 +0100, Andrew Goodbody wrote:
+>=20
+> > In clk_set_default_get_by_id ret is passed to ERR_PTR but nothing is
+> > done with the value that this calculates which is obviously not the
+> > intention of the code. This is confirmed by the code around where this
+> > function is called.
+> > Instead return the value from ERR_PTR.
+> >=20
+> > This issue found by Smatch.
+> >=20
+> > [...]
+>=20
+> Applied to u-boot/master, thanks!
+>=20
+> [1/1] clk: Return value calculated by ERR_PTR
+>       commit: 644b4650ee57c429bede77f44752cc867dac0e00
 
-[1/2] spi: cadence_qspi: Off by 1 in test for timeout
-      commit: 0ed45794ae9fa3bd8adb1f2d85875f93d94249f8
-[2/2] spi: cadence_qspi: Do not return unset error code
-      commit: 1a5129d3dafda90914972ce78db20f7eb6bc9fde
--- 
+Unfortunately I missed that this caused CI failures until too late:
+__________________________ test_ut[ut_dm_dm_test_clk] _____________________=
+_____
+test/py/tests/test_ut.py:591: in test_ut
+    assert output.endswith('failures: 0')
+E   assert False
+E    +  where False =3D <built-in method endswith of str object at 0xfffede=
+8fec30>('failures: 0')
+E    +    where <built-in method endswith of str object at 0xfffede8fec30> =
+=3D "Test: clk: clk.c\r\r\ntest/dm/clk.c:92, dm_test_clk(): 321 =3D=3D sand=
+box_clk_test_get_rate(dev_test, SANDBOX_CLK_TEST_ID...clk' failed 2 times\r=
+\r\nTests run: 1, 12 ms, average: 12 ms, failures: 2\r\r\nexit not allowed =
+=66rom main input shell.".endswith
+----------------------------- Captured stdout call ------------------------=
+-----
+=3D> ut dm dm_test_clk
+Test: clk: clk.c
+test/dm/clk.c:92, dm_test_clk(): 321 =3D=3D sandbox_clk_test_get_rate(dev_t=
+est, SANDBOX_CLK_TEST_ID_DEVM1): Expected 0x141 (321), got 0x0 (0)
+Test: clk: clk.c (flat tree)
+test/dm/clk.c:92, dm_test_clk(): 321 =3D=3D sandbox_clk_test_get_rate(dev_t=
+est, SANDBOX_CLK_TEST_ID_DEVM1): Expected 0x141 (321), got 0x0 (0)
+Test 'clk' failed 2 times
+Tests run: 1, 12 ms, average: 12 ms, failures: 2
+exit not allowed from main input shell.
+=3D>=20
+_______________________ test_ut[ut_dm_dm_test_clk_base] ___________________=
+_____
+test/py/tests/test_ut.py:591: in test_ut
+    assert output.endswith('failures: 0')
+E   assert False
+E    +  where False =3D <built-in method endswith of str object at 0xaaab78=
+8cbea0>('failures: 0')
+E    +    where <built-in method endswith of str object at 0xaaab788cbea0> =
+=3D 'Test: clk_base: clk.c\r\r\ntest/dm/clk.c:44, dm_test_clk_base(): 0 =3D=
+=3D uclass_get_device_by_name(UCLASS_MISC, "clk-tes...base\' failed 2 times=
+\r\r\nTests run: 1, 3 ms, average: 3 ms, failures: 2\r\r\nexit not allowed =
+=66rom main input shell.'.endswith
+---------------------------- Captured stdout setup ------------------------=
+-----
+/u-boot
+Bloblist at 100 not found (err=3D-2)
+U-Boot 2026.01-rc1-00013-gf12ca3e2b81b (Oct 28 2025 - 18:45:26 +0000)
+Reset Status: WARM Reset Status: COLD
+Model: sandbox
+DRAM:  256 MiB
+using memory 0x1988c000-0x1f88e000 for malloc()
+Core:  266 devices, 94 uclasses, devicetree: board
+WDT:   Not starting wdt-gpio-toggle
+WDT:   Not starting wdt-gpio-level
+WDT:   Not starting wdt@0
+NAND:  4100 MiB
+MMC:   mmc2: 2 (SD), mmc1: 1 (SD), mmc0: 0 (SD)
+Loading Environment from nowhere... OK
+In:    serial,cros-ec-keyb,usbkbd
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Model: sandbox
+Net:   eth0: eth@10002000, eth5: eth@10003000, eth3: sbe5, eth6: eth@100040=
+00, eth8: phy-test-eth, eth4: dsa-test-eth, eth2: lan0, eth7: lan1
+Hit any key to stop autoboot:  0
+=3D>=20
+----------------------------- Captured stdout call ------------------------=
+-----
+=3D> ut dm dm_test_clk_base
+Test: clk_base: clk.c
+test/dm/clk.c:44, dm_test_clk_base(): 0 =3D=3D uclass_get_device_by_name(UC=
+LASS_MISC, "clk-test4", &dev): Expected 0x0 (0), got 0xfffffffe (-2)
+Test: clk_base: clk.c (flat tree)
+test/dm/clk.c:44, dm_test_clk_base(): 0 =3D=3D uclass_get_device_by_name(UC=
+LASS_MISC, "clk-test4", &dev): Expected 0x0 (0), got 0xfffffffe (-2)
+Test 'clk_base' failed 2 times
+Tests run: 1, 3 ms, average: 3 ms, failures: 2
+exit not allowed from main input shell.
+=3D>=20
+
+So I will be pushing a revert in a moment.
+
+--=20
 Tom
 
+--txXHX95+orvdJ6vF
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQEYxwAKCRAr4qD1Cr/k
+Cm9GAP9Qbk7Hil575pNTx6sacKWBzCepPHtGvS8fTuAcvUY14wEAneIEMFEQWlMj
+8WLpeWxhdZi9Yu1N58OkJfd/FYFhog0=
+=VuNa
+-----END PGP SIGNATURE-----
+
+--txXHX95+orvdJ6vF--
