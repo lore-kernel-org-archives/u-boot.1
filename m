@@ -4,112 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B1ACCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 16:59:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06EFDCCF9EB
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 17:59:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3611983981;
-	Tue, 28 Oct 2025 17:58:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3B2AC838C7;
+	Tue, 28 Oct 2025 18:59:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kBiMqM5A";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YTB7VWpl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA677836D1; Tue, 28 Oct 2025 17:57:37 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 80EB5838BB; Tue, 28 Oct 2025 18:59:10 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BFFE83935
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 17:57:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D35D80422
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 18:59:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-475dc0ed8aeso32903045e9.2
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:57:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-44da4528832so1922207b6e.3
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:59:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761670655; x=1762275455; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1761674347; x=1762279147; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WHJfteSREVzUr9XxwZcWFhsHNZHw1zo6d7bHW5BFsBc=;
- b=kBiMqM5AJPXaRI+Mvsknenksdnxx0DbW/NGhRnjb1ItIi0mnqHHW+yra8tao+wF4mY
- 18x2w40fb9/ESDEOX8Uc8I3Vdn4EY4l78Tk0CtWdOFsAuL2SIiM6Gw6verjVO3dZzIJu
- W8BfbBkBKV9IO9JaOw452j6o22GQ0TZyH0tcrLs2CS2GVUBOCAGB3aGqjc6nvLuz+HPz
- nOdn7p1/fGsyyq7Daa/+sHbpNmKhpCzoGrQrdZqtMH2KNcIIOH1iFX3fPKsh3ZYFtrFc
- I/AustbuVtmfA4ot1RplparYJIek6lVhBpPBFDYy1mUzOy9IqdlAFv3j5dMx06SI41vB
- 0ylw==
+ bh=BTUZ2EbObhxzbjXZeEsG3pWPCBwmSJjN07kABjI5Apw=;
+ b=YTB7VWpl+ZqI+/iXtd26+EJR165BbJ8cVmJOYhPF+sByrnZeAb8uNtQ/pTj5I9437m
+ 6LOoSJhDPHvRVxT1Wbg6Vu4JhWqwtRhwrZyM3EW2vBRtNRfcjnZl+5brgAIBBFsU9YXl
+ 9HISukP1HWsUwHUVQy5BpoGKuUpvjUMWkBztg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761670655; x=1762275455;
+ d=1e100.net; s=20230601; t=1761674347; x=1762279147;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WHJfteSREVzUr9XxwZcWFhsHNZHw1zo6d7bHW5BFsBc=;
- b=VG+4gC36+nUtT7JMPBXg6VqHxhMk16/W/embFCWaLZjl7fh8O/5QG+J4WNzBnIo5uG
- gINhMCsFRvwr6TilMCOXqsekQyz54kRmycRrx2QUmqa3HbfFZ7aV/rdzQu86MeAXGcsZ
- SE5oIgMiuR+6QT7WYlUBwshzChWH2a+DIwdA82eMQ6KpEzVRV4k6slQEQqIrDa7A2Uv7
- +zcFzcL0umIr+yom8tCdBOqmz8kYdJ5KfOHvhEFR3OAHpxN2o5esGsI3J0WgYFJfncKM
- vbXhHhzE2Wolrkk0q0D14DGbEQK2HUPV285Zr6dL0zwlxVFcpx138nYEyx090aYCGPGf
- rCXg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVQH0g1/tWCuTmJVphJlNylyKnKV5nv4vPdnW/eIIaCYfCQg5+SJ3kq4yFTWlpcXMNorm2ppzo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzjEDIphu1SBIHJDf1cw3fpGQPQBy+ElfxvU2gyzKecrVAQxtzF
- e1zC1XX/CMzhqy5e+nAqbA7POJA6wXfcqKrDkJ3z9l440FuCxpnPYBPAaFJDb8Yj6go=
-X-Gm-Gg: ASbGnctb4cQHOtp9njUN8X1vxel6+gYUQyqXiutXTWKSA5nXh+wJjlU1GWujTb7xmWO
- lONcWC4OoOSUx9RJbTvRpCwI4nJarC7LYAx7YPdjX6xqjgw4KtK3K1YdjOvdBYdcZKXf3IB5mVI
- OLVAzAkR7woXyW1esWmyP8/XGjQLQNXHFtg/vvGuw7/zVdPzX3LRyhIlzc96EIGAO9k69MU80Hv
- mS0uNt4mUSTwmPPPRaJA61Q9TIl4X2wcP8wJLhaJSvLT/JJ5ws2vTtiJKvz6W8bikuMflUpjpRl
- 7NPX6XBwopcAkmftz/F+YGAdGmqADgBm8/joUeIfEx+DoDZl+kLVfwwflz/YKdlX9/N3tvwZJ7x
- A6Z11GX7lMGaWfKrWsMW/3xPaWKfrPB6JGpro3EJ2jKKVRO+qCih2JbwE8o/k15rTW4jKvdGyjh
- JVqwlvHaICxwheY37pT41t
-X-Google-Smtp-Source: AGHT+IH4O88rcev15mHjz8APBDkU75fLH5hW3kQCX0+YAw39OQp1ahGJk362b/3Ix4mPLRxs5TiFPQ==
-X-Received: by 2002:a05:600c:a013:b0:471:14b1:da13 with SMTP id
- 5b1f17b1804b1-4771e184c2dmr1537625e9.14.1761670654847; 
- Tue, 28 Oct 2025 09:57:34 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4771e222ca5sm1971495e9.15.2025.10.28.09.57.33
+ bh=BTUZ2EbObhxzbjXZeEsG3pWPCBwmSJjN07kABjI5Apw=;
+ b=SvT/FFE44tDDntt0bhknOsGDg2YhVTtis03OS00YETUbX9QH9gXxot6c4xJdviEjIq
+ COzQYJJHjs8XLunztnetBNm3nlfKQXZ5KzaRwxMTN1jEJSlIPE+a0Zfs7JH9WdW4Co7L
+ DjOne5mhyki52uRBf/yRNzI+RLQ5UbsWZ4LgCOydgJ35C9FDs3bZgzC4tvNIzP2hI2SG
+ 6rn0WALSn0LyJm/XHI7HTDnM2Vr1TpH7JVhE+w7Bp/hrcv5zJcWVA0nl25ZZMS1nohOR
+ tqaWS9jGM656Q8J/uDqzc+YF4iUT5jI2rRrp5F2wDO8t+riae3BHFry4TukAQeocpFCV
+ +F/g==
+X-Gm-Message-State: AOJu0YxO/cDPGQ8vV/AnOL4bUm+OVKJxfegN1KRQ/0KSivXynQsQRWgS
+ axK9pEMAewwQbWtzWQ6GUX9GU53Maj9Umt7yDro6TwwUeiVQ4Q7GuvTZzZ4YTJ+qhuc=
+X-Gm-Gg: ASbGncv095l3B/srOCARm0+QlAwXc0a9auzwFKuD5cfe9QT9HUfAe+x5X7ZcIYMEON0
+ D9ARO/qcE47t7G35YA7RLIH0BsF7cPrLHln+U7w1PPlAuKPCMxiuiLbzUsBaaKgXSq/FnyB5cVi
+ u3jvQijmY8gVshifQSAIok+ORWeBLECn0/LTSENs9jCvSBBeDEJxeXgFCE/T2KQnIBflZ4+xk0A
+ OHoWuhuvXG6eJ+MQUuxBsfK7zuX0y7swiKwbwOoP5GDsiZ+AS4KX2/M4crn4XG5SN3tvajVilJW
+ ZVFVTdqD//zdcLiUYtGRtBd4/ythG+8KEbIsiiPnTvrB7GhboRDY1kH71y39rz5trB0zuNlHfX6
+ FrjlgZPlXh8zQmsq7JeUY+FI+jb8gy1UBTsK7/1auo/Jr6MrRl6ScFq1Xkh+zNAHhoCcvI335xN
+ 15ViZMg6PXplAP0vtRrWhJzfuQr++MhQcnK8LxjA==
+X-Google-Smtp-Source: AGHT+IEApssAO+Hp/IJMSh+5gHIpkaeQcSru5eX4obia0twd9kuL1jD8XFt+oAWZwfL1mRbuE7G4ng==
+X-Received: by 2002:a05:6808:2109:b0:443:a19a:8a1c with SMTP id
+ 5614622812f47-44f7a406eb2mr177544b6e.25.1761674347008; 
+ Tue, 28 Oct 2025 10:59:07 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-654ef2e0d33sm2843926eaf.16.2025.10.28.10.59.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Oct 2025 09:57:34 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- u-boot@lists.denx.de, Igor Belwon <igor.belwon@mentallysanemainliners.org>
-Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Minkyu Kang <mk7.kang@samsung.com>, Tim Harvey <tharvey@gateworks.com>, 
- Roger Quadros <rogerq@kernel.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Minda Chen <minda.chen@starfivetech.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- Greg Malysa <malysagreg@gmail.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, Simon Glass <sjg@chromium.org>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, Yao Zi <ziyao@disroot.org>, 
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Stefan Roese <stefan.roese@mailbox.org>, Heiko Schocher <hs@nabladev.com>, 
- Sumit Garg <sumit.garg@kernel.org>, ~postmarketos/upstreaming@lists.sr.ht
-In-Reply-To: <20251011-mtk-ufs-uboot-v1-0-a05f991ee150@mentallysanemainliners.org>
-References: <20251011-mtk-ufs-uboot-v1-0-a05f991ee150@mentallysanemainliners.org>
-Subject: Re: (subset) [PATCH 0/4] ufs: Add support for MediaTek hosts
-Message-Id: <176167065378.4104072.13033991788401267817.b4-ty@linaro.org>
-Date: Tue, 28 Oct 2025 17:57:33 +0100
+ Tue, 28 Oct 2025 10:59:06 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250723-clk_versaclock-v1-0-9d70f2530871@linaro.org>
+References: <20250723-clk_versaclock-v1-0-9d70f2530871@linaro.org>
+Subject: Re: [PATCH 0/2] clk: versaclock: Fix two issues found by Smatch
+Message-Id: <176167434592.2025892.5045964795763972788.b4-ty@konsulko.com>
+Date: Tue, 28 Oct 2025 11:59:05 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
-X-Mailman-Approved-At: Tue, 28 Oct 2025 17:58:12 +0100
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,29 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Wed, 23 Jul 2025 16:54:06 +0100, Andrew Goodbody wrote:
 
-On Sat, 11 Oct 2025 21:10:03 +0200, Igor Belwon wrote:
-> This patchset includes basic support for UFS PHY and UFS for MediaTek
-> platforms.
+> Should return value calculated by ERR_PTR as calling code attempts to
+> check for it.
+> Also do not dereference a pointer that could be an error pointer before
+> checking it with IS_ERR.
 > 
-> It's part of my MT6878 upstreaming work (more to come soon), and is
-> fairly basic. It does successfully grab a link and allow I/O over UFS
-> with no spotted regressions, however features like clocks are yet to
-> come. The peripheral however works, due to the clocks being set up by
-> the previous bootloader.
 > 
-> [...]
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (master)
+Applied to u-boot/master, thanks!
 
-[2/4] ufs: unipro: Add PA_SCRAMBLING property
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/200e3f893fbc2915797b466043bbcb19000d821a
-[3/4] ufs: Add MediaTek UFS driver
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/6cca3db2bd91ce1e5d812a61c13f1f62a2c2b82d
-[4/4] MAINTAINERS: Add UFS to MediaTek section
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/928269494c8495eee0a74c9685cc6c222e8ee0b7
-
+[1/2] clk: versaclock: return value calculated by ERR_PTR
+      commit: 6f48f6f2a2df05bd7663917b694a4d881998f6c5
+[2/2] clk: versaclock: Use IS_ERR check before dereference
+      commit: 2a13b59ed4317ec4483d1502d9db161f46985a32
 -- 
-Neil
+Tom
+
 
