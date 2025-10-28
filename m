@@ -4,70 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6612CCCF9F1
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 23:12:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22951CCF9EA
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 23:57:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE4DC82E34;
-	Wed, 29 Oct 2025 00:12:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 27AB9836D1;
+	Wed, 29 Oct 2025 00:57:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="edFF9tYx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="by5p2Z0y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5C8E832AD; Wed, 29 Oct 2025 00:12:24 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 584B680422; Wed, 29 Oct 2025 00:57:32 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A61CB80422
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 00:12:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 366F280422
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 00:57:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cx5kD5Jqkz9tQr;
- Wed, 29 Oct 2025 00:12:20 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761693140;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Yk54Tb2J4aMlhmGjkU5JWRXcjPtuLuCYYJ86HwrFppE=;
- b=edFF9tYxlXcFRxIiqKbddTevCee3HYrz4DrpnCVOUb5PEc528jHzI54xMy7D/nroubIP8Q
- Cy2VWfmu+j2XM0gL2VLMrmQhf06jt3ldV7PQ0eNyR8eHtaVZMHSCaV8RHvyWAltRQkvHj4
- IudiC923LG0IIGzmoHEieuSpE+bPn05tE2rxORUMWHEojzmbnrV+hmS5CGSvtu8WsGpVeD
- 7pZLnI819m9wvi7DveoDN2+22cBW78+5hlF8KAytXn8k99VDoRP0R/8KOz5KIC3P1KFV7P
- sE0Iq1MNxarAXhz1lKa+aMAz9COrQgX1cSFUPhBi63SVF6GzY4PkrOXuNcxGSg==
-Message-ID: <5e6552ae-cd1a-4644-8f61-ea29847b427d@mailbox.org>
-Date: Wed, 29 Oct 2025 00:12:18 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7c0e8367d4eso2256889a34.1
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 16:57:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1761695849; x=1762300649; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cPLQjRzxXKSBfXKxvutZATrnDklpE3dgq/TLLr/yBN8=;
+ b=by5p2Z0y4O48CXIp2kXbSWQxzijhmPKy7djj9WWozMbf2M+4QlNn/oDQA0WuU+YkYW
+ tXUVDcw5eRPf7qmJBDTEDGBh5bB5VgBbODCiq5dfAvlqEtO1FCESz6wb4hohLfY1x6tS
+ yKnqhZ75GBrcEW5EwwzfW7DdMwMuwAjpkJhFM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761695849; x=1762300649;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cPLQjRzxXKSBfXKxvutZATrnDklpE3dgq/TLLr/yBN8=;
+ b=BWasyMXcWlN+6v08oYRNZ4NhZ2AYA0eJ4vPL0h83COS0ma7WOMiXGbP6nBONzrHE4w
+ kYF/U5d09eqN/fBwPwUbx+7yii8OilFvm/U/F2EqejQSqccL+5YlREr1kJLr4GvZsjDR
+ 09Jx/wS0yM0uQHNwchsm8+qfE+THAmeWj6MZPuaikvZEMJO6H1gY9rI7r5kUg9j4Pz1Y
+ 4Zzfp8AmFB63j0SKSjWIa6FaYKlzH1ex7E/2wz3Hw0Kl9lpmMp/nzCGaWhU3hBQX9rG8
+ M0xO/fljvKluv5JOy7hhRM2hx/MvlAbNGQHaa90Efa1DB3IvcCkK0Amxfvp8z4y41wWv
+ wzyQ==
+X-Gm-Message-State: AOJu0Yyh/aWxlqboEhxU4Xr0xGOoYkodglrbMbt2TizJFptvNWU0jmbR
+ hVvQ0JXTtp3jtCtf3XNRymiRQL/RECMp76r9TSzR1fi1dKyJ+ElglvNHhQUpw4qQJ2kJRZbE6tt
+ FJvDoojGllA==
+X-Gm-Gg: ASbGnctCUnl9WiOSeOz5PiWDaaHLkhLjFzDsM1AivIVRMSuVC/Lc/+uNBWIKVHGCNOF
+ 0AF2hiD9CTrsbdOIapfB+Ez+lE881pGPU7rx2lOOWinsSXtjfNTEa4n5LMOtjCEVCWq+s18XNOR
+ bdpOCXOaINgCQyxgWFhdTg0fJITVlV/d5G7zEACk2ZZNE47Z3pkgumeLa+0Bd/ye06evpmDrfkH
+ xTX/u5IOxajpnt1SXBse+j9+EfTpeTHltzPVXTSLS59wWYO41EkPV+0l7Zy4eVxPPsyWKEASTTD
+ VepPhwpFMvY2ZITmqKyZU5AzktMH556caQr/flLHXK6BPnRNq6+U+WX6K114KdWobuJ+LIkRHj5
+ S8Xvtd70RXEhZLrKOvKtnsuKEFWqKAf14TYbGnvLdAigFqDjuYs7TABLimLidAcW7TRxCqS2632
+ +hRKqr5ELITJ7OPYqTz5kLNqyLf5ao1T3YwENaCw==
+X-Google-Smtp-Source: AGHT+IHu/KEX0Ncx2qYXYo426SZhvJzaXr8TJD0SsRoGyS8NznkUlWbhEbAwcMjI9IZBDxihdf6uZQ==
+X-Received: by 2002:a05:6830:922:b0:7b9:c17b:1475 with SMTP id
+ 46e09a7af769-7c683065a66mr818841a34.8.1761695848848; 
+ Tue, 28 Oct 2025 16:57:28 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c5302068a6sm3646234a34.25.2025.10.28.16.57.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Oct 2025 16:57:28 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250626-mtd_fix-v1-1-1ffcc59a9d0a@linaro.org>
+References: <20250626-mtd_fix-v1-1-1ffcc59a9d0a@linaro.org>
+Subject: Re: [PATCH] cmd: mtd: Prevent use of uninitialised variable
+Message-Id: <176169584790.2287207.5576483898517388408.b4-ty@konsulko.com>
+Date: Tue, 28 Oct 2025 17:57:27 -0600
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/2] ARM: bootm: Add support for starting Linux through
- OpTee-OS on ARMv7a
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sam Edwards <cfsworks@gmail.com>, Simon Glass <sjg@chromium.org>
-References: <20250630000832.952206-1-marek.vasut@mailbox.org>
- <97DFDFA0-80F7-462B-B2A9-BDBAD42A191A@gmx.de>
- <20250630194711.GA523899@bill-the-cat>
- <9c9317eb-7d14-40c8-9955-c69a6a5a3bcb@mailbox.org>
- <20251028153641.GA833321@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251028153641.GA833321@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: zt1tquea1sud3dt6j73bk946ze661uaq
-X-MBO-RS-ID: 1f51f0b88818829992d
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,40 +97,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/28/25 4:36 PM, Tom Rini wrote:
-> On Tue, Oct 28, 2025 at 04:11:38PM +0100, Marek Vasut wrote:
->> On 6/30/25 9:47 PM, Tom Rini wrote:
->>> On Mon, Jun 30, 2025 at 07:18:33AM +0200, Heinrich Schuchardt wrote:
->>>> Am 30. Juni 2025 02:08:05 MESZ schrieb Marek Vasut <marek.vasut@mailbox.org>:
->>>>> Add support for jumping to Linux kernel through OpTee-OS on ARMv7a.
->>>>> This is only supported if U-Boot runs in PL1 secure. This change adds
->>>>> two components, one is fitImage OpTee-OS loadable handler, which makes
->>>>> a note of OpTee-OS being loaded and stores the load address for later
->>>>> jump to it. The second part is the actual jump to Linux through OpTee-OS.
->>>>> The jump through OpTee-OS requires set up of multiple CPU registers, r1
->>>>> and r2 are passed through, r0 and r3 have to be set to 0, lr is set to
->>>>> Linux kernel entry point. This setup is done by new assembler function
->>>>> boot_jump_linux_via_optee().
->>>>>
->>>>> The boot_jump_linux_via_optee() also includes STM32MP13xx late TZC
->>>>> configuration write, this cannot be moved easily, hence the ifdef.
->>>>
->>>> Hello Marek,
->>>>
->>>> Could you, please, add a documentation change to the series. This would allow reviewers to test your proposal.
->>>>
->>>> Furthermore, please, provide tests on QEMU.
->>>
->>> Documentation is good, also wiring up this use case for testing in CI
->>> via QEMU is a rather large ask. We're still on needing a general boot OS
->>> test or two in CI (and Ilias noted either on a call or IRC, I forget
->>> now, that there's been some progress on making up a small enough generic
->>> OS image to work from).
->> I would really like these two patches to land, it is the remaining piece I
->> need to make STM32MP13xx usable with pure U-Boot. How can we proceed here ?
-> 
-> There was some minor rewording requested, and adding documentation is
-> also good. We can't reasonably add CI testing here at this time, yes?
-I added documentation in V3 now.
+On Thu, 26 Jun 2025 11:49:32 +0100, Andrew Goodbody wrote:
 
-As for CI testing, I recall the infrastructure is not there yet.
+> ret maybe used uninitialised in some cases so instead
+> initialise it first to prevent this.
+> 
+> This issue was found by Smatch.
+> 
+> 
+
+Applied to u-boot/master, thanks!
+
+[1/1] cmd: mtd: Prevent use of uninitialised variable
+      commit: ce1bdedd2f4b3c5c8c76fbf2fc1a234fca470573
+-- 
+Tom
+
+
