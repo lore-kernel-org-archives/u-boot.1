@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA318CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 09:14:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49D72CCD1BF
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 09:14:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A3FF83A1E;
-	Tue, 28 Oct 2025 10:13:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0A14883A7A;
+	Tue, 28 Oct 2025 10:13:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="fOZaJDNL";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="rCzgzA4Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2F5D83A64; Tue, 28 Oct 2025 10:13:37 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id B3C86839DE; Tue, 28 Oct 2025 10:13:40 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC261839DE
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:13:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80E13839CC
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:13:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 647C84E41392;
- Tue, 28 Oct 2025 09:13:35 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 3C1BD1A16F6;
+ Tue, 28 Oct 2025 09:13:38 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 38E5B606AB;
- Tue, 28 Oct 2025 09:13:35 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 10E41606AB;
+ Tue, 28 Oct 2025 09:13:38 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5F995102F4916; Tue, 28 Oct 2025 10:13:31 +0100 (CET)
+ with ESMTPSA id 7F334102F492F; Tue, 28 Oct 2025 10:13:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761642813; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1761642817; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=ZE/HCAJmSSri1cL/ukiP1EDctN9IM3n7xfZbQqQJqho=;
- b=fOZaJDNLLS/6Mtcwp4kxhwEANSgOtQaVtMtgYL+WIGAUlPI2fJ0rw4qTNkgldvxWGpumFV
- +oJVbKu6sIsofFRFAaG4ENQBC4EYbQJcVAqtgQSPFNn7yx+hmC6jWQZQMcTltIPo0zDPGD
- 42ZeHotd6U9hGZoO1uy7t8TgTgvA9TSwLR6fwsc+WC7q6p001iRvWSsOeoykf0pDkvCk1I
- ofBHFNXVdP1DidKkMXjeaseqIUEyGcTTSfPTdjwAaww036QoR7VdxCEBDgbr2QYjo8kUY/
- 1ep6G39CVufdHgQwa+AZ8SHIx8P7HniC3Lev/+dwPqSw06T4sDvovU3DZlDYaA==
+ bh=7E3G/RRTcu7TxSEOMbDsShDYCWcEmHyBjeImIpM8hbE=;
+ b=rCzgzA4ZOsXn5o3L57dLJ79tS9akEnwwb5r37+15Thgb4DRetXtBJ99qYBlIRscCQEaCDF
+ A+ZDjoV6nXzDMVX2PaTLVIieT7pUiKMi9XFwr4G9ceGSbhdjPlVNg85eJ+lMdT0u8Agpyd
+ VQIjH+ruR7kqbhdHM9Qr3vZKBuNOYYln9MbpzfE2GA0Tq34t64yGLOQSUJF9nlKwc5m1F7
+ NspmkRJVlxFNeFtTWZ47+RP7YyVJL3qjq64gsbpu9wpvYnHAgxBL/LdxdayCe9yFwC0v1K
+ n8eA5R/6wkhRpjzYdU8lp2R1sp+QW5iv8qxYQpEXYApED6OyuJ1oTMIY/gLMjg==
 From: Richard Genoud <richard.genoud@bootlin.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -60,10 +60,10 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
  Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v2 04/24] mtd: rawnand: sunxi_spl: cosmetic: use definitions
- from linux/mtd/rawnand.h
-Date: Tue, 28 Oct 2025 10:12:25 +0100
-Message-ID: <20251028091256.600992-5-richard.genoud@bootlin.com>
+Subject: [PATCH v2 05/24] mtd: rawnand: sunxi: remove usage of struct
+ sunxi_ccm_reg
+Date: Tue, 28 Oct 2025 10:12:26 +0100
+Message-ID: <20251028091256.600992-6-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251028091256.600992-1-richard.genoud@bootlin.com>
 References: <20251028091256.600992-1-richard.genoud@bootlin.com>
@@ -86,65 +86,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove unneeded definitions NFC_CMD_R* in sunxi_nand_spl.c
+The sunxi_ccm_reg is legacy, drop its usage from nand related code
 
-No need to define NFC_CMD_RNDOUTSTART, NFC_CMD_RNDOUT and
-NFC_CMD_READSTART here since they are already in linux/mtd/rawnand.h
+For that, CCU_NAND0_CLK_CFG and CCU_AHB_GATE1 are added to the clock
+files when missing.
+And clock code in sunxi_nand{,_spl}.c and board.c are changed to use the
+new scheme.
 
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+Moreover, drop AHB_DIV_1 in favor of the more readable CCM_NAND_CTRL_M/N
+
+Suggested-by: Andre Przywara <andre.przywara@arm.com>
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 ---
- drivers/mtd/nand/raw/sunxi_nand_spl.c | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
+ arch/arm/include/asm/arch-sunxi/clock_sun4i.h      |  1 +
+ arch/arm/include/asm/arch-sunxi/clock_sun6i.h      |  1 +
+ arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h |  1 +
+ arch/arm/include/asm/arch-sunxi/clock_sun9i.h      |  2 ++
+ board/sunxi/board.c                                | 11 ++++++-----
+ drivers/mtd/nand/raw/sunxi_nand.c                  | 11 +++++------
+ drivers/mtd/nand/raw/sunxi_nand_spl.c              | 13 +++++++------
+ 7 files changed, 23 insertions(+), 17 deletions(-)
 
+diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
+index 00bdd5f938df..caa4b62b3e2d 100644
+--- a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
++++ b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
+@@ -11,6 +11,7 @@
+ #define _SUNXI_CLOCK_SUN4I_H
+ 
+ #define CCU_AHB_GATE0		0x60
++#define CCU_NAND0_CLK_CFG	0x80
+ #define CCU_MMC0_CLK_CFG	0x88
+ #define CCU_MMC1_CLK_CFG	0x8c
+ #define CCU_MMC2_CLK_CFG	0x90
+diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun6i.h b/arch/arm/include/asm/arch-sunxi/clock_sun6i.h
+index 28c3faccbbcf..bdb08a32d01b 100644
+--- a/arch/arm/include/asm/arch-sunxi/clock_sun6i.h
++++ b/arch/arm/include/asm/arch-sunxi/clock_sun6i.h
+@@ -11,6 +11,7 @@
+ #define _SUNXI_CLOCK_SUN6I_H
+ 
+ #define CCU_AHB_GATE0		0x060
++#define CCU_NAND0_CLK_CFG	0x80
+ #define CCU_MMC0_CLK_CFG	0x088
+ #define CCU_MMC1_CLK_CFG	0x08c
+ #define CCU_MMC2_CLK_CFG	0x090
+diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h b/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
+index 5ad2163926ad..70cd0ca00d21 100644
+--- a/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
++++ b/arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h
+@@ -14,6 +14,7 @@
+ #define _SUNXI_CLOCK_SUN8I_A83T_H
+ 
+ #define CCU_AHB_GATE0		0x060
++#define CCU_NAND0_CLK_CFG	0x80
+ #define CCU_MMC0_CLK_CFG	0x088
+ #define CCU_MMC1_CLK_CFG	0x08c
+ #define CCU_MMC2_CLK_CFG	0x090
+diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun9i.h b/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
+index 8d696e533f8f..3448f3fb3225 100644
+--- a/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
++++ b/arch/arm/include/asm/arch-sunxi/clock_sun9i.h
+@@ -12,11 +12,13 @@
+ #include <linux/bitops.h>
+ #endif
+ 
++#define CCU_NAND0_CLK_CFG	0x400
+ #define CCU_MMC0_CLK_CFG	0x410
+ #define CCU_MMC1_CLK_CFG	0x414
+ #define CCU_MMC2_CLK_CFG	0x418
+ #define CCU_MMC3_CLK_CFG	0x41c
+ #define CCU_AHB_GATE0		0x580
++#define CCU_AHB_GATE1		0x584
+ #define CCU_AHB_RESET0_CFG	0x5a0
+ 
+ struct sunxi_ccm_reg {
+diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+index 2929bc17f084..09b531b7f52a 100644
+--- a/board/sunxi/board.c
++++ b/board/sunxi/board.c
+@@ -307,15 +307,16 @@ static void nand_pinmux_setup(void)
+ 
+ static void nand_clock_setup(void)
+ {
+-	struct sunxi_ccm_reg *const ccm =
+-		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
++	void * const ccm = (void *)SUNXI_CCM_BASE;
+ 
+-	setbits_le32(&ccm->ahb_gate0, (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
++	setbits_le32(ccm + CCU_AHB_GATE0,
++		     (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
+ #if defined CONFIG_MACH_SUN6I || defined CONFIG_MACH_SUN8I || \
+     defined CONFIG_MACH_SUN9I || defined CONFIG_MACH_SUN50I
+-	setbits_le32(&ccm->ahb_reset0_cfg, (1 << AHB_GATE_OFFSET_NAND0));
++	setbits_le32(ccm + CCU_AHB_RESET0_CFG, (1 << AHB_GATE_OFFSET_NAND0));
+ #endif
+-	setbits_le32(&ccm->nand0_clk_cfg, CCM_NAND_CTRL_ENABLE | AHB_DIV_1);
++	setbits_le32(ccm + CCU_NAND0_CLK_CFG, CCM_NAND_CTRL_ENABLE |
++		     CCM_NAND_CTRL_N(0) | CCM_NAND_CTRL_M(1));
+ }
+ 
+ void board_nand_init(void)
+diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
+index c6b9b2a4ebac..ba2740ed1876 100644
+--- a/drivers/mtd/nand/raw/sunxi_nand.c
++++ b/drivers/mtd/nand/raw/sunxi_nand.c
+@@ -289,8 +289,7 @@ static inline struct sunxi_nfc *to_sunxi_nfc(struct nand_hw_control *ctrl)
+ 
+ static void sunxi_nfc_set_clk_rate(unsigned long hz)
+ {
+-	struct sunxi_ccm_reg *const ccm =
+-	(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
++	void * const ccm = (void *)SUNXI_CCM_BASE;
+ 	int div_m, div_n;
+ 
+ 	div_m = (clock_get_pll6() + hz - 1) / hz;
+@@ -305,14 +304,14 @@ static void sunxi_nfc_set_clk_rate(unsigned long hz)
+ 	/* config mod clock */
+ 	writel(CCM_NAND_CTRL_ENABLE | CCM_NAND_CTRL_PLL6 |
+ 	       CCM_NAND_CTRL_N(div_n) | CCM_NAND_CTRL_M(div_m),
+-	       &ccm->nand0_clk_cfg);
++	       ccm + CCU_NAND0_CLK_CFG);
+ 
+ 	/* gate on nand clock */
+-	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_NAND0));
++	setbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_NAND0));
+ #ifdef CONFIG_MACH_SUN9I
+-	setbits_le32(&ccm->ahb_gate1, (1 << AHB_GATE_OFFSET_DMA));
++	setbits_le32(ccm + CCU_AHB_GATE1, (1 << AHB_GATE_OFFSET_DMA));
+ #else
+-	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_DMA));
++	setbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_DMA));
+ #endif
+ }
+ 
 diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-index 0bdbf6a7b0e6..e90450439e41 100644
+index e90450439e41..2fcf52658008 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
 +++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-@@ -62,10 +62,6 @@
- #define NFC_RND_READ_CMD0_OFFSET    8
- #define NFC_RND_READ_CMD1_OFFSET    16
+@@ -533,14 +533,15 @@ unsigned int nand_page_size(void)
  
--#define NFC_CMD_RNDOUTSTART        0xE0
--#define NFC_CMD_RNDOUT             0x05
--#define NFC_CMD_READSTART          0x30
--
- struct nfc_config {
- 	int page_size;
- 	int ecc_strength;
-@@ -199,9 +195,9 @@ static int nand_load_page(const struct nfc_config *conf, u32 offs)
+ void nand_deselect(void)
  {
- 	int page = offs / conf->page_size;
+-	struct sunxi_ccm_reg *const ccm =
+-		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
++	void * const ccm = (void *)SUNXI_CCM_BASE;
  
--	writel((NFC_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
--	       (NFC_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
--	       (NFC_CMD_READSTART << NFC_READ_CMD_OFFSET),
-+	writel((NAND_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
-+	       (NAND_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
-+	       (NAND_CMD_READSTART << NFC_READ_CMD_OFFSET),
- 	       SUNXI_NFC_BASE + NFC_REG_RCMD_SET);
- 	writel(((page & 0xFFFF) << 16), SUNXI_NFC_BASE + NFC_REG_ADDR_LOW);
- 	writel((page >> 16) & 0xFF, SUNXI_NFC_BASE + NFC_REG_ADDR_HIGH);
-@@ -215,15 +211,15 @@ static int nand_change_column(u16 column)
- {
- 	int ret;
- 
--	writel((NFC_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
--	       (NFC_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
--	       (NFC_CMD_RNDOUTSTART << NFC_READ_CMD_OFFSET),
-+	writel((NAND_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
-+	       (NAND_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
-+	       (NAND_CMD_RNDOUTSTART << NFC_READ_CMD_OFFSET),
- 	       SUNXI_NFC_BASE + NFC_REG_RCMD_SET);
- 	writel(column, SUNXI_NFC_BASE + NFC_REG_ADDR_LOW);
- 
- 	ret = nand_exec_cmd(NFC_SEND_CMD1 | NFC_SEND_CMD2 | NFC_NORMAL_OP |
- 			    (1 << NFC_ADR_NUM_OFFSET) | NFC_SEND_ADR |
--			    NFC_CMD_RNDOUT);
-+			    NAND_CMD_RNDOUT);
- 	if (ret)
- 		return ret;
- 
+-	clrbits_le32(&ccm->ahb_gate0, (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
++	clrbits_le32(ccm + CCU_AHB_GATE0,
++		     (CLK_GATE_OPEN << AHB_GATE_OFFSET_NAND0));
+ #ifdef CONFIG_MACH_SUN9I
+-	clrbits_le32(&ccm->ahb_gate1, (1 << AHB_GATE_OFFSET_DMA));
++	clrbits_le32(ccm + CCU_AHB_GATE1, (1 << AHB_GATE_OFFSET_DMA));
+ #else
+-	clrbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_DMA));
++	clrbits_le32(ccm + CCU_AHB_GATE0, (1 << AHB_GATE_OFFSET_DMA));
+ #endif
+-	clrbits_le32(&ccm->nand0_clk_cfg, CCM_NAND_CTRL_ENABLE | AHB_DIV_1);
++	clrbits_le32(ccm + CCU_NAND0_CLK_CFG, CCM_NAND_CTRL_ENABLE |
++		     CCM_NAND_CTRL_N(0) | CCM_NAND_CTRL_M(1));
+ }
 -- 
 2.47.3
 
