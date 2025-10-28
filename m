@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428CCCCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 14:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CB70CCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 14:24:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1345D82A9E;
+	by phobos.denx.de (Postfix) with ESMTP id 4DC5C83710;
 	Tue, 28 Oct 2025 15:23:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PrCfdNMU";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="I9iPxlpt";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Y290DfCi";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pf5+kMw9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15AC483700; Tue, 28 Oct 2025 15:23:53 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id EAD6880422; Tue, 28 Oct 2025 15:23:54 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D80E480422
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 15:23:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 087E6836F0
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 15:23:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,54 +31,54 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cwt0Q4H51z9sq3;
- Tue, 28 Oct 2025 15:23:50 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cwt0S5nv0z9tV7;
+ Tue, 28 Oct 2025 15:23:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761661432;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TdLcdt/t/vTBMoUmKVypEiXQkzyQ66UzDZ/WQm6zMo4=;
+ b=Y290DfCikn462RfTdpIKuZ56lAVT9ZhHPoAjtREwFsQ/RsEiBIqR/0qv2yPtzitov79Utc
+ LamXl92HUa2U4Px3DNv9bc9hNjNI/CxQcgeJv5VSkEG/bKffWhJdDsxRYA9WbGhylD91Gd
+ BqWHPcIFTxKWnaLm+WGrxEadgMQpUdXZSxDOJQW3L0aN5FXT2COuC2QQew58m6FyAqMshb
+ 7VzHEym0pI/RsVuX4ufbYV4VzvOLE7TsFTKwv36LpMeRmuulXC5ZnDShyHhyuqpCYq60GJ
+ 7hefkAk273EzNMO786nX/M7tMY2CF6MTapHnwSIRr/wSELczw8fKSWLerdKsSw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1761661430;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mPIhr3b2aMoIQR5Rqipa3fk+ffb7fby2Kn2OGa9G40k=;
- b=PrCfdNMURmWJ+FAUzNZmFW+jRSUcMa48ZpU+QdVhOb2+0AClRhcLuZxi/5al0/zgnVJFEL
- ZBhEur9xZt8kXmLiSoHp6EaG6u2QNzIe3N+9UuoLZdH8i3++1spayhqUuZJy6GmckCTZ76
- v7+n5KEmmhI+dr0hAApyP6OBEqyVl9D5JQPWfMfQ1DsN4Oq+d8oGFYfOvyM6r/FRtKxTLj
- a9cu2bb3zVUNMmMWkWDErF7Rv3al+K+pCoiteJwh39KFCJ0kWm8vshvS/x9Lis0F9MdM3T
- miw2HQp0oJZDS4gn9/nISGNJIyoUN3Qo43vW/jYJW852mob3ElWRaDLKtVsA/Q==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761661428;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mPIhr3b2aMoIQR5Rqipa3fk+ffb7fby2Kn2OGa9G40k=;
- b=I9iPxlpt+ujJ3bq4jCwdoub9PAHqOi5X4UJ//4wNLeGJcdXiiCWhVR1hbYQH5d9ExD3NeN
- GxNYMW7N/Ha3arXWSojtAJve15iW+vREH36BxXKRGC6WNW+NDgMk5VCGBMGSII4/+LfA6M
- XmwYiHFhgot+pplFl4jJiBXA1p/HfqRo5vXWQ/MktRptKqqPvIBWHbLHPe8LHHYRzzjonR
- GF/GjGGzJnql7AKpqLpBuATmpdRIiIP3g/C8B6jGsATa/q7+nAlkaiTnuOT04iQtGmmv/B
- DP9vELq1y12nbgqdgTJIV4ymoFe+cjqq8zDQDuOg1//fqXqKtoZ/lcJ/9CTZeg==
+ bh=TdLcdt/t/vTBMoUmKVypEiXQkzyQ66UzDZ/WQm6zMo4=;
+ b=pf5+kMw9PBl6T/3aMRbc9h6hqEJFrQ0a8DKEfD+4Obmot9fL1gCu779b60fvTMQyq0fAEY
+ 4U26ef8vQksiLQNlHrWFqV+BwNsbwZ5P/xLzf1ez3PJzu8aU7cLEounkmTMCKbxZEnDcWI
+ 4B8rXn3b9AmtC4v+eGCdjwyeQzoty8CcHx0jwfpxttFCjMaQZQw8mOt0D134yAptyAt4af
+ 0gI5Ykce1Tqnsh6FUa3XlGEVhBPTJhycKWeJrWfNy5Xmq4ckj6BGxxxJOHpQfngFRuFBan
+ PPZsgCWDaQNvysauAVavDpcO0038IoQaGV612+d02yO32vawvYgZFNK3jtYr0w==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Casey Connolly <casey.connolly@linaro.org>,
  Michal Simek <michal.simek@amd.com>,
  Neha Malcom Francis <n-francis@ti.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  Tuyen Dang <tuyen.dang.xa@renesas.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>, u-boot-qcom@groups.io
-Subject: [PATCH v2 3/7] ufs: core: Rename ufs.c to ufs-uclass.c
-Date: Tue, 28 Oct 2025 15:22:23 +0100
-Message-ID: <20251028142335.18125-3-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 4/7] ufs: amd-versal2: Fix indent
+Date: Tue, 28 Oct 2025 15:22:24 +0100
+Message-ID: <20251028142335.18125-4-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20251028142335.18125-1-marek.vasut+renesas@mailbox.org>
 References: <20251028142335.18125-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 1d8x5wtq53k9uy33sn3yqjhzks74bu6u
-X-MBO-RS-ID: a0b2a157801ab2220f6
+X-MBO-RS-ID: 737783d46f2314054ce
+X-MBO-RS-META: 5zojq9pbu3o9d1fui4tueuoccc6jwbre
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,11 +95,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Previous commit folded existing ufs-uclass.c into ufs.c ,
-which produced a nice and reviewable change , but also broke
-the UCLASS should be in *-uclass.c pattern. Fix it. Keep the
-change separate from the previous one to make this reviewable.
+Fix indent, use tabs. No functional change.
 
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
@@ -115,30 +114,39 @@ Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 Cc: u-boot-qcom@groups.io
 Cc: u-boot@lists.denx.de
 ---
-V2: New patch
+V2: Add RB from Neil
 ---
- drivers/ufs/Makefile                | 2 +-
- drivers/ufs/{ufs.c => ufs-uclass.c} | 0
- 2 files changed, 1 insertion(+), 1 deletion(-)
- rename drivers/ufs/{ufs.c => ufs-uclass.c} (100%)
+ drivers/ufs/ufs-amd-versal2.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-index 2ac410cf7c3..17ca89e886f 100644
---- a/drivers/ufs/Makefile
-+++ b/drivers/ufs/Makefile
-@@ -3,7 +3,7 @@
- # Copyright (C) 2019 Texas Instruments Incorporated - https://www.ti.com
- #
+diff --git a/drivers/ufs/ufs-amd-versal2.c b/drivers/ufs/ufs-amd-versal2.c
+index 896dda2de4e..89931921ff9 100644
+--- a/drivers/ufs/ufs-amd-versal2.c
++++ b/drivers/ufs/ufs-amd-versal2.c
+@@ -330,7 +330,7 @@ static int ufs_versal2_init(struct ufs_hba *hba)
+ 		return PTR_ERR(priv->rstphy);
+ 	}
  
--obj-$(CONFIG_UFS) += ufs.o
-+obj-$(CONFIG_UFS) += ufs-uclass.o
- obj-$(CONFIG_CADENCE_UFS) += cdns-platform.o
- obj-$(CONFIG_QCOM_UFS) += ufs-qcom.o
- obj-$(CONFIG_TI_J721E_UFS) += ti-j721e-ufs.o
-diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs-uclass.c
-similarity index 100%
-rename from drivers/ufs/ufs.c
-rename to drivers/ufs/ufs-uclass.c
+-	ret =  zynqmp_pm_ufs_cal_reg(&cal);
++	ret = zynqmp_pm_ufs_cal_reg(&cal);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -567,9 +567,9 @@ static const struct udevice_id ufs_versal2_ids[] = {
+ };
+ 
+ U_BOOT_DRIVER(ufs_versal2_pltfm) = {
+-	.name           = "ufs-versal2-pltfm",
+-	.id             = UCLASS_UFS,
+-	.of_match       = ufs_versal2_ids,
+-	.probe          = ufs_versal2_probe,
+-	.bind           = ufs_versal2_bind,
++	.name		= "ufs-versal2-pltfm",
++	.id		= UCLASS_UFS,
++	.of_match	= ufs_versal2_ids,
++	.probe		= ufs_versal2_probe,
++	.bind		= ufs_versal2_bind,
+ };
 -- 
 2.51.0
 
