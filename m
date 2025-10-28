@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 484E2CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 09:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE3C3CCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 09:15:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1351583AA4;
-	Tue, 28 Oct 2025 10:14:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4E18083AA1;
+	Tue, 28 Oct 2025 10:14:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="JwI7SqGR";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="szHLp/Vn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F4079839DE; Tue, 28 Oct 2025 10:14:01 +0100 (CET)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id 81A9983AAB; Tue, 28 Oct 2025 10:14:05 +0100 (CET)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0559A83AA0
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:14:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CF14839DE
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:14:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 7BB48C0BE9C;
- Tue, 28 Oct 2025 09:13:39 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 4C6964E41392;
+ Tue, 28 Oct 2025 09:14:03 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id B8D68606AB;
- Tue, 28 Oct 2025 09:13:59 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 22755606AB;
+ Tue, 28 Oct 2025 09:14:03 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id AC8E5102F49C9; Tue, 28 Oct 2025 10:13:55 +0100 (CET)
+ with ESMTPSA id 7478A102F49E4; Tue, 28 Oct 2025 10:13:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761642838; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1761642841; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=BUcwJ15/aJUAObodShVIca/aeem/+vsWiNuVEXZWOhM=;
- b=JwI7SqGRfH0hrxuB5++S2wOR86cG9nRmkbOWCnBBQrGMaSQh07zkomEUpmpSpPUsnH5ijp
- jeZKbUUZ2HCkgpWBUw1mQLkcwA9u3/Gwe9tc94o486yS2EOqeQDYiV1Gfj5fyy8/aXfJyq
- IHTqnXanOQ21uwvuzJByKnM6apLQdP/ASgsrrzsoGLfcdhNj6UQC2ojLPuAbCIs1UUqOT1
- oCxBw/5kul54CQG3kROSz+XW/Gus4YQ6va3qF7bUOYHawhddBZZIFypCHaEiATRwxsJ+E6
- h/AzWIekkoqdDQRZrEHyqORo0t91mc70yejP5cRfvJknRooIRoh53rFY+jcMWA==
+ bh=5EIhSBMP63aH7QPsDS9/KFiOoTRh/i2w9ozvieqmCYU=;
+ b=szHLp/VnPiaBUNBCJayZ/rEDy+mdz1i3KkfPTIpJY9ioObTNZgOjlTM073wymPks+NtFzE
+ XQxxgQqB9zqbu/6k/MvO/PYDv41N2iT8oKr1Y7pKuvc7aUnipnsrRW0cCQziqUNOGcFtEO
+ zuurs+fX4Ts8BULpvgcoc4e3xUSYQUuGawABbVagEARYbSaVEzxp3agJJml3dyHrQYUi0v
+ HYN+tyI+M/1aWsvtIIZBM8JTtMEf0Nwd+ZFccCHgsF2XGFaJ4Gu1B3Gxge3hy7cZHIWNWN
+ UslzbCTINtt3gLFZ2bYXxleWicskCKWWSxYEArmonxFaC30+VEjsbaS+Iqtkqw==
 From: Richard Genoud <richard.genoud@bootlin.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -60,10 +60,10 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
  Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v2 12/24] mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC
- caps
-Date: Tue, 28 Oct 2025 10:12:33 +0100
-Message-ID: <20251028091256.600992-13-richard.genoud@bootlin.com>
+Subject: [PATCH v2 13/24] mtd: rawnand: sunxi: introduce reg_pat_id in
+ sunxi_nfc_caps
+Date: Tue, 28 Oct 2025 10:12:34 +0100
+Message-ID: <20251028091256.600992-14-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251028091256.600992-1-richard.genoud@bootlin.com>
 References: <20251028091256.600992-1-richard.genoud@bootlin.com>
@@ -86,84 +86,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-NFC_ECC_MODE register offset moved in H616, so let's make it a SoC cap
+Introduce NDFC Pattern ID Register in capability structure
+
+The H6/H616 pattern ID register is not at the same offset as the
+A10/A23 one, so move its offset into sunxi_nfc_caps.
 
 No functional change.
 
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 ---
- drivers/mtd/nand/raw/sunxi_nand.c | 6 ++++--
- drivers/mtd/nand/raw/sunxi_nand.h | 9 ++++++---
- 2 files changed, 10 insertions(+), 5 deletions(-)
+ drivers/mtd/nand/raw/sunxi_nand.c | 3 ++-
+ drivers/mtd/nand/raw/sunxi_nand.h | 5 ++++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
-index d14a12b6662c..c5efafa2414c 100644
+index c5efafa2414c..c032cabb4dc9 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand.c
 +++ b/drivers/mtd/nand/raw/sunxi_nand.c
-@@ -659,10 +659,11 @@ static void sunxi_nfc_hw_ecc_enable(struct mtd_info *mtd)
- 	u32 ecc_ctl;
+@@ -731,7 +731,7 @@ static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_info *mtd,
+ 	if (pattern_found & NFC_ECC_PAT_FOUND(0)) {
+ 		u8 pattern = 0xff;
  
- 	ecc_ctl = readl(nfc->regs + NFC_REG_ECC_CTL);
--	ecc_ctl &= ~(NFC_ECC_MODE_MSK | NFC_ECC_PIPELINE);
-+	ecc_ctl &= ~(NFC_ECC_MODE_MSK(nfc) | NFC_ECC_PIPELINE);
- 	if (nfc->caps->has_ecc_block_512)
- 		ecc_ctl &= ~NFC_ECC_BLOCK_512;
--	ecc_ctl |= NFC_ECC_EN | NFC_ECC_MODE(data->mode) | NFC_ECC_EXCEPTION;
-+	ecc_ctl |= NFC_ECC_EN | NFC_ECC_MODE(nfc, data->mode)
-+		| NFC_ECC_EXCEPTION;
+-		if (unlikely(!(readl(nfc->regs + NFC_REG_PAT_ID) & 0x1)))
++		if (unlikely(!(readl(nfc->regs + NFC_REG_PAT_ID(nfc)) & 0x1)))
+ 			pattern = 0x0;
  
- 	if (nand->ecc.size == 512 && nfc->caps->has_ecc_block_512)
- 		ecc_ctl |= NFC_ECC_BLOCK_512;
-@@ -1727,6 +1728,7 @@ static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
+ 		memset(data, pattern, ecc->size);
+@@ -1727,6 +1727,7 @@ static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
+ 	.reg_ecc_err_cnt = NFC_REG_A10_ECC_ERR_CNT,
  	.reg_user_data = NFC_REG_A10_USER_DATA,
  	.reg_pat_found = NFC_REG_ECC_ST,
++	.reg_pat_id = NFC_REG_A10_PAT_ID,
  	.pat_found_mask = GENMASK(31, 16),
-+	.ecc_mode_mask = GENMASK(15, 12),
+ 	.ecc_mode_mask = GENMASK(15, 12),
  };
- 
- static const struct udevice_id sunxi_nand_ids[] = {
 diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sunxi_nand.h
-index b4a05733c810..3b155b0c8f3e 100644
+index 3b155b0c8f3e..e18feb77c93c 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand.h
 +++ b/drivers/mtd/nand/raw/sunxi_nand.h
-@@ -25,8 +25,9 @@
+@@ -50,7 +50,8 @@
+ #define NFC_REG_A10_USER_DATA	0x0050
+ #define NFC_REG_USER_DATA(nfc, x)	((nfc)->caps->reg_user_data + ((x) * 4))
+ #define NFC_REG_SPARE_AREA	0x00A0
+-#define NFC_REG_PAT_ID		0x00A4
++#define NFC_REG_PAT_ID(nfc)	((nfc)->caps->reg_pat_id)
++#define NFC_REG_A10_PAT_ID	0x00A4
+ #define NFC_RAM0_BASE		0x0400
+ #define NFC_RAM1_BASE		0x0800
  
- #include <linux/bitops.h>
- 
--/* non compile-time field get */
-+/* non compile-time field get/prep */
- #define field_get(_mask, _reg) (((_reg) & (_mask)) >> (ffs(_mask) - 1))
-+#define field_prep(_mask, _val) (((_val) << (ffs(_mask) - 1)) & (_mask))
- 
- #define NFC_REG_CTL		0x0000
- #define NFC_REG_ST		0x0004
-@@ -141,8 +142,8 @@
- #define NFC_ECC_BLOCK_512	BIT(5)
- #define NFC_RANDOM_EN		BIT(9)
- #define NFC_RANDOM_DIRECTION	BIT(10)
--#define NFC_ECC_MODE_MSK	(0xf << 12)
--#define NFC_ECC_MODE(x)		((x) << 12)
-+#define NFC_ECC_MODE_MSK(nfc)	((nfc)->caps->ecc_mode_mask)
-+#define NFC_ECC_MODE(nfc, x)	field_prep(NFC_ECC_MODE_MSK(nfc), (x))
- #define NFC_RANDOM_SEED_MSK	(0x7fff << 16)
- #define NFC_RANDOM_SEED(x)	((x) << 16)
- 
-@@ -174,6 +175,7 @@
+@@ -173,6 +174,7 @@
+  * @nstrengths:		Number of element of ECC strengths array
+  * @reg_ecc_err_cnt:	ECC error counter register
   * @reg_user_data:	User data register
++ * @reg_pat_id:		Pattern ID Register
   * @reg_pat_found:	Data Pattern Status Register
   * @pat_found_mask:	ECC_PAT_FOUND mask in NFC_REG_PAT_FOUND register
-+ * @ecc_mode_mask:	ECC_MODE mask in NFC_ECC_CTL register
-  */
- struct sunxi_nfc_caps {
- 	bool has_ecc_block_512;
+  * @ecc_mode_mask:	ECC_MODE mask in NFC_ECC_CTL register
 @@ -182,6 +184,7 @@ struct sunxi_nfc_caps {
+ 	unsigned int nstrengths;
+ 	unsigned int reg_ecc_err_cnt;
  	unsigned int reg_user_data;
++	unsigned int reg_pat_id;
  	unsigned int reg_pat_found;
  	unsigned int pat_found_mask;
-+	unsigned int ecc_mode_mask;
- };
- 
- #endif
+ 	unsigned int ecc_mode_mask;
 -- 
 2.47.3
 
