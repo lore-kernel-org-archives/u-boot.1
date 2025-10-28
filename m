@@ -4,52 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A598CCCF9EB
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:49:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 163FDCCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 09:13:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F2BA839DD;
-	Tue, 28 Oct 2025 09:49:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 4D62B83A24;
+	Tue, 28 Oct 2025 10:13:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Zn2t2LnB";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="2lBIXLPW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D78983A2F; Tue, 28 Oct 2025 09:49:22 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id 9EDF083A1E; Tue, 28 Oct 2025 10:13:25 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CCAE839CC
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:49:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2E5C4839CC
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:13:23 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 89FD8C0BE9C;
+ Tue, 28 Oct 2025 09:13:02 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id B53B1606AB;
+ Tue, 28 Oct 2025 09:13:22 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4ADB1106DB3; Tue, 28 Oct 2025 09:49:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1761641359;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=y9Mx/K/By+d4GJcvKUjwog4tKdP4JvEEoePnTgCEMt0=;
- b=Zn2t2LnB8rljP2tTkyHNjBxyH5GuByDZFLjGBou4xL5yPtn7AK6JYbwFCFDhIT3emLT9Tn
- YHnGGGO9zkVlYP9aOcciyHwCoa7jPn5OjrFf8xadvFkfI/fzt5I0yIShH8q3zeRk26VucH
- UDxxpe4EkAhXAlGyp1qh5wUdqETQ0t1RAEP0t8CswIHWoqtfhx7g7EfZ3aXUYXD/YNuAsM
- bi/jvbDq2FUUH6L22ysj75VM9ORd9zjsBGLbKLTEZXOVwgikDYtw8zJ2Gs97yNFPU5b3GN
- dJxX4CgHhouYJN9rZdsQBgnMcdYVHX3n0J7bVbgysFXtJFHeZGokoGALKQlnjw==
-Message-ID: <5dfacb55-9e64-79a1-1f09-fb4fa11a9e15@nabladev.com>
-Date: Tue, 28 Oct 2025 09:49:36 +0100
+ with ESMTPSA id E1BE5102F4857; Tue, 28 Oct 2025 10:13:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1761642801; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=Pc1TifhM7i1Jvg1jQj7QsMS0NIT/5GY+QD92qbofCRQ=;
+ b=2lBIXLPWl4VcYvbMnsA+040dOlHli+5W39PcN96w43/EXPuPBLHg9WWGLMVderxjpQ7sy4
+ Do2iX9pKXyQJIEASaUGkP3e3BeIFsYD5hPK9JBSOcJ7bpgwf4yZ6IKVlhk/fS6vN5XvrkC
+ FKloDy72VDdyFhMh903EYmJCM3b1uMgu8B1SL3qxdI787Lif46zoDvtYH78+ZiWh3VT60I
+ JSMF5DdyefOey1HbFXct+S30oa1JzhLNd79DDVdZI0FGKDqyXkNLpF9nOYOaT4yhTVn4Si
+ OXZSV7w+7O9K4DZEcySt9ufJR8ahvgr2ZKTbS9flGHnjClTWy/YWX/J369AF4w==
+From: Richard Genoud <richard.genoud@bootlin.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dinesh Maniyam <dinesh.maniyam@intel.com>,
+ Anand Gore <anand.gore@broadcom.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ david regan <dregan@broadcom.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
+ Richard Genoud <richard.genoud@bootlin.com>
+Subject: [PATCH v2 00/24] Introduce Allwinner H6/H616 NAND controller support
+Date: Tue, 28 Oct 2025 10:12:21 +0100
+Message-ID: <20251028091256.600992-1-richard.genoud@bootlin.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v4] i2c: add support for the MT7621 I2C controller
-Content-Language: en-US
-To: Justin Swartz <justin.swartz@risingedge.co.za>, u-boot@lists.denx.de
-Cc: Anshul Dalal <anshuld@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Tom Rini <trini@konsulko.com>
-References: <20251027130942.12387-1-justin.swartz@risingedge.co.za>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20251027130942.12387-1-justin.swartz@risingedge.co.za>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
@@ -68,94 +83,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Justin,
+Hi everyone,
 
-On 27.10.25 14:09, Justin Swartz wrote:
-> This commit introduces a port of the Linux kernel's driver for the
-> Mediatek's MT7621 I2C controller.
-> 
-> The port was undertaken as the existing driver intended for Mediatek
-> I2C controllers (mtk_i2c.c) is not compatible with the MT7621.
-> 
-> To use the driver:
-> 
->    1.  Ensure that the mode of the i2c pin group is
->        configured for "i2c" rather than "gpio".
-> 
->    2.  Delete the existing (bitbanged) i2c node from
->        arch/mips/dts/mt7621.dtsi, or specify:
-> 
->          /delete-node/ &i2c;
-> 
->    3.  Declare:
-> 
->          i2c: i2c@1e000900 {
->                  compatible = "mediatek,mt7621-i2c";
->                  reg = <0x1e000900 0x100>;
-> 
->                  clocks = <&clk50m>;
->                  clock-names = "sys_clock";
-> 
->                  resets = <&rstctrl RST_I2C>;
->                  reset-names = "i2c_reset";
-> 
->                  pinctrl-names = "default";
->                  pinctrl-0 = <&i2c_pins>;
-> 
->                  #address-cells = <1>;
->                  #size-cells = <0>;
->                  status = "okay";
->          };
-> 
-> Signed-off-by: Justin Swartz <justin.swartz@risingedge.co.za>
-> ---
-> 
-> Notes:
->      [PATCH v4]
->      
->      - Fix style and whitespace issues to appease checkpatch.pl
->      - Include time.h (instead of common.h) for get_timer()
->      - Replace mt7621_i2c_check_ack()'s MMIO register access,
->        via a volatile pointer, with readl() macro expansion.
->      
->      [PATCH v3]
->      
->      - Add an empty line between variable declaration and code to
->        functions that did not have this separation.
->      
->      - Condense multi-line closing brace / else / opening brace
->        sequences into single lines consisting of "} else {" instead.
->      
->      - Relocate mt7621_i2c_check_ack()'s I2C_M_IGNORE_NAK flag check
->        to just after the last variable declaration.
->      
->      [PATCH v2]
->      
->      - Add "REG_" prefix to I2C (Serial Master 0) register definitions.
->      - Remove unused "PINT" (Peripheral Interrupt) register definitions.
->      - Adjust function definition style.
->      
->      - Refactor mt7621_i2c_check_ack() to accept the number of bytes
->        expected to have been acknowledged, instead of accepting a
->        literal value (which represents the acknowledgement status of
->        (up to) 8 bytes, encoded as 8 independent bit values) expected
->        in the SM0_ACK field (bits 23:16) of the SM0CTL1 register.
-> 
->   drivers/i2c/Kconfig      |   7 +
->   drivers/i2c/Makefile     |   1 +
->   drivers/i2c/mt7621_i2c.c | 374 +++++++++++++++++++++++++++++++++++++++
->   3 files changed, 382 insertions(+)
->   create mode 100644 drivers/i2c/mt7621_i2c.c
+This patch series introduce H6/H616 NAND controller support (but not yet
+the DMA/MDMA part).
 
-Thanks for fixing the checkpatch warnings.
+All the work was done on a H616 board with a Kioxia TC58NVG1S3HTA00 NAND
+chip.
+ECC is supported, as well as scrambling.
 
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
+Support for booting from NAND is not part of this series, but it's almost
+ready. (It needs quite some modifications in sunxi-spl-image-builder.c
+and sunxi_toc0.c)
 
-bye,
-Heiko
+H6 SoC has not been tested, but it shares all registers with H616, plus
+some registers dedicated to Embedded Crypto Engine that H616 lacks.
+
+This IP has quite some register fields modified from the A10/A23, but in
+the end, it works more or less the same.
+Main differences with A10/A23 are:
+- The need for 2 more clocks (for ECC and MBUS)
+- The use of a new USER_DATA_LEN register
+- More ECC strengths (44, 52, 68, 72, 76 and 80 bits / 1KB)
+- MDMA based on chained buffers
+- some registers layouts have changed (mainly due do the stronger ECC)
+
+Patches 1 and 2 are small fixes
+
+Patches 3-6 harmonize the registers definitions between U-Boot and SPL,
+and ultimately merge those definitions in an include file, without
+functional change, removing the usage of sunxi_ccm_reg on the way.
+
+Patches 7-19 are paving the way to the introduction of H6/H616 NAND
+controller by adding per SoC capabilities for both drivers. They are
+small for an easier review, without functional change.
+
+Patches 20-21 are adding missing NAND related clocks definitions for
+H6/H616
+
+Patch 22 adds the support for H6/H616 NAND controller in U-Boot.
+
+Patch 23 adds the support for H6/H616 NAND controller in SPL.
+
+Patch 24 fixes warnings in sunxi_nand_spl.c
+
+A similar series for this NAND controller support in Linux has been sent
+and being reviewed.
+
+Changes from v1:
+- pick-up reviewed-by
+- use a readl() loop instead of memcpy_fromio() in patch 2 as suggested
+  by Andre
+- remove cosmetic in patches that are beyond cosmetic changes
+- remove usage of struct sunxi_ccm_reg, suggested by Andre
+- indent @caps member description in comment
+- give more informations on PAT_FOUND registers in commit message
+- drop NFC_ECC_BLOCK_SIZE_MSK which was just a 1bit mask for the very
+  same bit NFC_ECC_BLOCK_512
+- add missing MACH_SUN50I_H6 in Kconfig
+
+Richard Genoud (24):
+  mtd: rawnand: sunxi: cosmetic: remove needless comment
+  mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
+  mtd: rawnand: sunxi_spl: harmonize register defines with non spl file
+  mtd: rawnand: sunxi_spl: cosmetic: use definitions from
+    linux/mtd/rawnand.h
+  mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
+  mtd: rawnand: sunxi: merge register definitions for
+    sunxi_nand{,_spl}.c
+  mtd: rawnand: sunxi: add per SoC capabilities
+  mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC caps
+  mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
+  mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
+  mtd: rawnand: sunxi: add has_ecc_block_512 capability
+  mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
+  mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
+  mtd: rawnand: sunxi_spl: add per SoC capabilities
+  mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC caps
+  mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
+  mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUND
+  mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
+  mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED macros
+  sunxi: clock: H6: add NAND controller clock registers
+  clk: sunxi: Add MBUS Master Clock Gating Register
+  mtd: rawnand: sunxi: add support for H6/H616 nand controller
+  mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
+  mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warnings
+
+ arch/arm/include/asm/arch-sunxi/clock_sun4i.h |   1 +
+ .../include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
+ arch/arm/include/asm/arch-sunxi/clock_sun6i.h |   1 +
+ .../include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
+ arch/arm/include/asm/arch-sunxi/clock_sun9i.h |   2 +
+ board/sunxi/board.c                           |  19 +-
+ drivers/clk/sunxi/clk_h6.c                    |   2 +
+ drivers/clk/sunxi/clk_h616.c                  |   2 +
+ drivers/mtd/nand/raw/Kconfig                  |   3 +-
+ drivers/mtd/nand/raw/sunxi_nand.c             | 308 +++++++++--------
+ drivers/mtd/nand/raw/sunxi_nand.h             | 228 +++++++++++++
+ drivers/mtd/nand/raw/sunxi_nand_spl.c         | 322 +++++++++++-------
+ 12 files changed, 629 insertions(+), 284 deletions(-)
+ create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
+
+
+base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
 -- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+2.47.3
+
