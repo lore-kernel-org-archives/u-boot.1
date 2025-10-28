@@ -4,142 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A07FCCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 16:31:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A947CCF9EB
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 16:51:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F7E683946;
-	Tue, 28 Oct 2025 17:30:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E1E96836D3;
+	Tue, 28 Oct 2025 17:51:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YuK0B9Cx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lOFkMcUX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDF4983771; Tue, 28 Oct 2025 17:19:21 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 7D990836D3; Tue, 28 Oct 2025 17:51:03 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBDFB80422
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 17:19:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35B5680422
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 17:51:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-42701b29a7eso33849f8f.0
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:19:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-3d357d115dfso1612351fac.1
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:51:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761668359; x=1762273159; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=TkmUPIggogctLSrYu94McPwVHunUUc4wMvtFpDDsAOA=;
- b=YuK0B9CxmMqlNNg1Y7Zo6supmSz5LE1JNehu1RIlcVzECSHkojkiH8KOlBmW9Wb3If
- xK7Hder/tHE0ZdsS2Pi2hWs8qydktvWo/GICh8FKiRuF2XOZP/4UDXxbwLWMDesM2Osp
- ZPpT9yLTfyQSjcxzfV51Dy3tIUEeP0GkbsUB61iauKVd4+Q0soRsNgyZ+PovEXBS8Ql/
- Xa326cMGgVR6zteHJnen91C6VlLyeRChZQmw+zpOMJAXFAcS6VCkAPIhpNzirrjDHNb8
- oYFIZddwpVvdbNDsx7HNB27DxrxU9lBMSx6yNqkUKOBTkYwrKLKpuIXsrRAlmLiFDNTY
- 8T+g==
+ d=konsulko.com; s=google; t=1761670260; x=1762275060; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wFYqd5kJF0c4Mq2rlrFSvyFuoVHaMZ1KOEhhiTtw1vI=;
+ b=lOFkMcUXBHn453VINMtTGbcsz+PbcngYEu4wDAdGHveG6ceKMnzsZ9FfhQnJas5JCU
+ yLwfZf1SdEFq4r8N8xEdeHlysTIRY0P8BXqyP7m5J2TuEIxRLCgTKP3NNLSqA1ag4Cbg
+ t/g+40hJ5bfrriQaxrR6oTleJBliEqopqRKP8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761668359; x=1762273159;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=TkmUPIggogctLSrYu94McPwVHunUUc4wMvtFpDDsAOA=;
- b=UmfITObZS1+WF2IMg3apNLGC23jWnRWmxVvKlpJViMH28Om42P9KAbOreNR2QX2kX2
- 3Jll6VKWv42/f0je5gg0+JJhP1au+26iXevxG9jJvWzFAgIvJs4rHwQqqO+hwRXE+6TE
- HKK6JwRlxVEjWxlkMsPOyH2Igf2DL0vYGU+GxfVaJw5jMPBGe4BU9iBUplA3QE0uKM1c
- /7a3sguqKdXVFVDj5JfOpF7UmZFwk7FXvsMWPPhnj+3KU7Zn+2M6rS52ntwj2LSKg8Sn
- Bj/+y21Y05qAtRsfQbPFq0GcvDeOzhn3I8aHBxtbr44bIiKvJPAQQMxoWwOjIiKkahw5
- C6Uw==
+ d=1e100.net; s=20230601; t=1761670260; x=1762275060;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wFYqd5kJF0c4Mq2rlrFSvyFuoVHaMZ1KOEhhiTtw1vI=;
+ b=oGvwWCdx7D4YG0GtM0xG3j9r8gg0JVcM3iPDUv9BLKH9y2QaVE39E5PIBt9ouod/k1
+ /WJEVJsFBvmzZ05ik0/2AJlndV/weSLABCXnBf1Z515uVDueYkCclIpJ2dtRXIEIloSa
+ C0vrzNZv2uBjsdBdXRAukT3lSiEdlFa/rth3OEXdigKCNp6OW9UdGM6AgNuUZfvr/Y5f
+ 8XF7WA8iltALGh9soY5Es5uqxub6CtmUDG6JXI44FXYO/i+T4U420qUu2JbfaxplwC/g
+ Pk02NerCYuTa7KfJ/QY6qn3axE18Yfr1d7GFjQe3Zcb70noXoF7D7/6edvNDILzDNS1+
+ NSjQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4FwLvQn6n68+NBtHwytvxVhtOBbErQWf+TZshbxo0B67TsyOrfK4uFJzWqjEITsn4GiuQgEQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzxakV9E3m8THv0gQY3WzAO5HliaK2tMm4AR6OkP1VzKUBuYi1G
- UERyILCTweKjQoRblWF4qOpKUIslblOf+QcPb9gZGgvfq4ccKBHfnk/l27eMRpbJ4nQ=
-X-Gm-Gg: ASbGncur6DfcZ77C/JMmI49/e88r5wy27KXDfp1Q98AfZilCD0o41+X4SgPJHp7oGxq
- wO8XM2NeHYswwv2wMEquNIiJMXafsVM7YGPM5xMZgNXW2FPRN2uW7aXVbGCWtg0S/IZeGI0a7ip
- NcLAvg+E1KsYAd28+sfH4+K06+ypZKd+tiZ8sAq7KouSWwgoI3ODF7dtc7pwg9z2fXa1kiASLXc
- Ax0J9Sg0xfN9aNaYjjYs/OjjEfawvH99pKxNvMeUyPGHCkdCcosUWtwBppXzkqSWnEIYfq89UHt
- zGzRHuOKrKfFFZ2SyfQgBrJf0+RBZ40kh3HkIKigwhtglJ7qyk9QmBRMg2+DViWnSDKKT13KSCY
- i0FTSgvLFzivNIFTKPfHpnXQ6RBSc4ILHQvIkcxzXwDiBKZG4O71gHVKqOfJOpRC8GFl8YICc/5
- XCKcQjVIOSAegx8Zlv0/ifmbnscv0DwAJai5NrfyDtFCbmIgq5cA==
-X-Google-Smtp-Source: AGHT+IEYeHslBRwCq0TfG2KoR44X6E2mGwpvh/IUXoMDMCDFwaV2MxtimM0HnDpo0hNJLbTTtkmyDg==
-X-Received: by 2002:a05:6000:2211:b0:426:fb27:974a with SMTP id
- ffacd0b85a97d-429a83e5079mr3441414f8f.27.1761668359071; 
- Tue, 28 Oct 2025 09:19:19 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:cad:2140:ebe6:df10:d28d:aa5?
- ([2a01:e0a:cad:2140:ebe6:df10:d28d:aa5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952b7badsm20762904f8f.7.2025.10.28.09.19.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Oct 2025 09:19:18 -0700 (PDT)
-Message-ID: <fbb4dc27-0aa6-4621-a25b-ae6bf13bbfd0@linaro.org>
-Date: Tue, 28 Oct 2025 17:19:17 +0100
+ AJvYcCUT+X7BQZrO+VuvtQMJTSNTmH4L8KMZN+YiKsfHbgpzyM3dfd0R8/CJFRmB6HwtvfUa8SYq8hY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwlB0rmhUZBDq59iIoFpCObnYv1dhkUr+HYIvfRBrb420a6PbsZ
+ EmBq2qsME0who0Rem09WqtEjeLjPHGuKtoGwvaAxrSCEgB3+i3bVnLH2ay/YcM9u8dw=
+X-Gm-Gg: ASbGncs9GqYVWKbE7nf7gmvBHHxSjAaeEcesjwoclW4vE/+Wqnf+OjzUOChGYBvYuxI
+ QCujsEUwCTGikrkGHviQXgdXRiEwrUwl+I50Oe1O+BmanjW216fYz4JfWFHw7P12bxBYMrCvqh3
+ 2lW8X5AIIj3DROUnGAQK7+nRCwXm/j6ge4zzQY9mk/Ob1UoyTFQhtrbPTpLcNPrKPD+t/IyihCj
+ VtNuDcuWv/SK/yZj4LArk6Bm+EbGNZXn35iWe/PFeFBH1/72AhX9mM+EMJLdECB1oA7cPUiKZy0
+ eyoFj/UoLOd4MMh0YZompz1nJ8WXb5OddjEGPACEHzQVuEoEQWh0BCURHOhPzPXkaktMFRfgBCi
+ 2GdOlJXw2AAPAMxcJ3+xxk68LsUluLvKASDAmfdSck2cmSvDlf9IlGAL0q0LC2FPQ7itWcIOimx
+ 5nOd6DcawWg3PXFGMAFB85UNIreiTLctk9sbWCATE=
+X-Google-Smtp-Source: AGHT+IF/nnv28p9/OPQRofhvPsQ1NGj2jZ+VErMa1NUZheX4yuHCIQ0uPM6m/VeVGWgJZd6JXXsb4g==
+X-Received: by 2002:a05:6871:71f:b0:3d3:84a6:652d with SMTP id
+ 586e51a60fabf-3d745b8a545mr10392fac.3.1761670259719; 
+ Tue, 28 Oct 2025 09:50:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3d1e2816b32sm3754933fac.9.2025.10.28.09.50.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Oct 2025 09:50:58 -0700 (PDT)
+Date: Tue, 28 Oct 2025 10:50:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: David Zang <davidzangcs@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] autoboot: Fix inconsistent countdown output
+Message-ID: <20251028165056.GG6688@bill-the-cat>
+References: <20251027002458.16741-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 4/4] MAINTAINERS: Add UFS to MediaTek section
-To: Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>, Minkyu Kang
- <mk7.kang@samsung.com>, Tim Harvey <tharvey@gateworks.com>,
- Roger Quadros <rogerq@kernel.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Minda Chen <minda.chen@starfivetech.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, Simon Glass <sjg@chromium.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, Yao Zi <ziyao@disroot.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
- Stefan Roese <stefan.roese@mailbox.org>, Heiko Schocher <hs@nabladev.com>,
- Sumit Garg <sumit.garg@kernel.org>, ~postmarketos/upstreaming@lists.sr.ht
-References: <20251011-mtk-ufs-uboot-v1-0-a05f991ee150@mentallysanemainliners.org>
- <20251011-mtk-ufs-uboot-v1-4-a05f991ee150@mentallysanemainliners.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20251011-mtk-ufs-uboot-v1-4-a05f991ee150@mentallysanemainliners.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Tue, 28 Oct 2025 17:30:22 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1bVjdN1Tpd+jJZrZ"
+Content-Disposition: inline
+In-Reply-To: <20251027002458.16741-1-semen.protsenko@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,41 +93,60 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/11/25 21:10, Igor Belwon wrote:
-> Add the UFS driver files to the ARM MediaTek section in MAINTAINERS.
-> Add myself as its maintainer.
-> 
-> Signed-off-by: Igor Belwon <igor.belwon@mentallysanemainliners.org>
-> ---
->   MAINTAINERS | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 1db1070d5f8d2fb74836bc8e55ca13fe6b292d93..30b2b602d2f3edeb6dc54f9d65211a372de9b896 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -410,6 +410,7 @@ ARM MEDIATEK
->   M:	Ryder Lee <ryder.lee@mediatek.com>
->   M:	Weijie Gao <weijie.gao@mediatek.com>
->   M:	Chunfeng Yun <chunfeng.yun@mediatek.com>
-> +M:	Igor Belwon <igor.belwon@mentallysanemainliners.org>
->   R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
->   S:	Maintained
->   F:	arch/arm/mach-mediatek/
-> @@ -433,6 +434,7 @@ F:	drivers/spi/mtk_snfi_spi.c
->   F:	drivers/spi/mtk_spim.c
->   F:	drivers/spi/mtk_snor.c
->   F:	drivers/timer/mtk_timer.c
-> +F:	drivers/ufs/ufs-mediatek*
->   F:	drivers/usb/host/xhci-mtk.c
->   F:	drivers/usb/mtu3/
->   F:	drivers/watchdog/mtk_wdt.c
-> 
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+--1bVjdN1Tpd+jJZrZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Oct 26, 2025 at 07:24:58PM -0500, Sam Protsenko wrote:
+
+> Commit 5f70be08b015 ("Fix autoboot countdown printing wrong") introduces
+> inconsistency in how the countdown is displayed. For example, in case
+> when BOOTDELAY=3D5, the next output is observed during the boot:
+>=20
+>     Hit any key to stop autoboot:  5
+>     Hit any key to stop autoboot: 4
+>     Hit any key to stop autoboot: 3
+>=20
+> That happens due to different printf format (%2d vs %1d). Moreover, the
+> mentioned commit fails to handle the case when the user is holding some
+> key before the countdown is shown. E.g. if BOOTDELAY=3D101, the next
+> malformed output is being produced:
+>=20
+>     Hit any key to stop autoboot: 1 0
+>=20
+> That's because the fast path code wasn't modified accordingly, and still
+> tries to erase the number using '\b\b\b' format.
+>=20
+> Fix both issues by introducing a dedicated routine for printing the
+> whole countdown line.
+>=20
+> Fixes: 5f70be08b015 ("Fix autoboot countdown printing wrong")
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+
+This seems the reasonable path, given everything in the following parts
+of the thread, thanks.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--1bVjdN1Tpd+jJZrZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQD0bQAKCRAr4qD1Cr/k
+CqelAP9YcA0hVOqfaahnfTPUyITklxevh0jH6BLqD2tJlJgT2wEA504D2pqLMqV6
+0smEg88yMSOTs1NAJHEhehmpsy0pIQc=
+=Idzv
+-----END PGP SIGNATURE-----
+
+--1bVjdN1Tpd+jJZrZ--
