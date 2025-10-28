@@ -4,93 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E99CCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 13:02:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0983CCD1BF
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 13:03:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C8A68352B;
-	Tue, 28 Oct 2025 14:02:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6CED883710;
+	Tue, 28 Oct 2025 14:03:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pE99wui7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zqGYMzRO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9772F82A9E; Tue, 28 Oct 2025 14:02:23 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 59CF483710; Tue, 28 Oct 2025 14:03:13 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEE8E83623
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 14:02:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FABA82A9E
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 14:03:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-47117f92e32so54171585e9.1
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 06:02:21 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-4285169c005so2772805f8f.0
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 06:03:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761656541; x=1762261341; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1761656590; x=1762261390; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=CfF9SHavyamCIFzWK3U3lEr7vSnoZtEEauTZanN+C8c=;
- b=pE99wui7YfkCagMao0dQvDnX5vOFeigrYE7jYbaqQnjERP90hFeGwRj3g8q/wY5nWp
- rkZjJd68Iq3TX/ZRztYB/32iwmdgDWggBd3sjWJROqh9GsTtiPekg67hzfHLJ04wORGK
- YKYuZq81XgNHTEcwsuPhDltbuQKRJ5/skm0ZEKuPtEAFaU0A0EqmyGr9qyb4WeukV0t/
- r7f0aeH51gw9CdiHRkCsulCDhX7qUlJ6C29B2zOSlLd/dZmlsvxprdw7LIm/1WlZ7wWC
- gSviO0DKVTIt/CSBDfKqjywQAOgZhEicdHPwn9qJVLmHx3EGominjClvQOLvp1oygMj7
- v3xg==
+ :reply-to; bh=l0AF6t0D6qIdNelC88Fnh8/azVYr9wpCsEXWFWxq4Jo=;
+ b=zqGYMzRO5mjMKWGR2uzGBW8/8QDfc/5qxbU2hd64cRGOm97ahTxQJh7E9Rjs0D4W13
+ FOBTZxtyUdVC8yLeig/V0qD4viwzXcdNuQosP5j9ld8yJPHn6+im3sh3S6LWLIbxrTEW
+ GyqKbhqy9KQEYXzMykt8xK3wtxQlUW/y7ZoGbitxZpAJx+PuSaRd1eShHgtP0hjRTj++
+ RidIrZ+L/bUTflWloECtAznv+3FD/XOVvsXG2TNvfJGB1NCGn0zuIY2diFBuumAZUtCj
+ 2RhqBSxwlOOQBI3LbcwYktvdYbv9EnXyBhRvgEDIBfggOx5LrqhNrVoSQ0Q6eehEPKqj
+ TJ4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761656541; x=1762261341;
+ d=1e100.net; s=20230601; t=1761656590; x=1762261390;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=CfF9SHavyamCIFzWK3U3lEr7vSnoZtEEauTZanN+C8c=;
- b=HuQmw/1ntFHI8Jde9gRKe69ORTHN6t8ASv+7oARaZDTfB1SBaUPmzTQKuEx+gEbj4R
- DjQp0lUr0CXYPL5s53f607eor6H9Z0n34AxQwesYIFAFwVikkYr0xSIcj0q+gCMGEGOZ
- LO+0uQJiQKbSN91SB//hIwap8m558TMt8l9e667XALfae7NTKL5UFjS8nqzBSCMEx6HV
- 1j8mdgHGBfv+RJ7DyOD5bvVH9jshc48A2kdx623G32gPUK3bzyGlQpcpcmcv2dLvRPWR
- 57hLxGxHiL11bXwfR4NZSeYHzThlWz12YNv6UjBwOV/FmNYRNpNMqUgYzoPlXknD3apN
- ITvA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUUnJNV433+cj+HklGJIYBQt173QzeaVUFxCs/EQ40QLdDA6N7PeLiI9FZyjDrdmvH2DYnd0ho=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxe2i2vjo5k5QVuVn+D4Nzm8H+3OvkS1MkXTdgfHT4aalPsaqG2
- sL1ZIiupKYVhw+ZB1sjhl1NSl/v7ngWGZy3Wy1vTovZIgWzhlMucNxQJTkI6nPFil14=
-X-Gm-Gg: ASbGncuWDHEgM37y1HE4jyUMPdfP1LwYJTmKrCnksN+fftA5k3jcyQDs5aYt1YhXFO4
- Qr3n+ExGdwISTi4H6iufhASwhiheV498nmLBXreBKP2H8enkQXTu85Zat/A0L1fZ/uZR/gUfMdx
- YA+sJKlmE4Tfwtf4jwL9ArjTQCrSR/lhm5OsM4QaZbctIhEMeRuOTbsSW0jBJJU9zTP4TOcaZ9v
- L2I2kZGRdg+XZDlT/AfYos/HBTV1hVitAwSlFf4JsIqbiTfZqLb7bUfWMfScrwpmSeE8/SqJCyE
- 0MDTeeP6LdwmBnp7zciZ12Kei0Yn7lvfYQJgmKfLcapz4kcKfZStMAiYXIDkZNC8LKCloOpCuXW
- zMrLjp6e7ld411eVj9QujN5sb2dkR/1ZS2gC0JgAg4xEJFbMZTiQGYVcU1G4f5qQ1dAzIF8ofnW
- UJWh7IbT1PrFNpnKdP5ve5aCfQolQ9G4tdvyjuP0/klvm9USIIhg==
-X-Google-Smtp-Source: AGHT+IFUNIY0lMF+MOLjZxaZvXIp0RypgzpfYgv4TfC7gK7ykEH2UpjDfswwUxbgLlVBwLhXVktsfA==
-X-Received: by 2002:a05:600c:4446:b0:476:6ef6:e28c with SMTP id
- 5b1f17b1804b1-47717e67e30mr23716475e9.38.1761656540929; 
- Tue, 28 Oct 2025 06:02:20 -0700 (PDT)
+ bh=l0AF6t0D6qIdNelC88Fnh8/azVYr9wpCsEXWFWxq4Jo=;
+ b=hUK38LSlgvhDNVTYP0P5qTZ0VDCrd69MOeScbJ1juXxfpT/UE0CuSd0YeWDT/Vvswa
+ Ysw4LdSRCZZvHyC2eI+LaYbwcrNphvGpJWwVqfzTqKzqPk/BXBWWeI3Lzr4akf92W8rv
+ UwnKqPwnywupnxcin9Ia4r//I461/2S+CNIUe4kevYDz886sl27vqM5IOtxcNnHj4DR5
+ iUtrknuZoEfLjiEgyl4rG3Xqe57RTHOJGKJOpD8BbVGiXDG74F0D/2b0RmeIIHrWDII5
+ 3Xo2/+cgqTM5vD4Pof0eGi+cDhkf6y8YDcWMQT/Ze79rifUX9irtEXlmkw37MwsXHuBg
+ w/Ag==
+X-Gm-Message-State: AOJu0YwiioQeoAv1AmC+WtJIm3JUgLZYzGydaw9Hr9NBKyaAJ8wV5/li
+ iviN6vvJeeg0A66xjLYU70QeKiysjka7XoHAiXZuQ9/0orFb6OljLkxmiwf2Slrr8JASsI46nQ+
+ pnLb35+s=
+X-Gm-Gg: ASbGncujCaptpwc1L380i7BacZohI/peH9BRjpMKlt/6B3gOIKAdjjd+hn9STryBIJj
+ 9MjDkOuwcLv70bczTCyhEa9PWK2mIyoIbGTd+oKlVN4KH3655KMLOra3nitRcBJb40suHgvgIjs
+ tjUd50HntrEr2QpDtqvdlg4fdVa7PoFQExDXH6nOJsNNZIiQB/RNtIRqWSByZWgD1OvdioO47yc
+ MI0H8K/Z8vG6Jaxd4Iay25JPhoe5WKDypB5h1sTpLwt4Ob/qyvfYiUtYAEZdyOefHAm5M3avoB+
+ hvFbjD51jSIS+Tmj6eQS59d4vN4qJM4FUwWJOHIvRr78/5fa8tZeFm/UMcXQx/NV4SPUGT5LuJ/
+ A37To4Z7MlhbQVI1JXc6b0bCgpI9kC8oAKLazHxd/emhlRSyDLPCxo1twchZTxaqU09pcTtg3Bp
+ JKlQ4VXA1GoF0d+Y7MyfyXspSVmukvjvHRy/jKQekDmeAYtZjRYQ==
+X-Google-Smtp-Source: AGHT+IHpnhs551TFM4p7I4uE86nGISK/ORo9PSfsSiM/VLcG/TMw4SstHYcaKGiDdlXnMw6hQSzUJg==
+X-Received: by 2002:a05:6000:491a:b0:429:a81a:a77b with SMTP id
+ ffacd0b85a97d-429a81aa96emr2456693f8f.31.1761656590313; 
+ Tue, 28 Oct 2025 06:03:10 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:cad:2140:ebe6:df10:d28d:aa5?
  ([2a01:e0a:cad:2140:ebe6:df10:d28d:aa5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952de5f9sm20260666f8f.38.2025.10.28.06.02.19
+ ffacd0b85a97d-429952df5c9sm20316021f8f.41.2025.10.28.06.03.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Oct 2025 06:02:20 -0700 (PDT)
-Message-ID: <f2227504-8cb9-4e06-9d8d-3f0f5902e114@linaro.org>
-Date: Tue, 28 Oct 2025 14:02:19 +0100
+ Tue, 28 Oct 2025 06:03:09 -0700 (PDT)
+Message-ID: <cd06e85d-8c66-45f8-a149-a6021394a272@linaro.org>
+Date: Tue, 28 Oct 2025 14:03:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v5 4/4] configs: qcom: Add QCOM_POWER_DOMAIN config
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
- casey.connolly@linaro.org, sumit.garg@kernel.org, jh80.chung@samsung.com,
- peng.fan@nxp.com, rui.silva@linaro.org, ilias.apalodimas@linaro.org,
- christopher.obbard@linaro.org, quic_varada@quicinc.com, me@samcday.com,
- marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
- alif.zakuan.yuslaimi@altera.com, tien.fong.chee@altera.com,
- balaji.selvanathan@oss.qualcomm.com, miquel.raynal@bootlin.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20251027113312.3815169-1-aswinm@qti.qualcomm.com>
- <20251027113312.3815169-5-aswinm@qti.qualcomm.com>
+Subject: Re: [PATCH] binman: fix mkmbn integration and tests
+To: u-boot-qcom@groups.io, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20251028111604.2510314-2-casey.connolly@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -117,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20251027113312.3815169-5-aswinm@qti.qualcomm.com>
+In-Reply-To: <20251028111604.2510314-2-casey.connolly@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -137,39 +131,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/27/25 12:33, Aswin Murugan wrote:
-> From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+On 10/28/25 12:15, Casey Connolly via groups.io wrote:
+> Add the missing cryptography requirement to binman so that mkmbn
+> will work correctly, fix a pylint error, and adjust mkmbn to properly
+> integrate into binman rather than writing the output file directly.
 > 
-> Enable QCOM_POWER_DOMAIN config for qualcomm devices
+> For now skip testing u_boot_mbn since it has some weird requirements due
+> to how mkmbn works and can't be easily integrated into binman.
 > 
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
-> v5:
-> - No changes to this patch in v5
+> Changes since v1:
+> - Remove mkmbn elf class fixup, it's a separate patch now
+> - Link to v1: https://lore.kernel.org/u-boot/20251023133850.3686431-1-casey.connolly@linaro.org
 > 
-> v4:
-> - No changes to this patch in v4
-> 
-> v3:
-> - Removed OF_LIVE_SA8775P config, since there is no SA8775p specific fixups are done
-> 
-> v2:
-> - No changes to this patch in v2
 > ---
->   configs/qcom_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   tools/binman/btool/mkmbn.py      | 9 ++-------
+>   tools/binman/etype/u_boot_mbn.py | 5 +++--
+>   tools/binman/main.py             | 4 +++-
+>   tools/binman/requirements.txt    | 1 +
+>   4 files changed, 9 insertions(+), 10 deletions(-)
 > 
-> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index 8d1269b4634..a5a1bf7368e 100644
-> --- a/configs/qcom_defconfig
-> +++ b/configs/qcom_defconfig
-> @@ -129,6 +129,7 @@ CONFIG_MSM_SERIAL=y
->   CONFIG_MSM_GENI_SERIAL=y
->   CONFIG_SOC_QCOM=y
->   CONFIG_QCOM_COMMAND_DB=y
-> +CONFIG_QCOM_POWER_DOMAIN=y
->   CONFIG_QCOM_RPMH=y
->   CONFIG_SPMI_MSM=y
->   CONFIG_SYSINFO=y
+> diff --git a/tools/binman/btool/mkmbn.py b/tools/binman/btool/mkmbn.py
+> index 232e2b442a16..c1439977833e 100644
+> --- a/tools/binman/btool/mkmbn.py
+> +++ b/tools/binman/btool/mkmbn.py
+> @@ -12,18 +12,13 @@ class Bintoolmkmbn(bintool.Bintool):
+>       def __init__(self, name):
+>           super().__init__(name, 'Generate MBN (signed ELF) image for U-Boot')
+>   
+>       # pylint: disable=R0913
+> -    def run(self, infile: str) -> CommandResult:
+> +    def run(self, infile: str, outfile:  str) -> CommandResult:
+>           """Run mkmbn.py
+>           """
+> -        args = [infile]
+> +        args = ['-o', outfile, infile]
+>           return self.run_cmd_result(*args, raise_on_error=False)
+>   
+>   
+> -    def get_path(self):
+> -        path = super().get_path()
+> -        return path
+> -
+> -
+>       def fetch(self, _method):
+>           return True
+> diff --git a/tools/binman/etype/u_boot_mbn.py b/tools/binman/etype/u_boot_mbn.py
+> index e470b31fa318..6268397fd122 100644
+> --- a/tools/binman/etype/u_boot_mbn.py
+> +++ b/tools/binman/etype/u_boot_mbn.py
+> @@ -31,10 +31,11 @@ class Entry_u_boot_mbn(Entry_blob):
+>       def __init__(self, section, etype, node):
+>           super().__init__(section, etype, node)
+>   
+>       def ObtainContents(self):
+> -        self._pathname = tools.get_input_filename('u-boot.bin')
+> -        res = self.mkmbn.run(self._pathname)
+> +        pathname = tools.get_input_filename('u-boot.bin')
+> +        self._pathname = tools.get_output_filename('u-boot.mbn')
+> +        res = self.mkmbn.run(pathname, self._pathname)
+>           if res is None:
+>               self.Raise('mkmbn not found or failed!')
+>           # Exit code 61 (ENODATA) indicates that an MBN file can't be built
+>           # for this board. This is non-fatal since it may not be required.
+> diff --git a/tools/binman/main.py b/tools/binman/main.py
+> index fa5ad79ca0e8..bfd6e990d2e4 100755
+> --- a/tools/binman/main.py
+> +++ b/tools/binman/main.py
+> @@ -102,9 +102,11 @@ def RunTestCoverage(toolpath, build_dir, args):
+>                'tools/u_boot_pylib/*'],
+>               build_dir, all_set, extra_args or None, args=args,
+>               allow_failures=['tools/binman/btool/cst.py',
+>                               'tools/binman/etype/nxp_imx8mcst.py',
+> -                            'tools/binman/etype/nxp_imx8mimage.py'])
+> +                            'tools/binman/etype/nxp_imx8mimage.py',
+> +                            'tools/binman/etype/u_boot_mbn.py',
+> +                            'tools/binman/btool/mkmbn.py'])
+>   
+>   def RunBinman(args):
+>       """Main entry point to binman once arguments are parsed
+>   
+> diff --git a/tools/binman/requirements.txt b/tools/binman/requirements.txt
+> index 7db72e888e3e..51b8ecd73478 100644
+> --- a/tools/binman/requirements.txt
+> +++ b/tools/binman/requirements.txt
+> @@ -3,4 +3,5 @@ importlib_resources==6.5.2
+>   jsonschema==4.23.0
+>   pycryptodomex==3.21.0
+>   pyelftools==0.31
+>   yamllint==1.35.1
+> +cryptography==46.0.3 # for mkmbn
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
