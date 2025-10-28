@@ -4,117 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2E80CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:19:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38FC3CCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:25:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EC4F839D6;
-	Tue, 28 Oct 2025 09:19:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AC4E9839B7;
+	Tue, 28 Oct 2025 09:25:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PyJXzPeB";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="eHAK2JPm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51C5483A24; Tue, 28 Oct 2025 09:19:56 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4E0BF839DD; Tue, 28 Oct 2025 09:25:23 +0100 (CET)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44AD9839A1
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:19:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0279C839B5
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:25:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4770c2cd96fso19547445e9.3
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 01:19:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761639594; x=1762244394; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=BaJt7FXU7tQZ+xYaBA1FppP/Llve2J3rcUdQEUl4/lE=;
- b=PyJXzPeBHZm9nfrZVExMjA6X3/dBedRwWBYCdZKN0OlKGWw6mdVotLHU65nIF8YYCT
- RuaAHi2RZG6r5E+p5uzqvuyoyiqQO7jH4eYnHwgKfwWJc3cz4M/pn4cWXcKgOgW1Z1rt
- O1kG5I1GdKnx02BNmCnQX00XE2GkjXjVVXkCCCtyQtXcG4juelGOnvurWUCsH4jh5uxt
- XOPwo5Inb5kRnIRKNfYV5PAWTu5Fftj6ICV3WkRKEEMT73ESmSIDOwb0NgxuaN0tB4wq
- fgUfnNKOZdzB00dj2XbjK6W/ZBHWi1msS9CUFAJBI8+Rm3/aFUUHASalhsBD7R9LLAbO
- rfvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761639594; x=1762244394;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=BaJt7FXU7tQZ+xYaBA1FppP/Llve2J3rcUdQEUl4/lE=;
- b=BBplVfuj5pkX/M4bIf9kKrhwHWYbPvMrClEMsST2+K/0yB12V8MOmqKQL3f153RbR2
- RpRfLx5E7jEYTFyNyNf/zEPa8YndmkMs/NYvjNFKgHOxfdpf4KHWRdVSF5l3TlBzLhpW
- GCWMIY0q3GlRnX7I8iAIQYoypTGiX4iqUGI8pHmfBeK5W/uM/5NwZ2iQtanWx9pO38EO
- IDgbPz/AEzCcEVzHIMEJKxIXBHiz+O/IOtfW/bKv0A1s/AqKqXBaFcIDz8N5FVa0ciVq
- 7ZLu/Z5r6QVJgR0uPr+lm4Zpgc9NQKGBnPJaqD+C6ObmNGDtxNc0KgAB7Mnriklwfizi
- ogUw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUhfEipF4IMpJlHYWb9voZHRS8A2gdT8LMpVh6RafLXYsEC8GfBoiYbyaAjj1aOt9GYXODqpHU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzITI8LY3amuURQzlKNnNzeJr98bPtAnbUk2fYiSgXTBLZuB6/r
- F74DMiE7XSP6kAdLxr3zUTAhB30pfhpj+qFNJbh4YNpNx9S9MfE3Qn9eVxN5EdIfowc=
-X-Gm-Gg: ASbGncvIU1HCiITgaehLiccnXvYgyWcm5j3RqNwJKql4bhCtvU9/uAY++qUYPflrjYN
- Dpe2ciuQYEwVGkiWu4zljuBvHbHetIOGuNv97DRuUaOwWB35H3MgT5lWYEmS7ibaUHlc7NVifi4
- hGISdCGoMYc2y985Zmm/pH48Rr6Wu0T+d/NuoAYps1ZvIiAMdXVOvmonvIhKNBaYADR9qAhRgq7
- xiRd4uEny5Wu0SRtfs4miRmWNk8QvlCILSVSBrkf/ZKhYv8SeVb7s+FNj3VVbc+q+ftG/W5iuTq
- aQK3V+TISHyDUROQN8tHauzHjvkCBReB06RiCbAiRuJDU9NDpu7n1GuE9RX52beUp7UiCJvsdsO
- lYdFTXEyXEMLXVQu5o0ztQP1MM9nu6jMMT0MNq7wGhrGOEtUwKOny8hyz6qZRdQ+L/o1zmikg3d
- LibxsjhMxnpIKJRWqAI/w7VC7Zmq15jUEcLNgV4vkYlZK7BhzdAg==
-X-Google-Smtp-Source: AGHT+IF20+63K7NQgN50Nhj4+/yOhJuRpHFfbsPyB+jmpFiUCfj9nflK71UJvDQWHSEEcCygTO47Nw==
-X-Received: by 2002:a5d:64c3:0:b0:427:9d7:86f9 with SMTP id
- ffacd0b85a97d-429a7e8a9c8mr2145492f8f.47.1761639593570; 
- Tue, 28 Oct 2025 01:19:53 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:cad:2140:ebe6:df10:d28d:aa5?
- ([2a01:e0a:cad:2140:ebe6:df10:d28d:aa5])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-475dd47853csm183345875e9.13.2025.10.28.01.19.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Oct 2025 01:19:53 -0700 (PDT)
-Message-ID: <5e94dba5-b922-4536-aa29-bbdd7aeafb0d@linaro.org>
-Date: Tue, 28 Oct 2025 09:19:52 +0100
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=u6sIFX1BlACN0ooVTPzf99rzCFIeU45NAYCHmfEybojKhBAAdGd41/kglewBhbBFNA76jjt9X5BvA2Uzp+bS8ZSi6vrKB8OpUeUFOQaUdmqO7WAmVAeS80v/D230U5Hw1n7jHCN/kzJ009L3hk3nNE7S8ioQE7j7VXJtEPl95MLQQChhfJExYaCzKmVFWFKhexp7EpR5e4UaxCU1shBiuty+CozGIxbywXH/akr8yU3OvN72UfrLqawUAn/dkjB3mI9XiPjJtFelJbtzI/W/9evXJxTyp8XyrHyN9nQzOJpt0pbYEcFynu71SRl/eve9EpXelwYo55NfC402MGWLRA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eDN78cUApLpJ9dmsJBS92SrcWUQmpCQ+Zvk2aN9BmaM=;
+ b=rf90WbgI9joSs13eIaPeMuBABHgY6BJ9B8H/G+z1ogOeWh/k7vSw3gfbtzQZ9GXK4fatJN+U+9cnqFivDNGpjj5pKpAscluFP15pZwHvRLFjfbNJdYeidiqwuiYYkbeteEfl62JKOYfWL+oR9Pqu8dNVk8eTzbfC3UxW45g9p/uFJdhpmekA4GFMiSYfLhhecBV8s1h3aX4TykKdOelnjY5IDdWxAnbfr0z8r9ZD0JVUf2srVhKLoBP9ncUGEK8FAS0AO13QmF5z1XBkE1wCR6SPUTo+NgnneA3AvZSoTEyIo++/BrkB+iKGmp7rzDYNtSbC86+hijLnTyDThC/h1Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eDN78cUApLpJ9dmsJBS92SrcWUQmpCQ+Zvk2aN9BmaM=;
+ b=eHAK2JPmA8ZDa7yKzcxJ1GY6TDfQTCXYspQ4t9ExzcYMaKvx0laHhmI/idrhY4824h7nRyqFNQSJjiX2HiMBhnT9jgEO2Ybg2b5KhuDB85VdCGgaNg6p13DWQU838FGs4sVde8rE3m6lwE3TamZbv4MX0m/N+5tnohQiI5TQujRkIhJ+jGPalVVkZSqNKjcxPyFsUE8+5FnMtMJjsPNXu0x/AXDHjqOE70N/f0Qwf0wqaL2y4zZW5dZmqqFWgmkmhXS1B42amEhQQF/JJWyTxK3yD2MV63KE5mz3Sq5uTIChO0BTJF9m5rbRveHPL5cB/cRBMNUKD54G1cK1yMKSZQ==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AM8PR04MB7908.eurprd04.prod.outlook.com (2603:10a6:20b:24c::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.13; Tue, 28 Oct
+ 2025 08:25:19 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9253.018; Tue, 28 Oct 2025
+ 08:25:19 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Alice Guo <alice.guo@nxp.com>, Etienne Carriere
+ <etienne.carriere@linaro.org>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Vinh Nguyen
+ <vinh.nguyen.xz@renesas.com>, Viorel Suman <viorel.suman@nxp.com>, Ye Li
+ <ye.li@nxp.com>
+Subject: RE: [PATCH] firmware: scmi: Drop mmu_set_region_dcache_behaviour()
+ misuse
+Thread-Topic: [PATCH] firmware: scmi: Drop mmu_set_region_dcache_behaviour()
+ misuse
+Thread-Index: AQHcRfdbWm99hZDObESOmKTyJOhNR7TXOyQQ
+Date: Tue, 28 Oct 2025 08:25:18 +0000
+Message-ID: <PAXPR04MB84593511CF2B43470CDD8ABD88FDA@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AM8PR04MB7908:EE_
+x-ms-office365-filtering-correlation-id: bb962ffd-b555-411e-ffc8-08de15fb87a3
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|366016|19092799006|1800799024|38070700021; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?0gtMZfjxzmaTd0C7b4fnZR28sxfoK6BZxp94/ICdk7vdRl6wEPP1VozSCkpY?=
+ =?us-ascii?Q?90zhsQHIe8Tu/fJ5IxKoVp8OMWMErncpvPAixpG+dKzb3PMOPTt3XapvLCrG?=
+ =?us-ascii?Q?UFPM66ZWTIkw2rp+6z+bFSh8f00AJWDhw2tK9Br7DPdb7II5vSi0OMRXhfjs?=
+ =?us-ascii?Q?00tdpvpFFYlVYGyBwegsHjBGD+CuoetAPfJUJqVwsKiZuaZGDquRm5U6KG1a?=
+ =?us-ascii?Q?2y2RoY6R27FF/lEXTvsVm5lmfbUh+I2iSDtVdPRA782yTCs/jE/YIIm35ozl?=
+ =?us-ascii?Q?zpNbEk5Ld8VAceCDesLhjodo3l7eU9rnwHL489jGG6/Y71swZAydnrF9rlCt?=
+ =?us-ascii?Q?NSu9+xXaPPydQccBa67OsBFh8kTrXooyKIBGS8PNLOJ12K3W0jJmK+m7LTZ+?=
+ =?us-ascii?Q?FOYfMWQC6edfJTPLxO16qSUqpZsmBO6Z/RacxWPT0PeIJH5K8nJHfRRzq0hY?=
+ =?us-ascii?Q?iA/jjEZfs8WTJcG/xfiRtw2Bc1SOZixdpqrXtNq0ahDcTGM15vqJGSTXZk1W?=
+ =?us-ascii?Q?u8t/5DjTz3s4YEqF2OvewH/izP60UvYAfzzM/bbJHR5YjBuLLU4Qq+vfk6zw?=
+ =?us-ascii?Q?X0xVEfShLeFu5VPPAtvizWPXtdiJizT/JBQnyY5MJiHdyJdfNvrW1jaenyZT?=
+ =?us-ascii?Q?frp/T/AHsA7ScKNozRqW24SzI5SCQjZhdfbCoHZXU3X8EggXFaQq76CiUQHn?=
+ =?us-ascii?Q?DXqxxCByWx56U1GilWAtYfzQZ2UnsTJb30R/3JD1/OJTd3aYmcjR29uFNzjT?=
+ =?us-ascii?Q?J+m20Za73soWLsHpP1E5lXtItarFLI68x86Q88E9YSEn7gKGf850/gwpuHQr?=
+ =?us-ascii?Q?2yroPWQao6U2M0MT/WXjxbLxGS3kZ77h20jZewyF29Ph7NOEGfIXdCzl8h+e?=
+ =?us-ascii?Q?7feghWD0PF6uea7Mm3E1CXBvaRdYMoiuu23GiaVgzcLlqfWd81cZpcnNaXFa?=
+ =?us-ascii?Q?LDs/2Z3UiOmEbhINHwspD1p49iWGdVZkHmUdgF0eRspNSWdw6hx/hlvhu3Wm?=
+ =?us-ascii?Q?J1jTbN9HSrg9P0SAF0yKtIsgDx+gfQ6u5hQFu6Iq8J9uTTqY2ypA5ytASFQG?=
+ =?us-ascii?Q?X8WilHDPdhXoG7RUS3ieFhcmePgXBIqKxomArnUwfVecgMOAiWEtcq0VLV8N?=
+ =?us-ascii?Q?G/qY4V6npSb84rWs3RlVwX+YzP1JRVVKTTcuREkzP26J39qHdqCNhblJZLN6?=
+ =?us-ascii?Q?c32Ko/Zu0pKZqHB7jTNaIKqX4WOVOypQqeGJnnW5ENLma6vuo0fU9WLVa0Md?=
+ =?us-ascii?Q?6D5ZnYfdKEdtPJYvlXZe+Vc0dtjue5b7lblh9hLjCuwyXleB9cTcyvS7hpOT?=
+ =?us-ascii?Q?P8ntzxPb2FjGWgG4viQ18jeM3wjtOnCsMZRYtkOkT3jSIF3k7aI+sJ4mT2/B?=
+ =?us-ascii?Q?iXTdUUWqHoAgknAud77nV6YdUIi/luH5HyZhaLkei5KrsIwk49EozXX69TlG?=
+ =?us-ascii?Q?M7kbpkIRDR4aIm1/VCKFhKUQ6YBtq5+iGdiS+l9meMFrwh6tn0szbzHmynIA?=
+ =?us-ascii?Q?FFctMpmLOtlEPABIy2/5bhvAaqNrQC+Umh5c?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(19092799006)(1800799024)(38070700021); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?E1/mbkAaeorJxfaSD3SS7dYb9b1Rc9I0s93iJbmil4R1RIF6jD23RIbd/Re+?=
+ =?us-ascii?Q?L7QSXLcXvuBT1IRJm4sOTJArwb4s1bPvZ+a7fbV2MEDr0MxxKQlNjvTkex7d?=
+ =?us-ascii?Q?vQzUyO1cDKVNnEwevf2255niN3ji5jCLVG5xRU6SbziqiawfGPVzUmDVpnTK?=
+ =?us-ascii?Q?PPCKaFP0FGMBcMwXFPIyDPfkzuYCVYglo9bJvEvGjIe3BlGSg1y56wYvWQzx?=
+ =?us-ascii?Q?qPDWiMlecp2tEO2HD4mDM2cAmMMzK1I5MDcVJxWQMHWuaAas1j4ccuZatEju?=
+ =?us-ascii?Q?nvviqx3/iF5pG+ZbiZy/NZBRJCFkd9slDWx5nZNqQluxPWGPffH30aj8vptp?=
+ =?us-ascii?Q?3r4ARIy8FZss1DybS/u7HZdk+l4k7+FtNFS7mQ8QioopP9RiguShRc3J2hq+?=
+ =?us-ascii?Q?C6jKPbx/z1ZmEnU0SzKiW5f8fE4es0YC0Z8JvTiv+dKd225pJTHDNGsa6cTE?=
+ =?us-ascii?Q?8svS7zaDZneeyVw/cs3qco2VQWwN1+oz8xZqxRoGP9EOmihA/LmN7TMLN0Mw?=
+ =?us-ascii?Q?0Fiag7kyyptqhvHTUmb47SK+DIWHUo0q+QH6wWH+HzJGKIakb4758/1ysarz?=
+ =?us-ascii?Q?IFJOIn0iff3W5jWjPlQGg71s/wM5iUuE1SiqSjrGQYbVVmfNTwzVUdS90bxO?=
+ =?us-ascii?Q?EfHEajl/Zpj2TG0R4kPDJINO/VXE3qYg2gmn7Qwz2dJp27U7MbPTXkRGYIFh?=
+ =?us-ascii?Q?7gPZzRpFia3CnL3ch4qwOPiw1TqxGe1s3nhN48eJskR72FLoPFCUDEvfjNwI?=
+ =?us-ascii?Q?iF6bAoT5NTqqcIjY4v1VroQ0AZu2zvUgMcNFxsvRAlxEhXMdR5mcKChrfvl+?=
+ =?us-ascii?Q?EDkMPp59go1At8F7FSNKLym6uEOaAZ1hzoMoCyRusZj61PRBG8j0rK4Y6EUg?=
+ =?us-ascii?Q?CQjHcvBymiK9moJeogq2Lue296/FXZDXGqoDfBgzea4OMZMyK3EF/LqJkub/?=
+ =?us-ascii?Q?lp+pL5zrN5rzbVDDcGvWH+8HkwwbmTmxmcyE0dVgcxSmfHzRYHfM5K6VXm7h?=
+ =?us-ascii?Q?+KbynVpjnmLD8hOL1aicHfcbux3BDwr0x28nix9EHD12hFQMX3Ic5FmswVzz?=
+ =?us-ascii?Q?ATgFYI/eP0rU+Aph1Q5rAjC+GBS6PM5VrBqKkgXZ9FC6EFjoqWkzhDGY9J2+?=
+ =?us-ascii?Q?pOQ1rymV8eBX4yzBHDg6m4/8bXVWagprrH3+y7UYO62x+X9daqRnqg8GO6AY?=
+ =?us-ascii?Q?M21I7TNHmKat30Wc5JTZ1OWjyi/Y4QpMm4BlVLzjAC11ZEaY3BI0kmE1sScA?=
+ =?us-ascii?Q?k5/dxmFr8yeMEyQgr2j54gfbR69u/DRJbr/wXbmfU6AFJcARQTJBK5p7PaDm?=
+ =?us-ascii?Q?rs9fau/dVffLuIv2oNKfsz6G+vGqqqyFd0WJ0LYk0pLwsHJagM+CuCMumbP/?=
+ =?us-ascii?Q?NB+MIztcRefVs+XMqbM3bN4hHkFDWv5YyFIZOrUBaiGnlg7a/BOoeI1hhAD7?=
+ =?us-ascii?Q?4pDFcIUuYFvVgiiJxobSgjJHv1Fl1d3WPDRl613pOQEZkfWRxZMzceX5IAY+?=
+ =?us-ascii?Q?lP7DbKgbMJT7JzbejIF0IFOvBk3oWqMOHOxXqBeTLjF7wl6/LqIFbChqkSGA?=
+ =?us-ascii?Q?cHXNiSOzjWp5UdRLuTg=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RESEND] binman: fix mkmbn integration and tests
-To: Casey Connolly <casey.connolly@linaro.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20251023133850.3686431-1-casey.connolly@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20251023133850.3686431-1-casey.connolly@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb962ffd-b555-411e-ffc8-08de15fb87a3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Oct 2025 08:25:18.9373 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: z3MjhSpgbY3SdluAcwQ5L0XHzc/9isXfuzFDOHi/C2OscpPSr+DQ2DRlswC4Rjk1zevLfInKITyaxHy5NQZOVg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7908
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,126 +161,32 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Marek,
 
-On 10/23/25 15:38, Casey Connolly wrote:
-> Add the missing cryptography requirement to binman so that mkmbn
-> will work correctly, fix a pylint error, and adjust mkmbn to properly
-> integrate into binman rather than writing the output file directly.
-> 
-> For now skip testing u_boot_mbn since it has some weird requirements due
-> to how mkmbn works and can't be easily integrated into binman.
-> 
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> ---
-> Resent to fix my name
-> ---
->   tools/binman/btool/mkmbn.py      | 9 ++-------
->   tools/binman/etype/u_boot_mbn.py | 5 +++--
->   tools/binman/main.py             | 4 +++-
->   tools/binman/requirements.txt    | 1 +
->   tools/qcom/mkmbn/elf.py          | 6 +++---
->   5 files changed, 12 insertions(+), 13 deletions(-)
-> 
-> diff --git a/tools/binman/btool/mkmbn.py b/tools/binman/btool/mkmbn.py
-> index 232e2b442a16..c1439977833e 100644
-> --- a/tools/binman/btool/mkmbn.py
-> +++ b/tools/binman/btool/mkmbn.py
-> @@ -12,18 +12,13 @@ class Bintoolmkmbn(bintool.Bintool):
->       def __init__(self, name):
->           super().__init__(name, 'Generate MBN (signed ELF) image for U-Boot')
->   
->       # pylint: disable=R0913
-> -    def run(self, infile: str) -> CommandResult:
-> +    def run(self, infile: str, outfile:  str) -> CommandResult:
->           """Run mkmbn.py
->           """
-> -        args = [infile]
-> +        args = ['-o', outfile, infile]
->           return self.run_cmd_result(*args, raise_on_error=False)
->   
->   
-> -    def get_path(self):
-> -        path = super().get_path()
-> -        return path
-> -
-> -
->       def fetch(self, _method):
->           return True
-> diff --git a/tools/binman/etype/u_boot_mbn.py b/tools/binman/etype/u_boot_mbn.py
-> index e470b31fa318..6268397fd122 100644
-> --- a/tools/binman/etype/u_boot_mbn.py
-> +++ b/tools/binman/etype/u_boot_mbn.py
-> @@ -31,10 +31,11 @@ class Entry_u_boot_mbn(Entry_blob):
->       def __init__(self, section, etype, node):
->           super().__init__(section, etype, node)
->   
->       def ObtainContents(self):
-> -        self._pathname = tools.get_input_filename('u-boot.bin')
-> -        res = self.mkmbn.run(self._pathname)
-> +        pathname = tools.get_input_filename('u-boot.bin')
-> +        self._pathname = tools.get_output_filename('u-boot.mbn')
-> +        res = self.mkmbn.run(pathname, self._pathname)
->           if res is None:
->               self.Raise('mkmbn not found or failed!')
->           # Exit code 61 (ENODATA) indicates that an MBN file can't be built
->           # for this board. This is non-fatal since it may not be required.
-> diff --git a/tools/binman/main.py b/tools/binman/main.py
-> index fa5ad79ca0e8..bfd6e990d2e4 100755
-> --- a/tools/binman/main.py
-> +++ b/tools/binman/main.py
-> @@ -102,9 +102,11 @@ def RunTestCoverage(toolpath, build_dir, args):
->                'tools/u_boot_pylib/*'],
->               build_dir, all_set, extra_args or None, args=args,
->               allow_failures=['tools/binman/btool/cst.py',
->                               'tools/binman/etype/nxp_imx8mcst.py',
-> -                            'tools/binman/etype/nxp_imx8mimage.py'])
-> +                            'tools/binman/etype/nxp_imx8mimage.py',
-> +                            'tools/binman/etype/u_boot_mbn.py',
-> +                            'tools/binman/btool/mkmbn.py'])
->   
->   def RunBinman(args):
->       """Main entry point to binman once arguments are parsed
->   
-> diff --git a/tools/binman/requirements.txt b/tools/binman/requirements.txt
-> index 7db72e888e3e..51b8ecd73478 100644
-> --- a/tools/binman/requirements.txt
-> +++ b/tools/binman/requirements.txt
-> @@ -3,4 +3,5 @@ importlib_resources==6.5.2
->   jsonschema==4.23.0
->   pycryptodomex==3.21.0
->   pyelftools==0.31
->   yamllint==1.35.1
-> +cryptography==46.0.3 # for mkmbn
-> diff --git a/tools/qcom/mkmbn/elf.py b/tools/qcom/mkmbn/elf.py
-> index 86f12d1f4e5d..7737adc6a4e2 100644
-> --- a/tools/qcom/mkmbn/elf.py
-> +++ b/tools/qcom/mkmbn/elf.py
-> @@ -171,11 +171,11 @@ def _align(i: int, alignment: int) -> int:
->   class Elf:
->   	ehdr: Ehdr
->   	phdrs: List[Phdr]
->   
-> -	def __init__(self):
-> -		self.ehdr = Ehdr()
-> -		self.phdrs: List[Phdr] = []
-> +	def __init__(self, ehdr: Ehdr | None = None, phdrs: List[Phdr] | None = None):
-> +		self.ehdr = ehdr or Ehdr()
-> +		self.phdrs: List[Phdr] = phdrs or []
->   
->   	def total_header_size(self):
->   		return self.ehdr.e_phoff + len(self.phdrs) * self.ehdr.e_phentsize
->   
+> Subject: [PATCH] firmware: scmi: Drop
+> mmu_set_region_dcache_behaviour() misuse
+>=20
+> MMU region cache behavior configuration for SCMI/SMT mailboxes is
+> platform specific. Even on ARM systems, the mailbox memory may not
+> even be located in any cacheable MMU region and may instead reside
+> in some SRAM. Remove this non-generic cache behavior configuration
+> code from generic code path.
+>=20
+> It is unlikely that any platform is affected by this change if it did
+> configure its MMU regions correctly on start up. Platforms which might
+> be affected are i.MX94/95 and STM32MP.
+>=20
 
-I understand all the changes.. except this last one.
+If the memory is mapped before running SCMI stuff, it is ok.
+But if memory is dynamic mapped at run time, there might be issue.
 
-Could you elaborate ?
+I saw TI platforms has some changes to use dynamic mappings,
+I have not read the details, TBH.
 
 Thanks,
-Neil
+Peng.
