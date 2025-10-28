@@ -4,83 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC8C8CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 03:43:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DCD6CCD1BF
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 04:39:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E171B839B1;
-	Tue, 28 Oct 2025 04:42:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 458AB83968;
+	Tue, 28 Oct 2025 05:39:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GOjjj5Lj";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ptm29aKZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uzk/0cNt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC30E839A7; Tue, 28 Oct 2025 04:42:41 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0B738391C
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 04:42:39 +0100 (CET)
+ id E2ED18391C; Tue, 28 Oct 2025 05:39:03 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C6508391C
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 05:39:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cwbmZ67KHz9t5w;
- Tue, 28 Oct 2025 04:42:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761622958;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BcImpXWZduYvZUPonpk/xxPt1wOYWlpbTn4G4xVWASI=;
- b=GOjjj5LjboyZ3ZaN61o5fRqK+NapfsZq1hvyfByEbmM+qU7en8BQGTSYUDw+M/vbOWHaOk
- n4/TP/RKAtxChhGlpWxNlPW3z1wjpzk5Qja+faW27rLU9K1/P1DGSeFX4Sg1NCbawndluq
- WqezLfJ5zohaaoPRGtfZOJ/oS5w7gXDjI9brVcOx5DFwizW3wZQ4mW/uONWFo6B7QXdTOf
- +rUYd10aiup5wSVzhbzOpQfkuZna3vvD+5z/yUzAUaR7I9Z01AYUlmfABULf2UbiLt7sVZ
- hd+gHzP/o81AGnWgY2v6FXrmj0uq/K2dHSUOXa1clEOIMumaF37tGN3tboCm+A==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ptm29aKZ;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761622957;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BcImpXWZduYvZUPonpk/xxPt1wOYWlpbTn4G4xVWASI=;
- b=ptm29aKZoRdcYvB7l6Cl2gOm/eIeMXI+2TGURJ18c9Cd0mTPq8q/mKQxJgqhpZ7GRozSAk
- 1UP6q9lU2JSFISd+GB16iyDtRuzKOwT+A7A9u1mEjB5pcKFaPjWOIdw6ea2ZGKR7D8OapY
- ohLtXOch0dsjKyBqmUwCZMcQ0X488bCN15OeSaoc1qQEKI2hbirURGy/uFwAfS3FULW7WE
- 6mxA7POb3XjLjl2eCM1dS0K6kKWY3TwE4SqWkE4yxDx4GrQJLyCDyiL4mtRO9ZqoKbhI4G
- 6OLfRtTKLUPimc9DNzWtqba2gw27UNVp+NhoYdD58qWGEd2o2HWdaoGmguWUHg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alice Guo <alice.guo@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>
-Subject: [PATCH 4/4] clk: scmi: Defer issue of SCMI_CLOCK_ATTRIBUTES
-Date: Tue, 28 Oct 2025 04:41:06 +0100
-Message-ID: <20251028034225.260469-4-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20251028034225.260469-1-marek.vasut+renesas@mailbox.org>
-References: <20251028034225.260469-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59S4cpN62574129;
+ Mon, 27 Oct 2025 23:38:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1761626331;
+ bh=88dKdOFhVoP67tm7D3KEBeWaTeeVBbIoT8XaopgJE/c=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=uzk/0cNtFGCTP00JFcNDg1zheoRPsggk/cdrX9bkPjyzl1GQW4yuxMwMCY3bMP0zQ
+ gnS0d8ME9fqSxHDpVAczd8f+P95LuzqFD32WfWAGKE8kaojUWM0/Xkvtwp+VLluV6n
+ 9eqltLfsrkWh75AKugaYTaNOyonRt2I4zE0Jc1/w=
+Received: from DLEE210.ent.ti.com (dlee210.ent.ti.com [157.170.170.112])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59S4cpnb1814945
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 27 Oct 2025 23:38:51 -0500
+Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 27 Oct
+ 2025 23:38:51 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 27 Oct 2025 23:38:51 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59S4cnui1747253;
+ Mon, 27 Oct 2025 23:38:50 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: c31ccfcca0dd5860e3c
-X-MBO-RS-META: raowbrfdzmdnt8x481hgiom9fzpicwch
-X-Rspamd-Queue-Id: 4cwbmZ67KHz9t5w
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 28 Oct 2025 10:08:49 +0530
+Message-ID: <DDTOEZHOH4OK.1ZQ850D6UHD0Z@ti.com>
+CC: <u-boot@lists.denx.de>, <d-gole@ti.com>, <b-padhi@ti.com>,
+ <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
+ <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
+Subject: Re: [REGRESSION] Re: [PATCH v11 00/11] Add support for dynamic MMU
+ configuration
+From: Anshul Dalal <anshuld@ti.com>
+To: Francesco Dolcini <francesco@dolcini.it>, Anshul Dalal <anshuld@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20251017131540.3636067-1-anshuld@ti.com>
+ <20251027165225.GA71553@francesco-nb>
+In-Reply-To: <20251027165225.GA71553@francesco-nb>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,141 +85,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of resolving clock control flags using SCMI_CLOCK_ATTRIBUTES
-during probe for each and every clock, resolve the clock control
-flags using SCMI_CLOCK_ATTRIBUTES when the clock control flags are
-first used. Because most clock are never used by U-Boot, this allows
-reducing the amount of SCMI_CLOCK_ATTRIBUTES considerably, and this
-improve probe time of the scmi clock driver and U-Boot start up time.
+Hi Francesco,
 
-On Renesas X5H, with 1700+ SCMI clock, the boot time improved by 1.7s .
+On Mon Oct 27, 2025 at 10:22 PM IST, Francesco Dolcini wrote:
+> Hello Anshul,
+>
+> On Fri, Oct 17, 2025 at 06:45:22PM +0530, Anshul Dalal wrote:
+>> Hi all,
+>>=20
+>> In U-Boot, TI only provides a single memory map for all k3 platforms, th=
+is
+>> does not scale for devices where atf and optee lie outside the range 0x8=
+0000000
+>> - 0x80080000 and 0x9e780000 - 0xa0000000 respectively.
+>>=20
+>> There are also issues for devices with < 2GiB of memory (eg am62SiP with=
+ 512MiB
+>> of RAM) as the maximum size for the first DRAM bank is hardcoded to 2GiB=
+ in the
+>> current memory map. Furthermore the second DRAM bank is mapped even for =
+devices
+>> that only have a single bank.
+>>=20
+>> Therefore this patch set adds the required functionality to create the M=
+MU table
+>> at runtime based on the device-tree.
+>>=20
+>> The patch set has been build tested on all effected platforms but boot-t=
+ested
+>> only on TI's K3 EVMs, the beagleplay and phytec's phycore-am6* platforms=
+.
+>>=20
+>> The following effected boards have not been boot tested:
+>>  - verdin-am62
+>
+> it seems that this series introduce a regression on verdin-am62, I have
+> not done a bi-sect yet, but we run daily build of U-Boot master and the
+> regressions seems to have started when this patch series was
+> merged.
+>
+> On verdin-am62 we detect the RAM size at run-time, see
+> board/toradex/verdin-am62/verdin-am62.c:dram_init(), and now we always
+> get 2GiB even for modules with only 512MB or 1024MB of memory.
+>
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Alice Guo <alice.guo@nxp.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Valentin Caron <valentin.caron@foss.st.com>
-Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
-Cc: u-boot@lists.denx.de
----
- drivers/clk/clk_scmi.c | 50 ++++++++++++++++++++++++++----------------
- 1 file changed, 31 insertions(+), 19 deletions(-)
+This patch series modified the behavior of enable_caches to configure the
+memory map of the device as per the device-tree instead of using a
+static map for all of K3.
 
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index afaeb84e65d..005968e8b75 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -18,6 +18,7 @@ struct clk_scmi {
- 	struct clk clk;
- 	char name[SCMI_CLOCK_NAME_LENGTH_MAX];
- 	u32 ctrl_flags;
-+	bool attrs_resolved;
- };
- 
- struct scmi_clock_priv {
-@@ -85,7 +86,7 @@ static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
- 	return 0;
- }
- 
--static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
-+static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char *name,
- 				 u32 *attr)
- {
- 	struct scmi_clock_priv *priv = dev_get_priv(dev);
-@@ -109,7 +110,7 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
- 		if (ret)
- 			return ret;
- 
--		*name = strdup(out.clock_name);
-+		strncpy(name, out.clock_name, SCMI_CLOCK_NAME_LENGTH_MAX);
- 		*attr = out.attributes;
- 	} else {
- 		struct scmi_clk_attribute_out out;
-@@ -126,7 +127,7 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
- 		if (ret)
- 			return ret;
- 
--		*name = strdup(out.clock_name);
-+		strncpy(name, out.clock_name, SCMI_CLOCK_NAME_LENGTH_MAX);
- 		*attr = out.attributes;
- 	}
- 
-@@ -166,7 +167,9 @@ static int scmi_clk_gate(struct clk *clk, int enable)
- 
- static int scmi_clk_get_ctrl_flags(struct clk *clk, u32 *ctrl_flags)
- {
-+	struct udevice *dev = clk->dev->parent;
- 	struct clk_scmi *clkscmi;
-+	u32 attributes;
- 	struct clk *c;
- 	int ret;
- 
-@@ -176,6 +179,31 @@ static int scmi_clk_get_ctrl_flags(struct clk *clk, u32 *ctrl_flags)
- 
- 	clkscmi = container_of(c, struct clk_scmi, clk);
- 
-+	if (!clkscmi->attrs_resolved) {
-+		char name[SCMI_CLOCK_NAME_LENGTH_MAX];
-+		ret = scmi_clk_get_attibute(dev, clk->id & CLK_ID_MSK,
-+					    name, &attributes);
-+		if (ret)
-+			return ret;
-+
-+		strncpy(clkscmi->name, name, SCMI_CLOCK_NAME_LENGTH_MAX);
-+		if (CLK_HAS_RESTRICTIONS(attributes)) {
-+			u32 perm;
-+
-+			ret = scmi_clk_get_permissions(dev, clk->id & CLK_ID_MSK, &perm);
-+			if (ret < 0)
-+				clkscmi->ctrl_flags = 0;
-+			else
-+				clkscmi->ctrl_flags = perm;
-+		} else {
-+			clkscmi->ctrl_flags = SUPPORT_CLK_STAT_CONTROL |
-+					      SUPPORT_CLK_PARENT_CONTROL |
-+					      SUPPORT_CLK_RATE_CONTROL;
-+		}
-+
-+		clkscmi->attrs_resolved = true;
-+	}
-+
- 	*ctrl_flags = clkscmi->ctrl_flags;
- 
- 	return 0;
-@@ -328,7 +356,6 @@ static int scmi_clk_probe(struct udevice *dev)
- 	for (i = 0; i < num_clocks; i++) {
- 		clk_scmi = clk_scmi_bulk + i;
- 		char *clock_name = clk_scmi->name;
--		u32 attributes;
- 
- 		snprintf(clock_name, SCMI_CLOCK_NAME_LENGTH_MAX, "scmi-%zu", i);
- 
-@@ -338,21 +365,6 @@ static int scmi_clk_probe(struct udevice *dev)
- 			return ret;
- 
- 		dev_clk_dm(dev, i, &clk_scmi->clk);
--
--		if (!scmi_clk_get_attibute(dev, i, &clock_name, &attributes)) {
--			if (CLK_HAS_RESTRICTIONS(attributes)) {
--				u32 perm;
--
--				ret = scmi_clk_get_permissions(dev, i, &perm);
--				if (ret < 0)
--					clk_scmi->ctrl_flags = 0;
--				else
--					clk_scmi->ctrl_flags = perm;
--			} else {
--				clk_scmi->ctrl_flags = SUPPORT_CLK_STAT_CONTROL | SUPPORT_CLK_PARENT_CONTROL |
--						       SUPPORT_CLK_RATE_CONTROL;
--			}
--		}
- 	}
- 
- 	return 0;
--- 
-2.51.0
+The issue with verdin-am62 seems to be that while you do properly
+configure gd->ram_size in your dram_init, the '/memory' node of the
+device-tree remains unchanged with the outdated 2GiB size.
 
+You could try updating the fdt's memory size to the correct value in
+dram_init and see if that fixes the problem.
+
+Regards,
+Anshul
