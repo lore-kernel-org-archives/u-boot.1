@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE48CCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 09:13:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C417FCCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 09:13:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED03283A3A;
-	Tue, 28 Oct 2025 10:13:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A7AF83A5E;
+	Tue, 28 Oct 2025 10:13:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="HWsvnpos";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="YT+ucnKK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7888383A1E; Tue, 28 Oct 2025 10:13:31 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id 9E0F483A5C; Tue, 28 Oct 2025 10:13:34 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B2EE839CC
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:13:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AC89839CC
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:13:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id CACD14E41392;
- Tue, 28 Oct 2025 09:13:28 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 103071A16F5;
+ Tue, 28 Oct 2025 09:13:32 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 9E6F6606AB;
- Tue, 28 Oct 2025 09:13:28 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id D7015606AB;
+ Tue, 28 Oct 2025 09:13:31 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 140ED102F48E4; Tue, 28 Oct 2025 10:13:24 +0100 (CET)
+ with ESMTPSA id 040FE102F48FA; Tue, 28 Oct 2025 10:13:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761642807; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1761642810; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=6lu9ILJTvfArXjTu1hv+uX710fiGdLRqbrSSrwB39HE=;
- b=HWsvnposAeET3XRCeRD7vUe72yjbbmw0OdFd/l1oSDweGCkeArCrXuiT0eh/DyVJv4xCwI
- 08xblTq0U7ygDFpnlPfMWbkUBy1UFpSgg0KjK7BDBONPHb7xZEg+PH4BhjlIUto+du8kjq
- nzA+Pua1oB4nTsPbTAx5HoBb19uK3GQfPSBP8yBVOiP3CbpD47khrMRdv5meTNJcBxr9Hp
- 5RXIIfgwxlLpr2U6DyQwrsA5d4Q4tidMOvsxJSbs3Rhc+L3H940/T4VwmC+Y2YnJSd23jN
- r9l8Fq9UpuQUzZ5//yOxKVG5UkNNfOeAW3k3DlS9A6owBEMytvE32t9Y9F9fHg==
+ bh=BB5LR/s0re4kwP+rXhI8iFs+3yH+JT0gKshJiTLSz+8=;
+ b=YT+ucnKKfPJvgoS6dhJZ9IjfOFVVE1KEpKztHIDO5b9TeJP4PBZyvh9hYRPgDt+lgv3nrJ
+ 5H5tSpF3ZlwJQzMVnLTS9/EDo/tWM43JwTV7BudJEMArYx1E4U4AUmp94pJEm9s0NfRQ0A
+ eYcpeXzg+QavrndpO/UeGfVRECAEhqmIEtt7aoASld+xQEL+fX9erQasHUdpZsbggOPbZT
+ h1XgnIYaWVw8QbkXGw8HlYEWX8D7Co6lF93lOwCf7uJGYfdhfvRIBdpyukBXitieLOIhvL
+ rz7wHw5PJTXmSg3+HUONo3Dc6RVaEoophXy7YjGDjOJLbDVMevzmRO0erZsqGQ==
 From: Richard Genoud <richard.genoud@bootlin.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -60,15 +60,14 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
  Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v2 02/24] mtd: rawnand: sunxi_spl: fix pointer from integer
- without a cast
-Date: Tue, 28 Oct 2025 10:12:23 +0100
-Message-ID: <20251028091256.600992-3-richard.genoud@bootlin.com>
+Subject: [PATCH v2 03/24] mtd: rawnand: sunxi_spl: harmonize register defines
+ with non spl file
+Date: Tue, 28 Oct 2025 10:12:24 +0100
+Message-ID: <20251028091256.600992-4-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251028091256.600992-1-richard.genoud@bootlin.com>
 References: <20251028091256.600992-1-richard.genoud@bootlin.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
@@ -87,57 +86,275 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix pointer from interget warning when compiling for ARM64
+Harmonize registers definition in sunxi_nand{,_spl}.c files
 
-When compiling for arm64, we get this error:
-error: passing argument 2 of ‘__memcpy_fromio’ makes pointer from
-			integer without a cast [-Wint-conversion]
+This is a first step to then include the same file from both
+sunxi_nand{,_spl}.c files
 
-Moreover the copy should be made with dedicated readl(), like for any
-register access on this peripheral, since they are 32bit wide.
+Unused defines are also removed
 
-So, instead of memcpy_fromio(), just use a readl() loop.
-Introduce nand_readlcpy() to implement this loop.
-
-Fixes: 6ddbb1e936c7 ("spl: nand: sunxi: use PIO instead of DMA")
-Suggested-by: Andre Przywara <andre.przywara@arm.com>
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 ---
- drivers/mtd/nand/raw/sunxi_nand_spl.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ drivers/mtd/nand/raw/sunxi_nand_spl.c | 148 ++++++++++++--------------
+ 1 file changed, 66 insertions(+), 82 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-index 4f1e2d9a5775..a15f54573df2 100644
+index a15f54573df2..0bdbf6a7b0e6 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
 +++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-@@ -251,6 +251,17 @@ static int nand_change_column(u16 column)
+@@ -14,48 +14,32 @@
+ #include <linux/mtd/rawnand.h>
  
- static const int ecc_bytes[] = {32, 46, 54, 60, 74, 88, 102, 110, 116};
+ /* registers */
+-#define NFC_CTL                    0x00000000
+-#define NFC_ST                     0x00000004
+-#define NFC_INT                    0x00000008
+-#define NFC_TIMING_CTL             0x0000000C
+-#define NFC_TIMING_CFG             0x00000010
+-#define NFC_ADDR_LOW               0x00000014
+-#define NFC_ADDR_HIGH              0x00000018
+-#define NFC_SECTOR_NUM             0x0000001C
+-#define NFC_CNT                    0x00000020
+-#define NFC_CMD                    0x00000024
+-#define NFC_RCMD_SET               0x00000028
+-#define NFC_WCMD_SET               0x0000002C
+-#define NFC_IO_DATA                0x00000030
+-#define NFC_ECC_CTL                0x00000034
+-#define NFC_ECC_ST                 0x00000038
+-#define NFC_DEBUG                  0x0000003C
+-#define NFC_ECC_CNT0               0x00000040
+-#define NFC_ECC_CNT1               0x00000044
+-#define NFC_ECC_CNT2               0x00000048
+-#define NFC_ECC_CNT3               0x0000004C
+-#define NFC_USER_DATA_BASE         0x00000050
+-#define NFC_EFNAND_STATUS          0x00000090
+-#define NFC_SPARE_AREA             0x000000A0
+-#define NFC_PATTERN_ID             0x000000A4
++#define NFC_REG_CTL                0x00000000
++#define NFC_REG_ST                 0x00000004
++#define NFC_REG_ADDR_LOW           0x00000014
++#define NFC_REG_ADDR_HIGH          0x00000018
++#define NFC_REG_CNT                0x00000020
++#define NFC_REG_CMD                0x00000024
++#define NFC_REG_RCMD_SET           0x00000028
++#define NFC_REG_ECC_CTL            0x00000034
++#define NFC_REG_ECC_ST             0x00000038
++#define NFC_REG_SPARE_AREA         0x000000A0
+ #define NFC_RAM0_BASE              0x00000400
+ #define NFC_RAM1_BASE              0x00000800
  
-+static void nand_readlcpy(u32 *dest, u32 * __iomem src, size_t len)
-+{
-+	if (len & 0x3)
-+		printf("length should be multiple of 4 (32bits access), data will be incomplete.\n");
-+
-+	len >>= 2;
-+
-+	while (len--)
-+		*dest++ = readl(src++);
-+}
-+
- static int nand_read_page(const struct nfc_config *conf, u32 offs,
- 			  void *dest, int len)
+-#define NFC_CTL_EN                 (1 << 0)
+-#define NFC_CTL_RESET              (1 << 1)
+-#define NFC_CTL_RAM_METHOD         (1 << 14)
+-#define NFC_CTL_PAGE_SIZE_MASK     (0xf << 8)
+-#define NFC_CTL_PAGE_SIZE(a)       ((fls(a) - 11) << 8)
++#define NFC_EN                     (1 << 0)
++#define NFC_RESET                  (1 << 1)
++#define NFC_PAGE_SHIFT_MSK         (0xf << 8)
++#define NFC_PAGE_SIZE(a)           ((fls(a) - 11) << 8)
+ 
+ #define NFC_ECC_EN                 (1 << 0)
+-#define NFC_ECC_PIPELINE           (1 << 3)
+ #define NFC_ECC_EXCEPTION          (1 << 4)
+-#define NFC_ECC_BLOCK_SIZE         (1 << 5)
+-#define NFC_ECC_RANDOM_EN          (1 << 9)
+-#define NFC_ECC_RANDOM_DIRECTION   (1 << 10)
++#define NFC_ECC_BLOCK_512          (1 << 5)
++#define NFC_RANDOM_EN              (1 << 9)
++#define NFC_RANDOM_DIRECTION       (1 << 10)
+ 
+-#define NFC_ADDR_NUM_OFFSET        16
+-#define NFC_SEND_ADDR              (1 << 19)
++#define NFC_ADR_NUM_OFFSET         16
++#define NFC_SEND_ADR               (1 << 19)
+ #define NFC_ACCESS_DIR             (1 << 20)
+ #define NFC_DATA_TRANS             (1 << 21)
+ #define NFC_SEND_CMD1              (1 << 22)
+@@ -66,17 +50,17 @@
+ #define NFC_ROW_AUTO_INC           (1 << 27)
+ #define NFC_SEND_CMD3              (1 << 28)
+ #define NFC_SEND_CMD4              (1 << 29)
+-#define NFC_RAW_CMD                (0 << 30)
+-#define NFC_ECC_CMD                (1 << 30)
+-#define NFC_PAGE_CMD               (2 << 30)
++#define NFC_NORMAL_OP              (0 << 30)
++#define NFC_ECC_OP                 (1 << 30)
++#define NFC_PAGE_OP                (2 << 30)
+ 
+-#define NFC_ST_CMD_INT_FLAG        (1 << 1)
+-#define NFC_ST_DMA_INT_FLAG        (1 << 2)
+-#define NFC_ST_CMD_FIFO_STAT       (1 << 3)
++#define NFC_CMD_INT_FLAG           (1 << 1)
++#define NFC_DMA_INT_FLAG           (1 << 2)
++#define NFC_CMD_FIFO_STATUS        (1 << 3)
+ 
+ #define NFC_READ_CMD_OFFSET         0
+-#define NFC_RANDOM_READ_CMD0_OFFSET 8
+-#define NFC_RANDOM_READ_CMD1_OFFSET 16
++#define NFC_RND_READ_CMD0_OFFSET    8
++#define NFC_RND_READ_CMD1_OFFSET    16
+ 
+ #define NFC_CMD_RNDOUTSTART        0xE0
+ #define NFC_CMD_RNDOUT             0x05
+@@ -143,8 +127,8 @@ static inline int check_value_negated(int offset, int unexpected_bits,
+ 
+ static int nand_wait_cmd_fifo_empty(void)
  {
-@@ -310,7 +321,8 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
- 			return 1;
+-	if (!check_value_negated(SUNXI_NFC_BASE + NFC_ST, NFC_ST_CMD_FIFO_STAT,
+-				 DEFAULT_TIMEOUT_US)) {
++	if (!check_value_negated(SUNXI_NFC_BASE + NFC_REG_ST,
++				 NFC_CMD_FIFO_STATUS, DEFAULT_TIMEOUT_US)) {
+ 		printf("nand: timeout waiting for empty cmd FIFO\n");
+ 		return -ETIMEDOUT;
+ 	}
+@@ -154,7 +138,7 @@ static int nand_wait_cmd_fifo_empty(void)
  
- 		/* Retrieve the data from SRAM */
--		memcpy_fromio(data, SUNXI_NFC_BASE + NFC_RAM0_BASE,
-+		nand_readlcpy((u32 *)data,
-+			      (void *)(uintptr_t)SUNXI_NFC_BASE + NFC_RAM0_BASE,
+ static int nand_wait_int(void)
+ {
+-	if (!check_value(SUNXI_NFC_BASE + NFC_ST, NFC_ST_CMD_INT_FLAG,
++	if (!check_value(SUNXI_NFC_BASE + NFC_REG_ST, NFC_CMD_INT_FLAG,
+ 			 DEFAULT_TIMEOUT_US)) {
+ 		printf("nand: timeout waiting for interruption\n");
+ 		return -ETIMEDOUT;
+@@ -171,8 +155,8 @@ static int nand_exec_cmd(u32 cmd)
+ 	if (ret)
+ 		return ret;
+ 
+-	writel(NFC_ST_CMD_INT_FLAG, SUNXI_NFC_BASE + NFC_ST);
+-	writel(cmd, SUNXI_NFC_BASE + NFC_CMD);
++	writel(NFC_CMD_INT_FLAG, SUNXI_NFC_BASE + NFC_REG_ST);
++	writel(cmd, SUNXI_NFC_BASE + NFC_REG_CMD);
+ 
+ 	return nand_wait_int();
+ }
+@@ -183,13 +167,13 @@ void nand_init(void)
+ 
+ 	board_nand_init();
+ 
+-	val = readl(SUNXI_NFC_BASE + NFC_CTL);
++	val = readl(SUNXI_NFC_BASE + NFC_REG_CTL);
+ 	/* enable and reset CTL */
+-	writel(val | NFC_CTL_EN | NFC_CTL_RESET,
+-	       SUNXI_NFC_BASE + NFC_CTL);
++	writel(val | NFC_EN | NFC_RESET,
++	       SUNXI_NFC_BASE + NFC_REG_CTL);
+ 
+-	if (!check_value_negated(SUNXI_NFC_BASE + NFC_CTL,
+-				 NFC_CTL_RESET, DEFAULT_TIMEOUT_US)) {
++	if (!check_value_negated(SUNXI_NFC_BASE + NFC_REG_CTL,
++				 NFC_RESET, DEFAULT_TIMEOUT_US)) {
+ 		printf("Couldn't initialize nand\n");
+ 	}
+ 
+@@ -203,42 +187,42 @@ static void nand_apply_config(const struct nfc_config *conf)
+ 
+ 	nand_wait_cmd_fifo_empty();
+ 
+-	val = readl(SUNXI_NFC_BASE + NFC_CTL);
+-	val &= ~NFC_CTL_PAGE_SIZE_MASK;
+-	writel(val | NFC_CTL_PAGE_SIZE(conf->page_size),
+-	       SUNXI_NFC_BASE + NFC_CTL);
+-	writel(conf->ecc_size, SUNXI_NFC_BASE + NFC_CNT);
+-	writel(conf->page_size, SUNXI_NFC_BASE + NFC_SPARE_AREA);
++	val = readl(SUNXI_NFC_BASE + NFC_REG_CTL);
++	val &= ~NFC_PAGE_SHIFT_MSK;
++	writel(val | NFC_PAGE_SIZE(conf->page_size),
++	       SUNXI_NFC_BASE + NFC_REG_CTL);
++	writel(conf->ecc_size, SUNXI_NFC_BASE + NFC_REG_CNT);
++	writel(conf->page_size, SUNXI_NFC_BASE + NFC_REG_SPARE_AREA);
+ }
+ 
+ static int nand_load_page(const struct nfc_config *conf, u32 offs)
+ {
+ 	int page = offs / conf->page_size;
+ 
+-	writel((NFC_CMD_RNDOUTSTART << NFC_RANDOM_READ_CMD1_OFFSET) |
+-	       (NFC_CMD_RNDOUT << NFC_RANDOM_READ_CMD0_OFFSET) |
++	writel((NFC_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
++	       (NFC_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
+ 	       (NFC_CMD_READSTART << NFC_READ_CMD_OFFSET),
+-	       SUNXI_NFC_BASE + NFC_RCMD_SET);
+-	writel(((page & 0xFFFF) << 16), SUNXI_NFC_BASE + NFC_ADDR_LOW);
+-	writel((page >> 16) & 0xFF, SUNXI_NFC_BASE + NFC_ADDR_HIGH);
++	       SUNXI_NFC_BASE + NFC_REG_RCMD_SET);
++	writel(((page & 0xFFFF) << 16), SUNXI_NFC_BASE + NFC_REG_ADDR_LOW);
++	writel((page >> 16) & 0xFF, SUNXI_NFC_BASE + NFC_REG_ADDR_HIGH);
+ 
+-	return nand_exec_cmd(NFC_SEND_CMD1 | NFC_SEND_CMD2 | NFC_RAW_CMD |
+-			     NFC_SEND_ADDR | NFC_WAIT_FLAG |
+-			     ((conf->addr_cycles - 1) << NFC_ADDR_NUM_OFFSET));
++	return nand_exec_cmd(NFC_SEND_CMD1 | NFC_SEND_CMD2 | NFC_NORMAL_OP |
++			     NFC_SEND_ADR | NFC_WAIT_FLAG |
++			     ((conf->addr_cycles - 1) << NFC_ADR_NUM_OFFSET));
+ }
+ 
+ static int nand_change_column(u16 column)
+ {
+ 	int ret;
+ 
+-	writel((NFC_CMD_RNDOUTSTART << NFC_RANDOM_READ_CMD1_OFFSET) |
+-	       (NFC_CMD_RNDOUT << NFC_RANDOM_READ_CMD0_OFFSET) |
++	writel((NFC_CMD_RNDOUTSTART << NFC_RND_READ_CMD1_OFFSET) |
++	       (NFC_CMD_RNDOUT << NFC_RND_READ_CMD0_OFFSET) |
+ 	       (NFC_CMD_RNDOUTSTART << NFC_READ_CMD_OFFSET),
+-	       SUNXI_NFC_BASE + NFC_RCMD_SET);
+-	writel(column, SUNXI_NFC_BASE + NFC_ADDR_LOW);
++	       SUNXI_NFC_BASE + NFC_REG_RCMD_SET);
++	writel(column, SUNXI_NFC_BASE + NFC_REG_ADDR_LOW);
+ 
+-	ret = nand_exec_cmd(NFC_SEND_CMD1 | NFC_SEND_CMD2 | NFC_RAW_CMD |
+-			    (1 << NFC_ADDR_NUM_OFFSET) | NFC_SEND_ADDR |
++	ret = nand_exec_cmd(NFC_SEND_CMD1 | NFC_SEND_CMD2 | NFC_NORMAL_OP |
++			    (1 << NFC_ADR_NUM_OFFSET) | NFC_SEND_ADR |
+ 			    NFC_CMD_RNDOUT);
+ 	if (ret)
+ 		return ret;
+@@ -287,16 +271,16 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 		u8 *data = dest + data_off;
+ 
+ 		/* Clear ECC status and restart ECC engine */
+-		writel(0, SUNXI_NFC_BASE + NFC_ECC_ST);
++		writel(0, SUNXI_NFC_BASE + NFC_REG_ECC_ST);
+ 		writel((rand_seed << 16) | (conf->ecc_strength << 12) |
+-		       (conf->randomize ? NFC_ECC_RANDOM_EN : 0) |
+-		       (conf->ecc_size == 512 ? NFC_ECC_BLOCK_SIZE : 0) |
++		       (conf->randomize ? NFC_RANDOM_EN : 0) |
++		       (conf->ecc_size == 512 ? NFC_ECC_BLOCK_512 : 0) |
+ 		       NFC_ECC_EN | NFC_ECC_EXCEPTION,
+-		       SUNXI_NFC_BASE + NFC_ECC_CTL);
++		       SUNXI_NFC_BASE + NFC_REG_ECC_CTL);
+ 
+ 		/* Move the data in SRAM */
+ 		nand_change_column(data_off);
+-		writel(conf->ecc_size, SUNXI_NFC_BASE + NFC_CNT);
++		writel(conf->ecc_size, SUNXI_NFC_BASE + NFC_REG_CNT);
+ 		nand_exec_cmd(NFC_DATA_TRANS);
+ 
+ 		/*
+@@ -304,10 +288,10 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
+ 		 * the data.
+ 		 */
+ 		nand_change_column(oob_off);
+-		nand_exec_cmd(NFC_DATA_TRANS | NFC_ECC_CMD);
++		nand_exec_cmd(NFC_DATA_TRANS | NFC_ECC_OP);
+ 
+ 		/* Get the ECC status */
+-		ecc_st = readl(SUNXI_NFC_BASE + NFC_ECC_ST);
++		ecc_st = readl(SUNXI_NFC_BASE + NFC_REG_ECC_ST);
+ 
+ 		/* ECC error detected. */
+ 		if (ecc_st & 0xffff)
+@@ -326,8 +310,8 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
  			      conf->ecc_size);
  
  		/* Stop the ECC engine */
+-		writel(readl(SUNXI_NFC_BASE + NFC_ECC_CTL) & ~NFC_ECC_EN,
+-		       SUNXI_NFC_BASE + NFC_ECC_CTL);
++		writel(readl(SUNXI_NFC_BASE + NFC_REG_ECC_CTL) & ~NFC_ECC_EN,
++		       SUNXI_NFC_BASE + NFC_REG_ECC_CTL);
+ 
+ 		if (data_off + conf->ecc_size >= len)
+ 			break;
 -- 
 2.47.3
 
