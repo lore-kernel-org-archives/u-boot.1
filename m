@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20FE3CCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:15:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A52DCCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:15:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B06F0839FD;
-	Tue, 28 Oct 2025 09:15:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0977B839F1;
+	Tue, 28 Oct 2025 09:15:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ipBpj8+9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U4ISosrq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD4F083A13; Tue, 28 Oct 2025 09:15:01 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 62760839D6; Tue, 28 Oct 2025 09:15:12 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7E45839D6
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:14:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4096C83A1E
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:15:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-42966ce6dbdso4095006f8f.0
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 01:14:59 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4711b95226dso70010815e9.0
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 01:15:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761639299; x=1762244099; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1761639310; x=1762244110; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Wcu5xXbIS3pDMmPwBn10nYzO6zGgUnuBuqeE2aWdSTk=;
- b=ipBpj8+98IiCgROTonxNjyEITcIn1YXYfUSyLmd7FGuEXVrvvQh3ULbD6glvudTzFj
- +nnwHBdZCnooDeAKOEIuuJCRjDe+v38eVgyf4nm9YdIKupUi3ZFfi+CbS5VkzmuW7uie
- v5VJe51SdCfcb9wAhrqjRYS7gkYTTJ4kInnbS6BP4l48IW7g6tngcu5pAKLoFsCgrWo5
- U4JMdnXn6XA0XAwr0GpV3+d0YN7y/SpmV8aX4q9yvIOXjkuOSmwDE2HLBVuEh8vqEbkb
- C8yVrK+UTVtbV75dMAztw//xk1jT7Hx89YMSE3Jje3gLLqacNQxzpNpuDhPfDlYHb/dk
- XSaw==
+ :reply-to; bh=DT8arGlM7OwrH4NcZl595W976MPWL1+ZssoWPXxZtTM=;
+ b=U4ISosrq5pIJW04C56mjvywS0mIFvh5efHN4IHMYaFLAd8wx+e1VgG/Q+S1kYggKQi
+ HHQfVpNOa1T3mPvYStIohIvkcYMXX96sJAeydUdQs336XrQY8z7x0xiGmgCvyoSUkQTI
+ 1BAFLo+MgH3IE5i4q54wGfuhrXbLBAF4bRpsA02D8DCWo78j1YbeiOOMZnFHBor601w5
+ 7a+qrii2Ru+ZnmtWBJrW+STsAFBbZKUFQfxDXco8ixqIFMwzFMKZH9u/FsxfZfzI4mnu
+ 33e2i5n9OY0YOX/iH6HMF4nG1YnXzkJ92p33FIlwwcmRBtmmSs1alcNg7YMIXGVyQ53D
+ 9o7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761639299; x=1762244099;
+ d=1e100.net; s=20230601; t=1761639310; x=1762244110;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=Wcu5xXbIS3pDMmPwBn10nYzO6zGgUnuBuqeE2aWdSTk=;
- b=UJ97Oz2oVWRTeCj2Y6bYsUQRiKX/GGDObA8GOCmYCxazUAoKQqEegDCJiQWNDDSucw
- uQQsJ7d7xPCtYNWcgNoOpdHJ/LADWeMB7HYBbx2fAAW8u1jlsXDbDuRPRrZc90xDbgB+
- gnx6yKmE+iGveNm2x4/3ro7Z/j6GU67JgktLij3QqnN/s5DFB8HePK1jDISWbAVS16+B
- QTvTi1diIjoxaAMoViwUQ6+z8VH5tbW/fkQcj8BStF0yhctN817B8UeXfZMvA5jHDHV4
- QrmFCb6GDkGdDYyOpO+PE10ftb85Z4KCY9umHYaeLXehHyigrSb7DQbq14hIf800qFHZ
- SrSA==
+ bh=DT8arGlM7OwrH4NcZl595W976MPWL1+ZssoWPXxZtTM=;
+ b=PjsIQDPOihqd12LBYicjkvkQU2rMXB65FFX9LRDwZqhkcBZVES8P4ajOHGUXVALLkw
+ BpozbT9Y55dBD7prSJEzp2nQ1eRpThnAKb9eqZxkbvs8mKVHuPtr4qsUjhaKfXqREnSZ
+ OHa51ISQ7qkq8YJsWR7opujZiH7iRBuV7h01mu743JrY9UjgIia/KFnmY08egnA6tlrE
+ OxiMLVO5Agu2M5NFESf4+T2flo6TjJi/fhhGf1lwHFsF/955Q0NmmNaMbJ+/dIXsu7e9
+ 7hq3ETD5chDrVdm7EvElIhsRG+pee4Bb1rVrDSYNmi1Sc4G0UOGRNMbpVN5C8gHzpC98
+ 5IoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUHLFQ5OBCSwV06EvjZwtzEXJ9Ju4Fv0T9WxosXEwz0/67SnqCPMLqZdwS27uDcfx/ocQAFXQE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwS6QMi99DBqAm5aLV0l2keb+WyQPUPOCnGq+ohLhymFBo9veeT
- 05VEx01NcN/ij7d3HjM2nvIHWMjSR7i6rubhHWsCqhDLxZ7bsFOAnby/g1LVz2aFPoo=
-X-Gm-Gg: ASbGncsBTf8ztjIJIrJB6GES+C4ZzAeTL9iwtetEO4d870Fuvski2/lyT0Li3AvG4ZG
- o96+JgrlrfaLEgsbFXja9soeyHWS6NNb8eqibdPXhktcDvMQ4425VprJqe7kQU3SL93/v3CBdow
- Hi1QP4GFhJMK7KMYCrCqqKZdpAlvFayeRouK3T4Z6uGySacw6TaBzhRmpt/iKNAho1wE7A1N4P+
- 08vrVcGKf2qQUtgQK7FdW6VpaTD2xgHLstkKaZEM0961+boxE/ROlQ/SWclHxMk0XxPi/fzFdbZ
- PTPbjCsIPr7CFZWxd867oN8B9L6rydf0SAqm3aHBlThneE2DALZNEOH6moTYFZmeoUuuP5L/EeG
- 7r9ja2lraWBiG3BfyQsrtn+bLlfJcF4tIntU4yfOD4h7LPQeApqQJQD6+O+JvpHvKR+1BmCxHfr
- RKiYpQidq/HOTbhg4SZ5ShMy1PJBjHMWmBmI280LFDrDEzoQqwxQ==
-X-Google-Smtp-Source: AGHT+IEUZq3/YAIgQ34fZBaeQffY/CYzQPH5UtoK3+fQG8r6Z3DK/De94EMF0nwY7objwp9NVkYW7A==
-X-Received: by 2002:a05:6000:2f85:b0:428:3e7f:88c3 with SMTP id
- ffacd0b85a97d-429a7e7a759mr2067300f8f.50.1761639298914; 
- Tue, 28 Oct 2025 01:14:58 -0700 (PDT)
+ AJvYcCViypESrj71wrn9VWER8+hNOkNloOplKFMd0Rd3jIx3SZ4EEOiYNgFcNnhhzQgHLR+rSWK5RAg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzkf+nQZ3oLHneQGIxuP0lLLCXLhK7c/zB9Mh6tRTX8ZQm82/zs
+ iW030jfYer1pyDyGF8eNwo+MhTiMtdU8g3SG4YdfABYZ1DUtfEMkcjpx8JUuoECl8pHzxzJv61g
+ 7pRuJnng=
+X-Gm-Gg: ASbGncssKOvI3a17DIVtxVzGSiwN4Cm//ANSqZZ2FAQGYWlpMBc4NcSEilrFekuaUfV
+ fYTKRT0nu9GL2/32u9jaaKn1Sh2rZcpnUOeCRVWZacHN6ymP4IXUPCKgTxPo5Fmb7K0VeCG2tn7
+ v3u8zDFw4LJz+Umfi9dAR2eszSdCouVhpV4jFFlVIm7xBRMf1kscg+imOuMsFX0c3FKDtHrt++A
+ PuQeBXBX/NXfUq2NebeoFHugyv4nnHTefJafG31B2PKWjN6CItzUENfYcapx53W/d/JCkWW/EBb
+ at1B0V3h2Fn6DvCsSG7GurwD5wNG8+SZL55LlmJ/N0mMOHXbzHNbC5EKCRVop1GKJ9O0KQQ6DlI
+ mWo0nWNfLYJLYVQLTgpCxZ4H0ncBhcRG4JI1s4wum2m5mG/t3RLhPZkzvkhIhtC7/gaOTfa9cO4
+ gBvPmYsBY8fnHp3UifkK6uljcjFdNPZS5+4V1jEPNIqZrmfdBgqA==
+X-Google-Smtp-Source: AGHT+IFc64l6y+hHmsJ1hDU5u63HqE9KROAO20JNiTuKFoDs9RppTMMNKn8CnHBubCBNXInMgfErdg==
+X-Received: by 2002:a05:600c:3b14:b0:475:dd59:d8ba with SMTP id
+ 5b1f17b1804b1-47717df66f6mr21161395e9.3.1761639309598; 
+ Tue, 28 Oct 2025 01:15:09 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:cad:2140:ebe6:df10:d28d:aa5?
  ([2a01:e0a:cad:2140:ebe6:df10:d28d:aa5])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952df473sm18838447f8f.42.2025.10.28.01.14.57
+ 5b1f17b1804b1-4771904b26esm13123095e9.10.2025.10.28.01.15.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Oct 2025 01:14:58 -0700 (PDT)
-Message-ID: <d396ac77-5a44-4bd5-a964-b050797d4879@linaro.org>
-Date: Tue, 28 Oct 2025 09:14:57 +0100
+ Tue, 28 Oct 2025 01:15:09 -0700 (PDT)
+Message-ID: <603d8e53-7393-418e-8139-87547be28bdb@linaro.org>
+Date: Tue, 28 Oct 2025 09:15:08 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 3/6] ufs: amd-versal2: Fix indent
+Subject: Re: [PATCH 4/6] ufs: Call ufs_scsi_bind() from uclass .post_bind
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Casey Connolly <casey.connolly@linaro.org>,
@@ -91,7 +92,7 @@ Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>, u-boot-qcom@groups.io
 References: <20251027170706.29302-1-marek.vasut+renesas@mailbox.org>
- <20251027170706.29302-3-marek.vasut+renesas@mailbox.org>
+ <20251027170706.29302-4-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -118,7 +119,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20251027170706.29302-3-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251027170706.29302-4-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -139,7 +140,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/27/25 18:06, Marek Vasut wrote:
-> Fix indent, use tabs. No functional change.
+> Instead of duplicating the ufs_scsi_bind() call in every driver,
+> call it from UFS uclass .post_bind callback for every driver in
+> one place. While doing so, inline ufs_scsi_bind() directly into
+> ufs_post_bind() as trivial device_bind_driver() call.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -157,36 +161,174 @@ On 10/27/25 18:06, Marek Vasut wrote:
 > Cc: u-boot-qcom@groups.io
 > Cc: u-boot@lists.denx.de
 > ---
->   drivers/ufs/ufs-amd-versal2.c | 12 ++++++------
->   1 file changed, 6 insertions(+), 6 deletions(-)
+>   drivers/ufs/cdns-platform.c   |  8 --------
+>   drivers/ufs/ufs-amd-versal2.c |  8 --------
+>   drivers/ufs/ufs-pci.c         |  8 --------
+>   drivers/ufs/ufs-qcom.c        |  8 --------
+>   drivers/ufs/ufs-renesas.c     |  8 --------
+>   drivers/ufs/ufs.c             | 14 ++++++--------
+>   6 files changed, 6 insertions(+), 48 deletions(-)
 > 
+> diff --git a/drivers/ufs/cdns-platform.c b/drivers/ufs/cdns-platform.c
+> index 510a6a6aa5d..87d9c5bad79 100644
+> --- a/drivers/ufs/cdns-platform.c
+> +++ b/drivers/ufs/cdns-platform.c
+> @@ -101,13 +101,6 @@ static int cdns_ufs_pltfm_probe(struct udevice *dev)
+>   	return err;
+>   }
+>   
+> -static int cdns_ufs_pltfm_bind(struct udevice *dev)
+> -{
+> -	struct udevice *scsi_dev;
+> -
+> -	return ufs_scsi_bind(dev, &scsi_dev);
+> -}
+> -
+>   static const struct udevice_id cdns_ufs_pltfm_ids[] = {
+>   	{
+>   		.compatible = "cdns,ufshc-m31-16nm",
+> @@ -120,5 +113,4 @@ U_BOOT_DRIVER(cdns_ufs_pltfm) = {
+>   	.id		= UCLASS_UFS,
+>   	.of_match	= cdns_ufs_pltfm_ids,
+>   	.probe		= cdns_ufs_pltfm_probe,
+> -	.bind		= cdns_ufs_pltfm_bind,
+>   };
 > diff --git a/drivers/ufs/ufs-amd-versal2.c b/drivers/ufs/ufs-amd-versal2.c
-> index 896dda2de4e..89931921ff9 100644
+> index 89931921ff9..bf23439e59d 100644
 > --- a/drivers/ufs/ufs-amd-versal2.c
 > +++ b/drivers/ufs/ufs-amd-versal2.c
-> @@ -330,7 +330,7 @@ static int ufs_versal2_init(struct ufs_hba *hba)
->   		return PTR_ERR(priv->rstphy);
->   	}
+> @@ -552,13 +552,6 @@ static int ufs_versal2_probe(struct udevice *dev)
+>   	return ret;
+>   }
 >   
-> -	ret =  zynqmp_pm_ufs_cal_reg(&cal);
-> +	ret = zynqmp_pm_ufs_cal_reg(&cal);
->   	if (ret)
->   		return ret;
+> -static int ufs_versal2_bind(struct udevice *dev)
+> -{
+> -	struct udevice *scsi_dev;
+> -
+> -	return ufs_scsi_bind(dev, &scsi_dev);
+> -}
+> -
+>   static const struct udevice_id ufs_versal2_ids[] = {
+>   	{
+>   		.compatible = "amd,versal2-ufs",
+> @@ -571,5 +564,4 @@ U_BOOT_DRIVER(ufs_versal2_pltfm) = {
+>   	.id		= UCLASS_UFS,
+>   	.of_match	= ufs_versal2_ids,
+>   	.probe		= ufs_versal2_probe,
+> -	.bind		= ufs_versal2_bind,
+>   };
+> diff --git a/drivers/ufs/ufs-pci.c b/drivers/ufs/ufs-pci.c
+> index 871f3f50f5c..5b9c72a695d 100644
+> --- a/drivers/ufs/ufs-pci.c
+> +++ b/drivers/ufs/ufs-pci.c
+> @@ -11,13 +11,6 @@
+>   #include <dm/device_compat.h>
+>   #include "ufs.h"
 >   
-> @@ -567,9 +567,9 @@ static const struct udevice_id ufs_versal2_ids[] = {
+> -static int ufs_pci_bind(struct udevice *dev)
+> -{
+> -	struct udevice *scsi_dev;
+> -
+> -	return ufs_scsi_bind(dev, &scsi_dev);
+> -}
+> -
+>   static int ufs_pci_probe(struct udevice *dev)
+>   {
+>   	int err;
+> @@ -32,7 +25,6 @@ static int ufs_pci_probe(struct udevice *dev)
+>   U_BOOT_DRIVER(ufs_pci) = {
+>   	.name	= "ufs_pci",
+>   	.id	= UCLASS_UFS,
+> -	.bind	= ufs_pci_bind,
+>   	.probe	= ufs_pci_probe,
 >   };
 >   
->   U_BOOT_DRIVER(ufs_versal2_pltfm) = {
-> -	.name           = "ufs-versal2-pltfm",
-> -	.id             = UCLASS_UFS,
-> -	.of_match       = ufs_versal2_ids,
-> -	.probe          = ufs_versal2_probe,
-> -	.bind           = ufs_versal2_bind,
-> +	.name		= "ufs-versal2-pltfm",
-> +	.id		= UCLASS_UFS,
-> +	.of_match	= ufs_versal2_ids,
-> +	.probe		= ufs_versal2_probe,
-> +	.bind		= ufs_versal2_bind,
+> diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
+> index 843585726c7..9f0a6940d98 100644
+> --- a/drivers/ufs/ufs-qcom.c
+> +++ b/drivers/ufs/ufs-qcom.c
+> @@ -648,13 +648,6 @@ static int ufs_qcom_probe(struct udevice *dev)
+>   	return 0;
+>   }
+>   
+> -static int ufs_qcom_bind(struct udevice *dev)
+> -{
+> -	struct udevice *scsi_dev;
+> -
+> -	return ufs_scsi_bind(dev, &scsi_dev);
+> -}
+> -
+>   static const struct udevice_id ufs_qcom_ids[] = {
+>   	{ .compatible = "qcom,ufshc" },
+>   	{},
+> @@ -665,6 +658,5 @@ U_BOOT_DRIVER(qcom_ufshcd) = {
+>   	.id		= UCLASS_UFS,
+>   	.of_match	= ufs_qcom_ids,
+>   	.probe		= ufs_qcom_probe,
+> -	.bind		= ufs_qcom_bind,
+>   	.priv_auto	= sizeof(struct ufs_qcom_priv),
 >   };
+> diff --git a/drivers/ufs/ufs-renesas.c b/drivers/ufs/ufs-renesas.c
+> index ae05bdc8102..0b74b39dc2a 100644
+> --- a/drivers/ufs/ufs-renesas.c
+> +++ b/drivers/ufs/ufs-renesas.c
+> @@ -351,13 +351,6 @@ static struct ufs_hba_ops ufs_renesas_vops = {
+>   	.hce_enable_notify = ufs_renesas_hce_enable_notify,
+>   };
+>   
+> -static int ufs_renesas_pltfm_bind(struct udevice *dev)
+> -{
+> -	struct udevice *scsi_dev;
+> -
+> -	return ufs_scsi_bind(dev, &scsi_dev);
+> -}
+> -
+>   static int ufs_renesas_pltfm_probe(struct udevice *dev)
+>   {
+>   	struct ufs_renesas_priv *priv = dev_get_priv(dev);
+> @@ -405,7 +398,6 @@ U_BOOT_DRIVER(ufs_renesas) = {
+>   	.name		= "ufs-renesas",
+>   	.id		= UCLASS_UFS,
+>   	.of_match	= ufs_renesas_pltfm_ids,
+> -	.bind		= ufs_renesas_pltfm_bind,
+>   	.probe		= ufs_renesas_pltfm_probe,
+>   	.remove		= ufs_renesas_pltfm_remove,
+>   	.priv_auto	= sizeof(struct ufs_renesas_priv),
+> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+> index c1f3301b37e..5dff5c3aaec 100644
+> --- a/drivers/ufs/ufs.c
+> +++ b/drivers/ufs/ufs.c
+> @@ -2030,14 +2030,6 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
+>   	return 0;
+>   }
+>   
+> -int ufs_scsi_bind(struct udevice *ufs_dev, struct udevice **scsi_devp)
+> -{
+> -	int ret = device_bind_driver(ufs_dev, "ufs_scsi", "ufs_scsi",
+> -				     scsi_devp);
+> -
+> -	return ret;
+> -}
+> -
+>   #if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
+>   static int ufs_scsi_buffer_aligned(struct udevice *scsi_dev, struct bounce_buffer *state)
+>   {
+> @@ -2092,8 +2084,14 @@ U_BOOT_DRIVER(ufs_scsi) = {
+>   	.ops = &ufs_ops,
+>   };
+>   
+> +static int ufs_post_bind(struct udevice *dev)
+> +{
+> +	return device_bind_driver(dev, "ufs_scsi", "ufs_scsi", NULL);
+> +}
+> +
+>   UCLASS_DRIVER(ufs) = {
+>   	.id			= UCLASS_UFS,
+>   	.name			= "ufs",
+> +	.post_bind		= ufs_post_bind,
+>   	.per_device_auto	= sizeof(struct ufs_hba),
+>   };
+
+Nice change !
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
