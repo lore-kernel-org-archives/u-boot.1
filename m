@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F7C1CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:38:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A598CCCF9EB
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:49:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95C7783A3B;
-	Tue, 28 Oct 2025 09:38:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0F2BA839DD;
+	Tue, 28 Oct 2025 09:49:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="a9S0dQb2";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Zn2t2LnB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D14D083A43; Tue, 28 Oct 2025 09:38:26 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 4D78983A2F; Tue, 28 Oct 2025 09:49:22 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92EBC839DD
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:38:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id B7AB540805;
- Tue, 28 Oct 2025 08:38:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 520A3C4CEE7;
- Tue, 28 Oct 2025 08:38:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761640702;
- bh=R3tzngHHmde2Ms8vsIAUv80XfFApqmcXvkceck8omS0=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=a9S0dQb2UVvfWh4EYhu76lWCPluj/1VvG+oISBPz2vYR3aqmHzgE5DytxFVi3IPZ5
- c8WfjhyYzPQB5m0sMZcm+pgaQUoZZohdYNf3lndVOuzOuyjL+Gb8kLV8WkJpO4P1OI
- w/9MDrt897WSsFnL4wJ6azoZylj20DbfdTQueA2YzB0nuUQSnxxxD33/T91KMQZo78
- uhQXmv+aVLUnszuPx/o6VM84ARzk7GFwcUQAk42GKf5nAzbYqsS6zxmhBG7ExOcbPC
- Qjq7RSc9p7ne2MA3VZs5kyjJPv8l66ZHkO8L2I/73fvYZEO9yZVzCiKpBaEFUEc01b
- MVU0wCh2TaeBA==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>,
- u-boot@lists.denx.de
-Cc: George Chan <gchan9527@gmail.com>
-Subject: Re: [PATCH] boot: bootmeth_android: Conditionally dependent on
- abootimg
-In-Reply-To: <20251021-abootimg-minor-v1-1-88a12f53d8de@gmail.com>
-References: <20251021-abootimg-minor-v1-1-88a12f53d8de@gmail.com>
-Date: Tue, 28 Oct 2025 09:38:20 +0100
-Message-ID: <87ms5bju9v.fsf@kernel.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 1CCAE839CC
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:49:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 4ADB1106DB3; Tue, 28 Oct 2025 09:49:15 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1761641359;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=y9Mx/K/By+d4GJcvKUjwog4tKdP4JvEEoePnTgCEMt0=;
+ b=Zn2t2LnB8rljP2tTkyHNjBxyH5GuByDZFLjGBou4xL5yPtn7AK6JYbwFCFDhIT3emLT9Tn
+ YHnGGGO9zkVlYP9aOcciyHwCoa7jPn5OjrFf8xadvFkfI/fzt5I0yIShH8q3zeRk26VucH
+ UDxxpe4EkAhXAlGyp1qh5wUdqETQ0t1RAEP0t8CswIHWoqtfhx7g7EfZ3aXUYXD/YNuAsM
+ bi/jvbDq2FUUH6L22ysj75VM9ORd9zjsBGLbKLTEZXOVwgikDYtw8zJ2Gs97yNFPU5b3GN
+ dJxX4CgHhouYJN9rZdsQBgnMcdYVHX3n0J7bVbgysFXtJFHeZGokoGALKQlnjw==
+Message-ID: <5dfacb55-9e64-79a1-1f09-fb4fa11a9e15@nabladev.com>
+Date: Tue, 28 Oct 2025 09:49:36 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v4] i2c: add support for the MT7621 I2C controller
+Content-Language: en-US
+To: Justin Swartz <justin.swartz@risingedge.co.za>, u-boot@lists.denx.de
+Cc: Anshul Dalal <anshuld@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20251027130942.12387-1-justin.swartz@risingedge.co.za>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20251027130942.12387-1-justin.swartz@risingedge.co.za>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,74 +68,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi George,
+Hello Justin,
 
-Thank you for the patch.
-Sorry I missed this, I was not cc'ed so it took me some time to notice
-the patch.
-
-On Tue, Oct 21, 2025 at 00:36, George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org> wrote:
-
-> From: George Chan <gchan9527@gmail.com>
->
-> If target u-boot img do not support androidboot v3 or greater,
-> abootimg might not be necessary.
->
-> aarch64-linux-gnu-ld.bfd: boot/bootmeth_android.o: in function `boot_android_normal':
-> /home/user/sources/u-boot-next/boot/bootmeth_android.c:541:(.text.boot_android_normal+0xd0): undefined reference to `set_avendor_bootimg_addr'
-> aarch64-linux-gnu-ld.bfd: /home/user/sources/u-boot-next/boot/bootmeth_android.c:543:(.text.boot_android_normal+0xd8): undefined reference to `set_abootimg_addr'
-> Segmentation fault (core dumped)
->
-> Signed-off-by: George Chan <gchan9527@gmail.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
+On 27.10.25 14:09, Justin Swartz wrote:
+> This commit introduces a port of the Linux kernel's driver for the
+> Mediatek's MT7621 I2C controller.
+> 
+> The port was undertaken as the existing driver intended for Mediatek
+> I2C controllers (mtk_i2c.c) is not compatible with the MT7621.
+> 
+> To use the driver:
+> 
+>    1.  Ensure that the mode of the i2c pin group is
+>        configured for "i2c" rather than "gpio".
+> 
+>    2.  Delete the existing (bitbanged) i2c node from
+>        arch/mips/dts/mt7621.dtsi, or specify:
+> 
+>          /delete-node/ &i2c;
+> 
+>    3.  Declare:
+> 
+>          i2c: i2c@1e000900 {
+>                  compatible = "mediatek,mt7621-i2c";
+>                  reg = <0x1e000900 0x100>;
+> 
+>                  clocks = <&clk50m>;
+>                  clock-names = "sys_clock";
+> 
+>                  resets = <&rstctrl RST_I2C>;
+>                  reset-names = "i2c_reset";
+> 
+>                  pinctrl-names = "default";
+>                  pinctrl-0 = <&i2c_pins>;
+> 
+>                  #address-cells = <1>;
+>                  #size-cells = <0>;
+>                  status = "okay";
+>          };
+> 
+> Signed-off-by: Justin Swartz <justin.swartz@risingedge.co.za>
 > ---
-> Cc: 
-> ---
->  boot/bootmeth_android.c | 2 +-
->  include/image.h         | 3 ++-
->  2 files changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> index 8c2bde10e17..d7740b86d67 100644
-> --- a/boot/bootmeth_android.c
-> +++ b/boot/bootmeth_android.c
-> @@ -534,7 +534,7 @@ static int boot_android_normal(struct bootflow *bflow)
->  	if (ret < 0)
->  		return log_msg_ret("read boot", ret);
->  
-> -	if (priv->header_version >= 3) {
-> +	if (IS_ENABLED(CONFIG_CMD_ABOOTIMG) && priv->header_version >= 3) {
->  		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
->  					     priv->vendor_boot_img_size, vloadaddr);
->  		if (ret < 0)
-> diff --git a/include/image.h b/include/image.h
-> index fc2f2487095..55a6af69b31 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -2039,7 +2039,7 @@ ulong get_abootimg_addr(void);
->   * Return: no returned results
->   */
->  void set_abootimg_addr(ulong addr);
-> -
-> +void __weak set_abootimg_addr(ulong addr) {}
->  /**
->   * get_ainit_bootimg_addr() - Get Android init boot image address
->   *
-> @@ -2060,6 +2060,7 @@ ulong get_avendor_bootimg_addr(void);
->   * Return: no returned results
->   */
->  void set_avendor_bootimg_addr(ulong addr);
-> +void __weak set_avendor_bootimg_addr(ulong addr) {}
->  
->  /**
->   * board_fit_config_name_match() - Check for a matching board name
->
-> ---
-> base-commit: 4e4a9de31de2a5f395ee25c59e4026422fbcb27e
-> change-id: 20251021-abootimg-minor-17755894a376
->
-> Best regards,
-> -- 
-> George Chan <gchan9527@gmail.com>
+> 
+> Notes:
+>      [PATCH v4]
+>      
+>      - Fix style and whitespace issues to appease checkpatch.pl
+>      - Include time.h (instead of common.h) for get_timer()
+>      - Replace mt7621_i2c_check_ack()'s MMIO register access,
+>        via a volatile pointer, with readl() macro expansion.
+>      
+>      [PATCH v3]
+>      
+>      - Add an empty line between variable declaration and code to
+>        functions that did not have this separation.
+>      
+>      - Condense multi-line closing brace / else / opening brace
+>        sequences into single lines consisting of "} else {" instead.
+>      
+>      - Relocate mt7621_i2c_check_ack()'s I2C_M_IGNORE_NAK flag check
+>        to just after the last variable declaration.
+>      
+>      [PATCH v2]
+>      
+>      - Add "REG_" prefix to I2C (Serial Master 0) register definitions.
+>      - Remove unused "PINT" (Peripheral Interrupt) register definitions.
+>      - Adjust function definition style.
+>      
+>      - Refactor mt7621_i2c_check_ack() to accept the number of bytes
+>        expected to have been acknowledged, instead of accepting a
+>        literal value (which represents the acknowledgement status of
+>        (up to) 8 bytes, encoded as 8 independent bit values) expected
+>        in the SM0_ACK field (bits 23:16) of the SM0CTL1 register.
+> 
+>   drivers/i2c/Kconfig      |   7 +
+>   drivers/i2c/Makefile     |   1 +
+>   drivers/i2c/mt7621_i2c.c | 374 +++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 382 insertions(+)
+>   create mode 100644 drivers/i2c/mt7621_i2c.c
+
+Thanks for fixing the checkpatch warnings.
+
+Reviewed-by: Heiko Schocher <hs@nabladev.com>
+
+bye,
+Heiko
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
