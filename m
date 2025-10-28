@@ -4,166 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A024FCCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 10:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4ADFCCD1BF
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 11:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA0D083A45;
-	Tue, 28 Oct 2025 11:35:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 13EC6832AD;
+	Tue, 28 Oct 2025 12:06:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="W6rLQnQd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M7wkHvtP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA84383A56; Tue, 28 Oct 2025 11:35:05 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 15787836D1; Tue, 28 Oct 2025 12:06:44 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33EBD839DE
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 11:35:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 4CF6880422
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 12:06:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WxXrjwtPGxojQ9f1e7WF49emUmBHbk77wylLD04olRNhBDWbB8j1Sw4FKdHAWsENb9tGpHdDTIjt7p6etiV1zfmjJciwcaPEDFCOn2nYrNfjSSxWt/fnxjqY7KT4jdI4FVOT4atAxDJ5Mp7LqpXwFYnH78Qh78Gzhi+DAbEMe/n3Yw4CqmlS9i/2a6DRsgwu+GvlKVgvveXAZYom7fhvXIh62GVz6LUB+GMCPkJY/eA+5BbR/OhFTJmn9NBJoE6HHx/X0rcaCm48kGhApftQO8BevcjQtHcgXee1cqurYd+nj3NsfaqnTwDv4QFU3dH/CB6cmkEaFt9XJ/XkI7qFmw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MBy+mQRjcKIrpSzb3NPNGPdRlx5/7QOp8UKT+bUTD/M=;
- b=Ul45WGMty1/xGHKxoF854YlJQqqM4MHXb2SOJjbxCiqQ/BiN9+jQW5JgCAFQnnp1+h2WNNP99DCxrhJpEQMBH8B+PRihjJlCron2p3zLq0ohz1pOdYriQPr3HP3tvOrkAKLIYqhj8RTfKuygW9J3sIqiV2yF1PF4e87cjyPwc98R6EfN3sU9UQ6jRdLtpQsY25JRZKSD6uQOgXbhJHPGH1rso0lFPS8hQbJqY2Ec32efvQK9CKRQIaDVC3uyv/tV/oGJQbj9a2H9C3aU+s+tDs2htar6es8oubbZEen6grL3oZiwTRgA/BSlLsL0exvWrfCYuj+lx6sGTl+c/Qkw/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MBy+mQRjcKIrpSzb3NPNGPdRlx5/7QOp8UKT+bUTD/M=;
- b=W6rLQnQd4w+wS2rWZNfeN4QWKQI+vsxCLplizqeR6fQV3BSgYVYJCSOg3NZolHPnOIBmudF4pvvZABtS0n2yac/t+RNxBFxoKRidMrWRO6/PuXfs+MLdJ25bJ3PU8WYCSQpt7uYr/bbdq6VLP6iSuEElK/Jf6mFMxTwETGH2rD4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AM9PR04MB8179.eurprd04.prod.outlook.com (2603:10a6:20b:3b5::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Tue, 28 Oct
- 2025 10:35:01 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9253.017; Tue, 28 Oct 2025
- 10:35:00 +0000
-Message-ID: <5f45b4ed-d01e-41f8-a05e-c617039228e0@cherry.de>
-Date: Tue, 28 Oct 2025 11:34:58 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] rockchip: make rksd the default format for SPI images
-To: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Johan Jonker <jbx6244@gmail.com>, Sumit Garg <sumit.garg@kernel.org>,
- Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20251027-rockchip-more-template-v1-0-430672840303@cherry.de>
- <20251027-rockchip-more-template-v1-2-430672840303@cherry.de>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251027-rockchip-more-template-v1-2-430672840303@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BE1P281CA0063.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:26::8) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b6d4e44c54aso1013753166b.2
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 04:06:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761649601; x=1762254401; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Bu8b8EBWy9PGRtTVN9orpdSefi4IGEOp+UIV//BCE3g=;
+ b=M7wkHvtPWyiw1rhDeQqGt1swI5q5pHCTerxL1r0Ja6XjaG6Jv8EC0jhWA95ys6kcoS
+ xKlxvQ3T0Zkkb5VK+uZtXayFWDp+QpdUWTPbAwBIO0sWLzR42160uZejLs1afs02pSWq
+ PE2h9XVMMXHFQlR/+3ZT/YQuii59LKktJD2hU1wo45KbMfERVgkvrMDiRXafEUPdpm0f
+ r70EOMggu5RqUXTYcWbxMFrSYbQyxl9kCZ2iMaFvMEuRIaX6QQTFos7EavoRE2DSmARK
+ 95NikWVh+LeHzRSC0MVk1hKMFWbbDQRquqGctDU3pQOXnX35XDsDBjVoXRn/sQYqqx+m
+ OWSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761649601; x=1762254401;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Bu8b8EBWy9PGRtTVN9orpdSefi4IGEOp+UIV//BCE3g=;
+ b=RrrXsaYyEnFylK83/WauViThpnusYULgGC1yzKh1i+mcrfIWj4+ffYuAag27vMXy8Q
+ +Q7RZpJGhAoFD4U+u4s3MQH7PhGWWdq/7x096r/kBXLE8BFfkfFUXBq0QRldRiNcsFGp
+ 3f880WXn7raNyYxWYQh2YP1E8taJt35MqEP+GtnqOkLhrC8dVXKl9yP/bXXsKu1oI0pm
+ E7AN0tH30hmBSaxwg26/L0IaWsqVBQfm74sDxP7y7hWGCObkj3JRWBKyM67sdlQr27gs
+ caiSY6oruYcMWHjsJmTT0wUs3+x7XqpUWxJUJjj1zeu6ROlr8ql//eZVX4O/v4Qd04fW
+ lJLg==
+X-Gm-Message-State: AOJu0YyrNxdtWo80OsQ1c5AmULL6QrMIOoYfsgsHLTbCciPFkECDrtlk
+ a00p1IFBOTOcKZCyOHkI/zKj7DS4EsJ3ex+z+hX+DR4EJa0Av/9EK3x1uBHhOAzQ0yo=
+X-Gm-Gg: ASbGncs5GgtDxAyu2jQw4KlHH/SZkWhI3zGxPzfPXaWOrdlgVi8WnIL2jgPP6xFb0ws
+ gEydC+H/xlpcE0tRYUOLt8CqnRmr8uybiRZ5GICTi9W/UBJ3rTrHoCHXR/MnZTfog3ShWI9HLeD
+ YRH9OVWSle/O/cE5GjC9y0lI3j/S+0em8ZjVg82pA2N+cYeXTLLW5fcbWAnw1ylOhD73dW7D2jV
+ 02vhVFQqUxbJFFhC5bYarHZocaX525Ri2yAYnL6HI7fzgbBffdTgU7R7fdUu0tKuewGBXxC305e
+ +4BJHLAZGNAFHAy/z8b7N9LCCgL8sOVqzJyuO3/RGx+1qaegTbf3q0dBaal0DZMpOC16PGHfhr6
+ Enfpll5uO3hXdfkaWOeTjknZ18l9o8fTtVfPid6ixSLYoNHjlqAms8FiCcTDoaqrQbTapKI5GB1
+ c6/T6tH7liOjQX1Vj3mz/17WvAkiq2QuvkEnUWs2qEsQ==
+X-Google-Smtp-Source: AGHT+IGb+Nl2IqZtsXdhax0GiaBNxpOBk++akdy0Z84ABjLrtF8CyXFfHpK3JVWCoEduQHLQq6TC4w==
+X-Received: by 2002:a17:907:9727:b0:b2d:830a:8c09 with SMTP id
+ a640c23a62f3a-b6dba5a4780mr310539366b.44.1761649600634; 
+ Tue, 28 Oct 2025 04:06:40 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e67b.dip0.t-ipconnect.de. [91.41.230.123])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b6d85309069sm1039356766b.10.2025.10.28.04.06.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Oct 2025 04:06:39 -0700 (PDT)
+Message-ID: <b3e8efc4-b176-4f05-9769-be7180ea7a7b@linaro.org>
+Date: Tue, 28 Oct 2025 12:06:38 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM9PR04MB8179:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1e932ea9-1907-4634-9899-08de160da550
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?b0dORWJHcEtOTFh2Z1ZSelVNOHp0U2FrdzN3bGVWSVkxejRiMlpIK2s4Qzls?=
- =?utf-8?B?RjdTQy8zSFU1V1NqbEg0MTJTeUFKR3Q0amdubVpDU3pvNzZJTkRSZ0VnNzNR?=
- =?utf-8?B?eExSOVVNNk9WWVlvTVkycFFUb0RWT2tnWStMMVlHTmRaL0luNFZtclJpRnN6?=
- =?utf-8?B?R29GYTN5VGxVa21kd0lEWkt5L2JsQXNaNEh1VTR0MjU3L2R0MDhnU0s0YTlW?=
- =?utf-8?B?UTZJN0JwRW4zeUN0SDhRbnE1WitwNnRaT2V6ZFkwcWxDblVna0gydjZSUHRF?=
- =?utf-8?B?UkZwTWZqRnRnRFBsMjlYcElXT0ZlbnBqaUFoRjJQM3U3ZldoRlVSNjZrUmlS?=
- =?utf-8?B?WW9LWGlId2hPWFRnQkNsNUVJTW56NTFQdWd0SThkUXBwR1BqcWdtdktnbGFZ?=
- =?utf-8?B?RVFRaFFTdHY4OU1UWmlSd04zNTgrYStFVElCS3FBZ2MzN0JGTGZJbWhIR1pW?=
- =?utf-8?B?R0NEemx3bGpKVDYyM3FVWHplT2ZEY05JeVRLNUUyZVJ2VVNpOUdjRnozWDMv?=
- =?utf-8?B?U2NNb1VjTm93Vk9Qa3J3RTBCOFk3eHpsUytZNWQ1RFR6VHdRc0JjL2sybjdy?=
- =?utf-8?B?cTFLRm56NGl0WWpwS1BoUStGY3hadk12cjJxaW9nWmRBdXl1bCtxUkhBdXJS?=
- =?utf-8?B?b2tpOGdDZ0tTdVRiZEN0MFprbWtIclI2b012cjYxbmhZRDgyN3VrdjVkeUU2?=
- =?utf-8?B?QkhXbitPMXlrUmIrRE8wWXd2bnVwUW9wdnRTVkdFTGh3Tm9Ra05lY0FiRTgy?=
- =?utf-8?B?WE1zNzFld0VydzBOZkVxN05RVFU1S0ZNcWZZVjJSLy9CVDlYU3ByMUpOUHFp?=
- =?utf-8?B?VjdiNkhLOUxJd05mV3gvYnltUjBOWEw5S1BvSVpCSkk3TEFIV0ltMjdkdFZv?=
- =?utf-8?B?VjAwcmtzcWY3RzlXVnY3N1dIWHExQVlmR1NrM040cFhnUzlHRTdwMFg1dlVx?=
- =?utf-8?B?ZkhqSHdScDN2Y3ZuL0hkZ1FSSkdsVjVWZ25ualUyOGhkQXBVdUM2UFVuOVA1?=
- =?utf-8?B?UUMxYUNReTAxTEpqUWVIT2hKM3RZL3JRd0xCVDVIK2UwVWUwSWpiVUFHMkFz?=
- =?utf-8?B?dDFvSlpIbGJyd0JVVWhmUmVkUzVSYWVhSStBRzNydklQdFVwRWNFcTJkb0pz?=
- =?utf-8?B?UjVQeUxvZ2s4a0J1bTlaOHBNZ0krQmRLeGptZXM1VlUwWCtOdHFGQVhsVXFG?=
- =?utf-8?B?VjN6dU9IMHU0Y2ZRV0lISGtCK0cyNEpscGg3aU1NcVNRejg5b2kxdzVmSklO?=
- =?utf-8?B?V1FnWHBDSG5xc0pnMkVISnMyL0duU3pmcUppbnN5cnlvd0wvSmFoVG0rWHNz?=
- =?utf-8?B?Y0I1ZU02MGFiN3ZhWWM0eVlnc2JDcXpiaTRLZlpPY0RkbnJEdjdQOTNORTZE?=
- =?utf-8?B?T29jdVlDcmNSSEw3clFhcmJTbk9sZERKc28ySkdkek1GSHBPLzh5NEJQOVUw?=
- =?utf-8?B?VzFZVld0endYZXliQUdzQjR4dVdRbjFXWUtlVlRaR1o2a0Ftb3BrTnNVdXJ1?=
- =?utf-8?B?Wk9sY2ovVk1odHF4RW9lYThBZkZFY2o1QVVaV1RRNmFOL3VDbVEzaFVtUy9U?=
- =?utf-8?B?blJCSW43bG1vZjJVM3VZY0R1WnlJM1RmYXpLNzd3ODB4OUZEZXRzelBnNW8y?=
- =?utf-8?B?MUdlaEhTdmZGeHg1L1plWlQ5UDZrcUhDbnRaZkR1cWwvSEF4ckFsRTB2bW1Y?=
- =?utf-8?B?djFCV2wxWllIOXpoUXh2K2V4WGhwaUdJVHdrc1kwVkFzOXpTcFJNREdXQXFE?=
- =?utf-8?B?cThuclhMaGtiYVdaSkQ0UUxJb29kVFRsaDY4eXl1dzZ6Ull1ZG5PQnU2MVhi?=
- =?utf-8?B?d0FLMG8vUGMya0kxVTZOMWVtMUdIeFp1Q0hoSXpUSDBRcTNnR1pHNUxDZUli?=
- =?utf-8?B?cStrZUpkRnhCdzZvK3puM1dRTGFhQUlSekNZdjNSV0dId2ZzeXVrZzF6TVVt?=
- =?utf-8?Q?09sdrUbEpcZmSWRl7KK7FN3CJZ/OJ+gp?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YzlJRTR0c0RaUmowNE1DZUFHOWhmZ1ZveWU3UDBldWFMY0Uya3IrV00xU012?=
- =?utf-8?B?eTl3UVJCSng5Q3Z6dVl0VHZSbnhZKzh0NFdMdVVycmM0TmNSc0l2Y1hSenhk?=
- =?utf-8?B?aFpGd3NCbExmMnhGdzUxUVg5OGdLZTNUZDRJUEFuWFBtdUI5d1k0ZnBOa0ZO?=
- =?utf-8?B?SlBqR2ZHd2YzUjRoUTBMd2tzYVpiU1FKNTJPeVAvQS91WUJNbjdacDhzMTZU?=
- =?utf-8?B?dU1uejFEN3Z3SUN1NUo3My9FRFA4T1RHUW1JZDVMOEVYK3RyRHdyQzcwV2Er?=
- =?utf-8?B?K0swb3U5Y0x6Sm1haFJjTGRqNDVOL21RZG8xV2lFelpDekRrSUNtQjZYckxz?=
- =?utf-8?B?MXhJTmRmeTExNXFxVzdPOHFUN294NjVVUVJBR3E1dkowZWpsbkV2V0V6SWpo?=
- =?utf-8?B?dGwyZDZqMkU0cWNJWlN5TzRNUU42cGFmVklzUGdTcjR1YWVhSDk3K1crMFR3?=
- =?utf-8?B?RWVmbmlnV1BtTHV2YjJaeTlIZ3oyV05vTGxjem9Na1BwcmQ0bGpFSEJxeGtp?=
- =?utf-8?B?bVUrK3EwdUhJUHovcUcxWkFWV1FJUXhFWHRiaTZ0QkR0MVdza09vZTliTlJ0?=
- =?utf-8?B?amxOQVVlNjlZWW9iM3grTXRlN1lsbmJZY3VETTJQV1QzSC8xSmExQzZ3eHV2?=
- =?utf-8?B?c0hrblpTQjVDTitKWi94VSt3Y2xZLzFIQ1JsNDBqY1ZuajNRK2VreGoxZGlK?=
- =?utf-8?B?QWhpUENnSzVZZHgyanhCdlBGWkF1NldRYjg2Rnd0SHFPaE1kWnBaajZKQm1N?=
- =?utf-8?B?TGFRMkZCZEhwSVZrK2txdi9jbVg2bEtUUTdLSStUbHJMcHZYM2lOYkFyVEph?=
- =?utf-8?B?NFhDRHdPMjRNcDc0WS82WmtXWUM1Y0s2VkhYcjRqMkZLOVlSR3N4NTJsQTVu?=
- =?utf-8?B?Nk0zUjFCWU9BZktpUTlEcFhtM3JmaEhmN08rc2ZPc00yUFBVL2MvTDFCUEkv?=
- =?utf-8?B?ak5ITTR5MFZGODZUeE5Gd1VxR2I1WGJGSmhKV1NnOGUzRFlGanhTbk1jaWxt?=
- =?utf-8?B?NHF1aktkazM3REdJMkJvYkpWcWM0YUpkNVFvN1FmUWtKR0Q0Tlk3VXBEVDB4?=
- =?utf-8?B?UTNGc2lqVjBWU016YitCTE9oQmwySlBoWVNFaW9oL2tGQkF5NFVQTVNMZlFL?=
- =?utf-8?B?M1Z6ODBoN2gyeHJYcitoVngvMkFycEpyeVJyQmp6QjNOUC96UWV5S2JGOWkr?=
- =?utf-8?B?Y2ExRk5qLzlra1NPTmxtUFZBMDhoRFh0UklkNFdWRytoZzlEaTJGN1ZTc0k5?=
- =?utf-8?B?TSt1eTE5bUI2NDNmZ2lTaEIxUTFGWnlyMVlvUkZ6Qld3YmZpeEF3S2t4ZGNq?=
- =?utf-8?B?QnIxRGtwOVdrV2hRQ0F5dWJBNGNmMXZpMUNKQ1MxMmg0S1RBNG0rdVBKS3RO?=
- =?utf-8?B?MW1wbHVad3F2cGt5cW9tc1ppYlBiNHhYWityZ25vNHNyWVI3c0trbCthUTdj?=
- =?utf-8?B?dS8wTG5IanE4UUxNRGVwUmlOSmNnRE1RZ1dqUjByWjNtSEpVdnJnTkR0QW5n?=
- =?utf-8?B?YWJ4U2xlejdwOHdJenJoN2dYck9WVUVBN3dKNXZqd1k2WXR6T3BTSGNGblJ0?=
- =?utf-8?B?TWoyOFNNZ3ZBR0tXMXM4TlY2TWZRU1VrV2hERTZ6VDl3UjNqQWllQkhObzky?=
- =?utf-8?B?dTBWd3ZBMTNJamVKbTh1bCtlZXFvMFZLdWRzU2QzY2U2R0czR2ZWd2lleFBn?=
- =?utf-8?B?T21RQ2dTYnVhZXhHc0E3RzB6Z1RmanhCbXVCNVpPNHArcEVZd2NhSEwxZEFB?=
- =?utf-8?B?NlE2Vmd5eEZjcEROU2V5SitsM2VaWS9RcjRYVWJIRm13ZGFwUDBjNWN2blpV?=
- =?utf-8?B?bENJSTZUWE9Yc3J6VmZHejF3L2NaSmswUlRVZGRyZjlOcjNtZlRZKzBReDlX?=
- =?utf-8?B?UUhVTEFIME11cjkycFJqd0hnMm1BSy9qKzJlVm1ZNVhESkV5bUFXaUJNVnFZ?=
- =?utf-8?B?M2d3LzVZcHFnQjdpclQ5NUR1V3l5OS9BeVgyYnRzT2VzZHdXbFpqekxqQ3VK?=
- =?utf-8?B?YkhndU15R1pSeVdqWTMrclFhSmdzS1J5WXlGTkVoOUxtdjNsK3VxeVhwYWwv?=
- =?utf-8?B?N2l1UkRvZTNQUGhSYlFTV2N5cDhvRHVRY2c3Y0NPOEpSd3d4TkIvYkVuQzdm?=
- =?utf-8?B?TTIrNmsxZGQzR3pjeUR1MXN2SC9GcXNkdmJ2cFJZcks3V3NjclJYbkg0N01r?=
- =?utf-8?B?bnc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1e932ea9-1907-4634-9899-08de160da550
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2025 10:35:00.6122 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ulk1k5A4dBSKOWtQQQH9ng9nouDLbvZZicUI1ATsGQxX4dVm6h1+SoJcRxxvS+VOzM8zTr1zRoPuWqvQNGTg/53F1tnZtcqxVs16FKXwXMc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8179
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RESEND] binman: fix mkmbn integration and tests
+Content-Language: en-US
+To: u-boot-qcom@groups.io, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20251023133850.3686431-1-casey.connolly@linaro.org>
+ <5e94dba5-b922-4536-aa29-bbdd7aeafb0d@linaro.org>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <5e94dba5-b922-4536-aa29-bbdd7aeafb0d@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,52 +103,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
 
-Collected some feedback on IRC on #linux-rockchip, so putting it here 
-for future reference.
 
-On 10/27/25 4:51 PM, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 28/10/2025 09:19, Neil Armstrong via groups.io wrote:
+> Hi,
 > 
-> I believe (hope) that the new SoCs should now have this fixed and not
-> require the "hack" implemented in rkspi format which almost doubles the
-> size of TPL+SPL (idbloader.img).
+> On 10/23/25 15:38, Casey Connolly wrote:
+>> Add the missing cryptography requirement to binman so that mkmbn
+>> will work correctly, fix a pylint error, and adjust mkmbn to properly
+>> integrate into binman rather than writing the output file directly.
+>>
+>> For now skip testing u_boot_mbn since it has some weird requirements due
+>> to how mkmbn works and can't be easily integrated into binman.
+>>
+>> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+>> ---
+>> Resent to fix my name
+>> ---
+>>   tools/binman/btool/mkmbn.py      | 9 ++-------
+>>   tools/binman/etype/u_boot_mbn.py | 5 +++--
+>>   tools/binman/main.py             | 4 +++-
+>>   tools/binman/requirements.txt    | 1 +
+>>   tools/qcom/mkmbn/elf.py          | 6 +++---
+>>   5 files changed, 12 insertions(+), 13 deletions(-)
+>>
+>> diff --git a/tools/binman/btool/mkmbn.py b/tools/binman/btool/mkmbn.py
+>> index 232e2b442a16..c1439977833e 100644
+>> --- a/tools/binman/btool/mkmbn.py
+>> +++ b/tools/binman/btool/mkmbn.py
+>> @@ -12,18 +12,13 @@ class Bintoolmkmbn(bintool.Bintool):
+>>       def __init__(self, name):
+>>           super().__init__(name, 'Generate MBN (signed ELF) image for
+>> U-Boot')
+>>         # pylint: disable=R0913
+>> -    def run(self, infile: str) -> CommandResult:
+>> +    def run(self, infile: str, outfile:  str) -> CommandResult:
+>>           """Run mkmbn.py
+>>           """
+>> -        args = [infile]
+>> +        args = ['-o', outfile, infile]
+>>           return self.run_cmd_result(*args, raise_on_error=False)
+>>     -    def get_path(self):
+>> -        path = super().get_path()
+>> -        return path
+>> -
+>> -
+>>       def fetch(self, _method):
+>>           return True
+>> diff --git a/tools/binman/etype/u_boot_mbn.py b/tools/binman/etype/
+>> u_boot_mbn.py
+>> index e470b31fa318..6268397fd122 100644
+>> --- a/tools/binman/etype/u_boot_mbn.py
+>> +++ b/tools/binman/etype/u_boot_mbn.py
+>> @@ -31,10 +31,11 @@ class Entry_u_boot_mbn(Entry_blob):
+>>       def __init__(self, section, etype, node):
+>>           super().__init__(section, etype, node)
+>>         def ObtainContents(self):
+>> -        self._pathname = tools.get_input_filename('u-boot.bin')
+>> -        res = self.mkmbn.run(self._pathname)
+>> +        pathname = tools.get_input_filename('u-boot.bin')
+>> +        self._pathname = tools.get_output_filename('u-boot.mbn')
+>> +        res = self.mkmbn.run(pathname, self._pathname)
+>>           if res is None:
+>>               self.Raise('mkmbn not found or failed!')
+>>           # Exit code 61 (ENODATA) indicates that an MBN file can't be
+>> built
+>>           # for this board. This is non-fatal since it may not be
+>> required.
+>> diff --git a/tools/binman/main.py b/tools/binman/main.py
+>> index fa5ad79ca0e8..bfd6e990d2e4 100755
+>> --- a/tools/binman/main.py
+>> +++ b/tools/binman/main.py
+>> @@ -102,9 +102,11 @@ def RunTestCoverage(toolpath, build_dir, args):
+>>                'tools/u_boot_pylib/*'],
+>>               build_dir, all_set, extra_args or None, args=args,
+>>               allow_failures=['tools/binman/btool/cst.py',
+>>                               'tools/binman/etype/nxp_imx8mcst.py',
+>> -                            'tools/binman/etype/nxp_imx8mimage.py'])
+>> +                            'tools/binman/etype/nxp_imx8mimage.py',
+>> +                            'tools/binman/etype/u_boot_mbn.py',
+>> +                            'tools/binman/btool/mkmbn.py'])
+>>     def RunBinman(args):
+>>       """Main entry point to binman once arguments are parsed
+>>   diff --git a/tools/binman/requirements.txt b/tools/binman/
+>> requirements.txt
+>> index 7db72e888e3e..51b8ecd73478 100644
+>> --- a/tools/binman/requirements.txt
+>> +++ b/tools/binman/requirements.txt
+>> @@ -3,4 +3,5 @@ importlib_resources==6.5.2
+>>   jsonschema==4.23.0
+>>   pycryptodomex==3.21.0
+>>   pyelftools==0.31
+>>   yamllint==1.35.1
+>> +cryptography==46.0.3 # for mkmbn
+>> diff --git a/tools/qcom/mkmbn/elf.py b/tools/qcom/mkmbn/elf.py
+>> index 86f12d1f4e5d..7737adc6a4e2 100644
+>> --- a/tools/qcom/mkmbn/elf.py
+>> +++ b/tools/qcom/mkmbn/elf.py
+>> @@ -171,11 +171,11 @@ def _align(i: int, alignment: int) -> int:
+>>   class Elf:
+>>       ehdr: Ehdr
+>>       phdrs: List[Phdr]
+>>   -    def __init__(self):
+>> -        self.ehdr = Ehdr()
+>> -        self.phdrs: List[Phdr] = []
+>> +    def __init__(self, ehdr: Ehdr | None = None, phdrs: List[Phdr] |
+>> None = None):
+>> +        self.ehdr = ehdr or Ehdr()
+>> +        self.phdrs: List[Phdr] = phdrs or []
+>>         def total_header_size(self):
+>>           return self.ehdr.e_phoff + len(self.phdrs) *
+>> self.ehdr.e_phentsize
+>>   
 > 
-> It's known to be fixed on RK3566/RK3568 and RK3588(S) (according to the
-> DTS setting the mkimage format for the SPI's idbloader.img to rksd
-> explicitly).
+> I understand all the changes.. except this last one.
 > 
-> Since I do not have any board with a bootable SPI flash except on RK3399
-> where this work-around is required, I simply invert the logic by having
-> rkspi explicitly set for all SoCs that didn't and remove rksd from SoCs
-> that did. It doesn't mean that the SoC actually requires rkspi format,
-> just that it's been the case until now (maybe because nobody tested).
+> Could you elaborate ?
+
+Ah yeah i missed that in the commit message. In ("tools: qcom: add
+mkmbn.py") we add the missing constructor for the Elf class but I forgot
+to add the parameters which are passed in when constructed with the
+parse() staticmethod, this fixes that. It should probably be a separate
+commit, I'll split it out.
+
+Kind regards,
 > 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->   arch/arm/dts/px30-u-boot.dtsi              | 12 ++++++++++++
->   arch/arm/dts/rk3036-u-boot.dtsi            | 13 +++++++++++++
->   arch/arm/dts/rk3066a-u-boot.dtsi           | 12 ++++++++++++
->   arch/arm/dts/rk3128-u-boot.dtsi            | 12 ++++++++++++
->   arch/arm/dts/rk3188-u-boot.dtsi            | 12 ++++++++++++
->   arch/arm/dts/rk322x-u-boot.dtsi            | 12 ++++++++++++
->   arch/arm/dts/rk3288-u-boot.dtsi            | 12 ++++++++++++
+> Thanks,
+> Neil
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Groups.io Links: You receive all messages sent to this group.
+> View/Reply Online (#2386): https://groups.io/g/u-boot-qcom/message/2386
+> Mute This Topic: https://groups.io/mt/115910537/8413174
+> Group Owner: u-boot-qcom+owner@groups.io
+> Unsubscribe: https://groups.io/g/u-boot-qcom/
+> leave/13197796/8413174/1557304080/xyzzy [casey.connolly@linaro.org]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+> 
 
-RK3288 is confirmed to need rkspi work-around to boot from SPI as the 
-Chromebooks Jerry and Speedy had build instructions to use rkspi.
+-- 
+// Casey (she/her)
 
->   arch/arm/dts/rk3308-u-boot.dtsi            | 12 ++++++++++++
->   arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 12 ++++++++++++
-
-RK3326 is confirmed to *not* need rkspi work-around to boot from SPI.
-Considering it's a lite version of PX30, I'm assuming the same can be 
-said for PX30 but since I cannot test it, I won't modify it.
-
-I'll send a further patch once this gets merged (or if there's a v2 for 
-this series) to make rksd the default format for SPI booting on RK3326.
-
-Don't hesitate to provide feedback for other Rockchip SoCs.
-
-Cheers,
-Quentin
