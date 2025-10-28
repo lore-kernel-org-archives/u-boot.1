@@ -4,86 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B85C2CCF9EA
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 23:04:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B294CCF9E5
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 00:05:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C9D68392C;
-	Tue, 28 Oct 2025 00:04:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 82B8483952;
+	Tue, 28 Oct 2025 01:04:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gigadevice.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kw6I2vtH";
+	dkim=pass (1024-bit key; unprotected) header.d=gigadevice.com header.i=@gigadevice.com header.b="KUDbwXF2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFE258392C; Tue, 28 Oct 2025 00:04:04 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 31CCE83968; Tue, 28 Oct 2025 01:04:57 +0100 (CET)
+Received: from OS8PR02CU002.outbound.protection.outlook.com
+ (mail-japanwestazlp170120003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c406::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B598780422
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 00:04:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3DE68391C
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 01:04:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=gigadevice.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-3c94deb7c7cso2871554fac.2
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 16:04:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761606241; x=1762211041; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=r5qILvffvKO+Ifu8e1hmIIZT48QreSih01ccshlf+BQ=;
- b=kw6I2vtH3vIWYg7VywVZCzo6zywc7K9BUCuBwZE2ZvN84xmdDHRVk6SukoLFtDC3yG
- eer/ONRCulK5782t7OkLYqxW5y06skwIFalZQREiuuuoYpIy+WZfLsBaku5ylUTsGZz2
- 39GssIL6ALhc/lIJnJ4Ma7uODbQeFrXHJdqEs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761606241; x=1762211041;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r5qILvffvKO+Ifu8e1hmIIZT48QreSih01ccshlf+BQ=;
- b=lC5jr6XHB1sMakLN35oswZm4a/AoJrAZzU3ly57pwVC80pGjTbSAJG4/H+HF8US/6z
- uCNKnfWGI3+g9tK1MrrbNNi9iGnMvduCvp32ofuQHQnTpPtuOzHNM2hazKTg32UGG4nD
- nhfrXhmC10yA/XXfOfUbZKcYQrp7btHZWB9OJqxLsc/IESXYeweeRF6pR2cgqJA8SfwG
- dWcYbRSr8RZRCkneLwR7HF7Xu1gJtx1O3WHLA7fDvtSKotgLhKGcgzia11ObCel5DWgl
- 78BMvPvVyWATe2B3rgPS958mFbxqgRTpXqd6WY1qoinjhmlRbHwzjbJ+QmVA7w47YJLI
- meTQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVWt+IT5w2TARBXROojwUCMtINvT1ODnIUdluslL2fQbgD5jMTCBhCR3B8p3tUCvDTXfQrlsz0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzthbEMfAGH5MKVce62yBJUiH4nRRMz01fRNViW9GflafF7cXE
- 4xgCN5Li2xu/uoki+B58hBeyG0mItKA48/CiXSfkNxs1XwHVfpyh+uqV7Yxwed+flshAqgmAkAL
- Ewtu929UTqq9z
-X-Gm-Gg: ASbGncsaTMo743/tpxzrQ2A+8oLuQPZknCiAwUvFpYgEmr26spPdbxiFTUWXq4nDmyz
- q5fjBc61e1AG69VaEPgSk9bFQifTR3AowLboQoC84W3pQHBUr6wrs5DLLxTADETTlUoUtugb/cu
- K7lX0tbWOJmJ0pt4NZfBqU9J2lXclGbAWWCPESUY8R9OMS1JrEKoPyjcYS5p91SR5iOyNYbCzoD
- GfjMdBpEQvgntiwmMMXszc3UBwYTixvBv9EVtFvFmTtlJMeBk6uNW/8PExwcFRig23gKpoj6pOI
- SbMiJt4/FR0ZUk2NXu/rSxKbtfEkg6Z9hOvqdOn7V1P6Tdo3JTCd/NqAIG6cDVdy7tlsJWu/NlX
- E6O7quCtvgrTIb1xbfZLjhQvx6/u37ZYVrEc/Er0BkfaeZ4KXLuFd4vxlY0r8pxV1/moOJuv74m
- HhLoBULlEhf5U6XUCt8EOjiyesn0IuOrJBt6rtbrbGIDcGUjyPHQ==
-X-Google-Smtp-Source: AGHT+IGooTObxPqpjLWmIH0FExiJ0ZQ8qT256+PU8FCdJj8g2R0eoO1rV5dkY8AzbN7wM6V6ljn0jQ==
-X-Received: by 2002:a05:6870:a11b:b0:3d2:ad7e:e2ff with SMTP id
- 586e51a60fabf-3d5d922cd06mr927374fac.25.1761606241406; 
- Mon, 27 Oct 2025 16:04:01 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3d1e3a618a9sm2968962fac.23.2025.10.27.16.04.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 16:04:00 -0700 (PDT)
-Date: Mon, 27 Oct 2025 17:03:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Walle <mwalle@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] common/spl: fix endless loop in spl_fit_append_fdt()
-Message-ID: <20251027230358.GD6688@bill-the-cat>
-References: <20251027110523.1105773-1-mwalle@kernel.org>
+ spf=pass smtp.mailfrom=vlim@gigadevice.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Fh/c0s5nndEH1ewKcrXun99bctDyGG6HSPuRDxUvew5ILrDgG8MnXiU9Fivdt3/ndDGL/B6q7V9SY9yN7WiOs7Dvlh5nwKjlyaHpNK9aEhJUT4xAXoTaLr79v0b3Wn3ecy+BQKkOxLBXHMvQQO0H4WRRAReii1nwmLoBHef1smBQisTrPlVhSL/kiPTZ0iF7y8nGkoiiX07kvoi/JydCWWG0bl/KHoHB64zX2Vs+kd8c3v1HuQKreal+fF2kxBmJkqJ2AK+XpsvDq1PKOCWID9kJeOsY8Pgp7xlifkUv24N4KMWN9y0b/5X7ne5EyCAMwCi0a+TnYOmIePjGURQaPQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RGkiDdxsEhK34MlPGnVa5Fj1VaDwvoUAN8dN00upWKw=;
+ b=J8KZOBZWde2kC1BinCRFmOLy77qgl3XY9454iFGvUfTyIMmn3ay4Skqvqx/Z2kM6eTosl0n8PeFLyP7ifSVfITck5IyE7WlK/0+iCngeAjS+Ds2CJ9cudAuS+ao9pc+nmWMIwbbUY42BWB2Bl381txJIS5l8M87pucbFVHF0WSe79AX+YOeEkFW8ekD3vTF3gXjKHlx/levCwcu+CjMJXOQ+Vj+YFLT9WAMLWEf4W5LWfgiUk20FZpxneVVnyUd5bypWRdDHktqs1Ypec2kAv48yWk9cLyHqTqevxC/uWfSmbncDDiwGmTsxDXNQB0pjhhOZ5OjLwUgUqSdI7Bjrrw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=gigadevice.com; dmarc=pass action=none
+ header.from=gigadevice.com; dkim=pass header.d=gigadevice.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gigadevice.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RGkiDdxsEhK34MlPGnVa5Fj1VaDwvoUAN8dN00upWKw=;
+ b=KUDbwXF2lZ/b/+yWYkpRC4yrDwcXnMv61dr3GmOr6S7haE+xfrQBJkxuxCYOeABGIceRRUwNEXZPF3+3zzsQZvjKRJWlQR3/DtVxiBgMimP6TZId2zxKUb4wuElWpgMVeknPGOHgiPASIF81gNXReCMyycfNntshZ2OMXEmI2ao=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=gigadevice.com;
+Received: from SI6PR06MB7813.apcprd06.prod.outlook.com (2603:1096:4:26f::11)
+ by SEZPR06MB5668.apcprd06.prod.outlook.com (2603:1096:101:9e::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.20; Tue, 28 Oct
+ 2025 00:04:48 +0000
+Received: from SI6PR06MB7813.apcprd06.prod.outlook.com
+ ([fe80::554d:309a:787d:e16]) by SI6PR06MB7813.apcprd06.prod.outlook.com
+ ([fe80::554d:309a:787d:e16%4]) with mapi id 15.20.9253.018; Tue, 28 Oct 2025
+ 00:04:47 +0000
+From: Victor <vlim@gigadevice.com>
+To: u-boot@lists.denx.de, git@amd.com, jagan@amarulasolutions.com,
+ vigneshr@ti.com, tudor.ambarus@linaro.org, trini@konsulko.com,
+ Takahiro.Kuwano@infineon.com, venkatesh.abbarapu@amd.com,
+ marek.vasut+renesas@mailbox.org, havish.mutya@amd.com
+Cc: vlim@gigadevice.com
+Subject: [PATCH V1 0/1] add new part numbers
+Date: Mon, 27 Oct 2025 17:04:25 -0700
+Message-Id: <20251028000426.90860-1-vlim@gigadevice.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: CH0PR04CA0021.namprd04.prod.outlook.com
+ (2603:10b6:610:76::26) To SI6PR06MB7813.apcprd06.prod.outlook.com
+ (2603:1096:4:26f::11)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Lik/3+N+VcuJHBjz"
-Content-Disposition: inline
-In-Reply-To: <20251027110523.1105773-1-mwalle@kernel.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SI6PR06MB7813:EE_|SEZPR06MB5668:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6dd87c10-ed24-4103-a101-08de15b59b62
+X-LD-Processed: f84ba339-959c-4ab1-9b67-1e43414f945e,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|7416014|376014|366016|1800799024|10070799003|921020; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?pUO90Hi8lumIfcJ38o9NPOFfoO1mAEplPhTW3mxpJ+CceNVIRWS9NRCPsuCQ?=
+ =?us-ascii?Q?fHJRWOZC78MTcSK3TamEjZ5a/+hzGq2R2m8aplzkRiArQeXVJuQpSxLOkAPn?=
+ =?us-ascii?Q?YWUQ9SWkoeBpQMAgAZ62xC9EP/VWk2Mi6K9UZzxKuOBbH9tHB/wmeXtMojPS?=
+ =?us-ascii?Q?yxi/1t/aGUe5niKL61uyPO091lDfxG8n7K6LDEd55ucPH81Sa5ytrORugQPF?=
+ =?us-ascii?Q?fcxqbPfR19OrK0H/PiBGdefNtFt3kFY63W5NtAyR9kccobnZUQ3AUN6iWDBO?=
+ =?us-ascii?Q?7difdgyIqi7i4KZGYrCo8jGqZMDw87AwDhk+abSbmMx/VFLy/1IgXf1eBUzA?=
+ =?us-ascii?Q?zKlQmzlbDImLeEC+o7QYycY6MT264+gGq/2LKzTKCM40W5bJKZ28XcPlgEhv?=
+ =?us-ascii?Q?lZsJzWNzBifb8HwQoIKw0Cc2Bs0O7aYghOQkt2AyxPxRPhaV1qeBUmnxMIRF?=
+ =?us-ascii?Q?8sSEIVB4qKf+M0N6cXu+RooSdkWtg/VwxGJytL4tLEJYFDtXCvvRvJ+ocGG+?=
+ =?us-ascii?Q?z+T7cLEyj4iUuD3l+Eo3nfULwLU9kNIHmy0I+6gWQzM7Qtu+Ku5f3Y2S5cPD?=
+ =?us-ascii?Q?BeF39UODFcB4Y4M6B5tHsItFGQWaWthrmqXeUq1wzjZIGi4aXy4hdQ/OWGht?=
+ =?us-ascii?Q?VvLuBKIiRv3IHOBvFTROPYgT+A578NfTvzWt/6BtUYS9QgQUhaW26UUqxsNw?=
+ =?us-ascii?Q?GQt82t7Rc1VMmZ8t5bzcdq12F3C/jkAx5xX6cb1BghLsjpQk5Tv+iHjvpHP1?=
+ =?us-ascii?Q?mA3izMXA56exXK2Gc2JHKXA9yTQ2+6Cpn0btR36Wz7wd2riGFGl+AfyJAHYE?=
+ =?us-ascii?Q?A5LuzcmIsfpPYoWxASDcBj408L5ZrPSjfzh0zal1/JQPxnNdXal1xh18sTbs?=
+ =?us-ascii?Q?E/r3nJdIZC1r/3SYkz1D+KMkpmo4EI1W89NUFN7I2lc3a7LhObOb8b6l/vaB?=
+ =?us-ascii?Q?f9J0x8+WuKrOVPRm8iEBxr+vyq0nZ/FXUj4SEnoOdtgmZabsuv8YygSetTP2?=
+ =?us-ascii?Q?i9g0lDcwPfg/Ddfu1nexbDDPyjv0KgVqhbUFMbGUpNfBEdX1jwSB5Mig6X0I?=
+ =?us-ascii?Q?UlXMONACglAwuIJ1WwSOsQ4/teQG9qx751DZGUVpHHMOXvtjnNRBk2FHseGQ?=
+ =?us-ascii?Q?IfktHzSC4ILCZLfNgojiUgZjWr9+dfE7aEVRmiQ3LjrL8f6XR01ExLofSCIa?=
+ =?us-ascii?Q?UYH108WLJiSibe49W1PVJpgSHvVSqgcIpBsC37K5fKQgFYRmZxq6x/Cc+nJz?=
+ =?us-ascii?Q?YYFKNvLP1+P96IihvH8HLTqLWSC1APaDULyG6MYpxt9fuoDAHeiJVAuQJpqL?=
+ =?us-ascii?Q?06JOnGuM46jf18bVE1ONU3PQU0s80yK35On473xTkJwAA/2VAagXoRNufgM9?=
+ =?us-ascii?Q?MAFLhPyHQLToUMnQk1sQNHHtLQAmY+iE/7t6o8lzqRhJWay9XtT82h1yMJkf?=
+ =?us-ascii?Q?zfmR83lBhJi/rMQuyXEu1BcO9IL+IMZYipU4xIQSd4mBk9FGgD6y4//VhRQo?=
+ =?us-ascii?Q?TziFiParSLZXCA4=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SI6PR06MB7813.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(7416014)(376014)(366016)(1800799024)(10070799003)(921020);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EPR/jrcPAR6x7/fCia/LvGu0aJFgeg/9ZbHFgG8ztunLAcBbw/O6aGOY1kRe?=
+ =?us-ascii?Q?ORalxx8zYMvIYs4WP6IBlmX47JmkggdIwvyN7SFpWtujperx90yFgj90AXre?=
+ =?us-ascii?Q?x7NBik7F1dft4TgOkGp1uhxrhZXcGvX4NlkFUshNvN3AcF/YvOUjYXseqn18?=
+ =?us-ascii?Q?9r+D7tOfp1/fKdFMP+bUyx4kYpkrliS3usEDa2ZmMOCkZZCNJfrumOUc6tmB?=
+ =?us-ascii?Q?I658DWF171WmlzPdFuQTvy4/h8OimRjFLcEnr8KGKI5R0Nmqd4BOLpjA70yD?=
+ =?us-ascii?Q?EfWiwehUy8SbarsCZpM0COhmLMYVE+2gOfGHS6wSmjAdn/qJOP329f/+DZh6?=
+ =?us-ascii?Q?1sNtsj4MjkfTszM4iMbW+4hHnEyQ2yx3pj7A96gQXXfSINrCEn8rVGObigLQ?=
+ =?us-ascii?Q?p8Yoy/uGqZ72BZeF1pMbuIi91MtE03dImRkZwa0c072oDUUNgFn0dbjRFRYE?=
+ =?us-ascii?Q?S8fu/rCDF9DHux8T75Fc5M3jI0piPVnfcYCngy0XhSYhoTIOWBiNGgs5cQc4?=
+ =?us-ascii?Q?wcVpHWGWQFgtQOnu9OyofrnfcscsrbC7zCfuEP1yBn16KwYRUa5w/N45J9iI?=
+ =?us-ascii?Q?olZiFxdP1h5PsSj8LFSVIAWsFMV2hXMUzU4/g5fBU9dDPGWCUFEXwINRCXUe?=
+ =?us-ascii?Q?5LtecgMBoE5KQjRbqgh+G4mnAtpTKX1ZXtlzaObmkDorsOr1Y7lDs/jpF1+T?=
+ =?us-ascii?Q?I1wa+oxhwUVW0LSvoG2IwfD3Rsef4cfVSzHwekcJUvLoCjMsZWxTjfpsSk0V?=
+ =?us-ascii?Q?3XIoYbAXWtVFzHUQM7R4hepuPAiDV1yC4ddjQ9pvefo6UNrDm89VhCEj50h0?=
+ =?us-ascii?Q?fZ4FDQbRHjQWVnjg3g/V814XErn1VSePPlNKklW+7V2t0IlrKBN50gYnKCpk?=
+ =?us-ascii?Q?HQALrBVPvmHzRpjq4lw0+MR1RvWSElMXqOyLp9aW2MCCx2M3g/7t7HHfK3Vf?=
+ =?us-ascii?Q?qNYadHHCZcB3RkxL6EJFnqSsbKQ+KbBg+qigSqF4BMAcw5gvbA4tQFEv8Agr?=
+ =?us-ascii?Q?TPxld/EkUhK4U/We+5/pjGN/JNGGyhqq2dA5VaHJHgQPdz7A5hNWAYrePje9?=
+ =?us-ascii?Q?e4druToLx9ctcxUhWSyEE5R7lLk45DP1pnMdxO+fBfRhTZzq+qrTMyuNEdyr?=
+ =?us-ascii?Q?0cDpBlj6Y3FdHhUOdJ/QJ9GwXdILKAWF6TNwrRji/obSL9kCbfPlNIFaZQCp?=
+ =?us-ascii?Q?UmS3JozZR6qp89x27wbv/ntgbzsXfI/lEjhCqUPioJaQh3Qegn3DkzLyIKev?=
+ =?us-ascii?Q?wxHLxmM+XoOfX0WaljAQmiJuqWmieNysaHQehhvR+oqgFV3AX1k5IStGGfYJ?=
+ =?us-ascii?Q?eSaQafukFXUCpa0rtPC7xJt9xhDd8yjoQdw5A7iPv/3tAX8/AajCNtlrtM7H?=
+ =?us-ascii?Q?V+h2viNEPja2Kzt4wIV9eLgNtmMKvAZFC6WXBOepOdvCVjJ/jBwVvjqm3b6L?=
+ =?us-ascii?Q?HMAYnCslDseKwj94l37c0uI6FZxW1VSEkWW7RXlo9JfJADU5237O+0NW69JW?=
+ =?us-ascii?Q?BxWQKxrsAugdgVM6ThEjLiwFU5ZGBcW8EwXyrQu1hLU4uwAM14OX8BeZBiPM?=
+ =?us-ascii?Q?JERiaH3LuatyZsdHbay/y+aQRtpDXX24vM6yd5376P2qjeiF0R3tdX6yBMNs?=
+ =?us-ascii?Q?QguSu7BAwRgQBDzEqrI9J+PtKu6aWkXsDOKGHdIKMfcS?=
+X-OriginatorOrg: gigadevice.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6dd87c10-ed24-4103-a101-08de15b59b62
+X-MS-Exchange-CrossTenant-AuthSource: SI6PR06MB7813.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2025 00:04:47.6852 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f84ba339-959c-4ab1-9b67-1e43414f945e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: gxpSndqgH+HeiZ6r3irkfMVsFiswnRN41gWCiRDQ71W9rfuIaNw2psxwbZb/tO5SgRSov/MtASampH8pJt7t+w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR06MB5668
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,53 +162,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+GD25B512: ID C8401A, 3V 512Mbit
+https://download.gigadevice.com/Datasheet/DS-00649-GD25B512ME-Rev1.6.pdf
 
---Lik/3+N+VcuJHBjz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+GD55B01G: ID C8401B, 3V 1Gbit
+https://download.gigadevice.com/Datasheet/DS-00979-GD55B01GF-Rev1.1.pdf
 
-On Mon, Oct 27, 2025 at 12:05:21PM +0100, Michael Walle wrote:
+GD55B02G: ID C8401C, 3V 2Gbit
+https://download.gigadevice.com/Datasheet/DS-00980-GD55B02GF-Rev1.2.pdf
 
-> Technically, commit 24bf44cf88e7 ("spl: fit: Do not fail immediately if
-> an overlay is not available") introduced that regression as the code
-> will never advance if spl_fit_get_image_name() will return an error. But
-> at that time, spl_fit_get_image_node() was used in spl_fit_append_fdt()
-> which calls fdt_subnode_offset() to get the image node. And I presume
-> the commit was about the latter failing gracefully and trying the next
-> one.
->=20
-> But with commit b13eaf3bb4e6 ("spl: fit: Add board level function to
-> decide application of DTO") that behavior changed and the loop in
-> spl_fit_append_fdt() no longer uses spl_fit_get_image_node() but
-> spl_fit_get_image_name() directly. Thus it doesn't make any sense to not
-> break the loop if that fails.
->=20
-> Also, the original use case of commit 24bf44cf88e7 ("spl: fit: Do not
-> fail immediately if an overlay is not available") is preserved because
-> spl_subnode_offset() is now called within the loop and errors are
-> handled gracefully (and advancing the index).
->=20
-> Fixes: b13eaf3bb4e6 ("spl: fit: Add board level function to decide applic=
-ation of DTO")
-> Signed-off-by: Michael Walle <mwalle@kernel.org>
+GD55F01G: ID C8431B, 3V 1Gbit high performance
+I can send the datasheet via email
 
-Thanks for explaining what's going on in such detail.
+GD55F02G: ID C8431C, 3V 2Gbit high performance
+I can send the datasheet via email.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+These parts are tested on Digilent Atry Z7 board and Xilinx Vitis.
 
---=20
-Tom
+Victor (1):
+  mtd/spi: add new part numbers
 
---Lik/3+N+VcuJHBjz
-Content-Type: application/pgp-signature; name="signature.asc"
+ drivers/mtd/spi/spi-nor-ids.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.34.1
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaP/6XgAKCRAr4qD1Cr/k
-CtZQAQDXk7NLTw913edaGj7JgI6exCCLQQHdzMWsAwzoK4REagEAwW2rIf3Nyzpa
-oQNVOm/BM7BuWQJS+dEvF86BC/cAEQE=
-=Z66s
------END PGP SIGNATURE-----
-
---Lik/3+N+VcuJHBjz--
