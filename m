@@ -4,92 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A420CCD1BF
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 15:36:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F9BFCCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 15:37:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E629E832AD;
-	Tue, 28 Oct 2025 16:36:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BCA9836C8;
+	Tue, 28 Oct 2025 16:37:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VgR1PUE1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iA7xWOET";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A54480422; Tue, 28 Oct 2025 16:36:48 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 8190182E34; Tue, 28 Oct 2025 16:10:22 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C46D80422
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 16:36:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FD2080422
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 16:10:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-44db11c7ed6so1506316b6e.2
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 08:36:46 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4770e7062b5so20486955e9.2
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 08:10:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761665805; x=1762270605; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=L28LzwirpyRzMzW6QQPt8r6nQJ4jsdVR/B5JYnlQ+hY=;
- b=VgR1PUE1vfHI/ya+e0v4QzoLj5D+9tgshR6mgG5kOuQz5i2by7iDB7U+RBUdGtnYHi
- CfE1YG5usX7SenGz7n/t2tT7QLs3tYfHdP3LqNpEIhaQ7e5Decq4P3DffY4TiXHyfAOS
- RoFhvCt+aGi/CH8d3QzWRS1qolILdLiCZSrbI=
+ d=gmail.com; s=20230601; t=1761664219; x=1762269019; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=e0uLDvhnRCy4O50PX5dh/FX3PhkFOuqHj4dkwIIH3uo=;
+ b=iA7xWOETdEpOOF+A65PaVkBp6EcIpeN0OvkipyoANcJOS5BGY4uiw0LbH22zMulYgg
+ USnxe2rojlw5lJF7uQMf3WYpScOWIs3IDU2cBr1CJ85WlLP7j79QQ87zJNyZ7hfqFIG1
+ g9zL7Hy4ox/GpbpKzsTIRtaJcxJVW1MPuhL8VolKt6Z75EK+x3W1yVoqO5kgIln+LyPm
+ nccockVevrBuCrquUatZwjw1kuIWprgH7CaqbRX2uphb6j5jumJIv5386u76EV4COCR5
+ Q8zKQtlAJEbqf04ym9CUZJMZfBBYD/B3XptcIuJN5Jurlm0vhIHyxJsBpugwKCkD93/w
+ D2sQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761665805; x=1762270605;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L28LzwirpyRzMzW6QQPt8r6nQJ4jsdVR/B5JYnlQ+hY=;
- b=UD15P4u5xZ1byoEPRrqDosEownSSK1BeCxgWjQm28ZG7uxAro6BsukMAR0iCwJ650H
- uU6rnFT37GQJ0MNCYvKSOj8USFQuL1UpWgww89ve0897WTyuYJaUpIjpD0p8baqC1+vc
- KPS14VnmaemuLByZBqr0KxDj0ZOmB7/BkE7IYEjlWRCr8DwF8uKj0enrXYsFxEOOfa+j
- L5WNfbrojJJjNQ8SnXVtz2pVNO4UjDN3vO9dIt4kdNbD5gj83bIGzPNzVHARzMU2BY0n
- iK9ngytt1JH2M1qgQSo9OQ0nylR/OVQC3P5fKSDYDuM2Yo6mqu5kw0vQXMVFtQ70ds7z
- SO7w==
+ d=1e100.net; s=20230601; t=1761664219; x=1762269019;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=e0uLDvhnRCy4O50PX5dh/FX3PhkFOuqHj4dkwIIH3uo=;
+ b=TAFKrZo/OrroJ+wr0GLa23Ks8Hi3FLOgRBnhDEz7MFJ0sqs9z4dE0yF3aEch7gxjIq
+ QzDNEa2DnEoWz1TBnGiTMEswxwqeMSYZ0ktmOzOKw/xUn0pMbsf5VAjbJPsM2clCD1u+
+ 4Jp5SQ8QNT14lYId2R0631peJhMsYHCDk5+be66y7AS6yBJYfcE75ovT9iqkoOA/HVLd
+ XgHw4XWpCj/HspOqIO0AFY/HGA7Mzq29b1+tInzf+qiXG7btW3DFoJc6odfIE4rNZsU7
+ 1ULTbODGBXBShZPKdU7eedqJLpnRZNdBrMs5m2diNRtOOChkYvvk2VhiMyFVwKgtHjEO
+ 9V2A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUzlLv+uBdf/NfkDli0FKiA1nVQx+T0ZqlnM6mcbsG+ZiXXo0W7N2cNyM+HFpONvHoe3HkjzyY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyS6DTv3eSy3W02PjB5K80MexKHBQegxtO2Yibo9acTtKhbVn6o
- VJt6tyJ+ZT6HmGSluCH1u8Ck52tVpspX2DPEAnDuAbjLLr4y6ne50/EyUtxRqk84Yr8=
-X-Gm-Gg: ASbGncuAViKk5SjfEwo0czVE0d+L/ocYnOFIsc57QNB44i9SNPuGE7spR01sZu9WaAC
- W0PSDVMOKFci9tcddmB/k8Wz8Uvckj4+B2IxeHOw/WeiUIz4+XyIUYpv7DqoebzxXzzxyI7XFN9
- jFbXDu6XVP6WiAfSR4XRotU6jvXHCdSR8rOTltYRfuF/AIsP1nJG9H/NjZMoBF4qnQ4KyPJPW3Z
- IuVOGykcyW2Io/lzKcA7vzr2Oxu2R7/SvJqwuMQrFF1VtfYZw0fBqz9RbcmjbDI3NQSZfC9f54B
- hcxbS00eFLxbnmGrH8hLi2lGKliSIvNY2kioNNMlihOZSvEIYOpFgLo9R6SDJUJ4MlLtFaJdkVd
- p5DEA21WrGUu2Qnb5ppp3tBOBgoWlEVh78RscNV94WFMhu/y++NYOsZ7OJecdNa36mG3Qqcw+wp
- Xv5NiKpI4QaWUEFfT5svk4ecWCug97gFH+4dcWcAc=
-X-Google-Smtp-Source: AGHT+IFeXxL9cr0ucFDsAuJJJFc0rBqGGnEJ4uauMPggMHAkKhbNFdl1ymYNl0Yu7USVVesawQ8/RQ==
-X-Received: by 2002:a05:6808:6f94:b0:43f:b74b:ac43 with SMTP id
- 5614622812f47-44f6b9fac4emr1780309b6e.27.1761665804644; 
- Tue, 28 Oct 2025 08:36:44 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44da3e59a15sm2664185b6e.8.2025.10.28.08.36.42
+ AJvYcCXnBxLvZphbw23RospwbNRs8s9mrheqXYW7CtBpzcKxvsxDYO1RkHzmQLkxIetRxXaHpiFeYWc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxxheH/rmhFhOAeiXTCt6waqj3dcZ38e3z1ppm8SxLESbyHYgTo
+ qHwJl8OiN158FglHlRs5k9qB8zcZkbr+ZWr+3cp5Wl7qKLV+SP7JlfmI
+X-Gm-Gg: ASbGncu2gzunPhljKy4LGwWTe4i6BxcqGBfbDfRaTcPZ9r2KkUSXrChXle1Bu/OtM/c
+ ditHOxZsp22DPbU+abI2fKls7AOcl2zRbltkCoHdoeJA9y8eqFeRiL3ZsT1pww4FRIjAFNW+eoy
+ AhWKaH5GTGkHPtYeGnYlUO0zN/9RB+vpinVveg8O2DyVs9fsNcN5Z4xO8FjdiLSP0kPuD7WY4h5
+ w7m6GS+ZnzXoBtcFJis7KOhNpZf2667wVr0HS0Q6SmDMPH2Jr6UqqbX6oZTc31bsn/vHn/HdTGQ
+ h3wlR1YU/KhlHhZq/j/NQXU8xG8NTo9Zk2Fq8rvqsdYNDOVKDQ6uJ5g/OlrSDYepWyaVmIWse74
+ nv0WiMroWiYPyDFyaPq98Fz+HV4msiTOE4hRbGtkDdRPZvVO0MPd5IUBkO0+XYD011Qnz7dJ+Tq
+ gVEC0A43yHghLNPngoSKEEIbROZz8=
+X-Google-Smtp-Source: AGHT+IGd6P8XGYcHIe89hFdKJTMFyuxQioOeAyBdUTttGSz2U7OudYSizh7O3k0UY6Smlh5TqsWGJw==
+X-Received: by 2002:a05:600c:470b:b0:46e:32a5:bd8d with SMTP id
+ 5b1f17b1804b1-47717df9dc0mr38969895e9.3.1761664219113; 
+ Tue, 28 Oct 2025 08:10:19 -0700 (PDT)
+Received: from vitor-nb (bl19-170-125.dsl.telepac.pt. [2.80.170.125])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-475dd4783b8sm201193315e9.15.2025.10.28.08.10.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Oct 2025 08:36:43 -0700 (PDT)
-Date: Tue, 28 Oct 2025 09:36:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sam Edwards <cfsworks@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 1/2] ARM: bootm: Add support for starting Linux
- through OpTee-OS on ARMv7a
-Message-ID: <20251028153641.GA833321@bill-the-cat>
-References: <20250630000832.952206-1-marek.vasut@mailbox.org>
- <97DFDFA0-80F7-462B-B2A9-BDBAD42A191A@gmx.de>
- <20250630194711.GA523899@bill-the-cat>
- <9c9317eb-7d14-40c8-9955-c69a6a5a3bcb@mailbox.org>
+ Tue, 28 Oct 2025 08:10:17 -0700 (PDT)
+From: Vitor Soares <ivitro@gmail.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de,
+ ivitro@gmail.com
+Subject: [PATCH v1] toradex: verdin-am62: sync rm-cfg with SDK 11.01.05.03
+ baseline
+Date: Tue, 28 Oct 2025 15:10:11 +0000
+Message-ID: <20251028151012.126588-1-ivitro@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UruqfM7Wrhr/TBto"
-Content-Disposition: inline
-In-Reply-To: <9c9317eb-7d14-40c8-9955-c69a6a5a3bcb@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 28 Oct 2025 16:37:10 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,68 +100,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Vitor Soares <vitor.soares@toradex.com>
 
---UruqfM7Wrhr/TBto
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Update the resource management configuration (rm-cfg.yaml) to align
+with the default configuration provided in TI's AM62xx Processor SDK
+Linux version 11.01.05.03, generated using the K3 Resource Partitioning
+Tool.
 
-On Tue, Oct 28, 2025 at 04:11:38PM +0100, Marek Vasut wrote:
-> On 6/30/25 9:47 PM, Tom Rini wrote:
-> > On Mon, Jun 30, 2025 at 07:18:33AM +0200, Heinrich Schuchardt wrote:
-> > > Am 30. Juni 2025 02:08:05 MESZ schrieb Marek Vasut <marek.vasut@mailb=
-ox.org>:
-> > > > Add support for jumping to Linux kernel through OpTee-OS on ARMv7a.
-> > > > This is only supported if U-Boot runs in PL1 secure. This change ad=
-ds
-> > > > two components, one is fitImage OpTee-OS loadable handler, which ma=
-kes
-> > > > a note of OpTee-OS being loaded and stores the load address for lat=
-er
-> > > > jump to it. The second part is the actual jump to Linux through OpT=
-ee-OS.
-> > > > The jump through OpTee-OS requires set up of multiple CPU registers=
-, r1
-> > > > and r2 are passed through, r0 and r3 have to be set to 0, lr is set=
- to
-> > > > Linux kernel entry point. This setup is done by new assembler funct=
-ion
-> > > > boot_jump_linux_via_optee().
-> > > >=20
-> > > > The boot_jump_linux_via_optee() also includes STM32MP13xx late TZC
-> > > > configuration write, this cannot be moved easily, hence the ifdef.
-> > >=20
-> > > Hello Marek,
-> > >=20
-> > > Could you, please, add a documentation change to the series. This wou=
-ld allow reviewers to test your proposal.
-> > >=20
-> > > Furthermore, please, provide tests on QEMU.
-> >=20
-> > Documentation is good, also wiring up this use case for testing in CI
-> > via QEMU is a rather large ask. We're still on needing a general boot OS
-> > test or two in CI (and Ilias noted either on a call or IRC, I forget
-> > now, that there's been some progress on making up a small enough generic
-> > OS image to work from).
-> I would really like these two patches to land, it is the remaining piece I
-> need to make STM32MP13xx usable with pure U-Boot. How can we proceed here=
- ?
+This matches the configuration from board/ti/am62x/rm-cfg.yaml and the
+notable change is the sharing of MCU GPIO interrupts between DM R5 and
+A53 cores, and reservation of an additional virtual interrupt and event
+for TIFS usage.
 
-There was some minor rewording requested, and adding documentation is
-also good. We can't reasonably add CI testing here at this time, yes?
+Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+---
+ board/toradex/verdin-am62/rm-cfg.yaml | 26 +++++++++++++++++++-------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
---=20
-Tom
+diff --git a/board/toradex/verdin-am62/rm-cfg.yaml b/board/toradex/verdin-am62/rm-cfg.yaml
+index e4221f82f924..ea5f2423cf3d 100644
+--- a/board/toradex/verdin-am62/rm-cfg.yaml
++++ b/board/toradex/verdin-am62/rm-cfg.yaml
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0+
+-# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++# Copyright (C) 2022-2025 Texas Instruments Incorporated - https://www.ti.com/
+ #
+-# Resource management configuration for AM62
++# Resource management configuration for AM62X
+ #
+ 
+ ---
+@@ -244,7 +244,7 @@ rm-cfg:
+             subhdr:
+                 magic: 0x7B25
+                 size: 8
+-            resasg_entries_size: 960
++            resasg_entries_size: 976
+             reserved: 0
+     resasg_entries:
+         -
+@@ -285,10 +285,22 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 0
+-            num_resource: 4
++            num_resource: 2
+             type: 320
+             host_id: 12
+             reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 320
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 320
++            host_id: 36
++            reserved: 0
+         -
+             start_resource: 4
+             num_resource: 4
+@@ -501,13 +513,13 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 44
+-            num_resource: 36
++            num_resource: 35
+             type: 1802
+             host_id: 35
+             reserved: 0
+         -
+             start_resource: 44
+-            num_resource: 36
++            num_resource: 35
+             type: 1802
+             host_id: 36
+             reserved: 0
+@@ -543,7 +555,7 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 909
+-            num_resource: 627
++            num_resource: 626
+             type: 1805
+             host_id: 128
+             reserved: 0
+-- 
+2.51.0
 
---UruqfM7Wrhr/TBto
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQDjBQAKCRAr4qD1Cr/k
-CiWZAQCIPqzJ0eKlWuPXbRUFqm674RRiX1ZXlaJ9GE6p4+LhKwEAh7GUXCF/Vf2h
-2mQdhjWC7PkZBG1X+erW/FtD0LWlvQo=
-=ABfN
------END PGP SIGNATURE-----
-
---UruqfM7Wrhr/TBto--
