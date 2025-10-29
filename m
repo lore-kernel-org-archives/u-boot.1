@@ -4,84 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F90ECCF9EA
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 00:00:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AE33CCD1BF
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 01:07:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB43B8382E;
-	Wed, 29 Oct 2025 01:00:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E61C82A9E;
+	Wed, 29 Oct 2025 02:07:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NFn6Vle6";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rm6zduXB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3B9183826; Wed, 29 Oct 2025 01:00:34 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 52EFE832AD; Wed, 29 Oct 2025 02:07:14 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D741D80422
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 01:00:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B48080422
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 02:07:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-3c972dec6easo4440551fac.3
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 17:00:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761696030; x=1762300830; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GtHsGAvSLWJn4UAA2ClKllv7SHmLUK4uRP/aNrdBcm8=;
- b=NFn6Vle6mT2g+h7mba2xd187OCib5EcFHPtzyDt1thBhtUJiKFVd6iTxpLs6/fIXKj
- h51lxM81XnsCBDkhK6VbqivkDMIbmR+DRbnZRcK6DoYDGystQYDyGs9gkg3D8Fv/ajQc
- UwI67oTrZmWKviaWSSWcktlg6G63sTZrCKCFQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761696030; x=1762300830;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GtHsGAvSLWJn4UAA2ClKllv7SHmLUK4uRP/aNrdBcm8=;
- b=KALiXluNDFjnrPZ1pp0pq5wU7kigigmca+4fS7sEak3IH3Va8qEeoAGLFuvaO0uOw3
- 9sbO+0g/BbXTHX0lGM7kqfIpZpdnfZU1DIS1Z10EuNbN8vhCf+GIGzaP3lU9kiUhD+qe
- ttP+tdjItrDR5iK80rTHoUuHyG1+2boZbIbPpU8ooO0PMzkJgbkLPvis3dAkeWU0v1Xy
- AW+QFCAc8O44qqYiKAriL7FKRqUMddxZbe40Wt3tP2voY+CVK1eGsWx/BPWp3ltlsZGP
- 7dZl7DunfewqlOpYSewoa3DNkF7vzq3p6OTzVLnYKTM573JeE8o5F7QFpPY3LcovAm4O
- kKKg==
-X-Gm-Message-State: AOJu0YwtFhFWPRjPUP+ikTF98Rx8CVKYpyK+WijtW86vQKSzFrg1ASAD
- zx3SSTU13X6pD7WRW6eQ4c1X1558EyDDwM1t0JQFC5SgbkvjyIRFUyjpgbI5IDUwkUFoobKSFdy
- sSziTy18Q5Q==
-X-Gm-Gg: ASbGncukFHo0pjztJAOwH0WfXP+XvWF9z4obDNbN36UBQXHWSMe6Hte6oMIPOYU47X+
- V6CtUNmKOcueRHrCypqo4QZTjmVyYZjXFa7r8H+q54i2AWyCwN6+rDEfj4ezHYqxxRmP1VjgWDm
- Z/8YKxBtaJYg5MKVGbRe7qJrUPI/+ZhlSiky7gFgysxK872hAJPmMKd84A2y4Nc/GQFL7BdYdbY
- B2nLMzKhq6QTF843olD6JGBicAvJpbwVyhIh5LDzhOkrGvIqYsKklTu7tzU9F9K+1PliKDhMM70
- +3CdRcOMXK/VCe0i4VxrcVxveZhiSK0wSK1lhv4AWcE7OW1Ay0z485l0sD6Box7olnqkLl8hOos
- L6nmvR1wYp258ykjHDSyAmAIVqGYInboiKyHnkvBzCTf+0ZjtwT1azDMeXpBj567kyN0H/uBjMK
- 83ABuDKskKxaTahdRINxRHDg07C5CUJmSWNyJCJez5bcR5yRG4rA==
-X-Google-Smtp-Source: AGHT+IEolw1oizo3Hc3YO0A9L9oS0wTYoPDjZBFSijw1apBvcOEToAGbhSrEbKuwOIAvNnvPho2R6Q==
-X-Received: by 2002:a05:6870:8132:b0:3d4:4c81:df37 with SMTP id
- 586e51a60fabf-3d7432e3bbdmr756519fac.0.1761696030565; 
- Tue, 28 Oct 2025 17:00:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3d1e2816dfasm4087887fac.8.2025.10.28.17.00.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Oct 2025 17:00:29 -0700 (PDT)
-Date: Tue, 28 Oct 2025 18:00:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Subject: Re: [PATCH 2/2] spi: altera_spi: Add missing <time.h> to altera_spi.c
-Message-ID: <20251029000028.GJ6688@bill-the-cat>
-References: <20250804215719.1413106-1-trini@konsulko.com>
- <20250804215719.1413106-9-trini@konsulko.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cx8Gj2WRNz9sWs;
+ Wed, 29 Oct 2025 02:07:09 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761700029;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uGPH4AOyB69k7u2+dnq772TocAcEQdi/+6pppWRQgyY=;
+ b=rm6zduXBbLHpqbQwbOQlU/M01BiRswCWNQzCzVF4NwPdcU86bFUBXLe2uj99ejyDw7Ogmm
+ f1oWbHXPpf2nhFDAOpJmyqJ3adb5YJVObSIlodypcDvLzdQs63xxjTodCKTLygcxouKu7B
+ m3r4gnpcw/OmyeS2AoJYOkr8cdWuop+R2Z1sHvDT90QYUWCyQAw+2s5C2yoIAHkterAz16
+ /ea+AfYm0y7SPxVeZYETLnqvXD8y2vJw8LICMUKc4PunFbj/K2elO4VHZMTCpoWc9OZBoy
+ VAwO2wlotRjTYFu54Q4COOyA0uxtwO1/ohWmvvt3J+S1NCUequK1iiysseyxGA==
+Message-ID: <1f163d6d-bd46-4dcf-afa3-2cc246461bfe@mailbox.org>
+Date: Wed, 29 Oct 2025 02:07:06 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="weQ3jb7EOg5UPFdf"
-Content-Disposition: inline
-In-Reply-To: <20250804215719.1413106-9-trini@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] mtd: spi-nor-ids: Reformat the table
+To: Vlim <vlim@gigadevice.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Tom Rini
+ <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vignesh R <vigneshr@ti.com>, "havish.mutya" <havish.mutya@amd.com>
+References: <20251028004729.119349-1-marek.vasut+renesas@mailbox.org>
+ <SI6PR06MB7813347A75CE48B5924DF36EBBFDA@SI6PR06MB7813.apcprd06.prod.outlook.com>
+ <20ee9a4e-9d66-4507-9c88-6efacef85297@mailbox.org>
+ <SI6PR06MB7813BEE2045C178C32397BCABBFDA@SI6PR06MB7813.apcprd06.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <SI6PR06MB7813BEE2045C178C32397BCABBFDA@SI6PR06MB7813.apcprd06.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: t7c4byp7p3kkdsji3qmgfzqr81dch5u7
+X-MBO-RS-ID: 8b6d8b8dd02c5a52e37
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,33 +81,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/28/25 9:33 PM, Vlim wrote:
+> Hi, Marek,
 
---weQ3jb7EOg5UPFdf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello Vlim,
 
-On Mon, Aug 04, 2025 at 03:57:18PM -0600, Tom Rini wrote:
+>    1.
+> reformat the table to follow this format.
+> 
+>       {
+>             INFO("gd25q32", 0xc84016, 0, 64 * 1024,  64,
+>                   SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+>                   SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+>       },
 
-> This driver references the get_timer macro while relying on an
-> indirection inclusion of <time.h>. Add the missing include directly.
->=20
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+Why this way ? Does it bring any improvement, aside from being less 
+concise ?
 
-Applied to u-boot/master, thanks!
+>    1.
+> Re-arrange the order of the table based on the ID, so that I can group the part #s by product family.
 
---=20
-Tom
+Sure. I'll just wait for the maintainer and whichever patch they pick 
+first, the other will be rebased and resent.
 
---weQ3jb7EOg5UPFdf
-Content-Type: application/pgp-signature; name="signature.asc"
+>    2.
+> I have a few more part numbers to add to the table, can I add them with this update?
 
------BEGIN PGP SIGNATURE-----
+Sure.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQFZGwAKCRAr4qD1Cr/k
-Ch5KAP9orZG9Fx48D1p7m9rS7okjOqFxfeisd4e/g6ucGs5GhgD+K/oR6H9UYJO2
-j+SCSUJu0nwVZs9vMAX7mTC+9B4wVA4=
-=t1y3
------END PGP SIGNATURE-----
+>    3.
+> Do I submit as a new patch?
 
---weQ3jb7EOg5UPFdf--
+Yes, but please, let's wait for maintainer input first.
+
+-- 
+Best regards,
+Marek Vasut
