@@ -4,62 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1274CCF9E9
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 14:14:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D188CCF9EB
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 14:33:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20CD58004F;
-	Wed, 29 Oct 2025 15:14:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id AF2128004F;
+	Wed, 29 Oct 2025 15:33:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="qx8TpI+9";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="yLVB5/l7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66B138003E; Wed, 29 Oct 2025 15:14:42 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id 33C038006D; Wed, 29 Oct 2025 15:33:54 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B45E8006D
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 15:14:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EA5F8003E
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 15:33:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03 (unknown [93.94.208.154])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id A017240965; 
- Wed, 29 Oct 2025 14:14:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1761747276;
- bh=AfTu4tOEOeHZPfVLAavD1QxG5KhiCA26WLYcNKAwiuc=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=qx8TpI+90sJ21a6F5iR1lteFSshFbotqKY7MHPgCOfGEzmgKFsmwqR5iHAnr4TLRw
- CCCjzuIp5820hXuwMAcpOeplM1BGYk766mba4HMr/3DPJRglE2Y3y0W15LWHBPk6GE
- lVzlze0IbJ6Fz0Yl8c9sgOppSuegwd6JBp+zOKQ6X+aUb08X1NcJhRxB5HO7QBfBgV
- j6eMJaalru8JcbMgb74ui1H6xffBGmFfXyp+CLgH9YpS7fzkDGu/RdLS4dQ63bScZ2
- G2GQmm0YZXU30rBhD53ARSIyVpEXPM4ENusp7mHguE95P7dZHRal0g3ApI3uffvS7O
- PngvjX5/CpaU7fu4GZQ1ePDFQawKNcI9lVMosAbBDreRhS27bB25CN4a0rIIQSqaKF
- f0vptRxhAi/CxMhEJIt3svOlHfAqX9xS6E1Nn1hVkKg3mJ0X2tID/6VjGOwQOERQMp
- sLshpvlhYcnD5Xd4PHOfyLsDsB+K+cQcRqIT3M2cat4fLe0z9nT3d+woG8+IdZQb/+
- 47SzV/o6ynAsf6DYIiG5+laNFRsjDfB4lxZfRg31EHIEuuoZDfN1cxKJVOTnH1WRvN
- EiDjl6/ZmcIVcXIR3rmEeVL0d8/wp4f4wyJRLL881IWKV/WYBRYxRaBF50NHCA+vZr
- xRDor4TgDrDO4m794GP/KpE8=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] qfw: Add more fields and a heading to qfw list
-Date: Wed, 29 Oct 2025 15:14:32 +0100
-Message-ID: <20251029141432.276238-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 91648C0DA83;
+ Wed, 29 Oct 2025 14:33:30 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id E212F606E8;
+ Wed, 29 Oct 2025 14:33:50 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 757A4102F24F9; Wed, 29 Oct 2025 15:33:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1761748430; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=lJNbGpaKEnVwZrLswNxTYjIKXCW9mz8cJmEDh+zxFiQ=;
+ b=yLVB5/l7jE3l1JkHNN6IrOGqRP7yuTu9X+ADeNMyIV+zQkJVSLM0W5DWUBcjbXRi8yq5YT
+ KMr8OkkEtw5E9AhCl7xk9CH4CvPlN3y9wJi9M64N/quzJKC5pcvbqfWfHUBz7beNAdMHeM
+ FREbq/GFRmuUtNQ1QLlMc3wqRebv0G5/6zZl0VkPcE5Z2zNm8UwGzSXjOl6i8Fxul2A0DF
+ M0nAqNc/Mnjq3Nvv7yT0HvBvA+6b/xyCnGm2BBXYchBMLWY8uCOuRMUrumRV8u+PiWB4Hg
+ bxr5ZKGqcmoLw2sMMOXbJZk7PF7dO2M8uZkF6Q+E6w6sfOjiG9vcU6zkzu6hYA==
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: u-boot@lists.denx.de
+Cc: Bajjuri Praneeth <praneeth@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ thomas.petazzoni@bootlin.com, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] doc: pytest: Complete dependencies list with missing
+ packages
+Date: Wed, 29 Oct 2025 15:33:44 +0100
+Message-ID: <20251029143346.1320868-1-kory.maincent@bootlin.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,140 +72,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <sjg@chromium.org>
+From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
 
-Update the command to show the size and selected file, since this is
-useful information at times. Add a heading so it is clear what each
-field refers to.
+Add missing dependencies to the pytest usage documentation and correct
+the device tree compiler package name from 'dtc' to 'device-tree-compiler'.
 
-Add a simple test as well.
+This ensures users have the complete list of dependencies needed to run
+the pytest test suite without errors.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 ---
- cmd/qfw.c             |  6 +++++-
- doc/usage/cmd/qfw.rst | 27 +++++++++++++++------------
- test/cmd/Makefile     |  1 +
- test/cmd/qfw.c        | 40 ++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 61 insertions(+), 13 deletions(-)
- create mode 100644 test/cmd/qfw.c
 
-diff --git a/cmd/qfw.c b/cmd/qfw.c
-index 1b108118658..09bd7d9849d 100644
---- a/cmd/qfw.c
-+++ b/cmd/qfw.c
-@@ -22,10 +22,14 @@ static int qemu_fwcfg_cmd_list_firmware(void)
- 	if (ret)
- 		return ret;
+Change in v2:
+- Update the "incomplete" word for the list description.
+---
+ doc/develop/pytest/usage.rst | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.rst
+index 779b2dbe24b..153e3c4091d 100644
+--- a/doc/develop/pytest/usage.rst
++++ b/doc/develop/pytest/usage.rst
+@@ -35,11 +35,11 @@ installed via the command
+    pip install -r requirements.txt
  
-+	printf("            Addr     Size Sel Name\n");
-+	printf("---------------- -------- --- ------------\n");
- 	for (file = qfw_file_iter_init(qfw_dev, &iter);
- 	     !qfw_file_iter_end(&iter);
- 	     file = qfw_file_iter_next(&iter)) {
--		printf("%08lx %-56s\n", file->addr, file->cfg.name);
-+		printf("%16lx %8x %3x %-48s\n", file->addr,
-+		       be32_to_cpu(file->cfg.size),
-+		       be16_to_cpu(file->cfg.select), file->cfg.name);
- 	}
+ In order to execute certain tests on their supported platforms other tools
+-will be required. The following is an incomplete list:
++will be required. The following tools may be needed:
  
- 	return 0;
-diff --git a/doc/usage/cmd/qfw.rst b/doc/usage/cmd/qfw.rst
-index 40770acb3c0..0a65a247b44 100644
---- a/doc/usage/cmd/qfw.rst
-+++ b/doc/usage/cmd/qfw.rst
-@@ -44,18 +44,21 @@ QEMU firmware files are listed via the *qfw list* command:
- ::
+ * gdisk
+ * dfu-util
+-* dtc
++* device-tree-compiler
+ * openssl
+ * e2fsprogs
+ * util-linux
+@@ -50,6 +50,11 @@ will be required. The following is an incomplete list:
+ * mtools
+ * sbsigntool
+ * udisks2
++* swig
++* cgpt
++* libgnutls28-dev
++* vboot-kernel-utils
++* fdisk
  
-     => qfw list
--    00000000 bios-geometry
--    00000000 bootorder
--    000f0060 etc/acpi/rsdp
--    bed14040 etc/acpi/tables
--    00000000 etc/boot-fail-wait
--    00000000 etc/e820
--    00000000 etc/smbios/smbios-anchor
--    00000000 etc/smbios/smbios-tables
--    00000000 etc/system-states
--    00000000 etc/table-loader
--    00000000 etc/tpm/log
--    00000000 genroms/kvmvapic.bin
-+                Addr     Size Sel Name
-+    ---------------- -------- --- ------------
-+                   0        0  20 bios-geometry
-+                   0        0  21 bootorder
-+            1fc6c000       14  22 etc/acpi/rsdp
-+            1fc6c040    20000  23 etc/acpi/tables
-+                   0        4  24 etc/boot-fail-wait
-+                   0       28  25 etc/e820
-+                   0        8  26 etc/msr_feature_control
-+                   0       18  27 etc/smbios/smbios-anchor
-+                   0      151  28 etc/smbios/smbios-tables
-+                   0        6  29 etc/system-states
-+                   0     1000  2a etc/table-loader
-+                   0        0  2b etc/tpm/log
-+                   0     2400  2c genroms/kvmvapic.bin
- 
- Where an address is shown, it indicates where the data is available for
- inspection, e.g. using the :doc:`md`.
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index e71c80a5b2e..98731d9bdff 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -27,6 +27,7 @@ obj-$(CONFIG_CMD_MEM_SEARCH) += mem_search.o
- ifdef CONFIG_CMD_PCI
- obj-$(CONFIG_CMD_PCI_MPS) += pci_mps.o
- endif
-+obj-$(CONFIG_CMD_QFW) += qfw.o
- obj-$(CONFIG_CMD_SEAMA) += seama.o
- ifdef CONFIG_SANDBOX
- obj-$(CONFIG_CMD_MBR) += mbr.o
-diff --git a/test/cmd/qfw.c b/test/cmd/qfw.c
-new file mode 100644
-index 00000000000..e615a82b31a
---- /dev/null
-+++ b/test/cmd/qfw.c
-@@ -0,0 +1,40 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for qfw command
-+ *
-+ * Copyright 2025 Simon Glass <sjg@chromium.org>
-+ */
-+
-+#include <console.h>
-+#include <dm.h>
-+#include <mapmem.h>
-+#include <qfw.h>
-+#include <dm/test.h>
-+#include <test/cmd.h>
-+#include <test/ut.h>
-+
-+/* Test 'qfw list' command */
-+static int cmd_test_qfw_list(struct unit_test_state *uts)
-+{
-+	struct fw_cfg_file_iter iter;
-+	struct fw_file *file;
-+	struct udevice *dev;
-+
-+	ut_assertok(uclass_first_device_err(UCLASS_QFW, &dev));
-+
-+	ut_assertok(run_command("qfw list", 0));
-+	ut_assert_nextline("            Addr     Size Sel Name");
-+	ut_assert_nextlinen("--");
-+
-+	for (file = qfw_file_iter_init(dev, &iter); !qfw_file_iter_end(&iter);
-+	     file = qfw_file_iter_next(&iter)) {
-+		ut_assert_nextline("%16lx %8x %3x %-48s", file->addr,
-+				   be32_to_cpu(file->cfg.size),
-+				   be16_to_cpu(file->cfg.select),
-+				   file->cfg.name);
-+	}
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+CMD_TEST(cmd_test_qfw_list, UTF_CONSOLE);
+ Please use the appropriate commands for your distribution to match these tools
+ up with the package that provides them.
 -- 
-2.51.0
+2.43.0
 
