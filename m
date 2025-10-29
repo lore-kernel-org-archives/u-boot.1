@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE898CCF9EB
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 19:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC9CCCF9EE
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 20:12:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5181382A9E;
-	Wed, 29 Oct 2025 20:16:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 769E88004F;
+	Wed, 29 Oct 2025 21:12:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eVEC2VJU";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="moTum3Nh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B30D832AD; Wed, 29 Oct 2025 20:16:10 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 7D7CD800B6; Wed, 29 Oct 2025 21:12:40 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 151B28004F
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 20:16:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DD278003E
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 21:12:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3d275090417so202968fac.1
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 12:16:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b7042e50899so72922666b.0
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 13:12:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761765365; x=1762370165; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=e6mtDtq9Guq1rCcRnNl6jV00WeWHZ2u20qwBf0uvZhA=;
- b=eVEC2VJUDUiKpyqeVLXT2bHsAOhIy9a5yQtIyMTjkwyb10s0QyTHyN5d4yb/RFrtLL
- KdOGgYiHIC5I3yban9KOIq3bTDNRtHMAP9xWBivykQxgP3JkxYfHO85Mt5QChsf6GXxk
- IuHQPhHzXL38CZiE6HjGzkCRwAqWqEv5Ml5NY=
+ d=chromium.org; s=google; t=1761768758; x=1762373558; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n2I0wLLE+7U2uDCGBP/Gpc2bv0BiEcboTf3mOY2ou0U=;
+ b=moTum3Nh7qzPN7s6uyXQcdl+QzBr9p/obZeO3KnYOfQ6pew30r/bh/P6lP+46rK90F
+ Y9Puq7HZoXSMXn7RVL51h7gTeB+b7i++wubqIHPnD06h5ppb1C1pXY/J4JiCzQ/kS4/Z
+ R/GdE+Bd3soSB2IzAVbPmJVJUs2BS6uCytiGY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761765365; x=1762370165;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e6mtDtq9Guq1rCcRnNl6jV00WeWHZ2u20qwBf0uvZhA=;
- b=dyWWfU5HxdU3AQZUG6BlxaG0gVhllTJyIjwBkMbElTaMrbacQT0pLNQeiAq4u5ZKtR
- rYzuEajA9BXOqCzgqJ6Pr9jkBMaCFmMwtkErup5KPxP/wVv86jLB9nOZSJpjcrKttzSK
- Xi5QFyBuJWcjfh6kKaApME4fJeRh2hEUdHu00geFceb9kxDxvcLWvks/FwYnbaJhy3bb
- mkxplAk1j1+PPWmGy3YqzSyvszaOJzA/1SV2cFqE7I4FqC+ZqWJiZ2mMC5P713tNvRjr
- SHbimO+Iw10EFDVw9pRyMSr+ta41DWsegRbP6vKcqceogHXtaFVO+UIquUHvIRG1vVbW
- 32iw==
-X-Gm-Message-State: AOJu0YxI4tH84Ghnlr2a5QMotD6emjRXkeicBKFmnhsUTCL2W3tjSIAH
- cJyTTlOMkHtpeU1tSOkIqPGSFNRJZNUhiTa+nKg7IndRJqsrb08P5pUE6FIZv2/IUhs=
-X-Gm-Gg: ASbGncsXojAJwkCS0rmd9XUpph3lrjkS2bB9fXz5y/0b7cnfMIjX6j7UZQMdv9Q6ZGb
- iYW+pVtoB+/20tCfnnKanetPjlVIGrQv8D+JBKqnLD/aIXf1WCW1TnrxLN/6X2fmMCPbwIVPWHi
- Ek8Bp7Ge8C+NIK3DYuX0J2Wfq58K29HM4LRqhDDU+zyojG/NfaCFBwnU611PBbuJhBbE+5XPkHM
- KqWrdHag+NOSKISV/AhzIuGBJhbQ0jHoOFT1bQQ4cbF16Kh5fpqcKFpXrBN6Umo4cRpM06sg2Sy
- fUjj630yMVQIg9AlyuXk8CWdz0SI2CH2bjda5DM4nK9vyqkpDm79dKNBrXlesPi3PsH3ovnUD3u
- 6HSrKhjk7iUyhAV9uwP8xXy+sy8EF5vRX0nuq7a83xiA6GMfWdffjiOGT81hIxkpKJ78bGjGyoL
- JnQCVt9l7mpERl8wxrcSE/LVk5ZagY4hjPW2T5+Sw=
-X-Google-Smtp-Source: AGHT+IFTTQ99q4bc8FzApt9dHNL5lpFAjQ+q920TNZS2B1DN2e8I11ODwynFvnVrysFd2Oxo16Ui7Q==
-X-Received: by 2002:a05:6871:81e:b0:3d2:ddfa:dfdb with SMTP id
- 586e51a60fabf-3d8c634958amr309067fac.13.1761765365404; 
- Wed, 29 Oct 2025 12:16:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3d1e2d24eb1sm5003244fac.12.2025.10.29.12.16.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Oct 2025 12:16:04 -0700 (PDT)
-Date: Wed, 29 Oct 2025 13:16:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
- Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH] serial: make VPL_DM_SERIAL depend on VPL_DM
-Message-ID: <20251029191601.GO6688@bill-the-cat>
-References: <20251029-vpl-dm-serial-v1-1-7117f541511f@cherry.de>
+ d=1e100.net; s=20230601; t=1761768758; x=1762373558;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n2I0wLLE+7U2uDCGBP/Gpc2bv0BiEcboTf3mOY2ou0U=;
+ b=bur2KVF1/nM+oCJNAnVtgIL97K4uUT0PV5tcTiV2RWRIvVonOFPWOJEDWuISPmSIje
+ 7q3jgijSyWpqi9Js/HgKfWxA/Dm+j5Cn5/jf5/9AB5/Bl5f4wXY+eliMRMWXrc1UdqkY
+ MYUYXPTbDJzOcLGS2N62JajV3O3LzW7desqgwR9zlyeM73HRVtvBptK7U/uKPA/A7QjB
+ QGq48YLfhqfQWb22Loatq3LRg5AtC03w82+6S7d89rMAESG1q/xPbw6gaUuWkoAiYdtx
+ Ws+BWvWo8YcvJCj+0GGqXP+ilv9bAmM+Mij6E7rr9dOq85JHYCgEdF7A+a40uZJv1s6C
+ XhyQ==
+X-Gm-Message-State: AOJu0YxqTzVIsYhFNQOi0aes86PuEActCiSPaU376JmPFSopiOpLdTLH
+ GiBmcxPq5eUOk4HkdEDizfO1MLWV2wDXHyelZMV0+avI/1VzI8ZnSt9lO421NXBHYrZOXzH2258
+ Bovo3XcnenCbMT5rmZfskJiM7H+un1AqO05ZstlEw
+X-Gm-Gg: ASbGncu2+zPh6ZVzZjwdTsNxWjetP5LJpAbhXQQJoicjqYq/NYNLPTKiV4Tp+myPShs
+ I/6+4ijazBD3rCJ20ZlET7IeY2LsDb2bZ2S2EFIhoRXGBrD+EDa0K6sLLfaicA+kTFRpWuPp/E7
+ kni8ITxrbrULIRjAvvPsBqJyeAPG1n7Ciq+U8oqxErBKIxUzbZeqs8HQhGYztEoVEARnl0J106P
+ MyLogRg/JZPmmtyZeuZLaf2K4bvagilwGLKUOF/CX8usB0NWBOE6gOLGhA=
+X-Google-Smtp-Source: AGHT+IEgcun6sMqFTMAMA0F5BuzvR5pcSjbPSukineeN+Ws6UDHsoube3eMkz66aUH49b9nA2QCDB9pU7ufYXrwmRJI=
+X-Received: by 2002:a17:906:f5a9:b0:b3d:c47c:7ce9 with SMTP id
+ a640c23a62f3a-b703d5b452dmr443873366b.54.1761768757895; Wed, 29 Oct 2025
+ 13:12:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NBjCwPQWHR67Vj9C"
-Content-Disposition: inline
+References: <20251029-vpl-dm-serial-v1-1-7117f541511f@cherry.de>
 In-Reply-To: <20251029-vpl-dm-serial-v1-1-7117f541511f@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 29 Oct 2025 21:12:26 +0100
+X-Gm-Features: AWmQ_blscdquFIaFa0Y4EGwjHyjrr9qdarX2ivR2l_zlV8KAkPnk2E1jPc6WxDo
+Message-ID: <CAFLszTg4N7c+f7TRPZoND7TQJcogj1L8SSOgw4LR-oEa1tkxqQ@mail.gmail.com>
+Subject: Re: [PATCH] serial: make VPL_DM_SERIAL depend on VPL_DM
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,39 +90,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---NBjCwPQWHR67Vj9C
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Oct 29, 2025 at 12:17:43PM +0100, Quentin Schulz wrote:
-
+On Wed, 29 Oct 2025 at 12:17, Quentin Schulz <foss+uboot@0leil.net> wrote:
+>
 > From: Quentin Schulz <quentin.schulz@cherry.de>
->=20
+>
 > I have a hunch VPL_DM_SERIAL should not be selectable if VPL isn't set
 > as implied by the prefix. Additionally, still based on the prefix, I'm
 > assuming VPL_DM should be a dependency. Since VPL_DM can only be
 > selectable when VPL is enabled, only depend on VPL_DM.
->=20
+>
 > This mirrors SPL_DM_SERIAL and TPL_DM_SERIAL so seems right to me.
->=20
+>
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+>  drivers/serial/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---NBjCwPQWHR67Vj9C
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQJn8QAKCRAr4qD1Cr/k
-CuEjAP9QCWTYHJT+fPct4VI6Sh6Ythc2Szvmt9iMlRkU/Qn09wD/SJWvfNKJ8j/W
-T/aIi4+2UZ31WGvMpb8fKdCEKHpd6A0=
-=MSXx
------END PGP SIGNATURE-----
-
---NBjCwPQWHR67Vj9C--
+Reviewed-by: Simon Glass <sjg@chromium.org>
