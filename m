@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7DB7CCD1BF
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 07:56:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20349CCF9E9
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 07:59:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED386800B6;
-	Wed, 29 Oct 2025 08:56:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D2D482E34;
+	Wed, 29 Oct 2025 08:59:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1887C800D7; Wed, 29 Oct 2025 08:56:38 +0100 (CET)
+ id 34D9B832AD; Wed, 29 Oct 2025 08:59:24 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84F32800B1
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 08:56:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66F7A82A9E
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 08:59:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 59T7uRl9047584
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK)
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 15:56:27 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTPS id 59T7wijY048313
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Wed, 29 Oct 2025 15:58:44 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS34.andestech.com
  (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 29 Oct
- 2025 15:56:27 +0800
+ 2025 15:58:44 +0800
 From: Leo Yu-Chi Liang <ycliang@andestech.com>
 To: <u-boot@lists.denx.de>
-CC: <ycliang@andestech.com>, Randolph Sheng-Kai Lin <randolph@andestech.com>
-Subject: [PATCH 1/1] andes: ae350: Remove fdt_high default
-Date: Wed, 29 Oct 2025 15:56:13 +0800
-Message-ID: <20251029075613.3173561-1-ycliang@andestech.com>
+CC: <mchitale@ventanamicro.com>, <ziyao@disroot.org>, Leo Yu-Chi Liang
+ <ycliang@andestech.com>
+Subject: [PATCH 1/1] riscv: cpu: Beautify the warning message
+Date: Wed, 29 Oct 2025 15:58:39 +0800
+Message-ID: <20251029075839.3198587-1-ycliang@andestech.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -47,7 +48,7 @@ X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 59T7uRl9047584
+X-MAIL: Atcsqr.andestech.com 59T7wijY048313
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,27 +65,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Setting fdt_high to all ones causes a boot failure.
-Remove it to allow U-Boot to pick a suitable address and relocate the FDT.
+Add '\n' to the end of the warning message.
 
-Signed-off-by: Randolph Sheng-Kai Lin <randolph@andestech.com>
+Besides, if we enable console record utility,
+missing the '\n' causes the console_record_readline
+fail to recognize the end of string.
+
+Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 ---
- include/configs/ae350.h | 2 --
- 1 file changed, 2 deletions(-)
+ arch/riscv/cpu/cpu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/configs/ae350.h b/include/configs/ae350.h
-index 0d0beacabdc..4f46e69e403 100644
---- a/include/configs/ae350.h
-+++ b/include/configs/ae350.h
-@@ -114,8 +114,6 @@
- #include <config_distro_bootcmd.h>
- 
- #define CFG_EXTRA_ENV_SETTINGS	\
--				"fdt_high=0xffffffffffffffff\0" \
--				"initrd_high=0xffffffffffffffff\0" \
- 				"kernel_addr_r=0x00600000\0" \
- 				"kernel_comp_addr_r=0x04600000\0" \
- 				"kernel_comp_size=0x04000000\0" \
+diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
+index 7cd1f5f0d44..c7023ca932f 100644
+--- a/arch/riscv/cpu/cpu.c
++++ b/arch/riscv/cpu/cpu.c
+@@ -463,7 +463,7 @@ static void riscv_parse_isa_string(const char *isa)
+ 		switch (*ext) {
+ 		case 'x':
+ 		case 'X':
+-			log_warning("Vendor extensions are ignored in riscv,isa. Use riscv,isa-extensions instead.");
++			log_warning("Vendor extensions are ignored in riscv,isa. Use riscv,isa-extensions instead.\n");
+ 			/*
+ 			 * To skip an extension, we find its end.
+ 			 * As multi-letter extensions must be split from other multi-letter
 -- 
 2.34.1
 
