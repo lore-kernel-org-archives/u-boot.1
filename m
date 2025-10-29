@@ -4,47 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D62B9CCF9EB
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 11:30:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D07CCF9E9
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 11:34:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 529BA8004F;
-	Wed, 29 Oct 2025 12:30:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 77C058004F;
+	Wed, 29 Oct 2025 12:34:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F6C5800B1; Wed, 29 Oct 2025 12:30:46 +0100 (CET)
-Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
- [84.16.66.169])
+ id 8334882E34; Wed, 29 Oct 2025 12:34:43 +0100 (CET)
+Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
+ [84.16.66.174])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F89A8003E
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 12:30:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 943DA8003E
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 12:34:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cxQ6D2spcz5Z8;
- Wed, 29 Oct 2025 12:30:44 +0100 (CET)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4cxQ6C6f8DzSt6; Wed, 29 Oct 2025 12:30:43 +0100 (CET)
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246c])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cxQBn2P67zfg3;
+ Wed, 29 Oct 2025 12:34:41 +0100 (CET)
+Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4cxQBm1MtnzKkP; Wed, 29 Oct 2025 12:34:40 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 29 Oct 2025 12:30:36 +0100
-Subject: [PATCH] binman: btool: mkimage: fix Bintoolmkimage.run() method
- docstring
+Date: Wed, 29 Oct 2025 12:34:25 +0100
+Subject: [PATCH] rockchip: imply most symbols for ARCH_ROCKCHIP
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251029-btool-mkimage-docstring-v1-1-9905a95018cc@cherry.de>
-X-B4-Tracking: v=1; b=H4sIANv6AWkC/x2MQQqAIBAAvxJ7TqgNJftKdLDabKk0NCII/550H
- IaZFyIFpghd8UKgmyN7l6EuC5hW4ywJnjMDVijrCrUYL+93cWx8mCxnP8UrsLNC63ZUDSJJoyD
- XZ6CFn//cDyl9opfcF2kAAAA=
-X-Change-ID: 20251029-btool-mkimage-docstring-998b6322e5a6
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
+Message-Id: <20251029-arch-rockchip-imply-v1-1-899e1592a736@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAMD7AWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDAyNL3cSi5Azdovzk7OSMzALdzNyCnErdlGSjRAsT40RDczNzJaDOgqL
+ UtMwKsKnRsbW1ACDDcXllAAAA
+X-Change-ID: 20251029-arch-rockchip-imply-dc2a843a1767
+To: u-boot@lists.denx.de
+Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Tingting Meng <tingting.meng@altera.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
+ Liya Huang <1425075683@qq.com>, Quentin Schulz <quentin.schulz@cherry.de>
 X-Mailer: b4 0.14.3
 X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
@@ -65,32 +70,76 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Commit 65e2c14d5a5a ("binman: btool: mkimage: use Bintool.version")
-removed the version argument from the run method but forgot to remove it
-from the method docstring, so let's fix this oversight.
+Forcing all those symbols on means we cannot make the binary smaller or
+with unnecessary features or drivers disabled. This is especially useful
+for security, auditing and certification where less code built means
+less to look at (and less surface attack) and less to patch, but also
+for making binary images smaller which typically means faster boot.
 
-Fixes: 65e2c14d5a5a ("binman: btool: mkimage: use Bintool.version")
+It is possible to have boards without MMC, NAND or SPI flashes, without
+anything on SPI or I2C buses, nothing to control over PWM or GPIO or for
+which we have no interest in regulator control or serial output so make
+it possible to remove all that if desired.
+
+No intended change in default selected symbols.
+
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- tools/binman/btool/mkimage.py | 1 -
- 1 file changed, 1 deletion(-)
+ arch/arm/Kconfig | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/tools/binman/btool/mkimage.py b/tools/binman/btool/mkimage.py
-index 3f84220fb1a..23c0a8e490d 100644
---- a/tools/binman/btool/mkimage.py
-+++ b/tools/binman/btool/mkimage.py
-@@ -35,7 +35,6 @@ class Bintoolmkimage(bintool.Bintool):
-                 signatures
-             align: Bytes to use for alignment of the FIT and its external data
-             keys_dir: Path to directory containing private and encryption keys
--            version: True to get the mkimage version
-         """
-         args = []
-         if external:
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index ef834542bd4..4ee74d5cdd8 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -2072,30 +2072,30 @@ config ARCH_ROCKCHIP
+ 	bool "Support Rockchip SoCs"
+ 	select BINMAN if SPL_OPTEE || SPL
+ 	select DM
+-	select DM_GPIO
+-	select DM_I2C
+-	select DM_PWM
+-	select DM_REGULATOR
+-	select DM_SERIAL
+-	select DM_SPI
+-	select DM_SPI_FLASH
+ 	select DM_USB_GADGET if USB_DWC3_GADGET
+ 	select ENABLE_ARM_SOC_BOOT0_HOOK
+ 	select OF_CONTROL
+-	select MMC
+-	select MTD
+-	select SPI
+ 	select SPL_DM if SPL
+-	select SPL_DM_SPI if SPL
+-	select SPL_DM_SPI_FLASH if SPL
+ 	select SYS_MALLOC_F
+ 	select SYS_THUMB_BUILD if !ARM64
+ 	imply ADC
++	imply BOOTSTD_DEFAULTS
+ 	imply CMD_DM
+ 	imply DEBUG_UART_BOARD_INIT
+-	imply BOOTSTD_DEFAULTS
++	imply DM_GPIO
++	imply DM_I2C
++	imply DM_PWM
++	imply DM_REGULATOR
++	imply DM_SERIAL
++	imply DM_SPI
++	imply DM_SPI_FLASH
+ 	imply FAT_WRITE
++	imply MMC
++	imply MTD
+ 	imply SARADC_ROCKCHIP
++	imply SPI
++	imply SPL_DM_SPI if SPL
++	imply SPL_DM_SPI_FLASH if SPL
+ 	imply SPL_SYSRESET
+ 	imply SPL_SYS_MALLOC_SIMPLE
+ 	imply SYS_NS16550
 
 ---
 base-commit: 4cad9faf8d2887b8851f0ced5194ffbaa92ca71e
-change-id: 20251029-btool-mkimage-docstring-998b6322e5a6
+change-id: 20251029-arch-rockchip-imply-dc2a843a1767
 
 Best regards,
 -- 
