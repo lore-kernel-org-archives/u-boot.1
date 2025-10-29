@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C25CCF9EB
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 18:08:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31CF5CCF9EE
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 18:08:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5474A800B6;
+	by phobos.denx.de (Postfix) with ESMTP id 92E9A8331F;
 	Wed, 29 Oct 2025 19:08:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p7DmKA9g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AQ8pDngG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF103832AD; Wed, 29 Oct 2025 19:08:03 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id E387482A9E; Wed, 29 Oct 2025 19:08:04 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1968C8144A
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 19:08:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5371E82A9E
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 19:08:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7c3e2221217so50100a34.3
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 11:08:01 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-44f76e8d10bso124359b6e.1
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 11:08:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761761280; x=1762366080; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1761761281; x=1762366081; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7Y7eATklmNZ5W4PzD7Jp0xgcwaXI8Wyo7cn8xwT/sOU=;
- b=p7DmKA9gyKVkqyaE1ct6MUPF8Zg7dJBIEvKPzICed4+QCKEj6lGixItSdTUt6MOdE8
- htAH+SMJa+gJSeNDLwfjkaljQuhIoLfcEiQG0fp1uj+OsYBtmQe7fv5IgKr2s/8sUMAE
- nqZH5DKTp/dqtu7bYBEEQhxyofcb2NCQ4lclk=
+ bh=yBhcZ1yi+L1ha9yXEv0qbXtbspwYtut6JQ27ZxEiriE=;
+ b=AQ8pDngGu/OkNy74062goQFytA3rFuJLpBfYkat7dSnYX1FfG0rFXBYEYFF1g22PNe
+ h8xa2dcOAk01LePrhsQLlv8wo+bgmdyqNsV31RFut0xLLvoQKcWYaSq2adp0Zoa9ZDa8
+ EH9wz8+IAnDiuJAATtDWu+gK8NrIdoqUuY3ZA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761761280; x=1762366080;
+ d=1e100.net; s=20230601; t=1761761281; x=1762366081;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7Y7eATklmNZ5W4PzD7Jp0xgcwaXI8Wyo7cn8xwT/sOU=;
- b=JFmIZ8h1qAmqRoeCehAm6BI60sDWqscyfofOztGRmu+uXmsoEStkKnGBnh8lPjIIkG
- D9vtWnz47I8SZaTR7GefwiHPWFiyxBkEGMIvmtBESjJuBU6pKZbtqHkhXu3jCDZujOal
- sVZzx+OPUceDAf1+37/2PTP/tKY1iNmQdN/O+rR/n2G0TeGm67qJBSrkH49+jF/o0pk1
- SFBR+S/EQiuFm7MECoWVYgGV0axrfevJfCeHd3CiSYrv4Hg8xRqyE0W/GvAAaeBAjQXX
- iUXqPbnS5Juz1/7Ok0BGOfFRfm5L03nfUegpu/oRnxATxq1j+uddDB79d4iChz2w7h5s
- MBzw==
-X-Gm-Message-State: AOJu0YwEr0/9s7YSPpFJyh6voz1TfDbrpuP57VH3I/pVfIoWiZEfy6ZT
- sqeEfCIvxlXau2hlXkwuSZPKjpetl8nL+FUzx9Jhha0CJIqQCLZLVMwIB3TgrdcQtTyr7vC5ocW
- yIGKdNfULkg==
-X-Gm-Gg: ASbGncv9I3prTz/LnmXUh/sgDg1Esn+CPmdeYstbIdqBbQAz3YtzVEdRHm1qCcXZb62
- F1SiSPpPAuq82fBkRXPAmO3C63iPzc3O4ejhhsndUMaHoMhE0GcdDBIQdreWQedQIDfYclfQzu/
- rvP9xz8reZdnq6ktcUBkeBQXHhmenmsfxJqzUfaEsQH5dV379bartatwrv1drZN8AFgkTy+BEoy
- VPZP2BdI9/pjbATKEV56eBIHLxAq/gRZNCQyI92fJ4GxWtsP24rcmJKY2+JIHh9F4za+vzL4QSt
- APb/pxO2aCjSodsD+LPL5N6kCJaE8jVD4yqbd0fTMRMxSrTd/tpKdDpuukSUG+16qnXwnYfoZ4p
- v9FMkydznaUD/TZLv28qjmu0r7r99uIyv5ao94kSHPxY4x6D8oMN11g42iDhbKzQxJAlZwb8F/s
- ywZUiYONCiAld/sSMIcZVi1ca0Ldk3vRt+ongAfA==
-X-Google-Smtp-Source: AGHT+IHTMwOhgT/iieQfDx5wmcE+2enI8+I3DPiI8yMSitk6oAPjxmNIA/3nqQjHXG5BSi1GRvjR7Q==
-X-Received: by 2002:a05:6808:3999:b0:44f:6a19:433e with SMTP id
- 5614622812f47-44f7a44a203mr1903992b6e.15.1761761279859; 
- Wed, 29 Oct 2025 11:07:59 -0700 (PDT)
+ bh=yBhcZ1yi+L1ha9yXEv0qbXtbspwYtut6JQ27ZxEiriE=;
+ b=AecRPbegOA9RCV6MRm6i/JBmhMNVNFUfEVmdIN/4o88piJ2wLLdkk7tMqsC095MH1D
+ jGr6ttQjxxet0SrMITIhCT/AogiPzyoZY4a3nn7Fp9JgCMWF5wwoq5S4NeMXAf34YFK/
+ xtuDoyl7y9bVJuYxz0SOjcrBLcxX/iCsKmjYEg1gnGIB4cFY/KhKWIFA6aSg0FNa+dGy
+ SFKbITwQ2NT/ylPyjZ2OIB4wDrhmTaZ/wXclWRgpn5yGhcIn+O++DBKXL86z7q12IR34
+ aTnOBNkHWNGaFnGluKorSMen2VZnUyzUHqjOh78KMsFSxix1ao9liaqU9z/ioSxj2KlD
+ yI9A==
+X-Gm-Message-State: AOJu0YzkQ5YNx+LVab4G7D85BrkRBhlwlwXwTuA/sxD+nEGAgeYTVgx1
+ vbGuhpymIb8XBO7JgJyH3wiKofMt88GZPp+go0CUdmGNPxvJ3IPU26aGjf47Sy+AosJeMOeVnYF
+ uNOYizkrPCg==
+X-Gm-Gg: ASbGncssmXsYazkNl4uRKWCX4OCBvb2Z0KOmfyXCgDQ3LeI0ootS+yPj1mKYimfqU/D
+ oR6xOIQSQ7spmW2YgeUoWbuTsKZMk+NnmraD6FxJAq61bvDzuBcRqLBk6NwtyTCYGizKt3jK+vk
+ rwgg2O0v0cOl4GGOA4LQZ5Lkbo9r569Js9yfCtnTXdaJyv7fVja5mE42d/2WuDEkcbPtysJE3AX
+ txxhUZ/yU/x8zjnGFy9dDDhfUdYs1qq0pjEnk92tTH1cDH2ajWiyGXP4UzDMxvC4MSQlFv8GS/4
+ pBSNfYlu/3EOtD00oWeU8+m6fdg6B3Q7Z6Z0iC6ueLfULwJdMUFIjp958ZlcomaaNTLVXYw5bCm
+ o7YlnWUkVvDhMXUhHMQnK1mi5AEJEzjcXBhoAz4NWkEllO9iH3X5kkgRdhfPWvpIXjpIIzhWtMJ
+ s3SieSd3tAipVQtbPuw73S//DQvYxsp2sb8MzLaw==
+X-Google-Smtp-Source: AGHT+IHk/SPxGQQXqG1Fv6kbKmaxH4CB6RdepCHk8KOT0bLbRibsPl4I/LU7S6xO879ZuOSAIb/miA==
+X-Received: by 2002:a05:6808:c173:b0:438:27af:3ff8 with SMTP id
+ 5614622812f47-44f89d3bfe4mr76364b6e.7.1761761280873; 
+ Wed, 29 Oct 2025 11:08:00 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44da3e93e0esm3555356b6e.17.2025.10.29.11.07.58
+ 5614622812f47-44da3e93e0esm3555356b6e.17.2025.10.29.11.07.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Oct 2025 11:07:59 -0700 (PDT)
+ Wed, 29 Oct 2025 11:08:00 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20251029013114.113745-1-marek.vasut+usb@mailbox.org>
-References: <20251029013114.113745-1-marek.vasut+usb@mailbox.org>
-Subject: Re: [PULL] u-boot-usb/master
-Message-Id: <176176127880.2497692.5700163200347579279.b4-ty@konsulko.com>
-Date: Wed, 29 Oct 2025 12:07:58 -0600
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com, e@freeshell.de, 
+ jimmy.ho@sifive.com
+In-Reply-To: <aQHEYtIGJ9sab_Ai@swlinux02>
+References: <aQHEYtIGJ9sab_Ai@swlinux02>
+Subject: Re: [PULL] u-boot-riscv/master
+Message-Id: <176176127995.2497692.6569306743037421733.b4-ty@konsulko.com>
+Date: Wed, 29 Oct 2025 12:07:59 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,7 +98,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 29 Oct 2025 02:30:47 +0100, Marek Vasut wrote:
+On Wed, 29 Oct 2025 15:38:10 +0800, Leo Liang wrote:
 
 > The following changes since commit 23987e10905146def3ab61e55ec912c6e742efdc:
 > 
@@ -105,7 +106,7 @@ On Wed, 29 Oct 2025 02:30:47 +0100, Marek Vasut wrote:
 > 
 > are available in the Git repository at:
 > 
->   git://source.denx.de/u-boot-usb.git master
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
 > 
 > [...]
 
