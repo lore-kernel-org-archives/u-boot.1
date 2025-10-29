@@ -4,87 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2C50CCF9EB
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 10:50:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84155CCF9EB
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 10:55:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96B6A832AD;
-	Wed, 29 Oct 2025 11:50:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id ECE65800B6;
+	Wed, 29 Oct 2025 11:55:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Z3aijhbK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D9M+RK3o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA5558003E; Wed, 29 Oct 2025 11:49:21 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id D38A9800D7; Wed, 29 Oct 2025 11:55:54 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ACE58004F
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 11:49:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=andrea.calabrese@amarulasolutions.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-63bea08a326so10035799a12.3
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 03:49:19 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 46A798004F
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 11:55:52 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3f0ae439bc3so4416819f8f.1
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 03:55:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1761734958; x=1762339758;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EldHAT0WeEvFmohI8KorUVqwDdiWCWMp9iAzLtkQfHM=;
- b=Z3aijhbKCexbuqmT78WVunXWoXMtp8bKcYp8Gk1LLJizehUFZPcVx7yNc1sz72I/hu
- z97K2fUwvMBEBrU9yg9iGu95QUrxi24J3QcVsd4U2VPcp+VPmIwGkT9bfPuHo/5vAhqw
- TVES6oGoGoIuBae8T8HbCTJA1vBd4K/rYLSH4=
+ d=linaro.org; s=google; t=1761735352; x=1762340152; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KVduHldS/XUM32HxZkDl0WGK2r33+6/qm4u41PgvosE=;
+ b=D9M+RK3oweU3MBNsxFjtff+S5tR/+V73xXLJxyqDlNjYuWiPrzGGbTvaFK2uCJdiZL
+ +FceJX87kKR7s/NCX1Tn9DUgIPfONEiPf55YEQ4N5Kl1kSywzea5dilD6fLz8aU+ASPh
+ MaucY3PxAdxAkzA0B1P4cujkiyyMW+2yYA1+VlETO6f7z80kYOmcKuIcKLmfbds+/dFk
+ ELqtdLwbbSgyVQfwDo8vdNzPQaakIzJqYlZadIZxdCO6drEw5yJca5WjT/7ONzp0gVZU
+ TwQgH2HMOjYG6Qn3QfpD7iKeVGUiCfCXYwI1LunBWaeQfoJUL+y7EHxusekJS5wFyoHN
+ q+OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761734958; x=1762339758;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EldHAT0WeEvFmohI8KorUVqwDdiWCWMp9iAzLtkQfHM=;
- b=VNSimiXWWiL5C3uGQ9Gko/MQoPflfEb3BydhrZLIhHzbM4yU0dDdGnwD6ul5jvSQLK
- aEeIkNVQLFzHdGxKAUs6huwNkBf2fepJrt6fTCKqJjf7vyiA0+svIomKmjAAXNoBnoF0
- wcSK9EOxtctEEeMm9+Nc1p0CoVDbLe22X3AeZfpJaL0qSyu4hXLQTKi1mMYmazV3NpR5
- Q2DIGPFf7n88LAgTOOkXLQJxsw5KZuFLweKrS/8RTuGa+QEybaUDmuWE0wI9cPSZnU/O
- tJBjYch6goLw5fXhu0dy9M+Vg1gUrp88AiXohHO85gYtKy95VDDfYEMc1LYi1USpCWIb
- fadQ==
-X-Gm-Message-State: AOJu0Yw27XaMpuRFP6AwocP3YwIkzSGmKopvK8ZvsTnmwQJWzCtkP0aw
- 2ITOHWrNsGdCZVEXXD++RAW5hZ8AJMjv1I37WmYS7ZCsutCxLr6ndlf2X2X97ZUxQ8DyvspJe6h
- RyQqE8YA=
-X-Gm-Gg: ASbGncsF8Np+D+O0I0+Lcku76roU1gm03ZIBLO6F6PjcaLjQo4r0tIutFgp87+haGDU
- PqezYvvLBDnOeIoSf3Lb/5K5c4P6h988YCAXH6Xoh1Xc3ZCJNdcgbB67vAJ4mPZcmhUl4YBQuxB
- uzRnHRnGD+nXbKsYaPiY4HlgaROSEdzGTCrERBtr1T//1K/cyWvIHc/GtwKmrEpWKzMctiqKYEQ
- oDi3vvlwayFG07aKw+n6ZMmQ7Dladd/Hce7m6Sbx+flRZQeDyt6gzR3CZTaMHqcP8bXoFkpQIfP
- cpAUkT3Co4iBIce06axj/iYFWqD5h8ncPqlF1ARXOwyriPo8z+VDYwYl9oZPa6/WOJA0gL6Q1TK
- LfIPfPFek9o1JgGFQdorNi9N8BNezdPiBAy4Ma+0nVmW7IJj6rDporVScCSYDehvgtBLyJ0Hd+a
- ak2cgBJIVUR1rmpOJ5vhzsNPnAnQWOjuIioEdTKmt9sjR4j4TjhGEo1gFK8v7YcebONFX10/x2c
- GJLZC5bV6n6Z5HKWg==
-X-Google-Smtp-Source: AGHT+IHlKZzbrtQfRcLaO4kEjS0Hf9bxVcGoSa8B2rXEas+mch+L/dGX7KrypU7xictP35FHPN14pA==
-X-Received: by 2002:a17:907:d8a:b0:b3e:c7d5:4cbb with SMTP id
- a640c23a62f3a-b703d4d6101mr216012166b.35.1761734958425; 
- Wed, 29 Oct 2025 03:49:18 -0700 (PDT)
-Received: from andrea-amarula.amarulasolutions.com
- (98-215-98-95.ftth.glasoperator.nl. [95.98.215.98])
+ d=1e100.net; s=20230601; t=1761735352; x=1762340152;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=KVduHldS/XUM32HxZkDl0WGK2r33+6/qm4u41PgvosE=;
+ b=YLviIj2+xCARUXxkA9QVHqpYFoI1OtZcpBCbchewWSz04386YhXRk49nYsYl19Gidp
+ o6emz6Gn6Uf5MoOqpv2S7euko1Tg47qfai12JRMJIXjTzNAqSrXe38UHKXwaJsNKFqHq
+ NEUK0wGBOsUKUIOWGa6XmXxoA6mUQeRwRydE/w5/feQinYWQPE7rUVNLLYHUY84SqPI/
+ CfApG28v4oOfP6kTg861drIQJYOskXqgPoeg0N48Yt+Y90eoGDIa3cZTlmIE2Kb/1Lic
+ 78kaEBDbZxpUAEAB2svIWIsD0toY8mR/gUZWyP+qup9dKYqieBygVBS7s6DOhM/ncWp2
+ LrZA==
+X-Gm-Message-State: AOJu0YyTz6kxsAzvzXL0FiFJt1bZncvw0y3id4ERMjZLj5vXIavnm0gC
+ ggFX0Zzcgp0viIqnkloudYPuGdaaE+Syfw4ZHO1dLFqMhCczPfpcSxYEeRrADtyGSqY=
+X-Gm-Gg: ASbGncuEEU0BgF5d4An9VhqKuL5ol8xNlTeXTHeT+Uv4Q70tOMKSBICBwv5o+sVeN5g
+ r5DH0vHjbxi7XoJhp1xLWHN7PtuanK85HENtV8IvwTto0+9guMeGSIn/E8ynGbxLWkkhfxg5Dje
+ uEv9c533btgnsJpViO6rN9PK8xXI7mjnLZ54Wb7qA19IttWD0NwB2/rPVMyhhva5SDFYK+ImW8R
+ T3/q96EIooQHX8zSDdltV7bt1NPETYYexqntKaaceX+IVvRSSIfQEOVH35y/x8F1N1V3zizAEBF
+ pVArxDa2+qioqqxg0ivswtMNs5GgU0y87qCZbg399ZqjfU3v04ZL/jqbsye3QBt3PZFCo9VZBag
+ Tvgojzhds6lbdRiH+SxHxgBbQ5skVC/xgvQDwvfmk78kWLNlNc+0jNRIVdjcSk4nwkZ4jf0w0vn
+ W3ooDqbaidsWkkaA85YTUz369qObdHLtk9vmYiNItpLj9Nv08oIg==
+X-Google-Smtp-Source: AGHT+IERYZ/tI7ezMfNPTZ8hZWBPXW2UZ2q8vFgP6gmQqzZKoKI3IkRjxOGq99VFGAWuk7U8x8HCtA==
+X-Received: by 2002:a05:6000:2089:b0:428:4354:aa43 with SMTP id
+ ffacd0b85a97d-429aef83083mr1871166f8f.18.1761735351614; 
+ Wed, 29 Oct 2025 03:55:51 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:cad:2140:3447:eb7a:cb9f:5e0?
+ ([2a01:e0a:cad:2140:3447:eb7a:cb9f:5e0])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b6d8530905dsm1385924166b.6.2025.10.29.03.49.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Oct 2025 03:49:17 -0700 (PDT)
-From: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-To: u-boot@lists.denx.de, michael@amarulasolutions.com,
- dario.binacchi@amarulasolutions.com, trini@konsulko.com, festevam@gmail.com
-Cc: andrea.calabrese@amarulasolutions.com
-Subject: [PATCH 3/3] bsh: imx6ulz_smm_m2: Add imx6ulz BSH SMM M2D board
-Date: Wed, 29 Oct 2025 11:49:01 +0100
-Message-ID: <20251029104901.3810649-3-andrea.calabrese@amarulasolutions.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20251029104901.3810649-1-andrea.calabrese@amarulasolutions.com>
-References: <20251029104901.3810649-1-andrea.calabrese@amarulasolutions.com>
+ ffacd0b85a97d-429952cbb2bsm26077167f8f.13.2025.10.29.03.55.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 29 Oct 2025 03:55:51 -0700 (PDT)
+Message-ID: <df0e58ef-a00c-41b7-a872-7be468d92252@linaro.org>
+Date: Wed, 29 Oct 2025 11:55:50 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 29 Oct 2025 11:50:14 +0100
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-ufs-20251029
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,556 +120,105 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the BSH SystemMaster (SMM) M2D board. Notably, the M2D is
-designed to leverage the existing device tree of its predecessors, the M2B
-and the M2.
-The primary distinction arises from memory incompatibilities with the M2B
-and M2.
-To address this, we've implemented a configuration system that allows for
-selective inclusion of the desired memory components.
+Hi Tom,
 
-Signed-off-by: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
+This is a set of UFS changes, including fixes and cleanup plus 3 new
+platforms support.
 
-diff --git a/board/bsh/imx6ulz_smm_m2/Kconfig b/board/bsh/imx6ulz_smm_m2/Kconfig
-index 20971aa4fe1..6c4321c3b5e 100644
---- a/board/bsh/imx6ulz_smm_m2/Kconfig
-+++ b/board/bsh/imx6ulz_smm_m2/Kconfig
-@@ -28,6 +28,12 @@ config BSH_M2B_MEMORY
- 	  If this option is enabled, U-Boot will be configured to support
- 	  imx6ulz bsh m2b revision memories.
- 
-+config BSH_M2D_MEMORY
-+	bool "Enable for bsh m2d variant"
-+	help
-+	  If this option is enabled, U-Boot will be configured to support
-+	  imx6ulz bsh m2d revision memories.
-+
- endchoice
- 
- endif
-diff --git a/board/bsh/imx6ulz_smm_m2/MAINTAINERS b/board/bsh/imx6ulz_smm_m2/MAINTAINERS
-index a75cddd72f8..098b992b07a 100644
---- a/board/bsh/imx6ulz_smm_m2/MAINTAINERS
-+++ b/board/bsh/imx6ulz_smm_m2/MAINTAINERS
-@@ -5,3 +5,4 @@ F:	board/bsh/imx6ulz_smm_m2/
- F:	include/configs/imx6ulz_smm_m2.h
- F:	configs/imx6ulz_smm_m2_defconfig
- F:	configs/imx6ulz_smm_m2b_defconfig
-+F:	configs/imx6ulz_smm_m2d_defconfig
-diff --git a/board/bsh/imx6ulz_smm_m2/Makefile b/board/bsh/imx6ulz_smm_m2/Makefile
-index 5ab00a5ea75..81e47e3735e 100644
---- a/board/bsh/imx6ulz_smm_m2/Makefile
-+++ b/board/bsh/imx6ulz_smm_m2/Makefile
-@@ -5,3 +5,4 @@ obj-y  := imx6ulz_smm_m2.o
- obj-$(CONFIG_XPL_BUILD) += spl.o
- obj-$(CONFIG_BSH_M2_MEMORY) += ddr3l_timing_512m.o ddr3l_timing_256m.o ddr3l_timing_128m.o
- obj-$(CONFIG_BSH_M2B_MEMORY) += ddr3l_timing_512m_m2b.o ddr3l_timing_256m_m2b.o ddr3l_timing_128m_m2b.o
-+obj-$(CONFIG_BSH_M2D_MEMORY) += ddr3l_timing_512m_m2d.o ddr3l_timing_256m_m2d.o ddr3l_timing_128m_m2d.o
-\ No newline at end of file
-diff --git a/board/bsh/imx6ulz_smm_m2/README b/board/bsh/imx6ulz_smm_m2/README
-index 3007180cc47..9af85d36c40 100644
---- a/board/bsh/imx6ulz_smm_m2/README
-+++ b/board/bsh/imx6ulz_smm_m2/README
-@@ -1,4 +1,4 @@
--How to Update U-Boot on imx6ulz_smm_m2 and imx6ulz_smm_m2b boards
-+How to Update U-Boot on imx6ulz_smm_m2, imx6ulz_smm_m2b and imx6ulz_smm_m2d boards
- --------------------------------------------
- 
- Required software on the host PC:
-@@ -16,6 +16,12 @@ $ make mrproper
- $ make imx6ulz_smm_m2b_defconfig
- $ make
- 
-+Build U-Boot for m2d:
-+$ make mrproper
-+$ make imx6ulz_smm_m2d_defconfig
-+$ make
-+
-+
- This generates the SPL and u-boot-dtb.img binaries.
- 
- 1. Loading U-Boot via USB Serial Download Protocol
-diff --git a/board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m_m2d.c b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m_m2d.c
-new file mode 100644
-index 00000000000..5910858a930
---- /dev/null
-+++ b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m_m2d.c
-@@ -0,0 +1,121 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "spl_mtypes.h"
-+
-+static const struct dram_cfg_param ddr_ddrc_cfg_128mb[] = {
-+	/*  IOMUX */
-+
-+	/* DDR IO TYPE: */
-+	{0x020E04B4, 0x000C0000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDR_TYPE */
-+	{0x020E04AC, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRPKE */
-+
-+	/* CLOCK: */
-+	{0x020E027C, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDCLK0_P */
-+
-+	/* Control: */
-+	{0x020E0250, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_CAS */
-+	{0x020E024C, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RAS */
-+	{0x020E0490, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_ADDDS */
-+	{0x020E0288, 0x000C0028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET */
-+	{0x020E0270, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDBA2 - DSE can be configured */
-+				  /*  using Group Control Register: IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+	{0x020E0260, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT0 */
-+	{0x020E0264, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT1 */
-+	{0x020E04A0, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+
-+	/* Data Strobes: */
-+	{0x020E0494, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE_CTL */
-+	{0x020E0280, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS0_P */
-+	{0x020E0284, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS1_P */
-+
-+	/* Data: */
-+	{0x020E04B0, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE */
-+	{0x020E0498, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_B0DS */
-+	{0x020E04A4, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_B1DS */
-+	{0x020E0244, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM0 */
-+	{0x020E0248, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM1 */
-+
-+	/* ============================================================================= */
-+	/*  DDR Controller Registers */
-+	/* ============================================================================= */
-+	/*  Manufacturer:WINBOND */
-+	/*  Device Part Number:W631GU6RB-11 */
-+	/*  Clock Freq.: 400MHz */
-+	/*  Density per CS in Gb: 1 */
-+	/*  Chip Selects used:1 */
-+	/*  Total DRAM density (Gb)1 */
-+	/*  Number of Banks:8 */
-+	/*  Row address:    13 */
-+	/*  Column address: 10 */
-+	/*  Data bus width16 */
-+	/* ============================================================================= */
-+	{0x021B001C, 0x00008000}, /*  [MMDC_MDSCR] MMDC Core Special Command Register */
-+
-+	/* ====================================================== */
-+	/* Calibrations: */
-+	/* ====================================================== */
-+	{0x021B0800, 0xA1390003}, /*  DDR_PHY_P0_MPZQHWCTRL, enable both one-time & periodic */
-+				  /*  HW ZQ calibration. */
-+
-+	{0x021B080C, 0x00060002}, /*  [MMDC_MPWLDECTRL0] MMDC PHY Write Leveling Delay Control */
-+				  /*  Register 0 */
-+	{0x021B083C, 0x414C0150}, /*  [MMDC_MPDGCTRL0] MMDC PHY Read DQS Gating Control */
-+				  /*  Register 0 */
-+	{0x021B0848, 0x4040363E}, /*  [MMDC_MPRDDLCTL] MMDC PHY Read delay-lines Configuration */
-+				  /*  Register */
-+	{0x021B0850, 0x40402A28}, /*  [MMDC_MPWRDLCTL] MMDC PHY Write delay-lines Configuration */
-+				  /*  Register */
-+
-+	{0x021B081C, 0x33333333}, /*  [MMDC_MPRDDQBY0DL] MMDC PHY Read DQ Byte0 Delay Register */
-+	{0x021B0820, 0x33333333}, /*  [MMDC_MPRDDQBY1DL] MMDC PHY Read DQ Byte1 Delay Register */
-+
-+	{0x021B082C, 0xf3333333}, /*  [MMDC_MPWRDQBY0DL] MMDC PHY Write DQ Byte0 Delay Register */
-+	{0x021B0830, 0xf3333333}, /*  [MMDC_MPWRDQBY1DL] MMDC PHY Write DQ Byte1 Delay Register */
-+
-+	{0x021B08C0, 0x00944009}, /*  [MMDC_MPDCCR] MMDC Duty Cycle Control Register */
-+
-+	/*  Complete calibration by forced measurement: */
-+	{0x021B08B8, 0x00000800}, /*  DDR_PHY_P0_MPMUR0, frc_msr */
-+
-+	/* ====================================================== */
-+	/* MMDC init: */
-+	/* ====================================================== */
-+	{0x021B0004, 0x0002002D}, /*  MMDC0_MDPDC */
-+	{0x021B0008, 0x1B333030}, /*  MMDC0_MDOTC */
-+	{0x021B000C, 0x2B2F52F3}, /*  MMDC0_MDCFG0 */
-+	{0x021B0010, 0xB66D0A63}, /*  MMDC0_MDCFG1 */
-+	{0x021B0014, 0x01FF00DB}, /*  MMDC0_MDCFG2 */
-+	{0x021B0018, 0x00201740}, /*  MMDC0_MDMISC */
-+	{0x021B002C, 0x000026D2}, /*  MMDC0_MDRWD; recommend to maintain the default values */
-+	{0x021B0030, 0x002F1023}, /*  MMDC0_MDOR */
-+	{0x021B0040, 0x00000043}, /*  CS0_END */
-+	{0x021B0000, 0x82180000}, /*  MMDC0_MDCTL */
-+
-+	/*  Mode register writes for CS0 */
-+	{0x021B001C, 0x02808032}, /*  MMDC0_MDSCR, MR2 write, CS0 */
-+	{0x021B001C, 0x00008033}, /*  MMDC0_MDSCR, MR3 write, CS0 */
-+	{0x021B001C, 0x00048031}, /*  MMDC0_MDSCR, MR1 write, CS0 */
-+	{0x021B001C, 0x15208030}, /*  MMDC0_MDSCR, MR0 write, CS0 */
-+	{0x021B001C, 0x04008040}, /*  MMDC0_MDSCR, ZQ calibration command sent to device on CS0 */
-+
-+	/*  Mode register writes for CS, commented out automatically if only one chip select used */
-+	/*     {0x021B001C, 0x0200803A},  */
-+	/*     {0x021B001C, 0x0000803B},  */
-+	/*     {0x021B001C, 0x00048039},  */
-+	/*     {0x021B001C, 0x15208038},  */
-+	/*     {0x021B001C, 0x04008048},  */
-+
-+	/*  final DDR setup, before operation start: */
-+	{0x021B0020, 0x00000800}, /*  MMDC0_MDREF */
-+	{0x021B0818, 0x00000227}, /*  DDR_PHY_P0_MPODTCTRL */
-+	{0x021B0004, 0x0002556D}, /*  MMDC0_MDPDC now SDCTL power down enabled */
-+	{0x021B0404, 0x00011006}, /*  MMDC0_MAPSR ADOPT power down enabled */
-+	{0x021B001C, 0x00000000}, /*  MMDC0_MDSCR, clear this register (especially the */
-+				  /*  configuration bit as initialization is complete) */
-+};
-+
-+struct dram_timing_info bsh_dram_timing_128mb = {
-+	.ddrc_cfg = ddr_ddrc_cfg_128mb,
-+	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_128mb),
-+	.dram_size = SZ_128M,
-+};
-diff --git a/board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m_m2d.c b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m_m2d.c
-new file mode 100644
-index 00000000000..d0ba01258f4
---- /dev/null
-+++ b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m_m2d.c
-@@ -0,0 +1,122 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "spl_mtypes.h"
-+
-+static const struct dram_cfg_param ddr_ddrc_cfg_256mb[] = {
-+	/*  IOMUX */
-+
-+	/* DDR IO TYPE: */
-+	{0x020E04B4, 0x000C0000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDR_TYPE */
-+	{0x020E04AC, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRPKE */
-+
-+	/* CLOCK: */
-+	{0x020E027C, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDCLK0_P */
-+
-+	/* Control: */
-+	{0x020E0250, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_CAS */
-+	{0x020E024C, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RAS */
-+	{0x020E0490, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_ADDDS */
-+	{0x020E0288, 0x000C0030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET */
-+	{0x020E0270, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDBA2 - DSE can be configured */
-+				  /*  using Group Control Register: IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+	{0x020E0260, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT0 */
-+	{0x020E0264, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT1 */
-+	{0x020E04A0, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+
-+	/* Data Strobes: */
-+	{0x020E0494, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE_CTL */
-+	{0x020E0280, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS0_P */
-+	{0x020E0284, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS1_P */
-+
-+	/* Data: */
-+	{0x020E04B0, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE */
-+	{0x020E0498, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_B0DS */
-+	{0x020E04A4, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_B1DS */
-+	{0x020E0244, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM0 */
-+	{0x020E0248, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM1 */
-+
-+	/* ============================================================================= */
-+	/*  DDR Controller Registers */
-+	/* ============================================================================= */
-+	/*  Manufacturer:WINBOND */
-+	/*  Device Part Number:W632GU6RB-11 */
-+	/*  Clock Freq.: 400MHz */
-+	/*  Density per CS in Gb: 2 */
-+	/*  Chip Selects used:1 */
-+	/*  Total DRAM density (Gb)2 */
-+	/*  Number of Banks:8 */
-+	/*  Row address:    14 */
-+	/*  Column address: 10 */
-+	/*  Data bus width16 */
-+	/* ============================================================================= */
-+	{0x021B001C, 0x00008000}, /*  [MMDC_MDSCR] MMDC Core Special Command Register */
-+
-+	/* ====================================================== */
-+	/* Calibrations: */
-+	/* ====================================================== */
-+	{0x021B0800, 0xA1390003}, /*  DDR_PHY_P0_MPZQHWCTRL, enable both one-time & periodic */
-+				  /*  HW ZQ calibration. */
-+
-+	{0x021B080C, 0x00070005}, /*  [MMDC_MPWLDECTRL0] MMDC PHY Write Leveling Delay Control */
-+				  /*  Register 0 */
-+	{0x021B083C, 0x414C0150}, /*  [MMDC_MPDGCTRL0] MMDC PHY Read DQS Gating Control */
-+				  /* Register 0 */
-+	{0x021B0848, 0x4040383E}, /*  [MMDC_MPRDDLCTL] MMDC PHY Read delay-lines Configuration */
-+				  /*  Register */
-+	{0x021B0850, 0x40402E2A}, /*  [MMDC_MPWRDLCTL] MMDC PHY Write delay-lines Configuration */
-+				  /*  Register */
-+
-+	{0x021B081C, 0x33333333}, /*  [MMDC_MPRDDQBY0DL] MMDC PHY Read DQ Byte0 Delay Register */
-+	{0x021B0820, 0x33333333}, /*  [MMDC_MPRDDQBY1DL] MMDC PHY Read DQ Byte1 Delay Register */
-+
-+	{0x021B082C, 0xf3333333}, /*  [MMDC_MPWRDQBY0DL] MMDC PHY Write DQ Byte0 Delay Register */
-+	{0x021B0830, 0xf3333333}, /*  [MMDC_MPWRDQBY1DL] MMDC PHY Write DQ Byte1 Delay Register */
-+
-+	{0x021B08C0, 0x00944009}, /*  [MMDC_MPDCCR] MMDC Duty Cycle Control Register */
-+
-+	/*  Complete calibration by forced measurement: */
-+	{0x021B08B8, 0x00000800}, /*  DDR_PHY_P0_MPMUR0, frc_msr */
-+
-+	/* ====================================================== */
-+	/* MMDC init: */
-+	/* ====================================================== */
-+	{0x021B0004, 0x00020024}, /*  MMDC0_MDPDC */
-+	{0x021B0008, 0x1B333030}, /*  MMDC0_MDOTC */
-+	{0x021B000C, 0x3F4352D3}, /*  MMDC0_MDCFG0 */
-+	{0x021B0010, 0xB66D0A63}, /*  MMDC0_MDCFG1 */
-+	{0x021B0014, 0x01FF00DB}, /*  MMDC0_MDCFG2 */
-+	{0x021B0018, 0x00201740}, /*  MMDC0_MDMISC */
-+	{0x021B002C, 0x000026D2}, /*  MMDC0_MDRWD; recommend to maintain the default values */
-+	{0x021B0030, 0x00431023}, /*  MMDC0_MDOR */
-+	{0x021B0040, 0x00000047}, /*  CS0_END */
-+	{0x021B0000, 0x83180000}, /*  MMDC0_MDCTL */
-+
-+	/*  Mode register writes for CS0 */
-+	{0x021B001C, 0x02808032}, /*  MMDC0_MDSCR, MR2 write, CS0 */
-+	{0x021B001C, 0x00008033}, /*  MMDC0_MDSCR, MR3 write, CS0 */
-+	{0x021B001C, 0x00048031}, /*  MMDC0_MDSCR, MR1 write, CS0 */
-+	{0x021B001C, 0x15208030}, /*  MMDC0_MDSCR, MR0 write, CS0 */
-+	{0x021B001C, 0x04008040}, /*  MMDC0_MDSCR, ZQ calibration command sent to device on CS0 */
-+
-+	/*  Mode register writes for CS, commented out automatically */
-+	/*  if only one chip select used */
-+	/*     {0x021B001C, 0x0200803A},  */
-+	/*     {0x021B001C, 0x0000803B},  */
-+	/*     {0x021B001C, 0x00048039},  */
-+	/*     {0x021B001C, 0x15208038},  */
-+	/*     {0x021B001C, 0x04008048},  */
-+
-+	/*  final DDR setup, before operation start: */
-+	{0x021B0020, 0x00000800}, /*  MMDC0_MDREF */
-+	{0x021B0818, 0x00000227}, /*  DDR_PHY_P0_MPODTCTRL */
-+	{0x021B0004, 0x00025564}, /*  MMDC0_MDPDC now SDCTL power down enabled */
-+	{0x021B0404, 0x00011006}, /*  MMDC0_MAPSR ADOPT power down enabled */
-+	{0x021B001C, 0x00000000}, /*  MMDC0_MDSCR, clear this register (especially the  */
-+				  /*  configuration bit as initialization is complete) */
-+};
-+
-+struct dram_timing_info dram_timing_256mb = {
-+	.ddrc_cfg = ddr_ddrc_cfg_256mb,
-+	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_256mb),
-+	.dram_size = SZ_256M,
-+};
-diff --git a/board/bsh/imx6ulz_smm_m2/ddr3l_timing_512m_m2d.c b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_512m_m2d.c
-new file mode 100644
-index 00000000000..e767f9ed641
---- /dev/null
-+++ b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_512m_m2d.c
-@@ -0,0 +1,127 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "spl_mtypes.h"
-+
-+static const struct dram_cfg_param ddr_ddrc_cfg_512mb[] = {
-+	/* ============================================================================= */
-+	/*  IOMUX */
-+	/* ============================================================================= */
-+	/* DDR IO TYPE: */
-+	{0x020E04B4, 0x000C0000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDR_TYPE */
-+	{0x020E04AC, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRPKE */
-+
-+	/* CLOCK: */
-+	{0x020E027C, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDCLK0_P */
-+
-+	/* Control: */
-+	{0x020E0250, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_CAS */
-+	{0x020E024C, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RAS */
-+	{0x020E0490, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_ADDDS */
-+	{0x020E0288, 0x000C0030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET */
-+	{0x020E0270, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDBA2 */
-+				/* DSE can be configured using Group Control Register: */
-+				/* IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+	{0x020E0260, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT0 */
-+	{0x020E0264, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT1 */
-+	{0x020E04A0, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+
-+	/* Data Strobes: */
-+	{0x020E0494, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE_CTL */
-+	{0x020E0280, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS0_P */
-+	{0x020E0284, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS1_P */
-+
-+	/* Data: */
-+	{0x020E04B0, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE */
-+	{0x020E0498, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_B0DS */
-+	{0x020E04A4, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_B1DS */
-+	{0x020E0244, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM0 */
-+	{0x020E0248, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM1 */
-+
-+	/* ============================================================================= */
-+	/*  DDR Controller Registers */
-+	/* ============================================================================= */
-+	/*  Manufacturer 1:NANYA */
-+	/*  Device Part Number 1:NT5CC256M16ER-EKI */
-+	/*  Manufacturer 2:MICRON */
-+	/*  Device Part Number 2:MT41K256M16TW-107 */
-+	/*  Clock Freq.: 400MHz */
-+	/*  Density per CS in Gb: 4 */
-+	/*  Chip Selects used:1 */
-+	/*  Total DRAM density (Gb)4 */
-+	/*  Number of Banks:8 */
-+	/*  Row address:    15 */
-+	/*  Column address: 10 */
-+	/*  Data bus width16 */
-+	/* ============================================================================= */
-+	{0x021B001C, 0x00008000}, /*  [MMDC_MDSCR] MMDC Core Special Command Register */
-+
-+	/* ====================================================== */
-+	/* Calibrations: */
-+	/* ====================================================== */
-+	{0x021B0800, 0xA1390003}, /*  DDR_PHY_P0_MPZQHWCTRL, */
-+			/* enable both one-time & periodic HW ZQ calibration. */
-+
-+	{0x021B080C, 0x00070004}, /*  [MMDC_MPWLDECTRL0] MMDC PHY Write Leveling */
-+				  /*  Delay Control Register 0 */
-+	{0x021B083C, 0x414C014C}, /*  [MMDC_MPDGCTRL0] MMDC PHY Read DQS */
-+				  /* Gating Control Register 0 */
-+	{0x021B0848, 0x40403A3E}, /*  [MMDC_MPRDDLCTL] MMDC PHY Read delay-lines */
-+				  /*  Configuration Register */
-+	{0x021B0850, 0x40402E28}, /*  [MMDC_MPWRDLCTL] MMDC PHY Write delay-lines */
-+				  /*  Configuration Register */
-+
-+	{0x021B081C, 0x33333333}, /*  [MMDC_MPRDDQBY0DL] MMDC PHY Read DQ Byte0 Delay Register */
-+	{0x021B0820, 0x33333333}, /*  [MMDC_MPRDDQBY1DL] MMDC PHY Read DQ Byte1 Delay Register */
-+
-+	{0x021B082C, 0xf3333333}, /*  [MMDC_MPWRDQBY0DL] MMDC PHY Write DQ Byte0 Delay Register */
-+	{0x021B0830, 0xf3333333}, /*  [MMDC_MPWRDQBY1DL] MMDC PHY Write DQ Byte1 Delay Register */
-+
-+	{0x021B08C0, 0x00944009}, /*  [MMDC_MPDCCR] MMDC Duty Cycle Control Register */
-+
-+	/*  Complete calibration by forced measurement: */
-+	{0x021B08B8, 0x00000800}, /*  DDR_PHY_P0_MPMUR0, frc_msr */
-+
-+	/* ====================================================== */
-+	/* MMDC init: */
-+	/* ====================================================== */
-+	{0x021B0004, 0x0002002D}, /*  MMDC0_MDPDC */
-+	{0x021B0008, 0x1B333030}, /*  MMDC0_MDOTC */
-+	{0x021B000C, 0x616552F3}, /*  MMDC0_MDCFG0 */
-+	{0x021B0010, 0xB62C0A63}, /*  MMDC0_MDCFG1 */
-+	{0x021B0014, 0x01FF00DB}, /*  MMDC0_MDCFG2 */
-+	{0x021B0018, 0x00201740}, /*  MMDC0_MDMISC */
-+	{0x021B002C, 0x000026D2}, /*  MMDC0_MDRWD; recommend to maintain the default values */
-+	{0x021B0030, 0x00651023}, /*  MMDC0_MDOR */
-+	{0x021B0040, 0x0000004F}, /*  CS0_END */
-+	{0x021B0000, 0x84180000}, /*  MMDC0_MDCTL */
-+
-+	/*  Mode register writes for CS0 */
-+	{0x021B001C, 0x02008032}, /*  MMDC0_MDSCR, MR2 write, CS0 */
-+	{0x021B001C, 0x00008033}, /*  MMDC0_MDSCR, MR3 write, CS0 */
-+	{0x021B001C, 0x00048031}, /*  MMDC0_MDSCR, MR1 write, CS0 */
-+	{0x021B001C, 0x15208030}, /*  MMDC0_MDSCR, MR0 write, CS0 */
-+	{0x021B001C, 0x04008040}, /*  MMDC0_MDSCR, ZQ calibration command sent */
-+				  /*  to device on CS0 */
-+
-+	/*  Mode register writes for CS, commented out automatically */
-+	/*  if only one chip select used */
-+	/*     {0x021B001C,0x0200803A},  */
-+	/*     {0x021B001C,0x0000803B},  */
-+	/*     {0x021B001C,0x00048039},  */
-+	/*     {0x021B001C,0x15208038},  */
-+	/*     {0x021B001C,0x04008048},  */
-+
-+	/*  final DDR setup, before operation start: */
-+	{0x021B0020, 0x00000800}, /*  MMDC0_MDREF */
-+	{0x021B0818, 0x00000227}, /*  DDR_PHY_P0_MPODTCTRL */
-+	{0x021B0004, 0x0002556D}, /*  MMDC0_MDPDC now SDCTL power down enabled */
-+	{0x021B0404, 0x00011006}, /*  MMDC0_MAPSR ADOPT power down enabled */
-+	{0x021B001C, 0x00000000}, /*  MMDC0_MDSCR, clear this register */
-+			/* (especially the configuration bit as initialization is complete) */
-+};
-+
-+struct dram_timing_info bsh_dram_timing_512mb = {
-+	.ddrc_cfg = ddr_ddrc_cfg_512mb,
-+	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_512mb),
-+	.dram_size = SZ_512M,
-+};
-diff --git a/configs/imx6ulz_smm_m2d_defconfig b/configs/imx6ulz_smm_m2d_defconfig
-new file mode 100644
-index 00000000000..ab80f94ba9a
---- /dev/null
-+++ b/configs/imx6ulz_smm_m2d_defconfig
-@@ -0,0 +1,82 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_MX6=y
-+CONFIG_TEXT_BASE=0x87800000
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SYS_MALLOC_F_LEN=0x18000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x20000
-+CONFIG_ENV_OFFSET=0x400000
-+CONFIG_MX6ULL=y
-+CONFIG_TARGET_MX6ULZ_SMM_M2=y
-+CONFIG_BSH_M2D_MEMORY=y
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6ulz-bsh-smm-m2"
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_BSS_START_ADDR=0x84100000
-+CONFIG_SPL=y
-+CONFIG_FIT=y
-+CONFIG_FIT_SIGNATURE=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_MTD=y
-+CONFIG_SPL_NAND_SUPPORT=y
-+CONFIG_SPL_WATCHDOG=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_SDP=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_MTDIDS_DEFAULT="nand0=gpmi-nand"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=gpmi-nand:4m(nandboot),1m(env),8m(kernel),1m(nanddtb),-(rootfs)"
-+CONFIG_CMD_UBI=y
-+# CONFIG_ISO_PARTITION is not set
-+CONFIG_OF_CONTROL=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_NAND=y
-+CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-+CONFIG_NO_NET=y
-+CONFIG_BOUNCE_BUFFER=y
-+CONFIG_CLK_COMPOSITE_CCF=y
-+CONFIG_CLK_IMX6UL=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x82000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_UUU_SUPPORT=y
-+CONFIG_SYS_I2C_MXC=y
-+# CONFIG_MMC is not set
-+CONFIG_MTD=y
-+CONFIG_MTD_RAW_NAND=y
-+CONFIG_SYS_NAND_USE_FLASH_BBT=y
-+CONFIG_NAND_MXS=y
-+CONFIG_NAND_MXS_DT=y
-+CONFIG_SYS_NAND_ONFI_DETECTION=y
-+CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
-+CONFIG_SYS_NAND_U_BOOT_OFFS=0x111400
-+CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND=0x291400
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_IMX6=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_MXC_UART=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
-+CONFIG_IMX_THERMAL=y
-+CONFIG_USB=y
-+CONFIG_SPL_USB_HOST=y
-+CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="BSH"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_CI_UDC=y
-+CONFIG_SDP_LOADADDR=0x877fffc0
-+CONFIG_SPL_USB_SDP_SUPPORT=y
-+CONFIG_IMX_WATCHDOG=y
--- 
-2.48.1
+Thanks,
+Neil
 
+The following changes since commit 23987e10905146def3ab61e55ec912c6e742efdc:
+
+   Prepare v2026.01-rc1 (2025-10-27 16:10:23 -0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-ufs-20251029
+
+for you to fetch changes up to 3351fe7ecc1ac717c23e9ad2c16e1fe4a7b84fd2:
+
+   ufs: Add UFS driver for Renesas R-Car X5H (2025-10-28 17:35:46 +0100)
+
+----------------------------------------------------------------
+- ti-j721e: Correct error detection
+- Fix wrong bitfield usage for Data Direction in Transfer Request
+- Add support for sending UFS attribute requests
+- Add bRefClkFreq attribute setting
+- Add ufshcd_dme_enable() and ufshcd_dme_reset()
+- unipro: Add PA_SCRAMBLING property
+- Cleanups:
+  - Keep Makefile and Kconfig list sorted
+  - Fold ufs-uclass into ufs and rename to ufs-uclass
+  - amd-versal2: Fix indent
+  - Call ufs_scsi_bind() from uclass .post_bind
+  - renesas: Update Kconfig entry help text
+- New plaforms:
+  - Rockchip UFS
+  - Mediatek UFS
+  - Renesas R-Car X5H UFS
+
+----------------------------------------------------------------
+Andrew Goodbody (1):
+       ufs: ti-j721e: Correct error detection
+
+Igor Belwon (3):
+       ufs: unipro: Add PA_SCRAMBLING property
+       ufs: Add MediaTek UFS driver
+       MAINTAINERS: Add UFS to MediaTek section
+
+Jared McArthur (2):
+       ufs: Add support for sending UFS attribute requests
+       ufs: Add bRefClkFreq attribute setting
+
+Kunihiko Hayashi (1):
+       ufs: Fix wrong bitfield usage for Data Direction in Transfer Request
+
+Marek Vasut (6):
+       ufs: core: Keep Makefile and Kconfig list sorted
+       ufs: core: Fold ufs-uclass into ufs
+       ufs: core: Rename ufs.c to ufs-uclass.c
+       ufs: amd-versal2: Fix indent
+       ufs: Call ufs_scsi_bind() from uclass .post_bind
+       ufs: renesas: Update Kconfig entry help text
+
+Shawn Lin (2):
+       ufs: core: Add ufshcd_dme_enable() and ufshcd_dme_reset()
+       ufs: rockchip: Add initial support
+
+Tuyen Dang (1):
+       ufs: Add UFS driver for Renesas R-Car X5H
+
+  MAINTAINERS                         |    3 +
+  drivers/ufs/Kconfig                 |   62 +-
+  drivers/ufs/Makefile                |    7 +-
+  drivers/ufs/cdns-platform.c         |    8 -
+  drivers/ufs/ti-j721e-ufs.c          |    6 +-
+  drivers/ufs/ufs-amd-versal2.c       |   18 +-
+  drivers/ufs/ufs-mediatek-sip.h      |   56 +
+  drivers/ufs/ufs-mediatek.c          |  395 ++++++
+  drivers/ufs/ufs-mediatek.h          |  210 ++++
+  drivers/ufs/ufs-pci.c               |    8 -
+  drivers/ufs/ufs-qcom.c              |    8 -
+  drivers/ufs/ufs-renesas-rcar-gen5.c |  268 ++++
+  drivers/ufs/ufs-renesas.c           |    8 -
+  drivers/ufs/ufs-rockchip.c          |  203 +++
+  drivers/ufs/ufs-rockchip.h          |   88 ++
+  drivers/ufs/ufs-uclass.c            | 2303 ++++++++++++++++++++++++++++++++++-
+  drivers/ufs/ufs.c                   | 2093 -------------------------------
+  drivers/ufs/ufs.h                   |   14 +
+  drivers/ufs/unipro.h                |    1 +
+  19 files changed, 3595 insertions(+), 2164 deletions(-)
+  create mode 100644 drivers/ufs/ufs-mediatek-sip.h
+  create mode 100644 drivers/ufs/ufs-mediatek.c
+  create mode 100644 drivers/ufs/ufs-mediatek.h
+  create mode 100644 drivers/ufs/ufs-renesas-rcar-gen5.c
+  create mode 100644 drivers/ufs/ufs-rockchip.c
+  create mode 100644 drivers/ufs/ufs-rockchip.h
+  delete mode 100644 drivers/ufs/ufs.c
