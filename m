@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD0EDCCF9EE
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 18:08:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C25CCF9EB
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 18:08:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF67281E13;
-	Wed, 29 Oct 2025 19:08:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5474A800B6;
+	Wed, 29 Oct 2025 19:08:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uCo0uzOR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p7DmKA9g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8820682E34; Wed, 29 Oct 2025 19:08:02 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id AF103832AD; Wed, 29 Oct 2025 19:08:03 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 235A58004F
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 19:08:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1968C8144A
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 19:08:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7c681a8aecdso57893a34.1
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 11:08:00 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c3e2221217so50100a34.3
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 11:08:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761761279; x=1762366079; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1761761280; x=1762366080; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3VOCuLlYMDJDnnqNYZpubEiYFQkR6iswXGo+k+Niblk=;
- b=uCo0uzORnS5LGUYJFK5J4FR6IlO/xwCnGCxH1n70IjpW33eSBuvAfutmtvJrq9KFih
- +uVVzxVXka7N4JyPwIu3vQ0+9SKcjZ92K5s+fIn3okIFlAxkHbaXcowubCpXnCwa+8rX
- Srddql5prZOIxH6sl5VLc0Bnki7kkkvBe5LXA=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7Y7eATklmNZ5W4PzD7Jp0xgcwaXI8Wyo7cn8xwT/sOU=;
+ b=p7DmKA9gyKVkqyaE1ct6MUPF8Zg7dJBIEvKPzICed4+QCKEj6lGixItSdTUt6MOdE8
+ htAH+SMJa+gJSeNDLwfjkaljQuhIoLfcEiQG0fp1uj+OsYBtmQe7fv5IgKr2s/8sUMAE
+ nqZH5DKTp/dqtu7bYBEEQhxyofcb2NCQ4lclk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761761279; x=1762366079;
+ d=1e100.net; s=20230601; t=1761761280; x=1762366080;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3VOCuLlYMDJDnnqNYZpubEiYFQkR6iswXGo+k+Niblk=;
- b=DC9WGZP2dBSe8JNQNeaQZ5K7Oair6Ufj4QTok8G/cYTAN2Tsbf/UlJTi0Gf6FwxHIv
- dsnmJfSsjsnHIWRQa+78fZCWEECwruMiMIkGL7039PUM+CDG6mtJlnc/558roR1B6af1
- nnZzxXIOd02WwZZkrP+TIRqFtw5Ci3e7Jq1TTpSFJYwmywx1pvfs5MeDQully+u8IynJ
- z/IK5exZefVDOeOTPtlZVl0hkq1cLBlT9scsFTWDIhyQ+3S/JysNVl44fTPXniTNWSt4
- JN+b/8pK+CfPZyV7JKMQdh45lDJpPgVkeVsxs+m75feHpLq//xVAqv92l5z02AjnQqhp
- Z+ZA==
-X-Gm-Message-State: AOJu0YxHmCzFUd5AEbnz0pLr/yARuTcJ/F61mrqNo+VIXMiLJTnE0XqV
- /myELsMy7KqY4/QKBN3SjqYLJg0kt6+rzVYa8Q75Ib2yEuKRubP9H//K8h1KhTx+bNI=
-X-Gm-Gg: ASbGncuavQPvCoUaqe40SBHniq/oi3SEv5vioo9LF/DO+V5bh2ICrt0gLic3degzSCW
- DH2wHaJ0L3bkM6WYINvxcpEHz/Yk+P9p33tGWkj3uEGfmM15SPPbGus5OkMLz4/FzatouzTGDBl
- qlDxKKESE0C6KXXW8+E+y76HgwIaJ32wwSqYjd4AqenSWXPgHMFQ40rZ+F+Mu6EpUhsQoXj9ykW
- s6Wz1MEz+4WEPdDzIwS4ZnTz0UVD/sq5BMHvjYVcEvaYxhrNooNfjRfyARHKqrqU4Py59sjlJaF
- WhMMvMO0OnqcUcGaXy1omvr69OejJrsNcqpzt/jXMoGwJt37+10hJoD0nBm4MrPn/UhXk7KM0ou
- wpN2e6GJbPnw5uB6EkpEElW6ZCwab7cM3+SrKmwr0iGr+i14q+iTsZLMinYop5FY1v6h7T6z8l9
- AizLqtsgq2fWS6t34B/WXNMVBvEXk7Og6jigSviw==
-X-Google-Smtp-Source: AGHT+IGdFSc0ELwCWSEYicC2/gs4qFoQD/BC7nMA6f6/ZXR6+y0kXlshE4NUbGj97wywjHxt4d6ogw==
-X-Received: by 2002:a05:6808:bc6:b0:44d:aa8b:58f6 with SMTP id
- 5614622812f47-44f89d63922mr85575b6e.1.1761761278670; 
- Wed, 29 Oct 2025 11:07:58 -0700 (PDT)
+ bh=7Y7eATklmNZ5W4PzD7Jp0xgcwaXI8Wyo7cn8xwT/sOU=;
+ b=JFmIZ8h1qAmqRoeCehAm6BI60sDWqscyfofOztGRmu+uXmsoEStkKnGBnh8lPjIIkG
+ D9vtWnz47I8SZaTR7GefwiHPWFiyxBkEGMIvmtBESjJuBU6pKZbtqHkhXu3jCDZujOal
+ sVZzx+OPUceDAf1+37/2PTP/tKY1iNmQdN/O+rR/n2G0TeGm67qJBSrkH49+jF/o0pk1
+ SFBR+S/EQiuFm7MECoWVYgGV0axrfevJfCeHd3CiSYrv4Hg8xRqyE0W/GvAAaeBAjQXX
+ iUXqPbnS5Juz1/7Ok0BGOfFRfm5L03nfUegpu/oRnxATxq1j+uddDB79d4iChz2w7h5s
+ MBzw==
+X-Gm-Message-State: AOJu0YwEr0/9s7YSPpFJyh6voz1TfDbrpuP57VH3I/pVfIoWiZEfy6ZT
+ sqeEfCIvxlXau2hlXkwuSZPKjpetl8nL+FUzx9Jhha0CJIqQCLZLVMwIB3TgrdcQtTyr7vC5ocW
+ yIGKdNfULkg==
+X-Gm-Gg: ASbGncv9I3prTz/LnmXUh/sgDg1Esn+CPmdeYstbIdqBbQAz3YtzVEdRHm1qCcXZb62
+ F1SiSPpPAuq82fBkRXPAmO3C63iPzc3O4ejhhsndUMaHoMhE0GcdDBIQdreWQedQIDfYclfQzu/
+ rvP9xz8reZdnq6ktcUBkeBQXHhmenmsfxJqzUfaEsQH5dV379bartatwrv1drZN8AFgkTy+BEoy
+ VPZP2BdI9/pjbATKEV56eBIHLxAq/gRZNCQyI92fJ4GxWtsP24rcmJKY2+JIHh9F4za+vzL4QSt
+ APb/pxO2aCjSodsD+LPL5N6kCJaE8jVD4yqbd0fTMRMxSrTd/tpKdDpuukSUG+16qnXwnYfoZ4p
+ v9FMkydznaUD/TZLv28qjmu0r7r99uIyv5ao94kSHPxY4x6D8oMN11g42iDhbKzQxJAlZwb8F/s
+ ywZUiYONCiAld/sSMIcZVi1ca0Ldk3vRt+ongAfA==
+X-Google-Smtp-Source: AGHT+IHTMwOhgT/iieQfDx5wmcE+2enI8+I3DPiI8yMSitk6oAPjxmNIA/3nqQjHXG5BSi1GRvjR7Q==
+X-Received: by 2002:a05:6808:3999:b0:44f:6a19:433e with SMTP id
+ 5614622812f47-44f7a44a203mr1903992b6e.15.1761761279859; 
+ Wed, 29 Oct 2025 11:07:59 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44da3e93e0esm3555356b6e.17.2025.10.29.11.07.57
+ 5614622812f47-44da3e93e0esm3555356b6e.17.2025.10.29.11.07.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Oct 2025 11:07:57 -0700 (PDT)
+ Wed, 29 Oct 2025 11:07:59 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20251029013156.113902-1-marek.vasut+renesas@mailbox.org>
-References: <20251029013156.113902-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/master
-Message-Id: <176176127704.2497692.999349409338971294.b4-ty@konsulko.com>
-Date: Wed, 29 Oct 2025 12:07:57 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20251029013114.113745-1-marek.vasut+usb@mailbox.org>
+References: <20251029013114.113745-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <176176127880.2497692.5700163200347579279.b4-ty@konsulko.com>
+Date: Wed, 29 Oct 2025 12:07:58 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,7 +97,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 29 Oct 2025 02:31:40 +0100, Marek Vasut wrote:
+On Wed, 29 Oct 2025 02:30:47 +0100, Marek Vasut wrote:
 
 > The following changes since commit 23987e10905146def3ab61e55ec912c6e742efdc:
 > 
@@ -102,7 +105,7 @@ On Wed, 29 Oct 2025 02:31:40 +0100, Marek Vasut wrote:
 > 
 > are available in the Git repository at:
 > 
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+>   git://source.denx.de/u-boot-usb.git master
 > 
 > [...]
 
