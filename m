@@ -4,54 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D07CCF9E9
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 11:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8137CCCF9E9
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 13:48:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77C058004F;
-	Wed, 29 Oct 2025 12:34:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id B325F8004F;
+	Wed, 29 Oct 2025 14:48:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SGWEjiU/";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8334882E34; Wed, 29 Oct 2025 12:34:43 +0100 (CET)
-Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
- [84.16.66.174])
+ id 816DA800B6; Wed, 29 Oct 2025 14:48:41 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 943DA8003E
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 12:34:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 85CE28003E
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 14:48:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246c])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cxQBn2P67zfg3;
- Wed, 29 Oct 2025 12:34:41 +0100 (CET)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4cxQBm1MtnzKkP; Wed, 29 Oct 2025 12:34:40 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 29 Oct 2025 12:34:25 +0100
-Subject: [PATCH] rockchip: imply most symbols for ARCH_ROCKCHIP
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03 (unknown [93.94.208.154])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C72783FAF6; 
+ Wed, 29 Oct 2025 13:48:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1761745719;
+ bh=OFL1oUwG5MewbVCT85HtvQmNrVrvGwYTtK4jnhy0/r8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=SGWEjiU/JBHXCBK8hvqUWu13Hz4Hl0xnzyIprtz3zZW7+5rgDXfX1A9Hewk86R9qL
+ YLqKfnSZ/sLWKD2oU9mXvEpZC3MSRq6b3VKN5kgBX0s7mGSJwVpjGiKDkGj1jXMoMF
+ 1vshkaYr9dcevRQu/hAPtKFNl5eVADIXvkuV4t/X/LGnrj6q/qR9V8GdcpEoxOdulX
+ WxCMnUaoq694jkIski26WSzXvfcu+fJQ3Kmvpq+nzzAe4yk8Z3uaumjmZC3RcWQN5T
+ 9U3TRCE5Ho8MVCWB+h+wHWZpZw7SEjWZQY1CBjdF6KbOSA77yfRQPAMzKwpf91S4ab
+ jr00uFN6dtP11xwkoQqd31LLZH9Dzi2h8GCrCFYip5e98f1oE0g8Qxjyv44pXGFmwR
+ Jt5FA7dnAkotbyLZkhoCLwj/ZnDJGk2lIIIsnQdL8D6Fyt+h++I2uAthLz5askFbXC
+ vyrmpvXRcfoDEs9r9Kaf9ev30tiDfVHMBSLRpsXJIfsJoQ2CSsp9h/z2MlaQHCwI9p
+ 3nYDzoahL+JCIZg8HspTPQsR5Qvwu67YhTWbx/2JsYYwnlh3ghyCD2WqMxRzNZqOxk
+ 8jRJ7JTiFsdqFXUk0o0NbACU38QXqcEqxbNvp3/YMfN3wkXts1AgINjcl5y5F6rFu0
+ ubZWEND1P6DsVY19KnXFfDn0=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] Dockerfile: remove Python 2.7
+Date: Wed, 29 Oct 2025 14:48:33 +0100
+Message-ID: <20251029134833.137965-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251029-arch-rockchip-imply-v1-1-899e1592a736@cherry.de>
-X-B4-Tracking: v=1; b=H4sIAMD7AWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDAyNL3cSi5Azdovzk7OSMzALdzNyCnErdlGSjRAsT40RDczNzJaDOgqL
- UtMwKsKnRsbW1ACDDcXllAAAA
-X-Change-ID: 20251029-arch-rockchip-imply-dc2a843a1767
-To: u-boot@lists.denx.de
-Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Tingting Meng <tingting.meng@altera.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Liya Huang <1425075683@qq.com>, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.3
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,80 +73,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+We don't use Python 2 anywhere. Remove the package from our Docker image.
 
-Forcing all those symbols on means we cannot make the binary smaller or
-with unnecessary features or drivers disabled. This is especially useful
-for security, auditing and certification where less code built means
-less to look at (and less surface attack) and less to patch, but also
-for making binary images smaller which typically means faster boot.
-
-It is possible to have boards without MMC, NAND or SPI flashes, without
-anything on SPI or I2C buses, nothing to control over PWM or GPIO or for
-which we have no interest in regulator control or serial output so make
-it possible to remove all that if desired.
-
-No intended change in default selected symbols.
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/arm/Kconfig | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ tools/docker/Dockerfile | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index ef834542bd4..4ee74d5cdd8 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -2072,30 +2072,30 @@ config ARCH_ROCKCHIP
- 	bool "Support Rockchip SoCs"
- 	select BINMAN if SPL_OPTEE || SPL
- 	select DM
--	select DM_GPIO
--	select DM_I2C
--	select DM_PWM
--	select DM_REGULATOR
--	select DM_SERIAL
--	select DM_SPI
--	select DM_SPI_FLASH
- 	select DM_USB_GADGET if USB_DWC3_GADGET
- 	select ENABLE_ARM_SOC_BOOT0_HOOK
- 	select OF_CONTROL
--	select MMC
--	select MTD
--	select SPI
- 	select SPL_DM if SPL
--	select SPL_DM_SPI if SPL
--	select SPL_DM_SPI_FLASH if SPL
- 	select SYS_MALLOC_F
- 	select SYS_THUMB_BUILD if !ARM64
- 	imply ADC
-+	imply BOOTSTD_DEFAULTS
- 	imply CMD_DM
- 	imply DEBUG_UART_BOARD_INIT
--	imply BOOTSTD_DEFAULTS
-+	imply DM_GPIO
-+	imply DM_I2C
-+	imply DM_PWM
-+	imply DM_REGULATOR
-+	imply DM_SERIAL
-+	imply DM_SPI
-+	imply DM_SPI_FLASH
- 	imply FAT_WRITE
-+	imply MMC
-+	imply MTD
- 	imply SARADC_ROCKCHIP
-+	imply SPI
-+	imply SPL_DM_SPI if SPL
-+	imply SPL_DM_SPI_FLASH if SPL
- 	imply SPL_SYSRESET
- 	imply SPL_SYS_MALLOC_SIMPLE
- 	imply SYS_NS16550
-
----
-base-commit: 4cad9faf8d2887b8851f0ced5194ffbaa92ca71e
-change-id: 20251029-arch-rockchip-imply-dc2a843a1767
-
-Best regards,
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 5b4c75f8400..95ce1fdc6cc 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -120,7 +120,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+ 	parted \
+ 	pkg-config \
+ 	python-is-python3 \
+-	python2.7 \
+ 	python3 \
+ 	python3-dev \
+ 	python3-pip \
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.51.0
 
