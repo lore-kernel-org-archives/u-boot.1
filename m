@@ -4,43 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2D24CCF9E9
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 11:16:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D43ACCF9EB
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 11:16:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D04F800D7;
-	Wed, 29 Oct 2025 12:16:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6854E82A9E;
+	Wed, 29 Oct 2025 12:16:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93ECF8352B; Wed, 29 Oct 2025 12:16:32 +0100 (CET)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42af])
+ id 17F778003E; Wed, 29 Oct 2025 12:16:33 +0100 (CET)
+Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc0b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8F1F8003E
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 12:16:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38D63800D7
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 12:16:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6b])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cxPnp3FFxzy86;
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cxPnp6qQYzxnN;
  Wed, 29 Oct 2025 12:16:30 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4cxPnn41MMzJ5B; Wed, 29 Oct 2025 12:16:29 +0100 (CET)
+ id 4cxPnp37PWzGgs; Wed, 29 Oct 2025 12:16:30 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH 0/3] pwm: put symbols into a menu + use if DM_PWM block
- instead of depends on
-Date: Wed, 29 Oct 2025 12:16:07 +0100
-Message-Id: <20251029-pwm-kconfig-v1-0-80186567f2e8@cherry.de>
+Date: Wed, 29 Oct 2025 12:16:08 +0100
+Subject: [PATCH 1/3] pwm: move all PWM related topics inside a Kconfig menu
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAHj3AWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDAyNL3YLyXN3s5Py8tMx0XYvEFOPkRLOkFMsUQyWgjoKi1LTMCrBp0bG
- 1tQBjGhsLXQAAAA==
-X-Change-ID: 20251029-pwm-kconfig-8ad3ca6bd9d1
+Message-Id: <20251029-pwm-kconfig-v1-1-80186567f2e8@cherry.de>
+References: <20251029-pwm-kconfig-v1-0-80186567f2e8@cherry.de>
+In-Reply-To: <20251029-pwm-kconfig-v1-0-80186567f2e8@cherry.de>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Sukrut Bellary <sbellary@baylibre.com>, 
  Patrice Chotard <patrice.chotard@foss.st.com>, 
@@ -65,32 +62,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This improves readability in menuconfig by putting PWM symbols under a
-Kconfig menu.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-It also groups PWM symbols that depend on DM_PWM together under an if
-DM_PWM block so that we don't need to always list the dependency in the
-depends on of the symbol.
-
-I do have questions around the assumed missing dependency of DM_PWM for
-PWM_SANDBOX.
-
-No intended change in behavior except how it shows in menuconfig.
+So it's visually better split from the other subsystems when using
+menuconfig.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (3):
-      pwm: move all PWM related topics inside a Kconfig menu
-      pwm: put all UCLASS PWM drivers under an if condition on DM_PWM
-      pwm: fix typo in PWM_MESON help text
+ drivers/pwm/Kconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- drivers/pwm/Kconfig | 140 ++++++++++++++++++++++++++--------------------------
- 1 file changed, 71 insertions(+), 69 deletions(-)
----
-base-commit: 4cad9faf8d2887b8851f0ced5194ffbaa92ca71e
-change-id: 20251029-pwm-kconfig-8ad3ca6bd9d1
+diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
+index 06f42f699de..ec57a967721 100644
+--- a/drivers/pwm/Kconfig
++++ b/drivers/pwm/Kconfig
+@@ -1,3 +1,5 @@
++menu "Pulse-width modulation (PWM)"
++
+ config DM_PWM
+ 	bool "Enable support for pulse-width modulation devices (PWM)"
+ 	depends on DM
+@@ -133,3 +135,5 @@ config PWM_TI_ECAP
+ 	depends on DM_PWM && ARCH_OMAP2PLUS
+ 	help
+ 	  PWM driver support for the ECAP controller found on TI SOCs.
++
++endmenu
 
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.51.0
 
