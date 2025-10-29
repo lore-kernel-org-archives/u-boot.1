@@ -4,95 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2FFCCF9EA
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 23:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B683CCF9EA
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 00:00:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECC3D8391C;
-	Wed, 29 Oct 2025 00:57:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7B637832AD;
+	Wed, 29 Oct 2025 01:00:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="doCJmRkg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n1WiWT1H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 603FB838D7; Wed, 29 Oct 2025 00:57:44 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 4ED89836B4; Wed, 29 Oct 2025 01:00:27 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E363836B4
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 00:57:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3713080422
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 01:00:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-44db11c7ed6so1775063b6e.2
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 16:57:42 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-3d1e68f7a6cso2348318fac.3
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 17:00:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761695861; x=1762300661; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B/e75cm9HO+w2kpzGI1A0sMsCBu2W3fRawUEoxLw9Js=;
- b=doCJmRkgSxiiSFAROARFVf888W/vcje7O9zgC/YZdUv0yDKxKq+PMUDhiVBdLlf4e6
- hDz4EuXNR8A2nXQ8ePSJtljRMsA2msrKU98ZCU1J4wTviRRqYnQhzTB+3ptfwOkGprTQ
- klvx9dpGUcgZPd5BqbhUX9qfmp4CgKTv9ch7Y=
+ d=konsulko.com; s=google; t=1761696024; x=1762300824; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qLg0ETsvUU5AoTSLbyFxU0frV3XA/RpmkhfXis59CXE=;
+ b=n1WiWT1HNCnIkzv/B7C2DyxtMFPJUBSnMIlu2AKPhoSpo14j8juNzDKB4LLlxvz9B8
+ 4r3SMAya9fH7qMJBBcUiCQLnING+JC+AlA6eJABueHraUMiaTtQawuc0xFZSM6/GQvCL
+ 0YQF3kQ2Uvn8i8lc6z3UkTZXC4Q5PuueqbdoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761695861; x=1762300661;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=B/e75cm9HO+w2kpzGI1A0sMsCBu2W3fRawUEoxLw9Js=;
- b=fyeBZxHD1mbm7GpGDBit04XcZGiyYgkd+mXHx7Ei2jtAeqamlToptEkes2seTvV4vR
- Oc0gHgNC3wZyjP/J/YMzqYaVtAfJw++qaGmv2NwKdJZavpw1+q8MpUvFfdcJDAfuHtqp
- 3wdRF0cBuYRfKap7vE+Yz2b2EBnl0gVz6bQBXCTgM9ipq8ea1IfZlhfon2L78QRs2iP5
- kfjO+huRbYleY+tR8mOU9QAj0ooqugr/+S+E49BE/FHbI4OMIoWud7tlSiU/U+APstki
- I9L6dL3bSc6XwCA97XoxeENAyasFuBNkWtvvGBNnEG7z9IsJ+C6cRoCD3T5hW6nOnaLb
- aNfA==
-X-Gm-Message-State: AOJu0YzOrnNlLg42cVlcoXD2YmxqSHXipM8/3OJnhQXx163+mMPNhni4
- Pus+E5puXd4+8sZgg6K8wfajnQS/pq/z5ULfztjP+2adMWFjmVLufGJYfv/61xW19ic=
-X-Gm-Gg: ASbGncu2qDfSwkZ3RO+Wy+xTny3stB2Udu5MMd3t9bEQXz0zaUMo7nTvZFhqIESuWUQ
- yetyOjzLKueXk8/9QNNnTikGy1c0sjqi7NWNG4tdrQIOuKbQvUWevt+Glgp7Xdaaz775J8ePu6G
- +OcmnbFT1qFksOtZ3OpcyBgHoa/eT+V4UxoMFFJ5f7Q81cZ86IknA8iLP9Pjo+detZKDVyqG9hH
- OrsgJ7zhWVgHdFrNQPX4vHszU6fRzdRKu9fgdlQ4Hpih/fQTop72dbho2WnlCGB4spSJz64F9AE
- NJ4CoI8RtcWjAcy2aaKLW9nbHNFH8PhqpAnjCefnOQjSWfYC6ua6SVSYX7wKycks5UQyQDBdL0/
- /6RMalqoTPYREy0T1MOCTxdng2NjGVX6pfZPZiIry1i0p6RtmyuTsqi0QzhTIdV/3qd7ASGDoeo
- f993QfxnvNJ4fxD90Nwb/LV2xNfubFUnBd3jlYsA==
-X-Google-Smtp-Source: AGHT+IGh6qL7EcF7MMmFQp7dCJO/WURCr36bvdTIi8uZXzgiuFxENqSckAX4k2N4+gfbmNExzvwE7A==
-X-Received: by 2002:a05:6808:1789:b0:43f:b94a:14f2 with SMTP id
- 5614622812f47-44f7a41ed59mr691701b6e.16.1761695860975; 
- Tue, 28 Oct 2025 16:57:40 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1761696024; x=1762300824;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qLg0ETsvUU5AoTSLbyFxU0frV3XA/RpmkhfXis59CXE=;
+ b=js0o3tsgQRKy7Gex2dzyGxv5ht1aDKshos60VhbfA4YH2A5vORsJL3xPRxscdSwld5
+ wWs6Rhi+KMKEJ1XoeTsIo0h/ZzG8rUrzSBkAXgQHRRJMne2cIpOsyS8b6suHMnRmrhgp
+ m/OMPrjAbXP+gXBKqUOVEEeygye9EzrSawhZdT1a+yVAF+3X+qvcF69VRgitqnY2tFpI
+ GJgsy6S3/3iKFDt3rRmkHJ7PW14VxUoznnJLzi/xCSwovUGPNaYDDFAFwRVp6pw3bg5m
+ C7ihlGsrCfLyRalXLS5xmGhqhg1QSIo/Qgv9mipiC47+EGdJXY2QDLEmFTBE41Vau9Q6
+ Lc6A==
+X-Gm-Message-State: AOJu0YwnfrpO4lZngBc/9CECzfyIVNfp5IRGl5kZKZs0xixHLWLDoRnE
+ VV0nULpUjw9bIDBifHqy4jU/ddlTDKn7jIlAkMRVpeoNb0QTi/riJJc3PwJpqTr3sCPsf7hnRxc
+ 7Y350L5/f6Q==
+X-Gm-Gg: ASbGncv5+x3fRyNY8TQ0Gja0wJ+Qq3lPelJgBQ/VeejZg4OrxbBthUEUme3BA/D9BWa
+ vmQ1dSC08Pw8UKmjgYWm6rlnhOOLgCTQrmsJMdCpzIzHxukXI+bjxxEaGtn67ghijFj7AEcmexv
+ SD5kzzGY7qIDhuiBDG62or9eQI4OlL3gXo8Bsakn3EV7LnmOktKm/N+hY5nV4GsPk8//C+2IbyR
+ NEhli8YcQItTqCN70Ayt6Bqef559Ss4Wc0qalk2lTvgIo9CeKqGBCc2zXX+3QvRQYDcCOlKJBqC
+ WOklxrEnUEPok0KpdRneBfzz/Kq/KiSB4ne0zIeR/4QwhFI4EiKbQryF+l6dbAg3YT3risUdSWH
+ CMl1YhK9yVNbaBv4sVz0hOLdL6cjRwe1lTruL28hRXlcWWzf+tbBGQFPc+tehAXSnwaSRhV2tKT
+ SXvqdhNCu2PkYCLu0w/N2ZIs9zvSTi+ubVpx/WX5o=
+X-Google-Smtp-Source: AGHT+IEWzctpilLuYlq3GlKteu/UFfD944kSg/7WciIv9dutY1vhYG9xzNmWoZq4E6Xc8NoF/+OOaQ==
+X-Received: by 2002:a05:6870:6490:b0:3c9:8689:35d1 with SMTP id
+ 586e51a60fabf-3d746f050e1mr644220fac.32.1761696023848; 
+ Tue, 28 Oct 2025 17:00:23 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c5302068a6sm3646234a34.25.2025.10.28.16.57.39
+ 586e51a60fabf-3d1e395c213sm4091704fac.21.2025.10.28.17.00.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Oct 2025 16:57:40 -0700 (PDT)
+ Tue, 28 Oct 2025 17:00:22 -0700 (PDT)
+Date: Tue, 28 Oct 2025 18:00:21 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Raymond Mao <raymondmaoca@gmail.com>
-Cc: ilias.apalodimas@linaro.org, Greg Malysa <malysagreg@gmail.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Simon Glass <sjg@chromium.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Yao Zi <ziyao@disroot.org>, Stefan Roese <stefan.roese@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Sumit Garg <sumit.garg@kernel.org>
-In-Reply-To: <20251028202618.7893-1-raymondmaoca@gmail.com>
-References: <20251028202618.7893-1-raymondmaoca@gmail.com>
-Subject: Re: [PATCH] MAINTAINERS: update my email address
-Message-Id: <176169585940.2287207.17613071672095744909.b4-ty@konsulko.com>
-Date: Tue, 28 Oct 2025 17:57:39 -0600
+To: u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Subject: Re: [PATCH 1/2] spi: Tighten some spi driver dependencies
+Message-ID: <20251029000021.GI6688@bill-the-cat>
+References: <20250804215719.1413106-1-trini@konsulko.com>
+ <20250804215719.1413106-8-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DVtLyjRe1DOMxzGF"
+Content-Disposition: inline
+In-Reply-To: <20250804215719.1413106-8-trini@konsulko.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,17 +98,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 28 Oct 2025 13:26:17 -0700, Raymond Mao wrote:
 
-> Update my email address in the maintainers list.
-> 
-> 
+--DVtLyjRe1DOMxzGF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Aug 04, 2025 at 03:57:17PM -0600, Tom Rini wrote:
+
+> A few spi drivers cannot build without access to some platform
+> specific header files. Express those requirements in Kconfig as well.
+>=20
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
 Applied to u-boot/master, thanks!
 
-[1/1] MAINTAINERS: update my email address
-      commit: 4cad9faf8d2887b8851f0ced5194ffbaa92ca71e
--- 
+--=20
 Tom
 
+--DVtLyjRe1DOMxzGF
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQFZEQAKCRAr4qD1Cr/k
+Cm/aAQD+XbfJsWq1RMODY1hQlpCuQkeYBi7YoEmqZhgCNrUfEwD/YcBmK88xLHiq
+btL5s8+SuRufDR/3N9XvAA2ChIyQxQ4=
+=FrIP
+-----END PGP SIGNATURE-----
+
+--DVtLyjRe1DOMxzGF--
