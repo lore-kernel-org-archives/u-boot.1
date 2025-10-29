@@ -4,159 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB57CCF9E9
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 09:23:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54259CCF9EB
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 09:55:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7415800B1;
-	Wed, 29 Oct 2025 10:23:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C45A80422;
+	Wed, 29 Oct 2025 10:55:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="q8Ua7oD0";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="bhVK+4Sq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3171B82A9E; Wed, 29 Oct 2025 10:23:41 +0100 (CET)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
+ id CEC7B832AD; Wed, 29 Oct 2025 10:55:09 +0100 (CET)
+Received: from outbound.pv.icloud.com
+ (p-west1-cluster1-host7-snip4-2.eps.apple.com [57.103.64.25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11D6B8003E
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 10:23:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF5C28003E
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 10:55:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CAs1M4arKsMRIdKLTLLY9KhS5/NDEW4kbOAhzstV6Y7p4tkzTLghK+6xnA+4pAVIWuykukxvqey13m6kxI8bkMfDWyRUw9CM6sDk2pBvRGzcbw/Frt/I5v+rqlvljqj12OzTiWwjILG+2yAAU5AzMwPlPQIgztswDuJo+TdlzhkTjFBRpA4sX1B7lgVnY9C8AMqDEoLdIcnRpFqjXfhFMsNxFOD8V5iWs+dAzoLB+1VMjo7aIalfV5E1yoEOmWn61gQ1HiTNnT/cF0GvKei2eG7EzGXp0wwnNVNTwINIb8YLgHA9SPi6EAp/CJDFwDiqJdBM/aS6WbplkvCNqrXI5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FUrYZdxY0esqVDNm6MpJLDYW5SPZb46iasiBAiTXbLs=;
- b=HslCeHsApCb0kBT5wuRcsUkUtPfzsMe7AdCWCJSJacFfG0sdE7fKTaTcVx6ZadsEBjz0pWNU6Ad1sq4ClMCWEYt8+bc5UkKTnLEMTC1Vrp95C71aGdm3LE1w4UgGzIxHK4w4gsCGsEQ8L9Cqekfpm8FCdOdsX5XDoyweKc/3oAFDNCvF1sNGRypR5BD3s22lOyhIJ4h+oz6/NqQhzQmYcCrkASvtX3/GWjxIGAKHH86vhtXbPAGgt9bxz1UuWdgFksVDCotScvV+RFE2Ec9F72HMR8Qau3d5dPwonw/dKc+KzkRc3ZpBHzQkohXil1WnLs9/O+a7ssIQmUv5T7MCKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=nxp.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FUrYZdxY0esqVDNm6MpJLDYW5SPZb46iasiBAiTXbLs=;
- b=q8Ua7oD0ixM/rmtI9DQK8+XrUNmfJ+7O2LozqXaoGpS1Atdxmo885twp0aAr/skhBB0u4FjhUqw2ql2bP6B/Nckse0/G31oqXyQKU+9M8NPoLjwcgewHCs7RFEmKX/8aenNzvT9mLS0hLwuihLSsZUIwpHArG8P3dKL1v9/wjoQ=
-Received: from SJ0PR03CA0213.namprd03.prod.outlook.com (2603:10b6:a03:39f::8)
- by PH3PPF8C8C3D129.namprd10.prod.outlook.com (2603:10b6:518:1::7b6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.13; Wed, 29 Oct
- 2025 09:23:35 +0000
-Received: from SJ1PEPF00002326.namprd03.prod.outlook.com
- (2603:10b6:a03:39f:cafe::be) by SJ0PR03CA0213.outlook.office365.com
- (2603:10b6:a03:39f::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.13 via Frontend Transport; Wed,
- 29 Oct 2025 09:23:28 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SJ1PEPF00002326.mail.protection.outlook.com (10.167.242.89) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Wed, 29 Oct 2025 09:23:35 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Oct
- 2025 04:23:34 -0500
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Oct
- 2025 04:23:34 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 29 Oct 2025 04:23:34 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59T9NXf03803023;
- Wed, 29 Oct 2025 04:23:33 -0500
-MIME-Version: 1.0
+ dmarc=none (p=none dis=none) header.from=infi.wang
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
+Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-west-1a-60-percent-3 (Postfix) with ESMTPS id
+ E5A2318000AF; Wed, 29 Oct 2025 09:55:01 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
+ bh=jMapH5mJf2MQ1yMxKjmoh20cqBWoGkhmtocDZs/9rtM=;
+ h=From:Message-Id:Content-Type:Mime-Version:Subject:Date:To:x-icloud-hme;
+ b=bhVK+4SqNFhNUOs8SsZGH43V0k/ELvoe79rA2yMcqnACVrfocqj3QTX3D+tMozAok6nkvojuKxdwtVsZMia3GNzEzNIsHosC1NmyVLj+/qAxvaQtSukr9Ftwiy+lDVavImMDPZXbOSKk/1eRsqR9ZNNycONZV9dZCVxbwq7aEzRnY7M2ViWqoXYQ6PdqDyvOlAtTLNeWDZox6fU7vp+SQJTnDQ4pXYk0erB5hPBaZkgbg43+B99avOHuhZ3+3mwkWTgIiw7Pz8f1D27s7/jucb2miph6J20eSmvKsbEN3/YPB6gUK10U7phfc4L4/S1NOw38sNheFIVJAT/sbywdbA==
+mail-alias-created-date: 1549370554000
+Received: from smtpclient.apple (unknown [17.56.9.36])
+ by p00-icloudmta-asmtp-us-west-1a-60-percent-3 (Postfix) with ESMTPSA id
+ C8F3718003D0; Wed, 29 Oct 2025 09:54:58 +0000 (UTC)
+From: Beiyan Yun <root@infi.wang>
+Message-Id: <0BCDA96C-117C-4FF1-8B8B-C9E3620D8752@infi.wang>
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
+Subject: Re: [PATCH v3 4/4] net: phy: aquantia: use generic firmware loader
+Date: Wed, 29 Oct 2025 17:54:46 +0800
+In-Reply-To: <b0e62d688e281cc9b8144db23b10a143b977f523.camel@mediatek.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Yao Zi <ziyao@disroot.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Weijie Gao <weijie.gao@mediatek.com>
+References: <20251014121318.453701-1-root@infi.wang>
+ <20251014121318.453701-5-root@infi.wang>
+ <b0e62d688e281cc9b8144db23b10a143b977f523.camel@mediatek.com>
+X-Mailer: Apple Mail (2.3826.700.81)
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI5MDA3NCBTYWx0ZWRfX++HX5NL0wiKi
+ dwYvNFU+bvvjPSKywXopYNnWXtABdtaUp69JHiugiqvbfmzbUkDrkP+tvM7BUs7HbKnEQ02yzOt
+ 2fseyVVg/mJw6UeQGC3T/YVf5e5chBxIm8A0kf0ZzQ5D4+z268V9pqdGg70Oim4PBUjsF6Wccpu
+ 75CY2ILYTxgvnKts9GQtmOOKqNyN01BsDo5Y9ryx2SC4Ou4yDEoF4tTrjhp9JACG5xLplOSU8X6
+ AxgUw2QlcvzahsD0ilmR0CDudnH8yWSrZjZXOwKy1SIYMjwwUojtnLbmt7+SGTjCtiES5gHno=
+X-Proofpoint-GUID: lDODi5U5--7H2umIan2GoW3iiCzFAB1e
+X-Proofpoint-ORIG-GUID: lDODi5U5--7H2umIan2GoW3iiCzFAB1e
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-29_04,2025-10-22_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1030
+ adultscore=0 suspectscore=0 bulkscore=0 malwarescore=0 spamscore=0
+ phishscore=0 mlxscore=0 mlxlogscore=999 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.22.0-2506270000 definitions=main-2510290074
+X-JNJ: AAAAAAABFXPCccf8LPrVfQM1s8v41VMrAhhr01cVHUpaDk7ePtSG941YUykxMN/uS95DiMxXQuvNOWl3GfiopQomYJa/7NpRn/7j/UDTEEL6UT/pB0o3+t419ouawlLbWBp0/S5EsXblCbldSlKgUkEUPABYCbMv8cD7Iry+GaU3HA7x8JJ/TFoI4FTZ3zFmkoRM8htlxNWid9LZNeJ6Ho7JN7EMzh1O9ZKyrvmq5IoyNes7N2VBvdAn5cQNRLiERPstgfolhhNsEsIiv++qsK1Nn7lvLXJ0ghvxNFfMgvvmLxAus5rMonCODOMvqWvzIscVFYsD5EtcEqIUqKpWIQmdo/1ukN45kBM5m1v2T1OakNFeGjHOhrMjf3Y3zcU4MhwV6+PNkWssMHtQslQ76BXmGyae6iwJgJ+/VX8fheddplK18VvKMxNRXQDaEDYrpHVdEZRxM88j5cYtIN6RWCrJF17WZDLxcyzYO/J4D0zSAOZ8n8yEN1J3AZnzUMJUTsPYOxv5KDH7x7NE+EuWqjErADRwGF1yXmERVm29/ub+EMGUztCjRfvECHH7EBnAd16Au+c/hqkXgAoeqy08s8NO5oGg9QNPwz/QJ2ZGo9Euw2fBX7n6zcFaDtK9VuFi/YpAfAKM7NfG50Z67jZj93YiZL8rKypcaknqj/kwQjtMxHQgoBMpD6gnNZ8Hox83MeQdfy8KkC7ij40IIC5dcgB9vDx8b2dSINomlaT0r7KmdjeqlMULpdhTQRhkIlBSQ9TrUZqDF1hg0reg1VOuPdAgkfRUEatQqz6ewSk90JQthfZU//JeBUVg4w==
+Content-Type: text/plain;
+	charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Wed, 29 Oct 2025 14:53:32 +0530
-Message-ID: <DDUP3J37VKJU.3G90BDVOTBJSI@ti.com>
-CC: Alice Guo <alice.guo@nxp.com>, Etienne Carriere
- <etienne.carriere@linaro.org>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Vinh Nguyen
- <vinh.nguyen.xz@renesas.com>, Viorel Suman <viorel.suman@nxp.com>, Ye Li
- <ye.li@nxp.com>, <kamlesh@ti.com>, <bb@ti.com>, <d-gole@ti.com>
-Subject: Re: [PATCH] firmware: scmi: Drop mmu_set_region_dcache_behaviour()
- misuse
-From: Anshul Dalal <anshuld@ti.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Anshul Dalal <anshuld@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
- <PAXPR04MB84593511CF2B43470CDD8ABD88FDA@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <68e5af37-1511-4720-9172-751d5b788c39@mailbox.org>
- <2a3421c8-b7af-4c6e-91c5-cbd08c9f3dd5@mailbox.org>
-In-Reply-To: <2a3421c8-b7af-4c6e-91c5-cbd08c9f3dd5@mailbox.org>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002326:EE_|PH3PPF8C8C3D129:EE_
-X-MS-Office365-Filtering-Correlation-Id: c7b109f7-5156-450a-43e3-08de16ccd647
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|82310400026|1800799024|36860700013|34020700016; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cFRpU1ByWUZUMUNsaVkxMy9PMExndjdkc2FuRHVyWmk2YVNQZnlLTTBKVkNC?=
- =?utf-8?B?TWhXbTRGc3p2aTJxUk1tZmxVWm16c0JCU3d3M2MwMkNiRnRqK3Q2TDZSWWVD?=
- =?utf-8?B?R3ZjMUxlODJyZnlWMzNzKzZIdG1DMXRhK0cycFA4b1VjUkFwSGFzMzFFRlRR?=
- =?utf-8?B?WUpuSWVoSit6cng3bXdTMWxDSUc3b2x5U010SXJNVlo2UVBIUU9WYlZrUnFz?=
- =?utf-8?B?YkdSTmRiU2tIVTlRRUJBYVVzU0xrbEgvaFRJb1U5MDBQUDJ1bHdSLzI2Ujds?=
- =?utf-8?B?c3hrWnlnSHcrcUI0OTJocUZVb09DaVVUOWU3WVFPSDd3K1RQMTlMSlFmeXNu?=
- =?utf-8?B?WFdwMVB5TDZrREYwUFU0bzBXYzZobEcxOWQ4WmJpQUJYZ0RzK1p3TDBFMEFv?=
- =?utf-8?B?bC93Q0trNlhPWE0xVU1LUFo3QVBEVDF2cERCZCt6aXRNMitoOHRieUhjQ1Nh?=
- =?utf-8?B?Z05Da3JaWWc3bEZWb1FFdCtmMFVvTjIzK2huZFQxNWhjOUNnbGkzN2s3SWZN?=
- =?utf-8?B?UTZ4YkhKRndLSk5lRzZ6SGsxYTlYSVZWOUsrS25vV3RSNFExanRTK1pUbzAy?=
- =?utf-8?B?MVNMU3JBQ0FuR0ZsMmxmckJrd25sVFpLZ1dJczYrNmZYcTNVeTMwNVVDMXNK?=
- =?utf-8?B?WVEzK1RZbHBhWXRDcXZ0M3QwcWgyenQvVm4zVDA1OFUybEhRdTRTZEI3bENn?=
- =?utf-8?B?ZGgxcTVLQ3FYa0lVUDM2M29tbXlnQ0lVRFB5cVVZWHhPVklvRUljNG0yNjhO?=
- =?utf-8?B?RFh6bEYxQldVZGFTNmdJT1VxTDk4OC9QckhaTlVFTDlRYTVRalZjOGFqbzNu?=
- =?utf-8?B?UEVmc1RMYW1qTEhjTzFXY0hRcUhQbURzZE9EWnZrM1VDd3BSOWNDNG5ZK3Br?=
- =?utf-8?B?c2hibG5URTdmSjc4bm9lc01zV1ZiV1Fnd0I5N0FzZk9kQzg4WHN0YlBVcGty?=
- =?utf-8?B?bkl0dFF0dGxleEtoZ0h5ei9MUTJjOXVzZXFubVh5Y3JIVDE3SUppZjZPZGtZ?=
- =?utf-8?B?L0JOK3JRalhESWhtdjU1bTdlaW8zQy9UZVB1Y2x6OXF1ajVCVzBZR1U2aUo4?=
- =?utf-8?B?SDdKZlAvRVdzWURuY25ieE50ZFVZT2gyNUhHU1lQYlllTUlRQ25BV1FPUWQw?=
- =?utf-8?B?Z3cxTVFYWElQckFWLzZZVXBOeE1XU3RyR0hZQmphOWJDT0grdnA2aHFWYWFx?=
- =?utf-8?B?SXNqQ0x3SU1kZTFlNFJ6MWpUcmp2cXovRUVja2RwdmZPUElnS2ZRdGlPZzlC?=
- =?utf-8?B?THBreHhoVy9PUVl2azZabWRKKzVBOE9pRGs5L1hhOHN5dEJ4S0ljbGtXdkF1?=
- =?utf-8?B?OXdodDNXRjZUbHMyNGYySGFpRXQ2Uzhla0hDNGpDRUZ4RXhlTW12bnEvUjN1?=
- =?utf-8?B?ajAxb25pTEt0aWJMTUlGWHFvUko0YVJTcUtvR0VxRVBwSS8yZUZrN1d1QjhT?=
- =?utf-8?B?NXAvYm02ZXozL3lCSlVZc0E0UGcvQ20wZGF6dWJHVFV1QVUvdkRtNHNPcitR?=
- =?utf-8?B?YmROVVpQZGs3eDhGYUVCaXJsNUI5TUhUUitoeFZ1Rk5vMHd5T1FZdDI2T2lq?=
- =?utf-8?B?c0c3TUQrVVFMSWwrR0VxZEhjNCtvU2xyenB4dVZtQWd6Skhac2JOb3p6VlN2?=
- =?utf-8?B?ZHc4TXNNTVAwL1FGVXdoNUprYmRFT3VrTFpWcTBOTGF2S3k0dTJGUTFqN1d6?=
- =?utf-8?B?K2pZNUxEd0ZqV3ArdmVIbllxZ2k4ZTR6R1ZPcjc4eTRIUE9BSUYzYkRobmw0?=
- =?utf-8?B?cEJFWFA3Q3l1YVdWWW82WlVoMGR0aEc5eGhPVjVTTUxmRG41RGdqc2orM0s5?=
- =?utf-8?B?TXVjQjI0WWNuMU5LUFVGZnJaV2hOaUVQcDJaSVhuU21ZendoVzY2eUdBZ0JS?=
- =?utf-8?B?N2g2UDNNNk55c3RORXBiWXE1Wk5iWXZNdnlHRUxVTFUwL1BJcWNMM1ZGblJj?=
- =?utf-8?B?VmxiUmNsNGc3eHRQMDVNa05YaFBBb0xFdmRtRGxJTjdUNlhpQkJKUkoweG1l?=
- =?utf-8?B?cDJJSWF6VUxZcG1WZ3lHcE1CTnBDRWF3T2dBZWUrc3RXc3J3QStKMEp0cXZq?=
- =?utf-8?B?Zzh4VmpiVGZOMW1NeDVDelZ0VE9rRGRCTVcyemdIQkllTWdCS3RjcWpkSURV?=
- =?utf-8?Q?C88Y=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(7416014)(376014)(82310400026)(1800799024)(36860700013)(34020700016);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2025 09:23:35.6089 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c7b109f7-5156-450a-43e3-08de16ccd647
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002326.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH3PPF8C8C3D129
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,48 +91,346 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Oct 28, 2025 at 8:46 PM IST, Marek Vasut wrote:
-> On 10/28/25 3:37 PM, Marek Vasut wrote:
->> On 10/28/25 9:25 AM, Peng Fan wrote:
->>=20
->> Hello Peng,
->>=20
->>>> Subject: [PATCH] firmware: scmi: Drop
->>>> mmu_set_region_dcache_behaviour() misuse
->>>>
->>>> MMU region cache behavior configuration for SCMI/SMT mailboxes is
->>>> platform specific. Even on ARM systems, the mailbox memory may not
->>>> even be located in any cacheable MMU region and may instead reside
->>>> in some SRAM. Remove this non-generic cache behavior configuration
->>>> code from generic code path.
->>>>
->>>> It is unlikely that any platform is affected by this change if it did
->>>> configure its MMU regions correctly on start up. Platforms which might
->>>> be affected are i.MX94/95 and STM32MP.
->>>>
->>>
->>> If the memory is mapped before running SCMI stuff, it is ok.
->>> But if memory is dynamic mapped at run time, there might be issue.
->>=20
->> I wonder ... should ARM/ARM64 define CONFIG_HAVE_ARCH_IOREMAP and=20
->> implement actual ioremap() function which changes these cacheable=20
->> properties accordingly ?
->>=20
->>> I saw TI platforms has some changes to use dynamic mappings,
->>> I have not read the details, TBH.
->>=20
->> Can we put the TI people on CC here ?
->
-> +CC Anshul
+Hi Weijie,
 
-This change shouldn't affect any current TI platforms since we don't
-make use of SCMI on K3 devices.
+Sorry for the late reply.
 
-I'll CC folks working on upcoming devices in case they have any
-thoughts.
+> On 15 Oct 2025, at 8:43=E2=80=AFAM, Weijie Gao =
+<weijie.gao@mediatek.com> wrote:
+>=20
+> Hi Beiyan,
+>=20
+> On Tue, 2025-10-14 at 20:12 +0800, Beiyan Yun wrote:
+>> External email : Please do not click links or open attachments until
+>> you have verified the sender or the content.
+>>=20
+>>=20
+>> Aquantia PHYs are being used w/o SPI flash in some routers recently.
+>> Current firmware loader only attempts to load from FS on top of MMC,
+>> limiting the use on many devices.
+>>=20
+>> Removed the old firmware loader, migrate to generic firmware loader
+>> to
+>> allow a wider range and runtime override of firmware source. (e.g.,
+>> USB).
+>>=20
+>> Tested on Buffalo WXR18000BE10P with UBIFS.
+>>=20
+>> Tested-by: Beiyan Yun <root@infi.wang>
+>> Signed-off-by: Beiyan Yun <root@infi.wang>
+>>=20
+>>=20
+>> ---
+>>=20
+>> Changes in v3:
+>> - Select FW_LOADER with PHY_AQUANTIA_UPLOAD_FW
+>>=20
+>> Changes in v2:
+>> - Add support for script based loader
+>>=20
+>> drivers/net/phy/Kconfig    |  24 ++++---
+>> drivers/net/phy/aquantia.c | 133 ++++++++++++++++++++---------------
+>> --
+>> 2 files changed, 88 insertions(+), 69 deletions(-)
+>>=20
+>> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+>> index 185c6a3156e..68765290671 100644
+>> --- a/drivers/net/phy/Kconfig
+>> +++ b/drivers/net/phy/Kconfig
+>> @@ -1,4 +1,3 @@
+>> -
+>> config BITBANGMII
+>>        bool "Bit-banged ethernet MII management channel support"
+>>=20
+>> @@ -90,23 +89,30 @@ menuconfig PHY_AQUANTIA
+>> config PHY_AQUANTIA_UPLOAD_FW
+>>        bool "Aquantia firmware loading support"
+>>        depends on PHY_AQUANTIA
+>> +       select FS_LOADER
+>> +       select FW_LOADER
+>>        help
+>>                Aquantia PHYs use firmware which can be either loaded
+>> automatically
+>>                from storage directly attached to the phy or loaded
+>> by the boot loader
+>> -               via MDIO commands.  The firmware is loaded from a
+>> file, specified by
+>> -               the PHY_AQUANTIA_FW_PART and PHY_AQUANTIA_FW_NAME
+>> options.
+>> +               via MDIO commands.
+>> +
+>> +               This option enables loading the firmware using the
+>> generic
+>> +               file system firmware loader framework.
+>>=20
+>> -config PHY_AQUANTIA_FW_PART
+>> -       string "Aquantia firmware partition"
+>> +config PHY_AQUANTIA_FW_MAX_SIZE
+>> +       hex "Max firmware size"
+>>        depends on PHY_AQUANTIA_UPLOAD_FW
+>> +       default 0x80000
+>>        help
+>> -               Partition containing the firmware file.
+>> +         The maximum size of the Aquantia PHY firmware. This is used
+>> to
+>> +         allocate a buffer to load the firmware into.
+>>=20
+>> -config PHY_AQUANTIA_FW_NAME
+>> -       string "Aquantia firmware filename"
+>> +config PHY_AQUANTIA_FW_LOADER_SCRIPT
+>> +       string "Aquantia firmware loader script"
+>>        depends on PHY_AQUANTIA_UPLOAD_FW
+>> +       default "aqr_phy_load_firmware"
+>>        help
+>> -               Firmware filename.
+>> +               The firmware loading script variable name.
+>>=20
+>> config PHY_ATHEROS
+>>        bool "Atheros Ethernet PHYs support"
+>> diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
+>> index d9df0e23a45..98ee7ae10e7 100644
+>> --- a/drivers/net/phy/aquantia.c
+>> +++ b/drivers/net/phy/aquantia.c
+>> @@ -17,6 +17,10 @@
+>> #include <malloc.h>
+>> #include <asm/byteorder.h>
+>> #include <fs.h>
+>> +#if (IS_ENABLED(CONFIG_PHY_AQUANTIA_UPLOAD_FW))
+>> +#include <fs_loader.h>
+>> +#include <fw_loader.h>
+>> +#endif
+>>=20
+>> #define AQUNTIA_10G_CTL                0x20
+>> #define AQUNTIA_VENDOR_P1      0xc400
+>> @@ -127,53 +131,7 @@ struct fw_header {
+>>=20
+>> #pragma pack()
+>>=20
+>> -#if defined(CONFIG_PHY_AQUANTIA_UPLOAD_FW)
+>> -static int aquantia_read_fw(u8 **fw_addr, size_t *fw_length)
+>=20
+> I think it's better to add a weak function, e.g.:
+> int __weak aquantia_read_fw(u8 **fw_addr, size_t *fw_length);
+>=20
+> And put the default fw loading logic into this function.
+> Overriding this function by board allows using firmware data embedded
+> into u-boot by binman.
+>=20
+> It's useful in case that firmware data was damaged in filesystem.
+>=20
 
-+CC Dhruva, Bryan, Kamlesh
+Good point, I can see that=E2=80=99s how MTK U-Boot manages the firmware =
+currently.
 
-Regards,
-Anshul
+There=E2=80=99s a catch though: I=E2=80=99ve prototyped the change =
+locally, realize it breaks current assumption of lifetime. Let's say we =
+override `aquantia_upload_firmware` with a wrapper function to bin data =
+array, in that case we can not free `fw_addr` in =
+`aquantia_upload_firmware`, or a dumb memory copy is needed.
+
+Maybe we can add a structure wrapper with additional info like Qcom's =
+`struct rpmh_request`? That=E2=80=99s a bit too much for me, I=E2=80=99d =
+like further opinion.
+
+Cheers,
+Yun
+
+>> -{
+>> -       loff_t length, read;
+>> -       int ret;
+>> -       void *addr =3D NULL;
+>> -
+>> -       *fw_addr =3D NULL;
+>> -       *fw_length =3D 0;
+>> -       debug("Loading Aquantia microcode from %s %s\n",
+>> -             CONFIG_PHY_AQUANTIA_FW_PART,
+>> CONFIG_PHY_AQUANTIA_FW_NAME);
+>> -       ret =3D fs_set_blk_dev("mmc", CONFIG_PHY_AQUANTIA_FW_PART,
+>> FS_TYPE_ANY);
+>> -       if (ret < 0)
+>> -               goto cleanup;
+>> -
+>> -       ret =3D fs_size(CONFIG_PHY_AQUANTIA_FW_NAME, &length);
+>> -       if (ret < 0)
+>> -               goto cleanup;
+>> -
+>> -       addr =3D malloc(length);
+>> -       if (!addr) {
+>> -               ret =3D -ENOMEM;
+>> -               goto cleanup;
+>> -       }
+>> -
+>> -       ret =3D fs_set_blk_dev("mmc", CONFIG_PHY_AQUANTIA_FW_PART,
+>> FS_TYPE_ANY);
+>> -       if (ret < 0)
+>> -               goto cleanup;
+>> -
+>> -       ret =3D fs_read(CONFIG_PHY_AQUANTIA_FW_NAME, (ulong)addr, 0,
+>> length,
+>> -                     &read);
+>> -       if (ret < 0)
+>> -               goto cleanup;
+>> -
+>> -       *fw_addr =3D addr;
+>> -       *fw_length =3D length;
+>> -       debug("Found Aquantia microcode.\n");
+>> -
+>> -cleanup:
+>> -       if (ret < 0) {
+>> -               printf("loading firmware file %s %s failed with error
+>> %d\n",
+>> -                      CONFIG_PHY_AQUANTIA_FW_PART,
+>> -                      CONFIG_PHY_AQUANTIA_FW_NAME, ret);
+>> -               free(addr);
+>> -       }
+>> -       return ret;
+>> -}
+>> +#if (IS_ENABLED(CONFIG_PHY_AQUANTIA_UPLOAD_FW))
+>>=20
+>> /* load data into the phy's memory */
+>> static int aquantia_load_memory(struct phy_device *phydev, u32 addr,
+>> @@ -218,27 +176,27 @@ static u32 unpack_u24(const u8 *data)
+>>        return (data[2] << 16) + (data[1] << 8) + data[0];
+>> }
+>>=20
+>> -static int aquantia_upload_firmware(struct phy_device *phydev)
+>> +/* Common firmware upload implementation */
+>> +static int aquantia_do_upload_firmware(struct phy_device *phydev,
+>> +                                      const u8 *addr, size_t
+>> fw_length)
+>> {
+>>        int ret;
+>> -       u8 *addr =3D NULL;
+>> -       size_t fw_length =3D 0;
+>>        u16 calculated_crc, read_crc;
+>>        char version[VERSION_STRING_SIZE];
+>>        u32 primary_offset, iram_offset, iram_size, dram_offset,
+>> dram_size;
+>>        const struct fw_header *header;
+>>=20
+>> -       ret =3D aquantia_read_fw(&addr, &fw_length);
+>> -       if (ret !=3D 0)
+>> -               return ret;
+>> +       if (!addr || !fw_length) {
+>> +               printf("%s: Invalid firmware data\n", phydev->dev-
+>>> name);
+>> +               return -EINVAL;
+>> +       }
+>>=20
+>> -       read_crc =3D (addr[fw_length - 2] << 8)  | addr[fw_length - =
+1];
+>> +       read_crc =3D (addr[fw_length - 2] << 8) | addr[fw_length - =
+1];
+>>        calculated_crc =3D crc16_ccitt(0, addr, fw_length - 2);
+>>        if (read_crc !=3D calculated_crc) {
+>>                printf("%s bad firmware crc: file 0x%04x calculated
+>> 0x%04x\n",
+>>                       phydev->dev->name, read_crc, calculated_crc);
+>> -               ret =3D -EINVAL;
+>> -               goto done;
+>> +               return -EINVAL;
+>>        }
+>>=20
+>>        /* Find the DRAM and IRAM sections within the firmware file.
+>> */
+>> @@ -268,14 +226,14 @@ static int aquantia_upload_firmware(struct
+>> phy_device *phydev)
+>>        ret =3D aquantia_load_memory(phydev, DRAM_BASE_ADDR,
+>> &addr[dram_offset],
+>>                                   dram_size);
+>>        if (ret !=3D 0)
+>> -               goto done;
+>> +               return ret;
+>>=20
+>>        debug("loading iram 0x%08x from offset=3D%d size=3D%d\n",
+>>              IRAM_BASE_ADDR, iram_offset, iram_size);
+>>        ret =3D aquantia_load_memory(phydev, IRAM_BASE_ADDR,
+>> &addr[iram_offset],
+>>                                   iram_size);
+>>        if (ret !=3D 0)
+>> -               goto done;
+>> +               return ret;
+>>=20
+>>        /* make sure soft reset and low power mode are clear */
+>>        phy_write(phydev, MDIO_MMD_VEND1, GLOBAL_STANDARD_CONTROL,
+>> 0);
+>> @@ -289,8 +247,63 @@ static int aquantia_upload_firmware(struct
+>> phy_device *phydev)
+>>        phy_write(phydev, MDIO_MMD_VEND1, UP_CONTROL,
+>> UP_RUN_STALL_OVERRIDE);
+>>=20
+>>        printf("%s firmware loading done.\n", phydev->dev->name);
+>> -done:
+>> -       free(addr);
+>> +       return 0;
+>> +}
+>> +
+>> +static int aquantia_upload_firmware(struct phy_device *phydev)
+>> +{
+>> +       int ret;
+>> +       ofnode node;
+>> +       struct udevice *loader_dev;
+>> +       const char *fw_name;
+>> +       u8 *fw_addr =3D NULL;
+>> +       size_t fw_length;
+>> +
+>> +       fw_addr =3D malloc(CONFIG_PHY_AQUANTIA_FW_MAX_SIZE);
+>> +       if (!fw_addr) {
+>> +               printf("Failed to allocate memory for firmware\n");
+>> +               return -ENOMEM;
+>> +       }
+>> +
+>> +       /* First, try to load firmware via script */
+>> +       ret =3D request_firmware_into_buf_via_script(fw_addr,
+>> +                                                  CONFIG_PHY_AQUANTI
+>> A_FW_MAX_SIZE,
+>> +                                                  CONFIG_PHY_AQUANTI
+>> A_FW_LOADER_SCRIPT,
+>> +                                                  &fw_length);
+>> +       if (ret) {
+>> +               /* Fallback to DT specified firmware */
+>> +               node =3D phy_get_ofnode(phydev);
+>> +               if (!ofnode_valid(node)) {
+>> +                       printf("Failed to get PHY node\n");
+>> +                       ret =3D -EINVAL;
+>> +                       goto out;
+>> +               }
+>> +
+>> +               fw_name =3D ofnode_read_string(node, =
+"firmware-name");
+>> +               if (!fw_name) {
+>> +                       printf("Failed to get firmware name\n");
+>> +                       ret =3D -ENOENT;
+>> +                       goto out;
+>> +               }
+>> +
+>> +               ret =3D get_fs_loader(&loader_dev);
+>> +               if (ret) {
+>> +                       printf("Failed to get fs_loader instance:
+>> %d\n", ret);
+>> +                       goto out;
+>> +               }
+>> +
+>> +               ret =3D request_firmware_into_buf(loader_dev, =
+fw_name,
+>> fw_addr,
+>> +                                               CONFIG_PHY_AQUANTIA_F
+>> W_MAX_SIZE, 0);
+>> +               if (ret < 0) {
+>> +                       printf("Failed to load firmware %s: %d\n",
+>> fw_name, ret);
+>> +                       goto out;
+>> +               }
+>> +               fw_length =3D ret;
+>> +       }
+>> +
+>> +       ret =3D aquantia_do_upload_firmware(phydev, fw_addr,
+>> fw_length);
+>> +out:
+>> +       free(fw_addr);
+>>        return ret;
+>> }
+>> #else
+>> --
+>> 2.47.3
 
