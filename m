@@ -4,81 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A8D0CCF9EB
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 20:14:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA7ACCF9EB
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 22:20:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE64C81E13;
-	Wed, 29 Oct 2025 21:14:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A33D081E13;
+	Wed, 29 Oct 2025 23:20:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="X/kEAa92";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="lv6kTNZz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A6rMZspB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BB6482A9E; Wed, 29 Oct 2025 21:14:43 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DF73282A9E; Wed, 29 Oct 2025 23:20:40 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F4E18004F
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 21:14:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2531800B6
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 23:20:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cxdkn1HZ3z9sv0;
- Wed, 29 Oct 2025 21:14:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761768881;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=RGNsKwpwOlPJocqdbunZKg77pH/tJ6vJSrN+qFtu2jc=;
- b=X/kEAa92d5KJYgXVVSWt7YNwczfZSHbLj+aCu3MxNFAT7JktrmLwePmS8TkNpV1gdnpc/6
- diRXoX5wJ1U0I1AdRnAl1xre6utSthu6YLzHa11Di5xfi0lawhJYxg/8sdCj16y4dkAMvE
- LqRCBEYR7v8WCLHXejhEpjZvsW1sY/+T7HGko6pS5DWNojqHpuqqxMb5z8I7zo8AtltM8E
- YotQX6gF3xC/7/vhEHTUARGkYkOb5Wbd7c9bi6AlPeOI7u4QBLLWuejjArfTCJSa+H9lwu
- EYJygCfU4etv8eKhyFHs7KhPghI/wdSHo1vQpYAeSMhKdzDX6Ibt9j9rE7Qy+A==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=lv6kTNZz;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761768879;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=RGNsKwpwOlPJocqdbunZKg77pH/tJ6vJSrN+qFtu2jc=;
- b=lv6kTNZzt73zHFuW7OdzbWnmd089kUAE7ynyl3AdgmX7J1dybpijiXpwIJ+U6aHuzpzkyV
- 6dXwfUjxo+JGZ0sIicoWZ2plPSRttIyqjr2Z7Q/plgMjCH1+W5BAUpPBghIBOvRIU6ylQB
- JSpwdHJJUaGKguXFyELtBA+XPmBCLlSdnXvR9VcGkfkxKjmyDigMaMBuKJMFyxCCnsXqQ7
- PD572xh8UtTaKHq4+yKWjh9WpRjWVQAQm8ulHva+hYsPO7Gk0QGRz+RSo+pKLzVUOPJbJ/
- XwdJkiHnTixJrLQW0Sj1NP2s40lGMy0AMilNFkG96jMKUj73Thf16rJhBueEPA==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Neha Malcom Francis <n-francis@ti.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Shawn Lin <shawn.lin@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Subject: [PATCH] ufs: Keep Makefile and Kconfig sorted one more time
-Date: Wed, 29 Oct 2025 21:14:10 +0100
-Message-ID: <20251029201435.215966-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7c2766675adso180451a34.1
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 15:20:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1761776437; x=1762381237; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=73199O89No4F94cn9R5QF5JaeXhifk2DF83WswUv8BA=;
+ b=A6rMZspBcGauYMwXPcIsjKhAz2Or6ntn533/QonqdQBsTwn0WE1rQzwLIl7HIBQ9MR
+ 7PgiM7rPaxOgaQbNiIrZpb7uxgXsWuDnD+mdcxD4ydkn66Z6a4H2r/ktGz+7XUOJmIj2
+ iAY9v13YTCx524/DYpewsVWeRMF5rLQXwIZf4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761776437; x=1762381237;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=73199O89No4F94cn9R5QF5JaeXhifk2DF83WswUv8BA=;
+ b=oz6Ht5QzRK5YmcppfTFRE0f8GQXZspEfguseVOl0cesk1VWz2o0UUotAAFqOuID8Yy
+ zXRMLJEtMDi/w1jVDfYfqBWFMtIjtBMJxNbgMZpalDKmJPsrKdnBitGBQf+3H+AYok0p
+ L1DdQCJgvY367+mQtMNONaJpFkSSHoOZMmcJXBE+WueHjNsAEYw1ngfxwxKPhQ+VrEno
+ ucMpvb7ssMU1sOIwv5k1UlpmBNSZ5FK9+v8FCkS9rO5pcJMZMj04UkQfdRU2Y68R8b5W
+ u5X+KAl+Xi6OTlcpzVooCAx+RKKo3ejI4NUJQEXtAoEcGjLkjxwBh73NhJmdyCvudjCv
+ 0Oaw==
+X-Gm-Message-State: AOJu0YxrtTBO4HDvKaFSdvP6sBHtK3ScHO2ScpvFqv/vg22Pl2zUf5In
+ 4FgOz7aYG6GyF1pKzQYtpsbfZuprG3ku4zXdVEbUBGWy07fhcdHWw+k7xHWkfGHrt0o=
+X-Gm-Gg: ASbGnctcxf/gN+DsQnXAL+kmLBC1Ruh+P5CinicczcbogNvSnXrFyTeNjOMjvsVjugC
+ JYyDad0XDBQDThHy0j3u+IhsCebA4HC2ZzX+NlY7qrTT7TtvOoC7iw9uyruFG58KXJ+E4jlFTOa
+ 9YxYBbhs9Qlr+7o84fsx+gtxi3g/hrEOcdPmIOeLlHEn9ZDPSSjl7emDW87kUXjLJBs0wbl8AXj
+ 2LLPK1PhAdGmGLtaiUrw6KIv0LD38jhs1D3nfeur+Ps4crrDjjRg2o//uw2U0y4xM5vbTnWnbRm
+ S8OCTPYvR6GGvxBBMl5IOfcB4c3z5Xmq9KR4rIBjP9Uv1Quhe2fESDlw/NCHePBdqODjYVjszpH
+ SJMYdFKwssPum9J7/xUKHskqZaALI9n2FoxbGmpP1Z5MNbqh+9/n+mKcausEs+hb/hpN+5ANweN
+ oK0f+l/tAhPhkQr23jpw6zTmHnAi3whOwK+uOqZhc=
+X-Google-Smtp-Source: AGHT+IF106lOIf09wisvMoFe0BqWnDUMvrvWfXGB2/aOLBkl5ug5/pLiSPfBGmdCO5dykkCsRK37sw==
+X-Received: by 2002:a05:6830:82d4:b0:7ad:d568:6e60 with SMTP id
+ 46e09a7af769-7c68304e894mr3059119a34.9.1761776437405; 
+ Wed, 29 Oct 2025 15:20:37 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c530005afasm4560500a34.0.2025.10.29.15.20.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Oct 2025 15:20:35 -0700 (PDT)
+Date: Wed, 29 Oct 2025 16:20:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>, Martin Schwan <m.schwan@phytec.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Alexander Graf <agraf@csgraf.de>,
+ Loic Poulain <loic.poulain@linaro.org>, Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Anton Moryakov <ant.v.moryakov@gmail.com>, E Shattow <e@freeshell.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH] rsa: always build pss padding
+Message-ID: <20251029222032.GP6688@bill-the-cat>
+References: <20251029-rsa-pss-always-v1-1-ad2b652e75aa@cherry.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 8x6tx84r9p8n3pzdqgoesyis4xsckccz
-X-MBO-RS-ID: 312f921bba6123ac943
-X-Rspamd-Queue-Id: 4cxdkn1HZ3z9sv0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="uOfIKxd5ovVUkb3I"
+Content-Disposition: inline
+In-Reply-To: <20251029-rsa-pss-always-v1-1-ad2b652e75aa@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,89 +110,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sort the Makefile and Kconfig alphabetically again. No functional change.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
-Cc: Igor Belwon <igor.belwon@mentallysanemainliners.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Neha Malcom Francis <n-francis@ti.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Shawn Lin <shawn.lin@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>
-Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Cc: u-boot@lists.denx.de
----
- drivers/ufs/Kconfig  | 28 ++++++++++++++--------------
- drivers/ufs/Makefile |  4 ++--
- 2 files changed, 16 insertions(+), 16 deletions(-)
+--uOfIKxd5ovVUkb3I
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-index 68693b7d226..445270e8da1 100644
---- a/drivers/ufs/Kconfig
-+++ b/drivers/ufs/Kconfig
-@@ -15,20 +15,6 @@ config CADENCE_UFS
- 	  This selects the platform driver for the Cadence UFS host
- 	  controller present on present TI's J721e devices.
- 
--config UFS_MEDIATEK
--	tristate "MediaTek UFS Host Controller Driver"
--	depends on UFS && ARCH_MEDIATEK
--	select PHY_MTK_UFS
--	help
--	  This selects the MediaTek specific additions to UFSHCD platform driver.
--	  UFS host on Mediatek needs some vendor specific configuration before
--	  accessing the hardware which includes PHY configuration and vendor
--	  specific registers.
--
--	  Select this if you have UFS controller on MediaTek chipset.
--
--	  If unsure, say N.
--
- config QCOM_UFS
- 	bool "Qualcomm Host Controller driver for UFS"
- 	depends on UFS && ARCH_SNAPDRAGON
-@@ -59,6 +45,20 @@ config UFS_AMD_VERSAL2
- 	  UFS host on AMD needs some vendor specific configuration before accessing
- 	  the hardware.
- 
-+config UFS_MEDIATEK
-+	tristate "MediaTek UFS Host Controller Driver"
-+	depends on UFS && ARCH_MEDIATEK
-+	select PHY_MTK_UFS
-+	help
-+	  This selects the MediaTek specific additions to UFSHCD platform driver.
-+	  UFS host on Mediatek needs some vendor specific configuration before
-+	  accessing the hardware which includes PHY configuration and vendor
-+	  specific registers.
-+
-+	  Select this if you have UFS controller on MediaTek chipset.
-+
-+	  If unsure, say N.
-+
- config UFS_PCI
- 	bool "PCI bus based UFS Controller support"
- 	depends on PCI && UFS
-diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-index 15329b9795a..6b2f2ccc9fc 100644
---- a/drivers/ufs/Makefile
-+++ b/drivers/ufs/Makefile
-@@ -5,11 +5,11 @@
- 
- obj-$(CONFIG_UFS) += ufs-uclass.o
- obj-$(CONFIG_CADENCE_UFS) += cdns-platform.o
--obj-$(CONFIG_UFS_MEDIATEK) += ufs-mediatek.o
- obj-$(CONFIG_QCOM_UFS) += ufs-qcom.o
-+obj-$(CONFIG_ROCKCHIP_UFS) += ufs-rockchip.o
- obj-$(CONFIG_TI_J721E_UFS) += ti-j721e-ufs.o
- obj-$(CONFIG_UFS_AMD_VERSAL2) += ufs-amd-versal2.o ufshcd-dwc.o
-+obj-$(CONFIG_UFS_MEDIATEK) += ufs-mediatek.o
- obj-$(CONFIG_UFS_PCI) += ufs-pci.o
- obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
- obj-$(CONFIG_UFS_RENESAS_GEN5) += ufs-renesas-rcar-gen5.o
--obj-$(CONFIG_ROCKCHIP_UFS) += ufs-rockchip.o
--- 
-2.51.0
+On Wed, Oct 29, 2025 at 12:28:53PM +0100, Quentin Schulz wrote:
 
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+>=20
+> One could very well want to verify signed files which aren't a FIT
+> image (e.g. via rsa_verify_hash() when $(PHASE_)RSA_VERIFY_WITH_PKEY=3Dy)
+> but that is currently only possible if the FIT_SIGNATURE symbol is
+> enabled for the stage this signed file needs to be verified.
+>=20
+> While we could remove the dependency on FIT_SIGNATURE and find a better
+> name for the symbol, let's simply always build support for PSS padding
+> when RSA is enabled, like we currently do for pkcs-1.5 padding.
+>=20
+> When $(PHASE_)RSA_VERIFY is enabled on PX30 Ringneck, the difference is
+> an additional 904B for the SPL (spl/u-boot-spl.bin) and 1000B for U-Boot
+> proper (u-boot-nodtb.bin).
+>=20
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+> Another option is to remove the FIT_SIGNATURE dependency. For context, I
+> have a system where U-Boot proper verifies the signature of a few
+> binaries thanks to rsa_verify_hash() (see CONFIG_RSA_VERIFY_WITH_PKEY)
+> with an embedded public key. We do not use FIT images in proper and I
+> would like to avoid building code we don't use to limit the attack
+> surface, so I was looking at ways to remove the FIT support in proper
+> and this dependency makes it impossible as we use PSS padding.
+>=20
+> The cost of always building all RSA paddings may be too high though, I
+> don't know where we should draw the line.
+
+I think the cost of ~900 bytes in SPL for 120 platforms is on the high
+side. How about a different symbol? Or would you want this enabled by
+default on rockhip and so changing those 120 platforms anyways?
+
+--=20
+Tom
+
+--uOfIKxd5ovVUkb3I
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQKTLQAKCRAr4qD1Cr/k
+CrV/AQDagRG8WmIf/aRMUFDm7cNzr85gDK/upS+eoa7i3M1jeQEAnfxLRim5iMrn
+Zt5GMRawq7m2e5wrE6Sh08MorT48rAU=
+=WWiB
+-----END PGP SIGNATURE-----
+
+--uOfIKxd5ovVUkb3I--
