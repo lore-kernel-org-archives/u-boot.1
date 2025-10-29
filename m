@@ -4,178 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F7CCCF9EA
-	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 01:53:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 427E7CCF9E9
+	for <u-boot@archiver.kernel.org>; Wed, 29 Oct 2025 07:31:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DD6482A9E;
-	Wed, 29 Oct 2025 02:53:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gigadevice.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F1AA8004F;
+	Wed, 29 Oct 2025 08:31:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=gigadevice.com header.i=@gigadevice.com header.b="lbxfhVIc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TvVu/BZ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACBEC8352B; Wed, 29 Oct 2025 02:53:54 +0100 (CET)
-Received: from TYDPR03CU002.outbound.protection.outlook.com
- (mail-japaneastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c405::7])
+ id 7EC90800B6; Wed, 29 Oct 2025 08:31:03 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazhn150100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d800::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A757180422
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 02:53:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=gigadevice.com
+ by phobos.denx.de (Postfix) with ESMTPS id BE9E58003E
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 08:30:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vlim@gigadevice.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fBC2ozPbHRm2OJq1bL+oAAt5ts3maO3OrU2+XAMGmYBd4anYW55sgBKllhqeN66nuDcgGfbllBY0BI1WMIQFNb6eGWjOdW5rrEoCoceIIBjtbLVIKm8X+ukCZoLTXml6mjFgLyVnO1BGXDBiESduogwE6rUqG88u8v4UU4NMMtk7Ss99kGa2jYHqnQYn41L7wtbb7kiHv+aP+9shmFoeFOmbNphd4siAVEf+pJUgRHHN1eK3rd6UThWIWaARBF87HHcFQ/7fsEak7WTCLtTt3GqnNyMZMUbD0QCARC5ElNUPnou8KBdgjADeKDsPyeJH50TTxXhjiWhMfevlD1U2Vw==
+ b=WTaCm+W279EShOpE+YleHI3WWnBenZFeDwWF926g+jP+GABTOHMmYU/33vRjpr20dMa5fwxINFXK646R9PmGll5t7YE7o1u+zkQp0s4AzyCVNuMz5FBbzEUnoTvTp3lhIPHWGLGhsVP5rlYmnU9TCca27FeNlt9VMSppYNCxnbXD57+sryU+5tkQIelNZtkBZ+/aywL8yB5QtYKYIPGkJoo72ZRp8V6kzVm0He8H3tMRLYVjOopefUgznN+zks6vVQMR/szlA/pJEt1hHBljb7+8+1DkOUhOQ0UBH0EYkZyBTvbYf4LZaacLUi8N5XSYAjCWkCc8oqjx4EyH2EgxEA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=U9xeSB/zUuTZQjJPZy191Gx1J8bnHJV3qfIu4c/gzDo=;
- b=yijhIb2W75lc+ebBrs0bmccNgbkzrmjFTeGc9NCJkNsn4mRlD7tVpc3XFkg+6Q4bBwhSbMvEN2EN5lE3hDPTTau3Qm2cZ88HbbHKrRjyZOYWaWgBIukqzuct3d8CQJery+5Ev7LQZJT7/9rLSdO1JSphVHf1OtgVcinfExDSYddjwjO4k87Gl8VIxxbGLOPr36PLuzbjJeY67fWabxQWbyECqghlXxIUx8U6KgW3Z9a+LNYtlwc+bf/xNkh4uiQu1Hcf2qPJlFTzqVIKs7XGksv4ohg1Q8v/hAaIkV817xmyuEUrk5vX7z6tu1BmNPUXDPYCT7BAZjKdJBsQfCdilg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=gigadevice.com; dmarc=pass action=none
- header.from=gigadevice.com; dkim=pass header.d=gigadevice.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gigadevice.com;
- s=selector1;
+ bh=7QH/8Ke/l++Lule7GzJtYfteTDQndkSbTkGoAR+Kz5w=;
+ b=kyPtMLGNOxt8rJPq1lPCGx4TYs7TM81ed68baCOWMP9zU+nEuSft5NxBdin6GoJbLdANr0mmLRg6CAknHRdG5T54Z/RPU5xjLHyIPGoiJ/MdHdGMuLwA4tNUijXzpY6/jz6dzXxWukcl5j5hZr1nNtwi6Gv6au4GLwvCUiKIgKMWQpmZxq5uEMyk1dRFJsrn5x8hO1Qm2XzyyjojuH2JJTq+bboExeZt6/l1VBHiBOfDL0DJok3g8dLpvs85PQwatl9HRnj4LG5D0sWrDjBS7xfuamiFYwOcluq8fiLqnFqR1/LBzGkTu6KSZ5nzZNLngoUzz/SAPGlFdDYshP+DPw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U9xeSB/zUuTZQjJPZy191Gx1J8bnHJV3qfIu4c/gzDo=;
- b=lbxfhVIcfUkx70eJWUIJiVOu6jEZ/uAw/FSJkRPfD0uTI9K1Y0TgSWiHML6smMQE9ijtoU3CgBWYHdupZAU1NVNNO1yC34VigbdGRMqJV0qVfOK1y/UpVaq/HBbatRs5/yiFPxqrEHglgg3b5VRd1WN3bpGB1q3zesCqPSNsw84=
-Received: from SI6PR06MB7813.apcprd06.prod.outlook.com (2603:1096:4:26f::11)
- by TYZPR06MB6189.apcprd06.prod.outlook.com (2603:1096:400:335::12) with
+ bh=7QH/8Ke/l++Lule7GzJtYfteTDQndkSbTkGoAR+Kz5w=;
+ b=TvVu/BZ4DOfsZXQk/U6G2McbPzmzae7xHQK8fIMFTAJoCI2nIVAetBd5RgQn/9VhnndW/VuqSSK2vJvHF4V/bRkSSVZ47ddR/JJRsopnJ6s+AoG1clFI837cWKJ2TmBJS3JjQ65B14IfWwVHFqL/EAfcQrkGTv85Li4pRDRCbmo=
+Received: from CH2PR18CA0011.namprd18.prod.outlook.com (2603:10b6:610:4f::21)
+ by DM4PR10MB7402.namprd10.prod.outlook.com (2603:10b6:8:182::16) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Wed, 29 Oct
- 2025 01:53:45 +0000
-Received: from SI6PR06MB7813.apcprd06.prod.outlook.com
- ([fe80::554d:309a:787d:e16]) by SI6PR06MB7813.apcprd06.prod.outlook.com
- ([fe80::554d:309a:787d:e16%4]) with mapi id 15.20.9253.018; Wed, 29 Oct 2025
- 01:53:45 +0000
-From: Vlim <vlim@gigadevice.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Jagan Teki <jagan@amarulasolutions.com>, Takahiro Kuwano
- <Takahiro.Kuwano@infineon.com>, Tom Rini <trini@konsulko.com>, Tudor Ambarus
- <tudor.ambarus@linaro.org>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>, Vignesh R <vigneshr@ti.com>, havish.mutya
- <havish.mutya@amd.com>
-Subject: Re: [PATCH] mtd: spi-nor-ids: Reformat the table
-Thread-Topic: [PATCH] mtd: spi-nor-ids: Reformat the table
-Thread-Index: AQHcR6R84bCIRBwF0Uan6yynaKMByLTWzOjRgAAdAwCAARTGzYAAUrUAgAAKLMU=
-Date: Wed, 29 Oct 2025 01:53:45 +0000
-Message-ID: <SI6PR06MB78132750D9E159847DA0F798BBFAA@SI6PR06MB7813.apcprd06.prod.outlook.com>
-References: <20251028004729.119349-1-marek.vasut+renesas@mailbox.org>
- <SI6PR06MB7813347A75CE48B5924DF36EBBFDA@SI6PR06MB7813.apcprd06.prod.outlook.com>
- <20ee9a4e-9d66-4507-9c88-6efacef85297@mailbox.org>
- <SI6PR06MB7813BEE2045C178C32397BCABBFDA@SI6PR06MB7813.apcprd06.prod.outlook.com>
- <1f163d6d-bd46-4dcf-afa3-2cc246461bfe@mailbox.org>
-In-Reply-To: <1f163d6d-bd46-4dcf-afa3-2cc246461bfe@mailbox.org>
-Accept-Language: en-US, zh-CN
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=gigadevice.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SI6PR06MB7813:EE_|TYZPR06MB6189:EE_
-x-ms-office365-filtering-correlation-id: 50e899cb-eb17-41a5-8109-08de168dfec4
-x-ld-processed: f84ba339-959c-4ab1-9b67-1e43414f945e,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|10070799003|376014|1800799024|366016|38070700021|13003099007|8096899003|7053199007;
-x-microsoft-antispam-message-info: =?utf-8?B?WU9WSzRLVDgyRXhCdURRQ1JKQ2lJaGZ0Z3lEUU04L3g5WTF0MFdmYU5OZXQ4?=
- =?utf-8?B?RTNTY05ZdkZyaU56ZjNIc1hXYkNGOWw5a28rVEJwbGwrTHRlN1RIQThscHdt?=
- =?utf-8?B?bGhCblh5TFlnY0Fwcy8xSXp6aHNTM3NXcVMvQUZJK08rRy9aWnRMKzVkK1Bq?=
- =?utf-8?B?aXFsWVpSNlZOa0t0VElqWGN2TVhpTzZNUUFFZGxPVmd2c1l6citvRTI0SjVV?=
- =?utf-8?B?b3RBcm5YU001U0tYTXl5emt1K2dGNHI4TnpiS1E3QW1UWERXcHUxOW1QakhG?=
- =?utf-8?B?QWduNmxBNCtuZEtMQkFPdXdQWGlNUjRDbXo4eEhLQ3oxNjhCb0xCUUpGWjEr?=
- =?utf-8?B?NU5neWdTVk13TExkVmNHa0ZWV3hqZEJQZDJnYUw3TEtkRmFOeU9wcTNzcnhD?=
- =?utf-8?B?QitJdzZQTEE1QS9laXhxZlVWV1l0TXZpcjJreHZoLzV2RUZUb01GNUIrbUJw?=
- =?utf-8?B?a0oyYzdCek9XbVpzTVpYanpwR05oOS9LSXl5ZjdJVmJmMFYrUEFwRlpOMlNK?=
- =?utf-8?B?ckErMkdVaElheGdWcDBwR3pySi8wTXFOWE5zSXdZT09DeEJqbW55Z1BncXVq?=
- =?utf-8?B?OU1WUkNOcjNLeURCNE9VbUdtblRqNVlEYmRhMnpJUTFIb0Njd2RjVkhxQndL?=
- =?utf-8?B?SG9xQXduZXNNVkF3Y2NPNGZqdVNWZFo5L1FDTThkclVCdEFpcUprb1dYbnZX?=
- =?utf-8?B?WEErR2VhcUg2anAzaitTUHluMmI0dkMrUzNtdXVneHYwZjRDRW5VN1cwQzlq?=
- =?utf-8?B?K29KNjNJQS9GVTIrTXlvYVMvRU9UT3ZoMmsvVXZWY0xEN1preUVMeGRmVzJL?=
- =?utf-8?B?NGJxMUVnV29lYTFWanQ5RDBJQTBNSFJReHZvYWt1Z2xpWVNVRDEwYTNYWWhx?=
- =?utf-8?B?T3Q4MzJubEZjYnNxOXlmRTVuWkltckdWaDJQOEE1ZDJDN3RhU3YvaDNWYS8w?=
- =?utf-8?B?c2VtbTZzR2FCeXZzRlBlQ3hKYXdQZi9sNEIwYjg2VDZhNTcyNXpoUFlIQkt5?=
- =?utf-8?B?M05mR3U3WlJFWkI0NytVdUZnRlhRYlBDSDJmcFNVWDk0bE1uZFczNUFnVjFw?=
- =?utf-8?B?U29uZVJsaFBTY0Iva1FSTlVzUURWdWEzSUJSekc3SXk1S2gxUmNmTzZuNENl?=
- =?utf-8?B?VkJrMUtPUTFsdE9xSmlpdlowbEpPQ2RMMUZ3NlBnODAralNZcldBcmlUaEsx?=
- =?utf-8?B?MGo2YzNOOGkzcDFHckREeFpRRmd0ZnFxZ3BNSnhXS1FkL2hiOEc4djZ5NjND?=
- =?utf-8?B?ZUdhMm1XNXdHbzZzY2R4ZnlLb2NIVDBVaE00U3crcUg5MmdxTTUvbTA4Mktr?=
- =?utf-8?B?eVIyZzVJUk1ldzFwYUw5T1UzMWZVYkFtMUxRUXdVdWs3SCtFSkowbzNTYzE5?=
- =?utf-8?B?M0gxQjU3NEFnenVIcEdXMnhOOGFWRUJCK2YrcTMwbDRyQ1lZMldoV3ZEZkFU?=
- =?utf-8?B?WStxNGlXN2pCYWJ1VVl2aUNicDk2Ti9teEtBZkFtV3ZydTl4dXg5cUhTUkp6?=
- =?utf-8?B?dXBUZ0NFdS95Q21HU0hXTWtqSjNzbWRXRUlDNVY5ZHFkNi95L01TbXREVExI?=
- =?utf-8?B?bmxxdVVZdHNEcVpLaG51bWNES1JRbitPVkNlU0ZLNHRLNUp6ZWgxVFU5NFlj?=
- =?utf-8?B?NWd6RXJzbGxPOXhmdEdjZitiNG82Ykp6QmlnckFEWFBhZTVSTU5UYkRXQW1j?=
- =?utf-8?B?bWpTNzcxay9PNjcvRnU5N0tOVTRuNWVFY0dVSXlVeDJhdTRTTjZYSElBZGRH?=
- =?utf-8?B?dmN1TXVGV1VtdGE5OXZjajIzSW9NbXhHSlc1OEFTbW51akZjcUxEQ1dkVXRh?=
- =?utf-8?B?aTBzNDhpS3VGZDVwTk1tZFlXZzR5eWh3MnFnRVkvQVArTTJTalVqSGQyMWE2?=
- =?utf-8?B?NnRjR2tJNUsrdFNDMDVaYllJM3QxSjlweHpiQmdZOGFaUUpjV041QTZHRFhr?=
- =?utf-8?B?aDUrdFpUS0oxL0ZaRm9zR1V5d21MNmFxZDB4TjVyQmVXQTUrK0VERWZXeFlX?=
- =?utf-8?B?aER0cTZON3hsMk16a1F0NlhUUFpOMFM1aWxxMUZmczFRdDVydThjcGFDT29v?=
- =?utf-8?Q?PEaS8t?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SI6PR06MB7813.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(376014)(1800799024)(366016)(38070700021)(13003099007)(8096899003)(7053199007);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?cjdCWU1RVW5yT2NLT0loekZ6T2I5K25DSWJDMWlnZStxNEJ4NjZqTUcrc3Mw?=
- =?utf-8?B?blBtVHd3bVFDNHh5KzdHTU5OMDVyNUJDZHdvcGJiekZYOGJiSGprT2Q0amZP?=
- =?utf-8?B?UWhPck5uSjllNVZPYi9rZytjUkhkaUdBbkxYRCsyZWV3UnNQaE5RZmRiNWh6?=
- =?utf-8?B?aDBIZ1BZQzhZdUpqbENWblgyN2xUWXhYT2NHZktTTWYwRGtUa0c2ZzJyM29h?=
- =?utf-8?B?dGRLU3QzUmJQRWFmL2VPbXVBMFRiajBCNnRlaG9IVE9tQ1JUVklGN2JWeGtX?=
- =?utf-8?B?VndpU2liQXpMUXVOTDZRVUFTdU51S0wyT00waUI4YVNQcEZmMjdrK0lFeUxN?=
- =?utf-8?B?Um00eFVFR2JFNjZLbXpWc0gzYUVYSXA4K1BWcUVLckxBWUdWUGNvNHdNVWJY?=
- =?utf-8?B?WGJDMlF2RktPdmQ2RCsyckUxRUh3RXJ0ZzF2RmIvbEg1MFV2OS9OL0hKSFdp?=
- =?utf-8?B?aGpXWnFmdUJ0VlllMndxajJyTlliais2RllsVi9SbzI5dlcvT2tQSzN6S3NG?=
- =?utf-8?B?U2dncGRJTXBBQ2UvWXUwcU9CcHFHRGFEVHNsbWlnb2h5S1hjSGlxWUprQUZU?=
- =?utf-8?B?UlRWdHpoeGlXaXFyQUNrVlc3SjVhaFgvTHZhMEZlRmJhWW80cFkwMkdhR215?=
- =?utf-8?B?cDg4N0I2UGxna1M3b2c0a0pCc25oZTVQOE9vRHFsYitGMGp4UUVTVzZFOUlt?=
- =?utf-8?B?Q09wdWd4REtOZVdMZ2VFZU1HaE9jRFdIRk00REp6YWN2NEpzaDdJR0tOdW1S?=
- =?utf-8?B?RENXZm8ybzdHUmQ4Wm42VTdmdFppQkdCTllUclVkZDVRR0tMWFZaVDlvS1Nh?=
- =?utf-8?B?ZG9rRGNGeXBHck04c2ZJYmlNNXZrNUFKS1RORHdaQUFOaWNmZzRjdWlmdWFG?=
- =?utf-8?B?eVg1S09uTU8zUHJ2YXI3VWpNSVcrU1dtVXZhTExHbkduNExZOSs2NzE2eGRM?=
- =?utf-8?B?eTFCWklWeFR2VzE5akNYMGZ6T0NWTGpTNGwzVStmNjlucTBEL1ZCS3AvUDhH?=
- =?utf-8?B?VXQxYlpxa0w5V2laQnJvWWhEQXN6Y3lnRGV5SFJVSDUxbnVCZ1FjdWlzVmlT?=
- =?utf-8?B?bzJ5ZVdwdVRxczJZYXMyZUhmWVhKSUhiU2ptY291bzR2TUQzYzVoZjIzcFJF?=
- =?utf-8?B?NFVUYnFFdmEwZDdzcEViaTM5RjRWRVZUZkxrRXlYUW9QRFN1ZFFMU05XSjJ2?=
- =?utf-8?B?dHhrc1dWbWpZdmNYVVJ2QWI1U3dkbjFCaWF4TndTSXV0azZkU3NTSVFxZzhF?=
- =?utf-8?B?NTJzV2Y2eHFPWWRBa0ltUElCYUcxU2ZVTTcvZ1FqK0ZhUDlYeFZoTEVvN0Vs?=
- =?utf-8?B?SC91MUMzSkpuaHZ3OEo1YnlIWXY1aXNzMC9XRkxlcEgvS3FrUlFzMGJweEh3?=
- =?utf-8?B?WWxFUExWdFZyZDdtelQwYkNocDQ1WUc1dXVGLzdMdlhvWE5DS2ZvcWg1NFhx?=
- =?utf-8?B?UllpejJzQ0tQRHVYcHh5Mlc3dVBXbDA1MmoydmJpSk5heHJvOFVjK0RBY3lR?=
- =?utf-8?B?NENWUEN1c1draHMxQUhpT1lRVGt1cnE2Z0FlcXFrK2UvcHRwc1V4c05LMVJL?=
- =?utf-8?B?RTNjN3NPMklVU0dlTlJyRE1lOGlDWXZGLzc5MlJ2MmxOUjd2aGFoRlhiM2lo?=
- =?utf-8?B?cFljSVpOcHRkSkNZY3lsUWxjY25zRjlRdW5BWVBQa0wrNFJWNkcwT0h3Q2ZU?=
- =?utf-8?B?UjBLblBRdnp5ZzZMSkRXTkd5MUdMKyt4QXE3YVNEVEFIM0xnblI4WEw1MEE4?=
- =?utf-8?B?WmQrUTB4cDFUcU40SDJ6ZXlobmZ6aUV2SGdFcVZPdjFnU0lHa3dsellrSUVB?=
- =?utf-8?B?Znlja2hlNWdGSzlnbi9UbGxTNHRtRy9zc2dUc25OMmxiUFNBYXpsbUhRUFFU?=
- =?utf-8?B?cnFCWElMeEtNMmEwaDh3djZJUmt4ei9vbDFXSXZHOFdHTXRLVWRFd0s0bHVU?=
- =?utf-8?B?WG53d0dnUkU5MERXNnE1VHFZOERTUXFKNlN3akU2VUpMRlVGWTdrSnZVanlY?=
- =?utf-8?B?bHBtblBxdTRGQ2kvU041OWF2eVVyVmZuV1d5eE5WZnNGaTF0aWptTzVaYjVH?=
- =?utf-8?B?NUZ3ZEhQOENoWU9LZ2sxd1dJQ005dW5oRm1VK21yMU02YW5VZTJ1S21hMTI0?=
- =?utf-8?B?RlNQT0ZieVZIaFk5ZDAwUDQycFFMK2FMdXZlUmZpOVlBTDdhc1IvMnA0OEFW?=
- =?utf-8?Q?VaDS476lZwOFXHhNO/D0PA9qxF5VieulyC2GoUNRrBb0?=
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Wed, 29 Oct
+ 2025 07:30:55 +0000
+Received: from DS3PEPF000099D3.namprd04.prod.outlook.com
+ (2603:10b6:610:4f:cafe::ae) by CH2PR18CA0011.outlook.office365.com
+ (2603:10b6:610:4f::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9253.17 via Frontend Transport; Wed,
+ 29 Oct 2025 07:30:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ DS3PEPF000099D3.mail.protection.outlook.com (10.167.17.4) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9275.10 via Frontend Transport; Wed, 29 Oct 2025 07:30:53 +0000
+Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Oct
+ 2025 02:30:44 -0500
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Oct
+ 2025 02:30:44 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 29 Oct 2025 02:30:44 -0500
+Received: from localhost (kamlesh.dhcp.ti.com [172.24.233.19])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59T7UhJC3636634;
+ Wed, 29 Oct 2025 02:30:43 -0500
+From: Kamlesh Gurudasani <kamlesh@ti.com>
+To: Maxim Kochetkov <fido_max@inbox.ru>, Dhruva Gole <d-gole@ti.com>
+CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, "Tom
+ Rini" <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Ye Li
+ <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 2/2] clk: scmi: add compatibility for clock version
+ 3.0 and onwards
+In-Reply-To: <87sef3p3c2.fsf@kamlesh.mail-host-address-is-not-set>
+References: <20250819-b4-scmi-v1-v3-0-360145076b3b@ti.com>
+ <20250819-b4-scmi-v1-v3-2-360145076b3b@ti.com>
+ <ccf326ff-b4d3-43f0-92df-07a22bd5c60e@inbox.ru>
+ <20250909101806.bymqunywxu6pe33o@lcpd911>
+ <dd60557d-e8ee-4ea1-8045-e442db38a5c8@inbox.ru>
+ <874is9h937.fsf@kamlesh.mail-host-address-is-not-set>
+ <7e1881e5-3feb-4b26-b9ea-e6e56a090873@inbox.ru>
+ <87sef3p3c2.fsf@kamlesh.mail-host-address-is-not-set>
+Date: Wed, 29 Oct 2025 13:00:42 +0530
+Message-ID: <87pla6p3kt.fsf@kamlesh.mail-host-address-is-not-set>
 MIME-Version: 1.0
-X-OriginatorOrg: gigadevice.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SI6PR06MB7813.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 50e899cb-eb17-41a5-8109-08de168dfec4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Oct 2025 01:53:45.3200 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: f84ba339-959c-4ab1-9b67-1e43414f945e
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: k4xRukMOiyFNS/J/HX1hfzWQtYmuWolZ2XzzPZ8OA63WspANuDY/4wpf9XvBv/0TDt7RN2zEE/QmlHK+w4M7Jg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB6189
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099D3:EE_|DM4PR10MB7402:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0ec1fbc5-9d35-4da5-1ed0-08de16bd17e4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|34020700016|36860700013|1800799024|376014|82310400026|12100799066;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8zsmle/E23t2vlJT58p0C19+Mwl3NSWLmdPjipMcjEjJWTCo5PZfoCAJegSX?=
+ =?us-ascii?Q?dOdvcttAGOXX1+in80EgymDPGZHShyYLPulbQ2J/1YCon9wH803D9vadUlr3?=
+ =?us-ascii?Q?WhmzxpHkg7yReawiFPv4nNFH0oetKYan81LUi7Jtcu4Q7opDPO2nAze1wJZr?=
+ =?us-ascii?Q?MBtUpURT3H8Pg8soaIEnrvxsClfrIBw36Qqc6TVALYjNNLdJtc//tE8r/k2F?=
+ =?us-ascii?Q?0IT01NCX7a9vJj5jLvakTJaCEzGEyyXpZSq2f1F3cBi8k0f/lBtFklrSF9LM?=
+ =?us-ascii?Q?SYQxWfmgZ2EuR9aoMJwSKvkZ4ujPytUwXXgdN6bcQoXqKK82LvfNv7mN2irO?=
+ =?us-ascii?Q?hXQ5YEcNC2fsqqonGFj0cSKdq7UcpLyjxIwjfKJ9gRWZQP3oOgGe25zrx4Un?=
+ =?us-ascii?Q?9cCQU1AAiWsz4EvZLYBeBP36+hU4u38s0ha811H8fMlGSXXmyOeVR97CpS/t?=
+ =?us-ascii?Q?8uIPy4jKrPNLPOe3w/uCTCNljpDA3s+bt/O7iv2UZPMl3D3Z9y/lbf7kzF2E?=
+ =?us-ascii?Q?VL9nmxPIe1I4yQnOlf0+44a+BgJwT6kl5KrHG/oHUajO4OqrohNjcRHiIJ0Z?=
+ =?us-ascii?Q?hHVVLf/7JcDjfMNLsfSob5ni9u8g4MbyiTrtciIqFGVis/jYUic+9rwWV60p?=
+ =?us-ascii?Q?Wbc+y0YFc1T2Q8sJCEzLqSMflVOPRJnv5N26QWccHCJ3UrdHvWNoyCrxJLZT?=
+ =?us-ascii?Q?7dJAf4mbVnD7vLnDJ/Ep+eQDvMvA6mKcFS0x7Bl8dIW8ZiP9eQXRIU5M01g3?=
+ =?us-ascii?Q?1d6d1E9LRNgaWjl8O0fk7xtBp6PRBZWidxZ7SVy1Dbmyqak1PXGkIVbjTvN8?=
+ =?us-ascii?Q?d2zJAOtG1dYVp8tRSUfN2cCFc6kCnszeyJKvPi4WUQDUlv8YZzaa2ofnVcKn?=
+ =?us-ascii?Q?sKWBr9U976Jn5/i0ZSn77f05BFv+7H63c2RPBbJ10jEJPWac6ihpHrR7rsnB?=
+ =?us-ascii?Q?q9c+MUWdMiFAhH8jvEfu0VY5qaLfktQj+L/IRDLTyc4B8C0BMN8zzr4aPLHW?=
+ =?us-ascii?Q?VEin04GDpoRvLmYgppiPM206xPLSlJJMt67qc6iG/kG0BCjCctTo6UILPE6Z?=
+ =?us-ascii?Q?1MpA/HUdsceM0AdV5UT1PBYS5U/RCW8ezjrDh+h++xAaIao0e5Yn64vdt9+D?=
+ =?us-ascii?Q?Cxy53SWfJOcONXcGJp5LaisqnKPCkZe3Yuo50G7+XnkTreDrMPJRhHAJePrI?=
+ =?us-ascii?Q?YVZEGZiCZpMRXpCEGv6JGcU/cK23kOSFcX7hv8kdBFv4VJPZScEKQe5fLTEC?=
+ =?us-ascii?Q?M56TDGk4riNQ6gfM0ZnkTTF4SV72nNgqH/HKW8TME21sWLWVCsGWnOQKUJdf?=
+ =?us-ascii?Q?F72hxDQhBTJxRzQMrCvThHwPwSlbuvBjTr8i81ohQVCqLu0Ry1ZN6XGkKfVT?=
+ =?us-ascii?Q?mPExWNjQS6QMQpWmZT8G9t5DRPjCMIn0FAPEj/nsOSvwi/AzVlHPVt5mxHif?=
+ =?us-ascii?Q?aFekx/IKEd2Lwnzzr0Ec8s1R7SOHIWItfUi3hwuw/LsRA920Pl1YLSnAFR9n?=
+ =?us-ascii?Q?5pKSuJtrhUmoXNbsi0Ghv6GdPvDNZuxMilh/aUCGx2xvqYXXWKuiPjpteFDg?=
+ =?us-ascii?Q?cFsiUAdZuA7QokcBzHU=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(34020700016)(36860700013)(1800799024)(376014)(82310400026)(12100799066);
+ DIR:OUT; SFP:1501; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2025 07:30:53.8086 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0ec1fbc5-9d35-4da5-1ed0-08de16bd17e4
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D3.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB7402
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -192,49 +162,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-VGhhbmtzLCBNYXJlaywNCg0KQ2FuIHlvdSBwbGVhc2Ugc2hvdyBtZSB0aGUgcHJlZmVycmVkIGZv
-cm1hdD8NCg0KVGhpcyB3YXMgdGhlIG9yaWdpbmFsIGZvcm1hdCwNCg0K4oCCew0KIOKAguKAguKA
-guKAguKAguKAguKAguKAguKAguKAguKAguKAgklORk8oImdkMjVxMzIiLCAweGM4NDAxNiwgMCwg
-NjQgKiAxMDI0LCAgNjQsDQog4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC
-4oCC4oCC4oCC4oCC4oCCU0VDVF80SyB8IFNQSV9OT1JfRFVBTF9SRUFEIHwgU1BJX05PUl9RVUFE
-X1JFQUQgfA0KIOKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKA
-guKAguKAglNQSV9OT1JfSEFTX0xPQ0sgfCBTUElfTk9SX0hBU19UQikNCiDigILigILigILigILi
-gILigIJ9LA0KDQoNClRoaXMgb25lIGxvb2tzIGNsZWFuZXIuDQoNCuKAguKAguKAguKAguKAguKA
-gntJTkZPKCJnZDI1YjI1NiIsIDB4Yzg0MDE5LCAwLCA2NCAqIDEwMjQsIDUxMizigILigIJTRUNU
-XzRLIHwNCuKAguKAguKAguKAguKAguKAglNQSV9OT1JfRFVBTF9SRUFEIHwgU1BJX05PUl9RVUFE
-X1JFQUQgfCBTUElfTk9SX0hBU19MT0NLIHwgU1BJX05PUl80Ql9PUENPREVTKeKAguKAguKAguKA
-guKAguKAgn0sDQoNClJlZ2FyZHMsDQoNClZpY3Rvcg0KDQpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXw0KRnJvbTogTWFyZWsgVmFzdXQgPG1hcmVrLnZhc3V0QG1haWxib3gub3JnPg0K
-U2VudDogVHVlc2RheSwgT2N0b2JlciAyOCwgMjAyNSAxODowNw0KVG86IFZsaW0gPHZsaW1AZ2ln
-YWRldmljZS5jb20+OyB1LWJvb3RAbGlzdHMuZGVueC5kZSA8dS1ib290QGxpc3RzLmRlbnguZGU+
-DQpDYzogSmFnYW4gVGVraSA8amFnYW5AYW1hcnVsYXNvbHV0aW9ucy5jb20+OyBUYWthaGlybyBL
-dXdhbm8gPFRha2FoaXJvLkt1d2Fub0BpbmZpbmVvbi5jb20+OyBUb20gUmluaSA8dHJpbmlAa29u
-c3Vsa28uY29tPjsgVHVkb3IgQW1iYXJ1cyA8dHVkb3IuYW1iYXJ1c0BsaW5hcm8ub3JnPjsgVmVu
-a2F0ZXNoIFlhZGF2IEFiYmFyYXB1IDx2ZW5rYXRlc2guYWJiYXJhcHVAYW1kLmNvbT47IFZpZ25l
-c2ggUiA8dmlnbmVzaHJAdGkuY29tPjsgaGF2aXNoLm11dHlhIDxoYXZpc2gubXV0eWFAYW1kLmNv
-bT4NClN1YmplY3Q6IFJlOiBbUEFUQ0hdIG10ZDogc3BpLW5vci1pZHM6IFJlZm9ybWF0IHRoZSB0
-YWJsZQ0KDQpbWW91IGRvbid0IG9mdGVuIGdldCBlbWFpbCBmcm9tIG1hcmVrLnZhc3V0QG1haWxi
-b3gub3JnLiBMZWFybiB3aHkgdGhpcyBpcyBpbXBvcnRhbnQgYXQgaHR0cHM6Ly9ha2EubXMvTGVh
-cm5BYm91dFNlbmRlcklkZW50aWZpY2F0aW9uIF0NCg0K5q2k5Li65aSW6YOo6YKu5Lu277yM6LCo
-6Ziy6ZKT6bG86YKu5Lu277yM6K+35rOo5oSP6YKu5Lu25piv5ZCm5raJ5Y+K5pWP5oSf5L+h5oGv
-DQpUaGlzIGlzIGFuIGV4dGVybmFsIGVtYWlsLCBiZXdhcmUgb2YgcGhpc2hpbmcgZW1haWxzLiBQ
-bGVhc2UgcGF5IGNsb3NlIGF0dGVudGlvbiB0byB3aGV0aGVyIHRoZSBlbWFpbCBjb250YWlucyBz
-ZW5zaXRpdmUgaW5mb3JtYXRpb24NCg0KT24gMTAvMjgvMjUgOTozMyBQTSwgVmxpbSB3cm90ZToN
-Cj4gSGksIE1hcmVrLA0KDQpIZWxsbyBWbGltLA0KDQo+ICAgIDEuDQo+IHJlZm9ybWF0IHRoZSB0
-YWJsZSB0byBmb2xsb3cgdGhpcyBmb3JtYXQuDQo+DQo+IOKAguKAguKAguKAguKAguKAgnsNCj4g
-4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCCSU5GTygiZ2QyNXEzMiIsIDB4Yzg0
-MDE2LCAwLCA2NCAqIDEwMjQsICA2NCwNCj4g4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC
-4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCCU0VDVF80SyB8IFNQSV9OT1JfRFVBTF9SRUFEIHwgU1BJ
-X05PUl9RVUFEX1JFQUQgfA0KPiDigILigILigILigILigILigILigILigILigILigILigILigILi
-gILigILigILigILigILigIJTUElfTk9SX0hBU19MT0NLIHwgU1BJX05PUl9IQVNfVEIpDQo+IOKA
-guKAguKAguKAguKAguKAgn0sDQoNCldoeSB0aGlzIHdheSA/IERvZXMgaXQgYnJpbmcgYW55IGlt
-cHJvdmVtZW50LCBhc2lkZSBmcm9tIGJlaW5nIGxlc3MNCmNvbmNpc2UgPw0KDQo+ICAgIDEuDQo+
-IFJlLWFycmFuZ2UgdGhlIG9yZGVyIG9mIHRoZSB0YWJsZSBiYXNlZCBvbiB0aGUgSUQsIHNvIHRo
-YXQgSSBjYW4gZ3JvdXAgdGhlIHBhcnQgI3MgYnkgcHJvZHVjdCBmYW1pbHkuDQoNClN1cmUuIEkn
-bGwganVzdCB3YWl0IGZvciB0aGUgbWFpbnRhaW5lciBhbmQgd2hpY2hldmVyIHBhdGNoIHRoZXkg
-cGljaw0KZmlyc3QsIHRoZSBvdGhlciB3aWxsIGJlIHJlYmFzZWQgYW5kIHJlc2VudC4NCg0KPiAg
-ICAyLg0KPiBJIGhhdmUgYSBmZXcgbW9yZSBwYXJ0IG51bWJlcnMgdG8gYWRkIHRvIHRoZSB0YWJs
-ZSwgY2FuIEkgYWRkIHRoZW0gd2l0aCB0aGlzIHVwZGF0ZT8NCg0KU3VyZS4NCg0KPiAgICAzLg0K
-PiBEbyBJIHN1Ym1pdCBhcyBhIG5ldyBwYXRjaD8NCg0KWWVzLCBidXQgcGxlYXNlLCBsZXQncyB3
-YWl0IGZvciBtYWludGFpbmVyIGlucHV0IGZpcnN0Lg0KDQotLQ0KQmVzdCByZWdhcmRzLA0KTWFy
-ZWsgVmFzdXQNCg==
+Kamlesh Gurudasani <kamlesh@ti.com> writes:
+
+> Maxim Kochetkov <fido_max@inbox.ru> writes:
+>
+>> 08.10.2025 15:27, Kamlesh Gurudasani wrote:
+>>
+>>>>> Could you elaborate?
+>>>>> I think clk->dev should be fine, similar to other instances in the same
+>>>>> file. Maybe I am missing something?
+>>>>>
+>>>>
+>>>> clk->dev points to hw clock device. It has no struct scmi_clock_priv
+>>>> stored in priv data. So we have to step up to parent device to get SCMI
+>>>> protocol device to get struct scmi_clock_priv to get protocol version
+>>>> priv->version.
+>>> Hi Maxim,
+>>> 
+>>> in probe function, we are making sure that priv data is available
+>>> 	struct scmi_clock_priv *priv = dev_get_priv(dev);
+>>> 	size_t num_clocks, i;
+>>> 	int ret;
+>>> 
+>>> 	ret = devm_scmi_of_get_channel(dev);
+>>> 	if (ret)
+>>> 		return ret;
+>>> 
+>>> 	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
+>>> 					    &priv->version);
+>>> 
+>>> 
+>>> Also, the code is working just fine and returns correct version with
+>>> clk->dev
+>>> 
+>>> Let me know if I missed something
+>>
+>> Here is my debug path:
+>>
+>> --- a/drivers/clk/clk_scmi.c
+>> +++ b/drivers/clk/clk_scmi.c
+>> @@ -135,6 +135,10 @@ static int scmi_clk_gate(struct clk *clk, int enable)
+>>          struct scmi_clk_state_out out;
+>>          int ret;
+>>
+>> +       printf("%s name:%s dev:0x%px dev->priv:0x%px     parent->name:%s 
+>> parent->dev:0x%px parent->dev->priv:0x%px\n", __FUNCTION__,
+>> +               clk->dev->name, clk->dev, dev_get_priv(clk->dev),
+>> +               clk->dev->parent->name, clk->dev->parent, 
+>> dev_get_priv(clk->dev->parent));
+>> +
+>>          if (priv->version >= CLOCK_PROTOCOL_VERSION_3_0) {
+>>                  struct scmi_clk_state_in_v2 in = {
+>>                          .clock_id = clk_get_id(clk),
+>> @@ -288,6 +292,8 @@ static int scmi_clk_probe(struct udevice *dev)
+>>          size_t num_clocks, i;
+>>          int ret;
+>>
+>> +       printf("%s name:%s dev:0x%px dev->priv:0x%px\n", __FUNCTION__, 
+>> dev->name, dev, priv);
+>> +
+>>          ret = devm_scmi_of_get_channel(dev);
+>>          if (ret)
+>>                  return ret;
+>>
+>> And output:
+>>
+>> DRAM:  510 MiB
+>> scmi_clk_probe name:protocol@14 dev:0x000000041f51fc50 
+>> dev->priv:0x000000041f520ae0
+>> scmi_clk_gate name:UART0 dev:0x000000041f522710 
+>> dev->priv:0x0000000000000000     parent->name:protocol@14 
+>> parent->dev:0x000000041f51fc50 parent->dev->priv:0x000000041f520ae0
+>> Core:  132 devices, 22 uclasses, devicetree: board
+>> MMC:   scmi_clk_gate name:EMMC_S dev:0x000000041f521950 
+>> dev->priv:0x0000000000000000     parent->name:protocol@14 
+>> parent->dev:0x000000041f51fc50 parent->dev->priv:0x000000041f520ae0
+>> sdhci@0: 0
+>> Loading Environment from nowhere... OK
+>> In:    serial
+>> Out:   serial
+>> Err:   serial
+>>
+>> As we can see here, we have two different devs in scmi_clk_probe() and 
+>> scmi_clk_gate(). dev from scmi_clk_gate() have NULL in dev->priv. So we 
+>> can't get scmi version form clk->dev direcrly.
+>>
+>> P.S.: I have CONFIG_CLK_CCF=y
+> Thanks for the logs Maxim.
+>
+> Looks like the behaviour is different for CCF and non CCF
+>
+> We have parent->dev->priv as NULL. (and no prints from probe func for r5)
+>
+> *r5 core logs*
+> U-Boot SPL 2025.01-00667-g8d2958a533ce-dirty (Oct 28 2025 - 18:43:57 +0530)
+> SPL initial stack usage: 1984 bytes
+> Trying to boot from DFU
+> scmi_clk_gate name:protocol@14 dev:0x82b7a400x dev->priv:0x82b7a588x parent->name:scmi parent->dev:0x82b7a1d0x parent->dev->pr\
+> iv:0x0x
+> #####DOWNLOAD ... OK
+> Ctrl+C to exit ...
+> ERROR:   Agent 0 Protocol 0x10 Message 0x7: not supported
+My bad both are a53 logs, spl and uboot
+
+
+>
+> *A53 core logs*
+> U-Boot 2025.01-00667-g8d2958a533ce-dirty (Oct 28 2025 - 18:43:57 +0530)
+>
+> SoC:   AM62LX SR1.0 HS-FS
+> Model: Texas Instruments AM62L3 Evaluation Module
+> DRAM:  2 GiB
+> ERROR:   Agent 0 Protocol 0x10 Message 0x7: not supported
+> scmi_clk_probe name:protocol@14 dev:0x00000000fdeb65a0 dev->priv:0x00000000fdeb6f30
+> Core:  84 devices, 32 uclasses, devicetree: separate
+> MMC:   mmc@fa10000: 0, mmc@fa00000: 1
+> Loading Environment from nowhere... OK
+>
+>
+> If you have suggestion for solutions please let me know.
+I'm not able to test CCF enabled but I have following that might be a
+potential solution
+
+modified   drivers/clk/clk_scmi.c
+@@ -130,10 +130,18 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
+ 
+ static int scmi_clk_gate(struct clk *clk, int enable)
+ {
+-	struct scmi_clock_priv *priv = dev_get_priv(clk->dev);
++	struct scmi_clock_priv *priv;
+         struct scmi_clk_state_out out;
+         int ret;
+ 
++	if (CONFIG_IS_ENABLED(CLK_CCF)) {
++		/* CCF: version info is in parent device */
++		priv = dev_get_priv(clk->dev->parent);
++	} else {
++		/* Non-CCF: version info is in current device */
++		priv = dev_get_priv(clk->dev);
++	}
++
+         printf("%s name:%s dev:0x%px dev->priv:0x%px parent->name:%s parent->dev:0x%px parent->dev->priv:0x%px\n", __FUNCTION__, clk->dev->name, clk->dev, dev_get_priv(clk->dev), clk->dev->parent->name, clk->dev->parent, dev_get_priv(clk->dev->parent));
+ 	if (priv->version >= CLOCK_PROTOCOL_VERSION_3_0) {
+ 		struct scmi_clk_state_in_v2 in = {
+
+
+I have checked with CCF disabled.
+Let me know if this works for you as well.
+
+Regards,
+Kamlesh
