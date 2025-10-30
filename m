@@ -4,137 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D09ACCF9F8
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 07:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6619CCF9F8
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 07:56:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D27C2838E7;
-	Thu, 30 Oct 2025 08:53:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F7A78391C;
+	Thu, 30 Oct 2025 08:56:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QKaLzext";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="dRCmzIBy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 260A7838F8; Thu, 30 Oct 2025 08:53:34 +0100 (CET)
+ id 941D88392C; Thu, 30 Oct 2025 08:56:03 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A6F7838D7
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 08:53:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D4C8838D7
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 08:56:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1761810807; x=1762415607; i=xypron.glpk@gmx.de;
- bh=DbNXy9zpQ5RAhtQtnkfhE9denM+63x99Wtz1LSTqVaU=;
+ s=s31663417; t=1761810961; x=1762415761; i=xypron.glpk@gmx.de;
+ bh=+52cvid2YSk5jiiH/mbW+76TrAH3jQDBeUVY8+pqal8=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=QKaLzextoWT2ULOy3vs+JQ9YPNtUJx2O2dhcwnkOTT6HH1BylEaq5Z9avdpQOrno
- QNU6AwnPVgLGQrn4TF1pmMb/hruyTuVskn+Z6BMaDkpANCC552AMAmZh61eE9tgbm
- ifPCtB3oZxYhYQhonDl3hL9DoiZdVtxvyxwVHriegkoQety44GrPD/Dh18ZaEncYj
- Gaoh8cKj1jwpURi5Hzn4Y63bsdnqkk58zZDWaMuHifU6IsJSbcU99BpYErL/le3CL
- NRXZlEp7WAaiuHdFLncLLMXUepRXKxokcb1iTCY4OJEIpDEEWLQLeo7kOajdkxHro
- eaEkI1/UX2hcma5wdw==
+ b=dRCmzIByK7dRTibwdnSvT102IbmFBVoRqiEikmUQTEfSGuYbKW1ghcD6tXiiumU2
+ 6JsRJueHr6GLQkg8Dz60EII7UY8Hx7axe/bDJlElRQgUTIh6bYP1HUWnbTc9LmLgj
+ i+uK7vDjCKesGLihCr0CBZqPV3FzLcMgThcSPGZnsMVtprrkeE+berZc2y2mbkXz1
+ I9289LcvJzy9v+ptqFRPUxnTC4ly8S/zxTvlCZUe3fNEfwAtNPSJi3FY8skLqyvLf
+ B6G7iJ2n8Vpr5D18L1oierA/goIP/GocGAZ//viEbJjlOSGCGkU6icAfnpf7SbaO+
+ I1TdKS5RV0OIAcpvMQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [172.25.161.182] ([93.94.208.154]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MgNct-1vuZFB1gfH-00gZMV; Thu, 30
- Oct 2025 08:53:27 +0100
-Message-ID: <2f1605c2-c23c-41cf-b9e2-78c29d5475dd@gmx.de>
-Date: Thu, 30 Oct 2025 08:53:11 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MgNct-1vuZ9b3V9D-00gZ2Z; Thu, 30
+ Oct 2025 08:56:00 +0100
+Message-ID: <c15d7ead-883d-4c34-93b9-d70310d85bb1@gmx.de>
+Date: Thu, 30 Oct 2025 08:55:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/3] ram: starfive: drop references to 16GB memory size
+Subject: Re: [PATCH v1 3/3] ram: starfive: fix typo for unsupported DDR size
 To: E Shattow <e@freeshell.de>
 Cc: u-boot@lists.denx.de, Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Leo Liang <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>
 References: <20251030062354.35413-1-e@freeshell.de>
- <20251030062354.35413-2-e@freeshell.de>
+ <20251030062354.35413-4-e@freeshell.de>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251030062354.35413-2-e@freeshell.de>
+In-Reply-To: <20251030062354.35413-4-e@freeshell.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:JaQ3cfFvNsuryuAThtfOLW6Qhrp4AphJYY8eey/7/gD6r61ZZW3
- m/0fT6wHG5Cp/v/j4nyc5TkRudbDJhfek0kFQZnxMCa4/DVjLXediB3/iYKSbgAH0QfaMwk
- 2SkB8IOQUql+tex9y+Oc+u5QCE2vMAo9gy9uEQZ+bGqOf0PmPU4vgDpkiTLfV3NvXQOUatu
- 8C3Qp7tBAipAu75pXXPYg==
-UI-OutboundReport: notjunk:1;M01:P0:tkri7PpzZjU=;mMtTNX0kULZSqbncbaZEk8nxmXo
- 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
+X-Provags-ID: V03:K1:dm/O/R9GKjnJWMaqWj0K0xDWMpzfT5YKUX+QRf0B6B+Yv6lKkFv
+ xjh7dCth4ADUUiSlP+m56GNqeoPDgyRhoC8xWnjfwXTIOxAYfzbonFFAMS4Kdq0pUAjLh5z
+ 0cTuFoIw/ehQ+0R4tedeqHqseKX6uZGDGLSDtPNUu5ybn2LjYW6oWmlZkMXyY6+8Cqr1aHo
+ LM5JcmJ/7MwmV5/PVeKow==
+UI-OutboundReport: notjunk:1;M01:P0:35rH56PUERY=;u6cOlN5PNGGyvzAc2zUnmvSFC4H
+ 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
+ ajBW6pa5swN4CYo3Q=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,99 +153,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/30/25 07:23, E Shattow wrote:
-> 16GB memory size is not addressable on StarFive JH-7110 SoC because the
-> DRAM uncached alias begins at +8GB offset from start of DRAM. The logic
-> for 16GB memory size is a fall-through to the default for an unknown siz=
+> Fix typo for "unsupport" size and improve description to Unknown DDR siz=
 e.
-> Let's drop this unnecessary 16GB memory size and rely on the case defaul=
-t.
 >=20
 > Signed-off-by: E Shattow <e@freeshell.de>
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 > ---
->   drivers/ram/starfive/ddrcsr_boot.c  | 3 ---
->   drivers/ram/starfive/ddrphy_start.c | 1 -
->   drivers/ram/starfive/starfive_ddr.c | 1 -
->   drivers/ram/starfive/starfive_ddr.h | 1 -
->   4 files changed, 6 deletions(-)
+>   drivers/ram/starfive/starfive_ddr.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/drivers/ram/starfive/ddrcsr_boot.c b/drivers/ram/starfive/d=
-drcsr_boot.c
-> index 6764b3ed5cc..ece6f5aae94 100644
-> --- a/drivers/ram/starfive/ddrcsr_boot.c
-> +++ b/drivers/ram/starfive/ddrcsr_boot.c
-> @@ -231,7 +231,6 @@ void ddrcsr_boot(u32 *csrreg, u32 *secreg, u32 *phyr=
-eg, enum ddr_size_t size)
->   		mask =3D REG8G;
->   		break;
->  =20
-> -	case DDR_SIZE_16G:
->   	default:
->   		return;
->   	};
-> @@ -260,7 +259,6 @@ void ddrcsr_boot(u32 *csrreg, u32 *secreg, u32 *phyr=
-eg, enum ddr_size_t size)
->   		out_le32(csrreg + REGOFFSET(0x10), 0x3c);
->   		break;
->  =20
-> -	case DDR_SIZE_16G:
->   	default:
->   		break;
->   	};
-> @@ -286,7 +284,6 @@ void ddrcsr_boot(u32 *csrreg, u32 *secreg, u32 *phyr=
-eg, enum ddr_size_t size)
->   		break;
->  =20
->   	case DDR_SIZE_2G:
-
-Why don't we drop the line above? It is just falling through to default.
-
-Best regards
-
-Heinrich
-
-> -	case DDR_SIZE_16G:
->   	default:
->   		break;
->   	};
-> diff --git a/drivers/ram/starfive/ddrphy_start.c b/drivers/ram/starfive/=
-ddrphy_start.c
-> index efe3f8a181a..f26bc9ccaad 100644
-> --- a/drivers/ram/starfive/ddrphy_start.c
-> +++ b/drivers/ram/starfive/ddrphy_start.c
-> @@ -267,7 +267,6 @@ void ddr_phy_start(u32 *phyreg, enum ddr_size_t size=
-)
->   		mask =3D REG8G;
->   		break;
->  =20
-> -	case DDR_SIZE_16G:
->   	default:
->   		return;
->   	};
 > diff --git a/drivers/ram/starfive/starfive_ddr.c b/drivers/ram/starfive/=
 starfive_ddr.c
-> index b31ed3bcf61..9e902f03ee9 100644
+> index f030192f6f4..e151179398f 100644
 > --- a/drivers/ram/starfive/starfive_ddr.c
 > +++ b/drivers/ram/starfive/starfive_ddr.c
-> @@ -47,7 +47,6 @@ static int starfive_ddr_setup(struct udevice *dev, str=
+> @@ -48,7 +48,7 @@ static int starfive_ddr_setup(struct udevice *dev, str=
 uct starfive_ddr_priv *pri
->   		size =3D DDR_SIZE_8G;
 >   		break;
 >  =20
-> -	case 0x400000000:
 >   	default:
->   		pr_err("unsupport size %lx\n", priv->info.size);
+> -		pr_err("unsupport size %lx\n", priv->info.size);
+> +		pr_err("Unknown DDR size %lx\n", priv->info.size);
 >   		return -EINVAL;
-> diff --git a/drivers/ram/starfive/starfive_ddr.h b/drivers/ram/starfive/=
-starfive_ddr.h
-> index c29d26b510c..3ab0b0e8fa6 100644
-> --- a/drivers/ram/starfive/starfive_ddr.h
-> +++ b/drivers/ram/starfive/starfive_ddr.h
-> @@ -48,7 +48,6 @@ enum ddr_size_t {
->   	DDR_SIZE_2G,
->   	DDR_SIZE_4G,
->   	DDR_SIZE_8G,
-> -	DDR_SIZE_16G,
->   };
+>   	}
 >  =20
->   void ddr_phy_train(u32 *phyreg);
 
