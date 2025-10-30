@@ -4,141 +4,179 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DDC4CCF9EA
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:21:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7BAACCF9EA
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 06:00:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 565FC83952;
-	Thu, 30 Oct 2025 06:20:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 21E4D83887;
+	Thu, 30 Oct 2025 07:00:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gigadevice.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VmTytMqX";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=gigadevice.com header.i=@gigadevice.com header.b="dbi+jTnE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24DD98394E; Thu, 30 Oct 2025 06:20:15 +0100 (CET)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
+ id 27D7E838AB; Thu, 30 Oct 2025 07:00:31 +0100 (CET)
+Received: from TYDPR03CU002.outbound.protection.outlook.com
+ (mail-japaneastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c405::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E195838EC
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:20:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28BC083849
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 07:00:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=gigadevice.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ spf=pass smtp.mailfrom=vlim@gigadevice.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VljTu4tKFnui1FkuvfZ/uicYHKLu20+Sz3PHRKzgHUExQZQTEi/eTpAdcPtGxn855raf9Dc5YHfsIRJ5a4QHJpZAjN5Hz6Q7b8angTurbOozhIG+J4gbn2ndp495CtHtf8hh3w9Dgy1rgCgDbOVraw5ZMqSX0iTJoPXx9qoxNcs0RG9uTEtDl3AVlQD7ntskfg3k73l9J4oLA25h/vURCvKY/l7xRc/BlszRv5yiC/7fJDVMghaS+WOiBxUguUj7EWjFm96fFnKe+x97SgXhsnA4+8zZOnYUKd3RrXmdLppfatzMWaLX+4IBGRwZ5MaPM86yWJDBJXjRpt51z2fN1A==
+ b=J0TtHiyFZv/yqR8nou87zFrAKCa5cqPW4s7tMRdCsZ2+iJ+64i23s1kbcIZz2Ux8Y4MMDSgchScT8RMlbgFkvUT0IY162WZsx9MCCfUEZQ0Zp53+rDKzLUEe6O6reHb/YxciH4tzeCpwBOcNM0MGeC7eJc9HAXA0MqSOu/QU9oE3O91ohy/HmnubnzlZpISlQVnTty+FUbRCfV2Kp9L2bZIbf5eIRbnBZd9y/OBLdza7j/7E7uhbRFNUjtGBFYPIgZyuJwlFG3P+PV2o8K11DSibXj7wqRnKp3c9wuYw4cjzUkWzTQYNt/e7oOFqcVwqvhbYdLagk7BBCVGpZFwA6Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2cOXsXrH3XX7WHXqn+bbv/sN1Lxyap01pjXu5C33PvY=;
- b=qBrfTYJLpgCVuweQJy/U6pH8GJiGIuFWYe55NJrMbDfFvnzXuC0//O0CIYZzzKDTBk8/PklKlKzoGmhpqkdh6uJiAHbffaXCJY9UoY9L0GXH/PyD6juTlAXkeT0/Qw6ANklqptmepg2NLPeUiTppW5jo33cxbrbDA+H+UdfXNE5JB82AXFY676YMDS1+JdRix5scy1VWC87EdNso6nrfUfr/aVICYV0VS7xjAhIFORZcJc6r2eZ+Gnw/p7qdkKbz3la+SmIZu21NmjfOgbYMERMrxpfBUKNIdZBDiNe9rCmFz+utHLpzxl17L6u2CU8OTNjl0jwji+aBqUrDztZ3eg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=1VpAm9JnD6XzUc/bh9KD698uVFsvLMwqjLmkQfQ+Xvw=;
+ b=NzSXhZsX/DoMQN/8TvwceNTqda+oeBAunVqv+e6ZBWakA8Ww8Yd5DjlnpbOTQGvZSGbSaKAlu8b595tfNmw2zQI9dZX5C2rKwsca0Tg3zDlT4o7UvBFH++6ZXkWl9TZCrnoUpwjTTh7ihmxzsbsz3VssbN0k3J74t+l08BP0toV9cZMdjsrp+kVhg+BYLJBDAb3la/hFlJIcoEtMoa1KyzrnVWV/cKfJ6uiPhDyiXJmn58CaYiGtpdgIvI7/UVvF9PXI+96ymBWlUk/Zc8UUQP7ERKrNcUStxZr6ZIrgFRT43hNfLQlWfLhvNzDnB1h0YFc6ju8m/x+MtYDrrPk9wQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=gigadevice.com; dmarc=pass action=none
+ header.from=gigadevice.com; dkim=pass header.d=gigadevice.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gigadevice.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2cOXsXrH3XX7WHXqn+bbv/sN1Lxyap01pjXu5C33PvY=;
- b=VmTytMqXRI4Bpp8HRmj8JJd37ewFM/zohxrO8RYrcN5brplkk1uTB8NYQylsBAPfX5/KRKju/FO/kW3Pbp7BgkmYklfZvwDlpDG/RFaqfYMr0jD04NGs64Y6MRus5XZqxqX1jPL3cTb8oivjg9yxUdxgWldz8b6uX4YMjt9JmII=
-Received: from PH0PR07CA0113.namprd07.prod.outlook.com (2603:10b6:510:4::28)
- by DM3PR10MB7926.namprd10.prod.outlook.com (2603:10b6:0:3d::15) with
+ bh=1VpAm9JnD6XzUc/bh9KD698uVFsvLMwqjLmkQfQ+Xvw=;
+ b=dbi+jTnE1arV1cQFLhG02yrwBrreM/QleCQH6fmUx05YlTt8nqze2GtCRyJ1v4fJuOkYOe/jEEF5Vi+X2AO0MJAZnGIuPEd8rWYe0o3fxmJE/qciVcrQc0v7ItAHZ5sfk1pVgU5NdYG+weWyq4f45sdJRtatrX+iD9goPK1DW88=
+Received: from SI6PR06MB7813.apcprd06.prod.outlook.com (2603:1096:4:26f::11)
+ by JH0PR06MB6603.apcprd06.prod.outlook.com (2603:1096:990:31::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.13; Thu, 30 Oct
- 2025 05:20:08 +0000
-Received: from SN1PEPF000252A1.namprd05.prod.outlook.com
- (2603:10b6:510:4:cafe::c1) by PH0PR07CA0113.outlook.office365.com
- (2603:10b6:510:4::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.13 via Frontend Transport; Thu,
- 30 Oct 2025 05:20:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- SN1PEPF000252A1.mail.protection.outlook.com (10.167.242.8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Thu, 30 Oct 2025 05:20:06 +0000
-Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
- 2025 00:19:55 -0500
-Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
- 2025 00:19:55 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 30 Oct 2025 00:19:55 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59U5Jrld1446347;
- Thu, 30 Oct 2025 00:19:54 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: 
-CC: Anshul Dalal <anshuld@ti.com>, <afd@ti.com>, <b-liu@ti.com>, <bb@ti.com>, 
- <m-chawdhry@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <trini@konsulko.com>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>
-Subject: [PATCH v9 8/8] doc: ti: document R5 falcon mode for AM62 platforms
-Date: Thu, 30 Oct 2025 10:49:32 +0530
-Message-ID: <20251030051937.3659010-9-anshuld@ti.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251030051937.3659010-1-anshuld@ti.com>
-References: <20251030051937.3659010-1-anshuld@ti.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Thu, 30 Oct
+ 2025 06:00:21 +0000
+Received: from SI6PR06MB7813.apcprd06.prod.outlook.com
+ ([fe80::554d:309a:787d:e16]) by SI6PR06MB7813.apcprd06.prod.outlook.com
+ ([fe80::554d:309a:787d:e16%4]) with mapi id 15.20.9253.018; Thu, 30 Oct 2025
+ 06:00:21 +0000
+From: Vlim <vlim@gigadevice.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Jagan Teki <jagan@amarulasolutions.com>, Takahiro Kuwano
+ <Takahiro.Kuwano@infineon.com>, Tom Rini <trini@konsulko.com>, Tudor Ambarus
+ <tudor.ambarus@linaro.org>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>, Vignesh R <vigneshr@ti.com>, havish.mutya
+ <havish.mutya@amd.com>
+Subject: Re: [PATCH] mtd: spi-nor-ids: Reformat the table
+Thread-Topic: [PATCH] mtd: spi-nor-ids: Reformat the table
+Thread-Index: AQHcR6R84bCIRBwF0Uan6yynaKMByLTWzOjRgAAdAwCAARTGzYAAUrUAgAAKLMWAAdmIHQ==
+Date: Thu, 30 Oct 2025 06:00:21 +0000
+Message-ID: <SI6PR06MB78137361B12B205406D76AB3BBFBA@SI6PR06MB7813.apcprd06.prod.outlook.com>
+References: <20251028004729.119349-1-marek.vasut+renesas@mailbox.org>
+ <SI6PR06MB7813347A75CE48B5924DF36EBBFDA@SI6PR06MB7813.apcprd06.prod.outlook.com>
+ <20ee9a4e-9d66-4507-9c88-6efacef85297@mailbox.org>
+ <SI6PR06MB7813BEE2045C178C32397BCABBFDA@SI6PR06MB7813.apcprd06.prod.outlook.com>
+ <1f163d6d-bd46-4dcf-afa3-2cc246461bfe@mailbox.org>
+ <SI6PR06MB78132750D9E159847DA0F798BBFAA@SI6PR06MB7813.apcprd06.prod.outlook.com>
+In-Reply-To: <SI6PR06MB78132750D9E159847DA0F798BBFAA@SI6PR06MB7813.apcprd06.prod.outlook.com>
+Accept-Language: en-US, zh-CN
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=gigadevice.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SI6PR06MB7813:EE_|JH0PR06MB6603:EE_
+x-ms-office365-filtering-correlation-id: b271905a-c1a4-4677-8ab9-08de17799c5a
+x-ld-processed: f84ba339-959c-4ab1-9b67-1e43414f945e,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|10070799003|7053199007|38070700021|13003099007|8096899003;
+x-microsoft-antispam-message-info: =?utf-8?B?dEtxd29vTWRiZUVBQW5pWlVESHBUMkVkNFFYMlBuQ3B6WlNPT1NEYWhaZlRQ?=
+ =?utf-8?B?Y2Z5V1F6TFRVQjk1SjREWGlRT040RzNxNWZ0ODZoN0hRdGxXME83TmdmcStS?=
+ =?utf-8?B?a3U0eDZ1aUpsalNnSUx6RGVrTVU0TXFXZTgrRVdwMGJuVnJ0US9WeDEvYWpj?=
+ =?utf-8?B?ZUxxd1UvOEd0TzhLOW9KU0ZURFVlWTRuYXI2TzlCTDRHL0pkdmdKU1BUcFNU?=
+ =?utf-8?B?OWJNdkxMUktDb1p2bFVvY3lmTGtMTkJEd2Q2bENRVlFZVU1wa3pzNyttekNx?=
+ =?utf-8?B?RGtyb09CeVhFMEgxTzFXU2ZLczd1dDIzQ3ZEWVFtMFFqYXFZYTU4aEwyaXJS?=
+ =?utf-8?B?clRwNlZ5RDdHSmtydW5PSVJLbFNJVkMzMmk5ZGtaMDlBanJnU0VoSUY1c0Jx?=
+ =?utf-8?B?cmRoZzBuYllwQzk3ZFY4TG1nLy9SRWZ2OFB1emMrNW9PRU4zQ0ovTzg5LzBR?=
+ =?utf-8?B?dCs3K1pKVEZVeWtxamV1MFdpSk1wQ2E4OEZnRUJsZGpqRHQzQloxbXFtUE1E?=
+ =?utf-8?B?dCtHYzYxYWJHMHU3Y1lhUSs1RGxQZWMwdmh3ZlBPc3BGZVN3Q2lPUlBVOWlT?=
+ =?utf-8?B?SHY0eVUwSnNQcndRbkx1bVdMSnVqNlpBU2VLMWdabnFiYWtZK2V6WklCY2FM?=
+ =?utf-8?B?UVZoZlQrbElENVlpU2xWTlJqYU1OK2ZWeWVOOVVVODljTU94WlQxazdjODlV?=
+ =?utf-8?B?Y29lQXV0UDVaeWtqTElvb0pPQ0lMem56djlGZ0R2V044bVpyNG1ENkh0UXZ0?=
+ =?utf-8?B?SXcxbURyMFgzQUdjenNBbUxVV2ZmTlFQVFJmRGhPNEprcU9jcXY3K0M3SmJh?=
+ =?utf-8?B?VFFuZ3dwQWtuMTZldCs5Yk5wK0RSMkF0Yzl2emthUW1Xd3hGRktnUndRaUVh?=
+ =?utf-8?B?bWhmUFhtZDRLb0p1MHBodEVUY0p1dGVtTTROd3FlUmQyWFI0aFRoN3YwMlRC?=
+ =?utf-8?B?YVFQS2U3T3V5ZTdkaVBnTFRaVjIvc3hPN2hMZjJXd3ZsNk9KUUx6dktkbVcy?=
+ =?utf-8?B?Q3JrMkhORmhtVGxtV3FUdjRWYlIxa2h5eUdVSFNEc2FCUUdHY2dBbU1vQ1I1?=
+ =?utf-8?B?cTdianhvVEEvQWFZT3NmNUc2dXpTUHVHdmlkMitRT3pudUhaelpMem4vWXJa?=
+ =?utf-8?B?bnpCUWFjWElkMGJpTWFhSUErVjNFbU92NjBXL1NJRW50ekFNUFl0RXl4NkRi?=
+ =?utf-8?B?UkNwVEs0ZXlCKzNEcW9wWm5GczNHRXdYMGI0TUp2VWxBSzh0V2RlMlhuTnI0?=
+ =?utf-8?B?NU5qOFF3by9SU1dUQ0lsUTVhdU1vWVd6a3pXdytnZHY0dVZRTGwrSWhOOTh0?=
+ =?utf-8?B?MXBXWG10Z1g2bGtMT3h3RjdkekNISHpPc3V2eG9VTTZDOExibTA5MUNSU3N0?=
+ =?utf-8?B?czR6REw0N3FKV0VpN1d2NWZXbThGN2p5N2p1SnRTcWFmNDRiYTF5RDYzTW1x?=
+ =?utf-8?B?K0oxS1ZwUEdJTE9BY3R1Z3pRN21HbTZIS3BVT296cklhcEhFajhHNlJSU3FP?=
+ =?utf-8?B?aVlmY2krZmVhcW51d1RNQmlCVG8xWjdOU0hMNFpneHhadi9pTlNzb3dOZnR6?=
+ =?utf-8?B?Qk5pVk0yblNNN1JnWW9TRFc4VzdnQWRseU1lTVdRRlNpbFpVeGprVWdlaXow?=
+ =?utf-8?B?WWpBc1VhZXJ5VEVONG5MRnZHMGczRXNwRkMvQW5SOHhaM3ZCOVp6TlV3Umdz?=
+ =?utf-8?B?VGdmcTB1ZTExY3hlNWxPblJ6L21HT0YwZFJ2a3Z5UlVRR3lDT3ZTQ0dkVldS?=
+ =?utf-8?B?RU10RzV6Q3IwaXN5bDZEajdNTU9Lc0I5VkZZVzM0Vnp3NFFTc3ZZSW44TnpM?=
+ =?utf-8?B?U1hIazNMZHhJK3Jab0kzbmwvMWVlRFoveElWVmpwN3lIRTI0WDNRa3NJTHlk?=
+ =?utf-8?B?OXAwWERxWHBTUE80T21LQUhrTENjUFRtS3FneExHOUJQTnVUZlFmakYxdU9y?=
+ =?utf-8?B?bEV4TUI4NXJSTjNZT3dpbWVvWUNxRTQ1YUN4UGhWdmxBd01GaUo0NEJCenps?=
+ =?utf-8?B?aWFrNE0zWHRQMjZ5UHY1aEt1NVNacVcvd3dUc1VDT0Q2b3JDK1YzdEQxOEFy?=
+ =?utf-8?Q?i1ld7N?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SI6PR06MB7813.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(10070799003)(7053199007)(38070700021)(13003099007)(8096899003);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?cTY1ZE5CTGtFYm8wd0ZBOGREZEdRRUNSazROVE5iclpseFNnajhhQTFlZjdW?=
+ =?utf-8?B?NnNYdlk5ZDNQbG04TUhWbWpnVFZYWjhyRkIyMXlGOFlVdlZITzFBOWYvK1Nx?=
+ =?utf-8?B?MXZMYzhWY2RZTHFLYzZrczFPa1lJbnJTblBIdHNzUHlSKytzb2JIbFZ2cTR4?=
+ =?utf-8?B?RUQrY1M0NDlwZjg5WEYxd3ZMNC9YYTJSZUdlRG1CV0o1RFB0NDl5VlNjNlhF?=
+ =?utf-8?B?bEpsaHhtTU9ISGFpWmxXeXdkSEU5Q0pkbitrSkt3ZmlGWmdiSWJFUHBtSnBN?=
+ =?utf-8?B?dkdkSlB4VXRKV1F0Z2hnS1FZOS9aY0UvTDFkN2tTbWlFQlh6M1BWZnBFRStp?=
+ =?utf-8?B?Y0RlYjkrUk9hVHpxUzk0U2VJd0pFOGhIVmNiV0h3YjVZWlc1bXFlZ1VNeit1?=
+ =?utf-8?B?NENSTnF5ZUNKQjNvblQyRFJ3QnVhL3V1bW1CSnZONjNFSWo4S1hoVjA1V3My?=
+ =?utf-8?B?aVlFSUMwYTV2WFhUSGtxQTVuWXVvUENvQzBtdUZYR2R4b3g3TUMvR1pBdFdM?=
+ =?utf-8?B?MVZ4anIyaUNQK3ZHTFJwY2t5MVJ4YWNZR3NZZFhkRU9CekNtdHZRMS9NdnE1?=
+ =?utf-8?B?SXFnSHJFOENId3VFdXIyN25iSHZWVXFKYkRFQ1I3SE9SSjZWWmtpM1hJR1ZN?=
+ =?utf-8?B?Wk5jQ3pJaC81c2pUN1hDemN6eUFTUStnRTY2U0lndUxya2VoZzBiVGdzM2ZV?=
+ =?utf-8?B?TGtzRm02NlpNQVFXMXpnQk5uQmxEWUtmUVN6dmRIek0xTzdpL3dpeUhRd1RO?=
+ =?utf-8?B?U0Z1ZW1MTGxWNmMyVWUwa1ZoMzA3Wm91MlF6alowVWJtNmJjU0kzU2lGWE1p?=
+ =?utf-8?B?TVVIL1EwMnBsRVQxc1AzVm9VTlFwRG1rbW5xUzcyTXczVGs3NmZYTHVlenpW?=
+ =?utf-8?B?NFZhczNhcm40MlI0TTJRczc1QWxHY3BsS0RianhDVUJodVNUUEdmdzMxSHZh?=
+ =?utf-8?B?OXBvOXJVN2ZUbjQrTXJIcjJKQm1WTzlNWVdvMndkRURqOURCUVk3YmNyOFdy?=
+ =?utf-8?B?UjRZZGxybDk1UjRlazBJRTlPQXhjOXZPNHExVkNwSnRjWmNvMmttS0JCRWlR?=
+ =?utf-8?B?TnNYNkhRWHFGYmdzTUJXamE3ZWJXaHFacVd0ZlBjbk5HVjhzMFlscjd1dGww?=
+ =?utf-8?B?d0ZFN25VdmZlWmQzNEJmVEk0VGxyRnFPakJ1dHpFZXdHZWlxdEtKYXBITWto?=
+ =?utf-8?B?SFVubVMzQ3g1N3NpYTJoSXNXV1FGOW1EYzdEQ1RVeW5LMWp3YjZzbk1VTlBF?=
+ =?utf-8?B?WHk3dmp2TEhFUkpRbFE2dlBHcE5iMDJSdm0vREhXQllza29leWxjOEQ1dTgr?=
+ =?utf-8?B?RjZFdW83SG9BUG41eXdxNjNYWWxZMmJYeG1adU5mbFpSTVV2K0s5bUJkdmhv?=
+ =?utf-8?B?eGlGN29XYldOWnp4bHc1aytjODdSMEhheE9rVGxWRW1xa3VmbTlFSVNHcmo4?=
+ =?utf-8?B?U25zTVl1UXFXN0NNc05XenJKaWZPbnhnVkEzNmlKcHJqWjhKNGFNQmdYS3Bn?=
+ =?utf-8?B?UVNsZUZ0eGlYUkpZZm5YN2xYb1lneG9SZ0JxWFNoSHJaTkxpREFGTDZYeVVU?=
+ =?utf-8?B?V25KcXZiZjdVb2pUbVdPQzVsTzZvKzY1OHFkS1F1Ly9kLzN2cDM3OFhjb3VX?=
+ =?utf-8?B?SVo4ZHI1bEltVHRVaGlqemxzdkRMdzNuK2pZOUxJU1A4QUtqYzBKd0I1R01w?=
+ =?utf-8?B?T3BLRC82WDE4dkI3dGNmSkd3dEFuQmcxTWFLTHlxWGswd0hwQVJvYjI2Y2c2?=
+ =?utf-8?B?cVZuNElKMEE3alU3TnVQdy9zQVVvaXhuRHpGejR4dlE5YTdEWlQ4cFVydzBE?=
+ =?utf-8?B?VVBhNld1ZDlnN3RpR0VuV2ZYZVBlOFdnZDVKczBXWmJHeE5LZ1EwNU5iRjVt?=
+ =?utf-8?B?VU9QYW9Sd3NnMndpVm5DT1BmM3M1TkNPR01UN2ZkMFRhUGcxWGgxeElzME5G?=
+ =?utf-8?B?b3krUzh1V3dZVnlmcVV1S2M5ZTZWcnIySWVpY1NRK3BNYW40K3NtdVp0TGNx?=
+ =?utf-8?B?VE10S2tCcE5rZHpHZXU4SzlnR1BITTZneXVqK3VFa0tmRUdGV1AzOUxhOFpV?=
+ =?utf-8?B?cXBKaStUaU1uV0NPWkZSVVArZk9YQmxLZUlhUEorN1pxVXMzQW9FQ25XbFl3?=
+ =?utf-8?B?Q0lna21HZDRFcURYdndHYmdCSnc2VklNSVR4bVp1aW9MbG5NNExOYlJaaS8z?=
+ =?utf-8?Q?VsELzO6JikzvlJmYMiEqviYCXLm+/qf5RGFTIxQy34Dn?=
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000252A1:EE_|DM3PR10MB7926:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3e16fa2a-5280-4efc-8527-08de1773fd1c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|34020700016|36860700013|13003099007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?UFN2UwsEg9pofoX/jlTgO3tQzHqvEWgzsJOU7aKHX/M1bMaqZwamhH9gc3zi?=
- =?us-ascii?Q?ZDILHnAj5TuNf/SNakeU4bkSf8/Yk1V6ezxFFcR5ZWnh5DbzQRtTNGg4grX9?=
- =?us-ascii?Q?2KP1rsTXcocXZOYV7zJq3qiDAXosJjwKxpuXyhFMfeuDH1FppNwQP98OoKrS?=
- =?us-ascii?Q?Y6lLUizFYrTwI7VagRNSZp4u5nk+QP9kGRe0fHRtIehYfM07YLmGrIGGLcnM?=
- =?us-ascii?Q?1US9B1+j22pNy62tDZFlu3HLUqgBlhCiti6he2TbZgYRTaT5bMBV4MK5DlZp?=
- =?us-ascii?Q?oZ3uaCsONV32dnMDJNdIZ5eQd1T7KoJed0U2mvtB3WLiVfpFFg6LLUxNWqgu?=
- =?us-ascii?Q?ZHTXwkup0a4RHytt71URceml04fWddivR8s9z9iXcsSFgOpoijdMDDgFgYgx?=
- =?us-ascii?Q?ksCXRa6kIBALObq79Gj9gHsIQgOCRJF8GNXRBGB3M00tH0utVMkle1bdjQb+?=
- =?us-ascii?Q?4P2B6PNFNvxnqPYDzMInlOhuGAQnyrz/2TBmHnXvcyVe2gDkHPCA9ztPts0u?=
- =?us-ascii?Q?+IaJ/X4NuYyt8JAg0+nshhaQDOp8q25Ny3kE3vO2n2L03VJUaNS2ZQtj53w3?=
- =?us-ascii?Q?lAl89zKl100FqLA+n8an8ANVV4oivmiV/kJRztRnp4jUKy/cKCs1UZBrJMhw?=
- =?us-ascii?Q?T5mvoEqhLVEL5fnhTRIPsMKo/bJN41G/PThdXJ111PaKhPxWGtYnvSPSAMKD?=
- =?us-ascii?Q?56ZoLY8mvHlGuj1q4fFHOViqWEWrpOeVsWFk1IUTFVos/BLV0dvxbr6On1eI?=
- =?us-ascii?Q?nmXu2T4ehh53OmAKFvN/e4/VJZUQKWgNHYxn0yiz0/2EuyhUdJ6VZIIws6rq?=
- =?us-ascii?Q?7Phxq7kBua9O6e1H1NFJDjQ3wwiBrwTo8UzAajLuUmRPucYtF7JW0oa0rUW1?=
- =?us-ascii?Q?ahMEacXtIrEoVp24MM/Gzz1RRWs/hUJg4YwYUEXLfJjHoIS5OSluNvV+HP+v?=
- =?us-ascii?Q?R8QbMSQ78FQYQudyLhoB9pkhGtGUYl1r5uFfAeiZQSXFRM1Nj5j67/euMOWw?=
- =?us-ascii?Q?lF1EHO2et/6z3FQuVzNRBvLnf34lvpXodL6gIaJIYQCymDfuNNb6ojOI8DRC?=
- =?us-ascii?Q?+0fFNKgBdPkydTtNdNWmwowQkwI0NNJmbqprVXPWvhAUfgb5Pwk53XFkvjP9?=
- =?us-ascii?Q?Bg5p9r04Fn9FIeqyvVgC9VcwCneFr1Z3oNdzarsuQe/t7dhTAgEs6OXG8nEQ?=
- =?us-ascii?Q?aFCzhuCuYj1Uk7oDZ7xBvHgdhWomQDP/NDZW+fyXIn/Dwkq0CV/oLaB+atAr?=
- =?us-ascii?Q?/0nrkNgaxy0664mc18eCF4CwNTtVA3LSRjgsC6THg/zQuktFMIE1SkMASITM?=
- =?us-ascii?Q?po/zEe9YdhOSIL72bMMAPYKgOkCBovtPUU4mIoW6lZMDkG6s3bMBeo5XSvwC?=
- =?us-ascii?Q?LEUZBaoNRPOP+vDm/boCMolrcSnEVxhIVNgxaFA5Ux9eDeCOBfRPBeSW9CcF?=
- =?us-ascii?Q?3KZpfug7x52N7psXZwuYngHzShN5rV29bXpXp+/lKBf89FyfgDsJSn4De5VV?=
- =?us-ascii?Q?ALFsFlqwqUzfJGFAoygHfBiAUxqWH5CvSKo5?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(1800799024)(34020700016)(36860700013)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 05:20:06.7675 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e16fa2a-5280-4efc-8527-08de1773fd1c
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000252A1.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PR10MB7926
+X-OriginatorOrg: gigadevice.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SI6PR06MB7813.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b271905a-c1a4-4677-8ab9-08de17799c5a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Oct 2025 06:00:21.4636 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: f84ba339-959c-4ab1-9b67-1e43414f945e
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: GtiP9Zh40pbaRrDW0JgUOjDEUQHqSDtay+7VfEQLhz3N2eAHE/Gh6/mUiuZzzP/fKJ+ook33Z8VX2FibVbHPkA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: JH0PR06MB6603
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,916 +193,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds user documentation for falcon boot for AM62 platforms.
-The main section is added to am62x_sk.rst and other documents just
-include the section. Steps to build falcon support, usage and the
-modified R5 memory map have been documented.
-
-Two svg images have also been added for reference, one for the modified
-tifalcon.bin and other for the falcon specific fitImage format.
-
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- doc/board/ti/am62ax_sk.rst                    |  31 ++
- doc/board/ti/am62px_sk.rst                    |  31 ++
- doc/board/ti/am62x_sk.rst                     | 319 ++++++++++++++++++
- doc/board/ti/img/fitImage_falcon.svg          | 180 ++++++++++
- doc/board/ti/img/tifsstub_dm_tifalcon.bin.svg | 285 ++++++++++++++++
- 5 files changed, 846 insertions(+)
- create mode 100644 doc/board/ti/img/fitImage_falcon.svg
- create mode 100644 doc/board/ti/img/tifsstub_dm_tifalcon.bin.svg
-
-diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
-index 4dd998bcce9..8eeb90a271b 100644
---- a/doc/board/ti/am62ax_sk.rst
-+++ b/doc/board/ti/am62ax_sk.rst
-@@ -187,6 +187,37 @@ https://www.ti.com/lit/pdf/spruj16 under the `Boot Mode Pins` section.
- 
- For SW2 and SW1, the switch state in the "ON" position = 1.
- 
-+Falcon Mode
-+-----------
-+
-+Falcon Mode on AM62ax platforms bypasses the A53 SPL and U-Boot with the overall
-+boot flow as below:
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_start_boot_flow
-+    :end-before: .. am62x_evm_falcon_end_boot_flow
-+
-+Build Process
-+^^^^^^^^^^^^^
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_start_build_process
-+    :end-before: .. am62x_evm_falcon_end_build_process
-+
-+Usage
-+^^^^^
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_start_usage
-+    :end-before: .. am62x_evm_falcon_end_usage
-+
-+R5 SPL Memory Map
-+^^^^^^^^^^^^^^^^^
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_start_r5_memory_map
-+    :end-before: .. am62x_evm_falcon_end_r5_memory_map
-+
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
-index a07d6a4da45..da70cd58095 100644
---- a/doc/board/ti/am62px_sk.rst
-+++ b/doc/board/ti/am62px_sk.rst
-@@ -290,6 +290,37 @@ https://www.ti.com/lit/pdf/spruj83 under the `Boot Mode Pins` section.
- 
- For SW2 and SW1, the switch state in the "ON" position = 1.
- 
-+Falcon Mode
-+-----------
-+
-+Falcon Mode on AM62px platforms bypasses the A53 SPL and U-Boot with the overall
-+boot flow as below:
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_start_boot_flow
-+    :end-before: .. am62x_evm_falcon_end_boot_flow
-+
-+Build Process
-+^^^^^^^^^^^^^
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_start_build_process
-+    :end-before: .. am62x_evm_falcon_end_build_process
-+
-+Usage
-+^^^^^
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_start_usage
-+    :end-before: .. am62x_evm_falcon_end_usage
-+
-+R5 SPL Memory Map
-+^^^^^^^^^^^^^^^^^
-+
-+.. include:: am62x_sk.rst
-+    :start-after: .. am62x_evm_falcon_start_r5_memory_map
-+    :end-before: .. am62x_evm_falcon_end_r5_memory_map
-+
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
-index dab2970a85c..ef705713cfd 100644
---- a/doc/board/ti/am62x_sk.rst
-+++ b/doc/board/ti/am62x_sk.rst
-@@ -526,6 +526,325 @@ Next, based on NET_VCI_STRING string mentioned in respective defconfig file `tib
- fetches `tispl.bin` and then `tispl.bin` fetches `u-boot.img` from TFTP server which
- completes Ethernet boot on the device.
- 
-+Falcon Mode
-+-----------
-+
-+Falcon Mode on AM62x platforms bypasses the A53 SPL and U-Boot with the overall
-+boot flow as below:
-+
-+.. am62x_evm_falcon_start_boot_flow
-+
-+**Normal boot flow:**
-+
-+.. code-block::
-+
-+             | tiboot3.bin |         tispl.bin          | u-boot.img |  Image  |
-+             |-------------+----------------------------+------------+---------|
-+    R5 Core  |    SPL      |                            |            |         |
-+    ---------|       \     |                            |            |         |
-+    A53 Core |        ------> TFA -> OP-TEE -> A53 SPL -->  U-Boot  --> Kernel |
-+
-+**With falcon mode:**
-+
-+.. code-block::
-+
-+             | tiboot3.bin |   tifalcon.bin   | fitImage |
-+             |-------------+------------------+----------|
-+    R5 Core  |    SPL      |                  |          |
-+    ---------|       \     |                  |          |
-+    A53 Core |        ------> TFA -> OP-TEE  -->  Kernel |
-+
-+.. am62x_evm_falcon_end_boot_flow
-+
-+Build Process
-+^^^^^^^^^^^^^
-+
-+.. am62x_evm_falcon_start_build_process
-+
-+Enabling falcon mode requires re-building TFA, U-Boot and the kernel
-+``fitImage`` as follows:
-+
-+0. Setup environment variables:
-+"""""""""""""""""""""""""""""""
-+
-+Refer to the build procedure above for setting up the environment variables.
-+
-+1. Trusted Firmware-A:
-+""""""""""""""""""""""
-+
-+The R5 SPL in falcon mode loads the kernel at ``0x82000000`` and the
-+corresponding DTB at ``0x88000000``. Therefore TFA needs to be rebuild with
-+changes to the respective addresses.
-+
-+.. prompt:: bash $
-+
-+ # Change load addresses for the kernel and DTB
-+ export TFA_EXTRA_ARGS="PRELOADED_BL33_BASE=0x82000000 K3_HW_CONFIG_BASE=0x88000000"
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_tfa
-+    :end-before: .. k3_rst_include_end_build_steps_tfa
-+
-+2. U-Boot:
-+""""""""""
-+
-+* **2.1 R5:**
-+
-+.. prompt:: bash $
-+
-+ # use the common falcon config fragment for all k3 platforms
-+ export $UBOOT_FALCON_CFG_FRAGMENTR="k3_r5_falcon.config"
-+ export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} ${UBOOT_FALCON_CFG_FRAGMENTR}"
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+* **2.2 A53:**
-+
-+After rebuilding TFA, the binary needs to be repackaged inside the tispl
-+binaries:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+
-+3. fitImage:
-+""""""""""""
-+
-+.. warning::
-+
-+    The ``fitImage`` available by default under ``boot/fitImage`` in rootfs of
-+    the standard SDK release is not compatible with falcon mode.
-+
-+For secure boot in falcon mode, the compute heavy authentication required for
-+the ``fitImage`` is offloaded from the slower R5 core to TIFS. This requires
-+``fitImage`` to package the necessary binaries (kernel and dtb) with a
-+pre-signed x509 certificate.
-+
-+**fitImage for falcon mode:**
-+
-+.. image:: img/fitImage_falcon.svg
-+  :alt: fitImage for falcon boot image format
-+
-+* **Sources**
-+
-+  * **Core Secdev K3**
-+
-+    | **source:** https://git.ti.com/cgit/security-development-tools/core-secdev-k3
-+    | **branch:** master
-+
-+**Follow the steps below to create a falcon compatible fitImage:**
-+
-+**3.1 Environment setup**
-+
-+.. prompt:: bash $
-+
-+  export DTB=path/to/dtb
-+  export IMAGE=path/to/kernel-image
-+
-+**3.2 fitImage creation**
-+
-+  An Image tree source (*its*) file describes the structure and contents of the
-+  final image produced by the ``mkimage`` tool.
-+
-+  To create the ``fitImage`` for falcon mode, create a file ``fitImage.its``
-+  with the following contents inside the ``core-secdev-k3`` source directory,:
-+
-+.. code-block:: dts
-+
-+    /dts-v1/;
-+
-+    / {
-+        description = "Kernel fitImage";
-+        #address-cells = <1>;
-+
-+        images {
-+            kernel-sec {
-+                description = "Linux kernel";
-+                data = /incbin/("Image.sec");
-+                type = "kernel";
-+                arch = "arm64";
-+                os = "linux";
-+                compression = "none";
-+                load = <0x82000000>;
-+                entry = <0x82000000>;
-+            };
-+
-+            fdt-sec {
-+                description = "Flattened Device Tree blob";
-+                data = /incbin/("falcon.dtb.sec");
-+                type = "flat_dt";
-+                arch = "arm64";
-+                compression = "none";
-+                load = <0x88000000>;
-+                entry = <0x88000000>;
-+            };
-+        };
-+
-+        configurations {
-+            default = "conf-falcon";
-+            conf-falcon {
-+                description = "Pre-signed Linux kernel, FDT blob";
-+                kernel = "kernel-sec";
-+                fdt = "fdt-sec";
-+            };
-+        };
-+    };
-+
-+Sign the kernel and dtb using ``secure-binary-image.sh`` and create the
-+``fitImage`` using mkimage:
-+
-+.. prompt:: bash $
-+
-+  # inside core-secdev-k3 source
-+  cp $IMAGE Image
-+  cp $DTB falcon.dtb
-+  ./scripts/secure-binary-image.sh Image Image.sec
-+  ./scripts/secure-binary-image.sh falcon.dtb falcon.dtb.sec
-+  mkimage -f fitImage.its fitImage
-+
-+.. am62x_evm_falcon_end_build_process
-+
-+Usage
-+^^^^^
-+
-+.. am62x_evm_falcon_start_usage
-+
-+Falcon Mode makes use of a cut down variant of the tispl binary called
-+``tifalcon.bin`` with lacks the Cortex-A SPL and it's DTBs. This file should
-+be present alongside the existing ``tispl.bin`` after building U-Boot for the
-+Cortex-A core.
-+
-+- **tifalcon.bin**
-+
-+.. image:: img/tifsstub_dm_tifalcon.bin.svg
-+  :alt: tifalcon.bin image format
-+
-+The R5 SPL requires both ``tifalcon.bin`` and the ``fitImage`` (created
-+in previous steps) to be present in the second partition of the MMC device
-+specified by the ``mmcdev`` environment variable. By default, ``mmcdev`` is
-+set to 1, which implies that the SD card is the boot media. Additionally, the
-+``bootpart`` environment variable, which defaults to 1:2, specifies that the
-+second partition of the SD card should be used as the root file system for the
-+kernel.
-+
-+To use eMMC instead of SD as the boot media, rebuild the R5 SPL with the
-+following diff:
-+
-+.. code-block:: diff
-+
-+    diff --git a/board/ti/<soc>/<soc>.env b/board/ti/<soc>/<soc>.env
-+    index 82b9f0741bb..73d59ac425c 100644
-+    --- a/board/ti/<soc>/<soc>.env
-+    +++ b/board/ti/<soc>/<soc>.env
-+    @@ -17,8 +17,8 @@ run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
-+
-+     boot_targets=mmc1 mmc0 usb pxe dhcp
-+     boot=mmc
-+    -mmcdev=1
-+    -bootpart=1:2
-+    +mmcdev=0
-+    +bootpart=0:1
-+     bootdir=/boot
-+     rd_spec=-
-+
-+**List of files required on SD/eMMC for Falcon Mode:**
-+
-+.. list-table::
-+   :widths: 8 8 8 25
-+   :header-rows: 1
-+
-+   * - File
-+     - Copy path on SD/eMMC
-+     - Partition
-+     - Description
-+
-+   * - ``tifalcon.bin``
-+     - ``/boot/tifalcon.bin``
-+     - rootfs (ext4)
-+     - tispl binary without SPL for the A core and DTB
-+
-+   * - ``fitImage``
-+     - ``/boot/fitImage``
-+     - rootfs (ext4)
-+     - kernel and dtb fitImage with pre-signed binaries
-+
-+.. note::
-+
-+    Falcon mode requires the boot binaries to be present in the root file system
-+    of either eMMC or SD, even when using raw eMMC boot mode to load
-+    ``tiboot3.bin``.
-+
-+.. am62x_evm_falcon_end_usage
-+
-+R5 SPL Memory Map
-+^^^^^^^^^^^^^^^^^
-+
-+.. am62x_evm_falcon_start_r5_memory_map
-+
-+Standard Boot:
-+""""""""""""""
-+
-+.. code-block::
-+
-+    0x80000000 +===============================+ Start of DDR
-+      512KiB   |   TFA reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
-+               |                               |
-+    0x80080000 +-------------------------------+ PRELOADED_BL33_BASE in TFA
-+     29.5MiB   |         A53 SPL + DTB +       | CONFIG_SPL_LOAD_FIT_ADDRESS
-+               | Download region for FIT in DFU|
-+    0x81e00000 +-------------------------------+
-+               |  R5 U-Boot SPL Stack + Heap   |
-+        2MiB   |       (size defined by        |
-+               | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
-+    0x82000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR
-+      112MiB   |            Unused             |
-+    0x89000000 +-------------------------------+
-+      331MiB   | Device Manager (DM) Load Addr |
-+    0x9db00000 +-------------------------------+
-+       12MiB   |          DM Reserved          |
-+    0x9e700000 +-------------------------------+
-+        1MiB   |            Unused             |
-+    0x9e800000 +-------------------------------+ BL32_BASE in TFA
-+       24MiB   |             OPTEE             |
-+    0xa0000000 +===============================+ End of DDR (512MiB)
-+
-+Falcon Mode:
-+""""""""""""
-+
-+.. code-block::
-+
-+    0x80000000 +===============================+ Start of DDR
-+      512KiB   |   TFA reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
-+    0x80080000 +-------------------------------+
-+     31.5MiB   |            Unused             |
-+    0x82000000 +-------------------------------+ PRELOADED_BL33_BASE in TFA
-+               |                               | CONFIG_SYS_LOAD_ADDR
-+       57MiB   |   Kernel + initramfs Image    | CONFIG_SPL_LOAD_FIT_ADDRESS
-+               |                               |
-+    0x85900000 +-------------------------------+
-+               |                               |
-+               |  R5 U-Boot SPL Stack + Heap   |
-+       39MiB   |       (size defined by        |
-+               | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
-+               |                               |
-+    0x88000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR
-+               |                               | K3_HW_CONFIG_BASE in TFA
-+       16MiB   |          Kernel DTB           | CONFIG_SPL_PAYLOAD_ARGS_ADDR
-+               |                               |
-+    0x89000000 +-------------------------------+
-+      331MiB   | Device Manager (DM) Load Addr |
-+    0x9db00000 +-------------------------------+
-+       12MiB   |          DM Reserved          |
-+    0x9e700000 +-------------------------------+
-+        1MiB   |            Unused             |
-+    0x9e800000 +-------------------------------+ BL32_BASE in TFA
-+       24MiB   |             OPTEE             |
-+    0xa0000000 +===============================+ End of DDR (512MiB)
-+
-+.. am62x_evm_falcon_end_r5_memory_map
-+
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/img/fitImage_falcon.svg b/doc/board/ti/img/fitImage_falcon.svg
-new file mode 100644
-index 00000000000..b5f0229397f
---- /dev/null
-+++ b/doc/board/ti/img/fitImage_falcon.svg
-@@ -0,0 +1,180 @@
-+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-+<!-- SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause -->
-+
-+<!-- Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/ -->
-+
-+<svg
-+   version="1.1"
-+   width="231"
-+   height="220"
-+   viewBox="-0.5 -0.5 231 220"
-+   id="svg72"
-+   sodipodi:docname="fitImage_falcon.svg"
-+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
-+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-+   xmlns="http://www.w3.org/2000/svg"
-+   xmlns:svg="http://www.w3.org/2000/svg">
-+  <sodipodi:namedview
-+     id="namedview74"
-+     pagecolor="#ffffff"
-+     bordercolor="#666666"
-+     borderopacity="1.0"
-+     inkscape:pageshadow="2"
-+     inkscape:pageopacity="0.0"
-+     inkscape:pagecheckerboard="0"
-+     showgrid="false"
-+     inkscape:zoom="2.9"
-+     inkscape:cx="83.62069"
-+     inkscape:cy="131.72414"
-+     inkscape:window-width="1918"
-+     inkscape:window-height="1078"
-+     inkscape:window-x="0"
-+     inkscape:window-y="0"
-+     inkscape:window-maximized="0"
-+     inkscape:current-layer="g62"
-+     inkscape:showpageshadow="2"
-+     inkscape:deskcolor="#d1d1d1" />
-+  <defs
-+     id="defs2">
-+    <inkscape:perspective
-+       sodipodi:type="inkscape:persp3d"
-+       inkscape:vp_x="0 : 104.5 : 1"
-+       inkscape:vp_y="0 : 1000 : 0"
-+       inkscape:vp_z="231 : 104.5 : 1"
-+       inkscape:persp3d-origin="115.5 : 46 : 1"
-+       id="perspective1" />
-+  </defs>
-+  <g
-+     id="g62">
-+    <rect
-+       x="-0.06279549"
-+       y="-0.062792346"
-+       width="230.12561"
-+       height="219.12558"
-+       rx="34.518837"
-+       ry="27.33382"
-+       fill="#d5e8d4"
-+       stroke="#82b366"
-+       pointer-events="all"
-+       id="rect4"
-+       style="display:inline;fill:#dbe4f4;fill-opacity:1;stroke:#8166b3;stroke-width:0.888796;stroke-dasharray:none;stroke-opacity:1" />
-+    <text
-+       x="115.15599"
-+       y="156.49472"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6"
-+       style="display:inline"
-+       inkscape:label="x509 cert">x509 Certificate</text>
-+    <text
-+       x="115.15598"
-+       y="85.615631"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6-1"
-+       style="display:inline"
-+       inkscape:label="x509 cert">x509 Certificate</text>
-+    <text
-+       x="114.532"
-+       y="42.263863"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6-5"
-+       style="display:inline"
-+       inkscape:label="x509 cert">Fit Header</text>
-+    <text
-+       x="114.78398"
-+       y="106.884"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6-5-5"
-+       style="display:inline"
-+       inkscape:label="x509 cert">Kernel Image</text>
-+    <rect
-+       style="display:none;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"
-+       id="rect1"
-+       width="171.46796"
-+       height="210.89911"
-+       x="36.799908"
-+       y="21.652758"
-+       transform="translate(-7.533886,15.237117)" />
-+    <text
-+       xml:space="preserve"
-+       style="font-size:21.3333px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#db8c8c;fill-opacity:1;stroke:#000000;stroke-width:1.13386"
-+       x="90.327087"
-+       y="177.15775"
-+       id="text1"><tspan
-+         sodipodi:role="line"
-+         id="tspan1"
-+         x="90.327087"
-+         y="177.15775" /></text>
-+    <text
-+       xml:space="preserve"
-+       style="font-size:21.3333px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#db8c8c;fill-opacity:1;stroke:#000000;stroke-width:1.13386"
-+       x="106.45526"
-+       y="214.93161"
-+       id="text2"><tspan
-+         sodipodi:role="line"
-+         id="tspan2"
-+         x="106.45526"
-+         y="214.93161" /></text>
-+    <g
-+       id="g62-6"
-+       transform="translate(-5.6022949,-9.676433)">
-+      <text
-+         x="120.33229"
-+         y="188.7475"
-+         fill="#000000"
-+         font-family="Helvetica"
-+         font-size="12px"
-+         text-anchor="middle"
-+         id="text8-8-7-6-6-5-2"
-+         style="display:inline"
-+         inkscape:label="x509 cert">DTB</text>
-+    </g>
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.13386"
-+       id="rect2"
-+       width="82.644012"
-+       height="17.6518"
-+       x="73.677986"
-+       y="94.992081" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.13386;stroke-dasharray:none"
-+       id="rect2-7"
-+       width="32.336376"
-+       height="18.068098"
-+       x="98.83181"
-+       y="165.66302" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.77036;stroke-dasharray:none"
-+       id="rect3"
-+       width="152.43475"
-+       height="70.500725"
-+       x="38.782627"
-+       y="127.54861" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.77036;stroke-dasharray:none"
-+       id="rect3-9"
-+       width="152.43475"
-+       height="70.500732"
-+       x="38.782623"
-+       y="56.777336" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.78506;stroke-dasharray:none"
-+       id="rect5"
-+       width="152.41736"
-+       height="36.60006"
-+       x="38.791306"
-+       y="20.211617" />
-+  </g>
-+</svg>
-diff --git a/doc/board/ti/img/tifsstub_dm_tifalcon.bin.svg b/doc/board/ti/img/tifsstub_dm_tifalcon.bin.svg
-new file mode 100644
-index 00000000000..2508923d480
---- /dev/null
-+++ b/doc/board/ti/img/tifsstub_dm_tifalcon.bin.svg
-@@ -0,0 +1,285 @@
-+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-+<!-- SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause -->
-+
-+<!-- Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/ -->
-+
-+<svg
-+   version="1.1"
-+   width="231"
-+   height="280"
-+   viewBox="-0.5 -0.5 231 280"
-+   id="svg72"
-+   sodipodi:docname="tifsstub_dm_tifalcon.bin.svg"
-+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
-+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-+   xmlns:xlink="http://www.w3.org/1999/xlink"
-+   xmlns="http://www.w3.org/2000/svg"
-+   xmlns:svg="http://www.w3.org/2000/svg"
-+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-+  <sodipodi:namedview
-+     id="namedview74"
-+     pagecolor="#ffffff"
-+     bordercolor="#666666"
-+     borderopacity="1.0"
-+     inkscape:pageshadow="2"
-+     inkscape:pageopacity="0.0"
-+     inkscape:pagecheckerboard="0"
-+     showgrid="false"
-+     inkscape:zoom="2.3561254"
-+     inkscape:cx="175.5"
-+     inkscape:cy="151.30774"
-+     inkscape:window-width="1920"
-+     inkscape:window-height="1080"
-+     inkscape:window-x="0"
-+     inkscape:window-y="0"
-+     inkscape:window-maximized="0"
-+     inkscape:current-layer="g62"
-+     inkscape:showpageshadow="2"
-+     inkscape:deskcolor="#d1d1d1" />
-+  <defs
-+     id="defs2">
-+    <inkscape:perspective
-+       sodipodi:type="inkscape:persp3d"
-+       inkscape:vp_x="0 : 104.5 : 1"
-+       inkscape:vp_y="0 : 1000 : 0"
-+       inkscape:vp_z="231 : 104.5 : 1"
-+       inkscape:persp3d-origin="115.5 : 46 : 1"
-+       id="perspective1" />
-+  </defs>
-+  <g
-+     id="g62">
-+    <rect
-+       x="-0.0064085587"
-+       y="-0.0064054145"
-+       width="230.01283"
-+       height="278.39682"
-+       rx="34.501923"
-+       ry="34.727341"
-+       fill="#d5e8d4"
-+       stroke="#82b366"
-+       pointer-events="all"
-+       id="rect4"
-+       style="stroke-width:1.00331" />
-+    <rect
-+       x="40"
-+       y="30"
-+       width="160"
-+       height="60"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect6" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g12">
-+      <switch
-+         id="switch10">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 60px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">FIT Header</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="64"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text8">FIT Header</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="160"
-+       width="160"
-+       height="50"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect14" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g20">
-+      <switch
-+         id="switch18">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 185px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TIFS Stub<xhtml:br />
-+
-+(GP, HS-FS, HS-SE)</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="189"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text16">TIFS Stub...</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="90"
-+       width="160"
-+       height="30"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect22" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g28">
-+      <switch
-+         id="switch26">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 105px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TF-A</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="109"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text24">TF-A</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="120"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect30" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g36">
-+      <switch
-+         id="switch34">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 140px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">OP-TEE</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="144"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text32">OP-TEE</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="210"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect38" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g44">
-+      <switch
-+         id="switch42">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 230px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">R5 DM FW</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="234"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text40">R5 DM FW</text>
-+      </switch>
-+    </g>
-+  </g>
-+  <switch
-+     id="switch70">
-+    <g
-+       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+       id="g64" />
-+    <a
-+       transform="translate(0,-5)"
-+       xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems"
-+       target="_blank"
-+       id="a68">
-+      <text
-+         text-anchor="middle"
-+         font-size="10px"
-+         x="50%"
-+         y="100%"
-+         id="text66">Text is not SVG - cannot display</text>
-+    </a>
-+  </switch>
-+</svg>
--- 
-2.51.0
-
+SGksIE1hcmVrLA0KDQpJIGFtIHJlYWR5IHRvIGFkZCBhIGZldyBuZXcgcGFydCBudW1iZXJzLg0K
+DQpEbyB5b3UgaGF2ZSBhIHByZWZlcnJlZCBmb3JtYXQgeWV0IGZvciB0aGUgdGFibGU/DQoNCkkg
+Y2FuIHVwbG9hZCB0aGUgcGF0Y2ggZm9yIHRoZSBuZXcgcGFydCBudW1iZXJzIGFuZCBhZGRyZXNz
+IHRoZSBmb3JtYXQgaW4gdGhlIGZ1dHVyZS4NCg0KUmVnYXJkcywNCg0KVmljdG9yDQoNCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fDQpGcm9tOiBWbGltIDx2bGltQGdpZ2FkZXZpY2Uu
+Y29tPg0KU2VudDogVHVlc2RheSwgT2N0b2JlciAyOCwgMjAyNSAxODo1Mw0KVG86IE1hcmVrIFZh
+c3V0IDxtYXJlay52YXN1dEBtYWlsYm94Lm9yZz47IHUtYm9vdEBsaXN0cy5kZW54LmRlIDx1LWJv
+b3RAbGlzdHMuZGVueC5kZT4NCkNjOiBKYWdhbiBUZWtpIDxqYWdhbkBhbWFydWxhc29sdXRpb25z
+LmNvbT47IFRha2FoaXJvIEt1d2FubyA8VGFrYWhpcm8uS3V3YW5vQGluZmluZW9uLmNvbT47IFRv
+bSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+OyBUdWRvciBBbWJhcnVzIDx0dWRvci5hbWJhcnVz
+QGxpbmFyby5vcmc+OyBWZW5rYXRlc2ggWWFkYXYgQWJiYXJhcHUgPHZlbmthdGVzaC5hYmJhcmFw
+dUBhbWQuY29tPjsgVmlnbmVzaCBSIDx2aWduZXNockB0aS5jb20+OyBoYXZpc2gubXV0eWEgPGhh
+dmlzaC5tdXR5YUBhbWQuY29tPg0KU3ViamVjdDogUmU6IFtQQVRDSF0gbXRkOiBzcGktbm9yLWlk
+czogUmVmb3JtYXQgdGhlIHRhYmxlDQoNClRoYW5rcywgTWFyZWssDQoNCkNhbiB5b3UgcGxlYXNl
+IHNob3cgbWUgdGhlIHByZWZlcnJlZCBmb3JtYXQ/DQoNClRoaXMgd2FzIHRoZSBvcmlnaW5hbCBm
+b3JtYXQsDQoNCuKAgnsNCiDigILigILigILigILigILigILigILigILigILigILigILigIJJTkZP
+KCJnZDI1cTMyIiwgMHhjODQwMTYsIDAsIDY0ICogMTAyNCwgIDY0LA0KIOKAguKAguKAguKAguKA
+guKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAglNFQ1RfNEsgfCBTUElfTk9S
+X0RVQUxfUkVBRCB8IFNQSV9OT1JfUVVBRF9SRUFEIHwNCiDigILigILigILigILigILigILigILi
+gILigILigILigILigILigILigILigILigILigILigIJTUElfTk9SX0hBU19MT0NLIHwgU1BJX05P
+Ul9IQVNfVEIpDQog4oCC4oCC4oCC4oCC4oCC4oCCfSwNCg0KDQpUaGlzIG9uZSBsb29rcyBjbGVh
+bmVyLg0KDQrigILigILigILigILigILigIJ7SU5GTygiZ2QyNWIyNTYiLCAweGM4NDAxOSwgMCwg
+NjQgKiAxMDI0LCA1MTIs4oCC4oCCU0VDVF80SyB8DQrigILigILigILigILigILigIJTUElfTk9S
+X0RVQUxfUkVBRCB8IFNQSV9OT1JfUVVBRF9SRUFEIHwgU1BJX05PUl9IQVNfTE9DSyB8IFNQSV9O
+T1JfNEJfT1BDT0RFUynigILigILigILigILigILigIJ9LA0KDQpSZWdhcmRzLA0KDQpWaWN0b3IN
+Cg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCkZyb206IE1hcmVrIFZhc3V0IDxt
+YXJlay52YXN1dEBtYWlsYm94Lm9yZz4NClNlbnQ6IFR1ZXNkYXksIE9jdG9iZXIgMjgsIDIwMjUg
+MTg6MDcNClRvOiBWbGltIDx2bGltQGdpZ2FkZXZpY2UuY29tPjsgdS1ib290QGxpc3RzLmRlbngu
+ZGUgPHUtYm9vdEBsaXN0cy5kZW54LmRlPg0KQ2M6IEphZ2FuIFRla2kgPGphZ2FuQGFtYXJ1bGFz
+b2x1dGlvbnMuY29tPjsgVGFrYWhpcm8gS3V3YW5vIDxUYWthaGlyby5LdXdhbm9AaW5maW5lb24u
+Y29tPjsgVG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNvbT47IFR1ZG9yIEFtYmFydXMgPHR1ZG9y
+LmFtYmFydXNAbGluYXJvLm9yZz47IFZlbmthdGVzaCBZYWRhdiBBYmJhcmFwdSA8dmVua2F0ZXNo
+LmFiYmFyYXB1QGFtZC5jb20+OyBWaWduZXNoIFIgPHZpZ25lc2hyQHRpLmNvbT47IGhhdmlzaC5t
+dXR5YSA8aGF2aXNoLm11dHlhQGFtZC5jb20+DQpTdWJqZWN0OiBSZTogW1BBVENIXSBtdGQ6IHNw
+aS1ub3ItaWRzOiBSZWZvcm1hdCB0aGUgdGFibGUNCg0KW1lvdSBkb24ndCBvZnRlbiBnZXQgZW1h
+aWwgZnJvbSBtYXJlay52YXN1dEBtYWlsYm94Lm9yZy4gTGVhcm4gd2h5IHRoaXMgaXMgaW1wb3J0
+YW50IGF0IGh0dHBzOi8vYWthLm1zL0xlYXJuQWJvdXRTZW5kZXJJZGVudGlmaWNhdGlvbiBdDQoN
+CuatpOS4uuWklumDqOmCruS7tu+8jOiwqOmYsumSk+mxvOmCruS7tu+8jOivt+azqOaEj+mCruS7
+tuaYr+WQpua2ieWPiuaVj+aEn+S/oeaBrw0KVGhpcyBpcyBhbiBleHRlcm5hbCBlbWFpbCwgYmV3
+YXJlIG9mIHBoaXNoaW5nIGVtYWlscy4gUGxlYXNlIHBheSBjbG9zZSBhdHRlbnRpb24gdG8gd2hl
+dGhlciB0aGUgZW1haWwgY29udGFpbnMgc2Vuc2l0aXZlIGluZm9ybWF0aW9uDQoNCk9uIDEwLzI4
+LzI1IDk6MzMgUE0sIFZsaW0gd3JvdGU6DQo+IEhpLCBNYXJlaywNCg0KSGVsbG8gVmxpbSwNCg0K
+PiAgICAxLg0KPiByZWZvcm1hdCB0aGUgdGFibGUgdG8gZm9sbG93IHRoaXMgZm9ybWF0Lg0KPg0K
+PiDigILigILigILigILigILigIJ7DQo+IOKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKA
+guKAgklORk8oImdkMjVxMzIiLCAweGM4NDAxNiwgMCwgNjQgKiAxMDI0LCAgNjQsDQo+IOKAguKA
+guKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAguKAglNFQ1RfNEsg
+fCBTUElfTk9SX0RVQUxfUkVBRCB8IFNQSV9OT1JfUVVBRF9SRUFEIHwNCj4g4oCC4oCC4oCC4oCC
+4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCCU1BJX05PUl9IQVNfTE9D
+SyB8IFNQSV9OT1JfSEFTX1RCKQ0KPiDigILigILigILigILigILigIJ9LA0KDQpXaHkgdGhpcyB3
+YXkgPyBEb2VzIGl0IGJyaW5nIGFueSBpbXByb3ZlbWVudCwgYXNpZGUgZnJvbSBiZWluZyBsZXNz
+DQpjb25jaXNlID8NCg0KPiAgICAxLg0KPiBSZS1hcnJhbmdlIHRoZSBvcmRlciBvZiB0aGUgdGFi
+bGUgYmFzZWQgb24gdGhlIElELCBzbyB0aGF0IEkgY2FuIGdyb3VwIHRoZSBwYXJ0ICNzIGJ5IHBy
+b2R1Y3QgZmFtaWx5Lg0KDQpTdXJlLiBJJ2xsIGp1c3Qgd2FpdCBmb3IgdGhlIG1haW50YWluZXIg
+YW5kIHdoaWNoZXZlciBwYXRjaCB0aGV5IHBpY2sNCmZpcnN0LCB0aGUgb3RoZXIgd2lsbCBiZSBy
+ZWJhc2VkIGFuZCByZXNlbnQuDQoNCj4gICAgMi4NCj4gSSBoYXZlIGEgZmV3IG1vcmUgcGFydCBu
+dW1iZXJzIHRvIGFkZCB0byB0aGUgdGFibGUsIGNhbiBJIGFkZCB0aGVtIHdpdGggdGhpcyB1cGRh
+dGU/DQoNClN1cmUuDQoNCj4gICAgMy4NCj4gRG8gSSBzdWJtaXQgYXMgYSBuZXcgcGF0Y2g/DQoN
+ClllcywgYnV0IHBsZWFzZSwgbGV0J3Mgd2FpdCBmb3IgbWFpbnRhaW5lciBpbnB1dCBmaXJzdC4N
+Cg0KLS0NCkJlc3QgcmVnYXJkcywNCk1hcmVrIFZhc3V0DQo=
