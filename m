@@ -4,57 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92BE1CCF9FC
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:27:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F6DCCF9F0
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:37:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD50F836F0;
-	Thu, 30 Oct 2025 14:27:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=jens-maus.de
+	by phobos.denx.de (Postfix) with ESMTP id 7D52D836D3;
+	Thu, 30 Oct 2025 14:37:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="0bbYvOm5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OVL3uPN5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C2EA83710; Thu, 30 Oct 2025 14:27:50 +0100 (CET)
-Received: from mail.light-speed.de (mail.light-speed.de
- [IPv6:2a01:238:43f2:8900:dd04:e3a0:ee11:a73d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C6E9D8334F; Thu, 30 Oct 2025 14:36:59 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F36F9836D3
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 14:27:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=jens-maus.de
+ by phobos.denx.de (Postfix) with ESMTPS id 6266E836D3
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 14:36:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mail@jens-maus.de
-Received: from smtpclient.apple (unknown [149.220.72.217])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.light-speed.de (Postfix) with ESMTPSA id 8BEF53D429C3;
- Thu, 30 Oct 2025 14:27:47 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
- s=mail; t=1761830867;
- bh=ddwW3rp6bEO9m4t8RVN9BVaOrPPoOfa8NW6QITgVq2k=;
- h=From:Subject:Date:In-Reply-To:Cc:To:References;
- b=0bbYvOm5OasDJAXdPmJquJ/orD4e+kQtFfbr9Fqxuw+N2bH0rKvugck2yy5sDr7GM
- oBHb4agZbYnIq7v6E9oj6yCD0T51oUSDKBpv6CEnDudbCgSFwxtl3a7t+RZ6/nEXiG
- xu72dJhzOZz9aCnM1xHRlDZAOKTu1OPTU9exHHVw=
-From: Jens Maus <mail@jens-maus.de>
-Message-Id: <471FB4A4-9EE9-480F-B74C-1B60F437A5DB@jens-maus.de>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
-Subject: Re: [PATCH 0/4] Improve RaspBerry Pi 5 support part1: Fixes
-Date: Thu, 30 Oct 2025 14:27:37 +0100
-In-Reply-To: <20251010161442.410C4227AAE@verein.lst.de>
-Cc: Matthias Brugger <mbrugger@suse.com>, Simon Glass <sjg@chromium.org>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-To: Torsten Duwe <duwe@lst.de>
-References: <20251010161442.410C4227AAE@verein.lst.de>
-X-Mailer: Apple Mail (2.3826.700.81)
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c52ce8cbe7so807933a34.0
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:36:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1761831413; x=1762436213; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=D9HAGW9cKG9RHR8rTSPfxufytyIuUQ0jsFyjS0gZoc0=;
+ b=OVL3uPN5B2StuJ5/jnEoP38zg1fLjvbC+eICRD22GVhRefrpJa8o6JGTObZPQsEVJw
+ bfXjDFoD7HCimkcXMv/puBk1N+KgiMA34aXyxTBXPVB8IvZTuKeOG/C9P7T2LgUDBUmd
+ On50rmDYuCkrb3Q7pZlFS+9V5dYa2S4o7+wm8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761831413; x=1762436213;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=D9HAGW9cKG9RHR8rTSPfxufytyIuUQ0jsFyjS0gZoc0=;
+ b=uXDVXKScnXCTf/YwHxh7w7sdsprLcdBs62t5Jac5iFIXgY5QsHxuEz0jvBxSKJ4As0
+ vmWSrrAws3FZi0siQjYKkFjDoF9vxDyI8dDEmoCRGWO6iu9d4SjXhHWoaiGFBY5d66CR
+ oR8ZwAwP1GzDC7t0ccFkYqh6SF8GeF+RRl5/2EN7fQqB7G68uyeXKIhuy/wvb3DaAZyR
+ ZFabrn0HdLeya4JwsuqufJ3B5j0FxIPXii6/39DVWC0bu/AQ8OhYqWDpJNpBaOEYD2zj
+ oE3dHz4NUWYOYeQo1Z7tXamkE6bZdK5k1Df/0+950IXvxcxamgiXelSCNYI70RmFqY7r
+ ipag==
+X-Gm-Message-State: AOJu0YzK61oJ7+BFfwW8ulm9ZM7R+aPRYviqZNN5Vz62uewDNTDQzBRM
+ WzhELxI+YffR69yB9TBrsew2er98ztVt8PL+gFcg5gZFOuQfslaCTl9zipAy1VWACx257mg2USb
+ CcGUncEGuHw==
+X-Gm-Gg: ASbGncvmTUjQIyR176XEMjouEzEkho9vdjRGArf7v7Q/PFcVMSpYDmKZ0vZYlYfnu3U
+ OEKSBxG/JEkrgbCv9fCHCAbhr3pLiKo8+O3zQMIUyV6KanbWokEEmLDeP6S74KZ8VYRHCtDIywK
+ nP+4ImusyKzVWzPeCDZJ8m+tzcSVCn8BQsJxo/QdfIOsAKgOq0NRTWdx5OCAxL3Sj2jadMm2tWQ
+ 1fK4YYOhrQvp9GVGUhkN6uwl5c22Fwxm9KuaKUHP8VWkwwbIUyO6hpegE5JjAmAjGgJ/4jkmWDD
+ AAroEKIpjjjXktMMj6f+zcspfyt3vDsswXeqkeKI5K0Oq3Kr1ud/bY3f0bxDTr4D3rkQi05ydvv
+ f3DlowjCrJW6QpRVIQtsrmcDyEhpytoowxzBSxibfs5nDZxueWQm3Zk8rAYuxjd/vDdQVyoSMzV
+ b7gSxUaIO6jn4Re0+Etkb3Ew+g05IL9CN1UGSms5k=
+X-Google-Smtp-Source: AGHT+IHeCE3Fs7k8wB3+y9cv7xyOx3n921raPQuBw15ceJsG0pl0E9LFiMWyZLuptYKe69LeII+nDg==
+X-Received: by 2002:a05:6808:152c:b0:43f:7287:a5e3 with SMTP id
+ 5614622812f47-44f7a3ffcdfmr3361699b6e.28.1761831412997; 
+ Thu, 30 Oct 2025 06:36:52 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44da3e793c5sm4111686b6e.13.2025.10.30.06.36.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Oct 2025 06:36:52 -0700 (PDT)
+Date: Thu, 30 Oct 2025 07:36:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, michael@amarulasolutions.com,
+ dario.binacchi@amarulasolutions.com, festevam@gmail.com
+Subject: Re: [PATCH v2 1/3] bsh: update readme with instructions to build M2B
+Message-ID: <20251030133649.GR6688@bill-the-cat>
+References: <20251030084710.3995770-1-andrea.calabrese@amarulasolutions.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rtTZfwZH7MYPiDjM"
+Content-Disposition: inline
+In-Reply-To: <20251030084710.3995770-1-andrea.calabrese@amarulasolutions.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,45 +98,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Torsten,
 
-Looking forward to your whole patch series on getting Pi 5 support in =
-U-Boot finally in a state that booting from NVMe and USB as well as =
-ethernet would finally be possible. Quickly looked over your first =
-patchset on fixes. When do you expect to submit the rest (patchset 2+3) =
-so that we can start testing NVMe/USB Boot with a Pi5?
+--rtTZfwZH7MYPiDjM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
+On Thu, Oct 30, 2025 at 09:47:08AM +0100, Andrea Calabrese wrote:
 
-Jens
+> readme was missing instructions to build M2B. Now added.
+>=20
+> Signed-off-by: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
+[snip]
+> diff --git a/doc/board/bsh/imx6ulz_bsh_smm_m2.rst b/doc/board/bsh/imx6ulz=
+_bsh_smm_m2.rst
+> new file mode 100644
+> index 00000000000..c61dbfe2ae7
+> --- /dev/null
+> +++ b/doc/board/bsh/imx6ulz_bsh_smm_m2.rst
+> @@ -0,0 +1,85 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +How to Update U-Boot on imx6ulz_smm_m2 and imx6ulz_smm_m2b boards
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
 
-> Am 10.10.2025 um 18:14 schrieb Torsten Duwe <duwe@lst.de>:
->=20
-> Hi all,
->=20
-> This series is basically a resend of Oleksii Moisieiev's from =
-February[0].
-> I forward-ported the code where neccessary, rephrased some =
-explanations,
-> retested and reshuffled the changes, grouping them into at least 3 =
-parts:
->=20
->     1: Fixes
->     2: PCIe support for the bcm2712
->     3: RP1 chip and MACB ethernet support
->=20
-> Haven't tried USB yet, but with the full series NVMe boot is working,
-> and I get a "file not found" from my DHCP/TFTP server.
->=20
-> Let's start with the fixes, they should be undisputable. Credits go
-> to the epam guys for tracking these down. Patches should apply cleanly
-> on 2025.10 and on current master [ecdc3872a767].
->=20
-> 	Torsten
->=20
-> [0] https://lists.denx.de/pipermail/u-boot/2025-February/579540.html
+Please see doc/build/documentation.rst for how to build the
+documentation as there's errors here that will trip CI. Headings (=3D=3D=3D)
+need to be the exact length as the text. Everything else is probably
+fine but I can't always spot spacing errors without building. I don't
+know if Fabio wants to fix this part up when applying. Thanks!
 
 --=20
-Jens Maus, Dresden/Germany
-https://jens-maus.de/
+Tom
 
+--rtTZfwZH7MYPiDjM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQNp7gAKCRAr4qD1Cr/k
+CkbwAQDdxWitRht0wxCGKVKDw19FE8ZTx7GvEdtHC+G5JT1DXAEAwXnydiq1t0PL
+09NUk51TdXHIDUgVjxXJww7UkRqzpg4=
+=aDYq
+-----END PGP SIGNATURE-----
+
+--rtTZfwZH7MYPiDjM--
