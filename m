@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8EFCCCF9E3
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 21:31:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB1CCCF9E3
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 22:36:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41AB083849;
-	Thu, 30 Oct 2025 22:31:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 104B5836D3;
+	Thu, 30 Oct 2025 23:36:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f8NtHUzS";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hHFOKU7h";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hXrL8jqS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C135483893; Thu, 30 Oct 2025 22:31:40 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3DC95836D1; Thu, 30 Oct 2025 23:36:38 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 692DA836F0
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 22:31:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 278278334F
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 23:36:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c53038fd99so491024a34.2
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 14:31:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761859897; x=1762464697; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Q14gsOfkbiPbv2NsS4PAEKzLQqa2jYMsvRfEJ46wFx8=;
- b=f8NtHUzSF8z7lDShUygPVgK3447OzezMTIRnhg59QogEzcw/vRTmqJSMMchU3C0Vi+
- kTAZ5u8PjV4ngljz/HqI/v++z2wmWnDQH1skSuXwxEEdGCPbTnSEhlqQovs36EGM3Y+m
- u/NaGqRrCmExrMsylIAEL6ns3fonhwrbI2sYcReumHYi5suBKdSOtEmHR2LOGuJ61OWC
- IsxCAeCGwqH1YqchQUWDYeDkMVCDiU2iBJLX9CzYZTl2Nml3RsvAXLkFYOXUfhPAdzZA
- vW+VgMMXf+kesB8RPndGn/xNGgnvDQgaN+ZQrYhsDWKiJ5I2c3DDrjAYf/qQaHMJ0SIc
- d+cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761859897; x=1762464697;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Q14gsOfkbiPbv2NsS4PAEKzLQqa2jYMsvRfEJ46wFx8=;
- b=gFUDA9eK/RGwPyTcgtZfq6ekFJ52HG0lW5YvYU8QIzfBmJYCs3BcN1VtGasFrxAyP1
- NKjkV112roXC7WsKccLZTWe2AHMBIoylXXFDLumuQpFAtLK98r1e8TvUuxGHjt0jUGEo
- qdHUaVK1BjB7g41/BOEqF8CuLqbJL901J73oiKsOAD5fXau5WhBMCnhqsizIs08mwZfw
- lmXeX2AXJA4wQzYhBpvQUYtDiiabPqz5fyhS1fB5u/18bg/Psi+VmGTEfyPf8Mj98XIU
- dHTLExV2ozWT3/GI6UsuZ+PZ2OzhWKKVZm0ojamkleMyLdveeqMuewdMjDdlmsdXtG2d
- TuMg==
-X-Gm-Message-State: AOJu0YwESo/fk7Vc45t0eiyzRWIvV0+HD6Wkjk0kCj9tDcbg7cT9SwkA
- PMp8BNjNXh4poMBMMy1YhFlrRh0S+k5VsFPz9di2NfMvf9fYFOcvx1371brPKbtLbhRkHGMttsP
- U9TIptLJLPhuJHT4DlTWheqVAw01LxS1i+ax0
-X-Gm-Gg: ASbGncsebGfrXok5VmO24OJVew35oO96F7AzgmYEy22aT37aD+RgmnOhMbhIfNUFeHa
- SANPlpEMKUPb7jSBkJsZEJjC+odRkmL21fbpNLJZ+0rxrXI347xLy6lmn/VW9ZpXGGb3zfgU6AW
- QMiKCZCeE2m96MxXe9WsZXBDqcj+ZiyvLIUSihT28mP9oQXc6HShoJSgwsJ+92/fvaYtZxz+hYU
- lMiC648/gPV27ptUPiHO0s3Spl2pHfruW7KWyY/hSFkA4whe0ogktXX9C93t+auFnDDRqA=
-X-Google-Smtp-Source: AGHT+IH5mLks409UhFgTkrrIfGdW7/IO+K05EI2KMaxQj7/rkffkROSh3a9SgT/HnBQov0sG85WSDkWt+mUbl8SDfsA=
-X-Received: by 2002:a05:6830:67d5:b0:7ac:869b:3284 with SMTP id
- 46e09a7af769-7c6967e1e5fmr528127a34.26.1761859897074; Thu, 30 Oct 2025
- 14:31:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cyJr368H6z9tMq;
+ Thu, 30 Oct 2025 23:36:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761863795;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=GWy0Hmq5TUlDzkXwz+5FGIrnBQSL7c9ojW1FDnmJbf0=;
+ b=hHFOKU7hQm5ax0A8d0NeaCLG15kEQpsL3TQHSAUyRurSl0Z5LcR+kyqEkegzEZZkqD1Dzd
+ LMrMDX4TUn3pxl+Trh42Gl2pbwTJu8Sr0rrFwgm/l6okXrVxKcNU8kijIzcWMs51qrrcPe
+ 9vWjyCU7T7lE0yTU89GfCLNS/RRhYY8LodqikjhHPLTl14/wAMxEy0erI9PlTUK4wTb2uj
+ 6z1nbJTYyqxcDV+J+jlxM8/oTKpf69DlJjp1drJacgnSYcoApDxewZ3yuU+pSKlXlxbvQy
+ BIDzcUQHOahXWBL2Z5bola5REecsyXU9eCPVQ/oW41ydP8YETHFBCsRW8VSoKA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761863793;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=GWy0Hmq5TUlDzkXwz+5FGIrnBQSL7c9ojW1FDnmJbf0=;
+ b=hXrL8jqS6xq9vZ/ICN2gQXiYUSZREcw35Zvqc+p9lwoHkAS8mhENiN7awyKtp7e0V1wrHp
+ RT7OR5p4KP06O6ZjQgqMDR/2dTpfccoWA/f06hu7Iasr5bUKJMcFYzFZYFv3jTBDHOLtfd
+ GWDWPSr9hXFGrJxedkSDPlyV5rwg+8VPjyjNFUgn3HFUdWYRtg3XdvQPI59bLAYZFLNJXa
+ Y5392rDvIabSDNdLZ6n4dLDYhuWaWiV08ng6gHDdE6MErQ0RF8pEoURURbnPIZOyx9s4AK
+ 7zWSmvIUXu/uIE+9YFQ0Lg+AnB5HV9jxLV+3AAjJ3rRr5EBpRfQCPORXM679/A==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Anshul Dalal <anshuld@ti.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>, u-boot-qcom@groups.io
+Subject: [PATCH 1/4] ufs: cadence: Rename CONFIG_CADENCE_UFS to
+ CONFIG_UFS_CADENCE
+Date: Thu, 30 Oct 2025 23:35:42 +0100
+Message-ID: <20251030223626.20005-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20251030003359.1023-1-briansune@gmail.com>
- <20251030180940.GY6688@bill-the-cat>
- <CAN7C2SC+uJ2OX9WmU7AmUjTZ7O4rWwQY0ueYYvWcUH1GF=fgZw@mail.gmail.com>
-In-Reply-To: <CAN7C2SC+uJ2OX9WmU7AmUjTZ7O4rWwQY0ueYYvWcUH1GF=fgZw@mail.gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Fri, 31 Oct 2025 05:31:25 +0800
-X-Gm-Features: AWmQ_bm59fMSdNopzk0CSFmXT34owHWWSQsLRSudv-9XyuW_3qqQEdChxWNiDKU
-Message-ID: <CAN7C2SDcEC+A5-rmCKMYD=vEYDFdOAfMp1G=T5SuQcXYOHDuJg@mail.gmail.com>
-Subject: Re: [PATCH v1] Cyclone V Board handsoff script
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 55a43deafcc0286818e
+X-MBO-RS-META: a1p5k4nduw1uyqcr4ebsgfewg9jcwo9f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,23 +88,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> No, this is a build script that is a must and also required on every
-> clean build.
+Align the Kconfig option with the rest of the subsystem, use
+CONFIG_UFS_<vendor> format for the Kconfig option.
 
-Let me elaborate a bit more.
-According to the current U-Boot folder:
-board/altera/cyclone5-socdk/qts
-board/altera/arria5-socdk
-board/altera/arria10-socdk
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Anshul Dalal <anshuld@ti.com>
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Igor Belwon <igor.belwon@mentallysanemainliners.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+Cc: u-boot-qcom@groups.io
+Cc: u-boot@lists.denx.de
+---
+ configs/am69_sk_a72_defconfig    |  2 +-
+ configs/j7200_evm_a72_defconfig  |  2 +-
+ configs/j721e_evm_a72_defconfig  |  2 +-
+ configs/j721s2_evm_a72_defconfig |  2 +-
+ configs/j784s4_evm_a72_defconfig |  2 +-
+ drivers/ufs/Kconfig              | 14 +++++++-------
+ drivers/ufs/Makefile             |  2 +-
+ 7 files changed, 13 insertions(+), 13 deletions(-)
 
-All these board folder files are not sure and high change to be stall.
-As the deconfig boards are not only official Altera board.
-As such [1] is a prerequisite to build U-Boot.
+diff --git a/configs/am69_sk_a72_defconfig b/configs/am69_sk_a72_defconfig
+index bd8aaf7f201..d91cc71aacc 100644
+--- a/configs/am69_sk_a72_defconfig
++++ b/configs/am69_sk_a72_defconfig
+@@ -7,7 +7,7 @@ CONFIG_TARGET_J784S4_A72_EVM=y
+ 
+ CONFIG_CMD_UFS=n
+ CONFIG_UFS=n
+-CONFIG_CADENCE_UFS=n
++CONFIG_UFS_CADENCE=n
+ CONFIG_TI_J721E_UFS=n
+ 
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am69-sk"
+diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
+index 826a2db0805..75d7d332d30 100644
+--- a/configs/j7200_evm_a72_defconfig
++++ b/configs/j7200_evm_a72_defconfig
+@@ -196,5 +196,5 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x6164
+ CONFIG_SPL_DFU=y
+ CONFIG_UFS=y
+-CONFIG_CADENCE_UFS=y
++CONFIG_UFS_CADENCE=y
+ CONFIG_TI_J721E_UFS=y
+diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+index 42e1dd21d0b..01faa33c042 100644
+--- a/configs/j721e_evm_a72_defconfig
++++ b/configs/j721e_evm_a72_defconfig
+@@ -201,7 +201,7 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x6163
+ CONFIG_SPL_DFU=y
+ CONFIG_UFS=y
+-CONFIG_CADENCE_UFS=y
++CONFIG_UFS_CADENCE=y
+ CONFIG_TI_J721E_UFS=y
+ CONFIG_EFI_SET_TIME=y
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
+index e373a9f05b7..a231c12d803 100644
+--- a/configs/j721s2_evm_a72_defconfig
++++ b/configs/j721s2_evm_a72_defconfig
+@@ -188,5 +188,5 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x6168
+ CONFIG_SPL_DFU=y
+ CONFIG_UFS=y
+-CONFIG_CADENCE_UFS=y
++CONFIG_UFS_CADENCE=y
+ CONFIG_TI_J721E_UFS=y
+diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
+index 67aa18a16da..dc6321cd615 100644
+--- a/configs/j784s4_evm_a72_defconfig
++++ b/configs/j784s4_evm_a72_defconfig
+@@ -171,7 +171,7 @@ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_SPL_DFU=y
+ CONFIG_CMD_UFS=y
+ CONFIG_UFS=y
+-CONFIG_CADENCE_UFS=y
++CONFIG_UFS_CADENCE=y
+ CONFIG_TI_J721E_UFS=y
+ 
+ #include <configs/k3_efi_capsule.config>
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index 445270e8da1..e77b144a470 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -8,13 +8,6 @@ config UFS
+ 	  This selects support for Universal Flash Subsystem (UFS).
+ 	  Say Y here if you want UFS Support.
+ 
+-config CADENCE_UFS
+-	bool "Cadence platform driver for UFS"
+-	depends on UFS
+-        help
+-	  This selects the platform driver for the Cadence UFS host
+-	  controller present on present TI's J721e devices.
+-
+ config QCOM_UFS
+ 	bool "Qualcomm Host Controller driver for UFS"
+ 	depends on UFS && ARCH_SNAPDRAGON
+@@ -45,6 +38,13 @@ config UFS_AMD_VERSAL2
+ 	  UFS host on AMD needs some vendor specific configuration before accessing
+ 	  the hardware.
+ 
++config UFS_CADENCE
++	bool "Cadence platform driver for UFS"
++	depends on UFS
++        help
++	  This selects the platform driver for the Cadence UFS host
++	  controller present on present TI's J721e devices.
++
+ config UFS_MEDIATEK
+ 	tristate "MediaTek UFS Host Controller Driver"
+ 	depends on UFS && ARCH_MEDIATEK
+diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
+index 6b2f2ccc9fc..656988ef9ad 100644
+--- a/drivers/ufs/Makefile
++++ b/drivers/ufs/Makefile
+@@ -4,11 +4,11 @@
+ #
+ 
+ obj-$(CONFIG_UFS) += ufs-uclass.o
+-obj-$(CONFIG_CADENCE_UFS) += cdns-platform.o
+ obj-$(CONFIG_QCOM_UFS) += ufs-qcom.o
+ obj-$(CONFIG_ROCKCHIP_UFS) += ufs-rockchip.o
+ obj-$(CONFIG_TI_J721E_UFS) += ti-j721e-ufs.o
+ obj-$(CONFIG_UFS_AMD_VERSAL2) += ufs-amd-versal2.o ufshcd-dwc.o
++obj-$(CONFIG_UFS_CADENCE) += cdns-platform.o
+ obj-$(CONFIG_UFS_MEDIATEK) += ufs-mediatek.o
+ obj-$(CONFIG_UFS_PCI) += ufs-pci.o
+ obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
+-- 
+2.51.0
 
-So unless there are handoff changes until the EOL of 2030.
-These scripts are highly required on U-Boot, unless U-Boot
-plan to remove Altera SoCFPGA from the ARM support list.
-
-Brian
-
-[1] https://www.rocketboards.org/foswiki/Documentation/BuildingBootloaderCycloneVAndArria10#Prerequisites
