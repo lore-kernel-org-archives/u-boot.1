@@ -4,175 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B0A5CCF9F8
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 17:07:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D37DCCCF9F8
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 17:36:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6207E83887;
-	Thu, 30 Oct 2025 18:07:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 1CA22836F0;
+	Thu, 30 Oct 2025 18:36:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=live.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="N9ZKU8Z5";
+	dkim=pass (2048-bit key; unprotected) header.d=live.com header.i=@live.com header.b="V/+YJTn0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80F4883893; Thu, 30 Oct 2025 18:06:59 +0100 (CET)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id D8BDC836D3; Thu, 30 Oct 2025 18:03:29 +0100 (CET)
+Received: from YT5PR01CU002.outbound.protection.outlook.com
+ (mail-canadacentralazolkn190110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d103::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6277B836D1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 18:06:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id F1E6683642
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 18:03:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=none dis=none) header.from=live.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=prasad.kale@live.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yK8dCSFA65Shn8eu4OiYkIh48KHSXr7vSwqZ1L1zst23o2DBPrfUIjyRuJgPfFMWYmWrlydP3dyaQWTcDrOTByS4+u7TD7d4rpFW29psQKCJ8jGBRocNohippigWdh5wrPb3yebhbSFbazQ1IgE+J9qj2KZSeytnfRGSdZIaPJEJUbmb/ihdewXKjblYPE5KPih2Btn8ds9A3WtYc8DvG3UdZuJaXdqNAEqQcNy8EXUCKErAFN5idjYUbtwynLGKYp2cn+9EyVQnQH+UBYk44RiPMPLRu6fg+C8qPpmVVOVd7cKR63oTbzHA8eIlYMqRzwJU25q6yXjtJvmsgMGCOw==
+ b=XrQh58d257O4EMpW1xzzmhvuQuraFDi9JZOS4UCutaCT5/fe9lxiuICDaR8cRKPFzaZGl0cmbFTXTEckrEdG2JazxQaBKXTYx60BOwg/iXV21jve45Q2U51Glac2l6pJimCy8HKxzAs28MI4o2cms5W3F1O4lgffaMhsHSHxHK3a1zmgStVj6ZNRXRiavk2BrmyNn1PzDCHXNektdUtCgADHqnlqgzwsw4Cpp8+/XARCA6OdrIl1wVW/V2Dlx8tLsMpYhYo9IWHc81W7NirliLvrxgW4GkySDH8Gn2eIDzZxJjAY8Je7VZet06TRBRTEXOijC80Pq4CoyveDNNDU8Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LifTvf1mVEUVolZwwW5yKVhCmex0Yv/5N5fghJCciUI=;
- b=tskiczYboU+ZAKGN+lN/ssxZx4e+GHmHfHjg8PDTDryZK6TyI1EeAzE65cFIQ299TFJ5ltPtxsFBTgCk+s2T8gUtfN0L5zAxZnC+4UQHMxGyB+8F56wVhmH4RJ2LLMfq1YUPRmnGNNkLstsr+dYwXtWqT0BLla/PMZjGXTp/3H2bZ0lzRebzKzKUGa1pu2r684BnaOlLJ+0BtShoCJPrPW+lVaRb6muJeuDTozCXSCWGzVCsgXXG/Z3dDfloYbYK6p/9AvChF9zIJ/gYF9tLgE9E1APqI944eUBom1wbSMDVuScJZgMkW2TTWjygylzFMZdwwPc+AWYoBcQeoygWtA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ bh=BgoO6VDhYLFIfM9nTh4lqeM6XGZiYnbfr6zVLs9NwYg=;
+ b=DbDcttMA2w/tbcU0vL2ROnaonTyUwRaA/XnczSdYYJ0/mK/EBnlxCgMSNXvKFC6/DQgN3PquELQbEKFvGv7xfQrPAleC3qSlx+bzjYXEta9K23L0nZaNab7NR7/3maamnbtVurRNsWfa0WDT07fdiZOkwhkuJ8BINYbs0L/3I+3jLjINJLdFtMlPeMj7uRf7HYpKfs+ZK2N/G2zFF+fatioVLnZ/6LVT2Ukuf1dbW26Rk22tEYn3CDdHt6yD1zAShVqkmq91bV9Q8ZptLvAI4lHnWds7wNTE/bR13h+PKZNUadZu72Sd289F/ctQofQHMUg4f0RYK0e0Q/nEqRMOQQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=live.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LifTvf1mVEUVolZwwW5yKVhCmex0Yv/5N5fghJCciUI=;
- b=N9ZKU8Z5RMj4r8MVeEkB60OSlo/8KCifKpoyWj2YZCx+3c7hxvceVeTAOX6QkV3zREBZpgtv6tBJ6gJL6rlThVo3X9MZWFBz5/G3Pm7HxQ82uPMqtgAKvgyqJedCuWxEYRqHBzyBESgs6cz064wGNm492Z5eeeHS+AukrEFRsUI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by GVXPR04MB10112.eurprd04.prod.outlook.com (2603:10a6:150:1c0::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.13; Thu, 30 Oct
- 2025 17:06:53 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9253.017; Thu, 30 Oct 2025
- 17:06:53 +0000
-Message-ID: <c0ecedd9-a07e-49e4-9c76-b854dd3fff96@cherry.de>
-Date: Thu, 30 Oct 2025 18:06:50 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rsa: always build pss padding
-From: Quentin Schulz <quentin.schulz@cherry.de>
-To: Tom Rini <trini@konsulko.com>, Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>, Martin Schwan <m.schwan@phytec.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Pieter Van Trappen <pieter.van.trappen@cern.ch>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Alexander Graf <agraf@csgraf.de>,
- Loic Poulain <loic.poulain@linaro.org>, Tobias Olausson <tobias@eub.se>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Shiji Yang <yangshiji66@outlook.com>,
- Anton Moryakov <ant.v.moryakov@gmail.com>, E Shattow <e@freeshell.de>
-References: <20251029-rsa-pss-always-v1-1-ad2b652e75aa@cherry.de>
- <20251029222032.GP6688@bill-the-cat>
- <320655db-d362-43ba-83ab-d79eb6e58559@cherry.de>
-Content-Language: en-US
-In-Reply-To: <320655db-d362-43ba-83ab-d79eb6e58559@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BE1P281CA0035.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:22::12) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ bh=BgoO6VDhYLFIfM9nTh4lqeM6XGZiYnbfr6zVLs9NwYg=;
+ b=V/+YJTn0+87Q6DONrXQ7QkM/F6jGK2+E2OwcvAnjsxqEOHpUxt2xzds6F71p9oSxqYCkrzvr79BqdSQ2RcCB8u0bENqroM5yk4LubjxIszOArj4/4r0LJp7w0Ws0d0Yg+tygXB52V3tFSpF661rroq+K5F37/5FnkjylskToiG1Lcslrb1lq1UqL/feze7NkYAxbVGtqbO378qoxmeXIHWperqPLu1msl1Omtg1KdHBV6ZPpRnhbxgCRv62b/OCo4/CR1DdaAxWBtuzv2jG6KVLB02gej9CizTD9qKeH5Z4bv7kcmvoMAohRUfTID683HGyZrzFCmj9yHqZxWQr/Og==
+Received: from YT2P288MB0091.CANP288.PROD.OUTLOOK.COM (2603:10b6:b01:f3::22)
+ by YT6P288MB0754.CANP288.PROD.OUTLOOK.COM (2603:10b6:b01:11e::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Thu, 30 Oct
+ 2025 17:03:20 +0000
+Received: from YT2P288MB0091.CANP288.PROD.OUTLOOK.COM
+ ([fe80::c0e8:3f2f:548a:a775]) by YT2P288MB0091.CANP288.PROD.OUTLOOK.COM
+ ([fe80::c0e8:3f2f:548a:a775%6]) with mapi id 15.20.9275.013; Thu, 30 Oct 2025
+ 17:03:19 +0000
+From: Prasad Kale <prasad.kale@live.com>
+To: u-boot@lists.denx.de
+Cc: Prasad Kale <prasad.kale@live.com>, Dan Murphy <dmurphy@ti.com>,
+ Sean Anderson <seanga2@gmail.com>, Anshul Dalal <anshuld@ti.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] Invalidate cached FAT device upon boot error
+Date: Thu, 30 Oct 2025 22:33:01 +0530
+Message-ID: <YT2P288MB00915176E3C7F2F72F4C2A879BFBA@YT2P288MB0091.CANP288.PROD.OUTLOOK.COM>
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BMXP287CA0019.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:b00:2c::31) To YT2P288MB0091.CANP288.PROD.OUTLOOK.COM
+ (2603:10b6:b01:f3::22)
+X-Microsoft-Original-Message-ID: <20251030170306.154506-1-prasad.kale@live.com>
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GVXPR04MB10112:EE_
-X-MS-Office365-Filtering-Correlation-Id: 30c25b66-a470-4ffc-809b-08de17d6b92a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bDNTTERpeE1qVnN3RlgxWEdxS0VQVFZEdHpCaXRpdVE5dnRkRWwrbWtqUjE3?=
- =?utf-8?B?TUJ4b0J3ZUVlVUJYQmExNDNMejhYK0xMUEtPZmdiekFJZkI2bkRkSm1OMFRO?=
- =?utf-8?B?Y2hmVzIydWFTVUdDWW4zTS9maElPZ213T1c1TjNHb1B4bVhTVFZ0cTBrMkhs?=
- =?utf-8?B?K2pDcWMxRFNObjNhN3hhZGV2cXpGL3dmMnpQNWNnQ000T2hvdFIzL3RPYVY3?=
- =?utf-8?B?aVJWUmNWMlRZVEN5cXQ4NnoweG1penF4cHArTUdvQWVvRktJUGFpajNsUGps?=
- =?utf-8?B?VXMxSTQvUXJMV2lubDJKS0J0bG9mdmdqMmhHOENHTG4vR01rOTU0elhwcFdO?=
- =?utf-8?B?UW1TaStHYlJEcVhQZHI1aFB1eFJZY2d4OVhOeVQ4ZTkrUm9DUjJia0hIb2pS?=
- =?utf-8?B?SzlZa2dkek1SbEpEQWx4bUNEYXF2UFdZczRMRWUzREJDN3JwZlBFbTk2cmND?=
- =?utf-8?B?WVpyMTF3QjhyN1NMbzhidmxzdmhTWmZpOWJVYzJDWUNDemFoSEFZb1BKRkRS?=
- =?utf-8?B?TzFpOVhqSzMvNXZPYlgxRTQzeFpYMi9OSjlRbUhpVzFxcldvZWFWbDRscDZF?=
- =?utf-8?B?QVdvREhjTjNHTUg3S09vZVRnc00xdjFpYTduSGdlNWlaMnM3azYvbnRLVW94?=
- =?utf-8?B?djJCKzNaVDQydkE3dXB2SW1zSUxzSWhVaHc1a2VMYzFHemZDSmhDWklON1Zh?=
- =?utf-8?B?UlgzaGFGd2hCQWRZd0hqRy9CWjQxOHl6OVhMaVhmaGZWSEx4Y0s2dDA0SXNt?=
- =?utf-8?B?Vkx0WEphb0RyenlrMUtGSVZXdHFNbEJ1VnN2Q0QxbGRRYjBQQk12NEx5OENN?=
- =?utf-8?B?cEdXWW1sWk4wM3ZsOTJWcTV5dDllZGtRdEw3YUIyNFJ0Ym5TWXd4Smx5bjVB?=
- =?utf-8?B?TVhYNzNHZFVFUFlZZnRkTFJLMDVZYkVKc1JQcURGTzFmL3k4ZkJ3UFVSL0Zm?=
- =?utf-8?B?Umhwc1EzckF5ekdhSTAxa0tKZGRZajVVUFNCZjdSRGZVYkxicE0yaHZaTWxF?=
- =?utf-8?B?MFkrRk1SRlUxTUxnZTlWUjdkaDN3bEhjMGRrbEFXTEIxOFFDRWpBMHlXUXN3?=
- =?utf-8?B?dE1MMStNVThRT25ZMEZVQVV5ZEgrRDdGRmw0ZFJ6bGxDUzcwdGtEYzc0Qm1w?=
- =?utf-8?B?Qmd1ckF4VlFuZldpb2JLVEo3ZlJoM25uSmxSQThGNVlDYUhqa0poRUJyQlBP?=
- =?utf-8?B?bXA3WlJScC9UeUIxVkI3RW5mbGV6YjFFOGdrMXhvMVlCa1VhVC9PSE5vaGdj?=
- =?utf-8?B?b3lFRHU3dHE3QnAxN1p3clU5alJsb25tNndQOWU0bUIzdHdXUVowWHZ3TGVG?=
- =?utf-8?B?ZTg2Tkp4V0pqYWF4STNMUGZIVFpNOEtlZjFhQ3dRMy9sMzJzTlE3L1NDM0pu?=
- =?utf-8?B?UHNsZEUzdXFGckZzVFJpS0pwL0lhM2QxODR2TjB2MUZmcHNhV3gyYkRscE9H?=
- =?utf-8?B?azRNUXBPNDZOOEVjK0dFOUxLZnRXTm8wSG5jQjdPMzdQVXJDS0gzR0o2Ynp6?=
- =?utf-8?B?VW9xNVRqS2NGVmx3eHYvYjcxckR5aVhGYkdEamNHRnduRGp3bmRMOTNVVzM3?=
- =?utf-8?B?OWpHNFIvSGtzWFZERTBLNnZ1eE1uNUQ1dzRJR01idFhRWFRwOENqNzZvb2FS?=
- =?utf-8?B?cG9TNDBDNVJtSCt2My8wTGFjOTdNbXZmK3pCSmdlY1cwMkhWaERTZU9OTk82?=
- =?utf-8?B?ajQvZmhkN3daalZ0ZlBUUVRWRSthUERYZVVxM2p0NkpwM01BalRDOHFmYlhk?=
- =?utf-8?B?R0Q4M2ZjZ3ZKZjVhdmdqd2dFSUF4R084OE5ZemlOcXpQdWNGdzduMHBQMTlY?=
- =?utf-8?B?RlBCRlk0b1JXRElOWm5qWnN6NXJ1R0tCbjkyNDI1U05Nd3dtanJ0QVo5SUwr?=
- =?utf-8?B?MUZMOHZGYlZic0x0ckJKbS9zSDQwaTJPZ0pZMTl6Si90REhObDNBbDZQU3px?=
- =?utf-8?Q?DgAyb82mzcHuwiptza7a4rrywaoQpUKp?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(7416014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-TrafficTypeDiagnostic: YT2P288MB0091:EE_|YT6P288MB0754:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e443a37-d2b1-42e2-e4c8-08de17d639db
+X-MS-Exchange-SLBlob-MailProps: ScCmN3RHayF0bP0FcI6aESyZnZAIXMvqmuA8ZRYPGvc/RfahimXgDOjVx4tUlMggdZFcZYY/ZacmLI0m+gPlqmnfv5NJRp7+8no3Z+LymjVvYJ8ZF7vI7ZKFIV/yeJA4dgAzfkOU+3hKJMMaaq5mzZZml27dCeDyTqImE60ctad8mvUwvpnDdZBV91SRLUuroc7DYd//yHip8RX2kFLGzEfVwuMjBsdVAkB33PZpaXIvmth9vRNngBv4lhoZlI0qcHFZhLdjUG8g+tzPpCFs2MGZOUgkIkJn3fCimQZxKffrlNHKEEMi1s+OYKZuJXWL+LNQQD4cDyr2RDyCjo91dPWZzwdgUDVkPkWZPscX5pt61aD7stwW/811i7/TXf09e1BLolwxMDo1wEQWsgSfOMA7cMrko8qHECY0Ph+FZ01/imp89P6L4se0iXd13hmzvhAXBtBZEYsr2+rrmwhl0hOUNmQkIH83L7QXTLG12XMTLi8wn5NI6Pl6G6cKQ6VXyMDoHOD5vnlFGrVfaKAC+CwkWQdML2vpUAgkRwsXZrkunPMW1fImLr50L26YvOD7NdCGH2Z6xjT9w96eQQwDyV9bpt8KPpn2edv6t41USex0u5lNg3g4XizxFZ4qsckyqq5m+bEwNMjk25NUReZ1nPCRgIlgGlT1R0zR2EYmS9bqS1xo2pwB/zt43qpxlNlx6uK7oPDJ4EXiCQp3tikjzNcvLVNScXgb4GJ/SQqGUYY=
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|41001999006|8060799015|23021999003|19110799012|15080799012|5062599005|461199028|5072599009|40105399003|52005399003|440099028|3412199025|1710799026;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xxqpzRG2Nnoq1BkQ9MxcibHLozq9d8K7AbUtrNS9uY99HwDM8+V6qyarWb/z?=
+ =?us-ascii?Q?aJm/2AAh2NF1qcJltFDJ65z4c9eSiZvZKu+BihemxDsfgmmr7W9B6aTED2jj?=
+ =?us-ascii?Q?Ta2OJ0hO6acU/DNaqwREUw/DZABdmW24gwchdt77fDY3pUMoWKZboLtcxlZh?=
+ =?us-ascii?Q?RNTZHuKJsJ7+rq1lPRMtFC3SMlnHBzOQSap/G49HVFFFEOBstVdEO02NIAAR?=
+ =?us-ascii?Q?3TiIQrsKz2uJO9EUcrc9tK+qFz1FIQuJyRsJ3rH9QRHFbxuX503u9B333M6s?=
+ =?us-ascii?Q?gT0c91JlBSdCQ0wsiODIrijRmOWoNZGPG99jV/AwmkXfzlxcx/fdhxHjvmsl?=
+ =?us-ascii?Q?7xadmGb3CdZ20zheP5i8vRAG+91Zcr3MtyVGYjTqVi+xrO8QkLyqS6ATrmF0?=
+ =?us-ascii?Q?zZJneZt1N0BhjKAe5tv4KA0uvEq5il0bhfP2ZrsaVTsIFIhuMzelBJ3AhDFg?=
+ =?us-ascii?Q?ZQuFPcT8BtGRmeiqjEYX8RZguRsyP4iw0Au8ltd55YV2LM2Q02uUtLJRbck1?=
+ =?us-ascii?Q?CWOJvxZvLLyU0IVurdxGRoeOW7sMqSrPhj8ODFCa0DZgPfX5E+vyYVE5JcQp?=
+ =?us-ascii?Q?dTnbeLw0qKiGG3CKf8pSwruzidL8/OOHksmCIkULG6/IUyNgPpDbAB5rhrxI?=
+ =?us-ascii?Q?3TYE1C4WGiPYUsQrzOfZy2y0SO/vg8lTQiOUoEW3cgbrXju+tB07vvDhAnoT?=
+ =?us-ascii?Q?NRvnGUxu8Nr4w2vsKrMVspOYmhlUZc9RMkyoyx5ENkiCIGhgBIv7mlb04o7v?=
+ =?us-ascii?Q?DCC3/6qgVE7VZF4CFROahgS13bJeuFnTVIa3wak7K7fMRc35oQJunmo6XP4n?=
+ =?us-ascii?Q?meN63ZK4SlH6b6SoAgXDzndqx9yhhf1olmTJCpniQTfKyWAtj29r/2XCeXPB?=
+ =?us-ascii?Q?Ioiey7pWKoohjfe2HIMwuGNiCx7pqB2x/ryVngtHhbzgAy1QBfkNFlCZfpN4?=
+ =?us-ascii?Q?HKeWzetU537IVAZfm4unFCj9+ZwJGEBjzmyu2zTGLjaUH8AlMoS7tUa0KoeB?=
+ =?us-ascii?Q?iRpI7UMDkDYi4dL0IXm6LHqcf2K4xNiq/Zi8scGJGzfP46kellz1wWb4amUz?=
+ =?us-ascii?Q?HhO4LkESiDE5aD10UNnfaXRvcOA4cMWxvRSnKmPxh2PWDyPDyG7VYAcBLyd1?=
+ =?us-ascii?Q?nDxlZcyB/q3MG/GT4zG7Lriy9+3DoxvSPcu+rnCqhgf+WVnojGU3EkJgXLL3?=
+ =?us-ascii?Q?f3yUwVVe+oFAPEcUYfo2dGaZdc8FCWkragglv270sNh2+zejQgCX+l76u7VC?=
+ =?us-ascii?Q?CrIidwMb6ZzUJO57gFUslhC7FiBWP04lUBEdIVrXQg=3D=3D?=
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WDRHUjcyTVo3NjBlaUZvMEFsRTBaS1FTR1Vlcklpd0RZVEhNZUFQYThkcVBW?=
- =?utf-8?B?NWZMVkhPNFZ4bEFYVU9DZzdndWR1Sjg1RFdLUTlBMUFNdVI3WlVkVmF5clFD?=
- =?utf-8?B?bzQrSnNVOEk1VU1ZaW5XcHdBUGc1cEc5WnBJQlhHQ0s3SElHLzA2WG9rQmJy?=
- =?utf-8?B?Z0N0UEpkeDg0ckV0SmdKcEUyMHNITUhFalZHSy9ma1pRV3ZmcUN2WGJlbzB5?=
- =?utf-8?B?ZHlIT2lPME8yK1doL0VWY1hZWjZxb2llNmtyenY4VEZjanR4SmRrT24xVDA4?=
- =?utf-8?B?UmlydVR0VHhPd29WNmJHT2p5WUFjbGNjT1ZCdlRNVVVBYU1WcjRlYkFLcm1l?=
- =?utf-8?B?MlVXNG9GVFVPQVg3U0JNcnV4Ti85bURaNTI1RFlQVUlNTkMxTEwvL0JYZXlk?=
- =?utf-8?B?cklFcjdBSS9yUVd4ZmJWU3A0TGJ2RjBQZGE3Q0l4NjZQZXV5U0d1LzV2MlpB?=
- =?utf-8?B?UG03dzg3ZDRuMDFzUmhtV3JEUG5HcndKak9TUDZjMHI3OWJ0My9nTDREZlhr?=
- =?utf-8?B?QlQ5aEx3QjFWN2phSzN1RlZwMHkvM1lnekh0WFdYUnd0c1R5RnRBeUUzN2xL?=
- =?utf-8?B?dUd1MHJ5NEE4NWc0V2pCRXlyK0tZUDhMWmdXMFpDZFI2VlFVUVlFMjBFZGNF?=
- =?utf-8?B?VXdXTWJ1VGI1bU1Vd1dmQldlUmsrL0JpZmE2RU9rNGFhbFU4SDhtZUxwdEMy?=
- =?utf-8?B?R08rdTdSSC8wSkxYV0VzaU52YkZPS3AxVDNVbC9ITW5OQy9iTDFaZm01OUVD?=
- =?utf-8?B?bExrdVQ3UVRGS0JGUno1SWFMajlJcjB3VWFFamR1bjlUNzkzVXRLbGRpakdW?=
- =?utf-8?B?TUFtREVydnBBbzR1WjQ3UkZoN2s5R3FWMFZ0TUppSGcwTXNJYzFpbzBaU0FK?=
- =?utf-8?B?NEM1U3F1WklEWHN0elhCM1NxUDBwMnRWVnZDZ09hcXNWbHYvejNmQlUySnV4?=
- =?utf-8?B?TGk2ZXI2RzFXQ2RlQmlNMzlXVkpEbllSb1VwZUpVMCtzOEtmakJZZU9lcU4x?=
- =?utf-8?B?M3R0TEREdldMR2E5RW9raTdVWWtybWhqME82ZThjNmlvaU1Scms2a0FZMkRR?=
- =?utf-8?B?clBxWG1RV3JWYlVITnViRWtmQUVNOFVLT1NHb1BJdStncGdMbURPOFRHVGha?=
- =?utf-8?B?aTFTUm0xVjg2djhpb0pYSzV3N25ZVmNJUEp5NGM5YmtiWG43cHg0TEE1WFBR?=
- =?utf-8?B?cFVSZHpWNFc5L2NFNHk4TGliQjVqR1BOSExKSlpydjF2UnU0ajMwYU51ODBh?=
- =?utf-8?B?R3hjcUMwdjVFdmJENDVnNXN2alJ1M2JTMVkvRktKM09zUW9iY3dLb0RJNUVP?=
- =?utf-8?B?MzByWnFxRHFSYU44T0pzYWxKbXdjZEtTY2I4WXA1eUwxTEk0ZkxjWlhqUEhI?=
- =?utf-8?B?TXpzU0JLVVRXdUhSd3hVNlp5QlF2d3NTa3ErZDllZ291cG9zYlJvcWJ4WDJh?=
- =?utf-8?B?aUhSRGxGN2VVNkFqdVFiTWNvZXFiTUdXWmFTNXc5clJzZWtGUlpJSXVnN0cr?=
- =?utf-8?B?WWJvdVVPaTkwRWU0Y3NoT3ZlbDNBd0RNWk1zNmkwRmNvaEJoSkFYeWRXMkVo?=
- =?utf-8?B?UEVQL0hnajJzOUN2Mm1XSkpCWjBXcHVobGNrRjY1MUlGbVJiK1lObG0zRVNF?=
- =?utf-8?B?NWdRQUNzRnFxMS9BY1hGTjdwdEN3OGJMZW1HN0VoN3MvbG80R3VHYmpYaG9w?=
- =?utf-8?B?dEoxQWhmcjJkdktqbEZNM0lsd3BhVDdDYURPS1hndDViMG9YT2FCdWtxMHhF?=
- =?utf-8?B?dktjK3N0bUNtMlNVdW14RVV2Y1hHZE82L2pBb3lhTEdDa0FEREZzdytNb1RO?=
- =?utf-8?B?U1h3ZjN4TDhBSFczZDI1U2FFMDRqcFI2NkRqcWFjYnV0dXJaSXhiTkZPVXBn?=
- =?utf-8?B?L1RqbzVBMWk4TW5ZblR6SnJrNGNZOFM4bGFBY1NTazVNbWVQY3czSVdhVjAz?=
- =?utf-8?B?SjhsdkJLVG9XTU82aXB0MHV3NC9QMDY2a21xNEJJMEcwZTA3dXZmaWxKNWR6?=
- =?utf-8?B?L3paSVJlYnJrYU0vRGxZYnVVUGZOUTVGbTJTRUNZeFBOQUQyZnNCcVplTE1O?=
- =?utf-8?B?U1FLNkx5OG9mRVNYK29SM21uYXVBdGkxYUc1T29qdlJhYVdFSzQzUzRwU1hv?=
- =?utf-8?B?UXVuemwwWnd0MzFVZW42bElIdW1BTVNoZkFYbVpKaUpwa2lNcXE3UHFnbkJL?=
- =?utf-8?B?UlE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 30c25b66-a470-4ffc-809b-08de17d6b92a
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0LgskjnqjMaZvRiLT1uv+4gRjUOGPQB1tGNF4QsZXH6aMOox1H/MKPhKcQf5?=
+ =?us-ascii?Q?/YOL2qmRzTSxPuKhcStknOpPLQXZTJm2vGcg3Q2g6e9T5i6HOpzy2fxMUw+D?=
+ =?us-ascii?Q?4nUbDEykfXRTUIsOW1IaGyLwrqLIkzY2QK/mODAZHLvDWO6mv5H6GMQycjzl?=
+ =?us-ascii?Q?/L6XzzWnjrnmf8zSs0+9ftWQ0ivIwKa2syU4iX7yZ8w2qLr81PCB8haIFC4e?=
+ =?us-ascii?Q?tY/lLhEDLE3Ac9xh+yBbY5EPWTsHQA4E++Kz0KiNtsX86naVsKrQAu+Z3KCV?=
+ =?us-ascii?Q?AtKQDtj7OBUtsfXHNfFZ5sP9MNEyfD64qWqVpBdo3AE7iR0pslAK93j0yU9p?=
+ =?us-ascii?Q?gTb2YvlAYlBskD+WxbLhrJcXJgJUFM536NOiFdFo7d79+TK7Q2r5KVNdcbuu?=
+ =?us-ascii?Q?hv+JYq0kKxsdD9UV6CCCsX4JOht2eOWx1kRjFCu6aT/3lJLZlKXlxRnK91Kh?=
+ =?us-ascii?Q?RTkHTmDMKdqCb7hd7NRwa5k34oF/13DJtY5iiURnDmE4ZypmGen0a18gASUf?=
+ =?us-ascii?Q?WppDS+LAg6yFjP5jhueWD4Ge8mtn8w98R+Aqj2ZpjztpHNftwP6Tu8oitjVw?=
+ =?us-ascii?Q?HOhv2NTdM/79eTzHx8L75dnzpHRdSCgYqN5CgSgjaDpQw4NlPiYfJySBjHpE?=
+ =?us-ascii?Q?z3CnIpAN+e04ZSb2pgz7vXs/vOKmlU9H6lthYhRoE3SD1gepma6Hu0uIctYZ?=
+ =?us-ascii?Q?k33BZVFMfeWjo/fWUwYU5ONmQAU5UEjYq60WYJWLIXy0E1cTNm7rprBnSf+i?=
+ =?us-ascii?Q?Yzlx8Hs17L2Ubnk5cg/Fo3Afdur7eziSKOGIa/erH1TmZ9XA4uP78mnEpvxs?=
+ =?us-ascii?Q?gSvq6VQ/9uj3NUWyCG9Jy1Q8FevxODSO3U2SqPEJ7dZE7RV40gNsRDWZ3Ddk?=
+ =?us-ascii?Q?qBG+qgT9gi3SpsTraBshbTJqgG5UPMGSgOg6KBaj5TJ37f0uB5o7kWxlcZlf?=
+ =?us-ascii?Q?TXCXmbDPZ4MTV5ix1162qLrJdreq4h5OnXNXXuoSyNnXNig7ELifIF9/1NdH?=
+ =?us-ascii?Q?xEd42RCeMjfNF56Ca4WkM6KUxl5eD6qiGxBR+8qLnh7kIUtdBrqiW999KnCA?=
+ =?us-ascii?Q?I9iCjqsC1/X+OVzFhKz0WgJfgBjy+pK2wpLU1MSCpIFJfkf3nyW0OdacrQ27?=
+ =?us-ascii?Q?OeSN3P3lSXRIKlRNfxphdJzEgmXHq3XMdAOzUbvnHMf1m47ACUvSdMzxaxUc?=
+ =?us-ascii?Q?auQleijjwT4kA6FIfpS5Lk66UAz9GGrdfELlZAsY0MZKQR91VtVvV/Wn5gjK?=
+ =?us-ascii?Q?lEimsZw/h2/dffbZJja42IEU1GNrj4rP2eLN0m0/FXmLXjZYg+hzb0swezWX?=
+ =?us-ascii?Q?rF0=3D?=
+X-OriginatorOrg: sct-15-20-7719-20-msonline-outlook-a8de4.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e443a37-d2b1-42e2-e4c8-08de17d639db
+X-MS-Exchange-CrossTenant-AuthSource: YT2P288MB0091.CANP288.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 17:06:53.2053 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 17:03:19.8763 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fdzsP3MSBKQVV8hE1yj+lGNnWiz21v5I06JJc05pTdLpgWQhbgYz3sf8n7+shEl3WXF2urHDk8jjHV+uSAJUnb4OBBORa2CajBMFzugDfiI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10112
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: YT6P288MB0754
+X-Mailman-Approved-At: Thu, 30 Oct 2025 18:36:24 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -189,63 +144,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When spl boot device list has multiple FAT devices, any previousely
+registered FAT device should be deregistered before registering
+next FAT boot device, otherwise the function may not attempt boot
+from next FAT device.One of the situations where this issue can be
+observed is when the boot device list has two FAT partitions of a
+memory device and if booting fails on first partition (because of
+file or partition related errors), boot from next partition actually
+gets attempted on previous boot device only, as the previous device
+has remained marked as registered. Call the function that invalidates
+cached boot device in case of failure in booting from current FAT
+boot device.
 
+Signed-off-by: Prasad Kale <prasad.kale@live.com>
+Cc: Dan Murphy <dmurphy@ti.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+---
 
-On 10/30/25 11:21 AM, Quentin Schulz wrote:
-> Hi Tom.
-> 
-> On 10/29/25 11:20 PM, Tom Rini wrote:
->> On Wed, Oct 29, 2025 at 12:28:53PM +0100, Quentin Schulz wrote:
->>
->>> From: Quentin Schulz <quentin.schulz@cherry.de>
->>>
->>> One could very well want to verify signed files which aren't a FIT
->>> image (e.g. via rsa_verify_hash() when $(PHASE_)RSA_VERIFY_WITH_PKEY=y)
->>> but that is currently only possible if the FIT_SIGNATURE symbol is
->>> enabled for the stage this signed file needs to be verified.
->>>
->>> While we could remove the dependency on FIT_SIGNATURE and find a better
->>> name for the symbol, let's simply always build support for PSS padding
->>> when RSA is enabled, like we currently do for pkcs-1.5 padding.
->>>
->>> When $(PHASE_)RSA_VERIFY is enabled on PX30 Ringneck, the difference is
->>> an additional 904B for the SPL (spl/u-boot-spl.bin) and 1000B for U-Boot
->>> proper (u-boot-nodtb.bin).
->>>
->>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->>> ---
->>> Another option is to remove the FIT_SIGNATURE dependency. For context, I
->>> have a system where U-Boot proper verifies the signature of a few
->>> binaries thanks to rsa_verify_hash() (see CONFIG_RSA_VERIFY_WITH_PKEY)
->>> with an embedded public key. We do not use FIT images in proper and I
->>> would like to avoid building code we don't use to limit the attack
->>> surface, so I was looking at ways to remove the FIT support in proper
->>> and this dependency makes it impossible as we use PSS padding.
->>>
->>> The cost of always building all RSA paddings may be too high though, I
->>> don't know where we should draw the line.
->>
->> I think the cost of ~900 bytes in SPL for 120 platforms is on the high
->> side. How about a different symbol? Or would you want this enabled by
-> 
-> Yeah that was my assumption as well.
-> 
-> I think will go with renaming the symbol to RSASSA_PSS (and 
-> SPL_RSASSA_PSS) and only make it depend on RSA (and SPL_RSA), then move 
-> the symbol to lib/rsa/Kconfig.
-> 
-> How does that sound?
-> 
-> I'm not sure to understand why we made PSS padding an option for the 
-> tools though... I'm thinking about removing the TOOLS_RSASSA_PSS symbol 
+ common/spl/spl_fat.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Answering myself: the option is actually `def_bool y` so always built 
-in. It's there so that CONFIG_IS_ENABLED(FIT_RSASSA_PSS) can be resolved 
-when building for tools.
+diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+index e9ee5487d6e..8b1d01cff4b 100644
+--- a/common/spl/spl_fat.c
++++ b/common/spl/spl_fat.c
+@@ -96,9 +96,11 @@ int spl_load_image_fat(struct spl_image_info *spl_image,
+ 	err = spl_load(spl_image, bootdev, &load, size, 0);
+ 
+ end:
+-	if (err < 0)
++	if (err < 0) {
++		spl_fat_force_reregister();
+ 		printf("%s: error reading image %s, err - %d\n",
+ 		       __func__, filename, err);
++	}
+ 
+ 	return err;
+ }
+-- 
+2.43.0
 
-Meanwhile, I'm looking into getting rid of FIT support in proper but 
-still have it in SPL, but that I'm hitting issues with symbols all 
-around. Let's see what I can do :)
-
-Cheers,
-Quentin
+base-commit: e34d01d23e45e007368685ffa6dfd674b6dd7b17
+branch: master
