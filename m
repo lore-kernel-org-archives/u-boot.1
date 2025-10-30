@@ -4,185 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB8DCCF9F8
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 07:44:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D09ACCF9F8
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 07:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD3FF83914;
-	Thu, 30 Oct 2025 08:44:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id D27C2838E7;
+	Thu, 30 Oct 2025 08:53:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="V8wQIzSr";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QKaLzext";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B14B83946; Thu, 30 Oct 2025 08:44:31 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id 260A7838F8; Thu, 30 Oct 2025 08:53:34 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61504838E7
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 08:44:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A6F7838D7
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 08:53:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=33980d621d=yannick.fertre@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 59U7VawG1099199; Thu, 30 Oct 2025 08:44:21 +0100
-Received: from pa4pr04cu001.outbound.protection.outlook.com
- (mail-francecentralazon11013009.outbound.protection.outlook.com
- [40.107.162.9])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4a3mwa310m-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 30 Oct 2025 08:44:21 +0100 (CET)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zUopODYoth8ohEoSgbkYcmxCGhKOnPMYB+GSgjZabMAzxh/n/4CM1m4Je9p1YqdWpOIljSmJa8ELy1Kzh70NUp6Ysiwg5uj8+a7nfZNFLVdoHZYtsAznj4pBRjHnrHLt7aQkl7QfXkR5IhI+KK13UnvzRayUHV2YD2e7NFMAkus3R9hvQ4y+ax6n/LTmHSXCperM5YLVXhYjZkPAgfgonmUJhZAApiSPF+jUxnNSAccXstW7W7uARbFp0yIcFSwrOE37Ydy7iLouxFS96iDKaHbxVF1NrnHUd0rFZKy7oNOW423uHsSBdIxIZlBV3vDzRTPDPE2mVJurJolI8ZRszQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1Z33fBKYUkatRJQsN4mKhuAi670uWDi4nLG8O2wM8oo=;
- b=w0/S10o74bKSHbHCvj0s3Ur8cOJFCXrdLUhkMYSt8jT0vnYiB01RzUbNZ7sg7lDb6odWbrRGeBk5esJuHIWQpcgh7gRQNxSIP4WAV4kXTzG7RbBaBS2Z8EAHEIBY3bl9REOtLftM50TXYzhZ3LSz0ofcCvCkOZvfdLejvh0jsvLsD3NC3lmEAqzbHo7q3n++Rpi3A901eM5CgscjlNYbZBMXy7HmMpPLhNm+AqTmpstaiXNGQW5v6USlJQghgNOwgEfzLu/7ebtQYwG1PFO1Qe+/KLsi/kh73p+9Lh1V4PbXzMMeYOiEYVnGiTdzvOhLyS2TlMmCcwAzGAQSmRC4jw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.44) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1Z33fBKYUkatRJQsN4mKhuAi670uWDi4nLG8O2wM8oo=;
- b=V8wQIzSrAij/xwZqsVQ6sTT9ZaGT+L2WAvX5N3JfEYLA5gWndoytieAW7tDuEqzk6spZ1oinn7gkrdENeb4zxuykWpIi0h1abRflDcYHr4WOcFtHUFrOGA29XMj51OKtRxnHODucui0tRG80J+r4Heac9qHv07HmOXWYfbc8eEkmv15XkQDag45fp3Gcc3P16ir2ZQbW6M/kIYVb8H+dkk5yJOdxcnsDAJd9vD+H7G7vDDmN8XRkKkrA/cPsMxR49rPqsLkuVqUN51GRDzCZCGSVb0bv0/I/jsePkqdMcyEcY3fpaM7T6Xsv0s0buwqWsLFowdmFalWSxaIbgMa0pw==
-Received: from DU2PR04CA0066.eurprd04.prod.outlook.com (2603:10a6:10:232::11)
- by AM7PR10MB3720.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:13e::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Thu, 30 Oct
- 2025 07:44:18 +0000
-Received: from DU6PEPF0000B61D.eurprd02.prod.outlook.com
- (2603:10a6:10:232:cafe::9) by DU2PR04CA0066.outlook.office365.com
- (2603:10a6:10:232::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.13 via Frontend Transport; Thu,
- 30 Oct 2025 07:44:16 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.44)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.44 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.44; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.44) by
- DU6PEPF0000B61D.mail.protection.outlook.com (10.167.8.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Thu, 30 Oct 2025 07:44:17 +0000
-Received: from SHFDAG1NODE3.st.com (10.75.129.71) by smtpO365.st.com
- (10.250.44.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 30 Oct
- 2025 08:36:49 +0100
-Received: from [10.252.23.232] (10.252.23.232) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 30 Oct
- 2025 08:44:14 +0100
-Message-ID: <92fe2431-deae-4d78-947d-dbc0fbf58aeb@foss.st.com>
-Date: Thu, 30 Oct 2025 08:44:13 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1761810807; x=1762415607; i=xypron.glpk@gmx.de;
+ bh=DbNXy9zpQ5RAhtQtnkfhE9denM+63x99Wtz1LSTqVaU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=QKaLzextoWT2ULOy3vs+JQ9YPNtUJx2O2dhcwnkOTT6HH1BylEaq5Z9avdpQOrno
+ QNU6AwnPVgLGQrn4TF1pmMb/hruyTuVskn+Z6BMaDkpANCC552AMAmZh61eE9tgbm
+ ifPCtB3oZxYhYQhonDl3hL9DoiZdVtxvyxwVHriegkoQety44GrPD/Dh18ZaEncYj
+ Gaoh8cKj1jwpURi5Hzn4Y63bsdnqkk58zZDWaMuHifU6IsJSbcU99BpYErL/le3CL
+ NRXZlEp7WAaiuHdFLncLLMXUepRXKxokcb1iTCY4OJEIpDEEWLQLeo7kOajdkxHro
+ eaEkI1/UX2hcma5wdw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.25.161.182] ([93.94.208.154]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MgNct-1vuZFB1gfH-00gZMV; Thu, 30
+ Oct 2025 08:53:27 +0100
+Message-ID: <2f1605c2-c23c-41cf-b9e2-78c29d5475dd@gmx.de>
+Date: Thu, 30 Oct 2025 08:53:11 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 7/7] configs: stm32mp25: enable LVDS display support
-To: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, Tom Rini
- <trini@konsulko.com>, Kamil Lulko <kamil.lulko@gmail.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Dillon Min <dillon.minfei@gmail.com>,
- "Patrick Delaunay" <patrick.delaunay@foss.st.com>, Anatolij Gustschin
- <ag.dev.uboot@gmail.com>, Simon Glass <sjg@chromium.org>, Sumit Garg
- <sumit.garg@kernel.org>, Philippe Cornu <philippe.cornu@foss.st.com>
-CC: <u-boot@lists.denx.de>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250904-master-v3-0-b42847884974@foss.st.com>
- <20250904-master-v3-7-b42847884974@foss.st.com>
+Subject: Re: [PATCH v1 1/3] ram: starfive: drop references to 16GB memory size
+To: E Shattow <e@freeshell.de>
+Cc: u-boot@lists.denx.de, Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Leo Liang <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20251030062354.35413-1-e@freeshell.de>
+ <20251030062354.35413-2-e@freeshell.de>
 Content-Language: en-US
-From: Yannick FERTRE <yannick.fertre@foss.st.com>
-In-Reply-To: <20250904-master-v3-7-b42847884974@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.252.23.232]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU6PEPF0000B61D:EE_|AM7PR10MB3720:EE_
-X-MS-Office365-Filtering-Correlation-Id: 58fd8ec8-0a06-42a9-5720-08de1788219b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026|921020; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VXkrdEVla1k4Ykp0dW5lMDYzbm5kUFQzUnVRUGVPLzNJVmlDOVpncDliTWVM?=
- =?utf-8?B?QzE5MTlhcCtPQllGZXZibDdxZFg1VG1vWnpSblpmMXFTRTJRZlBtdnAxbDM3?=
- =?utf-8?B?a2dHNWs1TXZmQzF3UVBEQnpnSmUvd3hRT3YxQ0txOTVzZmFodmdUblpTQTBi?=
- =?utf-8?B?alp0YXpLclpIZDdwSXBoQ0VDemhSWkhxaExvREp1ZU9pTUhoTFZBMHpLVmpp?=
- =?utf-8?B?bWVjVGRiSFJGY1ZTL0RyVG9MUUxMMTJxQXJvcy9Qb2htRmZlZ3lxVThJNmhv?=
- =?utf-8?B?d1B6djdnVmpTSzlLTGlIbzFmWDF2T29MRHhqZVhGUU9TSjBpeTl5MU90UW81?=
- =?utf-8?B?ZExEYlBmQjd2Uzcyb09jSldTMy82UmxHSXpmNTJkcWtDYmhIR2JGbXd3UzJo?=
- =?utf-8?B?dTZrNVhrbHkxczI5a2RJS3lUbVdBbDlydEt2eFpoS1hBeFFoRmVnMkVzN2tD?=
- =?utf-8?B?TnJCSzUvQ09pUklnMFVEWDZsNnl3UDdTMk9HbGtlTHpsYWFCa3BmQk5WMWpT?=
- =?utf-8?B?STNKUTZqQ1QwYXhjbGE3WEtvQTRXakFBUE54MDFGY1VMblhWVitsUS9qRlVU?=
- =?utf-8?B?cU05eVNFZStQRDVXR3FON2VwMklVWlhLNUdWT0JYTUxHNDZ2TUk3djZ6VHBU?=
- =?utf-8?B?d0N5aklvcWZ5SXJsTmZrK0NlOEM5Vzg1NTVLQUpabExDUS9RZ0R1WkVFK1Ey?=
- =?utf-8?B?UVNLSktPVmkxUEtuVHFUSzM4WWp6aCswekIvdUUycmo4VUk3dVlKVndoSXFN?=
- =?utf-8?B?TUtlU3p2aURTWCtjNXgxaExnNjNDYS8zRGxiQWx6bmE2dGVrMGFRTjc2bndp?=
- =?utf-8?B?a0hmZjJCZ2hydVBxMlhQZXpIek5lT3JlWXJ6TFI2Z3Z3cmhVQTFQWFJ4Y1lR?=
- =?utf-8?B?Q3owYk1VUHd4cGlTcUlZUHVGQzhkZU1lOE9QMjN6UUZTQTQ5ZGhvdmRxMEhj?=
- =?utf-8?B?SUY3TXR3cnozbWNsNXRuUkFFeUNXaURPVThWRHFDM0NkelA4bnl4NmlBbkh2?=
- =?utf-8?B?Yy84aU4ySEhyY24xbEJiOElyaWVtczBOTVhFZDZzNWNCUGpVZ0lBQkZnd2lF?=
- =?utf-8?B?dVQrejUyUUxRb1A1Nml1ZDk5ZWtwTzBwTHRYRzV3dmYxT3JabUhVaUJKYXZN?=
- =?utf-8?B?S0I5cmlPMk4yS2hjTDRQN2tuTEhYM3VhNUErNFBReFBkQXVBc3lFa2h5TG5V?=
- =?utf-8?B?bG1Kakw0bHk2QXRodURjQkdBT3g3Tjc4aWJjNGZJbi9WRGFISTVsd3NLTjdZ?=
- =?utf-8?B?WWVmcjQ4ZXBzK2ZxSWdjWkZVRzVPbk01UnJUbEU0OHFTemJSN1dVNmxvajJH?=
- =?utf-8?B?YWIwKzZ5aGxacTNORlRWK3NDeC9ITVQ3WlQybzNjNVZtbTRoYjJoQ2dSbmpy?=
- =?utf-8?B?MnVCT29pcUl4Y3pIaTR3cmkyT1VhL0Z6V3d5VzdCOUtzZEJ1OGdmeUNzWW9U?=
- =?utf-8?B?V1IrZi9MQ1hwUnBlbFBJa2VtZkp4ODN2YitYRndHdHBuUzNmU2RtQ2RVVld5?=
- =?utf-8?B?YWIyS0xwM3NRbmV1Q0xDOVR3SkwyNzZ6UFpwTmZrYUtPUnN0Q3ZVZm9tcUll?=
- =?utf-8?B?cGhlK2phTXJ5dDBkbmFYWGczZzhzNXA0cWU3MEtYYmdpTDQ5UU1EVE9QTy9D?=
- =?utf-8?B?SCtKaTFFZWZaam9CQnNLbWxWemlKa1pGbnJwbUN0clBESEpvTnJjdjNxaFgw?=
- =?utf-8?B?WXhhcGxvem1yRjRuS2NzWC9VcHppQ3Z4aE43Z25jRStvSWNwWStiQk9Qaklw?=
- =?utf-8?B?UUpSaEkycldTd25xdzRqQTJnbS9aSXRYZkI3aFBiUnZSVExkUEpndU1HVCth?=
- =?utf-8?B?TFRBcmFTcUc4N056Y29LaEs3U0tGOVhsSzk0QzlsbjZ0dS9UbGJjejZtZytQ?=
- =?utf-8?B?b0c3TlFJZGR4QkhSR3NhTklNYjcrNE93TFZ0TkRkeEVITzQxUVdEWG4vR2sv?=
- =?utf-8?B?d29kSkEvMzlva1Y4Z3VXUDVMNWVKL3pNNnk5eDVvcUJrMG9QbzhuWWk5L2hD?=
- =?utf-8?B?VzJFNTBsUUt5aDJ3RGlMT2lya3FUVGVIWEJlY2huK0hmYzhPWVgxdEF3UFdR?=
- =?utf-8?B?VVpWRkR2dW9UaUswa0dzN1d1bER6VFNhNlVqM2pXMHFXL0NiT1FscTFndXh3?=
- =?utf-8?Q?lE33gfITYzfwY6VR7dxQVo0Nf?=
-X-Forefront-Antispam-Report: CIP:164.130.1.44; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026)(921020); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 07:44:17.8984 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 58fd8ec8-0a06-42a9-5720-08de1788219b
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.44];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF0000B61D.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3720
-X-Proofpoint-ORIG-GUID: lww9yhoUR5Jmi15PnTrmZ2E8L6IdDbQi
-X-Proofpoint-GUID: lww9yhoUR5Jmi15PnTrmZ2E8L6IdDbQi
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMwMDA2MSBTYWx0ZWRfX8jKVTkcM6shX
- yPTUr0mcfNMh4szYZjDbErjuxqgj9Zf5+L630fkEoCO0PGBL5T2vmMHF0mAxdLm22zXZlc8rXQR
- Cke8s7LpwkjgSGjmRmVlZ8SF3tG4fLriU0xFMjYj/msrEDGE4NXqlwRthFAjbfH5474cKVud9AI
- BGlAxtzKGzD/5bV3MD+xRX91IeQoNC5cwl1ekCd2wEBiKSNw/whfik6sKnZ+qSLtpbp1p+4fJvW
- CCzgowE6owzH0C1vrFVlgNRAH1TAYoq+zmEMWZBTl0X9uIkCjMFKbt1OpNHH3NuEQ+/vPROjTpP
- L5ymj8+Q7GFLAC3VzPkmfRenhiFpNfFJEsAkPnPhWOK8HadiYW/kmw40+W4J8YGqRXYPMh8Lm/Q
- heGZdv1434t7Pd7haetgLa3H2j9A7g==
-X-Authority-Analysis: v=2.4 cv=DP2CIiNb c=1 sm=1 tr=0 ts=69031755 cx=c_pps
- a=LGnPzPuKiaZPXrRM6phl+Q==:117 a=Tm9wYGWyy1fMlzdxM1lUeQ==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=ttam_Flv6DUA:10 a=IkcTkHD0fZMA:10
- a=x6icFKpwvdMA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=8b9GpE9nAAAA:8 a=mEGgFpeMVL09x6plPeYA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=T3LWEMljR5ZiDmsYVIUa:22
- a=cPQSjfK2_nFv0Q5t_7PE:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-10-30_02,2025-10-29_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- lowpriorityscore=0 priorityscore=1501 adultscore=0 bulkscore=0 malwarescore=0
- phishscore=0 spamscore=0 suspectscore=0 clxscore=1015 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2510300061
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251030062354.35413-2-e@freeshell.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:JaQ3cfFvNsuryuAThtfOLW6Qhrp4AphJYY8eey/7/gD6r61ZZW3
+ m/0fT6wHG5Cp/v/j4nyc5TkRudbDJhfek0kFQZnxMCa4/DVjLXediB3/iYKSbgAH0QfaMwk
+ 2SkB8IOQUql+tex9y+Oc+u5QCE2vMAo9gy9uEQZ+bGqOf0PmPU4vgDpkiTLfV3NvXQOUatu
+ 8C3Qp7tBAipAu75pXXPYg==
+UI-OutboundReport: notjunk:1;M01:P0:tkri7PpzZjU=;mMtTNX0kULZSqbncbaZEk8nxmXo
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -199,34 +151,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raphael,
-
-Thanks for the patch.
-
-Acked-by: Yannick Fertre<yannick.fertre@foss.st.com>
-
-Le 04/09/2025 à 14:53, Raphael Gallais-Pou a écrit :
-> Compile VIDEO_STM32 and VIDEO_STM32_LVDS by default.
->
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Reviewed-by: Yannick Fertre <yannick.fertre@foss.st.com>
-> Signed-off-by: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
+On 10/30/25 07:23, E Shattow wrote:
+> 16GB memory size is not addressable on StarFive JH-7110 SoC because the
+> DRAM uncached alias begins at +8GB offset from start of DRAM. The logic
+> for 16GB memory size is a fall-through to the default for an unknown siz=
+e.
+> Let's drop this unnecessary 16GB memory size and rely on the case defaul=
+t.
+>=20
+> Signed-off-by: E Shattow <e@freeshell.de>
 > ---
->   configs/stm32mp25_defconfig | 3 +++
->   1 file changed, 3 insertions(+)
->
-> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-> index 2b02cd86d6134497151e398eb54230f08d4e6272..e84df4a2a8f52890376f7689b01d3dcab5079ed9 100644
-> --- a/configs/stm32mp25_defconfig
-> +++ b/configs/stm32mp25_defconfig
-> @@ -78,6 +78,9 @@ CONFIG_SERIAL_RX_BUFFER=y
->   CONFIG_SPI=y
->   CONFIG_DM_SPI=y
->   # CONFIG_OPTEE_TA_AVB is not set
-> +CONFIG_VIDEO=y
-> +CONFIG_VIDEO_STM32=y
-> +CONFIG_VIDEO_STM32_LVDS=y
->   CONFIG_WDT=y
->   CONFIG_WDT_STM32MP=y
->   CONFIG_WDT_ARM_SMC=y
->
+>   drivers/ram/starfive/ddrcsr_boot.c  | 3 ---
+>   drivers/ram/starfive/ddrphy_start.c | 1 -
+>   drivers/ram/starfive/starfive_ddr.c | 1 -
+>   drivers/ram/starfive/starfive_ddr.h | 1 -
+>   4 files changed, 6 deletions(-)
+>=20
+> diff --git a/drivers/ram/starfive/ddrcsr_boot.c b/drivers/ram/starfive/d=
+drcsr_boot.c
+> index 6764b3ed5cc..ece6f5aae94 100644
+> --- a/drivers/ram/starfive/ddrcsr_boot.c
+> +++ b/drivers/ram/starfive/ddrcsr_boot.c
+> @@ -231,7 +231,6 @@ void ddrcsr_boot(u32 *csrreg, u32 *secreg, u32 *phyr=
+eg, enum ddr_size_t size)
+>   		mask =3D REG8G;
+>   		break;
+>  =20
+> -	case DDR_SIZE_16G:
+>   	default:
+>   		return;
+>   	};
+> @@ -260,7 +259,6 @@ void ddrcsr_boot(u32 *csrreg, u32 *secreg, u32 *phyr=
+eg, enum ddr_size_t size)
+>   		out_le32(csrreg + REGOFFSET(0x10), 0x3c);
+>   		break;
+>  =20
+> -	case DDR_SIZE_16G:
+>   	default:
+>   		break;
+>   	};
+> @@ -286,7 +284,6 @@ void ddrcsr_boot(u32 *csrreg, u32 *secreg, u32 *phyr=
+eg, enum ddr_size_t size)
+>   		break;
+>  =20
+>   	case DDR_SIZE_2G:
+
+Why don't we drop the line above? It is just falling through to default.
+
+Best regards
+
+Heinrich
+
+> -	case DDR_SIZE_16G:
+>   	default:
+>   		break;
+>   	};
+> diff --git a/drivers/ram/starfive/ddrphy_start.c b/drivers/ram/starfive/=
+ddrphy_start.c
+> index efe3f8a181a..f26bc9ccaad 100644
+> --- a/drivers/ram/starfive/ddrphy_start.c
+> +++ b/drivers/ram/starfive/ddrphy_start.c
+> @@ -267,7 +267,6 @@ void ddr_phy_start(u32 *phyreg, enum ddr_size_t size=
+)
+>   		mask =3D REG8G;
+>   		break;
+>  =20
+> -	case DDR_SIZE_16G:
+>   	default:
+>   		return;
+>   	};
+> diff --git a/drivers/ram/starfive/starfive_ddr.c b/drivers/ram/starfive/=
+starfive_ddr.c
+> index b31ed3bcf61..9e902f03ee9 100644
+> --- a/drivers/ram/starfive/starfive_ddr.c
+> +++ b/drivers/ram/starfive/starfive_ddr.c
+> @@ -47,7 +47,6 @@ static int starfive_ddr_setup(struct udevice *dev, str=
+uct starfive_ddr_priv *pri
+>   		size =3D DDR_SIZE_8G;
+>   		break;
+>  =20
+> -	case 0x400000000:
+>   	default:
+>   		pr_err("unsupport size %lx\n", priv->info.size);
+>   		return -EINVAL;
+> diff --git a/drivers/ram/starfive/starfive_ddr.h b/drivers/ram/starfive/=
+starfive_ddr.h
+> index c29d26b510c..3ab0b0e8fa6 100644
+> --- a/drivers/ram/starfive/starfive_ddr.h
+> +++ b/drivers/ram/starfive/starfive_ddr.h
+> @@ -48,7 +48,6 @@ enum ddr_size_t {
+>   	DDR_SIZE_2G,
+>   	DDR_SIZE_4G,
+>   	DDR_SIZE_8G,
+> -	DDR_SIZE_16G,
+>   };
+>  =20
+>   void ddr_phy_train(u32 *phyreg);
+
