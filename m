@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A03FACCF9F8
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 18:09:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E06CCF9F8
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 18:12:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C676836D1;
-	Thu, 30 Oct 2025 19:09:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BBE1836D1;
+	Thu, 30 Oct 2025 19:12:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sg9Kl0lJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C6Q5xFs6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31A87836F0; Thu, 30 Oct 2025 19:09:47 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id AD7E483849; Thu, 30 Oct 2025 19:12:18 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 478EA83677
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 19:09:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53BDD83677
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 19:12:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-3d1bc63d5f0so838788fac.0
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 11:09:44 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-290cd62acc3so17822605ad.2
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 11:12:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761847783; x=1762452583; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n4Vz5rw+AxyfST2uKkJa7BNpjBpbrAF0d7CMZN18DUU=;
- b=sg9Kl0lJ53M6Y1FUiA2hMwZvtrRlru5S0qfQ/8h0DCcV+UYRH+25dPq7s3HWSxWMHJ
- e6LSB7vDVu/WMks/IR7OkIKt9XX4lSTDHpdh2VhicA1jILP/tCMCQVKUd963Arruk2gg
- OUn3hfsb0NhFzPxBoEoAd6KU/0j3cVIrrr2kM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761847783; x=1762452583;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1761847935; x=1762452735; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n4Vz5rw+AxyfST2uKkJa7BNpjBpbrAF0d7CMZN18DUU=;
- b=FZLJ2boYUt0VHmKGX6YqcE+gmCRPJSND4bUg/iVp2qufyGk5/N58lydtZScM9bVI8s
- 1shtcZ7fRIStw/G3vXrVozz0PbPVuC0ygiNZQ155gmKjVqaa4scnIVK4S/bsfPk6m/EE
- HHM0GJEKVtN7E177M347e7byu4NikV6DRkFjG/NzWlEAMBbUZCssJo4/iWbNFMulgUeW
- K3YV0y0jYQusDdzVfi5ZUh7tM1Kbw7jNOyUR/SZ+CbvPP/7fmx/Vn/iUlg/A8tZCdpaB
- 4JSNeRt03S47dfID4IAbPGccGjWnvj2M+H9LUJslvHAfMk8STvwhi2ByzUGGwshhm+or
- UpRA==
-X-Gm-Message-State: AOJu0YziA/yp9lGt2BKgt2nJCIr3RhkZYSIqNujV8A9qPt+/71miRVwX
- KcpdC6IO5bnz3KJFMdMzUwyfwCKaBid5ay8to7u8QdnT9hdhSqbDjMEOfiN8dkOFqIHPvL+dl8c
- hVEF+R1yBpw==
-X-Gm-Gg: ASbGncvQdV3cFDcPhnHlu7Ig+ubRrTHQS8s2L3qLKsf5u5nKk4IwtvEo3MQk1ayfX2L
- 9S1jIB+hxQE+krR/pwXci8NjIWRPISznYOHKG61wbIYrf12APi5xGNovpdcesSO77eXfZrAxCSJ
- 0G+pEMAiHcYLBMWmHAZ2EKSUFU0xoox0ULg75NA3ctaykiza6crrba8HDFCekLJn/22VHfJXBNM
- ro3AjHJwUN6Q8JbQUzFMZUvqnshkzTSzwCKr6SvAbvI1UAb0Bv/W3ztv5GtipJvL8YRkls9/ctk
- 1RPjtEcPNt5UGp2VB7NH+eVaBx/Aou6lTQUK6qiWseZ3REDtbQOcWGxc9DG/neFsc0NvOfFEyJI
- Lm9yBA+gqbnJpRJ4g2L860DfPyreDW6eEPVRFYIE1dqEurBsNjU/HsV92+6CPgnywFf7MeXtosG
- Uri8aJxgrXUVBcI609kUOVcMnxGM7GgrlWyOuV+ehrb3Aib+kYQA==
-X-Google-Smtp-Source: AGHT+IF+rdReuI/3FOC1QPhvfxtcx3mdgywQgVEax0SZ02oH/L2DNfzqQt0TyTmQ7XC/xaEPKkS5Sg==
-X-Received: by 2002:a05:6871:c69b:b0:3c9:8689:35d1 with SMTP id
- 586e51a60fabf-3dacbfabbf4mr317698fac.32.1761847783016; 
- Thu, 30 Oct 2025 11:09:43 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3d1e395cbf1sm6113046fac.20.2025.10.30.11.09.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Oct 2025 11:09:42 -0700 (PDT)
-Date: Thu, 30 Oct 2025 12:09:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Brian Sune <briansune@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1] Cyclone V Board handsoff script
-Message-ID: <20251030180940.GY6688@bill-the-cat>
-References: <20251030003359.1023-1-briansune@gmail.com>
+ bh=KiFlgW0IFNO+kY/ot260Ki4NzPW1UN2qVXlRnUyRri0=;
+ b=C6Q5xFs60emHFCy3zljv1S0PXz1ZQpE4u4ufVgXSGc1rCS0GU8Ouk8WKSsFsPUa62q
+ IKA8R3m+l26IaMKLC+dPZoyyqJMKDnt0omCU8EqAPq7FNoQMSAl+/9/tVSY8FGHx2BDq
+ dRKpLoGK3T92ZJP5Ol+I+vlfQDsVrT2Vg5Egm5W6OkHtEN1tO4P1LbhUvpoRe9mGSXHm
+ gstdQhId0BDRXwRJIubI9R33+qIRDJH/mJGOk4JpwjdtZ2tVHu+x3OAVGv6g2uqlFVVw
+ hcNuOr0l8SpTrvbgNvu8vjXDY/o4BkU3eZjlLSd0JfX+dxtOBD/ekMeEaRbD0QNitaFO
+ ZEfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761847935; x=1762452735;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=KiFlgW0IFNO+kY/ot260Ki4NzPW1UN2qVXlRnUyRri0=;
+ b=OMsLy9JgMTnloMZWaNDTVewyWYNFy2ls3waaE30coWgLNqSFehQCGevplH0ruciVmU
+ v9v+q190AmGOQNshxXeVFtp92tVKIjSrjKj2kR9SgHRqZy62Tag7YgAnMrNj925yHwy6
+ MNWGofkxBlrpqu6dpi4OS3Dlzat/E+6DsLjROz08HEFmhxIvs/nYRN+zwf2tiPzZJ3fe
+ BrgVSYHYnrUI0LxlGzFSt/5y5smPrT/vOotj+U6Nf6TYoxYBZ4GipabIkXfxmfo6E0Bu
+ A/R26f9DoCWsqmnNSvOx0EtAsKpH9TeY6xMek0GbylMt3S/BQXUmiUA4b2wfTm8x7AAt
+ rNzQ==
+X-Gm-Message-State: AOJu0Yyy9tQsEgw/QZwoQcTFB2KEIftgiJ+zZTlJSU9jQWQ4+iIlJ2r3
+ doeeltjePp3HDn2wDx5p0949pjsHCpAy8wRrWF+iFjP1eAUgCJ8QDZV4
+X-Gm-Gg: ASbGnctfL/bpTCdtgRAwva9OMwXbJeyqsp5nVModcRsYZcbd2+d03eCesG2KzdkKGca
+ W/TFSEn6KZmy+Yu5fweQOd1+cERSVmTpev9DBNRvA2t4a9DqhnIiC71v4gJmdCTYpQHbpZpIxzA
+ RdD0Ds/y7HqwyU7tQkyBZjiCJgZnRuooSODiIdcyTNQF/dg1xe/nr8qDWVz9ueW2TjXihrnxgWT
+ rn7UPk9Kw23BTjN0dt4Klajeqn4Z1ioqQx6+LO//mog8mca68Z4BuyjVSLT4JtgwlZKzlPcrPpt
+ JGtzvVP5kuUi5qtwdtyciEu3JHdMdUHANPCJW5EiZhtK5rsmk+aXRp9EErOdLOmAdgMc3JBkNoR
+ wbcn01E3s+lso0JV4OlFDkXi1r5IExG5Ky/KSa6Z59za90/1d3eq3
+X-Google-Smtp-Source: AGHT+IGW6VRIdctGieoP73CpLeOhoudnlN+Cajn4BExjA/ZGj3pmuS1FppylAo4/oHZN+0G80KPv6g==
+X-Received: by 2002:a17:902:ec88:b0:290:9a31:26de with SMTP id
+ d9443c01a7336-2951a496200mr9776595ad.33.1761847934062; 
+ Thu, 30 Oct 2025 11:12:14 -0700 (PDT)
+Received: from CNSZTL-PC.lan ([2001:df0:a640:1::14])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-29498d273a2sm193068285ad.60.2025.10.30.11.12.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Oct 2025 11:12:13 -0700 (PDT)
+Message-ID: <6ae3eab1-3208-4317-8ae2-5f5cac1e2dfe@gmail.com>
+Date: Fri, 31 Oct 2025 02:12:10 +0800
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Qqax3UJbJmtup6HI"
-Content-Disposition: inline
-In-Reply-To: <20251030003359.1023-1-briansune@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: rockchip: Fix eMMC write on RK3528
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250613224343.3521820-1-jonas@kwiboo.se>
+From: Tianling Shen <cnsztl@gmail.com>
+In-Reply-To: <20250613224343.3521820-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,49 +99,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
---Qqax3UJbJmtup6HI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025/6/14 6:43, Jonas Karlman wrote:
+> Writing to eMMC on RK3528 is affected with the same or a similar issue
+> as on RK3588, where eMMC must init to HS200 at least once to fully work.
+> 
+> Trying to write u-boot-rockchip.bin to eMMC fails with:
+> 
+>    => mmc write $fileaddr 40 5000
+>    MMC write: dev # 0, block # 64, count 20480 ... mmc write failed
+>    0 blocks written: ERROR
+> 
+> For U-Boot to enable HS200 mode the mmc-hs200-1_8v prop must be defined
+> in the device tree. Linux does not seem to be affected and is able to
+> detect and use HS200 without this prop.
+> 
+> Enable use of HS200 and fix eMMC write on RK3528 by adding the missing
+> mmc-hs200-1_8v prop for affected boards:
+> 
+>    => mmc write $fileaddr 40 5000
+>    MMC write: dev # 0, block # 64, count 20480 ... 20480 blocks written: OK
+> 
 
-On Thu, Oct 30, 2025 at 08:33:59AM +0800, Brian Sune wrote:
+Sorry for the noise.
 
-> Since turning from old build flow.
-> New Altera SoCFPGA requires converting handsoff
-> conversion via the python script. This is from
-> official provided, and now sync to U-Boot
->=20
-> Signed-off-by: Brian Sune <briansune@gmail.com>
+I recently got an E20C board, and I ran into a very stange issue, the 
+U-Boot throw errors with any mmc r/w operation, like `boot` or `mmc erase`:
+
+```
+=> boot
+Scanning for bootflows in all bootdevs
+Seq  Method       State   Uclass    Part  Name                      Filename
+---  -----------  ------  --------  ----  ------------------------ 
+----------------
+Scanning global bootmeth 'efi_mgr':
+  ** fs_devread read error - block
+  ** fs_devread read error - block
+Card did not respond to voltage select! : -110
+Cannot persist EFI variables without system partition
+   0  efi_mgr      ready   (none)       0  <NULL>
+** Booting bootflow '<NULL>' with efi_mgr
+Loading Boot0000 'mmc 0' failed
+EFI boot manager: Cannot load any image
+Boot failed (err=-14)
+Scanning bootdev 'mmc@ffc30000.bootdev':
+Card did not respond to voltage select! : -110
+Card did not respond to voltage select! : -110
+Card did not respond to voltage select! : -110
+Card did not respond to voltage select! : -110
+Scanning bootdev 'mmc@ffbf0000.bootdev':
+  ** fs_devread read error - block
+  ** fs_devread read error - block
+  ** fs_devread read error - block
+Unknown uclass 'nvme' in label
+Unknown uclass 'scsi' in label
+No USB controllers found
+Scanning bootdev 'ethernet@ffbe0000.bootdev':
+ethernet@ffbe0000 Waiting for PHY auto negotiation to complete..user 
+interrupt!
+phy_startup() failed: -4
+FAILED: -4
+BOOTP broadcast 1
+
+=> mmc read $loadaddr 0x40 0x4000
+MMC read: dev # 0, block # 64, count 16384 ... 0 blocks read: ERROR
+
+=> mmc erase 0x40 0x4000
+MMC erase: dev # 0, block # 64, count 16384 ... mmc erase failed
+0 blocks erased: ERROR
+
+=> mmc part
+
+Partition Map for mmc device 0  --   Partition Type: DOS
+
+Part	Start Sector	Num Sectors	UUID		Type
+** Can't read partition table on 0:0 **
+```
+
+By checking the mmc information:
+```
+=> mmc info
+Device: mmc@ffbf0000
+Manufacturer ID: ef
+OEM: 0
+Name: TLi16G
+Bus Speed: 200000000
+Mode: HS200 (200MHz)
+Rd Block Len: 512
+MMC version 5.1
+High Capacity: Yes
+Capacity: 14.7 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 KiB
+HC WP Group Size: 128 MiB
+User Capacity: 14.7 GiB WRREL
+Boot Capacity: 4 MiB ENH
+RPMB Capacity: 4 MiB ENH
+```
+
+I found the bus width is not corrent, and no "Boot area X is not write 
+protected" tip.
+
+This is the working `mmc info` output:
+```
+Device: mmc@ffbf0000
+Manufacturer ID: ef
+OEM: 0
+Name: TLi16G
+Bus Speed: 200000000
+Mode: HS200 (200MHz)
+Rd Block Len: 512
+MMC version 5.1
+High Capacity: Yes
+Capacity: 14.7 GiB
+Bus Width: 8-bit
+Erase Group Size: 512 KiB
+HC WP Group Size: 128 MiB
+User Capacity: 14.7 GiB WRREL
+Boot Capacity: 4 MiB ENH
+RPMB Capacity: 4 MiB ENH
+Boot area 0 is not write protected
+Boot area 1 is not write protected
+```
+
+I tried to use the generic-rk3528 configuration, and it seems to work.
+After making some tests (about 50 times reboot/reset), I found the eMMC 
+works fine if `CONFIG_REGULATOR_PWM=y` is disabled.
+This is a bit weird. Maybe disabling this option just hides the real issue?
+
+Here's the build information:
+U-Boot commit: 4cad9faf8d28 ("MAINTAINERS: update my email address")
+rkbin commit: 74213af1e952 ("rv1126b: bl31: update version to v1.07")
+Build command:
+make CROSS_COMPILE=aarch64-linux-musl- 
+BL31=../rkbin/bin/rk35/rk3528_bl31_v1.20.elf 
+ROCKCHIP_TPL=../rkbin/bin/rk35/rk3528_ddr_1056MHz_v1.11.bin
+
+Any help will be greatly appreciated!
+
+Thanks,
+Tianling.
+
+> Fixes: b112a44531cb ("board: rockchip: Add minimal generic RK3528 board")
+> Fixes: ccbddf645310 ("board: rockchip: Add Radxa E20C")
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
->  .../cv_bsp_generator/cv_bsp_generator.py      | 100 +++
->  arch/arm/mach-socfpga/cv_bsp_generator/doc.py | 243 ++++++++
->  .../arm/mach-socfpga/cv_bsp_generator/emif.py | 424 +++++++++++++
->  arch/arm/mach-socfpga/cv_bsp_generator/hps.py | 571 ++++++++++++++++++
->  .../mach-socfpga/cv_bsp_generator/iocsr.py    | 203 +++++++
->  .../mach-socfpga/cv_bsp_generator/model.py    | 114 ++++
->  .../mach-socfpga/cv_bsp_generator/renderer.py | 196 ++++++
->  .../mach-socfpga/cv_bsp_generator/streamer.py | 102 ++++
->  .../mach-socfpga/cv_bsp_generator/xmlgrok.py  |  32 +
->  9 files changed, 1985 insertions(+)
+> Kever, Tom: Please consider this for the v2025.07 release as support for
+> RK3528 was added in v2025.07-rc1.
+> ---
+>   arch/arm/dts/rk3528-generic.dts            | 1 +
+>   arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi | 4 ++++
+>   2 files changed, 5 insertions(+)
+> 
+> diff --git a/arch/arm/dts/rk3528-generic.dts b/arch/arm/dts/rk3528-generic.dts
+> index 792d3e04a4cb..3f6f0bed108d 100644
+> --- a/arch/arm/dts/rk3528-generic.dts
+> +++ b/arch/arm/dts/rk3528-generic.dts
+> @@ -18,6 +18,7 @@
+>   &sdhci {
+>   	bus-width = <8>;
+>   	cap-mmc-highspeed;
+> +	mmc-hs200-1_8v;
+>   	no-sd;
+>   	no-sdio;
+>   	non-removable;
+> diff --git a/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi b/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
+> index 9c2f03a786cf..1372d8f1e38a 100644
+> --- a/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
+> @@ -2,6 +2,10 @@
+>   
+>   #include "rk3528-u-boot.dtsi"
+>   
+> +&sdhci {
+> +	mmc-hs200-1_8v;
+> +};
+> +
+>   &sdmmc {
+>   	bus-width = <4>;
+>   	cap-mmc-highspeed;
 
-I'm not sure this should live in U-Boot. And if it really needs to be
-hosted by U-Boot and not hosted/maintained by altera somewhere, that
-this is the right place in the tree for it. I assume you run this tool
-on the output of some other tool?
-
---=20
-Tom
-
---Qqax3UJbJmtup6HI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQOp4wAKCRAr4qD1Cr/k
-CiItAQDYsM/YCps6+pRDhkZ8QTfEhz0Vj3Amhc7JNs/RIg4eOgEA41yMCugipVgR
-lD7ZSz8Tr9Y3X3l/e2PIvwTaNIommQg=
-=z9Lx
------END PGP SIGNATURE-----
-
---Qqax3UJbJmtup6HI--
