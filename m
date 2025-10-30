@@ -4,159 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0938CCCF9FC
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 12:37:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCE88CCF9F0
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:00:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6ECE2836D1;
-	Thu, 30 Oct 2025 13:37:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 505CF83642;
+	Thu, 30 Oct 2025 14:00:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jXtp60vB";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75995836D3; Thu, 30 Oct 2025 13:37:10 +0100 (CET)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 44969838CE; Thu, 30 Oct 2025 07:31:52 +0100 (CET)
+Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
+ (mail-bjschn02on20717.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4440:2::717])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06D098331F
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 13:37:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76CDA832BC
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 07:31:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=O8dYAaJ5PPekQSYXLBsJnB06QZhu2i3BdyF4sU54s8EF8MyNop5+orIRCWkHKc8GhOrWiracJPbHJ14ynTiQzUZVyG5Fy5vUDrLCSK5ZqoDBycUwB7xuIkumuKLQb7s0IJz0M3ixeVozQXG/iyjsJRraYdRzcr1Amhu9KHwkrJca3iNYXyw46ISD2rBW4zBDt7O9Ev8nCbqWztIAD1lOAYMDwx/4kZ9eu4iOL9qRtXUXH3AJywAf8TrzKAyqBmJ+2szvfL6LLDcIswfFCNjapKXN8n4PYhmwOXSq20XTnJlYItDAZVAc5+QSxKPcByshDeza+EuNsmdQZLOeIjZ1fg==
+ spf=pass smtp.mailfrom=hal.feng@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=GIWslQHZjaWULG5vyQbP764GiqJ1UMKuPHky4tReoWNdpXOX1zvinArYM9kuH2fgiejT9RbI15R84EQewc6SQdp1bZ+W+evn4Hgsr9s098f36/RPFFX3My+DYez1IFbiW1HcLRqNpWK8oA+90EXabhYyY8nlfycE0WSoAg7xfFpNwNcnRRmAx8ccr5DGEkp1KtENDj55iBrPo1nJsnM3c8UN7yGqO0kyI5u6baWEnGKwTCFb8VVlpwdHv8ngsCrbmV3YpBK8VO4ws/fnm2m8o1BrBPbTX1hiREXxslk4rZHkeK1SNznboLS6XR9RhLuoMootAY/tcD6wgQrkpioOKQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
+ s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EYQiV0+uUAZsojuWy4+o0XLH25kRYufNqgdBn0rqu2Q=;
- b=hmL+/IivELZGLZhfurYurimcktrZcKawNSQOlpOz0v7NB7UEVlpQJHoqVfKdJKMKBp1xy3iJ+2tuJ+VUQ/XcM6RBUcWl5DOlT25GFFaxL9RRDLGUBY2XC8+YUQePCL3wrtIw0I4I9LpLyVR8cBso7axUn6qbusq+G8j5H1i1Nzn+Q5Doed7lHeZ4bm9yddBf2hED9y2+n+0Pjojbfv4H0vfRuFny3NFzoVMjWwWGweKmyBpx5xIsPPDIh0S9ndPGDKGBrRsCCGeKWWjK2+WDR4eQPOXjdDsvkh7XoaqjzjeqHcqBsJjLpwjDKkV0e2dhigddKm7pcwyePfad7ILbcQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=nxp.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EYQiV0+uUAZsojuWy4+o0XLH25kRYufNqgdBn0rqu2Q=;
- b=jXtp60vBqyDOUqC3LDeSSdPKSj+XxNIEllXpZY5TR9wB2Aw8XYb45yeBu7xVAptgxrvsJZOmSn3cc4Uk7AFQlRU2zpEsw8e505lSCIozkOhDGcO/ZEg81pfjDRYAo6Ogv23VYUVVy04fxGSsulfcQkaCk13wsa7zx4nomDG/FPc=
-Received: from SJ0PR05CA0070.namprd05.prod.outlook.com (2603:10b6:a03:332::15)
- by IA1PR10MB7263.namprd10.prod.outlook.com (2603:10b6:208:3f5::19)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=NEYWi8FOuePEQaIoVtLd9S3u4XWq51TboEicd850b3M=;
+ b=ZGcB1vUZdjutM0FHlpFha81iH9Q/10Yty/q1KhGbr0xLvM8bYye8l7n7s50n7JVrVDzCPuCi+yoOBCUKPCwBpn7lXc5V4B232KH9uGRelTCXOAaX9S08ZCEnxocOcZMCE62vXaDpTzFFtTeaO28cxctKiz7uUoM0EIyVoj5M+8pw76lgZh442cJrJGJqUK6TxAB7KM7Uxmi9aeh2MaoKYCp4c2EsWS54Qm29KaJES0B1+qEGcZ3aurTSqj1dK0eGxK6J0i8xJqE0ghqHa5Y4CVxdUT7lLuwRVR8HOmDxMU3RNnR3aqVEWEcng+SZYpg/CibF/h365osh0jXiQ+lcLg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::14) by ZQ2PR01MB1292.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:12::7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Thu, 30 Oct
- 2025 12:37:03 +0000
-Received: from SJ5PEPF0000020A.namprd05.prod.outlook.com
- (2603:10b6:a03:332:cafe::fd) by SJ0PR05CA0070.outlook.office365.com
- (2603:10b6:a03:332::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.12 via Frontend Transport; Thu,
- 30 Oct 2025 12:37:03 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ5PEPF0000020A.mail.protection.outlook.com (10.167.244.43) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Thu, 30 Oct 2025 12:37:01 +0000
-Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
- 2025 07:36:54 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
- 2025 07:36:54 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 30 Oct 2025 07:36:54 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59UCasqC2197725;
- Thu, 30 Oct 2025 07:36:54 -0500
-Date: Thu, 30 Oct 2025 07:36:54 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Anshul Dalal <anshuld@ti.com>
-CC: Marek Vasut <marek.vasut@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Alice Guo <alice.guo@nxp.com>, 
- Etienne Carriere <etienne.carriere@linaro.org>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Vinh Nguyen
- <vinh.nguyen.xz@renesas.com>, Viorel Suman <viorel.suman@nxp.com>, Ye Li
- <ye.li@nxp.com>, <kamlesh@ti.com>, <d-gole@ti.com>
-Subject: Re: [PATCH] firmware: scmi: Drop mmu_set_region_dcache_behaviour()
- misuse
-Message-ID: <20251030123654.zp2abxrfdgex3rq2@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
- <PAXPR04MB84593511CF2B43470CDD8ABD88FDA@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <68e5af37-1511-4720-9172-751d5b788c39@mailbox.org>
- <2a3421c8-b7af-4c6e-91c5-cbd08c9f3dd5@mailbox.org>
- <DDUP3J37VKJU.3G90BDVOTBJSI@ti.com>
+ 2025 06:31:40 +0000
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7%6]) with mapi id 15.20.9275.013; Thu, 30 Oct 2025
+ 06:31:40 +0000
+From: Hal Feng <hal.feng@starfivetech.com>
+To: E Shattow <e@freeshell.de>, Leo Liang <ycliang@andestech.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: RE: [PATCH v1 2/3] ram: starfive: use SZ_8G for 8GB memory size
+Thread-Topic: [PATCH v1 2/3] ram: starfive: use SZ_8G for 8GB memory size
+Thread-Index: AQHcSWYYBaKR79Jq+0iRmOhqIO6rzrTaOcmQ
+Date: Thu, 30 Oct 2025 06:31:40 +0000
+Message-ID: <ZQ2PR01MB1307B89ACAC820E9393EB0E2E6FB2@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+References: <20251030062354.35413-1-e@freeshell.de>
+ <20251030062354.35413-3-e@freeshell.de>
+In-Reply-To: <20251030062354.35413-3-e@freeshell.de>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1292:EE_
+x-ms-office365-filtering-correlation-id: 10fa37fc-a0c2-41a9-53db-08de177dfc56
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|41320700013|1800799024|38070700021; 
+x-microsoft-antispam-message-info: ECotMpAajTVZua5jtiaTq3bvkeWnS6/kKJpJAzqcwgBXrvChl6/lq5Jk0tYEi8xl0f8MamRVIVZ5Efj2xNABsVeXsMlpKfnga8f33eY4/okaRh2FWaYZcZaJAzw+tXd2H8jAj6FodpkvcGRjU7FqS5IxcUAlZ5efA/RTSYH3eowWaarTfgJyy0WopL4Uhbl96mK1N9APw7ubMogFpxdt03IvrxMZkJxxtZTtz+d7F5Wl2LQZeh/Oiuv4G/iBTl1+FSm+wYRYwHUbQfSnqVQHMENip2RUAVeQytKxRB8V52NB15uu8lEgKs9eTxN/Pf6qrrDIpi1JfBlZvhJ5Zm1Cv/Jh0aPYnlo2WkF/P2StP1qJjaHMsd7QVHtSe7FGob2HcmsAapps4YAzOYe0eyC3AvON4Jw8migr9Yfvk1FM7DwmG9jJZr8YxhULyTf6lrInah71VTegB0zCOl09EJSgxqvuBzgRQOWhCDWBKBgUFaUxTbcsQTJWUZZFNAgu4UXVRES2VeX4nvfS5lYfNpp4bIaQ1fwrVlXMr+KurrylVcgxX+XkSjo+j4ZDhDtaNXtXYf+i7hmgLloxCbHJZaXqtQ==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE; SFS:(13230040)(366016)(41320700013)(1800799024)(38070700021);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?qrMxsx3ZQe8BRDU5XaXLpA1/qHHzCktExqaRoQut181xzkLo5wJD+VIlgseQ?=
+ =?us-ascii?Q?A9OUOF/+HElk7cGnRJhlnjz9i+tnCKl7M3zGBamaUOCsDo2/vcxGKXEydhZK?=
+ =?us-ascii?Q?b/j/tcu9IN1kK+cxsquuF9bSkg2IeJj8Fu7itO4r37sTWq5cjjNr9e+ObIRe?=
+ =?us-ascii?Q?cPu10GVi95ttFxnmfX3aKN6eiYlHtlWwqW6jb/ZVszT/x1wIG2h7UUAH6Ugm?=
+ =?us-ascii?Q?cb+WVSp0aV3BYk+PDtWLMMFdQn3nZRn9cm2/nv8MtUltxL3BaZGEFdfSeSqh?=
+ =?us-ascii?Q?iWjXo9+CoI8vt6de19qpjFMO9BF8Vhu+DPXFNRpKPmKrSWJ51V/BY0QjieSt?=
+ =?us-ascii?Q?nkTh/hZX7tVVR9DcibwElk3ULpznjSKAa/yPDo/D3wNFsUT+MsYYpoV9weVZ?=
+ =?us-ascii?Q?046GUMQ5vMXP2SFPhxtueMaoPw91fUbhDewaiMXia2KOC9TLNp9KzflB1aCk?=
+ =?us-ascii?Q?xucrl2gLgA0IWHoUQhyvFl8xDmhZwTLrGGnmFlXMNlEYjsnHxq6olRTDd+x3?=
+ =?us-ascii?Q?KJ0dNUmtioquk1XkKjQLquTChA0KLSwwK59wAFURs/+JExDrSPyKdEgWlnlS?=
+ =?us-ascii?Q?bb29BPKcBrYlRhpFXHvRhYQuOc3uAm2FbszrQqxYHUTZ15DUG3fY0ML1OgSb?=
+ =?us-ascii?Q?8UQ7bL+KD/TPowTAcibPSbRaxpurM4f5qXnCh/Noqgh9hPgQs5Q9FaoMCaHU?=
+ =?us-ascii?Q?OScH3WO8YSQegTDGh8t7nqTFv2lSzkvd3jTjNi86kfFkXcGibwsAIDfunQM6?=
+ =?us-ascii?Q?+no9/BcprIIn6UP1b1VVFcS5+f8iWCt/D9BdPu82cnFYWV+2cKKjOm3BTKUg?=
+ =?us-ascii?Q?Ykk/cVhuYKVke2QP7zQaKAkhl9jocISgQJMZd+SXtYSVVUvlye6wJ/3GCBIl?=
+ =?us-ascii?Q?ebtJyZQjaLsbeXRJVAIIAHrCJad4pUgGt3wI7Yd++2MgpHJ/2W9Ns4rjbh6K?=
+ =?us-ascii?Q?O2H8+wjCKMPrpXpZkdxxaxY2ds6SWYGEY+mgBIa/wx+MiryS6Tx5ZOaVkZ8u?=
+ =?us-ascii?Q?PNPMsTK0jXVTV353F2CX1S+h+bSxLPxoAB7Ai3QcmutzW37VHQpff2lAAAD3?=
+ =?us-ascii?Q?xHLD2fzs4itPtrpwOCxEFfM8q5EBL/KRt2RnhkgMCqmOK+Tpo9te8LsREyUJ?=
+ =?us-ascii?Q?oluAEGDUutcRwZKa08UPdIlSKuNfSozFneHlIWad6NdBpGT7b9wWMzq63fEc?=
+ =?us-ascii?Q?u+0AbSjAqZXUDPjNQnSGka4p373DAd9nhWiYtvevK2fH3rjCLFoJocH4Y/iX?=
+ =?us-ascii?Q?KzE/3uzhL7ZMfc6+sFyzoXyXGfjnEcVjw2cJ3IsqF9IlYXT0xcX/3cl/jsHF?=
+ =?us-ascii?Q?xv08AHE4kxe50UkIRkoiBPTu36Qdj4sxc/PQiAn13o4AVihxY98NBeTWjMaA?=
+ =?us-ascii?Q?Dq6TMD3UkQKRXS3F33Cs8gOpujfNlByfiaSOWpYQHZW+lIFYDoVbsl4Y6auz?=
+ =?us-ascii?Q?4Z1mUIFyUuGLcOOeHOJxbS1HPc2d3UY0pJBU6/gXoCCOsQjPKQZ0BkkPtz+x?=
+ =?us-ascii?Q?/FZhiHt7UqeWWJVQsmbAv1vYDG5884zbYvxfkpGtDjZx2JEQfKKTq2HwPpgE?=
+ =?us-ascii?Q?5gcLgJKEQocYNaNDDHxNWb0BABPMc3Nlq3hN2aqC?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <DDUP3J37VKJU.3G90BDVOTBJSI@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF0000020A:EE_|IA1PR10MB7263:EE_
-X-MS-Office365-Filtering-Correlation-Id: 92097fa8-3248-48eb-99c8-08de17b1064a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|34020700016|7416014|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZTFyalNnK0p0QnNuWkI0TjZuczduQld2V1RodElEZ2tud0EwOVV4dXd6Y0dL?=
- =?utf-8?B?ZVNqZjJKTGJDaGMyUnk1ZE43d0krLzc3M0xvT2pEbzJoUXlJZXo0Y3M3NGVN?=
- =?utf-8?B?MTdSZzJOTzB6NGhJdEgwYUcxUWFLMnR6UXNZSFJBU0tuZXJ3RUZsQmF6TE5Y?=
- =?utf-8?B?anhSb3JrVllFSTJkV1dBaU5FanRRT2QxVHFON3h2RGdxOVhIMDBHOE54RzY1?=
- =?utf-8?B?VDRYWG5JQ1BiMmlZUjVkYWVqRXhxclNZTnZZTVFsdlZGN0FjOEVDdDBRcFEz?=
- =?utf-8?B?NEFmckRHai9RdVk3N1RFdDlGOHhVenRQZ0Y5a21yKzI5TkNIUzRkZVlvR2lX?=
- =?utf-8?B?Z0VrUUM3SitOR0lRWFlUODZnUkIwS3o5OVp6OG9MYi9WUFUxazFKS3hwM1R4?=
- =?utf-8?B?dHJwNGdmejlBckZlMkc3M3BsL2RoVjFIbU5IeTVLcmllZW9hQis2ZHhreFRH?=
- =?utf-8?B?TnpuSHU3M1lXeUpTNDFjVWU3VG05ZlUyelc5TUE1cEo0RXAxYXVPS1I1MWJY?=
- =?utf-8?B?WlVEOHlLd2ZEZEZ3S2dqaW03TWpVbFd3Zy83cWlSdlo5WE1TZXkvWDBoaHRL?=
- =?utf-8?B?VXFZT3FXUVc0c1dTRExaWkxKejVWcHVtZERBcWpjQ2h0U21qMCsxYng2ZXds?=
- =?utf-8?B?R1BlOGhDcVdUZERrMnREV1hCLzRvYUsxYzdzdW81ZXJoeU1GZUxTQzBQaGZY?=
- =?utf-8?B?ZW1sdzR1cUhmeklucFBkV1NuK1lvSHdCMkV0SGNYV1dTWGtadnhWRk1zWG4r?=
- =?utf-8?B?MGVHL0xGM0lORzZnUElwOFgyaHc0dE9yOEVOZ2MvUCs1a0J4RkdiazRiNUVP?=
- =?utf-8?B?cUUzdWZyemVMVzk2T1BrZk1ZRXRHU3ZqUDBuOHVEMUlkKzc0WTYzdlQ4V1Bk?=
- =?utf-8?B?Ti9EU0MzaUpOZ0p2cFhZczB1OUE1bkRQQnZqeTVEcEJaSVIvdGl6MVJuWTJ6?=
- =?utf-8?B?cytqL3lWVHVGbDhIdUNRQWJKQzZ5QjgyWU5xMXg4NnhsYW9tZklpbGErWjdl?=
- =?utf-8?B?Umx2SVRhVUUxSzN5a21HTjZGNTJBYnZpNndlVHBuZkJZZStLZGxTSnA4bEho?=
- =?utf-8?B?NzBNTmhDMmdZWjF2L0lLTDE3YmxGOWlUOG9TNEdRYkI3VVFQaWhIMjZZY0Fz?=
- =?utf-8?B?cXB4cmVjc1RvUmtnVmxzdnNpQ0s3dnlaUWtVbWIrQ2FJZ2dtRWt4ZVBSWGdm?=
- =?utf-8?B?UmdyMTQvZVdvanIrcitGQ0RFazNDOU11VTVaM0hlN0dUV3pabHI2dis5NWtJ?=
- =?utf-8?B?U0M1a0NidUF2dWZiVmgxNnBLN1R4bjMvd1EwWWh1U0NsMTBOd0RGMUp4Vy9X?=
- =?utf-8?B?NGxMV0QrUmRINDBxeG14MVRHR3BjVTVPMnhRUytYSElPM05YZnM4Z0lmNmpo?=
- =?utf-8?B?bkRpWGpBcWgxMlNIelg0d09qbTNjWGs3aWFiTVJvaElmZEtZUlJNeHQzbFhP?=
- =?utf-8?B?Y1dPUlJpejdWcFh6K0JBcHg4WjFtVllxaTdzNjlrK3RJM0Zka0NmdUIxUWpt?=
- =?utf-8?B?S3g2eUVjb0xVdlAza2hDWFA4a0FRSTY1TG1DZWVJc3Nzc3VtZEYzaUJobzZM?=
- =?utf-8?B?NkV4R3kwK0lMRWwwcExFNFJMb0hUaGQzYzh4U1BCN2hhSnhnM1NZZkNEbllS?=
- =?utf-8?B?a2dhUTZqOWJlVkN4SkhWRDU0cUtiY0wvWUNKSE9VczRROGNsd0xqQ2ZwaDlE?=
- =?utf-8?B?QzBrTHg2NFZyZ1hEbVl1WkFPZVp2L1R4REU5dlFZblZJU3d1eUhPb2M5WlFE?=
- =?utf-8?B?MlkvZHd5cW80QUJ1c3c3Y2QzZkVFbTBoQzhnUFBOZkgrQnBIdTdwSC9nVkZV?=
- =?utf-8?B?eTJDc09kbTR1dTVmcjNENDA2TEUreFVZc2NjQk9uVVdwK29IcU9PeURYSUtE?=
- =?utf-8?B?MVZFSVl1SUxXMG9UQllXSDJXd0trZU0zd3dBMm02VDBLSEdjODNpZ1VycjBP?=
- =?utf-8?B?Zlg5Vy9XV2FRUmh5Z1FUSloyOXhrY3kzVkZhcGl0YnNxTkdVdHRrakd2aGgz?=
- =?utf-8?B?N1hOSml3cWFEd2xBdEtObzBtR1hKWmtTbzgvZFlYSmVnUTVIVWdZWnBEQXlM?=
- =?utf-8?B?VjFUa3dCWW5aMlQ3Yi81Q3hyUXNVeWIrVHU4OXNqYmJyN2Nudm95alR0d1dY?=
- =?utf-8?Q?zUAQ=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(34020700016)(7416014)(1800799024)(376014)(36860700013)(82310400026);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 12:37:01.4081 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92097fa8-3248-48eb-99c8-08de17b1064a
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF0000020A.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB7263
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-Network-Message-Id: 10fa37fc-a0c2-41a9-53db-08de177dfc56
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Oct 2025 06:31:40.5022 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: qruKanUDwJ2RXBhjTTh+JNeN5J6km20nGQSWVdS/1UpCxNqSo5f1FpHEP8s15hV2Jq78pR5SD2sSZC2WBgtHa1b9Gm8QVYDg+RXyPTi4heY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1292
+X-Mailman-Approved-At: Thu, 30 Oct 2025 14:00:47 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,55 +130,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On October 29, 2025 thus sayeth Anshul Dalal:
-> On Tue Oct 28, 2025 at 8:46 PM IST, Marek Vasut wrote:
-> > On 10/28/25 3:37 PM, Marek Vasut wrote:
-> >> On 10/28/25 9:25 AM, Peng Fan wrote:
-> >> 
-> >> Hello Peng,
-> >> 
-> >>>> Subject: [PATCH] firmware: scmi: Drop
-> >>>> mmu_set_region_dcache_behaviour() misuse
-> >>>>
-> >>>> MMU region cache behavior configuration for SCMI/SMT mailboxes is
-> >>>> platform specific. Even on ARM systems, the mailbox memory may not
-> >>>> even be located in any cacheable MMU region and may instead reside
-> >>>> in some SRAM. Remove this non-generic cache behavior configuration
-> >>>> code from generic code path.
-> >>>>
-> >>>> It is unlikely that any platform is affected by this change if it did
-> >>>> configure its MMU regions correctly on start up. Platforms which might
-> >>>> be affected are i.MX94/95 and STM32MP.
-> >>>>
-> >>>
-> >>> If the memory is mapped before running SCMI stuff, it is ok.
-> >>> But if memory is dynamic mapped at run time, there might be issue.
-> >> 
-> >> I wonder ... should ARM/ARM64 define CONFIG_HAVE_ARCH_IOREMAP and 
-> >> implement actual ioremap() function which changes these cacheable 
-> >> properties accordingly ?
-> >> 
-> >>> I saw TI platforms has some changes to use dynamic mappings,
-> >>> I have not read the details, TBH.
-> >> 
-> >> Can we put the TI people on CC here ?
-> >
-> > +CC Anshul
-> 
-> This change shouldn't affect any current TI platforms since we don't
-> make use of SCMI on K3 devices.
-> 
-> I'll CC folks working on upcoming devices in case they have any
-> thoughts.
-> 
-> +CC Dhruva, Bryan, Kamlesh
+> On 30.10.25 14:24, E Shattow wrote:
+> Replace numeric literal with SZ_8G consistent with other uses of types fr=
+om
+> linux/types.h
+>=20
+> Signed-off-by: E Shattow <e@freeshell.de>
 
-It's my expectation is the shared buffer would always be in some 
-internal SRAM which shouldn't need to be mapped. Not only does it keep 
-the buffer secure on platforms that care about that but it also speeds 
-up the access latencies between the different binaries.
+Acked-by: Hal Feng <hal.feng@starfivetech.com>
 
-IMHO it makes sense to rip this out and let the few architectures that 
-need to do some MMU maintenance do it themselves.
+Best regards,
+Hal
 
-~Bryan
+> ---
+>  drivers/ram/starfive/starfive_ddr.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/ram/starfive/starfive_ddr.c
+> b/drivers/ram/starfive/starfive_ddr.c
+> index 9e902f03ee9..f030192f6f4 100644
+> --- a/drivers/ram/starfive/starfive_ddr.c
+> +++ b/drivers/ram/starfive/starfive_ddr.c
+> @@ -43,7 +43,7 @@ static int starfive_ddr_setup(struct udevice *dev, stru=
+ct
+> starfive_ddr_priv *pri
+>  		size =3D DDR_SIZE_4G;
+>  		break;
+>=20
+> -	case 0x200000000:
+> +	case SZ_8G:
+>  		size =3D DDR_SIZE_8G;
+>  		break;
+>=20
+> --
+> 2.50.0
+
