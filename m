@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D7DBCCF9F0
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31277CCF9FC
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:02:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2068583959;
+	by phobos.denx.de (Postfix) with ESMTP id 60C3083966;
 	Thu, 30 Oct 2025 14:00:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sMz1tOem";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="gQnR1Oj1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06E6E800B1; Thu, 30 Oct 2025 11:01:35 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 4E447800B1; Thu, 30 Oct 2025 11:01:36 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 055D1808AF
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 11:01:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 569558394A
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 11:01:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-475d9de970eso6001735e9.1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 03:01:33 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-475d9de970eso6001885e9.1
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 03:01:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761818492; x=1762423292;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761818494; x=1762423294;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=sweNQavyuE2TprjAPKov5JkYRQQDTo6z2UG1tohV2a4=;
- b=sMz1tOemjegHXeKCXzdzUOHjo7E8goEu/jAlzeOqJ6zT1AgkkZnn3CPiF9yMgpbzMF
- xJbjgXKawj1QCuOAQxm3uLqaTKvISow5hjo/hIYSARX96Y8A8PVtWLO/kDWLhY/czI1B
- ZNIvak/3H2UoYKQgu2+GyUXh3C27CVNjkw1bh5mtDaRlNVau70Fb2IZm9nA66qzWUgbM
- nnkZt5MMNM2mpfq0huivH/uVKFS/65JCJF70pSPq3sjhHO69R96XVNnHMMYffhdi3/RW
- OGRFfa24T8brKFkJMakgitnJqtI0dPhk59oznjzgpdguKsr1DcV7P8k+MSMImQTEG3ne
- Oguw==
+ :reply-to; bh=6e0rvUi28lAVZt+mOqv0GqCQ1sydQkJc2CFpDaElLuU=;
+ b=gQnR1Oj1ylK//vkZSsO/MMu8hnNixtS8+lz2PmW5SHFU/hDUAa/MHReLl4n4DG+pgy
+ t+FM5xPr1VxBwjH2UQOSo7uJ3aaNB18nSJ/0EUMRSxMK46X2ef/bwcsmbKqwzC3bF/Vf
+ t/htlE4X8+TVagagkmx3IMJuudYumTxzuo/t573D323DaLlc5O0BNdXtU1Mnnvx37jt5
+ VRBQkTMqRoImtOIKyJkFV5xa2vtbC6quA6uJjM06WZKY/j33XuJZ97bK45lh/iwi2HBH
+ y1SwH2qfOnmexrjN6MQaY/QDX7J/pKZuOjhv50h+Eo9EHjUusgmo+DqziBf2jYD4f7Ik
+ e1AA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761818492; x=1762423292;
+ d=1e100.net; s=20230601; t=1761818494; x=1762423294;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sweNQavyuE2TprjAPKov5JkYRQQDTo6z2UG1tohV2a4=;
- b=sONkgC3SKEwujxk5NZpMJhdD5GHwHODyFKb7jYRtPKEWYz912XOs5/q6Zo+nOMXhJt
- UFskdJp1WhnDN2S5CUGXPxD6PB5KW8zHsVyISVxzC5ROme32Lsog0PIzEWgUCht0NyoK
- f6uAXuEyOkCx+wuJkwT8MrOqV9ThuX2J70rUbwk8kzfn7UBQ6k/SU7Ac5tqLk96b9yj7
- 91CjAfq4PENUsJUVzcOd9LzyaBdR2ZIq3v0+DRXH5LK8TgUG4bi/LaIR0S6ZcN1d0ICv
- RJDURP9x+uynNByxnNmEmTyBCdRAqI/+QoJADjgGG/nDmEUqhd8J2Z4szLsmqvg3/QUs
- MFBg==
+ bh=6e0rvUi28lAVZt+mOqv0GqCQ1sydQkJc2CFpDaElLuU=;
+ b=iC5VsDjoNrZejP5agW+KKu/BZvC+gFQD+IdZ8TApH2jcJrScKPGWi3R3sAErpYg6AH
+ 7DHJBn/3k90hUMY5E5RIxVCuv9VU7gV/fZIRCJwlqQq5aYWpvh7LMrb/P1FEdRmbuVJK
+ 1DaJ/IMewiFvZjudLa/hsGv3/GHFMAVr45aUCJA1FVHAn+/hoR+4fhDfixHz5kDmzKwW
+ rVcCMv+7h9zHLFN5is+AK5EEI0TOy9AtGr/P2UaE1ZMsb6Sk0OezYT1zwrzf+yws7iv9
+ yCuuQouP3iqpsF3FId1UywqQuks+fj/syLjplf7X/45b0OLxFbeRMC+RnHD1CYqYGpak
+ x5ow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9O+ekdoo8ymmQ2sIjH/ubH+6RJP/y983SR7yyb4NiIQegzMGoDr+OiBTjSmw5cVh8w/JEg+o=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKwQerstfZBee79Tvpzg7wrljginbUFC6kc9dxnxEhUXwftqWZ
- 5OyiPodBrKHDpM+lPJjMuwZFVMYLJtQCuDK1EiURHzXmGNkVfSbUEazzoCbIgJTsgH8=
-X-Gm-Gg: ASbGnctJqNOvuPIk2Sx7r7fjEB6AGT1KB4mt8v3Am1rtDFPeV74gLDE1oBuaHiD16S/
- a972f+JM/kdazAFEzN3M8MsdkCyZhQ6J7W8zXwzFfOusFdXLqAStNXJjxDN+tUq3PbDyWu45rDB
- m1CMblG4w/LNr0VTkVNzYenC/1ph06f7Fpp2q1GKoFI/lUoGA5M8rJaS48z7zUYE+H60sWghvS+
- QYgU1dIXlCkeeHP+3NdJOWSt9d9ZQO+KRpMYGv4kHFK4vyS+t8FElQLE1kTW+xdLYQwBeDhwbo8
- qmSZKe3sJRoqOnxozisBOZm8M7adsedd3yxlBzAHVHBeD+zk6egvm/qAvIxXWzayypFttm90liU
- 2VCLxOsrq00Om0UFdvDL5prmpDXxvk+kErOV6TzfQNySaYVg3Z6556/YsjAOlqWaWu0bPlg80iQ
- ==
-X-Google-Smtp-Source: AGHT+IEGUzVdBtzhr/FXxK7dhRd5D2Nah5bMhz8IZGxcCx+Vx9cbQ0lBk5gVaHxBHhvSt89scNqGeA==
-X-Received: by 2002:a05:600c:a08:b0:475:db8f:ae0e with SMTP id
- 5b1f17b1804b1-477267111e5mr24968465e9.2.1761818492308; 
- Thu, 30 Oct 2025 03:01:32 -0700 (PDT)
+ AJvYcCWwXt0u7/dQkWVnPnV2BP8vnRNI4M6gPi/Uk4q034kjavTntq+1YrHYEFjPCswcFBWPw4rKL5E=@lists.denx.de
+X-Gm-Message-State: AOJu0YznLGe8kkcDa5afZA+Ccv/4rKBzhI4piHXCJqO3RLMCwb0If0BV
+ GfE85Mx/w1J48gSOcGWMipA/vTWXxofKAiykyArLd5OAcRpQeJpmnm4P4+ONZBpTWQg=
+X-Gm-Gg: ASbGncvNfOE7ReYzAp4gv8oURWYJJgL6Nv9RgN/QQZGuCtFrgj4UYMPg+SnA5zX8nVw
+ 1vDLIoUl84ISqLIz7XSFg6qxMkm/7J7mt+TR68B2Qd6IUzSSNMGoG77YJzpB2BM/GsvrqvD8PzE
+ wuSVnxgA5TsXuQlu2IAtxBg4hOC10CVB0beurrMDmJom0id/AnUD+JHe3bGC4RAnbtvJGPrV6To
+ twtl1lpuEp2dZ1E8NlUiijwGbUEBnPdl+HiyjJ0B31ToSW0jY7ow580R7uC1fhanRW7uWwWJcEL
+ 9ZPWCSeU0/RTUDNUN6FxRw07VbQ8ppwX5XLYXxpriBCgL/8k+YlJxRCnmVoBS/fkEA6pZ1RIl8q
+ zWRfKfVhHYY/3/lUTL2py9aKRjN9KIH3aU3UP6a7yNhYuOqD4fxnU2mqkH5gpgUmVA7C7NnfHUX
+ hCBPQ3RNgI
+X-Google-Smtp-Source: AGHT+IHIqK2BHjsirtBIefcO2NRxpxVyodsCia89P22FjNNQdlMqj/OPPQiqOlmgN+qczuPpZ5wFIA==
+X-Received: by 2002:a05:600c:5187:b0:471:747:2116 with SMTP id
+ 5b1f17b1804b1-4772ca96f7cmr7706965e9.41.1761818493662; 
+ Thu, 30 Oct 2025 03:01:33 -0700 (PDT)
 Received: from localhost ([2001:4090:a245:8496:49da:2c07:5e9a:7fb9])
  by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-477289998f3sm32064725e9.4.2025.10.30.03.01.31
+ 5b1f17b1804b1-47728999a4bsm30166735e9.2.2025.10.30.03.01.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Oct 2025 03:01:31 -0700 (PDT)
+ Thu, 30 Oct 2025 03:01:33 -0700 (PDT)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Thu, 30 Oct 2025 10:59:22 +0100
-Subject: [PATCH v4 04/13] firmware: ti_sci: Add TI_SCI_MSG_MIN_CONTEXT_RESTORE
+Date: Thu, 30 Oct 2025 10:59:23 +0100
+Subject: [PATCH v4 05/13] arm: mach-k3: common: Add CANUART wakeup check
+ helpers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-4-4cef18af0226@baylibre.com>
+Message-Id: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-5-4cef18af0226@baylibre.com>
 References: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-0-4cef18af0226@baylibre.com>
 In-Reply-To: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-0-4cef18af0226@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,12 +109,12 @@ Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4576; i=msp@baylibre.com;
- h=from:subject:message-id; bh=MWb9cGyA/P0Ic24/TqxCiK8A+MbQqQFifhkGvj06R5A=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkxmc4mGRnPJzyXuQvuN5Vxmp7fcZU7ZoB/Yyhg0KZ7fy
- CrgqF9HKQuDGBeDrJgiS2diaNp/+Z3Hkhct2wwzh5UJZAgDF6cATKTPiuF/Tves7PXCF+obAmZr
- TXp4KXN3qdc/jYD1xhGzXZdPnfXpFsP/wNWyp3TTzh7//a5M/l/FRUFBJvXoM3kFRe6Jn2c7d4f
- wAgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3213; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=VnwBRk5RMCA+hpg3h7PhAsvgtoMrLVb73bQZgjxA1hc=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkxmc/mOkL5VGVc6tn3ottxwVDZGZx5PavNu3m88FcVBx
+ m/ObT7UUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABNJD2X4n5XMIeVUV6W/qsZ7
+ 8TrB7J2/ozqsWvR+dRZLvb9X488+mZHh5sXgtAmlbwWe8N1PKdhymMenjfXT3Vxzhmm8zY9V+O7
+ yAQA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Thu, 30 Oct 2025 14:00:47 +0100
@@ -133,139 +134,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds code to be able to call TI_SCI_MSG_MIN_CONTEXT_RESTORE.
-The context needs to be restored after booting SPL when resuming from
-IO+DDR.
+Add dedicated helper functions to check CANUART wake registers and magic
+word. This helps determining if we are in a wakeup or if CAN IO
+isolation has to be removed.
+
+Also add a helper to detect a low power mode exit/resume.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- drivers/firmware/ti_sci.c              | 38 ++++++++++++++++++++++++++++++++++
- drivers/firmware/ti_sci.h              | 16 ++++++++++++++
- include/linux/soc/ti/ti_sci_protocol.h |  9 ++++++++
- 3 files changed, 63 insertions(+)
+ arch/arm/mach-k3/common.c                | 22 ++++++++++++++++++++--
+ arch/arm/mach-k3/common.h                |  1 +
+ arch/arm/mach-k3/include/mach/hardware.h |  3 +++
+ 3 files changed, 24 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index 6f57dcfe8de8f874318cd53372c798d182faae73..f1cb871e8f45013097f6f8188222770ffe3653dc 100644
---- a/drivers/firmware/ti_sci.c
-+++ b/drivers/firmware/ti_sci.c
-@@ -2710,6 +2710,41 @@ static int ti_sci_cmd_change_fwl_owner(const struct ti_sci_handle *handle,
- 	return ret;
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index b4a605503d27b29d0fb962fbe4c94650a1f6c54f..10964417295c1b3b1e0a36e03617cf1b32d09b97 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -164,13 +164,31 @@ static void wkup_ctrl_remove_can_io_isolation(void)
+ 	writel(0, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_PMCTRL_IO_GLB);
  }
  
-+static int ti_sci_cmd_restore_context(const struct ti_sci_handle *handle, u64 ctx_addr)
++static bool wkup_ctrl_canuart_wakeup_active(void)
 +{
-+	struct ti_sci_msg_min_restore_context_req req;
-+	struct ti_sci_msg_hdr *resp;
-+	struct ti_sci_info *info;
-+	struct ti_sci_xfer *xfer;
-+	int ret = 0;
-+
-+	if (IS_ERR(handle))
-+		return PTR_ERR(handle);
-+	if (!handle)
-+		return -EINVAL;
-+
-+	info = handle_to_ti_sci_info(handle);
-+
-+	xfer = ti_sci_setup_one_xfer(info, TI_SCI_MSG_MIN_CONTEXT_RESTORE,
-+				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
-+				     (u32 *)&req, sizeof(req), sizeof(*resp));
-+	if (IS_ERR(xfer)) {
-+		ret = PTR_ERR(xfer);
-+		return ret;
-+	}
-+
-+	req.ctx_lo = (u32)(ctx_addr & 0xffffffff);
-+	req.ctx_hi = (u32)(ctx_addr >> 32);
-+
-+	ret = ti_sci_do_xfer(info, xfer);
-+	if (ret) {
-+		dev_err(info->dev, "Failed restoring context %d\n", ret);
-+		return ret;
-+	}
-+
-+	return ret;
++	return !!(readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_STAT1) &
++		WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE);
 +}
 +
- /*
-  * ti_sci_setup_ops() - Setup the operations structures
-  * @info:	pointer to TISCI pointer
-@@ -2728,6 +2763,7 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
- 	struct ti_sci_rm_psil_ops *psilops = &ops->rm_psil_ops;
- 	struct ti_sci_rm_udmap_ops *udmap_ops = &ops->rm_udmap_ops;
- 	struct ti_sci_fwl_ops *fwl_ops = &ops->fwl_ops;
-+	struct ti_sci_lpm_ops *lpm_ops = &ops->lpm_ops;
- 
- 	bops->board_config = ti_sci_cmd_set_board_config;
- 	bops->board_config_rm = ti_sci_cmd_set_board_config_rm;
-@@ -2795,6 +2831,8 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
- 
- 	fw_ops->get_dm_version = ti_sci_cmd_get_dm_version;
- 	fw_ops->query_dm_cap = ti_sci_cmd_query_dm_cap;
++static bool wkup_ctrl_canuart_magic_word_set(void)
++{
++	return readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT) ==
++		WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW;
++}
 +
-+	lpm_ops->restore_context = ti_sci_cmd_restore_context;
+ void wkup_ctrl_remove_can_io_isolation_if_set(void)
+ {
+-	if (readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_STAT1) &
+-	    WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE)
++	if (wkup_ctrl_canuart_wakeup_active() && !wkup_ctrl_canuart_magic_word_set())
+ 		wkup_ctrl_remove_can_io_isolation();
  }
  
- /**
-diff --git a/drivers/firmware/ti_sci.h b/drivers/firmware/ti_sci.h
-index ce50bf6800eb1fee70a872d8ae648b1a9582b681..3f8c27c7d8c5b35cc55c18ed33225e7b5262b3da 100644
---- a/drivers/firmware/ti_sci.h
-+++ b/drivers/firmware/ti_sci.h
-@@ -45,6 +45,9 @@
- #define TI_SCI_MSG_QUERY_CLOCK_FREQ	0x010d
- #define TI_SCI_MSG_GET_CLOCK_FREQ	0x010e
- 
-+/* Low Power Mode Requests */
-+#define TI_SCI_MSG_MIN_CONTEXT_RESTORE	0x0308
++bool wkup_ctrl_is_lpm_exit(void)
++{
++	return IS_ENABLED(CONFIG_K3_IODDR) &&
++		wkup_ctrl_canuart_wakeup_active() &&
++		wkup_ctrl_canuart_magic_word_set();
++}
 +
- /* Processor Control Messages */
- #define TISCI_MSG_PROC_REQUEST		0xc000
- #define TISCI_MSG_PROC_RELEASE		0xc001
-@@ -1572,4 +1575,17 @@ struct ti_sci_msg_fwl_change_owner_info_resp {
- 	u16			owner_permission_bits;
- } __packed;
+ bool is_rom_loaded_sysfw(struct rom_extended_boot_data *data)
+ {
+ 	if (strncmp(data->header, K3_ROM_BOOT_HEADER_MAGIC, 7))
+diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
+index 49417679e2ec7210d5c95540f476a5d8ee548617..b7dd52fd1792cb6e3eab5c9f3863f983a8ac08df 100644
+--- a/arch/arm/mach-k3/common.h
++++ b/arch/arm/mach-k3/common.h
+@@ -52,6 +52,7 @@ void do_board_detect(void);
+ void ti_secure_image_check_binary(void **p_image, size_t *p_size);
+ int shutdown_mcu_r5_core1(void);
+ void wkup_ctrl_remove_can_io_isolation_if_set(void);
++bool wkup_ctrl_is_lpm_exit(void);
  
-+/**
-+ * struct ti_sci_msg_min_restore_context_req - Request to restore context from DDR
-+ *
-+ * @hdr:		Generic Header
-+ * @ctx_lo		Low 32-bits of physical pointer to address to use for context save.
-+ * @ctx_hi		High 32-bits of physical pointer to address to use for context save.
-+ */
-+struct ti_sci_msg_min_restore_context_req {
-+	struct ti_sci_msg_hdr	hdr;
-+	u32			ctx_lo;
-+	u32			ctx_hi;
-+} __packed;
+ #if (IS_ENABLED(CONFIG_K3_QOS))
+ void setup_qos(void);
+diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
+index d7c759420524faf48ea26c66607c6a899d1321b3..e4e7dd61c0689db11083b81f2e74ba8bea74577e 100644
+--- a/arch/arm/mach-k3/include/mach/hardware.h
++++ b/arch/arm/mach-k3/include/mach/hardware.h
+@@ -128,6 +128,9 @@ K3_SOC_ID(j722s, J722S)
+ #define WKUP_CTRL_MMR_CANUART_WAKE_STAT1			0x1830c
+ #define WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE	BIT(0)
+ 
++#define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT		0x18318
++#define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW		0x555555
 +
- #endif /* __TI_SCI_H */
-diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
-index 52696763ecf6bc2336e796978e1cc02896db13ab..cb9798c8546617bcea9cc0f49f19c70e1e2c16f1 100644
---- a/include/linux/soc/ti/ti_sci_protocol.h
-+++ b/include/linux/soc/ti/ti_sci_protocol.h
-@@ -632,6 +632,14 @@ struct ti_sci_fwl_ops {
- 	int (*change_fwl_owner)(const struct ti_sci_handle *handle, struct ti_sci_msg_fwl_owner *owner);
- };
- 
-+/**
-+ * struct ti_sci_lpm_ops - Low Power Mode operations
-+ * @restore_context: Request restoring context from DDR.
-+ */
-+struct ti_sci_lpm_ops {
-+	int (*restore_context)(const struct ti_sci_handle *handle, u64 ctx_addr);
-+};
-+
- /**
-  * struct ti_sci_ops - Function support for TI SCI
-  * @board_ops:	Miscellaneous operations
-@@ -654,6 +662,7 @@ struct ti_sci_ops {
- 	struct ti_sci_rm_psil_ops rm_psil_ops;
- 	struct ti_sci_rm_udmap_ops rm_udmap_ops;
- 	struct ti_sci_fwl_ops fwl_ops;
-+	struct ti_sci_lpm_ops lpm_ops;
- };
- 
- /**
+ #define WKUP_CTRL_MMR_PMCTRL_IO_0				0x18084
+ #define WKUP_CTRL_MMR_PMCTRL_IO_0_ISOCLK_OVRD_0			BIT(0)
+ #define WKUP_CTRL_MMR_PMCTRL_IO_0_ISOOVR_EXTEND_0		BIT(4)
 
 -- 
 2.51.0
