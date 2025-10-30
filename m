@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B80CCF9F0
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:04:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56F74CCF9F0
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:04:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28027838CE;
-	Thu, 30 Oct 2025 14:04:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7189383893;
+	Thu, 30 Oct 2025 14:04:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HVkkPJqd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pHinbV8A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6310A83893; Thu, 30 Oct 2025 14:04:03 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id EE6E5838EC; Thu, 30 Oct 2025 14:04:22 +0100 (CET)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45CCF838DD
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 14:04:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D11E83710
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 14:04:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WwGJsNgqcht17DU+EJC71Po3f+4c5l3eki3i5UCk8dUQA6Q/q9zRJ1SfagoSpNhfnRL9pbIyt5Dr5M2+A1Cyotb3pq3BDojd9Mx1rK3U8DqGz/g7FEMWDp02qOKz+rtzdbRqDho7dQadRikc7h3zsYIHNRYpGqFM+iEy65rMLUumTAGTr+xebugt3OkT5M96bDbzNsSlZAc7zlUtOPl+G7CDQ6IPotqpz4ceygHL+j1wqLYi+3tV+DzGJdIlyBgeCrvZRUFRQHEvFSQptnSiX0Qyshvt+DTo06WxckPjDMBNbCBl4bhLbbtFigMhF0nADxvnrOemy8GoPhWhVPtXrw==
+ b=ysFMQHd1yIktwErbJ34nrY3Ut+5ZTvqPVMpV0H2mHtM6FWqR1g6ka1GI/GLeb0Tfcgvr9nB+s7FwNCaOqSJI6kQGu6VRS/6FEGHeIC+4DoDqeQKI+2/ujfoFs4iI+3Yfa/Q+XrrtOVaN+LsoTERScyJ+TSt15m0IaRt3UyGFAyh1vLJIqxtwujd/uudXmApysp58ChxmFivtgvCnSaZC9rAIPVpoMRmrPP7zifMN5/4TyRIqZezg0iQAWYJTqj3FJo5/IZqNsMD6gw4yBtVKM0vKWjmIi1t7176mIMjmGXHuBylKVqV68XO/jC5Q5vXY1QD2CnRK1q5TVWhqu/fVnA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MWoZ6sm/pp6eRlD2rq/zFkVKvNVQqNYOfIGGxmwWMhM=;
- b=URNInuQBrdDb7qpxpcxbGJ467VjAxji3O0qDYgOa6SfOEzdB5ZQ345eSzs5NvXVoYJACJGp4sHT2eDIUoMX9AqUtZPBCNEPIRsk6+LpANuse0hzcBmnJw3eiiz635Pl0jEEVNnldkmZCTttKXMPPor5x8Wkhp4xT33r5xeG0+DMtrWPAsFqg5nol4xHGwF+a8cULBibkGXvQ51pc1h5TquC/cgillbjeSHEhFlCONDFNf07Ud/LOLsRYZffspIY49b2vS9QKnJc+vvhuTsjZQPeQPiuzK3bsJUs6LyCECq4M8TBxbKgo8Ek6k3oAEYaehkkJHkjM1yDj+SlwljNMOg==
+ bh=CAl8mv7kaxrOqDgFn7TFnGvmY4HdStDyvtU8yIyDvlQ=;
+ b=PNHKaQxs6nnGCRpT8YRyE1avZwQqH9hJu5WdXdi8LI9sVOnUsxkH7t/FKObpVRA9/uuF/RdG7coKmJHREAa1juEH1z6EnETCg6ifC+Xm/BYHlaqt5jGetDgcuq0vrOVmYAsxvb1TNklID9FDf7A630tsgxKXOgwvQoFF0E1XGelfyhVVKXLVC/NpO6cCjAm/nmREIrPu393bVmU45Ry4g8ca7Jtf+CcOQjxJtdNNU2y+T1e13UtCkJ1QIquKZD9OCYr21JVu/1HFVOGX/Anu6acm+YD78yjAK9imrRDX51DO++99xPoSRuI+j67QMfNbIetUttls0EUl+OL7TgEN9A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MWoZ6sm/pp6eRlD2rq/zFkVKvNVQqNYOfIGGxmwWMhM=;
- b=HVkkPJqdQB7i1Mfxd95phOBM0HZ1aCYCajehkcQ7ozi7KcyBL7pQ0ckHVPxnwB4gmdOzFmYYyznRsdonLxOnwI/VXX8VpZeFxchXv4Oko63e1pG97sTLqn5iylyNuwP1YJp1Fq7KTDt1v/2QBC1C/Dt6/CkHJlJm9WB1X4iZHGM=
-Received: from MW4P221CA0007.NAMP221.PROD.OUTLOOK.COM (2603:10b6:303:8b::12)
- by CH3PR10MB6857.namprd10.prod.outlook.com (2603:10b6:610:14a::10) with
+ bh=CAl8mv7kaxrOqDgFn7TFnGvmY4HdStDyvtU8yIyDvlQ=;
+ b=pHinbV8A/sK42PPV7ehM4N4y21z/Y9+j3zRHzna9NM0A4oy+Sbd9gGcWRWRI/CNBYYUhRSRDZOzHpTAZxKLMVtzO1vc6cxo0nmJIHOOPHXAO2hA8GJJ0zFUnrzXUVfYBhDPuLB9NSYvTQthlss3zGe1P0x9C1g3i+D83xfQ34Fs=
+Received: from BL1PR13CA0388.namprd13.prod.outlook.com (2603:10b6:208:2c0::33)
+ by DM6PR10MB4394.namprd10.prod.outlook.com (2603:10b6:5:221::21) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Thu, 30 Oct
- 2025 13:03:55 +0000
-Received: from MWH0EPF000971E6.namprd02.prod.outlook.com
- (2603:10b6:303:8b:cafe::54) by MW4P221CA0007.outlook.office365.com
- (2603:10b6:303:8b::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.13 via Frontend Transport; Thu,
- 30 Oct 2025 13:03:53 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Thu, 30 Oct
+ 2025 13:04:17 +0000
+Received: from BL6PEPF00020E61.namprd04.prod.outlook.com
+ (2603:10b6:208:2c0:cafe::c6) by BL1PR13CA0388.outlook.office365.com
+ (2603:10b6:208:2c0::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.4 via Frontend Transport; Thu,
+ 30 Oct 2025 13:04:13 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- MWH0EPF000971E6.mail.protection.outlook.com (10.167.243.74) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BL6PEPF00020E61.mail.protection.outlook.com (10.167.249.22) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Thu, 30 Oct 2025 13:03:53 +0000
-Received: from DFLE204.ent.ti.com (10.64.6.62) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9275.10 via Frontend Transport; Thu, 30 Oct 2025 13:04:14 +0000
+Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
- 2025 08:03:42 -0500
-Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 08:03:58 -0500
+Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
- 2025 08:03:42 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 08:03:44 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 30 Oct 2025 08:03:42 -0500
+ Transport; Thu, 30 Oct 2025 08:03:44 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59UD3fMG2198449;
- Thu, 30 Oct 2025 08:03:41 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59UD3gfe2229520;
+ Thu, 30 Oct 2025 08:03:43 -0500
 From: Anshul Dalal <anshuld@ti.com>
-Date: Thu, 30 Oct 2025 18:33:21 +0530
-Subject: [PATCH 2/3] mach-k3: refactor A53 speed grade clock-rate fixup
+Date: Thu, 30 Oct 2025 18:33:22 +0530
+Subject: [PATCH 3/3] mach-k3: am62a: add support for speed grades
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20251030-ti_speed_grade_fix-v1-2-703e4189640a@ti.com>
+Message-ID: <20251030-ti_speed_grade_fix-v1-3-703e4189640a@ti.com>
 References: <20251030-ti_speed_grade_fix-v1-0-703e4189640a@ti.com>
 In-Reply-To: <20251030-ti_speed_grade_fix-v1-0-703e4189640a@ti.com>
 To: <u-boot@lists.denx.de>
@@ -93,72 +93,72 @@ CC: Tom Rini <trini@konsulko.com>, Aparna Patra <a-patra@ti.com>, "Bryan
  Raghavendra" <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Anshul Dalal
  <anshuld@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761829417; l=14534;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1761829417; l=2888;
  i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=hhOw4WdV19oTlelrEeRFx7sCB3vRhuBPgpnzDV5XYvk=;
- b=nZx+VDDEYh37ieu0frOgn2cyG1TuVIrRYiE44KgifVVlzOdOoMt4MoHr5zIDKxFrSwvEeWwV9
- Q2hugN7kI9ECGxYLOMm6FFpodBJ5PMwFNVbMbgFHjuRsNofeHRQiRK4
+ bh=Vx+zVVc5Q1gLcN50cFdcBThB0pke54BXOlj0WsO3+AM=;
+ b=iS1hjHqbtDKlUYCM73vo3jgneblUpb/Scu7lg40DhHtB7LthbUSBDr0mVcEKdcVJjtYS2VX3L
+ h0qrGYN1/+WBj5iRmki4TShAtNWTUNPAnSfZFZsAoe9y6hd/YzSNRq9
 X-Developer-Key: i=anshuld@ti.com; a=ed25519;
  pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000971E6:EE_|CH3PR10MB6857:EE_
-X-MS-Office365-Filtering-Correlation-Id: e7e96b0f-8ee9-4fb7-f92c-08de17b4c6dc
+X-MS-TrafficTypeDiagnostic: BL6PEPF00020E61:EE_|DM6PR10MB4394:EE_
+X-MS-Office365-Filtering-Correlation-Id: 03ba4b80-f0bf-4c36-2850-08de17b4d3c0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|34020700016|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VmZwdUJKVTNZQVRmU2tSb3ByQllnVXkzMGorSks5aFo5RmRYdnpDK3BHZEov?=
- =?utf-8?B?RDRLUWtFSUZISWlyUjhyZnJxblB4SWpUNVdqR1V5YnpWcHQzSmVuV2t5MjFW?=
- =?utf-8?B?aC9hR21TbVRYZmFhVzloQVJZZlRKemJHbVdHMzEzKzVHandocDJPS2k4REVa?=
- =?utf-8?B?UlBkSEF6dWxLUy9UaW00TDZuTzBMTXp4dWNENFA1a2cvMC80QjRiQVZSTlRK?=
- =?utf-8?B?NU1zNVBvYytWNU13Vk5uQ3ZwNWJBNEtIVjc5RExkU081bTJrZlpjd0NyNjRY?=
- =?utf-8?B?TmdPK1loMkVNQmkrUFdOSk9DRDM2OElMeDdiOEhuWGN5T04xQTlpbnlnVTRl?=
- =?utf-8?B?SVV2YUpseDN6NzM4UDczQlpzbnR0VXB4empvTHgyK0w3V3JBaGdLQ0hLbWg2?=
- =?utf-8?B?ZUhUc3I2NU9EVzZUSzJZclRyTmtmY2JHc29IcmJOam1uU2g0aGt6ZUM2WVZ3?=
- =?utf-8?B?VnNaOXJseDQ5ZzBZNzlDN2YzbzZ0YzhCcjB6WCtiOXVldXBKUHBnb1hXN3h6?=
- =?utf-8?B?cjJUMlNiNDBia2hyQjlGM0cvYzRjay82TVBubkx6MVhtR2E4cE1rK2JxYXkv?=
- =?utf-8?B?Tk5aa0FrRlNUSC9hWUd2dzc0M0lkemVhRG1QclRRWnBCSUIwU1FQekV5TS9S?=
- =?utf-8?B?K2prQlUzWG5YNVk1b1o0VnpFOEV0Q1paaVRjL21CaWlxK3VnQUo4VVBrazRq?=
- =?utf-8?B?c2NHclRITXlXWU50dTNoc0U2VlFkM054ZVYrQ0VvQUY2VzUrRDB0UFVOcyts?=
- =?utf-8?B?VmsraG5rdDFwVVlzR1FGNGp6VzdpeGp5SWR4dC9HRDN1dmp0bE5Fbk9EUkV1?=
- =?utf-8?B?bWp6dnM1b3F1bWFmWS9BbnI3aS9sUkZreDVSWmR6UGovOHNMelNCU0RhSmlo?=
- =?utf-8?B?YXVJMkg4MXIweHJzREFjaStLU20ycElpcHN3Y0RBcytNRGtMMWFaWlVid2VE?=
- =?utf-8?B?aEVkVkkvNklEL0NMTG9BZndHbkY5QUM4cktvVmU5a1ZlK3RUeEMzMUZRQXZp?=
- =?utf-8?B?OFZaMzNBRlp1alJVK2FBMkJPbGYrT0Vhb0I4WmNmWksrL2JyQkJXYkUxcDRq?=
- =?utf-8?B?V3BvWkNRcWd6b1hDc0xUeTNuL2Y0TFdjRUo3MDRkSVJ4RTNIeFhSbDhMUHpq?=
- =?utf-8?B?QkF2U0l5Y0tuRi9FVlpHTEo2ZFBpcEt3bkdTdXVKcDdsVTdkVjdtWS9RMFFS?=
- =?utf-8?B?RGxuT2lxb1V5a3c2VTZGSVhwbmMra2t1TGJwak4xTERENEhTRFpqOENzZ2o4?=
- =?utf-8?B?V3luZ0xYZzBXTEUxNDBhOEdQajQzS0RJVXU3ek1RS2t3UmM3NzNFYjB0Slh2?=
- =?utf-8?B?MHlzQ2FIbUlPMUxBeTRVNzczT2R5b0ozOUdTN085YkRBR2ZYZDVWUTFkMC95?=
- =?utf-8?B?R2wyTElhTGx5QjV6WDVwTXp3K0F2TDN0VDV4a09nSkpwY3ZlMjdMVFhMekRH?=
- =?utf-8?B?cmRhdXFVeVhiNGtpaVptWlhLOWJGQ09ZaUd1UVZBcG0vNHBWSUlIVjBsdGlY?=
- =?utf-8?B?YTlYK3dEcW9BdmJBNXlkWVRPTDZ2ODFPR3h5N09PcmFzbHRFbGxIMEsyU2dH?=
- =?utf-8?B?N2F2V0FIUm1Wd3EyYWhnREh2OTZLQUxUcmc0eGV4eStHaHlENjhKZ3BSMGlx?=
- =?utf-8?B?Q2dpTWdocWFHejNtOHFXMjNyTlJJcy8xVk5nem1YWXlmYmlpM1NHTVltZk9J?=
- =?utf-8?B?RUIvbWhHRHNPb1NNbE1wRXJmVzBFT2p5ZGFmSW4xekhZRGM5NGlhR04zVXRE?=
- =?utf-8?B?UEtRcWhtUHo0RHFiT0YxaEZqb0RETFVQdzlPbVZlRFRhSTFHczJpbXZhdWRW?=
- =?utf-8?B?UlFqUHZ4eldHTnFaM0FSeVc1STZKQjNWdGpySW50TkRYM3J1b01NOHZKMFha?=
- =?utf-8?B?SnY1OWRJaENlVzRydElNSGx5MEUwSS9hTWR1dDZyU1hIME9aK2kwaEZxWTA5?=
- =?utf-8?B?Y2plUGVVcU52Y3dtTnJqRmR0b2NONE9VZzR6TWRqZzJMdlBFZVBCRGdrWm9U?=
- =?utf-8?B?Rkc1OVhiWkVnelpsRjRhMytOcTdzWlpWbEFrQ2ppeFl0d2F1aUFMdmMvYXM1?=
- =?utf-8?B?Nk1zVkpKbTErNTg5d3AramVKZEpQOHJYYXZEdklrTHJrS1d3MjQ4QnVZY0hn?=
- =?utf-8?Q?Pcbg=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(34020700016)(36860700013)(1800799024);
+ ARA:13230040|376014|82310400026|36860700013|34020700016|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QnhPTTR4bEYyN3lRRDRHNy9Kb1E1dnU5RzhoWE5LZmpXdloyRlpzNkhJU3Z5?=
+ =?utf-8?B?Ym9DTG5ycnNLdDdUNGVWNWx1Lys4TTk3d21FZzV0b2E4Uk5jV21DN1p5d2hs?=
+ =?utf-8?B?UExEd084MVh4a1dNakgxQVFlZzVvVHVrenQ4MzgvRGV2Vk51QldSTWpxUDk0?=
+ =?utf-8?B?WUpuMWRFVkV2ZmU3R0FzUTB4Qi9Gdi9yeEhrRkdCSEM4UGtkSTZCNmFtY1RC?=
+ =?utf-8?B?UDVQL0pGUlBlditzMm9tWjRneldVaWR2aDRnaGErSTJ4THZQU2F0bkZ0bnEz?=
+ =?utf-8?B?V1lhVnpxK21ucTVoOFBJUllNRjJ1M2ROOU5hQkp5ZTJhVkJ1RVgwTU9ldHdL?=
+ =?utf-8?B?R2M4Zy81cnhkY0loUVZGa3g4bkJReWEwNG9vaFZjYnJWeitRaEFsRFlGcnhG?=
+ =?utf-8?B?QUpKZitlZklYVUdoWldHcnRnV1JBQVExajlIY21xQ3hmQ1FvT2tBSTRkMXIy?=
+ =?utf-8?B?Z2FtV0c1SlRJc0ZrcStaVnpYaHJ5b3lXYU5PTXZxWlJJb0JMOWJ0ZlZrQi9z?=
+ =?utf-8?B?MmxBbkdJM1R3MGVNR3FqNk8rVUJpRGtGck5RS2NoV1RicHBTVGYrTDltcEdQ?=
+ =?utf-8?B?OUJaMEtMK3RrVG1OZjBVRXdVa2ZEL1F5WDVGTlNsOTU3TGR5YXlEMzRtYlZC?=
+ =?utf-8?B?MTBSeXY5VWtRNC9ZNW9Ia0NacWZsenRwbEtZUlJ1UmttanJDYTFiRXJxaDc1?=
+ =?utf-8?B?UVJ1V3BQd09lOGxmRjNHUjNpRzdGb2h6WVBHS2VNcG5WNTN4YzkzYmtTR2Mv?=
+ =?utf-8?B?TTMrNEFuWkRNS1NTcklxT0VXd2tVUnpXd01JZjhVQXBlU0JXNWQ1UGJBUnZq?=
+ =?utf-8?B?ZXgzc0ZuVytHM2E3aTVGV3JUSGJEWmc4cldsSHEwYVlJTDZVbkU4Rm9PL0JM?=
+ =?utf-8?B?WDM1U1NIVkgvbWIyWTErQ1lMenE1VEhpWmt1YTdodkt6RHVWaklCdkVNblo5?=
+ =?utf-8?B?aS83ZndDVUxBZWNkRzc2aWFyN0NQcXFoQnQ2RUZETzFmZWY1WUlJZ0t0NGtj?=
+ =?utf-8?B?RVFSVzE0cXZJSzZGYWd0ZVVUY0dDQ01Qd3VMNjdzbVY5dUs1aXllcWJRTGJt?=
+ =?utf-8?B?UXM4d3dsTWRvZnU0QXpnTXF6Z3d0RC84N1lSSUpEckc2VVdsWUNCUEljTVFu?=
+ =?utf-8?B?UnBWMmVGUUhndjQzcEVjN2hzclRXQ2NjT1dHUzBveXcwczZZNE1KcVBOSmZB?=
+ =?utf-8?B?M25sM3V0R2lPVEdOVWNRUC9ucTcxQkhqQnNZU0h2anNUeUFkcWp5a2JCRkdv?=
+ =?utf-8?B?OVV2UE9XckhnMGdiTWtuYW1JWDBuanJuN3JadXVmanRIcVJtVlpaM1lnSTg1?=
+ =?utf-8?B?WVhhK1BMby83YWs3c2lHV0MxQmRnMlo5YWdHcGRiMzVVNW5CTTlSWHQ1V3Bn?=
+ =?utf-8?B?OXBwS0tOQ3lxZnJyZUVHY3phYmorU05aYzBxYXpHTld0RkJuaVJjeUhXZ0Vr?=
+ =?utf-8?B?NmlBSDMwYTlOd2R0Zno2Q0ZydXIrbk1QaEVvSndXWjFpR0M1eVVPQmNTNmEw?=
+ =?utf-8?B?SlV5cHNNMWhzTGh4WHIrd3A3ZGJLV1ZLYjBtQVlzVWMzYW9hLy8wNHZ3MEpP?=
+ =?utf-8?B?aGdmeUhDaHdhRlA0WTBTOUc1ME9DZWdkUEgxQ3ZxaWdVMXlUb2dlR1FMOTBV?=
+ =?utf-8?B?U0lyVGFyRHI3UnJ2R1REbmdUYzB0UE1RMTJ5SmxUYkE2a1pOMGc4c0k0cUlI?=
+ =?utf-8?B?L3RXQjd5akl5b0NYclFKelFtTjFLV09nc3YwWWdiWm84ZHoxL3Z4VnF2YTlU?=
+ =?utf-8?B?R2xkV1FMSFgxRThzL0lMV0k0U3hrbFkvcWFzOTExU1dqRnd2dGVuNXcvamI4?=
+ =?utf-8?B?M3h4aXF5ZlAxYzNhVTE1NSsvKy92cDhvMjRyNzFkWmp4US9OWENWT0VNWEQv?=
+ =?utf-8?B?MnRweVpSRkFTa0t3c0hwKzRscElodXd5RWhKUkVWYjE1T2JCakFBNEg3OEQ5?=
+ =?utf-8?B?SzhEajdGMW5XSjRwcHQvMmkzZjZUSXh1TkhvTGtWbGhobkpqTWtmSDVUb2lt?=
+ =?utf-8?B?NnBSNGhIZFZYMG5EMEtYaTZoeTlEa29NSmtVSTA5R0hGRDNhOHhXTy9NZ0kv?=
+ =?utf-8?Q?YBR81r?=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(34020700016)(1800799024);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 13:03:53.0337 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7e96b0f-8ee9-4fb7-f92c-08de17b4c6dc
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 13:04:14.5806 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 03ba4b80-f0bf-4c36-2850-08de17b4d3c0
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000971E6.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00020E61.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB6857
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB4394
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,55 +175,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The K3 ARM64 rproc driver uses the "assigned-clock-rates" value in the
-respective "/a53@0" node to properly configure the clocks for the A53
-core.
+Speed grades indicate the maximum operating frequency of any core on the
+SoC. This patch adds support for the same to AM62a, this allows the A53
+core to be started with the correct frequency by the R5 SPL.
 
-Although the clock value in the DT node might need to be fixed based on
-SoC's speed grade at runtime. Certain SoCs such as AM62p and AM62x
-already had this implemented, this patch moves the common code to
-common.c to avoid duplication and simplify speed grade handling.
-
-The logic to detect the correct entry in the "assigned-clock-rates"
-property has also changed. Where we earlier relied on per SoC specific
-device and clock IDs for the A53 core, we now use the "clock-names"
-property which is device agnostic.
+Reference:
+  Device Speed Grades (Table 6-1) in AM62a7 Datasheet
+  https://www.ti.com/lit/ds/symlink/am62a7.pdf (Page#82)
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- arch/arm/mach-k3/am62px/am62p5_init.c          |  87 ++++++--------------
- arch/arm/mach-k3/am62x/am625_init.c            |  84 ++++++-------------
- arch/arm/mach-k3/common.c                      | 108 +++++++++++++++++++++++++
- arch/arm/mach-k3/common.h                      |  11 ++-
- arch/arm/mach-k3/include/mach/am62_hardware.h  |  24 ------
- arch/arm/mach-k3/include/mach/am62p_hardware.h |  17 ----
- 6 files changed, 165 insertions(+), 166 deletions(-)
+ arch/arm/mach-k3/am62ax/am62a7_init.c          | 39 ++++++++++++++++++++++++++
+ arch/arm/mach-k3/include/mach/am62a_hardware.h |  4 +++
+ 2 files changed, 43 insertions(+)
 
-diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
-index aebd5200b0db9959805d04408b34d283e21b6e2c..eeb054d575ad94040370817f648c5319850fe7f8 100644
---- a/arch/arm/mach-k3/am62px/am62p5_init.c
-+++ b/arch/arm/mach-k3/am62px/am62p5_init.c
-@@ -11,14 +11,10 @@
- #include <dm.h>
- #include <dm/uclass-internal.h>
- #include <dm/pinctrl.h>
--#include <dm/ofnode.h>
- 
- #include "../sysfw-loader.h"
- #include "../common.h"
- 
--/* TISCI DEV ID for A53 Clock */
--#define AM62PX_DEV_A53SS0_CORE_0_DEV_ID 135
--
- #define CTRLMMR_MCU_RST_CTRL             0x04518170
- #define RST_CTRL_ESM_ERROR_RST_EN_Z_MASK 0xFFFDFFFF
- 
-@@ -26,6 +22,29 @@ struct fwl_data cbass_main_fwls[] = {
- 	{ "FSS_DAT_REG3", 7, 8 },
+diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
+index 48d578e7d6f180f06b42003313bf643c725eae7e..cf81ca62f5b59912034290979a406c0bc02eca46 100644
+--- a/arch/arm/mach-k3/am62ax/am62a7_init.c
++++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+@@ -22,6 +22,44 @@ struct fwl_data cbass_main_fwls[] = {
+        { "FSS_DAT_REG3", 7, 8 },
  };
  
-+const struct k3_speed_grade_map am62p_map[] = {
++const struct k3_speed_grade_map am62a_map[] = {
++	{'M', 800000000},
++	{'N', 800000000},
 +	{'O', 1000000000},
++	{'P', 1000000000},
++	{'Q', 1000000000},
++	{'R', 1000000000},
 +	{'S', 1250000000},
 +	{'T', 1250000000},
 +	{'U', 1250000000},
@@ -237,438 +217,50 @@ index aebd5200b0db9959805d04408b34d283e21b6e2c..eeb054d575ad94040370817f648c5319
 +	u32 efuse_speed = (efuse_val & JTAG_DEV_SPEED_MASK) >>
 +			  JTAG_DEV_SPEED_SHIFT;
 +
-+	return ('A' - 1) + efuse_speed;
++	char speed_grade = ('A' - 1) + efuse_speed;
++
++	/* Speed grades for AM62a are not sequential */
++	switch (efuse_speed) {
++	case 'T':
++		return 'V';
++	case 'V':
++		return 'T';
++	default:
++		return speed_grade;
++	}
 +}
 +
 +const struct k3_speed_grade_map *k3_get_speed_grade_map(void)
 +{
-+	return am62p_map;
++	return am62a_map;
 +}
 +
  /*
   * This uninitialized global variable would normal end up in the .bss section,
   * but the .bss is cleared between writing and reading this variable, so move
-@@ -74,62 +93,6 @@ static void ctrl_mmr_unlock(void)
- 	mmr_unlock(PADCFG_MMR1_BASE, 1);
- }
- 
--#if CONFIG_IS_ENABLED(OF_CONTROL)
--static int get_a53_cpu_clock_index(ofnode node)
--{
--	int count, i;
--	struct ofnode_phandle_args *args;
--	ofnode clknode;
--
--	clknode = ofnode_path("/bus@f0000/system-controller@44043000/clock-controller");
--	if (!ofnode_valid(clknode))
--		return -1;
--
--	count = ofnode_count_phandle_with_args(node,  "assigned-clocks", "#clock-cells", 0);
--
--	for (i  = 0; i < count; i++) {
--		if (!ofnode_parse_phandle_with_args(node, "assigned-clocks",
--						    "#clock-cells", 0, i, args)) {
--			if (ofnode_equal(clknode, args->node) &&
--			    args->args[0] == AM62PX_DEV_A53SS0_CORE_0_DEV_ID)
--				return i;
--		}
--	}
--
--	return -1;
--}
--
--static void fixup_a53_cpu_freq_by_speed_grade(void)
--{
--	int index, size;
--	u32 *rates;
--	ofnode node;
--
--	node =  ofnode_path("/a53@0");
--	if (!ofnode_valid(node))
--		return;
--
--	rates = fdt_getprop_w(ofnode_to_fdt(node), ofnode_to_offset(node),
--			      "assigned-clock-rates", &size);
--
--	index = get_a53_cpu_clock_index(node);
--
--	if (!rates || index < 0 || index >= (size / sizeof(u32))) {
--		printf("Wrong A53 assigned-clocks configuration\n");
--		return;
--	}
--
--	rates[index] = cpu_to_fdt32(k3_get_a53_max_frequency());
--
--	printf("Changed A53 CPU frequency to %dHz (%c grade) in DT\n",
--	       k3_get_a53_max_frequency(), k3_get_speed_grade());
--}
--#else
--static void fixup_a53_cpu_freq_by_speed_grade(void)
--{
--}
--#endif
--
- static __maybe_unused void enable_mcu_esm_reset(void)
- {
- 	/* Set CTRLMMR_MCU_RST_CTRL:MCU_ESM_ERROR_RST_EN_Z  to '0' (low active) */
-@@ -251,9 +214,7 @@ void board_init_f(ulong dummy)
- 	spl_enable_cache();
- 
- 	setup_qos();
--	debug("am62px_init: %s done\n", __func__);
--
--	fixup_a53_cpu_freq_by_speed_grade();
-+	k3_fix_rproc_clock("/a53@0");
- }
- 
- u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
-index 14f93ac998f7d11997b753550c0ea38926e35e64..9f7f2d8c084654b1b55a23a6fa889161cd1c8cb2 100644
---- a/arch/arm/mach-k3/am62x/am625_init.c
-+++ b/arch/arm/mach-k3/am62x/am625_init.c
-@@ -12,7 +12,6 @@
- #include <dm.h>
- #include <dm/uclass-internal.h>
- #include <dm/pinctrl.h>
--#include <dm/ofnode.h>
- 
- #include "../sysfw-loader.h"
- #include "../common.h"
-@@ -26,15 +25,34 @@
- #define K3RTC_KICK0_UNLOCK_VALUE	0x83e70b13
- #define K3RTC_KICK1_UNLOCK_VALUE	0x95a4f1e0
- 
--/* TISCI DEV ID for A53 Clock */
--#define AM62X_DEV_A53SS0_CORE_0_DEV_ID 135
--
- struct fwl_data rom_fwls[] = {
- 	{ "SOC_DEVGRP_MAIN", 641, 1 },
- 	{ "SOC_DEVGRP_MAIN", 642, 1 },
- 	{ "SOC_DEVGRP_MAIN", 642, 2 },
- };
- 
-+const struct k3_speed_grade_map am62x_map[] = {
-+	{'G', 300000000},
-+	{'K', 800000000},
-+	{'S', 1000000000},
-+	{'T', 1250000000},
-+	{/* List Terminator */ },
-+};
-+
-+char k3_get_speed_grade(void)
-+{
-+	u32 efuse_val = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-+	u32 efuse_speed = (efuse_val & JTAG_DEV_SPEED_MASK) >>
-+			  JTAG_DEV_SPEED_SHIFT;
-+
-+	return ('A' - 1) + efuse_speed;
-+}
-+
-+const struct k3_speed_grade_map *k3_get_speed_grade_map(void)
-+{
-+	return am62x_map;
-+}
-+
- /*
-  * This uninitialized global variable would normal end up in the .bss section,
-  * but the .bss is cleared between writing and reading this variable, so move
-@@ -123,62 +141,6 @@ static __maybe_unused void rtc_erratumi2327_init(void)
- 	writel(K3RTC_KICK1_UNLOCK_VALUE, REG_K3RTC_KICK1);
- }
- 
--#if CONFIG_IS_ENABLED(OF_CONTROL)
--static int get_a53_cpu_clock_index(ofnode node)
--{
--	int count, i;
--	struct ofnode_phandle_args *args;
--	ofnode clknode;
--
--	clknode = ofnode_path("/bus@f0000/system-controller@44043000/clock-controller");
--	if (!ofnode_valid(clknode))
--		return -1;
--
--	count = ofnode_count_phandle_with_args(node,  "assigned-clocks", "#clock-cells", 0);
--
--	for (i  = 0; i < count; i++) {
--		if (!ofnode_parse_phandle_with_args(node, "assigned-clocks",
--						    "#clock-cells", 0, i, args)) {
--			if (ofnode_equal(clknode, args->node) &&
--			    args->args[0] == AM62X_DEV_A53SS0_CORE_0_DEV_ID)
--				return i;
--		}
--	}
--
--	return -1;
--}
--
--static void fixup_a53_cpu_freq_by_speed_grade(void)
--{
--	int index, size;
--	u32 *rates;
--	ofnode node;
--
--	node =  ofnode_path("/a53@0");
--	if (!ofnode_valid(node))
--		return;
--
--	rates = fdt_getprop_w(ofnode_to_fdt(node), ofnode_to_offset(node),
--			      "assigned-clock-rates", &size);
--
--	index = get_a53_cpu_clock_index(node);
--
--	if (!rates || index < 0 || index >= (size / sizeof(u32))) {
--		printf("Wrong A53 assigned-clocks configuration\n");
--		return;
--	}
--
--	rates[index] = cpu_to_fdt32(k3_get_a53_max_frequency());
--
--	printf("Changed A53 CPU frequency to %dHz (%c grade) in DT\n",
--	       k3_get_a53_max_frequency(), k3_get_speed_grade());
--}
--#else
--static void fixup_a53_cpu_freq_by_speed_grade(void)
--{
--}
--#endif
--
- void board_init_f(ulong dummy)
- {
- 	struct udevice *dev;
-@@ -294,7 +256,7 @@ void board_init_f(ulong dummy)
+@@ -207,6 +245,7 @@ void board_init_f(ulong dummy)
+ 			printf("Failed to probe am65_cpsw_nuss driver\n");
  	}
- 	spl_enable_cache();
  
--	fixup_a53_cpu_freq_by_speed_grade();
 +	k3_fix_rproc_clock("/a53@0");
+ 	debug("am62a_init: %s done\n", __func__);
  }
  
- u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index 7c06764af8256b7fd27f8e7f208a597b1b91652b..3a97b70259e965c6ab400d5fbebd8b46f0a55173 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -304,6 +304,114 @@ void enable_caches(void)
- }
- #endif
+diff --git a/arch/arm/mach-k3/include/mach/am62a_hardware.h b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+index f3fd736f31b8444d84e95099441003c572843226..21bed6e2c6e3480ba5be4560bc0d61ece655d333 100644
+--- a/arch/arm/mach-k3/include/mach/am62a_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+@@ -19,6 +19,10 @@
+ #define MCU_CTRL_MMR0_BASE			0x04500000
+ #define WKUP_CTRL_MMR0_BASE			0x43000000
  
-+__weak char k3_get_speed_grade(void)
-+{
-+	return K3_SPEED_GRADE_UNKNOWN;
-+}
++#define CTRLMMR_WKUP_JTAG_DEVICE_ID		(WKUP_CTRL_MMR0_BASE + 0x18)
++#define JTAG_DEV_SPEED_MASK			GENMASK(10, 6)
++#define JTAG_DEV_SPEED_SHIFT			6
 +
-+__weak const struct k3_speed_grade_map *k3_get_speed_grade_map(void)
-+{
-+	return NULL;
-+}
-+
-+static int k3_fdt_set_assigned_clk_rate(const char *path, const char *clk_name,
-+					unsigned int new_clk_rate)
-+{
-+	int size, clk_name_index, phandle_count;
-+	struct ofnode_phandle_args phandle_args;
-+	unsigned int dev_id, clock_id, i;
-+	ofnode node = ofnode_path(path);
-+	u32 *clk_rates;
-+	int ret;
-+
-+	debug("%s: Setting clock '%s' frequency of '%s' to %u\n", __func__,
-+	      path, clk_name, new_clk_rate);
-+
-+	clk_name_index =
-+		ofnode_stringlist_search(node, "clock-names", clk_name);
-+	if (clk_name_index < 0)
-+		return clk_name_index;
-+
-+	ret = ofnode_parse_phandle_with_args(node, "clocks", "#clock-cells", 0,
-+					     clk_name_index, &phandle_args);
-+
-+	if (ret || phandle_args.args_count != 2)
-+		return -EINVAL;
-+
-+	dev_id = phandle_args.args[0];
-+	clock_id = phandle_args.args[1];
-+
-+	debug("%s: Found dev_id: %u, clock_id: %u\n", __func__, dev_id,
-+	      clock_id);
-+
-+	phandle_count = ofnode_count_phandle_with_args(node, "assigned-clocks",
-+						       "#clock-cells", 0);
-+
-+	for (i = 0; i < phandle_count; i++) {
-+		ret = ofnode_parse_phandle_with_args(node, "assigned-clocks",
-+						     "#clock-cells", 0, i,
-+						     &phandle_args);
-+
-+		if (ret || phandle_args.args_count != 2)
-+			continue;
-+
-+		if (phandle_args.args[0] == dev_id &&
-+		    phandle_args.args[1] == clock_id) {
-+			clk_rates = (u32 *)ofnode_read_prop(node,
-+				"assigned-clock-rates", &size);
-+
-+			if (i >= (size / sizeof(u32)))
-+				return -EOVERFLOW;
-+
-+			clk_rates[i] = cpu_to_fdt32(new_clk_rate);
-+			return 0;
-+		}
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+static u32 k3_get_a_core_frequency(char speed_grade)
-+{
-+	const struct k3_speed_grade_map *map = k3_get_speed_grade_map();
-+	unsigned int i;
-+
-+	if (!map)
-+		return 0;
-+
-+	for (i = 0; map[i].speed_grade != 0; i++) {
-+		if (map[i].speed_grade == speed_grade)
-+			return map[i].a_core_frequency;
-+	}
-+
-+	return 0;
-+}
-+
-+void k3_fix_rproc_clock(const char *path)
-+{
-+	u32 a_core_frequency;
-+	char speed_grade;
-+	int ret;
-+
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		return;
-+
-+	speed_grade = k3_get_speed_grade();
-+	a_core_frequency = k3_get_a_core_frequency(speed_grade);
-+
-+	if (!a_core_frequency) {
-+		printf("%s: Failed to get speed grade frequency\n", __func__);
-+		return;
-+	}
-+
-+	ret = k3_fdt_set_assigned_clk_rate(path, "core", a_core_frequency);
-+	if (ret)
-+		printf("Failed to set clock rates for '%s': %d\n", path, ret);
-+	else
-+		printf("Set clock rates for '%s', CPU: %dMHz at Speed Grade '%c'\n",
-+		       path, a_core_frequency / 1000000, speed_grade);
-+}
-+
- void spl_enable_cache(void)
- {
- #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
-diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-index 52d3faaab5c94578cf4f7e288cbf840500d490a1..6452188bd1949da83be20dcff6e59a282c3ff51e 100644
---- a/arch/arm/mach-k3/common.h
-+++ b/arch/arm/mach-k3/common.h
-@@ -13,7 +13,8 @@
- /* keep ram_top in the 32-bit address space */
- #define CFG_MAX_MEM_MAPPED		0x100000000
- 
--#define K3_FIREWALL_BACKGROUND_BIT (8)
-+#define K3_FIREWALL_BACKGROUND_BIT	(8)
-+#define K3_SPEED_GRADE_UNKNOWN		'\0'
- 
- struct fwl_data {
- 	const char *name;
-@@ -21,6 +22,11 @@ struct fwl_data {
- 	u16 regions;
- };
- 
-+struct k3_speed_grade_map {
-+	char speed_grade;
-+	u32 a_core_frequency;
-+};
-+
- enum k3_firewall_region_type {
- 	K3_FIREWALL_REGION_FOREGROUND,
- 	K3_FIREWALL_REGION_BACKGROUND
-@@ -44,6 +50,9 @@ int load_firmware(char *name_fw, char *name_loadaddr, u32 *loadaddr);
- void k3_sysfw_print_ver(void);
- void k3_dm_print_ver(void);
- void spl_enable_cache(void);
-+char k3_get_speed_grade(void);
-+const struct k3_speed_grade_map *k3_get_speed_grade_map(void);
-+void k3_fix_rproc_clock(const char *path);
- void mmr_unlock(uintptr_t base, u32 partition);
- bool is_rom_loaded_sysfw(struct rom_extended_boot_data *data);
- enum k3_device_type get_device_type(void);
-diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
-index 2f5655bf24ac64cb807e282650712c36ebca0f36..9b8fd6276f112375828acd0e2c3d14fd38dc6940 100644
---- a/arch/arm/mach-k3/include/mach/am62_hardware.h
-+++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
-@@ -113,15 +113,6 @@ static inline int k3_get_core_nr(void)
- 	return (full_devid & JTAG_DEV_CORE_NR_MASK) >> JTAG_DEV_CORE_NR_SHIFT;
- }
- 
--static inline char k3_get_speed_grade(void)
--{
--	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
--	u32 speed_grade = (full_devid & JTAG_DEV_SPEED_MASK) >>
--			   JTAG_DEV_SPEED_SHIFT;
--
--	return 'A' - 1 + speed_grade;
--}
--
- static inline int k3_get_temp_grade(void)
- {
- 	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-@@ -142,21 +133,6 @@ static inline int k3_get_max_temp(void)
- 	}
- }
- 
--static inline int k3_get_a53_max_frequency(void)
--{
--	switch (k3_get_speed_grade()) {
--	case 'K':
--		return 800000000;
--	case 'S':
--		return 1000000000;
--	case 'T':
--		return 1250000000;
--	case 'G':
--	default:
--		return 300000000;
--	}
--}
--
- static inline int k3_has_pru(void)
- {
- 	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-diff --git a/arch/arm/mach-k3/include/mach/am62p_hardware.h b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-index a310b52b45dc5cb76c215c598deee287a2e8e3c6..3c8fbb6b4211153b34fd156ca87b484c5ac9322e 100644
---- a/arch/arm/mach-k3/include/mach/am62p_hardware.h
-+++ b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-@@ -120,23 +120,6 @@ static inline int k3_get_max_temp(void)
- 		return JTAG_DEV_TEMP_EXTENDED_VALUE;
- }
- 
--static inline char k3_get_speed_grade(void)
--{
--	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
--	u32 speed_grade = (dev_id & JTAG_DEV_SPEED_MASK) >>
--			   JTAG_DEV_SPEED_SHIFT;
--
--	return 'A' - 1 + speed_grade;
--}
--
--static inline int k3_get_a53_max_frequency(void)
--{
--	if (k3_get_speed_grade() == 'O')
--		return 1000000000;
--	else
--		return 1250000000;
--}
--
- #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
- 
- static const u32 put_device_ids[] = {};
+ #define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR0_BASE + 0x30)
+ #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
+ #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT	3
 
 -- 
 2.51.0
