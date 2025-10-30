@@ -4,137 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DFEACCF9F8
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 07:57:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B38EFCCF9FA
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 08:42:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30B4883946;
-	Thu, 30 Oct 2025 08:57:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id EE15A838D7;
+	Thu, 30 Oct 2025 09:42:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Spay7b1R";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ldlx8Tvd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D602C83948; Thu, 30 Oct 2025 08:57:15 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9C5B0838F8; Thu, 30 Oct 2025 09:42:20 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB20F838D7
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 08:57:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 011FD838CC
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 09:42:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1761811019; x=1762415819; i=xypron.glpk@gmx.de;
- bh=Yct1CYzC0z6uio7scQM0JOYcLxl2XwmNtTWoKUJvZ3k=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=Spay7b1RkvFJkFFkUzw9yzIEhI9ymoEk1SAKut8EKZM2hkDi41hTMco99qQEituq
- hDSBNNb69WefjZUtiPLN3/qfayIp7/K/DCH3hHv2rjM5gGMv1wzT//aYQntBe7QpS
- ykey1NlXYJp1Uz1qesN+kC/zcPggiv3NUua7OjV8XzK3q5AO65QWeSRd+7fy2Lmu4
- UXPCuPz9CVxaMR41JIzMBSAFlYf71cd5J6GTOLZlhwNiM2XZC7WWZxyf6EgfBZgW5
- B5qFGMceu/S7Da/qL33n+GEGSuV5TAfKtVuc4YNbuxAvRsQj0EAZAGeRLlbbWCVGq
- iyJsDbpB9FiL9uVSHA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [172.25.161.182] ([93.94.208.154]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MkYbu-1vzI8a472s-00lI4G; Thu, 30
- Oct 2025 08:56:59 +0100
-Message-ID: <5bbc14d9-52b4-4ab0-8b37-095794feb897@gmx.de>
-Date: Thu, 30 Oct 2025 08:56:57 +0100
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-426fd62bfeaso353658f8f.2
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 01:42:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761813737; x=1762418537; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=w1WJzpl9czm/nyHNivmcSHgKX0csoVLJA9GkMuH8hs4=;
+ b=Ldlx8TvdJbQeoKqWQ15xaE/ZVcMfouLLff4ZXdyUGnGAxUIjzTkZsDLD63sMh1l40+
+ BUCMpiXj3Uz2/incCv2xf7mj0OIwwIk6D6AFIyqJ4vKJz90ahTqQdOnMRc/TO+QIbM4L
+ FceiZ6szrq5x05TnqMb3F/r3OBaN2+ze0xQZ5zm7r+2UHzrGq+gckgc7+AtgtXMM3vUg
+ TQk/jIl3k9tNEe66HeMDzVX2LlCwzx0RwiWDTsXjWVfdzcuMSaDdcGvjpOFX97N7G793
+ brs2cn0TE19JsBtWWlabfuJZAz7SCFOYHg8NYmTeaVcqHUVFtPBgcaCHgHtUSwzapb6r
+ 260g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761813737; x=1762418537;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=w1WJzpl9czm/nyHNivmcSHgKX0csoVLJA9GkMuH8hs4=;
+ b=cNQ3JecW38bXUbCYQuTEb6yHQKI9c8SEqmwztw55WIoPJZlvNk8ID3NwLn3XJc3yug
+ 7tkH+4nhLezGQi6Gjjyd8LcH8GoEc0NTu9Y/DyeunmyN3dmBLc6iaHquwISdqjDBoHoM
+ 2vgXwEyJ/4xEHQQZQOAOcQCMyyoto6HN4t5s9gsZ9nQyQ7HP8+vyEigPyFtr1fWQaXgQ
+ jZ0aVlmpTFbM1v9ehkknoTqpiQjqzJv6hOXYpOnSKDZx2JJinv5NgEtbAqfJ+38+MklQ
+ 9ZW/qISQJ/Zgm9EIro6WkG6boNWPa7tjsW+ZjeIrK6DyhVrxs3exLdqa0FJlh3g8wcOG
+ qJKw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/lBmg4A2TcUA05236P8Ixa//aTNQL0/PuXKGnDbSS22uEK1D4+gGx7QER2KshWvCvmVDN3/I=@lists.denx.de
+X-Gm-Message-State: AOJu0YxcpMCHCZHL/oNwfEncbRziwLg/X8xKaE01p38w2Hl/DsVDyDY2
+ fnM8+obnSlPEBg1E8b/J39Olyiq8DbRi4dgvkNEp7tmgaivVU3wZSMjHS1TEKHbPmrlDqB+JcQD
+ imu2r
+X-Gm-Gg: ASbGncu8ma4BkYsTqmk66/hoVDexVzoWUZ3U+XUCcNHpKbNA0EpDWOiR8BX+mZo5AZS
+ QYDtX0MYcEHwj7xyQgjbgSmBvqFwiW/ZZmCwn9m/2nHHMvhIrp6KMuHG3SxtaP9smIaEPOUVC2O
+ FzkKGL8xZknI+GXXFEmjnKs5e8UUB+Ew3Fxn9MSV0/3cRLyx+vFSrEWKcIloBOjp20ZLH1xLVP0
+ 9qPox/n3HU5aBMS/BGkRDJRJrEoZbpGwh6dovq5M5h0bVu87SJsu8DUTsIH9+3C+y7IpPjaaeqx
+ afk15hXoL5IO2jix+OlkRtESg+G1q3gb4H6mm6fP4dK9qV/M2ODMpppZb0/3lfubp50w0Y4yeNE
+ P4pxr0Q812/1yTaxYkIGOVczBAXX0PxuBIZESGIAOgISO3uJi7TLk0/BeXtnfB6On/6o138aZbi
+ kJy+1DFz4cccVc67jjb2Fv8O3wiPY0bEl4p3rKojHHqrLHjuMjQP0hbJBwazOHl4I=
+X-Google-Smtp-Source: AGHT+IFkVII1c8XhmlQE3rUhflKmD+tMS7JouCWlI67cBdDnADIXsu4MvinwZoalk2utym3lW+8JTg==
+X-Received: by 2002:a05:6000:240f:b0:3ec:db87:e8fa with SMTP id
+ ffacd0b85a97d-429aef830bbmr5092108f8f.26.1761813737219; 
+ Thu, 30 Oct 2025 01:42:17 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:cad:2140:3e45:b3e1:4bfc:5477?
+ ([2a01:e0a:cad:2140:3e45:b3e1:4bfc:5477])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-429b9b43eb5sm1433632f8f.28.2025.10.30.01.42.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Oct 2025 01:42:16 -0700 (PDT)
+Message-ID: <60141b41-c456-4ea3-a755-d6b4c546d417@linaro.org>
+Date: Thu, 30 Oct 2025 09:42:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/3] ram: starfive: use SZ_8G for 8GB memory size
-To: E Shattow <e@freeshell.de>
-Cc: u-boot@lists.denx.de, Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Leo Liang <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>
-References: <20251030062354.35413-1-e@freeshell.de>
- <20251030062354.35413-3-e@freeshell.de>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251030062354.35413-3-e@freeshell.de>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] tools: qcom: mkmbn: fix Elf constructor
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20251028111334.2508482-1-casey.connolly@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20251028111334.2508482-1-casey.connolly@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:0cQtUJIQbrz5vABe+XQEnIo2LCkbkW21T/I2oszJagZuEYmkg68
- ZclrnnbBYGyoncwKoxF9EXs2uC9zNJnMP2bG+OS/UWc7W6NzKFr9tKT/WKpdKSwvW4l8Flp
- TB/KJMRvScNIhErfRAkHxNRKsaYf7gOL4ro33dnxvHmxP0aD3Mfr8p1lRLsGAqWtw00SgAo
- r/h0cfFEw7VMMkc8gku+A==
-UI-OutboundReport: notjunk:1;M01:P0:e8zhsTqmAWw=;riG80XwGCT1IcRKIAG+hkal9XKS
- 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
- wUljA==
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,36 +126,44 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/30/25 07:23, E Shattow wrote:
-> Replace numeric literal with SZ_8G consistent with other uses of types
-> from linux/types.h
->=20
-> Signed-off-by: E Shattow <e@freeshell.de>
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
+On 10/28/25 12:13, Casey Connolly wrote:
+> The Elf class constructor was missing two optional parameters: the Ehdr
+> object and a list of Phdr's to populate the Elf.
+> 
+> Add these back so that the parse() method will work correctly.
+> 
+> Fixes: 9fe658c97f5e ("tools: qcom: add mkmbn.py")
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
->   drivers/ram/starfive/starfive_ddr.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/drivers/ram/starfive/starfive_ddr.c b/drivers/ram/starfive/=
-starfive_ddr.c
-> index 9e902f03ee9..f030192f6f4 100644
-> --- a/drivers/ram/starfive/starfive_ddr.c
-> +++ b/drivers/ram/starfive/starfive_ddr.c
-> @@ -43,7 +43,7 @@ static int starfive_ddr_setup(struct udevice *dev, str=
-uct starfive_ddr_priv *pri
->   		size =3D DDR_SIZE_4G;
->   		break;
->  =20
-> -	case 0x200000000:
-> +	case SZ_8G:
->   		size =3D DDR_SIZE_8G;
->   		break;
->  =20
+>   tools/qcom/mkmbn/elf.py | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/tools/qcom/mkmbn/elf.py b/tools/qcom/mkmbn/elf.py
+> index 86f12d1f4e5d..7737adc6a4e2 100644
+> --- a/tools/qcom/mkmbn/elf.py
+> +++ b/tools/qcom/mkmbn/elf.py
+> @@ -171,11 +171,11 @@ def _align(i: int, alignment: int) -> int:
+>   class Elf:
+>   	ehdr: Ehdr
+>   	phdrs: List[Phdr]
+>   
+> -	def __init__(self):
+> -		self.ehdr = Ehdr()
+> -		self.phdrs: List[Phdr] = []
+> +	def __init__(self, ehdr: Ehdr | None = None, phdrs: List[Phdr] | None = None):
+> +		self.ehdr = ehdr or Ehdr()
+> +		self.phdrs: List[Phdr] = phdrs or []
+>   
+>   	def total_header_size(self):
+>   		return self.ehdr.e_phoff + len(self.phdrs) * self.ehdr.e_phentsize
+>   
 
+This patch is required to finalize the Qcom PR, I guess it's fine, so LGTM
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
