@@ -4,73 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CEEACCF9F8
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 16:35:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA1ECCF9F8
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 16:36:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D4BD83642;
-	Thu, 30 Oct 2025 17:35:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BC25983849;
+	Thu, 30 Oct 2025 17:36:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d2NR+5zh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JskpxsGd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F22C836D1; Thu, 30 Oct 2025 17:35:49 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 8464483887; Thu, 30 Oct 2025 17:36:47 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FF538334F
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 17:35:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 543EE8334F
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 17:36:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-378e8d10494so12341711fa.2
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 09:35:47 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5930f751531so1317825e87.3
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 09:36:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761842146; x=1762446946; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=RY5LTGBk6ogjS5N7qgEe+Eq96zHtjQipbMyaUYL17xo=;
- b=d2NR+5zhj4xqg01xk8r+4OiVvFdXWo/NQ88sZc5E8Jf6PSf4Qz98+PlGS7Lxvu7C1a
- y4SzgTJpDJ+PWQ4KZJ22GEO6vWJ4DRwVyV7DMkXnP+KeM4g62BCUB6DN154m8r30x9XC
- mTOL2FS/reGZX5YsIWkyX3E2NnDghgF0zYEdJFTzTMgrmZvmEgcCXea4TOwyFLk1SkCa
- hcaB33YPOHfYxzk5wE6FxiuHzc6UMUR4wVECyiYjH9nYSu5duQTej659/UlFdwXrjJJe
- ffu+m8ZqunHpb38Ygkl3ZQ+JPcXKwSpArPnMX/qs1Au8895C9t/t8lQxbC9xXGHuQVgQ
- PbUQ==
+ d=gmail.com; s=20230601; t=1761842205; x=1762447005; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BCqznJ995sOJ8adpwEgPkbSBZRAKBTBpP1RFHWQloR4=;
+ b=JskpxsGdUhn5hUlUdJdVBJ7pQTHm3jlJ2pYEyPZkX0zALL20FFj0PBYMkU3+/qz96Z
+ 7lWaXyPBh2Kv4+BWVIsEF7Gw6NqTk/CfgxIcVuOgt/JpG6h8HGwqbpiHsRmVda14jHId
+ 1cxQDza1KuF2cxmoR+xdKCWAnwXjJukTIwHYAB/UormS5KO8eh+CLUsyOtIpaU1afezO
+ 50d6GWeazaNDtrXCWlHvb26dYZOHIsLQGdaLPPX8L1VAdm/RRVZ38gWSMdIGoS3N9Q/d
+ FuuzydxUKqtm2AxPOri1msoUcXsGP6btaoTC/OtXsct25R/HxDVElMm91ywvW8Aio4rT
+ 9KmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761842146; x=1762446946;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RY5LTGBk6ogjS5N7qgEe+Eq96zHtjQipbMyaUYL17xo=;
- b=r1bODWzX44tSZXJI28blUEKqE2r2DpEY85oa0J/bxbs8PvPri2L39nqWbf7tmwkayB
- ZqwJotscamMoWJmi/C0PrlERcAWgl84Si2nvXvFcTgXPi+ygpr7+s7gAxTGSdJFNfc4X
- cgkjCmlL6wmiC2x0kjCaYtoSIEWEn//nMjA8QuFq/3K8sJ4I5ZKrZjOte1M5pUKMIpt8
- XXSL3ClzinH7Z4CfTz1fKUagzXuTzErPjJJj2AluxUD6eOfLX8eao9EJCFguKYsVq6fs
- 992NUguXx009To7N1t2Bg+mv2+ClswO2su+gGzjwc/44r0lp6V56L2kCV1RSaBeh1N+A
- q6TA==
-X-Gm-Message-State: AOJu0Yyk1tlimwa34OLSb6KtK1nDBX/MYX0ec8UE/+0UiKR+X1K5gT7+
- XMKofXF/B+ldJElb1Rh3WPM25u23fRxulWqvQTdmfjpM+M8gZYo2XDD1JtI4SZQDsfYUhs39E3F
- J0H0VzmTmZLXEA13exkxULKakO7P4I5Q=
-X-Gm-Gg: ASbGnctyfm62NRmDq95gO1wHnlFnAy1G+HzyFcxQvSAnSh416i/FtFsNKZPnKGCHYxP
- Z9Ad6ftK5+EmkYEO8YxQj/oVIWMZXKgWX+LUDcxwv5YPuErxv9cQfSGUmSDxiNZIN+KsjGV1/tG
- lUm2jL8SFEQFpe+rqqiveh3gb45+x95BmHL8Ui2JccC/KxSu5HSCYJmqPY6Qy6BQLqtx9xGoDsZ
- XFWFh47ve7ipQ9YdQ2CFkUDbMjgE36gXnfv1ym1/tgmrzVgGGXjYeQRE7xYFBbAmOWaCUKmag==
-X-Google-Smtp-Source: AGHT+IHmi+DcvGkA9O6w7VYDWEtsMYWZqRTa1knNi8i3d0hdEQBJxbvQbMcNxrrLAFWfBHr1wdoTbc/pNOKIi0H4R+s=
-X-Received: by 2002:a2e:9a0c:0:b0:378:f07e:7fc3 with SMTP id
- 38308e7fff4ca-37a18e1398emr1520881fa.34.1761842145995; Thu, 30 Oct 2025
- 09:35:45 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1761842205; x=1762447005;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BCqznJ995sOJ8adpwEgPkbSBZRAKBTBpP1RFHWQloR4=;
+ b=TuQs3YJltjjVya7oVqcCvEyuipongW8yN7CsvH+H/JNFqw48NVLspZjSnwe/mJ/Egj
+ kXM5YHTrlUC+TMeWxKxeZ8qkPffXXzAsaKkzV74T+/fY190pDrddObWmMjPhPsSkM7iz
+ iUztAr0JvimxdSQEjFyCWs3/IVxWS2updyWgB1WvI2zIGFDP6DclW5Q0PQhRd5hLdJTJ
+ K1Qr0in4yqxvav0ybqC441zoS/iN6KGDOeGOh62HdxOoW/gKy70KGAlKtU02e7WoTJwJ
+ JbN6nFgfI5PgHD5Q8tSBopXnodo4fXGbUwCDyYs3KTlKE2p1m8sNN79f5QusBN2/2q+K
+ ZL2A==
+X-Gm-Message-State: AOJu0YzWlaCQYQOTbhfQmWWkgBpuUsaQO+4GO7FU6hrQG4CjgiCXlGf/
+ msvLUw3OevwcxX7CvJcS+5zVT7AzYZ0rkt0HJ6SbLijYdo/G2ph8Q9eeiNyE4N6zx5RWWzs3twD
+ gnuwJ60H3LUwW9GNqnRsaTLITliRJ2nw=
+X-Gm-Gg: ASbGncvMVL+LuqRddPnNCsz3xN/4FiL6QteUAB4Tb++/2IjJ70R9xbW47cjScaqvmLW
+ ebPBPVeSiy6f0oLmh/9nwmo9clUznQQMx56/CJrjLHg8X0Ag0Y+WUN7is4s9YtbagiXoQxfp3wP
+ xYwSqArig8/dUqP/oc73/LkAg6kXGPs6SmR9FRxekeOb9jrkTj7QrPDzDRonRTIWLgM5ygzE5AQ
+ gvNeFo7/aoerdtWjFvJl128M8yzWQD9H3+OYi47P8SDnXGavQtikT0aT9L8JklgQGdgvD7qusNC
+ yni6L86G
+X-Google-Smtp-Source: AGHT+IGZrQuCGpEGPx9VLwMMZNo0IsYXF0lgJBwu83KnU9liNswzDrqwRhHdn9ULxl8yw2wVVSq2g3y77u3jUyFW/ic=
+X-Received: by 2002:a05:6512:108d:b0:592:f814:3852 with SMTP id
+ 2adb3069b0e04-5941d52534fmr124074e87.20.1761842204215; Thu, 30 Oct 2025
+ 09:36:44 -0700 (PDT)
 MIME-Version: 1.0
+References: <CAOMZO5Any4akaDeRNwxqhcdy_gjxQVHC3aao6sDDxqALxNsp9Q@mail.gmail.com>
+In-Reply-To: <CAOMZO5Any4akaDeRNwxqhcdy_gjxQVHC3aao6sDDxqALxNsp9Q@mail.gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 30 Oct 2025 13:35:33 -0300
-X-Gm-Features: AWmQ_bm8CpmXIGHHFuE7y1ERBWWtz9FOSnSgX26-z1-lzYDOoyESZVLOMhWiURc
-Message-ID: <CAOMZO5Any4akaDeRNwxqhcdy_gjxQVHC3aao6sDDxqALxNsp9Q@mail.gmail.com>
-Subject: vexpress_fvp test.py CI errors
+Date: Thu, 30 Oct 2025 13:36:32 -0300
+X-Gm-Features: AWmQ_blFYWDgQ6Qw0sprMH_AQIap5VAN0m-C_uHJutt1nz4FdB4zYCcpZHjdkjg
+Message-ID: <CAOMZO5ANeCogTO+dyq9GSu7XGeW+H3OZ2CXCEsguhcrQLJwNrg@mail.gmail.com>
+Subject: Re: vexpress_fvp test.py CI errors
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot-Denx <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,15 +93,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, Oct 30, 2025 at 1:35=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> Hi Tom,
+>
+> I'm getting the following vexpress_fvp test.py CI error, which seems
 
-I'm getting the following vexpress_fvp test.py CI error, which seems
-unrelated to the master-next tree I'm building:
+Here is the error log:
 
-https://source.denx.de/u-boot/custodians/u-boot-imx/-/commits/master-next?ref_type=heads
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1279968
 
-Please take a look.
-
-Regards,
-
-Fabio Estevam
+> unrelated to the master-next tree I'm building:
+>
+> https://source.denx.de/u-boot/custodians/u-boot-imx/-/commits/master-next=
+?ref_type=3Dheads
+>
+> Please take a look.
+>
+> Regards,
+>
+> Fabio Estevam
