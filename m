@@ -4,55 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1B27CCF9F0
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 12:05:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ACB1CCF9E3
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 12:16:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A396836D1;
-	Thu, 30 Oct 2025 13:05:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id F39AF83849;
+	Thu, 30 Oct 2025 13:16:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="TwQGQbGc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AahYNqxS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 720F283710; Thu, 30 Oct 2025 13:05:45 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E76DD83826; Thu, 30 Oct 2025 13:16:31 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EE4983642
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 13:05:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 24B231092DB; Thu, 30 Oct 2025 13:05:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1761825941;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=3ZqJl9Ru/vjJzFWeCLe6o2VPTYs8aw078rgtTE9ZWqM=;
- b=TwQGQbGcCwFomiauuWoUbQCdJUjeFIXdUhE5Rwv5s4RQedNLAeDTlvJD1Rp5lGXej2vYGY
- vAHqgXSWB9f0iQf9nITH38vQf86USj8Dzc1vZ9uHSld1Outdi3Hl12o/3KVS79NXyWlPxh
- h1jAV16srTXLVhy8KDwtyGACRlfpm6six3lYREZV/lAe+0rd26/xVyz5Yzrf5Rf5i7D5AH
- UxPmJ6LLoCZ5VKBXvn2Pj/CTCfTdKs7oR8NZu7VdEL84V8ZWz72bOsH8Ji2jICxMnmVb+Q
- 8tndG/60KR14w93HXcTd3xYNBXGxq557TFneAjbBSi1y8pw/NMup/Xiz2zsJgQ==
-Message-ID: <a3a704de-3ff1-e2c9-b41d-87ecc5e23f14@nabladev.com>
-Date: Thu, 30 Oct 2025 13:05:53 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 44999836D1
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 13:16:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-63c45c11be7so1550660a12.3
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 05:16:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761826588; x=1762431388; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=kNwnOsSM56+kAFnc64o27Z6LLWpSMxdG+2xx0mAA+UE=;
+ b=AahYNqxSubwlNjRL2q6D4h2BaXbQTmLgJ7WP7L0LGh8Zau13hWGsHU2PJNmSOSUZGy
+ +MDnD7XU8kgQq1xYQB4adIB34IXtVN6CaqwAJRgQ26fnbE0HqBNhcpMO9LbAj0vGUSOt
+ 7IqhkkqynSzSwfJdQ1KRoKg641K1/1MvXb0/7Gvnw6mfyUBTiGnks1TJOXDGk3AvYfIj
+ Mkvkvk9oDFW7hAvOHJMvjck6DxwJ7rOYDaiJcwU0lc8wvWUhj4T8J6GF6Vap8/6mk/sW
+ e9Dn9A8XeTalV+7hYSfYN6f61LIFkCP76ON4FnenVVkJ9yFoTUUcjl+JUd5VICKLuh01
+ X2BQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761826588; x=1762431388;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kNwnOsSM56+kAFnc64o27Z6LLWpSMxdG+2xx0mAA+UE=;
+ b=dfRA/7DTa3ZCEdqNlyL2jyPwGo40/zcyU9pLcaBaHCYM9pQvIF9oKngGBkj/4C1d2s
+ z7dTlcFj/NnCncWo8hRo5nTNXpy5cyrYgiVSF/rjseRSfp16VduCivtsi1Fwgr0U50ay
+ TsWWcZHoxfVOTdBufX0ck2VaH4C1HzB1VYPSgdIaqO9Oc5Y40QHYOwqEIbxjfDK23IsM
+ rqe199upaiHBWyuSOmsBlie6TZJKs+m9WSdaxMWoVKprulER5slbHsC5d9rzN4jIcRuX
+ Lb6yKhOReCKIwI+AFOu+ViAKCyT5xfYmiWeq/2wdQ9KeAPzkagxh2ulxU/1lLlu1qQVG
+ XXZg==
+X-Gm-Message-State: AOJu0Yx65+fcUV/piDXF4M3ST7cUqllBWuu6+r1Wmii7a5KPnfgQcpN1
+ 3fBDtVOzlY2PHSsmS5MJvmypaKuHP3MENpqwJPjyVWTxAUnU5Gztok+KCKZodXwNSMbYLV/Apk5
+ LPCaHOjU=
+X-Gm-Gg: ASbGnctw9lSv6kDkbc4kFG02Fp/h2lWDdThzqrU0K3nB/fJPZmh2ftgwe+YcQ1Sh+73
+ uLP7O8EbBflRpoUCk5mPO5cJwtnYhgBqmX5r1NV9Dm6yzDIntVjZs+qTojOinnTXSUf39a+cS8W
+ boYbq0JZpVSFEaRnKmSqK2HQRl1+mr9AbCZtcYiSazUI7f+mW7CQxCZcEJkgnF5P8txjmGQ1ORj
+ 2ozRwQzZHnun3LVUlcX11+PmGuntDAUhFYwVVR18V8Z7vSyc3spQzaCXthk3+xVpFD3wez1eZmz
+ MoHujrAXOim8PLbmOzMveM3booPXu1YYW5oAl6I2d8I2hPS34YzBlJWrqWfby2UpArn3ASbBVAI
+ V9YZHQKEdKnhJXmZZODgTZ5G1BC76falR9x0LE3yOo4yeaD7iN5Ou3MIgZbqgoKXZFNdgxygOaT
+ dfo+xNEvE3XV/D/UWPoGSfcJ2ZmAN84M2xFbkjpEW12190
+X-Google-Smtp-Source: AGHT+IH6SRuOSUYJroLcUvOf4cLesfgqGz+lubT6UQsRhd95pJLdZb12AA3ilDeIh5kc7GCCLrUlng==
+X-Received: by 2002:a17:907:d29:b0:b6f:198e:c348 with SMTP id
+ a640c23a62f3a-b703d5392demr615108666b.46.1761826588379; 
+ Thu, 30 Oct 2025 05:16:28 -0700 (PDT)
+Received: from lion.localdomain (p5b29e67b.dip0.t-ipconnect.de.
+ [91.41.230.123]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b6d8548eda6sm1710123266b.75.2025.10.30.05.16.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Oct 2025 05:16:27 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: u-boot@lists.denx.de, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
+ Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>
+In-Reply-To: <20251010051200.2313081-1-venkyada@qti.qualcomm.com>
+References: <20251010051200.2313081-1-venkyada@qti.qualcomm.com>
+Subject: Re: [PATCH] qcom_defconfig: Enable meminfo command with mapping
+Message-Id: <176182658725.4111945.15659133151094956735.b4-ty@linaro.org>
+Date: Thu, 30 Oct 2025 13:16:27 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v4] i2c: add support for the MT7621 I2C controller
-Content-Language: en-US
-To: Justin Swartz <justin.swartz@risingedge.co.za>, u-boot@lists.denx.de
-Cc: Anshul Dalal <anshuld@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Tom Rini <trini@konsulko.com>
-References: <20251027130942.12387-1-justin.swartz@risingedge.co.za>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20251027130942.12387-1-justin.swartz@risingedge.co.za>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15-dev-52d38
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,94 +99,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Justin,
 
-On 27.10.25 14:09, Justin Swartz wrote:
-> This commit introduces a port of the Linux kernel's driver for the
-> Mediatek's MT7621 I2C controller.
+On Fri, 10 Oct 2025 10:42:00 +0530, Abbarapu Venkatesh Yadav wrote:
+> Enable meminfo command to be able to see where things are mapped.
 > 
-> The port was undertaken as the existing driver intended for Mediatek
-> I2C controllers (mtk_i2c.c) is not compatible with the MT7621.
 > 
-> To use the driver:
-> 
->    1.  Ensure that the mode of the i2c pin group is
->        configured for "i2c" rather than "gpio".
-> 
->    2.  Delete the existing (bitbanged) i2c node from
->        arch/mips/dts/mt7621.dtsi, or specify:
-> 
->          /delete-node/ &i2c;
-> 
->    3.  Declare:
-> 
->          i2c: i2c@1e000900 {
->                  compatible = "mediatek,mt7621-i2c";
->                  reg = <0x1e000900 0x100>;
-> 
->                  clocks = <&clk50m>;
->                  clock-names = "sys_clock";
-> 
->                  resets = <&rstctrl RST_I2C>;
->                  reset-names = "i2c_reset";
-> 
->                  pinctrl-names = "default";
->                  pinctrl-0 = <&i2c_pins>;
-> 
->                  #address-cells = <1>;
->                  #size-cells = <0>;
->                  status = "okay";
->          };
-> 
-> Signed-off-by: Justin Swartz <justin.swartz@risingedge.co.za>
-> ---
-> 
-> Notes:
->      [PATCH v4]
->      
->      - Fix style and whitespace issues to appease checkpatch.pl
->      - Include time.h (instead of common.h) for get_timer()
->      - Replace mt7621_i2c_check_ack()'s MMIO register access,
->        via a volatile pointer, with readl() macro expansion.
->      
->      [PATCH v3]
->      
->      - Add an empty line between variable declaration and code to
->        functions that did not have this separation.
->      
->      - Condense multi-line closing brace / else / opening brace
->        sequences into single lines consisting of "} else {" instead.
->      
->      - Relocate mt7621_i2c_check_ack()'s I2C_M_IGNORE_NAK flag check
->        to just after the last variable declaration.
->      
->      [PATCH v2]
->      
->      - Add "REG_" prefix to I2C (Serial Master 0) register definitions.
->      - Remove unused "PINT" (Peripheral Interrupt) register definitions.
->      - Adjust function definition style.
->      
->      - Refactor mt7621_i2c_check_ack() to accept the number of bytes
->        expected to have been acknowledged, instead of accepting a
->        literal value (which represents the acknowledgement status of
->        (up to) 8 bytes, encoded as 8 independent bit values) expected
->        in the SM0_ACK field (bits 23:16) of the SM0CTL1 register.
-> 
->   drivers/i2c/Kconfig      |   7 +
->   drivers/i2c/Makefile     |   1 +
->   drivers/i2c/mt7621_i2c.c | 374 +++++++++++++++++++++++++++++++++++++++
->   3 files changed, 382 insertions(+)
->   create mode 100644 drivers/i2c/mt7621_i2c.c
 
-applied to u-boot-i2c.git
+Applied, thanks!
 
-Thanks!
+[1/1] qcom_defconfig: Enable meminfo command with mapping
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/e51d4d23c714
 
-bye,
-Heiko
+Best regards,
 -- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+// Caleb (they/them)
+
+
