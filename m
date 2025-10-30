@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 863DCCCF9E5
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:02:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD3ECCF9EA
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:02:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17FDF838C7;
-	Thu, 30 Oct 2025 06:02:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 68CD9838BF;
+	Thu, 30 Oct 2025 06:02:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VSuihK8m";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jlF3sk3z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1914C838C8; Thu, 30 Oct 2025 06:02:09 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 8B5A8838D5; Thu, 30 Oct 2025 06:02:21 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 424DD836D1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:02:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2A67836D1
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:02:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-63bea08a326so789067a12.3
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 22:02:07 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-63bf76fc9faso1209485a12.2
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 22:02:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761800527; x=1762405327; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761800539; x=1762405339; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KfwJTvTURA+EkhQl8V0Shua2TIcT0j8kRaSzm8+EgL8=;
- b=VSuihK8mioW0jixEboRS0oMJRa9Iq5lvQMP6ZunxcZR4M89eFCiRPoNxbV5uqkZdnx
- Fb9SJGV4gB24plumtlLYiiO4HMoIPjaxDKuKJdiqfrpqbcE66M0hhryG+9LnS80Aak+7
- aZoGPcnJW2NmTtrlG+ciyCpJVjCY+5l68FVdHXrzwvkfMRBuja2+OnMQeH9GnUvsgQtX
- rd7L/rE1L3is7lVhmTWYPSgv8nQhhtphr+9/y+6zxv2T9kOAl9GrvDNudifF0qiDODwp
- aiMckdBYYO29zpH21OUw4Hj9d14rY9DLCfR9oOxgMZrUs2Gx7HdiO0oJCTessj3IikeQ
- BnKw==
+ bh=CkxGrPAKx9oUqyWqSsgbjM/+eFWmTt7OREyX9YfXtmk=;
+ b=jlF3sk3z8KlEszVVITq/aZFgfd5jOp8QGWILDE5MNARtaVTS2/6587mrTYAunBWGHc
+ eaHdWf3unxO6/ZdvkckfWGaxItiUt0icbYp82++E+apZQ0XM3QX/v9AUQ6yGpBR4EEUA
+ ZZFijQuxHaCYT+ZnMARYZgqmedEHpYI+5rf5RUUXFedhfif0ioQ8FSSH3www1Q4S89EI
+ QjmgYd/7JPgxpqfRk7tsm4t8K7x4cl9CtMtP2Iiz89rYE0luMWDAeofpe4z8R6b4h0fC
+ PlFNMDKxKwrgigJR2vFL6ijylOB1rDjmIcwzrnb78Og+3Yqk2xqZsTNNPKVy447/4hUu
+ 1FaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761800527; x=1762405327;
+ d=1e100.net; s=20230601; t=1761800539; x=1762405339;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KfwJTvTURA+EkhQl8V0Shua2TIcT0j8kRaSzm8+EgL8=;
- b=W9Q5HaqBy2uC7MWxvQ1UBZlBwP0kFchGD1B5A8npOa0ruTrixJKVRQVsXacGvbEUdN
- YWmEiQztDKfpEtGiKjH0axzNGb2qx1eeBHHUlbdCqJTCRaMsdeoutboRBNnQkh1PgueX
- +quwDqVtRDpHeRbKITAx97AxxCiPYe2EQogAyKUfRjcjM9/y8oiSaJV7WFA4kp8/USID
- PGFHzRpOuasHGtdpqU97N3HfdGHd1jDEcfrIa3J4MsjoNc6Ge1WSnZfuVQC6WILR7LP+
- lOjO5RvqPmKjhEBpjceoBK9mHLcx0967b/tk/Qeebf90rbRsf0Pbz2W5eil+3sK3VtRI
- ACaQ==
+ bh=CkxGrPAKx9oUqyWqSsgbjM/+eFWmTt7OREyX9YfXtmk=;
+ b=PfebJrTm4ld/3ddjzdakS/LuZiqe8hVP5CJVJNJcqn445pG+ovkUElZM8+t6qP7vX7
+ hV4SipQ8gF9garxlDIGPQObYw9lqdPIdacQ9mCYt1+sa0kxFbpe5jVi9LJLya7yLDGIR
+ iPpqoVIh60XvIs0CSmMfMo5xaku8QhF8i3l5mVOwCv7RCsfrZ7vXUh1bTiaHfgifzx8M
+ +eRXOTNa1Qgy/jG37FLtQgPquHB4YXWAym1ctanaobxizbf2bpx7fwsG2bFvvkETkaPb
+ lN/9LVlj43supfB6YtTgoY3W2/JfIb4BO/uPcpDK5dnB/0xUrZ8SEVnCv1FMhblr1Z6h
+ rirA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWsc+PodCAWyD9i1l6ihFMMhG5hGkoUzAZy5gNQZx+w/gN7id0YN0rraZrgT3yFAf/KF8b/1do=@lists.denx.de
-X-Gm-Message-State: AOJu0YzNVuAKCICQhVh8axRDf1oTkljEpaT0jW0GHrdYWrgdh513Vbge
- pT+1ccxGnYU4xOBbeKAezmRpwOyNsOWuXL+rHDCf+zTdZuxEL85QKfxA1Pj7WHW2VdeAaoCtL8y
- 0U+iXvD6SHQ/Y5rCDMPytxItjm2TDCm8=
-X-Gm-Gg: ASbGncuTj/WLa4ifc/qIRU7LWUgFQSBQAYqtFW9NFwgvJji/b8GE7US4e483TVtVHSw
- Ce63Hi2pNV+wv7SQXvbGgDFdTH0mCUgHCLJqf4EBJRjVzZDmH/uEMfhv/iBitjAk8y5d1oJBFTM
- uf6mC/fvoJKnYnGNkFYhbcLDsM7AzbogHcHoJ07ZtbuXHytvzf/tdyC9VVDPnSgwbVVbonWa3Lj
- l1WuuegqsiDMk/Zw6MA+BsurZT0xBIxX42iI8M0IZ72RbFWwFdYKi9CsUTYxTlICr6Ufw==
-X-Google-Smtp-Source: AGHT+IEO1tv8a5bIDrunFOMUYHalK5Ps+Q4//2+/YVVB47l6a3rWwF/oPkw+jvHemspI7bonSCN2+bfLs5MJCwxMQFY=
-X-Received: by 2002:a05:6402:26ce:b0:63b:ee76:3f5b with SMTP id
- 4fb4d7f45d1cf-6404425e4a9mr4019221a12.25.1761800526632; Wed, 29 Oct 2025
- 22:02:06 -0700 (PDT)
+ AJvYcCUPViqUQgAbBPDPe5Ni7tcjwKSPX5U43qs0MYtT8JBnhAJ9xA82iAL03qNEuc7ttSDdX8FfGTw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwEGdIalbMJEpTS1OePQ6rwgrln5gEZ56dU/O9FQmVG/p5NvzXg
+ Z5IwYriP38CveCoSjXtFLyfhBd+F08r0HVvu38QwFDT3CJmr8+fCG64eifmXVoSknSGdYcrTR9z
+ /8zRwZ3cqn5sP5yUdMtHc0JBK/tTB770=
+X-Gm-Gg: ASbGnctKSGg7DYgXeDPUdlxB5Njo6PRstUcjXiaWVn88zM382uaGnz6p6HlZrXoKc25
+ EYp+nY8RX6Z7vlRKV2GEoVshob0xKj7JfRMFcxxj2gzASZtxxNqrLX11nRs8HOkIDLkWRvV7z9p
+ rNEE3zNUflD1HVWWaR6CoTEXEFewcZpDjpWgLJxR81vJLE9F/w/JpbN1fNlfqB31UKbJixBpO/q
+ bvnqL0ZcDQwuGEVny5vJ1jDFcMaA9EJGW31xLaRKix05uFz9wQqN9569VNyGr+DSqQrVg==
+X-Google-Smtp-Source: AGHT+IHG0RkZdB/CpQu0Dd/JjJRXBWmP09gEBxamu/kHRJ0qrprX4n5TIOBEk+QBYuRtUs7+PUkirtJJh/0XjCOloeI=
+X-Received: by 2002:a05:6402:430c:b0:636:9129:8826 with SMTP id
+ 4fb4d7f45d1cf-640443dc7e7mr4052146a12.38.1761800539053; Wed, 29 Oct 2025
+ 22:02:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251026010658.19271-1-semen.protsenko@linaro.org>
- <20251026010658.19271-4-semen.protsenko@linaro.org>
-In-Reply-To: <20251026010658.19271-4-semen.protsenko@linaro.org>
+ <20251026010658.19271-6-semen.protsenko@linaro.org>
+In-Reply-To: <20251026010658.19271-6-semen.protsenko@linaro.org>
 From: Anand Moon <linux.amoon@gmail.com>
-Date: Thu, 30 Oct 2025 10:31:47 +0530
-X-Gm-Features: AWmQ_bm1NLxpscOxHcxV3U-cUlity0C202hjVNfFzeno5jNgepkKKZWNQ2dK39g
-Message-ID: <CANAwSgSchAby-x_GXByLgaaUszpqihX9MQHUVjVGdfhkj274ZQ@mail.gmail.com>
-Subject: Re: [PATCH 3/6] mmc: exynos_dw_mmc: Improve coding style
+Date: Thu, 30 Oct 2025 10:31:58 +0530
+X-Gm-Features: AWmQ_bmGmUonz_9zEMn98tdB1OXP2BDYXZWwIYtJCVCMnOUZrgeNzWR4vMhFMTk
+Message-ID: <CANAwSgRq3CrRXfxKFUdSvM9M46WLmzXTOXkVtRAqfyoQMe0AxQ@mail.gmail.com>
+Subject: Re: [PATCH 5/6] mmc: exynos_dw_mmc: Add exynos850 compatible
 To: Sam Protsenko <semen.protsenko@linaro.org>
 Cc: Minkyu Kang <mk7.kang@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
  Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
@@ -100,10 +100,14 @@ Hi Sam,
 
 On Sun, 26 Oct 2025 at 06:37, Sam Protsenko <semen.protsenko@linaro.org> wrote:
 >
-> Exynos DW MMC glue layer driver have seen a lot of changes recently.
-> Stabilize the coding style.
+> Up until now "samsung,exynos7-dw-mshc-smu" compatible was used for
+> Exynos850 SoC, as it's present in its device tree. But Exynos850 device
+> tree also supports "samsung,exynos850-dw-mshc-smu" compatible string.
+> Add it in compatible ID list in the driver so that it can be matched
+> against this string for Exynos850 device tree.
 >
-> No functional change.
+> No functional change, as the driver data is just a copy of
+> "samsung,exynos7-dw-mshc-smu" data for now.
 >
 > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
