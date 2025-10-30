@@ -4,120 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB114CCF9FC
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:04:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A612CCF9FC
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:04:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F624839C6;
-	Thu, 30 Oct 2025 14:00:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D641D83885;
+	Thu, 30 Oct 2025 14:03:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="zTUK1FEa";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G/NNqs1M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FF8D800B1; Thu, 30 Oct 2025 11:01:49 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F406B838BB; Thu, 30 Oct 2025 14:03:58 +0100 (CET)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c101::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 581EF832AD
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 11:01:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E314583710
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 14:03:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3ece0e4c5faso841361f8f.1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 03:01:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761818507; x=1762423307;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=BJLqWRejbqGGWB2ClRyBmoFJla4Vp2XGf46a/xI7PrA=;
- b=zTUK1FEaw4IfWIai2CcPJ75EDPfsxxms57eZ1glBeopfwSugqWm9FPY7BKnxrQz1pm
- Ttu8Nmjqk8nSkuRJQc2XDCUKJreoF5sThzha3eMj27dw4OQFtsDx6Cj2JKuDE/PMefe0
- KzQReQiP0icRlnlOEtrMeayHTm4Mllru/jnwveDX6eeonjHsxXfhAIa7U3PPzDeIiZK+
- jV9NfXh5MwHyK4n1CQLjkrEw586LofCbXhEvHisZLtEWItbwc6n5+tBQrQJ8KRfTSIEq
- u5ti7HDcR45tMPUQjUvZetHRiXPOxtJD6/fMy32z1zCD5EqfC4QG9yYMKjcrUSlaYynP
- dqpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761818507; x=1762423307;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BJLqWRejbqGGWB2ClRyBmoFJla4Vp2XGf46a/xI7PrA=;
- b=I0FFOwR9Yp2zeaKpVt0qQj1hooR39O8oLlmfLBJO4oruunOC4xPnyA3GK3gMTpqxTv
- aclxvCGq9+VJpnTud6YkV24Y//rOwS/p1qVn0WZcTqjHx6LRABMjivhs5wkQ7+uGbHfq
- oyY/3AQ9ilUJq9L04mqUFTcbqRE35TB6UBc/JOnBGPi7De3tlmFEr1axMuim8VCixHUr
- 9rSdB81SntTVTWSNnPsSeJ0D4ZcbdVM3hZFDpRJNISJhINl4JWSOOVqUWMNgvm+JnYjj
- 23s7zzKl+nGzP2hIgieH+U29NL0sn2H10XmaPYbwlanse1/zQu9X0ZKXOi00v3Jho4uo
- IIRQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXTRktHMbNazf5sSmr2LC+/JChgBHTp+ZQFjClbtK44OlVjNwcCnt+9EIuPuW7iCIvgS9FfAJo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yww205E58L7R3HcSYf9bM9EdVz4swj+X3pSd4PJZNZjk4QTRIR7
- dyS0jEhmNcj4vEr5v0CMozsAWQ2As2NDT/oJId/rcm0H8AzH96TuHUFeRwq92Fwk/pk=
-X-Gm-Gg: ASbGncvycarebcpVTN3sCyjzhnk5jN+sHW5Ai9ceg1uWdn9KXiGx8PsFJAaljd5Cp5m
- 27D6Y6LfWcuSWKZangY3tm7IifkVjbaL2s47i9LyTQQCEHKk/8janOqcDYeAS09yizSP630Ly5p
- tBbbcoM8Mm27UiyhEL680hdh/JwBdRnwKpJ+lsvIbnEMo3ilzAdJ37MhEQ0Ckf7tHOEJN4tHEXy
- urkAW5dGfZy6iC1+gUWr4gF9FxbF1InzABMRZf9Hjesq/No1cXzwKRI53aS+a6TzFh1Pd3cbzu2
- PBIrNLuOlsE+qMSlmT0fikPy8dlKVJbIAbC8vkWgv3x5ggVTNVm2bgXSv5UW5WKqBwsxg8EO9Gk
- gJCn/jE4tyEUp1bUKCXYKJl9fDd7JfBwvWPjtGq60z3EepVyOhsGqbgRanBzSiJS98M+3v8kBvk
- /sO2NYs+iHh9KSi0AaY6E=
-X-Google-Smtp-Source: AGHT+IHUbzZfI1l3fru0fJ6o6dgd6MR689pzm+I9nklaSTSIY1wkeRUfY9C370JY97TQgqeiLuHg4g==
-X-Received: by 2002:a05:6000:4a1a:b0:429:b9bc:e825 with SMTP id
- ffacd0b85a97d-429b9bce91dmr1040858f8f.46.1761818506775; 
- Thu, 30 Oct 2025 03:01:46 -0700 (PDT)
-Received: from localhost ([2001:4090:a245:8496:49da:2c07:5e9a:7fb9])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-429952da645sm29797819f8f.30.2025.10.30.03.01.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Oct 2025 03:01:46 -0700 (PDT)
-From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Thu, 30 Oct 2025 10:59:31 +0100
-Subject: [PATCH v4 13/13] configs: am62p_evm_r5_defconfig: Enable IODDR
- resume support
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=voZNMPJS6gsP+3Ur6i4hSqv7QagATyzhZF68EuQzrkSRQ69MKmJwGEBVT0Ss8pG2GfgmleSLLM0BBK942B4SnaZW3a5S8KRXj3F2C1IyLbBUr9HcXXIE5HEv5MIBgzNYJ3P6zmNcu/VkwGS+BRgrWjMA8Ol1uh7oPl4bMQy3T1A5U3fYH7D+Sycv74FfaV7vzY3H3OTotGV039fpEyKyLMx6kjTCSX2mWcof1lUuGhHjliRRVPIR8Zw/2X4wYb7DTFnAnmQOLmKxW4MJOIhe9J+h3UWy6DHmWm/plVEr+tZlcPg56NlsSNQnWZkuVJZkUwWmzP925MgzQ2y5eM5eJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yJixyNkvttCGucdlkh8aW8NEtQj7HlBvTAuzrOEeX3o=;
+ b=F8/GUynrfuSdnrgnREDp7Lwr/+p6kp8zjYYTCBgPBpACbYgEGeA3S6lCg1bbsG6ryqeZp5YXWEHanF8FfbA7VFe9TT5zOZidn9frZEjlIouMO2uJZs7vm0H/3dySY/i39LH2ce9Lf6Zs9jnoIpHOjonJ5dsPRDAEpoCg4K1+48vr8WcMhSX0f9bGAWQvmHBeA95/x0RrVvh/aa7h/jL0yG8okgGMxKH3gQyFKuYlPYo9JuAki1gRUaL1pU2qTka1df0eGXYyLUVkNZ/lkuCXoZY5HjtqYf9VWMWZHww35kUCVIJnCn4jmGA+rKs1J1Pb1Bub1p6jGeva1U8l6R5P+w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yJixyNkvttCGucdlkh8aW8NEtQj7HlBvTAuzrOEeX3o=;
+ b=G/NNqs1M9tOrxaXLwt2bU2k5EgVBnD2FJFZSaAaHdQuO+N4oW0dAvgBMLSOU5jP2QS3RynnTzS9pOuVMimFOAHREr7cHuBckQfvzv8+iI4fy959SnGJ+auvl5LccD2TnFxatmnQrMcKDDlzrZWjCamOVhPG/oLK6wwDxi2okEgw=
+Received: from MW4P221CA0007.NAMP221.PROD.OUTLOOK.COM (2603:10b6:303:8b::12)
+ by CH3PR10MB7575.namprd10.prod.outlook.com (2603:10b6:610:167::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Thu, 30 Oct
+ 2025 13:03:51 +0000
+Received: from MWH0EPF000971E6.namprd02.prod.outlook.com
+ (2603:10b6:303:8b:cafe::eb) by MW4P221CA0007.outlook.office365.com
+ (2603:10b6:303:8b::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.13 via Frontend Transport; Thu,
+ 30 Oct 2025 13:03:49 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ MWH0EPF000971E6.mail.protection.outlook.com (10.167.243.74) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9275.10 via Frontend Transport; Thu, 30 Oct 2025 13:03:49 +0000
+Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
+ 2025 08:03:40 -0500
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
+ 2025 08:03:40 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 30 Oct 2025 08:03:40 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59UD3dQx2229473;
+ Thu, 30 Oct 2025 08:03:39 -0500
+From: Anshul Dalal <anshuld@ti.com>
+Date: Thu, 30 Oct 2025 18:33:20 +0530
+Subject: [PATCH 1/3] mach-k3: am62px: remove fdt_fixup_cpu_freq_nodes_am62p
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-13-4cef18af0226@baylibre.com>
-References: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-0-4cef18af0226@baylibre.com>
-In-Reply-To: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-0-4cef18af0226@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>
-Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>, 
- Dhruva Gole <d-gole@ti.com>, Sebin Francis <sebin.francis@ti.com>, 
- Kendall Willis <k-willis@ti.com>, Akashdeep Kaur <a-kaur@ti.com>, 
- u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, 
- Moteen Shah <m-shah@ti.com>, Santhosh Kumar K <s-k6@ti.com>, 
- Nathan Morrisson <nmorrisson@phytec.com>, 
- Garrett Giordano <ggiordano@phytec.com>, Judith Mendez <jm@ti.com>, 
- Aparna Patra <a-patra@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
- Chintan Vankar <c-vankar@ti.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Prasanth Babu Mantena <p-mantena@ti.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Beleswar Padhi <b-padhi@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Andrew Davis <afd@ti.com>, 
- Wadim Egorov <w.egorov@phytec.de>, Udit Kumar <u-kumar1@ti.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, E Shattow <e@freeshell.de>, 
- Devarsh Thakkar <devarsht@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Andre Przywara <andre.przywara@arm.com>, 
- =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Message-ID: <20251030-ti_speed_grade_fix-v1-1-703e4189640a@ti.com>
+References: <20251030-ti_speed_grade_fix-v1-0-703e4189640a@ti.com>
+In-Reply-To: <20251030-ti_speed_grade_fix-v1-0-703e4189640a@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Aparna Patra <a-patra@ti.com>, "Bryan
+ Brattlof" <bb@ti.com>, Udit Kumar <u-kumar1@ti.com>, Dhruva Gole
+ <d-gole@ti.com>, Judith Mendez <jm@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
+ Andrew Davis <afd@ti.com>, Aniket Limaye <a-limaye@ti.com>, "Vignesh
+ Raghavendra" <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Anshul Dalal
+ <anshuld@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=633; i=msp@baylibre.com;
- h=from:subject:message-id; bh=8q3WU1UttF57TPGTLBQNZggAFoDrgWAZidX35YOBHDI=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkxm89ywX3vSor7oiVg8np+5m7eraWPm6iPeXNuEvnPZV
- nl8qwzpKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIloOTP8Zo9UOS7hn8bX5p7+
- TPncZpPdZlOOZTt0JEdd/HR56ye30wz/zB9/uTxF50xowM3Zx3+0lnmfny7jGbrrScmvA3Nsvju
- xcwMA
-X-Developer-Key: i=msp@baylibre.com; a=openpgp;
- fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
-X-Mailman-Approved-At: Thu, 30 Oct 2025 14:00:47 +0100
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1761829417; l=1809;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=ZPGqVsZL5tsObtVKanGAs5SO091mdQ/ap0W6o8qIqoQ=;
+ b=x+q72Z1smMvV9GgkLbsg13GWWWuEVy7sb2hgTkyXBkI7eJz7rbaQ38uhIyfiR9tzipvKIXkNM
+ CjrkcvI9dItCXAoufgHqU/IA/vmuYy86MdYbHpo79v2is9UFhFt2s4C
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000971E6:EE_|CH3PR10MB7575:EE_
+X-MS-Office365-Filtering-Correlation-Id: 14fc32e8-684e-4855-36ee-08de17b4c4d5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700013|34020700016|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RFRGMTBFNW14Ykd3Z1dKQ2hpTHJJZFphUjVteWJFeHFlWlZSQjVCcE05eGpZ?=
+ =?utf-8?B?THJsUXM2MWdPM1NKSTVRSDdOUGNZMmp0R3U3UG9FMEJJMHdubXRwZnl0OUhk?=
+ =?utf-8?B?bXBkd2tnSlJyTzNvaWJ1YzlPdnBhNGJBa2dXVllwazBoeWNvelNvRUdid2lC?=
+ =?utf-8?B?a1ZmWEl1TTRkS3JkRDZGaFZGU0JaMGprcVA5ZDdMOUVtcjdwUzFvaTM1M1Nu?=
+ =?utf-8?B?VnRhajdNWEhBT290VDQ4YjhPRGY0WUI1ZUNwbzc2SDB6RnVjM0lyUHhUTU5E?=
+ =?utf-8?B?aENVaXJIL3R1MGhoeHdRcTErWG5MbmN1QUxxRXZScS9LZSttNXFhd1ZLZnpO?=
+ =?utf-8?B?RzNlZzRXQ3lmYUh1eENheWY1bktzcE5Vb1JHekxpWHE4TVRmWmFJZkZWaERW?=
+ =?utf-8?B?LzVGMUtzblVNTEVtQkNnSk1zNXp5MjgwYlFNelNEQldEWjVrMEh6NlVEeHJX?=
+ =?utf-8?B?WDdmdHQ4SGsyZStIQ2ZYbmxvdTlMZTFVazFmRHB1ZlRISUw3ckRuZmVZOC9L?=
+ =?utf-8?B?c0hCZU0xdTBoUi9vVkxtM0NMOGUxV3NNbE1ta25naVVXdzgzcTNvSUJQWUFP?=
+ =?utf-8?B?eFlwN24yT2d6dXNTQ21PdGo2K1BKZURXNmhMdEtQczBEenZEcXdTSWh2dXo3?=
+ =?utf-8?B?d3pYVU8vU3NISjRTcEpYYUVUVHh4S3J6SFNaVU90R3lkck8vb21nOENmWFdy?=
+ =?utf-8?B?cENFd3VCYzdiYzYweEEzaVJDMEg3VzREOEFuZXJNaGxpZUFYQkZ3eEZJRWNo?=
+ =?utf-8?B?OUIxL2dISkZXUVYwNXFWSjZWcjZzL2N0a2pJN2lkLzIxd2pmS1RmZVpIS21z?=
+ =?utf-8?B?L0ltTHIrL3BxWVFvTTlJTWNUSkFzUDk4aFZHQitMRVp3L2RQdVNBVThTNU5j?=
+ =?utf-8?B?ZEQ3YkhrcFc1WTBqdUdMOGxYSVhta2VHdWkrVnM2SmJPTDJnRTA1dHJMd2VH?=
+ =?utf-8?B?eXlpZklUdlFlY0Z4YVVKbUt2VCtpeGJQWURBNGVQdWZscTEwZkw3a0puV25K?=
+ =?utf-8?B?eVdLWWE3b1dIeUVWOSs4S3VzQVp6Y0RHdlZSdGt2eFFUbVR6R3hIQVV1eEN1?=
+ =?utf-8?B?RU5FTDZNWlh0bmRzcDVOZDRTVlU3NUErUTh1RTJGcUVESmxwenpSVVJLdnds?=
+ =?utf-8?B?Y3JETXJjaEUrMGFkU05IZ0Jpbk9xUzEyc0Q4cGhteVpud2szOXl5bFVVZUps?=
+ =?utf-8?B?ZXFUWWxaZmk1cUhZRFFMcVZwZlRxQ2F1Y08wRHVjSzNMS1lWRHJMaWlWWjhD?=
+ =?utf-8?B?QTV6Y1l3Qmd3eHZ0T3pralJZNS9FUGZjU2oveDdTMzJ4VXk3dEdNWmI0bGRV?=
+ =?utf-8?B?c1BaaFRPdUovNVB2aFY5Q3NGRVdkdWhUcEdIME9Vakw0b3FReSs5Qit5MjRP?=
+ =?utf-8?B?VGx0ejFxK01TbTJkenBxbkd0UjNmOUM0czdsdEowR0t2NU5vQ1pldXk2U1lF?=
+ =?utf-8?B?NDF4cEFWSTc5Vng0SXZiVmJzN01Rdk9xMVVOMnhNZThjRGxZZXVVeTBoQk9i?=
+ =?utf-8?B?UzYvanQ4NjYvbXV0V1Exc3ZuUEpvcDRmdlJ0WEtGVjBxcThVSjU5TVFqS1NC?=
+ =?utf-8?B?VUkvaTljV0tSSjgyeGNDTGRsL1psa1NEQmkzZVFuZGZBb0w4cU9DRm14Qjdi?=
+ =?utf-8?B?dVZ0SDh6aVVTOStJc09nSU0ydm5Gdjc5VEdXOWVjS3BmVXRzUlliRkF2alVo?=
+ =?utf-8?B?UGQ0bFVUbjRsNm0reGNsRlFaeEZMMStPeFhLMEJNSUJDVzNva1pDOEhCYjlR?=
+ =?utf-8?B?VDZvQUoybzJDaEtMdWJaeGJtMUU3QlYvWGdBYitWV2l0WldzbGZxMEk0eVB0?=
+ =?utf-8?B?c3NaRSs4Y3ByYVZqemM5amkrN05scWNKZUlYK0ZqK2RVeTlXRGhHYXNMc1Nt?=
+ =?utf-8?B?a1owSFRDUDd5OWh2U2MwZVVnMzgvaDVjT3VRSU5VVHltdUhneUNmVmRTMFFM?=
+ =?utf-8?B?VzVldlVjaGhUUVF4bm9SaDJQRnRoY0lxQjMvZFhieUY2SnRTM3A3THNWWkpu?=
+ =?utf-8?B?T2VxVWE2VVdSTzBjYXExdGlqSmtLU29ZMktyTnVoS3kzckZ1ckMybGpma2Zq?=
+ =?utf-8?B?S2xPZm1Od0pDY1doR2ZUcVc4aExZZy9xOE81K0lKN0J3dzkrbUhmcnZvclQr?=
+ =?utf-8?Q?1pwA=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(34020700016)(376014)(1800799024);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 13:03:49.6429 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 14fc32e8-684e-4855-36ee-08de17b4c4d5
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000971E6.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7575
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,23 +175,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable K3_IODDR to enable support to resume from DDR after exiting
-IO+DDR.
+fdt_fixup_cpu_freq_nodes_am62p is used to delete unsupported opp table
+entries at runtime based on the SoC's speed grade.
 
-Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+However, the ti-cpufreq driver in kernel already has support for
+rejecting unsupported entries. Therefore this fdt fixup is not necessary
+and can be dropped.
+
+Fixes: 8d05cbef73ae ("arm: mach-k3: am62p: Fixup a53 max cpu frequency by speed-grade")
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- configs/am62px_evm_r5_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/mach-k3/am62px/am62p5_fdt.c | 12 ------------
+ 1 file changed, 12 deletions(-)
 
-diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
-index c9592d7b6c4cc037a886fe81385791269a825aa3..39e8093597352e6ed3fb67ac59e0494239a51352 100644
---- a/configs/am62px_evm_r5_defconfig
-+++ b/configs/am62px_evm_r5_defconfig
-@@ -123,3 +123,4 @@ CONFIG_SPL_TIMER=y
- CONFIG_OMAP_TIMER=y
- CONFIG_LIB_RATIONAL=y
- CONFIG_SPL_LIB_RATIONAL=y
-+CONFIG_K3_IODDR=y
+diff --git a/arch/arm/mach-k3/am62px/am62p5_fdt.c b/arch/arm/mach-k3/am62px/am62p5_fdt.c
+index 4a5ff594df66878368777cd7aa79b3adf0a094e1..03f56cfd9fc404a114b444a482706b579cd1878e 100644
+--- a/arch/arm/mach-k3/am62px/am62p5_fdt.c
++++ b/arch/arm/mach-k3/am62px/am62p5_fdt.c
+@@ -39,17 +39,6 @@ static void fdt_fixup_canfd_nodes_am62p(void *blob, bool has_canfd)
+ 	}
+ }
+ 
+-static void fdt_fixup_cpu_freq_nodes_am62p(void *blob, int max_freq)
+-{
+-	if (max_freq >= 1250000000)
+-		return;
+-
+-	if (max_freq <= 1000000000) {
+-		fdt_del_node_path(blob, "/opp-table/opp-1250000000");
+-		fdt_del_node_path(blob, "/opp-table/opp-1400000000");
+-	}
+-}
+-
+ static void fdt_fixup_thermal_cooling_device_cpus_am62p(void *blob, int core_nr)
+ {
+ 	static const char * const thermal_path[] = {
+@@ -92,7 +81,6 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+ 	fdt_fixup_canfd_nodes_am62p(blob, k3_has_canfd());
+ 	fdt_fixup_thermal_critical_trips_k3(blob, k3_get_max_temp());
+ 	fdt_fixup_thermal_cooling_device_cpus_am62p(blob, k3_get_core_nr());
+-	fdt_fixup_cpu_freq_nodes_am62p(blob, k3_get_a53_max_frequency());
+ 	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+ 	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+ 
 
 -- 
 2.51.0
