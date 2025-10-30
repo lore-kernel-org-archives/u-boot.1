@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F023ECCF9E5
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3804BCCF9E5
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:01:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A90083885;
-	Thu, 30 Oct 2025 06:01:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C73D5838AE;
+	Thu, 30 Oct 2025 06:01:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DKh1teYb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BotTLoRL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF7A583887; Thu, 30 Oct 2025 06:01:40 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id F266E836D1; Thu, 30 Oct 2025 06:01:51 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C968C836D1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:01:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4D5B838BB
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:01:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-63c3d7e2217so911461a12.3
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 22:01:38 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-63d6ee383bdso1156091a12.2
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 22:01:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761800498; x=1762405298; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761800509; x=1762405309; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r0ybn3KmtmK7gLsJHnNmza9wbHr+EyVfoBi6AWi+wdg=;
- b=DKh1teYbuY+NUyTJCdCGX1B04FscfxG0qAZT1X3zR2rus2cqb1NA/sn6a62QgX8Ahx
- 75KNRRFWNN8TdDxUE+7hSmgYCkibiq/+D6M8OwAPdGQ3HhEzSVUiFhCojoiSPLV+vgkT
- 27fWLt3U3FqsH9d5eY88JzwUBulSvFMITK0Vgminwecf0/yfIG+TsalFA1rhBkR7ipkp
- OECOo0x4fk1ia0mVYqSdDWxf93dp9DFXAK5s8A7RBG60kx+vohXQLYKhq2j1eHP0wUiX
- ovz7iRtWew1okg0vYrWnPX0Guoib4wBM6C/2GEtqb2MVSp8TbiCWt3sgbk9ra4o31BIW
- gHZg==
+ bh=XxR7bUfKf5lyaEkqS9EPYB95F5+7ySXMoWH834EAPW4=;
+ b=BotTLoRLybHq5K2Cg4ocuJiolYBb5dF0g0lnz4wnvFghYgu5qoSC4OwlZKTq9JeR6F
+ +cMEmfKwowzNlT9vqywXBgoxVlxxOhVJGE94Zvyo+LhtwVzqnYRdIkWiaqqcEndqV4KK
+ 80pkH+6/w2n5pv8EWlrjuuCmgjaRKBG8CKIugYq9kk9rLfn7mURV0fl6F3Vm6+wxwdz7
+ rRcHhnak7XH1HK/pOJnQm0+BCpu4w600WCxHIUQqqBhRYK2nqgw5Vp8crO5YBnP3pm4+
+ 6ZMrZTPphgF51pgcvQRX/e8MbEoJW5KzCzMULJQ7TITtI0VQmKr3aiVUcQ9NC0i9WFbK
+ 9qSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761800498; x=1762405298;
+ d=1e100.net; s=20230601; t=1761800509; x=1762405309;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=r0ybn3KmtmK7gLsJHnNmza9wbHr+EyVfoBi6AWi+wdg=;
- b=WQnx7ZiLWT2xDT4sez9bTOYN0HI9USNuIaUu0vcpmdcVcIj+TkI2UGz6aY2yJGeZEp
- OSclljKEoySSQcxWaRDyqlEbejgCJ+zo2OigQGZetJvlQC4bfRafi8vg4rKE2NC+Dy4L
- cvz7w47cZcl03Zx+PH6gfkNeiOtqPjXUoVw/uaqiano9tvoRC39e8E+eJ+9b1b4IntKe
- toHIpDUU5x+Qq94d7iKg0tqFcBd332gC3KJVLDBBRnDgnB1yAKUBS0B/yafThEytNlYO
- TQbrhhVZtm5PZ9u75kQyQWrwaqpgl8qEywKfGcheeWtjcL0tDWSTX2gihCZ4/bGcMrO2
- wYbQ==
+ bh=XxR7bUfKf5lyaEkqS9EPYB95F5+7ySXMoWH834EAPW4=;
+ b=USwa9ndFkna9KwuPwj2kUx5DY1iHidNbW//VS72MDfllSh18N2tyAd5RxNTnI3/dJk
+ KZO7qX+nYyjjXVjLO9XpM8/IBm89ObgPlKQY1Q7i3Y1pkiNeTzhvh6lr7mLB6xOI+Tws
+ h11jF16hqkqPhMFrt6Vf9noh6k36eq5+d43CDrnYvPWGe6Aju/uQyhiDGayQ56vF1PJq
+ 1R0tGZpm8BuaiqdCjpmpYgBJRMQMpIZ/GMOZbQaPp+dnSJcogL1+bxpblBbtFID2XoMv
+ HJ7gdfaQyQ3jgeHSUwu4eY5LuzCfJdEQ0LK7TslOW48pd15VcDww5iakw3cfVlZYYzLi
+ K1Rg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXZvyPI/rDY9ZBj1/ff5zwcdvT6mHzJBkv8sPLPYLVbq8BhR6nr5hpMzQyB9R9Npw6ZEUjXXX4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx4xRyruaeFyJiEGZes1OgaM0Hz0PM5KWTIW/ywNbvoj1Ss/p9w
- XreKrja4M5/2bz7Fmcp4+G4QXNjIr/Qqjex876VYusXJzeYQv/GcYwEMq5kcsCN862uQb0dNZIR
- OramimxsDq+XpFmuPN+76SNmqabd8vRc=
-X-Gm-Gg: ASbGncvUq/7rxiT6VOPmVjHeFE21HDtsXS3OcWG8T5cCoXaK+oYWLZU45gUY47R4q9B
- V4ce01qo9/gXOoCAOK444xBOXhWF3zXxOsgI0u57zGkRRB9v6qZWWGe7NM7DNZYdnrkMiptv1pq
- LpxRACUwvULvHH/MaTBsDG6gIynpRQk/0DoCXMMBdazYa9lMzn9VjhqMgO1dKu9S2m3KagOTZi1
- owvsUfb+UHChydVT99PRqpbYtfQn8f3M38vzR59ux0MB/6YGCwXY5pKmBB1uwK+vsoUa8MxkpJy
- nzQv
-X-Google-Smtp-Source: AGHT+IGROfvPZt3KnrvNGcGzDKhL3x0fN+83X31fiYo0hYyH99x4ZxSN78EZyY9ga+/Bqi+L4U23vJO8ZUV62N0fhHs=
-X-Received: by 2002:a05:6402:2354:b0:63b:f1aa:11d1 with SMTP id
- 4fb4d7f45d1cf-640441aee39mr4466520a12.1.1761800498145; Wed, 29 Oct 2025
- 22:01:38 -0700 (PDT)
+ AJvYcCXu4oVb+fnzCGlBnQSygt0l1T11vZc+YL9pLzPIPKWIUq189APVmC5HzVjNGFLL+6mZ0Ki+dRw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzyjUc4MH0hBsaon4dLj+KSCjBmhCV00St76EodCt844HC5onJl
+ CnDWM3HsaEhP91FUTR7fiELnGpp5XXHT/qfNA9NvXhXG5dSALbvFHOcGZ1frdA31d0TO0WAhKci
+ 4mmbwP+GHIIcT5qHkTC09EUorjM+c2pq/kg==
+X-Gm-Gg: ASbGncuNEoa3/MRMvVULIBqQ67w3l7Y9RQjaS6O8iuPEY9Ve+rHhehD6rSy9YHIq3Sv
+ 4e6I+Prxg6VAmfDULYee5L4CN0y5Em2OfaI3FqsI8V+G4kMHRFazRhY6n3ujvj+kYmsVuZmIg68
+ vkJxFXmqbpmwDPVNvTcc8f5Sm26zw1nJnQwNXCNetDQyR/9OUfQiYonLXS1uQcziyZRYvKAlMxU
+ ib1q13Rs8ulZ/AuQE/1nx5m9drWJPwJMpqNW425d5dTq5YvYXq2T7bBd/oD88clbCOVMg==
+X-Google-Smtp-Source: AGHT+IHPmHw4TOY9zIG7LA2SJ+5HrF6VDb8S8ugclnKXe3wvDjZvTGaJFwgyKgKFfhu3XVr/wWxhayPvzktkXR9WV3A=
+X-Received: by 2002:a05:6402:20cc:10b0:639:ff5f:bdfb with SMTP id
+ 4fb4d7f45d1cf-64044254d90mr3336069a12.19.1761800509182; Wed, 29 Oct 2025
+ 22:01:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251026010658.19271-1-semen.protsenko@linaro.org>
- <20251026010658.19271-3-semen.protsenko@linaro.org>
-In-Reply-To: <20251026010658.19271-3-semen.protsenko@linaro.org>
+ <20251026010658.19271-5-semen.protsenko@linaro.org>
+In-Reply-To: <20251026010658.19271-5-semen.protsenko@linaro.org>
 From: Anand Moon <linux.amoon@gmail.com>
-Date: Thu, 30 Oct 2025 10:31:17 +0530
-X-Gm-Features: AWmQ_bnxEdoc1OVBmdzVxGfw0PvUSUFsFV7ol5hdhgcpAIO6FhFRIE5TsebhsAY
-Message-ID: <CANAwSgT6N1WFvxQyUkLChCBga9NPq9XbkiWhek2Wdz4S1Tb=vQ@mail.gmail.com>
-Subject: Re: [PATCH 2/6] mmc: dw_mmc: Do not export dwmci_send_cmd() and
- dwmci_set_ios()
+Date: Thu, 30 Oct 2025 10:31:31 +0530
+X-Gm-Features: AWmQ_blVgwHh8FhzIFNCIZhWhnVzJaCc_H-TaRtLVLHWeZhCWXWLbXkIJdoeM8M
+Message-ID: <CANAwSgRzCjdQ46=bkO9r_wDBYdupFbUeOTj+TM6KLV0tG7LomQ@mail.gmail.com>
+Subject: Re: [PATCH 4/6] mmc: exynos_dw_mmc: Add quirk for disabling FMP
 To: Sam Protsenko <semen.protsenko@linaro.org>
 Cc: Minkyu Kang <mk7.kang@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
  Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
@@ -102,25 +100,15 @@ Hi Sam,
 
 On Sun, 26 Oct 2025 at 06:37, Sam Protsenko <semen.protsenko@linaro.org> wrote:
 >
-> Do not over-expose the private dw_mmc API. The glue layer drivers at
-> this point shouldn't be aware and shouldn't use the generic
-> dwmci_send_cmd() and dwmci_set_ios() functions. Making those functions
-> public causes a "leaky abstraction" issue. It clutters the public
-> interface of generic dw_mmc driver and possibly leads to improper usage
-> of those functions, so it's a bad design.
+> Add DWMCI_QUIRK_DISABLE_FMP which disables Flash Memory Protector (FMP)
+> during driver's init. It's usually done by early bootloaders, but in
+> some cases (like USB boot) the FMP may be left unconfigured. The issue
+> was observed on Exynos850 SoC (the E850-96 board). Enabling this quirk
+> makes eMMC functional even in such cases.
 >
-> If struct dm_dwmci_ops has to be extended, do so by copying it first
-> (like it's done for example in snps_dw_mmc driver). That also makes sure
-> the future changes to struct dm_dwmci_ops in dw_mmc driver will be
-> automatically reflected in all extended copies, and avoid code
-> duplication.
+> No functional change, as this feature is only added here but not enabled
+> for any chips yet.
 >
-> This effectively reverts commit ef3b16bb8e73 ("mmc: dw_mmc: export
-> dwmci_send_cmd() and dwmci_set_ios()").
->
-> No functional change.
->
-> Fixes: ef3b16bb8e73 ("mmc: dw_mmc: export dwmci_send_cmd() and dwmci_set_ios()")
 > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
 Reviewed-by: Anand Moon <linux.amoon@gmail.com>
