@@ -4,94 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20557CCF9F0
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 16:55:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3FB3CCF9F0
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 16:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93D03836D3;
-	Thu, 30 Oct 2025 17:55:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 42AC4836D1;
+	Thu, 30 Oct 2025 17:57:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ogOCgc9p";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FmiAiImR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15F6A836D1; Thu, 30 Oct 2025 17:55:50 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 281A2838CC; Thu, 30 Oct 2025 17:57:02 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B81BD836F0
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 17:55:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E70558334F
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 17:56:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4710683a644so12919845e9.0
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 09:55:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761843347; x=1762448147; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mPWAeLUFWOEd99jEJxwPwupfsrMt9CzyyNeHR+5Prjw=;
- b=ogOCgc9pvHFJ3g02Z9ox/ujYUC27jbD+sm8LksrJcFCbhn9LzogRe3bF+8hQRNiF2b
- x1/uMN3nT6/aRsZ4XXdhn9N1my7fH8kFtFAZ/bg9+e3hdFVMLrjk6SzwJ8WIGTVqKhxm
- 5z45jk4M3QCaVsrb09oOzOdluuxOg7o0P88r6TAOPGIhs3BCL7OIMRrEc2juvYkgD609
- LysEF3uUk6sF77C6PRrBVQOoYQhmzI57bNp65LVH5cP+lRGi07zAjLOqjZw0OrgMVzd4
- E4Z89/5kwcr/Ti8JSTzXNxiPmxVpKJ1IqwcF5mBp4Lyg7LhkBHjElPhFMHvFim+GX1MR
- tRRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761843347; x=1762448147;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mPWAeLUFWOEd99jEJxwPwupfsrMt9CzyyNeHR+5Prjw=;
- b=bPa0pG4QZnPWcp1h7tu0yvn8ZQhyHSCb15b5vp0L426ixyIbpyjDC7MhVzqBgRIxC6
- /6HZuRJxYlXVWVG/DKMQ+CUh+kkr+fR0cq7EOlWHa/LF8dOVs1CpRh1P21YyicDG+Ugf
- tbpufMRCU8nDo3zoMROvmbPlOBqOEWdHBlvG4No+hoDy9dreNPEzCJgnduA3RtDHfSwU
- 21X5dTcWJe79PTPiUCxGWCO6+METK6sqoVYtPJyn08uhqD9MlCozRi4ZRfmdFXsCGNsO
- 8NI/sj421ChtciljcjTYHAiSE9KHVbsHUi8rN3oDZTj9eTVFlmIyx6xwIdoz4W6pz8GX
- yg0Q==
-X-Gm-Message-State: AOJu0YzUvJnJnD7pW0COR8VrfpIh3RpKgiD2AufFOHASfI4fcqvLLK9z
- qC/kPaiVT9RcK3XKC2aOctgTlq3qulWFLWETa4jnX5uIFdq+9OsdCcVFIwNJ5acVH4o=
-X-Gm-Gg: ASbGncv5+N0jGGA+HUByf1ox0jtogKxj3TFXFdvfawFL6QMCMRd5EwBAIvt5kZ9nV6S
- K4iUVS4FKeJbs+qkcWZOaAukD2gRJChKmV29SQV59njRjDFn0m9DAMFlGUm16vnqAAJOCrtkLKn
- wV4YXNRveFtnFbGDed7z5lqdrbm5QlxV8lkP6nRLlMCoQ0xKUp6JRK8LEurQtb3UmpRH5IOOy7s
- B/jjLzpvhwlLZs4mCzBm3OAWfU07q4UogrT+njk6Z1pCcfS1btrha+zc/6DhwCH/H26KqSQsBcE
- WzDTu9BSARNW7vqAJ54vRJrMwT6rGAvmk302Gz+FHlFwBCH8+qN8XW0sAwP1lXgap44bu5pgOpn
- BigK5rQwpf5sRLlsGgCA8ZepxBCySpJ/399tmUqL2bKO2W2lDSCbehKlZG9+rLGMCtKvAtBAqiN
- w2HfXgp2zj0x5+vxvzTxVj+I8N3IE=
-X-Google-Smtp-Source: AGHT+IF+evLrB03aQ1s6KyJpL/R+qspJBks5pI9qhMoDEtOVkfHrhrQpuAPT9kx+ajjvW9KP2yMLdA==
-X-Received: by 2002:a05:600d:435a:b0:475:d278:1ab8 with SMTP id
- 5b1f17b1804b1-477262226d8mr25198985e9.2.1761843347179; 
- Thu, 30 Oct 2025 09:55:47 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:fed:4601:ec33:cd66:338:ecc7])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429952b7badsm32403888f8f.7.2025.10.30.09.55.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Oct 2025 09:55:46 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 30 Oct 2025 16:55:45 +0000
-Subject: [PATCH] clk: Prevent SIGSEGV on debug
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cy9J96bcvz9v97;
+ Thu, 30 Oct 2025 17:56:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761843418;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NrEeHulrPqqcygc69UxcDlUkjkSlFgR5xqKvzcLTtKc=;
+ b=FmiAiImRaTMq7N2kNffHveEbbasDL4CqXdJEEkww/0b00bkB8u+yyulNac8GdUg3zzXTqL
+ Du7r2Td3xFT8CE12iRd/jw6hTavoNFQhnUsco3rmtxjk3Su7Q/oTSs5YVCxHLgsVk8A/Yh
+ g/2MZfJma8lqpqvnm7LUuMwgdH8hUuvXxxz7P/0ubPwe+Q3FUtH6YAnOR/JzULU7goPU2b
+ UCEScv+EEElDfTqcXQ76GCWW5cq7vbWBnw8Tr9T3eABowc7jmZ2fMwri6IVRv5YrUJvMmw
+ TLkuIdWke9tr7nQ4t2rpeLu4Ovw7LcAc/YSxmlL/m+WZgLU/5ECl0zV3EV9qrg==
+Message-ID: <421f3c7a-9313-4a3d-bf62-ec675cc4057b@mailbox.org>
+Date: Thu, 30 Oct 2025 14:56:09 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH] firmware: scmi: Drop mmu_set_region_dcache_behaviour()
+ misuse
+To: Bryan Brattlof <bb@ti.com>, Anshul Dalal <anshuld@ti.com>
+Cc: Peng Fan <peng.fan@nxp.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Alice Guo <alice.guo@nxp.com>,
+ Etienne Carriere <etienne.carriere@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
+ Viorel Suman <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>, kamlesh@ti.com,
+ d-gole@ti.com
+References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
+ <PAXPR04MB84593511CF2B43470CDD8ABD88FDA@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <68e5af37-1511-4720-9172-751d5b788c39@mailbox.org>
+ <2a3421c8-b7af-4c6e-91c5-cbd08c9f3dd5@mailbox.org>
+ <DDUP3J37VKJU.3G90BDVOTBJSI@ti.com>
+ <20251030123654.zp2abxrfdgex3rq2@bryanbrattlof.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251030123654.zp2abxrfdgex3rq2@bryanbrattlof.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251030-fix_debugs-v1-1-4750e9617499@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAJCYA2kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDA2MD3bTMiviU1KTS9GLdlFSLJItkC3NzSzNLJaCGgqJUoCzYsOjY2lo
- AsGE0plwAAAA=
-X-Change-ID: 20251030-fix_debugs-de8b8c877969
-To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Tom Rini <trini@konsulko.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Marek Vasut <marex@denx.de>, 
- Christian Marangi <ansuelsmth@gmail.com>, Ye Li <ye.li@nxp.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+X-MBO-RS-META: 97kskwaeuiagyrxuiht9fudqufib65tk
+X-MBO-RS-ID: e10f6f25a614bbf3edf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,43 +85,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If LOG_DEBUG is defined and a NULL clk is passed to clk_enable or
-clk_disable then an attempt is made to dereference NULL in the debug
-statement. Guard against this.
+On 10/30/25 1:36 PM, Bryan Brattlof wrote:
+> On October 29, 2025 thus sayeth Anshul Dalal:
+>> On Tue Oct 28, 2025 at 8:46 PM IST, Marek Vasut wrote:
+>>> On 10/28/25 3:37 PM, Marek Vasut wrote:
+>>>> On 10/28/25 9:25 AM, Peng Fan wrote:
+>>>>
+>>>> Hello Peng,
+>>>>
+>>>>>> Subject: [PATCH] firmware: scmi: Drop
+>>>>>> mmu_set_region_dcache_behaviour() misuse
+>>>>>>
+>>>>>> MMU region cache behavior configuration for SCMI/SMT mailboxes is
+>>>>>> platform specific. Even on ARM systems, the mailbox memory may not
+>>>>>> even be located in any cacheable MMU region and may instead reside
+>>>>>> in some SRAM. Remove this non-generic cache behavior configuration
+>>>>>> code from generic code path.
+>>>>>>
+>>>>>> It is unlikely that any platform is affected by this change if it did
+>>>>>> configure its MMU regions correctly on start up. Platforms which might
+>>>>>> be affected are i.MX94/95 and STM32MP.
+>>>>>>
+>>>>>
+>>>>> If the memory is mapped before running SCMI stuff, it is ok.
+>>>>> But if memory is dynamic mapped at run time, there might be issue.
+>>>>
+>>>> I wonder ... should ARM/ARM64 define CONFIG_HAVE_ARCH_IOREMAP and
+>>>> implement actual ioremap() function which changes these cacheable
+>>>> properties accordingly ?
+>>>>
+>>>>> I saw TI platforms has some changes to use dynamic mappings,
+>>>>> I have not read the details, TBH.
+>>>>
+>>>> Can we put the TI people on CC here ?
+>>>
+>>> +CC Anshul
+>>
+>> This change shouldn't affect any current TI platforms since we don't
+>> make use of SCMI on K3 devices.
+>>
+>> I'll CC folks working on upcoming devices in case they have any
+>> thoughts.
+>>
+>> +CC Dhruva, Bryan, Kamlesh
+> 
+> It's my expectation is the shared buffer would always be in some
+> internal SRAM which shouldn't need to be mapped.
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/clk/clk-uclass.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I think the buffer can be in DRAM, if the DRAM controller supports some 
+protected regions/filtering, but it would be susceptible to rowhammer or 
+similar attacks.
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 3dbe1ce9441ca513d41be90520ff175c96b4253a..1f55dbe385b76d0d6cfbf19bc9f4f1abe619baf2 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -660,7 +660,7 @@ int clk_enable(struct clk *clk)
- 	struct clk *clkp = NULL;
- 	int ret;
- 
--	debug("%s(clk=%p name=%s)\n", __func__, clk, clk->dev->name);
-+	debug("%s(clk=%p name=%s)\n", __func__, clk, clk ? clk->dev->name : "NULL");
- 	if (!clk_valid(clk))
- 		return 0;
- 	ops = clk_dev_ops(clk->dev);
-@@ -721,7 +721,7 @@ int clk_disable(struct clk *clk)
- 	struct clk *clkp = NULL;
- 	int ret;
- 
--	debug("%s(clk=%p name=%s)\n", __func__, clk, clk->dev->name);
-+	debug("%s(clk=%p name=%s)\n", __func__, clk, clk ? clk->dev->name : "NULL");
- 	if (!clk_valid(clk))
- 		return 0;
- 	ops = clk_dev_ops(clk->dev);
+> Not only does it keep
+> the buffer secure on platforms that care about that but it also speeds
+> up the access latencies between the different binaries.
+> 
+> IMHO it makes sense to rip this out and let the few architectures that
+> need to do some MMU maintenance do it themselves.
+It seems Alice from NXP found some breakage on MX8ULP , I have yet to 
+reply to that, but maybe this is fixable on architecture/mmu table 
+level, I'll reply to that email shortly.
 
----
-base-commit: e34d01d23e45e007368685ffa6dfd674b6dd7b17
-change-id: 20251030-fix_debugs-de8b8c877969
+If we have breakage here, I think we either need to consider:
+- some weak function to fix up dynamically allocated areas (?)
+- make ioremap() configure the cacheable properties of mapped memory
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+The second option is more generic obviously, but I am unsure whether 
+this is the right way to go about it.
