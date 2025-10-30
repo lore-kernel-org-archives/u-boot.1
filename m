@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CB64CCF9F0
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 16:47:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC2FDCCF9F8
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 16:47:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92BB38399B;
-	Thu, 30 Oct 2025 17:45:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D09E5839AC;
+	Thu, 30 Oct 2025 17:45:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="VDsQXVq+";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="1+hO8y2k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8F648399B; Thu, 30 Oct 2025 17:45:35 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 74656838FA; Thu, 30 Oct 2025 17:45:38 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D59D683955
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 17:45:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 988EE839A1
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 17:45:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 906361A1773;
- Thu, 30 Oct 2025 16:45:33 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id D9E09C0DABA;
+ Thu, 30 Oct 2025 16:45:15 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 65CA960331;
- Thu, 30 Oct 2025 16:45:33 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 551B760331;
+ Thu, 30 Oct 2025 16:45:36 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C9DC511808CA7; Thu, 30 Oct 2025 17:45:30 +0100 (CET)
+ with ESMTPSA id B950811808C40; Thu, 30 Oct 2025 17:45:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761842732; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1761842735; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=5XFxqE/v6nPQwGkdxm/Igk+wj7LsHcJ1QJFv6MfqA3g=;
- b=VDsQXVq+ZIxD+aZ4gDfbOeUORSa+lEf3DRyrKBgX5JG/WnpQvOxz2g2+zOSHBWn0vEVuNb
- 2sw8BFsKeByLpkxrcT3jY4zeTjxbktiOMi2KW/JX3wjVJ91m3c0FM4SeJreJj8tkEXj6d8
- Wj8gB4YgVqaWYdd+HejSYJYZv0tYHcgIc10Na/N5Ur+LpLVA90hjFVAhB8Lf2WG0gb4Uce
- dYf0WjNNtDR2VJYMA6+Te95Ug4P8jgxP1ab5RN/8vfcSOdjEasjJhZhQJxO0jZI44CBcsa
- 1y1cHAo6wg/0X5/jEGZPldA3PNI23ej0nzexvKe6tDM0P0eWSt6DJbXuUHsQBg==
+ bh=a5FkYtERhhbyQqXmCLdfcors3JqRZQV6zWoHXX8of5U=;
+ b=1+hO8y2kSe3ukOGLNhmLPjPbubnOwoDAoLt4eB3hlUsZULHXnKWUrnAEyM+FBg87ulaUv5
+ 1/YpT0kKo2QvTRUTy3xGefGvX8Xg1VA0B72vzoNaM6lBZi3Uf5exL/jc36aG1ar5NSjPzS
+ EB8Mbjor2XE1fMHsmsl3mHxKdv3bXHz70ZhqZEfrOgwaqauFEvou7XF4nwU0jRQPm2mZK9
+ cSnFUpt5zRKHtCX2v1bbQmED2GY3SvnWCuFCoL/3u12bIJFsqKaBYLVldIb1sntjdwVSp3
+ zPzywoIHsGM8z6zkkeC2dp2CxzHancLFLc9vpmv2n4axac83Z3mwTOyPFkHZaA==
 From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Date: Thu, 30 Oct 2025 17:45:05 +0100
-Subject: [PATCH v5 12/20] board: sunxi: Convert extension support to UCLASS
- framework
+Date: Thu, 30 Oct 2025 17:45:06 +0100
+Subject: [PATCH v5 13/20] board: sandbox: Improve extension board scan
+ implementation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251030-feature_sysboot_extension_board-v5-12-cfb77672fc68@bootlin.com>
+Message-Id: <20251030-feature_sysboot_extension_board-v5-13-cfb77672fc68@bootlin.com>
 References: <20251030-feature_sysboot_extension_board-v5-0-cfb77672fc68@bootlin.com>
 In-Reply-To: <20251030-feature_sysboot_extension_board-v5-0-cfb77672fc68@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,89 +80,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Migrate sunxi board extension detection from legacy implementation to
-the new UCLASS-based extension board framework.
+Enhance the extension board scanning code in sandbox with better error
+handling and code organization.
 
 Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
+ board/sandbox/sandbox.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Change in v3:
-- Use U_BOOT_DRVINFO.
-
-Changes in v2:
-- Fix build error.
----
- arch/arm/mach-sunxi/Kconfig |  2 +-
- board/sunxi/chip.c          | 26 ++++++++++++++------------
- 2 files changed, 15 insertions(+), 13 deletions(-)
-
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index b04ec671696..f5696199516 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -1223,7 +1223,7 @@ config BLUETOOTH_DT_DEVICE_FIXUP
- 
- config CHIP_DIP_SCAN
- 	bool "Enable DIPs detection for CHIP board"
--	select SUPPORT_EXTENSION_SCAN
-+	select SUPPORT_DM_EXTENSION_SCAN
- 	select W1
- 	select W1_GPIO
- 	select W1_EEPROM
-diff --git a/board/sunxi/chip.c b/board/sunxi/chip.c
-index 5e5ec0d1d89..b60a739df41 100644
---- a/board/sunxi/chip.c
-+++ b/board/sunxi/chip.c
-@@ -40,7 +40,8 @@ struct dip_w1_header {
- 	u8      data[16];               /* user data, per-dip specific */
- } __packed;
- 
--int extension_board_scan(struct list_head *extension_list)
-+static int sunxi_extension_board_scan(struct udevice *udev,
-+				      struct alist *extension_list)
+diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
+index 0dc23a27dfc..c5d7b9651a9 100644
+--- a/board/sandbox/sandbox.c
++++ b/board/sandbox/sandbox.c
+@@ -113,11 +113,15 @@ int ft_board_setup(void *fdt, struct bd_info *bd)
+ #ifdef CONFIG_CMD_EXTENSION
+ int extension_board_scan(struct list_head *extension_list)
  {
- 	struct udevice *bus, *dev;
- 	int num_dip = 0;
-@@ -55,8 +56,8 @@ int extension_board_scan(struct list_head *extension_list)
- 	}
+-	struct extension *extension;
+ 	int i;
  
- 	for_each_w1_device(bus, &dev) {
-+		struct extension dip = {0};
- 		struct dip_w1_header w1_header;
--		struct extension *dip;
- 		u32 vid;
- 		u16 pid;
- 
-@@ -82,18 +83,19 @@ int extension_board_scan(struct list_head *extension_list)
- 		       w1_header.product_name, pid,
- 		       w1_header.vendor_name, vid);
- 
--		dip = calloc(1, sizeof(struct extension));
--		if (!dip) {
--			printf("Error in memory allocation\n");
--			return num_dip;
--		}
--
--		snprintf(dip->overlay, sizeof(dip->overlay), "dip-%x-%x.dtbo",
-+		snprintf(dip.overlay, sizeof(dip.overlay), "dip-%x-%x.dtbo",
- 			 vid, pid);
--		strlcpy(dip->name, w1_header.product_name, sizeof(dip->name));
--		strlcpy(dip->owner, w1_header.vendor_name, sizeof(dip->owner));
--		list_add_tail(&dip->list, extension_list);
-+		strlcpy(dip.name, w1_header.product_name, sizeof(dip.name));
-+		strlcpy(dip.owner, w1_header.vendor_name, sizeof(dip.owner));
-+		if (!alist_add(extension_list, dip))
+ 	for (i = 0; i < 2; i++) {
++		struct extension *extension;
++
+ 		extension = calloc(1, sizeof(struct extension));
++		if (!extension)
 +			return -ENOMEM;
- 		num_dip++;
- 	}
- 	return num_dip;
- }
 +
-+U_BOOT_EXTENSION(dip, sunxi_extension_board_scan);
-+
-+U_BOOT_DRVINFO(dip) = {
-+	.name = "dip",
-+};
+ 		snprintf(extension->overlay, sizeof(extension->overlay), "overlay%d.dtbo", i);
+ 		snprintf(extension->name, sizeof(extension->name), "extension board %d", i);
+ 		snprintf(extension->owner, sizeof(extension->owner), "sandbox");
 
 -- 
 2.43.0
