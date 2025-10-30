@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F1CCCF9EA
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:20:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD984CCF9E5
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:21:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D58B983968;
-	Thu, 30 Oct 2025 06:20:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1B6538397B;
+	Thu, 30 Oct 2025 06:20:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tEUO1Kac";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oHpdFGq3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81C918394E; Thu, 30 Oct 2025 06:20:11 +0100 (CET)
+ id 328D483935; Thu, 30 Oct 2025 06:20:12 +0100 (CET)
 Received: from SJ2PR03CU001.outbound.protection.outlook.com
  (mail-westusazlp170120002.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67813838EC
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:20:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 259658390D
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:20:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eCWxZ3/iE6cRzFPvkf09P5o3WTbEDxhp9/YKSRxtoeydw5xpSf7df75L5PigbLc653bDyvUM4qMWulzv8qsYr/hO3v6A0wqHOM8mHUjDkbz0UyNu94bS70Ivpxzrby57jN/CpdMnlfrEottod5KvPZfeo0W+C9Jnw4a0b2K6HFJcQ7M4jubhhmBuOGNPlLwe46ExLAr97VZfRNWAlWqeRVvlrhMJK0tIflV9lsoX7PJtHnq2MSmXp517cY5ZjEkWGkFZu7hVeVSG6Sbis06c8L0qyafcLJS+V/DGQHpHEg6LJzvqXifqxymP++Nz3vFhqTsx0jiCo3BpwV4ggEXIsA==
+ b=I97Sl5t3d1p9uENYj/t72yadhp6BrWF+/RBvGzuoTpLUSnqoXfY+juZmwYZUZUhKG40hmM0tFEeCD7kGkaWSV1w6SEmlR4Jk6a/bJ6QNZIZEhZroq7Q5yjHBuf4ndOHPeJUG0vx+jw1sYEa+FHIiNZjOIa1gDgJsJ3NrvTvhKTzE8+d5s4ywq1GHDoXmuI3UVAkY5SthFJNJg1z31SNwuEfvEZWju7kBECtLfJ9Bj+qbxNfvMHGbvPNzQpV+GDIx9ieDk9GLRvxr97JmRu/+P8dZGIybZekM6u5gtt9ri/xRTWZCraNjbN9W+sdKn3UX9aQn2yl698kicz4yhVi6SA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QUzgzaKMfwc5gly2YcYEl5chZzJFgfChPzs4xiB/vlM=;
- b=ppTd4f+aT6I/8BSkAiSYDg5qUgQOJrUshSqSxrgm+b7hyQahX/gm2x7BcNbsTQV3KoF8FbaXjd4Tbi41v6g6i8k2/hC7ehq+ne3lWXpu8V1g5vDKnexwUiJnZfRD/3FNgH1zIr7dw1blgO3QJCz1lAPomeJUGHRTKZ2zwLpunr/qy6oLl+oeTU9wWlEabUeOKGW68GUE6eXTOdybmFGifGP80oNBDsU+jLcDJElNGTcyx1V2VoreekluBt4ta7k74pDxIfiAqbdNvUQlcj92ccrQ+tI79hcerfx1WvkJov5/rO0PVC/Yem+UIIs6lL++T7lVnNSg6KuO4vzNhkTI9w==
+ bh=eYFwXHcuTxo2vsWLU6rszjS6hf/PyDFvVYYuyaEb6Qw=;
+ b=DnkAUEFdQCK6VPHEx+GAIwC1J7r7zyiId/Qj9O4/IyhTM7swp3cjtbIo2jRfRAmTsfCotlr6PIYwcoJKbUAZ11AAQXSp5EjT9UylZqKabWWRy/f6vsUZe2xLXHZ2eiJKGF/WxbGlvwX18kraXczIywZ952QuGkwVWeELz6f40sMvW8ADuHi8HmmHpKy/TqXURIzedsc2DOeH5ATvFTTUlFXUcK9Wy9SBmlA9Stp4tj2/VCAuysv1MqkxDo8zCIwiI/IDAsCAKkms/tl4Ea/IhgyZ0Zr1k3zYQbSJGDraVJEkOrlBYVq2mD3DKwZwyTfylWNvw5bPZEG2o+L9G+x3Bw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QUzgzaKMfwc5gly2YcYEl5chZzJFgfChPzs4xiB/vlM=;
- b=tEUO1KacBiVWLcmm/BpY4pSxD5ZrKrS4R1yDfj8UIkRqbP6T1gxiLLqL3oKkxyfRo9h20y2KmyzJa2rIKXY2pf9esrxC9L7kLExL17f4hTFN+YdO/Ln33lTuFM3UODgp8tIH/W+Rg8zfrYBXRUaHJB7Xrl34gzhY/YaSqPxSrTs=
-Received: from BYAPR04CA0031.namprd04.prod.outlook.com (2603:10b6:a03:40::44)
- by IA0PR10MB6841.namprd10.prod.outlook.com (2603:10b6:208:437::19)
+ bh=eYFwXHcuTxo2vsWLU6rszjS6hf/PyDFvVYYuyaEb6Qw=;
+ b=oHpdFGq3Ub5u8N5L/iwJP+Ie8cJ0S4K48Lqzx4E++LyZyqsVZP+4wUqGVlExrHtAHx35+3E0XLZeYfeYez4oz/yGJ5iRmzwVOeSuqgz0+N28aCwIGy2bZM+07LeMAGT361OvCAOXO2ec5WjIJza6FmMFoxON75rskvW99eXqDRM=
+Received: from BYAPR04CA0013.namprd04.prod.outlook.com (2603:10b6:a03:40::26)
+ by LV3PR10MB8177.namprd10.prod.outlook.com (2603:10b6:408:289::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Thu, 30 Oct
- 2025 05:20:06 +0000
-Received: from CO1PEPF000075F0.namprd03.prod.outlook.com
- (2603:10b6:a03:40:cafe::c2) by BYAPR04CA0031.outlook.office365.com
- (2603:10b6:a03:40::44) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Thu, 30 Oct
+ 2025 05:20:07 +0000
+Received: from CO1PEPF000075EF.namprd03.prod.outlook.com
+ (2603:10b6:a03:40:cafe::a1) by BYAPR04CA0013.outlook.office365.com
+ (2603:10b6:a03:40::26) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.14 via Frontend Transport; Thu,
  30 Oct 2025 05:20:07 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
@@ -58,32 +58,32 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.21.195 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
 Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CO1PEPF000075F0.mail.protection.outlook.com (10.167.249.39) with Microsoft
+ CO1PEPF000075EF.mail.protection.outlook.com (10.167.249.38) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Thu, 30 Oct 2025 05:20:04 +0000
-Received: from DFLE200.ent.ti.com (10.64.6.58) by flwvzet201.ext.ti.com
+ 15.20.9275.10 via Frontend Transport; Thu, 30 Oct 2025 05:20:06 +0000
+Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
  (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
- 2025 00:19:51 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 00:19:53 -0500
+Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 30 Oct
- 2025 00:19:51 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 00:19:53 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 30 Oct 2025 00:19:51 -0500
+ Transport; Thu, 30 Oct 2025 00:19:53 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59U5JovQ1416880;
- Thu, 30 Oct 2025 00:19:50 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59U5JqT41416931;
+ Thu, 30 Oct 2025 00:19:52 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: 
 CC: Anshul Dalal <anshuld@ti.com>, <afd@ti.com>, <b-liu@ti.com>, <bb@ti.com>, 
  <m-chawdhry@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <trini@konsulko.com>,
  <u-boot@lists.denx.de>, <vigneshr@ti.com>
-Subject: [PATCH v9 6/8] mach-k3: r5: common: add bootargs to kernel's dtb
-Date: Thu, 30 Oct 2025 10:49:30 +0530
-Message-ID: <20251030051937.3659010-7-anshuld@ti.com>
+Subject: [PATCH v9 7/8] Makefile: add tifalcon.bin to CLEAN_FILES
+Date: Thu, 30 Oct 2025 10:49:31 +0530
+Message-ID: <20251030051937.3659010-8-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251030051937.3659010-1-anshuld@ti.com>
 References: <20251030051937.3659010-1-anshuld@ti.com>
@@ -93,53 +93,53 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000075F0:EE_|IA0PR10MB6841:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4307a433-4759-46b3-4b21-08de1773fba0
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075EF:EE_|LV3PR10MB8177:EE_
+X-MS-Office365-Filtering-Correlation-Id: 72cea528-4c98-4eab-5e04-08de1773fcf1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|82310400026|376014|1800799024|34020700016|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jV6cIl+ec1igjbtfsvx9Frx+CqTzDYNWDZmmBweag8i7gpG5E3PTfOmhI4nK?=
- =?us-ascii?Q?behSzqP8tnu0p/110SD8gFIDVKHxvtgiZdXMN/Y66v1KlYlk72+R/rgJuDAn?=
- =?us-ascii?Q?ZSdhxitdy5jiiSWtS3vyrwS03mbMTacJ/FozJobdMv0Aqz/i5V9LyVS5wU/f?=
- =?us-ascii?Q?2u24qFOVYf9E9f1tgBs/Uuf3v+iO+DVpwQ05mrJkhJ2pQGjRvZ4W8s2XDp1b?=
- =?us-ascii?Q?/N9flEpDcpiL46BVuvPdVFgRnG7DD+aGLYP8rOm/yngPC1VHSlWhheVqnYPM?=
- =?us-ascii?Q?HU+GEfWj0eLUoG38k5im2oiEGPQhsmR71N6G5oDVVvboCkmNtZn5wK6pVEr4?=
- =?us-ascii?Q?uVvyraXwRmntk9fvTBZwSz4iEBLtfVj7WoaIdSsjBohvlxaBxCecIQZcSyFa?=
- =?us-ascii?Q?PA+lRnjs8sonzJ0BR+nk9iNJC+ZmpB2ZpSTeUIjzNdTa6+SO54Bz/pyjX346?=
- =?us-ascii?Q?tmY9M7xwHP38jBaMFgp/cMkZA5ENLt8tpSw5hANlRTQ9zwaGSlbJa5pn7lqO?=
- =?us-ascii?Q?zLBU9S4qGOi0iost7i+8qdH+S6MUJPcpvdDB1C198JiJTV8ydaP1aUmAuhZj?=
- =?us-ascii?Q?YSsOuCstDJqcrWdFh7NQ5WdrtTovotDXthwTuiBoksEklNby3ZIh6xGXi3rP?=
- =?us-ascii?Q?1D5qG2tZYop09439XPUUPk6cvrumMpLVdKFLFCgj1T5INrbVjocUXIyRvsAf?=
- =?us-ascii?Q?gKrL7tAlG5EtIkQByRwGrI0T4agUPuXg5YoU/uSUA4A8B+vcYTlo0+c9nEpH?=
- =?us-ascii?Q?5t24HVGmFWq1LmBqAsTLbnhk64Kz2kdldZYtd+N82FZnj9A6dmCeBU1s9N9s?=
- =?us-ascii?Q?Ez/jGhLX0/zKvlqQtmXyTsEgnqvVs2eupHcXWMDdTx4k31JrTGfIz0KPjTsQ?=
- =?us-ascii?Q?Ta1GFw6AwMXWf3vnu0lQL5houwuVzWe1llYiotn7rlCFouKBD4qAd3B2l4N5?=
- =?us-ascii?Q?HXjp157Lux91mOd9Q1m7U77GSbri2FousXPBsQhRykr8sS5c0hYyJvusUWaU?=
- =?us-ascii?Q?Mr4m5r7ei5VcqPMavWxuJM/1A2WBXlXrOdCg4zPckfB/7BF3UwFl6xcXzURC?=
- =?us-ascii?Q?eHwZiYpNUOuHtYcrI8xNp66cA96DrlHBbnvaL/bt3A0pEIjJdwhkMtl0xyMQ?=
- =?us-ascii?Q?LDV55tlV6l+o0KWABOvlBnI8kgBd0PcyY/lQVVr8jt7SvDt5nemJ/atn0G9v?=
- =?us-ascii?Q?QPv1KhDSA9dF8HaFvF2MX6xR9a7Wj8tVCPMYK9ifPmYTlHkoH5Q/DfU1WdpZ?=
- =?us-ascii?Q?CAmo8JJn+6iqYh2fo/RP5qIpBzPFFlEkacufZin6Bg5aDOsTnr5cJm//A7J6?=
- =?us-ascii?Q?kj11klv606YyKbgp1eFayQSzZt1FZaczoioevK6UmFpHvObxjI+V9pKHewdZ?=
- =?us-ascii?Q?WE1RjvJepp/V0E7RgZtWEqSuckvy2taj4kEcHeErFytJxYVmKCdTujkKsxIe?=
- =?us-ascii?Q?2SgPiFbkwyXSzgNgV1XFqki7U76qwdtuaRp8mlikZMJjMlmtKGZ6axbFfWh6?=
- =?us-ascii?Q?0zwkf6vdAodxLRTKGMjYA3hXRGraCTjlf/VyDtCGrI91h+jso/K34tySNROm?=
- =?us-ascii?Q?JdghaJvPyQOxSTGpyEk=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9BLTioTjejNl6StFPqhB8ldEmz9ETJtxlaNdPTkS5K7xvnf7/vsAo62Xh7Do?=
+ =?us-ascii?Q?ir0Mk6dxmIBsA5yiIx128sm6putX2Qx1opTEzYGyo6T5swxDFtYNvsITd4Oa?=
+ =?us-ascii?Q?7JKe/saYYIuYtsBU97GT3s3Un79eiddGGV5oiXUo2Nm69xXAR6YKLrRCEUjg?=
+ =?us-ascii?Q?rDCoPlFv3rDAnRxh0i7gOGwsX8XQwBBGKI37jhwuk/01z0dIEndudoKzyVh/?=
+ =?us-ascii?Q?dy9kqR5H4joy4Jl3z1GjsrSzAfohzCGOrgdscB5+L9VtlkgzYQy7zlU1OIzf?=
+ =?us-ascii?Q?uyPQv9BPYgv0gfK6ZtGE9Oeb7lHfK4hwzST0mFcnCMAdCofe6dnZfy3Czd0T?=
+ =?us-ascii?Q?xwLlocildHnQIdXGAJbX7KFq5IgHCqKJREZfVP8gENiowfdRIW4e1AsqMBXr?=
+ =?us-ascii?Q?d6pJAWpDdgHyMj0Zen97dh22uB2iJg/rRC6wa8ujvCqSZUQ2NhNtWNUH0icC?=
+ =?us-ascii?Q?HQQym5w9GVxW+aipf208ZHQo6vGGX2JDo2MKEgWoGgiR3L45FFTsT4M+1eKP?=
+ =?us-ascii?Q?HzHCOIaWrnbMuk8ZV4gNtatcI8C+MXKHZf/pJ84cFXNiTQ9QY3yDLn0xnTGV?=
+ =?us-ascii?Q?akWsE82U3UH29H2ml8wy89uNcr2YCMXM1y7b2G+DMaM00Ehdf21KHzcJEKIx?=
+ =?us-ascii?Q?FAbRV3bx8wBvX+WKfDD9zfb0h8HXYyIP240UUbGQBD6Q+kB4BC95BpMxS3oV?=
+ =?us-ascii?Q?Q51Uphqcitx/yvzNbpQSFX3z1+zDzFOU0ZYbvwT+xeKAscpKqwKeijX/sti3?=
+ =?us-ascii?Q?QPY2pfK2WA0ANFNCOGTRVsg/wfpOvs4mT2Niz3CngS3RQlGA3XhJbZ93VhuW?=
+ =?us-ascii?Q?nNBs90GUNwAh/D0G3BdbynNSvIJURbMx4KEAe4czXPUW8EFOIch4wCo74uG2?=
+ =?us-ascii?Q?uHF+FIUW1VK6Wv27cE+3UIIPOZWnXYEz0TXkM7aBjQox2B3LMcKZ0Va86C7l?=
+ =?us-ascii?Q?rRs08sdt/fnTHbM93nOMI/+Gr+4s/w32F4wj49KHTq+zwYy2FvF7uI9+juzp?=
+ =?us-ascii?Q?z23WQnmTjn7wRyxhIgjex4Jd+Von3d/z0bQQWPiTQfF357RTorvE4q7tLBFv?=
+ =?us-ascii?Q?ZnA6k1RV/VqW2lHETJy2CiBEnFt+o4loqBw+SriRAEHBm4KNdPnGMYvLnN4+?=
+ =?us-ascii?Q?AFu3siOcVmzepeE5QpXITd9QNWZeqHhl5e5mcCSB6L/Tfeaf0oTWVaFr0xmt?=
+ =?us-ascii?Q?wEQ0d9ofJT/UPVx2X4XjzjUstIfGYU7+sOb6EDT3kUjBT+mNoG+eRvDpt0SH?=
+ =?us-ascii?Q?syx5FHUJranKgui7FJW1BmQbl01lmL4syy0342Md63KQB+SQsqscPl7C+jY0?=
+ =?us-ascii?Q?1/51RIyTGHdmoStPOnaWrKUl7HGjdo7qmrS7EoBIcdRDzfXeViSR4kABzfCM?=
+ =?us-ascii?Q?QfbCzA4UEnj11xfIUSdBPd4ofeBVMK3NTC90Si1kqe/TYmriRwJ461QkeIrI?=
+ =?us-ascii?Q?79N7+j2SIyneHomLs6ouYU32LH+OLRmY381bBY/VhAUXdcIJsLaeQsXNGPBo?=
+ =?us-ascii?Q?z6kvYypOJyWhwDZeM8t/xPYEs68ZhWdCZbVrcZW7Z704Q4+Ry9jJt9+1uyy/?=
+ =?us-ascii?Q?8tx2BCzfRmS7oRm1VKs=3D?=
 X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
  SFS:(13230040)(82310400026)(376014)(1800799024)(34020700016)(36860700013);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 05:20:04.2301 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4307a433-4759-46b3-4b21-08de1773fba0
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 05:20:06.4384 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 72cea528-4c98-4eab-5e04-08de1773fcf1
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
  Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075F0.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075EF.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR10MB6841
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB8177
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,82 +156,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootargs are passed to the kernel in the chosen node, this patch
-adds support for populating bootargs in the dtb if missing.
-
-The values for kernel boot params is taken from the env with, 'boot' and
-'bootpart' specifying the rootfs for the kernel.
+Builds for A53 on AM62 platforms now generates tifalcon.bin alongside
+tispl.bin, add it to CLEAN_FILES to make sure the file gets deleted on
+`make clean`.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- arch/arm/mach-k3/r5/common.c | 47 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-index 4788aaff3ea..9e20b7ae93d 100644
---- a/arch/arm/mach-k3/r5/common.c
-+++ b/arch/arm/mach-k3/r5/common.c
-@@ -406,6 +406,46 @@ int k3_r5_falcon_bootmode(void)
- 		return BOOT_DEVICE_NOBOOT;
- }
+diff --git a/Makefile b/Makefile
+index 2402f9313d8..ebbfa7b5cb7 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2470,7 +2470,7 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
+ 	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
+ 	       Test* capsule*.*.efi-capsule capsule*.map mkimage.imx-boot.spl \
+ 	       mkimage.imx-boot.u-boot mkimage-out.imx-boot.spl mkimage-out.imx-boot.u-boot \
+-	       imx9image* m33-oei-ddrfw*
++	       imx9image* m33-oei-ddrfw* tifalcon.bin
  
-+static int k3_falcon_fdt_add_bootargs(void *fdt)
-+{
-+	struct disk_partition info;
-+	struct blk_desc *dev_desc;
-+	char bootmedia[32];
-+	char bootpart[32];
-+	char str[256];
-+	int ret;
-+
-+	strlcpy(bootmedia, env_get("boot"), sizeof(bootmedia));
-+	strlcpy(bootpart, env_get("bootpart"), sizeof(bootpart));
-+	ret = blk_get_device_part_str(bootmedia, bootpart, &dev_desc, &info, 0);
-+	if (ret < 0) {
-+		printf("%s: Failed to get part details for %s %s [%d]\n",
-+		       __func__, bootmedia, bootpart, ret);
-+		return ret;
-+	}
-+
-+	if (!CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
-+		printf("ERROR: Failed to find rootfs PARTUUID\n");
-+		printf("%s: CONFIG_SPL_PARTITION_UUIDS not enabled\n",
-+		       __func__);
-+		return -EOPNOTSUPP;
-+	}
-+
-+	snprintf(str, sizeof(str), "console=%s root=PARTUUID=%s rootwait",
-+		 env_get("console"), disk_partition_uuid(&info));
-+
-+	ret = fdt_find_and_setprop(fdt, "/chosen", "bootargs", str,
-+				   strlen(str) + 1, 1);
-+	if (ret) {
-+		printf("%s: Could not set bootargs: %s\n", __func__,
-+		       fdt_strerror(ret));
-+		return ret;
-+	}
-+
-+	debug("Set bootargs to: %s\n", str);
-+	return 0;
-+}
-+
- static int k3_falcon_fdt_fixup(void *fdt)
- {
- 	int ret;
-@@ -415,6 +455,13 @@ static int k3_falcon_fdt_fixup(void *fdt)
- 
- 	fdt_set_totalsize(fdt, fdt_totalsize(fdt) + CONFIG_SYS_FDT_PAD);
- 
-+	if (fdt_path_offset(fdt, "/chosen/bootargs") < 0) {
-+		ret = k3_falcon_fdt_add_bootargs(fdt);
-+
-+		if (ret)
-+			return ret;
-+	}
-+
- 	if (IS_ENABLED(CONFIG_OF_BOARD_SETUP)) {
- 		ret = ft_board_setup(fdt, gd->bd);
- 		if (ret) {
+ # Directories & files removed with 'make mrproper'
+ MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
 -- 
 2.51.0
 
