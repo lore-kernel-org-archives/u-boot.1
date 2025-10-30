@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22488CCF9F8
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 16:48:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15CE7CCF9F8
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 16:48:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2CC9839D7;
-	Thu, 30 Oct 2025 17:45:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 180F2839E2;
+	Thu, 30 Oct 2025 17:45:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="xk/86VnC";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="f4r2UbyA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7EC1839E2; Thu, 30 Oct 2025 17:45:48 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id CBE86839D7; Thu, 30 Oct 2025 17:45:50 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0ECB839CA
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 17:45:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90A35839DD
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 17:45:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 6F7034E413FD;
- Thu, 30 Oct 2025 16:45:46 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 20BBC1A1782;
+ Thu, 30 Oct 2025 16:45:48 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 4591A60331;
- Thu, 30 Oct 2025 16:45:46 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id EA6BA60331;
+ Thu, 30 Oct 2025 16:45:47 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C71FF1180809D; Thu, 30 Oct 2025 17:45:43 +0100 (CET)
+ with ESMTPSA id CE14911808CA3; Thu, 30 Oct 2025 17:45:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761842745; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1761842747; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=TAzXQYJGKPjy+aarSj0pjLX+ryDAhilPBvd+ThnnXpM=;
- b=xk/86VnCXY1L3HsEKiAQv+eFH6eaTPedYA43aAEREEjTMiQ7sdG5dzYY5CxMppx+Vly5gM
- lPsAHcMJX9O57bN4LcjC2rQE60ZsQf6Vh6fAW1EZ05jAOhyOlJLjyXEmac6jBb/DVft7Z9
- 74uPN6lIQC8Embv/imAYzGE55pV3csJp/kLBHAtTkWoNIz1xWna8hLOupKP3H0w8Y48fx1
- 6pzxAZFovpjv2aemHvxlkguegEp4zpqeQjHGqZ3ja0S/hru9+nOxFvmgRroyZ+CmZ1jQ0f
- ROpnh/v5zAPkj1WsBIUEw5WDquh7GeNiMm/8nADhDoPGyR1XXNiM9Tr7ih1oyA==
+ bh=FAp4XnlgGlM0i2xyGRIe3WsZLCXn1kHESvFofslsZUs=;
+ b=f4r2UbyAGKzNFypI6UR83JcsXcriMemXvEe1z+ZiXz/oLlCVZYhntKD4ZcpGMNOVOF/obq
+ 1dZu0VG9V96yF3kS86L5luorzx+CCBxI9yF1yKObsCMeI0ty+nBwSS+aqiBtS8pnU4YJtx
+ WTmlceILp7Pa9z6mgvYK9ZwzBdyfiFlx+YYHAKhJONxgFXfPrBy2zUl3s7HK+C/p5TMcY0
+ RWaoY4oTDkBAW8GSUrISQu+5SZqBCk9jAsEH76414Nah8khEgiuOzhs/rjYdKU+drp9XGk
+ JT5EJdK+w4kgCaELLiuDhYT1JVuOGx4NakVraatj+CFXAFmnJUL6a6TkrxcJug==
 From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Date: Thu, 30 Oct 2025 17:45:11 +0100
-Subject: [PATCH v5 18/20] boot: pxe_utils: Add extension board devicetree
- overlay support
+Date: Thu, 30 Oct 2025 17:45:12 +0100
+Subject: [PATCH v5 19/20] boot: bootmeth_efi: Refactor
+ distro_efi_try_bootflow_files return logic
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251030-feature_sysboot_extension_board-v5-18-cfb77672fc68@bootlin.com>
+Message-Id: <20251030-feature_sysboot_extension_board-v5-19-cfb77672fc68@bootlin.com>
 References: <20251030-feature_sysboot_extension_board-v5-0-cfb77672fc68@bootlin.com>
 In-Reply-To: <20251030-feature_sysboot_extension_board-v5-0-cfb77672fc68@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,157 +80,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for scanning and applying extension board devicetree
-overlays during PXE boot. After loading the main board devicetree,
-the system now scans for available extension boards and applies their
-overlays automatically.
-
-This enables dynamic hardware configuration for systems with extension
-boards during boot scenarios which are using pxe_utils.
+Simplify the return path in distro_efi_try_bootflow_files() to prepare
+for adding extension board support in a subsequent commit.
 
 Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
+ boot/bootmeth_efi.c | 31 ++++++++++++++++---------------
+ 1 file changed, 16 insertions(+), 15 deletions(-)
 
-Changes in v3:
-- Added error log if the overlay does not load or apply.
----
- boot/pxe_utils.c  | 92 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
- doc/usage/pxe.rst |  4 +++
- 2 files changed, 96 insertions(+)
-
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index eb4d7723481..038416203fc 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -10,6 +10,7 @@
- #include <command.h>
- #include <dm.h>
- #include <env.h>
-+#include <extension_board.h>
- #include <image.h>
- #include <log.h>
- #include <malloc.h>
-@@ -432,6 +433,95 @@ skip_overlay:
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index 0af23df3a4a..64de5c08b7b 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -148,25 +148,26 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
+ 			return log_msg_ret("fil", -ENOMEM);
+ 	}
+ 
+-	if (!ret) {
+-		bflow->fdt_size = size;
+-		bflow->fdt_addr = fdt_addr;
+-
+-		/*
+-		 * TODO: Apply extension overlay
+-		 *
+-		 * Here we need to load and apply the extension overlay. This is
+-		 * not implemented. See do_extension_apply(). The extension
+-		 * stuff needs an implementation in boot/extension.c so it is
+-		 * separate from the command code. Really the extension stuff
+-		 * should use the device tree and a uclass / driver interface
+-		 * rather than implementing its own list
+-		 */
+-	} else {
++	if (ret) {
+ 		log_debug("No device tree available\n");
+ 		bflow->flags |= BOOTFLOWF_USE_BUILTIN_FDT;
++		return 0;
+ 	}
+ 
++	bflow->fdt_size = size;
++	bflow->fdt_addr = fdt_addr;
++
++	/*
++	 * TODO: Apply extension overlay
++	 *
++	 * Here we need to load and apply the extension overlay. This is
++	 * not implemented. See do_extension_apply(). The extension
++	 * stuff needs an implementation in boot/extension.c so it is
++	 * separate from the command code. Really the extension stuff
++	 * should use the device tree and a uclass / driver interface
++	 * rather than implementing its own list
++	 */
++
+ 	return 0;
  }
- #endif
  
-+/*
-+ * label_boot_extension - scan extension boards and load overlay associated
-+ */
-+
-+static void label_boot_extension(struct pxe_context *ctx,
-+				 struct pxe_label *label)
-+{
-+#if CONFIG_IS_ENABLED(SUPPORT_EXTENSION_SCAN)
-+	const struct extension *extension;
-+	struct fdt_header *working_fdt;
-+	struct alist *extension_list;
-+	int ret, dir_len, len;
-+	char *overlay_dir;
-+	const char *slash;
-+	ulong fdt_addr;
-+
-+	ret = extension_scan();
-+	if (ret < 0)
-+		return;
-+
-+	extension_list = extension_get_list();
-+	if (!extension_list)
-+		return;
-+
-+	/* Get the main fdt and map it */
-+	fdt_addr = env_get_hex("fdt_addr_r", 0);
-+	working_fdt = map_sysmem(fdt_addr, 0);
-+	if (fdt_check_header(working_fdt))
-+		return;
-+
-+	/* Use fdtdir for now as the overlay devicetree directory */
-+	if (label->fdtdir) {
-+		len = strlen(label->fdtdir);
-+		if (!len)
-+			slash = "./";
-+		else if (label->fdtdir[len - 1] != '/')
-+			slash = "/";
-+		else
-+			slash = "";
-+
-+		dir_len = strlen(label->fdtdir) + strlen(slash) + 1;
-+		overlay_dir = calloc(1, len);
-+		if (!overlay_dir)
-+			return;
-+
-+		snprintf(overlay_dir, dir_len, "%s%s", label->fdtdir,
-+			 slash);
-+	} else {
-+		dir_len = 2;
-+		snprintf(overlay_dir, dir_len, "/");
-+	}
-+
-+	alist_for_each(extension, extension_list) {
-+		char *overlay_file;
-+		ulong size;
-+
-+		len = dir_len + strlen(extension->overlay);
-+		overlay_file = calloc(1, len);
-+		if (!overlay_file)
-+			goto cleanup;
-+
-+		snprintf(overlay_file, len, "%s%s", overlay_dir,
-+			 extension->overlay);
-+
-+		/* Load extension overlay file */
-+		ret = get_relfile_envaddr(ctx, overlay_file,
-+					  "extension_overlay_addr",
-+					  (enum bootflow_img_t)IH_TYPE_FLATDT,
-+					  &size);
-+		if (ret < 0) {
-+			printf("Failed loading overlay %s\n", overlay_file);
-+			free(overlay_file);
-+			continue;
-+		}
-+
-+		ret = extension_apply(working_fdt, size);
-+		if (ret) {
-+			printf("Failed applying overlay %s\n", overlay_file);
-+			free(overlay_file);
-+			continue;
-+		}
-+		free(overlay_file);
-+	}
-+
-+cleanup:
-+	free(overlay_dir);
-+#endif
-+}
-+
- /**
-  * label_boot() - Boot according to the contents of a pxe_label
-  *
-@@ -685,6 +775,8 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
- 			if (label->fdtoverlays)
- 				label_boot_fdtoverlay(ctx, label);
- #endif
-+			label_boot_extension(ctx, label);
-+
- 		} else {
- 			bootm_argv[3] = NULL;
- 		}
-diff --git a/doc/usage/pxe.rst b/doc/usage/pxe.rst
-index c2dc11f218d..18532f182d5 100644
---- a/doc/usage/pxe.rst
-+++ b/doc/usage/pxe.rst
-@@ -103,6 +103,10 @@ Environment
-         ``fdt_addr_r``. Required to use the ``fdtoverlays`` command in
-         the PXE file.
- 
-+``extension_overlay_addr``
-+	Location in RAM to temporarily store extension fdt overlay(s)
-+	before applying them to the fdt blob stored at ``fdt_addr_r``.
-+
- ``pxe_label_override``
-         Override label to be used, if exists, instead of the default
-         label. This will allow consumers to choose a pxe label at
 
 -- 
 2.43.0
