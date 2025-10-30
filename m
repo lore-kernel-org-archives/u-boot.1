@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8769CCF9F0
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 18:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A03FACCF9F8
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 18:09:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31A9C836F0;
-	Thu, 30 Oct 2025 19:05:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C676836D1;
+	Thu, 30 Oct 2025 19:09:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Pn8nmKFY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sg9Kl0lJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3354783893; Thu, 30 Oct 2025 19:05:43 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 31A87836F0; Thu, 30 Oct 2025 19:09:47 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD320836D1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 19:05:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 478EA83677
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 19:09:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-3d2059871d0so956527fac.3
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 11:05:40 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-3d1bc63d5f0so838788fac.0
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 11:09:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761847539; x=1762452339; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=biENHp/B2bq+OXCcnn8Qqg6Kk0tiM73x42AFQZEHwcI=;
- b=Pn8nmKFYsXOdRfkdVNfmC2Gr+Y9AWL/nt7SQTbh3SltF5w7vHnMZKG1QrYVBYmWKC9
- /p1CWvizzRX09+2li5X99oA1iDoZ+bFiV1t/hLZm54t0Su03tWNmT36AdUhhHbVYbtko
- Z5uV/k94tqxARZmMUJ630zWJblzOzQx1hlycE=
+ d=konsulko.com; s=google; t=1761847783; x=1762452583; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=n4Vz5rw+AxyfST2uKkJa7BNpjBpbrAF0d7CMZN18DUU=;
+ b=sg9Kl0lJ53M6Y1FUiA2hMwZvtrRlru5S0qfQ/8h0DCcV+UYRH+25dPq7s3HWSxWMHJ
+ e6LSB7vDVu/WMks/IR7OkIKt9XX4lSTDHpdh2VhicA1jILP/tCMCQVKUd963Arruk2gg
+ OUn3hfsb0NhFzPxBoEoAd6KU/0j3cVIrrr2kM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761847539; x=1762452339;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=biENHp/B2bq+OXCcnn8Qqg6Kk0tiM73x42AFQZEHwcI=;
- b=gnOUdAM+7vYuL561GrJPVvZt6pVXPDXUY5oiW8wWnJXXpZJb3RRBk21GM5HwRCc832
- hcaB3F3FsClC62MAQWrq6sd3+8DBc0kATvqZ7W4jkz86utyaVU+GVTr7dh3UbKWCph24
- cyOtUCWbuoDQDobLcZyZhAUW8wuB3sbatA1qOKQV/vcZ2XzNyCDKWqsQLwLtILpyJDcU
- 5nvfrKa7lsQYAkJsYGvZAxiLAHA+94ZSQ4tXMLSqMUfd1XNQapojm4szUTDJcF8L/f5j
- 47ziKqzlfzvZ7IWswYOcSXguRV3GLq9dJzoJmLRstvNk7h/qIZxrgUKJT34OGHchGXZF
- kWMA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW+RCBZt6YHIdYiConlzJrG98D8Eh3G0XOWQA3eb+G7X/AEe3ajF5yXAMWdb7lltENyMp6R7NE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwaEQbwGqZ5ITiBU/K+QT9JBYtbCZpZrVvTmvqdVScENAhrOdPe
- FBJfTgzC8jLG7UnDQOVKYfmvGeiXza1DaHBT1u0el84Yjwpoj8GLY+Xua1xHq7hh2C0=
-X-Gm-Gg: ASbGncv5rFz+0A1DgHr0UYx9W3BDl2N7qdr7WwUAvJHA4E126D7S1iNvqlTf5FKewoP
- Iz8wNj3sOL45Uh5iFC2uZG9DUNcNaNudx/pb91c0ZRv8kBOhg6vEb+o1lbvgo1uE5A/uPqKuMUf
- HCkn7fFdPWVH1bgCzonu7Z3RQ31RASXJPEatY3TZo6b+qpBiPBJM/123k7g7J2XpSoKwiQe9DNh
- xNbBAIQDv9EsNtOVt1s60OZEP8NLU7+6zTE7QcjGxS+GfXrOJ8M2ch3DDnssUme73eQJ3oXvdpF
- NV2lIioVkN6mSWIlT9XjWjDiAfLw8ZuW0i7Leq+hJno0jPUHutMoyPxv+j1R3bGY7MHY8A9b825
- qS7tGhX3s22KKrKiPrQOIk4KWcHO2AmQkBEUWzKedR4LJpWAk8npvoMhKpzlhYtMRdfCsHn9uXQ
- y8sGwm7WF/2OJLvCe/a7+YZRX8NyODiiwgE0np4w==
-X-Google-Smtp-Source: AGHT+IHXI7L/6heDH0pWFHMVQNiuAqEf7y4IXBOtfPI19jMziy/TGcM2JPj46i5j0G9BgdaPU+cSpw==
-X-Received: by 2002:a05:6870:5390:b0:332:1b00:6d5 with SMTP id
- 586e51a60fabf-3dacc6d7c27mr292233fac.39.1761847539467; 
- Thu, 30 Oct 2025 11:05:39 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1761847783; x=1762452583;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=n4Vz5rw+AxyfST2uKkJa7BNpjBpbrAF0d7CMZN18DUU=;
+ b=FZLJ2boYUt0VHmKGX6YqcE+gmCRPJSND4bUg/iVp2qufyGk5/N58lydtZScM9bVI8s
+ 1shtcZ7fRIStw/G3vXrVozz0PbPVuC0ygiNZQ155gmKjVqaa4scnIVK4S/bsfPk6m/EE
+ HHM0GJEKVtN7E177M347e7byu4NikV6DRkFjG/NzWlEAMBbUZCssJo4/iWbNFMulgUeW
+ K3YV0y0jYQusDdzVfi5ZUh7tM1Kbw7jNOyUR/SZ+CbvPP/7fmx/Vn/iUlg/A8tZCdpaB
+ 4JSNeRt03S47dfID4IAbPGccGjWnvj2M+H9LUJslvHAfMk8STvwhi2ByzUGGwshhm+or
+ UpRA==
+X-Gm-Message-State: AOJu0YziA/yp9lGt2BKgt2nJCIr3RhkZYSIqNujV8A9qPt+/71miRVwX
+ KcpdC6IO5bnz3KJFMdMzUwyfwCKaBid5ay8to7u8QdnT9hdhSqbDjMEOfiN8dkOFqIHPvL+dl8c
+ hVEF+R1yBpw==
+X-Gm-Gg: ASbGncvQdV3cFDcPhnHlu7Ig+ubRrTHQS8s2L3qLKsf5u5nKk4IwtvEo3MQk1ayfX2L
+ 9S1jIB+hxQE+krR/pwXci8NjIWRPISznYOHKG61wbIYrf12APi5xGNovpdcesSO77eXfZrAxCSJ
+ 0G+pEMAiHcYLBMWmHAZ2EKSUFU0xoox0ULg75NA3ctaykiza6crrba8HDFCekLJn/22VHfJXBNM
+ ro3AjHJwUN6Q8JbQUzFMZUvqnshkzTSzwCKr6SvAbvI1UAb0Bv/W3ztv5GtipJvL8YRkls9/ctk
+ 1RPjtEcPNt5UGp2VB7NH+eVaBx/Aou6lTQUK6qiWseZ3REDtbQOcWGxc9DG/neFsc0NvOfFEyJI
+ Lm9yBA+gqbnJpRJ4g2L860DfPyreDW6eEPVRFYIE1dqEurBsNjU/HsV92+6CPgnywFf7MeXtosG
+ Uri8aJxgrXUVBcI609kUOVcMnxGM7GgrlWyOuV+ehrb3Aib+kYQA==
+X-Google-Smtp-Source: AGHT+IF+rdReuI/3FOC1QPhvfxtcx3mdgywQgVEax0SZ02oH/L2DNfzqQt0TyTmQ7XC/xaEPKkS5Sg==
+X-Received: by 2002:a05:6871:c69b:b0:3c9:8689:35d1 with SMTP id
+ 586e51a60fabf-3dacbfabbf4mr317698fac.32.1761847783016; 
+ Thu, 30 Oct 2025 11:09:43 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c530221d90sm5276964a34.33.2025.10.30.11.05.38
+ 586e51a60fabf-3d1e395cbf1sm6113046fac.20.2025.10.30.11.09.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Oct 2025 11:05:38 -0700 (PDT)
+ Thu, 30 Oct 2025 11:09:42 -0700 (PDT)
+Date: Thu, 30 Oct 2025 12:09:40 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-In-Reply-To: <20251030035201.GA16948@nxa18884-linux.ap.freescale.net>
-References: <20251030035201.GA16948@nxa18884-linux.ap.freescale.net>
-Subject: Re: [GIT PULL] please pull mmc-power-2025-10-30
-Message-Id: <176184753852.2789371.15201266188369340282.b4-ty@konsulko.com>
-Date: Thu, 30 Oct 2025 12:05:38 -0600
+To: Brian Sune <briansune@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v1] Cyclone V Board handsoff script
+Message-ID: <20251030180940.GY6688@bill-the-cat>
+References: <20251030003359.1023-1-briansune@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Qqax3UJbJmtup6HI"
+Content-Disposition: inline
+In-Reply-To: <20251030003359.1023-1-briansune@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,25 +97,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 30 Oct 2025 11:52:01 +0800, Peng Fan wrote:
 
-> Please pull mmc-power-2025-10-30 for master branch
-> 
-> CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/28083
-> 
-> --------------------------------------------------------------------
-> Add support for Samsung Exynos 7870 DW-MMC device
-> Add support for Samsung S2MPU05 PMIC device
-> Add compatible string for Exynos5250 in Exynos DW-MMC driver
-> Add support for handling UHS-I voltage signaling without power-cycle
-> Minor misc cleanup
-> --------------------------------------------------------------------
-> 
-> [...]
+--Qqax3UJbJmtup6HI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Merged into u-boot/master, thanks!
+On Thu, Oct 30, 2025 at 08:33:59AM +0800, Brian Sune wrote:
 
--- 
+> Since turning from old build flow.
+> New Altera SoCFPGA requires converting handsoff
+> conversion via the python script. This is from
+> official provided, and now sync to U-Boot
+>=20
+> Signed-off-by: Brian Sune <briansune@gmail.com>
+> ---
+>  .../cv_bsp_generator/cv_bsp_generator.py      | 100 +++
+>  arch/arm/mach-socfpga/cv_bsp_generator/doc.py | 243 ++++++++
+>  .../arm/mach-socfpga/cv_bsp_generator/emif.py | 424 +++++++++++++
+>  arch/arm/mach-socfpga/cv_bsp_generator/hps.py | 571 ++++++++++++++++++
+>  .../mach-socfpga/cv_bsp_generator/iocsr.py    | 203 +++++++
+>  .../mach-socfpga/cv_bsp_generator/model.py    | 114 ++++
+>  .../mach-socfpga/cv_bsp_generator/renderer.py | 196 ++++++
+>  .../mach-socfpga/cv_bsp_generator/streamer.py | 102 ++++
+>  .../mach-socfpga/cv_bsp_generator/xmlgrok.py  |  32 +
+>  9 files changed, 1985 insertions(+)
+
+I'm not sure this should live in U-Boot. And if it really needs to be
+hosted by U-Boot and not hosted/maintained by altera somewhere, that
+this is the right place in the tree for it. I assume you run this tool
+on the output of some other tool?
+
+--=20
 Tom
 
+--Qqax3UJbJmtup6HI
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQOp4wAKCRAr4qD1Cr/k
+CiItAQDYsM/YCps6+pRDhkZ8QTfEhz0Vj3Amhc7JNs/RIg4eOgEA41yMCugipVgR
+lD7ZSz8Tr9Y3X3l/e2PIvwTaNIommQg=
+=z9Lx
+-----END PGP SIGNATURE-----
+
+--Qqax3UJbJmtup6HI--
