@@ -4,83 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 824A1CFC28C
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 16:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C12CCF9F0
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 14:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D516083966;
-	Fri, 21 Nov 2025 17:20:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id EA56E83642;
+	Thu, 30 Oct 2025 15:02:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iMqsznBW";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="LVONfjkw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 221938394E; Fri, 21 Nov 2025 17:20:53 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id C0D2A836F0; Thu, 30 Oct 2025 15:02:46 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D7488394E
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 17:20:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4794F8334F
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 15:02:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b73875aa527so352360266b.3
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 08:20:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763742050; x=1764346850; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Hox807oRO3CfQKEhyfgbA0h17mGSqHIdnUfpRwSU0as=;
- b=iMqsznBW6jvI7LbnIVd1PCKsbpcy65RmoLsYtDfVghbnLN9znFAOA4NHxK+0wtPy89
- 7xL7bYmIZ/xFP8d7E7WWHbEi0aP9GQg6CNaYg2VozDs6sipIRz2UPLBnJLEgKxDmIWQW
- 8P3mC5JwxTls8Jva0ryZTyPX73uuY9HO3mMIs=
+ dmarc=fail (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tom.rini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c531b42dbeso708953a34.3
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 07:02:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763742050; x=1764346850;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Hox807oRO3CfQKEhyfgbA0h17mGSqHIdnUfpRwSU0as=;
- b=Wb9N2l2usC0nYCJdtP3rXaOnzOO5YvIcuG+vPYh3ZpnXtOccCB+i2WgR4H6YqvrZpa
- TgGmngSAmz8MY5tG7c4KD2KqysZ21ewp4FwD5HO19hArguTLfE5lmD3U/puJgyM+5x9z
- u8onXE942oexEczvmx+AqVaMFiRI3TRURp7YZUPSHrAlNFXHEXvmVZgy6hNnO2efMuID
- Am5xvNgknOn93RjKcSF/CjNYY/JzxvKPWyzl315SgGbtR3KoHPhjn6/RU1QQ2nIpe55D
- I9SfkhVGMWNa4t8zkfPUhoo5RhClRGcEXdhTy7AHdSAsSXB7vGu+NU4BOnHUQhPMUe9s
- oYBg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUEs5lx45NhYF2jAt2wRU0ZBxviRLf25aYpiREhWhpPmyYnBxCkedBSWtDDzvqO+M4lVIfLSJQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwHzR4mlEa1YkvoyJA1Dc7wY4xKgZ4cbIdolG0JMaLAwRyIfgcY
- n/bPdCYtiysPd7iLvl52muJ1O+sHn30Swetha9hoEc8ZQtZWqSbFGinzRPis8W6FXaIQAQDRZBl
- AdAz85XZrxsW9+HTokNYi6Au9b4y6wCAZi5Bb4UVr2wfDCm4zj2w=
-X-Gm-Gg: ASbGncsfWZH/maf7MOYfntWExxUtEb9CQfU9rrXgTKieO/n/GtNX3ZwQVA35z95dupV
- zkQvobJAU8z4uqyOdlD8bJbNOR2umZNaAwWoL52ja4rhg8vU8RQ10pY5nBeJjdeRsEmYIBMELuI
- ULQz0WyYRcny45LB41S0dbVPlMuq9UkHByyjWaE6C/DPTFULUywRA1hhy290/ZM690LxtF+otOL
- XxY1yX8WHbpOg94lD3tZrP9U7XsmaWVhieJRECsF3eLTfqE/VMDAYJbjJjYYzVpniFvhgJbl5Zc
- KlAj
-X-Google-Smtp-Source: AGHT+IEdi8JRbUnFQc0n98IoFzy8kVN1ITUzr9kmTpI9mOBZ5XuvRPSzQ87L5ZKDc0stmkHwLvWeA/P7uuX40pTa3zA=
-X-Received: by 2002:a17:907:7248:b0:b76:23b0:7d6f with SMTP id
- a640c23a62f3a-b76718cef3amr308404466b.56.1763742050417; Fri, 21 Nov 2025
- 08:20:50 -0800 (PST)
+ d=1e100.net; s=20230601; t=1761832963; x=1762437763;
+ h=content-transfer-encoding:subject:cc:to:content-language:user-agent
+ :mime-version:date:message-id:dkim-signature:resent-to
+ :resent-message-id:resent-date:resent-from:from:sender
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/3VHHdE6ZGloZ+XS+fZklAus64krYPhouX4lqFpySgc=;
+ b=ncCBkgBfzM6vDKLHR+TSCoN9ZIt3/CfkBjMVOSD7I2FBfastF49FfJZK4DrSKXosLB
+ BwYN2I9A+Xh/OVKYzvSjSPY0XPAFO/Zpa58jrNb0ZrqKI0YorwuQJ8Hd2236RMcc2KtZ
+ G4We5bcA1ZUDI0l3vh6WfM3iJAbGzYaXEjfhrvb0JBTrrcrU1CVtFDDzG6ZTAYG/bZuM
+ GmjVOP9AsrNyTZFBsukmVZOMIY5WwBTa+NEllCh5/neBWSk8yTaLri/Duvq6gfqqne32
+ ezJCS9kYb8dSUzdWUQcaheLwwNmSD4TRByoBWbvRKzc2KfzPiJKM9097hsO0cqW6nHsI
+ n7pw==
+X-Forwarded-Encrypted: i=2;
+ AJvYcCWkP10GEzlzRTVbiwgNAdGcnSBR5fvOowEHIbAAmcg6LL6U6eDMI2cbodxI4rd3MaZhhx5/EQQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwUtS31XhcY9eHlhVbtKsGgdWKPZQTlcfTkqRUfPuYCsLQuHLCM
+ cW4OhIPHG7kSuqg+hfGgF4EzMrSo8hrdILXni9xawbhIUl+VAHyDJHz2aCCOaHM+/kH7oeqxFVc
+ eWthyfCuehw==
+X-Gm-Gg: ASbGncvQAzCrUQ6++26TMszWNJedncmjWb/7tiYUcq0gDuYZriADGbkowsItjQP7ofQ
+ Dww7OafOa1OVR7LA+7830Qt9RqkDL64SCv8k2rZq5jyt+amQt7CKqm4fRpsXijhA8DBRQEFGxTR
+ YmR3fzHKM0bgjXJ3bM+bvTGqvATq9sO41ekppsFWXrLn5atrSOVR36dpn9eW494z845eDT7FZ2b
+ u2xIF/f1Lc/mbWPKbhNFND6cTRqQzCG+cYot1LxpIjIuLDsljlKbQPCtDN70qvgOxHqlL1zKGaX
+ +8IdBWKH9apVTPPL/xDJcj8zWb7T8mMBjg9dA2nrbJcCxrlruYowZ7/K4cM4JRV82B3gkrM1ePf
+ 0fI0+LEHkdNky9BaFttM7olmOPiRmbLxo8oPVyCYFFtnRYuz2ukYFXjRc8br2FGwb0KTZkehcYM
+ aj4AQE4GsKYhOM28vx56w5p3jyw2t7rfRJELtdqR4=
+X-Google-Smtp-Source: AGHT+IFw2ShxEFYpR4/Ga3mxeZHJ09m5m++M90olU0KtuMRhS2LiPcwyWtV0n++ziQg2qtd5oFDPqA==
+X-Received: by 2002:a05:6830:410f:b0:7c6:8c73:ab0c with SMTP id
+ 46e09a7af769-7c68cea61b5mr1704471a34.4.1761832962377; 
+ Thu, 30 Oct 2025 07:02:42 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c5302068d5sm5126057a34.28.2025.10.30.07.02.41
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Oct 2025 07:02:41 -0700 (PDT)
+From: Heiko Schocher <trini@konsulko.com>
+X-Google-Original-From: Heiko Schocher <hs@nabladev.com>
+Resent-From: Tom Rini <trini@bill-the-cat>
+Resent-Date: Thu, 30 Oct 2025 08:02:38 -0600
+Resent-Message-ID: <20251030140238.GT6688@bill-the-cat>
+Resent-To: u-boot@lists.denx.de
+Received: by 2002:a05:7022:32b:b0:ba:8f80:e1f6 with SMTP id 43csp946846dld;
+ Thu, 30 Oct 2025 05:08:30 -0700 (PDT)
+X-Received: by 2002:a17:907:d29:b0:b6f:198e:c348 with SMTP id
+ a640c23a62f3a-b703d5392demr612201566b.46.1761826110665; 
+ Thu, 30 Oct 2025 05:08:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1761826110; cv=none;
+ d=google.com; s=arc-20240605;
+ b=FLftam67/hRCnsSiqqMusHxwj5yfYEPjw4+7cQ2B9uxiejz4e4bgi2wi1xieQuvMU0
+ 4XcHVfKDlPtGY+P/1n1KDDi51xk0xYUp4x9xAShTaLO8/eifS5DlZmiobqc7kFV5uGMV
+ wu3c/kyEDhwyXriE46rFUX8EyaLdtjqWam6ujzB9iQT2ZpTr4TWrWqimOmXazvH3lTW8
+ FoIDc3DBYY70pB1X6+8ZgQB0+LCOlyWe1P+hzHdqJQ8U3Ub4Ltfbu80matDVSdzmqox4
+ Y6xEUQHkrIoX8otBComnh17oc7DEwxRqPAhDG26QPbCdxtOKCrxiImvA6ko+rsnUYAng
+ cViw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:dkim-signature;
+ bh=/3VHHdE6ZGloZ+XS+fZklAus64krYPhouX4lqFpySgc=;
+ fh=EegZwyrwIecF0z4NTMUN/qdt2e5XQDJysXXeJK4IZ44=;
+ b=JbkDY79Zqgi7Ia34Ibzj+/XVs5cX8KPSLRpOwCdi4F1+XmMMnPvXyPao1M+meEiISV
+ N68ZY0GWmn3J7n+B7wtfJB0xdQ4An5TPY4yWbqnOvIoNtCJ+sCbjDRvPOzswZXwaP55z
+ c3AoHQYGJucdIoBlUyPoCopk702NYF2V410/K/9H4OdDI6mXo/PO++ztUzDTcDYFIBaa
+ OaRx8+5bosMH1cgDFVE5POTjz2ne119Y/AYPkooTJZajRQq+zDma1acBL1ESOnKl+0rt
+ 0oUXG19GYnlTywqbKT+gkMvvl4qLIb28HESnOqAoaQefLoPfPcyWsUeTGCWTlWTfJWhW
+ x1Og==; dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+ dkim=pass header.i=@nabladev.com header.s=dkim header.b=LVONfjkw;
+ spf=pass (google.com: domain of hs@nabladev.com designates
+ 2a00:f820:417:0:178:251:229:89 as permitted sender)
+ smtp.mailfrom=hs@nabladev.com; 
+ dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=nabladev.com
+Received: from mx.nabladev.com (mx.nabladev.com.
+ [2a00:f820:417:0:178:251:229:89]) by mx.google.com with ESMTPS id
+ a640c23a62f3a-b7041c713d3si238956366b.401.2025.10.30.05.08.30
+ for <trini@konsulko.com>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Oct 2025 05:08:30 -0700 (PDT)
+Received-SPF: pass (google.com: domain of hs@nabladev.com designates
+ 2a00:f820:417:0:178:251:229:89 as permitted sender)
+ client-ip=2a00:f820:417:0:178:251:229:89; 
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 6BEBE1092FC; Thu, 30 Oct 2025 13:08:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1761826109;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language;
+ bh=/3VHHdE6ZGloZ+XS+fZklAus64krYPhouX4lqFpySgc=;
+ b=LVONfjkw+X6PyXb4DzduggDKjBrSBOE+mVLB0210Bjlab5ydYOklxaEwRz/vRB2+0VUCaT
+ +dg3slWC715gZzhRycaX0mOPXZTPLp6Z2YkvvV8O2EG7eFg5mYq1osUMHnYRPQSV7TY6Zs
+ wyxQw5nj9vRp/xPtiMysiakTEXd9QGfJHAgwA0KDxkz40e86eK1wwWctr2qK///MQdQdF4
+ i0JIZLNPjZ6+mt/KzM5dK0Qk+EuPRU5RcJ2rM5w5r4XK/ZQHvf81ZGLd8+NN4YKHTCaq+E
+ 74ISza10wjvHMPCdOKaNQ6tXj4wIwvI/i3Gx+G9d+vVO30r5HwL56UZfCQZKcg==
+Message-ID: <c720c9ca-22e1-321c-4762-74fa37f61e59@nabladev.com>
+Date: Thu, 30 Oct 2025 13:08:48 +0100
 MIME-Version: 1.0
-References: <20251120041526.817288-1-marek.vasut+renesas@mailbox.org>
- <6a902e2d-b1be-1ba1-5d8b-e0a07ea2aebe@nabladev.com>
- <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
- <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
- <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
- <CAFLszTjyXo9yh6Jzdaev9GhN8OZ4Z5xz9phgNHnKCvA0ASzbaA@mail.gmail.com>
- <60b12c96-4e63-4cf1-8c27-25eabead529c@mailbox.org>
-In-Reply-To: <60b12c96-4e63-4cf1-8c27-25eabead529c@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 21 Nov 2025 09:20:37 -0700
-X-Gm-Features: AWmQ_bn-GHjo4PIwvpbgsa-2jKtcTFuWvZZcdp2HAXUsZsnvj9FCh83O8d060Nw
-Message-ID: <CAFLszThg+6LdxHXOYy9x8-nat+bsspbUT8Dg_vqnmx62aO0a2g@mail.gmail.com>
-Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
- CONFIG_OF_PLATDATA=y
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: Justin Swartz <justin.swartz@risingedge.co.za>,
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>
+Subject: Please pull u-boot-i2c master
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,108 +151,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hello Tom,
 
-On Fri, 21 Nov 2025 at 07:52, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 11/21/25 3:26 PM, Simon Glass wrote:
-> > Hi Marek,
-> >
-> > On Thu, 20 Nov 2025 at 21:39, Marek Vasut <marek.vasut@mailbox.org> wrote:
-> >>
-> >> On 11/21/25 12:40 AM, Simon Glass wrote:
-> >>> Hi Marek,
-> >>>
-> >>> On Thu, 20 Nov 2025 at 04:56, Marek Vasut <marek.vasut@mailbox.org> wrote:
-> >>>>
-> >>>> On 11/20/25 10:08 AM, Heiko Schocher wrote:
-> >>>>
-> >>>> Hello Heiko,
-> >>>>
-> >>>>>> diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
-> >>>>>> index 380a9f8f3ad..d0e9dad7202 100644
-> >>>>>> --- a/drivers/i2c/i2c-uclass.c
-> >>>>>> +++ b/drivers/i2c/i2c-uclass.c
-> >>>>>> @@ -749,8 +749,11 @@ static int i2c_post_probe(struct udevice *dev)
-> >>>>>>     #if CONFIG_IS_ENABLED(OF_REAL)
-> >>>>>>         struct dm_i2c_bus *i2c = dev_get_uclass_priv(dev);
-> >>>>>> -    i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
-> >>>>>> -                         I2C_SPEED_STANDARD_RATE);
-> >>>>>> +    if (!dev_has_ofnode(dev))
-> >>>>>> +        i2c->speed_hz = I2C_SPEED_STANDARD_RATE;
-> >>>>>> +    else
-> >>>>>> +        i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
-> >>>>>> +                             I2C_SPEED_STANDARD_RATE);
-> >>>>>>         return dm_i2c_set_bus_speed(dev, i2c->speed_hz);
-> >>>>>>     #else
-> >>>>>>
-> >>>>>
-> >>>>> This sounds more as a bug of dev_read_u32_default() to me and should
-> >>>>> be fixed there, else we need to make this check around each call of
-> >>>>> dev_read_u32_default() ...
-> >>>>>
-> >>>>> And looking into u-boot:/drivers/core/read.c there are more
-> >>>>> candidates for such a fix (all with "default" in function name?)
-> >>>>>
-> >>>>> and such a fix would also make the dev_has_ofnode(dev) check in
-> >>>>> i2c_child_post_bind() obsolete.
-> >>>>>
-> >>>>> Or may we fix the default functions in drivers/core/ofnode.c ?
-> >>>> No, this was the previous implementation which is now superseded by this
-> >>>> one, see [1] [2]. The goal is to fix the entry points which pass invalid
-> >>>> content further into U-Boot DT handling code, so the DT validation
-> >>>> happens only one, on DT input, and not again later.
-> >>>
-> >>> Do the libfdt functions work correctly with *any* negative numbers?
-> >>
-> >> Not without a full tree check (LIBFDT_ASSUME_MASK=0x00). With
-> >> LIBFDT_ASSUME_MASK=0xff (what SPL uses, tree checks disabled), passing
-> >> negative offset to libfdt functions would simply trigger a segfault for
-> >> sandbox SPL tests.
-> >>
-> >>> Do
-> >>> you have a pointer to the libfdt commit which changed this? All of
-> >>> driver model relies on that behaviour in libfdt:
-> >> With libfdt 1.7.2 , this code triggers segfault in sandbox SPL tests:
-> >>
-> >> 162 uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
-> >> 163 {
-> >> 164         const fdt32_t *tagp, *lenp;
-> >> 165         uint32_t tag, len, sum;
-> >> 166         int offset = startoffset;
-> >> 167         const char *p;
-> >> 168
-> >> 169         *nextoffset = -FDT_ERR_TRUNCATED;
-> >> 170         tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
-> >> 171         if (!can_assume(VALID_DTB) && !tagp)
-> >> 172                 return FDT_END; /* premature end */
-> >> 173         tag = fdt32_to_cpu(*tagp);
-> >>
-> >> The fdt_offset_ptr() returns NULL and fdt32_to_cpu(*tagp) would
-> >> dereference that NULL pointer.
-> >
-> > Ah, I see. So the library hasn't changed, it's just the 'assume'
-> > logic. That makes sense.
-> >
-> > I see a few options:
-> > - enable the checks for the affected board (code-size impact)
->
-> Every system that enables OF_PLATDATA is affected ?
->
-> > - create a new VALID_OFFSET assumption (split out from VALID_DTB)
-> > which checks offsets in fdt_next_tag()
-> >
-> > The latter might be best. It would likely be very cheap in terms of
-> > code size. In fact, I should have thought of this at the time.
-> Wouldn't it be better to not misuse libfdt ?
+The following changes since commit 23987e10905146def3ab61e55ec912c6e742efdc:
 
-It actually isn't a misuse. It is perfectly OK to pass an invalid
-offset and libfdt has defined behaviour in that case, absent any
-'assumptions' we force.
+   Prepare v2026.01-rc1 (2025-10-27 16:10:23 -0600)
 
-Remember, in Linux these checks are enabled. We added the 'assume'
-thing to reduce code size. Here you have found a situation where it
-breaks stuff, so we should back off the assumption a bit.
+are available in the Git repository at:
 
-Regards,
-Simon
+   https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2c-updates-for-2026.01-rc2
+
+for you to fetch changes up to fc7d868327439c4ea6c640d2e8fead7679c0b86f:
+
+   i2c: rcar_i2c: Add R-Car Gen5 support (2025-10-28 09:51:02 +0100)
+
+----------------------------------------------------------------
+I2C updates for 2026.01-rc2
+
+- add support for the MT7621 I2C controller
+   from Justin
+
+- Add R-Car Gen5 support
+   from Minh Le
+
+----------------------------------------------------------------
+Justin Swartz (1):
+       i2c: add support for the MT7621 I2C controller
+
+Minh Le (1):
+       i2c: rcar_i2c: Add R-Car Gen5 support
+
+  drivers/i2c/Kconfig      |   7 +++
+  drivers/i2c/Makefile     |   1 +
+  drivers/i2c/mt7621_i2c.c | 374 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  drivers/i2c/rcar_i2c.c   |   1 +
+  4 files changed, 383 insertions(+)
+  create mode 100644 drivers/i2c/mt7621_i2c.c
+
+
+Azure build:
+
+https://dev.azure.com/hs0298/hs/_build/results?buildId=189&view=results
+
+Hope I made the correct setting, so that your b4 command works...
+
+bye,
+Heiko
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
