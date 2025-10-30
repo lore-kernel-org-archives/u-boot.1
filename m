@@ -4,78 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9069CCF9EA
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 04:36:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3FA3CCF9E5
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 04:36:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 226F283655;
-	Thu, 30 Oct 2025 05:36:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7290783710;
+	Thu, 30 Oct 2025 05:36:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KGblMnID";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="wCxT9yz0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9944E836D1; Thu, 30 Oct 2025 05:36:04 +0100 (CET)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 03394835FE; Thu, 30 Oct 2025 03:39:46 +0100 (CET)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7996F835FE
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 05:36:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C7BB832BC
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 03:39:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-3d47192e99bso1076899fac.0
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 21:36:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761798961; x=1762403761; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=tYwrXNbR2JzFR4RLeJyi4SmnBelwtI1C83QAasAMp6E=;
- b=KGblMnIDCBGlWI73UKu0RxHPQDl8HKaM4wKj7eEdHiWNDdhSroT40z1WZt85PvdmGg
- c2DHQPTamS7mQ7q3uly7n94gFsQXON4brha8mkZHxJf6x5f0CeQBZbqH64cewITWkO0S
- OmO4q0OJ/qtyLcaWNj0hrn2f0YGcMxdCDnBb8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761798961; x=1762403761;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tYwrXNbR2JzFR4RLeJyi4SmnBelwtI1C83QAasAMp6E=;
- b=AQxHP3Fg17tZbdfqyMDRi8edIvBQDVgXs1TE+Fg1gcYUdc5jal7BGYsCChVBPt5maE
- AeLuRteqAd5hu3o3hpWyNhJRGi6ah6kcmjDv3lqil1CxfvxnKmvtwVqpPb8/pVZSXC0z
- LYj6xk14yWLX3Pqclsz5j9LnDou1BiMa0u1fsPRNYALRzF3JY0PCegnI/wagGMlerPTg
- 8nITIbMixZidHEdUlNwMahhmtgWNs+errEHS5yTvww1w36XIKx44v8iCBWz8wjSwmpq5
- nmA8Jk6vgprj4wIx4JwozJO/oHA4QhJUMKzC5/QLm5Wb2OILnaI5dRPUURobJ68Y94JB
- +A5g==
-X-Gm-Message-State: AOJu0YzJN8hfQgYn/hcjlxGhcx9BVhRNbl6MKXOcnBavd+LevtpsbKj2
- vzBBUy+v/9N+51eegdLcIn2cYd3cg1aSrnFiSXz2q0vkLog6a5Xt8GizfovJXJ/z4+z6gKdzM80
- LNlRlqVEyBQ==
-X-Gm-Gg: ASbGnctyoQ6aA/uFeTVeC9BdCbpQgAj4jEOzn8hZ6ufsVrEuJ2h71XmfjpyYwpdSm/2
- 2drwajIrxGZAMVrtFIoXwDrqHQFnPneBvnULf4322Ze8I1ouWZ/IQRMpj72oUupYWlSlAkRSA+Q
- bIGeaDt91Ivn6RdRkj4IcpYKuD7DI9rEWTRaNdunreqvBymezQUlcgTQnzDZrySDXguZfIqL09e
- oMEt7S9SMckgLflxKfR17EwnmQlH7FpWWsHGf6QGSvv4H22C1zCHA6wcFsOdOEVaw8H6p8eerQS
- tqevOSoXXc3Qim64wgMhJt/heQ7BhpGUMdJshmjx7UupxmruIpnEf0bILcxdcggoyQkjWP+Tsiw
- KNX3mfXrggZlFTPd2BVKtbVZr7USWOZuNJ/49Ia53G5A8wqRMmroupXsFZfP8lQ2xf9QENnHAlQ
- W1ci+YCC1h+NE7dUXkn189ePWLeqVEyvEe4asPY7y8waT8
-X-Google-Smtp-Source: AGHT+IGZhmF6F+AAfbjEA6yAh97LNoy4FqWFc+y8ZUJaisj0uYwEAIfe/BEhadBfhBbj2kemtM2Vhg==
-X-Received: by 2002:a05:6870:7024:b0:3cd:c7ed:3377 with SMTP id
- 586e51a60fabf-3d8a285317emr1003038fac.9.1761798960936; 
- Wed, 29 Oct 2025 21:36:00 -0700 (PDT)
-Received: from bill-the-cat.k.g (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-654ef2f0bf4sm4132107eaf.18.2025.10.29.21.35.59
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Oct 2025 21:35:59 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] Gitlab CI: Rework our tag usage again
-Date: Wed, 29 Oct 2025 22:35:58 -0600
-Message-ID: <20251030043558.2620797-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=f3pWb5wYjVT8XvtAG/o7nabg9yDuDa9YwAtFSsfIDkH585OpM823DmheO0AhHGDc+faSTp5EG0kppXp/BTcmOzttUi0TsCEo69fMq7x/N25CYVvmCYf0x/QS0xR64jq7MXfd4BOmxB+431IUIVr9q0cG/drGhGqeyE0Thq1VQDFieKmUkiVW95TypbhdvOiw303rW6AX1hduHeWx/ImSmawgExcVPa+UKW2qEab3jvqkTXw2+tvXTZpq/vysbVuElayx0AQbu2CQfNGSGW7O63N7xebm0wd6nj5cKpfV5D+Cnlg0HhK6OsiQdyvAtL2XCEX51YGSKePfuwLcq/Z+/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=z8EFwHOp0pd4zo+R4KGbMb8pw5TWu3uGmhgszN/J1p8=;
+ b=bUbxGVzVM7JFR++yu7tgiEfJs8Pp0vzoB/Iypp9W3185wXBw3esITjEgpSTOG0XTJ9lm4HsrRUf6eNWrJ0GN7lCO4FfAxyho8vgX4yyl/wFlhLiA33SwcIHwXfUMPBf/C/fN+jswA8nrGRXwQl+xd7Eeyet3yzc+l13g46qIdqNE873Cu/kZhe8VbPjbk4kylw4SJ5IYcFKuwHaPirSutSBBSTTD9xXkrxjTVfjdiFDnimo76KaDnxqoXYxTfOE7Dauq6ViWbI3jkRtB9VBh+IYsMXj3CfYHIWb9Mkda9oeAmndKE6G/w3/z7ZBdpiI3LH+9RLhY9fFCQRBUSDomEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=z8EFwHOp0pd4zo+R4KGbMb8pw5TWu3uGmhgszN/J1p8=;
+ b=wCxT9yz0mFnuxw+2aXoymdBG2+KNInEuBrNkTxnNbAAfnqy+PlVp0+aeLi45G44V2vmG626hzJZ4E63L2DaloYCGtXoZBNjKl9VcpHTk0w8IM4KpLKHBzlu0TWFYWiX+hbDrZA0OmCjaKpUQuSlKn9CcdbIWLSbTGlSebTYXRJ42miFprJl771/wAlUea6GTY00dv7dB7yyblGRrXclUUxD8lxsLtgvzO/uePMoM/bVbgIcVDoiXVgSLUqFxWsCvlABH8NugxBa7EhkzoNKHSMEqtHxwztUaaZpgHPWD2mcevGvY3xzMME244jYOEh/ge0T3ZTdigbfJvqeEMG05MA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AS8PR04MB8086.eurprd04.prod.outlook.com (2603:10a6:20b:3f6::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.13; Thu, 30 Oct
+ 2025 02:39:41 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9275.013; Thu, 30 Oct 2025
+ 02:39:41 +0000
+Date: Thu, 30 Oct 2025 11:52:01 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Subject: [GIT PULL] please pull mmc-power-2025-10-30
+Message-ID: <20251030035201.GA16948@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SG2PR01CA0127.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:40::31) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS8PR04MB8086:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2d734d0d-ce61-482a-ebfc-08de175d9384
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|52116014|19092799006|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?5nUj9lXaib3phpxzLYYVWxeUIwvkGqvcPgu+fILL/1VmjBue2OEio+JgZ+ln?=
+ =?us-ascii?Q?MXLfQdgyBsSY9B1rakFBv+3EmbjHnVRYpA4uPhs1ru816OiIP0hcnoUys6cK?=
+ =?us-ascii?Q?ovEtEI7B59m+6zp8VpGl0LhvJJKrENBNe+KGqjevGZC1VjbV+U3SCu+mgkCZ?=
+ =?us-ascii?Q?Oebpe2qmj/Wup1npJzfzx1MOGrZBMrxhl1Vuox2mOaJDm8gxoZt/FW5vohvG?=
+ =?us-ascii?Q?nvItPpxUSlTigKhjQvTijMd4focsdXyYO6EQ8Q5Y8CBllt7PCs2TLmX5fHl1?=
+ =?us-ascii?Q?JAv9to5yTTXNNTtO8Zt69w0xIQt9WSws235p9C8GFMWHkapxLCRfnC4WA97F?=
+ =?us-ascii?Q?NUlfPTMd+j5L/icudm04x6ZQBaoga3y+9kLpeD9zURn8IVZDw/rBL+ivep/4?=
+ =?us-ascii?Q?4SnVsrIa0cIS1CfdYheBs+n9UWeADn3tYDCU/VxI2VyudzB+Ru+P5vic9KHH?=
+ =?us-ascii?Q?ZL6Qlmvs9iBuDV/l7UtUru/h98iic0tiVa20lAoCq9YcH6Cp1TfzdWDFTSG6?=
+ =?us-ascii?Q?UEZC0hHeOsVmPwMuCAtKNXb+YxTCzAnH4KgazXZNywHnnMi5vqEoApwekflu?=
+ =?us-ascii?Q?LT4bmQ2MHZenDerPUoE8Strvf8Dychkj6ohW1ta3LalofvsmsxfwsZLzJwUA?=
+ =?us-ascii?Q?EyBtqKybM/GixW23cLPBWHJM6rMMV6Xh1JSJJ8xvmEUgXXNwnSE2d986/bwH?=
+ =?us-ascii?Q?OfawHMAQpCzHufGAj5cRchBCjjlxh3SDnVBE8zLjtTiS7wlUUdw4sqgRUGQe?=
+ =?us-ascii?Q?YM+B01OMsFtDvsIEcKOCDIivD63ZXvCCkIFeHSOFZbWl6+K1eFshh4aGqwa+?=
+ =?us-ascii?Q?BLA8u9dgo4z48Yp7ukvU1anP/bg0uomKBvFfEnElk/dHQ4TRsAgBazBFnLBT?=
+ =?us-ascii?Q?moJDIncw9GwGzKvk1QonVz3BTMAfctTA1W6HA61barCnwQfyMh0u5q9jxZjB?=
+ =?us-ascii?Q?I2KsUVL0DpkvqgGii9caIjJXEMxwy8h5MMFXkQtVduDE0Fex6CqJbPRFLcFq?=
+ =?us-ascii?Q?5+ERVrLKaN+sg1Fvlna2/UN115vQ5WDA0gvGuSQv4GTjHWKABHTZHwVlo7Eh?=
+ =?us-ascii?Q?I36li8TX8V9pKSft8cCYZtI470QGfPMZ61QoUCanVfHTsDNcshX4yxOlW/cL?=
+ =?us-ascii?Q?Irt/Ub+e0YQ5W1d5Qf6NT+r3OVYysRhujCOPGswGvMJX11iOsxw7U4Yc8AQ0?=
+ =?us-ascii?Q?kdFLHSaeOxk6MCdpttqw5jiClhwiW/J0yekS8PHrznV5IINvQMeTW4qlL3OQ?=
+ =?us-ascii?Q?KDjZ0kABkunsbusk0sAZxIki6RhlnyQNCcoltYp80QFQhTtUyvz3U5iL7Rbx?=
+ =?us-ascii?Q?88jKnl/+3mUBhxefmxqygkccnWxWnWMuvIQc7lF62xXjgv9GHR8nvBEfGxvg?=
+ =?us-ascii?Q?HtdnIhjiRh3gcOY09ap5hfC6ZM3J/fS0oGIKcmVRBOXJCGyecXm7vrWj29V/?=
+ =?us-ascii?Q?Up7UkEn05H/9k1EJVySnDwYx9N1Ft9WX4ryuwN78+69peWCPrqu88rbqTDXD?=
+ =?us-ascii?Q?HZvrQwsAaIMIBw/219laF9NQzHA2YMVdZpoC?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(52116014)(19092799006)(376014)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MPi5C4RJvKkZFSqlqHnIRTw+ngy/c7L5S9ZZ1uOQ03+00LJH2KbGmuizV/5s?=
+ =?us-ascii?Q?BPfNBazIj7xlS9cNPKsbW7OIjSPBMtC9co6HNBVpGoBMZGTTEqEF//jOnfzR?=
+ =?us-ascii?Q?YkBHAxQ/iU+kDvrUnUCIbkJV8y4Ae0ffXl5OcvmA8bclFoMKfX0qZjBgNY6a?=
+ =?us-ascii?Q?K45xX606IBXgbYjR9w95u0/JQh8d6W5stYRSWT3ek07s8XBsyOT8vDn5plsg?=
+ =?us-ascii?Q?37vhOeZyDr7cQOM692IOHm9tmttuK6eqrvyYcfhD1o3QCJAM9ZygBqXS5YHe?=
+ =?us-ascii?Q?aOL5dZ5p97ewpaMdqQ9iVUNlBGSnJtkptyHMWJCNDuRjStK5mS+5tAbrL3dW?=
+ =?us-ascii?Q?NOK9Rd//UBEyuJr7EJATTBEVgSZyaMmZhJjUp3kpfFwdb01Rhfe/3bSy7WE3?=
+ =?us-ascii?Q?aNFD4rUGP5cjeaJrGyPVIlhl3qjSV1ZwERx/Qp0Go9QWsXEym0lKV8kdg6Sa?=
+ =?us-ascii?Q?QjzgW9/m6JlNPZspadrPsKUoVFZUv9cUXIVe8lIxlWHvetMGosR+Ds2u/tTt?=
+ =?us-ascii?Q?rnuL/ieE411scGUMUO5mA7WTaVPUPjy+lPvTzKXYnCeQg9dvNcNIf6BZzlQU?=
+ =?us-ascii?Q?Z/a7469UqH38HsqUhGALG4olJCPgHl70IEx49fjSJehBk0krdL0pJ4qwTe20?=
+ =?us-ascii?Q?Mydb4eWSwwazBusdohAlPCVtR23UtQsn1IYg5QIdCCVzj9Gp/O7Ma1xKrD1U?=
+ =?us-ascii?Q?+QJoOtCLEihSjsmOobDJH8FovPtzT/YFzmzfhg7Ey5PGjrXZ8adWhgZR9iDh?=
+ =?us-ascii?Q?4qP4TikyigDLX+MKsYYBR0dJBA4ZLVFDgRtfGr2fkIFnsH4J4oA6MhE0pqid?=
+ =?us-ascii?Q?gN8FGCTeYu1ejP7euR2eK0E0S1RtyMMfyYU3dbhTbEhL4O+x8fuXz2fB04kZ?=
+ =?us-ascii?Q?JTLxKO/j9/MMpC5pR/sPbToBGbsMe2SIbzxhgJZN3FY8LOC0xG+a2+oXpze/?=
+ =?us-ascii?Q?vwhmUYwxCNE3gOO7uzSsMGjHAAZvRBzG80AXmiUl9voAQ9P5zgDXXod8eJyL?=
+ =?us-ascii?Q?65lj5iZnrZFLCQU45R0xgEw32VEPDFT82fsWAXT+Cn3F91ZPnGelnkx0aMpH?=
+ =?us-ascii?Q?f/VQfjYx1K8aWWrxe91Tf2QdZtGXMkGQEsW1t+X0ePgT+4vYgmChu+4LgIF4?=
+ =?us-ascii?Q?utH82vQNzVLIouvn64Cjs2k1CtZ9fxEntfEiR1SRDvzDihFg+0gkY1Ef0o0h?=
+ =?us-ascii?Q?9laWxnM+EicHI6j4EPW6oD9jVBR8JFFdzov5FF0UaSRHT6penLcT6cZVCkiz?=
+ =?us-ascii?Q?rgZUUgLsjiGYyWphsy2U6nCSv9YbxDt+E0QSVpcc+IqZCrWQMwNqcdlpoUds?=
+ =?us-ascii?Q?705PoC/Uuu+utwKGRt8KsU39cWHReNmSOoCHjPbodfL6BeOHDSCb0/fBIezv?=
+ =?us-ascii?Q?Mx8iTDdocIUI63FuX92zWPXZDq/gx+jS1ofmzLnGSMp1qMUqUtKNFqXHDS32?=
+ =?us-ascii?Q?hqFGbMLnMMaXtArmo3YV8Xm4ryVRji8B6sDQ8vWKwZfzhTdaybR6+4f2bEj8?=
+ =?us-ascii?Q?7AxRVLa57tY3Vx74TXZ6bB6q3f/zgRhpTx1rBs5kZur/3xmieDfLRzUKA5TW?=
+ =?us-ascii?Q?n3qYzd/wpx23dtz6KdW4DmthGkvVhRs2Agj2jH1i?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2d734d0d-ce61-482a-ebfc-08de175d9384
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2025 02:39:41.2722 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ku/vUF6wCfKWIQCq6Hq3DL1VP21VVy0QgNA42si4rOsG3CAZWLiyNrIOrA7xd1ZeRE3Icef5o/doPY0PsZfaRg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8086
+X-Mailman-Approved-At: Thu, 30 Oct 2025 05:36:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,71 +160,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we've had jobs running on both amd64 and arm64 hosts for a
-while, we have enough data to look at usage and findings. For the world
-build job, make use of the new DEFAULT_FAST_TAG and only build it once,
-on either amd64 or arm64 as we don't run in to host specific results
-there. For sandbox, continue to build on both arm64 and amd64 hosts as
-we can find host specific breakage that way. Remove the mistaken
-restriction on sandbox64_lwip.
+Hi Tom,
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- .gitlab-ci.yml | 18 ++----------------
- 1 file changed, 2 insertions(+), 16 deletions(-)
+Please pull mmc-power-2025-10-30 for master branch
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 73ff975e5746..a9a57f1d58e7 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -2,10 +2,8 @@
- 
- variables:
-   DEFAULT_ALL_TAG: "all"
--  DEFAULT_ARM64_TAG: "arm64"
--  DEFAULT_FAST_ARM64_TAG: "fast arm64"
-   DEFAULT_AMD64_TAG: "amd64"
--  DEFAULT_FAST_AMD64_TAG: "fast amd64"
-+  DEFAULT_FAST_TAG: "fast"
-   MIRROR_DOCKER: docker.io
-   SJG_LAB: ""
-   PLATFORM: linux/amd64,linux/arm64
-@@ -134,12 +132,8 @@ stages:
- build all platforms in a single job:
-   stage: world build
-   dependencies: []
--  parallel:
--    matrix:
--      - HOST: "fast arm64"
--      - HOST: "fast amd64"
-   tags:
--    - ${HOST}
-+    - ${DEFAULT_FAST_TAG}
-   script:
-     # Prepare python environment
-     - python3 -m venv /tmp/venv;
-@@ -309,12 +303,6 @@ sandbox64 with clang test.py:
-   <<: *buildman_and_testpy_dfn
- 
- sandbox64_lwip test.py:
--  parallel:
--    matrix:
--      - HOST: "arm64"
--      - HOST: "amd64"
--  tags:
--    - ${HOST}
-   variables:
-     TEST_PY_BD: "sandbox64_lwip"
-   <<: *buildman_and_testpy_dfn
-@@ -361,8 +349,6 @@ evb-ast2500 test.py:
-   <<: *buildman_and_testpy_dfn
- 
- sandbox_flattree test.py:
--  tags:
--    - ${DEFAULT_AMD64_TAG}
-   variables:
-     TEST_PY_BD: "sandbox_flattree"
-   <<: *buildman_and_testpy_dfn
--- 
-2.43.0
+CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/28083
 
+--------------------------------------------------------------------
+Add support for Samsung Exynos 7870 DW-MMC device
+Add support for Samsung S2MPU05 PMIC device
+Add compatible string for Exynos5250 in Exynos DW-MMC driver
+Add support for handling UHS-I voltage signaling without power-cycle
+Minor misc cleanup
+--------------------------------------------------------------------
+
+Thanks,
+Peng
+
+The following changes since commit e34d01d23e45e007368685ffa6dfd674b6dd7b17:
+
+  Merge tag 'u-boot-ufs-20251029' of https://source.denx.de/u-boot/custodians/u-boot-ufs (2025-10-29 07:41:43 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-mmc.git tags/mmc-power-2025-10-30
+
+for you to fetch changes up to e16018f6b22d36f9f6b9f881175547457c06dae3:
+
+  mmc: exynos_dw_mmc: guard execute_tuning (2025-10-30 10:11:19 +0800)
+
+----------------------------------------------------------------
+Kaustabh Chakraborty (15):
+      mmc: dw_mmc: export dwmci_send_cmd() and dwmci_set_ios()
+      mmc: dw_mmc: do not skip dwmci_setup_bus() for same non-zero clock frequency
+      mmc: dw_mmc: properly address command completion in dwmci_control_clken()
+      mmc: dw_mmc: add voltage switch command flag
+      mmc: dw_mmc: return error for invalid voltage setting
+      mmc: enable/disable VQMMC regulator only during MMC power cycle
+      mmc: exynos_dw_mmc: add support for MMC HS200 and HS400 modes
+      mmc: exynos_dw_mmc: add support for SD UHS mode
+      mmc: exynos_dw_mmc: add compatible for exynos7870-dw-mshc-smu
+      power: pmic: s2mps11: change the probe function to bind
+      power: pmic: s2mps11: add support for allowing multiple device variants
+      power: regulator: s2mps11: declaratively define LDOs and BUCKs
+      power: regulator: s2mps11: declaratively get/set regulator mode
+      power: regulator: s2mps11: add support for S2MPU05 PMIC
+      power: pmic: s2mps11: add support for Samsung S2MPU05 PMIC
+
+Lukas Timmermann (1):
+      mmc: exynos_dw_mmc: Add compatible string for Exynos5250
+
+Peng Fan (1):
+      mmc: exynos_dw_mmc: guard execute_tuning
+
+Tanmay Kathpalia (3):
+      mmc: sd: Handle UHS-I voltage signaling without power cycle
+      sdhci: Reorder interrupt flags in SDHCI_INT_DATA_MASK definition
+      power: regulator: Remove duplicate include of regulator_common.h
+
+ drivers/mmc/dw_mmc.c                        |  50 +--
+ drivers/mmc/exynos_dw_mmc.c                 | 142 ++++++-
+ drivers/mmc/mmc.c                           |  75 +++-
+ drivers/power/pmic/s2mps11.c                |  37 +-
+ drivers/power/regulator/fixed.c             |   1 -
+ drivers/power/regulator/gpio-regulator.c    |   1 -
+ drivers/power/regulator/regulator_common.c  |   1 -
+ drivers/power/regulator/s2mps11_regulator.c | 590 +++++++++++++++++-----------
+ include/dwmmc.h                             |   7 +
+ include/mmc.h                               |   3 +
+ include/power/s2mps11.h                     | 134 ++++++-
+ include/sdhci.h                             |   2 +-
+ 12 files changed, 740 insertions(+), 303 deletions(-)
