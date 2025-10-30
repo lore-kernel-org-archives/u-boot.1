@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFE02CCF9EA
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:01:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F023ECCF9E5
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:01:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 385C8836F0;
-	Thu, 30 Oct 2025 06:01:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7A90083885;
+	Thu, 30 Oct 2025 06:01:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="csVKzLNx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DKh1teYb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 695FF83771; Thu, 30 Oct 2025 06:01:21 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id AF7A583887; Thu, 30 Oct 2025 06:01:40 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F454836D1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:01:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C968C836D1
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:01:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b704db3686cso138719666b.3
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 22:01:19 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-63c3d7e2217so911461a12.3
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 22:01:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761800479; x=1762405279; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761800498; x=1762405298; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EgGm3385DdZTzcRQzcMv5U/pmWTWNpyTByzvWQoNYuw=;
- b=csVKzLNxFTcxufbtxWmn4fK/NMmtzJ0jsG6nS+TvJrV43PQaDTtbZvy5946LDizGKd
- fwbEz2ClRwDa/GKYvVp6D3Tgkt6KtX50IZkRqekNFmrfifLEIo8kG4t1U9Y79bbasF9H
- 7n3CxzflZXO5Fwiy0sVmo2Bb21Umx7EuQLgwdxiDO4N8MKUyryjQNavGV2PYi4I+aR/l
- UX0reKbpFdiHyzqIK9Vvvv7C5WwwA0jY1XxodD+7iUsht8PBbANl0vA9TRPYiXOKQQfX
- ZSabgczuWWps0Exb3b4lNAzwQkFGWE1pZr7Sy2egErth1BH+oHqEpzYzaTg8zc8at8T8
- IrlA==
+ bh=r0ybn3KmtmK7gLsJHnNmza9wbHr+EyVfoBi6AWi+wdg=;
+ b=DKh1teYbuY+NUyTJCdCGX1B04FscfxG0qAZT1X3zR2rus2cqb1NA/sn6a62QgX8Ahx
+ 75KNRRFWNN8TdDxUE+7hSmgYCkibiq/+D6M8OwAPdGQ3HhEzSVUiFhCojoiSPLV+vgkT
+ 27fWLt3U3FqsH9d5eY88JzwUBulSvFMITK0Vgminwecf0/yfIG+TsalFA1rhBkR7ipkp
+ OECOo0x4fk1ia0mVYqSdDWxf93dp9DFXAK5s8A7RBG60kx+vohXQLYKhq2j1eHP0wUiX
+ ovz7iRtWew1okg0vYrWnPX0Guoib4wBM6C/2GEtqb2MVSp8TbiCWt3sgbk9ra4o31BIW
+ gHZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761800479; x=1762405279;
+ d=1e100.net; s=20230601; t=1761800498; x=1762405298;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EgGm3385DdZTzcRQzcMv5U/pmWTWNpyTByzvWQoNYuw=;
- b=OcL5mFQelORZVhVm0zIxrJ9TuJ2kFWdvkpX7MnAO4UbROyDNgQ8s5GkU3xi+USUoi0
- 28XezFvnnOR7p3xzWg4NbjGHckmxhe1715GD+asj1msauwtFkAK1U4P7TmdpzxViKdMf
- g3UPpdqPHXH32Rkw5yzA9ZIsP7W8TsZgVHRLilDGCkYOvKu1qkKv83zn8f+Lvc/797GA
- NN7WPSA4E52uZLn0Ag6GTKgYpLQfR6DKw59MwljMExJhUnS++PZQETBszlW651pRm0l3
- gWGrqvj0nonKb7DzrbOKyHezHp2UVD8vQZOCFa/UCCS/opGslOk9YJeP+17zECCCkBWm
- OkIA==
+ bh=r0ybn3KmtmK7gLsJHnNmza9wbHr+EyVfoBi6AWi+wdg=;
+ b=WQnx7ZiLWT2xDT4sez9bTOYN0HI9USNuIaUu0vcpmdcVcIj+TkI2UGz6aY2yJGeZEp
+ OSclljKEoySSQcxWaRDyqlEbejgCJ+zo2OigQGZetJvlQC4bfRafi8vg4rKE2NC+Dy4L
+ cvz7w47cZcl03Zx+PH6gfkNeiOtqPjXUoVw/uaqiano9tvoRC39e8E+eJ+9b1b4IntKe
+ toHIpDUU5x+Qq94d7iKg0tqFcBd332gC3KJVLDBBRnDgnB1yAKUBS0B/yafThEytNlYO
+ TQbrhhVZtm5PZ9u75kQyQWrwaqpgl8qEywKfGcheeWtjcL0tDWSTX2gihCZ4/bGcMrO2
+ wYbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXr/uz7KwziWvWaxMi91h6qbDFK/Sw48wShjUN/rLRcf5v3561AL2vkIoojFYbTfuGYdCyDiLU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxcG+AGmomxh6SwVJGvmCyGQWYThF8dArGDnkw/F28X3vAd0AZF
- 94k0H2SNdU8JuL/1hciHuTvAPcf6FtzHJ1i/rCifS9zwKF3Ul3LmAIxURZJtkzv07jfhyck1Qx4
- 69PCspHiQEA4I58cFHWDYeq5qVpKQMkg=
-X-Gm-Gg: ASbGnctjHiU/gG9xKW2jUJGZIe/hGiUqu8OHbHIMQb8chljRxvlLwHoUjDVsGofsZsm
- E8y0ELtQJzFli68H9fDEifqDlJ3bOKnvBdz1t3W73iPWolQVixai7UQf9MJ/NGAHZjV2zHHJBYH
- 0tGzrdloZkNqJstRhlDST8PaI3lkkaunABD/V4VxOcE9AmN7sVgId02sJYEbyBuWNPQId93r9bb
- S+wDQ8mDOX55jHzk7cu1h0Wp16rSPyP2jDyDqvDtWGwFTXPIJ12ImTgswZU0+l4/+F2vQ==
-X-Google-Smtp-Source: AGHT+IFW9Aroli9UXvmHq6ToaTFgSkhGR78l9nV7iAfHQDe8Y2UL4tYQryXjEPzRW1zia4cvjJ+8A3MqBpMlyQ+o8ZU=
-X-Received: by 2002:a17:907:60cb:b0:b3f:d9e9:baab with SMTP id
- a640c23a62f3a-b703d339722mr615399066b.27.1761800478522; Wed, 29 Oct 2025
- 22:01:18 -0700 (PDT)
+ AJvYcCXZvyPI/rDY9ZBj1/ff5zwcdvT6mHzJBkv8sPLPYLVbq8BhR6nr5hpMzQyB9R9Npw6ZEUjXXX4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4xRyruaeFyJiEGZes1OgaM0Hz0PM5KWTIW/ywNbvoj1Ss/p9w
+ XreKrja4M5/2bz7Fmcp4+G4QXNjIr/Qqjex876VYusXJzeYQv/GcYwEMq5kcsCN862uQb0dNZIR
+ OramimxsDq+XpFmuPN+76SNmqabd8vRc=
+X-Gm-Gg: ASbGncvUq/7rxiT6VOPmVjHeFE21HDtsXS3OcWG8T5cCoXaK+oYWLZU45gUY47R4q9B
+ V4ce01qo9/gXOoCAOK444xBOXhWF3zXxOsgI0u57zGkRRB9v6qZWWGe7NM7DNZYdnrkMiptv1pq
+ LpxRACUwvULvHH/MaTBsDG6gIynpRQk/0DoCXMMBdazYa9lMzn9VjhqMgO1dKu9S2m3KagOTZi1
+ owvsUfb+UHChydVT99PRqpbYtfQn8f3M38vzR59ux0MB/6YGCwXY5pKmBB1uwK+vsoUa8MxkpJy
+ nzQv
+X-Google-Smtp-Source: AGHT+IGROfvPZt3KnrvNGcGzDKhL3x0fN+83X31fiYo0hYyH99x4ZxSN78EZyY9ga+/Bqi+L4U23vJO8ZUV62N0fhHs=
+X-Received: by 2002:a05:6402:2354:b0:63b:f1aa:11d1 with SMTP id
+ 4fb4d7f45d1cf-640441aee39mr4466520a12.1.1761800498145; Wed, 29 Oct 2025
+ 22:01:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251026010658.19271-1-semen.protsenko@linaro.org>
- <20251026010658.19271-2-semen.protsenko@linaro.org>
-In-Reply-To: <20251026010658.19271-2-semen.protsenko@linaro.org>
+ <20251026010658.19271-3-semen.protsenko@linaro.org>
+In-Reply-To: <20251026010658.19271-3-semen.protsenko@linaro.org>
 From: Anand Moon <linux.amoon@gmail.com>
-Date: Thu, 30 Oct 2025 10:31:00 +0530
-X-Gm-Features: AWmQ_blGFbkjlW2KYPdtct7Qb6ylr7z9-stHNjyIa_AW7CXi41SBfnCpBhHeZwE
-Message-ID: <CANAwSgQScETiuKQ=wLsUwFbPgyNw2DP82vrOA7WWgoWMC_0yAg@mail.gmail.com>
-Subject: Re: [PATCH 1/6] mmc: exynos_dw_mmc: Extend dm_dwmci_ops without code
- duplication
+Date: Thu, 30 Oct 2025 10:31:17 +0530
+X-Gm-Features: AWmQ_bnxEdoc1OVBmdzVxGfw0PvUSUFsFV7ol5hdhgcpAIO6FhFRIE5TsebhsAY
+Message-ID: <CANAwSgT6N1WFvxQyUkLChCBga9NPq9XbkiWhek2Wdz4S1Tb=vQ@mail.gmail.com>
+Subject: Re: [PATCH 2/6] mmc: dw_mmc: Do not export dwmci_send_cmd() and
+ dwmci_set_ios()
 To: Sam Protsenko <semen.protsenko@linaro.org>
 Cc: Minkyu Kang <mk7.kang@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
  Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
@@ -101,16 +102,25 @@ Hi Sam,
 
 On Sun, 26 Oct 2025 at 06:37, Sam Protsenko <semen.protsenko@linaro.org> wrote:
 >
-> Instead of extending dm_dwmci_ops by copy-pasting the structure code
-> first, copy the actual structure data with memcpy() and then set the
-> .execute_tuning field. Now if struct dm_dwmci_ops gets modified in
-> future, these changes will be automatically reflected in struct
-> exynos_dwmmc_ops, which prevents possible issues in future. It also
-> avoids code duplication.
+> Do not over-expose the private dw_mmc API. The glue layer drivers at
+> this point shouldn't be aware and shouldn't use the generic
+> dwmci_send_cmd() and dwmci_set_ios() functions. Making those functions
+> public causes a "leaky abstraction" issue. It clutters the public
+> interface of generic dw_mmc driver and possibly leads to improper usage
+> of those functions, so it's a bad design.
 >
-> No functional change, but it can prevent possible isssues in future.
+> If struct dm_dwmci_ops has to be extended, do so by copying it first
+> (like it's done for example in snps_dw_mmc driver). That also makes sure
+> the future changes to struct dm_dwmci_ops in dw_mmc driver will be
+> automatically reflected in all extended copies, and avoid code
+> duplication.
 >
-> Fixes: eda4bd29929c ("mmc: exynos_dw_mmc: add support for MMC HS200 and HS400 modes")
+> This effectively reverts commit ef3b16bb8e73 ("mmc: dw_mmc: export
+> dwmci_send_cmd() and dwmci_set_ios()").
+>
+> No functional change.
+>
+> Fixes: ef3b16bb8e73 ("mmc: dw_mmc: export dwmci_send_cmd() and dwmci_set_ios()")
 > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
 Reviewed-by: Anand Moon <linux.amoon@gmail.com>
