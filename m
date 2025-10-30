@@ -4,70 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87066CCF9F0
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 16:57:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E27CCF9F0
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 17:03:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C8EC838D5;
-	Thu, 30 Oct 2025 17:57:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 704D9836D1;
+	Thu, 30 Oct 2025 18:03:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="AeWNO1sQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KIfBjg1+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24A53838CE; Thu, 30 Oct 2025 17:57:04 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 97056836D3; Thu, 30 Oct 2025 18:03:32 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1DEA836D3
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 17:57:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 739D583642
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 18:03:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cy9JC6fy6z9t2V;
- Thu, 30 Oct 2025 17:56:59 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761843419;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0Xwh6o1PU7uF6H1SQr5tsKEnT0IAdv02BRzpHwPbJ7M=;
- b=AeWNO1sQu3+v42V68Ysgsj8p1BnGWnl8diIqqW+/c0ccFqB8QmDiPpxecaxAihXBHkeH5m
- AK5bCdd8DcXyZA8kZQXOG/Ik6savuulivtLyZuMQrtzjgaGKqgY3voTXqL0cVXFEgxP1An
- qZKuUmS/N0FkTTnO2cFLe9VVbSgHBfSdgovvfKjOmhCkjTrc6V+AxcEuI+GQn3lgzNA3yx
- dJ4z9NEP2rJFmjlEO9Bf98XLg93IOGKarwL7AWl3/DKHuGEO+RY6NH4eNPCN6f63t1IiUp
- e6//jnJJy1A9vsHq/Ixm71uCLvRd1VHMmxB6c02rjq20mf9Q+ztsNOhAD5q6SA==
-Message-ID: <eca51372-3bcd-4873-ba47-c06781d18466@mailbox.org>
-Date: Thu, 30 Oct 2025 14:58:25 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-44da99d4d40so674307b6e.2
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 10:03:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1761843809; x=1762448609; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zur7Fl0RORM4Z/yn7TdzYGmteZ8ZW2yROZqwDj/KEB8=;
+ b=KIfBjg1+X5z9CyMJqXBh6lFquP+q3CiU6QGlc76c6WNvkdeAlTZCdCo5K+86Wc9kkb
+ yJbS2z6if5VVm1Cq76WGmKxy+7TYfKp8YxKSzEopC2eylKea9CVNLLZA5qrSugPuF7BE
+ QWmQxKaGg7MbpL2de3medEKMOWRcOriKMoh+A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761843809; x=1762448609;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Zur7Fl0RORM4Z/yn7TdzYGmteZ8ZW2yROZqwDj/KEB8=;
+ b=u0A4q7qRD/aaZ76aKPzQmyCbUdQ7dDcU6N2lJoQoVhVWFhzS/yFEGZ6tFsjYVDTchY
+ LBq8bWUlyAsEY7C32CC3ucNgMKOeVrZ4c9Ugo7cXyzh4mIRlB0pojB5B2Q1ZDCcFI2Dh
+ MEWx1Cz+x9wYle9yUtebpjjkLtxAO8YJzTM0b3tdJj5SussyMSh46DAvfFFdj8WZG8JT
+ 3nZb6nCuRPtZdi3mFDHgNNlsy16jH30weJ5AECpvY4s9+i5VtulfdTyyQNO2hRnUo155
+ f6f/Qd6Mk/KF3c+wYk4cTuwebflUOwNo2JzUkGrAPzPmaSX6oYG99hKYy6qwIbXTXMjg
+ 2KcQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXdfsKlnVNpiFYZnz0+ml1rVdVDKEP1tTy0QdwsFO3ZwwhDda9e7hLZb500UqB1PKuYOVV6Flk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxUYlJdtujig4HXhoT8jpN6NM1ZDJodG0QU3739ncgunUBu679a
+ 9EV4FJ/0exZBfeC8vEdKJq7ybxkxGNkIX4ovvvlfnB3OO5c1mX728mCqJ8RsMsaOFepNVY7hNBW
+ LIi+t2f2dlw==
+X-Gm-Gg: ASbGnct94qiAGDqSMnznwGO/WiREGOF3C7LleC3kfex1AYBsJUBRiNT6AOBg42jT9pw
+ oSBI41/C+BLAsYCsZ2xelGrdX7+cav2rX/B4V8ZXjiFf8pK+rW9dWeOIvgh0GZqQQqFb3k5WJ1k
+ kMQwa2sMcEUnfYYK3LYNPAn/uNd2FM8OR2vQYAXWOrXreUZisYDczE78Ps6El3MM+FtjCR9XTRY
+ t/wBYZr0BURZmUY4NHu7mLq1XsbgMVadGxz+0lkrR9h4LWqCmm+OLCqQzckQiH16q77fYn7RJ6j
+ Jgj2JGIe2zX+aQhY0dexNSfJmzUGzWAUkzO4ZauwBPt3U2QKMe3SFVxWRue5JDS9xRLLOVtGfqT
+ W5OkWxqh2pod9EIQq+A09MOxZyVTsNMUaK49BoNWMmysfd9tW0WG1eH7K2W9z5FAGrIEF6Fgb55
+ +VP/lYaDTbte/MkTNtb3SHnZ98ZLaZfc/1NG0z19Pp+GuQx45r5w==
+X-Google-Smtp-Source: AGHT+IGD+14bZzvExfpiBNv6iZTKmr4DFprx0y4tdR465A5/OTP94P5Kf9m/AJOZmWrt8IvTlZ+MyA==
+X-Received: by 2002:a05:6808:1b23:b0:44d:bcb0:1413 with SMTP id
+ 5614622812f47-44f95f8afa3mr142288b6e.46.1761843808801; 
+ Thu, 30 Oct 2025 10:03:28 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44da3e59a15sm4326212b6e.8.2025.10.30.10.03.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Oct 2025 10:03:28 -0700 (PDT)
+Date: Thu, 30 Oct 2025 11:03:26 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ U-Boot-Denx <u-boot@lists.denx.de>
+Subject: Re: vexpress_fvp test.py CI errors
+Message-ID: <20251030170326.GV6688@bill-the-cat>
+References: <CAOMZO5Any4akaDeRNwxqhcdy_gjxQVHC3aao6sDDxqALxNsp9Q@mail.gmail.com>
+ <CAOMZO5ANeCogTO+dyq9GSu7XGeW+H3OZ2CXCEsguhcrQLJwNrg@mail.gmail.com>
+ <CAOf5uw=rMZZs7m2mUMV-DCw=C1d_R7uWAqzpWfYOM4TXY9Sm6A@mail.gmail.com>
+ <CAOMZO5BxaAcr5BF+D1KB9hjddv4AmG3f5pzRM5edDUHBSCz1Pw@mail.gmail.com>
 MIME-Version: 1.0
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTog5Zue5aSNOiBbUEFUQ0hdIGZpcm13YXJlOiBzY21p?=
- =?UTF-8?Q?=3A_Drop_mmu=5Fset=5Fregion=5Fdcache=5Fbehaviour=28=29_misuse?=
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Alice Guo <alice.guo@nxp.com>,
- Etienne Carriere <etienne.carriere@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
- <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Viorel Suman
- <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>
-References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
- <PAXPR04MB9644A04B5499EA2BDC3130A7E2FDA@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <e7063153-036d-4079-b9c0-252a5d1eb364@mailbox.org>
- <PAXPR04MB964488C508F283B14E8B9B11E2FBA@PAXPR04MB9644.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <PAXPR04MB964488C508F283B14E8B9B11E2FBA@PAXPR04MB9644.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: morqzor7mq1rmqzsz6jwrzggq8rsxpzx
-X-MBO-RS-ID: ae475291ccbc16ca2c9
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="G30a1Sajf0XAFdDW"
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5BxaAcr5BF+D1KB9hjddv4AmG3f5pzRM5edDUHBSCz1Pw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,62 +103,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/30/25 4:58 AM, Alice Guo (OSS) wrote:
 
-Hello Alice,
+--G30a1Sajf0XAFdDW
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->>>> diff --git a/drivers/firmware/scmi/smt.c
->>>> b/drivers/firmware/scmi/smt.c index
->>>> 237871559f0..cd1c0801f72 100644
->>>> --- a/drivers/firmware/scmi/smt.c
->>>> +++ b/drivers/firmware/scmi/smt.c
->>>> @@ -61,20 +61,6 @@ int scmi_dt_get_smt_buffer(struct udevice *dev,
->>>> struct scmi_smt *smt)
->>>>    	if (device_is_compatible(dev, "arm,scmi") &&
->>>> ofnode_has_property(dev_ofnode(dev), "mboxes"))
->>>>    		scmi_smt_enable_intr(smt, true);
->>>>
->>>> -#ifdef CONFIG_ARM
->>>> -	if (dcache_status()) {
->>>> -		u32 align_size;
->>>> -
->>>> -		if (IS_ENABLED(CONFIG_ARM64))
->>>> -			align_size = PAGE_SIZE;
->>>> -		else
->>>> -			align_size = MMU_SECTION_SIZE;
->>>> -
->>>> -
->>>> 	mmu_set_region_dcache_behaviour(ALIGN_DOWN((uintptr_t)smt->buf,
->>>> align_size),
->>>> -						ALIGN(smt->size, align_size), DCACHE_OFF);
->>>> -	}
->>>> -#endif
->>>> -
->>>>    	return 0;
->>>>    }
->>>>
->>>> --
->>>> 2.51.0
->>>
->>> Tested-by: Alice Guo <alice.guo@nxp.com>
->>>
->>> Tested on two boards: IMX94 and IMX95. No regressions were observed
->> during boot. Looks good to me.
->> Thank you !
-> 
-> Hi Marek,
-> 
-> Applied this patch on the U-Boot NXP tree and found that it affects the i.MX8ULP. On i.MX8ULP, the SCMI buffer is in SRAM and mapped as normal memory.
+On Thu, Oct 30, 2025 at 01:41:27PM -0300, Fabio Estevam wrote:
+> On Thu, Oct 30, 2025 at 1:39=E2=80=AFPM Michael Nazzareno Trimarchi
+> <michael@amarulasolutions.com> wrote:
+>=20
+> > ! _pytest.outcomes.Exit: Lab failure: Marking connection bad - no
+> > other tests will run !
+> >
+> > Did you try to rerun from that stage?
+>=20
+> Yes, I tried to rerun it several times. It always fails.
 
-Thank you for testing, this helps greatly !
+Yes, the console access is unfortunately racey. It's why I'd like to
+replace it with QEMU being the bloblist using platform.
 
-Would it be possible to fix up the SRAM mapping in:
+--=20
+Tom
 
-arch/arm/mach-imx/imx8ulp/soc.c:static struct mm_region 
-imx8ulp_arm64_mem_map[] = {
+--G30a1Sajf0XAFdDW
+Content-Type: application/pgp-signature; name="signature.asc"
 
-?
+-----BEGIN PGP SIGNATURE-----
 
--- 
-Best regards,
-Marek Vasut
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQOaUQAKCRAr4qD1Cr/k
+CojPAQC2AjFUnIP3SmVy5NmIMUz1dbdihs4X/COPv47UUkuIzAD/b044JLX5xhh6
+fJJVZN9vUdTrx9NDytSG0kzfk9GMbQ0=
+=o0vf
+-----END PGP SIGNATURE-----
+
+--G30a1Sajf0XAFdDW--
