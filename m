@@ -4,137 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C12CCF9F0
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 14:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC908CCF9FC
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 14:02:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA56E83642;
-	Thu, 30 Oct 2025 15:02:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3E84583887;
+	Thu, 30 Oct 2025 15:02:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="LVONfjkw";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bU1vqElN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0D2A836F0; Thu, 30 Oct 2025 15:02:46 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id CE581838BF; Thu, 30 Oct 2025 15:02:57 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4794F8334F
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 15:02:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16ECD8334F
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 15:02:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tom.rini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7c531b42dbeso708953a34.3
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 07:02:44 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c69476dd8cso124531a34.2
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 07:02:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761832963; x=1762437763;
- h=content-transfer-encoding:subject:cc:to:content-language:user-agent
- :mime-version:date:message-id:dkim-signature:resent-to
- :resent-message-id:resent-date:resent-from:from:sender
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/3VHHdE6ZGloZ+XS+fZklAus64krYPhouX4lqFpySgc=;
- b=ncCBkgBfzM6vDKLHR+TSCoN9ZIt3/CfkBjMVOSD7I2FBfastF49FfJZK4DrSKXosLB
- BwYN2I9A+Xh/OVKYzvSjSPY0XPAFO/Zpa58jrNb0ZrqKI0YorwuQJ8Hd2236RMcc2KtZ
- G4We5bcA1ZUDI0l3vh6WfM3iJAbGzYaXEjfhrvb0JBTrrcrU1CVtFDDzG6ZTAYG/bZuM
- GmjVOP9AsrNyTZFBsukmVZOMIY5WwBTa+NEllCh5/neBWSk8yTaLri/Duvq6gfqqne32
- ezJCS9kYb8dSUzdWUQcaheLwwNmSD4TRByoBWbvRKzc2KfzPiJKM9097hsO0cqW6nHsI
- n7pw==
+ d=1e100.net; s=20230601; t=1761832974; x=1762437774;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:dkim-signature:resent-to:resent-message-id:resent-date
+ :resent-from:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cW7QJCXyLq2431Wk8kMguwBjv9st6RHus/vGRsxC/oA=;
+ b=KwM7uD/hdQX/qCDegq5OS1OdpA8IUaHWCyyhmbSgG6yCsN9e9+aLwyHvJfnRhNo6uK
+ SJpm9Hy+8q7wM+JSYBwJuoXxQRxHEyppgNhTl4eXcRWtEW22gG9ontop0A5Vfq9gZco4
+ ZGClDW4GFnBPVgFVQL0AKplUp4TnCZoIvLD91aU4GqUKlpdbk/2zGX2pFiEt77dY69/K
+ 3JcgT1ZHiX7wGiDTpptxTMSWr9iiGBOF05r8IT+iyN0dByMhSt/V3AJvGEUXRuWuX3Mh
+ x8VgGSCFSskqYQh8ha//2sWGw4P7NumQtQGD4lUlFf7oKrsX7gMxYulYNCSoPu1fvahJ
+ uOPQ==
 X-Forwarded-Encrypted: i=2;
- AJvYcCWkP10GEzlzRTVbiwgNAdGcnSBR5fvOowEHIbAAmcg6LL6U6eDMI2cbodxI4rd3MaZhhx5/EQQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwUtS31XhcY9eHlhVbtKsGgdWKPZQTlcfTkqRUfPuYCsLQuHLCM
- cW4OhIPHG7kSuqg+hfGgF4EzMrSo8hrdILXni9xawbhIUl+VAHyDJHz2aCCOaHM+/kH7oeqxFVc
- eWthyfCuehw==
-X-Gm-Gg: ASbGncvQAzCrUQ6++26TMszWNJedncmjWb/7tiYUcq0gDuYZriADGbkowsItjQP7ofQ
- Dww7OafOa1OVR7LA+7830Qt9RqkDL64SCv8k2rZq5jyt+amQt7CKqm4fRpsXijhA8DBRQEFGxTR
- YmR3fzHKM0bgjXJ3bM+bvTGqvATq9sO41ekppsFWXrLn5atrSOVR36dpn9eW494z845eDT7FZ2b
- u2xIF/f1Lc/mbWPKbhNFND6cTRqQzCG+cYot1LxpIjIuLDsljlKbQPCtDN70qvgOxHqlL1zKGaX
- +8IdBWKH9apVTPPL/xDJcj8zWb7T8mMBjg9dA2nrbJcCxrlruYowZ7/K4cM4JRV82B3gkrM1ePf
- 0fI0+LEHkdNky9BaFttM7olmOPiRmbLxo8oPVyCYFFtnRYuz2ukYFXjRc8br2FGwb0KTZkehcYM
- aj4AQE4GsKYhOM28vx56w5p3jyw2t7rfRJELtdqR4=
-X-Google-Smtp-Source: AGHT+IFw2ShxEFYpR4/Ga3mxeZHJ09m5m++M90olU0KtuMRhS2LiPcwyWtV0n++ziQg2qtd5oFDPqA==
-X-Received: by 2002:a05:6830:410f:b0:7c6:8c73:ab0c with SMTP id
- 46e09a7af769-7c68cea61b5mr1704471a34.4.1761832962377; 
- Thu, 30 Oct 2025 07:02:42 -0700 (PDT)
+ AJvYcCUR+S29ITDkhD2M3Z6c50o+zrqeVivWGfV6Z7rsXQt4rJe8WHJKLqmiCQVxkdlPLNp2zv1DVsM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFaktKtyLeLS0temlQq+h7OiCY0fRRdHr5BhzCR2M1L/uFxTQY
+ 1V3LzvysPGm+T9V0cEfz9ITodexp/Gnh/9sdnSQP1P1BB7GourSV3lvXsNDa+im4WEHQ4KIL/Z8
+ cDxsIzGJplQ==
+X-Gm-Gg: ASbGncu/47JZajZcVbkVzmfcN6UvkAcS+Zj0Zc2zL348T2OVZIjbFb+AHg/vQdLI8eJ
+ qrvS//uRTkJLfbI0UTdaZkGcPQmETOwTPQRdvqH2DKHpBIKlyjm17JqYJ+VuGtkt6f4MuANORrS
+ r/l6Ck2dvAJi/8epMNQk2IvnCugASsaZDTWQtzTqWmaXy1dwcqIbKHSL1omgslypnovHEybUOxg
+ Ms0/AqS+fee7lqP/5i3iS6TwqIZpio5jWZD4+KJ8JjQttcHKcpGe+Mt/EvbtNDbIYi24UsqkKPz
+ RBusTjBaSSvL1Ndj92pCpdh2A/crDPEd5csN2SUI51DLlWnj7GFcuz5o33vNCwMeb18X48jlI5T
+ bfVXFmc9LhmfkIerEZrsx2pbv37TlvKPvYUW5tuQswdnv88DnIqF/NftPkKFAU79gZxGqlDw/sw
+ BYBdsbKyJodT82JvOYo1pbnBZNNF8KH4xqXCTqUJ4=
+X-Google-Smtp-Source: AGHT+IGZghHVAa0mjli5GvLapeBYa0ADqo/NDPZetEaVj8EbS5pNhN4KBP5CL2O2UJHemYcEY7BM0w==
+X-Received: by 2002:a05:6830:4390:b0:745:2585:9c84 with SMTP id
+ 46e09a7af769-7c68304db4bmr3953660a34.9.1761832973722; 
+ Thu, 30 Oct 2025 07:02:53 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c5302068d5sm5126057a34.28.2025.10.30.07.02.41
+ 46e09a7af769-7c5302203d2sm5126888a34.32.2025.10.30.07.02.52
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Oct 2025 07:02:41 -0700 (PDT)
-From: Heiko Schocher <trini@konsulko.com>
-X-Google-Original-From: Heiko Schocher <hs@nabladev.com>
+ Thu, 30 Oct 2025 07:02:53 -0700 (PDT)
+From: Casey Connolly <trini@konsulko.com>
+X-Google-Original-From: Casey Connolly <casey.connolly@linaro.org>
 Resent-From: Tom Rini <trini@bill-the-cat>
-Resent-Date: Thu, 30 Oct 2025 08:02:38 -0600
-Resent-Message-ID: <20251030140238.GT6688@bill-the-cat>
+Resent-Date: Thu, 30 Oct 2025 08:02:51 -0600
+Resent-Message-ID: <20251030140251.GU6688@bill-the-cat>
 Resent-To: u-boot@lists.denx.de
-Received: by 2002:a05:7022:32b:b0:ba:8f80:e1f6 with SMTP id 43csp946846dld;
- Thu, 30 Oct 2025 05:08:30 -0700 (PDT)
-X-Received: by 2002:a17:907:d29:b0:b6f:198e:c348 with SMTP id
- a640c23a62f3a-b703d5392demr612201566b.46.1761826110665; 
- Thu, 30 Oct 2025 05:08:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1761826110; cv=none;
+Received: by 2002:a05:7022:32b:b0:ba:8f80:e1f6 with SMTP id 43csp951793dld;
+ Thu, 30 Oct 2025 05:15:48 -0700 (PDT)
+X-Received: by 2002:a17:907:a42:b0:b3e:fc83:fa83 with SMTP id
+ a640c23a62f3a-b70521bce1bmr340062066b.26.1761826548311; 
+ Thu, 30 Oct 2025 05:15:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1761826548; cv=none;
  d=google.com; s=arc-20240605;
- b=FLftam67/hRCnsSiqqMusHxwj5yfYEPjw4+7cQ2B9uxiejz4e4bgi2wi1xieQuvMU0
- 4XcHVfKDlPtGY+P/1n1KDDi51xk0xYUp4x9xAShTaLO8/eifS5DlZmiobqc7kFV5uGMV
- wu3c/kyEDhwyXriE46rFUX8EyaLdtjqWam6ujzB9iQT2ZpTr4TWrWqimOmXazvH3lTW8
- FoIDc3DBYY70pB1X6+8ZgQB0+LCOlyWe1P+hzHdqJQ8U3Ub4Ltfbu80matDVSdzmqox4
- Y6xEUQHkrIoX8otBComnh17oc7DEwxRqPAhDG26QPbCdxtOKCrxiImvA6ko+rsnUYAng
- cViw==
+ b=I3EuL40agjf7+WBl8weGtPXSSFNE5anaA7u67TZ5NUMsRYPzjM2DwbTrLxFjXax4zO
+ 2iVQxfEsOKSf8f8yCaDYdqnDP4+4m720Y9TxBvf6OMjsDr6D+tQ+6UBeenOB9Hm4sncf
+ BNbHA/faHxQ5pPKgFnbcSrzlq/PAgHH9C46F2DkoBdVUt8fMmJUrfbRlgJ0ckikTAxvg
+ AG9NUNMneaV4WYg3CRsZEWJIZLYOxLYXu4Me1G6pdLjEG54iRB/6s9MmpKxD32rRHTUe
+ kXzwfOXMab2VXgHsHtBTJerWHoG7xjg1fD7/8G0j3zOScjelJwgQsciXKqiHGFWuFUYD
+ /4CA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:dkim-signature;
- bh=/3VHHdE6ZGloZ+XS+fZklAus64krYPhouX4lqFpySgc=;
- fh=EegZwyrwIecF0z4NTMUN/qdt2e5XQDJysXXeJK4IZ44=;
- b=JbkDY79Zqgi7Ia34Ibzj+/XVs5cX8KPSLRpOwCdi4F1+XmMMnPvXyPao1M+meEiISV
- N68ZY0GWmn3J7n+B7wtfJB0xdQ4An5TPY4yWbqnOvIoNtCJ+sCbjDRvPOzswZXwaP55z
- c3AoHQYGJucdIoBlUyPoCopk702NYF2V410/K/9H4OdDI6mXo/PO++ztUzDTcDYFIBaa
- OaRx8+5bosMH1cgDFVE5POTjz2ne119Y/AYPkooTJZajRQq+zDma1acBL1ESOnKl+0rt
- 0oUXG19GYnlTywqbKT+gkMvvl4qLIb28HESnOqAoaQefLoPfPcyWsUeTGCWTlWTfJWhW
- x1Og==; dara=google.com
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:dkim-signature;
+ bh=cW7QJCXyLq2431Wk8kMguwBjv9st6RHus/vGRsxC/oA=;
+ fh=zna9hY4FOIhPgu3NrqMxvq6Nz930DL0qdeQV4ySEF4w=;
+ b=LaZ5Z2lepi6y61JyFL7NOMorr4cd7qo4xATBpyOpXWK4H3uI4Sw6RjP3FRG2I5p/lU
+ GjVYAIHSNaJrN+asTngS105CphENcyEkFIRYUYuuvH275wnOIFTYLK8PMcxMKYKya5io
+ ZQXVixkihN1cWCSBNIC0Wl3KIgiAD5DRwynU1Nb4bNkWdl7mEdggkzQYgkFJoareqtU+
+ kTPVYN7i1F8vpL5tew12Z5vduy3UdJ3ofj1Zy/DzS16fmUYJiexag54va9P09iR/DUgG
+ rV8a0Y7N5mwa2oulD7W89IWQ09ZsuwRX72ghshiLMsONBN8ctlM+xUAzh23UHysZYTLu
+ Emfw==; dara=google.com
 ARC-Authentication-Results: i=1; mx.google.com;
- dkim=pass header.i=@nabladev.com header.s=dkim header.b=LVONfjkw;
- spf=pass (google.com: domain of hs@nabladev.com designates
- 2a00:f820:417:0:178:251:229:89 as permitted sender)
- smtp.mailfrom=hs@nabladev.com; 
- dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=nabladev.com
-Received: from mx.nabladev.com (mx.nabladev.com.
- [2a00:f820:417:0:178:251:229:89]) by mx.google.com with ESMTPS id
- a640c23a62f3a-b7041c713d3si238956366b.401.2025.10.30.05.08.30
- for <trini@konsulko.com>
+ dkim=pass header.i=@linaro.org header.s=google header.b=bU1vqElN;
+ spf=pass (google.com: domain of casey.connolly@linaro.org designates
+ 209.85.220.41 as permitted sender) smtp.mailfrom=casey.connolly@linaro.org; 
+ dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=linaro.org;
+ dara=neutral header.i=@konsulko.com
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com.
+ [209.85.220.41]) by mx.google.com with SMTPS id
+ a640c23a62f3a-b7056c2cef0sor79028466b.5.2025.10.30.05.15.47
+ for <trini@konsulko.com> (Google Transport Security);
+ Thu, 30 Oct 2025 05:15:48 -0700 (PDT)
+Received-SPF: pass (google.com: domain of casey.connolly@linaro.org designates
+ 209.85.220.41 as permitted sender) client-ip=209.85.220.41; 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761826547; x=1762431347; darn=konsulko.com;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cW7QJCXyLq2431Wk8kMguwBjv9st6RHus/vGRsxC/oA=;
+ b=bU1vqElNDulb5zwbtL3j4Lt/NydVcPO6on0ntn+WyS7Ltm72X+bZntY9/4g1aTBxSc
+ yMdySaVZFFdsJEhmt3RZqIz+M+haMVzDJ8bd8BkqXCrNIYa1tI9uQfYMbC7sv8qi501O
+ FdslGuS9deeBx7xEuXKPX2bWFrHT/EjnZHbT4Ipj33j5gWSmWmrSLacfXMG/ofy66roJ
+ CTmtLqjSzO2xsKxcACr3oD9DNUYSFE49UA7KzehS/HlIyZtKRNzZMurQkz//y0Sj27/z
+ Ee8UtrbonVLB94WtAoU/gAIZU3+hBJ5WB8jGpfyfs+K3eCOiCyxSAAN47lB/NJmlk51u
+ 9hlA==
+X-Received: by 2002:a17:907:3f26:b0:b3f:331a:a982 with SMTP id
+ a640c23a62f3a-b7051f630e8mr353748866b.6.1761826547158; 
+ Thu, 30 Oct 2025 05:15:47 -0700 (PDT)
+Received: from lion.tail248178.ts.net (p5b29e67b.dip0.t-ipconnect.de.
+ [91.41.230.123]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b6d853f97f7sm1693460666b.51.2025.10.30.05.15.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Oct 2025 05:08:30 -0700 (PDT)
-Received-SPF: pass (google.com: domain of hs@nabladev.com designates
- 2a00:f820:417:0:178:251:229:89 as permitted sender)
- client-ip=2a00:f820:417:0:178:251:229:89; 
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 6BEBE1092FC; Thu, 30 Oct 2025 13:08:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1761826109;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language;
- bh=/3VHHdE6ZGloZ+XS+fZklAus64krYPhouX4lqFpySgc=;
- b=LVONfjkw+X6PyXb4DzduggDKjBrSBOE+mVLB0210Bjlab5ydYOklxaEwRz/vRB2+0VUCaT
- +dg3slWC715gZzhRycaX0mOPXZTPLp6Z2YkvvV8O2EG7eFg5mYq1osUMHnYRPQSV7TY6Zs
- wyxQw5nj9vRp/xPtiMysiakTEXd9QGfJHAgwA0KDxkz40e86eK1wwWctr2qK///MQdQdF4
- i0JIZLNPjZ6+mt/KzM5dK0Qk+EuPRU5RcJ2rM5w5r4XK/ZQHvf81ZGLd8+NN4YKHTCaq+E
- 74ISza10wjvHMPCdOKaNQ6tXj4wIwvI/i3Gx+G9d+vVO30r5HwL56UZfCQZKcg==
-Message-ID: <c720c9ca-22e1-321c-4762-74fa37f61e59@nabladev.com>
-Date: Thu, 30 Oct 2025 13:08:48 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Content-Language: en-US
+ Thu, 30 Oct 2025 05:15:45 -0700 (PDT)
 To: Tom Rini <trini@konsulko.com>
-Cc: Justin Swartz <justin.swartz@risingedge.co.za>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>
-Subject: Please pull u-boot-i2c master
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Cc: Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>,
+ Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Danila Tikhonov <danila@jiaxyga.com>,
+ David Wronek <david.wronek@mainlining.org>,
+ George Chan <gchan9527@gmail.com>, Jens Reidel <adrian@mainlining.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Paul Sajna <sajattack@postmarketos.org>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Stephen Boyd <swboyd@chromium.org>,
+ Casey Connolly <casey.connolly@linaro.org>, u-boot-qcom@groups.io
+Subject: [PULL] Please pull qcom-for-2026.01-rc2
+Date: Thu, 30 Oct 2025 13:08:32 +0100
+Message-ID: <20251030121510.4105280-2-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.51.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,56 +160,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+Hi Tom,
 
-The following changes since commit 23987e10905146def3ab61e55ec912c6e742efdc:
+A variety of Qualcomm features/fixes for this cycle, notably with a few
+new platforms gaining support:
 
-   Prepare v2026.01-rc1 (2025-10-27 16:10:23 -0600)
+* Initial support for SDM670 (similar to SDM845), SM6350, and SM7150
+  platforms is added
+* USB and UART issues on MSM8916 are addressed (improving stability/
+  reliability)
+* Firmware loading is implemented for the GENI serial engine, this is
+  used on some platforms to load firmware for i2c/spi/uart to work
+
+Some additional patches like binman support for building MBN files still
+need some additional work.
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/8ef6ac07b35e39a57501554680bbf452e818d3e3/pipelines?ref=qcom-main
+
+Cc: u-boot-qcom@groups.io
+---
+
+The following changes since commit 4cad9faf8d2887b8851f0ced5194ffbaa92ca71e:
+
+  MAINTAINERS: update my email address (2025-10-28 14:37:25 -0600)
 
 are available in the Git repository at:
 
-   https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2c-updates-for-2026.01-rc2
+  https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git tags/qcom-for-2026.01-rc2
 
-for you to fetch changes up to fc7d868327439c4ea6c640d2e8fead7679c0b86f:
+for you to fetch changes up to 8ef6ac07b35e39a57501554680bbf452e818d3e3:
 
-   i2c: rcar_i2c: Add R-Car Gen5 support (2025-10-28 09:51:02 +0100)
-
-----------------------------------------------------------------
-I2C updates for 2026.01-rc2
-
-- add support for the MT7621 I2C controller
-   from Justin
-
-- Add R-Car Gen5 support
-   from Minh Le
+  usb: gadget: Introduce usb gadget vendor/product default id for ARCH_QCOM (2025-10-29 12:27:34 +0100)
 
 ----------------------------------------------------------------
-Justin Swartz (1):
-       i2c: add support for the MT7621 I2C controller
+Abbarapu Venkatesh Yadav (1):
+      qcom_defconfig: Enable meminfo command with mapping
 
-Minh Le (1):
-       i2c: rcar_i2c: Add R-Car Gen5 support
+Alexey Minnekhanov (1):
+      qcom_defconfig: Enable pinctrl driver for SDM630/660
 
-  drivers/i2c/Kconfig      |   7 +++
-  drivers/i2c/Makefile     |   1 +
-  drivers/i2c/mt7621_i2c.c | 374 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  drivers/i2c/rcar_i2c.c   |   1 +
-  4 files changed, 383 insertions(+)
-  create mode 100644 drivers/i2c/mt7621_i2c.c
+Casey Connolly (7):
+      configs: qualcomm: use fragments for debug UART
+      i2c: geni: fix error message wording in clk_disable
+      misc: introduce Qcom GENI wrapper
+      i2c: geni: load firmware if required
+      clk/qcom: sc7280: add uart5 and uart7 clocks
+      serial: msm-geni: implement firmware loading
+      configs: qcom_*: enable QCOM_GENI where needed
 
+Danila Tikhonov (4):
+      clk/qcom: add driver for SM7150 GCC
+      pinctrl: qcom: add SM7150 pinctrl driver
+      phy: qcom-qmp-ufs: Import SM7150 tables from Linux
+      configs: qcom_defconfig: Enable SM7150 GCC and Pinctrl
 
-Azure build:
+David Wronek (5):
+      clk/stub: add sdm670 rpmh clock
+      clk/qcom: sdm845: add support for sdm670
+      pinctrl: qcom: add sdm670 pinctrl driver
+      qcom_defconfig: enable pinctrl for sdm670
+      gpio: qcom_spmi: add pm660l
 
-https://dev.azure.com/hs0298/hs/_build/results?buildId=189&view=results
+George Chan (2):
+      iommu: qcom-smmu: Introduce sc7180 compatible string
+      usb: gadget: Introduce usb gadget vendor/product default id for ARCH_QCOM
 
-Hope I made the correct setting, so that your b4 command works...
+Jens Reidel (2):
+      gpio: qcom: qcom_spmi_gpio: add compatible for pm6150l
+      clk/stub: add sc7180-rpmh clock
 
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+Luca Weiss (15):
+      pinctrl: qcom: sc7280: Fix offset of UFS_RESET
+      clk/qcom: sm8250: Remove unused defines
+      serial: msm-geni: Update kconfig name for DEBUG_UART_MSM_GENI
+      doc: board/qualcomm: Clean up debug options for QUP UART
+      board/qualcomm: add debug config fragment for MSM8953
+      clk/qcom: Add SM6350 clock driver
+      clk/stub: add sm6350-rpmh clock
+      drivers: pinctrl: Add Qualcomm SM6350 TLMM driver
+      iommu: qcom-smmu: Add qcom,sm6350-smmu-500 compatible
+      phy: qcom: Add SM6350 to QMP UFS PHY driver
+      regulator: qcom-rpmh-regulator: add support for pm6150l regulators
+      gpio: qcom: Support GPIOs on PM6350 PMIC
+      qcom_defconfig: Enable SM6350 clock and pinctrl drivers
+      board/qualcomm: add debug config fragment for SM6350
+      gpio: qcom: Support GPIOs on PM7325 PMIC
+
+Paul Sajna (1):
+      qcom_defconfig: enable watchdog command
+
+Stephan Gerhold (12):
+      board: dragonboard410c: Drop now unneeded bootph-all for console
+      Revert "serial: serial_msm: Delay initialization to let pins stabilize"
+      serial: msm: Cleanup register naming
+      serial: msm: Reset after writing to DMEN
+      serial: msm: Re-enable after resetting
+      serial: msm: Use single character mode
+      usb: host: ehci-msm: Fix pointer check
+      usb: host: echi-msm: Drop ulpi definitions
+      usb: host: ehci-msm: Disable clocks after all register accesses
+      usb: host: ehci-msm: Use clk bulk helpers
+      usb: host: ehci-msm: Drop redundant EHCI register writes
+      usb: host: ehci-msm: Register ULPI PHY through NOP wrapper
+
+Stephen Boyd (1):
+      serial: msm-geni: Enable SE clk in probe
+
+Tom Rini (1):
+      phy: qcom: Rework Kconfig logic around MSM8916_USB_PHY
+
+ arch/arm/dts/apq8016-sbc-u-boot.dtsi          |   9 -
+ board/qualcomm/debug-msm8953.config           |   5 +
+ board/qualcomm/debug-qcm6490.config           |   5 +
+ board/qualcomm/debug-qcs9100.config           |   5 +
+ board/qualcomm/debug-sm6350.config            |   5 +
+ configs/qcm6490_defconfig                     |   6 -
+ configs/qcom_defconfig                        |  10 +
+ configs/qcom_ipq5424_mmc_defconfig            |   2 +
+ configs/qcom_ipq9574_mmc_defconfig            |   2 +
+ configs/qcs9100_defconfig                     |   6 -
+ doc/board/qualcomm/debugging.rst              |   2 -
+ drivers/clk/clk-stub.c                        |   3 +
+ drivers/clk/qcom/Kconfig                      |  15 +
+ drivers/clk/qcom/Makefile                     |   2 +
+ drivers/clk/qcom/clock-sc7280.c               |  28 ++
+ drivers/clk/qcom/clock-sdm845.c               | 127 ++++++
+ drivers/clk/qcom/clock-sm6350.c               | 193 +++++++++
+ drivers/clk/qcom/clock-sm7150.c               | 250 +++++++++++
+ drivers/clk/qcom/clock-sm8250.c               |   5 -
+ drivers/gpio/qcom_spmi_gpio.c                 |   4 +
+ drivers/i2c/Kconfig                           |   2 +-
+ drivers/i2c/geni_i2c.c                        |  14 +-
+ drivers/iommu/qcom-hyp-smmu.c                 |   4 +-
+ drivers/misc/Kconfig                          |   9 +
+ drivers/misc/Makefile                         |   1 +
+ drivers/misc/qcom_geni.c                      | 580 ++++++++++++++++++++++++++
+ drivers/phy/qcom/Kconfig                      |   6 +-
+ drivers/phy/qcom/phy-qcom-qmp-ufs.c           |  62 +++
+ drivers/pinctrl/qcom/Kconfig                  |  20 +
+ drivers/pinctrl/qcom/Makefile                 |   3 +
+ drivers/pinctrl/qcom/pinctrl-sc7280.c         |   6 +-
+ drivers/pinctrl/qcom/pinctrl-sdm670.c         | 247 +++++++++++
+ drivers/pinctrl/qcom/pinctrl-sm6350.c         | 104 +++++
+ drivers/pinctrl/qcom/pinctrl-sm7150.c         | 142 +++++++
+ drivers/power/regulator/qcom-rpmh-regulator.c |  31 ++
+ drivers/serial/Kconfig                        |   3 +-
+ drivers/serial/serial_msm.c                   | 127 ++----
+ drivers/serial/serial_msm_geni.c              | 107 ++---
+ drivers/usb/gadget/Kconfig                    |   2 +
+ drivers/usb/host/ehci-msm.c                   | 146 +++----
+ include/soc/qcom/geni-se.h                    |  36 ++
+ include/soc/qcom/qup-fw-load.h                | 178 ++++++++
+ 42 files changed, 2229 insertions(+), 285 deletions(-)
+ create mode 100644 board/qualcomm/debug-msm8953.config
+ create mode 100644 board/qualcomm/debug-qcm6490.config
+ create mode 100644 board/qualcomm/debug-qcs9100.config
+ create mode 100644 board/qualcomm/debug-sm6350.config
+ create mode 100644 drivers/clk/qcom/clock-sm6350.c
+ create mode 100644 drivers/clk/qcom/clock-sm7150.c
+ create mode 100644 drivers/misc/qcom_geni.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-sdm670.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-sm6350.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-sm7150.c
+ create mode 100644 include/soc/qcom/qup-fw-load.h
