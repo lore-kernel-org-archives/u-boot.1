@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E51FCCF9FC
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:01:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C50DCCF9FC
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:01:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5E7A83893;
-	Thu, 30 Oct 2025 14:00:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 32E94838BF;
+	Thu, 30 Oct 2025 14:00:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="TQ6W4vUg";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="AW6v+xQn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C774838F8; Thu, 30 Oct 2025 09:41:52 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 6ABA98392C; Thu, 30 Oct 2025 09:47:16 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B907838CC
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 09:41:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6CC4838CC
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 09:47:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=andrea.calabrese@amarulasolutions.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-634cef434beso3421235a12.1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 01:41:50 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-63c45c11be7so1182992a12.3
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 01:47:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1761813709; x=1762418509;
+ d=amarulasolutions.com; s=google; t=1761814033; x=1762418833;
  darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RhR3uZEuW5p4fMlgh9PdmaCgOKNUqa31LXDigTHtwl8=;
- b=TQ6W4vUgA5+Fba1GxXzXqz/UJWpecac6ZWFiQUPJ6QRbqm9eMiWPbEX3dULV3pRLA+
- DcJhLTHI9UgYjiIBxfsj1NK9uQai3a5Ho5LF+KGfM5CrzvQ1NwEVpuRo8s9qK+i0rOzu
- i9iyQoexCXZHUFOldabtSAqN6fPCwQ1ls/I7M=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=O3SduFKE/ldSShL7V+DEHzRb68gerMIeo5xd3Zt2zw0=;
+ b=AW6v+xQn7aYpbeLIf6zwHwynhenbyS86MNNrOkbmro4XnUyAGpfG2mgHFIKQDi4tV3
+ MuNy2Ru8W2E5VqDU6QfiU7M4+otXaxjZsigTD16DcKpXngkEpF1DbcLQjfIJPmwD+cHa
+ VxRVkE1Frb81vmDGCMsQ0s8BkgX6KsDbGIK3Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761813709; x=1762418509;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RhR3uZEuW5p4fMlgh9PdmaCgOKNUqa31LXDigTHtwl8=;
- b=mvDrHvlET3c1sVDlVLMY/b2DYeYoc+Fe7UUKqdFivZAluoLfZWbDzGrtsfhkGEHM3O
- Wc9mNpDli9AZY85isoc1+GJ32CaAmeDQlRngH2/k0ffiZztpvAod+Bj8LKYZaFnq2rPG
- HOvtVqhyRxFFi0Vug1HVvxk5Xj97oz39aAkwsEW5Mj/FBoulGTJR9IiyK7Kk+S5UlNiw
- zqYuJ9KgkQOksWysGyW9uiHaiQX6aFoowt2A5sos6sEBO7eKOiJH9hrz9h+R6gUC+L+I
- JBo7o34RjvSOx3+IOnCjpRnwnV+boyyepJqYG3W7ua5kwp+9b9KfyIvjMPxPdktwYeUt
- yUAA==
-X-Gm-Message-State: AOJu0YzLLebSCRyj/LO0PahJpUjtsb2c6V1t3mecx2Po88zC2yduEAqI
- Ba7CxtgoQ4pp9tJSoyEBzeijB1nxWdKQioymncqCg/MqT31GtP7+IZBwBtTF3igj28I=
-X-Gm-Gg: ASbGnctb5DCXRcyQSkZDbNP1CpKysqxVxpHn3P4tDqifK5IXq9LLG6oa9lVZ224a13M
- 1oV7vNgQOH/HfrdPcdRmuwqUves3fhLgTGYAI+KFU7KVEnbfuICF+tLZ35nHINZm4+6Lly8exoy
- 8bCshTAgQS2qNjHYmu2bjyC7BLMqfzhASBj+3tjVJV4p67M71ASKoqgVW0zpGQmzU6lnpjawRt8
- BMb75aiW4MgRjQB0FKEG73199hm7JPMPyJ8rK9q4OOA2kWzdllDNKq9M2bHZW46EvEBL47fCM42
- oUQYAITOucWhpQpx3sHWvDEN+o+W9iqyCgBhuip6ZBpem5npLqM++/Zs2dbQb8Kskk3iljjsH5z
- 0PadSU+7q6recrxVP+xRs/F7F+9B5mV4ZEZy9ZMEMwvmPlx5Up7Wtro1Sz0rLtVrj3HLgd4lf/0
- Rcnm2G5YkGTVWNs9xrjnnMeu97uVpo3yP/BMDtiZ6Zqkl9cu5Zx0qAUHJZGEN/Xw==
-X-Google-Smtp-Source: AGHT+IEuYGALO6VwKBG9o2wr41gj7Tm1m0HUgNqwJkQs+Nj5MAWiWs5bHFepVHSSaaQDLnzZ1tYc6w==
-X-Received: by 2002:a17:907:7f2a:b0:b07:87f1:fc42 with SMTP id
- a640c23a62f3a-b70520bcb84mr316531566b.16.1761813709444; 
- Thu, 30 Oct 2025 01:41:49 -0700 (PDT)
-Received: from [192.168.1.54] (98-215-98-95.ftth.glasoperator.nl.
+ d=1e100.net; s=20230601; t=1761814033; x=1762418833;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=O3SduFKE/ldSShL7V+DEHzRb68gerMIeo5xd3Zt2zw0=;
+ b=miWWfHCwNjJK0ezx7i06mMWmmUjWcRxDVKAmGfgjXPrrfRVNYaRPFskX/fjygL7QOP
+ VCj2JUc81oqrJQzy8LLBPPSLuWw1D1CoCuyp9OhVRZMKVAui3lINhyI2Qk4BG/i6+23g
+ Rxdy0m5kog6qugluSRoRNlBgsB7LZIL3uCnRWMBPV3QlFEPqlwEV5kV4x55VbGEB2LO5
+ GfusH+R4qlZGR0rRa8xfp6hs2Y8v0RCQ4GmsiqlJC1X21MFZLiDEJG8Cxnv6geqAvTFU
+ V4CMSZqRe/H8EmlD0Gi6PhEDJmSn7mYqkYEzB3Tb12odGT1Z10k6p9TMMSXSELvfQVg7
+ wDOg==
+X-Gm-Message-State: AOJu0YwMD5ApP5MDeNckaLu2f9qoKZAXdUQu2E5Omp6qh7wg7An5904c
+ XgdI4JN1KeNzQRux1d+YPSO1imFOHBIIjKreONHxwzAo63HUOEqzy4FN0c98ySTVs21CwOaFqoz
+ ec6Xa
+X-Gm-Gg: ASbGncsrQcGkyWfzzzGYAuKMsDe4+gkjxhjbMgkhavxhFSzpLlO8AQ0YzcSd9Etx7/G
+ 8jmVZsc/NXsSqBr0bEOKVNxUVVGgOf2wfs3kRoJWBRLIEAeeon78uAQgMwqjotVIUpgOFdrzlFi
+ iLnzQ0ByCYD21GJpx0VuoGojn/0WQF/3vQsvjF1tGHp3DQsJu7si8Xg9Q9y4o1wKonWSB0pc8W1
+ 4KuPsI3eGBJzrUk0YTzgt691c1UTuorMZQqTku2RBesYzJVrNVBcbzkSAMTHQl7dzJfyLY+kLXC
+ CunWiEMZHWZYWA52thj3dv9QrgbL2BGLrnZ4XbpLUgOE0DvK7ccy+4UhjRT8UPla+IQTZ2zsZ66
+ MSVKivGitD8wwRjB6JbNkhKyEqJZ2ZtsjhESrRM/T1R2MTsdmFSA7BWUfXrl8iTD8Ej0LVs0if0
+ rq9Loqf22Y9OPlxO71fPBjm5jZRhG8tce5UQjY6TNu320P4UFczmuX6kAR7Gt7Uo4jRD133LnkC
+ IB6X44=
+X-Google-Smtp-Source: AGHT+IGzctQd2LcmkjD1g2XjeciEfLf+jIYoQSgUC4hTCZJwMIYhPaxTEGZH4rGzwgDZr7D9YoUihw==
+X-Received: by 2002:a05:6402:1d54:b0:61c:cf8d:e51d with SMTP id
+ 4fb4d7f45d1cf-64044252c81mr4985171a12.22.1761814033096; 
+ Thu, 30 Oct 2025 01:47:13 -0700 (PDT)
+Received: from andrea-amarula.home (98-215-98-95.ftth.glasoperator.nl.
  [95.98.215.98]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b6d85359c0bsm1702590266b.24.2025.10.30.01.41.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Oct 2025 01:41:48 -0700 (PDT)
-Message-ID: <c900b5e3-78ef-453a-b79b-0ea7fe1834b4@amarulasolutions.com>
-Date: Thu, 30 Oct 2025 09:41:48 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] bsh: update readme with instructions to build M2B
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, michael@amarulasolutions.com,
- dario.binacchi@amarulasolutions.com, festevam@gmail.com
-References: <20251029104901.3810649-1-andrea.calabrese@amarulasolutions.com>
- <20251029191130.GK6688@bill-the-cat>
-Content-Language: en-US, it-IT
+ 4fb4d7f45d1cf-63e7ef82f2esm14048648a12.14.2025.10.30.01.47.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Oct 2025 01:47:12 -0700 (PDT)
 From: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-In-Reply-To: <20251029191130.GK6688@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: u-boot@lists.denx.de, michael@amarulasolutions.com,
+ dario.binacchi@amarulasolutions.com, trini@konsulko.com, festevam@gmail.com
+Cc: andrea.calabrese@amarulasolutions.com
+Subject: [PATCH v2 1/3] bsh: update readme with instructions to build M2B
+Date: Thu, 30 Oct 2025 09:47:08 +0100
+Message-ID: <20251030084710.3995770-1-andrea.calabrese@amarulasolutions.com>
+X-Mailer: git-send-email 2.48.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 30 Oct 2025 14:00:47 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,43 +97,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you,
+readme was missing instructions to build M2B. Now added.
 
-I will make a V2 for the patch set then.
+Signed-off-by: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
 
-Best regards,
-
-Andrea Calabrese
-
-Il 29/10/25 20:11, Tom Rini ha scritto:
-> On Wed, Oct 29, 2025 at 11:48:59AM +0100, Andrea Calabrese wrote:
->
->> readme was missing instructions to build M2B. Now added.
->>
->> Signed-off-by: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
->>
->> diff --git a/board/bsh/imx6ulz_smm_m2/README b/board/bsh/imx6ulz_smm_m2/README
->> index 03d01325a97..3007180cc47 100644
->> --- a/board/bsh/imx6ulz_smm_m2/README
->> +++ b/board/bsh/imx6ulz_smm_m2/README
-> This should get converted and updated as doc/board/bsh/ (and various
-> index files updated), thanks.
->
+diff --git a/board/bsh/imx6ulz_smm_m2/README b/board/bsh/imx6ulz_smm_m2/README
+deleted file mode 100644
+index 03d01325a97..00000000000
+--- a/board/bsh/imx6ulz_smm_m2/README
++++ /dev/null
+@@ -1,67 +0,0 @@
+-How to Update U-Boot on imx6ulz_smm_m2 board
+---------------------------------------------
+-
+-Required software on the host PC:
+-
+-- UUU: https://github.com/NXPmicro/mfgtools
+-
+-Build U-Boot for m2:
+-
+-$ make mrproper
+-$ make imx6ulz_smm_m2_defconfig
+-$ make
+-
+-This generates the SPL and u-boot-dtb.img binaries.
+-
+-1. Loading U-Boot via USB Serial Download Protocol
+-
+-Copy SPL and u-boot-dtb.img to the uuu folder.
+-
+-Load the U-Boot via USB:
+-
+-$ sudo uuu -v -b nand_script.lst u-boot-with-spl.imx
+-
+-where nand_script.lst contains the following:
+-
+-uuu_version 1.2.39
+-
+-# @_flash.bin            | bootloader
+-# @_image   [_flash.bin] | image burn to nand, default is the same as bootloader
+-
+-# This command will be run when i.MX6/7 i.MX8MM, i.MX8MQ
+-SDP: boot -f _flash.bin
+-
+-# This command will be run when ROM support stream mode
+-# i.MX8QXP, i.MX8QM
+-SDPS: boot -f _flash.bin
+-
+-# These commands will be run when use SPL and will be skipped if no spl
+-# SDPU will be deprecated. please use SDPV instead of SDPU
+-# {
+-SDPU: delay 1000
+-SDPU: write -f _flash.bin -offset 0x57c00
+-SDPU: jump
+-# }
+-
+-# These commands will be run when use SPL and will be skipped if no spl
+-# if (SPL support SDPV)
+-# {
+-SDPV: delay 1000
+-SDPV: write -f _flash.bin -offset 0x11000
+-SDPV: jump
+-# }
+-
+-FB: ucmd setenv fastboot_buffer ${loadaddr}
+-FB: download -f _image
+-FB: ucmd if test ! -n "$fastboot_bytes"; then setenv fastboot_bytes $filesize; else true; fi
+-# Burn image to nandfit partition if needed
+-FB: ucmd if env exists nandfit_part; then nand erase.part nandfit; nand write ${fastboot_buffer} nandfit ${fastboot_bytes}; else true; fi;
+-FB: ucmd nandbcb init ${fastboot_buffer} nandboot ${fastboot_bytes}
+-FB: Done
+-
+-Then U-Boot starts and its messages appear in the console program.
+-
+-Use the default environment variables:
+-
+-=> env default -f -a
+-=> saveenv
+diff --git a/doc/board/bsh/imx6ulz_bsh_smm_m2.rst b/doc/board/bsh/imx6ulz_bsh_smm_m2.rst
+new file mode 100644
+index 00000000000..c61dbfe2ae7
+--- /dev/null
++++ b/doc/board/bsh/imx6ulz_bsh_smm_m2.rst
+@@ -0,0 +1,85 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++How to Update U-Boot on imx6ulz_smm_m2 and imx6ulz_smm_m2b boards
++==================================================================================
++
++Required software on the host PC:
++
++- UUU: https://github.com/NXPmicro/mfgtools
++
++Build U-Boot for m2:
++
++.. code-block:: bash
++
++   $ make mrproper
++   $ make imx6ulz_smm_m2_defconfig
++   $ make
++
++Build U-Boot for m2b:
++
++.. code-block:: bash
++
++   $ make mrproper
++   $ make imx6ulz_smm_m2b_defconfig
++   $ make
++
++This generates the SPL and u-boot-dtb.img binaries.
++
++Loading U-Boot via USB Serial Download Protocol
++-----------------------------------------------
++
++Copy SPL and u-boot-dtb.img to the uuu folder.
++
++Load the U-Boot via USB:
++
++.. code-block:: bash
++
++   $ sudo uuu -v -b nand_script.lst u-boot-with-spl.imx
++
++where nand_script.lst contains the following:
++
++.. code-block::
++
++   uuu_version 1.2.39
++
++   # @_flash.bin            | bootloader
++   # @_image   [_flash.bin] | image burn to nand, default is the same as bootloader
++
++   # This command will be run when i.MX6/7 i.MX8MM, i.MX8MQ
++   SDP: boot -f _flash.bin
++
++   # This command will be run when ROM support stream mode
++   # i.MX8QXP, i.MX8QM
++   SDPS: boot -f _flash.bin
++
++   # These commands will be run when use SPL and will be skipped if no spl
++   # SDPU will be deprecated. please use SDPV instead of SDPU
++   # {
++   SDPU: delay 1000
++   SDPU: write -f _flash.bin -offset 0x57c00
++   SDPU: jump
++   # }
++
++   # These commands will be run when use SPL and will be skipped if no spl
++   # if (SPL support SDPV)
++   # {
++   SDPV: delay 1000
++   SDPV: write -f _flash.bin -offset 0x11000
++   SDPV: jump
++   # }
++
++   FB: ucmd setenv fastboot_buffer ${loadaddr}
++   FB: download -f _image
++   FB: ucmd if test ! -n "$fastboot_bytes"; then setenv fastboot_bytes $filesize; else true; fi
++   # Burn image to nandfit partition if needed
++   FB: ucmd if env exists nandfit_part; then nand erase.part nandfit; nand write ${fastboot_buffer} nandfit ${fastboot_bytes}; else true; fi;
++   FB: ucmd nandbcb init ${fastboot_buffer} nandboot ${fastboot_bytes}
++   FB: Done
++
++Then U-Boot starts and its messages appear in the console program.
++
++Use the default environment variables:
++
++=> env default -f -a
++
++=> saveenv
+diff --git a/doc/board/bsh/index.rst b/doc/board/bsh/index.rst
+index 570ee4d72ed..e4f8b1f0b1c 100644
+--- a/doc/board/bsh/index.rst
++++ b/doc/board/bsh/index.rst
+@@ -7,3 +7,4 @@ BSH Hausgeraete GmbH
+    :maxdepth: 2
+ 
+    imx8mn_bsh_smm_s2
++   imx6ulz_bsh_smm_m2
 -- 
-Andrea Calabrese
-Embedded Software Developer
-M. +39 339 394 4747
-andrea.calabrese@amarulasolutions.com
-
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9170
-info@amarulasolutions.com
-www.amarulasolutions.com
-
-__________________________________
-This message and any file transmitted with it may contain privileged or confidential information. In case you were not listed in the addressed recipient, please notify the sender immediately and delete the message.
-Any other use of this email, including copying it and the disclosure of its content, is prohibited.
+2.48.1
 
