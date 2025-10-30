@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD3ECCF9EA
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:02:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 204F1CCF9EA
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 05:02:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68CD9838BF;
-	Thu, 30 Oct 2025 06:02:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B2337838DD;
+	Thu, 30 Oct 2025 06:02:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jlF3sk3z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bw1EVEJe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B5A8838D5; Thu, 30 Oct 2025 06:02:21 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id A7D83838E5; Thu, 30 Oct 2025 06:02:33 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2A67836D1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:02:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CAF6D838D7
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 06:02:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-63bf76fc9faso1209485a12.2
- for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 22:02:19 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-63c3d913b3bso1056738a12.2
+ for <u-boot@lists.denx.de>; Wed, 29 Oct 2025 22:02:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761800539; x=1762405339; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761800551; x=1762405351; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CkxGrPAKx9oUqyWqSsgbjM/+eFWmTt7OREyX9YfXtmk=;
- b=jlF3sk3z8KlEszVVITq/aZFgfd5jOp8QGWILDE5MNARtaVTS2/6587mrTYAunBWGHc
- eaHdWf3unxO6/ZdvkckfWGaxItiUt0icbYp82++E+apZQ0XM3QX/v9AUQ6yGpBR4EEUA
- ZZFijQuxHaCYT+ZnMARYZgqmedEHpYI+5rf5RUUXFedhfif0ioQ8FSSH3www1Q4S89EI
- QjmgYd/7JPgxpqfRk7tsm4t8K7x4cl9CtMtP2Iiz89rYE0luMWDAeofpe4z8R6b4h0fC
- PlFNMDKxKwrgigJR2vFL6ijylOB1rDjmIcwzrnb78Og+3Yqk2xqZsTNNPKVy447/4hUu
- 1FaA==
+ bh=hpLTVDhWWhS6jbaiN1CkTQhz3gRnmfrVBfVxnAQ6I+0=;
+ b=bw1EVEJeJ0q3h764/VrAwZ01XoW3SGwcO5M9rH4oToZ7kx15ErPpYZlGK9r6dfgY55
+ bn2XjRuz6TpPkLjYnznQ7sn4JpADzMVHDOizCejFV4rnE5MP+O3XKtwnIYdLgtf8/USr
+ pjfbxz2tRwR4ydoqyhjhao40MxUMwcu4bCaEffghx/1FpfbWhPO1gIl60C60GY1zyTRg
+ h0XVDRudITmIQWuXm6uBG+Bb6mwgxVQjxrJTG5Molu+sYVLhXmZHyaXME3JtoUVrVbyR
+ GrjrATQShZc0h9ynDtZAh9KWUdo3LNf8q5GODdyxrgLBfD2UgGSWGRKQd7bPDtFpt6WQ
+ HV8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761800539; x=1762405339;
+ d=1e100.net; s=20230601; t=1761800551; x=1762405351;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CkxGrPAKx9oUqyWqSsgbjM/+eFWmTt7OREyX9YfXtmk=;
- b=PfebJrTm4ld/3ddjzdakS/LuZiqe8hVP5CJVJNJcqn445pG+ovkUElZM8+t6qP7vX7
- hV4SipQ8gF9garxlDIGPQObYw9lqdPIdacQ9mCYt1+sa0kxFbpe5jVi9LJLya7yLDGIR
- iPpqoVIh60XvIs0CSmMfMo5xaku8QhF8i3l5mVOwCv7RCsfrZ7vXUh1bTiaHfgifzx8M
- +eRXOTNa1Qgy/jG37FLtQgPquHB4YXWAym1ctanaobxizbf2bpx7fwsG2bFvvkETkaPb
- lN/9LVlj43supfB6YtTgoY3W2/JfIb4BO/uPcpDK5dnB/0xUrZ8SEVnCv1FMhblr1Z6h
- rirA==
+ bh=hpLTVDhWWhS6jbaiN1CkTQhz3gRnmfrVBfVxnAQ6I+0=;
+ b=HGCx7UIxZdT2hTSNPUB9cfSb41CpL8A0whbDjGF1RfWoHLicKExcMSY44KzAllE99z
+ M/VLOrKO4FZl7F852+JSafNHaXeq4Bip6CzMf/JH4nLYTMDzWGLM0bh9S8H+8cCr6WNq
+ +MZNLvYoP44uu/CvzQMFWicn9n7hHnEkif2gCNMnKQSGgLtX+JTIsAowsg7nS9hzUBna
+ wjW0cPkXhzWBrC9VBHHKWkbpZdcBPRP7FRkysAzomgLWKyjeXPCzPv2vvutimSJfpykt
+ tzp4/fJ0B5Lv7fQsj8zX0OyvxhsIkyw582JJHdD850FBFDsH6vqW6lejl2wJECQfWse9
+ pssA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUPViqUQgAbBPDPe5Ni7tcjwKSPX5U43qs0MYtT8JBnhAJ9xA82iAL03qNEuc7ttSDdX8FfGTw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwEGdIalbMJEpTS1OePQ6rwgrln5gEZ56dU/O9FQmVG/p5NvzXg
- Z5IwYriP38CveCoSjXtFLyfhBd+F08r0HVvu38QwFDT3CJmr8+fCG64eifmXVoSknSGdYcrTR9z
- /8zRwZ3cqn5sP5yUdMtHc0JBK/tTB770=
-X-Gm-Gg: ASbGnctKSGg7DYgXeDPUdlxB5Njo6PRstUcjXiaWVn88zM382uaGnz6p6HlZrXoKc25
- EYp+nY8RX6Z7vlRKV2GEoVshob0xKj7JfRMFcxxj2gzASZtxxNqrLX11nRs8HOkIDLkWRvV7z9p
- rNEE3zNUflD1HVWWaR6CoTEXEFewcZpDjpWgLJxR81vJLE9F/w/JpbN1fNlfqB31UKbJixBpO/q
- bvnqL0ZcDQwuGEVny5vJ1jDFcMaA9EJGW31xLaRKix05uFz9wQqN9569VNyGr+DSqQrVg==
-X-Google-Smtp-Source: AGHT+IHG0RkZdB/CpQu0Dd/JjJRXBWmP09gEBxamu/kHRJ0qrprX4n5TIOBEk+QBYuRtUs7+PUkirtJJh/0XjCOloeI=
-X-Received: by 2002:a05:6402:430c:b0:636:9129:8826 with SMTP id
- 4fb4d7f45d1cf-640443dc7e7mr4052146a12.38.1761800539053; Wed, 29 Oct 2025
- 22:02:19 -0700 (PDT)
+ AJvYcCX6aqA9ZzCqjMFeIR1VfwAymE+afCN9YI7fOtHDOtSorp4ZHc2IScr+lZ9L1s5OGxm+5o5CZ0s=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZHul3AXJDTrw8W+RW9ky/1GfvtsCGjHXqaALqjrR2ysuM9Hu4
+ K2X6CKPC0UG+MBH0JoZ9al3qfMux061vdHocz9abW9rfyDlLh6RRXc/wU0nVPgFxgKu7gy5uZPo
+ aT7qEZKmW4D8YVtVNTbj7GNQ01n9eN8Y=
+X-Gm-Gg: ASbGncsLd6ubhaNuoxEqNe+pYlX3HrLAixiHsuYDXGIPRKQWJdmbVAOlwIi1IRc/CTr
+ s8CZo6wb1L6nEOEGasziCPIdLFaNQNJmf/DTQAoFQDIp7X6VF0x/OWCLoBvWjqTfijs3ARRyyKG
+ SduXraYYk18z9q6jZhEZOdzk52DiwP/3u35R70i4NaBMrslPg97ugryVmpj48hXcFMqWzIqYi1r
+ gA2de/nK/ZivtCtjj9BKb7c0TsopM23L09p1s7GPzqz4nglz8TnIwQV57kHIBzE/BLeeA==
+X-Google-Smtp-Source: AGHT+IG5lmw1ml5dZMxPmaHw7T+KBt/iSeOIHFFbyOz1JwMogO+Msyiq6/O565U+/JMbMdLBQw6gVC+D9MiaRc0JxLI=
+X-Received: by 2002:a05:6402:1ed3:b0:63c:33f8:f05e with SMTP id
+ 4fb4d7f45d1cf-64044251d98mr4412848a12.22.1761800551221; Wed, 29 Oct 2025
+ 22:02:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251026010658.19271-1-semen.protsenko@linaro.org>
- <20251026010658.19271-6-semen.protsenko@linaro.org>
-In-Reply-To: <20251026010658.19271-6-semen.protsenko@linaro.org>
+ <20251026010658.19271-7-semen.protsenko@linaro.org>
+In-Reply-To: <20251026010658.19271-7-semen.protsenko@linaro.org>
 From: Anand Moon <linux.amoon@gmail.com>
-Date: Thu, 30 Oct 2025 10:31:58 +0530
-X-Gm-Features: AWmQ_bmGmUonz_9zEMn98tdB1OXP2BDYXZWwIYtJCVCMnOUZrgeNzWR4vMhFMTk
-Message-ID: <CANAwSgRq3CrRXfxKFUdSvM9M46WLmzXTOXkVtRAqfyoQMe0AxQ@mail.gmail.com>
-Subject: Re: [PATCH 5/6] mmc: exynos_dw_mmc: Add exynos850 compatible
+Date: Thu, 30 Oct 2025 10:32:13 +0530
+X-Gm-Features: AWmQ_bnC2XU2ihN8eUQBJai6KOwogNBKDhT2tQPH1CCVR6DwHEm_x81qnQjHvsY
+Message-ID: <CANAwSgTf9KOhwwKiTHKzxn-UB1OpYTY1pce1pnSZF2=jBdFpaw@mail.gmail.com>
+Subject: Re: [PATCH 6/6] mmc: exynos_dw_mmc: Disable FMP for Exynos850 chip
 To: Sam Protsenko <semen.protsenko@linaro.org>
 Cc: Minkyu Kang <mk7.kang@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
  Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
@@ -100,14 +100,9 @@ Hi Sam,
 
 On Sun, 26 Oct 2025 at 06:37, Sam Protsenko <semen.protsenko@linaro.org> wrote:
 >
-> Up until now "samsung,exynos7-dw-mshc-smu" compatible was used for
-> Exynos850 SoC, as it's present in its device tree. But Exynos850 device
-> tree also supports "samsung,exynos850-dw-mshc-smu" compatible string.
-> Add it in compatible ID list in the driver so that it can be matched
-> against this string for Exynos850 device tree.
->
-> No functional change, as the driver data is just a copy of
-> "samsung,exynos7-dw-mshc-smu" data for now.
+> Add DWMCI_QUIRK_DISABLE_FMP flag to Exynos850 driver data to make the
+> driver disable FMP in case of Exynos850 chip. That makes eMMC on
+> Exynos850 functional when U-Boot is executed during USB boot.
 >
 > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
