@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06783CCF9FC
-	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:04:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB114CCF9FC
+	for <u-boot@archiver.kernel.org>; Thu, 30 Oct 2025 13:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03B57839B1;
+	by phobos.denx.de (Postfix) with ESMTP id 3F624839C6;
 	Thu, 30 Oct 2025 14:00:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ambKKgUZ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="zTUK1FEa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE23E83893; Thu, 30 Oct 2025 11:01:47 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 3FF8D800B1; Thu, 30 Oct 2025 11:01:49 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1407800B1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 11:01:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 581EF832AD
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 11:01:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-4270a3464bcso640315f8f.2
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 03:01:45 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3ece0e4c5faso841361f8f.1
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 03:01:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761818505; x=1762423305;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761818507; x=1762423307;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ZNxbW6ERWikMraMYHdeyk1vAfpc9A4vrIaj4zwKijzo=;
- b=ambKKgUZC0ZYiLgrNjxb4ZgJvJIoqAchCNtEFwLXOSUtAxmKsckVinO5tmuVZ7Ob14
- q27sMuX+a1xIdTXZSOt3ZdmX0zIYldrhSDLcfsMRFa+Om2jgdI4EaJkkuXnjq6Bv2WTW
- D6o8TzCJJK+VP/okF0eydiXcmcevf6sXOpu4+tVcFoiKAaAMyc6sHVNRAZXY0fduk0Ab
- xHS77n0wJbA+Syr3PaNvBn2y3XliGVhgJpJZ2d1VlBq51z9byKIt58J+hGsN6jGfm+sw
- tOM7bj3Xq29SEynjApg0IceUhS8ZHbZRAR+Kmo2vUY6YfwNgDOOo4tOVC0MY6qLPcXmu
- 9mtQ==
+ :reply-to; bh=BJLqWRejbqGGWB2ClRyBmoFJla4Vp2XGf46a/xI7PrA=;
+ b=zTUK1FEaw4IfWIai2CcPJ75EDPfsxxms57eZ1glBeopfwSugqWm9FPY7BKnxrQz1pm
+ Ttu8Nmjqk8nSkuRJQc2XDCUKJreoF5sThzha3eMj27dw4OQFtsDx6Cj2JKuDE/PMefe0
+ KzQReQiP0icRlnlOEtrMeayHTm4Mllru/jnwveDX6eeonjHsxXfhAIa7U3PPzDeIiZK+
+ jV9NfXh5MwHyK4n1CQLjkrEw586LofCbXhEvHisZLtEWItbwc6n5+tBQrQJ8KRfTSIEq
+ u5ti7HDcR45tMPUQjUvZetHRiXPOxtJD6/fMy32z1zCD5EqfC4QG9yYMKjcrUSlaYynP
+ dqpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761818505; x=1762423305;
+ d=1e100.net; s=20230601; t=1761818507; x=1762423307;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZNxbW6ERWikMraMYHdeyk1vAfpc9A4vrIaj4zwKijzo=;
- b=QWuOgMfkg2X0r9hBEseeIfc4WBEWBPN5qj55gUpdMb8nKoAi4e6EdKdKWgq8YUo31r
- 2Lev1Cau8cp3ZlCx4TNIFExxpsbWon+gS/JA8MGNC5A/c6A1yfze+GOZOgcCU9KawIUs
- FLW8gxyZM7up9DlBTs8Q3ebA7XjZs3lWhR5oX3WRZVD6nhrrKhc/Aq/bqDTQwU/+eDGJ
- gjfWlVksUsD3acvG/GC/VADyQ3dXEOYMlxkqM0fmrPQ2XbFyyeOMjOhBleSOB4UgRHf4
- IKdrbde3kvbqXJZNUYwkzVkNjpO0/DFkWywPI3WLDGnRvKxwBdrICalcKZ40nErs+D04
- ZaMg==
+ bh=BJLqWRejbqGGWB2ClRyBmoFJla4Vp2XGf46a/xI7PrA=;
+ b=I0FFOwR9Yp2zeaKpVt0qQj1hooR39O8oLlmfLBJO4oruunOC4xPnyA3GK3gMTpqxTv
+ aclxvCGq9+VJpnTud6YkV24Y//rOwS/p1qVn0WZcTqjHx6LRABMjivhs5wkQ7+uGbHfq
+ oyY/3AQ9ilUJq9L04mqUFTcbqRE35TB6UBc/JOnBGPi7De3tlmFEr1axMuim8VCixHUr
+ 9rSdB81SntTVTWSNnPsSeJ0D4ZcbdVM3hZFDpRJNISJhINl4JWSOOVqUWMNgvm+JnYjj
+ 23s7zzKl+nGzP2hIgieH+U29NL0sn2H10XmaPYbwlanse1/zQu9X0ZKXOi00v3Jho4uo
+ IIRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWeKc7BV+FPdeqWevjwVzfyddcHP2h0VhKByF2udExJJB27p2Sz/7fOeqr+mNo4JaI9fAjHdDo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxzHVUNgtXbytGMBe8hsy8AKIamOg29zIaqPvPUDuCtOCENI5LF
- opFqomO1X4GfxfQnOB8SPaM6oXMd+VWGAuddAZPjYK5+h8xovyxc0kE3kF/26HYJE7w=
-X-Gm-Gg: ASbGncvvhaIdcNq16eYtE51jqwaHwFuRlPjPn1BmQ4Osb+R0b/69ssF7rYs1EPYvdqP
- pRPjENkIe4yKS7FLZbHnCPoUM4eG9BjF25hCwCxESVp5/K0Rowh9DyezbxWIpNRr0jZsQc951QB
- 4A7CwhsSp++X0IsmlycmlRGPeZ9yuUcCZRZdKtUzaD/gJiqqJX7aRagZJSx9bnPx8VNsf8FYiNj
- PIHmc+iXAl9CmT3wBx68nYFKHH926N19ng59Xu2mggJyV2o9u0wzQDxEgV0fcs/xSqH2SBBTjP/
- 589WUvnJEO6Q1r8qj6wU0grLIOdszps3PBEeI33uhYij1K0P+APaHuCaGFEPUj/iBY2F+NOzDwh
- trLv9gDyq5yEmMBE/nLDUPDLPOar0jfhDDz2l4wZ8ybJaN/Sej8cy2VgPKjmC+P+T4g8V0UeA9W
- Rem/8+/jsK9dcEjfKdvRo=
-X-Google-Smtp-Source: AGHT+IFer82kgLYO8jiGeMxzFbkGG7cvl1kQxVBBuX967/ECogFmvYcdvjQ0HTmJi0hTz9MyS+tQdA==
-X-Received: by 2002:a05:6000:2908:b0:428:3ea7:4473 with SMTP id
- ffacd0b85a97d-429b4c9b02emr2471097f8f.39.1761818505184; 
- Thu, 30 Oct 2025 03:01:45 -0700 (PDT)
+ AJvYcCXTRktHMbNazf5sSmr2LC+/JChgBHTp+ZQFjClbtK44OlVjNwcCnt+9EIuPuW7iCIvgS9FfAJo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yww205E58L7R3HcSYf9bM9EdVz4swj+X3pSd4PJZNZjk4QTRIR7
+ dyS0jEhmNcj4vEr5v0CMozsAWQ2As2NDT/oJId/rcm0H8AzH96TuHUFeRwq92Fwk/pk=
+X-Gm-Gg: ASbGncvycarebcpVTN3sCyjzhnk5jN+sHW5Ai9ceg1uWdn9KXiGx8PsFJAaljd5Cp5m
+ 27D6Y6LfWcuSWKZangY3tm7IifkVjbaL2s47i9LyTQQCEHKk/8janOqcDYeAS09yizSP630Ly5p
+ tBbbcoM8Mm27UiyhEL680hdh/JwBdRnwKpJ+lsvIbnEMo3ilzAdJ37MhEQ0Ckf7tHOEJN4tHEXy
+ urkAW5dGfZy6iC1+gUWr4gF9FxbF1InzABMRZf9Hjesq/No1cXzwKRI53aS+a6TzFh1Pd3cbzu2
+ PBIrNLuOlsE+qMSlmT0fikPy8dlKVJbIAbC8vkWgv3x5ggVTNVm2bgXSv5UW5WKqBwsxg8EO9Gk
+ gJCn/jE4tyEUp1bUKCXYKJl9fDd7JfBwvWPjtGq60z3EepVyOhsGqbgRanBzSiJS98M+3v8kBvk
+ /sO2NYs+iHh9KSi0AaY6E=
+X-Google-Smtp-Source: AGHT+IHUbzZfI1l3fru0fJ6o6dgd6MR689pzm+I9nklaSTSIY1wkeRUfY9C370JY97TQgqeiLuHg4g==
+X-Received: by 2002:a05:6000:4a1a:b0:429:b9bc:e825 with SMTP id
+ ffacd0b85a97d-429b9bce91dmr1040858f8f.46.1761818506775; 
+ Thu, 30 Oct 2025 03:01:46 -0700 (PDT)
 Received: from localhost ([2001:4090:a245:8496:49da:2c07:5e9a:7fb9])
  by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-429b9b436efsm1756941f8f.23.2025.10.30.03.01.44
+ ffacd0b85a97d-429952da645sm29797819f8f.30.2025.10.30.03.01.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Oct 2025 03:01:44 -0700 (PDT)
+ Thu, 30 Oct 2025 03:01:46 -0700 (PDT)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Thu, 30 Oct 2025 10:59:30 +0100
-Subject: [PATCH v4 12/13] configs: am62ax_evm_r5: Enable IODDR resume support
+Date: Thu, 30 Oct 2025 10:59:31 +0100
+Subject: [PATCH v4 13/13] configs: am62p_evm_r5_defconfig: Enable IODDR
+ resume support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-12-4cef18af0226@baylibre.com>
+Message-Id: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-13-4cef18af0226@baylibre.com>
 References: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-0-4cef18af0226@baylibre.com>
 In-Reply-To: <20251030-topic-am62-ioddr-v2025-04-rc1-v4-0-4cef18af0226@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
@@ -109,11 +110,11 @@ Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
 X-Developer-Signature: v=1; a=openpgp-sha256; l=633; i=msp@baylibre.com;
- h=from:subject:message-id; bh=+qyiUx6XLG5UhRn4foleZckG0VNlcEq2vd/29s1FPXw=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkxm89Rr/KFtZ49sO7en6G1SdvW7qU3r6nT1roodfRtTa
- 1yReVKxo5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACZSMJPhf9iRWP/aGwsNde2z
- jyjntSyf+PXb9Qn3Zect/PHoyU7r7tWMDLv3/Alc2/nte6jJXK6jBZIGreZVU7wypb/XnVKwuJc
- uwQQA
+ h=from:subject:message-id; bh=8q3WU1UttF57TPGTLBQNZggAFoDrgWAZidX35YOBHDI=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkxm89ywX3vSor7oiVg8np+5m7eraWPm6iPeXNuEvnPZV
+ nl8qwzpKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIloOTP8Zo9UOS7hn8bX5p7+
+ TPncZpPdZlOOZTt0JEdd/HR56ye30wz/zB9/uTxF50xowM3Zx3+0lnmfny7jGbrrScmvA3Nsvju
+ xcwMA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Thu, 30 Oct 2025 14:00:47 +0100
@@ -138,14 +139,14 @@ IO+DDR.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- configs/am62ax_evm_r5_defconfig | 1 +
+ configs/am62px_evm_r5_defconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
-index 64886986c4264a5d9272228e468f7057c195593a..3a9f382193532dc3b712a1bd3fa16a9c0de3fedb 100644
---- a/configs/am62ax_evm_r5_defconfig
-+++ b/configs/am62ax_evm_r5_defconfig
-@@ -106,3 +106,4 @@ CONFIG_SPL_TIMER=y
+diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
+index c9592d7b6c4cc037a886fe81385791269a825aa3..39e8093597352e6ed3fb67ac59e0494239a51352 100644
+--- a/configs/am62px_evm_r5_defconfig
++++ b/configs/am62px_evm_r5_defconfig
+@@ -123,3 +123,4 @@ CONFIG_SPL_TIMER=y
  CONFIG_OMAP_TIMER=y
  CONFIG_LIB_RATIONAL=y
  CONFIG_SPL_LIB_RATIONAL=y
