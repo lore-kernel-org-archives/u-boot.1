@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9CBECCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:53:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ABE9CCFA00
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:54:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41467839E2;
-	Fri, 31 Oct 2025 16:53:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E8775839F1;
+	Fri, 31 Oct 2025 16:54:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Hlxpo/Rs";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sVnQHG+Q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZMxlmL4y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B58AE839E4; Fri, 31 Oct 2025 16:53:35 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 20332839FA; Fri, 31 Oct 2025 16:54:34 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE4C083971
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:53:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC661839E8
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:54:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cylrY56GSz9tKD;
- Fri, 31 Oct 2025 16:53:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761926013;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8mPwVpI7VT4qp+tqumbiN5dB20Ytv6qYzQIAEW1/ftU=;
- b=Hlxpo/RsTQ7z9wmrJh7XSEpjXihG/rn5S8P7dNiC93aEtjP+PgUP8w5Ygl11iOBBL/MyBK
- owE1xpf6RCR2eZRGPK80ReKbV/1Fucl0j+wxMFEX+i3IIV/1ggmnzEZf3HUEQCRggbj5Zm
- kjK+jE1Ouc66cdLF+TVoGM5fy0inZnvsHilQxAwMjlG+S4UAgRIHIpORvT+ykKt7Y/Z7XK
- uXC2MKMKzJbDuoheooskZiyqzmyUdPL0EwLcGOt4AvqQNUGpe8xYBQ21hZHnyLrtIMjnrI
- 9Xg/uLXZeKV5NVxkWwU0FcMBUZxN+uxonKevxulaRMSuG28IMNW1+tgYVXHL5Q==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=sVnQHG+Q;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <6ca0b758-ac2b-46a5-a06a-5ef5ae676f00@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761926011;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8mPwVpI7VT4qp+tqumbiN5dB20Ytv6qYzQIAEW1/ftU=;
- b=sVnQHG+QrmoFBNHyHMtzVq0bB3Ps+Iygp8jllVIOYka81wXuwlQxC6yayvqcMXWZ16m7Ne
- uBah3zC5EwRhC/wMfRmMKUNTtBhrPdnVj3bZ52g3HJCQaBbqVzxENc9WqK+nmr2RTdoFLX
- f4T0oGeewZfvoM+I7tABxq/GkGzn8urVLYgXOJPxgoUYftwUl/YDk+jjKBQEg/5IrCR4TK
- 30BS75NroqgpnsoU0LGsg9sSNgigAHonnbb3cawEHahKYC4O6Z/NYDhAnCzJiglGbkJy4i
- tN0Wmk8ahYNj/Iwf/1RI52UJ7LkPc7WLNvki14kdtDbSh/siJaYApUohY7E3Fw==
-Date: Fri, 31 Oct 2025 16:53:30 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3c97813e788so1542311fac.0
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:54:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1761926070; x=1762530870; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NTji4JdYpOdXNSnln0MQiOoFjTgigSJBkxtGQ3Qm8Zk=;
+ b=ZMxlmL4yTCGhlAhUGP9YBb7RnRrbYl+n/+IR2vJiEpw8OP9jEdHtru2/oHT6pr/Fzr
+ igVzNShF+F+XFXFvkCHPqCvv92AID21F+XCZcaU0CKyAQ3j5O4q1xJMvqrwZTueNErf4
+ kSM2OOvkKsT4L5ytn5Owbl0IF8laaGUUbR7c0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761926070; x=1762530870;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NTji4JdYpOdXNSnln0MQiOoFjTgigSJBkxtGQ3Qm8Zk=;
+ b=Osx3z76TW67D8vpdDqnOdloDmlUOIZGElXbhvvjIBj5F3CnbFzIUeCtp6lmNAHrqrc
+ eDlmFhQJvYk44fZLjkVuAzdkEmI67F6NfVOB2/jnuZt0YcwAV16oOARka25zqiE8bhO7
+ TpMKFAeIu0vPaVGxLyMDaJOYjE+JMbXng9ANEj7G3ki1ozZS31oTFfEtXiYXwMRfZLKa
+ C2DwsyxlERB8S6rU7N1gHqk4eeBUa/h6mdZ6ZLMzxzaI7AkUr+yDvOxrrlVx9p0K8gMV
+ mxE4vMcKv5Ca4YEuextSThJ13FgmGLpbfUYKyNaQY1E0qnoqkzUnfwpIdkwItBI5ghE7
+ 3kpA==
+X-Gm-Message-State: AOJu0YwIbKU0givN6NtUhFO/JY6fzz9TnLGWvsECU+JoE8pmJB3bLUmL
+ Dtp42IrPEU4BcofofNYuLmTSz1mUW6p103kNgL67WEV51ps7r8GMzDl2PGaFK5qt+Sn3NDerGsp
+ j4RBcrXnzYg==
+X-Gm-Gg: ASbGncvw+9VVktlyf/WgZ61SND+Ex/zTi7eYpSzVFItfBns8xTwGcWsaW16/AKZXssF
+ y7DTkS5TWQQV1SEFUXYT09XpovYkQRM7nzatBa0+Dhz6Xd0nFdaropkNT8O0TIhMbaLaJsmw4hK
+ wwNyeQ+haBbNw4/M2N+olhxBIgQdgFbVQzBjZhm/8D6vW559WsL4rYPM8iDs9d+vS/sJbJLGi1P
+ +VEaxZ+FQK8EO8UfJu5I6LZn+vnYiz+U26UzZaxxnA/nBudr8p+WvNgbZQOeSZNmS0iV1zu1HcB
+ rVUokYGUYn+yT4AmthRb4QJuvdwJtmfWAInV2Tx1yGTD9R5Gf0uROIS6ueUGSn4EFVmwxvVqDVa
+ DSDKKC35Fj4BKNFS78Z/Niz1Ws4FUbPxLe5+csJ/ZBJq7WcPaoyuNmOpyzjGc8TsZkJwNYw65j9
+ ik7RBYCjXS9F3XTZ8A/8ALI2SkD/+pGcThC6hZeGuf4rXYAcxiPyBKuGhV/B5O
+X-Google-Smtp-Source: AGHT+IFnwW8I7jYPUFk5nWo2UcCkCzsPGB54h0tz3oo/dnZcut56vBoGYbmVnE3CtuECcssP3qxXBg==
+X-Received: by 2002:a05:6808:80b4:b0:44b:1f75:df07 with SMTP id
+ 5614622812f47-44f95ef58a5mr1909609b6e.30.1761926070475; 
+ Fri, 31 Oct 2025 08:54:30 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44f9d7e3b88sm448374b6e.5.2025.10.31.08.54.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 31 Oct 2025 08:54:29 -0700 (PDT)
+Date: Fri, 31 Oct 2025 09:54:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sune Brian <briansune@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v1] Cyclone V Board handsoff script
+Message-ID: <20251031155427.GC6688@bill-the-cat>
+References: <20251030003359.1023-1-briansune@gmail.com>
+ <20251030180940.GY6688@bill-the-cat>
+ <CAN7C2SC+uJ2OX9WmU7AmUjTZ7O4rWwQY0ueYYvWcUH1GF=fgZw@mail.gmail.com>
+ <CAN7C2SDcEC+A5-rmCKMYD=vEYDFdOAfMp1G=T5SuQcXYOHDuJg@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 2/5] doc: bindings: use upstream bindings for aquantia
- phy
-To: Beiyan Yun <root@infi.wang>, u-boot@lists.denx.de
-Cc: Yao Zi <ziyao@disroot.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
-References: <20251031152348.60571-1-root@infi.wang>
- <20251031152348.60571-3-root@infi.wang>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251031152348.60571-3-root@infi.wang>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 3t5mgsakou6ok6s9tzbfuif51tmz67jx
-X-MBO-RS-ID: 38f6a5f82a36875a42e
-X-Rspamd-Queue-Id: 4cylrY56GSz9tKD
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="OSD0hHFAxwurFbix"
+Content-Disposition: inline
+In-Reply-To: <CAN7C2SDcEC+A5-rmCKMYD=vEYDFdOAfMp1G=T5SuQcXYOHDuJg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +100,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/31/25 4:21 PM, Beiyan Yun wrote:
-> Prepare for the switch to upstream bindings and generic firmware loader,
-> remove reference to upstreamed bindings, also add a firmware-name example.
-> 
-> Signed-off-by: Beiyan Yun <root@infi.wang>
-> 
-> ---
-> 
-> (no changes since v2)
-> 
-> Changes in v2:
-> - New
-> 
->   doc/device-tree-bindings/net/aquantia-phy.txt | 15 +++------------
-Upstream bindings are in YAML format:
 
-Documentation/devicetree/bindings/net/marvell,aquantia.yaml
+--OSD0hHFAxwurFbix
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-How come these bindings here are in text format ?
+On Fri, Oct 31, 2025 at 05:31:25AM +0800, Sune Brian wrote:
+> > No, this is a build script that is a must and also required on every
+> > clean build.
+>=20
+> Let me elaborate a bit more.
+> According to the current U-Boot folder:
+> board/altera/cyclone5-socdk/qts
+> board/altera/arria5-socdk
+> board/altera/arria10-socdk
+>=20
+> All these board folder files are not sure and high change to be stall.
+> As the deconfig boards are not only official Altera board.
+> As such [1] is a prerequisite to build U-Boot.
+>=20
+> So unless there are handoff changes until the EOL of 2030.
+> These scripts are highly required on U-Boot, unless U-Boot
+> plan to remove Altera SoCFPGA from the ARM support list.
+>=20
+> Brian
+>=20
+> [1] https://www.rocketboards.org/foswiki/Documentation/BuildingBootloader=
+CycloneVAndArria10#Prerequisites
+
+That's interesting. But that also does mean that someone needs to work
+better with upstream about integration here as no, that's not where that
+kind of tooling should live. At bare minimum it should be in
+tools/something/ and have it's own requirements.txt file too for
+whatever python modules it requires.
+
+--=20
+Tom
+
+--OSD0hHFAxwurFbix
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQTbsAAKCRAr4qD1Cr/k
+CmvoAP9TOz9xWK/MKOF+SWnYMtuzrHhbl/KKJESKhVi/SK8DWwD/eoTBB+mDohE8
+UqIj3Oy+VZ1sFekqAhcDoOG1nFRNEw8=
+=icCo
+-----END PGP SIGNATURE-----
+
+--OSD0hHFAxwurFbix--
