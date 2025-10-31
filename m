@@ -4,71 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B26CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:03:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74EFBCCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:08:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB2CB83A35;
-	Fri, 31 Oct 2025 18:03:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
+	by phobos.denx.de (Postfix) with ESMTP id C302D83A5D;
+	Fri, 31 Oct 2025 18:08:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="OwSmJnz/";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7E0383A41; Fri, 31 Oct 2025 18:02:58 +0100 (CET)
-Received: from outbound.pv.icloud.com
- (p-west1-cluster3-host5-snip4-10.eps.apple.com [57.103.66.13])
+ id B7B5583A57; Fri, 31 Oct 2025 18:08:43 +0100 (CET)
+Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
+ [83.166.143.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8E8483A13
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:02:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BB3B839DF
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:08:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=infi.wang
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
-Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-west-1a-60-percent-2 (Postfix) with ESMTPS id
- 037CC180176D; Fri, 31 Oct 2025 17:02:53 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
- bh=y3Ez+huFdExPRgP5rjXDG3pw0bbpw6PwCAlAC/i9WQY=;
- h=Content-Type:Mime-Version:Subject:From:Date:Message-Id:To:x-icloud-hme;
- b=OwSmJnz/SVyFq21qYcmkLKeElza4rkXGKkYPf2YmZtQ/UC4U9uZchNm5Rih7f5BZRjtEQ5P0i8fpDSyJhuwbpuwEiU7YxlqL61By3GHNljN5fWXQDfmkzq7NCE+ieZccITeaBdIslydZkaSkIj5I2LRtXpbij7s+FpAa8R5alab9j0q68zuT0JCOv+vImwEwd2WfsBl1JI6jaTiYk06lAXvryFxaHts54F6JzNOWrDJvwPzFeMJgSgBBmVnULi8bRmZKTUj2BTfmwkPlVDMj/l9UGfzA3/XuQyHfbtD5jRSPpHL321SqNDw4QOMUjp6jcfDjCyeePpFTb7UkJ1NvTg==
-mail-alias-created-date: 1549370554000
-Received: from smtpclient.apple (unknown [17.56.9.36])
- by p00-icloudmta-asmtp-us-west-1a-60-percent-2 (Postfix) with ESMTPSA id
- A16C2180175C; Fri, 31 Oct 2025 17:02:42 +0000 (UTC)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
-Subject: Re: [PATCH v4 2/5] doc: bindings: use upstream bindings for aquantia
- phy
-From: Beiyan Yun <root@infi.wang>
-In-Reply-To: <6ca0b758-ac2b-46a5-a06a-5ef5ae676f00@mailbox.org>
-Date: Sat, 1 Nov 2025 01:02:30 +0800
-Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <7AB9A75C-6A37-4DFA-B077-EEC6A6E9C1ED@infi.wang>
-References: <20251031152348.60571-1-root@infi.wang>
- <20251031152348.60571-3-root@infi.wang>
- <6ca0b758-ac2b-46a5-a06a-5ef5ae676f00@mailbox.org>
-To: Marek Vasut <marek.vasut@mailbox.org>
-X-Mailer: Apple Mail (2.3826.700.81)
-X-Proofpoint-ORIG-GUID: BrEjfGDBpOsC6JY7ncerONsCbbns1tnE
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDE1MyBTYWx0ZWRfX+ho1kA8LsSyT
- eGqiEhG4j9ltKlib6/JmTzt3oJpBjDvqALDAnXL0z4caJoWRUvGHdNEU64wmyJ8t+p/ci63xod4
- YtzFaRYeZO3gdopAuY+ofXgb4IZgRphq+CmkrNCXw1804LnxgKVmcwd1yPLrB4glATaojYKwVh7
- il1hz65DmHwFpFvKbO3i2zc/IEa46vQ5NpCkjxrqE72JSSj9IWtYLgtQ7CUSfnnq5rwTroM6Kj5
- nuFEJLK/TCfZI6T4/Pctg+NcU8jW/AAv2whhNObydXYbivtwi0NOzCWIf5PV1x1O9zo86ISuA=
-X-Proofpoint-GUID: BrEjfGDBpOsC6JY7ncerONsCbbns1tnE
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-10-31_05,2025-10-29_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1030
- suspectscore=0 bulkscore=0 spamscore=0 mlxlogscore=981 malwarescore=0
- phishscore=0 mlxscore=0 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.22.0-2506270000 definitions=main-2510310153
-X-JNJ: AAAAAAABrWJAby1lHBboh21rr+fUsyA4GLMec4LxtKloxvYrzEnJLfmEhWqoKOh4G18YVeomQpO463/3dh1opu1Hcr7W5urHwhpQ1+59HUnFjPU73GAuKc4Fr8e0QZliLx7lKrPSp+SXBdSbg/L3AR2qOAwhXwulVIIZ5CEy0HzaGvwkSddiRkBU3oy2EOJ6LP2z7PR2n6TlHBewj0w8C6txNS9X7i6Ce5tcrw8611ma/K07ZxGxwKpG1GKn5wbAkRs09xSW/4K34LPLMeHcXqCxauxQg+RZzTxBJJEjitNm23gNPzjEv+zS8bOqu916TVhr3pv+/blfllVhUWjQPgwAsoq9ALXgxeZf17dGP00qXepFuDVdnKb88WGTTuzSyjbNKqBkYlelhYSp6syymAMNg26EDaTK+kvg/jU6vE6EQlG7HnOBGrBVjZdlcWd/Lgxqck406MLXUm6SOimMUSNTcu9yBg5efCbFf7tMCEln0ExaXTb3lDUdzANfPvyXuneCGg9AGJvUS+AP456c+vyrz0ikfM1w4sGKjqG5YAsTtfjWslDq+k4LEqPTvgELqdAHT2V39xYZCDAxkuYocvBe2xhJan5WH0wd1FCAElCKtS0rIqnJ6I7NDpGPllurqIEHWVM5RHrLa1GEojuXWrhEjvZIHIiQWg==
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
+ [10.4.36.108])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cynWD67jfzZHZ;
+ Fri, 31 Oct 2025 18:08:40 +0100 (CET)
+Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4cynWC2fFpz14x; Fri, 31 Oct 2025 18:08:39 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH v2 0/5] rsa: fix dependency, rename and relocate RSASSA PSS
+ symbols
+Date: Fri, 31 Oct 2025 18:08:19 +0100
+Message-Id: <20251031-rsa-pss-always-v2-0-a29184ea064d@cherry.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAPtBGkC/3XMQQrCQAyF4auUrI10RsZSV95Dush0og1IWxKpl
+ jJ3d+ze5f/gfRsYq7DBpdpAeRGTaSzhDxX0A40PRkmlwdc+uNq3qEY4myE937Qaphgp9KFJrTt
+ BOc3Kd/ns4K0rPYi9Jl13f3G/9S+1OHRIycdz8NwEoms/sOp6TAxdzvkLZ/w88awAAAA=
+X-Change-ID: 20251029-rsa-pss-always-dbba5c57d913
+To: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martin Schwan <m.schwan@phytec.de>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Alexander Graf <agraf@csgraf.de>, Loic Poulain <loic.poulain@linaro.org>, 
+ Tobias Olausson <tobias@eub.se>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Shiji Yang <yangshiji66@outlook.com>, 
+ Anton Moryakov <ant.v.moryakov@gmail.com>, E Shattow <e@freeshell.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,32 +77,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+While historically signature verification is mostly done for FIT such
+FIT_SIGNATURE dependency for signature algorithm makes sense, it isn't
+the only kind of file we can verify signatures of. It can also be done
+manually with rsa_verify_hash() with an embedded public key.
 
+Considering the impacted code is guarded by RSA_VERIFY, let's make the
+symbol depend on that otherwise selecting it without RSA_VERIFY won't do
+anything. The FIT_SIGNATURE dependency wasn't also enough before as it
+only implied RSA_VERIFY.
 
-> On 31 Oct 2025, at 11:53=E2=80=AFPM, Marek Vasut =
-<marek.vasut@mailbox.org> wrote:
->=20
-> On 10/31/25 4:21 PM, Beiyan Yun wrote:
->> Prepare for the switch to upstream bindings and generic firmware =
-loader,
->> remove reference to upstreamed bindings, also add a firmware-name =
-example.
->> Signed-off-by: Beiyan Yun <root@infi.wang>
->> ---
->> (no changes since v2)
->> Changes in v2:
->> - New
->>  doc/device-tree-bindings/net/aquantia-phy.txt | 15 +++------------
-> Upstream bindings are in YAML format:
->=20
-> Documentation/devicetree/bindings/net/marvell,aquantia.yaml
->=20
-> How come these bindings here are in text format ?
-As much as I=E2=80=99d like to, aquantia-phy.txt file has always been a =
-plain-text binding in U-Boot; I only updated its contents to cleanup the =
-upstreamed property names. Converting it to YAML would require a larger =
-migration, one preferably upstreams smb-addr and eliminate the file =
-entirely.
-Since I have no interest, and don=E2=80=99t have hardware to validate =
-the smb-addr quirk, I=E2=80=99d prefer to keep the local text binding =
-as-is for NXP people.=
+Then, simply relocate the RSA SSA PSS padding with the other RSA symbols
+in lib/rsa instead of in boot/ and rename it to remove the mention to
+FIT.
+
+Finally, add the PSS padding wherever PKCS1.5 padding is specified as
+one or the other can be used.
+
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Changes in v2:
+- do not always enable PSS padding, the increase in size is too much,
+- added patch renaming the symbol,
+- added patch to fix input prompt and dependency on RSA_VERIFY,
+- added patch fixing missing PSS in docstring,
+- added patch to group SPL_FIT_ symbols together,
+- added patch to remove duplicate VPL_FIT symbol,
+- Link to v1: https://patch.msgid.link/20251029-rsa-pss-always-v1-1-ad2b652e75aa@cherry.de
+
+---
+Quentin Schulz (5):
+      boot: fix incorrect dependency of FIT_RSASSA_PSS
+      boot: remove duplicate config entry for VPL_FIT
+      boot: group SPL_FIT symbols together
+      rsa: rename FIT_RSASSA_PSS to RSASSA_PSS and move symbols under lib/rsa
+      rsa: update doxygen doc for RSA signature verification to mention PSS
+
+ boot/Kconfig              | 62 ++++++++++++++++-------------------------------
+ configs/sandbox_defconfig |  2 +-
+ lib/rsa/Kconfig           | 14 +++++++++++
+ lib/rsa/rsa-sign.c        |  2 +-
+ lib/rsa/rsa-verify.c      |  8 +++---
+ tools/Kconfig             |  2 +-
+ 6 files changed, 42 insertions(+), 48 deletions(-)
+---
+base-commit: e34d01d23e45e007368685ffa6dfd674b6dd7b17
+change-id: 20251029-rsa-pss-always-dbba5c57d913
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
