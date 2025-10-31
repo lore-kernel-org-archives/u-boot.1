@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 935F0CCF9F0
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 01:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBF5CCF9E3
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 01:51:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22B9A838BB;
-	Fri, 31 Oct 2025 02:51:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C1C083642;
+	Fri, 31 Oct 2025 02:51:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HMGoPVd/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VtM2yDf5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 910A4838C7; Fri, 31 Oct 2025 02:51:25 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id F00C783893; Fri, 31 Oct 2025 02:51:46 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A286F8331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 02:51:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15E138331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 02:51:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-37a17d470dfso11726281fa.3
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 18:51:23 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-592fb80c2faso2192576e87.2
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 18:51:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761875483; x=1762480283; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761875504; x=1762480304; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vujd3zBzFTAPhu/BGFA8Dgmyk1Rw+fhfDu0QchMxihM=;
- b=HMGoPVd/5MCfY64K+JKJR3+cLOi/5D7pAmzZChAbwuP80xjuNz0gJ5tyVXx4zoTRk2
- cEkPUVwsWYk1pvEw9v3SrCXsm8knnXrTr/GfK7lhb01W+bkIgz6BK0+qyrsTTMBJOdCg
- D6zOXG3loXE8j81xttcis+JdK4e+tP7NVZ0pDBiO+iYjMacxTXRWdILRh4Wc8BF38cAt
- iZp6qWEChjukWlrT60BIBk4DxWbRavFRl7qrpBtcGEgssD7spUgWjGXrbkMJ3/FjbixH
- JmNSaskqSmy8WLgkMxij2iprtB15y0LoFlfg4sts7hHAlPqRVjrsRTKqrRu5+3wZ8cQf
- cD3A==
+ bh=tQSbuFlvEIHu5BxE3Gvi7/j673ZV1lbmqOnC2efIxJM=;
+ b=VtM2yDf5POz/4L04rPzlfPUmeYzKhYcDRyF+GOO4G51+Czo4RU8QCqf2SMO/1HL/Os
+ 6HTBAuh+IE/LBzbXZqGtV7ig1PPbEsus/GA5pWdcQ/Nw2XqP1zYjUr8qFnFpjxNM6CAz
+ vmAbt3mxZtwdrPfZ0EamnH9HAs11hgj76/erFnCXItt3btElBkisMZpqgoacVEv4b+Ee
+ 3ZTDAY+pmW8LP/c4yCE+zqrEKoxcKetIGX83URVf2GJV6W6CcASEIsp7jI+xj/Frd8MM
+ W2NkWNEmhVZx4Q5K+T8BxAjxCb3Dhzql5eoxnB4UzF+AE9PK1SyB+I6H4EcPfy1YJWPD
+ 2Aig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761875483; x=1762480283;
+ d=1e100.net; s=20230601; t=1761875504; x=1762480304;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Vujd3zBzFTAPhu/BGFA8Dgmyk1Rw+fhfDu0QchMxihM=;
- b=tla0t49T1arhuPJeRb/KM8ZQve5SJGwT+BY+hU4H3tPYzcwU6TwTXh3F5rs9HhRW86
- Z2B6e8GWCgbNqcrDLxMgmtmrL4PL8ZgrHZgXXqatkpouxc2F3y1u/MjV+S6oreKWZFIy
- /DlMuFLpQT+oHB46krIcGPXx9AwodK2c+1p45QmMR2iQCPmkvjREAdsxC+iKxQaBQ6Y5
- bVIyEEYf1uQ6VOosa4qcxyfv8tUa4feJnG26PXfKnd43xZG8jxrT9DnhweqgrcXAaahs
- 5Wm2FrtpwSwM0w/NJVzwSWCTo8iV95o6ChcKAwH5zdQ813jO8Tjj3M98zvAo0FWLGaVB
- /MHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVzMWR3xLSdAm70oN1LsdJPOk9pnpjLxpBa5hBqxP80xXaqb3tCRCCKqOs+mjtAuQeQdxIYr7o=@lists.denx.de
-X-Gm-Message-State: AOJu0YztFS88bMjdmlr7VScseVbEAf0p/SEAZ4Se+zww6rUgZLQt8YQ+
- 6+A9dm3CBxcJPT6aNfZZVq/cysiIo7YVQxzpDP/66ADJYTd1oylT02VgEZe4IdZ7Y1cKpXcL4WW
- 44KaqjsTClLe4598oPLNWRC+6/cqBzrg=
-X-Gm-Gg: ASbGnctfsQWpdSA88L+nCvXRk6GRF+bN7XeEuchuZ7zNo+sBEcIEQW5zw2ybYRbciP5
- Pn0+VQbxWLtYljvjGfu2uK7NVRH2JR8sGQylgssVnq0qkA3ixO/QWjfCRyJBe2+KovWix7ExzvT
- H6sk7TIWQs7i9jpCfOtSRp61IL32moyFJnSpIge/QRtetw0GXkAW4xij8VEvDlYeSgK9Lgh+xwX
- DQlC+eNEsS7oWJ8psK3PGFXFZK3M/V9Ld7EUhrd21feWnlgQWChhhf9yMzaCAp0tyYlS85CnQ==
-X-Google-Smtp-Source: AGHT+IHq/wzB3LgMh/+zICEuXd9yiF1No4lGgPPf1oM4fLCfTpW979rtt+nKCXooxxegkkFmJzJAJ+CkmOowdSD5BCs=
-X-Received: by 2002:a05:651c:2228:b0:36d:e147:3f34 with SMTP id
- 38308e7fff4ca-37a18d879eamr6760571fa.2.1761875482753; Thu, 30 Oct 2025
- 18:51:22 -0700 (PDT)
+ bh=tQSbuFlvEIHu5BxE3Gvi7/j673ZV1lbmqOnC2efIxJM=;
+ b=meHOIPx4CmIfGct+Dt2OO7oPBlpMgmCZ3gQqJlzp2EiKTJhUCRNe2QfA7jlmPXj3e8
+ CCM93OU/vSLoKH9HhLNnoPZdgmWaB84+RiJmiixr3uhcSbnZ6XeR/VzHgzqtvgUuSMxD
+ vOJHSg0PSWHZVxXDp9wiKTdO6oZvr0PP+C5I0N+g3R/0VF/j0zxRIwDfzQzmX4qLemEA
+ FaLfNP/VaJltfwaVPAScWJZHB12llbFbYEPZsMzaEoG3JF7mp1IWLadV9VtNjoqVb6Ho
+ jttLQbkAq5Eful+KWK8WKugETfTuzZD1BvW2EIKi5Lb9lnjPg51PazKr5XNmXxbYYMqb
+ Sk9A==
+X-Gm-Message-State: AOJu0Yx7pg56bHP1V+C1PJ0uMkIwQvVb3iI5OKfrsFjEKY05G3ozuGHm
+ /udmJ1I0Bn9IBjHltfPQ9pjH4jAYFDt2Ke3yyijE0XGbJISpXYRaxk1XfFqipshjx9EdYQEv58q
+ JlM0og9FcBhYJqh2cKMzK6fqFPux4DExeDf6J
+X-Gm-Gg: ASbGncvAUTjKpgyIzJpit0YV4uZvJ7bjNhvFurfWfXh1ZEEGjaMs345xA/EKmQZqpvX
+ 90UKqk2YXYBYCNdRrhGEdXj7rqx2aibs9xhPIUeJ29zhdFQtl9Fb333HyOXgqLBJM/C0NDz4QCQ
+ ejyyTP6CInQZLFLmb6PRZmKJUWLIxVlx9UC1KIsWCQrUgzr0P7U0Ftp5bOTL1D40CjxpVK+b6Wv
+ 6IGV4gOMYcoNDNAOSkx7Ux7n3dnpqdJdig7ht0a04x0odd7JOvHLVyBIsrr1hLPggq/zl14og==
+X-Google-Smtp-Source: AGHT+IHJog1gWGWyhXIXdhzyVY1wNbvWjXqixh5iWiaBLlq/9E/fvVHhPyAvVUiCQ+M8f3ufdv1VPb/0XN9B+9077+o=
+X-Received: by 2002:a05:6512:1593:b0:593:d69:ea07 with SMTP id
+ 2adb3069b0e04-5941d565de4mr660315e87.57.1761875504223; Thu, 30 Oct 2025
+ 18:51:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251013105507.35881-1-francesco@dolcini.it>
-In-Reply-To: <20251013105507.35881-1-francesco@dolcini.it>
+References: <20251030141440.250629-1-festevam@gmail.com>
+In-Reply-To: <20251030141440.250629-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 30 Oct 2025 22:51:10 -0300
-X-Gm-Features: AWmQ_bnNl4f2KkQpTxdYARcsqUj72DaIM1y9jAeRWtrLN6cDzUviDZLZfpwPIQM
-Message-ID: <CAOMZO5BDwXe-N4XY+dJ91Z7QbFyOCcHLUGxrf5ZgPptJ0R3bcQ@mail.gmail.com>
-Subject: Re: [PATCH v1] board: toradex: fix aquila imx95 0098 pid4
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Thu, 30 Oct 2025 22:51:32 -0300
+X-Gm-Features: AWmQ_bmcZd7FVId9n6GpCzDXy6288of8nkXHySttDRJcqwFSSu36uj0JD4O5eNQ
+Message-ID: <CAOMZO5BDqv9e1Z99OeF3c5DVgkkvOpDPqgcwNe7ydx521hHoMQ@mail.gmail.com>
+Subject: Re: [PATCH] imx8mp_evk: Fix typo on maintainer's name
+To: peng.fan@nxp.com
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,15 +92,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 13, 2025 at 7:55=E2=80=AFAM Francesco Dolcini <francesco@dolcin=
-i.it> wrote:
+On Thu, Oct 30, 2025 at 11:14=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 >
-> From: Francesco Dolcini <francesco.dolcini@toradex.com>
+> My last name was misspelled. Fix it.
 >
-> The memory size of the 0098 SKU is 8 GB instead of 16 GB.
-> Fix PID4 0098 Aquila iMX95 definition.
->
-> Fixes: 4c9340716522 ("toradex: tdx-cfg-block: add new pid4 support")
-> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> Fixes: ae09edaeec3d2 ("imx8mp_evk: Add myself to MAINTAINERS")
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
 Applied, thanks.
