@@ -4,61 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 294EACCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 18:11:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4E5DCCFA02
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 18:33:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A511483A98;
-	Fri, 31 Oct 2025 19:11:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id E6F1383AAB;
+	Fri, 31 Oct 2025 19:33:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="mew5AV6V";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xdrkxmM+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="FtXU/+sx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 982DA83A9A; Fri, 31 Oct 2025 19:11:12 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id AA8F783AAC; Fri, 31 Oct 2025 19:33:21 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C490B83A97
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 19:11:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84E6E83AA4
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 19:33:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 657F41A17C2
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:11:09 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 28D7860704;
- Fri, 31 Oct 2025 18:11:09 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 6C1A911818007; Fri, 31 Oct 2025 19:11:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761934268; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=gev912YycFPB9k5GGU8nHgsmMJ0+XtZZEDGc/AVZUG0=;
- b=mew5AV6VKIzt6lOQN2dmtdBr7Nbkd4NhGWxHMOyqbwJr+35n9Oblv76HK3cPXameT+8vRO
- HDR9jd2I3FF80xwHRlAc/pNOLbL5aFF9QcZX03BWtDVllvoTgvYTyq8Mqq+4/e1r5lXyTJ
- OZyTNdZY3gZN4BkqMmFo5EWIVE7CjeaEwbk447l+eVPQRMkd4N1PlDL4v+vkp7zDCyiBiC
- l/9Qc8Vv4pd9G8Bg0TwRNd0SjVQt4w10qCywIUGeC+WqIFq9Y9IVG//fWBP/C4wqt5weuJ
- x4lfKttsqA3BzJjWJ2F9rfuDjunQujGAe6cZelUz5gbMLCTnMAccnxkww1kt8Q==
-Date: Fri, 31 Oct 2025 19:11:04 +0100
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- "Bajjuri, Praneeth" <praneeth@ti.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 0/2] Add support for customizable find_distro_rootpart
-Message-ID: <20251031191104.797c6b4e@kmaincent-XPS-13-7390>
-In-Reply-To: <20251031174733.GE6688@bill-the-cat>
-References: <20251031-feature_distro_rootpart-v1-0-4e7c465708e8@bootlin.com>
- <20251031174733.GE6688@bill-the-cat>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cyqNv1wygz9t2M;
+ Fri, 31 Oct 2025 19:33:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761935599;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2nOFe0uxr5ZGDNuAWxcFC3mfhQJv4gJ90QdoVP6Pfxc=;
+ b=xdrkxmM+XsQqJDbQ5OabC4MbdIFbKKTdos61rl1v1A/DWerB/f1AQiEIkVi2dN4pTVGl2p
+ btzoxyz4dUIIAXUSsEaxwQvDd30KAhB8txgTDcgvTsW9rwAVV5OCm6dGbfZmVoNBmcCWXX
+ ZqiAXInS9Fp2hGwChf3YJDT+KMVuH6uHA2RGDJYty7YFuxHKZdK7jtRVYacprrcUeCHqmw
+ d2v6bGmfhwg42vIBgGuontLEHPYbovmkhzcJr685GiJ4bXLqDFPdEmma7YS6tBLkOuISYi
+ XrpG8thXQ96Dgjy7OgTRdOcpxbEBmnN9b0EXGOprtV0H5s8KCg8+nD8dTRAjkg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="FtXU/+sx";
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <304efeca-2529-4241-a9fe-7f305f8b430c@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761935597;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2nOFe0uxr5ZGDNuAWxcFC3mfhQJv4gJ90QdoVP6Pfxc=;
+ b=FtXU/+sxdioZ5ykg39x9pXuEwMCipXeX+ztmn9jCR2lzFrKuPM4ZBdQ6i54uceuIansIXx
+ cyYXqM9ro84o2LBfxS3PwlU2wFm4aJJlizYOSHNljSkZsg0zktRWe55tSemkWP+dskToS9
+ Tqnf12YCdZCGL2XjH93dg8FtS7/T+LVAj0ARKmCu5JBaGAwRHd+lWDELShxJU0O9cHYJMO
+ RB1puLSTAgXAbgKDyd5/BCHZDiliax7rlzl/Cyos50F8hd2hNqPI4Io/dI0NOR7n25glyM
+ NKmDV51KYpt3GCFSXAnH6syrzZ+U/OKDhp1vtfhcj29Y4JDMUK8Q/lUDFYyr0g==
+Date: Fri, 31 Oct 2025 19:33:13 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Subject: Re: [PATCH v4 1/5] net: phy: aquantia: refresh format
+To: Beiyan Yun <root@infi.wang>
+Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
+ <trini@konsulko.com>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Siddharth Vadapalli <s-vadapalli@ti.com>
+References: <20251031152348.60571-1-root@infi.wang>
+ <20251031152348.60571-2-root@infi.wang>
+ <ac552ba3-832c-4cfb-aa39-c80949df7900@mailbox.org>
+ <C2649793-C878-4906-BDF4-0410DA9F12A2@infi.wang>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <C2649793-C878-4906-BDF4-0410DA9F12A2@infi.wang>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: tbqqmuiugmj3kw8nzgyoue199chz16c6
+X-MBO-RS-ID: b3cd3e6686113ce09a2
+X-Rspamd-Queue-Id: 4cyqNv1wygz9t2M
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,35 +100,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 31 Oct 2025 11:47:33 -0600
-Tom Rini <trini@konsulko.com> wrote:
-
-> On Fri, Oct 31, 2025 at 05:36:02PM +0100, Kory Maincent (TI.com) wrote:
->=20
-> > Add a customizable find_distro_rootpart command to allow each board to
-> > define its own logic for locating the rootfs partition inside the
-> > config_distro_bootcmd logic.
-> >=20
-> > Convert am335x_evm board to this new find_distro_rootpart customizable
-> > environment variable to locate the rootfs partition dynamically, instead
-> > of finduuid which hardcodes the rootfs partition location (mmc 0:2).
-> >=20
-> > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
-> > ---
-> > Kory Maincent (TI.com) (2):
-> >       distro_bootcmd: Add support for customizable find_distro_rootpart
-> >       include: configs: am335x_evm: Replace findduid with
-> > find_distro_rootpart =20
->=20
-> The first question here is, can we migrate these to standard boot
-> instead, or is that kind of functionality also missing there?
-
-I will let Simon confirm but I don't see anything related to the rootfs
-partition or parameters that could be used by the "root=3D" Linux cmdline o=
-ption.
-
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+On 10/31/25 6:21 PM, Beiyan Yun wrote:
+> 
+> 
+>> On 31 Oct 2025, at 11:51 PM, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>
+>> On 10/31/25 4:21 PM, Beiyan Yun wrote:
+>>> Refresh format using clang-format.
+>>> Signed-off-by: Beiyan Yun <root@infi.wang>
+>>> ---
+>>> Changes in v4:
+>>> - New
+>>>   drivers/net/phy/aquantia.c | 159 +++++++++++++++++--------------------
+>>>   1 file changed, 75 insertions(+), 84 deletions(-)
+>>> diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
+>>> index 903fcd667f6..439c4c48bdc 100644
+>>> --- a/drivers/net/phy/aquantia.c
+>>> +++ b/drivers/net/phy/aquantia.c
+>>> @@ -18,28 +18,28 @@
+>>>   #include <asm/byteorder.h>
+>>>   #include <fs.h>
+>>>   -#define AQUNTIA_10G_CTL		0x20
+>>> -#define AQUNTIA_VENDOR_P1	0xc400
+>>> +#define AQUNTIA_10G_CTL 0x20
+>>> +#define AQUNTIA_VENDOR_P1 0xc400
+>>>   -#define AQUNTIA_SPEED_LSB_MASK	0x2000
+>>> -#define AQUNTIA_SPEED_MSB_MASK	0x40
+>>> +#define AQUNTIA_SPEED_LSB_MASK 0x2000
+>>> +#define AQUNTIA_SPEED_MSB_MASK 0x40
+>> #define<space>MACRO<tab>0xvalue
+>>
+>> is perfectly fine format.
+> 
+> Agree, until clang-format has become the default.
+This change makes readability worse, no matter what formatting tool is 
+the current recommendation.
