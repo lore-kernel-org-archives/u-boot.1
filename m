@@ -4,60 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3545FCCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 16:27:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91A4BCCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 16:35:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F62383A07;
-	Fri, 31 Oct 2025 17:27:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 02C5283A2F;
+	Fri, 31 Oct 2025 17:35:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WJ0phqSC";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="Eh2+v+3b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00FAF83A13; Fri, 31 Oct 2025 17:27:11 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 9B35C83A2F; Fri, 31 Oct 2025 17:35:00 +0100 (CET)
+Received: from outbound.pv.icloud.com
+ (p-west1-cluster5-host3-snip4-10.eps.apple.com [57.103.66.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9617839CA
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 17:27:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 3C81383A1B
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 17:34:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C715C60239;
- Fri, 31 Oct 2025 16:27:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E9BDC4CEE7;
- Fri, 31 Oct 2025 16:27:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761928027;
- bh=rxcivZCf35YpKRJ+MNkGuJNY5T6j1g4CNI3KC/ZSzak=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=WJ0phqSCke97YDG132ZsUTtj+TKM5P8dNKt11k14+0yXhnScKh+B977YzurmiMeKd
- KLxZ4q25Nd0GjPzUpkE/lpBfMkOvlajTFlpto1rIIUWe+dh3WtVHoveKI4YCznDI9u
- Dhf+wtkywIhi99DsyixJ7bFaEALP/c85c0edtqehMqKnJpp4tHk1tH/s83vUePuL3I
- U3ztVhfZyeGzpZ6D1b/iZVeO4Z2LY4B7s8ykGHXkfR89CWCcZHt3ohD6zUq9x7BNQM
- t+lJkwINAXYw4TlxkogFS+uwhVfIFO4RfGjb1oLE3XMa/VS84TujlrnsjSIWNgU1k/
- k+gsWbeMRX01Q==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, Tom Rini
- <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Julien Masson <jmasson@baylibre.com>, Guillaume La Roque
- <glaroque@baylibre.com>, u-boot@lists.denx.de, Simon Glass
- <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>,
- Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- Maxime Fournier <mfournier@baylibre.com>
-Subject: Re: [PATCH v2 5/5] test: abootimg: Add test for bootconfig handling
-In-Reply-To: <20251017-bootconfig-v2-5-8c7c2f2e5474@baylibre.com>
-References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
- <20251017-bootconfig-v2-5-8c7c2f2e5474@baylibre.com>
-Date: Fri, 31 Oct 2025 17:27:03 +0100
-Message-ID: <877bwb5960.fsf@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain
+ dmarc=none (p=none dis=none) header.from=infi.wang
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
+Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-west-1a-20-percent-2 (Postfix) with ESMTPS id
+ 9889718013E1; Fri, 31 Oct 2025 16:34:55 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
+ bh=zivya74la+qS6JqDpePwdKR5KP6Mbd9NymMeTOlGBLA=;
+ h=From:Message-Id:Content-Type:Mime-Version:Subject:Date:To:x-icloud-hme;
+ b=Eh2+v+3bEuCaBA7aWbIGHF4w4bF6LKWQVOePGXDWAfKDdRK2u6t+2ISHVXRWqTxPxxLkov9RuyxmXk6OKNwsG0bkYuUheSbCaMeGU0uW5j3CKgnOTtRyldf3W12BOFeO4YvAE8ibRl2ys2oOtzOL6HINcH2++pv+y6F6aGx9r9yvA4OZIDYwsY92pCiNFF/tAgPkGOMblLJd6C5y7Bsf0bclHmrXlQjAEHyXkYeYWPvoJAcUsR6re9EH8GN3zr/d7P1ssbY3r+UHVBNZIA9A0nzQUXy0MN0alnhBhm14vc9cFJk5/os7fd0PyilboQ694RBiNBPeHu6QpTgCl8NTYw==
+mail-alias-created-date: 1549370554000
+Received: from smtpclient.apple (unknown [17.56.9.36])
+ by p00-icloudmta-asmtp-us-west-1a-20-percent-2 (Postfix) with ESMTPSA id
+ CD5BA180017C; Fri, 31 Oct 2025 16:34:52 +0000 (UTC)
+From: Beiyan Yun <root@infi.wang>
+Message-Id: <FEAA3555-3109-41E7-A58F-5B601B6C2FB5@infi.wang>
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
+Subject: Re: [PATCH v4 5/5] net: phy: aquantia: use generic firmware loader
+Date: Sat, 1 Nov 2025 00:34:40 +0800
+In-Reply-To: <9942f1d3-669e-48a6-923a-c2607eafdd02@mailbox.org>
+Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Weijie Gao <weijie.gao@mediatek.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+References: <20251031152348.60571-1-root@infi.wang>
+ <20251031152348.60571-6-root@infi.wang>
+ <9942f1d3-669e-48a6-923a-c2607eafdd02@mailbox.org>
+X-Mailer: Apple Mail (2.3826.700.81)
+X-Proofpoint-GUID: _E1e_5WxstnXIKIjcW-poPrj4HD7yrIX
+X-Proofpoint-ORIG-GUID: _E1e_5WxstnXIKIjcW-poPrj4HD7yrIX
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDE0OSBTYWx0ZWRfX80+CMXklpqjo
+ IUw3bU93rrLXPX+fNL54eBj8OtlDiB/p281LmVhqUOWfLvysa36yHviZQYqz+YBc2arHfkCxofN
+ rq53fLfMNx9OXxo00y1WpkOvaAhBXd99xfBPaCiULIkw2pY44jNHUHo05Gfp8d/jJoyGqLTiLPg
+ UDMNuTi2ij8K5W2j+GP5TQGebiHdQEsUY+2JmiyXThnIQxZ/F9V6GrbhLANdJ1IyFy2lvI8jxmv
+ bLcD5+WRkiogKjMxJnRqdW6e2L3DyExQ5vtpLNUCuDr1HpoOXQ8Fls86EsfTrQWB5Bz5V39vY=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-10-31_05,2025-10-29_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ malwarescore=0 clxscore=1030 adultscore=0 mlxscore=0 spamscore=0
+ suspectscore=0 mlxlogscore=999 bulkscore=0 classifier=spam adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2506270000 definitions=main-2510310149
+X-JNJ: AAAAAAABeSW5ig6poj1dBQrwj9zMfU6fyqB1dwXCS0ZFUwX+lK9Ht0xwAnHlaeF1tGRUQpTxvcASldJnakkeKM5ypTYBT9l9QQyzAMsIAI+wNBusX7+tlXCUL50lRvfM1h3YqnR1qJ68n6yv5mMjWxXdn0Z6zLB2cPbQGmcYZhq+BW1OzknpXGiC/0rh3jh+xUhLYeY73GDzX/u1vZ69b9Yet/Cqk5SBB/eGegswx/e0t4aGzWIrvZH+OSNVQ/B4wq3aXCHLfQPBayNaY8eXBmu3gSbhmxzbMgKKfiEXqRUeo+FntpLgGCSk/xpddDpKspRSWk3mAStW5dlynVfdzMctgwbOZ3VU8i9EzFW1+kFUqmOq0rfJRJNpj5k2VVBSbjxgYWQ4KRt1igYXOzlyrgCGHyw5KG3vwyoksgfvcewEeZjx0rRtr79RVaT0rAxTD8kIGaRbe3k133NAPyCCWOlYXetYiI4MAKfvP14Gj8+93D2PJflcgknedQWWW6XF1eV9O+0hJRu9SMzsAhKGtF/d7arN+IUQD4JPMIKk99UL38+2+Ak+F3LyB1kMgT+9bVPRNCDQX1DNRvSUdhRgmbxStTzo0brHVbOdffWScEH1pS+Obu32NZVHuRuWB4ABzTsln4GTzPmaW0JPnzuLrVFsFUcGljCg1z+U11zcSVbnI1n3vNxqa3MPuzXSzUdi1Hn+U5tQE3t+m441yKjniFiSV1IQ51hexaeoP/+0rSFUFBebPkdmUHyWj7x9IF56leN3KiUAQBt8GqmeWtTYbKyJafiAL9p751pUKdinZ3sWOMEI60g=
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,177 +91,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Guillaume,
-
-Thank you for the patch.
-
-On Fri, Oct 17, 2025 at 15:19, "Guillaume La Roque (TI.com)" <glaroque@baylibre.com> wrote:
-
-> Add test to verify that androidboot.* parameters are correctly extracted
-> from bootargs and appended to the bootconfig section when using
-> 'abootimg get ramdisk' with boot image v4 and vendor_boot image.
->
-> The test verifies:
-> - androidboot.* parameters are removed from bootargs
-> - They are appended to the bootconfig section in the ramdisk
-> - Non-androidboot parameters remain in bootargs
-> - The bootconfig trailer is properly updated
->
-> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
-> ---
->  test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++++++++++++---
->  1 file changed, 99 insertions(+), 9 deletions(-)
->
-> diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
-> index 2aadb692b30..bd5fb992a7d 100644
-> --- a/test/py/tests/test_android/test_abootimg.py
-> +++ b/test/py/tests/test_android/test_abootimg.py
-> @@ -69,15 +69,33 @@ e5bddc8a7b792d8e8788c896ce9b88d32ebe6c971e7ddd3543cae734cd01
->  c0ffc84c0000b0766d1a87d4e5afeadd3dab7a6f10000000f84163d5d7cd
->  d43a000000000000000060c53e7544995700400000"""
->  
-> -# vendor boot image v4 hex dump
-> -vboot_img_hex = """1f8b0808baaecd63020376626f6f742e696d6700edd8310b824018c6f1b3
-> -222a08f41b3436b4280dcdd19c11d16ee9109d18d59042d047ec8b04cd0d
-> -d19d5a4345534bf6ffc173ef29272f38e93b1d0ec67dd79d548462aa1cd2
-> -d5d20b0000f8438678f90c18d584b8a4bbb3a557991ecb2a0000f80d6b2f
-> -f4179b656be5c532f2fc066f040000000080e23936af2755f62a3d918df1
-> -db2a7ab67f9ffdeb7df7cda3465ecb79c4ce7e5c577562bb9364b74449a5
-> -1e467e20c53c0a57de763193c1779b3b4fcd9d4ee27c6a0e00000000c0ff
-> -309ffea7010000000040f1dc004129855400400000"""
-> +# vendor boot image v4 hex dump (contains initial bootconfig: androidboot.hardware=test)
-> +vboot_img_hex = """1f8b08000000000002ffeddb316a02411806d009a49040606d3d84374823a9a348b095
-> +915951b2c9caee8690ce237a91406a0b497603e215dcbc577cf3334cf5350303b3787a
-> +9c4fa6d3e7dbf02b6b63dfc6b01b0180ffe726644d5e37975bb34108c76efa1eb65974
-> +c7fed691c600e02a64e7ab3e8494afe37bd128050000007ae6707ffad202000000f45b
-> +155fd3b67e59eee26751c674a711000000e89ff896aa729b5665d98c37b14a1fb1ca1f
-> +da4f7f5e02000000a0377e0040ab5ba000500000"""
-> +
-> +# bootable boot image v4 hex dump (contains actual bootable kernel)
-> +boot_bootable_img_hex = """1f8b08081663ee6802ff626f6f745f626f6f7461626c655f76342e696d67
-> +00edd1c14ac3401485e159b80a083ec24dba4f117c81d8140c6dad24ee25
-> +4da6e9d07452321305dfca37d4d4ec5cb954fe6f37ccb967606ef298e6db
-> +2c0d3f94526feae25adda81fae140000000000f8ab66e17c67ecdc1d025d
-> +1d3a89125bf79da9e5beebbc64a7b2d1f27a27cfda7959e9deea369a8263
-> +a0eaecde34e2c75b375495766e3fb46114cca430a7a12dbd96e3654a7663
-> +dfb9f4feeb383514beecbdb1cd1489e3380a5cabf5596ea7c4f78b62acf1
-> +a66ccdbbaea380950100000000f06b79b249b362f5f2b44e16cb87ed3a5d
-> +e67c0a0000000000ffcc27ba944c7e00300000"""
-> +
-> +# bootable vendor boot image v4 hex dump (contains actual bootable ramdisk)
-> +vendor_boot_bootable_img_hex = """1f8b08081663ee6802ff76656e646f725f626f6f745f626f6f7461626c65
-> +5f76342e696d6700edd8b10a02310cc6f10c0e7220f8080737b8b93ab9a8
-> +282e571171959e0d787058a84557f5c96ddd7d80c3ff0f92217c5396408e
-> +f56abf30e63090649c9b3c53bd050000fcab57d45b3c35de47db749a06bb
-> +e1eff08c7d0100d00bf6ea826f5dbef0d38b0dee618396f3f27bf69ddedb
-> +b316558a4d462255fe132c4dbdde6e0a160700000000408f7c0027597569
-> +00200000"""
->  
->  # Expected response for "abootimg dtb_dump" command
->  dtb_dump_resp="""## DTB area contents (concat format):
-> @@ -179,6 +197,24 @@ def abootimgv4_disk_image_boot(ubman):
->          gtdi3 = AbootimgTestDiskImage(ubman, 'bootv4.img', boot_img_hex)
->      return gtdi3
->  
-> +gtdi4 = None
-> +@pytest.fixture(scope='function')
-> +def abootimgv4_bootable_disk_image_boot(ubman):
-> +    """pytest fixture to provide bootable boot image v4."""
-> +    global gtdi4
-> +    if not gtdi4:
-> +        gtdi4 = AbootimgTestDiskImage(ubman, 'boot_bootable_v4.img', boot_bootable_img_hex)
-> +    return gtdi4
-> +
-> +gtdi5 = None
-> +@pytest.fixture(scope='function')
-> +def abootimgv4_bootable_disk_image_vboot(ubman):
-> +    """pytest fixture to provide bootable vendor boot image v4."""
-> +    global gtdi5
-> +    if not gtdi5:
-> +        gtdi5 = AbootimgTestDiskImage(ubman, 'vendor_boot_bootable_v4.img', vendor_boot_bootable_img_hex)
-> +    return gtdi5
-> +
->  @pytest.mark.boardspec('sandbox')
->  @pytest.mark.buildconfigspec('android_boot_image')
->  @pytest.mark.buildconfigspec('cmd_abootimg')
-> @@ -266,3 +302,57 @@ def test_abootimgv4(abootimgv4_disk_image_vboot, abootimgv4_disk_image_boot, ubm
->      ubman.run_command('fdt get value v / model')
->      response = ubman.run_command('env print v')
->      assert response == 'v=x2'
-> +
-> +@pytest.mark.boardspec('sandbox')
-> +@pytest.mark.buildconfigspec('android_boot_image')
-> +@pytest.mark.buildconfigspec('cmd_abootimg')
-> +@pytest.mark.requiredtool('xxd')
-> +@pytest.mark.requiredtool('gunzip')
-
-We use the md command below so I think you should also add something in
-the line of
-
-    @pytest.mark.buildconfigspec('cmd_md')
-
-Note: I have not tested this.
-
-> +def test_abootimg_bootconfig(abootimgv4_disk_image_vboot,
-> +                              abootimgv4_disk_image_boot,
-> +                              ubman):
-
-Nit: this seems weirdly indented. Should be:
-
-+def test_abootimg_bootconfig(abootimgv4_disk_image_vboot,
-+                             abootimgv4_disk_image_boot,
-+                             ubman):
 
 
-> +    """Test bootconfig handling with boot image v4.
-> +
-> +    Verifies that androidboot.* parameters from bootargs are appended to the
-> +    bootconfig section in vendor_boot image in memory, and that non-androidboot
-> +    parameters remain in bootargs.
-> +    """
-> +
-> +    # Setup addresses
-> +    ram_base = utils.find_ram_base(ubman)
-> +    ramdisk_addr_r = ram_base + 0x4000000
-> +    ubman.run_command('setenv ramdisk_addr_r 0x%x' % ramdisk_addr_r)
-> +    ubman.run_command('setenv loadaddr 0x%x' % loadaddr)
-> +    ubman.run_command('setenv vloadaddr 0x%x' % vloadaddr)
-> +
-> +    # Set bootargs with androidboot.* parameters
-> +    ubman.run_command('setenv bootargs "androidboot.serialno=ABC123 androidboot.mode=recovery console=ttyS0"')
-> +
-> +    # Load images
-> +    ubman.run_command('host load hostfs - 0x%x %s' % (vloadaddr,
-> +        abootimgv4_disk_image_vboot.path))
-> +    ubman.run_command('host load hostfs - 0x%x %s' % (loadaddr,
-> +        abootimgv4_disk_image_boot.path))
-> +    ubman.run_command('abootimg addr 0x%x 0x%x' % (loadaddr, vloadaddr))
-> +
-> +    # Extract ramdisk (triggers bootconfig append)
-> +    ubman.run_command('abootimg get ramdisk ramdisk_addr ramdisk_size')
-> +
-> +    # Get ramdisk address
-> +    response = ubman.run_command('env print ramdisk_addr')
-> +    ramdisk_start = int(response.split('=')[1], 16)
-> +
-> +    # Verify androidboot.* parameters were removed from bootargs
-> +    response = ubman.run_command('env print bootargs')
-> +    assert 'androidboot.' not in response
-> +    assert 'console=ttyS0' in response
-> +
-> +    # Get ramdisk size and verify BOOTCONFIG magic at the end
-> +    response = ubman.run_command('env print ramdisk_size')
-> +    ramdisk_size = int(response.split('=')[1], 16)
-> +
-> +    # Dump the end of the ramdisk where BOOTCONFIG trailer should be
-> +    response = ubman.run_command('md.b 0x%x 96' % (ramdisk_start))
-> +
-> +    # Verify BOOTCONFIG magic is present
-> +    assert 'BOOTCONFIG' in response or 'BOOTCON' in response
+> On 31 Oct 2025, at 11:57=E2=80=AFPM, Marek Vasut =
+<marek.vasut@mailbox.org> wrote:
+>=20
+> On 10/31/25 4:21 PM, Beiyan Yun wrote:
+>> Aquantia PHYs are being used w/o SPI flash in some routers recently.
+>> Current firmware loader only attempts to load from FS on top of MMC,
+>> limiting the use on many devices.
+>> Removed the old firmware loader, migrate to generic firmware loader =
+to
+>> allow a wider range and runtime override of firmware source. (e.g., =
+USB).
+>> Tested on Buffalo WXR18000BE10P with UBIFS.
+>> Signed-off-by: Beiyan Yun <root@infi.wang>
+>> ---
+>> Changes in v4:
+>> - Split firmware upload helpers change
+>> - Reorder `aquantia_read_fw`
+>> - Make `aquantia_read_fw` weak to allow overide
+>> - Rename exit label in `aquantia_read_fw`
+>> - Kconfig polish
+>> Changes in v3:
+>> - Select FW_LOADER with PHY_AQUANTIA_UPLOAD_FW
+>> Changes in v2:
+>> - Add support for script based loader
+>>  drivers/net/phy/Kconfig    |  28 +++++----
+>>  drivers/net/phy/aquantia.c | 122 =
+++++++++++++++++++++++---------------
+>>  2 files changed, 91 insertions(+), 59 deletions(-)
+>> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+>> index 018be98705a..4a74a0d4e8c 100644
+>> --- a/drivers/net/phy/Kconfig
+>> +++ b/drivers/net/phy/Kconfig
+>> @@ -1,4 +1,3 @@
+>> -
+>>  config BITBANGMII
+>>  	bool "Bit-banged ethernet MII management channel support"
+>>  @@ -91,23 +90,30 @@ menuconfig PHY_AQUANTIA
+>>  config PHY_AQUANTIA_UPLOAD_FW
+>>  	bool "Aquantia firmware loading support"
+>>  	depends on PHY_AQUANTIA
+>> +	select FS_LOADER
+>> +	select FW_LOADER
+> Can you not use the plain FW_LOADER to load the firmware from either =
+storage, UBI or Block ? Is FS_LOADER even needed ?
 
-Can we explain why it's either BOOTCONFIG or BOOTCON? why would the
-magic be truncated ?
+Thanks for the suggestion, and yes you can, but that API is =
+script-only=E2=80=94it expects the board to stage the blob and just =
+copies from the address exposed via *_addr/_size. The current users of =
+this driver expect the old pattern: the bootloader mounts a filesystem =
+(MMC before, now possibly UBI/USB/etc.), reads the firmware, and applies =
+it. Keeping an fs-loader node in the DT is effectively the same contract =
+as the legacy MMC setup, just generalized.
 
->
-> -- 
-> 2.34.1
+The fs_loader driver gives us several things the script path doesn=E2=80=99=
+t: a standard way to describe the storage via "/chosen/firmware-loader", =
+runtime overrides through "storage_interface/fw_dev_part/fw_ubi_*, and =
+no requirement for a board-specific script. So FS_LOADER isn=E2=80=99t =
+redundant=E2=80=94it=E2=80=99s the part that replaces the hard-coded MMC =
+flow with a configurable backend, while the script helper stays =
+available for boards that want extra logic.
+
