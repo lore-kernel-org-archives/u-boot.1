@@ -4,166 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE3DCCFA00
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 16:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3545FCCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 16:27:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36682839D7;
-	Fri, 31 Oct 2025 17:18:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7F62383A07;
+	Fri, 31 Oct 2025 17:27:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="T4os9VA5";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WJ0phqSC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10F14839FA; Fri, 31 Oct 2025 17:18:04 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazhn150120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d900::1])
+ id 00FAF83A13; Fri, 31 Oct 2025 17:27:11 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64B8D839B1
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 17:18:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9617839CA
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 17:27:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=maPuRzeDCl388aIr/Ulj97nvLwZZ6qyLCTV6Hm0yscn5oK2QNlrsh/IqQpSEMRg/qFIOKs81XAdyo+jhHyg+QAPZskAS56BJ4xJdG6vacDM/M6Q6Dt17IOEXhsIV98byPi8ScZX5A8k9uEmw0WhAOZBN1HLkwZL3F2u0tisktgyLlBuXOUzn+eSyWX2W2QlwxNyLzsZiRs0CwZ6udukORCklhEzkVMX/gco81GksFpt5Ao8YKRQ2Z422+FtNGwFXtFZdxn7wM4r5SGftQPWLgp7zILmfwlBw+Ad74nANI+dhGT2eR0eUdawGSK05XaHsUHmdoFHyMnhqQDnk9xOv+Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fnwpk491EubRPjvk5e7t/300EXkXlRt220xmaomUGrI=;
- b=n55X3Kss6Dq2TlG1Jbc5Je3mzjbKF+TfgmbY72iljUfGJBeroXg3rqTBQSxDvcf21uQg7mHEapWDFEOqSbO6GtP/HU9QW6zPKebyEDxekraWWCS+Noj6wAf5W3OYAN+6wrOctKkNn8neMLmGNimQVPcsVAOepsWsq1JHe9zhnmzgb+VFxfXGKn3igybvUG5XwKGMjfyiB0TAHLQfsfu1kPn3ts7ZTjCfXQMyq6PvWvc3GE2MBxQGWlMWk5quTMUnp1s/w86Ag2M1yFg97cy69Pk2DtamRCwX8QUxJtoHisbpOxq5jSlXvoCz84URRUowzjivZol6AMwAQ9EdOoj6jQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=gmail.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fnwpk491EubRPjvk5e7t/300EXkXlRt220xmaomUGrI=;
- b=T4os9VA5d5XWEbgi+ANKju0tPLdGxvT9CjmPFBsu1U2QdRZvciYHjhk0xGePpcXiOs1nJUtl3Td61SATDa/GErf0XN0EBcPs4eyatYwLrDTWPCqi1dOYb3Ug4LN91ySoJ/QzbTI5uQryqkwgsfUtq+f+rhKro6PRMapKkeqC4EQ=
-Received: from MN0PR02CA0016.namprd02.prod.outlook.com (2603:10b6:208:530::14)
- by SN7PR10MB6619.namprd10.prod.outlook.com (2603:10b6:806:2ae::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.13; Fri, 31 Oct
- 2025 16:17:55 +0000
-Received: from MN1PEPF0000ECD9.namprd02.prod.outlook.com
- (2603:10b6:208:530:cafe::ba) by MN0PR02CA0016.outlook.office365.com
- (2603:10b6:208:530::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Fri,
- 31 Oct 2025 16:17:50 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- MN1PEPF0000ECD9.mail.protection.outlook.com (10.167.242.138) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 16:17:53 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 11:17:36 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 11:17:36 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 31 Oct 2025 11:17:36 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59VGHZKt4186149;
- Fri, 31 Oct 2025 11:17:35 -0500
-From: Anshul Dalal <anshuld@ti.com>
-Date: Fri, 31 Oct 2025 21:47:31 +0530
-Subject: [PATCH] arm: armv8: mmu: fix mem_map_from_dram_banks
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id C715C60239;
+ Fri, 31 Oct 2025 16:27:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E9BDC4CEE7;
+ Fri, 31 Oct 2025 16:27:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1761928027;
+ bh=rxcivZCf35YpKRJ+MNkGuJNY5T6j1g4CNI3KC/ZSzak=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=WJ0phqSCke97YDG132ZsUTtj+TKM5P8dNKt11k14+0yXhnScKh+B977YzurmiMeKd
+ KLxZ4q25Nd0GjPzUpkE/lpBfMkOvlajTFlpto1rIIUWe+dh3WtVHoveKI4YCznDI9u
+ Dhf+wtkywIhi99DsyixJ7bFaEALP/c85c0edtqehMqKnJpp4tHk1tH/s83vUePuL3I
+ U3ztVhfZyeGzpZ6D1b/iZVeO4Z2LY4B7s8ykGHXkfR89CWCcZHt3ohD6zUq9x7BNQM
+ t+lJkwINAXYw4TlxkogFS+uwhVfIFO4RfGjb1oLE3XMa/VS84TujlrnsjSIWNgU1k/
+ k+gsWbeMRX01Q==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, Tom Rini
+ <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Julien Masson <jmasson@baylibre.com>, Guillaume La Roque
+ <glaroque@baylibre.com>, u-boot@lists.denx.de, Simon Glass
+ <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>,
+ Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Maxime Fournier <mfournier@baylibre.com>
+Subject: Re: [PATCH v2 5/5] test: abootimg: Add test for bootconfig handling
+In-Reply-To: <20251017-bootconfig-v2-5-8c7c2f2e5474@baylibre.com>
+References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
+ <20251017-bootconfig-v2-5-8c7c2f2e5474@baylibre.com>
+Date: Fri, 31 Oct 2025 17:27:03 +0100
+Message-ID: <877bwb5960.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20251031-k3_fix_mmu-v1-1-3f3cb6f8b3dd@ti.com>
-X-B4-Tracking: v=1; b=H4sIABrhBGkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDA2ND3Wzj+LTMivjc3FLdpBQzI0sLi1QglaIE1FBQlAqUAhsWHVtbCwC
- gvA3wXAAAAA==
-X-Change-ID: 20251031-k3_fix_mmu-bd62988ed62d
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Dhruva Gole <d-gole@ti.com>, Casey Connolly
- <casey.connolly@linaro.org>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Neha Malcom Francis
- <n-francis@ti.com>, Beleswar Padhi <b-padhi@ti.com>, Moteen Shah
- <m-shah@ti.com>, Chintan Vankar <c-vankar@ti.com>, Wadim Egorov
- <w.egorov@phytec.de>, Bryan Brattlof <bb@ti.com>, Francesco Dolcini
- <francesco@dolcini.it>, Emanuele Ghidoli <ghidoliemanuele@gmail.com>, "Anshul
- Dalal" <anshuld@ti.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761927454; l=1974;
- i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=Mf4JUW92EVtxKTWXigZB/tkVpWfIfIiUZAPKWJxKxAs=;
- b=gEYvw84BvDNkSufP3ucMZWGWc/3vV9OfNR6RtTQNTwwMcFcBkAIboUOZUriHVIPJWpOIbi168
- UpqlxQxI8fvAlJsJtburmO1hGr2B3kaNKnboXUrpTIpUd3SGsa6zzkt
-X-Developer-Key: i=anshuld@ti.com; a=ed25519;
- pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD9:EE_|SN7PR10MB6619:EE_
-X-MS-Office365-Filtering-Correlation-Id: e7dd5711-e7e3-401e-7f08-08de18990bc2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|34020700016|376014|82310400026|12100799066;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Qkx2ZnF4anFRZ0krVTliV0tkZmordWxhQlYrR0w4ZkVxSGRTNWtJVFRmQVFq?=
- =?utf-8?B?dlBaaFJ3NlZLcVQ0Q3ZGZGwyckJXM3FnOEljS3dCMnFoRkVjQXpQQkNFZW8z?=
- =?utf-8?B?cmFqdURueFlUTjNsSGxCSTBsMWgrWFhTZjdqZ0gwcVFVTFpxUGIrM1FQR1Bz?=
- =?utf-8?B?T2wycW9zTG9jSDhvNDNSdGE1ZmhGU2dVRjhCWW54SDFVRkpwYlFkclp3MytV?=
- =?utf-8?B?cHZ4aFk1YVF0c1hmM0dTWnE0NDI4eldJNkNnbitHclZ2UjdRL2RsbExna2wz?=
- =?utf-8?B?QU94anRScmpqNzhKSld2U1hKTEFPYzZyUnJpMEFiRnBYMSswVmloVFI2KzNp?=
- =?utf-8?B?SzltbE9QZ3R4TzBYYmprTU5oU1pXZUE3cmd3N1JkckZTV09zZEdueDhPZjJq?=
- =?utf-8?B?VXRBZFpBMWN5YXBJT2hwZStuQTdLb29ma2piR1BHYmRrZWoraEFyaXhUYUlP?=
- =?utf-8?B?V05Mcmtoc012bU1FU2xBbVZaMWh0R2liUjZtK29Za3FJYzg5eDZIV3pOZWcr?=
- =?utf-8?B?S2Z3dkdZL05qMXpDdVVqRG54cG5LQ0xDOHZGN3ZoV1FqaDJDdlovNTBHVWVt?=
- =?utf-8?B?ZG5xMmZXNzQ2eGVkMVJrZVRlMUp4NkZHRTNIRERuNWFTYkg1eWIrU3FsNGVW?=
- =?utf-8?B?US9vM0ZXQUorUDF2SmdXNXpGaUFHeTlxYlpsd25oT0o0V0xvM3ZndnltVkVK?=
- =?utf-8?B?TVB1U0xuMjlCMDBpRXZPODgwSkNveGpzK3V1VHZ2Z1ZxMnlCdGN4MkwreU1I?=
- =?utf-8?B?Q3QydkdRMlowMlQ2Slo3SldiVkxFNWp0a3RHVS9zajlqY0kxTGtEaG5KQXc4?=
- =?utf-8?B?OHdmb3VleFdzMUk5TUMyd3FKemczbEhlMm9yR3VlenBCSWlKbk1DOVZMYTU3?=
- =?utf-8?B?eGQxT25YVnhBd2lXYVM5c2ZHZW1JTWtvMDB5T1FJL3JLNDArMXp4czFwaVBp?=
- =?utf-8?B?WGNZUGp1K0tXN1VwaWxUbWJxMURPZllaL1pGQTNYWFUvbU5PUUtGbmZmVGM3?=
- =?utf-8?B?ek5kcHg2NUd5dXNpTVI3cHgxdUJpL1h1cHhQOFhSSXpDUzhkOEZRMkszcHRX?=
- =?utf-8?B?akc2QXFvanZoVHllbklPM0w5UFFVSWwzYUR5aGpOK1JoTFlhWlFEb29qbzJh?=
- =?utf-8?B?a0V0bTFmOExBZFM5Sms3L3dzaG5jUmZlcjdFV0NPYTZNLzVFRlI2bXZZdXN6?=
- =?utf-8?B?ck9leTY5TjdkMWo0TkZVTHJLREIwaENYRHlSOVU4WmFWNWQvSVNveDdadEN0?=
- =?utf-8?B?VGRJampxNEtXaVU0RFF3dlBXdVpUT0NDZmNBZ0Zod2xuRVo2TGhDNG5XbmlR?=
- =?utf-8?B?UkYyVFVLNXdSUGxTcVBkc3FaSUFlQit2UnV2aDBPYTZRN0NlQndvYlRpdEl1?=
- =?utf-8?B?YitxT0hJNDF3NmdicldMY1cwSndlOXBvZDhVTDlIY0ppRG1wdlJROXlCRUxZ?=
- =?utf-8?B?dGdDRSt2S2JZN1VuN04ybmRXei81R0xhRGpzMmlTV3dXd00yNnhJQWJPdnE2?=
- =?utf-8?B?aDlXVWoyMXFYMVMrc2dQNXQvRW9oS2tUVXY2emMrMThyRVZJV3hNWXNiVTBy?=
- =?utf-8?B?cXBYNU1JUE9nOWlPMjN6YTVZMEhSK2JSUWkxeTJjMnpGV2RSbmlHSTZubDJh?=
- =?utf-8?B?aXlldU5UeHZoSktVcC8vamhqcUZvSlFIazdXTFpUUU5nTzU0NUwzTmg2Q0Q2?=
- =?utf-8?B?OG5HSm1OY1RwdXE2clZ0ekJYMHlZa2I3TjF0WGFkdDVxTFdZMThqMVlTa3JU?=
- =?utf-8?B?cm83UVY4TnF4RzhYQVJ2SFFDMmRDYWEzdk5kZjllOWJubWIxL1EwTkdFVlZ3?=
- =?utf-8?B?cFhyZHRNS0psWnpyZzJEYW52RUhxaHZBQ0dRL3lIdEltZ1ZueU1JcHN1Vm5V?=
- =?utf-8?B?cmRHdmMySlVZOE8wSFpNblZBdWo0clZoQUJUREZHVzQ2a2x2MmR0Q0xYdEhu?=
- =?utf-8?B?b0ZjYUhvbC9PRzlXQ2ZXYmcrdXJSTEtvQit6aTdURjZ3bmdLUi94Q2lCbHVZ?=
- =?utf-8?B?V0RkczRRYU1SSUpSZElhM1pIWFVibTZLZG9MblpwR3plT2Y2SExPeC9paGZq?=
- =?utf-8?B?L2QzQVJieEZYQlFXc3ZiWlI5SEVKc3plODlWYXg1VkI0a3NzR014ZnRlYmFp?=
- =?utf-8?Q?t5+I=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(34020700016)(376014)(82310400026)(12100799066);
- DIR:OUT; SFP:1501; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 16:17:53.8280 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7dd5711-e7e3-401e-7f08-08de18990bc2
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD9.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR10MB6619
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,58 +74,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-mem_map_from_dram_banks calls fdtdec_setup_memory_banksize to setup the
-dram banks though that is expected to be done by dram_init_banksize as
-part of board_r sequence.
+Hi Guillaume,
 
-This has the side effect of modifying gd->bd->bi_dram as well, therefore
-this patch removes the call and updates spl_enable_cache for K3 to call
-dram_init_banksize.
+Thank you for the patch.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
-Reported-by: Francesco Dolcini <francesco@dolcini.it>
-Closes: https://lore.kernel.org/u-boot/20251027165225.GA71553@francesco-nb/
-Fixes: fe2647f2a0d4 ("arm: armv8: mmu: add mem_map_from_dram_banks")
----
- arch/arm/cpu/armv8/cache_v8.c | 6 ------
- arch/arm/mach-k3/common.c     | 1 +
- 2 files changed, 1 insertion(+), 6 deletions(-)
+On Fri, Oct 17, 2025 at 15:19, "Guillaume La Roque (TI.com)" <glaroque@baylibre.com> wrote:
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 672ec16d4834be501d5bfa343af9537aa9285252..0309da6d3971af6f2a349ce0760507765da9af4f 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -61,12 +61,6 @@ static int get_effective_el(void)
- int mem_map_from_dram_banks(unsigned int index, unsigned int len, u64 attrs)
- {
- 	unsigned int i;
--	int ret = fdtdec_setup_memory_banksize();
--
--	if (ret) {
--		log_err("%s: Failed to setup dram banks\n", __func__);
--		return ret;
--	}
- 
- 	if (index + CONFIG_NR_DRAM_BANKS >= len) {
- 		log_err("%s: Provided mem_map array has insufficient size for DRAM entries\n",
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index 7c06764af8256b7fd27f8e7f208a597b1b91652b..82a31b5178b9b5abdf7eae68cbbd22fe2a86dbee 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -311,6 +311,7 @@ void spl_enable_cache(void)
- 	int ret = 0;
- 
- 	dram_init();
-+	dram_init_banksize();
- 
- 	/* reserve TLB table */
- 	gd->arch.tlb_size = PGTABLE_SIZE;
+> Add test to verify that androidboot.* parameters are correctly extracted
+> from bootargs and appended to the bootconfig section when using
+> 'abootimg get ramdisk' with boot image v4 and vendor_boot image.
+>
+> The test verifies:
+> - androidboot.* parameters are removed from bootargs
+> - They are appended to the bootconfig section in the ramdisk
+> - Non-androidboot parameters remain in bootargs
+> - The bootconfig trailer is properly updated
+>
+> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+> ---
+>  test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++++++++++++---
+>  1 file changed, 99 insertions(+), 9 deletions(-)
+>
+> diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
+> index 2aadb692b30..bd5fb992a7d 100644
+> --- a/test/py/tests/test_android/test_abootimg.py
+> +++ b/test/py/tests/test_android/test_abootimg.py
+> @@ -69,15 +69,33 @@ e5bddc8a7b792d8e8788c896ce9b88d32ebe6c971e7ddd3543cae734cd01
+>  c0ffc84c0000b0766d1a87d4e5afeadd3dab7a6f10000000f84163d5d7cd
+>  d43a000000000000000060c53e7544995700400000"""
+>  
+> -# vendor boot image v4 hex dump
+> -vboot_img_hex = """1f8b0808baaecd63020376626f6f742e696d6700edd8310b824018c6f1b3
+> -222a08f41b3436b4280dcdd19c11d16ee9109d18d59042d047ec8b04cd0d
+> -d19d5a4345534bf6ffc173ef29272f38e93b1d0ec67dd79d548462aa1cd2
+> -d5d20b0000f8438678f90c18d584b8a4bbb3a557991ecb2a0000f80d6b2f
+> -f4179b656be5c532f2fc066f040000000080e23936af2755f62a3d918df1
+> -db2a7ab67f9ffdeb7df7cda3465ecb79c4ce7e5c577562bb9364b74449a5
+> -1e467e20c53c0a57de763193c1779b3b4fcd9d4ee27c6a0e00000000c0ff
+> -309ffea7010000000040f1dc004129855400400000"""
+> +# vendor boot image v4 hex dump (contains initial bootconfig: androidboot.hardware=test)
+> +vboot_img_hex = """1f8b08000000000002ffeddb316a02411806d009a49040606d3d84374823a9a348b095
+> +915951b2c9caee8690ce237a91406a0b497603e215dcbc577cf3334cf5350303b3787a
+> +9c4fa6d3e7dbf02b6b63dfc6b01b0180ffe726644d5e37975bb34108c76efa1eb65974
+> +c7fed691c600e02a64e7ab3e8494afe37bd128050000007ae6707ffad202000000f45b
+> +155fd3b67e59eee26751c674a711000000e89ff896aa729b5665d98c37b14a1fb1ca1f
+> +da4f7f5e02000000a0377e0040ab5ba000500000"""
+> +
+> +# bootable boot image v4 hex dump (contains actual bootable kernel)
+> +boot_bootable_img_hex = """1f8b08081663ee6802ff626f6f745f626f6f7461626c655f76342e696d67
+> +00edd1c14ac3401485e159b80a083ec24dba4f117c81d8140c6dad24ee25
+> +4da6e9d07452321305dfca37d4d4ec5cb954fe6f37ccb967606ef298e6db
+> +2c0d3f94526feae25adda81fae140000000000f8ab66e17c67ecdc1d025d
+> +1d3a89125bf79da9e5beebbc64a7b2d1f27a27cfda7959e9deea369a8263
+> +a0eaecde34e2c75b375495766e3fb46114cca430a7a12dbd96e3654a7663
+> +dfb9f4feeb383514beecbdb1cd1489e3380a5cabf5596ea7c4f78b62acf1
+> +a66ccdbbaea380950100000000f06b79b249b362f5f2b44e16cb87ed3a5d
+> +e67c0a0000000000ffcc27ba944c7e00300000"""
+> +
+> +# bootable vendor boot image v4 hex dump (contains actual bootable ramdisk)
+> +vendor_boot_bootable_img_hex = """1f8b08081663ee6802ff76656e646f725f626f6f745f626f6f7461626c65
+> +5f76342e696d6700edd8b10a02310cc6f10c0e7220f8080737b8b93ab9a8
+> +282e571171959e0d787058a84557f5c96ddd7d80c3ff0f92217c5396408e
+> +f56abf30e63090649c9b3c53bd050000fcab57d45b3c35de47db749a06bb
+> +e1eff08c7d0100d00bf6ea826f5dbef0d38b0dee618396f3f27bf69ddedb
+> +b316558a4d462255fe132c4dbdde6e0a160700000000408f7c0027597569
+> +00200000"""
+>  
+>  # Expected response for "abootimg dtb_dump" command
+>  dtb_dump_resp="""## DTB area contents (concat format):
+> @@ -179,6 +197,24 @@ def abootimgv4_disk_image_boot(ubman):
+>          gtdi3 = AbootimgTestDiskImage(ubman, 'bootv4.img', boot_img_hex)
+>      return gtdi3
+>  
+> +gtdi4 = None
+> +@pytest.fixture(scope='function')
+> +def abootimgv4_bootable_disk_image_boot(ubman):
+> +    """pytest fixture to provide bootable boot image v4."""
+> +    global gtdi4
+> +    if not gtdi4:
+> +        gtdi4 = AbootimgTestDiskImage(ubman, 'boot_bootable_v4.img', boot_bootable_img_hex)
+> +    return gtdi4
+> +
+> +gtdi5 = None
+> +@pytest.fixture(scope='function')
+> +def abootimgv4_bootable_disk_image_vboot(ubman):
+> +    """pytest fixture to provide bootable vendor boot image v4."""
+> +    global gtdi5
+> +    if not gtdi5:
+> +        gtdi5 = AbootimgTestDiskImage(ubman, 'vendor_boot_bootable_v4.img', vendor_boot_bootable_img_hex)
+> +    return gtdi5
+> +
+>  @pytest.mark.boardspec('sandbox')
+>  @pytest.mark.buildconfigspec('android_boot_image')
+>  @pytest.mark.buildconfigspec('cmd_abootimg')
+> @@ -266,3 +302,57 @@ def test_abootimgv4(abootimgv4_disk_image_vboot, abootimgv4_disk_image_boot, ubm
+>      ubman.run_command('fdt get value v / model')
+>      response = ubman.run_command('env print v')
+>      assert response == 'v=x2'
+> +
+> +@pytest.mark.boardspec('sandbox')
+> +@pytest.mark.buildconfigspec('android_boot_image')
+> +@pytest.mark.buildconfigspec('cmd_abootimg')
+> +@pytest.mark.requiredtool('xxd')
+> +@pytest.mark.requiredtool('gunzip')
 
----
-base-commit: 08bf42e1faa4411cd347c2e370da790a0116e318
-change-id: 20251031-k3_fix_mmu-bd62988ed62d
+We use the md command below so I think you should also add something in
+the line of
 
-Best regards,
--- 
-Anshul Dalal <anshuld@ti.com>
+    @pytest.mark.buildconfigspec('cmd_md')
 
+Note: I have not tested this.
+
+> +def test_abootimg_bootconfig(abootimgv4_disk_image_vboot,
+> +                              abootimgv4_disk_image_boot,
+> +                              ubman):
+
+Nit: this seems weirdly indented. Should be:
+
++def test_abootimg_bootconfig(abootimgv4_disk_image_vboot,
++                             abootimgv4_disk_image_boot,
++                             ubman):
+
+
+> +    """Test bootconfig handling with boot image v4.
+> +
+> +    Verifies that androidboot.* parameters from bootargs are appended to the
+> +    bootconfig section in vendor_boot image in memory, and that non-androidboot
+> +    parameters remain in bootargs.
+> +    """
+> +
+> +    # Setup addresses
+> +    ram_base = utils.find_ram_base(ubman)
+> +    ramdisk_addr_r = ram_base + 0x4000000
+> +    ubman.run_command('setenv ramdisk_addr_r 0x%x' % ramdisk_addr_r)
+> +    ubman.run_command('setenv loadaddr 0x%x' % loadaddr)
+> +    ubman.run_command('setenv vloadaddr 0x%x' % vloadaddr)
+> +
+> +    # Set bootargs with androidboot.* parameters
+> +    ubman.run_command('setenv bootargs "androidboot.serialno=ABC123 androidboot.mode=recovery console=ttyS0"')
+> +
+> +    # Load images
+> +    ubman.run_command('host load hostfs - 0x%x %s' % (vloadaddr,
+> +        abootimgv4_disk_image_vboot.path))
+> +    ubman.run_command('host load hostfs - 0x%x %s' % (loadaddr,
+> +        abootimgv4_disk_image_boot.path))
+> +    ubman.run_command('abootimg addr 0x%x 0x%x' % (loadaddr, vloadaddr))
+> +
+> +    # Extract ramdisk (triggers bootconfig append)
+> +    ubman.run_command('abootimg get ramdisk ramdisk_addr ramdisk_size')
+> +
+> +    # Get ramdisk address
+> +    response = ubman.run_command('env print ramdisk_addr')
+> +    ramdisk_start = int(response.split('=')[1], 16)
+> +
+> +    # Verify androidboot.* parameters were removed from bootargs
+> +    response = ubman.run_command('env print bootargs')
+> +    assert 'androidboot.' not in response
+> +    assert 'console=ttyS0' in response
+> +
+> +    # Get ramdisk size and verify BOOTCONFIG magic at the end
+> +    response = ubman.run_command('env print ramdisk_size')
+> +    ramdisk_size = int(response.split('=')[1], 16)
+> +
+> +    # Dump the end of the ramdisk where BOOTCONFIG trailer should be
+> +    response = ubman.run_command('md.b 0x%x 96' % (ramdisk_start))
+> +
+> +    # Verify BOOTCONFIG magic is present
+> +    assert 'BOOTCONFIG' in response or 'BOOTCON' in response
+
+Can we explain why it's either BOOTCONFIG or BOOTCON? why would the
+magic be truncated ?
+
+>
+> -- 
+> 2.34.1
