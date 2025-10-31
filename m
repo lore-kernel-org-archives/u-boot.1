@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06648CCF9EE
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 07:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68C22CCF9EE
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 07:39:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F11883946;
-	Fri, 31 Oct 2025 08:38:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6C01F83936;
+	Fri, 31 Oct 2025 08:38:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="d7FDhxyC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jzMJozFC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0070E8331F; Fri, 31 Oct 2025 08:38:31 +0100 (CET)
+ id 2C9E283849; Fri, 31 Oct 2025 08:38:40 +0100 (CET)
 Received: from SN4PR2101CU001.outbound.protection.outlook.com
  (mail-southcentralusazlp170120001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8ECF8331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:38:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 26B8483936
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:38:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=up8UEPB+m8BDrX60Oi8fTvRIUrZ+A98fyuytpNCtKuViIBluSE/eZ/IudJXqzEMuTaa1GWWcBRF3/JLExr6rKSIz3O7JrDaVARVLtPmKQD1HmymMEZWj0BeWZkrFSQtM3FAdjU/hEiu+1WxJwzII5ajPWeVD8MepWLAFybNfH1bSTwaV1Wqe/yclX8rVKY84FJq8hb+rV2T8ZtOZ+IBcqF9bNarhD2PnhJPMfmUgsE/s72NPrpfWV8nC9zVHS698PzQXwla27IshA9piunjuAGsi2HVQzRLEhFblGcB7107U/mKKduCr8W/Zu0vPpJ5bI7WzvlELzzyPGuma6mZNYA==
+ b=KW5g2ZnwfUC+mQISilQtLSHd2SLPinQ+8nzFQHRn43dw+ZOoinm1HXiK4EqKVvYZ5iM+cPmvpElzbGzs8/I5Acs5rkyOyoR49NcGq4GbXkJEePP4pEA2qyD7f283ZmjH+fMYWSNZlfoanFFSCi3d+OE3rkL+3SpXrNz3CP7RnwGQYxcWeDiWeF49WiKcqCeFoYzeT+c4mHffrnL2sa2VjOegrC/pQflAf/4j/Sdz3GHJNIoiglLpehy7J+bYzNHDLQ/F11xE/Spt5jpRvhqyR/vKyeTVttOrsJqeVtKTtqj6utMwlpB0FWIWjt5e+sAkuQSQ/QfRrreNwp1p2lkn1w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uQHBvHjh+t9ipCsT+NDy/08s4y8c4jOJ1HZyYcMXVxo=;
- b=AghHCYFdWz5xLC2ipqQYDodj08d2ioII9KfnnCnckVOYefAo9Loh0Dm8eECMEtsUVdAo1rRzxpGsnU6TjlkfCsyE8ZcNxw08caxaDeUa21wJ4NmVJ/d3eUV672C4oGXz3NTwBGSgtp468Sm/DHjmmG00YR6PPqyKrexU3aJiZP/WDzPrl1SA5EJ/jEQKin33izqfzH9JNqmbk0lTdym9IRWtJEIk+b8BX90XO/K9oc7oLrC5+zEd7vrpAQ54C4td/ub3/dPqWUnBOdj5YLvxA4G2ReV05a0dPhjBvluyHELcVc3dhv9rbPu5BgpBdNwKjtXGhBLpP5bhwrxX/OzZ0Q==
+ bh=uOTCvD5HDbWZmw6NUrDYe42fiJ5NyHQHNcGqQGiBKis=;
+ b=dlA3Jm22nkyof8F8WnjuVoI1Hbu3sQSTxCLE1MRd7vzXilmKS5p6e7SxbrkRvcVwH8Oj8hqQF7S9+nTPfQlxFm8bUBeszi2aeo6xGB8VyQRtm+LW+GEgbMz9HUlFVODsowfMRTJsYlF8zFrsH/g0UkaLwwMNJnRvPxeCzQh3eAhUWeHqKV0hzr5Zbtx3MHy17+n0jDRAMJnoN/NsOA7ojTgUfi5uXpw/f4rJGz5Gqxy9Clbo09fpL2rNV1J8/ELN0CP1WpJltrKFZzqQheMDZbhuDo2VnYgpvNekCEbcy8v5DGYpOwCUyXwmOR71IpMe8CaAJTh3BHKdPpdfkPXXug==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uQHBvHjh+t9ipCsT+NDy/08s4y8c4jOJ1HZyYcMXVxo=;
- b=d7FDhxyCaBKy5UUSpucFgbLr3Kt/4GgQQTotkgXZdIMaNFNoaLtazVLEPVPmqVQhvnSW8+4JcWZROobBzLYHerjiZ0M5psHCP5S3WBL+kJqv1WjUjKFclLZZMsZ7NEcQULWWLlyc1hl+6gpTXxb1xj86AhRZZN7GEvN6NiaDoP0=
-Received: from PH8P220CA0023.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:345::29)
- by SJ5PPF07759F8B1.namprd10.prod.outlook.com
- (2603:10b6:a0f:fc02::787) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Fri, 31 Oct
- 2025 07:38:26 +0000
-Received: from CY4PEPF0000FCC5.namprd03.prod.outlook.com
- (2603:10b6:510:345:cafe::e8) by PH8P220CA0023.outlook.office365.com
- (2603:10b6:510:345::29) with Microsoft SMTP Server (version=TLS1_3,
+ bh=uOTCvD5HDbWZmw6NUrDYe42fiJ5NyHQHNcGqQGiBKis=;
+ b=jzMJozFCVBwZ+04wj+HspB7S1w2AlGceCnaFEEOTVuaUHF/TWtzqlxTbZeuFYj6FkGcajlhzphg2z2s5koNn1Fd/6+2U8RcqSPSCOOdnJUVQK4eN05karHEPTtpzQnHTgVSaEJQkIqNbj/LY+vwXZ4Cq34GXTNvUmAfTgzeTano=
+Received: from PH5P220CA0013.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:34a::10)
+ by DS7PR10MB5903.namprd10.prod.outlook.com (2603:10b6:8:85::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9275.12; Fri, 31 Oct 2025 07:38:29 +0000
+Received: from CY4PEPF0000FCC3.namprd03.prod.outlook.com
+ (2603:10b6:510:34a:cafe::aa) by PH5P220CA0013.outlook.office365.com
+ (2603:10b6:510:34a::10) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Fri,
- 31 Oct 2025 07:38:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ 31 Oct 2025 07:38:41 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CY4PEPF0000FCC5.mail.protection.outlook.com (10.167.242.107) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CY4PEPF0000FCC3.mail.protection.outlook.com (10.167.242.105) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 07:38:25 +0000
-Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 07:38:28 +0000
+Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 02:38:15 -0500
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 02:38:15 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE210.ent.ti.com
+ 2025 02:38:17 -0500
+Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE210.ent.ti.com
  (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
+ 2025 02:38:17 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 31 Oct 2025 02:38:15 -0500
+ Transport; Fri, 31 Oct 2025 02:38:17 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59V7cEtv3500822;
- Fri, 31 Oct 2025 02:38:15 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59V7cGVh3540009;
+ Fri, 31 Oct 2025 02:38:16 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: 
 CC: Anshul Dalal <anshuld@ti.com>, <afd@ti.com>, <b-liu@ti.com>, <bb@ti.com>, 
  <m-chawdhry@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <trini@konsulko.com>,
  <u-boot@lists.denx.de>, <vigneshr@ti.com>
-Subject: [PATCH v10 5/7] mach-k3: r5: common: add fdt fixups for falcon mode
-Date: Fri, 31 Oct 2025 13:07:55 +0530
-Message-ID: <20251031073800.344500-6-anshuld@ti.com>
+Subject: [PATCH v10 6/7] mach-k3: r5: common: add bootargs to kernel's dtb
+Date: Fri, 31 Oct 2025 13:07:56 +0530
+Message-ID: <20251031073800.344500-7-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251031073800.344500-1-anshuld@ti.com>
 References: <20251031073800.344500-1-anshuld@ti.com>
@@ -93,53 +93,53 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC5:EE_|SJ5PPF07759F8B1:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9b58914-6afe-413a-2785-08de185079de
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC3:EE_|DS7PR10MB5903:EE_
+X-MS-Office365-Filtering-Correlation-Id: 72c45c0b-989d-402f-5632-08de18507b8d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|34020700016|36860700013|82310400026|376014|3122999009;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dsuM1SLUwt13U/y0QHDgANlBnQyDyj8sQ7EyXmCQLGpL4op43uulqli7Efda?=
- =?us-ascii?Q?IuajIz0hgAgzXolbXndk+t6/5guAwT73vCuWfsp6FEqkuBuj9cWUQccyEnMW?=
- =?us-ascii?Q?tyJVGQHOv8z4KRiXc2mWZ3B1Bl0Oy/Sy7jjuFbAUW28qh5o8Y+Da4NddkAXr?=
- =?us-ascii?Q?V3d2DbVgY+ZsXM6yzEmZH93bZE57sgOXGwCfrY4LkoHQe33arYsp7mIfMfhq?=
- =?us-ascii?Q?eQaSYp1nf/qbn1LmsmZz8XVvwl89XlZhRmD9oJTZadAZKZ/sOltZznRaLS8b?=
- =?us-ascii?Q?AUneqPRTVt6kN16+45YbJFXjmcyzWRW3pusFX3ypjXKXiQXfghV/D5nUJl0u?=
- =?us-ascii?Q?fCa2GyuLAAaFGvgvRDSrwPPu7RiCTFRpdMiynd60T13LxadBBbe8KkGPz6ru?=
- =?us-ascii?Q?MaATB91qR52G/HcoVNCxHJtyO31Ff8ox0d4x4l35ZdlIUunJuw4UcB/TkUc3?=
- =?us-ascii?Q?qCKxLuOzsxrTfzzD+fslHXaNakmPBtt99U1yaaM3i4B5Q2trvy5bOG7h/f75?=
- =?us-ascii?Q?GfJYbNRCr4GVRnKu/xsv7zzEwNv6qjRsXnL+FY3pzfXiRVMQtKN+41ZbQFYZ?=
- =?us-ascii?Q?vFPRmLshcezjNMu1UeTU5m090uCd0c4hGQRaksGtq+3wZPWa2akjxjb5TxPu?=
- =?us-ascii?Q?lESDW4VuoB48f3i9/yp41Btn29dZ3ZKsfhnDWp82XYujjvmDrir5hgXhG4Q8?=
- =?us-ascii?Q?FkSt7bfU/uEFkZZCi19MUVhK5hbZqpkc4XkRMGAd/431IfZqQHGgn5B/Rh3V?=
- =?us-ascii?Q?4YE3n3o5KR+AmuHc31a3xnmdW3impH03Tpc0PWikMNHNn2gCVPdgCVAw16S/?=
- =?us-ascii?Q?d+MuffjQdBqk3UOsaarXYlx/OKI+/Oxf+9le0uTKTCighlS+dFzRV31LzQGc?=
- =?us-ascii?Q?epqEBVXj0+FTBBnS1ArJAf6tUlTnYqUVQecdB6gtFCFwUDFolVpvPq33+oY8?=
- =?us-ascii?Q?XuFROM2+TRxJBHiKMZfVRKHuNe7qDX+gbP4aI3s+Nb9u8MX24YxbGINxKXuQ?=
- =?us-ascii?Q?pCeNEcq/9wOs8aYsPdQki7aAAR6YC1Eq7I0pc14qNSkcDX/esnnb5MFL+++6?=
- =?us-ascii?Q?dYZcqJEKgQwwymrpzXPZDnuUdgwQ6f4KIlpM3pxF7xrOzdmWFt4gN7C+7c03?=
- =?us-ascii?Q?rE7QU1Q932hwidOc3DfI3meoJiZ/UDhLgGPXSOuUhoc6W9J3DC5CyDDnTlXp?=
- =?us-ascii?Q?3tuFCsT2L5JgMOOLvCNLfpfIIOcrAZe7ZnV99TaboibxoxyfQJYJUzR4CvPT?=
- =?us-ascii?Q?dcUsNXlpdMIb5Jru3rff7L4WC5zFrXeSDXND8X6+wNgC24hHM5iQIvJSoqc4?=
- =?us-ascii?Q?ICS21XhS6o3YPSGGFzsFAxl/PtStcw8ptxu+7rtkzEclLu+oUoSrSZ9ur1di?=
- =?us-ascii?Q?LU6QQDDJcOwz5PF5b6WnoQos7KJYMBS+W6VaDQ5ujRH5+enMZrT0io47Q87u?=
- =?us-ascii?Q?QNmClhIFkYmnYzCVh2SNRh9+Y6/zpniAMQal86nocw7sKyC771FnUi5eFTZ8?=
- =?us-ascii?Q?lhIM3VIL+DV5iPLRoYgpzh0iaYRDc7BmEoCP5qQz7r4KzRLFGodyvjTH7m62?=
- =?us-ascii?Q?WBm0C8/6xX5mEBv7R0I=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(34020700016)(36860700013)(82310400026)(376014)(3122999009);
+ ARA:13230040|82310400026|376014|1800799024|36860700013|34020700016; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?t7+WSDxA8nlSeLlIYWc+vejiMiKuF9PUC6Qi87OCRR3gp0HqmigFolftDu4F?=
+ =?us-ascii?Q?S+1lyz8s7TbPhF/YSVW6imyYbszFa6Pmzm99NW09F66f7Y+bYxZLNoA/yxtr?=
+ =?us-ascii?Q?rloW0gHDSiX4GDIYJjKeookMRUUufWPEH+Qk8Hg02spNQQMRxeBOnqS7JHRR?=
+ =?us-ascii?Q?k0Z7VVANgyJG8no6D2MoL9xw+4fOpj0FPjPo5UuJ9skc7iRFxVuxFnc4T8dL?=
+ =?us-ascii?Q?rdzNM+vHtXuxNPpg/fsshoiZ9RoxUB0/h7mWjKEfL6mqDVOyZ5nA6rTqbLVk?=
+ =?us-ascii?Q?BcXfL1Te4D3fm8WgkjD9cXzY0GBB7+qQPq0FMVn+7AeDpIUHkf2nL2QeqM7H?=
+ =?us-ascii?Q?ORu5l3bi5WvoMNc/qXIIQZzaAcOYhXWaRcvj8ERuDf+DYkTHqw3LU0MKcsLk?=
+ =?us-ascii?Q?moLtjTsL0J53Qo8n77+KrXnlFqH6jj0iTH3TD8bGC3gi4Uw5VwP8fLC3ofDW?=
+ =?us-ascii?Q?pWtfVEZ/NgSA5Lye+MnLslZmRgIlzbxqMcyi38xWN1/rVrgHlFgGkBpgYMIZ?=
+ =?us-ascii?Q?FalcYAqIu1H7KygJZke+h+QaixPA8taI72N8j36shyKe8oILVdoNPfCtyKkb?=
+ =?us-ascii?Q?Ew/2ZPPC4lG/+JmrG8EgORFLeYPMMn2Hyxg0lYKV+tqNLJxWx/cKwccL4uWS?=
+ =?us-ascii?Q?nFrekOWml3me9bOBsswQre4ZW3894O+d/yntc3OCNKtjdu6jaduQO2yeDaVO?=
+ =?us-ascii?Q?rMD6/3GJdsbco5L8aP9jhHTcXUgSY3xhaz3eGpZQRIYlCsXQwH0/TbqY3Oft?=
+ =?us-ascii?Q?ov15ZxL8QIUvo60CEAS3BMKpiaK41pRMXYjG+Q+v2hDnM0nyHX3NLk59KSMA?=
+ =?us-ascii?Q?Lusmbe8AxS0Wgqmfp4Tml/eZtxi0DEIa7KXnME9f2nIIOepTOBloXnJHJn1L?=
+ =?us-ascii?Q?+NF59K1O2d5pDcm1ZzGrb/RdopC4cwtPjymrf3mUFNYbqZUmVZZT7x0Zv/Uc?=
+ =?us-ascii?Q?q5ff5wrAhy8g9FQjvNISlCBcB8qzn4b/LPZFXLGO1F8+R+iFwWl7+bshOY9b?=
+ =?us-ascii?Q?I9RNhu/uH2nfwU/xSgZwhkstvF/5spTZ4HVPJJXPwZnXqze4xQpSTR4bHF2x?=
+ =?us-ascii?Q?ii8lG3N3TlWhq5hIXbnlsKZL0yLF5hHBTJrPhKmmOoC7QD2f3nDNw+vRgemu?=
+ =?us-ascii?Q?iXG83WWR8U9VRgKwCEHeKRJrjeJQLFKETMqrq5WeWJCi9uCMr62j7a34R6jS?=
+ =?us-ascii?Q?rRZmXfCTGm8Rl7htJZwRqwdLwbVFHAyhJ28PUX71vyS8AYs5jGmKvfNlcbna?=
+ =?us-ascii?Q?dkug/dP8kp6kagvTC5hyz21tvhPw9BgNeRqBrGJ5vy1E4ac5b758tLjKxUXl?=
+ =?us-ascii?Q?T/74a8U7JBOX/OQBc9pa+DeDtvuFHNUYbL9pcSy6EWyNj7pcYIkNJBEnZwDd?=
+ =?us-ascii?Q?oOhKTcnmWW5bedSNRbDHtW/FaSMyEP/pXFbk4U5NDebS+7ut3f1WBgwYmH+6?=
+ =?us-ascii?Q?GxNFy5l6zv3YYt4M9IO9SDQOCwIuatd4zvSmncXrYkwH3mWcu6qbZl0DJkEo?=
+ =?us-ascii?Q?YP6LXmcdZU8h1XC3XTKE+KTfkay2nZUnN5Op4BRbxXjiI2UEOTRPeB3H1+eQ?=
+ =?us-ascii?Q?BuncAfaLYBjtE2WCBhE=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(34020700016);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 07:38:25.3940 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9b58914-6afe-413a-2785-08de185079de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 07:38:28.1607 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 72c45c0b-989d-402f-5632-08de18507b8d
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC5.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC3.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF07759F8B1
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB5903
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,79 +156,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds fdt fixups to the kernel device-tree in R5 falcon mode,
-these fixups include fixing up the core-count, reserved-memory etc.
+The bootargs are passed to the kernel in the chosen node, this patch
+adds support for populating bootargs in the dtb if missing.
 
-The users can opt out by disabling the respective CONFIG_OF_*_SETUP
-config options.
+The values for kernel boot params is taken from the env, with 'boot' and
+'bootpart' specifying the rootfs for the kernel similar to the
+non-falcon boot flow.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- arch/arm/mach-k3/r5/common.c | 38 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+ arch/arm/mach-k3/r5/common.c | 47 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
 
 diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-index bf5e7903dcb..8e002504897 100644
+index 8e002504897..03638366046 100644
 --- a/arch/arm/mach-k3/r5/common.c
 +++ b/arch/arm/mach-k3/r5/common.c
-@@ -406,12 +406,43 @@ int k3_r5_falcon_bootmode(void)
+@@ -406,6 +406,46 @@ int k3_r5_falcon_bootmode(void)
  		return BOOT_DEVICE_NOBOOT;
  }
  
-+static int k3_falcon_fdt_fixup(void *fdt)
++static int k3_falcon_fdt_add_bootargs(void *fdt)
 +{
++	struct disk_partition info;
++	struct blk_desc *dev_desc;
++	char bootmedia[32];
++	char bootpart[32];
++	char str[256];
 +	int ret;
 +
-+	if (!fdt)
-+		return -EINVAL;
-+
-+	fdt_set_totalsize(fdt, fdt_totalsize(fdt) + CONFIG_SYS_FDT_PAD);
-+
-+	if (IS_ENABLED(CONFIG_OF_BOARD_SETUP)) {
-+		ret = ft_board_setup(fdt, gd->bd);
-+		if (ret) {
-+			printf("%s: Failed in board setup: %s\n", __func__,
-+			       fdt_strerror(ret));
-+			return ret;
-+		}
++	strlcpy(bootmedia, env_get("boot"), sizeof(bootmedia));
++	strlcpy(bootpart, env_get("bootpart"), sizeof(bootpart));
++	ret = blk_get_device_part_str(bootmedia, bootpart, &dev_desc, &info, 0);
++	if (ret < 0) {
++		printf("%s: Failed to get part details for %s %s [%d]\n",
++		       __func__, bootmedia, bootpart, ret);
++		return ret;
 +	}
 +
-+	if (IS_ENABLED(CONFIG_OF_SYSTEM_SETUP)) {
-+		ret = ft_system_setup(fdt, gd->bd);
-+		if (ret) {
-+			printf("%s: Failed in system setup: %s\n", __func__,
-+			       fdt_strerror(ret));
-+			return ret;
-+		}
++	if (!CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
++		printf("ERROR: Failed to find rootfs PARTUUID\n");
++		printf("%s: CONFIG_SPL_PARTITION_UUIDS not enabled\n",
++		       __func__);
++		return -EOPNOTSUPP;
 +	}
 +
++	snprintf(str, sizeof(str), "console=%s root=PARTUUID=%s rootwait",
++		 env_get("console"), disk_partition_uuid(&info));
++
++	ret = fdt_find_and_setprop(fdt, "/chosen", "bootargs", str,
++				   strlen(str) + 1, 1);
++	if (ret) {
++		printf("%s: Could not set bootargs: %s\n", __func__,
++		       fdt_strerror(ret));
++		return ret;
++	}
++
++	debug("%s: Set bootargs to: %s\n", __func__, str);
 +	return 0;
 +}
 +
- int k3_r5_falcon_prep(void)
+ static int k3_falcon_fdt_fixup(void *fdt)
  {
- 	struct spl_image_loader *loader, *drv;
- 	struct spl_image_info kernel_image;
- 	struct spl_boot_device bootdev;
- 	int ret = -ENXIO, n_ents;
-+	void *fdt;
+ 	int ret;
+@@ -415,6 +455,13 @@ static int k3_falcon_fdt_fixup(void *fdt)
  
- 	tifalcon_loaded = true;
- 	memset(&kernel_image, '\0', sizeof(kernel_image));
-@@ -428,6 +459,13 @@ int k3_r5_falcon_prep(void)
- 		if (ret)
- 			continue;
+ 	fdt_set_totalsize(fdt, fdt_totalsize(fdt) + CONFIG_SYS_FDT_PAD);
  
-+		fdt = spl_image_fdt_addr(&kernel_image);
-+		ret = k3_falcon_fdt_fixup(fdt);
-+		if (ret) {
-+			printf("Failed to fixup fdt in falcon mode: %d\n", ret);
-+			return ret;
-+		}
++	if (fdt_path_offset(fdt, "/chosen/bootargs") < 0) {
++		ret = k3_falcon_fdt_add_bootargs(fdt);
 +
- 		return 0;
- 	}
- 
++		if (ret)
++			return ret;
++	}
++
+ 	if (IS_ENABLED(CONFIG_OF_BOARD_SETUP)) {
+ 		ret = ft_board_setup(fdt, gd->bd);
+ 		if (ret) {
 -- 
 2.51.0
 
