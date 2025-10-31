@@ -4,93 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B39CCFA02
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 19:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 075BECCFA02
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 19:17:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D71A83AAC;
-	Fri, 31 Oct 2025 20:00:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C87F83AB7;
+	Fri, 31 Oct 2025 20:17:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a/fSFoPN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a5UtJTEF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFACB83AAD; Fri, 31 Oct 2025 20:00:10 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 0394583AB8; Fri, 31 Oct 2025 20:17:35 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B91683A32
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 20:00:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C04AC83AB4
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 20:17:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-3c9a42d6349so2960700fac.1
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 12:00:08 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7c531445439so880967a34.0
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 12:17:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761937207; x=1762542007; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1761938251; x=1762543051; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n44dZkyPhKw9lzY1QPQCSDnJ2zNqoZVhui5gm8i55GA=;
- b=a/fSFoPNwwytImRjxqd99G2+DOOOnVzH5SLdGvlnOtH+g11NDc3rgP2mx5zlhLcJMP
- OebJ1dfKrnyk5tG4J7EPcxJa8Rn4KR7fBhIrAy1au2d4zuj2ZABTp328CrfFOweLMKj8
- 7mO7FkCJEhAD4gC2m77FRcj7Q8gZ7RVV5sVbM=
+ bh=js/HZRzruMss/+0q/vzPIwkTBSTMdfagWEJp2ZM3l+Y=;
+ b=a5UtJTEFxAF/hoJy3AbjylJiy0SRp5JuLSZowaIL4kXyWpzPaa4q14Jzrf1ScYifiK
+ 13DTft+WmNuKUII62pMveJ9QJJlIlaaOT+DKjV1Ckmditf+P0R2jIa24xqCw0tlhvsvB
+ 8cwkPNBq0JXTpw57+OOHIQmqCUJluNKoy+D7I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761937207; x=1762542007;
+ d=1e100.net; s=20230601; t=1761938251; x=1762543051;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n44dZkyPhKw9lzY1QPQCSDnJ2zNqoZVhui5gm8i55GA=;
- b=n4oA8JVHG79A+SJODfWaVxC8UCz7KVflWPPBGF4BHyn5LFM3ZPvgP0VvYVxxdhasd/
- f9tILQlW1oLhNJE3lwFdnHus2oaCJ7/1HoV+ifUJ1wHQeZuv+r/pwaGf62M1eXfyvIcl
- D3gzduzr2QIrYJ0rxIj4F8qidxk3WhgrUeODbshrHg+EcmXTLjNrQvx1y8nrSJsFieYA
- Vcl/ePq5/0MGjsi0tF51sdhowxCkY6dC0FK3qJS9xuv3hn6fQ2p1FFV1FZPvt2fuBwKH
- gylJgZcgPt/oB6DaOkvzThNRzFmygJH+D+RKOtrKz2Te3MlPaRXREpNuH4iiSrl9/sgk
- X4lg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX9z4xaiBtwvJD8WTTLv3gmGYnLAG434wBsCZBodvN6+zk7vr/4exkR17QPM5ZZN5rBZngNhs8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw3646WKq5/+E+N3XFxUW4rtYF14wfud7aYWsoNHv7v/65xUlOA
- bBPheRE5MdqJoOdrLvdrDgljzCHUPW9NyXsl2PeUka9P4w/Xvtbkoc1u47bGro3eqOhzJHYZy0Q
- cRXtQa0nBEQ==
-X-Gm-Gg: ASbGncvYrPTzSZpCwV5sCqn4Ryqsed67K0KA508UW/e2/HlFVCS4qyvIoCtvaJUdyXP
- 3FrCgPN82abedPnOI4LnpKYyZHL11yydp679NSppHMb4xnNH1rGIdCtzUwCwncOesa41qQtIkhN
- ++AuGLTp2o8v6/GSmThGwT8iZ69Ro7bjv+j7MaCFV4gSEzB0wZ0xFxcaw1XcDX229oABNCWwcVR
- RC8zoRRhzWT/3qWcy7/YHusMyuuswZ5/GDTania2pXg5JtY5g4itbDHlagSh+w4Ai2y+k7+7Cyf
- 41oKC82hS0DpQZVjAxlh6bsSprtqLYARVdhcUSKtdgyH3tBXzVQP9PDl7qUYnx1jdPf9Pk1AhK1
- pOYq8QXvFDKPpRgQcV5HMhYmoDqCKa6MwyUmfA5RaxnNnEsNlIgSSj92ahE3FX2sx3GA8EePop+
- Vio9EJotEf0bKHo1TcHh94sDpdPyBP9Dj1TnHVmLaaL3nBL1Zf6A==
-X-Google-Smtp-Source: AGHT+IEHiN9J4OLXy/jvIhoexKw3ddFr0rjS959kn5epUgJzEkhOcoLxln+nKFwlgt51jHf0Ot8rLQ==
-X-Received: by 2002:a05:6870:9610:b0:3d4:97:cc1f with SMTP id
- 586e51a60fabf-3dacbfbc58cmr2378218fac.26.1761937207092; 
- Fri, 31 Oct 2025 12:00:07 -0700 (PDT)
+ bh=js/HZRzruMss/+0q/vzPIwkTBSTMdfagWEJp2ZM3l+Y=;
+ b=LE/t+NsWTz7FF/Vi/df//x+N2imzlfGYK0jNqhgw5pNsIA0HLF8CO76cR3nWdfoksV
+ rzsYpk/AMCmBEK1Xw5P9++d0j2Dr0nZVh+bkZJb+ARbQR94a8FZNcl08sdeEMUqOcbAM
+ /gF206zsyS5oJ1rWjQt6f13zftzayoDqiGvJiKQz2O2md10pz5S4g0TQ3Zon9BmOG4pi
+ gdH/+3p42MwLOPs8qfyfrBzluYFRMj2VMyDo4ejbDPwezM3YLlBsWZvc2IVy+xcr0ns1
+ L5oFu67bYyr+BnoGFRJejmA3E0ArEDaEgU69zS8i8K/dUaqYzvLl70ETnbVlkFLFKASf
+ XyZQ==
+X-Gm-Message-State: AOJu0YygHtLWbzvk0iztGcVeMh/xXtdGxcHRW0H49x4nUF0Va97oiedP
+ +8xn4YLwdj4wwZbiagbE1uvNubnliM+cPmT7e05ONRobMLjsj5HbcKH68JafdDY1E8U=
+X-Gm-Gg: ASbGncsSZ7L0r0ar5+4WfLkvOvy/bfDmKeyfjxew2Yf/95gCadurdjsireD+4olg3nh
+ 5mhG/t/YAbfQux80jjolAM16DDnH/YrMtHQW8iTP3FidCO3iSoVs7yjGnQALvwcAEBW6CGBXmmE
+ dY722NeP+U8e8Jrb5myxFsTK08ZyfKifv+2BdrWcmpKa3AmHmGeRmXSMpJSglT2F4bByf9pVy3o
+ 2pRVAvsIEnQP67kL6MWpXT599OloGLNWZwQIVFmDyHcZnyPT8GIu5Sre5tMK3Lt4qsk4ru0dbBY
+ kL0S0vq8jFSDNProIdzgSdmGhrSFmGVyzvKuQW/E0j2YHcRsf+6DfXtqjVDLmWXwEgph2icaAi6
+ l1pKvD68M480AcycOItdISwaajHK0XAIk9VYqn0rYq8ch7IAs4FcaZb4TgKuKr7/rQCmPYSKJly
+ T3vRQN5w6uKI4IDAfvRWxiK4yIMuGjoc2Vj3FLn7U=
+X-Google-Smtp-Source: AGHT+IF6jqOp7iSJxyFh6raWaOhEVtiU+06U9gbnBgrjOGJv3B0djGKI+jnuQAC/ZnYe+cQ17+SFBQ==
+X-Received: by 2002:a05:6830:82da:b0:7c1:1170:8959 with SMTP id
+ 46e09a7af769-7c6967e21fbmr2727089a34.27.1761938251460; 
+ Fri, 31 Oct 2025 12:17:31 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3db40d8ef47sm829999fac.10.2025.10.31.12.00.05
+ 46e09a7af769-7c699c1ea72sm781609a34.8.2025.10.31.12.17.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Oct 2025 12:00:05 -0700 (PDT)
-Date: Fri, 31 Oct 2025 13:00:03 -0600
+ Fri, 31 Oct 2025 12:17:30 -0700 (PDT)
+Date: Fri, 31 Oct 2025 13:17:28 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Beiyan Yun <root@infi.wang>, u-boot@lists.denx.de,
- Yao Zi <ziyao@disroot.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>
-Subject: Re: [PATCH v4 1/5] net: phy: aquantia: refresh format
-Message-ID: <20251031190003.GF6688@bill-the-cat>
-References: <20251031152348.60571-1-root@infi.wang>
- <20251031152348.60571-2-root@infi.wang>
- <ac552ba3-832c-4cfb-aa39-c80949df7900@mailbox.org>
- <C2649793-C878-4906-BDF4-0410DA9F12A2@infi.wang>
- <304efeca-2529-4241-a9fe-7f305f8b430c@mailbox.org>
+To: Sune Brian <briansune@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [DEBUG] rk3399-nanopi-neo4: SPL SD init may report -5 due to SD
+ power-on timing
+Message-ID: <20251031191728.GG6688@bill-the-cat>
+References: <CAN7C2SArdbhag_56MwOMGoaEYSLiHbHHo3KFhUS5U03ntEJbGA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6LvUsuRkrreNEwR4"
+ protocol="application/pgp-signature"; boundary="0p/sm1RLJLwIDWcZ"
 Content-Disposition: inline
-In-Reply-To: <304efeca-2529-4241-a9fe-7f305f8b430c@mailbox.org>
+In-Reply-To: <CAN7C2SArdbhag_56MwOMGoaEYSLiHbHHo3KFhUS5U03ntEJbGA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,67 +100,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---6LvUsuRkrreNEwR4
+--0p/sm1RLJLwIDWcZ
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 31, 2025 at 07:33:13PM +0100, Marek Vasut wrote:
-> On 10/31/25 6:21 PM, Beiyan Yun wrote:
-> >=20
-> >=20
-> > > On 31 Oct 2025, at 11:51=E2=80=AFPM, Marek Vasut <marek.vasut@mailbox=
-=2Eorg> wrote:
-> > >=20
-> > > On 10/31/25 4:21 PM, Beiyan Yun wrote:
-> > > > Refresh format using clang-format.
-> > > > Signed-off-by: Beiyan Yun <root@infi.wang>
-> > > > ---
-> > > > Changes in v4:
-> > > > - New
-> > > >   drivers/net/phy/aquantia.c | 159 +++++++++++++++++---------------=
------
-> > > >   1 file changed, 75 insertions(+), 84 deletions(-)
-> > > > diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
-> > > > index 903fcd667f6..439c4c48bdc 100644
-> > > > --- a/drivers/net/phy/aquantia.c
-> > > > +++ b/drivers/net/phy/aquantia.c
-> > > > @@ -18,28 +18,28 @@
-> > > >   #include <asm/byteorder.h>
-> > > >   #include <fs.h>
-> > > >   -#define AQUNTIA_10G_CTL		0x20
-> > > > -#define AQUNTIA_VENDOR_P1	0xc400
-> > > > +#define AQUNTIA_10G_CTL 0x20
-> > > > +#define AQUNTIA_VENDOR_P1 0xc400
-> > > >   -#define AQUNTIA_SPEED_LSB_MASK	0x2000
-> > > > -#define AQUNTIA_SPEED_MSB_MASK	0x40
-> > > > +#define AQUNTIA_SPEED_LSB_MASK 0x2000
-> > > > +#define AQUNTIA_SPEED_MSB_MASK 0x40
-> > > #define<space>MACRO<tab>0xvalue
-> > >=20
-> > > is perfectly fine format.
-> >=20
-> > Agree, until clang-format has become the default.
-> This change makes readability worse, no matter what formatting tool is the
-> current recommendation.
+On Fri, Oct 31, 2025 at 12:10:36PM +0800, Sune Brian wrote:
 
-Generally speaking, one should not just reformat the code, for
-reformatting sake. If someone wants to tweak .clang-format and push the
-changes to the kernel (whom I would assume are as picky as anyone else
-here), that's fine with me.
+> Hello U-Boot maintainers,
+>=20
+> While testing mainline U-Boot (v2026.01-rc1-00070-ge34d01d23e45) on the
+> FriendlyARM NanoPi NEO4 (RK3399), I observed that SPL sometimes fails to
+> initialize the SD card with the following message:
+>=20
+>     spl: mmc init failed with error: -5
+>     SPL: failed to boot from all boot devices
+>=20
+> After investigation, the root cause appears to be related to the **SD card
+> power rail (`vcc3v0_sd`) timing during SPL startup**. On the NanoPi NEO4,
+> the SD slot is powered via GPIO0_A1 to a fixed 3.0=E2=80=AFV supply. SPL =
+may attempt
+> MMC initialization **before this supply has fully stabilized**, resulting=
+ in
+> a generic I/O error (`-5`). The SD card itself and the controller are
+> functioning correctly once the supply is stable.
+>=20
+> **Workarounds / fixes observed:**
+> - Add a small delay after enabling `vcc3v0_sd` before SPL starts MMC init.
+> - Ensure the regulator is fully powered and stable at SPL start.
+>=20
+> This appears to be a **hardware/platform-specific power-on timing issue**
+> rather than a device tree or software bug, but documenting it would help
+> users encountering similar errors on the NanoPi NEO4.
+>=20
+> **Hardware:** FriendlyARM NanoPi NEO4
+> **SoC:** Rockchip RK3399
+> **U-Boot version:** v2026.01-rc1-00070-ge34d01d23e45
+> **Reproducibility:** 100% with SD boot
+
+Adding the board maintainer and come other active rockchip people.
 
 --=20
 Tom
 
---6LvUsuRkrreNEwR4
+--0p/sm1RLJLwIDWcZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQUHMAAKCRAr4qD1Cr/k
-CnYiAQD2To5n9Cg8aW/fcp4rlacGWPGbxLMN9UkRylYItuKb+wD+KJFjLfueCONm
-5c8wIDDkA3Og8NNY+NZ0KHLbMAuvdQc=
-=7vAL
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQULRAAKCRAr4qD1Cr/k
+Ct4TAP9G8z9q9IHd4429kuTE0QCcvv3H4Mz223df/xTBZZ4EFAEA5f7yK2xLRqUH
+JDGnirl3uJvzI157APlAYyxoL4Zp8QQ=
+=/yqa
 -----END PGP SIGNATURE-----
 
---6LvUsuRkrreNEwR4--
+--0p/sm1RLJLwIDWcZ--
