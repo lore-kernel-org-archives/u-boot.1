@@ -4,154 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12259CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0027CCF9FE
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:18:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 859CC83968;
-	Fri, 31 Oct 2025 16:15:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 23D2883979;
+	Fri, 31 Oct 2025 16:18:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fDmFmVRX";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="t2BgaJfX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A10DE83968; Fri, 31 Oct 2025 16:15:50 +0100 (CET)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
+ id 934D48397A; Fri, 31 Oct 2025 16:18:19 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AE2A83952
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:15:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 65E3383952
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:18:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZgkjIwgnp3FPqcCgJyXIr1GFit4biF64LLXalo4hE3EZ/omsEd43+euRpyzLUo/3KBCwhZEHuyWecF85wCXjHjq5q690AWoaSS+Kby6l1ePnvazbWiSWXPsq6SJZertFui8BM9IwSVQSJGcLlmZEGvSReE8XSPH4oncGvgyik8oOrKePaI4XUAd/ebWIGRAKNUjzIyfMaF1r4lq5yHeGUR+qXOtEpsaE3ZCRBGkWVTkCpielO5e2nNbJ610icKpNCHieE8XG6c+ujXa9GtkYoUjLiIjcqwSWY4Y+DUMQz8sFhuVh9T3An3oPeEIYIIWytGr+sJ57ldm6FEwGjuaCfA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jqJhGvcaig2h8xkSFWf6fB2ZjPewqC4yj8dUsFfxWo4=;
- b=e5/de6VMCSbHn55j3XW6AMTZ9I3qfouG5xNMg/bpOy5+Xaw7yC2u2fFjvugUm6NEdmHZCR2wLTyRIsiCn4cy5zqi8lTobRWKwCEkxJz0YIF1pHTY2pSI/dQCzLZmfuDSnkRdNMQoJ7uE7JP8ZRuWXdKQDsuvQpDl3jLy9p+7SagwXj58lfdkHPXalFBcZWGflMySIwVFgY1bDSi+8haGfaCeiHSEDQMG5MuvnHLeHf4SoxjUmF2QTWj+7UMjl7I4XvqvXEhIGiARMLe80wAci4AR3gMilE1pYd978nmiFlioC2QwALIRW58QgU+qVYwUovhnW/T8w96cNFFk11Tq/A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jqJhGvcaig2h8xkSFWf6fB2ZjPewqC4yj8dUsFfxWo4=;
- b=fDmFmVRX7oB/TomzFCCiWBjZMm8Rg4ZG9z80yTlVF9cu7kfAzLq+/2kOPX0OL3qoCd6ZMzOgnKT2wiLE4jCnzR7qsjBq3tTw4Y0yJCzcCHRH7NN2B6NzdGNL97+GfaZG7AdKG3IzA7Z6E+SHAKINgWcfnnERc77S5pjXpRXuQYM=
-Received: from MN2PR08CA0023.namprd08.prod.outlook.com (2603:10b6:208:239::28)
- by DS7PR10MB5134.namprd10.prod.outlook.com (2603:10b6:5:3a1::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Fri, 31 Oct
- 2025 15:15:42 +0000
-Received: from BL02EPF0002992D.namprd02.prod.outlook.com
- (2603:10b6:208:239:cafe::a) by MN2PR08CA0023.outlook.office365.com
- (2603:10b6:208:239::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Fri,
- 31 Oct 2025 15:15:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL02EPF0002992D.mail.protection.outlook.com (10.167.249.58) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 15:15:41 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 10:15:23 -0500
-Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 10:15:23 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 31 Oct 2025 10:15:23 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59VFFKcs4106032;
- Fri, 31 Oct 2025 10:15:20 -0500
-Message-ID: <b72301e7-cdf1-41a6-ab9a-2c915f74d6b6@ti.com>
-Date: Fri, 31 Oct 2025 20:45:19 +0530
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id ADF7743CB0;
+ Fri, 31 Oct 2025 15:18:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FEF6C4CEE7;
+ Fri, 31 Oct 2025 15:18:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1761923895;
+ bh=I/FQbMyQnbrU6NB4ZUOzXXE34u3Ar/uLZRLvUwWP04k=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=t2BgaJfXGLXDdbgvANYRenuZzYrtXylD484gfLABi4EpPqExG4TYwKTbCAnjYUgwS
+ eNt6IAgRum00m1Zj9rP6Pu+RRfvznNGbzqog+FdcIiTgk2227TfFdd81cy5fmnIQrO
+ 6nsfnE8Jd1i+yCSschc+zfOhHv4yM2iQdAY0D/Ib77te4LPlWTzhRMd67HDNJoxBBl
+ dxwW8PdlYMpt75vOQ/GXMZxk/hKMzvnMX5fLDeyjuS4YV3lYogQnCbA0tDE0vXMXPb
+ TRPt9yYdiGqj23OkMHGFIIieoouUBB0Qw84xYGbMXl4W2FeFZdQA7egv9k57qBMd4i
+ kEI5eIdAJjddA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>, Julien Masson
+ <jmasson@baylibre.com>, "Nicolas Belin (TI.com)" <nbelin@baylibre.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, george chan
+ <gchan9527@gmail.com>, "Guillaume La Roque (TI.com)"
+ <glaroque@baylibre.com>
+Subject: Re: [PATCH] bootstd: android: add the bootargs env to the commandline
+In-Reply-To: <20251024-botargsappend-v1-1-0b78f05f9132@baylibre.com>
+References: <20251024-botargsappend-v1-1-0b78f05f9132@baylibre.com>
+Date: Fri, 31 Oct 2025 16:18:11 +0100
+Message-ID: <87ldkr5ccs.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/6] arm: dts: k3-j742s2: ddr: Update to v0.12.0 of DDR
- config tool
-To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>,
- <s-k6@ti.com>, <bb@ti.com>
-CC: <m-chawdhry@ti.com>, <u-boot@lists.denx.de>, <gehariprasath@ti.com>,
- <u-kumar1@ti.com>
-References: <20251031053425.3960963-1-n-francis@ti.com>
- <20251031053425.3960963-7-n-francis@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251031053425.3960963-7-n-francis@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992D:EE_|DS7PR10MB5134:EE_
-X-MS-Office365-Filtering-Correlation-Id: 63683e00-bd8e-449e-68c9-08de18905aef
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|34020700016|376014|1800799024|13003099007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?M1lTK3JwaUZ5L2RGTnJ2YmdWWGxwdDNOUlNmdFcyallMUXJYb0wxQ1NqMyt1?=
- =?utf-8?B?VTcxd3JWUVRLdFlLZlBuWXJIQXBTaDNyUEZrOGFOLzBQSnluR2pDeHRIVkZN?=
- =?utf-8?B?TlQyZnJzZTlJbzAwRzJBY044cTF6NWYyWCswN21XZVpIR3d0dXovUGxpb2VR?=
- =?utf-8?B?NDdKeGVtUldZcEdyblBrY2dWMXdaRms0SFdPek1WL1RralRsRENyaWc1UUky?=
- =?utf-8?B?V3hiVGVCdGxQL2xYR014RE4vak9ySkxsYTdNSm9XSW9IV1FkaHJvRlkvdnhl?=
- =?utf-8?B?SWdsRDBtVEFGRlNKM0VVQmVJdE9CaGtYOUM4WTBDR3lMK0ZyM1AyVUZOMXpN?=
- =?utf-8?B?SmJZSXNvbGJYU1E1NFhNdnkzN04yTGNEMnVDb0w4TjVNMEl0SHprbHpFYytu?=
- =?utf-8?B?L0VCdDFvR2dHUHpPVWwxc0RncE1LT3BXTURmdEpNUk43cExGbnM2WHFNSjl1?=
- =?utf-8?B?SkhJVEhZQmlaWXQzZ3E0czduVUR0dC9qUWJsaFYrelZvZWZTb0cyMFZmNnds?=
- =?utf-8?B?OE5QQjdzS1pUZjlsSGV6MTBVYlRleC9RMGRJUStSZ3F0UUI5ZG9XZkZWWFBm?=
- =?utf-8?B?N2FQTEJVa1VuWHNneFVkVW8rV2l4R1VxbFk3VmtQcHIyNVpkOHU0K1Fad3I4?=
- =?utf-8?B?WGdCNWZ5NkxLUForUHhsRXJRNTh6ci9xM1ZpSHlmSUZ2bDkyWjlyQzVPSWpW?=
- =?utf-8?B?bUNnYmZrd05xSlM3R2t6N0FNK2RkcGVSNDA2eUJuQ1RBVDc1RWt0RCtmdE53?=
- =?utf-8?B?MXFhVDNBMi9NaFBKNkx6SFVvdFpBRTd3RWdHSXRHVEhjTkxMWndxZGMzOHRa?=
- =?utf-8?B?SllGYlU3THZoVjU3MjJDd3RVMHFYTUo1NDk2alVMMmltUTY4bGtJRm11akpN?=
- =?utf-8?B?SWlxV0pJSytaZFdqSFdiSjB2VCtBZThkMCtIcmRhVHpoUWozTGFJeVd1OHlI?=
- =?utf-8?B?cGlLaGZ4RnAvRWhnUHF2ODJpemlYL251aDJ5M2VLcnRRRTNkYTBzSFJQckdP?=
- =?utf-8?B?RmZ1czZ5U0kzOExBWklTRnQ1cjdEbmQ5Q3R4a3JOMkZOTGVyMi9FQURwT0ta?=
- =?utf-8?B?NTh2UVNDamhQMVZjVms2blljRlVDS0tOZmtjSTZrWkhrWk1vV0JrblJsbmND?=
- =?utf-8?B?YzF1UGVyeWw0eExvRlpqUlp0MzJCZTBoTEtxaFY0ZVIvaWVOZXNnZGh6bTcv?=
- =?utf-8?B?em1VdkhSWXZxRFdZRWxVSXpiSjRwYW9ndjcxRlpON0FickVGRVZQdHNJWHF4?=
- =?utf-8?B?MzFOUkVVa1NsZ2hEUmd0YjZWclprR2Z6RGpTM241Q3FjbUh3WkI4REh5YTRW?=
- =?utf-8?B?aGRsODJoWWR0cG0wVzRwUTdhVHJERWZWQVZzcHpCTkI0dnZPY2o5bGJxeklL?=
- =?utf-8?B?N2cxaUNTaE43a29qL0gzQ25SMkRpQ0NSeURQRndJK3Nld3AzbUxzaVIyRXN4?=
- =?utf-8?B?YWMyVUFrNDlWQUtRd3hIYzRxNFFEZ1MwTDRid2JtS1Rqc0lScGlmY2tqelpW?=
- =?utf-8?B?QVJpc3hod05zUUNhU1ZzZ0t2QlVEbm1HZmRtbEFrVEowVnM1Q2h6Y3BHd2Vx?=
- =?utf-8?B?djJ2SkN5OWlDZzNEY1JvaUlEdis4VUpBRFdGS2t3dmNlMUVrbElxVmdMb0po?=
- =?utf-8?B?ZU04T05NV2dZSHNiSjIzdk4vdUJhdVhrRGtUVEZlYTR3OUtOV1YwQ1Fndysw?=
- =?utf-8?B?aFJOOWpXd09iVStQT3oyeE14QkY2ZFlpUlB0bUxUUStuUG95NzJNeldBU2VS?=
- =?utf-8?B?SitJODc3d3c2N2NISkp1L0syRkZMYlNibzUybnJER252azNnczNzZDd3c3RN?=
- =?utf-8?B?N1daQnhjakVneFd0SndLYk1BRVdkRUpwQVRObjdjeFNneUJMR3phQnhmWGlT?=
- =?utf-8?B?OGhQeGlpUDB4R1Y2SjhUVTNacThyNDJsa2RtQkpHbnYyNzhQOVpwMnRiTU15?=
- =?utf-8?B?aW5HOU5nb0Yza1daWDdzc1hJczFhelF6d1lNd1ovT1ZsV2FJdG1WUGlQbkFI?=
- =?utf-8?B?YlMyMXRQMzhMdUVCVXlZQTV5akxWOWJPU3psQUxGV0RkVnJBbkQ4U2R4bDUw?=
- =?utf-8?Q?8G65i3?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(34020700016)(376014)(1800799024)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 15:15:41.2042 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63683e00-bd8e-449e-68c9-08de18905aef
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0002992D.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB5134
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,49 +72,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Guillaume,
 
-On 10/31/2025 11:04 AM, Neha Malcom Francis wrote:
-> Update the DDR configuration for J742S2 according to the SysConfig
-> DDR Configuration tool v0.12.0. Log of changes between 0.9.1 to 0.12.0
-> is [0].
+Thank you for the patch.
+
+On Fri, Oct 24, 2025 at 16:23, "Guillaume La Roque (TI.com)" <glaroque@baylibre.com> wrote:
+
+> From: "Nicolas Belin (TI.com)" <nbelin@baylibre.com>
 >
-> [0] https://dev.ti.com/tirex/content/TDA4x_DRA8x_AM67x-AM69x_DDR_Config_0.12.00.0000/docs/RevisionHistory.html
+> When previously using script based bootflows, the U-Boot
+> environment variable bootargs was used to customize the kernel
+> commandline at boot time.
+> In order to get the same behaviour, concatenate the bootflow
+> commandline with the contents the bootargs environment variable.
 >
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> Signed-off-by: Nicolas Belin (TI.com) <nbelin@baylibre.com>
+> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
 > ---
->   arch/arm/dts/k3-j742s2-ddr-evm-lp4-4266.dtsi | 4872 +-----------------
->   1 file changed, 263 insertions(+), 4609 deletions(-)
+>  boot/bootmeth_android.c | 35 +++++++++++++++++++++++++++++++++++
+>  1 file changed, 35 insertions(+)
 >
-> diff --git a/arch/arm/dts/k3-j742s2-ddr-evm-lp4-4266.dtsi b/arch/arm/dts/k3-j742s2-ddr-evm-lp4-4266.dtsi
-> index a64d19b05f3..2cd21efbf93 100644
-> --- a/arch/arm/dts/k3-j742s2-ddr-evm-lp4-4266.dtsi
-> +++ b/arch/arm/dts/k3-j742s2-ddr-evm-lp4-4266.dtsi
-> @@ -1,10 +1,23 @@
->   // SPDX-License-Identifier: GPL-2.0+
->   /*
-> - * Copyright (C) 2024 Texas Instruments Incorporated - http://www.ti.com/
-> - * This file was generated by the Jacinto7_DDRSS_RegConfigTool, Revision: 0.9.0
-> - */
-> + * Copyright (C) 2023 Texas Instruments Incorporated - http://www.ti.com/
-> + * This file was generated with the following tool revisions:
-> + *     - SysConfig: Revision 1.25.0+4268
-> + *     - Jacinto7_DDRSS_RegConfigTool: Revision 0.12.0
-> + * This file was generated on Thu Oct 30 2025 15:02:20 GMT+0530 (India Standard Time)
-> + *
-> + * Multi DDR Configuration (table based on register configuration tool inputs):
-> + * |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-> + * | DDRSS | PHYSICAL SIZE | SOFTWARE ACCESSIBLE SIZE |
-> + * |~~~~~~~|~~~~~~~~~~~~~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~|
-> + * |   0   |      8 GB     |           8 GB           |
-> + * |~~~~~~~|~~~~~~~~~~~~~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~|
-> + * |   1   |      8 GB     |           8 GB           |
-> + * |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-> +*/
->   
-
-For whole Series
-
-Tested-by: Udit Kumar <u-kumar1@ti.com>
-
-
-> [..]
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> index 8c2bde10e17..1374551dbeb 100644
+> --- a/boot/bootmeth_android.c
+> +++ b/boot/bootmeth_android.c
+> @@ -512,6 +512,37 @@ static int run_avb_verification(struct bootflow *bflow)
+>  }
+>  #endif /* AVB_VERIFY */
+>  
+> +static int append_bootargs_to_cmdline(struct bootflow *bflow)
+> +{
+> +	char *bootargs;
+> +	int len = 0;
+> +
+> +	/*
+> +	 * Check any additionnal bootargs coming from U-Boot env. If any,
+> +	 * merge them with the current cmdline
+> +	 */
+> +	bootargs = env_get("bootargs");
+> +	if (bootargs) {
+> +		len += strlen(bootargs) + 1; /* Extra space character needed */
+> +		len += strlen(bflow->cmdline);
+> +
+> +		char *newcmdline = malloc(len + 1); /* +1 for the '\0' */
+> +
+> +		if (!newcmdline)
+> +			return log_msg_ret("newcmdline malloc", -ENOMEM);
+> +
+> +		strcpy(newcmdline, bootargs);
+> +		strcat(newcmdline, " ");
+> +		strcat(newcmdline, bflow->cmdline);
+> +
+> +		/* Free the previous cmdline and replace it */
+> +		free(bflow->cmdline);
+> +		bflow->cmdline = newcmdline;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  static int boot_android_normal(struct bootflow *bflow)
+>  {
+>  	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+> @@ -546,6 +577,10 @@ static int boot_android_normal(struct bootflow *bflow)
+>  	if (priv->slot)
+>  		free(priv->slot);
+>  
+> +	ret = append_bootargs_to_cmdline(bflow);
+> +	if (ret < 0)
+> +		return log_msg_ret("bootargs append", ret);
+> +
+>  	ret = bootm_boot_start(loadaddr, bflow->cmdline);
+>  
+>  	return log_msg_ret("boot", ret);
+>
+> ---
+> base-commit: b10c055d4e1b5153a331a61ef82a5b01b5bb4c45
+> change-id: 20251024-botargsappend-38a4371cb6dc
+>
+> Best regards,
+> -- 
+> Guillaume La Roque (TI.com) <glaroque@baylibre.com>
