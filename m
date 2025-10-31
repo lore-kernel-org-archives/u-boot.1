@@ -4,208 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D630CCF9FA
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 09:36:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2DB0CCF9FA
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 09:41:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A909838CC;
-	Fri, 31 Oct 2025 10:36:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 30B3283642;
+	Fri, 31 Oct 2025 10:41:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="cbwprjWd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mQ2afoKX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC935838CE; Fri, 31 Oct 2025 10:36:11 +0100 (CET)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 14D26836F0; Fri, 31 Oct 2025 10:41:09 +0100 (CET)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08C3C83642
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:36:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 684DB8331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:41:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jan.kiszka@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WHyj3p4TGUbFEIvEFOfodlaLc6CFQQHu3o1k/KO1r3qZJD8oAKytSV2FCXlDTVR4Mi+HxXh7preIwrhmkJow61fyWxJciulvdFCOSbcbfdPmuTwNKDjwhnB4EV3N+IccX38Pj26KttnlNcthJpN+B8ZVAu17mjKIJZBVOB3sC2rutCQ1a4VqnmQz/7kH7gv2FCIYdCT+YVoEUahv+X06v8gA3bDyrOcH6NL8B4Af+QDdR7MBzfmQzT5sn/luujP35G+ZgDup2xTNAoIuKVZtUah2L+tUW33KylRsqO+5lrDV/GhTbV5EMogvDBLS7CVN8I9g8jGp8+g1ymFqWgwRQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o4paBHxnRsmlp7nLT1f0jt7dd9vOMuzA83ovin4DGzY=;
- b=S5x0wGKC9REDDNvASMDT/ycNOqRx+BLpx9oDeH40DGxFp3IgjX3qv+ShHyMaM4t0FO5zbs8Yi+ftAH56U1L+WxIW02EoNWeX8BJ8J33Mq8mauTTFpC1BqkaljKpJKn/4tmxtgLjoPfP+HQqL7AAuxTFQdJbbC28dPwXYnLz/vM+eERDMQEYjjGPypOPxVuxAX/k2mcHkQdPyRVowgWx7AHuCYd7WS6ajmsbLDX1nezRKLTNqgsaK2VsKzgcWehCJ3Fw9z39XiqdecP/ce0q+yfLJ34M9xlI4PMDvPTv7qllBiPp11gJDraf3aScnAsPYcoKyNVZ0oT5UdRJnKNsEJQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o4paBHxnRsmlp7nLT1f0jt7dd9vOMuzA83ovin4DGzY=;
- b=cbwprjWdLb2hv13fCXx43V7MDgmFoWOkBd//1/4LSgnhejt/2tp9NB6bchXDo7FTIYIAcyEvCNUp1iaqEcgTNpvJC1hz/a35JmkBRaHcm3h8JbTZ/MdmrnRxO3taU5FzduuHm8AunwvJuxPRyRZsA0XzahkLlkz+6OUVq4AH93zRp4XcRjpKfnOABPpgutCh/3ebA+CLU8j3g0NL7gMLHBHKMn/w9oCg6Bl4ZFEjQbTcJrbTo4GHZ266YIcynACkA67p5rWkxZAws96cZgQHiEdeUVFSbwZUhmZxJZuJAos13Mz9z7mOtqF4QYxikv48yeiXdfYfweT2hTEkLRnJWw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by AS1PR10MB5626.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:479::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.15; Fri, 31 Oct
- 2025 09:36:08 +0000
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408%6]) with mapi id 15.20.9275.013; Fri, 31 Oct 2025
- 09:36:08 +0000
-Message-ID: <55d68052-0610-434e-8f6e-4c1808e43207@siemens.com>
-Date: Fri, 31 Oct 2025 10:36:06 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: small Issue with u-boot/tools/key2dtsi.py
-To: "Hans Gfirtner (Nokia)" <hans.gfirtner@nokia.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <AS5PR07MB9799CED5D37A580FD862C1B5FAF8A@AS5PR07MB9799.eurprd07.prod.outlook.com>
- <efd72055-b96d-40e5-beb5-e6af08664180@siemens.com>
- <AS5PR07MB979928242B521581C1C07153FAF8A@AS5PR07MB9799.eurprd07.prod.outlook.com>
- <AS5PR07MB97996638E48C9C5BC79EDFF8FAF8A@AS5PR07MB9799.eurprd07.prod.outlook.com>
-From: Jan Kiszka <jan.kiszka@siemens.com>
-Content-Language: en-US
-Autocrypt: addr=jan.kiszka@siemens.com; keydata=
- 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
-In-Reply-To: <AS5PR07MB97996638E48C9C5BC79EDFF8FAF8A@AS5PR07MB9799.eurprd07.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AS4PR10CA0018.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:5d8::12) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:588::19)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-7833765433cso2771202b3a.0
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 02:41:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1761903665; x=1762508465; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4Snbk5LCa5HEupGunNzseNos56kxpcxna1xYIhh9tCI=;
+ b=mQ2afoKXivvf3+yCSu3utqNqOlhnitKAbEoGAXjZIamj4kW9aWKI6WizebX3BIGW+5
+ vNJ1QMJCi22NsmfK91ZQHYW5RxSI5IN3MJx30tllC9rrlk1Cunuo7ycHdeiqYbMh74i3
+ Jy+0mfwiQYy8r8dkEVb6XRdQgfIuPHcE9bIES2QpMP5Odd8grkRIZEScTA4+ZxDxvaXQ
+ NVWOlFllVa5nemrnZbVKblHgwJrSxT77z0A2BUZkFwi3fC0o7Y8JRvYISjQ5ficTY6WW
+ EmdCEFDxomJp7O+DtqniaXT8q80tubWQKOi4QOAnRva253qo9gaApCiqLp0wXH4HJsxy
+ Jn1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761903665; x=1762508465;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=4Snbk5LCa5HEupGunNzseNos56kxpcxna1xYIhh9tCI=;
+ b=qhZ9OcrYQW6Ktxjpj1LFlTR3fAOsrkyZtW7kugXPO4z9K8gZINziCNJNbWH606iLZv
+ gbIKcKruDAJ6gb7PGHWNso2ROHWYFb6kEJnQqr8qFzuHvo3Bkzj57frWJVLgO0oE6I5N
+ yREm/uNJg5+1K8B7tVwcneN0LapjsrjCg0ePdOqY0amPqfo9MpDu6f5ItfE//o8Xv6j8
+ 4mSEOf+mXbTq51QYt+u2GZ6njG3Bx12ReFPSQ05ThMGddx9x1teqofZ3h6sWhpRK2eYn
+ XFhMNWmByDEA9H7zwWbQMM/Jwe8bI3EQg5f3P5CM0Ysdx1ngAC1yAiuSVarH8O4tzB4z
+ dSrw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/uKWTzatxZ685cs9DBxdHU1OrU4ixQZkTmUWj3ge02hrJLU40n2BIIMvO9ROptzo0s8zX8xc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyfJ/6xxHT50o/4tu4IRRUdsk4B76mre0E+wjpYRkrY7gl7iCz+
+ S0FfpFxhmCLVMtCxkwbcMLTopfhOY3K0Td9N5Q7F9x3VA/tW+9+Y1kDS
+X-Gm-Gg: ASbGncsnP/7UA/CnTkyv/jQLmFUH2qysUiPG+v3YH1n8f/HwDCfkV8wcHQRlCJS+Fne
+ h+caMbqklDNjM7K7/KzsQUMrXgCExBMxAPwx2r5g6s8Sb607ri7Izye1fEu9mBEPGY3ffcGDJ4j
+ plmn/syj7ntMmtTrwiGGb/Cu3x/a8cyNhK+LogSYZJnHn61qidW1abZWnigGZFDhrKMJ5Ugimot
+ kEd0to1DIAAIGTdXMQXHPEmAVYqCmav9l8TBmzzZtkwmITxgyRTQzFI/NTuTj4v3EQ8Wk+f799F
+ QSt82voPxKn6ZCHlvFLoU0zPdM8VSQnEawb42zvHRPBaYW/P36+Enw+xAdYMEtJqEKQQ1F+1bOG
+ IaHqrMOsr0sEcDLDGbM8F7hWMK3qf5fgzoSp3lCU3Gy9TLJtyRpTw
+X-Google-Smtp-Source: AGHT+IFEb2BNtoD5710Z0loNJRerbEJgyK5I86LJaRJkZgDQc6FFCE1+ws9RRbE1sdwfpx/IAb7q6Q==
+X-Received: by 2002:a05:6a20:3951:b0:334:97a6:17f2 with SMTP id
+ adf61e73a8af0-348ca75a407mr4150481637.14.1761903664029; 
+ Fri, 31 Oct 2025 02:41:04 -0700 (PDT)
+Received: from CNSZTL-PC.lan ([2001:df0:a640:1::12])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7a7db28d3fbsm1598601b3a.43.2025.10.31.02.41.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 31 Oct 2025 02:41:03 -0700 (PDT)
+Message-ID: <bbde8b7b-fa1c-4526-845c-849ea1510c2d@gmail.com>
+Date: Fri, 31 Oct 2025 17:40:47 +0800
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|AS1PR10MB5626:EE_
-X-MS-Office365-Filtering-Correlation-Id: f423cf74-ea04-4e34-7c5b-08de1860eb5d
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Ynl4eVBZcDdVZ1VXY1VyS1ZHL2ZObE9JMjlobWkwbjFmZlRsYVdYcUcxSDV4?=
- =?utf-8?B?eGJmNUwvUGtxSXNUU0Jzd1NhNTFaWTBNWE5sN2p6MEd5Sm5LRWJvRzJXSlpX?=
- =?utf-8?B?UlFVVE1vWVl0QU5RSjdhY2VIUTY5bUV4MnJ2U0xUN0Zac21yZUE0aStXV213?=
- =?utf-8?B?ejJpMUEwUmh4bERISmVHazFINURMWHQwSCthUlJubnRoWHVDV2tENU9DSS92?=
- =?utf-8?B?c2xWWWtBRFdjRmJ6bFRnNmFEeE1xR1hMYkpZdG1HT1BHMVpYemRUNUtUZVYz?=
- =?utf-8?B?VHh3OEIrcGJxYTRpbXMvcVpsQUxqKzU5Ynp0K2JXbnhSMWF0aWpmTzRQQWth?=
- =?utf-8?B?YU1OMXZ0eS9MYjR0Y0FSZDZIa1R4bEV1VUpBWW9WMmlkV1ZJenloUWpXcU8y?=
- =?utf-8?B?VDhkQzBKL21mTlJNRTNxSE1PcVhKUDBGdEhLL1pJcmdsanRjdDdIMWJyTVNR?=
- =?utf-8?B?M09jVDlEV0hqblZpb3JJY0VTcGhTMFdaZURyQkNjbEhZK3lPS0Z4OHk4emxk?=
- =?utf-8?B?ckZQK2lna2ZjOTZNL3lKdHRxa2c5YU5jbHpzS1QzMTk5VzAxSlVWcDhBZ0Ru?=
- =?utf-8?B?N3B4SGpaMXAwMEl4N0pqeFpHSFVHRWhXcXRhdlpMRWkyTStNWFBELy9nTU9T?=
- =?utf-8?B?NFlCV0pNeUVCM2crajdFbk12YUhkak5KOEJRNDRPWUttNDUrLy91QzRWWno4?=
- =?utf-8?B?bnJjdHRWcDlUTEo3MFArTjhhRzJzVGVnNDZtRjdWS0NPZENJTCtCcVRSWERa?=
- =?utf-8?B?QXVYUnZ6UmIrVzFsZTBld0Fzc2U5V2I3YTVvVGNHL2J1WWF5QlpMRERRdVVt?=
- =?utf-8?B?bkxMZDQxWkdORG1vWkpQZDFEWlh3eWU4dUpUZ2R0NWNESlEyS0RFbUtqWUtG?=
- =?utf-8?B?bUs2RC82RkZNbUROeXRMR3RHOXNQcUI3MkJlazlpRDd6NlJmUUUvZDFJT0cv?=
- =?utf-8?B?NGNHMFlFd05qb212M1hLZEUwUWZnTWNOemZaVDlOd0hqVFl0MFN5aldUVUo3?=
- =?utf-8?B?RHNvRzYxOXVkMnNnZE9ObmQxRGJxNU5zQytWdkcyblR3NTdpQndTMGo5L3ZV?=
- =?utf-8?B?ZTZaV0gzdWE4eVVGZHQ4c1pDZ1J2ZHlmczZuZVBMTmVXQmVSR2JkdThqck8r?=
- =?utf-8?B?eHlIMFk4OGxZTmNGMnBEWnluL1BjalNXdnJlSzNQeE4wUVZjd3pSUEloKzRR?=
- =?utf-8?B?Wjg4eFFhWEgxLzhpTDJUcTlYaEc4YWlRSlBTTXhhNjF1ekt2Lzd4WlVrYWJ2?=
- =?utf-8?B?V1dRQWdScU1yOThJQWMzc0dLSGxtMFBybG1wZ0tzWm1kbUZiZ1dZTWd0NU9p?=
- =?utf-8?B?emU1cTNYbWtuUkNqVURzQmY3V1h1QkxoNFFMZGY5TWJEWlpubmFydWhLLytG?=
- =?utf-8?B?UkVZZ0J2MXFjYmU5Wlp1VGpuSXdjdFlmVUNNbWswOWxWamplcEZ1WlFSOHho?=
- =?utf-8?B?cmJzSm1GUzBmdW1NZGdqdzF0RGhTc0o2MFZQb013cEIzK051NWVUek82Zldk?=
- =?utf-8?B?OUpIVGgzdU5pL2JGdm1hWmdNQjd3MFVncjRGS3RndmNDdndjbU5oT09kTXJl?=
- =?utf-8?B?Mk9oQ0ZyY0lnSUExTElJblBPbFJPWUlYaWpvSytmeGpORDlnOEVuRGg1RlR4?=
- =?utf-8?B?NUZZVXVlWlM0K0JrWlNJdlJMYlpPYWl6MkhLRDNsNFkweEMzYy9NSzlEcVI4?=
- =?utf-8?B?SkhJcnJzbGdaS2laRE5mMVdMTWh6MFlqRm8wMVJzQmxXZmxPM2IydkdreENr?=
- =?utf-8?B?QkJuK3o3ZEZhc3hrSjIxZTVZaXBuNWJKcE5QOHMzOWZqOVFQQ2I5cnRrcjZ4?=
- =?utf-8?B?RnUrZnQ3YWJ0YmxhdnFxT29GRFFDQ01SVXdhRnFrREJzYTRIZ1hkQzUyUkJs?=
- =?utf-8?B?aWZjY2lza2dYQlNoWXMveEdhdTE3Y0NLSXB4RCsxQlNKOUxTbUJqdWlNT2VF?=
- =?utf-8?Q?jaEBcI11saqNrKU6EOIa5i32WYgi+xrm?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VXZOUmVIWDlGbVhYZ1FFQjFEeHViUk9aVGYxMW5vYmJQUmtpNFlvTUZXSGVm?=
- =?utf-8?B?SU5TRkVMbHRGb3BtNk1iSEprSWgzaTFxNFJ5cWhmSktlRW9rNTEzVkFCTnlQ?=
- =?utf-8?B?czZ6RzgwVTM3ZVQydTNtcnZsemdhVXplMDhubUFFdmFzUHN0VHlTTHA2amVJ?=
- =?utf-8?B?VTZpcXRLTlI4R1dvNnR4QkUveDRZRWpia0U4VjArSGxSNTJhNXptS2wrM3BY?=
- =?utf-8?B?enZGSStuZVlObnlwL1VoQ0xWdHVuaXFoNlJyQjdvS2tZL1FrWnUrNE9tZGlp?=
- =?utf-8?B?T0lMQUJQWWM0MUdsYkl3UUhNTFl6amNpUWs5d0o3NllKeHoxN2FKa3BpRU01?=
- =?utf-8?B?VjhpclY1QUdPN0Z0SG1iSm14RDVrOFZoRmlrbmVpRjZVWW51S1owSXoxMFVo?=
- =?utf-8?B?amZSR29LTUZIc205N0FSbHR3eHo4dHk4dmVpOWUvalNXYXFPTEJ1YUhUMDV2?=
- =?utf-8?B?cjBsb0xMTmFqbGMxUXhWbHoxZUptdjcwQXNxSW1TeTV4SGp5OS9mTUE2YWhv?=
- =?utf-8?B?Y0FpQVU5c3dtLzhCemF0QVRwL2VIM3lCeEdXaG1JVlJkN3pnV3FlejMyTy9F?=
- =?utf-8?B?WWVDcUh3YXFySS9aWEQwRi9yWllZS1dESXRZdTRTSnpwdVNiRXMzamkrVllt?=
- =?utf-8?B?NGNLK2xiSUhRMW5BTnZxMHViNjE4VHV5S0k1Qk1abW5DUHd4SVFrN3dJZmNr?=
- =?utf-8?B?YllUSURXUU51Wjh2Q05XcVpDUlN4UU5LTTVNOER3STVHd2RaZWNZZm5ZVE5E?=
- =?utf-8?B?cWZIditvOHBnNUcwV1hDK2NkWE1YaU9tSkwxd3FGeEQwSFNYQkJjUU95ODl1?=
- =?utf-8?B?VnhtVkpxeHFTTzZXMVh3RDc3TUtjZEYrQlY1N241dDhpWE1kWFk4ZCtkWEFp?=
- =?utf-8?B?S0NPaGtNZUptNHRnanVvZmpSRmxKZ3Z3WXJSQjhEQWV6clBZN1VIeEZKVTUr?=
- =?utf-8?B?RDR6N1E0SXI5blVUQ2o3cnRvUVZjeDk4SG5RRXF2bGUyU2hwSUFaZ2ZlWHo2?=
- =?utf-8?B?SGpKTi9vbFVIVnpCS3lSeGhuLzRFblR6L1pJRGNUN3JkWlIxSk40aUhGVHBv?=
- =?utf-8?B?YWg0dEo4OUE4WGJvMkllSWo5WXBlbk1EVllJQzAreXlpelpVd3FLOE1uNjQy?=
- =?utf-8?B?TGRHc2lvczZBRnpwRUkwVGh6dzBrYXhvVW0rOU5FZDR0UmxPODdjbHo1ZWhB?=
- =?utf-8?B?bWFBSlNXUzRmSzV4U0s5dkR0UG9MN0I2OTNESUJJa2o3TWxpZXAyNktmRnMv?=
- =?utf-8?B?NTFlR1pYMTY4T1hubUlIMmFsMGNLbHpPanl2SGNZS2xLODAvaElvaDMxbHpr?=
- =?utf-8?B?UWpMVWFLalVEMFIrSjAwVml5dXhIRG1OeEpSMElPWWNGamtKMld4N2V1dXFJ?=
- =?utf-8?B?MktBRk1IZEs4Y1h4aUJLTHp3NEZMQzk3bGQ4ejRlZFJZVDMrb1FQWi95WFRE?=
- =?utf-8?B?Y1JneHZJcGxIZDlSWER2S01taVBhNzhnaDIrS0pBSytnZ3VaeWVQUHFoWDFs?=
- =?utf-8?B?aFZzVzl4QW00UWtmTGZzVU9GcmR2ZFpVN1l0V05OaDc5cnkybUdQVnRHZ0FB?=
- =?utf-8?B?NDRtU0VVTjMvMUE0aDVSQUpIdWsxWWNLQTRBc0pJbUFNSWVWK1NBeUI0VStV?=
- =?utf-8?B?SkI2NHp1TXh6NW0zaTR5K3cxZ2oyTXV4L3Zrb1YyYkVXMlR5dEFkc2V0STNR?=
- =?utf-8?B?YjF0Z1BuQ2JnSkNGMVVFdldiQjZDUDd5aXJtaTk2Rk5VZ044am1JQkY3YXVB?=
- =?utf-8?B?Z2xnaFA1V1lSam0vcnBueVYrSTV3cU9LMngwcEp6d2E4S0YrME1ZdnV2cXh5?=
- =?utf-8?B?YVBUMWFLVHp1TDBOaXErLzgrcys4b0trdHBpVzl2dUJLSHdlT1RPYjV0enIx?=
- =?utf-8?B?ZndOdVEwSzFueGNOUFc4cE0wRXErRzlpSjlRYkZRcWhGNFdYOGcrcFRVWkh1?=
- =?utf-8?B?a2VWeHpPbHhKazZmRWo3YzVmN29rcGs3TGdBWWVQbG1KdVpZWVh4cmRRc3Iw?=
- =?utf-8?B?OGpQL0lWdzBLWlA5dHlmRFUwbnlqcjByUmJYLzYzYzBib2tPTVg0QkpSTFZI?=
- =?utf-8?B?a0RWK1p0NGkyUit4a2tONStZRlhWMG03NFIwNm9ZRklKMkNueVFiVGM2YWZB?=
- =?utf-8?B?bkZVUURsckJIamY4d1JsMUZtTUdKdUErUC9TRFpKQmhZNTdpc3dvUGtQOS8x?=
- =?utf-8?B?ZFE9PQ==?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f423cf74-ea04-4e34-7c5b-08de1860eb5d
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 09:36:08.0139 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OTIeXrLIh4hmJrIpHbYSsv+rjOyAfQCrqedWm4fbvVSpRNUAcUzIueHPCRykQttbxx5PrBH3Q0XjlhgQbc7Atg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR10MB5626
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: rockchip: Fix eMMC write on RK3528
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250613224343.3521820-1-jonas@kwiboo.se>
+ <6ae3eab1-3208-4317-8ae2-5f5cac1e2dfe@gmail.com>
+ <dcbc1f40-f418-459f-9696-b39d22d63180@kwiboo.se>
+From: Tianling Shen <cnsztl@gmail.com>
+In-Reply-To: <dcbc1f40-f418-459f-9696-b39d22d63180@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -222,38 +103,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 31.10.25 10:07, Hans Gfirtner (Nokia) wrote:
-> Hi jan, all
+On 2025/10/31 3:41, Jonas Karlman wrote:
+> Hi Tianling,
 > 
-> I experienced an issue with some public keys (probability ~0,5%) u-boot fails to load secure kernel image:
+> On 10/30/2025 7:12 PM, Tianling Shen wrote:
+>> Hi Jonas,
+>>
+>> On 2025/6/14 6:43, Jonas Karlman wrote:
+>>> Writing to eMMC on RK3528 is affected with the same or a similar issue
+>>> as on RK3588, where eMMC must init to HS200 at least once to fully work.
+>>>
+>>> Trying to write u-boot-rockchip.bin to eMMC fails with:
+>>>
+>>>     => mmc write $fileaddr 40 5000
+>>>     MMC write: dev # 0, block # 64, count 20480 ... mmc write failed
+>>>     0 blocks written: ERROR
+>>>
+>>> For U-Boot to enable HS200 mode the mmc-hs200-1_8v prop must be defined
+>>> in the device tree. Linux does not seem to be affected and is able to
+>>> detect and use HS200 without this prop.
+>>>
+>>> Enable use of HS200 and fix eMMC write on RK3528 by adding the missing
+>>> mmc-hs200-1_8v prop for affected boards:
+>>>
+>>>     => mmc write $fileaddr 40 5000
+>>>     MMC write: dev # 0, block # 64, count 20480 ... 20480 blocks written: OK
+>>>
+>>
+>> Sorry for the noise.
+>>
+>> I recently got an E20C board, and I ran into a very stange issue, the
+>> U-Boot throw errors with any mmc r/w operation, like `boot` or `mmc erase`:
+>>
+
+<snip>
+
+>>
+>> I tried to use the generic-rk3528 configuration, and it seems to work.
+>> After making some tests (about 50 times reboot/reset), I found the eMMC
+>> works fine if `CONFIG_REGULATOR_PWM=y` is disabled.
+>> This is a bit weird. Maybe disabling this option just hides the real issue?
 > 
-> There is a small flaw in the script, imagine you calculated a “rsa, r-squared” value with leading zero, then this script outputs just 255 values for it, without the leading 00.
-> I tested this with a script generating hundreds of keys and observed this error with approximately 0.5% chance (matching to the probability of having 00 in first place).
-> I fixed this locally in our u-boot by adding ", 256" to make sure leading zeros will also be generated:
+> Interesting information and thanks for testing!
 > 
-> out.write('\t\t\trsa,r-squared = [{}];\n'.format(int_to_bytestr(r_squared, 256)))
+> Without REGULATOR_PWM=y the cpu and logic regulators will keep their reset
+> init values instead of U-Boot trying to configure these pwm regulators.
+> 
+> The generic-rk3528 target does not include information about any of these
+> regulators so they would keep using the reset init values.
+> 
+> There could be two issues related to this, first both the pwm regulator
+> and rk pwm driver are not fully aligned with Linux and round values a
+> little bit different. I have some local work-in-progress patches that I
+> should complete and send out to fix this discrepancy.
+> 
+> The second issue could be that the logic regulator should be configured
+> with a higher regulator-init-microvolt value so that U-Boot do not
+> re-configure the regulator with a lower voltage than it has after reset.
+> 
+> Did your testing also include the "mmc: rockchip_sdhci: Set xx_TAP_VALUE
+> for RK3528" [1] patch?
 
-Well, that may only help for certain key sizes. What if r_squared needs
-more than 256 bytes?
+Thank you for the quick reply!
+
+I tested this patch and it works like a charm (30 times soft reboot + 10 
+times cold boot).
 
 > 
-> An example for a problematic public key (generated with openssl) to reproduce the issue would be:
-> -----BEGIN PUBLIC KEY-----
-> MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5FeZKqBPrnGw3PgvfJ7a
-> ajFUMt94MIBsW5movhjKfdCqHJt0oS/bQWAeOEzW7eaAU9RnQev8ud+WgyVuKyrz
-> AaUZ6gpQC4V/Ll3Z1k06JXGInCxTVaOQh/A3fCgntqQmyotK6UeE/Xe9uvQ7Olw7
-> n+d1nyGWWTrWt5wqQ2HRCyiDtD9kSMYoM9rKlU301oJOCBKZlvHJz+zP3jNz52ZB
-> SFe3daaYmbIGz4mDTigJjGEh2BA8M+rT+/JkAUqUBC07wC+DsuNpr/A8QSTWs1Lk
-> YwpUuzTaDij/UN1gJ/Xw2NMEkQMAbz6F4U4TbBez6/zDa52i/LmRn4A1nxy7agY8
-> kwIDAQAB
-> -----END PUBLIC KEY-----
+>>
+>> Here's the build information:
+>> U-Boot commit: 4cad9faf8d28 ("MAINTAINERS: update my email address")
+>> rkbin commit: 74213af1e952 ("rv1126b: bl31: update version to v1.07")
+>> Build command:
+>> make CROSS_COMPILE=aarch64-linux-musl-
+>> BL31=../rkbin/bin/rk35/rk3528_bl31_v1.20.elf
+>> ROCKCHIP_TPL=../rkbin/bin/rk35/rk3528_ddr_1056MHz_v1.11.bin
+> 
+> I will make some runtime test on my E20C using these as a base and see
+> if I can replicate a similar issue.
+> 
+> I have also pushed my local pwm-regulator/rk-pwm relates patches to [2],
+> they need some re-work before being ready to be sent out.
+
+I have tested this patchset, and the eMMC works as well even without the 
+rockchip_sdhci patch/commit applied.
+
+I will make more tests these days and report then ;)
+Many thanks again!
+
+Thanks,
+Tianling.
+
+> 
+> [1] https://lore.kernel.org/u-boot/20250714203410.1782783-1-jonas@kwiboo.se/
+> [2] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/rk3528
+> 
+> Regards,
+> Jonas
+> 
+>>
+>> Any help will be greatly appreciated!
+>>
+>> Thanks,
+>> Tianling.
+>>
+>>> Fixes: b112a44531cb ("board: rockchip: Add minimal generic RK3528 board")
+>>> Fixes: ccbddf645310 ("board: rockchip: Add Radxa E20C")
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>> ---
+>>> Kever, Tom: Please consider this for the v2025.07 release as support for
+>>> RK3528 was added in v2025.07-rc1.
+>>> ---
+>>>    arch/arm/dts/rk3528-generic.dts            | 1 +
+>>>    arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi | 4 ++++
+>>>    2 files changed, 5 insertions(+)
+>>>
+>>> diff --git a/arch/arm/dts/rk3528-generic.dts b/arch/arm/dts/rk3528-generic.dts
+>>> index 792d3e04a4cb..3f6f0bed108d 100644
+>>> --- a/arch/arm/dts/rk3528-generic.dts
+>>> +++ b/arch/arm/dts/rk3528-generic.dts
+>>> @@ -18,6 +18,7 @@
+>>>    &sdhci {
+>>>    	bus-width = <8>;
+>>>    	cap-mmc-highspeed;
+>>> +	mmc-hs200-1_8v;
+>>>    	no-sd;
+>>>    	no-sdio;
+>>>    	non-removable;
+>>> diff --git a/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi b/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
+>>> index 9c2f03a786cf..1372d8f1e38a 100644
+>>> --- a/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
+>>> +++ b/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
+>>> @@ -2,6 +2,10 @@
+>>>    
+>>>    #include "rk3528-u-boot.dtsi"
+>>>    
+>>> +&sdhci {
+>>> +	mmc-hs200-1_8v;
+>>> +};
+>>> +
+>>>    &sdmmc {
+>>>    	bus-width = <4>;
+>>>    	cap-mmc-highspeed;
+>>
 > 
 
-Thanks for the report. I just sent a patch that is supposed to fix the
-root cause.
-
-Jan
-
--- 
-Siemens AG, Foundational Technologies
-Linux Expert Center
