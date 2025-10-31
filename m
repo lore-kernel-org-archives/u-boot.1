@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07273CCF9E3
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 01:51:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 935F0CCF9F0
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 01:51:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78B5883642;
-	Fri, 31 Oct 2025 02:51:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 22B9A838BB;
+	Fri, 31 Oct 2025 02:51:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ORMNgEYx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HMGoPVd/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75D5283887; Fri, 31 Oct 2025 02:51:00 +0100 (CET)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 910A4838C7; Fri, 31 Oct 2025 02:51:25 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D00B8331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 02:50:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A286F8331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 02:51:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-378d65d8184so22643151fa.0
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 18:50:58 -0700 (PDT)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-37a17d470dfso11726281fa.3
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 18:51:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761875457; x=1762480257; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761875483; x=1762480283; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3RQPmlEekhCXbyCAYpnfiWwEgW9qFh//QEKKaKSKr14=;
- b=ORMNgEYx4Z9NiSukILQGLoQ/sZfMlJJ5G+o8eTJ+xfpmcxG3icVT9u+2yy+D6CNKV5
- kq78y7CQnruIWjc4RyYA05Ue/huvzp0wqDrBkmkH8N6xgxTnZZWIXqzWW8U2AGZdKY8l
- TYP5JOnZQMFYbCFPCvlumJbFq41ANuvxp/4oVXK9vXwJqvnhRKZxZmlFLchDgoTnBPda
- 84AUDg1Sh6s85L4g1hoD0eGCPxea+zeJ97d2SHL8/wLDW+3M/is7pbIhyby0qIkpNWVE
- yrC20+tOgpTGuCvyUJL8ftFGu51qhiQpMcCRTpmx21vcc384/tIDFKN7rAQMu5i5aZ0r
- ENPg==
+ bh=Vujd3zBzFTAPhu/BGFA8Dgmyk1Rw+fhfDu0QchMxihM=;
+ b=HMGoPVd/5MCfY64K+JKJR3+cLOi/5D7pAmzZChAbwuP80xjuNz0gJ5tyVXx4zoTRk2
+ cEkPUVwsWYk1pvEw9v3SrCXsm8knnXrTr/GfK7lhb01W+bkIgz6BK0+qyrsTTMBJOdCg
+ D6zOXG3loXE8j81xttcis+JdK4e+tP7NVZ0pDBiO+iYjMacxTXRWdILRh4Wc8BF38cAt
+ iZp6qWEChjukWlrT60BIBk4DxWbRavFRl7qrpBtcGEgssD7spUgWjGXrbkMJ3/FjbixH
+ JmNSaskqSmy8WLgkMxij2iprtB15y0LoFlfg4sts7hHAlPqRVjrsRTKqrRu5+3wZ8cQf
+ cD3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761875457; x=1762480257;
+ d=1e100.net; s=20230601; t=1761875483; x=1762480283;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3RQPmlEekhCXbyCAYpnfiWwEgW9qFh//QEKKaKSKr14=;
- b=cTqodXwzCLZcWVABVMv4ta7OQLBniUX54nPBbK/vXwI9N3Pnl++zSZRFAV6uqH5slR
- wI0xKnCzhhQjESjcpsb85sL9ka+EkINJay6capejBZ64naOeKxYLn5D5dmruFOz+6XvC
- fYoEXAN3hgmH3gT0OyCzy89YecDn9WFzCeQsDscJDbmQGBeKHMSye4v4UF+7iOHNhoGy
- he84KsRPpkrAdwB8eM4Xibt4rajgZs+YPPcdv8HcmwP1u2vHe6dl9emyfwSSFsWy0Zu0
- VNGHqO4/jLdc9UYxM0k3kBfgNmkCZODRp9LHw61cW+yj+mpdJ9aCVgihHtjaOBgSZcz/
- Uhuw==
+ bh=Vujd3zBzFTAPhu/BGFA8Dgmyk1Rw+fhfDu0QchMxihM=;
+ b=tla0t49T1arhuPJeRb/KM8ZQve5SJGwT+BY+hU4H3tPYzcwU6TwTXh3F5rs9HhRW86
+ Z2B6e8GWCgbNqcrDLxMgmtmrL4PL8ZgrHZgXXqatkpouxc2F3y1u/MjV+S6oreKWZFIy
+ /DlMuFLpQT+oHB46krIcGPXx9AwodK2c+1p45QmMR2iQCPmkvjREAdsxC+iKxQaBQ6Y5
+ bVIyEEYf1uQ6VOosa4qcxyfv8tUa4feJnG26PXfKnd43xZG8jxrT9DnhweqgrcXAaahs
+ 5Wm2FrtpwSwM0w/NJVzwSWCTo8iV95o6ChcKAwH5zdQ813jO8Tjj3M98zvAo0FWLGaVB
+ /MHQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVYfwCXXMwmpd29f37U9ZlzZFyvX1+XdJexh7cBQe7oJsMjhak3XOQQOsts1/iGOYWcqt3kJWo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0Z3U6bC0d763JP0lnYsNk/SBPGbxrF3zbfLrda582TfjzUdqH
- G4sbl8kinPhnRB/qyhlSLa/bkwKIymDXszzSi4GVTzGsban8JC5TtYZjTk/3vlpYApcW2DDS/mK
- mBdhd9NogzdwdlP0+M3Cf4+prmkV+Kkg=
-X-Gm-Gg: ASbGncskh3KCcxnYVRo/XlXou4otAqZsdEM+niTfoul7uOgq6+YjDUOd7axYOc3G7iq
- SPUw0m7k7RtXSeHkezTdAVSnb3V0XzOeh/t/9FA1/t3OwfOthQQLYyQArU+qSyFKM4iPUpkcZWy
- rKr/ta2PDRpXd4pWL7dOJFgP4bHxReLKXimd/bKg+yaD6t0eGR578oIPXYb6TteWnu60a4SRVGU
- TtxrAtcM9OCVFr57CXcRUbriQJ7IVq6zIRA+xgPFqJ1vhQdntqGeT0tjz28xN3sdIaHq2HLcg==
-X-Google-Smtp-Source: AGHT+IEXlPpW8zD1mAIU015YyrIiOHZbabzx8oHWzfntSMtpPTwB5z5xZQrSRt+KtxAiCKSmx92WjzjvbHpUY9aRS6Y=
-X-Received: by 2002:a05:6512:304d:b0:592:f814:7c8e with SMTP id
- 2adb3069b0e04-5941d5252e7mr645595e87.24.1761875457135; Thu, 30 Oct 2025
- 18:50:57 -0700 (PDT)
+ AJvYcCVzMWR3xLSdAm70oN1LsdJPOk9pnpjLxpBa5hBqxP80xXaqb3tCRCCKqOs+mjtAuQeQdxIYr7o=@lists.denx.de
+X-Gm-Message-State: AOJu0YztFS88bMjdmlr7VScseVbEAf0p/SEAZ4Se+zww6rUgZLQt8YQ+
+ 6+A9dm3CBxcJPT6aNfZZVq/cysiIo7YVQxzpDP/66ADJYTd1oylT02VgEZe4IdZ7Y1cKpXcL4WW
+ 44KaqjsTClLe4598oPLNWRC+6/cqBzrg=
+X-Gm-Gg: ASbGnctfsQWpdSA88L+nCvXRk6GRF+bN7XeEuchuZ7zNo+sBEcIEQW5zw2ybYRbciP5
+ Pn0+VQbxWLtYljvjGfu2uK7NVRH2JR8sGQylgssVnq0qkA3ixO/QWjfCRyJBe2+KovWix7ExzvT
+ H6sk7TIWQs7i9jpCfOtSRp61IL32moyFJnSpIge/QRtetw0GXkAW4xij8VEvDlYeSgK9Lgh+xwX
+ DQlC+eNEsS7oWJ8psK3PGFXFZK3M/V9Ld7EUhrd21feWnlgQWChhhf9yMzaCAp0tyYlS85CnQ==
+X-Google-Smtp-Source: AGHT+IHq/wzB3LgMh/+zICEuXd9yiF1No4lGgPPf1oM4fLCfTpW979rtt+nKCXooxxegkkFmJzJAJ+CkmOowdSD5BCs=
+X-Received: by 2002:a05:651c:2228:b0:36d:e147:3f34 with SMTP id
+ 38308e7fff4ca-37a18d879eamr6760571fa.2.1761875482753; Thu, 30 Oct 2025
+ 18:51:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251027105859.258497-1-ernestvanhoecke@gmail.com>
-In-Reply-To: <20251027105859.258497-1-ernestvanhoecke@gmail.com>
+References: <20251013105507.35881-1-francesco@dolcini.it>
+In-Reply-To: <20251013105507.35881-1-francesco@dolcini.it>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 30 Oct 2025 22:50:45 -0300
-X-Gm-Features: AWmQ_bkIm0kZC30vN7lVH6Ibu3fNb5Tsr2xFU161RyP0d3u-9ZZcH4Q1M9L0Xho
-Message-ID: <CAOMZO5AMcdaUcKa5YRAw4JPhZ_9Zb1zXXxRd=SSneiCuGWdTTQ@mail.gmail.com>
-Subject: Re: [PATCH v1] board: toradex: add Toradex SMARC iMX95
-To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Max Krummenacher <max.krummenacher@toradex.com>, Peng Fan <peng.fan@nxp.com>, 
- Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>, u-boot@lists.denx.de, 
- Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+Date: Thu, 30 Oct 2025 22:51:10 -0300
+X-Gm-Features: AWmQ_bnNl4f2KkQpTxdYARcsqUj72DaIM1y9jAeRWtrLN6cDzUviDZLZfpwPIQM
+Message-ID: <CAOMZO5BDwXe-N4XY+dJ91Z7QbFyOCcHLUGxrf5ZgPptJ0R3bcQ@mail.gmail.com>
+Subject: Re: [PATCH v1] board: toradex: fix aquila imx95 0098 pid4
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -102,24 +95,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 27, 2025 at 7:59=E2=80=AFAM Ernest Van Hoecke
-<ernestvanhoecke@gmail.com> wrote:
+On Mon, Oct 13, 2025 at 7:55=E2=80=AFAM Francesco Dolcini <francesco@dolcin=
+i.it> wrote:
 >
-> From: Jo=C3=A3o Paulo Gon=C3=A7alves <joao.goncalves@toradex.com>
+> From: Francesco Dolcini <francesco.dolcini@toradex.com>
 >
-> Add support for the Toradex SMARC iMX95.
+> The memory size of the 0098 SKU is 8 GB instead of 16 GB.
+> Fix PID4 0098 Aquila iMX95 definition.
 >
-> Link: https://www.toradex.com/computer-on-modules/smarc-arm-family/nxp-im=
-x95
-> Link: https://www.toradex.com/products/carrier-board/smarc-development-bo=
-ard-kit
-> Signed-off-by: Jo=C3=A3o Paulo Gon=C3=A7alves <joao.goncalves@toradex.com=
->
-> Co-developed-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> Co-developed-by: Max Krummenacher <max.krummenacher@toradex.com>
-> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-> Co-developed-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
-> Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+> Fixes: 4c9340716522 ("toradex: tdx-cfg-block: add new pid4 support")
+> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
 Applied, thanks.
