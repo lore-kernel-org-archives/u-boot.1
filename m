@@ -4,53 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D381CCF9FE
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:23:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B025ECCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:24:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF036839A1;
-	Fri, 31 Oct 2025 16:23:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 44BE58398C;
+	Fri, 31 Oct 2025 16:24:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="EmPK6+WM";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48A3F83980; Fri, 31 Oct 2025 16:23:13 +0100 (CET)
-Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::1909])
+ id 740F783980; Fri, 31 Oct 2025 16:24:12 +0100 (CET)
+Received: from outbound.pv.icloud.com
+ (p-west1-cluster2-host1-snip4-10.eps.apple.com [57.103.64.181])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3949A83984
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:23:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6133D83677
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:24:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6b])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cyl9T6Dpdz4gD;
- Fri, 31 Oct 2025 16:23:09 +0100 (CET)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4cyl9T0lNtzZD6; Fri, 31 Oct 2025 16:23:09 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 31 Oct 2025 16:23:00 +0100
-Subject: [PATCH 3/3] tools: binman: fit: add support for OpenSSL engines
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251031-binman-engine-v1-3-c13c1b5dac43@cherry.de>
-References: <20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de>
-In-Reply-To: <20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de>
+ dmarc=none (p=none dis=none) header.from=infi.wang
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
+Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-west-1a-60-percent-2 (Postfix) with ESMTPS id
+ 0A2EC18001D1; Fri, 31 Oct 2025 15:24:05 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
+ bh=4qu7SH66bQeQKQrBMXeAytuDNzf20sF7rfK0HFpX2Ic=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme;
+ b=EmPK6+WMKmD3jdlGdYKCNA05OqHHlQwuSLXcbAzTxVdXu8vSieuxIbdjcno4hlSJ5ELMyv6VlGUzPuhUCxbAerdmpp6lDQrclFsKbuUc4rHUhJjuUEPTqJPUbAYLQVAQmiP/R0LtCJE/G4H4KTc4cfWIRIFYkgQOSZgQLOICdgdVulEW3of9zmHJ6T3zCZN+nXmPH1RgkYivuXEnQ1PD1yWbhuEVmE+WtmOCXNchBaSVpy5xRuNwogLrtDvV5dal52Dd6d3kLW/d0aXSSh/Z+VOZ9PjeMJ97UAvut4XAt/W6dgJdiWTkpjXJW3lGUXo8AKRWnZgc5uXC5b8/FkcmrA==
+mail-alias-created-date: 1549370554000
+Received: from debian.. (unknown [17.56.9.36])
+ by p00-icloudmta-asmtp-us-west-1a-60-percent-2 (Postfix) with ESMTPSA id
+ E46B118003CC; Fri, 31 Oct 2025 15:24:02 +0000 (UTC)
+From: Beiyan Yun <root@infi.wang>
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Aristo Chen <jj251510319013@gmail.com>, 
- Rasmus Villemoes <ravi@prevas.dk>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Simon Glass <sjg@chromium.org>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Shiji Yang <yangshiji66@outlook.com>, 
- Anton Moryakov <ant.v.moryakov@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>, 
- Bryan Brattlof <bb@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.3
-X-Infomaniak-Routing: alpha
+Cc: Yao Zi <ziyao@disroot.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>, Beiyan Yun <root@infi.wang>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH v4 0/5] net: phy: aquantia: Switch to generic firmware loader
+Date: Fri, 31 Oct 2025 23:21:02 +0800
+Message-ID: <20251031152348.60571-1-root@infi.wang>
+X-Mailer: git-send-email 2.47.3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: v3a9aQK2gAXknKq24YI6rWCQaOkThOJv
+X-Proofpoint-ORIG-GUID: v3a9aQK2gAXknKq24YI6rWCQaOkThOJv
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDEzOCBTYWx0ZWRfX5TW3YFWO+94Y
+ P08vx0P95Yx+hJsRSLFUxdCxOCrADt5YsaCPPPcT0JAghSSDnbpBd4NZGa55IkuBGMiDSpE12WL
+ g1y4lUs4LU5ybqqXa6Rk40zgHXFedDMyoW4gU8AQBpvVWAtSGteEUczh+hrAbwOps86R0NY7svA
+ 43PWCAvaov5j/MydoP14HX5Dgx1L2BSmDbpxlFnjJ7gMKxwExE59VMBUnzkS37WemmRbcNfEm2Z
+ Hl9hHkJSdN5dieidv5DmiNBN4H/6HtHvfCZFwO3vq7QsD0WjqGnLJMRbUdmpMzfbKhoVshuQk=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-10-31_04,2025-10-29_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ phishscore=0 mlxscore=0 adultscore=0 mlxlogscore=846 malwarescore=0
+ clxscore=1030 spamscore=0 suspectscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.22.0-2506270000 definitions=main-2510310138
+X-JNJ: AAAAAAAB04Cq/wEvlnh0xO27qQalzEJlXE3D/d8JGYoJumTgFfKsfTpW47J/wSxwUtlFIOoipYd2j571JKQIzXLDYyXwv6L1j/zZw7l7SSgr03gOm1/cd4Xowym1QmyBD+zhHdhPWjkXYnJyubTgYcZzKHeD4IWzq+sYMARbgSFykj9JSgSMcxy/SqqeanT/vldSf129bI4IZ/0z0yFRwwPEe79D+YvQvibq4NuubkLaZCjuBxsL4AhWWpk1EGDkk1yn44STFQPJAZFcw3KK2+aESom5EKr7A6bnjp0QenPTCIohEAIOWlwT5OPbiXi8G18d3HjQtXioi7ZoraM+AD9HxgLmSKIvZQ3GkSOci/eCHy/S9kCOxXpdGlf/n38qZwNaIzf4DBrDA68E4syWRVc/UO/nbZaG+HSI/HJB4ou/xXhbKkuOnMoEMwZ7ldWEdHrRzV3ghCHNiAUITe3MF6EfsQG3ZzGAUt5mtH8AhIL20txTmyUa7x7wf7C63HOoQ+QX5oq1E4VloNUUUoi9hnQmscJJ+YWfYD7/rNNA+6JuI6VEeBwoDHblxjzmABWGZFpmQVw6wobFcYaiQnZPUVRtvCIRZjKlHFikRJ3yCtvWwfRIOyafFR03Ls4eD6iV1p+YI0y5TYWipA0/LipU9l9Kh8x9PZBjS3moQk6O6hdntIK2SgibdPvbTRQQzzmrKMZzWJ0NgYDXSso4St64WSwibvEA9cty8v3tabbyjR1dgXz1v1D2haskyrTou1fimzScEOyep1gGLgGiHp0Z8jBaMdYy9FLN
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,139 +83,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hi,
 
-This adds support for using an OpenSSL engine for signing a FIT image.
-To use it, one should set the fit,sign-engine property at the FIT node
-level with the engine to use. This will in turn call mkimage with the -N
-option.
+This patch series refactors the Aquantia PHY firmware loader to use
+the generic fsloader framework.
 
-The key-name-hint property in the signature node will be used verbatim
-as key_id in OpenSSL engine API.
+The existing loader is limited to loading firmware from an MMC device,
+which restricts its use on many devices (e.g., routers) that may use
+other storage like USB or have a UBIFS root filesystem. Migrating to the
+generic firmware loader allows firmware to be sourced from any backend
+supported by the fwloader and fsloader framework.
 
-We could somehow still decide to pass some keys_dir to mkimage when
-signing with an engine is enabled (mkimage does support that!),
-unfortunately binman resolves key paths absolutely. I don't believe an
-OpenSSL engine will happen to have the exact same key_id than the path
-to the encryption key, so fit,encrypt and fit,sign-engine cannot
-cohabit.
+The series is structured as follows:
+- The first patch is formatting.
+- The second patch aligns binding document with upstream and prepares
+  for the migration.
+- The third patch aligns binding for MDI with upstream.
+- The fourth patch prepares current loading code for fsloader.
+- The final and main patch replaces the custom loader with generic one.
 
-The public key (with .crt extension) is still required if it needs to be
-embedded in the SPL DTB for example.
+Kept smb-addr intact as NXP is the only consumer.
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- tools/binman/entries.rst  | 22 +++++++++++++++++++---
- tools/binman/etype/fit.py | 41 +++++++++++++++++++++++++++++++++++++----
- 2 files changed, 56 insertions(+), 7 deletions(-)
+This change has been tested on a Buffalo WXR18000BE10P router, loading
+firmware from a UBIFS volume for Marvell CUX3410.
 
-diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index 8922d6cd070..7b162a3edb8 100644
---- a/tools/binman/entries.rst
-+++ b/tools/binman/entries.rst
-@@ -885,9 +885,10 @@ The top-level 'fit' node supports the following special properties:
- 
-     fit,sign
-         Enable signing FIT images via mkimage as described in
--        verified-boot.rst. If the property is found, the private keys path
--        is detected among binman include directories and passed to mkimage
--        via  -k flag. All the keys required for signing FIT must be
-+        verified-boot.rst.
-+        If the property is found and fit,sign-engine is not set, the private
-+        keys path is detected among binman include directories and passed to
-+        mkimage via -k flag. All the keys required for signing FIT must be
-         available at time of signing and must be located in single include
-         directory.
- 
-@@ -898,6 +899,21 @@ The top-level 'fit' node supports the following special properties:
-         required for encrypting the FIT must be available at the time of
-         encrypting and must be located in a single include directory.
- 
-+        Incompatible with fit,sign-engine.
-+
-+    fit,sign-engine
-+        Indicates the OpenSSL engine to use for signing the FIT image. This
-+        is passed to mkimage via the `-N` flag. Example::
-+
-+            fit,sign-engine = "my-engine";
-+
-+        No `-k` argument will be passed to mkimage. The key_id passed to the
-+        OpenSSL engine API is the verbatim value of the key-name-hint property.
-+
-+        Depends on fit,sign.
-+
-+        Incompatible with fit,encrypt.
-+
- Substitutions
- ~~~~~~~~~~~~~
- 
-diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-index db40479d30e..df4cc9b749c 100644
---- a/tools/binman/etype/fit.py
-+++ b/tools/binman/etype/fit.py
-@@ -104,9 +104,10 @@ class Entry_fit(Entry_section):
- 
-         fit,sign
-             Enable signing FIT images via mkimage as described in
--            verified-boot.rst. If the property is found, the private keys path
--            is detected among binman include directories and passed to mkimage
--            via  -k flag. All the keys required for signing FIT must be
-+            verified-boot.rst.
-+            If the property is found and fit,sign-engine is not set, the private
-+            keys path is detected among binman include directories and passed to
-+            mkimage via -k flag. All the keys required for signing FIT must be
-             available at time of signing and must be located in single include
-             directory.
- 
-@@ -117,6 +118,21 @@ class Entry_fit(Entry_section):
-             required for encrypting the FIT must be available at the time of
-             encrypting and must be located in a single include directory.
- 
-+            Incompatible with fit,sign-engine.
-+
-+        fit,sign-engine
-+            Indicates the OpenSSL engine to use for signing the FIT image. This
-+            is passed to mkimage via the `-N` flag. Example::
-+
-+                fit,sign-engine = "my-engine";
-+
-+            No `-k` argument will be passed to mkimage. The key_id passed to the
-+            OpenSSL engine API is the verbatim value of the key-name-hint property.
-+
-+            Depends on fit,sign.
-+
-+            Incompatible with fit,encrypt.
-+
-     Substitutions
-     ~~~~~~~~~~~~~
- 
-@@ -620,7 +636,24 @@ class Entry_fit(Entry_section):
-             args.update({'align': fdt_util.fdt32_to_cpu(align.value)})
-         if (self._fit_props.get('fit,sign') is not None or
-             self._fit_props.get('fit,encrypt') is not None):
--            args.update({'keys_dir': self._get_keys_dir(data)})
-+            engine = None
-+            if self._fit_props.get('fit,sign') is not None:
-+                engine_prop = self._fit_props.get('fit,sign-engine')
-+                if engine_prop is not None:
-+                    engine = engine_prop.value
-+                    args.update({'engine': engine})
-+            # Don't pass a key-dir to mkimage in case an engine is used to sign
-+            # as we don't need a private key on storage anyway.
-+            # Additionally, binman pass an absolute path as keys_dir which is
-+            # highly unlikely to actually make sense for engines.
-+            # Because of that limitation, we currently cannot support at the
-+            # same time fit,encrypt and fit,sign-engine.
-+            # mkimage will read key-name-hint and pass it verbatim to the engine
-+            # as key_id in the OpenSSL engine API instead.
-+            if engine is None:
-+                args.update({'keys_dir': self._get_keys_dir(data)})
-+            elif self._fit_props.get('fit,encrypt') is not None:
-+                self.Raise('Cannot have both fit,encrypt and fit,sign-engine')
-         if self.mkimage.run(reset_timestamp=True, output_fname=output_fname,
-                             **args) is None:
-             if not self.GetAllowMissing():
+Changes in v4:
+- net: phy: aquantia: refresh format
+- net: phy: aquantia: refactor firmware upload helpers
+- Split firmware upload helpers change
+- Reorder `aquantia_read_fw`
+- Make `aquantia_read_fw` weak to allow overide
+- Rename exit label in `aquantia_read_fw`
+- Kconfig polish
+
+Changes in v3:
+- Select FW_LOADER with PHY_AQUANTIA_UPLOAD_FW
+
+Changes in v2:
+- doc: bindings: use upstream bindings for aquantia phy
+- net: phy: aquantia: replace the "mdi-reversal" node with "marvell,mdi-cfg-order"
+- Add support for script based loader
+
+Beiyan Yun (5):
+  net: phy: aquantia: refresh format
+  doc: bindings: use upstream bindings for aquantia phy
+  net: phy: aquantia: replace the "mdi-reversal" node with
+    "marvell,mdi-cfg-order"
+  net: phy: aquantia: refactor firmware upload helpers
+  net: phy: aquantia: use generic firmware loader
+
+ arch/arm/dts/fsl-sch-30841.dtsi               |   8 +-
+ arch/arm/dts/fsl-sch-30842.dtsi               |   2 +-
+ doc/device-tree-bindings/net/aquantia-phy.txt |  15 +-
+ drivers/net/phy/Kconfig                       |  28 +-
+ drivers/net/phy/aquantia.c                    | 299 ++++++++++--------
+ 5 files changed, 188 insertions(+), 164 deletions(-)
 
 -- 
-2.51.0
+2.47.3
 
+base-commit: 08bf42e1faa4411cd347c2e370da790a0116e318
+branch: aquantia-fsloader-v4
