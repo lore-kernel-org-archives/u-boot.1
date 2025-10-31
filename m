@@ -4,131 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96ED1CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:00:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4334ACCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:02:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A36D8391E;
-	Fri, 31 Oct 2025 16:00:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 90A0E83936;
+	Fri, 31 Oct 2025 16:02:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="XXqoXX4B";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZFhXiG5z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7839183927; Fri, 31 Oct 2025 16:00:30 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4EDAE83946; Fri, 31 Oct 2025 16:02:34 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ADA8836F0
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:00:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id D7019838C2
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:02:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=C.Stoidner@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TV8MbjaTq/2THtt+rSxvMUJXtE87D/Ip/9rTigQFBiduAV57SZhf0Ih974VjkmAeqV2WNB3vAvulR4phcnRy+twVvWyexyVPbgI67ImFXzN+CFPXPe1AI7m/mpSKUHT1Dwij3+dxdTFvfgatIbi3GztxuRToBipmWackphrvwwjgz3gouI5NKWQZSKjPlzHH5XnL1qC1EggLZjcbOFLuL+F1f9l0KyfTMY2mO3kq8nIV8F09ZPOEGxme2n6COi3RGRMtzApen8m6BGl9Xh0duK2CVV084JezamURVfwr7ac2ZiBEpGbFI0NgpQZ3m6BC+3NywD6uETwWQEh5tEjbnQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=O9BBl/HlKuhgcyiRocsRTJrIq+iu4GCFLe7M3oBgeSc=;
- b=UhR65H28XQGX6/gvyS+7gZKIFk/9LW7Q6YyuzswcBICd3pFIaAScUUA3ZUzoXFP8K1bdAMKV9onhd4UFlQ1YH7kNLcKStZO6pCfoidS57miSydaT6WkfXJp/u/YwkeCAbRe4kuL/ac9V2D28DWTOSIyat0ynjUis3qI4MpbTNrG2kXaIObBgCcepz05tNiODyCV9Rbq/YheqENUvr5CRduWwO2remwNHkPi3eK+j7GEyq6oUNUmH9zi2K4Iupv9IGUE9HVcKOsrhD48TwHQtP1CphBJsVAnAoNThvNUi7AdPKdC6BlQfJrK48YY2aEF8FetmkvTHfFVYFko/+M5dSw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=O9BBl/HlKuhgcyiRocsRTJrIq+iu4GCFLe7M3oBgeSc=;
- b=XXqoXX4BXgdCfM5A/Tm/N+fOZBcdR8Ayb/7gHocwmQFlUU6uH20fHG4kTpo9IcvxoMenz2ml3WzfL4AWc4Rnq7BMrlRC0FtweUqZH4RJ9Eh2Jrndixbl9zNz1djIRdsd2fHfHuyKLuoQZzNHB4x15pGN206eizX/8yW7rbxS0shqhCFlc7t6A9eOHPHxQaotQnP2za4Qa2o/Y9qBTZVsey1Urcxf3woM/s24LRX6cGQCHVWDG2ZPTgH9jR7zoTz0YozBa4mxGjj1e88KkjcnoVP6xbwd0E3yEZiKlgJbEjBqaecWjN6aVP7Ai1X3lql/fiMoCmva0OiKvJwFCqhf2g==
-Received: from AS4P195CA0018.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:5d6::15)
- by DU0P195MB1724.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:3b8::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.13; Fri, 31 Oct
- 2025 15:00:26 +0000
-Received: from AM3PEPF0000A798.eurprd04.prod.outlook.com
- (2603:10a6:20b:5d6:cafe::f1) by AS4P195CA0018.outlook.office365.com
- (2603:10a6:20b:5d6::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Fri,
- 31 Oct 2025 15:00:22 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Postix.phytec.de (91.26.50.189) by
- AM3PEPF0000A798.mail.protection.outlook.com (10.167.16.103) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 15:00:25 +0000
-Received: from llp-stoidner.fritz.box (172.25.39.157) by Postix.phytec.de
- (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Fri, 31 Oct
- 2025 16:00:24 +0100
-From: Christoph Stoidner <c.stoidner@phytec.de>
-To: <u-boot@lists.denx.de>
-CC: Christoph Stoidner <c.stoidner@phytec.de>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH] mmc: Fix missing 1 ms delay after mmc power up
-Date: Fri, 31 Oct 2025 15:59:51 +0100
-Message-ID: <20251031145951.535376-1-c.stoidner@phytec.de>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c28ff7a42eso890367a34.3
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:02:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1761922950; x=1762527750; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=M6BZ3yojFzBGJp/wIE/EZG36v/s2feq00n8usAIpics=;
+ b=ZFhXiG5zOKiNj0xRYEg8/31do9hQdURa8S+/0nlxXA99/gN6mwqxTWJzAad5Sj1drH
+ 3VQ0d2vHTzCIq4tGIhevvQZNtx0as1iafvTvXLe+BxDHXwdZ1T8nrDFueSH2p9wHGWEt
+ PaaiapofeDgILGKBNJBGsr04tFDrFWgR+HMWg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761922950; x=1762527750;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=M6BZ3yojFzBGJp/wIE/EZG36v/s2feq00n8usAIpics=;
+ b=hi+3KfRA16eokjpbXpNEl8l1/hUVX7qC97T+e9ktPyACBLUDB6wq2FJNUEYqDeQ14H
+ 5ypjXAqWlEnYzGkCc3W/xVvZYlZZCvcqjtorLEAQtdWdbZgvwymwsKrHDClUKVpS3JA/
+ hr0NDkL73t/dWB2tcu5mCBUP8TomcNdNUoBZelGdBGmmlWzQeX2M+dhgUd2RoIZx73Zp
+ aOoXFuAUJEBv2HDu/b9eivtb9rnKjXpaAfq+U0ipYYvPKHx+mX1S11EPc7TZfpO7Hymm
+ 4FoZmYK+OuGUt5TXoufOJ4tJE4k4+r+PCKuBs9Cb+F6mthEdE10tdyxdlaRw2tB13xrM
+ NPyw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXXvflYsphwQvKrU2rqKApnM873Nj3rDPyWsC4fVXWfKGUPPb/el2MkLpJmKedjENK7OqKHZUM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzjKTsYKqR2DbKFNLRFsugFm5+s9xJcN78J9+w4G/mi59BARLF6
+ n8HC21HaVx0hcErf84eytChHstRIZisJM/Ty79N31TYBa8WFgYAhrsVJ3w1SMIQbYxc27lH6rQI
+ o+MkIVC+vMw==
+X-Gm-Gg: ASbGncvkG5pLdm3EHyH3+QBJhyJEP1lHk+0gq1qiAqpODXfw46obCYkfyrHvBWLiX9R
+ l74YRSX6IV2SNcybMiOxxu3W702evDzDGE+81VygOTIZQQ5QXdYiPpExNwRnp3+SzJjArbC0eyJ
+ 8pUehYnM+25GaGCK+gym2MF9q3t18WG/kFtund5xylfPzT3pV8vAWdNEceBYMpm5RKZWjqtoHxP
+ xgQxZ/Xu5BHfwh69mQomTP93U6U1hHwiaHcWQUCssGlyn50p1yBZnQKVfpPygbZ+rMXzJsrewn+
+ WswGZA71pD19xIUzMytuLmymp/bMKnREvGLS3Ar503I8p2zmRGpSrXtgo/REx9uJ5OySgSKsdCR
+ nfqO7gEtqA1rWRHU6ZnD1UbICrMtYDimxJYFkf+GId/Rk70yezDHHgMYWdPI6plubtRUbyaC429
+ k9eDybMbh3S5KdE56eY55qK+iN5ELkSdZSXPzjISRVss1ondJQdg==
+X-Google-Smtp-Source: AGHT+IFh/yMXn09AdVc/euEECKDB67ZuWFf/PuyB6A/hp6BQWjKg772jVQm9gcw06PR73oLePBP0tQ==
+X-Received: by 2002:a05:6830:6313:b0:7c5:3a9d:b6a5 with SMTP id
+ 46e09a7af769-7c6966ed3abmr2651676a34.3.1761922950418; 
+ Fri, 31 Oct 2025 08:02:30 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c699c1fbdasm604729a34.9.2025.10.31.08.02.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 31 Oct 2025 08:02:29 -0700 (PDT)
+Date: Fri, 31 Oct 2025 09:02:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Bryan Brattlof <bb@ti.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>, s-k6@ti.com, m-chawdhry@ti.com,
+ u-boot@lists.denx.de, u-kumar1@ti.com, gehariprasath@ti.com
+Subject: Re: [PATCH 1/6] arm: dts: k3-j7200: ddr: Update to v0.12.0 of DDR
+ config tool
+Message-ID: <20251031150227.GB6688@bill-the-cat>
+References: <20251031053425.3960963-1-n-francis@ti.com>
+ <20251031053425.3960963-2-n-francis@ti.com>
+ <20251031113240.b3kdiupm2v6n6tob@bryanbrattlof.com>
+ <20251031140810.GA6688@bill-the-cat>
+ <20251031143111.ifk5yqrt5akjakgi@bryanbrattlof.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.39.157]
-X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
- (172.25.0.11)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF0000A798:EE_|DU0P195MB1724:EE_
-X-MS-Office365-Filtering-Correlation-Id: f47f9634-a45b-43ed-03ed-08de188e38d5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Tvh/RcuIiy1YyX3QIuhMJPEk5fZk930cp5zlaLT5A7qj/gh1YBIaXFjlZv8g?=
- =?us-ascii?Q?E0A7c3OB684AbXwvCORVtQMVq/I8nmM76sSYQ01hWEHqwwEvs0LpXs6Hjs1d?=
- =?us-ascii?Q?cyqwuGJKbxUvsKY8Q4Of1feVGh3AVE4hl3p+vuaxR6gpMtbEs1twPkh8Rgq5?=
- =?us-ascii?Q?+BLMyGT9nig9eX6CYQsnuKF6DQr2GU0RI9aaS5mJ6cgpl+ky4T4AoZCJdArg?=
- =?us-ascii?Q?NNbX0Myd8jW5IVlAjM9jJL/9g2eTW0GlRFowhxUblkT9f26kBgBTdNzsGO1X?=
- =?us-ascii?Q?9nSsUaTyktbIP/pA2NPAQnCiIsonlvc4zeaLi1k7x0ZN5iC6UssrNzXJ4WHy?=
- =?us-ascii?Q?avLiDwjbJtWuBeO8FC19PZynqtN4gfnX8zL6zqxybtbKcKaYLGMH/TUhiwy+?=
- =?us-ascii?Q?91yfvI53OZ70C890Ec7ud9EbO71930dNJCmUj5iI26XBMBC3eRLk4Z+S2qo2?=
- =?us-ascii?Q?5C1BtrXYV55HsVUpJ295mBBgxyZ2Ti4cJFOqYAljoM0PsATo6OKtqa1Wk1ay?=
- =?us-ascii?Q?FPp4pcwzofbMN0ZkLVQYxsp9o8onS8NPlAfAYCe/eWV67DeYM4pjMpMcNmF+?=
- =?us-ascii?Q?Y0kJE6VEdhveIjgDufMaNWJAKEvh02LOP7XswIMcHKBrCo2ZwEqMreUZEaAC?=
- =?us-ascii?Q?ppXrSQ1SafwoAQRcbfSEWCHS+oeEbjTYdQhKkdgCDD/INffjQ1THrHf7gJqa?=
- =?us-ascii?Q?E1766ZyuEsBDP3ahBaSuN5cZoL2nahmnet9EdOaotxtQZ/mXf8/XxX8/fPQb?=
- =?us-ascii?Q?GlEdNIg6wf54oChO/xtMy9Ho5laPF2YUl0keuWCjrm6dBiw2wbynQcwq7Jtd?=
- =?us-ascii?Q?Y3RkUfNKsUoSWctfl4PhLgRo9OVa88DN087FfhfYrqSGmRzoJ9CsxkWI09ha?=
- =?us-ascii?Q?Ef4ws6xhjhSRrtyESxIYE18E91ZeGqQbYGGyj/kITqCHzEoFBN42C8I9jNXD?=
- =?us-ascii?Q?dyONoODkKN0QFTHby9yB/a09h6qw285IyGGwEPVG6rn7vSbjrWC6h2liJcvK?=
- =?us-ascii?Q?EYIiAd2tNO5SrrILoI2c0e987QpEUcCJFpYtHoNMebk6ZDfjyWyaW6RTDLAx?=
- =?us-ascii?Q?+loOahCLaKG2jc9hnj99/C65CbQaUYqkQuK3sZr1ESOyM3dif0UMSKZeN2c7?=
- =?us-ascii?Q?HyVvGBPrxLPaTg+f9vHc+ze2Qe9oFwu1Bf3R74kPB0l8KwFqEKRnk74P+JQT?=
- =?us-ascii?Q?6ysaaDmpHL06y6oPkCQ7ig09djjAIuhkEg7YJKgEgF0MgMelfDh6cFVjCxXC?=
- =?us-ascii?Q?lS1uM43d4w34QVt9r9hN6hxdeO+LZiE9K/eaEpBqhz87Z/JmWZrKf2SFIvzb?=
- =?us-ascii?Q?z4zPTBOaEZtOAEVne3Dto89P+/RtLceI8IOa3d3ig5pAlduNHxkWXLgeSe8j?=
- =?us-ascii?Q?aUT/YiDd+LcTkBPhR+xIBLkgT2tIrRbI1DImyqnPbuHwpbRkuLaQAx2MctOX?=
- =?us-ascii?Q?w82uKh9YI4MmDHJjLH8ha5yGzUfwvAZSZOEO11YezzQrlJtGMCbkpK2++yHC?=
- =?us-ascii?Q?RYxuC0ZkjPYZ1Qe2KG+dKlWbw6PtwH+tagig3pfn8We0Dqh4jgklK52wru5i?=
- =?us-ascii?Q?LAol+kN2mzMxYWLgyBw=3D?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 15:00:25.0668 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f47f9634-a45b-43ed-03ed-08de188e38d5
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Postix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A798.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1724
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Fh+pxj7LnLYwfXa0"
+Content-Disposition: inline
+In-Reply-To: <20251031143111.ifk5yqrt5akjakgi@bryanbrattlof.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,54 +105,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-mmc/sd specification requires a 1 ms delay (stable supply voltage)
-after vdd was enabled and before issuing first command.
 
-For most sdcard/soc combinations, the missing delay seems to be not a
-problem because the processing time between enabling vdd and the first
-command is often hundreds of microseconds or more. However, in our
-specific case, some sdcards were not detected by u-boot:
-* soc: NXP i.MX 93
-* sdcards: SanDisk Ultra, 64GB micro SDXC 1,
-           MediaRange, 8GB, SDHC
-* measured time between vdd and first command: approx. 784us
-* symptom: both sdcards did not respond at all to first commands,
-           u-boot mmc subsystem ran into timeout and stops to
-           initialize the cards
+--Fh+pxj7LnLYwfXa0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Christoph Stoidner <c.stoidner@phytec.de>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
----
- drivers/mmc/mmc.c | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
+On Fri, Oct 31, 2025 at 09:31:11AM -0500, Bryan Brattlof wrote:
+> On October 31, 2025 thus sayeth Tom Rini:
+> > On Fri, Oct 31, 2025 at 06:32:40AM -0500, Bryan Brattlof wrote:
+> > > On October 31, 2025 thus sayeth Neha Malcom Francis:
+> > > > Update the DDR configuration for J7200 according to the SysConfig
+> > > > DDR Configuration tool v0.12.0. Log of changes between 0.9.1 to 0.1=
+2.0
+> > > > is [0].
+> > > >=20
+> > > > [0] https://dev.ti.com/tirex/content/TDA4x_DRA8x_AM67x-AM69x_DDR_Co=
+nfig_0.12.00.0000/docs/RevisionHistory.html
+> > > >=20
+> > > > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> > > > ---
+> > > >  arch/arm/dts/k3-j7200-ddr-evm-lp4-3200.dtsi   | 2207 +++++++++++++=
+++++
+> > > >  .../arm/dts/k3-j7200-r5-common-proc-board.dts |    2 +-
+> > > >  2 files changed, 2208 insertions(+), 1 deletion(-)
+> > > >  create mode 100644 arch/arm/dts/k3-j7200-ddr-evm-lp4-3200.dtsi
+> > > >=20
+> > > > diff --git a/arch/arm/dts/k3-j7200-ddr-evm-lp4-3200.dtsi b/arch/arm=
+/dts/k3-j7200-ddr-evm-lp4-3200.dtsi
+> > > > new file mode 100644
+> > > > index 00000000000..810415494ce
+> > > > --- /dev/null
+> > > > +++ b/arch/arm/dts/k3-j7200-ddr-evm-lp4-3200.dtsi
+> > > > @@ -0,0 +1,2207 @@
+> > > > +// SPDX-License-Identifier: GPL-2.0+
+> > > > +/*
+> > > > + * Copyright (C) 2023 Texas Instruments Incorporated - http://www.=
+ti.com/
+> > > > + * This file was generated with the following tool revisions:
+> > > > + *     - SysConfig: Revision 1.25.0+4268
+> > > > + *     - Jacinto7_DDRSS_RegConfigTool: Revision 0.12.0
+> > > > + * This file was generated on Thu Oct 30 2025 13:11:41 GMT+0530 (I=
+ndia Standard Time)
+> > > > +*/
+> > > > +
+> > >=20
+> > > ...
+> > >=20
+> > > > diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts=20
+> > > > b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > > > index e35b767a7e3..3127ac83d7f 100644
+> > > > --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > > > +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > > > @@ -6,7 +6,7 @@
+> > > >  /dts-v1/;
+> > > > =20
+> > > >  #include "k3-j7200-common-proc-board.dts"
+> > > > -#include "k3-j7200-ddr-evm-lp4-2666.dtsi"
+> > >=20
+> > > These are automatically generated files. Why are we keeping the older=
+=20
+> > > configuration around?=20
+> >=20
+> > Is this tool publicly available? If so, using it should be mentioned in
+> > our docs too, so custom designs can update these more easily.
+>=20
+> Yeah, a porting guide would be a good idea. It's part of TI's sysconfig=
+=20
+> tools[0]. Maybe we can add at least a reference to it in the docs.
+>=20
+> [0] https://dev.ti.com/sysconfig
 
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index ec61ed92e86..2093d169094 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -2878,11 +2878,18 @@ static int mmc_power_cycle(struct mmc *mmc)
- 		return ret;
- 
- 	/*
--	 * SD spec recommends at least 1ms of delay. Let's wait for 2ms
--	 * to be on the safer side.
-+	 * SD spec recommends at least 1ms of 'power on' delay.
-+	 * Let's wait for 2ms to be on the safer side.
- 	 */
- 	udelay(2000);
--	return mmc_power_on(mmc);
-+	ret = mmc_power_on(mmc);
-+
-+	/*
-+	 * SD spec recommends at least 1ms of 'stable supply voltage' delay.
-+	 * Let's wait for 2ms to be on the safer side.
-+	 */
-+	udelay(2000);
-+	return ret;
- }
- 
- int mmc_get_op_cond(struct mmc *mmc, bool quiet)
--- 
-2.43.0
+Sounds good, thanks!
 
+--=20
+Tom
+
+--Fh+pxj7LnLYwfXa0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQTPfwAKCRAr4qD1Cr/k
+CpinAQDFEjA8aKExcZTMgM3Rbev4qo4DdhbM6IfPeGhloxv1ggD9FGKRfkJWaNt1
+wAdU92A3hen8Wd/CqIBg3VuJJrO7pQw=
+=0fXC
+-----END PGP SIGNATURE-----
+
+--Fh+pxj7LnLYwfXa0--
