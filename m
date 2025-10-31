@@ -4,61 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1036ACCF9FE
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:39:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3578CCCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:41:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76D9683966;
-	Fri, 31 Oct 2025 16:39:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 7C4B583993;
+	Fri, 31 Oct 2025 16:41:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="h0shdlFd";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D862183971; Fri, 31 Oct 2025 16:39:32 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 386438399D; Fri, 31 Oct 2025 16:41:36 +0100 (CET)
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7436383677
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:39:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 975618397A
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:41:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4739A601DC;
- Fri, 31 Oct 2025 15:39:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C245DC4CEE7;
- Fri, 31 Oct 2025 15:39:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761925169;
- bh=wFbm4u6x5jO0qqms4YA5ynXnVvrOmeM49d78Rwg9P8g=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=h0shdlFdtCsnP1S2n4WXlc8OlNL1mecaXtmleSAPFtp4L5Yl24+N4YivpaoCnIZPT
- rXw0GcIiSkuvHW0tHAS7kXl43Qm5tL3QaumSmzu3UX+YxTNt0oHKGrH1jje6OnLR0y
- 2DDNaoySFvWBLPJPu2aeeIPCTFFArSc+PPCtK+sJVWOlpHw+NEcQuPAa4au2aTvN/I
- MigqkQkynfr2lGq+pQnm3srOZix0yGXbMXMzt4+hL6wBOCa2SEC+ZZ6h4IPwORGahY
- /lSZPO1dIobux1pqugPB9I8NSDV9uRxmi/b8j/+QDzucokc8K+JeiKQnUsTWMKVPGu
- 3stHRCVwFlz1Q==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, Tom Rini
- <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Julien Masson <jmasson@baylibre.com>, Guillaume La Roque
- <glaroque@baylibre.com>, u-boot@lists.denx.de, Simon Glass
- <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>,
- Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- Maxime Fournier <mfournier@baylibre.com>
-Subject: Re: [PATCH v2 1/5] boot: android: import addBootConfigParameters()
- from AOSP
-In-Reply-To: <20251017-bootconfig-v2-1-8c7c2f2e5474@baylibre.com>
-References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
- <20251017-bootconfig-v2-1-8c7c2f2e5474@baylibre.com>
-Date: Fri, 31 Oct 2025 16:39:22 +0100
-Message-ID: <87ikfv5bdh.fsf@kernel.org>
+ spf=pass smtp.mailfrom=daniel@makrotopia.org
+Received: from local
+ by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.98.2) (envelope-from <daniel@makrotopia.org>)
+ id 1vErFo-000000004W7-1bQ5; Fri, 31 Oct 2025 15:41:28 +0000
+Date: Fri, 31 Oct 2025 15:41:19 +0000
+From: Daniel Golle <daniel@makrotopia.org>
+To: Beiyan Yun <root@infi.wang>
+Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Weijie Gao <weijie.gao@mediatek.com>
+Subject: Re: [PATCH v4 5/5] net: phy: aquantia: use generic firmware loader
+Message-ID: <aQTYn1wbwXXXnlT6@makrotopia.org>
+References: <20251031152348.60571-1-root@infi.wang>
+ <20251031152348.60571-6-root@infi.wang>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251031152348.60571-6-root@infi.wang>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,82 +63,265 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Guillaume,
+On Fri, Oct 31, 2025 at 11:21:07PM +0800, Beiyan Yun wrote:
+> Aquantia PHYs are being used w/o SPI flash in some routers recently.
+> Current firmware loader only attempts to load from FS on top of MMC,
+> limiting the use on many devices.
+> 
+> Removed the old firmware loader, migrate to generic firmware loader to
+> allow a wider range and runtime override of firmware source. (e.g., USB).
+> 
+> Tested on Buffalo WXR18000BE10P with UBIFS.
 
-Thank you for the patch.
+Does the Buffalo WXR18000BE10P use UBIFS as rootfs out-of-the-box, and
+include the Aquatia firmware there?
 
-On Fri, Oct 17, 2025 at 15:19, "Guillaume La Roque (TI.com)" <glaroque@baylibre.com> wrote:
+I'm asking because most of the devices supported in OpenWrt don't use
+UBIFS on UBI but typically use a squashfs volume, or even a squashfs
+filesystem or cpio.gz embedded into the uImage.FIT which is stored
+directly on a UBI volume (and not as a file within UBIFS).
 
-> From: "Mattijs Korpershoek (TI.com)" <mkorpershoek@kernel.org>
->
-> To properly implement Android boot image v4, U-Boot must be able to
-> add additional entries to the bootconfig.
->
-> Add `add_bootconfig_parameters()` to do so.
->
-> This has been imported from Google's U-Boot source[1]
-> The variables/function names have been reworked to be
-> compliant with U-Boot's coding style.
->
-> [1] https://android.googlesource.com/platform/external/u-boot/+/7af0a0506d4de6f5ea147d10fb0664a8af07d326
-> Signed-off-by: Mattijs Korpershoek (TI.com) <mkorpershoek@kernel.org>
-> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+Hence it would be crucial to make sure that using
+request_firmware_into_buf_via_script()
+works for those devices which do not store the firmware on a filesystem
+which is directly accessible within U-Boot.
+Imho that's also better than using a __weak symbol as it would allow
+implementing the board-specific method for acquiring the firmware as a
+script rather than having to write C code for each board.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
+> 
+> Signed-off-by: Beiyan Yun <root@infi.wang>
 > ---
->  boot/image-android.c | 38 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 38 insertions(+)
->
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index e46dee0d9b3..3a0a934acc7 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -57,6 +57,44 @@ static ulong add_trailer(ulong bootconfig_start_addr, ulong bootconfig_size)
->  	return BOOTCONFIG_TRAILER_SIZE;
+> 
+> Changes in v4:
+> - Split firmware upload helpers change
+> - Reorder `aquantia_read_fw`
+> - Make `aquantia_read_fw` weak to allow overide
+> - Rename exit label in `aquantia_read_fw`
+> - Kconfig polish
+> 
+> Changes in v3:
+> - Select FW_LOADER with PHY_AQUANTIA_UPLOAD_FW
+> 
+> Changes in v2:
+> - Add support for script based loader
+> 
+>  drivers/net/phy/Kconfig    |  28 +++++----
+>  drivers/net/phy/aquantia.c | 122 ++++++++++++++++++++++---------------
+>  2 files changed, 91 insertions(+), 59 deletions(-)
+> 
+> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+> index 018be98705a..4a74a0d4e8c 100644
+> --- a/drivers/net/phy/Kconfig
+> +++ b/drivers/net/phy/Kconfig
+> @@ -1,4 +1,3 @@
+> -
+>  config BITBANGMII
+>  	bool "Bit-banged ethernet MII management channel support"
+>  
+> @@ -91,23 +90,30 @@ menuconfig PHY_AQUANTIA
+>  config PHY_AQUANTIA_UPLOAD_FW
+>  	bool "Aquantia firmware loading support"
+>  	depends on PHY_AQUANTIA
+> +	select FS_LOADER
+> +	select FW_LOADER
+>  	help
+> -		Aquantia PHYs use firmware which can be either loaded automatically
+> -		from storage directly attached to the phy or loaded by the boot loader
+> -		via MDIO commands.  The firmware is loaded from a file, specified by
+> -		the PHY_AQUANTIA_FW_PART and PHY_AQUANTIA_FW_NAME options.
+> +	  Aquantia PHYs use firmware which can be either loaded automatically
+> +	  from storage directly attached to the phy or loaded by the boot loader
+> +	  via MDIO commands.
+> +
+> +	  This option enables loading the firmware using the generic
+> +	  firmware loader framework.
+>  
+> -config PHY_AQUANTIA_FW_PART
+> -	string "Aquantia firmware partition"
+> +config PHY_AQUANTIA_FW_MAX_SIZE
+> +	hex "Max firmware size"
+>  	depends on PHY_AQUANTIA_UPLOAD_FW
+> +	default 0x80000
+>  	help
+> -		Partition containing the firmware file.
+> +	  The maximum size of the Aquantia PHY firmware. This is used to
+> +	  allocate a buffer to load the firmware into.
+>  
+> -config PHY_AQUANTIA_FW_NAME
+> -	string "Aquantia firmware filename"
+> +config PHY_AQUANTIA_FW_LOADER_SCRIPT
+> +	string "Aquantia firmware loader script"
+>  	depends on PHY_AQUANTIA_UPLOAD_FW
+> +	default "aqr_phy_load_firmware"
+>  	help
+> -		Firmware filename.
+> +	  The firmware loading script variable name.
+>  
+>  config PHY_ATHEROS
+>  	bool "Atheros Ethernet PHYs support"
+> diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
+> index 461d4b07a40..934bd17eadd 100644
+> --- a/drivers/net/phy/aquantia.c
+> +++ b/drivers/net/phy/aquantia.c
+> @@ -17,6 +17,10 @@
+>  #include <malloc.h>
+>  #include <asm/byteorder.h>
+>  #include <fs.h>
+> +#if (IS_ENABLED(CONFIG_PHY_AQUANTIA_UPLOAD_FW))
+> +#include <fs_loader.h>
+> +#include <fw_loader.h>
+> +#endif
+>  
+>  #define AQUNTIA_10G_CTL 0x20
+>  #define AQUNTIA_VENDOR_P1 0xc400
+> @@ -127,51 +131,67 @@ struct fw_header {
+>  
+>  #pragma pack()
+>  
+> -#if defined(CONFIG_PHY_AQUANTIA_UPLOAD_FW)
+> -static int aquantia_read_fw(u8 **fw_addr, size_t *fw_length)
+> +#if (IS_ENABLED(CONFIG_PHY_AQUANTIA_UPLOAD_FW))
+> +int __weak aquantia_read_fw(struct phy_device *phydev, u8 **fw_addr,
+> +			    size_t *fw_length)
+>  {
+> -	loff_t length, read;
+>  	int ret;
+> -	void *addr = NULL;
+> -
+> -	*fw_addr = NULL;
+> -	*fw_length = 0;
+> -	debug("Loading Aquantia microcode from %s %s\n",
+> -	      CONFIG_PHY_AQUANTIA_FW_PART, CONFIG_PHY_AQUANTIA_FW_NAME);
+> -	ret = fs_set_blk_dev("mmc", CONFIG_PHY_AQUANTIA_FW_PART, FS_TYPE_ANY);
+> -	if (ret < 0)
+> -		goto cleanup;
+> -
+> -	ret = fs_size(CONFIG_PHY_AQUANTIA_FW_NAME, &length);
+> -	if (ret < 0)
+> -		goto cleanup;
+> -
+> -	addr = malloc(length);
+> -	if (!addr) {
+> -		ret = -ENOMEM;
+> -		goto cleanup;
+> +	ofnode node;
+> +	struct udevice *loader_dev;
+> +	const char *fw_name;
+> +	u8 *tmp_fw_addr;
+> +	size_t tmp_fw_length;
+> +
+> +	tmp_fw_addr = malloc(CONFIG_PHY_AQUANTIA_FW_MAX_SIZE);
+> +	if (!tmp_fw_addr) {
+> +		printf("Failed to allocate memory for firmware\n");
+> +		return -ENOMEM;
+>  	}
+>  
+> -	ret = fs_set_blk_dev("mmc", CONFIG_PHY_AQUANTIA_FW_PART, FS_TYPE_ANY);
+> -	if (ret < 0)
+> -		goto cleanup;
+> -
+> -	ret = fs_read(CONFIG_PHY_AQUANTIA_FW_NAME, (ulong)addr, 0, length,
+> -		      &read);
+> -	if (ret < 0)
+> -		goto cleanup;
+> -
+> -	*fw_addr = addr;
+> -	*fw_length = length;
+> -	debug("Found Aquantia microcode.\n");
+> -
+> -cleanup:
+> -	if (ret < 0) {
+> -		printf("loading firmware file %s %s failed with error %d\n",
+> -		       CONFIG_PHY_AQUANTIA_FW_PART, CONFIG_PHY_AQUANTIA_FW_NAME,
+> -		       ret);
+> -		free(addr);
+> +	/* First, try to load firmware via script */
+> +	ret = request_firmware_into_buf_via_script(
+> +		tmp_fw_addr, CONFIG_PHY_AQUANTIA_FW_MAX_SIZE,
+> +		CONFIG_PHY_AQUANTIA_FW_LOADER_SCRIPT, &tmp_fw_length);
+> +	if (ret) {
+> +		/* Fallback to DT specified firmware */
+> +		node = phy_get_ofnode(phydev);
+> +		if (!ofnode_valid(node)) {
+> +			printf("Failed to get PHY node\n");
+> +			ret = -EINVAL;
+> +			goto fail_free;
+> +		}
+> +
+> +		fw_name = ofnode_read_string(node, "firmware-name");
+> +		if (!fw_name) {
+> +			printf("Failed to get firmware name\n");
+> +			ret = -ENOENT;
+> +			goto fail_free;
+> +		}
+> +
+> +		ret = get_fs_loader(&loader_dev);
+> +		if (ret) {
+> +			printf("Failed to get fs_loader instance: %d\n", ret);
+> +			goto fail_free;
+> +		}
+> +
+> +		ret = request_firmware_into_buf(loader_dev, fw_name,
+> +						tmp_fw_addr,
+> +						CONFIG_PHY_AQUANTIA_FW_MAX_SIZE,
+> +						0);
+> +		if (ret < 0) {
+> +			printf("Failed to load firmware %s: %d\n", fw_name,
+> +			       ret);
+> +			goto fail_free;
+> +		}
+> +		tmp_fw_length = ret;
+>  	}
+> +
+> +	*fw_addr = tmp_fw_addr;
+> +	*fw_length = tmp_fw_length;
+> +	return 1;
+> +
+> +fail_free:
+> +	free(tmp_fw_addr);
+>  	return ret;
 >  }
 >  
-> +/*
-> + * Add a string of boot config parameters to memory appended by the trailer.
-> + * NOTE: This function expects bootconfig_start_addr to be already mapped.
-> + *       It works directly with the mapped pointer, not a physical address.
-> + */
-> +u32 add_bootconfig_parameters(char *params, ulong params_size,
-> +			      ulong bootconfig_start_addr, u32 bootconfig_size)
-> +{
-> +	if (!params || !bootconfig_start_addr)
-> +		return -1;
-> +
-> +	if (params_size == 0)
-> +		return 0;
-> +
-> +	u32 applied_bytes = 0;
-> +	u32 new_size = 0;
-> +	ulong end = bootconfig_start_addr + bootconfig_size;
-> +
-> +	if (is_trailer_present(end)) {
-> +		end -= BOOTCONFIG_TRAILER_SIZE;
-> +		applied_bytes -= BOOTCONFIG_TRAILER_SIZE;
-> +		memcpy(&new_size, (void *)end, BOOTCONFIG_SIZE_SIZE);
-> +	} else {
-> +		/*
-> +		 * When no trailer is present, the bootconfig_size includes the actual content.
-> +		 * We should write new parameters right after the existing content.
-> +		 */
-> +		end = bootconfig_start_addr + bootconfig_size;
-> +		new_size = bootconfig_size;
+> @@ -227,6 +247,11 @@ static int aquantia_do_upload_firmware(struct phy_device *phydev,
+>  	u32 primary_offset, iram_offset, iram_size, dram_offset, dram_size;
+>  	const struct fw_header *header;
+>  
+> +	if (!addr || !fw_length) {
+> +		printf("%s: Invalid firmware data\n", phydev->dev->name);
+> +		return -EINVAL;
 > +	}
 > +
-> +	memcpy((void *)end, params, params_size);
-> +	applied_bytes += params_size;
-> +	applied_bytes += add_trailer(bootconfig_start_addr,
-> +				     bootconfig_size + applied_bytes);
-> +	return applied_bytes;
-> +}
-> +
->  __weak ulong get_avendor_bootimg_addr(void)
+>  	read_crc = (addr[fw_length - 2] << 8) | addr[fw_length - 1];
+>  	calculated_crc = crc16_ccitt(0, addr, fw_length - 2);
+>  	if (read_crc != calculated_crc) {
+> @@ -290,17 +315,18 @@ static int aquantia_do_upload_firmware(struct phy_device *phydev,
+>  
+>  static int aquantia_upload_firmware(struct phy_device *phydev)
 >  {
->  	return -1;
->
+> -	int ret;
+> -	u8 *addr = NULL;
+> -	size_t fw_length = 0;
+> +	int ret, fwrc;
+> +	u8 *fw_addr = NULL;
+> +	size_t fw_length;
+>  
+> -	ret = aquantia_read_fw(&addr, &fw_length);
+> -	if (ret != 0)
+> -		return ret;
+> +	fwrc = aquantia_read_fw(phydev, &fw_addr, &fw_length);
+> +	if (fwrc < 0)
+> +		return fwrc;
+>  
+> -	ret = aquantia_do_upload_firmware(phydev, addr, fw_length);
+> +	ret = aquantia_do_upload_firmware(phydev, fw_addr, fw_length);
+>  
+> -	free(addr);
+> +	if (fwrc > 0)
+> +		free(fw_addr);
+>  
+>  	return ret;
+>  }
 > -- 
-> 2.34.1
+> 2.47.3
+> 
