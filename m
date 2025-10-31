@@ -4,148 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE843CCF9EB
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 07:49:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6ED2CCFA00
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 08:22:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BF02836F0;
-	Fri, 31 Oct 2025 08:49:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 0122E8331F;
+	Fri, 31 Oct 2025 09:22:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="eV/+C7uf";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CP9+TBTp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 044CC83849; Fri, 31 Oct 2025 08:49:57 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7C1AA83849; Fri, 31 Oct 2025 09:22:11 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13B018331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:49:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC2FC800B1
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 09:22:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zUMsjX1W7CaUfYVX20DcKHi7swgdsDD9PXH/e+A6P7KMM1GduzoMJJ3HCLnzDFzv5HRAlDx1kVVLaG2OrMORyOnpZ+rviJDmUYeb1R8aR7dmxnAqhFq/5Vhz4f8k6ur+5FPcxGLr37Di2L6Y2+PkSzTWvA4qmamhdzI2fhu5UBerF+RuBQ2frUWl8WE32RE/hgYe4pZvK84frQkoEPI6akumCU3WHdRPh3Lw1BNwrpubZwPnrU4CmrTOSpcp9qL25y9PSf9Wc0RBmUZw5gRmz8DB66zaeN/fL8ZLcVU0FTqjHtHeNPB9JcCfuf0tpMPXQhmOt0ZliqHgIKOSTaNsfA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Z1rTRbwdYcrmPkG5YYOqM5IrTiR2paZnTUXI/KC24zw=;
- b=ehESGfPcDtMYP7XfyHAJuRrTHaTmeOvbX3WWBsjKOE72T++fNPycZAuR3rpYDmBY/cPccnRlvUIWGDjZacZ5iud0JR0JKM2w4e+vJzxYdXh6/tUj7F6HzDSa9VmqD4KBXEXKpTJVFPKkXr1YJ90SqsUbL2enbWtQ4qnZzxuaypgeyR8J7wl92Fvnm5HLkKjC72H3c9WxaodeuIIzL1dgnp+3GiWb5x1FTiBsvw8W0CQij37+JPHlmEv7ZrfJk483jp4JNSBxA2Elwl5Yx7Or9G2Z6YYRHpnqF5Z9DqRLDxy0HbrBR/jmElchw+vIs0u6eCgx26yzV28mqvDDkwk+9w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Z1rTRbwdYcrmPkG5YYOqM5IrTiR2paZnTUXI/KC24zw=;
- b=eV/+C7ufkAlzOlRLaS9mnUg2TU1MfYWa2FNbTIVU+/ucbJfcObm+gxGVkMYPcz0xvLDDwopSO6o8UQ9wrkB59Rq8sWhZeEGuv5m5pgCV7awrvLzpe7RBHnC2IIaJBcxvZh3yS7iZh5xw1fTVQYBEmvmk9LAYyWW2kfVTWlJii0xHmK3HwmVpJkir0GSfU3VJNNYqCHtIQWiaxSh7xQdorKygbUaxMlzu3QWpuPZa0bqVU1Gqix4PlqLGPdgAOLw1ERBL6fujjTrqjbLAZJFH/FtZlniyy+OjE5otRXVvCgov3dtOt4gm2jXfqxWlZTedAifWT1wsB2VLLEAH8N7d6A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by DU4PR04MB11434.eurprd04.prod.outlook.com (2603:10a6:10:5cc::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Fri, 31 Oct
- 2025 07:49:53 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9275.013; Fri, 31 Oct 2025
- 07:49:53 +0000
-From: alice.guo@oss.nxp.com
-To: u-boot@lists.denx.de, uboot-imx@nxp.com, sbabic@nabladev.com,
- festevam@gmail.com, trini@konsulko.com, marek.vasut+renesas@mailbox.org
-Cc: davidzangcs@gmail.com, sjg@chromium.org, ye.li@nxp.com, peng.fan@nxp.com,
- alice.guo@nxp.com
-Subject: [PATCH v1] arm64: imx8ulp: Split SRAM0 mapping to isolate the SCMI
- shared memory as non-cacheable
-Date: Fri, 31 Oct 2025 15:49:02 +0800
-Message-ID: <20251031074902.2066064-1-alice.guo@oss.nxp.com>
-X-Mailer: git-send-email 2.43.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SG2P153CA0053.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::22)
- To PAXPR04MB9644.eurprd04.prod.outlook.com
- (2603:10a6:102:242::11)
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-429c48e05aeso13591f8f.1
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 01:22:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761898928; x=1762503728;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=eTZ0KoCPoG3MjuGCZpD/SuK6yiL8+YzWGgle1LFo/0U=;
+ b=CP9+TBTpD8dn+hXJ2jk8Ziwkd78h9fBKdAlPm0+9dMRAWMZ6bZdCG52H8Pa0i42Rw6
+ MfI82XKAZx0T5B17VhER6NWPCJZJneAFSHGGBIeyFd6wgg4oxeK7Yxqbfz4q/oJtnupk
+ cSRZS0ImAs4qgryRHubUAhes5qvzJFxkkwWL8lk6FNUg6V5szr8pMSLdXPVVL4GoztNp
+ U+lZ/85/IB1J5ki8LOCL1U+ijf46/MoUbuduu+n6qitoO3S3NEEqJC5jQNdDxypgLyHW
+ lpm1XPN/cCnwLYNYu6ewNEdfNpeAnzpIku2mQ/mkurovRsM/JR+L+qS33kSfwnbhOEHf
+ PGWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761898928; x=1762503728;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=eTZ0KoCPoG3MjuGCZpD/SuK6yiL8+YzWGgle1LFo/0U=;
+ b=K9FqEEeqK/3ZOJ3SJgYVxUCv5YoLEyltZrOm0GtpJU2tBRMihW9O3skaZWD8oFgwAB
+ PEeV5gh0f+ErpMkvSmr5QZIKsWVD2wZgRgLcNBaQVtBRhlMKx+qqCPsJ6LcxLBNb2/RH
+ 8Q70fJXPpwdnW4ST1qPCsozuNnhNzBGT+xVL7n+/9wWDVX5xTeaBpqlJx3c8zPalsiQZ
+ a47/nlaMiaKlomSD7UEk1najuaeEnugMn6WuTxXz3KVORN8NHSLl8atDM4QTt9B/lfe+
+ Mw8X4SuBPcG44TV4nhXeRiIoLSWed7vK3rkL7GgQPvH87LxrK8OAvGpHMNPFZmLkXKI7
+ +ErA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXQFv6/0zmd61WYkCSh1c41CUNAw7H5QZ9M2JerS8mvXLwiEUeIa8Jko0kE226f7FPWCfojKR4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWsva1z4/8kNCKzDtAjvDfb3AZDMNsbKgFAkbyhrs9wyx85tN6
+ x7rF0JduaCaqSKedtcRCwWBlzS8sPPRMt8PUtqHdEa5evG8jjH5ZLuny15BzRqRvUgo=
+X-Gm-Gg: ASbGncskVpLd5PB7I94SSgn0NDddN73UV0syMwDb0/chf64+gOJ2hfEzT+wBmNCfG1f
+ EZhia35WdCX8gy+gMWdQiD2+k1tla2/B1SsKYFbTUkZ6WcgkgND6flQNCiesFCZ5Jh+n/x/S7OQ
+ CSkda2wSsluEQP2I3E5BaTY/TtNXfwlWS6AZljyassOhzABQleDTP3QSZ7ZkfF7TbCDIM2/lSqn
+ blXcz5dFIaCCmI93CRUz0W+OAybrUCvHpfHgALr8eH2vCrUAVy3rPqit8UbhBPj0RZTTJ+0gN8V
+ HLvusfB3E7WDzHkhd+HndTIPARAdDaPFyP8dy5T45Xt+W3IdSJA0NonZznZNz//y+Hfe8eU6H7D
+ fs/g2oN/rq74rigRRi06ZChpOxQUqaCpKpG6S/UpKIDv7OV1wXgSss1bqPCwRpEH6luHOlMqqxZ
+ 3QgdHGpPSoNW09cZw5lBWmEvpXHsL0BHRNNcXNl3S8vgn3klCTr9rqiFguyw==
+X-Google-Smtp-Source: AGHT+IHZOudIWXFEhZewBgYIw3zZ2Hsd5qp6GMp2ulptVb90sBRL6HVo4RjRTBuvu0cVfqslccCd6g==
+X-Received: by 2002:a05:6000:26d2:b0:429:bfbb:5dae with SMTP id
+ ffacd0b85a97d-429bfbb606cmr1269633f8f.17.1761898927956; 
+ Fri, 31 Oct 2025 01:22:07 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:e50:3860:d519:e583:910d:b32c?
+ ([2a01:e0a:e50:3860:d519:e583:910d:b32c])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47728a979b8sm82132135e9.10.2025.10.31.01.22.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 31 Oct 2025 01:22:07 -0700 (PDT)
+Message-ID: <c2121665-7eb3-473d-8933-e6729c3e9040@baylibre.com>
+Date: Fri, 31 Oct 2025 09:22:06 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|DU4PR04MB11434:EE_
-X-MS-Office365-Filtering-Correlation-Id: 959e072e-21db-4bda-1eed-08de1852137a
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|52116014|366016|19092799006|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ZKAUkxyOmymPeGkgX/ujXbVyh0jDzjGmpJ0kfrcRdcLKPXTPLLut8RgMnh8Q?=
- =?us-ascii?Q?kaXvUZ6YpIhgtIsjr84GFsjvbInVpr2sTnquaGbGrQF0gks86sm2e6JPhSS5?=
- =?us-ascii?Q?eD2F/U3XtK0VAPtg4/RhB1TY21uVarYGacBbw25nvbTDY+NOWhdLxUNblxLc?=
- =?us-ascii?Q?Z9xx/JcX8ZeIRLz8EaSWByeSjmIch0KauHvC1CR3BxMAVbKx4dZIGAec9yQX?=
- =?us-ascii?Q?mlsks4vdvYg9IVTl8erTz+/ef7hbUiLyBWopcuweODn7Gz3s+xkAW/KsYGFN?=
- =?us-ascii?Q?BLwlaI2hDzcazdVmCm5ZGivnoR3Szoszu+tlUSFBziLvix89/2R/ysglCWWO?=
- =?us-ascii?Q?Q9n6UZ8579Gknk7HeG17i35Hb8KhSwuh0QPf6BTUThIwfB/NOD8BBXsGBY5E?=
- =?us-ascii?Q?ulQLM4aMUt86jks4H+nREId7V5+V6rmushlu4chTLpsDiq8UTA5xNETVD+DY?=
- =?us-ascii?Q?rtaJA3Zk9cgEJ4DS6O4YGtx+YgGO3PnHjPhVx1tCliZdV7tvtU3dwOsDcT6s?=
- =?us-ascii?Q?2djWweeHXEDT1NEmPmZaMJ4QHOjfr2+1xUNmBfFySRd52bqA7XdyczIGTmjR?=
- =?us-ascii?Q?g388MhIX6xui29DS0QainkesImrW5F6yfb4hZ4TQ9yJMxWQy4nfFwAQgqdK5?=
- =?us-ascii?Q?JmzitGeXakVD5KODxSlgeTKLl2Ure6oVTfCSK6XGW63xQZUn1bBP7XlfR3B7?=
- =?us-ascii?Q?Kmf3Qg7T3ogxERstx7hDy2LGeOmJ/ngoP/UzAPdcZy6fIqOfHjFwdazxePd2?=
- =?us-ascii?Q?C/6tbbWm5GNwPMBXWPM4nuL3072w+mToQ0uM9WU2ZERm6hNfWgutmEkqltcI?=
- =?us-ascii?Q?Jic7n7Iw8LanjFgpIidiOpoq64uo75KCnKsZcREQUE1IE5vA36lg5RXtSW6m?=
- =?us-ascii?Q?4UG/nB8pWAfi8wv658RZGdW9rIXQ/H5rmG6xlD3fBwAPDohoQDqscBUSiAjR?=
- =?us-ascii?Q?3usXDZ9RzhX1xd2h/Y+ksFgOj8U7o23cdUnAvQU05vKxWDLVjWOkjD8ExxwL?=
- =?us-ascii?Q?m2CuDO6Ugsa1MNq9kjQmTvWyC2GL/DI3GjiLYgbjsyPiMAltkVzrQ5Mg0Yba?=
- =?us-ascii?Q?CREoPW97fPnW5lpetx5Pa12VAgM0FRedZZjHQ4LbHjP638Yfbbo01F2ujTWq?=
- =?us-ascii?Q?AIyGNT5UAdZPm2rcZB7/+N3qFRnh/AbYmnFZ1TS7J5bVydj1FdZlA3rmBaAz?=
- =?us-ascii?Q?4/7DL+2YjuGyBX9/uz3BKw3qAboBpCDu9xxR4vPkJ+GBMb4RboHdNVb/6xWz?=
- =?us-ascii?Q?3uWP+HACjXl0pQ/bNOqY3lx9/ot4ehEc0NyIubxO7fMcBWsxvMMqzl/+2uCj?=
- =?us-ascii?Q?yKy5yT9AB2j1ImjbCXDHDtvH0jhW5gFtk/f+3vwOy9mXqoHl03GrUQn1gK09?=
- =?us-ascii?Q?EFjKjhvORwohUcNY1DfLOAsnDlrr4eO6U5axWA8jqhUwO/CO5p9kede3a/aI?=
- =?us-ascii?Q?3nsgEZJX0Jbbfbx/QIQHrfWQarz9gvFQUAdqyzrPYj69sZhK6xLchVsV+nLH?=
- =?us-ascii?Q?teGpkPo5vkc+N2Q9sbWyDXf0a/bwr+nyzqBI?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(52116014)(366016)(19092799006)(376014)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?cRz9inDDqrJMmS6/xk5zc/C0pUaaGjo3Cp3zY3vxG1SJVulPLigPK3eZPClt?=
- =?us-ascii?Q?01s/D9ENtHgeAa1H/5CwLqSN+I1BmWCMYAFaoc453g1FhlNIVEFNgCJf9OyI?=
- =?us-ascii?Q?g9ubik0hOdeVb3hatZNLScMnvdvmEk2sbhv+zIWjWD+2eEGDjcskDNPzaudw?=
- =?us-ascii?Q?S3MD8qyrv+uhyZDu/JWNtiWvUtQdWLryvsmwE6D22aRNmgHhbK/Q4LAmqgCM?=
- =?us-ascii?Q?bdoL6fCo88Yx/ilOgxGnBVtCW/nI630J2dfnjPkCmcR2DU2u++lEnnkkdXg5?=
- =?us-ascii?Q?0rl7ARKM4GYqNvWimr484ni3OQvQHJLR1EhTxb7OoJt1XU3fF84q3k1fTo3X?=
- =?us-ascii?Q?XbIh+HFmSm5ydQPW7NnpMzMpuPgyaqVldFVUSa16+ihGGoAyl1vu9ltb4Aaq?=
- =?us-ascii?Q?nJrGBZGP7AMiHoRYasHZ3/7OROIYuXLoqBRoI3o/PabJ7HHYFbGGzATC0WV7?=
- =?us-ascii?Q?iORl8OKJJ/I3ZA3X2FZjXannNVCt0ybm/ZDl3MD9sGXUZXfpjswkFLXf5jvZ?=
- =?us-ascii?Q?prxLVHklN2ptzLlv1QWuyqSLG/mrK6Al9CAJbGStPpNrCb4pwPFn3Ir0Fjwd?=
- =?us-ascii?Q?o6H1Xwy9Vrvi5lTFm63In60oA8ycy2owMinjDqaQ9Y+wXtOfjEVQR4DNnK4P?=
- =?us-ascii?Q?r+rrFA1pP9f4Bir5ZRynk/BdptxeBLdV4k+s4zJ/ZEsFTTS0tNw0L3HWU10N?=
- =?us-ascii?Q?wOF2EgR34q76WdaUp6hVsdKv7NFWzDXPI1ODzCghl5Huwz60KCEc+nuiX2Nm?=
- =?us-ascii?Q?Xir+KSsacTHiHa+gAUpRcFh21KSCR20F5vgXsipt92ksJzqGZnplasHSko6C?=
- =?us-ascii?Q?VLBCf4bvLZaOsC7Xf+pb3J3rZnd2efgWS+vOl9Z/JzMbbxYvLwjkvntZhZP+?=
- =?us-ascii?Q?r9Hkbl3aNYT+MjfFIN7FXpfxjuo2OvRlYoUMc+vUooACGq3gONJHzUFdQGEu?=
- =?us-ascii?Q?D0+MfwF4f8ctSLaBwxmXgqI6ZYmR30PSzbhyWJDPepLfBdOYPMMteQJD+42j?=
- =?us-ascii?Q?mEmgnHew0uu5rsuLsirVjPwxMNGt6AorOGGSwiSY1yuIp9ANlueQlmkJzmb1?=
- =?us-ascii?Q?xrjpILQGpI315J6hQekTdtqa22Sm/ZhrV/0SL0/DnFpLwm7qXs7Pg7USUCjW?=
- =?us-ascii?Q?UBLI9Zjia90+LsgAc+62ofe8Y75V9pyF9vwV8qSvqzGf96yBmtrkh2hdtmib?=
- =?us-ascii?Q?Ir3vgPrEiGgXMgkPJte6C+nOWmknL4YdhrMqxzJGCNAFCGyA+my2T2uwqxBt?=
- =?us-ascii?Q?i8GKIxuLXBDeYZAeQ8/9UFtUyyWmsAcWLfkdeEVbzNITkLCZGbmn1jUozOtr?=
- =?us-ascii?Q?zca41TmaqylxrlvQmIcjEu+558X7W3o5Nt15O69+Cv5de8STzGm1WebWEUOw?=
- =?us-ascii?Q?FbCxiOaqu7dPWy9awJm88ek5YCFnoK6fhI+OnEf5XMnxk1tP+ZEVHepJo6xm?=
- =?us-ascii?Q?GGK2kYlmwOAO6QRv2K7g5E81Axr7auU8PM3Yg8qQg60s2jjerNJdKiQyH/ou?=
- =?us-ascii?Q?OM/10+b/pt9Cz48iAr73xS7sCp9A6BV4U4WYJceE8WZ1PJbjBWmVc0euiaox?=
- =?us-ascii?Q?K/SnkCpn3spsovWAVuboHu7e77ZcYxMDiY2mLBqk?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 959e072e-21db-4bda-1eed-08de1852137a
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 07:49:53.0501 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oDf0EobMzDJUwWkg5mx1sbeJoYPwG7QvHKBwe619Rl6EKI1VCP5O4OVw1A4G6d5lhmEUzJLBzZ6xSzURgdZOnA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB11434
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/4] board: am62x: Add support for reading eeprom data
+To: Andrew Davis <afd@ti.com>, u-boot@lists.denx.de,
+ Anshul Dalal <anshuld@ti.com>, Bryan Brattlof <bb@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, Garrett Giordano <ggiordano@phytec.com>,
+ Wadim Egorov <w.egorov@phytec.de>, Neha Malcom Francis <n-francis@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Santhosh Kumar K <s-k6@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Devarsh Thakkar
+ <devarsht@ti.com>, Prasanth Babu Mantena <p-mantena@ti.com>,
+ Judith Mendez <jm@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dhruva Gole <d-gole@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Aashvij Shenai
+ <a-shenai@ti.com>, Peng Fan <peng.fan@nxp.com>
+References: <20251024-am62xeeprom-v2-0-0e372347e7d4@baylibre.com>
+ <20251024-am62xeeprom-v2-2-0e372347e7d4@baylibre.com>
+ <8127d3c6-3b1e-4e8c-9ae5-efd7740cc54c@ti.com>
+Content-Language: fr
+From: Guillaume La Roque <glaroque@baylibre.com>
+In-Reply-To: <8127d3c6-3b1e-4e8c-9ae5-efd7740cc54c@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,49 +117,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
-
-This patch splits the 2MB SRAM0 mapping into three regions:
-- 0x22000000~0x2201f000: cacheable normal memory
-- 0x2201f000~0x22020000: non-cacheable device memory
-- 0x22020000~0x22200000: cacheable normal memory
-
-The change ensures the SCMI shared memory is non-cacheable, which
-avoids cache-related issues after removing
-mmu_set_region_dcache_behaviour() from scmi_dt_get_smt_buffer().
-
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
----
- arch/arm/mach-imx/imx8ulp/soc.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-imx/imx8ulp/soc.c b/arch/arm/mach-imx/imx8ulp/soc.c
-index 04c6f064130..6cb6b0e7429 100644
---- a/arch/arm/mach-imx/imx8ulp/soc.c
-+++ b/arch/arm/mach-imx/imx8ulp/soc.c
-@@ -384,7 +384,21 @@ static struct mm_region imx8ulp_arm64_mem_map[] = {
- 		/* SRAM0 (align with 2M) */
- 		.virt = 0x22000000UL,
- 		.phys = 0x22000000UL,
--		.size = 0x200000UL,
-+		.size = 0x1f000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+			 PTE_BLOCK_OUTER_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		.virt = 0x2201f000UL,
-+		.phys = 0x2201f000UL,
-+		.size = 0x1000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		.virt = 0x22020000UL,
-+		.phys = 0x22020000UL,
-+		.size = 0x1e0000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
- 			 PTE_BLOCK_OUTER_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--- 
-2.43.0
+Le 27/10/2025 à 19:08, Andrew Davis a écrit :
+> On 10/24/25 9:17 AM, Guillaume La Roque (TI.com) wrote:
+>> I2C EEPROM data contains the board name and its revision.
+>> Add support for:
+>> - Reading EEPROM data and store a copy at end of SRAM
+>> - Updating env variable with relevant board info
+>> - Printing board info during boot
+>>
+>> Use the generic do_board_detect_am6() and setup_serial_am6()
+>> functions to avoid code duplication across AM6x family boards.
+>>
+>> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+>> ---
+>>   arch/arm/mach-k3/am62x/Kconfig |  3 +++
+>>   board/ti/am62x/evm.c           | 54 
+>> +++++++++++++++++++++++++++++++++++++++++-
+>>   configs/am62x_evm_r5_defconfig |  1 +
+>>   3 files changed, 57 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-k3/am62x/Kconfig 
+>> b/arch/arm/mach-k3/am62x/Kconfig
+>> index 81199ada3a1..f7ad52db7d8 100644
+>> --- a/arch/arm/mach-k3/am62x/Kconfig
+>> +++ b/arch/arm/mach-k3/am62x/Kconfig
+>> @@ -14,6 +14,8 @@ config TARGET_AM625_A53_EVM
+>>       select ARM64
+>>       select BINMAN
+>>       select OF_SYSTEM_SETUP
+>> +    imply TI_COMMON_CMD_OPTIONS
+>> +    imply TI_I2C_BOARD_DETECT
+>>     config TARGET_AM625_R5_EVM
+>>       bool "TI K3 based AM625 EVM running on R5"
+>> @@ -25,6 +27,7 @@ config TARGET_AM625_R5_EVM
+>>       select K3_DDRSS
+>>       select BINMAN
+>>       imply SYS_K3_SPL_ATF
+>> +    imply TI_I2C_BOARD_DETECT
+>>     config TARGET_PHYCORE_AM62X_A53
+>>       bool "PHYTEC phyCORE-AM62x running on A53"
+>> diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
+>> index c2c7a0216b9..591324ecc15 100644
+>> --- a/board/ti/am62x/evm.c
+>> +++ b/board/ti/am62x/evm.c
+>> @@ -22,8 +22,16 @@
+>>   #include <dm/uclass.h>
+>>   #include <asm/arch/k3-ddr.h>
+>>   +#include "../common/board_detect.h"
+>>   #include "../common/fdt_ops.h"
+>>   +#define board_is_am62x_skevm()  (board_ti_k3_is("AM62-SKEVM") || \
+>> +                 board_ti_k3_is("AM62B-SKEVM"))
+>> +#define board_is_am62b_p1_skevm() board_ti_k3_is("AM62B-SKEVM-P1")
+>> +#define board_is_am62x_lp_skevm() board_ti_k3_is("AM62-LP-SKEVM")
+>> +#define board_is_am62x_sip_skevm() board_ti_k3_is("AM62SIP-SKEVM")
+>> +#define board_is_am62x_play() board_ti_k3_is("BEAGLEPLAY-A0-")
+>
+> BeaglePlay is not a TI AM62x EVM variant, its support is handled
+> separately over in board/beagle/beagleplay/, might be good to drop
+> this line to avoid any confusion around how the board is supported.
+yes sorry i forgot it i will fix in v3
+>
+> Andrew
+>
+>> +
+>>   DECLARE_GLOBAL_DATA_PTR;
+>>     #if CONFIG_IS_ENABLED(SPLASH_SCREEN)
+>> @@ -74,9 +82,53 @@ struct efi_capsule_update_info update_info = {
+>>       .images = fw_images,
+>>   };
+>>   -#ifdef CONFIG_BOARD_LATE_INIT
+>> +#if CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
+>> +int checkboard(void)
+>> +{
+>> +    struct ti_am6_eeprom *ep = TI_AM6_EEPROM_DATA;
+>> +
+>> +    if (!do_board_detect_am6())
+>> +        printf("Board: %s rev %s\n", ep->name, ep->version);
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +#if CONFIG_IS_ENABLED(BOARD_LATE_INIT)
+>> +static void setup_board_eeprom_env(void)
+>> +{
+>> +    char *name = "am62x_skevm";
+>> +
+>> +    if (do_board_detect_am6())
+>> +        goto invalid_eeprom;
+>> +
+>> +    if (board_is_am62x_skevm())
+>> +        name = "am62x_skevm";
+>> +    else if (board_is_am62b_p1_skevm())
+>> +        name = "am62b_p1_skevm";
+>> +    else if (board_is_am62x_lp_skevm())
+>> +        name = "am62x_lp_skevm";
+>> +    else if (board_is_am62x_sip_skevm())
+>> +        name = "am62x_sip_skevm";
+>> +    else if (board_is_am62x_play())
+>> +        name = "am62x_beagleplay";
+>> +    else
+>> +        printf("Unidentified board claims %s in eeprom header\n",
+>> +               board_ti_get_name());
+>> +
+>> +invalid_eeprom:
+>> +    set_board_info_env_am6(name);
+>> +}
+>> +#endif
+>> +#endif
+>> +
+>> +#if CONFIG_IS_ENABLED(BOARD_LATE_INIT)
+>>   int board_late_init(void)
+>>   {
+>> +    if (IS_ENABLED(CONFIG_TI_I2C_BOARD_DETECT)) {
+>> +        setup_board_eeprom_env();
+>> +        setup_serial_am6();
+>> +    }
+>> +
+>>       ti_set_fdt_env(NULL, NULL);
+>>       return 0;
+>>   }
+>> diff --git a/configs/am62x_evm_r5_defconfig 
+>> b/configs/am62x_evm_r5_defconfig
+>> index 18ffc991b25..d42bdf1f074 100644
+>> --- a/configs/am62x_evm_r5_defconfig
+>> +++ b/configs/am62x_evm_r5_defconfig
+>> @@ -85,6 +85,7 @@ CONFIG_SPL_CLK_K3_PLL=y
+>>   CONFIG_SPL_CLK_K3=y
+>>   CONFIG_TI_SCI_PROTOCOL=y
+>>   CONFIG_DA8XX_GPIO=y
+>> +CONFIG_DM_I2C=y
+>>   CONFIG_DM_MAILBOX=y
+>>   CONFIG_K3_SEC_PROXY=y
+>>   CONFIG_SPL_MISC=y
+>>
+>
 
