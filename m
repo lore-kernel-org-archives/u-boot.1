@@ -4,61 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1304CCFA00
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A97CCFA00
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:12:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1196283A89;
-	Fri, 31 Oct 2025 18:08:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 98F3683A57;
+	Fri, 31 Oct 2025 18:12:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="c9jlpLyR";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xualbe2i";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06E9D83A43; Fri, 31 Oct 2025 18:08:48 +0100 (CET)
-Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::8faa])
+ id E6FDF83A62; Fri, 31 Oct 2025 18:12:48 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE06983A45
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:08:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA31183A47
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:12:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246c])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cynWJ3WMTzcMX;
- Fri, 31 Oct 2025 18:08:44 +0100 (CET)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4cynWH4GGKzyJn; Fri, 31 Oct 2025 18:08:43 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 31 Oct 2025 18:08:23 +0100
-Subject: [PATCH v2 4/5] rsa: rename FIT_RSASSA_PSS to RSASSA_PSS and move
- symbols under lib/rsa
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cynby2RXQz9v9S;
+ Fri, 31 Oct 2025 18:12:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761930766;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=UDxGlZhEk6d8BbqYqq/cPCQVSGz3s3AsepqyrIjfug8=;
+ b=c9jlpLyR1PLgujkDtFDZR0W+s2tRTdr8Zrh1YT3HEaLWbhQMHIlgyYBSqpkZ30auGXH5x4
+ DPllN0hDna/DoaNhI48r9tlh85jNUg/fE3nj5XkyuqgswZY4lNNGwkutPmi0S16pE8MTgT
+ kd7w+ivjXS6wEH1zsdGy6eyMe59Aj19R2qzIxZ8Y8uNrFtG07G5zr7aLhGQjaVUWbDt3Ib
+ /6upNargzGNf/bxFBNTrWhC0n9+gFXkyR7DaAlsXa8O0qmUPNZDj2ZCkdEkf2eIkS65dKw
+ o+mkINkT0LK5CEtxxfr4PcQ98trxKMbtR120ZrKSayhxutlU6ZCuolCeNmFtWQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=xualbe2i;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <52b17e87-9fd1-48c3-9202-bd8df12b1c66@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761930764;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=UDxGlZhEk6d8BbqYqq/cPCQVSGz3s3AsepqyrIjfug8=;
+ b=xualbe2ixf4kMu+9F0t+/2bKrDl81oUuvUCClhgtVaz+96wLQEcEY+Q/FnqmVvn1gWnmHZ
+ 05dKz7PpTSm29/WPtK4EkvGkbO8OrwfFokxP+B42QDiMl6ach3v2Hc/IBtc4qZNrqVQ3e+
+ AwjpruhbmDfpePe+xtUySYCHmTA2nUPzdSAq576l3PzEp34DH+L9GrGupFX3p3leVIWNOO
+ sla7vwlwG+9S5cz2KLDL9LHUlAB281eZYZd1FGTSvroOR0CxK90JMRroTn+o91dzP8ngOG
+ DkLquNFE6O4DMBho+mRLb9eH67BZ76t5iBOTFEvYv8LlYeAHj+fomLLwP7Q8Sw==
+Date: Fri, 31 Oct 2025 18:12:42 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251031-rsa-pss-always-v2-4-a29184ea064d@cherry.de>
-References: <20251031-rsa-pss-always-v2-0-a29184ea064d@cherry.de>
-In-Reply-To: <20251031-rsa-pss-always-v2-0-a29184ea064d@cherry.de>
-To: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Michal Simek <michal.simek@amd.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martin Schwan <m.schwan@phytec.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Pieter Van Trappen <pieter.van.trappen@cern.ch>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Alexander Graf <agraf@csgraf.de>, Loic Poulain <loic.poulain@linaro.org>, 
- Tobias Olausson <tobias@eub.se>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Shiji Yang <yangshiji66@outlook.com>, 
- Anton Moryakov <ant.v.moryakov@gmail.com>, E Shattow <e@freeshell.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.3
-X-Infomaniak-Routing: alpha
+Subject: Re: [PATCH v4 2/5] doc: bindings: use upstream bindings for aquantia
+ phy
+To: Beiyan Yun <root@infi.wang>
+Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
+References: <20251031152348.60571-1-root@infi.wang>
+ <20251031152348.60571-3-root@infi.wang>
+ <6ca0b758-ac2b-46a5-a06a-5ef5ae676f00@mailbox.org>
+ <7AB9A75C-6A37-4DFA-B077-EEC6A6E9C1ED@infi.wang>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <7AB9A75C-6A37-4DFA-B077-EEC6A6E9C1ED@infi.wang>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 9a57ee212cf6129f9b7
+X-MBO-RS-META: yi75eyrqepdpsh86u8tuy8qqatwkpg95
+X-Rspamd-Queue-Id: 4cynby2RXQz9v9S
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,143 +99,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+On 10/31/25 6:02 PM, Beiyan Yun wrote:
+> 
+> 
+>> On 31 Oct 2025, at 11:53 PM, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>
+>> On 10/31/25 4:21 PM, Beiyan Yun wrote:
+>>> Prepare for the switch to upstream bindings and generic firmware loader,
+>>> remove reference to upstreamed bindings, also add a firmware-name example.
+>>> Signed-off-by: Beiyan Yun <root@infi.wang>
+>>> ---
+>>> (no changes since v2)
+>>> Changes in v2:
+>>> - New
+>>>   doc/device-tree-bindings/net/aquantia-phy.txt | 15 +++------------
+>> Upstream bindings are in YAML format:
+>>
+>> Documentation/devicetree/bindings/net/marvell,aquantia.yaml
+>>
+>> How come these bindings here are in text format ?
+> As much as I’d like to, aquantia-phy.txt file has always been a plain-text binding in U-Boot; I only updated its contents to cleanup the upstreamed property names. Converting it to YAML would require a larger migration, one preferably upstreams smb-addr and eliminate the file entirely.
 
-This renames FIT_RSASSA_PSS symbols to drop the FIT_ prefix to avoid
-potential confusion since there's nothing FIT specific to those symbols.
-
-It also isn't really related to booting, so boot/Kconfig is an odd place
-for them to live. Since they make sense only in relation with RSA,
-simply move them to lib/rsa where it makes more sense for them to
-reside.
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- boot/Kconfig              | 14 --------------
- configs/sandbox_defconfig |  2 +-
- lib/rsa/Kconfig           | 14 ++++++++++++++
- lib/rsa/rsa-sign.c        |  2 +-
- lib/rsa/rsa-verify.c      |  2 +-
- tools/Kconfig             |  2 +-
- 6 files changed, 18 insertions(+), 18 deletions(-)
-
-diff --git a/boot/Kconfig b/boot/Kconfig
-index a37d08eff1d..708a18fd0ad 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -116,13 +116,6 @@ config FIT_SIGNATURE_MAX_SIZE
- 	  device memory. Assure this size does not extend past expected storage
- 	  space.
- 
--config FIT_RSASSA_PSS
--	bool "Support rsassa-pss signature scheme"
--	depends on RSA_VERIFY
--	help
--	  Enable this to support the pss padding algorithm as described
--	  in the rfc8017 (https://tools.ietf.org/html/rfc8017).
--
- config FIT_CIPHER
- 	bool "Enable ciphering data in a FIT uImages"
- 	depends on DM
-@@ -212,13 +205,6 @@ config SPL_FIT_SIGNATURE_MAX_SIZE
- 	  device memory. Assure this size does not extend past expected storage
- 	  space.
- 
--config SPL_FIT_RSASSA_PSS
--	bool "Support rsassa-pss signature scheme in SPL"
--	depends on SPL_RSA_VERIFY
--	help
--	  Enable this to support the pss padding algorithm as described
--	  in the rfc8017 (https://tools.ietf.org/html/rfc8017) in SPL.
--
- config SPL_LOAD_FIT
- 	bool "Enable SPL loading U-Boot as a FIT (basic fitImage features)"
- 	depends on SPL
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index cf5a8accd50..f4c2cc5d155 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -18,7 +18,6 @@ CONFIG_EFI_CAPSULE_AUTHENTICATE=y
- CONFIG_EFI_CAPSULE_CRT_FILE="board/sandbox/capsule_pub_key_good.crt"
- CONFIG_BUTTON_CMD=y
- CONFIG_FIT=y
--CONFIG_FIT_RSASSA_PSS=y
- CONFIG_FIT_CIPHER=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_BOOTMETH_ANDROID=y
-@@ -383,6 +382,7 @@ CONFIG_MBEDTLS_LIB=y
- CONFIG_HKDF_MBEDTLS=y
- CONFIG_ECDSA=y
- CONFIG_ECDSA_VERIFY=y
-+CONFIG_RSASSA_PSS=y
- CONFIG_TPM=y
- CONFIG_ERRNO_STR=y
- CONFIG_GETOPT=y
-diff --git a/lib/rsa/Kconfig b/lib/rsa/Kconfig
-index 9033384e60a..904eafa9441 100644
---- a/lib/rsa/Kconfig
-+++ b/lib/rsa/Kconfig
-@@ -67,6 +67,20 @@ config SPL_RSA_VERIFY_WITH_PKEY
- 	  key properties will be calculated on the fly in verification code
- 	  in the SPL.
- 
-+config RSASSA_PSS
-+	bool "Support rsassa-pss signature scheme"
-+	depends on RSA_VERIFY
-+	help
-+	  Enable this to support the pss padding algorithm as described
-+	  in the rfc8017 (https://tools.ietf.org/html/rfc8017).
-+
-+config SPL_RSASSA_PSS
-+	bool "Support rsassa-pss signature scheme within SPL"
-+	depends on SPL_RSA_VERIFY
-+	help
-+	  Enable this to support the pss padding algorithm as described
-+	  in the rfc8017 (https://tools.ietf.org/html/rfc8017) within SPL.
-+
- config RSA_SOFTWARE_EXP
- 	bool "Enable driver for RSA Modular Exponentiation in software"
- 	depends on DM
-diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
-index 92b9d7876e5..0e38c9e802f 100644
---- a/lib/rsa/rsa-sign.c
-+++ b/lib/rsa/rsa-sign.c
-@@ -421,7 +421,7 @@ static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
- 		goto err_sign;
- 	}
- 
--	if (CONFIG_IS_ENABLED(FIT_RSASSA_PSS) && padding_algo &&
-+	if (CONFIG_IS_ENABLED(RSASSA_PSS) && padding_algo &&
- 	    !strcmp(padding_algo->name, "pss")) {
- 		if (EVP_PKEY_CTX_set_rsa_padding(ckey,
- 						 RSA_PKCS1_PSS_PADDING) <= 0) {
-diff --git a/lib/rsa/rsa-verify.c b/lib/rsa/rsa-verify.c
-index b65fbe44007..0d618f15ea9 100644
---- a/lib/rsa/rsa-verify.c
-+++ b/lib/rsa/rsa-verify.c
-@@ -89,7 +89,7 @@ U_BOOT_PADDING_ALGO(pkcs_15) = {
- };
- #endif
- 
--#if CONFIG_IS_ENABLED(FIT_RSASSA_PSS)
-+#if CONFIG_IS_ENABLED(RSASSA_PSS)
- static void u32_i2osp(uint32_t val, uint8_t *buf)
- {
- 	buf[0] = (uint8_t)((val >> 24) & 0xff);
-diff --git a/tools/Kconfig b/tools/Kconfig
-index 652b0f22557..a1b4d701ac7 100644
---- a/tools/Kconfig
-+++ b/tools/Kconfig
-@@ -55,7 +55,7 @@ config TOOLS_FIT_PRINT
- 	help
- 	  Print the content of the FIT verbosely in the tools builds
- 
--config TOOLS_FIT_RSASSA_PSS
-+config TOOLS_RSASSA_PSS
- 	def_bool y
- 	help
- 	  Support the rsassa-pss signature scheme in the tools builds
-
--- 
-2.51.0
-
+Pull in the kernel YAML file, discard this txt file, and be done with it.
