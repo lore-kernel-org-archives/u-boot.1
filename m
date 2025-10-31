@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A8A2CCF9EE
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 07:38:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50200CCF9EB
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 07:38:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27156836F0;
-	Fri, 31 Oct 2025 08:38:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 60F0A838EE;
+	Fri, 31 Oct 2025 08:38:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="raK0o4Ah";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="i5p7/4L3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C129836F0; Fri, 31 Oct 2025 08:38:19 +0100 (CET)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
+ id 5429C83914; Fri, 31 Oct 2025 08:38:24 +0100 (CET)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D6368331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:38:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32E518331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:38:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ojDrHbjk8nAxa4oxKvydhM4AHGAOQAM9UHJ7rPh3TQ3cFffa8O7ln8eRYIHFlX0h2ZbwRqbZKApSjwzyVzHXlTydUxZwUg/6fZO0MxIsSbe66iQcdFkJtnycDXQ5YRpoUpgy96NU2LdooZG8ySm4tGDrkj3z/In/yn8INrsYXf7xn9YUhlY4Lz86+6vo3EsB+5gVgGtSA7SFAcoQyIqP3dpD4dcHfMjbbd9z6wySruv5ABFmgT5lN65oUUWTYMTCTGfApKQQJuiPrdRACjfmXbEw1r0n8sf+5DkhwCgBOJ+xdlB+VxtHyqzlL9SzJc/IDYdDhcapCNPNnk0DGX9rUg==
+ b=r/O/o/cr2gBhwnQWUNcGwg4q8jnM9V1lvJ/v9tFbrdvXehjat9n+2JaXoq62GGyDuzx72Df1Xr7vOanpnY18C1WP9Hc08evCCuRYjdtCdSPZl1NMLhmb//wwnqm5dGcGmovK8Vk6iUJM96kGeZEmu43pzkW/sSJIOoOAoGXTZO4aWzDwS5rDqs3Gn3VkXN6fUrX0ShzpraANx40XtibIOK1muAZ6bMQxG4UXmmK5wkkx/vcEPgev4NpyXjg39MZqIzBCLACmaq1vy5UMYjvlB7AIFl5ZX8RBWsa2fPziuXRAZD4aMBK+dwx1WPMfAQkYv0jNsC6oCVgDrt3haXqPtw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xZ9PSE0oEV8LYVNQfuvCaVIQi9Ktfgm4kHQ6rApuoPo=;
- b=L8JaDnE/6rv/Jf0NQEyTjO4a9qkpsz8JtZf57VoIYP7gGAvHqvCZYdRiv0M6MFnuN7Dj+LNS24Gvgl3EdAeJ8RIxEGttwn4p6SjAhD3LgB+/O385aRUltrPNT7hO8lsOmctNzbTzIgcZ1A+08+mxnh+xLNjhbTY/dEm/OJ+NxdKtDpBIyoVy7VykHmGJUCkWTgu45teCvrCHfOWObRw4RMK3VvXam83rl+L+SxirLT72Do6X+PhCXyu43CONwZjs2fNmHyN+Y3bmYrWWMH5RI9nu5L1B+ZpPU9oUJ6Nd7ykRyQkI0mSTSx+p0j5OzjdgXaGW6pzoVJq+ZKnSozT+uQ==
+ bh=ev1C7e1CtTEg2gWZZ5xpl93P3on9jjAOuShAQ7FreZU=;
+ b=O7MOyaDPKlTdClVsqYuQMhRG9yyjGFExVb91hO05QDxxQ1A5AV6ZU++Fw8JRPo40+iwPCcBNV/O7cESQdKF1j8oNnS4um7arXfuZ6VDLfHro6QVS8xwl+mQfy50LPIFuVPDvZaLiXPqNo41/peud8mXChhXA/B1hf+DZhObecv7YMplSIXTh75Xc6FI2iifWcPvlhGFv3Ed9GcO591E1DCm888bd1I+wg1X1ihXN3sY2iYkCxoffvSaejQoW5XUtA6u05WjL8JTKAmE/359CTrnyrIhnbEym7A4ktb7IKC0LqBFgLkSfPpaYIrs/2717+xkvRbnuXro4xKSHTBvgXQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xZ9PSE0oEV8LYVNQfuvCaVIQi9Ktfgm4kHQ6rApuoPo=;
- b=raK0o4AhdMPaay83BkjgV+GS0XJJAVvOQO4cLoZLO5bXZ4Y4uOH4u9wtfSBIUME7Gf3SdNopMwoCzAP7Wmx04O3YL+ClChNo6840EyvigvV60IoLe2E7G3Nnl7NdJenvDoWPRUp3CEFFVGLduWcPNDKWwtJh6Z2tc2YQtw787mo=
-Received: from CH0P220CA0014.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:ef::29)
- by CH0PR10MB7500.namprd10.prod.outlook.com (2603:10b6:610:192::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Fri, 31 Oct
- 2025 07:38:12 +0000
-Received: from CH2PEPF00000141.namprd02.prod.outlook.com
- (2603:10b6:610:ef:cafe::7f) by CH0P220CA0014.outlook.office365.com
- (2603:10b6:610:ef::29) with Microsoft SMTP Server (version=TLS1_3,
+ bh=ev1C7e1CtTEg2gWZZ5xpl93P3on9jjAOuShAQ7FreZU=;
+ b=i5p7/4L3Emt8VSr5n3vG3Gp6ju6Q+ytSWU8khPVobOMBktJAZhBiXvURnF8ZPvH2Ycem2Cys0jueb+1H3x+hwrVu4CWeA4fMUsomjsgmSsL456ygtTNTIMweW7JJqvqLt5j0Tv+J3EBuCuttgxC7ttOM7HLB/s9gYxeB+iL21hI=
+Received: from CYZPR17CA0004.namprd17.prod.outlook.com (2603:10b6:930:8c::19)
+ by DS4PPF20A8CDC0B.namprd10.prod.outlook.com (2603:10b6:f:fc00::d10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Fri, 31 Oct
+ 2025 07:38:19 +0000
+Received: from CY4PEPF0000FCC2.namprd03.prod.outlook.com
+ (2603:10b6:930:8c:cafe::2d) by CYZPR17CA0004.outlook.office365.com
+ (2603:10b6:930:8c::19) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Fri,
- 31 Oct 2025 07:38:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ 31 Oct 2025 07:38:19 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CH2PEPF00000141.mail.protection.outlook.com (10.167.244.74) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CY4PEPF0000FCC2.mail.protection.outlook.com (10.167.242.104) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 07:38:12 +0000
-Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 07:38:18 +0000
+Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 02:38:08 -0500
-Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 02:38:12 -0500
+Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 02:38:08 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 02:38:11 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 31 Oct 2025 02:38:08 -0500
+ Transport; Fri, 31 Oct 2025 02:38:11 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59V7c7bq3539890;
- Fri, 31 Oct 2025 02:38:07 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59V7cA1G3539956;
+ Fri, 31 Oct 2025 02:38:11 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: 
 CC: Anshul Dalal <anshuld@ti.com>, <afd@ti.com>, <b-liu@ti.com>, <bb@ti.com>, 
  <m-chawdhry@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <trini@konsulko.com>,
  <u-boot@lists.denx.de>, <vigneshr@ti.com>
-Subject: [PATCH v10 1/7] arm: k3-binman: add tifalcon.bin for falcon mode
-Date: Fri, 31 Oct 2025 13:07:51 +0530
-Message-ID: <20251031073800.344500-2-anshuld@ti.com>
+Subject: [PATCH v10 3/7] mach-k3: common: enable falcon mode from R5 SPL
+Date: Fri, 31 Oct 2025 13:07:53 +0530
+Message-ID: <20251031073800.344500-4-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251031073800.344500-1-anshuld@ti.com>
 References: <20251031073800.344500-1-anshuld@ti.com>
@@ -93,54 +93,53 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000141:EE_|CH0PR10MB7500:EE_
-X-MS-Office365-Filtering-Correlation-Id: d012683c-b116-487d-ce20-08de1850725d
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC2:EE_|DS4PPF20A8CDC0B:EE_
+X-MS-Office365-Filtering-Correlation-Id: 55d2f28a-31f7-439d-24a7-08de185075a5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|34020700016|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aM9Yeg8+Hmg+nXjGQ4s90X8ZI7z5KVXgy+5r9cB6oCwq8hTSuarHBvMdU4ef?=
- =?us-ascii?Q?9+bmGTC8XgF4cDcu87CsN6r8zhfwxhsl5IbVFnzZy0DUBQPqezPyDsxWP4ZL?=
- =?us-ascii?Q?r8hjfCp29icNthabpBg25wLzT+VvFsSpaDOQdGOWYH7k939MAOnR51J4lO2k?=
- =?us-ascii?Q?6fjl4HZdDvAxWvvnuLYcyphQQQV1XzFekn0VXW6FO2N7aTyMBby4Lgzu7Apr?=
- =?us-ascii?Q?Z+aK0eui97FqMLQB/9vaUCcPK36WtqIOQAaATbjwD5uiZB4+hm38u8m6KoU/?=
- =?us-ascii?Q?XvwnCRkwFslP/uigEzSSWi4MtuR+pio2VrOSGAvhkrBHywyMcvuzybuDl27N?=
- =?us-ascii?Q?IG9hVT9ioA3i5bTsYYbp44VFU8ClIwhur2YKqxBQy4jR5KO/KTYTOoGxlPWH?=
- =?us-ascii?Q?oEpa+TnW9/qGShUYhP/D7dSo3v4dNXtOoU+LiGG+vr/9DdmHnHk18pi3S0r9?=
- =?us-ascii?Q?ZriulRnj08uEvEvmZq8YKFhkN0l38KF9xYpx6vTvCwKuUfx3gZFUMNA0C9fT?=
- =?us-ascii?Q?HNjWW3d977eWHxtdkRtx2WX9TCb36jU3wqADKEMPkYbHgDoNsA7AsccqvL4n?=
- =?us-ascii?Q?YsJJIxdUiut+xTiI5ppAmBLqRA8+aklk9WpIcO7AuuSxyU7pgXOhBmfuOPzU?=
- =?us-ascii?Q?kcmpMRK2Gs7yveUwszgQe7gagJuovmhl2l9akrXdy0MBJj0L0yYyPdH8Ubw2?=
- =?us-ascii?Q?DKieZadtnMi3iBjzpamwAxM/kZCyrfhZyso0lo2NlxaFe6LMdmmPYDkiqAd1?=
- =?us-ascii?Q?t3x9+CCgAieEb93LW/HNN+0uYScMBMUStuwjKVdmIBIFWG71lfPr/Cq75BJs?=
- =?us-ascii?Q?W5RL/hzO3lv1G0klgwdlCZ8gUtQ5n0MLyNT63sw44Bm7JBG0qlzAmE32GFte?=
- =?us-ascii?Q?Fc5E8dY31PzGUS/RTrz2AnIrdfCjmXHEmtHzv2EyFilDgTZju8OjJP0hdYGz?=
- =?us-ascii?Q?Oky62pCd3F2MZD6O8uk9zkkWal6IOzpqZPeTDdd90BahgWRxc+gXs/6mgfNX?=
- =?us-ascii?Q?2SgzyTEmxMaD9w4OMG657y8DFrd+zk5JqEbeznHGUKNCnNgRxKESilnXYhqv?=
- =?us-ascii?Q?bsRPxJi4gawFBTtTj2TJq2LLy2g6ydmxYkYv7QrVQqqYlqip8wLa5StAIwAU?=
- =?us-ascii?Q?KBCrUPoFDewM1JX6urcp4ykgWP+rCrpG3d8xKlo7tlnpyXdqTG9aFOmysIyt?=
- =?us-ascii?Q?aC/2E1J92u30eu1vpUo99WQxh9IakJpgZVcOEzxf9L7fFxqiGD3hrXV9Uqxe?=
- =?us-ascii?Q?LkwkmxSn40LHV2FyoweyUBbOv0j14MHmO5ZN/6O7bv3FnJienNnLG6ph0IJi?=
- =?us-ascii?Q?Lt//b2Bj++lSnKv2XLdnEOq/m9+Nsr0GP8bWrO784j1oSiTURbhq8skM71sD?=
- =?us-ascii?Q?/wFFHljgioq9Yyr8mPQCHLrGTHUiTFs8oWsYeMFYgsuZjJP7whHeQGE0dprC?=
- =?us-ascii?Q?RrpEXSCQF5iBoXNiZMPcsMxnIrCvno533cEjITzEsIFc0P93biWRkIBYbLRF?=
- =?us-ascii?Q?d8H4BADGDPilKRf9dB/vuDUGPaaSPelvFd8cyZaLfUzdMv+cwfseXk6zkQUp?=
- =?us-ascii?Q?6qSlwfoPgzASAPUwBLU=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(34020700016)(82310400026);
+ ARA:13230040|82310400026|376014|36860700013|1800799024|34020700016; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?V+LZ/gM0YBOpmhvnI4yPD1QNuzqIhjEVbO+eoX9WwxPiys6BeL5pmTDrrDMP?=
+ =?us-ascii?Q?dG8B/NiwLTZIDqmZTKHktzLpyFgcMPFdCAN3ycZJJknoHou5eZzrY6QqLuN/?=
+ =?us-ascii?Q?SctWlgW4llUuA010hGuEMEMynOQ3KyzW7zpMXBxo6knCpp9M9HErp1Bdm27M?=
+ =?us-ascii?Q?HS8+PXxh5p031ulLkq3zyDPgqo/X6mfui3uhO+hzn61Tv7GthpC41A3/UKOL?=
+ =?us-ascii?Q?CjFL+aRiqiTnsBbER9PuritjCEgPFybeD8WEFtcbj5D37YPsdFDuKlC9L06h?=
+ =?us-ascii?Q?HXpfCFCsMsCqy4/hAGG+3jlLd08uq3RLbV1YGAEge1q3Rg1a6osLZTHdykPK?=
+ =?us-ascii?Q?oz3aFmqn21CvgRbCHoly70yss6PygBaG7QSxzoiiaNjfH/dCXfNcOT8ESwZZ?=
+ =?us-ascii?Q?TUfTmkTA6n7GwoorscyNAvWqWeXZpSFDWBL6ruwMTq4bKeeVeM7iQiv1Fe82?=
+ =?us-ascii?Q?GKISKLkeNQ5Z8eC0Hpwg5BhY2wW/eo0vHhbH/Ew9r1OW8c5i4enIsf4D7Xjo?=
+ =?us-ascii?Q?1Y9+5EC3totGq0vn6JGxAyDGnuaIpP/DUfKQczbDBn7+7KEVIwqfFbdwEnVc?=
+ =?us-ascii?Q?IkokN8RmNUQ4YEQxjSBPZMcwr4DUn9t9wXdDXu5RRT7I7RVbmISPhnRmTfPA?=
+ =?us-ascii?Q?QWcVogAPUyyhCgiN00a30UKY/bNwsMw79hk0uJW7TXGlJRLP9LNGqTcfSL7z?=
+ =?us-ascii?Q?9J4Kfb6iZaHNnHXILzOKfnXH9tipied/FQ8hhqMYkoYGuGrKb7fUz7XuJunj?=
+ =?us-ascii?Q?4b8BEw3C+vhoWh30bU6HCfRCBKw/rLSkZs0n16i/b+8mRwwmFt2P6IcLIiTv?=
+ =?us-ascii?Q?wqOdTTRu1k4ChkonJEK4OU6bZUiJN8g8knRwawidu1W4Oa5pyB8uw7SbXaw7?=
+ =?us-ascii?Q?bnXMs5ucdjNZ4PLAMqZA0+E2+6kDomN3oz/PUcT3ihLh44Se25uBOs9FKMub?=
+ =?us-ascii?Q?j9GAinCLfkJCglDIOb4yUpOtH5639dtq7vzN0jk49S4APiNG3y+M5ExcD6Is?=
+ =?us-ascii?Q?C/imO4AA9FBMSEFyX1wC0HQ0k6H2D5pI3igO2ScrzOuR5+hj6ZMBcZ+7q0K1?=
+ =?us-ascii?Q?XW1uooHLk8P+uRjQngUeJREB/MitqbRgIA62rMmE1q8xiyTktxBCeAR2Olkd?=
+ =?us-ascii?Q?4NJzIakhwHdhMzqbRqSSLqgiqa85GUC6iYM3tccilMQpyAWTqFs+vffCZs/m?=
+ =?us-ascii?Q?hpY3LFBZxXOB8Nu1ei8EAh96N+kSVrxkdCr3bXiou3nVe/8U5B8QelHyEwjP?=
+ =?us-ascii?Q?/xm57uYc79WQ1xkNAQpojOyHY+bqlc2aEphNulS4e24sdqCTYdE4iv7vLAlw?=
+ =?us-ascii?Q?VCffaXMXf7Vkzu13nOF0QMTvO5Fec5HAii/oFk6eO22macW5gJEQsiXmVFdf?=
+ =?us-ascii?Q?PjQA553QXXEjoIY3DPpfN3mzQ6O320l921wDntEFnLZux+V5yqRlr5W0kN16?=
+ =?us-ascii?Q?JL3j5+3UUr7zKS4407OiVaSRGJxJn2TjY5scb/aD/dG9hvDiVdFT0IyJLT/h?=
+ =?us-ascii?Q?WoMShXM4BjXLuLyFDNmxaENPTwLRWwR0INysN+w1TLHNhjcL2Jr4YMXgdy6D?=
+ =?us-ascii?Q?k6H7Xpa3Et5nHh6gda8=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024)(34020700016);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 07:38:12.7694 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d012683c-b116-487d-ce20-08de1850725d
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 07:38:18.2481 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 55d2f28a-31f7-439d-24a7-08de185075a5
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000141.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC2.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB7500
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PPF20A8CDC0B
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,303 +156,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds creation of tifalcon.bin for the AM62a, 62p and 62x.
+We use the spl_board_prepare_for_boot hook to call k3_r5_falcon_prep
+which is ran after tispl is loaded but before jump_to_image.
 
-The contents are the same as the existing tispl.bin but A53's SPL and
-the FDT have been removed as they are not needed in R5 falcon mode.
+In k3_r5_falcon_prep, we find the boot media and load the kernel FIT
+just as standard secure falcon mode (since spl_start_uboot returns 0
+now). Once the kernel and args are loaded.
 
-This reduces boot time since the payload size is smaller compared to the
-regular tispl.bin.
+Now when the flow goes to jump_to_image, we do the regular pre-jump
+procedure and jump to TFA which jumps to the kernel directly since we
+have already loaded the kernel and dtb at their respective addresses
+(PRELOADED_BL33_BASE and K3_HW_CONFIG_BASE).
 
-tispl.bin    = TFA + TEE + TIFS-STUB + A53 SPL + FDT
-tifalcon.bin = TFA + TEE + TIFS-STUB
+Overall execution for the R5 SPL after this patch:
+
+  board_init_r
+  |-> boot_from_devices
+  |   +-> load_image (we load tifalcon.bin here since spl_start_uboot
+  |                   returns 1)
+  |
+  +-> spl_prepare_for_boot
+  |   +-> k3_falcon_prep
+  |       +-> load_image (we load fitImage here since spl_start_uboot
+  |                       returns 0 now)
+  |
+  +-> jump_to_image
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- Makefile                             |  2 +-
- arch/arm/dts/k3-am625-sk-binman.dtsi | 64 ++++++++++++++++++++++++++++
- arch/arm/dts/k3-am62a-sk-binman.dtsi | 51 ++++++++++++++++++++++
- arch/arm/dts/k3-am62p-sk-binman.dtsi | 51 ++++++++++++++++++++++
- arch/arm/dts/k3-binman.dtsi          | 54 +++++++++++++++++++++++
- 5 files changed, 221 insertions(+), 1 deletion(-)
+ arch/arm/mach-k3/common.c    |  8 +++++++
+ arch/arm/mach-k3/common.h    |  4 ++++
+ arch/arm/mach-k3/r5/common.c | 46 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 58 insertions(+)
 
-diff --git a/Makefile b/Makefile
-index 750f8a84b1f..d01cbce8b7a 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2470,7 +2470,7 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
- 	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
- 	       Test* capsule*.*.efi-capsule capsule*.map mkimage.imx-boot.spl \
- 	       mkimage.imx-boot.u-boot mkimage-out.imx-boot.spl mkimage-out.imx-boot.u-boot \
--	       imx9image* m33-oei-ddrfw*
-+	       imx9image* m33-oei-ddrfw* tifalcon.bin
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index 04a0f232d84..c446d1c47fd 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -360,6 +360,14 @@ void spl_perform_arch_fixups(struct spl_image_info *spl_image)
  
- # Directories & files removed with 'make mrproper'
- MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
-diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
-index f743c4353b4..42edb35fa7b 100644
---- a/arch/arm/dts/k3-am625-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
-@@ -206,6 +206,70 @@
- 		};
- 	};
- 
-+	ti-falcon {
-+		insert-template = <&ti_falcon_template>;
+ void spl_board_prepare_for_boot(void)
+ {
++#if IS_ENABLED(CONFIG_SPL_OS_BOOT_SECURE) && !IS_ENABLED(CONFIG_ARM64)
++	int ret;
 +
-+		fit {
-+			images {
-+				tifsstub-hs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+				tifsstub-fs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+				tifsstub-gp {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-gp";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_gp";
-+					};
-+				};
-+				dm {
-+					ti-secure {
-+						content = <&dm_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					dm_falcon: ti-dm {
-+						filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
++	ret = k3_r5_falcon_prep();
++	if (ret)
++		panic("%s: Failed to boot in falcon mode: %d\n", __func__, ret);
++#endif /* falcon mode on R5 SPL */
 +
-+			configurations {
-+				default = "conf-0";
-+				conf-0 {
-+					description = "k3-am625-sk-falcon";
-+					firmware = "atf";
-+					loadables = "tee", "tifsstub-hs", "tifsstub-fs",
-+					"tifsstub-gp", "dm";
-+				};
-+			};
-+		};
-+	};
-+
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-index e3a2d155d51..cb9a56b8c37 100644
---- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-@@ -144,6 +144,57 @@
- 
- 	};
- 
-+	ti-falcon {
-+		insert-template = <&ti_falcon_template>;
-+
-+		fit {
-+			images {
-+				tifsstub-hs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9ca00000>;
-+					entry = <0x9ca00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+				tifsstub-fs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9ca00000>;
-+					entry = <0x9ca00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+				dm {
-+					ti-secure {
-+						content = <&dm_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					dm_falcon: ti-dm {
-+						filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-0";
-+				conf-0 {
-+					description = "k3-am62a7-sk-falcon";
-+					firmware = "atf";
-+					loadables = "tee", "dm", "tifsstub-hs", "tifsstub-fs";
-+				};
-+			};
-+		};
-+	};
-+
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-diff --git a/arch/arm/dts/k3-am62p-sk-binman.dtsi b/arch/arm/dts/k3-am62p-sk-binman.dtsi
-index feb59edcd83..e1443d6226b 100644
---- a/arch/arm/dts/k3-am62p-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am62p-sk-binman.dtsi
-@@ -161,6 +161,57 @@
- 
- 	};
- 
-+	ti-falcon {
-+		insert-template = <&ti_falcon_template>;
-+
-+		fit {
-+			images {
-+				tifsstub-hs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9ca00000>;
-+					entry = <0x9ca00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+				tifsstub-fs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9ca00000>;
-+					entry = <0x9ca00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+				dm {
-+					ti-secure {
-+						content = <&dm_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					dm_falcon: ti-dm {
-+						filename = "ti-dm/am62pxx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-0";
-+				conf-0 {
-+					description = "k3-am62p5-sk-falcon";
-+					firmware = "atf";
-+					loadables = "tee", "dm", "tifsstub-hs", "tifsstub-fs";
-+				};
-+			};
-+		};
-+	};
-+
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
-diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-index 5163161b94d..761b1730464 100644
---- a/arch/arm/dts/k3-binman.dtsi
-+++ b/arch/arm/dts/k3-binman.dtsi
-@@ -489,6 +489,60 @@
- 		end_address = <0x0 0x9fffffff>;
- 	};
- 
-+	ti_falcon_template: template-9 {
-+		filename = "tifalcon.bin";
-+		pad-byte = <0xff>;
-+
-+		fit {
-+			description = "Configuration for falcon boot";
-+			#address-cells = <1>;
-+
-+			images {
-+				atf {
-+					description = "ARM Trusted Firmware";
-+					type = "firmware";
-+					arch = "arm64";
-+					compression = "none";
-+					os = "arm-trusted-firmware";
-+					load = <CONFIG_K3_ATF_LOAD_ADDR>;
-+					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
-+					ti-secure {
-+						content = <&atf_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					atf_falcon: atf-bl31 {
-+					};
-+				};
-+				tee {
-+					description = "OP-TEE";
-+					type = "tee";
-+					arch = "arm64";
-+					compression = "none";
-+					os = "tee";
-+					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
-+					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
-+					ti-secure {
-+						content = <&tee_falcon>;
-+						keyfile = "custMpk.pem";
-+					};
-+					tee_falcon: tee-os {
-+						optional;
-+					};
-+				};
-+				dm {
-+					description = "DM binary";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "DM";
-+					load = <0x89000000>;
-+					entry = <0x89000000>;
-+				};
-+
-+			};
-+		};
-+	};
-+
- };
- 
+ #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
+ 	dcache_disable();
  #endif
+diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
+index 52d3faaab5c..5807d358464 100644
+--- a/arch/arm/mach-k3/common.h
++++ b/arch/arm/mach-k3/common.h
+@@ -52,6 +52,10 @@ void do_board_detect(void);
+ void ti_secure_image_check_binary(void **p_image, size_t *p_size);
+ int shutdown_mcu_r5_core1(void);
+ 
++#if IS_ENABLED(CONFIG_SPL_OS_BOOT_SECURE) && !IS_ENABLED(CONFIG_ARM64)
++int k3_r5_falcon_bootmode(void);
++#endif
++
+ #if (IS_ENABLED(CONFIG_K3_QOS))
+ void setup_qos(void);
+ #else
+diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
+index 6269b33f66b..f0654102737 100644
+--- a/arch/arm/mach-k3/r5/common.c
++++ b/arch/arm/mach-k3/r5/common.c
+@@ -376,3 +376,49 @@ void board_fit_image_post_process(const void *fit, int node, void **p_image,
+ 	}
+ }
+ #endif
++
++#ifdef CONFIG_SPL_OS_BOOT_SECURE
++
++static bool tifalcon_loaded = false;
++
++int spl_start_uboot(void)
++{
++	/* If tifalcon.bin is not loaded, proceed to regular boot */
++	if (!tifalcon_loaded)
++		return 1;
++
++	/* Boot to linux on R5 SPL with tifalcon.bin loaded */
++	return 0;
++}
++
++int k3_r5_falcon_prep(void)
++{
++	struct spl_image_loader *loader, *drv;
++	struct spl_image_info kernel_image;
++	struct spl_boot_device bootdev;
++	int ret = -ENXIO, n_ents;
++
++	tifalcon_loaded = true;
++	memset(&kernel_image, '\0', sizeof(kernel_image));
++	drv = ll_entry_start(struct spl_image_loader, spl_image_loader);
++	n_ents = ll_entry_count(struct spl_image_loader, spl_image_loader);
++	bootdev.boot_device = spl_boot_device();
++
++	for (loader = drv; loader != drv + n_ents; loader++) {
++		if (loader && bootdev.boot_device != loader->boot_device)
++			continue;
++
++		printf("Load falcon from %s\n", spl_loader_name(loader));
++		ret = loader->load_image(&kernel_image, &bootdev);
++		if (ret)
++			continue;
++
++		return 0;
++	}
++
++	printf("%s: ERROR: No supported loader for boot dev '%d'\n", __func__,
++	       bootdev.boot_device);
++
++	return ret;
++}
++#endif
 -- 
 2.51.0
 
