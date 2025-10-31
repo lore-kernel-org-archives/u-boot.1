@@ -4,182 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F1FCCF9FE
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 09:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72CFCCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 10:12:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD366838CC;
-	Fri, 31 Oct 2025 10:48:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id E0F7883642;
+	Fri, 31 Oct 2025 11:12:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="GfbDdGZg";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ARuYwr0G";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XjUnTP5E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE78E838CE; Fri, 31 Oct 2025 10:48:22 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 86629836F0; Fri, 31 Oct 2025 11:12:36 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 959BA8331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:48:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 439F68331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 11:12:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=339923f62e=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 59V9Xxm53952176; Fri, 31 Oct 2025 10:48:17 +0100
-Received: from db3pr0202cu003.outbound.protection.outlook.com
- (mail-northeuropeazon11010023.outbound.protection.outlook.com [52.101.84.23])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4a4t0mr8p4-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 31 Oct 2025 10:48:17 +0100 (CET)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=clHpf+FiyJy9Q1anzMXm/+3g7/DWhmjBCDNPd4Nzc8ruYLwDJszcnVjTCmQpwGE2uwDcTXXRrs348a3hN8IG5s+149q5QBnegbGZTTqgSokvcpmIMqSvkm0LvDJeT4GLbGyDxckhGz1/udA22vFpAN9g1MSgGbMcLBWy9bqf0BzhGFdv+MrcaMMEDgOx2GT0xLkXxzyXAzDFyNSpDMYAnPAgc/aY08k3wy+b39G3aMDDNIqHlJCYvzhWkkEcgJ9243HBOPUXdqGt2GUA3VdhZoZbn/yZbm7q6t8+Vm8NjBzolH3f/WmMzKllrdMAVk1DVRRmYglPR5w8C5urKnjFjA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NHYs0faP2UZw4zYCcGX82wSOhR1WiM51o+jM3ZgCcj4=;
- b=IVhMFgALsJKIgTeYmiE9vdI8w6d6m6mbhXeBqNSoP0Z7Nk4dBRUA0aMPgVU8qHa2Um4t+T0QsTAN+lPNY2vuK8a7NpvyIpUcALk6ut/BSiy1MUY2MiXXosd7cFTTkRxBQPlOVBshehE3jnCfkyPnPseBR9YacogY7xniNerIwF5JV4T7kQRdA9QpXbXK/y/wiJcUwd6WLdOkXJ360Wl2Skijcpz10Ap5fXai8p3vL0bsoPwAZbS6Cm+YKdC9xQco3KBaVUu+vfi/o7t04O2cTGVw+KIePgzGNMCjKLDVY3zQCK5C8Z5WxbZ2iJTzJ1uLmCw9hgvGbrA1JQjM86LGRA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.44) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NHYs0faP2UZw4zYCcGX82wSOhR1WiM51o+jM3ZgCcj4=;
- b=GfbDdGZgfHYK3xkDSB2uknISDD4MfOkqOKNWP8rzB1Xk/zyrmNH5pfVernVertaD/pAi4C+d31XW6oa+uvZ5q+YLW0Eusg7CdsxvuJD5Q9WmkTYl7u/2Fy01IhCHp3C0Gpn4wF7gSTB4EH+YnIVYB6JIarAGqhR8QVtmxKXtswDFjmkveAACFnJm3E2HAWiVt+dlMIYeZwsAaEsjnbbhHbnynu+BDuSyCv7CL4pmfzSw7mg3L6wCBmlcTPhNPSn4RL0l1HSJDY3N9wWjp+KwK8IwIc3f0ViVCAdy+Y1T2xpAintbRc8Qhhw/jXj2ubiA8B5LrsYS/ZYLdAoMHm0BFA==
-Received: from AS4P191CA0026.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:5d9::17)
- by VI0PR10MB8667.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:213::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Fri, 31 Oct
- 2025 09:48:14 +0000
-Received: from AM4PEPF00027A60.eurprd04.prod.outlook.com
- (2603:10a6:20b:5d9:cafe::f9) by AS4P191CA0026.outlook.office365.com
- (2603:10a6:20b:5d9::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Fri,
- 31 Oct 2025 09:48:10 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.44)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.44 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.44; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.44) by
- AM4PEPF00027A60.mail.protection.outlook.com (10.167.16.68) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 09:48:13 +0000
-Received: from SHFDAG1NODE1.st.com (10.75.129.69) by smtpO365.st.com
- (10.250.44.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Fri, 31 Oct
- 2025 10:40:48 +0100
-Received: from [10.252.18.244] (10.252.18.244) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Fri, 31 Oct
- 2025 10:48:12 +0100
-Message-ID: <45aac9e6-eaeb-4e96-baba-225a6b63f636@foss.st.com>
-Date: Fri, 31 Oct 2025 10:48:10 +0100
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 59V1n3kX1572066
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:12:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ fuyv9Qf6NHtKrG6rRjNZXbsxEzf8+7BSnah3di7lIls=; b=ARuYwr0GK3t+yQqW
+ gWpymvG2BEuy3QlN/gq/O9OvBCV9lkUqpp237q17VfEdS58y9sWoZfj2uYdwz71d
+ TmiN07nJ1HZ7bs59SCv6vT7OW4WtnIvb1e4CVXNB3WQqhHk5HktP1haQI++da2/S
+ Sr2dRhJIuV94h5IJm5hTtkcGUnwYqOqvM+asC+1z+igwQb5u/UH0POH7Yz7/Rt4j
+ 0OJIcf2/9ZqzyxjKPPI676ZVoAK9eTcQrX/K1DDscN/OX9Zn51PBrviNRQu25FXv
+ n3ATgzj6KdCPTENa4fzqD/Qgt/L68D59qs2SEXplHX00J0lce0iD3NFDthWgOvlH
+ RmD10Q==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4a4ksc17yu-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:12:32 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id
+ d2e1a72fcca58-7810912fc31so2142565b3a.3
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 03:12:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1761905551; x=1762510351; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=fuyv9Qf6NHtKrG6rRjNZXbsxEzf8+7BSnah3di7lIls=;
+ b=XjUnTP5EZcD1gsrQNOtbyYdyi+eBsM57tozgVaNrGCxsJLhgEKHC78mBglRNDynlzt
+ UlxKsr8SjBAf0T4l3jdnP2nH7rdNsEBo34lIFfsyMb31Y2i8434YoxLCLm2t8574Aitz
+ bob77vM2rh/cPF0GZDj3S9oatl+Z+WtIuakOkdMtCtydHdIIqCWSEUD6yE5s0XK+VCPz
+ S/Qf/mvnd79yE1VJvVriEuNZEMQRamOIic5AhCdzR7VtQVGoElE0U99ZuFmOxvU7HYUs
+ XITTDIl5wc4AAb5JLUD75BQzqHUaBkjsOrt8bHFZFSd0VZr3URYX3lmvJPbG/JlEgCCU
+ RdGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761905551; x=1762510351;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fuyv9Qf6NHtKrG6rRjNZXbsxEzf8+7BSnah3di7lIls=;
+ b=kQPuBXFVA1+844dwqKMn2+uufIlh5E65vxp5PrfpgEzTUYcYviD4tZpb1k1wrZAYPB
+ gpF6aX9l6Jv1a/aeGd0J0rBUxYNa4mbeM380qL4yw/bYb6qySr/4OBoQtAmTqFQmLQTc
+ vzz8k4nEqHm6OUNTgdHVg3U6BvoJ4BIF1xySs+iebq9zUPYovn9h2TDOtPjH8o6bOz6D
+ agljNWYHR1mTOqhe2vNBV+FGy7NFXbk9/mfEO7DgHNS0kuP5c4HwHzewT68sfcZryzLP
+ C9/8W8MTqZseuOKryyDJ+o479/oGukufpsO431dmOke2pyhRW6a/mLaK+F7CRySHxpo4
+ uWpA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/mOW4jHGRUIAceMwziRRarWUSKU+vW66tNnpo7npsbDv+QPQEsvhs8fx62+LY+P4whjf70QA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4z+BI4B2mny86gDjLo8BBVOg9LNZBcyXNPVibapDQSiGYDTrC
+ qm5l1tNVdGf6ZOoYGhhVP04u8lrTP0LSmj8nzuX2qktOqo/HFDTlBUBwvYGZsF6sZJCVvO9vB/O
+ cge1UewHuqScHRDTMTcD9qtj8Id6jgpJF7NkaZslHf6sSocm7hAwD8BYF
+X-Gm-Gg: ASbGncsZ8zMZ1V107pFe8RVUZTBU5SxkWQIJ+bE8nGZ/65eJkZfg+IQK89R4m21FukW
+ 5Tmlq0dkFl8xV7DTBefXI2UFASbnQ1zKK4vtdnVo2UfB3cHADZlGcyWByzLVOjh8OS0foaxk/rk
+ HqqTlb0IPi4o1ly84IqWPt3XIuLJAJU6FgO/QHmsg/RX3cVvRiFO2qwsxoUQ10H33eQjSmW1S9X
+ qzCMbWkf7wHEZS1kXobHl+WZMxG8Uk8QUXWJxPBUhXkEmTg6byadvKnRCr1iBoEIfjprS+BXks9
+ pdnVLgqkCLW3ugKj4fjDeujDQmcIiqJCkIsGfrZMNxGbOdB9hkMJ6jbSBBm85sqSzke5Nk19+Y4
+ 61NB6glBdKRAVyFKoaPKD/uMjffrzbaY=
+X-Received: by 2002:a05:6a00:2d9f:b0:7a2:710d:43e7 with SMTP id
+ d2e1a72fcca58-7a7799aff2emr3668631b3a.24.1761905551475; 
+ Fri, 31 Oct 2025 03:12:31 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGlLkyjNqWx/vJ2Qi5RJ/OmvtL0RRZpkMaukX2M/Lw+reqXV0MfGHgVHy17Bd/jeypU1XZi+g==
+X-Received: by 2002:a05:6a00:2d9f:b0:7a2:710d:43e7 with SMTP id
+ d2e1a72fcca58-7a7799aff2emr3668580b3a.24.1761905550882; 
+ Fri, 31 Oct 2025 03:12:30 -0700 (PDT)
+Received: from [10.152.202.155] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7a7db681f4asm1666151b3a.62.2025.10.31.03.12.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 31 Oct 2025 03:12:30 -0700 (PDT)
+Message-ID: <3af79816-26e0-4403-988f-29858bf569d3@oss.qualcomm.com>
+Date: Fri, 31 Oct 2025 15:42:23 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Add missing build of ST DFU virt code on DH
- STM32MP1 DHSOM
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20251031041640.174689-1-marek.vasut@mailbox.org>
+Subject: Re: [PATCH v5 3/4] mach-snapdragon: fixup power-domains
+To: Neil Armstrong <neil.armstrong@linaro.org>, trini@konsulko.com,
+ casey.connolly@linaro.org, sumit.garg@kernel.org,
+ jh80.chung@samsung.com, peng.fan@nxp.com, rui.silva@linaro.org,
+ ilias.apalodimas@linaro.org, christopher.obbard@linaro.org,
+ quic_varada@quicinc.com, me@samcday.com,
+ marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
+ alif.zakuan.yuslaimi@altera.com, tien.fong.chee@altera.com,
+ balaji.selvanathan@oss.qualcomm.com, miquel.raynal@bootlin.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20251027113312.3815169-1-aswinm@qti.qualcomm.com>
+ <20251027113312.3815169-4-aswinm@qti.qualcomm.com>
+ <ea83aa0d-9db8-4a7a-8b4e-bf32c9aa4ffc@linaro.org>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20251031041640.174689-1-marek.vasut@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.18.244]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A60:EE_|VI0PR10MB8667:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3b5f7c54-e33f-4e7d-ab2f-08de18629bef
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|82310400026|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Sk1hMHY4VnAxa0QxMVNmdkdVV0tHcjRocHcvd3BrbkYyYWovODYwcTZiNFpC?=
- =?utf-8?B?cmwxYlhsN0N1Wk55NHpGUE9BWnFYdXljNDVEdGZFZHhNRlN3NkJZdEtmeUpr?=
- =?utf-8?B?d1N3d2pYZFRpMkpLaFFEb0hsdEhrcmFUR0ZlQXdyRlZ3YUk1Q3B3cTBkQ0JM?=
- =?utf-8?B?SzR6akxCdmRFNVFGQlRCRUZvZnlQaFhoR2l4UVp6NldodWRIRzh1Z0dXNkpN?=
- =?utf-8?B?dnB6Ymp6WGJOTVBHQkprbm1WbFA2Q1ZoWDFGNGQ2Zm13V01OTUxObXBMaEQ2?=
- =?utf-8?B?Q200UlBRZysvWlBrbkZmK05hZ2JmOWQ2SDl4bENReEtTU0hSTlArYThkYjVs?=
- =?utf-8?B?TlowWEVKcHVwZk0vZkc5azZuaEZmcDdqbTM5TlgrVTVWWEVXRUtlYm9qZ2Vm?=
- =?utf-8?B?QmlNMlJVb3A3QmNldE15aHhXMWJaTUtCOWVSckVHNHJLV1JIWXZldTlIbzlB?=
- =?utf-8?B?Zzk2UkNyLzlXSHdBVy8rT3VVS296azdOVDF0eGs0Q2xXeDZrbi8rZzJma005?=
- =?utf-8?B?cGFSS3NOVFRkMXZ4SzhvN3lXNWZrSVo0V2NnSTVtV1JZVjdIek53OGtsZWdL?=
- =?utf-8?B?eUpSMFFPZlNRT1M4WmpiTnBxOURrSjViRlFSYjRrak1WVEpMaTUzUVlQVHNO?=
- =?utf-8?B?L3NkZmhIY0IxbG1tdG9WeWdFQkVqQkVVTUlLRWhRSUZqbHl2R2U4LzBnVEVr?=
- =?utf-8?B?SHFDWVh5QVl5M2dyRXNQQkRQUk9SOWpZcG1kVWd1aTNQOTNTT3VTblNnREtR?=
- =?utf-8?B?MjUxc3NFT0FxbkN0Q1drSitQWm5mRnJkSnFUbDQvWEFqamp3bFRpZ1BPZnF6?=
- =?utf-8?B?Qld6NFRieER6b1Z3R2l6b21uWG1YcXh2VXFqWVhVQ01HSjhMUDVDM3dqbzlB?=
- =?utf-8?B?dUh2WmE1bmw4bERsb1NPSWVHS2hKWU9oQjNielFnM01lSFRGaU1seEtnU0J4?=
- =?utf-8?B?RnJJcXRYbnRnd1hrK05abUVrQzBrSTVDSm0xL0JWbmZxSnFrUUtEZGhLY0tS?=
- =?utf-8?B?NjN3aGM2MkVTZk1uRi9iSlN1TGtOK1RJSG5WN2lhcnJFREdWTWY2S0sydU9Q?=
- =?utf-8?B?UUFna3VwUUZ2cWJhc0c5WDJiSERtQ2hmMG1ORXhQZkw4dWNNN3UwNktwT2ZZ?=
- =?utf-8?B?UUJkSzRneVU1ZHpzME1ibDNlb080NWFpOS9zdXZCNWtUaGVjV0dFbFgwenlG?=
- =?utf-8?B?M09PdlBERVMvb0lUTnc1Vzc5ZTN4dDhQQkR5NzdxTVZHRUlkeExVTmR2OU9k?=
- =?utf-8?B?VnJ3YnloL0wvdE9qU0JQZ09wNHZ3V3h1MnY1SzMwbGRTalJxZVIxZGFJK2ox?=
- =?utf-8?B?MENHaDZDN0xkUldJNlNkV1diejFBYXZtanFPNXpyZkU2RU1kN1picUxNZ0lS?=
- =?utf-8?B?QnYzalJDM2lJTlpveWJTNm9sSUU0Nm5MTmVoZFpScDJJeUs3N0o3OEM1RG0v?=
- =?utf-8?B?RVRTMElqNVJTQ3haaVBoOEZObWx1N2huRkxBb1lxdGRkdS81b1NJb3hFdWhE?=
- =?utf-8?B?RHNsalU1djlMeThPcVB2RE9uNEJreVJIWlVsZFJqNU1vYnRDTG0zRlVhYzVN?=
- =?utf-8?B?V0JUNi9xWm0zVktqTGZ6Vm1hQWJIOC9Pd2ZHc1ZueFpRa1FhNTV2QXkvcGxN?=
- =?utf-8?B?aDdnZWsrcVJjMGpSQWxWY3J2MDBDSkZjR3Q4cWFVZmRTS1ZsZ01kL2Q4aDFQ?=
- =?utf-8?B?NjVTUnNyRE9PNjh2RjE1d0JxVFk4K3gveXFzRjFTS0lKOGR6dFNsaDQzeGdr?=
- =?utf-8?B?WWhSTHhCK0w5bS9Mb1FDVDhtZTRYZjB4M1hzei9rdlBLdDl2YzhJc2VNVGRm?=
- =?utf-8?B?eXRsdUNhZmphaG1xYm9tN2ttWlR3czk5enhna0NOWnpyZUxrNkFiOUp1OVFl?=
- =?utf-8?B?Wmg2VHlxS3FieWxnWThzRnQwR1p4VjhvVTh0TWtxeEdsdUpuY2F2ZTFGUjlL?=
- =?utf-8?B?K3ZVY1lwdGpUWG5YdytCaURTN01ZVWtWdExKS29RZWl6UkJHaEJVd09OcUZq?=
- =?utf-8?B?dnFwbUlLV2FPMXJwQytwK0x6dklGejRselRlUGVCSFlmWk1rNUJMRzYzVnIy?=
- =?utf-8?B?ZGMyMUFNOFYwc3BkRlBjL3RINDBmRkxySDhrdXNxREJmYlBNZDlzaTlpcnl0?=
- =?utf-8?Q?ADuo=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.44; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014)(7053199007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 09:48:13.4088 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3b5f7c54-e33f-4e7d-ab2f-08de18629bef
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.44];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A60.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR10MB8667
-X-Proofpoint-ORIG-GUID: fKeRDjgpiLDv69RsPgel63dlSJTaknro
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDA4OCBTYWx0ZWRfX0Lxg6mcDDEk9
- FFEKMPx6aZYKy4u58YWAK1WtzSNqo434BX5tfHsvpr0QFu2vmvJIyw5rqByTMCYeMthKUOeG1SA
- eqFgF0uEwciLLXR4lMlhGO/loqpeTKaQGdSd5S+qU5uNU8LS9bfcZ1xiyilvQ2hOihwep7+DeTN
- v4eLzvy/y8FLskWFlNbyd/23hpfPrTvXvQVK0dtdtQKTbppTz831lDc966q43f8sEcRemL/jtsA
- qK3bVQD2O1U3aWyfUab6YXa5V00e7UCbfVKicghk1EH5xej86Isv0yM0+KXCIS+8qf+CJWpueeZ
- DyidgLHuNatemr0wG3W5oiqinOm0ykzWl0hBrUcYdoZZwqA6EM8pWlAtVrFnQWm3iaAwjxhCV2H
- N/EUrmrfMgYEEdGv6fQLvUjA62CaYA==
-X-Proofpoint-GUID: fKeRDjgpiLDv69RsPgel63dlSJTaknro
-X-Authority-Analysis: v=2.4 cv=U/ufzOru c=1 sm=1 tr=0 ts=690485e1 cx=c_pps
- a=mucXRGHKJBmRlkbHDuFPWg==:117 a=Tm9wYGWyy1fMlzdxM1lUeQ==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=F4d32EgQ6_0A:10 a=IkcTkHD0fZMA:10
- a=x6icFKpwvdMA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=b3CbU_ItAAAA:8 a=8b9GpE9nAAAA:8 a=k-42gJp3AAAA:8
- a=zk4-lHRcAAAA:8 a=phlkwaE_AAAA:8 a=ZuHQpEm67TBVP2XyqMsA:9 a=QEXdDO2ut3YA:10
- a=Rv2g8BkzVjQTVhhssdqe:22 a=T3LWEMljR5ZiDmsYVIUa:22 a=uCSXFHLys93vLW5PjgO_:22
- a=7cv85riZL9-k45RWW8P6:22 a=uKTQOUHymn4LaG7oTSIC:22 a=cPQSjfK2_nFv0Q5t_7PE:22
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <ea83aa0d-9db8-4a7a-8b4e-bf32c9aa4ffc@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDA5MiBTYWx0ZWRfX6YQ+hp/CXFQz
+ hyBGM6f6xxDzRu9/v1ew/PCzjdsTIvSegKobJs6TTF/rS3PjDYqIdGLAibn9P/zk7If9jKuzA2q
+ ELXvbZyrtyRVHsRzgtt6hEhn9o7XvtZF3taS+15Fh3/Ibp18h4DlB4rRkS77NAeEcHYBDUY3CMd
+ ySqwe/JqJtno/yzbexGOrW1CYKc0fNhyaMP+zmZVlmnZEpZNh5fHW8+LrV4XYc8J+qwk0RmrIfc
+ uw1CtNdduwRXssnxPJejuoEDHNhYzw4JAvikaZlzfFn9Bw/z3fGkMaJtuYCD7uSdYFjev/BNmxw
+ 2ZE+kdb7wAto1bzMKgSutsHreiJZbGKB4GBNQjIvyUKDP7/nHEvdKgYoQ2lPNoQ6/TMHhzGJAMu
+ yM0EdN13GD0Smbms1wqdj2vEG3HrkA==
+X-Authority-Analysis: v=2.4 cv=Q8PfIo2a c=1 sm=1 tr=0 ts=69048b90 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=x6icFKpwvdMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=tvshNE4mzlgVatfoYFEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: uYDXAtlYjz8kTwWrDbb7hie08rZ--6TN
+X-Proofpoint-GUID: uYDXAtlYjz8kTwWrDbb7hie08rZ--6TN
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-10-31_02,2025-10-29_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1015
- phishscore=0 malwarescore=0 spamscore=0 impostorscore=0 bulkscore=0
- adultscore=0 priorityscore=1501 lowpriorityscore=0 suspectscore=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 priorityscore=1501 adultscore=0 malwarescore=0 suspectscore=0
+ spamscore=0 lowpriorityscore=0 impostorscore=0 phishscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2510310088
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2510310092
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -197,39 +158,98 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-
-On 10/31/25 05:16, Marek Vasut wrote:
-> Commit 6d91f0a3a14d ("board: st: common: cleanup dfu support") split
-> the vendor-specific DFU implementation into two files, but failed to
-> update other non-ST boards. This did not lead to noticable breakage
-> with plain simple dfu-util, but it makes the ST proprietary programmer
-> CLI tool end in an infinite loop. Update the Makefile accordingly to
-> allow even that kind of tooling to work.
-> 
-> Fixes: 6d91f0a3a14d ("board: st: common: cleanup dfu support")
-> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  board/dhelectronics/dh_stm32mp1/Makefile | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/board/dhelectronics/dh_stm32mp1/Makefile b/board/dhelectronics/dh_stm32mp1/Makefile
-> index ffd221ac224..2f4a301d1a0 100644
-> --- a/board/dhelectronics/dh_stm32mp1/Makefile
-> +++ b/board/dhelectronics/dh_stm32mp1/Makefile
-> @@ -7,3 +7,4 @@ obj-$(CONFIG_PMIC_STPMIC1) += ../../st/common/stpmic1.o
->  obj-y += board.o
->  
->  obj-$(CONFIG_SET_DFU_ALT_INFO) += ../../st/common/stm32mp_dfu.o
-> +obj-$(CONFIG_$(PHASE_)DFU_VIRT) += ../../st/common/stm32mp_dfu_virt.o
-
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
+On 10/28/2025 6:32 PM, neil.armstrong@linaro.org wrote:
+> On 10/27/25 12:33, Aswin Murugan wrote:
+>> From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>>
+>> RPMH power domain properties were initially removed from the
+>> device tree due to the absence of driver support. Since RPMH
+>> power domain driver is added now, the fixups are removed.
+>>
+>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>> ---
+>> v5:
+>> - No changes to this patch in v5
+>>
+>> v4:
+>> - Reverted the inclusion of qcom-rpmpd.h header in pervious versions.
+>>
+>> v3:
+>> - Removed OF_LIVE_SA8775P config, since there is no SA8775P specific 
+>> fixups are done
+>>
+>> v2:
+>> - Removed the power domain fixups, since the power domains are 
+>> handled in qcom-rpmhpd driver
+>> ---
+>>   arch/arm/mach-snapdragon/of_fixup.c | 31 -----------------------------
+>>   1 file changed, 31 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-snapdragon/of_fixup.c 
+>> b/arch/arm/mach-snapdragon/of_fixup.c
+>> index eec2c0c757e..93c16821e54 100644
+>> --- a/arch/arm/mach-snapdragon/of_fixup.c
+>> +++ b/arch/arm/mach-snapdragon/of_fixup.c
+>> @@ -116,36 +116,6 @@ static void fixup_usb_nodes(struct device_node 
+>> *root)
+>>       }
+>>   }
+>>   -/* Remove all references to the rpmhpd device */
+>> -static void fixup_power_domains(struct device_node *root)
+>> -{
+>> -    struct device_node *pd = NULL, *np = NULL;
+>> -    struct property *prop;
+>> -    const __be32 *val;
+>> -
+>> -    /* All Qualcomm platforms name the rpm(h)pd "power-controller" */
+>> -    for_each_of_allnodes_from(root, pd) {
+>> -        if (pd->name && !strcmp("power-controller", pd->name))
+>> -            break;
+>> -    }
+>> -
+>> -    /* Sanity check that this is indeed a power domain controller */
+>> -    if (!of_find_property(pd, "#power-domain-cells", NULL)) {
+>> -        log_err("Found power-controller but it doesn't have 
+>> #power-domain-cells\n");
+>> -        return;
+>> -    }
+>> -
+>> -    /* Remove all references to the power domain controller */
+>> -    for_each_of_allnodes_from(root, np) {
+>> -        if (!(prop = of_find_property(np, "power-domains", NULL)))
+>> -            continue;
+>> -
+>> -        val = prop->value;
+>> -        if (val[0] == cpu_to_fdt32(pd->phandle))
+>> -            of_remove_property(np, prop);
+>> -    }
+>> -}
+>> -
+>>   #define time_call(func, ...) \
+>>       do { \
+>>           u64 start = timer_get_us(); \
+>> @@ -158,7 +128,6 @@ static int qcom_of_fixup_nodes(void * 
+>> __maybe_unused ctx, struct event *event)
+>>       struct device_node *root = event->data.of_live_built.root;
+>>         time_call(fixup_usb_nodes, root);
+>> -    time_call(fixup_power_domains, root);
+>
+> I think the fixup should be removed only if QCOM_POWER_DOMAIN is 
+> enabled, no ?
+>
+> Neil
+>
+> In line with the previous review comment in thread Re: [PATCH v1 0/4] 
+> Added QCOM RPMH Power Domain Driver - Casey Connolly 
+> <https://lore.kernel.org/u-boot/5afbdafa-a0f9-4146-b64e-8869f68bc7f8@linaro.org/#t>, 
+> which recommended the complete removal of the fixup code, we have 
+> removed it accordingly, also the QCOM_POWER_DOMAIN config is enabled 
+> by default in qcom_defconfig
+> Please let us know if you would like any further changes or adjustments.
+>
+> Thanks,
+> Aswin
+>
+>>         return 0;
+>>   }
+>
