@@ -4,89 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA110CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 16:51:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B26CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:03:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5285D83A2D;
-	Fri, 31 Oct 2025 17:51:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id CB2CB83A35;
+	Fri, 31 Oct 2025 18:03:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="v2FWQTON";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="A/b2KZ9x";
+	dkim=pass (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="OwSmJnz/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0D1783A32; Fri, 31 Oct 2025 17:51:32 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id D7E0383A41; Fri, 31 Oct 2025 18:02:58 +0100 (CET)
+Received: from outbound.pv.icloud.com
+ (p-west1-cluster3-host5-snip4-10.eps.apple.com [57.103.66.13])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5F6083A1E
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 17:51:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C8E8483A13
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:02:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cyn7P3rKrz9spX;
- Fri, 31 Oct 2025 17:51:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761929489;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9QoDTm30RnK+zAr2t2KawJPDyWHcL+F+NL+z87G/brU=;
- b=v2FWQTONHXc9Ldn0yOac9H+hhBJxbKEe3EnS0QFSMlmj30tIODJh91VIGjDP2VrnTjM3fl
- JLzU/TCbvcxuvKR+vUyPtk/QsokIQdYNQJapWE6OXypst9V5ifI2EJnHchpM3UhlB1+Bb0
- Nofc4GQsXy5Lay0A2TXbZaPjDdiLqSSqVhGcxkZL7Xaem/P0m5BCb1spbQ9SQ1gxd6XUzY
- 6d4vdAfkh2ob8PMdLUphDc3JuEyagqYhHqN9uevlZUKqWJZ41jTJTfr1mWNKo3z9TGfpJx
- G9jnyPHbf/S4PGiRtHyVbAyw59t2YLsp02qx/ZmhPUUIoyry7oUReQB9fKCwgw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="A/b2KZ9x";
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <a8f176dc-59c3-4af4-88ed-03d064f2e7c2@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761929487;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9QoDTm30RnK+zAr2t2KawJPDyWHcL+F+NL+z87G/brU=;
- b=A/b2KZ9xB087hHrqGzEJtI0cgRog1gBPJkvILmJVsGOwf/RE5806+IcNm1kj9wiTIcTw9x
- lXozLP1EQH2JiNrqQzJrbPggRHSsP2HP2fFJNZbfFhiXJV5qrrgNYI0FWlpFxFRHo0JZwd
- vSktfY9ozd58Nlf3IkxpMLvzE/1KuYDjhS8OjIxV3kBl2nKC6F9SIOoiYRcnIoAx1gTGzj
- pUfqtELlKBkxUviFubw6qhmRrajFfmUuypLGPMghMdJC7lVf+qf/N8zvrT/cPBbc9rzGBU
- ncV71IxmCZ+aZdADmE4erHzIknNFRXro6G3pDIhoYTgLHtbx+JSH+OJG7QeADA==
-Date: Fri, 31 Oct 2025 17:51:24 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH v4 5/5] net: phy: aquantia: use generic firmware loader
-To: Beiyan Yun <root@infi.wang>
+ dmarc=none (p=none dis=none) header.from=infi.wang
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
+Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-west-1a-60-percent-2 (Postfix) with ESMTPS id
+ 037CC180176D; Fri, 31 Oct 2025 17:02:53 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
+ bh=y3Ez+huFdExPRgP5rjXDG3pw0bbpw6PwCAlAC/i9WQY=;
+ h=Content-Type:Mime-Version:Subject:From:Date:Message-Id:To:x-icloud-hme;
+ b=OwSmJnz/SVyFq21qYcmkLKeElza4rkXGKkYPf2YmZtQ/UC4U9uZchNm5Rih7f5BZRjtEQ5P0i8fpDSyJhuwbpuwEiU7YxlqL61By3GHNljN5fWXQDfmkzq7NCE+ieZccITeaBdIslydZkaSkIj5I2LRtXpbij7s+FpAa8R5alab9j0q68zuT0JCOv+vImwEwd2WfsBl1JI6jaTiYk06lAXvryFxaHts54F6JzNOWrDJvwPzFeMJgSgBBmVnULi8bRmZKTUj2BTfmwkPlVDMj/l9UGfzA3/XuQyHfbtD5jRSPpHL321SqNDw4QOMUjp6jcfDjCyeePpFTb7UkJ1NvTg==
+mail-alias-created-date: 1549370554000
+Received: from smtpclient.apple (unknown [17.56.9.36])
+ by p00-icloudmta-asmtp-us-west-1a-60-percent-2 (Postfix) with ESMTPSA id
+ A16C2180175C; Fri, 31 Oct 2025 17:02:42 +0000 (UTC)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
+Subject: Re: [PATCH v4 2/5] doc: bindings: use upstream bindings for aquantia
+ phy
+From: Beiyan Yun <root@infi.wang>
+In-Reply-To: <6ca0b758-ac2b-46a5-a06a-5ef5ae676f00@mailbox.org>
+Date: Sat, 1 Nov 2025 01:02:30 +0800
 Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
- <trini@konsulko.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Weijie Gao <weijie.gao@mediatek.com>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <7AB9A75C-6A37-4DFA-B077-EEC6A6E9C1ED@infi.wang>
 References: <20251031152348.60571-1-root@infi.wang>
- <20251031152348.60571-6-root@infi.wang>
- <9942f1d3-669e-48a6-923a-c2607eafdd02@mailbox.org>
- <FEAA3555-3109-41E7-A58F-5B601B6C2FB5@infi.wang>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <FEAA3555-3109-41E7-A58F-5B601B6C2FB5@infi.wang>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: dk1xe6dnfodwkex5keogm93gzf3bo5br
-X-MBO-RS-ID: ebec2cc829feeb70f87
-X-Rspamd-Queue-Id: 4cyn7P3rKrz9spX
+ <20251031152348.60571-3-root@infi.wang>
+ <6ca0b758-ac2b-46a5-a06a-5ef5ae676f00@mailbox.org>
+To: Marek Vasut <marek.vasut@mailbox.org>
+X-Mailer: Apple Mail (2.3826.700.81)
+X-Proofpoint-ORIG-GUID: BrEjfGDBpOsC6JY7ncerONsCbbns1tnE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDE1MyBTYWx0ZWRfX+ho1kA8LsSyT
+ eGqiEhG4j9ltKlib6/JmTzt3oJpBjDvqALDAnXL0z4caJoWRUvGHdNEU64wmyJ8t+p/ci63xod4
+ YtzFaRYeZO3gdopAuY+ofXgb4IZgRphq+CmkrNCXw1804LnxgKVmcwd1yPLrB4glATaojYKwVh7
+ il1hz65DmHwFpFvKbO3i2zc/IEa46vQ5NpCkjxrqE72JSSj9IWtYLgtQ7CUSfnnq5rwTroM6Kj5
+ nuFEJLK/TCfZI6T4/Pctg+NcU8jW/AAv2whhNObydXYbivtwi0NOzCWIf5PV1x1O9zo86ISuA=
+X-Proofpoint-GUID: BrEjfGDBpOsC6JY7ncerONsCbbns1tnE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-10-31_05,2025-10-29_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1030
+ suspectscore=0 bulkscore=0 spamscore=0 mlxlogscore=981 malwarescore=0
+ phishscore=0 mlxscore=0 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.22.0-2506270000 definitions=main-2510310153
+X-JNJ: AAAAAAABrWJAby1lHBboh21rr+fUsyA4GLMec4LxtKloxvYrzEnJLfmEhWqoKOh4G18YVeomQpO463/3dh1opu1Hcr7W5urHwhpQ1+59HUnFjPU73GAuKc4Fr8e0QZliLx7lKrPSp+SXBdSbg/L3AR2qOAwhXwulVIIZ5CEy0HzaGvwkSddiRkBU3oy2EOJ6LP2z7PR2n6TlHBewj0w8C6txNS9X7i6Ce5tcrw8611ma/K07ZxGxwKpG1GKn5wbAkRs09xSW/4K34LPLMeHcXqCxauxQg+RZzTxBJJEjitNm23gNPzjEv+zS8bOqu916TVhr3pv+/blfllVhUWjQPgwAsoq9ALXgxeZf17dGP00qXepFuDVdnKb88WGTTuzSyjbNKqBkYlelhYSp6syymAMNg26EDaTK+kvg/jU6vE6EQlG7HnOBGrBVjZdlcWd/Lgxqck406MLXUm6SOimMUSNTcu9yBg5efCbFf7tMCEln0ExaXTb3lDUdzANfPvyXuneCGg9AGJvUS+AP456c+vyrz0ikfM1w4sGKjqG5YAsTtfjWslDq+k4LEqPTvgELqdAHT2V39xYZCDAxkuYocvBe2xhJan5WH0wd1FCAElCKtS0rIqnJ6I7NDpGPllurqIEHWVM5RHrLa1GEojuXWrhEjvZIHIiQWg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,63 +85,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/31/25 5:34 PM, Beiyan Yun wrote:
-> 
-> 
->> On 31 Oct 2025, at 11:57 PM, Marek Vasut <marek.vasut@mailbox.org> wrote:
->>
->> On 10/31/25 4:21 PM, Beiyan Yun wrote:
->>> Aquantia PHYs are being used w/o SPI flash in some routers recently.
->>> Current firmware loader only attempts to load from FS on top of MMC,
->>> limiting the use on many devices.
->>> Removed the old firmware loader, migrate to generic firmware loader to
->>> allow a wider range and runtime override of firmware source. (e.g., USB).
->>> Tested on Buffalo WXR18000BE10P with UBIFS.
->>> Signed-off-by: Beiyan Yun <root@infi.wang>
->>> ---
->>> Changes in v4:
->>> - Split firmware upload helpers change
->>> - Reorder `aquantia_read_fw`
->>> - Make `aquantia_read_fw` weak to allow overide
->>> - Rename exit label in `aquantia_read_fw`
->>> - Kconfig polish
->>> Changes in v3:
->>> - Select FW_LOADER with PHY_AQUANTIA_UPLOAD_FW
->>> Changes in v2:
->>> - Add support for script based loader
->>>   drivers/net/phy/Kconfig    |  28 +++++----
->>>   drivers/net/phy/aquantia.c | 122 ++++++++++++++++++++++---------------
->>>   2 files changed, 91 insertions(+), 59 deletions(-)
->>> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
->>> index 018be98705a..4a74a0d4e8c 100644
->>> --- a/drivers/net/phy/Kconfig
->>> +++ b/drivers/net/phy/Kconfig
->>> @@ -1,4 +1,3 @@
->>> -
->>>   config BITBANGMII
->>>   	bool "Bit-banged ethernet MII management channel support"
->>>   @@ -91,23 +90,30 @@ menuconfig PHY_AQUANTIA
->>>   config PHY_AQUANTIA_UPLOAD_FW
->>>   	bool "Aquantia firmware loading support"
->>>   	depends on PHY_AQUANTIA
->>> +	select FS_LOADER
->>> +	select FW_LOADER
->> Can you not use the plain FW_LOADER to load the firmware from either storage, UBI or Block ? Is FS_LOADER even needed ?
-> 
-> Thanks for the suggestion, and yes you can, but that API is script-only—it expects the board to stage the blob and just copies from the address exposed via *_addr/_size. The current users of this driver expect the old pattern: the bootloader mounts a filesystem (MMC before, now possibly UBI/USB/etc.), reads the firmware, and applies it. Keeping an fs-loader node in the DT is effectively the same contract as the legacy MMC setup, just generalized.
 
-Can you maybe write a script which implements the old loader behavior in 
-a compatible manner ?
 
-> The fs_loader driver gives us several things the script path doesn’t: a standard way to describe the storage via "/chosen/firmware-loader"
-
-Try this:
-
-"fdt addr $fdtcontroladdr ; fdt print /chosen"
-
-And then look at the "fdt" command and what it can do regarding reading 
-content of DT properties into variables.
-
-> , runtime overrides through "storage_interface/fw_dev_part/fw_ubi_*, and no requirement for a board-specific script. So FS_LOADER isn’t redundant—it’s the part that replaces the hard-coded MMC flow with a configurable backend, while the script helper stays available for boards that want extra logic.
-Maybe a more generic script can be a replacement for the older 
-hard-coded approach ?
+> On 31 Oct 2025, at 11:53=E2=80=AFPM, Marek Vasut =
+<marek.vasut@mailbox.org> wrote:
+>=20
+> On 10/31/25 4:21 PM, Beiyan Yun wrote:
+>> Prepare for the switch to upstream bindings and generic firmware =
+loader,
+>> remove reference to upstreamed bindings, also add a firmware-name =
+example.
+>> Signed-off-by: Beiyan Yun <root@infi.wang>
+>> ---
+>> (no changes since v2)
+>> Changes in v2:
+>> - New
+>>  doc/device-tree-bindings/net/aquantia-phy.txt | 15 +++------------
+> Upstream bindings are in YAML format:
+>=20
+> Documentation/devicetree/bindings/net/marvell,aquantia.yaml
+>=20
+> How come these bindings here are in text format ?
+As much as I=E2=80=99d like to, aquantia-phy.txt file has always been a =
+plain-text binding in U-Boot; I only updated its contents to cleanup the =
+upstreamed property names. Converting it to YAML would require a larger =
+migration, one preferably upstreams smb-addr and eliminate the file =
+entirely.
+Since I have no interest, and don=E2=80=99t have hardware to validate =
+the smb-addr quirk, I=E2=80=99d prefer to keep the local text binding =
+as-is for NXP people.=
