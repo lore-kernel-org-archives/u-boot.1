@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA0CACCFA02
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 21:43:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABC3FCCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 22:07:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EA1A83B0E;
-	Fri, 31 Oct 2025 22:43:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D865B83B22;
+	Fri, 31 Oct 2025 23:07:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jwYNC2s7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NUtfq7qp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9DD183B21; Fri, 31 Oct 2025 22:43:52 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 4024F83B23; Fri, 31 Oct 2025 23:07:14 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 909CA83B0A
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 22:43:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12DE88397B
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 23:07:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7c5308f6aedso1940473a34.1
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 14:43:50 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-3c96de7fe7eso1949805fac.0
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 15:07:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761947029; x=1762551829; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761948431; x=1762553231; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=akzQNjDiluWlNbz9UKAq5NLKc06TsAvZZDYAJDToNpQ=;
- b=jwYNC2s7fklT8ElL5TiAoFqV5/tdtCtSJflJ6N5MAt8dhtR0zsJay4ASiKoGnnRZDL
- ymfwmV9RN7QHa+tB+CZ3axdhP42bXJiaWdHjlmKLuYQiIHVRi4CV5WSiYgQ4XD9vJy1U
- SPStTPhPdzPExz61HJgfan8s10BV5Dl2cLpSl5Lw6mbDln6pVeCKYhy44BgtthWK0hz0
- jAw2YHjyOmZqqkDtVDC4kI7m07Yo0C+HU3AusiuOzvmdJQDoo1dsxQdydD0ix1yLPit7
- LSlobNMLQ8+5QWrApR1menDKrm5s3v2GGQ/Jt5uBHgsDlbTY9cto187ssueoV1Zu7yvg
- wJNg==
+ bh=DfSnq+MD7D4vBhXgmeG7Ucs+2ueg9UsVGgdCut9kPEM=;
+ b=NUtfq7qpkjDwCLKnsj4MNMI82J/UpRAKthsp+K5JiV7QaUIOmOKaRHIOsrE2kNPQ3U
+ GDAm5/nmjGDsppYs8DYprAt49lH3dzBafDNn7WcUBDNg8hefhf3JXIcPR52GEJSGV0lZ
+ J/XvXptM2VDcgFhE+NBIc3MoSKTWBQ/9SYU3/D8+n6gQOKqT3f8cM2uxB8GwNtfjpvcL
+ WQM96s1LtiyY7UEtgCVldAJKOMRzDlfXBWP9Fs/88b4S1Q0HU4pT3hlbAqx/eqzfivw7
+ 9gvnY0d8HY2NJynH9YkxpiBgT91ZY6F0QOEHU9hALmC5RW23Y4zPjoId098BWF7flJR/
+ vr0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761947029; x=1762551829;
+ d=1e100.net; s=20230601; t=1761948431; x=1762553231;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=akzQNjDiluWlNbz9UKAq5NLKc06TsAvZZDYAJDToNpQ=;
- b=gqSFExlRDZ0VEruX2OMAzdIR2SfEQqxRWhbLrl8kpuhTOFvNF6IsHGyjCop6uxVB4Z
- uI9zKgVW90LHNyVW7k+6Qz3w5rcSCTM0QGYkZrEaa/5PYw7hUiu0GKa0ItPc0IVnes3A
- KUZim6wcAlCJP1nfd1ZlHp7AbhdIJ1wwczfdkTLZRw85pCrAW970aKBk2Zudy/EmX0lx
- 6l3RMtEnIvjqoR75SQmK5bAZHIvoBa5J1qpJHUbwZICuChkOWi3KKAiLZd5+AVS9hg+w
- QDzn1J/EdpOMqs6lelByOAAfv+Q5qEi2Et0rSZ2K2McVnvUnLST21MsGe+Wmp09gK/wI
- kqIA==
+ bh=DfSnq+MD7D4vBhXgmeG7Ucs+2ueg9UsVGgdCut9kPEM=;
+ b=LwqJZe7Uf4ZQKkyty/Z6BrYjjB/VSEZKQV9O0GAhva1rU/TM1D8XM5a8ZpD/wCJ+Fb
+ XebG2zwLbzFS4foUZWrF8G+S08oDHRiDUxHSV286oGFzPHuW9fuPbBpSvqj1/fNgLpEw
+ fvG/wJBJRt7/fp2I4PMsdob6m/yHNfoKmuDBN/UoOYPrSTqOFUMwRTKNI+L43EpycKXM
+ Zc/oRi47wdzDnaUbi9jpoTOpL4qfpe55wDRlJHrn/7HRDoMb11FBQrEUdoQNZ6bKMgY2
+ iMk8ulWItXVfJ+4CpCNQDoCoM7vd5et79pHTH4iQNUiFYZiPjhorrLHoXeQcU3hrP10J
+ JHoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXWwoYORr0GMqWwd9evNoT+nqhjOlNigsxI/GlKRFIbRTTEXcGoV8lvz7OtQE5zMK5ChSDv0z4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPIWJsR4EXEUsoGDY5glBeD+Qr7ahyAAAPKUwlevgWsTOZV5eQ
- uFfVRdrquZpb3rT20wHEnhHdR5uMQHBYHSwWxCo0x7id/w10IY+xMmT4/QhOfXG1UfUSantGVul
- dCJL5QTiOi1XKmRxSgHCK2PJGeIilZjWxA09yDmU=
-X-Gm-Gg: ASbGncuOs/E5UGH6jZUTOw7QR/xnWgUPUQdrGzlisI5moYyFXfxSZX9CUHCKVLKnsI8
- tpkuIUL72FFx0sVopHGEvMZ0Dx99hDULS5B7zXFLJKp9CDhxD3FRNCKK0IlWq6PQuGiuPqf6R4l
- y26VX+fz3J9rw8Ml821s3IvswaeWS7rgDhQ7l20tHtZywAt1WvfZ8i1rnVaMkAbxumrSv9YWpmi
- 2JqTCKUTpPzUS7VjIxYB5b0vIDqe3/lMLwmaRaAX92PL3JNbP+Qvq0cHF5cZQ==
-X-Google-Smtp-Source: AGHT+IHEzS89dGxEWmFnOKNACzouMMZRh7Fzhbib8xh79j3+CBi//Bqm7JJAiCZJE4Z+9k2CZyKn3ZN8mYjhKWrQ99E=
-X-Received: by 2002:a05:6808:23cd:b0:43d:24b7:2b93 with SMTP id
- 5614622812f47-44f95eb8411mr2560213b6e.17.1761947029301; Fri, 31 Oct 2025
- 14:43:49 -0700 (PDT)
+ AJvYcCVKEY1oXM/DtZ58arlrG0UyEyvIlZuMFatCMSf75vMUGRHsTiSc/he2WntCv3LxvEVzjBHrE+M=@lists.denx.de
+X-Gm-Message-State: AOJu0YxuOfsjrCYsQxWAPzlpstWNnHT+UBqzZ3+rwdukAJ2OiUfD6+OT
+ zmPxG4ErK1vR88sr4TXdctju4Lj3Z2y9YD3FMMaB5CMDC2KhHDPNoZxSzuagfWkf2YT78igalx7
+ uCYTySWn+VHZaGtIbzyA8AqOuMWQr9BM=
+X-Gm-Gg: ASbGncv9EEYsnffh3xeCSqmkC3UZgtQbk7Bnegdq5Ud8ifY8CGPe0f3x35czjr651WK
+ O8uYc9OTnysHrvoHMMloKyHnRUCPUDuF/4vxjjeK0eDEsGyDYkFlhFgUaXFc2Udi25WqPmmkoIC
+ hrCMt09jeROZi+eP5R+Rpzyu9443mC2bHNv5M6ino9n+USTmC+UrKMZeD7hEN3DvW9FHipCKwYq
+ cKvIHVbl1POe3BC9LQbjE290ivblZk9WZzUSWyAdnK0WSPNgQ93B0Ixe8l2jw==
+X-Google-Smtp-Source: AGHT+IGcV0Db3imcwXzzZ46p8VGy0fJmPfzm392cF3PXrohk/K/4lAyFdwgiTqoodZCMNn8ZXdIPkmQ6hNqYMO/sS+g=
+X-Received: by 2002:a05:6870:cc84:b0:344:a994:2ad4 with SMTP id
+ 586e51a60fabf-3dacd10ca2dmr1975504fac.20.1761948430698; Fri, 31 Oct 2025
+ 15:07:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAN7C2SArdbhag_56MwOMGoaEYSLiHbHHo3KFhUS5U03ntEJbGA@mail.gmail.com>
  <20251031191728.GG6688@bill-the-cat>
  <97a6d067-8c57-48cb-ab9b-c5094a798d99@kwiboo.se>
  <CAN7C2SCquwnP5tUE0KLE15wGPqbNE10adEgshXLjRQnTK+JM4g@mail.gmail.com>
  <af9255c6-4217-4784-bfcb-b6d90d79d0aa@kwiboo.se>
- <CAN7C2SDpWi4-+adCT+KbW7mhBHvxe95YGin2qv+AHRAkc1=ASA@mail.gmail.com>
- <3e1590fc-19c9-4e89-a280-cfc975bda8a8@kwiboo.se>
-In-Reply-To: <3e1590fc-19c9-4e89-a280-cfc975bda8a8@kwiboo.se>
+In-Reply-To: <af9255c6-4217-4784-bfcb-b6d90d79d0aa@kwiboo.se>
 From: Sune Brian <briansune@gmail.com>
-Date: Sat, 1 Nov 2025 05:43:38 +0800
-X-Gm-Features: AWmQ_bmFHaaUNip8E7o_juy2G9n7FT0JHrpbPh3t2-svNshfpZYUnIQSQ7x1OBY
-Message-ID: <CAN7C2SAp6znuN-q83wkwkqsSzf6U2VyQER5WwrDdmMn45QiA-Q@mail.gmail.com>
+Date: Sat, 1 Nov 2025 06:06:59 +0800
+X-Gm-Features: AWmQ_bmQGrZfPMufTZnx_E2Dyy-wiaNBR-_CK1IlkeA-qh_lN_52ugYzvj6pypE
+Message-ID: <CAN7C2SBAf7K3eRnSWqXWC0Ffp3+KtdFVFTn0i=XzAsJyM-JP6Q@mail.gmail.com>
 Subject: Re: [DEBUG] rk3399-nanopi-neo4: SPL SD init may report -5 due to SD
  power-on timing
 To: Jonas Karlman <jonas@kwiboo.se>
@@ -102,43 +100,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> My M4B could boot using sd-card without any issue last time I tested.
->
-> I do not understand the purpose of your original mail when you do not
-> seem to be willing to test suggestions from board maintainers. I will
-> most likely just ignore any more replies from you, sorry.
+> Please try my suggestion above, the datasheet for the LDO mention 50us
+> start-time and card may need one ms to fully init. Defining this timing
+> requirement in the device tree that U-Boot SPL uses should match the
+> workaround/fix you mention in your original mail.
 
-First allow me to clarify the purpose of this email.
+Modification on dts as such:
 
-1) There are no reports from any user in the first place, could
-this only be one specific board issue.
+vcc3v0_sd: regulator-vcc3v0-sd {
+compatible = "regulator-fixed";
+enable-active-high;
+gpio = <&gpio0 RK_PA1 GPIO_ACTIVE_HIGH>;
+pinctrl-names = "default";
+pinctrl-0 = <&sdmmc0_pwr_h>;
+regulator-always-on;
+regulator-min-microvolt = <3000000>;
+regulator-max-microvolt = <3000000>;
+regulator-name = "vcc3v0_sd";
+startup-delay-us = <2000>;
+vin-supply = <&vcc3v3_sys>;
+};
 
-2) I never said I won't try your suggestion, however, the delay method
-itself is a very bad method unless there is no choice to do so.
+SD node on dts roll back to latest U-Boot as such:
 
-3) If there are board users mentioned this is not the case then why
-cont'd debug on such? As the LDO delay might not be the root cause.
+&sdmmc {
+bus-width = <4>;
+cap-sd-highspeed;
+cap-mmc-highspeed;
+cd-gpios = <&gpio0 RK_PA7 GPIO_ACTIVE_LOW>;
+disable-wp;
+pinctrl-names = "default";
+pinctrl-0 = <&sdmmc_bus4 &sdmmc_clk &sdmmc_cmd &sdmmc0_det_l>;
+sd-uhs-sdr104;
+vmmc-supply = <&vcc3v0_sd>;
+vqmmc-supply = <&vcc_sdio>;
+status = "okay";
+};
 
-4) It is not guarantee my observation is what actually happened on
-the boot error or stall.
+Test Result:
 
-Based on the 4 points I had given.
 
-Could this be a board QC issue? aka one specific report only.
-Could the inherent issue not be caused by the LDO startup time?
-So more samples and feedback could help a lot to resolve the
-stability.
+U-Boot TPL 2026.01-rc1-00070-ge34d01d23e45-dirty (Nov 01 2025 - 06:01:06)
+Channel 0: DDR3, 933MHz
+BW=32 Col=10 Bk=8 CS0 Row=15 CS=1 Die BW=16 Size=1024MB
+no stride
+Trying to boot from BOOTROM
+Returning to boot ROM...
 
-Not simply using a delay test to conclude all things, this is what
-I thought.
+U-Boot SPL 2026.01-rc1-00070-ge34d01d23e45-dirty (Nov 01 2025 - 06:01:06 +0800)
+Trying to boot from MMC2
+spl: mmc init failed with error: -5
+Error: -5
+Trying to boot from MMC1
+Card did not respond to voltage select! : -110
+spl: mmc init failed with error: -95
+Error: -95
+Trying to boot from MMC2
+spl: mmc init failed with error: -5
+Error: -5
+SPL: failed to boot from all boot devices
+### ERROR ### Please RESET the board ###
 
-I appreciate the feedback on your board is not having issue.
-Then with almost the same hardware design why does
-NANOPI NEO4 have this issue?
+Thank you Jonas ' feedback on dts.
+But sadly stall.
 
-If you feel I wasted your time on feedback and suggestions
-I deeply sorry on that, but I never mentioned I am not trying to
-take suggestions on your side. I am just playing very safe on this
-issue as this could not be a simple timing issue.
-
+Thank you,
 Brian
