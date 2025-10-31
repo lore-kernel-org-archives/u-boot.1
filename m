@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A97CCFA00
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:12:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDAE2CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:22:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98F3683A57;
-	Fri, 31 Oct 2025 18:12:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 45B1E839A5;
+	Fri, 31 Oct 2025 18:22:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="c9jlpLyR";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xualbe2i";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="FKUmSsFJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6FDF83A62; Fri, 31 Oct 2025 18:12:48 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id A7B2183A45; Fri, 31 Oct 2025 18:22:01 +0100 (CET)
+Received: from outbound.pv.icloud.com
+ (p-west1-cluster2-host5-snip4-6.eps.apple.com [57.103.64.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA31183A47
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:12:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B0E883956
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:21:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cynby2RXQz9v9S;
- Fri, 31 Oct 2025 18:12:46 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761930766;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UDxGlZhEk6d8BbqYqq/cPCQVSGz3s3AsepqyrIjfug8=;
- b=c9jlpLyR1PLgujkDtFDZR0W+s2tRTdr8Zrh1YT3HEaLWbhQMHIlgyYBSqpkZ30auGXH5x4
- DPllN0hDna/DoaNhI48r9tlh85jNUg/fE3nj5XkyuqgswZY4lNNGwkutPmi0S16pE8MTgT
- kd7w+ivjXS6wEH1zsdGy6eyMe59Aj19R2qzIxZ8Y8uNrFtG07G5zr7aLhGQjaVUWbDt3Ib
- /6upNargzGNf/bxFBNTrWhC0n9+gFXkyR7DaAlsXa8O0qmUPNZDj2ZCkdEkf2eIkS65dKw
- o+mkINkT0LK5CEtxxfr4PcQ98trxKMbtR120ZrKSayhxutlU6ZCuolCeNmFtWQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=xualbe2i;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <52b17e87-9fd1-48c3-9202-bd8df12b1c66@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761930764;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UDxGlZhEk6d8BbqYqq/cPCQVSGz3s3AsepqyrIjfug8=;
- b=xualbe2ixf4kMu+9F0t+/2bKrDl81oUuvUCClhgtVaz+96wLQEcEY+Q/FnqmVvn1gWnmHZ
- 05dKz7PpTSm29/WPtK4EkvGkbO8OrwfFokxP+B42QDiMl6ach3v2Hc/IBtc4qZNrqVQ3e+
- AwjpruhbmDfpePe+xtUySYCHmTA2nUPzdSAq576l3PzEp34DH+L9GrGupFX3p3leVIWNOO
- sla7vwlwG+9S5cz2KLDL9LHUlAB281eZYZd1FGTSvroOR0CxK90JMRroTn+o91dzP8ngOG
- DkLquNFE6O4DMBho+mRLb9eH67BZ76t5iBOTFEvYv8LlYeAHj+fomLLwP7Q8Sw==
-Date: Fri, 31 Oct 2025 18:12:42 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH v4 2/5] doc: bindings: use upstream bindings for aquantia
- phy
-To: Beiyan Yun <root@infi.wang>
+ dmarc=none (p=none dis=none) header.from=infi.wang
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
+Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-west-1a-60-percent-6 (Postfix) with ESMTPS id
+ ED09E1800129; Fri, 31 Oct 2025 17:21:56 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
+ bh=7UhNI3X/U4lLw06X6JnddZDUKcdi7cF/5NTUVixiSZA=;
+ h=From:Message-Id:Content-Type:Mime-Version:Subject:Date:To:x-icloud-hme;
+ b=FKUmSsFJFcb7A+ShvPq9VGhuVCHPktBHW0VF2ysnogNkU7u+TFfWoZUQmlTDL7Z7qLxGy6jNX1Iuy34pIjiW8xeUFNmNWAx8ScsCN9Td2SCheDBMOkkx0QpPNNqEZnPo76ggEBaWkonNCLbtuHBeYmBY2yC/MJoOxJxoI2Lb8fzOJ8Esm2F6JvGPua8AeakTtU+HRe7xECnYtcAExIRKeqJe07ioGC1qbApFRojoJiz3cUCgHY1zAss6xngXiOiD0s8vZ6kGrB/5RUkhvssDK1fzoXAqP9Z/6c4hln2dK1RB3EYvjvSLlHBMHbtlEn7gQJTsMNQznoOZR+GAyuI2TQ==
+mail-alias-created-date: 1549370554000
+Received: from smtpclient.apple (unknown [17.56.9.36])
+ by p00-icloudmta-asmtp-us-west-1a-60-percent-6 (Postfix) with ESMTPSA id
+ 1E7F71800125; Fri, 31 Oct 2025 17:21:52 +0000 (UTC)
+From: Beiyan Yun <root@infi.wang>
+Message-Id: <C2649793-C878-4906-BDF4-0410DA9F12A2@infi.wang>
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
+Subject: Re: [PATCH v4 1/5] net: phy: aquantia: refresh format
+Date: Sat, 1 Nov 2025 01:21:40 +0800
+In-Reply-To: <ac552ba3-832c-4cfb-aa39-c80949df7900@mailbox.org>
 Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
 References: <20251031152348.60571-1-root@infi.wang>
- <20251031152348.60571-3-root@infi.wang>
- <6ca0b758-ac2b-46a5-a06a-5ef5ae676f00@mailbox.org>
- <7AB9A75C-6A37-4DFA-B077-EEC6A6E9C1ED@infi.wang>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <7AB9A75C-6A37-4DFA-B077-EEC6A6E9C1ED@infi.wang>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 9a57ee212cf6129f9b7
-X-MBO-RS-META: yi75eyrqepdpsh86u8tuy8qqatwkpg95
-X-Rspamd-Queue-Id: 4cynby2RXQz9v9S
+ <20251031152348.60571-2-root@infi.wang>
+ <ac552ba3-832c-4cfb-aa39-c80949df7900@mailbox.org>
+X-Mailer: Apple Mail (2.3826.700.81)
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDE1NSBTYWx0ZWRfX9dBItw5iMZ7G
+ B3eamBIKtaZOApWZTzgzAxjKpbcAkV+6UA/NiVZIg0cJb2Gc0VtDqpkNuETMUSHnp/pGxHKmRij
+ E30maJei8fRQbFYfWWeN45YoylKu7ydl2JZi/Cu18n6R490eKtQbeeP3DuQOQMfxPXyvsXMGHhg
+ 1ftaZdA5fx6L9/4PH343MiFr9RP5ZTe4r+RK2V+xtAs2F7LLQKifzYNNfNsf7CSdymlw+N2zV/5
+ JNi/DUXdvuMXImRCDY4QHJhze2R+NhOTyZHCw8V0Itx3U7IU7lSko+pcHueYYUf3ITIldqBQE=
+X-Proofpoint-GUID: qO-mklvmYIE-Y5l1X4XJaU2U_RkTnMRH
+X-Proofpoint-ORIG-GUID: qO-mklvmYIE-Y5l1X4XJaU2U_RkTnMRH
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-10-31_05,2025-10-29_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
+ bulkscore=0 mlxlogscore=999 suspectscore=0 mlxscore=0 spamscore=0
+ phishscore=0 clxscore=1030 malwarescore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.22.0-2506270000 definitions=main-2510310155
+X-JNJ: AAAAAAABLidiNuSSfmlc+Y2/lNge78cz+EqeTKqR93E8GosFLW49SC4F2h0o+8t50xXZ2cPWURlyomXslw8Vllb/2YwSPhXg46jA9dIaGKy1Q2GaH9wC+NH00kzsDBsDK0tAQHfhgJ1sRC9RWpXN1luSmmjvnqJM9Zgi+Rdg7YiqmUE+kHLGP+0ct97FUQLdWsx2k4kad58JX8B5xH6Px3Y+CgfhioyeynQ4v1DcdTar2PlRg/nfhLtemDFxqqj7gayD/Us+wU3bJ9J6sU1wV49h2Z8t8XaULQExlfP6fNPwIXrgILfJCXDRLYsVY8h5s1hCVUQtGdrN2pjm/dmofLJzCxKA/sq6pvP1OnGQQSI/xEg534hEC37rcFi+LecVVHDVOLwUkPRab+sFwVbaYw5OOJKwpwCcAhaJAhNKMQHcTPDjb+pwpWe6jplGiCD0FNK8LhLc2CCVdTjTgnOX8q9IGtyUy2dVlHf9IacoEi4x6jwbkTcJAkefCcTIIxED0RqWgzpFrfhYjc6g4ibREeKowhyyx8lVm2vqawc4lnIw17/Joh0FenWvM2IFqNsP9CPhJ47eyWS+Ez3a9xX3pxRsXWnOoSGN6FOFqY+iZCTTZH/tsBSghNj/CFMGXfvIvSS0WXMjrOlDVhvNysAZ56UfZwFZjPPlSfn9JboAr0VdYcn/T9bvLUCz7ZjlCgR7Wi+T3R7mdF0RTOvwyaL2YWCLJWmOEzxmKYLkddf/cUmq3BLIK1rQlsZuZ3hc
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,25 +89,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/31/25 6:02 PM, Beiyan Yun wrote:
-> 
-> 
->> On 31 Oct 2025, at 11:53 PM, Marek Vasut <marek.vasut@mailbox.org> wrote:
->>
->> On 10/31/25 4:21 PM, Beiyan Yun wrote:
->>> Prepare for the switch to upstream bindings and generic firmware loader,
->>> remove reference to upstreamed bindings, also add a firmware-name example.
->>> Signed-off-by: Beiyan Yun <root@infi.wang>
->>> ---
->>> (no changes since v2)
->>> Changes in v2:
->>> - New
->>>   doc/device-tree-bindings/net/aquantia-phy.txt | 15 +++------------
->> Upstream bindings are in YAML format:
->>
->> Documentation/devicetree/bindings/net/marvell,aquantia.yaml
->>
->> How come these bindings here are in text format ?
-> As much as I’d like to, aquantia-phy.txt file has always been a plain-text binding in U-Boot; I only updated its contents to cleanup the upstreamed property names. Converting it to YAML would require a larger migration, one preferably upstreams smb-addr and eliminate the file entirely.
 
-Pull in the kernel YAML file, discard this txt file, and be done with it.
+
+> On 31 Oct 2025, at 11:51=E2=80=AFPM, Marek Vasut =
+<marek.vasut@mailbox.org> wrote:
+>=20
+> On 10/31/25 4:21 PM, Beiyan Yun wrote:
+>> Refresh format using clang-format.
+>> Signed-off-by: Beiyan Yun <root@infi.wang>
+>> ---
+>> Changes in v4:
+>> - New
+>>  drivers/net/phy/aquantia.c | 159 =
++++++++++++++++++--------------------
+>>  1 file changed, 75 insertions(+), 84 deletions(-)
+>> diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
+>> index 903fcd667f6..439c4c48bdc 100644
+>> --- a/drivers/net/phy/aquantia.c
+>> +++ b/drivers/net/phy/aquantia.c
+>> @@ -18,28 +18,28 @@
+>>  #include <asm/byteorder.h>
+>>  #include <fs.h>
+>>  -#define AQUNTIA_10G_CTL		0x20
+>> -#define AQUNTIA_VENDOR_P1	0xc400
+>> +#define AQUNTIA_10G_CTL 0x20
+>> +#define AQUNTIA_VENDOR_P1 0xc400
+>>  -#define AQUNTIA_SPEED_LSB_MASK	0x2000
+>> -#define AQUNTIA_SPEED_MSB_MASK	0x40
+>> +#define AQUNTIA_SPEED_LSB_MASK 0x2000
+>> +#define AQUNTIA_SPEED_MSB_MASK 0x40
+> #define<space>MACRO<tab>0xvalue
+>=20
+> is perfectly fine format.
+
+Agree, until clang-format has become the default. I don=E2=80=99t really =
+have a option.=
