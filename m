@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC96DCCF9EB
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 07:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECDDACCF9EE
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 07:38:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C14883849;
-	Fri, 31 Oct 2025 08:38:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E01CF838CE;
+	Fri, 31 Oct 2025 08:38:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Tk8l7Qzo";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TdUf3hIV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EDA1836F0; Fri, 31 Oct 2025 08:38:14 +0100 (CET)
+ id 3013E838C7; Fri, 31 Oct 2025 08:38:16 +0100 (CET)
 Received: from BN1PR04CU002.outbound.protection.outlook.com
  (mail-eastus2azlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c110::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D62098331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:38:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27DF68331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:38:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eV94vYJy/GknyH+m8xt187iZiAoUvCjVwVoXM6Btpp/QxYB6PFmIaLf1IotvJRAD+io1uNLhNTORpNy4DAQyIFahuRW4o541I8u1uv6uEeA17V8+fKrixFrs0P0vwAgckXmu0NAtERrE3vaSnHuw8Cgc01lwDlC98R4SnbHxRJvx1bzOYWOKcJ9kT2pe2gfLihfzQCHhKVG54s6J7zZQbZso9+g2BQpM2liCTEn4yJWCKb7FqZ11JUl/L4eKRbhurzQSU54Kk+mJYy7pYW3bXfJn3RcsD80HjPB8B1+OxmfII37vIpr90fPdma/CYcQSpc4vy3wInrNKe4yA3REhXA==
+ b=rqvfwywgFDZuN4sIaPz2ZsmTn+Ig+vEmPcqOjrX1h6EDkeZiqxDq+FpRBRLUf9Z6VFjucwRl5MnT1WR0kUGnN4Gk28aX6/ewxafJT63NnDr3NYcSKTw9glcQeWS8J/gDyJ87OL+nDznestfi8FuysW3rUWNlgErG5fJ9yYzyIept/YQfiRnjvm193+ekfvdAitwB5jl+LArMiGsBJopvc7f9ApNqi7iRAoBUAZtXLGjdNLWsq6dDZkAiECTUJ3gzze1h65kC54YnQAG23UVr6SwLrumoODMrIn1HNYGBZI1mFCSwqi5N+XUyW+r9EabZpM7ecfZYFaOqTXWdIozzag==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/Vix1z9NuL2zCcwMGaWAUmluS1NbrhZsEl7NCrISwSk=;
- b=nYb9vVkUJ6FVY7rSoVC7iHVbNaMqXcUFZki+BQk8ralPKR3c3gRBs1V9gfaTKZw2DRp/ArFZo9wzqoSIQZWa2BiUDrHX/wQcOqpLRYESGzYJMaPIynIzxG9712hvVOa8L17+P0mqRB+IKUCfOZzf7WoJLgOQ+oV4dtCDKRLWN3af6avZ/dMfcJrwpt6TYgKbAAwJ/WmX6fhZIp64GU6TKTNQTOLddK2Fq58wYdaPQCfr/EZtPgZvMB2uAJfwcmdDrXeIqSrgqEfkrihEebIQFEy86DR7pjBMZS4sevFWQeOgJ3ockPMaLvIv17CCroJE0TWIk4rvvRzZXhjzQpbV0w==
+ bh=9EGSddeXYDIxzwwfS0DJvLiETRqgsvhn1oAa5S9QXMs=;
+ b=gD83QsijclFUOffcocq2BhLNZb3fTXoZToli6H/AwPYj6bHIVYtH+MtFOXSLI0w7mSGuoFz/4qGg2mq4GEEEsX5dpJtrdGsO72meQy31+ep1QkO/yQ6XKqQF19YGn09Iy6SB6WxwTzrvgF373j9GGcAUbiH1+/TqjZozRsVq4/ExdFn8aGFsQd5BLnZdWRkMzyMlRU4ZrAGP39KFzGI/TvJaY8qEavc5d/9Kmaho3+HsJ0/xLya7+4PfYOwhY8hxZk8lE1Rs4B6lLhY7kgv6jvCe5CvVFSTHSvxmtPxmTUmwhB1LXJPuylH10JJh2kgrEH+IOMjioStlAOmRTuoNMQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/Vix1z9NuL2zCcwMGaWAUmluS1NbrhZsEl7NCrISwSk=;
- b=Tk8l7Qzot4Z6uphsVs1Q5kcKj331MlNmiChYPVgTNUQqy8fQ8xZsZYGj7VAMAQbFjpur5npROZKcoQRyd42iwaD2i0hXfIuL2NNgezoE9Bq6/NQjuFRlYzQuKnY1ck+0SMcMuC0ZBxIDPtWxN/5Ob9mJky8/MpVRIvfLXTh0sbE=
-Received: from BYAPR01CA0055.prod.exchangelabs.com (2603:10b6:a03:94::32) by
- CY5PR10MB6190.namprd10.prod.outlook.com (2603:10b6:930:32::19) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.14; Fri, 31 Oct 2025 07:38:08 +0000
-Received: from SJ5PEPF000001CE.namprd05.prod.outlook.com
- (2603:10b6:a03:94:cafe::84) by BYAPR01CA0055.outlook.office365.com
- (2603:10b6:a03:94::32) with Microsoft SMTP Server (version=TLS1_3,
+ bh=9EGSddeXYDIxzwwfS0DJvLiETRqgsvhn1oAa5S9QXMs=;
+ b=TdUf3hIVb5OUOvcq7c79z+rr1jBlHniBhh8r6qZK0PQEjLVYD5E41jjZsPyoAE3ts3IAqM4FSf6ZljZegPEiQK0mQggEaaNZfDcW6f0PsCpW8GKPC3xFdneM8XPJ4oBQmIBaNQScRbziBX6QRjoV5fXQY5LBaRNGnc3EtwaRe/k=
+Received: from SN7PR04CA0037.namprd04.prod.outlook.com (2603:10b6:806:120::12)
+ by DM3PPFAA42ED99C.namprd10.prod.outlook.com (2603:10b6:f:fc00::c41)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Fri, 31 Oct
+ 2025 07:38:11 +0000
+Received: from SN1PEPF000252A2.namprd05.prod.outlook.com
+ (2603:10b6:806:120:cafe::18) by SN7PR04CA0037.outlook.office365.com
+ (2603:10b6:806:120::12) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Fri,
- 31 Oct 2025 07:39:10 +0000
+ 31 Oct 2025 07:38:08 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -57,87 +58,89 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.23.195 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
 Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SJ5PEPF000001CE.mail.protection.outlook.com (10.167.242.38) with Microsoft
+ SN1PEPF000252A2.mail.protection.outlook.com (10.167.242.9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 07:38:07 +0000
-Received: from DLEE203.ent.ti.com (157.170.170.78) by lewvzet201.ext.ti.com
+ 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 07:38:11 +0000
+Received: from DLEE204.ent.ti.com (157.170.170.84) by lewvzet201.ext.ti.com
  (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 02:38:06 -0500
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 02:38:06 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
+ 2025 02:38:10 -0500
+Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE204.ent.ti.com
  (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
+ 2025 02:38:10 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 31 Oct 2025 02:38:06 -0500
+ Transport; Fri, 31 Oct 2025 02:38:10 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59V7c55p3539845;
- Fri, 31 Oct 2025 02:38:06 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59V7c9AH3539928;
+ Fri, 31 Oct 2025 02:38:09 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: 
 CC: Anshul Dalal <anshuld@ti.com>, <afd@ti.com>, <b-liu@ti.com>, <bb@ti.com>, 
  <m-chawdhry@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <trini@konsulko.com>,
  <u-boot@lists.denx.de>, <vigneshr@ti.com>
-Subject: [PATCH v10 0/7] Allow falcon boot from R5 SPL on TI's AM62 devices
-Date: Fri, 31 Oct 2025 13:07:50 +0530
-Message-ID: <20251031073800.344500-1-anshuld@ti.com>
+Subject: [PATCH v10 2/7] configs: add falcon mode fragment for k3 devices
+Date: Fri, 31 Oct 2025 13:07:52 +0530
+Message-ID: <20251031073800.344500-3-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251031073800.344500-1-anshuld@ti.com>
+References: <20251031073800.344500-1-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CE:EE_|CY5PR10MB6190:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4cec2c1d-342e-4ed2-655e-08de18506f5f
+X-MS-TrafficTypeDiagnostic: SN1PEPF000252A2:EE_|DM3PPFAA42ED99C:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd773b54-c660-41cb-f209-08de18507185
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|1800799024|34020700016|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?iCLNCBvm3+cWx85McYgPRlktNdpAJES/P1UNNqvGu2gOj6YoR6qLfRUxebEC?=
- =?us-ascii?Q?1j7be9+ft7YNK1PX+J/zKFNm9rR3lKaKDDo/zdg0VUgPERmOpLRKcS9wqIuF?=
- =?us-ascii?Q?IrI7g5M73aVJK4+HIgLMRwhJDzWKcZIkdXOJg4RGJ4ZR2KH8dmBq0fqlXReq?=
- =?us-ascii?Q?JXLQ3YqQdppWeTJl91iE68V1wDRfoxzj2Cc9L5VE0viWtBPv5+UN5JI1Q5Ml?=
- =?us-ascii?Q?FSXeYvPVUtCkYxkR768aW7yWXuDOaEMdgBk99OTJwegRH3HN35msENgkrYFt?=
- =?us-ascii?Q?WWJjRI3AK85Auw+xykcHHAj3QwNNQWv1Ti+n3S9ln5FbyhwjfL+9TcnWjfJu?=
- =?us-ascii?Q?6CgJuM/4sbfrjTiW8j7gIM9RN9GFiyeDD8ob1ZnM+S6PmUCOpqn73YeaWF43?=
- =?us-ascii?Q?AZOu1Jl2aEV+Z4c66s9wLKM9QM2OBSobzO7RRHEuq7qjyn/qYSovs+Msz1qB?=
- =?us-ascii?Q?X7XxG6pD6gVcr0YBiIaIe7OhEdr2TmT4/h5sa0VbYXGPT8MccgTHDYxUWsGa?=
- =?us-ascii?Q?qSOLkZPt5KWwmhFHUiUWNKznUWpifP58tu17BALCpfMEMdWTp3FphYhIL6VJ?=
- =?us-ascii?Q?uXO4PjcZRIiFWyIuFv6CyoXPqYS/XY1k5NTUQMFo0Fu912SbUL8OWS3K26nL?=
- =?us-ascii?Q?pVut5dJ+5995+gTPlSMsYi1WDqdavihHRohog3cXuGvtU1pmXjAfYFZlMThm?=
- =?us-ascii?Q?oThrtUdLEfbb76m3twqWakmjrY4wtM5Vf/11bf6Uo3D3YJ1kEhp4cbJgZQiq?=
- =?us-ascii?Q?QiJ13eU3Kmg6Jrj92Pm/dBjk7iU/uO0FK9KX1tvClsWw46amvxE03I7y7l06?=
- =?us-ascii?Q?32kDI2THxqP5hNM2E4QN0mVtKjrPfWX7zONtFmDTSXtfPF/BerjmtLoqylk+?=
- =?us-ascii?Q?xC5ftBSUKGytq+XS7TvquLmgBaEQx2r7jInC2goXVbRT9nAgubaiBYC6qOTS?=
- =?us-ascii?Q?sxywSKL9+fVnwa9/pKVgeFgZs1Ll3kuInpJmwRWCt9SJCPDoZoOtgyqh+OyP?=
- =?us-ascii?Q?ieUZoDY8XyuozSpTcBSnmbQzQ6HD9a+thfM+3Mv2F8t1SXKYcTelJ+A4uLY6?=
- =?us-ascii?Q?FtJhL/8soLydALIFhtpwsB25V9LYJPn9aAewRa3WRkgfnAAz6VX5Xi6W3QV8?=
- =?us-ascii?Q?LUbDqvyWhQmAgxzZMKh6E1XtAK82AEnOI1qYhhzzRGrLIPzHRsoppKvLcUeA?=
- =?us-ascii?Q?YB387STUZesxVHVB0UiqM8z5CIM08rePnKxB8jCEBNcUj8U30ZRgnF+PgwH8?=
- =?us-ascii?Q?W3hSexYEitE7rWfOypc1Kwoc+hIIj5/27Xm3DoI9U08F1+1AU6hZJU3zOHcH?=
- =?us-ascii?Q?wauwspF35ipUbnXPLN3721PxqAafBe4SXTQNLJ4y9LMxY5VpgUrlEIA6etpZ?=
- =?us-ascii?Q?CxwcqDwkWWHGjUa0LWFeHNUkSc71torQ1TaFOtU+w7gpnIkpUDOr/nvQEBk3?=
- =?us-ascii?Q?tkNv14aa5lVmzVdFHcPOZS4yWWxVkwrzRws4r0BY9raBM/qeIsmdOvmLlHnR?=
- =?us-ascii?Q?1b6VGytlINLaulhs1p+8XUyDDp/LO3081xyv3IreYTreh/kBLJTWreR8NQ9i?=
- =?us-ascii?Q?oClDu7xHy+T88OpCpS4=3D?=
+ ARA:13230040|82310400026|376014|1800799024|36860700013|34020700016; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?zS7S8PSR0js35DB9dfoNyfEQMOsegaHcvXyPz5I7EbOJQ9a/gFM08aayybFA?=
+ =?us-ascii?Q?G3RsWvq3vCjJ4o7brYAF3M3spsK0Wv7190si8gTFFIGD6mqAwxzW71uFlv1n?=
+ =?us-ascii?Q?SeNH0GIP7fZ97iwvyh+sz/OofXc/5JjgeFvs30QTxDRrKWZ6YlZH6FXaRd6p?=
+ =?us-ascii?Q?XUYGwOtzI6GfnfKRickzX7EDPqmC+I8syx+dfEDGxGIbt3YCHDdYjCHY2RSt?=
+ =?us-ascii?Q?Yp2j7qz7m9iA2H+7V+TQQTn/AAQGvQq5+2YBILwD9ybeh61rWaawvNltRmEf?=
+ =?us-ascii?Q?FoBGDoovt4+biQ6F4ZvpzHDVlY06BGTTltQzVoSb1ukqDBu6W5hCcauI61sK?=
+ =?us-ascii?Q?Ca9vfPLONk76c7YL9/I7OTshOUTmKmgMDvxZ7nuXF2izyY4qah8hPwKutpDv?=
+ =?us-ascii?Q?pXfK4v/GHH0o2xPsiMfMBB3jVgU/AcXaZgwvHSLM00rRTrN8PkouLIaa45Yz?=
+ =?us-ascii?Q?jbr1oIv3A+T9jHAS3P481Gvj1Ah4HOXpCdPZqDyqgoGcaTSpBAr7tn3ayMH3?=
+ =?us-ascii?Q?S6bAprZbi83nH8e1/iNoW1BXw37jkHpNaUMHLRqmPeGzPdwpfGNVoJ7+4hxT?=
+ =?us-ascii?Q?QawkvNTN764AD3UlILHgCgsqHvu8r0iwqYLb4eYoOqK+qXsvyGi/g0+zQFc0?=
+ =?us-ascii?Q?+IvphJbybe+nx16tm0T15EMPen1EL00C09ihtBazVZJ/ctOgNzFqqqSA5TnM?=
+ =?us-ascii?Q?o+stiNqtAohfksV0yy5BX2h3PXTkVO7PO19fnAyEglPjghWqwEa4AGZ4Wdgk?=
+ =?us-ascii?Q?sh+ksdGagYQbIttcxsI2PDszob49oFsJHFFqcwBWkpJN74o93HdNXdhu2CHa?=
+ =?us-ascii?Q?3u8GZqzQVqQWsPaLjFrByRyuWzP7/6Y1SoofCEgn7wRV2OENDHhzZj5AYhsH?=
+ =?us-ascii?Q?JNIj9BBBr/6XBClTM1NIT7eGOeDfDs24+Au1MPh8gyRkBWw6rVzL3Y8EPR4E?=
+ =?us-ascii?Q?iHx279KJZpZPM1ioVasT8f/2ZQQGi2s2H0TWGY3qmqjlVlo5nuUp2a7EQlNj?=
+ =?us-ascii?Q?1FrXS2V8iv+2vclRLDn2ywTzrjWMhtLNVlWsx541qAeNCeIBkMkEtTiafoaY?=
+ =?us-ascii?Q?anGPq9iLOcD7VpWT7sRClCMv7+JdMJPOmyS+E7l3Km0AysPaywzM7JcSO7ER?=
+ =?us-ascii?Q?Y43tQnFWJ9/Tfrg+z4QVNxX5Urmf6K9iaEdWnY519cZ+6RpA7Fi9qcmEU8hG?=
+ =?us-ascii?Q?5MHEhc0LSpUXmmZeq5xUH7qejTXlggdj9oIcXwMvm/QEtVnG9s6hN4vAoZZP?=
+ =?us-ascii?Q?HDMflFoFTaZJG+WDU9YXccmV0Fv9Po+NDyF7jCKYfspneN4grNG4pO1KhYnK?=
+ =?us-ascii?Q?T9zfkwfrX4ieWXEs8R97XP3QU6WEBA4zWMd8mbigYdAF5oPAj03Uti8HrpkE?=
+ =?us-ascii?Q?QEZkeGa4gCxyb9ZKRVEAihnZoWj8uiRUzclCWCmNqpbbuCFDiPjTJx62SkU6?=
+ =?us-ascii?Q?WIy5pHK3hP/hahYJiLoOiRjBi0yUlGX5N+VzT+4aQcIU1nDoGeT8bW03UU4l?=
+ =?us-ascii?Q?jjMl7FAyCBYyppzFI9Dsn5VFzXqErttMFSDLDjksVRIjgrPXgYadvrW7Rgoi?=
+ =?us-ascii?Q?NX8DKsuTKBf4Fls06hE=3D?=
 X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(1800799024)(34020700016)(36860700013);
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(34020700016);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 07:38:07.7165 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4cec2c1d-342e-4ed2-655e-08de18506f5f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 07:38:11.3795 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd773b54-c660-41cb-f209-08de18507185
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
  Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CE.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000252A2.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR10MB6190
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPFAA42ED99C
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,120 +157,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+This fragment enables falcon mode for K3 platforms and modifies the
+memory map.
 
-This patch set adds support for falcon boot on AM62a, 62p and 62x by bypassing
-A53 SPL and U-boot.
+To have enough stack and heap space for loading kernel image as
+FIT the memory map was modified by expanding stack + heap size, the
+PRELOADED_BL33_BASE in TFA has to also be updated to 0x82000000 since
+the kernel needs to be loaded at 2MiB aligned address along with
+updating K3_HW_CONFIG_BASE to 0x88000000 for the DT passed to kernel.
 
-Existing Boot flow:
-R5 SPL -> ATF -> A53 SPL -> U-Boot -> Linux Kernel
+Modified memory map for R5 SPL (modified addresses marked with *):
 
-Updated flow:
-R5 SPL -> ATF -> Linux Kernel
-
-U-Boot's falcon mode expects the jump from SPL to kernel to happen on the same
-core which is not directly applicable for our heterogeneous platforms since
-ATF, OPTEE and other non SPL binaries from tispl.bin should be loaded before the
-kernel by the R5 SPL.
-
-So we have to use a different flow to bypass A53 SPL and U-Boot, we first load
-the newly added tispl_falcon.bin instead of tispl.bin which lacks u-boot-spl.bin
-(A53's SPL) and the corresponding fdt. This sets up dm, tifs, optee and
-atf. Once loaded, we load the kernel and the dtb (with fixups) at ATF's
-PRELOADED_BL33_BASE and K3_HW_CONFIG_BASE.
-
-NOTE:
-
-Since we're now using the SPL to load the kernel and kernel expects a 2MiB
-aligned load address, the existing PRELOADED_BL33_BASE has to be changed for ATF
-to 0x82000000 with K3_HW_CONFIG_BASE set to 0x88000000 for the DTB.
-
-Depends on:
-  [PATCH v3 0/4] Allow falcon boot from A-core SPL on K3 devices
-  https://lore.kernel.org/u-boot/20251024081408.1610102-1-anshuld@ti.com/
+0x80000000 +-------------------------------+ Start of DDR
+  512KiB   |   TFA reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR*
+0x80080000 +-------------------------------+
+ 31.5MiB   |            Unused             |
+0x82000000 +-------------------------------+ PRELOADED_BL33_BASE* in TFA
+           |                               | CONFIG_SYS_LOAD_ADDR*
+   57MiB   |   Kernel + initramfs Image    | CONFIG_SPL_LOAD_FIT_ADDRESS*
+           |                               |
+0x85900000 +-------------------------------+
+           |                               |
+           |  R5 U-Boot SPL Stack + Heap   |
+   39MiB   |       (size defined by        |
+           |SPL_STACK_R_MALLOC_SIMPLE_LEN*)|
+           |                               |
+0x88000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR*
+           |                               | K3_HW_CONFIG_BASE* in TFA
+   16MiB   |          Kernel DTB           | CONFIG_SPL_PAYLOAD_ARGS_ADDR*
+           |                               |
+0x89000000 +-------------------------------+
+  331MiB   | Device Manager (DM) Load Addr |
+0x9db00000 +-------------------------------+
+   12MiB   |          DM Reserved          |
+0x9e700000 +-------------------------------+
+    1MiB   |            Unused             |
+0x9e800000 +-------------------------------+ BL32_BASE in TFA
+   24MiB   |             OPTEE             |
+0xa0000000 +-------------------------------+ End of DDR (512MiB)
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
-Changes in v10:
- * Fixed null check for loader
- * Expanded commit messages
- * Merge [8/8] of last series to [1/8]
- * Restructure falcon mode fragment for clarity
-v9: https://lore.kernel.org/u-boot/20251030051937.3659010-1-anshuld@ti.com/
-Changes in v9:
- * Update the boot flow diagram in documentation
- * Refactor the documentation diagram into am62x_sk.rst
-v8: https://lore.kernel.org/u-boot/20251027130004.2156121-1-anshuld@ti.com/
-Changes in v8:
- * Base the series on the recently added support for secure falcon mode
- * Split the [8/10] patch of previous series to multiple commits
- * Move R5 falcon mode logic from k3/common.c to k3/r5/common.c
- * Load `tifalcon.bin` from rootfs even in raw eMMC boot to simplify usage
- * Drop the section on 'SPI usage' in the documentation
-v7: https://lore.kernel.org/u-boot/20250603142452.2707171-1-anshuld@ti.com/
-Changes in v7:
- * Replaced AM62a/p documentation with a hyperlink to AM62x's docs
- * Made CMD_BOOTZ disabled for TI_SECURE_DEVICE
-v6: https://lore.kernel.org/u-boot/20250428141235.1734014-1-anshuld@ti.com/
-Changes in v6:
- * Added A53 build steps in docs
- * Had git add SVGs as text instead of blob
- * Added memory map for standard boot flow
-v5: https://lore.kernel.org/u-boot/20250425145644.2228186-1-anshuld@ti.com/
-Changes in v5:
- * Added documentation
- * Moved address for kernel and dtb to 0x82000000 and 0x88000000 respectively
-v4: https://lore.kernel.org/u-boot/20250416074515.1452854-1-anshuld@ti.com/
-Changes in v4:
- * Move emmc boot fixes to saperate patch
- * Update load address for kernel to 0x82200000
- * Add jump_stub config
-v3: https://lore.kernel.org/u-boot/20250403215910.1292922-1-anshuld@ti.com/
-Changes in v3:
- * Make tifs load and entry address consistent with tispl for am62a and 62p
- * Update loadables order to be same as tispl.bin
- * Use rootfs for boot instead of boot partition
- * Disable SPL_HAS_BOOTZ to save space
- * Add default dtbs for each board in Kconfig
- * Fix fdt totalsize in the header before applying fixups
- * Update Makefile to clean tispl_falcon.bin on `make clean`
-v2: https://lore.kernel.org/u-boot/20250311095758.3383047-1-anshuld@ti.com/
-Changes in v2:
- * Move to CONFIG_SYS_SPI_*
- * Remove the need for CMD_BOOTI
-v1: https://lore.kernel.org/u-boot/20250307075541.2571104-1-anshuld@ti.com/
----
-Anshul Dalal (7):
-  arm: k3-binman: add tifalcon.bin for falcon mode
-  configs: add falcon mode fragment for k3 devices
-  mach-k3: common: enable falcon mode from R5 SPL
-  mach-k3: common: support only MMC in R5 falcon mode
-  mach-k3: r5: common: add fdt fixups for falcon mode
-  mach-k3: r5: common: add bootargs to kernel's dtb
-  doc: ti: document R5 falcon mode for AM62 platforms
-
- Makefile                                      |   2 +-
- arch/arm/dts/k3-am625-sk-binman.dtsi          |  64 ++++
- arch/arm/dts/k3-am62a-sk-binman.dtsi          |  51 +++
- arch/arm/dts/k3-am62p-sk-binman.dtsi          |  51 +++
- arch/arm/dts/k3-binman.dtsi                   |  54 +++
- arch/arm/mach-k3/am62ax/am62a7_init.c         |   4 +
- arch/arm/mach-k3/am62px/am62p5_init.c         |   4 +
- arch/arm/mach-k3/am62x/am625_init.c           |   4 +
- arch/arm/mach-k3/common.c                     |   8 +
- arch/arm/mach-k3/common.h                     |   5 +
- arch/arm/mach-k3/r5/common.c                  | 146 ++++++++
- configs/k3_r5_falcon.config                   |  39 +++
- doc/board/ti/am62ax_sk.rst                    |  31 ++
- doc/board/ti/am62px_sk.rst                    |  31 ++
- doc/board/ti/am62x_sk.rst                     | 319 ++++++++++++++++++
- doc/board/ti/img/fitImage_falcon.svg          | 180 ++++++++++
- doc/board/ti/img/tifsstub_dm_tifalcon.bin.svg | 285 ++++++++++++++++
- 17 files changed, 1277 insertions(+), 1 deletion(-)
+ configs/k3_r5_falcon.config | 39 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
  create mode 100644 configs/k3_r5_falcon.config
- create mode 100644 doc/board/ti/img/fitImage_falcon.svg
- create mode 100644 doc/board/ti/img/tifsstub_dm_tifalcon.bin.svg
 
+diff --git a/configs/k3_r5_falcon.config b/configs/k3_r5_falcon.config
+new file mode 100644
+index 00000000000..b6762b35f74
+--- /dev/null
++++ b/configs/k3_r5_falcon.config
+@@ -0,0 +1,39 @@
++# Enable falcon mode
++CONFIG_SPL_OS_BOOT=y
++CONFIG_SPL_OS_BOOT_SECURE=y
++
++# We use envs for setting bootargs
++CONFIG_SPL_ENV_SUPPORT=y
++
++# Allows for the SPL to detect UUID for kernel's rootfs
++CONFIG_SPL_PARTITION_UUIDS=y
++
++# Perform FDT fixups from SPL
++CONFIG_OF_SYSTEM_SETUP=y
++
++# We use the rootfs (i.e partition 2) for booting which is ext4 not FAT
++CONFIG_SYS_MMCSD_FS_BOOT=y
++CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=2
++CONFIG_SPL_FS_EXT4=y
++
++# Loading tifalcon instead of tispl which has FDT and A53 SPL saves time
++CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="boot/tifalcon.bin"
++CONFIG_SPL_FS_LOAD_KERNEL_NAME="boot/fitImage"
++CONFIG_SPL_LOAD_FIT=y
++
++# Used as the 2MiB aligned load address for kernel
++CONFIG_SYS_LOAD_ADDR=0x82000000
++CONFIG_SPL_STACK_R_ADDR=0x88000000
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x82000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x88000000
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x2700000
++
++# Disable all unsupported boot media to save space
++# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
++# CONFIG_SPL_SPI_FLASH_SUPPORT is not set
++# CONFIG_SPL_YMODEM_SUPPORT is not set
++# CONFIG_SUPPORT_EMMC_BOOT is not set
++# CONFIG_SPL_NAND_SUPPORT is not set
++# CONFIG_SPL_NOR_SUPPORT is not set
++# CONFIG_SPL_RAM_DEVICE is not set
++# CONFIG_SPL_FS_FAT is not set
 -- 
 2.51.0
 
