@@ -4,84 +4,177 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29541CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 10:58:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53708CCF9FA
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 10:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E31EC83942;
-	Fri, 31 Oct 2025 11:57:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 30F268394E;
+	Fri, 31 Oct 2025 11:57:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="gCXh/UcU";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="RfWrQPyr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB54C836F0; Fri, 31 Oct 2025 08:46:23 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 68B05838AE; Fri, 31 Oct 2025 08:52:16 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D8D5800B1
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:46:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=andrea.calabrese@amarulasolutions.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-63c1a0d6315so4005645a12.1
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 00:46:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1761896781; x=1762501581;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uXHqXW70J0jV7+dXyxXS/zjg5iXjDhUR+cEVDPhw12Y=;
- b=gCXh/UcURG3q4OHnIQCth/aPSooNszW7yQR590IhX/ExBG9QjNh5F8B9lpbdNWtNuu
- ddQn78TfGg+40rmPHRCAHwnNJ95/XjXkjDxpDxO+yvbMhHiT47ptIPO1lz9zpq0f0Km0
- zyLYPsuPIOoksXEo27ZIsJggyLeTnKoviJpME=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761896781; x=1762501581;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uXHqXW70J0jV7+dXyxXS/zjg5iXjDhUR+cEVDPhw12Y=;
- b=XflCOf/0YteTGhyqEuzFvpN3EigPfx9bqW7ngNSuCpf+MngddoEl3/yaUPq3vw10g4
- O+3erduk6MHhMLbuuj8InlqUVt4nqGWEtJEUissXkhFIHsnGrbSybWSW5696my2XOscU
- SZB/SAB7lEg4id5/LO+qbbvqx5mImf7ii+suarUixrR3NXnsbwqqSsrUh/SWX9S0mDzP
- 3ecRKogM+FOdYtXYeEzi369eiZskc0CXlanuXzod8vhCoAFYXZTM5A1+Tns0WtuKUria
- 76bNZ+UNo/I8+bVzwI8QEfDmBBHOf1PSQanEXCgPeU9F2AS+PTckb9VS32US2UD/dOjj
- gLpw==
-X-Gm-Message-State: AOJu0Yxsavd5lp6EmFkkj6Ds9X+kQty+pNylIWo1pbkfWCqk560kZhf1
- vtkUH5heGuWeTNmABq6SBp1gHV37TqPmklU1qUOeX+XkffJTWlwGbGkAFMYP8SqvkC7EXmQEykT
- CC6Eo
-X-Gm-Gg: ASbGncsxwUoyht3yM0sfgNv8uIbubZbtEtNZZteSd9/p3Ygta/jZtf4hxFhD5gqLweb
- RKKCenvQpGty4PaKfOS5e+FtRaorZcctI086mNP3wRQEdTwcTNr+eBMsbBeuWmrC+jdX0kbG2XW
- OjAaD/0DFv8u2l3YmlWenYVpVp5KkoE5BRBSfmb2kGoA3WKYAfAmePuLZgh6MhQGtBZDyUqxtGm
- 2OE0vDARKrRGNgx77bD82OyDErYzMpPhAfFnojcbOA9nMrFsYI+tHssHXKMSvjMe1mJlLH/THXw
- 2OXD0JcCZbMa7sZIFQnep4KDYU/kE/7Tdnc1ohtgm2LMGDXX8xEf9i0QdMqaWluXx+xy6Noe73n
- pu0iE29s/32IPq8p+kVYamxvo7dwBrieFK6dMMxXutEsWf2sXN9CLzbybUNvm1ZYvti+O5H7YiL
- M7u/krFkJ1bH7b3cJM9EzQ4e39BqMbzqGdX2s6Kc6Y2ZKF9BPUgjqLJI8KYn/YSPWRLtiZ
-X-Google-Smtp-Source: AGHT+IE0Eem/yiLFPmYcN3KTNGyjZBEKyz0LdWyeuwxWblGpsj2gZjFOxcIbQuXftCLQBKr6XYnsbQ==
-X-Received: by 2002:a05:6402:1e94:b0:640:7529:b8b9 with SMTP id
- 4fb4d7f45d1cf-640770820e2mr1641749a12.30.1761896780489; 
- Fri, 31 Oct 2025 00:46:20 -0700 (PDT)
-Received: from andrea-amarula.home (98-215-98-95.ftth.glasoperator.nl.
- [95.98.215.98]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6407b34a808sm1018102a12.8.2025.10.31.00.46.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Oct 2025 00:46:20 -0700 (PDT)
-From: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-To: u-boot@lists.denx.de, michael@amarulasolutions.com,
- dario.binacchi@amarulasolutions.com, trini@konsulko.com, festevam@gmail.com
-Cc: andrea.calabrese@amarulasolutions.com
-Subject: [PATCH v3 3/3] bsh: imx6ulz_smm_m2: Add imx6ulz BSH SMM M2D board
-Date: Fri, 31 Oct 2025 08:46:11 +0100
-Message-ID: <20251031074611.39426-3-andrea.calabrese@amarulasolutions.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20251031074611.39426-1-andrea.calabrese@amarulasolutions.com>
-References: <20251031074611.39426-1-andrea.calabrese@amarulasolutions.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 815A98331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:52:13 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alice.guo@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FZkptTCQWC2WfH4ZTnBkFKzxaKEvPK+OhWg+7FlIXWVmiTibyNjqGXLxcoOU/fLAbZA5TTX65FGk2jwy+WOTIpxpWDVz3GxJpiuQer8lMfbJwixfHgHDkye31uAqCUFHGQQ/mS12MlEUIGQCUYdLmxtOWRCDDKOfsGOEFsfeyprKEZ/canozIS/5LUFlr2aG0iICAQrBjdwKC3npesd0ytuBi8+zu7ES7RQOliADTZkXlQ+DQbU3b1LHHt8yioCcm4/zYS3DcgqApo1l8eD8d6Hr4YXbAgvboaBHro6GlIVdLaRWXVWgFZL/y9l1yGV/qvP0PW3kurUmAmTOJcsHaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KdteHwtApJHhcyniDiYZBmdXLvLKb5H4ykBIJp2Hm8E=;
+ b=PkgKQF9j0KRnfKasda1WuG5/dLmnlJIqvY5HuuHtaysxDNV4DSE0JKouaZXRwBLIvB1QFBcJ0BOxNaKhWE2KU0wY4xsMHdaNRheu/VP0v5Na6eyZ8RF2OnG5YBSgXpx2pDgUdj/qRykg4a7NBT+6i2/0pWcY8yac703BgrdicBfogGSTBAmjmEvalnyvGtaW2wGeUHClwI6fUTWBAr0Fm7GE0LVn5LUE5bso5fLmRLQ6695qimMNyXXK1uKJcP30aBfLx2xfWu5KBu2TgtgQT98zADvJSVyIb+fz5Kb8P6znmkiHCabmTxgb5BUP8Shi8SYJ5jSvqwcnbnUfyX4PDg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KdteHwtApJHhcyniDiYZBmdXLvLKb5H4ykBIJp2Hm8E=;
+ b=RfWrQPyroTx2j6kGunNKmZAUzKVB9R6a2MhxIZZm58PKX7EwNMd4MPAOjUIKGW/yOCN8pProK7hcm/8IeLbcuqTu4siG2mhrsBxEnkmaWxzDoYVYWotAzROYuao7ClXNM5ePdtAWj4S4uVyYEKTioQFJCryFVCnus1/iwc3QMJTAW9JcRnkPkWo/cGYP5IB4A6st1VRK6XD60NElYR03vbH0XcyEtjXVDGUZAE7Seg6huFgtLiAj9JA1LA14Oo51pcM7nWjx+NqGteGuX9Fd6llHsTfriQUKCS7qOShJLIj37XRzAPMTBOEPxPIka32n5VHl74DNNJjRuJs9R0YBXA==
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by DU4PR04MB11434.eurprd04.prod.outlook.com (2603:10a6:10:5cc::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Fri, 31 Oct
+ 2025 07:52:11 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9275.013; Fri, 31 Oct 2025
+ 07:52:11 +0000
+From: Alice Guo <alice.guo@nxp.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, "Alice Guo (OSS)"
+ <alice.guo@oss.nxp.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Etienne Carriere <etienne.carriere@linaro.org>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Tom Rini
+ <trini@konsulko.com>, Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Viorel Suman
+ <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>
+Subject: =?utf-8?B?5Zue5aSNOiBbRVhUXSBSZTog5Zue5aSNOiDlm57lpI06IOWbnuWkjTogW1BB?=
+ =?utf-8?B?VENIXSBmaXJtd2FyZTogc2NtaTogRHJvcCBtbXVfc2V0X3JlZ2lvbl9kY2Fj?=
+ =?utf-8?Q?he=5Fbehaviour()_misuse?=
+Thread-Topic: =?utf-8?B?W0VYVF0gUmU6IOWbnuWkjTog5Zue5aSNOiDlm57lpI06IFtQQVRDSF0gZmly?=
+ =?utf-8?B?bXdhcmU6IHNjbWk6IERyb3AgbW11X3NldF9yZWdpb25fZGNhY2hlX2JlaGF2?=
+ =?utf-8?Q?iour()_misuse?=
+Thread-Index: AQHcSheFlyrYRNUGyUyrWHPOj/5oPbTbpHgAgAA9ogA=
+Date: Fri, 31 Oct 2025 07:52:11 +0000
+Message-ID: <PAXPR04MB96441809F6362E35C7D3E052E2F8A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
+ <PAXPR04MB9644A04B5499EA2BDC3130A7E2FDA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <e7063153-036d-4079-b9c0-252a5d1eb364@mailbox.org>
+ <PAXPR04MB964488C508F283B14E8B9B11E2FBA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <eca51372-3bcd-4873-ba47-c06781d18466@mailbox.org>
+ <PAXPR04MB964436F50D41BF186019598FE2F8A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <ad762bb5-fb1d-47db-94ca-b8115f077e6f@mailbox.org>
+In-Reply-To: <ad762bb5-fb1d-47db-94ca-b8115f077e6f@mailbox.org>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB9644:EE_|DU4PR04MB11434:EE_
+x-ms-office365-filtering-correlation-id: 071c8e6d-d6e5-4430-183b-08de18526645
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|19092799006|376014|38070700021; 
+x-microsoft-antispam-message-info: =?utf-8?B?K28yaitNaWhxdVJiMmd5MmMwVVdYdVFkT256eHoyQWwzQ2pBMzBOVXIwQS8w?=
+ =?utf-8?B?U0g4NFpKMnM2N09ONmFIQlQ2eGFtYXMvb2VvZDhQYWpNbXZqa0FTN1BKVDNw?=
+ =?utf-8?B?VlJpN09LN0QvTmc4Q2VIbTlmR0lpVnpSdDlVaC95OVZ3Y3dVN25zYVRmdEpp?=
+ =?utf-8?B?R0JHTUlVTWp2OER1UEdoay9hN3l5TWNUcFdHRngzOEc0Ym16QkJIdUJwWTho?=
+ =?utf-8?B?MjJSbHVrOWZNcE1IYVg5YWRTTFN3S2lCU1NqTXlvazZ0aTBnMGZtdUVWVjlT?=
+ =?utf-8?B?SDloVzRSSlRFSGhaQkZkREpGZ1Zwd21vRktNMm9QeU9EYitRRG1VQ2xxeUgy?=
+ =?utf-8?B?VUdyeXZjTjIxeXhKYjdKSWZJUS9MZXpVdEttYnVpa1NkRFZoeXBPRTFyODdK?=
+ =?utf-8?B?cFhPUEhQTGxRVU1MOHhmNDZjSzJJTC9PZTVSL29ZQ3JIN1owNnBQcUEzM2JX?=
+ =?utf-8?B?M09NdEZjczB4NXBpam5odTBUb2xBNE05Tmk0Q1oxWTJ3cEVoZlRidW5OTDk5?=
+ =?utf-8?B?azdQanN3amlSVEg5STE2WHlFV3h2TXlVdHRzSnJXZHBDWk1kRlZ3cE05S3Ft?=
+ =?utf-8?B?aVBQSjRWSUw4NG93bDZKSndTZFJjb0N3MU5KWEMyTXJyREJQTmhDVGpsV3hi?=
+ =?utf-8?B?aWVoT21xVHV6em9iTm10Q0JuTE9iS3JXRExBc2dGQkVKTVBYa2VrUVMzWkRp?=
+ =?utf-8?B?YjE2TkJ0c3NEQVl0NXJsWUpzdjVsYmw4blBRRjFmWWkrMDBVcmY0OEtXNkNk?=
+ =?utf-8?B?N3I2c3g4TklMSkwxUWtYVW0raC9XSmc2ejhhQVhWZUFXY3l0d1AyR0p0N2d6?=
+ =?utf-8?B?ZWxHOVY3MGRJZzd5ZmFidFQ4TWxqdlR5WjEwUFovMGpFSHc1VzlGNEtJWGtP?=
+ =?utf-8?B?UkJRYkRyMnpSQ29sQkp2c1hvZ2FKM1E2dU9KaWVOZFltSFBYdzYwSjdDSFpB?=
+ =?utf-8?B?WFhCQ1pZMXRDeDNEa3FmUGo1NVdYd2ttNTlkNEtuN0trZFVzeHoyUWoyeHdC?=
+ =?utf-8?B?a0dRRDVBdTFtY3JHdHdtdGUrSVNSd0cvQnEyT1B6eDJoa2dMcEd3MDN6ZjI5?=
+ =?utf-8?B?bUdkKzZaTU13eHRKREhjeTQ3UkR5Q09nTldYU2toRGFFYWZKaytNdDh0Rmsy?=
+ =?utf-8?B?K095YnhPSkxJVStJL2l6eXI4R1FnWFJvSWYwMXNMazZhcUJHb2Y2M1MyZVlO?=
+ =?utf-8?B?V0pENTY5WmtINS9kU1orUml6QXhGNG9WdnpJODRUbmhBdG1sbGZKdFJsaW1L?=
+ =?utf-8?B?dnlGeUxRWXN0VGgydll5TUFDZEtjbG1pU25USjBsT2wxdlJ2U2V3U3o3SHJK?=
+ =?utf-8?B?TmlSUU1wajVNVm5HUUNCb2JFVlU0Y21SQTZUYjk4bFgxVFpQZzRuNEdXNUtF?=
+ =?utf-8?B?blFLclMwTzhrOHFQVTJleTBkMC80ZHhqRjFaVWN1c01YOVdUNjN4SmFkOGtX?=
+ =?utf-8?B?bWRsc2dHUmM3ejAwS002VzBrTlhBYm9sU0lIT3BQZ0ZZUlJzR2hFOUxjT0lt?=
+ =?utf-8?B?OHE3UGl4SGdsd3UzUGRVVktPY2NlbWg1RFExc2FQeWRnQW5aUHQ4UVltZ0NR?=
+ =?utf-8?B?QzEvaGR6N0JXNjd4TjJOTXVaOXpjRzVyTjlPaXNiMmlRWDZiUTRZaHlEOTBr?=
+ =?utf-8?B?WjBsbmhJaEtQNU15ZkhWMVFpSUplR3huM0JCUm0zU0huaUZsRU9mbStSWFUz?=
+ =?utf-8?B?RzBCMFdiakd6b1pUMm12N0Zzd1RRN0E1T3crZ1lVelJRclBnb01IRU1CMkRR?=
+ =?utf-8?B?UThXUWVQRFNqK2VXclhDT1plUlg0ZUEvdllJVHE2VXl1akNEQjQ5OUJsRHY4?=
+ =?utf-8?B?cEhZV3ZoZEtoVFFzcFRLMm1rK3JCaitQWkFEOVZzZm92RFdBMGxBa1NaRnFB?=
+ =?utf-8?B?cm1EYjhGQ0dSRnBDTlZKelBiMm1iSkFKTmprSjR4UmdqSWtqNzJBTnB3c1pj?=
+ =?utf-8?B?RmtFNlBTaUdJTVpkeEFHV2t0WHo5MVozekpoNXdoYlZRaEt5SE1Ic1ppdVBt?=
+ =?utf-8?B?R3RmYkdTSEFBPT0=?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
+ SRV:; IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:;
+ CAT:NONE; SFS:(13230040)(1800799024)(366016)(19092799006)(376014)(38070700021);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?d1cxSVN4dU5MTEI2YXNqU2FhTEY4RmRxU0x5WFA0ZGV6V3kybHF3WlB0Yk95?=
+ =?utf-8?B?eGtqWkRsUHg3ekJhdHJmWHI5aG9MWkVqNDE0L25La0d6dTdnWDhzZFp5SVRE?=
+ =?utf-8?B?RW50NDJqRG5jc3JzRWcyWFBpTkU4ZU5QbElnWUo0RmVrNHV0NzFZM0dEaCtw?=
+ =?utf-8?B?TWVKSnNnM2RlM0ovdXg2Y2djei8wSGdLYThHSW8vV1ZDOE8wV08wUnFlSVZD?=
+ =?utf-8?B?TXlwSUtUcE02OTdObHhTUGh2S0NkVmtjMHYrczg4b3pxeDNaOUxUS2hXTEhz?=
+ =?utf-8?B?ZnBCdXN1eVRmL2ZLTWM0U0ZQbElLaGZaaHl2NXFMcCtZY1lmYjI3SUlXa081?=
+ =?utf-8?B?bmpoTWdCNGU1NW5aZGh5Z1UwTjN5MmVqNlp5NDlvWCtIM3lSQzBucU1XWTF3?=
+ =?utf-8?B?TmwxOEpudkZJWHd6RFBzY2VNSEdxbjFnKzFpeWpiNTg5c1Y3UFNuR1ZIUzBp?=
+ =?utf-8?B?VjJPMlBDM3pFUHRFSVRCMDlzMnlPYXRaTXVmNG56VnBGcituSklKdlhuWWow?=
+ =?utf-8?B?U2RVMTF3M2hEQzl5RnlBVWpSQW9MQTROL1dNdUhrS1c3dE9lSythSEZIUG16?=
+ =?utf-8?B?alpKMGlTa1YxQjM5SmFZQ3RlUmhrQzA2MXhVaDJVNjFGd1FCQXlMckt2Rks0?=
+ =?utf-8?B?TU95c2FaU3ZDT0Q5aWVJS0VtdmpSbTBrWk52Q2ZUeHNHWWkzc1ZNL1VXdDdj?=
+ =?utf-8?B?MFBYeXFjRk1yY1YwcFJyMjN6YVd5NnhxT3QrNzNzRGlxRU5ZVHBHcXRQUVhE?=
+ =?utf-8?B?QW9IV0J0c0NLQ0o1NGk2cHJCVzVYOWF3RWN2MWRLRGI1d0dHOGp3MEFDSURI?=
+ =?utf-8?B?OG9aMHVhamM1R0FTOVdHY0ZTd1ZnOGpMa3N6MTVKRjl2WEQ3NHNRQSsyeVpZ?=
+ =?utf-8?B?R1J5TFgzdm56MjZWbHoxNDhteFJBdlFGajhNaXJoM2RGZ2c1L051Q2Q0a1Fy?=
+ =?utf-8?B?VlFSaHNoKzJ6bWVJaGVQVUI5aGpVbjNSMjlPK3M4QUQrYUtNT2RFeGl6bWpu?=
+ =?utf-8?B?VkRzK2d0VWtIUnBMdDFnYjZBcXY3Y2dPRVlxVVhEZjFSbUV1dVV5WTR4Rjcz?=
+ =?utf-8?B?cTVwZHJObUo1WkMzM2pBU2xKT1MxaFNrNUtidUp0aDd5NGtuTmlZSHZ6SkFs?=
+ =?utf-8?B?U0xoTThHeU83L2FXS3hRblYzcnBJSFpDRmU5M3FzK1dySWR0SWtvYXB5eHpP?=
+ =?utf-8?B?cE5rL3FtdmxIUHNSZHU1WmhBaWRlSjZhakVUcFBTVVEvRkFTaUR3RTRhaWps?=
+ =?utf-8?B?YWdoNkptM0RSRnl3ZE5zSnFDM2d1a0ZoeEtuMzF5K2d4U0F5VTBuQ3VVY2FK?=
+ =?utf-8?B?VzVadStSeGFnYjJuMVZPZ1d0UmJWT2RlclRCSlhXTHd6UUVjaEdiR3lUTHUr?=
+ =?utf-8?B?QVJMSlBwUFE2d2hEcGVBdXdEekZyWW0vbXFxekN4dFhHd0ozenBJbEVqbkpw?=
+ =?utf-8?B?YVN4MnMrRG1ISlFjRGthTnQwRkRteFRieVZLZmxGd1Q4czhJZlVhRjU1QUx4?=
+ =?utf-8?B?NzgwTEFlcGptdHNNc3hwcXUrcVcyeXN2a3pwWk1ETk9ramQ5UDJ2RWo1RlVV?=
+ =?utf-8?B?eW9rekJMWHNGSGpnaHdHTHpSN01ZUmJWc1JHL0FrNFpJV28vRHNhdFZXekZj?=
+ =?utf-8?B?eEpLeitKS3BjWjNFMWduVThqM09tdTF3NmlXZHpqQ0dSZlZsenBrK3lIMmlU?=
+ =?utf-8?B?TEYvZDB6M3VKVitUSHhDSC95MUFRYm43UGtiNzRZYXpDSnd3N3RrYmRGOXZZ?=
+ =?utf-8?B?cjd2T1crbXlKRHhsV3F1cUVwRzJ1NC9BcjNKWWVzTE52TDlHQ2FzaWVDNDl0?=
+ =?utf-8?B?Yk9TaTFjTlZYVUFJcHY1QlN2cmNNalNla1dtM1BPT2dWOElPcjVVb3QvcEc5?=
+ =?utf-8?B?aE05aUphS0xWNVBhWHJCZkpNNHROdllOTFFsRnJJNnBKWlRPWWU3VFlNOTJ0?=
+ =?utf-8?B?cDZ0RkV1bDNwVVI3SEViekZKVDF6enRmcnJIKzNKRzJSZ2IzYldoS1lBc2lZ?=
+ =?utf-8?B?S3dsRGxTeGE2cFg1SUFCRGtiUmZvbHJOMmtIZDFjaVdxNXNqL21hVDJERVUz?=
+ =?utf-8?B?QjFYc2dUOURHWnppY2tvQ29WODRrMVc0ZWdlS2I1UWF6R2UrOTUwNHoyTlNM?=
+ =?utf-8?Q?LA+8=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 071c8e6d-d6e5-4430-183b-08de18526645
+X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Oct 2025 07:52:11.4924 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Kcm7kd9ar1PBf2CM1tKb5a7D5WpP1cn6mNIPbe/RtWWZeKLxcpPkQsM64jtIq1nKbBlvHSkalBDXBt3wOqjYsw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB11434
 X-Mailman-Approved-At: Fri, 31 Oct 2025 11:57:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,557 +192,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the BSH SystemMaster (SMM) M2D board. Notably, the M2D is
-designed to leverage the existing device tree of its predecessors, the M2B
-and the M2.
-The primary distinction arises from memory incompatibilities with the M2B
-and M2.
-To address this, we've implemented a configuration system that allows for
-selective inclusion of the desired memory components.
-
-Signed-off-by: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-
-diff --git a/board/bsh/imx6ulz_smm_m2/Kconfig b/board/bsh/imx6ulz_smm_m2/Kconfig
-index 20971aa4fe1..6c4321c3b5e 100644
---- a/board/bsh/imx6ulz_smm_m2/Kconfig
-+++ b/board/bsh/imx6ulz_smm_m2/Kconfig
-@@ -28,6 +28,12 @@ config BSH_M2B_MEMORY
- 	  If this option is enabled, U-Boot will be configured to support
- 	  imx6ulz bsh m2b revision memories.
- 
-+config BSH_M2D_MEMORY
-+	bool "Enable for bsh m2d variant"
-+	help
-+	  If this option is enabled, U-Boot will be configured to support
-+	  imx6ulz bsh m2d revision memories.
-+
- endchoice
- 
- endif
-diff --git a/board/bsh/imx6ulz_smm_m2/MAINTAINERS b/board/bsh/imx6ulz_smm_m2/MAINTAINERS
-index a75cddd72f8..098b992b07a 100644
---- a/board/bsh/imx6ulz_smm_m2/MAINTAINERS
-+++ b/board/bsh/imx6ulz_smm_m2/MAINTAINERS
-@@ -5,3 +5,4 @@ F:	board/bsh/imx6ulz_smm_m2/
- F:	include/configs/imx6ulz_smm_m2.h
- F:	configs/imx6ulz_smm_m2_defconfig
- F:	configs/imx6ulz_smm_m2b_defconfig
-+F:	configs/imx6ulz_smm_m2d_defconfig
-diff --git a/board/bsh/imx6ulz_smm_m2/Makefile b/board/bsh/imx6ulz_smm_m2/Makefile
-index 5ab00a5ea75..81e47e3735e 100644
---- a/board/bsh/imx6ulz_smm_m2/Makefile
-+++ b/board/bsh/imx6ulz_smm_m2/Makefile
-@@ -5,3 +5,4 @@ obj-y  := imx6ulz_smm_m2.o
- obj-$(CONFIG_XPL_BUILD) += spl.o
- obj-$(CONFIG_BSH_M2_MEMORY) += ddr3l_timing_512m.o ddr3l_timing_256m.o ddr3l_timing_128m.o
- obj-$(CONFIG_BSH_M2B_MEMORY) += ddr3l_timing_512m_m2b.o ddr3l_timing_256m_m2b.o ddr3l_timing_128m_m2b.o
-+obj-$(CONFIG_BSH_M2D_MEMORY) += ddr3l_timing_512m_m2d.o ddr3l_timing_256m_m2d.o ddr3l_timing_128m_m2d.o
-\ No newline at end of file
-diff --git a/board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m_m2d.c b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m_m2d.c
-new file mode 100644
-index 00000000000..5910858a930
---- /dev/null
-+++ b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_128m_m2d.c
-@@ -0,0 +1,121 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "spl_mtypes.h"
-+
-+static const struct dram_cfg_param ddr_ddrc_cfg_128mb[] = {
-+	/*  IOMUX */
-+
-+	/* DDR IO TYPE: */
-+	{0x020E04B4, 0x000C0000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDR_TYPE */
-+	{0x020E04AC, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRPKE */
-+
-+	/* CLOCK: */
-+	{0x020E027C, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDCLK0_P */
-+
-+	/* Control: */
-+	{0x020E0250, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_CAS */
-+	{0x020E024C, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RAS */
-+	{0x020E0490, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_ADDDS */
-+	{0x020E0288, 0x000C0028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET */
-+	{0x020E0270, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDBA2 - DSE can be configured */
-+				  /*  using Group Control Register: IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+	{0x020E0260, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT0 */
-+	{0x020E0264, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT1 */
-+	{0x020E04A0, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+
-+	/* Data Strobes: */
-+	{0x020E0494, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE_CTL */
-+	{0x020E0280, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS0_P */
-+	{0x020E0284, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS1_P */
-+
-+	/* Data: */
-+	{0x020E04B0, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE */
-+	{0x020E0498, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_B0DS */
-+	{0x020E04A4, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_B1DS */
-+	{0x020E0244, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM0 */
-+	{0x020E0248, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM1 */
-+
-+	/* ============================================================================= */
-+	/*  DDR Controller Registers */
-+	/* ============================================================================= */
-+	/*  Manufacturer:WINBOND */
-+	/*  Device Part Number:W631GU6RB-11 */
-+	/*  Clock Freq.: 400MHz */
-+	/*  Density per CS in Gb: 1 */
-+	/*  Chip Selects used:1 */
-+	/*  Total DRAM density (Gb)1 */
-+	/*  Number of Banks:8 */
-+	/*  Row address:    13 */
-+	/*  Column address: 10 */
-+	/*  Data bus width16 */
-+	/* ============================================================================= */
-+	{0x021B001C, 0x00008000}, /*  [MMDC_MDSCR] MMDC Core Special Command Register */
-+
-+	/* ====================================================== */
-+	/* Calibrations: */
-+	/* ====================================================== */
-+	{0x021B0800, 0xA1390003}, /*  DDR_PHY_P0_MPZQHWCTRL, enable both one-time & periodic */
-+				  /*  HW ZQ calibration. */
-+
-+	{0x021B080C, 0x00060002}, /*  [MMDC_MPWLDECTRL0] MMDC PHY Write Leveling Delay Control */
-+				  /*  Register 0 */
-+	{0x021B083C, 0x414C0150}, /*  [MMDC_MPDGCTRL0] MMDC PHY Read DQS Gating Control */
-+				  /*  Register 0 */
-+	{0x021B0848, 0x4040363E}, /*  [MMDC_MPRDDLCTL] MMDC PHY Read delay-lines Configuration */
-+				  /*  Register */
-+	{0x021B0850, 0x40402A28}, /*  [MMDC_MPWRDLCTL] MMDC PHY Write delay-lines Configuration */
-+				  /*  Register */
-+
-+	{0x021B081C, 0x33333333}, /*  [MMDC_MPRDDQBY0DL] MMDC PHY Read DQ Byte0 Delay Register */
-+	{0x021B0820, 0x33333333}, /*  [MMDC_MPRDDQBY1DL] MMDC PHY Read DQ Byte1 Delay Register */
-+
-+	{0x021B082C, 0xf3333333}, /*  [MMDC_MPWRDQBY0DL] MMDC PHY Write DQ Byte0 Delay Register */
-+	{0x021B0830, 0xf3333333}, /*  [MMDC_MPWRDQBY1DL] MMDC PHY Write DQ Byte1 Delay Register */
-+
-+	{0x021B08C0, 0x00944009}, /*  [MMDC_MPDCCR] MMDC Duty Cycle Control Register */
-+
-+	/*  Complete calibration by forced measurement: */
-+	{0x021B08B8, 0x00000800}, /*  DDR_PHY_P0_MPMUR0, frc_msr */
-+
-+	/* ====================================================== */
-+	/* MMDC init: */
-+	/* ====================================================== */
-+	{0x021B0004, 0x0002002D}, /*  MMDC0_MDPDC */
-+	{0x021B0008, 0x1B333030}, /*  MMDC0_MDOTC */
-+	{0x021B000C, 0x2B2F52F3}, /*  MMDC0_MDCFG0 */
-+	{0x021B0010, 0xB66D0A63}, /*  MMDC0_MDCFG1 */
-+	{0x021B0014, 0x01FF00DB}, /*  MMDC0_MDCFG2 */
-+	{0x021B0018, 0x00201740}, /*  MMDC0_MDMISC */
-+	{0x021B002C, 0x000026D2}, /*  MMDC0_MDRWD; recommend to maintain the default values */
-+	{0x021B0030, 0x002F1023}, /*  MMDC0_MDOR */
-+	{0x021B0040, 0x00000043}, /*  CS0_END */
-+	{0x021B0000, 0x82180000}, /*  MMDC0_MDCTL */
-+
-+	/*  Mode register writes for CS0 */
-+	{0x021B001C, 0x02808032}, /*  MMDC0_MDSCR, MR2 write, CS0 */
-+	{0x021B001C, 0x00008033}, /*  MMDC0_MDSCR, MR3 write, CS0 */
-+	{0x021B001C, 0x00048031}, /*  MMDC0_MDSCR, MR1 write, CS0 */
-+	{0x021B001C, 0x15208030}, /*  MMDC0_MDSCR, MR0 write, CS0 */
-+	{0x021B001C, 0x04008040}, /*  MMDC0_MDSCR, ZQ calibration command sent to device on CS0 */
-+
-+	/*  Mode register writes for CS, commented out automatically if only one chip select used */
-+	/*     {0x021B001C, 0x0200803A},  */
-+	/*     {0x021B001C, 0x0000803B},  */
-+	/*     {0x021B001C, 0x00048039},  */
-+	/*     {0x021B001C, 0x15208038},  */
-+	/*     {0x021B001C, 0x04008048},  */
-+
-+	/*  final DDR setup, before operation start: */
-+	{0x021B0020, 0x00000800}, /*  MMDC0_MDREF */
-+	{0x021B0818, 0x00000227}, /*  DDR_PHY_P0_MPODTCTRL */
-+	{0x021B0004, 0x0002556D}, /*  MMDC0_MDPDC now SDCTL power down enabled */
-+	{0x021B0404, 0x00011006}, /*  MMDC0_MAPSR ADOPT power down enabled */
-+	{0x021B001C, 0x00000000}, /*  MMDC0_MDSCR, clear this register (especially the */
-+				  /*  configuration bit as initialization is complete) */
-+};
-+
-+struct dram_timing_info bsh_dram_timing_128mb = {
-+	.ddrc_cfg = ddr_ddrc_cfg_128mb,
-+	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_128mb),
-+	.dram_size = SZ_128M,
-+};
-diff --git a/board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m_m2d.c b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m_m2d.c
-new file mode 100644
-index 00000000000..d0ba01258f4
---- /dev/null
-+++ b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_256m_m2d.c
-@@ -0,0 +1,122 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "spl_mtypes.h"
-+
-+static const struct dram_cfg_param ddr_ddrc_cfg_256mb[] = {
-+	/*  IOMUX */
-+
-+	/* DDR IO TYPE: */
-+	{0x020E04B4, 0x000C0000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDR_TYPE */
-+	{0x020E04AC, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRPKE */
-+
-+	/* CLOCK: */
-+	{0x020E027C, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDCLK0_P */
-+
-+	/* Control: */
-+	{0x020E0250, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_CAS */
-+	{0x020E024C, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RAS */
-+	{0x020E0490, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_ADDDS */
-+	{0x020E0288, 0x000C0030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET */
-+	{0x020E0270, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDBA2 - DSE can be configured */
-+				  /*  using Group Control Register: IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+	{0x020E0260, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT0 */
-+	{0x020E0264, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT1 */
-+	{0x020E04A0, 0x00000028}, /*  IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+
-+	/* Data Strobes: */
-+	{0x020E0494, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE_CTL */
-+	{0x020E0280, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS0_P */
-+	{0x020E0284, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS1_P */
-+
-+	/* Data: */
-+	{0x020E04B0, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE */
-+	{0x020E0498, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_B0DS */
-+	{0x020E04A4, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_B1DS */
-+	{0x020E0244, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM0 */
-+	{0x020E0248, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM1 */
-+
-+	/* ============================================================================= */
-+	/*  DDR Controller Registers */
-+	/* ============================================================================= */
-+	/*  Manufacturer:WINBOND */
-+	/*  Device Part Number:W632GU6RB-11 */
-+	/*  Clock Freq.: 400MHz */
-+	/*  Density per CS in Gb: 2 */
-+	/*  Chip Selects used:1 */
-+	/*  Total DRAM density (Gb)2 */
-+	/*  Number of Banks:8 */
-+	/*  Row address:    14 */
-+	/*  Column address: 10 */
-+	/*  Data bus width16 */
-+	/* ============================================================================= */
-+	{0x021B001C, 0x00008000}, /*  [MMDC_MDSCR] MMDC Core Special Command Register */
-+
-+	/* ====================================================== */
-+	/* Calibrations: */
-+	/* ====================================================== */
-+	{0x021B0800, 0xA1390003}, /*  DDR_PHY_P0_MPZQHWCTRL, enable both one-time & periodic */
-+				  /*  HW ZQ calibration. */
-+
-+	{0x021B080C, 0x00070005}, /*  [MMDC_MPWLDECTRL0] MMDC PHY Write Leveling Delay Control */
-+				  /*  Register 0 */
-+	{0x021B083C, 0x414C0150}, /*  [MMDC_MPDGCTRL0] MMDC PHY Read DQS Gating Control */
-+				  /* Register 0 */
-+	{0x021B0848, 0x4040383E}, /*  [MMDC_MPRDDLCTL] MMDC PHY Read delay-lines Configuration */
-+				  /*  Register */
-+	{0x021B0850, 0x40402E2A}, /*  [MMDC_MPWRDLCTL] MMDC PHY Write delay-lines Configuration */
-+				  /*  Register */
-+
-+	{0x021B081C, 0x33333333}, /*  [MMDC_MPRDDQBY0DL] MMDC PHY Read DQ Byte0 Delay Register */
-+	{0x021B0820, 0x33333333}, /*  [MMDC_MPRDDQBY1DL] MMDC PHY Read DQ Byte1 Delay Register */
-+
-+	{0x021B082C, 0xf3333333}, /*  [MMDC_MPWRDQBY0DL] MMDC PHY Write DQ Byte0 Delay Register */
-+	{0x021B0830, 0xf3333333}, /*  [MMDC_MPWRDQBY1DL] MMDC PHY Write DQ Byte1 Delay Register */
-+
-+	{0x021B08C0, 0x00944009}, /*  [MMDC_MPDCCR] MMDC Duty Cycle Control Register */
-+
-+	/*  Complete calibration by forced measurement: */
-+	{0x021B08B8, 0x00000800}, /*  DDR_PHY_P0_MPMUR0, frc_msr */
-+
-+	/* ====================================================== */
-+	/* MMDC init: */
-+	/* ====================================================== */
-+	{0x021B0004, 0x00020024}, /*  MMDC0_MDPDC */
-+	{0x021B0008, 0x1B333030}, /*  MMDC0_MDOTC */
-+	{0x021B000C, 0x3F4352D3}, /*  MMDC0_MDCFG0 */
-+	{0x021B0010, 0xB66D0A63}, /*  MMDC0_MDCFG1 */
-+	{0x021B0014, 0x01FF00DB}, /*  MMDC0_MDCFG2 */
-+	{0x021B0018, 0x00201740}, /*  MMDC0_MDMISC */
-+	{0x021B002C, 0x000026D2}, /*  MMDC0_MDRWD; recommend to maintain the default values */
-+	{0x021B0030, 0x00431023}, /*  MMDC0_MDOR */
-+	{0x021B0040, 0x00000047}, /*  CS0_END */
-+	{0x021B0000, 0x83180000}, /*  MMDC0_MDCTL */
-+
-+	/*  Mode register writes for CS0 */
-+	{0x021B001C, 0x02808032}, /*  MMDC0_MDSCR, MR2 write, CS0 */
-+	{0x021B001C, 0x00008033}, /*  MMDC0_MDSCR, MR3 write, CS0 */
-+	{0x021B001C, 0x00048031}, /*  MMDC0_MDSCR, MR1 write, CS0 */
-+	{0x021B001C, 0x15208030}, /*  MMDC0_MDSCR, MR0 write, CS0 */
-+	{0x021B001C, 0x04008040}, /*  MMDC0_MDSCR, ZQ calibration command sent to device on CS0 */
-+
-+	/*  Mode register writes for CS, commented out automatically */
-+	/*  if only one chip select used */
-+	/*     {0x021B001C, 0x0200803A},  */
-+	/*     {0x021B001C, 0x0000803B},  */
-+	/*     {0x021B001C, 0x00048039},  */
-+	/*     {0x021B001C, 0x15208038},  */
-+	/*     {0x021B001C, 0x04008048},  */
-+
-+	/*  final DDR setup, before operation start: */
-+	{0x021B0020, 0x00000800}, /*  MMDC0_MDREF */
-+	{0x021B0818, 0x00000227}, /*  DDR_PHY_P0_MPODTCTRL */
-+	{0x021B0004, 0x00025564}, /*  MMDC0_MDPDC now SDCTL power down enabled */
-+	{0x021B0404, 0x00011006}, /*  MMDC0_MAPSR ADOPT power down enabled */
-+	{0x021B001C, 0x00000000}, /*  MMDC0_MDSCR, clear this register (especially the  */
-+				  /*  configuration bit as initialization is complete) */
-+};
-+
-+struct dram_timing_info dram_timing_256mb = {
-+	.ddrc_cfg = ddr_ddrc_cfg_256mb,
-+	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_256mb),
-+	.dram_size = SZ_256M,
-+};
-diff --git a/board/bsh/imx6ulz_smm_m2/ddr3l_timing_512m_m2d.c b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_512m_m2d.c
-new file mode 100644
-index 00000000000..e767f9ed641
---- /dev/null
-+++ b/board/bsh/imx6ulz_smm_m2/ddr3l_timing_512m_m2d.c
-@@ -0,0 +1,127 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "spl_mtypes.h"
-+
-+static const struct dram_cfg_param ddr_ddrc_cfg_512mb[] = {
-+	/* ============================================================================= */
-+	/*  IOMUX */
-+	/* ============================================================================= */
-+	/* DDR IO TYPE: */
-+	{0x020E04B4, 0x000C0000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDR_TYPE */
-+	{0x020E04AC, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRPKE */
-+
-+	/* CLOCK: */
-+	{0x020E027C, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDCLK0_P */
-+
-+	/* Control: */
-+	{0x020E0250, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_CAS */
-+	{0x020E024C, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RAS */
-+	{0x020E0490, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_ADDDS */
-+	{0x020E0288, 0x000C0030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET */
-+	{0x020E0270, 0x00000000}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDBA2 */
-+				/* DSE can be configured using Group Control Register: */
-+				/* IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+	{0x020E0260, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT0 */
-+	{0x020E0264, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_ODT1 */
-+	{0x020E04A0, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_CTLDS */
-+
-+	/* Data Strobes: */
-+	{0x020E0494, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE_CTL */
-+	{0x020E0280, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS0_P */
-+	{0x020E0284, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_SDQS1_P */
-+
-+	/* Data: */
-+	{0x020E04B0, 0x00020000}, /*  IOMUXC_SW_PAD_CTL_GRP_DDRMODE */
-+	{0x020E0498, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_B0DS */
-+	{0x020E04A4, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_GRP_B1DS */
-+	{0x020E0244, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM0 */
-+	{0x020E0248, 0x00000030}, /*  IOMUXC_SW_PAD_CTL_PAD_DRAM_DQM1 */
-+
-+	/* ============================================================================= */
-+	/*  DDR Controller Registers */
-+	/* ============================================================================= */
-+	/*  Manufacturer 1:NANYA */
-+	/*  Device Part Number 1:NT5CC256M16ER-EKI */
-+	/*  Manufacturer 2:MICRON */
-+	/*  Device Part Number 2:MT41K256M16TW-107 */
-+	/*  Clock Freq.: 400MHz */
-+	/*  Density per CS in Gb: 4 */
-+	/*  Chip Selects used:1 */
-+	/*  Total DRAM density (Gb)4 */
-+	/*  Number of Banks:8 */
-+	/*  Row address:    15 */
-+	/*  Column address: 10 */
-+	/*  Data bus width16 */
-+	/* ============================================================================= */
-+	{0x021B001C, 0x00008000}, /*  [MMDC_MDSCR] MMDC Core Special Command Register */
-+
-+	/* ====================================================== */
-+	/* Calibrations: */
-+	/* ====================================================== */
-+	{0x021B0800, 0xA1390003}, /*  DDR_PHY_P0_MPZQHWCTRL, */
-+			/* enable both one-time & periodic HW ZQ calibration. */
-+
-+	{0x021B080C, 0x00070004}, /*  [MMDC_MPWLDECTRL0] MMDC PHY Write Leveling */
-+				  /*  Delay Control Register 0 */
-+	{0x021B083C, 0x414C014C}, /*  [MMDC_MPDGCTRL0] MMDC PHY Read DQS */
-+				  /* Gating Control Register 0 */
-+	{0x021B0848, 0x40403A3E}, /*  [MMDC_MPRDDLCTL] MMDC PHY Read delay-lines */
-+				  /*  Configuration Register */
-+	{0x021B0850, 0x40402E28}, /*  [MMDC_MPWRDLCTL] MMDC PHY Write delay-lines */
-+				  /*  Configuration Register */
-+
-+	{0x021B081C, 0x33333333}, /*  [MMDC_MPRDDQBY0DL] MMDC PHY Read DQ Byte0 Delay Register */
-+	{0x021B0820, 0x33333333}, /*  [MMDC_MPRDDQBY1DL] MMDC PHY Read DQ Byte1 Delay Register */
-+
-+	{0x021B082C, 0xf3333333}, /*  [MMDC_MPWRDQBY0DL] MMDC PHY Write DQ Byte0 Delay Register */
-+	{0x021B0830, 0xf3333333}, /*  [MMDC_MPWRDQBY1DL] MMDC PHY Write DQ Byte1 Delay Register */
-+
-+	{0x021B08C0, 0x00944009}, /*  [MMDC_MPDCCR] MMDC Duty Cycle Control Register */
-+
-+	/*  Complete calibration by forced measurement: */
-+	{0x021B08B8, 0x00000800}, /*  DDR_PHY_P0_MPMUR0, frc_msr */
-+
-+	/* ====================================================== */
-+	/* MMDC init: */
-+	/* ====================================================== */
-+	{0x021B0004, 0x0002002D}, /*  MMDC0_MDPDC */
-+	{0x021B0008, 0x1B333030}, /*  MMDC0_MDOTC */
-+	{0x021B000C, 0x616552F3}, /*  MMDC0_MDCFG0 */
-+	{0x021B0010, 0xB62C0A63}, /*  MMDC0_MDCFG1 */
-+	{0x021B0014, 0x01FF00DB}, /*  MMDC0_MDCFG2 */
-+	{0x021B0018, 0x00201740}, /*  MMDC0_MDMISC */
-+	{0x021B002C, 0x000026D2}, /*  MMDC0_MDRWD; recommend to maintain the default values */
-+	{0x021B0030, 0x00651023}, /*  MMDC0_MDOR */
-+	{0x021B0040, 0x0000004F}, /*  CS0_END */
-+	{0x021B0000, 0x84180000}, /*  MMDC0_MDCTL */
-+
-+	/*  Mode register writes for CS0 */
-+	{0x021B001C, 0x02008032}, /*  MMDC0_MDSCR, MR2 write, CS0 */
-+	{0x021B001C, 0x00008033}, /*  MMDC0_MDSCR, MR3 write, CS0 */
-+	{0x021B001C, 0x00048031}, /*  MMDC0_MDSCR, MR1 write, CS0 */
-+	{0x021B001C, 0x15208030}, /*  MMDC0_MDSCR, MR0 write, CS0 */
-+	{0x021B001C, 0x04008040}, /*  MMDC0_MDSCR, ZQ calibration command sent */
-+				  /*  to device on CS0 */
-+
-+	/*  Mode register writes for CS, commented out automatically */
-+	/*  if only one chip select used */
-+	/*     {0x021B001C,0x0200803A},  */
-+	/*     {0x021B001C,0x0000803B},  */
-+	/*     {0x021B001C,0x00048039},  */
-+	/*     {0x021B001C,0x15208038},  */
-+	/*     {0x021B001C,0x04008048},  */
-+
-+	/*  final DDR setup, before operation start: */
-+	{0x021B0020, 0x00000800}, /*  MMDC0_MDREF */
-+	{0x021B0818, 0x00000227}, /*  DDR_PHY_P0_MPODTCTRL */
-+	{0x021B0004, 0x0002556D}, /*  MMDC0_MDPDC now SDCTL power down enabled */
-+	{0x021B0404, 0x00011006}, /*  MMDC0_MAPSR ADOPT power down enabled */
-+	{0x021B001C, 0x00000000}, /*  MMDC0_MDSCR, clear this register */
-+			/* (especially the configuration bit as initialization is complete) */
-+};
-+
-+struct dram_timing_info bsh_dram_timing_512mb = {
-+	.ddrc_cfg = ddr_ddrc_cfg_512mb,
-+	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_512mb),
-+	.dram_size = SZ_512M,
-+};
-diff --git a/configs/imx6ulz_smm_m2d_defconfig b/configs/imx6ulz_smm_m2d_defconfig
-new file mode 100644
-index 00000000000..ab80f94ba9a
---- /dev/null
-+++ b/configs/imx6ulz_smm_m2d_defconfig
-@@ -0,0 +1,82 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_MX6=y
-+CONFIG_TEXT_BASE=0x87800000
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SYS_MALLOC_F_LEN=0x18000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x20000
-+CONFIG_ENV_OFFSET=0x400000
-+CONFIG_MX6ULL=y
-+CONFIG_TARGET_MX6ULZ_SMM_M2=y
-+CONFIG_BSH_M2D_MEMORY=y
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6ulz-bsh-smm-m2"
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_BSS_START_ADDR=0x84100000
-+CONFIG_SPL=y
-+CONFIG_FIT=y
-+CONFIG_FIT_SIGNATURE=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_MTD=y
-+CONFIG_SPL_NAND_SUPPORT=y
-+CONFIG_SPL_WATCHDOG=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_SDP=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_MTDIDS_DEFAULT="nand0=gpmi-nand"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=gpmi-nand:4m(nandboot),1m(env),8m(kernel),1m(nanddtb),-(rootfs)"
-+CONFIG_CMD_UBI=y
-+# CONFIG_ISO_PARTITION is not set
-+CONFIG_OF_CONTROL=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_NAND=y
-+CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-+CONFIG_NO_NET=y
-+CONFIG_BOUNCE_BUFFER=y
-+CONFIG_CLK_COMPOSITE_CCF=y
-+CONFIG_CLK_IMX6UL=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x82000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_UUU_SUPPORT=y
-+CONFIG_SYS_I2C_MXC=y
-+# CONFIG_MMC is not set
-+CONFIG_MTD=y
-+CONFIG_MTD_RAW_NAND=y
-+CONFIG_SYS_NAND_USE_FLASH_BBT=y
-+CONFIG_NAND_MXS=y
-+CONFIG_NAND_MXS_DT=y
-+CONFIG_SYS_NAND_ONFI_DETECTION=y
-+CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
-+CONFIG_SYS_NAND_U_BOOT_OFFS=0x111400
-+CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND=0x291400
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_IMX6=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_MXC_UART=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
-+CONFIG_IMX_THERMAL=y
-+CONFIG_USB=y
-+CONFIG_SPL_USB_HOST=y
-+CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="BSH"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_CI_UDC=y
-+CONFIG_SDP_LOADADDR=0x877fffc0
-+CONFIG_SPL_USB_SDP_SUPPORT=y
-+CONFIG_IMX_WATCHDOG=y
-diff --git a/doc/board/bsh/imx6ulz_bsh_smm_m2.rst b/doc/board/bsh/imx6ulz_bsh_smm_m2.rst
-index 0f391a17ade..0af41c09d20 100644
---- a/doc/board/bsh/imx6ulz_bsh_smm_m2.rst
-+++ b/doc/board/bsh/imx6ulz_bsh_smm_m2.rst
-@@ -1,7 +1,7 @@
- .. SPDX-License-Identifier: GPL-2.0+
- 
--How to Update U-Boot on imx6ulz_smm_m2 and imx6ulz_smm_m2b boards
--=================================================================
-+How to Update U-Boot on imx6ulz_smm_m2, imx6ulz_smm_m2b and imx6ulz_smm_m2d boards
-+==================================================================================
- 
- Required software on the host PC:
- 
-@@ -23,6 +23,14 @@ Build U-Boot for m2b:
-    $ make imx6ulz_smm_m2b_defconfig
-    $ make
- 
-+Build U-Boot for m2d:
-+
-+.. code-block:: bash
-+
-+   $ make mrproper
-+   $ make imx6ulz_smm_m2d_defconfig
-+   $ make
-+
- This generates the SPL and u-boot-dtb.img binaries.
- 
- Loading U-Boot via USB Serial Download Protocol
--- 
-2.48.1
-
+PiAtLS0tLemCruS7tuWOn+S7ti0tLS0tDQo+IOWPkeS7tuS6ujogTWFyZWsgVmFzdXQgPG1hcmVr
+LnZhc3V0QG1haWxib3gub3JnPg0KPiDlj5HpgIHml7bpl7Q6IDIwMjXlubQxMOaciDMx5pelIDEy
+OjExDQo+IOaUtuS7tuS6ujogQWxpY2UgR3VvIChPU1MpIDxhbGljZS5ndW9Ab3NzLm54cC5jb20+
+OyB1LWJvb3RAbGlzdHMuZGVueC5kZQ0KPiDmioTpgIE6IEFsaWNlIEd1byA8YWxpY2UuZ3VvQG54
+cC5jb20+OyBFdGllbm5lIENhcnJpZXJlDQo+IDxldGllbm5lLmNhcnJpZXJlQGxpbmFyby5vcmc+
+OyBQYXRyaWNrIERlbGF1bmF5DQo+IDxwYXRyaWNrLmRlbGF1bmF5QGZvc3Muc3QuY29tPjsgUGVu
+ZyBGYW4gPHBlbmcuZmFuQG54cC5jb20+OyBUb20gUmluaQ0KPiA8dHJpbmlAa29uc3Vsa28uY29t
+PjsgVmluaCBOZ3V5ZW4gPHZpbmgubmd1eWVuLnh6QHJlbmVzYXMuY29tPjsgVmlvcmVsDQo+IFN1
+bWFuIDx2aW9yZWwuc3VtYW5AbnhwLmNvbT47IFllIExpIDx5ZS5saUBueHAuY29tPg0KPiDkuLvp
+opg6IFtFWFRdIFJlOiDlm57lpI06IOWbnuWkjTog5Zue5aSNOiBbUEFUQ0hdIGZpcm13YXJlOiBz
+Y21pOiBEcm9wDQo+IG1tdV9zZXRfcmVnaW9uX2RjYWNoZV9iZWhhdmlvdXIoKSBtaXN1c2UNCj4g
+DQo+IENhdXRpb246IFRoaXMgaXMgYW4gZXh0ZXJuYWwgZW1haWwuIFBsZWFzZSB0YWtlIGNhcmUg
+d2hlbiBjbGlja2luZyBsaW5rcyBvcg0KPiBvcGVuaW5nIGF0dGFjaG1lbnRzLiBXaGVuIGluIGRv
+dWJ0LCByZXBvcnQgdGhlIG1lc3NhZ2UgdXNpbmcgdGhlICdSZXBvcnQgdGhpcw0KPiBlbWFpbCcg
+YnV0dG9uDQo+IA0KPiANCj4gT24gMTAvMzEvMjUgNDozNiBBTSwgQWxpY2UgR3VvIChPU1MpIHdy
+b3RlOg0KPiANCj4gSGVsbG8gQWxpY2UsDQo+IA0KPiA+PiBXb3VsZCBpdCBiZSBwb3NzaWJsZSB0
+byBmaXggdXAgdGhlIFNSQU0gbWFwcGluZyBpbjoNCj4gPj4NCj4gPj4gYXJjaC9hcm0vbWFjaC1p
+bXgvaW14OHVscC9zb2MuYzpzdGF0aWMgc3RydWN0IG1tX3JlZ2lvbg0KPiA+PiBpbXg4dWxwX2Fy
+bTY0X21lbV9tYXBbXSA9IHsNCj4gPj4NCj4gPj4gPw0KPiA+Pg0KPiA+PiAtLQ0KPiA+PiBCZXN0
+IHJlZ2FyZHMsDQo+ID4+IE1hcmVrIFZhc3V0DQo+ID4NCj4gPiBIaSBNYXJlaywNCj4gPg0KPiA+
+IENvbmZpZ3VyaW5nIHRoZSBtZW1vcnkgcmVnaW9uIGZvciBTQ01JIGNvbW11bmljYXRpb24gYXMN
+Cj4gTVRfREVWSUNFX05HTlJORSByZXNvbHZlcyB0aGUgaXNzdWUuIFdpdGggdGhpcyBjaGFuZ2Us
+IFNDTUkgd29ya3MNCj4gY29ycmVjdGx5IGFuZCB0aGUgaS5NWDhVTFAgYm9vdHMgc3VjY2Vzc2Z1
+bGx5Lg0KPiA+DQo+ID4gICAgICAgICAgICAgICAgICAvKiBTUkFNMCAoYWxpZ24gd2l0aCAyTSkg
+Ki8NCj4gPiAgICAgICAgICAgICAgICAgIC52aXJ0ID0gMHgyMjAwMDAwMFVMLA0KPiA+ICAgICAg
+ICAgICAgICAgICAgLnBoeXMgPSAweDIyMDAwMDAwVUwsDQo+ID4gLSAgICAgICAgICAgICAgIC5z
+aXplID0gMHgyMDAwMDBVTCwNCj4gPiArICAgICAgICAgICAgICAgLnNpemUgPSAweDFmMDAwVUws
+DQo+ID4gKyAgICAgICAgICAgICAgIC5hdHRycyA9IFBURV9CTE9DS19NRU1UWVBFKE1UX05PUk1B
+TCkgfA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICBQVEVfQkxPQ0tfT1VURVJfU0hBUkUg
+fA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICBQVEVfQkxPQ0tfUFhOIHwgUFRFX0JMT0NL
+X1VYTg0KPiA+ICsgICAgICAgfSwgew0KPiA+ICsgICAgICAgICAgICAgICAudmlydCA9IDB4MjIw
+MWYwMDBVTCwNCj4gPiArICAgICAgICAgICAgICAgLnBoeXMgPSAweDIyMDFmMDAwVUwsDQo+ID4g
+KyAgICAgICAgICAgICAgIC5zaXplID0gMHgxMDAwVUwsDQo+ID4gKyAgICAgICAgICAgICAgIC5h
+dHRycyA9IFBURV9CTE9DS19NRU1UWVBFKE1UX0RFVklDRV9OR05STkUpIHwNCj4gPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgUFRFX0JMT0NLX05PTl9TSEFSRSB8DQo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgIFBURV9CTE9DS19QWE4gfCBQVEVfQkxPQ0tfVVhODQo+ID4gKyAgICAgICB9
+LCB7DQo+ID4gKyAgICAgICAgICAgICAgIC52aXJ0ID0gMHgyMjAyMDAwMFVMLA0KPiA+ICsgICAg
+ICAgICAgICAgICAucGh5cyA9IDB4MjIwMjAwMDBVTCwNCj4gPiArICAgICAgICAgICAgICAgLnNp
+emUgPSAweDFlMDAwMFVMLA0KPiA+ICAgICAgICAgICAgICAgICAgLmF0dHJzID0gUFRFX0JMT0NL
+X01FTVRZUEUoTVRfTk9STUFMKSB8DQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICBQVEVf
+QkxPQ0tfT1VURVJfU0hBUkUgfA0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgUFRFX0JM
+T0NLX1BYTiB8IFBURV9CTE9DS19VWE4NCj4gPg0KPiBFeGNlbGxlbnQgIQ0KPiANCj4gQ2FuIHlv
+dSBwbGVhc2Ugc3VibWl0IGEgZml4IGxpa2UgdGhpcyB1cHN0cmVhbSA/DQoNClBhdGNoIGhhcyBi
+ZWVuIHNlbnQgb3V0Lg0KaHR0cHM6Ly93d3cubWFpbC1hcmNoaXZlLmNvbS91LWJvb3RAbGlzdHMu
+ZGVueC5kZS9tc2c1NTc3NjYuaHRtbA0KDQpCZXN0IHJlZ2FyZHMsDQpBbGljZSBHdW8NCg==
