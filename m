@@ -4,64 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEA84CCF9FF
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 09:35:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D630CCF9FA
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 09:36:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1735E83642;
-	Fri, 31 Oct 2025 10:35:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7A909838CC;
+	Fri, 31 Oct 2025 10:36:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="ZYL66rr5";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="cbwprjWd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 814AC838BB; Fri, 31 Oct 2025 10:35:22 +0100 (CET)
+ id EC935838CE; Fri, 31 Oct 2025 10:36:11 +0100 (CET)
 Received: from AM0PR83CU005.outbound.protection.outlook.com
  (mail-westeuropeazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08A6F8331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:35:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 08C3C83642
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:36:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aWMd/VrmNA2kJHGAWq2CH0g0JduhLCSNDaKyCwNpeF1MMzoOlY89S21WMCJRRSmTvU6e+PHGiBfoSZKZc9+8a6Dp7l/thLffqXprP1s4RXt87t87TaS7DmsHNmSpq7b7GCriOLuABE6dmbxThxRoEf1yKxTxrIth2lRdzoToki1mLWxGS0QEOK8OpeiZORms8pqX6Mm1paVNFuZ8TweApuEq1onrMiVuhoRwND7bN5UFMIa8SL/fTBqI+RfIgcg0GqXdKpmuOxMbj7VKj1jxVvUO9S6bd+cpyZPvbvsKKbXLYxfdG1VbYNtLB4BX7BlUd8vZgJiyKvs+fuqO8S0czQ==
+ b=WHyj3p4TGUbFEIvEFOfodlaLc6CFQQHu3o1k/KO1r3qZJD8oAKytSV2FCXlDTVR4Mi+HxXh7preIwrhmkJow61fyWxJciulvdFCOSbcbfdPmuTwNKDjwhnB4EV3N+IccX38Pj26KttnlNcthJpN+B8ZVAu17mjKIJZBVOB3sC2rutCQ1a4VqnmQz/7kH7gv2FCIYdCT+YVoEUahv+X06v8gA3bDyrOcH6NL8B4Af+QDdR7MBzfmQzT5sn/luujP35G+ZgDup2xTNAoIuKVZtUah2L+tUW33KylRsqO+5lrDV/GhTbV5EMogvDBLS7CVN8I9g8jGp8+g1ymFqWgwRQg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=k8FhrYshC/tcYW9XDNGeHGZ0BORCm+UpHuJQxifnpLA=;
- b=gr78y3G8xMjdEIv99J2qgDmt3hDcYveRzMrEg2RCiRnnvZ/E3JVd1w3aOtXCEVb8rSFlYB1l8c8tmMbjnOqms0FUzURXmA0OPBEsu6JchGwj8FavtV6wsubdHzx8oxlKCFbIbQaw+CJLLzKKLtEhD3sMvCBRsXoAyUwYrhZVEaS9VHdXBB5AebmP6ngjn6wp1lcmfLo8YArr4j2+kdHBKPnWz5eV4LKi1TuDZ/YeOTr29U3xoFB9LR2v0wF8x5bwNQTEvJj8z3CZ33UQyEMFh7pvUoTU3Uc2vO1oFb+q7VGjvzK84/SKXDEjvBKKX8EnAQkHCJa123XqEIddCRM4rQ==
+ bh=o4paBHxnRsmlp7nLT1f0jt7dd9vOMuzA83ovin4DGzY=;
+ b=S5x0wGKC9REDDNvASMDT/ycNOqRx+BLpx9oDeH40DGxFp3IgjX3qv+ShHyMaM4t0FO5zbs8Yi+ftAH56U1L+WxIW02EoNWeX8BJ8J33Mq8mauTTFpC1BqkaljKpJKn/4tmxtgLjoPfP+HQqL7AAuxTFQdJbbC28dPwXYnLz/vM+eERDMQEYjjGPypOPxVuxAX/k2mcHkQdPyRVowgWx7AHuCYd7WS6ajmsbLDX1nezRKLTNqgsaK2VsKzgcWehCJ3Fw9z39XiqdecP/ce0q+yfLJ34M9xlI4PMDvPTv7qllBiPp11gJDraf3aScnAsPYcoKyNVZ0oT5UdRJnKNsEJQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
  dkim=pass header.d=siemens.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k8FhrYshC/tcYW9XDNGeHGZ0BORCm+UpHuJQxifnpLA=;
- b=ZYL66rr59zpEQxy0UvVOoomZ6M1bVfUTlL6RdC+2VwjYAu76Aim2IqdyZO/ENZi7oS0CtFefOTXKdTPLszZfLGvwzIfXVguDcm69WjEjRriE7rSdMe9Uw3Rf64rHGfQhI1QCh58DUmcqKJPLdVCXCJPCFp3Q2bgAyBYr828YGLQkY/SQDtHCWBe83LvlfD3VfDUBEp36znw6XPkHWn7MMc/7iH3J6CQRjDKvxXZLWTJKnFXlERVHfYJ6egnaROTFhH7faUZz7ItjTRVALy7/AmfDlcy4ZCdY4yQfSscGkkzHZikgk/xURC2QIcJSfxichi/tyzZHdMoXCQYEwkQrxg==
+ bh=o4paBHxnRsmlp7nLT1f0jt7dd9vOMuzA83ovin4DGzY=;
+ b=cbwprjWdLb2hv13fCXx43V7MDgmFoWOkBd//1/4LSgnhejt/2tp9NB6bchXDo7FTIYIAcyEvCNUp1iaqEcgTNpvJC1hz/a35JmkBRaHcm3h8JbTZ/MdmrnRxO3taU5FzduuHm8AunwvJuxPRyRZsA0XzahkLlkz+6OUVq4AH93zRp4XcRjpKfnOABPpgutCh/3ebA+CLU8j3g0NL7gMLHBHKMn/w9oCg6Bl4ZFEjQbTcJrbTo4GHZ266YIcynACkA67p5rWkxZAws96cZgQHiEdeUVFSbwZUhmZxJZuJAos13Mz9z7mOtqF4QYxikv48yeiXdfYfweT2hTEkLRnJWw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=siemens.com;
 Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by AS8PR10MB6924.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:57f::5)
+ by AS1PR10MB5626.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:479::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.15; Fri, 31 Oct
- 2025 09:35:17 +0000
+ 2025 09:36:08 +0000
 Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8fe1:7e71:cf4a:7408%6]) with mapi id 15.20.9275.013; Fri, 31 Oct 2025
- 09:35:17 +0000
-Message-ID: <f7068c43-db26-434a-b039-9a70e210e395@siemens.com>
-Date: Fri, 31 Oct 2025 10:35:16 +0100
+ 09:36:08 +0000
+Message-ID: <55d68052-0610-434e-8f6e-4c1808e43207@siemens.com>
+Date: Fri, 31 Oct 2025 10:36:06 +0100
 User-Agent: Mozilla Thunderbird
+Subject: Re: small Issue with u-boot/tools/key2dtsi.py
+To: "Hans Gfirtner (Nokia)" <hans.gfirtner@nokia.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <AS5PR07MB9799CED5D37A580FD862C1B5FAF8A@AS5PR07MB9799.eurprd07.prod.outlook.com>
+ <efd72055-b96d-40e5-beb5-e6af08664180@siemens.com>
+ <AS5PR07MB979928242B521581C1C07153FAF8A@AS5PR07MB9799.eurprd07.prod.outlook.com>
+ <AS5PR07MB97996638E48C9C5BC79EDFF8FAF8A@AS5PR07MB9799.eurprd07.prod.outlook.com>
 From: Jan Kiszka <jan.kiszka@siemens.com>
-Subject: [PATCH] tools: key2dtsi: Write out modulus and r-squared with the
- correct length
 Content-Language: en-US
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, "Hans Gfirtner (Nokia)" <hans.gfirtner@nokia.com>
 Autocrypt: addr=jan.kiszka@siemens.com; keydata=
  xsFNBGZY+hkBEACkdtFD81AUVtTVX+UEiUFs7ZQPQsdFpzVmr6R3D059f+lzr4Mlg6KKAcNZ
  uNUqthIkgLGWzKugodvkcCK8Wbyw+1vxcl4Lw56WezLsOTfu7oi7Z0vp1XkrLcM0tofTbClW
@@ -105,103 +108,104 @@ Autocrypt: addr=jan.kiszka@siemens.com; keydata=
  qH4kDzsqKX8zzTzfAWFxrkXA/kFpR3JsMzNmvextkN2kOLCCHkym0zz5Y3vxaYtbXG2wTrqJ
  8WpkWIE8STUhQa9AkezgucXN7r6uSrzW8IQXxBInZwFIyBgM0f/fzyNqzThFT15QMrYUqhhW
  ZffO4PeNJOUYfXdH13A6rbU0y6xE7Okuoa01EqNi9yqyLA8gPgg/DhOpGtK8KokCsdYsTbk=
+In-Reply-To: <AS5PR07MB97996638E48C9C5BC79EDFF8FAF8A@AS5PR07MB9799.eurprd07.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS4PR10CA0016.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:5d8::8) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AS4PR10CA0018.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5d8::12) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:588::19)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|AS8PR10MB6924:EE_
-X-MS-Office365-Filtering-Correlation-Id: 97081d2c-0cd1-4684-1308-08de1860cd31
+X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|AS1PR10MB5626:EE_
+X-MS-Office365-Filtering-Correlation-Id: f423cf74-ea04-4e34-7c5b-08de1860eb5d
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SjA2UW1FaFJsYW1VMTY1dDhlZ1pNSURyVFZoTFZONHA1N25lVklYNjVGUXlw?=
- =?utf-8?B?LzhGcm9UNW93bjRyMTFXV1lpVlZkaXhRYWNsQW9nT3QzcHA0RWQrU25DYjFq?=
- =?utf-8?B?WXphL2hEN1ppTFBjbGJ4R2loNkRQQURqaFM2VzZGaUMwcEN5TjhBNHZSa05W?=
- =?utf-8?B?YVl6Vzl5VEhaYkRqR0Y5TU54eWNtdzk2bWJZU1VsaWkzSkhwYzZKcnkyN0FC?=
- =?utf-8?B?ZHJ2YVBNa1o5blZiaVZRcU5HRDVvTy9JeDd1NzN5QkpFSklDWm03MDNqRmYz?=
- =?utf-8?B?U0pwZWhKWk5LTnBSZHNZbStIUEtDWnl5dUFUVkdIYTJhaUsyZmVYYmZZOWxR?=
- =?utf-8?B?eDJaNVFwcXF0V1VCc0ZmT1Y1Wll4Y2RUR0pkV0dUcXhHSnpNN0hPWFM3MGw4?=
- =?utf-8?B?QnZJK2pnTENvaWFLYTZnajhYQXVTVXpMaEdKWlhFSDMyWFFiMDJwSEt5QVBN?=
- =?utf-8?B?N21jM01DQmRkb0FYWS8vcG50TEV2TExOczA0dkx2eUhpYURvSFBmUTYzOUdu?=
- =?utf-8?B?T25kWTdWUFlWMVF6QkYzSzJUdWk0OUVlZGNtNVJqRkZ5Ky9zTXFIdGtOdXkz?=
- =?utf-8?B?QkFRb3JJV2ZHd3BZenF1aisxYUxVMmZ2WWV4MmRPTGdVSTZqTm5nOTZNeXJG?=
- =?utf-8?B?c1MwRFVpKzVRY21uZis1TEM5ZWRUNi9JRjU0dHE0enQ3K1ovS0NjVFFmcklq?=
- =?utf-8?B?SjduMXZPeVc5TXFrbTBsMzRrTTNvU0R4T1J3ZWJlN2ZHd0FRZ1dNeGZWYnFD?=
- =?utf-8?B?dUErUU1zckhSN2plcnBnRU1WbzM3b1dCV1BqbG5JZ1dDMTk4bUpvRExRek9S?=
- =?utf-8?B?RW9iWTBMejFoSFZWaEI2M0pEZ3d4Q2c0cVFIV01qTjJHTVNBeFlIcU9HRkFt?=
- =?utf-8?B?ZWw2eGNvNVVvTktSREk1Vk9BQ3lBSUwvNVdDN0REaFM3ZTVaakNlUHNMUVBI?=
- =?utf-8?B?R0pVV2V5YXU0YWF4cWpxZGVjRWtXR1hyOExqU2gxcGpCd1Vuc25VaFRaREw0?=
- =?utf-8?B?dzVLdHJML3lYeTlwdGdsNWp5cnNkbE9RdVF2bkRERlk0K1dzYjNJUmhaWDFE?=
- =?utf-8?B?RklNRkNkcmtHdXYyTjF5cU9vZWt0NXBJVzJIQy92amRGMStDNlJIa3g4UllF?=
- =?utf-8?B?UXMrSXhYTDk1ZEYyNXJDM3VFNVExR29pRHI2aC9tYXZZekwrWEt3MUxMeFVU?=
- =?utf-8?B?b0hSMnI3dHBjOEg0VWZ4TUVUUFlNdEcvRWZJbVdRUHpieTViay9JUnFXZnlW?=
- =?utf-8?B?VGQ5b2c0UHhFRllhME84eDVOZG5DUDl4ODI2L2NPVm5KWng1a2thZFVZNFFm?=
- =?utf-8?B?Q2VqeGdtUTRDaFhnV29UMUpQK2FYOUlxcHlybUxYQmxNUDFiY1hQYzF3UUZL?=
- =?utf-8?B?RGRGbllHbFVFWTJCWVRrbWJGcGRZS081ejU0dmVjS29kUkkzQnphb1NtTXcv?=
- =?utf-8?B?VGs4N3haYm4xT3BvWnhEejZINUdLNW5BeHMvVWEwS2Y1YTJreGVtSEFMK3Zp?=
- =?utf-8?B?NzR1UVlyMnkzR1ZsMXI3Vm9GQUdxNUN3K1hRdmUxY1QvRnhWa3RaTHdCd3hQ?=
- =?utf-8?B?ZWNrQTdLejJpUkQzU094ZFZrZ2k0L0tLUG91cElRTkVCbXFBVDZFblB3TkhZ?=
- =?utf-8?B?WTVDK3lMM2pqUEFjVXBILzhHY1IyQlFzV29YOVRnMFJ6ejl2alI1MXV1V0xj?=
- =?utf-8?B?d3pyK0RFdzdvSStTdFpjS2dnNHpRM2ZZNlduRUhXRUprREwzeE9NNUV6ZVFM?=
- =?utf-8?B?dlRjQWw3K1dzVGxTRFRSeG45aEh5NGRoTEZxU29tU056MjZ3RzRHQXBYcy9U?=
- =?utf-8?B?ak16SzQxZGRFczU3L1JOMVZyYUQ4VEpqaURsZHEwVWRid2sybktHVzlodzIw?=
- =?utf-8?B?WTRjZlhIeTF4VUdSc3hIWVQydVpKbWRsOFNhczBBdXpzY1lSbTJDblBhcmtQ?=
- =?utf-8?Q?Rbn4q7lfH7gigg4eWfKK70ZWc8WrDYRm?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Ynl4eVBZcDdVZ1VXY1VyS1ZHL2ZObE9JMjlobWkwbjFmZlRsYVdYcUcxSDV4?=
+ =?utf-8?B?eGJmNUwvUGtxSXNUU0Jzd1NhNTFaWTBNWE5sN2p6MEd5Sm5LRWJvRzJXSlpX?=
+ =?utf-8?B?UlFVVE1vWVl0QU5RSjdhY2VIUTY5bUV4MnJ2U0xUN0Zac21yZUE0aStXV213?=
+ =?utf-8?B?ejJpMUEwUmh4bERISmVHazFINURMWHQwSCthUlJubnRoWHVDV2tENU9DSS92?=
+ =?utf-8?B?c2xWWWtBRFdjRmJ6bFRnNmFEeE1xR1hMYkpZdG1HT1BHMVpYemRUNUtUZVYz?=
+ =?utf-8?B?VHh3OEIrcGJxYTRpbXMvcVpsQUxqKzU5Ynp0K2JXbnhSMWF0aWpmTzRQQWth?=
+ =?utf-8?B?YU1OMXZ0eS9MYjR0Y0FSZDZIa1R4bEV1VUpBWW9WMmlkV1ZJenloUWpXcU8y?=
+ =?utf-8?B?VDhkQzBKL21mTlJNRTNxSE1PcVhKUDBGdEhLL1pJcmdsanRjdDdIMWJyTVNR?=
+ =?utf-8?B?M09jVDlEV0hqblZpb3JJY0VTcGhTMFdaZURyQkNjbEhZK3lPS0Z4OHk4emxk?=
+ =?utf-8?B?ckZQK2lna2ZjOTZNL3lKdHRxa2c5YU5jbHpzS1QzMTk5VzAxSlVWcDhBZ0Ru?=
+ =?utf-8?B?N3B4SGpaMXAwMEl4N0pqeFpHSFVHRWhXcXRhdlpMRWkyTStNWFBELy9nTU9T?=
+ =?utf-8?B?NFlCV0pNeUVCM2crajdFbk12YUhkak5KOEJRNDRPWUttNDUrLy91QzRWWno4?=
+ =?utf-8?B?bnJjdHRWcDlUTEo3MFArTjhhRzJzVGVnNDZtRjdWS0NPZENJTCtCcVRSWERa?=
+ =?utf-8?B?QXVYUnZ6UmIrVzFsZTBld0Fzc2U5V2I3YTVvVGNHL2J1WWF5QlpMRERRdVVt?=
+ =?utf-8?B?bkxMZDQxWkdORG1vWkpQZDFEWlh3eWU4dUpUZ2R0NWNESlEyS0RFbUtqWUtG?=
+ =?utf-8?B?bUs2RC82RkZNbUROeXRMR3RHOXNQcUI3MkJlazlpRDd6NlJmUUUvZDFJT0cv?=
+ =?utf-8?B?NGNHMFlFd05qb212M1hLZEUwUWZnTWNOemZaVDlOd0hqVFl0MFN5aldUVUo3?=
+ =?utf-8?B?RHNvRzYxOXVkMnNnZE9ObmQxRGJxNU5zQytWdkcyblR3NTdpQndTMGo5L3ZV?=
+ =?utf-8?B?ZTZaV0gzdWE4eVVGZHQ4c1pDZ1J2ZHlmczZuZVBMTmVXQmVSR2JkdThqck8r?=
+ =?utf-8?B?eHlIMFk4OGxZTmNGMnBEWnluL1BjalNXdnJlSzNQeE4wUVZjd3pSUEloKzRR?=
+ =?utf-8?B?Wjg4eFFhWEgxLzhpTDJUcTlYaEc4YWlRSlBTTXhhNjF1ekt2Lzd4WlVrYWJ2?=
+ =?utf-8?B?V1dRQWdScU1yOThJQWMzc0dLSGxtMFBybG1wZ0tzWm1kbUZiZ1dZTWd0NU9p?=
+ =?utf-8?B?emU1cTNYbWtuUkNqVURzQmY3V1h1QkxoNFFMZGY5TWJEWlpubmFydWhLLytG?=
+ =?utf-8?B?UkVZZ0J2MXFjYmU5Wlp1VGpuSXdjdFlmVUNNbWswOWxWamplcEZ1WlFSOHho?=
+ =?utf-8?B?cmJzSm1GUzBmdW1NZGdqdzF0RGhTc0o2MFZQb013cEIzK051NWVUek82Zldk?=
+ =?utf-8?B?OUpIVGgzdU5pL2JGdm1hWmdNQjd3MFVncjRGS3RndmNDdndjbU5oT09kTXJl?=
+ =?utf-8?B?Mk9oQ0ZyY0lnSUExTElJblBPbFJPWUlYaWpvSytmeGpORDlnOEVuRGg1RlR4?=
+ =?utf-8?B?NUZZVXVlWlM0K0JrWlNJdlJMYlpPYWl6MkhLRDNsNFkweEMzYy9NSzlEcVI4?=
+ =?utf-8?B?SkhJcnJzbGdaS2laRE5mMVdMTWh6MFlqRm8wMVJzQmxXZmxPM2IydkdreENr?=
+ =?utf-8?B?QkJuK3o3ZEZhc3hrSjIxZTVZaXBuNWJKcE5QOHMzOWZqOVFQQ2I5cnRrcjZ4?=
+ =?utf-8?B?RnUrZnQ3YWJ0YmxhdnFxT29GRFFDQ01SVXdhRnFrREJzYTRIZ1hkQzUyUkJs?=
+ =?utf-8?B?aWZjY2lza2dYQlNoWXMveEdhdTE3Y0NLSXB4RCsxQlNKOUxTbUJqdWlNT2VF?=
+ =?utf-8?Q?jaEBcI11saqNrKU6EOIa5i32WYgi+xrm?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RllkeGVReWdNdlpzb00wTitwK29ZVVVoaUdyUXZtSFhvOTJiczRuSExkME9Q?=
- =?utf-8?B?SjY1RmhORFQyQ2dYaHRNSk01RVVpQmJzbGo3WDZnN2tjNTl6RkpleW51dmVs?=
- =?utf-8?B?Z1NLV2Y1UTBxRTI3OFdyVmVDcTZpN3lHdUZ2MWFoT3kxNFE3SjFxK1duQitX?=
- =?utf-8?B?V0pLZFczWTZIeGZUSkJNdCtpWXNGSS9pTmk3elQrZWtaQzVGQUt0R2RXNVk3?=
- =?utf-8?B?TmE0Y2s3UmpWYWJmTzJBT1hGem9oNDJFWUMwMU93QU5nL1AxZ1FadlAyYThl?=
- =?utf-8?B?N0p4dGU0SFVuSG14NDdQYWVSUFZlQ3lqMTQ1a203VGswNkkvM0U3QU5Gd1hU?=
- =?utf-8?B?NnloV1NFRGVsT1cxNEV5dWMwdHNQdlJUeTk5UzNxVnFPUjlyVS9JZDROd3Q1?=
- =?utf-8?B?VGtlbkR1ZkllQ2JHYlZsY05LWUh2bm1HSUFVU1ZVTVlQOEw2M0NSMzhCb2tF?=
- =?utf-8?B?SEJCRWpnUzBEVDlNY1BySUZuMzUxSUpZZTA2TmdwMysyM1gxTW0yZGxiYTVw?=
- =?utf-8?B?YjZCemIwSTF6OWNyK3pPdytCbEJnYkVqYmgyQnpQT2tza2YwdW95L2xlNSth?=
- =?utf-8?B?cVVTSVp1Szd4a2VJelMyMHZheWhUN2crUVZvTEYzNU1xUmlCbWhGUWhxc2dq?=
- =?utf-8?B?YjdZV00rRjMzTzQ4Mytad1FuRWZMcWxhKzh2bkdqWnFiVHRwTmZvQVdINjg2?=
- =?utf-8?B?ZURKZVI4SnhKdGkrVzFTdExMYXgxRDFBL0NtU0FMOVozODRkTnpnU1FJMFNO?=
- =?utf-8?B?ZHRKUXVLYmcvQzEvMUgzV1Y3b3lsbTdIYkRLOEd5RzJVMHVUcWlsK09BUXJV?=
- =?utf-8?B?eTU2dzdxVGJGY1NIRjBzejVtV2FOS2pPeWhnVGpXa1VzU1R2dDIxMHY2Vmx4?=
- =?utf-8?B?V0ErSERjWERmYUp5T0xaVzJWZ1JpWjVMbXFDcmxrMmFYSWlVZWtJMWdFTzh6?=
- =?utf-8?B?S3kzR2tDMFBqMkN6TUkxS1J0ZzFkVmJuT0RSaitEUzhJdHhya2g5Y2xvOTJS?=
- =?utf-8?B?Vit3bktrYm1sS3FBRkNUTTNlSnFJQkJzWkxremZkMzZQZ1cwY0FTYTdGTUlP?=
- =?utf-8?B?SzFsUGYwbGJNMmE3cGJKNHF1UHhRV1BMSjNZUldZK0MzbmZ5b29OczJrZVRT?=
- =?utf-8?B?VWIrOHgyVm9pejdQZG5kNmZBeGxyc01PZ0FuYkVxVkNVRUIxb2xxaTd0UGNS?=
- =?utf-8?B?dUdqT3I3Q2ExN2M3VW1YTHVDTmpJLzMzL0wzeU1hWVlHM08rZkhEQWl5VXFn?=
- =?utf-8?B?cGF3aEhBa2I4MFVjR1hUMkg2UHpwWXRnb0FtamJTdFo2WDhQR05hSHJkY1di?=
- =?utf-8?B?NGlKZFpFYkNFaFZuYTVSNTZHenVsTmtwQWo4YUJaNktkSzlVWE11LzV0QTNT?=
- =?utf-8?B?SllHZnZUdEtuL1hxYWNianIzUjUzcmFxTUNRM0lDVy9hbU56M2RWSTQ3YWFl?=
- =?utf-8?B?cXdwd1lYY0pyQW5BSHNYZlJCOWRJamhzcEM3dzhRdnlobC8yV2NIUE9TN25t?=
- =?utf-8?B?eFVSOUY5bTJuMU1VQ2ZQdkJ2cHJldENWL0tZTzUzdVJTanJDc1I1LzR5NTdj?=
- =?utf-8?B?K0J4OWp0cDU1dmxXb25lWFhUWlZqdjJiYTM0RG5EQTk3ODRlNDBIQkVFRmt3?=
- =?utf-8?B?aHpBTklkUDRHVmt0citZS2h4TitKMHovNjhBbXFPakp0UXEwTStNc2tNdGYy?=
- =?utf-8?B?eThnWDIrY3phYkJveUU2SFpVZ1VxUVk0dEJYMGdiWVUxUmlEOVlvTkNPTWpm?=
- =?utf-8?B?N0FYQjhQdmpZRS9aTWVtWG1RbmZUL1BrRUJmaUNjeEU0YSsxS0hmWm5IL0lL?=
- =?utf-8?B?ODdzVjJhMkl5cUVqdW9zeTJpTlFuZ2xEZnJ2c3l3dmNTRmMzSzBrRlAwOTRh?=
- =?utf-8?B?cUh4SVV6cWRXUlRxd3Fxc1VabGE2V0cyZnBkSjNaSFFHc1A4enZKVGlIbVhq?=
- =?utf-8?B?L3pnNEg3dURKNGNsa2F2bkV5TmRtZkpLa2oxdU11Rm5XMUhRWkFvQlhrL3Y4?=
- =?utf-8?B?bCs2end5c00xNERSWUVTdDc1Wityc2VFT3ZyQlR0aFJ5WGdMZ3ZrUWp0THhX?=
- =?utf-8?B?ZkRjaE82VjhyM1pzMlNacXNvV0tVT0tXUE1VajVmU3BjY3pzNkFaTFA4QlNZ?=
- =?utf-8?B?VTRheU9pQTN6SEdHSldGYnhSZ0YzTE9SRkl4TlBhQ1NsbnhiQkx0UXdtZmhW?=
- =?utf-8?B?N3c9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VXZOUmVIWDlGbVhYZ1FFQjFEeHViUk9aVGYxMW5vYmJQUmtpNFlvTUZXSGVm?=
+ =?utf-8?B?SU5TRkVMbHRGb3BtNk1iSEprSWgzaTFxNFJ5cWhmSktlRW9rNTEzVkFCTnlQ?=
+ =?utf-8?B?czZ6RzgwVTM3ZVQydTNtcnZsemdhVXplMDhubUFFdmFzUHN0VHlTTHA2amVJ?=
+ =?utf-8?B?VTZpcXRLTlI4R1dvNnR4QkUveDRZRWpia0U4VjArSGxSNTJhNXptS2wrM3BY?=
+ =?utf-8?B?enZGSStuZVlObnlwL1VoQ0xWdHVuaXFoNlJyQjdvS2tZL1FrWnUrNE9tZGlp?=
+ =?utf-8?B?T0lMQUJQWWM0MUdsYkl3UUhNTFl6amNpUWs5d0o3NllKeHoxN2FKa3BpRU01?=
+ =?utf-8?B?VjhpclY1QUdPN0Z0SG1iSm14RDVrOFZoRmlrbmVpRjZVWW51S1owSXoxMFVo?=
+ =?utf-8?B?amZSR29LTUZIc205N0FSbHR3eHo4dHk4dmVpOWUvalNXYXFPTEJ1YUhUMDV2?=
+ =?utf-8?B?cjBsb0xMTmFqbGMxUXhWbHoxZUptdjcwQXNxSW1TeTV4SGp5OS9mTUE2YWhv?=
+ =?utf-8?B?Y0FpQVU5c3dtLzhCemF0QVRwL2VIM3lCeEdXaG1JVlJkN3pnV3FlejMyTy9F?=
+ =?utf-8?B?WWVDcUh3YXFySS9aWEQwRi9yWllZS1dESXRZdTRTSnpwdVNiRXMzamkrVllt?=
+ =?utf-8?B?NGNLK2xiSUhRMW5BTnZxMHViNjE4VHV5S0k1Qk1abW5DUHd4SVFrN3dJZmNr?=
+ =?utf-8?B?YllUSURXUU51Wjh2Q05XcVpDUlN4UU5LTTVNOER3STVHd2RaZWNZZm5ZVE5E?=
+ =?utf-8?B?cWZIditvOHBnNUcwV1hDK2NkWE1YaU9tSkwxd3FGeEQwSFNYQkJjUU95ODl1?=
+ =?utf-8?B?VnhtVkpxeHFTTzZXMVh3RDc3TUtjZEYrQlY1N241dDhpWE1kWFk4ZCtkWEFp?=
+ =?utf-8?B?S0NPaGtNZUptNHRnanVvZmpSRmxKZ3Z3WXJSQjhEQWV6clBZN1VIeEZKVTUr?=
+ =?utf-8?B?RDR6N1E0SXI5blVUQ2o3cnRvUVZjeDk4SG5RRXF2bGUyU2hwSUFaZ2ZlWHo2?=
+ =?utf-8?B?SGpKTi9vbFVIVnpCS3lSeGhuLzRFblR6L1pJRGNUN3JkWlIxSk40aUhGVHBv?=
+ =?utf-8?B?YWg0dEo4OUE4WGJvMkllSWo5WXBlbk1EVllJQzAreXlpelpVd3FLOE1uNjQy?=
+ =?utf-8?B?TGRHc2lvczZBRnpwRUkwVGh6dzBrYXhvVW0rOU5FZDR0UmxPODdjbHo1ZWhB?=
+ =?utf-8?B?bWFBSlNXUzRmSzV4U0s5dkR0UG9MN0I2OTNESUJJa2o3TWxpZXAyNktmRnMv?=
+ =?utf-8?B?NTFlR1pYMTY4T1hubUlIMmFsMGNLbHpPanl2SGNZS2xLODAvaElvaDMxbHpr?=
+ =?utf-8?B?UWpMVWFLalVEMFIrSjAwVml5dXhIRG1OeEpSMElPWWNGamtKMld4N2V1dXFJ?=
+ =?utf-8?B?MktBRk1IZEs4Y1h4aUJLTHp3NEZMQzk3bGQ4ejRlZFJZVDMrb1FQWi95WFRE?=
+ =?utf-8?B?Y1JneHZJcGxIZDlSWER2S01taVBhNzhnaDIrS0pBSytnZ3VaeWVQUHFoWDFs?=
+ =?utf-8?B?aFZzVzl4QW00UWtmTGZzVU9GcmR2ZFpVN1l0V05OaDc5cnkybUdQVnRHZ0FB?=
+ =?utf-8?B?NDRtU0VVTjMvMUE0aDVSQUpIdWsxWWNLQTRBc0pJbUFNSWVWK1NBeUI0VStV?=
+ =?utf-8?B?SkI2NHp1TXh6NW0zaTR5K3cxZ2oyTXV4L3Zrb1YyYkVXMlR5dEFkc2V0STNR?=
+ =?utf-8?B?YjF0Z1BuQ2JnSkNGMVVFdldiQjZDUDd5aXJtaTk2Rk5VZ044am1JQkY3YXVB?=
+ =?utf-8?B?Z2xnaFA1V1lSam0vcnBueVYrSTV3cU9LMngwcEp6d2E4S0YrME1ZdnV2cXh5?=
+ =?utf-8?B?YVBUMWFLVHp1TDBOaXErLzgrcys4b0trdHBpVzl2dUJLSHdlT1RPYjV0enIx?=
+ =?utf-8?B?ZndOdVEwSzFueGNOUFc4cE0wRXErRzlpSjlRYkZRcWhGNFdYOGcrcFRVWkh1?=
+ =?utf-8?B?a2VWeHpPbHhKazZmRWo3YzVmN29rcGs3TGdBWWVQbG1KdVpZWVh4cmRRc3Iw?=
+ =?utf-8?B?OGpQL0lWdzBLWlA5dHlmRFUwbnlqcjByUmJYLzYzYzBib2tPTVg0QkpSTFZI?=
+ =?utf-8?B?a0RWK1p0NGkyUit4a2tONStZRlhWMG03NFIwNm9ZRklKMkNueVFiVGM2YWZB?=
+ =?utf-8?B?bkZVUURsckJIamY4d1JsMUZtTUdKdUErUC9TRFpKQmhZNTdpc3dvUGtQOS8x?=
+ =?utf-8?B?ZFE9PQ==?=
 X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 97081d2c-0cd1-4684-1308-08de1860cd31
+X-MS-Exchange-CrossTenant-Network-Message-Id: f423cf74-ea04-4e34-7c5b-08de1860eb5d
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 09:35:17.4619 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 09:36:08.0139 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: URV/mI9JAi0Neq/h1obYOeYx+bsWSwudLh4UN8gGiEVyvrWINJiEPm2l9oIY4ZnL4nFiyK/FrHIBHbdt8cb/9w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6924
+X-MS-Exchange-CrossTenant-UserPrincipalName: OTIeXrLIh4hmJrIpHbYSsv+rjOyAfQCrqedWm4fbvVSpRNUAcUzIueHPCRykQttbxx5PrBH3Q0XjlhgQbc7Atg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR10MB5626
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -218,67 +222,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jan Kiszka <jan.kiszka@siemens.com>
+On 31.10.25 10:07, Hans Gfirtner (Nokia) wrote:
+> Hi jan, all
+> 
+> I experienced an issue with some public keys (probability ~0,5%) u-boot fails to load secure kernel image:
+> 
+> There is a small flaw in the script, imagine you calculated a “rsa, r-squared” value with leading zero, then this script outputs just 255 values for it, without the leading 00.
+> I tested this with a script generating hundreds of keys and observed this error with approximately 0.5% chance (matching to the probability of having 00 in first place).
+> I fixed this locally in our u-boot by adding ", 256" to make sure leading zeros will also be generated:
+> 
+> out.write('\t\t\trsa,r-squared = [{}];\n'.format(int_to_bytestr(r_squared, 256)))
 
-Align the implementation to rsa_add_verify_data() by writing the modulus
-and r-squared properties with the same length as the key itself. This
-fixes signature verification issues when one of the parameters has
-leading zeros.
+Well, that may only help for certain key sizes. What if r_squared needs
+more than 256 bytes?
 
-Reported-by: Hans Gfirtner (Nokia) <hans.gfirtner@nokia.com>
-Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
----
+> 
+> An example for a problematic public key (generated with openssl) to reproduce the issue would be:
+> -----BEGIN PUBLIC KEY-----
+> MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5FeZKqBPrnGw3PgvfJ7a
+> ajFUMt94MIBsW5movhjKfdCqHJt0oS/bQWAeOEzW7eaAU9RnQev8ud+WgyVuKyrz
+> AaUZ6gpQC4V/Ll3Z1k06JXGInCxTVaOQh/A3fCgntqQmyotK6UeE/Xe9uvQ7Olw7
+> n+d1nyGWWTrWt5wqQ2HRCyiDtD9kSMYoM9rKlU301oJOCBKZlvHJz+zP3jNz52ZB
+> SFe3daaYmbIGz4mDTigJjGEh2BA8M+rT+/JkAUqUBC07wC+DsuNpr/A8QSTWs1Lk
+> YwpUuzTaDij/UN1gJ/Xw2NMEkQMAbz6F4U4TbBez6/zDa52i/LmRn4A1nxy7agY8
+> kwIDAQAB
+> -----END PUBLIC KEY-----
+> 
 
-Hans, please validate. I only had a dry run with your test key.
+Thanks for the report. I just sent a patch that is supposed to fix the
+root cause.
 
- tools/key2dtsi.py | 21 +++++++++++----------
- 1 file changed, 11 insertions(+), 10 deletions(-)
+Jan
 
-diff --git a/tools/key2dtsi.py b/tools/key2dtsi.py
-index 1dbb2cc94bf..320ea930a97 100755
---- a/tools/key2dtsi.py
-+++ b/tools/key2dtsi.py
-@@ -11,10 +11,8 @@ from os.path import basename, splitext
- from Cryptodome.PublicKey import RSA
- from Cryptodome.Util.number import inverse
- 
--def int_to_bytestr(n, length=None):
--    if not length:
--        length = (n.bit_length() + 7) // 8
--    byte_array = n.to_bytes(length, 'big')
-+def int_to_bytestr(n, bits):
-+    byte_array = n.to_bytes(bits // 8, 'big')
-     return ' '.join(['{:02x}'.format(byte) for byte in byte_array])
- 
- ap = ArgumentParser(description='Public key to dtsi converter')
-@@ -39,7 +37,8 @@ key_name, _ = splitext(basename(args.key_file.name))
- key_data = args.key_file.read()
- key = RSA.importKey(key_data)
- 
--r_squared = (2**key.size_in_bits())**2 % key.n
-+key_bits = key.size_in_bits()
-+r_squared = (2**key_bits)**2 % key.n
- n0_inverse = 2**32 - inverse(key.n, 2**32)
- 
- out = args.dtsi_file
-@@ -47,11 +46,13 @@ out.write('/ {\n')
- out.write('\tsignature {\n')
- out.write('\t\tkey-{} {{\n'.format(key_name))
- out.write('\t\t\tkey-name-hint = "{}";\n'.format(key_name))
--out.write('\t\t\talgo = "{},rsa{}";\n'.format(args.hash, key.size_in_bits()))
--out.write('\t\t\trsa,num-bits = <{}>;\n'.format(key.size_in_bits()))
--out.write('\t\t\trsa,modulus = [{}];\n'.format(int_to_bytestr(key.n)))
--out.write('\t\t\trsa,exponent = [{}];\n'.format(int_to_bytestr(key.e, 8)))
--out.write('\t\t\trsa,r-squared = [{}];\n'.format(int_to_bytestr(r_squared)))
-+out.write('\t\t\talgo = "{},rsa{}";\n'.format(args.hash, key_bits))
-+out.write('\t\t\trsa,num-bits = <{}>;\n'.format(key_bits))
-+out.write('\t\t\trsa,modulus = [{}];\n'.format(int_to_bytestr(key.n,
-+                                                              key_bits)))
-+out.write('\t\t\trsa,exponent = [{}];\n'.format(int_to_bytestr(key.e, 64)))
-+out.write('\t\t\trsa,r-squared = [{}];\n'.format(int_to_bytestr(r_squared,
-+                                                                key_bits)))
- out.write('\t\t\trsa,n0-inverse = <0x{:x}>;\n'.format(n0_inverse))
- if args.required_conf:
-     out.write('\t\t\trequired = "conf";\n')
 -- 
-2.51.0
+Siemens AG, Foundational Technologies
+Linux Expert Center
