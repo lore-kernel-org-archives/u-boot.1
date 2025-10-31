@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 289E5CCF9EE
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 04:11:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1562CCF9EE
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 04:16:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 246C2838AE;
-	Fri, 31 Oct 2025 05:10:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 52A1483642;
+	Fri, 31 Oct 2025 05:16:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bhmLxZ3H";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nAbkPS5v";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="P+3Z0r6/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88FC38331F; Fri, 31 Oct 2025 05:10:51 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 0F38083849; Fri, 31 Oct 2025 05:16:47 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D7CA836F0
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 05:10:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 138F48331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 05:16:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,47 +32,51 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cySFg2lfSz9sss;
- Fri, 31 Oct 2025 05:10:47 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cySNX6M60z9sdZ;
+ Fri, 31 Oct 2025 05:16:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761883847;
+ s=mail20150812; t=1761884204;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=EgwMnbw7dvag5fW+TNAsUTu9H92eYPuaVZ96pF8hGj0=;
- b=bhmLxZ3HeTh9leJR7qcrWc5Qipo6xpBT5a98f0IHSLboaz7afj8TdicEc0W8Gmmcjte1tF
- zvnGm+mCuE3OGWgB26wJVp16wDh/Dfe6/32030CiZimovcsShP3N2FeUO84oaIEkdbt6Gm
- rJZAGnsnkKmFYP+n7S/RxlVMvSnM/S7wrF8ZNHWmMVGvZkgLV1Lw8NDPOFNyEWB+CFMPGF
- hlC6eAt/OiGZHomk16xepTZhgtahFrn4JPk+RJv+8qtBTtGm6845CZO/FxeYjPkNEpW/LL
- 601mzeiw5TRb/dA2m8vqYsE8rMI5TRyni3xN6Q2yrZ4EEdcmBpW6od/HhjmABQ==
-Message-ID: <ad762bb5-fb1d-47db-94ca-b8115f077e6f@mailbox.org>
-Date: Fri, 31 Oct 2025 05:10:44 +0100
-MIME-Version: 1.0
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTog5Zue5aSNOiDlm57lpI06IFtQQVRDSF0gZmlybXdh?=
- =?UTF-8?Q?re=3A_scmi=3A_Drop_mmu=5Fset=5Fregion=5Fdcache=5Fbehaviour=28=29_?=
- =?UTF-8?Q?misuse?=
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Alice Guo <alice.guo@nxp.com>,
- Etienne Carriere <etienne.carriere@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
- <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Viorel Suman
- <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>
-References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
- <PAXPR04MB9644A04B5499EA2BDC3130A7E2FDA@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <e7063153-036d-4079-b9c0-252a5d1eb364@mailbox.org>
- <PAXPR04MB964488C508F283B14E8B9B11E2FBA@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <eca51372-3bcd-4873-ba47-c06781d18466@mailbox.org>
- <PAXPR04MB964436F50D41BF186019598FE2F8A@PAXPR04MB9644.eurprd04.prod.outlook.com>
-Content-Language: en-US
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=chHnbm3tXYStw0EGD32Vc02Qn7qScIQL90GAoHt30LE=;
+ b=nAbkPS5vAlLNRKVBEnna9evyS6K9wUPBQ/E9CHwDn8O5bntX199g8cWSwOKHqap1Y4UzWW
+ LTn205zhfCmwVgu5pOCnjMdetqotnFd8jrlbviJQgZfm0QZnD3vvi8C1TPxzsYgKJHvt24
+ Dn76Iu+PBMmi7uMPijDKC34xar+caR2iEqQnjgpOgub7JkVHN7nbSUeFnO8HjsSQtSl3sU
+ df+EILf6+TRbuc786gfDErlELTDavFRVrCEIWpiq4YdVuSuqN6oIrs2v9wTV2nrDA8Gwiq
+ CeK6aFaI9+jEkQc8+njpGVp2IOcihdbe4J2us9v5jcHrD8TGbGhGgT9E5r7q7w==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="P+3Z0r6/";
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <PAXPR04MB964436F50D41BF186019598FE2F8A@PAXPR04MB9644.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: s3766gds6zcwbi6apu5ib65hk1rzx71g
-X-MBO-RS-ID: 72a0379134ddde88b3c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761884203;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=chHnbm3tXYStw0EGD32Vc02Qn7qScIQL90GAoHt30LE=;
+ b=P+3Z0r6/ynYy32fUfgJmqi1Tuj6RcTnD+NArcPOx8lg/cgRZ7D9EIuXDRKptoeHvQAVZ9n
+ R1+MxrrCe/UsCNCxqdrEO50/ZiTAsMFqx83QVJgelGS+9LUBUPNpIyfFVDA/nWP3DAfu/5
+ FZX4uxgMKTKhsHW6IwDEXD6f7bs8oXaNqzINLf8054hdY1K4P8hUTHG/bCrrIwhUuvaSom
+ 4HX/rxfOwGpEQm417aDTv61D0s258ZjoBtxXG9RkzNgvtNaTEh8grq2NmTATC+F1I9oT2c
+ EoJT77A99NzxH3GuEoNEmORSr8F4f8cy0ldvn541aQF/kZFEMMcw/SEbe8iLOQ==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut@mailbox.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: stm32: Add missing build of ST DFU virt code on DH
+ STM32MP1 DHSOM
+Date: Fri, 31 Oct 2025 05:16:09 +0100
+Message-ID: <20251031041640.174689-1-marek.vasut@mailbox.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 31c2c1b6586f93f5471
+X-MBO-RS-META: bmg5mhcc4jc617pnscf66uznp74r5pzk
+X-Rspamd-Queue-Id: 4cySNX6M60z9sdZ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,48 +93,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/31/25 4:36 AM, Alice Guo (OSS) wrote:
+Commit 6d91f0a3a14d ("board: st: common: cleanup dfu support") split
+the vendor-specific DFU implementation into two files, but failed to
+update other non-ST boards. This did not lead to noticable breakage
+with plain simple dfu-util, but it makes the ST proprietary programmer
+CLI tool end in an infinite loop. Update the Makefile accordingly to
+allow even that kind of tooling to work.
 
-Hello Alice,
+Fixes: 6d91f0a3a14d ("board: st: common: cleanup dfu support")
+Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ board/dhelectronics/dh_stm32mp1/Makefile | 1 +
+ 1 file changed, 1 insertion(+)
 
->> Would it be possible to fix up the SRAM mapping in:
->>
->> arch/arm/mach-imx/imx8ulp/soc.c:static struct mm_region
->> imx8ulp_arm64_mem_map[] = {
->>
->> ?
->>
->> --
->> Best regards,
->> Marek Vasut
-> 
-> Hi Marek,
-> 
-> Configuring the memory region for SCMI communication as MT_DEVICE_NGNRNE resolves the issue. With this change, SCMI works correctly and the i.MX8ULP boots successfully.
-> 
->                  /* SRAM0 (align with 2M) */
->                  .virt = 0x22000000UL,
->                  .phys = 0x22000000UL,
-> -               .size = 0x200000UL,
-> +               .size = 0x1f000UL,
-> +               .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +                        PTE_BLOCK_OUTER_SHARE |
-> +                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +       }, {
-> +               .virt = 0x2201f000UL,
-> +               .phys = 0x2201f000UL,
-> +               .size = 0x1000UL,
-> +               .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +                        PTE_BLOCK_NON_SHARE |
-> +                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +       }, {
-> +               .virt = 0x22020000UL,
-> +               .phys = 0x22020000UL,
-> +               .size = 0x1e0000UL,
->                  .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->                           PTE_BLOCK_OUTER_SHARE |
->                           PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> 
-Excellent !
+diff --git a/board/dhelectronics/dh_stm32mp1/Makefile b/board/dhelectronics/dh_stm32mp1/Makefile
+index ffd221ac224..2f4a301d1a0 100644
+--- a/board/dhelectronics/dh_stm32mp1/Makefile
++++ b/board/dhelectronics/dh_stm32mp1/Makefile
+@@ -7,3 +7,4 @@ obj-$(CONFIG_PMIC_STPMIC1) += ../../st/common/stpmic1.o
+ obj-y += board.o
+ 
+ obj-$(CONFIG_SET_DFU_ALT_INFO) += ../../st/common/stm32mp_dfu.o
++obj-$(CONFIG_$(PHASE_)DFU_VIRT) += ../../st/common/stm32mp_dfu_virt.o
+-- 
+2.51.0
 
-Can you please submit a fix like this upstream ?
