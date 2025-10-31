@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ABE9CCFA00
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA95CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:57:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8775839F1;
-	Fri, 31 Oct 2025 16:54:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 938EB83A03;
+	Fri, 31 Oct 2025 16:57:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZMxlmL4y";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SLl0WGll";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="FRWzECFW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20332839FA; Fri, 31 Oct 2025 16:54:34 +0100 (CET)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 15D0383A05; Fri, 31 Oct 2025 16:57:18 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC661839E8
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:54:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F394A839FD
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:57:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-3c97813e788so1542311fac.0
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:54:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761926070; x=1762530870; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NTji4JdYpOdXNSnln0MQiOoFjTgigSJBkxtGQ3Qm8Zk=;
- b=ZMxlmL4yTCGhlAhUGP9YBb7RnRrbYl+n/+IR2vJiEpw8OP9jEdHtru2/oHT6pr/Fzr
- igVzNShF+F+XFXFvkCHPqCvv92AID21F+XCZcaU0CKyAQ3j5O4q1xJMvqrwZTueNErf4
- kSM2OOvkKsT4L5ytn5Owbl0IF8laaGUUbR7c0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761926070; x=1762530870;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NTji4JdYpOdXNSnln0MQiOoFjTgigSJBkxtGQ3Qm8Zk=;
- b=Osx3z76TW67D8vpdDqnOdloDmlUOIZGElXbhvvjIBj5F3CnbFzIUeCtp6lmNAHrqrc
- eDlmFhQJvYk44fZLjkVuAzdkEmI67F6NfVOB2/jnuZt0YcwAV16oOARka25zqiE8bhO7
- TpMKFAeIu0vPaVGxLyMDaJOYjE+JMbXng9ANEj7G3ki1ozZS31oTFfEtXiYXwMRfZLKa
- C2DwsyxlERB8S6rU7N1gHqk4eeBUa/h6mdZ6ZLMzxzaI7AkUr+yDvOxrrlVx9p0K8gMV
- mxE4vMcKv5Ca4YEuextSThJ13FgmGLpbfUYKyNaQY1E0qnoqkzUnfwpIdkwItBI5ghE7
- 3kpA==
-X-Gm-Message-State: AOJu0YwIbKU0givN6NtUhFO/JY6fzz9TnLGWvsECU+JoE8pmJB3bLUmL
- Dtp42IrPEU4BcofofNYuLmTSz1mUW6p103kNgL67WEV51ps7r8GMzDl2PGaFK5qt+Sn3NDerGsp
- j4RBcrXnzYg==
-X-Gm-Gg: ASbGncvw+9VVktlyf/WgZ61SND+Ex/zTi7eYpSzVFItfBns8xTwGcWsaW16/AKZXssF
- y7DTkS5TWQQV1SEFUXYT09XpovYkQRM7nzatBa0+Dhz6Xd0nFdaropkNT8O0TIhMbaLaJsmw4hK
- wwNyeQ+haBbNw4/M2N+olhxBIgQdgFbVQzBjZhm/8D6vW559WsL4rYPM8iDs9d+vS/sJbJLGi1P
- +VEaxZ+FQK8EO8UfJu5I6LZn+vnYiz+U26UzZaxxnA/nBudr8p+WvNgbZQOeSZNmS0iV1zu1HcB
- rVUokYGUYn+yT4AmthRb4QJuvdwJtmfWAInV2Tx1yGTD9R5Gf0uROIS6ueUGSn4EFVmwxvVqDVa
- DSDKKC35Fj4BKNFS78Z/Niz1Ws4FUbPxLe5+csJ/ZBJq7WcPaoyuNmOpyzjGc8TsZkJwNYw65j9
- ik7RBYCjXS9F3XTZ8A/8ALI2SkD/+pGcThC6hZeGuf4rXYAcxiPyBKuGhV/B5O
-X-Google-Smtp-Source: AGHT+IFnwW8I7jYPUFk5nWo2UcCkCzsPGB54h0tz3oo/dnZcut56vBoGYbmVnE3CtuECcssP3qxXBg==
-X-Received: by 2002:a05:6808:80b4:b0:44b:1f75:df07 with SMTP id
- 5614622812f47-44f95ef58a5mr1909609b6e.30.1761926070475; 
- Fri, 31 Oct 2025 08:54:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44f9d7e3b88sm448374b6e.5.2025.10.31.08.54.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Oct 2025 08:54:29 -0700 (PDT)
-Date: Fri, 31 Oct 2025 09:54:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sune Brian <briansune@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1] Cyclone V Board handsoff script
-Message-ID: <20251031155427.GC6688@bill-the-cat>
-References: <20251030003359.1023-1-briansune@gmail.com>
- <20251030180940.GY6688@bill-the-cat>
- <CAN7C2SC+uJ2OX9WmU7AmUjTZ7O4rWwQY0ueYYvWcUH1GF=fgZw@mail.gmail.com>
- <CAN7C2SDcEC+A5-rmCKMYD=vEYDFdOAfMp1G=T5SuQcXYOHDuJg@mail.gmail.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cylwq3NGXz9tMH;
+ Fri, 31 Oct 2025 16:57:15 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761926235;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=dSOfxjmPNpNK2oAOC3x+CT8Nfzc1ACiT4uspLbcjEcI=;
+ b=SLl0WGlliyXFgKUBi4SNoBpc2ti+O3UEhNChj9xYBGzQSJ5PeKCPzURa1bXL7ZFwZezi2X
+ rnshJwexm2RTUJ0S2X1kgL+/pVYZDXyboJ98+WDS2p98as0tyF8d1xMNxp0iH3ze+7A2X9
+ d5ggMpnHTINpvps3FDmD/FHdVHW3WC5bVv7zmz0vObdjLHPj2jLajEqelPTowYXy7aOF/h
+ lWYI5HTXa55G1sWFKHFuvMRGEFasXsbmUJCyRuqIuZS4m+XKLXhzw39bEQxIwI+WHGOsxQ
+ TPVcTReNCaiksQ5LfTDLjgbHSn/KK7O+YV3Hn/EvPAFDypiLz2aEMoN5hMSemQ==
+Message-ID: <9942f1d3-669e-48a6-923a-c2607eafdd02@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761926233;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=dSOfxjmPNpNK2oAOC3x+CT8Nfzc1ACiT4uspLbcjEcI=;
+ b=FRWzECFWobh0MuX5MEIZaOMnFxSwpKzE9GnAkFWcsguUnc698HzDL1OU4DGtwFBj+1HUS7
+ Bo20fT41no/kPMrm34rEOeQ8Kg0IEg2EnHsOUIERWzYHSPMDabZrNRidYkQzyxiyFoKUyW
+ Ygcon2B6/k5/EutwvTlwkkr+3/Q3oACHI13BLFkO/xV6u3s16jvuv4htg5DGFMhYGytjKz
+ Tgnhl2U9Ip+fM5hDLf2icGi9qkvDabyIz27jr95YBkveVJF5nJazug5HQV4VSz2QO5n1+V
+ sx1yzyEgzvcJBJz/Bd7YuK9gFzhJi/lEB2P8tOy46Z6ne3Akxo5TjGPVYmePgA==
+Date: Fri, 31 Oct 2025 16:57:10 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OSD0hHFAxwurFbix"
-Content-Disposition: inline
-In-Reply-To: <CAN7C2SDcEC+A5-rmCKMYD=vEYDFdOAfMp1G=T5SuQcXYOHDuJg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH v4 5/5] net: phy: aquantia: use generic firmware loader
+To: Beiyan Yun <root@infi.wang>, u-boot@lists.denx.de
+Cc: Yao Zi <ziyao@disroot.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Weijie Gao <weijie.gao@mediatek.com>
+References: <20251031152348.60571-1-root@infi.wang>
+ <20251031152348.60571-6-root@infi.wang>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251031152348.60571-6-root@infi.wang>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 8x7idwdpo75ao3j91ohfs7enc1aeyqkx
+X-MBO-RS-ID: da2df2a9f9c0c2b7659
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,53 +94,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---OSD0hHFAxwurFbix
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Oct 31, 2025 at 05:31:25AM +0800, Sune Brian wrote:
-> > No, this is a build script that is a must and also required on every
-> > clean build.
->=20
-> Let me elaborate a bit more.
-> According to the current U-Boot folder:
-> board/altera/cyclone5-socdk/qts
-> board/altera/arria5-socdk
-> board/altera/arria10-socdk
->=20
-> All these board folder files are not sure and high change to be stall.
-> As the deconfig boards are not only official Altera board.
-> As such [1] is a prerequisite to build U-Boot.
->=20
-> So unless there are handoff changes until the EOL of 2030.
-> These scripts are highly required on U-Boot, unless U-Boot
-> plan to remove Altera SoCFPGA from the ARM support list.
->=20
-> Brian
->=20
-> [1] https://www.rocketboards.org/foswiki/Documentation/BuildingBootloader=
-CycloneVAndArria10#Prerequisites
-
-That's interesting. But that also does mean that someone needs to work
-better with upstream about integration here as no, that's not where that
-kind of tooling should live. At bare minimum it should be in
-tools/something/ and have it's own requirements.txt file too for
-whatever python modules it requires.
-
---=20
-Tom
-
---OSD0hHFAxwurFbix
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQTbsAAKCRAr4qD1Cr/k
-CmvoAP9TOz9xWK/MKOF+SWnYMtuzrHhbl/KKJESKhVi/SK8DWwD/eoTBB+mDohE8
-UqIj3Oy+VZ1sFekqAhcDoOG1nFRNEw8=
-=icCo
------END PGP SIGNATURE-----
-
---OSD0hHFAxwurFbix--
+On 10/31/25 4:21 PM, Beiyan Yun wrote:
+> Aquantia PHYs are being used w/o SPI flash in some routers recently.
+> Current firmware loader only attempts to load from FS on top of MMC,
+> limiting the use on many devices.
+> 
+> Removed the old firmware loader, migrate to generic firmware loader to
+> allow a wider range and runtime override of firmware source. (e.g., USB).
+> 
+> Tested on Buffalo WXR18000BE10P with UBIFS.
+> 
+> Signed-off-by: Beiyan Yun <root@infi.wang>
+> ---
+> 
+> Changes in v4:
+> - Split firmware upload helpers change
+> - Reorder `aquantia_read_fw`
+> - Make `aquantia_read_fw` weak to allow overide
+> - Rename exit label in `aquantia_read_fw`
+> - Kconfig polish
+> 
+> Changes in v3:
+> - Select FW_LOADER with PHY_AQUANTIA_UPLOAD_FW
+> 
+> Changes in v2:
+> - Add support for script based loader
+> 
+>   drivers/net/phy/Kconfig    |  28 +++++----
+>   drivers/net/phy/aquantia.c | 122 ++++++++++++++++++++++---------------
+>   2 files changed, 91 insertions(+), 59 deletions(-)
+> 
+> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+> index 018be98705a..4a74a0d4e8c 100644
+> --- a/drivers/net/phy/Kconfig
+> +++ b/drivers/net/phy/Kconfig
+> @@ -1,4 +1,3 @@
+> -
+>   config BITBANGMII
+>   	bool "Bit-banged ethernet MII management channel support"
+>   
+> @@ -91,23 +90,30 @@ menuconfig PHY_AQUANTIA
+>   config PHY_AQUANTIA_UPLOAD_FW
+>   	bool "Aquantia firmware loading support"
+>   	depends on PHY_AQUANTIA
+> +	select FS_LOADER
+> +	select FW_LOADER
+Can you not use the plain FW_LOADER to load the firmware from either 
+storage, UBI or Block ? Is FS_LOADER even needed ?
