@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E91CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:30:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C514CCFA02
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:35:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D99C83A41;
-	Fri, 31 Oct 2025 18:30:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CB9F683A83;
+	Fri, 31 Oct 2025 18:35:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YcaH5Wl8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l/Vv8mVm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3426783A5E; Fri, 31 Oct 2025 18:30:49 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 1707D83A83; Fri, 31 Oct 2025 18:35:39 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 133AB839A8
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:30:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0689F83A61
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:35:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c53908e8b5so1490411a34.1
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:30:46 -0700 (PDT)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-65677b3aa4bso1234300eaf.0
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:35:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761931846; x=1762536646; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761932136; x=1762536936; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qhQk4lh77i4vVyBvdvfncqJK3rYWye/Tcx57Ifzg3S8=;
- b=YcaH5Wl8bwS1aBWTpsCuyFscbBdD40t47j7m8HFQmTUswgjQIv3kFCVNb3p+buKmir
- Rls7muJyYuXBbCyKwPniZRYBQham7s+foDddOA9QN0rjysylRSWnyUiTdvYxjDbyLMvL
- oJiemhIE++nQ8hW2w7pnDXjNjE+eI2MlI/rTFkXl0tWJR34YAIGg6/3Q8Q6DjfV5ZXmA
- OR0ylEnlt7l0rfoNSfQQY7NSoYFRVaOmA/NitBfe8aM/2nIVuh+vSRR2WTZ1cgefZRAE
- 6xluJn/kBci0zd8CUKS5k0eBSM+ivLqvjjXymAU6MTAXZM+sqoyaiaqPUnJzNfuqCoG9
- hfTw==
+ bh=O6SIVAJpw/92ej5ZId861QequOo9hlFQmd7MD7vHEy0=;
+ b=l/Vv8mVmCSrXOIczeqjdfn8wGLv+TdHfV0TNyMLFBl063JbZoVmBLNFBoKhEMmsOLe
+ lR0ZBPWRMVOpNZ0TRN9vNtq4K+U9tznrgpal8/00vuiSyqPxdqK9Po8JITtG9KgAijYu
+ DYWkGJPunpa5aBgccDzBUWh6kJuh+UAFBJAXNnovsZyupsIGq3wUxh1v/WZWL2mm37v2
+ kDQiu1M7uZElzcHlCD/zJzPgL5CuaTclSC3lA32Qy1FPAwg7imppH+PmtQ27d8haawTj
+ IwKDF7prZesw9cvPVFi4hZLBoBlyxTYwvpGw8h/p1Vsoon9iXuLY1FTxpOJ35Mf73PPR
+ FqbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761931846; x=1762536646;
+ d=1e100.net; s=20230601; t=1761932136; x=1762536936;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qhQk4lh77i4vVyBvdvfncqJK3rYWye/Tcx57Ifzg3S8=;
- b=pAbrQxLf69mAzWLWSJltNQZI2N8y/nuYx9udsrdmTaDpLu+S4pHWcDafnvLDObeVzc
- S2wzLKt2uguJEh+/1R0PNT0Ck9Kma6crvGznygi8/GuGOs0MJp85M+gUSIOI11mPtv3Z
- OaYs29WioHkrMu1WzNlyBNuFjfgF97CH/bKVls0r7cPDV+EHQSh3M2rpXfx4g38ZB8wB
- lSgOJaB6o9NxG0iUzBED2AMic4f93u8s12G1L5mUDfj1sO5mkxFq/o7j6ECpJ2GAqwSZ
- t6dC/pto7Bz9ktJxyNd2B4bKY2qUfbYcfOBBtSKGl5ICuE++qBptOUO5RBeCF3m/YrgY
- NxGg==
-X-Gm-Message-State: AOJu0Yyw76xGBGLDqFfitV5cqfTBquTABOIwqazRn4sxoNKg+59q6p5L
- i4C0wzfRyiSllOJoY8zr5EL8aqIBnIk42RJYaWa7tfDKD9bNWQz7bYe1R3CoSeRfgaZH3WuztHw
- bp28L69DPDFCygqBFNPcvnoUD1tYCR7I=
-X-Gm-Gg: ASbGncsr165zC/FBDpWN0viblWmj7o4sCSfwi4vRBs0WvDya5zPSVT+r5CUZKcpjxdH
- zRhRVmrZF1OrgIyDj46cLst3gCwPUsuL496vEBfDp7RZolI9/mS6PoipDR5+K8g3QKSCFXiFjzU
- 1mhUCCTOZ2B4Lq+gHM5YNjyHAHrJGfQp9k77Oq1UA3cXC0DvZojcoB1Ep8t3/WcvypCnGX7l2bg
- FoNXUegdMkdVD26UH8dSTJ8dIOq8JmcxHCrbttZ6Lf6oH2qsMUo0aBtl1R5TpkzUN8S5TL9
-X-Google-Smtp-Source: AGHT+IHuWdaSZMgqaGaW9M/v7TFviFSicJlptcqHC56ggH81TIXGsDkryGutxMuh2trn+oFtbIjAgLq89Yg4mDrsCpM=
-X-Received: by 2002:a05:6830:380e:b0:7c5:345f:60b0 with SMTP id
- 46e09a7af769-7c69677bea2mr2273906a34.18.1761931845647; Fri, 31 Oct 2025
- 10:30:45 -0700 (PDT)
+ bh=O6SIVAJpw/92ej5ZId861QequOo9hlFQmd7MD7vHEy0=;
+ b=UWgxbO9Al4ar1MiaO8zG1yxsNwfFpRH6cCgw62Pc3iOcVliguBfQJLCP2kn5mpUZrL
+ S86APWlurEa8ilV9TQ17wmaEGo2lZBcugz2nvJftuwSI+sPP06fM40YNzCfXpNG7i4uF
+ yEX+5tMmCX1/cBoAR5CWTexVkjZyOH425AH/5SOpqslj5+77aV3M3sW2KdnS2KBviwmB
+ wEPke7KbccLZ5OpGYG0OkDCG2RvDuxDPCf5fXUYJtX9UExZjP3xTF2DD1bbiilxs0rUm
+ 0uAy9wR5Oo6/TfvpMWiTs39CpZlhLEN5r7qCQD35uUcYQq/dEMn5MvRmmKYXapYs5u+8
+ Ci3A==
+X-Gm-Message-State: AOJu0YywDK0Rsy4WqgR9Qk3yFancsnIWjLryt5RZGHB4fhgyA0P2hjEH
+ 0Ip11JY4axp4BG89UOscLlB39r1Gx8r6lkg49rZUsbUNVCV3ilXTXzusf93rrnxdQjdJKgwfsgs
+ utUw/BOS9vvdOtPh3aWUaannpUElnIzVrmg==
+X-Gm-Gg: ASbGncvhDvyVFVqN6tAz8kNO2ALh9VVipJsB3ygUh2aQZsArlqW1hQOoR5Pra+b+XJo
+ LuTTAcgzSo2nyfbCtzU+bP6I3MC2y3ASTtW8faTCELoClUliRxeQyqy7AKjuRfciR4EocPrNGGQ
+ zbXzg/ADyr1f4ksD6ud2pJO/bsJUWf1NgKWD7oLmAvQXDWoJCHe7QYKq3RnSPgp97vd9QfY9S3k
+ hpLMBbwS5LFycygzai2temdJ807xdTchzUJM+g2XVJKOGUOBMVfOms292WzQQ==
+X-Google-Smtp-Source: AGHT+IFPUAT2P4cdsvuy7JjAHKkZCO9a8pfD7/xLzD3bR8yXSv2FubgjLJiV4fM36p0B1+8cUQkS0oT4UfAU9xR9mIg=
+X-Received: by 2002:a05:6808:18a1:b0:441:8f74:e8b with SMTP id
+ 5614622812f47-44f95fd8eebmr1767076b6e.53.1761932135600; Fri, 31 Oct 2025
+ 10:35:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251030003359.1023-1-briansune@gmail.com>
  <20251030180940.GY6688@bill-the-cat>
@@ -71,9 +71,9 @@ References: <20251030003359.1023-1-briansune@gmail.com>
  <20251031155427.GC6688@bill-the-cat>
 In-Reply-To: <20251031155427.GC6688@bill-the-cat>
 From: Sune Brian <briansune@gmail.com>
-Date: Sat, 1 Nov 2025 01:30:34 +0800
-X-Gm-Features: AWmQ_bneGjr3s2RebKKD-LFcjKOqWe2LHwzC4DvkV6edgNTb1lnddcSNSb3jt80
-Message-ID: <CAN7C2SCXWoi6XRKppKFUzPiUykYeQ0Mbm=S3dhALajP98S8rAA@mail.gmail.com>
+Date: Sat, 1 Nov 2025 01:35:24 +0800
+X-Gm-Features: AWmQ_bljcP_b0Qo9BwH84ccRn210kcsUl1L3ey1aclKr-nz6ndNZ3BuJVx08kqQ
+Message-ID: <CAN7C2SB6dPGn4Tf_Z7ELK1VPv_LDf_ufRHWRn-u-Oo=xN9rWig@mail.gmail.com>
 Subject: Re: [PATCH v1] Cyclone V Board handsoff script
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
@@ -94,12 +94,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> That's interesting. But that also does mean that someone needs to work
-> better with upstream about integration here as no, that's not where that
 > kind of tooling should live. At bare minimum it should be in
 > tools/something/ and have it's own requirements.txt file too for
 > whatever python modules it requires.
 
-Do you mean I should move it to tool folder?
+I just pull from official and this is the location where Altera puts.
+If you think it should belongs to a better place please do make
+suggestions how to do so.
 
 Brian
