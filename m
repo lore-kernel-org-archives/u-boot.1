@@ -4,76 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBF5CCF9E3
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 01:51:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB7FECCF9E3
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 01:52:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C1C083642;
-	Fri, 31 Oct 2025 02:51:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6A7BB83642;
+	Fri, 31 Oct 2025 02:52:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VtM2yDf5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E2QTUwX7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F00C783893; Fri, 31 Oct 2025 02:51:46 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 9B543838BB; Fri, 31 Oct 2025 02:52:13 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15E138331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 02:51:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABB568331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 02:52:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-592fb80c2faso2192576e87.2
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 18:51:45 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-57f0aa38aadso2536851e87.2
+ for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 18:52:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761875504; x=1762480304; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761875531; x=1762480331; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tQSbuFlvEIHu5BxE3Gvi7/j673ZV1lbmqOnC2efIxJM=;
- b=VtM2yDf5POz/4L04rPzlfPUmeYzKhYcDRyF+GOO4G51+Czo4RU8QCqf2SMO/1HL/Os
- 6HTBAuh+IE/LBzbXZqGtV7ig1PPbEsus/GA5pWdcQ/Nw2XqP1zYjUr8qFnFpjxNM6CAz
- vmAbt3mxZtwdrPfZ0EamnH9HAs11hgj76/erFnCXItt3btElBkisMZpqgoacVEv4b+Ee
- 3ZTDAY+pmW8LP/c4yCE+zqrEKoxcKetIGX83URVf2GJV6W6CcASEIsp7jI+xj/Frd8MM
- W2NkWNEmhVZx4Q5K+T8BxAjxCb3Dhzql5eoxnB4UzF+AE9PK1SyB+I6H4EcPfy1YJWPD
- 2Aig==
+ bh=fLLe60NhUNSDONqy5ljYXBEG45p0zltv+2O2aK4yQdo=;
+ b=E2QTUwX70aEGepQwfT+XPZeO85GuyfoXAfAcYKwOy2We+sy1+O56L7mcwH9KbWBKQ8
+ ny0rM9RDEVGkD4w9woxtE4LC5clXZ3egiAebLaJtOpteQvVuLSvwQgttHLETq5s1CGwH
+ gMPziHmwN8iukeWQJXGnjxnOC3nRBUlTXGWr/rs/UZHJp3W9aDuvHYZT50fx+/cq92lq
+ 7avlhHYsqYvsIeX/F/X89IPI6VGxbdWrATouTU/eVj0/H8Uo2Kx0ZERKAenMHY1blno9
+ /qG6jJn4/LjUH2bYDeQeax0jkB3yGu1p4cHwEf0aeUt4Ow/arB5snG8r+ZeEFXqBysFd
+ CkcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761875504; x=1762480304;
+ d=1e100.net; s=20230601; t=1761875531; x=1762480331;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tQSbuFlvEIHu5BxE3Gvi7/j673ZV1lbmqOnC2efIxJM=;
- b=meHOIPx4CmIfGct+Dt2OO7oPBlpMgmCZ3gQqJlzp2EiKTJhUCRNe2QfA7jlmPXj3e8
- CCM93OU/vSLoKH9HhLNnoPZdgmWaB84+RiJmiixr3uhcSbnZ6XeR/VzHgzqtvgUuSMxD
- vOJHSg0PSWHZVxXDp9wiKTdO6oZvr0PP+C5I0N+g3R/0VF/j0zxRIwDfzQzmX4qLemEA
- FaLfNP/VaJltfwaVPAScWJZHB12llbFbYEPZsMzaEoG3JF7mp1IWLadV9VtNjoqVb6Ho
- jttLQbkAq5Eful+KWK8WKugETfTuzZD1BvW2EIKi5Lb9lnjPg51PazKr5XNmXxbYYMqb
- Sk9A==
-X-Gm-Message-State: AOJu0Yx7pg56bHP1V+C1PJ0uMkIwQvVb3iI5OKfrsFjEKY05G3ozuGHm
- /udmJ1I0Bn9IBjHltfPQ9pjH4jAYFDt2Ke3yyijE0XGbJISpXYRaxk1XfFqipshjx9EdYQEv58q
- JlM0og9FcBhYJqh2cKMzK6fqFPux4DExeDf6J
-X-Gm-Gg: ASbGncvAUTjKpgyIzJpit0YV4uZvJ7bjNhvFurfWfXh1ZEEGjaMs345xA/EKmQZqpvX
- 90UKqk2YXYBYCNdRrhGEdXj7rqx2aibs9xhPIUeJ29zhdFQtl9Fb333HyOXgqLBJM/C0NDz4QCQ
- ejyyTP6CInQZLFLmb6PRZmKJUWLIxVlx9UC1KIsWCQrUgzr0P7U0Ftp5bOTL1D40CjxpVK+b6Wv
- 6IGV4gOMYcoNDNAOSkx7Ux7n3dnpqdJdig7ht0a04x0odd7JOvHLVyBIsrr1hLPggq/zl14og==
-X-Google-Smtp-Source: AGHT+IHJog1gWGWyhXIXdhzyVY1wNbvWjXqixh5iWiaBLlq/9E/fvVHhPyAvVUiCQ+M8f3ufdv1VPb/0XN9B+9077+o=
-X-Received: by 2002:a05:6512:1593:b0:593:d69:ea07 with SMTP id
- 2adb3069b0e04-5941d565de4mr660315e87.57.1761875504223; Thu, 30 Oct 2025
- 18:51:44 -0700 (PDT)
+ bh=fLLe60NhUNSDONqy5ljYXBEG45p0zltv+2O2aK4yQdo=;
+ b=aWHE1JQndehlqMiUiQgksL5a+ad8ONKjFvAZ8o1hC0a0ECkoD76UhdmXNrv4F0a0CS
+ v0BAUek1Izk7q/9K5+mGkWShvuaY2tfSk+xv67uWqpH0T1FoxD3Ml/sLHqH/ENcU+0SE
+ HjQBmlhNKsoAITpLlzgyaKdATnb7UJr2r2kHkSq62lCLv9ETDQeQZamCOVF2MyqxC4qU
+ 53WcGKELedThIC5pNhynFd6tNiQGDw3gEztNtdyJdQr0F53+c5iHNd1jlDT1uwkQ274B
+ 9WT2E4yqGBQdFtBkaaCpIJN4CsYP8JcOSPCggyD7p1vyRMF4Ykq1tJOS85kWWxRCo0os
+ ywdg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX42G8wcNmGf5GYsgu6rKZYVQJXDg0gU/6XwkN3G6nsNbcMPrLpZh3TVOfJQAkDjpjUcP+23zw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwWgbC3eyanNNwmeCev0VRbllv9FgevC5Z4/CJ4Pq3ZctIjNkoF
+ nZw81fVcWA5XNiwe4Dg7c5jU8tJYWRvkHxH+bGfPjRs2l/GzkNizZGc7JmEO1+7V7LZVifhZyCF
+ EeYLfBzh/dh8TJlHsCgZygs+g9j7h2DQ=
+X-Gm-Gg: ASbGncvEii4I5D0sZzL4gaXei0dtia//+DT5jp3hSzXp45LgwtIu8fDMrhjUHbvzFEM
+ dADxPXirJYDVqSChHUn/1OvdJC4mW2zbMP/Vw3lJa69pboA7jqJsRZJ/PIQ6iVGpDkPgPMtq0Ki
+ 1qYeEy2CHzdloK/EQQnoYd9G+mQWt4MLpWckM3qdFXl8n8gvFnBEhnyXN6gIQ1RsVsVeOAsabAQ
+ FQjCfAydOGt4LcdK38jgjKLFsvsY3WuspG8B6n0KX9JqvXBnMLE+1Vs8GPBeHJdzmoGq17dPBgZ
+ eYzbBMnj
+X-Google-Smtp-Source: AGHT+IFQT2dm9IQcLueMToc48QFsbhx919CZR98jUrNxbjmYDmJabsWmzrn4qLlLJbPiXRmHjwf8XZz9tYLbWz9rcJ8=
+X-Received: by 2002:a05:6512:6614:b0:592:fc21:bc17 with SMTP id
+ 2adb3069b0e04-5941d50dda3mr493999e87.3.1761875530661; Thu, 30 Oct 2025
+ 18:52:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251030141440.250629-1-festevam@gmail.com>
-In-Reply-To: <20251030141440.250629-1-festevam@gmail.com>
+References: <20251024054036.676912-1-ghidoliemanuele@gmail.com>
+In-Reply-To: <20251024054036.676912-1-ghidoliemanuele@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 30 Oct 2025 22:51:32 -0300
-X-Gm-Features: AWmQ_bmcZd7FVId9n6GpCzDXy6288of8nkXHySttDRJcqwFSSu36uj0JD4O5eNQ
-Message-ID: <CAOMZO5BDqv9e1Z99OeF3c5DVgkkvOpDPqgcwNe7ydx521hHoMQ@mail.gmail.com>
-Subject: Re: [PATCH] imx8mp_evk: Fix typo on maintainer's name
-To: peng.fan@nxp.com
-Cc: u-boot@lists.denx.de
+Date: Thu, 30 Oct 2025 22:51:59 -0300
+X-Gm-Features: AWmQ_bmiA4e-31KWa3861D3eBml9Et2hLYtEA8bxK38ZAyCctqIY9XP4UELiqzc
+Message-ID: <CAOMZO5CPpzEoNzpO9f3HJEjOD-9ZTF60fJPASmHH0P-gXf8dzQ@mail.gmail.com>
+Subject: Re: [PATCH v1] arm: imx8: select ARCH_MISC_INIT if FSL_CAAM is enabled
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Simon Glass <sjg@chromium.org>, Patrick Rudolph <patrick.rudolph@9elements.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,12 +100,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 30, 2025 at 11:14=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
- wrote:
+On Fri, Oct 24, 2025 at 2:48=E2=80=AFAM Emanuele Ghidoli
+<ghidoliemanuele@gmail.com> wrote:
 >
-> My last name was misspelled. Fix it.
+> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 >
-> Fixes: ae09edaeec3d2 ("imx8mp_evk: Add myself to MAINTAINERS")
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> Commit 2a7acc865b9d ("configs: colibri-imx8x: enable RNG support for KASL=
+R")
+> enables FSL_CAAM which requires initialization in arch_misc_init().
+> The ARCH_MISC_INIT configuration was added to the relevant defconfig.
+>
+> Commit d0ed9636902b ("global: Make ARCH_MISC_INIT a selected symbol")
+> changed ARCH_MISC_INIT to require explicit selection by the developer.
+> With this change the colibri-imx8x defconfig is no longer sufficient to
+> enable ARCH_MISC_INIT when FSL_CAAM is selected.
+>
+> Add the necessary selection to automatically enable ARCH_MISC_INIT when
+> FSL_CAAM is enabled on i.MX8 platforms.
+>
+> Fixes: d0ed9636902b ("global: Make ARCH_MISC_INIT a selected symbol")
+> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
 Applied, thanks.
