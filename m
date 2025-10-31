@@ -4,59 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50123CCFA03
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 21:07:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B048CCFA02
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 21:27:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CE5683B0B;
-	Fri, 31 Oct 2025 22:07:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id A5CB383B0D;
+	Fri, 31 Oct 2025 22:27:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="PSTKyg3L";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="nTZp5pXn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9765D83B0D; Fri, 31 Oct 2025 22:07:05 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id 74FCB83B0E; Fri, 31 Oct 2025 22:27:36 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 010D083AF6
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 22:07:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 294E083AC6
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 22:27:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03 (unknown [93.94.208.154])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 04AC23FAF6; 
- Fri, 31 Oct 2025 21:07:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1761944822;
- bh=ooTYgQbmlbwQp0WR/uI9H9hYZMUHMwaLSXJYJnJLnIY=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=PSTKyg3LyVEBIQGyUklxXMvGVpBu7s/WhCXgEDzA5gXeBNaYmPmlenYyaGkm8F9G/
- zsr3ZROaGCvxYy5ZU0snKm9xYujj4hT0zaLZNRuebeQr6j5h/uOYmWQ6s5yjbgMU0S
- gydbItdfZrhl5f1GnbetaadmVE4yFSZZOoR+oRZwQWcuikeUkcnNHuoa+4ZzkBlvKF
- VhKVU+3LdMD3kOMeBZ8Bk6qgK6HAQsxDvkHNiLkWOldJHRHrpl9oetqSks30xVCJ2u
- SCmlqPow8MfppJdlctMmDOLsyR4MbN0y1a1M9HLCpqmiX5odTGKo2M15CiJJcGjcJU
- Hzcqj36uBrWz6GA/TWBzg66/BhT8YP6GsG8N3A/jZd/NJReElViL46ChZZwR1kdZEC
- kMExEeMylWFHVeTHV06z2xp3KJ9MaTF9Idmw5StbPw5vW7UzYJLs81qDKoeC/GgA6I
- BnkzM2R52kvqDrwnyVcQugMjpb9FzNXb0Cg+QNuTw8FiRhLoe5/HCCfA0Zsw4NrhMF
- xH2sQju0O3NM9NtYCwxC/7KoDsuwHUDkQXIrCC3Bu4+1svqmhy5ukL/yvfxxper3U6
- XqlYFnRfTjPMMGc0TnmSCqYcETeM2FdKmjkHRcXjuynBt/nJ88g/7ymcLgzF3RSNNO
- DLKE+CVHMvzq6bRTIrCy1aEU=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] sound: all sound devices must depend on CONFIG_SOUND
-Date: Fri, 31 Oct 2025 22:07:00 +0100
-Message-ID: <20251031210700.643712-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
+ smtp.mailfrom=SRS0=f3a5=5J=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1761946053;
+ bh=5wJ5rKq5ZJJHp8B9gl3VbXWEnnswdbU5+79eq72SdGI=;
+ b=nTZp5pXn5O8HDuFz+4MMz51ytwm7hJZURa5JOJxu2v+QLkUvTxj9yOd3+KBfjlJP043ntpRqD
+ p70aQNdmPRSkqbTSzZ8gJAHArEKrOO29gFoXKqZmJJiGkpb3bMyKH8/Str+fvZrbzXFrN/NdKAc
+ df7p5aQDves+eBOt8z6dhga0jOUhz9YQrsbmVRpm6zY10qhwFMekcaCUjGdwRq0uzA1bq+1pbjK
+ EJ+AFMBQRhs/BaXManqpY9MR6eycuJBRDkp+cr1Av/yL0mVJqTKNHax5NoPw9xEGqDrp6e9yf74
+ Ef8NoNOu5E3Sp3QVyde+WZ6f7LKndK4e/VLjjjWbPlzg==
+X-Forward-Email-ID: 690529be0a03120dafdbb96c
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.4.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <3e1590fc-19c9-4e89-a280-cfc975bda8a8@kwiboo.se>
+Date: Fri, 31 Oct 2025 22:27:22 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [DEBUG] rk3399-nanopi-neo4: SPL SD init may report -5 due to SD
+ power-on timing
+To: Sune Brian <briansune@gmail.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <CAN7C2SArdbhag_56MwOMGoaEYSLiHbHHo3KFhUS5U03ntEJbGA@mail.gmail.com>
+ <20251031191728.GG6688@bill-the-cat>
+ <97a6d067-8c57-48cb-ab9b-c5094a798d99@kwiboo.se>
+ <CAN7C2SCquwnP5tUE0KLE15wGPqbNE10adEgshXLjRQnTK+JM4g@mail.gmail.com>
+ <af9255c6-4217-4784-bfcb-b6d90d79d0aa@kwiboo.se>
+ <CAN7C2SDpWi4-+adCT+KbW7mhBHvxe95YGin2qv+AHRAkc1=ASA@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAN7C2SDpWi4-+adCT+KbW7mhBHvxe95YGin2qv+AHRAkc1=ASA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,73 +81,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clean up the sound Kconfig options to let all sound devices depend on
-CONFIG_SOUND.
+Hi Brian,
 
-Before this patch it was possible to select CONFIG_SOUND_MAX98357A even
-with CONFIG_SOUND=n.
+On 10/31/2025 10:02 PM, Sune Brian wrote:
+>> Your original mail mentions "sometimes fails" and that you tested U-Boot
+>> v2026.01-rc1+, the most recent change for the nanpi4 family was related
+>> to sd-card regulator handling to improve reboot when card was using uhs
+>> speed in os and boot fails in spl due to this.
+> 
+> I cant 100% conclude all boards and situations so I used "sometimes".
+> 
+>> Please try my suggestion above, the datasheet for the LDO mention 50us
+>> start-time and card may need one ms to fully init. Defining this timing
+>> requirement in the device tree that U-Boot SPL uses should match the
+>> workaround/fix you mention in your original mail.
+> 
+> w/o modification do your board experience any sd card error or stall during
+> boot phase?
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- drivers/sound/Kconfig | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+My M4B could boot using sd-card without any issue last time I tested.
 
-diff --git a/drivers/sound/Kconfig b/drivers/sound/Kconfig
-index 81de9b30f39..afcc08c27bc 100644
---- a/drivers/sound/Kconfig
-+++ b/drivers/sound/Kconfig
-@@ -12,9 +12,10 @@ config SOUND
- 	  audio codecs are called from the sound-i2s code. This could be
- 	  converted to driver model.
- 
-+if SOUND
-+
- config I2S
- 	bool "Enable I2S support"
--	depends on SOUND
- 	help
- 	  I2S is a serial bus often used to transmit audio data from the
- 	  SoC to the audio codec. This option enables sound support using
-@@ -42,7 +43,6 @@ config I2S_SAMSUNG
- 
- config SOUND_DA7219
- 	bool "Dialog Semiconductor audio codec"
--	depends on SOUND
- 	help
- 	  The DA7219 is an ultra-low-power audio codec with Advanced Accessory
- 	  Detection (AAD). This driver only supports generation of ACPI tables.
-@@ -51,7 +51,7 @@ config SOUND_DA7219
- 
- config SOUND_I8254
- 	bool "Intel i8254 timer / beeper"
--	depends on SOUND && X86
-+	depends on X86
- 	help
- 	  This enables support for a beeper that uses the i8254 timer chip.
- 	  This can emit beeps at a fixed frequency. It is possible to control
-@@ -63,7 +63,6 @@ config SOUND_I8254
- 
- config SOUND_INTEL_HDA
- 	bool "Intel HDA audio codec"
--	depends on SOUND
- 	help
- 	  Most Intel chips have an HDA (High-definition audio) codec which can
- 	  be used by U-Boot to play simple beeps. This is also sometimes called
-@@ -72,7 +71,6 @@ config SOUND_INTEL_HDA
- 
- config SOUND_IVYBRIDGE
- 	bool "Intel Ivybridge sound support"
--	depends on SOUND
- 	select SOUND_INTEL_HDA
- 	help
- 	  Enable sound output on supported Intel Ivybridge-based boards. This
-@@ -148,4 +146,6 @@ config SOUND_WM8994
- 	  audio data and I2C for codec control. At present it only works
- 	  with the Samsung I2S driver.
- 
-+endif
-+
- endmenu
--- 
-2.51.0
+I do not understand the purpose of your original mail when you do not
+seem to be willing to test suggestions from board maintainers. I will
+most likely just ignore any more replies from you, sorry.
+
+Regards,
+Jonas
+
+> 
+> brian
 
