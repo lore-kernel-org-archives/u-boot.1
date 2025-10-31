@@ -4,60 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 110BCCCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 14:53:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96ED1CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:00:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38F22838E5;
-	Fri, 31 Oct 2025 15:53:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1A36D8391E;
+	Fri, 31 Oct 2025 16:00:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lyZh9XgL";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="XXqoXX4B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B451838EE; Fri, 31 Oct 2025 15:53:00 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 7839183927; Fri, 31 Oct 2025 16:00:30 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAA33836F0
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 15:52:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ADA8836F0
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:00:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C634F601DC;
- Fri, 31 Oct 2025 14:52:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8962EC4CEE7;
- Fri, 31 Oct 2025 14:52:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761922376;
- bh=oJcYp0dPg/roYTIpPyodZFSOk6bFntuskclBi7kXuTw=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=lyZh9XgLR2pWIdKD4RiNJBEQFZqYXuctPGPMID/5CUG6cWDtLMzvTsy68C3mUabLE
- IPowqt55l9R6dTVEW9z5BAxn5WBHWBCdCSvPASGum7C/kE29rn+kHQjuE50pB0MEln
- gX5gFPuNd1w4ktPQkR1FN2EzANbv8HGbPPyzh0bRILURfeIigzx8PlGVBGuhchsede
- IsItTPwP7H/Ek8bMTRJd1EjFyoJgEwhuWVNf69IeYFexSX5eA340kedaFtppxB2VvS
- IXypjQvBakn4qiZrgHsx4s6UODXf1P+3WvnG7+rpISH245MytpL0cxbNBGCpRIrF9j
- 3AtlGjMNpdfxQ==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Hrushikesh Salunke <h-salunke@ti.com>, trini@konsulko.com,
- lukma@denx.de, mkorpershoek@kernel.org, peng.fan@nxp.com,
- marek.vasut+renesas@mailbox.org, anshuld@ti.com, andre.przywara@arm.com,
- xypron.glpk@gmx.de, ye.li@nxp.com, sjg@chromium.org,
- dario.binacchi@amarulasolutions.com, a-dutta@ti.com,
- dinesh.maniyam@altera.com
-Cc: u-boot@lists.denx.de, h-salunke@ti.com, s-vadapalli@ti.com,
- danishanwar@ti.com
-Subject: Re: [PATCH v4] spl: Add support for Device Firmware Upgrade (DFU)
- over PCIe
-In-Reply-To: <20251023080922.3527052-1-h-salunke@ti.com>
-References: <20251023080922.3527052-1-h-salunke@ti.com>
-Date: Fri, 31 Oct 2025 15:52:51 +0100
-Message-ID: <87tszf5dj0.fsf@kernel.org>
+ spf=pass smtp.mailfrom=C.Stoidner@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TV8MbjaTq/2THtt+rSxvMUJXtE87D/Ip/9rTigQFBiduAV57SZhf0Ih974VjkmAeqV2WNB3vAvulR4phcnRy+twVvWyexyVPbgI67ImFXzN+CFPXPe1AI7m/mpSKUHT1Dwij3+dxdTFvfgatIbi3GztxuRToBipmWackphrvwwjgz3gouI5NKWQZSKjPlzHH5XnL1qC1EggLZjcbOFLuL+F1f9l0KyfTMY2mO3kq8nIV8F09ZPOEGxme2n6COi3RGRMtzApen8m6BGl9Xh0duK2CVV084JezamURVfwr7ac2ZiBEpGbFI0NgpQZ3m6BC+3NywD6uETwWQEh5tEjbnQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=O9BBl/HlKuhgcyiRocsRTJrIq+iu4GCFLe7M3oBgeSc=;
+ b=UhR65H28XQGX6/gvyS+7gZKIFk/9LW7Q6YyuzswcBICd3pFIaAScUUA3ZUzoXFP8K1bdAMKV9onhd4UFlQ1YH7kNLcKStZO6pCfoidS57miSydaT6WkfXJp/u/YwkeCAbRe4kuL/ac9V2D28DWTOSIyat0ynjUis3qI4MpbTNrG2kXaIObBgCcepz05tNiODyCV9Rbq/YheqENUvr5CRduWwO2remwNHkPi3eK+j7GEyq6oUNUmH9zi2K4Iupv9IGUE9HVcKOsrhD48TwHQtP1CphBJsVAnAoNThvNUi7AdPKdC6BlQfJrK48YY2aEF8FetmkvTHfFVYFko/+M5dSw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=O9BBl/HlKuhgcyiRocsRTJrIq+iu4GCFLe7M3oBgeSc=;
+ b=XXqoXX4BXgdCfM5A/Tm/N+fOZBcdR8Ayb/7gHocwmQFlUU6uH20fHG4kTpo9IcvxoMenz2ml3WzfL4AWc4Rnq7BMrlRC0FtweUqZH4RJ9Eh2Jrndixbl9zNz1djIRdsd2fHfHuyKLuoQZzNHB4x15pGN206eizX/8yW7rbxS0shqhCFlc7t6A9eOHPHxQaotQnP2za4Qa2o/Y9qBTZVsey1Urcxf3woM/s24LRX6cGQCHVWDG2ZPTgH9jR7zoTz0YozBa4mxGjj1e88KkjcnoVP6xbwd0E3yEZiKlgJbEjBqaecWjN6aVP7Ai1X3lql/fiMoCmva0OiKvJwFCqhf2g==
+Received: from AS4P195CA0018.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:5d6::15)
+ by DU0P195MB1724.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:3b8::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.13; Fri, 31 Oct
+ 2025 15:00:26 +0000
+Received: from AM3PEPF0000A798.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5d6:cafe::f1) by AS4P195CA0018.outlook.office365.com
+ (2603:10a6:20b:5d6::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Fri,
+ 31 Oct 2025 15:00:22 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Postix.phytec.de (91.26.50.189) by
+ AM3PEPF0000A798.mail.protection.outlook.com (10.167.16.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 15:00:25 +0000
+Received: from llp-stoidner.fritz.box (172.25.39.157) by Postix.phytec.de
+ (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Fri, 31 Oct
+ 2025 16:00:24 +0100
+From: Christoph Stoidner <c.stoidner@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: Christoph Stoidner <c.stoidner@phytec.de>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH] mmc: Fix missing 1 ms delay after mmc power up
+Date: Fri, 31 Oct 2025 15:59:51 +0100
+Message-ID: <20251031145951.535376-1-c.stoidner@phytec.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.39.157]
+X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
+ (172.25.0.11)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A798:EE_|DU0P195MB1724:EE_
+X-MS-Office365-Filtering-Correlation-Id: f47f9634-a45b-43ed-03ed-08de188e38d5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Tvh/RcuIiy1YyX3QIuhMJPEk5fZk930cp5zlaLT5A7qj/gh1YBIaXFjlZv8g?=
+ =?us-ascii?Q?E0A7c3OB684AbXwvCORVtQMVq/I8nmM76sSYQ01hWEHqwwEvs0LpXs6Hjs1d?=
+ =?us-ascii?Q?cyqwuGJKbxUvsKY8Q4Of1feVGh3AVE4hl3p+vuaxR6gpMtbEs1twPkh8Rgq5?=
+ =?us-ascii?Q?+BLMyGT9nig9eX6CYQsnuKF6DQr2GU0RI9aaS5mJ6cgpl+ky4T4AoZCJdArg?=
+ =?us-ascii?Q?NNbX0Myd8jW5IVlAjM9jJL/9g2eTW0GlRFowhxUblkT9f26kBgBTdNzsGO1X?=
+ =?us-ascii?Q?9nSsUaTyktbIP/pA2NPAQnCiIsonlvc4zeaLi1k7x0ZN5iC6UssrNzXJ4WHy?=
+ =?us-ascii?Q?avLiDwjbJtWuBeO8FC19PZynqtN4gfnX8zL6zqxybtbKcKaYLGMH/TUhiwy+?=
+ =?us-ascii?Q?91yfvI53OZ70C890Ec7ud9EbO71930dNJCmUj5iI26XBMBC3eRLk4Z+S2qo2?=
+ =?us-ascii?Q?5C1BtrXYV55HsVUpJ295mBBgxyZ2Ti4cJFOqYAljoM0PsATo6OKtqa1Wk1ay?=
+ =?us-ascii?Q?FPp4pcwzofbMN0ZkLVQYxsp9o8onS8NPlAfAYCe/eWV67DeYM4pjMpMcNmF+?=
+ =?us-ascii?Q?Y0kJE6VEdhveIjgDufMaNWJAKEvh02LOP7XswIMcHKBrCo2ZwEqMreUZEaAC?=
+ =?us-ascii?Q?ppXrSQ1SafwoAQRcbfSEWCHS+oeEbjTYdQhKkdgCDD/INffjQ1THrHf7gJqa?=
+ =?us-ascii?Q?E1766ZyuEsBDP3ahBaSuN5cZoL2nahmnet9EdOaotxtQZ/mXf8/XxX8/fPQb?=
+ =?us-ascii?Q?GlEdNIg6wf54oChO/xtMy9Ho5laPF2YUl0keuWCjrm6dBiw2wbynQcwq7Jtd?=
+ =?us-ascii?Q?Y3RkUfNKsUoSWctfl4PhLgRo9OVa88DN087FfhfYrqSGmRzoJ9CsxkWI09ha?=
+ =?us-ascii?Q?Ef4ws6xhjhSRrtyESxIYE18E91ZeGqQbYGGyj/kITqCHzEoFBN42C8I9jNXD?=
+ =?us-ascii?Q?dyONoODkKN0QFTHby9yB/a09h6qw285IyGGwEPVG6rn7vSbjrWC6h2liJcvK?=
+ =?us-ascii?Q?EYIiAd2tNO5SrrILoI2c0e987QpEUcCJFpYtHoNMebk6ZDfjyWyaW6RTDLAx?=
+ =?us-ascii?Q?+loOahCLaKG2jc9hnj99/C65CbQaUYqkQuK3sZr1ESOyM3dif0UMSKZeN2c7?=
+ =?us-ascii?Q?HyVvGBPrxLPaTg+f9vHc+ze2Qe9oFwu1Bf3R74kPB0l8KwFqEKRnk74P+JQT?=
+ =?us-ascii?Q?6ysaaDmpHL06y6oPkCQ7ig09djjAIuhkEg7YJKgEgF0MgMelfDh6cFVjCxXC?=
+ =?us-ascii?Q?lS1uM43d4w34QVt9r9hN6hxdeO+LZiE9K/eaEpBqhz87Z/JmWZrKf2SFIvzb?=
+ =?us-ascii?Q?z4zPTBOaEZtOAEVne3Dto89P+/RtLceI8IOa3d3ig5pAlduNHxkWXLgeSe8j?=
+ =?us-ascii?Q?aUT/YiDd+LcTkBPhR+xIBLkgT2tIrRbI1DImyqnPbuHwpbRkuLaQAx2MctOX?=
+ =?us-ascii?Q?w82uKh9YI4MmDHJjLH8ha5yGzUfwvAZSZOEO11YezzQrlJtGMCbkpK2++yHC?=
+ =?us-ascii?Q?RYxuC0ZkjPYZ1Qe2KG+dKlWbw6PtwH+tagig3pfn8We0Dqh4jgklK52wru5i?=
+ =?us-ascii?Q?LAol+kN2mzMxYWLgyBw=3D?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 15:00:25.0668 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f47f9634-a45b-43ed-03ed-08de188e38d5
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Postix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A798.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1724
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,347 +145,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Hrushikesh,
+mmc/sd specification requires a 1 ms delay (stable supply voltage)
+after vdd was enabled and before issuing first command.
 
-Thank you for the patch.
+For most sdcard/soc combinations, the missing delay seems to be not a
+problem because the processing time between enabling vdd and the first
+command is often hundreds of microseconds or more. However, in our
+specific case, some sdcards were not detected by u-boot:
+* soc: NXP i.MX 93
+* sdcards: SanDisk Ultra, 64GB micro SDXC 1,
+           MediaRange, 8GB, SDHC
+* measured time between vdd and first command: approx. 784us
+* symptom: both sdcards did not respond at all to first commands,
+           u-boot mmc subsystem ran into timeout and stops to
+           initialize the cards
 
-v4 is in good shape already. I have a couple of small remarks below.
-Please have a look.
+Signed-off-by: Christoph Stoidner <c.stoidner@phytec.de>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+---
+ drivers/mmc/mmc.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
-On Thu, Oct 23, 2025 at 13:39, Hrushikesh Salunke <h-salunke@ti.com> wrote:
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index ec61ed92e86..2093d169094 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -2878,11 +2878,18 @@ static int mmc_power_cycle(struct mmc *mmc)
+ 		return ret;
+ 
+ 	/*
+-	 * SD spec recommends at least 1ms of delay. Let's wait for 2ms
+-	 * to be on the safer side.
++	 * SD spec recommends at least 1ms of 'power on' delay.
++	 * Let's wait for 2ms to be on the safer side.
+ 	 */
+ 	udelay(2000);
+-	return mmc_power_on(mmc);
++	ret = mmc_power_on(mmc);
++
++	/*
++	 * SD spec recommends at least 1ms of 'stable supply voltage' delay.
++	 * Let's wait for 2ms to be on the safer side.
++	 */
++	udelay(2000);
++	return ret;
+ }
+ 
+ int mmc_get_op_cond(struct mmc *mmc, bool quiet)
+-- 
+2.43.0
 
-> Introduces support for Device Firmware Upgrade (DFU) over PCIe in
-> U-Boot. Traditionally, the DFU protocol is used over USB, where a
-> device enters DFU mode and allows a host to upload firmware or binary
-> images directly via the USB interface. This is a widely adopted and
-> convenient method for updating firmware.
->
-> In the context of Texas Instruments (TI) SoCs, PCIe can be used as a
-> boot interface in a manner that differs from the conventional
-> "PCIe Boot" process, which typically refers to booting an OS or
-> firmware image from an NVMe SSD or other PCIe-attached storage devices.
-> Instead, TI SoCs can be configured as a PCIe Endpoint, allowing a
-> connected PCIe Root Complex (host) to transfer images directly into the
-> device=E2=80=99s memory over the PCIe bus for boot purposes. This mechani=
-sm is
-> analogous to DFU over USB, but leverages the high-speed PCIe link and
-> does not depend on traditional storage devices.
->
-> By extending the DFU framework in U-Boot to support PCIe, it will be
-> possible to flash images over PCIe. While this implementation is
-> motivated by TI SoC use cases, the framework is generic and can be
-> adopted by everyone for platforms that support PCIe Endpoint mode.
-> Platforms with hardware support for PCIe-based memory loading can use
-> this to implement PCIe as a boot mode, as well as to enable flashing
-> and recovery scenarios similar to DFU over USB.
->
-> In summary, enable support for:
-> - DFU-style flashing of firmware/images over PCIe, analogous to existing
-> USB DFU workflows
-> - PCIe as a boot mode where a host can load images directly into device
-> memory using DFU over PCIe
->
-> Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
-> ---
-> This patch is based on commit
-> 4e4a9de31de  Merge branch 'next' of git://source.denx.de/u-boot-usb into =
-next
->
-> Changes since v3
-> - Addressed feedback from Mattijs Korpershoek
-> - Renamed all Kconfig symbols to include SPL_ prefix to avoid potential
->   naming clashes with future U-Boot proper DFU over PCIe implementation:
->   * PCI_DFU_SPL_LOAD_FIT_ADDRESS -> SPL_PCI_DFU_LOAD_FIT_ADDRESS
->   * PCI_DFU_BAR_SIZE -> SPL_PCI_DFU_BAR_SIZE
->   * PCI_DFU_MAGIC_WORD -> SPL_PCI_DFU_MAGIC_WORD
->   * PCI_DFU_VENDOR_ID -> SPL_PCI_DFU_VENDOR_ID
->   * PCI_DFU_DEVICE_ID -> SPL_PCI_DFU_DEVICE_ID
->   * PCI_DFU_BOOT_PHASE -> SPL_PCI_DFU_BOOT_PHASE
-> - Changed strncpy to strlcpy for safer string copying
-> - Fixed boot phase string length check to enforce 63 character max as
->   documented in Kconfig
-> - Improved error message clarity for boot phase string length validation
-> - Removed verbose debug print statements from normal operation
->
-> v3 : https://patchwork.ozlabs.org/project/uboot/patch/20250619071841.1265=
-364-1-h-salunke@ti.com/
->
->  common/spl/Kconfig   | 62 ++++++++++++++++++++++++++++++
->  common/spl/spl_dfu.c | 91 ++++++++++++++++++++++++++++++++++++++++++++
->  common/spl/spl_ram.c | 18 +++++++++
->  drivers/Makefile     |  1 +
->  4 files changed, 172 insertions(+)
->
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index f34b96efc02..86464c17799 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -1278,6 +1278,14 @@ config SPL_PCI
->  	  necessary driver support. This enables the drivers in drivers/pci
->  	  as part of an SPL build.
->=20=20
-> +config SPL_PCI_ENDPOINT
-> +	bool "Support for PCI endpoint drivers"
-> +	help
-> +	   Enable this configuration option to support configurable PCI
-> +	   endpoints at SPL. This should be enabled if the platform has
-> +	   a PCI controllers that can operate in endpoint mode (as a device
-> +	   connected to PCI host or bridge).
-> +
->  config SPL_PCH
->  	bool "Support PCH drivers"
->  	help
-> @@ -1338,6 +1346,60 @@ config SPL_RAM_DEVICE
->  	  be already in memory when SPL takes over, e.g. loaded by the boot
->  	  ROM.
->=20=20
-> +config SPL_PCI_DFU
-> +	bool "PCIe boot support"
-> +	depends on SPL_PCI_ENDPOINT
-> +	help
-> +	  This config enables support to download bootloaders over PCIe
-> +	  when device is acting as an PCI endpoint.
-> +
-> +if SPL_PCI_DFU
-> +
-> +config SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS
-> +	hex "Address to load FIT image when booting via DFU over PCIe"
-> +	help
-> +	  Specify the load address of the fit image that will be loaded
-> +	  by SPL via DFU over PCIe.
-> +
-> +config SPL_PCI_DFU_BAR_SIZE
-> +	hex "BAR size to advertise for PCIe DFU"
-> +	default 0x800000
-> +	help
-> +	  This config sets the size of BAR to be advertised to the Root
-> +	  Complex. The size should be large enough to fit the FIT image
-> +	  being downloaded via DFU over PCIe.
-> +
-> +config SPL_PCI_DFU_MAGIC_WORD
-> +	hex "Completion magic word for PCIe DFU boot"
-> +	default 0xdeadbeef
-> +	help
-> +	  Specify the magic word which will be written to a specific
-> +	  address to signal the completion of transfer of FIT image
-> +	  when using DFU over PCIe to download the image. Size of magic
-> +	  word should be 32-bit.
-> +
-> +config SPL_PCI_DFU_VENDOR_ID
-> +	hex "PCI Vendor ID for PCI endpoint"
-> +	help
-> +	  PCI Vendor ID for endpoint device for DFU over PCIe. This should
-> +	  be set to your assigned 16-bit PCI Vendor ID.
-> +
-> +config SPL_PCI_DFU_DEVICE_ID
-> +	hex "PCI Vendor ID for PCI endpoint"
-> +	help
-> +	  A 16-bit PCI Vendor ID for endpoint device for DFU over PCIe.
-> +
-> +config SPL_PCI_DFU_BOOT_PHASE
-> +	string "Current boot phase for PCI DFU boot"
-> +	help
-> +	  Specify the current boot phase when booting via DFU over PCIe.
-> +	  This value can be read by the root complex to determine the
-> +	  current boot phase. Value of this config is written to memory
-> +	  location (BAR_start + PCI_DFU_BAR_SIZE - 70). Max size of this
-> +	  config is 63 bytes.
-> +
-> +endif
-> +
->  config SPL_REMOTEPROC
->  	bool "Support REMOTEPROCS"
->  	default y if (CPU_V7R && ARCH_K3)
-> diff --git a/common/spl/spl_dfu.c b/common/spl/spl_dfu.c
-> index e9f381c392c..b09f82790c9 100644
-> --- a/common/spl/spl_dfu.c
-> +++ b/common/spl/spl_dfu.c
-> @@ -15,6 +15,17 @@
->  #include <usb.h>
->  #include <dfu.h>
->  #include <linux/printk.h>
-> +#include <pci_ep.h>
-> +#include <dm/uclass.h>
-> +#include <cpu_func.h>
-> +#include <linux/io.h>
-> +
-> +/*
-> + * Macros define size of magic word and boot phase string
-> + * in bytes.
-> + */
-> +#define MAGIC_WORD_SIZE 4
-> +#define BOOT_PHASE_STRING_SIZE 63
->=20=20
->  static int run_dfu(int usb_index, char *interface, char *devstring)
->  {
-> @@ -32,11 +43,91 @@ exit:
->  	return ret;
->  }
->=20=20
-> +#ifdef CONFIG_SPL_PCI_DFU
-> +static int dfu_over_pcie(void)
-> +{
-> +	u32 offset, magic_word;
-> +	volatile void *addr;
-> +	struct udevice *dev;
-> +	struct pci_bar bar;
-> +	struct pci_ep_header hdr;
-> +	uint fn =3D 0;
-> +	int ret;
-> +	char *bootphase;
-> +
-> +	uclass_get_device_by_seq(UCLASS_PCI_EP, 0, &dev);
-> +	if (!dev) {
-> +		pr_err("Failed to get pci ep device\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	hdr.deviceid =3D CONFIG_SPL_PCI_DFU_DEVICE_ID;
-> +	hdr.vendorid =3D CONFIG_SPL_PCI_DFU_VENDOR_ID;
-> +	hdr.baseclass_code =3D PCI_BASE_CLASS_MEMORY;
-> +	hdr.subclass_code =3D PCI_CLASS_MEMORY_RAM;
-> +
-> +	ret =3D pci_ep_write_header(dev, fn, &hdr);
-> +	if (ret) {
-> +		pr_err("Failed to write header: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	bar.barno =3D BAR_0;
-> +	bar.phys_addr =3D (dma_addr_t)CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-> +	bar.flags =3D PCI_BASE_ADDRESS_SPACE_MEMORY |
-> +			  PCI_BASE_ADDRESS_MEM_TYPE_32 |
-> +			  PCI_BASE_ADDRESS_MEM_PREFETCH;
-> +
-> +	bar.size =3D CONFIG_SPL_PCI_DFU_BAR_SIZE;
-> +
-> +	ret =3D pci_ep_set_bar(dev, fn, &bar);
-> +	if (ret) {
-> +		pr_err("Failed to set bar: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	ret =3D pci_ep_start(dev);
-> +	if (ret) {
-> +		pr_err("Failed to start ep: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	addr =3D (void *)CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-> +	offset =3D CONFIG_SPL_PCI_DFU_BAR_SIZE - MAGIC_WORD_SIZE;
-> +
-> +	if (sizeof(CONFIG_SPL_PCI_DFU_BOOT_PHASE) > BOOT_PHASE_STRING_SIZE) {
-> +		pr_err("Not copying boot phase. String too long\n");
-> +	} else {
-> +		bootphase =3D (char *)(addr + CONFIG_SPL_PCI_DFU_BAR_SIZE -
-> +				  (BOOT_PHASE_STRING_SIZE + MAGIC_WORD_SIZE + 1));
-> +		strlcpy(bootphase, CONFIG_SPL_PCI_DFU_BOOT_PHASE,
-> +			sizeof(CONFIG_SPL_PCI_DFU_BOOT_PHASE) + 1);
-> +	}
-> +
-> +	addr =3D addr + offset;
-> +	magic_word =3D CONFIG_SPL_PCI_DFU_MAGIC_WORD;
-> +	(*(int *)addr) =3D 0;
-> +	flush_dcache_all();
-> +	for (;;) {
-> +		if (*(int *)addr =3D=3D magic_word)
-> +			break;
-> +		invalidate_dcache_all();
-> +	}
-> +
-> +	return 0;
-> +}
-> +#endif
-> +
->  int spl_dfu_cmd(int usbctrl, char *dfu_alt_info, char *interface, char *=
-devstr)
->  {
->  	char *str_env;
->  	int ret;
->=20=20
-> +#ifdef CONFIG_SPL_PCI_DFU
-> +	if (spl_boot_device() =3D=3D BOOT_DEVICE_PCIE)
-> +		return dfu_over_pcie();
-> +#endif
-> +
->  	/* set default environment */
->  	env_set_default(NULL, 0);
->  	str_env =3D env_get(dfu_alt_info);
-> diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
-> index 71b7a8374bb..0c501cf02f2 100644
-> --- a/common/spl/spl_ram.c
-> +++ b/common/spl/spl_ram.c
-> @@ -27,6 +27,11 @@ static ulong spl_ram_load_read(struct spl_load_info *l=
-oad, ulong sector,
->  	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
->  		addr =3D IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
->  				      CONFIG_SPL_LOAD_FIT_ADDRESS);
-> +
-> +#ifdef	CONFIG_SPL_PCI_DFU
-> +		if (spl_boot_device() =3D=3D BOOT_DEVICE_PCIE)
-> +			addr =3D CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-> +#endif
-
-Can't we rewrite this using IF_ENABLED_INT() similarly to what has been
-done for CONFIG_SPL_LOAD_FIT_ADDRESS ?
-
-This should allow us to get rid of the #ifdef CONFIG_SPL_PCI_DFU part.
-
->  	}
->  	addr +=3D sector;
->  	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD))
-> @@ -47,6 +52,11 @@ static int spl_ram_load_image(struct spl_image_info *s=
-pl_image,
->  	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
->  		addr =3D IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
->  				      CONFIG_SPL_LOAD_FIT_ADDRESS);
-> +
-> +#ifdef CONFIG_SPL_PCI_DFU
-> +		if (spl_boot_device() =3D=3D BOOT_DEVICE_PCIE)
-> +			addr =3D CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-> +#endif
-
-Same here
-
->  	}
->=20=20
->  	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)) {
-> @@ -64,6 +74,11 @@ static int spl_ram_load_image(struct spl_image_info *s=
-pl_image,
->  		spl_dfu_cmd(0, "dfu_alt_info_ram", "ram", "0");
->  #endif
->=20=20
-> +#if CONFIG_IS_ENABLED(PCI_DFU)
-> +	if (bootdev->boot_device =3D=3D BOOT_DEVICE_PCIE)
-> +		spl_dfu_cmd(0, "dfu_alt_info_ram", "ram", "0");
-> +#endif
-> +
-
-Same here. Please rewrite using if (IS_ENABLED(CONFIG_SPL_PCI_DFU)).
-This way we are consistent with the rest of the file.
-
->  	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
->  	    image_get_magic(header) =3D=3D FDT_MAGIC) {
->  		struct spl_load_info load;
-> @@ -102,3 +117,6 @@ SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, spl_=
-ram_load_image);
->  #if CONFIG_IS_ENABLED(DFU)
->  SPL_LOAD_IMAGE_METHOD("DFU", 0, BOOT_DEVICE_DFU, spl_ram_load_image);
->  #endif
-> +#if CONFIG_IS_ENABLED(PCI_DFU)
-> +SPL_LOAD_IMAGE_METHOD("PCIE", 0, BOOT_DEVICE_PCIE, spl_ram_load_image);
-> +#endif
-> diff --git a/drivers/Makefile b/drivers/Makefile
-> index 7560008a842..77fc66eb8ba 100644
-> --- a/drivers/Makefile
-> +++ b/drivers/Makefile
-> @@ -26,6 +26,7 @@ obj-$(CONFIG_MULTIPLEXER) +=3D mux/
->  obj-$(CONFIG_$(PHASE_)ETH) +=3D net/
->  obj-$(CONFIG_$(PHASE_)PCH) +=3D pch/
->  obj-$(CONFIG_$(PHASE_)PCI) +=3D pci/
-> +obj-$(CONFIG_$(PHASE_)PCI_ENDPOINT) +=3D pci_endpoint/
->  obj-$(CONFIG_$(PHASE_)PHY) +=3D phy/
->  obj-$(CONFIG_$(PHASE_)PINCTRL) +=3D pinctrl/
->  obj-$(CONFIG_$(PHASE_)POWER) +=3D power/
-> --=20
-> 2.34.1
