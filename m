@@ -4,80 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA95CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:57:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A439BCCFA00
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:58:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 938EB83A03;
-	Fri, 31 Oct 2025 16:57:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3633B8399B;
+	Fri, 31 Oct 2025 16:58:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SLl0WGll";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="FRWzECFW";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="o10xWY4E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15D0383A05; Fri, 31 Oct 2025 16:57:18 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id D716F839B1; Fri, 31 Oct 2025 16:58:24 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F394A839FD
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:57:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDD3C83A07
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:58:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cylwq3NGXz9tMH;
- Fri, 31 Oct 2025 16:57:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761926235;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dSOfxjmPNpNK2oAOC3x+CT8Nfzc1ACiT4uspLbcjEcI=;
- b=SLl0WGlliyXFgKUBi4SNoBpc2ti+O3UEhNChj9xYBGzQSJ5PeKCPzURa1bXL7ZFwZezi2X
- rnshJwexm2RTUJ0S2X1kgL+/pVYZDXyboJ98+WDS2p98as0tyF8d1xMNxp0iH3ze+7A2X9
- d5ggMpnHTINpvps3FDmD/FHdVHW3WC5bVv7zmz0vObdjLHPj2jLajEqelPTowYXy7aOF/h
- lWYI5HTXa55G1sWFKHFuvMRGEFasXsbmUJCyRuqIuZS4m+XKLXhzw39bEQxIwI+WHGOsxQ
- TPVcTReNCaiksQ5LfTDLjgbHSn/KK7O+YV3Hn/EvPAFDypiLz2aEMoN5hMSemQ==
-Message-ID: <9942f1d3-669e-48a6-923a-c2607eafdd02@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761926233;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dSOfxjmPNpNK2oAOC3x+CT8Nfzc1ACiT4uspLbcjEcI=;
- b=FRWzECFWobh0MuX5MEIZaOMnFxSwpKzE9GnAkFWcsguUnc698HzDL1OU4DGtwFBj+1HUS7
- Bo20fT41no/kPMrm34rEOeQ8Kg0IEg2EnHsOUIERWzYHSPMDabZrNRidYkQzyxiyFoKUyW
- Ygcon2B6/k5/EutwvTlwkkr+3/Q3oACHI13BLFkO/xV6u3s16jvuv4htg5DGFMhYGytjKz
- Tgnhl2U9Ip+fM5hDLf2icGi9qkvDabyIz27jr95YBkveVJF5nJazug5HQV4VSz2QO5n1+V
- sx1yzyEgzvcJBJz/Bd7YuK9gFzhJi/lEB2P8tOy46Z6ne3Akxo5TjGPVYmePgA==
-Date: Fri, 31 Oct 2025 16:57:10 +0100
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id A2E9260241;
+ Fri, 31 Oct 2025 15:58:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E865C4CEE7;
+ Fri, 31 Oct 2025 15:58:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1761926301;
+ bh=HYw5ynD8QjuVP+FHmu/u24rwL+y8JkLatZpfWFhxtFY=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=o10xWY4EdUjJeV73Hw+D4XRMjQWAZAeQnRIbau1OvsuPnLgVwzeDkJtOURiaYQrd6
+ WzR9E1TUSWkB3EY96Y/Vzd9oAwsv07VdXcshR5Oq4IT7YfBw/L1qM4QDqCke8I3Mjz
+ SMav8jpZ/bnYwqOOOwOrljus2mbheFcNn6waYrCEvGmCabdKjxY4C9yoIEdwOVqREi
+ UWXmf2UBcQZQXqemGpExVy5nGOKgF/kDQ5bFl9RztEgb17wa7ACvvTbyqidIor9WoA
+ ni/HPSQclgRO5HrJoZvBjvv7ElGxhW/Uf4J0TRRH2v5DAiTYhreWLyRlaZIw45JdSK
+ CO8LJXHx+sYnA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>, Tom Rini
+ <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Julien Masson <jmasson@baylibre.com>, Guillaume La Roque
+ <glaroque@baylibre.com>, u-boot@lists.denx.de, Simon Glass
+ <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>,
+ Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Maxime Fournier <mfournier@baylibre.com>
+Subject: Re: [PATCH v2 3/5] boot: android: Add bootconfig support
+In-Reply-To: <20251017-bootconfig-v2-3-8c7c2f2e5474@baylibre.com>
+References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
+ <20251017-bootconfig-v2-3-8c7c2f2e5474@baylibre.com>
+Date: Fri, 31 Oct 2025 16:58:16 +0100
+Message-ID: <87cy635ahz.fsf@kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 5/5] net: phy: aquantia: use generic firmware loader
-To: Beiyan Yun <root@infi.wang>, u-boot@lists.denx.de
-Cc: Yao Zi <ziyao@disroot.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Weijie Gao <weijie.gao@mediatek.com>
-References: <20251031152348.60571-1-root@infi.wang>
- <20251031152348.60571-6-root@infi.wang>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251031152348.60571-6-root@infi.wang>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 8x7idwdpo75ao3j91ohfs7enc1aeyqkx
-X-MBO-RS-ID: da2df2a9f9c0c2b7659
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,50 +74,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/31/25 4:21 PM, Beiyan Yun wrote:
-> Aquantia PHYs are being used w/o SPI flash in some routers recently.
-> Current firmware loader only attempts to load from FS on top of MMC,
-> limiting the use on many devices.
-> 
-> Removed the old firmware loader, migrate to generic firmware loader to
-> allow a wider range and runtime override of firmware source. (e.g., USB).
-> 
-> Tested on Buffalo WXR18000BE10P with UBIFS.
-> 
-> Signed-off-by: Beiyan Yun <root@infi.wang>
+Hi Guillaume,
+
+Thank you for the patch.
+
+On Fri, Oct 17, 2025 at 15:19, "Guillaume La Roque (TI.com)" <glaroque@baylibre.com> wrote:
+
+> For android vendor boot image version 4 bootconfig is mandatory.[1]
+
+There seems to be a link "[1]" here but it's not part of the commit
+message.
+Can you add it please?
+
+>
+> In the android_image_get_ramdisk function, after copying both vendor and
+> boot ramdisks, we extract all androidboot.* entries from the kernel
+> command line. These entries are added to the bootconfig section.
+> We then update the sizes of the ramdisk and bootconfig.
+> Finally, all androidboot.* entries are removed from the kernel command
+> line.
+>
+> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 > ---
-> 
-> Changes in v4:
-> - Split firmware upload helpers change
-> - Reorder `aquantia_read_fw`
-> - Make `aquantia_read_fw` weak to allow overide
-> - Rename exit label in `aquantia_read_fw`
-> - Kconfig polish
-> 
-> Changes in v3:
-> - Select FW_LOADER with PHY_AQUANTIA_UPLOAD_FW
-> 
-> Changes in v2:
-> - Add support for script based loader
-> 
->   drivers/net/phy/Kconfig    |  28 +++++----
->   drivers/net/phy/aquantia.c | 122 ++++++++++++++++++++++---------------
->   2 files changed, 91 insertions(+), 59 deletions(-)
-> 
-> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-> index 018be98705a..4a74a0d4e8c 100644
-> --- a/drivers/net/phy/Kconfig
-> +++ b/drivers/net/phy/Kconfig
-> @@ -1,4 +1,3 @@
-> -
->   config BITBANGMII
->   	bool "Bit-banged ethernet MII management channel support"
->   
-> @@ -91,23 +90,30 @@ menuconfig PHY_AQUANTIA
->   config PHY_AQUANTIA_UPLOAD_FW
->   	bool "Aquantia firmware loading support"
->   	depends on PHY_AQUANTIA
-> +	select FS_LOADER
-> +	select FW_LOADER
-Can you not use the plain FW_LOADER to load the firmware from either 
-storage, UBI or Block ? Is FS_LOADER even needed ?
+>  boot/image-android.c | 101 +++++++++++++++++++++++++++++++++++++++++++++++----
+>  1 file changed, 93 insertions(+), 8 deletions(-)
+>
+> diff --git a/boot/image-android.c b/boot/image-android.c
+> index 613f2aa4b9e..cf038a4a62f 100644
+> --- a/boot/image-android.c
+> +++ b/boot/image-android.c
+> @@ -534,17 +534,102 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+>  			ramdisk_ptr = img_data.ramdisk_addr;
+>  		}
+>  		*rd_data = ramdisk_ptr;
+> -		memcpy((void *)(ramdisk_ptr), (void *)img_data.vendor_ramdisk_ptr,
+> +
+> +		/* Extract androidboot.* parameters from bootargs */
+> +		const char *bootargs = env_get("bootargs");
+> +		char *androidboot_params = NULL;
+> +		char *new_bootargs = NULL;
+> +		size_t androidboot_params_len = 0;
+> +
+> +		if (bootargs && img_data.bootconfig_size) {
+> +			size_t len = strlen(bootargs);
+> +
+> +			androidboot_params = malloc(len + 1);
+> +			new_bootargs = malloc(len + 1);
+> +			if (!androidboot_params || !new_bootargs) {
+> +				free(androidboot_params);
+> +				free(new_bootargs);
+> +				printf("Error: malloc failed\n");
+> +				return -ENOMEM;
+> +			}
+> +
+> +			/* Extract androidboot.* and build new bootargs in one pass */
+> +			const char *src = bootargs;
+> +			char *bc_dst = androidboot_params;
+> +			char *args_dst = new_bootargs;
+> +
+> +			while (*src) {
+> +				/* Skip leading spaces */
+> +				while (*src == ' ')
+> +					src++;
+> +				if (!*src)
+> +					break;
+> +
+> +				/* Check if this param starts with androidboot. */
+> +				if (strncmp(src, "androidboot.", 12) == 0) {
+> +					/* Copy to bootconfig (add newline if not first) */
+> +					if (bc_dst != androidboot_params)
+> +						*bc_dst++ = '\n';
+> +					while (*src && *src != ' ')
+> +						*bc_dst++ = *src++;
+> +				} else {
+> +					/* Copy to new bootargs (add space if not first) */
+> +					if (args_dst != new_bootargs)
+> +						*args_dst++ = ' ';
+> +					while (*src && *src != ' ')
+> +						*args_dst++ = *src++;
+> +				}
+> +			}
+> +
+> +			*bc_dst++ = '\n';  /* Final newline for bootconfig */
+> +			*bc_dst = '\0';
+> +			*args_dst = '\0';
+> +			androidboot_params_len = bc_dst - androidboot_params;
+> +
+> +			/* Update bootargs if we extracted any androidboot params */
+> +			if (androidboot_params_len > 1)
+> +				env_set("bootargs", new_bootargs);
+> +		}
+> +
+> +		/* Map addresses for memcpy operations */
+> +		void *ramdisk_dest = map_sysmem(ramdisk_ptr, img_data.ramdisk_size);
+> +		void *vendor_ramdisk_src = map_sysmem(img_data.vendor_ramdisk_ptr,
+> +						      img_data.vendor_ramdisk_size);
+> +		void *boot_ramdisk_src = map_sysmem(img_data.ramdisk_ptr,
+> +						    img_data.boot_ramdisk_size);
+> +
+> +		memcpy(ramdisk_dest, vendor_ramdisk_src,
+>  		       img_data.vendor_ramdisk_size);
+> -		ramdisk_ptr += img_data.vendor_ramdisk_size;
+> -		memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
+> -		       img_data.boot_ramdisk_size);
+> -		ramdisk_ptr += img_data.boot_ramdisk_size;
+> +		memcpy((char *)ramdisk_dest + img_data.vendor_ramdisk_size,
+> +		       boot_ramdisk_src, img_data.boot_ramdisk_size);
+> +
+>  		if (img_data.bootconfig_size) {
+> -			memcpy((void *)
+> -			       (ramdisk_ptr), (void *)img_data.bootconfig_addr,
+> -			       img_data.bootconfig_size);
+> +			void *bootconfig_src = map_sysmem(img_data.bootconfig_addr,
+> +							  img_data.bootconfig_size);
+> +			memcpy((char *)ramdisk_dest + img_data.vendor_ramdisk_size +
+> +			       img_data.boot_ramdisk_size,
+> +			       bootconfig_src, img_data.bootconfig_size);
+> +			unmap_sysmem(bootconfig_src);
+> +
+> +			/* Add androidboot.* parameters to bootconfig */
+> +			if (androidboot_params && androidboot_params_len > 1) {
+> +				ulong bootconfig_ptr = (ulong)ramdisk_dest +
+> +						       img_data.vendor_ramdisk_size +
+> +						       img_data.boot_ramdisk_size;
+> +				img_data.ramdisk_size +=
+> +					add_bootconfig_parameters(androidboot_params,
+> +								  androidboot_params_len,
+> +								  bootconfig_ptr,
+> +								  img_data.bootconfig_size);
+> +			}
+>  		}
+> +
+> +		free(androidboot_params);
+> +		free(new_bootargs);
+> +
+> +		unmap_sysmem(boot_ramdisk_src);
+> +		unmap_sysmem(vendor_ramdisk_src);
+> +		unmap_sysmem(ramdisk_dest);
+
+We are here in the "if (img_data.header_version > 2) {" block.
+What about boot image v3? Why are we forcing bootconfig upon them?
+
+Also, please move this to a seperate function. It makes
+android_image_get_ramdisk() quite long and difficult to read otherwise.
+
+Finally, what happens if a kernel does not have bootconfig enabled ?
+I imagine that everything will crash due to this change. Even if
+bootconfig is mandatory for boot image v4, I believe we should make this
+behaviour optional to avoid breaking existing kernels.
+
+>  	} else {
+>  		/* Ramdisk can be used in-place, use current ptr */
+>  		if (img_data.ramdisk_addr == 0 ||
+>
+> -- 
+> 2.34.1
