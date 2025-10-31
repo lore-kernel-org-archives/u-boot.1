@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC738CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:24:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A2ECCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 15:24:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1AD583980;
-	Fri, 31 Oct 2025 16:24:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F5EB839B7;
+	Fri, 31 Oct 2025 16:24:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="cBClQdgH";
+	dkim=pass (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="oxy2QeHL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC59C839C6; Fri, 31 Oct 2025 16:24:21 +0100 (CET)
+ id 9BBB783677; Fri, 31 Oct 2025 16:24:26 +0100 (CET)
 Received: from outbound.pv.icloud.com
- (p-west1-cluster5-host11-snip4-8.eps.apple.com [57.103.66.219])
+ (p-west1-cluster5-host10-snip4-7.eps.apple.com [57.103.66.208])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F8F283677
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:24:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40BA9839B7
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 16:24:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
 Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
  by p00-icloudmta-asmtp-us-west-1a-60-percent-2 (Postfix) with ESMTPS id
- 526CE1800211; Fri, 31 Oct 2025 15:24:16 +0000 (UTC)
+ 3E8BD1800222; Fri, 31 Oct 2025 15:24:20 +0000 (UTC)
 Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
- bh=WTVSYmsvRj7P4xhKoliZoyRDS7cGmvd5/I8KB1k+0+Q=;
+ bh=o5AJ6Zn0NCmP0UHTb3C0rOdTdE/85JGLuTyFsdQvx7w=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme;
- b=cBClQdgHgD9Ck47RkPPycpmyL3e9zGq9zuoR64rigilDArkAzkmmzpIcRmZbkdgIwN9bnPF6l73aHjOIVNakxho/KV/H9ZkGbtGjWfxtV19V+JcxuOFf7VnHZ/DZTtlyTCOsxE7ZNML5t0kdNJM+tlNZdT5LRL6rHr7Y76kUKk5jv7PjmwwBIw0QQNidgfOFxT9qaeeJyGNBqgVHBg29Tl8jl/m/tEYwoeSIyZgRw8908iqCjaX4h4OED+o2VAjQWmSM2SqwzZiMlKgT6tmGmdRK2O/43PgqVt0cWNH3t2gl8G/9G9/L+ian+j3UzQhv+Vl//6m8ZmZGTVjX68xLKw==
+ b=oxy2QeHLbFaxYBg/qWoONevJQnfpftunu4Bn1GL1HKnEaigUgd4gk3RVqMxLF3IN6UB/GU5326i0kfvaUiL9K3IZ8GQjZwNwsiXmeZaLqlMQDeThb6QorMCLnsRhxxs3GLf9RXURveG8slwp3NAV8saK8RfI9l1FP822vyQnOpLQSPYV+bztTaKzU8bVmtxVHGp629VxKX3AADeOBa8n25gvokI1hT5VmQ/1caMCE/snJy3QYY4hjSygmE9A9uDeVxa15uhTcIm8JkD65LqapRvABlmw/cxFS7Ny6i5PhORs9SSFGkaWX1QNIFnXLymwIaxSZ43ANyAeUEBe3pBZSg==
 mail-alias-created-date: 1549370554000
 Received: from debian.. (unknown [17.56.9.36])
  by p00-icloudmta-asmtp-us-west-1a-60-percent-2 (Postfix) with ESMTPSA id
- CA32A18003E2; Fri, 31 Oct 2025 15:24:13 +0000 (UTC)
+ 6E1B918003EF; Fri, 31 Oct 2025 15:24:17 +0000 (UTC)
 From: Beiyan Yun <root@infi.wang>
 To: u-boot@lists.denx.de
 Cc: Yao Zi <ziyao@disroot.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -44,30 +44,29 @@ Cc: Yao Zi <ziyao@disroot.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
  Siddharth Vadapalli <s-vadapalli@ti.com>
-Subject: [PATCH v4 3/5] net: phy: aquantia: replace the "mdi-reversal" node
- with "marvell, mdi-cfg-order"
-Date: Fri, 31 Oct 2025 23:21:05 +0800
-Message-ID: <20251031152348.60571-4-root@infi.wang>
+Subject: [PATCH v4 4/5] net: phy: aquantia: refactor firmware upload helpers
+Date: Fri, 31 Oct 2025 23:21:06 +0800
+Message-ID: <20251031152348.60571-5-root@infi.wang>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251031152348.60571-1-root@infi.wang>
 References: <20251031152348.60571-1-root@infi.wang>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: vI2ePhX9Zpm8_Z3dTtLbhnTpkUeUSX23
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDEzOCBTYWx0ZWRfX9tt1SAWdX8Yf
- 4a6O7T5/ZlmmL2lBSdCpcXJgPOTxHa1wCMovHGj8nBLmHYB7mirTEhG3ZREyyp6tZe3CJblkN2z
- H6hUg1hHxltCCxu6zA4DW8D45rpp1EeEUZi002sBBt+mJ3kC6pUdi2n0mkiGAzs/CDgrX8JwZPC
- u3s62cbCVveDbjqX+F3qdnDvZiC3og3V3LdVdihiFD63PO/6z12c8S0Ls1+C5JPx43SzK9+ok+f
- saVMwt2Fk0/2+NPVByOVyTEZIVZzJSLDFnItQ0kl/6icOn2SzRN/v4bgiKJLeRi06qIzu/37s=
-X-Proofpoint-GUID: vI2ePhX9Zpm8_Z3dTtLbhnTpkUeUSX23
+X-Proofpoint-GUID: tYcJ0k8NbeY0QEtcX_QajT6Iar4n54fD
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDEzOCBTYWx0ZWRfXw1J0+KKTi4Zo
+ qgPoZeFFn1JtbclyyqOm0KKePASEzGODqKQPVMPPHX6lHGRAK2ND877QlPYskBvk4LYcEgtoi0E
+ CgxcmDuBX6cPjVK3ww0yujebwNud4ZTvb8bS8+lW6RRzPFBodUkkF+tWOPNw8FKl7+YDYKKaboY
+ d4gAWoVd6OhZAlQeDgX7DLf/hRSuP309/LNa7VwbL6dZgodRP0ERPl5RRSsllJuayhSUbpR7Z3e
+ sE4hRk1N7LV7u+o1IMNL8zvTSVP4E5MSIsrU8vot3JP953MENNTDF1nX/MY7o0HBJ1mw/UcWk=
+X-Proofpoint-ORIG-GUID: tYcJ0k8NbeY0QEtcX_QajT6Iar4n54fD
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-10-31_04,2025-10-29_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- mlxlogscore=725 clxscore=1030 spamscore=0 malwarescore=0 bulkscore=0
- adultscore=0 suspectscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ spamscore=0 adultscore=0 mlxlogscore=910 phishscore=0 clxscore=1030
+ suspectscore=0 mlxscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx
  scancount=1 engine=8.22.0-2506270000 definitions=main-2510310138
-X-JNJ: AAAAAAABqcEIUcwXst8dNEPoiYkSfmHO3amG/Qts+6rDZ8SII0Sm/Y7M2MqAyzsiUC6B4odXKW7DkWPk+9+Iqvmrrv8iXwvaCCwFYo9rj9DiPgLRbX3cUb4q8Cf3rrBv+r8epmOHRSE/ci5nQiBNsBjU7DpQopOaBmAOYIwFAxOvkQBSZ11QazdmNkkRuiwE0S3lRCtdKTqEG8PD+V7OeNCSCR2SVlWPvlKgoeFjvRD3nbl9EIVuHbL4O5GZUI3ruzFV+uFasZK3nHKRCYBbssQ8y1WVZDTEEDUxs7mPou33jgkeUDjgwKGMJJfn+70lZpFg08FJgVuEH2XDSpWf8UuMuu0Eln1FRy2nWOf/4EZP/HWSN4OuzikutLUcXE0c7Kirl7JsNRZ/3+WJMkw0O99QL8zPO1b1oOdDopGA8gnda/zR7vm8wjRb+yeBvwzeDXQ6lqEHnWlhkKJqbWjJqRtE5NSh/Et3qyb6WaC/ZjTLdVjPBwfBUYw2koq61YR5gSvwi+8RRDxzs4omLYKyo4rw5ZQCpekUSONChBAHCmiyXhcHzMP8KiFLZvWyzmfBbyY70fiubGV9pzZQsd4RKB8Bh7rlTwuTkMB67eV1+qLZsOaYKhJ8FMzt0c18KT3oto91Zr3F/MOEp9mYcut8mnruWBAesQAo26teXI3RuHO3wgNLHOuDbqIWJ4svb4dBgh8/MX+JkL5G43i4eBygn1JiDHi42lSbV80+nqrBa3xAcQhZfOytH6TKHI8MohwBGdAkPZZq4xlyw3zd47J0P0a7MR39rbPQkYqR6tmj7tCH5Q==
+X-JNJ: AAAAAAABrQVwTslQd4jY81TmrvMuTg69ASc9pXXxKmKTkbbx5EmaLlMT+Yzx/AQI3ZQpL3yEwz+K9FsUYlDw9S3hCLJJHhNL0J4Ql/dNz7AdEXeEZh9bZu2rAnDRUQ4M5NGQ8bgqTWn5gFdazsNnzSlTvyi8gBJk1Ej3oGv1ONfXZ0PcyORx0Pi7X9RY7FKSv0pUiAiV2vQsvde82hvA7vvmgM9qPwC5XY03RABqgPUDuT0JdIryfUdRgpU9CM14BRG28BjW0gZB/u5+nQFxsBp/HvS0gq22iQVWcQ6HsDMGCTwESey+gu7qNRGyjHcKBLnmWvdiGSEyB+opjwZusE/ANsXfs1ZQBgRq1X4vZaKJmIjw3cpgCFWPTfNESWIgfjE2dZoDEiq088iRsmXwD/p7781y0FUDgm+nl3xxjYBnG/A4qYTAfBFzgiJoNiPmHJqy9+8HOLdoAiy6xYzGMe/FjvEIETMtR0E4jZugKD5jW0U7ckvu9NgIgC4AuC9rDeylqbALUepKLiT4oAJtdsrVYZYfRuzTsahP3si6jOR/09Xjd32KY694sIK97DJ4PY9VluK9U1+ChTmr5M/WM6MJOgLd0bqPAUcIsQGclJLosdXzSPBXfxpPHyn+/tUfjnJ94IQdCu5NsHsCQ8AfosxErcwT7X1Ugyci82AXPhqWHapMxA6pvQgiadwgbECwzUGBcsy+Y1Uh1Ce78EWX+TQICKLc/8K4mffX+VrWTMI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,83 +83,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As part of the effort of making U-Boot work with the same device tree as
-Linux, align with upstream node name.
+Split `aquantia_upload_firmware` into `aquantia_upload_firmware`
+and `aquantia_do_upload_firmware` to prepare for fsloader change.
 
 Signed-off-by: Beiyan Yun <root@infi.wang>
 
+Patch-cc:marek
 ---
 
-(no changes since v2)
-
-Changes in v2:
+Changes in v4:
 - New
 
- arch/arm/dts/fsl-sch-30841.dtsi | 8 ++++----
- arch/arm/dts/fsl-sch-30842.dtsi | 2 +-
- drivers/net/phy/aquantia.c      | 4 ++--
- 3 files changed, 7 insertions(+), 7 deletions(-)
+ drivers/net/phy/aquantia.c | 34 ++++++++++++++++++++++------------
+ 1 file changed, 22 insertions(+), 12 deletions(-)
 
-diff --git a/arch/arm/dts/fsl-sch-30841.dtsi b/arch/arm/dts/fsl-sch-30841.dtsi
-index 28b1bec18a5..a92d9811fd3 100644
---- a/arch/arm/dts/fsl-sch-30841.dtsi
-+++ b/arch/arm/dts/fsl-sch-30841.dtsi
-@@ -15,24 +15,24 @@
-  */
- phy@00 {
- 	reg = <0x00>;
--	mdi-reversal = <1>;
-+	marvell,mdi-cfg-order = <1>;
- 	smb-addr = <0x25>;
- };
- 
- phy@01 {
- 	reg = <0x01>;
--	mdi-reversal = <1>;
-+	marvell,mdi-cfg-order = <1>;
- 	smb-addr = <0x26>;
- };
- 
- phy@02 {
- 	reg = <0x02>;
--	mdi-reversal = <1>;
-+	marvell,mdi-cfg-order = <1>;
- 	smb-addr = <0x27>;
- };
- 
- phy@03 {
- 	reg = <0x03>;
--	mdi-reversal = <1>;
-+	marvell,mdi-cfg-order = <1>;
- 	smb-addr = <0x28>;
- };
-diff --git a/arch/arm/dts/fsl-sch-30842.dtsi b/arch/arm/dts/fsl-sch-30842.dtsi
-index bff9e76570b..fca38d14975 100644
---- a/arch/arm/dts/fsl-sch-30842.dtsi
-+++ b/arch/arm/dts/fsl-sch-30842.dtsi
-@@ -13,6 +13,6 @@
-  */
- phy@02 {
- 	reg = <0x02>;
--	mdi-reversal = <1>;
-+	marvell,mdi-cfg-order = <1>;
- 	smb-addr = <0x25>;
- };
 diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
-index 439c4c48bdc..11e450cdb0b 100644
+index 11e450cdb0b..461d4b07a40 100644
 --- a/drivers/net/phy/aquantia.c
 +++ b/drivers/net/phy/aquantia.c
-@@ -351,8 +351,8 @@ static int aquantia_dts_config(struct phy_device *phydev)
- 	if (!ofnode_valid(node))
- 		return 0;
+@@ -218,27 +218,21 @@ static u32 unpack_u24(const u8 *data)
+ 	return (data[2] << 16) + (data[1] << 8) + data[0];
+ }
  
--	if (!ofnode_read_u32(node, "mdi-reversal", &prop)) {
--		debug("mdi-reversal = %d\n", (int)prop);
-+	if (!ofnode_read_u32(node, "marvell,mdi-cfg-order", &prop)) {
-+		debug("marvell,mdi-cfg-order = %d\n", (int)prop);
- 		reg = phy_read(phydev, MDIO_MMD_PMAPMD,
- 			       AQUANTIA_PMA_RX_VENDOR_P1);
- 		reg &= ~AQUANTIA_PMA_RX_VENDOR_P1_MDI_MSK;
+-static int aquantia_upload_firmware(struct phy_device *phydev)
++static int aquantia_do_upload_firmware(struct phy_device *phydev,
++				       const u8 *addr, size_t fw_length)
+ {
+ 	int ret;
+-	u8 *addr = NULL;
+-	size_t fw_length = 0;
+ 	u16 calculated_crc, read_crc;
+ 	char version[VERSION_STRING_SIZE];
+ 	u32 primary_offset, iram_offset, iram_size, dram_offset, dram_size;
+ 	const struct fw_header *header;
+ 
+-	ret = aquantia_read_fw(&addr, &fw_length);
+-	if (ret != 0)
+-		return ret;
+-
+ 	read_crc = (addr[fw_length - 2] << 8) | addr[fw_length - 1];
+ 	calculated_crc = crc16_ccitt(0, addr, fw_length - 2);
+ 	if (read_crc != calculated_crc) {
+ 		printf("%s bad firmware crc: file 0x%04x calculated 0x%04x\n",
+ 		       phydev->dev->name, read_crc, calculated_crc);
+-		ret = -EINVAL;
+-		goto done;
++		return -EINVAL;
+ 	}
+ 
+ 	/* Find the DRAM and IRAM sections within the firmware file. */
+@@ -269,14 +263,14 @@ static int aquantia_upload_firmware(struct phy_device *phydev)
+ 	ret = aquantia_load_memory(phydev, DRAM_BASE_ADDR, &addr[dram_offset],
+ 				   dram_size);
+ 	if (ret != 0)
+-		goto done;
++		return ret;
+ 
+ 	debug("loading iram 0x%08x from offset=%d size=%d\n", IRAM_BASE_ADDR,
+ 	      iram_offset, iram_size);
+ 	ret = aquantia_load_memory(phydev, IRAM_BASE_ADDR, &addr[iram_offset],
+ 				   iram_size);
+ 	if (ret != 0)
+-		goto done;
++		return ret;
+ 
+ 	/* make sure soft reset and low power mode are clear */
+ 	phy_write(phydev, MDIO_MMD_VEND1, GLOBAL_STANDARD_CONTROL, 0);
+@@ -290,8 +284,24 @@ static int aquantia_upload_firmware(struct phy_device *phydev)
+ 	phy_write(phydev, MDIO_MMD_VEND1, UP_CONTROL, UP_RUN_STALL_OVERRIDE);
+ 
+ 	printf("%s firmware loading done.\n", phydev->dev->name);
+-done:
++
++	return 0;
++}
++
++static int aquantia_upload_firmware(struct phy_device *phydev)
++{
++	int ret;
++	u8 *addr = NULL;
++	size_t fw_length = 0;
++
++	ret = aquantia_read_fw(&addr, &fw_length);
++	if (ret != 0)
++		return ret;
++
++	ret = aquantia_do_upload_firmware(phydev, addr, fw_length);
++
+ 	free(addr);
++
+ 	return ret;
+ }
+ #else
 -- 
 2.47.3
 
