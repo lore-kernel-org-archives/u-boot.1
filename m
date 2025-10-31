@@ -4,92 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 584F2CCF9EE
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 06:43:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC96DCCF9EB
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 07:38:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E11983642;
-	Fri, 31 Oct 2025 07:43:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C14883849;
+	Fri, 31 Oct 2025 08:38:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="aptJaizH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Tk8l7Qzo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA4A6836F0; Fri, 31 Oct 2025 07:43:51 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0EDA1836F0; Fri, 31 Oct 2025 08:38:14 +0100 (CET)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65EB28331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 07:43:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id D62098331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 08:38:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-295163ae901so12355805ad.1
- for <u-boot@lists.denx.de>; Thu, 30 Oct 2025 23:43:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1761893028; x=1762497828;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hgKCiW9cVv/TNcBobTaRdnRPBbdeBaj1ZU/fet140pE=;
- b=aptJaizH4VrgtpH5UnA6F0d0gxYPpS7fbFVDFr/rlrBg2KcrGfDD1sMMaV6JJ8YxR8
- SpV+HG2bwT3jAsEpZ/5dnaq8zxuBXdPSpbqWkFkyWg0iE44j/5YXZ9eF+CKcikaj8+N2
- pDoxwb6R+FFVseSCA2PgJUvMeyanmnsO9hBXk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761893028; x=1762497828;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hgKCiW9cVv/TNcBobTaRdnRPBbdeBaj1ZU/fet140pE=;
- b=t5+T7qGezUIVNJlB4cxE6YerTIOyTBIPkhGuQU3omCrnliXhjaHu4WBOXDZcmRD353
- k4IjJsMMUbxEJtOPop0o+Fe1euvzhR99nszYnggRiaX+7k+HWcwPl762VJKsSwJJ6fBN
- cLlgZzkNvav7tZPhMt1RoIF6imFIUMPSpjwnA22G3lvS4BGriII8q2I+Xk/ftOz6OGSs
- aMdrklwKHBrkQnZLYNx4nW7UUVKTlPnrreamKYY3HN/SMlWuT0JD4Z8hfY/HJMwy2Hpi
- 26KEqdv2rfAFvV5GOR21JsAmxRYdpCAnYNnShUAGfsgxMoTFm6U4FFB3w6YKZpo/1AgH
- Klew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHew/O+NSa9ZZrUIvk0MjnpgYq8y82BtGlaHVHd+n/SZvWLmW1QixaOYeUDJfTVJ3NVrZJwvA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyyduvOhUPYpyxWmm9RCdFSQNc9qYfCi/DRTf8+EfbVbhQfAUeW
- r5Cn4dDf1eX5mZ3pC4MI2smuA8JHX6WJpZNBlzyHoTY7yntjzS7Mupgjiznr9xTNCabweiZDY27
- 84xiLdP9e9442B4L4K10ma6xGiFOW+sj6bkSqEEVHPA==
-X-Gm-Gg: ASbGncteEwXaLBBqS/4f+Gxv+niOUI4nAFd9oYXxa02Cdlf8aUohKbt+qz5MXiigoM2
- DdyU/lHziD2e7n8XEntDudAuDndV+1DEi27tAlhVgEns1UjnD8pvDqicyobH1bw6ixIjQ/775Mt
- ArU0t6mMTVYgGD7mzQ6DClJ0re9FhmFV5b51lJXhgpiqRpODgHDWKhIgLzPEsepsIM9rkM8Yy2n
- ghOwRTi6QQJE+khBwQYYq+9ulkbTikkLMNxf8yNpV/4CE0oL2LXaJQb0nt2YVfYjYCWUCmpseZJ
- UjmoBRKr7ZpT5xhs
-X-Google-Smtp-Source: AGHT+IHorx/QEKYFeYu9IPy2VrL+SCXc4tRiedILPHOMIawK10uQyZp9lDJPBsh7BZULiN9+VnRyWru8m4xo8CZyBhY=
-X-Received: by 2002:a17:903:228b:b0:27e:e1f3:f853 with SMTP id
- d9443c01a7336-2951a3906b4mr31467735ad.8.1761893027764; Thu, 30 Oct 2025
- 23:43:47 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eV94vYJy/GknyH+m8xt187iZiAoUvCjVwVoXM6Btpp/QxYB6PFmIaLf1IotvJRAD+io1uNLhNTORpNy4DAQyIFahuRW4o541I8u1uv6uEeA17V8+fKrixFrs0P0vwAgckXmu0NAtERrE3vaSnHuw8Cgc01lwDlC98R4SnbHxRJvx1bzOYWOKcJ9kT2pe2gfLihfzQCHhKVG54s6J7zZQbZso9+g2BQpM2liCTEn4yJWCKb7FqZ11JUl/L4eKRbhurzQSU54Kk+mJYy7pYW3bXfJn3RcsD80HjPB8B1+OxmfII37vIpr90fPdma/CYcQSpc4vy3wInrNKe4yA3REhXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/Vix1z9NuL2zCcwMGaWAUmluS1NbrhZsEl7NCrISwSk=;
+ b=nYb9vVkUJ6FVY7rSoVC7iHVbNaMqXcUFZki+BQk8ralPKR3c3gRBs1V9gfaTKZw2DRp/ArFZo9wzqoSIQZWa2BiUDrHX/wQcOqpLRYESGzYJMaPIynIzxG9712hvVOa8L17+P0mqRB+IKUCfOZzf7WoJLgOQ+oV4dtCDKRLWN3af6avZ/dMfcJrwpt6TYgKbAAwJ/WmX6fhZIp64GU6TKTNQTOLddK2Fq58wYdaPQCfr/EZtPgZvMB2uAJfwcmdDrXeIqSrgqEfkrihEebIQFEy86DR7pjBMZS4sevFWQeOgJ3ockPMaLvIv17CCroJE0TWIk4rvvRzZXhjzQpbV0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/Vix1z9NuL2zCcwMGaWAUmluS1NbrhZsEl7NCrISwSk=;
+ b=Tk8l7Qzot4Z6uphsVs1Q5kcKj331MlNmiChYPVgTNUQqy8fQ8xZsZYGj7VAMAQbFjpur5npROZKcoQRyd42iwaD2i0hXfIuL2NNgezoE9Bq6/NQjuFRlYzQuKnY1ck+0SMcMuC0ZBxIDPtWxN/5Ob9mJky8/MpVRIvfLXTh0sbE=
+Received: from BYAPR01CA0055.prod.exchangelabs.com (2603:10b6:a03:94::32) by
+ CY5PR10MB6190.namprd10.prod.outlook.com (2603:10b6:930:32::19) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9275.14; Fri, 31 Oct 2025 07:38:08 +0000
+Received: from SJ5PEPF000001CE.namprd05.prod.outlook.com
+ (2603:10b6:a03:94:cafe::84) by BYAPR01CA0055.outlook.office365.com
+ (2603:10b6:a03:94::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Fri,
+ 31 Oct 2025 07:39:10 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ SJ5PEPF000001CE.mail.protection.outlook.com (10.167.242.38) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 07:38:07 +0000
+Received: from DLEE203.ent.ti.com (157.170.170.78) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
+ 2025 02:38:06 -0500
+Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
+ 2025 02:38:06 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 31 Oct 2025 02:38:06 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59V7c55p3539845;
+ Fri, 31 Oct 2025 02:38:06 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: 
+CC: Anshul Dalal <anshuld@ti.com>, <afd@ti.com>, <b-liu@ti.com>, <bb@ti.com>, 
+ <m-chawdhry@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, <vigneshr@ti.com>
+Subject: [PATCH v10 0/7] Allow falcon boot from R5 SPL on TI's AM62 devices
+Date: Fri, 31 Oct 2025 13:07:50 +0530
+Message-ID: <20251031073800.344500-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251028091256.600992-1-richard.genoud@bootlin.com>
-In-Reply-To: <20251028091256.600992-1-richard.genoud@bootlin.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Fri, 31 Oct 2025 07:43:36 +0100
-X-Gm-Features: AWmQ_blVS53SCqnxYdG9yX2bhcADUt0hhh6KAgzWberF2I_eAZwgbRBx1qybSjk
-Message-ID: <CAOf5uw=gqHtS7BynpaN-FO+gNinBnao+phhMAs-pn5gk9BSP6A@mail.gmail.com>
-Subject: Re: [PATCH v2 00/24] Introduce Allwinner H6/H616 NAND controller
- support
-To: Richard Genoud <richard.genoud@bootlin.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Tom Rini <trini@konsulko.com>, Hans de Goede <hdegoede@redhat.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>, 
- Andrey Skvortsov <andrej.skvortzov@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Dinesh Maniyam <dinesh.maniyam@intel.com>, Anand Gore <anand.gore@broadcom.com>,
- Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CE:EE_|CY5PR10MB6190:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4cec2c1d-342e-4ed2-655e-08de18506f5f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|1800799024|34020700016|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?iCLNCBvm3+cWx85McYgPRlktNdpAJES/P1UNNqvGu2gOj6YoR6qLfRUxebEC?=
+ =?us-ascii?Q?1j7be9+ft7YNK1PX+J/zKFNm9rR3lKaKDDo/zdg0VUgPERmOpLRKcS9wqIuF?=
+ =?us-ascii?Q?IrI7g5M73aVJK4+HIgLMRwhJDzWKcZIkdXOJg4RGJ4ZR2KH8dmBq0fqlXReq?=
+ =?us-ascii?Q?JXLQ3YqQdppWeTJl91iE68V1wDRfoxzj2Cc9L5VE0viWtBPv5+UN5JI1Q5Ml?=
+ =?us-ascii?Q?FSXeYvPVUtCkYxkR768aW7yWXuDOaEMdgBk99OTJwegRH3HN35msENgkrYFt?=
+ =?us-ascii?Q?WWJjRI3AK85Auw+xykcHHAj3QwNNQWv1Ti+n3S9ln5FbyhwjfL+9TcnWjfJu?=
+ =?us-ascii?Q?6CgJuM/4sbfrjTiW8j7gIM9RN9GFiyeDD8ob1ZnM+S6PmUCOpqn73YeaWF43?=
+ =?us-ascii?Q?AZOu1Jl2aEV+Z4c66s9wLKM9QM2OBSobzO7RRHEuq7qjyn/qYSovs+Msz1qB?=
+ =?us-ascii?Q?X7XxG6pD6gVcr0YBiIaIe7OhEdr2TmT4/h5sa0VbYXGPT8MccgTHDYxUWsGa?=
+ =?us-ascii?Q?qSOLkZPt5KWwmhFHUiUWNKznUWpifP58tu17BALCpfMEMdWTp3FphYhIL6VJ?=
+ =?us-ascii?Q?uXO4PjcZRIiFWyIuFv6CyoXPqYS/XY1k5NTUQMFo0Fu912SbUL8OWS3K26nL?=
+ =?us-ascii?Q?pVut5dJ+5995+gTPlSMsYi1WDqdavihHRohog3cXuGvtU1pmXjAfYFZlMThm?=
+ =?us-ascii?Q?oThrtUdLEfbb76m3twqWakmjrY4wtM5Vf/11bf6Uo3D3YJ1kEhp4cbJgZQiq?=
+ =?us-ascii?Q?QiJ13eU3Kmg6Jrj92Pm/dBjk7iU/uO0FK9KX1tvClsWw46amvxE03I7y7l06?=
+ =?us-ascii?Q?32kDI2THxqP5hNM2E4QN0mVtKjrPfWX7zONtFmDTSXtfPF/BerjmtLoqylk+?=
+ =?us-ascii?Q?xC5ftBSUKGytq+XS7TvquLmgBaEQx2r7jInC2goXVbRT9nAgubaiBYC6qOTS?=
+ =?us-ascii?Q?sxywSKL9+fVnwa9/pKVgeFgZs1Ll3kuInpJmwRWCt9SJCPDoZoOtgyqh+OyP?=
+ =?us-ascii?Q?ieUZoDY8XyuozSpTcBSnmbQzQ6HD9a+thfM+3Mv2F8t1SXKYcTelJ+A4uLY6?=
+ =?us-ascii?Q?FtJhL/8soLydALIFhtpwsB25V9LYJPn9aAewRa3WRkgfnAAz6VX5Xi6W3QV8?=
+ =?us-ascii?Q?LUbDqvyWhQmAgxzZMKh6E1XtAK82AEnOI1qYhhzzRGrLIPzHRsoppKvLcUeA?=
+ =?us-ascii?Q?YB387STUZesxVHVB0UiqM8z5CIM08rePnKxB8jCEBNcUj8U30ZRgnF+PgwH8?=
+ =?us-ascii?Q?W3hSexYEitE7rWfOypc1Kwoc+hIIj5/27Xm3DoI9U08F1+1AU6hZJU3zOHcH?=
+ =?us-ascii?Q?wauwspF35ipUbnXPLN3721PxqAafBe4SXTQNLJ4y9LMxY5VpgUrlEIA6etpZ?=
+ =?us-ascii?Q?CxwcqDwkWWHGjUa0LWFeHNUkSc71torQ1TaFOtU+w7gpnIkpUDOr/nvQEBk3?=
+ =?us-ascii?Q?tkNv14aa5lVmzVdFHcPOZS4yWWxVkwrzRws4r0BY9raBM/qeIsmdOvmLlHnR?=
+ =?us-ascii?Q?1b6VGytlINLaulhs1p+8XUyDDp/LO3081xyv3IreYTreh/kBLJTWreR8NQ9i?=
+ =?us-ascii?Q?oClDu7xHy+T88OpCpS4=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(34020700016)(36860700013);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 07:38:07.7165 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4cec2c1d-342e-4ed2-655e-08de18506f5f
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CE.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR10MB6190
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,122 +154,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Richard
+Hi all,
 
-On Tue, Oct 28, 2025 at 10:13=E2=80=AFAM Richard Genoud
-<richard.genoud@bootlin.com> wrote:
->
-> Hi everyone,
->
-> This patch series introduce H6/H616 NAND controller support (but not yet
-> the DMA/MDMA part).
->
-> All the work was done on a H616 board with a Kioxia TC58NVG1S3HTA00 NAND
-> chip.
-> ECC is supported, as well as scrambling.
->
-> Support for booting from NAND is not part of this series, but it's almost
-> ready. (It needs quite some modifications in sunxi-spl-image-builder.c
-> and sunxi_toc0.c)
->
-> H6 SoC has not been tested, but it shares all registers with H616, plus
-> some registers dedicated to Embedded Crypto Engine that H616 lacks.
->
-> This IP has quite some register fields modified from the A10/A23, but in
-> the end, it works more or less the same.
-> Main differences with A10/A23 are:
-> - The need for 2 more clocks (for ECC and MBUS)
-> - The use of a new USER_DATA_LEN register
-> - More ECC strengths (44, 52, 68, 72, 76 and 80 bits / 1KB)
-> - MDMA based on chained buffers
-> - some registers layouts have changed (mainly due do the stronger ECC)
->
-> Patches 1 and 2 are small fixes
->
-> Patches 3-6 harmonize the registers definitions between U-Boot and SPL,
-> and ultimately merge those definitions in an include file, without
-> functional change, removing the usage of sunxi_ccm_reg on the way.
->
-> Patches 7-19 are paving the way to the introduction of H6/H616 NAND
-> controller by adding per SoC capabilities for both drivers. They are
-> small for an easier review, without functional change.
->
-> Patches 20-21 are adding missing NAND related clocks definitions for
-> H6/H616
->
-> Patch 22 adds the support for H6/H616 NAND controller in U-Boot.
->
-> Patch 23 adds the support for H6/H616 NAND controller in SPL.
->
-> Patch 24 fixes warnings in sunxi_nand_spl.c
->
-> A similar series for this NAND controller support in Linux has been sent
-> and being reviewed.
->
-> Changes from v1:
-> - pick-up reviewed-by
-> - use a readl() loop instead of memcpy_fromio() in patch 2 as suggested
->   by Andre
-> - remove cosmetic in patches that are beyond cosmetic changes
-> - remove usage of struct sunxi_ccm_reg, suggested by Andre
-> - indent @caps member description in comment
-> - give more informations on PAT_FOUND registers in commit message
-> - drop NFC_ECC_BLOCK_SIZE_MSK which was just a 1bit mask for the very
->   same bit NFC_ECC_BLOCK_512
-> - add missing MACH_SUN50I_H6 in Kconfig
->
-> Richard Genoud (24):
->   mtd: rawnand: sunxi: cosmetic: remove needless comment
->   mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
->   mtd: rawnand: sunxi_spl: harmonize register defines with non spl file
->   mtd: rawnand: sunxi_spl: cosmetic: use definitions from
->     linux/mtd/rawnand.h
->   mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
->   mtd: rawnand: sunxi: merge register definitions for
->     sunxi_nand{,_spl}.c
->   mtd: rawnand: sunxi: add per SoC capabilities
->   mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC caps
->   mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
->   mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
->   mtd: rawnand: sunxi: add has_ecc_block_512 capability
->   mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
->   mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
->   mtd: rawnand: sunxi_spl: add per SoC capabilities
->   mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC caps
->   mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
->   mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUND
->   mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
->   mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED macros
->   sunxi: clock: H6: add NAND controller clock registers
->   clk: sunxi: Add MBUS Master Clock Gating Register
->   mtd: rawnand: sunxi: add support for H6/H616 nand controller
->   mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
->   mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warnings
->
->  arch/arm/include/asm/arch-sunxi/clock_sun4i.h |   1 +
->  .../include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
->  arch/arm/include/asm/arch-sunxi/clock_sun6i.h |   1 +
->  .../include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
->  arch/arm/include/asm/arch-sunxi/clock_sun9i.h |   2 +
->  board/sunxi/board.c                           |  19 +-
->  drivers/clk/sunxi/clk_h6.c                    |   2 +
->  drivers/clk/sunxi/clk_h616.c                  |   2 +
->  drivers/mtd/nand/raw/Kconfig                  |   3 +-
->  drivers/mtd/nand/raw/sunxi_nand.c             | 308 +++++++++--------
->  drivers/mtd/nand/raw/sunxi_nand.h             | 228 +++++++++++++
->  drivers/mtd/nand/raw/sunxi_nand_spl.c         | 322 +++++++++++-------
->  12 files changed, 629 insertions(+), 284 deletions(-)
->  create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
->
+This patch set adds support for falcon boot on AM62a, 62p and 62x by bypassing
+A53 SPL and U-boot.
 
-I will pick the series over the weekend, check CI, and check better
-all the patches that already
-get reviewed anyway
+Existing Boot flow:
+R5 SPL -> ATF -> A53 SPL -> U-Boot -> Linux Kernel
 
-MIchael
+Updated flow:
+R5 SPL -> ATF -> Linux Kernel
 
->
-> base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
-> --
-> 2.47.3
->
+U-Boot's falcon mode expects the jump from SPL to kernel to happen on the same
+core which is not directly applicable for our heterogeneous platforms since
+ATF, OPTEE and other non SPL binaries from tispl.bin should be loaded before the
+kernel by the R5 SPL.
+
+So we have to use a different flow to bypass A53 SPL and U-Boot, we first load
+the newly added tispl_falcon.bin instead of tispl.bin which lacks u-boot-spl.bin
+(A53's SPL) and the corresponding fdt. This sets up dm, tifs, optee and
+atf. Once loaded, we load the kernel and the dtb (with fixups) at ATF's
+PRELOADED_BL33_BASE and K3_HW_CONFIG_BASE.
+
+NOTE:
+
+Since we're now using the SPL to load the kernel and kernel expects a 2MiB
+aligned load address, the existing PRELOADED_BL33_BASE has to be changed for ATF
+to 0x82000000 with K3_HW_CONFIG_BASE set to 0x88000000 for the DTB.
+
+Depends on:
+  [PATCH v3 0/4] Allow falcon boot from A-core SPL on K3 devices
+  https://lore.kernel.org/u-boot/20251024081408.1610102-1-anshuld@ti.com/
+
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+Changes in v10:
+ * Fixed null check for loader
+ * Expanded commit messages
+ * Merge [8/8] of last series to [1/8]
+ * Restructure falcon mode fragment for clarity
+v9: https://lore.kernel.org/u-boot/20251030051937.3659010-1-anshuld@ti.com/
+Changes in v9:
+ * Update the boot flow diagram in documentation
+ * Refactor the documentation diagram into am62x_sk.rst
+v8: https://lore.kernel.org/u-boot/20251027130004.2156121-1-anshuld@ti.com/
+Changes in v8:
+ * Base the series on the recently added support for secure falcon mode
+ * Split the [8/10] patch of previous series to multiple commits
+ * Move R5 falcon mode logic from k3/common.c to k3/r5/common.c
+ * Load `tifalcon.bin` from rootfs even in raw eMMC boot to simplify usage
+ * Drop the section on 'SPI usage' in the documentation
+v7: https://lore.kernel.org/u-boot/20250603142452.2707171-1-anshuld@ti.com/
+Changes in v7:
+ * Replaced AM62a/p documentation with a hyperlink to AM62x's docs
+ * Made CMD_BOOTZ disabled for TI_SECURE_DEVICE
+v6: https://lore.kernel.org/u-boot/20250428141235.1734014-1-anshuld@ti.com/
+Changes in v6:
+ * Added A53 build steps in docs
+ * Had git add SVGs as text instead of blob
+ * Added memory map for standard boot flow
+v5: https://lore.kernel.org/u-boot/20250425145644.2228186-1-anshuld@ti.com/
+Changes in v5:
+ * Added documentation
+ * Moved address for kernel and dtb to 0x82000000 and 0x88000000 respectively
+v4: https://lore.kernel.org/u-boot/20250416074515.1452854-1-anshuld@ti.com/
+Changes in v4:
+ * Move emmc boot fixes to saperate patch
+ * Update load address for kernel to 0x82200000
+ * Add jump_stub config
+v3: https://lore.kernel.org/u-boot/20250403215910.1292922-1-anshuld@ti.com/
+Changes in v3:
+ * Make tifs load and entry address consistent with tispl for am62a and 62p
+ * Update loadables order to be same as tispl.bin
+ * Use rootfs for boot instead of boot partition
+ * Disable SPL_HAS_BOOTZ to save space
+ * Add default dtbs for each board in Kconfig
+ * Fix fdt totalsize in the header before applying fixups
+ * Update Makefile to clean tispl_falcon.bin on `make clean`
+v2: https://lore.kernel.org/u-boot/20250311095758.3383047-1-anshuld@ti.com/
+Changes in v2:
+ * Move to CONFIG_SYS_SPI_*
+ * Remove the need for CMD_BOOTI
+v1: https://lore.kernel.org/u-boot/20250307075541.2571104-1-anshuld@ti.com/
+---
+Anshul Dalal (7):
+  arm: k3-binman: add tifalcon.bin for falcon mode
+  configs: add falcon mode fragment for k3 devices
+  mach-k3: common: enable falcon mode from R5 SPL
+  mach-k3: common: support only MMC in R5 falcon mode
+  mach-k3: r5: common: add fdt fixups for falcon mode
+  mach-k3: r5: common: add bootargs to kernel's dtb
+  doc: ti: document R5 falcon mode for AM62 platforms
+
+ Makefile                                      |   2 +-
+ arch/arm/dts/k3-am625-sk-binman.dtsi          |  64 ++++
+ arch/arm/dts/k3-am62a-sk-binman.dtsi          |  51 +++
+ arch/arm/dts/k3-am62p-sk-binman.dtsi          |  51 +++
+ arch/arm/dts/k3-binman.dtsi                   |  54 +++
+ arch/arm/mach-k3/am62ax/am62a7_init.c         |   4 +
+ arch/arm/mach-k3/am62px/am62p5_init.c         |   4 +
+ arch/arm/mach-k3/am62x/am625_init.c           |   4 +
+ arch/arm/mach-k3/common.c                     |   8 +
+ arch/arm/mach-k3/common.h                     |   5 +
+ arch/arm/mach-k3/r5/common.c                  | 146 ++++++++
+ configs/k3_r5_falcon.config                   |  39 +++
+ doc/board/ti/am62ax_sk.rst                    |  31 ++
+ doc/board/ti/am62px_sk.rst                    |  31 ++
+ doc/board/ti/am62x_sk.rst                     | 319 ++++++++++++++++++
+ doc/board/ti/img/fitImage_falcon.svg          | 180 ++++++++++
+ doc/board/ti/img/tifsstub_dm_tifalcon.bin.svg | 285 ++++++++++++++++
+ 17 files changed, 1277 insertions(+), 1 deletion(-)
+ create mode 100644 configs/k3_r5_falcon.config
+ create mode 100644 doc/board/ti/img/fitImage_falcon.svg
+ create mode 100644 doc/board/ti/img/tifsstub_dm_tifalcon.bin.svg
+
+-- 
+2.51.0
+
