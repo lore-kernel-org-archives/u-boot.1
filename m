@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41020CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 19:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8F79CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 19:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE81D83ABA;
-	Fri, 31 Oct 2025 20:48:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 2690583ACD;
+	Fri, 31 Oct 2025 20:53:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="orAtRnj4";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nlvk7SYC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1B9083ABF; Fri, 31 Oct 2025 20:48:33 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id F383783AD1; Fri, 31 Oct 2025 20:53:00 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03949839AC
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 20:48:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7986C83AC5
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 20:52:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f3a5=5J=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1761940109;
- bh=MZNbSr6cR96aIKX4XziRiZJa3ZxYKs1wkpUy0qGt2uU=;
- b=orAtRnj4KUe0YD6N3EaAUK8Auxu7hZmmaXQ8FAx05t+HFI3Hgl+3iiBnnU92uXhAXYM6EQRWJ
- v+yGrRPZE7E2/reBrfS/7PC/XW/l2ENxjjxja003OquVEUMGO5n2cbacUiNehfrgWaraN/5hLXb
- IVCLIfbKDcqw0Py1KawzOTJRXIfWnt3xaPuEeiUep4vDoshXEO7p0z46l1hW0LCpMyWSHUdm4Y5
- MKuLPIPneg/mbeRZvqHZemKEweajYaCcX8Sog1RfLA0GuTy8sNKAcRuIlrJZURUEB0PJNRW/3uG
- Dy67n1Gwg87N3X0A4fPa32YPYPHQCsz0zMxzIOW9E+Qw==
-X-Forward-Email-ID: 690512860a03120dafdb958a
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.4.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <97a6d067-8c57-48cb-ab9b-c5094a798d99@kwiboo.se>
-Date: Fri, 31 Oct 2025 20:48:17 +0100
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03 (unknown [93.94.208.154])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 9F37D3FB67; 
+ Fri, 31 Oct 2025 19:52:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1761940377;
+ bh=SF1J8ji5f2YvegcMQjol2G6jewgMiy9ZRcF5PrQmLuY=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=nlvk7SYCurHC1/Okx6zGw/vvG9eGG+o/X/waU4CnhX691MvBiO7Dj92hcqOaTR8rU
+ JAmCyq+g8TJGT5BqnKNtECcgKKulGAk8i3m+Qj2rodGAks3X4Q1LDUusxwJXgD7Y+Y
+ 7Jd7mpNABuif0EF62Za6ByLdPr2H2gRaJF/wX8YXQeKp+o5eIPniV3Fw/ofUL3w3qn
+ +k2SripArL1UbA3jsFvWQbkQn9DpY2MEB44p0o7VjqWRTZWDyuG68GDmNDQ2rzvsPh
+ bsFCBZPim5RP86kIVuupuKd247NHrZecay9QBHCJ7pxpqcMQ05ZF/xbAkK3v45+yD5
+ mV9IHMa0JOeUNfGBB680qRHQIPsRHLsoLyhy88cKtZPbgbM4stsLorN/WA2TwmY09p
+ kvm8sWGv4HQrjoG2aOgFftMwcR/LSqDm0LPbabjDnN4mv8movZXphPoHI9EbeekUKl
+ IYMseJ61hAbjsz62peJjIeEkIS1vtF/6BFPkog7lqC02DJtiQohwMFLUKqTWxpkyyO
+ uJB7mD25G7ZVEQ3KQciePi2Mm/EGyDtIrt8kdQLngOb+6JZttRrGVQ4QivCCmx60Ww
+ BVLB8beGcJoYDOK01l5hP1RTGBwT9RZ0iPqDdso7AQ4VVKOp0NijD4grpBaebK36cz
+ 7hok49zTjj9KxsCBoUYEa1+E=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] acpi: use U-Boot ACPI vendor ID
+Date: Fri, 31 Oct 2025 20:52:53 +0100
+Message-ID: <20251031195253.621971-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [DEBUG] rk3399-nanopi-neo4: SPL SD init may report -5 due to SD
- power-on timing
-To: Sune Brian <briansune@gmail.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <CAN7C2SArdbhag_56MwOMGoaEYSLiHbHHo3KFhUS5U03ntEJbGA@mail.gmail.com>
- <20251031191728.GG6688@bill-the-cat>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20251031191728.GG6688@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,59 +76,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian,
+The U-Boot project has been assigned the vendor ID 'UBOO' [1]. Use this
+vendor ID and our release version in the ACPI table headers.
 
-On 10/31/2025 8:17 PM, Tom Rini wrote:
-> On Fri, Oct 31, 2025 at 12:10:36PM +0800, Sune Brian wrote:
-> 
->> Hello U-Boot maintainers,
->>
->> While testing mainline U-Boot (v2026.01-rc1-00070-ge34d01d23e45) on the
->> FriendlyARM NanoPi NEO4 (RK3399), I observed that SPL sometimes fails to
->> initialize the SD card with the following message:
->>
->>     spl: mmc init failed with error: -5
->>     SPL: failed to boot from all boot devices
->>
->> After investigation, the root cause appears to be related to the **SD card
->> power rail (`vcc3v0_sd`) timing during SPL startup**. On the NanoPi NEO4,
->> the SD slot is powered via GPIO0_A1 to a fixed 3.0 V supply. SPL may attempt
->> MMC initialization **before this supply has fully stabilized**, resulting in
->> a generic I/O error (`-5`). The SD card itself and the controller are
->> functioning correctly once the supply is stable.
->>
->> **Workarounds / fixes observed:**
->> - Add a small delay after enabling `vcc3v0_sd` before SPL starts MMC init.
->> - Ensure the regulator is fully powered and stable at SPL start.
->>
->> This appears to be a **hardware/platform-specific power-on timing issue**
->> rather than a device tree or software bug, but documenting it would help
->> users encountering similar errors on the NanoPi NEO4.
+[1] ACPI ID Registry
+    https://uefi.org/ACPI_ID_List
 
-U-Boot v2025.07-rc4 changed how sd-card regulators are handled for the
-nanopi4 family of boards.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ arch/x86/lib/acpi_nhlt.c  |  2 +-
+ arch/x86/lib/acpi_table.c |  2 +-
+ include/acpi/acpi_table.h | 20 +++++++++++---
+ lib/acpi/acpi_table.c     |  6 ++---
+ test/dm/acpi.c            | 55 +++++++++++++++++++++++----------------
+ 5 files changed, 54 insertions(+), 31 deletions(-)
 
-Is your issue specific to a reboot or cold boot?
-
-Try adding something like following to rk3399-nanopi-neo4-u-boot.dtsi
-to add a 2ms delay to ensure the voltage for the vcc3v0_sd regulator is
-stabilized when it is enabled. Or any other timing that is required.
-
-&vcc3v0_sd {
-	startup-delay-us = <2000>;
-};
-
-I only have a NanoPi M4B from the nanopi4 family to run tests on.
-
-Regards,
-Jonas
-
->>
->> **Hardware:** FriendlyARM NanoPi NEO4
->> **SoC:** Rockchip RK3399
->> **U-Boot version:** v2026.01-rc1-00070-ge34d01d23e45
->> **Reproducibility:** 100% with SD boot
-> 
-> Adding the board maintainer and come other active rockchip people.
-> 
+diff --git a/arch/x86/lib/acpi_nhlt.c b/arch/x86/lib/acpi_nhlt.c
+index 8aae5fa5af7..4ffce589d7a 100644
+--- a/arch/x86/lib/acpi_nhlt.c
++++ b/arch/x86/lib/acpi_nhlt.c
+@@ -408,7 +408,7 @@ int nhlt_serialise_oem_overrides(struct acpi_ctx *ctx, struct nhlt *nhlt,
+ 		memcpy(header->oem_table_id, oem_table_id, oem_table_id_len);
+ 	}
+ 	header->oem_revision = oem_revision;
+-	memcpy(header->creator_id, ASLC_ID, 4);
++	memcpy(header->creator_id, ACPI_CREATOR_ID, 4);
+ 
+ 	cur.buf = (void *)(header + 1);
+ 	cur.start = (void *)header;
+diff --git a/arch/x86/lib/acpi_table.c b/arch/x86/lib/acpi_table.c
+index b13292c4150..6bd7ad799bf 100644
+--- a/arch/x86/lib/acpi_table.c
++++ b/arch/x86/lib/acpi_table.c
+@@ -224,7 +224,7 @@ static int acpi_write_tpm2(struct acpi_ctx *ctx,
+ 
+ 	/* Fill out header fields. */
+ 	acpi_fill_header(header, "TPM2");
+-	memcpy(header->creator_id, ASLC_ID, 4);
++	memcpy(header->creator_id, ACPI_CREATOR_ID, 4);
+ 
+ 	header->length = sizeof(struct acpi_tpm2);
+ 	header->revision = acpi_get_table_revision(ACPITAB_TPM2);
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index 05b6385544e..4895366a618 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -13,15 +13,29 @@
+ #ifndef __ACPI_TABLE_H__
+ #define __ACPI_TABLE_H__
+ 
++#include <version.h>
+ #include <dm/acpi.h>
+ 
+ #define RSDP_SIG		"RSD PTR "	/* RSDP pointer signature */
+ #define OEM_ID			"U-BOOT"	/* U-Boot */
+ #define OEM_TABLE_ID		"U-BOOTBL"	/* U-Boot Table */
+-#define ASLC_ID			"INTL"		/* Intel ASL Compiler */
+ 
+-/* TODO(sjg@chromium.org): Figure out how to get compiler revision */
+-#define ASL_REVISION	0
++/**
++ * define ACPI_CREATOR_ID - ACPI creator ID
++ *
++ * This is the ACPI assigned vendor ID for the U-Boot project.
++ * It is used in the ACPI tables created by U-Boot.
++ */
++#define ACPI_CREATOR_ID		"UBOO"
++
++/**
++ * define ACPI_CREATOR_REVISION - ACPI creator ID
++ *
++ * This encodes the U-Boot version.
++ * It is used in the ACPI tables created by U-Boot.
++ */
++#define ACPI_CREATOR_REVISION \
++	(U_BOOT_VERSION_NUM << 4 | U_BOOT_VERSION_NUM_PATCH)
+ 
+ #define ACPI_RSDP_REV_ACPI_1_0	0
+ #define ACPI_RSDP_REV_ACPI_2_0	2
+diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+index 43b71182133..52b05efd62d 100644
+--- a/lib/acpi/acpi_table.c
++++ b/lib/acpi/acpi_table.c
+@@ -134,8 +134,8 @@ void acpi_fill_header(struct acpi_table_header *header, char *signature)
+ 	memcpy(header->oem_id, OEM_ID, 6);
+ 	memcpy(header->oem_table_id, OEM_TABLE_ID, 8);
+ 	header->oem_revision = OEM_REVISION;
+-	memcpy(header->creator_id, ASLC_ID, 4);
+-	header->creator_revision = ASL_REVISION;
++	memcpy(header->creator_id, ACPI_CREATOR_ID, 4);
++	header->creator_revision = ACPI_CREATOR_REVISION;
+ }
+ 
+ void acpi_align(struct acpi_ctx *ctx)
+@@ -248,7 +248,7 @@ int acpi_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ 	header->revision = acpi_get_table_revision(ACPITAB_FADT);
+ 	memcpy(header->oem_id, OEM_ID, 6);
+ 	memcpy(header->oem_table_id, OEM_TABLE_ID, 8);
+-	memcpy(header->creator_id, ASLC_ID, 4);
++	memcpy(header->creator_id, ACPI_CREATOR_ID, 4);
+ 	header->creator_revision = 1;
+ 	fadt->minor_revision = 2;
+ 
+diff --git a/test/dm/acpi.c b/test/dm/acpi.c
+index db012b6d2f1..559ea269de2 100644
+--- a/test/dm/acpi.c
++++ b/test/dm/acpi.c
+@@ -261,8 +261,8 @@ static int dm_test_acpi_fill_header(struct unit_test_state *uts)
+ 	ut_asserteq_mem(OEM_TABLE_ID, hdr.oem_table_id,
+ 			sizeof(hdr.oem_table_id));
+ 	ut_asserteq(OEM_REVISION, hdr.oem_revision);
+-	ut_asserteq_mem(ASLC_ID, hdr.creator_id, sizeof(hdr.creator_id));
+-	ut_asserteq(ASL_REVISION, hdr.creator_revision);
++	ut_asserteq_mem(ACPI_CREATOR_ID, hdr.creator_id, sizeof(hdr.creator_id));
++	ut_asserteq(ACPI_CREATOR_REVISION, hdr.creator_revision);
+ 
+ 	return 0;
+ }
+@@ -415,22 +415,27 @@ static int dm_test_acpi_cmd_list(struct unit_test_state *uts)
+ 	ut_assert_nextline("RSDP  %16lx  %5zx  v02 U-BOOT", addr,
+ 			   sizeof(struct acpi_rsdp));
+ 	addr = ALIGN(addr + sizeof(struct acpi_rsdp), 16);
+-	ut_assert_nextline("RSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
++	ut_assert_nextline("RSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x",
+ 			   addr, sizeof(struct acpi_table_header) +
+-			   3 * sizeof(u32), OEM_REVISION);
++			   3 * sizeof(u32), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	addr = ALIGN(addr + sizeof(struct acpi_rsdt), 16);
+-	ut_assert_nextline("XSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
++	ut_assert_nextline("XSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x",
+ 			   addr, sizeof(struct acpi_table_header) +
+-			   3 * sizeof(u64), OEM_REVISION);
++			   3 * sizeof(u64), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	addr = ALIGN(addr + sizeof(struct acpi_xsdt), 64);
+-	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
+-			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
++	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x",
++			   addr, sizeof(struct acpi_dmar), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	addr = ALIGN(addr + sizeof(struct acpi_dmar), 16);
+-	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
+-			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
++	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x",
++			   addr, sizeof(struct acpi_dmar), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	addr = ALIGN(addr + sizeof(struct acpi_dmar), 16);
+-	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
+-			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
++	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x",
++			   addr, sizeof(struct acpi_dmar), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	ut_assert_console_end();
+ 	unmap_sysmem(buf);
+ 	free(buf);
+@@ -459,23 +464,27 @@ static int dm_test_acpi_cmd_list_chksum(struct unit_test_state *uts)
+ 	ut_assert_nextline("RSDP  %16lx  %5zx  v02 U-BOOT  OK  OK", addr,
+ 			   sizeof(struct acpi_rsdp));
+ 	addr = ALIGN(addr + sizeof(struct acpi_rsdp), 16);
+-	ut_assert_nextline("RSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  OK",
++	ut_assert_nextline("RSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x  OK",
+ 			   addr, sizeof(struct acpi_table_header) +
+-			   3 * sizeof(u32), OEM_REVISION);
++			   3 * sizeof(u32), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	addr = ALIGN(addr + sizeof(struct acpi_rsdt), 16);
+-	ut_assert_nextline("XSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  OK",
++	ut_assert_nextline("XSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x  OK",
+ 			   addr, sizeof(struct acpi_table_header) +
+-			   3 * sizeof(u64), OEM_REVISION);
++			   3 * sizeof(u64), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	addr = ALIGN(addr + sizeof(struct acpi_xsdt), 64);
+-	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  OK",
+-			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
++	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x  OK",
++			   addr, sizeof(struct acpi_dmar), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	addr = ALIGN(addr + sizeof(struct acpi_dmar), 16);
+-	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  OK",
+-			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
++	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x  OK",
++			   addr, sizeof(struct acpi_dmar), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	addr = ALIGN(addr + sizeof(struct acpi_dmar), 16);
+-	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  OK",
+-			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
+-	ut_assert_console_end();
++	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x UBOO %x  OK",
++			   addr, sizeof(struct acpi_dmar), OEM_REVISION,
++			   ACPI_CREATOR_REVISION);
+ 	ut_assert_console_end();
+ 	unmap_sysmem(buf);
+ 	free(buf);
+-- 
+2.51.0
 
