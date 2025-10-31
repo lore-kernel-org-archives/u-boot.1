@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDAE2CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:22:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E91CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 17:30:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45B1E839A5;
-	Fri, 31 Oct 2025 18:22:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
+	by phobos.denx.de (Postfix) with ESMTP id 2D99C83A41;
+	Fri, 31 Oct 2025 18:30:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="FKUmSsFJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YcaH5Wl8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7B2183A45; Fri, 31 Oct 2025 18:22:01 +0100 (CET)
-Received: from outbound.pv.icloud.com
- (p-west1-cluster2-host5-snip4-6.eps.apple.com [57.103.64.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3426783A5E; Fri, 31 Oct 2025 18:30:49 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B0E883956
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:21:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 133AB839A8
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 18:30:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=infi.wang
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
-Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-west-1a-60-percent-6 (Postfix) with ESMTPS id
- ED09E1800129; Fri, 31 Oct 2025 17:21:56 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
- bh=7UhNI3X/U4lLw06X6JnddZDUKcdi7cF/5NTUVixiSZA=;
- h=From:Message-Id:Content-Type:Mime-Version:Subject:Date:To:x-icloud-hme;
- b=FKUmSsFJFcb7A+ShvPq9VGhuVCHPktBHW0VF2ysnogNkU7u+TFfWoZUQmlTDL7Z7qLxGy6jNX1Iuy34pIjiW8xeUFNmNWAx8ScsCN9Td2SCheDBMOkkx0QpPNNqEZnPo76ggEBaWkonNCLbtuHBeYmBY2yC/MJoOxJxoI2Lb8fzOJ8Esm2F6JvGPua8AeakTtU+HRe7xECnYtcAExIRKeqJe07ioGC1qbApFRojoJiz3cUCgHY1zAss6xngXiOiD0s8vZ6kGrB/5RUkhvssDK1fzoXAqP9Z/6c4hln2dK1RB3EYvjvSLlHBMHbtlEn7gQJTsMNQznoOZR+GAyuI2TQ==
-mail-alias-created-date: 1549370554000
-Received: from smtpclient.apple (unknown [17.56.9.36])
- by p00-icloudmta-asmtp-us-west-1a-60-percent-6 (Postfix) with ESMTPSA id
- 1E7F71800125; Fri, 31 Oct 2025 17:21:52 +0000 (UTC)
-From: Beiyan Yun <root@infi.wang>
-Message-Id: <C2649793-C878-4906-BDF4-0410DA9F12A2@infi.wang>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
-Subject: Re: [PATCH v4 1/5] net: phy: aquantia: refresh format
-Date: Sat, 1 Nov 2025 01:21:40 +0800
-In-Reply-To: <ac552ba3-832c-4cfb-aa39-c80949df7900@mailbox.org>
-Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-References: <20251031152348.60571-1-root@infi.wang>
- <20251031152348.60571-2-root@infi.wang>
- <ac552ba3-832c-4cfb-aa39-c80949df7900@mailbox.org>
-X-Mailer: Apple Mail (2.3826.700.81)
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDMxMDE1NSBTYWx0ZWRfX9dBItw5iMZ7G
- B3eamBIKtaZOApWZTzgzAxjKpbcAkV+6UA/NiVZIg0cJb2Gc0VtDqpkNuETMUSHnp/pGxHKmRij
- E30maJei8fRQbFYfWWeN45YoylKu7ydl2JZi/Cu18n6R490eKtQbeeP3DuQOQMfxPXyvsXMGHhg
- 1ftaZdA5fx6L9/4PH343MiFr9RP5ZTe4r+RK2V+xtAs2F7LLQKifzYNNfNsf7CSdymlw+N2zV/5
- JNi/DUXdvuMXImRCDY4QHJhze2R+NhOTyZHCw8V0Itx3U7IU7lSko+pcHueYYUf3ITIldqBQE=
-X-Proofpoint-GUID: qO-mklvmYIE-Y5l1X4XJaU2U_RkTnMRH
-X-Proofpoint-ORIG-GUID: qO-mklvmYIE-Y5l1X4XJaU2U_RkTnMRH
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-10-31_05,2025-10-29_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- bulkscore=0 mlxlogscore=999 suspectscore=0 mlxscore=0 spamscore=0
- phishscore=0 clxscore=1030 malwarescore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.22.0-2506270000 definitions=main-2510310155
-X-JNJ: AAAAAAABLidiNuSSfmlc+Y2/lNge78cz+EqeTKqR93E8GosFLW49SC4F2h0o+8t50xXZ2cPWURlyomXslw8Vllb/2YwSPhXg46jA9dIaGKy1Q2GaH9wC+NH00kzsDBsDK0tAQHfhgJ1sRC9RWpXN1luSmmjvnqJM9Zgi+Rdg7YiqmUE+kHLGP+0ct97FUQLdWsx2k4kad58JX8B5xH6Px3Y+CgfhioyeynQ4v1DcdTar2PlRg/nfhLtemDFxqqj7gayD/Us+wU3bJ9J6sU1wV49h2Z8t8XaULQExlfP6fNPwIXrgILfJCXDRLYsVY8h5s1hCVUQtGdrN2pjm/dmofLJzCxKA/sq6pvP1OnGQQSI/xEg534hEC37rcFi+LecVVHDVOLwUkPRab+sFwVbaYw5OOJKwpwCcAhaJAhNKMQHcTPDjb+pwpWe6jplGiCD0FNK8LhLc2CCVdTjTgnOX8q9IGtyUy2dVlHf9IacoEi4x6jwbkTcJAkefCcTIIxED0RqWgzpFrfhYjc6g4ibREeKowhyyx8lVm2vqawc4lnIw17/Joh0FenWvM2IFqNsP9CPhJ47eyWS+Ez3a9xX3pxRsXWnOoSGN6FOFqY+iZCTTZH/tsBSghNj/CFMGXfvIvSS0WXMjrOlDVhvNysAZ56UfZwFZjPPlSfn9JboAr0VdYcn/T9bvLUCz7ZjlCgR7Wi+T3R7mdF0RTOvwyaL2YWCLJWmOEzxmKYLkddf/cUmq3BLIK1rQlsZuZ3hc
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7c53908e8b5so1490411a34.1
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 10:30:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1761931846; x=1762536646; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qhQk4lh77i4vVyBvdvfncqJK3rYWye/Tcx57Ifzg3S8=;
+ b=YcaH5Wl8bwS1aBWTpsCuyFscbBdD40t47j7m8HFQmTUswgjQIv3kFCVNb3p+buKmir
+ Rls7muJyYuXBbCyKwPniZRYBQham7s+foDddOA9QN0rjysylRSWnyUiTdvYxjDbyLMvL
+ oJiemhIE++nQ8hW2w7pnDXjNjE+eI2MlI/rTFkXl0tWJR34YAIGg6/3Q8Q6DjfV5ZXmA
+ OR0ylEnlt7l0rfoNSfQQY7NSoYFRVaOmA/NitBfe8aM/2nIVuh+vSRR2WTZ1cgefZRAE
+ 6xluJn/kBci0zd8CUKS5k0eBSM+ivLqvjjXymAU6MTAXZM+sqoyaiaqPUnJzNfuqCoG9
+ hfTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761931846; x=1762536646;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qhQk4lh77i4vVyBvdvfncqJK3rYWye/Tcx57Ifzg3S8=;
+ b=pAbrQxLf69mAzWLWSJltNQZI2N8y/nuYx9udsrdmTaDpLu+S4pHWcDafnvLDObeVzc
+ S2wzLKt2uguJEh+/1R0PNT0Ck9Kma6crvGznygi8/GuGOs0MJp85M+gUSIOI11mPtv3Z
+ OaYs29WioHkrMu1WzNlyBNuFjfgF97CH/bKVls0r7cPDV+EHQSh3M2rpXfx4g38ZB8wB
+ lSgOJaB6o9NxG0iUzBED2AMic4f93u8s12G1L5mUDfj1sO5mkxFq/o7j6ECpJ2GAqwSZ
+ t6dC/pto7Bz9ktJxyNd2B4bKY2qUfbYcfOBBtSKGl5ICuE++qBptOUO5RBeCF3m/YrgY
+ NxGg==
+X-Gm-Message-State: AOJu0Yyw76xGBGLDqFfitV5cqfTBquTABOIwqazRn4sxoNKg+59q6p5L
+ i4C0wzfRyiSllOJoY8zr5EL8aqIBnIk42RJYaWa7tfDKD9bNWQz7bYe1R3CoSeRfgaZH3WuztHw
+ bp28L69DPDFCygqBFNPcvnoUD1tYCR7I=
+X-Gm-Gg: ASbGncsr165zC/FBDpWN0viblWmj7o4sCSfwi4vRBs0WvDya5zPSVT+r5CUZKcpjxdH
+ zRhRVmrZF1OrgIyDj46cLst3gCwPUsuL496vEBfDp7RZolI9/mS6PoipDR5+K8g3QKSCFXiFjzU
+ 1mhUCCTOZ2B4Lq+gHM5YNjyHAHrJGfQp9k77Oq1UA3cXC0DvZojcoB1Ep8t3/WcvypCnGX7l2bg
+ FoNXUegdMkdVD26UH8dSTJ8dIOq8JmcxHCrbttZ6Lf6oH2qsMUo0aBtl1R5TpkzUN8S5TL9
+X-Google-Smtp-Source: AGHT+IHuWdaSZMgqaGaW9M/v7TFviFSicJlptcqHC56ggH81TIXGsDkryGutxMuh2trn+oFtbIjAgLq89Yg4mDrsCpM=
+X-Received: by 2002:a05:6830:380e:b0:7c5:345f:60b0 with SMTP id
+ 46e09a7af769-7c69677bea2mr2273906a34.18.1761931845647; Fri, 31 Oct 2025
+ 10:30:45 -0700 (PDT)
+MIME-Version: 1.0
+References: <20251030003359.1023-1-briansune@gmail.com>
+ <20251030180940.GY6688@bill-the-cat>
+ <CAN7C2SC+uJ2OX9WmU7AmUjTZ7O4rWwQY0ueYYvWcUH1GF=fgZw@mail.gmail.com>
+ <CAN7C2SDcEC+A5-rmCKMYD=vEYDFdOAfMp1G=T5SuQcXYOHDuJg@mail.gmail.com>
+ <20251031155427.GC6688@bill-the-cat>
+In-Reply-To: <20251031155427.GC6688@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Sat, 1 Nov 2025 01:30:34 +0800
+X-Gm-Features: AWmQ_bneGjr3s2RebKKD-LFcjKOqWe2LHwzC4DvkV6edgNTb1lnddcSNSb3jt80
+Message-ID: <CAN7C2SCXWoi6XRKppKFUzPiUykYeQ0Mbm=S3dhALajP98S8rAA@mail.gmail.com>
+Subject: Re: [PATCH v1] Cyclone V Board handsoff script
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,38 +94,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> That's interesting. But that also does mean that someone needs to work
+> better with upstream about integration here as no, that's not where that
+> kind of tooling should live. At bare minimum it should be in
+> tools/something/ and have it's own requirements.txt file too for
+> whatever python modules it requires.
 
+Do you mean I should move it to tool folder?
 
-> On 31 Oct 2025, at 11:51=E2=80=AFPM, Marek Vasut =
-<marek.vasut@mailbox.org> wrote:
->=20
-> On 10/31/25 4:21 PM, Beiyan Yun wrote:
->> Refresh format using clang-format.
->> Signed-off-by: Beiyan Yun <root@infi.wang>
->> ---
->> Changes in v4:
->> - New
->>  drivers/net/phy/aquantia.c | 159 =
-+++++++++++++++++--------------------
->>  1 file changed, 75 insertions(+), 84 deletions(-)
->> diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
->> index 903fcd667f6..439c4c48bdc 100644
->> --- a/drivers/net/phy/aquantia.c
->> +++ b/drivers/net/phy/aquantia.c
->> @@ -18,28 +18,28 @@
->>  #include <asm/byteorder.h>
->>  #include <fs.h>
->>  -#define AQUNTIA_10G_CTL		0x20
->> -#define AQUNTIA_VENDOR_P1	0xc400
->> +#define AQUNTIA_10G_CTL 0x20
->> +#define AQUNTIA_VENDOR_P1 0xc400
->>  -#define AQUNTIA_SPEED_LSB_MASK	0x2000
->> -#define AQUNTIA_SPEED_MSB_MASK	0x40
->> +#define AQUNTIA_SPEED_LSB_MASK 0x2000
->> +#define AQUNTIA_SPEED_MSB_MASK 0x40
-> #define<space>MACRO<tab>0xvalue
->=20
-> is perfectly fine format.
-
-Agree, until clang-format has become the default. I don=E2=80=99t really =
-have a option.=
+Brian
