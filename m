@@ -4,65 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85335CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 20:00:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1698ACCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 20:17:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B21E183B07;
-	Fri, 31 Oct 2025 20:59:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8DBF083AEE;
+	Fri, 31 Oct 2025 21:17:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XAkB0jy/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TjAGsx4l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81C6483AFD; Fri, 31 Oct 2025 20:59:40 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C9CA283AF6; Fri, 31 Oct 2025 21:17:11 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5D9D83AEA
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 20:59:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62B3F83AED
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 21:17:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03 (unknown [93.94.208.154])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 5C55640968; 
- Fri, 31 Oct 2025 19:59:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1761940775;
- bh=802s4MHcdxqYa4Z3UxFUNawYy7k+8Haoq2FApppdpf0=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=XAkB0jy/6Jg6lUKp0XTLQYGwnP+QTUbAGOIxJqIhkHoxiRcZhnu2sVnE6DsCtS2TF
- b18yOFXAEL6xnB5Z80Jdy8hvsUJobGK+THq1+L3uhsCKSbT2ENxyqaD7m8ovT7YrCc
- 7TRT6jJBTFfHDTUEfv9GdzP4BdLjeYln2JB6gScsVALLBKYYr1GDU2RmmoG+7a+msO
- GKmStKHC9USOPr4l5YSE2PbWMb/zxWKHrpKHukrbOhFExaYs+mMr9YpRLvyQGtsyZG
- nJ4E45+Vmn4p9n4aPr9ntYP64RxWmlSrr8Ub2pSBB8kzJwuLMfIdkMZMShAceaxf0w
- 7XAMg5SS5TXjK+lg6lVWPtgBlmwUs5GY5NRU1hrsH3P7p7kM1yO1MZIyXvvCWsg5is
- usl72f3zSaXdfawPzR4w0wkvDznpGf/ckgireoA+5AY/lLnEnVndgWr+iSjvoXQtTh
- aYH+MFY1+ABCsAS0/sZHYcxMPJ1Po66q6EkXi2fIsUKE2raHOmBNIWOGnl6TuIiWHj
- JcW4sCOofZ0Fh6Oqbpn89ORWEFGDuBsJE4SzmFJsb+rw5D8a9UXdbxxNJtY/1JpZWX
- VybklAYeF3/YH4o52vbbYIEmIRqlNA6zEQy4h1eGEjxdvawZp4B4K/VBEKoSpEYRW0
- //1BmhtrGuN1VdGyIgpdTjPI=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/3] test: provide test for 'acpi list' command
-Date: Fri, 31 Oct 2025 20:59:30 +0100
-Message-ID: <20251031195931.622513-3-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251031195931.622513-1-heinrich.schuchardt@canonical.com>
-References: <20251031195931.622513-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c67d9577b3so1886991a34.2
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 13:17:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1761941828; x=1762546628; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IRxSOmHjJLBJ6hJbfM9BAJHsch7rvd4YYbuBRx1M+Wk=;
+ b=TjAGsx4l3h8RkcqkRTiDv1dJlIgztrr3YlA7dpZ6DULUz6YHalPgdBxrCNG4vddjuo
+ dyKVGJuNLQtpXd/ZK1odm6D6YsGnbh4X4whiwu4sQTsSPOBwu3a832caoYgashL68dcD
+ aJDdHdX8cJgdEOya/z2y3G9Ufy94OOoYotxB2fYsrFhn/a38OEmbiHzWnXuiqlaPxiEf
+ rOGkUtBoEIGPTts06tP9oEcUnHnmg4h+ksp6IDykvAMALHZieZ+/RrZ3s1xbYbyEx2D/
+ H0DdSVBOycSFOMDHHsnPWiWYl2hd/7lvTtoPlz6I/7wfRupdXD16wu1XHMfeLVkzhpI6
+ vvTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761941828; x=1762546628;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IRxSOmHjJLBJ6hJbfM9BAJHsch7rvd4YYbuBRx1M+Wk=;
+ b=YouTTj//As3cGeh/FHwOV2IIAycxbUMOoVlMmZYGKg+NgsYRgA1HGPqURgi7YeJFFN
+ aQxLQhZgq+57HbaGbOvFECbpNiQrCPt8dcEXrWadSJ3X+0oy9ZXecI5IniPSniuUoF9B
+ iLfvvYU7q2wKCTF28ZTGVx5tIUIiZ/5idsGIEPYNDRPzB2O/IliaoQsEofB7N4LiJ148
+ pZ4AbifowCmZWgUgxFBlGgfVQjw20huwuNfV5wr+f7zq8Kraw+uCGOCeSMObWV7zSE8E
+ Xyb0KFT69bbloN9jE6OTjG8HbGR8PdceiT3sxzykN/qR0zY+jqzMKXa/L1fJXh3ZV93w
+ c2OA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUj0a0gIzCRfLVgIBCSgSkklxXEG+Y9vIdOJTA3FrVPlWVKOnpkWXjXoewTQshJC4gJSTKhajI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLuI0RbjrqEmXexKoWyPWHOzhlp73Yv+08VtAhRBbwM7qtxqbE
+ UFz76Lt7zYfw1874IYIwsv4eaRjxmTfpUjrtHO8zDu6VU/QGzYMr6h7jI4kbVKD7NPiRov7Dtl1
+ jZW3gMZHMrQ/e/EsKJ242vfc1UZ8XYCo=
+X-Gm-Gg: ASbGnctxtNnrBp6P8z277qiwAjM/TtZZ8t5BpfsYd6gVFgIxWd0lIZNide8K11lk6qR
+ Wv65GsaJXRno3Grgc4PEJDgpub0yEBf9Fwapd+mFRjGQ6iS9YjSU10LoqlT0PI/Jn2HE5GJPdmZ
+ rTjXVUxpj0rJcIPUugn3TYIqakVz0f+7WbmUZgtXF5/PpaWf0YmYVZvoCOqt1dl4Aq6IZoOEMJZ
+ zAGCBvGq3nq/rMPYFMIj5BY1x9k/rH2FBHJ/2LXHOFfApf8wXnw/lew+DaEpvKW8Fi7E0DLsNlv
+ 9BQJ6aI=
+X-Google-Smtp-Source: AGHT+IFbgGmNSpoWEwPEJ1Aykaehk0c63zqx9NAGlhfMlvlFkE40R6YNAVV2GQWnQcJv5lCKgugVAgAVWEAiFnnfzCo=
+X-Received: by 2002:a05:6830:2b06:b0:7c5:3bd4:18f6 with SMTP id
+ 46e09a7af769-7c696715cb0mr2890298a34.16.1761941828087; Fri, 31 Oct 2025
+ 13:17:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAN7C2SArdbhag_56MwOMGoaEYSLiHbHHo3KFhUS5U03ntEJbGA@mail.gmail.com>
+ <20251031191728.GG6688@bill-the-cat>
+ <97a6d067-8c57-48cb-ab9b-c5094a798d99@kwiboo.se>
+In-Reply-To: <97a6d067-8c57-48cb-ab9b-c5094a798d99@kwiboo.se>
+From: Sune Brian <briansune@gmail.com>
+Date: Sat, 1 Nov 2025 04:16:57 +0800
+X-Gm-Features: AWmQ_blf3rpwlOrC4bA2JxsP2WFNrS12mtn9GnCODFb2l-PI2lQ2Y06GNYFSQWI
+Message-ID: <CAN7C2SCquwnP5tUE0KLE15wGPqbNE10adEgshXLjRQnTK+JM4g@mail.gmail.com>
+Subject: Re: [DEBUG] rk3399-nanopi-neo4: SPL SD init may report -5 due to SD
+ power-on timing
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,91 +99,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Check that some mandatory ACPI tables exist:
+> Is your issue specific to a reboot or cold boot?
 
-  - RSDP
-  - RSDT or XSDT
-  - FADT
+First got to think in logical flow. As the SD card fail to pass the
+detection of valid SD card aka -5 error then it is 100% impossible
+to enter U-Boot user control phase, same as kernel nor distro.
+Hence, also cannot do 'reset' on U-Boot nor 'sudo reboot' on distro.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- test/cmd/Makefile |  3 +++
- test/cmd/acpi.c   | 52 +++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 55 insertions(+)
- create mode 100644 test/cmd/acpi.c
+So the answer is cold boot.
+However, do reboot also have issue? This is not tested yet as
+we got to solve the regulator behavior trouble first.
 
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index e71c80a5b2e..ae545b03b79 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -13,6 +13,9 @@ endif
- obj-y += exit.o
- obj-$(CONFIG_X86) += cpuid.o msr.o
- obj-$(CONFIG_CMD_ADDRMAP) += addrmap.o
-+ifdef CONFIG_CONSOLE_RECORD
-+obj-$(CONFIG_CMD_ACPI) += acpi.o
-+endif
- obj-$(CONFIG_CMD_BDI) += bdinfo.o
- obj-$(CONFIG_COREBOOT_SYSINFO) += coreboot.o
- obj-$(CONFIG_CMD_FDT) += fdt.o
-diff --git a/test/cmd/acpi.c b/test/cmd/acpi.c
-new file mode 100644
-index 00000000000..ae6157d3d56
---- /dev/null
-+++ b/test/cmd/acpi.c
-@@ -0,0 +1,52 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Tests for acpi command
-+ */
-+
-+#include <linux/bitops.h>
-+#include <test/cmd.h>
-+#include <test/ut.h>
-+
-+#define HAVE_RSDP BIT(0)
-+#define HAVE_XSDT BIT(1)
-+#define HAVE_FADT BIT(2)
-+#define HAVE_ALL (HAVE_RSDP | HAVE_XSDT | HAVE_FADT)
-+
-+/**
-+ * cmd_test_acpi() - test the acpi command
-+ */
-+static int cmd_test_acpi(struct unit_test_state *uts)
-+{
-+	unsigned int actual = 0;
-+	int ret;
-+
-+	/*
-+	 * Check that some mandatory ACPI tables exist:
-+	 * - RSDP
-+	 * - RSDT or XSDT
-+	 * - FADT
-+	 */
-+	ut_assertok(run_commandf("acpi list"));
-+	ut_assert_nextline("Name              Base   Size  Detail");
-+	ut_assert_nextline("----  ----------------  -----  ----------------------------");
-+	for (;;) {
-+		ret = console_record_readline(uts->actual_str, sizeof(uts->actual_str));
-+		if (ret == -ENOENT) {
-+			ut_asserteq(HAVE_ALL, actual);
-+
-+			return 0;
-+		}
-+		if (ret < 0)
-+			ut_asserteq(0, ret);
-+
-+		if (!strncmp("RSDP", uts->actual_str, 4))
-+			actual |= HAVE_RSDP;
-+		else if (!strncmp("RSDT", uts->actual_str, 4))
-+			actual |= HAVE_XSDT;
-+		else if (!strncmp("XSDT", uts->actual_str, 4))
-+			actual |= HAVE_XSDT;
-+		else if (!strncmp("FACP", uts->actual_str, 4))
-+			actual |= HAVE_FADT;
-+	}
-+}
-+CMD_TEST(cmd_test_acpi, UTF_CONSOLE);
--- 
-2.51.0
+> Try adding something like following to rk3399-nanopi-neo4-u-boot.dtsi
+> to add a 2ms delay to ensure the voltage for the vcc3v0_sd regulator is
+> stabilized when it is enabled. Or any other timing that is required.
+>
+> &vcc3v0_sd {
+>         startup-delay-us = <2000>;
+> };
 
+So far i got to comment this in the dts in order to boot.
+
+&sdmmc {
+// vmmc-supply = <&vcc3v0_sd>;
+};
+
+> I only have a NanoPi M4B from the nanopi4 family to run tests on.
+
+My board is nanopi neo4. If my reading is correct.
+The schematic on your board is mostly same as the neo4 on SD card.
+
+M4B page 19 [1], NEO4 page 18 [2]
+
+Should able to check if issue can be reproduced. The LDO itself could be
+slow as this is not digital based LDO, it is old analog control-loop
+one I guess.
+Meantime, the RK3399 may not have internal ADC or HW to sense the rail sanity.
+
+Brian
+
+[1] https://wiki.friendlyelec.com/wiki/images/1/16/NanoPi-M4B-1909-Schematic.pdf
+[2] https://wiki.friendlyelec.com/wiki/images/b/bb/NanoPi_NEO4_2008_SCH.pdf
