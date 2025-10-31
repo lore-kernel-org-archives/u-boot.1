@@ -4,150 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1FA5CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 11:33:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0E7DCCF9F8
+	for <u-boot@archiver.kernel.org>; Fri, 31 Oct 2025 11:43:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4418783885;
-	Fri, 31 Oct 2025 12:33:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1DEC5838C7;
+	Fri, 31 Oct 2025 12:43:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bbbhSKY4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tCLnTkt9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9571838AE; Fri, 31 Oct 2025 12:32:58 +0100 (CET)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
+ id 4905B838CC; Fri, 31 Oct 2025 12:43:34 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazhn150100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d800::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 604AF8331F
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 12:32:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 653098331F
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 12:43:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=d9cA6CJsbdJbpZaMG8dKeN0X9uL3eNS1d5xakR3C22RBTKZQqUDlXsZ3Z2eTWSIwiTzg9hZIN7+FNX8RM4NWnNy/jvk0idzJ94NRyVmJht0awBxSxVlEVd7QHqJ4MhR+1CTFPZKE9Ynjyzg2DdYYircgUvDqMuHUBjynI3lW2jQA8j/NnfziE9iSUhRRYkPgRz/Xqx8RN/+GpP3fIOLubFZkeJJXmr/kDOEXySo1bpj8EhLeqF5JsYm63Ju5gZHiv/uGmkvp08cqkHFaHa0euM2LJA0qFY/hgoMLVZV4BaAnchrzZlfq5OsExPUaxNebYfku73DCqxEgeJ2VuFkxsg==
+ b=HDaIyo1RAsUYe0yr1PN7RFfXGgZfmaxaj5ZC06vo1O/Fa25TgWuaB3Ju9qg+qBChxopUmINZTISD+BtcQ3xKmCRYf/cpo+NZ7atgtHbJb5XhzkYb5ZQL4YARY+Djkccmt9Kd7YZAOqaTGIdCPEIB5fCj1OZAatHWLhASelyswC1vgqPIvZ9k+rwlMYbDoCDXpYkKrVJXzhnS1RAIBC6rxrJozIUtJv+7+uIo1qqr1/FUwQtBvrvp96higXOYoo6vvdOkjkeWRUrtv29wcke+JDMmAU/Xia5bjIoDREEY9iSs/KstIbDQ9dxMQJ6FBuJ8CwoWHYeR4jMD4g629Y9ogw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Fbzs98xEhAmBBlqC3uuBX9Px4scJcKYimM24oz6T73s=;
- b=jJa3ztt74zJutDT8eUgNb0iTqT1axWIYBwBa3cquIbWj1UIVmPiYohUtscns848SLBvX9Pb/Wo0neGegAxxEcZlyDOVIfB/MnrJ8GmNvsllS9AsCHETPbfva3TXT/bMOKoBo4bDiS6JsdR7QBWqfiDGP3anigy0tPDO0cGmbwKVVoR2H1XErtre7+q2cX02upb83EJgLCc0SgVUaecZ+sP0ZEPffOwZB2W5Z0sKo3WBtkFH47RpPWL7QckGj44gBIl/yP8asSgiwKGmPStAaL4Kvl5xdYIGWV7SHX50V1+dOWnvY+M/sgspH+eyyZeKSFbBbO+qLVXXReKVTmmM8MQ==
+ bh=/RQpnmoeG7dak2UG7qVmXIgouQ75AeyETNpBoknLokU=;
+ b=qxZxt48r2RaidhcngPI1uMhpP5PTeywzd6EviG8U6MwKgt+R7UT2LfeTJvpDCKG+7bwQJCPqAqTA82hCxtnwJn+EdxwsRrJGEKB16LIMdR6Pb+sNpuOztO/XBYg/oeLAbPu5ntGOQVynEyqQo1pKsQUttSTq4d0EXGVjgofta6TNdQKgR7twgzDl4mEZwL+rfstGsD8aNOlJr6BOAWbfa5vfcCzJHrg2ydQtCxUZ3He2BoDzEJqEj50Hd/2yKdkcoxWdHNxjcYqdB3nHC/ZFm1GxCW4Mpbunn1ycaKhwoneQE55RfJRXH53FmozNqDuWacPlI9e+QGWAce97RsU0rw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
+ 198.47.23.194) smtp.rcpttodomain=gmx.de smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Fbzs98xEhAmBBlqC3uuBX9Px4scJcKYimM24oz6T73s=;
- b=bbbhSKY429xUYdgkXtkJe5EQAK7Ssd1WkET2iaisaHlpMs3+y/kJqJd1skPujWuvinySALpN5bVycpV+TYEsNo/sxB6UBLQGLEhfDFS9we8hG5e7worCBvWoHfOngDcwrlF6E5Tf4/4E49OxSqpLu7olhJXzuJk69A5VixwWdLg=
-Received: from BN9PR03CA0371.namprd03.prod.outlook.com (2603:10b6:408:f7::16)
- by SN7PR10MB6382.namprd10.prod.outlook.com (2603:10b6:806:26e::20)
+ bh=/RQpnmoeG7dak2UG7qVmXIgouQ75AeyETNpBoknLokU=;
+ b=tCLnTkt9tG6IgoqpYiAwKyfYbxG7Om4x35zfj7CkOHXJ/E/2A+6qVhHtU6ErbanAJAuJOorv8hmWFqftYSPe/dqR5jOQj/w4nsxQlYZdHq82SxPaaW8ZE5jghXJM/VTbF3Hp8Rj+pNOS1RevW1i9v78N/9paQicohDGqCWTMwLQ=
+Received: from MW4PR03CA0236.namprd03.prod.outlook.com (2603:10b6:303:b9::31)
+ by BN0PR10MB4936.namprd10.prod.outlook.com (2603:10b6:408:123::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Fri, 31 Oct
- 2025 11:32:51 +0000
-Received: from BN1PEPF00004682.namprd03.prod.outlook.com
- (2603:10b6:408:f7:cafe::8b) by BN9PR03CA0371.outlook.office365.com
- (2603:10b6:408:f7::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.15; Fri, 31 Oct
+ 2025 11:43:27 +0000
+Received: from MWH0EPF000971E2.namprd02.prod.outlook.com
+ (2603:10b6:303:b9:cafe::f2) by MW4PR03CA0236.outlook.office365.com
+ (2603:10b6:303:b9::31) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.12 via Frontend Transport; Fri,
- 31 Oct 2025 11:32:35 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ 31 Oct 2025 11:43:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BN1PEPF00004682.mail.protection.outlook.com (10.167.243.88) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ MWH0EPF000971E2.mail.protection.outlook.com (10.167.243.69) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 11:32:49 +0000
-Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9275.10 via Frontend Transport; Fri, 31 Oct 2025 11:43:26 +0000
+Received: from DLEE208.ent.ti.com (157.170.170.97) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 06:32:40 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 06:43:23 -0500
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 31 Oct
- 2025 06:32:40 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 06:43:23 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 31 Oct 2025 06:32:40 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59VBWeep3837884;
- Fri, 31 Oct 2025 06:32:40 -0500
-Date: Fri, 31 Oct 2025 06:32:40 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <trini@konsulko.com>, <s-k6@ti.com>, <m-chawdhry@ti.com>,
- <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <gehariprasath@ti.com>
-Subject: Re: [PATCH 1/6] arm: dts: k3-j7200: ddr: Update to v0.12.0 of DDR
- config tool
-Message-ID: <20251031113240.b3kdiupm2v6n6tob@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20251031053425.3960963-1-n-francis@ti.com>
- <20251031053425.3960963-2-n-francis@ti.com>
+ Transport; Fri, 31 Oct 2025 06:43:23 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59VBhLhR3847795;
+ Fri, 31 Oct 2025 06:43:22 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20251031053425.3960963-2-n-francis@ti.com>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 31 Oct 2025 17:13:21 +0530
+Message-ID: <DDWHBO3NYVG1.2GFO0LYSSGZYF@ti.com>
+CC: <u-boot@lists.denx.de>, <d-gole@ti.com>, <b-padhi@ti.com>,
+ <vigneshr@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
+ <w.egorov@phytec.de>, <francesco.dolcini@toradex.com>,
+ <ggiordano@phytec.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
+ <xypron.glpk@gmx.de>
+Subject: Re: [REGRESSION] Re: [PATCH v11 00/11] Add support for dynamic MMU
+ configuration
+From: Anshul Dalal <anshuld@ti.com>
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>, Anshul Dalal
+ <anshuld@ti.com>, Francesco Dolcini <francesco@dolcini.it>,
+ <trini@konsulko.com>, Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20251017131540.3636067-1-anshuld@ti.com>
+ <20251027165225.GA71553@francesco-nb> <DDTOEZHOH4OK.1ZQ850D6UHD0Z@ti.com>
+ <7401dee0-7ac6-4280-a934-0881dfbb1b6c@gmail.com>
+ <DDUOKBSB2Q29.17CMLWGWUOD48@ti.com>
+ <071bbf2d-0cbd-4359-abfa-b020b5d32ef5@gmail.com>
+In-Reply-To: <071bbf2d-0cbd-4359-abfa-b020b5d32ef5@gmail.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004682:EE_|SN7PR10MB6382:EE_
-X-MS-Office365-Filtering-Correlation-Id: ebb05a2c-98c5-44af-9310-08de18713902
+X-MS-TrafficTypeDiagnostic: MWH0EPF000971E2:EE_|BN0PR10MB4936:EE_
+X-MS-Office365-Filtering-Correlation-Id: d5f4d966-cf87-400d-7f6b-08de1872b48c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|34020700016|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dEJDdGN5aWpvanZhQlIzaUtEb2hXQlp3dHYxaFg5NTRJd0JFR25xUnNYUHVH?=
- =?utf-8?B?N2F6a1R5QnIrclRaUUp6MElMMHYrbWJnczFtQVI5S0NDM3pyUENWbGNaMFFv?=
- =?utf-8?B?aVArRVVSQTNxazZhM215Qm9qZnA2aFRhZ25NSEMyQWJKT3dQcTVaN2dCbGxN?=
- =?utf-8?B?RlR5cy9zNWxzN3BsMzFsN2Z4d0FCWi85UUlGQVNmV21SZGxlcU1JOXQ5c3J0?=
- =?utf-8?B?R1VIcnlYQk03ek9UM2xpYmhMNFhlYUJkbmM1ekJHbkFkQVNzVzNLY0NIYnNS?=
- =?utf-8?B?cWxhcVZWYnVPZWUrakZ1YTR6ZlZ4UVM3S3FidEFGbnN1N1JVbVlUdE14bjRJ?=
- =?utf-8?B?WlJMeE5SMGp2MXlySS9UMnVTdmk2NmFTeDNmdC9wakNBWHZ0bEFpSXNnYVpC?=
- =?utf-8?B?bnVGQ1pseHpaVzdWV3RXRnpyam1NeW5nUnBDTVNHZkEyNHFFSWRXZXd1OWFi?=
- =?utf-8?B?SE9pMll3VzB4RjRPc0dmaW5mUndxR0dMZFRRekkxR2xjUEd6eXBPTDA2b0cw?=
- =?utf-8?B?azZRWTBIZzI1L1V1NCs3bEp2WmRXRnBLNkVhYktHa25ZZldpMzFXbmxHR3Uv?=
- =?utf-8?B?Q091SzFBSU5pSTc3aE9WNmVtL1M4L3NXMElSUEprYUV6b0R6akgrTXNrRnZY?=
- =?utf-8?B?VndQWUswV2hmZlc3QjJWK3dNVHBiR1FZclF3S1hSbHNORFhFQUJJd0tBbXZt?=
- =?utf-8?B?b0Q4Y3lGU2p0aWh1cWhDVldVajNmQ0hzaHpHQnkzVnNrNHV4RzlRdDcrQ3Nx?=
- =?utf-8?B?U24yL3QweG82WW9EdXZPclB5SVdqUmVEK0owWGRkNzZ2L3FmRVZobG1waU5q?=
- =?utf-8?B?amJtRWpZeVpleXp5Z2RkT1A0NVAwakJLYnBpSVBNVmdNOWcxQi94elpZSTZ0?=
- =?utf-8?B?ZkRLZkdXVzZ5c1lUeWVkSVV1M3Bmazc2ZlF2QlJEYk5ONFB2L0J2YnFqYXNw?=
- =?utf-8?B?OWszOTNLcVRWL2VoSjhVbC9nT2R5OTljZElnbEZqZXlXM0RURlpPNVBCTEl3?=
- =?utf-8?B?aG1mbGpuM0NWRWs3T201QU5XZkpWUVhscWk4WmZqOWFzRjVDVlpwTTJHb1A0?=
- =?utf-8?B?Y1cxc3F6b3FzcHN1Z0x5a2tLemxwbkNibWNtSmxMa1BmMXJwYUxyYkZ2d1I2?=
- =?utf-8?B?enh1UVdWZUxnbVA1MDVoUDViM3orc1FhVWFSSENOUWQ1aG9NYVZYbC9xQlJX?=
- =?utf-8?B?dndXOEVqQlRMQ1ZyYlZRT2NxYlYvcE5qR1JqZ3ZKVm1VMHk5TlpTQmpwVWtM?=
- =?utf-8?B?bHhYNk1YNEtGRk9vWUJNamp1ZE1oVTlITkdkNUkvYWF2WUd6blRoQ1h2UEZ4?=
- =?utf-8?B?amZ3OGhZUkVxSitYZDk4QlBIQ1pJTU9LZFBCTDRvNGs3UjBoOUErazZGejl6?=
- =?utf-8?B?dTRUUC9iVDRSMU4xaGIrdkk3Y1k1THg0Vld0MjBrdEphaW5EMDZUNGViM1Fi?=
- =?utf-8?B?OTlPak5mOThUWldmbGxUS3M4blNhbXdQemJLaWFXY3dHYmpTVFBoRWdlekxu?=
- =?utf-8?B?R0JxcFhKUnE2RDR4aVdTaFZKWTUwRkRvRE84b0ozQmVsNjRJMi9oR2lqaFBL?=
- =?utf-8?B?TDFCTXdlOWZPVWRhbll3RkhpdkhwZEVkWThobEVxb0Zxbno2RnJYVU5LamFC?=
- =?utf-8?B?Z0Q0OFZQRGlBNnBYNkxvL3Bta3krSjJhdmh3T1o0dFQybnAvdFNWS2hKRFlK?=
- =?utf-8?B?L21XVVhNcU9Pa3hJb0RaVmtJeFhkOUFDQUtNU1RKTTdPeW5NR3lESFlmVkNo?=
- =?utf-8?B?dWZpcUIvaW5qUjFYbmw1V3Q2ZXJENkJZelJwSjVaM3R0cm8zdkh6S21OaHkx?=
- =?utf-8?B?YVJxQ1BhSUVOakJCU1FGQ095c040dnNseGJKTGwrNDVTQXp5d3JIcVlSUUNP?=
- =?utf-8?B?aFduNk5LRldBb2g5Q2Vud2xoVUY2WHd3MGx5NStVaTB5YnRKUjlYajBLQktt?=
- =?utf-8?B?b1JjdG1IakxnQUdQbk9LbDhJTm1nczZlVzNEejNrbnVYZFQzTXNBUWo2UW1K?=
- =?utf-8?Q?WEAlPbc/gk3VYI2mBiPpHwrkjiWcfE=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(34020700016)(36860700013);
- DIR:OUT; SFP:1101; 
+ ARA:13230040|7416014|376014|36860700013|1800799024|34020700016|82310400026|12100799066;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aEVsY2RmVGVMTnNjTEdMeDloUFBoRDVVVmZDV1g4MDRzWGk0UHBaY0NCbXVJ?=
+ =?utf-8?B?WnplZGcwSVFUQi9QRGE1cGhKZ1JKUUNibTZ5U2I4VVptMmNmNmF2aHlXUW9Q?=
+ =?utf-8?B?SFhzZnVObEtLLzlvMEw1Z2hWV21RakxRbDJXTExNenJSMnRzTjQ2bkhYb09K?=
+ =?utf-8?B?VEV1azVMbityaitkVS9RVm0wZWFmNUlQQVU4a1VnYmhmdjkvWmV3dys0NUYv?=
+ =?utf-8?B?OFBUNkRmZTVsbG9FV2xySTJCT3F4cGZocG0wT2ZadjNxVGxwQWF0SHpJSGJ2?=
+ =?utf-8?B?bVpQTzRJbEJBTGg0TjM4QkZ6NENsTlFuRTZ1Mm1UNTlxNGs3Y0ZxS2NlRjZ0?=
+ =?utf-8?B?WEl1QVFldWkrekdMZWttdmRlNzVzN0FKWklTYkM2bG9KS2tvUzB1K1lscFVy?=
+ =?utf-8?B?d0x0UEFFQm00WnVFK21uZ0JORUljNGlVR0JzbjlQUGZmWDRaR1ZVd29obFFW?=
+ =?utf-8?B?ZDBZQTBaZno3c2kvNkRCdEtOQ0szd3V0WXZ2VitlRGk1NE9NMFV3cGM4L2tY?=
+ =?utf-8?B?UFNWYmNoUXVLbDE2UlFDTTNWMjRHTmdrT2V2Rk1LaHZ0S29HemEwbXNMbGdw?=
+ =?utf-8?B?ek42OThKRHhyeUVNaHV1dVpvNjdxTVFhOTJXSUJFbFlMZFhDbERsdVRKQUln?=
+ =?utf-8?B?UkNWVlNRZzAwSHBFdHFWZHp2UWplTnVxVlFzdm5hbkNYeDBtZkJIcmthaGR3?=
+ =?utf-8?B?c2JOa0JtbHJmbVh6U2p2Yyt6VTg2YXpudlg5dFNuU2FOZFNVbWI1VHpKazZG?=
+ =?utf-8?B?cHFSQ3FqVHIzaXpFT2lpdFh6UXRMajlPSUovdHF1dVJ0ZGwzUlgvNU50OXJE?=
+ =?utf-8?B?YVdUL3c2RWdnY1ROdFU4SXZKZjFkdjY5QlA2a2Mxbk9PSk0vMUZ2emNsK0FK?=
+ =?utf-8?B?RDNGY3hOMlBuU2tNYlBWczJVbDRvbVVNWFI3SmhvV2NpRm83WEVlSXViVUpL?=
+ =?utf-8?B?QkdUK0cybnlzaDVDUnVLZ3prdDdXdlhkWkdhNm1pUHAzWEdpdGs3UWphak5L?=
+ =?utf-8?B?aGNDOG5Ra3Jsbmcvbnh0T05QMWdWWEs2aXlUUEI5bmNZREpLTm0wajJRRzdq?=
+ =?utf-8?B?N0VJSkQvL1hEODlVWGd0bUVxa0p4SkdwL016M082YWI5U05BZjQrTFRXVXZn?=
+ =?utf-8?B?bTd3VXFuRjJSRHhJMzF2S1NMY2NhcEhoUDFGaEVzU3ZaeVUyM3FFMXB0cVIx?=
+ =?utf-8?B?QjBwN2N0L2JNV25rOFd3Ymwva1JZN1ZQRzI2eGdvQS9Md3BoM2FobmZENTlQ?=
+ =?utf-8?B?aG94dUViejZ3eHZ0TE0rMkxsamhMbEhhRE1iN3dNRFJvSWgrMkhEODcvZEta?=
+ =?utf-8?B?b3Q1VDFNSlJIVWV1UGtOY28yczZUN1BZb3BNc3dtUmowWXk2Y1c0YitkeE5E?=
+ =?utf-8?B?Y1J5VDlyZmlxcTRSejNwMXRYQmZ1YTBOcmNDNzhqeSswWGFuekRSQUY4S2Fi?=
+ =?utf-8?B?eEk5QjF5TXBXcDE3TU5ZM1gzYSsxdk1ZVXN5eDlvNVFFakRvaHMvcmtGb0tB?=
+ =?utf-8?B?QUMvZWJqV2F4SVRDR1ZMQU5LdWlnM1JVQ1U2aVg3OVJwUUVUMFFxL3duQ0ZZ?=
+ =?utf-8?B?b3NLZGFSbDdETEc0cDJUTCtGZ01oT0NoZHF0dGFsMk8ybUVTR3J2YzJGeXJQ?=
+ =?utf-8?B?bmRQUWxDT1orTlVRRlVYckdvZDdCK0twNXZmVUpQQVQxcXJPd1c0VThFTDd2?=
+ =?utf-8?B?d2trc1ZneEdJQ3VTOUo4Tis1WFI5RkdzdXdtUlpMU05FNnNyNHR4emNHa0l6?=
+ =?utf-8?B?RzFnYzk4aDFPdDR1NENOODkyWlhuaE5YYzVUREo4NEYyeEFjcGREMGlkZXJW?=
+ =?utf-8?B?Z0FTV2dqbnVVeU1WNjlPRVFOM3c5T0c0bzFGWVF0Qkc1QmtSWDVPOWZXci9G?=
+ =?utf-8?B?a1BEL0wrZ0RFRjdlYkJqYXRXUW1yMXAwa2hWNGVKbUowRW0zVGRtRWtsQndR?=
+ =?utf-8?B?Y1R0SjBXTVpvQS9IL0dxT09CWU9RZlpuRS9UQjhrbzc2OHR2WWVUeXRFMTRu?=
+ =?utf-8?B?azdXQzBORUIwaEE2YzdpZ0xTSVpIZGNkU0VZazI0TW9icW1wYXRCZnZ5Y2Ny?=
+ =?utf-8?B?ZU5FMzUra2tjN2pKK1NaNENqQjJOTUF2dXhUS0hXZnIyalA0U0tZVzNTZm9m?=
+ =?utf-8?Q?XDoc=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(36860700013)(1800799024)(34020700016)(82310400026)(12100799066);
+ DIR:OUT; SFP:1501; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 11:32:49.8857 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ebb05a2c-98c5-44af-9310-08de18713902
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2025 11:43:26.6466 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5f4d966-cf87-400d-7f6b-08de1872b48c
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004682.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000971E2.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR10MB6382
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB4936
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,58 +176,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On October 31, 2025 thus sayeth Neha Malcom Francis:
-> Update the DDR configuration for J7200 according to the SysConfig
-> DDR Configuration tool v0.12.0. Log of changes between 0.9.1 to 0.12.0
-> is [0].
-> 
-> [0] https://dev.ti.com/tirex/content/TDA4x_DRA8x_AM67x-AM69x_DDR_Config_0.12.00.0000/docs/RevisionHistory.html
-> 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> ---
->  arch/arm/dts/k3-j7200-ddr-evm-lp4-3200.dtsi   | 2207 +++++++++++++++++
->  .../arm/dts/k3-j7200-r5-common-proc-board.dts |    2 +-
->  2 files changed, 2208 insertions(+), 1 deletion(-)
->  create mode 100644 arch/arm/dts/k3-j7200-ddr-evm-lp4-3200.dtsi
-> 
-> diff --git a/arch/arm/dts/k3-j7200-ddr-evm-lp4-3200.dtsi b/arch/arm/dts/k3-j7200-ddr-evm-lp4-3200.dtsi
-> new file mode 100644
-> index 00000000000..810415494ce
-> --- /dev/null
-> +++ b/arch/arm/dts/k3-j7200-ddr-evm-lp4-3200.dtsi
-> @@ -0,0 +1,2207 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2023 Texas Instruments Incorporated - http://www.ti.com/
-> + * This file was generated with the following tool revisions:
-> + *     - SysConfig: Revision 1.25.0+4268
-> + *     - Jacinto7_DDRSS_RegConfigTool: Revision 0.12.0
-> + * This file was generated on Thu Oct 30 2025 13:11:41 GMT+0530 (India Standard Time)
-> +*/
-> +
+On Fri Oct 31, 2025 at 4:30 PM IST, Emanuele Ghidoli wrote:
+>
+>
+> On 29/10/2025 09:58, Anshul Dalal wrote:
+>> On Tue Oct 28, 2025 at 10:26 PM IST, Emanuele Ghidoli wrote:
+>>> On 28/10/2025 05:38, Anshul Dalal wrote:
+>>>> Hi Francesco,
+>>>>
+>>>> On Mon Oct 27, 2025 at 10:22 PM IST, Francesco Dolcini wrote:
+>>>>> Hello Anshul,
+>>>>>
+>>>>> On Fri, Oct 17, 2025 at 06:45:22PM +0530, Anshul Dalal wrote:
+>>>>>> Hi all,
+>>>>>>
+>>>>>> In U-Boot, TI only provides a single memory map for all k3 platforms=
+, this
+>>>>>> does not scale for devices where atf and optee lie outside the range=
+ 0x80000000
+>>>>>> - 0x80080000 and 0x9e780000 - 0xa0000000 respectively.
+>>>>>>
+>>>>>> There are also issues for devices with < 2GiB of memory (eg am62SiP =
+with 512MiB
+>>>>>> of RAM) as the maximum size for the first DRAM bank is hardcoded to =
+2GiB in the
+>>>>>> current memory map. Furthermore the second DRAM bank is mapped even =
+for devices
+>>>>>> that only have a single bank.
+>>>>>>
+>>>>>> Therefore this patch set adds the required functionality to create t=
+he MMU table
+>>>>>> at runtime based on the device-tree.
+>>>>>>
+>>>>>> The patch set has been build tested on all effected platforms but bo=
+ot-tested
+>>>>>> only on TI's K3 EVMs, the beagleplay and phytec's phycore-am6* platf=
+orms.
+>>>>>>
+>>>>>> The following effected boards have not been boot tested:
+>>>>>>  - verdin-am62
+>>>>>
+>>>>> it seems that this series introduce a regression on verdin-am62, I ha=
+ve
+>>>>> not done a bi-sect yet, but we run daily build of U-Boot master and t=
+he
+>>>>> regressions seems to have started when this patch series was
+>>>>> merged.
+>>>>>
+>>>>> On verdin-am62 we detect the RAM size at run-time, see
+>>>>> board/toradex/verdin-am62/verdin-am62.c:dram_init(), and now we alway=
+s
+>>>>> get 2GiB even for modules with only 512MB or 1024MB of memory.
+>>>>>
+>>>>
+>>>> This patch series modified the behavior of enable_caches to configure =
+the
+>>>> memory map of the device as per the device-tree instead of using a
+>>>> static map for all of K3.
+>>>>
+>>>> The issue with verdin-am62 seems to be that while you do properly
+>>>> configure gd->ram_size in your dram_init, the '/memory' node of the
+>>>> device-tree remains unchanged with the outdated 2GiB size.
+>>>>
+>>>> You could try updating the fdt's memory size to the correct value in
+>>>> dram_init and see if that fixes the problem.
+>>>>
+>>>> Regards,
+>>>> Anshul
+>>> Hello Anshul,
+>>>
+>>> I was bisecting the series, and I can confirm that the commit "mach-k3:=
+ map
+>>> all banks using mem_map_from_dram_banks" introduces the regression.
+>>>
+>>> Given that initcall_run_f() calls dram_init_banksize(), and after reloc=
+ation
+>>> board_init_r() calls enable_caches() (call stack: board_init_r() ->
+>>> initcall_run_r() -> initr_caches() -> enable_caches()), I would expect =
+that
+>>> enable_caches() should not override the bank sizes previously configure=
+d.
+>>> Currently, however, enable_caches() introduces this side effect.
+>>>
+>>> Wouldn=E2=80=99t it make more sense to call fdtdec_setup_memory_banksiz=
+e() in the
+>>> default dram_init_banksize() (in arch/arm/mach-k3/k3-ddr.c) and avoid c=
+alling
+>>> it again in mem_map_from_dram_banks()?
+>>>
+>>=20
+>> We could follow that order too but that would makes a call to
+>> mem_map_from_dram_banks dependent on gd->bd->di_dram being correctly
+>> populated. I had assumed whoever calls mem_map_from_dram_banks had made
+>> sure to properly fixup the memory node of the fdt.
+>>=20
+>> Given that it seems like the root cause of the problem is with the
+>> U-Boot's device-tree not having the correct memory node, we could add a
+>> call to fixup_memory_node (arch/arm/mach-k3/k3-ddr.c) from A53 SPL to
+>> ensure the memory can be queried stright from the device-tree once we do
+>> get to U-Boot proper.
+>>=20
+>> 	--- a/board/toradex/verdin-am62/verdin-am62.c
+>> 	+++ b/board/toradex/verdin-am62/verdin-am62.c
+>> 	@@ -46,6 +46,13 @@ int dram_init_banksize(void)
+>> 		return ret;
+>> 	 }
+>>=20
+>> 	+#ifdef CONFIG_XPL_BUILD
+>> 	+void spl_perform_board_fiups(struct spl_image_info *spl_image)
+>> 	+{
+>> 	+       fixup_memory_node(spl_image);
+>> 	+}
+>> 	+#endif
+>> 	+
+>> 	 /*
+>> 	  * Avoid relocated U-Boot clash with Linux reserved-memory on 512 MB S=
+oM
+>> 	  */
+>>=20
+>>=20
+>> If you could get to U-Boot prompt with the above diff, could you
+>> share the output of the 'meminfo' command with the following configs
+>> added:
+>> 	CONFIG_CMD_MEMINFO=3Dy
+>> 	CONFIG_CMD_MEMINFO_MAP=3Dy
+>>=20
+>> Though so far, I have been unsuccessful in my attempts to reproduce a
+>> boot failure on our own 512MiB platforms (AM62x SiP). Could you share
+>> the boot logs with '#define DEBUG' in common/board_r.c, common/board_f.c
+>> and mach-k3/common.c to help further narrow down the issue.
+>>=20
+>> Regards,
+>> Anshul
+>
+> Hello Anshul,
+> let me try to rephrase.
+>
+> The enable_caches() function is not only enabling caches, but also updati=
+ng
+> the memory map.
+> It is not expected from the point of view of the caller and this side eff=
+ect
+> introduces a regression on our U-Boot, since the memory banks are already
+> configured in dram_init().
 
-...
+Hi Emanuele,
 
-> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts 
-> b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> index e35b767a7e3..3127ac83d7f 100644
-> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> @@ -6,7 +6,7 @@
->  /dts-v1/;
->  
->  #include "k3-j7200-common-proc-board.dts"
-> -#include "k3-j7200-ddr-evm-lp4-2666.dtsi"
+Ah, I see your point. In that case mem_map_from_dram_banks should only
+rely on the gd with dram_init and dram_init_banksize taking care of
+configuring gd properly.
 
-These are automatically generated files. Why are we keeping the older 
-configuration around? 
+I'll send a fix as per your suggestion (moving
+fdtdec_setup_memory_banksize to the default dram_init_banksize) shortly.
 
-~Bryan
+Regards,
+Anshul
 
-> +#include "k3-j7200-ddr-evm-lp4-3200.dtsi"
->  #include "k3-j721e-ddr.dtsi"
->  #include "k3-j7200-common-proc-board-u-boot.dtsi"
->  
-> -- 
-> 2.34.1
-> 
+>
+> I understand that updating the device tree, as you proposed, could work a=
+round
+> the issue, but that does not really fix the root cause.
+> Having a function perform unexpected operations is the best way to introd=
+uce
+> regressions now and bugs in the future.
+>
+> We should either revert the patch or properly fix the issue.
+>
+> Regards,
+> Emanuele
+
