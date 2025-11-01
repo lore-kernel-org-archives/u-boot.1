@@ -4,58 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E1CCCFA02
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 16:08:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99D74CCFA02
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 17:12:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62C8E838C2;
-	Sat,  1 Nov 2025 17:08:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id C021C83642;
+	Sat,  1 Nov 2025 18:12:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JAg6n7CQ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ow90ZwWk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39DA48331F; Sat,  1 Nov 2025 17:08:00 +0100 (CET)
-Received: from mail-m1973194.qiye.163.com (mail-m1973194.qiye.163.com
- [220.197.31.94])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A991F83677; Sat,  1 Nov 2025 18:12:06 +0100 (CET)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9BA8838C2
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 17:07:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id E9F2E8331F
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 18:12:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.1.64] (unknown [124.72.36.229])
- by smtp.qiye.163.com (Hmail) with ESMTP id 28044c68a;
- Sun, 2 Nov 2025 00:07:52 +0800 (GMT+08:00)
-Message-ID: <675f7815-5be2-446d-93fd-d1d2d25f8c9e@rock-chips.com>
-Date: Sun, 2 Nov 2025 00:07:52 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-9352980a4f2so91444241.2
+ for <u-boot@lists.denx.de>; Sat, 01 Nov 2025 10:12:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1762017122; x=1762621922; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WKr68BZYri22/+LGNDhvgLYUF+A2gda/APgYGhCQgW8=;
+ b=Ow90ZwWkJsbU4BKh0hU4EwiHYbfUI9Cus5/V+5ArD5kwMhfZuHGG5DfVwp4xivBXUT
+ KyUPk1APoSmJXDSwXXnlvUz/zvafvJ5mJMU7bQKqI458RxAxVgrB+5/nkpbNK3+EiX0L
+ xyCQPC6Inp7gLMkibclBO8l7zMgKG5Zykfb1wyzS/WQk9ULLmHNhZBXUr3i1MkycdNbZ
+ zjjHhLZX2G1y7mZRxCt723y0l0oxNsMb+g4NuDk5nhlvNGn1O+WpsPhN7JnyiU47/uwP
+ /E91PCmuZOqf4PHZ5bDUEnlhRlJX9eixCyFDMOp9kigxrmgy7sXAxuebfm3gaWvLS2vt
+ 1maA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762017122; x=1762621922;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WKr68BZYri22/+LGNDhvgLYUF+A2gda/APgYGhCQgW8=;
+ b=UCdfyF62nUAo/1weoCWE3McP/oOkIXvjajDrLa9qwpghaeZueAxFuPcsygl/x3GR4g
+ SM+JrC6rMqg68tcU2JIUhTwlHquy5V8ySbu8Vog18eNpVi2bl2rzt0nVPRssYnDOKi/r
+ LJTIc46KiJp54PcO2DsyFpCEgWhaBHxSs2vdRt2lnDx9xc9FVsZbg9bMmPo2EShW96Y6
+ hOF5XLz8Wv42xZt6QyWOoXAC4mA3OCBFvixLAyRGMGa9Tr0uUoA+2q82NlehZ1Dzdah5
+ V8t/MDpCnvl2qzZSuKpTTeON+gq4G2N6sjSCYXwNoUZ256zQCLeQGC5PP9tTgbvrSQnJ
+ MU0w==
+X-Gm-Message-State: AOJu0YxSPb8CKJleNr3A1coq1uy4cLEjPtBCcQ1Dv4lkEnZvJ9WJ7zcT
+ GdpFldnGzRLZByaj4yyxoM7XrSkm9LHWRNuivruAFJ4exIc6Fo5YAZg4dK8dgFQN1aHQA8BnXbd
+ NhHxL788NzyY5Bg6lNxbsaLYOicT4/kw=
+X-Gm-Gg: ASbGncvF9IsWp7cPNLfMr9SRAefn+Q9hzE8b5e1f1B9TvbHECJ7TFJdwCen+kD0LUpa
+ DUi2WIn441CwK73cZaDIKlUme8276OGu4Bb3Ud1NKIlBFGF2Gl0pW3jdpzNTriE7S/8j6f0w8hm
+ hYjbh80CR+O+73OFMimIM3thnwKz/u0K+rVwUC3Z3XPTsx22sdTH4pgf1ReIlQBQ7T8c+bbATV/
+ CnyOVXZD0FT6+v09OykRyXqA/Sa1MbfqFrL7eg57+dPLBcigvYfyK0abUw=
+X-Google-Smtp-Source: AGHT+IG7stVEUcam0wY170srY+CoCi/zH+jsCTM0u67zzAPBv2RJpTxv3yMMWzcrvAc8GJrCkLCBFzcjAJGiBoZlds0=
+X-Received: by 2002:a05:6102:1a18:20b0:5db:b7d9:4db with SMTP id
+ ada2fe7eead31-5dbb7d9061dmr1325199137.14.1762017121436; Sat, 01 Nov 2025
+ 10:12:01 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mmc: rockchip_sdhci: Set xx_TAP_VALUE for RK3528
-To: Jonas Karlman <jonas@kwiboo.se>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <ziyao@disroot.org>,
- Chukun Pan <amadeus@jmu.edu.cn>, u-boot@lists.denx.de
-References: <20250714203410.1782783-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250714203410.1782783-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9a402cdaf203afkunmf1713c0f9a6a68
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTUsYVkJISUsYHhkfQkJLTFYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUlCWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-DKIM-Signature: a=rsa-sha256;
- b=JAg6n7CQAh5UoLAdq7nNuclCAQBVTRqmegRVSK3zZs1/RtvD7HYR9NR3Ea8NVCdMRxWavO6Bpv5XOWEFSqWZo8cJseLaeIfRhvqTL+2I+JLw7oBMJwv/9wPdTsRH5j4KebMqRNQY2djkla2OM+UO5E2DPmbP5IfjQ0CBMxwvQDo=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=t4y3JdU/COgY4HjZ+XiYaiidjbYFf8RQZCMp4RGyyvY=;
- h=date:mime-version:subject:message-id:from;
+References: <20251101064907.5037-1-hs@nabladev.com>
+ <20251101064907.5037-3-hs@nabladev.com>
+In-Reply-To: <20251101064907.5037-3-hs@nabladev.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Sat, 1 Nov 2025 13:11:50 -0400
+X-Gm-Features: AWmQ_bnBnVoEh0_TW2BfOChXM98F0RiiI2n-zQvFZUx5-5HOaCw-bEuXezsG8cU
+Message-ID: <CAMDkj5w4uwKFJwoSdM2CnG4-ewH3V5X0ZW3jk1MCNH+Bdg+j3A@mail.gmail.com>
+Subject: Re: [PATCH v1 2/5] lib: implement SM3 secure hash
+To: Heiko Schocher <hs@nabladev.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
+ Greg Malysa <malysagreg@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
+ Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,119 +116,655 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heiko,
 
-On 2025/7/15 04:34, Jonas Karlman wrote:
-> eMMC erase and write support on RK3528 is somewhat unreliable, sometime
-> e.g. mmc erase and write commands will fail with an error.
->
-> Use the delay line lock value for half card clock cycle, DLL_LOCK_VALUE,
-> to set a manual xx_TAP_VALUE to fix the unreliable eMMC support.
->
-> This is only enabled for RK3528, remaining SoCs still use the automatic
-> tap value, (DLL_LOCK_VALUE * 2) % 256, same value we configure manually
-> for RK3528.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+On Sat, Nov 1, 2025 at 2:49=E2=80=AFAM Heiko Schocher <hs@nabladev.com> wro=
+te:
 
-Thanks,
-- Kever
-> ---
-> Changes in v2:
-> - Rename flag and field value to function name, TAPVALUE_FROM_SW
-> - Simplify and make code more understandable with use of FIELD_GET/PREP,
->    should be more clear that xx_TAP_VALUE is set to DLL_LOCK_VALUE * 2
-> ---
->   drivers/mmc/rockchip_sdhci.c | 27 ++++++++++++++++++++++-----
->   1 file changed, 22 insertions(+), 5 deletions(-)
+> Implement SM3 secure hash algorithm, as specified by
+> OSCCA GM/T 0004-2012 SM3 and described
+> at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
 >
-> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-> index 761e3619329c..cca917da68e7 100644
-> --- a/drivers/mmc/rockchip_sdhci.c
-> +++ b/drivers/mmc/rockchip_sdhci.c
-> @@ -9,6 +9,7 @@
->   #include <dm.h>
->   #include <dm/ofnode.h>
->   #include <dt-structs.h>
-> +#include <linux/bitfield.h>
->   #include <linux/delay.h>
->   #include <linux/err.h>
->   #include <linux/libfdt.h>
-> @@ -86,6 +87,9 @@
->   #define DLL_CMDOUT_SRC_CLK_NEG		BIT(28)
->   #define DLL_CMDOUT_EN_SRC_CLK_NEG	BIT(29)
->   #define DLL_CMDOUT_BOTH_CLK_EDGE	BIT(30)
-> +#define DLL_TAPVALUE_FROM_SW		BIT(25)
-> +#define DLL_TAP_VALUE_PREP(x)		FIELD_PREP(GENMASK(15, 8), (x))
-> +#define DLL_LOCK_VALUE_GET(x)		FIELD_GET(GENMASK(7, 0), (x))
->   
->   #define DLL_LOCK_WO_TMOUT(x) \
->   	((((x) & DWCMSHC_EMMC_DLL_LOCKED) == DWCMSHC_EMMC_DLL_LOCKED) && \
-> @@ -93,6 +97,7 @@
->   #define ROCKCHIP_MAX_CLKS		3
->   
->   #define FLAG_INVERTER_FLAG_IN_RXCLK	BIT(0)
-> +#define FLAG_TAPVALUE_FROM_SW		BIT(1)
->   
->   struct rockchip_sdhc_plat {
->   	struct mmc_config cfg;
-> @@ -317,7 +322,7 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
->   	struct sdhci_data *data = (struct sdhci_data *)dev_get_driver_data(priv->dev);
->   	struct mmc *mmc = host->mmc;
->   	int val, ret;
-> -	u32 extra, txclk_tapnum;
-> +	u32 extra, txclk_tapnum, dll_tap_value;
->   
->   	if (!enable) {
->   		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
-> @@ -347,7 +352,15 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
->   		if (ret)
->   			return ret;
->   
-> -		extra = DWCMSHC_EMMC_DLL_DLYENA | DLL_RXCLK_ORI_GATE;
-> +		if (data->flags & FLAG_TAPVALUE_FROM_SW)
-> +			dll_tap_value = DLL_TAPVALUE_FROM_SW |
-> +					DLL_TAP_VALUE_PREP(DLL_LOCK_VALUE_GET(val) * 2);
-> +		else
-> +			dll_tap_value = 0;
+> code is based on linux commit
+> f83a4f2a4d8c: ("Merge tag 'erofs-for-6.17-rc6-fixes' of git://
+> git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs")
+>
+> Signed-off-by: Heiko Schocher <hs@nabladev.com>
+> ---
+> This patch drops a lot of checkpatch warnings, ignored them
+> as tried to stay as close as possible with linux code.
+>
+> MbedTLS also supports SMx, can you turn on the SM3 option in MbedTLS and
+make it selectable between lib/sm3 and MbedTLS via Kconfig? Just like what
+we have for other algorithms.
+
+Regards,
+Raymond
+
+
+>  MAINTAINERS          |   7 +
+>  boot/Kconfig         |   1 +
+>  cmd/Kconfig          |  16 +++
+>  cmd/Makefile         |   1 +
+>  cmd/sm3sum.c         |  48 +++++++
+>  common/hash.c        |  43 +++++-
+>  include/u-boot/sm3.h |  34 +++++
+>  lib/Kconfig          |   7 +
+>  lib/Makefile         |   1 +
+>  lib/sm3.c            | 313 +++++++++++++++++++++++++++++++++++++++++++
+>  10 files changed, 470 insertions(+), 1 deletion(-)
+>  create mode 100644 cmd/sm3sum.c
+>  create mode 100644 include/u-boot/sm3.h
+>  create mode 100644 lib/sm3.c
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 671903605d1..4c13e21e147 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1672,6 +1672,13 @@ F:       include/slre.h
+>  F:     lib/slre.c
+>  F:     test/lib/slre.c
+>
+> +SM3
+> +M:     Heiko Schocher <hs@nabladev.com>
+> +S:     Maintained
+> +F:     cmd/sm3sum.c
+> +F:     include/u-boot/sm3.h
+> +F:     lib/sm3.c
 > +
-> +		extra = DWCMSHC_EMMC_DLL_DLYENA |
-> +			DLL_RXCLK_ORI_GATE |
-> +			dll_tap_value;
->   		if (data->flags & FLAG_INVERTER_FLAG_IN_RXCLK)
->   			extra |= DLL_RXCLK_NO_INVERTER;
->   		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_RXCLK);
-> @@ -361,19 +374,22 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
->   				DLL_CMDOUT_BOTH_CLK_EDGE |
->   				DWCMSHC_EMMC_DLL_DLYENA |
->   				data->hs400_cmdout_tapnum |
-> -				DLL_CMDOUT_TAPNUM_FROM_SW;
-> +				DLL_CMDOUT_TAPNUM_FROM_SW |
-> +				dll_tap_value;
->   			sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_CMDOUT);
->   		}
->   
->   		extra = DWCMSHC_EMMC_DLL_DLYENA |
->   			DLL_TXCLK_TAPNUM_FROM_SW |
->   			DLL_TXCLK_NO_INVERTER |
-> -			txclk_tapnum;
-> +			txclk_tapnum |
-> +			dll_tap_value;
->   		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_TXCLK);
->   
->   		extra = DWCMSHC_EMMC_DLL_DLYENA |
->   			data->hs400_strbin_tapnum |
-> -			DLL_STRBIN_TAPNUM_FROM_SW;
-> +			DLL_STRBIN_TAPNUM_FROM_SW |
-> +			dll_tap_value;
->   		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_STRBIN);
->   	} else {
->   		/*
-> @@ -663,6 +679,7 @@ static const struct sdhci_data rk3528_data = {
->   	.set_ios_post = rk3568_sdhci_set_ios_post,
->   	.set_clock = rk3568_sdhci_set_clock,
->   	.config_dll = rk3568_sdhci_config_dll,
-> +	.flags = FLAG_TAPVALUE_FROM_SW,
->   	.hs200_txclk_tapnum = 0xc,
->   	.hs400_txclk_tapnum = 0x6,
->   	.hs400_cmdout_tapnum = 0x6,
+>  SMCCC TRNG
+>  M:     Etienne Carriere <etienne.carriere@linaro.org>
+>  S:     Maintained
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 9adb051400f..6209c7ef712 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -1024,6 +1024,7 @@ config MEASURED_BOOT
+>         select SHA256
+>         select SHA384
+>         select SHA512
+> +       select SM3
+>         help
+>           This option enables measurement of the boot process when bootin=
+g
+>           without UEFI . Measurement involves creating cryptographic hash=
+es
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 9929087a8bb..943c8425320 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -264,6 +264,22 @@ config CMD_SBI
+>         help
+>           Display information about the SBI implementation.
+>
+> +config CMD_SM3SUM
+> +       bool "sm3sum"
+> +       select SM3
+> +       select HASH
+> +       help
+> +         add SM3_256 Hash Algorithm Implementation for U-Boot
+> +         SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and
+> described
+> +         at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
+> +
+> +config SM3SUM_VERIFY
+> +       bool "sm3sum -v"
+> +       depends on CMD_SM3SUM
+> +       help
+> +         Add for the sm3sum command the -v option
+> +         to verify data against a SM3 checksum.
+> +
+>  config CMD_SMBIOS
+>         bool "smbios"
+>         depends on SMBIOS
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index 25479907797..642042cfe00 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -177,6 +177,7 @@ obj-$(CONFIG_CMD_SETEXPR) +=3D setexpr.o
+>  obj-$(CONFIG_CMD_SETEXPR_FMT) +=3D printf.o
+>  obj-$(CONFIG_CMD_SPI) +=3D spi.o
+>  obj-$(CONFIG_CMD_STRINGS) +=3D strings.o
+> +obj-$(CONFIG_CMD_SM3SUM) +=3D sm3sum.o
+>  obj-$(CONFIG_CMD_SMBIOS) +=3D smbios.o
+>  obj-$(CONFIG_CMD_SMC) +=3D smccc.o
+>  obj-$(CONFIG_CMD_SYSBOOT) +=3D sysboot.o
+> diff --git a/cmd/sm3sum.c b/cmd/sm3sum.c
+> new file mode 100644
+> index 00000000000..9044a322e22
+> --- /dev/null
+> +++ b/cmd/sm3sum.c
+> @@ -0,0 +1,48 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2025
+> + * Heiko Schocher, Nabladev Software Engineering, hs@nabladev.com
+> + *
+> + * based on code from cmd/md5sum.c
+> + */
+> +
+> +#include <command.h>
+> +#include <env.h>
+> +#include <hash.h>
+> +
+> +static int do_sm3sum(struct cmd_tbl *cmdtp, int flag, int argc,
+> +                    char *const argv[])
+> +{
+> +       int flags =3D HASH_FLAG_ENV;
+> +       int ac;
+> +       char *const *av;
+> +
+> +       if (argc < 3)
+> +               return CMD_RET_USAGE;
+> +
+> +       av =3D argv + 1;
+> +       ac =3D argc - 1;
+> +       if (IS_ENABLED(CONFIG_SM3SUM_VERIFY) && strcmp(*av, "-v") =3D=3D =
+0) {
+> +               flags |=3D HASH_FLAG_VERIFY;
+> +               av++;
+> +               ac--;
+> +       }
+> +
+> +       return hash_command("sm3_256", flags, cmdtp, flag, ac, av);
+> +}
+> +
+> +#if IS_ENABLED(CONFIG_SM3SUM_VERIFY)
+> +U_BOOT_CMD(sm3sum, 5, 1, do_sm3sum,
+> +          "compute SM3 message digest",
+> +          "address count [[*]sum]\n"
+> +          "  - compute SM3 message digest [save to sum]\n"
+> +          "sm3sum -v address count [*]sum\n"
+> +          "  - verify sm3sum of memory area"
+> +);
+> +#else
+> +U_BOOT_CMD(sm3sum, 4, 1, do_sm3sum,
+> +          "compute SM3 message digest",
+> +          "address count [[*]sum]\n"
+> +          "  - compute SM3 message digest [save to sum]"
+> +);
+> +#endif /* IS_ENABLED(CONFIG_SM3SUM_VERIFY) */
+> diff --git a/common/hash.c b/common/hash.c
+> index 0c45992d5c7..1bf0a01681f 100644
+> --- a/common/hash.c
+> +++ b/common/hash.c
+> @@ -34,6 +34,7 @@
+>  #include <u-boot/sha256.h>
+>  #include <u-boot/sha512.h>
+>  #include <u-boot/md5.h>
+> +#include <u-boot/sm3.h>
+>
+>  static int __maybe_unused hash_init_sha1(struct hash_algo *algo, void
+> **ctxp)
+>  {
+> @@ -143,6 +144,35 @@ static int __maybe_unused hash_finish_sha512(struct
+> hash_algo *algo, void *ctx,
+>         return 0;
+>  }
+>
+> +static int __maybe_unused hash_init_sm3(struct hash_algo *algo, void
+> **ctxp)
+> +{
+> +       struct sm3_context *ctx =3D malloc(sizeof(struct sm3_context));
+> +
+> +       sm3_init(ctx);
+> +       *ctxp =3D ctx;
+> +       return 0;
+> +}
+> +
+> +static int __maybe_unused hash_update_sm3(struct hash_algo *algo, void
+> *ctx,
+> +                                         const void *buf, uint size,
+> +                                         int is_last)
+> +{
+> +       sm3_update((struct sm3_context *)ctx, buf, size);
+> +       return 0;
+> +}
+> +
+> +static int __maybe_unused hash_finish_sm3(struct hash_algo *algo, void
+> *ctx,
+> +                                         void *dest_buf, int size)
+> +{
+> +       if (size < algo->digest_size)
+> +               return -1;
+> +
+> +       sm3_final((struct sm3_context *)ctx, dest_buf);
+> +       free(ctx);
+> +       return 0;
+> +}
+> +
+> +
+>  static int __maybe_unused hash_init_crc16_ccitt(struct hash_algo *algo,
+>                                                 void **ctxp)
+>  {
+> @@ -298,6 +328,17 @@ static struct hash_algo hash_algo[] =3D {
+>  #endif
+>         },
+>  #endif
+> +#if CONFIG_IS_ENABLED(SM3)
+> +       {
+> +               .name           =3D "sm3_256",
+> +               .digest_size    =3D SM3_DIGEST_SIZE,
+> +               .chunk_size     =3D SM3_BLOCK_SIZE,
+> +               .hash_func_ws   =3D sm3_csum_wd,
+> +               .hash_init      =3D hash_init_sm3,
+> +               .hash_update    =3D hash_update_sm3,
+> +               .hash_finish    =3D hash_finish_sm3,
+> +       },
+> +#endif
+>  #if CONFIG_IS_ENABLED(CRC16)
+>         {
+>                 .name           =3D "crc16-ccitt",
+> @@ -334,7 +375,7 @@ static struct hash_algo hash_algo[] =3D {
+>  #if CONFIG_IS_ENABLED(SHA256) || IS_ENABLED(CONFIG_CMD_SHA1SUM) || \
+>         CONFIG_IS_ENABLED(CRC32_VERIFY) || IS_ENABLED(CONFIG_CMD_HASH) ||=
+ \
+>         CONFIG_IS_ENABLED(SHA384) || CONFIG_IS_ENABLED(SHA512) || \
+> -       IS_ENABLED(CONFIG_CMD_MD5SUM)
+> +       IS_ENABLED(CONFIG_CMD_MD5SUM) || CONFIG_IS_ENABLED(SM3)
+>  #define multi_hash()   1
+>  #else
+>  #define multi_hash()   0
+> diff --git a/include/u-boot/sm3.h b/include/u-boot/sm3.h
+> new file mode 100644
+> index 00000000000..6caaed537de
+> --- /dev/null
+> +++ b/include/u-boot/sm3.h
+> @@ -0,0 +1,34 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +#ifndef _SM3_H
+> +#define _SM3_H
+> +
+> +#define SM3_DIGEST_SIZE        32      /* 256 bits */
+> +#define SM3_BLOCK_SIZE 64      /* 512 bits */
+> +#define SM3_PAD_UNIT   56      /* 448 bits */
+> +
+> +#define SM3_T1         0x79CC4519
+> +#define SM3_T2         0x7A879D8A
+> +
+> +#define SM3_IVA                0x7380166f
+> +#define SM3_IVB                0x4914b2b9
+> +#define SM3_IVC                0x172442d7
+> +#define SM3_IVD                0xda8a0600
+> +#define SM3_IVE                0xa96f30bc
+> +#define SM3_IVF                0x163138aa
+> +#define SM3_IVG                0xe38dee4d
+> +#define SM3_IVH                0xb0fb0e4e
+> +
+> +struct sm3_context {
+> +       uint32_t state[SM3_DIGEST_SIZE / 4];
+> +       uint64_t count; /* Message length in bits */
+> +       uint8_t buffer[SM3_BLOCK_SIZE];
+> +       int buflen;
+> +};
+> +
+> +void sm3_init(struct sm3_context *sctx);
+> +void sm3_update(struct sm3_context *sctx, const uint8_t *input, size_t
+> ilen);
+> +void sm3_final(struct sm3_context *sctx, uint8_t output[SM3_DIGEST_SIZE]=
+);
+> +
+> +void sm3_csum_wd(const unsigned char *input, uint32_t len,
+> +                unsigned char *output, unsigned int chunk_sz);
+> +#endif
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index f5c1731f456..fdfe0bd5042 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -606,6 +606,13 @@ config SHA384
+>           The SHA384 algorithm produces a 384-bit (48-byte) hash value
+>           (digest).
+>
+> +config SM3
+> +       bool "Enable SM3 support"
+> +       help
+> +         This option enables support of hashing using
+> +         SM3 (ShangMi 3) secure hash function (OSCCA GM/T 0004-2012,
+> ISO/IEC 10118-3)
+> +         The hash is calculated in software.
+> +
+>  config SHA_HW_ACCEL
+>         bool "Enable hardware acceleration for SHA hash functions"
+>         help
+> diff --git a/lib/Makefile b/lib/Makefile
+> index 07702cef7e7..70667f3728c 100644
+> --- a/lib/Makefile
+> +++ b/lib/Makefile
+> @@ -81,6 +81,7 @@ obj-$(CONFIG_$(PHASE_)SHA1_LEGACY) +=3D sha1.o
+>  obj-$(CONFIG_$(PHASE_)SHA256) +=3D sha256_common.o
+>  obj-$(CONFIG_$(PHASE_)SHA256_LEGACY) +=3D sha256.o
+>  obj-$(CONFIG_$(PHASE_)SHA512_LEGACY) +=3D sha512.o
+> +obj-$(CONFIG_$(PHASE_)SM3) +=3D sm3.o
+>
+>  obj-$(CONFIG_CRYPT_PW) +=3D crypt/
+>  obj-$(CONFIG_$(PHASE_)ASN1_DECODER_LEGACY) +=3D asn1_decoder.o
+> diff --git a/lib/sm3.c b/lib/sm3.c
+> new file mode 100644
+> index 00000000000..6b750b66772
+> --- /dev/null
+> +++ b/lib/sm3.c
+> @@ -0,0 +1,313 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * SM3_256 Hash Algorithm Implementation for U-Boot
+> + * based on linux implementation:
+> + *
+> + * f83a4f2a4d8c
+> + *  Merge tag 'erofs-for-6.17-rc6-fixes' of git://
+> git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs
+> + *
+> + * SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and describ=
+ed
+> + * at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
+> + *
+> + * Copyright (c) 2025 Heiko Schocher <hs@nabladev.com>
+> + */
+> +
+> +#include <stdint.h>
+> +#include <stdlib.h>
+> +#include <string.h>
+> +#include <asm/unaligned.h>
+> +#include <linux/bitops.h>
+> +
+> +#include <u-boot/sm3.h>
+> +#ifndef USE_HOSTCC
+> +#include <u-boot/schedule.h>
+> +#endif
+> +
+> +static const u32 K[64] =3D {
+> +       0x79cc4519, 0xf3988a32, 0xe7311465, 0xce6228cb,
+> +       0x9cc45197, 0x3988a32f, 0x7311465e, 0xe6228cbc,
+> +       0xcc451979, 0x988a32f3, 0x311465e7, 0x6228cbce,
+> +       0xc451979c, 0x88a32f39, 0x11465e73, 0x228cbce6,
+> +       0x9d8a7a87, 0x3b14f50f, 0x7629ea1e, 0xec53d43c,
+> +       0xd8a7a879, 0xb14f50f3, 0x629ea1e7, 0xc53d43ce,
+> +       0x8a7a879d, 0x14f50f3b, 0x29ea1e76, 0x53d43cec,
+> +       0xa7a879d8, 0x4f50f3b1, 0x9ea1e762, 0x3d43cec5,
+> +       0x7a879d8a, 0xf50f3b14, 0xea1e7629, 0xd43cec53,
+> +       0xa879d8a7, 0x50f3b14f, 0xa1e7629e, 0x43cec53d,
+> +       0x879d8a7a, 0x0f3b14f5, 0x1e7629ea, 0x3cec53d4,
+> +       0x79d8a7a8, 0xf3b14f50, 0xe7629ea1, 0xcec53d43,
+> +       0x9d8a7a87, 0x3b14f50f, 0x7629ea1e, 0xec53d43c,
+> +       0xd8a7a879, 0xb14f50f3, 0x629ea1e7, 0xc53d43ce,
+> +       0x8a7a879d, 0x14f50f3b, 0x29ea1e76, 0x53d43cec,
+> +       0xa7a879d8, 0x4f50f3b1, 0x9ea1e762, 0x3d43cec5
+> +};
+> +
+> +/*
+> + * Transform the message X which consists of 16 32-bit-words. See
+> + * GM/T 004-2012 for details.
+> + */
+> +#define R(i, a, b, c, d, e, f, g, h, t, w1, w2)                        \
+> +       do {                                                    \
+> +               ss1 =3D rol32((rol32((a), 12) + (e) + (t)), 7);   \
+> +               ss2 =3D ss1 ^ rol32((a), 12);                     \
+> +               d +=3D FF ## i(a, b, c) + ss2 + ((w1) ^ (w2));    \
+> +               h +=3D GG ## i(e, f, g) + ss1 + (w1);             \
+> +               b =3D rol32((b), 9);                              \
+> +               f =3D rol32((f), 19);                             \
+> +               h =3D P0((h));                                    \
+> +       } while (0)
+> +
+> +#define R1(a, b, c, d, e, f, g, h, t, w1, w2) \
+> +       R(1, a, b, c, d, e, f, g, h, t, w1, w2)
+> +#define R2(a, b, c, d, e, f, g, h, t, w1, w2) \
+> +       R(2, a, b, c, d, e, f, g, h, t, w1, w2)
+> +
+> +#define FF1(x, y, z)  (x ^ y ^ z)
+> +#define FF2(x, y, z)  ((x & y) | (x & z) | (y & z))
+> +
+> +#define GG1(x, y, z)  FF1(x, y, z)
+> +#define GG2(x, y, z)  ((x & y) | (~x & z))
+> +
+> +/* Message expansion */
+> +#define P0(x) ((x) ^ rol32((x), 9) ^ rol32((x), 17))
+> +#define P1(x) ((x) ^ rol32((x), 15) ^ rol32((x), 23))
+> +#define I(i)  (W[i] =3D get_unaligned_be32(data + i * 4))
+> +#define W1(i) (W[i & 0x0f])
+> +#define W2(i) (W[i & 0x0f] =3D                           \
+> +               P1(W[i & 0x0f]                          \
+> +                       ^ W[(i-9) & 0x0f]               \
+> +                       ^ rol32(W[(i-3) & 0x0f], 15))   \
+> +               ^ rol32(W[(i-13) & 0x0f], 7)            \
+> +               ^ W[(i-6) & 0x0f])
+> +
+> +static void sm3_transform(struct sm3_context *sctx, u8 const *data, u32
+> W[16])
+> +{
+> +       u32 a, b, c, d, e, f, g, h, ss1, ss2;
+> +
+> +       a =3D sctx->state[0];
+> +       b =3D sctx->state[1];
+> +       c =3D sctx->state[2];
+> +       d =3D sctx->state[3];
+> +       e =3D sctx->state[4];
+> +       f =3D sctx->state[5];
+> +       g =3D sctx->state[6];
+> +       h =3D sctx->state[7];
+> +
+> +       R1(a, b, c, d, e, f, g, h, K[0], I(0), I(4));
+> +       R1(d, a, b, c, h, e, f, g, K[1], I(1), I(5));
+> +       R1(c, d, a, b, g, h, e, f, K[2], I(2), I(6));
+> +       R1(b, c, d, a, f, g, h, e, K[3], I(3), I(7));
+> +       R1(a, b, c, d, e, f, g, h, K[4], W1(4), I(8));
+> +       R1(d, a, b, c, h, e, f, g, K[5], W1(5), I(9));
+> +       R1(c, d, a, b, g, h, e, f, K[6], W1(6), I(10));
+> +       R1(b, c, d, a, f, g, h, e, K[7], W1(7), I(11));
+> +       R1(a, b, c, d, e, f, g, h, K[8], W1(8), I(12));
+> +       R1(d, a, b, c, h, e, f, g, K[9], W1(9), I(13));
+> +       R1(c, d, a, b, g, h, e, f, K[10], W1(10), I(14));
+> +       R1(b, c, d, a, f, g, h, e, K[11], W1(11), I(15));
+> +       R1(a, b, c, d, e, f, g, h, K[12], W1(12), W2(16));
+> +       R1(d, a, b, c, h, e, f, g, K[13], W1(13), W2(17));
+> +       R1(c, d, a, b, g, h, e, f, K[14], W1(14), W2(18));
+> +       R1(b, c, d, a, f, g, h, e, K[15], W1(15), W2(19));
+> +
+> +       R2(a, b, c, d, e, f, g, h, K[16], W1(16), W2(20));
+> +       R2(d, a, b, c, h, e, f, g, K[17], W1(17), W2(21));
+> +       R2(c, d, a, b, g, h, e, f, K[18], W1(18), W2(22));
+> +       R2(b, c, d, a, f, g, h, e, K[19], W1(19), W2(23));
+> +       R2(a, b, c, d, e, f, g, h, K[20], W1(20), W2(24));
+> +       R2(d, a, b, c, h, e, f, g, K[21], W1(21), W2(25));
+> +       R2(c, d, a, b, g, h, e, f, K[22], W1(22), W2(26));
+> +       R2(b, c, d, a, f, g, h, e, K[23], W1(23), W2(27));
+> +       R2(a, b, c, d, e, f, g, h, K[24], W1(24), W2(28));
+> +       R2(d, a, b, c, h, e, f, g, K[25], W1(25), W2(29));
+> +       R2(c, d, a, b, g, h, e, f, K[26], W1(26), W2(30));
+> +       R2(b, c, d, a, f, g, h, e, K[27], W1(27), W2(31));
+> +       R2(a, b, c, d, e, f, g, h, K[28], W1(28), W2(32));
+> +       R2(d, a, b, c, h, e, f, g, K[29], W1(29), W2(33));
+> +       R2(c, d, a, b, g, h, e, f, K[30], W1(30), W2(34));
+> +       R2(b, c, d, a, f, g, h, e, K[31], W1(31), W2(35));
+> +
+> +       R2(a, b, c, d, e, f, g, h, K[32], W1(32), W2(36));
+> +       R2(d, a, b, c, h, e, f, g, K[33], W1(33), W2(37));
+> +       R2(c, d, a, b, g, h, e, f, K[34], W1(34), W2(38));
+> +       R2(b, c, d, a, f, g, h, e, K[35], W1(35), W2(39));
+> +       R2(a, b, c, d, e, f, g, h, K[36], W1(36), W2(40));
+> +       R2(d, a, b, c, h, e, f, g, K[37], W1(37), W2(41));
+> +       R2(c, d, a, b, g, h, e, f, K[38], W1(38), W2(42));
+> +       R2(b, c, d, a, f, g, h, e, K[39], W1(39), W2(43));
+> +       R2(a, b, c, d, e, f, g, h, K[40], W1(40), W2(44));
+> +       R2(d, a, b, c, h, e, f, g, K[41], W1(41), W2(45));
+> +       R2(c, d, a, b, g, h, e, f, K[42], W1(42), W2(46));
+> +       R2(b, c, d, a, f, g, h, e, K[43], W1(43), W2(47));
+> +       R2(a, b, c, d, e, f, g, h, K[44], W1(44), W2(48));
+> +       R2(d, a, b, c, h, e, f, g, K[45], W1(45), W2(49));
+> +       R2(c, d, a, b, g, h, e, f, K[46], W1(46), W2(50));
+> +       R2(b, c, d, a, f, g, h, e, K[47], W1(47), W2(51));
+> +
+> +       R2(a, b, c, d, e, f, g, h, K[48], W1(48), W2(52));
+> +       R2(d, a, b, c, h, e, f, g, K[49], W1(49), W2(53));
+> +       R2(c, d, a, b, g, h, e, f, K[50], W1(50), W2(54));
+> +       R2(b, c, d, a, f, g, h, e, K[51], W1(51), W2(55));
+> +       R2(a, b, c, d, e, f, g, h, K[52], W1(52), W2(56));
+> +       R2(d, a, b, c, h, e, f, g, K[53], W1(53), W2(57));
+> +       R2(c, d, a, b, g, h, e, f, K[54], W1(54), W2(58));
+> +       R2(b, c, d, a, f, g, h, e, K[55], W1(55), W2(59));
+> +       R2(a, b, c, d, e, f, g, h, K[56], W1(56), W2(60));
+> +       R2(d, a, b, c, h, e, f, g, K[57], W1(57), W2(61));
+> +       R2(c, d, a, b, g, h, e, f, K[58], W1(58), W2(62));
+> +       R2(b, c, d, a, f, g, h, e, K[59], W1(59), W2(63));
+> +       R2(a, b, c, d, e, f, g, h, K[60], W1(60), W2(64));
+> +       R2(d, a, b, c, h, e, f, g, K[61], W1(61), W2(65));
+> +       R2(c, d, a, b, g, h, e, f, K[62], W1(62), W2(66));
+> +       R2(b, c, d, a, f, g, h, e, K[63], W1(63), W2(67));
+> +
+> +       sctx->state[0] ^=3D a;
+> +       sctx->state[1] ^=3D b;
+> +       sctx->state[2] ^=3D c;
+> +       sctx->state[3] ^=3D d;
+> +       sctx->state[4] ^=3D e;
+> +       sctx->state[5] ^=3D f;
+> +       sctx->state[6] ^=3D g;
+> +       sctx->state[7] ^=3D h;
+> +}
+> +#undef R
+> +#undef R1
+> +#undef R2
+> +#undef I
+> +#undef W1
+> +#undef W2
+> +
+> +void sm3_init(struct sm3_context *sctx)
+> +{
+> +       memset(sctx, 0, sizeof(struct sm3_context));
+> +
+> +       /* Load initial values */
+> +       sctx->state[0] =3D SM3_IVA;
+> +       sctx->state[1] =3D SM3_IVB;
+> +       sctx->state[2] =3D SM3_IVC;
+> +       sctx->state[3] =3D SM3_IVD;
+> +       sctx->state[4] =3D SM3_IVE;
+> +       sctx->state[5] =3D SM3_IVF;
+> +       sctx->state[6] =3D SM3_IVG;
+> +       sctx->state[7] =3D SM3_IVH;
+> +       sctx->count =3D 0;
+> +}
+> +
+> +static inline void sm3_block(struct sm3_context *sctx,
+> +               u8 const *data, int blocks, u32 W[16])
+> +{
+> +       while (blocks--) {
+> +               sm3_transform(sctx, data, W);
+> +               data +=3D SM3_BLOCK_SIZE;
+> +       }
+> +}
+> +
+> +void sm3_update(struct sm3_context *sctx, const uint8_t *input, size_t
+> ilen)
+> +{
+> +       unsigned int partial =3D sctx->count % SM3_BLOCK_SIZE;
+> +       u32 W[16];
+> +
+> +       sctx->count +=3D ilen;
+> +
+> +       if ((partial + ilen) >=3D SM3_BLOCK_SIZE) {
+> +               int blocks;
+> +
+> +               if (partial) {
+> +                       int p =3D SM3_BLOCK_SIZE - partial;
+> +
+> +                       memcpy(sctx->buffer + partial, input, p);
+> +                       input +=3D p;
+> +                       ilen -=3D p;
+> +
+> +                       sm3_block(sctx, sctx->buffer, 1, W);
+> +               }
+> +
+> +               blocks =3D ilen / SM3_BLOCK_SIZE;
+> +               ilen %=3D SM3_BLOCK_SIZE;
+> +
+> +               if (blocks) {
+> +                       sm3_block(sctx, input, blocks, W);
+> +                       input +=3D blocks * SM3_BLOCK_SIZE;
+> +               }
+> +
+> +               memset(W, 0, sizeof(W));
+> +
+> +               partial =3D 0;
+> +       }
+> +       if (ilen)
+> +               memcpy(sctx->buffer + partial, input, ilen);
+> +}
+> +
+> +void sm3_final(struct sm3_context *sctx, uint8_t output[SM3_DIGEST_SIZE]=
+)
+> +{
+> +       const int bit_offset =3D SM3_BLOCK_SIZE - sizeof(u64);
+> +       __be64 *bits =3D (__be64 *)(sctx->buffer + bit_offset);
+> +       __be32 *digest =3D (__be32 *)&output[0];
+> +       unsigned int partial =3D sctx->count % SM3_BLOCK_SIZE;
+> +       u32 W[16];
+> +       int i;
+> +
+> +       sctx->buffer[partial++] =3D 0x80;
+> +       if (partial > bit_offset) {
+> +               memset(sctx->buffer + partial, 0, SM3_BLOCK_SIZE -
+> partial);
+> +               partial =3D 0;
+> +
+> +               sm3_block(sctx, sctx->buffer, 1, W);
+> +       }
+> +
+> +       memset(sctx->buffer + partial, 0, bit_offset - partial);
+> +       *bits =3D cpu_to_be64(sctx->count << 3);
+> +       sm3_block(sctx, sctx->buffer, 1, W);
+> +
+> +       for (i =3D 0; i < 8; i++)
+> +               put_unaligned_be32(sctx->state[i], digest++);
+> +
+> +       /* Zeroize sensitive information. */
+> +       memset(W, 0, sizeof(W));
+> +       memset(sctx, 0, sizeof(*sctx));
+> +}
+> +
+> +
+> +/**
+> + * sm3_hash - Calculate SM3 hash of input data
+> + * @input: Input data
+> + * @ilen: Input data length in bytes
+> + * @output: Output buffer for hash (32 bytes)
+> + */
+> +void sm3_hash(const uint8_t *input, size_t ilen, uint8_t
+> output[SM3_DIGEST_SIZE])
+> +{
+> +       struct sm3_context sctx;
+> +
+> +       sm3_init(&sctx);
+> +       sm3_update(&sctx, input, ilen);
+> +       sm3_final(&sctx, output);
+> +}
+> +
+> +/**
+> + * sm3_csum_wd - Calculate SM3 checksum on memory region using watchdog
+> + * @addr: Starting address
+> + * @len: Length in bytes
+> + * @output: Output buffer for checksum (32 bytes)
+> + * @flags: Flags for watchdog behavior
+> + *
+> + * This is the U-Boot API entry function for SM3 hash calculation
+> + */
+> +void sm3_csum_wd(const unsigned char *input, uint32_t len,
+> +                unsigned char *output, unsigned int chunk_sz)
+> +{
+> +       struct sm3_context ctx;
+> +       uint32_t chunk;
+> +
+> +       sm3_init(&ctx);
+> +
+> +       /* Process data in chunks, kicking watchdog between chunks */
+> +       while (len > 0) {
+> +               chunk =3D (len > chunk_sz) ? chunk_sz : len;
+> +               sm3_update(&ctx, input, chunk);
+> +               input +=3D chunk;
+> +               len -=3D chunk;
+> +
+> +               schedule();
+> +       }
+> +       sm3_final(&ctx, output);
+> +}
+> --
+> 2.20.1
+>
+>
