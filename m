@@ -4,56 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED5CCCFA02
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 21:15:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACB21CCFA00
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 21:17:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2534983642;
-	Sat,  1 Nov 2025 22:15:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F35CE83642;
+	Sat,  1 Nov 2025 22:17:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="pJ64mVDw";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="AT4HR+VH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC3AA83677; Sat,  1 Nov 2025 22:15:31 +0100 (CET)
-Received: from mail1.manjaro.org (mail1.manjaro.org [142.132.176.110])
+ id E4103836D1; Sat,  1 Nov 2025 22:17:33 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BEBE8331F
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 22:15:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id C4DB68331F
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 22:17:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPA id 0689440D56; Sat,  1 Nov 2025 22:15:25 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=dkim;
- t=1762031728; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=eDt9g7xa59rLg+ZaBANtUv7APn/b/aR3+oMYUaxlPbY=;
- b=pJ64mVDwGR/DAfUKJTdFtEqeAk+vlEy8iltMigDbQZKENx4juTgfci3hucZ4Scnxv6ImRF
- FI9FwlvMRWwizEBlhgIIVYbst5IOUH9E/b4bLWHAWheYqlidkTdmDEbeQjt6p8fdIbFSUL
- NsGL75pg7DWyZV4V1VtjLU3QyUhttilclDsI4oQu/nK/AV/62AzmigxECrgrio3VA5CbTG
- XODp+WlKYbfGgW1NjjJZudl4udRM1Os6toidybOdYyc54vX1HyP9q2XqM4P1GGitXMcBIv
- +iBQoXrmiWgDbdI8h5LgD52PrHncPJgOZNapRxSWJyIT/mkxhhDfD+Jk/axHXQ==
-From: "Dragan Simic" <dsimic@manjaro.org>
-In-Reply-To: <20251101203429.1603832-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset="utf-8"
+ dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 93968553-b768-11f0-b0b9-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 93968553-b768-11f0-b0b9-00505699b430;
+ Sat, 01 Nov 2025 22:20:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=nd6Ui8/Pro3+NiMj3XcWh992hjUzCTEQocvdpKsqnt0=;
+ b=AT4HR+VHXOXgV/M0iHdfOW+JjNkTR5QhbU5PxG20W6Ntxb0sZO6qkgi2QSZ21Zua0N6y1zi5IzFlY
+ lRithdKQEyfbvhC37YWJskYbg/o61k042pCLBxLE7tU853frRhxcowqrA/kZPzagNuY709Ft5C7o5V
+ GBHdTY6vg5MH7TSKUiN0vJbUoYWFqf7W12ZwlU5Tv0Wf4YpMKpktVs9L3f/EgYejsleTnZFXKUYR6o
+ P9vw1RGG2k8E4492V/iXumxkk9w1kk+8FF6uuxZhTiQJhXX1GCxaemSy5a8nSQhKmXdrRVJJO1EfzZ
+ 3aKVwHpO71qXt2OO37xq53HtI0xPvrw==
+X-KPN-MID: 33|PNE3soOfmw91OyPGu271pHp1NOYglIwq3qqRN9ro8yK5yHsdRNZrH4jwgkM7nTa
+ K7iS4UukCzRxOWXNhBO9Nt4nSjXRyjGqF3pt5PBVW7/A=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|j+YJthDR6+NHmhWfkz/98ew/eO9OasuHnaiN4bo57covxRqwjs+Eb8z1vAa872O
+ NONRGginzpUvhzT35W3BzEg==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 2c768624-b768-11f0-86bd-005056998788;
+ Sat, 01 Nov 2025 22:17:30 +0100 (CET)
+Date: Sat, 01 Nov 2025 22:17:29 +0100
+Message-Id: <878qgpqwpi.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: trini@konsulko.com, jh80.chung@samsung.com, peng.fan@nxp.com,
+ ye.li@nxp.com, festevam@gmail.com, jonas@kwiboo.se,
+ danct12@riseup.net, u-boot@lists.denx.de
+In-Reply-To: <20251101203429.1603832-1-jonas@kwiboo.se> (message from Jonas
+ Karlman on Sat, 1 Nov 2025 20:34:26 +0000)
+Subject: Re: [PATCH] Revert "power: regulator: Add vin-supply for GPIO and
+ Fixed regulators"
 References: <20251101203429.1603832-1-jonas@kwiboo.se>
-Date: Sat, 01 Nov 2025 22:15:25 +0100
-Cc: "Tom Rini" <trini@konsulko.com>, "Jaehoon Chung" <jh80.chung@samsung.com>,
- "Peng Fan" <peng.fan@nxp.com>, "Ye Li" <ye.li@nxp.com>,
- "Fabio Estevam" <festevam@gmail.com>, "Dang Huynh" <danct12@riseup.net>,
- u-boot@lists.denx.de
-To: "Jonas Karlman" <jonas@kwiboo.se>
-MIME-Version: 1.0
-Message-ID: <54983c5b-4625-2000-5dc5-e47fbcac5517@manjaro.org>
-Subject: =?utf-8?q?Re=3A?= [PATCH] Revert =?utf-8?q?=22power=3A?=
- =?utf-8?q?_regulator=3A?= Add vin-supply for GPIO and Fixed 
- =?utf-8?q?regulators=22?=
-User-Agent: SOGoMail 5.12.3
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: None
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,103 +76,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jonas and Dang,
-
-On Saturday, November 01, 2025 21:34 CET, Jonas Karlman <jonas@kwiboo.s=
-e> wrote:
+> From: Jonas Karlman <jonas@kwiboo.se>
+> 
 > Rockchip boards may depend on a working MMC regulator in SPL to
 > successfully load FIT payload from MMC. Typically, these boards only
-> include the vmmc-supply regulator and not its vin-supply in SPL contr=
-ol
+> include the vmmc-supply regulator and not its vin-supply in SPL control
 > FDT.
->=20
-> The commit f98d812e5353 ("power: regulator: Add vin-supply for GPIO a=
-nd
-> Fixed regulators") breaks loading FIT from MMC in SPL on some of thes=
-e
+> 
+> The commit f98d812e5353 ("power: regulator: Add vin-supply for GPIO and
+> Fixed regulators") breaks loading FIT from MMC in SPL on some of these
 > boards due to now requiring the vin-supply to be included in the SPL
 > control FDT.
->=20
+
+I ran into this issue a few days ago.  Unfortunately that means U-Boot
+2025.10 is broken on several Rockchip boards :(.
+
 > The commit also strangely enables any found vin-supply in
-> regulator=5Fcommon=5Fof=5Fto=5Fplat() and not when a regulator is ena=
-bled or as
-> part of regulator=5Fautoset().
->=20
+> regulator_common_of_to_plat() and not when a regulator is enabled or as
+> part of regulator_autoset().
+> 
 > Revert the commit to fix FIT loading in SPL on broken boards.
->=20
+> 
 > If a board needs to have its vin-supply enabled, two options come to
 > mind:
->=20
-> - Add regulator-always-on prop to the regulator in the -u-boot.dtsi f=
-or
+> 
+> - Add regulator-always-on prop to the regulator in the -u-boot.dtsi for
 >   any board.
->=20
-> - Implement full support for reference counting of regulators and the=
-n
+> 
+> - Implement full support for reference counting of regulators and then
 >   update the regulator-uclass to enable any found vin-supply when a
 >   regulator is enabled.
->=20
-> This reverts commit f98d812e5353408ef77a46bad1f1cdc793ff8a03.
 
-Thank you, Jonas, for preparing this patch so quickly!  Of course,
-huge thanks to Dang for spotting the issue and bisecting it.
+I fixed the issue with the diff below instead.  But I don't claim to
+fully understand how this all is supposed to work...
 
-I totally agree with the description of how the reverted commit
-f98d812e5353 ("power: regulator: Add vin-supply for GPIO and Fixed
-regulators", 2025-09-11) strangely performed the enabling of "vin-
-supply" regulators in a suboptimal way.  As already described by
-Jonas, a proper implementation of such regulator enabling would
-require a much more complex approach.
 
-Thus, please feel free to include:
-
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-
-> Reported-by: Dang Huynh <danct12@riseup.net>
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
->  drivers/power/regulator/regulator=5Fcommon.c | 10 ----------
->  drivers/power/regulator/regulator=5Fcommon.h |  1 -
->  2 files changed, 11 deletions(-)
->=20
-> diff --git a/drivers/power/regulator/regulator=5Fcommon.c b/drivers/p=
-ower/regulator/regulator=5Fcommon.c
-> index 3ed713ce5019..685d8735fa5c 100644
-> --- a/drivers/power/regulator/regulator=5Fcommon.c
-> +++ b/drivers/power/regulator/regulator=5Fcommon.c
-> @@ -44,16 +44,6 @@ int regulator=5Fcommon=5Fof=5Fto=5Fplat(struct ude=
-vice *dev,
->  			dev=5Fread=5Fu32=5Fdefault(dev, "u-boot,off-on-delay-us", 0);
->  	}
-> =20
-> -	ret =3D device=5Fget=5Fsupply=5Fregulator(dev, "vin-supply", &plat-=
->vin=5Fsupply);
-> -	if (ret) {
-> -		debug("Regulator vin regulator not defined: %d\n", ret);
-> -		if (ret !=3D -ENOENT)
-> -			return ret;
-> -	}
-> -
-> -	if (plat->vin=5Fsupply)
-> -		regulator=5Fset=5Fenable=5Fif=5Fallowed(plat->vin=5Fsupply, true);
-> -
->  	return 0;
->  }
-> =20
-> diff --git a/drivers/power/regulator/regulator=5Fcommon.h b/drivers/p=
-ower/regulator/regulator=5Fcommon.h
-> index 799c968d0b66..d4962899d830 100644
-> --- a/drivers/power/regulator/regulator=5Fcommon.h
-> +++ b/drivers/power/regulator/regulator=5Fcommon.h
-> @@ -14,7 +14,6 @@ struct regulator=5Fcommon=5Fplat {
->  	unsigned int startup=5Fdelay=5Fus;
->  	unsigned int off=5Fon=5Fdelay=5Fus;
->  	unsigned int enable=5Fcount;
-> -	struct udevice *vin=5Fsupply;
->  };
-> =20
->  int regulator=5Fcommon=5Fof=5Fto=5Fplat(struct udevice *dev,
-> --=20
-> 2.51.0
->
-
+diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+index c80f10c3aa3..f43879a4353 100644
+--- a/drivers/power/regulator/regulator_common.c
++++ b/drivers/power/regulator/regulator_common.c
+@@ -48,7 +48,7 @@ int regulator_common_of_to_plat(struct udevice *dev,
+ 	ret = device_get_supply_regulator(dev, "vin-supply", &plat->vin_supply);
+ 	if (ret) {
+ 		debug("Regulator vin regulator not defined: %d\n", ret);
+-		if (ret != -ENOENT)
++		if (ret != -ENOENT && ret != -ENODEV)
+ 			return ret;
+ 	}
+ 
