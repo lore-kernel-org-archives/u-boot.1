@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70EC3CCF9FE
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 00:45:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 840E6CCF9FE
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 00:45:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D60B183B7F;
-	Sat,  1 Nov 2025 01:45:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 29AC483B63;
+	Sat,  1 Nov 2025 01:45:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="KQgFb7XK";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="nzWdw2R2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE62583B4F; Sat,  1 Nov 2025 01:45:18 +0100 (CET)
+ id 2212883B4E; Sat,  1 Nov 2025 01:45:19 +0100 (CET)
 Received: from PA4PR04CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAF6183B4A
+ by phobos.denx.de (Postfix) with ESMTPS id 1265F83B56
  for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 01:45:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Kki5w6kLdlQuNCkik7bFTrf7BSNzpSEzG4p4veamHAmaZ5Xr4FTNfv7OYnRmgGXCYo7XbP6ZfRzotwUffIkc4+2Hb9zhDcR3sn0PLauBdKuJvFG0p/e0lOhsqCv5j46Sp6HAYuSbRja+W987b6+H/NvNg/VovdgDBruTee1rMnr7kHyaB/5fzfif7cFbpM41P78KupEwN/LtkR+kFtv37rL9Wd2DOYMSb15Vm4djZYM2ZAKNSMQQo7FyjNg5KMvvERm2Awi6hZRYoZ4d3bUSOVIj0+6mJmFoK3/uljOOZ/S+GgWEu5VgCh/qRn5QHywPJm3JffJK1mBaN78ewJhTlQ==
+ b=hH+f9bp7KBKIt2CieK4903x0vKTT1N5u9+SzxmtfdASAkUIY+qOLD0UIHmhXs2A39A4ohg+NN0xxbJ1+QaIvgaVvekN8XAbAzVjuQCTbrSJCfvpP0FbMyeuJ7SiC76AJ5k6NpXpx7exa2zwf+zquQrJ4hRh51V1VFkMDf+CyYEdIDfJ9QvaFL024xvmJ+IaYIAV5ZnVfZTHXrlmCgksp/2aMfmYumHT/2QCkEvLJF7nNiFva1e37m5etvxQ6bfMVMmyo7rJKfQpwk1EXpIOn0nZk11SeDPlT8NQ4rt5sIDgJA/7bErVBgcNMLqZs1RoZK1M7DO+MKUGI2MhxR0pzRw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Wn0adpxi0B7dEUr3bxLKhyaXzvOZmyswDGF+iC3yx4Y=;
- b=xCPUoi12bDcHek9JCiKPhTE1n3djO5ugQknE2RY1Be7RQAlEj42SPRZAh4USjlj/KkoCrPxPC/oY8+RVr75FOSE1ZQYwtY/7prfKkUIxfA07jTq+/Nii+kpgHYm7IJ1cU9T/h3udL2LNQZqRTLRoc22Xg0EZDexhLP32zsAr9PS8eObCwvLbuVXMW1U9ZExYRO3uYnT9difRjpmd6yiIXr+PhpRoFvJF2QEoBLD+0oQveHvhj8UJX2qzpR36aBQVqeMsAbfq0n1i1w4l4EZgPzl5IYOGMdU12qvaseJebUiOSVJa2wP7pCpbwOl2yhv/qFP2pbRCZxDxOELSWTvVSg==
+ bh=oswVNEdt+PnaaCOqV6MPlfmP6AUlS1l+oi2aBeUm+jk=;
+ b=b0gCYTfyhQFJNn2zOu5lE5eEktUrYkEhlJJ9UwsM6VGQ9SqXPW4TCTIavFJ3nHAK2FhUD3JT4WoHu5h5nme+kcK4f8gTL6iDgdVqAhydZDraZiNzSUIFoQvBxQZl9uAjkBKBlR9xgDerEivQ6iPQCW2rr2Ln50pdTWUXAmAcqVLOCFuQRBrv781ugEO8I/+CU1w9Enh3PLsdxGnmaV4/CNsbaBUxJU3spZqXCVwYDaDo0DChhuEVCsusfPBeaRN9eI5Tisdwto7k5zDxsC06NKU/KrY3e/zf5tmPdcVnVo9TMG3+U1dk7R7/rKaT6MGsFp+6QNavDZloi/HiRBkeaA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Wn0adpxi0B7dEUr3bxLKhyaXzvOZmyswDGF+iC3yx4Y=;
- b=KQgFb7XKwbBWVZ9vutf2DesYNKnkMzQztaAgX1Bp4n5LoOloJ0+7IPF/HAcHjv2foHYkDyxHbh8sidyAoNFR1/TXrZuDCb1EbR6asseADiSA3hol5gPXSeR0RWeoDtqxYy55LBTdiKlWypluW7DGyztH2dVp5GFY0dPys6frZcWDBMmpVQzYecKkAhICMkuYRu2U7i1WAfAJz7z01Tyqu7wDU90V+RxwH3Iylzuw2Odg7Rm66U6DZvMr3qbH+mWVebtDDpeyig5nHUOWkTNdPvwBC0RI3i/ef3TrC9xGtuF0uO53VU0+ByCCp/0t4NItyrvu7+OwwxHP1s0cXqIcjA==
+ bh=oswVNEdt+PnaaCOqV6MPlfmP6AUlS1l+oi2aBeUm+jk=;
+ b=nzWdw2R2JfFfDR75pU2/YKDaLjNBeEEmM8MyzeUpPA61D1cWdpC+2EZxBh2qgDlvZVRRDu6MEcSDLCMzwBETp0r33yvjz1NkLnrvs+CtO5525HIn95UCjK9quFrREpu7QoaVbtQe4/BTNCmqSMDs6Z3hxg31OLm83tN5fYZls20deWOCcWq3fnMbii9bonZl9NuANzv1h02sHYZgwoGCUjXxkj0GzZ1Ks5j7aRMUmkxVPacoiI1WdP1rG6elFNTPbu5cvLFMV2DyzMbctCLu2p0ipCbpAXxWpSfgEWXRhnAMZwrhTp4gHY/wZMP8i+XTxnmJ9jSguVJGfIPRErM1Zw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by PAVPR08MB9258.eurprd08.prod.outlook.com (2603:10a6:102:308::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.15; Sat, 1 Nov
- 2025 00:45:14 +0000
+ 2025 00:45:12 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.9275.013; Sat, 1 Nov 2025
- 00:45:14 +0000
+ 00:45:12 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
@@ -61,12 +61,10 @@ To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Andreas Gnau <andreas.gnau@iopsys.eu>
-Subject: [PATCH 02/19] arm/airoha: add support for airoha en7523 SoC family
-Date: Sat,  1 Nov 2025 03:44:46 +0300
-Message-ID: <20251101004503.2379529-3-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH 00/19] arm: airoha: add support for en7523 based boards
+Date: Sat,  1 Nov 2025 03:44:44 +0300
+Message-ID: <20251101004503.2379529-1-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251101004503.2379529-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20251101004503.2379529-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: FR4P281CA0283.DEUP281.PROD.OUTLOOK.COM
@@ -75,79 +73,79 @@ X-ClientProxiedBy: FR4P281CA0283.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAVPR08MB9258:EE_
-X-MS-Office365-Filtering-Correlation-Id: e7160774-174c-474c-015b-08de18dfeb8d
+X-MS-Office365-Filtering-Correlation-Id: 20d70a5b-c822-4ab3-3253-08de18dfea11
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|1800799024|376014|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?StjcNtPMQZBEg/2Jw5wKYdS46xW+2bYxeIo4l8y5Y+Xv1cKg0InrjkTgJyC7?=
- =?us-ascii?Q?M/YGKzxs0HAgc/go71X7STt68GvDWWE9tdEfvLcMQeMSakWbVBhEMqvzIoSV?=
- =?us-ascii?Q?cGCY0aTBPtlFiEIVeAdTXjejva9o08hfG4XWDTxlXV1nz/y1Op8a4Jdybj6n?=
- =?us-ascii?Q?hJiLvFSJ4xqb62zpfTxT59S9XLM6KfHG/uLPMqlmwB+VlC/ppfpZA0fy43ND?=
- =?us-ascii?Q?whoK8a0p2qGMyWluX/5rduMG2QN4jUDp6oCSBmHse8aqo/kNZ+Mq83bjli7S?=
- =?us-ascii?Q?HZLPL9Sa8QFEUtQjYk0Q6ephWNWpOj0JmqbDUencxX+tIaovyEczNRWlkiIo?=
- =?us-ascii?Q?mfeWhabK63Mb2dPouKQxwjv3JSJhE81enoZW02FH88d6W032YYFn4ZaQ/Zyb?=
- =?us-ascii?Q?Mc3FIJj9BI/JI9Uhg7Jqm5/jgIjAC1hLNaRMp9Y+B/N1S/9zm0jYzXU0dxNW?=
- =?us-ascii?Q?FVngQgpKJdIqTiHbQKeJb6m91ua0F3l8QJtDyMRGDfEh+Ss3rk1IreiAYlGo?=
- =?us-ascii?Q?8lzhfnnfgTQ5fRNzJFovJTt76/HuL/bluidVWtw03vwDwJr9+DH+nanJJ0Dn?=
- =?us-ascii?Q?BmFGINpggAT9uhfkzRCLTvC7iMnQWdSxklHN2+XXO9rAtg4YXriK44VYpA09?=
- =?us-ascii?Q?n8hQTYW98U0CzmFk7xR5WtUVZLpItKbDUA/xe3fFWXLc6z8cC4jjsa3pUhto?=
- =?us-ascii?Q?4hEvIB7wRagv5HkqdW6YrJE9qYzJcr5rYMhwCGi28Szsi8OWQ/7U6WXyxIsZ?=
- =?us-ascii?Q?ltauWq+G+Y6XhJZ0++yu2DbTCFSfw978xsY8ML+53ob0O/9HIsSgTOrlHUKI?=
- =?us-ascii?Q?mljahSmTm+ulf0sdvtcBcYZ1ohRlXSbPB78WarytX1ms6lLBlhyN8UuV7xgM?=
- =?us-ascii?Q?glzGrbBKm6oP7pzR9Te2gdl20jjTYTBwqZDrseFVh0vd8TfESFPcU58FqAlT?=
- =?us-ascii?Q?lUqti9dpOuWp5UskFWeTYY5pSPrr7mru85S8SVn9Uz2WUldZEaNxs/UF3KZD?=
- =?us-ascii?Q?rUHmVywUkHZnIXaQzBfDKspnrX47jdQDvWTWDIqOS/K4rYuh/OVmOScwT9Ex?=
- =?us-ascii?Q?HKt1EoYtcubhWLxoOt+e/vakq7pjaMimYpKZcWwqbijgbCz3FlPS0f+zvKxB?=
- =?us-ascii?Q?b4OfMB3sl8YUimtnqslcdhOu5YsDfcqzKg/OMbQ7iTM+368Ho+XUxIB8y8h4?=
- =?us-ascii?Q?dWGL+vvORrpsHV4mbptg70rPtSoBHhtWdS/cS96DZA7jZ3+8JlXI5O05NxM6?=
- =?us-ascii?Q?TcRWCstQr183AbWkmME8c6KKc6rOaBNX2JWeOMDIpF/kp0VDWrhNug4+xKG6?=
- =?us-ascii?Q?C4sjaoUiSPxe9Wvk7RKlt1OHuFsNQMOquS/Jzoj0p3wnHLygXvsEgUniO21q?=
- =?us-ascii?Q?KysvrOLM0GHesfKLoJMjPlhmfOpBPLj/QbR+ikyoxJkPCXJGjQlqIoYV2RVi?=
- =?us-ascii?Q?ODEaWUqqwHcyC2W11KIM+aDln87ebNT6ZRLAJNdRVmLRdfE40s/XlcX9vW/N?=
- =?us-ascii?Q?WbxXfiVHwoangrxoRJBmFWF3sOqV2LDAu8UE?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KzVP9kO7QyarcrwICTZEA4Ld4zBZLWKGHfsKEHLvOKNzuDndpVCNh37Kwx1I?=
+ =?us-ascii?Q?7lVli4C2dE+zxXKLK4m6gWVYW5xLvdIaIaVdflph4dXgNDIS+sm/0qXIrfEg?=
+ =?us-ascii?Q?MzZwPfWGZ63nYJBhMznD0/5Xfzhr51Oerg2KoyWlISqilY2mdDv49XJHCL7n?=
+ =?us-ascii?Q?4bFhAmAltoqYEYckzibmxM3bYqIvLzXRVLy3ewYDLgqrUuEb/kKoj2ptuUXJ?=
+ =?us-ascii?Q?CeqoWHOHMDoQkSllcF28+2qgflEzbwO8DzGD3afsxv2k4tE+2vJCm9AldXhG?=
+ =?us-ascii?Q?9BghzDlcKAsRDQWhpmbZXfg+xn3go4qDgEMuLWosERmpOkPGD8gMJ11+sdVz?=
+ =?us-ascii?Q?m42jn/Q2qTAk6ixiDY/xvsDlKmlSknZAHfhyDJTmyPGY4CtCPFcdFSRib4S6?=
+ =?us-ascii?Q?0npku9PILd6R+SLOBcoT8JqM+CysQOQuEBTJhm/bYZF71c7Nyt2spjHE09XB?=
+ =?us-ascii?Q?fs0zSa5hjzc76Xm7L7iAmJxeEnbMlmaL5k3f4Fcx60j2V7yPnvGJn9fSiVhB?=
+ =?us-ascii?Q?tqR+caLUwVtd/SwsrVW/HAKtr1FIYI6zYh8ED+cKVQmwhh3eFhuhE7tIeXOv?=
+ =?us-ascii?Q?9gYb7cdVGBhe3mmJq5h9rYfTaCj4YfJ7BgcD8V3wqAbNHwPMHzYPNCE8N73J?=
+ =?us-ascii?Q?QCYf3L+MrTKqUneUd2tiuWInpVqcVT7bw8R1moZI2Nb9qd84kZsr1gAwA6sU?=
+ =?us-ascii?Q?Vnxshk5SD9acDwDerht+pQo5CypyMOfnQxX0i2kLNjuHyw1HY0xPtidOcZ0q?=
+ =?us-ascii?Q?QI3Mm54+nWjfYQcb+UJpU7QC6YrXMGD0ph/RYCfXo6n6GV95nbShJmfbuQha?=
+ =?us-ascii?Q?mY+IRGkwtX8Jh4SEv9C1VI/CeCsIbkxPJoCgSBX4vwfgsOwunEZAWaafWzAm?=
+ =?us-ascii?Q?nViCS+cczyVLf2nZsgDGOTTKcKBp9LyYRhp03KR/rPPGKbMeQy/fpoMp/1eg?=
+ =?us-ascii?Q?rry8xT2+SwxAFOcHwvpGGgCE0A4anWJlArAetnXhDghS1UtXhSWUG4jLgMOz?=
+ =?us-ascii?Q?0ZNVkaNBJ6pxCbAAaFzg6eQS/ASx4hGVQ2SRkq86Fyn/BJaCimGjeuAuw505?=
+ =?us-ascii?Q?CzlEl6pNIzLEeR41iO70qnVeb6vcfYr7t446A31ZpQb1/3JChG3s8WhklnOb?=
+ =?us-ascii?Q?XnId23JNLZJESJb3jh02ZsJAWrr8mlDfN2HfnH1NVrOIK+iqMwE3F491n06i?=
+ =?us-ascii?Q?HF4K0styyEaylxizL52KLNZf1rZ5DRVTabv8Z6TdHdqD6geZR02pUXGN+9sy?=
+ =?us-ascii?Q?+e3sdL2udeV+icsgZ7YHFb6g8u8smJTKAsHdl/R54j6Y3jOzfxLUfVv/uvUR?=
+ =?us-ascii?Q?ILcSb31vw8NLM9O5fenLLVk3Tfx8oHn6yp9I3pkWeJZ370pmBxhLiKa2irIG?=
+ =?us-ascii?Q?RhDqm0DD1aSrkBV61cYFOguNVB2EDhXuOY8i9tB+tpPqjkGo2YPUtj7Lnl+N?=
+ =?us-ascii?Q?HGsm/JqvqysQDQYHvWc8dQSy4wkqz72rMk5tdavDdiAY8DJodaJpfv04SB42?=
+ =?us-ascii?Q?qqRIXgCGnXKHFkZLb062lOGBEonWqJsaAumM?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014); DIR:OUT;
  SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zKUwL+k+u9kCXG3N8Sba3jHoUmDzLEI+qJdoQIzxNG03bootImxFUyebbPAP?=
- =?us-ascii?Q?iLXXPp+WS8Jy6X4tfi1WhdugWP6A7N2Cy6ggReC9xDE7xzaN9wbttxoNdj/V?=
- =?us-ascii?Q?HfBuVXp/D7p/mZQDg/CE6EWiFqnNdSxBdfrqyBuRu50TFkgCDAy4fbGjnJLV?=
- =?us-ascii?Q?YrYkpnx2iO1Wwkf6baYNhAZK8PmjLWD1IgXZ8v+mZQR2F4+1vrWQo7KTsBSU?=
- =?us-ascii?Q?9deyF7H6VwYUkjT1CCOYcGEA1/L2CX0hn5bjoVEymS4BVm9stpidb2z+j3LB?=
- =?us-ascii?Q?daoj0Up07PQuJ5MadTM/ipJzyF/npbKy/FxP74IEGZEA1EDzdDPzVEDPTjEG?=
- =?us-ascii?Q?g3VASaxLi+cNM61tTTXMuLyvYoWWU4hZroPQG9cL5ghz2Xb2CvCut6IEJDtW?=
- =?us-ascii?Q?h3sN2GBj8ztt2T3eX9ambyrIDrxVIFLpVH7aOiZm6VH0is1K9Je4ulKWGiF9?=
- =?us-ascii?Q?WRK1Ob2KuW7Vf9aUOMiAzhMAse7+IF9fjKlBbHtCK9MSazxhdoKHtEQa0Cge?=
- =?us-ascii?Q?pGl+hnV5WddVKhxF9tCOSRnO07fnI31x3PjB6tj5m/GjKhPGU09gBUFLel84?=
- =?us-ascii?Q?7NendEdcA9vh+jtrFlL2Sb36T6su/A308Z2REcE8x2YH4RHuYEiKZnga/6Hi?=
- =?us-ascii?Q?wjWBT1/pFJQqaqFD+oJNOMRYmNilVLZvRAqbJUmdP/MuVJYwE1PY/Doy7X3W?=
- =?us-ascii?Q?plyAvGvXqa8nKF7AsKXhZEhXgmDf3dBhPKhhdWCDA1+Hmis/b0kRflzojVgI?=
- =?us-ascii?Q?hUMShc0IgOdR8aKy8QIszVURIJC+NfSrnY0Sl5Js63F0pOB7o/eVGC5nwMj0?=
- =?us-ascii?Q?gyIp5CUYKHBf4QqnwfuX2U7hcuzZq0ELVM4Le1PZg8WcIe2TdETjsfdI2fz/?=
- =?us-ascii?Q?GPbs6EMp7UbnYBoAdyr+mXJS/Q8Hz/CPBkyUL0V9U2NEFwgdxLjEmxA1fMQy?=
- =?us-ascii?Q?FedZy4eaBChIiRQ1qnwzdovUCTci9zW0QdaNpvFw76fCb0IxQP1jzq5ZLUwu?=
- =?us-ascii?Q?WeDqm6NVBXkTUROCzwMY32l3ycD9a3VOTS+iQRmOOHzP4Xzlb4omjlrZNtfM?=
- =?us-ascii?Q?UE0FMzSTGpM+1rkdI3+4+GstKrbtMgdz7Patcf+V0euDQcinIDdQPwdyTGel?=
- =?us-ascii?Q?d8N8BU9grm2AyApnUonFeqAmODCYQYDCIQXs3xz8K7/+OMViowU3o40DyLAm?=
- =?us-ascii?Q?Fa06KFmbfTjBmMweUPxDebrDJrwY+9PSmGoAVmCr5JDJ8OEuSX8gbiqfgRlV?=
- =?us-ascii?Q?dG6pHo2gprZdCUaqyLvd98VYxGKF2WqmtbyyU48O5F8i3KoKx0Df2KeB9Xjf?=
- =?us-ascii?Q?KlXBxXxPzst2JnKtJokV2v4N7gIkW0EQo87HRPKaggl9OWFjulbu3hs83aMk?=
- =?us-ascii?Q?P7flBFLmwDreS/nF4SG3xHObb2InzehfsZOr5SR/NmuWp0O1wZesXWI2nZvg?=
- =?us-ascii?Q?ccGggqfFeahrrI9NHNI654XZbXkbjT49eTtSvxiiS4FRPqXqrOLlebLCHo1J?=
- =?us-ascii?Q?y7/lL3fGrc6ZkzyojbgWEGBayQbnN8U2iA5+LnjjNOzPQo6/vYyRPmmg4Z0n?=
- =?us-ascii?Q?GB84yPTp9Q+Pz9nhAdxKJ+aamMK8r5TrfQMqEnbdGbdgGmS29wC9cS5uV7ns?=
- =?us-ascii?Q?3KGtv+uapqipwTMEltV0izQ=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?oU1yXb+xCIF9Bmr2mC8WjH7uHH76+RSu0fZ/s7R5nOj5M+JaxV+mR03RCEm1?=
+ =?us-ascii?Q?dAK0VqLELe6l+EKtcLs04nfFZqIKgAyrg1242Q5E//5UVsEAbsOB9bM+5bqg?=
+ =?us-ascii?Q?EpUp1PZJ5A6h2CYiV/cbR/Gu14zBHP8id6pfsPsSg9LNFI15/dR5e3GaFbFv?=
+ =?us-ascii?Q?pfYBo7BtQilb8WlzFBX/st85sTA9RRYeHAKf622xekjmaVNmA2NWdxiAD/10?=
+ =?us-ascii?Q?HmTbPCtMbxad+v1R47sxWdELDE8HqGy3CSo0oktoUcaXoW8iZrU7wk8nMv5w?=
+ =?us-ascii?Q?5AJORMuR39BKmCBTdVXs/ms/HU1RtXUWrcEjPQVSUc7jhZxX+lqzUehW9QyY?=
+ =?us-ascii?Q?H/wK7mdWMBRnkPBv7uB1yQjQLywRgBdEXFR51bF3WvyUtT1gRUIGClejWEBT?=
+ =?us-ascii?Q?Dl6wbaQMOdsn/U7L3R1TCjU3ERKK17hIYzMICfU98TIBrihOsoGO83EWspDd?=
+ =?us-ascii?Q?Uz+qkDxXxP/DMRmy1CHOcZdn78/AASR+9if8q0mEw0jsBGmyKhVjOY7bKUTT?=
+ =?us-ascii?Q?UY1/eKRR9rD8I0cphXq3UQNvIVnnPmDv9AHnG1joNTUbVBALxUO6uA81I5K3?=
+ =?us-ascii?Q?jKD3VLVoj3XkoKXJVOmGwrrkmhS2ZKEECh4Ih5ETRXRdrjPFO9tv0/mg7ZNd?=
+ =?us-ascii?Q?ToWlBEoyanidpjKD31VcxhZyUgADrY5k8jCC+teBcqtoxiGn+4HmP/98zuDf?=
+ =?us-ascii?Q?cGBlY7bAZfXr96u9SYEC5dYi7yFSNqPwFjAiubZwMq0gD4BtsHpnsqoxFyKx?=
+ =?us-ascii?Q?o0sNZY+Jb+SRkEBn6AgWfnBfTN4fZwnM/gh4ccZxGvx0VznehtcNJcoewUVZ?=
+ =?us-ascii?Q?wG50JAbUsF93jY4oZmi6fQijfVU/De50FQ33dKEByPWgreJfL68xZhLPv+61?=
+ =?us-ascii?Q?hhj5uDv5O/0qqPbdXMam/q09TLQDv1KuNKhw0MfYqVuJzTPbeNSsC4CsqgcA?=
+ =?us-ascii?Q?jOHw1EtZOWCfK1FQD8MfnzbugnESi87TnzEToWGSseWhTAX4hXbSrE3w8XQs?=
+ =?us-ascii?Q?apisLUsGiXmxJZcxvayQO5qnWbTSTZvEyUM8j4iJjrUDGs7nN+twRGrtx9vD?=
+ =?us-ascii?Q?Elz2zG2B5XbTnjklXm2p+F0/b5ZM1nUuMeM5b/fsWst01AyvFigYQP1OHjO3?=
+ =?us-ascii?Q?ZcZ5laa/LWuZYixWzR6RN5H/MIOicUzJUd0TL/ELyFTk3XArH3bnwY5dHXV5?=
+ =?us-ascii?Q?2SeN7GSNM2zg9GmqRScliH3wtmuk0cKhmXyC2+HkhvNHpUX4hzAdvg+MoZTE?=
+ =?us-ascii?Q?tl1QRbJGOFS9m4hb6IcOmGLRsZ1fKKF+01beLF6nx5sqTnUjJFsQVX1Ju7K0?=
+ =?us-ascii?Q?dLTeBx2VX1x8Y8gkSTfR3ixvtRuTp+9xZl7B79fTZ8zWel062UfsAsZeFNt/?=
+ =?us-ascii?Q?6d4Jm4EIeGTLuk3eO6wTTFJ4vf2MhXggm39PMKLpWevgu5ivtsflLmVud5xB?=
+ =?us-ascii?Q?1M1hjXzqCUsZm9Xu/xnDl0h6uiCJ0LNf4PdJkecLZD5mLVvT6WuGfX+Iz1Ys?=
+ =?us-ascii?Q?nlAOnEuPGF45+plBj3f86E/niTUG6hsuJvccD6mldriJOF6go/FrIMUQPx+s?=
+ =?us-ascii?Q?UCMoYck/PdYVonQ4S71HpYiJvc1bLBrc4tFMXbAodkvwZbhY6Z3rDDMt5pFW?=
+ =?us-ascii?Q?tU3j6iCARimer5LiK2k8wm4=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7160774-174c-474c-015b-08de18dfeb8d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 20d70a5b-c822-4ab3-3253-08de18dfea11
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2025 00:45:14.3531 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2025 00:45:12.0003 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3Qf8PqTeeyVDEJjYJEDoByYVl4/LsEG4gIlEXF5Q2UItXrFja9OcgIrj8YG4EEv6vNgr8xy502Yozod782XUJtb8Up8GvGE2mycIK8sANKM=
+X-MS-Exchange-CrossTenant-UserPrincipalName: w0eGluYR2aCvukrdf9uIIEw2dFuIznXZZSSVz5Ng94u/4NDxiNKCbF2QBv33j7YuQvI3pJpaphhmGfmSicPheBE8qzGI7CVnHKfdlJmAqhg=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB9258
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -165,297 +163,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Basic support for en7523/en7529/en7562 SoCs. Within a patch
-only serial console will be supported.
+This patch series adds basic support for the boards based on Airoha
+EN7523/EN7529/EN7562 SoCs. Due to ATF restrictions these boards are
+able to run 32-bit OS only.
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
----
- arch/arm/dts/en7523-evb-u-boot.dtsi  | 11 ++++++
- arch/arm/dts/en7523-u-boot.dtsi      | 26 +++++++++++++
- arch/arm/mach-airoha/Kconfig         | 14 +++++++
- arch/arm/mach-airoha/Makefile        |  1 +
- arch/arm/mach-airoha/en7523/Makefile |  3 ++
- arch/arm/mach-airoha/en7523/init.c   | 33 ++++++++++++++++
- board/airoha/en7523/Makefile         |  3 ++
- board/airoha/en7523/en7523_rfb.c     | 16 ++++++++
- configs/en7523_evb_defconfig         | 57 ++++++++++++++++++++++++++++
- include/configs/en7523.h             | 21 ++++++++++
- 10 files changed, 185 insertions(+)
+This patch series adds support for the following hardware:
+ * console UART
+ * ethernet controller/switch
+ * spinand flash (in non-dma mode)
+
+The following issues may be expected:
+ * Extra slow UBI attaching in U-Boot (up to 20 sec with fastmap enabled).
+   This is caused by the lack of DMA support in the U-Boot airoha-snfi driver.
+ * Linux airoha-snfi driver in some cases might damage you flash data
+   (see: https://lore.kernel.org/lkml/20251012121707.2296160-15-mikhail.kshevetskiy@iopsys.eu/)
+ * Latest linux kernel is recommended to properly support flashes
+   with more than one plane per lun
+   (see: https://lore.kernel.org/lkml/20251012121707.2296160-7-mikhail.kshevetskiy@iopsys.eu/)
+ * It's NOT recommended to use flashes working in continuous mode because
+   U-Boot airoha-snfi driver does not support such flashes properly.
+
+The patches was tested on the board:
+ - SoC: Airoha EN7562
+ - RAM: 512 MB
+ - SPI NAND: 4 Gbit, made by Toshiba
+ - Linux boot: was NOT tested
+
+The U-Boot was chain-loaded from the running U-Boot. Airoha ATF-2.3 does
+not allow easily chain-loading of U-Boot from U-Boot, so a special FIT
+image (mimic linux kernel) was created
+
+1) Create u-boot.its file with the following contents:
+
+=== cut here ===
+/dts-v1/;
+
+/ {
+	description = "ARM OpenWrt FIT (Flattened Image Tree)";
+	#address-cells = <1>;
+
+	images {
+		u-boot-ram {
+			description = "OpenWrt U-Boot RAM image";
+			data = /incbin/("u-boot.bin.lzma");
+			type = "kernel";
+			arch = "arm";
+			os = "linux";
+			compression = "lzma";
+			load = <0x81e00000>;
+			entry = <0x81e00000>;
+			hash@1 {
+				algo = "crc32";
+			};
+			hash@2 {
+				algo = "sha1";
+			};
+		};
+
+		fdt-1 {
+			description = "OpenWrt device tree blob";
+			
+			data = /incbin/("dts/upstream/src/arm/airoha/en7523-evb.dtb");
+			type = "flat_dt";
+
+			arch = "arm";
+			compression = "none";
+			hash@1 {
+				algo = "crc32";
+			};
+			hash@2 {
+				algo = "sha1";
+			};
+		};
+	};
+
+	configurations {
+		default = "config-ram-uboot";
+		config-ram-uboot {
+			description = "OpenWrt RAM U-Boot";
+			kernel = "u-boot-ram";
+			fdt = "fdt-1";
+		};
+	};
+};
+==================
+
+2) Create u-boot.itb image to chain-load new u-boot from the old one
+
+  lzma_alone e u-boot.bin u-boot.bin.lzma
+  mkimage -f u-boot.its u-boot.itb
+
+3) Load new u-boot from the old one
+
+  U-Boot> tftpboot u-boot.itb && bootm
+
+
+Christian Marangi (1):
+  reset: airoha: convert to regmap API
+
+Mikhail Kshevetskiy (18):
+  airoha/an7581: add CONFIG_TARGET_AN7581=y to the defconfig
+  arm/airoha: add support for airoha en7523 SoC family
+  arm: airoha: introduce AN7581 helpers to get SCU and CHIP_SCU regmaps
+  arm: airoha: introduce EN7523 helpers to get SCU and CHIP_SCU regmaps
+  clk: airoha: use CHIP_SCU regmap helper
+  clk: airoha: add support for airoha en7523 SoC family
+  configs: airoha: en7523: enable clk support
+  reset: airoha: unify code using SCU regmap helper
+  dt-bindings: reset: Add reset support for Airoha EN7523
+  reset: airoha: add support for airoha en7523 SoC family
+  dts: airoha: en7523: add reset controller support
+  configs: airoha: en7523: enable reset controller support
+  net: airoha: unify code using SCU regmap helper
+  net: airoha: add support for airoha en7523 SoC family
+  dts: airoha: en7523: add ethernet controller support
+  configs: airoha: en7523: enable ethernet controller support
+  dts: airoha: en7523: add spinand flash support
+  configs: airoha: en7523: enable spinand flashes support
+
+ arch/arm/dts/en7523-evb-u-boot.dtsi           |  11 ++
+ arch/arm/dts/en7523-u-boot.dtsi               |  70 ++++++++++
+ arch/arm/include/asm/arch-airoha/scu-regmap.h |  13 ++
+ arch/arm/include/asm/arch-an7581              |   1 +
+ arch/arm/include/asm/arch-en7523              |   1 +
+ arch/arm/mach-airoha/Kconfig                  |  14 ++
+ arch/arm/mach-airoha/Makefile                 |   1 +
+ arch/arm/mach-airoha/an7581/Makefile          |   1 +
+ arch/arm/mach-airoha/an7581/scu-regmap.c      |  30 +++++
+ arch/arm/mach-airoha/en7523/Makefile          |   4 +
+ arch/arm/mach-airoha/en7523/init.c            |  33 +++++
+ arch/arm/mach-airoha/en7523/scu-regmap.c      |  38 ++++++
+ board/airoha/en7523/Makefile                  |   3 +
+ board/airoha/en7523/en7523_rfb.c              |  16 +++
+ configs/an7581_evb_defconfig                  |   1 +
+ configs/en7523_evb_defconfig                  |  67 +++++++++
+ drivers/clk/airoha/clk-airoha.c               | 127 ++++++++++++++++--
+ drivers/net/airoha_eth.c                      |  78 +++++++----
+ drivers/reset/reset-airoha.c                  | 106 ++++++++++++---
+ include/configs/en7523.h                      |  21 +++
+ .../dt-bindings/reset/airoha,en7523-reset.h   |  61 +++++++++
+ 21 files changed, 642 insertions(+), 55 deletions(-)
  create mode 100644 arch/arm/dts/en7523-evb-u-boot.dtsi
  create mode 100644 arch/arm/dts/en7523-u-boot.dtsi
+ create mode 100644 arch/arm/include/asm/arch-airoha/scu-regmap.h
+ create mode 120000 arch/arm/include/asm/arch-an7581
+ create mode 120000 arch/arm/include/asm/arch-en7523
+ create mode 100644 arch/arm/mach-airoha/an7581/scu-regmap.c
  create mode 100644 arch/arm/mach-airoha/en7523/Makefile
  create mode 100644 arch/arm/mach-airoha/en7523/init.c
+ create mode 100644 arch/arm/mach-airoha/en7523/scu-regmap.c
  create mode 100644 board/airoha/en7523/Makefile
  create mode 100644 board/airoha/en7523/en7523_rfb.c
  create mode 100644 configs/en7523_evb_defconfig
  create mode 100644 include/configs/en7523.h
+ create mode 100644 include/dt-bindings/reset/airoha,en7523-reset.h
 
-diff --git a/arch/arm/dts/en7523-evb-u-boot.dtsi b/arch/arm/dts/en7523-evb-u-boot.dtsi
-new file mode 100644
-index 00000000000..c109d6794fb
---- /dev/null
-+++ b/arch/arm/dts/en7523-evb-u-boot.dtsi
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/ {
-+	/* When running as a first-stage bootloader this isn't filled in automatically */
-+	memory@80000000 {
-+		device_type = "memory";
-+		reg = <0x80000000 0x10000000>;
-+	};
-+};
-+
-+#include "en7523-u-boot.dtsi"
-diff --git a/arch/arm/dts/en7523-u-boot.dtsi b/arch/arm/dts/en7523-u-boot.dtsi
-new file mode 100644
-index 00000000000..34fa8069f9e
---- /dev/null
-+++ b/arch/arm/dts/en7523-u-boot.dtsi
-@@ -0,0 +1,26 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/ {
-+	reserved-memory {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges;
-+
-+		atf-reserved-memory@80000000 {
-+			no-map;
-+			reg = <0x80000000 0x40000>;
-+		};
-+	};
-+
-+	scu: system-controller@1fa20000 {
-+		compatible = "airoha,en7523-scu";
-+		reg = <0x1fa20000 0x400>,
-+		      <0x1fb00000 0x1000>;
-+		#clock-cells = <1>;
-+	};
-+
-+};
-+
-+&uart1 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/mach-airoha/Kconfig b/arch/arm/mach-airoha/Kconfig
-index be3562ae3ff..b9cd0a413e1 100644
---- a/arch/arm/mach-airoha/Kconfig
-+++ b/arch/arm/mach-airoha/Kconfig
-@@ -6,6 +6,17 @@ config SYS_VENDOR
- choice
- 	prompt "Airoha board select"
- 
-+config TARGET_EN7523
-+	bool "Airoha EN7523 SoC"
-+	select CPU_V7A
-+	select ARMV7_SET_CORTEX_SMPEN
-+	help
-+	  The Airoha EN7523 family (en7523/en7529/en7562) is an ARM-based
-+	  SoCs with a dual-core CPU. It comes with Wi-Fi 5/6 support and
-+	  connectivity to Ethernet PHY, DDR, PCIe, USB, UART and VoIP.
-+	  With advanced hardware design, EN7523 provides high processing
-+	  performance and low power consumption.
-+
- config TARGET_AN7581
- 	bool "Airoha AN7581 SoC"
- 	select ARM64
-@@ -20,12 +31,15 @@ config TARGET_AN7581
- endchoice
- 
- config SYS_SOC
-+	default "en7523" if TARGET_EN7523
- 	default "an7581" if TARGET_AN7581
- 
- config SYS_BOARD
-+	default "en7523" if TARGET_EN7523
- 	default "an7581" if TARGET_AN7581
- 
- config SYS_CONFIG_NAME
-+	default "en7523" if TARGET_EN7523
- 	default "an7581" if TARGET_AN7581
- 
- endif
-diff --git a/arch/arm/mach-airoha/Makefile b/arch/arm/mach-airoha/Makefile
-index 215a300373b..91395b8a850 100644
---- a/arch/arm/mach-airoha/Makefile
-+++ b/arch/arm/mach-airoha/Makefile
-@@ -2,4 +2,5 @@
- 
- obj-y	+= cpu.o
- 
-+obj-$(CONFIG_TARGET_EN7523) += en7523/
- obj-$(CONFIG_TARGET_AN7581) += an7581/
-diff --git a/arch/arm/mach-airoha/en7523/Makefile b/arch/arm/mach-airoha/en7523/Makefile
-new file mode 100644
-index 00000000000..886ab7e4eb9
---- /dev/null
-+++ b/arch/arm/mach-airoha/en7523/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier:	GPL-2.0
-+
-+obj-y += init.o
-diff --git a/arch/arm/mach-airoha/en7523/init.c b/arch/arm/mach-airoha/en7523/init.c
-new file mode 100644
-index 00000000000..c1c1eeabdf5
---- /dev/null
-+++ b/arch/arm/mach-airoha/en7523/init.c
-@@ -0,0 +1,33 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-+ */
-+#include <fdtdec.h>
-+#include <init.h>
-+#include <sysreset.h>
-+#include <asm/system.h>
-+#include <linux/io.h>
-+
-+int print_cpuinfo(void)
-+{
-+	printf("CPU:   Airoha EN7523/EN7529/EN7562\n");
-+	return 0;
-+}
-+
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	return fdtdec_setup_memory_banksize();
-+}
-+
-+void __noreturn reset_cpu(void)
-+{
-+	writel(0x80000000, 0x1FB00040);
-+	while (1) {
-+		/* loop forever */
-+	}
-+}
-diff --git a/board/airoha/en7523/Makefile b/board/airoha/en7523/Makefile
-new file mode 100644
-index 00000000000..c6629486f21
---- /dev/null
-+++ b/board/airoha/en7523/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier:	GPL-2.0
-+
-+obj-y	+= en7523_rfb.o
-diff --git a/board/airoha/en7523/en7523_rfb.c b/board/airoha/en7523/en7523_rfb.c
-new file mode 100644
-index 00000000000..aa73679d929
---- /dev/null
-+++ b/board/airoha/en7523/en7523_rfb.c
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Author: Christian Marangi <ansuelsmth@gmail.com>
-+ */
-+
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int board_init(void)
-+{
-+	/* address of boot parameters */
-+	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
-+
-+	return 0;
-+}
-diff --git a/configs/en7523_evb_defconfig b/configs/en7523_evb_defconfig
-new file mode 100644
-index 00000000000..0730136b041
---- /dev/null
-+++ b/configs/en7523_evb_defconfig
-@@ -0,0 +1,57 @@
-+CONFIG_ARM=y
-+CONFIG_SYS_ARCH_TIMER=y
-+CONFIG_ARCH_AIROHA=y
-+CONFIG_TARGET_EN7523=y
-+CONFIG_TEXT_BASE=0x81E00000
-+CONFIG_SYS_MALLOC_F_LEN=0x4000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="airoha/en7523-evb"
-+CONFIG_SYS_LOAD_ADDR=0x81800000
-+CONFIG_BUILD_TARGET="u-boot.bin"
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_DEFAULT_FDT_FILE="en7523-evb"
-+CONFIG_SYS_PBSIZE=1049
-+CONFIG_SYS_CONSOLE_IS_IN_ENV=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_SYS_MAXARGS=8
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_BOOTMENU=y
-+# CONFIG_CMD_ELF is not set
-+# CONFIG_CMD_XIMG is not set
-+CONFIG_CMD_BIND=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MTD=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_LOG=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_NOWHERE=y
-+# CONFIG_ENV_IS_IN_MTD is not set
-+CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SYS_RX_ETH_BUFFER=8
-+CONFIG_REGMAP=y
-+CONFIG_DMA=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+# CONFIG_MMC is not set
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_RAM=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_SHA512=y
-diff --git a/include/configs/en7523.h b/include/configs/en7523.h
-new file mode 100644
-index 00000000000..2d27b3626ae
---- /dev/null
-+++ b/include/configs/en7523.h
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Configuration for Airoha EN7523
-+ *
-+ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-+ */
-+
-+#ifndef __EN7523_H
-+#define __EN7523_H
-+
-+#include <linux/sizes.h>
-+
-+#define CFG_SYS_UBOOT_BASE		CONFIG_TEXT_BASE
-+
-+#define CFG_SYS_INIT_RAM_ADDR           CONFIG_TEXT_BASE
-+#define CFG_SYS_INIT_RAM_SIZE           SZ_2M
-+
-+/* DRAM */
-+#define CFG_SYS_SDRAM_BASE		0x80000000
-+
-+#endif
 -- 
 2.51.0
 
