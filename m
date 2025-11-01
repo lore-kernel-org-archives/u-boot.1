@@ -4,48 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAF45CCF9F0
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 06:49:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D0D9CCF9F8
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 06:50:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6A4D83AC5;
-	Sat,  1 Nov 2025 07:49:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 25E2A83AD1;
+	Sat,  1 Nov 2025 07:49:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="dCvaZk+2";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="kR/qiQBC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADEB083A27; Sat,  1 Nov 2025 07:49:29 +0100 (CET)
+ id B9CA383A8A; Sat,  1 Nov 2025 07:49:29 +0100 (CET)
 Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 511B783AA7
+ by phobos.denx.de (Postfix) with ESMTPS id D345F83AB4
  for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 07:49:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9DE3F1097FE; Sat,  1 Nov 2025 07:49:26 +0100 (CET)
+ with ESMTPSA id 43861109806; Sat,  1 Nov 2025 07:49:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
  s=dkim; t=1761979767; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=JC+yK1bjFxyFRFKtS+ni3akBkK7yMGPzZHAXJu5lrA8=;
- b=dCvaZk+2RHnKbSK0FQXlio96sogZTreYhG4qshFONvDBgfJf69UFaJq8sF7wFEHCssgAHC
- TghzblIu1WBOn1mtnLAK7iAk/70mgAPVGOlJnGpe7T+qKH5AScL08jimmKRANAWB2argPu
- h6VpGUyo1Dl4QTPkAkx8gCUE/Qxikuzau+9F7WiL/CGhyrobZfZMKEkvBho/gZF9DaDIc7
- yQIRUCyGy+nnVh3LAEvULMlBSgnJetdmS0Bg1Q562hqPblxXwZxtdsnjVo1KcullSiCV/v
- 7z0yU3jTkh/8RRWZZ1eT/VZbpTO3J/hRvJ6YrmDDnnyHWSXdyUoKXSQH/Eo1IQ==
+ bh=A/qxf5qxOek/iiINM6yuWl9fcqlxf5vy7bt8aMuVczk=;
+ b=kR/qiQBCchiD6ZIsnA2sR5Xb2IgL51PoUgguP16DYK0L78hmWD48O+JtQr/6JqEhmbwIP1
+ RdrcxiFZvIYMqjtaKpRbj74pmX8MI7gNGXRo7Fm7Z+ipctMmdzGg5nBYdHSRe2Rhuhsh9g
+ ecbV7k1aqqtGttATkq2RbSOeVSJwf/Ed5E1jS8HkZ25+X+BL4keCY+/jo3kpPVIvEdmeGC
+ pURwdDj8T957jHo5yR/guZwkbZYuHYHLVwVbiJDdRASNorOAadKFVrTK7adXamamjNTVtH
+ jHlwjr3fS5i+zjIXsxteJv0HODiaX4lx96SS5euMZQVvIok3Uifl8BEm5tawBw==
 From: Heiko Schocher <hs@nabladev.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heiko Schocher <hs@nabladev.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 4/5] tpm2: add sm3 256 hash support
-Date: Sat,  1 Nov 2025 07:49:06 +0100
-Message-Id: <20251101064907.5037-5-hs@nabladev.com>
+Cc: Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 5/5] test: cmd: fix a typo in md5 test
+Date: Sat,  1 Nov 2025 07:49:07 +0100
+Message-Id: <20251101064907.5037-6-hs@nabladev.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20251101064907.5037-1-hs@nabladev.com>
 References: <20251101064907.5037-1-hs@nabladev.com>
@@ -68,73 +66,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-add sm3 256 hash support, so TPM2 chips which report
-5 pcrs with sm3 hash do not fail with:
-
-  u-boot=> tpm2 autostart
-  tpm2_get_pcr_info: too many pcrs: 5
-  Error: -90
+In dm_test_cmd_hash_md5 accidentially sha256 hash
+ist used. Use the correct md5 hash instead.
 
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
 ---
 
- cmd/tpm-v2.c     |  1 +
- include/tpm-v2.h | 12 ++++++++++++
- lib/tpm-v2.c     |  4 ++--
- 3 files changed, 15 insertions(+), 2 deletions(-)
+ test/cmd/hash.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-index 346e21d27bb..847b2691581 100644
---- a/cmd/tpm-v2.c
-+++ b/cmd/tpm-v2.c
-@@ -589,6 +589,7 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_tpm, "Issue a TPMv2.x command",
- "        * sha256\n"
- "        * sha384\n"
- "        * sha512\n"
-+"        * sm3_256\n"
- "    <on|off> is one of:\n"
- "        * on  - Select all available PCRs associated with the specified\n"
- "                algorithm (bank)\n"
-diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index f3eb2ef5643..a776d24d71f 100644
---- a/include/tpm-v2.h
-+++ b/include/tpm-v2.h
-@@ -345,6 +345,18 @@ static const struct digest_info hash_algo_list[] = {
- 		false,
- #endif
- 	},
-+	{
-+		"sm3_256",
-+		TPM2_ALG_SM3_256,
-+		TCG2_BOOT_HASH_ALG_SM3_256,
-+		TPM2_SM3_256_DIGEST_SIZE,
-+#if IS_ENABLED(CONFIG_SM3)
-+		true,
-+#else
-+		false,
-+#endif
-+	},
-+
- };
+diff --git a/test/cmd/hash.c b/test/cmd/hash.c
+index 3f7f64d27d3..3a3869831ce 100644
+--- a/test/cmd/hash.c
++++ b/test/cmd/hash.c
+@@ -38,7 +38,7 @@ static int dm_test_cmd_hash_md5(struct unit_test_state *uts)
+ 					  "d41d8cd98f00b204e9800998ecf8427e"));
  
- /* NV index attributes */
-diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 5b21c57ae42..0fea35e5ae0 100644
---- a/lib/tpm-v2.c
-+++ b/lib/tpm-v2.c
-@@ -686,10 +686,10 @@ int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs)
+ 	if (!CONFIG_IS_ENABLED(HASH_VERIFY)) {
+-		ut_assert(run_command("hash -v sha256 $loadaddr 0 foo", 0));
++		ut_assert(run_command("hash -v md5 $loadaddr 0 foo", 0));
+ 		ut_assertok(ut_check_console_line(
+ 				uts, "hash - compute hash message digest"));
  
- 	pcrs->count = get_unaligned_be32(response);
- 	/*
--	 * We only support 4 algorithms for now so check against that
-+	 * We only support 5 algorithms for now so check against that
- 	 * instead of TPM2_NUM_PCR_BANKS
- 	 */
--	if (pcrs->count > 4 || pcrs->count < 1) {
-+	if (pcrs->count > 5 || pcrs->count < 1) {
- 		printf("%s: too many pcrs: %u\n", __func__, pcrs->count);
- 		return -EMSGSIZE;
- 	}
 -- 
 2.20.1
 
