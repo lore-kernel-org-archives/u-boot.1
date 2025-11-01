@@ -4,77 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEBF5CCF9F0
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 09:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDE5DCCF9F8
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 11:54:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA76083A91;
-	Sat,  1 Nov 2025 10:04:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 22B8183A1E;
+	Sat,  1 Nov 2025 12:54:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BC+a+4SG";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bvAJHw5s";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="kQhuhaSU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CE66839B9; Sat,  1 Nov 2025 10:04:22 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 85C4483A24; Sat,  1 Nov 2025 12:54:51 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AC8683A6A
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 10:04:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6670583A1B
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 12:54:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b6d2f5c0e8eso636636466b.3
- for <u-boot@lists.denx.de>; Sat, 01 Nov 2025 02:04:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1761987860; x=1762592660; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mhe5WvEO4omnoB/cHcISOSLWqKeluir0m4d/cFDCO6Y=;
- b=BC+a+4SG0191ZEYdyaHzslXKKBq6J+EBaOYK/gKep/sG3xEcLC9VjZDXgkmKNAfO8J
- IZ4ngZ3JT55Qiu4Np3Tj4oXFeJuAQomtBXRPoWkd+AroMofj3f5pgmVhhVvvqVcSYsue
- 9C4uZCIH3/l//Jzzd8NhjkzW51T502AQma2FA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761987860; x=1762592660;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mhe5WvEO4omnoB/cHcISOSLWqKeluir0m4d/cFDCO6Y=;
- b=vHrjIwSVwfqaCoCo9jh3aO8B9psfXU16M0FhLaY80uC+3tOnRwhpkac1ZsIs4Tcb0g
- 4uNSYIDCRGCooPnimJQWcRQeMMPpVLV9TvIldErAyYTmWdsb7NxNdui594vCyQB1+/bd
- iJ0MLAA/63tsu2CUkE7GRf2HNRe/znFR39+0IGUbrcRcDInlLs/e8bwbou38Gi9ILwko
- b0UWSv3TUJRKdTm+Eux87SG/fYjgkmivVtbqP7YPHGXoiJ6fD70qDdo2Uvcfni82hewU
- gY9jr818A7WQaPYyGxhBQhcRilaeWr2SLD+iFgGJTEfM+O4pSWNURPICFF+gwHeE/bNQ
- w7rw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX1rk3jAx9Jp5fDSdgfQRW/mxFWBfGY6DNleI9v+xssMmjIFZVuTrNhANHVMbZt3to7a7s5oKI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxbipQGOr5LzK8FsR2SaIbA0qB7MIzfIxSW1+l0S3C+WKyzZHdq
- ZJ/ISYNU8sH+dEzdeusog6BfkuyKvxFZDJHNfL9N5qOrgpBKyge7IixIe0gI8jjG/AMB6UvQr8W
- bSmONAawT47HBWhknA8o5MGvNyi82zlQdYoRXe//l
-X-Gm-Gg: ASbGncu06YRX3/A38sBb9Xffm4VLYBOASBWYHSn7/LocbSDZMwlxEjEh+7xEwO8MFf8
- o8dew7iHol1jNlWq5sRAEr0/kwnZG1b3w9Q5IoQHj0N3vAEHMxfjrJ7gaJhpfVGwHPQ8XpfNgYc
- VD7/q0QtYx0ogWDqjjUnLexI2M/9KVGrEez8ssfGOLUGa7Tw7/mb4fRG8KJajCxzmQTY8eh6rpi
- eA9qItm64k9IX/N6FzFM6kDIQTt3Rv8QZYLOKdveMEWeyCxE/yeV6zFZ+jLlu1rW3zwnQY=
-X-Google-Smtp-Source: AGHT+IHOZiq9ElBXcx7ozC1sy8sj/5l2icQWmhV6IZxrgDaw5RkGdtc+kuSGlNDUber784/BTWVA1aWfRcmcfvc8rwU=
-X-Received: by 2002:a17:906:c149:b0:b60:52f6:a32 with SMTP id
- a640c23a62f3a-b70700b3413mr608636666b.7.1761987859999; Sat, 01 Nov 2025
- 02:04:19 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4czGVc6H25z9t0n;
+ Sat,  1 Nov 2025 12:54:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761998088;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=05vT8naUnAJVfnBV06wNbWvqWwXknGGCZ2NtxfDDR3I=;
+ b=bvAJHw5simFQUKUiYw7jF6whctG5fbqgisJ1DimwPbPH+hAxyij7a3CrbMv9irVX6GKOMz
+ 649+89CJigE3jLCvxXtHHjEitkaTnf+TaWqQT37Shgu7eY6frqzH4eE7Vk7Pmlrz4VP3wY
+ lDlzOiv1hjiSkdRyVU8T+E6GVpPuxNcteHNclyrWRHlRcDqwSG311kPUDU4/WmedPCij25
+ tNtTtMfbSIHi/xJKK0Sck6IceYmbuxFx5PJLhkK5xcjBERt7y+sTqFP+8rpLmfICxOWY4F
+ F9rnBlsRdN76nQVBeJJyVlo9PtHGdDrp7GMgVjFeugvMPVr0hwXyBbfnLTiW+g==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=kQhuhaSU;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <1fc25e78-4a7c-4471-b381-f35e69a8d5d8@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761998087;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=05vT8naUnAJVfnBV06wNbWvqWwXknGGCZ2NtxfDDR3I=;
+ b=kQhuhaSUFIHGtWwu9mYgAVG6Ppmzx40RT60AGAkZuUJHpHHJwkf7HfLotoeJBx1/PEsA3I
+ s236kkKnpAwFZu7NGfI47rDOzVBuouw0u/RxL9E96cESffTudFdB3x9cHbb7lzeMuooHOT
+ /iamo7j+2muL0f/UcHVOYcfTEgyWyYqGDsg18EtQCj0CAs/Cg0kf0pW/21gMN+UZZNnOcn
+ JbZxS+vvkMqkSjqN0DvvtpZXJPZzHTgI/oiIZ7S4Cc+50PjwLX73VCcjJcExHJhXKeE4us
+ FSLoyVxhuAsw+6LbRTum8z5T3dF22rGQochc52We51zbL1iJppfh38VTEEiQ3g==
+Date: Sat, 1 Nov 2025 12:54:42 +0100
 MIME-Version: 1.0
-References: <20251028131720.55212-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251028131720.55212-1-heinrich.schuchardt@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 1 Nov 2025 10:04:02 +0100
-X-Gm-Features: AWmQ_bnd11VwX-F8BmrZ0Q5qaihlTj9oOBJxTJ-gYc6WVRQAvveU7AWUMcRNU9I
-Message-ID: <CAFLszTjKphT4fj13jdAdwxydnJ_xK5hAE0_+-DzAfC+uk=+8Eg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] CI: test qemu-riscv64_smode[_acpi]
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v4 5/5] net: phy: aquantia: use generic firmware loader
+To: Beiyan Yun <root@infi.wang>
+Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
+ <trini@konsulko.com>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Weijie Gao <weijie.gao@mediatek.com>
+References: <20251031152348.60571-1-root@infi.wang>
+ <20251031152348.60571-6-root@infi.wang>
+ <9942f1d3-669e-48a6-923a-c2607eafdd02@mailbox.org>
+ <FEAA3555-3109-41E7-A58F-5B601B6C2FB5@infi.wang>
+ <a8f176dc-59c3-4af4-88ed-03d064f2e7c2@mailbox.org>
+ <8968863B-CFDC-4EE9-9062-08219AC0838E@infi.wang>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <8968863B-CFDC-4EE9-9062-08219AC0838E@infi.wang>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: yehkmqcpo3k1nhngn4abss5bryeiqjue
+X-MBO-RS-ID: b5d9bc119efbf3a2265
+X-Rspamd-Queue-Id: 4czGVc6H25z9t0n
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,65 +105,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 28 Oct 2025 at 14:17, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> QEMU comes with its own OpenSBI. For running RISC-V virtual machine
-> using one of qemu-riscv64_smode_defconfig or
-> qemu-riscv64_smode_acpi_defconfig is the natural choice.
->
-> Add the riscv64 smode configurations to the test scope.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  .azure-pipelines.yml |  6 ++++++
->  .gitlab-ci.yml       | 12 ++++++++++++
->  2 files changed, 18 insertions(+)
+On 11/1/25 8:45 AM, Beiyan Yun wrote:
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Hi,
 
+>>>> Can you not use the plain FW_LOADER to load the firmware from either storage, UBI or Block ? Is FS_LOADER even needed ?
+>>> Thanks for the suggestion, and yes you can, but that API is script-only—it expects the board to stage the blob and just copies from the address exposed via *_addr/_size. The current users of this driver expect the old pattern: the bootloader mounts a filesystem (MMC before, now possibly UBI/USB/etc.), reads the firmware, and applies it. Keeping an fs-loader node in the DT is effectively the same contract as the legacy MMC setup, just generalized.
+>>
+>> Can you maybe write a script which implements the old loader behavior in a compatible manner ?
+>>
+>>> The fs_loader driver gives us several things the script path doesn’t: a standard way to describe the storage via "/chosen/firmware-loader"
+>>
+>> Try this:
+>>
+>> "fdt addr $fdtcontroladdr ; fdt print /chosen"
+>>
+>> And then look at the "fdt" command and what it can do regarding reading content of DT properties into variables.
+>>
+>>> , runtime overrides through "storage_interface/fw_dev_part/fw_ubi_*, and no requirement for a board-specific script. So FS_LOADER isn’t redundant—it’s the part that replaces the hard-coded MMC flow with a configurable backend, while the script helper stays available for boards that want extra logic.
+>> Maybe a more generic script can be a replacement for the older hard-coded approach ?
+> 
+> Fair enough, I’ll remove fsloader for now.
+> 
+> I still believe it would be valuable someday: if reading from nvmem cell is implemented, the same DT could be used for both U-Boot and Linux.
 
->
-> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> index fc55c8b2100..be310b85eda 100644
-> --- a/.azure-pipelines.yml
-> +++ b/.azure-pipelines.yml
-> @@ -506,6 +506,12 @@ stages:
->          qemu_riscv64_spl:
->            TEST_PY_BD: "qemu-riscv64_spl"
->            TEST_PY_TEST_SPEC: "not sleep"
-> +        qemu_riscv64_smode:
-> +          TEST_PY_BD: "qemu-riscv64_smode"
-> +          TEST_PY_TEST_SPEC: "not sleep"
-> +        qemu_riscv64_smode_acpi:
-> +          TEST_PY_BD: "qemu-riscv64_smode_acpi"
-> +          TEST_PY_TEST_SPEC: "not sleep"
->          qemu_x86:
->            TEST_PY_BD: "qemu-x86"
->            TEST_PY_TEST_SPEC: "not sleep"
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index 73ff975e574..e3cba5d6b90 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -471,6 +471,18 @@ qemu-riscv64_spl test.py:
->      TEST_PY_TEST_SPEC: "not sleep"
->    <<: *buildman_and_testpy_dfn
->
-> +qemu-riscv64_smode test.py:
-> +  variables:
-> +    TEST_PY_BD: "qemu-riscv64_smode"
-> +    TEST_PY_TEST_SPEC: "not sleep"
-> +  <<: *buildman_and_testpy_dfn
-> +
-> +qemu-riscv64_smode_acpi test.py:
-> +  variables:
-> +    TEST_PY_BD: "qemu-riscv64_smode_acpi"
-> +    TEST_PY_TEST_SPEC: "not sleep"
-> +  <<: *buildman_and_testpy_dfn
-> +
->  qemu-x86 test.py:
->    variables:
->      TEST_PY_BD: "qemu-x86"
-> --
-> 2.51.0
->
+See example above, you can read anything from the U-Boot control DT both 
+in U-Boot shell and in U-Boot env scripts, using 'fdt' command .
+
+-- 
+Best regards,
+Marek Vasut
