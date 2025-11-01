@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB01FCCF9F8
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 03:29:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19671CCF9F8
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 03:53:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D23D88397A;
-	Sat,  1 Nov 2025 04:29:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 88EFA839E4;
+	Sat,  1 Nov 2025 04:53:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cdPWdaVf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lV48k+pd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DB3683A15; Sat,  1 Nov 2025 04:29:07 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 013D5839FD; Sat,  1 Nov 2025 04:53:09 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D455E83677
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 04:29:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 531C2839DD
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 04:53:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-294fb21b160so19197275ad.1
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 20:29:04 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-340c1c05feeso81327a91.1
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 20:53:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761967743; x=1762572543; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1761969185; x=1762573985; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=IFKgaVX/4YrpkPSoHPZVg4pqZcr2GsJuCNuVcb0Tf+w=;
- b=cdPWdaVf0bIahw3qeBYVRhZIfp+VgKO6fImjbNOBxHxi2S8DQbg3k9fvHnOoiIFEdF
- wBcvOGj8WE5/lT06TKrpxMkRTmYOkajkm0N+Mxi5VJWskDzpiE+ScX2BETrxbJf/R2/p
- 8NyeZ18WuPtCpkrQ48tD1qVpj525mNmoGYp4VM6GAE6xMN0pwGtwpH4/ksGpY4n8SVAi
- ieiwwjatpTVH7B9avzbXj3btZZbdvDi/DpVx1+SH9Ak+rVBY0pbn7of2V2TVn0wypW6+
- oQf2ikOf8hqg5nL5dah3P7PsPufBFyLItXUunc5CGIk8OvNNzgc94hhmMxvedNbPrS0s
- Kdxw==
+ bh=ckBWg9deNS0s55IfU4SwebN26gGhH6JVVELrfC5Oe/Q=;
+ b=lV48k+pdzlKVi+NPT8EJ/YpZL8NFr4g+TBQme+aD4huyisrVHnYcpLMbPJ1K4p2v8S
+ CZ0GnWzJ1pNr3c20CDVIUFT6QwIS2V1MYFPC0q6f+dcy60/tiJ/R8MjHxfioNR5xicfP
+ 7lCCgq3YEuhJ21z/CuTydcQ4fx63hCedsT8qnD6Hu/oKDeK2ILFCum94SDqhDmVfqUg/
+ wGgUlpO0cmlc0pL3PY0maJ2tappW9RRHLMUhcBxpMRXd80UL0gDfW0yN5eDDwBhFkNkQ
+ WGx4ITV/u1ThZI8hd47XrIh2erzLD23prXesu2s384rK667zDWp5awpFlBK9XYSwnDOL
+ fEuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761967743; x=1762572543;
+ d=1e100.net; s=20230601; t=1761969185; x=1762573985;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IFKgaVX/4YrpkPSoHPZVg4pqZcr2GsJuCNuVcb0Tf+w=;
- b=hS7L5Ox84A8O1hhEgj1fIw+d/91fPESEB3Modzpqis798w5EwLdedH86WEsO919EVs
- C/yyZ7p8D5ySwX0nNh3uB551F7toB4Amal0ORfETtwThUwdYqRAoNetjjQZh8wkfKvNf
- ZyiaLgvldfyoYIf53wLIpSbyR5zI4pDjj8Cu42qgiYjAmpzmlyTY7a+7r5pcb6h2M+SC
- s72zoo46Y1CvVKmvX+00A8CK9xJ67Zb5n+YTmz2RDNlL5uJArdqom4BcLLDt49MpOyXl
- yE4ZJZYGXbfX+MYIPXnylbN6+zLYCxoPpvtvf7Q6yBCdi9DdIhfPNhB6myU7vMwk5Yk3
- 40Gw==
+ bh=ckBWg9deNS0s55IfU4SwebN26gGhH6JVVELrfC5Oe/Q=;
+ b=dcv2CVrRca+OUAxyWqkXGtlKbQsrxhzV7uNmTKCFKig2sBNg+6ejaOto7iisWMSRfW
+ ZAPQoeExHY69YhBTU4REhTOhJgz+rOmdgjs1pZ+FiOS3Y4uhRcdg+tRlfOoucoFJs0G9
+ AqKxvkMoghm7n3SwrHI8RF8hTecRGT2uCsJYh97kd5ljRJ1J81ObTwUAu0q9uE3Sp6cB
+ 80HjFg8o8rIpuI7CERjEVhOIR44A8RYpzVyy4jzfbyMLiY8jZrQYcF/EsGCRTpv+9tfF
+ wWn0lXoKCGmyuEH87IY4u8RXB8mj/Fb8LDbwTcy3sy+siRWZAh4vhMN1vpAs34p6cj2C
+ 1+IQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUS3Yj4/HRE1DwGl6ppCvSvR/kmjPQTcdIyZx6ji1f/yXzeuPm1nGXtqYSmpglqyqgZrL9Covo=@lists.denx.de
-X-Gm-Message-State: AOJu0YydPEq2reEuTwcamPSZif5DqrJLRNp0jpNud8EyaYp8TkxVzeCr
- Tu7NBhbEujstEMLzi8bATsZPFHlenCpm7TVgkSolUC4q/7Aq5QHjYZtvbIvtDL9s
-X-Gm-Gg: ASbGncsHmg3tr/4kn2JtyMPHzKgLHBymwG5OmSwGlbeJl+stYjXTR5N5CQB6u9UJvnn
- ehFOH0y/KZTVtZ7WF5lbhJKX/98dXLzpYh5Tt8GfqDJ8rUGjsiyyniGBc8R3Il58MiX4dJrdqSQ
- 6s6gKXcfuhvov58YgwkAkpHDfrBs2oCSRIKPKw4JvZ7Fgig3G9idc2BPTecRQeyVpgOUoOsMdHS
- lbLZIBuCUQb0XyiiWPqZqDuZn4zh5n5OgAt0U5M4FJ4i4EjCzCyCxIT1xYTqzVhiWOkoDtyGroM
- fmsyjxfcP+Nj3uMoCuSr/xugvAB6xmh/WsDghP3Uj7uL/pnX4MCSkDotRPKAJ8+h5O+W+xSbPGj
- F2NOLAxeA+/2MKQEz0ARomGkjeHHyHVL5E1QbnmL1cU7OVIn6kE+BdlEAqSiwA7yX/wT401FroG
- vAoUhy1661ol9YJFhh0qepjHab0w==
-X-Google-Smtp-Source: AGHT+IEJQhkf7NaMdEGHEKVRWFUn+3vJSK2MKMXXWEL7vUdvcIdpcDNMnhHhKzgmsHUKkyW65C9I7Q==
-X-Received: by 2002:a17:903:2310:b0:267:ba53:8bd3 with SMTP id
- d9443c01a7336-2951a4935b5mr85132835ad.28.1761967743163; 
- Fri, 31 Oct 2025 20:29:03 -0700 (PDT)
+ AJvYcCVdJ+/7FCBiqvgkgNBUM3HjrLcNMS3CZd3syrayU4UcMT2/IVJ9CP1y9OhrA4apf25I5vmLRHY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMSISj1ZEtVxltnvInkboCwL4QhaIrEUrjPzozMmlusiQHW/s5
+ +fGPGtAb5T8nqBSkq2QpYJAmZLIouMhXfveYIPJgWidyJCXmTg01jGoRFgnlkVY1
+X-Gm-Gg: ASbGncsdoNdPHOcp7sv2EBNyIWVrXK67nSSuhPdcVy2M467LO1sikkPlTZFdxN3W/Gh
+ RBaQWFMyNAEgV8o6qCQG8A7R7oHrPEAs/2DXccgxZWzRNDteSxtNoXR7bVPgDNY+Ke4QAosm53/
+ i7zeONkcEVbzfQ94EgSnsa053bQxQJm8W2Klwo7lzuCsp3PMemVMNSqRNov33pCKcz/O+WrECQ7
+ asydA5UtERiYwyY6IuSMppQD5Pp7+vdFAPP7P9AzYjE9bj1sl+BLhYoWZd9Fto0Cx2je2Azkew4
+ wGf8C42lh56WOm4OqBbR2RW2BkSCvDKRWe/mGQMmNjmj/unlDSU+WpSfQDLwsYRXjGoWiQrB4x1
+ C/B8lpSEce4yN6v3Ut0TgqGgzKz2D6hQ97yE+tTf0K7ObDNyPwG0LEg6GtQSh2WxpD7KcRz8MvA
+ 2CV0OQji5lfplOR62/4agl+Jnf0w==
+X-Google-Smtp-Source: AGHT+IFggHboH/m6qHC87Ul6RtFUlZaCG9CTFX3Fugl/bOXgZZgloFgNz+Cf3TnPwL6SRE9c+CispQ==
+X-Received: by 2002:a17:903:38c8:b0:295:4d50:aaab with SMTP id
+ d9443c01a7336-2954d50ab58mr29524975ad.20.1761969184634; 
+ Fri, 31 Oct 2025 20:53:04 -0700 (PDT)
 Received: from localhost.localdomain ([185.213.82.75])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7a7d897f379sm3759233b3a.7.2025.10.31.20.29.01
+ d9443c01a7336-295268a629csm40393305ad.30.2025.10.31.20.53.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Oct 2025 20:29:02 -0700 (PDT)
+ Fri, 31 Oct 2025 20:53:04 -0700 (PDT)
 From: Brian Sune <briansune@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v1] Add make feature support for SoCFPGA Handoff
-Date: Sat,  1 Nov 2025 11:28:50 +0800
-Message-ID: <20251101032850.1674-1-briansune@gmail.com>
+Subject: [PATCH v2] Add make feature support for SoCFPGA Handoff
+Date: Sat,  1 Nov 2025 11:52:52 +0800
+Message-ID: <20251101035252.261-1-briansune@gmail.com>
 X-Mailer: git-send-email 2.47.1.windows.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -112,7 +112,7 @@ diff --git a/Makefile b/Makefile
 index 750f8a84b1f..74474368413 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -485,6 +485,48 @@ CFLAGS_KERNEL	=
+@@ -484,6 +484,48 @@ CFLAGS_KERNEL	=
  AFLAGS_KERNEL	=
  LDFLAGS_vmlinux =
  
