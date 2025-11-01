@@ -4,86 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A899DCCFA00
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 15:15:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A6ECCCFA03
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 15:15:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D96183642;
+	by phobos.denx.de (Postfix) with ESMTP id 805D08389A;
 	Sat,  1 Nov 2025 16:15:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=internet-e-mail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=permerror (0-bit key) header.d=internet-e-mail.com header.i=@internet-e-mail.com header.b="PNVG+6ko";
-	dkim=permerror (0-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="nomHquTX";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="j9ZTaq+A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8349683B4F; Sat,  1 Nov 2025 01:22:44 +0100 (CET)
-Received: from flow-a4-smtp.messagingengine.com
- (flow-a4-smtp.messagingengine.com [103.168.172.139])
+ id CC62883AAE; Sat,  1 Nov 2025 07:49:27 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DAE683B43
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 01:22:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=internet-e-mail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew@internet-e-mail.com
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailflow.phl.internal (Postfix) with ESMTP id 5DBAF1380287
- for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 20:22:40 -0400 (EDT)
-Received: from phl-imap-01 ([10.202.2.91])
- by phl-compute-05.internal (MEProxy); Fri, 31 Oct 2025 20:22:40 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- internet-e-mail.com; h=cc:content-transfer-encoding:content-type
- :content-type:date:date:from:from:in-reply-to:message-id
- :mime-version:reply-to:subject:subject:to:to; s=fm3; t=
- 1761956560; x=1761963760; bh=2c18H999XUx+eeFZETRE4qHzZYxC6NCoWY3
- NDX3CtyY=; b=PNVG+6koUXrX7iU2P+ksg6hUckJczXEHmJ1RyGvBEH3bV5td0eC
- 6u80ipfYOqv7X4LPXCCc7y/dJ+Jf0G5uLkI5MXk7A1LZj7xVQm/GsKKM93+RBV6W
- KYFFFdG9X8q3nwvNyMj5uEttzK/iK9rgufLw3ic7b+HfRIwtgwx4MAX4QWYJYAA7
- 1k4Tb+4zccGX3M3sMwo/GGFui2T35FB6gdYZhQgKE0cu2CdFyE3MPk7JpxBL2TBv
- j5fs19JRMgTgA7YqhZEvrtZqJjXWSJtX3Ov0YrHsIo610HKELooJfG5Ny2KIy1fJ
- dNvUvzU7rP5TrcUf3zx0jF5ni0gqNN8yp0g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-transfer-encoding:content-type
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1761956560; x=1761963760; bh=2c18H999XUx+eeFZETRE4qHzZYxC6NCoWY3
- NDX3CtyY=; b=nomHquTX7poSQ/LbreE2iN4iHfDT6i9GTXq7iETG9fugrkFT8A5
- ivpyN/9smoCPX5gs8rE6hMT64+5Lzi9m3e1VJE4nLlKvUy6Ml0ePKe5DcSXtoU7c
- skIbd9XDGfhNJ3Lq0B7omrWRBPun4KjTSuXLDicSxj7zye+vs4AAq2jc22L4wEfa
- tceinVQR5gKj8j3m+j3z1pZCdsUBmpSp8fB6S5igkH4MG5al+la2f5yJPbk9GsDT
- EEMbzLBieZdFNNnnhXnhLxqeKBkHqGfE26jHLL7uujFPkOAlu4goh9Mqe+rtMaVM
- W243wTC2H4E5nmYzIKoimFECZpIEPLqEIWA==
-X-ME-Sender: <xms:0FIFaYlOK1xhsaeOidvyxTZ42fhViQ9mqTjActj7ReJbxJkoXHVzig>
- <xme:0FIFaSpa2jbmqYQ7CKytgGPKOkOmMfqmeolJfddxKzCZrM4SQiJbTfVyk-4C7FhT7
- CuBh4l4xg2OORGUejWKE1YSgJJowGQMbNzjVNV9Gce8_F7YkeHPOw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggddujedtledvucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
- rghilhhouhhtmecufedttdenucenucfjughrpefoggffhffvkffutgfgsehtqhertdertd
- ejnecuhfhrohhmpegrnhgurhgvfiesihhnthgvrhhnvghtqdgvqdhmrghilhdrtghomhen
- ucggtffrrghtthgvrhhnpeeutdffvdeuteeuteegiedtvedvledttdekteeigefgteevvd
- ehfeeuhefhteeiueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
- fhhrohhmpegrnhgurhgvfiesihhnthgvrhhnvghtqdgvqdhmrghilhdrtghomhdpnhgspg
- hrtghpthhtohepuddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepuhdqsghoohht
- sehlihhsthhsrdguvghngidruggv
-X-ME-Proxy: <xmx:0FIFaSUmMIAutnhHwbAKViiErsyI6cgx1tdejKDEJdm2uyHI6hiP5A>
- <xmx:0FIFaej8Vn-e5hOo61ed9cg7NAVSdSW_uk-7MH8NCdZtDBizSkWxJw>
- <xmx:0FIFaTQUR1aTG-Wjx0mvXlk98YPtdkqDYo_d9rWrSsu2mmqwS61Dhw>
- <xmx:0FIFaRE_BRK7BCwNotgiNyb7PSlSglvSHtW4eAGJ5TkZgf7zVHnhXg>
- <xmx:0FIFaeudmuj4b9ybTJrGpvP5Ub98t78YhcW4mmeGkk1O5fUa2T95SlpZ>
-Feedback-ID: i72864837:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 1F80418C0066; Fri, 31 Oct 2025 20:22:40 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+ by phobos.denx.de (Postfix) with ESMTPS id 926ED83A92
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 07:49:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 3C4071096DF; Sat,  1 Nov 2025 07:49:16 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1761979763; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=Sndv4hCvYZTOa19sM3TWZoI8YENct9kGfdUMoJWT3Ls=;
+ b=j9ZTaq+AUKff6xe9K3Lw+VsYHUhtd+tlYMt4X6xq5eLs/qHMrrb0yzx+IhNfOa1KY0v4Jt
+ w/uXfNRN8oZJijvll3x5bsUGOlZ00I/Qt5Weo2G5dU9JxQOmEUdNTMVwP868kWAZPhFmu/
+ jdBNpNWWI9Vns0dJEUJw8Rmga0s2BECt9EGybGlCqQX3upmp12xlY8yFZf94vcm0KrjdbQ
+ I0K0nzotfLQoW9s9GXcj4BxqxwQWEZj6d/z0+uFN1skqxkk34io0a7ByOdK2mSed0UxwGq
+ w9ggPXJL4DRu54POTypYDQrwWrEQyL/96zzw6JmYCy0/yXTORD9kS0/SYuZ+tg==
+From: Heiko Schocher <hs@nabladev.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heiko Schocher <hs@nabladev.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+Subject: [PATCH v1 0/5] Add support for SM3 secure hash
+Date: Sat,  1 Nov 2025 07:49:02 +0100
+Message-Id: <20251101064907.5037-1-hs@nabladev.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Date: Fri, 31 Oct 2025 20:22:19 -0400
-From: andrew@internet-e-mail.com
-To: u-boot@lists.denx.de
-Message-Id: <63bb0a47-d02d-4d73-a63a-3f6b37caa09e@app.fastmail.com>
-Subject: building u-boot without pxe, dhcp, etc. 
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Sat, 01 Nov 2025 16:15:06 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,52 +89,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I want to build u-boot without a network stack (the target machine only =
-needs to boot from usb, nvme and mmc devices) but disabling pxe causes a=
- dependency problem. Does anyone know how to resolve this?=20
+
+Add SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and described
+at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
+
+TPMv2 defines hash algo sm3, which is currently
+not supported and prevented TPMv2 chip with newer
+firmware to work with U-Boot. Seen this on a ST33TPHF2XI2C
+
+    u-boot=> tpm2 init
+    u-boot=> tpm2 autostart
+    tpm2_get_pcr_info: too many pcrs: 5
+    Error: -90
+    u-boot=>
+
+Implement sm3 hash, so we can fix this problem.
+
+Azure build:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=188&view=results
 
 
-include/config_distro_bootcmd.h:443:9: error: expected =E2=80=98}=E2=80=99=
- before =E2=80=98BOOT_TARGET_DEVICES_references_PXE_without_CONFIG_CMD_D=
-HCP_or_PXE=E2=80=99
-  443 |         BOOT_TARGET_DEVICES_references_PXE_without_CONFIG_CMD_DH=
-CP_or_PXE
-      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~~~~~~
-include/config_distro_bootcmd.h:475:9: note: in expansion of macro =E2=80=
-=98BOOTENV_DEV_NAME_PXE=E2=80=99
-  475 |         BOOTENV_DEV_NAME_##devtypeu(devtypeu, devtypel, instance=
-, ## __VA_ARGS__)
-      |         ^~~~~~~~~~~~~~~~~
-include/configs/sifive-unmatched.h:24:9: note: in expansion of macro =E2=
-=80=98BOOTENV_DEV_NAME=E2=80=99
-   24 |         func(PXE, pxe, na) \
-      |         ^~~~
-include/config_distro_bootcmd.h:477:25: note: in expansion of macro =E2=80=
-=98BOOT_TARGET_DEVICES=E2=80=99
-  477 |         "boot_targets=3D" BOOT_TARGET_DEVICES(BOOTENV_DEV_NAME) =
-"\0"
-      |                         ^~~~~~~~~~~~~~~~~~~
-include/config_distro_bootcmd.h:497:9: note: in expansion of macro =E2=80=
-=98BOOTENV_BOOT_TARGETS=E2=80=99
-  497 |         BOOTENV_BOOT_TARGETS \
-      |         ^~~~~~~~~~~~~~~~~~~~
-include/configs/sifive-unmatched.h:51:9: note: in expansion of macro =E2=
-=80=98BOOTENV=E2=80=99
-   51 |         BOOTENV
-      |         ^~~~~~~
-include/env_default.h:120:9: note: in expansion of macro =E2=80=98CFG_EX=
-TRA_ENV_SETTINGS=E2=80=99
-  120 |         CFG_EXTRA_ENV_SETTINGS
-      |         ^~~~~~~~~~~~~~~~~~~~~~
-In file included from env/common.c:32:
-include/env_default.h:27:36: note: to match this =E2=80=98{=E2=80=99
-   27 | const char default_environment[] =3D {
-      |                                    ^
-make[1]: *** [scripts/Makefile.build:256: env/common.o] Error 1
-make: *** [Makefile:1857: env] Error 2
+Heiko Schocher (5):
+  lib: Import rol32 function from Linux
+  lib: implement SM3 secure hash
+  test: cmd: add unit test for sm3 hash
+  tpm2: add sm3 256 hash support
+  test: cmd: fix a typo in md5 test
 
+ MAINTAINERS            |   7 +
+ boot/Kconfig           |   1 +
+ cmd/Kconfig            |  16 +++
+ cmd/Makefile           |   1 +
+ cmd/sm3sum.c           |  48 +++++++
+ cmd/tpm-v2.c           |   1 +
+ common/hash.c          |  43 +++++-
+ include/linux/bitops.h |  11 ++
+ include/tpm-v2.h       |  12 ++
+ include/u-boot/sm3.h   |  34 +++++
+ lib/Kconfig            |   7 +
+ lib/Makefile           |   1 +
+ lib/sm3.c              | 313 +++++++++++++++++++++++++++++++++++++++++
+ lib/tpm-v2.c           |   4 +-
+ test/cmd/hash.c        |  48 ++++++-
+ 15 files changed, 543 insertions(+), 4 deletions(-)
+ create mode 100644 cmd/sm3sum.c
+ create mode 100644 include/u-boot/sm3.h
+ create mode 100644 lib/sm3.c
 
---=20
- =20
-  andrew@internet-e-mail.com
+-- 
+2.20.1
+
+base-commit: e6d1bcd668341af940254482b206a484e6a98db9
