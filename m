@@ -4,74 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A6ECCCFA03
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 15:15:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A768CCFA00
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 15:15:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 805D08389A;
+	by phobos.denx.de (Postfix) with ESMTP id E0961838CE;
 	Sat,  1 Nov 2025 16:15:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="j9ZTaq+A";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BFSzy3xl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC62883AAE; Sat,  1 Nov 2025 07:49:27 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DF0A883A3B; Sat,  1 Nov 2025 10:40:05 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 926ED83A92
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 07:49:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3C4071096DF; Sat,  1 Nov 2025 07:49:16 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1761979763; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=Sndv4hCvYZTOa19sM3TWZoI8YENct9kGfdUMoJWT3Ls=;
- b=j9ZTaq+AUKff6xe9K3Lw+VsYHUhtd+tlYMt4X6xq5eLs/qHMrrb0yzx+IhNfOa1KY0v4Jt
- w/uXfNRN8oZJijvll3x5bsUGOlZ00I/Qt5Weo2G5dU9JxQOmEUdNTMVwP868kWAZPhFmu/
- jdBNpNWWI9Vns0dJEUJw8Rmga0s2BECt9EGybGlCqQX3upmp12xlY8yFZf94vcm0KrjdbQ
- I0K0nzotfLQoW9s9GXcj4BxqxwQWEZj6d/z0+uFN1skqxkk34io0a7ByOdK2mSed0UxwGq
- w9ggPXJL4DRu54POTypYDQrwWrEQyL/96zzw6JmYCy0/yXTORD9kS0/SYuZ+tg==
-From: Heiko Schocher <hs@nabladev.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heiko Schocher <hs@nabladev.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Subject: [PATCH v1 0/5] Add support for SM3 secure hash
-Date: Sat,  1 Nov 2025 07:49:02 +0100
-Message-Id: <20251101064907.5037-1-hs@nabladev.com>
-X-Mailer: git-send-email 2.20.1
+ by phobos.denx.de (Postfix) with ESMTPS id BDA9F83A24
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 10:40:03 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=d3dx12.xx@gmail.com
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-429c7f4f8a2so122380f8f.0
+ for <u-boot@lists.denx.de>; Sat, 01 Nov 2025 02:40:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1761990003; x=1762594803; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6tu0h17rBY70tILmRi5UNHeUAcHuRRiWbagvo7LFy6c=;
+ b=BFSzy3xl3hqy5f0xqmmaMqUhFX4r55N1yK7cSK9yxFiYvnoYz3jVzcgm2iVZv0GRlL
+ lyA4LstIJIX82MCvCmW4NQpWiR9mXkXJPNfo8xfD909ZHtZl/evEo2vGTZeLG1SXnB1D
+ iSxhlaWJy+jt5Fj0ak+ETz8RNVBNRBqF0mm8S6cC/9u/u6oesAHsvK/VNHKGAKNHS6Wx
+ ChMTypf+MCzaKoVam5orh0I7RzWbHyQ7eaSMxJFY2bPQqMwhaJdCC+XMTR+qBMVDHAvE
+ 9Atae8CtLiwnSyRD063vJLO5rlM+N4+t2pAkRjg8HdEO27EelonRfTtMcTGQ6a0PdYZQ
+ XATQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761990003; x=1762594803;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6tu0h17rBY70tILmRi5UNHeUAcHuRRiWbagvo7LFy6c=;
+ b=jI0jyZp6Y3h/DmHNCh+/UbrJA04dVw8+3m8buRQ+Hy74zbHdvzhos/eaKVPtuMDd0B
+ KLM/lXOV6pSlOLFi2rpUU/P3Lo/3srWqhg93tRX+tlNVGLglHP17YIgYzSnDo4LufB0A
+ sRkR/iYaGQOimFlU2llSbZWsoDGoiAZYAL2FlXgFB2w4XCvxReCxzjDK5MuzV3Xyc9Wa
+ IbWcYKRhJH5b/6NgFi9CGHJHTC1cQLETK2K3KjnKgnLGRz1UsbpxHPpJinvfGAX2zsSd
+ Cyd4PFXwCdnpzaT4K0GlXzV+pFe+IlCHCkYwZP8WweGO5PdUM199mYQXyQeRD/YlzTFQ
+ nqZw==
+X-Gm-Message-State: AOJu0Yycwcbr9uVr1ntoZbVGX1R1uw32VCZtaNMeBdZk7SaOTxPTsQcO
+ dVTILlq8yvdq3rhvzsjFNI3jyjh9SKchlMaqmE7c1hZNov1J4qZYAmAc
+X-Gm-Gg: ASbGncu+l43XvtVxSlZhkuEVbsKZ7/0oOtazT64WYJ7dp6sqy3dvrYCQF4BAxYQD9NM
+ y7ja8is0X1aRRxwZjV/iabVuv0xaGP139pRfeuV7G0LwfwGLm4HRblX9oVhoGJYHrL1DOu+ajot
+ v0iOWXsPXR2tVWEpbGIBSNqO9kdtqXE+W/0WPYEFCmRN33L/m7ohmOXP9e4D5X7LhmaQ6+TJ5jC
+ oEZ4g2pH47XkPIYqiYI4gnrnSY8HcGkrSwzRJo890hacalbQp0jVytxsX/asWpQN3Sjv2BO/G0X
+ EXS1gapMUaJbCVW1fZCB0wYISYHZm+umt56qbLfRGpzg6LGypD8bQnf7qz803rh5bHF3rdqGCst
+ 3hGQ8eaGpI0nXMQj3Dk9WjIVuiRou0U0F2gP+BEMAXNKwOmQr3/VLZV0fh8gFLhUPu0IvtLiRGa
+ gol+XoXOVxcqz2aXPY7xnXTxjSfIX7FJVVfgA=
+X-Google-Smtp-Source: AGHT+IFe4++vT5HeWADOUQIuHmEySSUH+afMzdi754XpSgJYKurna/ZphkjLAoe4b5kdcwZ2YsXyVQ==
+X-Received: by 2002:adf:ef44:0:b0:429:ba83:dea7 with SMTP id
+ ffacd0b85a97d-429ba83dfcbmr5567513f8f.25.1761990003113; 
+ Sat, 01 Nov 2025 02:40:03 -0700 (PDT)
+Received: from [127.0.0.1] (B-228.ahl.uni-linz.ac.at. [193.171.46.128])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-429c110037asm8697791f8f.3.2025.11.01.02.40.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 01 Nov 2025 02:40:02 -0700 (PDT)
+From: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+Subject: [PATCH 0/2] Fix AArch32 compilation with Clang
+Date: Sat, 01 Nov 2025 10:39:57 +0100
+Message-Id: <20251101-clang-fixes-v1-0-a8398475226e@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAG3VBWkC/x2LQQqAIBAAvyJ7TnANofpKdJBtq4WwUIhA/HtLx
+ 5lhKhTOwgUmUyHzI0WupICdATpi2tnKqgze+YDo0NKp1m7ycrFEbnA4Uh98BD3uzH/QYV5a+wD
+ ipK7hXQAAAA==
+X-Change-ID: 20251101-clang-fixes-cc08019c352a
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Samuel Holland <samuel@sholland.org>, 
+ Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+X-Mailer: b4 0.14.3
 X-Mailman-Approved-At: Sat, 01 Nov 2025 16:15:06 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,54 +106,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+I faced some minor compatibility issues when choosing Clang as the cross-compiler for my target.
 
-Add SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and described
-at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
+Please review these two fixes, aiming at enabling Clang-based builds (still using GNU binutils)
+for 32-bit ARM targets.
 
-TPMv2 defines hash algo sm3, which is currently
-not supported and prevented TPMv2 chip with newer
-firmware to work with U-Boot. Seen this on a ST33TPHF2XI2C
+Tested to fix build with (also run-tested on qemu arm and arm64 with clang):
 
-    u-boot=> tpm2 init
-    u-boot=> tpm2 autostart
-    tpm2_get_pcr_info: too many pcrs: 5
-    Error: -90
-    u-boot=>
+make ARCH=arm HOSTCC=clang CROSS_COMPILE=arm-none-eabi- CC=clang imx6ulz_smm_m2b_defconfig
+make ARCH=arm HOSTCC=clang CROSS_COMPILE=arm-none-eabi- CC=clang -j20
 
-Implement sm3 hash, so we can fix this problem.
+Thank you!
 
-Azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=188&view=results
+Best regards,
+Dmitrii
 
+Signed-off-by: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+---
+Dmitrii Sharshakov (2):
+      arch: arm: build: only set -mgeneral-regs-only for AArch64
+      build: fix building u-boot.lds with Clang as a cross-compiler
 
-Heiko Schocher (5):
-  lib: Import rol32 function from Linux
-  lib: implement SM3 secure hash
-  test: cmd: add unit test for sm3 hash
-  tpm2: add sm3 256 hash support
-  test: cmd: fix a typo in md5 test
+ Makefile           | 1 +
+ arch/arm/config.mk | 5 ++++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+---
+base-commit: 62b45e82bdbf703571450e97f605893fe0d50530
+change-id: 20251101-clang-fixes-cc08019c352a
 
- MAINTAINERS            |   7 +
- boot/Kconfig           |   1 +
- cmd/Kconfig            |  16 +++
- cmd/Makefile           |   1 +
- cmd/sm3sum.c           |  48 +++++++
- cmd/tpm-v2.c           |   1 +
- common/hash.c          |  43 +++++-
- include/linux/bitops.h |  11 ++
- include/tpm-v2.h       |  12 ++
- include/u-boot/sm3.h   |  34 +++++
- lib/Kconfig            |   7 +
- lib/Makefile           |   1 +
- lib/sm3.c              | 313 +++++++++++++++++++++++++++++++++++++++++
- lib/tpm-v2.c           |   4 +-
- test/cmd/hash.c        |  48 ++++++-
- 15 files changed, 543 insertions(+), 4 deletions(-)
- create mode 100644 cmd/sm3sum.c
- create mode 100644 include/u-boot/sm3.h
- create mode 100644 lib/sm3.c
-
+Best regards,
 -- 
-2.20.1
+Dmitrii Sharshakov <d3dx12.xx@gmail.com>
 
-base-commit: e6d1bcd668341af940254482b206a484e6a98db9
