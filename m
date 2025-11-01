@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A7C9CCFA02
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 16:07:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D971CCFA02
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 16:07:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ABA783642;
-	Sat,  1 Nov 2025 17:07:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0EE6283885;
+	Sat,  1 Nov 2025 17:07:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="PuD/uNbv";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BPNxiflt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9E3183677; Sat,  1 Nov 2025 17:07:44 +0100 (CET)
-Received: from mail-m15572.qiye.163.com (mail-m15572.qiye.163.com
- [101.71.155.72])
+ id E33D78389A; Sat,  1 Nov 2025 17:07:51 +0100 (CET)
+Received: from mail-m3274.qiye.163.com (mail-m3274.qiye.163.com
+ [220.197.32.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 930AD8331F
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 17:07:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80CF183885
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 17:07:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [124.72.36.229])
- by smtp.qiye.163.com (Hmail) with ESMTP id 28044c680;
- Sun, 2 Nov 2025 00:07:37 +0800 (GMT+08:00)
-Message-ID: <68040238-b2e1-47cc-a942-15cbffe763bd@rock-chips.com>
-Date: Sun, 2 Nov 2025 00:07:37 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 28044c687;
+ Sun, 2 Nov 2025 00:07:45 +0800 (GMT+08:00)
+Message-ID: <7f3455d7-2802-4743-99a4-9f9362aa3a58@rock-chips.com>
+Date: Sun, 2 Nov 2025 00:07:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: Ensure env in SPI Flash can work correctly
+Subject: Re: [PATCH v2] rockchip: spl-boot-order: Defer probe of boot device
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250712212710.684525-1-jonas@kwiboo.se>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+References: <20250804182541.3858351-1-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250712212710.684525-1-jonas@kwiboo.se>
+In-Reply-To: <20250804182541.3858351-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9a402ca00f03afkunm51d583149a6990
+X-HM-Tid: 0a9a402cbe7003afkunm8fdbd01e9a6a12
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDHUofVhlLTBlCTEIdHksYH1YVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHh5CVh0YHk1OT05CSxlDH1YVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUlCWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=PuD/uNbv2orJd6XRS/3Vlr9nhUENG6ZNXtsuycFStDi+xk6kYD82AiCy9estAoaP1BtzHu73wGKgtUsg1r1/NIqA7JYv5piZJKzgYp0dg7+Z+pPfJVzbW22jMozxKojaVM8Mxfkj2TX4ELKsKKwVF6IDQVVcAxOvDJ4PbI791p8=;
+ b=BPNxifltGbHMdj7sTkFkD3g5ktfNdOhYcYutfKoC+IVLhLXhT3fUebRoz/RjO5mVojs0IMwxg8j1XARgQVHkqk1kzc19dr+Ul9cSAXziTTlazvYpB0LNN8mW1a/fhRSRiACVE/Mv9XuRHRhOUcBtewa0pEodHQzPtGcCjqP+2g4=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=FzE+0B7C7v6+jypC8nwBlYksUOqrIO7BAqJ8VgQTfzE=;
+ bh=fjJ/a4DgtwV910Zdp4VpIZIUTN8TiHnbsLBxSr0PkdM=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,12 +71,13 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/7/13 05:27, Jonas Karlman wrote:
-> Ensure that the spi/sfc node for SPI flash is aviliable during pre-reloc
-> phase so that env can successfully be loaded from SPI Flash.
+On 2025/8/5 02:25, Jonas Karlman wrote:
+> Boot devices are being probed when SPL boot order is determined, this
+> may unnecessarily delay boot slightly.
 >
-> No boards with these SoCs seem to be affected as there is no default use
-> of ENV_IS_IN_SPI_FLASH=y.
+> Instead defer probe of the boot device until SPL try to load image from
+> the boot device by using uclass_find_device_by_of_offset() instead of
+> the get variant.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -84,47 +85,30 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk3328-u-boot.dtsi  | 4 ++++
->   arch/arm/dts/rk356x-u-boot.dtsi  | 1 +
->   arch/arm/dts/rk3588s-u-boot.dtsi | 1 +
->   3 files changed, 6 insertions(+)
+> v2: Update commit message
+> ---
+>   arch/arm/mach-rockchip/spl-boot-order.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-> index b0e50a973a88..8ffc9ed3d573 100644
-> --- a/arch/arm/dts/rk3328-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-u-boot.dtsi
-> @@ -132,6 +132,10 @@
->   	bootph-pre-ram;
->   };
+> diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
+> index 3dce9b30898d..6b1b84dc86d1 100644
+> --- a/arch/arm/mach-rockchip/spl-boot-order.c
+> +++ b/arch/arm/mach-rockchip/spl-boot-order.c
+> @@ -40,7 +40,7 @@ static int spl_node_to_boot_device(int node)
+>   	 * aware of the block-device layer.  Until then (and to avoid unneeded
+>   	 * delays in getting this feature out), it lives at the board-level.
+>   	 */
+> -	if (!uclass_get_device_by_of_offset(UCLASS_MMC, node, &parent)) {
+> +	if (!uclass_find_device_by_of_offset(UCLASS_MMC, node, &parent)) {
+>   		struct udevice *dev;
+>   		struct blk_desc *desc = NULL;
 >   
-> +&spi0 {
-> +	bootph-some-ram;
-> +};
-> +
->   &uart2 {
->   	bootph-all;
->   	clock-frequency = <24000000>;
-> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
-> index 871869739536..738b9673d352 100644
-> --- a/arch/arm/dts/rk356x-u-boot.dtsi
-> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
-> @@ -157,6 +157,7 @@
->   };
+> @@ -72,7 +72,7 @@ static int spl_node_to_boot_device(int node)
+>   	 * extended with awareness of the BLK layer (and matching OF_CONTROL)
+>   	 * soon.
+>   	 */
+> -	if (!uclass_get_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
+> +	if (!uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
+>   		return BOOT_DEVICE_SPI;
 >   
->   &sfc {
-> +	bootph-some-ram;
->   	u-boot,spl-sfc-no-dma;
->   };
->   
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-> index 5eeb138f3513..71fd352f640e 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -140,6 +140,7 @@
->   };
->   
->   &sfc {
-> +	bootph-some-ram;
->   	u-boot,spl-sfc-no-dma;
->   };
->   
+>   	return -1;
