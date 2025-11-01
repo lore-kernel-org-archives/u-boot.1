@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5DD9CCF9F8
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 09:04:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 328ACCCF9F0
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 09:04:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB16D83A5A;
-	Sat,  1 Nov 2025 10:04:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 278BC83A15;
+	Sat,  1 Nov 2025 10:04:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZKBcarRQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E+nVKu0m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D30183A36; Sat,  1 Nov 2025 10:04:14 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 92B6C83A8A; Sat,  1 Nov 2025 10:04:17 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EC98839B9
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 10:04:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B10FC83A15
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 10:04:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b6d3340dc2aso804017266b.0
- for <u-boot@lists.denx.de>; Sat, 01 Nov 2025 02:04:12 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b472842981fso426127166b.1
+ for <u-boot@lists.denx.de>; Sat, 01 Nov 2025 02:04:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1761987852; x=1762592652; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1761987855; x=1762592655; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RqisBkHJ2je7rX7G4nHYoJ/GwbZacV4LJuUVB3qY7CQ=;
- b=ZKBcarRQHiHp+UVUH+q7eSyiABuweYqKui1c2z9X8YIu7Y9GC12YP5CCRrb0fsa5d3
- rO37gO+ar/qDmq7WcvkYXj/FFnWrR6Mk9eSlm/EFbWfil0fdzyBepv6hp9ZMyrUvFeGC
- zCnhPk7LfCRQPPbtD38ofuNfVCSh56UiFVeMs=
+ bh=eJn28cw2r1fhqNvrMgXxqlsf4jEVNvCLUtWT5vE0mfg=;
+ b=E+nVKu0mKt1uAT5XbRuWhSL+ZCvfHOcPRHpOU7lMrlW6tdai3spQ8IG/iuCe9CzqNc
+ dWn8JauaT7dbrbcnhvK0NSW2Oi7PKm0zPiLTymk0TgBstV1G8I58vdbsHzLsv27MPtRo
+ urMVyPQsh+XAxiqF7awq84UrkOPyJEfuyKdFE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761987852; x=1762592652;
+ d=1e100.net; s=20230601; t=1761987855; x=1762592655;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RqisBkHJ2je7rX7G4nHYoJ/GwbZacV4LJuUVB3qY7CQ=;
- b=iPNA81rDbmx3Jeznq7cMr2mnQaBKElMbY3e1VdJxpEPUEeQemRfaWChOVioFOABNXu
- 9SWjDS8RpqKzk1nveCdy6wzDQBdQa43rqVzonNcrHHzMA1tlygSOXGZdMeL7FKCW3vEf
- SBLhoE0is6OTHgXUDqsU4+HMu2HM5nVXju2o1taxIIcUuE9NrPW7zm/qQ/Dj6u+1/adr
- 2LtlwdOnsCHQkKvS08/XOy/t9yPPZfOgsPxrDo8LD2cv0pO4ILxopOOTeuTcZ1FUDR9V
- uMonDzKPKIm49orOCr43QpCWc+2F3WgMie+AYsiDrvLSTcqkZ/788npA8LbmCDKKgsHo
- WR4Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVW8gfy/Cj2P5iJ8CWsKaXaFA0odYEKe7sjm7KiOHbh3ktqIzhFe9Od6uyk4sdi6CyEnxvxRUM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxd1y18MhFiy0WEj1PebODC/aQaKk6ue0zIkXcUkpSUrwWiQ+Yf
- yCfBhLNNvVBd8qGvcpa+yaDUYJiSJluikehL2YcnTkI7Gk2pNRPci+0KFCbk7ePVe1Fkati/s8+
- Q2eReVcgPxANpgNmE5NtsKMYSehLz0Ct+6gx/ET85
-X-Gm-Gg: ASbGncuC8WnY7P/uxHrTBN8kqkVssyFvdQWaJ5bbHjvIS7cHNNexbB3JMezUh1Mgfvg
- icGhERHoqWTBbwBS58CYNWHcMUK7cExjQyc7sCmzSDKE/nMN7Inhb4vfqCoAAo8VKT4SQjg2Z82
- p1hAeRtnVBv1wndAzRfRR1QQDRGDOIIe0gib947vzA1YMMHyUaed+Bb5FPVOeGDaTX3aWfvUCxO
- Mm2xlLnAp1Nym1PqwND4w+Y0tL+ShCLJ0pSRzvxNSlZNI9nrh+gGCUfMRa4wwN0QuxB4Ys=
-X-Google-Smtp-Source: AGHT+IFwOIO6aOgy7fswsGuvWjzeJES+dMPTreoYl8gxqFStPlCBHvnlQk7V3v590T2H+sIVGwbc8XMgto5eMLDNzE0=
-X-Received: by 2002:a17:907:6ea6:b0:b6d:6026:9f1d with SMTP id
- a640c23a62f3a-b7051f27e9emr1036713166b.1.1761987851852; Sat, 01 Nov 2025
- 02:04:11 -0700 (PDT)
+ bh=eJn28cw2r1fhqNvrMgXxqlsf4jEVNvCLUtWT5vE0mfg=;
+ b=GdlTB8eKrjDaOUI/P//IaLEBTuU8sZcn3teTkKn3VKF3A3eN9mrAgYUN6Sz3Z26Sie
+ Lu0fCB+Zk0lqjeM5CkrQ//TwHvy77ZdlLF9coVDo3gVIOEupO0OWuhC7SmLrBiLJJNFX
+ 3ys4K1g90/w3LJ5n46bQBLjdQ5doqq3APID4Ep9SatPj86D8DZajXvFrOxj76RRXFTM9
+ kY2rAdtmgwx7ep/EvHLhavcPgqCLwgziC8m7DiLL79csOxVwonFlaV/NrY73cpuAqP+t
+ LoBMDk8u/lJZ/lc+VEuphC6JsEN+CKaiZjO3RTF4uxdDTbJaa0mOE7YJzUyG8FW2WKFw
+ PFGQ==
+X-Gm-Message-State: AOJu0Yz1pO2Fm+NS/+ZDLnmCFi6wKGDt5yWLMDME/lQBlkVPJ/jXFD19
+ 6M2miI8mjWPlcbRirY094wZLH+jxaFo7BAMq/9vJL2srFE+3h5FvAR4Yj5xarKlRPY3bfyIAGnM
+ 5I771/Ez1sLgDTSS1r01VrwlsapWIqNy1hEOPYw0y
+X-Gm-Gg: ASbGnct5zfBjuYxiYf7cR2JdUqwkX+AyeUWr2EX8SitAS3lLCMRt1tUlmxYU/HGQV+w
+ N1m+erfpBqM0Zw5/lxhirz5Dy6mss9bUm+TisnfHvdKPGTrnY9vh5ViJ/z/jj28a/FcO9D3T2aL
+ 4SSDQtj+JuTMVpnaSnWjSZCuwB5QQFOF6W1drWaZivqB6vKwBdbHPqGKdRzyYt2NMihwf6GhV9G
+ If/CgueIEx7nI5JgWuA2pNfO38iUoG03tok2/GdwDLxG7fdayA9jSyBLRLs
+X-Google-Smtp-Source: AGHT+IFqP4dkyRZTj2oejwW/6grX3MPlMnIF7QVJRKjwSHu9io/Ac8ntPSumA5oQl9CRlWwIVFwdj5tIh761dB+OIMA=
+X-Received: by 2002:a17:907:ea8:b0:b6d:3ad4:ecb5 with SMTP id
+ a640c23a62f3a-b70705eca64mr658717366b.40.1761987855160; Sat, 01 Nov 2025
+ 02:04:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250904-master-v3-0-b42847884974@foss.st.com>
- <20250904-master-v3-1-b42847884974@foss.st.com>
-In-Reply-To: <20250904-master-v3-1-b42847884974@foss.st.com>
+References: <20251029-btool-mkimage-docstring-v1-1-9905a95018cc@cherry.de>
+In-Reply-To: <20251029-btool-mkimage-docstring-v1-1-9905a95018cc@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 1 Nov 2025 10:03:59 +0100
-X-Gm-Features: AWmQ_bk-kd3YffpUBHGdTcqb2J8FUlXC2bINTQamEUoJy-kpddgT3ym8YhzoRLA
-Message-ID: <CAFLszTiT9iLx6gguhVui2Qh0Ew89yhvpDggKwPo71cB+Rv=xJA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/7] ofnode: support panel-timings in
- ofnode_decode_display_timing
-To: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>, Kamil Lulko <kamil.lulko@gmail.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Dillon Min <dillon.minfei@gmail.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Sumit Garg <sumit.garg@kernel.org>, Philippe Cornu <philippe.cornu@foss.st.com>,
- Yannick Fertre <yannick.fertre@foss.st.com>, u-boot@lists.denx.de, 
- uboot-stm32@st-md-mailman.stormreply.com
+Date: Sat, 1 Nov 2025 10:04:01 +0100
+X-Gm-Features: AWmQ_bkxic4sgd_wh_12V3Wg-aZIOB-hgUFqpx6D2I87J_t1cDmFCO9XioLL01Q
+Message-ID: <CAFLszTiR_2b-znMy+0UJhTFo1sYcsAEeGT6h_mCZiF8hfizuSg@mail.gmail.com>
+Subject: Re: [PATCH] binman: btool: mkimage: fix Bintoolmkimage.run() method
+ docstring
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,61 +89,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raphael,
-
-On Thu, 4 Sept 2025 at 14:53, Raphael Gallais-Pou
-<raphael.gallais-pou@foss.st.com> wrote:
+On Wed, 29 Oct 2025 at 12:30, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
-> The "Display Timings" in panel-common.yaml can be provided by 2 properties
-> - panel-timing: when display panels are restricted to a single resolution
->                 the "panel-timing" node expresses the required timings.
-> - display-timings: several resolutions with different timings are supported
->                    with several timing subnode of "display-timings" node
+> From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> This patch update the parsing function to handle this 2 possibility
-> when index = 0.
+> Commit 65e2c14d5a5a ("binman: btool: mkimage: use Bintool.version")
+> removed the version argument from the run method but forgot to remove it
+> from the method docstring, so let's fix this oversight.
 >
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Reviewed-by: Yannick Fertre <yannick.fertre@foss.st.com>
-> Signed-off-by: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
+> Fixes: 65e2c14d5a5a ("binman: btool: mkimage: use Bintool.version")
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
->  drivers/core/ofnode.c | 17 ++++++++++-------
->  1 file changed, 10 insertions(+), 7 deletions(-)
->
-> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> index e040e3f2806ffe74c58dcd82f36307351acd5a99..5a721b46e5a3214e7bd437739776362c2d22a3c9 100644
-> --- a/drivers/core/ofnode.c
-> +++ b/drivers/core/ofnode.c
-> @@ -1221,13 +1221,16 @@ int ofnode_decode_display_timing(ofnode parent, int index,
->         int ret = 0;
->
->         timings = ofnode_find_subnode(parent, "display-timings");
-> -       if (!ofnode_valid(timings))
-> -               return -EINVAL;
-> -
-> -       i = 0;
-> -       ofnode_for_each_subnode(node, timings) {
-> -               if (i++ == index)
-> -                       break;
-> +       if (ofnode_valid(timings)) {
-> +               i = 0;
-> +               ofnode_for_each_subnode(node, timings) {
-> +                       if (i++ == index)
-> +                               break;
-> +               }
-> +       } else {
-> +               if (index != 0)
-> +                       return -EINVAL;
-> +               node = ofnode_find_subnode(parent, "panel-timing");
->         }
->
->         if (!ofnode_valid(node))
->
-> --
-> 2.25.1
->
+>  tools/binman/btool/mkimage.py | 1 -
+>  1 file changed, 1 deletion(-)
 
-Please add a test for this in test/dm/ofnode.c
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
