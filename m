@@ -4,62 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B736CCFA00
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 14:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A899DCCFA00
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 15:15:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97F4B83A1B;
-	Sat,  1 Nov 2025 15:26:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 2D96183642;
+	Sat,  1 Nov 2025 16:15:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=internet-e-mail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BWr4blfw";
+	dkim=permerror (0-bit key) header.d=internet-e-mail.com header.i=@internet-e-mail.com header.b="PNVG+6ko";
+	dkim=permerror (0-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="nomHquTX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D40E283A1E; Sat,  1 Nov 2025 15:26:35 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 8349683B4F; Sat,  1 Nov 2025 01:22:44 +0100 (CET)
+Received: from flow-a4-smtp.messagingengine.com
+ (flow-a4-smtp.messagingengine.com [103.168.172.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B0D6838AE
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 15:26:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DAE683B43
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 01:22:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=internet-e-mail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=bfc8=5K=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1762007191;
- bh=5rBKnz7sWUUKwX+c4O9m5xyUPsXqRxukx986o/xAOoA=;
- b=BWr4blfwdwZ/WvB20J2h+TKxCxSV6CvbzmQSpnr84VyF04BKrEco9OqrSYI53JCJuEzSxhqUg
- Ky7z3yrXrjtq791AAPkn+5wJ8hd5ui1An/fU9/skr+FcD7udES4J2UJpn6HZLQeXuFJd8g8Dcce
- dxv+3rIkRs9PtSvSy8Nmy0lFRnf38Np2UxraB4kjZlK4TMdpkpj1wmsMs50+CpX2DS5bYXRnI8y
- a3h8vwH/eqs4twXzaWR+ddhT+mBoncExqSQQRI+w8gctXbTla7BXg5LiqkUqqrzXEWYv1N693Qy
- tz5CjOeNQP6zeqm91QbQlqChyOUiyqYUa6kPt8y1g9MA==
-X-Forward-Email-ID: 69061896d434f1750450407d
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.4.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <d233c95a-931b-4b72-821e-62a4614cdb21@kwiboo.se>
-Date: Sat, 1 Nov 2025 15:26:25 +0100
+ spf=pass smtp.mailfrom=andrew@internet-e-mail.com
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+ by mailflow.phl.internal (Postfix) with ESMTP id 5DBAF1380287
+ for <u-boot@lists.denx.de>; Fri, 31 Oct 2025 20:22:40 -0400 (EDT)
+Received: from phl-imap-01 ([10.202.2.91])
+ by phl-compute-05.internal (MEProxy); Fri, 31 Oct 2025 20:22:40 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ internet-e-mail.com; h=cc:content-transfer-encoding:content-type
+ :content-type:date:date:from:from:in-reply-to:message-id
+ :mime-version:reply-to:subject:subject:to:to; s=fm3; t=
+ 1761956560; x=1761963760; bh=2c18H999XUx+eeFZETRE4qHzZYxC6NCoWY3
+ NDX3CtyY=; b=PNVG+6koUXrX7iU2P+ksg6hUckJczXEHmJ1RyGvBEH3bV5td0eC
+ 6u80ipfYOqv7X4LPXCCc7y/dJ+Jf0G5uLkI5MXk7A1LZj7xVQm/GsKKM93+RBV6W
+ KYFFFdG9X8q3nwvNyMj5uEttzK/iK9rgufLw3ic7b+HfRIwtgwx4MAX4QWYJYAA7
+ 1k4Tb+4zccGX3M3sMwo/GGFui2T35FB6gdYZhQgKE0cu2CdFyE3MPk7JpxBL2TBv
+ j5fs19JRMgTgA7YqhZEvrtZqJjXWSJtX3Ov0YrHsIo610HKELooJfG5Ny2KIy1fJ
+ dNvUvzU7rP5TrcUf3zx0jF5ni0gqNN8yp0g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-transfer-encoding:content-type
+ :content-type:date:date:feedback-id:feedback-id:from:from
+ :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1761956560; x=1761963760; bh=2c18H999XUx+eeFZETRE4qHzZYxC6NCoWY3
+ NDX3CtyY=; b=nomHquTX7poSQ/LbreE2iN4iHfDT6i9GTXq7iETG9fugrkFT8A5
+ ivpyN/9smoCPX5gs8rE6hMT64+5Lzi9m3e1VJE4nLlKvUy6Ml0ePKe5DcSXtoU7c
+ skIbd9XDGfhNJ3Lq0B7omrWRBPun4KjTSuXLDicSxj7zye+vs4AAq2jc22L4wEfa
+ tceinVQR5gKj8j3m+j3z1pZCdsUBmpSp8fB6S5igkH4MG5al+la2f5yJPbk9GsDT
+ EEMbzLBieZdFNNnnhXnhLxqeKBkHqGfE26jHLL7uujFPkOAlu4goh9Mqe+rtMaVM
+ W243wTC2H4E5nmYzIKoimFECZpIEPLqEIWA==
+X-ME-Sender: <xms:0FIFaYlOK1xhsaeOidvyxTZ42fhViQ9mqTjActj7ReJbxJkoXHVzig>
+ <xme:0FIFaSpa2jbmqYQ7CKytgGPKOkOmMfqmeolJfddxKzCZrM4SQiJbTfVyk-4C7FhT7
+ CuBh4l4xg2OORGUejWKE1YSgJJowGQMbNzjVNV9Gce8_F7YkeHPOw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggddujedtledvucetufdoteggodetrf
+ dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+ rghilhhouhhtmecufedttdenucenucfjughrpefoggffhffvkffutgfgsehtqhertdertd
+ ejnecuhfhrohhmpegrnhgurhgvfiesihhnthgvrhhnvghtqdgvqdhmrghilhdrtghomhen
+ ucggtffrrghtthgvrhhnpeeutdffvdeuteeuteegiedtvedvledttdekteeigefgteevvd
+ ehfeeuhefhteeiueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
+ fhhrohhmpegrnhgurhgvfiesihhnthgvrhhnvghtqdgvqdhmrghilhdrtghomhdpnhgspg
+ hrtghpthhtohepuddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepuhdqsghoohht
+ sehlihhsthhsrdguvghngidruggv
+X-ME-Proxy: <xmx:0FIFaSUmMIAutnhHwbAKViiErsyI6cgx1tdejKDEJdm2uyHI6hiP5A>
+ <xmx:0FIFaej8Vn-e5hOo61ed9cg7NAVSdSW_uk-7MH8NCdZtDBizSkWxJw>
+ <xmx:0FIFaTQUR1aTG-Wjx0mvXlk98YPtdkqDYo_d9rWrSsu2mmqwS61Dhw>
+ <xmx:0FIFaRE_BRK7BCwNotgiNyb7PSlSglvSHtW4eAGJ5TkZgf7zVHnhXg>
+ <xmx:0FIFaeudmuj4b9ybTJrGpvP5Ub98t78YhcW4mmeGkk1O5fUa2T95SlpZ>
+Feedback-ID: i72864837:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+ id 1F80418C0066; Fri, 31 Oct 2025 20:22:40 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mmc: rockchip_sdhci: Set xx_TAP_VALUE for RK3528
-To: Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, Yao Zi <ziyao@disroot.org>,
- Chukun Pan <amadeus@jmu.edu.cn>, u-boot@lists.denx.de
-References: <20250714203410.1782783-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250714203410.1782783-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Date: Fri, 31 Oct 2025 20:22:19 -0400
+From: andrew@internet-e-mail.com
+To: u-boot@lists.denx.de
+Message-Id: <63bb0a47-d02d-4d73-a63a-3f6b37caa09e@app.fastmail.com>
+Subject: building u-boot without pxe, dhcp, etc. 
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 01 Nov 2025 16:15:06 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,131 +101,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+I want to build u-boot without a network stack (the target machine only =
+needs to boot from usb, nvme and mmc devices) but disabling pxe causes a=
+ dependency problem. Does anyone know how to resolve this?=20
 
-Please consider this patch for v2026.01.
 
-Looking back I think most feedback from Quentin was addressed in this
-v2 patch.
+include/config_distro_bootcmd.h:443:9: error: expected =E2=80=98}=E2=80=99=
+ before =E2=80=98BOOT_TARGET_DEVICES_references_PXE_without_CONFIG_CMD_D=
+HCP_or_PXE=E2=80=99
+  443 |         BOOT_TARGET_DEVICES_references_PXE_without_CONFIG_CMD_DH=
+CP_or_PXE
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~~~~~~
+include/config_distro_bootcmd.h:475:9: note: in expansion of macro =E2=80=
+=98BOOTENV_DEV_NAME_PXE=E2=80=99
+  475 |         BOOTENV_DEV_NAME_##devtypeu(devtypeu, devtypel, instance=
+, ## __VA_ARGS__)
+      |         ^~~~~~~~~~~~~~~~~
+include/configs/sifive-unmatched.h:24:9: note: in expansion of macro =E2=
+=80=98BOOTENV_DEV_NAME=E2=80=99
+   24 |         func(PXE, pxe, na) \
+      |         ^~~~
+include/config_distro_bootcmd.h:477:25: note: in expansion of macro =E2=80=
+=98BOOT_TARGET_DEVICES=E2=80=99
+  477 |         "boot_targets=3D" BOOT_TARGET_DEVICES(BOOTENV_DEV_NAME) =
+"\0"
+      |                         ^~~~~~~~~~~~~~~~~~~
+include/config_distro_bootcmd.h:497:9: note: in expansion of macro =E2=80=
+=98BOOTENV_BOOT_TARGETS=E2=80=99
+  497 |         BOOTENV_BOOT_TARGETS \
+      |         ^~~~~~~~~~~~~~~~~~~~
+include/configs/sifive-unmatched.h:51:9: note: in expansion of macro =E2=
+=80=98BOOTENV=E2=80=99
+   51 |         BOOTENV
+      |         ^~~~~~~
+include/env_default.h:120:9: note: in expansion of macro =E2=80=98CFG_EX=
+TRA_ENV_SETTINGS=E2=80=99
+  120 |         CFG_EXTRA_ENV_SETTINGS
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+In file included from env/common.c:32:
+include/env_default.h:27:36: note: to match this =E2=80=98{=E2=80=99
+   27 | const char default_environment[] =3D {
+      |                                    ^
+make[1]: *** [scripts/Makefile.build:256: env/common.o] Error 1
+make: *** [Makefile:1857: env] Error 2
 
-This v2 patch can also be found at [1] and the older v1 with the initial
-feedback at [2].
 
-[1] https://patchwork.ozlabs.org/patch/2111059/
-[2] https://patchwork.ozlabs.org/patch/2109461/
-
-Regards,
-Jonas
-
-On 7/14/2025 10:34 PM, Jonas Karlman wrote:
-> eMMC erase and write support on RK3528 is somewhat unreliable, sometime
-> e.g. mmc erase and write commands will fail with an error.
-> 
-> Use the delay line lock value for half card clock cycle, DLL_LOCK_VALUE,
-> to set a manual xx_TAP_VALUE to fix the unreliable eMMC support.
-> 
-> This is only enabled for RK3528, remaining SoCs still use the automatic
-> tap value, (DLL_LOCK_VALUE * 2) % 256, same value we configure manually
-> for RK3528.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> Changes in v2:
-> - Rename flag and field value to function name, TAPVALUE_FROM_SW
-> - Simplify and make code more understandable with use of FIELD_GET/PREP,
->   should be more clear that xx_TAP_VALUE is set to DLL_LOCK_VALUE * 2
-> ---
->  drivers/mmc/rockchip_sdhci.c | 27 ++++++++++++++++++++++-----
->  1 file changed, 22 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-> index 761e3619329c..cca917da68e7 100644
-> --- a/drivers/mmc/rockchip_sdhci.c
-> +++ b/drivers/mmc/rockchip_sdhci.c
-> @@ -9,6 +9,7 @@
->  #include <dm.h>
->  #include <dm/ofnode.h>
->  #include <dt-structs.h>
-> +#include <linux/bitfield.h>
->  #include <linux/delay.h>
->  #include <linux/err.h>
->  #include <linux/libfdt.h>
-> @@ -86,6 +87,9 @@
->  #define DLL_CMDOUT_SRC_CLK_NEG		BIT(28)
->  #define DLL_CMDOUT_EN_SRC_CLK_NEG	BIT(29)
->  #define DLL_CMDOUT_BOTH_CLK_EDGE	BIT(30)
-> +#define DLL_TAPVALUE_FROM_SW		BIT(25)
-> +#define DLL_TAP_VALUE_PREP(x)		FIELD_PREP(GENMASK(15, 8), (x))
-> +#define DLL_LOCK_VALUE_GET(x)		FIELD_GET(GENMASK(7, 0), (x))
->  
->  #define DLL_LOCK_WO_TMOUT(x) \
->  	((((x) & DWCMSHC_EMMC_DLL_LOCKED) == DWCMSHC_EMMC_DLL_LOCKED) && \
-> @@ -93,6 +97,7 @@
->  #define ROCKCHIP_MAX_CLKS		3
->  
->  #define FLAG_INVERTER_FLAG_IN_RXCLK	BIT(0)
-> +#define FLAG_TAPVALUE_FROM_SW		BIT(1)
->  
->  struct rockchip_sdhc_plat {
->  	struct mmc_config cfg;
-> @@ -317,7 +322,7 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
->  	struct sdhci_data *data = (struct sdhci_data *)dev_get_driver_data(priv->dev);
->  	struct mmc *mmc = host->mmc;
->  	int val, ret;
-> -	u32 extra, txclk_tapnum;
-> +	u32 extra, txclk_tapnum, dll_tap_value;
->  
->  	if (!enable) {
->  		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
-> @@ -347,7 +352,15 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
->  		if (ret)
->  			return ret;
->  
-> -		extra = DWCMSHC_EMMC_DLL_DLYENA | DLL_RXCLK_ORI_GATE;
-> +		if (data->flags & FLAG_TAPVALUE_FROM_SW)
-> +			dll_tap_value = DLL_TAPVALUE_FROM_SW |
-> +					DLL_TAP_VALUE_PREP(DLL_LOCK_VALUE_GET(val) * 2);
-> +		else
-> +			dll_tap_value = 0;
-> +
-> +		extra = DWCMSHC_EMMC_DLL_DLYENA |
-> +			DLL_RXCLK_ORI_GATE |
-> +			dll_tap_value;
->  		if (data->flags & FLAG_INVERTER_FLAG_IN_RXCLK)
->  			extra |= DLL_RXCLK_NO_INVERTER;
->  		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_RXCLK);
-> @@ -361,19 +374,22 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
->  				DLL_CMDOUT_BOTH_CLK_EDGE |
->  				DWCMSHC_EMMC_DLL_DLYENA |
->  				data->hs400_cmdout_tapnum |
-> -				DLL_CMDOUT_TAPNUM_FROM_SW;
-> +				DLL_CMDOUT_TAPNUM_FROM_SW |
-> +				dll_tap_value;
->  			sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_CMDOUT);
->  		}
->  
->  		extra = DWCMSHC_EMMC_DLL_DLYENA |
->  			DLL_TXCLK_TAPNUM_FROM_SW |
->  			DLL_TXCLK_NO_INVERTER |
-> -			txclk_tapnum;
-> +			txclk_tapnum |
-> +			dll_tap_value;
->  		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_TXCLK);
->  
->  		extra = DWCMSHC_EMMC_DLL_DLYENA |
->  			data->hs400_strbin_tapnum |
-> -			DLL_STRBIN_TAPNUM_FROM_SW;
-> +			DLL_STRBIN_TAPNUM_FROM_SW |
-> +			dll_tap_value;
->  		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_STRBIN);
->  	} else {
->  		/*
-> @@ -663,6 +679,7 @@ static const struct sdhci_data rk3528_data = {
->  	.set_ios_post = rk3568_sdhci_set_ios_post,
->  	.set_clock = rk3568_sdhci_set_clock,
->  	.config_dll = rk3568_sdhci_config_dll,
-> +	.flags = FLAG_TAPVALUE_FROM_SW,
->  	.hs200_txclk_tapnum = 0xc,
->  	.hs400_txclk_tapnum = 0x6,
->  	.hs400_cmdout_tapnum = 0x6,
-
+--=20
+ =20
+  andrew@internet-e-mail.com
