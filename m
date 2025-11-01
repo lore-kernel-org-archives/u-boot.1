@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07FC7CCF9F0
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 07:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F71FCCF9F8
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 07:57:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5561683AEF;
-	Sat,  1 Nov 2025 08:57:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9EB6983B1A;
+	Sat,  1 Nov 2025 08:57:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="P9ghXK1K";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DD5I9ozE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3565C83B0A; Sat,  1 Nov 2025 08:57:26 +0100 (CET)
-Received: from mail-m49228.qiye.163.com (mail-m49228.qiye.163.com
- [45.254.49.228])
+ id C1B5283B27; Sat,  1 Nov 2025 08:57:35 +0100 (CET)
+Received: from mail-m49225.qiye.163.com (mail-m49225.qiye.163.com
+ [45.254.49.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BE5983AC7
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 08:57:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 724FD83B0A
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 08:57:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [124.72.36.229])
- by smtp.qiye.163.com (Hmail) with ESMTP id 27ff79874;
- Sat, 1 Nov 2025 15:57:19 +0800 (GMT+08:00)
-Message-ID: <15e3e9cb-b112-4ac8-85e9-7b0f92811078@rock-chips.com>
-Date: Sat, 1 Nov 2025 15:57:19 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 27ff79887;
+ Sat, 1 Nov 2025 15:57:29 +0800 (GMT+08:00)
+Message-ID: <3dce43f8-bb2d-4c56-b543-7b576c9c31b4@rock-chips.com>
+Date: Sat, 1 Nov 2025 15:57:29 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] board: theobroma-systems: add instructions for how to
- use upstream TF-A
+Subject: Re: [PATCH 3/3] board: theobroma-systems: jaguar_rk3588: explicit
+ UART IOMUX
 To: Quentin Schulz <foss+uboot@0leil.net>, Klaus Goger <klaus.goger@cherry.de>,
  Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>,
  Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
 References: <20250730-tsd-readme-update-v1-0-5a96672d2211@cherry.de>
- <20250730-tsd-readme-update-v1-2-5a96672d2211@cherry.de>
+ <20250730-tsd-readme-update-v1-3-5a96672d2211@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250730-tsd-readme-update-v1-2-5a96672d2211@cherry.de>
+In-Reply-To: <20250730-tsd-readme-update-v1-3-5a96672d2211@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9a3e6bbeb103afkunmfa45dbc39250dc
+X-HM-Tid: 0a9a3e6be4a303afkunmdb2e58cc9251ac
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaSxofVk4fTEkeHhgZS09JSFYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTRofVkxDHUhNSxhKSkkYGFYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUlCWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=P9ghXK1K4q2bIrARo/R8cwTXXqRnc9sCcLkoPQyUphDXiSqhFUeuJh+XTX+dRjyR8wXUsYbKVqZZotp+Gfg6QLWQ/1jh/HW+yTe7NvtZuJJi+P2dliKkoeVNxrPkB1/+vTEOPQFdPFS0/dtZQo9pbmt0DQKYh23+YIdGFJTk3vc=;
+ b=DD5I9ozEDZuE1UrRk15gm0VgpGgYVq6l4dLteFJJ2O8VJV3WJkHTrGQ46X5VkX3ej5HuFV2CzB3ibE6qHuVGG0Ey/9PU3M3xIntXEVioAdJNCLF2EC2fhV1JElcE8i7t6eyQma/flBZACh7ol4QAuC0tZp507nhY0GYTQf052aI=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=jOGuxil3DbwkjP2w/HwAp9yZXZVoVYtXTIZxqknwg14=;
+ bh=q/gkmaxXlqmCPjjOE65ykCMIh8ICfJoUYgrXgc7gk3c=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,9 +77,14 @@ X-Virus-Status: Clean
 On 2025/7/30 20:46, Quentin Schulz wrote:
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> Upstream TF-A has support for RK3588 since v2.12 so let's document how
-> to use upstream TF-A instead of the prebuilt binary blob from Rockchip
-> if one wants to do that.
+> When one attempts to build Tiger and Jaguar from the same directory,
+> because Tiger will set the IOMUX to 2 but Jaguar doesn't reset it,
+> Jaguar will have IOMUX set to 2 if built after Tiger.
+>
+> This isn't an issue if in separate directories or building Tiger after
+> Jaguar because the default if missing from the configuration file is 0.
+>
+> Let's make it explicit that the iomux is 0 for Jaguar.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -87,144 +92,19 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   doc/board/theobroma-systems/jaguar_rk3588.rst | 38 +++++++++++++++++++++++----
->   doc/board/theobroma-systems/tiger_rk3588.rst  | 38 +++++++++++++++++++++++----
->   2 files changed, 66 insertions(+), 10 deletions(-)
+>   doc/board/theobroma-systems/jaguar_rk3588.rst | 1 +
+>   1 file changed, 1 insertion(+)
 >
 > diff --git a/doc/board/theobroma-systems/jaguar_rk3588.rst b/doc/board/theobroma-systems/jaguar_rk3588.rst
-> index 33cd7276852c5b74b750ad14ce2beb4a9440ef3f..eff0ee7347c7d0e810d9dba542ce3aaf28ef359d 100644
+> index eff0ee7347c7d0e810d9dba542ce3aaf28ef359d..d09cfaa88ff81b679421dc941984d47f3b3a2f67 100644
 > --- a/doc/board/theobroma-systems/jaguar_rk3588.rst
 > +++ b/doc/board/theobroma-systems/jaguar_rk3588.rst
-> @@ -32,14 +32,13 @@ It provides the following features:
->   Here is the step-by-step to boot to U-Boot on SBC-RK3588-AMR Jaguar from Theobroma
->   Systems.
->   
-> -Get the TF-A and DDR init (TPL) binaries
-> -----------------------------------------
-> +Get DDR init (TPL) binary
-> +-------------------------
->   
->   .. prompt:: bash
->   
->      git clone https://github.com/rockchip-linux/rkbin
+> @@ -41,6 +41,7 @@ Get DDR init (TPL) binary
 >      cd rkbin
-> -   export BL31=$(readlink -f bin/rk35/rk3588_bl31_v*.elf | head -1)
 >      export ROCKCHIP_TPL=$(readlink -f bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v*.bin | head -1)
 >      sed -i 's/^uart baudrate=.*$/uart baudrate=115200/' tools/ddrbin_param.txt
+> +   sed -i 's/^uart iomux=.*$/uart iomux=0/' tools/ddrbin_param.txt
 >      python3 ./tools/ddrbin_tool.py rk3588 tools/ddrbin_param.txt "$ROCKCHIP_TPL"
-> @@ -47,8 +46,32 @@ Get the TF-A and DDR init (TPL) binaries
+>      ./tools/boot_merger RKBOOT/RK3588MINIALL.ini
 >      export RKDB=$(readlink -f rk3588_spl_loader_v*.bin | head -1)
->   
->   This will setup all required external dependencies for compiling U-Boot. This will
-> -be updated in the future once upstream Trusted-Firmware-A supports RK3588 or U-Boot
-> -gains support for open-source DRAM initialization in TPL.
-> +be updated in the future once U-Boot gains support for open-source DRAM initialization
-> +in TPL.
-> +
-> +Get TF-A
-> +--------
-> +
-> +There are two possible options, pick one or the other. Note that the instructions need
-> +to be run from the ``rkbin`` directory.
-> +
-> +Prebuilt binary from Rockchip
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +.. prompt:: bash
-> +
-> +   export BL31=$(readlink -f bin/rk35/rk3588_bl31_v*.elf | head -1)
-> +
-> +Upstream
-> +~~~~~~~~
-> +
-> +.. prompt:: bash
-> +
-> +   cd ../
-> +   git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-> +   cd trusted-firmware-a
-> +   make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3588 bl31
-> +   export BL31=$PWD/build/rk3588/release/bl31/bl31.elf
->   
->   Build U-Boot
->   ------------
-> @@ -58,6 +81,11 @@ Build U-Boot
->      cd ../u-boot
->      make CROSS_COMPILE=aarch64-linux-gnu- jaguar-rk3588_defconfig all
->   
-> +.. note::
-> +   If using upstream TF-A, one should disable ``SPL_ATF_NO_PLATFORM_PARAM`` symbol in
-> +   U-Boot config (via e.g. ``make CROSS_COMPILE=aarch64-linux-gnu- menuconfig``) which
-> +   will, among other things, enable console output in TF-A.
-> +
->   This will build ``u-boot-rockchip.bin`` which can be written to an MMC device
->   (eMMC or SD card).
->   
-> diff --git a/doc/board/theobroma-systems/tiger_rk3588.rst b/doc/board/theobroma-systems/tiger_rk3588.rst
-> index 71dbe4c59de8f8b3ccb6ece440a780459db127b1..493f191020fd4326bd19aa3a3c927ea9258a4720 100644
-> --- a/doc/board/theobroma-systems/tiger_rk3588.rst
-> +++ b/doc/board/theobroma-systems/tiger_rk3588.rst
-> @@ -39,14 +39,13 @@ It provides the following feature set:
->   Here is the step-by-step to boot to U-Boot on SOM-RK3588-Q7 Tiger from Theobroma
->   Systems.
->   
-> -Get the TF-A and DDR init (TPL) binaries
-> -----------------------------------------
-> +Get DDR init (TPL) binary
-> +-------------------------
->   
->   .. prompt:: bash
->   
->      git clone https://github.com/rockchip-linux/rkbin
->      cd rkbin
-> -   export BL31=$(readlink -f bin/rk35/rk3588_bl31_v*.elf | head -1)
->      export ROCKCHIP_TPL=$(readlink -f bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v*.bin | head -1)
->      sed -i 's/^uart baudrate=.*$/uart baudrate=115200/' tools/ddrbin_param.txt
->      sed -i 's/^uart iomux=.*$/uart iomux=2/' tools/ddrbin_param.txt
-> @@ -55,8 +54,32 @@ Get the TF-A and DDR init (TPL) binaries
->      export RKDB=$(readlink -f rk3588_spl_loader_v*.bin | head -1)
->   
->   This will setup all required external dependencies for compiling U-Boot. This will
-> -be updated in the future once upstream Trusted-Firmware-A supports RK3588 or U-Boot
-> -gains support for open-source DRAM initialization in TPL.
-> +be updated in the future once U-Boot gains support for open-source DRAM initialization
-> +in TPL.
-> +
-> +Get TF-A
-> +--------
-> +
-> +There are two possible options, pick one or the other. Note that the instructions need
-> +to be run from the ``rkbin`` directory.
-> +
-> +Prebuilt binary from Rockchip
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +.. prompt:: bash
-> +
-> +   export BL31=$(readlink -f bin/rk35/rk3588_bl31_v*.elf | head -1)
-> +
-> +Upstream
-> +~~~~~~~~
-> +
-> +.. prompt:: bash
-> +
-> +   cd ../
-> +   git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-> +   cd trusted-firmware-a
-> +   make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3588 bl31
-> +   export BL31=$PWD/build/rk3588/release/bl31/bl31.elf
->   
->   Build U-Boot
->   ------------
-> @@ -66,6 +89,11 @@ Build U-Boot
->      cd ../u-boot
->      make CROSS_COMPILE=aarch64-linux-gnu- tiger-rk3588_defconfig all
->   
-> +.. note::
-> +   If using upstream TF-A, one should disable ``SPL_ATF_NO_PLATFORM_PARAM`` symbol in
-> +   U-Boot config (via e.g. ``make CROSS_COMPILE=aarch64-linux-gnu- menuconfig``) which
-> +   will, among other things, enable console output in TF-A.
-> +
->   This will build ``u-boot-rockchip.bin`` which can be written to an MMC device
->   (eMMC or SD card).
->   
 >
