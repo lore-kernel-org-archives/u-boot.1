@@ -4,55 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D971CCFA02
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 16:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E1CCCFA02
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 16:08:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EE6283885;
-	Sat,  1 Nov 2025 17:07:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 62C8E838C2;
+	Sat,  1 Nov 2025 17:08:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BPNxiflt";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JAg6n7CQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E33D78389A; Sat,  1 Nov 2025 17:07:51 +0100 (CET)
-Received: from mail-m3274.qiye.163.com (mail-m3274.qiye.163.com
- [220.197.32.74])
+ id 39DA48331F; Sat,  1 Nov 2025 17:08:00 +0100 (CET)
+Received: from mail-m1973194.qiye.163.com (mail-m1973194.qiye.163.com
+ [220.197.31.94])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80CF183885
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 17:07:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9BA8838C2
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 17:07:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [124.72.36.229])
- by smtp.qiye.163.com (Hmail) with ESMTP id 28044c687;
- Sun, 2 Nov 2025 00:07:45 +0800 (GMT+08:00)
-Message-ID: <7f3455d7-2802-4743-99a4-9f9362aa3a58@rock-chips.com>
-Date: Sun, 2 Nov 2025 00:07:45 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 28044c68a;
+ Sun, 2 Nov 2025 00:07:52 +0800 (GMT+08:00)
+Message-ID: <675f7815-5be2-446d-93fd-d1d2d25f8c9e@rock-chips.com>
+Date: Sun, 2 Nov 2025 00:07:52 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] rockchip: spl-boot-order: Defer probe of boot device
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+Subject: Re: [PATCH v2] mmc: rockchip_sdhci: Set xx_TAP_VALUE for RK3528
+To: Jonas Karlman <jonas@kwiboo.se>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20250804182541.3858351-1-jonas@kwiboo.se>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <ziyao@disroot.org>,
+ Chukun Pan <amadeus@jmu.edu.cn>, u-boot@lists.denx.de
+References: <20250714203410.1782783-1-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250804182541.3858351-1-jonas@kwiboo.se>
+In-Reply-To: <20250714203410.1782783-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9a402cbe7003afkunm8fdbd01e9a6a12
+X-HM-Tid: 0a9a402cdaf203afkunmf1713c0f9a6a68
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHh5CVh0YHk1OT05CSxlDH1YVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTUsYVkJISUsYHhkfQkJLTFYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUlCWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=BPNxifltGbHMdj7sTkFkD3g5ktfNdOhYcYutfKoC+IVLhLXhT3fUebRoz/RjO5mVojs0IMwxg8j1XARgQVHkqk1kzc19dr+Ul9cSAXziTTlazvYpB0LNN8mW1a/fhRSRiACVE/Mv9XuRHRhOUcBtewa0pEodHQzPtGcCjqP+2g4=;
+ b=JAg6n7CQAh5UoLAdq7nNuclCAQBVTRqmegRVSK3zZs1/RtvD7HYR9NR3Ea8NVCdMRxWavO6Bpv5XOWEFSqWZo8cJseLaeIfRhvqTL+2I+JLw7oBMJwv/9wPdTsRH5j4KebMqRNQY2djkla2OM+UO5E2DPmbP5IfjQ0CBMxwvQDo=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=fjJ/a4DgtwV910Zdp4VpIZIUTN8TiHnbsLBxSr0PkdM=;
+ bh=t4y3JdU/COgY4HjZ+XiYaiidjbYFf8RQZCMp4RGyyvY=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,13 +73,16 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/8/5 02:25, Jonas Karlman wrote:
-> Boot devices are being probed when SPL boot order is determined, this
-> may unnecessarily delay boot slightly.
+On 2025/7/15 04:34, Jonas Karlman wrote:
+> eMMC erase and write support on RK3528 is somewhat unreliable, sometime
+> e.g. mmc erase and write commands will fail with an error.
 >
-> Instead defer probe of the boot device until SPL try to load image from
-> the boot device by using uclass_find_device_by_of_offset() instead of
-> the get variant.
+> Use the delay line lock value for half card clock cycle, DLL_LOCK_VALUE,
+> to set a manual xx_TAP_VALUE to fix the unreliable eMMC support.
+>
+> This is only enabled for RK3528, remaining SoCs still use the automatic
+> tap value, (DLL_LOCK_VALUE * 2) % 256, same value we configure manually
+> for RK3528.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -85,30 +90,101 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
-> v2: Update commit message
+> Changes in v2:
+> - Rename flag and field value to function name, TAPVALUE_FROM_SW
+> - Simplify and make code more understandable with use of FIELD_GET/PREP,
+>    should be more clear that xx_TAP_VALUE is set to DLL_LOCK_VALUE * 2
 > ---
->   arch/arm/mach-rockchip/spl-boot-order.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>   drivers/mmc/rockchip_sdhci.c | 27 ++++++++++++++++++++++-----
+>   1 file changed, 22 insertions(+), 5 deletions(-)
 >
-> diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
-> index 3dce9b30898d..6b1b84dc86d1 100644
-> --- a/arch/arm/mach-rockchip/spl-boot-order.c
-> +++ b/arch/arm/mach-rockchip/spl-boot-order.c
-> @@ -40,7 +40,7 @@ static int spl_node_to_boot_device(int node)
->   	 * aware of the block-device layer.  Until then (and to avoid unneeded
->   	 * delays in getting this feature out), it lives at the board-level.
->   	 */
-> -	if (!uclass_get_device_by_of_offset(UCLASS_MMC, node, &parent)) {
-> +	if (!uclass_find_device_by_of_offset(UCLASS_MMC, node, &parent)) {
->   		struct udevice *dev;
->   		struct blk_desc *desc = NULL;
+> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
+> index 761e3619329c..cca917da68e7 100644
+> --- a/drivers/mmc/rockchip_sdhci.c
+> +++ b/drivers/mmc/rockchip_sdhci.c
+> @@ -9,6 +9,7 @@
+>   #include <dm.h>
+>   #include <dm/ofnode.h>
+>   #include <dt-structs.h>
+> +#include <linux/bitfield.h>
+>   #include <linux/delay.h>
+>   #include <linux/err.h>
+>   #include <linux/libfdt.h>
+> @@ -86,6 +87,9 @@
+>   #define DLL_CMDOUT_SRC_CLK_NEG		BIT(28)
+>   #define DLL_CMDOUT_EN_SRC_CLK_NEG	BIT(29)
+>   #define DLL_CMDOUT_BOTH_CLK_EDGE	BIT(30)
+> +#define DLL_TAPVALUE_FROM_SW		BIT(25)
+> +#define DLL_TAP_VALUE_PREP(x)		FIELD_PREP(GENMASK(15, 8), (x))
+> +#define DLL_LOCK_VALUE_GET(x)		FIELD_GET(GENMASK(7, 0), (x))
 >   
-> @@ -72,7 +72,7 @@ static int spl_node_to_boot_device(int node)
->   	 * extended with awareness of the BLK layer (and matching OF_CONTROL)
->   	 * soon.
->   	 */
-> -	if (!uclass_get_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
-> +	if (!uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
->   		return BOOT_DEVICE_SPI;
+>   #define DLL_LOCK_WO_TMOUT(x) \
+>   	((((x) & DWCMSHC_EMMC_DLL_LOCKED) == DWCMSHC_EMMC_DLL_LOCKED) && \
+> @@ -93,6 +97,7 @@
+>   #define ROCKCHIP_MAX_CLKS		3
 >   
->   	return -1;
+>   #define FLAG_INVERTER_FLAG_IN_RXCLK	BIT(0)
+> +#define FLAG_TAPVALUE_FROM_SW		BIT(1)
+>   
+>   struct rockchip_sdhc_plat {
+>   	struct mmc_config cfg;
+> @@ -317,7 +322,7 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+>   	struct sdhci_data *data = (struct sdhci_data *)dev_get_driver_data(priv->dev);
+>   	struct mmc *mmc = host->mmc;
+>   	int val, ret;
+> -	u32 extra, txclk_tapnum;
+> +	u32 extra, txclk_tapnum, dll_tap_value;
+>   
+>   	if (!enable) {
+>   		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
+> @@ -347,7 +352,15 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+>   		if (ret)
+>   			return ret;
+>   
+> -		extra = DWCMSHC_EMMC_DLL_DLYENA | DLL_RXCLK_ORI_GATE;
+> +		if (data->flags & FLAG_TAPVALUE_FROM_SW)
+> +			dll_tap_value = DLL_TAPVALUE_FROM_SW |
+> +					DLL_TAP_VALUE_PREP(DLL_LOCK_VALUE_GET(val) * 2);
+> +		else
+> +			dll_tap_value = 0;
+> +
+> +		extra = DWCMSHC_EMMC_DLL_DLYENA |
+> +			DLL_RXCLK_ORI_GATE |
+> +			dll_tap_value;
+>   		if (data->flags & FLAG_INVERTER_FLAG_IN_RXCLK)
+>   			extra |= DLL_RXCLK_NO_INVERTER;
+>   		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_RXCLK);
+> @@ -361,19 +374,22 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+>   				DLL_CMDOUT_BOTH_CLK_EDGE |
+>   				DWCMSHC_EMMC_DLL_DLYENA |
+>   				data->hs400_cmdout_tapnum |
+> -				DLL_CMDOUT_TAPNUM_FROM_SW;
+> +				DLL_CMDOUT_TAPNUM_FROM_SW |
+> +				dll_tap_value;
+>   			sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_CMDOUT);
+>   		}
+>   
+>   		extra = DWCMSHC_EMMC_DLL_DLYENA |
+>   			DLL_TXCLK_TAPNUM_FROM_SW |
+>   			DLL_TXCLK_NO_INVERTER |
+> -			txclk_tapnum;
+> +			txclk_tapnum |
+> +			dll_tap_value;
+>   		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_TXCLK);
+>   
+>   		extra = DWCMSHC_EMMC_DLL_DLYENA |
+>   			data->hs400_strbin_tapnum |
+> -			DLL_STRBIN_TAPNUM_FROM_SW;
+> +			DLL_STRBIN_TAPNUM_FROM_SW |
+> +			dll_tap_value;
+>   		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_STRBIN);
+>   	} else {
+>   		/*
+> @@ -663,6 +679,7 @@ static const struct sdhci_data rk3528_data = {
+>   	.set_ios_post = rk3568_sdhci_set_ios_post,
+>   	.set_clock = rk3568_sdhci_set_clock,
+>   	.config_dll = rk3568_sdhci_config_dll,
+> +	.flags = FLAG_TAPVALUE_FROM_SW,
+>   	.hs200_txclk_tapnum = 0xc,
+>   	.hs400_txclk_tapnum = 0x6,
+>   	.hs400_cmdout_tapnum = 0x6,
