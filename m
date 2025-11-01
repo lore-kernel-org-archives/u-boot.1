@@ -4,79 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61C38CCFA02
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 18:45:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C53D2CCFA02
+	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 20:34:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FCA383642;
-	Sat,  1 Nov 2025 19:45:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0887783642;
+	Sat,  1 Nov 2025 21:34:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FHN2I4hA";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="pZsUzATZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 655F083677; Sat,  1 Nov 2025 19:44:59 +0100 (CET)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4F38083677; Sat,  1 Nov 2025 21:34:53 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 489A48331F
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 19:44:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81CA58331F
+ for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 21:34:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-378d6fa5aebso33346601fa.2
- for <u-boot@lists.denx.de>; Sat, 01 Nov 2025 11:44:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762022696; x=1762627496; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WU9T3ZbppLCn/On+mCRXM+SwGjh2AY9L7mmcJhw1DFQ=;
- b=FHN2I4hApkM1Zzwu0/N0oBXJAhi3TJLUN8wmLAmdXv6wxUO4DXcqBh/vDktbIJWu7k
- cQ7p6D2R88NVCZWNBP/1zVG2Jly5MbQsRWPudfAhvpyChZIWqY2+UmViyT95pu4V3ENs
- ew6pDW7PVXOdMAD6K8NcwYlh5sYlEtu2QxmhVy1SHpL9NP95cgSxPoue3pxP8VyvzH8o
- hMwXXlk1tRr7zyxldJHtLWREZUWaHXqLGhCjZFW3dEYWN0aKYyw3NY6nYqHCnPWUwn0H
- YybSNBmeZrvLpNCiC9C5Oycqi/LNS03dyT959Pvp1dQn2iUxtjIlPMpINcUyRoBxbz3V
- IJNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762022696; x=1762627496;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WU9T3ZbppLCn/On+mCRXM+SwGjh2AY9L7mmcJhw1DFQ=;
- b=am4nxUdFQsHMEBoeDWh9y/VX4IjZxecR1FKEsptcc14qPK3cn+sWkjjxJ9XeWQo+A2
- mJCqlPaxyStMT2VBkdB8v5AMpv7TMogsrJnr1RnECqpVM7F57Yo/I+XDh1QZjACk8cni
- SjNugBpsxv1ny3x7nwn9eGrTcD2aKaiGT1byRUytbf/LxJzfIURZMU6q2wqpWdSvpB9c
- DEARqI9EwnGZXS6sUh3tsQVGqE44H+LulPnrMAbLqgaLhw6RRWydQoxMEaHmD4PL26A/
- JUMrtsfOcraRdHPH4+H/peSRVjhUmc/YI3JKo6X6iw7GP/Mc1G2NF3QgHOcwxRG1u5Hc
- 4QkQ==
-X-Gm-Message-State: AOJu0Yy7puLv+q5JKrJOzZtWyrekp2ootISuKbSNRuFQerL/O6KxvwXL
- KChuZQoZW6ughPi15T/yY5JKNWAnA+VMrswbfXXvt9l1XeKdMVfvvF96cqhv2Eq8rIdZvLYk0Wj
- rXwMSRPV5/fyXjhCLFcTs3A+uVut0PbJYJPL/6/s=
-X-Gm-Gg: ASbGncvfq3Pguq3Ahz/YokZrs4f0DleP/rbdGT5+1agyxnAlq136s1luSPx5lIrhGb+
- 7NlAqHp8lfJmockaKXQCTvw7sOKlY6HyEvX+fdNcO6Adr3Sw9wO9Q0j2S1d3Vzpm6nBWB1yz3QX
- +vsHISqQeVDdcLGxz8YpCxR5lLoE8lboiDlU3+l5uieF++y4ydFu9i7dIc4FS1TxRWGwCgwZ2gZ
- jCPZnC2cN1O1vvE27d2I5NXH5AqSuvsI+JA+YN2KtEXyIN0HMd2KBYqh9oY9gTvSCV8e83gKyKL
- S+5vHCNPvEjnwJpsKDUlb1UMiVOp3Rz4qwkNqg==
-X-Google-Smtp-Source: AGHT+IG5CC+xL87urJWPXIdYW0Wc9EJtQdDloV4/qw0J0+RTbqjlzXgNxuiCf36N9n2Zq3nBmn8Oi8JJDHSqZp3dnpg=
-X-Received: by 2002:a2e:bc25:0:b0:37a:2f9b:92a6 with SMTP id
- 38308e7fff4ca-37a2f9b93c8mr3403621fa.17.1762022696173; Sat, 01 Nov 2025
- 11:44:56 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=bfc8=5K=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1762029289;
+ bh=WcjoTpFOuIyeG9QuUgPCzEeBOIwuc6m1ctSEL5Vbgfs=;
+ b=pZsUzATZA80dsjQ5IfVVfZxy5NlskgUoLXsBkg4oOOoePvFlf1A42m/7XG838Jxvy4UQPvOc+
+ rV6tcD74K3NOe3btDPjyOpYXt9GvL+HRmrMyCcSuUqTCzhdV2SOpzEwQxWOVtyYIOsaYtTcmTja
+ CUPi9oXFYwdCfuekGsQh4kgWuVooxnpVplV5wxZk3PJuWbNro+JgyMNWSW/TlZ41w2y+twSogDA
+ ugThJf+T2dQaVcQXnkrA5kQM6Vzf4EoKIcle/OJtUwDpFoNF5m/YUAz2zwWj1vCSdQvlpGDYLLW
+ x4w4gtVE4JOz3MGK9Qf18IHW1/b/UQVbaJYraIsPdFtQ==
+X-Forward-Email-ID: 69066ee0d987fc274f5252ac
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.4.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>
+Cc: Ye Li <ye.li@nxp.com>, Fabio Estevam <festevam@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Dang Huynh <danct12@riseup.net>,
+ u-boot@lists.denx.de
+Subject: [PATCH] Revert "power: regulator: Add vin-supply for GPIO and Fixed
+ regulators"
+Date: Sat,  1 Nov 2025 20:34:26 +0000
+Message-ID: <20251101203429.1603832-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <63bb0a47-d02d-4d73-a63a-3f6b37caa09e@app.fastmail.com>
-In-Reply-To: <63bb0a47-d02d-4d73-a63a-3f6b37caa09e@app.fastmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 1 Nov 2025 15:44:44 -0300
-X-Gm-Features: AWmQ_bkuIhfXTgzF7cNXOUBGhdB9Vsdl_Cj3A7JsP1nLjARWpq1Rs4JLGP-r5kg
-Message-ID: <CAOMZO5BD=Q6_VamiPr-qAomfmszU41g8ML+q0sOnSn=Bj3ooPQ@mail.gmail.com>
-Subject: Re: building u-boot without pxe, dhcp, etc.
-To: andrew@internet-e-mail.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,10 +71,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Nov 1, 2025 at 12:15=E2=80=AFPM <andrew@internet-e-mail.com> wrote:
->
-> I want to build u-boot without a network stack (the target machine only n=
-eeds to boot from usb, nvme and mmc devices) but disabling pxe causes a dep=
-endency problem. Does anyone know how to resolve this?
+Rockchip boards may depend on a working MMC regulator in SPL to
+successfully load FIT payload from MMC. Typically, these boards only
+include the vmmc-supply regulator and not its vin-supply in SPL control
+FDT.
 
-Try passing CONFIG_NO_NET=3Dy in your defconfig file.
+The commit f98d812e5353 ("power: regulator: Add vin-supply for GPIO and
+Fixed regulators") breaks loading FIT from MMC in SPL on some of these
+boards due to now requiring the vin-supply to be included in the SPL
+control FDT.
+
+The commit also strangely enables any found vin-supply in
+regulator_common_of_to_plat() and not when a regulator is enabled or as
+part of regulator_autoset().
+
+Revert the commit to fix FIT loading in SPL on broken boards.
+
+If a board needs to have its vin-supply enabled, two options come to
+mind:
+
+- Add regulator-always-on prop to the regulator in the -u-boot.dtsi for
+  any board.
+
+- Implement full support for reference counting of regulators and then
+  update the regulator-uclass to enable any found vin-supply when a
+  regulator is enabled.
+
+This reverts commit f98d812e5353408ef77a46bad1f1cdc793ff8a03.
+
+Reported-by: Dang Huynh <danct12@riseup.net>
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ drivers/power/regulator/regulator_common.c | 10 ----------
+ drivers/power/regulator/regulator_common.h |  1 -
+ 2 files changed, 11 deletions(-)
+
+diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+index 3ed713ce5019..685d8735fa5c 100644
+--- a/drivers/power/regulator/regulator_common.c
++++ b/drivers/power/regulator/regulator_common.c
+@@ -44,16 +44,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
+ 			dev_read_u32_default(dev, "u-boot,off-on-delay-us", 0);
+ 	}
+ 
+-	ret = device_get_supply_regulator(dev, "vin-supply", &plat->vin_supply);
+-	if (ret) {
+-		debug("Regulator vin regulator not defined: %d\n", ret);
+-		if (ret != -ENOENT)
+-			return ret;
+-	}
+-
+-	if (plat->vin_supply)
+-		regulator_set_enable_if_allowed(plat->vin_supply, true);
+-
+ 	return 0;
+ }
+ 
+diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
+index 799c968d0b66..d4962899d830 100644
+--- a/drivers/power/regulator/regulator_common.h
++++ b/drivers/power/regulator/regulator_common.h
+@@ -14,7 +14,6 @@ struct regulator_common_plat {
+ 	unsigned int startup_delay_us;
+ 	unsigned int off_on_delay_us;
+ 	unsigned int enable_count;
+-	struct udevice *vin_supply;
+ };
+ 
+ int regulator_common_of_to_plat(struct udevice *dev,
+-- 
+2.51.0
+
