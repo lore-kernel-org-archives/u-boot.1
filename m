@@ -4,56 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE980CCFA00
-	for <u-boot@archiver.kernel.org>; Sat,  1 Nov 2025 21:23:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36AECCF9F8
+	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 00:50:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FE9E83677;
-	Sat,  1 Nov 2025 22:23:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 129318307F;
+	Sun,  2 Nov 2025 01:50:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="IS1srxT9";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Kb+pEXii";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60072836D1; Sat,  1 Nov 2025 22:23:45 +0100 (CET)
-Received: from mail1.manjaro.org (mail1.manjaro.org [142.132.176.110])
+ id A76838307F; Sun,  2 Nov 2025 01:50:56 +0100 (CET)
+Received: from mail-m1033.netease.com (mail-m1033.netease.com [154.81.10.33])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B3BA83642
- for <u-boot@lists.denx.de>; Sat,  1 Nov 2025 22:23:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id D09A282A9E
+ for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 01:50:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPA id 75F0240C2A; Sat,  1 Nov 2025 22:23:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=dkim;
- t=1762032222; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=F8v4n4JDp0dBBfLVM8zymVBw5+NmqZ5h9HnKiY/c20Y=;
- b=IS1srxT9oiKyo79lYgX8eiaKBhkHSaPY+/HJeGeZ603hgvVM2EWM8PxZG4f+06zFBF62th
- ktE+L/MfCtcVxTftnSJfV2tj81I/1c9qhwKFWcDIZIS+YF4XVTwTACoRpYVceA/Msqj49W
- xxG0OzQXJ9eeVufkdSLO0Hho7IKX2dgwfI7DhSvZzbnGWGUiKWK+vtiwbHdu17Y1T7Ju98
- B4yp+Xo22jQuwnBrIaCZtmuZo6URD7zADkkWNqpHuzYokgvOvx0cwiWzjOsAWaRsqTVUQz
- mUkbpuQ9uQc+gvq6zVmXIiIRYYo+cxvYt5TJy7IGfp5dtVhn7kF9VmFnkFOhUA==
-From: "Dragan Simic" <dsimic@manjaro.org>
-In-Reply-To: <878qgpqwpi.fsf@bloch.sibelius.xs4all.nl>
-Content-Type: text/plain; charset="utf-8"
-References: <20251101203429.1603832-1-jonas@kwiboo.se>
- <878qgpqwpi.fsf@bloch.sibelius.xs4all.nl>
-Date: Sat, 01 Nov 2025 22:23:41 +0100
-Cc: "Jonas Karlman" <jonas@kwiboo.se>, trini@konsulko.com,
- jh80.chung@samsung.com, peng.fan@nxp.com, ye.li@nxp.com, festevam@gmail.com,
- danct12@riseup.net, u-boot@lists.denx.de
-To: "Mark Kettenis" <mark.kettenis@xs4all.nl>
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.1.64] (unknown [124.72.36.229])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 280888861;
+ Sun, 2 Nov 2025 08:50:48 +0800 (GMT+08:00)
+Message-ID: <fe161f4a-57e8-4914-a181-de76017414a3@rock-chips.com>
+Date: Sun, 2 Nov 2025 08:50:48 +0800
 MIME-Version: 1.0
-Message-ID: <cec3cc0b-0326-4b0b-6832-f5db556c4cf2@manjaro.org>
-Subject: =?utf-8?q?Re=3A?= [PATCH] Revert =?utf-8?q?=22power=3A?=
- =?utf-8?q?_regulator=3A?= Add vin-supply for GPIO and Fixed 
- =?utf-8?q?regulators=22?=
-User-Agent: SOGoMail 5.12.3
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: None
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] clk: rockchip: rk3368: Add bus clk get/set
+To: WeiHao Li <cn.liweihao@gmail.com>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ lukma@denx.de, seanga2@gmail.com, ag.dev.uboot@gmail.com,
+ muratdemirtaseu@outlook.com
+References: <20250814131237.8135-1-cn.liweihao@gmail.com>
+ <20250814131237.8135-2-cn.liweihao@gmail.com>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20250814131237.8135-2-cn.liweihao@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Tid: 0a9a420b9d5203afkunm840419a5a1dcf0
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZSEJPVh8eHx1LHUNIHU5KQ1YVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUlCWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
+ VKQktLWQY+
+DKIM-Signature: a=rsa-sha256;
+ b=Kb+pEXiiN8+QBWc7VEVwDu0JD7HIOL0wOYo0ApFRqvE5RfwLA+HlC6vE4+90Ycj5pBJPk/o9dTQXAXv0LqhE6y0YKmKqciMiexUhXADdhtk7Hh1wfYsfuxAi1pWKd2teezJsGcqlzeHRy6B6zI9O1tdbb8SJYxvX/ma1bmYxyEc=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=z7qr/nAKs+PvpE6c1nKC2ks7Wi8yYp1J4lEe8zRcLgw=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,74 +71,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Mark,
 
-On Saturday, November 01, 2025 22:17 CET, Mark Kettenis <mark.kettenis@=
-xs4all.nl> wrote:
-> > From: Jonas Karlman <jonas@kwiboo.se>
-> >=20
-> > Rockchip boards may depend on a working MMC regulator in SPL to
-> > successfully load FIT payload from MMC. Typically, these boards onl=
-y
-> > include the vmmc-supply regulator and not its vin-supply in SPL con=
-trol
-> > FDT.
-> >=20
-> > The commit f98d812e5353 ("power: regulator: Add vin-supply for GPIO=
- and
-> > Fixed regulators") breaks loading FIT from MMC in SPL on some of th=
-ese
-> > boards due to now requiring the vin-supply to be included in the SP=
-L
-> > control FDT.
->=20
-> I ran into this issue a few days ago.  Unfortunately that means U-Boo=
-t
-> 2025.10 is broken on several Rockchip boards :(.
+On 2025/8/14 21:12, WeiHao Li wrote:
+> Some of board need operate PMIC like RK808-B for power supply. It's
+> depends on I2C peripheral, this patch add bus clock get/set function
+> which include I2C clock support.
+>
+> This patch get form Rockchip downstream uboot repository.
+>
+> Link: https://github.com/rockchip-linux/u-boot
+>
+> Signed-off-by: WeiHao Li <cn.liweihao@gmail.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Sadly, that's true. :(
-
-> > The commit also strangely enables any found vin-supply in
-> > regulator=5Fcommon=5Fof=5Fto=5Fplat() and not when a regulator is e=
-nabled or as
-> > part of regulator=5Fautoset().
-> >=20
-> > Revert the commit to fix FIT loading in SPL on broken boards.
-> >=20
-> > If a board needs to have its vin-supply enabled, two options come t=
-o
-> > mind:
-> >=20
-> > - Add regulator-always-on prop to the regulator in the -u-boot.dtsi=
- for
-> >   any board.
-> >=20
-> > - Implement full support for reference counting of regulators and t=
-hen
-> >   update the regulator-uclass to enable any found vin-supply when a
-> >   regulator is enabled.
->=20
-> I fixed the issue with the diff below instead.  But I don't claim to
-> fully understand how this all is supposed to work...
-
-Unfortunately, that's just a quick workaround, not a proper fix.
-Basically, the regulator=5Fcommon=5Fof=5Fto=5Fplat() function is a wron=
-g
-place for such enabling of additional regulators.
-
-> diff --git a/drivers/power/regulator/regulator=5Fcommon.c b/drivers/p=
-ower/regulator/regulator=5Fcommon.c
-> index c80f10c3aa3..f43879a4353 100644
-> --- a/drivers/power/regulator/regulator=5Fcommon.c
-> +++ b/drivers/power/regulator/regulator=5Fcommon.c
-> @@ -48,7 +48,7 @@ int regulator=5Fcommon=5Fof=5Fto=5Fplat(struct udev=
-ice *dev,
->  	ret =3D device=5Fget=5Fsupply=5Fregulator(dev, "vin-supply", &plat-=
->vin=5Fsupply);
->  	if (ret) {
->  		debug("Regulator vin regulator not defined: %d\n", ret);
-> -		if (ret !=3D -ENOENT)
-> +		if (ret !=3D -ENOENT && ret !=3D -ENODEV)
->  			return ret;
->  	}
-
+Thanks,
+- Kever
+> ---
+>   .../include/asm/arch-rockchip/cru_rk3368.h    | 12 +++
+>   drivers/clk/rockchip/clk_rk3368.c             | 94 +++++++++++++++++++
+>   2 files changed, 106 insertions(+)
+>
+> diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3368.h b/arch/arm/include/asm/arch-rockchip/cru_rk3368.h
+> index ed2a61218..845113f13 100644
+> --- a/arch/arm/include/asm/arch-rockchip/cru_rk3368.h
+> +++ b/arch/arm/include/asm/arch-rockchip/cru_rk3368.h
+> @@ -80,6 +80,18 @@ enum {
+>   	PLL_RESET			= 1,
+>   	PLL_RESET_MASK			= GENMASK(5, 5),
+>   
+> +	/* CLKSEL8CON */
+> +	PCLK_BUS_DIV_CON_SHIFT		= 12,
+> +	PCLK_BUS_DIV_CON_MASK		= 0x7 << PCLK_BUS_DIV_CON_SHIFT,
+> +	HCLK_BUS_DIV_CON_SHIFT		= 8,
+> +	HCLK_BUS_DIV_CON_MASK		= 0x3 << HCLK_BUS_DIV_CON_SHIFT,
+> +	CLK_BUS_PLL_SEL_CPLL		= 0,
+> +	CLK_BUS_PLL_SEL_GPLL		= 1,
+> +	CLK_BUS_PLL_SEL_SHIFT		= 7,
+> +	CLK_BUS_PLL_SEL_MASK		= 1 << CLK_BUS_PLL_SEL_SHIFT,
+> +	ACLK_BUS_DIV_CON_SHIFT		= 0,
+> +	ACLK_BUS_DIV_CON_MASK		= 0x1f << ACLK_BUS_DIV_CON_SHIFT,
+> +
+>   	/* CLKSEL12_CON */
+>   	MCU_STCLK_DIV_SHIFT		= 8,
+>   	MCU_STCLK_DIV_MASK		= GENMASK(10, 8),
+> diff --git a/drivers/clk/rockchip/clk_rk3368.c b/drivers/clk/rockchip/clk_rk3368.c
+> index 630253fbb..994330162 100644
+> --- a/drivers/clk/rockchip/clk_rk3368.c
+> +++ b/drivers/clk/rockchip/clk_rk3368.c
+> @@ -453,6 +453,82 @@ static ulong rk3368_saradc_set_clk(struct rk3368_cru *cru, uint hz)
+>   	return rk3368_saradc_get_clk(cru);
+>   }
+>   
+> +#if !IS_ENABLED(CONFIG_XPL_BUILD)
+> +static ulong rk3368_bus_get_clk(struct rk3368_cru *cru, ulong clk_id)
+> +{
+> +	u32 div, con, parent;
+> +
+> +	switch (clk_id) {
+> +	case ACLK_BUS:
+> +		con = readl(&cru->clksel_con[8]);
+> +		div = (con & ACLK_BUS_DIV_CON_MASK) >> ACLK_BUS_DIV_CON_SHIFT;
+> +		parent = rkclk_pll_get_rate(cru, GPLL);
+> +		break;
+> +	case HCLK_BUS:
+> +		con = readl(&cru->clksel_con[8]);
+> +		div = (con & HCLK_BUS_DIV_CON_MASK) >> HCLK_BUS_DIV_CON_SHIFT;
+> +		parent = rk3368_bus_get_clk(cru, ACLK_BUS);
+> +		break;
+> +	case PCLK_BUS:
+> +	case PCLK_PWM0:
+> +	case PCLK_PWM1:
+> +	case PCLK_I2C0:
+> +	case PCLK_I2C1:
+> +		con = readl(&cru->clksel_con[8]);
+> +		div = (con & PCLK_BUS_DIV_CON_MASK) >> PCLK_BUS_DIV_CON_SHIFT;
+> +		parent = rk3368_bus_get_clk(cru, ACLK_BUS);
+> +		break;
+> +	default:
+> +		return -ENOENT;
+> +	}
+> +
+> +	return DIV_TO_RATE(parent, div);
+> +}
+> +
+> +static ulong rk3368_bus_set_clk(struct rk3368_cru *cru,
+> +				ulong clk_id, ulong hz)
+> +{
+> +	int src_clk_div;
+> +
+> +	/*
+> +	 * select gpll as pd_bus bus clock source and
+> +	 * set up dependent divisors for PCLK/HCLK and ACLK clocks.
+> +	 */
+> +	switch (clk_id) {
+> +	case ACLK_BUS:
+> +		src_clk_div = DIV_ROUND_UP(rkclk_pll_get_rate(cru, GPLL), hz);
+> +		assert(src_clk_div - 1 < 31);
+> +		rk_clrsetreg(&cru->clksel_con[8],
+> +			     CLK_BUS_PLL_SEL_MASK | ACLK_BUS_DIV_CON_MASK,
+> +			     CLK_BUS_PLL_SEL_GPLL << CLK_BUS_PLL_SEL_SHIFT |
+> +			     (src_clk_div - 1) << ACLK_BUS_DIV_CON_SHIFT);
+> +		break;
+> +	case HCLK_BUS:
+> +		src_clk_div = DIV_ROUND_UP(rk3368_bus_get_clk(cru,
+> +							      ACLK_BUS),
+> +					   hz);
+> +		assert(src_clk_div - 1 < 3);
+> +		rk_clrsetreg(&cru->clksel_con[8],
+> +			     HCLK_BUS_DIV_CON_MASK,
+> +			     (src_clk_div - 1) << HCLK_BUS_DIV_CON_SHIFT);
+> +		break;
+> +	case PCLK_BUS:
+> +		src_clk_div = DIV_ROUND_UP(rk3368_bus_get_clk(cru,
+> +							      ACLK_BUS),
+> +					   hz);
+> +		assert(src_clk_div - 1 < 3);
+> +		rk_clrsetreg(&cru->clksel_con[8],
+> +			     PCLK_BUS_DIV_CON_MASK,
+> +			     (src_clk_div - 1) << PCLK_BUS_DIV_CON_SHIFT);
+> +		break;
+> +	default:
+> +		printf("do not support this bus freq\n");
+> +		return -EINVAL;
+> +	}
+> +	return rk3368_bus_get_clk(cru, clk_id);
+> +}
+> +#endif
+> +
+>   static ulong rk3368_clk_get_rate(struct clk *clk)
+>   {
+>   	struct rk3368_clk_priv *priv = dev_get_priv(clk->dev);
+> @@ -469,6 +545,17 @@ static ulong rk3368_clk_get_rate(struct clk *clk)
+>   	case SCLK_SPI0 ... SCLK_SPI2:
+>   		rate = rk3368_spi_get_clk(priv->cru, clk->id);
+>   		break;
+> +#if !IS_ENABLED(CONFIG_XPL_BUILD)
+> +	case ACLK_BUS:
+> +	case HCLK_BUS:
+> +	case PCLK_BUS:
+> +	case PCLK_PWM0:
+> +	case PCLK_PWM1:
+> +	case PCLK_I2C0:
+> +	case PCLK_I2C1:
+> +		rate = rk3368_bus_get_clk(priv->cru, clk->id);
+> +		break;
+> +#endif
+>   #if !IS_ENABLED(CONFIG_XPL_BUILD) || CONFIG_IS_ENABLED(MMC)
+>   	case HCLK_SDMMC:
+>   	case HCLK_EMMC:
+> @@ -500,6 +587,13 @@ static ulong rk3368_clk_set_rate(struct clk *clk, ulong rate)
+>   		ret = rk3368_ddr_set_clk(priv->cru, rate);
+>   		break;
+>   #endif
+> +#if !IS_ENABLED(CONFIG_XPL_BUILD)
+> +	case ACLK_BUS:
+> +	case HCLK_BUS:
+> +	case PCLK_BUS:
+> +		rate = rk3368_bus_set_clk(priv->cru, clk->id, rate);
+> +		break;
+> +#endif
+>   #if !IS_ENABLED(CONFIG_XPL_BUILD) || CONFIG_IS_ENABLED(MMC)
+>   	case HCLK_SDMMC:
+>   	case HCLK_EMMC:
