@@ -4,62 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 088EECCF9E3
-	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 13:58:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25B6ACCFA02
+	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 13:59:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1978A8307F;
-	Sun,  2 Nov 2025 14:58:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7A6A38307F;
+	Sun,  2 Nov 2025 14:59:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ElzVBdJ6";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JJEAPRcg";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="HbNLeA7D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A3FD83642; Sun,  2 Nov 2025 14:58:10 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id A8F3A8307F; Sun,  2 Nov 2025 14:59:09 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBA16800B1
- for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 14:58:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5872800B1
+ for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 14:59:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4czxBP3nPYz9snk;
- Sun,  2 Nov 2025 14:58:05 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4czxCb3swcz9tWy;
+ Sun,  2 Nov 2025 14:59:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762091885;
+ s=mail20150812; t=1762091947;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=14fMnbbG7SVcQtpuhAFgD29uiz80DSVva1gZ+11m9r4=;
- b=ElzVBdJ65JUWwdB6gPrT6YKVyRtNmToe2QgcO7iMzvhTe29owuJ72vheVYuOTfLvwbtdDG
- 09s83XrH8bpWcgRgqb3odGcnRqQTRzF1Nyp0c0GATzCdi0Xqaf0Neu1CqGBPd0gc+GIVY1
- cUO/jFguM4nk3DXtE0l77FA7BN21PUwVmK4gNjj/UkaLkQAU6Yfsmr6snF8RWywUlDQmmp
- U3yRus5vkG5xsF+0Z53zVH5YCKJiOSHklLtxhUNk7DlMWQzQW8VDXGnzXUgiVJdRaxsVlS
- rrYaEx8R27fIY34aZF/Jlmmp/ENHua0YYNQaiZbE2CFFehS1xiCwwEocuCqlPw==
-Message-ID: <05d93ac3-b79b-4503-8745-7442033b7b2a@mailbox.org>
-Date: Sun, 2 Nov 2025 14:58:02 +0100
+ bh=L7q0LmtyI1NT5TT9ilKWbCCubuaK9SNHy1fkIO0wCPE=;
+ b=JJEAPRcg1ajAquN2S0S09JkXl5IYZexo9zfCUWnQQ6/aNjy4kSMwGwJsisSvEr7PrrKO7u
+ yxMjed4zPvxs6uguwqWmGrdJRMba9gr6yyoXkGHGmpY4xIlqbVSeiNrAURL1bcTZzJASIv
+ lMaiMXN8kB4cpqQiyzRt7mFJhRwOiZ+b0n+czo9wbj+N5OeOzU1iScfNi+2N3StyvoF1Un
+ UH2H5lndBHT03qcGXITr1y5bsL4rNBcrU22gc5kWuSgDHIKGY93tJUVJDVR4gz4JDXZ6D1
+ DX/xOtk7mebl0b4bFEP4rR/rmLf1pc+AUX8WhoyIIpVZsNzC3CXBTCmWsC52bg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=HbNLeA7D;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <2f894c99-3279-4d8a-8e09-b002a73d85bb@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762091945;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=L7q0LmtyI1NT5TT9ilKWbCCubuaK9SNHy1fkIO0wCPE=;
+ b=HbNLeA7DZsOgYK7QqRMu3q4fzOoJGFICqUVUkXoTF4edrhXgkFvR33nHTbPyn05pueuvMm
+ N4z9MOMr7Ui58RjbD+1XIiQnnS3nf73kTug1mROhvhj30RGy3+exMTgSebhz6NZmeexasX
+ A5Q6bH9BCJAaWcb8pueI6HmnXmwtSNGmo+u8Gnh+tW504nVJPVfEDfwMWiUzqnV1PLAZZb
+ LJfdk9+bImtSdshFI4PjiKeibgXDPsNaiPA8nTF8twH/dV68UN1WK0INfujx+Pd3On6kL2
+ pp9b7FqxrYZc36ix5sPvcUQ9PwgWyWadH1emPuWWMM8ooCcKEsHCLPVsDmuJaA==
+Date: Sun, 2 Nov 2025 14:59:01 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] spi-nor: add support for XM25QH01D
-To: Ssunk <ssunkkan@gmail.com>, u-boot@lists.denx.de,
- tudor.ambarus@linaro.org, trini@konsulko.com
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com,
- Takahiro.Kuwano@infineon.com, pratyush@kernel.org
-References: <20250827105854.10746-1-ssunkkan@gmail.com>
+Subject: Re: [U-Boot, v2, 1/1]net: phy: add paged PHY register accessors
+To: "Lucien.Jheng" <lucienzx159@gmail.com>, jerome.forissier@linaro.org,
+ skylake.huang@mediatek.com, s-vadapalli@ti.com,
+ paul.barker.ct@bp.renesas.com, marek.vasut+renesas@mailbox.org,
+ u-boot@lists.denx.de
+Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org
+References: <20251006124915.13647-1-lucienzx159@gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250827105854.10746-1-ssunkkan@gmail.com>
+In-Reply-To: <20251006124915.13647-1-lucienzx159@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 3k4y7yy6diwx4fc1orwj9pwih5b39191
-X-MBO-RS-ID: 6bcf55d2f7e043e7037
+X-MBO-RS-ID: a1235248fe0a949073c
+X-MBO-RS-META: 49u4pxgbjpwq7g8a46ypc171mgcfrd6u
+X-Rspamd-Queue-Id: 4czxCb3swcz9tWy
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,31 +97,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/27/25 12:58 PM, Ssunk wrote:
-> Add support for the XMC XM25QH01D SPI NOR flash.
+On 10/6/25 2:49 PM, Lucien.Jheng wrote:
+> Synchronize paged PHY helpers with Linux v6.17.
 > 
-> This device has 1Gbit (128MB) capacity, with 64KB sectors and
-> supports 4KB erase, dual and quad read modes, and 4-byte opcodes.
-> Datasheet link: https://www.xmcwh.com/uploads/958/XM25QH01D_Ver1.0.pdf
+> Add support for PHY devices that use paged register access by
+> implementing the following functions:
+> - phy_save_page(): Save current page number
+> - phy_select_page(): Switch to a specific page and return previous page
+> - phy_restore_page(): Restore previously saved page
 > 
-> Signed-off-by: Ssunk <ssunkkan@gmail.com>
-> ---
->   drivers/mtd/spi/spi-nor-ids.c | 1 +
->   1 file changed, 1 insertion(+)
+> Also adds read_page and write_page callbacks to the phy_driver
+> structure to enable driver-specific page handling.
 > 
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-> index 0383175beb5..330ab77ee5d 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -603,6 +603,7 @@ const struct flash_info spi_nor_ids[] = {
->   	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
->   	{ INFO("XM25QH512C", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
->   	{ INFO("XM25QU512C", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-> +	{ INFO("XM25QH01D", 0x204021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
->   #endif
->   #ifdef CONFIG_SPI_FLASH_XTX
->   	/* XTX Technology Limited */
-
-Keep the list sorted please.
-
-+CC Tom, Tudor.
+> These helpers allow safe access to paged PHY registers by ensuring
+> proper page selection and restoration,
+> even in error conditions, which will be used by the Airoha PHY driver.
+Are there any users ? If not, this is dead code.
