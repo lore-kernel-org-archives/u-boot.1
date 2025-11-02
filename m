@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF995CCF9E3
-	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 19:54:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6377CCFA02
+	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 19:54:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42D1A83923;
-	Sun,  2 Nov 2025 20:54:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8E0C58391C;
+	Sun,  2 Nov 2025 20:54:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a1pqKbXE";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FJu9sGKe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D09DE8393F; Sun,  2 Nov 2025 20:54:39 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 88F81838AE; Sun,  2 Nov 2025 20:54:43 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1D498391B
- for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 20:54:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45DAC8393F
+ for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 20:54:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b710601e659so11733766b.1
- for <u-boot@lists.denx.de>; Sun, 02 Nov 2025 11:54:37 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b70406feed3so811077866b.3
+ for <u-boot@lists.denx.de>; Sun, 02 Nov 2025 11:54:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1762113277; x=1762718077; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1762113281; x=1762718081; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VFUA/GQy3dLpiUoFT0nFX8E7STcUaHUYoFKhLwUJUZ0=;
- b=a1pqKbXE19bza++BHqTWiT9otBA+9RfT1axvCOk3fa45pUS5dzfCeQ0gWOKIr/1fY4
- HVXyYqHfTwbMWhYKd86hPt8Zl/B+eaBNL9fXgBFm4JcJe4MLYavlljFKwehgzBIaCc66
- AR7CmjIhuwjDQPVq6h2j79Q12N2Aray15pHsc=
+ bh=fa1+DieywGMc7b1XzOBqwb3uDTE5/YOUXgeS0M4lwUw=;
+ b=FJu9sGKesiH0QcEWj4RG+zZMQc9bW2xgMSTXebMLEg5EhS4koBAjwqrA4OH8aiHGcJ
+ ni9ouNpLTA0kPgPyss69jWHgkDYdoBuHs4IX7Ey1Il80eESuP/y9E2pYlNfYAwMH8IyU
+ +TRNQXIEuK6FQQaSauiJ23gN/1gEeRNYh3S9A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762113277; x=1762718077;
+ d=1e100.net; s=20230601; t=1762113281; x=1762718081;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VFUA/GQy3dLpiUoFT0nFX8E7STcUaHUYoFKhLwUJUZ0=;
- b=GP3Q8h3F6ALCf38VoBJZRQHKUv7IW1TUXSp0obHwIw/eBgmBF+D7esz6EpqZl1g51E
- hQKNym3MRKUkCJ/G1xB5HDhYPaZXz+TsjgclnIwvgBn7zi7yqI6j/RrAoLlQXpjBFY/t
- K5AIBBzPaq3Ip0WwK8uvQ4fFIasG7f3bLMmCh5ZxEduoPQujftZG80wK1r7qvZWcbmMd
- WXuw7tWFkgdvZFTHfyIDZt02jwNZkq0cTjMdmr3negtjyHwHSSYuGacXcue/Ay3NVFCE
- W/QIxJ2XQ4dy3BXKlLjG2A41ax4fZo7nwW42TCtNOGAXf7CPFIlBt3/nMfEbYi7PEZC1
- 6org==
-X-Gm-Message-State: AOJu0Yzpvgv22l1IxsCRSE20WgvDBHCC5A/Eac7Ep/sicoyFd1yUZE8y
- v+037e3fKwTRmiLUHZ3oEHqtYwjYkvTogBk3pH0CrJKfDYCufGWTB4Q8XOwAT1x57+O9L72fTuQ
- kS2IwWrjPAE5gL3t9xYf1P9p1TOxqJCy6xf5WUG+W
-X-Gm-Gg: ASbGncv+T0kct/TuUSkfaiCCjeXtDvEgHkGNG0BLQ0M3jx81O4QoB+Tbk8E9hRTuqed
- 49J3GSbRQz9DlgJaZ9sGUvwVe4Jgbb7/vR9WdlpxTntlquVuHJns85/zrp4MchW/4DL8nCL9eo+
- rxxOH1c5BugsNpsTYjtvZvoE6/6oHoHYCffFRRlOzz+GVH6hcaJXL3KSvLWRS3OnjTkUbuq5DLJ
- C1LjV7PAJsrxsLUSSF8NpgRpCW3f5zD2DQa35N7Ffa/gETXR4gnZC/CKTwE7RpVPArKkX4/WHR7
- ykfy86g=
-X-Google-Smtp-Source: AGHT+IFpuO7HBzlYfEirDSNvmcEo480K55tGg1aOwQB+tgeymYj1xlkdcerqKm567uCjsLLVur3me9IVVjf70Z72row=
-X-Received: by 2002:a17:906:730b:b0:b70:b83a:73ea with SMTP id
- a640c23a62f3a-b70b83a8c80mr185302766b.55.1762113277285; Sun, 02 Nov 2025
- 11:54:37 -0800 (PST)
+ bh=fa1+DieywGMc7b1XzOBqwb3uDTE5/YOUXgeS0M4lwUw=;
+ b=EXMi2FgVziNNNYpc7t7XqL/rErC9JCXbr82vqS6Rtodiqh5y63s1ilWprzRH1CLYse
+ 17tBcxTkmQ9RG7NjXTFvfl3jfRln4sU222lC48UqFdYotcpCUEZZE7c42Mju+UBmWRJo
+ ZbJtMGDyxazuNQqqogW5GLRnjH1vnGYgoiaYiGOaA48i2q6XtJSmqJ98FInscZETSkke
+ pL2E6NXUlul9kM1jf9j/NNKWYnVuqVrSWOxesmR9WahT7Mj6i8Kaeyr2u/kVF2iEWL8P
+ 11fF1wSqAsawuy96O2PmIfTjn9nqUAKPrZIgJPAJzv9fKhkoet/crVd2ghBRjdzf7EaZ
+ BhSg==
+X-Gm-Message-State: AOJu0YwQ6klIoTQblOHC/Vcxx5zysbPG8/bkwDaFulHNowyR9gebEbAi
+ NBH1ffAK7Tpai2ycc4PveVdpynCcF+XkwhRmxYip7oHFYJ/ldb0oQRM/ymj28g5EpO3dEfbTt7u
+ i+g37QSZrLEOYCpR9pua3AHMwhhYtnfbeuRJmoarY
+X-Gm-Gg: ASbGncvVkkTU0Ptov47cjaC1adJUQ8miYQeeVbAqylY3AvTnRfzuGGvHpeInER9ZpdI
+ oEg7SiFb10bVKeLTba0qX7OP16J4W1me/TEwyHC06twXgRk+Zg6fZFIA3r42Kq8HBh2Us4YG6AA
+ p8tHgutD+1Vlay2yqrABg9FN0oVS3XbLRi2OadAR56KjxhV+meUZ1JaZok4TJlx8FXoAWdfLQKV
+ rK0OFpJDaoP1OHCQsvEbjBew6WiFhj4XP9WjBj05lVpdlGOO5Z6Jgy0MxvlwxA/BH/ceB4PKW+K
+ 3pYoepc=
+X-Google-Smtp-Source: AGHT+IFwi1aev0Atj4jAyRpierehyjjuv2bUip+rLvj7bOUMUQ1fBDKd2wylW0fvFqHdctiBiSdST/ZdyczXuwCRAmg=
+X-Received: by 2002:a17:907:2681:b0:b63:7cb3:4105 with SMTP id
+ a640c23a62f3a-b7070831603mr1116625666b.52.1762113280626; Sun, 02 Nov 2025
+ 11:54:40 -0800 (PST)
 MIME-Version: 1.0
 References: <20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de>
- <20251031-binman-engine-v1-2-c13c1b5dac43@cherry.de>
-In-Reply-To: <20251031-binman-engine-v1-2-c13c1b5dac43@cherry.de>
+ <20251031-binman-engine-v1-3-c13c1b5dac43@cherry.de>
+In-Reply-To: <20251031-binman-engine-v1-3-c13c1b5dac43@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 2 Nov 2025 20:53:56 +0100
-X-Gm-Features: AWmQ_blZtzHy3qF3FAGDzsylhH8mbrFoxAoRMGMLqg3yOk1X-mSu11j9-SUm-fw
-Message-ID: <CAFLszTgKWU7mnFdXAOX7rH8jcGs3QrEVy=49om49=FbdNj1q=w@mail.gmail.com>
-Subject: Re: [PATCH 2/3] tools: binman: mkimage: add support for passing the
- engine
+Date: Sun, 2 Nov 2025 20:53:59 +0100
+X-Gm-Features: AWmQ_blmlIFrqRsgmdtFDiw0qIJg8HiBEimiWKC2sbqwYyvejfN1XLOI-t-f0rI
+Message-ID: <CAFLszTgdXonbu6MM92hwbLyRwwX9X_cPuhX=UJgR4L7wimkVBQ@mail.gmail.com>
+Subject: Re: [PATCH 3/3] tools: binman: fit: add support for OpenSSL engines
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
  Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>, 
@@ -103,52 +102,170 @@ On Fri, 31 Oct 2025 at 16:23, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> mkimage has support for OpenSSL engines but binman currently doesn't for
-> direct callers of mkimage (e.g. the fit etype). This prepares for adding
-> support for OpenSSL engines for signing elements of a FIT image, which
-> will done in the next commit.
+> This adds support for using an OpenSSL engine for signing a FIT image.
+> To use it, one should set the fit,sign-engine property at the FIT node
+> level with the engine to use. This will in turn call mkimage with the -N
+> option.
+>
+> The key-name-hint property in the signature node will be used verbatim
+> as key_id in OpenSSL engine API.
+>
+> We could somehow still decide to pass some keys_dir to mkimage when
+> signing with an engine is enabled (mkimage does support that!),
+> unfortunately binman resolves key paths absolutely. I don't believe an
+> OpenSSL engine will happen to have the exact same key_id than the path
+> to the encryption key, so fit,encrypt and fit,sign-engine cannot
+> cohabit.
+>
+> The public key (with .crt extension) is still required if it needs to be
+> embedded in the SPL DTB for example.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
->  tools/binman/btool/mkimage.py | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  tools/binman/entries.rst  | 22 +++++++++++++++++++---
+>  tools/binman/etype/fit.py | 41 +++++++++++++++++++++++++++++++++++++----
+>  2 files changed, 56 insertions(+), 7 deletions(-)
+>
 
-Please make sure this is tested.
+This will need a test.
 
+> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+> index 8922d6cd070..7b162a3edb8 100644
+> --- a/tools/binman/entries.rst
+> +++ b/tools/binman/entries.rst
+> @@ -885,9 +885,10 @@ The top-level 'fit' node supports the following
+special properties:
 >
-> diff --git a/tools/binman/btool/mkimage.py b/tools/binman/btool/mkimage.py
-> index 3f84220fb1a..79a8f887795 100644
-> --- a/tools/binman/btool/mkimage.py
-> +++ b/tools/binman/btool/mkimage.py
-> @@ -22,7 +22,7 @@ class Bintoolmkimage(bintool.Bintool):
+>      fit,sign
+>          Enable signing FIT images via mkimage as described in
+> -        verified-boot.rst. If the property is found, the private keys
+path
+> -        is detected among binman include directories and passed to
+mkimage
+> -        via  -k flag. All the keys required for signing FIT must be
+> +        verified-boot.rst.
+> +        If the property is found and fit,sign-engine is not set, the
+private
+> +        keys path is detected among binman include directories and
+passed to
+> +        mkimage via -k flag. All the keys required for signing FIT must
+be
+>          available at time of signing and must be located in single
+include
+>          directory.
 >
->      # pylint: disable=R0913
->      def run(self, reset_timestamp=False, output_fname=None,
-external=False,
-> -            pad=None, align=None, keys_dir=None):
-> +            pad=None, align=None, keys_dir=None, engine=None):
->          """Run mkimage
+> @@ -898,6 +899,21 @@ The top-level 'fit' node supports the following
+special properties:
+>          required for encrypting the FIT must be available at the time of
+>          encrypting and must be located in a single include directory.
 >
->          Args:
-> @@ -35,6 +35,7 @@ class Bintoolmkimage(bintool.Bintool):
->                  signatures
->              align: Bytes to use for alignment of the FIT and its
-external data
->              keys_dir: Path to directory containing private and
-encryption keys
-> +            engine: Name of the OpenSSL engine to use
->              version: True to get the mkimage version
->          """
->          args = []
-> @@ -50,6 +51,8 @@ class Bintoolmkimage(bintool.Bintool):
->              args += ['-k', f'{keys_dir}']
->          if output_fname:
->              args += ['-F', output_fname]
-> +        if engine:
-> +            args += ['-N', engine]
->          return self.run_cmd(*args)
+> +        Incompatible with fit,sign-engine.
+> +
+> +    fit,sign-engine
+> +        Indicates the OpenSSL engine to use for signing the FIT image.
+This
+> +        is passed to mkimage via the `-N` flag. Example::
+> +
+> +            fit,sign-engine = "my-engine";
+> +
+> +        No `-k` argument will be passed to mkimage. The key_id passed to
+the
+> +        OpenSSL engine API is the verbatim value of the key-name-hint
+property.
+> +
+> +        Depends on fit,sign.
+> +
+> +        Incompatible with fit,encrypt.
+> +
+>  Substitutions
+>  ~~~~~~~~~~~~~
 >
->      def fetch(self, method):
+> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+> index db40479d30e..df4cc9b749c 100644
+> --- a/tools/binman/etype/fit.py
+> +++ b/tools/binman/etype/fit.py
+> @@ -104,9 +104,10 @@ class Entry_fit(Entry_section):
+>
+>          fit,sign
+>              Enable signing FIT images via mkimage as described in
+> -            verified-boot.rst. If the property is found, the private
+keys path
+> -            is detected among binman include directories and passed to
+mkimage
+> -            via  -k flag. All the keys required for signing FIT must be
+> +            verified-boot.rst.
+> +            If the property is found and fit,sign-engine is not set, the
+private
+> +            keys path is detected among binman include directories and
+passed to
+> +            mkimage via -k flag. All the keys required for signing FIT
+must be
+>              available at time of signing and must be located in single
+include
+>              directory.
+>
+> @@ -117,6 +118,21 @@ class Entry_fit(Entry_section):
+>              required for encrypting the FIT must be available at the
+time of
+>              encrypting and must be located in a single include directory.
+>
+> +            Incompatible with fit,sign-engine.
+> +
+> +        fit,sign-engine
+> +            Indicates the OpenSSL engine to use for signing the FIT
+image. This
+> +            is passed to mkimage via the `-N` flag. Example::
+> +
+> +                fit,sign-engine = "my-engine";
+> +
+> +            No `-k` argument will be passed to mkimage. The key_id
+passed to the
+> +            OpenSSL engine API is the verbatim value of the
+key-name-hint property.
+> +
+> +            Depends on fit,sign.
+> +
+> +            Incompatible with fit,encrypt.
+> +
+>      Substitutions
+>      ~~~~~~~~~~~~~
+>
+> @@ -620,7 +636,24 @@ class Entry_fit(Entry_section):
+>              args.update({'align': fdt_util.fdt32_to_cpu(align.value)})
+>          if (self._fit_props.get('fit,sign') is not None or
+>              self._fit_props.get('fit,encrypt') is not None):
+> -            args.update({'keys_dir': self._get_keys_dir(data)})
+> +            engine = None
+> +            if self._fit_props.get('fit,sign') is not None:
+> +                engine_prop = self._fit_props.get('fit,sign-engine')
+> +                if engine_prop is not None:
+> +                    engine = engine_prop.value
+> +                    args.update({'engine': engine})
+> +            # Don't pass a key-dir to mkimage in case an engine is used
+to sign
+> +            # as we don't need a private key on storage anyway.
+> +            # Additionally, binman pass an absolute path as keys_dir
+which is
+> +            # highly unlikely to actually make sense for engines.
+> +            # Because of that limitation, we currently cannot support at
+the
+> +            # same time fit,encrypt and fit,sign-engine.
+> +            # mkimage will read key-name-hint and pass it verbatim to
+the engine
+> +            # as key_id in the OpenSSL engine API instead.
+> +            if engine is None:
+> +                args.update({'keys_dir': self._get_keys_dir(data)})
+> +            elif self._fit_props.get('fit,encrypt') is not None:
+> +                self.Raise('Cannot have both fit,encrypt and
+fit,sign-engine')
+
+Put all that in a function? Then your comment could be in the function
+comment.
+
+>          if self.mkimage.run(reset_timestamp=True,
+output_fname=output_fname,
+>                              **args) is None:
+>              if not self.GetAllowMissing():
 >
 > --
 > 2.51.0
