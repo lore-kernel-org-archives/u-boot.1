@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D76C0CCFA02
-	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 11:20:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1BE2CCFA02
+	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 11:31:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C56B83642;
-	Sun,  2 Nov 2025 12:20:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 53144830A0;
+	Sun,  2 Nov 2025 12:31:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AFCiNtM7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PJkoU2kU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FD5D838C7; Sun,  2 Nov 2025 12:20:33 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 3158383642; Sun,  2 Nov 2025 12:31:41 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1C028307F
- for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 12:20:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B0358307F
+ for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 12:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ssunkkan@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-33be037cf73so3736782a91.2
- for <u-boot@lists.denx.de>; Sun, 02 Nov 2025 03:20:30 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2947d345949so30775765ad.3
+ for <u-boot@lists.denx.de>; Sun, 02 Nov 2025 03:31:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762082429; x=1762687229; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1762083097; x=1762687897; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cahkdBc/ysaYUM1biwLookvEy0+v49A18g2Mg54mAaQ=;
- b=AFCiNtM7xwFzCdQDua6ZXsQPD7VZ9ja3pzJ6LMSFcBfRsshwiW2M+tFMhN/W/9Euwi
- YIpXg+jiC3cWF5DjQYUdnd5qWL87mAwSjdiifBdGQqE15xLNh2VPFp5U8wDKgtoVXUfm
- H7RM8mOtflth7hg6XBcCf0Fkcw1FD4IEXVGI1kL7ec/r3+ORDQfrjVIlItjMRMbqohv8
- +d68X0G5HA2G1CdrNU+Sx3TV3cfdDuaSUVAlSRFxF0AYtgFCjSQfx3pQwieqTm5bnq9h
- sDj5V135O9hIQZcBTq4O2Jy+xKSngSE5JHpA/Wam9zdTGWHtM7YL2lGdqkw+Iuh2ByEk
- XM1g==
+ bh=yNvnlFURNu43xzylFjOal1iwVXB5cxe/l3i5Eyp+Wc4=;
+ b=PJkoU2kUKgij6Jk1oKxDpMOYUo49/1w/0+rdw+t6nUvniDkPpAtuwQ21o3PdExIK/b
+ nOFNeRQsVaQM72uqkND1xq3NXRbDkOCB2oQpitASOa1l07Nc4QJ6x2VZ89fBIPrF1Kg3
+ 77yqVHTHTNDoMGeqZZPoXX2xaOBb30qvaBoIskK2qazDt9qp0LjGhwOrmd+x50tBmKwu
+ wnHX662qhYK2kHaHTdLqWON1aS4bsvm02GmItYjT+7S7gbMpKC2xzzsxeSIBosq64yD7
+ DZzkKJZf2KUI/qrbYqVwAwTwsjgf9agMMq1IsjUkkIbCtlki9qI6vj3b7Caj/0Hdtnx6
+ oW8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762082429; x=1762687229;
+ d=1e100.net; s=20230601; t=1762083097; x=1762687897;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cahkdBc/ysaYUM1biwLookvEy0+v49A18g2Mg54mAaQ=;
- b=xVPiKHzTdnimXVNYHwvzeVBEzlom0iUcReAiEsFnOj0VIFW07XithbQ3i8CDU7TUEv
- Vl7igaPgaPVoiz7A4JIX3qkIewofnIZZIncJuBWhhMiLGm9MkjwbukthosNWP05WlT6Z
- F/Y8rK5f5SFS/Ugx8s47JYok6mS5bET8mTJvY4xqbpQKl/w7t+k1W3kswx6xxh0eYGX0
- wrfbWns5YpSFQANczeyuUBRTTk8WnNwBLKPapQUiAPWGNVrymO0yHEFHCL2JREM/0D53
- O1ztdJCtoMwjhupLs0072YjlrYN4cdIIWXDgMD172zNDuxVwjQ6sAjts1N0wT71PTlJ+
- CyQQ==
-X-Gm-Message-State: AOJu0Yz1AWmVUubOInZHN3u3yX6GGRx6nCFoSf5rK2w8Y8PRTWW7KZEk
- RU5l1kQXSIWhTbCo2YH2GKl9pGmdNTL0yaqn6tBKbcsQRwMVQt9ny84guiFDMNOtvhU=
-X-Gm-Gg: ASbGncsIVFknOVbbwvEz+s/X6FRfeTGDUB/9x+RSUjCBtRSwNA3CnMj6I5F/95zCSzi
- 0RkEAxIuwh3VgfpaOK9SguPJFnCHJKe/IkTrvY75oViwaV+ulI00T2x//T/ng9/52anu6pA+XJN
- GuHt33eA594WlRDCfwkgk3UpcS9Ke4mB+RlZNjA4gKBm/TIxwfesIwSCZqgz+Pd+8mXJVlDHG7F
- J+7XBfXQYDTchlIn5S7z4RO91BHjpGvqps1wc2IVd6HoYOLDXS/89tE4JnjH8aonAA3Hc7sNX0z
- s8+vznp/k56qBneYuW4qxnBSjq6hUZYkRXOxOvlIh7qYeQClGdLj++MKQO2PCsna/pNNdfyhHGt
- y6SUI5idgXPjQdQmzpxnerYOqAMRvxo4GMWsE0xQh6sUQEW51UiWqIA4dCoSFLTpS5RMZLNYzKw
- 6Utl5YOxenit7xHtqmdxWLW4oiZzrKLamcpmb3tgDctT2LwC3j9VwI97qeHzFyduKuvqh1Deq85
- VbOlvIjc6j+NmsKjSplUwfH+bI=
-X-Google-Smtp-Source: AGHT+IFbyw4hHjeOwDEG6OmZLmwAekfWimTpv5od93iXY2y6jxPyono8rG0BzhvEk4VLCfu1zrQGww==
-X-Received: by 2002:a17:90a:e70b:b0:340:2a3a:71b7 with SMTP id
- 98e67ed59e1d1-34082fc3919mr12321623a91.12.1762082429027; 
- Sun, 02 Nov 2025 03:20:29 -0800 (PST)
-Received: from sun-virtual-machine.localdomain
- (ec2-13-112-158-202.ap-northeast-1.compute.amazonaws.com. [13.112.158.202])
+ bh=yNvnlFURNu43xzylFjOal1iwVXB5cxe/l3i5Eyp+Wc4=;
+ b=wktttx3OQFjcnULeeAVXlvR/yaFGEb7K6lgO04GFyhONM5sxwtrD7JE7ojtYg7GD1F
+ qLHV4E65jIapyVemEBUcb6iMzInhWC7KbxLHNY6GnEHhPe+b5Mf/eJNaWP9hx7mz6QBt
+ UiDS9Gq6AJazShED+7Q5vYQOo4TpVXgZ3RK+Q43jVtDXeaL0abHc5Fno9qHW0IlUwj4k
+ /WebCk0baktA+S7ZodRxNbWA9tgNnjv9dsp3GHUqhpTr/ulMk6Aju/FrNkvVkgChFiIw
+ UPDivs+gOTc6iX+uBmOm9MP+MhUpvSovMVsldhiNVB+B28rDKEQouGU+wg92a+GcCPnc
+ gK6A==
+X-Gm-Message-State: AOJu0YwksajHTrH7tdPdtbjwIbgPqZww3Zt0T3SsxBDlPIX10mgYGF4l
+ IYFlx2RtdeStg1KQkrsWVq+sOUiCOlDzeDSwTDzYF1ozSDbnW1fAhAdAgYPvY1T1
+X-Gm-Gg: ASbGncvh6Y+kovjzhr2HGVRipDR4tPZmSdJ8NEuqfyAKoKvppbgy6k8/QJvpXis1EYk
+ 0nmVGnHg/OSwMlxIZU0JVA296QC29MjW7QbfIKkUv2fqAQTA2lq9eLSOOH9zAe8F/Bt/ke2Htoc
+ 1hhkm2rGf0+ZXKC9JZcAA0i3MfPotHzBehQ8Ez3qKZ5nbphQGPGVEpdvFXU/Lt1pwv6ylIxJ7/t
+ 0mXOCMgvoDdWxWaqobquMzzm1jLWJntXKxsXS79v7mqPBHdNTPlvhRNRXn3TE2qQQFoRMOdmoL+
+ BP3SrguLVgL0mJmXKsII5enARXX1Pe7Yrx6aI9k4ykgU7F+EmySaV6IVI4LjT+DogSC/wjwzPC0
+ s/n75JTwyC+2hF9jQf4kImq0ENfOt/Rx9CBfvBe2Xbu54hJJK4vYMKMxT5z/ssCuIco68iyldPf
+ RyqaqFqVCGUWpki0ThxY/tsBBz1A==
+X-Google-Smtp-Source: AGHT+IHJOx6wFtqNLXFwH44sYYdc8S/VCcbTObXE9lMotHp3jjWyI5RpqaVZbheP9ziWf8f/Ph5POA==
+X-Received: by 2002:a17:902:c405:b0:295:21ac:3533 with SMTP id
+ d9443c01a7336-29521ac3969mr126803545ad.43.1762083097353; 
+ Sun, 02 Nov 2025 03:31:37 -0800 (PST)
+Received: from localhost.localdomain ([185.213.82.75])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b93be404874sm7199858a12.29.2025.11.02.03.20.26
+ d9443c01a7336-2954448e9c2sm62700985ad.23.2025.11.02.03.31.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Nov 2025 03:20:28 -0800 (PST)
-From: Ssunk <ssunkkan@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Ssunk <ssunkkan@gmail.com>, jagan@amarulasolutions.com, vigneshr@ti.com,
- tudor.ambarus@linaro.org, trini@konsulko.com, Takahiro.Kuwano@infineon.com,
- marek.vasut+renesas@mailbox.org, pratyush@kernel.org
-Subject: Re: [PATCH] mtd: spi-nor: Add support for Dosilicon DS25Q4CB/DS25Q4DN
-Date: Sun,  2 Nov 2025 19:20:18 +0800
-Message-Id: <20251102112018.5334-1-ssunkkan@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250827122403.20159-1-ssunkkan@gmail.com>
-References: <20250827122403.20159-1-ssunkkan@gmail.com>
+ Sun, 02 Nov 2025 03:31:37 -0800 (PST)
+From: Brian Sune <briansune@gmail.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>,
+ Dang Huynh <danct12@riseup.net>, Brian Sune <briansune@gmail.com>
+Subject: Re: [PATCH] rockchip: remove regulator enable from device probe
+Date: Sun,  2 Nov 2025 19:31:22 +0800
+Message-ID: <20251102113122.1038-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.47.1.windows.1
+In-Reply-To: <20251101203429.1603832-1-jonas@kwiboo.se>
+References: <20251101203429.1603832-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,11 +100,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
-
-Gentle ping — any comments on this patch?
-
-Link: https://lore.kernel.org/u-boot/20250827122403.20159-1-ssunkkan@gmail.com/
-
-Thanks,
-Ssunk
+Hi Jonas,=0D
+=0D
+This patch resolves the previous boot issue mentioned earlier on the mailin=
+g list:=0D
+=0D
+[DEBUG] rk3399-nanopi-neo4: SPL SD init may report -5 due to SD power-on ti=
+ming=0D
+=0D
+Quoting the earlier observation:=0D
+"=0D
+While testing mainline U-Boot (v2026.01-rc1-00070-ge34d01d23e45) on the=0D
+FriendlyARM NanoPi NEO4 (RK3399), I observed that SPL sometimes fails to=0D
+initialize the SD card with the following message:=0D
+=0D
+    spl: mmc init failed with error: -5=0D
+    SPL: failed to boot from all boot devices=0D
+"=0D
+=0D
+So the NanoPi NEO4 boot stall appears to have been caused by the previous r=
+egulator patch.=0D
+However, it is puzzling why the issue only affected SD boot and not MMC.=0D
+=0D
+This suggests that the delay method proposed earlier regarding power-on tim=
+ing=0D
+is not the actual root cause of the RK3399 NanoPi NEO4 SD boot stall.=0D
+=0D
+Tested with this patch applied, and SD boot now works normally.=0D
+=0D
+Regards,  =0D
+Brian=0D
