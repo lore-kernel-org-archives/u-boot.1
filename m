@@ -4,62 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69DF5CCFA02
-	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 02:00:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97852CCF9F8
+	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 02:24:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1A108307F;
-	Sun,  2 Nov 2025 03:00:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id DB1B48307F;
+	Sun,  2 Nov 2025 03:23:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="gcl1Cwuu";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gx8a3VPa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E61A8830A0; Sun,  2 Nov 2025 03:00:31 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id F35FB830A0; Sun,  2 Nov 2025 03:23:58 +0100 (CET)
+Received: from mail-m81142.xmail.ntesmail.com (mail-m81142.xmail.ntesmail.com
+ [156.224.81.142])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6214382A9E
- for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 03:00:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC27382A9E
+ for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 03:23:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=bfc8=5K=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1762048822;
- bh=H0oWLWRBFdzTIV52o3qsF0/J2S2lSc4yGkQH+pvfDFM=;
- b=gcl1CwuuZHKaIlWdkAfamVIRUpx8dfFYYWyjb/hFN0m1Jhk7d9HJACrAHwUMU3UCFcc14DfJr
- GfODig2R6x8VzJ7FNs87/NYycxuQTI0AbZvThQKSm7IhWR/Q5SZeScYNtm/ozBEE2/0bJF4n6WL
- TD3+yhkT93fdas5j9kZrQpqUYJEZ5d/tGEbLThvSDV+Laz1LEfM3/83+zB06oy4h3eOexK7LsLs
- eUjk32keedO7FfB4xHubA/+cw23+cl4jXDhKChCE4nZQvpH4V/h4hZt8CsZEYNQYMn/sHoIcDGu
- 3abvbF7w8SRUXImECmUxRpsRdgQakXsE/jbFHHyIKvCw==
-X-Forward-Email-ID: 6906bb3125b744ade9932474
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.4.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <3df8e40c-ecdf-4134-aee4-b59deb17de89@kwiboo.se>
-Date: Sun, 2 Nov 2025 03:00:11 +0100
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from localhost.localdomain (unknown [124.72.36.229])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 28096ae6c;
+ Sun, 2 Nov 2025 10:23:49 +0800 (GMT+08:00)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-rockchip-20251101
+Date: Sun,  2 Nov 2025 10:23:49 +0800
+Message-Id: <20251102022349.326599-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Revert "power: regulator: Add vin-supply for GPIO and
- Fixed regulators"
-To: Mark Kettenis <mark.kettenis@xs4all.nl>, Dragan Simic <dsimic@manjaro.org>
-Cc: trini@konsulko.com, jh80.chung@samsung.com, peng.fan@nxp.com,
- ye.li@nxp.com, festevam@gmail.com, danct12@riseup.net, u-boot@lists.denx.de
-References: <20251101203429.1603832-1-jonas@kwiboo.se>
- <878qgpqwpi.fsf@bloch.sibelius.xs4all.nl>
- <cec3cc0b-0326-4b0b-6832-f5db556c4cf2@manjaro.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <cec3cc0b-0326-4b0b-6832-f5db556c4cf2@manjaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9a4260c5c103afkunm316abdcfa364db
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTxpKVklCTx1OGUlMTUMdSFYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUlCWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
+ VKQktLWQY+
+DKIM-Signature: a=rsa-sha256;
+ b=gx8a3VPacMmhZtelhPpJBqVjuajhOhXhkIH/gtdiTT/Nx6WeKHb7uxFiygKucAzx6hB7GWAGNEX79fvQozcWzmjZOYxIRyJcosG31vQV5aNM1AuiOOY8+rkfxWjYCkdCtLC57rMQVG3+P1Z8Kb5gPnNCEhHX9CA++/HvkrFzDCs=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=pgOGnGGWzCt7w9GCqAEeeLMWirmga/FDIoNT+nO6TAc=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,73 +65,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark and Dragan,
+Hi Tom,
 
-On 11/1/2025 10:23 PM, Dragan Simic wrote:
-> Hello Mark,
-> 
-> On Saturday, November 01, 2025 22:17 CET, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
->>> From: Jonas Karlman <jonas@kwiboo.se>
->>>
->>> Rockchip boards may depend on a working MMC regulator in SPL to
->>> successfully load FIT payload from MMC. Typically, these boards only
->>> include the vmmc-supply regulator and not its vin-supply in SPL control
->>> FDT.
->>>
->>> The commit f98d812e5353 ("power: regulator: Add vin-supply for GPIO and
->>> Fixed regulators") breaks loading FIT from MMC in SPL on some of these
->>> boards due to now requiring the vin-supply to be included in the SPL
->>> control FDT.
->>
->> I ran into this issue a few days ago.  Unfortunately that means U-Boot
->> 2025.10 is broken on several Rockchip boards :(.
-> 
-> Sadly, that's true. :(
+Please pull the updates for rockchip platform:
+- New Boards support: 
+	rk3588: MNT Reform2
+	rk3528: Radxa ROCK 2A/2F
+	rk3576: ArmSoM Sige1, Luckfox Omni3576, FriendlyElec NanoPi M5, Radxa ROCK 4D
+	rk3568: Lunzn FastRhino R66S
+- Other board level updates.
 
-I do not think the commit was part of 2025.10, it was merged to next and
-should currently only be part of master and 2026.01-rc1.
 
-If you experience a similar boot issue on 2025.10 then that will most
-likely be a different issue.
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/28119
 
-Regards,
-Jonas
+Thanks,
+- Kever
 
-> 
->>> The commit also strangely enables any found vin-supply in
->>> regulator_common_of_to_plat() and not when a regulator is enabled or as
->>> part of regulator_autoset().
->>>
->>> Revert the commit to fix FIT loading in SPL on broken boards.
->>>
->>> If a board needs to have its vin-supply enabled, two options come to
->>> mind:
->>>
->>> - Add regulator-always-on prop to the regulator in the -u-boot.dtsi for
->>>   any board.
->>>
->>> - Implement full support for reference counting of regulators and then
->>>   update the regulator-uclass to enable any found vin-supply when a
->>>   regulator is enabled.
->>
->> I fixed the issue with the diff below instead.  But I don't claim to
->> fully understand how this all is supposed to work...
-> 
-> Unfortunately, that's just a quick workaround, not a proper fix.
-> Basically, the regulator_common_of_to_plat() function is a wrong
-> place for such enabling of additional regulators.
-> 
->> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
->> index c80f10c3aa3..f43879a4353 100644
->> --- a/drivers/power/regulator/regulator_common.c
->> +++ b/drivers/power/regulator/regulator_common.c
->> @@ -48,7 +48,7 @@ int regulator_common_of_to_plat(struct udevice *dev,
->>  	ret = device_get_supply_regulator(dev, "vin-supply", &plat->vin_supply);
->>  	if (ret) {
->>  		debug("Regulator vin regulator not defined: %d\n", ret);
->> -		if (ret != -ENOENT)
->> +		if (ret != -ENOENT && ret != -ENODEV)
->>  			return ret;
->>  	}
-> 
+The following changes since commit e34d01d23e45e007368685ffa6dfd674b6dd7b17:
 
+  Merge tag 'u-boot-ufs-20251029' of https://source.denx.de/u-boot/custodians/u-boot-ufs (2025-10-29 07:41:43 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20251101
+
+for you to fetch changes up to 498a9756adf57e94af64e31b144a6698c656c50a:
+
+  mmc: rockchip_sdhci: Set xx_TAP_VALUE for RK3528 (2025-11-02 00:29:58 +0800)
+
+----------------------------------------------------------------
+David Barbion (1):
+      board: rockchip: Fix RG353M model renaming
+
+Jon Lin (1):
+      spi: rockchip_sfc: Support sclk_x2 version
+
+Jonas Karlman (32):
+      clk: px30: Allow use of GPU and WIFI_PMU in assigned-clocks
+      rockchip: odroid-go2: Remove cru assigned-clocks override
+      rockchip: odroid-go2: Remove incorrect re-defined spi0 alias
+      rockchip: odroid-go2: Remove u-boot.dtsi props already defined
+      rockchip: odroid-go2: Use appropriate bootph props
+      rockchip: odroid-go2: Move SoC common overrides into a SoC u-boot.dtsi
+      rockchip: odroid-go2: Remove unsupported Kconfig options
+      rockchip: odroid-go2: Update Kconfig options for SPL
+      rockchip: odroid-go2: Include pinctrl for sdmmc, sfc and uart in SPL
+      rockchip: odroid-go2: Use power off at power plug-in event
+      rockchip: odroid-go2: Add support for SPI flash boot
+      rockchip: odroid-go2: Select board FDT from FIT in SPL
+      rockchip: odroid-go2: Use env from same storage FIT was loaded from
+      rockchip: odroid-go2: Enable RockUSB, button, LED and RNG support
+      rockchip: odroid-go2: Turn on the blue LED at boot
+      rockchip: odroid-go2: Enable more commands
+      rockchip: odroid-go2: Add myself as a reviewer
+      arm: dts: rockchip: Include OTP in U-Boot pre-reloc phase for RK3326
+      rockchip: rk3528-radxa-e20c: Drop eMMC HS200 prop from board u-boot.dtsi
+      rockchip: spl: Add a read_brom_bootsource_id() helper
+      rockchip: rk3528: Implement read_brom_bootsource_id()
+      rockchip: rk3576: Add SPI Flash boot support
+      board: rockchip: Add Radxa ROCK 4D
+      board: rockchip: Add Luckfox Omni3576
+      board: rockchip: Add FriendlyElec NanoPi M5
+      arm64: dts: rockchip: Add Radxa ROCK 2A/2F
+      board: rockchip: Add Radxa ROCK 2A/2F
+      arm64: dts: rockchip: Add ArmSoM Sige1
+      board: rockchip: Add ArmSoM Sige1
+      rockchip: spl-boot-order: Defer probe of boot device
+      rockchip: Ensure env in SPI Flash can work correctly
+      mmc: rockchip_sdhci: Set xx_TAP_VALUE for RK3528
+
+Peter Robinson (1):
+      board: rockchip: Add support for rk3588 MNT Reform2
+
+Quentin Schulz (6):
+      rockchip: px30: use rockchip_stimer_init from spl_common.o for TPL
+      rockchip: rk3036: use rockchip_stimer_init from spl_common.o
+      rockchip: rk3399: fix TIMER_FMODE constant
+      rockchip: spl_common: fix TIMER_FMODE constant
+      binman: btool: mkimage: fix Bintoolmkimage.run() method docstring
+      rockchip: imply most symbols for ARCH_ROCKCHIP
+
+Tianling Shen (1):
+      board: rockchip: add Lunzn FastRhino R66S
+
+ arch/arm/Kconfig                                   |  26 +-
+ arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi         | 111 ++---
+ arch/arm/dts/rk3326-odroid-go2-v11-u-boot.dtsi     |   3 +
+ arch/arm/dts/rk3326-odroid-go3-u-boot.dtsi         |   3 +
+ arch/arm/dts/rk3326-u-boot.dtsi                    | 154 +++++++
+ arch/arm/dts/rk3328-u-boot.dtsi                    |   4 +
+ arch/arm/dts/rk3528-armsom-sige1-u-boot.dtsi       |  11 +
+ arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi         |   5 +-
+ arch/arm/dts/rk3528-rock-2-u-boot.dtsi             |  16 +
+ arch/arm/dts/rk3528-rock-2a-u-boot.dtsi            |   3 +
+ arch/arm/dts/rk3528-rock-2f-u-boot.dtsi            |   3 +
+ arch/arm/dts/rk3568-fastrhino-r66s-u-boot.dtsi     |   3 +
+ arch/arm/dts/rk356x-u-boot.dtsi                    |   1 +
+ arch/arm/dts/rk3576-luckfox-omni3576-u-boot.dtsi   |  11 +
+ arch/arm/dts/rk3576-nanopi-m5-u-boot.dtsi          |  22 +
+ arch/arm/dts/rk3576-rock-4d-u-boot.dtsi            |  10 +
+ arch/arm/dts/rk3576-u-boot.dtsi                    |  46 ++
+ arch/arm/dts/rk3588s-u-boot.dtsi                   |   1 +
+ arch/arm/include/asm/arch-rockchip/bootrom.h       |   2 +
+ arch/arm/mach-rockchip/Makefile                    |   4 +-
+ arch/arm/mach-rockchip/px30-board-tpl.c            |  28 +-
+ arch/arm/mach-rockchip/rk3036-board-spl.c          |  21 +-
+ arch/arm/mach-rockchip/rk3399/rk3399.c             |   4 +-
+ arch/arm/mach-rockchip/rk3528/Kconfig              |   7 +
+ arch/arm/mach-rockchip/rk3528/MAINTAINERS          |   6 +
+ arch/arm/mach-rockchip/rk3528/rk3528.c             |  15 +
+ arch/arm/mach-rockchip/rk3576/MAINTAINERS          |  18 +
+ arch/arm/mach-rockchip/rk3576/rk3576.c             |  25 ++
+ arch/arm/mach-rockchip/spl-boot-order.c            |   4 +-
+ arch/arm/mach-rockchip/spl.c                       |   7 +-
+ arch/arm/mach-rockchip/spl_common.c                |   4 +-
+ board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c         |   2 +-
+ board/hardkernel/odroid_go2/Kconfig                |   7 +
+ board/hardkernel/odroid_go2/MAINTAINERS            |   2 +
+ board/hardkernel/odroid_go2/go2.c                  |  88 +++-
+ board/radxa/rock-2-rk3528/Kconfig                  |  14 +
+ board/radxa/rock-2-rk3528/MAINTAINERS              |   6 +
+ board/radxa/rock-2-rk3528/Makefile                 |   3 +
+ board/radxa/rock-2-rk3528/rock-2-rk3528.c          |  60 +++
+ board/rockchip/evb_rk3568/MAINTAINERS              |   7 +
+ board/rockchip/evb_rk3588/MAINTAINERS              |   5 +
+ configs/fastrhino-r66s-rk3568_defconfig            |  64 +++
+ configs/mnt-reform2-rk3588_defconfig               |  84 ++++
+ configs/nanopi-m5-rk3576_defconfig                 |  78 ++++
+ configs/odroid-go2_defconfig                       |  63 ++-
+ configs/omni3576-rk3576_defconfig                  |  63 +++
+ configs/radxa-e20c-rk3528_defconfig                |   3 +
+ configs/rock-2-rk3528_defconfig                    |  68 +++
+ configs/rock-4d-rk3576_defconfig                   |  68 +++
+ configs/sige1-rk3528_defconfig                     |  64 +++
+ doc/board/rockchip/rockchip.rst                    |   7 +
+ drivers/clk/rockchip/clk_px30.c                    |   6 +
+ drivers/mmc/rockchip_sdhci.c                       |  27 +-
+ drivers/spi/rockchip_sfc.c                         |  13 +-
+ .../src/arm64/rockchip/rk3528-armsom-sige1.dts     | 464 +++++++++++++++++++++
+ dts/upstream/src/arm64/rockchip/rk3528-rock-2.dtsi | 293 +++++++++++++
+ dts/upstream/src/arm64/rockchip/rk3528-rock-2a.dts |  82 ++++
+ dts/upstream/src/arm64/rockchip/rk3528-rock-2f.dts |  10 +
+ tools/binman/btool/mkimage.py                      |   1 -
+ 59 files changed, 2031 insertions(+), 199 deletions(-)
+ create mode 100644 arch/arm/dts/rk3326-odroid-go2-v11-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3326-odroid-go3-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3326-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3528-armsom-sige1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3528-rock-2-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3528-rock-2a-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3528-rock-2f-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3568-fastrhino-r66s-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3576-luckfox-omni3576-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3576-nanopi-m5-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3576-rock-4d-u-boot.dtsi
+ create mode 100644 board/radxa/rock-2-rk3528/Kconfig
+ create mode 100644 board/radxa/rock-2-rk3528/MAINTAINERS
+ create mode 100644 board/radxa/rock-2-rk3528/Makefile
+ create mode 100644 board/radxa/rock-2-rk3528/rock-2-rk3528.c
+ create mode 100644 configs/fastrhino-r66s-rk3568_defconfig
+ create mode 100644 configs/mnt-reform2-rk3588_defconfig
+ create mode 100644 configs/nanopi-m5-rk3576_defconfig
+ create mode 100644 configs/omni3576-rk3576_defconfig
+ create mode 100644 configs/rock-2-rk3528_defconfig
+ create mode 100644 configs/rock-4d-rk3576_defconfig
+ create mode 100644 configs/sige1-rk3528_defconfig
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-armsom-sige1.dts
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-rock-2.dtsi
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-rock-2a.dts
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-rock-2f.dts
