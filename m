@@ -4,86 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1BE2CCFA02
-	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 11:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 088EECCF9E3
+	for <u-boot@archiver.kernel.org>; Sun,  2 Nov 2025 13:58:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53144830A0;
-	Sun,  2 Nov 2025 12:31:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1978A8307F;
+	Sun,  2 Nov 2025 14:58:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PJkoU2kU";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ElzVBdJ6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3158383642; Sun,  2 Nov 2025 12:31:41 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5A3FD83642; Sun,  2 Nov 2025 14:58:10 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B0358307F
- for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 12:31:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBA16800B1
+ for <u-boot@lists.denx.de>; Sun,  2 Nov 2025 14:58:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2947d345949so30775765ad.3
- for <u-boot@lists.denx.de>; Sun, 02 Nov 2025 03:31:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762083097; x=1762687897; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yNvnlFURNu43xzylFjOal1iwVXB5cxe/l3i5Eyp+Wc4=;
- b=PJkoU2kUKgij6Jk1oKxDpMOYUo49/1w/0+rdw+t6nUvniDkPpAtuwQ21o3PdExIK/b
- nOFNeRQsVaQM72uqkND1xq3NXRbDkOCB2oQpitASOa1l07Nc4QJ6x2VZ89fBIPrF1Kg3
- 77yqVHTHTNDoMGeqZZPoXX2xaOBb30qvaBoIskK2qazDt9qp0LjGhwOrmd+x50tBmKwu
- wnHX662qhYK2kHaHTdLqWON1aS4bsvm02GmItYjT+7S7gbMpKC2xzzsxeSIBosq64yD7
- DZzkKJZf2KUI/qrbYqVwAwTwsjgf9agMMq1IsjUkkIbCtlki9qI6vj3b7Caj/0Hdtnx6
- oW8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762083097; x=1762687897;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yNvnlFURNu43xzylFjOal1iwVXB5cxe/l3i5Eyp+Wc4=;
- b=wktttx3OQFjcnULeeAVXlvR/yaFGEb7K6lgO04GFyhONM5sxwtrD7JE7ojtYg7GD1F
- qLHV4E65jIapyVemEBUcb6iMzInhWC7KbxLHNY6GnEHhPe+b5Mf/eJNaWP9hx7mz6QBt
- UiDS9Gq6AJazShED+7Q5vYQOo4TpVXgZ3RK+Q43jVtDXeaL0abHc5Fno9qHW0IlUwj4k
- /WebCk0baktA+S7ZodRxNbWA9tgNnjv9dsp3GHUqhpTr/ulMk6Aju/FrNkvVkgChFiIw
- UPDivs+gOTc6iX+uBmOm9MP+MhUpvSovMVsldhiNVB+B28rDKEQouGU+wg92a+GcCPnc
- gK6A==
-X-Gm-Message-State: AOJu0YwksajHTrH7tdPdtbjwIbgPqZww3Zt0T3SsxBDlPIX10mgYGF4l
- IYFlx2RtdeStg1KQkrsWVq+sOUiCOlDzeDSwTDzYF1ozSDbnW1fAhAdAgYPvY1T1
-X-Gm-Gg: ASbGncvh6Y+kovjzhr2HGVRipDR4tPZmSdJ8NEuqfyAKoKvppbgy6k8/QJvpXis1EYk
- 0nmVGnHg/OSwMlxIZU0JVA296QC29MjW7QbfIKkUv2fqAQTA2lq9eLSOOH9zAe8F/Bt/ke2Htoc
- 1hhkm2rGf0+ZXKC9JZcAA0i3MfPotHzBehQ8Ez3qKZ5nbphQGPGVEpdvFXU/Lt1pwv6ylIxJ7/t
- 0mXOCMgvoDdWxWaqobquMzzm1jLWJntXKxsXS79v7mqPBHdNTPlvhRNRXn3TE2qQQFoRMOdmoL+
- BP3SrguLVgL0mJmXKsII5enARXX1Pe7Yrx6aI9k4ykgU7F+EmySaV6IVI4LjT+DogSC/wjwzPC0
- s/n75JTwyC+2hF9jQf4kImq0ENfOt/Rx9CBfvBe2Xbu54hJJK4vYMKMxT5z/ssCuIco68iyldPf
- RyqaqFqVCGUWpki0ThxY/tsBBz1A==
-X-Google-Smtp-Source: AGHT+IHJOx6wFtqNLXFwH44sYYdc8S/VCcbTObXE9lMotHp3jjWyI5RpqaVZbheP9ziWf8f/Ph5POA==
-X-Received: by 2002:a17:902:c405:b0:295:21ac:3533 with SMTP id
- d9443c01a7336-29521ac3969mr126803545ad.43.1762083097353; 
- Sun, 02 Nov 2025 03:31:37 -0800 (PST)
-Received: from localhost.localdomain ([185.213.82.75])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2954448e9c2sm62700985ad.23.2025.11.02.03.31.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Nov 2025 03:31:37 -0800 (PST)
-From: Brian Sune <briansune@gmail.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>,
- Dang Huynh <danct12@riseup.net>, Brian Sune <briansune@gmail.com>
-Subject: Re: [PATCH] rockchip: remove regulator enable from device probe
-Date: Sun,  2 Nov 2025 19:31:22 +0800
-Message-ID: <20251102113122.1038-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.47.1.windows.1
-In-Reply-To: <20251101203429.1603832-1-jonas@kwiboo.se>
-References: <20251101203429.1603832-1-jonas@kwiboo.se>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4czxBP3nPYz9snk;
+ Sun,  2 Nov 2025 14:58:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762091885;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=14fMnbbG7SVcQtpuhAFgD29uiz80DSVva1gZ+11m9r4=;
+ b=ElzVBdJ65JUWwdB6gPrT6YKVyRtNmToe2QgcO7iMzvhTe29owuJ72vheVYuOTfLvwbtdDG
+ 09s83XrH8bpWcgRgqb3odGcnRqQTRzF1Nyp0c0GATzCdi0Xqaf0Neu1CqGBPd0gc+GIVY1
+ cUO/jFguM4nk3DXtE0l77FA7BN21PUwVmK4gNjj/UkaLkQAU6Yfsmr6snF8RWywUlDQmmp
+ U3yRus5vkG5xsF+0Z53zVH5YCKJiOSHklLtxhUNk7DlMWQzQW8VDXGnzXUgiVJdRaxsVlS
+ rrYaEx8R27fIY34aZF/Jlmmp/ENHua0YYNQaiZbE2CFFehS1xiCwwEocuCqlPw==
+Message-ID: <05d93ac3-b79b-4503-8745-7442033b7b2a@mailbox.org>
+Date: Sun, 2 Nov 2025 14:58:02 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH] spi-nor: add support for XM25QH01D
+To: Ssunk <ssunkkan@gmail.com>, u-boot@lists.denx.de,
+ tudor.ambarus@linaro.org, trini@konsulko.com
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com,
+ Takahiro.Kuwano@infineon.com, pratyush@kernel.org
+References: <20250827105854.10746-1-ssunkkan@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250827105854.10746-1-ssunkkan@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 3k4y7yy6diwx4fc1orwj9pwih5b39191
+X-MBO-RS-ID: 6bcf55d2f7e043e7037
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,33 +76,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,=0D
-=0D
-This patch resolves the previous boot issue mentioned earlier on the mailin=
-g list:=0D
-=0D
-[DEBUG] rk3399-nanopi-neo4: SPL SD init may report -5 due to SD power-on ti=
-ming=0D
-=0D
-Quoting the earlier observation:=0D
-"=0D
-While testing mainline U-Boot (v2026.01-rc1-00070-ge34d01d23e45) on the=0D
-FriendlyARM NanoPi NEO4 (RK3399), I observed that SPL sometimes fails to=0D
-initialize the SD card with the following message:=0D
-=0D
-    spl: mmc init failed with error: -5=0D
-    SPL: failed to boot from all boot devices=0D
-"=0D
-=0D
-So the NanoPi NEO4 boot stall appears to have been caused by the previous r=
-egulator patch.=0D
-However, it is puzzling why the issue only affected SD boot and not MMC.=0D
-=0D
-This suggests that the delay method proposed earlier regarding power-on tim=
-ing=0D
-is not the actual root cause of the RK3399 NanoPi NEO4 SD boot stall.=0D
-=0D
-Tested with this patch applied, and SD boot now works normally.=0D
-=0D
-Regards,  =0D
-Brian=0D
+On 8/27/25 12:58 PM, Ssunk wrote:
+> Add support for the XMC XM25QH01D SPI NOR flash.
+> 
+> This device has 1Gbit (128MB) capacity, with 64KB sectors and
+> supports 4KB erase, dual and quad read modes, and 4-byte opcodes.
+> Datasheet link: https://www.xmcwh.com/uploads/958/XM25QH01D_Ver1.0.pdf
+> 
+> Signed-off-by: Ssunk <ssunkkan@gmail.com>
+> ---
+>   drivers/mtd/spi/spi-nor-ids.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+> index 0383175beb5..330ab77ee5d 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -603,6 +603,7 @@ const struct flash_info spi_nor_ids[] = {
+>   	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+>   	{ INFO("XM25QH512C", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+>   	{ INFO("XM25QU512C", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+> +	{ INFO("XM25QH01D", 0x204021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+>   #endif
+>   #ifdef CONFIG_SPI_FLASH_XTX
+>   	/* XTX Technology Limited */
+
+Keep the list sorted please.
+
++CC Tom, Tudor.
