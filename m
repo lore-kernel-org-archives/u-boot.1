@@ -4,92 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC82CCCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 14:38:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8407ACCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 14:52:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2937C838D7;
-	Mon,  3 Nov 2025 15:38:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CA756838CE;
+	Mon,  3 Nov 2025 15:52:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tSZJZpU6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NK3FzHUz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C6EA838DD; Mon,  3 Nov 2025 15:38:15 +0100 (CET)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 2A3C1838D7; Mon,  3 Nov 2025 15:52:25 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E66EC83700
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 15:38:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CA9E83700
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 15:52:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-656a5e7b07dso270232eaf.0
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 06:38:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-640aaa89697so2466701a12.3
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 06:52:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762180691; x=1762785491; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LiyoHTuhuvd64naYlKXrMzoSHz7vUd/GRDkxe1u9MxY=;
- b=tSZJZpU6R8Go7w+eI8IMPWRJKhvCdzLljZAPRTSp4gz8vX2eS45DiM3YQHXfnh2nSk
- TjrHpIwE79y+YwT/IsLGMsbvTP+3SSttEo+SzqOLqFmZTelsUn5vZ8xmTxNlZ0/EB+xm
- jd8b0hbEHUiy5lcTPcHC3h52CYqShf6bzGl0o=
+ d=chromium.org; s=google; t=1762181542; x=1762786342; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bOBtoNPedl4d5UpzDFD5KEOC+B828zIbrm6EynT7S0Q=;
+ b=NK3FzHUzoy853tHSkPt3sQAkC0y/ORz6bdkSNhCz79vOSwURx7JxRGZ/BpXV4c98Aw
+ hIXoMSHqpG647y0L6MZBkFIvBAdxTg1bIzKdSHHP8wx+iHuPcatjIvHJficomverOdNs
+ wzQDA4/isE3hayivJwVMy2nLmFlE9Fr+05R/c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762180691; x=1762785491;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LiyoHTuhuvd64naYlKXrMzoSHz7vUd/GRDkxe1u9MxY=;
- b=hoqoIn9dHeWguQzGUFU4COwMA4b3Inv77bwUa4YAdKY3uYXiDn8K+kg8+aqzpXMI/q
- 471tx83WDcP5AqcOcsdYPxuUIgT2OtKEF/uuNSEMoiVZinrfqk6RPx59C389DRIpQ9R+
- AvZYBr6uIQxCBBCGjGYF8Eq+WRiPKBBXy7JUDzF2UzNpAyU2W9h5Jem2d7j299mqpXC/
- FP/HXAd7Wr4edntfjFKOqt3XBQUZW8/kt548YKIFWREgug7Y4z38kSHnGnysl9XTL9z9
- aSqWszJEpmDrrN+pPyRaazW7AGMSnMa44ysVGPd5gNoz+hKKdKpnkw4eklFSJala0H62
- ugTQ==
+ d=1e100.net; s=20230601; t=1762181542; x=1762786342;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bOBtoNPedl4d5UpzDFD5KEOC+B828zIbrm6EynT7S0Q=;
+ b=w4/DkBCqW/X3GbxQhHBQJTlU+eMur5I0tJdSzBEs6BaAOPqmRs9jdwizkrFapsQCbW
+ lVDnRj25s8gbXuUJI8k2CX0myB1rF/76dOOnzTJ6QHLiUUkrtJUsojflV5FB31/kgP6l
+ 2JYBT1y6GYSRRFItcXoKRsXp8Atjvyex1BlGOPs6Ep1Kqbw+r/VOVwujtT2fpTWwC8R5
+ Q0r9IkyTBd3bU8+fSdaHJ44gNvqQkPKSPsb0PV/Z4Lc3m5GpDEstDB59O2pDabZM2t/4
+ 7uxtSFPIuae/03TfNs7BkrogB8DDinQmCje6O8ZS5G9goNCapYnB4FfHV7NbwC7c6S8D
+ LZAQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV9hGwkUpGgXndxiyZc2JDLm/ND9mQQubQyaGyYfLfY6SAc3yC41xY4T3n/KdgRmhypNUhkqV4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzE18guarWqBy3188mKmfZBoMryyMAiHm7JsBW9UHp3j3QfSCbE
- eQxKWIH4mq12ZLmxYuHImWy7L99ijOxN8BJXffONcFyHk1LGXMoantcvsM3wpTG/cQk=
-X-Gm-Gg: ASbGnct1bvs0iTmpwulfJdgZJUkHdgy4V4a4X31/5Lgm+oYCNDpw21scsZqaWR0bNyY
- Cel1chwKQ2ny3hxQ2IsecrLdtPew4XR08RexVoL0yyTB6KQ8KH5AE5BS4mR5nRzYMBt1/p1LcRI
- ov6k2B4uILpuuqxcDN3u8QGnBFKNKMxOzorizq2xPkR1XORr92MJkfJdSU86k309Cth1+2pXXMC
- 88S6oa3LlCXcCzjtRW68S86FNWe8w+55lswblrTLxL0kzUiK3VRyYH8LIfBYDTk7fpuxikNUJdH
- bhlT8fyhfo7Nll1f173H2dHM43UCmFZyBkCOcapeZjEIxhkMnDm6iZ/01U6lLTrrpmsn3h3TmtN
- ydWfQAJ8GJfwUOYxJ6mwTxfNi+xSU5ApSmVbWFLbWJM1e4dRwhcjuqeVZqzKlxg9+kD8jSgn2m4
- G08dTRdkTmbcXWhuyu8rgMM3wfoRo6O94gAjc406pYgKB5o4cm7A==
-X-Google-Smtp-Source: AGHT+IGNWvUEROffNRKMSACfoLal+2AxXEVtY0SoirIV9fQr7hAVUpWGT8dGDR9Rt9UR5Ezxakjy2g==
-X-Received: by 2002:a05:6808:448d:b0:434:1222:e323 with SMTP id
- 5614622812f47-44f95df904fmr6032138b6e.7.1762180691584; 
- Mon, 03 Nov 2025 06:38:11 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-656ad0617c8sm142185eaf.4.2025.11.03.06.38.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Nov 2025 06:38:10 -0800 (PST)
-Date: Mon, 3 Nov 2025 08:38:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Andreas Gnau <andreas.gnau@iopsys.eu>
-Subject: Re: [PATCH 10/19] dt-bindings: reset: Add reset support for Airoha
- EN7523
-Message-ID: <20251103143808.GL6688@bill-the-cat>
-References: <20251101004503.2379529-1-mikhail.kshevetskiy@iopsys.eu>
- <20251101004503.2379529-11-mikhail.kshevetskiy@iopsys.eu>
+ AJvYcCXZhL44Z3vkpNRtDzwr4gqV0YCV4VkxhCPF8QGi2FLPl6DnEs1bSIhVBFhm0gNVU9fL21OvEfM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyNvD6DbegigqiNbjGzTRqdipsCrGHhNMwaPJQF54t9QLI+cSAe
+ Ygd47sY/ylkHLJ7togjXGeJnB263R5+mWxlilpZlVryRPcQzi69lzi8UI/7Oz++OSFZzz+ck07T
+ +kaBuE2FDyWlxnN6uJAMOvoQjf5OWwFPse/2+4Sfy
+X-Gm-Gg: ASbGnctJe9NciqSmDFGD9OIvY9nGcOKUcqddRuNGG1XBCeEPZYqa566X47KOA9vwof2
+ Vx9BVj2smw0CEUbHfEhok5x10dKzfbheQrIEMOXiUQBVa3pp1QnS9llM+dy8Y3TE/LhVAQq6o5R
+ +TMhlFaobFXNbzMYnfIC8Ucy+eRanQVv7tugzaXYJctwZKndZtgwnMQy+64S9NPgI0N2gZjMnOJ
+ hDfr05u34NmMGIiSHjTOdBAx6WlXcdqlebZtDqObrOTy6yz99EYR2Jnf106HAkk0i5pIxY=
+X-Google-Smtp-Source: AGHT+IEHkbhP+oAG1xSfs/un4TPCALxy0tgSt64SHBLLErC0mHTw+FBkTQD31q3K8NBnS5UcCV2N0D8s3LmYIbJazfE=
+X-Received: by 2002:a17:907:7253:b0:b3f:ccac:af47 with SMTP id
+ a640c23a62f3a-b70705f3602mr1382515566b.31.1762181541869; Mon, 03 Nov 2025
+ 06:52:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="w4nevX8cB24ppy4o"
-Content-Disposition: inline
-In-Reply-To: <20251101004503.2379529-11-mikhail.kshevetskiy@iopsys.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de>
+ <20251031-binman-engine-v1-2-c13c1b5dac43@cherry.de>
+ <CAFLszTgKWU7mnFdXAOX7rH8jcGs3QrEVy=49om49=FbdNj1q=w@mail.gmail.com>
+ <77d2b661-3416-41ae-9f73-68977a26aa30@cherry.de>
+In-Reply-To: <77d2b661-3416-41ae-9f73-68977a26aa30@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 3 Nov 2025 15:52:08 +0100
+X-Gm-Features: AWmQ_bmdZiqU2x7PayTgcBSulxGoTaxKEypnJhG5DzDSj1a9i7iQIVwM4Y4ENc8
+Message-ID: <CAFLszTjMEt2Ph+K63WM8z3yNiZdOwyo-HeQhNuu-6uULiw+3XA@mail.gmail.com>
+Subject: Re: [PATCH 2/3] tools: binman: mkimage: add support for passing the
+ engine
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Quentin Schulz <foss+uboot@0leil.net>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Tom Rini <trini@konsulko.com>, Aristo Chen <jj251510319013@gmail.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Shiji Yang <yangshiji66@outlook.com>, Anton Moryakov <ant.v.moryakov@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
+ Bryan Brattlof <bb@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,56 +101,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
---w4nevX8cB24ppy4o
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 3 Nov 2025 at 13:13, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Simon,
+>
+> On 11/2/25 8:53 PM, Simon Glass wrote:
+> > Hi Quentin,
+> >
+> > On Fri, 31 Oct 2025 at 16:23, Quentin Schulz <foss+uboot@0leil.net> wrote:
+> >>
+> >> From: Quentin Schulz <quentin.schulz@cherry.de>
+> >>
+> >> mkimage has support for OpenSSL engines but binman currently doesn't for
+> >> direct callers of mkimage (e.g. the fit etype). This prepares for adding
+> >> support for OpenSSL engines for signing elements of a FIT image, which
+> >> will done in the next commit.
+> >>
+> >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> >> ---
+> >>   tools/binman/btool/mkimage.py | 5 ++++-
+> >>   1 file changed, 4 insertions(+), 1 deletion(-)
+> >
+> > Please make sure this is tested.
+> >
+>
+> That was the anticipated and feared answer. I'll need to figure out how
+> to create a dummy OpenSSL engine which doesn't require any hardware so
+> it can be part of the CI. I have no experience with OpenSSL, so this
+> will take a while.
 
-On Sat, Nov 01, 2025 at 03:44:54AM +0300, Mikhail Kshevetskiy wrote:
+You can actually just fake it in Binman, or even mock it. You don't
+need to do things for real.
 
-> Introduce reset capability for EN7523 device-tree binding
->=20
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> ---
->  .../dt-bindings/reset/airoha,en7523-reset.h   | 61 +++++++++++++++++++
->  1 file changed, 61 insertions(+)
->  create mode 100644 include/dt-bindings/reset/airoha,en7523-reset.h
->=20
-> diff --git a/include/dt-bindings/reset/airoha,en7523-reset.h b/include/dt=
--bindings/reset/airoha,en7523-reset.h
-> new file mode 100644
-> index 00000000000..bb0a28673d6
-> --- /dev/null
-> +++ b/include/dt-bindings/reset/airoha,en7523-reset.h
-> @@ -0,0 +1,61 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
-> +/*
-> + * Copyright (C) 2024 iopsys Software Solutions AB.
-> + * Copyright (C) 2025 Genexis AB.
-> + *
-> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> + *
-> + * based on
-> + *   dts/upstream/include/dt-bindings/reset/airoha,en7581-reset.h
-> + * by Lorenzo Bianconi <lorenzo@kernel.org>
-> + */
+For example, see testFetchBintools() which uses mock.patch() to
+provide a fake download. There is also command.TEST_RESULT which lets
+you fake a command - e.g. testVblock() does this.
 
-This is as good a place as any I suppose, so what is the status on
-upstreaming all of the bindings/etc changes for this platform? Thanks.
+If you are worried about how to get real data so that the test will
+pass, you can just plumb in some canned data for that purpose.
 
---=20
-Tom
+>
+> Just to be sure I'm not sinking time into things U-Boot has no interest
+> in, would supporting OpenSSL engines for signing be mergeable? OpenSSL
+> has deprecated engines with their 3.0 release in favor of providers (see
+> a recent series on the U-Boot ML for their support in U-Boot and
+> https://github.com/openssl/openssl/blob/master/README-ENGINES.md for the
+> official stance of OpenSSL on this). Porting my employer's engine to
+> provider isn't planned (yet?) but I would like to know if U-Boot has no
+> interest supporting that use-case, in which case I will "happily" keep
+> this downstream only.
 
---w4nevX8cB24ppy4o
-Content-Type: application/pgp-signature; name="signature.asc"
+It seems very useful and interesting to me.
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQi+TAAKCRAr4qD1Cr/k
-CpfpAQDSpKoTZcM5wrSxY5ip2eEE6+j3saw37drj63QNqE0Z6gEArvLRFs0G1TNi
-mbCH8IFmZ0vnZ6DWbXp7EBaag/MV8gQ=
-=uRaq
------END PGP SIGNATURE-----
-
---w4nevX8cB24ppy4o--
+Regards,
+Simon
