@@ -4,170 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE77CCFA03
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 16:48:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B6D3CCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 17:50:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D2EA836D1;
-	Mon,  3 Nov 2025 17:48:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id C4B73836D1;
+	Mon,  3 Nov 2025 18:50:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ZjM393bY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="td6vvOqw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 994D6838A5; Mon,  3 Nov 2025 17:48:00 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 78B6B838A5; Mon,  3 Nov 2025 18:50:15 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92D148331F
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 17:47:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 2C9478331F
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 18:50:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TuKoFrDCmSCOb1IFyu8zBBPyqQzT4ShC9QICwLBFOK99C6qrhOqVFR2OCdH1sDOZesFxX/I6IN0Vf2WMd0lzf6YWtheIpIGfUu/n0wRQCfNHcrY9/oJVDwGJDWFaWyHYE0CHT3mrTlARTLMHocOLycU3Q88CzkbXJ24Ndq/idhAzdMmhTwQTg6wHxnNi1W9dndquhvws0op4WJEunj0wug0XwNQ4jlg2p5Ja5XIF8hQUNwBrpthXeFSrzw/YyIGBAUNtdU5CtPtaCi9dj+9zQl3vDy/75eoAd68L71AbhnpX0mwm5jpbImFMCXg/XGquPDGoxZCzJl8nn5ZCyOndNw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rf3/OISQem9LMwWnvJm+NxAInI7+QCkTijPMMk14q9E=;
- b=WX4F/BiNKdNDavzjAIYRPOWX959efT6QbaVOklMoFdV2LWhjPdni95Du29xOe8+lMpr0/b24n2g5+bTILcrFvfT4zF08tszjIkG2cbNKKfoAt3NQY7X8V3A09fFyO/Q+6IMtJOnWjdksvBJXg4+COlnIltDCI7tctFyFfek6zMBJOG7KSKof5LHiISZdl1DrpOBkfIsaD12JDs+BhepnOQligJq9Zdrm0uF6ngjD5EKddi0da+WexGhN2jhP8mUrxXFQjztqyis1VCtq5bq5y0qA9rMYHBl1N7ZcAURd9xbPvQetmd+UwiO/E23UQ8d8QWLl0LSmJ0j7O/mP+bjtUA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rf3/OISQem9LMwWnvJm+NxAInI7+QCkTijPMMk14q9E=;
- b=ZjM393bYRbuKrxRUW6HSCZoIj8Fx1XAM/uzHMWXbT17MO4ga+UqI23c0tGe1q+snbUWhzRXFlgO2lwZGL8F7/Dtk1fHYvBb7RNYrzTa7GFcMwI7YfU50ZtWzDuvdjKRtZf0Wtl5CRBsQNlet8sgQ6bb3jL73zvAJAfDg6VGLfuM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by VI1PR04MB7054.eurprd04.prod.outlook.com (2603:10a6:800:12d::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.14; Mon, 3 Nov
- 2025 16:47:52 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9275.013; Mon, 3 Nov 2025
- 16:47:52 +0000
-Message-ID: <d7173975-9308-4767-80d3-3472f9873dda@cherry.de>
-Date: Mon, 3 Nov 2025 17:47:50 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] tools: binman: fit: add support for OpenSSL engines
-To: Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass
- <sjg@chromium.org>, Paul HENRYS <paul.henrys_ext@softathome.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Shiji Yang <yangshiji66@outlook.com>,
- Anton Moryakov <ant.v.moryakov@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
- Bryan Brattlof <bb@ti.com>
-References: <20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de>
- <20251031-binman-engine-v1-3-c13c1b5dac43@cherry.de>
- <CALeDE9MYi2+u_ek1Rapmzx2_T9uE_cQcH8paKgxKwZjtGJ2gzg@mail.gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CALeDE9MYi2+u_ek1Rapmzx2_T9uE_cQcH8paKgxKwZjtGJ2gzg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0090.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9b::8) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-654e25cc7d7so2178880eaf.1
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 09:50:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762192210; x=1762797010; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I8sbK6DSh6gQrjVAjWffZTSTGqSEbxUtMTPBMWHiayA=;
+ b=td6vvOqwyTHfGO3NOMZ/rAPJgvpN9ILKrj/g7IBojgnI5/6TKAsCv18gYvx6fNqbMO
+ +bdIlSjvIdOHVfIfOE9fod5gYeT3PBgEX1xYjZNGrohMSYlHR0cZwCNYaQkAnjie9+Rw
+ +xBQscbIf5Z+YZHlffI9jq0zKmQoQLoQTL3eY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762192210; x=1762797010;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=I8sbK6DSh6gQrjVAjWffZTSTGqSEbxUtMTPBMWHiayA=;
+ b=jkOe1BDB8+DJOzGXLxoWPzAqs5e9jnYsUprtkf5QmaS0wUpI00aUrvXv2YkgJ/9dPq
+ YjltasAkyMVKJBeFQvxHv1C/0OiHVLs4Zih18PLva7N3Bt3SqAxqjAQu3Lx/c/APQEV7
+ 64swJDrvFqkLyGOBxdjylc/b8KOctE9ZvscIxe5ToO6b93RGM079GeKa1IbnqIiokSjP
+ hX5Is3VJye60Vi28F6LJyD+8NYMa3v+XDXfMfCTadbsA6+qs7zZkS8NyoWuqI4Y5FJn6
+ 9lNm2MYJ23PwRvumvYX8ttDAdZendKTCPR1Z0KT67u/HRR8rTS1pA77jFviUhdhSFLXV
+ JyRw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVj3hbIOxJriIpiljoO+qtCKc2TpA1nAbhCOP2DwCr8V3QjYzQHbolPAiEM4Kq1k9RrHAlixpM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxeK3CqFSYN3Ou5AYPi2LgIy4/bGexwk5cxKj4K1sBRCimv/CQM
+ VPPKJ48zlbjHxkBCJlByqvsc0Qdx7yEJulvl5iJz9yxyPJDnddPBj1MNSiw7xCJ+QbI=
+X-Gm-Gg: ASbGncvziZP+lYizcB9QojrUT5dmI+kwtVziNVVVgQDwSEiXh+yW1wox2ggn+XpgtJE
+ /KDfpXZ/IU1iv7GJf7R9SR+5tAFwfSKZb9gzgjYqE1SsDQ+7CH7R+f1JUqq12qWiUiVpqyVWypI
+ KSoQV6o6KsmhI0pOCY0Hc0AEQWnpnYIAdx73nJXSrOPai742VfOoVbsjOrNWODgsX8kquL54wDn
+ x6rzr7gugbh8fsu+Iu+dZCZNno5hRQdFb+NcM6JZj5pocVvIZLFNoH8HTTaApOrIJFauzI0gUSC
+ VQpDCC6BEcB30iuC29MzH6XSrlQ+hXuF3fqCrlOM1hIAwBA2whzjh97WfNC6RhQ343nWdBZ+dhG
+ neJSdbkLGGIOxqvCG/pNT3hQfJ/aF4o4vqueNCY5qTy5XrqAU1kyoIyoXD7A4dZ69AGvTnJmC83
+ RFrVV/k8XjA7r4DPxhWc23vr6BTqa/uahiA2jW7v0hpPQJg2S+
+X-Google-Smtp-Source: AGHT+IES3tWq+D+3gOX09DwOLefON9WPHIqsFqh0pROs9zAGJaJKoqLpskOFxwRwz5lOid3to0/JtA==
+X-Received: by 2002:a05:6820:2008:b0:656:6e2f:628c with SMTP id
+ 006d021491bc7-6568a197d92mr5658162eaf.0.1762192209808; 
+ Mon, 03 Nov 2025 09:50:09 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-656ad42c713sm237826eaf.16.2025.11.03.09.50.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Nov 2025 09:50:09 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+Cc: Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+In-Reply-To: <20251030-feature_sysboot_extension_board-v5-0-cfb77672fc68@bootlin.com>
+References: <20251030-feature_sysboot_extension_board-v5-0-cfb77672fc68@bootlin.com>
+Subject: Re: [PATCH v5 00/20] Convert extension support to UCLASS and adds
+ its support to boot flows
+Message-Id: <176219220832.3330001.8393354242838443950.b4-ty@konsulko.com>
+Date: Mon, 03 Nov 2025 11:50:08 -0600
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI1PR04MB7054:EE_
-X-MS-Office365-Filtering-Correlation-Id: c9085b9c-b72c-471d-68e1-08de1af8baaa
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|7416014|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SVhtc3YvRzVqaWx5N3BwVC9wekgwM0k3OFF5ZzI4ZnZGNmhBeWJ4aStWV2cv?=
- =?utf-8?B?bWdCM0ZCN1hmNUFNcTh3dDM2MUxlY1Z5SjMwU0h0dnhnUEdUdjZGUzRxbE1Z?=
- =?utf-8?B?OHhHYWVlOStvSXI3Y1ViWTUxQjQ2Wi9NdWEzd1pwSWl4YVpBU2p5ZDZMTVBh?=
- =?utf-8?B?TW45UFJudEpBdHJPazhtaE9WZjhRSVo0QXJ6L0xXV0ZsSjUxVlZKTzVOOHk0?=
- =?utf-8?B?eEFyYlU0UjN5WXJocmdjYS9oOXVLb1NUQ2x3NGNTRmlvNDBuMHJWT3EzWW93?=
- =?utf-8?B?MEp0WlBGSEhIVUhTejlYTzNYczlDSWxDYk04bHVNZmhrNE9LZkg3eFNnQXEw?=
- =?utf-8?B?Z1crb09DSWtPcmloTjJ5Z1RTTk12WVc3dU1WSTVWWDFVajJGRTFubU8zZEJ6?=
- =?utf-8?B?UWRseUhXdkxOOUlJQ3g0OVFaR0VGc014NkpsMzRMMytwcGdvdTd1amEyeHAy?=
- =?utf-8?B?Q000MTZIUUJzMzlWSWY2WndMWU1SbHBONkVtajdlMWNzMVQ1d3NtOGpmZG5P?=
- =?utf-8?B?V0JzMm5IcUZSU3FFa3F0bmtWd0JPamVNL1J4SWpmUUxjeC9aUzVMb0JGVnJh?=
- =?utf-8?B?Q095NUlnM0cveGhHNnRmb3k2c1ZjTTlRaDMwNEtXbVNOd1VUcnpsNkRjVUx6?=
- =?utf-8?B?ZEgvVStZb0tONm0xWHhJSTVWT1kya2ViMFFXelF0dVgwalo1Q21CN3plL2Vw?=
- =?utf-8?B?MC9kZUhNL1hmR3hKVzhYMm1GOVZGYlhLUHo2a3EycENIS2VaWWxmS2hNaWFa?=
- =?utf-8?B?ZXlqR0ZmaVRkR0x0d05ha3VmOE1sYXpNa1Vjeko5QXU1akhjdThYUlFiMk92?=
- =?utf-8?B?NU1tRVNqZ05vVnlWMjBGOTZZakt6UWZzeFprQkpGTzNjNkUyRnB5RXhIaXBu?=
- =?utf-8?B?a0Q1QWM0R0tySHNLYm15MmxoaHBORkJlUmN2WnpOV3huOG9DWDN3Q01XeVR2?=
- =?utf-8?B?b2l1SWQ0dERjcWY2QU5SK1d5cGlmMFFjcWV5aXBXVjUzcy9zaCtkbVRaMHBS?=
- =?utf-8?B?ZW9odWVkQmo2TWRxZEFCazhQR3gvZnRzUjd1NENCc2tPMDQyUXA5MlZxa1Z2?=
- =?utf-8?B?QjBUVVk4T0lCYmhTMHRESkdQczYzK01kdit5aVp4b0MxTjF1cGNTV3BCNytq?=
- =?utf-8?B?QVY3bnd3SW9IbkEyWGtoekVHNXRiUnVCNkU1UFJsSkV3MG5vZ3dRQjVhdDdL?=
- =?utf-8?B?RU8xTExuRFRPVzVoRDlpaFd3ZWZOb0kwaW9zWk02YVJGd2pPTlVPZ2hpRnVj?=
- =?utf-8?B?a2lRMUplZE9ZN1RHelh2WXE5RkkxSUVTTHNRQjM0b1p6VnVzTzM2M0tWdjMy?=
- =?utf-8?B?NFFjZ2NxVVFjK256a0NxNSs4Y3Jyd1lWWXRURVd6SXdDVVloZDBjUUFMbkVE?=
- =?utf-8?B?enA4cTFNSWtxTEUxM2cyRlRCVVY0clhybkFWSTdrSWpnZzVHOHg5Z2VVWE5q?=
- =?utf-8?B?dm5iKytGc1hraUE5RHRQUEI2Q0xQOERiZllUSEhuQWZ3T3h5YXNWNXdxcjNt?=
- =?utf-8?B?U3JJTVdubFZmL0JkczdLQUpOYWhId05MU1hiOU5JMis3V20xV1NheFNGYW5D?=
- =?utf-8?B?dHUyYkJNVjRDbVdWdG5BRG9GeTJiK2NnREZVbmY0a1NJa25CdngrTFE4ak9z?=
- =?utf-8?B?SlVlL3d0aWdNWDg3VXlHckNQcCs2WVhrTkYvd0trMlU4SmVDK0ZlZ21Nd1Zn?=
- =?utf-8?B?dGxhQytRVjI3cW0wUGhoTFZFeGtKYzZRSjhyMW92ZGdXQWg4c2JJOGtnUThz?=
- =?utf-8?B?azBlMkd5WFUwb2dTT2NZT0pRcTl6NGx4Z1FWSy9ONy95b1k3cVltZkdRekt1?=
- =?utf-8?B?SlA0Tk52MllvRldQZmZEOEZtWHp0ZmZDbUI3bm9vQzZuU2lMcnRqMDIrY2tJ?=
- =?utf-8?B?NzVnV0w2bUlGRnU5dFl4UDg1UlQxV3Fkem53dVBSOFNwOHc9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R2RYRUVkZ0dGMkd5MzFIaGhZellOL3ZqRTB4U2VVeXJtbFB0S1Vndy9JVGFn?=
- =?utf-8?B?a3I4WkNuQldOSDl6NURvRlhsSWNrK1IvVy9FN09vSzBQdmJ4NDRXQ3VPK3p2?=
- =?utf-8?B?RFNDQi9xWE1SaFV3RVM1UHNMY0h3VWNVVnRCVWN4c05EaXlnSEZZOTEyU3ow?=
- =?utf-8?B?bnB6VjZkbXZ3TjlRdlgxQ05vQkxlSm9EQzFJVWdScXVtRkNaSlp0THpib2J2?=
- =?utf-8?B?OVdFdzBDVFhlYUtaYTBBTkxoeU82ejdNU2NVMGVrdmV1ZW1DZm5DRW9GVmFS?=
- =?utf-8?B?dXBPYnN1a3p2OTlibU9LK0U5ZEhRT00wUDdXbW1XTFRXV0RDSE56T2FLdkQ2?=
- =?utf-8?B?ei9sdktDMnMyQ0RlaVl2N21zN0NsOU5VWHF1OUwxUVUya1h6dThuNFAwcldV?=
- =?utf-8?B?ODVGN05nczlzK1JPUmpDdXk2dEVpUHhpdW9Dc0hJWXN0OFQ2OVV0N3FwOE5k?=
- =?utf-8?B?bEpPQ3djVXBDWm5TODhtRnVnN251ekFWQUNQNndTOEEyRFgrRDd6SGMwVVdX?=
- =?utf-8?B?L3l3dGVrazlIdmlZZ29rOGpNZGorblRvVXBSQ2M3ckxNbzNHczVob3VNTXNM?=
- =?utf-8?B?U2xIZW4vTm1xajBtZlFBc3RoNW1RN0toczY4eG1uOGlJVG85UVhwQ20ydnJj?=
- =?utf-8?B?TDh6cmt2dURMWVlWV3pKd0tESWxiU0NVYXRKUlk0ek5sNE8vcU55T1Jtb3RF?=
- =?utf-8?B?amZUV2hiZzcrR0N1T3Qwa3laYkZ3VmxmNXo4R0VVcHBVbm45bGsycjhYOU8r?=
- =?utf-8?B?dEd5aU10a2RmSFhORjZGVy84cENpTFJyMEtxaytpbzB6SEptM1pkN0RROVVt?=
- =?utf-8?B?Zk80ckJQak5haDJROWJ1S0ZhdTdPKzg3R25HL09ad1RpMU5tWlFQSjE4QTNF?=
- =?utf-8?B?cnM5Zis3cit6WnRycG9LZzZLZU1BdU54eXlWalZFZ1ovZzZiNzVRdTFoUzUr?=
- =?utf-8?B?cEJqbkNVdWxsRnhkamQ4L2tadWlzdWgra0MvQ0g3MCtJQnFBVmVhMU9Sa3B0?=
- =?utf-8?B?MkhBTnQwOU1oR1NaY3gzdGNDVlEyNWhURmFSVnlvQjRpQ2pIM3lva0Y4WTl5?=
- =?utf-8?B?UzdNR0ZSVlBEVkVxaEVYTXhHSHpDSnJyQ1l6eTlYSDU3OHR2a1ZsMXh4Y3NT?=
- =?utf-8?B?R2k5WmJLeWJxS1BUaDRualRFR3hOSXQrT1ZQcTRsMUVsdkdEWEZkcUVjVEhQ?=
- =?utf-8?B?WnQwNkQ1VjRpTitlK0JVQVRWN2EwdnlZazZYaGZTMmZ2Qll5REthOWpQZTZk?=
- =?utf-8?B?NWwrVjlWY2FEUjJEUG4rS2l2VmpnaWtCbjljdElQZXNBckY3OEltWFR4OUNX?=
- =?utf-8?B?UVA0TWxHWi9oTlNxUVRCWllmNjA4L25yeW5DYTFYVXVCRVk5djNrZFB1MUhm?=
- =?utf-8?B?RS8wS25HekZTTkxSVkJuRTVwQ3ZQVWpQQ1hJOGZVQUJac2tHQ2VZREtuRWN3?=
- =?utf-8?B?UTM2QW9Yb2tUZGk4WU9KQi9KaXBsNFgxMTVFV3J1VTFrTkJ3TXNSQVNUYjdE?=
- =?utf-8?B?Q2tMTFgwR09mNXJPWFlqUzQ0cFM4b2l6bnEyQk1zK1BOOFdveTBZUzhNZUNu?=
- =?utf-8?B?akRlSDJKZTc3MDRyZHNUZjdNQW90QnNnSVVWL3UxL0U1S2pkUEtEU3owUWlL?=
- =?utf-8?B?TW92a2RBdU1UWmxSUUVLTnBkQmliRGROWHIxNXJlQVZHcm9jSXhsMHdxckZN?=
- =?utf-8?B?eXRUMEEwU3J2WDQ4NGhVdERiNU9wcWNTVm0wdWdtQnBrSG9lbUtpc2RLNVpz?=
- =?utf-8?B?dVp4UWNTeXZqZUlqbnc3NWNkejRCQkZzcDd3NkRLaFZkNEl3aTlmM3dsKzdE?=
- =?utf-8?B?eXdjSC9pMjF0VmdZdXpzajFRZ091S241MFNvcFNTRldNR1ZuL3Z4K3RjZlV4?=
- =?utf-8?B?bTl2cjI5dzRsY1JWOS9iN1RQNnk4cUpEZlZZMXZ1eDYwMlVvbUJ5eFNuemhr?=
- =?utf-8?B?TTA1ZklJK0ViOGpHNktwQ1RXbWNDb2tBRStxTDZpWmN1SE8vZm1kMGY2TFgw?=
- =?utf-8?B?dlpudDYwUWsvTXR5aWpDNlRQYlpOZG14WGk4M3ZXWTZwTngwajRPeUpJM1pZ?=
- =?utf-8?B?bitRaHk2TFBjK0pnUENPTlFGTEN3ZURsd2Z3VTdQd0JlZ0hhTy9vU0NUWXBP?=
- =?utf-8?B?V2M5WXpuVXlsMFhjSWhlUHFzVk44YS9EQzMwMXlEcHV1QWtITTh2RXZDVGRM?=
- =?utf-8?B?VGc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c9085b9c-b72c-471d-68e1-08de1af8baaa
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 16:47:52.4659 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Lj/YfNcrKUZC4DhH8fBFHTcDh0GIXfRBGEfk5FStoC0vxM57/CE0lRrBq5+kWbS11c6f2x8O/oH35HiqeRQPV4WVNPY51jGvhBgFjuWiVoQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB7054
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -184,33 +107,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+On Thu, 30 Oct 2025 17:44:53 +0100, Kory Maincent (TI.com) wrote:
 
-On 11/3/25 5:21 PM, Peter Robinson wrote:
-> Hey Quentin,
+> This series converts the extension board framework to use UCLASS as
+> requested by Simon Glass, then adds extension support to pxe_utils
+> and bootmeth_efi (not tested) to enable extension boards devicetree load
+> in the standard boot process.
 > 
->> This adds support for using an OpenSSL engine for signing a FIT image.
->> To use it, one should set the fit,sign-engine property at the FIT node
->> level with the engine to use. This will in turn call mkimage with the -N
->> option.
+> I can't test the imx8 extension scan enabled by the
+> imx8mm-cl-iot-gate_defconfig as I don't have this board.
+> I also can't test the efi bootmeth change as I don't have such board.
 > 
-> Just to be aware this should likely be a OpenSSL provider, engines in
-> OpenSSL are deprecated and due to be removed in 4.0. A lot of distros
-> are already dropping support for engines. There's a patch [1] adding
-> support for Providers support to U-Boot, I suspect we shouldn't be
-> adding more deps on the Engine support. OpenSSL 4 is due in March.
-> 
+> [...]
 
-There is no plan (yet?) migrating my employer's engine to a provider, so 
-I have no interest in doing that.
+Applied to u-boot/master, thanks!
 
-Additionally, Tom said[1] that LibreSSL isn't going the OpenSSL route so 
-engines probably are here to stay?
+[01/20] MAINTAINERS: Add maintainer for extension board support
+        commit: d7d05f86fc4c6f4f84a216a237c47a9bdba5c73f
+[02/20] board: ti: Exclude cape detection from xPL builds
+        commit: 4c9d907eef08f9c23c8136f4e957e2e5ed8028c2
+[03/20] board: ti: Fix CAPE_EEPROM_BUS_NUM Kconfig dependency
+        commit: 5b68f58a0883a897e44e8356061103784e49d046
+[04/20] board: sunxi: Exclude DIP detection from XPL builds
+        commit: 9279a00c3c8e32461c901219121e066c9866c8e6
+[05/20] board: compulab: Exclude compulab extension board detection from XPL builds
+        commit: 06199ca751199bc432f33f10a3992df27a3bdac7
+[06/20] include: extension_board: Document the extension structure
+        commit: 79cd6e78ff6387685e0ccb5f7382d808478155dc
+[07/20] boot: Move extension board support from cmd/ to boot/
+        commit: b7edeac950dae10759527a1ed0d1c306710ec9de
+[08/20] boot: Add UCLASS support for extension boards
+        commit: 78a06090f4860d52dfd1577619f53a7ec75122c9
+[09/20] board: ti: Refactor cape detection code for readability
+        commit: b2e7b1df3bb8c88a6d5e27f29e152d61f2ec8eb5
+[10/20] board: ti: Convert cape detection to use UCLASS framework
+        commit: 58a36be4ac8bc68ce6069eddcf8ee3fe2178404e
+[11/20] board: sunxi: Refactor CHIP board extension code
+        commit: 56cbcb1cc957870148c31a56237c07057d02c7ef
+[12/20] board: sunxi: Convert extension support to UCLASS framework
+        commit: 53e14e9c0c606f0684a3ddb09afebe4b5eb89926
+[13/20] board: sandbox: Improve extension board scan implementation
+        commit: 37c6cdb053573587afb57e09a2f5096b4b71c442
+[14/20] board: sandbox: Convert extension support to UCLASS framework
+        commit: 0487fbec7bd47a8c8685433d1bca260832c668a2
+[15/20] board: compulab: Convert imx8mm-cl-iot-gate to UCLASS extension framework
+        commit: 6f5b839d5ee1ace365c3c1ba571db7f57bb48433
+[16/20] boot: Remove legacy extension board support
+        commit: 2d12958ee71b5f400ff2045aebc9730e8e219340
+[17/20] boot: extension: Move overlay apply custom logic to command level
+        commit: f9b139342c4f6cc067df06692e6dcaa4ba2edafc
+[18/20] boot: pxe_utils: Add extension board devicetree overlay support
+        commit: 935109cd9e97b2f48b177b7c31373325deab44c0
+[19/20] boot: bootmeth_efi: Refactor distro_efi_try_bootflow_files return logic
+        commit: d3008a08d822d545d223e6ce53b0c590bb6c83a8
+[20/20] boot: bootmeth_efi: Add extension board devicetree overlay support
+        commit: e9dc6c12958fc5d909848fc3999e6be5df1cd3ae
+-- 
+Tom
 
-Also, OpenSSL 3.5 (LTS) is supported until mid-2030.
 
-Cheers,
-Quentin
-
-[1] 
-https://lore.kernel.org/u-boot/20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de/T/#m8002ea155864cf8d1ab2b8bb16b997089f4fac0e
