@@ -4,80 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22BA1CCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 10:29:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C63DFCCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 10:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74B7E83642;
-	Mon,  3 Nov 2025 11:29:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A1EF838AE;
+	Mon,  3 Nov 2025 11:36:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LD7mLZlh";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="AaZiVXQz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FAD8836D1; Mon,  3 Nov 2025 11:29:35 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D06A2838CE; Mon,  3 Nov 2025 11:36:18 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC2658331F
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 11:29:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FA6783642
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 11:36:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7c5308f6aedso3062827a34.1
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 02:29:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762165771; x=1762770571; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3Fm/JFbWWoxAHhevdkcfchDkctKFOyfGpDZOAmXLPTU=;
- b=LD7mLZlhL106W8zfnoQO0Aq124oCylX03WxGDJf7wM55vrStp6NzeYs7lg7gqjaWTK
- 6XeMuL8M16kGlCAce051dTNcw0QlAVEJO0eoQlPqqep7sHDEo9XqzTK2GeUsqnulxtN8
- asGe/Drt2Wl+lCGQQc620l+6GGfkBtN/CnVWJfeq8sZR6XTgfBAO5JxXgxoiORF38aaz
- oWozfBtmAJUcGJSW0kiCwP9D2m1jTcAJ9ZYSORKyixZLBz72CwtPIxDw0TpFsHOUHd/y
- GS/51ui/fkr8qNGXcnp2a28khfpWQfGQ50pp5NeovTFusCq+CDYUpNTmlXZsxLFfnziD
- 736Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762165771; x=1762770571;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3Fm/JFbWWoxAHhevdkcfchDkctKFOyfGpDZOAmXLPTU=;
- b=t1Y90jqbRATc+FuUAnLXaISrlq/MUYfbuYFRaci7DH+bXkO9omuZflh8B9vcLjJU9F
- EwPR32Bz2HCKOtYG4OdjLpcpZQvoMb6IZAl65UjbbclqsZTTU5lxLTY+h7vqhu8jzkSu
- yds/2KdZwENlcEq128oxL7Wf6B/37L0nOC78WPc0P4Ua/DFNAcqH4YNSEOo+Wh1xwWS0
- AIy7muZ37IMlQGqVfnfkpjTp60ww3b9eFvoKRncPBaeQmUE711rj6CQEbNgS8AhFSJjH
- STsTOFG7Gmp8iXmUUzfCE/j8XKOTcdh2aIxtnX9JD0tNNQoY7EkxqklWCwdn0JrRJENS
- 97Gw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUvePykssPyyiIkU0uSGuc7EBfap1RmhbBXA/jzmbYu/JRVg/8WqF7RpBU1Twp9zuKv1rWUZ9E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2BqRSgfttKHR8OfZNtKLryYSqOT9VjPXUrZ9HJn9D/LWNiZnW
- UQTmX8VDkQeaET7pS3trq2bOnHQb9gq6BGavPpfnW0m5ckbQgQZRO8+qWZVRfpIm2r4NFWgN1qz
- TJsLRwRfvTRsTLwCBaI3jwad8vPZtnRs=
-X-Gm-Gg: ASbGncucwlsnPRi6VQeNbV033TfaCHNOPRwN+J+zTKiBffp9efpReflnNyvCeUFiOxv
- mI9Snr9okhLRmFIC7J97PGq2cQA9bsX6JHItZKST7D0OdSZo2G34tc0dvoPDyyy2+MrNjUR1kAQ
- N2ToiGQrKwveg/k+MyVrxO0Di1XyhLqxHbLtGGru+RuPaCFjBhdi+ta4A2TFs9xIR7b0ofJSMnn
- 2kvJcJqXJ77BiAg525erKSyxI92ahnEpm8Vc1XkrRmH6a0qR1h0431gjtwrzQ==
-X-Google-Smtp-Source: AGHT+IFM96tYwvW6l/YXTqCoeemfpRIjvAg/3XlBbjbZlz9uyXNo+5Te3bNJ1gWgZ9CO5O2JSCiySz00X6wJxsCuuZ4=
-X-Received: by 2002:a05:6830:838e:b0:7bd:bc5:fa9d with SMTP id
- 46e09a7af769-7c6967bdcc7mr5962661a34.29.1762165771440; Mon, 03 Nov 2025
- 02:29:31 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=f764=5L=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1762166175;
+ bh=BzA/9N4OwIpwFPmLq86ePRh4l2911CaD1CptTOwrf6s=;
+ b=AaZiVXQzIPQucBU2QDg4PPsc8apKU2zAsy1h8t/ygwHdT/b1RMrIK6Yp+YMHsYgBt0Ugc+dYV
+ J0U0F7S9lPwp4/Te+/qCgh4VbMIBkFYcAej1dDziiwhuNLYrWNq3sDrZcqM8shQipcL5xAuIy1N
+ FdaGmBYdHKBYWk0l7pDy+RFoKK29jKO1mLcZ36J7Hf4gHEkDvFsWLNpPZpcwTqjHFII1Uw7vRGe
+ oZdQbIjY/Ejy0WzHX9dVYasJ0RV4cPGrKWqIOg7dn3Wkvda2y0+XcBZ5BvBKYBDWFs3bbfpoJCK
+ OwBS8fvluUKRCNsPr0W+qm/lWvcbpNi2iD9Ji2kDR4Lw==
+X-Forward-Email-ID: 6908859c828d1c0fe857dea1
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.4.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <9039b700-16cf-44c9-8e32-dfdbe73f29b8@kwiboo.se>
+Date: Mon, 3 Nov 2025 11:36:07 +0100
 MIME-Version: 1.0
-References: <CAN7C2SArdbhag_56MwOMGoaEYSLiHbHHo3KFhUS5U03ntEJbGA@mail.gmail.com>
- <0f8fa8d4-3cab-4555-af1e-03feaef81ca5@cherry.de>
-In-Reply-To: <0f8fa8d4-3cab-4555-af1e-03feaef81ca5@cherry.de>
-From: Sune Brian <briansune@gmail.com>
-Date: Mon, 3 Nov 2025 18:29:20 +0800
-X-Gm-Features: AWmQ_bljcvfm30JKEOFkpwzB12bo06xJ8rilEUP5FfwY0-i1_unRdh8Pwpd3ny8
-Message-ID: <CAN7C2SBiONLZLy3jwUW8OE2QkvJ+N2Av8zcu5PEPa0zZmPNOpA@mail.gmail.com>
-Subject: Re: [DEBUG] rk3399-nanopi-neo4: SPL SD init may report -5 due to SD
- power-on timing
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Revert "power: regulator: Add vin-supply for GPIO and
+ Fixed regulators"
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Dang Huynh <danct12@riseup.net>,
+ u-boot@lists.denx.de
+References: <20251101203429.1603832-1-jonas@kwiboo.se>
+ <20251103085135.GB1698@nxa18884-linux.ap.freescale.net>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20251103085135.GB1698@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,23 +77,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> the vmmc-supply always on (not configurable by software) so I cannot be
-> impacted by any change.
+Hi Peng,
 
-Comment on this.
-The nanopi neo4 has an sd card slot and mmc slot.
-The initial debug mail is only targeted on sd card.
-Where the MMC do not have any issue and this is
-why puzzle me at first place and yet this SD boot
-issue is having trouble for a long time and not been
-well investigate due to different works.
+On 11/3/2025 9:51 AM, Peng Fan wrote:
+> On Sat, Nov 01, 2025 at 08:34:26PM +0000, Jonas Karlman wrote:
+>> Rockchip boards may depend on a working MMC regulator in SPL to
+>> successfully load FIT payload from MMC. Typically, these boards only
+>> include the vmmc-supply regulator and not its vin-supply in SPL control
+>> FDT.
+>>
+>> The commit f98d812e5353 ("power: regulator: Add vin-supply for GPIO and
+>> Fixed regulators") breaks loading FIT from MMC in SPL on some of these
+>> boards due to now requiring the vin-supply to be included in the SPL
+>> control FDT.
+>>
+>> The commit also strangely enables any found vin-supply in
+>> regulator_common_of_to_plat() and not when a regulator is enabled or as
+>> part of regulator_autoset().
+>>
+>> Revert the commit to fix FIT loading in SPL on broken boards.
+>>
+>> If a board needs to have its vin-supply enabled, two options come to
+>> mind:
+>>
+>> - Add regulator-always-on prop to the regulator in the -u-boot.dtsi for
+>>  any board.
+>>
+>> - Implement full support for reference counting of regulators and then
+>>  update the regulator-uclass to enable any found vin-supply when a
+>>  regulator is enabled.
+>>
+>> This reverts commit f98d812e5353408ef77a46bad1f1cdc793ff8a03.
+>>
+>> Reported-by: Dang Huynh <danct12@riseup.net>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> drivers/power/regulator/regulator_common.c | 10 ----------
+>> drivers/power/regulator/regulator_common.h |  1 -
+>> 2 files changed, 11 deletions(-)
+>>
+>> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+>> index 3ed713ce5019..685d8735fa5c 100644
+>> --- a/drivers/power/regulator/regulator_common.c
+>> +++ b/drivers/power/regulator/regulator_common.c
+>> @@ -44,16 +44,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
+>> 			dev_read_u32_default(dev, "u-boot,off-on-delay-us", 0);
+>> 	}
+>>
+>> -	ret = device_get_supply_regulator(dev, "vin-supply", &plat->vin_supply);
+>> -	if (ret) {
+>> -		debug("Regulator vin regulator not defined: %d\n", ret);
+>> -		if (ret != -ENOENT)
+> 
+> I understand it might be not proper to enable vin-supply in
+> function regulator_common_of_to_plat().
+> But I have a question, there is -ENOENT check in the original patch. If the
+> board does not have vin-supply, there should be no issue. Or I miss something?
 
-w/o reverting the regulator patch the mmc still able
-to boot w/o any issue. And if I read correctly. The
-NEO4 board EMMC uses main power PMIC rather
-than additional power regulator [1]. So this is a huge
-difference in timing and boot stability.
+As mentioned in the commit message the SPL control FDT does not contain
+the regulator references as a vin-supply, this result in -ENODEV to be
+returned. I.e. following where the vcc_io is not included in SPL control
+FDT.
 
-Brian
+  vcc_io: regulator@ {
+  }
+  vcc_sd: regulator@ {
+  	bootph-pre-ram;
+  	vin-supply = <&vcc_io>;
+  }
+  sdmmc: mmc@ {
+  	bootph-pre-ram;
+  	vmmc-supply = <&vcc_sd>;
+  }
 
-[1] https://wiki.friendlyelec.com/wiki/images/b/bb/NanoPi_NEO4_2008_SCH.pdf
+With the change introduced in this commit the core gpio/fixed regulator
+behavior changed and this now result in unbootable boards.
+
+Other reasons why I prefer a full revert instead of a workaround:
+- The implementation changed core gpio/fixed regulator function without
+  any review-by or acked-by.
+- The patch was quickly merged after only being on the list for 1 week,
+  the imx pull-request that included this did not even mention regulator
+  changes.
+- The implementation is not optimal, looking up vin-supply could be okay
+  but not failing because it is missing, and enabling it during probe
+  when we already have working enable count and regulator autoset to
+  handle any needed auto-enable.
+- The commit message does not give any insights on why this is needed.
+
+My suggestion is that this is reverted and if needed it should can be
+submitted as a separated patch/series with a proper implementation.
+
+Regards,
+Jonas
+
+> 
+> Thanks,
+> Peng
+> 
+>> -			return ret;
+>> -	}
+>> -
+>> -	if (plat->vin_supply)
+>> -		regulator_set_enable_if_allowed(plat->vin_supply, true);
+>> -
+>> 	return 0;
+>> }
+>>
+>> diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
+>> index 799c968d0b66..d4962899d830 100644
+>> --- a/drivers/power/regulator/regulator_common.h
+>> +++ b/drivers/power/regulator/regulator_common.h
+>> @@ -14,7 +14,6 @@ struct regulator_common_plat {
+>> 	unsigned int startup_delay_us;
+>> 	unsigned int off_on_delay_us;
+>> 	unsigned int enable_count;
+>> -	struct udevice *vin_supply;
+>> };
+>>
+>> int regulator_common_of_to_plat(struct udevice *dev,
+>> -- 
+>> 2.51.0
+>>
+
