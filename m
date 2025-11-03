@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5096BCCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 22:33:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A59E4CCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 22:33:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3CF1838A5;
-	Mon,  3 Nov 2025 23:33:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 36798838A5;
+	Mon,  3 Nov 2025 23:33:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eAwh5bBv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aLN4j5OB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EABD3838CE; Mon,  3 Nov 2025 23:33:14 +0100 (CET)
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com
- [209.85.210.46])
+ id ADEE1838D7; Mon,  3 Nov 2025 23:33:52 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA5038144A
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 23:33:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A4AC8144A
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 23:33:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-f46.google.com with SMTP id
- 46e09a7af769-7c29466eabaso1300925a34.0
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 14:33:12 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-74526ca79beso3482949a34.0
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 14:33:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762209186; x=1762813986; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=al58R8FyPwiPRYcaTuIMlThOPXAeHdhyb6sOn3pN7sI=;
- b=eAwh5bBvAeFwCGe0qn57V60YpZQdzHdMDLCvDQGpFiySlF9Bwkma3jr/PhN+wlr6fJ
- Jy4eP9QdK3II8AZhx0SDMGFqYeIIiDAzjePCEQHYQFSVHd5gy+zpMOVZC83vmj8sTFhX
- p5m96VJPqjQ4NmUvvytio97nhLBzsL9tg6YznP/AW8OjFDnQRHATaFxERpIlvc+bpZge
- +/RnuRn6aUuQf3Z96Ye7jrEsUJ7NFHT1bTcnXarFYs0e9mxnQc3n3ZDiKUpwPdgAAPu0
- PDTcOgXphmp4F9scP47mf1ryQi0LUN7ekvCajVETGlD0aAHBUoTbcogC4pjHmEUekBua
- 8z2Q==
+ d=konsulko.com; s=google; t=1762209229; x=1762814029; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=reljXWJCNLTgH3w8InYFgQifnWNaaVW4B4Wh9qcK0FI=;
+ b=aLN4j5OBtlRxeJ7OrOqaf2rcqOxslDbkCtJycF4kY0C0GJIluRcCW7Lwrl5nQnhn5D
+ tl4oSOBqPIe+FwfO8gaunTEH5JJqmn6CiqBFOHpyDMgmRq7WO3zrnp6xGy0oQ8zhaaI1
+ pWzomRkvpvs7stI7MGoxp4yCUKo/bKnWL+o04=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762209186; x=1762813986;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=al58R8FyPwiPRYcaTuIMlThOPXAeHdhyb6sOn3pN7sI=;
- b=dfDRhARFI4S0+F9oqrGiKvPQhLABmd1F3fbsVWno+SyeYrsvE9Ixy51u57eTgE3YXq
- u+OEl5emXnfdbmRSMZM40pgXbKwL1zY8VqCqMTDnBbQ9QmlYQUJiRwiVFTRl9YFMCNWC
- SHtuh5Kx0kb6awmhexh5P3iyxXBJBK4lwVSFI1es4rS6vGllOAD+dqVPrPsRpRU2yKU+
- 1gCZPGkOdMG5rY3o3e0fRVHk4AScaJdSxbXEfZVMogKDs9oaKhc6/czdpTZe2RcGDb8w
- wtnrTr79rF/WQDvcoN6MyvyBIV8OQ//M/x6da0Qtamq7oiI0UtCtnYSCVKLGPWCF2Y+5
- kaRg==
-X-Gm-Message-State: AOJu0YzyWyO9CnOooESOmqN2hLyyAfyKlIXb60EbK3jQkTU6/P1Ulh3A
- bxYx5pQbMGYpqESDneNZqIDko/gcICjDBckF6YNApzRxlQCR7URvRVP0lPRsOj4fPYFl+NScBjS
- tuhJFQ1Zp2QyRSG1CaxM/tNFx0cVEixR1aETrKNQ=
-X-Gm-Gg: ASbGncsX8ZbXezWz8nMS2TMwVSHmrq1qFrAgtFvveJB2axaYybgIwSZ4yLFq8QVSwNc
- Ozg0dMPhKcLYwAWj3eFq0DZAFaDO0H6b1itflRYOuaEBbXFI27suz6oTp0CVYVzXhYsD5mHe1n1
- z7ADZKAGvtzYhvRXrJcPbaSHTGB5r8kUJbTyWarnwu78kgfBBvm00gNYQFTwaRrVmoYHS0P5vCL
- xVBmHlyZz26qh622na4EOvtSHwgVjXAyoCrwfFHrDgszJhPU9OEM+tSNJE44Q==
-X-Google-Smtp-Source: AGHT+IE1OliyARMVl1300av04aQhdAoNANU125xVZTkQM8uRrfrWVAskWuQaBppuATTfVJ7pRE6IG07mku5tzfnzosA=
-X-Received: by 2002:a05:6830:6388:b0:747:323a:67b9 with SMTP id
- 46e09a7af769-7c6967e1f15mr7313258a34.32.1762209186160; Mon, 03 Nov 2025
- 14:33:06 -0800 (PST)
-MIME-Version: 1.0
-References: <20251101035252.261-1-briansune@gmail.com>
- <20251103153657.GO6688@bill-the-cat>
- <CAN7C2SB0b_YjcJ+LyVUJwi5DjdjR5Ssi=yQwuCvSvBh3XVj+dA@mail.gmail.com>
- <20251103200959.GR6688@bill-the-cat>
- <CAN7C2SCY1Q2_YcJWVMs0Zv+ymcuXLXEhrkX2JGcJviOaKDf0sQ@mail.gmail.com>
- <20251103204237.GS6688@bill-the-cat>
- <CAN7C2SACKPnE07-dtwc437f8xr38936h3RWvP1R5Ha_v1KfCng@mail.gmail.com>
- <20251103221712.GT6688@bill-the-cat>
-In-Reply-To: <20251103221712.GT6688@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Tue, 4 Nov 2025 06:32:54 +0800
-X-Gm-Features: AWmQ_bn-4P8J4uD0wNCkkRJBYVJIJ8Qi-LaRPwaUuuz_wM9vy3oTXSeKr5NA4ME
-Message-ID: <CAN7C2SAGzmP+ff8LNJcs=1z3cS2kpzHOpEfq8JB6DNF29_Nkbg@mail.gmail.com>
-Subject: Re: [PATCH v2] Add make feature support for SoCFPGA Handoff
-To: Tom Rini <trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1762209229; x=1762814029;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=reljXWJCNLTgH3w8InYFgQifnWNaaVW4B4Wh9qcK0FI=;
+ b=f06gWDje2QvvnDwm5J2d4dyHQISQJFCA24kKQ3LssiyHlVlNyWnsHSCQVDyKqCLtyo
+ SkzmZfe4xPt1W70yIGnlXUmjZYvkzpHoFBt6ZBH2tZoUn1YnPax3FVTPpPeEgjll728t
+ gvLC3h9i0OzoSujhUqUgY5UmeD4UGBW3J5deORiS/bculkiCWyon9m2XF0XwER7Z0YUS
+ 2SC7FZ/WswqE5mLT33AET9f0poufWKQEJsHcwmEGYzyUbE3tYauC1EIiJP+YbQEcs+V3
+ scYRK5VzZQ7sSRCmDLTv8HS0jLx93oPrMmijGJn6L3F6m5oTwskkEhMk6FxswFwHcehY
+ UkCw==
+X-Gm-Message-State: AOJu0Yw/r3oWQxJK7jr/0JGK+TWdxE6Yop6sWmZOvwrIBI/nw57ahrsU
+ nYFXZ2MKgM6eTLr3qrtlXEiORt+BY3mNASFmHL7kvwS2LLm5uhfeTEcGBO7MBYHd2CiqCof7nQd
+ uOu87rB5pTw==
+X-Gm-Gg: ASbGncuZS+vUxDtzfY/LeVj0j2R2wsQ4xOw2IL4FOOZK8502W5HdDf1FTSrMWoaferH
+ k3L3F3uDcQiurEcEnxJ1pf/orRp98rDc8BsHODqqNnIDcRheg7sfQ1KDgRb4pPUnY8NgwYirgw8
+ RKYmkFkpP0utxNa+Hu/AbWWyqDHMFZtYcinhWmbMv/Re8wHao27bS5d2+l7BsSi4e4LgZlln9Vd
+ xRXzuFUGROLaVsldLlylA7ZeTqjUfEVnRv2EaBA9hbWFs7U64CItGfFuV1AanTJr2H+6gN7CwoY
+ vlLGKKm9ERBXEhaqfOj+/RZpKbn3linNbVyHVvA73bOZxpDm4XLKtDcI79C3l40gRJB/pqF24Nr
+ BKkpqmEKba1leFMzg1Qf+BxRHZmJUDBuezswvca1Fe3+rbSNtuivZdzoac8FvbU4J+88Ja3018G
+ D9e324bnWmdpiRTE4daC2r89bEj5ekAHHpBjJIA44=
+X-Google-Smtp-Source: AGHT+IHTE+eRE4qeegqrWw1sAny4XhAV/40IVQvLuqUV2DzbfLSaIFTh7cicK6naThiwp2AdPqXQGw==
+X-Received: by 2002:a05:6830:3805:b0:745:a21c:6a57 with SMTP id
+ 46e09a7af769-7c6967b4676mr7723778a34.21.1762209228780; 
+ Mon, 03 Nov 2025 14:33:48 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c6c24fff45sm506675a34.26.2025.11.03.14.33.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Nov 2025 14:33:47 -0800 (PST)
+Date: Mon, 3 Nov 2025 16:33:46 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Brian Sune <briansune@gmail.com>
 Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v3] Add make feature support for SoCFPGA Handoff
+Message-ID: <20251103223346.GU6688@bill-the-cat>
+References: <20251103222840.458-1-briansune@gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TGQ9Ub+oo1rR4AWd"
+Content-Disposition: inline
+In-Reply-To: <20251103222840.458-1-briansune@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,114 +97,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Well, I think so long as you can do "make xxx_defconfig" (and a separate
-> objdir not source tree), then "make" sees deps and re-runs as needed,
-> yes, this should be workable. Thanks.
 
-Fresh UBOOT
+--TGQ9Ub+oo1rR4AWd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-```
-make socfpga_cyclone5_defconfig
-  HOSTCC  scripts/basic/fixdep
-  HOSTCC  scripts/kconfig/conf.o
-  YACC    scripts/kconfig/zconf.tab.c
-  LEX     scripts/kconfig/zconf.lex.c
-  HOSTCC  scripts/kconfig/zconf.tab.o
-  HOSTLD  scripts/kconfig/conf
-#
-# configuration written to .config
-#
-```
+On Tue, Nov 04, 2025 at 06:28:40AM +0800, Brian Sune wrote:
+> Introduce socfpga_gen5_handoff_prepare target in U-Boot Makefile
+> Automatically detects Altera/Intel SoCFPGA boards from .config
+> Checks for presence of hps_isw_handoff folder and .hiof files
+> Runs BSP generator script tools/cv_bsp_generator/cv_bsp_generator.py=20
+> if files exist.
+> Non-blocking: prepare continues even if handoff folder or files are missi=
+ng
+>=20
+> Signed-off-by: Brian Sune <briansune@gmail.com>
+> ---
+>  Makefile | 41 +++++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 39 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/Makefile b/Makefile
+> index 750f8a84b1f..32568a6c477 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -2158,7 +2158,7 @@ scripts: scripts_basic scripts_dtc
+>  # archprepare is used in arch Makefiles and when processed asm symlink,
+>  # version.h and scripts_basic is processed / created.
+> =20
+> -PHONY +=3D prepare archprepare prepare1 prepare3
+> +PHONY +=3D prepare archprepare prepare1 prepare3 socfpga_g5_hanoff_prepa=
+re
+> =20
+>  # prepare3 is used to check if we are building in a separate output dire=
+ctory,
+>  # and if so do:
+> @@ -2190,8 +2190,45 @@ archprepare: prepare1 scripts
+>  prepare0: archprepare
+>  	$(Q)$(MAKE) $(build)=3D.
+> =20
+> +# Intel-Altera SoCFPGA GEN5 prepare handoff file conversion
+> +socfpga_g5_hanoff_prepare:
+> +	@VENDOR=3D$$(grep -E '^CONFIG_SYS_VENDOR=3D' .config | cut -d'"' -f2); \
 
-When the board/xxx/ only got qts
+This won't work with separate object directories. Please give things a
+spin with "make O=3D/tmp/somedir". It also looks like it's going to impact
+every board, and either fail or add some build time? Make sure both say
+"sandbox" and "qemu_arm" both build at least, if not a full CI run.
+Thanks!
 
-```
-make prepare
-scripts/kconfig/conf  --syncconfig Kconfig
-  UPD     include/config.h
-  CFG     u-boot.cfg
-  GEN     include/autoconf.mk
-  GEN     include/autoconf.mk.dep
-  CFG     spl/u-boot.cfg
-  GEN     spl/include/autoconf.mk
-  UPD     include/config/uboot.release
-  UPD     include/generated/version_autogenerated.h
-  UPD     include/generated/timestamp_autogenerated.h
-  UPD     include/generated/dt.h
-  ENVC    include/generated/env.txt
-  ENVP    include/generated/env.in
-  ENVT    include/generated/environment.h
-  HOSTCC  scripts/dtc/dtc.o
-  HOSTCC  scripts/dtc/flattree.o
-  HOSTCC  scripts/dtc/fstree.o
-  HOSTCC  scripts/dtc/data.o
-  HOSTCC  scripts/dtc/livetree.o
-  HOSTCC  scripts/dtc/treesource.o
-  HOSTCC  scripts/dtc/srcpos.o
-  HOSTCC  scripts/dtc/checks.o
-  HOSTCC  scripts/dtc/util.o
-  LEX     scripts/dtc/dtc-lexer.lex.c
-  YACC    scripts/dtc/dtc-parser.tab.h
-  HOSTCC  scripts/dtc/dtc-lexer.lex.o
-  YACC    scripts/dtc/dtc-parser.tab.c
-  HOSTCC  scripts/dtc/dtc-parser.tab.o
-  HOSTLD  scripts/dtc/dtc
-  CC      lib/asm-offsets.s
-  UPD     include/generated/generic-asm-offsets.h
-  CC      arch/arm/lib/asm-offsets.s
-  UPD     include/generated/asm-offsets.h
-```
+--=20
+Tom
 
-When the board/xxx/handoff is place next to qts
+--TGQ9Ub+oo1rR4AWd
+Content-Type: application/pgp-signature; name="signature.asc"
 
-```
-make prepare
-  UPD     include/generated/timestamp_autogenerated.h
-[INFO] Handoff folder found: board/altera/cyclone5-socdk/hps_isw_handoff
-[INFO] Handoff subfolder found under board/altera/cyclone5-socdk/hps_isw_handoff
-[INFO] Found hiof file:
-board/altera/cyclone5-socdk/hps_isw_handoff/ddr3_5128x4_hps_0/ddr3_5128x4_hps_0.hiof
-[INFO] Using handoff folder: ddr3_5128x4_hps_0
-[INFO] Running BSP generator...
-Generating file: board/altera/cyclone5-socdk/qts/sdram_config.h...
-Generating file: board/altera/cyclone5-socdk/qts/pinmux_config.h...
-Generating file: board/altera/cyclone5-socdk/qts/pll_config.h
-Reading file: board/altera/cyclone5-socdk/hps_isw_handoff/ddr3_5128x4_hps_0/ddr3_5128x4_hps_0.hiof...
-Generating file: board/altera/cyclone5-socdk/qts/iocsr_config.h...
-[DONE] SoCFPGA QTS handoff conversion complete.
-```
+-----BEGIN PGP SIGNATURE-----
 
-or simply
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQktxgAKCRAr4qD1Cr/k
+Cu61AQDG5v+JiJEPRLDAFc+8txQQ0tbK13cRKqCAaY1FPOwA/gEAjXfo4Fv4E4U0
+09rdY54fdvUW+smNXlCJXk/Ynfnn9Qc=
+=sVxq
+-----END PGP SIGNATURE-----
 
-```
-make -j 8
-  UPD     include/generated/timestamp_autogenerated.h
-  UPD     include/config/uboot.release
-[INFO] Handoff folder found: board/altera/cyclone5-socdk/hps_isw_handoff
-[INFO] Handoff subfolder found under board/altera/cyclone5-socdk/hps_isw_handoff
-[INFO] Found hiof file:
-board/altera/cyclone5-socdk/hps_isw_handoff/ddr3_5128x4_hps_0/ddr3_5128x4_hps_0.hiof
-[INFO] Using handoff folder: ddr3_5128x4_hps_0
-[INFO] Running BSP generator...
-Generating file: board/altera/cyclone5-socdk/qts/sdram_config.h...
-Generating file: board/altera/cyclone5-socdk/qts/pinmux_config.h...
-Generating file: board/altera/cyclone5-socdk/qts/pll_config.h
-  UPD     include/generated/version_autogenerated.h
-Reading file: board/altera/cyclone5-socdk/hps_isw_handoff/ddr3_5128x4_hps_0/ddr3_5128x4_hps_0.hiof...
-Generating file: board/altera/cyclone5-socdk/qts/iocsr_config.h...
-[DONE] SoCFPGA QTS handoff conversion complete.
-  LDS     u-boot.lds
-  AR      tools/built-in.a
-  HOSTCC  tools/gen_eth_addr
-  HOSTCC  tools/gen_ethaddr_crc.o
-  HOSTCC  tools/img2srec
-  WRAP    tools/generated/lib/crc8.c
-  HOSTCC  tools/mkenvimage.o
-  HOSTCC  tools/os_support.o
-  WRAP    tools/generated/lib/crc32.c
-  HOSTCC  tools/atmelimage.o
-```
-
-Any additional requests?
-
-Brian
+--TGQ9Ub+oo1rR4AWd--
