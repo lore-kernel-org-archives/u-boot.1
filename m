@@ -4,100 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DBD9CCFA03
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 18:52:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9894FCCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 18:56:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03208836D1;
-	Mon,  3 Nov 2025 19:52:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E2405836D1;
+	Mon,  3 Nov 2025 19:56:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="c8ClJvn/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MnLkAJoD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C8A583700; Mon,  3 Nov 2025 19:52:20 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id E5615838CE; Mon,  3 Nov 2025 19:56:10 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D076C8331F
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 19:52:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 828168331F
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 19:56:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-421851bcb25so2658041f8f.2
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 10:52:17 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7c29466eabaso1248265a34.0
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 10:56:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1762195937; x=1762800737;
- darn=lists.denx.de; 
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DiDV9VzV89nTjw70RhDz9NSxBj/EfqR14KHklHOYRKs=;
- b=c8ClJvn/o0CV3f4U9qdERI0V5lm7VqJID01v5qsvfPIog8HtHkstLVL5gjHUukzqOr
- ifkBz1GVwszz/FsevY8nvu4Bwk26IlgBXxKRvoKZzcDMVEwX+A+BALrU8HrynIOs+227
- dH7SipSukWhi5jOSvvRP9RGtMhhOXXfLZV9BLu6YXlvp836TGq5/jshUkNCwv4YzZrHC
- A21uEwgPDoON6DJizhNvggHGde6Nna0H0w6exxu1+A9pwoTCGLXzr4qTRY6tePIPMrAc
- MrvVN1+lra2iJ4z6MEzgxnPUlRZFQRTA2I0G1tFoFSsTXSYudrk94qM7Huhs9m9uif9P
- nE4A==
+ d=gmail.com; s=20230601; t=1762196167; x=1762800967; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NJ4b83dOJrien/Nmo/SYcAOK3uocYIXxW3N7l/sfohw=;
+ b=MnLkAJoDQm0p4yDxDSiBgKsCt+O7Eq3BbJbSZ9HtLZr6ilsUPOYk/32sXRdC40SBpk
+ YgCtFNnL1g+BMWACw4Xlws+EXV5Mv3Yu6zK3HLxMKTBgbU9arEsf0DpE2V4C87x0BWSv
+ yD/dHjboMsPxds49J8A+YLDxsFTsrNxK09/UYXaB4YL8/jK5zuwiB9iq/AUzW4F2D+JR
+ 7628Umq4nlBZFhBAl1ZR9iNDRAOPn7+QcjrAkqV3iMKRK2S8d6uSFaO7CEY6OWOVZ1rl
+ YPDH89PrQfjlbHo8RLhs+QPPg2VQqXUstUZGLCIlva5vN1nWc4wxbWZoNZPejXpCNfh3
+ 1iPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762195937; x=1762800737;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=DiDV9VzV89nTjw70RhDz9NSxBj/EfqR14KHklHOYRKs=;
- b=JqdDmxdY/dcpsJ3CAWGKoYOz7jx81qtYy27uoTYOB0xSyvbVDvmEIJidatOz9+vNs/
- FT97e2VhcxDxwOA3VNxrYhd7uXzhd6Gk2xvGPDoeH9mJ/feSBwFH044t9GTNCSlKAVqS
- XYy8dhxNDh6sTMvg4I27vMY8VCSwMt51b0EFYD1MhTPmuZ55diLqUeM+9nEzHdvmvgnK
- +Q1+p3P4MaXrnOatn2++Mna4IVvgSeyJc2VBrO9WxCQGAHkWDX0Ky0b4aV00EfLwyjWc
- hwNDuyPtRVahtUVeJMX7LKb3pvzWVS4TQ9Zi0jjEvxilqHCTVoune9q+AyL4RjR256Tp
- /v3w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUGGSts2CJik++/3Pqj4xcYMLwmMXJlbkie5z6ijw/2Rr83rjGSiMdHFIs5jChfUyiivh+v7Ms=@lists.denx.de
-X-Gm-Message-State: AOJu0YybfEeryDknDUAtwOHJmjad8BninoOIA2EcrJobt/8eta0U3E5+
- rqACRu24Kxq9jDSZ1V7VZB4M6grubml+f6elqprL0HKbsC0cQplV0HmqM1CC8GNnmJI=
-X-Gm-Gg: ASbGncsErnhDw7LVQ8527DHw2x8SIrBvHzHhVHjE/jNbJo+5hLGHhJ5peEltEw6vO/6
- lmt2J26fn6cmw1DvL4d8OTDtKtbVpj0TZLblDRgqIQCwijWWIMSE0OFcxKuQevCbfOhpkQrH+iZ
- mcDxY/G4E1UZUO41PWxIZADtVHg0G0CR4W4TBXYB3UEAdqO3gQiGwkmGH0X18l7MHtuLfghLm2m
- 7PECqdaPiT1bU3OUGoCyQPq5OSktUT5C9uXuEPs89VC3qHwhjOw27xYXilnb+altYZCPEIJpuIz
- NEddiLRBzjirSZ/gyqZx1lkEKf48BiDfO+BnCD2Enlh3WU7PzRfV8sMY8wc2rU3dH8GBo+w7rIX
- edLhaKXcJQEnUHSYeSw5Od2AzCpxjH54G6W/5xFit/vXA5F7qpKISvMDqvpUzjEC4ceyW8B9qac
- jmzumzsZnYW0nwNbZ53N8jaau5OybM/tyTNMOShR2a4183
-X-Google-Smtp-Source: AGHT+IHHbh6YsEtJ1JMH577WJrTCVBMmi4iT3FW9OVmXxRB412sBv5cq3b//EnCIzkZBHRcpG61oPg==
-X-Received: by 2002:a05:6000:186c:b0:429:dbed:2900 with SMTP id
- ffacd0b85a97d-429dbed3b87mr213278f8f.39.1762195937127; 
- Mon, 03 Nov 2025 10:52:17 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:e50:3860:23eb:8c68:e19:f7bc?
- ([2a01:e0a:e50:3860:23eb:8c68:e19:f7bc])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4773c2e674csm168098175e9.4.2025.11.03.10.52.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Nov 2025 10:52:16 -0800 (PST)
-Message-ID: <5c42a166-1ff4-478a-b76c-9573874a0ca3@baylibre.com>
-Date: Mon, 3 Nov 2025 19:52:15 +0100
+ d=1e100.net; s=20230601; t=1762196167; x=1762800967;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NJ4b83dOJrien/Nmo/SYcAOK3uocYIXxW3N7l/sfohw=;
+ b=YL4SDzkvgR22ufTVUZiwPydDPPQU4eDn4wGNc6EdJ7dqEGkbFQsRMiH65z2/5wVeM4
+ PDRuFl4MhF5oVo0PiA3BlM8R/vD3gE+GMLUInQp7jtRVG3CTQ33ZkB3KBa9b6v4YbrIC
+ VgT1e8/abdEOsDorxDOjQrjkYY2lzE7+WncD3Wwy8Z01aS6OcpBkKBzyNfFU+l99Y3gy
+ FlX6Xyn1o4LNMtsyOw68A5j/XFjz3g5mIIIrN1C7GfVZxwVhXyu+Meb4EBWozGClEfJE
+ dw5rOpf+yC4KA6Rz0gzEZBB/0+eCnQPf/TInE6cLY/2ro0njpMMotCNDa3oeeml3gLx3
+ n+kQ==
+X-Gm-Message-State: AOJu0YxfIm40VFslwkethZIpLsEmazXXDErRRnLNPfL4s20VaJJ3mauf
+ 2pnrbIq+n0ntnhcdlrfTC7oK9gVPgXP374HkzLmHEZ5yVM2gg+TR8Mqa+x8YbJmLBcYfm+CaavV
+ Ac36udW+HHbtSU62KMC3GZbmlf8z5uoc=
+X-Gm-Gg: ASbGncv72VO3xUwwg2clB9gz6W5dLCkh2R9DD2RM8qEQdlka7oD7MZ8xWtVlpZGmoBy
+ JILAz5cQu+kZoCQrRtzTyk9a36sdksqWK6KiJiD2FtaCP/1Z8OE2sy1NdlXL3T1edEB6Gy4W37F
+ 6U3uYPJgJ5Vxnoe9OOXFQIinVUOtcGQpfYGqYgNndEzRvn5b7LGHW6esjn1Bc6k0TgEXCUHKlO7
+ 0lSzSkBl6tYpbxOZVX6a1QUbfePtLhvInvPrnjIdU2r37ba6SWWXBX0rj7Jqg==
+X-Google-Smtp-Source: AGHT+IHlPm37/Eoqiv1/TiyoX/nE8DL4rQp+KIolJ5kV1LRVo6Z/KEWBwmh+pRl8YsRUPJbyr5ElN9Oc1uto31s/NVM=
+X-Received: by 2002:a05:6830:4422:b0:760:6ff1:2995 with SMTP id
+ 46e09a7af769-7c6967dc593mr7283869a34.30.1762196166908; Mon, 03 Nov 2025
+ 10:56:06 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] boot: android: Add bootconfig support
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>,
- Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- Maxime Fournier <mfournier@baylibre.com>
-References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
- <20251017-bootconfig-v2-3-8c7c2f2e5474@baylibre.com>
- <87cy635ahz.fsf@kernel.org>
-Content-Language: fr
-From: Guillaume La Roque <glaroque@baylibre.com>
-In-Reply-To: <87cy635ahz.fsf@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+References: <20251101035252.261-1-briansune@gmail.com>
+ <20251103153657.GO6688@bill-the-cat>
+In-Reply-To: <20251103153657.GO6688@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Tue, 4 Nov 2025 02:55:53 +0800
+X-Gm-Features: AWmQ_bkjPuNuQaRT1yWZhwm8BPhqY5nVlU6ZHTcGCNRm81Bf8_YzQ7C2DPZM7ok
+Message-ID: <CAN7C2SB0b_YjcJ+LyVUJwi5DjdjR5Ssi=yQwuCvSvBh3XVj+dA@mail.gmail.com>
+Subject: Re: [PATCH v2] Add make feature support for SoCFPGA Handoff
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,173 +91,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+> OK. I was hoping that we could just automate as part of the regular
+> build process seeing for example $(BOARD)/foo.xml and invoking the
+> script to re-create foo.c and so forth, but that doesn't seem to be the
+> case. So, no Makefile logic. We should then instead start on some
+> content for doc/board/socfpga/ and document this tool there. Thanks!
 
+Ok what you expected on the automation flow.
+I can give it a try. But the build flow for Altera project side
+is that the compiled handoff is in the form of a folder.
+only foo_bar is defined by user other naming on C5
+should be fixed.
 
-Le 31/10/2025 à 16:58, Mattijs Korpershoek a écrit :
-> Hi Guillaume,
->
-> Thank you for the patch.
->
-> On Fri, Oct 17, 2025 at 15:19, "Guillaume La Roque (TI.com)"<glaroque@baylibre.com> wrote:
->
->> For android vendor boot image version 4 bootconfig is mandatory.[1]
-> There seems to be a link "[1]" here but it's not part of the commit
-> message.
-> Can you add it please?
-yes of course ,
->> In the android_image_get_ramdisk function, after copying both vendor and
->> boot ramdisks, we extract all androidboot.* entries from the kernel
->> command line. These entries are added to the bootconfig section.
->> We then update the sizes of the ramdisk and bootconfig.
->> Finally, all androidboot.* entries are removed from the kernel command
->> line.
->>
->> Signed-off-by: Guillaume La Roque (TI.com)<glaroque@baylibre.com>
->> ---
->>   boot/image-android.c | 101 +++++++++++++++++++++++++++++++++++++++++++++++----
->>   1 file changed, 93 insertions(+), 8 deletions(-)
->>
->> diff --git a/boot/image-android.c b/boot/image-android.c
->> index 613f2aa4b9e..cf038a4a62f 100644
->> --- a/boot/image-android.c
->> +++ b/boot/image-android.c
->> @@ -534,17 +534,102 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
->>   			ramdisk_ptr = img_data.ramdisk_addr;
->>   		}
->>   		*rd_data = ramdisk_ptr;
->> -		memcpy((void *)(ramdisk_ptr), (void *)img_data.vendor_ramdisk_ptr,
->> +
->> +		/* Extract androidboot.* parameters from bootargs */
->> +		const char *bootargs = env_get("bootargs");
->> +		char *androidboot_params = NULL;
->> +		char *new_bootargs = NULL;
->> +		size_t androidboot_params_len = 0;
->> +
->> +		if (bootargs && img_data.bootconfig_size) {
->> +			size_t len = strlen(bootargs);
->> +
->> +			androidboot_params = malloc(len + 1);
->> +			new_bootargs = malloc(len + 1);
->> +			if (!androidboot_params || !new_bootargs) {
->> +				free(androidboot_params);
->> +				free(new_bootargs);
->> +				printf("Error: malloc failed\n");
->> +				return -ENOMEM;
->> +			}
->> +
->> +			/* Extract androidboot.* and build new bootargs in one pass */
->> +			const char *src = bootargs;
->> +			char *bc_dst = androidboot_params;
->> +			char *args_dst = new_bootargs;
->> +
->> +			while (*src) {
->> +				/* Skip leading spaces */
->> +				while (*src == ' ')
->> +					src++;
->> +				if (!*src)
->> +					break;
->> +
->> +				/* Check if this param starts with androidboot. */
->> +				if (strncmp(src, "androidboot.", 12) == 0) {
->> +					/* Copy to bootconfig (add newline if not first) */
->> +					if (bc_dst != androidboot_params)
->> +						*bc_dst++ = '\n';
->> +					while (*src && *src != ' ')
->> +						*bc_dst++ = *src++;
->> +				} else {
->> +					/* Copy to new bootargs (add space if not first) */
->> +					if (args_dst != new_bootargs)
->> +						*args_dst++ = ' ';
->> +					while (*src && *src != ' ')
->> +						*args_dst++ = *src++;
->> +				}
->> +			}
->> +
->> +			*bc_dst++ = '\n';  /* Final newline for bootconfig */
->> +			*bc_dst = '\0';
->> +			*args_dst = '\0';
->> +			androidboot_params_len = bc_dst - androidboot_params;
->> +
->> +			/* Update bootargs if we extracted any androidboot params */
->> +			if (androidboot_params_len > 1)
->> +				env_set("bootargs", new_bootargs);
->> +		}
->> +
->> +		/* Map addresses for memcpy operations */
->> +		void *ramdisk_dest = map_sysmem(ramdisk_ptr, img_data.ramdisk_size);
->> +		void *vendor_ramdisk_src = map_sysmem(img_data.vendor_ramdisk_ptr,
->> +						      img_data.vendor_ramdisk_size);
->> +		void *boot_ramdisk_src = map_sysmem(img_data.ramdisk_ptr,
->> +						    img_data.boot_ramdisk_size);
->> +
->> +		memcpy(ramdisk_dest, vendor_ramdisk_src,
->>   		       img_data.vendor_ramdisk_size);
->> -		ramdisk_ptr += img_data.vendor_ramdisk_size;
->> -		memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
->> -		       img_data.boot_ramdisk_size);
->> -		ramdisk_ptr += img_data.boot_ramdisk_size;
->> +		memcpy((char *)ramdisk_dest + img_data.vendor_ramdisk_size,
->> +		       boot_ramdisk_src, img_data.boot_ramdisk_size);
->> +
->>   		if (img_data.bootconfig_size) {
->> -			memcpy((void *)
->> -			       (ramdisk_ptr), (void *)img_data.bootconfig_addr,
->> -			       img_data.bootconfig_size);
->> +			void *bootconfig_src = map_sysmem(img_data.bootconfig_addr,
->> +							  img_data.bootconfig_size);
->> +			memcpy((char *)ramdisk_dest + img_data.vendor_ramdisk_size +
->> +			       img_data.boot_ramdisk_size,
->> +			       bootconfig_src, img_data.bootconfig_size);
->> +			unmap_sysmem(bootconfig_src);
->> +
->> +			/* Add androidboot.* parameters to bootconfig */
->> +			if (androidboot_params && androidboot_params_len > 1) {
->> +				ulong bootconfig_ptr = (ulong)ramdisk_dest +
->> +						       img_data.vendor_ramdisk_size +
->> +						       img_data.boot_ramdisk_size;
->> +				img_data.ramdisk_size +=
->> +					add_bootconfig_parameters(androidboot_params,
->> +								  androidboot_params_len,
->> +								  bootconfig_ptr,
->> +								  img_data.bootconfig_size);
->> +			}
->>   		}
->> +
->> +		free(androidboot_params);
->> +		free(new_bootargs);
->> +
->> +		unmap_sysmem(boot_ramdisk_src);
->> +		unmap_sysmem(vendor_ramdisk_src);
->> +		unmap_sysmem(ramdisk_dest);
-> We are here in the "if (img_data.header_version > 2) {" block.
-> What about boot image v3? Why are we forcing bootconfig upon them?
+hps_isw_handoff/foo_bar/
 
-our right it's not good bootconfig come with version 4 i will fix it in v3.
+|-- alt_types.h
+|-- foo_bar.hiof
+|-- emif.xml
+|-- hps.xml
+|-- id
+|-- sdram_io.h
+|-- sequencer.c
+|-- sequencer.h
+|-- sequencer_auto.h
+|-- sequencer_auto_ac_init.c
+|-- sequencer_auto_inst_init.c
+|-- sequencer_defines.h
+|-- system.h
+|-- tclrpt.c
+`-- tclrpt.h
 
->
-> Also, please move this to a seperate function. It makes
-> android_image_get_ramdisk() quite long and difficult to read otherwise.
-i will.
->
-> Finally, what happens if a kernel does not have bootconfig enabled ?
-> I imagine that everything will crash due to this change. Even if
-> bootconfig is mandatory for boot image v4, I believe we should make this
-> behaviour optional to avoid breaking existing kernels.
+Documentation is not an issue.
 
-it's enable in android kernel since android-12-5.4.xx so if you enable 
-boot image version 4 and move androidboot.x in booconfig instead of 
-kernelcmdline it's because you decide to enable it with 
-BOARD_KERNEL_CMDLINE += bootconfig and you support android boot image 
-version 4. it's explained in aosp doc 
-:https://source.android.com/docs/core/architecture/bootloader/implementing-bootconfig 
-
-
->
->>   	} else {
->>   		/* Ramdisk can be used in-place, use current ptr */
->>   		if (img_data.ramdisk_addr == 0 ||
->>
->> -- 
->> 2.34.1
-
+Brian
