@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C89E0CCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 13:23:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3428CCF9FE
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 13:23:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B40708397B;
+	by phobos.denx.de (Postfix) with ESMTP id EF78C83984;
 	Mon,  3 Nov 2025 14:21:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KXxHWM/G";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bh1LFHi0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D55C838E5; Mon,  3 Nov 2025 12:07:14 +0100 (CET)
-Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
- [IPv6:2607:f8b0:4864:20::b12f])
+ id A630E838EC; Mon,  3 Nov 2025 12:07:17 +0100 (CET)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00FB6836D1
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 12:07:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98D3E836D1
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 12:07:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-yx1-xb12f.google.com with SMTP id
- 956f58d0204a3-63d0692136bso4627950d50.1
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 03:07:11 -0800 (PST)
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-63e393c4a8aso4062036d50.2
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 03:07:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762168031; x=1762772831; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1762168034; x=1762772834; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M5dQMVbyI+RWakujQN2d+LqqMIEP7n4FbkazA7cJkZg=;
- b=KXxHWM/GqBLzf6klBF0OBQPOEcspUT9KG83bWsA1iyjzyi8ZyRKYJDFr/WalDvQQ/j
- mpqjI9Fh2Vp8UCYiC+YSvoWs1NEuG2jqfa8W0x+a8/Gq7G5HLPA7rs8YSjuwn1Xeh/9h
- tt5U1i0fioYZVJEWnyOejLZJDo7bWMHFK9TAjtZDQsXzlq0PwEbgM9qi+Fojx3gEdqhm
- F/5Xh1BVLQXqklQ/6YBIRXAA65UoIkT37eI22z+j19JYLAPfzMNRgQBrNCQA4GoE80Pp
- N0jyN9Lxq67PL31pLfQh/iW9zof4sIS/uwNoUVT7pMlAVEAjPqToU8QJtwLsarG0tyjn
- dB8Q==
+ bh=dki79PVB5FuWmvspzPK4DPzQnE5tLA/LSXbE+QMaV3g=;
+ b=bh1LFHi05pIrDlkRlgZMmTfBAESw92103YFBrxdLibIBg7b2ilnvj9GUwfTgszPwVm
+ TO407wPLx50KEEUXQwwsLUMk+GPuI4Y+fEBMMviTiVEks8T+e6Gn0vbKqhe3kk37+AND
+ PDEB+aLdLv1CL0gNzPGHjsUl7yqgwGm03cfVQTo8JADqHPpbPNTuZuyrhBxP3FkSIAn1
+ ztpj19jiDVpzKzKarLfTMguik8mjcIEkv3rGaey4uF0YWs62fon+NVvhmLXH8yzotfG0
+ 9gwWS6TB1r/9qCaa1LubIHfbpXj88kk0M80yzjFDIgfqd3BWqUcFUtqOpqeHOU04nrv1
+ 3NlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762168031; x=1762772831;
+ d=1e100.net; s=20230601; t=1762168034; x=1762772834;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M5dQMVbyI+RWakujQN2d+LqqMIEP7n4FbkazA7cJkZg=;
- b=PXz9vGxrR+o5qctLrHI6XWDMPfb/RM/i3SFA2SRbckDn9VZY+melrwP1viZ4Ufdy6F
- 1u/4eTnWpZqY8y1oBYcwVCZtKAZgObtuWRfre3WW/k8SqbbNlp1uedQ3YNQqVak1FScS
- Gp3vQ81EtwdkCe6vmJSuoTGhV4dtBb2MLHyEsirkToHy6TemADinGqj2qfw9UQEGzmAD
- mDOvvBpS1Q0CxKTIrXVXg41zzYOBJO3hcQ+m0TDZuO96lf0mEML1v7T/r5RPMLlK8y21
- qzyeHmL9woH4FZkDHNf/Ys/Y5YZHZXEvMbqPVjk+Bwe3j4SFXu16nWZVn/uAmCFMb6Fs
- pReg==
+ bh=dki79PVB5FuWmvspzPK4DPzQnE5tLA/LSXbE+QMaV3g=;
+ b=uIn88b+ywAoEHFNgD6//YZysaIynbiR1I6p8GBYa1/qO3VF3kHuYR5MjONYqzVFj4b
+ l1JbZd3MJfer+C1T5JQ3k0lb6oIkycUbioF9lkFelFp69dYw0UF5smCIVEwGjBaD/7aH
+ 7PzWdMFn/tfv1wpDJ1nBlHJZ7uoulLsNhS+wQZVM+kcSJQaCgo9TUp8SPLggeAo8+ivB
+ A01kHQClP+ZnfCuYiztOtmN0XEMECYxoYYzCfPuej6CSNSi4wsdHm4TSwFmVmO24+pVf
+ E+1tuxvfO02PqqvAYO/IJs/1I5Uhw59r5/5joyhPl1UUDpQGvl5pK5whwQRJyzvBnwRq
+ OVSg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUhnoZU8NSCeEG9lpTm6Ahlw0lhfrhOt+y5aq/wv+kQeTfal7gexgXwNNmezOB4BpUnTZBb6/k=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzJ2+m4PGjHr3vmXul9ABMWNmJ8bFqUY+vVaq7xuxAZqO5eymU
- Uc38gjDy2yMD5KsrPT8WVtg2EH+bg0jccMhRt11vApR3S15Zs5XI767W/i5PwsaJE0AKGj4yZPg
- m+kQ5jD4G5MjKw7xOHaVxCpjqBfsEpII=
-X-Gm-Gg: ASbGncuAUOlzR1x+XX+F7DrTzJxioBG7acbTPp8osaOwTZOSVdlOW1o0Rp0QQRGlkPj
- ILeeTl5n2b1EzQhQQOwRw/pgpMCD1rbXhk/T93/H3Pzf83kr1jvg5F6DDAvBCAS0u+d1DsdbBiN
- iDGHeKUefaT0azXcc+wzxqcH+rjX0fT+uVC3nBcSBXAdg+lttgAu/5vKpORfCjBvoVVFFTl5jAn
- 95CjAbohmnE/ijma2wa719ZzJFVZp7q1s2bqU6vYalpaWlX7CZuvXjTjt8DApMwTYz6DeQUeQ==
-X-Google-Smtp-Source: AGHT+IHGjtbjx9BkkbbrD4i1+sS82ZYoYs/xoLHdSScj1Yk4UEPysv7HEeoNmXYm44UMEH16zwXSqffdxJMVtiTCHHE=
-X-Received: by 2002:a05:690e:d8c:b0:63f:9b81:bef1 with SMTP id
- 956f58d0204a3-63f9b81c09amr7816607d50.48.1762168030683; Mon, 03 Nov 2025
- 03:07:10 -0800 (PST)
+ AJvYcCVgY0EFyVN0y3MXqKrUDgjQSEPE3AjY/vY1qLw2Jbsp1jSCSL197EfobSoowkKUo5baThxab6A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxNUtLY0jYzPT+7nC1+RGHwXrf5t4iFM6s3KpDART5rAz2XqwGG
+ sbImdfkQjUk5WDqzPZXWV2PcoMiMTAYaNeV3AhLQznWTAMkk7Dw6pLdOZ+FXSeEBo2IT3O+/COn
+ iPxoFBsbmXuuW2ts9Skb453ULjBAWjcU=
+X-Gm-Gg: ASbGnctsoK9LtoiMJ0zRhiYFXaheZht3LRpTI9fDuCcMuAmfZxg2dQ0BszyqAtnB2G7
+ 5LI9kJXlRqGrfFKv2Y9Qs8mFuMmo93KuNQVZN756fWolAmql7uoCq2e5coZ+6RwRPkW3yMxxzct
+ Ch5PL6+tr3Us2Ao53YRnmojfOWynBMeB6xGd1FPZxhLVE2TgO0ViXrTQfEVZ0w2/X3s/XhqzQQh
+ dbJLADXcJnKLHo9MjZCgTwjWBR+NlztEjclNZGrOovo2tClFlaNCJYPkWScLH8=
+X-Google-Smtp-Source: AGHT+IEImyD6odapVtjtAJQUuY6NKSg98O9ORTdJN7n/BQ94gPSpUYbZsUVNYuhx2dsfs1LiW4GzJBZ/1nP0+fUpTHk=
+X-Received: by 2002:a05:690c:5c01:b0:786:4fd5:e5d2 with SMTP id
+ 00721157ae682-7864fd5f604mr80699307b3.45.1762168034409; Mon, 03 Nov 2025
+ 03:07:14 -0800 (PST)
 MIME-Version: 1.0
 References: <20251031195931.622513-1-heinrich.schuchardt@canonical.com>
- <20251031195931.622513-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251031195931.622513-2-heinrich.schuchardt@canonical.com>
+ <20251031195931.622513-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251031195931.622513-3-heinrich.schuchardt@canonical.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 3 Nov 2025 19:06:59 +0800
-X-Gm-Features: AWmQ_bnRGqolEfqhxabwRQLoMWx5A41U8sq7pM5nHNQQu5vAwJt0dDZWgsAHoeA
-Message-ID: <CAEUhbmVds3hMzeLpheB5tNStzeJgsD6ExBsvq2P-UfLgcwkFcA@mail.gmail.com>
-Subject: Re: [PATCH 1/3] qfw/acpi: do not zero out XSDT address
+Date: Mon, 3 Nov 2025 19:07:03 +0800
+X-Gm-Features: AWmQ_bmbFobVJFIgkoShOnwoEKYe-t6KuO5ulZuPr9AoFV6tRWXWzN9W-LdsUDo
+Message-ID: <CAEUhbmVqZQQ6b574eAPGK8=SjCuLBH7BFe3LoViUoyfLZbjQvQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] test: provide test for 'acpi list' command
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -102,17 +102,18 @@ X-Virus-Status: Clean
 On Sat, Nov 1, 2025 at 3:59=E2=80=AFAM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> On RISC-V QEMU provides an XSDT table. The RSDP table points to it.
-> We must not zero out this pointer because otherwise no ACPI table can be
-> found.
+> Check that some mandatory ACPI tables exist:
 >
-> Fixes: 15ca25e31ed5 ("x86: emulation: Support BLOBLIST_TABLES properly")
+>   - RSDP
+>   - RSDT or XSDT
+>   - FADT
+>
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  drivers/misc/qfw_acpi.c | 1 -
->  1 file changed, 1 deletion(-)
+>  test/cmd/Makefile |  3 +++
+>  test/cmd/acpi.c   | 52 +++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 55 insertions(+)
+>  create mode 100644 test/cmd/acpi.c
 >
-
-Yeah, QEMU for x86 machines does not generate XSDT tables but only RSDT.
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
