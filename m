@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BABACCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 14:35:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC82CCCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 14:38:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C55F83700;
-	Mon,  3 Nov 2025 15:35:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=smile.fr
+	by phobos.denx.de (Postfix) with ESMTP id 2937C838D7;
+	Mon,  3 Nov 2025 15:38:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=smile.fr header.i=@smile.fr header.b="t4XEIc3L";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tSZJZpU6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7E40838AE; Mon,  3 Nov 2025 15:35:34 +0100 (CET)
-Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
- [IPv6:2a00:1450:4864:20::342])
+ id 1C6EA838DD; Mon,  3 Nov 2025 15:38:15 +0100 (CET)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D1B4836D1
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 15:35:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E66EC83700
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 15:38:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=smile.fr
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=romain.naour@smile.fr
-Received: by mail-wm1-x342.google.com with SMTP id
- 5b1f17b1804b1-475dc0ed8aeso30593645e9.2
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 06:35:32 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-656a5e7b07dso270232eaf.0
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 06:38:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=smile.fr; s=google; t=1762180532; x=1762785332; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Fdo03ZfKjzwC5W8VQPS8+2ZAvEHMWFbDL1+aOzPPuok=;
- b=t4XEIc3LD8hEhVDBYN4v1wOmePX21WVosR8iKve3+S+2KLMhlKjeCmAp3RSiHWXo0o
- faEReHDZ8uNgu8Z1bCphxt2yExKUZP9Ohs4GQsMH2Mi4ZxzlyOdQzzPVbiLIyw7Jcx6Q
- 1z75RM6npOOf3NbbsS/qgj+89C7Cc1cngPhM4=
+ d=konsulko.com; s=google; t=1762180691; x=1762785491; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LiyoHTuhuvd64naYlKXrMzoSHz7vUd/GRDkxe1u9MxY=;
+ b=tSZJZpU6R8Go7w+eI8IMPWRJKhvCdzLljZAPRTSp4gz8vX2eS45DiM3YQHXfnh2nSk
+ TjrHpIwE79y+YwT/IsLGMsbvTP+3SSttEo+SzqOLqFmZTelsUn5vZ8xmTxNlZ0/EB+xm
+ jd8b0hbEHUiy5lcTPcHC3h52CYqShf6bzGl0o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762180532; x=1762785332;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Fdo03ZfKjzwC5W8VQPS8+2ZAvEHMWFbDL1+aOzPPuok=;
- b=csJFIa33wCNjnl+n9gV6c3dMQd8E53lV5FAqQ/Hel3PpWFisLmqL7AR8WRRENDKsv2
- ewtAZNVZHKzSo7V+RnffwKK2AsYRB7+4NLuxjI7kX9uXRVkiCeD8nU13sJnKy0A0N39U
- pDkZOMqbA8a1QajmyapA8hd8DZRtu7Zm0xTLbQjeGY4YECeyCJj/MhquV7susM9yIHoR
- bIT2riPerhICIhzn5tcwV/E9gOXq3/4vCBMsq8JdntPAmDcKootcJglTQx3tSsEUzJeF
- h1eyahBKM0eS1Q7rYYEhMyxoxFC5swuGAwWoUtNP90qkLU+Rw2IQGy9U5wmYhn0aHma9
- QBMQ==
+ d=1e100.net; s=20230601; t=1762180691; x=1762785491;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LiyoHTuhuvd64naYlKXrMzoSHz7vUd/GRDkxe1u9MxY=;
+ b=hoqoIn9dHeWguQzGUFU4COwMA4b3Inv77bwUa4YAdKY3uYXiDn8K+kg8+aqzpXMI/q
+ 471tx83WDcP5AqcOcsdYPxuUIgT2OtKEF/uuNSEMoiVZinrfqk6RPx59C389DRIpQ9R+
+ AvZYBr6uIQxCBBCGjGYF8Eq+WRiPKBBXy7JUDzF2UzNpAyU2W9h5Jem2d7j299mqpXC/
+ FP/HXAd7Wr4edntfjFKOqt3XBQUZW8/kt548YKIFWREgug7Y4z38kSHnGnysl9XTL9z9
+ aSqWszJEpmDrrN+pPyRaazW7AGMSnMa44ysVGPd5gNoz+hKKdKpnkw4eklFSJala0H62
+ ugTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVRQL4QS6wDdb1MvGxcCI6KJC5sHsFeDiWq20xUgZhboGuoPQUztHcB0zvmiNRP9h3o6pcCJlw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxEOIVowCf5l68zi8So7NNVHkyLBP6G+fvnlzvsTVUdNF+Nj9Pn
- /J0S+t7WARp12u0NeAUG5iPEBhay9JKTzXsGMyOnfNxXG0kKVmdcCXLvSvY54O0mE7w=
-X-Gm-Gg: ASbGnctUVJg5zdk5jQ37OJPhbqN5ZLW1ezFbAX1r6L/orKl5vsCEFp5jjPLgBkanAWc
- 4Ic73uZDkbPyaEkVbHQj+UGOJImKZZjfBZpOeUAz56R3F8GvecE4iLeFPR86JyOdAgxFPNG2AlZ
- X5vY/Oza0d3kDDiEW151Nai/fMTjoQen4Ecaqt5wlUm8HdtR704jCKtx2YKpMIZPfupgxU3Ts7G
- Otc5KNT5l2Jiz548wIpHhpZ/sL/iGVTITB5VTvKubpBlZmr5TrhwKT7rNtyU3VBWXNXiku83O1E
- j4ursiXVlCfZcU9E8Lmc9q6wK9ust96yzKQw/87ebIb0yp3xOtrxTWWNG9fPydn8U8KUOSn6M5F
- 5XjLNdFFvK1q1NHFjl2yvldMWKBPg7z8ovP3MpTP1JjMW6yqBPdiR3DefBS/jccY0yWqj9xJQEr
- LBCXwR+PG1QGL99IFPpfFGjLvWI09iTzZlR5Efs0P/ALsp+kWYmOdg5ATOwX9xXKOyQ8VX7KVQJ
- gOlxUGyuj7lZqTY6pDU+GMJLZIpG3MFtUGFrRZ4YDs=
-X-Google-Smtp-Source: AGHT+IEDriS5Ttye1dye8tjE89JZyWIaq5+PVZhfJ3fkdZpRuQG49IqPAmFcYTwD5pIygLcdax47Pg==
-X-Received: by 2002:a05:600c:3e83:b0:477:fad:acd9 with SMTP id
- 5b1f17b1804b1-477308a4e55mr144582695e9.34.1762180531698; 
- Mon, 03 Nov 2025 06:35:31 -0800 (PST)
-Received: from ?IPV6:2a01:cb05:94a2:a200:2ad9:827a:59cb:148a?
- (2a01cb0594a2a2002ad9827a59cb148a.ipv6.abo.wanadoo.fr.
- [2a01:cb05:94a2:a200:2ad9:827a:59cb:148a])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429c9416f82sm15128221f8f.6.2025.11.03.06.35.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Nov 2025 06:35:31 -0800 (PST)
-Message-ID: <92bf5ca4-10a4-40fa-a920-1408779cb181@smile.fr>
-Date: Mon, 3 Nov 2025 15:35:30 +0100
+ AJvYcCV9hGwkUpGgXndxiyZc2JDLm/ND9mQQubQyaGyYfLfY6SAc3yC41xY4T3n/KdgRmhypNUhkqV4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzE18guarWqBy3188mKmfZBoMryyMAiHm7JsBW9UHp3j3QfSCbE
+ eQxKWIH4mq12ZLmxYuHImWy7L99ijOxN8BJXffONcFyHk1LGXMoantcvsM3wpTG/cQk=
+X-Gm-Gg: ASbGnct1bvs0iTmpwulfJdgZJUkHdgy4V4a4X31/5Lgm+oYCNDpw21scsZqaWR0bNyY
+ Cel1chwKQ2ny3hxQ2IsecrLdtPew4XR08RexVoL0yyTB6KQ8KH5AE5BS4mR5nRzYMBt1/p1LcRI
+ ov6k2B4uILpuuqxcDN3u8QGnBFKNKMxOzorizq2xPkR1XORr92MJkfJdSU86k309Cth1+2pXXMC
+ 88S6oa3LlCXcCzjtRW68S86FNWe8w+55lswblrTLxL0kzUiK3VRyYH8LIfBYDTk7fpuxikNUJdH
+ bhlT8fyhfo7Nll1f173H2dHM43UCmFZyBkCOcapeZjEIxhkMnDm6iZ/01U6lLTrrpmsn3h3TmtN
+ ydWfQAJ8GJfwUOYxJ6mwTxfNi+xSU5ApSmVbWFLbWJM1e4dRwhcjuqeVZqzKlxg9+kD8jSgn2m4
+ G08dTRdkTmbcXWhuyu8rgMM3wfoRo6O94gAjc406pYgKB5o4cm7A==
+X-Google-Smtp-Source: AGHT+IGNWvUEROffNRKMSACfoLal+2AxXEVtY0SoirIV9fQr7hAVUpWGT8dGDR9Rt9UR5Ezxakjy2g==
+X-Received: by 2002:a05:6808:448d:b0:434:1222:e323 with SMTP id
+ 5614622812f47-44f95df904fmr6032138b6e.7.1762180691584; 
+ Mon, 03 Nov 2025 06:38:11 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-656ad0617c8sm142185eaf.4.2025.11.03.06.38.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Nov 2025 06:38:10 -0800 (PST)
+Date: Mon, 3 Nov 2025 08:38:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Andreas Gnau <andreas.gnau@iopsys.eu>
+Subject: Re: [PATCH 10/19] dt-bindings: reset: Add reset support for Airoha
+ EN7523
+Message-ID: <20251103143808.GL6688@bill-the-cat>
+References: <20251101004503.2379529-1-mikhail.kshevetskiy@iopsys.eu>
+ <20251101004503.2379529-11-mikhail.kshevetskiy@iopsys.eu>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/7] doc: ti: k3: Add section for DDR configuration
-To: Neha Malcom Francis <n-francis@ti.com>, trini@konsulko.com, s-k6@ti.com,
- bb@ti.com
-Cc: m-chawdhry@ti.com, u-boot@lists.denx.de, u-kumar1@ti.com,
- gehariprasath@ti.com
-References: <20251103071035.674604-1-n-francis@ti.com>
- <20251103071035.674604-8-n-francis@ti.com>
-Content-Language: en-US
-From: Romain Naour <romain.naour@smile.fr>
-In-Reply-To: <20251103071035.674604-8-n-francis@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="w4nevX8cB24ppy4o"
+Content-Disposition: inline
+In-Reply-To: <20251101004503.2379529-11-mikhail.kshevetskiy@iopsys.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,62 +106,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Neha, All,
 
-Le 03/11/2025 à 08:10, Neha Malcom Francis a écrit :
-> Add a concise section for DDR configuration pointing to the public tool
-> that can be used to generate the configuration DTSI.
-> 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+--w4nevX8cB24ppy4o
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Nov 01, 2025 at 03:44:54AM +0300, Mikhail Kshevetskiy wrote:
+
+> Introduce reset capability for EN7523 device-tree binding
+>=20
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 > ---
-> Changes since v1:
-> - new patch
-> 
->  doc/board/ti/k3.rst | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> index 01fb9411688..de66b830703 100644
-> --- a/doc/board/ti/k3.rst
-> +++ b/doc/board/ti/k3.rst
-> @@ -649,6 +649,17 @@ Refer (:ref:`U-boot ARMV8 build <k3_rst_include_start_build_steps_uboot>`)
->     This will need to be explicitly disabled by changing the boot_targets to
->     disallow fallback during testing.
->  
-> +DDR Configuration
-> +-----------------
-> +
-> +The K3 DDRSS driver (drivers/ram/k3-ddrss/k3-ddrss.c) configures the DDR during
-> +the R5 SPL stage. The driver utilizes an auto-generated configuration file
-> +containing necessary settings for the DDR. It configures the frequency, timing
-> +parameters, training algorithms etc. for DDR initialization. The configuration
-> +DTSI can be generated using the `Sysconfig tool <https://dev.ti.com/sysconfig>`_
-> +and selecting the software product as "DDR Configuration for \*" as well as the
-> +required device.
+>  .../dt-bindings/reset/airoha,en7523-reset.h   | 61 +++++++++++++++++++
+>  1 file changed, 61 insertions(+)
+>  create mode 100644 include/dt-bindings/reset/airoha,en7523-reset.h
+>=20
+> diff --git a/include/dt-bindings/reset/airoha,en7523-reset.h b/include/dt=
+-bindings/reset/airoha,en7523-reset.h
+> new file mode 100644
+> index 00000000000..bb0a28673d6
+> --- /dev/null
+> +++ b/include/dt-bindings/reset/airoha,en7523-reset.h
+> @@ -0,0 +1,61 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
+> +/*
+> + * Copyright (C) 2024 iopsys Software Solutions AB.
+> + * Copyright (C) 2025 Genexis AB.
+> + *
+> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> + *
+> + * based on
+> + *   dts/upstream/include/dt-bindings/reset/airoha,en7581-reset.h
+> + * by Lorenzo Bianconi <lorenzo@kernel.org>
+> + */
 
-Thanks for promoting the new K3 DDRSS configuration tool (v0.12.00)!
-Until recently, I was still using the old spreadsheet (K3 DDRSS v0.10.0) from
-outdated application note [1].
+This is as good a place as any I suppose, so what is the status on
+upstreaming all of the bindings/etc changes for this platform? Thanks.
 
-The FAQ post [2] is really useful for custom board DDR configuration but
-somewhat difficult to find/notice on e2e forum.
+--=20
+Tom
 
-Note: The K3 DDRSS sysconfig based tool can even be used offline [3].
+--w4nevX8cB24ppy4o
+Content-Type: application/pgp-signature; name="signature.asc"
 
-[1] https://www.ti.com/lit/an/spracu8b/spracu8b.pdf
-[2]
-https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1482402/faq-tda4vm-tda4x-dra8x-am68x-am69x-lpddr4-topics
-[3]
-https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1378443/processor-sdk-j784s4-tda4ah-offline-ddr-configuration-tool---latest-version/5269621
+-----BEGIN PGP SIGNATURE-----
 
-Reviewed-by: Romain Naour <romain.naour@smile.fr>
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQi+TAAKCRAr4qD1Cr/k
+CpfpAQDSpKoTZcM5wrSxY5ip2eEE6+j3saw37drj63QNqE0Z6gEArvLRFs0G1TNi
+mbCH8IFmZ0vnZ6DWbXp7EBaag/MV8gQ=
+=uRaq
+-----END PGP SIGNATURE-----
 
-Best regards,
-Romain
-
-
-> +
->  Saving environment
->  ------------------
->  
-
+--w4nevX8cB24ppy4o--
