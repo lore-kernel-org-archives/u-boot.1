@@ -4,159 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE18CCF9FE
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 06:05:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8492FCCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 07:10:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC77883642;
-	Mon,  3 Nov 2025 07:05:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A7D61838AE;
+	Mon,  3 Nov 2025 08:10:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bN4nTmnt";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SgCKesjE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2192838AE; Mon,  3 Nov 2025 07:05:40 +0100 (CET)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
+ id DD113838CE; Mon,  3 Nov 2025 08:10:52 +0100 (CET)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CF768331F
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 07:05:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BFAF8331F
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 08:10:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MHynO7jBWdIoVXyt7ruS82jy9xg0YqC/SeYAOO5OXincqo7mT1ywLFUNdNNshsc0nv8MvjAZlGiYa+iPDdS43am/ecND4Y4ckm5QbYBS1Yz+ToLjTfFLddWiR19hv4oXOT8Onl/Zu4QOVl95sypfcvROeLf8pYehC9XTBCPsrSTUQ8npgMegPUDWAj/OS5R0LIVWEuWvnI4+kc00lESHd1Anh68lUwyc+DdeYSC+F+XyqJNyiitsJAAJbSUO5uhMbok87CMKEO3nemj66pRZJ/hS9hBVogNtLK4JpkDHkew7nDqLFUdIEIRTyFNKBFrRTOfbfQj1P5WCoDRV7IqpZw==
+ b=Y/GaLBwfNzbh5wcMDsOfVFkG5XSlKGnghv2kf9EJPNJHzt3P/CVkpXiqOY2/IuCx1/sIldV9ytow8viIz7sDnxEv2PnN7Ny+UoOeektB1Rdt+mXCl02CP/t90qTWgBKz0XLm01At91uGNYcY07QzntyIqykmPrXMShahTYxzZdBlLLF8ki5CA/eHq4bb3e2Z0VXCtYx+mcmFmprk4ivVFMAq+wIwAhEpzHE24wkNE/aL4qi/M9OacvGzncYiih0z/iZajEAuZ/BSfM6mcULJVDtGlDpeoUwmH5Ds0CqnnJkXXLJPBi5XqnM56BrIETasnfUbjYMiGlQ9e7nzExlB0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FGpEa0hYWNn7yzDiyZUANUFNNjQ1oFXYwnkqJjHSclE=;
- b=l08IE/KzFn3dddjbfwYIGqhTPUoyR6l21XybixGz46TCoOaeXMeuWIfZ8gD/7sd3WpizgXwnSkrSN/7y0OGL+TNaCWW7kVKInTs6Cb7sn9W9Ou4DqinHkkpZMQOYLTM15zFZvToIMbfRxEPNyxz52IUwkWktWgMoNaoAdaYddBjlKaK4hlY0+H6z6X5q5cuhFRBJkjInXMQBVVCiuxkMp8BKWoj7IhMjxVlSZGrRof9H8Q/Frp5Mp+nlpclSj99ao6EAkcycjdlPqzn5aH/LEqtO4/joIr5S8VFucF4g/xSG71vncjjNqAMdT3BWZqYn6ox12FlMLBsJSW31AmunOA==
+ bh=DLPaOHkEN3dTvjYic8ZSjpipVmTA8HEiwg4A/73weqo=;
+ b=Gd6ZnW4O4MClcou1mmngphqiTLsW2hScFxtn5Y68tyl75Y8o3cfAEbN/N0Ti4w2h6DLArz7IL0gQmP6Dfy1YyTAZhOXmhr1XVoxCM5yt4uCcezpR6wIXZjtFoIxJ5Xrlpcz9sy3GWEt7dm+5kcr55u6Nf4QBiHlp4Bp+RPqPxdMJL8gmqpH1n7k86dylvxkLCxQ/XgKZ9WDTRfkMsYLdN/I12//jYAcAJ3Swwp4zTVYj+tNtZXpNTp3nVTVkg1CeOP3OJF6M74Ms5oNHfFLzSYZtRhk5lNJzX3IBTEkQcOkUChwZ9B+trwaAtZt1L5rACe4q7P88TECPNm43fGvNBA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FGpEa0hYWNn7yzDiyZUANUFNNjQ1oFXYwnkqJjHSclE=;
- b=bN4nTmnt4b6ufDgOqZ0nAEKTo+KDongQ4e/NIiv/S60ao/PCp47vAU8WZIIL2BQvxHtkfbvWoaHODEL+3lppV3GmbVR7thAwyfxfLAeM0mLw1DPm/6rsDcSM2TwRBTcqeUmPMT82w/dEAu7qiBEkSc1iEf5svx9g686txBl6vL4=
-Received: from BN9PR03CA0074.namprd03.prod.outlook.com (2603:10b6:408:fc::19)
- by SJ2PR10MB7858.namprd10.prod.outlook.com (2603:10b6:a03:578::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.15; Mon, 3 Nov
- 2025 06:05:33 +0000
-Received: from BN1PEPF00004685.namprd03.prod.outlook.com
- (2603:10b6:408:fc:cafe::ef) by BN9PR03CA0074.outlook.office365.com
- (2603:10b6:408:fc::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.15 via Frontend Transport; Mon,
- 3 Nov 2025 06:05:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ bh=DLPaOHkEN3dTvjYic8ZSjpipVmTA8HEiwg4A/73weqo=;
+ b=SgCKesjE//G6wzXYBbbzMuSEIySg6Qj4jjG3G4EEUbGhVOIdBYhgJAlEzdRbItbO3aXPYyIBecfpDcx3EXoYD9Yh+rxwdSH50IVV8PfOWh1HqA4CNNCVyjrbGEjVOKsNGm5bu4/2QvlyjGwjU9lCGTRLmBkvAK8aA3TH9ubY+o4=
+Received: from DS7P220CA0069.NAMP220.PROD.OUTLOOK.COM (2603:10b6:8:224::35) by
+ PH0PR10MB4565.namprd10.prod.outlook.com (2603:10b6:510:31::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9275.15; Mon, 3 Nov 2025 07:10:47 +0000
+Received: from CY4PEPF0000E9DA.namprd05.prod.outlook.com
+ (2603:10b6:8:224:cafe::3e) by DS7P220CA0069.outlook.office365.com
+ (2603:10b6:8:224::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.16 via Frontend Transport; Mon,
+ 3 Nov 2025 07:10:38 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BN1PEPF00004685.mail.protection.outlook.com (10.167.243.86) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CY4PEPF0000E9DA.mail.protection.outlook.com (10.167.241.73) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Mon, 3 Nov 2025 06:05:31 +0000
-Received: from DLEE206.ent.ti.com (157.170.170.90) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9298.6 via Frontend Transport; Mon, 3 Nov 2025 07:10:45 +0000
+Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 3 Nov
- 2025 00:05:30 -0600
-Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE206.ent.ti.com
- (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 01:10:38 -0600
+Received: from DFLE209.ent.ti.com (10.64.6.67) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 3 Nov
- 2025 00:05:30 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 01:10:38 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 3 Nov 2025 00:05:30 -0600
-Received: from [172.24.234.127] (psdkl-workstation0.dhcp.ti.com
- [172.24.234.127])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A365QXw3596548;
- Mon, 3 Nov 2025 00:05:27 -0600
-Message-ID: <788da073-2760-4b64-a82b-8172ddb5f833@ti.com>
-Date: Mon, 3 Nov 2025 11:35:26 +0530
+ Transport; Mon, 3 Nov 2025 01:10:38 -0600
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.235.200])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A37AZYt3684702;
+ Mon, 3 Nov 2025 01:10:36 -0600
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>, <s-k6@ti.com>, <bb@ti.com>
+CC: <m-chawdhry@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>,
+ <gehariprasath@ti.com>, <n-francis@ti.com>
+Subject: [PATCH v2 0/7] ti: j7: Update to v0.12.0 of DDR config tool
+Date: Mon, 3 Nov 2025 12:40:28 +0530
+Message-ID: <20251103071035.674604-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] mach-k3: refactor A53 speed grade clock-rate fixup
-To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Aparna Patra <a-patra@ti.com>, "Bryan
- Brattlof" <bb@ti.com>, Udit Kumar <u-kumar1@ti.com>, Dhruva Gole
- <d-gole@ti.com>, Judith Mendez <jm@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
- Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, "Nishanth
- Menon" <nm@ti.com>
-References: <20251030-ti_speed_grade_fix-v1-0-703e4189640a@ti.com>
- <20251030-ti_speed_grade_fix-v1-2-703e4189640a@ti.com>
- <5f1d8353-bb04-4f43-847d-9f66761b574d@ti.com>
- <DDYT5EH4CX1N.UP6UHCIGTL78@ti.com>
-Content-Language: en-US
-From: Aniket Limaye <a-limaye@ti.com>
-In-Reply-To: <DDYT5EH4CX1N.UP6UHCIGTL78@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004685:EE_|SJ2PR10MB7858:EE_
-X-MS-Office365-Filtering-Correlation-Id: a2dddc69-343f-4113-558e-08de1a9efee8
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9DA:EE_|PH0PR10MB4565:EE_
+X-MS-Office365-Filtering-Correlation-Id: a2716c38-3a93-4cc8-c693-08de1aa81bac
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|34020700016|36860700013|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eHNGQzc2ZnpPN1hCd09jeExYclRkOUhzZkZEKzRGNE9rY2ROWmF5VlBhY1Bz?=
- =?utf-8?B?U240d2hBZDBZNWN1RWpBK29KWDY2SWZ3ZUdUaitWTVBWWE1UOGtIaEZvZ25x?=
- =?utf-8?B?S212Yy9ET2owMXJWRGVmRXVqMm1yRXhJL0hNWkN4ZnFVRGk4VjZrUDBvajd3?=
- =?utf-8?B?TEY3ZisyODRoNzBjclNka3AyaVRnK1hZckNqYzRmdUxLQWJIOGsyZFl3bHh1?=
- =?utf-8?B?ZlNKdS9GZ0FhblVRcTFQZ1pMQmRGMURSRE9HLzhLUytTbUZ1SE9QSlhVcXd3?=
- =?utf-8?B?SXprQ3ZIUkw1M0JtaFVXMGFRMFBpNFBVN1pJSjRkcVlWdVJwR2IvSnZGQUhI?=
- =?utf-8?B?Y2ZpZm1zTGhWRkpsbVdVUFJ4eHA1RzY1TWRzeUJHQmVBdkFrRnRYem9wZVlO?=
- =?utf-8?B?WjZGeGM1WkhCc2F0cFltNjJtdVlFemxaVnN0ZmF2N3Y5RllnbGRBS1NsWm4z?=
- =?utf-8?B?WGlDY0lObmRkRERwUFp5VjlCM01BdVQ2MEFiK2pSdVRndmdWVnIrWGhxSS95?=
- =?utf-8?B?VThxalVtb1dXbUtnL2ZJWFZuRGthWWErWkZsemJoeTVxekNyQVZWdG83TE1p?=
- =?utf-8?B?dXZmMG5IQnlEWEd5b3llMXJ4R2ZQNGFWclUyQ1AwTFludGlrUXV2RFhHd3Fz?=
- =?utf-8?B?MExOYW1paTdYcmFtTUpYdWtzYXpRQVVUaXArRStlK3o2V3hFL2hDZ0JHeDM4?=
- =?utf-8?B?V0FNdFhxQlZYUkJkeXF6aHpxc24wMFRTVU9HSmdMM1d2R1FFL1BYak9HbUpx?=
- =?utf-8?B?Vzg3OXQ5TFlvdGFPK2JTVWJVeEdCVU5CSXg5ZWFxdEF2Y0pocEU5bVErZzhj?=
- =?utf-8?B?czRGZHBFeWw5UnI2V0xNb25EdkxLbG00NVVkOVB2TWFMSEJMQVplTDZxWjlh?=
- =?utf-8?B?bEdHdU5jU2o2MTZWWWVvZlhnZ21GbDZtcFdKNHdRcUZxdmdONFJqSWxnWG9U?=
- =?utf-8?B?RitlZFV2MlozN216VUtsVG9SamRDWUdNbDhud3I1QWlzbXRyTjFQRzIzcmg0?=
- =?utf-8?B?VWF3ZEZYWE5VMWNNU1UvSmRmY0VEMXFEYTF3azJ0MDdrcll4VEV1aTZaN2NL?=
- =?utf-8?B?akZzMk1ZR25TZFhITUk3TWRoRDB4WFVDYjI5dHZYNDMrTU5KWFN4ZUg0TUlX?=
- =?utf-8?B?TzBwZWxMVkpCbThlSWNXZHRiVm1XdWtYc3dJV2hQbXB4cGxIOWdYSmt0TmV0?=
- =?utf-8?B?Q2VjTkpwOUNPUG1hajNmdUNXdVRmdzZTNzFOaXVKNC92am9zNm9EaDhtdHFK?=
- =?utf-8?B?SzhQbFdoek8zY0QrdFhITU50aWowaE43cDJzVTF3ZEtZeUQvU28yS2RQWjlH?=
- =?utf-8?B?Sks5bE9DUkZNV0ZUSDllM1pXRHV4RXBEWWpWWHV1bVpKVVg1WlBtOUlJRFhJ?=
- =?utf-8?B?ZVN6a05RVW5USElSL3FGZ3ozNmtJS3hHRE5GRjRwNmNsN0Q2UEZNelVScUVL?=
- =?utf-8?B?TE1Da2tSV2N5N2JrbWs5aFpVaXVMakVSdHJ3RGR6cHR4T0NRSkxqZU1ublNm?=
- =?utf-8?B?Vms0V0RXc0FLQmM4aVZ5VHpmN0RCU3l2MVV0dUlaUFhBMUdCdVZ6ZWNudy9L?=
- =?utf-8?B?VWRINDd0SHFmOUxCeFppRTlkODhybzk1TVJLbFl5b245OE1CdkFISGJRNHhM?=
- =?utf-8?B?OEpON3NLNVF3V0dneUZpU2RjZGVwM1k3SXpNcWs4ZjdzWDJDRDM4TGRwdG9j?=
- =?utf-8?B?N1BVRXdhRDNoMmVuenpEQ2x0andMcW1IQ1ZuSnZwRnU4K09sWnc5cjV5SS96?=
- =?utf-8?B?U2NvaXQ3VUJKbUxkV0twODZBN3F1bmNibU1xV2RqM2JmVXIrUWIraTU5N0t5?=
- =?utf-8?B?VW5DRjRLaUg2NFo5Zm56TGw4QjBwZWMydVFNcTlDZGpaUU5la1hIbzlsbGdV?=
- =?utf-8?B?S3R2VE5YR3N1ZU5jQmUweHVqZ1pjc0RxNmlCdXp0TjhBUDFlZVhaVWRoVCtk?=
- =?utf-8?B?YVBlMG1BMWw3WWMwalphVlhESldJU1RPUXVnZk1BRzFaSmNSVi9NZ1dRMDVX?=
- =?utf-8?B?SUUyL2puZUZjakpRb3kzeWQwajlVSnpJWDZBUmRuRDJIZ0svK1M2M0prNkVu?=
- =?utf-8?B?WWkvRWZRTDJ0VG43aWl5emdkRUhEcVE1YlZCWnByR2hRR2xIT0V6QVY4RzVX?=
- =?utf-8?Q?jhlQ=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(34020700016)(36860700013)(376014)(1800799024);
+ ARA:13230040|376014|82310400026|36860700013|1800799024|34020700016; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xDwR4LvnpKYI7JYa+564wf8V7B5YY59XeuvjmOwJHn3XcPhN/zZTVXaiTcIy?=
+ =?us-ascii?Q?oNH7bAkncYvTcw1fESY2rGP8gV/mrOMi2p/7Ncyhj9que+J/AnREA7bIqGKq?=
+ =?us-ascii?Q?1WURONLZsND1eT93uQLETOiTC3v9FoLqFbiJmnEAQ6XWzub0qRAbR6GB8BKE?=
+ =?us-ascii?Q?0lXoXpFug1g1GBUX5DxlwpDt+WdgWqLYLPTklJRKhvXKwb9Mtn2lzthT3yMM?=
+ =?us-ascii?Q?q/rSQCfXzAM/4T+rgHOp3YznqIO5Qbz0LQvPFmYfnwgxKx7ADuuyKaLgP6uO?=
+ =?us-ascii?Q?+UYJkBWwQIe8RfWriRAORGwMDtzJHxdtiIyAMSeiYDmGLvImLW65HjEh6X8e?=
+ =?us-ascii?Q?vnWyLsgFL5xDlIMkWinx7rwUJXWpm7MWmLoI7VJQdygYGefNo/g74PNLiD+o?=
+ =?us-ascii?Q?iKoKwllwclWMyxtmwseBVsH0kbM5S/TwfR0567AtMazRRMoSMvLpYQn2HrBr?=
+ =?us-ascii?Q?govkaK2Jq6roTLGmHFRKPaci3tazVEWEm45fzHji4dI0aQzx2Rf/S3k8cZQ+?=
+ =?us-ascii?Q?pO60NCtKOoU9R37uMVxhzzPb++K4BJoPF/GgheuZmjtvOR7MUdQ41cui4y+i?=
+ =?us-ascii?Q?PS9EI2UJiKmpY+AAq5Koe/8C78tZ5hp1DkWVLHA1YMjuGb5MJ3vBpl+S2YXe?=
+ =?us-ascii?Q?v940kja2W1x24sevZKQjATFP6kl19K33x6GNleaNQDigjwwxMLkBNeoRPQd0?=
+ =?us-ascii?Q?tyL4bvQm+ZNuj54mzs3L96h9hmpJvaGD3zdUdXTvOQtlPq5mwN3ll96P8X6y?=
+ =?us-ascii?Q?4hxzmYsKT6zz8Lxks4d7LhVglYAJls2HJq/VEXy1OzQ4msdCNWx6VLNmZykL?=
+ =?us-ascii?Q?HsinluadQcHyLkQ8jHR8Ou7EdGwSVS4jjvbL7KS4lfkso+/qFYSd5iFnTghx?=
+ =?us-ascii?Q?uTR4Y9q+y85lE0Cu5u1emQ/rwiy/E5KNomCsXRynE0CtZzKbGulwStih4cT8?=
+ =?us-ascii?Q?9W2UAI/vGzKhgoRyvcY4B3MbZSpuL81rMFhZIz8o1YCivJOFMzt1JbVru/ld?=
+ =?us-ascii?Q?G0GID4KnehkTc8jxw+FLyxUU7L3PSjOOrO+2GJVFeHhhydS4kgNpgJu1wZGm?=
+ =?us-ascii?Q?7Y1P5HXwvWOCznMnv5mtSeYtJH8dhDsvl1ILCizlqZA8R8UIHKd1rKv6cJw7?=
+ =?us-ascii?Q?ni1kz6W5z98if6kBDift8sinZQqQS+GjUxva7QwQLpR5zPGswfu8+ZSI1t5I?=
+ =?us-ascii?Q?kOKp+8G3rR+xVf8MPZVsVizlPGej1QZsIkNY0nZ4dbMqb8CREr2Ue+QL33ZJ?=
+ =?us-ascii?Q?Ge8mtLj01IFHAdxU6f3b/7cHnjEENEpPBikbxDvFeq88+zn+ovEDdadBEXCy?=
+ =?us-ascii?Q?xZRwwCLV06jgzS1HVfb5Tt6nHyKxGLNhYJf7WdBq+DOQrKeHeQnnoaRnvIbC?=
+ =?us-ascii?Q?40GJHuuvDkZ+uC2E5potVs9VLu0oMTFZOZijZDp+BPjCcWS7ZGAptaOVD2R3?=
+ =?us-ascii?Q?q0QjW6JBad/4oWVw9ppIhv4U1tOjwb957Mv5dOIlvK2Wd2oyDPnnQV9pvAng?=
+ =?us-ascii?Q?b8RKV0uxhPVNbRHxWLdjPmXnzXucxcXr5ofKz7g/trwogvBRgcuS5DNnU9oU?=
+ =?us-ascii?Q?huAhL9DI4RcRZN2wBD8=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024)(34020700016);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 06:05:31.5868 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2dddc69-343f-4113-558e-08de1a9efee8
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 07:10:45.3870 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a2716c38-3a93-4cc8-c693-08de1aa81bac
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004685.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9DA.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR10MB7858
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB4565
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,164 +154,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anshul,
+Update all DDR configuration DTSIs to the latest auto-generated output of
+the Sysconfig Tool (DDR Configuration for TDA4x, DRA8x, AM67x, AM68x,
+AM69x (0.12.00.0000)) [0]
 
-On 03/11/25 10:54, Anshul Dalal wrote:
-> Hi Aniket,
-> 
-> On Sat Nov 1, 2025 at 9:30 AM IST, Aniket Limaye wrote:
->> On 30/10/25 18:33, Anshul Dalal wrote:
->>> The K3 ARM64 rproc driver uses the "assigned-clock-rates" value in the
->>> respective "/a53@0" node to properly configure the clocks for the A53
->>> core.
->>>
->>> Although the clock value in the DT node might need to be fixed based on
->>> SoC's speed grade at runtime. Certain SoCs such as AM62p and AM62x
->>> already had this implemented, this patch moves the common code to
->>> common.c to avoid duplication and simplify speed grade handling.
->>>
->>> The logic to detect the correct entry in the "assigned-clock-rates"
->>> property has also changed. Where we earlier relied on per SoC specific
->>> device and clock IDs for the A53 core, we now use the "clock-names"
->>> property which is device agnostic.
->>>
->>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
->>> ---
->>>    arch/arm/mach-k3/am62px/am62p5_init.c          |  87 ++++++--------------
->>>    arch/arm/mach-k3/am62x/am625_init.c            |  84 ++++++-------------
->>>    arch/arm/mach-k3/common.c                      | 108 +++++++++++++++++++++++++
->>>    arch/arm/mach-k3/common.h                      |  11 ++-
->>>    arch/arm/mach-k3/include/mach/am62_hardware.h  |  24 ------
->>>    arch/arm/mach-k3/include/mach/am62p_hardware.h |  17 ----
->>>    6 files changed, 165 insertions(+), 166 deletions(-)
->>>
->>> diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
->>> index aebd5200b0db9959805d04408b34d283e21b6e2c..eeb054d575ad94040370817f648c5319850fe7f8 100644
->>> --- a/arch/arm/mach-k3/am62px/am62p5_init.c
->>> +++ b/arch/arm/mach-k3/am62px/am62p5_init.c
->>> @@ -11,14 +11,10 @@
->>>    #include <dm.h>
->>>    #include <dm/uclass-internal.h>
->>>    #include <dm/pinctrl.h>
->>> -#include <dm/ofnode.h>
->>>    
->>>    #include "../sysfw-loader.h"
->>>    #include "../common.h"
->>>    
->>> -/* TISCI DEV ID for A53 Clock */
->>> -#define AM62PX_DEV_A53SS0_CORE_0_DEV_ID 135
->>> -
->>>    #define CTRLMMR_MCU_RST_CTRL             0x04518170
->>>    #define RST_CTRL_ESM_ERROR_RST_EN_Z_MASK 0xFFFDFFFF
->>>    
->>> @@ -26,6 +22,29 @@ struct fwl_data cbass_main_fwls[] = {
->>>    	{ "FSS_DAT_REG3", 7, 8 },
->>>    };
->>>    
->>> +const struct k3_speed_grade_map am62p_map[] = {
->>> +	{'O', 1000000000},
->>> +	{'S', 1250000000},
->>> +	{'T', 1250000000},
->>> +	{'U', 1250000000},
->>> +	{'V', 1250000000},
->>> +	{/* List Terminator */ },
->>> +};
->>> +
->>> +char k3_get_speed_grade(void)
->>> +{
->>> +	u32 efuse_val = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
->>> +	u32 efuse_speed = (efuse_val & JTAG_DEV_SPEED_MASK) >>
->>> +			  JTAG_DEV_SPEED_SHIFT;
->>> +
->>> +	return ('A' - 1) + efuse_speed;
->>> +}
->>> +
->>> +const struct k3_speed_grade_map *k3_get_speed_grade_map(void)
->>> +{
->>> +	return am62p_map;
->>> +}
->>> +
->>>    /*
->>>     * This uninitialized global variable would normal end up in the .bss section,
->>>     * but the .bss is cleared between writing and reading this variable, so move
->>> @@ -74,62 +93,6 @@ static void ctrl_mmr_unlock(void)
->>>    	mmr_unlock(PADCFG_MMR1_BASE, 1);
->>>    }
->>>    
->>> -#if CONFIG_IS_ENABLED(OF_CONTROL)
->>> -static int get_a53_cpu_clock_index(ofnode node)
->>> -{
->>> -	int count, i;
->>> -	struct ofnode_phandle_args *args;
->>> -	ofnode clknode;
->>> -
->>> -	clknode = ofnode_path("/bus@f0000/system-controller@44043000/clock-controller");
->>> -	if (!ofnode_valid(clknode))
->>> -		return -1;
->>> -
->>> -	count = ofnode_count_phandle_with_args(node,  "assigned-clocks", "#clock-cells", 0);
->>> -
->>> -	for (i  = 0; i < count; i++) {
->>> -		if (!ofnode_parse_phandle_with_args(node, "assigned-clocks",
->>> -						    "#clock-cells", 0, i, args)) {
->>> -			if (ofnode_equal(clknode, args->node) &&
->>> -			    args->args[0] == AM62PX_DEV_A53SS0_CORE_0_DEV_ID)
->>> -				return i;
->>> -		}
->>> -	}
->>> -
->>> -	return -1;
->>> -}
->>> -
->>> -static void fixup_a53_cpu_freq_by_speed_grade(void)
->>> -{
->>> -	int index, size;
->>> -	u32 *rates;
->>> -	ofnode node;
->>> -
->>> -	node =  ofnode_path("/a53@0");
->>> -	if (!ofnode_valid(node))
->>> -		return;
->>> -
->>> -	rates = fdt_getprop_w(ofnode_to_fdt(node), ofnode_to_offset(node),
->>> -			      "assigned-clock-rates", &size);
->>> -
->>> -	index = get_a53_cpu_clock_index(node);
->>> -
->>> -	if (!rates || index < 0 || index >= (size / sizeof(u32))) {
->>> -		printf("Wrong A53 assigned-clocks configuration\n");
->>> -		return;
->>> -	}
->>> -
->>> -	rates[index] = cpu_to_fdt32(k3_get_a53_max_frequency());
->>> -
->>> -	printf("Changed A53 CPU frequency to %dHz (%c grade) in DT\n",
->>> -	       k3_get_a53_max_frequency(), k3_get_speed_grade());
->>> -}
->>> -#else
->>> -static void fixup_a53_cpu_freq_by_speed_grade(void)
->>> -{
->>> -}
->>> -#endif
->>
->> The original function here was implemented behind #if
->> CONFIG_IS_ENABLED(OF_CONTROL). (With an empty function in the else case)
->>
->> While the new common implementation does not have such the config check.
->> Is this intentional?
->>
->>
-> 
-> Yes, this was intentional since there are currently no K3 platforms
-> without OF_CONTROL as per qconfig:
-> 
-> 	$ tools/qconfig.py -f  CONFIG_ARCH_K3 '~CONFIG_SPL_OF_CONTROL'
-> 	0 matches
+The auto-generated files must not be modified, but effort will be taken to
+change the tool output to adhere to the latest checkpatch.pl rules. J722S
+and J721E will also be updated in a subsequent series.
 
-Alright, makes sense.
-Reviewed-by: Aniket Limaye <a-limaye@ti.com>
+All the changes have been kernel boot tested and memtester has passed (same
+as v1, as no functional changes made).
 
-> 
-> Regards,
-> Anshul
+[0] https://dev.ti.com/sysconfig/#/start
+
+Changes since v1:
+https://lore.kernel.org/u-boot/20251031053425.3960963-1-n-francis@ti.com/
+- Remove old config file (Bryan)
+- Add patch (7/7) for DDR configuration documentation (Tom)
+
+Neha Malcom Francis (7):
+  arm: dts: k3-j7200: ddr: Update to v0.12.0 of DDR config tool
+  arm: dts: k3-j721s2: ddr: Update to v0.12.0 of DDR config tool
+  arm: dts: k3-am68: ddr: Update to v0.12.0 of DDR config tool
+  arm: dts: k3-j784s4: ddr: Update to v0.12.0 of DDR config tool
+  arm: dts: k3-am69: ddr: Update to v0.12.0 of DDR config tool
+  arm: dts: k3-j742s2: ddr: Update to v0.12.0 of DDR config tool
+  doc: ti: k3: Add section for DDR configuration
+
+ arch/arm/dts/k3-am68-ddr-sk-lp4-4266.dtsi     | 4410 +++++++++
+ arch/arm/dts/k3-am68-sk-r5-base-board.dts     |    2 +-
+ arch/arm/dts/k3-am69-ddr-sk-lp4-4266.dtsi     | 8786 +++++++++++++++++
+ arch/arm/dts/k3-am69-r5-sk.dts                |    2 +-
+ ...66.dtsi => k3-j7200-ddr-evm-lp4-3200.dtsi} |  563 +-
+ .../arm/dts/k3-j7200-r5-common-proc-board.dts |    2 +-
+ arch/arm/dts/k3-j721s2-ddr-evm-lp4-4266.dtsi  |  591 +-
+ arch/arm/dts/k3-j742s2-ddr-evm-lp4-4266.dtsi  | 4872 +--------
+ arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi  |  653 +-
+ doc/board/ti/k3.rst                           |   11 +
+ 10 files changed, 14408 insertions(+), 5484 deletions(-)
+ create mode 100644 arch/arm/dts/k3-am68-ddr-sk-lp4-4266.dtsi
+ create mode 100644 arch/arm/dts/k3-am69-ddr-sk-lp4-4266.dtsi
+ rename arch/arm/dts/{k3-j7200-ddr-evm-lp4-2666.dtsi => k3-j7200-ddr-evm-lp4-3200.dtsi} (87%)
+
+-- 
+2.34.1
 
