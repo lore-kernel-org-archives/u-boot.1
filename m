@@ -4,76 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A725CCFA06
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 15:26:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D468FCCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 15:34:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81AF9838CE;
-	Mon,  3 Nov 2025 16:26:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 574798331F;
+	Mon,  3 Nov 2025 16:34:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lKEOokU/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="et+h6NVp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8673838D7; Mon,  3 Nov 2025 16:26:44 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4F397838A5; Mon,  3 Nov 2025 16:34:16 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7A3C836D1
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 16:26:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 941F280050
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 16:34:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d0b683hmVz9sQS;
- Mon,  3 Nov 2025 16:26:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762183600;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kfoGLpJ9YFqQVuTfs6MtMtjGwT3LqJsiPsibKDAeMPc=;
- b=lKEOokU/q3s6S64vAtg18xAgswTwkluQ2X+fDUbFl2PjeaJSpIjZ3Ned2Fx9V/OBzRxAFp
- iB6DXZoDnFHa6/FnmDIds0grvhUFxQS6fXGE2niFMpy3NKQ4uY+u2qr9K5KBl7iSdWEbpj
- fN2W5GO4Nfocp5Rfm0/0yfWkMn3OiwK4Le3i0mIhFZKjmHWdH+Pi/H1OuVGj/JSTUsE0V1
- uH21F2OUWDsbw8+07o6WSgxP4kjrNz4JJbv36QnyzWdlYccQPLcKcSlJP/iZUCkasNHN3j
- GQet4SgZIKVqtOictDOcXQF4pIwIWZiyavoxNBieApMEyGUE17q3S4wSaC8qPA==
-Message-ID: <c272350d-7aac-405a-9e61-b1b1f48dedda@mailbox.org>
-Date: Mon, 3 Nov 2025 16:26:36 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-3c9c379af8aso3045328fac.1
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 07:34:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762184052; x=1762788852; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=P6MGOKQ6Bi/fi0fJlvkEgVLhBk3a72j7KRpQtCm1ogY=;
+ b=et+h6NVp5x2P2s/F+qOoZSR81vhHnGFHJInaajjpyk8gS7FErDsvj2m3oVZ3o2vmre
+ OroXNm8WGgvKCSJOOJlSwkCbqP7jriQsw8cbTHEzEC5qrrtEZay8ndYw88OVwdU3h0MY
+ 9Uaxm4QFkiDPUTr8lYeZHWSGbR9rE6qvjo624=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762184052; x=1762788852;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P6MGOKQ6Bi/fi0fJlvkEgVLhBk3a72j7KRpQtCm1ogY=;
+ b=gfNKPOJ5EX+vejwZFstlgSNrKjuvELZBAn3bo9k4vjkUNbkz9LRW1q9K58+suA6ymA
+ d5yeiVmTOl/jpOK2noT/DPvGtzSv+6wAqguvfOD9Cx0VmukcCJKT534TPXIBJ7aOScxv
+ lWZJEaERbRsl2P0o4gJPZNeFAng94OfgMWiKgbSrlHRxWZ7h0fs3ftxYVwi497z+ciP8
+ yUvVf7hWceMqCOiI+wvdKX6RIaoco6LKcH5H4h/SbBKyTKcIaVn2lypMJCzOY4Kfi9A0
+ l5HoC3eF5M/YHHfAi4+6NvdQp9O5DwxdDmgtp+tLiiCxKag+WU6PSR6C4PFzVHx23N0c
+ vPWQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV7ymJjxn7KZCAcjdqVZe/s1Jvt8SXSHWX4ztsWdR/CQ7UWDycfq+x9hZ9K3EUEk0S28e4YznI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwXmPWcZXJmR0If2t17fF5RSfUF9iiFfe+ODd/CdZt9g2X/66kc
+ a9rauZdYLO9fcFY6oWR3d6TENmleByH50r6NGk++wbuG2aoHY8rE3pLJFwnvG2MO0FE=
+X-Gm-Gg: ASbGncsGxdBftw6PSTpVcC8zBBnx4L48nJhr+kiHNaa+ba7qNe5ncd2Lan3pXr/xQPK
+ o0jpLOeM8404dK8CZdfbgkdjnIRJmSey7moxbdZQk47mUb0bfDxsMdgkwK1OGDjix3G36O3TXcM
+ AXP83EIQNP398KSIFH+n/fn4OQOpUtzn2T3/9aEtZJYfUPdjaeD/uNwC1Od6vDdFd9OXSFZsXYV
+ AxuLL7Fov6jZrnzGcjQ5J5yUzP1m0nW0RyFF34xmrXUWj1T3mh36jsou1FSg3Kt6R146WJg/Azp
+ eoGVPmJdrNtCCReFbIw8G6ilzqn64M4f60U5NiSYUoHkUfKY9OzfrBLqwPDl71B+Yl8xadnM4I+
+ 0o0BMM5oogki9rkRFNzj1h/fSqvAEz0Pb5Oh/FAc2pHwte+w/xyKcbE03jwaD9tHqZetLx2JDTX
+ BqFtfjf2Pn95eNkbPV5i7znqDNE7wYyMiApNePezDazEC6MJRfEXZ7NDG+F2ij
+X-Google-Smtp-Source: AGHT+IG6lkXEPSSpKpoY2BLPjKVU+6C4eOiz0jKCy42AFORWlYpNEWqp0uey4GRrxfANszqDS3lEDw==
+X-Received: by 2002:a05:6870:b626:b0:3c9:77fb:dc3b with SMTP id
+ 586e51a60fabf-3d8a5d009bdmr8082050fac.18.1762184052232; 
+ Mon, 03 Nov 2025 07:34:12 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3dff736d560sm143337fac.18.2025.11.03.07.34.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Nov 2025 07:34:11 -0800 (PST)
+Date: Mon, 3 Nov 2025 09:34:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Andreas Gnau <andreas.gnau@iopsys.eu>
+Subject: Re: [PATCH 10/19] dt-bindings: reset: Add reset support for Airoha
+ EN7523
+Message-ID: <20251103153409.GN6688@bill-the-cat>
+References: <20251101004503.2379529-1-mikhail.kshevetskiy@iopsys.eu>
+ <20251101004503.2379529-11-mikhail.kshevetskiy@iopsys.eu>
+ <20251103143808.GL6688@bill-the-cat>
+ <db279009-c0dd-4649-8bb5-6cfcc00d378f@iopsys.eu>
 MIME-Version: 1.0
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW0VYVF0gUmU6IOWbnuWkjTog5Zue5aSNOiDlm54=?=
- =?UTF-8?B?5aSNOiBbUEFUQ0hdIGZpcm13YXJlOiBzY21pOiBEcm9wIG1tdV9zZXRfcmVnaW9u?=
- =?UTF-8?Q?=5Fdcache=5Fbehaviour=28=29_misuse?=
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Alice Guo <alice.guo@nxp.com>, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Etienne Carriere <etienne.carriere@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Viorel Suman
- <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>
-References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
- <PAXPR04MB9644A04B5499EA2BDC3130A7E2FDA@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <e7063153-036d-4079-b9c0-252a5d1eb364@mailbox.org>
- <PAXPR04MB964488C508F283B14E8B9B11E2FBA@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <eca51372-3bcd-4873-ba47-c06781d18466@mailbox.org>
- <PAXPR04MB964436F50D41BF186019598FE2F8A@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <ad762bb5-fb1d-47db-94ca-b8115f077e6f@mailbox.org>
- <PAXPR04MB96441809F6362E35C7D3E052E2F8A@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <6193cdf5-ff52-4c8f-952e-0feb738f5c8f@mailbox.org>
- <189dc72e-a2a3-4081-99df-8ec17cf730ff@foss.st.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <189dc72e-a2a3-4081-99df-8ec17cf730ff@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: w4z6adtyx6nfwfku1mexg1jfjh5w7obp
-X-MBO-RS-ID: cb868c836da3c80aa4b
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LJWcsjjIA8BoTS+g"
+Content-Disposition: inline
+In-Reply-To: <db279009-c0dd-4649-8bb5-6cfcc00d378f@iopsys.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,55 +108,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/3/25 2:11 PM, Patrick DELAUNAY wrote:
 
-Hello Patrick,
+--LJWcsjjIA8BoTS+g
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->> So I think, this now covers
->> - NXP SoCs -- iMX8ULP , iMX95
->> - TI SoCs -- AM6.. ?
->>
->> How about ST SoCs ?
-> 
-> 
-> No impacts for ST SoCs.
-> 
-> 
-> Now ae are using OP-TEE transport for SCMI messages without external 
-> shared memory
-> 
->              compatible = "linaro,scmi-optee";
->              linaro,optee-channel-id = <0>;
-> 
-> => the message are managed by only by OP-TEE channel
-> 
-> Reference:
-> 
-> - b2fb22396f97 ("ARM: dts: stm32mp15: remove shmem for scmi-optee")
-> 
-> - 3fce6bf21309 ("ARM: dts: stm32mp13: remove shmem for scmi-optee")
-> 
-> Moreover the patch is coherent with linux behavior
-> 
-> (https://lore.kernel.org/r/20211125150730.188487-1-sudeep.holla@arm.com)
-> 
-> 
-> This part was initially introduced by Etienne when OP-TEE transport use 
-> a static or dynamic shmem in DDR,
-> 
-> which was mapped by default as cacheable.
-> 
-> 
-> But it is more the case for STM32 SoCs today or in futur
-> 
-> (SCMI channel with TF-M use internal memory mapped not ccheable).
+On Mon, Nov 03, 2025 at 06:24:24PM +0300, Mikhail Kshevetskiy wrote:
+>=20
+> On 11/3/25 17:38, Tom Rini wrote:
+> > On Sat, Nov 01, 2025 at 03:44:54AM +0300, Mikhail Kshevetskiy wrote:
+> >
+> >> Introduce reset capability for EN7523 device-tree binding
+> >>
+> >> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> >> ---
+> >>  .../dt-bindings/reset/airoha,en7523-reset.h   | 61 +++++++++++++++++++
+> >>  1 file changed, 61 insertions(+)
+> >>  create mode 100644 include/dt-bindings/reset/airoha,en7523-reset.h
+> >>
+> >> diff --git a/include/dt-bindings/reset/airoha,en7523-reset.h b/include=
+/dt-bindings/reset/airoha,en7523-reset.h
+> >> new file mode 100644
+> >> index 00000000000..bb0a28673d6
+> >> --- /dev/null
+> >> +++ b/include/dt-bindings/reset/airoha,en7523-reset.h
+> >> @@ -0,0 +1,61 @@
+> >> +/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
+> >> +/*
+> >> + * Copyright (C) 2024 iopsys Software Solutions AB.
+> >> + * Copyright (C) 2025 Genexis AB.
+> >> + *
+> >> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> >> + *
+> >> + * based on
+> >> + *   dts/upstream/include/dt-bindings/reset/airoha,en7581-reset.h
+> >> + * by Lorenzo Bianconi <lorenzo@kernel.org>
+> >> + */
+> > This is as good a place as any I suppose, so what is the status on
+> > upstreaming all of the bindings/etc changes for this platform? Thanks.
+> >
+>=20
+> It was sent to linux kernel already:
+>=20
+> https://lore.kernel.org/lkml/20251017201126.493496-1-mikhail.kshevetskiy@=
+iopsys.eu/
+>=20
+> Patches was reviewed, but not=A0 merged up to a moment. No any activity
+> since last resend
 
-Does the MP25 use SCP at all, or does OP-TEE on Cortex-A handle the 
-SCMI/hardware interaction ?
+OK, thanks. We can probably just keep an eye on this and move to
+OF_UPSTREAM in hopefully early 2026 then?
 
->> Anything else left over ?
-> 
-> 
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Thank you
+--=20
+Tom
+
+--LJWcsjjIA8BoTS+g
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQjLbgAKCRAr4qD1Cr/k
+CiSIAQCAX1yE3KjoRq9jnePziDrP8eLADc6xo6wMejbeoM8B8gD+Is8TSS24EzAB
+eGmN69UUvs2hARbp6kpGXWum/JksDgM=
+=gMOY
+-----END PGP SIGNATURE-----
+
+--LJWcsjjIA8BoTS+g--
