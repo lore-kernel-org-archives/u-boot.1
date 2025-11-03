@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BACA3CCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 15:24:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A725CCFA06
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 15:26:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB6A8838E7;
-	Mon,  3 Nov 2025 16:24:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 81AF9838CE;
+	Mon,  3 Nov 2025 16:26:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="T4mbXmad";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lKEOokU/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 575D1838EC; Mon,  3 Nov 2025 16:24:43 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D8673838D7; Mon,  3 Nov 2025 16:26:44 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C34D838E5
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 16:24:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id A7A3C836D1
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 16:26:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-29524abfba3so30900675ad.1
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 07:24:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1762183479; x=1762788279;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ed7sGU+y17dTGoH8yIokkpFc+sLfx7OM8CIm/QZ9kAM=;
- b=T4mbXmad8NYbhGqAMB8iWvMTsEziaB+fZ4fFMxhV7Vhr3v7rwYq6Rhmd8qT7z0CCdp
- c4xJyLaMYZuFJEaE6bUGGRINnMjWCRqJxvcEtPhgijJKvJU5lY1iTdl89z/oZa00XzNK
- rumAwfjvwUxDlYENpPsYaag/9KfRVgMO83HbU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762183479; x=1762788279;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ed7sGU+y17dTGoH8yIokkpFc+sLfx7OM8CIm/QZ9kAM=;
- b=JHKceJejxvX1F3Q468px2DofRJ/5sEgyouh8U4OSZIV19Bso5Zao51joJpYfgs2BBw
- ++u7vuW/P+MF0h9O5ExPDcegJkJwrhriyUQwTdVK3AG3FRFyLWV6u5G5LuoZQ6gfA0Uq
- qfRvL9gFVlCUWS1r88QOsmT7KoPhZRY6luWnhOC7iwzIAAYAbeGW8uVjnm4nmvTcDBBp
- noM5QUImKYjJmVn8tLz1GBn6ebwHL5QQ/MuC8lXcU6jbk6QB91ecaBaAlwf7nRAK84eQ
- BpBxFxVFmBWP/hxc4MSE/iBWoxL9gByyx29EJshk7w8RM9F2NPvGd1CwxyrjMbUrXIsk
- 7FlA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWY7+feQH81g90AWExQXT2BQaIPpWwrjjuc3dOUOEzzXMDdX6UcvKW0NmGxiWuoaM5Zb1u0h9E=@lists.denx.de
-X-Gm-Message-State: AOJu0YwD8vSIyi3PR+dbd4uNfZH1eeexxVthXC+B9KiKloFmB56KgkzP
- Yc8Zo2unzJ77uVWBlMH+Ww4Pn8SQILYCr71wFaazWp3RxzVwDXxReRa65+XyNqO/ctTbU1n68NW
- vFc/8PQ5PEgp6rc4Cku7YppmfCQEpYvL9M9EmWln38w==
-X-Gm-Gg: ASbGnctIQ/jUhpf7XRn5KGsBYc3C4lucM2UqeItlNtnmWfq1JNf5ruh5Pzq+yF75AWb
- XOECWNiFRh61K8L8I5/JmYN0OTzQU8ZNacLuhkQPrEAM27GEKPKhoqSDAc8Bwkky75GNk94KsIZ
- sh4W17BMWXZqrCvL6P9F1hU2MJEh74YG2cL8+XywRs1HaCNQdsNy+SNGfjjbL9x05SU4Cs7k2qY
- uPZNlKoDwDFNyLXJwka7nDwEUrzs/NaPUjNlgwGlv4dt58VJACAw1Jqq1vtAYjDrEF6tjhvYSpa
- HSYbpyCb6uGa7wfm+9iWDrlpOyzxw0T/Y8czXUIwdTustMcEmE7WAdL2svG1
-X-Google-Smtp-Source: AGHT+IHPSZV5EWIphVeIDBuR7gNaxFPOuyPBdCbB9boLvume5Y8sgAOHAF0Izs/0+OEM2JUpCXsN2qt67pR3kEXyRwc=
-X-Received: by 2002:a17:902:ea0e:b0:24e:81d2:cfda with SMTP id
- d9443c01a7336-29519b9ef83mr161075125ad.0.1762183478957; Mon, 03 Nov 2025
- 07:24:38 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d0b683hmVz9sQS;
+ Mon,  3 Nov 2025 16:26:40 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762183600;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kfoGLpJ9YFqQVuTfs6MtMtjGwT3LqJsiPsibKDAeMPc=;
+ b=lKEOokU/q3s6S64vAtg18xAgswTwkluQ2X+fDUbFl2PjeaJSpIjZ3Ned2Fx9V/OBzRxAFp
+ iB6DXZoDnFHa6/FnmDIds0grvhUFxQS6fXGE2niFMpy3NKQ4uY+u2qr9K5KBl7iSdWEbpj
+ fN2W5GO4Nfocp5Rfm0/0yfWkMn3OiwK4Le3i0mIhFZKjmHWdH+Pi/H1OuVGj/JSTUsE0V1
+ uH21F2OUWDsbw8+07o6WSgxP4kjrNz4JJbv36QnyzWdlYccQPLcKcSlJP/iZUCkasNHN3j
+ GQet4SgZIKVqtOictDOcXQF4pIwIWZiyavoxNBieApMEyGUE17q3S4wSaC8qPA==
+Message-ID: <c272350d-7aac-405a-9e61-b1b1f48dedda@mailbox.org>
+Date: Mon, 3 Nov 2025 16:26:36 +0100
 MIME-Version: 1.0
-References: <20251011180636.GM298503@bill-the-cat>
- <ef6da754-8217-42ac-bde4-8752cbd3090d@iopsys.eu>
- <20251012190713.GB6113@bill-the-cat>
- <d0e51598-8786-4f4b-a62d-7c981bf186a2@iopsys.eu>
- <20251103151715.GM6688@bill-the-cat>
-In-Reply-To: <20251103151715.GM6688@bill-the-cat>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 3 Nov 2025 16:24:27 +0100
-X-Gm-Features: AWmQ_blWNytq3aWskx1P-zCO-PSDrP9uFOcvkiaZb-Rf7H3P4EIzuM3SxZFbmng
-Message-ID: <CAOf5uwniF2C5txO=fqcKCZUbdZAm3b9Z2MkBamOpoyff-1p5Gw@mail.gmail.com>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-To: Tom Rini <trini@konsulko.com>
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW0VYVF0gUmU6IOWbnuWkjTog5Zue5aSNOiDlm54=?=
+ =?UTF-8?B?5aSNOiBbUEFUQ0hdIGZpcm13YXJlOiBzY21pOiBEcm9wIG1tdV9zZXRfcmVnaW9u?=
+ =?UTF-8?Q?=5Fdcache=5Fbehaviour=28=29_misuse?=
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Alice Guo <alice.guo@nxp.com>, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Etienne Carriere <etienne.carriere@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Viorel Suman
+ <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>
+References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
+ <PAXPR04MB9644A04B5499EA2BDC3130A7E2FDA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <e7063153-036d-4079-b9c0-252a5d1eb364@mailbox.org>
+ <PAXPR04MB964488C508F283B14E8B9B11E2FBA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <eca51372-3bcd-4873-ba47-c06781d18466@mailbox.org>
+ <PAXPR04MB964436F50D41BF186019598FE2F8A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <ad762bb5-fb1d-47db-94ca-b8115f077e6f@mailbox.org>
+ <PAXPR04MB96441809F6362E35C7D3E052E2F8A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <6193cdf5-ff52-4c8f-952e-0feb738f5c8f@mailbox.org>
+ <189dc72e-a2a3-4081-99df-8ec17cf730ff@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <189dc72e-a2a3-4081-99df-8ec17cf730ff@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: w4z6adtyx6nfwfku1mexg1jfjh5w7obp
+X-MBO-RS-ID: cb868c836da3c80aa4b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,39 +90,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+On 11/3/25 2:11 PM, Patrick DELAUNAY wrote:
 
-On Mon, Nov 3, 2025 at 4:17=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Nov 01, 2025 at 09:32:35AM +0300, Mikhail Kshevetskiy wrote:
-> p
-> > Hello Tom,
-> >
-> > I just sent a fix for the issue in the my "coverity and 64-bit division
-> > fixes" series.
-> > If it's needed I can split the series and send patches separately.
->
-> Thanks, that series looks fine to me.
->
-> --
+Hello Patrick,
 
-I will pick with other series
+>> So I think, this now covers
+>> - NXP SoCs -- iMX8ULP , iMX95
+>> - TI SoCs -- AM6.. ?
+>>
+>> How about ST SoCs ?
+> 
+> 
+> No impacts for ST SoCs.
+> 
+> 
+> Now ae are using OP-TEE transport for SCMI messages without external 
+> shared memory
+> 
+>              compatible = "linaro,scmi-optee";
+>              linaro,optee-channel-id = <0>;
+> 
+> => the message are managed by only by OP-TEE channel
+> 
+> Reference:
+> 
+> - b2fb22396f97 ("ARM: dts: stm32mp15: remove shmem for scmi-optee")
+> 
+> - 3fce6bf21309 ("ARM: dts: stm32mp13: remove shmem for scmi-optee")
+> 
+> Moreover the patch is coherent with linux behavior
+> 
+> (https://lore.kernel.org/r/20211125150730.188487-1-sudeep.holla@arm.com)
+> 
+> 
+> This part was initially introduced by Etienne when OP-TEE transport use 
+> a static or dynamic shmem in DDR,
+> 
+> which was mapped by default as cacheable.
+> 
+> 
+> But it is more the case for STM32 SoCs today or in futur
+> 
+> (SCMI channel with TF-M use internal memory mapped not ccheable).
 
-Michael
+Does the MP25 use SCP at all, or does OP-TEE on Cortex-A handle the 
+SCMI/hardware interaction ?
 
-> Tom
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+>> Anything else left over ?
+> 
+> 
+> 
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Thank you
