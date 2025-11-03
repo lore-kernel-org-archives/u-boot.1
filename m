@@ -4,161 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB2BCCF9FE
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 14:14:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D64FECCF9FE
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 14:17:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E4C7838CE;
-	Mon,  3 Nov 2025 15:14:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 3831F838CE;
+	Mon,  3 Nov 2025 15:17:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="h2hAIYrE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YLAisSHN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15758838D7; Mon,  3 Nov 2025 15:14:16 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 90831838DD; Mon,  3 Nov 2025 15:17:33 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31B4483700
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 15:14:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id ED8D0838CE
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 15:17:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=maFpqncMNjPUo2EUKTMZodhVVs0M3/r9xEt+jBHuh/1rBwRglL7Mc/qx7KA6+ASA9lPNP4NccRh0eoLs5P7uwwFCVKGEPJp3zgXNERRFEBGRhknfrDZHsYHoM+xuo2fI8ybUin3LWcJW0LxMFx4ck6o6En0ruoj/uW4F7yHk9kqDyX9XYGBG739y0ygMZN4Rd1HVSojh9slkpQLAoByvb1EAVUebhbSOLpmaT6SOUBiPBXxD5WrVDcRYjo2CGbolXjEYxtFo2MbsJ8ywWH6YeeprXew3bfC3YFAWStSy3FgTvbntZZMidTh+Ijrk12VFPgb9/7CQshLMY4ghvVdtNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W1oBeOOmWUW6rWT9pC+f4iMY7diLXeHrfZyFrQWd8pw=;
- b=LHpywYdYK+WqH3L+wS0TIYwQnd0O0Mcw19vOIlXnLm+nxGrHU670XwU5pUreQZN1/55IsL411Fg8rhipoz57ronAfUVl63uoMD8o5ZDH/TAUp5pCfODTag9Gjtuqm8lbEho3IAarpUsIYvbHEZ+f5zV7Ras2eeuJqeho9R+9fRVl9UYzy+/EcASPUhFW0qrT1hZ/gsvRX+qk7enKZwxcwI40rlnT5iy8b8zYMwffs+v46Bm7GBGaUj4GxB8uW4Z0osoLAYaS7oWcmDInLsvTD3VmWdUMW/eR43I7okaXM1KxLlsSyFCr90bobTCo5cT+trjSAmk85wE2jJOYB1Wecw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W1oBeOOmWUW6rWT9pC+f4iMY7diLXeHrfZyFrQWd8pw=;
- b=h2hAIYrE6msrqB+ilxND41lu+83PbdMKT2Jha4+POUi2W38illUPnMWU5qGCOmA3qP62mvWMyIQ95MJPxkmslJUs1bw1Pz/0h40pBgXAPlJmBjHlaQ0oai/xJ1zt7XZNvKRGttIjHE5jm0WopYoaagprXFOXOYvBOgf6AA7ZdUU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AM0PR04MB7090.eurprd04.prod.outlook.com (2603:10a6:208:19e::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Mon, 3 Nov
- 2025 14:14:12 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9275.013; Mon, 3 Nov 2025
- 14:14:12 +0000
-Message-ID: <fc2149cf-97ee-4ac4-ada3-c4797607a5ec@cherry.de>
-Date: Mon, 3 Nov 2025 15:14:10 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] cmd/part.c: implement "part name" subcommand
-To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20251020121100.1742812-1-ravi@prevas.dk>
- <20251020121100.1742812-3-ravi@prevas.dk>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251020121100.1742812-3-ravi@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0012.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1e::27) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-3d1e68f7a6cso2712716fac.3
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 06:17:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762179450; x=1762784250; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ryw1QHhCShG7ZEnRjA9RaY4JjG3v/UyzrigR96WVRjY=;
+ b=YLAisSHNcYnJbZqN/hinGFS3xtWgPR0kkgIyv9t1rY+dDijq8uZQs4Js+PM9ynvn/R
+ MCT2JYwDjorGTH+jGeJSpf60joHVHSQvwNefYZ1n0SmYV0sdvLysgojRuLE4PxNl3NmC
+ 9oVpPjg5/ESuQoLxGRUSShQ2zaXL47YuyfKLI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762179450; x=1762784250;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ryw1QHhCShG7ZEnRjA9RaY4JjG3v/UyzrigR96WVRjY=;
+ b=K7gtv5gaTcoM3kvi1utvQTifH4t3jzHqRLrk7dNPLJ3gijUoGEg2i/t+TqCohNVwW1
+ ed2anc4LetVY9LOOPkH6h5sh7scTOhkEN4OUI6kR1+KfsGSIYr6keUKRf35mufjQb2HG
+ Mp8L/tVe0/Bskc3TZMLPo4kKAMJ/zhxYCliz8rfgXVd/S/T9TndyT4a6zQM1X0V8fMf3
+ oIFUQTyC1m51pAkzRbtWFl7onP38jPTTVsV7eXw+/jsu9j4PXFLhBVxOCSkn1PZ1mNtC
+ VDhzcS/nKfVZrl8HuZP0Cs0lGUa8wWsl0Cl6OWKL5PTMQElGLVO5BcP7v7YSfiso2jO1
+ xPug==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXr3yRENPsa55d9kzfTDmq0dF0wezR/ebdTxxPfnkCpZ3vgDIWeb55dyb+bj3SqbrF3s8jw4b8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxA2Uf8LzxIplSL8ySRPze+xezHlP+74BNYnnRnneoTTFyqzvfr
+ BLso3DTGIkxFqphqcXEUU6wQCK4U1LGllJPWP5Z1rOUpJcRh3F44jWG8R8WooPOnOSc=
+X-Gm-Gg: ASbGnctHbLC23BhCkKYOlaHHkw3OyjMovi17kor4BBmgOHbff2Biw+eHm2yOWDo1WPi
+ Vxu8w9CpxAjzJPTm0C1JBdzljhZh5cmxOLIhHftj5c5KD6jIHxwLzYU6eTYmEMheKHfUQgUPsCh
+ HA4pC0ApVcK4RpNMgPQ1+8+kGezhySq8rn47uT6bDSw63XB7dzqGNy3q052+fscHr3mb2S51nqp
+ 6EYXrsuLILEpCPIINGoeJ9Y4mrrwDcB32iN+H78YeuwH4ElOO7WxPCUcQCohpxZeta09h66BDbp
+ D5xdyzhf4X6f8Vv8Ae/bECwfNRwgBKWuWoYAJ6HZSuT7EGi5DgTyL2y/F7J6AyTOqt6wx7sDcqG
+ ypPZYs4Y3dvbgeHhdUkTEw534R8e86wr2nRLaCvGq5YwYc94sUBQaMW99+7ja09d3vrFQdM0PHr
+ kXjR7/a9Xoirpf7TN2c1XDlm1vHXN2E5ah0tEFxj4=
+X-Google-Smtp-Source: AGHT+IGPwkMNxSr+dWAFHLWHwiy7iymH1PZdb9e+LV13y3wzQjPuqo2XLFWtbt11DZD75ySIBBC7SQ==
+X-Received: by 2002:a05:6870:d107:b0:365:a979:553 with SMTP id
+ 586e51a60fabf-3dacc5ce491mr5452836fac.36.1762179449564; 
+ Mon, 03 Nov 2025 06:17:29 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3dff6f625b7sm87258fac.15.2025.11.03.06.17.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Nov 2025 06:17:28 -0800 (PST)
+Date: Mon, 3 Nov 2025 08:17:26 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: =?iso-8859-1?Q?Rapha=EBl?= Gallais-Pou <rgallaispou@gmail.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Yannick Fertre <yannick.fertre@foss.st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Kamil Lulko <kamil.lulko@gmail.com>, Dillon Min <dillon.minfei@gmail.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 1/7] ofnode: support panel-timings in
+ ofnode_decode_display_timing
+Message-ID: <20251103141726.GJ6688@bill-the-cat>
+References: <20250904-master-v3-0-b42847884974@foss.st.com>
+ <20250904-master-v3-1-b42847884974@foss.st.com>
+ <CAFLszTiT9iLx6gguhVui2Qh0Ew89yhvpDggKwPo71cB+Rv=xJA@mail.gmail.com>
+ <aQavXq6jVagkIa53@thinkstation>
+ <CAFLszThdV7cZ-uBXzqRYWv-HsGbNJV9BVKVOC4FQUD1yjZDNkg@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM0PR04MB7090:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2a160525-2d69-4e62-cce1-08de1ae34319
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WkZtQUgwZW1SckR6TDZCb1E1eG9PT2FPVGlHZG9maU0wUURMZjFxWFVrTFdJ?=
- =?utf-8?B?bU5PSzJJUXU5MW5nQktUZ1BpTVNIU2hXSmVGVmEyc3hTNXNJR1dSa1E3elQ4?=
- =?utf-8?B?NWhmNHhaTG9rYWo0OFhuczhrUWllNTVMa3VFMW1sQWplV2tqbTB5cVFnY1lk?=
- =?utf-8?B?Y2pnTURoUE5mYzFaajhQcTFqdjc5RHJsUDFyRTZUZzhKYytidk10bmxSSmh6?=
- =?utf-8?B?N0lWR0pEK1IvZER5QTVJYTNobmVPYTRIaU5veU9qclpuVXlIQ29KNlAwU2E1?=
- =?utf-8?B?WXc3Y2dPWmdZdnlVNkxhakwrOFdlNlBrcHJrYWlCQ2EvSmdZTGFuWEF1aHJG?=
- =?utf-8?B?RW1aaWVZTlgwVVZoRnNzS2VQbnRXaFVTS3Q0dWRiamg1bFd3cGVOM1ZRSmtn?=
- =?utf-8?B?ellIR0VxVFhvTklteHN5Ui9uQzFPdG15aHYrMHdKTStWV3RBTHBqVVhyY0xS?=
- =?utf-8?B?Ynp6K1JIYWl6Uld5WHFkSGpCK0NLZm1CSkw2MUhQYXN4WmwzdWx4L0YwY01N?=
- =?utf-8?B?Qy9CQS9BaVdjaWNGWTRHekJqVjAzNy9NTXptcVpRcFh5QlRLV09TSDFVMUZW?=
- =?utf-8?B?aXBlaTg3aTJaaFcyTmZ3YjIrMG1ZVGMwN0ltSWgyeFNrVTZUTkx3cVJxa2Mr?=
- =?utf-8?B?RGZVbnV0WDZmMUl0eGVxQWJVT0gwS0k4ZzNFRStxd2g5TUxyZFZwN29pSDJo?=
- =?utf-8?B?cFlEM2MzWlN3U2thMng4NWdwdEFBRmZFbHduOEorYTFBN0EycFhkbWhpQVBs?=
- =?utf-8?B?NFd6OGZxU1BxbTBjSzM4SEM0UGtPOXU2eW1CVExPN1BETWdPdzRQR010U1Qz?=
- =?utf-8?B?SFdYNkh0YWR1MHBQZ3kxWFNOZkliZTd3UUl5UVJ3RWE1U0RXQnJIMHVMak8r?=
- =?utf-8?B?MWl3dWNBR0JjUUpRclpQYVhzSlY4Sm9McnMyT0lYeTQrM0ZZVERGcFFOaGQz?=
- =?utf-8?B?WlFyOXUvVkdhRWdUVUM3UjZqekpDa1JhQ2J2NkhsUWV3VUMvSm1kLy9jdW1p?=
- =?utf-8?B?RlpkWHVkUG1yUWt5dkRjcGY2NVpCZDE1dWpSY3h0RzBPK3pZYVo0Z2NYeUdt?=
- =?utf-8?B?N3RUV2s0OVJxQlFoYitpbTh5Vnc3UURrNjRXb01sUkl5RDlGVmt3U1VaN0tG?=
- =?utf-8?B?aEVrUFpTWm4wdHhmWUo3T1QrVExOV2hvZHBRaUJ2KzAxdzhQWHFDczNxNUZF?=
- =?utf-8?B?MXFMeWg3c2VmY0FXbjZPSXFjeUZ5UDhPaFZxR29BMXhYQlNEQzlvdlVLUXN2?=
- =?utf-8?B?WEl5NnZZSVNqTkkxNnQ2akthcTlIZ3dJdHFFVllHYVBTOU52QmVvYXlpNWMz?=
- =?utf-8?B?WmF2ZTV5MXFkcDhGdC9kTzF3TXkvUVlxUW1oczNmbGVUY2d1UmlTcTVHcUho?=
- =?utf-8?B?bU5rVjh1N0liVmZDbGZLYnBnd3NEeHBqRUE4UkJtMEo3S0UvZmh1cHV0OW5m?=
- =?utf-8?B?RUdUd08xcnF4SFlYbUdJUlRGQVVSQTZSZDNwektIei9rdnhIRExRenlHN3VG?=
- =?utf-8?B?THVFN09qOHVBTWU5dThGaGEzODhMemZ6QVM4b3U0ZUd5b0tyQVVNWHY2b0Iw?=
- =?utf-8?B?UzlrWjlBV29scFRBVzZEamlrVnlIZkxHN1RkTXVkb0EwWnFGRWVkTTNkQVpt?=
- =?utf-8?B?RmRkcGtPSzNoakhsRVlBck9kd2QyRXdSUWhGbmRPZFZjOVdwZXVWN2JKc2Vn?=
- =?utf-8?B?Q3R2RmZIVHlqcEFJR2pKQVR1UlByeXVQVy9FWDk1Z1lmSU9zelk4L1RIODFZ?=
- =?utf-8?B?azVwTi9CclhLSnVxRWt2bXJDVDZ3VDdoMUQ5d1dkZW51TWsyanp6bDB4M2li?=
- =?utf-8?B?c2RTTWhIZTVNRklJdTcvajZtOVZ6QWd4UVpnM1VyYTVzcElmTWFpSU9ybnBv?=
- =?utf-8?B?Z3VpRnY3eDhZYTJtbnB1UEFtRndlYkxQT3ZuOGZMRUlTNE55OEdIVVpTanZ3?=
- =?utf-8?Q?B4Vd9of5/GAv1dF6qHuo1TKwUdF3yCAQ?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WnA4L0luS0d1eXJxMElGZHluUDJtQ1lWaXFaYVUzOUxFYjRSZVlVcC9XS0Nw?=
- =?utf-8?B?WFE2cmNqUndIVDhtKy95cFVwUXorbFJVYUlGUEhuQ2xUZjVVU3RHZSt3OUow?=
- =?utf-8?B?Q1lhSUs4MHd2cDduNjUxcWJtTFdBU2ZZdE90K3FtNFd4YTJ6OWVPZk1RSFJF?=
- =?utf-8?B?T1FpajE5SnFkZ3BkdVRiRWRpTm4rZFlBNy95bUVmdG8wbzVhVmpHdnFQMm56?=
- =?utf-8?B?MWVVZHBBbW9aN2pTSkdZMkVBdUVZUlFxK015dnFPRmw5d0pHTVZSVXlJRnpW?=
- =?utf-8?B?LzdtU2tIZ0t6OHNTUDdvSmNscnN2S2FHNUdFVWJhOFNSenp4WmtPZnRrNHNw?=
- =?utf-8?B?Zk1pN091Wnd1eWkzdjZobGx1Uk5NUkREQTNHRHpQVWJ0UkdsQ2NEZStuVDBr?=
- =?utf-8?B?aHg4cFZQRUJNY2hQTUdDVHNEeTBvNlZmOW9ROUNMb3ZpVXNsWXgrcTBEMzdj?=
- =?utf-8?B?MmV1cENBOXJnT3dKS2w5Y2pHZi8vZjdLeUZ3WERNMjNYLzc5ODdUZGRHSTE0?=
- =?utf-8?B?Ry9GUVd1Z3VidWpOTHRxeUdGdlhHTjhvbFBPSUVpQmFVeVVqM2RVQ0h1U3Bu?=
- =?utf-8?B?dTV1V0hsV0tlYk1YRGhIemVQa2p5UVFBVXBsbTdDaTFFL2tHUnI0SFVjbmla?=
- =?utf-8?B?T29yQlJabFRwS2JhNkF6SnJYWTNsVktCeUMwNnVDdmV3dEFwNmRtVVhPdnZy?=
- =?utf-8?B?WGJuOGs2cE9rclJwUGpOOEVGUzJPY0xpYzd5eXFlbTBEYTRrY2hJb2NOS0VI?=
- =?utf-8?B?QlF3M3Y4TFh1QktiYkx6UjYrNExDejZ1V2JTSTJqMGRBdVp5Uy96cWZ2ZkZM?=
- =?utf-8?B?amNadi8rblVsQ0MyUUJac2hFa3BvbVVOY0pHQkpJYlBid1FHK2JiZ2Y4Tk80?=
- =?utf-8?B?OFpMWXJVNkd2bmhZejByOWxCQUpTa2t0UGlvMm1jZ0h1WGloTnVaKy9UR01R?=
- =?utf-8?B?UENibDJmT1M2QUNwSktsTWUrb0o2aTBsUHZ3Qm5QYXRTUVNhTU9oa1haTHYv?=
- =?utf-8?B?RUYwVGtML3pQTXJENS80SEtnck9VOTVDc2VXLzE5aFNSQWUybytjMzdKTHQr?=
- =?utf-8?B?WlRucVBJN09mOXVxTEc3Y1FGSWVMWkZkM1BJcFRKUkV1UnZGUkxadnBLQThW?=
- =?utf-8?B?RkpWMUJnaUFrSExpNjFYclA2RVdubXNOVHBSNVJJWGE2OXpPWHYrb3U5bnZy?=
- =?utf-8?B?ellsNVgycU5wNUNLdDgrMm90L1BkUHdza0JHUTByRU9RS3BJQ1pYcXZGUGRp?=
- =?utf-8?B?emJ1UEhPUTVXelpZeDg2SndNSzllS1hOd25kTWRNMHRJb2VRRGhxc0dHdUFq?=
- =?utf-8?B?VWJTYWhQR2dJTURCMjdWV1VVczF1alhMN1RmS2pJVDVuaFc3eE0zUnE2V3hj?=
- =?utf-8?B?OE9jamRLU2tkQU1KY2c1Y2JoSXdqdjhxZzBsNDd2UUJRVGdabDdCS1I0aitX?=
- =?utf-8?B?MFZCNG80bDRVYm4xSFc0RHgvRS95WTlveVVlN2ZUMzVYMHZGOXY2NW1jZlF1?=
- =?utf-8?B?RDd5eEVZaVVMU2t0VWtuQ2ljMUtTSlp1VGJYM2tadG53bDVyek56dFlNOXI1?=
- =?utf-8?B?TWo1NFIwL3p3K0svakdBSXhKRHpzazdEdnZXUXZuMURZT3A0STQrWkNDajBQ?=
- =?utf-8?B?a2dvQzlHMUFoK3p6RzZCUGZEKzZ1enJEclZrSmxIdlpwMmN4SzVMRUFxQ3dK?=
- =?utf-8?B?SVZJNlZXa1AvT3dlS3VmS1o3bitPcE9ITmxRL08yWml4aVd1SUw5Q2IyTlQr?=
- =?utf-8?B?djZaL3ZaNzM0L04xcnhFb09ERW5lOWZFenh4YjhGdmhhdTB2TlN0c2xRVFhh?=
- =?utf-8?B?SW5Xa1VWVzZrZ2QycnQ2b2lrcTVPS1FYWTlwcEkrZVpMbkZlTTJzQmpHUXYw?=
- =?utf-8?B?Z25xSU1vZTF0RE1hOTVlcEtVeEZnbmM4NkNHWEZUUjFCTnBmcHY5cGFPV1k4?=
- =?utf-8?B?NDA2RzVPWE1qVUNERDdxZjhrOVJ6QVlTRm5tMlVzNlN0cnpaQ21iVDUwSUpJ?=
- =?utf-8?B?OUR1dWI0UkZMcFcydUlzUGN0YXhJbDZhMVlvV2MxMlBwODZrL2dBTWh3UmFJ?=
- =?utf-8?B?WjJTdmE5elVYMGNhVHo4TWY1VFoxU2NlMFE0RlNLY2s5cWlwdnByWURhYy9j?=
- =?utf-8?B?NnJmTUtWTGVFQndGUnlIM2tTYzAxK256aUFDRWNQSlhsTEZCSTJvSFhpNGwz?=
- =?utf-8?B?RWc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2a160525-2d69-4e62-cce1-08de1ae34319
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 14:14:12.0659 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dL9kc3KQzV71LpLyioA1jOvX3cfRyfZaNOQuu+/SUdKQ5QljG3f4QmKqhUprvVgAuSttgrlBZfiO+r4xsx4+VihZURoPXb74RiuXs7E2biw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB7090
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qbjBMJgEwQtVadz2"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThdV7cZ-uBXzqRYWv-HsGbNJV9BVKVOC4FQUD1yjZDNkg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,19 +111,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
 
-On 10/20/25 2:11 PM, Rasmus Villemoes wrote:
-> This is a natural buddy to the existing "part number", allowing one to
-> get the partition name for a given partition number.
-> 
+--qbjBMJgEwQtVadz2
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Quentin Schuloz <quentin.schulz@cherry.de>
+On Sun, Nov 02, 2025 at 08:53:43PM +0100, Simon Glass wrote:
+> Hi Raphael,
+>=20
+> On Sun, 2 Nov 2025 at 02:10, Rapha=EBl Gallais-Pou <rgallaispou@gmail.com>
+> wrote:
+> >
+> > Le Sat, Nov 01, 2025 at 10:03:59AM +0100, Simon Glass a =E9crit :
+> > > Hi Raphael,
+> > >
+> > > On Thu, 4 Sept 2025 at 14:53, Raphael Gallais-Pou
+> > > <raphael.gallais-pou@foss.st.com> wrote:
+> > > >
+> > > > The "Display Timings" in panel-common.yaml can be provided by 2
+> properties
+> > > > - panel-timing: when display panels are restricted to a single
+> resolution
+> > > >                 the "panel-timing" node expresses the required
+> timings.
+> > > > - display-timings: several resolutions with different timings are
+> supported
+> > > >                    with several timing subnode of "display-timings"
+> node
+> > > >
+> > > > This patch update the parsing function to handle this 2 possibility
+> > > > when index =3D 0.
+> > > >
+> > > > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> > > > Reviewed-by: Yannick Fertre <yannick.fertre@foss.st.com>
+> > > > Signed-off-by: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
+> > > > ---
+> > > >  drivers/core/ofnode.c | 17 ++++++++++-------
+> > > >  1 file changed, 10 insertions(+), 7 deletions(-)
+> > > >
+> > > > diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> > > > index
+> e040e3f2806ffe74c58dcd82f36307351acd5a99..5a721b46e5a3214e7bd437739776362=
+c2d22a3c9
+> 100644
+> > > > --- a/drivers/core/ofnode.c
+> > > > +++ b/drivers/core/ofnode.c
+> > > > @@ -1221,13 +1221,16 @@ int ofnode_decode_display_timing(ofnode
+> parent, int index,
+> > > >         int ret =3D 0;
+> > > >
+> > > >         timings =3D ofnode_find_subnode(parent, "display-timings");
+> > > > -       if (!ofnode_valid(timings))
+> > > > -               return -EINVAL;
+> > > > -
+> > > > -       i =3D 0;
+> > > > -       ofnode_for_each_subnode(node, timings) {
+> > > > -               if (i++ =3D=3D index)
+> > > > -                       break;
+> > > > +       if (ofnode_valid(timings)) {
+> > > > +               i =3D 0;
+> > > > +               ofnode_for_each_subnode(node, timings) {
+> > > > +                       if (i++ =3D=3D index)
+> > > > +                               break;
+> > > > +               }
+> > > > +       } else {
+> > > > +               if (index !=3D 0)
+> > > > +                       return -EINVAL;
+> > > > +               node =3D ofnode_find_subnode(parent, "panel-timing"=
+);
+> > > >         }
+> > > >
+> > > >         if (!ofnode_valid(node))
+> > > >
+> > > > --
+> > > > 2.25.1
+> > > >
+> > >
+> > > Please add a test for this in test/dm/ofnode.c
+> >
+> > Hi Simon,
+> >
+> > I'll gladly do that, but I haven't write and use any test in U-Boot.  So
+> > it is a bit foggy how to implement it.
+>=20
+> There is some info here:
+>=20
+> https://docs.u-boot.org/en/latest/develop/testing.html
+>=20
+> >
+> > Do we want to create a fake device-tree and test each configuration or
+> > do we want to test in the _current_ device-tree if timings are correctly
+> > set according to the index value ?
+>=20
+> It looks like there is a 'display-timings' node in test.dts, with three
+> subnodes, so you should just be able to get an ofnode for that and then
+> read out one of them and check it.
 
-Reading the code, it seems the part command tries to auto-detect the 
-base of the part number as passed by the user, which isn't that usual I 
-believe in U-Boot (usually either forced hex or dec?), so maybe it's 
-worth mentioning in the docs.
+OK, but what is the utility in doing that? We don't, and aren't, going
+to have tests for every valid possible DT node, and this isn't
+introducing new library parsing functionality (the most recent patch to
+test/dm/ofnode.c was for ofnode_graph and that is important to test). We
+don't have display-timing tests to start with, so we're fine not adding
+something more here.
 
-Thanks!
-Quentin
+--=20
+Tom
+
+--qbjBMJgEwQtVadz2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQi5cwAKCRAr4qD1Cr/k
+Cq0NAP45uCx3S5eNa2JBm2ta5ckDnStj6Szp37Ej6bCS6MtLpQD/YZ3dDqGbeJWp
+HIrPZMN5QKqTN42LbFlWHLipf5yIogA=
+=zg5P
+-----END PGP SIGNATURE-----
+
+--qbjBMJgEwQtVadz2--
