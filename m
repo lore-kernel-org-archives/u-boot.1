@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0AE2CCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 18:40:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E59CCCFA03
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 18:40:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65CEC838CE;
+	by phobos.denx.de (Postfix) with ESMTP id AAC5C8391C;
 	Mon,  3 Nov 2025 19:40:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="vQL1Un4Y";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sE6dNTtK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A447838E7; Mon,  3 Nov 2025 19:40:20 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 0957C8331F; Mon,  3 Nov 2025 19:40:21 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 097B18331F
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 19:40:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 062DA83700
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 19:40:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-429c82bf86bso2237074f8f.1
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 10:40:18 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4774f41628bso6725175e9.0
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 10:40:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1762195217; x=1762800017;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1762195218; x=1762800018;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WQUK0f41hgFZGpWCvP6Zgd2cy4AesUI+5NPxWcv//yo=;
- b=vQL1Un4Y0S9Xk35BrbAN5mtiZ2g4+xb4Yi4tU55WlWWdNOaYMqt7Ge7Vd90YK3TYey
- ++1ZoKE9iXM9S1I9YXr5W+mr3j31JRFS4b0f3Ja5odvVoNZoNU//Mcr368JRV2+g8ny5
- uncYcCA4w/IXEErfaa3tambLytl9F8RFbCwE4Iw5e6beCJyDwf8LBzGN+K9iKIPghxkZ
- M1dYLSMznI2MBJr3bMBwvkL3jVFKdbHky9/ScxUYLO3e9g3AcvwirGYHn2ma6hHF2hvf
- HdWJ63S8JI2SclpMv/7QCoz9fBMTO4qBYW4ll75SHFk8Ys+cTXBo0Ksqa/OCeuYwPi6c
- WtVg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=CBW2vk4smWqTmhxxqefnKh7Ls8xTss10KxXafZ58O7g=;
+ b=sE6dNTtK+UoB7tEgtcz4BekfOZuptbpAsOFXS56FDQ9qkhh9Of5gPstUNDmH56W76z
+ HxB1nR2Ul6GoCo6YNlfq0cbc061xjpPdTQDNHVIf5j4bKn9h734+NjM6mNm6Q/Y8BQCR
+ fwZhBl98vHylm17u+GPd5VfLLEfk9Z/Jclok0RH7jqjSuLneDNrnfC1iR2tTtBdBs6Xx
+ pdMA7b/VxfnbRK22usRtLPgWFFiv4W/MmCBbNSFQEiH9ZsfMzipuA5fnULkZ32DOJ+RQ
+ gTOVR0KM630KLHpsaRvzPjPOmn4Auk3gHUVQWzJdiFlIAnhTrC69tGw6oGSOf+nRWWII
+ SqyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762195217; x=1762800017;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WQUK0f41hgFZGpWCvP6Zgd2cy4AesUI+5NPxWcv//yo=;
- b=rZ8H93H3ebd8/y5rrvEqW4qsKkMzHd8V0op6Q9mH1hyH92YME9dsiVF69Esnd1P3ct
- +CI7mhWcTqncAKWq+UL2WLfmJLpD+lZauOpVrRDJuEvEF5JkPKgHTjp6/ezRinHDBBla
- VtnuOqYr4hX91HUctknDEf5pBefeeEMwrjGnxqcc3pp3Z59H6CKFfZx4QwYlWH9iZp91
- dJzgFc4/Gwotk65YJGhHkRQjEvrST8QclHoWhLoEfSIksRoOSqDgmuP4PD1Qe6DHoV9Q
- zkmAfzmuj5SjQzILdkWlvd6m6I2U/FqYdfhgIE8sSbzXffKAT8yXudn1nC3ap8Sxvqkj
- GU3A==
-X-Gm-Message-State: AOJu0YwH39jiGgtLQRjAYqzyVdaWJj0E5JNO/ucSz0XdZHyubeZV6RSi
- zrWNZTzMIFncuCJ1riyaJxIkwNnZ454WlfctV9bihhUOAqZPk3tUan0CK0IxHci8KjQ=
-X-Gm-Gg: ASbGncuSkMHxXltmZ6dVc2xmhbeUgZf2++gogCqx+6IOJaPWZqe2OtzM02gE4pIrMBr
- Bv/EMV35uJ8+X19GEKaJodrskBbpXJ6qGAmFqVxp6q26K4myMy87rN2Q/7WHHHz/WzhWcAessiz
- K0jxXgFWrw959TtUd/ER75KfcWbp7kRLf7RSugrFHaVk0qmKTcJi1S793OI5IPjsKy2hMqTIvXB
- YmLMR5eLNbEmJrk1HK/ukPKgwJBlUg7tV5CcttQ2M1MezOgYt4GSlpXq+QKPn/6xbeWzkmHK93w
- f90KkAxe+/bwqCEP6Uphy2mgo233B+pPCyxyrlbftMOGq6TEcN+p+wjxngagjsbuyPGge+hB/SO
- ZHCcdrfr1yL+X046XsS8l3xhpf06isIf5xhQaV47Z4nBJif004RYydWt4OzPeP+ADdsi76Die+r
- ESHaaDR1JnlF98
-X-Google-Smtp-Source: AGHT+IEIZ8HvREaq2giCfSqiqBmuTGSMi9wl4t1v7fC0rvzhgareabH9AsAv5c66LsAhhkvSL3fjEw==
-X-Received: by 2002:a05:6000:22c7:b0:429:d742:87cf with SMTP id
- ffacd0b85a97d-429d7428a28mr2325737f8f.47.1762195217232; 
- Mon, 03 Nov 2025 10:40:17 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762195218; x=1762800018;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CBW2vk4smWqTmhxxqefnKh7Ls8xTss10KxXafZ58O7g=;
+ b=SEwG8G2SYDeu4zqUhr+q5qjO94mUJRTz3gWCUu9oQXCnTsvW/eiD8bdh1YR+DPrxO/
+ xTgj+HEp2I/zIWTIm73GtxnxW+I1+qIPsV/pSI/TXQ3vW1rmJFPX9EjI+nMPxSaF6qT5
+ 8OKzSXymAbznKkGx40ruAXGoF+w3slRneC0BXHvig/jrV2tlb+8N6ipu4ZjIE0uAGcwI
+ 27eN6MEiSip3owgN8zfnJe+5buWqE3Nm6iBnkTmrPJ4AIwLgMlXPp4hOIATLAu+bdAZ3
+ JmKMKzVjEIA7VMrgJHwx2zLzfuiq0XRTZ0/1KLq6KxSGtSG9lo0DQVMz8DbyOVXoiAGS
+ yDxg==
+X-Gm-Message-State: AOJu0YwSuqLQY9rLOuxOtvTDbf5Ugbk0DM6SYg6Bhx27zS6ssfy7GKu5
+ GnBhffKL3Q6GWi9C1EWsIAeDHgBm+ACI9GD+9B4kst47Y3k13dN7u+apkJBCbDqTSCM=
+X-Gm-Gg: ASbGnctJWvKZ9o/INq/UPBybmL6bwarGV74ehLoKMumflnDyG6AZ6LI/Z58gtdryi77
+ usABj5NG8j8tXSHQozgdXCuyvSYibbzku+qZMZZQm2qDLFrpLn4IJiE9+ytsUTILsmDMJRa0qY0
+ HOzDU5inskwuBjd06ssFp2d+qlhYceLGuyQyEWddh6BouCb/SvobSO+iEhT6JR7TcEDW7xqMl7C
+ bSqy2dm2xu2S4DW+ROVlfh+A6uxB4spfROoBDRBj+sZ8iKm6KrmCrjPbFWTbl9tFOX9NEevw3nD
+ hYTHm02Dkv7x6Zl40wf3/aPzcwU1yYxHH6hQfIfQ9xu+za2P1g/AgxV7YoBb9NKdgO80+HM0t97
+ 2EmNCLhZDEGOUqRfZdprZTMpT3o9UIgnEUjJ4RRrWatGm60MGl3DGbCSeKz6V7VkmiQ1InH0YMh
+ 3u8w==
+X-Google-Smtp-Source: AGHT+IFxB+moFIrnOEthAJBv2orJUJwW9GNmWU64rnscYKdK6WUmoPaq5cShCdxV1DslTKrcZD9lvg==
+X-Received: by 2002:a05:6000:3109:b0:411:3c14:3ad9 with SMTP id
+ ffacd0b85a97d-429dbcea015mr433327f8f.21.1762195218335; 
+ Mon, 03 Nov 2025 10:40:18 -0800 (PST)
 Received: from [127.0.1.1] ([2a01:e0a:e50:3860:23eb:8c68:e19:f7bc])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429dc1f98d9sm160295f8f.32.2025.11.03.10.40.16
+ ffacd0b85a97d-429dc1f98d9sm160295f8f.32.2025.11.03.10.40.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Nov 2025 10:40:16 -0800 (PST)
+ Mon, 03 Nov 2025 10:40:17 -0800 (PST)
 From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-Subject: [PATCH v3 0/4] board: ti: am62x: Add EEPROM support and refactor
- board detection
-Date: Mon, 03 Nov 2025 19:40:01 +0100
-Message-Id: <20251103-am62xeeprom-v3-0-e390779c0fc5@baylibre.com>
+Date: Mon, 03 Nov 2025 19:40:02 +0100
+Subject: [PATCH v3 1/4] board: ti: common: Add generic AM6x board detection
+ functions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAH3CGkC/13MQQqDMBCF4atI1k3JTFKjXfUepQujYw1UI0kJi
- nj3RqFQu3wP/m9hgbylwK7ZwjxFG6wb0pCnjNVdNTyJ2yZthgIvICDnVZ/jRDR613MFFZQoTGE
- aZKkYPbV22rX7I+3Ohrfz845H2N6vow9OBA5cQltIQAVF2d5MNb+s8XSuXc82KuJPjuqYIxdck
- NQolSbdqL98XdcPNomTB+gAAAA=
-X-Change-ID: 20251016-am62xeeprom-41a1920b8bd2
+Message-Id: <20251103-am62xeeprom-v3-1-e390779c0fc5@baylibre.com>
+References: <20251103-am62xeeprom-v3-0-e390779c0fc5@baylibre.com>
+In-Reply-To: <20251103-am62xeeprom-v3-0-e390779c0fc5@baylibre.com>
 To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, 
  Bryan Brattlof <bb@ti.com>
 Cc: Tom Rini <trini@konsulko.com>, Garrett Giordano <ggiordano@phytec.com>, 
@@ -116,47 +113,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds EEPROM board detection support for AM62x and refactors
-the board detection code across AM6x family boards to eliminate code
-duplication.
+Add two new generic functions for AM6x family boards to simplify
+board-specific implementations:
 
-The series introduces two new generic functions for AM6x boards:
-- do_board_detect_am6(): Reads the on-board EEPROM with fallback logic
-  to alternate I2C addresses
+- do_board_detect_am6(): Generic board detection function that reads
+  the on-board EEPROM. It first attempts to read at the configured
+  address, and if that fails, tries the alternate address
+  (CONFIG_EEPROM_CHIP_ADDRESS + 1). This provides a common
+  implementation that can be used across different AM6x boards.
+
 - setup_serial_am6(): Sets up the serial number environment variable
-  from EEPROM data
+  from the EEPROM data. The serial number is converted from
+  hexadecimal string format to a 16-character hexadecimal
+  representation and stored in the "serial#" environment variable.
 
+Both functions are protected by CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
+and are designed to be used by AM62x, AM64x, AM65x, and other AM6x
+family boards.
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 ---
-Changes in v3:
-- Remove beagleplay part 
-- Link to v2: https://lore.kernel.org/r/20251024-am62xeeprom-v2-0-0e372347e7d4@baylibre.com
+ board/ti/common/board_detect.c | 43 ++++++++++++++++++++++++++++++++++++++++++
+ board/ti/common/board_detect.h | 22 +++++++++++++++++++++
+ 2 files changed, 65 insertions(+)
 
-Changes in v2:
-- Create Generic function 
-- migrate am64 and am65 on it
-- Link to v1: https://lore.kernel.org/r/20251017-am62xeeprom-v1-1-31f83124189f@baylibre.com
+diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
+index a43cc075b92..d49e26fa453 100644
+--- a/board/ti/common/board_detect.c
++++ b/board/ti/common/board_detect.c
+@@ -824,3 +824,46 @@ bool __maybe_unused board_ti_was_eeprom_read(void)
+ 	else
+ 		return false;
+ }
++
++#if CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
++int do_board_detect_am6(void)
++{
++	int ret;
++
++	ret = ti_i2c_eeprom_am6_get_base(CONFIG_EEPROM_BUS_ADDRESS,
++					 CONFIG_EEPROM_CHIP_ADDRESS);
++	if (ret) {
++		printf("EEPROM not available at 0x%02x, trying to read at 0x%02x\n",
++		       CONFIG_EEPROM_CHIP_ADDRESS,
++		       CONFIG_EEPROM_CHIP_ADDRESS + 1);
++		ret = ti_i2c_eeprom_am6_get_base(CONFIG_EEPROM_BUS_ADDRESS,
++						 CONFIG_EEPROM_CHIP_ADDRESS +
++							 1);
++		if (ret)
++			pr_err("Reading on-board EEPROM at 0x%02x failed %d\n",
++			       CONFIG_EEPROM_CHIP_ADDRESS + 1, ret);
++	}
++
++	return ret;
++}
++
++void setup_serial_am6(void)
++{
++	struct ti_am6_eeprom *ep = TI_AM6_EEPROM_DATA;
++	unsigned long board_serial;
++	char *endp;
++	char serial_string[17] = { 0 };
++
++	if (env_get("serial#"))
++		return;
++
++	board_serial = simple_strtoul(ep->serial, &endp, 16);
++	if (*endp != '\0') {
++		pr_err("Error: Can't set serial# to %s\n", ep->serial);
++		return;
++	}
++
++	snprintf(serial_string, sizeof(serial_string), "%016lx", board_serial);
++	env_set("serial#", serial_string);
++}
++#endif
+diff --git a/board/ti/common/board_detect.h b/board/ti/common/board_detect.h
+index b057f3b2269..26ada2a449c 100644
+--- a/board/ti/common/board_detect.h
++++ b/board/ti/common/board_detect.h
+@@ -313,6 +313,28 @@ int __maybe_unused ti_i2c_eeprom_am6_get(int bus_addr, int dev_addr,
+  */
+ int __maybe_unused ti_i2c_eeprom_am6_get_base(int bus_addr, int dev_addr);
+ 
++/**
++ * do_board_detect_am6() - Detect AM6x board and read EEPROM data
++ *
++ * This is a generic board detection function for AM6x family boards.
++ * It attempts to read the on-board EEPROM at the configured address,
++ * and if that fails, tries the alternate address (CONFIG_EEPROM_CHIP_ADDRESS + 1).
++ *
++ * Return: 0 on success or corresponding error on failure.
++ */
++int do_board_detect_am6(void);
++
++/**
++ * setup_serial_am6() - Setup serial number environment variable for AM6x boards
++ *
++ * This function reads the serial number from the AM6x EEPROM data and
++ * sets the "serial#" environment variable. The serial number is converted
++ * from hexadecimal string format to a 16-character hexadecimal representation.
++ *
++ * EEPROM should be already read before calling this function.
++ */
++void setup_serial_am6(void);
++
+ #ifdef CONFIG_TI_I2C_BOARD_DETECT
+ /**
+  * board_ti_is() - Board detection logic for TI EVMs
 
----
-Guillaume La Roque (TI.com) (4):
-      board: ti: common: Add generic AM6x board detection functions
-      board: am62x: Add support for reading eeprom data
-      board: am64x: Use generic AM6x board detection functions
-      board: am65x: Use generic AM6x board detection function
-
- arch/arm/mach-k3/am62x/Kconfig |  3 +++
- board/ti/am62x/evm.c           | 51 +++++++++++++++++++++++++++++++++++++++++-
- board/ti/am64x/evm.c           | 45 +++----------------------------------
- board/ti/am65x/evm.c           | 17 ++------------
- board/ti/common/board_detect.c | 43 +++++++++++++++++++++++++++++++++++
- board/ti/common/board_detect.h | 22 ++++++++++++++++++
- configs/am62x_evm_r5_defconfig |  1 +
- 7 files changed, 124 insertions(+), 58 deletions(-)
----
-base-commit: 6a56d10fdcf1309d2070b62dc15e80a047da971b
-change-id: 20251016-am62xeeprom-41a1920b8bd2
-
-Best regards,
 -- 
-Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+2.34.1
 
