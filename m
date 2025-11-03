@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E19CCFA03
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 21:03:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ABA9CCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 22:12:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5434D836D1;
-	Mon,  3 Nov 2025 22:03:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C5E7F8144A;
+	Mon,  3 Nov 2025 23:12:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="owgHQsFV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D87jPs03";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 565F7838E5; Mon,  3 Nov 2025 22:03:23 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id E4ABB82A9E; Mon,  3 Nov 2025 23:12:19 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1141B82A9E
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 22:03:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B827280050
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 23:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-44fba97bf37so865934b6e.2
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 13:03:21 -0800 (PST)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-44dbb7e3c21so2403699b6e.0
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 14:12:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762203800; x=1762808600; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ymyug/ob56zc2RUMxwfGMAwDuJnCW5+U3yqaxQqOAIo=;
- b=owgHQsFVz2beEk+B+gHF1NLP2PKBV/gjgxVsoylqKYDiQV6312jWxXuJoEPmLgwZNR
- FnOLy6xdP5BbUKstGF0zfFuvEhFYNLXZ6XzRPx7EgP8oTdHXYZHz3C9cIMznFaldWkNG
- 77GC/36UKFMGvGNBuf42MQCosLyC1Ej/l62Kw=
+ d=konsulko.com; s=google; t=1762207936; x=1762812736; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UrBmoTts9Z91NJKqcFUsF1hGhr4qFlRXJpjFEjbVfQc=;
+ b=D87jPs03jrZ7M7mVoES+aHzOdcX09+K3M1bkSQ4qOcrOFKW4IjtabCPwW6R+I29sVQ
+ 9fWLHO9RFhrNsnqkwcSLc6wXeMJzI8tvvrO+3A6o0zYsbQH+UNm87o+HPJqmHIn3rDnn
+ Q40r//zfb+fMgglMzGSJMdVZax7D3pLvJxu/Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762203800; x=1762808600;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ymyug/ob56zc2RUMxwfGMAwDuJnCW5+U3yqaxQqOAIo=;
- b=k0CFqPmBSiwgPEZiP+LlFgf7WF5DnHyIH2uPZnduyC74s6v35hO2Ip7H2QysXeVPO1
- PdQDgcjF1bxmwxrL8sg40l2JXdO2j9I5g5aLRknaNFV1z5YUxfcP6Zuj4bPiQnm3UQrx
- AsJD/neTJYRXobElHFfqrFfmD1QmTrlQ2MUR0k0oRawzZYuH5GnmUnKoqKyv7F3rFU3X
- XnhoxDuF0yoeGNndJmhTWPzCjV3hvqZFtuwQilSMeqnvsBP6sPmeW/GnUGzhDKY4zlhq
- AckxYccsDXnbniA1JIohdtR3BIxHRvIz7pPMRB0PUHYzY/lG22SR5XeuzxxoNsBk+nPQ
- cEzw==
-X-Gm-Message-State: AOJu0YxroeGPRUaPhEGjrjDq96gEqrlr1JNPdoI099pjayyD5DtT0yXd
- BzazFHNTnIcpITWb9cH8ACgsy4oMUSYMq6hmL47bHVpH0/85fT8B8pmOYX41wnKJqAg=
-X-Gm-Gg: ASbGncvEXdwGuaKqSOMHKpVL60JHvvcsuHTXz6syi7fOec/Ftx90GffZoAGMDbUwpYm
- w3+PMNePikdNzbLtMxWJHCe43JeKPwRE1GywRHgGeDLqP9pf3wi9AdM/d90nAifL0ZhPZoFiyaF
- azRMS22JrJR7xtMK7aQURB2D5rDOJvp85ltdbfIbpgKT2IF3iEqF2f0UxA0Y8pUT5kRofKBWeLl
- GziM3hA3ntur5NgWjDHG/ta3u8jh/GJqnXm0tAxAZuFZ780xPFYrX1cSh5GZwbh2LDQJnhBa6Ra
- ZfffFc3NowgoswjBXFTXrGS16oLmnRNSAPYAgmM8MzeGnfHDcVQfShSJ0Dv14HlIy9+Fid3mA31
- GZ1wM07xdu6LHydntht/0d536ZCZguaiw9LM7Ajq6KqfIxDCKbAy5p/jfsyVlGAGVxzT3jRCepu
- ganMiQk+FfnFQY9E856gI/7qBauBl4wP3s0Aa3TJAXwHSsSztf
-X-Google-Smtp-Source: AGHT+IFaLiiKWE8aWkNsqMWebLtis69HobgpkqofZbnJp6WOlfBwyoZf98p1pkN0pZ0uBde98LV02g==
-X-Received: by 2002:a05:6808:c2d3:b0:441:8f74:f1e with SMTP id
- 5614622812f47-44f95ff9fecmr6526140b6e.56.1762203798964; 
- Mon, 03 Nov 2025 13:03:18 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1762207936; x=1762812736;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=UrBmoTts9Z91NJKqcFUsF1hGhr4qFlRXJpjFEjbVfQc=;
+ b=KDXfyCluPFaRkTwQC6RMoWqYRhrceOHGJcEiRi4EosUhOR/oTpe7Z9jvmAzO07KrVj
+ QE1Qcy329Ge0js4zQaR+ZcgzTmGMbdKcoPCm2ZgJNEtXielJ9w6lqYudhhfACr2XNCTF
+ I794mro22/5GucgzQzm2s4ITa7QZbzHo3dzMABvlWMsxrixMGXhCQLkQ1K5S/5K5QA43
+ JqFgaDDEVKEvP7Re92aj8v8JPla3mGVQ1xLkrkW+v+Cnx2wg7idwpOZut7UED05q+8PW
+ Y8i/afZLJXt6WWJy5HpfabYPGZ+QbSXdQavlPWFzpgVtsa2TUDZ7mnM19SUdLvf9cquc
+ 583Q==
+X-Gm-Message-State: AOJu0Yz3rGB5l2BTeLMHSZZrfGCe2afNgsPf2zmEeQyWpwqK3Wi4MtNJ
+ UtY3UvjraS06LNvsS8hBKDxOqUdLwZRFIpZkvzY5iJmYQskIWj5pl9PqINMyZMtD0xjIKyY4G3Y
+ 8NSUQMxXTDA==
+X-Gm-Gg: ASbGncu1BF/xZVGE/tT6r9BeABJKSc/TVkm8CgHPGNPOtx46/v5lR0GzKIy8RsLj+0p
+ cn94+MUiXYbDMF/UdqFnIQ7sA02gd7ixL867QqFfZzzhXAqKo5V6zSkVoryv7KZiF2Q1NO54QFj
+ qsivDXHuJEKzTCxKGquYPPfN+MxyE8aNEE7bXYOPzEPz9ghFlhSJov3NInxsb5sk3Qno1ZmASai
+ oHjngDikel/MQzsnmFn9BAFDgGBtqVC5l8iwZGhfYHuttXVwZWpKqXMlIbwngHbQqwXZyYtD+Sl
+ /EwZesUFcUY9FQneV85ntcX196ko+fkRSdY9OTAiHArB4UzI78AQG57HLbMXLPUXb9i/A5D0wXR
+ ZtgRXfdH6VO+oxgtcTR5e46a2/MBXImmdTHu+8Gr5flI0mqT0mjDK1mQOyDmg9KpPREnHfA3Bm4
+ KUVVIMtLvM97qWd7Lhw/GSHO/ee4SuM96BTwSL2RxEUCEpAzh2Utzc
+X-Google-Smtp-Source: AGHT+IFz9+p8VvuTLjL+K2eoDPkiHw9NPeN4HnGWQgUOROqxTWd5ESr9XkkzQLbv9IJr2RnYTngOIQ==
+X-Received: by 2002:a05:6808:2125:b0:43f:7287:a5d0 with SMTP id
+ 5614622812f47-44f96015836mr6146354b6e.34.1762207936398; 
+ Mon, 03 Nov 2025 14:12:16 -0800 (PST)
+Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6c246f342sm455378a34.9.2025.11.03.13.03.17
+ 5614622812f47-44fd888363asm391477b6e.19.2025.11.03.14.12.15
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Nov 2025 13:03:18 -0800 (PST)
+ Mon, 03 Nov 2025 14:12:15 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com, n-francis@ti.com, 
- b-liu@ti.com, nm@ti.com, bb@ti.com
-In-Reply-To: <20251024081408.1610102-1-anshuld@ti.com>
-References: <20251024081408.1610102-1-anshuld@ti.com>
-Subject: Re: [PATCH v3 0/4] Allow falcon boot from A-core SPL on K3 devices
-Message-Id: <176220379786.3382007.205569475864956068.b4-ty@konsulko.com>
-Date: Mon, 03 Nov 2025 15:03:17 -0600
+To: u-boot@lists.denx.de
+Subject: [PATCH] Azure: Ensure we do a shallow git clone
+Date: Mon,  3 Nov 2025 16:12:14 -0600
+Message-ID: <20251103221214.3398735-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,28 +92,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 24 Oct 2025 13:44:03 +0530, Anshul Dalal wrote:
+In Azure, older pipelines such as ours do not default to a shallow fetch
+but rather do a complete clone. This introduces a marginal time increase
+in each task, but also more importantly takes up significant disk space.
+We are now getting warnings in some cases about using more than 95% of
+our available disk space so take this as a first easy step to resolve
+that problem.
 
-> With the addition of secure falcon mode since commit 7674ac9c820f ("Merge patch
-> series "Add support for secure falcon mode: disable args file""), this series now
-> adds support for the same to TI's K3 devices and documents the feature taking
-> AM62x EVM as an example.
-> 
-> With secure falcon mode from A-Core SPL, the boot flow changes as follows:
-> 
-> [...]
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .azure-pipelines.yml | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Applied to u-boot/master, thanks!
-
-[1/4] spl: Kconfig: allow falcon mode for TI secure devices
-      commit: 16f412679005e539401308bb075d4cdf87f01cb2
-[2/4] board: ti: common: Kconfig: add CMD_SPL
-      commit: d99688d26e697a52ceccea8231e085a79ee63771
-[3/4] arm: mach-k3: enable support for falcon mode
-      commit: f5119b38ff0d13f58a9af4d9f7f48dbc3f6f6a93
-[4/4] doc: develop: add docs for secure falcon mode
-      commit: 20fe0f5dadb70c24163c2c5f1ecd27c569ddd13c
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index fc55c8b21006..d91073b6f827 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -3,6 +3,8 @@ variables:
+   ubuntu_vm: ubuntu-24.04
+   macos_vm: macOS-14
+   ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025
++  # Ensure we do a shallow clone
++  Agent.Source.Git.ShallowFetchDepth: 1
+   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
+   # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontainer",
+   # since our $(ci_runner_image) user is not root.
 -- 
-Tom
-
+2.43.0
 
