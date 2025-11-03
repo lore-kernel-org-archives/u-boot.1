@@ -4,84 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73095CCFA03
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 15:59:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E44CCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 16:16:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B08628331F;
-	Mon,  3 Nov 2025 16:59:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C33C88331F;
+	Mon,  3 Nov 2025 17:16:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cOjj7YyK";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="X8s5iOhC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24F20836D1; Mon,  3 Nov 2025 16:59:28 +0100 (CET)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2263C838A5; Mon,  3 Nov 2025 17:16:38 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74DD680050
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 16:59:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5192E80050
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 17:16:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-b8c0c0cdd61so4475601a12.2
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 07:59:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762185564; x=1762790364; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=POwPiUwDEE+2XVlePsOqwohl91GPrBNeSATZtYf+n5M=;
- b=cOjj7YyKmyNWUfVOkZLSMiyS2EdY2WAOtWCi7SfodqVSKFnvRBK9SJ7jW9QLHWqR8D
- NrCKVi2mnc31WTkimFSugLX9FmI66nl40gjHeSvJuzFJa0eZXuD5xsZ8y0h+aDoA2S+S
- wofh9aCaIzmVkM0zgfKd7yVD0Oz/lRdo3itbu29qJprpfUTrTvqvUIlnegJ5CrHZtPIK
- tJe3szaU6ELAe1+vl2qdbWWGa4ei5eU3VdiYOEoO8Ye3to+O8YwLFF8PtbjFWhDWhmGT
- tHH0zGp/9sh/3+HZx2e/blnQI9AzOT7AUgDpWdDH27CHr25uU3pprLoObhMLnIG4dA6v
- K/Og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762185564; x=1762790364;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=POwPiUwDEE+2XVlePsOqwohl91GPrBNeSATZtYf+n5M=;
- b=kqsJQoKMr06svYy2AgiJhTEP7GKS9DNJ0fQEybZxJTdtM25Fd/Yi+ONADTX44xLp20
- WG33W5wHRmOPB1DOBYHttaILAIW6lu46m44OVUCgxX0DFCfs4cVdJXyVEj/8UagABtRX
- a84vvJvp91Uryl0wlpp4nv4njTgH0V29xy4kNYk+qwOwe94t3AgtB5W5FC47zTpjbGmQ
- KLCcBKv9gDebHRpD0QUGm7DI1KEsMlA0z+TZsina2+FWaihrXHs+eUkDxc2p7Lr6f4dr
- hFS7z59s8zyk/tWVf6sPOxlHiKWByqwl2YVwXS9Vhb0ZZsJVF+6vGjCQpzgDgkG3/tSL
- V1Mw==
-X-Gm-Message-State: AOJu0YyRDTDCoF/aVJozfI2HMykdVSF60fwTYFOYCBY9444F34o3a4l2
- CYdU8VKpsE3UWc/oXuap7mUfknuJCWctHnq1SxvaqrOZCA687N5OccZC
-X-Gm-Gg: ASbGncuZ/XXQ/J81Uu/4E3ww1bddcvz8xolkTUJjEVgHlFs4QTJM5k55enA4L4qcgbz
- bz/9HTGTn8fL1ntYlrUSegOda6E5blzMhYXUlkVMxuAQIN8XrdqOpaYdieAC0fBLGKCwG0p59TL
- r242qGeU1ekaiZkllDWBNQzzs7JpGLnmr8KeiJ/DkzFOQw/92F8+nAjyPbS4C8Gbm0hZvC7ftLy
- nkIv2hsDpvsqV0fZjv7+2DHs+skYyeomjNdIJX3HQV6cN4sjc0zT24fj6VYrySKXMsmX7hw091P
- yInToYuoSPJx21fBVfQutTD6rpEitM+FbbWA6B5W07WXIeus3NQFjnfRW8XuDJYJBqOKRDuVzNU
- awBRD0psszHyyIJqpVInsmcmsEGav9+rIrB7vII/IOxNMnFmEjd4UC1QxdraSTMa4
-X-Google-Smtp-Source: AGHT+IF3JOoEkuV8fM290UBR3vrFIwEEpUrMHb4dYy5ZWKOxBSnQGisKIuzkH6SfKsF+lpHQf2m+xQ==
-X-Received: by 2002:a17:903:2341:b0:295:557e:7465 with SMTP id
- d9443c01a7336-295557e798emr119642095ad.11.1762185563240; 
- Mon, 03 Nov 2025 07:59:23 -0800 (PST)
-Received: from CNSZTL-DEB.lan ([2001:df0:a640:1::15])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-340b4296178sm5884875a91.0.2025.11.03.07.59.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Nov 2025 07:59:22 -0800 (PST)
-From: Tianling Shen <cnsztl@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tianling Shen <cnsztl@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v3] mtd: spinand: add support for FudanMicro FM25S01A
-Date: Mon,  3 Nov 2025 23:59:17 +0800
-Message-ID: <20251103155917.2659427-1-cnsztl@gmail.com>
-X-Mailer: git-send-email 2.51.1
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id DBF0A1A1834;
+ Mon,  3 Nov 2025 16:16:34 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 9BE6660628;
+ Mon,  3 Nov 2025 16:16:34 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id C9B2F10B5009C; Mon,  3 Nov 2025 17:16:31 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1762186593; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=v2IxknaQvY0SXMpA2Rtpg6X3+IUZ9GM1xx514F903wY=;
+ b=X8s5iOhCNcHRub1oMGIYd5UVbUIsegwooGVqVhfxS4HNoYbdCVmH0J1jbtUQZihhr6WyO6
+ 9gozb9kGDNBoZ9PdnuTu4UHTtPG7M3CTcaSKLoolxG26yiFPRPp1l2ABoTsykKZWDxbYB/
+ MAByEkqnGBvjS546ikclcbhOCVxRPwqojbfeiPETahd9FWS82VyxBPBJQFx9GibxwRs1pa
+ hJUNZznEeS3h6S4+9g/0Ws2GaSXXo5Me4UwKtkBy+HghHTfKqLYPAGOaIMCa/IUBVp/ueu
+ 2p+DJVDgpZoCU0kS5zkwU+KyJldaTtSkFfmCujMOS/B//Qrds4MeymuHcuL8FA==
+Date: Mon, 3 Nov 2025 17:16:30 +0100
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>, "Bajjuri, Praneeth" <praneeth@ti.com>, Tom
+ Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH 1/2] distro_bootcmd: Add support for customizable
+ find_distro_rootpart
+Message-ID: <20251103171630.4df1efdd@kmaincent-XPS-13-7390>
+In-Reply-To: <20251103115225.381126f1@kmaincent-XPS-13-7390>
+References: <20251031-feature_distro_rootpart-v1-0-4e7c465708e8@bootlin.com>
+ <20251031-feature_distro_rootpart-v1-1-4e7c465708e8@bootlin.com>
+ <CAFLszTicHdtY73+asYQ9NF_uEFg7BsSfN2cW+21FbQoxH9V_JA@mail.gmail.com>
+ <20251103115225.381126f1@kmaincent-XPS-13-7390>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,148 +78,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for FudanMicro FM25S01A SPI NAND.
+On Mon, 3 Nov 2025 11:52:25 +0100
+Kory Maincent <kory.maincent@bootlin.com> wrote:
 
-This driver is ported from linux v6.18 and tested on a MT7981 board.
+> On Sun, 2 Nov 2025 20:54:02 +0100
+> Simon Glass <sjg@chromium.org> wrote:
+>=20
+> > Hi Kory,
+> >=20
+> > On Fri, 31 Oct 2025 at 17:36, Kory Maincent (TI.com) < =20
+> > kory.maincent@bootlin.com> wrote:
+> > >
+> > > Commit d0ba0ca45a49 ("distro_bootcmd: Set distro_bootpart_uuid for bl=
+ock
+> > > devices") added support for the distro_boot_part_uuid environment var=
+iable
+> > > to allow using PARTUUID in the kernel command line.
+> > >
+> > > However, the way it was written only supports the case where the boot=
+   =20
+> > files =20
+> > > and the rootfs are located in the same partition. There are many cases
+> > > where the boot partition and rootfs partition are separate.
+> > >
+> > > Add a customizable find_distro_rootpart command to allow each board to
+> > > define its own logic for locating the rootfs partition. This provides
+> > > flexibility for boards with custom partition layouts while maintaining
+> > > backward compatibility for the default case where boot and rootfs sha=
+re
+> > > the same partition.
+> > >
+> > > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
+> > > ---
+> > >  doc/develop/distro.rst          | 11 +++++++++++
+> > >  include/config_distro_bootcmd.h | 10 +++++++---
+> > >  2 files changed, 18 insertions(+), 3 deletions(-)
+> > >   =20
+> >=20
+> > How about moving to standard boot and look at this there? =20
+>=20
+> Ok, I will take a look at it.
 
-Link: https://lore.kernel.org/linux-mtd/20250824170013.3328777-1-cnsztl@gmail.com/
-Reviewed-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Signed-off-by: Tianling Shen <cnsztl@gmail.com>
----
+There is a custom nand boot target [1], and I have not any am335x board with
+nand memory to test it. I am afraid to break it during the update to bootst=
+d.
+Not sure we can accept that. What do you think?
 
-Changes in v3:
-- Remove unsupported QE bit
-- Collect R-b tag
+[1]https://elixir.bootlin.com/u-boot/v2025.10/source/include/configs/am335x=
+_evm.h#L27
 
-Changes in v2:
-- add fmsh manufacturer to core files
-
----
- drivers/mtd/nand/spi/Makefile |  2 +-
- drivers/mtd/nand/spi/core.c   |  1 +
- drivers/mtd/nand/spi/fmsh.c   | 76 +++++++++++++++++++++++++++++++++++
- include/linux/mtd/spinand.h   |  1 +
- 4 files changed, 79 insertions(+), 1 deletion(-)
- create mode 100644 drivers/mtd/nand/spi/fmsh.c
-
-diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
-index 152aa1a3783c..a7a0b2cb4b9e 100644
---- a/drivers/mtd/nand/spi/Makefile
-+++ b/drivers/mtd/nand/spi/Makefile
-@@ -1,6 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0
- 
- spinand-objs := core.o otp.o
--spinand-objs += alliancememory.o ato.o esmt.o foresee.o gigadevice.o macronix.o
-+spinand-objs += alliancememory.o ato.o esmt.o fmsh.o foresee.o gigadevice.o macronix.o
- spinand-objs += micron.o paragon.o skyhigh.o toshiba.o winbond.o xtx.o
- obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 0c4350595469..14af42646122 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -1227,6 +1227,7 @@ static const struct spinand_manufacturer *spinand_manufacturers[] = {
- 	&alliancememory_spinand_manufacturer,
- 	&ato_spinand_manufacturer,
- 	&esmt_c8_spinand_manufacturer,
-+	&fmsh_spinand_manufacturer,
- 	&foresee_spinand_manufacturer,
- 	&gigadevice_spinand_manufacturer,
- 	&macronix_spinand_manufacturer,
-diff --git a/drivers/mtd/nand/spi/fmsh.c b/drivers/mtd/nand/spi/fmsh.c
-new file mode 100644
-index 000000000000..80837b7dd424
---- /dev/null
-+++ b/drivers/mtd/nand/spi/fmsh.c
-@@ -0,0 +1,76 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2020-2021 Rockchip Electronics Co., Ltd.
-+ *
-+ * Author: Dingqiang Lin <jon.lin@rock-chips.com>
-+ */
-+
-+#ifndef __UBOOT__
-+#include <linux/device.h>
-+#include <linux/kernel.h>
-+#endif
-+#include <linux/mtd/spinand.h>
-+
-+#define SPINAND_MFR_FMSH		0xA1
-+
-+static SPINAND_OP_VARIANTS(read_cache_variants,
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 2, NULL, 0, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
-+
-+static SPINAND_OP_VARIANTS(write_cache_variants,
-+		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
-+		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
-+
-+static SPINAND_OP_VARIANTS(update_cache_variants,
-+		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
-+		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
-+
-+static int fm25s01a_ooblayout_ecc(struct mtd_info *mtd, int section,
-+				  struct mtd_oob_region *region)
-+{
-+	return -ERANGE;
-+}
-+
-+static int fm25s01a_ooblayout_free(struct mtd_info *mtd, int section,
-+				   struct mtd_oob_region *region)
-+{
-+	if (section)
-+		return -ERANGE;
-+
-+	region->offset = 2;
-+	region->length = 62;
-+
-+	return 0;
-+}
-+
-+static const struct mtd_ooblayout_ops fm25s01a_ooblayout = {
-+	.ecc = fm25s01a_ooblayout_ecc,
-+	.rfree = fm25s01a_ooblayout_free,
-+};
-+
-+static const struct spinand_info fmsh_spinand_table[] = {
-+	SPINAND_INFO("FM25S01A",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xE4),
-+		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
-+		     NAND_ECCREQ(1, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&fm25s01a_ooblayout, NULL)),
-+};
-+
-+static const struct spinand_manufacturer_ops fmsh_spinand_manuf_ops = {
-+};
-+
-+const struct spinand_manufacturer fmsh_spinand_manufacturer = {
-+	.id = SPINAND_MFR_FMSH,
-+	.name = "Fudan Micro",
-+	.chips = fmsh_spinand_table,
-+	.nchips = ARRAY_SIZE(fmsh_spinand_table),
-+	.ops = &fmsh_spinand_manuf_ops,
-+};
-diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
-index cf9b9656d054..e9561c0a3956 100644
---- a/include/linux/mtd/spinand.h
-+++ b/include/linux/mtd/spinand.h
-@@ -361,6 +361,7 @@ struct spinand_manufacturer {
- extern const struct spinand_manufacturer alliancememory_spinand_manufacturer;
- extern const struct spinand_manufacturer ato_spinand_manufacturer;
- extern const struct spinand_manufacturer esmt_c8_spinand_manufacturer;
-+extern const struct spinand_manufacturer fmsh_spinand_manufacturer;
- extern const struct spinand_manufacturer foresee_spinand_manufacturer;
- extern const struct spinand_manufacturer gigadevice_spinand_manufacturer;
- extern const struct spinand_manufacturer macronix_spinand_manufacturer;
--- 
-2.51.1
-
+Regards,
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
