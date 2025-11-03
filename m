@@ -4,63 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C63DFCCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 10:36:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698AFCCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 10:47:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A1EF838AE;
-	Mon,  3 Nov 2025 11:36:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id EA31983642;
+	Mon,  3 Nov 2025 11:47:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="AaZiVXQz";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="TnlVjrtg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D06A2838CE; Mon,  3 Nov 2025 11:36:18 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 54BBA836D1; Mon,  3 Nov 2025 11:47:39 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FA6783642
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 11:36:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 571A08331F
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 11:47:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f764=5L=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1762166175;
- bh=BzA/9N4OwIpwFPmLq86ePRh4l2911CaD1CptTOwrf6s=;
- b=AaZiVXQzIPQucBU2QDg4PPsc8apKU2zAsy1h8t/ygwHdT/b1RMrIK6Yp+YMHsYgBt0Ugc+dYV
- J0U0F7S9lPwp4/Te+/qCgh4VbMIBkFYcAej1dDziiwhuNLYrWNq3sDrZcqM8shQipcL5xAuIy1N
- FdaGmBYdHKBYWk0l7pDy+RFoKK29jKO1mLcZ36J7Hf4gHEkDvFsWLNpPZpcwTqjHFII1Uw7vRGe
- oZdQbIjY/Ejy0WzHX9dVYasJ0RV4cPGrKWqIOg7dn3Wkvda2y0+XcBZ5BvBKYBDWFs3bbfpoJCK
- OwBS8fvluUKRCNsPr0W+qm/lWvcbpNi2iD9Ji2kDR4Lw==
-X-Forward-Email-ID: 6908859c828d1c0fe857dea1
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.4.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <9039b700-16cf-44c9-8e32-dfdbe73f29b8@kwiboo.se>
-Date: Mon, 3 Nov 2025 11:36:07 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Rsd+1TnqXG6c2ghx0usCf9shqTZjNSwES8dWiEXKO3glfGnoDznyIDxGUlt7hh+ae92h2NCoqjMLzEvndJXpD6H11jH4VwxWPa2ivbd1cGgyIUywUaX74zxxL+bSsaPeN0Z8zRffHuOnZs0/iSlFUMW69JgKMm1yUFULj/rDpZ1/qQ3yInkIF3sMadDUGwu63Ptm3m1OQNEG5PCns6iEgPNuhRICJPuKEEHA97f91aUGHqU7HkhQ8TujJHhA090Dc7nI9ZHTrz+h1yfur64NUuYHiN3FtzpMQc2ZSdHNE53qoYDobyFG4GIejlAREQgBZRYCCB/lTH6D9C5e2sthVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TzrLjWdiOBPzfmCWRy/JOiSPfC3FqfjE1UT34hWKq1Y=;
+ b=Rfgt4o7kGUGoDyLwNAstX5TwIXAKzz9HvVzed6X3Gx8TxIJvGzF1k2R2GJIIPG1kg6unz3UgXEZ5uyLeqzPXHEdcpbOF/YL8PX7pAoyqFF3zaXHg5ufXicVghElHRbqFGjqMdxqMm0IPIhqIHgZlTUX7VNhDT0ODGRqzzOR0SKZU1BExvE7ow4MTkpQt6gnhOtDEbCTxetRMlBaFgLdH5wotXMVmsvUQLLfDNeG7UX9rJcy+o2aWHCGoFC+EIybxwFmGmDvunkWiohnI65Hlh/owKZrw8e/ojrY90IA2pb5/vvGSEpmqH8nzNVX6VPQpkbnMCd074mai9xyJ+if7NQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TzrLjWdiOBPzfmCWRy/JOiSPfC3FqfjE1UT34hWKq1Y=;
+ b=TnlVjrtgei0JVbsuf+3UyIlEC8NFAQFl3MaKzwvmQa9rtw12DeaojMDdvr39RCj3JTkfPThTk6+yXKO7G6kHv8ez/KKBIXjsk+3Rnwvw6vxAY0OwmdIlUrhqYjkuRifnlSQAS3La0ohP8qwk7n+l2Uq4peZ4Hz56M2Ag9Z8Vn4s=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by FRWPR04MB11284.eurprd04.prod.outlook.com (2603:10a6:d10:19e::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Mon, 3 Nov
+ 2025 10:47:35 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9275.013; Mon, 3 Nov 2025
+ 10:47:35 +0000
+Message-ID: <8987cd66-3ba4-4a40-84a2-9f978d688566@cherry.de>
+Date: Mon, 3 Nov 2025 11:47:33 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Revert "power: regulator: Add vin-supply for GPIO and
- Fixed regulators"
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Dang Huynh <danct12@riseup.net>,
- u-boot@lists.denx.de
-References: <20251101203429.1603832-1-jonas@kwiboo.se>
- <20251103085135.GB1698@nxa18884-linux.ap.freescale.net>
+Subject: Re: [DEBUG] rk3399-nanopi-neo4: SPL SD init may report -5 due to SD
+ power-on timing
+To: Sune Brian <briansune@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <CAN7C2SArdbhag_56MwOMGoaEYSLiHbHHo3KFhUS5U03ntEJbGA@mail.gmail.com>
+ <0f8fa8d4-3cab-4555-af1e-03feaef81ca5@cherry.de>
+ <CAN7C2SBiONLZLy3jwUW8OE2QkvJ+N2Av8zcu5PEPa0zZmPNOpA@mail.gmail.com>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20251103085135.GB1698@nxa18884-linux.ap.freescale.net>
-Content-Type: text/plain; charset=UTF-8
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAN7C2SBiONLZLy3jwUW8OE2QkvJ+N2Av8zcu5PEPa0zZmPNOpA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0145.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:98::17) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|FRWPR04MB11284:EE_
+X-MS-Office365-Filtering-Correlation-Id: 982bb4cf-4562-4d58-a92b-08de1ac66578
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eVlUSWtVY3ZUbkIvcWtjTjRoZ2lMRXRvS3prM3RDTUYyMlprUVV3MEVUQlpU?=
+ =?utf-8?B?TWtITzJQdEYrQWlUcEcwd0hIRnB3K2dodlkyZ3lKREwzNGxScTdQVzMxYk4r?=
+ =?utf-8?B?N3hJVzFuVnlPQVU1R0VmdnFxUFFtOW01RjMrQVowaHRDYUVGaHgydlk5RG82?=
+ =?utf-8?B?Z1Zza1RIRUdKQ3o3NXUxU2pJMFdKN05CZE1ONXlKL3UzbjFlVzMyQmxNSDBm?=
+ =?utf-8?B?QWRpTzJaUGFhVW1FV2ZuMHMyVkJvSFpJcjNxL3psNGx3Q0g5UjBUeFp4b3Bo?=
+ =?utf-8?B?a0JvVnRWcnBNTnpLdEhSbG9NSC9Ed0U2UHFyK2dTNWh2Z3RFSkw2YmZaVEhZ?=
+ =?utf-8?B?NU15YXhHL1QwTHNkZzZmK3JsdVNnalhWRkY0TGVQeG9qZTFrYnp5UElpZGs4?=
+ =?utf-8?B?NHVNNDMzUkl3K25BOU0vUHo1Zk82S2xWeno5NHVESGR5cnpXY0FZSU1OV0x6?=
+ =?utf-8?B?aHNDRjVkV2J0SlZveWtHbDZLQ3NaRlJoVDZFMW0rM20raGxiYTRmdklqQnF0?=
+ =?utf-8?B?WlB6UjhqMkNmSndpWCtZRzljMWIyYWNBM3I0OWZpb3ltclBZQWI5TWp0dDhu?=
+ =?utf-8?B?WnNOajdPall2N2htcXBiblhWR3VXRHBHNmZGMjJPdFR6Wk42b1BUWXF0TVBz?=
+ =?utf-8?B?eExUTVREa25hOVV3NVUvd0w5eXRsOGJ5Sk4wZ21icEVEcGFXQ2lOYU1aZzNV?=
+ =?utf-8?B?aDNQajRadUtiNHBLWm9LR3V5RGk2MGpUYTFHK0tpV1NCVDE1a0c0VGRwck9C?=
+ =?utf-8?B?VGtJaWJ2MitZcEdVV1BVUjBoVlJWNVJhY0pIOG5WdlFQaElBai9XNVh6aXVJ?=
+ =?utf-8?B?cllGMlRjcTFTbEZsdFMrZHFzd0NSNjlYMTNXRHhWOFcxVjVRaHY5eVhTT2cx?=
+ =?utf-8?B?akN0RkV0VnVHUnAwTTd2OUdGQktLaE1hVEhORngyVDdzK01PcWtJZFlOb3Rj?=
+ =?utf-8?B?MDk1TFJpOTROWm16YW9mL3o1d1BhNmJwK244TGJTKzFwSlpVUjFENGU2Sk1G?=
+ =?utf-8?B?bEI0WXd1RFFYVnhkZi9GM0dPeXN5aktIU3VJbmZBYjRlYjBVWEc4M2k2MGdp?=
+ =?utf-8?B?UEI2citMMDNscWI3Si83ZjhaMG9YUDNnQkpla3NMVDJibFVJZ0pDOGRMMG9B?=
+ =?utf-8?B?QmpNSWMwU3BSbEZ5NGNmR3NzNm9xZEtLenZQQjQ0UW56TXR1NjJaOEJvQWVm?=
+ =?utf-8?B?dWs0U0ZmczNoY1ZaVVVyZ200b1B6L3MrbnpORFNRaWI1dmo3ZDVYNys0Ykdh?=
+ =?utf-8?B?SWcyYmpLblAxQUJTU3l2aXE2b2ZLK3lsWVdaa2E0VnlXdWVTbDVjMWFJVWpG?=
+ =?utf-8?B?Zm5pUGoybTZKRVhnYkorNVlndllyb3hoOHg5NVNQVGhaOEJoRlIvQ25acWFC?=
+ =?utf-8?B?cUcyL0VvdWRiU2kxSVlPamF0KzUwb1RBTVhtWFMydnE2a1Y3bFdYVUpvN21v?=
+ =?utf-8?B?UG9sOXI1MGxlTFdhbGcxQjFTRHdVemJVNTlpVm9GcXhJYXgvdGlCN1VMS09y?=
+ =?utf-8?B?cmxlelhyVmRsdTh5YUx5eVZnY1F3MTdCdVlHcERWaUJhcXRFYXBGQUo1ekxK?=
+ =?utf-8?B?dlQ0SWhtOEx2bW9NNUFpNHJHZHpkaVNQRUFFOHJPL2Y1YXZRdENIVk1iOHND?=
+ =?utf-8?B?WmVsYWlTSlRKYUlWSFIvbFlrMzgrRWJGb0dmSWp0L3lFdGw5QkprRTBWWUhG?=
+ =?utf-8?B?MmdMbWpqWkhZLzFQdDFhN2V2K2I3Zk9tSFBoMWlwQWpoZkI5USs4dGRrVCtP?=
+ =?utf-8?B?VGFGYXRON0ErdS9GV1NVaGdoWWRCL0JWdmtPdmhjSE1rNE5DUnpaNkRtUWJU?=
+ =?utf-8?B?QTdqSVJ5Vm90KzFuVG10TjB2VDJUR2w5M0crd1dib1FrQmZFbU9teitjNFBp?=
+ =?utf-8?B?b0UxZXZtUS9XYTBtNHI2b1crWlFodzkwOFZ2U1o3V1JsdVJvRVZZMjVJQ2o0?=
+ =?utf-8?Q?wvSmcB+s/ykNxg+OFbypG6tHIQYhxK1r?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U1B1Q0RITkozdEVjQjZnTkQxNExXczg3d2JDbDdIT2JpdDhxQmVFMDFYQ0NU?=
+ =?utf-8?B?NFVBRmNsT1RhTlc5cWlmUFMxN1cvTzJyK3VONyswYVRUL2NQRm1FZnF3TDg5?=
+ =?utf-8?B?Rlc1aVJqQVVBcDA4L1J2dk5BbC9QVG1HVU5Lak1WaHB4dkI5dEVRdHYrc1FV?=
+ =?utf-8?B?NnNacWdjdlJYK2lkbmFzS2RGd08vZHFMdGlyTG9ZU3ZWVHhUOEVOTTlpRldj?=
+ =?utf-8?B?K3Nocmp4ekNuY2RDaWg4ZVR5cEJyN0ZaZGV5eTlFS2xYbVh0d1NLWHlEbTZ4?=
+ =?utf-8?B?QWpiWWNPeEdST0NhT0hBOUw1Z3YrQmFuRGJLaVBmRzY0cFMrNDRhTnRJd04r?=
+ =?utf-8?B?aUw1Zi9Pa0VQcXN1aGlKbktoc1NBaHFVcFhkYkxpODY4RkJJU2lVKzE5WXND?=
+ =?utf-8?B?QmpKaVdiZlpSMzBjNHNJR3kwY0NyNVhMWDBXNmhNdS9oYkh1Vk0xV2Q3VE1a?=
+ =?utf-8?B?eVoxRjJIMXRtMWpjRk4yYmRXMkluS3IxZ0ZrVDhWQ3QwVy8rMWhTbUp6K2ZF?=
+ =?utf-8?B?WlN6Qmtqenc4dlp3RG1DQ3NBSkJBUEU1VmdySWt2NkFYVjJ1a1Q2R3BTOHJ3?=
+ =?utf-8?B?MUFManlyQ3l5Q2prY0xWVndtbWdUSDkzWWcwRkpNRTR2Z3Q1YVpwR0xYQURr?=
+ =?utf-8?B?M05zQllBcmRzd3dSa2xsQnZITUZpYXZZZ1NHNnBXT3JLbGMyMUFnT3pSTSt5?=
+ =?utf-8?B?MWxaUEx4S3FCZTVjQzNLMmljeXFJN0hjZG5ncUtGY0UySExoMVJ3d2pNaWxY?=
+ =?utf-8?B?QXpkeFFGOXhjZlI2RWJwbzArMjFEdHgwTG9ZczdtbnBSd3krc3hpc05jVHRn?=
+ =?utf-8?B?RU9YVHlKRHVTQTlzVnBBUFBRUGJpc0lJOU1Hck1FZ0Fjb2IrLzQzL2hZYmxC?=
+ =?utf-8?B?cGlFd1NrSXl0RmsyTXZQNFBsVWlreWdGVlArWnlwR2ltSDd3MURNMkZPbFNy?=
+ =?utf-8?B?RVdZNFpwUGtZU2lMYjVDQk9vci9JbjdjelF4K0xsbHdnYlU3TW9Ta1kwRGFS?=
+ =?utf-8?B?UjJiU2tMczhieXNab0pHakFmdkd0UlM1dFNqNUYyQUZrUWJQWExWS0ZDbDNK?=
+ =?utf-8?B?OXpWY2RxTzN4NDZwMXdJMFNmMlJ2dmd2UXlKU2pwWXNxSnZSbktkSDBLWklY?=
+ =?utf-8?B?SEJ6UHhQVmZPUk9lZ21JV0Y2eG1oUEN5eThLaWs3WkQzMVJYaXJnc0tXQUNu?=
+ =?utf-8?B?UGFyNTlvdGw0MGJUa2tkSkJsU3dXT2lZVmRZRGJzZ2V4cUFZY3JNWFgrZzJt?=
+ =?utf-8?B?OXA2SjV5WngxczJoZ05PU2p5VWpjRW43VXZ1WmhuZEJZYlJCQTBiS200YjZv?=
+ =?utf-8?B?anlZOHo1OFk0TmttREVpbC9yU1pOVFEydnIvMVM2cHVqcGNOTTRCUFhQUTRY?=
+ =?utf-8?B?bTdJcWlhV0ZLcDMrbEdJdDV2UStQTHJCZEtPbXpFSUdzclN1YjRYaDJhUTRa?=
+ =?utf-8?B?SHV6MlVHdUhXUmpEbzNkVkpiRmFCaVF6R1Z3bm56c2RveWx5Rkd3eVJKdVFJ?=
+ =?utf-8?B?aHZDb1NoRUpsZWp2WjJ2ajlKTTIvZFJOQzZ3N2l5VzIwQWhIaDUyZTdPc1Ey?=
+ =?utf-8?B?ZktPZEJOM2FubTlIV2dZWDdQdEF4VW0xdTlzT1BjK2QrS2ZlbzhOYUJFRCtx?=
+ =?utf-8?B?M1E4M2kzenE4a2cxN2tzMWF6QlBkQURZYjhQNFhuSWt6OVJQcmtvM2dQdVBn?=
+ =?utf-8?B?UjVObVo1RWZES0tSN3kzazhERm1vYk1FaFA3YkxFQkZlZEZpczdUcERNd2c1?=
+ =?utf-8?B?dld4K0VUT1VxUUxIRnpZTkN0VjRsVVBCNUhDa0hSc0ozcVVySlU3YnlxVk9u?=
+ =?utf-8?B?NEt1MEt1TFpxVHgrQTZlYnN5bStkb1gxaUZ4a0svejlNVGFOMmpFVEQ1UUF2?=
+ =?utf-8?B?TGlTUlYzZXdqRU0yY3pYM09yaHBEUlZxbnJ0aW9KZ3F2V1ZwVUVuSm5aQlRC?=
+ =?utf-8?B?QVcvZU54Qk1FNThhTWFSZ3VoSFBEMTljNk5UUGV5L1pidk5nV3p4NSt0YXVE?=
+ =?utf-8?B?Zkl4WHpoUTg2YnFoOVNZd096b1VXSkRFc0JmUk8xRTRlQ3lTQlgzeFFzMHJo?=
+ =?utf-8?B?MDhjUTcxVUJ1ZnlkdmVJZ1NmeUs0Mmozbm5JNi9Ia01Ga3dGdXFGUmFwU1VB?=
+ =?utf-8?B?bTFwSlF4RENLVUlOZ0p3blVWRytXdXpMRTRpLzhMRXB2b0YycW9qV2dUVi93?=
+ =?utf-8?B?OWc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 982bb4cf-4562-4d58-a92b-08de1ac66578
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 10:47:35.1012 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: M2TLYiGbW5fPT/OWOeI0IrH2x96H2kyKMo6jy/SigwpROfdsD5EnutGK0IA58fGNeeNtnR1fdPDkmdnWK3vbtqJZOMd/yGzMbzcTV817lSE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR04MB11284
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,126 +177,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+Hi Sune,
 
-On 11/3/2025 9:51 AM, Peng Fan wrote:
-> On Sat, Nov 01, 2025 at 08:34:26PM +0000, Jonas Karlman wrote:
->> Rockchip boards may depend on a working MMC regulator in SPL to
->> successfully load FIT payload from MMC. Typically, these boards only
->> include the vmmc-supply regulator and not its vin-supply in SPL control
->> FDT.
->>
->> The commit f98d812e5353 ("power: regulator: Add vin-supply for GPIO and
->> Fixed regulators") breaks loading FIT from MMC in SPL on some of these
->> boards due to now requiring the vin-supply to be included in the SPL
->> control FDT.
->>
->> The commit also strangely enables any found vin-supply in
->> regulator_common_of_to_plat() and not when a regulator is enabled or as
->> part of regulator_autoset().
->>
->> Revert the commit to fix FIT loading in SPL on broken boards.
->>
->> If a board needs to have its vin-supply enabled, two options come to
->> mind:
->>
->> - Add regulator-always-on prop to the regulator in the -u-boot.dtsi for
->>  any board.
->>
->> - Implement full support for reference counting of regulators and then
->>  update the regulator-uclass to enable any found vin-supply when a
->>  regulator is enabled.
->>
->> This reverts commit f98d812e5353408ef77a46bad1f1cdc793ff8a03.
->>
->> Reported-by: Dang Huynh <danct12@riseup.net>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->> drivers/power/regulator/regulator_common.c | 10 ----------
->> drivers/power/regulator/regulator_common.h |  1 -
->> 2 files changed, 11 deletions(-)
->>
->> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
->> index 3ed713ce5019..685d8735fa5c 100644
->> --- a/drivers/power/regulator/regulator_common.c
->> +++ b/drivers/power/regulator/regulator_common.c
->> @@ -44,16 +44,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
->> 			dev_read_u32_default(dev, "u-boot,off-on-delay-us", 0);
->> 	}
->>
->> -	ret = device_get_supply_regulator(dev, "vin-supply", &plat->vin_supply);
->> -	if (ret) {
->> -		debug("Regulator vin regulator not defined: %d\n", ret);
->> -		if (ret != -ENOENT)
+On 11/3/25 11:29 AM, Sune Brian wrote:
+>> the vmmc-supply always on (not configurable by software) so I cannot be
+>> impacted by any change.
 > 
-> I understand it might be not proper to enable vin-supply in
-> function regulator_common_of_to_plat().
-> But I have a question, there is -ENOENT check in the original patch. If the
-> board does not have vin-supply, there should be no issue. Or I miss something?
+> Comment on this.
+> The nanopi neo4 has an sd card slot and mmc slot.
+> The initial debug mail is only targeted on sd card.
+> Where the MMC do not have any issue and this is
 
-As mentioned in the commit message the SPL control FDT does not contain
-the regulator references as a vin-supply, this result in -ENODEV to be
-returned. I.e. following where the vcc_io is not included in SPL control
-FDT.
+MMC != eMMC
 
-  vcc_io: regulator@ {
-  }
-  vcc_sd: regulator@ {
-  	bootph-pre-ram;
-  	vin-supply = <&vcc_io>;
-  }
-  sdmmc: mmc@ {
-  	bootph-pre-ram;
-  	vmmc-supply = <&vcc_sd>;
-  }
+SD Cards are MMCs, eMMCs are MMCs.
 
-With the change introduced in this commit the core gpio/fixed regulator
-behavior changed and this now result in unbootable boards.
-
-Other reasons why I prefer a full revert instead of a workaround:
-- The implementation changed core gpio/fixed regulator function without
-  any review-by or acked-by.
-- The patch was quickly merged after only being on the list for 1 week,
-  the imx pull-request that included this did not even mention regulator
-  changes.
-- The implementation is not optimal, looking up vin-supply could be okay
-  but not failing because it is missing, and enabling it during probe
-  when we already have working enable count and regulator autoset to
-  handle any needed auto-enable.
-- The commit message does not give any insights on why this is needed.
-
-My suggestion is that this is reverted and if needed it should can be
-submitted as a separated patch/series with a proper implementation.
-
-Regards,
-Jonas
-
-> 
-> Thanks,
-> Peng
-> 
->> -			return ret;
->> -	}
->> -
->> -	if (plat->vin_supply)
->> -		regulator_set_enable_if_allowed(plat->vin_supply, true);
->> -
->> 	return 0;
->> }
->>
->> diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
->> index 799c968d0b66..d4962899d830 100644
->> --- a/drivers/power/regulator/regulator_common.h
->> +++ b/drivers/power/regulator/regulator_common.h
->> @@ -14,7 +14,6 @@ struct regulator_common_plat {
->> 	unsigned int startup_delay_us;
->> 	unsigned int off_on_delay_us;
->> 	unsigned int enable_count;
->> -	struct udevice *vin_supply;
->> };
->>
->> int regulator_common_of_to_plat(struct udevice *dev,
->> -- 
->> 2.51.0
->>
-
+Cheers,
+Quentin
