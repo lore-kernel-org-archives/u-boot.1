@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4324CCFA03
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 21:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E19CCFA03
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 21:03:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 177678144A;
-	Mon,  3 Nov 2025 22:03:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5434D836D1;
+	Mon,  3 Nov 2025 22:03:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SOyqN2Ic";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="owgHQsFV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7369C838CE; Mon,  3 Nov 2025 22:03:21 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 565F7838E5; Mon,  3 Nov 2025 22:03:23 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C39B8004F
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 22:03:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1141B82A9E
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 22:03:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c281c649ccso3371608a34.2
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 13:03:19 -0800 (PST)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-44fba97bf37so865934b6e.2
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 13:03:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762203798; x=1762808598; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762203800; x=1762808600; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p6cJCkwI0QtYP2CNMfZtCbyHwiX3anYBiNlD4oh4unU=;
- b=SOyqN2IcvTXuJWoyh12CPbWsd4CDr9oqr8y9gri+nkpANl1IW8UCJtQRO3PsfGwoN4
- 3J2MiF6C47DX2TiqIpeQXpQ9jyGKN/bhUx2kHBgUOgiuLxabnZ8CqVph35dSrxTfyEx0
- b0HaQrGgurS4in43KYu2tWmRGAOO49QFpWSKI=
+ bh=ymyug/ob56zc2RUMxwfGMAwDuJnCW5+U3yqaxQqOAIo=;
+ b=owgHQsFVz2beEk+B+gHF1NLP2PKBV/gjgxVsoylqKYDiQV6312jWxXuJoEPmLgwZNR
+ FnOLy6xdP5BbUKstGF0zfFuvEhFYNLXZ6XzRPx7EgP8oTdHXYZHz3C9cIMznFaldWkNG
+ 77GC/36UKFMGvGNBuf42MQCosLyC1Ej/l62Kw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762203798; x=1762808598;
+ d=1e100.net; s=20230601; t=1762203800; x=1762808600;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p6cJCkwI0QtYP2CNMfZtCbyHwiX3anYBiNlD4oh4unU=;
- b=MHV8I+jV48gAUV5V7u0lc+yFWLBtFJKrT0DZlNaOUQFeC3zUyQx/gR02ymAANo01Ss
- 4ZCp2QX6Ya8d6FfD8vpJaYRRmqvDjxoUhKBEebK5NitHY+0TeY/4BAXs0+3w5aFaZBUg
- kqKHMcniTZ1hyXnqS6qCJJrgrvow5woIygmuNc5sYESVoxflxJF300VvTiyxEVxIe6uS
- y/g+ywhLcThoxDOyql7+BHogRJIAZwFhZ5JQPd5xqHNgcUIkD3RGeocRkE1Ejj1tLYH3
- +aS96TnR05R+lQePNqPGpNOUqZzN076YPaTT3usmPQBsx3ePQi80XtBjUA8TQApFW4uH
- WssQ==
-X-Gm-Message-State: AOJu0YyKNmlUkacWKpJ3Mc754g0L9gs/qoKPl0Loc4NkDJlMOWxQRXme
- x7s2xB7G3ehj3XmUQgPn5e8RgN18O+zZDXiHqNVpsuqizEPYk4Ml5k7pzAxAbOJNEgk=
-X-Gm-Gg: ASbGncsGk4J/5v8OXQb8KPAEjjEj6A8HIBUCVd9MeevXr4SkXgr6qmgMxb9mS1deRum
- r1ooOZZhrWDu+og6TPh9hKw63q8hcXFWEjZdUdIRolu//jxIga9wg95KSVgYAQVWo4QJze3AUpg
- uj61cmgqOEhWh/ZBXz/kL5aKw/tyJA0e2WeWRzZOfAa92t2scHleIu1PHIzHTk6SOb18EfpVElU
- f4EVZrNISt3MqbpxrTpZlm2S0Rvqk4n+S5W1/2FwFpPMjsUGYXxgRP6tGzYw93WmKbJJgyQglgy
- thBJMtiaAiorCthC/VeQ1xjbiaphiPUS/LjMKBspKHwSppFQr7FO4M71lwbBsnwEKnqCQA13ieI
- MpRQjA8C+LaWEewMWnEBVOFIgTouKjn0qCpksv18B9wb0Ua5VMtm8lmqrzFXeq0Xi7qi3jA+IdM
- jBwq+rOrjVaU9WjJgPKmNeC7sVEaLEijxt/c8DysgxBRg8pCqt
-X-Google-Smtp-Source: AGHT+IEDEsWyR6Y59IozNurCbpLkjldBM7F4XnE7oQ6TPH99fSan+WTBnpmI3oWDrR3GH67swy+9zw==
-X-Received: by 2002:a05:6830:6d2c:b0:771:5ae2:fcde with SMTP id
- 46e09a7af769-7c6966f1646mr7335593a34.2.1762203797750; 
- Mon, 03 Nov 2025 13:03:17 -0800 (PST)
+ bh=ymyug/ob56zc2RUMxwfGMAwDuJnCW5+U3yqaxQqOAIo=;
+ b=k0CFqPmBSiwgPEZiP+LlFgf7WF5DnHyIH2uPZnduyC74s6v35hO2Ip7H2QysXeVPO1
+ PdQDgcjF1bxmwxrL8sg40l2JXdO2j9I5g5aLRknaNFV1z5YUxfcP6Zuj4bPiQnm3UQrx
+ AsJD/neTJYRXobElHFfqrFfmD1QmTrlQ2MUR0k0oRawzZYuH5GnmUnKoqKyv7F3rFU3X
+ XnhoxDuF0yoeGNndJmhTWPzCjV3hvqZFtuwQilSMeqnvsBP6sPmeW/GnUGzhDKY4zlhq
+ AckxYccsDXnbniA1JIohdtR3BIxHRvIz7pPMRB0PUHYzY/lG22SR5XeuzxxoNsBk+nPQ
+ cEzw==
+X-Gm-Message-State: AOJu0YxroeGPRUaPhEGjrjDq96gEqrlr1JNPdoI099pjayyD5DtT0yXd
+ BzazFHNTnIcpITWb9cH8ACgsy4oMUSYMq6hmL47bHVpH0/85fT8B8pmOYX41wnKJqAg=
+X-Gm-Gg: ASbGncvEXdwGuaKqSOMHKpVL60JHvvcsuHTXz6syi7fOec/Ftx90GffZoAGMDbUwpYm
+ w3+PMNePikdNzbLtMxWJHCe43JeKPwRE1GywRHgGeDLqP9pf3wi9AdM/d90nAifL0ZhPZoFiyaF
+ azRMS22JrJR7xtMK7aQURB2D5rDOJvp85ltdbfIbpgKT2IF3iEqF2f0UxA0Y8pUT5kRofKBWeLl
+ GziM3hA3ntur5NgWjDHG/ta3u8jh/GJqnXm0tAxAZuFZ780xPFYrX1cSh5GZwbh2LDQJnhBa6Ra
+ ZfffFc3NowgoswjBXFTXrGS16oLmnRNSAPYAgmM8MzeGnfHDcVQfShSJ0Dv14HlIy9+Fid3mA31
+ GZ1wM07xdu6LHydntht/0d536ZCZguaiw9LM7Ajq6KqfIxDCKbAy5p/jfsyVlGAGVxzT3jRCepu
+ ganMiQk+FfnFQY9E856gI/7qBauBl4wP3s0Aa3TJAXwHSsSztf
+X-Google-Smtp-Source: AGHT+IFaLiiKWE8aWkNsqMWebLtis69HobgpkqofZbnJp6WOlfBwyoZf98p1pkN0pZ0uBde98LV02g==
+X-Received: by 2002:a05:6808:c2d3:b0:441:8f74:f1e with SMTP id
+ 5614622812f47-44f95ff9fecmr6526140b6e.56.1762203798964; 
+ Mon, 03 Nov 2025 13:03:18 -0800 (PST)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6c246f342sm455378a34.9.2025.11.03.13.03.16
+ 46e09a7af769-7c6c246f342sm455378a34.9.2025.11.03.13.03.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Nov 2025 13:03:17 -0800 (PST)
+ Mon, 03 Nov 2025 13:03:18 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: Simon Glass <sjg@chromium.org>, Vignesh R <vigneshr@ti.com>
-In-Reply-To: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
-References: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
-Subject: Re: [PATCH v10 0/2] Remove usage of CMD_BOOTx from SPL code
-Message-Id: <176220379674.3382007.8679959848971433829.b4-ty@konsulko.com>
-Date: Mon, 03 Nov 2025 15:03:16 -0600
+Cc: vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com, n-francis@ti.com, 
+ b-liu@ti.com, nm@ti.com, bb@ti.com
+In-Reply-To: <20251024081408.1610102-1-anshuld@ti.com>
+References: <20251024081408.1610102-1-anshuld@ti.com>
+Subject: Re: [PATCH v3 0/4] Allow falcon boot from A-core SPL on K3 devices
+Message-Id: <176220379786.3382007.205569475864956068.b4-ty@konsulko.com>
+Date: Mon, 03 Nov 2025 15:03:17 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,23 +97,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 27 Oct 2025 19:47:01 +0530, Anshul Dalal wrote:
+On Fri, 24 Oct 2025 13:44:03 +0530, Anshul Dalal wrote:
 
-> We currently make use of CMD_BOOTI and CMD_BOOTZ in the SPL boot flow in
-> falcon mode, this isn't correct since all CMD_* configs are only meant
-> for U-Boot proper and not the SPL.
+> With the addition of secure falcon mode since commit 7674ac9c820f ("Merge patch
+> series "Add support for secure falcon mode: disable args file""), this series now
+> adds support for the same to TI's K3 devices and documents the feature taking
+> AM62x EVM as an example.
 > 
-> Therefore this patch set adds new LIB_BOOT[IMZ] configs that allow for
-> more granular selection of their respective compilation targets.
+> With secure falcon mode from A-Core SPL, the boot flow changes as follows:
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/2] spl: remove usage of CMD_BOOTx from image parsing
-      commit: 823e453987a6590af67e2226ad3e73fb399c205d
-[2/2] configs: disable SPL_BOOTZ to preserve spl size
-      commit: 1dde581e1affbbfad285a75b892cbebaa3f0bf19
+[1/4] spl: Kconfig: allow falcon mode for TI secure devices
+      commit: 16f412679005e539401308bb075d4cdf87f01cb2
+[2/4] board: ti: common: Kconfig: add CMD_SPL
+      commit: d99688d26e697a52ceccea8231e085a79ee63771
+[3/4] arm: mach-k3: enable support for falcon mode
+      commit: f5119b38ff0d13f58a9af4d9f7f48dbc3f6f6a93
+[4/4] doc: develop: add docs for secure falcon mode
+      commit: 20fe0f5dadb70c24163c2c5f1ecd27c569ddd13c
 -- 
 Tom
 
