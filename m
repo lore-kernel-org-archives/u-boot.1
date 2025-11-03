@@ -4,153 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75060CCFA06
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 13:22:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81383CCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 13:22:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E6F983942;
-	Mon,  3 Nov 2025 14:21:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 07CF683955;
+	Mon,  3 Nov 2025 14:21:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="eJRbeviA";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="TDKnRuSf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F26F83700; Mon,  3 Nov 2025 08:21:05 +0100 (CET)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 8B5F2838AE; Mon,  3 Nov 2025 08:39:04 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FF9D83642
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 08:21:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 970C68331F
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 08:39:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wLAfcScdH/6UUExTcdjoBFjIcFwr38Y0Mn0xs15dTC56IO5ZioC1H8TD8SUO77rWOw86GqeOFKDXav3K4tfqZA4n2eFLG5vZvKg8RIFkN48pVjlrE7Rd1WDPSVOCZWnxpXquDzOHaBG0ZthaYNwj1u6HENuSawOIm1+RiQpN62PkagCjL4/TJ7gbP1RGK0DteJiHVwwtGh0nh1lkM4WKnjnaiB1blhgnjvKM2So/GmEcYlbIyG5oZOSzOquZOgjQn3+pO8LnAmvz2A9/Oe9QJp4eFWP0lYpv+/7ddZGCPKbSkly8cO0s6S/3LVv11Rp7kDqYgDkfmwUIILVQ3hiEdg==
+ b=f9Q+Q3zS7HHIEXBlPNqAt6xUya6xmSHK8haxokLl5nigHKUUNxX+gw5GaKu1rJ08Zf238Mi47izCSTrzXgGx39AS88h/CsT/Dk3chb/qO5Z1pbPNrhVS1e2jOw9y+Ryq2fP1vwfEH22NW+NMkhB1ZkcLPL3DdXrc6G9JQDyESTqxDd2BWg6Szs0Wy8N0Ws2EeQPo8kxmtNGF9RhmVTqWll6K/5SLx7H3CHMF3dkjyCs2357+XoKA1pKNDPi4HF+9LEst9reBPmBY45ly8+7EvirNjHbbhH0XiZHTR5QHAnUosz57w4J0/c//ZJvzTtk/L2mtPkVCMRPozPLIvDG5IA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9V/8kHcA7liA+C3PIIu1NnsGrUnMXuuh5wPVrc/FnGI=;
- b=xRGB6CfXo0bB71SVyoFG54AMEOe9pt67IUlZILh/RzLdpQxgBuBSGxYF92lkMqceOmmQG3HAEm+xM5LUazCvI83x4Z0D8CnWGG8QQsAMCQkOCy+0TAjDRruKerom6G6xtI161f8HtrVxcf//8ZlM4AV5XFzLzGRa7sJgFPliT+tKdItjC3OxSxwpSeWut1lnzvupmHhWCKyn7yNK5Gri8g13hGwPTF7Cya3kiTQtZzrXuQXYj5dwRegyZrRx6BI2eKlLb4TORnSDg+RLM+ctebJ7hdmn5edwdaYZMCeg8ozIwyxnMjsCCzZtRl1gd58k5oAr6YCGcseo6lF4R2I6AQ==
+ bh=Wj8PS75ZW+CAfY2Vk+kWG3qcloGzgoS2OVczYq1umDM=;
+ b=nmQg3pdRVjl6XL7D7+EG1zXpyy67t0zw5RWAsphmVLY0bNMImcJNQsptgwVF0oPq9clvm48b02MsNbNQmv4lMbinKbBknNyUcdriKN9Ai6V+NKMwUzv53ks32MBVbbQ56YaCknbZ6X5DWLUOPG3qd3PfZBQcNjdzcwzt937fhFBMy73/COTM5KZydHgFeZe78++TLU/BNsjt3qQyY60bOR2qEh99lazAWbfSrwAQwIc41iykpLwXDB3YVh4lmuJYso3rGH2pywMbL106vrQqsU/KFZw/spQX89dmyjr3zfwU7mgvJjbYF6/1MGiAdTC6jouI743RNwU5YOuzlAXWmQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9V/8kHcA7liA+C3PIIu1NnsGrUnMXuuh5wPVrc/FnGI=;
- b=eJRbeviAj/+lMsBYhBUfXypcL8hOVU3CCEynvsTxJgkguL0DnfxSkK/PyuNb4uIlJu/tXqM466cYTEI1NhW+eozs9D2QuhCb1eeAPUT9hyhjoHhBV90XsOMLQ/aRliaKyAhPIToW0M3pnb92xe1xd0v2f6XPHrzlVWUJrDYVlgQIGpLu5Zt/s15zUTOiGD1sU5Gqd1xkhOWRReUtM2rs8JOPJUui8zGBtfPZC09TznxsV6VTkJVoNii0/Y2Nd5z0vGF8bP4MFKSeoYFqOCjWdRdPbArRxOxEswQZyYY91iw6/QliTWM4vJeRz7Q1oOiPXPtpLia4W1pnFPWHfBOaKg==
+ bh=Wj8PS75ZW+CAfY2Vk+kWG3qcloGzgoS2OVczYq1umDM=;
+ b=TDKnRuSfFj0cwxxZ5QMMnGjhTCDzkvsM3YJqE6iquyz6rf9T665V4jmZgJZABO95H3Y371VnT+HzSdMjzOQ0+3oyyl6Odp+Gmcvej4rq2H+GNxjtF4RQRHGp6sadmWYAXa+gwApRn1xLDpUssDwJQhYjMFKxbc0dq3ctaeqr6qsnT/whdmFFT/5866OG2TiaDSgItm3EW5V8vxt2jdIMC23t42iKaTPhHl84cPq8LRyiqHpKpz5cLXjKeRnMDWdHclguuzyD89ZmO6GbdjB87h/5wKtgabLlN3J8S/Gc/amM/WXJwuMSg3WrJgUyxM5J+xlWG6heouPn4C1R5YkpEw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AM8PR04MB7331.eurprd04.prod.outlook.com (2603:10a6:20b:1c7::20)
+ by DB8PR04MB7003.eurprd04.prod.outlook.com (2603:10a6:10:11d::24)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Mon, 3 Nov
- 2025 07:21:01 +0000
+ 2025 07:39:00 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9275.015; Mon, 3 Nov 2025
- 07:21:01 +0000
-Date: Mon, 3 Nov 2025 16:33:29 +0800
+ 07:39:00 +0000
+Date: Mon, 3 Nov 2025 16:51:35 +0800
 From: Peng Fan <peng.fan@oss.nxp.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
- Alice Guo <alice.guo@nxp.com>, Cristian Marussi <cristian.marussi@arm.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Valentin Caron <valentin.caron@foss.st.com>, Ye Li <ye.li@nxp.com>
-Subject: Re: [PATCH v2] firmware: scmi: Add clock v3.2 CONFIG_SET support
-Message-ID: <20251103083329.GA1698@nxa18884-linux.ap.freescale.net>
-References: <20251027135856.8909-1-marek.vasut+renesas@mailbox.org>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Dang Huynh <danct12@riseup.net>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] Revert "power: regulator: Add vin-supply for GPIO and
+ Fixed regulators"
+Message-ID: <20251103085135.GB1698@nxa18884-linux.ap.freescale.net>
+References: <20251101203429.1603832-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251027135856.8909-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251101203429.1603832-1-jonas@kwiboo.se>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-ClientProxiedBy: SI2PR04CA0008.apcprd04.prod.outlook.com
- (2603:1096:4:197::20) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+X-ClientProxiedBy: SG2P153CA0009.APCP153.PROD.OUTLOOK.COM (2603:1096::19) To
+ PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM8PR04MB7331:EE_
-X-MS-Office365-Filtering-Correlation-Id: 319b5fd5-90d6-415a-3420-08de1aa98aa0
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DB8PR04MB7003:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1df75a8d-1765-45ea-1af2-08de1aac0dfb
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|19092799006|1800799024|366016|38350700014|7053199007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KKTKOL9Yjxwx8P9e4QNeS1ncD3JCJab7iYex4tfSqH/vxTk6/4K0dfuKK0A0?=
- =?us-ascii?Q?M+IIksMJ71yPpmgROVsUIuqLZeV03uejmhUbursTSSMo85CCCVdpeWogOuLL?=
- =?us-ascii?Q?5PJLGZhsZyNxK84kMSTkCDhPQ0LK+oEJbrfodtVsgtzttKhQJiCZdhigV/wk?=
- =?us-ascii?Q?B8f83lwR6k2Wdt/hDATg1HHCPoESw6QuAEQV9hHY50+HejSoYOks6pcv3pww?=
- =?us-ascii?Q?zssjtoTDvk7yQBNnbC0dTHAUlkuzORMMCWDGmvmJ6jvA7f4wSvBIKyNZvHCD?=
- =?us-ascii?Q?IgF2/AGCrIpuojODzmNId7/Z/uyJsimzx9ie4ByG2V/JMn5cBHCJA793JizW?=
- =?us-ascii?Q?ld8QIYvL582R8GoXYKqYX8nW//fnHBXHhacBmHtL89AKrmNrw5wtrEnmMGto?=
- =?us-ascii?Q?txpThYS2jDEW0WQvvqOCJ4d5n9hntIZY0PrVIeM3jYNr732u/1zuoihaYiF/?=
- =?us-ascii?Q?d67EDFawJ1DROc3a29eo28jNKhzkg1Uj9t/XXU5/fdTXgsHHy+CGynFE3bW0?=
- =?us-ascii?Q?OKAXYrO+kgb3T4C6E1XeHluEznqTc5epRPgOxGXi4tsni6xjw8Skbo1pHrXB?=
- =?us-ascii?Q?vpQMgMrbRuHcJ1Rh9ZQD173BlHIdGUaDlyLBHp+VQhPDpkbt53k8VIma/SwZ?=
- =?us-ascii?Q?ujEtSM8iRItgNKZ9gdWv7Sy0pt2WB4JHZuXoeRynrTMDyttASEVzg6rLiiwh?=
- =?us-ascii?Q?+Gin/HnX78VQmLimYYTIGuzUi7ziWdSC40JZDKzDV8qed09w/B0dgZYUHZQs?=
- =?us-ascii?Q?IQ6YzMWmEaoU7n8SbPeTWg2Z149IjYc3X+whuM3vZItBwR/L4+UlTOMh9H1J?=
- =?us-ascii?Q?8baxKHUtpch9DTwea8unLmXVuZ+os5j+fBHKRVNhJTWUxZr4uqQKUrsK6uc3?=
- =?us-ascii?Q?7nbw+a7V3ZO5JX1xZDmNbH2SYe9DaGMZpFEqHy8L/7j4AF/in4esgRPDHys2?=
- =?us-ascii?Q?oe2/WTqKPzm6iO50caQEn7qWdtVlb5nGWDv8bbsWdiPozxrvTgeb+MtEJEvL?=
- =?us-ascii?Q?DB+vL1ii0Mw7UT0ivdJ5Ppq/AkK5+oD5sdYEOiYbeEpMdngl4VeMxeCmFYn8?=
- =?us-ascii?Q?RvExKkOwUDszms+tO2XIcBz4v9zjLRdmXqpcqkaCmURw53J2NjM7xyyxVgKf?=
- =?us-ascii?Q?jix/8iRP5rqNYNZ/UiIXL+nNOS1M8FwMgx3IQU2bs5II9Zz027062s7o/Lcf?=
- =?us-ascii?Q?7CfxSrtPALnoXX00NPaEzw/++OciP+bgqALDWLS8jNfUawZiJWR4351G0LN3?=
- =?us-ascii?Q?JJpoShM9iK1cFrj+C9jCEvQEkAiLpoCXYIF6oYBl1Gzx9G7Tg893sRlX45Ql?=
- =?us-ascii?Q?RAeyWqKEt0n7c+99zdW69AzVsP8Y4GmZAYU24LMsl6AxhSxnEGoARhLRyCUr?=
- =?us-ascii?Q?ujQ0LkyeYwz8IiP44fJwOXxTiKRHFse98V6sttGuN0MCILxuliKSgpxefcbY?=
- =?us-ascii?Q?MRpKjsuPbvYDbdJbeCbqqveRHw+exNlf0gCOM4xy70icgSFlcdaS1wLgk+ob?=
- =?us-ascii?Q?BGOj76xk0wBr3b64jqs/9kt7+clmqMi4hoVH?=
+ ARA:13230040|19092799006|366016|376014|52116014|1800799024|7053199007|38350700014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?y6MR4+AA/gdy1jh6YbtbnMKZGOBzpb1u6FI8A/rBzubotbQVyuw/YI6WDvvH?=
+ =?us-ascii?Q?QlzFGhKwPybVm3DxJESKxg/3aziPxp48JkJTIEd+obFRTh1lyuBhS9bW2yA2?=
+ =?us-ascii?Q?rwzEptsKLFQ2uGwMc8Flvr3aRohm9nTAGszT1XnAzbY2Kt2NM/VNzBqDyz41?=
+ =?us-ascii?Q?+2jX2ZodYc9qyILOuOMQg3ibbB6f7N1jbhgzRdJCPTaT2rtOanwagVtoy4XU?=
+ =?us-ascii?Q?9sV6ZImB0VHpgN/RBl29H1Q2onA47x3EotID85dJ8M8juZb1ZnEiZSc77h83?=
+ =?us-ascii?Q?vx4+yN2HvcYFaw7briBjSRdLU2/pozxipfHSPRWqPBN3Mxc6loBy6SR1PziC?=
+ =?us-ascii?Q?MHP1Sc0NqZPmRLjMKa5UNWp330WjX1UgPQgH4Mnn5yi8hFA/4iqgBtJHH9fP?=
+ =?us-ascii?Q?x9/GSMZE0USlVcRcIxauGty68tzUY5T3D+QI95EXwcoWeDBbJDkF5JX2dMFr?=
+ =?us-ascii?Q?IVYnOxabGN3V78hpCtDVNywiohN/dfBARbXLoWQ7OdIBN+dCd/t8Dmht8X/B?=
+ =?us-ascii?Q?zh85oHimffBO3a9vqm+USeOE6NfJcen68+4V/nugHFGzZSAWENkfEP4vDPfb?=
+ =?us-ascii?Q?2f32EZnhwt2i6cgtPItJCh481gtJUtyd8ekJoeVCcwV0WGTi/p1CFWjA/dLK?=
+ =?us-ascii?Q?HsN1DstL3BSz8Q59rklS7H5ueJxcT06Fr0B9e4XlIr3u62Ab6ocHHL6jZk4p?=
+ =?us-ascii?Q?x2HNCuiXWmpp/kxDeCVm+Vh0b7YjlaiP1gjfFtmhMBDyltnTKIS5QI3RmiMh?=
+ =?us-ascii?Q?L5P78pkgECgAvuc2EFZECpFxAd47zXXmPxphjHIJRSsgZNLwDX/lZhs3O121?=
+ =?us-ascii?Q?WPyZL+oECXAUVhd0VMfQTkF8o74sUEdS/+k+ghz8GyQRYU4zTTCjDazUwaL7?=
+ =?us-ascii?Q?IqiPESoAyXqB5e8hlTmAqwzHdbOwGziK64h21+PW5Cm5Bzs2P7gQxRh1NmQM?=
+ =?us-ascii?Q?1UrjH4IRATV0KDsAsPygwqMFUA+14i9icVezFIQQA1yHpMgQfy6bqXaHrAF0?=
+ =?us-ascii?Q?9hCmDuogonI4s1QyK86TvHFb5RxPoBiPFcUL5wJkROyi/xFTYAQSjQWa0bDS?=
+ =?us-ascii?Q?5NxGC8sqaZcHJ7luKYRSSvusOhL45cGhx1UiHVD+TCrM6u4b7yVjJX8+ttOY?=
+ =?us-ascii?Q?+uCFIzVnQUFnfKflzQrisHzig7VoMaTodgjg91rULJvwIKGgyGaEgnWsfGYE?=
+ =?us-ascii?Q?PFzR32lANcb+hu7ZAnpLoCYeZRWhPL/xc36XI6zB30b2M2YQjQP3ZrchMs0F?=
+ =?us-ascii?Q?qsdLlljEWjG0pbhiod/XaGpQuqQQFbdyTtpLkmdU0WubFSFFsFy2YVk+BNu3?=
+ =?us-ascii?Q?gkZcEvBMhpuK6QOC46CM63pX4nNe7+SavRY4aniVsH4XGZjlNVkG5mJMWYUg?=
+ =?us-ascii?Q?d4lYnrBGTWjiItzRxBKuA5bGfpi0DQZngJyExTBaTyd4NEnuytbYmYfjDIg4?=
+ =?us-ascii?Q?JTu13wdMZBpKerDSeTlGorx8lbAIHlyE1nJgqOFYs9SG3knyvKMYBdzeR/Xw?=
+ =?us-ascii?Q?gQF9AHJQIyo9Pm7aAhsyuELRFUl/jxsme28D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(19092799006)(1800799024)(366016)(38350700014)(7053199007);
+ SFS:(13230040)(19092799006)(366016)(376014)(52116014)(1800799024)(7053199007)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?l35lZ5ebwahX29IS8DFvC4uHdqOZFcw4pZd7yCtryRr4j6oCyNsl9AJpBTc6?=
- =?us-ascii?Q?uwfbykgXjpujpBoygn0pTLJY2O6U4Uwz36R6S+i3Ddu5F7+n26VGRg76UZDJ?=
- =?us-ascii?Q?5icuhJk2BOKhMabcguAsHb5PRPP+RrxMoOPvQ/EzASKMY+2X8K3e/NOBQ0eO?=
- =?us-ascii?Q?igG/JPjkW0raJXIsOy7Iu57SHSydWB2t0pCY/fcNbFmtt6aOpjsLkQUSu6/V?=
- =?us-ascii?Q?ZTuYLqF55HXZywVoZVK6snKOZBnNLphKgftfwDPWMSvCX7tylAdGoiErzPfr?=
- =?us-ascii?Q?odNBQLbKkZ8oUcqnJZOpVYaGsaMB0cBrKrhEdGPXdB7RJSoHSx8vJyzYM/Za?=
- =?us-ascii?Q?NubFhvnyfwXgJR95AS5oBLInoThuqtctAhpzG2qQtsC2M7H8J6L/rVMflnKi?=
- =?us-ascii?Q?VTvlrAvToEaTZ++wASJbjR8ttODUFziWXulGSUqnIC2djzJCzfyrkqhYuH/a?=
- =?us-ascii?Q?/ehlNfPiRQIRtcU2cXSUmx4w/2cgI7rWT3eFNMWcxf5YbBMR5NbIy+vSjzZ5?=
- =?us-ascii?Q?Cf7A2mStLDu5ky74NdqkiLlq0edptyBlIEVcof3pxRvUi3eVeUc/DZDhO8dA?=
- =?us-ascii?Q?uEoLXDW+Q4YychVbxbcJUKRm1ooyPZZhXJLmM3h8dke6ML9RLZwVCutMfDA0?=
- =?us-ascii?Q?XGmVNa6OKUS88oZA1G4kpA9+yhpDOo4hK8bQCnV2yIthzpgRo3t2LeDQudyf?=
- =?us-ascii?Q?REy6r0F8CqAQcNMLpU6DSkGcxCKn2Eblm+50JXAXZvLn8kc0MgT4H1hzsaxj?=
- =?us-ascii?Q?o+S8x1m0HAhqGv/Z4vzB9XS+fBxHMNBd4ahLal7XdX3IGnEQpLlGDg61xdMZ?=
- =?us-ascii?Q?clBWG77IZgES4uIhfiSoPcuIxpTLuNCxmP/Jpjxn7/FDI6EakWIzAL4QNAf4?=
- =?us-ascii?Q?1Ir+/IqTp75E0J2Gh/PFH/eXAAQ0jesjhYlUtPP/wrNqRlIeiIO1l+msVUM/?=
- =?us-ascii?Q?50TCJPjTuR9rXyLUyxzXy9WdKFu8SAbLBTyoaCRTDnWrX3Y8spVaFJ6fz1Nb?=
- =?us-ascii?Q?jxyb30oou5UZAtSbj6fLbvsA3sTLs75sD3EcqGLQFEw/9mR+ienu+sJsKicz?=
- =?us-ascii?Q?WW0/hQkTT9TIvI1IP5C6uOFIKZpBXUVQLx1ERw+gsj3KqOVd3iq8TIBjC5eH?=
- =?us-ascii?Q?7hsuXvz8uX4QP5v7d46EaCrdubl+p6yMSh66FUyk9CqBuQPUItN4QA28uuJU?=
- =?us-ascii?Q?S+V/rnfcQKMAImWGqAflRyM2IIOeBSsl/OfqthbpAebY46s6KUVYTvRp3RJG?=
- =?us-ascii?Q?+J+XIzG+tT8cHwAeGirnCrYCPKahDa8oSSXOIPi69A3JF7ulZ9UGf5WViPML?=
- =?us-ascii?Q?ldPLmLQgXt8SZX0eCwqKBCV1sMaunLM/ez0x9bIh3vyBJ828E2zMlKMUcGjh?=
- =?us-ascii?Q?/P4uQMIn96mxsuZYqIbAs9hmLbyEzXjOtpHcTHEz+cRJXnO0JmSAK7bC36GC?=
- =?us-ascii?Q?tW+rRbiogfA56/aqhVyjDGZ2PwRNUL5PwyeUMlsxFT398MaUxItJptng/dEc?=
- =?us-ascii?Q?G+VLUB7g4U0dJ428qzb9yJ3Urj7VZzZXnzm1zTeLiF90k10EzGvkUvnSuFPu?=
- =?us-ascii?Q?F5db2B148WFFtDVLhzvto8lMVLmybrYzPKf2fRTe?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?xkAUm3DvInZjTsNhoPAYzEHvmjarNvVe1A1/M9kvJjDW33H60OMbGpmcHaWD?=
+ =?us-ascii?Q?JZjSK+R/O1jqGLAecnennI940dB+TxImVOgb3C+qw0c37JWDJEFraqlyMurp?=
+ =?us-ascii?Q?jWU811REy5OlZ6y00BV66B88puSCbSlBO2pbZ/d2as9zsTs5QQxM/Y5bH422?=
+ =?us-ascii?Q?p7nXNJdVOgU4FMhll5J7Bf8BOgngFHer5oB/OKOrIZKzndE3xnR5kZcB9ZBY?=
+ =?us-ascii?Q?oL9KsVhIiLEzZZzrxOLs0YT5pr+/TH7LQG/UblXtJKGpVFhZmWgB9Pf3hr8x?=
+ =?us-ascii?Q?5SxGDLuHmCuyd/PlxXcwO4MmoIgNfNE6mKdwYGAcE2B8rhJjrFDRvnJT1u57?=
+ =?us-ascii?Q?evXpmFsyScWKaTL8T4RtHsmInGRi1+EUF5Fk0kB4ZvVz4lvvrDXkYsz3ku7j?=
+ =?us-ascii?Q?yCDwFRrfS2xpY+Wx/CXQndiWPS0Ieqm5tjC9oNFPc/8elysUZoin8EP5nDkQ?=
+ =?us-ascii?Q?lZRYv8BsGRcAOgKpWHYR6l4miEVC4PvrIvjI/0MKgLVVkGRsh1nHrXfA14Oz?=
+ =?us-ascii?Q?X9nAlT0xNsauZ1Y5sgGJOrzj734ZQJ+jK3GQyTy0dLHwkXmfihmll82pel6G?=
+ =?us-ascii?Q?kptKix5fRGvuNPShReuFOY+8fvPAS1BtQrNnvHVwPN2pOT7vY3HwVEHyrwxB?=
+ =?us-ascii?Q?mEMF4Yp3p+8zxF6mUXphfriVlMH7ew5/iAIMIl8aMCJzZ8jcq0LuImQLK+t0?=
+ =?us-ascii?Q?vI86veB1fZhZ7NDkDh6AYPPL8b1cK/JFjLrQYEiHyMyBOjJSpxWY+3OPX0Dl?=
+ =?us-ascii?Q?1bsdSl224MX1QUJ2ccNbgMAakDvymUck9ZvT2rcSfpELPre6+JSzt/dwbjz9?=
+ =?us-ascii?Q?RrTmmshUcXlPIKqvOoo3cpfSTKm2NZaYOahpLtWdw0QmyVZg++tXpUEPYXey?=
+ =?us-ascii?Q?ZjRYCpEPdOtMXlcTnbkoKguWIYs/TB2smrSpheRI219sUWl4zR07kq/KaaN/?=
+ =?us-ascii?Q?J8hWNu9kZ/LTTb3jsA/nBzTW87zIsFngpzInHMuqLq2SBiM4ijTdq15D7248?=
+ =?us-ascii?Q?OlNsO0WJNZM7O7q8zkftvLeyfPaty1fqZj/3u+j0y0US4P7X1FADdLBzYQot?=
+ =?us-ascii?Q?5/lmq9VhM3rt39D6Fu4AVjhomaWRjeMQ9Kx1UjH8KmKl13FcTuB1S71ziuPN?=
+ =?us-ascii?Q?0KsJ/E9IAoDdqvrLtXD7VSZz0uC/Huz9g9/sGfi+3+T38Kiu9JzOO8rVi+fk?=
+ =?us-ascii?Q?gOBhNepF9i+xISyJASfg+KQg5Pl5TrSW837watT8/u0xZo9pvV4loRi1O5F6?=
+ =?us-ascii?Q?SBNVCKaBvNcrD+Xe/mwlm2QTa/bJCoxoOFYat4/tF5iNH3Wg2E/I++VwOdeY?=
+ =?us-ascii?Q?QR3bw1R87GXlintFwC09h0ptVMcCGMiv+cNrYREFR86usoOAyy/dYy9quVx/?=
+ =?us-ascii?Q?igT49tWvEWCEHSEkcqwBCAhUmDPMlcI7uJAgjzucUUdinkQo4gpkKLkXGQlK?=
+ =?us-ascii?Q?z5Q4HrNDOMxArXhrG0UK83BGombZQdqT2KwKD1ym1ITlnm7WXKyPB6o93phx?=
+ =?us-ascii?Q?iQMex/664UhU7m4XdqdGpfWbqsnv5vmZejYWY1lkqzMiAjafASB7OFtFjM3E?=
+ =?us-ascii?Q?dS9WARDQRPkGCQKOJK6ugW9KVkU+jpfHQhfQ4hbM?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 319b5fd5-90d6-415a-3420-08de1aa98aa0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1df75a8d-1765-45ea-1af2-08de1aac0dfb
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 07:21:01.3423 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 07:39:00.6596 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xxgi4iTfdHThODNLZ8Rg03w67E192IB7MTIu4feieNuJQtFB1FSMzfqfKYhF/diNDfhAyeNT8h/34kyHgAGy4A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7331
+X-MS-Exchange-CrossTenant-UserPrincipalName: aZTGcMM7Lyy8Y6glcekCeXpb+tXB0iVw0xbRmrOJ7T6W7CoD1eiFiHTIHFu+5x0AE5LsBy7IIvnVLED0MfPHTA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB7003
 X-Mailman-Approved-At: Mon, 03 Nov 2025 14:21:42 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -168,75 +165,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
-
-On Mon, Oct 27, 2025 at 02:58:29PM +0100, Marek Vasut wrote:
->From: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+On Sat, Nov 01, 2025 at 08:34:26PM +0000, Jonas Karlman wrote:
+>Rockchip boards may depend on a working MMC regulator in SPL to
+>successfully load FIT payload from MMC. Typically, these boards only
+>include the vmmc-supply regulator and not its vin-supply in SPL control
+>FDT.
 >
->SCMI v3.2 introduces a new clock CONFIG_SET message format that can
->optionally carry also OEM specific configuration values beside the usual
->clock enable/disable requests. Add support to use such new format when
->talking to a v3.2 compliant SCMI platform.
+>The commit f98d812e5353 ("power: regulator: Add vin-supply for GPIO and
+>Fixed regulators") breaks loading FIT from MMC in SPL on some of these
+>boards due to now requiring the vin-supply to be included in the SPL
+>control FDT.
 >
->Support existing enable/disable operations across different clock protocol
->versions: this patch still does not add protocol operations to support the
->new OEM specific optional configuration capabilities.
+>The commit also strangely enables any found vin-supply in
+>regulator_common_of_to_plat() and not when a regulator is enabled or as
+>part of regulator_autoset().
 >
->No functional change for the SCMI drivers users of the related enable and
->disable clock operations.
+>Revert the commit to fix FIT loading in SPL on broken boards.
 >
->Signed-off-by: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
->Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->[Marek: Remodel after Linux e49e314a2cf7 ("firmware: arm_scmi: Add clock v3.2 CONFIG_SET support")
->        Support both old < 2.1 and new >= 2.1 protocol versions.
->	Update commit message based on Linux one]
+>If a board needs to have its vin-supply enabled, two options come to
+>mind:
+>
+>- Add regulator-always-on prop to the regulator in the -u-boot.dtsi for
+>  any board.
+>
+>- Implement full support for reference counting of regulators and then
+>  update the regulator-uclass to enable any found vin-supply when a
+>  regulator is enabled.
+>
+>This reverts commit f98d812e5353408ef77a46bad1f1cdc793ff8a03.
+>
+>Reported-by: Dang Huynh <danct12@riseup.net>
+>Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 >---
->Cc: Alice Guo <alice.guo@nxp.com>
->Cc: Cristian Marussi <cristian.marussi@arm.com>
->Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->Cc: Peng Fan <peng.fan@nxp.com>
->Cc: Sean Anderson <seanga2@gmail.com>
->Cc: Tom Rini <trini@konsulko.com>
->Cc: Valentin Caron <valentin.caron@foss.st.com>
->Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
->Cc: Ye Li <ye.li@nxp.com>
->Cc: u-boot@lists.denx.de
->---
->V2: Fix up iMX95 and sandbox after rework
->---
-> arch/arm/mach-imx/imx9/scmi/clock_scmi.c   |  2 +-
-> drivers/clk/clk_scmi.c                     | 22 +++++++++++++++++-----
-> drivers/firmware/scmi/sandbox-scmi_agent.c |  4 ++--
-> include/scmi_protocols.h                   | 17 +++++++++++++++--
-> 4 files changed, 35 insertions(+), 10 deletions(-)
+> drivers/power/regulator/regulator_common.c | 10 ----------
+> drivers/power/regulator/regulator_common.h |  1 -
+> 2 files changed, 11 deletions(-)
 >
->diff --git a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
->index fa15b5f8df9..fc1d5d77799 100644
->--- a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
->+++ b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
->@@ -10,7 +10,7 @@
+>diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+>index 3ed713ce5019..685d8735fa5c 100644
+>--- a/drivers/power/regulator/regulator_common.c
+>+++ b/drivers/power/regulator/regulator_common.c
+>@@ -44,16 +44,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
+> 			dev_read_u32_default(dev, "u-boot,off-on-delay-us", 0);
+> 	}
 > 
-> int imx_clk_scmi_enable(u32 clock_id, bool enable)
-> {
->-	struct scmi_clk_state_in in = {
->+	struct scmi_clk_state_in_v1 in = {
-> 		.clock_id = clock_id,
-> 		.attributes = (enable) ? 1 : 0,
-> 	};
->diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
->index a7d89f32cd7..f9e17c38cad 100644
->--- a/drivers/clk/clk_scmi.c
->+++ b/drivers/clk/clk_scmi.c
->@@ -134,17 +134,29 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
-> 
-> static int scmi_clk_gate(struct clk *clk, int enable)
-> {
->-	struct scmi_clk_state_in in = {
->+	struct scmi_clock_priv *priv = dev_get_priv(clk->dev->parent);
+>-	ret = device_get_supply_regulator(dev, "vin-supply", &plat->vin_supply);
+>-	if (ret) {
+>-		debug("Regulator vin regulator not defined: %d\n", ret);
+>-		if (ret != -ENOENT)
 
-This should be changed to find the protocol@14 device, because
-assigned-clock-parents could change the scmi clk parent.
+I understand it might be not proper to enable vin-supply in
+function regulator_common_of_to_plat().
+But I have a question, there is -ENOENT check in the original patch. If the
+board does not have vin-supply, there should be no issue. Or I miss something?
 
 Thanks,
 Peng
+
+>-			return ret;
+>-	}
+>-
+>-	if (plat->vin_supply)
+>-		regulator_set_enable_if_allowed(plat->vin_supply, true);
+>-
+> 	return 0;
+> }
+> 
+>diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
+>index 799c968d0b66..d4962899d830 100644
+>--- a/drivers/power/regulator/regulator_common.h
+>+++ b/drivers/power/regulator/regulator_common.h
+>@@ -14,7 +14,6 @@ struct regulator_common_plat {
+> 	unsigned int startup_delay_us;
+> 	unsigned int off_on_delay_us;
+> 	unsigned int enable_count;
+>-	struct udevice *vin_supply;
+> };
+> 
+> int regulator_common_of_to_plat(struct udevice *dev,
+>-- 
+>2.51.0
+>
