@@ -4,54 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6049CCFA03
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 19:15:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33EB9CCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 19:15:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 692008391B;
-	Mon,  3 Nov 2025 20:15:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B08E5836D1;
+	Mon,  3 Nov 2025 20:15:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timmermann.space
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA9DE838EC; Mon,  3 Nov 2025 20:15:14 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 43AED838CE; Mon,  3 Nov 2025 20:15:18 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE7948331F
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 20:15:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44D308331F
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 20:15:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=timmermann.space
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=uboot@timmermann.space
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4d0h9r3jQcz9tWH;
- Mon,  3 Nov 2025 20:15:12 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4d0h9w02vZz9tGx;
+ Mon,  3 Nov 2025 20:15:16 +0100 (CET)
+Authentication-Results: outgoing_mbo_mout; dkim=none;
+ spf=pass (outgoing_mbo_mout: domain of uboot@timmermann.space designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=uboot@timmermann.space
 From: Lukas Timmermann <uboot@timmermann.space>
 To: u-boot@lists.denx.de
 Cc: Lukas Timmermann <uboot@timmermann.space>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Eoin Dickson <eoin.dickson@microchip.com>,
- Greg Malysa <malysagreg@gmail.com>, Henrik Grimler <henrik@grimler.se>,
+ Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>,
  Ian Roberts <ian.roberts@timesys.com>,
- =?UTF-8?q?J=2E=20Neusch=C3=A4fer?= <j.ne@posteo.net>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Minkyu Kang <mk7.kang@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Philip Molloy <philip.molloy@analog.com>, Tom Rini <trini@konsulko.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Subject: [PATCH v2 1/2] gpio: s5p_gpio: Add config option for s5p_gpio driver
-Date: Mon,  3 Nov 2025 20:10:35 +0100
-Message-ID: <20251103191427.2410755-2-uboot@timmermann.space>
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <stefan.roese@mailbox.org>,
+ Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Yao Zi <ziyao@disroot.org>
+Subject: [PATCH v2 2/2] pinctrl: exynos: Add exynos5250 driver
+Date: Mon,  3 Nov 2025 20:10:36 +0100
+Message-ID: <20251103191427.2410755-3-uboot@timmermann.space>
 In-Reply-To: <20251103191427.2410755-1-uboot@timmermann.space>
 References: <20251103191427.2410755-1-uboot@timmermann.space>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4d0h9w02vZz9tGx
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,77 +74,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This config option is required to make use of a newer pinctrl driver on
-exynos 5 platforms. It is enabled per default to ensure older devices
-can still use this driver.
+Adds the needed files for using the new pinctrl driver with exynos5250
+SoCs.
 
 Signed-off-by: Lukas Timmermann <uboot@timmermann.space>
 ---
 
 Changes since v1:
-- Reworded comment for Kconfig (@Hendrik)
+- Renamed to lower case letters in constants (@Hendrik)
+- Removed co-author line and declared myself as author (@Hendrik)
 
- arch/arm/mach-exynos/pinmux.c | 18 ++++++++++++++++++
- drivers/gpio/Kconfig          |  7 +++++++
- drivers/gpio/Makefile         |  2 +-
- 3 files changed, 26 insertions(+), 1 deletion(-)
+ MAINTAINERS                                 |  5 ++
+ drivers/pinctrl/exynos/Kconfig              |  8 ++
+ drivers/pinctrl/exynos/Makefile             |  1 +
+ drivers/pinctrl/exynos/pinctrl-exynos5250.c | 99 +++++++++++++++++++++
+ 4 files changed, 113 insertions(+)
+ create mode 100644 drivers/pinctrl/exynos/pinctrl-exynos5250.c
 
-diff --git a/arch/arm/mach-exynos/pinmux.c b/arch/arm/mach-exynos/pinmux.c
-index ed46ea03355..2665aeee6d2 100644
---- a/arch/arm/mach-exynos/pinmux.c
-+++ b/arch/arm/mach-exynos/pinmux.c
-@@ -934,3 +934,21 @@ int pinmux_decode_periph_id(const void *blob, int node)
- 	return PERIPH_ID_NONE;
- }
- #endif
-+
-+#if !CONFIG_IS_ENABLED(S5P_GPIO)
-+
-+/* Add stub functions if s5p_gpio driver isn't enabled */
-+
-+void gpio_set_pull(int pin, int pull)
-+{
-+}
-+
-+void gpio_set_drv(int pin, int drv)
-+{
-+}
-+
-+void gpio_cfg_pin(int pin, int cfg)
-+{
-+}
-+
-+#endif
-diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index db077e472a8..8c93a850611 100644
---- a/drivers/gpio/Kconfig
-+++ b/drivers/gpio/Kconfig
-@@ -718,5 +718,12 @@ config MPFS_GPIO
- 	depends on DM_GPIO
- 	help
- 		Enable to support the GPIO driver on Polarfire SoC
-+config S5P_GPIO
-+	default y
-+	bool "Samsung S5P GPIO driver"
-+	depends on DM_GPIO && S5P
-+	help
-+	  Support GPIO controllers on Samsung Exynos SoCs.
-+	  This driver does not support upstream Linux device tree bindings.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 8c7d0e0ab2f..b82911d0d58 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -609,6 +609,11 @@ F:	drivers/clk/exynos/clk-exynos850.c
+ F:	drivers/phy/phy-exynos-usbdrd.c
+ F:	drivers/pinctrl/exynos/pinctrl-exynos850.c
  
- endif
-diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-index 73c94329e36..a26ef5a0371 100644
---- a/drivers/gpio/Makefile
-+++ b/drivers/gpio/Makefile
-@@ -35,7 +35,7 @@ obj-$(CONFIG_PCA953X)		+= pca953x.o
- obj-$(CONFIG_ROCKCHIP_GPIO)	+= rk_gpio.o
- obj-$(CONFIG_RCAR_GPIO)		+= gpio-rcar.o
- obj-$(CONFIG_RZA1_GPIO)		+= gpio-rza1.o
--obj-$(CONFIG_S5P)		+= s5p_gpio.o
-+obj-$(CONFIG_S5P_GPIO)		+= s5p_gpio.o
- obj-$(CONFIG_SANDBOX_GPIO)	+= sandbox.o sandbox_test.o
- obj-$(CONFIG_TEGRA_GPIO)	+= tegra_gpio.o
- obj-$(CONFIG_TEGRA186_GPIO)	+= tegra186_gpio.o
++ARM SAMSUNG EXYNOS5250 SOC
++M:	Lukas Timmermann <uboot@timmermann.space>
++S:	Maintained
++F:	drivers/pinctrl/exynos/pinctrl-exynos5250.c
++
+ ARM SAMSUNG SOC DRIVERS
+ M:	Sam Protsenko <semen.protsenko@linaro.org>
+ S:	Maintained
+diff --git a/drivers/pinctrl/exynos/Kconfig b/drivers/pinctrl/exynos/Kconfig
+index 1b7fb62bc4b..18503ce112e 100644
+--- a/drivers/pinctrl/exynos/Kconfig
++++ b/drivers/pinctrl/exynos/Kconfig
+@@ -1,6 +1,14 @@
+ config PINCTRL_EXYNOS
+ 	bool
+ 
++config PINCTRL_EXYNOS5250
++	bool "Samsung Exynos5250 pinctrl driver"
++	depends on ARCH_EXYNOS && PINCTRL_FULL
++	select PINCTRL_EXYNOS
++	help
++	  Support pin multiplexing and pin configuration control on
++	  Samsung's Exynos5250 SoC.
++
+ config PINCTRL_EXYNOS7420
+ 	bool "Samsung Exynos7420 pinctrl driver"
+ 	depends on ARCH_EXYNOS && PINCTRL_FULL
+diff --git a/drivers/pinctrl/exynos/Makefile b/drivers/pinctrl/exynos/Makefile
+index 3abe1226eb7..7ef8d90cb59 100644
+--- a/drivers/pinctrl/exynos/Makefile
++++ b/drivers/pinctrl/exynos/Makefile
+@@ -4,6 +4,7 @@
+ # Thomas Abraham <thomas.ab@samsung.com>
+ 
+ obj-$(CONFIG_PINCTRL_EXYNOS)		+= pinctrl-exynos.o
++obj-$(CONFIG_PINCTRL_EXYNOS5250)	+= pinctrl-exynos5250.o
+ obj-$(CONFIG_PINCTRL_EXYNOS7420)	+= pinctrl-exynos7420.o
+ obj-$(CONFIG_PINCTRL_EXYNOS78x0)	+= pinctrl-exynos78x0.o
+ obj-$(CONFIG_PINCTRL_EXYNOS850)		+= pinctrl-exynos850.o
+diff --git a/drivers/pinctrl/exynos/pinctrl-exynos5250.c b/drivers/pinctrl/exynos/pinctrl-exynos5250.c
+new file mode 100644
+index 00000000000..4c0d8fad36e
+--- /dev/null
++++ b/drivers/pinctrl/exynos/pinctrl-exynos5250.c
+@@ -0,0 +1,99 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2023 Linaro Ltd.
++ * Author: Lukas Timmermann <linux@timmermann.space>
++ *
++ * Exynos5250 pinctrl driver.
++ */
++
++#include <dm.h>
++#include <dm/pinctrl.h>
++#include "pinctrl-exynos.h"
++
++static const struct pinctrl_ops exynos5250_pinctrl_ops = {
++	.set_state = exynos_pinctrl_set_state
++};
++
++static const struct samsung_pin_bank_data exynos5250_pin_banks0[] = {
++	EXYNOS_PIN_BANK(8, 0x000, "gpa0"),
++	EXYNOS_PIN_BANK(6, 0x020, "gpa1"),
++	EXYNOS_PIN_BANK(8, 0x040, "gpa2"),
++	EXYNOS_PIN_BANK(5, 0x060, "gpb0"),
++	EXYNOS_PIN_BANK(5, 0x080, "gpb1"),
++	EXYNOS_PIN_BANK(4, 0x0a0, "gpb2"),
++	EXYNOS_PIN_BANK(4, 0x0c0, "gpb3"),
++	EXYNOS_PIN_BANK(7, 0x0e0, "gpc0"),
++	EXYNOS_PIN_BANK(4, 0x100, "gpc1"),
++	EXYNOS_PIN_BANK(7, 0x120, "gpc2"),
++	EXYNOS_PIN_BANK(7, 0x140, "gpc3"),
++	EXYNOS_PIN_BANK(4, 0x160, "gpd0"),
++	EXYNOS_PIN_BANK(8, 0x180, "gpd1"),
++	EXYNOS_PIN_BANK(7, 0x2e0, "gpc4"),
++	EXYNOS_PIN_BANK(6, 0x1a0, "gpy0"),
++	EXYNOS_PIN_BANK(4, 0x1c0, "gpy1"),
++	EXYNOS_PIN_BANK(6, 0x1e0, "gpy2"),
++	EXYNOS_PIN_BANK(8, 0x200, "gpy3"),
++	EXYNOS_PIN_BANK(8, 0x220, "gpy4"),
++	EXYNOS_PIN_BANK(8, 0x240, "gpy5"),
++	EXYNOS_PIN_BANK(8, 0x260, "gpy6"),
++	EXYNOS_PIN_BANK(8, 0xc00, "gpx0"),
++	EXYNOS_PIN_BANK(8, 0xc20, "gpx1"),
++	EXYNOS_PIN_BANK(8, 0xc40, "gpx2"),
++	EXYNOS_PIN_BANK(8, 0xc60, "gpx3"),
++};
++
++static const struct samsung_pin_bank_data exynos5250_pin_banks1[] = {
++	EXYNOS_PIN_BANK(8, 0x000, "gpe0"),
++	EXYNOS_PIN_BANK(2, 0x020, "gpe1"),
++	EXYNOS_PIN_BANK(4, 0x040, "gpf0"),
++	EXYNOS_PIN_BANK(4, 0x060, "gpf1"),
++	EXYNOS_PIN_BANK(8, 0x080, "gpg0"),
++	EXYNOS_PIN_BANK(8, 0x0a0, "gpg1"),
++	EXYNOS_PIN_BANK(2, 0x0c0, "gpg2"),
++	EXYNOS_PIN_BANK(4, 0x0e0, "gph0"),
++	EXYNOS_PIN_BANK(8, 0x100, "gph1"),
++};
++
++static const struct samsung_pin_bank_data exynos5250_pin_banks2[] = {
++	EXYNOS_PIN_BANK(8, 0x000, "gpv0"),
++	EXYNOS_PIN_BANK(8, 0x020, "gpv1"),
++	EXYNOS_PIN_BANK(8, 0x060, "gpv2"),
++	EXYNOS_PIN_BANK(8, 0x080, "gpv3"),
++	EXYNOS_PIN_BANK(2, 0x0c0, "gpv4"),
++};
++
++static const struct samsung_pin_bank_data exynos5250_pin_banks3[] = {
++	EXYNOS_PIN_BANK(7, 0x000, "gpz"),
++};
++
++static const struct samsung_pin_ctrl exynos5250_pin_ctrl[] = {
++	{
++		.pin_banks	= exynos5250_pin_banks0,
++		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks0),
++	}, {
++		.pin_banks	= exynos5250_pin_banks1,
++		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks1),
++	}, {
++		.pin_banks	= exynos5250_pin_banks2,
++		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks2),
++	}, {
++		.pin_banks	= exynos5250_pin_banks3,
++		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks3),
++	},
++	{/* list terminator */}
++};
++
++static const struct udevice_id exynos5250_pinctrl_ids[] = {
++	{ .compatible = "samsung,exynos5250-pinctrl",
++		.data = (ulong)exynos5250_pin_ctrl },
++	{ }
++};
++
++U_BOOT_DRIVER(pinctrl_exynos5250) = {
++	.name		= "pinctrl_exynos5250",
++	.id			= UCLASS_PINCTRL,
++	.of_match	= exynos5250_pinctrl_ids,
++	.priv_auto	= sizeof(struct exynos_pinctrl_priv),
++	.ops		= &exynos5250_pinctrl_ops,
++	.probe		= exynos_pinctrl_probe,
++};
 -- 
 2.51.2
 
