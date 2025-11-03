@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8407ACCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 14:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 693DBCCFA06
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 15:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA756838CE;
-	Mon,  3 Nov 2025 15:52:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C7156836D1;
+	Mon,  3 Nov 2025 16:17:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NK3FzHUz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q1B9xt9a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A3C1838D7; Mon,  3 Nov 2025 15:52:25 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 367C7838AE; Mon,  3 Nov 2025 16:17:22 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CA9E83700
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 15:52:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C45D80050
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 16:17:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-640aaa89697so2466701a12.3
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 06:52:22 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7c52db2e41fso3427011a34.1
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 07:17:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1762181542; x=1762786342; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bOBtoNPedl4d5UpzDFD5KEOC+B828zIbrm6EynT7S0Q=;
- b=NK3FzHUzoy853tHSkPt3sQAkC0y/ORz6bdkSNhCz79vOSwURx7JxRGZ/BpXV4c98Aw
- hIXoMSHqpG647y0L6MZBkFIvBAdxTg1bIzKdSHHP8wx+iHuPcatjIvHJficomverOdNs
- wzQDA4/isE3hayivJwVMy2nLmFlE9Fr+05R/c=
+ d=konsulko.com; s=google; t=1762183039; x=1762787839; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6ku1TNU7DUbiZ9il4oKBPOLaOg0iLSReWTIk/lcnygo=;
+ b=q1B9xt9a6HZefxbD47FWX9Meop8TpA8PPI2XOCeGYkheUnrukB1ntoQLejTEOSFIN7
+ gEWk/4E4dwuL4MhQVI9WYdiIgoHUn6bkBd12x4GwmWfF4d9iJuOpbep7lN80buIskZg6
+ bRU/a0uDdlQF09mV4tRljofsWrYssc4fAWEEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762181542; x=1762786342;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bOBtoNPedl4d5UpzDFD5KEOC+B828zIbrm6EynT7S0Q=;
- b=w4/DkBCqW/X3GbxQhHBQJTlU+eMur5I0tJdSzBEs6BaAOPqmRs9jdwizkrFapsQCbW
- lVDnRj25s8gbXuUJI8k2CX0myB1rF/76dOOnzTJ6QHLiUUkrtJUsojflV5FB31/kgP6l
- 2JYBT1y6GYSRRFItcXoKRsXp8Atjvyex1BlGOPs6Ep1Kqbw+r/VOVwujtT2fpTWwC8R5
- Q0r9IkyTBd3bU8+fSdaHJ44gNvqQkPKSPsb0PV/Z4Lc3m5GpDEstDB59O2pDabZM2t/4
- 7uxtSFPIuae/03TfNs7BkrogB8DDinQmCje6O8ZS5G9goNCapYnB4FfHV7NbwC7c6S8D
- LZAQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZhL44Z3vkpNRtDzwr4gqV0YCV4VkxhCPF8QGi2FLPl6DnEs1bSIhVBFhm0gNVU9fL21OvEfM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyNvD6DbegigqiNbjGzTRqdipsCrGHhNMwaPJQF54t9QLI+cSAe
- Ygd47sY/ylkHLJ7togjXGeJnB263R5+mWxlilpZlVryRPcQzi69lzi8UI/7Oz++OSFZzz+ck07T
- +kaBuE2FDyWlxnN6uJAMOvoQjf5OWwFPse/2+4Sfy
-X-Gm-Gg: ASbGnctJe9NciqSmDFGD9OIvY9nGcOKUcqddRuNGG1XBCeEPZYqa566X47KOA9vwof2
- Vx9BVj2smw0CEUbHfEhok5x10dKzfbheQrIEMOXiUQBVa3pp1QnS9llM+dy8Y3TE/LhVAQq6o5R
- +TMhlFaobFXNbzMYnfIC8Ucy+eRanQVv7tugzaXYJctwZKndZtgwnMQy+64S9NPgI0N2gZjMnOJ
- hDfr05u34NmMGIiSHjTOdBAx6WlXcdqlebZtDqObrOTy6yz99EYR2Jnf106HAkk0i5pIxY=
-X-Google-Smtp-Source: AGHT+IEHkbhP+oAG1xSfs/un4TPCALxy0tgSt64SHBLLErC0mHTw+FBkTQD31q3K8NBnS5UcCV2N0D8s3LmYIbJazfE=
-X-Received: by 2002:a17:907:7253:b0:b3f:ccac:af47 with SMTP id
- a640c23a62f3a-b70705f3602mr1382515566b.31.1762181541869; Mon, 03 Nov 2025
- 06:52:21 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762183039; x=1762787839;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6ku1TNU7DUbiZ9il4oKBPOLaOg0iLSReWTIk/lcnygo=;
+ b=K/oTraNXev1ZdRD+hb+3HMUARxUrIiz/fURWPvaS30c0mZhcjLGm1GwIng+P9NrDm7
+ 81JAJ+g4jN3sGBw0vXHrCqkIErTv/2IN3wLgNyT0f1la0PrdE+otdE5LJ78mhu4b+TNx
+ oz2eLdxP/8/h3OVthhA4ep6GgcQVAsXt1fJ4KJ4SkTVD1hS17gU9LHPfl1P4dof2ug0w
+ 4GqHC6m3LXanqEBo3SKVL5UV5hRcjzvoh1vBGf3vY9TnupMIW1mcXYaTWzwYjFN142z+
+ Kk77BxEXyfvnYDPbpvT3tmawvLRY7HjC/4OewJczGSPFw9kiCyFQrsmn5iMl0qA07xhe
+ RTVA==
+X-Gm-Message-State: AOJu0YyIZMJ/LayEol56O8eZzE9uLSmp9jDUO/iBuuYp92Tb1EfqNYeA
+ 990DNC6pEzoifLZvMmObpwkfw2ux00ocUpMErRahZPu309aldicsQWEfyWbIcdJ8ioE=
+X-Gm-Gg: ASbGncveSFUEhyZWSK0buiPBlXtNlDEiuG7uGaa1+ewZkPxDwtHK9HnB2+4fLgkYNRQ
+ 4KcM7VIPIi40XrNHtGynd/+pzOTqm+B1oouCieDe8s3OpPWNS6ugMzmyDb02WsBjRQI4UqzUKoo
+ BkVnQwQ+adFbqtjbOOMUFELgT0EIK2vzH0f6T6zCRUl1vl5FQySoqJjFYigFk5mhzYD2TGmiktL
+ ZLZKGJRw1QTe4cggpfWs2ho7ymEjEoku/BCXYFvyD4GBYk3MeaunseJxppMUehder2G6979RK76
+ 6lt1eVPVOqB4xCsQEFvV3LoFA4ek+Akk1fSOTw+sIrwU+QyzmfPlN4jWI35O2+3fPgDpXOI/IcQ
+ eDdfQmRhWV0SDQuDVssiwpbRv61caxLag911Ar7TkvgK5LrJhFIxwvcOvYDfUjx/ObFEOan06Dd
+ 6S5uXhXgtN7AKsbCDDXUzfjqLJK7qzObD3J9+S8xVEZ4vpgx1HlQ==
+X-Google-Smtp-Source: AGHT+IGHNUFzKWgVgYSUZ4ofIo7nNF7+nBE510jupdkKy9rH/Kat5YH60g2VOQhraSgkeaCe/LjENA==
+X-Received: by 2002:a05:6808:301e:b0:44f:8f02:d5e7 with SMTP id
+ 5614622812f47-44f952854e6mr5004252b6e.13.1762183038581; 
+ Mon, 03 Nov 2025 07:17:18 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44fd849533fsm124438b6e.3.2025.11.03.07.17.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Nov 2025 07:17:17 -0800 (PST)
+Date: Mon, 3 Nov 2025 09:17:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20251103151715.GM6688@bill-the-cat>
+References: <20251011180636.GM298503@bill-the-cat>
+ <ef6da754-8217-42ac-bde4-8752cbd3090d@iopsys.eu>
+ <20251012190713.GB6113@bill-the-cat>
+ <d0e51598-8786-4f4b-a62d-7c981bf186a2@iopsys.eu>
 MIME-Version: 1.0
-References: <20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de>
- <20251031-binman-engine-v1-2-c13c1b5dac43@cherry.de>
- <CAFLszTgKWU7mnFdXAOX7rH8jcGs3QrEVy=49om49=FbdNj1q=w@mail.gmail.com>
- <77d2b661-3416-41ae-9f73-68977a26aa30@cherry.de>
-In-Reply-To: <77d2b661-3416-41ae-9f73-68977a26aa30@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 3 Nov 2025 15:52:08 +0100
-X-Gm-Features: AWmQ_bmdZiqU2x7PayTgcBSulxGoTaxKEypnJhG5DzDSj1a9i7iQIVwM4Y4ENc8
-Message-ID: <CAFLszTjMEt2Ph+K63WM8z3yNiZdOwyo-HeQhNuu-6uULiw+3XA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] tools: binman: mkimage: add support for passing the
- engine
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+uboot@0leil.net>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, Aristo Chen <jj251510319013@gmail.com>, 
- Rasmus Villemoes <ravi@prevas.dk>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Shiji Yang <yangshiji66@outlook.com>, Anton Moryakov <ant.v.moryakov@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
- Bryan Brattlof <bb@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LrxQ+Ubkc0RsIKuZ"
+Content-Disposition: inline
+In-Reply-To: <d0e51598-8786-4f4b-a62d-7c981bf186a2@iopsys.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,59 +100,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On Mon, 3 Nov 2025 at 13:13, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Simon,
->
-> On 11/2/25 8:53 PM, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Fri, 31 Oct 2025 at 16:23, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> >>
-> >> From: Quentin Schulz <quentin.schulz@cherry.de>
-> >>
-> >> mkimage has support for OpenSSL engines but binman currently doesn't for
-> >> direct callers of mkimage (e.g. the fit etype). This prepares for adding
-> >> support for OpenSSL engines for signing elements of a FIT image, which
-> >> will done in the next commit.
-> >>
-> >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> >> ---
-> >>   tools/binman/btool/mkimage.py | 5 ++++-
-> >>   1 file changed, 4 insertions(+), 1 deletion(-)
-> >
-> > Please make sure this is tested.
-> >
->
-> That was the anticipated and feared answer. I'll need to figure out how
-> to create a dummy OpenSSL engine which doesn't require any hardware so
-> it can be part of the CI. I have no experience with OpenSSL, so this
-> will take a while.
+--LrxQ+Ubkc0RsIKuZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-You can actually just fake it in Binman, or even mock it. You don't
-need to do things for real.
+On Sat, Nov 01, 2025 at 09:32:35AM +0300, Mikhail Kshevetskiy wrote:
+p
+> Hello Tom,
+>=20
+> I just sent a fix for the issue in the my "coverity and 64-bit division
+> fixes" series.
+> If it's needed I can split the series and send patches separately.
 
-For example, see testFetchBintools() which uses mock.patch() to
-provide a fake download. There is also command.TEST_RESULT which lets
-you fake a command - e.g. testVblock() does this.
+Thanks, that series looks fine to me.
 
-If you are worried about how to get real data so that the test will
-pass, you can just plumb in some canned data for that purpose.
+--=20
+Tom
 
->
-> Just to be sure I'm not sinking time into things U-Boot has no interest
-> in, would supporting OpenSSL engines for signing be mergeable? OpenSSL
-> has deprecated engines with their 3.0 release in favor of providers (see
-> a recent series on the U-Boot ML for their support in U-Boot and
-> https://github.com/openssl/openssl/blob/master/README-ENGINES.md for the
-> official stance of OpenSSL on this). Porting my employer's engine to
-> provider isn't planned (yet?) but I would like to know if U-Boot has no
-> interest supporting that use-case, in which case I will "happily" keep
-> this downstream only.
+--LrxQ+Ubkc0RsIKuZ
+Content-Type: application/pgp-signature; name="signature.asc"
 
-It seems very useful and interesting to me.
+-----BEGIN PGP SIGNATURE-----
 
-Regards,
-Simon
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQjHdAAKCRAr4qD1Cr/k
+CtT/AQDfrnA/MNEvr8WScdaIplKP8xrEMfacCwhnfqn+AEnOOQD/cNTqSrysMicn
+XR1eXjdGu4/IB+LoYhQCcQ6oNOPq1Ac=
+=hPIr
+-----END PGP SIGNATURE-----
+
+--LrxQ+Ubkc0RsIKuZ--
