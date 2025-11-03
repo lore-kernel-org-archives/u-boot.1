@@ -4,93 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B6D3CCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 17:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9ECDCCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 18:31:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4B73836D1;
-	Mon,  3 Nov 2025 18:50:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 02DCC836D1;
+	Mon,  3 Nov 2025 19:31:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="td6vvOqw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q5iBHgDc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78B6B838A5; Mon,  3 Nov 2025 18:50:15 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 40DC683700; Mon,  3 Nov 2025 19:31:41 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C9478331F
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 18:50:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 095E48331F
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 19:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-654e25cc7d7so2178880eaf.1
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 09:50:11 -0800 (PST)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-44fa105ce72so1312015b6e.2
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 10:31:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762192210; x=1762797010; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=I8sbK6DSh6gQrjVAjWffZTSTGqSEbxUtMTPBMWHiayA=;
- b=td6vvOqwyTHfGO3NOMZ/rAPJgvpN9ILKrj/g7IBojgnI5/6TKAsCv18gYvx6fNqbMO
- +bdIlSjvIdOHVfIfOE9fod5gYeT3PBgEX1xYjZNGrohMSYlHR0cZwCNYaQkAnjie9+Rw
- +xBQscbIf5Z+YZHlffI9jq0zKmQoQLoQTL3eY=
+ d=konsulko.com; s=google; t=1762194698; x=1762799498; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=hZl2KLYBzWBdUSTCzKtNTJzxkbevxcZuwAHwBkBaOLA=;
+ b=q5iBHgDc3KZM5e/g8WCvd7KQgoJsDMa06TRy+dfuNtJa3G+V82FXZ+afhNYolVyEFw
+ OapMs01Yui8/Zhi7WFzVHTo7P/PAXqne55XIQuJUUgKWxz34rhuCZd+KSW9csedzX7yK
+ gYkZZnnfaEQ6iN4U03sgOW6kXd8UpWh8JGYh4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762192210; x=1762797010;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=I8sbK6DSh6gQrjVAjWffZTSTGqSEbxUtMTPBMWHiayA=;
- b=jkOe1BDB8+DJOzGXLxoWPzAqs5e9jnYsUprtkf5QmaS0wUpI00aUrvXv2YkgJ/9dPq
- YjltasAkyMVKJBeFQvxHv1C/0OiHVLs4Zih18PLva7N3Bt3SqAxqjAQu3Lx/c/APQEV7
- 64swJDrvFqkLyGOBxdjylc/b8KOctE9ZvscIxe5ToO6b93RGM079GeKa1IbnqIiokSjP
- hX5Is3VJye60Vi28F6LJyD+8NYMa3v+XDXfMfCTadbsA6+qs7zZkS8NyoWuqI4Y5FJn6
- 9lNm2MYJ23PwRvumvYX8ttDAdZendKTCPR1Z0KT67u/HRR8rTS1pA77jFviUhdhSFLXV
- JyRw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVj3hbIOxJriIpiljoO+qtCKc2TpA1nAbhCOP2DwCr8V3QjYzQHbolPAiEM4Kq1k9RrHAlixpM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxeK3CqFSYN3Ou5AYPi2LgIy4/bGexwk5cxKj4K1sBRCimv/CQM
- VPPKJ48zlbjHxkBCJlByqvsc0Qdx7yEJulvl5iJz9yxyPJDnddPBj1MNSiw7xCJ+QbI=
-X-Gm-Gg: ASbGncvziZP+lYizcB9QojrUT5dmI+kwtVziNVVVgQDwSEiXh+yW1wox2ggn+XpgtJE
- /KDfpXZ/IU1iv7GJf7R9SR+5tAFwfSKZb9gzgjYqE1SsDQ+7CH7R+f1JUqq12qWiUiVpqyVWypI
- KSoQV6o6KsmhI0pOCY0Hc0AEQWnpnYIAdx73nJXSrOPai742VfOoVbsjOrNWODgsX8kquL54wDn
- x6rzr7gugbh8fsu+Iu+dZCZNno5hRQdFb+NcM6JZj5pocVvIZLFNoH8HTTaApOrIJFauzI0gUSC
- VQpDCC6BEcB30iuC29MzH6XSrlQ+hXuF3fqCrlOM1hIAwBA2whzjh97WfNC6RhQ343nWdBZ+dhG
- neJSdbkLGGIOxqvCG/pNT3hQfJ/aF4o4vqueNCY5qTy5XrqAU1kyoIyoXD7A4dZ69AGvTnJmC83
- RFrVV/k8XjA7r4DPxhWc23vr6BTqa/uahiA2jW7v0hpPQJg2S+
-X-Google-Smtp-Source: AGHT+IES3tWq+D+3gOX09DwOLefON9WPHIqsFqh0pROs9zAGJaJKoqLpskOFxwRwz5lOid3to0/JtA==
-X-Received: by 2002:a05:6820:2008:b0:656:6e2f:628c with SMTP id
- 006d021491bc7-6568a197d92mr5658162eaf.0.1762192209808; 
- Mon, 03 Nov 2025 09:50:09 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1762194698; x=1762799498;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hZl2KLYBzWBdUSTCzKtNTJzxkbevxcZuwAHwBkBaOLA=;
+ b=wwXa8G90FKapIh03l1VWEShf6dBOTQvc910X3jHUgGqavEWMGeaHKSZgiRbC9zEyPa
+ P1bIf7dT4HfN46wjyR7Yyddh57hhvEV62iAL8LHi8sQrz0CGfwfBqf02dytYNW4lQI5Y
+ +eV3OWl5PyIFpbSgMgwhsfJ33aIKZsrPGqGDqdzj28e8AaKJl2sqfNno/JmEEawxOj2h
+ HAqfkIzJvypySuMlPpRRpxnPnpfcTv+sK0oAcDn3c/ryPec6tlJbjYy4zEx1nlS0bJJ7
+ ZbB3j2BA8qIX8dnYxmXwYiWmTwbJxINcD39caw5GdsyTL/Py+6CtG9T26BwNdmFEQwoq
+ vhlw==
+X-Gm-Message-State: AOJu0YwHN+62zqyQefVpcGHQGLLhhCRvSEij3u575uLd6FmijaHP8rtF
+ XwJ4q7PwvxU1ZjxGzGtt56JYqROioa1IpTVMlcwuIQ6YEdA81C/yjjqsHKFln3Zx2ug=
+X-Gm-Gg: ASbGncvnWay7N+Rldy1QwCoDW/wi7TerC/gnF9WAvMY4b+okqDrcBw8vo11dsEb/vUw
+ Pm1UQP5VYv2jzGPev4zU6+jnAM/hlANxCJdjBJLEXLb/dquMyjw1MbYxGRPqBcbRF4mnFr1xrtR
+ bwHf2uBi8KTE54Zc65Q9TYF/4UeNW3SrT0QG87nlk+cCsvV18jTG+7sgFfhMQtJcLu0pvBGm06p
+ TCPm6iZuGGg+VgOrebAYGg0QJ8tdJ3ayBwsRNMNzrBNaVdZMUX78uW3gmjgnXgokmLecwmVwYgy
+ x7waOwdgj/ybl6uusTweYImzcXnbWD19GF4Bzpy/bWM5AvOPLXBeWukrlB3CbYiKK0neEdyEosQ
+ KbErMTyW/uUF2zXNxo9KtTgVbN8Fkb2y/ck4ryXAqCu87Y5BsXCNjyrdF3tlzQxJ0rpRXTWrKWI
+ z57Xs5mN7rJDT8qYzye+kztugZnouIzzs+34vFdRqVj04eUy8UiA==
+X-Google-Smtp-Source: AGHT+IFvhrCCUPJr5eEcnnjkGf/MTWTgmhXLsac9YuiF48ao/l+C6v/UBR60TvtSWu6LAUS4hZjhQA==
+X-Received: by 2002:a05:6808:1718:b0:44d:b860:83fb with SMTP id
+ 5614622812f47-44f95dfb199mr5059338b6e.9.1762194697655; 
+ Mon, 03 Nov 2025 10:31:37 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-656ad42c713sm237826eaf.16.2025.11.03.09.50.08
+ 5614622812f47-44fd8864d39sm246142b6e.12.2025.11.03.10.31.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Nov 2025 09:50:09 -0800 (PST)
+ Mon, 03 Nov 2025 10:31:36 -0800 (PST)
+Date: Mon, 3 Nov 2025 12:31:34 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, 
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Cc: Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-In-Reply-To: <20251030-feature_sysboot_extension_board-v5-0-cfb77672fc68@bootlin.com>
-References: <20251030-feature_sysboot_extension_board-v5-0-cfb77672fc68@bootlin.com>
-Subject: Re: [PATCH v5 00/20] Convert extension support to UCLASS and adds
- its support to boot flows
-Message-Id: <176219220832.3330001.8393354242838443950.b4-ty@konsulko.com>
-Date: Mon, 03 Nov 2025 11:50:08 -0600
+To: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Samuel Holland <samuel@sholland.org>
+Subject: Re: [PATCH 0/2] Fix AArch32 compilation with Clang
+Message-ID: <20251103183134.GQ6688@bill-the-cat>
+References: <20251101-clang-fixes-v1-0-a8398475226e@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="n2VLPb8WtA5YPdAg"
+Content-Disposition: inline
+In-Reply-To: <20251101-clang-fixes-v1-0-a8398475226e@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,62 +99,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 30 Oct 2025 17:44:53 +0100, Kory Maincent (TI.com) wrote:
 
-> This series converts the extension board framework to use UCLASS as
-> requested by Simon Glass, then adds extension support to pxe_utils
-> and bootmeth_efi (not tested) to enable extension boards devicetree load
-> in the standard boot process.
-> 
-> I can't test the imx8 extension scan enabled by the
-> imx8mm-cl-iot-gate_defconfig as I don't have this board.
-> I also can't test the efi bootmeth change as I don't have such board.
-> 
-> [...]
+--n2VLPb8WtA5YPdAg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Sat, Nov 01, 2025 at 10:39:57AM +0100, Dmitrii Sharshakov wrote:
 
-[01/20] MAINTAINERS: Add maintainer for extension board support
-        commit: d7d05f86fc4c6f4f84a216a237c47a9bdba5c73f
-[02/20] board: ti: Exclude cape detection from xPL builds
-        commit: 4c9d907eef08f9c23c8136f4e957e2e5ed8028c2
-[03/20] board: ti: Fix CAPE_EEPROM_BUS_NUM Kconfig dependency
-        commit: 5b68f58a0883a897e44e8356061103784e49d046
-[04/20] board: sunxi: Exclude DIP detection from XPL builds
-        commit: 9279a00c3c8e32461c901219121e066c9866c8e6
-[05/20] board: compulab: Exclude compulab extension board detection from XPL builds
-        commit: 06199ca751199bc432f33f10a3992df27a3bdac7
-[06/20] include: extension_board: Document the extension structure
-        commit: 79cd6e78ff6387685e0ccb5f7382d808478155dc
-[07/20] boot: Move extension board support from cmd/ to boot/
-        commit: b7edeac950dae10759527a1ed0d1c306710ec9de
-[08/20] boot: Add UCLASS support for extension boards
-        commit: 78a06090f4860d52dfd1577619f53a7ec75122c9
-[09/20] board: ti: Refactor cape detection code for readability
-        commit: b2e7b1df3bb8c88a6d5e27f29e152d61f2ec8eb5
-[10/20] board: ti: Convert cape detection to use UCLASS framework
-        commit: 58a36be4ac8bc68ce6069eddcf8ee3fe2178404e
-[11/20] board: sunxi: Refactor CHIP board extension code
-        commit: 56cbcb1cc957870148c31a56237c07057d02c7ef
-[12/20] board: sunxi: Convert extension support to UCLASS framework
-        commit: 53e14e9c0c606f0684a3ddb09afebe4b5eb89926
-[13/20] board: sandbox: Improve extension board scan implementation
-        commit: 37c6cdb053573587afb57e09a2f5096b4b71c442
-[14/20] board: sandbox: Convert extension support to UCLASS framework
-        commit: 0487fbec7bd47a8c8685433d1bca260832c668a2
-[15/20] board: compulab: Convert imx8mm-cl-iot-gate to UCLASS extension framework
-        commit: 6f5b839d5ee1ace365c3c1ba571db7f57bb48433
-[16/20] boot: Remove legacy extension board support
-        commit: 2d12958ee71b5f400ff2045aebc9730e8e219340
-[17/20] boot: extension: Move overlay apply custom logic to command level
-        commit: f9b139342c4f6cc067df06692e6dcaa4ba2edafc
-[18/20] boot: pxe_utils: Add extension board devicetree overlay support
-        commit: 935109cd9e97b2f48b177b7c31373325deab44c0
-[19/20] boot: bootmeth_efi: Refactor distro_efi_try_bootflow_files return logic
-        commit: d3008a08d822d545d223e6ce53b0c590bb6c83a8
-[20/20] boot: bootmeth_efi: Add extension board devicetree overlay support
-        commit: e9dc6c12958fc5d909848fc3999e6be5df1cd3ae
--- 
+> I faced some minor compatibility issues when choosing Clang as the cross-=
+compiler for my target.
+>=20
+> Please review these two fixes, aiming at enabling Clang-based builds (sti=
+ll using GNU binutils)
+> for 32-bit ARM targets.
+>=20
+> Tested to fix build with (also run-tested on qemu arm and arm64 with clan=
+g):
+>=20
+> make ARCH=3Darm HOSTCC=3Dclang CROSS_COMPILE=3Darm-none-eabi- CC=3Dclang =
+imx6ulz_smm_m2b_defconfig
+> make ARCH=3Darm HOSTCC=3Dclang CROSS_COMPILE=3Darm-none-eabi- CC=3Dclang =
+-j20
+
+Thanks for digging these changes out. I'll take them soon'ish for
+v2026.01 and then ideally be able to re-enable LLVM based build tests in
+my setup.
+
+--=20
 Tom
 
+--n2VLPb8WtA5YPdAg
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQj0/gAKCRAr4qD1Cr/k
+CvFzAQC6j6rx42HRms3rtO/PtD+KajARtEJOQ9sVp3PhHCX55QD+Lt7LESeAUDui
+ZtHAFu4uX3kd6ienlUOqRafqEVY2awM=
+=w83e
+-----END PGP SIGNATURE-----
+
+--n2VLPb8WtA5YPdAg--
