@@ -4,89 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAC0CCCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 13:21:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FE82CCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 13:21:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D182836D1;
-	Mon,  3 Nov 2025 14:21:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5FEEB838DD;
+	Mon,  3 Nov 2025 14:21:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NivVwzWi";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="SskFkde3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D8ED838A5; Mon,  3 Nov 2025 01:14:12 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 582AA83700; Mon,  3 Nov 2025 04:27:27 +0100 (CET)
+Received: from mail-m93158.xmail.ntesmail.com (mail-m93158.xmail.ntesmail.com
+ [103.126.93.158])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 125F883642
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 01:14:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E6D983642
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 04:27:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-4ed101e8486so54505581cf.2
- for <u-boot@lists.denx.de>; Sun, 02 Nov 2025 16:14:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762128849; x=1762733649; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Unfd/OgoDQVlb37zMuiPry9XQVolNRTCQu+fg+mRqCc=;
- b=NivVwzWirylSdeg0/nRMMVpqk9oBJRXmxsar7JgX6JwxpuHn9Sz+K7yugLd3U3m0gX
- X/PD1drqX3ja3HGDv1niHg5Xn94jkuUfkEs8fs7FPC+TpdhKEOSOdBgEnuqzprryXZih
- HFcR4QP/jGQ4H83/ci6dSxDvpOZNngntKO5mbkfL/uE8iX1skQ5VuLlU27C65INj0XUf
- Ufb/VML/NT8SQSAU+etYgvYPwuTmQzj/lpO+ZSoleb+p7eJ6IN3hsprqeXuVuNTJp2tQ
- P+n/bBFCcM25mT+TCw/JxOaTxfKz0J7KC2Hk72qoCbzWpc9B9cHTUZQJSCdLfVl+/1aa
- HGAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762128849; x=1762733649;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Unfd/OgoDQVlb37zMuiPry9XQVolNRTCQu+fg+mRqCc=;
- b=FfS/pCNFYDlnWoVaW0Atw21s9L4LJlP3cezDXqtOO2ZadlJKh3DI6e4nXvXxJ/qTry
- gASewv4iH/VX5koIIaQQjFs5PCfofXNLEovDkwhCntySUCkQyuvZuwZtD1Wt8PRUFzep
- zl37tKJo1GqRYXz7zAwjXK16L9os0twrNLn327h8FgUxt6d/Hp1n1Yxif3tGNC8+LHeA
- QnZMVPXYzNF54C5rhKgYPBklVcZ3MqrXcuPvjDf3w5GQr/7jATDuZdLztDF6zHotME11
- NsfQXGtk/EvhwsDCH4YsILBlUE6LWz5X73ZRvlPXflllMy5GEfA+1wMMxHobORfm5CuS
- OfRw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVWIbjKDtwww+ypYzbaMe+WH3soNGIKt6TrmuozXwSgtau93jFS6p1fC3sZIXQ6KxgQSc4XHco=@lists.denx.de
-X-Gm-Message-State: AOJu0Yys7ksPW8caon7fBCiDzkUNAfNsXTb0jNpJ2hhHS9diP5X1anUn
- 9JvzmEMOUGXpyYwe7orPO8Tx9NCmxcW12SXcz8mi/L1U/iH9nz3cMYBiihjnMbHpjYNP2kwFuPe
- aLp8vXvP1z0q9KnbcY3193MX3XaaQ9Jg=
-X-Gm-Gg: ASbGnctLuq/uI1mGPYroj3LAcruy7Wg8YSojXVPF9ijSaJRDtG91lustZH10wW4ZuyJ
- Kj7Am+vqp9AT7xossrd2g8n9C9WSu1blLVGJiYS5PRvHgZgi4vDDx+Peq/9PC4aZl6e11dZyCRl
- dZdWj4fDeOqTez5LrLtSSTVFL3zXVMBx+FzMrbvrgJP2da7I+/asFYex4IGqTiD8fEAumqLnmBi
- 7kmI8gwkP5I9Gr5PWxemEATJwPc5lBjReGOo2xFpxbMsNDzHVeI06IN001yerjzHxabIXaVLY/K
- y6FJdX1lBkQsHhTm7/i055b0xnimlA==
-X-Google-Smtp-Source: AGHT+IGxaunjyyxiP8eAE1Qpun3jW7pHXVVCQXu+Z56neret4qsbbC+6pNOmXdwv8hfaf8xyWb4+JWRX4dt2IRb8yU4=
-X-Received: by 2002:ac8:578b:0:b0:4b7:a8ce:a3fc with SMTP id
- d75a77b69052e-4ed3100938amr137173391cf.66.1762128848773; Sun, 02 Nov 2025
- 16:14:08 -0800 (PST)
+ spf=pass smtp.mailfrom=chaoyi.chen@rock-chips.com
+Received: from [172.16.12.149] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 281f0f5dd;
+ Mon, 3 Nov 2025 11:27:18 +0800 (GMT+08:00)
+Message-ID: <08c523fa-a501-4d50-85f5-7ac13f3c9247@rock-chips.com>
+Date: Mon, 3 Nov 2025 11:27:16 +0800
 MIME-Version: 1.0
-References: <20251006124915.13647-1-lucienzx159@gmail.com>
- <2f894c99-3279-4d8a-8e09-b002a73d85bb@mailbox.org>
- <0c7f155a-3bdb-4d4b-8f2d-3b79eec3cbc2@gmail.com>
- <a3e748e8-8785-4f74-bed5-5fd1c517d44f@mailbox.org>
-In-Reply-To: <a3e748e8-8785-4f74-bed5-5fd1c517d44f@mailbox.org>
-From: Lucien Jheng <lucienzx159@gmail.com>
-Date: Mon, 3 Nov 2025 08:13:58 +0800
-X-Gm-Features: AWmQ_bnhlFINM_koTzTesT0UNvMDWBEYeExS8h8hcw4rc9udV_yCCd6nh67_LlU
-Message-ID: <CAHvkZ4ZS+Nv=Nueqfve2ujJxwD0RgruQGi51TH6YNFqiEZd3Pw@mail.gmail.com>
-Subject: Re: [U-Boot, v2, 1/1]net: phy: add paged PHY register accessors
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: jerome.forissier@linaro.org, skylake.huang@mediatek.com, 
- s-vadapalli@ti.com, paul.barker.ct@bp.renesas.com, 
- marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de, 
- lucien.jheng@airoha.com, Frank Wunderlich <frank-w@public-files.de>, 
- Daniel Golle <daniel@makrotopia.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/5] video: rockchip: Add bridge support for VOP
+To: WeiHao Li <cn.liweihao@gmail.com>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ kever.yang@rock-chips.com, lukma@denx.de, seanga2@gmail.com,
+ ag.dev.uboot@gmail.com, muratdemirtaseu@outlook.com,
+ Andy Yan <andy.yan@rock-chips.com>, Sandy Huang <hjc@rock-chips.com>
+References: <20250814131237.8135-1-cn.liweihao@gmail.com>
+ <20250814131237.8135-5-cn.liweihao@gmail.com>
+Content-Language: en-US
+From: Chaoyi Chen <chaoyi.chen@rock-chips.com>
+In-Reply-To: <20250814131237.8135-5-cn.liweihao@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9a47c140e403abkunm69d2f19d97e1c5
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRgZSFYZTU1MHUkfHU5MSk1WFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+DKIM-Signature: a=rsa-sha256;
+ b=SskFkde3+BPyqMG+B9adVPUD/dd+TQaGCB9B8va7tbYSS1HP8LG0HcS8dKPEPYNxQPOfzFCBjil1uyIy1vQZ4k6dpom6AfhzORe3c+02C7cRh1EoHs6HUp1ateWDDVWekIIl95WcEA+bI7fcj3SuJkaxpusKGE6jeryTM0rNwMI=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=idSdhof/S3ImLSTV+be+9PLjn1ew4cOaX2y2tK69XP0=;
+ h=date:mime-version:subject:message-id:from;
 X-Mailman-Approved-At: Mon, 03 Nov 2025 14:21:42 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,47 +74,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek
+Hi WeiHao,
 
-On Mon, Nov 3, 2025, 1:15=E2=80=AFAM Marek Vasut <marek.vasut@mailbox.org> =
-wrote:
+On 8/14/2025 9:12 PM, WeiHao Li wrote:
+> Rockchip VOP driver only support UCLASS_DISPLAY for now, It can't work
+> if SOC use dw-mipi with inno-dphy like RK3368.
+>
+> This patch try to add UCLASS_VIDEO_BRIDGE support to let it support
+> dw-mipi-dsi-rockchip driver, will support SOC use dw-mipi with inno-dphy.
+>
+> This patch basic same as muratdemirtas's github repository, just adjust
+> some code style.
+>
+> Link: https://github.com/muratdemirtas/rockchip-rk3399-uboot-mipi-dsi
+>
+> Signed-off-by: muratdemirtas <muratdemirtaseu@outlook.com>
+> Signed-off-by: WeiHao Li <cn.liweihao@gmail.com>
 
-> On 11/2/25 4:34 PM, Lucien.Jheng wrote:
->
-> Hi,
->
-> >> On 10/6/25 2:49 PM, Lucien.Jheng wrote:
-> >>> Synchronize paged PHY helpers with Linux v6.17.
-> >>>
-> >>> Add support for PHY devices that use paged register access by
-> >>> implementing the following functions:
-> >>> - phy_save_page(): Save current page number
-> >>> - phy_select_page(): Switch to a specific page and return previous pa=
-ge
-> >>> - phy_restore_page(): Restore previously saved page
-> >>>
-> >>> Also adds read_page and write_page callbacks to the phy_driver
-> >>> structure to enable driver-specific page handling.
-> >>>
-> >>> These helpers allow safe access to paged PHY registers by ensuring
-> >>> proper page selection and restoration,
-> >>> even in error conditions, which will be used by the Airoha PHY driver=
-.
-> >> Are there any users ? If not, this is dead code.
-> >
-> > I have checked the latest Linux kernel, and these functions are
-> > currently used by several vendors, including *MediaTek, Airoha, Marvell=
-,
-> > and Realtek PHY*.
-> >
-> > Therefore, I believe these APIs are not dead code.
-> This is U-Boot, are there any users in U-Boot ?
->
-> If you plan to use this in a new driver, then please send this together
-> with the new driver.
->
-Got it.
-I will send this together with new driver.
-Thank you
+The rk_vop.c should implement code related to the VOP controller.  And anything related to panel/backlight should not appear here.
 
+Please refer to rk3288_mipi.c or rk3399_mipi.c.  You can implement a UCLASS_DISPLAY device to access the UCLASS_VIDEO_BRIDGE device.
+
+
+> ---
+>   drivers/video/rockchip/rk_vop.c | 92 +++++++++++++++++++++++++--------
+>   1 file changed, 71 insertions(+), 21 deletions(-)
 >
+> diff --git a/drivers/video/rockchip/rk_vop.c b/drivers/video/rockchip/rk_vop.c
+> index 17dfe62c9..71786da77 100644
+> --- a/drivers/video/rockchip/rk_vop.c
+> +++ b/drivers/video/rockchip/rk_vop.c
+> @@ -14,6 +14,8 @@
+>   #include <reset.h>
+>   #include <syscon.h>
+>   #include <video.h>
+> +#include <video_bridge.h>
+> +#include <panel.h>
+>   #include <asm/global_data.h>
+>   #include <asm/gpio.h>
+>   #include <asm/io.h>
+> @@ -257,6 +259,8 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode ep_node)
+>   	ofnode remote;
+>   	const char *compat;
+>   	struct reset_ctl dclk_rst;
+> +	struct udevice *bridge;
+> +	struct udevice *panel;
+>   
+>   	debug("%s(%s, 0x%lx, %s)\n", __func__,
+>   	      dev_read_name(dev), fbbase, ofnode_get_name(ep_node));
+> @@ -298,6 +302,10 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode ep_node)
+>   			return -EINVAL;
+>   		}
+>   
+> +		uclass_find_device_by_ofnode(UCLASS_VIDEO_BRIDGE, remote, &bridge);
+> +		if (bridge)
+> +			break;
+> +
+>   		uclass_find_device_by_ofnode(UCLASS_DISPLAY, remote, &disp);
+>   		if (disp)
+>   			break;
+> @@ -326,27 +334,60 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode ep_node)
+>   	}
+>   	debug("vop_id=%d\n", vop_id);
+>   
+> -	disp_uc_plat = dev_get_uclass_plat(disp);
+> -	debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
+> -	if (display_in_use(disp)) {
+> -		debug("   - device in use\n");
+> -		return -EBUSY;
+> -	}
+> +	if (bridge) {
+> +		/* video bridge detected, probe it */
+> +		ret = device_probe(bridge);
+> +		if (ret) {
+> +			debug("%s: device '%s' bridge won't probe (ret=%d)\n",
+> +			      __func__, dev->name, ret);
+> +			return ret;
+> +		}
+>   
+> -	disp_uc_plat->source_id = remote_vop_id;
+> -	disp_uc_plat->src_dev = dev;
+> +		/* Attach the DSI controller and the display to the bridge. */
+> +		ret = video_bridge_attach(bridge);
+> +		if (ret) {
+> +			debug("Failed to attach video bridge: %d\n", ret);
+> +			return ret;
+> +		}
+>   
+> -	ret = device_probe(disp);
+> -	if (ret) {
+> -		debug("%s: device '%s' display won't probe (ret=%d)\n",
+> -		      __func__, dev->name, ret);
+> -		return ret;
+> -	}
+> +		/*
+> +		 * Get the panel device
+> +		 * TODO: Maybe fetch it from the bridge private data.
+> +		 */
+> +		ret = uclass_first_device_err(UCLASS_PANEL, &panel);
+> +		if (ret) {
+> +			debug("Panel device error: %d\n", ret);
+> +			return ret;
+> +		}
+>   
+> -	ret = display_read_timing(disp, &timing);
+> -	if (ret) {
+> -		debug("%s: Failed to read timings\n", __func__);
+> -		return ret;
+> +		ret = panel_get_display_timing(panel, &timing);
+> +		if (ret) {
+> +			debug("%s: Failed to read timings\n", __func__);
+> +			return ret;
+> +		}
+> +	} else {
+> +		disp_uc_plat = dev_get_uclass_plat(disp);
+> +		debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
+> +		if (display_in_use(disp)) {
+> +			debug("   - device in use\n");
+> +			return -EBUSY;
+> +		}
+> +
+> +		disp_uc_plat->source_id = remote_vop_id;
+> +		disp_uc_plat->src_dev = dev;
+> +
+> +		ret = device_probe(disp);
+> +		if (ret) {
+> +			debug("%s: device '%s' display won't probe (ret=%d)\n",
+> +			      __func__, dev->name, ret);
+> +			return ret;
+> +		}
+> +
+> +		ret = display_read_timing(disp, &timing);
+> +		if (ret) {
+> +			debug("%s: Failed to read timings\n", __func__);
+> +			return ret;
+> +		}
+>   	}
+>   
+>   	ret = clk_get_by_index(dev, 1, &clk);
+> @@ -383,9 +424,18 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode ep_node)
+>   
+>   	rkvop_enable(dev, fbbase, 1 << l2bpp, &timing, &dclk_rst);
+>   
+> -	ret = display_enable(disp, 1 << l2bpp, &timing);
+> -	if (ret)
+> -		return ret;
+> +	if (bridge) {
+> +		/* Attach the DSI controller and the display to the bridge. */
+> +		ret = video_bridge_set_backlight(bridge, 80);
+> +		if (ret) {
+> +			printf("Failed to start the video bridge: %d\n", ret);
+> +			return ret;
+> +		}
+> +	} else {
+> +		ret = display_enable(disp, 1 << l2bpp, &timing);
+> +		if (ret)
+> +			return ret;
+> +	}
+>   
+>   	uc_priv->xsize = timing.hactive.typ;
+>   	uc_priv->ysize = timing.vactive.typ;
+
+-- 
+Best,
+Chaoyi
+
