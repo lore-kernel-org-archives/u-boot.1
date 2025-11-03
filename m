@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A59E4CCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 22:33:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A253CCFA03
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 22:52:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36798838A5;
-	Mon,  3 Nov 2025 23:33:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5DBFC82A9E;
+	Mon,  3 Nov 2025 23:52:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aLN4j5OB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KVtl9KYk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADEE1838D7; Mon,  3 Nov 2025 23:33:52 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id F1CB2836D1; Mon,  3 Nov 2025 23:52:28 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A4AC8144A
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 23:33:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD8638144A
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 23:52:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-74526ca79beso3482949a34.0
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 14:33:50 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c69f515220so641986a34.1
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 14:52:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762209229; x=1762814029; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=reljXWJCNLTgH3w8InYFgQifnWNaaVW4B4Wh9qcK0FI=;
- b=aLN4j5OBtlRxeJ7OrOqaf2rcqOxslDbkCtJycF4kY0C0GJIluRcCW7Lwrl5nQnhn5D
- tl4oSOBqPIe+FwfO8gaunTEH5JJqmn6CiqBFOHpyDMgmRq7WO3zrnp6xGy0oQ8zhaaI1
- pWzomRkvpvs7stI7MGoxp4yCUKo/bKnWL+o04=
+ d=gmail.com; s=20230601; t=1762210345; x=1762815145; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vde3eiwbAaqMAtT0e1rvuhoOS6bwHDp0qEAgbiBdr6k=;
+ b=KVtl9KYkUnaQ8Bcdgruy21sOuibiQO9pVTZVz6RYL3bcd7tEQ9mrOMucAjzteiw7vZ
+ KlY/4W5zBkDxICvtq6vBqdd4vsVRvmi4vanzdgb5+zSKVwnsJVwmnNUsfkdvOY5TGc9c
+ L/gOSAGg4hN4M/xbxdJmAzbUgCTDMnZzpQqR2mhyVn0gjsvflK4i1MHcf4YfeFEIOu3M
+ nNsWf754Rm/M+7QKSBzwJDzHpUAvL4l6bKjOWd0vH0Ou+ts/WPd0GFP6jNzRfAqkgfa8
+ RqCs37yEw6VSlGvthOiDU903Wj5pvLtkivS9UqcFivGxJ0V2VB7gF89QRjQ7cYTx51tq
+ DbZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762209229; x=1762814029;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=reljXWJCNLTgH3w8InYFgQifnWNaaVW4B4Wh9qcK0FI=;
- b=f06gWDje2QvvnDwm5J2d4dyHQISQJFCA24kKQ3LssiyHlVlNyWnsHSCQVDyKqCLtyo
- SkzmZfe4xPt1W70yIGnlXUmjZYvkzpHoFBt6ZBH2tZoUn1YnPax3FVTPpPeEgjll728t
- gvLC3h9i0OzoSujhUqUgY5UmeD4UGBW3J5deORiS/bculkiCWyon9m2XF0XwER7Z0YUS
- 2SC7FZ/WswqE5mLT33AET9f0poufWKQEJsHcwmEGYzyUbE3tYauC1EIiJP+YbQEcs+V3
- scYRK5VzZQ7sSRCmDLTv8HS0jLx93oPrMmijGJn6L3F6m5oTwskkEhMk6FxswFwHcehY
- UkCw==
-X-Gm-Message-State: AOJu0Yw/r3oWQxJK7jr/0JGK+TWdxE6Yop6sWmZOvwrIBI/nw57ahrsU
- nYFXZ2MKgM6eTLr3qrtlXEiORt+BY3mNASFmHL7kvwS2LLm5uhfeTEcGBO7MBYHd2CiqCof7nQd
- uOu87rB5pTw==
-X-Gm-Gg: ASbGncuZS+vUxDtzfY/LeVj0j2R2wsQ4xOw2IL4FOOZK8502W5HdDf1FTSrMWoaferH
- k3L3F3uDcQiurEcEnxJ1pf/orRp98rDc8BsHODqqNnIDcRheg7sfQ1KDgRb4pPUnY8NgwYirgw8
- RKYmkFkpP0utxNa+Hu/AbWWyqDHMFZtYcinhWmbMv/Re8wHao27bS5d2+l7BsSi4e4LgZlln9Vd
- xRXzuFUGROLaVsldLlylA7ZeTqjUfEVnRv2EaBA9hbWFs7U64CItGfFuV1AanTJr2H+6gN7CwoY
- vlLGKKm9ERBXEhaqfOj+/RZpKbn3linNbVyHVvA73bOZxpDm4XLKtDcI79C3l40gRJB/pqF24Nr
- BKkpqmEKba1leFMzg1Qf+BxRHZmJUDBuezswvca1Fe3+rbSNtuivZdzoac8FvbU4J+88Ja3018G
- D9e324bnWmdpiRTE4daC2r89bEj5ekAHHpBjJIA44=
-X-Google-Smtp-Source: AGHT+IHTE+eRE4qeegqrWw1sAny4XhAV/40IVQvLuqUV2DzbfLSaIFTh7cicK6naThiwp2AdPqXQGw==
-X-Received: by 2002:a05:6830:3805:b0:745:a21c:6a57 with SMTP id
- 46e09a7af769-7c6967b4676mr7723778a34.21.1762209228780; 
- Mon, 03 Nov 2025 14:33:48 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6c24fff45sm506675a34.26.2025.11.03.14.33.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Nov 2025 14:33:47 -0800 (PST)
-Date: Mon, 3 Nov 2025 16:33:46 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Brian Sune <briansune@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v3] Add make feature support for SoCFPGA Handoff
-Message-ID: <20251103223346.GU6688@bill-the-cat>
-References: <20251103222840.458-1-briansune@gmail.com>
+ d=1e100.net; s=20230601; t=1762210345; x=1762815145;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vde3eiwbAaqMAtT0e1rvuhoOS6bwHDp0qEAgbiBdr6k=;
+ b=vSckNy/FdUerpwDLhn6rBL2bNUfFwOa8MJkm+vmZUQllTv7BTf7NUnnOTbGXqZILbd
+ HcQ4o4ZKgMi+ymVvNqG5pTb3THhMxTebMXg0xz33xok5AVBIVQFjgLmh0WTLjPMOG/rU
+ dqlGtyRBpYK/nlsYbsVbGXW3pvcTM9+LMkBQ8UhDDE6RkJqWYNgKYFB5Z0r+oXRbASYY
+ 2ojZHXHpifrnWRrMJrgbz3hYr5fg36EEjSfK/5PDm6yg/zHZ/uh/KUmTjHGZ1xd5xJ/C
+ F4nsCEGUexWYp1ZuD3LWXaboaSjdpMEvioUWih0we5OrIXSJVymWrH3y/n/YX0KHvPXE
+ bdmA==
+X-Gm-Message-State: AOJu0YxfoxEGjQlEmPlYc82fxa80lEhHQogkKyOjMaLNJqLefGuQtWoQ
+ PJGRrkpPMsVw79+2AMBa7fQmFxPS3Ic0YjuCRWfcg7CVbKaGlVamESOesFW37zRsEMtsMvPprUb
+ vGJMu73N33HwEjbV9QjL87anhobTbpKM=
+X-Gm-Gg: ASbGncujM1o0exmCOB09oo56gdhha1BE9XVpAINjrjXjdvbnJ8CINgZVbvL0z7s9zET
+ 3a46TEQeeHfHa3C/Y6FGF87PMrqHajbAgrK4vwmtabJK82oGjiWUP8YFda0Ie8bTS4GxZINFKnq
+ UXkWnThs3Gcx3DDpr/9Sbh5WqqgyCLB8IlgsmlJD3QVzV1EdUanVqZShcbt1X8tu5nxWwX6jyl5
+ rjElbTidPFFG0SR731pBohRYhbNcjCGRY5vPbb7yxrfHExOtVvLrhFpaEemiQ==
+X-Google-Smtp-Source: AGHT+IGIjJS2HrnDmjrYULJhbK+YFABvoSguuZh/8uaAFbACV2pL7QPP9Z2n0Hb1WiO4IopG8Fg5q6NPqq2cBnSAAjI=
+X-Received: by 2002:a05:6830:916:b0:756:a322:311 with SMTP id
+ 46e09a7af769-7c6967098c2mr8107410a34.10.1762210345344; Mon, 03 Nov 2025
+ 14:52:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TGQ9Ub+oo1rR4AWd"
-Content-Disposition: inline
-In-Reply-To: <20251103222840.458-1-briansune@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251103222840.458-1-briansune@gmail.com>
+ <20251103223346.GU6688@bill-the-cat>
+In-Reply-To: <20251103223346.GU6688@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Tue, 4 Nov 2025 06:52:14 +0800
+X-Gm-Features: AWmQ_blzPXbTogXg1214yyMurrUY7rpCWiQOpzMFjVUXIcXzkIdhf1RbioWFT6Y
+Message-ID: <CAN7C2SB7qeXQB5=VHZ_DaE-ov4S7OX2hSyYNhb4SWv8-k+J_9A@mail.gmail.com>
+Subject: Re: [PATCH v3] Add make feature support for SoCFPGA Handoff
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,67 +91,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> This won't work with separate object directories. Please give things a
 
---TGQ9Ub+oo1rR4AWd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I am not too getting this, why? The checking stage is not enough to
+block the below script execute?
 
-On Tue, Nov 04, 2025 at 06:28:40AM +0800, Brian Sune wrote:
-> Introduce socfpga_gen5_handoff_prepare target in U-Boot Makefile
-> Automatically detects Altera/Intel SoCFPGA boards from .config
-> Checks for presence of hps_isw_handoff folder and .hiof files
-> Runs BSP generator script tools/cv_bsp_generator/cv_bsp_generator.py=20
-> if files exist.
-> Non-blocking: prepare continues even if handoff folder or files are missi=
-ng
->=20
-> Signed-off-by: Brian Sune <briansune@gmail.com>
-> ---
->  Makefile | 41 +++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 39 insertions(+), 2 deletions(-)
->=20
-> diff --git a/Makefile b/Makefile
-> index 750f8a84b1f..32568a6c477 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -2158,7 +2158,7 @@ scripts: scripts_basic scripts_dtc
->  # archprepare is used in arch Makefiles and when processed asm symlink,
->  # version.h and scripts_basic is processed / created.
-> =20
-> -PHONY +=3D prepare archprepare prepare1 prepare3
-> +PHONY +=3D prepare archprepare prepare1 prepare3 socfpga_g5_hanoff_prepa=
-re
-> =20
->  # prepare3 is used to check if we are building in a separate output dire=
-ctory,
->  # and if so do:
-> @@ -2190,8 +2190,45 @@ archprepare: prepare1 scripts
->  prepare0: archprepare
->  	$(Q)$(MAKE) $(build)=3D.
-> =20
-> +# Intel-Altera SoCFPGA GEN5 prepare handoff file conversion
-> +socfpga_g5_hanoff_prepare:
-> +	@VENDOR=3D$$(grep -E '^CONFIG_SYS_VENDOR=3D' .config | cut -d'"' -f2); \
+> spin with "make O=/tmp/somedir". It also looks like it's going to impact
+> every board, and either fail or add some build time? Make sure both say
+> "sandbox" and "qemu_arm" both build at least, if not a full CI run.
 
-This won't work with separate object directories. Please give things a
-spin with "make O=3D/tmp/somedir". It also looks like it's going to impact
-every board, and either fail or add some build time? Make sure both say
-"sandbox" and "qemu_arm" both build at least, if not a full CI run.
-Thanks!
+For build time -> There could be 4 line of code to check.
+For sandbox:
 
---=20
-Tom
+```
+make clean && make mrproper
+  CLEAN   cmd
+  CLEAN   dts/../arch/sandbox/dts
+  CLEAN   dts
+  CLEAN   lib/efi_loader
+  CLEAN   lib/efi_selftest
+  CLEAN   lib
+  CLEAN   tools
+  CLEAN   tools/generated
+  CLEAN   include/autoconf.mk include/autoconf.mk.dep
+include/bmp_logo.h include/bmp_logo_data.h include/config.h
+include/generated/env.in include/generated/env.txt
+drivers/video/u_boot_logo.S u-boot-nodtb.bin u-boot.lds u-boot.bin
+u-boot.sym u-boot-dtb.bin u-boot.srec u-boot u-boot.map u-boot.cfg
+u-boot.dtb.out u-boot.dtb System.map keep-syms-lto.c
+lib/efi_loader/helloworld_efi.S Test03 Test113 Test01 Test12 Test111
+Test102 Test11 Test103 Test02 Test112 Test101
+capsule_in.capsule5.efi-capsule capsule_in.capsule3.efi-capsule
+capsule_in.capsule8.efi-capsule capsule.capsule3.efi-capsule
+capsule.capsule10.efi-capsule capsule.capsule9.efi-capsule
+capsule.capsule6.efi-capsule capsule.capsule1.efi-capsule
+capsule_in.capsule9.efi-capsule capsule_in.capsule10.efi-capsule
+capsule.capsule5.efi-capsule capsule.capsule2.efi-capsule
+capsule_in.capsule2.efi-capsule capsule.capsule4.efi-capsule
+capsule.capsule11.efi-capsule capsule.capsule7.efi-capsule
+capsule_in.capsule7.efi-capsule capsule_in.capsule4.efi-capsule
+capsule.capsule8.efi-capsule capsule_in.capsule11.efi-capsule
+capsule_in.capsule6.efi-capsule capsule_in.capsule1.efi-capsule
+capsule1.map capsule8.map capsule5.map capsule7.map capsule4.map
+capsule6.map capsule10.map capsule3.map capsule9.map capsule2.map
+capsule11.map
+  CLEAN   scripts/basic
+  CLEAN   scripts/dtc/pylibfdt
+  CLEAN   scripts/dtc
+  CLEAN   scripts/kconfig
+  CLEAN   scripts
+  CLEAN   include/config include/generated
+  CLEAN   .config .config.old drivers/video/fonts/cantoraone_regular.S
+drivers/video/fonts/nimbus_sans_l_regular.S
+```
 
---TGQ9Ub+oo1rR4AWd
-Content-Type: application/pgp-signature; name="signature.asc"
+For qemu_arm:
 
------BEGIN PGP SIGNATURE-----
+```
+make clean && make mrproper
+  CLEAN   dts/../arch/arm/dts
+  CLEAN   dts
+  CLEAN   env
+  CLEAN   lib/efi_loader
+  CLEAN   lib/efi_selftest
+  CLEAN   tools
+  CLEAN   tools/generated
+  CLEAN   include/autoconf.mk include/autoconf.mk.dep
+include/bmp_logo.h include/bmp_logo_data.h include/config.h
+include/generated/env.in include/generated/env.txt
+drivers/video/u_boot_logo.S u-boot-nodtb.bin u-boot.lds u-boot.map
+u-boot.srec u-boot.cfg u-boot.bin u-boot u-boot.sym System.map
+lib/efi_loader/helloworld_efi.S
+  CLEAN   scripts/basic
+  CLEAN   scripts/dtc
+  CLEAN   scripts/kconfig
+  CLEAN   include/config include/generated
+  CLEAN   .config .config.old
+```
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQktxgAKCRAr4qD1Cr/k
-Cu61AQDG5v+JiJEPRLDAFc+8txQQ0tbK13cRKqCAaY1FPOwA/gEAjXfo4Fv4E4U0
-09rdY54fdvUW+smNXlCJXk/Ynfnn9Qc=
-=sVxq
------END PGP SIGNATURE-----
+I am not too sure full CL run?
 
---TGQ9Ub+oo1rR4AWd--
+Brian
