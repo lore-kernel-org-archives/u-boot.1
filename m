@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A253CCFA03
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 22:52:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97E84CCF9F8
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 22:56:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DBFC82A9E;
-	Mon,  3 Nov 2025 23:52:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0812282A9E;
+	Mon,  3 Nov 2025 23:56:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KVtl9KYk";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="S0x1Vdhr";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="fzu5A5KH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1CB2836D1; Mon,  3 Nov 2025 23:52:28 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 23C24838CE; Mon,  3 Nov 2025 23:56:40 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD8638144A
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 23:52:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F29908144A
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 23:56:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7c69f515220so641986a34.1
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 14:52:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762210345; x=1762815145; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vde3eiwbAaqMAtT0e1rvuhoOS6bwHDp0qEAgbiBdr6k=;
- b=KVtl9KYkUnaQ8Bcdgruy21sOuibiQO9pVTZVz6RYL3bcd7tEQ9mrOMucAjzteiw7vZ
- KlY/4W5zBkDxICvtq6vBqdd4vsVRvmi4vanzdgb5+zSKVwnsJVwmnNUsfkdvOY5TGc9c
- L/gOSAGg4hN4M/xbxdJmAzbUgCTDMnZzpQqR2mhyVn0gjsvflK4i1MHcf4YfeFEIOu3M
- nNsWf754Rm/M+7QKSBzwJDzHpUAvL4l6bKjOWd0vH0Ou+ts/WPd0GFP6jNzRfAqkgfa8
- RqCs37yEw6VSlGvthOiDU903Wj5pvLtkivS9UqcFivGxJ0V2VB7gF89QRjQ7cYTx51tq
- DbZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762210345; x=1762815145;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vde3eiwbAaqMAtT0e1rvuhoOS6bwHDp0qEAgbiBdr6k=;
- b=vSckNy/FdUerpwDLhn6rBL2bNUfFwOa8MJkm+vmZUQllTv7BTf7NUnnOTbGXqZILbd
- HcQ4o4ZKgMi+ymVvNqG5pTb3THhMxTebMXg0xz33xok5AVBIVQFjgLmh0WTLjPMOG/rU
- dqlGtyRBpYK/nlsYbsVbGXW3pvcTM9+LMkBQ8UhDDE6RkJqWYNgKYFB5Z0r+oXRbASYY
- 2ojZHXHpifrnWRrMJrgbz3hYr5fg36EEjSfK/5PDm6yg/zHZ/uh/KUmTjHGZ1xd5xJ/C
- F4nsCEGUexWYp1ZuD3LWXaboaSjdpMEvioUWih0we5OrIXSJVymWrH3y/n/YX0KHvPXE
- bdmA==
-X-Gm-Message-State: AOJu0YxfoxEGjQlEmPlYc82fxa80lEhHQogkKyOjMaLNJqLefGuQtWoQ
- PJGRrkpPMsVw79+2AMBa7fQmFxPS3Ic0YjuCRWfcg7CVbKaGlVamESOesFW37zRsEMtsMvPprUb
- vGJMu73N33HwEjbV9QjL87anhobTbpKM=
-X-Gm-Gg: ASbGncujM1o0exmCOB09oo56gdhha1BE9XVpAINjrjXjdvbnJ8CINgZVbvL0z7s9zET
- 3a46TEQeeHfHa3C/Y6FGF87PMrqHajbAgrK4vwmtabJK82oGjiWUP8YFda0Ie8bTS4GxZINFKnq
- UXkWnThs3Gcx3DDpr/9Sbh5WqqgyCLB8IlgsmlJD3QVzV1EdUanVqZShcbt1X8tu5nxWwX6jyl5
- rjElbTidPFFG0SR731pBohRYhbNcjCGRY5vPbb7yxrfHExOtVvLrhFpaEemiQ==
-X-Google-Smtp-Source: AGHT+IGIjJS2HrnDmjrYULJhbK+YFABvoSguuZh/8uaAFbACV2pL7QPP9Z2n0Hb1WiO4IopG8Fg5q6NPqq2cBnSAAjI=
-X-Received: by 2002:a05:6830:916:b0:756:a322:311 with SMTP id
- 46e09a7af769-7c6967098c2mr8107410a34.10.1762210345344; Mon, 03 Nov 2025
- 14:52:25 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4d0n5J4s17z9sps;
+ Mon,  3 Nov 2025 23:56:36 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762210596;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=6Z4P/Bt0Q9C14XbpVRb2SQxaQrJ3N+BPQcAEsv4MojQ=;
+ b=S0x1VdhrhThEdvpb+Phtf2xwsU6nE26PswouU9fqLd3mWeDaGy7Yg9nyaKpsuoyxwGUTOb
+ G7dmfhSpmc375/hzfNKF4Ibn2dDNYZwp1YhYG2Aws7ky6Cf6zr9ZRgRKO9u5ykoSNlbX+t
+ 5IbiIWNYsOhIhHacojx4B+FRFp2UkKtQ7GRC4pHEAcUotktPw26+snXcHq1j1jJQuMo6/P
+ XulhxAJgsHruluhetCAmq1xuqpILesKgYUWmD1PGQ1d3FublT2Indh/9Lini7xd/1+GvTh
+ SnD9i7V7A8eAh0sf75vnnE4wAHXptQd6oxvaMJK7usyjYLgiPYsVvM2AqgJaqg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762210594;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=6Z4P/Bt0Q9C14XbpVRb2SQxaQrJ3N+BPQcAEsv4MojQ=;
+ b=fzu5A5KHweSQO9y2m+hrriu65+PQe3Yhmcswj00CvBq7rmXEosBxOyXUPhFhR4kEC5W/ih
+ nFaIJSiEupOVd77SiA/Q4CO7ykNUhWzbbdGyyPqeDTe3/EU3AMP0aHcKWPwJ8AgaezxG9G
+ xH07HPMDY236l0kBdDDAI5lq0yqpn5xM1PXtPC/jcQQ5l2de7+t7NoVrVcpmZxZXj/hVqJ
+ /4nK1mOeOHawz1lu515pRbcWora1aWc0DCFjERI83s+WOdHgG15EfULcVP2Kl3WA2vbVh8
+ hrVpG7pu1zd/wYAVFwe3ZaUTFAol76QjOIV8X4vlp8ZthGzBw2tvxwDvNOI2Fw==
+To: u-boot@lists.denx.de
+Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alice Guo <alice.guo@nxp.com>, Cristian Marussi <cristian.marussi@arm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
+ Ye Li <ye.li@nxp.com>
+Subject: [PATCH v3] firmware: scmi: Add clock v3.2 CONFIG_SET support
+Date: Mon,  3 Nov 2025 23:56:03 +0100
+Message-ID: <20251103225625.195926-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20251103222840.458-1-briansune@gmail.com>
- <20251103223346.GU6688@bill-the-cat>
-In-Reply-To: <20251103223346.GU6688@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Tue, 4 Nov 2025 06:52:14 +0800
-X-Gm-Features: AWmQ_blzPXbTogXg1214yyMurrUY7rpCWiQOpzMFjVUXIcXzkIdhf1RbioWFT6Y
-Message-ID: <CAN7C2SB7qeXQB5=VHZ_DaE-ov4S7OX2hSyYNhb4SWv8-k+J_9A@mail.gmail.com>
-Subject: Re: [PATCH v3] Add make feature support for SoCFPGA Handoff
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: a2c80c7c30065a9fcd4
+X-MBO-RS-META: ns9f9iw33izywgbmr3yoqpyyp6ws1ob5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,84 +87,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> This won't work with separate object directories. Please give things a
+From: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
 
-I am not too getting this, why? The checking stage is not enough to
-block the below script execute?
+SCMI v3.2 introduces a new clock CONFIG_SET message format that can
+optionally carry also OEM specific configuration values beside the usual
+clock enable/disable requests. Add support to use such new format when
+talking to a v3.2 compliant SCMI platform.
 
-> spin with "make O=/tmp/somedir". It also looks like it's going to impact
-> every board, and either fail or add some build time? Make sure both say
-> "sandbox" and "qemu_arm" both build at least, if not a full CI run.
+Support existing enable/disable operations across different clock protocol
+versions: this patch still does not add protocol operations to support the
+new OEM specific optional configuration capabilities.
 
-For build time -> There could be 4 line of code to check.
-For sandbox:
+No functional change for the SCMI drivers users of the related enable and
+disable clock operations.
 
-```
-make clean && make mrproper
-  CLEAN   cmd
-  CLEAN   dts/../arch/sandbox/dts
-  CLEAN   dts
-  CLEAN   lib/efi_loader
-  CLEAN   lib/efi_selftest
-  CLEAN   lib
-  CLEAN   tools
-  CLEAN   tools/generated
-  CLEAN   include/autoconf.mk include/autoconf.mk.dep
-include/bmp_logo.h include/bmp_logo_data.h include/config.h
-include/generated/env.in include/generated/env.txt
-drivers/video/u_boot_logo.S u-boot-nodtb.bin u-boot.lds u-boot.bin
-u-boot.sym u-boot-dtb.bin u-boot.srec u-boot u-boot.map u-boot.cfg
-u-boot.dtb.out u-boot.dtb System.map keep-syms-lto.c
-lib/efi_loader/helloworld_efi.S Test03 Test113 Test01 Test12 Test111
-Test102 Test11 Test103 Test02 Test112 Test101
-capsule_in.capsule5.efi-capsule capsule_in.capsule3.efi-capsule
-capsule_in.capsule8.efi-capsule capsule.capsule3.efi-capsule
-capsule.capsule10.efi-capsule capsule.capsule9.efi-capsule
-capsule.capsule6.efi-capsule capsule.capsule1.efi-capsule
-capsule_in.capsule9.efi-capsule capsule_in.capsule10.efi-capsule
-capsule.capsule5.efi-capsule capsule.capsule2.efi-capsule
-capsule_in.capsule2.efi-capsule capsule.capsule4.efi-capsule
-capsule.capsule11.efi-capsule capsule.capsule7.efi-capsule
-capsule_in.capsule7.efi-capsule capsule_in.capsule4.efi-capsule
-capsule.capsule8.efi-capsule capsule_in.capsule11.efi-capsule
-capsule_in.capsule6.efi-capsule capsule_in.capsule1.efi-capsule
-capsule1.map capsule8.map capsule5.map capsule7.map capsule4.map
-capsule6.map capsule10.map capsule3.map capsule9.map capsule2.map
-capsule11.map
-  CLEAN   scripts/basic
-  CLEAN   scripts/dtc/pylibfdt
-  CLEAN   scripts/dtc
-  CLEAN   scripts/kconfig
-  CLEAN   scripts
-  CLEAN   include/config include/generated
-  CLEAN   .config .config.old drivers/video/fonts/cantoraone_regular.S
-drivers/video/fonts/nimbus_sans_l_regular.S
-```
+Signed-off-by: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+[Marek: Remodel after Linux e49e314a2cf7 ("firmware: arm_scmi: Add clock v3.2 CONFIG_SET support")
+        Support both old < 2.1 and new >= 2.1 protocol versions.
+	Update commit message based on Linux one]
+---
+Cc: Alice Guo <alice.guo@nxp.com>
+Cc: Cristian Marussi <cristian.marussi@arm.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Valentin Caron <valentin.caron@foss.st.com>
+Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+Cc: Ye Li <ye.li@nxp.com>
+Cc: u-boot@lists.denx.de
+---
+V2: Fix up iMX95 and sandbox after rework
+V3: Cache pointer to top-level SCMI clock device in each struct clk_scmi
+    and use it to extract struct scmi_clock_priv private data which
+    contain protocol version. This is necessary, because clk_scmi .dev
+    may not necessarily point to direct subdevice of the top level SCMI
+    clock device.
+---
+ arch/arm/mach-imx/imx9/scmi/clock_scmi.c   |  2 +-
+ drivers/clk/clk_scmi.c                     | 35 ++++++++++++++++++----
+ drivers/firmware/scmi/sandbox-scmi_agent.c |  4 +--
+ include/scmi_protocols.h                   | 17 +++++++++--
+ 4 files changed, 48 insertions(+), 10 deletions(-)
 
-For qemu_arm:
+diff --git a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
+index fa15b5f8df9..fc1d5d77799 100644
+--- a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
++++ b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
+@@ -10,7 +10,7 @@
+ 
+ int imx_clk_scmi_enable(u32 clock_id, bool enable)
+ {
+-	struct scmi_clk_state_in in = {
++	struct scmi_clk_state_in_v1 in = {
+ 		.clock_id = clock_id,
+ 		.attributes = (enable) ? 1 : 0,
+ 	};
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index a7d89f32cd7..cdbf7e6df52 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
+@@ -16,6 +16,7 @@
+ 
+ struct clk_scmi {
+ 	struct clk clk;
++	struct udevice *sdev;	/* SCMI top-level clock device */
+ 	u32 ctrl_flags;
+ };
+ 
+@@ -134,17 +135,40 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
+ 
+ static int scmi_clk_gate(struct clk *clk, int enable)
+ {
+-	struct scmi_clk_state_in in = {
++	struct scmi_clk_state_in_v1 in_v1 = {
++		.clock_id = clk_get_id(clk),
++		.attributes = enable,
++	};
++	/* Valid only from SCMI clock v2.1 */
++	struct scmi_clk_state_in_v2 in_v2 = {
+ 		.clock_id = clk_get_id(clk),
+ 		.attributes = enable,
+ 	};
+ 	struct scmi_clk_state_out out;
+-	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
+-					  SCMI_CLOCK_CONFIG_SET,
+-					  in, out);
++	struct scmi_msg msg_v1 = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
++					     SCMI_CLOCK_CONFIG_SET,
++					     in_v1, out);
++	struct scmi_msg msg_v2 = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
++					     SCMI_CLOCK_CONFIG_SET,
++					     in_v2, out);
++	struct scmi_clock_priv *priv;
++	struct clk_scmi *clkscmi;
++	struct clk *c;
+ 	int ret;
+ 
+-	ret = devm_scmi_process_msg(clk->dev, &msg);
++	ret = clk_get_by_id(clk->id, &c);
++	if (ret)
++		return ret;
++
++	clkscmi = container_of(c, struct clk_scmi, clk);
++
++	priv = dev_get_priv(clkscmi->sdev);
++	if (!priv)
++		return -EINVAL;
++
++	ret = devm_scmi_process_msg(clk->dev,
++				    (priv->version < CLOCK_PROTOCOL_VERSION_2_1) ?
++				    &msg_v1 : &msg_v2);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -319,6 +343,7 @@ static int scmi_clk_probe(struct udevice *dev)
+ 			}
+ 
+ 			dev_clk_dm(dev, i, &clk_scmi->clk);
++			clk_scmi->sdev = dev;
+ 
+ 			if (CLK_HAS_RESTRICTIONS(attributes)) {
+ 				u32 perm;
+diff --git a/drivers/firmware/scmi/sandbox-scmi_agent.c b/drivers/firmware/scmi/sandbox-scmi_agent.c
+index 74a87832dcb..5b242a039c2 100644
+--- a/drivers/firmware/scmi/sandbox-scmi_agent.c
++++ b/drivers/firmware/scmi/sandbox-scmi_agent.c
+@@ -828,7 +828,7 @@ static int sandbox_scmi_clock_rate_get(struct udevice *dev,
+ 
+ static int sandbox_scmi_clock_gate(struct udevice *dev, struct scmi_msg *msg)
+ {
+-	struct scmi_clk_state_in *in = NULL;
++	struct scmi_clk_state_in_v1 *in = NULL;
+ 	struct scmi_clk_state_out *out = NULL;
+ 	struct sandbox_scmi_clk *clk_state = NULL;
+ 
+@@ -836,7 +836,7 @@ static int sandbox_scmi_clock_gate(struct udevice *dev, struct scmi_msg *msg)
+ 	    !msg->out_msg || msg->out_msg_sz < sizeof(*out))
+ 		return -EINVAL;
+ 
+-	in = (struct scmi_clk_state_in *)msg->in_msg;
++	in = (struct scmi_clk_state_in_v1 *)msg->in_msg;
+ 	out = (struct scmi_clk_state_out *)msg->out_msg;
+ 
+ 	clk_state = get_scmi_clk_state(in->clock_id);
+diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+index bcd8e671149..ecab021b472 100644
+--- a/include/scmi_protocols.h
++++ b/include/scmi_protocols.h
+@@ -733,6 +733,7 @@ int scmi_pwd_name_get(struct udevice *dev, u32 domain_id, u8 **name);
+ /*
+  * SCMI Clock Protocol
+  */
++#define CLOCK_PROTOCOL_VERSION_2_1	0x20001
+ #define CLOCK_PROTOCOL_VERSION_3_0	0x30000
+ 
+ enum scmi_clock_message_id {
+@@ -800,15 +801,27 @@ struct scmi_clk_attribute_out_v2 {
+ };
+ 
+ /**
+- * struct scmi_clk_state_in - Message payload for CLOCK_CONFIG_SET command
++ * struct scmi_clk_state_in_v1 - Message payload for CLOCK_CONFIG_SET command for protocol < 2.1
+  * @clock_id:	SCMI clock ID
+  * @attributes:	Attributes of the targets clock state
+  */
+-struct scmi_clk_state_in {
++struct scmi_clk_state_in_v1 {
+ 	u32 clock_id;
+ 	u32 attributes;
+ };
+ 
++/**
++ * struct scmi_clk_state_in_v2 - Message payload for CLOCK_CONFIG_SET command for protocol >= 2.1
++ * @clock_id:	SCMI clock ID
++ * @attributes:	Attributes of the targets clock state
++ * @extended_config_val: Extended and OEM specific configuration
++ */
++struct scmi_clk_state_in_v2 {
++	u32 clock_id;
++	u32 attributes;
++	u32 extended_config_val;
++};
++
+ /**
+  * struct scmi_clk_state_out - Response payload for CLOCK_CONFIG_SET command
+  * @status:	SCMI command status
+-- 
+2.51.0
 
-```
-make clean && make mrproper
-  CLEAN   dts/../arch/arm/dts
-  CLEAN   dts
-  CLEAN   env
-  CLEAN   lib/efi_loader
-  CLEAN   lib/efi_selftest
-  CLEAN   tools
-  CLEAN   tools/generated
-  CLEAN   include/autoconf.mk include/autoconf.mk.dep
-include/bmp_logo.h include/bmp_logo_data.h include/config.h
-include/generated/env.in include/generated/env.txt
-drivers/video/u_boot_logo.S u-boot-nodtb.bin u-boot.lds u-boot.map
-u-boot.srec u-boot.cfg u-boot.bin u-boot u-boot.sym System.map
-lib/efi_loader/helloworld_efi.S
-  CLEAN   scripts/basic
-  CLEAN   scripts/dtc
-  CLEAN   scripts/kconfig
-  CLEAN   include/config include/generated
-  CLEAN   .config .config.old
-```
-
-I am not too sure full CL run?
-
-Brian
