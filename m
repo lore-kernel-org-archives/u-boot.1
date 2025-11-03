@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32760CCFA03
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 23:03:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B005CCFA03
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 23:05:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8AED82A9E;
-	Tue,  4 Nov 2025 00:03:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8C485838CE;
+	Tue,  4 Nov 2025 00:05:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lvcb8nlr";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SW1TmRZw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IdviI9Rg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7FFC838D7; Tue,  4 Nov 2025 00:03:30 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B166883927; Tue,  4 Nov 2025 00:05:47 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D4138144A
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 00:03:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F34B183923
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 00:05:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4d0nFD2TnTz9srB;
- Tue,  4 Nov 2025 00:03:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762211008;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rm1tRgC3UMpWL71h4aQ+k8CylaCBmwutqe8nFyjVOvM=;
- b=lvcb8nlr217bQMoRHCRGVl3fbOWHBisPIwN59wpHt1D431t8AYtk56qKZxeCdVjAhvCdba
- xjYkwja4XC0V1Be/m2i+E4enJUwa0xWMLLZxygBCyEldaiZAcCajl4fpLLWLwAHtjPVqVo
- C1LZDcXfHsZZE7Vm5IbkqBax1OPOC122On5kMmRzTLJlKCeVv+1qy/KzICO/squqG2ZJS6
- +/aKqsofCW8bGqMRmmNbKQJ1yV/yOXH/EkObz53NMTKubF8wpv7SQO2JtTPjhaZDKpJHzk
- pomEKXMEIQjrUq7SCek5J4yJTdbWKZvC8l+RJgAs2ro88MLP8PSnvIakenCvVA==
-Message-ID: <79277db1-c6d6-4fc5-b197-220e58dc0ce8@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762211006;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rm1tRgC3UMpWL71h4aQ+k8CylaCBmwutqe8nFyjVOvM=;
- b=SW1TmRZwnnYn6ynpLD/OwSVMFepjy0v462VuB2FB0s2IKLprVmsk7O1nRu/vBiUppwG70S
- QmGskFRdsakL6O1tMnYrEqjFMPN7PqIQBCvUv9JQFu9GLlEjZCv/8OflUa9lgVm0ZQEadO
- BPgW4VKm1RJ1gSpHeVmdb8BiwbBZc4E8kpZT/IePBMaYB8EaVJstIvPz8RQw5QkD7ADMyQ
- hjKaHOXYLBQ6cfoh74ilEG6Qe3pef83BPzeMYRdW2A5bsQ5S8hKqMPB4NWXL+5FkhLSEi/
- MJGlHxGPxbYALeVXhu+gFPl7yRjeVV27iDeuleWFCX2d9dWQ63KoZzcdnBPQAw==
-Date: Mon, 3 Nov 2025 23:58:53 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-3e085513892so38243fac.0
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 15:05:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762211144; x=1762815944; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pCSqCkgx0TgAeVDuIeHg5m8HS4+99v1w5irh8Jv9kNc=;
+ b=IdviI9RgXolJ5T68G4u7aeaFddL6woxUX7JRJY3PQzBCZ6iyd0sg0yeBkPHjuF6SJO
+ WXZ4or8OhSICLf4P3RnrmZwUwoYqbrJR9jQVoTA5YY9UCoX97ruT4DY2DwdKTVtt2Y5K
+ kufZfFIhi1gts7BAIzKZAzEWvHMVj3QCjiLZE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762211144; x=1762815944;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pCSqCkgx0TgAeVDuIeHg5m8HS4+99v1w5irh8Jv9kNc=;
+ b=SFJi1yMMqJWB05D6EMQzklC2yr+1Zi15j8MamSws4CmRK6fduVVXDpQTom/FW5bGEt
+ 8pbzFuOdb0q+hruUMWGakwCYtyJIDJPWR4MqgsrQz6kgPx8kwRsOOpczKyPdRRinCu9W
+ D48Ha/oUYJ1AlWqj4wGv1ARJ/20/jEvI8SJu2A8kzYOjVriHEMI5+bclLjy0YSizajDq
+ HFUaLVgla+tTu4nEWfMBdA0i7VMeo4chHeUHiWsiHVU83DykSI/RcUdAxY7yr0Tm984t
+ M64CBJKEiYtqZU8zbdl2tu8ersiycKT1WJOeOYAjqaxxvBAqBukHRJbpCWvI4CC2uoMo
+ KjMg==
+X-Gm-Message-State: AOJu0Yxf+LJihaWtWqwrKXH5SpiCYYTPDG8TmbwjP4TvxbjfZl8ugdyT
+ 9FjJtdaELPRG3baPaXoFqkbXdUGjr+/5cNg4MXbUqs2YGvNc81KM0lxxWczCmQIFQTk=
+X-Gm-Gg: ASbGncu+2FQ+R2rdeKwdl0iE6QLGLp7iH3C3bFaCaqMoVfAV7wAsSvkD0VPrEqk6/9M
+ kmfzPHCsqJ7zInOEsvs4Lv1JrvK6UZybtWQfgN3oYUninlssXhZk+dimVY9tYm+z57X8ImmMle9
+ BwkWtCmZ0uM1USPzkF21dnLdD9XQ1GZxFMEHvsTZJqmEiBXyZuyvqmbjsAPaNIkiWep5nWB3cDr
+ WK9Ba40GivGbMuaWWwP0fneBTpjvnVeIJvdGE5o5nq+6cziau5qHJzthQj0D6+3mM3X4EsuX21o
+ Fti/rkWqpGBsh71t4WS2EkpEBaRYNG9zMtBh+At8xRrjfrl5QpvW+7Z2h0FujnjpiiSvsacK0db
+ 9zNgT9VXmS/cQChKoecCMGq9C7Iew+hXyIDUc6WFqLbY+4hJ73NdNV94wVVCp+aToeV1ZMjzr+X
+ M2vRsW33Uxkx/K0ETPLwD3AJuq6cjk5pBw/9ErZu4r5X1aXy9cMA==
+X-Google-Smtp-Source: AGHT+IFcrV2ijGDO5nkN7vFMGc5YyW3j+K1B3foA0zqNwWL1Kk+0cto+7hhCyd34MnDCH4WMozYA+w==
+X-Received: by 2002:a05:6871:3305:b0:35d:ea5:6be5 with SMTP id
+ 586e51a60fabf-3daca82b544mr5833797fac.20.1762211143673; 
+ Mon, 03 Nov 2025 15:05:43 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3dff7965307sm501646fac.20.2025.11.03.15.05.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Nov 2025 15:05:42 -0800 (PST)
+Date: Mon, 3 Nov 2025 17:05:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sune Brian <briansune@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v3] Add make feature support for SoCFPGA Handoff
+Message-ID: <20251103230540.GV6688@bill-the-cat>
+References: <20251103222840.458-1-briansune@gmail.com>
+ <20251103223346.GU6688@bill-the-cat>
+ <CAN7C2SB7qeXQB5=VHZ_DaE-ov4S7OX2hSyYNhb4SWv8-k+J_9A@mail.gmail.com>
 MIME-Version: 1.0
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTog5Zue5aSNOiBbUEFUQ0ggdjJdIGZpcm13YXJlOiBz?=
- =?UTF-8?Q?cmi=3A_Add_clock_v3=2E2_CONFIG=5FSET_support?=
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Alice Guo <alice.guo@nxp.com>,
- Cristian Marussi <cristian.marussi@arm.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
- <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
- Ye Li <ye.li@nxp.com>
-References: <20251027135856.8909-1-marek.vasut+renesas@mailbox.org>
- <PAXPR04MB9644989432FCE67C8B8F87BEE2FAA@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <90fe8028-7e13-4434-bc9d-318b4e778c59@mailbox.org>
- <PAXPR04MB96441DDF7341ABBC54993642E2C7A@PAXPR04MB9644.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <PAXPR04MB96441DDF7341ABBC54993642E2C7A@PAXPR04MB9644.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b5be7e25c2811cd62fa
-X-MBO-RS-META: dmr1i3776bthdr76ps4trxrabx58q46c
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="AocpoGpRn53AWgs+"
+Content-Disposition: inline
+In-Reply-To: <CAN7C2SB7qeXQB5=VHZ_DaE-ov4S7OX2hSyYNhb4SWv8-k+J_9A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,111 +98,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/3/25 10:25 AM, Alice Guo (OSS) wrote:
->> -----邮件原件-----
->> 发件人: Marek Vasut <marek.vasut@mailbox.org>
->> 发送时间: 2025年11月3日 1:39
->> 收件人: Alice Guo (OSS) <alice.guo@oss.nxp.com>; Marek Vasut
->> <marek.vasut+renesas@mailbox.org>; u-boot@lists.denx.de
->> 抄送: Vinh Nguyen <vinh.nguyen.xz@renesas.com>; Alice Guo
->> <alice.guo@nxp.com>; Cristian Marussi <cristian.marussi@arm.com>; Patrice
->> Chotard <patrice.chotard@foss.st.com>; Patrick Delaunay
->> <patrick.delaunay@foss.st.com>; Peng Fan <peng.fan@nxp.com>; Sean
->> Anderson <seanga2@gmail.com>; Tom Rini <trini@konsulko.com>; Valentin
->> Caron <valentin.caron@foss.st.com>; Ye Li <ye.li@nxp.com>
->> 主题: Re: 回复: [PATCH v2] firmware: scmi: Add clock v3.2 CONFIG_SET support
->>
->> On 10/29/25 9:54 AM, Alice Guo (OSS) wrote:
->>
->> Hello Alice,
->>
->>> I tested this patch on IMX95 and here is the log:
->>> U-Boot SPL 2026.01-rc1-00001-g9bb6f2fc0f57 (Oct 29 2025 - 16:42:02
->>> +0800) SYS Boot reason: por, origin: -1, errid: -1 Normal Boot Trying
->>> to boot from MMC2 Primary set selected Load image from MMC/SD 0xd7000
->>> NOTICE:  BL31: v2.12.0(release):android-16.0.0_1.0.0-rc2-2-ga266ff458
->>> NOTICE:  BL31: Built : 10:13:07, Oct 17 2025
->>>
->>>
->>> U-Boot 2026.01-rc1-00001-g9bb6f2fc0f57 (Oct 29 2025 - 16:42:02 +0800)
->>>
->>> CPU:   NXP i.MX95 Rev2.0 A55 at 1800 MHz
->>> Model: NXP i.MX95 19X19 board
->>> DRAM:  15.8 GiB
->>> Core:  283 devices, 24 uclasses, devicetree: separate
->>> MMC:   "Synchronous Abort" handler, esr 0x96000006, far 0x0
->>> elr: 0000000090233fac lr : 0000000090233f60 (reloc)
->>> elr: 00000000fff4dfac lr : 00000000fff4df60
->>> x0 : 0000000000000004 x1 : 00000000fdf089c8
->>> x2 : 000000000000000c x3 : 00000000fdf19f18
->>> x4 : 000000000000001f x5 : 0000000000000000
->>> x6 : 00000000000013f0 x7 : 00000000fdf08bb0
->>> x8 : 00000000000013e0 x9 : 00000000fdf087fc
->>> x10: 0000000000000003 x11: 00000000000013c0
->>> x12: 0000000000000000 x13: 00000000fdf08bb0
->>> x14: 00000000fffffffb x15: 0000000000000002
->>> x16: 00000000fff6887c x17: 0000000000000000
->>> x18: 00000000fdf19dd0 x19: 00000000fdf2c640
->>> x20: 0000000000000001 x21: 0000000000000000
->>> x22: 00000000fffa7750 x23: 00000000fdf29f30
->>> x24: 00000000fdf2dd58 x25: 0000000000000000
->>> x26: 0000000000000000 x27: 0000000000000000
->>> x28: 0000000000000000 x29: 00000000fdf08950
->>>
->>> Code: f90047e2 f9004be1 9101e3e1 f9004fe0 (b94002a0) Resetting CPU ...
->>>
->>> resetting ...
->>>
->>> Store the protocol version in a global variable "ver" during probe, and use it in
->> scmi_clk_gate() instead of accessing priv->version. In this setup, the IMX95
->> board boots successfully.
->>
->> No global variables please.
->>
->> How does this crash even happen on MX95 ? I verified that the private data are
->> the same pointer in both probe and scmi_clk_gate(), so is the parent device. I
->> think this is either not the case for MX95 (how would that happen?) or the
->> private data or device is NULL or something ? Can you please apply the diff
->> below and share the output ?
->>
->> "
->> diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c index
->> 005968e8b75..dcc71ea4225 100644
->> --- a/drivers/clk/clk_scmi.c
->> +++ b/drivers/clk/clk_scmi.c
->> @@ -137,6 +137,7 @@ static int scmi_clk_get_attibute(struct udevice *dev, int
->> clkid, char *name,
->>    static int scmi_clk_gate(struct clk *clk, int enable)
->>    {
->>    	struct scmi_clock_priv *priv = dev_get_priv(clk->dev->parent);
->> +printf("%s[%d] dev=%px / %px priv=%px\n", __func__, __LINE__, clk->dev,
->> clk->dev->parent, priv);
->>    	struct scmi_clk_state_in_v1 in_v1 = {
->>    		.clock_id = clk_get_id(clk),
->>    		.attributes = enable,
->> @@ -335,6 +336,8 @@ static int scmi_clk_probe(struct udevice *dev)
->>    	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
->>    					    &priv->version);
->>
->> +printf("%s[%d] dev=%px priv=%px\n", __func__, __LINE__, dev, priv);
->> +
->>    	/* register CCF children: CLK UCLASS, no probed again */
->>    	if (device_get_uclass_id(dev->parent) == UCLASS_CLK)
->>    		return 0;
->> "
->>
->> Thank you !
-> 
-> U-Boot 2026.01-rc1-00200-gf99ba9c02db2-dirty (Nov 03 2025 - 16:40:03 +0800)
-> 
-> CPU:   NXP i.MX95 Rev2.0 A55 at 1800 MHz
-> Model: NXP i.MX95 19X19 board
-> DRAM:  15.8 GiB
-> scmi_clk_probe[301] dev=00000000fdf1e190 priv=00000000fdf20030
-> scmi_clk_gate[138] dev=00000000fdf2a390 / 00000000fdf1e190 priv=00000000fdf20030
-> scmi_clk_gate[138] dev=00000000fdf24210 / 00000000fdf1e190 priv=00000000fdf20030Core:  283 devices, 24 uclasses, devicetree: separate
-> MMC:   scmi_clk_gate[138] dev=00000000fdf2c690 / 00000000fdf20c50 priv=0000000000000000
-> "Synchronous Abort" handler, esr 0x96000006, far 0x0
-Thank you for that. Can you please test V3 and let me know whether the 
-problem persists ? I suspect it should be fixed now that we use the SCMI 
-device pointer in the driver.
+
+--AocpoGpRn53AWgs+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Nov 04, 2025 at 06:52:14AM +0800, Sune Brian wrote:
+> > This won't work with separate object directories. Please give things a
+>=20
+> I am not too getting this, why? The checking stage is not enough to
+> block the below script execute?
+
+Because ".config" isn't valid, you need to have $(objdir)/.config be
+checked, and in turn that has to depend on the appropriate target (we
+have some stage that says that we are configured, I forget which).
+
+> > spin with "make O=3D/tmp/somedir". It also looks like it's going to imp=
+act
+> > every board, and either fail or add some build time? Make sure both say
+> > "sandbox" and "qemu_arm" both build at least, if not a full CI run.
+>=20
+> For build time -> There could be 4 line of code to check.
+
+I do forget off-hand which methods of doing "something" in a Makefile
+are cheap and which result in firing off a subshell. But for a handy
+feature for one SoC I want to make sure we don't slow down say the world
+build of all 1400 configurations. For a maybe useful example, see how
+the "checkgcc6" target is handled, and maybe we can move all of this to
+live under arch/arm/mach-socfpga/config.mk and so only get invoked at
+all there.
+
+--=20
+Tom
+
+--AocpoGpRn53AWgs+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQk1QQAKCRAr4qD1Cr/k
+Cqj4AQCmvTsJjozFjDz5oqI/CsNH2chyMKHobE6WpOa+ddZwcgD9G4klS+yfVRgU
+Z5PAwN4NWZSSZNjwcofKWIalE/+6IwM=
+=q0H7
+-----END PGP SIGNATURE-----
+
+--AocpoGpRn53AWgs+--
