@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DEB1CCF9F8
-	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 20:50:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4324CCFA03
+	for <u-boot@archiver.kernel.org>; Mon,  3 Nov 2025 21:03:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0AF78144A;
-	Mon,  3 Nov 2025 21:50:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 177678144A;
+	Mon,  3 Nov 2025 22:03:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iY0w9Lm0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SOyqN2Ic";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98D3482A9E; Mon,  3 Nov 2025 21:50:40 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 7369C838CE; Mon,  3 Nov 2025 22:03:21 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 721D18004F
- for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 21:50:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C39B8004F
+ for <u-boot@lists.denx.de>; Mon,  3 Nov 2025 22:03:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7c532d70cfaso2889246a34.1
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 12:50:38 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7c281c649ccso3371608a34.2
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 13:03:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762203037; x=1762807837; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3Q51E8uD+h8GzpYz23WCfSVVAmBiULPk2SZK2w2733I=;
- b=iY0w9Lm0s8v8tA1+pKq+KwnuqRlfjt5mG2FD6AIQZIY5x3ODTIEkhwZwQZ4GefqQb7
- wvUyAQV3TSYxpF2g5E0V8v9bbEzq51FNh2rQ0ZNiSlbcLt5+MusZ1OicsQKgX7yuWV0n
- 7dIKlbz53B2aI/DUsoBvhSYUHeTfDKVhdkEuGopvNRv27JcXCqb/JcV5HVQMYe3T41G6
- pIZYBU9voJ7v6q02QMTkD2vqqII4lAjztmD38qNzeboI+fGNVH+NUwmtkCioCzOSxOHx
- jcVNybm1GubG4AbscdNNZag59CHXK30dfP1xWUhXWFTMUrsqcAYR+ORrsjexLbZziV1i
- tkqQ==
+ d=konsulko.com; s=google; t=1762203798; x=1762808598; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=p6cJCkwI0QtYP2CNMfZtCbyHwiX3anYBiNlD4oh4unU=;
+ b=SOyqN2IcvTXuJWoyh12CPbWsd4CDr9oqr8y9gri+nkpANl1IW8UCJtQRO3PsfGwoN4
+ 3J2MiF6C47DX2TiqIpeQXpQ9jyGKN/bhUx2kHBgUOgiuLxabnZ8CqVph35dSrxTfyEx0
+ b0HaQrGgurS4in43KYu2tWmRGAOO49QFpWSKI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762203037; x=1762807837;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3Q51E8uD+h8GzpYz23WCfSVVAmBiULPk2SZK2w2733I=;
- b=VUwxyYQis7eAeb6LVH6jVXEKVGOcpvjdU5goKedgLj+tH1Q/et7SW2VoAU0nsrvc8j
- jAy6ABQ1r8WL3bP1/TPAqunuoOVCS9PWOoKcfil7JME0gWzWBvEU1ltuxgzzSHvcLi90
- 139hcg53dBld04SvDALcH3ZC7lOk/8laJC975fY4v7RCQPoJooYaZpzSi0M4a6jS2u+U
- JpvWz5erUW1fCaWciv3x++jBAwZBaJUTuB+f0fQvagwaBQjtK6aR9RhJ6JCgCbOwSqOR
- rImidtu2/JCBQ6VioeR1ZR1v16sJ3bZEP6DHpRby2thAuscuOjH3Ptbsb5XdnKWioqhk
- +vdg==
-X-Gm-Message-State: AOJu0YyVv3O7Niy++/twn9w9EApqt/s6tkPsBeEGNAC9+o8bn2ZPTlJ4
- 1LNNkaD1PLuSd8zfHEKZ5BK1isi6C/SRkbqMDbR0uiFLkNVdDVcZ3CJoZicrQi5+lZsVmgF5nAc
- tu1YojxG+Tw9QWQtQLaK9It2C18bJFeCe07jSXU8=
-X-Gm-Gg: ASbGnct0ST0N9EwFMWe5g/PKHtcDvjxfPTBCWvBiVgu3vja/gsOHenpB3iIK9LnCtUZ
- LmdNRZCy6kAPHGYgv6I31DpF91unFrwLrfEXnMFyqCiujRYV1njbfh3PLpUDHXUq0hX6tICaY1T
- 18OwUMO/IGgdDPbcNiG2mEwuhYb/zgJ9pfYUFqmZVFa8s9vFu2Y4t0ueGoUtTsXldcBqUc8IyfW
- Z1n7v9UYb3aLVKwydIRJsXZ7k+6di0Vn9Dx650kUJi/lEjJsZVn6RNpO/B7GfChqJzBG68z
-X-Google-Smtp-Source: AGHT+IHqXSqYp8Fkl4a8cccTSe2a7ZSGEId22BDCG7xXXvKVOM0c5WLYtK1MHoSYynSIbux9fzoaKyFVd+TDEdh44iA=
-X-Received: by 2002:a05:6830:4114:b0:7bf:6c53:b558 with SMTP id
- 46e09a7af769-7c6966fe86fmr6957851a34.5.1762203037144; Mon, 03 Nov 2025
- 12:50:37 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762203798; x=1762808598;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=p6cJCkwI0QtYP2CNMfZtCbyHwiX3anYBiNlD4oh4unU=;
+ b=MHV8I+jV48gAUV5V7u0lc+yFWLBtFJKrT0DZlNaOUQFeC3zUyQx/gR02ymAANo01Ss
+ 4ZCp2QX6Ya8d6FfD8vpJaYRRmqvDjxoUhKBEebK5NitHY+0TeY/4BAXs0+3w5aFaZBUg
+ kqKHMcniTZ1hyXnqS6qCJJrgrvow5woIygmuNc5sYESVoxflxJF300VvTiyxEVxIe6uS
+ y/g+ywhLcThoxDOyql7+BHogRJIAZwFhZ5JQPd5xqHNgcUIkD3RGeocRkE1Ejj1tLYH3
+ +aS96TnR05R+lQePNqPGpNOUqZzN076YPaTT3usmPQBsx3ePQi80XtBjUA8TQApFW4uH
+ WssQ==
+X-Gm-Message-State: AOJu0YyKNmlUkacWKpJ3Mc754g0L9gs/qoKPl0Loc4NkDJlMOWxQRXme
+ x7s2xB7G3ehj3XmUQgPn5e8RgN18O+zZDXiHqNVpsuqizEPYk4Ml5k7pzAxAbOJNEgk=
+X-Gm-Gg: ASbGncsGk4J/5v8OXQb8KPAEjjEj6A8HIBUCVd9MeevXr4SkXgr6qmgMxb9mS1deRum
+ r1ooOZZhrWDu+og6TPh9hKw63q8hcXFWEjZdUdIRolu//jxIga9wg95KSVgYAQVWo4QJze3AUpg
+ uj61cmgqOEhWh/ZBXz/kL5aKw/tyJA0e2WeWRzZOfAa92t2scHleIu1PHIzHTk6SOb18EfpVElU
+ f4EVZrNISt3MqbpxrTpZlm2S0Rvqk4n+S5W1/2FwFpPMjsUGYXxgRP6tGzYw93WmKbJJgyQglgy
+ thBJMtiaAiorCthC/VeQ1xjbiaphiPUS/LjMKBspKHwSppFQr7FO4M71lwbBsnwEKnqCQA13ieI
+ MpRQjA8C+LaWEewMWnEBVOFIgTouKjn0qCpksv18B9wb0Ua5VMtm8lmqrzFXeq0Xi7qi3jA+IdM
+ jBwq+rOrjVaU9WjJgPKmNeC7sVEaLEijxt/c8DysgxBRg8pCqt
+X-Google-Smtp-Source: AGHT+IEDEsWyR6Y59IozNurCbpLkjldBM7F4XnE7oQ6TPH99fSan+WTBnpmI3oWDrR3GH67swy+9zw==
+X-Received: by 2002:a05:6830:6d2c:b0:771:5ae2:fcde with SMTP id
+ 46e09a7af769-7c6966f1646mr7335593a34.2.1762203797750; 
+ Mon, 03 Nov 2025 13:03:17 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c6c246f342sm455378a34.9.2025.11.03.13.03.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Nov 2025 13:03:17 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
+Cc: Simon Glass <sjg@chromium.org>, Vignesh R <vigneshr@ti.com>
+In-Reply-To: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
+References: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
+Subject: Re: [PATCH v10 0/2] Remove usage of CMD_BOOTx from SPL code
+Message-Id: <176220379674.3382007.8679959848971433829.b4-ty@konsulko.com>
+Date: Mon, 03 Nov 2025 15:03:16 -0600
 MIME-Version: 1.0
-References: <20251101035252.261-1-briansune@gmail.com>
- <20251103153657.GO6688@bill-the-cat>
- <CAN7C2SB0b_YjcJ+LyVUJwi5DjdjR5Ssi=yQwuCvSvBh3XVj+dA@mail.gmail.com>
- <20251103200959.GR6688@bill-the-cat>
- <CAN7C2SCY1Q2_YcJWVMs0Zv+ymcuXLXEhrkX2JGcJviOaKDf0sQ@mail.gmail.com>
- <20251103204237.GS6688@bill-the-cat>
-In-Reply-To: <20251103204237.GS6688@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Tue, 4 Nov 2025 04:50:25 +0800
-X-Gm-Features: AWmQ_blASE-XTqyHrd_9DQYBURpnt_B3RmOBLIr9o4njkRsnT3EqkFhAw_nMtro
-Message-ID: <CAN7C2SACKPnE07-dtwc437f8xr38936h3RWvP1R5Ha_v1KfCng@mail.gmail.com>
-Subject: Re: [PATCH v2] Add make feature support for SoCFPGA Handoff
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,35 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> I think I'm not explaining things well enough because I don't quite
-> understand the tooling well enough either. What I would like, but don't
-> think is possible, is something like:
-> $ make O=/tmp/myboard myboard_defconfig
-> ... goes along and sees that boards/myvendor/myboard/myboard.xml exists.
-> ... Runs the python script to re-create all of the C files, assuming xml
-> ... is newer than the C files.
-> ... Now compiles the new C files.
->
+On Mon, 27 Oct 2025 19:47:01 +0530, Anshul Dalal wrote:
 
-No, I think your method is just a bit more complex.
-What my last suggestion is just put the handoff folder
-next to qts i.e.
+> We currently make use of CMD_BOOTI and CMD_BOOTZ in the SPL boot flow in
+> falcon mode, this isn't correct since all CMD_* configs are only meant
+> for U-Boot proper and not the SPL.
+> 
+> Therefore this patch set adds new LIB_BOOT[IMZ] configs that allow for
+> more granular selection of their respective compilation targets.
+> 
+> [...]
 
-board/altera/abc/qts
-board/altera/abc/hps_isw_handoff/foo_bar
+Applied to u-boot/master, thanks!
 
-Then once you run maybe "make prepare"?
-It generates the new c sets.
+[1/2] spl: remove usage of CMD_BOOTx from image parsing
+      commit: 823e453987a6590af67e2226ad3e73fb399c205d
+[2/2] configs: disable SPL_BOOTZ to preserve spl size
+      commit: 1dde581e1affbbfad285a75b892cbebaa3f0bf19
+-- 
+Tom
 
-Flow always:
-make xxxx_defconfig
-make prepare <- this is the place it should be automated.
 
-As the user defines the board then what you need just place
-it new to the qts so it even removes the -o -i user parameter.
-And maybe leave the foo_bar naming for user to enter as
-it could be renamed by the user during the Quartus project build.
-
-Do you think this is good?
-
-Brian
