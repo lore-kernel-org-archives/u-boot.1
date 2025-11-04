@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E3ABCCF9E3
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 11:28:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35F84CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 11:56:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 657B1808AF;
-	Tue,  4 Nov 2025 12:28:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 71EDC808AF;
+	Tue,  4 Nov 2025 12:56:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1762255735;
-	bh=XAeZhEVWDJkvsRG/0E0gt4ciGnUhbj3STds0ifmEzPk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=NjwDFvlyjKpqMaPJqqV58348WtzzSU6MNiHAnFzaZFYP6/7k3HIqp6CnI6gOTLXAB
-	 jeYZJc81WCUSG+ROFOf8fy5D0y0c4QMb8d1s22S7V8s6y+dNvAdk08NcEo6JxNN+5a
-	 +5bUYfVffnFCP8uXQLsoVpQq6JMAYzZGURnLTdXkl4oQDvsclnt59MF21i5EPAz4wA
-	 Za6+Uh14oLJBUNaGhdqfKtmruRuOUL6UJj2EABy58s3Puh+1HNkN6mRhuo5b8db5LI
-	 3aPYbY8k7XzzIny/THszYEg4Vw5lX3ndHIRJRvqzO4dMYvYFGvsBvA144nnsxXt97/
-	 J2b6+R0XKJRfQ==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oFAmHvAS";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D8A38144A; Tue,  4 Nov 2025 12:28:54 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 4A7BB8144A; Tue,  4 Nov 2025 12:56:45 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A29FE8003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 12:28:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 135558003E
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 12:56:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Degl8skm"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7C23D103CF29F; Tue,  4 Nov 2025 12:28:47 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1762255731; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=XAeZhEVWDJkvsRG/0E0gt4ciGnUhbj3STds0ifmEzPk=;
- b=Degl8skmzjpfIMU9iKQduBQFDTvBep3/N0AGnxab28O16qJckCmIO/MXRL1mU9cyZWgDne
- z0L54sM7soR6CZhDkFufuYdGE/Dt/oKCzFGZlrfU+IioYUZkmjG/N0nZzhm47ol3S21VGC
- NCImLnFuPuJfNvbrg4VmZ2Gf257VvdKwRNyCJk3U+Y21hI4GK0QbU1ZCUsHmfteLQljCmq
- S+tBl/KfTGANhFTKQAWQjNWpWzrP3vSG3w+6nb/7V1KhAfq4t8OtyDAdUmUAGlScqCHqK2
- NI9XP54QkOPwzS91VhWze3Po4EIq3Q5a/iimyYGA36Zp7jUDYzOD9c7oz9V9SA==
-Date: Tue, 4 Nov 2025 12:28:44 +0100
-From: Philip Oberfichtner <pro@denx.de>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut@mailbox.org>,
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4d16PP15V3z9tnR;
+ Tue,  4 Nov 2025 12:56:41 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762257401;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=P1jqJUFUGbuj4IqUMta/z4DTnDENkw6TL0GgxQzLLmQ=;
+ b=oFAmHvAS4OmWTWW5jbPSnUn1JmwB023wysI+P69TUcI+DIoN0ugaU3B8eFtsBklQFXdAbp
+ bLPP4x7uvOa0So4x7765S0kxSNibKWKKb2dMuEDqTe+q0S6f9+uWHRd4tzUM4Eyk4wt7/h
+ RjAOhFwRXqaBqhUjCSzVUs7syeRWdCvPDAUWkHVw8ybZzjzOoJNyU4FLmuYOD8kggI4emN
+ iNdwJzLGPdp6WVFw+7kcKh7YmvB77481t31mIieeivqvmC3c3yBE7Pg8BpjjFlHTkbIAAF
+ 2Rxz6l9FO8sDDQXxXpYC978SkORexIA2TYfvdNxiwetzUMM/fj8Jmo7RqlpQmA==
+Message-ID: <74d44015-7482-40e5-a1ee-d0a1cb5725d6@mailbox.org>
+Date: Tue, 4 Nov 2025 12:56:34 +0100
+MIME-Version: 1.0
+Subject: Re: [PATCH v4 0/3] Harmonize image size checks
+To: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de,
  Tom Rini <trini@konsulko.com>
 Cc: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -60,14 +60,15 @@ Cc: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
  Trevor Woerner <twoerner@gmail.com>, Ye Li <ye.li@nxp.com>
-Subject: Re: [PATCH v4 0/3] Harmonize image size checks
-Message-ID: <aQnjbE0nAG7AFJlG@aristophanes>
 References: <20251015012320.2331007-1-pro@denx.de>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251015012320.2331007-1-pro@denx.de>
-X-Last-TLS-Session-Version: TLSv1.3
+ <aQnjbE0nAG7AFJlG@aristophanes>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <aQnjbE0nAG7AFJlG@aristophanes>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: btg7dsk9yrk6rimhmyahghzms34ta4nj
+X-MBO-RS-ID: 8c7e20970ac72fdd670
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,15 +85,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On Wed, Oct 15, 2025 at 03:23:17AM +0200, Philip Oberfichtner wrote:
-> This patch series aims at harmonizing image size checks, which are
-> currently represented by the following Kconfig symbols:
-
-Hi Tom, Marek,
-
-I think I've addressed all the points discussed in V3. Do you have any
-more comments?
-
-Thanks,
-Philip
+On 11/4/25 12:28 PM, Philip Oberfichtner wrote:
+> 
+> On Wed, Oct 15, 2025 at 03:23:17AM +0200, Philip Oberfichtner wrote:
+>> This patch series aims at harmonizing image size checks, which are
+>> currently represented by the following Kconfig symbols:
+> 
+> Hi Tom, Marek,
+> 
+> I think I've addressed all the points discussed in V3. Do you have any
+> more comments?
+Your change is under review. Reviewers are busy. Please be patient.
