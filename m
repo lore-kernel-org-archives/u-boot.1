@@ -4,71 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35F84CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 11:56:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FA86CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 12:00:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71EDC808AF;
-	Tue,  4 Nov 2025 12:56:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 829A2808AF;
+	Tue,  4 Nov 2025 13:00:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oFAmHvAS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MNvV2rbP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A7BB8144A; Tue,  4 Nov 2025 12:56:45 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CD13882A9E; Tue,  4 Nov 2025 13:00:18 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 135558003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 12:56:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC7A28003E
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 13:00:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4d16PP15V3z9tnR;
- Tue,  4 Nov 2025 12:56:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762257401;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=P1jqJUFUGbuj4IqUMta/z4DTnDENkw6TL0GgxQzLLmQ=;
- b=oFAmHvAS4OmWTWW5jbPSnUn1JmwB023wysI+P69TUcI+DIoN0ugaU3B8eFtsBklQFXdAbp
- bLPP4x7uvOa0So4x7765S0kxSNibKWKKb2dMuEDqTe+q0S6f9+uWHRd4tzUM4Eyk4wt7/h
- RjAOhFwRXqaBqhUjCSzVUs7syeRWdCvPDAUWkHVw8ybZzjzOoJNyU4FLmuYOD8kggI4emN
- iNdwJzLGPdp6WVFw+7kcKh7YmvB77481t31mIieeivqvmC3c3yBE7Pg8BpjjFlHTkbIAAF
- 2Rxz6l9FO8sDDQXxXpYC978SkORexIA2TYfvdNxiwetzUMM/fj8Jmo7RqlpQmA==
-Message-ID: <74d44015-7482-40e5-a1ee-d0a1cb5725d6@mailbox.org>
-Date: Tue, 4 Nov 2025 12:56:34 +0100
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-3737d09d123so71043131fa.2
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 04:00:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1762257616; x=1762862416; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0Cs84RHxlzECX1bQO7/9Pv/g0m3UwiK2Hk0oK8Dxc9A=;
+ b=MNvV2rbPPIeQwVUrX0wvr+t9kce1gbWxEYHtmvvJ6oZCIQjKLv/G3meqGMUiXup9Yv
+ l/r+sGG5eQaUtyPNtTu1WWliJquIkpjyMxawTW7YLLFXyRcAcc25wXZBtW+vcesZHtIo
+ H2tejkBKGjSoAxz8mfBV/Am1REv9yHNIwOiPSiVJJl6jACVj171q1dueokg3HoUY/YXJ
+ AP2yWUJVkxaPeC2TN4GJd2TIaB1hKtu8591PBnDMZ5MrG+XFwXzIwdJvHr69NvNpmV3h
+ aA45gGKlVydszw4jOxI++RAAHFaxX57Box7xw/bgIz70VCha5v/7BA56TmxfNR0VMUoy
+ KEQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762257616; x=1762862416;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0Cs84RHxlzECX1bQO7/9Pv/g0m3UwiK2Hk0oK8Dxc9A=;
+ b=alwsSqcm+zX7z0vw1DdM8f0M/Cxmezt4+fGHIEeQPsQzVifbl2Toj66R9ArbCZ0r74
+ Pw1ZqwxPlEnoNCI4rf3alLCyxx6jbTykpCiCl+bqZhozo3G5uN2IL9mprM1Cxd2EUpNq
+ NRNALWPiAuZ4+MecvvKRVpKndw2eq6MPUT8aFrkRkUa3h2xzt+fN7L0kvjXoCPJNWqXL
+ C2+4myvge/Wwvp5ON0DAAfd4kQNtTuL3pGHUEbZ/k/PQ+7zUUcbqo2onMWbLg/N0ypFf
+ lBYnmXTlL+UoXcYRbZNYCFNlGPhKIaak/F37g08DEJD1TL9nj/dxXOegT0QwQF8iyY83
+ iOMg==
+X-Gm-Message-State: AOJu0YyeF5SXdWEpxA1NYu5p71CytXyUuAio5GVFFKVXTAK6PkfV5eJv
+ s4BfXsdH0KNyXhVorz18OZRTYL8Lf/UG0qvTiQc1tY4r8hRCobaRYxvZXVJlcedQA0wk20Sfgp3
+ FRdjA+4/Alx2MFrIS2vZSypAqM+iiZ6M=
+X-Gm-Gg: ASbGnctyyBlP6+27WbE/uI4u2shML8DJaxX4EY56d/w9n3QBmF7hKzvuOk+qjgaZ3hQ
+ 44ylV4m15biHEKyFMx+6k71P1Xy4KoXNn0llBbKH/jiUSEs1dt6VHLdJWmcoIBUNK+4LJvFNXXz
+ juENPjl4fb/WDZ+IV3whON2SwnHHHz54aUUttLnuVAVwwa+l7G1fI42VtZcEdSLceqSwN1w4NZ2
+ IRA2HOngA/hx2WHmhv70xrGvL32virpUfU3IdLD+lADlxWkRdYjEcCLf6N0bzwJBLOpBRYmFOQl
+ KOXnLmPyhYhCDRw9
+X-Google-Smtp-Source: AGHT+IGkCgLnCYEZnnGf6/inhqFjzBRYCbfGYYPZkhRb5bWHMfLh75lXS3fBIuqdaxYhBj/jOENWHYNxYF3lYtn3MBY=
+X-Received: by 2002:a2e:bea6:0:b0:37a:2fee:31f7 with SMTP id
+ 38308e7fff4ca-37a2fee32c7mr28593521fa.27.1762257614050; Tue, 04 Nov 2025
+ 04:00:14 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 0/3] Harmonize image size checks
-To: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Cc: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Trevor Woerner <twoerner@gmail.com>, Ye Li <ye.li@nxp.com>
-References: <20251015012320.2331007-1-pro@denx.de>
- <aQnjbE0nAG7AFJlG@aristophanes>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <aQnjbE0nAG7AFJlG@aristophanes>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: btg7dsk9yrk6rimhmyahghzms34ta4nj
-X-MBO-RS-ID: 8c7e20970ac72fdd670
+References: <20251031074611.39426-1-andrea.calabrese@amarulasolutions.com>
+ <20251031074611.39426-3-andrea.calabrese@amarulasolutions.com>
+In-Reply-To: <20251031074611.39426-3-andrea.calabrese@amarulasolutions.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 4 Nov 2025 09:00:02 -0300
+X-Gm-Features: AWmQ_blVNaXRCeW_GOeb1XDwuWntfSvYg9WI2hNzUe_2uYgBVHwlGxIMY5xmcEQ
+Message-ID: <CAOMZO5D=sxnGZwm6X8d9hfe0suHRbxXLVGf9D_96K-+LzC9j0g@mail.gmail.com>
+Subject: Re: [PATCH v3 3/3] bsh: imx6ulz_smm_m2: Add imx6ulz BSH SMM M2D board
+To: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, michael@amarulasolutions.com, 
+ dario.binacchi@amarulasolutions.com, trini@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,14 +95,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/4/25 12:28 PM, Philip Oberfichtner wrote:
-> 
-> On Wed, Oct 15, 2025 at 03:23:17AM +0200, Philip Oberfichtner wrote:
->> This patch series aims at harmonizing image size checks, which are
->> currently represented by the following Kconfig symbols:
-> 
-> Hi Tom, Marek,
-> 
-> I think I've addressed all the points discussed in V3. Do you have any
-> more comments?
-Your change is under review. Reviewers are busy. Please be patient.
+Hi Andrea,
+
+On Fri, Oct 31, 2025 at 4:46=E2=80=AFAM Andrea Calabrese
+<andrea.calabrese@amarulasolutions.com> wrote:
+
+> --- /dev/null
+> +++ b/configs/imx6ulz_smm_m2d_defconfig
+> @@ -0,0 +1,82 @@
+> +CONFIG_ARM=3Dy
+> +CONFIG_ARCH_MX6=3Dy
+> +CONFIG_TEXT_BASE=3D0x87800000
+> +CONFIG_SYS_MALLOC_LEN=3D0x1000000
+> +CONFIG_SYS_MALLOC_F_LEN=3D0x18000
+> +CONFIG_SPL_GPIO=3Dy
+> +CONFIG_SPL_LIBCOMMON_SUPPORT=3Dy
+> +CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
+> +CONFIG_NR_DRAM_BANKS=3D1
+> +CONFIG_ENV_SIZE=3D0x20000
+> +CONFIG_ENV_OFFSET=3D0x400000
+> +CONFIG_MX6ULL=3Dy
+> +CONFIG_TARGET_MX6ULZ_SMM_M2=3Dy
+
+imx6ulz_smm_m2b_defconfig, imx6ulz_smm_m2_defconfig and
+imx6ulz_smm_m2d_defconfig are the same, except for the CONFIG_TARGET_
+line.
+
+I suggest introducing a <configs/imx6ulz_smm_m2.config> with the
+standard part and then including this header file and the
+CONFIG_TARGET_ line in each defconfig.
+
+Take a look at some examples:
+
+configs/imx6_dhcom_drc02_defconfig:#include <configs/dh_imx6.config>
+configs/imx6_dhcom_pdk2_defconfig:#include <configs/dh_imx6.config>
+configs/imx6_dhcom_picoitx_defconfig:#include <configs/dh_imx6.config>
+
+The idea here is to simplify maintenance and prevent duplicate
+defconfig settings.
