@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64D17CCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 22:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C91CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 23:02:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9703E83981;
-	Tue,  4 Nov 2025 23:56:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D478F83990;
+	Wed,  5 Nov 2025 00:02:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ov7m1o2P";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mapqnpkC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A41A78398C; Tue,  4 Nov 2025 23:56:42 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 48CF983993; Wed,  5 Nov 2025 00:02:08 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD9F983968
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 23:56:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 60F4783981
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 00:02:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,30 +30,30 @@ Received: from LT03 (unknown [93.94.208.154])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 58D9F409DF; 
- Tue,  4 Nov 2025 22:56:39 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 7F5BC3FFD2; 
+ Tue,  4 Nov 2025 23:02:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762296999;
- bh=E/w1IdBIYIm9Hr/zPveM+bXDVHHCR1ZF6O8qV/z9oEc=;
+ s=20251003; t=1762297325;
+ bh=IwRPB9Fy+5DneLr43hS70DjFjGvJKFqKhJcYPphI6aE=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=ov7m1o2PaLbmF2NVsXPXOxCPrilkw7PtVmQmYXTjAhDtBLtoAT6aAFlUW5GCkF4qJ
- B3rt1bN5IyG+kKLziO/ZGp7rbQLdWDvDnhayBvQklhHXJC2SsMjvh8TgHzqlm60Ovs
- 36oOhyFb+RY5g2rUIB0xI1YC6j1EgIrhcn0Bdz9EdCBIw+8sSwywnvnB7EQONgEY/0
- Qs9q9B/GihpoN0XT8mswRbxlJXwRBQFUAasfXPLXoQOgRnfKMnb1k7rBfPjToB8F26
- FpLYexbgP5eR9N54CJPH73/bsSsc+e/c2b0tGlocLQOX+9NvJzxjXpJive72OPlpUF
- vVyxE6J43kasSR+Zs0fo5Yq2+m1MqolNsrEFm+mSREwHfvrSUvkX9uGxCOSKIc2Nom
- 8POsJRhHUqtYLijC/aRe65uLA8aLxGUR7mr+xTN4wdDNd9lWtcTajNuL4/YFlNmbld
- tFc5DKCDoUvo33YE6kk+pHeu7YM0Zn994arC4rXaddrCISYf0Axt4GbzpEIGq3fMO7
- LjkJKPSFA3DjckIOmK0WtkYxNUtEyBQGosa9/bNzDYDZwDIr1rd112DFp4IYN5OZqF
- vjtmoZgwHnN8aZONrrgJZ8ynW3OHrVEa9Y1KJhmYITRwZT2VVygnXqmQBl0RDPIxec
- D8UmX8uWwmrYPqVp/HKRHXa4=
+ b=mapqnpkCDLU4Y9cJwEn3aSGf/iC/Vz/DqiUNJY/K8otlt/DbcjOLxBQC3oFfi/rV8
+ tOBen7qw5xbwcP7wiHDY15S76V33MTrIbh0T2lHYTMotte5+ewsM/3limLtV/T01rI
+ qAv+sg0GIl9dwpTaOldlBnU9UZ/61Vo+lxGpaLVygThANek+jzB3/vI3+JCAPyf6m4
+ E5lQnmzgzhs2qrfHwNOsu3VenZdJEZ0JSzlFzvxySB+ET2t+b8TQOBW/Z9W4wVE7Vn
+ gKIBqO3SPd3VwgXBk4bMezC1Ul3IzT9N7LuZU5P9IXL0C12z+aBYAc8sLia8wIrfTP
+ CbR2Lot+1BaEBzCB0WPSpF71V0BP3dJV/kR7W9qkIn6QlzNM5lZ67/1suJpQu1eBa1
+ Otl+80HEN4Q7xzjeLMGv5APA7e5VerjdFBWBmTWhUCWaOsu+195IgSUS02CkQygIIc
+ /dWRGBXjiUULkWitMefwNNLasKA0jGVoiq6tyQGGYsClgB1Y9sO/UrEizpcD4hhlhY
+ 7MLo31jQHcvpiyAOaW1MACBokwggPf7wK/7IG8BPBfAao3Ca69a+5Mzjmrg5kRijA8
+ F/zwI+0knzocg4TLWEPlPQfMB1hwVPc2BlgqLzjJ0a9EgW3LA+Be4anpw37zjJf2zB
+ 7iFwnG6qDpF0LH13ATJ2ViSM=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
+To: Tom Rini <trini@konsulko.com>
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_driver: typo 'to be write'
-Date: Tue,  4 Nov 2025 23:56:36 +0100
-Message-ID: <20251104225636.49890-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] sound: typos 'to be write', 'writen'
+Date: Wed,  5 Nov 2025 00:02:03 +0100
+Message-ID: <20251104230203.50404-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -74,25 +74,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 %s/to be write/to be written/
+%s/writen/written/
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- lib/efi_driver/efi_block_device.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/sound/maxim_codec.c | 4 ++--
+ drivers/sound/maxim_codec.h | 4 ++--
+ drivers/sound/wm8994.c      | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block_device.c
-index 070747de515..c389b1920a8 100644
---- a/lib/efi_driver/efi_block_device.c
-+++ b/lib/efi_driver/efi_block_device.c
-@@ -84,7 +84,7 @@ static ulong efi_bl_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
-  * efi_bl_write() - write to block device
+diff --git a/drivers/sound/maxim_codec.c b/drivers/sound/maxim_codec.c
+index 505a739ad7d..a3750e18f7d 100644
+--- a/drivers/sound/maxim_codec.c
++++ b/drivers/sound/maxim_codec.c
+@@ -18,8 +18,8 @@
+  * Writes value to a device register through i2c
   *
-  * @dev:	device
-- * @blknr:	first block to be write
-+ * @blknr:	first block to be written
-  * @blkcnt:	number of blocks to write
-  * @buffer:	input buffer
-  * Return:	number of blocks transferred
+  * @param priv	Private data for driver
+- * @param reg	reg number to be write
+- * @param data	data to be writen to the above registor
++ * @param reg	reg number to be written
++ * @param data	data to be written to the above registor
+  *
+  * Return:	int value 1 for change, 0 for no change or negative error code.
+  */
+diff --git a/drivers/sound/maxim_codec.h b/drivers/sound/maxim_codec.h
+index deaefd93eb1..23f8341e59c 100644
+--- a/drivers/sound/maxim_codec.h
++++ b/drivers/sound/maxim_codec.h
+@@ -31,8 +31,8 @@ struct maxim_priv {
+  * Writes value to a device register through i2c
+  *
+  * @param priv	Private data for driver
+- * @param reg	reg number to be write
+- * @param data	data to be writen to the above registor
++ * @param reg	reg number to be written
++ * @param data	data to be written to the above registor
+  *
+  * Return:	int value 1 for change, 0 for no change or negative error code.
+  */
+diff --git a/drivers/sound/wm8994.c b/drivers/sound/wm8994.c
+index 42947357836..ae27947d43f 100644
+--- a/drivers/sound/wm8994.c
++++ b/drivers/sound/wm8994.c
+@@ -67,8 +67,8 @@ static int bclk_divs[] = {
+  * Writes value to a device register through i2c
+  *
+  * @param priv	Private data for driver
+- * @param reg	reg number to be write
+- * @param data	data to be writen to the above registor
++ * @param reg	reg number to be written
++ * @param data	data to be written to the above registor
+  *
+  * Return:	int value 1 for change, 0 for no change or negative error code.
+  */
 -- 
 2.51.0
 
