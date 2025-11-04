@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 172F9CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:05:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B3BCCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:06:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 870AF8004F;
-	Tue,  4 Nov 2025 19:05:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D81C88004F;
+	Tue,  4 Nov 2025 19:06:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fJhWnGXl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iH5v1RvB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7504A838CE; Tue,  4 Nov 2025 19:05:47 +0100 (CET)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 61E4E8390D; Tue,  4 Nov 2025 19:06:24 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A7BF8003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 19:05:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78DDF8003E
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 19:06:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-378e0f355b9so26145831fa.0
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 10:05:45 -0800 (PST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-591c9934e0cso9267262e87.0
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 10:06:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762279545; x=1762884345; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1762279582; x=1762884382; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2FIoRPeGCINfDDhGVo57w21CYYDTOTWjgfEBSTyP9YM=;
- b=fJhWnGXlw49+AAqHi5lWxQk3WdWjPk3IVf1t17PZbnAlXcaFqpGyV6T8CuNpgwUIdw
- iWd/ki3tP/yXFbj4OdadlQn5vSoHHjvFPRKcVp/sPHiWKFIVF0SvXFAfe3TQv6C1gETo
- guDjWzCiG1AAy8BbBnqgaXv7tNV2EWE2ZKgKxd+LSIlNnma0EM9NAEoeGDLOYVNrEAZ4
- vrQnYFeBaYs3yFEjVzxYmLLR7krhze4FQNngZXzwODJxSEu7xcAnzAD8F879u/gAmr3z
- qRxQEoWccwyq7n4E1YGDXWTqKA9W2dOpcM1hdPoxoLIghKTGjGRpFvo5d3DVCgqRyXDD
- WcCg==
+ bh=/9fC/JHNkm9tXqSM/bsOhDNEbM1nZnV4tQwT43rP2Vo=;
+ b=iH5v1RvBC3XNL72vQYiriF3I5FwLe3bsZ+yuips35VhRuKPMyOAjLJI7XxZAiK8R0a
+ R+Pn6LnBG+J8A7hsiN1qxcES34RdoDwQVue5unKYn1O7JrXkpIB6jsryWRwrEstcpaaa
+ QJlwJ7ZQnqqFAyxJFO5nXNHGVm/Jmm4sV+agA1/SyIryvn5Y+PSwW2kvx0HTP1028VJs
+ utI4zrvVYhg2vRN0Wzzxt1uopqYXUWVUaJyf9NCatFHcIb4J8Fx3xWl+YtOyiX/0e0y2
+ 0/BHaLqDGpZQNTl0sctGuB8B/+dKJQUk4Hva6nk+aOZ7mSECx4bn4p/mFSCaQvsDNkX2
+ tYMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762279545; x=1762884345;
+ d=1e100.net; s=20230601; t=1762279582; x=1762884382;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2FIoRPeGCINfDDhGVo57w21CYYDTOTWjgfEBSTyP9YM=;
- b=cNHdkFCu4cIpHafHVHO7FdaaM6d/AUWNXRhP9TRUSiKd0F2s0eq8f6tGTVQsQ6X8TR
- Jrd5ELvc06DIUbH+1wKzER2FjNvPjUmpxZVxuin84a94lMhFGYJCAdsP0gDD8BNxwyvQ
- YXNpbV6ZSp112Nqyst5zHlJ/OimngM6isyqWEmaDcIc9M5ji9V6gTEvKLcy0FeUfl2GB
- xzM3uWffeKEYo+fSfnsQ51+XRHMVwlKpupjxIcS+S8T59L8+lAFxJAwppZ/b/F8GvO0j
- tOOXkDWyLneVxjQwTBtJA9NCzBOJ+0iGvDzpEZLmK1Dvi/PGvvXq8k2D3RqyKl0FIA/f
- oxdA==
-X-Gm-Message-State: AOJu0Yy/ZYrptnHTCW6lSpZtXmESUdBJ0dZPM0SWS7cN+JqVZE3uXVDs
- J1Uvn9wj3qtmnbWVdXZGmcmU+sJVucYAUdE1nmDGWMObh6o9AABx5p6zdsRepwGFHKRy/Ij6ONZ
- QHiA0PpR51sPcQYJomCRIxb993Fswdhk=
-X-Gm-Gg: ASbGnctIqLcZw+bbCpMp5dUS+PNMZ/xtBUF2BRGq6nOeLTH9iXe7LoGwZLN5oWzcKtC
- 3454pi3IjGp04c4ZUQXBfkEiRYok30/J9jBoiLcU3yoQbMpVXP7xvkO0TXgObBoCAVO/nVBIAAG
- AJ0EjknYGmKX2r34U1HJK7jJGJWAKVn8Y6c3kP8pb4E15FuBWN8rSCEin/gZ9K/nCd8tQi0QWh9
- 3k3QR1Cje+sILbr7RpQBZAMpeqIzXGdXu/8C+5ybZuTMnaJVLpl9EQmrpfbK4eZSxORdA8XYUDy
- +Rs+gN1/w7E0zfDD
-X-Google-Smtp-Source: AGHT+IGuhh2K/tcckZNMpYLdv+itY0rEPODLf6H3l6GM3CMJ7uGN/uUtQ6Z3Kt5XSgVOjmCJk2KVvD3INZIlWtAgwSw=
-X-Received: by 2002:a05:651c:2127:b0:37a:3494:7724 with SMTP id
- 38308e7fff4ca-37a513db5admr696301fa.6.1762279544568; Tue, 04 Nov 2025
- 10:05:44 -0800 (PST)
+ bh=/9fC/JHNkm9tXqSM/bsOhDNEbM1nZnV4tQwT43rP2Vo=;
+ b=YRzfXsZuOQBdGtD7ytDjzrJ42ZX+mZzlr7Nham0s74kKZFIOaLnHg0KXPWzjsj9cBj
+ Z71Bu0Y+to10g1o9pnObXJ3rBEU/Z7oKpfPz9J3EbwIOKxZjkPB0WsrGAvcyH/dxXuSf
+ dM8BYS0SBiNFxsD8oiOybMkMyXqLJHYVqIQVxPErK5xdAjnLYE3HapUB8Apu1CxEPMjX
+ LwMwfvDbsDcPORxMUHdtWM5QdBsgZKKcu6QhUI/A/hj/V/qad1x5p4LBvxP1LCyffMvi
+ QaprUQbNkFePD2HOT8WBiCVLg3AiEqvZodRgXgqm8GjqQP7GV0bjLpZFA/XD+B8fOCEN
+ 5Agw==
+X-Gm-Message-State: AOJu0YzTgQ14z8tt1GkATxpEux1cA33q1yKh3fGMD/AzXAZLuYYGLPTx
+ W6yTpPxqilBZDfMK55p9O3rkCIetmxFeSJd8IwkoRDVjl1vu2YI8uYGKW8ePcC3kpkg5T1BkPRE
+ bOqUMHZqg0CsZgc4zWQ3QavAMeSuwahw=
+X-Gm-Gg: ASbGnctC5ZmmfSdeVNEEbVzVXUU9LQPMeVPSdkOxYaPipMbrunl625PvtsHdp2cqDfj
+ YFSwmJLNP8ND5d09cfPPA0qyKDfg04NdAzzVey6GZo7R937UbRl1OeNFvmIWObFfIXmeCTVj1K2
+ pJuf195BRz1cpABzftrB4iyzctOn4WfH68NnpNJpUfhJYaMZlpXSYpWIFRqqNcFLmtrBFjwYK6s
+ J6tDhDtBp+aXR3z1NhDNsFOB/5GPsEA/xDHE6C/uP23I85BvhcmCS1sZxXG8eTL424qgKDlIgQ/
+ 1uLUIcEph0UrhXDN
+X-Google-Smtp-Source: AGHT+IHXZPs9740sQMMz4GyNcAoqFyC9beDgVd3HOamUmy2U6m6fOig/35uwbNS/gY9Ug+YNZeJIToTsk2xNF79VBU0=
+X-Received: by 2002:a05:6512:2345:b0:592:f2ac:779f with SMTP id
+ 2adb3069b0e04-5943d75466fmr22348e87.18.1762279581596; Tue, 04 Nov 2025
+ 10:06:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20251103073654.2106782-1-alice.guo@oss.nxp.com>
-In-Reply-To: <20251103073654.2106782-1-alice.guo@oss.nxp.com>
+References: <20251104015212.220542-1-marek.vasut@mailbox.org>
+In-Reply-To: <20251104015212.220542-1-marek.vasut@mailbox.org>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 4 Nov 2025 15:05:33 -0300
-X-Gm-Features: AWmQ_bmtyaV19A3SMg0sOYKOL3q9lM1w78wNs9Dstzw9igKZC1soROFTNjRlCFA
-Message-ID: <CAOMZO5BE2S8ffUAYbuPEwJ7S1XhgrqEvD81hQAnVBEkPTpkOFw@mail.gmail.com>
-Subject: Re: [PATCH v2] arm64: imx8ulp: Split SRAM0 mapping to isolate the
- SCMI shared memory as non-cacheable
-To: alice.guo@oss.nxp.com
-Cc: u-boot@lists.denx.de, uboot-imx@nxp.com, sbabic@nabladev.com, 
- trini@konsulko.com, marek.vasut+renesas@mailbox.org, davidzangcs@gmail.com, 
- sjg@chromium.org, ye.li@nxp.com, peng.fan@nxp.com, alice.guo@nxp.com
+Date: Tue, 4 Nov 2025 15:06:10 -0300
+X-Gm-Features: AWmQ_bkkVJo8EOnS9Q5wfPMyVYWNkag3Nf4nXX5r_S0NerdP-R6GcFNe6_b_qGE
+Message-ID: <CAOMZO5BPV0Jbu=oBHnL0NqM71OBSeBgqpeGeHCbpXE88Qoe7kg@mail.gmail.com>
+Subject: Re: [PATCH] arm64: dts: imx8mp: Add missing LED enumerators for DH
+ electronics i.MX8M Plus DHCOM on PDK2
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,20 +96,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 3, 2025 at 4:37=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
+On Mon, Nov 3, 2025 at 10:52=E2=80=AFPM Marek Vasut <marek.vasut@mailbox.or=
+g> wrote:
 >
-> From: Alice Guo <alice.guo@nxp.com>
+> The LED enumerators are missing, which prevents the LEDs from being
+> accurately told apart by label. Fill in the enumerators the same way
+> they are already present on PDK3. Put this into local DT extras until
+> matching kernel patch lands in Linux.
 >
-> This patch splits the 2MB SRAM0 mapping into three regions:
-> - 0x22000000~0x2201f000: cacheable normal memory
-> - 0x2201f000~0x22020000: non-cacheable device memory
-> - 0x22020000~0x22200000: cacheable normal memory
->
-> The change ensures the SCMI shared memory is non-cacheable, which
-> avoids cache-related issues after removing
-> mmu_set_region_dcache_behaviour() from scmi_dt_get_smt_buffer().
->
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 
 Applied, thanks.
