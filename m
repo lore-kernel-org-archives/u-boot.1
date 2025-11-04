@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7DAFCCF9E3
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27223CCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:04:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E13A8004F;
-	Tue,  4 Nov 2025 19:03:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A71FB8004F;
+	Tue,  4 Nov 2025 19:04:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LHfcB84a";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BNE+2dBw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CB7B83655; Tue,  4 Nov 2025 19:03:55 +0100 (CET)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id 130198389A; Tue,  4 Nov 2025 19:04:22 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E8CC8003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 19:03:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 249188003E
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 19:04:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-378cffe5e1aso28891581fa.2
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 10:03:53 -0800 (PST)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-57bd04f2e84so6964281e87.1
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 10:04:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762279432; x=1762884232; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1762279459; x=1762884259; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ShQLT/Gp6SncTt0TeGuGeCyFJaPHLXiZjuYBlQsgPxo=;
- b=LHfcB84aTfz7WL48s0KWA3+IDo2oxRdLS0rIiZwO3rJg5EzHxy9DbeTaIRKl2tROLw
- Nt/2A2jhmumw5XOIwXSBwYmE2Sv5dT9asKfxGWebuWD8uO7Y2t+uMhKFr9ZzqYvYEH5C
- QwayDNeZXnuk+l7klCLbkn10W2MQIc2DsO1Z3VGqxHGUVWJa6yGOZ9pW+3ADsu4ouoyQ
- 2WIQH0rzC5t59UfkPf26dmR9qZzxi5JmGYYN2LRGgFa1TRaP7VvNasdx8zGn4YG2oa13
- VJmNUKw44DPST/TwNb9Jl3o/02/Gu6sLraAa8MWsXRaCkdsE5BKqu47/OxYWSLQbQgzR
- 2xxQ==
+ bh=UJP7aHmBxASxUIo2QFWkutUin2dndx9QdMb1Ut7uLlw=;
+ b=BNE+2dBwzA2m/fdRW7b26Z8ej5vaj1eIhuUHGtHfWQkmqIpZs6vuli8HCBBud1nlxd
+ 2X3W5UIFz5SmRg8fTu01You6fkTyl0di7SqjKuzwFSpJU0Yy0RLhCi/dsJpghCIvHkee
+ saBBs+eYmCrmI9pEUjqCbVjsWXsjEU2nxfHQ7HbfA4aWNZURkWtDBrqxTw9Ww2LnX6j8
+ qZD9fQ5KBJkc1FjWf0wK5pQe6kBTwdISgt8/MlsvtKLVEIlGK4pNjheZuW14jifpfWLA
+ ftwOFCFvHxDwxTO2bdSlqfR3bA+d3NPpC9zgLFsWeQe4wIx0JwrYc/p620s/qGRzsX7n
+ JaPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762279432; x=1762884232;
+ d=1e100.net; s=20230601; t=1762279459; x=1762884259;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ShQLT/Gp6SncTt0TeGuGeCyFJaPHLXiZjuYBlQsgPxo=;
- b=R4y5PQSIBtjM8kKImC8gGFuS1jfRLMJ7AGheLSERM832uJQ41Qr6pPbzuHVsz/axgY
- zQmG5Izk+2DfOTDczZ5YFCs7ztD0Mv5em0DUAY4R8fsJfE1PKoSYYbevhcyBPGnkPIpa
- 6rK26KSzTb8sOP+akDtGldk2DADR4ufr9pCIOZZbXhOCMoEdlW+VQvQsuaNBkYQf0ZcN
- Zby4DhH7Jp0r/UwSd3zt/lLSpd+mhTSjJaf8yG3tUJc9YfDuoKJjVe5TuT6/AuQHh6eI
- WipIx+jhTjpYwdSbH2WFR43kuseH9shW3PVHm91mC5J2INYy48SrtJQkQrBdBiSDjRuR
- 1Lxg==
-X-Gm-Message-State: AOJu0YyzNj0lfyipHk4jKIZN/VFUwFDhT5dkhUjkTCANldVyuxD4MnSf
- opX1DD11mmcO5w+5y5ss8lPwkMhPk4EbKh0ITBI7B6nURUI+sQ5PMHtWjq1t96ERGCYXk+v72Pk
- o3opA14IKeMVuBrHZIPo2Zsg1kujIOYs=
-X-Gm-Gg: ASbGncsb1BqHTiZLw6HGGB18kuweb94/bpj8ewQoMvwGs0pQg71iBV8SA52KnFXLZWW
- aqoHfvhVcbu/jE00MdL526Br77LlwQzIg7AABQ1vWSsEZgkHgyKdG3DMeKhTsrKO9s5uBr+hFNO
- ERCgpmKiML3erE5lHKC6WC+6ylwaAFvQ5jjgwvG3gM+FPPofY8VaVtHoChX9MRX6XMopHgi90Le
- cSMnj8VLnJh5AbEKsjXqkNzJbTJ1rBNjgLHlT/npve4Zm9u3eGQhCLZVJ6JPNmlUqyn5975isjQ
- 5Tq8cZySUZq3EIa4
-X-Google-Smtp-Source: AGHT+IF4Ewb3eeXuNVmHODaNcDsn2K4xE0B1T5TnQVkEmlwxIxGz9izITHaawAmR0qXPc3x697gne9Q1qLcRE6uBf4s=
-X-Received: by 2002:a2e:83c6:0:b0:37a:3751:848f with SMTP id
- 38308e7fff4ca-37a5149d185mr434181fa.40.1762279430649; Tue, 04 Nov 2025
- 10:03:50 -0800 (PST)
+ bh=UJP7aHmBxASxUIo2QFWkutUin2dndx9QdMb1Ut7uLlw=;
+ b=vEvAcHupYzyi+cXNDdmUBS84wX4lZyBkVzh3FNMqvu9QO2GsKAVYRCNgc8swodu8wq
+ Shb4aJwEi0jXmaCZI8Z2vPSWrhICFchRMBTcMKILra89nSaYk6y6TTL8LZx+qwqwG02K
+ EkT51v7Tmiu5VmTowt1REtR37T/1BsbIrrEMAVckF3NkdFn6maMJEBLw4Hh3wKjXsbxW
+ WfWmjxwIK18Z7MUYD42Is180btnEwxZ9rMZ9hSizxRvYNsjNphnkjQVvISUHL4qk4LKS
+ NU3daHTSwSQuy9neJT2IbI7DCcUm0gyK2PVTXU1Bwz31FjRJtbqvXNPvkpF3E6VcMzxO
+ lnhA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWJ/m7Hnfteywghc2i3I6RXKgCbWFr6Fqo+4JPBZ0vh58dcnBQ9t6Vk71IwlZ8tykkyhbzaGeg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzq+yyxtWqNOPzF1AEuL/n7bh9ghV4GkWFMJHffUdNB9xsfAm7o
+ Gx35GT3omsz3wzYa97VI9l8jpDt6zSKZqichbUdco9maGfVzOAHixgs3kWZzdM/MHF10usr5fKY
+ +TTX67VgKJYXvuxPO41a24XRmT2vxTipTy7Jk
+X-Gm-Gg: ASbGncvyLwn6ae9GZoxRq9/3jHeUwOBFcbLzGtbXO6OiZ4ktuwK/FF84wRs3cNsEgT+
+ 7LIulVe2i/SOX4ifDwJP0IdkagmoC0SB6gkRKQTcX7b7bvwt+HikLBjsUzvQcsuuRDku1pxNL6p
+ 5l7ztiSfEJRJ6z5HvQi4LLXhIP2DqVWRy2XE5LYcA1HQWTiJ5KWXcMQOJ1LKmuqPF9bGINmxDWT
+ TjUSSHMw6tjlr8U4a2kmKWtGfeJIz58nQPMsGuc2IvTTUg7MBWJD5LqCmCO1NLluUylzeW9tAe2
+ kjgbN5Uk5hdHwfAw
+X-Google-Smtp-Source: AGHT+IFPNx79J55hKlB/k+yoTL46a5Asf8Sovn/bF7wNG3BaFeXeafdbpBrXgl0d4TJ9sB7NgKejm1QkAhi0M5pO7jg=
+X-Received: by 2002:a05:6512:2248:b0:594:2b8f:3b4 with SMTP id
+ 2adb3069b0e04-5943d7c3817mr11545e87.30.1762279459221; Tue, 04 Nov 2025
+ 10:04:19 -0800 (PST)
 MIME-Version: 1.0
-References: <20251031074611.39426-1-andrea.calabrese@amarulasolutions.com>
-In-Reply-To: <20251031074611.39426-1-andrea.calabrese@amarulasolutions.com>
+References: <20251031083904.34273-1-francesco@dolcini.it>
+In-Reply-To: <20251031083904.34273-1-francesco@dolcini.it>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 4 Nov 2025 15:03:39 -0300
-X-Gm-Features: AWmQ_bnq8pmabB6G1F65AvH4MHoafvTL6yYqLCeLiJ0UivbUxFxcCdDMBEyzuUg
-Message-ID: <CAOMZO5AJoHXOD11hoVgKV9QjNvxwk_Ox+XN1-UPRYnCPzAA-=w@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] bsh: update readme with instructions to build M2B
-To: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, michael@amarulasolutions.com, 
- dario.binacchi@amarulasolutions.com, trini@konsulko.com
+Date: Tue, 4 Nov 2025 15:04:06 -0300
+X-Gm-Features: AWmQ_bmO7sMGRyjHPwS-t1cKUcX1DyLWCNYAtvFa61Qs4SFX9r7e_k35K3Kdfgk
+Message-ID: <CAOMZO5CFXOuRjRd0vhvqvzJCKq8n+Ggc2THG6AASRsodEZC5Wg@mail.gmail.com>
+Subject: Re: [PATCH v1] configs: toradex-smarc-imx95: enable USB Gadget OS
+ Descriptors for fastboot
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,15 +97,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 31, 2025 at 4:46=E2=80=AFAM Andrea Calabrese
-<andrea.calabrese@amarulasolutions.com> wrote:
+On Fri, Oct 31, 2025 at 5:39=E2=80=AFAM Francesco Dolcini <francesco@dolcin=
+i.it> wrote:
 >
-> readme was missing instructions to build M2B. Now added.
+> From: Francesco Dolcini <francesco.dolcini@toradex.com>
 >
-> Signed-off-by: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
+> USB OS Descriptors are used to install and configure the device without
+> requiring any user interaction on OS which support them (e.g. Windows).
+> Enable them in order to improve the user experience when fastboot is used=
+.
+>
+> Fixes: ff0540fcfe49 ("board: toradex: add Toradex SMARC iMX95")
+> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-I have applied patches 1 and 2.
-
-About patch 3: please rework as per the suggestion I sent earlier.
-
-Thanks
+Applied, thanks.
