@@ -4,162 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5106FCCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 17:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 306B6CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 17:45:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C62E8835B3;
-	Tue,  4 Nov 2025 18:05:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 6FAAC808AF;
+	Tue,  4 Nov 2025 18:45:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="bdYqVGm2";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="R3Xe8vxC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7175B835FE; Tue,  4 Nov 2025 18:05:51 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id C751583655; Tue,  4 Nov 2025 18:45:07 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EC928003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 18:05:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 4FE538003E
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 18:45:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pJPAhrFhooqsWkirG4wWLCux/xuEHLoKo4TDeMt1FOD0ooQB/8rsZjfRIIbLSHrBorG0LSNmGDMhwLxOrnySWYmbfROZoaO2VqmOGZYBCv6zg+JOWle1MfJBanL49KM3BL9EO3e5uihYwAsk7WrWZT+1c60PSjUYqGp0nMntn8NP6G/JYZk78YJ2zCEXDWywqtKEDNEVVC81YEUUv+9wHQwOJ8z2KC9P9cRNKq+kB5mUHWgCqWya2zPBOqTO7o4Ynx3cEW5wCyIZdGg6rG5GJplYZM8AduVDPnSPddZga40Fogw+W5YyjAzuN4mC2JJqIKcAeAYAcgz/DSe5NzqbcA==
+ b=iuEqqJCBMMisRDZSBhVdH1Enb68oCMCzbZMH2Pfao/SevZWP5Z9yrvZDbjOWUBAc2e5f60s8iIvZfOEOMPvKopxKQjGFh2BEjvSnxXdHx69SPWDAQYLwCnkEhlm+T5JPNC6vcA3SZggdABB4YsQEQqTAgLEuwJapy1HXCJ47Q9xTq4Bl5nwZDDjTLCWnJVefZqftc5VK/G88Bd6g33TegbXNo1VBqEiUd2r2GNbM2Elf1geQYk+r7NnWZMXC8IvqGGEoWV/0NP+0w2G+hc2xdTCp6YJ+L9NmB2205ZR4jCTq9tztiqKXs7UeV6U/exNxqk/yQ8k/478n+D6wFYcr/w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=140ZzCBnywXt6FauH6osqGLy5817UY7bLRSQ5Zi8+hY=;
- b=pHFP8f/2iXSlYKKiR7l3w3zLZZbcnjmYXfwbBIKq3+u3eEXITSPhpyfbbqqdWmJ9LJ6i4dGsTRAy2WqFsiRCBOMKwpzFBNF3LN5FOXfopRntIb330/BnYagDeV4fDXPM6gQe74Nqr9jJpdju9dz1KFBLrNpvG5LEyP1tUzkXAmMH34nQ7oQsX2FSy5llnuL40fC+9ZGQy9fuAY047GDdh8CmJOaZCvse5/UP1myxwJWuZgSv0oNn857uqOdyQS2lCc3J30aH7mTvXH6TL8d39056pXVGDBCtberEnn9Vv8zKj8TL4BAVBVwD9v1aZeQkIxHCrlT3jne61PS+jd8J8A==
+ bh=qQ5FM513p+YDAeH3ykq5rCOeTzLBKo4kh0xjDHxOiDs=;
+ b=fO2SRmG+ZibRZXt4pIqwhNyJSOYsmHJAVNwwbXgRtNa8GtfjrMnwssCCKihR8YHizeAGxu0QFNGQX/SylLbi9y0Qy+sZJg/fZrOhrGWjMlv2sfgDG/y0uyCSQ0g+zp19F2KfZxiASNCM5KCqJfnbhYFzx5bruxGE3GG+Kon8K+wH7xOSrOsnOe0c8o5/8+jYLiG6e/JAtOL1nPugOxKTSBuJAx0ergR8Ho3I183xtN/almHuk0ISlk8iJltNAAht7cvSYzM5eoUmrmrAzSvjOf/VfF+qdSuaBaNvmOvNwsXIxGpffAnKgxvfVvNagoyJIsaeOUQgstwUr2zY+5IqGA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
- dkim=pass header.d=phytec.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=140ZzCBnywXt6FauH6osqGLy5817UY7bLRSQ5Zi8+hY=;
- b=bdYqVGm25/TRepNd4E1wi/XYQfcJ1m4YVc8B58n2l1cGyiLA3guTDsS5tfDqRYFMC6MbPvKJCyFyF0v4yvnpvRWzRc2YAzGgBgfBVgWx2Lp/ejq7403d1O9pFnfc5JPg1+rS26xZSbVwPQhvPNwutYmSDkjPNZEU/myTVQ4uf7Uy9sap08mRGfnut3tQfHmFJoqMbVoFApLNuD0ZGwvGpBJsQ3P3k9skuEU6jLW1ZNsBg9dt+kNt6Djk6KRUt2vwhTEV1d+7nHGC8IFA3ulZoBW0AAJ0RCnKbKSu1ms1mLWkaPjoJP09kvAnRzBPFE9NsFNF+8dsjluf5xm/7s3/lg==
+ bh=qQ5FM513p+YDAeH3ykq5rCOeTzLBKo4kh0xjDHxOiDs=;
+ b=R3Xe8vxCgDwIfrBmFvEXbFnoXSau0DT80dLJImYqIIdAHcDLWznka4FupknUSvGiKX82dp8qxlA0eg3/53dn1EDdpYegSySKd36Vc5wWzZ2GUUPvH6MwLjkGyldlHxOqTHWbZxnHo5PbTmWffzuEvAsaGVFil6mQ5eJl6vpGcHs=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
- by AM9P195MB1029.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:1f9::21)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by DB4PR10MB6286.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:382::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.7; Tue, 4 Nov
- 2025 17:05:47 +0000
-Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- ([fe80::369c:a760:5bf9:8d4a%2]) with mapi id 15.20.9275.015; Tue, 4 Nov 2025
- 17:05:47 +0000
-Message-ID: <11e9ea35-1dc9-42ae-8059-a7f5eca7e0b7@phytec.de>
-Date: Tue, 4 Nov 2025 19:05:27 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] arm: mach-k3: Rework spl/get_boot_device()
-To: Andrew Davis <afd@ti.com>, trini@konsulko.com, n-francis@ti.com,
- s-k6@ti.com, anshuld@ti.com, bb@ti.com, ggiordano@phytec.com, b-padhi@ti.com
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
-References: <20251104152459.3648004-1-w.egorov@phytec.de>
- <20251104152459.3648004-2-w.egorov@phytec.de>
- <bf5c3446-7ce2-4835-b005-52e1b1b677ba@ti.com>
-From: Wadim Egorov <w.egorov@phytec.de>
-Content-Language: en-US
-In-Reply-To: <bf5c3446-7ce2-4835-b005-52e1b1b677ba@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Tue, 4 Nov
+ 2025 17:45:02 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.9275.013; Tue, 4 Nov 2025
+ 17:45:02 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Heiko Schocher <hs@denx.de>, Simon Glass <sjg@chromium.org>,
+ Rasmus Villemoes <ravi@prevas.dk>
+Subject: [PATCH v3 0/3] reenable dm_gpio tests,
+ add support for gpio-line-names lookup
+Date: Tue,  4 Nov 2025 18:44:55 +0100
+Message-ID: <20251104174458.3385564-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.51.0
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1P194CA0060.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:803:3c::49) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:4b3::21)
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0102.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:9::23) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|AM9P195MB1029:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9018230c-2a4c-484a-e835-08de1bc46602
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DB4PR10MB6286:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7e309969-ff5b-4f1f-c439-08de1bc9e1bb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZUhla0VTWkt6L2UxMGQ0VDFGYmtkazhYQnVJVGhQSVNBc3BKZ1dibVVYWUlM?=
- =?utf-8?B?cEZ1czNKTklla1B6U0FXMkc4SGl2WmU5UVhCMnlYQnh1WitIOHFXcUNYaGVv?=
- =?utf-8?B?WDZYTTB5RGk1WGJkclBPTDA1YTZZWncrU2pPbk4vNjVvODcxWjcySTRvbitj?=
- =?utf-8?B?eldPK0JhR00xOVNIbkk1cUhaYzZIY2RFTHNUekorNGVpenQ1dURDSHU4N2dX?=
- =?utf-8?B?VnBhQ3M5NTh5OEp4WVRmYWJuRkdYek9xTE1FaDhqQXNVNGtYK1JWdGI5WjNX?=
- =?utf-8?B?ckNFRUhkTjBrZkhaVFpNNDc3WjR0K2lYQUNxZG5oUWxuVERGbGdmMGxkcTcv?=
- =?utf-8?B?a3FGZWkra1pqVDlJZGFEcDB3YmNGcFI0UXlKaklQVWhZZ3BZMGdyRjIzSWY1?=
- =?utf-8?B?ajJuZXNaOWZaYXNLeDdIcXV5dWFXM1VMVDh3Vk9oMTZ6TDJmYjFZb3dCajFi?=
- =?utf-8?B?UWFYbFRiVm5ERzFRcERZYm9wK0VpdDUzQkNGeXNiUlpiL2pEQTgvaDZ5M3Fp?=
- =?utf-8?B?WFhhazRBeHlVRUVqUVhxb2VNaDk4aWNpWmhjMjhZWUJ0MHJGdU1helM4WUJv?=
- =?utf-8?B?WUZOdjlQUE94Z0hTZWxWN2lTbXNwYTlhRlduV0VCQTkzSFJJR2pQYk9rY1lk?=
- =?utf-8?B?TStTalZ5dU5ZK0ZGWTBLdGRPaExDazZTc3RYSC81MmI1c2xPbjJ2QWxnMjFw?=
- =?utf-8?B?cGNhbFgwNTV5NW92bGdvekRGTmRGaW1RREtjczRYc3lMK01CZ3poWWZSQm51?=
- =?utf-8?B?MnVlL2JOR0JoT2pkdVFXcVI3cUYwWGVFSVVjM0VkTVlDaFp3VXVMQkdyM2JF?=
- =?utf-8?B?Y3hxbEV6Uk9maXdldndqNDBrNkMydm9BcEMvVFFpSXV0UkRNU2lHSU1OTVZ0?=
- =?utf-8?B?VGJFU1NDWFhpTEtVRHpxOXNLYUpXRzMvdW5YTExXWXhwaUhITUNUUUprTnEz?=
- =?utf-8?B?SWlGRFlxYkt5MXZxT3VPY25Ba0R3NDB3ZkcrTzNIbW1kNDE4Y2s5cEg4akVn?=
- =?utf-8?B?b3NSem9ZZjFUQlExMnpWdzJFaHBPNVllRXp0dUlFdHZXREIxSUtqdS9JZnhk?=
- =?utf-8?B?ZWRtN1QvOWd2T2lsOFJ3aGNrMHVOV1JqSWp4TVVSUWV3aC9FbzBvSEhXMy9O?=
- =?utf-8?B?YnRXVjVZc3lsZFdDUEw3NTROM3huaHdwZTVTaEc0dXZmczkxSW05aWl0ZzVO?=
- =?utf-8?B?S2FLdzdXV01OZTN0QlFFdWtiTlF1a2IzYkhMZlkzY1ZKNXYvc3hKaEVqN0hy?=
- =?utf-8?B?UitFYVlWeEtXNWJvS0RpSDYrcXlHM0ZqVXMwdllYR0hXaTduWXU5Uk5QdkpM?=
- =?utf-8?B?bkE3YnQvSGNhc2JCWi9lc2R2SXdXU2ZoTkExejNIb2NEUzB3cDR4a0pCdnN5?=
- =?utf-8?B?Ti8vZkpyRWxUanVPbDFPSWx1Mkw2Q0NsUHlhQVYwcm5TdXhxdkhpQUlsd2p1?=
- =?utf-8?B?K0VRMUd3OW5BdS84ZUFYbGluTW5JQkpqMVZxUTMwZVh0MC9jdmhSY20zenRV?=
- =?utf-8?B?NjkyNXdwaGhyTHpRajZVNkF0dFh6UjF3NlJSZlU3N09uVkpteG1nMGp2bTQ1?=
- =?utf-8?B?K21NWEs4VzBXTDVkZkFUbElhWktLZk9QQUdHWWM1cEdBM1ZNOWdYWHFZN2xs?=
- =?utf-8?B?QjFnOFo1NVk4SDEzRDE0aWtSaUtUcXNHVzdzc3RFdWxvMzdYdWpFc3d5cm9U?=
- =?utf-8?B?Q2tnVXhydmhub1JqWTQ3M3RRQUJuV2JqNGZhd1Z1KzJxMkRvSVJKcEQ2UFFK?=
- =?utf-8?B?TzFqVnI0b1oyb21rTWxtQlhJNGdxMU9zcllVY1hWZG84Uk1ZMWZEenRycnEy?=
- =?utf-8?B?bUFEWit0dHFIci9mcm9TNE1qVEx2cldrcENrWXdYUWowTHdNSEVSMlFJNnBr?=
- =?utf-8?B?Slk4VXdJZG9TQmx2c0xuQWtmeHlpNE5paTdmVXRRVmI0SXpLWVEvSDVxaFdq?=
- =?utf-8?Q?FsDjWJvGyp0DJ8BJPwwHpTIF/tu3VdlS?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|1800799024|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jhjFqMQ0bGJQUpcV6GuAZORDVhYYPAdU0V2cYZgCn7QQO4v5L2Hc8EdJ7Lub?=
+ =?us-ascii?Q?I+wIIqBxzt2Fs0lwVclePheFR3BIMKvXzSGUdhkVUlCm19C/BxVNHRZ4lnqK?=
+ =?us-ascii?Q?ft7tbWQgkVq8+8rI0zztEb1wRT7h04HL9POQJpOwYEtOU95MNKEb9fE5rqIz?=
+ =?us-ascii?Q?aV6YLiW7avsmA9Q8ap7+Tbh9e7wjx0uxH1dGfriJyPumZ7Fi3S8zTKvJjMBP?=
+ =?us-ascii?Q?LMxA2SKx4kABcWKgJlWBtq8fzu7XIO/ek6bm9K7GUuSQVN1N6dMa2qG5uhQ1?=
+ =?us-ascii?Q?+CLthBFEeOJZKJCNx/gNACz8v5FGrbsMcktIyn5aGsjfM/eynflwEZV6n8mh?=
+ =?us-ascii?Q?v8OI8ns9Pq0ugwMnUYF3L5+Wm/qm+6RzgRhf4pAtB1obZE1KtjeDswVZDix6?=
+ =?us-ascii?Q?QKLBzqSccRjDWbQMo8i1gZyT6sSU7SyhMZN7VwrSAGZsPI+33BdRWrR9ValF?=
+ =?us-ascii?Q?5rWJfdjJTw4qY+HrafHZ4+k5X6RiUKCqvARWR/iolNoo84VzXCPkROyipm9z?=
+ =?us-ascii?Q?G3QXxZ8sNCPJijRTYoUWoVm2cvMkgZeVSrM+ITBrbxL0Y7gHeDEvksnMwdEG?=
+ =?us-ascii?Q?BuNr9Hv85AzKLqLEfUGvQu3QlXnn6ZMB7wnr+7tZjyQZvmSh/Ji1KvpDA2po?=
+ =?us-ascii?Q?fYzqrfLlpuTPLDBXiG44FnmNqRObYgs4om8AJFqRhS6dBFElNrl0pdprixQF?=
+ =?us-ascii?Q?RVXqOhKL2POi0z6ugmHRxrXM4fiWxrL0OXMXE3+SLeD/sPzKeP09wcnsLEGJ?=
+ =?us-ascii?Q?gJ1Dd2aPjsnNKLODIQQ3qvNaVetS/Cuw9DQVbgHxSJIIhZ9Fp4EuVQjQkPzv?=
+ =?us-ascii?Q?GMFcqEMLE8Y8MyC2ssfttRIr7pCv3JCX3XKQ7Q/px5BMXKX+k2SDLOedouck?=
+ =?us-ascii?Q?+Md8RFV4lXZjZpLMiP15cc1MIrgcuR4fNSO6Gr3sja9O+jxmOxozdcMplzP6?=
+ =?us-ascii?Q?tGTmqsQ4T0dmGS8/U2UrAIMzC+zAVhJCVxfAbmuDdctfkKXK1hpmsK8/+ruG?=
+ =?us-ascii?Q?u1tBWLjUDt8+pHSMGo3tPBxAxUtU1PSZ03oPES61P9/YR566FEKNzrNaywk4?=
+ =?us-ascii?Q?/cOiPwW2jC+6UPxRT3zeD5TZU0+5fYfxU0msaPB/t9WnFM2XLkQfmYo/IoTp?=
+ =?us-ascii?Q?2Vdseo7ZJZdnbjbkcri1+konPTKvIMnc9ICjbnBJjsxnKpPSJ6X9D4cConIY?=
+ =?us-ascii?Q?tFp6KrDFYrYkh10JJE0eCDUEICSi8kfHjcjtPmjGNx3g4NO2E27vf8ezhIom?=
+ =?us-ascii?Q?QHOBPmKxA+OnQygDQqI8uVyyw0NiwmuDs72F8tSB3qytaG6v4tI1Qv2XPSHW?=
+ =?us-ascii?Q?IfZN6tbDM87waoEe1+oyW9b33sDxBZntMDP7QOZShRrO/7F8X/SFeDd+08Fj?=
+ =?us-ascii?Q?kk9+kFCvzLp5cm0wo4kRsluLH8mTM27TWvpt8RQzytlxbkhJd9gP60YiESua?=
+ =?us-ascii?Q?YyeMWmuBX1Wv6LMWlgcsErm0OQ/UMFObmOPL0EUGGNkYFXDSBJu4BDS1xyls?=
+ =?us-ascii?Q?ojqA/xhj2xBcv2T4ym/bdKcX6Oy9uqtuhn8l?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1102; 
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(1800799024)(366016)(38350700014); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Zk5kZ1M2VHpmdHdmbHpTRzhwbGUyS2l5N0JXZG9ySlJJaVlXRWZkTkMwTzEy?=
- =?utf-8?B?RVk5eTNaWXJRWjRxOTlDZmdpU0lmV3E4K1BMUXM2UFZEbGxPSlpPZEg2aTNz?=
- =?utf-8?B?RXkzaXZpTG5HcWZQZnNJNnpjWDRPRzJFTVZ1eUpZRFFqcU1TZWpKTFljcVF6?=
- =?utf-8?B?SDhXazk3cDBocFgzOUFPaGJWWXhhWG9pR3B3c1dIbVBhTktWQlUvNGtrUmlC?=
- =?utf-8?B?bTVkVnRmTFhjQzRXNW5HeFFqYnVXdGhqbXlHSVZPbEV2OHQwVTkwNXVaa0M0?=
- =?utf-8?B?MkpodkZPRjZxSFB5VTNYSkpMaXFaV2pnbkE0VEoyREVFR0FHeDlrQ1VWazFY?=
- =?utf-8?B?bEVSR0JoVWpQcmlqSkhpdG8rbDZtdlp0d04weS9PTzV3S1kwZUhWRUkxd1JL?=
- =?utf-8?B?ZUE4TmNhTDQyQUpwZStUeUxEb1B5SmRvL3A3UUhUeDZQdHcyYk5SaGNaMGxI?=
- =?utf-8?B?NmRqMk43VHliL0JyNWYyVFU3ZWFLT0tZRFJHV0lxbEVmbFFLdEYyaUpwTDhG?=
- =?utf-8?B?elhaaTBvTlBHeFV3SFRwZWtwaWMxZDA1NXFHSUd2eThMS2RQNnBUVVQ1NFp0?=
- =?utf-8?B?ajR0VmwzTFI5clkwdU81UGZUZmtlTklXSDZzbFNQWnl0V2QzVHh1a2lwRHdF?=
- =?utf-8?B?Zm8vQTlKd3NoS3JQVmZJbGRJMmFiUlNyMEhhTHlNVVFLR3dxSFBYeHZYTmVP?=
- =?utf-8?B?eDR5ZVhuL0l0OUEvT2liRWVXSkc5Zk10QVFIbURaQllPQ3Y2K09jRDFDYWY3?=
- =?utf-8?B?Z1lvT0pMb25WcEtUdVRqaDI2ck1RMjhuREJjRHp5RVVrTFhLckQ1RG9veDZl?=
- =?utf-8?B?NlovdmdMSGM1SnNKNEExUHczcXE2ZFV2SFZubzJ1SUpDTjZ5QldSSExaWVRS?=
- =?utf-8?B?cmFYdjJRRFZiMXdrcGE2dmd2aHpMSFRwanZUK3hXbnErOUkyZmRHYmVFWXkv?=
- =?utf-8?B?UFVGUkFiK0Eya3V5U25nS3VyTXp1bXM3aUhOeTNLWmp2MEpwMGhPbXJjejVL?=
- =?utf-8?B?N1JPU3NlVWxxekkzSGtpS2RWNVA0Vyszbk9vZUdiK3Bic3JScm0yWjhYN3Yz?=
- =?utf-8?B?a1l5L1dnS1VZekYrM0hhU1JHUStMajdERWgxcG81b2RJK2FhMStTdDRZV29v?=
- =?utf-8?B?MStveURXMG9LTnN0MEtmNDM2NVo2SzdBenlIbmhPUUJHcXRiUmI5R2ZNOUhI?=
- =?utf-8?B?MlVuUXI4Qkp0Qnpacm9MZHpDWVRDbkE4ejNzcXdJVVNUMHFCSWxmSkZMU091?=
- =?utf-8?B?NmdYL0dXVW1aT2U0Q1VWanhUa0lkQUFqMzFhM0xWR3crOGVZRFNZMnVTdnNN?=
- =?utf-8?B?V0JtM3lTWFVwdlAyUXlSbXpRSXA4dlRYTXNTMXhpQzZlUzBxVmk4SlBWZERT?=
- =?utf-8?B?bzI0YmM2c0J1SDljbTM5NjVyaE5iVVJsNUVGL3dBK3g2aThVT0V2dDhhMG9V?=
- =?utf-8?B?cnZPVXA0VEh1OHRCREZ0b0dRSjhuc0pRMlFTdnlVeWZmaXMyOTMxTkZkR3Y4?=
- =?utf-8?B?QnpGS09lM0FvalU4VThFNnhac3NrV295Y0FuWXh1UEhOS2MwU2hTNS94enIz?=
- =?utf-8?B?a2xHQnpReFl6eElENDZPNlVZRXF4c2QzS1cwZEIrbHFmRlllaFpza1pad2ZJ?=
- =?utf-8?B?ODk2RWhpS0lzam51b28ybHp2NnY0WUxleDhFSHAvSzFxMDdHVkZSWGg1QnNU?=
- =?utf-8?B?eDJ4N1Jib2NOQU8wdVo4a2NTSE1xOHZMN0tHU2JBWmF4R2VYU1ZkQkd2SkJw?=
- =?utf-8?B?bEFjNHlUQ3hxWVFIUDVIS3dNbHo5NnBtZXpYam1GYUdVc05pMzYwU1dJb3Z6?=
- =?utf-8?B?dnNyOEJYRUxEa1JVR2h4eVlPcFVxNGoyZjZpSSttUE5ENmN6VGtybEwydXdO?=
- =?utf-8?B?V0ZyVlhYV3IzNVdqSHJMY2xhWWNXaFhzRWpzWlc4MC9aaE8vUGxNN3dlZUlH?=
- =?utf-8?B?eXNyUzhDdSt4ZmtCNkZiZU5pUmMvR2RuQWtDZHZQMmtrT1poUXAvRTdLQnhR?=
- =?utf-8?B?K3ZLNHF4aFVodUZMNnNjM1poYTV3Rm1GWVk1YUkwck1QQ3VGM0Z1eG1YQVNH?=
- =?utf-8?B?TWxlcmV0QS8zMjZ0UVJIV0xjYVZGbWptZmw5KzUxT2ZGVEF6WDI2Qjd6cXFP?=
- =?utf-8?Q?G5qJAou+AtxOTiN9qiR08X4gK?=
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9018230c-2a4c-484a-e835-08de1bc46602
-X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8tSon9oRqrz+8c0TpSEwUFWCoCNS5tjDPVMdmJDZOW2NuXkj2+S2X/Ivb6Nm?=
+ =?us-ascii?Q?sD8xLGHtSWaHv2Phhf+LYJjxmoTtQaqDTher5fFm36eoGDcHml4kyJ1zjSDt?=
+ =?us-ascii?Q?XX7qN1Oo9pMDua5d1dfnr++BYnC9dQziogE+rXd1yOUIJCKS9yR9rmJCZ8vE?=
+ =?us-ascii?Q?9VOL6LJxWT0o6OskepL4lIDi6NKAUZU9dKOMbIvgQu1tyOVdPTzwGHJUqV90?=
+ =?us-ascii?Q?F/V3WJfTNxke083d487k+iMAE8T2n7clX3NsxMBM4qf6es+6kDOjPMlEBtaA?=
+ =?us-ascii?Q?MitB/GDrKuojrkuP4GgJT2lH90jYWvf31h+Cj2tdDOH7hSeIwfkuZiHDJTRA?=
+ =?us-ascii?Q?NM3/7LnXoxaK/FgvL7JqxtNZzwQHk3+F71y7/ZEyaG0UwEBUiY+ESeMiyEmq?=
+ =?us-ascii?Q?53RBPrpP/AoCEeMEz+l1Pvpswlwr/b3oGvJljmRSsqTx+4EZgXYi3Xv4FW2M?=
+ =?us-ascii?Q?zatPOaWnU3FWFgLVLfsPBrOvaVqWREiE/zhPLvuP/D+3sB4zPQiRV/KYUDiS?=
+ =?us-ascii?Q?JUvYdrvDxlcOuURAQ/1wivss3dtD6NH6UVLQooUeMhPJpbUAWRHOk99OGo1C?=
+ =?us-ascii?Q?573p+WmmHfMucRHHdjZROx7RsykKENVCiDghxRgfxEE0U2y4i+zpwyZVwxDb?=
+ =?us-ascii?Q?HAh8xI9RlZ7bA4RBtKJEuUDwwY3IOYpWCy8hsX8s6a7QGvCEz7csA2jXOkP5?=
+ =?us-ascii?Q?fn2Gw1OOYDGd8mmOGFyrzJK6Li6cGxkLbDowfgqpY6uv+7OyfPYWsfIYD8AS?=
+ =?us-ascii?Q?hXNTD4CLkFs/u8OCYavwUpPcp5yuNyek8z11K4ykKeX2d6Kkf+I3z5Wiul6B?=
+ =?us-ascii?Q?/N6sZDfb21gs/OQ/7GEw8AsuRBfEM9DOSEHFnNf0ywWeKOIMUo7sbe7Mlnj8?=
+ =?us-ascii?Q?dqVBp41RGSc/ivcCcSOqWvbeQQoLQj1OlO88izk6NQDj1oFHaQmFWNTMhnnZ?=
+ =?us-ascii?Q?mv/lTuUTFY6j+ytubdM1ca0eYMCIqoitATbByoU5PO1c37iZdBnO2Xs+E48e?=
+ =?us-ascii?Q?0VichRvrBjOQCQWuqJ+GX3Y77tLZtfcYc0SBgf/mxvFCfdj0BdwhHSy0L+s0?=
+ =?us-ascii?Q?OybATjc/hyRfahojwT0IZZ48WdlUQn6lBf/XmPkHVb4/nfyr/zeaoRKOZhij?=
+ =?us-ascii?Q?uFdC27iDMXCmEKMXNXsuL4CfCefEJ2+T2A8tzR7dLfmvy7e7ym1o4xkyqelk?=
+ =?us-ascii?Q?p1GAqmNLaTaKkVFy44H+4pZRhXHr+V2FLI/XOxu/tYEROi/7P6/4cWSP19fx?=
+ =?us-ascii?Q?uDPwpQJkBFrjugZH9AKWhgu3qZL98n0je99HUyzfX3zC/g003rQ9olJd4kI7?=
+ =?us-ascii?Q?0bGChOkQJHObLum/JyX080BXb3vA4KZOUqxvTtDMKX1SI89brXKA6qJnqVeO?=
+ =?us-ascii?Q?FxteX5hPmPXl6Jl75UpIOL53UgV0nLxz4I4XGKIYGe4co6gcvOuttuxxrQYC?=
+ =?us-ascii?Q?yKchDxO5kHX3WsBhVoD6tKUUE8vOY2GX9sWSc0YA6iWRQlj4+TSnM3TLZ6h7?=
+ =?us-ascii?Q?TDJ4EoTBr9g6JgbM3ZMDDnTa2a/+FrEp+i0ukhUIsHGWzSgz81/5HCxFn1/5?=
+ =?us-ascii?Q?PGgS20vAZatqBehOGLKQLEhGUdg+0ohPpWy1Kw1LZiMKIbTMVg+Nd8UcokBG?=
+ =?us-ascii?Q?wg=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7e309969-ff5b-4f1f-c439-08de1bc9e1bb
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2025 17:05:47.3877 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2025 17:45:02.4575 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gpMWMEB7Q2UyTYqHvS97rdXe6KDgqzH11wUW8S5a3/4+ZFTWLq30G+kB9gAmvy6C2IzaeliC6IBJuui5EQeLGQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9P195MB1029
+X-MS-Exchange-CrossTenant-UserPrincipalName: VU56NjM1SVhHJXTHnR/gU8tAMs13HJcjI/WsOzTDiY7GvNZU7QiT81LMEKGjfLGnIdq5Eh4WAbGUSdzxle+Iv7w3WPiI/VyvLa07vZ4tbvc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR10MB6286
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,377 +160,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hopefully third time's the charm.
 
+I merely wanted to add support (mostly for use by the 'gpio' shell
+command) for looking up a gpio via the gpio-line-names DT property. We
+already have a "gpio_request_by_line_name()", but cmd/gpio.c does a
+separate "lookup + request", so it felt more natural to teach the
+lookup machinery this as well. That ran into
+OF_CONTROL-but-not-OF_LIBFDT being a thing for SPL, so here's yet
+another attempt.
 
-On 11/4/25 6:41 PM, Andrew Davis wrote:
-> On 11/4/25 9:24 AM, Wadim Egorov wrote:
->> Introduce a shared boot-device helper that translates DEVSTAT boot
->> modes via SoC-specific lookup tables. This replaces the per SoC
->> get_boot_device()/get_*_bootmedia() implementations and centralizes
->> the logic in boot-device.c while keeping the mapping data SoC-owned.
->>
->> Start with am62x as a reference implementation.
->>
->> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
->> Acked-by: Anshul Dalal <anshuld@ti.com>
->> ---
->>   arch/arm/mach-k3/Makefile      |   2 +-
->>   arch/arm/mach-k3/am62x/boot.c  | 141 ++++++++++-----------------------
->>   arch/arm/mach-k3/boot-device.c |  90 +++++++++++++++++++++
->>   arch/arm/mach-k3/boot-device.h |  41 ++++++++++
->>   4 files changed, 175 insertions(+), 99 deletions(-)
->>   create mode 100644 arch/arm/mach-k3/boot-device.c
->>   create mode 100644 arch/arm/mach-k3/boot-device.h
->>
->> diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
->> index b2fd5810b67..7dc77328e5c 100644
->> --- a/arch/arm/mach-k3/Makefile
->> +++ b/arch/arm/mach-k3/Makefile
->> @@ -6,7 +6,7 @@
->>   obj-$(CONFIG_ARM64) += arm64/
->>   obj-$(CONFIG_CPU_V7R) += r5/
->>   obj-$(CONFIG_OF_LIBFDT) += common_fdt.o
->> -obj-y += common.o security.o k3-ddr.o
->> +obj-y += common.o security.o k3-ddr.o boot-device.o
->>   obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
->>   obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
->>   obj-$(CONFIG_SOC_K3_AM625) += am62x/
->> diff --git a/arch/arm/mach-k3/am62x/boot.c b/arch/arm/mach-k3/am62x/ 
->> boot.c
->> index a3a6cda6bdb..06bd04da99f 100644
->> --- a/arch/arm/mach-k3/am62x/boot.c
->> +++ b/arch/arm/mach-k3/am62x/boot.c
->> @@ -3,104 +3,7 @@
->>   #include <asm/arch/hardware.h>
->>   #include <asm/arch/am62_spl.h>
->> -static u32 __get_backup_bootmedia(u32 devstat)
->> -{
->> -    u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
->> -                MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
->> -    u32 bkup_bootmode_cfg =
->> -            (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
->> -                MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
->> -
->> -    switch (bkup_bootmode) {
->> -    case BACKUP_BOOT_DEVICE_UART:
->> -        return BOOT_DEVICE_UART;
->> -
->> -    case BACKUP_BOOT_DEVICE_USB:
->> -        return BOOT_DEVICE_USB;
->> -
->> -    case BACKUP_BOOT_DEVICE_ETHERNET:
->> -        return BOOT_DEVICE_ETHERNET;
->> -
->> -    case BACKUP_BOOT_DEVICE_MMC:
->> -        if (bkup_bootmode_cfg)
->> -            return BOOT_DEVICE_MMC2;
->> -        return BOOT_DEVICE_MMC1;
->> -
->> -    case BACKUP_BOOT_DEVICE_SPI:
->> -        return BOOT_DEVICE_SPI;
->> -
->> -    case BACKUP_BOOT_DEVICE_I2C:
->> -        return BOOT_DEVICE_I2C;
->> -
->> -    case BACKUP_BOOT_DEVICE_DFU:
->> -        if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
->> -            return BOOT_DEVICE_USB;
->> -        return BOOT_DEVICE_DFU;
->> -    };
->> -
->> -    return BOOT_DEVICE_RAM;
->> -}
->> -
->> -static u32 __get_primary_bootmedia(u32 devstat)
->> -{
->> -    u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
->> -                MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
->> -    u32 bootmode_cfg = (devstat & 
->> MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
->> -                MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
->> -
->> -    switch (bootmode) {
->> -    case BOOT_DEVICE_OSPI:
->> -        fallthrough;
->> -    case BOOT_DEVICE_QSPI:
->> -        fallthrough;
->> -    case BOOT_DEVICE_XSPI:
->> -        fallthrough;
->> -    case BOOT_DEVICE_SPI:
->> -        return BOOT_DEVICE_SPI;
->> -
->> -    case BOOT_DEVICE_ETHERNET_RGMII:
->> -        fallthrough;
->> -    case BOOT_DEVICE_ETHERNET_RMII:
->> -        return BOOT_DEVICE_ETHERNET;
->> -
->> -    case BOOT_DEVICE_EMMC:
->> -        return BOOT_DEVICE_MMC1;
->> -
->> -    case BOOT_DEVICE_MMC:
->> -        if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
->> -                MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
->> -            return BOOT_DEVICE_MMC2;
->> -        return BOOT_DEVICE_MMC1;
->> -
->> -    case BOOT_DEVICE_DFU:
->> -        if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
->> -            MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
->> -            return BOOT_DEVICE_USB;
->> -        return BOOT_DEVICE_DFU;
->> -
->> -    case BOOT_DEVICE_NOBOOT:
->> -        return BOOT_DEVICE_RAM;
->> -    }
->> -
->> -    return bootmode;
->> -}
->> -
->> -u32 get_boot_device(void)
->> -{
->> -    u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
->> -    u32 bootmode = *(u32 *)(K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
->> -    u32 bootmedia;
->> -
->> -    if (bootmode == K3_PRIMARY_BOOTMODE)
->> -        bootmedia = __get_primary_bootmedia(devstat);
->> -    else
->> -        bootmedia = __get_backup_bootmedia(devstat);
->> -
->> -    debug("%s: devstat = 0x%x bootmedia = 0x%x bootmode = %d\n",
->> -          __func__, devstat, bootmedia, bootmode);
->> -
->> -    return bootmedia;
->> -}
->> +#include "../boot-device.h"
->>   const char *get_reset_reason(void)
->>   {
->> @@ -141,3 +44,45 @@ const char *get_reset_reason(void)
->>       return "UNKNOWN";
->>   }
->> +
->> +static const struct k3_boot_map am62_boot_device_primary_table[] = {
->> +    { BOOT_DEVICE_OSPI, 0, 0, 0, BOOT_DEVICE_SPI },
->> +    { BOOT_DEVICE_QSPI, 0, 0, 0, BOOT_DEVICE_SPI },
->> +    { BOOT_DEVICE_XSPI, 0, 0, 0, BOOT_DEVICE_SPI },
->> +    { BOOT_DEVICE_SPI, 0, 0, 0, BOOT_DEVICE_SPI },
->> +    { BOOT_DEVICE_ETHERNET_RGMII, 0, 0, 0, BOOT_DEVICE_ETHERNET },
->> +    { BOOT_DEVICE_ETHERNET_RMII, 0, 0, 0, BOOT_DEVICE_ETHERNET },
->> +    { BOOT_DEVICE_EMMC, 0, 0, 0, BOOT_DEVICE_MMC1 },
->> +    { BOOT_DEVICE_MMC, MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK, 
->> MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT, 1, BOOT_DEVICE_MMC2 },
->> +    { BOOT_DEVICE_MMC, MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK, 
->> MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT, 0, BOOT_DEVICE_MMC1 },
->> +    { BOOT_DEVICE_DFU, MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK, 
->> MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT, 1, BOOT_DEVICE_USB },
->> +    { BOOT_DEVICE_DFU, MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK, 
->> MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT, 0, BOOT_DEVICE_DFU },
->> +    { BOOT_DEVICE_NOBOOT, 0, 0, 0, BOOT_DEVICE_RAM },
->> +};
->> +
->> +static const struct k3_boot_map am62_boot_device_backup_table[] = {
->> +    { BACKUP_BOOT_DEVICE_UART, 0, 0, 0, BOOT_DEVICE_UART },
->> +    { BACKUP_BOOT_DEVICE_USB, 0, 0, 0, BOOT_DEVICE_USB },
->> +    { BACKUP_BOOT_DEVICE_ETHERNET, 0, 0, 0, BOOT_DEVICE_ETHERNET },
->> +    { BACKUP_BOOT_DEVICE_MMC, 1, 0, 1, BOOT_DEVICE_MMC2 },
->> +    { BACKUP_BOOT_DEVICE_MMC, 1, 0, 0, BOOT_DEVICE_MMC1 },
->> +    { BACKUP_BOOT_DEVICE_SPI, 0, 0, 0, BOOT_DEVICE_SPI },
->> +    { BACKUP_BOOT_DEVICE_I2C, 0, 0, 0, BOOT_DEVICE_I2C },
->> +    { BACKUP_BOOT_DEVICE_DFU, MAIN_DEVSTAT_BACKUP_USB_MODE_MASK, 0, 
->> 0, BOOT_DEVICE_DFU },
->> +    { BACKUP_BOOT_DEVICE_DFU, MAIN_DEVSTAT_BACKUP_USB_MODE_MASK, 0, 
->> 1, BOOT_DEVICE_USB },
->> +};
->> +
->> +static const struct k3_boot_device_info am62_boot_device_info = {
->> +    .boot_device_primary_table = am62_boot_device_primary_table,
->> +    .boot_device_primary_count = 
->> ARRAY_SIZE(am62_boot_device_primary_table),
->> +    .boot_device_backup_table = am62_boot_device_backup_table,
->> +    .boot_device_backup_count = 
->> ARRAY_SIZE(am62_boot_device_backup_table),
->> +    .main_devstat_reg = (void __iomem *)CTRLMMR_MAIN_DEVSTAT,
->> +    .wkup_devstat_reg = NULL,
->> +    .bootmode_addr = (void __iomem *)K3_BOOT_PARAM_TABLE_INDEX_OCRAM,
->> +};
->> +
->> +const struct k3_boot_device_info *k3_get_boot_device_info(void)
->> +{
->> +    return &am62_boot_device_info;
->> +}
->> diff --git a/arch/arm/mach-k3/boot-device.c b/arch/arm/mach-k3/boot- 
->> device.c
->> new file mode 100644
->> index 00000000000..4c3f2da3269
->> --- /dev/null
->> +++ b/arch/arm/mach-k3/boot-device.c
->> @@ -0,0 +1,90 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +/*
->> + *  Copyright (C) 2025 PHYTEC Messtechnik GmbH
->> + *  Author: Wadim Egorov <w.egorov@phytec.de>
->> + */
->> +
->> +#include "boot-device.h"
->> +
->> +#include <asm/io.h>
->> +#include <asm/arch/hardware.h>
->> +#include <spl.h>
->> +
->> +__weak const struct k3_boot_device_info *k3_get_boot_device_info(void)
->> +{
->> +    return NULL;
->> +}
->> +
->> +static u32 __get_backup_bootmedia(const struct k3_boot_device_info 
->> *info, u32 devstat)
->> +{
->> +    u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
->> +                 MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
->> +    u32 bkup_bootmode_cfg = (devstat & 
->> MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
->> +                 MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
->> +    unsigned int i;
->> +
->> +    for (i = 0; i < info->boot_device_backup_count; i++) {
->> +        const struct k3_boot_map *m = &info- 
->> >boot_device_backup_table[i];
->> +
->> +        if (bkup_bootmode != m->mode)
->> +            continue;
->> +
->> +        if (m->cfg_mask == 0)
->> +            return m->result;
->> +
->> +        if (((bkup_bootmode_cfg & m->cfg_mask) >> m->cfg_shift) == m- 
->> >cfg_value)
->> +            return m->result;
->> +    }
->> +
->> +    return BOOT_DEVICE_RAM;
->> +}
->> +
->> +static u32 __get_primary_bootmedia(const struct k3_boot_device_info 
->> *info, u32 devstat)
->> +{
->> +    u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
->> +            MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-> 
-> So this won't work for J7x devices as they have the primary bootmode in the
-> wakeup devstat (WKUP_DEVSTAT_*).
-> 
-> Since you already have a k3_boot_device_info table, instead of storing
-> "main_devstat_reg" and "wkup_devstat_reg" store whichever reg contains the
-> primary and backup boot modes. No need to label them "main" or "wkup" as
-> you don't actually care what domain they are in, you care about what
-> each contains (bootmode). That plus the shift needed to extract that
-> value would make a table that would work across all mach-k3 platforms.
+Now, when trying to do my civic duty and add tests for this, I found
+that test/dm/gpio.c has been defunct for a couple of years, and
+reinstating it is not entirely trivial.
 
-I have not thought much about the Jacinto part yet. But you are right. 
-That would make it generic. Thanks, will update in the next version.
+After a couple of rounds CI is now happy with this:
+https://github.com/u-boot/u-boot/pull/828
 
-Regards,
-Wadim
+Rasmus Villemoes (3):
+  test: gpio: include in build, and fixup bitrot
+  gpio: search gpio-line-names property in dm_gpio_lookup_name
+  test: gpio: add test for gpio-line-names lookup
 
-> 
-> Andrew
-> 
->> +    u32 bootmode_cfg = (devstat & 
->> MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
->> +            MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
->> +    unsigned int i;
->> +
->> +    for (i = 0; i < info->boot_device_primary_count; i++) {
->> +        const struct k3_boot_map *m = &info- 
->> >boot_device_primary_table[i];
->> +
->> +        if (bootmode != m->mode)
->> +            continue;
->> +
->> +        if (m->cfg_mask == 0)
->> +            return m->result;
->> +
->> +        if (((bootmode_cfg & m->cfg_mask) >> m->cfg_shift) == m- 
->> >cfg_value)
->> +            return m->result;
->> +    }
->> +
->> +    return bootmode;
->> +}
->> +
->> +u32 __weak get_boot_device(void)
->> +{
->> +    const struct k3_boot_device_info *info = k3_get_boot_device_info();
->> +    u32 bootmode;
->> +    u32 main_devstat;
->> +    u32 bootmedia;
->> +
->> +    if (!info) {
->> +        pr_err("%s: no boot-device info for this SoC\n", __func__);
->> +        return BOOT_DEVICE_NOBOOT;
->> +    }
->> +
->> +    bootmode = readl(info->bootmode_addr);
->> +    main_devstat = readl(info->main_devstat_reg);
->> +
->> +    if (bootmode == K3_PRIMARY_BOOTMODE)
->> +        bootmedia = __get_primary_bootmedia(info, main_devstat);
->> +    else
->> +        bootmedia = __get_backup_bootmedia(info, main_devstat);
->> +
->> +    debug("%s: devstat = 0x%x bootmedia = 0x%x bootmode = %d\n",
->> +          __func__, main_devstat, bootmedia, bootmode);
->> +
->> +    return bootmedia;
->> +}
->> diff --git a/arch/arm/mach-k3/boot-device.h b/arch/arm/mach-k3/boot- 
->> device.h
->> new file mode 100644
->> index 00000000000..04951deafb3
->> --- /dev/null
->> +++ b/arch/arm/mach-k3/boot-device.h
->> @@ -0,0 +1,41 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +/*
->> + *  Copyright (C) 2025 PHYTEC Messtechnik GmbH
->> + *  Author: Wadim Egorov <w.egorov@phytec.de>
->> + */
->> +
->> +#ifndef _K3_BOOT_DEVICE_H
->> +#define _K3_BOOT_DEVICE_H
->> +
->> +#include <linux/types.h>
->> +#include <asm/io.h>
->> +
->> +/**
->> + * struct k3_boot_map - Descriptor to map a raw boot mode to 
->> normalized device
->> + * @mode:       Raw PRIMARY_BOOTMODE value
->> + * @cfg_mask:   Bits in devstat-cfg to test (0 if none)
->> + * @cfg_shift:  Shift right before comparing
->> + * @cfg_value:  Desired value after mask+shift
->> + * @result:     Normalized device to return
->> + */
->> +struct k3_boot_map {
->> +    u32 mode;
->> +    u32 cfg_mask;
->> +    u32 cfg_shift;
->> +    u32 cfg_value;
->> +    u32 result;
->> +};
->> +
->> +struct k3_boot_device_info {
->> +    const struct k3_boot_map *boot_device_primary_table;
->> +    unsigned int boot_device_primary_count;
->> +    const struct k3_boot_map *boot_device_backup_table;
->> +    unsigned int boot_device_backup_count;
->> +    void __iomem *main_devstat_reg;
->> +    void __iomem *wkup_devstat_reg;
->> +    void __iomem *bootmode_addr;
->> +};
->> +
->> +const struct k3_boot_device_info *k3_get_boot_device_info(void);
->> +
->> +#endif /* _K3_BOOT_DEVICE_H */
-> 
+ arch/sandbox/dts/test.dts  |  2 ++
+ drivers/gpio/Kconfig       | 16 ++++++++++++++++
+ drivers/gpio/gpio-uclass.c | 11 ++++++++++-
+ test/dm/Makefile           |  2 +-
+ test/dm/gpio.c             | 24 +++++++++++++++++++-----
+ 5 files changed, 48 insertions(+), 7 deletions(-)
+
+-- 
+2.51.0
 
