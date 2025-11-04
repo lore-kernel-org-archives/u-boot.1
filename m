@@ -4,59 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6F05CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 19:04:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC16ACCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 19:05:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECD4A8004F;
-	Tue,  4 Nov 2025 20:04:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 440E283655;
+	Tue,  4 Nov 2025 20:05:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="CzznDdEn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Om9PoWLw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31FBD8144A; Tue,  4 Nov 2025 20:04:25 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1490283623; Tue,  4 Nov 2025 20:05:06 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16AE68003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 20:04:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A4A18003E
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 20:05:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=0d2e=5N=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1762283060;
- bh=/X/fL1X35/C1HJzEtOQ0jZTRLtYCSBnNssEoY+Ko/YQ=;
- b=CzznDdEn48PWEJHb4qEONxN1WBVdHPolh+mSg3lYly36cxK2IZeCs10Z69VFqTsIyKuakudfO
- 4z07GC/ksJpvaCU5tJ40PO49Jx659HBL1lSKxyy9t4nc5DgJzhm5wAkoTNP+Uz9fzKXZUbgJafV
- o4XaLGCKkiJvUX4bJAOPxXuOaZ1KlX+V2nqjLA4dElab6xoaw11OjCtnp0T6AzjME+svNuEHHhI
- onZHp/de0DBEMu+Uv7gv1f+oE2vxc95Du+RHYhcNFzqneLo1Z+TRDA+L2xR1vHvMO1wn3GQzQJT
- fU3tuBl9/h9mg/9++INahTDct6nlsV5Hl0F1gFI8q/6g==
-X-Forward-Email-ID: 690a4e32c1241ac5cd3c8b9a
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.4.3
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <dc3d6a1c-37f1-45c9-95c0-d37effcb2ad5@kwiboo.se>
-Date: Tue, 4 Nov 2025 20:04:12 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-3c9a42d6349so7019133fac.1
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 11:05:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762283102; x=1762887902; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YmQlTf7hl4XDIHrZkJjSW2Y0NbggS0Mo4pZZEenKMoc=;
+ b=Om9PoWLw9dFNd6Y5wEs6wvOz27jRT+JU9Cci8cZhzotHDGyg8vgXWXKKpPx5NytWk5
+ n7zxSn2f//O3eViUMIxY+VScRLxp4U9UResUBcY7SlGfe9qaPRlMZ86Ey/nNTEKuVvET
+ aPQyBVsXp2DwXtXyhrD5p1xu7easYO/+5XtZI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762283102; x=1762887902;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YmQlTf7hl4XDIHrZkJjSW2Y0NbggS0Mo4pZZEenKMoc=;
+ b=iyIgou7LF2VOeSG5rrT0WZvcjmUXYovg9qlN0OubRixI+Jso+NTC9va7A31ZxSGexS
+ dW5IT+hOKUd1u3/hRjuWH98DXGopnrtgUBmBcHGBckc9Y8B2hud+S93cj0VoD55+v4ei
+ vGVFP37QPsgJtZDJBigMs4WA8YNMWbVHMS9krnamU6SfeQgQh5PKuWf2xPppjpU1pLKy
+ fhh86GzEInZbjkWA9EFAqgqf0dwQw5lm9Hhq7ThymiYLdTSmIYzI/JZWU/+IPzCUiuZa
+ G4lWdMT9UF151Dr4xU8SB1evNh7+YIqKipTJFAbhDs54kM6AXJze4pkLqQ/zkOVUm7tF
+ 9n2Q==
+X-Gm-Message-State: AOJu0Ywf2Ed1fn47inrH1LB7Yir5Htmu6QhrXUKOjZGV2jH+4pKuPlJk
+ jnNzARH8iOfwNWz0kmRf6gtSutyWS+P3nrCdymuJsMF84KppPw/MZpOdWDaBlhmSM9Q=
+X-Gm-Gg: ASbGnct6fsnY3OI7P5pGGkcR1mbiAeWLctTn4dg7l0aZ+vZ4wfLTmA03T0Iia0yYqEv
+ s1qeSK1nOl8tmFDonaw22c4HsVFndM6H7ghp2zE2aeyBflApjcJXrueW+uGxOGYwnSrbSsJNZ6E
+ l08dz8shUCRJBYIAnwy88q/lMkTS96lVxc7WTJV573XQoEYKy7YHlT9ZSvL9iROwjE2rC66xxQW
+ XwBMYjvWyYIiSjPrlwDpedplp7GK4Ut3jsD/OSF9wWQLRmQlx6Az5MyW2dzzzP14IWiQioQ3zSx
+ 3oAPIMLQvx/TJYTqYnM3kxlwhHUgsT6/BVDWo7iWKk35xTSkojwFyA3QQLheJ5vW6mApFGUR0qV
+ CQ0ykDR0suS1wZGZJKSF4qHB3XYAJrX9NUvsJgNEGigVgj2/R8lVj3mneTJi/JcbXeXg+gJnbkz
+ AiIqhNaWTo6oYL9O1ZQwEuiQOfMh5i1av7w/JBPQ==
+X-Google-Smtp-Source: AGHT+IEkm/raNyt775d1DpHxNHHuhjWmu6G+6+9IZ4eeCTDxkrN0JfVw+PWFBEXHWkpKTlqrRmqP6A==
+X-Received: by 2002:a05:6808:1983:b0:439:b1eb:3026 with SMTP id
+ 5614622812f47-44fed265384mr182187b6e.29.1762283102225; 
+ Tue, 04 Nov 2025 11:05:02 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44fe4ca9d03sm352611b6e.24.2025.11.04.11.05.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Nov 2025 11:05:01 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251021181703.598342-1-raymond.mao@linaro.org>
+References: <20251021181703.598342-1-raymond.mao@linaro.org>
+Subject: Re: [RESEND PATCH v5 0/5] Enable Firmware Handoff CI test on
+ qemu_arm64
+Message-Id: <176228310061.3992564.12873924159259004340.b4-ty@konsulko.com>
+Date: Tue, 04 Nov 2025 13:05:00 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] Add Radxa ROCK 5B+ defconfig
-To: Bryan Hinton <bryan@bryanhinton.com>
-Cc: "trini@konsulko.com" <trini@konsulko.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20251104182523.2142120-1-bryan@bryanhinton.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20251104182523.2142120-1-bryan@bryanhinton.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,44 +103,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bryan,
+On Tue, 21 Oct 2025 11:16:53 -0700, Raymond Mao wrote:
 
-On 11/4/2025 7:25 PM, Bryan Hinton wrote:
-> This series adds initial support for the Radxa ROCK 5B+ (RK3588).
-> It introduces a new defconfig that mirrors the ROCK 5B baseline
-> while building from the vendored upstream DTS snapshot
-> (rockchip/rk3588-rock-5b-plus).
+> This patch series enable Firmware Handoff [1] CI tests on qemu_arm64 by:
+> 1. fetch MbedTLS (v3.6), OP-TEE (v4.7.0) and TF-A (v2.13.0);
+> 2. build bl1 and fip with both Firmware Handoff and Measured Boot
+>    enabled;
+> 3. pytest to validate the Firmware Handoff feature via bloblist by
+>    checking the existence of expected FDT nodes and TPM events generated
+>    and handed over from TF-A/OP-TEE.
+> 
+> [...]
 
-Please take a look at the existing "rockchip: Add support for ROCK 5B+"
-series at [1], it extends the rock5b target to also support the 5B+
-variant instead of adding a new defconfig target.
+Applied to u-boot/master, thanks!
 
-[1] https://patchwork.ozlabs.org/cover/2118033/
+[1/5] docker: add OP-TEE and TF-A build for testing Firmware Handoff
+      commit: 183299d9a400ef2c1361e4b4959f663aec7b4e35
+[2/5] pytest: add test script to validate Firmware Handoff
+      commit: f974e9b626323a940f308ba7174dff0607827aed
+[3/5] configs: select CMD_BLOBLIST for Firmware Handoff testing
+      commit: 5396bf30ab5f807d7e8781f058f0aef5e6fb4853
+[4/5] ci: check existence of bl1 and fip in the test script
+      commit: 7a3fae6a493ba4886e3b55cc27f74fc01efa72a1
+[5/5] ci: add test entries for qemu_arm64_tfa_fw_handoff
+      commit: 915f0b232af756dcf7d8784781ed4a37a8028413
+-- 
+Tom
 
-Regards,
-Jonas
-
-> 
-> Tested on ROCK 5B+ rev 1.2 (32 GB LPDDR5) booting U-Boot from microSD card.
-> Build used:
->   - TPL rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.19.bin
->   - BL31 rk3588_bl31_v1.51.elf
->   - GCC 15.1.0 toolchain
-> 
-> The eMMC controller enumerates even without a soldered module. SPL → U-Boot
-> boot verified; SD and USB enumeration work as expected.
-> 
-> Thanks,
-> Bryan
-> 
-> ---
-> Bryan Hinton (2):
->   configs: Add rock5b_plus-rk3588_defconfig
->   MAINTAINERS: Add entry for Radxa ROCK 5B+
-> 
->  MAINTAINERS                          |   5 ++
->  configs/rock5b_plus-rk3588_defconfig | 118 +++++++++++++++++++++++++++
->  2 files changed, 123 insertions(+)
->  create mode 100644 configs/rock5b_plus-rk3588_defconfig
-> 
 
