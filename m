@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CAA7CCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 21:12:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C681DCCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 21:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C37F8390D;
-	Tue,  4 Nov 2025 22:12:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2062E800B6;
+	Tue,  4 Nov 2025 22:18:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EXSuoGQa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dZVmBPJX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42FBF8390D; Tue,  4 Nov 2025 22:12:06 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 8CD96800B6; Tue,  4 Nov 2025 22:18:39 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5A62836D1
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 22:12:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C50D8004F
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 22:18:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7c5308f6aedso4194323a34.1
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 13:12:03 -0800 (PST)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-3d2ea93836bso3394629fac.3
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 13:18:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762290722; x=1762895522; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762291116; x=1762895916; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Dt+gGkj6nP57Qp3K2emj40kuawGT95sRURSUAyyt9v0=;
- b=EXSuoGQai09vLfhK/U+EQ4QQs2TStkTAFMDGsEZT45GrnNCIcKQNxTkbWH/F4jFR2d
- iaPrlw2ulrl9gEEYlfAhUt0dEIscGI9bZ9F9nG7wNCBM8LtR7VLcNfR+b30o5OnMtc56
- AOgIgUAoLMpQszn+sUAJ8eSmWFhZFCcMTnLSQ=
+ bh=SVC79is9J9DFrwjENUkWyHHxvSetXVfGi19eIrm+bzY=;
+ b=dZVmBPJX5nEYinQQ4TQ+Lv+rhCSfXLHMC02N2cPvwPAV9MSua6lWsAPDQinkhA/5V+
+ C9Hfly4hVStEe18x6c4uDjNaVHAsYleLfix2umCIfhIWjALJVFG6tsHgTLIF6Lrfznt7
+ D5VoJ5IN/JOhPQmE3r2a3Uu1HbXV5voDei6NQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762290722; x=1762895522;
+ d=1e100.net; s=20230601; t=1762291116; x=1762895916;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Dt+gGkj6nP57Qp3K2emj40kuawGT95sRURSUAyyt9v0=;
- b=e0/pho3F68lABVwz+I+gvFhbJAwuY2GVsAYsnDD4nNUrxBNmUjUqa6qi0iiv26pi/M
- JEAwv+EnqQbm3d0sqfpHbWimDz79m8nnvjPsfq7fYBuuPHdyYKQdKKPgstqylSoFqrSw
- /IQgKHtGxhm7lFe2D3Unw9GPe4iAWn+DDrmKCDj2CN624oudGzrrnRAQRM+GIFg0Ftov
- 7huT6hD5D81sjgfvKgHxzLG9pxAqsAEVdP/NwxEu/GetP80LpPgH+xyIDGDLtD4QzTw2
- mE8pMPdLGZfcupL+D9HtB0VzMDWjrHWf3nLWlWJeQcOZpbeNQdpouaiPnRstXU1CzAhz
- NH2Q==
-X-Gm-Message-State: AOJu0Yxjq9+mCRI7SuxHrR3I26w7JLrGBUw1Mmwr0yF86tB9UGASD62S
- v6x5ZaHdMo4OBPu6kgPpK1Q/fKKdqpegbfo9JEKMxyDYmrxzhAlJWmqurXyzhNKNKCY=
-X-Gm-Gg: ASbGncsqTWwkLH67OZzy8/poxv5waR8Lnskh7RFrF1+4k074MTWXCnhbwK6dF6IMCAC
- E1zHlr+B0u3QTWVc1cAG1rAOdjomwRGrbqySYkvb1nwajk1jNQncG13RnhP0PrSFQqr4yEuV95Q
- aczPSeMKbb94lgqIQrFC68UWI7WnoMTcwjfRaZTTAOsTF4ZqiYb3guarONiIY4tFQ63KGemDlP0
- 4l7Bv39t+PNqQw2M0Pby6G72b5cMxm2vkYnpJbTPrpW15/+8DyTJ8U3hAitf5aDa/YuEFDWXGvR
- H9p9nSKQ4JRs/stg5czIIOMBeuy9641WcEOpkTmXgJ+Zw+3QvQYduHh4wJ+dghY2iRJh1DGHjEZ
- CdM5Iuf6pHtC4aY4RgcHa2x3/MUQU5rzlHc9Oe9ku2RYrTMhRUcPKRCN7yZJ7IWUhk0Rg+dsCAC
- Am92zf8k/ZZeIziqO9RtmKiViL+N2/frQ6F8PmPII=
-X-Google-Smtp-Source: AGHT+IHJRHIZDuhY9fUnwGKkeMuAzsHVPVXz56sCP6/peCKSLRptMP0b78FF5ceCGGmC/VImLJUAIQ==
-X-Received: by 2002:a05:6808:189e:b0:44f:6d6d:4a04 with SMTP id
- 5614622812f47-44fed36fed5mr421583b6e.58.1762290722357; 
- Tue, 04 Nov 2025 13:12:02 -0800 (PST)
+ bh=SVC79is9J9DFrwjENUkWyHHxvSetXVfGi19eIrm+bzY=;
+ b=HHHvkTVdgUNoYJu82mqoJqFhyZLnXcwOmbM7Z0Il1NoaMrYI0gmnkdzeo8XJl9WLV0
+ HptnmuxAPiB6g/KcgLLB6l+2zv1aWlpUUjy7H5MqeTLGvBdxYBviBLKwARBv2zOLMXCG
+ Go5GLTlkyb9dOWL8Ap2qSxxC5oV4zZEdXOhmpDjno72q/K1zVqJTBgR1y+ojUehZQ6At
+ pT2funDzKUnhacUo+rqCKPjfp2Krtr9gyR0Q/sM/nvFn8AMr33VIZKKZdWRmSNUGPmCi
+ MA3figs3XrLfFBQwlNZa+ALsJIOnLZ5QRbZ4+XMm+Lkhme/PgdLO0fPNl0U3kG2h622p
+ FtDQ==
+X-Gm-Message-State: AOJu0Yxl9+w9DCRsD9biVR2K7gdu+HZkg6a9kvvW4cMjF91Su3Rh8zL9
+ 5z1417oDFRPBDpp2pcBc4gCdSgvwYT+2yOTzWzVfZ6euNWhwGFYHR7DycPkuRW8qF5B0wk88e8w
+ sUb+EjfasOA==
+X-Gm-Gg: ASbGncvJqBV67GUiObfZsyE0lgKvrehgNeddltx/Up+LO8KxkhCXZEdw/m82/voPslQ
+ SW1itEax8/y3yGCD3JEvqk6RIZ+ApusBC71nMt4a418s0yg7brzsTd2TiKl7VuI0RQ9iELMqFbP
+ gOYEAmXvCXmY1vPJKZydB4QnzDzmLkq+XjOoiPde8z6nDtrT92y8ydvHkKACkLBC8ckiuff4ilE
+ iaFTz7LOnOJbI8h8TvbzvEB8oYfAsDAuc63Bc0n5mw6vue7uT2r8FS24yn/YPyNnwbcUiHiGY8Z
+ GpBRlCj8jXBLVaQqSC2OTRafcWhUP4D3Y/GzvzJ6dJTlloKE16CVmcP2+yaWLuyheO6b3/Q89OR
+ xiLhAy2VgHXmtU240mayLXSuy65oTjaSsVpOCcPVgHfrcLrBJxORthPptZTdr6UUdpLckXC8QLx
+ tAdG1i/bBAwIebguUcc1qZWQN32ssvq4JwBbJwRNw=
+X-Google-Smtp-Source: AGHT+IGBcCvAbuFzqgYhCbsOQE8GCAGw57uGH2ufVvpJpdVeGz9V2BUgwKTJHXPops44m/aXiGGisQ==
+X-Received: by 2002:a05:6870:c10f:b0:3d3:5fd8:a464 with SMTP id
+ 586e51a60fabf-3e19b20db55mr371639fac.35.1762291115752; 
+ Tue, 04 Nov 2025 13:18:35 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44fd84b3662sm1012713b6e.9.2025.11.04.13.12.00
+ 46e09a7af769-7c6d3637067sm90022a34.32.2025.11.04.13.18.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Nov 2025 13:12:01 -0800 (PST)
-Date: Tue, 4 Nov 2025 15:11:59 -0600
+ Tue, 04 Nov 2025 13:18:34 -0800 (PST)
+Date: Tue, 4 Nov 2025 15:18:32 -0600
 From: Tom Rini <trini@konsulko.com>
-To: adriana <adriana@arista.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Richard Weinberger <richard@nod.at>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>
-Subject: Re: [PATCH] boot/bootfdt: Add smbios3-entrypoint to FDT for non-EFI
- boots
-Message-ID: <20251104211159.GH6688@bill-the-cat>
-References: <20251104-smbios-v1-1-99b79a8f59b3@arista.com>
+To: Sune Brian <briansune@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v6] Add optimized Makefile support for SoCFPGA handoff
+Message-ID: <20251104211832.GI6688@bill-the-cat>
+References: <20251104010003.525-1-briansune@gmail.com>
+ <20251104175123.GE6688@bill-the-cat>
+ <CAN7C2SAvyfUyTqy8sqKxPWPG9Bu+aYiXGjMzfVJxR+mc59TD4A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xftis/SurcJsclQi"
+ protocol="application/pgp-signature"; boundary="H68/LshY3D5vE2AQ"
 Content-Disposition: inline
-In-Reply-To: <20251104-smbios-v1-1-99b79a8f59b3@arista.com>
+In-Reply-To: <CAN7C2SAvyfUyTqy8sqKxPWPG9Bu+aYiXGjMzfVJxR+mc59TD4A@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,53 +100,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---xftis/SurcJsclQi
+--H68/LshY3D5vE2AQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 04, 2025 at 08:15:21AM -0800, adriana wrote:
+On Wed, Nov 05, 2025 at 04:42:55AM +0800, Sune Brian wrote:
+> > This should be able to reside in arch/arm/mach-socfpga/config.mk and so
+> > it should be moved there. It might need to be done under "archprepare".
+> > That would also let us gate even trying it with an ifeq, like we do
+> > currently. I also don't see that you tested this "make O=3D/tmp/somedir"
+> > (which is not the HANDOFF_PATH thing) and I expect it doesn't work there
+> > as it references ".config" and not "$(objdir)/.config".
+>=20
+> I am not too familiar with make O=3Dxxxx i never used it.
+> I will check what is the issue here.
+> Meantime, do .mk is same as Makefile or not?
+>=20
+> > Finally, since you mentioned AIs in other emails, we do not yet have a
+> > formal policy for or against their usage in this project (it is
+> > something we need to discuss) but at a minimum the Fedora policy makes
+> > sense to me if using one:
+> > https://docs.fedoraproject.org/en-US/council/policy/ai-contribution-pol=
+icy/
+>=20
+> I don't think asking general on syntax run cost is a kind of issue.
+> Otherwise it will be a huge trouble to include all people or even
+> referenced website from the beginning. There are thousand kind
+> of syntax that can make things run. I will ignore this policy, sorry.
+> Even google these day uses AI supported engine.
 
-> The Linux kernel can discover SMBIOS tables through two primary methods:
-> 1. Via EFI tables, when using EFI boot;
-> 2. Via the 'linux,smbios3-entrypoint' property in the /chosen node of
-> the device tree.
->=20
-> When U-Boot boots a Linux kernel using a non-EFI command ("bootm",
-> "bootz", or "booti"), the kernel relies on the device tree to detect
-> the hardware. If SMBIOS tables are available in U-Boot, they should
-> be passed to the kernel via this device tree property.
->=20
-> This patch modifies boot_fdt_prepare(), to inject the SMBIOSv3 table
-> address into the device tree if there is a table generated by U-boot.
-> The "board_fdt_chosen_smbios" is weak in order to leave the possibilty
-> for specific boards to select custom SMBIOS addresses.
->=20
-> The changes in this patch are added in the context of supporting this
-> device tree property in linux kernel:
-> https://lkml.org/lkml/2025/10/24/1393
->=20
-> Signed-off-by: adriana <adriana@arista.com>
-
-The Signed-off-by line should have your full name please, thanks. Next,
-we should have a Link for
-https://github.com/devicetree-org/dt-schema/pull/177 and looking at
-that, it's just smbios3-entrypoint now. Please wait for that pull
-request to be merged and then post v2 of this code that matches the
-accepted schema. Thanks!
+I'm sorry, but I don't think that's an appropriate response to me saying
+that if you're using an AI to generate any of this then you should
+disclose it.
 
 --=20
 Tom
 
---xftis/SurcJsclQi
+--H68/LshY3D5vE2AQ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQpsGAAKCRAr4qD1Cr/k
-CiqUAQDRSEkQ5trGp0XBEJAl0cCLWiuDB8H28R4kN7vNFy3esgEA3zR0qPUsWDVE
-bTB230jTjCNF+6L/suarW88bQ9UgWQA=
-=uzb7
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQptqAAKCRAr4qD1Cr/k
+CtGpAP9n9KDaJhSIs7M9mIsHZxZJRbYLKbvhrI7Cw7lyLpibaAEAzGNKydZyvhv0
+ugXZvcHOaeJ+tLmh6WgR3LXdbYmbVwI=
+=9Lbi
 -----END PGP SIGNATURE-----
 
---xftis/SurcJsclQi--
+--H68/LshY3D5vE2AQ--
