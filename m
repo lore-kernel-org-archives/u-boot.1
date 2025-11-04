@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B754ECCFA05
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:12:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1644DCCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:12:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4236083923;
+	by phobos.denx.de (Postfix) with ESMTP id 8816183946;
 	Tue,  4 Nov 2025 19:12:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dC7m8kYo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SOuJFMbL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1A6583942; Tue,  4 Nov 2025 19:12:26 +0100 (CET)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 3C01D8003E; Tue,  4 Nov 2025 19:12:28 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB39D8003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 19:12:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A50B83923
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 19:12:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-6504c33afb1so42599eaf.1
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 10:12:24 -0800 (PST)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-656a67c0762so636953eaf.2
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 10:12:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762279943; x=1762884743; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=3s/ZzqyzwHGH0J6HTUNEzaqIHUGl+XMGCUCaPuk6sv8=;
- b=dC7m8kYoKf+7mPpVeKoQD+1mOmDTsZer1slVZXd7vqHTDa2DekFWKnO1MUECLsNst2
- gajFpXcQD3Ilysm1zahiXqqqLE7ye/fYpGa9FrVj/tdKwOCiVr2kAgMSls9Q+eSEhicb
- wlyNZqyc7LSLRumQwkzrHrDLZe4NcvOIWx11Q=
+ d=konsulko.com; s=google; t=1762279945; x=1762884745; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Gpf/bC01qY5ndFwvPVApZCxs+143yr7LEQneybbt1Os=;
+ b=SOuJFMbLUuNl/UjXnIvbWFFlabOJ5cINDh77kCnHbwwhUEzKAVmKnmp5h9T0Wu+Nna
+ JfugZ3YF1qY4ZRoiG63BWDHrsJhKqJKmpETPdS/5ywbHAglZ1gtKb2jJAKEXvToKLGWZ
+ i3MvA+gN46PDgfnLV+N+yjsLWaRnUnzmyXIHI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762279943; x=1762884743;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3s/ZzqyzwHGH0J6HTUNEzaqIHUGl+XMGCUCaPuk6sv8=;
- b=WxO+ijTl7OEcmIFbiCpw0QD/fLXSpK2Si/nHficOieyaNZrrQa5sT7F2WpzQv94ze2
- UK8Y5e9OYnGDLnR2DQSDAT60dQBuJEAG5xb2q0HlnNatoFjvt/HkUHjcWQqJ4YCp/+QM
- SNFRQvIoVT1Q/s+kvR1oXTo/rYRpDQBR1e92JpRDLzipgX0EsJppBOmIy0ZxBWaUtGvV
- XkVs3idX5VKTG9tJ3L+aIqcviZbwmvnb94uRlLXGR6d/X7+c9b7d2vkDbfGwpM3Zu0hI
- FwZtHJSBsL6J4VhGj7ofn32Wyn/GJRddpEsLvbnufvZ0+qhdo9WQjTkvbHLY8PL2qZ++
- qC+g==
-X-Gm-Message-State: AOJu0YwqKKl8X8PcQo7POPdtTNmF0qj2K0Q+K5nE74KX7vKElZpMj5vW
- IHs1u7DXMBufgXYtEi1lH9S5627hk0Q98hFRQZQumBPRTIwXwefxu5KnsxgVZZiB2cUhf20vygD
- 2BMRqcqOsIA==
-X-Gm-Gg: ASbGncsnXqB5QB3UdroP9jvSXbX+yf0bjxH871HAEv22TkUz/K2xeAQD8ejcPEH3ppf
- YYXDCULO2bXq2R/DtP8UQPX/r/H7Bq/EfnVhzoT9tJtTzCT3753/q/vvQCrNYMC8tCO1LYtXjoI
- rTctFKeCdZFJTKU+iutzKV/DSrmt8MWEZ4i0fU1XI4772fhzuoOSHIU16F4TGfhvxytB4JB/5xC
- EZTs/fMD0iaEPDRxTsP7KxhZnoGr+XFIB+2FIx0eXRuUyCPsetfYgst/QsJgt1Vl125jZ/FG2z8
- h8SOaLfw7HHA7zrrkY96pfjYI2ZPtzdq9xBVBNHjBaiTjy9vbqLPLrrTeuT1ZFiTV/b7qux4ZcU
- S+AOiRNcaWGK4YUGGxv1CmM4zqg1ZSFgMd5X8FxpcMvDVi+QNeOBlf03nJcL4sXk6wP4cTP6tJq
- S7tE+5/ZicuexClw3M/X0S5vX6ACZyUYLpvSWen7K5OQ==
-X-Google-Smtp-Source: AGHT+IGaIjso2H+ii9C8EOh6ri48FSzmgrYiLBObBU0Nd2nrVg7biIbCjQmn7/2mKH9lFjfB6U5QIQ==
-X-Received: by 2002:a4a:d448:0:b0:651:c857:a4eb with SMTP id
- 006d021491bc7-656afbe7badmr1133366eaf.4.1762279943486; 
- Tue, 04 Nov 2025 10:12:23 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762279945; x=1762884745;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Gpf/bC01qY5ndFwvPVApZCxs+143yr7LEQneybbt1Os=;
+ b=sl7x3M34SGWA2nitu7TwSeD+knb21tQTF21EOURjAdieW1YzvQA37OxLRoR8CT0+eH
+ L5WE3VM/i58DEw1a+ODDJNu+c1cqPzqWaQcunr+wWtULlaRfIy0u4oA9U2lsaWltH5nQ
+ 8vV272qSlkVYgReEenFcQpIDqHzvkWYFBATleDfsCsTnaeN+FMC/AD4sF6r8F8xnyrh+
+ 9B/IQ9+l95BlRU+3ir+9GHsMeEGNepwNo1Kn+aroPoxpYwNFlgoxMH97KiJGZMmeCFM2
+ 9RGpbFUqzSHplaaQEKf2dMUl1eylY9L0BSZZqB4fmMKIZt3mrZH9IujjZ5dDqEpH9JP+
+ ysmw==
+X-Gm-Message-State: AOJu0YwkAabFoLyxCtIq1wQumxSkJJD4bQXudiqX5GWUnbz0XK2eRipQ
+ OTGeMDua8+g2C6DDOP6/3FT3gVnwAmC5cb/lweYB0Qa5+g2574PHsUHFjDKsvOUF7SJu6gt+9JD
+ fOOq8dyHA6g==
+X-Gm-Gg: ASbGncsewvIIcufP0v/zxFBND8JN9IysMILYrvH4KZ728oe4ZqBQLbnBCPqirdL+Sdt
+ 4TDcLaXOdMBnA+mqe4qSr5dfKigfQWFCODU4g1DM5XayhKGOtFP3xzNZemlSGXjEpk80VhkV+sH
+ EY0Tq9HRfR21cjEpDZhBn3/QfEBPyxyXr4sruulrigcJQOClz0jpN2H/+1fNHAF1V9qpNWpQEka
+ 2M7WmMkzkW8TYSTDMN9ZMpwsU+s6oF5Dj/hn6sHncVL8+U3eNOBtfDAj95MFfY8H0IXvjBVq0vO
+ /FvhQGWpVz1HyBj6toB06CLSV34FJTSIa61GIndfD+4ZinWRaLeJivEmsvezOzr849t776xinTL
+ IS56GtXTdb58ch+rVSbRt49NhtzfWFfh7mog5xumvySM0LdijgE+lwrTxmnD9Rd3DkpwDedllGt
+ riiHouKTiNKzp6YSQhYv1+N5mG2HA87eV59EaSqL7imffxDrlBxVru
+X-Google-Smtp-Source: AGHT+IGccakFF1NYJ4kpNcqJ9yax97FzN35jB0DxkO/vVvJwOH3QM/YhYRF5SVqrQCcAue1UmPCdxQ==
+X-Received: by 2002:a05:6808:30a4:b0:43f:64bc:8b7e with SMTP id
+ 5614622812f47-44fed365430mr136893b6e.15.1762279944771; 
+ Tue, 04 Nov 2025 10:12:24 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-656b9eaac5csm138479eaf.11.2025.11.04.10.12.21
+ 006d021491bc7-656b9eaac5csm138479eaf.11.2025.11.04.10.12.23
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Nov 2025 10:12:22 -0800 (PST)
+ Tue, 04 Nov 2025 10:12:23 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 1/2] CI: Move to Ubuntu 'Jammy' 20251001 tag
-Date: Tue,  4 Nov 2025 12:12:20 -0600
-Message-ID: <20251104181221.3980984-1-trini@konsulko.com>
+Subject: [PATCH 2/2] Gitlab: Drop vexpress_fvp from tests
+Date: Tue,  4 Nov 2025 12:12:21 -0600
+Message-ID: <20251104181221.3980984-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251104181221.3980984-1-trini@konsulko.com>
+References: <20251104181221.3980984-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,56 +95,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This also incorporates the following commits to the Dockerfile:
-da7942de29f7 Dockerfile: remove Python 2.7
-183299d9a400 docker: add OP-TEE and TF-A build for testing Firmware Handoff
+Now that we have a test for QEMU using transfer list from the previous
+stage, there are two platforms testing this particular infrastructure. A
+problem with the vexpress_fvp platform emulation in Gitlab is that we
+often run it on hosts that are fast enough that we run in to a race
+condition when trying to acquire the console and the test fails. Remove
+both vexpress_fvp tests from Gitlab (they can remain in Azure) to remove
+these spurious failures.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- .azure-pipelines.yml    | 2 +-
- .gitlab-ci.yml          | 2 +-
- tools/docker/Dockerfile | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ .gitlab-ci.yml | 16 ----------------
+ 1 file changed, 16 deletions(-)
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 320f7567e6d6..c4a2504491ce 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -2,7 +2,7 @@ variables:
-   windows_vm: windows-2022
-   ubuntu_vm: ubuntu-24.04
-   macos_vm: macOS-14
--  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025
-+  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20251001-04Nov2025
-   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
-   # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontainer",
-   # since our $(ci_runner_image) user is not root.
 diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 033d4f9f0af8..a585ece8a0f9 100644
+index a585ece8a0f9..56fcc77f7bfd 100644
 --- a/.gitlab-ci.yml
 +++ b/.gitlab-ci.yml
-@@ -20,7 +20,7 @@ workflow:
+@@ -551,22 +551,6 @@ sifive_unleashed_spi-nor test.py:
+     TEST_PY_ID: "--id spi-nor_qemu"
+   <<: *buildman_and_testpy_dfn
  
- # Grab our configured image.  The source for this is found
- # in the u-boot tree at tools/docker/Dockerfile
--image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025
-+image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20251001-04Nov2025
- 
- # We run some tests in different order, to catch some failures quicker.
- stages:
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 5d2f6375e363..d2384219c06a 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -2,7 +2,7 @@
- # This Dockerfile is used to build an image containing basic stuff to be used
- # to build U-Boot and run our test suites.
- 
--FROM ubuntu:jammy-20250714
-+FROM ubuntu:jammy-20251001
- LABEL org.opencontainers.image.authors="Tom Rini <trini@konsulko.com>"
- LABEL org.opencontainers.image.description=" This image is for building U-Boot inside a container"
- 
+-vexpress_fvp test.py:
+-  variables:
+-    TEST_PY_BD: "vexpress_fvp"
+-    TEST_PY_TEST_SPEC: "not sleep and not hostfs"
+-  tags:
+-    - ${DEFAULT_AMD64_TAG}
+-  <<: *buildman_and_testpy_dfn
+-
+-vexpress_fvp_bloblist test.py:
+-  variables:
+-    TEST_PY_BD: "vexpress_fvp_bloblist"
+-    TEST_PY_TEST_SPEC: "not sleep and not hostfs"
+-  tags:
+-    - ${DEFAULT_AMD64_TAG}
+-  <<: *buildman_and_testpy_dfn
+-
+ xilinx_mbv32 test.py:
+   variables:
+     TEST_PY_BD: "xilinx_mbv32"
 -- 
 2.43.0
 
