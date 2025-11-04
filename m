@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3631CCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 21:55:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3921CCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 21:55:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03E5583957;
-	Tue,  4 Nov 2025 22:55:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 484B58394E;
+	Tue,  4 Nov 2025 22:55:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E263UKtw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j7p8/yQC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94B9B83936; Tue,  4 Nov 2025 22:55:16 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 5ADA283952; Tue,  4 Nov 2025 22:55:48 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E9F58394E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 22:55:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47D4683936
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 22:55:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7c51f56f3fdso3118821a34.2
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 13:55:14 -0800 (PST)
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-651cda151f0so3106007eaf.3
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 13:55:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762293313; x=1762898113; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ao3t7fkTbHdZzJ0TcVDtxLtb01kspAn9y8w7jkiAG9A=;
- b=E263UKtw36EfxPH63503SYszWa9px1qaZ4wpWBC4bVMemS/mPK0dmyc/Q2Pu+t5swp
- B86Ww1Iu5/Tn2VaR6uMrLPxL2bkPNeLR6MNvJe+SuhFRx1NC/Wxz0zSr1Xr4C0/oM+nD
- EwLs5HW/UbEgN43VZGwSpuPvRHzrWGIzOlwDI=
+ d=konsulko.com; s=google; t=1762293345; x=1762898145; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9avWUAj2SdVR2zzgRZ1ADGAY7Va0No/+hWRRsxrM6Tk=;
+ b=j7p8/yQCn8fwNxSmfCJSWUqv4FZtes9KMq1YyO/Xf8u7TVcgtixhSTk+2scIXcQrND
+ sYPY1icYskhPqXebc9c2yj4ahWLWt67KXUnNw1aDlT9SEubeIoNSuLd3UNH/NLPhZNjg
+ hcA54lKiPLhlFyp8TMVZUbVe65UosOlPMptYY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762293313; x=1762898113;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1762293345; x=1762898145;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ao3t7fkTbHdZzJ0TcVDtxLtb01kspAn9y8w7jkiAG9A=;
- b=kEtlHfde4Vzq8fOawRQbRMtbfSUqtL0afLZwNqwhH1B9P8sQrhfS+52TPUICeEHppi
- 76H0IKe0ux5M+AN/O8ABzSVtF+HFecyeiDiPSM6j7fbciUG5OouXgpt+5HQjKw0QJkRH
- NzAQ0hxz/75/0xS41YpChJkqUtrsgaqWGC7FLpUC/cZ5mDE+UF+e0GqnO61c8Y7oKwBV
- oStxNPzexBfvksG7cnmrjSx7XyoaXX+BF17IjIoV2sCGGgEBIzFL+AXhI9jkWhHeNOtb
- TxhfZlKfs3HNTjwrZZGlAmnHMcJSYmGiuOcV5/Ok+ZAEGoVTeybhPcQdA5lwvs5dyxIx
- zI5g==
-X-Gm-Message-State: AOJu0YydopmcoqhjWkw1kP/n5BVBwTdrgUruyYGJJg03zfpV/lpVfm8h
- VFWvW+XG3pcE3i0n7pSAcqJgQZ4jP2tk4h2Wsdvg4qzXl1XWmHBbRZbOx+CtkwdQvQu5Cf+ZmTa
- lHG0rAoRybQ==
-X-Gm-Gg: ASbGnctZQLLvGu2gDucU3nZb4PdiF2t1vCAq+qF0D5DtLykw0uqepw75nsyZ0laBniA
- eGGzARuTJMvRvl60SkqPFMpBIsmdY6ti8YrLlw5vxmm/C/8R7JJuLun+j09enFX3aAtTXBPsqK5
- QBi0eMD8CDf8DHfwzOw7T5fIBIOkYlE5A12wuIlvPDfaDwAVTLi77yevgISBXD8a6BBUeI1H2wS
- LgqsbMXIr4P8vS138pQz66RlPBDAtB/o1u9+26P5D0KU9/4WJewlqRvuH7zE2wlJYr/HrP2NHNq
- d6zJhd4KRTF4djGfSDl4IoLc8fwFQiIs3jrralFWJlX30LjvsQ49wpW6WkGpAgCkB6JUFPDn02P
- t86P6HhkG5InqUfeuGGAF5pX9+7VUUpKEcBZVCHhkMJYOcCGHwM8nKsOt87gpZ5XDGlCadBWoIu
- Rt8hoXNPqijnZbDGYwGYGYWqu0Rg5TyYxFPyKLLYcN6DMzbMFMhco3
-X-Google-Smtp-Source: AGHT+IHHu6jX9WGYaA7sNCAAoMUBU4L6inP1gEz9Y3eYtHUI3nBoijokMC66g4dsdLwbGeC6i1RTgA==
-X-Received: by 2002:a05:6808:5087:b0:43d:4d13:1108 with SMTP id
- 5614622812f47-44fed5025d1mr388529b6e.49.1762293313164; 
- Tue, 04 Nov 2025 13:55:13 -0800 (PST)
-Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
+ bh=9avWUAj2SdVR2zzgRZ1ADGAY7Va0No/+hWRRsxrM6Tk=;
+ b=fYKkKUquc6o4lzJylgGnOAEgKgnV4YsRjHv8sXHwGoUEuic/8/h0FwZJOal80c/vpv
+ X6hq2DkrmJ55Y2aPY/CvuOFCxSJnJ25/P6ROjmZI5QtV8cUV8ZaPSjRs6lSS2nVvxmTg
+ MKXlS/Ecohf4GQTI5nCykW8E2k8KkyZ0aDxygU1WjNnXRq+jg4E7O3etUoQNliOoCHyG
+ IND2hCYy7qYkJgR3oL4vwaj7gfiGvo+/lVgh4FjALO2wotM9OHnLW5IyFAHjeIK/286k
+ LgqjhaB2CFQN5Dvjckjt9Eh+ah7nZQV/8qKnwnRjvhvFOBNTBozP051/s8yNg7K9blUn
+ RncQ==
+X-Gm-Message-State: AOJu0YzBxiconNuX2AGgux7nao9yvDkj63KFJ3YFz2MDdDytzqwYUxdT
+ AK03w9Y5I9tvkfeG1XncVr/2nL0+H+iQ0X90Bdyluyik/LhKPwPekCdNhrCc+8A/7+wuY+bga5c
+ gtwXRAsoX9w==
+X-Gm-Gg: ASbGncuv3rw+ON5VJT4aCyKa7z0eLy2CpqtsYmO3fgfECw5GIwji0CTqYc/rWtyYAfK
+ ippwGWlPp9XKb088tW35FmuZbvjOkO7y+bcyOThIzWR/ys1NCFxLxDXOujDjAo0F7YoCQZ4FD5d
+ G6kwe9/h3z2Hk8YAQuCvC5G1ODZC5IqbFw8a7EIee8aG18NJkmeH97ujUzCkpCp9b+N+87+YFAk
+ AriG65NddGMmWXBJevVihBL6eOeN6BrqnL+PG8VJwMb1W8+GMFY9R3fBRO6wq/hG+HIPqdT/60M
+ RG1pXImRdXjtf4kx7pgDBwlwQvijvwcVcrdH7dePmbxZzwVnR6HmVMN2mGyy5tfQA6jephWyikj
+ J/I9mGN5HBt//VkLarxwBhlmyRUbscKwzmOqbX7Mbw9gAlTqDdYa9VIdX0D0ETY/y34IVcvCgm1
+ ZNAOX60Ip2Y8hng8LBPMx/X2NBvmR1ALiCkMi3Iw==
+X-Google-Smtp-Source: AGHT+IHOm5jiKhTdl3ZzhZayWt0E/IaM/E5lNyJ1iy/huRQOOoPDOMclSqKOuQPqMGfrfxLGegJ1EA==
+X-Received: by 2002:a05:6870:1685:b0:3d2:4f4a:9212 with SMTP id
+ 586e51a60fabf-3e1992694efmr502308fac.3.1762293345021; 
+ Tue, 04 Nov 2025 13:55:45 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44fd84952c4sm1038073b6e.1.2025.11.04.13.55.12
- for <u-boot@lists.denx.de>
+ 586e51a60fabf-3dff736d560sm1448134fac.18.2025.11.04.13.55.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Nov 2025 13:55:12 -0800 (PST)
+ Tue, 04 Nov 2025 13:55:44 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [u-boot-test-hooks][PATCH 2/2] labgrid: imx: Add a writer using
- write-image
-Date: Tue,  4 Nov 2025 15:55:09 -0600
-Message-ID: <20251104215509.2371164-2-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251104215509.2371164-1-trini@konsulko.com>
-References: <20251104215509.2371164-1-trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20251104180044.1507580-1-festevam@gmail.com>
+References: <20251104180044.1507580-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20251104
+Message-Id: <176229334433.2371545.13618792419605757647.b4-ty@konsulko.com>
+Date: Tue, 04 Nov 2025 15:55:44 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,52 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Labgrid has the ability to write a given file directly to disk. Make use of
-this to behave similarly to bin/writer.imx_raw. Note that since labgrid passes
-"bs=512" to dd, we need to adjust our arguments for this rather than bs=1024.
+On Tue, 04 Nov 2025 15:00:44 -0300, Fabio Estevam wrote:
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- bin/writer.labgrid-trini.imx | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 bin/writer.labgrid-trini.imx
+> Please pull from u-boot-imx/master, thanks.
+> 
+> The following changes since commit c9fdb9ac4d5234953ffaaef0cfc9d4ccb03f0ce5:
+> 
+>   Merge patch series "Allow falcon boot from A-core SPL on K3 devices" (2025-11-03 13:18:26 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-diff --git a/bin/writer.labgrid-trini.imx b/bin/writer.labgrid-trini.imx
-new file mode 100644
-index 0000000..9dd8dc1
---- /dev/null
-+++ b/bin/writer.labgrid-trini.imx
-@@ -0,0 +1,30 @@
-+# Copyright (c) 2024 Konsulko Group. All rights reserved.
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+# Ensure we have all environment variables set
-+. common.labgrid-trini
-+
-+build=${U_BOOT_BUILD_DIR}
-+
-+echo "Writing build at ${build}"
-+
-+# This use bs=512
-+labgrid-client write-image --mode dd --seek 2 ${build}/u-boot-with-spl.imx
-+echo "Done writing build"
+Merged into u-boot/master, thanks!
+
 -- 
-2.39.2
+Tom
+
 
