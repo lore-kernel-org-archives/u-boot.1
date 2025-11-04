@@ -4,59 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8811CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 20:56:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9219CCCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 21:12:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 067A7800B6;
-	Tue,  4 Nov 2025 21:56:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id CFCA0800B6;
+	Tue,  4 Nov 2025 22:12:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZGV7+T8Q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FuCgayAw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3CEF8389A; Tue,  4 Nov 2025 21:56:52 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CAB998391B; Tue,  4 Nov 2025 22:12:04 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98F7C8004F
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 21:56:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CA308004F
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 22:12:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03 (unknown [93.94.208.154])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C241240958; 
- Tue,  4 Nov 2025 20:56:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762289808;
- bh=rTDVboI66VlaDixJZl7TcARNRiyZtOeZd1F3QaDL2jk=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=ZGV7+T8QcPNLNj2G9VS8ey25IfD2Y1ObvWLqOb9DaXYpqWgH9BTwOIoB7aINwRjG3
- MrHaNH51FMf4WKK0W5W5sdTfxqRKT6lNemxxayU4tV2ABz3//bg+qDwHhDZ29Cz8bE
- Xm2I9f1AbgcOnsXfkt/pzZDHgAmlleKv3pFjIpYwBStFskTwy3QM1gj4DOHPaWIVsd
- o4Km+DsntEdhtxK5ioQY0xJE06tANOWHzeniLmrlbeCey5KcnY7uy5RKyiAUMT//Kb
- FJrKP5VQU9vXIVlObYJXXmKpRfEIH6P+q+DwaUsppBy0094CkkFsPqvFv8rYoDXJxs
- AbMHb/o988vLEerRXWGWc7es+DBsn4sD1xakJyHEmxzEbIoVICHA98a5+h1sgx3y90
- X6/s3HvF0grj7RnzgKL7THuVSooaQprdDAmcPP/NY86B/KvrvQC5EEc+kG7MTKaR8q
- 9CNG/xxrQX7kL1CV3QPdddar+6QfDZhM59OZPyTq4sbjfqLVZTQ7YVRBNwWC2j/V5i
- lhIIjSMnTumVxmSF9XzM1pXz6wsu/YbD0wBvgcEO+e+ki9Gox5jQBPivahWfTMSUXC
- 9yF34q9n6/RQdZWnr/qV9VFoX+gfrC1U+ZlrVbRm0Sx0KzQ9dkSm00XJqm1xPgIbe5
- +icvMM4a8PqeC/2SWMA4Plnc=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_selftest: use Sphinx style comments in efi_console.c
-Date: Tue,  4 Nov 2025 21:56:46 +0100
-Message-ID: <20251104205646.14454-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c5333e7099so3649008a34.3
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 13:12:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1762290720; x=1762895520; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tyxiGEezzPQJne/Sqn2uD6ssURbCRESyzMG71jg9wx8=;
+ b=FuCgayAwC6vpGvSxbSnNPEc2UvKbY0jcVm9a6CgKtMm5s3LnnZeUUp8QxawIMneU+x
+ 3l7C9JzRooEfu3nMYl4kmHbr5Ggr9W7x3JUwqnzCbRzFJ9IU2mtAdrCdgZyrK/o9/C6q
+ MML/YXO70bCEx+G1sO+KAJToOZ0gxT3zHH+4118Df3EeFINfW0eBSLzbXgr6FKY135zC
+ 8LOB/um0lGNdqB7CWZRMe/vyRR5ZWZxqUDrvwTv33QIOZiQrdfIe455Vw+wpRoCkJrVy
+ gf/R9UvYhvsFJbIsEHK8c62CDpjuOmD//rCXAxaeyuNZO2RoUY6tZtYz94wUjekwnMAL
+ mASw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762290720; x=1762895520;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tyxiGEezzPQJne/Sqn2uD6ssURbCRESyzMG71jg9wx8=;
+ b=rSpuDRI0U2fyWa43KlZwJWgKVAaseY5CyOaUhNa4yBJvFpAFUa1b3z8xGNbtdenNR4
+ oYA/rIaY0DCY7T98rj0M6ADgihgVN1WnkmuFkzWnk0m9lmUusxSUHWxwkTSHIuajiCJ5
+ /QW47JxAjHVZhtSJsoOj2XiQdGxtrZ8aKUwtjawmtPwB3nOKBMRDJlJPsJebzJZYG9jd
+ TmRES6dhGYhbJ9qBZblZanpqne0Tnl++kn1ka2i5zcI0I77fPCUQJIQ5VLGFfDO/WcMK
+ RbfAuqomFdVbhqke1k3LF+iAFlGCTtHmswi5ya0wtonyX6xlx1Z6ycFEOSeZK8qISi32
+ TwcA==
+X-Gm-Message-State: AOJu0Yx6CzkeUqKrp3BdCYi/LVRuCsraU/R/MowS5Ejg1UPTmMgWZka1
+ o7EAfXF+JvUvrxn8DIe/Z79yqw3HiOHv2MMAxlhUWny86RHFTt7a2MUHgEcj24hOZNOLTPNtjON
+ d9DTg6gzHlqnG5xG/xqiHj3kFZyzzbs3LmDoAIWI=
+X-Gm-Gg: ASbGnct1H8S4SuXJhbFgM6cs90McL+ZGIceVAfGtk8R6vDfLMRfTJ2OXiyLMbkEyYh7
+ bZfFJMIXMPf/tEqwe/4+4t2FfKIfrPe8Z5vMAVIyeEgSuxgUeie0mV6XrSXidgABazX6nVmGIx5
+ fcyGefhzRy5U83aUE2roxQqWseL7RUTwAvEk51BnoYUflByYybDHRK6VR12F374n6hIXKIRAWpn
+ MHr75rBvl3rYTk0eWOMCnO8nYaftzYGh+LIyUqDASvXhiIHWpWkO1eZDfG2
+X-Google-Smtp-Source: AGHT+IFe0PMsMZr9OLKpAz9yMJwjqZV0OyTtyQuVGd0xgI0+rMIqjEvZtTh4hRSj7xA5fGoWmN7rvr5vk/kH9lc9R+4=
+X-Received: by 2002:a05:6830:4989:b0:746:d4cf:b480 with SMTP id
+ 46e09a7af769-7c6d12f95ecmr709618a34.6.1762290720428; Tue, 04 Nov 2025
+ 13:12:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251104010003.525-1-briansune@gmail.com>
+ <20251104175123.GE6688@bill-the-cat>
+In-Reply-To: <20251104175123.GE6688@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Wed, 5 Nov 2025 05:11:48 +0800
+X-Gm-Features: AWmQ_bnudL8V-14xsy4kg5GsPwnghIpxaV4dBJbNuk_nORKdRyvvALtnJtRlHww
+Message-ID: <CAN7C2SAz828i4a4u5N7BO46H0c+hZprshM9J51duY5V_wPu-gg@mail.gmail.com>
+Subject: Re: [PATCH v6] Add optimized Makefile support for SoCFPGA handoff
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,122 +91,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert function comments in efi_selftest_console.c to match
-Sphinx style.
+> currently. I also don't see that you tested this "make O=/tmp/somedir"
+> (which is not the HANDOFF_PATH thing) and I expect it doesn't work there
+> as it references ".config" and not "$(objdir)/.config".
 
-Correct function name in print_uuid() comment.
+Do you mean the handoff not generating?
+For normal build it is still functioning, and with this config.mk
+should also have
+this trouble.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_selftest/efi_selftest_console.c | 44 ++++++++++++-------------
- 1 file changed, 22 insertions(+), 22 deletions(-)
+```
+make prepare O=/tmp/test
+HANDOFF_PATH=/media/sf_shared/loader/hps_isw_handoff/ddr3_5128x4_hps_0
+make[1]: Entering directory '/tmp/test'
+  Using /home/intel/u-boot as source for U-Boot
+  GEN     Makefile
+  UPD     include/generated/timestamp_autogenerated.h
+[INFO] SOC family detected: cyclone5
+[INFO] Using manually specified handoff folder:
+/media/sf_shared/loader/hps_isw_handoff/ddr3_5128x4_hps_0
+[INFO] Found hiof file:
+/media/sf_shared/loader/hps_isw_handoff/ddr3_5128x4_hps_0/ddr3_5128x4_hps_0.hiof
+[INFO] Running BSP generator...
+python3: can't open file 'tools/cv_bsp_generator/cv_bsp_generator.py':
+[Errno 2] No such file or directory
+[WARN] BSP generator failed, continuing...
+[DONE] SoCFPGA QTS handoff conversion complete.
+make[1]: Leaving directory '/tmp/test'
+```
 
-diff --git a/lib/efi_selftest/efi_selftest_console.c b/lib/efi_selftest/efi_selftest_console.c
-index fd2b3d09abc..0f8e9d28ef4 100644
---- a/lib/efi_selftest/efi_selftest_console.c
-+++ b/lib/efi_selftest/efi_selftest_console.c
-@@ -12,12 +12,12 @@
- struct efi_simple_text_output_protocol *con_out;
- struct efi_simple_text_input_protocol *con_in;
- 
--/*
-- * Print a MAC address to an u16 string
-+/**
-+ * mac() - print a MAC address to an u16 string
-  *
-- * @pointer: mac address
-- * @buf: pointer to buffer address
-- * on return position of terminating zero word
-+ * @pointer:	mac address
-+ * @buf:	pointer to buffer address,
-+ *		on return position of terminating zero word
-  */
- static void mac(void *pointer, u16 **buf)
- {
-@@ -43,7 +43,7 @@ static void mac(void *pointer, u16 **buf)
- 	*buf = pos;
- }
- 
--/*
-+/**
-  * printx() - print hexadecimal number to an u16 string
-  *
-  * @p:		value to print
-@@ -71,7 +71,7 @@ static void printx(u64 p, int prec, u16 **buf)
- }
- 
- /**
-- * print_guid() - print GUID to an u16 string
-+ * print_uuid() - print GUID to an u16 string
-  *
-  * @p:		GUID to print
-  * @buf:	pointer to buffer address,
-@@ -92,12 +92,12 @@ static void print_uuid(u8 *p, u16 **buf)
- 	}
- }
- 
--/*
-- * Print an unsigned 32bit value as decimal number to an u16 string
-+/**
-+ * uint2dec() - print an unsigned 32bit value as decimal number to an u16 string
-  *
-  * @value:	value to be printed
-  * @prec:	minimum number of digits to display
-- * @buf:	pointer to buffer address
-+ * @buf:	pointer to buffer address,
-  *		on return position of terminating zero word
-  */
- static void uint2dec(u32 value, int prec, u16 **buf)
-@@ -132,13 +132,13 @@ static void uint2dec(u32 value, int prec, u16 **buf)
- 	*buf = pos;
- }
- 
--/*
-- * Print a signed 32bit value as decimal number to an u16 string
-+/**
-+ * int2dec() - print a signed 32bit value as decimal number to an u16 string
-  *
-  * @value:	value to be printed
-  * @prec:	minimum number of digits to display
-- * @buf:	pointer to buffer address
-- * on return position of terminating zero word
-+ * @buf:	pointer to buffer address,
-+ *		on return position of terminating zero word
-  */
- static void int2dec(s32 value, int prec, u16 **buf)
- {
-@@ -155,12 +155,12 @@ static void int2dec(s32 value, int prec, u16 **buf)
- 	*buf = pos;
- }
- 
--/*
-- * Print a colored formatted string to the EFI console
-+/**
-+ * efi_st_printc() - print a colored message
-  *
-- * @color	color, see constants in efi_api.h, use -1 for no color
-- * @fmt		format string
-- * @...		optional arguments
-+ * @color:	color, see constants in efi_api.h, use -1 for no color
-+ * @fmt:	printf style format string
-+ * @...:	arguments to be printed
-  */
- void efi_st_printc(int color, const char *fmt, ...)
- {
-@@ -271,10 +271,10 @@ void efi_st_printc(int color, const char *fmt, ...)
- 		con_out->set_attribute(con_out, EFI_LIGHTGRAY);
- }
- 
--/*
-- * Reads an Unicode character from the input device.
-+/**
-+ * efi_st_get_key() - read an Unicode character from the input device
-  *
-- * Return: Unicode character
-+ * Return:	Unicode character
-  */
- u16 efi_st_get_key(void)
- {
--- 
-2.51.0
+Build capture.
 
+```
+make clean && make mrproper
+  CLEAN   scripts/basic
+  CLEAN   scripts/kconfig
+  CLEAN   .config
+
+make O=/tmp/test socfpga_cyclone5_defconfig
+make[1]: Entering directory '/tmp/test'
+  GEN     Makefile
+#
+# configuration written to .config
+#
+make[1]: Leaving directory '/tmp/test'
+
+make O=/tmp/test
+make[1]: Entering directory '/tmp/test'
+  GEN     Makefile
+scripts/kconfig/conf  --syncconfig Kconfig
+  CFG     u-boot.cfg
+  GEN     include/autoconf.mk
+  GEN     include/autoconf.mk.dep
+  CFG     spl/u-boot.cfg
+  GEN     spl/include/autoconf.mk
+  Using /home/intel/u-boot as source for U-Boot
+  GEN     Makefile
+  UPD     include/generated/version_autogenerated.h
+  UPD     include/generated/timestamp_autogenerated.h
+  UPD     include/generated/dt.h
+  ENVC    include/generated/env.txt
+  ENVP    include/generated/env.in
+  ENVT    include/generated/environment.h
+  HOSTCC  scripts/dtc/dtc.o
+  HOSTCC  scripts/dtc/flattree.o
+
+
+~/u-boot$ ls /tmp/test/
+arch    disk     examples             lib       source      u-boot
+ u-boot-dtb.bin  u-boot.map        u-boot-with-spl.sfp
+boot    drivers  fs                   Makefile  spl         u-boot.bin
+ u-boot-dtb.img  u-boot-nodtb.bin
+cmd     dts      generated_defconfig  net       System.map  u-boot.cfg
+ u-boot.img      u-boot.srec
+common  env      include              scripts   tools       u-boot.dtb
+ u-boot.lds      u-boot.sym
+```
+
+Brian
