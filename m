@@ -4,104 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56E03CCF9F8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 02:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D880CCCF9F8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 03:13:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ABA182A9E;
-	Tue,  4 Nov 2025 03:31:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BA41982A9E;
+	Tue,  4 Nov 2025 04:13:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bGwjd7Ku";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="afGH5r2J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB1458389A; Tue,  4 Nov 2025 03:30:59 +0100 (CET)
-Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com
- [IPv6:2607:f8b0:4864:20::a2c])
+ id 843748389A; Tue,  4 Nov 2025 04:13:32 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12DF28144A
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 03:30:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 259D68144A
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 04:13:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-54bbc2a8586so1857080e0c.2
- for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 18:30:56 -0800 (PST)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-81efcad9c90so60109276d6.0
+ for <u-boot@lists.denx.de>; Mon, 03 Nov 2025 19:13:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762223456; x=1762828256; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NJJgq/lRehRlHbla2xyJTgQU7WJpXQInWjbzZIe8q5Q=;
- b=bGwjd7KuXXIavVBxXq5cszfYUVQl3yVDRGRg766qbb8TTzj9ImU5fxrsUHLyR0fHb8
- o/bpphXPosMNsw9lCTnqSPlyZBkZF12a0GqICwkLwelCLnG+kUAkTqmJM9TSG6GvRJCJ
- NhFEfoTBYAgc1A13sJZ5GK6DWrHTp0nbUXx8WMJhdJIm0bIfe/RR1chW0DQu7kzbMsqH
- Coef6MCBhenTG24Bo4Uhy0fVqmqJHSMwlsW+TLG0g5ZqdTpUBGl04HcB8UFURRJ801+P
- 9kNMBbCEg2/vP+2oWkAJ/TuobvTmiDLFETux6fWSLyQIy1vHiyqqKpm5FS+zQLe8e1sU
- vtiQ==
+ d=gmail.com; s=20230601; t=1762226009; x=1762830809; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=YZR6yxIudcjbnLKJAKPPP2PMx2gzReCvfc16G6sU0DU=;
+ b=afGH5r2JdNGkoS8mknqLtNW9BkNAR+KpUEkWnAT8mwVNKkbeTML0792rjKOLxIr4eW
+ 0u4qchQrUCAqzb9xC541u6Z8WfsAi+smC8t9omDAOhGdbqvVqth2SuceoAVrf+Sv7g1q
+ Z7dxuqQh11I3XbuEUVbPS7M7vrK4HqL4SNxBVWM+40d+DKvkqEUYz4XwqzonEzIr6kpT
+ 4HZ53zlEGme5X5yQDIDq5lPHaSFQXPLHFGw0Iz7121e31mVaiMdJVAMRQ6mm5+wiouQl
+ 4EKkY01Q7CUswOuHo1zmRqGjn24tDLMIbf8M9vKHHSZ/3xpYWZs+yYMF7xoblwpNqzQD
+ xy0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762223456; x=1762828256;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NJJgq/lRehRlHbla2xyJTgQU7WJpXQInWjbzZIe8q5Q=;
- b=M28z35QMicuwUaOBGGLkMmSV867fS21NXbXpI0WJjbP1buy7EJBctVhXRzGgGdwqkU
- nn1ZnjzBXnOYiCD1wGcHdVicLV1KFo3/T4f8E7vSKZKmoTWws3nbl3T1zve2bezqPzNy
- js0oK/TPfmnp/lkxjEMxQHqn1Vf13xTDJBNvz0qvC7zhV5T0L6tNeklCSsX725J6bNPg
- ImL6a8w6CrV0v6gSZNZrLw6g6VcnPbj1pbdOIIVpGR7aRRt3PKPvaFth18OANI8xuRs0
- JEraPediYARGd+rY1bHlEVqbiSTjlZrex2a9AmCARtMfnc50nfS2dA9YeuEHi6QN1JxE
- rUQg==
-X-Gm-Message-State: AOJu0YzDjpgFYkuEj6akXlpj1Tnmd5StmmbHdpcyilKlYGl+K0uWFdmq
- IVWOizYiQzWPG/Zm2/FXD+NX3SX/qGq/1lr/d+CmJj8b7muGKKCtWi0npO1vpmiU8WqkLfkJteh
- yXxxG3Lx1mTr+mXB8PIT5eyBuz46DjY4=
-X-Gm-Gg: ASbGncsI+gQDPJ+pseuLmtj7O34IxKTHt5mblcsynez3DLl8HQtoyF7rl++JcXco5iw
- rPMlDXeiuWOooWzSKW78Xiq/NYoZQpgrS28MdUh2/zYGPDZTEFsoT0JoRVW6qEOGszOd58IhQDh
- Tqqc8dEfC1crWv8L/j8m0ofyukvGuGfIMWXEu8W30RDTvA3a0tnGsngVYFYig2/GKe5rKfYf4QB
- 6BEqgPUMdxvFdqQqVtp5Hg5hr4ok3l7gmpfwdZvYSS5GSqxOsCE5mEoQRo=
-X-Google-Smtp-Source: AGHT+IH2cxhqsNJcdVbhTbUsWH2nZZBwMUKE2oNg2maqsfVvsdIoD5kisDCcVnkUBT46Eu3LsmSQVC0cYr7srytr7Ls=
-X-Received: by 2002:a05:6122:4688:b0:559:65d6:1674 with SMTP id
- 71dfb90a1353d-55965d61dc8mr1831062e0c.14.1762223455699; Mon, 03 Nov 2025
- 18:30:55 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762226009; x=1762830809;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YZR6yxIudcjbnLKJAKPPP2PMx2gzReCvfc16G6sU0DU=;
+ b=NxALcDm++nMBhi+krh+q5nPVG0T9ddYWUuBrQbGc1odpPmHSQl6VAJYanXwxRKmFoA
+ UvOXaVEW6rTJxiU5TY75hX8PF3fC1xwPdfmc6AS/ObxB355Oj/ICOtsX6SbiEwrkQQRd
+ OjiLNPR82GBIt1MkiZDsBURAGcKSj5HESeTaXT+M+iMC/j9YgzNlTdKunhXBIVX4hldQ
+ 4nweKeMYUZNJg/Y3Cjwk526bpfZ71vanMAbrpc7q2Goy/+e0p5HZAbx3N9LIjF2ixoyd
+ iSC7ICt+YQ8hYJ50lwWuUUYyilTmM4WVQzNZDj5jtw8/MiU5Vxd6LQnBBKwZcboMaCHx
+ sYyQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW9J+5uIQO/riKcrmkRn7QNz7swBhiTIu8+totJVwfpIIoXQLxsWUpJSMZlRaffHDmJoansEzk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyL1plFoue19XLVbmPdQYRh7ugtgLpakVKULqh67c9ecpD9nZXv
+ 4dhp1WmkeffLTAmsFk4WKTyMjjBlwJOhyjmGAU8K31cASEq3WxKOD7Iz
+X-Gm-Gg: ASbGncvraROye5J+zyahrjgU7Scl9auVmSROhtPc9OCSrSf9EvBNKeXfvTYNqtCqNf5
+ T3zxOS2Ih4979O9WZ9HhYjPyPo3LDTKJTNQzPTjVkeldWncJnCTlmnHek8INlcAZ//f4QK0WZkp
+ K8eFIKJSeO9A7VKnULNGf+2c7Y2wVBbsBtMofv7LAWZlA2UChW8NN8l7c9gPw3WyM5RVO4O5ydr
+ SooaMG0qxMGRG4o1V9aPRF/9ls4r+nvfTM8SW/Pa2p4pDTBtihkWNDJJNOpz5zqKYbVNtNFCl5c
+ AiZrdTjTKCx3OdZr6NiXpJVxz/oMJgLN6fJiiAfQJ/ug0wOugrhVWAmsdyeqUOL1Nm5LcEbb5dg
+ Cijjtek8pQEZd1Fn0XMAENHd/SgjBXFX4DvDFMrtJd0oEkL0I32S4+1wLhbvw4b32dwIyNa1NDI
+ kGwHMk1QbcUXmIwTqksVzcGag6nSeLQtwqHkA8zMg=
+X-Google-Smtp-Source: AGHT+IGDDZsYnnlkKyfYd3y21lt29GUL/GLz6A71yKFeyhBrTOgLb1mwlgZgf30mQy2kfUBUa0BqkA==
+X-Received: by 2002:ad4:5d67:0:b0:7d4:e416:ac05 with SMTP id
+ 6a1803df08f44-8802ec30da7mr192889646d6.0.1762226008803; 
+ Mon, 03 Nov 2025 19:13:28 -0800 (PST)
+Received: from [192.168.68.100] ([216.58.22.99])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-88060db6137sm13037386d6.4.2025.11.03.19.13.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Nov 2025 19:13:28 -0800 (PST)
+Message-ID: <745a1137-08ad-4365-9712-35a45b9ed6fd@gmail.com>
+Date: Mon, 3 Nov 2025 22:13:28 -0500
 MIME-Version: 1.0
-References: <20251101064907.5037-1-hs@nabladev.com>
- <20251101064907.5037-3-hs@nabladev.com>
- <CAMDkj5w4uwKFJwoSdM2CnG4-ewH3V5X0ZW3jk1MCNH+Bdg+j3A@mail.gmail.com>
- <076c5537-3613-38cb-8d7c-e56a89f903aa@nabladev.com>
-In-Reply-To: <076c5537-3613-38cb-8d7c-e56a89f903aa@nabladev.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Mon, 3 Nov 2025 21:30:45 -0500
-X-Gm-Features: AWmQ_bnDlyAZjInkToSTCMitii_fSudhvfj1qdegtk4j9-vTjYfj0y4Ve0NZHjA
-Message-ID: <CAMDkj5yUcnyJXvyCZdjVWyMGDCAaiDWoTieMOdTpFEOt_JQMrw@mail.gmail.com>
-Subject: Re: [PATCH v1 2/5] lib: implement SM3 secure hash
-To: Heiko Schocher <hs@nabladev.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Greg Malysa <malysagreg@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RESEND PATCH v5 0/5] Enable Firmware Handoff CI test on
+ qemu_arm64
+To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen
+ <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, 
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, raymondmaoca@gmail.com
+References: <20251021181703.598342-1-raymond.mao@linaro.org>
+Content-Language: en-CA
+From: Raymond Mao <raymondmaoca@gmail.com>
+In-Reply-To: <20251021181703.598342-1-raymond.mao@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,84 +109,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+Hi Tom,
 
-On Mon, Nov 3, 2025 at 3:55=E2=80=AFAM Heiko Schocher <hs@nabladev.com> wro=
-te:
+Is this series ready to merge or any improvements are needed?
 
-> Hello Raymond,
->
-> On 01.11.25 18:11, Raymond Mao wrote:
-> > Hi Heiko,
-> >
-> > On Sat, Nov 1, 2025 at 2:49=E2=80=AFAM Heiko Schocher <hs@nabladev.com =
-<mailto:
-> hs@nabladev.com>> wrote:
-> >
-> >     Implement SM3 secure hash algorithm, as specified by
-> >     OSCCA GM/T 0004-2012 SM3 and described
-> >     at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
-> >     <https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02>
-> >
-> >     code is based on linux commit
-> >     f83a4f2a4d8c: ("Merge tag 'erofs-for-6.17-rc6-fixes' of
-> >     git://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs
-> >     <http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs>")
-> >
-> >     Signed-off-by: Heiko Schocher <hs@nabladev.com <mailto:
-> hs@nabladev.com>>
-> >     ---
-> >     This patch drops a lot of checkpatch warnings, ignored them
-> >     as tried to stay as close as possible with linux code.
-> >
-> > MbedTLS also supports SMx, can you turn on the SM3 option in MbedTLS an=
-d
-> make it selectable between
-> > lib/sm3 and MbedTLS via Kconfig? Just like what we have for other
-> algorithms.
->
-> I must admit, I have never used MbedTLS ...
->
-> [u-boot]$ find lib/mbedtls/ -name '*sm3'
-> [u-boot]$
->
-> So there is no sm3 header or c file...
->
-> [u-boot]$ find lib/mbedtls/ -name 'sha*'
-> lib/mbedtls/sha256.c
-> lib/mbedtls/sha512.c
-> lib/mbedtls/sha1.c
-> lib/mbedtls/port/sha512_alt.h
-> lib/mbedtls/port/sha1_alt.h
-> lib/mbedtls/port/sha256_alt.h
-> lib/mbedtls/external/mbedtls/library/sha256.c
-> lib/mbedtls/external/mbedtls/library/sha3.c
-> lib/mbedtls/external/mbedtls/library/sha512.c
-> lib/mbedtls/external/mbedtls/library/sha1.c
-> [...]
->
-> But I find for sha* ... so I am unsure what you mean now, what I
-> should do/change?
->
-> My bad... The supports are still in PRs, not part of the main branch.
-So I am fine with this, we can integrate the MbedTLS missing part in the
-future.
-
-Regards,
 Raymond
 
-
-> May this can be added in a follow up patch?
-> Maybe you can add this part?
+On 2025-10-21 2:16 p.m., Raymond Mao wrote:
+> This patch series enable Firmware Handoff [1] CI tests on qemu_arm64 by:
+> 1. fetch MbedTLS (v3.6), OP-TEE (v4.7.0) and TF-A (v2.13.0);
+> 2. build bl1 and fip with both Firmware Handoff and Measured Boot
+>     enabled;
+> 3. pytest to validate the Firmware Handoff feature via bloblist by
+>     checking the existence of expected FDT nodes and TPM events generated
+>     and handed over from TF-A/OP-TEE.
 >
-> Thanks!
+> Pre-requisite u-boot-test-hooks patches [2] are required.
+> A test pipeline is triggered at [3] with hacking docker image [4] and
+> test hooks [5].
 >
-> bye,
-> Heiko
-> --
-> Nabla Software Engineering
-> HRB 40522 Augsburg
-> Phone: +49 821 45592596
-> E-Mail: office@nabladev.com
-> Gesch=C3=A4ftsf=C3=BChrer : Stefano Babic
+> [1] https://github.com/FirmwareHandoff/firmware_handoff
+> [2] https://lore.kernel.org/u-boot/20251003191918.767698-1-raymond.mao@linaro.org/T/#t
+> [3] https://github.com/u-boot/u-boot/pull/818
+> [4] https://hub.docker.com/repository/docker/raymondmao20200915/uboot-ci/tags/latest/sha256-bff18c1f2488d350e9e6e51c9987e24c36b3bfe110079aa0682964c815dd285a
+> [5] https://github.com/raymo200915/u-boot-test-hooks/tree/eventlog_handoff_v2
+>
+> Raymond Mao (5):
+>    docker: add OP-TEE and TF-A build for testing Firmware Handoff
+>    pytest: add test script to validate Firmware Handoff
+>    configs: select CMD_BLOBLIST for Firmware Handoff testing
+>    ci: check existence of bl1 and fip in the test script
+>    ci: add test entries for qemu_arm64_tfa_fw_handoff
+>
+>   .azure-pipelines.yml                   |  18 ++++-
+>   .gitlab-ci.yml                         |  21 ++++-
+>   configs/qemu_arm64_defconfig           |   1 +
+>   doc/develop/pytest/test_fw_handoff.rst |   8 ++
+>   test/py/tests/test_fw_handoff.py       | 108 +++++++++++++++++++++++++
+>   tools/docker/Dockerfile                |  40 ++++++++-
+>   6 files changed, 189 insertions(+), 7 deletions(-)
+>   create mode 100644 doc/develop/pytest/test_fw_handoff.rst
+>   create mode 100644 test/py/tests/test_fw_handoff.py
 >
