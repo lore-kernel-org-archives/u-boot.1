@@ -4,152 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E807CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 14:04:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A135CCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 15:04:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C27258004F;
-	Tue,  4 Nov 2025 15:04:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7912B8004F;
+	Tue,  4 Nov 2025 16:04:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="I26fJDbO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OeT93BYk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 215DF82A9E; Tue,  4 Nov 2025 15:04:46 +0100 (CET)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB05B808AF; Tue,  4 Nov 2025 16:04:21 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DC278003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 15:04:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4F458003E
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 16:04:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BICAFFSjETx/slmCA736eDzrQhLh4/6z7a6ycK/v/HFCgxBv6YtJW2HJKOe1R4MX583oNWunJTnKLqONlAp+2PVY1y5HZk3wU2MMfEWd5VHbnsKBFY4VKAlwGDBSwOz/3lSdZ4aZJEOScMLiv0GlxM4QPUDlAXI5uGTFMg4OnN3oeY9l9JS6eSJSnZcFfaq4mfDxQHcy7BsLyTivQY3AQtnnv1UNqntk7uKvxH9hmuJhBfaOjDFzG9z6jcu8DDZdmRVNKAAYB1LzFpH5X2n5IitAX+Jt6L4+gACluM9KTLx9N+g9weTDYpFujcogR8plo4iAxu4zpdk5RY68cfPdog==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=r6FT7cHG4gX5HxRe+iIIHlWQurBotU2U1bBifD9R6Vg=;
- b=fj5iflSJsbadYDzbGNFhSRhVGrGQQL0D0xX0X3Ee0V04Badzls52QpusBOUNq+FrTu9NCMKj0sUHTHkujKv0/5w0/8Cb4i+OJcBtcUc8Cm4Yq2ybHPJfYUX7KjaXn8CdI4o2vca27c3Dq619Ywf1QRJ21zL1hoqnIxtNIAGOVHQbcoKuYZqPEX7Ws91+c5tclALjYElYNh/ZlQS+Nwg/9LPX4RZrGGNc7iTEpRpQRd7GZJcEAuQW6DLjMPAmVmQlXuVHYaB0hF91w5FVS1BY/Qm/3hsBPaDqgfcY4BWijcndG8cH2rm/f3rcwoHnZ0loRvJjH8kTqaFP6wF9bw8ubA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r6FT7cHG4gX5HxRe+iIIHlWQurBotU2U1bBifD9R6Vg=;
- b=I26fJDbOD1DC4CLrCCMbFLb+9PYrbo8TAQdX5+lIGiygfd+STTHFa6njwOVcPfmf3+wydyxsAvLE4kc0RQvSOA86Lok1Kjxb21zLzJHZwmHTFYYN1G5NTtVU/xZrRJFMoZuTauQJz+a4xX6wd1vxhdCAdiZn6SYMkUtds9vHvOM=
-Received: from BN9PR03CA0727.namprd03.prod.outlook.com (2603:10b6:408:110::12)
- by DM3PPFC7C228AEC.namprd10.prod.outlook.com (2603:10b6:f:fc00::c4a)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.7; Tue, 4 Nov
- 2025 14:03:59 +0000
-Received: from BL02EPF00029928.namprd02.prod.outlook.com
- (2603:10b6:408:110:cafe::7a) by BN9PR03CA0727.outlook.office365.com
- (2603:10b6:408:110::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.16 via Frontend Transport; Tue,
- 4 Nov 2025 14:03:59 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BL02EPF00029928.mail.protection.outlook.com (10.167.249.53) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Tue, 4 Nov 2025 14:03:57 +0000
-Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 4 Nov
- 2025 08:03:54 -0600
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 4 Nov
- 2025 08:03:53 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 4 Nov 2025 08:03:53 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A4E3rre2016442;
- Tue, 4 Nov 2025 08:03:53 -0600
-Date: Tue, 4 Nov 2025 08:03:53 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Anshul Dalal <anshuld@ti.com>
-CC: Santhosh Kumar K <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Dave Gerlach <d-gerlach@ti.com>, <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Andrew Davis <afd@ti.com>, Judith Mendez <jm@ti.com>,
- Vignesh R <vigneshr@ti.com>
-Subject: Re: [PATCH] mach-k3: Kconfig: fix NR_DRAM_BANKS for AM62x and AM64x
-Message-ID: <20251104140353.pfql2n5rmaa7lqpg@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20251104-fix_nr_dram_banks-v1-1-761ddb57f4cc@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-471b80b994bso72859295e9.3
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 07:04:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1762268659; x=1762873459; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uMu3QD6eLkyRDcUG73DIhbLqu1ezFi1FRyR6CkDfnVY=;
+ b=OeT93BYk0bLO1c4f9HNr/ea8TrvUbV1ydnOOhfDgrF9YP/iLsPr8dXrS/lu37LWriq
+ Z2ScU/myJsO2EWYH5NZfVaaGHzgjktvlM1gKBm/8Dus5dzV+Y6GB1GLdqZNiTlCYRQt8
+ z75+Z57tRhyM3FvJW+55imHZoqXsC2w6y0bfhPTnntb9wAo4lkZWfIaH4RYov7vE3/pC
+ FmqWAdbBtQa/dPZ4+EAn+XCtJV6ynazLshYcs9JCtOGa+uLf1D2LNxayDd9lxBXeb7MP
+ Q4lOd2LO1rEkuTAOvFDthDPOV1URFbUFURa0DBHBCQzrbu0iAOKpwX6sWG9ZKdRLJNYr
+ zC8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762268659; x=1762873459;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uMu3QD6eLkyRDcUG73DIhbLqu1ezFi1FRyR6CkDfnVY=;
+ b=EC7c8CeVM11ijz6kqYOi1UGK4QWthicWJ8L30mJ2mAE6APwb3oZdduL9hv3lbxhLS0
+ /F+B+cPQGiCTJ6Fiz43bHDrQHXyKaYszWwG7vb0Bu8vhDWBEXfUjkX12scW/vQ3j2/4L
+ WanUDh0M2psGgnPvTvaTofgj3NvpwT64JVyzI/vz0AdedbUoJQRXJEVSfN97ECZGPbG7
+ kpIBH6Sh7Fv7VDi3OWu64xAMJJXt+gTktSW+OXId9F3udQPTSfAoAG1UrfVyK0evWMaj
+ U73TTDjFH5ey7nWY2bHmxrss6uAyQCuLh/OndMMqVXKxrVDVKwIkdFjJNpKlk+fYJ5PS
+ qf+g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVhrgAgQHLKhhldVAKXIGcQ5BUWo7hjFON/bbJdinsbFd8bVIQE/F44guujzvcenME2i87qMKc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdMkR7FwuKyPngOmjC4N/FFkKp5SJhx1MdfkeDGngdDHIOnUw2
+ AUch7IGWvC/JofKg8R7SbCxoja9sDqRYcR/H3IRFlb9ssynD9YBF4gLLtHFhOdExnRY=
+X-Gm-Gg: ASbGncsv1NvQP+jL3kI6JjJf3UXYpgxJBn5N7MEQLaH98bP0FuD2UOlWTiGiVWKjtL7
+ RL9l7msMvACzvgRN1EZ1LR+a3TNuO8iAPxlQBz1XOVurP1FjTgoa1zfskyz8eJmpyBR6Vj8+7CC
+ HHE4mxFJ1bCr06ewEcQW+/P9sdpYJhNP+PJ/zye4bUxHZU9nj3lAZRiyCgJLPnt5np9l8WDNR94
+ eHM/jfkh161RBHv5sXTHDolDrVFq0u9PAMxmc3nUCX0SpcW4JljqT0GZbB0WKnWEGKqFwm3YhCg
+ 6oCwRyHZyMI7PGzDklIJ8jaAdwFknY9PZHP9Uv++G5epSTwx+QqE77SSgsu/RTkQlGfoccQeKMb
+ RHnJ95Z1gtERKxALO0BGj9PnSBILWPZAxVAJwub9P3MHNBTKFbgeO9OzaW+gwR+RZ5m9kCoLANe
+ jcFwiBmlZwqkeKSHI2RaJ2/Y07buo7SZQH6oZ/wig5sPndoIvheC8E6s2Ue8I=
+X-Google-Smtp-Source: AGHT+IF/TUSg2c0Pa1YA7j8nSoW4tgWQikwUoKdliWX5K6b05LC6m4bHaWLYY5ChYJyDB8Hhd/yl7A==
+X-Received: by 2002:a05:600c:5307:b0:45b:9a46:69e9 with SMTP id
+ 5b1f17b1804b1-47730890cd5mr183268515e9.31.1762268658935; 
+ Tue, 04 Nov 2025 07:04:18 -0800 (PST)
+Received: from hades.. ([95.164.180.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4773c48daa0sm223581805e9.3.2025.11.04.07.04.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Nov 2025 07:04:18 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: trini@konsulko.com,
+	raymondmaoca@gmail.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Xu Zhang <423756212@qq.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: [PATCH] armv8: Fix transfer list passing with KVM
+Date: Tue,  4 Nov 2025 17:04:02 +0200
+Message-ID: <20251104150404.3355422-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20251104-fix_nr_dram_banks-v1-1-761ddb57f4cc@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00029928:EE_|DM3PPFC7C228AEC:EE_
-X-MS-Office365-Filtering-Correlation-Id: 03d8f915-f6ab-4a22-7048-08de1baaff73
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|34020700016|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?V1k1N3dpajVnQkRpS2FuN0s0dTBzVnFCdFcyL1FPWGxqWE5tQnludFFKRk50?=
- =?utf-8?B?VlNYUzhMZjFaU2lQM1N5MlYxSDlhempSTkkxdnA5TkJuYlNIM3MyQ3JyQnN6?=
- =?utf-8?B?aDZKNWZ6UHhVR2lmTlJ4aEdaT2VIazY4YzMzS0ZRQU01cTg4engybjFFQWc0?=
- =?utf-8?B?Nkl0Wk02Z3RCRS9oQzVsL1hWdVZvTUwzZDI1aGZ3Mi9sVms0WlIxeGgwZ1My?=
- =?utf-8?B?VUVXeDQzNm10eXllZzFiWk5EWWtzNE9WbEg2YkVpWHVBY3N5MGxxV3NKUGVJ?=
- =?utf-8?B?VTRnYXhGbnpZamRXMnRucFlRTTdOVmtaNGFEQzU5ZHYvdVdXV3FZeXlGMThr?=
- =?utf-8?B?eU1LUi9RbFU0MXB3UjdhOXFESko2OUxrcm9TUC9iOFliWWl3ZGFHaGFQMTVH?=
- =?utf-8?B?c0g5UWFRbnp6WnUrUUIyNXdWaUtnWE5FbGJld2FNQ3JWK2NFU3ZMaUZaZEtH?=
- =?utf-8?B?MklSUTRiVjJrVVNWLzEwNkNRSnY0UDV5aHVSOFBmMWRrcytxb21mQkJ0ejdX?=
- =?utf-8?B?OFhxWFp0OVplck8zNVd1R3V0YXV0eFVBeDlBWnJ1WW1rVXl1L3UwT2ErWC92?=
- =?utf-8?B?MzNiNktxVEVUT1FaN0dYdWlITEp3STRtVWhDajdmRUxRRHFxcXFiU0NwUTZJ?=
- =?utf-8?B?UGNuS0s2cnA4ampSY0pFTTRPMXdmUGtNN2o0L1YyVHRRZERaT2VVOXY4anVQ?=
- =?utf-8?B?VkticlRRbC9hSjFmQUpLZ2RxR2sxNmEzaDduTXVrR3MwRVlqcXE2Vmg0aFhP?=
- =?utf-8?B?anJmc0pGeXViVU4yM3R4UjJNVlFXbVJqVlh2SjNGZGwrOUh0NkUxeVNSYnY3?=
- =?utf-8?B?ZlFwUzFrUWtsVjIzbVNEK25ZdWk0ekJkbEtCZ3ZUVnEydlRPYW9zcHNqbUgr?=
- =?utf-8?B?VUR5K3IrRzJ2SWtJL3BVWUhsUHBWQzhNTlBWRzFtaVhQU1NtSUkwUmVBZ28w?=
- =?utf-8?B?UkdiYmZqSnJGNURBbkV4R01EdmY4MUgwOFd6UXBvcXI0cTNyckJvdDk3ZHUy?=
- =?utf-8?B?dVU4SjNBekcwZnpHTmtHVGNuaVo3ajNvYVVwTllFdUxwaWVqc0dNc0pqZEtH?=
- =?utf-8?B?RDNWQ1dnYmFWVjlGUGVZOVJFTFBSZVF3NXM2c2dqdWVzMUI2eDZ3Sk5PZFZz?=
- =?utf-8?B?UDM1ZERqRCsrWFZISkVFQkdRTDI5U2x6clBVcFArcnVkSVoySjg1cmUzSy96?=
- =?utf-8?B?SDN6MzZ6ZmxBczcrSDdhMnFTMElrN0dmRmlzcE12ckhmL210TU10WjRmcWtP?=
- =?utf-8?B?Nm9TdDhZbmxmRU9kcTEwdjJCQkhSeC9nb1J6TGUrSXdVZDFrN3pNT2lobS96?=
- =?utf-8?B?Zno1c1NJN25JcHZHSm5TVWdlMFI5eTlkMjlXWmlWMXZ0djJWSlEyWWtxYUY2?=
- =?utf-8?B?M1REK090dXhRcVZmQ2Fza2NTNFhxYTRKL3dYZENMc3YvUjNobkVCRGJqbUg0?=
- =?utf-8?B?UUtGREtYSVcwYjdTNnVEa3Y1OUhBNEFNZ1Q3MVRPN3RvM1NEOWVKZ2pzZ3dp?=
- =?utf-8?B?dVgxa1VjYkhaOCtFSkF4UmxLWFNEVGdKYWtHYzdUZ0VXSkp2aFR1aXNxN05L?=
- =?utf-8?B?OWlsVjNocFR4YXNNa1F4eTlDQk01NmJYaFBKdFpvcjlRS0x2dTV4WjBROFp4?=
- =?utf-8?B?eTBza3d1N3FNUkNLREk4U003ZzNNTkhQMEtpMzRBcDlwRlBIZTdCT3hwdVBl?=
- =?utf-8?B?UktyLzl3ajZhczBkK21lbWJ5R1g0czJreW55cjNCcXJjeDY3Q3EyamxhSW1M?=
- =?utf-8?B?Y3pGRUttc2htN0YvQ3dLYzNZZkZObFlDcEIwOTJNYlVpVlMwK1AzRjVQYjBz?=
- =?utf-8?B?bHFBb3crdGxTZlRoTjNyRVFmdnM2a09sbjJDbC9GcmVib3RIcjFZK1FHWmty?=
- =?utf-8?B?WURUWDNxbmRMVVlNT0owdGQyd0dZUHgrWDk3WVhCaW1ocWtmYjRnMCtQSnBj?=
- =?utf-8?B?amIzaXY4TmdqSyszUXdEY3dORXk1R3g4UzBSejdTazBrZGRUb2ZpOEEvdGQw?=
- =?utf-8?B?WGxrNnhqZnk4cFdQZ05ZZUQ5bXZtakVUdVlGSGR3ejZ1Q0c0MzF5bThGWndi?=
- =?utf-8?B?TkVreG0rZG1kcnlRU28wOHFQZDRZaE92MlMvcVE3aU5GTUU1SEpvNEdJaTFH?=
- =?utf-8?Q?WSnY=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(34020700016)(82310400026)(36860700013);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2025 14:03:57.6659 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 03d8f915-f6ab-4a22-7048-08de1baaff73
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00029928.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPFC7C228AEC
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,34 +99,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On November  4, 2025 thus sayeth Anshul Dalal:
-> CONFIG_NR_DRAM_BANKS was improperly configured for AM64x and AM62x.
-> 
-> Although the commit b7d70fe68b9c ("configs: am62x: fix
-> CONFIG_NR_DRAM_BANKS to 1") fixed the issue for AM62x, a better fix
-> would have been to default to the correct value based on the SoC type
-> instead of relying on board defconfigs to set the correct value.
-> 
-> Fixes: 01fa91bd5bbc ("arm: mach-k3: Set NR_DRAM_BANKS to 2")
-> Fixes: 55afd2d8f5af ("configs: am64x_evm_a53: Add Initial support")
-> Fixes: ca1d803a4740 ("configs: am64x_evm_r5: Add CONFIG_NR_DRAM_BANKS as done in a53 defconfig")
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
->  arch/arm/mach-k3/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-> index 1b8c0b1eb968f0414107c0bf3142f744ce8364c8..9c99cf4744410601f770838aae29d3643c4f170b 100644
-> --- a/arch/arm/mach-k3/Kconfig
-> +++ b/arch/arm/mach-k3/Kconfig
-> @@ -155,6 +155,7 @@ config K3_X509_SWRV
->  	  SWRV for X509 certificate used for boot images
->  
->  config NR_DRAM_BANKS
-> +	default 1 if (SOC_K3_AM625 || SOC_K3_AM642)
+When loading U-Boot in a low memory address, the adpr instruction
+to preserve saved_args[] end up within the memory space of QEMUs
+mapped pflashes. As a result the following store pair instructions
+lead to a crash since instructions that modify more than one registers
+can't trap into KVM.
 
-Why does AM625 fall into this category? I can understand the AM64 which 
-only have 15 address lines for the DDR controller but the entire AM62* 
-family should be able to back the full 16b addresses
+This problem can be solved with loading U-Boot with -kernel
+and defining a different text base address. But when running with
+-bios we always start from 0x0. So let's postpone the calculation
+of saved_args[] post relocation, where we will have an address that
+doesn't collide with the QEMU flashes.
 
-~Bryan
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ arch/arm/cpu/armv8/start.S | 8 ++++----
+ arch/arm/lib/crt0_64.S     | 4 ++++
+ 2 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
+index 40c342e97e9b..ef335de16b79 100644
+--- a/arch/arm/cpu/armv8/start.S
++++ b/arch/arm/cpu/armv8/start.S
+@@ -387,10 +387,10 @@ ENDPROC(c_runtime_cpu_setup)
+ WEAK(save_boot_params)
+ #if (IS_ENABLED(CONFIG_BLOBLIST))
+ 	/* Calculate the PC-relative address of saved_args */
+-	adrp	x9, saved_args
+-	add	x9, x9, :lo12:saved_args
+-	stp 	x0, x1, [x9]
+-	stp 	x2, x3, [x9, #16]
++	mov     x0, x19
++	mov     x1, x20
++	mov     x2, x21
++	mov     x3, x22
+ #endif
+ 	b	save_boot_params_ret	/* back to my caller */
+ ENDPROC(save_boot_params)
+diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
+index 3e7627aa389b..d6246010f368 100644
+--- a/arch/arm/lib/crt0_64.S
++++ b/arch/arm/lib/crt0_64.S
+@@ -132,6 +132,10 @@ ENTRY(_main)
+ 	b	relocate_code
+ 
+ relocation_return:
++       adrp    x9, saved_args
++       add     x9, x9, :lo12:saved_args
++       stp     x19, x20, [x9]
++       stp     x21, x22, [x9, #16]
+ 
+ /*
+  * Set up final (full) environment
+-- 
+2.43.0
+
