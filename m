@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64B6FCCF9E3
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 19:05:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39EEFCCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 19:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3C44838A5;
-	Tue,  4 Nov 2025 20:05:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 95A00808AF;
+	Tue,  4 Nov 2025 20:26:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bryanhinton.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KiQoDiA3";
+	dkim=pass (2048-bit key; unprotected) header.d=bryanhinton.com header.i=@bryanhinton.com header.b="sl6H+ELW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 917638003E; Tue,  4 Nov 2025 20:05:08 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9569A832AD; Tue,  4 Nov 2025 20:23:45 +0100 (CET)
+Received: from outbound.mr.icloud.com
+ (p-west2-cluster2-host6-snip4-1.eps.apple.com [57.103.68.234])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E83B8003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 20:05:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8079C8004F
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 20:23:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bryanhinton.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7c2816c0495so3845864a34.3
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 11:05:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762283105; x=1762887905; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=19SbC4bkEKcR+fsijJKmX8QymvHi54208RDuOnQSpng=;
- b=KiQoDiA3sHdO007HBf1J4EjihFdMbXpbqNNgvkffP1zZHRgMr1iSbzZSftd4buJhkR
- //OdHvlthn8vndcz/HPe5DuRDuuydQbPzxIDujcchueOkXEmdtKIqJADSl+MtZM5GTI+
- myC3cte8qlVv0+DWCx7DNMFdUrO78oLfIwI0U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762283105; x=1762887905;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=19SbC4bkEKcR+fsijJKmX8QymvHi54208RDuOnQSpng=;
- b=BcpUp029MP4m5AkvLL6rezSiVdSCz0kJ2mOxn0uqiS1QJjEhzgh68nLwgM7gfcPUCj
- BN5STQXxvMymO4bhJj+/Bunqgqvl80CEcZ7TuLFHAEoLOvZQnPI6C4/mMMaWM9iHGX1W
- NqokXKCzQwdFISBKR8Qlg/aoa0fCYNkRv39xnN7wkOEBgTPvAqEL2UyL6UCIw/+P9XGr
- 33nujXgK9dMkfcf+zp25yGiQ/3GUC/g+lRdpYgvzQtb39LYphgKpL7+QZoHhcvOnhzUA
- Bq4r4wDJdq2lm6buBeQF99PfjYMHchEOy33GHEgAzkLu1As67wE1H9vAVxbftdoDNk5H
- 10qA==
-X-Gm-Message-State: AOJu0YzkzD5aNP+E3eJ43q+h8WxOF1uFPAU9BQZsOEELcY2p1s/cjIFp
- 7tswlYnH9FFzG9359ANKNv77JiYPbqzTH8WZXMLlMemqjSqNhxkQ/hUw+Y3lK9TbBW4=
-X-Gm-Gg: ASbGncuYLe0+1XF2bPu6qf4HDjQNkv2TSaohKVrazLzhbArJUmsIc2U2Nuk3Zkt8ZTt
- 5t5SWLSK9w/LKWkvQMReiVlyF/fzf4/4eMbY10XWJgHuiCso4iopD74JjffUfKOfIWZCzHnoohV
- PVMvUGv6KOt0gVe/6Y3pVn6gqY5R1tNoQO+qa0R45WO/ii/iDRmLeEscxEQGma+5cVKDXsANhlU
- RYZBqyDH3AV6LXEskntYua4Prl9XV/5cYXe3z4vbfkL3z8Dbm2lk+NBcRcE7Uca1VZrK7ZMlL8r
- QT1V1kiR8Uj8eivIB/p0e7MwSMDGj1KmeoLUZP0fxisYiJA42ncJegFCdxCDls4YRDtsYKSNNdo
- UDSyporD3xNOYxaAaaPKlnWWTA6Ceew3AQczW3HrJBTMNIxDhN9XM40aNijyhJxB91VCBWNSSUo
- 539zH4Ow5hby4lmRCOy2f/FUb613Du6JUz6XiASQ==
-X-Google-Smtp-Source: AGHT+IF5H2cSn4Yyv8oV4M1ayKDagCuUouUBPkYMBWMcEKYGeTXd9BM0+F00LyjpVIjJxo6n51BCHQ==
-X-Received: by 2002:a05:6808:4f68:b0:44d:9e0a:eef2 with SMTP id
- 5614622812f47-44fed57202cmr251526b6e.65.1762283105210; 
- Tue, 04 Nov 2025 11:05:05 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44fe4ca9d03sm352611b6e.24.2025.11.04.11.05.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Nov 2025 11:05:04 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251104181221.3980984-1-trini@konsulko.com>
-References: <20251104181221.3980984-1-trini@konsulko.com>
-Subject: Re: [PATCH 1/2] CI: Move to Ubuntu 'Jammy' 20251001 tag
-Message-Id: <176228310404.3992564.12719024892457136091.b4-ty@konsulko.com>
-Date: Tue, 04 Nov 2025 13:05:04 -0600
+ spf=pass smtp.mailfrom=bryan@bryanhinton.com
+Received: from outbound.mr.icloud.com (unknown [127.0.0.2])
+ by p00-icloudmta-asmtp-us-west-2a-60-percent-7 (Postfix) with ESMTPS id
+ 4784C1800E99; Tue,  4 Nov 2025 19:23:41 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bryanhinton.com; s=sig1;
+ bh=byIjHgqPhbwTpGAMOJwsGZIysqyC3b3REPGcyuoF7uU=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:x-icloud-hme;
+ b=sl6H+ELWJTGDMykO7kAbULbEw7xKCat8rnrBocO2rRE8TQsdsiMZmyTcvPi8cyjQ1LVMnzVNSQrpOUrjP1CZCrbEY1UT4EsewM/DtxRm7fwWcjT8t7/M2KFjb9WAUw4hfxUkT2hTx8BYvqKK7xJAHuD3TmFvDp966jcuKancUhNa20Ee7cBWLHDYTXSh98nfe3BMkB7hPbHuKQmeNvlPPHVCIbd1kEoiJgwcGfOaBbkbdk4CGYCG4OBzLP14dGK4oPa1NLiEK4qGAMtb90H9tJcYVtKt4s+pHP4AI8Sj34WAPNSIl3vt6wIxQMUjz4b43jPH2fbEbTn9h7UnKh8MwA==
+mail-alias-created-date: 1643268037438
+Received: from localhost (unknown [17.57.152.38])
+ by p00-icloudmta-asmtp-us-west-2a-60-percent-7 (Postfix) with ESMTPSA id
+ 85BB51800E97; Tue,  4 Nov 2025 19:23:40 +0000 (UTC)
+From: Bryan Hinton <bryan@bryanhinton.com>
+To: u-boot@lists.denx.de
+Cc: bryan@bryanhinton.com,
+	trini@konsulko.com
+Subject: [PATCH v2 0/2] Add Radxa ROCK 5B+ defconfig
+Date: Tue,  4 Nov 2025 13:21:51 -0600
+Message-ID: <20251104192354.2232191-1-bryan@bryanhinton.com>
+X-Mailer: git-send-email 2.51.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Authority-Info: v=2.4 cv=Ser6t/Ru c=1 sm=1 tr=0 ts=690a52bd cx=c_apl:c_pps
+ a=9OgfyREA4BUYbbCgc0Y0oA==:117 a=9OgfyREA4BUYbbCgc0Y0oA==:17
+ a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=FV9fdKxAccva9e2moXkA:9
+ a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA0MDE2MyBTYWx0ZWRfX1eYIY0XR14ZP
+ yJkAEMdX0cYhXo8qE4jdfT+RE7Xfws2O7eUk3zWYfI9d8sOFqLvbYBkTXJCN7O/f3TJ2q5MuQ10
+ 5lcMQJ5BXePCEaYZ3d+N1gaMWmTWDsZLEnBDVPCW57FNdOweelT5aOd1lwnoj8HNqs4USyPgDts
+ NwRQn9C+3xT7nDN1sKjzvShkuLhGFUaLMfX9+Tu/knN2sE/8xX2t4dRJIYMW9disgSsjZYj+z/b
+ +XCA50PVJfHtr1xLRz3XyLfNCoVjKqLoBOgrBDB6TazL1gdra0Zwhpf9sWJrAovJDdzi6MrGL/0
+ owycADCJWALydWUoAw0
+X-Proofpoint-ORIG-GUID: 69H3rwMdMGloTisBgGFup0fwqj9tNdSB
+X-Proofpoint-GUID: 69H3rwMdMGloTisBgGFup0fwqj9tNdSB
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-04_03,2025-11-03_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1030
+ adultscore=0 suspectscore=0 phishscore=0 malwarescore=0 mlxlogscore=568
+ mlxscore=0 spamscore=0 bulkscore=0 classifier=spam authscore=0 adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2509250000 definitions=main-2511040163
+X-JNJ: AAAAAAABZz6w1RJHO7rE0PAEqqwHkxfjAq9j7jnZORziAdue5jhlzKEFVFLCSMwFphi1DApydZrnROo4tLrLO6Tu9/58OiZJYQHp+ZOTjFxvDB7yFSCDX+nWe+m35l2liKpvVxULGZDuEXr4EC/Nlu0UI4At68J4cruAQW7pd1O7cRtIsp5NTIG/nFXne9j/lTT7iRcNeIcPaMYP2P+porCEjcVNwVIih1lwZgpC7V/hxy+aDJCNu4S7t/5tJFpS0orDL3+bbdhTe6SbWnUQGgtKklqPbwT+A58Qy5hx8ge2PwKHDshKYqec69kMs4n0HxoRLHj4+KSnK96/gbzRSxuF/ZJD7eRJDeWFn4MkZhalR8tVmtEBWKvDbNLAP7oh3G+2cK4tCqyqZ2fau/kyckypoR170zxlGCELyNRr3KGxiBeG+n/PYJbUr3p+fvH293OqXJrUiPxobYy1GQHLtAUnbeqIBx1soIRgLz4E8G0w+2LMW7805n1V65Mg1wQa5ojv07hQURu3zEvYqLj8Y9c3EqDSta4+c0USXLYbh/6k1yHI1L6dKLUg+oxlM6apooB4PdaEcPH2tp/1I4oPbPT/V2UdnIbiYLVkFfWrJa22SDHDsw==
+X-Mailman-Approved-At: Tue, 04 Nov 2025 20:26:02 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,21 +85,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 04 Nov 2025 12:12:20 -0600, Tom Rini wrote:
+The v2 patches use #include to augment the ROCK 5B defconfig and keep only the
+minimal deltas (savedefconfig output) to select the ROCK 5B+ DTS from the
+vendored upstream snapshot.
 
-> This also incorporates the following commits to the Dockerfile:
-> da7942de29f7 Dockerfile: remove Python 2.7
-> 183299d9a400 docker: add OP-TEE and TF-A build for testing Firmware Handoff
-> 
-> 
+Tested on ROCK 5B+ rev 1.2 (32 GB LPDDR5), U-Boot from microSD.
+Built with GCC 15.1.0, TPL v1.19, BL31 v1.51. Control FDT present; SD/eMMC
+controllers detected; USB enumerates.
 
-Applied to u-boot/master, thanks!
+Changes in v2:
+- Rework defconfig to use #include and minimal settings (savedefconfig)
+- Add MAINTAINERS entry in the same series
 
-[1/2] CI: Move to Ubuntu 'Jammy' 20251001 tag
-      commit: 8b7295f352b262713361fe03c62410de47e49a36
-[2/2] Gitlab: Drop vexpress_fvp from tests
-      commit: ef34776f21969a71594dc6224d0e54cf5a2a980c
+Thanks,
+Bryan
+
+---
+Bryan Hinton (2):
+  configs: Add rock5b_plus-rk3588_defconfig
+  MAINTAINERS: Add entry for Radxa ROCK 5B+
+
+ MAINTAINERS                          | 5 +++++
+ configs/rock5b_plus-rk3588_defconfig | 5 +++++
+ 2 files changed, 10 insertions(+)
+ create mode 100644 configs/rock5b_plus-rk3588_defconfig
+
 -- 
-Tom
-
+2.51.2
 
