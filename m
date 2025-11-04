@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23684CCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 23:39:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC35DCCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 23:42:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C8FC83957;
-	Wed,  5 Nov 2025 00:39:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0876F83957;
+	Wed,  5 Nov 2025 00:42:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jdbHldA7";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="HZlwbt4x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 271CD839A5; Wed,  5 Nov 2025 00:39:20 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 2C758839AC; Wed,  5 Nov 2025 00:42:37 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3221083942
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 00:39:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5522F83942
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 00:42:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,30 +30,30 @@ Received: from LT03 (unknown [93.94.208.154])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 8477E4042E; 
- Tue,  4 Nov 2025 23:39:17 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 842693FAEF; 
+ Tue,  4 Nov 2025 23:42:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762299557;
- bh=lt2Y0a7/VmR2qC83zIXQxQt6kVQGY0KYGtj+/K0Zqdw=;
+ s=20251003; t=1762299753;
+ bh=HWyLV3e44eaXexMCQ4RXIKRONEqUCmCOcxi7E1x8KIg=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=jdbHldA7EjauKss8Z5K3lhIluuC+uTkkFGliaZIjjg/5dBgmQnsF/inUqJQ7UjPMA
- WcykEuPfmxkF+3s9ztVNMRKOKk8kI4MXyp6tTh3meAfbOYDibvA8aB7mTuSphGv7S6
- qA2uHY0gLHighhE98g+a2Dk0wl4wyGzXAL7SEBbZlcaw0GFI+UJJSnkyduGVvoVWyv
- NRRBtkIrgao0lmNSoGCg0g4ezjXvsErH3gTqGu5s1rOIhO6Mlm8+VKh1qDOUMGmJQZ
- c3UAud6uVhPyEr5slFPLAsLntz3EB5e7G7ItrCMyJ/jDTYl6Bas6VQT1u+hc/HUGjm
- 3naD6/oyRPU16RyqRP5MolIsC9TOE8I2yGZ8znYfT4ikH6slglc7Aokov2adWDOr/N
- etga9j23aRoXR8gDRTidrEnR2+UI1TI24spNIjYHP2czgYus3ppTscZ1tLT4wW3AqN
- d4vayljChpjLquPmJ5VHWOdUG7d67AJysTDkO4hpSzbcNMBBGIRKTMF6APObLho/cf
- KIkRyZKB/C5rPO+hAGlONY9uOL27ighz6691RAnca/v1wL6wYT2q42ByM6DrifjbKA
- CdCpdiBoxgjEvH5pHSG1faiSxVpyh/QbJ5wsMktcJbsOdjS/qidU1nWgrNNM3mQVuB
- hgJOc21DG4gUmIPCJ4WEuo/I=
+ b=HZlwbt4x8nEvAr+lEqv8sUTt8+omtvSbT6XrTSei+d2f0l7ET0siBgkHKPFcQh50O
+ bt0vNp9GSudZrzcjY0Oyw11zT9qUXqDTycUqyI/W/DOpbboFHQQEyzUhHcTsmqkAky
+ MxHbEvYGPwpX0JYy/1Lge30kWJQYVmM3Ff5VmVnqVr8yLGvmP5kM4690Q183+73ZJm
+ Bgn5QTQl4Be0sxxPhkjbgp7W7xKqf145FRil8CD4etEgY+Ms+uUyL0nwseIXSBd8zZ
+ G0x3dlgCM8RU5mrkVOFfm+ZbQne5QvN0Nlr4Ed5H8z+q8SdXmclfyyBCITrb5XmpAO
+ cjyQeKqttTXxI7pZwCheqqf1SUSIflxHIVhgXune9VHvlQodzDs4U7vq+U+jRWkcmm
+ nsfgJ8/U0VYGHItIw51YzrWWvTZX1+/vLAMkSGFFtSCNt+oRruesz9c0XeujobhhtV
+ prvQ/5gtyi6r0HhxUbvvfoya/RvdxlRLZdvEXXqzEAXIj/+aE7JfL9ARbh/K1w/cSJ
+ PtXtUUcAQcOhYoTY4apwr9TPTgXyZKWjHSD/cHYbCYrQ+GnMrK04gNMAb84jVzG0u/
+ Bo/lWoG3GZiyDESwlE048h+qHb1kOMIudJBMjoNjii8k7wfJYtF8m4g0N3RPIM8ZhW
+ BKXC6JIwnkKWRXjhSUKhD1SA=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] virtio: typo complaint
-Date: Wed,  5 Nov 2025 00:39:15 +0100
-Message-ID: <20251104233915.89413-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] virtio: typo 'private date'
+Date: Wed,  5 Nov 2025 00:42:31 +0100
+Message-ID: <20251104234231.89796-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -73,26 +73,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-%s/v1.0 complaint/v1.0 compliant/
+%s/private date/private data/
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- drivers/virtio/virtio-uclass.c | 2 +-
+ drivers/virtio/virtio_blk.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclass.c
-index 1dbc1a56aa2..ac563991b90 100644
---- a/drivers/virtio/virtio-uclass.c
-+++ b/drivers/virtio/virtio-uclass.c
-@@ -328,7 +328,7 @@ static int virtio_uclass_child_pre_probe(struct udevice *vdev)
- 		debug("(%s): legacy virtio device\n", vdev->name);
- 		uc_priv->features = driver_features_legacy & device_features;
- 	} else {
--		debug("(%s): v1.0 complaint virtio device\n", vdev->name);
-+		debug("(%s): v1.0 compliant virtio device\n", vdev->name);
- 		uc_priv->features = driver_features & device_features;
- 	}
+diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+index ec2e28b54f7..3dd0cf36268 100644
+--- a/drivers/virtio/virtio_blk.c
++++ b/drivers/virtio/virtio_blk.c
+@@ -16,7 +16,7 @@
+ #include "virtio_blk.h"
  
+ /**
+- * struct virtio_blk_priv - private date for virtio block device
++ * struct virtio_blk_priv - private data for virtio block device
+  */
+ struct virtio_blk_priv {
+ 	/** @virtqueue - virtqueue to process */
 -- 
 2.51.0
 
