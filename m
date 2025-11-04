@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD8BCCF9E3
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:32:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EF8CCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:32:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3EFE808AF;
-	Tue,  4 Nov 2025 19:31:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 42F4D83655;
+	Tue,  4 Nov 2025 19:31:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B4IQYLAS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ShpbFnOy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96664808AF; Tue,  4 Nov 2025 15:54:52 +0100 (CET)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
+ id 855A6808AF; Tue,  4 Nov 2025 15:54:58 +0100 (CET)
+Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
+ [IPv6:2607:f8b0:4864:20::b132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FFD78003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 15:54:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E1E1F8004F
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 15:54:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-63f97c4eccaso3856008d50.2
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 06:54:50 -0800 (PST)
+Received: by mail-yx1-xb132.google.com with SMTP id
+ 956f58d0204a3-633c1b740c5so5251276d50.3
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 06:54:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762268089; x=1762872889; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1762268095; x=1762872895; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=utmfhcjK2FMnu5EWo10Kr5KxYaZyhBe1PRuI3F+lNnk=;
- b=B4IQYLASZAfavk/XX9CLIRo4QIEC30tBuRseXNQt2xrH8+/dIEfFZHA658uU4Rslos
- 1ntHETbUgmsqFNKpeOAoFA4w5jqCShvxcN/uR7KAhvKYPSjgetzFeyGPwLsmfS1Gg6Dj
- Kk2X0z/rA0+ftD2MJUuR1oCFnMyt6Q28dtKneIV/5myPREcct7K+0c7kM4qWBxJyYqS5
- 7U+5dJGoj8qgBjjGG57RAxuWwyvPgF4CJm1VW0GD+vI8ZJ9GKd7METytYxqUi1oXQoAv
- G6DkosDCkWE0+Ilj+CqDUT2tkhv2Ayghm6yhkRJDdNSCf/qbzJo30DkWFNG+WNnwjWno
- pteA==
+ bh=YvPM66gKWTOzldNBR7QSz8YehQh/qOUdISS2BEivRcs=;
+ b=ShpbFnOy9rTJHNyy3vs/7BTMgISkcmAWQZ6ihq/5N+v+oK2PHORPAyc/ut39GXYk5o
+ 5kpuhc/6tXaHMX4wgL9wBszddFoTRw2A0StVN3Wq2F7q4ogJSw1VZot5ACFFG/xzC/3H
+ wRYkA+wvyTeIxfeA3j5JovOzpLFlRdv1s2ukSIy8W2+Ym8ClXVxQ4lj2+cDCOmX+4rdF
+ LA0WyxzirHMxesupFYszor62OK5Cm8sDeXtwIH+QCN+jceggTcAy8nPhD8GehLn8Q46S
+ 49lbXoFvn2j6cSEU0lhvMh7HPpdYiZyUzk22I88/Q89Y99lYQMa0pW15/7ni8LMETni5
+ gzQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762268089; x=1762872889;
+ d=1e100.net; s=20230601; t=1762268095; x=1762872895;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=utmfhcjK2FMnu5EWo10Kr5KxYaZyhBe1PRuI3F+lNnk=;
- b=Gii3ix9u3mJ9qqSZtKHvXEtpH+fsupOkokPQkGO3plqfmVY1KPV6yK+z4WWJgD9LDp
- JuYWW5gcK4xTcdacGl/XfWYepkitjDaw2jUcPJ8HdnZBwTiX9BRldBISFiCRPwrGxLFv
- wHrHDSZZgjX0UJV5cycjaVfvHOFWIfdXLX9tPOKWvFuVRtfN5/jS/53eWTzc5+KrzGCH
- 6iY16DCEoR/0eTg+ljVTBioLVP4NC9gqpfnL/rvn936v71XGhilJAdZBH11Rx9izPj6h
- T271wOOFQTsBDq73KP8uIf4Uov+7bo/1k6tEY0Bo/IT5OfGJWryjj238ueDrevz9iqEQ
- l85w==
+ bh=YvPM66gKWTOzldNBR7QSz8YehQh/qOUdISS2BEivRcs=;
+ b=xIZuCVLh8qUbiMdK3JvTvajXoKEjZ0xzIPBZUXgaMk3u55Ey3by3Skii9aTH/pai7i
+ nOPAVTHn1DrMiVkW6MdztlSWmCu4bkkYEBBjokhhke0OHCcij3YKx/ySzAp7J2KCt45z
+ JJxXiIBXkjfJSovfPJmjvW+5R1Or4ZfHQjJYAj8OabS54BWLBm4PCa1ZiU3EVmPJ1nk6
+ 6Ev+MUicNzIwLE9kamr6TfnxBSxoJeOdGvxVDEbdEUpVjzUXNCUzh4DJXXGq/3WsWUlj
+ sPLReCK9BLG/d+Xs/Gg0G2Yyo9DOVaAM5kXKxRmP57uWLacM4/Zc5t5ZLRS0qbw7FRMY
+ Qp7A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWjQYz+A9o6av08ZQAv09pdpQbIUWN0h3St86P6rkm6Ky/x2dMmMyyN9PHFYx4vzMroOqU34ug=@lists.denx.de
-X-Gm-Message-State: AOJu0YxPmj931lNj4aXewUY10mSA80CKar1c8lLEXGAvGdluOSjcneXA
- oOzyRt1jygSFBgbgHoiqfJFzlKPYDqploURnDH1WWCwt3pf54KlOM09NPLt/8cPGQmyVTazPQ2t
- ONl782RGkZZvbKLw0YykPAWRqtjXf8qY=
-X-Gm-Gg: ASbGncvjyZpEIdT+Io6tGo8kL/TfrZSRxJbsvL3ddPaBKijOiOswn3hH6orEseIYc0D
- 9XLuFzyAlVKFw6fyFeY76fuaEv/kRCyHknuw0GD0B+OYqsnd0KXuWRSOhmNQ9rKrvOGaS2qFHgR
- WH14+Ppemesrl2euLJKHyP0GX7IpASiXi7c3bbTjtFMFjAXWzKvCMF3hXeSOb5C728G5QXE+05u
- l8F5v8H6yAZRNeGRC6mEf7YT/Ubjt3Et5REydJJJXngOTErWwCH6kHRZ/qA
-X-Google-Smtp-Source: AGHT+IGgioxu92uQkwU8ICW7DqUE6YkvQck66dcZ5KXfOouF5CYzLXYQstaMljPRCQIoZsVGDoIXlynQIQdGCm3X3Is=
-X-Received: by 2002:a53:d008:0:b0:63f:ae41:fbbd with SMTP id
- 956f58d0204a3-63fae4207f3mr8114133d50.8.1762268089292; Tue, 04 Nov 2025
- 06:54:49 -0800 (PST)
+ AJvYcCWFcJKTkz5coP9JHv97oxXAfkKBW9RfrI4dj8DmyJHQzbb+ihuGkfbqmV/+02Wq/RSsBpQpvjE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1JjYu2JhLRk7QcdKl8/3pTzB9dXxXFE91VPQWgNGjh+qFZUPV
+ 7hfXhjhgcOVEtlK3G8LJFYSUTzsVTOTrMfAEPAWWnhGvBnEL8zJzhY2oy4U6gi5ps+cCD9LmFUT
+ vKH/UIW2fvJWLxHHYEj9JjbzRHMf0rqyHqw==
+X-Gm-Gg: ASbGncsr1uI7ZDaCYwslhGCxvwSm0yKa7pXxfzRSVahW9tJd7+OrvOnAWKwPO+sJN0g
+ 4SZOtoNsF+S3YQ6Ava7aTlwTaUmlkQXChCZK9QdKusbD+r6V5DWS9AyZxEOyTCRzrMuHf+ndeq5
+ Zm7Q3LhiIjnxtNKhGjpD5VUTwi2NM39B6LPNQru+CMV69PFNoxq+o1DMy3CG3qPjKso1sPF6WM3
+ 2MZ0fFuZO7v/w0ZVHeiD7Adeg6EFiKHPMJL1NpYwiX0tVuc67Ywqz1lb90g
+X-Google-Smtp-Source: AGHT+IET+wVMWk3/P1XTVYDCRx8JZuaMOFnBoXy7YW1KhnFqoZ98Qy9qIVp4HFdKpFDmrutwuRgn9An66r1cc5F4n1M=
+X-Received: by 2002:a05:690e:1c05:b0:63f:9fda:e7f7 with SMTP id
+ 956f58d0204a3-63f9fdaec90mr9655281d50.53.1762268094569; Tue, 04 Nov 2025
+ 06:54:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20251104110702.62877-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251104110702.62877-1-heinrich.schuchardt@canonical.com>
+References: <20251104110240.62368-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251104110240.62368-1-heinrich.schuchardt@canonical.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 4 Nov 2025 22:54:37 +0800
-X-Gm-Features: AWmQ_bkdX9q5HS2fbYSVh90yXeRbm19WJJQmsPi35c_hFDPQPucZ0ai7Ejwr8sA
-Message-ID: <CAEUhbmWwb5Jf43R9hwDnFEuy2tVauDvA6f3Gr9vdpY17A5Qq3A@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi: Use struct efi_gop_mode_info in struct
- efi_entry_gopmode
+Date: Tue, 4 Nov 2025 22:54:42 +0800
+X-Gm-Features: AWmQ_bmp-jvP2s_BIc_uVqxMaaNBu5RBmteO2mAgTfIw1X2KCZPPAa6s0EhRR90
+Message-ID: <CAEUhbmUfd3-HMWiVNckut4o_Rt55xk6vu8QahkoSeFaZexKguw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: correct struct efi_priv description
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tobias Waldekranz <tobias@waldekranz.com>, 
- Ying-Chun Liu <paul.liu@linaro.org>, Adriano Cordova <adrianox@gmail.com>, 
- Yang Gang <yanggang@byosoft.com.cn>,
- Ben Wolsieffer <ben.wolsieffer@hefring.com>, u-boot@lists.denx.de
+ Tobias Waldekranz <tobias@waldekranz.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Tue, 04 Nov 2025 19:31:58 +0100
@@ -101,21 +97,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Nov 4, 2025 at 7:07=E2=80=AFPM Heinrich Schuchardt
+On Tue, Nov 4, 2025 at 7:13=E2=80=AFPM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Since C99 flexible array members are allowed at the end of structures.
-> We require C11.
->
-> Use struct efi_gop_mode_info in the definition of struct efi_entry_gopmod=
-e
-> to avoid code duplication and unnecessary conversions.
+> Add a missing colon ':' to match Sphinx style.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  include/efi.h     | 36 +++++++++++++++++++++++-------------
->  include/efi_api.h |  9 ---------
->  2 files changed, 23 insertions(+), 22 deletions(-)
+>  include/efi.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
