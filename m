@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF0A4CCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:07:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CB6ACCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 18:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ABA68004F;
-	Tue,  4 Nov 2025 19:07:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DFD4183923;
+	Tue,  4 Nov 2025 19:08:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G7TbM0EI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kFfctGur";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 666A28391C; Tue,  4 Nov 2025 19:07:32 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 9A9BA83923; Tue,  4 Nov 2025 19:08:09 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A34C8003E
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 19:07:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADB8D8393F
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 19:08:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-378d50e1c82so55904811fa.3
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 10:07:30 -0800 (PST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-59428d2d975so2834050e87.3
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 10:08:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762279650; x=1762884450; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1762279687; x=1762884487; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fzYuACR2Bj9StxNvQzsY8e7TYLBY+hQ0BFBsnTgyCXk=;
- b=G7TbM0EIKFJ0I9fXQ4Qur8CP5YPUqqAzuis2nrf5BMDz3U5ftnii4vWmLUYLiy5c25
- Gyf5yWQmPoAPrMx/ZeOCRIc5uKcAZS/0Ztluqf+rfc04DIT4aj48RIlI6Ympu/MnFWqa
- URutret132NlgTUCOaTCiyL850ot3SZZTmO7Rf4B2XC1mCVnMli+JJVQ3mePtWe89VVM
- s/97omr3Q3vDNVWXHdapjXrV2/10Er5hO1Y57G1qNnbRMjq3Ix/eJssSLC78d/WHMWsN
- IFFzxbz2BQC9OxrXUa7ULQgHHdMrEJgngj/02JXFvgvF8UdkEmrLycVQdMgC+DfCmL90
- eSoQ==
+ bh=RsAMQZxFUN5m52AxHnVnDHjYid/FpOpAFO6tx/jH7Fw=;
+ b=kFfctGurvirKhonJ1sjHfITPgzUx8KFpzOu3DRHpXh2LqXSrr+BOtikCA6eiEJTt+T
+ HZpLKvPL9A5c3V9HoCw+xlq8Sa9nJzuk+PBFoMY262Z7+AVFJiwE+i/XnupgommhO7h3
+ qRRUXBw3rD0X8KmgifmqZT81XBcuMeEO6/TfQilfrpE2J6CLI2QRadggum5oaD/Cm6EO
+ IocDL4L52qHWU1qmdJ//IjvwNrjEstda8kwZmQmHk+1MuUEFDl/wcKui2EQsGOJfwinA
+ SAUlarS07LNnIhM69sHuD3DsQLP0u/eItBnLaLdqxurXggHKMifSbsqNHhH39WKm2EyJ
+ HiyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762279650; x=1762884450;
+ d=1e100.net; s=20230601; t=1762279687; x=1762884487;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fzYuACR2Bj9StxNvQzsY8e7TYLBY+hQ0BFBsnTgyCXk=;
- b=lR9/2UA2p52V3pXOxkolBnwvlYPXNM9bvutMYJDxSuSDK02+T6/6AN6pUIqcQNTet6
- OVC9RMP4DArlKkxlair6fYVtAaigvrGuzJNEMczSGyUS2OAxqbcaXlmnQgrvBA8q33Ic
- 8KHmygS03G0yRaylDb/ObxNB76wRCiFbKpMcKbx/8YjU1a0jGCSRDWkgIdDfgJheWmlk
- 2ACXLY36EGOCTD3WTbXqG/vK7fZUAn9z2d1X4HGBNjob1eeWWoiOzw04yl6L3MgwlMqb
- 7ovZb/+QFfXhkLSeZClOTLlxJBvclWLHCl/fTw7NAjglOub8b4qULXNrbq1mPMDGN0L0
- Xvuw==
+ bh=RsAMQZxFUN5m52AxHnVnDHjYid/FpOpAFO6tx/jH7Fw=;
+ b=B9N/b3fINYUlIq1krrnYrQbWXxnKnaRaRuS6lOVi+InqmyUXf6SZSh7IAcxPBoC4V0
+ VDI3JVTiYn22YXVAUCpxynPOef8IK/KQtgfaTpAVwaHmSiCR50RqYprJYQbMohb37xuX
+ M0eFBwSxL7qJPoEtff3grdg1RHJgQ6UIlWsSMKk0IUlHQ1Wl94H6NwlG+CaijQkTiOC8
+ tKLK+5y0dVPEiQqOvQLNSxyHuMHgtUXa9TTRthRXonubVuo1fNR8qU4M6rZ9Jn9JZd5F
+ Nl3EaByIw4lgtI9sCmkmzzD3nl+Css+W1I30Pb3wYNbfaPjOFRDgIc25kfj3jJV6EEDl
+ 8YUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVWqoi9DyxheOeCYLMlRoswkfe8m3f1djOpPU6JRORqd72ROAl/bRDNhTkmUz8/Aq99PJmvZvE=@lists.denx.de
-X-Gm-Message-State: AOJu0YztlY9tKNspBF3W3DrbYuv8HVZSxOhS9A/tls6nWmIMLbV9gyor
- XHvXEczzhmxCzM4b3640FyWHCcHGRfLZfwnPWILYYhCkA26MUFmZZpiaXfVpBrOEDkTnq/i5bg5
- 0mvuHp+eEV0mq9BayAEgya9UMz1xmKNZoZkRm
-X-Gm-Gg: ASbGncuJ3tYGfsf6y8ez/4Elv+SZqlx+PW0rSlQDEeX3/a2uvZ2GucM/taMpudQClYh
- OP0dngYWPaLTFS+NEuLv+OVhf4yACCEV6V3fuajiAJ5FiFE+hKAr6vRSN5dKRaq4BAK024WVfZ2
- a2LbMB7TmidGuIWu3dc5G2RV2HQlkEx/64iIGPTlU1bahtzqjDFxADShKFp03X/vLcMRsBV7nF5
- 2AcUQh2C4198hmB0UKjXwOHi0h6lK7+TorcrXAeh4RZuvM2/GZMaGw7453l9yqab31Z6aLQhk3p
- MxxAU49tJpM+iBOP
-X-Google-Smtp-Source: AGHT+IFfU7hcgGfZ/izaA7tmjZhwLb/mPJ/r1dcgvrOH3cGnsbJxq1iISIXNskx17A2wdel06T/PO1oI1nTJh/0xsyo=
-X-Received: by 2002:a05:651c:234c:20b0:37a:31fc:1d47 with SMTP id
- 38308e7fff4ca-37a513e718cmr585471fa.14.1762279649474; Tue, 04 Nov 2025
- 10:07:29 -0800 (PST)
+ AJvYcCXsurmJJbXj19v1KJ+1jjdT8RK3Yqn90VdRPoY2EIRIqYXLl/2nq6eCeqUjThc1K1snC1sNDcs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvT7nF3hY41sIKPAcZmyOc5z7+GM/rGDaB+7mbdfqhAbpf+kcy
+ KB8b90CM1htd8V1DtDk6yY/uWexVLYWzeu2keD7LE/kXrW1hZM0gnTtt7lkTVlOxFNgq5cdq9r2
+ MD+LBQjyyixPOIo1QmkZn8xxGoO2/dyE=
+X-Gm-Gg: ASbGncvmoHbcetSo8w4IOqdlQVUCu3R9lAwe41UWQ/pvpu3fXDDlpDIzdjaEQ/vFGFK
+ He4FkxG+MyUsSw2FrEmgXqA6nDWKTq6MCPvCCKCBPxeBDsj0f2yObHfFXWOpmKLI3+ZhaAS2V5S
+ qTkD3LoDKCSH1MQFsyKlMKU0pWG6VHsrKHNQONksTY5ct6rRP9q3VWPQCcC7mtWU6pkHBLGgYDr
+ SJciwQ7t1hC+ajsNMtZCAUjhencguUg3efZYBgPtg9a/nAphXPX4oIZtnl/NyVjuQnvfgcMxhtU
+ hqW0scKx4SaBflzE
+X-Google-Smtp-Source: AGHT+IEbw2TvdPIKbJ7MejkaXFDgfcUuemlsViAs3RVRzqw74CGMIsUxwjXt5ueeXj6g/9c2cKVrLfMbOIK34Haw0w8=
+X-Received: by 2002:a05:6512:3c84:b0:594:2a49:f274 with SMTP id
+ 2adb3069b0e04-5943d7cedb9mr9561e87.38.1762279686796; Tue, 04 Nov 2025
+ 10:08:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20251104103010.43702-1-frieder@fris.de>
-In-Reply-To: <20251104103010.43702-1-frieder@fris.de>
+References: <20251104125441.138131-1-frieder@fris.de>
+In-Reply-To: <20251104125441.138131-1-frieder@fris.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 4 Nov 2025 15:07:17 -0300
-X-Gm-Features: AWmQ_bmhDC1sQlWc3aRQCHA6-LuWh9Pa6q19M7XL2U91BX67q-AANDuS-arAVyU
-Message-ID: <CAOMZO5DaiHrM-M7TPqnoeiYVU1G+J_LQASi5fEPjdyi4YQosjg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] imx: kontron-sl-mx8mm: Adjust offset for U-Boot
- proper in case of eMMC fastboot
+Date: Tue, 4 Nov 2025 15:07:55 -0300
+X-Gm-Features: AWmQ_blX56aPZFLcejklg38HVyuXNB7VkwLHbmE9iJM8bbuFCW3E0E6jhrJAkB8
+Message-ID: <CAOMZO5CPqiEyDfMEcw_BHYakKu0sF36uELDuqr4VJejS-zErpg@mail.gmail.com>
+Subject: Re: [PATCH 0/4] imx: kontron: Add support for HW UIDs in OTPs
 To: Frieder Schrempf <frieder@fris.de>
 Cc: Stefano Babic <sbabic@nabladev.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
+ Annette Kobou <annette.kobou@kontron.de>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Eberhard Stoll <eberhard.stoll@kontron.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Oualid Derouiche <oualid.derouiche@kontron.de>, Peng Fan <peng.fan@nxp.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -99,16 +102,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Nov 4, 2025 at 7:30=E2=80=AFAM Frieder Schrempf <frieder@fris.de> w=
+On Tue, Nov 4, 2025 at 9:56=E2=80=AFAM Frieder Schrempf <frieder@fris.de> w=
 rote:
 >
 > From: Frieder Schrempf <frieder.schrempf@kontron.de>
 >
-> The image offset on SD/MMC devices is 33 KiB, except for eMMC boot if
-> fastboot is enabled. In this case it is 1 KiB. In order to make the
-> the bootloader universal, check the fastboot OTP boot fuse and adjust
-> the offset.
+> SoMs and boards that are manufactured at Kontron Electronics
+> Germany (KED) get UIDs programmed to the OTP fuses. This adds support
+> for extracting them from the fuses and exporting them to the serial
+> console and Linux.
 >
-> Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+> Frieder Schrempf (4):
+>   imx: kontron-sl-mx6ul: Enable CONFIG_BOARD_LATE_INIT to fix auto
+>     fastboot
+>   imx: kontron: Add common function to get HW UIDs from OTPs
+>   imx: kontron-sl-mx6ul: Add support for reading HW UIDs
+>   imx: kontron-sl-mx8mm: Add support for reading HW UIDs
 
 Applied the series, thanks.
