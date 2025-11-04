@@ -4,59 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B23C3CCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 19:58:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43D06CCFA04
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 20:42:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F843808AF;
-	Tue,  4 Nov 2025 20:58:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 76C3A808AF;
+	Tue,  4 Nov 2025 21:42:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iGUeQeTF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oYskfUzd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75C4382A9E; Tue,  4 Nov 2025 20:58:41 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 289D7832AD; Tue,  4 Nov 2025 21:42:53 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEFCA8004F
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 20:58:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED7D78004F
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 21:42:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=0d2e=5N=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1762286317;
- bh=YpgqGJCiQKTIVkpaPcABvP4WSrcJ/p54MMQkksFG2pE=;
- b=iGUeQeTF1xsw3tVSTAec5zw1BGzr/x2tg/whH1eYRSwMVWfhW+0vW4ibihTv3q4jMfvcVgR81
- hluMM5nVQT1gWB9CJAlKbiK2YJUCtSUzaA5QM63X3I0ofrJqgrdqFU5u/q4GTmBwHq3Ju7HjEcx
- 6W5AM6SkyYyhM0D3rx+R1VU1qwruUBsQkViFyBWqYBmfhoDHwMwpiRmtA4qjXYFAx4triprauwQ
- H2nTlnH5oN2HrKo/0vbSW7x5hbvv9R8ey219g++9VLLCUCiJvE97lmfcqvNURDhzc+VCZzu8LJ6
- KBEYUkCoHGN3n5HmaFglN7x5jZPDpEjvy6Vhh+bwtaJQ==
-X-Forward-Email-ID: 690a5ae9c1241ac5cd3cab13
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.4.3
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <fa5080ae-0652-451a-8b71-d90d6fb139a8@kwiboo.se>
-Date: Tue, 4 Nov 2025 20:58:29 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-74526ca79beso4233927a34.0
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 12:42:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762288969; x=1762893769; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TKiub1F/8tpXrzLg5+RhXwfUECNtj6kfWxjwFeCqlXA=;
+ b=oYskfUzdfE/dZ9EXgzFdtaHLrI1FiGjrx01QX4dcZ0gUVL/rW/X+hadtee3XckAbzl
+ N01rUYianeNOE5Bop2LZ4ilut8QfgdNOsK3iQ1avkLJmKQ9qhDGUoSVJYJRN92qD2+6w
+ 18/O3CbRzb03ryassqUVX7UWKKDYmvUQW42u8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762288969; x=1762893769;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TKiub1F/8tpXrzLg5+RhXwfUECNtj6kfWxjwFeCqlXA=;
+ b=kyitrQm4sbEJ1o2li6qslOooUFTUdRTQbqiQHyRmsORhEVIGgHWDNYIdv6A/+pD4cZ
+ f5GumMqTturJAlHUF2VqjWyYkrUfHiPM+PFAXbxOx4NP+c+fPWQRicCfGuiIhqTVUr7o
+ fRoUZyH/HHmDm8IgoHF3SdOXt5O78wa1xFWrVjri2rV7Q5P6AhzohwHwRPy3d01OhJca
+ VBXEU101yAqdYNDyqXvoeSApbIilPmgoQ51C6y/ufb839W/9DuUN1bolLN806i5xrxjd
+ WgEAqAmbddonwYkbCcvKEcgE6R48dVXAK19HxxkfHwRRvoZXDBW3Vp4vjcCSeRr0oYMp
+ KPrg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWd2XFJMdT4Y4fqZ0MfovnrfFuFvsNRepI7LOnaqypdhMq+c3hdj7oHGAKyoEuvMi5yPRH2cJY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwO5yOad/vrwBqWrle0MbdMmPQ4ic3CZoQ1aYWssMt65XE0K18K
+ z/d0NXK09BR1O7rPml/JnLrt0aVzbXW5P7Vy4Xv6w9u8YXqGIwPQfl6YQW2Sj8pmfYs=
+X-Gm-Gg: ASbGncu0+9zLAESqREKyiLZm79WolTvIfxdGeTvJ70J2WINc4Nn7mZ4hmE7+Oa0JY9q
+ oE46x9UZT3AL85Lz+7WyZhOMLea5KbZfHy3VrcqEolxYkANJegn7FFPZsr43xD5Q3xqtR2DCbn9
+ 05KeGOP83LwHWAtUYn5m8fVRd0rZL0RAgP0OtUcKpWkwzX31+lvECTV6s2i9ph5XuBC+L3RV167
+ P4MiYG27NU06d5AQ0Xl8whSkPMUoSmCJmnZJ2RwSeUvj27Il9Fc3xCsmDpCGXldgG8ganEsq+tm
+ VBHcFLQ5IOnYogi/JhY67i7AoZsClMk/vigMlwAmjuqKXCg03eM4TICXhmtgRJl6GuW5i/01BsP
+ zwMzCo+S98SMupCTmgsXJVnIbllwM73sspidIrSi4r3X30NOBeCBgpkW4zxJ6OAVSSGO/c9OjWv
+ eidrJBNondSvaCjBmhJGV2fJAYI/rJIKDsBkx/1UxC8DV4UDXJ3Q==
+X-Google-Smtp-Source: AGHT+IFs2WlnqUBUc5i2aKSl/Vfd0cLtk1vWOXWHxwlVaSSeNHlEPBT3TV8iLaCK8qZPwoSkCmAC5Q==
+X-Received: by 2002:a05:6808:ec5:b0:43f:18a2:97ae with SMTP id
+ 5614622812f47-44fed32a3f0mr404111b6e.30.1762288969648; 
+ Tue, 04 Nov 2025 12:42:49 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44fe4ca9d03sm418115b6e.24.2025.11.04.12.42.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Nov 2025 12:42:48 -0800 (PST)
+Date: Tue, 4 Nov 2025 14:42:46 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: raymondmaoca@gmail.com, Xu Zhang <423756212@qq.com>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] armv8: Fix transfer list passing with KVM
+Message-ID: <20251104204246.GG6688@bill-the-cat>
+References: <20251104150404.3355422-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] Add Radxa ROCK 5B+ defconfig
-To: Bryan Hinton <bryan@bryanhinton.com>
-Cc: trini@konsulko.com, u-boot@lists.denx.de
-References: <dc3d6a1c-37f1-45c9-95c0-d37effcb2ad5@kwiboo.se>
- <097D31DF-D7AC-4008-BF9A-CBFBF01247A4@bryanhinton.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <097D31DF-D7AC-4008-BF9A-CBFBF01247A4@bryanhinton.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="maWxgzM7kHT+XpLy"
+Content-Disposition: inline
+In-Reply-To: <20251104150404.3355422-1-ilias.apalodimas@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,85 +100,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bryan,
 
-On 11/4/2025 8:43 PM, Bryan Hinton wrote:
-> Thanks, I did see that. When I pulled mainline master, I only saw the 5b
-> defconfig and dtsi includes in arch/arm/dts. The plus dts file was in
-> dts/upstream/src/arm64/rockchip and appeared to mirror the dts
-> configuration in Linux mainline arch/arm64/boot/dts/rockchip for the 5b+.
-> I tried the dts configuration a few different ways and reduced it to just
-> including the 5b config per Tom in the patches just sent.
-> I’m doing other testing on the board related to memory and timing, and
-> hope to submit some more mainline contributions in the future.
+--maWxgzM7kHT+XpLy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Please try the existing series and if possible review it instead of
-sending a new conflicting series :-)
+On Tue, Nov 04, 2025 at 05:04:02PM +0200, Ilias Apalodimas wrote:
 
-The plan is to use a single rock5b defconfig target for both 5B and 5B+.
-And in the future the ROCK 5T should also be able to the same target.
+> When loading U-Boot in a low memory address, the adpr instruction
+> to preserve saved_args[] end up within the memory space of QEMUs
+> mapped pflashes. As a result the following store pair instructions
+> lead to a crash since instructions that modify more than one registers
+> can't trap into KVM.
+>=20
+> This problem can be solved with loading U-Boot with -kernel
+> and defining a different text base address. But when running with
+> -bios we always start from 0x0. So let's postpone the calculation
+> of saved_args[] post relocation, where we will have an address that
+> doesn't collide with the QEMU flashes.
+>=20
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  arch/arm/cpu/armv8/start.S | 8 ++++----
+>  arch/arm/lib/crt0_64.S     | 4 ++++
+>  2 files changed, 8 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
+> index 40c342e97e9b..ef335de16b79 100644
+> --- a/arch/arm/cpu/armv8/start.S
+> +++ b/arch/arm/cpu/armv8/start.S
+> @@ -387,10 +387,10 @@ ENDPROC(c_runtime_cpu_setup)
+>  WEAK(save_boot_params)
+>  #if (IS_ENABLED(CONFIG_BLOBLIST))
+>  	/* Calculate the PC-relative address of saved_args */
 
-> 
-> Which TPL do you use for testing the rock5b+?
+This comment is no longer correct. We're saving a few regs in other regs
+that can't be touched until later.
 
-The latest ddr bin from rkbin at the time when my series was sent back
-in July and August when my series was sent, should have been the
-v1.19.bin blob. Did you have an issue with a TPL blob using my series?
+> -	adrp	x9, saved_args
+> -	add	x9, x9, :lo12:saved_args
+> -	stp 	x0, x1, [x9]
+> -	stp 	x2, x3, [x9, #16]
+> +	mov     x0, x19
+> +	mov     x1, x20
+> +	mov     x2, x21
+> +	mov     x3, x22
+>  #endif
+>  	b	save_boot_params_ret	/* back to my caller */
+>  ENDPROC(save_boot_params)
+> diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
+> index 3e7627aa389b..d6246010f368 100644
+> --- a/arch/arm/lib/crt0_64.S
+> +++ b/arch/arm/lib/crt0_64.S
+> @@ -132,6 +132,10 @@ ENTRY(_main)
+>  	b	relocate_code
+> =20
+>  relocation_return:
+> +       adrp    x9, saved_args
+> +       add     x9, x9, :lo12:saved_args
+> +       stp     x19, x20, [x9]
+> +       stp     x21, x22, [x9, #16]
 
-With my series applied you should be able to build the rock5b target
-and when booting on a 5B+ you should be able to see something like
+Here is where we should comment on what's being calculated (and is it
+safe to do this without BLOBLIST?).
 
-  Model: Radxa ROCK 5B+
-  SoC:   RK3588
+--=20
+Tom
 
-and this will indicate that the 5B+ device tree is correctly used.
+--maWxgzM7kHT+XpLy
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Regards,
-Jonas
+-----BEGIN PGP SIGNATURE-----
 
-> 
-> 
->> On Nov 4, 2025, at 1:04 PM, Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> ﻿Hi Bryan,
->>
->>> On 11/4/2025 7:25 PM, Bryan Hinton wrote:
->>> This series adds initial support for the Radxa ROCK 5B+ (RK3588).
->>> It introduces a new defconfig that mirrors the ROCK 5B baseline
->>> while building from the vendored upstream DTS snapshot
->>> (rockchip/rk3588-rock-5b-plus).
->>
->> Please take a look at the existing "rockchip: Add support for ROCK 5B+"
->> series at [1], it extends the rock5b target to also support the 5B+
->> variant instead of adding a new defconfig target.
->>
->> [1] https://patchwork.ozlabs.org/cover/2118033/
->>
->> Regards,
->> Jonas
->>
->>>
->>> Tested on ROCK 5B+ rev 1.2 (32 GB LPDDR5) booting U-Boot from microSD card.
->>> Build used:
->>>  - TPL rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.19.bin
->>>  - BL31 rk3588_bl31_v1.51.elf
->>>  - GCC 15.1.0 toolchain
->>>
->>> The eMMC controller enumerates even without a soldered module. SPL → U-Boot
->>> boot verified; SD and USB enumeration work as expected.
->>>
->>> Thanks,
->>> Bryan
->>>
->>> ---
->>> Bryan Hinton (2):
->>>  configs: Add rock5b_plus-rk3588_defconfig
->>>  MAINTAINERS: Add entry for Radxa ROCK 5B+
->>>
->>> MAINTAINERS                          |   5 ++
->>> configs/rock5b_plus-rk3588_defconfig | 118 +++++++++++++++++++++++++++
->>> 2 files changed, 123 insertions(+)
->>> create mode 100644 configs/rock5b_plus-rk3588_defconfig
->>>
->>
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQplQwAKCRAr4qD1Cr/k
+CgPgAP0SZuA96kn9jXJEDbEtsCRjNDzd2fSji1WHy6rWBa4QOwEAyiqgFwBTQJkm
+5RPQwIORtWnIc3k/bYIHaNOURLX2gg4=
+=0rCF
+-----END PGP SIGNATURE-----
 
+--maWxgzM7kHT+XpLy--
