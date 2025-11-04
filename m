@@ -4,162 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 334CDCCFA00
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 09:36:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34546CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 09:44:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1F1483946;
-	Tue,  4 Nov 2025 10:36:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id A48B6836D1;
+	Tue,  4 Nov 2025 10:44:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="kiJOjqDo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UaCfgq3I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5293183952; Tue,  4 Nov 2025 10:36:27 +0100 (CET)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 930D0838CE; Tue,  4 Nov 2025 10:44:37 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C47383942
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 10:36:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 791FE82A9E
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 10:44:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BNXy/fjKZWxLXXKySdYPcgS+8kJRK0l4htygAyaC+tQBhKoH9qxpv2i66qx6Bzbfm/smZTJtUuxnoAk1royUAXOK1YyZmMEv0cv4uxDQTPtGtotFjXGGTAjSMwvtHQhjDxbqOyyWXNIlZ26LuNKNn+cSNVWmzyJ5pWBcVS3zrkJ5Y7Kwb5e8bqyR1vxBN42FjEfNf3q5TZjCfoiu8KN42tAGie1vaYONeC2ZyCbuzxQkLg6pe1tJT09Jx3rzEIFLaz7laxKiphJEeeV3anqkY5g2ODyB9rUlW+L/VPUm5QbLy1VjpjBPfnS3dLONuKZDKwWVwzhZCKGXBASSIDZtKg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tGZIwly/JuKfscE2M2VdPNL8ZoLawuIFn1w8tec9FR0=;
- b=JSQVlaZ9k4aDeP/kYGm5zODeyJG8+MXq8clNO2g1nEcoSK8AW8JNRg7j4MuWSk6ojVMEEAUuS/bbdc7nRAdUPn18WBhiGGV/BhXfLhipi2u+8ll6qtWiq5PVNCzyeR0VDvwey63HI4/TwHe5n6TL7t/jt198L9VIMBCtqsky6C9Ctu5jBWlmyB7oNOqLEAKPRXO79UhOAwbHhGrsGA+ZmUMk8ydMaR4HtlmiD3oecf9Ki2rwrZ/H+7rCxayweURlBqzcMY70wRbw1oersno1i08A5xom7suoAzRZI8zFeAimfVE2nRsYDN+jlj7eJqwW8bfjGgr7uecCumdekxzDqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tGZIwly/JuKfscE2M2VdPNL8ZoLawuIFn1w8tec9FR0=;
- b=kiJOjqDoxSPcBsEoBkSubEK3ieKQX6NSrxj3s3/m7zSEPoFVWHS8tzWsyV1wKDhzEpz90X2RSEDnGesghTknNmN4Ee8DgbYfEKYEDoGh6AsAWpP4GQ1FoTLRvwVtluiMHwgD/fU+FNRuJngZIlktZY5eZvyYNd/TGE6yRJxKfNw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by GVXPR04MB10045.eurprd04.prod.outlook.com (2603:10a6:150:11a::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Tue, 4 Nov
- 2025 09:36:19 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9275.013; Tue, 4 Nov 2025
- 09:36:19 +0000
-Message-ID: <e52a25b4-d5bd-443f-8647-a62ef356b19f@cherry.de>
-Date: Tue, 4 Nov 2025 10:36:17 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] cmd/part.c: implement "part name" subcommand
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20251020121100.1742812-1-ravi@prevas.dk>
- <20251020121100.1742812-3-ravi@prevas.dk>
- <fc2149cf-97ee-4ac4-ada3-c4797607a5ec@cherry.de> <87tszadf7t.fsf@prevas.dk>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <87tszadf7t.fsf@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BE1P281CA0020.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:15::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-47117f92e32so43173025e9.1
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 01:44:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1762249475; x=1762854275; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=qqKHXq3dW/NFn5sZO21vjUVJKR+NKMCLYWWKROqiNa8=;
+ b=UaCfgq3I9sJ7fvMqP7w2UA+Lg4+USwqtFcwaAd8hFMoM8jYJIeodMVeg6fzmaPq6/v
+ u67W5KNjoicx1YHRsFDtC4ivS4Z1v1SB5IzhT2YDZqSjJqAcyCJam0RtH9oNpkTQn8Qp
+ ffZQjyF5iR5O8emlo4eHAWNzpaeR4sI8IbtIgo/YnFAOp5jL6sr3+PP43NEQveb30QYV
+ TyxeMORjcLDtC6evrz7GhxENo9HMS+F20NghxZi/+aLDBgghgVto1B4r3gBuQ6RHYgPD
+ JY0vqInbxCmqtcgHLrsGn5DWGvA6AcGKg7FUWsz+cJmv9fZH5Hwq5/U0lQdZZeenChtB
+ oEAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762249475; x=1762854275;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=qqKHXq3dW/NFn5sZO21vjUVJKR+NKMCLYWWKROqiNa8=;
+ b=r+I2BFvmcmuaGq3r4+PSoYxVdGzsFoXv4mRZdgManJoOMkfPhIKWQS/Xm6X0hyeJbY
+ ovTbFuifXGXMCKw2NNbx19a3updhXDpYXti++K1z7yXzIxMZBIbZdMGGaX3PqSpZyveS
+ lg/peMvdIUluwX669WFXQzrIeZDk8HOYB90sy/U8ZUgS2lgjRkqBwy1ggyuyprYnY/B6
+ HEz4jQxk/NhgYuK1Ylk31sGGi7aQ6u7w5qIb46nIIErgWAB6OEQ39cWTPxEK5mGv5ErT
+ AWNvNhra8t0MP0p62aGceOGhd/aOwrPofTsiKpbY9hke83WniRHlbLivDjycj7Wg8r51
+ EchQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCULR9q+c2Fy3kRtYKHhrCCfpetCj3ln7jYtjAYnLA4VTfNBj9EjEBjR+bk5EFNvRaVmPeYeZdY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwexDRXaUSTdqK2Dq3NB2/n6WCQLooriPAd7PmuFzYJZmpi6grc
+ qvLlOeBGfITpnKULqDonxk8hooCtXUQufr5f4V6D8vZBIWMzuoBvpR2RuF5EErzkxeQ=
+X-Gm-Gg: ASbGncvJX6OJiRjDh6U4pKS13N0gf3nw064Y2matMO+B00VqBTlh/W1JX1NbG7lKWNV
+ 7b4jijac9dMmib3boo33IbzPZUbQyhQ6ZMjXjgXMKwNIWS4HuPGx+I4YHWAtZc+frKujSJ6lNPV
+ O+d8lNozqTdxAxKaGFOuzVEUUKR5XhbF/tXbtTWQVSl3fW4GUjaqrJMQW2xrzV8d4au53wx7Mis
+ EGva9cI6qihVuOcR6xiYbyuw8U++l31jox6XGNV4eNcoHPDc8fc2sdPlWzoKI9UcsDcdboc4Nhm
+ dw/mckc6QMEDAMj0PKtlJ3tsGNUgVODcar3HcH5H3CCZ9mu0Lm2CzA0q6zHK4e7HR5U2OUKPeCM
+ nQ04bF+uk8ya0VygTxBGao1+7vR6/FAlrC+akUpYsvuT6E6xsrWALwHgGG1D72Q67403UL15gZd
+ p/3u0BO4ifxZ18R/nmR0pmskoUDjBLcih5mw==
+X-Google-Smtp-Source: AGHT+IFEMdY0iKcQ0rqRwsqK77rfYnTtMsSy3XaUNNVIuJT+8L4AaPPWWOMuRJb+PmHHe9Nl6QWhpQ==
+X-Received: by 2002:a05:600c:3b0f:b0:46e:4a60:ea2c with SMTP id
+ 5b1f17b1804b1-477308a897dmr142422025e9.37.1762249474747; 
+ Tue, 04 Nov 2025 01:44:34 -0800 (PST)
+Received: from [192.168.27.65] (home.rastines.starnux.net. [82.64.67.166])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4775598c2c9sm28043605e9.8.2025.11.04.01.44.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 04 Nov 2025 01:44:33 -0800 (PST)
+Message-ID: <2e387aeb-2ba2-4b72-aa91-0815cd06f831@linaro.org>
+Date: Tue, 4 Nov 2025 10:44:32 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GVXPR04MB10045:EE_
-X-MS-Office365-Filtering-Correlation-Id: 00745eec-f03f-4f56-5315-08de1b859b78
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dUVjVlkrb1h5aGFzdXBIVm1EaTVtSzdoWHdlSDd1MEpxbWdKc21vQXpTNWln?=
- =?utf-8?B?YzNzQklPUFMzQzVYUWlOaVc0RVl5YmY4VW9lcWxMNE9qTkpLUm1nUk43enFT?=
- =?utf-8?B?QVZsazB4TEdpZmYvQkp4bGd4bTlmVTFGVEdpWWZqVU1qOHBERzFjSDRmTm85?=
- =?utf-8?B?Q3pRMjlmbmRobzdPV2VUUi9qSGJIV2RvVS9EbWFYQVRSMDZKRWFQZkRFK2Nw?=
- =?utf-8?B?bGRiaFdoa0cvempMN3BKdjNWY2E1STNXQm5Ia0NjQzJmT2dQZUJIQ1E0S09i?=
- =?utf-8?B?UTV3WVRRU3FCR1ljYXJnT3JPVmFHL1EyTEM2eFlKMFVRazNZQ1UyRVVqZVkx?=
- =?utf-8?B?SGNHSnhsMkRmMGwrVGJoMkRrbkkwMEp4M09hMUNJbkVLMzJTclI1Lzg1Z1Fp?=
- =?utf-8?B?ZVM3YmVzNE03QVg4R1U3Rk02c2crOFl4NnMxUGhBMjg4VGN5alV3OGFMREdI?=
- =?utf-8?B?bEdZQTFaL0RFYlJCczcxNlkwSG80bVROWW5yRHR1ZG56TjVXalUxUWpYc2k1?=
- =?utf-8?B?eVJkeEpkSFhLWmsxbnNER1hKOVZreUI5ZyswN0YyU0xWemJtcytxZU8vNjV5?=
- =?utf-8?B?VlRFQ3kvNmVuSzJEWitGanlYZ2lBcUt4WmIyaGZLYTBEWWkwaEdTT3FQU2k4?=
- =?utf-8?B?SHJkTTlhMUtpck1PZStnc3p3eEJ0REg5QU9OVGNZcGpXaXNmQTg1UWYwYXFH?=
- =?utf-8?B?NUVjemlDVWZjbWlYeUF5T1hxSHg4ZUFEK0ZSU3pYSXpibEhKQmlneTJzT2hZ?=
- =?utf-8?B?Ym1nUU15a055dHNoeUQ4b2lkc0ZvYXhUNkJJSmtaR3Q1akNHU0hsVHpTVkdy?=
- =?utf-8?B?RVh2ZnVkYW1VVG1zTGFwYW15c05pTmM5bDJyT1B5TDlrYW5ra21mRU41UlA0?=
- =?utf-8?B?c2xxZ1hnV254L0xZbDIxRUZmMS9oMytrL2tldG9tQk5QR2xYM1FpdHVwY2J1?=
- =?utf-8?B?M3dCTW9zQVFhakRNUTJmWUwxdDFKZHFpWU9zby9UZHA4L2V1LzdPRmJuaGpS?=
- =?utf-8?B?azlIbnZaeHFJU1VId25NdVdZYkFUUWcvV2lQZS9xVG9NbWV2VWduVVQxVDVy?=
- =?utf-8?B?eTV5MWZXbGJ0akUvTFhITTZXSGZyaUtUa3paV3MrRXk2c25seCtCMWFwa09S?=
- =?utf-8?B?dE9JU2lMdnBpOU1RYlRXZDdSYnRmUFVEQUtkUElwMTNpaU1QV3JHZUVmUi9C?=
- =?utf-8?B?R0tNM1I5L1ZNdUNsQXVqQWtWVFY4djREbitxMlFXM0FOaWtDWTU1UlFzd1hu?=
- =?utf-8?B?dW9pWU5YUTN4bVBxZE1OTFZFaHh2ZG4xRmt4L3I5Y25Ta0JISTBmSVBaU1ZS?=
- =?utf-8?B?b1krWkd0OExhbU14WE1NU0ErMzBRZDBTekVMVkFqbzVtNzBzZW8zUmxvVjdB?=
- =?utf-8?B?MGJ0RDZJaFVoK0VCTzVGQmZ1ZE9lSFpmVDVPc3ROeFNmMFBIaGVwRDhoR2lp?=
- =?utf-8?B?RCttdVdORlgwQWVRVFByc3JBVEZVOS93NUNZNVVLWTBESURWMEprL3NZamlj?=
- =?utf-8?B?SXB3bDhCTkE1VHBsemFlQ0J6WE5Db3NqMUdDSTh3UVpDLy9EVWlqallJVkd4?=
- =?utf-8?B?bmhrTVAyZ2gwWE1XQ2VjSVdBNXVqTU82MHFPVkgweWlNUEw2WmxLNVpGTFl6?=
- =?utf-8?B?OGd2bkpoRFNpZlZ2cU96dW5KYVRwSFZtT3ZZeVUxVjBDc0ZEdmR2ZGxjbjcz?=
- =?utf-8?B?SWJtMTl3N2JoazFSWE5BYkJIdDUydzRWdENrV0R3cWlGYXBSQ1IzelhYeFVr?=
- =?utf-8?B?aW1ZN2R5bDlqaHZRUmhsSUtEMDZNWU0yYlBsejJLRWtuK2lTc056TEJoVHdS?=
- =?utf-8?B?UFRjZ2c2OFdwaUQ0cFpYZXhyZy9zSWtBTWxnUVJSR0xDalE5QklzVlRRNWhj?=
- =?utf-8?B?eHppSFg2Q1pRNHVTTTNzNmRSeEZIZFNUUzBqSEd4SUVjd2tyYUU3NDFyaE4r?=
- =?utf-8?Q?rV/sN5SjKFOR6cGDR4vXA/2XYBTAA86u?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eDdFUVlFcWZkQlJrSVkydnVzWW5nYWJsVG1GMVdtMm1yY0FiT09OT09SVXZ0?=
- =?utf-8?B?TWZaS1RBeHoyZ2YrMGlZTTBYU015VENsTVR2VGlONUVodmNUZTJGWldib0FX?=
- =?utf-8?B?NXI2ZzlXanpxalVXVXUzb29yRm80dHh4QWdJL2h4K3NXamZrRmNybGhORUtM?=
- =?utf-8?B?eW0xRStKS1NLRDg3eDBGd1R0NWRiSFNGNEgwK0xpTnNUZmQzSjliUDQ3NlBu?=
- =?utf-8?B?bVhZTEc1dGU2MTdmZENyaC9FdCtLemVjdlZOT244YzMwdGpKdStZcHg3dXcy?=
- =?utf-8?B?akg3TUtvU25kRkpLd2lmbmNGWklXcG1uaXNSM2JZWXN1MWlSYW5BZWg3SmNN?=
- =?utf-8?B?akRLaCtzK3F6dEhXdXJITmRzaS9MZzBremFidHFBZk96eHo2RVZIMFFBekp4?=
- =?utf-8?B?UjJBTXVUNWtYMzVzdFlmV01mU0RVQllBTFZGMWhqcDl1cDVaYWtGSG1CTDMz?=
- =?utf-8?B?ZWJpSFF0L1BQQ25zZGdKV2pMcHZmOHd6NWtYSlhyeUJsN2lPSXJBU2Z0THA1?=
- =?utf-8?B?WUh2UFplZm9aMWIwaDJmaFlEeXdraGRnNzg0RnkwLzg4OHV6andnOFBsQmdX?=
- =?utf-8?B?amNVeVQ0dFRxSFpkSGF2MDRTVzlYRzN3Um9YQUVHaFF4TmZmcjlHcDhzMUov?=
- =?utf-8?B?RWdZd3U5TXQ3VFVqRDduYlh5bU4xVjdVaURmU3lsaXBVTkpRenJrUUo3c09h?=
- =?utf-8?B?NS9XcWR0QVdGaFlJR3Z3UFh4UURIM3NkNHJyWGhrWUl3Y0ZkZHVrdER0OTdu?=
- =?utf-8?B?RmV4ZUcydXpXMVZUTDRNTTVNTDE3SjJvQ3FobGdIY1Roenpua3k2bDlSWSt1?=
- =?utf-8?B?azA5c1M1dzBzOHUrNENJZ3YxaGRjVVU3WG0xL3BiN3ZlcFVrN3Z6b29WWmNw?=
- =?utf-8?B?NHJEMEdGS1pEN0k5MnNqYTVNS3k2RTAvYnA2a2xsMXcxZFpPV21rUlJmK0xo?=
- =?utf-8?B?NG9EYWZjSnZjeno2SVpSZmxtYWdGQWVjbk5YQ3hjZ1ExUFQrckhJSFgvdDA2?=
- =?utf-8?B?cDIxNW5GNU1vc0NzRjFVNGZ6UWNKY3NGeGVHdGZ3TW8rWUZxMDRTMzNBd2Q1?=
- =?utf-8?B?bTNKdi83TExZR3o3Q2lZQ2xPb2IyNHJHK050QTk0VkZITFFQcERRTnhlVDNE?=
- =?utf-8?B?ZzNNZnNTZ2RJWjQzbHpLR3ZxVi9GeWVsUG1hSXcyaDh3VFZwSEd0aUJZQ2dR?=
- =?utf-8?B?RVpFYk9ENmo1cUJqNExuOFRyeDJ1YXdjU3FPZThYOHVid3d5L0lodVFLTldp?=
- =?utf-8?B?Zk9HN0ZzQ29ncjdZKyt2blBmT0RNZzNhKy9XcktZcnpRcDhVSVpjalhRYzZS?=
- =?utf-8?B?TmlXai9qcmgxalovNWM1b05RRHZsWnBpQnhrZXlLMHBvRFpTdXNRYmxmRVEr?=
- =?utf-8?B?UGlJaHpxQ3FSZEc3N1ljUWRUalJqSXdUZjBoZkw5VlJEYVVDN0VuaXIyTTEz?=
- =?utf-8?B?TGFhbStNdG8rTWkvRTF6RStDdnE5Nmw4RTk4T2lIRnlvNWkyV0R2RldNVDdw?=
- =?utf-8?B?d1dJZWZvQUU2VXFtQ205SWx1aHh4b1Y1cXliTXU4a1E3Y25nYkJVUXhsTG1a?=
- =?utf-8?B?VlN3ai8rU0ZyYUdDd09QLzNBdnczMzVMdzZGSTZuVTJkRzdrYTMxTTN4QTdi?=
- =?utf-8?B?a3M5ZW9VZTNQRTI3TFMySnNxZHA3WFp6KzZWWnpQSHFVSUZIUWRBT2YwTks0?=
- =?utf-8?B?aGJEa01JSjUyN1VqczNGNEhUQXNyaWViRXZmQ2JWa3UxZkdQbEx3bG9vaFM1?=
- =?utf-8?B?R2Q0bGVRZ0x6TlZ0a0R4YWEyd1pHMFlXSU9BMTFqYVRmdXdURVcyNGs0bFp6?=
- =?utf-8?B?WEgxbzBqaHBUS3FHYXJ6c1V0azR3bllhdDNJN3BIQkswT3Yxa004SWU0OGZC?=
- =?utf-8?B?NTlsSHVSUzRWVlo4cVNYeTZTUFd4eitDLzdiVkxuWVl4Y0tJVy85MlFNZmR3?=
- =?utf-8?B?MGd1aVY4RDhHOXJQZTZ6S21XaW8xc1pmbFVLSXUvQWVpZVVHL1hoM3pzVlRN?=
- =?utf-8?B?SlluWFZ1TGF5eUpwQU1ZWHNFcWV4SFpnRmw0Zkx0RVdKeU8yUzUxRFpsU2tk?=
- =?utf-8?B?K3RtSktxNDBIbEh1UnFCVHR0OUFicnhXeTE5QWtMMERFVXZQR01IcHErU1VQ?=
- =?utf-8?B?UFNweHpKTlBoV04vRFBHdEV1K0tBTzFxYUE4YmNFRW1JZE9xT0ttcnQwT2dS?=
- =?utf-8?B?dHc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00745eec-f03f-4f56-5315-08de1b859b78
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2025 09:36:19.5551 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zymsr5O8pktL64n8FccLlDEH55eTDRVj3nunyW5wH/Rm8Fw7iSXhIq3JMMejrDM3hdz/4kHJ9dWxLafZgjUpKtnp8Y9+yY3JYmCX2ToeGMI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10045
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v5 3/4] mach-snapdragon: fixup power-domains
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
+ sumit.garg@kernel.org, jh80.chung@samsung.com, peng.fan@nxp.com,
+ rui.silva@linaro.org, ilias.apalodimas@linaro.org,
+ christopher.obbard@linaro.org, quic_varada@quicinc.com, me@samcday.com,
+ marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
+ alif.zakuan.yuslaimi@altera.com, tien.fong.chee@altera.com,
+ balaji.selvanathan@oss.qualcomm.com, miquel.raynal@bootlin.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20251027113312.3815169-1-aswinm@qti.qualcomm.com>
+ <20251027113312.3815169-4-aswinm@qti.qualcomm.com>
+ <ea83aa0d-9db8-4a7a-8b4e-bf32c9aa4ffc@linaro.org>
+ <3af79816-26e0-4403-988f-29858bf569d3@oss.qualcomm.com>
+ <caea13ec-4b90-4a7e-85f7-023e42365a7a@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <caea13ec-4b90-4a7e-85f7-023e42365a7a@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,60 +134,140 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
-
-On 11/3/25 9:38 PM, Rasmus Villemoes wrote:
-> On Mon, Nov 03 2025, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On 11/3/25 13:31, Casey Connolly wrote:
 > 
->> Hi Rasmus,
+> 
+> On 10/31/25 11:12, Aswin Murugan wrote:
 >>
->> On 10/20/25 2:11 PM, Rasmus Villemoes wrote:
->>> This is a natural buddy to the existing "part number", allowing one to
->>> get the partition name for a given partition number.
+>> On 10/28/2025 6:32 PM, neil.armstrong@linaro.org wrote:
+>>> On 10/27/25 12:33, Aswin Murugan wrote:
+>>>> From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>>>>
+>>>> RPMH power domain properties were initially removed from the
+>>>> device tree due to the absence of driver support. Since RPMH
+>>>> power domain driver is added now, the fixups are removed.
+>>>>
+>>>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>>>> ---
+>>>> v5:
+>>>> - No changes to this patch in v5
+>>>>
+>>>> v4:
+>>>> - Reverted the inclusion of qcom-rpmpd.h header in pervious versions.
+>>>>
+>>>> v3:
+>>>> - Removed OF_LIVE_SA8775P config, since there is no SA8775P specific fixups are done
+>>>>
+>>>> v2:
+>>>> - Removed the power domain fixups, since the power domains are handled in qcom-rpmhpd driver
+>>>> ---
+>>>>   arch/arm/mach-snapdragon/of_fixup.c | 31 -----------------------------
+>>>>   1 file changed, 31 deletions(-)
+>>>>
+>>>> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach- snapdragon/of_fixup.c
+>>>> index eec2c0c757e..93c16821e54 100644
+>>>> --- a/arch/arm/mach-snapdragon/of_fixup.c
+>>>> +++ b/arch/arm/mach-snapdragon/of_fixup.c
+>>>> @@ -116,36 +116,6 @@ static void fixup_usb_nodes(struct device_node *root)
+>>>>       }
+>>>>   }
+>>>>   -/* Remove all references to the rpmhpd device */
+>>>> -static void fixup_power_domains(struct device_node *root)
+>>>> -{
+>>>> -    struct device_node *pd = NULL, *np = NULL;
+>>>> -    struct property *prop;
+>>>> -    const __be32 *val;
+>>>> -
+>>>> -    /* All Qualcomm platforms name the rpm(h)pd "power-controller" */
+>>>> -    for_each_of_allnodes_from(root, pd) {
+>>>> -        if (pd->name && !strcmp("power-controller", pd->name))
+>>>> -            break;
+>>>> -    }
+>>>> -
+>>>> -    /* Sanity check that this is indeed a power domain controller */
+>>>> -    if (!of_find_property(pd, "#power-domain-cells", NULL)) {
+>>>> -        log_err("Found power-controller but it doesn't have #power- domain-cells\n");
+>>>> -        return;
+>>>> -    }
+>>>> -
+>>>> -    /* Remove all references to the power domain controller */
+>>>> -    for_each_of_allnodes_from(root, np) {
+>>>> -        if (!(prop = of_find_property(np, "power-domains", NULL)))
+>>>> -            continue;
+>>>> -
+>>>> -        val = prop->value;
+>>>> -        if (val[0] == cpu_to_fdt32(pd->phandle))
+>>>> -            of_remove_property(np, prop);
+>>>> -    }
+>>>> -}
+>>>> -
+>>>>   #define time_call(func, ...) \
+>>>>       do { \
+>>>>           u64 start = timer_get_us(); \
+>>>> @@ -158,7 +128,6 @@ static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
+>>>>       struct device_node *root = event->data.of_live_built.root;
+>>>>         time_call(fixup_usb_nodes, root);
+>>>> -    time_call(fixup_power_domains, root);
 >>>
->>
->> Acked-by: Quentin Schuloz <quentin.schulz@cherry.de>
->>
-Can't even type my own (short) name without typo :(
+>>> I think the fixup should be removed only if QCOM_POWER_DOMAIN is enabled, no ?
+>>>
+>>> Neil
+> 
+> Hi Aswin,
+> 
+>>>
+>>> In line with the previous review comment in thread Re: [PATCH v1 0/4] Added QCOM RPMH Power Domain Driver - Casey Connolly <https:// lore.kernel.org/u-boot/5afbdafa-a0f9-4146- b64e-8869f68bc7f8@linaro.org/#t>, which recommended the complete removal of the fixup code, we have removed it accordingly, also the QCOM_POWER_DOMAIN config is enabled by default in qcom_defconfig
+>>> Please let us know if you would like any further changes or adjustments.
+> 
+> Yes ideally the fixup code would be removed, but we support platforms like msm8916 (apq8064) which use rpm (no H) which are not supported by your series.
+> 
+> So I think the fixup code needs to stay, and we likely need some kind of runtime check (best I can think of right now is checking if the compatible string ends in "rpmpd" or "pmhpd" and only doing the fixups for non-rpmh platforms).
 
->>
->> Reading the code, it seems the part command tries to auto-detect the
->> base of the part number as passed by the user, which isn't that usual
->> I believe in U-Boot (usually either forced hex or dec?), so maybe it's
->> worth mentioning in the docs.
+I think the proper fix would be to just bail out when no power-domain device is found in dev_power_domain_ctrl(),
+
+=======================><=============================
+diff --git a/drivers/power/domain/power-domain-uclass.c b/drivers/power/domain/power-domain-uclass.c
+index d9fa8ad4bd2..61f693c41bc 100644
+--- a/drivers/power/domain/power-domain-uclass.c
++++ b/drivers/power/domain/power-domain-uclass.c
+@@ -184,6 +184,8 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
+                                             "#power-domain-cells", 0);
+         for (i = 0; i < count; i++) {
+                 ret = power_domain_get_by_index(dev, &pd, i);
++               if (ret == -ENODEV)
++                       return 0;
+                 if (ret)
+                         return ret;
+                 if (on)
+========================><================================
+
+Probably a warning could help aswell for debugging.
+
+Neil
+
+
+
 > 
-> Fun story: I started doing this because I have a legacy stand-alone app
-> which is involved in the bootflow, and it communicates the partition to
-> load the kernel from by setting an env variable via
+> Sorry if this wasn't communicated very clearly, hopefully it makes sense now(?).
 > 
->    sprintf(buf, "%d", kernel_part);
->    env_set("kernel_part", buf);
+> Ideally we'd be able to have ARCH_SNAPDRAGON select the rpmh pd driver, but since it isn't needed on some platforms it doesn't make much sense to do that I guess.
 > 
-> and on the U-Boot side, that $kernel_part is/was used with various "read
-> mmc ..." or "mmc read ..." commands. Guess how well that works when
-> kernel_part ends up being >= 10 and the U-Boot commands unconditionally
-> interprets the partition argument as hex...
+> Kind regards,
+> Casey (she/they)
 > 
-> So what I wanted to do on the U-Boot side is to translate that
-> $kernel_part into a name ASAP and then use that name exclusively, and
-> for that the sane semantics of the "part" command came in handy. Except
-> it lacked the ability to do the translation.
-> 
-> As for the "[not] that usual", `git grep strto -- cmd/` says that the
-> base argument can be 0, 10 or 16 depending on the phase of the moon -
-> it's a constant source of pain to figure out how numeric arguments
-> to commands will be interpreted.
+>>>
+>>> Thanks,
+>>> Aswin
+>>>
+>>>>         return 0;
+>>>>   }
+>>>
 > 
 
-Yeah, and I vaguely remember being upset by the same lack of consistency 
-for printing numbers.
 
-I share the pain. But that's API so cannot change it without breaking 
-stuff :/
-
-Quentin
