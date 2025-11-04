@@ -4,83 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3921CCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 21:55:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EADDCCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 22:01:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 484B58394E;
-	Tue,  4 Nov 2025 22:55:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C12C83936;
+	Tue,  4 Nov 2025 23:01:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j7p8/yQC";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="e1pZc5I2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ADA283952; Tue,  4 Nov 2025 22:55:48 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 28DC98394E; Tue,  4 Nov 2025 23:01:03 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47D4683936
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 22:55:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 022F78391C
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 23:01:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-651cda151f0so3106007eaf.3
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 13:55:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762293345; x=1762898145; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9avWUAj2SdVR2zzgRZ1ADGAY7Va0No/+hWRRsxrM6Tk=;
- b=j7p8/yQCn8fwNxSmfCJSWUqv4FZtes9KMq1YyO/Xf8u7TVcgtixhSTk+2scIXcQrND
- sYPY1icYskhPqXebc9c2yj4ahWLWt67KXUnNw1aDlT9SEubeIoNSuLd3UNH/NLPhZNjg
- hcA54lKiPLhlFyp8TMVZUbVe65UosOlPMptYY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762293345; x=1762898145;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9avWUAj2SdVR2zzgRZ1ADGAY7Va0No/+hWRRsxrM6Tk=;
- b=fYKkKUquc6o4lzJylgGnOAEgKgnV4YsRjHv8sXHwGoUEuic/8/h0FwZJOal80c/vpv
- X6hq2DkrmJ55Y2aPY/CvuOFCxSJnJ25/P6ROjmZI5QtV8cUV8ZaPSjRs6lSS2nVvxmTg
- MKXlS/Ecohf4GQTI5nCykW8E2k8KkyZ0aDxygU1WjNnXRq+jg4E7O3etUoQNliOoCHyG
- IND2hCYy7qYkJgR3oL4vwaj7gfiGvo+/lVgh4FjALO2wotM9OHnLW5IyFAHjeIK/286k
- LgqjhaB2CFQN5Dvjckjt9Eh+ah7nZQV/8qKnwnRjvhvFOBNTBozP051/s8yNg7K9blUn
- RncQ==
-X-Gm-Message-State: AOJu0YzBxiconNuX2AGgux7nao9yvDkj63KFJ3YFz2MDdDytzqwYUxdT
- AK03w9Y5I9tvkfeG1XncVr/2nL0+H+iQ0X90Bdyluyik/LhKPwPekCdNhrCc+8A/7+wuY+bga5c
- gtwXRAsoX9w==
-X-Gm-Gg: ASbGncuv3rw+ON5VJT4aCyKa7z0eLy2CpqtsYmO3fgfECw5GIwji0CTqYc/rWtyYAfK
- ippwGWlPp9XKb088tW35FmuZbvjOkO7y+bcyOThIzWR/ys1NCFxLxDXOujDjAo0F7YoCQZ4FD5d
- G6kwe9/h3z2Hk8YAQuCvC5G1ODZC5IqbFw8a7EIee8aG18NJkmeH97ujUzCkpCp9b+N+87+YFAk
- AriG65NddGMmWXBJevVihBL6eOeN6BrqnL+PG8VJwMb1W8+GMFY9R3fBRO6wq/hG+HIPqdT/60M
- RG1pXImRdXjtf4kx7pgDBwlwQvijvwcVcrdH7dePmbxZzwVnR6HmVMN2mGyy5tfQA6jephWyikj
- J/I9mGN5HBt//VkLarxwBhlmyRUbscKwzmOqbX7Mbw9gAlTqDdYa9VIdX0D0ETY/y34IVcvCgm1
- ZNAOX60Ip2Y8hng8LBPMx/X2NBvmR1ALiCkMi3Iw==
-X-Google-Smtp-Source: AGHT+IHOm5jiKhTdl3ZzhZayWt0E/IaM/E5lNyJ1iy/huRQOOoPDOMclSqKOuQPqMGfrfxLGegJ1EA==
-X-Received: by 2002:a05:6870:1685:b0:3d2:4f4a:9212 with SMTP id
- 586e51a60fabf-3e1992694efmr502308fac.3.1762293345021; 
- Tue, 04 Nov 2025 13:55:45 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3dff736d560sm1448134fac.18.2025.11.04.13.55.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Nov 2025 13:55:44 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20251104180044.1507580-1-festevam@gmail.com>
-References: <20251104180044.1507580-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20251104
-Message-Id: <176229334433.2371545.13618792419605757647.b4-ty@konsulko.com>
-Date: Tue, 04 Nov 2025 15:55:44 -0600
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03 (unknown [93.94.208.154])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 292D93F189; 
+ Tue,  4 Nov 2025 22:01:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1762293660;
+ bh=04AXctSsvA00TX+hsz79sjR8XwiJiOjlPZfOi+rJeyI=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=e1pZc5I2o5Q1uY8ifIwmbCn35Hso8JQa+eDdDBMuUorAZlzcUtKh1Mkko256tC1pp
+ oCmssTg3pH6HGJELVbWyPNv6WEgil0cjjCsiUjol5AMb6mNzsutwl7/Kcq0Px2NTPM
+ gwVna2SxipWfQZwGed8Y8WefrysOn+HSF2lPiPxaTVvvTuQPLODaR48Ein4z8H1Kvv
+ hYL8OMYPdv0noapMbkXD8mPK79sxduSDtVo0NPySbofE2+U4ZGwOxFDrwph4QXfKif
+ mYetixLGeez13LO1MLlMY+H+wjtr7p/00fS5APChLlm+e8UL4+BgcaagWps2UtfeZQ
+ /hJIvFDboxEHYszk7DKAKH4wZ+jOzt7OXtvV9Z7RsYgY1u3QcfpIDNM71+Hb/hRjBJ
+ O7AhVP+6AWrdmjNJ7FVWrTKOXhOtb9D1EQlli6CGNc+rVU8mQ4INC6DLjyGkE81hnJ
+ pO0zXbe0GS806zWEM9jLXNWeVeNoP5aCseCnhCOPRjHFq4AF3wWQtJpwi8qNBPbtKf
+ A0vpa/BrdZZsDpWZPwr465/YtYagfieJ9vjuE87w7FWmzYhttNuZz1ZSI4P9QtdDj9
+ wurBbjy3HR4M0DEOyDtbVubq6sLKhB/Qn+O2JB/Wd4HVW8/KD7i65CfkHihQLEFYMB
+ IujLamMJXWwIEXOEFwwPxSJM=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_client: don't include asm/global_data.h twice
+Date: Tue,  4 Nov 2025 23:00:55 +0100
+Message-ID: <20251104220055.26609-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,21 +73,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 04 Nov 2025 15:00:44 -0300, Fabio Estevam wrote:
+Remove duplicate #include.
 
-> Please pull from u-boot-imx/master, thanks.
-> 
-> The following changes since commit c9fdb9ac4d5234953ffaaef0cfc9d4ccb03f0ce5:
-> 
->   Merge patch series "Allow falcon boot from A-core SPL on K3 devices" (2025-11-03 13:18:26 -0600)
-> 
-> are available in the Git repository at:
-> 
-> [...]
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_client/efi_app.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-Merged into u-boot/master, thanks!
-
+diff --git a/lib/efi_client/efi_app.c b/lib/efi_client/efi_app.c
+index 9b94a93ee4f..da8e3432859 100644
+--- a/lib/efi_client/efi_app.c
++++ b/lib/efi_client/efi_app.c
+@@ -21,7 +21,6 @@
+ #include <asm/global_data.h>
+ #include <linux/err.h>
+ #include <linux/types.h>
+-#include <asm/global_data.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+ #include <dm/root.h>
 -- 
-Tom
-
+2.51.0
 
