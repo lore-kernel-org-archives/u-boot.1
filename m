@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7829CCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 19:05:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64B6FCCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 19:05:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8651D835FE;
-	Tue,  4 Nov 2025 20:05:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C3C44838A5;
+	Tue,  4 Nov 2025 20:05:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="esjXZP4M";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KiQoDiA3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 823BF838A5; Tue,  4 Nov 2025 20:05:07 +0100 (CET)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 917638003E; Tue,  4 Nov 2025 20:05:08 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 688E9832AD
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 20:05:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E83B8003E
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 20:05:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4439ecf6004so72094b6e.1
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 11:05:05 -0800 (PST)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7c2816c0495so3845864a34.3
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 11:05:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762283104; x=1762887904; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762283105; x=1762887905; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XCnie5i+4sRCTwdcPTVno9NVwEupaXme/fQkBg49WA0=;
- b=esjXZP4MhSbD+adKzzjW4+dWhGc24e31BnEi4irM4rWX+OPU2YkthqXp6QOxbykXQR
- kJiJOJQRxk5b5f4Cq0rNVVks60tOdMU33lg7NXVhjeEPwVW06LD1HIGAGDHGhMYY9OJE
- gPQRWo/3IAnMZCRD2OPzXHUJlFViIud5McchM=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=19SbC4bkEKcR+fsijJKmX8QymvHi54208RDuOnQSpng=;
+ b=KiQoDiA3sHdO007HBf1J4EjihFdMbXpbqNNgvkffP1zZHRgMr1iSbzZSftd4buJhkR
+ //OdHvlthn8vndcz/HPe5DuRDuuydQbPzxIDujcchueOkXEmdtKIqJADSl+MtZM5GTI+
+ myC3cte8qlVv0+DWCx7DNMFdUrO78oLfIwI0U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762283104; x=1762887904;
+ d=1e100.net; s=20230601; t=1762283105; x=1762887905;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XCnie5i+4sRCTwdcPTVno9NVwEupaXme/fQkBg49WA0=;
- b=EY0Cm8zbKU4eqnRMadv5AvFc7pnxRuBQa4pkMhwTdSsb9YRkSXkNIoc1ln5oXtM4O1
- bap+RiXk8asj8gkWDjESzD3dmOp21TM8LdN84u1s+TvoKejqKPjSRxKzc6e3CRldRu0G
- mN6bzBRZXpnI34Y8t0fZaMIL022b0110QaKcVcLIkTMskHrWwz0utMxI/rcI3UcMMQmQ
- hzYrgXOj+uM6PMaj1DgdWQ573mITjZPkU/XKuywfUPAKTEs+yOJreNB30wU0fHcNrzWQ
- IAUMtZt4st0JRxdjlztK/prphdjB89/9iqCPkebROpzfXAyAm9hGHZ/yTg09KBsmja9s
- 1zYg==
-X-Gm-Message-State: AOJu0YxLaPTjqiwyEFucGLyq6V8AOqRUTXBYYVioAeBvWxplWw2NdgbO
- syjs3Mk1nzNqmPsxVK+6NPEcoHZiivCJ3eI4EvanM8vYrggG2q4z6UiuYsSsQSfqT1OYZP76si8
- oOHaracG48Q==
-X-Gm-Gg: ASbGncsTXp5N2xMqyVJsOp7iAINvxkq7/wfxaEbLJLuMmgt8dKlWYByCRyzjbY37gOa
- CpXQfpTnWTlqJZk/UaFiaJSi0JgocGQTXm8CblOhGZy9FthK+NbgWKcv1aoEFzEQWRkQ1Qwh3F+
- imOk+4lG24y60aqZV7wcr+sNnlVgsvUA6OAI3FrKczYMpsmZfGa6UzvxjqHMuF0x/7p0u/jg6gV
- AgAG0jjzAZXtYrERx0JvsWIQAZg0nuftRrBcA5yjZJ/p89kPv/U4CdOKDgxLs0qARVbGul3LCXV
- V00lP4RhtLZmubW6oJ3tenCEzzN1muzBjIymNdFtb3/6deloqhXGNpN/kjLXDHnqQTaoggS0N5x
- cgFIVshWoJvBAezkp8/m5qJgRJuw6P12mEpq+qWLhdypXKTtRwC5qXBmm2ToFpIXewXmeaU4a8u
- BGNY9KplKez8lHhs1x9lZG0lYTEjgdSV2XoDI7cQ==
-X-Google-Smtp-Source: AGHT+IF5JI5oLL3pP6kh9CD61StdKXdcZHVnwjE/9qVFfpnqydox58jVsLYdFgnX0jfbCxT7ek6XFQ==
-X-Received: by 2002:a05:6808:6f87:b0:44f:b05e:2637 with SMTP id
- 5614622812f47-44fdc0560b4mr1946880b6e.31.1762283103903; 
- Tue, 04 Nov 2025 11:05:03 -0800 (PST)
+ bh=19SbC4bkEKcR+fsijJKmX8QymvHi54208RDuOnQSpng=;
+ b=BcpUp029MP4m5AkvLL6rezSiVdSCz0kJ2mOxn0uqiS1QJjEhzgh68nLwgM7gfcPUCj
+ BN5STQXxvMymO4bhJj+/Bunqgqvl80CEcZ7TuLFHAEoLOvZQnPI6C4/mMMaWM9iHGX1W
+ NqokXKCzQwdFISBKR8Qlg/aoa0fCYNkRv39xnN7wkOEBgTPvAqEL2UyL6UCIw/+P9XGr
+ 33nujXgK9dMkfcf+zp25yGiQ/3GUC/g+lRdpYgvzQtb39LYphgKpL7+QZoHhcvOnhzUA
+ Bq4r4wDJdq2lm6buBeQF99PfjYMHchEOy33GHEgAzkLu1As67wE1H9vAVxbftdoDNk5H
+ 10qA==
+X-Gm-Message-State: AOJu0YzkzD5aNP+E3eJ43q+h8WxOF1uFPAU9BQZsOEELcY2p1s/cjIFp
+ 7tswlYnH9FFzG9359ANKNv77JiYPbqzTH8WZXMLlMemqjSqNhxkQ/hUw+Y3lK9TbBW4=
+X-Gm-Gg: ASbGncuYLe0+1XF2bPu6qf4HDjQNkv2TSaohKVrazLzhbArJUmsIc2U2Nuk3Zkt8ZTt
+ 5t5SWLSK9w/LKWkvQMReiVlyF/fzf4/4eMbY10XWJgHuiCso4iopD74JjffUfKOfIWZCzHnoohV
+ PVMvUGv6KOt0gVe/6Y3pVn6gqY5R1tNoQO+qa0R45WO/ii/iDRmLeEscxEQGma+5cVKDXsANhlU
+ RYZBqyDH3AV6LXEskntYua4Prl9XV/5cYXe3z4vbfkL3z8Dbm2lk+NBcRcE7Uca1VZrK7ZMlL8r
+ QT1V1kiR8Uj8eivIB/p0e7MwSMDGj1KmeoLUZP0fxisYiJA42ncJegFCdxCDls4YRDtsYKSNNdo
+ UDSyporD3xNOYxaAaaPKlnWWTA6Ceew3AQczW3HrJBTMNIxDhN9XM40aNijyhJxB91VCBWNSSUo
+ 539zH4Ow5hby4lmRCOy2f/FUb613Du6JUz6XiASQ==
+X-Google-Smtp-Source: AGHT+IF5H2cSn4Yyv8oV4M1ayKDagCuUouUBPkYMBWMcEKYGeTXd9BM0+F00LyjpVIjJxo6n51BCHQ==
+X-Received: by 2002:a05:6808:4f68:b0:44d:9e0a:eef2 with SMTP id
+ 5614622812f47-44fed57202cmr251526b6e.65.1762283105210; 
+ Tue, 04 Nov 2025 11:05:05 -0800 (PST)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44fe4ca9d03sm352611b6e.24.2025.11.04.11.05.02
+ 5614622812f47-44fe4ca9d03sm352611b6e.24.2025.11.04.11.05.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Nov 2025 11:05:02 -0800 (PST)
+ Tue, 04 Nov 2025 11:05:04 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-In-Reply-To: <20251029134833.137965-1-heinrich.schuchardt@canonical.com>
-References: <20251029134833.137965-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] Dockerfile: remove Python 2.7
-Message-Id: <176228310235.3992564.14541939100672418499.b4-ty@konsulko.com>
-Date: Tue, 04 Nov 2025 13:05:02 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20251104181221.3980984-1-trini@konsulko.com>
+References: <20251104181221.3980984-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/2] CI: Move to Ubuntu 'Jammy' 20251001 tag
+Message-Id: <176228310404.3992564.12719024892457136091.b4-ty@konsulko.com>
+Date: Tue, 04 Nov 2025 13:05:04 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,16 +94,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 29 Oct 2025 14:48:33 +0100, Heinrich Schuchardt wrote:
+On Tue, 04 Nov 2025 12:12:20 -0600, Tom Rini wrote:
 
-> We don't use Python 2 anywhere. Remove the package from our Docker image.
+> This also incorporates the following commits to the Dockerfile:
+> da7942de29f7 Dockerfile: remove Python 2.7
+> 183299d9a400 docker: add OP-TEE and TF-A build for testing Firmware Handoff
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] Dockerfile: remove Python 2.7
-      commit: da7942de29f7f033a676a099335b16ca9b0226ab
+[1/2] CI: Move to Ubuntu 'Jammy' 20251001 tag
+      commit: 8b7295f352b262713361fe03c62410de47e49a36
+[2/2] Gitlab: Drop vexpress_fvp from tests
+      commit: ef34776f21969a71594dc6224d0e54cf5a2a980c
 -- 
 Tom
 
