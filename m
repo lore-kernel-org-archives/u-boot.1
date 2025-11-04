@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43D06CCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 20:42:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A46CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 20:43:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76C3A808AF;
-	Tue,  4 Nov 2025 21:42:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BE3868389A;
+	Tue,  4 Nov 2025 21:43:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oYskfUzd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="avwI2ZuG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 289D7832AD; Tue,  4 Nov 2025 21:42:53 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 189CA838A5; Tue,  4 Nov 2025 21:43:09 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED7D78004F
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 21:42:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A5648004F
+ for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 21:43:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-74526ca79beso4233927a34.0
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 12:42:50 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7c2948b774cso4049621a34.0
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 12:43:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762288969; x=1762893769; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TKiub1F/8tpXrzLg5+RhXwfUECNtj6kfWxjwFeCqlXA=;
- b=oYskfUzdfE/dZ9EXgzFdtaHLrI1FiGjrx01QX4dcZ0gUVL/rW/X+hadtee3XckAbzl
- N01rUYianeNOE5Bop2LZ4ilut8QfgdNOsK3iQ1avkLJmKQ9qhDGUoSVJYJRN92qD2+6w
- 18/O3CbRzb03ryassqUVX7UWKKDYmvUQW42u8=
+ d=gmail.com; s=20230601; t=1762288985; x=1762893785; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RL0VVpQv5fI8P0H0CZCJGjg0V7CruSAGmzXT/iSsrXc=;
+ b=avwI2ZuGd+NfTLLU/AGKjOaEQ0lK+RzntVdio+kD2ITRFcUBhY6odm2oIhHSK6jBZH
+ Z0n4yYUOb7ZsaPrrC1lywM9kcBkOIkyrigVygtgothlR6kZTKlFnO2FcWtBza55CB+rq
+ SLs5oHCKO4k8kjDzWP2oZ6k9xfWwQP44gBgPJzmy/20LmoWsnwRDJSaum/xt1GVwJ2a8
+ xr399ctckhDcahPmye0QKaS2cCVHaAobBJ3JhfZciHY8qieePLGdDGgXmw0SsKmaJP4r
+ 7xFKOLxKeF1zwgI2IdrHrNVeXe+fMy21+uy8sU5NaowEEKxg7MjBEjmpH1SsWpZ22Xo2
+ kdTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762288969; x=1762893769;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TKiub1F/8tpXrzLg5+RhXwfUECNtj6kfWxjwFeCqlXA=;
- b=kyitrQm4sbEJ1o2li6qslOooUFTUdRTQbqiQHyRmsORhEVIGgHWDNYIdv6A/+pD4cZ
- f5GumMqTturJAlHUF2VqjWyYkrUfHiPM+PFAXbxOx4NP+c+fPWQRicCfGuiIhqTVUr7o
- fRoUZyH/HHmDm8IgoHF3SdOXt5O78wa1xFWrVjri2rV7Q5P6AhzohwHwRPy3d01OhJca
- VBXEU101yAqdYNDyqXvoeSApbIilPmgoQ51C6y/ufb839W/9DuUN1bolLN806i5xrxjd
- WgEAqAmbddonwYkbCcvKEcgE6R48dVXAK19HxxkfHwRRvoZXDBW3Vp4vjcCSeRr0oYMp
- KPrg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWd2XFJMdT4Y4fqZ0MfovnrfFuFvsNRepI7LOnaqypdhMq+c3hdj7oHGAKyoEuvMi5yPRH2cJY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwO5yOad/vrwBqWrle0MbdMmPQ4ic3CZoQ1aYWssMt65XE0K18K
- z/d0NXK09BR1O7rPml/JnLrt0aVzbXW5P7Vy4Xv6w9u8YXqGIwPQfl6YQW2Sj8pmfYs=
-X-Gm-Gg: ASbGncu0+9zLAESqREKyiLZm79WolTvIfxdGeTvJ70J2WINc4Nn7mZ4hmE7+Oa0JY9q
- oE46x9UZT3AL85Lz+7WyZhOMLea5KbZfHy3VrcqEolxYkANJegn7FFPZsr43xD5Q3xqtR2DCbn9
- 05KeGOP83LwHWAtUYn5m8fVRd0rZL0RAgP0OtUcKpWkwzX31+lvECTV6s2i9ph5XuBC+L3RV167
- P4MiYG27NU06d5AQ0Xl8whSkPMUoSmCJmnZJ2RwSeUvj27Il9Fc3xCsmDpCGXldgG8ganEsq+tm
- VBHcFLQ5IOnYogi/JhY67i7AoZsClMk/vigMlwAmjuqKXCg03eM4TICXhmtgRJl6GuW5i/01BsP
- zwMzCo+S98SMupCTmgsXJVnIbllwM73sspidIrSi4r3X30NOBeCBgpkW4zxJ6OAVSSGO/c9OjWv
- eidrJBNondSvaCjBmhJGV2fJAYI/rJIKDsBkx/1UxC8DV4UDXJ3Q==
-X-Google-Smtp-Source: AGHT+IFs2WlnqUBUc5i2aKSl/Vfd0cLtk1vWOXWHxwlVaSSeNHlEPBT3TV8iLaCK8qZPwoSkCmAC5Q==
-X-Received: by 2002:a05:6808:ec5:b0:43f:18a2:97ae with SMTP id
- 5614622812f47-44fed32a3f0mr404111b6e.30.1762288969648; 
- Tue, 04 Nov 2025 12:42:49 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44fe4ca9d03sm418115b6e.24.2025.11.04.12.42.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Nov 2025 12:42:48 -0800 (PST)
-Date: Tue, 4 Nov 2025 14:42:46 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: raymondmaoca@gmail.com, Xu Zhang <423756212@qq.com>,
- Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] armv8: Fix transfer list passing with KVM
-Message-ID: <20251104204246.GG6688@bill-the-cat>
-References: <20251104150404.3355422-1-ilias.apalodimas@linaro.org>
+ d=1e100.net; s=20230601; t=1762288985; x=1762893785;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RL0VVpQv5fI8P0H0CZCJGjg0V7CruSAGmzXT/iSsrXc=;
+ b=Fmz62866FKJf8fkPNqCwH5eOc7HtNE3dTVVsdxwKSiO2E/b0Yu4mLw8rFrJS6ZVBm1
+ /fQ2MXFwNQ+GQv0015dYDbUgR+Hf1+3IpgV6+K9H+eJWsf7Uks59efqFR7cshDSemlwZ
+ aVmrlXaH89U4rXhlCAKfNWLb7Yj7B2avNgOAz3cIG+XjU+fRUfIWDWuJZX/9cKJn57v2
+ ubcNyIFWi0iMiDoKOeAgt8SeiHM9ZBKlLE1hF7l1r0O9+MmreRKkW1Sy+U/Z27NPZVY7
+ C68Ku148SET9zlSi+132lqp88uagPff8HDPaugWiIs8Y9SGBO4HNynN2Dch06am0tX5G
+ 3sQA==
+X-Gm-Message-State: AOJu0YxN5OGyBgM27rdgRxmJJQX9k4pwhOxb7CsHAkJ36ASYFgisQv9L
+ bNxEFiR1kGNxDmnwdcOaozyOTgbvyM4Um4JJqUfg1p0mNsaX+MifoBuTaVRn+u3jNo2adhZrrbf
+ ib/JIfCHctc/2E+XmeIe+SmWdpZjL0S/xdkGi
+X-Gm-Gg: ASbGncvjMdG9JFe/Nztqi/aNMhhBDC61HjbrqJsEklPyKiBbduEovOazEhbSwlD/VrD
+ uoO0CFBGod8LdlkPWmsLJ/Q2yFFv+LoFOaGa6FpRFsgecuFGPikoC41w0jeiNSlFO3GsAwoc2Tc
+ otlSp7ZQe3wm7DWE9b2ebhj2ZdgLEJWo1owZN5qJdhFUcX3Gm6bCp3uCyZf6+9ZA49dLvKL36t3
+ 5HaHnG/KU9ioXgkRzSmgQYXM1h734I99V7JEy1Ipb9Dl4tYZ1xBsJWpwTZL
+X-Google-Smtp-Source: AGHT+IFgG4TW/akHc2PGoeoiPq4LqWUR7vx89cTNpAVTLLUAe2H6SkPNRNeDTQSiWJ1/g+p3bOoKdKOuY5cZGNSqwc8=
+X-Received: by 2002:a05:6830:2646:b0:7c5:3aa3:4927 with SMTP id
+ 46e09a7af769-7c6d14aca43mr467764a34.25.1762288985215; Tue, 04 Nov 2025
+ 12:43:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="maWxgzM7kHT+XpLy"
-Content-Disposition: inline
-In-Reply-To: <20251104150404.3355422-1-ilias.apalodimas@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251104010003.525-1-briansune@gmail.com>
+ <20251104175123.GE6688@bill-the-cat>
+In-Reply-To: <20251104175123.GE6688@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Wed, 5 Nov 2025 04:42:55 +0800
+X-Gm-Features: AWmQ_bnie-6_JVBUV7KxQ5kB-jAh1RpfzoBQiJf691KGaepc0zd1jLh4biTspHU
+Message-ID: <CAN7C2SAvyfUyTqy8sqKxPWPG9Bu+aYiXGjMzfVJxR+mc59TD4A@mail.gmail.com>
+Subject: Re: [PATCH v6] Add optimized Makefile support for SoCFPGA handoff
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,83 +91,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> This should be able to reside in arch/arm/mach-socfpga/config.mk and so
+> it should be moved there. It might need to be done under "archprepare".
+> That would also let us gate even trying it with an ifeq, like we do
+> currently. I also don't see that you tested this "make O=/tmp/somedir"
+> (which is not the HANDOFF_PATH thing) and I expect it doesn't work there
+> as it references ".config" and not "$(objdir)/.config".
 
---maWxgzM7kHT+XpLy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I am not too familiar with make O=xxxx i never used it.
+I will check what is the issue here.
+Meantime, do .mk is same as Makefile or not?
 
-On Tue, Nov 04, 2025 at 05:04:02PM +0200, Ilias Apalodimas wrote:
+> Finally, since you mentioned AIs in other emails, we do not yet have a
+> formal policy for or against their usage in this project (it is
+> something we need to discuss) but at a minimum the Fedora policy makes
+> sense to me if using one:
+> https://docs.fedoraproject.org/en-US/council/policy/ai-contribution-policy/
 
-> When loading U-Boot in a low memory address, the adpr instruction
-> to preserve saved_args[] end up within the memory space of QEMUs
-> mapped pflashes. As a result the following store pair instructions
-> lead to a crash since instructions that modify more than one registers
-> can't trap into KVM.
->=20
-> This problem can be solved with loading U-Boot with -kernel
-> and defining a different text base address. But when running with
-> -bios we always start from 0x0. So let's postpone the calculation
-> of saved_args[] post relocation, where we will have an address that
-> doesn't collide with the QEMU flashes.
->=20
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  arch/arm/cpu/armv8/start.S | 8 ++++----
->  arch/arm/lib/crt0_64.S     | 4 ++++
->  2 files changed, 8 insertions(+), 4 deletions(-)
->=20
-> diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
-> index 40c342e97e9b..ef335de16b79 100644
-> --- a/arch/arm/cpu/armv8/start.S
-> +++ b/arch/arm/cpu/armv8/start.S
-> @@ -387,10 +387,10 @@ ENDPROC(c_runtime_cpu_setup)
->  WEAK(save_boot_params)
->  #if (IS_ENABLED(CONFIG_BLOBLIST))
->  	/* Calculate the PC-relative address of saved_args */
+I don't think asking general on syntax run cost is a kind of issue.
+Otherwise it will be a huge trouble to include all people or even
+referenced website from the beginning. There are thousand kind
+of syntax that can make things run. I will ignore this policy, sorry.
+Even google these day uses AI supported engine.
 
-This comment is no longer correct. We're saving a few regs in other regs
-that can't be touched until later.
-
-> -	adrp	x9, saved_args
-> -	add	x9, x9, :lo12:saved_args
-> -	stp 	x0, x1, [x9]
-> -	stp 	x2, x3, [x9, #16]
-> +	mov     x0, x19
-> +	mov     x1, x20
-> +	mov     x2, x21
-> +	mov     x3, x22
->  #endif
->  	b	save_boot_params_ret	/* back to my caller */
->  ENDPROC(save_boot_params)
-> diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
-> index 3e7627aa389b..d6246010f368 100644
-> --- a/arch/arm/lib/crt0_64.S
-> +++ b/arch/arm/lib/crt0_64.S
-> @@ -132,6 +132,10 @@ ENTRY(_main)
->  	b	relocate_code
-> =20
->  relocation_return:
-> +       adrp    x9, saved_args
-> +       add     x9, x9, :lo12:saved_args
-> +       stp     x19, x20, [x9]
-> +       stp     x21, x22, [x9, #16]
-
-Here is where we should comment on what's being calculated (and is it
-safe to do this without BLOBLIST?).
-
---=20
-Tom
-
---maWxgzM7kHT+XpLy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQplQwAKCRAr4qD1Cr/k
-CgPgAP0SZuA96kn9jXJEDbEtsCRjNDzd2fSji1WHy6rWBa4QOwEAyiqgFwBTQJkm
-5RPQwIORtWnIc3k/bYIHaNOURLX2gg4=
-=0rCF
------END PGP SIGNATURE-----
-
---maWxgzM7kHT+XpLy--
+Brian
