@@ -4,107 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA0E4CCF9F8
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 22:57:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3F12CCF9F8
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 23:07:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27D4883B03;
-	Wed,  5 Nov 2025 23:57:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 46B3383B03;
+	Thu,  6 Nov 2025 00:07:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XImn3G6a";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fIr+8PEw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56EB083B07; Wed,  5 Nov 2025 23:57:33 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 740C183B0A; Thu,  6 Nov 2025 00:07:37 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4725C83AD1
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 23:57:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 734A183AD1
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 00:07:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
- [209.85.208.197])
+Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
+ [209.85.167.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 6E6693FBD6
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 22:57:30 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6A82C40005
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 23:07:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762383450;
- bh=kIlRsACjAh3CZs3qQS+kVUvVXvbpok5zp0iHhH1GRNY=;
+ s=20251003; t=1762384054;
+ bh=tdhtUPpf5KXtqtN0W/KJNXYjrPaSdCome9Vzjq5tvx4=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=XImn3G6aGkSLR2jf6uFADiTjQYjTMTqLh+bqZuQl4RImFcWU5xiq1sIohWh5rHvZx
- b0MVWB9YE6KXqYOD997z9+eDd5fLjnzS+jAO22ar+eoh8KVizsCWcrAD8GBBmftIbv
- WHVp3b4l36a3yzRaTYTMZiTVF+IXY+LFN79By64qFXJyKPKOrQNDcKz/+u2i1TmE3u
- V1AAwJ8Du4Pzl1WGiYeBaSoPZMRSBRYgS+xIW9DjVQZVksRBKr4KiigPMtbdtTi8ht
- HeYwJE5C1w/E0tGMJxHLAk56kdc/vzqM7gSDM12wri1A/sHhDNWf5qIYQVMRTEdVsZ
- pEz48b8WKMjpwczG2puk4BynHhxeYId2f5nn7ihi1lnK7pIIqg8bWyOV9Bk/gkot3U
- xt7XB70KdBcE7ZmycmN856krfFhiJEnU/mvem/7BHZCEGcRd/BsW244LiUguta9+mV
- XWosLTd9TGDbvMECnHjc+/Ztqvrm+3LWyGq8lGHTlORtctdxLWAT0BGQUQeKUGX/wY
- JwV/xNdrj8FyegTGQRC3QZK0zwRIZJdbmqBwu6Ze/eCnftlC0KBRcABVuuSGOrwDtH
- Uo8k/BpqjmcaGSdoUMU8V73MmGfUsVd2gLeNtEbuSNkAUFYN1pn2vMbbSryx1XowGo
- haBiHCUil3iycOjX0WK5PTmI=
-Received: by mail-lj1-f197.google.com with SMTP id
- 38308e7fff4ca-35f62a3c170so2307211fa.0
- for <u-boot@lists.denx.de>; Wed, 05 Nov 2025 14:57:30 -0800 (PST)
+ b=fIr+8PEwF0awRI4IUnLeCsNLo5kVNxmLN7Qb0HnTEnFQ2D+t5IA84aURixu/J1oPW
+ 2vCuSMraPJ00g7N423WvXRSGUxhdp3yX0nkkJK9fjpPFVqLLaeJXjRPlEKKZofLSyC
+ UMRBwUITj1TqSg0Gv0Jzx41TdRAda8OkSyxotlww6CMyec8StOdJykadauTqBxWdQO
+ bVyxkiuIhjSGW8X8XwURO6/dVR1R48zSp+i9AuI/v1Kqgfsds6zrQBj99FBiwF09nf
+ 6QkaOwG72fcOYABcmC2ZojxzWeWtHv5L7clOjkVRFie09ir82oGg2M/bDnl5NAWfBM
+ HC4i1fF5BrNhLk8m7TOd4Pcr2Gy/hBhasnXtb0veHmIVQt9iWy5U+DBSlR7qlfsaUs
+ Td13QaCeYSXMU4eDY7pvLWo+q6wZurF1RctftqNwOz5P5fE6qzjEnd4ebVC6EnLI4u
+ Du2J2XSdYWDk/rPRLL6n8ybcg+pFXB78dFJhMEtY3V0FjnMQ3rIhTzr4S0YVuXCm98
+ f5PdY75qddXDVUI3OrhvxFsc6V6ochZu8HK/10TvBvK9LTCDCA/OW5DdTqGjNSNQ+X
+ g+FZ5cr/7XbReo9eeUiwgRwmF0k5E1zdeydBJadnRRVjIjzvcaUOsi/+YlFRe5hbKD
+ e3B84Tpp+iG5NTjLS0ZBXtWA=
+Received: by mail-lf1-f71.google.com with SMTP id
+ 2adb3069b0e04-594285c6850so158800e87.2
+ for <u-boot@lists.denx.de>; Wed, 05 Nov 2025 15:07:34 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762383449; x=1762988249;
+ d=1e100.net; s=20230601; t=1762384052; x=1762988852;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kIlRsACjAh3CZs3qQS+kVUvVXvbpok5zp0iHhH1GRNY=;
- b=SrgXCZAi36304R8PPHZLJZjOkRuXplwCHN2fG3OZ3xUQwyDvBDfMQ101Q+DFKo2vFa
- BT/izCNIuWRg4yvtAY0vyNAE9SRI/Yn5ca8p+mn1/zI3MAmzHXDWjtltgSwYMM8eGXir
- Kx+ErmHje5p7pNvOm9tLKJmvLLMjuMlNOSwBOL/Aun/nCvN60ccg9Dncmt75/Z02WMlW
- iRfIUR1hVqZkEGBOwo0BvWF0u7KU6qQmkjmarNvzZgwaThkPiLROrosY8a7U4ApgnXb4
- 7PRBmuQpXFu6DBxNAJwo4rqlEQbVUsdl+0fNd9GCo3Z8muRGyzpV01cDwtjhXbgN3HjZ
- QU/g==
+ bh=tdhtUPpf5KXtqtN0W/KJNXYjrPaSdCome9Vzjq5tvx4=;
+ b=WQ0BbXMb4W8nd9nltAEsUYa17YRLmoyqrinMUd+eenDPO/TbE0K11WqTGpj86jBHJd
+ AkcadeB7OMs8LFfT1WoIdYpjccfYSpwVeO6arLtjBuymaaeOCOJIzodjK6XLPkLv+mUD
+ 2k5xsyUuk8zom/omz8JS7H5BlgFQo1ajeKSnvH0IsGEBRg1w4hgL+zsi9pKgYdWkVe+b
+ 8smNnqrKnDwubY6mLbOzGPd2phd8S/ZDtMu73NIsUEdxgAd8Ytl8gQ14ibyCfvpDOoNP
+ h/+556lQSGwBv3o0Xx8AiYe2vnBUhwpFWcxBeWqjNg7UF6SY8Pke7Jg0zsRJ8zlIkhAK
+ wDjA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXf1GBrA/tQHk6XxiD4pVaH6fJHa6YPrVTJeC3QQkXI0y1XlWaQEp1/GLtfdyg6y7gwt6Uodwk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxsnINKBZ+ZfnDoM4gnKiOxYSLhpX5OZ125awSfF2Pwpw8F1j3O
- fMEPdzMdEWSa6s8FCUoYb5niraJ0TcqpyYS2U6OU93Q9PwrH9f7swJ2+6pNxinCjTr2TWqPHtoH
- u/nKQUtg3vATEM2dV5Jchl0ED8mAOuCWXLXQHGxVTjNj3442S4nupcesj49m/GvIW+5dCIhk=
-X-Gm-Gg: ASbGncs/bLauusoogzJBLUky1omm8LOxNuyoYSQTSs0+57ud5Z/raJ5OiSHqxj9xVr1
- g0+GGaVN9cE6jRrH7tPlptMonqr/jH1adRYNXcUL9Axj9ProevlNcV1OwbS3of3toLFkxGj5Etp
- QOvkDoQA6CqzQNGGo3BizV2lpTVsAXHLPQQmDeJg7UlpptQGBDuvmYQX0XV9P9IC95XMUke9mlH
- Q5WuhHt/jqtH14SAcdsz93sSKSDMpZxeGUukLXwCgD8OtbYZhwBQelVfq5Ewd/fDr/FKhLcrBiM
- y7K3lq4cy5pQZbn3uxQ9LwcN3TnmO6Lkq2mV82XaVhw6JI6k7xFnjC4JEluNgstTEk8n9zHkz5v
- 6FZKQCf+1LUZH/vJwcNi8O/ktf1V44i0z7+PlQJFnkQBN
-X-Received: by 2002:a2e:9ccd:0:b0:378:e0e7:40cc with SMTP id
- 38308e7fff4ca-37a513e5962mr11872121fa.19.1762383448987; 
- Wed, 05 Nov 2025 14:57:28 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHkMkjF5kNaUHMLhOAEr5x9oQLf+423oNjhErifjPKieI7O0Na1JGgFVabAtcHhFsGrrcVXsQ==
-X-Received: by 2002:a2e:9ccd:0:b0:378:e0e7:40cc with SMTP id
- 38308e7fff4ca-37a513e5962mr11872071fa.19.1762383448546; 
- Wed, 05 Nov 2025 14:57:28 -0800 (PST)
+ AJvYcCUcQkKXaqE7+nPz3ud318Tz8EpgEBDwQxyLxxMe38JpIpLHrusOSDq3zApEiZ56KEu0BONdhuE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxtXld5g4/THFcZ7papWX/6omM1B12WNbGRZQIKp8R23Ezno7ue
+ Qy8CvlfMK5u/fmnauHUu7ngvYbbPKmoJboCa+I7EhO2sEUo7ujVbcvriInO8fR8GOT7ZN9R7z2n
+ LUHr3gQbKdfW63VRVHvVV0pxz8YoQHa0CQEolMegWgH/ev9XyTFVbIWMVcKAsuCJBTDCDXyg=
+X-Gm-Gg: ASbGnctlIhVR2tlPyqZffZlwnO8aQIuvEjFwBIFFZK5UQBb0/nsmsctzBNzAKd/f284
+ qVX1wounyv7kPtSwjtNjt2lpacV8ulESKceutcnJNj0SA6ygmcm/5YhjZtUjTFjCx9VeUv/50Mp
+ 3u2NCPd9NFUY9V9oXvQbiPkSlI5BzUkJHV92zwZ7Gd3dNvkFhaDMNx8HFb9+0mSazbxUM9AxjrZ
+ 7TwM17fL1swRhYUC43Ya7AtSJQBoaC5oduKhWU3FQImrPfD1YETksO5O89Jmizqu3Vx7pOPjF7O
+ kq3tHqPMRhNJxFu/eQNePt+s9bOllY0lJh0jA9hjJt5y1H6TrKonCJ/OE39fY2I5PyiXhDBYIJL
+ q73PTUTgxRCuA9cQ2p6aQmJYeVvdJ0ltfYxQpO7zGsYHk
+X-Received: by 2002:a05:6512:3d04:b0:592:f8c0:c8de with SMTP id
+ 2adb3069b0e04-5943d74d75dmr1704999e87.13.1762384051938; 
+ Wed, 05 Nov 2025 15:07:31 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFO5BEsSvpTCKaqUUV91aOoxIt74dwWywnctwigypf9efMKIH2fTJpOcK2KTOJlgZEzi7LzVA==
+X-Received: by 2002:a05:6512:3d04:b0:592:f8c0:c8de with SMTP id
+ 2adb3069b0e04-5943d74d75dmr1704990e87.13.1762384051501; 
+ Wed, 05 Nov 2025 15:07:31 -0800 (PST)
 Received: from [172.26.194.12] ([93.94.208.154])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5944a019ef3sm184114e87.32.2025.11.05.14.57.26
+ 2adb3069b0e04-5944a013bd8sm198842e87.1.2025.11.05.15.07.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Nov 2025 14:57:26 -0800 (PST)
-Message-ID: <0a146dc8-f1bd-4a92-ab42-29909da4e7c0@canonical.com>
-Date: Wed, 5 Nov 2025 23:57:25 +0100
+ Wed, 05 Nov 2025 15:07:29 -0800 (PST)
+Message-ID: <219a1f79-8ae3-4724-bf37-a7c5902aa9fc@canonical.com>
+Date: Thu, 6 Nov 2025 00:07:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] test: do not write to 0x0 except on sandbox
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
+Subject: Re: [PATCH 3/3] configs: CONFIG_CONSOLE_RECORD=y on
+ qemu-riscv64_smode_acpi
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20251105180748.115441-1-heinrich.schuchardt@canonical.com>
- <20251105192601.GT6688@bill-the-cat> <20251105193307.GU6688@bill-the-cat>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, u-boot@lists.denx.de
+References: <20251031195931.622513-1-heinrich.schuchardt@canonical.com>
+ <20251031195931.622513-4-heinrich.schuchardt@canonical.com>
+ <CAEUhbmVCkjyPOyYtbABqEQZYeGV5QLwMUkO9xP4obFne7PryQQ@mail.gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251105193307.GU6688@bill-the-cat>
+In-Reply-To: <CAEUhbmVCkjyPOyYtbABqEQZYeGV5QLwMUkO9xP4obFne7PryQQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,66 +122,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/5/25 20:33, Tom Rini wrote:
-> On Wed, Nov 05, 2025 at 01:26:01PM -0600, Tom Rini wrote:
->> On Wed, Nov 05, 2025 at 07:07:47PM +0100, Heinrich Schuchardt wrote:
->>> ARM and RISC-V do not have memory at 0x0.
->>> On X86 interrupt vectors are stored at 0x0.
->>>
->>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>> ---
->>>   test/cmd/fdt.c      | 4 ++++
->>>   test/common/print.c | 8 ++++++--
->>>   2 files changed, 10 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
->>> index 96a8488e172..6b07999c88f 100644
->>> --- a/test/cmd/fdt.c
->>> +++ b/test/cmd/fdt.c
->>> @@ -269,6 +269,10 @@ static int fdt_test_move(struct unit_test_state *uts)
->>>   	uint32_t ts;
->>>   	void *buf;
->>>   
->>> +	/* This test requires low writable memory */
->>> +	if (!IS_ENABLED(CONFIG_SANDBOX))
->>> +		return -EAGAIN;
->>> +
->>>   	/* Original source DT */
->>>   	ut_assertok(make_test_fdt(uts, fdt, size, &addr));
->>>   	ts = fdt_totalsize(fdt);
+On 11/3/25 12:07, Bin Meng wrote:
+> On Sat, Nov 1, 2025 at 3:59 AM Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
 >>
->> In one of those "what is even going on?" moments, just out of context we
->> set newaddr to 0x10000 and then "fdt move addr newaddr ts". Loooking at
->> my logs for am62x_beagleplay_a53 where memory is not at 0x0, this test
->> is currently running and passing. I'm going to fire the platform up and
->> poke now.
+>> For testing ACPI on QEMU we need a defconfig that supports acpi command
+>> test.
 >>
->>> diff --git a/test/common/print.c b/test/common/print.c
->>> index 76ee851fe6a..389d6bf4069 100644
->>> --- a/test/common/print.c
->>> +++ b/test/common/print.c
->>
->> These tests are also running and passing on am62x_beagleplay_a53 I see
->> in that same log.
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   configs/qemu-riscv64_smode_acpi_defconfig | 1 +
+>>   1 file changed, 1 insertion(+)
 > 
-> I'm poking TI folks about this in that it seems like memory is really at
-> 0x0 here.
-> 
-> But with respect to this patch, NAK, we need to figure out how to change
-> these tests to run elsewhere rather than disable them on all of the
-> platforms they currently run on.
-> 
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
-These tests that are not passing on qemu-riscv64_smode_acpi because of 
-illegal memory accesses.
+For some tests to pass we need to increase CONFIG_CONSOLE_RECORD_OUT_SIZE.
 
-Unfortunately Simon has written a lot of tests with the sandbox in mind. 
-I agree that it is preferable to make tests more generic.
-
-test/cmd/fdt.c also has issues.
+The sandbox uses CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000.
 
 Best regards
 
 Heinrich
-
-
