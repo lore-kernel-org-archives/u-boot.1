@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68971CCFA0D
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 12:38:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4435ACCF9F8
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 12:57:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6ED8383A1B;
-	Wed,  5 Nov 2025 13:38:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C04383A32;
+	Wed,  5 Nov 2025 13:57:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eKPtlpIK";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="SeMS+wg0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA9F283A28; Wed,  5 Nov 2025 13:38:02 +0100 (CET)
-Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
- [IPv6:2607:f8b0:4864:20::b134])
+ id B348B83A48; Wed,  5 Nov 2025 08:05:52 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C8CD839FA
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 13:38:00 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-yx1-xb134.google.com with SMTP id
- 956f58d0204a3-63f74b43db8so6811598d50.3
- for <u-boot@lists.denx.de>; Wed, 05 Nov 2025 04:38:00 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id A554E83A3D
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 08:05:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=andrea.calabrese@amarulasolutions.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b72134a5125so298782066b.0
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 23:05:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762346279; x=1762951079; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/KSYT7ssBDFtI+nLUFevPNm9yyzHdhAT7pmcjUYnfyM=;
- b=eKPtlpIKK9aTO7Rdzhq0d8YqMRWjlQefUaZlKApUQt76hnMda42NlA55f/L1khU34Q
- KfwN/zWWRtzTdxxwehHgcl7F/1yNlOGWyZ4OqPLeNMISB9xTWFBp1I/h2+ddExpOSQmA
- +4fTf/8XscivwWr7ifhcGR45L2r6Nz6s1qg44qZZlNzKTmwEljeHnuta3Ya3uMhax+sf
- JXIrKwJQ/R4MQ2UtSzo/iPxA2+iZNXiS6kP3uUtGz4+KA9jIRVDVM8gCnvVyaYWDTXZb
- KHFcaY8wj/K+cB82auR+JVbZURq20hXBEJ9vWLb3vQH0cWmJRjIaTQx5xKei5oTj+w74
- jIEw==
+ d=amarulasolutions.com; s=google; t=1762326350; x=1762931150;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0F7ea5mHo+cAM5BROiPim2S299jxi1HHVUtpoa3rS+g=;
+ b=SeMS+wg0nWc/F3BPZD8tWDBTkuB1ceHQ7Hk8f3uCtnHi4kjY8itm1JMzKyPnoeMoV3
+ ynIynWCwwb1vFPwkvZEba6zVCQIS+9iJWHwMkP6CTEIg6UGvHSg8xBcYeiXemAmDuM+s
+ 78FFJfxRFz4NOuaoRc3wsgbXkSgTXHMSWbf84=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762346279; x=1762951079;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/KSYT7ssBDFtI+nLUFevPNm9yyzHdhAT7pmcjUYnfyM=;
- b=YYWj/M6dlPO4vjD3FjNT4Ah4OkQs1f/8TsI2ph27lTwDT53/cSURvgkbS2eMFoyRJC
- nejSpYaz2YIHJIlupSe93d5IwsjGz8jLMUHg2uE0nf0Ganhb6ZTYqo3+pkHqNWeQ5PEk
- sIDtrMYfpuGfKxhck0JwvJmi4KTUxmkA1GFKRF3F9I7fVoXPMtKrodGi3u5u6NpWYbPg
- 54bPelNWEjxI2D0K9SCPev9etIFK3RzMHnXG1CoTpd/SmBsfgaM+qBh5h4TR8jFUpbLW
- AvWRiKSI83b2DH2vA1H9rpKfdNW6gOLv9CqsTTjNZCZAHDthWZ8xU05L0FJ5JVZtycvv
- Virw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXoxhY4Hd4Czi4aTAzTywHQStiogn/gsTUssgOFWkadBXXBlf79uCD+Ck4/ScMWowBEajbM5N0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSF8osqhTnKj2FL29WGy64ZegcY7tzP1pvjXLyegzwzAND6PPi
- 96cO3/5g4gXI7DCdblF10+dbh/DKuQB0YuqwtUYMU6amCbcDhmQCDVqYeJo2teGqjA1WYMwtbO0
- Req9jFXdMCTPmGu/+9DuPvDsCXahrY7U=
-X-Gm-Gg: ASbGncuyXOYZZTtaSE/vLH3ETldh9I/ZHEpi9C9HVech+s+zIY17p8eIUHB6prTLhFk
- EvlPe4k7HRQDeTqQTGUpD32wkKtINOrwWP6C0zvoRgKSgf2zPaVEv+zCDEH4g3gOSWxuRV+ulji
- e5gyXMbW1sSWDazpD4gTNvjP6YCoQhdKD2GO4VVUamWL2TB9FZBxuhWapYAUAS97t1oWe4fRLDY
- Z604h1Hqj8ogZNz1G06xN25IcPUkQhCQ0hZ+y/t9IOqQYUkwzroPdT4JQLaUFfnRfGZ2tf9uA==
-X-Google-Smtp-Source: AGHT+IH/ei1OEqmuh2x9EdAImJD5nGtKH5YMci46mt4VvcQj8BrUhoBIo45L/0FCGgV9v8K5Nwz3jCEew6O34Ce7+a8=
-X-Received: by 2002:a05:690e:1597:20b0:63f:a6da:4b38 with SMTP id
- 956f58d0204a3-63fd34b3f63mr2143280d50.5.1762346279417; Wed, 05 Nov 2025
- 04:37:59 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762326350; x=1762931150;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=0F7ea5mHo+cAM5BROiPim2S299jxi1HHVUtpoa3rS+g=;
+ b=rubMPwgqKLc1DKcjYc+c/uAXFFoCtqLfd3PIbnrOzNy1Gtbgrcs8ecFuq5OEb/rEDl
+ eKs8AsKF8IDtvcBY4wKdFKBOvX/OG3oxd1aSY8e/tHS3QKpCIFdrQKiVUIKPFgzd/cjt
+ 2P8zbKnh9k3sWoyT8uEDeAngGqReS6x+arQuGfuoIXEOEGmsQVl358uXmRaeXsziXZNX
+ NnYGowmf5sqyGEFEPtxEMeNcBf60A2WkcB8zYAbegbfVYp0nhPnmuJpRMMGawQIBjc+a
+ 91ldssycV1SpQyHnUTei93cKOO3Z2x31lNbAwv1lYm/qxLYLHHBFazqbebrL7XJAG4GM
+ TSRg==
+X-Gm-Message-State: AOJu0YzlRm2POG+NCijnjUrndTDqCkPPgJUvu/lDZV5T4Ps9kKvKqx+l
+ Oo+N+F5vYySTM7D1CREaQTswiaBiXUSK7xjET3ernyNdj2OkNxfPQ7H9HNi0UyI10VA=
+X-Gm-Gg: ASbGncub1orcDji4T1eZ5q2p1ipyb/8QJVjRJcekAy0RrV6NO5oEiFjvf1Q8YXE09my
+ AzyYMr3eH4mCIZ8UegNlNesKxRwqNpw1bGNiQ4VUiT/wPWMUTgQvXQIvKQAuRIVEOZtZHzgFO4e
+ VvlKBC6o+olVWlY+yJigLfLJdH0zHm52e24oygT0KW6X8SM6j1ZAkNwhPkSTVp4Tc/yWCZimUl8
+ wxYpXN1tlcsSWi0+cSAeV4h3xhxEaydSoScG4wc3GjleJwvo4o67Y8r62fInbNif3Gx4E0/eXG4
+ jrYoXYg9yKz9t66hIhdXdfRj5c8ODM6sYX3lmljRCJdnWxDNlmckJMZbz30wlCjxV+hS9de1kdC
+ aR5sUQa1Ifqca9UaxJvXOfLVALxO3IftYxFPbgIy6eWpbYr0IFDuDFcotbAJC/SYWE7iLSpA7yD
+ vcaSG7tgpYDhHPrllQIS23XqF+pjRY27zkvfRAVO9vBAibjx9o2YSI3FixsiFzHg==
+X-Google-Smtp-Source: AGHT+IGgUF1vo3sZjFSgnjiesd5rJIxSQdkMma3w5orWFKidUW9O19Fe67bps8RsLXVfH4nDQlgVxQ==
+X-Received: by 2002:a17:906:6a14:b0:b5b:3ab0:a5b7 with SMTP id
+ a640c23a62f3a-b726552ff4cmr173891166b.42.1762326349906; 
+ Tue, 04 Nov 2025 23:05:49 -0800 (PST)
+Received: from [192.168.1.54] (98-215-98-95.ftth.glasoperator.nl.
+ [95.98.215.98]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b7240540d7csm402927666b.71.2025.11.04.23.05.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 04 Nov 2025 23:05:49 -0800 (PST)
+Message-ID: <ef13fbda-8526-4d42-8d96-1db0ce4a46fe@amarulasolutions.com>
+Date: Wed, 5 Nov 2025 08:05:48 +0100
 MIME-Version: 1.0
-References: <20251105122426.59479-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251105122426.59479-1-heinrich.schuchardt@canonical.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 5 Nov 2025 20:37:47 +0800
-X-Gm-Features: AWmQ_bm6bqgL5BkUH15sncRFgDxiYRusKltpYmfcaJh4cC31d3iY8Yq72VIFuWQ
-Message-ID: <CAEUhbmUip+1EefA10YBCH2Gu6yqqZhKZsh9eqMBBoHsRs-uZQQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] efi_driver: don't leak name in
- efi_bl_create_block_device()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] bsh: update readme with instructions to build M2B
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, michael@amarulasolutions.com,
+ dario.binacchi@amarulasolutions.com, trini@konsulko.com
+References: <20251031074611.39426-1-andrea.calabrese@amarulasolutions.com>
+ <CAOMZO5AJoHXOD11hoVgKV9QjNvxwk_Ox+XN1-UPRYnCPzAA-=w@mail.gmail.com>
+Content-Language: en-US, it-IT
+From: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
+In-Reply-To: <CAOMZO5AJoHXOD11hoVgKV9QjNvxwk_Ox+XN1-UPRYnCPzAA-=w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 05 Nov 2025 13:57:55 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,19 +101,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 5, 2025 at 8:24=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> blk_create_devicef() uses a copy of parameter name.
-> We can use a local variable.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
->         use local variable
-> ---
->  lib/efi_driver/efi_block_device.c | 6 +-----
->  1 file changed, 1 insertion(+), 5 deletions(-)
->
+Hi,
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+thank you! Sure!
+
+Il 04/11/25 19:03, Fabio Estevam ha scritto:
+> On Fri, Oct 31, 2025 at 4:46 AM Andrea Calabrese
+> <andrea.calabrese@amarulasolutions.com> wrote:
+>> readme was missing instructions to build M2B. Now added.
+>>
+>> Signed-off-by: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
+> I have applied patches 1 and 2.
+>
+> About patch 3: please rework as per the suggestion I sent earlier.
+>
+> Thanks
+
+-- 
+Andrea Calabrese
+Embedded Software Developer
+M. +39 339 394 4747
+andrea.calabrese@amarulasolutions.com
+
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9170
+info@amarulasolutions.com
+www.amarulasolutions.com
+
+__________________________________
+This message and any file transmitted with it may contain privileged or confidential information. In case you were not listed in the addressed recipient, please notify the sender immediately and delete the message.
+Any other use of this email, including copying it and the disclosure of its content, is prohibited.
+
