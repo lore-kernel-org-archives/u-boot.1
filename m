@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A74CCFA0D
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 15:20:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2E15CCFA0D
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 15:21:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0E3983A32;
-	Wed,  5 Nov 2025 16:20:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7E8CF83A32;
+	Wed,  5 Nov 2025 16:21:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JUgFxit6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Loeap3JZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2917183A1B; Wed,  5 Nov 2025 16:20:25 +0100 (CET)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id E070F83A79; Wed,  5 Nov 2025 16:21:49 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC5F983A83
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 16:20:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CAFEE83A1B
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 16:21:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-3c92328d0bcso3815305fac.2
- for <u-boot@lists.denx.de>; Wed, 05 Nov 2025 07:20:22 -0800 (PST)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-44fe80bde84so317081b6e.2
+ for <u-boot@lists.denx.de>; Wed, 05 Nov 2025 07:21:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762356021; x=1762960821; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762356106; x=1762960906; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=k0yoObyGuuYLhWy87FgMOX/ww4kCOySFAGcPQ4kx3S8=;
- b=JUgFxit62KVIp6KZ+mHUGvYanc2YcZCAkYkSmO9y6M90mDb5gTfpyjzOjehgXpgUg+
- kgtAObQiV9zHfV06VP3wudbWVAzhAsf8zLvQbAOHEWfx1/mIZhwMEi5N83g0Kz+4iPZu
- BvIo8ONyjhixHymXtz+iow6cNJyZKrTRXtcOg=
+ bh=FTD4v+0m7nsBhAgrM8z2pTVGwDrHCQHJ60tNeqS0Zo4=;
+ b=Loeap3JZzHoNvV43aFLWHMPZqiRLVD+V3Rr01glM+riWBCLZSqLCKmjT1fGvs/wZ1r
+ T2YFq+/1dO0dw9IdMhPcPyNv2lEk48l2ezISWjndNTX5nvQQT4IpwPfeOq/5IsBbdZmz
+ kdz+Hw5iauU+NFb1M0wRrp7Gmr1pg+sUNiI74=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762356021; x=1762960821;
+ d=1e100.net; s=20230601; t=1762356106; x=1762960906;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k0yoObyGuuYLhWy87FgMOX/ww4kCOySFAGcPQ4kx3S8=;
- b=aHnCb6BNwI0ZHpM9y6XxwGUPhbzg7ZLN/pJ+cE9gu29G3srifFVeMqgiq9Nn9Ypdpa
- vo5p8dN/K2COlQny3PkzRsyhYMYpT3ojDTkmTym1nt3K3XMLOPLrtdZQXiEZt47xGtsI
- harkbKHhPVrl+NqINjhlVu1DRXcRiwQDeRzQg3JJzDHNMMHAyuruJVeP7RsETDC76Rd3
- Jgqp19mwDHD9SlOf2HSToUMfPF2VbFbnsxRrDSrdDu4ZmWUGuD+zGLe4tmp4se641mVr
- 2U8b0D9VG/g7uHbBHYTUqMKeC2G1NoHAsz97q0end85pJsVhHGo6nXsReaU4dEooBHPE
- fyOg==
-X-Gm-Message-State: AOJu0YzBmw90gT+m1pac9LstNljyFbQERkrNgFtQuQOIr5PEibKTARds
- xKW67bnxCWm8TTTg5c+t0lCAqf5Od/gxNHx1jOM9Tdoz6WXEQawXSL1HoUpMqZnP7T3/BsYImER
- /S04smX9EcQ==
-X-Gm-Gg: ASbGncvduBJSwwgs1cVgj8vvzz5v1qLpFq89+y5aWmKOJA4E/RcjyIpZMGg5W8XL9tC
- tB3JVeSfXPwFsShkSjcJSmyJtMjebJfRfTe2eN0275OuWYj0iYcRowTXOg6TFxR6JL11kmHAuUv
- kY5vzBlh6Rym9/ok6f0p9c8SoDXwZhr+5/1boK8KjlHpebt9XlhEPXvja1sHdsu8G7onSCG+Y8i
- Xi1nVeTirq/JeqqcqL6kgN53eVtSb4vOd1cjxxlI/vF9AjLXV6ciT2FdiVYbuTvfODFZMJ/nHZN
- JVS1eduomZRwjDxPOkWXm4K+Nk9LkDi5ZYMilLAEjzKHcB9JqelNPKMx86d4Ixcu9E+oPQIp0ix
- pri+Fi199dhQ1zyihYOgjQ8Er3LLM7zBrUMLW/3gIHDE7ozSPLP14XN6LqwBB8okZZNSbHgu2g+
- OgPCOKQwMM08i2TIIxvy3I9fqZbJ8p8k3jnk75xEs=
-X-Google-Smtp-Source: AGHT+IGt0Vz3LbuRBo/+XOlZG0txbTtITnw2MNPaCcitsfeMOvCj4Sh5N2B+FsVByl9HBKu/33cCQQ==
-X-Received: by 2002:a05:6871:7583:b0:3d4:94ef:d05c with SMTP id
- 586e51a60fabf-3e19a7e51c2mr1499387fac.21.1762356021484; 
- Wed, 05 Nov 2025 07:20:21 -0800 (PST)
+ bh=FTD4v+0m7nsBhAgrM8z2pTVGwDrHCQHJ60tNeqS0Zo4=;
+ b=KVS/2gQcBE34uXVIeKs80+8h0J2Kd+gy1kwQQne2SeszbAxIBUbteehgp5DdSJ5J2A
+ 8MrWtQAjaEfPvTcBY7xL0CubC22y1zocN+9LNb1SkGlnDk9FaJFvrzj6m54NFzBqd+33
+ Rn0O8raWN4/GTMOdkEuNQPIt+v0lNqi6u8L0ff2gwlOQO+qOfU6iwu4GOHzOjp0qO4p0
+ VkafS8wnxiBHn3/TCexNWizrwdTmsR7eMt7RtBdYaS9qIcdNveYRdcQOJQAqY7ePde9P
+ IoSieial4eodJLeyohRia3MKtp/+ADAhag1V29V2PBG8VRzdWCa5VpOZZJ+GQstMc6Wa
+ 8StA==
+X-Gm-Message-State: AOJu0Yxzaan8d2TqUUhwUNuhWuBSSrm3W+aJo67QA6QD4MrAGqUuvAkH
+ a9s6n/BWVcQfi5C0w2zoKXr/bWxp4IPqlbKARfhoxJLCU1wNuaSd3DIM5c1zSphhuaU=
+X-Gm-Gg: ASbGncvKb4Fh3getr9gN8zBTcxKC4AluFLwvMDGr/jlUnIJSTqxuvwe/zNQNEzhDUM9
+ rBv2EhgyOpbbPGOHsdgkycsDXXe9GGLa9Vx2ryTXtHEtHMxrtLw4yacKSU3CyGDQjh/LcsJ5SbQ
+ 4Psq2kcjWhPthCko79a24IN6letd1q7sfewUTMheAXwyPUBIXijExv05XFMt9jYCggg2pTcuVQ4
+ XxqbonWEfyRVt08sUuKdzJlDo58UK44YPNwV2KRHjhXgiXdqPS3XlBwT2rXdGFKA8/h61neTjeU
+ vjTROsEcpQ5YcsOiWC/zJrVbmrBgdE53Ucyuz/5li50adPMsfHZqL8CuxdGJtljkKVacFO/dQsM
+ rZYKS1u3o666pyEbpipPNu8JNaobF4CWADq3cIcYrkS6v1d6ADFiuDSDOTu78PUDV215vRnG2fl
+ 8zOlkcBgEQbRFSD49EAX5qmTu6DTCRPSV3fYWFhm62ZTEOrcxKyA==
+X-Google-Smtp-Source: AGHT+IGqMLuMPmx6r9fTImH4PbbXz2cfNYQoLcfF71BtuaAYf4mWnpdfyfCJSeql7VflbpRxpCvXYg==
+X-Received: by 2002:a05:6808:344c:b0:43f:1de2:fe8f with SMTP id
+ 5614622812f47-44fed1cd4c3mr1544608b6e.15.1762356106555; 
+ Wed, 05 Nov 2025 07:21:46 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e0f2eb63b1sm1552502fac.21.2025.11.05.07.20.20
+ 006d021491bc7-656ad0617c8sm1852301eaf.4.2025.11.05.07.21.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Nov 2025 07:20:20 -0800 (PST)
-Date: Wed, 5 Nov 2025 09:20:18 -0600
+ Wed, 05 Nov 2025 07:21:45 -0800 (PST)
+Date: Wed, 5 Nov 2025 09:21:44 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Heiko Schocher <hs@denx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v3 0/3] reenable dm_gpio tests, add support for
- gpio-line-names lookup
-Message-ID: <20251105152018.GO6688@bill-the-cat>
-References: <20251104174458.3385564-1-ravi@prevas.dk>
+To: Brian Sune <briansune@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v1] sync doc/README.socfpga with new info
+Message-ID: <20251105152144.GP6688@bill-the-cat>
+References: <20251105120613.530-1-briansune@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IgfSyINNbiZqduy0"
+ protocol="application/pgp-signature"; boundary="gw493htm8y4uJnFL"
 Content-Disposition: inline
-In-Reply-To: <20251104174458.3385564-1-ravi@prevas.dk>
+In-Reply-To: <20251105120613.530-1-briansune@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,56 +97,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---IgfSyINNbiZqduy0
+--gw493htm8y4uJnFL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 04, 2025 at 06:44:55PM +0100, Rasmus Villemoes wrote:
+On Wed, Nov 05, 2025 at 08:06:13PM +0800, Brian Sune wrote:
 
-> Hopefully third time's the charm.
+> Pulled from official Altera trunk
+> and modified the handoff section.
+> New handoff tool location and operations
+> are explained accordingly.
 >=20
-> I merely wanted to add support (mostly for use by the 'gpio' shell
-> command) for looking up a gpio via the gpio-line-names DT property. We
-> already have a "gpio_request_by_line_name()", but cmd/gpio.c does a
-> separate "lookup + request", so it felt more natural to teach the
-> lookup machinery this as well. That ran into
-> OF_CONTROL-but-not-OF_LIBFDT being a thing for SPL, so here's yet
-> another attempt.
->=20
-> Now, when trying to do my civic duty and add tests for this, I found
-> that test/dm/gpio.c has been defunct for a couple of years, and
-> reinstating it is not entirely trivial.
->=20
-> After a couple of rounds CI is now happy with this:
-> https://github.com/u-boot/u-boot/pull/828
->=20
-> Rasmus Villemoes (3):
->   test: gpio: include in build, and fixup bitrot
->   gpio: search gpio-line-names property in dm_gpio_lookup_name
->   test: gpio: add test for gpio-line-names lookup
->=20
->  arch/sandbox/dts/test.dts  |  2 ++
->  drivers/gpio/Kconfig       | 16 ++++++++++++++++
->  drivers/gpio/gpio-uclass.c | 11 ++++++++++-
->  test/dm/Makefile           |  2 +-
->  test/dm/gpio.c             | 24 +++++++++++++++++++-----
->  5 files changed, 48 insertions(+), 7 deletions(-)
+> Signed-off-by: Brian Sune <briansune@gmail.com>
+> ---
+>  doc/README.socfpga | 412 ++++++++++++++++++++++++++++++++-------------
+>  1 file changed, 295 insertions(+), 117 deletions(-)
 
-Thanks for doing your "civic duty" and fixing these up!
+Right, so the first thing to do is migrate doc/README.socfpga to rST
+probably as doc/board/socfpga/index.rst (and include that in
+doc/board/index.rst). Then work in some improvements, thanks.
 
 --=20
 Tom
 
---IgfSyINNbiZqduy0
+--gw493htm8y4uJnFL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQtrMgAKCRAr4qD1Cr/k
-Cug0AQCtiTMiTSfxnhxHnnXyjfs/TTyT4F1NgdNHwiU4R9k8wAD/WvqIHaNzfi5z
-YRLO0pAIQrwL62RrdSJqoX1zSXZBpQs=
-=WYYT
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQtrhwAKCRAr4qD1Cr/k
+CoCpAP9cp+juhskFnw3syzQFYHtVjX/yAlt7gcrMkPpX+FxnnwD/fEjltePwgRxS
+A+GBYVKeRCOVABWs/K12IuQAENslOAM=
+=om6V
 -----END PGP SIGNATURE-----
 
---IgfSyINNbiZqduy0--
+--gw493htm8y4uJnFL--
