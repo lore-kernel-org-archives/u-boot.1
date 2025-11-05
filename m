@@ -4,87 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EF40CCFA0D
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 17:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E010CCFA0D
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 18:07:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A56F83AE6;
-	Wed,  5 Nov 2025 18:22:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 4727883AD1;
+	Wed,  5 Nov 2025 19:07:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="X1aWvr5Z";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kkIbtNhn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03C0B83A5A; Wed,  5 Nov 2025 15:08:27 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9ABF683AE6; Wed,  5 Nov 2025 19:07:55 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1517883A1B
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 15:08:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9C55583AC5
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 19:07:53 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=andrea.calabrese@amarulasolutions.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-b727f452fffso52738666b.1
- for <u-boot@lists.denx.de>; Wed, 05 Nov 2025 06:08:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1762351704; x=1762956504;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3z3Hreoyc5LEnlxnhvt1RoUSuRJ2bvgjlhDg2tWTfHg=;
- b=X1aWvr5ZMI/1kG9Nq6J8wzNCNdOamreV2FyzwXRr7TyYET1nWjhKWWCzuf5oz+sy1o
- QlRF9+7EUhibbOjAclZwpnYZjNQGNgA2UCPHUyGtI/w488PaAPNbEicp5IkNCD6VDVcH
- OwnYOjXUEeOFKcHp4uNzQekB4MX0Co6+QPu4Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762351704; x=1762956504;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3z3Hreoyc5LEnlxnhvt1RoUSuRJ2bvgjlhDg2tWTfHg=;
- b=Q/ISgCs+7qR+meQQrvqinG4pWZkhD0LNumE6T5KAyn3ypE/F9LJZiHQrtmVW9oSXJr
- VUkGp+EkuGU7+I3Y+jqhEPGsrltLuD6n4AblmLE/uba5GfClfSL4GNdm3VLnQh3jKkkP
- AUqJqyiH8RHlzpqlpq0put5nCyAe9aNQqS1/PhPBuIvKDlo7mGHvM0tmhWObnI0X9x19
- 4gYJPW0uNUobIYq5kyX70f0rxswHVwiWoM0rgL1ZPEGpPyFD9PF2KLpbbGMbfTy7VX1y
- EqzcISmljS8ufu3e+o7BYbKIkDmX3E0mQmu8QiCS3LxiMcRo4Ll4tqpis8IdBpLVziOf
- jAMg==
-X-Gm-Message-State: AOJu0YwP0nffJj1nMt0HAnnIWgpocYzkmLewQSK0Jow0fkdLplQySM4E
- t0eRYb0/UjuIO5jKQlNd6HCQbl332pr1GzN6tKrYh24v0u5SB0tT2QYYXGrqytR2BZc=
-X-Gm-Gg: ASbGncsIITrk7s9Jr9y+szejY+ymjUW+mcKg5ACo/izAgGasKiRFvfKiv5rOQ33Onbo
- HTeJjMHCAKQ/JCrDPwAx/08m2/06wKOS4zfoFnqaIGxdjnUB8deijkepWrzgWvDFTBoypPAWW4X
- qeq+u/I32Ky/9I89BnAyeDjg1wWAQxoxkTn56iE3ju5VjdUc+DSavSYOfoG/TqwhCk2PUBXf7dg
- qp4/jKLXp/nskI/qAksVsmOgYo38OH2f5uklDxrj+W5gWPawu8KkcCU6RnwIMNoukdJ9HpG6bpb
- 34s+YRNbru8mBFgT75b0ttMh7IsJIq0cEd1e7g8YJVG/OknDZW9U0hQEZNsTw3bkJEY7ztYWpwj
- Jy6MH88qs+UKGDeIzHGloNyKygn6LWdrjmaq+k8YNM28WxpMSlWHhY2YCKiddU/xou3S/bHK5ek
- 8+IO9htTqrK6K813s1w0isGv830BxpCckFUsNm/YMfYsPJ/uAqGq9rgTWlOufa
-X-Google-Smtp-Source: AGHT+IF65XTUco9LNqmVeK80JZ9E1t4kyM0LTQpK5W8VmbXtIv6/hy3V7kgtSEOzgE6faANXnV43xA==
-X-Received: by 2002:a17:907:9449:b0:b6d:671d:8814 with SMTP id
- a640c23a62f3a-b7263246b5dmr453461366b.27.1762351704498; 
- Wed, 05 Nov 2025 06:08:24 -0800 (PST)
-Received: from [192.168.1.54] (98-215-98-95.ftth.glasoperator.nl.
- [95.98.215.98]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b724034ade7sm497805066b.69.2025.11.05.06.08.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Nov 2025 06:08:24 -0800 (PST)
-Message-ID: <39087182-ccab-410d-830e-9745e8fb3606@amarulasolutions.com>
-Date: Wed, 5 Nov 2025 15:08:23 +0100
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03 (unknown [93.94.208.154])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id AC5523FAF6; 
+ Wed,  5 Nov 2025 18:07:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1762366073;
+ bh=8SxhYu1AnT/jPQjPRevZ6yO/jJIDzv1R3FKIz+npF0k=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=kkIbtNhn9Qy8FNZIOXzxouoK/JSK+Mf0AEW9MczdkkP5kAviRiZGtDVhzg6Fn5Elg
+ L3db5xSYygRtN8VrZPOWjbP+HMq41roqcLObQiMnnU2yRziJlevP2gh+XfhZiua/+r
+ jQG21h7c2wFmhtET8/mKrWJ9iPW/uSHP0Wh6nTAmZudILPjPDJ2UFUIjfr/ArlgvlC
+ k2G9qaHtGH4GwENnJQWelqh9cFy5EiIGFtIixIEuqD9D4UR2eYew7kJI3ER7grNmp5
+ NsUZgTRJL9RoxiqQYf4Cp6+pZdxcVUP/dguyqjR/YHXu3dqxnjVutwDDcfpCJCEuwy
+ eU+rk81EYTnWqM8CLkL6GYTv+C/Wi8eobylLR+jahRAR1EHn6prptHURVyWH94PPv/
+ pt3kiLUBMQpzhTpJvKGI50BwqD6JfxTxyOPRhCByzVgMYLTspw2X2TDaXdFPbO2r+J
+ 9rzjn6s/kH4ruhfTKvNloUPFzZ7eQOJytNA0V2lyShRzZX2Pufy21dqLLvugnTNw0k
+ x0GCdK5JWS1tlgnR/4Kq18Fz2KrUl3Ff/uCLIofh0RdXxxNgLFVrNJN9KBRkM3IheM
+ Gt8yekz9YdZ0fzn/cQMIWE/2zs69mV7Dz9mGq3OJMryGxJUch2iNAh1ackQk2UwaiZ
+ 80W4cDEYmF85aYpTlFxi/vQA=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH] test: do not write to 0x0 except on sandbox
+Date: Wed,  5 Nov 2025 19:07:47 +0100
+Message-ID: <20251105180748.115441-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/3] bsh: imx6ulz_smm_m2: Add imx6ulz BSH SMM M2D board
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, michael@amarulasolutions.com,
- dario.binacchi@amarulasolutions.com, trini@konsulko.com
-References: <20251105071308.228223-1-andrea.calabrese@amarulasolutions.com>
- <CAOMZO5AR1+yo+yeUKAhHm73DxdWH4XpdRdD5YgO_Fd2MdnbA7Q@mail.gmail.com>
-Content-Language: en-US, it-IT
-From: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-In-Reply-To: <CAOMZO5AR1+yo+yeUKAhHm73DxdWH4XpdRdD5YgO_Fd2MdnbA7Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 05 Nov 2025 18:22:48 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,51 +77,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I'm sorry, I thought the change was trivial and did not think about it.
+ARM and RISC-V do not have memory at 0x0.
+On X86 interrupt vectors are stored at 0x0.
 
-Re-sent now, and built...
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ test/cmd/fdt.c      | 4 ++++
+ test/common/print.c | 8 ++++++--
+ 2 files changed, 10 insertions(+), 2 deletions(-)
 
-Il 05/11/25 14:25, Fabio Estevam ha scritto:
-> Hi Andrea,
->
-> On Wed, Nov 5, 2025 at 4:13 AM Andrea Calabrese
-> <andrea.calabrese@amarulasolutions.com> wrote:
->> diff --git a/configs/imx6ulz_smm_m2.config b/configs/imx6ulz_smm_m2.config
->> new file mode 100644
->> index 00000000000..50dafd887f2
->> --- /dev/null
->> +++ b/configs/imx6ulz_smm_m2.config
->> @@ -0,0 +1 @@
->> +#include <configs/imx6ulz_smm_m2.config>
-> A file that includes itself?
->
-> You have not tested this, as this does not even build.
->
-> Here is my suggestion:
->
-> 1. Make a patch that introduces configs/imx6ulz_smm_m2.config with the
-> standard defconfig options and convert the existing imx6ulz_smm
-> defconfig to make use of it.
->
-> 2. Make another patch that introduces the m2d board.
->
-> 3. Make sure it builds and boots.
-
+diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+index 96a8488e172..6b07999c88f 100644
+--- a/test/cmd/fdt.c
++++ b/test/cmd/fdt.c
+@@ -269,6 +269,10 @@ static int fdt_test_move(struct unit_test_state *uts)
+ 	uint32_t ts;
+ 	void *buf;
+ 
++	/* This test requires low writable memory */
++	if (!IS_ENABLED(CONFIG_SANDBOX))
++		return -EAGAIN;
++
+ 	/* Original source DT */
+ 	ut_assertok(make_test_fdt(uts, fdt, size, &addr));
+ 	ts = fdt_totalsize(fdt);
+diff --git a/test/common/print.c b/test/common/print.c
+index 76ee851fe6a..389d6bf4069 100644
+--- a/test/common/print.c
++++ b/test/common/print.c
+@@ -169,7 +169,7 @@ static int print_display_buffer(struct unit_test_state *uts)
+ 	int i;
+ 
+ 	/* This test requires writable memory at zero */
+-	if (IS_ENABLED(CONFIG_X86))
++	if (!IS_ENABLED(CONFIG_SANDBOX))
+ 		return -EAGAIN;
+ 
+ 	buf = map_sysmem(0, BUF_SIZE);
+@@ -244,6 +244,10 @@ static int print_hexdump_line(struct unit_test_state *uts)
+ 	u8 *buf;
+ 	int i;
+ 
++	/* This test requires writable memory at zero */
++	if (!IS_ENABLED(CONFIG_SANDBOX))
++		return -EAGAIN;
++
+ 	buf = map_sysmem(0, BUF_SIZE);
+ 	memset(buf, '\0', BUF_SIZE);
+ 	for (i = 0; i < 0x11; i++)
+@@ -270,7 +274,7 @@ static int print_do_hex_dump(struct unit_test_state *uts)
+ 	int i;
+ 
+ 	/* This test requires writable memory at zero */
+-	if (IS_ENABLED(CONFIG_X86))
++	if (!IS_ENABLED(CONFIG_SANDBOX))
+ 		return -EAGAIN;
+ 
+ 	buf = map_sysmem(0, BUF_SIZE);
 -- 
-Andrea Calabrese
-Embedded Software Developer
-M. +39 339 394 4747
-andrea.calabrese@amarulasolutions.com
-
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9170
-info@amarulasolutions.com
-www.amarulasolutions.com
-
-__________________________________
-This message and any file transmitted with it may contain privileged or confidential information. In case you were not listed in the addressed recipient, please notify the sender immediately and delete the message.
-Any other use of this email, including copying it and the disclosure of its content, is prohibited.
+2.51.0
 
