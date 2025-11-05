@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FACCCFA0D
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 16:19:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86247CCFA0D
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 16:22:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47D5C83AA4;
-	Wed,  5 Nov 2025 17:19:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C03583AB4;
+	Wed,  5 Nov 2025 17:22:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KhoO70qJ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h8MGw8Lv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FD1E83AA7; Wed,  5 Nov 2025 17:19:04 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazhn150100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d902::])
+ id 917FB83AB7; Wed,  5 Nov 2025 17:22:18 +0100 (CET)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E36E383A9F
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 17:19:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15E4183AA4
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 17:22:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-jain1@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qDGXC7otr+qWL9VnnowTJBM94IyAHyH4o1tZYDo1M8ujmfpBDBp1C9WVk+MxTUs8JqMotLaoCgtpDBeQKL7rBw/rw/Czcmf6PvxBfdoXYcC81RBbUX7eUPCQfU6Ju4bXazIVXlsyrVEHlkp6dXrN2mX+D7B89ks49F/9LK+csG9Y1GyeNH5PUsUxTz6lgjba/Encz0QFihTNb+cNAIR6xKv71yIBgddgtpwjA8HpvQAliwluz+hKuuvpYIYmq5cwpF6hAue2uafFn73CkvmZU94SNOLp6aqP202J3zhjdIkKryw/IrP4Sl56nlxVD8Lq48+3Yn3t/MG2b71/c4+kFg==
+ b=XUj6KdE0etmdXBcBMYlp8VhHjHLRSAMKXnAn2UbKTFIpH+5Z4Qxu9AdinJe6hgHgi05Q/JBfmgKYcSbMmLPvtGaeev+I9ozWP2izEYjYlY3fsPPNSER1sDZNMNF04yti7brUpFzjt5RXil/I0PDjef/b2dw9wB4Co7Q7GiV/TtLDG9Gs5u6Qu5iyBKKlsqVWTwMlPP7yPyqPHxZVw2lDVOfAQ9vbRZRcJccc6uCPJEaxjR+n1SJFEujOHoGQ1VPzdoTk+KbmXM4JPeWfJ76ahSQUPiXM+RyaX1GojXtlPqPcCwWOEi3ZBn9tOV+ZV9BGhrKZlUKyHUuWxDZtGWHUTA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OwvK+h+d6+j7AWecPtFk+ogy923/DFTTkYpxRr+CQKQ=;
- b=j1yVFv7DZMjxRNcm0SH2Y89OtLqMHuvLiF4pX19baFsBaEQsywuDteslmkbFxcZxhEf2tNv6Y4+5P588eWMtKdsq0xKLzbS6BEbUNYtpunPZEbUEBFBIamribP7ZvNE2aQOaUNxGk4RGxq0QA64Re+z28AcVSmY5UYBkNWaETYuA2C0C7S46qJuWHwHCg9u6DiB2TFftqPq2hltnTJWOFpbL9K5tPs0zh6vmreNI0Qztxe7bnkfeGKyWBdD97NfrLL9TtCp8M4JHv0XWUWzqXqVK+c8BLc2WazqHAQ+eRwGetHnzjefk9T8Nd+av53/MmXns0LIFUaFTvtKVHPmLDA==
+ bh=iMuodGt1zsUHcmmSEBp/TyK5Ttx+2AOhzTtev1/+EeE=;
+ b=FdNZAWpzRJ+56v/TjnoGl3iiKCCgbfU4BAtXA1pOU5c/XAH7Zdx53Tz07uTe7SU/cjKqnLIyX8O2vw2bCQr7cshKI9QYjqnAyE0bBZJVLEwRgguvrkxt1gKRcmAMakXYjdF3+t48YnJ9J5xZKgoq2OMLeWJRfDhTVdW9ZjaGeF33/A/b1esHou1Axd5IFWvgvb0+gBd6E0ki9f9osjtwNXKdjth5C6A1oeSrUHnSqpMBbKaYB/5t6LM6yYrBpzxIiDy69xevNTiEOauCSrzDd9a9JkzXV2BO6RGB5kQ7toKyDTgJvVAPzpv1vU4kCxS4GIsxZgK15VoeAGF17jVFNQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=dh-electronics.com smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OwvK+h+d6+j7AWecPtFk+ogy923/DFTTkYpxRr+CQKQ=;
- b=KhoO70qJBBdTQVKQA08+tGJIoVkW7/q4/L4QxvmxPomtMg1qyaURYvXzY7moBpFd5N6AwIy7DxHs1FjRSe9Ja2qt1qkK8ErZESi3TxsHwQrZRzb4wX2+oGQxAk+b0cWm8NPJi4Y18lfLj41gIfQNMqcgwSU0aFRNPoLGNZGalII=
-Received: from BN0PR02CA0047.namprd02.prod.outlook.com (2603:10b6:408:e5::22)
- by CH0PR10MB5130.namprd10.prod.outlook.com (2603:10b6:610:cb::24)
+ bh=iMuodGt1zsUHcmmSEBp/TyK5Ttx+2AOhzTtev1/+EeE=;
+ b=h8MGw8Lv8azeClFqYlcaglcxRv7hT7z9ExZRf8QdVPORQsuSAkC5yqVFn/dkjrqwYazdQyIb0zztMy7uiswM7wGtj+AoF3iRRHkXjD3GOJmtq/MlAIWr8ODjcbBqvVDBI7F5F38oKBBYSB7dwtbC0LEhNhXKFYi0Rl88VPh0iHw=
+Received: from BYAPR11CA0069.namprd11.prod.outlook.com (2603:10b6:a03:80::46)
+ by BY5PR10MB4322.namprd10.prod.outlook.com (2603:10b6:a03:208::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Wed, 5 Nov
- 2025 16:18:56 +0000
-Received: from BN2PEPF00004FBB.namprd04.prod.outlook.com
- (2603:10b6:408:e5:cafe::ae) by BN0PR02CA0047.outlook.office365.com
- (2603:10b6:408:e5::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.10 via Frontend Transport; Wed,
- 5 Nov 2025 16:18:56 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.9; Wed, 5 Nov
+ 2025 16:22:12 +0000
+Received: from SJ5PEPF00000203.namprd05.prod.outlook.com
+ (2603:10b6:a03:80:cafe::af) by BYAPR11CA0069.outlook.office365.com
+ (2603:10b6:a03:80::46) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.8 via Frontend Transport; Wed, 5
+ Nov 2025 16:22:11 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -58,100 +58,110 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.23.194 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
 Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BN2PEPF00004FBB.mail.protection.outlook.com (10.167.243.181) with Microsoft
+ SJ5PEPF00000203.mail.protection.outlook.com (10.167.244.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Wed, 5 Nov 2025 16:18:56 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet200.ext.ti.com
+ 15.20.9298.6 via Frontend Transport; Wed, 5 Nov 2025 16:22:09 +0000
+Received: from DLEE201.ent.ti.com (157.170.170.76) by lewvzet200.ext.ti.com
  (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 5 Nov
- 2025 10:18:50 -0600
-Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 10:22:02 -0600
+Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 5 Nov
- 2025 10:18:50 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 10:22:02 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 5 Nov 2025 10:18:50 -0600
-Received: from [172.24.233.20] (a0512632.dhcp.ti.com [172.24.233.20])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A5GIkGx3988801;
- Wed, 5 Nov 2025 10:18:46 -0600
-Message-ID: <9875f311-a65e-45be-993a-c57aca808268@ti.com>
-Date: Wed, 5 Nov 2025 21:48:45 +0530
+ Transport; Wed, 5 Nov 2025 10:22:02 -0600
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A5GM12C3949927;
+ Wed, 5 Nov 2025 10:22:01 -0600
+From: Anshul Dalal <anshuld@ti.com>
+Date: Wed, 5 Nov 2025 21:51:46 +0530
+Subject: [PATCH v2] configs: am65x_usbdfu: add
+ SPL_USE_TINY_PRINTF_POINTER_SUPPORT
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/2] Refactor tidss_drv and enable early splash on AM625
-To: swamiljain <swamil.jain2016@gmail.com>, <devarsht@ti.com>,
- <aradhya.bhatia@linux.dev>, <n-jain1@ti.com>,
- <tomi.valkeinen@ideasonboard.com>, <trini@konsulko.com>, <agust@denx.de>
-CC: <vigneshr@ti.com>, <praneeth@ti.com>, <h-shenoy@ti.com>,
- <u-kumar1@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>
-References: <20251105161437.4064391-1-swamil.jain2016@gmail.com>
-Content-Language: en-US
-From: Swamil Jain <s-jain1@ti.com>
-In-Reply-To: <20251105161437.4064391-1-swamil.jain2016@gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-ID: <20251105-am65_dfu_fix-v2-1-ccada89d966d@ti.com>
+X-B4-Tracking: v=1; b=H4sIAJl5C2kC/3WMQQrCMBAAv1L2bCQbmkI9+Q8pJW43dg9tJKlBK
+ fm7sXePMzCzQ+IonODS7BA5S5KwVjCnBmh264OVTJXBaGMRtVVu6ew4+dfo5a0Q25aZdHfHHmr
+ yjFz1sbsNlWdJW4if457xZ/+MMipUjsj0iDgR+esmZwoLDKWULw+CSvalAAAA
+X-Change-ID: 20251105-am65_dfu_fix-1144eec06b19
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>, Judith Mendez
+ <jm@ti.com>, Udit Kumar <u-kumar1@ti.com>, Hrushikesh Salunke
+ <h-salunke@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh R
+ <vigneshr@ti.com>, Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Anshul Dalal <anshuld@ti.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1762359720; l=1838;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=BedG8GNyhe8LH2mSgzpupNGpFTs/DBoSMYtlqxnN59c=;
+ b=W3AhU58Jp8bRd8udYF+lLjelKqNYnH8GJy9I1XwmVTI7CC/iTqPlT8+vArg+PSF0D6Z52CCBz
+ G55T/pP5rcNCwCOvmg6gHprTPNboGUVCRpRX/toceWjjT8d9d8ruNga
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF00004FBB:EE_|CH0PR10MB5130:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0d94c6d8-4d6c-441d-500f-08de1c8704e3
+X-MS-TrafficTypeDiagnostic: SJ5PEPF00000203:EE_|BY5PR10MB4322:EE_
+X-MS-Office365-Filtering-Correlation-Id: b859a074-ded7-4087-8027-08de1c8777fa
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|34020700016|1800799024|36860700013|12100799066;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WjdZVHRMWTZtM3liUTgzU3ZjcUpSWTEyd3h1T3JwNzFXOWwzY3hhejgwdmRD?=
- =?utf-8?B?SE5pZUxDdGdjQ2pUSjBKRE1ueml1ZGM5OGJiYUxHd2ZvMzU2UzFOK0lZOER6?=
- =?utf-8?B?VzhNRUhOcVRwTGoxNXB1RXVEMUJGUGI4YnQwUCtvZE1MQjEySmltQUNzMW5y?=
- =?utf-8?B?aGJENy9yWGZSVk51eUpKYkNkcHl3ZkdQaWVjRU1lTzJoN1hQbVpyN2FKNzBM?=
- =?utf-8?B?OXo5Y240SUlVTGhxb3hVWUljc3k0cUxkR0phVm1IMEttbFZCUE1VYXk1aUVH?=
- =?utf-8?B?SldJWmlPc2xicGgybkVxNmYyQ3k4bWFmUnhKQzd3ZlZsNUxVc2cvVmdQWEFl?=
- =?utf-8?B?ZEVidHFXR1dCSVNvTWErNXU0VWVMc3Yrb2xDVE8yL1VnMzlvTTdNYUJoT1ZQ?=
- =?utf-8?B?RlgyeEJocDM3S1piVDh4cG9BblJTcjRrQlFpWlovc2xHOXZqNUpiZ2RjYllh?=
- =?utf-8?B?UDdRdUhSM0dQZG5EUk9YVXZYT1JtbDgwNDJpVW5GMHd6eFVKMHZTVENYWWI3?=
- =?utf-8?B?L21kb29OYXBwVTJQR01JSkt2SjdUUWlNWkxQME16THM5UGhkN3N4RTB2dkk2?=
- =?utf-8?B?TmQ0QVRTQjNGdm1RYUltRGFpVi9KKzU4QXNydTNzMzRsLzZxdzZ4QzNrY1FX?=
- =?utf-8?B?eHhqbWFOdnhoUjgxV3YyOWxUb21tRVhFaG1jcWJRWko2VmxvRjBqMWZiMWd2?=
- =?utf-8?B?MzY4ZjlZQWtMd1JiUVhiNDVCUE5kUDRjN3NZVTgxTWxEMk1HUnJBMm8xbmRC?=
- =?utf-8?B?QUNlUTBueGZVamh4VkRUZ1hxbnFWLzd5cTNlcnBtOXdmRm9zUGU1SHBaV3kw?=
- =?utf-8?B?RHJYQUJZZHdhRmVZYXVSYVFqRDFVRllzUWFvNXdwWCsxY3JrV3BnUUkwcnJ0?=
- =?utf-8?B?dG93UjVZVTBnSGhPWlo1QmJrL2JYVmxsRnRJQzBmRCs1TDBQTy9XYWZkNnVi?=
- =?utf-8?B?WEhmVmtHeDFwMkd2SFlDa09GRHdBYU5Qa3Q4eVJEeVE2QXpCM3pSS0ZHNFBW?=
- =?utf-8?B?RmRoNU56akh2TGI4TTRaYU04T2xjVG94ZVlxdk1OS2I2Uk9kWkcyU0tteGlT?=
- =?utf-8?B?STQ0S0lNdFEwN3RvcEJjVHZMNmllWk9oZXJzcGFTL0VZaXFaSDZmZmxBK2tI?=
- =?utf-8?B?VXltLzVtZVhlTy8yWnBMUmlrREdGaEREQVcvNG5sVWcwc1BMMC85QVJLTTll?=
- =?utf-8?B?SHJ4SWlYc1FuemRtYzJtZjFLMWxSR0RQUU9UNkdiSm0zZGpLUS9pWFliU0hu?=
- =?utf-8?B?T2RwZVJ2L2M1ODVtejJYTTVvd3QvRnN5QkhoMDBjU203WFE5eDlVZ09WZGVK?=
- =?utf-8?B?K08yVVlENjE3bWhOV3prMWJqSncyQ0NJQjZzUmg0U29TOVlQK0FyRWxsZnhs?=
- =?utf-8?B?Ym1hbDV1eWRNK3JDUnd6TGVrUkxvOHN1ZmlnTHhGcGJmK1pINCtyZXprNmU0?=
- =?utf-8?B?dVZiYVBQdkZTZmovTyticWVLaHBZa0JCV2RpRGNzNHRCdFNrRlNrY1g4YWpU?=
- =?utf-8?B?UG4vSlJ6VjB2VHozcGhUVkdrdnRiUTYyNGdLbUVoWlJJMGFyWmRnRFQvQjFq?=
- =?utf-8?B?QnZrZzc4WFl4SDE5WWxkUWxYaHFxTE5PZDg2aHZBRXhHekhJNTdZbmpQeEFX?=
- =?utf-8?B?eEhnais5a2ErbGhwZ1BsR1VqWWw5NysyQlpDLzA0WGxVRU1HMGdFS3IwYVJW?=
- =?utf-8?B?NlNuMnFuQ2xQME1pZGdLUllNQmRvdkxEckFpNGRmTnBqQk1UcVJ3KzQ3U3Qy?=
- =?utf-8?B?Q1BXWHo5eG1qTmxKY1E1ek55YkRvbUJ5RXRJTzZaSm9WVHBhcUVGUjJPdm1D?=
- =?utf-8?B?S3F2M1UrcFNmSk0zLzB0ZHp4bkFUbkZTb1J4RmJtaGlyU21MdkduazRJMUFk?=
- =?utf-8?B?V0lnZVV4MEFHckhaT2lwVWpJUjNsTFN4aitrUEdOQVZHeTBUWENKN051UzlL?=
- =?utf-8?B?cmp0clFOa0QxVjdHcWFHeGZsVVh0c05NaHVxTW1rVS9lS2ppWm12NDlleFdm?=
- =?utf-8?B?cUJXeS92a1d5UkRnQ0MwbU5mMkkxdnpVZExDa2MzMlVVa3VibzEzQUYxUkM4?=
- =?utf-8?B?VlJBbDJGUStpRCt0Ym1sdG4yaDhRbjEwQVkrUlVtUHhueGJuOHJpK05XYm1K?=
- =?utf-8?Q?ZKhY=3D?=
+ ARA:13230040|376014|34020700016|36860700013|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MUtpSFdseVd1WEM1b1hsRm5hOTY4b0pDN0hTbDNRSFFzYlY4Vkt4V05waGNW?=
+ =?utf-8?B?SEpxY00vdWkwNWZEN2NBYWJuL0VzZzJ2QTVKbkl2bDR5K1RnYVc1cGFPNGh2?=
+ =?utf-8?B?TXpPeVdkaWg0c2JRNUJEUWZSR1NDV0Q5b0dDV2RuSDdxaHBwL0xGVXdreFNY?=
+ =?utf-8?B?eTVzcnFCNzNUSDVFdU5nb0dRN2Y1Z3BUNEhHL3UzUmlYMEhJVVdWU3NWaHkx?=
+ =?utf-8?B?cTlISWpSay9ETjlWUUdjUXEzRmlRUDhyNkhwNGNGcXp1cml3RjFzYlF5dXI2?=
+ =?utf-8?B?TWxuc3JBRHNrQitHaFB4UytuTTREN0lnZ1R4c1dWQkl0elJZck5ITi9NdHhq?=
+ =?utf-8?B?eGt1MzlyQnNsUElHL3YxdDVSR3JZS0JQbjdNdUZ0NXNLblhKaGROQkY0T3lt?=
+ =?utf-8?B?Qndjeno3SWlXYjJhVGlZREFQR1NCMXJOc1FwM0lILzhmbHpLaFdjZ0l5eks3?=
+ =?utf-8?B?N1QwRTR0Rkh5QmVSMGplaDR5UDJuSEJaQ2h6RUZzSGRQWUcrTER6V0ZMRXBO?=
+ =?utf-8?B?RHBJT0syczBrWXNsQTZzVlhURVNQd2EwRDg0Y2JkaXkyOXYvQ0xGdmdCOWtP?=
+ =?utf-8?B?US9pQmRwbzM2MzJybUo1aDVLU3dtSXFBRUFiM01rTmxuNUVLS0xHa3JRTVI4?=
+ =?utf-8?B?TWtKcC9BbHoxK0l5aktIeEZXWnRIU09qa01aaHRrc093OFlBQldna2xJdjI1?=
+ =?utf-8?B?UDlIVUJmTlFSNE9UUEtxWkhLV0dBM0tLaDBTb0EvTkh3VDRzalRRVEpPMzE5?=
+ =?utf-8?B?MmdvRVVHU1VxZXA5bU9DeHQxUEtLZzVXVGZqSVpCZVZCNVdnTWd5VnUvQVN1?=
+ =?utf-8?B?cU12aUdqbzFDQVo4ZnZVWi9nejZxMHl2TmpzZlpYTTl3cmtXcTJNMjZzMlp0?=
+ =?utf-8?B?VURDM2dseVV4MVZrTXhCTW1OcDJUYVg3RU5HZzZyOEtTTjMwSE1hU1RkNWgy?=
+ =?utf-8?B?Vi9ibWpIUThEbzh2aVlhU1AydzRvUGhWcDk2Wk9iV1JxRXYxMDlheCtvMGNY?=
+ =?utf-8?B?NmtiSUcxbkpVenhraEc0Wk8vQVlmcE5senNTUlRnOVBkYjdKVEdwNXAvQ2lw?=
+ =?utf-8?B?cGdMTFBjMzZZaThMNHBGbVBzT0ZhaHA4MjJRTHdrZTluc1M5S3VMS2ZOOXg3?=
+ =?utf-8?B?aFBXTmNvQlBPcThNZFBBSWZXcUpKL1RhZ2N6WXNFWk14RlBXbkR3SW95UnhB?=
+ =?utf-8?B?Q2xsc2gvWmE1ZFVPMW1wU1VXQ0lNZ0E1R044OG5RVTBES2Y4Y3Y1S3NidDky?=
+ =?utf-8?B?Unc3NWh6Q0dVZ0s2N1pWaW9tTi9nMU1YcnFCREVISktyN2o0M1lPMFBPSEc2?=
+ =?utf-8?B?dE9sZm40V1ZSQThJYjVvZHU0ajBqNnA0dUFRTTZUdGlXL2MzSEFnY2h1TTh3?=
+ =?utf-8?B?Qzh6dXV2MGJMVzNqbXptUkZTVkwxY0VqNW9VNzN1NDNkV2E0SUY3SGZJRTZq?=
+ =?utf-8?B?V2RlL25qYmtMWnRLdUZwK21YdXh3TWNrSVBkd1pVRHUwaTAzSkRXWm1zdExY?=
+ =?utf-8?B?NzNRd0MrSlhyYU1wc2hKRmh1L3FjdytsRzBySmducTM3SDY4WnFJOHY5OFFS?=
+ =?utf-8?B?QkR1c0Y5ZEdLbGptTlE0dHFVdVlBNGI5WkxoUXppbnRVSkhkVGFiZExPdHpu?=
+ =?utf-8?B?TlNsUzB6aXdUUy9pQjNFdVVVSTh5VzlkMU5JbTV3Wng1YUtaQVR5ZlEyNnA3?=
+ =?utf-8?B?dFBSVXgwM0tHVHp2Zkt0SHBHMGNPS1pxVWVrdGhIaXlpeE43YldjYXk0ZXQ2?=
+ =?utf-8?B?Yk5mcmxQMlhTVUhBTCtjTEdFaFFMRDgzaVYxN2JsSFU2SmovdlUxMUxEYlFr?=
+ =?utf-8?B?VWFtcG1kOXdGMVhFRG1pTGVYMnNiYWdCVTh5U3ZZbWhNV3JPY3lHUHd0bHdz?=
+ =?utf-8?B?eFFXdkdxOHpyaTR0cVJyc0kwaHZMV3d5bnNYNVMxaHI3RC8rYklsQTVVYkxi?=
+ =?utf-8?B?M2JmbUlVYUFVRGtmckRHVG9HZXFQQTJoZmtlNHoyaFRLM0g2eVVZZmM3Vzl2?=
+ =?utf-8?B?WlE5azNIVTlZdHNheUxMWitMQkkwMkwyNW1Zc3A1VzgxbUZCOXNYT2t5cTdu?=
+ =?utf-8?B?WHpEWFl4RGJaOTNaOWtyMk1GSXdvOGdrTzZJajAvNjRZanI1K1p5MEczQkJ2?=
+ =?utf-8?Q?bxww=3D?=
 X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(34020700016)(1800799024)(36860700013)(12100799066);
- DIR:OUT; SFP:1501; 
+ SFS:(13230040)(376014)(34020700016)(36860700013)(1800799024)(82310400026);
+ DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2025 16:18:56.0706 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0d94c6d8-4d6c-441d-500f-08de1c8704e3
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2025 16:22:09.0881 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b859a074-ded7-4087-8027-08de1c8777fa
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
  Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF00004FBB.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF00000203.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB5130
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4322
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,68 +178,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi All,
+Since the commit 1e24e84db41a ("tiny-printf: Handle formatting of %p
+with an extra Kconfig"), SPL_USE_TINY_PRINTF_POINTER_SUPPORT has been
+made mandatory in order to use %p which would earlier have defaulted to
+a 'long' print.
 
-On 11/5/25 21:44, swamiljain wrote:
-> - Refactor tidss_drv
-> - Add am62x_a53_splashscreen.config to enable splashscreen at u-boot
->    SPL
-> 
-> Note:
-> - As OLDI specific changes are in progress to be synced to upstream DT,
-> use this[1] branch to enable SD-MMC splash on AM62X. Upstream DT changes
-> can be found here[2][3].
-> - Use TI logo file(ti_logo_414x97_32bpp.bmp.gz) from this link[4].
-> 
-> [1]: https://github.com/swamiljain/u-boot/tree/v3_splash_final
-> [2]: https://lore.kernel.org/all/20250913064205.4152249-1-s-jain1@ti.com/
-> [3]: https://lore.kernel.org/all/20251017115325.1942591-2-s-jain1@ti.com/
-> [4]: https://github.com/swamiljain/ti-splash-logo/blob/main/ti_logo_414x97_32bpp.bmp.gz
-> ---
+Without this config symbol, k3_sysfw_dfu_download fails to set the
+correct value for the DFU string with:
 
-Please ignore this series, will be resending v3.
+ sprintf(dfu_str, "sysfw.itb ram 0x%p 0x%x", addr,
+   CONFIG_K3_SYSFW_IMAGE_SIZE_MAX);
 
-Regards,
-Swamil
+The value we get "sysfw.itb ram 0x? 0x41c29d40" causes a boot failure.
 
-> Changelog v2->v3:
-> - Add splashscreen.config fragment to enable splashscreen
-> - Align OLDI mode detection logic with kernel side upstreamed OLDI
->    series[1]
-> - Address styling issue mentioned by Devarsh
-> - Pick up R-by tag for PATCH 1/2
->                                                                          
-> Link to v2:
-> https://lore.kernel.org/all/20250725043012.1186886-1-s-jain1@ti.com/
->                                                                          
-> Changelog v1->v2
-> - Iterate through all available OLDIs
-> - Move dss_oldi_tx_power from tidss_drv.c to tidss_oldi.c
-> - Rename tidss_attach_active_panel to a more generic name
-> - To handle all active hw video ports, add an array for active hw vps
-> - Iterate through all active hw vps to enable respective clks
->                                                                          
-> Link to v1: https://lore.kernel.org/u-boot/20250603105735.4038240-1-s-jain1@ti.com/
-> ---
-> 
-> Devarsh Thakkar (1):
->    configs: am62x_evm_a53_defconfig: Enable A53 splashscreen at u-boot
->      SPL
-> 
-> Swamil Jain (1):
->    drivers: video: tidss: Refactor tidss_drv
-> 
->   configs/am62x_a53_splashscreen.config |  16 ++
->   configs/am62x_evm_a53_defconfig       |   4 +-
->   drivers/video/tidss/Makefile          |   2 +-
->   drivers/video/tidss/tidss_drv.c       | 235 +++++++++++------
->   drivers/video/tidss/tidss_drv.h       |  40 ++-
->   drivers/video/tidss/tidss_oldi.c      | 364 ++++++++++++++++++++++++++
->   drivers/video/tidss/tidss_oldi.h      |  72 +++++
->   drivers/video/tidss/tidss_regs.h      |  21 --
->   8 files changed, 631 insertions(+), 123 deletions(-)
->   create mode 100644 configs/am62x_a53_splashscreen.config
->   create mode 100644 drivers/video/tidss/tidss_oldi.c
->   create mode 100644 drivers/video/tidss/tidss_oldi.h
-> 
+Therefore this patch sets SPL_USE_TINY_PRINTF_POINTER_SUPPORT for the
+usbdfu defconfig.
+
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+Not sure if a 'Fixes' tag is appropriate here since the commit
+1e24e84db41a ("tiny-printf: Handle formatting of %p with an extra
+Kconfig") did cause a regression though I think the problem existed with
+the usage of "%p" with TINY_PRINTF set to begin with.
+---
+Changes in v2:
+- Remove unrelated changes
+- Link to v1: https://lore.kernel.org/r/20251105-am65_dfu_fix-v1-1-acc29111dccf@ti.com
+---
+ configs/am65x_evm_r5_usbdfu_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/am65x_evm_r5_usbdfu_defconfig b/configs/am65x_evm_r5_usbdfu_defconfig
+index f9161f1fe111ff97f7aa79f10b21c3b0ab1dad32..add03dce002b2abd913770cd836d2cd8c852ed5e 100644
+--- a/configs/am65x_evm_r5_usbdfu_defconfig
++++ b/configs/am65x_evm_r5_usbdfu_defconfig
+@@ -6,6 +6,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x57000
+ CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SPL_USE_TINY_PRINTF_POINTER_SUPPORT=y
+ CONFIG_SOC_K3_AM654=y
+ CONFIG_K3_EARLY_CONS=y
+ CONFIG_TARGET_AM654_R5_EVM=y
+
+---
+base-commit: 1c250e444ad3b15315ee8b0fcb3fc3acc26449e2
+change-id: 20251105-am65_dfu_fix-1144eec06b19
+
+Best regards,
+-- 
+Anshul Dalal <anshuld@ti.com>
 
