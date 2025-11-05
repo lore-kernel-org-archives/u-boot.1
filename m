@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB2F0CCF9E3
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 00:46:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 465FDCCF9E3
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 00:48:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BD73839D6;
-	Wed,  5 Nov 2025 01:46:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8ED33839D6;
+	Wed,  5 Nov 2025 01:48:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="loVAGGAb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WubZwVVg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 543B4839D9; Wed,  5 Nov 2025 01:46:29 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 32459839DE; Wed,  5 Nov 2025 01:48:33 +0100 (CET)
+Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
+ [IPv6:2607:f8b0:4864:20::b133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 484DF83981
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 01:46:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C81783981
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 01:48:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-784966ad073so72873647b3.1
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 16:46:27 -0800 (PST)
+Received: by mail-yx1-xb133.google.com with SMTP id
+ 956f58d0204a3-63f9beb2730so3771510d50.0
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 16:48:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762303586; x=1762908386; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1762303710; x=1762908510; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IbI4V5Bqw4eX6fGHZDXD0tODieeH4U3HrsM/GZRRw/o=;
- b=loVAGGAb7960WILLymU3x6Vkhow4LUhlF1kacWUwGDcfltI9rmmHNnMee/wDOcfDWc
- JgfNZgThFAAXVxn/TX10A/gCsFMEULyd6gtxx5W7iCu2lczbqQG8xCKx/vXm0rZAKp9x
- d83MGK82+3xeUEHSGyvo8wMu8AkCkW0RuToNYGUbDh0w55NAkn8urOjmnGJL1AGMazR3
- n+sgRYyUiVrWcmaasSwdBaDN02wPWjq2Z7/cEjesNaszy2bLQEmGMlXo9/OmdnbK1Phh
- 9oQQ4nyMPMXsVyzgU01HDsuJMuRly0QPIK5paoD05VNdpXqa7bHshBNBmVxPTzUZt2ZJ
- BDUg==
+ bh=0Yj/477+/gbw2CC/CsxaUBC75ENnsKpAqtfA+/mzjNE=;
+ b=WubZwVVg7FhN4XpThByhFBA+m1rfrmnVPBzIrjEMsA/+5a3T1e2MbN0VSVK7WzAya1
+ TeWRmKgr46ZZTMlgkeYp8sOsTdKGM7uAJO6Z6xYCMUG6Gby5VgghduV/YZ4X1PFSQfYF
+ ABZix88pp5qlYR+euyasR6JpkmsBaGs3UbyH6n7lRj4W1OdFIcA+x6sR8xMrkaMOUqNz
+ Alb8CZTUB50be6Ett8vcbJYI9VIYQ1/e8Y8zIQmGnUU9kiTVShv9buApdkLbqBWePE7X
+ 67IFBxGuwMUd8bzrjjb4ZT9WE46ZyJjCBuxfGNV+Y2axNbShAkyxVOREdm4pZ1ut079A
+ JMJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762303586; x=1762908386;
+ d=1e100.net; s=20230601; t=1762303710; x=1762908510;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IbI4V5Bqw4eX6fGHZDXD0tODieeH4U3HrsM/GZRRw/o=;
- b=oMOskAqdfTKIDiFDSt+nwJ0VURrMXNSggfvAezW4ekqLR1GbZZnMDYMmKi41/67Tfn
- JoSDhcSRhqdwGGdPDuqkfQ5PvziLAfj+Fm4gpXFspFv/ifXR+6TakjcZWoBf7RgLdm50
- lKBkn3i0TpWPHKdOhHgwA532YvJ20KmCh3GHyt+Et/5pyOrzKHPGHdncc28vqt+08Ypt
- pG3tE+j49O9X/kWj6zdJSnpFECwQ9g1qtIbhcOpufZ4FuXLhbTld5h0tIO5qMlKhdC3f
- oexJ63QRxlIsXwH0mZn2shGATq3+bT/4V8ksgJhH7HNvpK2IBPfc2VwG0gOirrobm1dd
- EgRw==
+ bh=0Yj/477+/gbw2CC/CsxaUBC75ENnsKpAqtfA+/mzjNE=;
+ b=WkHKJ/ivRwRBhsAzWU9Go4X70FCw1kaG0elIwtlyOYVEEW2QaM/SlKc2AOIt1X++IS
+ G3e32Gp2scLpozpBlZv2qkgMaclxjRu4yW9w3gp9gWuk4XNjYzSk5klc2ySy+PUyHmQV
+ LPga9+GW3H5zwaLKDXOqO5PAajrFxdoh3t/ooNs/mrNUutxMHPJsEoFzzS70haKe3QhN
+ 9KeNCxqU+okDuMaz6lAN8vPqYAJvxujzzxtsQZed8jcugQIE+weQTu3ZZk9in2fyVoE8
+ KihCR5jI6w5LJQni4+VH8hzsgGl+Q7v6jIuisjYFvBr8w83mFgOZofbo6lklkJzpBOw4
+ GJ2w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUGq2nCYsd+6kpP4Fsy3AOv0Qc6hVCdsHvD4UjV4pJa7uaPvu00wtdJaw2KIreXDvvy/Ls6QM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwOdhUu7I6CUJ3FW4I0xmY0B0xoH/HiDyLreImSBNPshb1i7/Ku
- EpoLWmOZjX50Tf1lt1FbjfCyrk3cARmw/sci1q13U15uK2gvEG99Aw1uPOCasV81f4iJavEXjhZ
- ysDTMKfHa/dM7/Cc62MHzeQ2Ibjzynu0=
-X-Gm-Gg: ASbGncveivWRVh0WUZG3RP8QiYEbnhZXV1tOE9ZC0kmj1tyw2Tjumyy5Mwj3Th2opc2
- cvpXf2GVi12658glJeGoQPa9GO+nUDndcfxfzApyVpEakhIlFR7a0Y0VLuRIQiE2N4HXOwCdxOX
- Vpj/QY1TnGQpp2PSZm++w9x54SEdOob5DZQiPYrqYCwzCJsG9HXoTTtlt8xnQObipcNo6fYKlXi
- fw8G/pQJqsLI2SKtLDXPcuu1C0I9hJn8B4VlszVUKH4fsHTd1D1lxIUBVPn
-X-Google-Smtp-Source: AGHT+IFw6dKHGHC/39Ft+ACX8qicfY4v3ZnWq3e6AvsnrTXXGfL+kLnVLXD9i2muggGvHkncFc54r1UrKEde6eI7z7Y=
-X-Received: by 2002:a05:690e:1559:10b0:63f:b9d1:b152 with SMTP id
- 956f58d0204a3-63fd34c52f1mr1272202d50.21.1762303586138; Tue, 04 Nov 2025
- 16:46:26 -0800 (PST)
+ AJvYcCUJyOGs0qEdDEvfIFfOiYa103kH6/l/pYj7K11RW/lYPxU02MX5Q19BQ5eJ8hgNQNDfKL4Qi+s=@lists.denx.de
+X-Gm-Message-State: AOJu0YxIDj7JbgKDJikWCKrAzjkHEDddZIbMGujE9MQ36CdMY85/EmFE
+ EvXX69iQaJKb2tgpnhnOqZP8ZceN1tOaK6tIO0V8RN/PWLCy0S/hLknhWs25MLqI+TO+nuEXYeo
+ 3PIY+r6cDAXY6OAFzdtxPa02bVUSG9Ik=
+X-Gm-Gg: ASbGnctQJDfpJYuHh0LP3KLFtgvV4HVs4uxnd8HKRSfpcaeUaxTtrRiNZU3cxMdP7aw
+ BgfqQ6cccWYm6c73bQ+nCAFV/MYbkhCn9M0sJW4Ed6mVlYwM5hruUtyk+8wPE6UhXMKvjkkvoI7
+ LtkV19YhXJ8JuQhvb0bNos/9PIcWSSXpEkmEBvdD2pdFgj4uFJtdM3dIuvs/doIsidwrTc2aW6T
+ hSzlIWSfAxmPdM+uhDlvIREiDij25TGWyZJ3n8CsS3bAv1Ww7QVkjEHcodT
+X-Google-Smtp-Source: AGHT+IEap3QEhcJmE3EQKWzH9c5dz7aatS0FJk5CJ7NnpfZ1VhUfrYSValxNkx0dINb7gNB/rpBeahQcIM1buog4jc4=
+X-Received: by 2002:a53:b10d:0:b0:63f:babc:dbe4 with SMTP id
+ 956f58d0204a3-63fd35856bdmr1025412d50.51.1762303709872; Tue, 04 Nov 2025
+ 16:48:29 -0800 (PST)
 MIME-Version: 1.0
-References: <20251104225404.49618-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251104225404.49618-1-heinrich.schuchardt@canonical.com>
+References: <20251104225636.49890-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251104225636.49890-1-heinrich.schuchardt@canonical.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 5 Nov 2025 08:46:14 +0800
-X-Gm-Features: AWmQ_bnVgya9JDJhJF6UxUnYR4t0sQZVxPFDe5siod_6KmvMpBlFNUD8Q6Qgjwc
-Message-ID: <CAEUhbmVNfx0FS7j3jVxcttermTVJ6owUkF=1F4s65H_ZREGQMA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] block: type 'to be write'
+Date: Wed, 5 Nov 2025 08:48:18 +0800
+X-Gm-Features: AWmQ_bk7XqezwJbENyMtr1sW19hM5jIx5jBy8xrayj9xb7whdFBi3vQ3HXu0484
+Message-ID: <CAEUhbmWmGfuymkgq-gyadokLVQF+orWo0smx=EnS86dDEG=OVQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_driver: typo 'to be write'
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -102,13 +101,29 @@ On Wed, Nov 5, 2025 at 7:03=E2=80=AFAM Heinrich Schuchardt
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  drivers/block/efi_blk.c | 2 +-
+>  lib/efi_driver/efi_block_device.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
+> diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block=
+_device.c
+> index 070747de515..c389b1920a8 100644
+> --- a/lib/efi_driver/efi_block_device.c
+> +++ b/lib/efi_driver/efi_block_device.c
+> @@ -84,7 +84,7 @@ static ulong efi_bl_read(struct udevice *dev, lbaint_t =
+blknr, lbaint_t blkcnt,
+>   * efi_bl_write() - write to block device
+>   *
+>   * @dev:       device
+> - * @blknr:     first block to be write
+> + * @blknr:     first block to be written
 
-The commit message has a typo too :)
+Or, "first block to write", to be inconsistent with the next one
+"number of blocks to write"
 
-%s/type/typo/
+>   * @blkcnt:    number of blocks to write
+>   * @buffer:    input buffer
+>   * Return:     number of blocks transferred
+> --
 
 Regards,
 Bin
