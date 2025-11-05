@@ -4,74 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46208CCF9F8
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 03:43:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0DF4CCF9F8
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 05:48:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF3FC83A15;
-	Wed,  5 Nov 2025 04:43:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id CC6A083968;
+	Wed,  5 Nov 2025 06:48:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dqcj8fkr";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="bK4O4Xei";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="AJojRCOc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D92683A1A; Wed,  5 Nov 2025 04:43:20 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id F25B0835B3; Wed,  5 Nov 2025 06:48:36 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31991839DF
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 04:43:18 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4d1WPf09CPz9tcd;
- Wed,  5 Nov 2025 04:43:18 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762314198;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=QsKefnDcsnlm4eaqrnagKmEqX4jrzA/MRaRG1XCit8I=;
- b=dqcj8fkrvlgudLXveFF+s6wD0/55dA+LlvfOCQ9qw55orQ+g19LNLcZRJMDJv63DFIQwB8
- 950wj8LWSlXg6KLxeHyjfnXympBmVOzRMgyUtG0/dlhg5FxkwOZCXPpO9GbkKfS57VIlO0
- rasmlkw+9mcZl75GS9L4rSyibeh93QItLiCMVPX6co9i/oCB0K6psYxK0fIpK1BEahn/4k
- clXJeeNcqBUVzzFeLzEA4ixw80C0j3BI1RhuptsL+U30+78Rhax3AOpiHKidmBvmyPc+xG
- DuASPd4ZLjAZkSnwShHUhRgzEPyGJq6WAp1C7CQTnLYL+JqxH55Jdxs2aGka5g==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762314195;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=QsKefnDcsnlm4eaqrnagKmEqX4jrzA/MRaRG1XCit8I=;
- b=bK4O4XeiME7YLSZi0eHKdHC8j8yw1l59q58lGPJIcrMznc7NprsLa8pThGcAfyouHwRBuq
- i34kyE/KS3S4VcZb3W6GfpH3qmbCQTly5DXgp0MC/GLBVBndJdvh13FNQtjh7UwLxTXnzv
- K9J240oEc2XTBcw8KewQhXsAhOr3e+nk79+z/PcdANVuBmOwGJJwrCZDdIyXp0aOvAaGuD
- nkOHPupa05oXg5EYyZw+6puSvoAXwH0qeGqKDGoDaVeXABZS+r0WVGSJZbt1jZD9lywL63
- e6fNqGmRITKI7vfcOy67wSyX23PZtw6/7Od9FI+6rJS6JZIKbbuHeVz2bRnXgg==
-To: u-boot@lists.denx.de
-Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alice Guo <alice.guo@nxp.com>, Cristian Marussi <cristian.marussi@arm.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH v4] firmware: scmi: Add clock v3.2 CONFIG_SET support
-Date: Wed,  5 Nov 2025 04:42:26 +0100
-Message-ID: <20251105034308.93340-1-marek.vasut+renesas@mailbox.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 86F3183981
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 06:48:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7B061109CE4; Wed,  5 Nov 2025 06:48:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1762321710;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=z/weDerQLe6dX3d+sIcWhkNRTMX/MCY/FZPFWy5U2FI=;
+ b=AJojRCOcGfdFCXnhKBX7vgR6BH9KefNuofg1AsLJhpcBGdAhqctmqT9WuuhnepFwXi7V5J
+ tX/1pS41/SNCzykzfZBp1BT6w1P4Xs+/g7j9GzhN91Pi//CyyUSKumYEM5K/EE3doyEYja
+ g/Tf8bl4XIK9cp1ZCqZDSYzph5F34HIRLsHB73hulUDVK1xxppW2JpcvdaqAhcL61pltZZ
+ dW31KuGQEbocUNrb5wJRqlx8cckw5dtNvB5u4In+Xvc5eBSyBzGiHof7TnUuaolUFpgs2A
+ 9BchPnz77gu0MPoRFKZWkOuMMmhQMdwjG2XVelbNn0oGOPIqpFOH2BC4cdKoIw==
+Message-ID: <daa45f64-f7ed-333b-9dd8-e7a43eb5e8b5@nabladev.com>
+Date: Wed, 5 Nov 2025 06:48:48 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v3 1/3] test: gpio: include in build, and fixup bitrot
+Content-Language: en-US
+To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Heiko Schocher <hs@denx.de>, Simon Glass <sjg@chromium.org>
+References: <20251104174458.3385564-1-ravi@prevas.dk>
+ <20251104174458.3385564-2-ravi@prevas.dk>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20251104174458.3385564-2-ravi@prevas.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 727f78eb2ed82691069
-X-MBO-RS-META: qrje5768wn4k9crroh5s75pbmqsuh51z
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,183 +70,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+Hello Rasmus,
 
-SCMI v3.2 introduces a new clock CONFIG_SET message format that can
-optionally carry also OEM specific configuration values beside the usual
-clock enable/disable requests. Add support to use such new format when
-talking to a v3.2 compliant SCMI platform.
+On 04.11.25 18:44, Rasmus Villemoes wrote:
+> Commit ebaa3d053e5 ("test: fix CONFIG_ACPIGEN dependencies"), which
+> got into v2022.10-rc1, accidentally left out a $
+> before (CONFIG_DM_GPIO), with the effect that test/dm/gpio.c has not
+> been built for three years.
+> 
+> Unsurprisingly, the code in there has bit-rotted.
+> 
+> - There's a missing ; causing plain build fail.
+> 
+>    That code was added in 9bf87e256c2 ("test: dm: update test for
+>    open-drain/open-source emulation in gpio-uclass"), which was part of
+>    v2020.07-rc3, i.e. long before the commit causing gpio.c to not be
+>    built at all. It did build at that time, but also, the missing
+>    semicolon wasn't found when fa847bb409d ("test: Wrap assert macros
+>    in ({ ... }) and fix missing semicolons") happened in 2023.
+> 
+> - Commit 592b6f394ae ("led: add function naming option from linux")
+>    bumped sandbox,gpio-count for bank gpio_a in test.dts to 25, but
+>    didn't update the expected global gpio numbers accordingly.
+> 
+> - The "lookup by label" test likely worked when it was added, but then I
+>    inadvertently broke it when I noticed that dm_gpio_lookup_label()
+>    seemed to be broken in commit 10e66449d7e ("gpio-uclass: fix gpio
+>    lookup by label") - which landed in v2023.01-rc1, so after gpio.c
+>    was no longer being built.
+> 
+>    The "label" (which is a u-boot concept) that a "hogged gpio" gets is
+>    <gpio hog node name>.gpio-hog, which is why it used to work with the
+>    strncmp() but doesn't with strcmp().
+> 
+>    We can either revert 10e66449d7e or append the ".gpio-hog" suffix as
+>    done below. I don't really have a dog in that race; when I did
+>    10e66449d7e, it was because I thought the "lookup by label" was
+>    actually about the standardized gpio-line-names property, but then I
+>    learnt it was not, so is not at all useful to me.
+> 
+> - The leak check now fails.
+> 
+>    Test: gpio_leak: gpio.c
+>    test/dm/core.c:112, dm_leak_check_end(): uts->start.uordblks == end.uordblks: Expected 0x2a95b0 (2790832), got 0x2a9650 (2790992)
+>    test/dm/gpio.c:328, dm_test_gpio_leak(): 0 == dm_leak_check_end(uts): Expected 0x0 (0), got 0x1 (1)
+>    Test: gpio_leak: gpio.c (flat tree)
+>    test/dm/core.c:112, dm_leak_check_end(): uts->start.uordblks == end.uordblks: Expected 0x2a9650 (2790992), got 0x2a9700 (2791168)
+>    test/dm/gpio.c:328, dm_test_gpio_leak(): 0 == dm_leak_check_end(uts): Expected 0x0 (0), got 0x1 (1)
+> 
+>    And it fails with the same differences (160/176) even if I
+>    remove the three lines that actually exercise any of the gpio code,
+>    i.e. make the whole function amount to
+> 
+>      ut_assertok(dm_leak_check_end(uts));
+> 
+>    Test: gpio_leak: gpio.c
+>    test/dm/core.c:112, dm_leak_check_end(): uts->start.uordblks == end.uordblks: Expected 0x2a95b0 (2790832), got 0x2a9650 (2790992)
+>    test/dm/gpio.c:325, dm_test_gpio_leak(): 0 == dm_leak_check_end(uts): Expected 0x0 (0), got 0x1 (1)
+>    Test: gpio_leak: gpio.c (flat tree)
+>    test/dm/core.c:112, dm_leak_check_end(): uts->start.uordblks == end.uordblks: Expected 0x2a9650 (2790992), got 0x2a9700 (2791168)
+>    test/dm/gpio.c:325, dm_test_gpio_leak(): 0 == dm_leak_check_end(uts): Expected 0x0 (0), got 0x1 (1)
+> 
+>    So I suspect that the leak is somewhere in the test framework
+>    setup/teardown code - dm_leack_check_end() isn't really used
+>    anywhere else except in a dm/core test. Bisecting to figure out
+>    where that was introduced is somewhat of a hassle because of the
+>    other bitrot, and because of the SWIG failure that makes it very
+>    hard to build older U-Boots.
+> 
+>    So since it's better to have most of the gpio tests actually
+>    working instead of leaving all of gpio.c as dead code, #if 0 that
+>    part out and leave it as an archeological exercise.
+> 
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> ---
+>   test/dm/Makefile |  2 +-
+>   test/dm/gpio.c   | 13 ++++++++-----
+>   2 files changed, 9 insertions(+), 6 deletions(-)
 
-Support existing enable/disable operations across different clock protocol
-versions: this patch still does not add protocol operations to support the
-new OEM specific optional configuration capabilities.
+Thanks!
 
-No functional change for the SCMI drivers users of the related enable and
-disable clock operations.
+Reviewed-by: Heiko Schocher <hs@nabladev.com>
 
-Signed-off-by: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-[Marek: Remodel after Linux e49e314a2cf7 ("firmware: arm_scmi: Add clock v3.2 CONFIG_SET support")
-        Support both old < 2.1 and new >= 2.1 protocol versions.
-	Update commit message based on Linux one]
----
-Cc: Alice Guo <alice.guo@nxp.com>
-Cc: Cristian Marussi <cristian.marussi@arm.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Valentin Caron <valentin.caron@foss.st.com>
-Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
-Cc: Ye Li <ye.li@nxp.com>
-Cc: u-boot@lists.denx.de
----
-V2: Fix up iMX95 and sandbox after rework
-V3: Cache pointer to top-level SCMI clock device in each struct clk_scmi
-    and use it to extract struct scmi_clock_priv private data which
-    contain protocol version. This is necessary, because clk_scmi .dev
-    may not necessarily point to direct subdevice of the top level SCMI
-    clock device.
-V4: Use parent_priv instead to avoid growing memory usage (Alice)
----
- arch/arm/mach-imx/imx9/scmi/clock_scmi.c   |  2 +-
- drivers/clk/clk_scmi.c                     | 23 +++++++++++++++++-----
- drivers/firmware/scmi/sandbox-scmi_agent.c |  4 ++--
- include/scmi_protocols.h                   | 17 ++++++++++++++--
- 4 files changed, 36 insertions(+), 10 deletions(-)
+bye,
+Heiko
 
-diff --git a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
-index b6be20ec674..9030dbf600d 100644
---- a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
-+++ b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
-@@ -10,7 +10,7 @@
- 
- int imx_clk_scmi_enable(u32 clock_id, bool enable)
- {
--	struct scmi_clk_state_in in = {
-+	struct scmi_clk_state_in_v1 in = {
- 		.clock_id = clock_id,
- 		.attributes = !!enable,
- 	};
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index a7d89f32cd7..54378b4e1ec 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -8,6 +8,7 @@
- #include <clk-uclass.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-+#include <dm/device-internal.h>
- #include <scmi_agent.h>
- #include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
-@@ -134,17 +135,28 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
- 
- static int scmi_clk_gate(struct clk *clk, int enable)
- {
--	struct scmi_clk_state_in in = {
-+	struct scmi_clock_priv *priv = dev_get_parent_priv(clk->dev);
-+	struct scmi_clk_state_in_v1 in_v1 = {
-+		.clock_id = clk_get_id(clk),
-+		.attributes = enable,
-+	};
-+	/* Valid only from SCMI clock v2.1 */
-+	struct scmi_clk_state_in_v2 in_v2 = {
- 		.clock_id = clk_get_id(clk),
- 		.attributes = enable,
- 	};
- 	struct scmi_clk_state_out out;
--	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
--					  SCMI_CLOCK_CONFIG_SET,
--					  in, out);
-+	struct scmi_msg msg_v1 = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
-+					     SCMI_CLOCK_CONFIG_SET,
-+					     in_v1, out);
-+	struct scmi_msg msg_v2 = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
-+					     SCMI_CLOCK_CONFIG_SET,
-+					     in_v2, out);
- 	int ret;
- 
--	ret = devm_scmi_process_msg(clk->dev, &msg);
-+	ret = devm_scmi_process_msg(clk->dev,
-+				    (priv->version < CLOCK_PROTOCOL_VERSION_2_1) ?
-+				    &msg_v1 : &msg_v2);
- 	if (ret)
- 		return ret;
- 
-@@ -319,6 +331,7 @@ static int scmi_clk_probe(struct udevice *dev)
- 			}
- 
- 			dev_clk_dm(dev, i, &clk_scmi->clk);
-+			dev_set_parent_priv(clk_scmi->clk.dev, priv);
- 
- 			if (CLK_HAS_RESTRICTIONS(attributes)) {
- 				u32 perm;
-diff --git a/drivers/firmware/scmi/sandbox-scmi_agent.c b/drivers/firmware/scmi/sandbox-scmi_agent.c
-index 74a87832dcb..5b242a039c2 100644
---- a/drivers/firmware/scmi/sandbox-scmi_agent.c
-+++ b/drivers/firmware/scmi/sandbox-scmi_agent.c
-@@ -828,7 +828,7 @@ static int sandbox_scmi_clock_rate_get(struct udevice *dev,
- 
- static int sandbox_scmi_clock_gate(struct udevice *dev, struct scmi_msg *msg)
- {
--	struct scmi_clk_state_in *in = NULL;
-+	struct scmi_clk_state_in_v1 *in = NULL;
- 	struct scmi_clk_state_out *out = NULL;
- 	struct sandbox_scmi_clk *clk_state = NULL;
- 
-@@ -836,7 +836,7 @@ static int sandbox_scmi_clock_gate(struct udevice *dev, struct scmi_msg *msg)
- 	    !msg->out_msg || msg->out_msg_sz < sizeof(*out))
- 		return -EINVAL;
- 
--	in = (struct scmi_clk_state_in *)msg->in_msg;
-+	in = (struct scmi_clk_state_in_v1 *)msg->in_msg;
- 	out = (struct scmi_clk_state_out *)msg->out_msg;
- 
- 	clk_state = get_scmi_clk_state(in->clock_id);
-diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index bcd8e671149..ecab021b472 100644
---- a/include/scmi_protocols.h
-+++ b/include/scmi_protocols.h
-@@ -733,6 +733,7 @@ int scmi_pwd_name_get(struct udevice *dev, u32 domain_id, u8 **name);
- /*
-  * SCMI Clock Protocol
-  */
-+#define CLOCK_PROTOCOL_VERSION_2_1	0x20001
- #define CLOCK_PROTOCOL_VERSION_3_0	0x30000
- 
- enum scmi_clock_message_id {
-@@ -800,15 +801,27 @@ struct scmi_clk_attribute_out_v2 {
- };
- 
- /**
-- * struct scmi_clk_state_in - Message payload for CLOCK_CONFIG_SET command
-+ * struct scmi_clk_state_in_v1 - Message payload for CLOCK_CONFIG_SET command for protocol < 2.1
-  * @clock_id:	SCMI clock ID
-  * @attributes:	Attributes of the targets clock state
-  */
--struct scmi_clk_state_in {
-+struct scmi_clk_state_in_v1 {
- 	u32 clock_id;
- 	u32 attributes;
- };
- 
-+/**
-+ * struct scmi_clk_state_in_v2 - Message payload for CLOCK_CONFIG_SET command for protocol >= 2.1
-+ * @clock_id:	SCMI clock ID
-+ * @attributes:	Attributes of the targets clock state
-+ * @extended_config_val: Extended and OEM specific configuration
-+ */
-+struct scmi_clk_state_in_v2 {
-+	u32 clock_id;
-+	u32 attributes;
-+	u32 extended_config_val;
-+};
-+
- /**
-  * struct scmi_clk_state_out - Response payload for CLOCK_CONFIG_SET command
-  * @status:	SCMI command status
+
+
 -- 
-2.51.0
-
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
