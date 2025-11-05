@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C61CCFA04
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 00:45:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB2F0CCF9E3
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 00:46:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8CC8839D6;
-	Wed,  5 Nov 2025 01:45:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2BD73839D6;
+	Wed,  5 Nov 2025 01:46:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cSJlTJP/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="loVAGGAb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3E96839DD; Wed,  5 Nov 2025 01:45:16 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 543B4839D9; Wed,  5 Nov 2025 01:46:29 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA55983981
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 01:45:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 484DF83981
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 01:46:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-7864cef1976so6643777b3.0
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 16:45:14 -0800 (PST)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-784966ad073so72873647b3.1
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 16:46:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762303513; x=1762908313; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1762303586; x=1762908386; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W8+FwRTWr/Rc1uw5ljfjw9+wCp6iufXOgmBG0z7X+dk=;
- b=cSJlTJP/b64GapU1/2GyBiSiBkXRxFXrUVP3IPjBHsrSX9nWTqMaOnkRPvzkW358lB
- oQo5yJgr8Gzcaz6GF22NXJwC2kT54WHLydZcj29oQ70SgS6s1gf2N58qVeeqwlWJp+tp
- tOhqzMZO41egGS79q2ZZkfjg3t/r0NPTFYuNiMTEL5OymhMUmzxB+O4gwHE0fQWrOVGx
- 8s09ng14XCB43xFWgt3bMGPzrKw46nc3LTk9oq9DyTnoQigQdzL2OWBzWuXqhpsAg7mJ
- iwJgEPmDmRo0zkOOxqTnWRIx83j3nYF6vykQpsNgJA6nTu3Ut2b/XXTMLRzP7EbP+rxD
- qWig==
+ bh=IbI4V5Bqw4eX6fGHZDXD0tODieeH4U3HrsM/GZRRw/o=;
+ b=loVAGGAb7960WILLymU3x6Vkhow4LUhlF1kacWUwGDcfltI9rmmHNnMee/wDOcfDWc
+ JgfNZgThFAAXVxn/TX10A/gCsFMEULyd6gtxx5W7iCu2lczbqQG8xCKx/vXm0rZAKp9x
+ d83MGK82+3xeUEHSGyvo8wMu8AkCkW0RuToNYGUbDh0w55NAkn8urOjmnGJL1AGMazR3
+ n+sgRYyUiVrWcmaasSwdBaDN02wPWjq2Z7/cEjesNaszy2bLQEmGMlXo9/OmdnbK1Phh
+ 9oQQ4nyMPMXsVyzgU01HDsuJMuRly0QPIK5paoD05VNdpXqa7bHshBNBmVxPTzUZt2ZJ
+ BDUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762303513; x=1762908313;
+ d=1e100.net; s=20230601; t=1762303586; x=1762908386;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=W8+FwRTWr/Rc1uw5ljfjw9+wCp6iufXOgmBG0z7X+dk=;
- b=f+mOMBeCgyhdB72ETSH05XzeaQG7+Mhl+08twGA6XKTS67nZ0vluYAzX5z3eSvpTAe
- RF+GSzXBJXKPH0ksQecHdLIJtGQfuAK8unWQn1bncIZve5HsGJCSaMgFf4fn3ZhkKXB1
- S01jXvuZslD2jXk9U5QhYuOPpChmCMG2uNK1qmz6VROK6ry+RXm+ytzVU5nEEG4QUSSJ
- bcANNn04c/dQiksVoaUGDx9dS5C8o5RAud7SOv7VHk2S2qfHN2GWLhDtdG0x+HX7RilK
- UdSCkFURVYFQlLkMwNL7jxKV7zEuqNy4dT7HcAoKbY4MS4UidXMIdMyXqCmvk8IoEEg8
- Tu4w==
+ bh=IbI4V5Bqw4eX6fGHZDXD0tODieeH4U3HrsM/GZRRw/o=;
+ b=oMOskAqdfTKIDiFDSt+nwJ0VURrMXNSggfvAezW4ekqLR1GbZZnMDYMmKi41/67Tfn
+ JoSDhcSRhqdwGGdPDuqkfQ5PvziLAfj+Fm4gpXFspFv/ifXR+6TakjcZWoBf7RgLdm50
+ lKBkn3i0TpWPHKdOhHgwA532YvJ20KmCh3GHyt+Et/5pyOrzKHPGHdncc28vqt+08Ypt
+ pG3tE+j49O9X/kWj6zdJSnpFECwQ9g1qtIbhcOpufZ4FuXLhbTld5h0tIO5qMlKhdC3f
+ oexJ63QRxlIsXwH0mZn2shGATq3+bT/4V8ksgJhH7HNvpK2IBPfc2VwG0gOirrobm1dd
+ EgRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHP0J+CK/3mzydoTQVL2/ajFVR2+4YEEh97LiEl4ZH9IL+wcwImzV+nxQSwQBr5xAsQ0skMxY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzzbwRUHMyPpG7fBGaTbIuWmLgfWC7m8SxoaZOvMSsJizC5bz6
- a1W5rxg68FX5BUG3gpI9Y8KF70AKKzysiM+IvJP7K5qgpn0QSTSSuRZpiSCO2gg/woLur1JLmYr
- Z00O7u1if8IVHzpgm2cO3LBJFkX/70tk=
-X-Gm-Gg: ASbGnctsSzibTeR61W2fUiqlPmK6rbERpay0nlu6KSUhC4/P3nFE5AJWddtTlPMlu8I
- poNuNYA0OuYH0q6pJDykIgeJV7NvzZidjps9IqTHQR39o4gWzBFHYYQka4Pr6Dw4cB5FIpot+cR
- d/dxWUq7ZXRV/vqaCiT5GSXSHbq6wjiWW6rk7OpJI+uYsPJvXW9eBoK/K5GbzpKtsB4qUBjtfNy
- XXz4r2qAoBUsahRHDuY+VT0zr4d0nOdpmsnhRlb9tJejZGZ5aClPvDsTd4A
-X-Google-Smtp-Source: AGHT+IGgTtBtsUb/JwLTjkE9uMW8Ji9my6AC24HxaRlHQBTI3pqjNkxOE7KVanz/Kfv6i5I1IRJOf3RsauesiY1VKlc=
-X-Received: by 2002:a05:690e:4005:b0:63e:3546:6fc5 with SMTP id
- 956f58d0204a3-63fc76ab56amr5076893d50.32.1762303513511; Tue, 04 Nov 2025
- 16:45:13 -0800 (PST)
+ AJvYcCXUGq2nCYsd+6kpP4Fsy3AOv0Qc6hVCdsHvD4UjV4pJa7uaPvu00wtdJaw2KIreXDvvy/Ls6QM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOdhUu7I6CUJ3FW4I0xmY0B0xoH/HiDyLreImSBNPshb1i7/Ku
+ EpoLWmOZjX50Tf1lt1FbjfCyrk3cARmw/sci1q13U15uK2gvEG99Aw1uPOCasV81f4iJavEXjhZ
+ ysDTMKfHa/dM7/Cc62MHzeQ2Ibjzynu0=
+X-Gm-Gg: ASbGncveivWRVh0WUZG3RP8QiYEbnhZXV1tOE9ZC0kmj1tyw2Tjumyy5Mwj3Th2opc2
+ cvpXf2GVi12658glJeGoQPa9GO+nUDndcfxfzApyVpEakhIlFR7a0Y0VLuRIQiE2N4HXOwCdxOX
+ Vpj/QY1TnGQpp2PSZm++w9x54SEdOob5DZQiPYrqYCwzCJsG9HXoTTtlt8xnQObipcNo6fYKlXi
+ fw8G/pQJqsLI2SKtLDXPcuu1C0I9hJn8B4VlszVUKH4fsHTd1D1lxIUBVPn
+X-Google-Smtp-Source: AGHT+IFw6dKHGHC/39Ft+ACX8qicfY4v3ZnWq3e6AvsnrTXXGfL+kLnVLXD9i2muggGvHkncFc54r1UrKEde6eI7z7Y=
+X-Received: by 2002:a05:690e:1559:10b0:63f:b9d1:b152 with SMTP id
+ 956f58d0204a3-63fd34c52f1mr1272202d50.21.1762303586138; Tue, 04 Nov 2025
+ 16:46:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20251105001351.92457-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251105001351.92457-1-heinrich.schuchardt@canonical.com>
+References: <20251104225404.49618-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251104225404.49618-1-heinrich.schuchardt@canonical.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 5 Nov 2025 08:45:02 +0800
-X-Gm-Features: AWmQ_bmEA5htxPzbqdQgpsSv7F6etaXh8vBu66B2X-MOJyWs0vODU5-itAtwPbU
-Message-ID: <CAEUhbmXSt+CTcKK0E_Fxgoh9PF6Lns3nxV2W_5b1MTpn=BCjTQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] spl: mmc: avoid including errno.h twice
+Date: Wed, 5 Nov 2025 08:46:14 +0800
+X-Gm-Features: AWmQ_bnVgya9JDJhJF6UxUnYR4t0sQZVxPFDe5siod_6KmvMpBlFNUD8Q6Qgjwc
+Message-ID: <CAEUhbmVNfx0FS7j3jVxcttermTVJ6owUkF=1F4s65H_ZREGQMA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] block: type 'to be write'
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Anshul Dalal <anshuld@ti.com>, Simon Glass <sjg@chromium.org>, 
- Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,15 +95,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 5, 2025 at 8:14=E2=80=AFAM Heinrich Schuchardt
+On Wed, Nov 5, 2025 at 7:03=E2=80=AFAM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Each include should only be included once.
+> %s/to be write/to be written/
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  common/spl/spl_mmc.c | 1 -
->  1 file changed, 1 deletion(-)
+>  drivers/block/efi_blk.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+The commit message has a typo too :)
+
+%s/type/typo/
+
+Regards,
+Bin
