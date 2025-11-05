@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A33CCF9E3
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 01:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B037BCCFA04
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 01:41:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCF8883981;
-	Wed,  5 Nov 2025 02:30:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 13748839DF;
+	Wed,  5 Nov 2025 02:41:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="raQqeUOD";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="n5Ci1GFA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 860BE839E4; Wed,  5 Nov 2025 02:30:50 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 1BAA4839FD; Wed,  5 Nov 2025 02:41:10 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADBD783968
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 02:30:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA3D183968
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 02:41:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03 (unknown [93.94.208.154])
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id F05BA3F1C6; 
- Wed,  5 Nov 2025 01:30:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762306248;
- bh=+IIcAZEqT7IFhukXWa2RsjY1RV7BwJa0Pe1LbsMn5a0=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=raQqeUODaGqOGepZtm27L5Kn+l3kS+4ZS95QNIx5YBoEDEME16BtDMFHGNXK8lt+9
- Mo02e/ArbIz2oafIkZW13wKSH6O05agmBFvKl+E6jdSPn3UWkk5J3a0GYeVpFJf70w
- fCD2PppYyXAGgVeOssb4ZlRnrVjqUGOOW3eg32fd+x8iuj28MCxViySlCGi0iAUob6
- Z4/q+/8vqHO75Wym/9LTDknnkVsRvBCwzkWKbyIBqsxb+++dP4f/olpRASBpsaqW8X
- yrKI3KZccWo0vcFkPfdRDiymcBqY37pFDiYmETPHW5+NYj6XTlfRwERjdZ++p2TBUy
- 442d5GRRl3G7apizZzmLVgpoMj3Eqt2n+wza4KfFAd/GINgf13g0cKQJbSnZ64r53N
- ZZg9wAmm7LIOvmTOOyyjZ6PKu8wao5FwknC1wb0hw9i/jL/ZcY27pxg4/EbN+rJ6dG
- wJsIxmTCstoBjHgKrHnzJEnrIqsjUkTHcLmUe2MFj7tFvljjm61qAwl+Z+IcNZECF2
- upsgUCmZ7qkiswLE8LORyLW2KwJg814Q9/ZQvoA+CVeOAg8qYNHz41Se2b/8nwkYJ+
- trlX35jUbvp067EK79hKa2j04vCUOXll5Zzfj77spXZnEKGJBxMLqZ3ME8+/r+rvHB
- +hmVeJRWfDn6VB6V7zRxsbRU=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2] efi_driver: typo 'to be write'
-Date: Wed,  5 Nov 2025 02:30:45 +0100
-Message-ID: <20251105013045.11283-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4d1Shd5KrDz9ss6;
+ Wed,  5 Nov 2025 02:41:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762306865;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ctIvF+ur77eEz7dttiQrrLcU+v4cDk6wcqKe6tnOQZE=;
+ b=n5Ci1GFAihI0+88dM/i8J/gzH4YrzPeFYKxWyyciEEMOYZ+sIYcyXslxQd0sQemjm8VNLx
+ W/r8/Uz1oWCSFNXSQjuAbgmEZK106edOyGbq1qBEQLftw9xUGrumxmzsE+9bLIE7S/Soaa
+ /F24/CtlA3yB7mZ9eVidANlbz6t27wECWuthcl9MSU3kWLSnsz/BgXpIHmGyET8MqqkJW/
+ InvHdX5NmtsLZSfXuVis37PSJesyFNuIhEDbV+VaUL1wg4T0ETVDStFDoyyhu57DhnRidq
+ TC4rfZoecth7x7ko5Eh3lr3K3+Nynr3ZQdSSe0pLhU0CmY17iDGZ/9dvfLECMA==
+Message-ID: <f1efd15f-590f-433f-b579-5aae9f4a18f8@mailbox.org>
+Date: Wed, 5 Nov 2025 02:40:53 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH 1/1] usb: typos 'requird', 'current'
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+References: <20251105000751.91889-1-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251105000751.91889-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 3i1sshomhgtziag5u4mb1nyxzf6sokua
+X-MBO-RS-ID: 484f4afa785da007096
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,29 +74,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-%s/to be write/to write/
+On 11/5/25 1:07 AM, Heinrich Schuchardt wrote:
+> %s/requird/required/
+> %s/current XHCI/currently XHCI/
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>   drivers/usb/host/usb-uclass.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+> index 7247245a702..1c74d6fd39a 100644
+> --- a/drivers/usb/host/usb-uclass.c
+> +++ b/drivers/usb/host/usb-uclass.c
+> @@ -134,7 +134,7 @@ int usb_alloc_device(struct usb_device *udev)
+>   	struct udevice *bus = udev->controller_dev;
+>   	struct dm_usb_ops *ops = usb_get_ops(bus);
+>   
+> -	/* This is only requird by some controllers - current XHCI */
+> +	/* This is only required by some controllers - currently XHCI */
+>   	if (!ops->alloc_device)
+>   		return 0;
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	use 'to write' to match blkcnt description
----
- lib/efi_driver/efi_block_device.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block_device.c
-index 070747de515..c389b1920a8 100644
---- a/lib/efi_driver/efi_block_device.c
-+++ b/lib/efi_driver/efi_block_device.c
-@@ -84,7 +84,7 @@ static ulong efi_bl_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
-  * efi_bl_write() - write to block device
-  *
-  * @dev:	device
-- * @blknr:	first block to be write
-+ * @blknr:	first block to write
-  * @blkcnt:	number of blocks to write
-  * @buffer:	input buffer
-  * Return:	number of blocks transferred
 -- 
-2.51.0
+Best regards,
+Marek Vasut
 
