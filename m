@@ -4,108 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3F12CCF9F8
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 23:07:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0863CCF9F8
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 23:09:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46B3383B03;
-	Thu,  6 Nov 2025 00:07:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 9E74F83AC5;
+	Thu,  6 Nov 2025 00:09:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fIr+8PEw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jAAyzwOj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 740C183B0A; Thu,  6 Nov 2025 00:07:37 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8DBC8839FA; Thu,  6 Nov 2025 00:09:14 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 734A183AD1
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 00:07:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF23783AC5
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 00:09:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
- [209.85.167.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6A82C40005
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 23:07:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762384054;
- bh=tdhtUPpf5KXtqtN0W/KJNXYjrPaSdCome9Vzjq5tvx4=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=fIr+8PEwF0awRI4IUnLeCsNLo5kVNxmLN7Qb0HnTEnFQ2D+t5IA84aURixu/J1oPW
- 2vCuSMraPJ00g7N423WvXRSGUxhdp3yX0nkkJK9fjpPFVqLLaeJXjRPlEKKZofLSyC
- UMRBwUITj1TqSg0Gv0Jzx41TdRAda8OkSyxotlww6CMyec8StOdJykadauTqBxWdQO
- bVyxkiuIhjSGW8X8XwURO6/dVR1R48zSp+i9AuI/v1Kqgfsds6zrQBj99FBiwF09nf
- 6QkaOwG72fcOYABcmC2ZojxzWeWtHv5L7clOjkVRFie09ir82oGg2M/bDnl5NAWfBM
- HC4i1fF5BrNhLk8m7TOd4Pcr2Gy/hBhasnXtb0veHmIVQt9iWy5U+DBSlR7qlfsaUs
- Td13QaCeYSXMU4eDY7pvLWo+q6wZurF1RctftqNwOz5P5fE6qzjEnd4ebVC6EnLI4u
- Du2J2XSdYWDk/rPRLL6n8ybcg+pFXB78dFJhMEtY3V0FjnMQ3rIhTzr4S0YVuXCm98
- f5PdY75qddXDVUI3OrhvxFsc6V6ochZu8HK/10TvBvK9LTCDCA/OW5DdTqGjNSNQ+X
- g+FZ5cr/7XbReo9eeUiwgRwmF0k5E1zdeydBJadnRRVjIjzvcaUOsi/+YlFRe5hbKD
- e3B84Tpp+iG5NTjLS0ZBXtWA=
-Received: by mail-lf1-f71.google.com with SMTP id
- 2adb3069b0e04-594285c6850so158800e87.2
- for <u-boot@lists.denx.de>; Wed, 05 Nov 2025 15:07:34 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3d3116a5a26so299462fac.3
+ for <u-boot@lists.denx.de>; Wed, 05 Nov 2025 15:09:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762384144; x=1762988944; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4YaZwQHywWqILXYeqWK6OUqEAU6UKhe4+9BI0nW1QSA=;
+ b=jAAyzwOjOeAs+74mdNeZjtmuC9Kf9544LUOtkOnWuuN6v6kdPGWVR9rfR0Zb5zyJga
+ lWGfxA1az3W/NsI+JGP8XKpBf3MF2SKdGfVu9WFc7O1Agnyh3a+KhzpdnP3OYKsvFcbX
+ oUHu6hLHEVFCZ4w1Ov2NAWuYo8VURJa9SrEHU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762384052; x=1762988852;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tdhtUPpf5KXtqtN0W/KJNXYjrPaSdCome9Vzjq5tvx4=;
- b=WQ0BbXMb4W8nd9nltAEsUYa17YRLmoyqrinMUd+eenDPO/TbE0K11WqTGpj86jBHJd
- AkcadeB7OMs8LFfT1WoIdYpjccfYSpwVeO6arLtjBuymaaeOCOJIzodjK6XLPkLv+mUD
- 2k5xsyUuk8zom/omz8JS7H5BlgFQo1ajeKSnvH0IsGEBRg1w4hgL+zsi9pKgYdWkVe+b
- 8smNnqrKnDwubY6mLbOzGPd2phd8S/ZDtMu73NIsUEdxgAd8Ytl8gQ14ibyCfvpDOoNP
- h/+556lQSGwBv3o0Xx8AiYe2vnBUhwpFWcxBeWqjNg7UF6SY8Pke7Jg0zsRJ8zlIkhAK
- wDjA==
+ d=1e100.net; s=20230601; t=1762384144; x=1762988944;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4YaZwQHywWqILXYeqWK6OUqEAU6UKhe4+9BI0nW1QSA=;
+ b=t1euPf5xcG0U1NjIo8//ZcsjOk1AJMwqQc4X5bPdk0YYKPgOMj++tczDy1N7WabtFX
+ R50fLREarpOKH64WF5T/bnDjB/rQKnf9r7onIseHTO8agST2VA0XURAcPf6oRJQBpxz8
+ Ir3RWWFvVpCG+s/DVipZ9RUsH3rb5xl3eXp3AIZicRl2q0yV+UkZD2qXQ4JhlvC4O35p
+ rMB+O0eA81z6mknjbq/P2WtJy5naOV1PKaQ0A0pg1Js5oWVeQmuHmiZURf/oj8LBrHrm
+ /7OAIvbtcV5+Uz4CaOkfdEfrD4UkyZugx5/FmxLGrZxtW22V7QIlwbze4PYUOqUVnXX1
+ XBsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUcQkKXaqE7+nPz3ud318Tz8EpgEBDwQxyLxxMe38JpIpLHrusOSDq3zApEiZ56KEu0BONdhuE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxtXld5g4/THFcZ7papWX/6omM1B12WNbGRZQIKp8R23Ezno7ue
- Qy8CvlfMK5u/fmnauHUu7ngvYbbPKmoJboCa+I7EhO2sEUo7ujVbcvriInO8fR8GOT7ZN9R7z2n
- LUHr3gQbKdfW63VRVHvVV0pxz8YoQHa0CQEolMegWgH/ev9XyTFVbIWMVcKAsuCJBTDCDXyg=
-X-Gm-Gg: ASbGnctlIhVR2tlPyqZffZlwnO8aQIuvEjFwBIFFZK5UQBb0/nsmsctzBNzAKd/f284
- qVX1wounyv7kPtSwjtNjt2lpacV8ulESKceutcnJNj0SA6ygmcm/5YhjZtUjTFjCx9VeUv/50Mp
- 3u2NCPd9NFUY9V9oXvQbiPkSlI5BzUkJHV92zwZ7Gd3dNvkFhaDMNx8HFb9+0mSazbxUM9AxjrZ
- 7TwM17fL1swRhYUC43Ya7AtSJQBoaC5oduKhWU3FQImrPfD1YETksO5O89Jmizqu3Vx7pOPjF7O
- kq3tHqPMRhNJxFu/eQNePt+s9bOllY0lJh0jA9hjJt5y1H6TrKonCJ/OE39fY2I5PyiXhDBYIJL
- q73PTUTgxRCuA9cQ2p6aQmJYeVvdJ0ltfYxQpO7zGsYHk
-X-Received: by 2002:a05:6512:3d04:b0:592:f8c0:c8de with SMTP id
- 2adb3069b0e04-5943d74d75dmr1704999e87.13.1762384051938; 
- Wed, 05 Nov 2025 15:07:31 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFO5BEsSvpTCKaqUUV91aOoxIt74dwWywnctwigypf9efMKIH2fTJpOcK2KTOJlgZEzi7LzVA==
-X-Received: by 2002:a05:6512:3d04:b0:592:f8c0:c8de with SMTP id
- 2adb3069b0e04-5943d74d75dmr1704990e87.13.1762384051501; 
- Wed, 05 Nov 2025 15:07:31 -0800 (PST)
-Received: from [172.26.194.12] ([93.94.208.154])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5944a013bd8sm198842e87.1.2025.11.05.15.07.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Nov 2025 15:07:29 -0800 (PST)
-Message-ID: <219a1f79-8ae3-4724-bf37-a7c5902aa9fc@canonical.com>
-Date: Thu, 6 Nov 2025 00:07:27 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] configs: CONFIG_CONSOLE_RECORD=y on
- qemu-riscv64_smode_acpi
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AJvYcCU0+xyL/y7v5MP87KANj5Gz6WvBr2ObPFCUbyW0ciyu8mP4Z6kKr4SbmhaaKQrAcF+HpTI1h4s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1PfbZxslTDkmMzkH7ujUSmIeMu44GFeYVjUuTOlH318qJAq5Y
+ dwBtPwaxsKOhDhs7rGzxWIfe3kkeXmGnWTWSzqqKKhMAoqVRLrPdlQRVKkpq3kPRJOY=
+X-Gm-Gg: ASbGncux9QaASDzL0fvlskkrn2M4i1bcsX4gwsgfow5uyAcsFDrvenZY8SeD0J+E5Vd
+ wr1iXO34Vmzh4xPRcY3bPGOawSaQQCKbglLj9zLO3A+tGvM350zkKkF7PX5nlnrqdXBdr+OVPvt
+ F405OuPfh68E/C/D2DguxGOY67/fYeUCxN2UJPqPlhhw6Os/JR5cI2vxHc1ZXOD8yPJtm99xFqx
+ i6BYFzkoGLlgHs7Ul5s+lpGD2ZfslwAqGVkgX1wVxMbtheW8H5WYyMv4jWyK25L5qClJYTUqtSA
+ ZIRFmpoGK3g2Ma1H0Ek3gtzK7pZeoezY2iHmMvfFxAXu4rPdncjqupSjVjXA6mhOWk02AB2pset
+ 9cGi63KB6mdMB6xe9dTC5B9hYyPEoC0zEK2hVi1mXYi6nIExrIs/cY33Q9HKySM1RkXZO9t3NzQ
+ kX9UofFXzr5PTQ/FlG1VOhgyC1j7rYlBGQpqGHDpU=
+X-Google-Smtp-Source: AGHT+IH05mLTGR3QPN17+wg27gzI8We9e3sQnTsYmhS9uhmYFTArsCcsQKPUh1zz461x8mKPlONJmg==
+X-Received: by 2002:a05:687c:2057:b0:3e0:df48:d5df with SMTP id
+ 586e51a60fabf-3e19c15b067mr2633274fac.34.1762384144505; 
+ Wed, 05 Nov 2025 15:09:04 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3e30823e536sm285691fac.1.2025.11.05.15.09.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Nov 2025 15:09:03 -0800 (PST)
+Date: Wed, 5 Nov 2025 17:09:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>, u-boot@lists.denx.de
-References: <20251031195931.622513-1-heinrich.schuchardt@canonical.com>
- <20251031195931.622513-4-heinrich.schuchardt@canonical.com>
- <CAEUhbmVCkjyPOyYtbABqEQZYeGV5QLwMUkO9xP4obFne7PryQQ@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAEUhbmVCkjyPOyYtbABqEQZYeGV5QLwMUkO9xP4obFne7PryQQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] test: do not write to 0x0 except on sandbox
+Message-ID: <20251105230901.GV6688@bill-the-cat>
+References: <20251105180748.115441-1-heinrich.schuchardt@canonical.com>
+ <20251105192601.GT6688@bill-the-cat>
+ <20251105193307.GU6688@bill-the-cat>
+ <0a146dc8-f1bd-4a92-ab42-29909da4e7c0@canonical.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+a4OZ54aXfjE07me"
+Content-Disposition: inline
+In-Reply-To: <0a146dc8-f1bd-4a92-ab42-29909da4e7c0@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,24 +105,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/3/25 12:07, Bin Meng wrote:
-> On Sat, Nov 1, 2025 at 3:59 AM Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> For testing ACPI on QEMU we need a defconfig that supports acpi command
->> test.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   configs/qemu-riscv64_smode_acpi_defconfig | 1 +
->>   1 file changed, 1 insertion(+)
-> 
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
-For some tests to pass we need to increase CONFIG_CONSOLE_RECORD_OUT_SIZE.
+--+a4OZ54aXfjE07me
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The sandbox uses CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000.
+On Wed, Nov 05, 2025 at 11:57:25PM +0100, Heinrich Schuchardt wrote:
+> On 11/5/25 20:33, Tom Rini wrote:
+> > On Wed, Nov 05, 2025 at 01:26:01PM -0600, Tom Rini wrote:
+> > > On Wed, Nov 05, 2025 at 07:07:47PM +0100, Heinrich Schuchardt wrote:
+> > > > ARM and RISC-V do not have memory at 0x0.
+> > > > On X86 interrupt vectors are stored at 0x0.
+> > > >=20
+> > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.c=
+om>
+> > > > ---
+> > > >   test/cmd/fdt.c      | 4 ++++
+> > > >   test/common/print.c | 8 ++++++--
+> > > >   2 files changed, 10 insertions(+), 2 deletions(-)
+> > > >=20
+> > > > diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+> > > > index 96a8488e172..6b07999c88f 100644
+> > > > --- a/test/cmd/fdt.c
+> > > > +++ b/test/cmd/fdt.c
+> > > > @@ -269,6 +269,10 @@ static int fdt_test_move(struct unit_test_stat=
+e *uts)
+> > > >   	uint32_t ts;
+> > > >   	void *buf;
+> > > > +	/* This test requires low writable memory */
+> > > > +	if (!IS_ENABLED(CONFIG_SANDBOX))
+> > > > +		return -EAGAIN;
+> > > > +
+> > > >   	/* Original source DT */
+> > > >   	ut_assertok(make_test_fdt(uts, fdt, size, &addr));
+> > > >   	ts =3D fdt_totalsize(fdt);
+> > >=20
+> > > In one of those "what is even going on?" moments, just out of context=
+ we
+> > > set newaddr to 0x10000 and then "fdt move addr newaddr ts". Loooking =
+at
+> > > my logs for am62x_beagleplay_a53 where memory is not at 0x0, this test
+> > > is currently running and passing. I'm going to fire the platform up a=
+nd
+> > > poke now.
+> > >=20
+> > > > diff --git a/test/common/print.c b/test/common/print.c
+> > > > index 76ee851fe6a..389d6bf4069 100644
+> > > > --- a/test/common/print.c
+> > > > +++ b/test/common/print.c
+> > >=20
+> > > These tests are also running and passing on am62x_beagleplay_a53 I see
+> > > in that same log.
+> >=20
+> > I'm poking TI folks about this in that it seems like memory is really at
+> > 0x0 here.
+> >=20
+> > But with respect to this patch, NAK, we need to figure out how to change
+> > these tests to run elsewhere rather than disable them on all of the
+> > platforms they currently run on.
+> >=20
+>=20
+> These tests that are not passing on qemu-riscv64_smode_acpi because of
+> illegal memory accesses.
+>=20
+> Unfortunately Simon has written a lot of tests with the sandbox in mind. I
+> agree that it is preferable to make tests more generic.
+>=20
+> test/cmd/fdt.c also has issues.
 
-Best regards
+Perhaps lmb could be used to ask for a new address to use and then free
+it?
 
-Heinrich
+--=20
+Tom
+
+--+a4OZ54aXfjE07me
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQvZCQAKCRAr4qD1Cr/k
+Cjl3AQD3jVrPG2J0zTkcxYWEHo/X4/ugl7Ro3R2O35ihpMtVRgD/QFe8UZC1fkAs
+iAQInNaxi71a+etykDxIRJZhaciurwU=
+=jsHT
+-----END PGP SIGNATURE-----
+
+--+a4OZ54aXfjE07me--
