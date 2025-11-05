@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22AB6CCF9F8
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 16:44:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F91DCCFA0D
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 16:44:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1B4083957;
-	Wed,  5 Nov 2025 17:44:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B34683AD1;
+	Wed,  5 Nov 2025 17:44:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFE6983AAE; Wed,  5 Nov 2025 17:44:31 +0100 (CET)
+ id 6CA8383ACA; Wed,  5 Nov 2025 17:44:37 +0100 (CET)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 142A58334F
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 17:44:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8331E83AC6
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 17:44:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id 20BB1227AAA; Wed,  5 Nov 2025 17:44:26 +0100 (CET)
+ id C8AA4227AAD; Wed,  5 Nov 2025 17:44:32 +0100 (CET)
 From: Torsten Duwe <duwe@lst.de>
 To: Matthias Brugger <mbrugger@suse.com>, Simon Glass <sjg@chromium.org>
 Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, Christian Marangi <ansuelsmth@gmail.com>,
@@ -38,11 +38,11 @@ Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, Christian Marangi <ansuelsmth@
     Tom Rini <trini@konsulko.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
     Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Quentin Schulz <quentin.schulz@cherry.de>,
     u-boot@lists.denx.de
-Subject: [RESEND PATCH 1/4] macb: wrap asm/arch/clk.h with ifndef CLK
+Subject: [RESEND PATCH 2/4] pci-uclass: respect ofnode_read_pci_vendev retval
 In-Reply-To: <20251105163553.15F2A227AAC@verein.lst.de>
 References: <20251105163553.15F2A227AAC@verein.lst.de>
-Message-Id: <20251105164426.20BB1227AAA@verein.lst.de>
-Date: Wed,  5 Nov 2025 17:44:26 +0100 (CET)
+Message-Id: <20251105164432.C8AA4227AAD@verein.lst.de>
+Date: Wed,  5 Nov 2025 17:44:32 +0100 (CET)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,33 +59,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-macb.c includes asm/arch/clk.h solely to declare get_macb_pclk_rate().
-That function is platform specific and only required if CONFIG_CLK
-is not set. In case the machine does not provide it, compilation fails
-even when the MACB pclk is detected via the CLK framework.
+The vendor:device read in pci_uclass_child_post_bind() might fail,
+which is currently ignored. In that case e.g. the RP1 on the RasPi5
+is erroneously being treated as a host bridge.
 
-Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+Mark the device's PCI info as invalid in case of failure.
+
+Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 Signed-off-by: Torsten Duwe <duwe@suse.de>
 Reviewed-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 ---
- drivers/net/macb.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/pci/pci-uclass.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/macb.c b/drivers/net/macb.c
-index cbf5f605518..a54a268036d 100644
---- a/drivers/net/macb.c
-+++ b/drivers/net/macb.c
-@@ -38,7 +38,9 @@
- #include <linux/mii.h>
- #include <asm/io.h>
- #include <linux/dma-mapping.h>
-+#ifndef CONFIG_CLK
- #include <asm/arch/clk.h>
-+#endif
- #include <linux/errno.h>
+diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+index c370f8c6400..4092e8ff5a9 100644
+--- a/drivers/pci/pci-uclass.c
++++ b/drivers/pci/pci-uclass.c
+@@ -1200,6 +1200,7 @@ static int pci_uclass_post_probe(struct udevice *bus)
+ static int pci_uclass_child_post_bind(struct udevice *dev)
+ {
+ 	struct pci_child_plat *pplat;
++	int err;
  
- #include "macb.h"
+ 	if (!dev_has_ofnode(dev))
+ 		return 0;
+@@ -1207,7 +1208,13 @@ static int pci_uclass_child_post_bind(struct udevice *dev)
+ 	pplat = dev_get_parent_plat(dev);
+ 
+ 	/* Extract vendor id and device id if available */
+-	ofnode_read_pci_vendev(dev_ofnode(dev), &pplat->vendor, &pplat->device);
++	err = ofnode_read_pci_vendev(dev_ofnode(dev), &pplat->vendor,
++				     &pplat->device);
++	if (err) {
++		/* Mark PCI device structure as invalid */
++		pplat->devfn = -1;
++		return 0;
++	}
+ 
+ 	/* Extract the devfn from fdt_pci_addr */
+ 	pplat->devfn = pci_get_devfn(dev);
 -- 
 2.51.0
 
