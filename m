@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 465FDCCF9E3
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 00:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEF5DCCF9E3
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 00:49:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ED33839D6;
-	Wed,  5 Nov 2025 01:48:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 232EF839D6;
+	Wed,  5 Nov 2025 01:49:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WubZwVVg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bh/ztj8D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32459839DE; Wed,  5 Nov 2025 01:48:33 +0100 (CET)
-Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
- [IPv6:2607:f8b0:4864:20::b133])
+ id D07DE839E2; Wed,  5 Nov 2025 01:49:27 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C81783981
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 01:48:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C028083981
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 01:49:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-yx1-xb133.google.com with SMTP id
- 956f58d0204a3-63f9beb2730so3771510d50.0
- for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 16:48:31 -0800 (PST)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-7869819394aso13835377b3.3
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 16:49:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762303710; x=1762908510; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1762303764; x=1762908564; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0Yj/477+/gbw2CC/CsxaUBC75ENnsKpAqtfA+/mzjNE=;
- b=WubZwVVg7FhN4XpThByhFBA+m1rfrmnVPBzIrjEMsA/+5a3T1e2MbN0VSVK7WzAya1
- TeWRmKgr46ZZTMlgkeYp8sOsTdKGM7uAJO6Z6xYCMUG6Gby5VgghduV/YZ4X1PFSQfYF
- ABZix88pp5qlYR+euyasR6JpkmsBaGs3UbyH6n7lRj4W1OdFIcA+x6sR8xMrkaMOUqNz
- Alb8CZTUB50be6Ett8vcbJYI9VIYQ1/e8Y8zIQmGnUU9kiTVShv9buApdkLbqBWePE7X
- 67IFBxGuwMUd8bzrjjb4ZT9WE46ZyJjCBuxfGNV+Y2axNbShAkyxVOREdm4pZ1ut079A
- JMJA==
+ bh=IxsKXdHNujsVDuiKMRjC06+JEz13YPdmEt/7A27u4Dc=;
+ b=bh/ztj8DWRCtMFrzA8pi6LyELS+JCnZoRh3mrsK+mnlCRgq1bI9TkBfNiPGA3PI+JD
+ a2kkQ3Ed3qx0SIuJZ0LZyHOUZjS7bVeUQz1IMzxp2Gftw9iEezO7vGhWTw1c3FvBscJc
+ csuGoW2uBy8pavkmsa0NJI9b5xxPn5ATpU0PpQyKpTBV5D9Q9ywQdotQwEd4cJyHlx9V
+ ffePaSOPJJtzneroBRggORk2nO2oVPzWjEB/gzzkL6R0qSQgjYz77bCYty2HFtFxqPjO
+ CUalSc910SjUrAJ1YdegTz0OYlTIVlTRJKZvB0YBXUqu9HlSkgFlXX+ePyhMjplCE9YW
+ virA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762303710; x=1762908510;
+ d=1e100.net; s=20230601; t=1762303764; x=1762908564;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0Yj/477+/gbw2CC/CsxaUBC75ENnsKpAqtfA+/mzjNE=;
- b=WkHKJ/ivRwRBhsAzWU9Go4X70FCw1kaG0elIwtlyOYVEEW2QaM/SlKc2AOIt1X++IS
- G3e32Gp2scLpozpBlZv2qkgMaclxjRu4yW9w3gp9gWuk4XNjYzSk5klc2ySy+PUyHmQV
- LPga9+GW3H5zwaLKDXOqO5PAajrFxdoh3t/ooNs/mrNUutxMHPJsEoFzzS70haKe3QhN
- 9KeNCxqU+okDuMaz6lAN8vPqYAJvxujzzxtsQZed8jcugQIE+weQTu3ZZk9in2fyVoE8
- KihCR5jI6w5LJQni4+VH8hzsgGl+Q7v6jIuisjYFvBr8w83mFgOZofbo6lklkJzpBOw4
- GJ2w==
+ bh=IxsKXdHNujsVDuiKMRjC06+JEz13YPdmEt/7A27u4Dc=;
+ b=tOPtpPBHjIiXI4v+e6d7vwkFSq72g5I5R4zy93uokr5czSFKuJWRfosl94hKcPmIbI
+ C+Ji8HcKo2gXhoTRoVXbUHy2H0IvBdUpkJSlipPvm1MqVOH0S3T6OR/reoBRHW0F+I+t
+ aT1Tbxa/z4BIJvFonnV4Mbrrgn0Z0iS/bzEhQbJSnsdUVUFbZ8ZNV2Bhw1iSwUDojZGf
+ NQMnM0kXk8R1CO21RId7s2Q8xMUm1WovsQdsaufs0tVcbu0l/ODvn7/+fx/qfYd6Dc3u
+ 15z1VV3ZtGxw7QaSwHqhPo+92TcYoiP/h1Gjp4z/NxKz0Kj9/FefPse93FtK2yP5d37U
+ 1APA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJyOGs0qEdDEvfIFfOiYa103kH6/l/pYj7K11RW/lYPxU02MX5Q19BQ5eJ8hgNQNDfKL4Qi+s=@lists.denx.de
-X-Gm-Message-State: AOJu0YxIDj7JbgKDJikWCKrAzjkHEDddZIbMGujE9MQ36CdMY85/EmFE
- EvXX69iQaJKb2tgpnhnOqZP8ZceN1tOaK6tIO0V8RN/PWLCy0S/hLknhWs25MLqI+TO+nuEXYeo
- 3PIY+r6cDAXY6OAFzdtxPa02bVUSG9Ik=
-X-Gm-Gg: ASbGnctQJDfpJYuHh0LP3KLFtgvV4HVs4uxnd8HKRSfpcaeUaxTtrRiNZU3cxMdP7aw
- BgfqQ6cccWYm6c73bQ+nCAFV/MYbkhCn9M0sJW4Ed6mVlYwM5hruUtyk+8wPE6UhXMKvjkkvoI7
- LtkV19YhXJ8JuQhvb0bNos/9PIcWSSXpEkmEBvdD2pdFgj4uFJtdM3dIuvs/doIsidwrTc2aW6T
- hSzlIWSfAxmPdM+uhDlvIREiDij25TGWyZJ3n8CsS3bAv1Ww7QVkjEHcodT
-X-Google-Smtp-Source: AGHT+IEap3QEhcJmE3EQKWzH9c5dz7aatS0FJk5CJ7NnpfZ1VhUfrYSValxNkx0dINb7gNB/rpBeahQcIM1buog4jc4=
-X-Received: by 2002:a53:b10d:0:b0:63f:babc:dbe4 with SMTP id
- 956f58d0204a3-63fd35856bdmr1025412d50.51.1762303709872; Tue, 04 Nov 2025
- 16:48:29 -0800 (PST)
+ AJvYcCWM29EDWtc5ogRJMV02BNdSW+XwfC1+FOijlnzx8WGltJeADBMDlB3sKov+juhyXPalOniER6M=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywep+VLXeJnHV50NkzniG1Qb1013zTkPgoUXslnhFKEMplHnt/E
+ YYM6DjiEq/C6+XDTD1zbgAMjv7bi1NH33DlZtqu4Hnllm4IRLIUSlUQCCEeeXb7fJc8PnNUtRxg
+ nImXR2tTnLkoE0JTu1R4vw6103HDd3nU=
+X-Gm-Gg: ASbGncsmMtcFAMfWlsqRffaByGx5zfimC2WqtiG89hDOiw/ArMCN2Zvj3nJE3Gb10QV
+ PZSR9NI3snBqYcoZ2T11B7T9nKBqquL7bi8FMBk9vn6Mwu0GnMDj1i5Vaed0XT/btiRc4z+LNgO
+ J+HaS1yL6RvKhl9VeBchQcBI83JQdXOuo1WhxD3DZdxAuXaYBrBL1Mm/8qStuT5UBXqoq+LFTPc
+ CCS5FFb+aAjj56rCiKRSUN6EkLjoL+LpSD4FxC4/1ub2QCwO0M0wByQokNh
+X-Google-Smtp-Source: AGHT+IHfyyWlLCAtmNIQB2x7HdncMdMdGv9eXAtWOYBh1+MA6hhHa1cL1aP/z4QsR5a6sciAtwt1TWm16uN86bW50ZA=
+X-Received: by 2002:a05:690c:55c7:20b0:781:534:e754 with SMTP id
+ 00721157ae682-786a40f8622mr13973737b3.21.1762303764622; Tue, 04 Nov 2025
+ 16:49:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20251104225636.49890-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251104225636.49890-1-heinrich.schuchardt@canonical.com>
+References: <20251104232933.88528-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251104232933.88528-1-heinrich.schuchardt@canonical.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 5 Nov 2025 08:48:18 +0800
-X-Gm-Features: AWmQ_bk7XqezwJbENyMtr1sW19hM5jIx5jBy8xrayj9xb7whdFBi3vQ3HXu0484
-Message-ID: <CAEUhbmWmGfuymkgq-gyadokLVQF+orWo0smx=EnS86dDEG=OVQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_driver: typo 'to be write'
+Date: Wed, 5 Nov 2025 08:49:12 +0800
+X-Gm-Features: AWmQ_blYe7P1AMm6ghWAGfb3GLV8k7Fvh0fmwfQozje1oKjrd2yOXI3A7hxBxfU
+Message-ID: <CAEUhbmVes9kfiktBwiEgg4JnK+sTPmvtQggucWASACXvN=SaBA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_driver: correct formatting in efi_uc_stop()
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,36 +95,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 5, 2025 at 7:03=E2=80=AFAM Heinrich Schuchardt
+On Wed, Nov 5, 2025 at 7:29=E2=80=AFAM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> %s/to be write/to be written/
+> Correct indentation.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  lib/efi_driver/efi_block_device.c | 2 +-
+>  lib/efi_driver/efi_uclass.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block=
-_device.c
-> index 070747de515..c389b1920a8 100644
-> --- a/lib/efi_driver/efi_block_device.c
-> +++ b/lib/efi_driver/efi_block_device.c
-> @@ -84,7 +84,7 @@ static ulong efi_bl_read(struct udevice *dev, lbaint_t =
-blknr, lbaint_t blkcnt,
->   * efi_bl_write() - write to block device
->   *
->   * @dev:       device
-> - * @blknr:     first block to be write
-> + * @blknr:     first block to be written
 
-Or, "first block to write", to be inconsistent with the next one
-"number of blocks to write"
-
->   * @blkcnt:    number of blocks to write
->   * @buffer:    input buffer
->   * Return:     number of blocks transferred
-> --
-
-Regards,
-Bin
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
