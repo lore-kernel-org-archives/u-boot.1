@@ -4,59 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E569FCCFA04
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 00:21:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 955CDCCF9E3
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 00:41:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CB1583981;
-	Wed,  5 Nov 2025 01:21:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C472883981;
+	Wed,  5 Nov 2025 01:41:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="qo5T9Bcy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PGNI/eRm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DFE1839B1; Wed,  5 Nov 2025 01:21:49 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6904C839B9; Wed,  5 Nov 2025 01:41:54 +0100 (CET)
+Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
+ [IPv6:2607:f8b0:4864:20::b133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D30F83957
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 01:21:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A39D83968
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 01:41:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03 (unknown [93.94.208.154])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id BF298405D7; 
- Wed,  5 Nov 2025 00:21:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762302107;
- bh=pLfHJlUsg5zZc8MDysk63y0n6epZ4YkiAtx396ULmWY=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=qo5T9Bcy/kMur3lezyoCbvzEIScziRG7kUpKuIvNInrfSteYWLzAoc0DKXvjpAadP
- vrM23A3DddazyycMksDRBBjluGqRoKpozFbT099N7MszKjnGjxu4jqV/xQM4jhmnpc
- widwC248jl2dhofRFzpqAQfho/Hy4jBeKGdVrvBUIgnWHyre4ax27jqO4Vt1MDV672
- 8/do63HUy6qi4fFYjchbzLqSaSn2hNfLRbGW9IPIQ81oSbfh12kIgsc2ITAh0lnTbq
- xDnKmT5B/uBNXm26wNZYxI1/ygc0mFNiYlRFfhFs3CJuiuOt6KwMIucV/Mt30FqmJ8
- Ft0tinpKIqStygCz92tygmAJ+3FGRbqk8osTmEvJR2nkisw3MU3qRGsqqlHuo+7z1a
- zZqat+WNOddJ+gbsfcKcXAA+H8kpiNk7HKak0JQGRySXa1oplgzWm02PlFDmJVO5Lj
- LZWSuxKxWv9wsLMgRVU0nN+XzueY7VpiqLIH8VH9i2AcZQw2xC/KVSNk49zu9JnAwg
- h9/juKFztVMXQvGLwXSpPS3owZ6Zw4bK5hH2JJ/LYkCK054aim0HoDBGeoGqX3L0Wh
- ED4cPVhkO5rUn4LeSEuZ6pxFhFvSImISyEoGMu5qKed+D9SUsXujQZM/yQcVOev9U5
- 27+SYo37doV2iDhtrhS9C02U=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] spl: nand: typo 'destintion'
-Date: Wed,  5 Nov 2025 01:21:44 +0100
-Message-ID: <20251105002144.93283-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-yx1-xb133.google.com with SMTP id
+ 956f58d0204a3-63fc72db706so1720885d50.2
+ for <u-boot@lists.denx.de>; Tue, 04 Nov 2025 16:41:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1762303311; x=1762908111; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YgtUjoA0PNSVHeepHKYJFLTSqvcrY9n3HlVpFJIRKfI=;
+ b=PGNI/eRmZ5ZS0zj/ev822tMi4jCFAerrm1u/q7e0ONbTnbqP3lhlFtBToYh+hnMKSA
+ s+fFFsvheQbs1ZufgjfGyKi2d+w5aq/DLGZPFVZi/XpnYnOxklpQeKB0AraFOYN8ZJPa
+ M5xtOKybh2WAkDPOskQ8qo0MnIfKllOwpKZVfF7b6r6ERFCUqAMEeXq4T3bnHikFWM0P
+ Wg/vh2ZtEHyLm99eTARYgy+NBcpF57n9M6QunDcrHdekQQ2+EG6M8VQm+1p/NBvRbqeP
+ nIXT23CUtwXZ3g46Bx4ayFJts4fFVu1SDiYNmfwSnbiEX8YvIfvDZkZuqZsrnMv9uC/H
+ Z+/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762303311; x=1762908111;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YgtUjoA0PNSVHeepHKYJFLTSqvcrY9n3HlVpFJIRKfI=;
+ b=AcfXQrIaNUwgnTf90MaPsN1I6i+IbYzRvYZ2kXWin3UC/pf4C+F1APBHPvM7eXkTP/
+ Y/ooQxyxDpMK0EhjFq3ncxIKq0tY8KCHgCiB/xfZrJv/P6QCZtgQCU1nZtO95mW7IPbi
+ gwZlDoEN5K/cYRBXm1vsc2+0kAZvDWBLPOWpxRohU5h1GHoY5tt/E0Dkl6zWo/436Voi
+ 9Fz1EWpA/UPuE1Y5jwA4cp+1+Zjkd08KyRNqSioSYb008QUunFqWy90j4K0yV5BnDkRE
+ jOqY6heWtbZPU3DhozInrAnBHofSlUiTNPPUdk5Qnp8jCMcbse+G12Kb0k3C6EwZfvBs
+ CI8Q==
+X-Gm-Message-State: AOJu0YwFDmTDINYQMsPVmOhwF25NMLqx5pjcOV/5F3IneTPWmbQI+G32
+ aet+mS17MMVenBsVsEg0xLhVNG4LiI0FPiS0MyTGSnRpnYNq1+14prok5F3EQYRcYAOE7nEYYlY
+ zig0S3SbQFTSOEQbs5OdZ+GpXzycjLYU0DOek
+X-Gm-Gg: ASbGncuLVtM09dp3TgnSW4DseZSxCEkAdbpB1tscFLPz/8Yof5gnpOfZ/MUbHru/nq4
+ 8YXEaVGahFOb+6iVMbOk0O4L+/XtHJNbUxeRwKkttacEbEO6zSe+HbLt3dVUVMwRiTyHXpMEt9R
+ is0/0AiUYZEtb1IRy1yWe9FUYWDu1Ds56lWRtd9k7s9u9JEVjKL2af7TIwKA7R3fteyUBBsJd3k
+ evdusN5+9/QF27+9HFURcP+C/ZjgMzUb2uHrkY9MndsO/qEErhYuahUY/p9UAV007Tndwc=
+X-Google-Smtp-Source: AGHT+IFqVIFqKAiCeg5BfizVOsbgSJVlzGH9Lx2GLUiVOFVt3I9mQGML5FfHc3xSX3kaug0NulsGxuwzTGQvYdkgrlo=
+X-Received: by 2002:a05:690e:254e:b0:63f:7617:e338 with SMTP id
+ 956f58d0204a3-63fd3585e28mr1009061d50.53.1762303310990; Tue, 04 Nov 2025
+ 16:41:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251104233915.89413-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251104233915.89413-1-heinrich.schuchardt@canonical.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 5 Nov 2025 08:41:39 +0800
+X-Gm-Features: AWmQ_blZmZIdgLBXh6VjkLNZcJPImTLPolrI20fPwI_wSORjr9Br5AWeRP2PYgc
+Message-ID: <CAEUhbmWhdt_8_moHLnkmAkM=N3_wWgSh1pKHAWidH0ghUpnz2w@mail.gmail.com>
+Subject: Re: [PATCH 1/1] virtio: typo complaint
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,26 +92,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-%s/destintion/destination/
+On Wed, Nov 5, 2025 at 7:39=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> %s/v1.0 complaint/v1.0 compliant/
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  drivers/virtio/virtio-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- common/spl/spl_nand.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
-index 032f2466278..f449b31f594 100644
---- a/common/spl/spl_nand.c
-+++ b/common/spl/spl_nand.c
-@@ -111,7 +111,7 @@ static int spl_nand_load_image_os(struct spl_image_info *spl_image,
- 	int *src, *dst;
- 	nand_spl_load_image(CONFIG_CMD_SPL_NAND_OFS, CONFIG_CMD_SPL_WRITE_SIZE,
- 			    (void *)CONFIG_TEXT_BASE);
--	/* copy to destintion */
-+	/* copy to destination */
- 	for (dst = (int *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
- 	    src = (int *)CONFIG_TEXT_BASE;
- 	     src < (int *)(CONFIG_TEXT_BASE + CONFIG_CMD_SPL_WRITE_SIZE);
--- 
-2.51.0
-
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
