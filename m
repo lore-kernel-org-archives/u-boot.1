@@ -4,157 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67353CCFA0D
-	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 15:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A08E9CCFA1A
+	for <u-boot@archiver.kernel.org>; Wed,  5 Nov 2025 16:14:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD88383A32;
-	Wed,  5 Nov 2025 16:27:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DCD3783A9F;
+	Wed,  5 Nov 2025 17:14:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cVtKZ4/1";
+	dkim=pass (1024-bit key; unprotected) header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com header.b="AaBtgnTj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7077E83A8A; Wed,  5 Nov 2025 16:27:15 +0100 (CET)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
+ id EFB5383AA4; Wed,  5 Nov 2025 17:14:54 +0100 (CET)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 489DD83A1B
- for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 16:27:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FE5683A9A
+ for <u-boot@lists.denx.de>; Wed,  5 Nov 2025 17:14:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reatmon@ti.com
+ dmarc=fail (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-jain1@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BLITDzw3IXM6nVBKZLGG3kp0x3cNyGGY2cF8bPL3WMwvyz78P4IdJj6+xcHqzHFl0MJDWPxzD7LiviAdHCXYXXvjBXDjHSGYuxDP65/qxO+A9PnLuTGiTr9soDRzkbl9cHuovQ5Exl+U7brkxSmA0XlMPXoDVB96RUrj61xj7I8jArdyweF70CuZsMLbNOQHk0FyBl+bor7sYdlxoOhb6G9y0kO3/vZLXAjjiGie8Gg92nnUBfdtcPkhL6af1vfZ29MWWIiqK37SFQ+zXViWEdzUJQKbpbaNs4zHQMK4n6YSAI4v/qCX/+K6hPaFFWO7yyKdKSpNXoO0VBxul1OEqw==
+ b=I0kLMGSz6shBY0UNNDZcaOODo9cGWSa3asSQ+WePbRztAXsht2XN3FSxHEY9N97YJ4MdKjA1XNuop05lXimXb3zLqpuYPWCxKvFeNPnd2FXFDAxtOyE/GUA07EmS3RCt3UWFR8nYoSYJc20wS5KSwlslj0PQUK1aY89m2qcxfiJqBqgsFLOXqF6Qduzx3sGNpkxzxTQc6Wg/qep2eZyFscKyJJozALlg9tNFjprNi+d0bgrUMr3zcdpMXWZ6qhJUQ5maCm9fwKQF4BsS5lRdYpu1iPh/ZiqrcN3LQ8rPNUVOtig/Cki+yqSszXHCfmERT+PnPqho0z82GUmbP7RBAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+ugKST/1ljfItKhtLAlfuNGrHekakRHBSLE89GmbEvM=;
- b=DFWtBtqD75BwsnDFfnVNEH9T3rt5TvBZcRhPygPdZ9Ei4bx4ltDQeHJFz/uY1OU8nspM9R9JRBxgbhkxKa5biGeD4WqHYRfNtNZe9mAdUsgZkcqlxyn6g+lbcCwA9YW6XP5Z/591oYkjnMNVL08crWkJH4kyv9Oc0tD/M28volpu58SdnspmwVry/H7ei7jniz4P8tM1JcrrRuWCbq9dPaQhWAAtFP2xPsZ/oLI2sQhjQ7EzZPB8CtvxO4syLAL91hDubsAELFh1qfoE/WCyvlyUgPXSXIXlLSbG1JuV/2nPjJzN5sABN54CBdOL3S9L/0WGEgd9ZgDBiBqh12tH7g==
+ bh=pERnVwQEOBgth4pee+9Mgmkd4XTT6Vtrg9Ez7FR0ABo=;
+ b=rHD1dJemjJzab5uns3FV9cvtcey3VlWERwTZOB4BhcWR+/isMsG7pyNrjZS5XZV9gJI/4OLJn+NhdvIKaj9MG5/EA6x06W1Vn9nLuFgv6memgKdeynv39mW/cY6IjPtoIHPT7sgvZt8Uf3uLCMYELyfSn3bYHDQNCOZSQIBoYQ1zSBMKaKjjsJ+mzu+wDVzgAdiVn5hTxTO/oLOtBl/xcTcCPVcMDrbeRZ7yCASEYVCzUi3Mxe/xkiaulQUObqN0sFfWMNJVdXp2X5QHHOk424s0W+P2NRcfWNp8YINmgSdH67V1IIapBt62ZXwCpuvjsu4jrbDLjmCExTpLu4Semw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=disroot.org smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=fail (p=none sp=quarantine pct=100) action=none header.from=gmail.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ticloud.onmicrosoft.com; s=selector1-ticloud-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+ugKST/1ljfItKhtLAlfuNGrHekakRHBSLE89GmbEvM=;
- b=cVtKZ4/10qjQi0CwBaS/wgK4YunIg4XQxwgUc+ErrwhBA319zZHCcbhw8XKIOwv+UYSa6cWyH9rCzLVjSQwRNE30w/23DWaj6BRKX08qdxhEVRn4hXmtzGZ1u+QkEWvyU6DSCLoR7qLPb4MI1TxSvzTCIRRxhM7YpvshzkZb+SA=
-Received: from CH2PR10CA0020.namprd10.prod.outlook.com (2603:10b6:610:4c::30)
- by MN2PR10MB4253.namprd10.prod.outlook.com (2603:10b6:208:1d6::20)
+ bh=pERnVwQEOBgth4pee+9Mgmkd4XTT6Vtrg9Ez7FR0ABo=;
+ b=AaBtgnTjL0IMhsIJaiJKpPBVam5CXu2w+0mg9FWN1RLUaaQq/+Z5M8SbQ7Rufxyac/sJIx2/DlTKG+xrsrT08kTU1zcoW5EbQCQ4WEHldnLdMjooPA98/COfUmSWNBuSpOh9krD61KPkgDJ5WlMgOMt3n2N6OA+L4WtxF0H+3bs=
+Received: from MW3PR05CA0007.namprd05.prod.outlook.com (2603:10b6:303:2b::12)
+ by SA1PR10MB6543.namprd10.prod.outlook.com (2603:10b6:806:2bc::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.7; Wed, 5 Nov
- 2025 15:27:10 +0000
-Received: from CH1PEPF0000AD7C.namprd04.prod.outlook.com
- (2603:10b6:610:4c:cafe::f4) by CH2PR10CA0020.outlook.office365.com
- (2603:10b6:610:4c::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.7 via Frontend Transport; Wed, 5
- Nov 2025 15:27:07 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.15; Wed, 5 Nov
+ 2025 16:14:47 +0000
+Received: from CO1PEPF000066E7.namprd05.prod.outlook.com
+ (2603:10b6:303:2b:cafe::cd) by MW3PR05CA0007.outlook.office365.com
+ (2603:10b6:303:2b::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.6 via Frontend Transport; Wed, 5
+ Nov 2025 16:14:47 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=fail
+ action=none header.from=gmail.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.23.194 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
 Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CH1PEPF0000AD7C.mail.protection.outlook.com (10.167.244.84) with Microsoft
+ CO1PEPF000066E7.mail.protection.outlook.com (10.167.249.9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Wed, 5 Nov 2025 15:27:10 +0000
-Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
+ 15.20.9298.6 via Frontend Transport; Wed, 5 Nov 2025 16:14:47 +0000
+Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
  (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 5 Nov
- 2025 09:27:07 -0600
-Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 10:14:42 -0600
+Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 5 Nov
- 2025 09:27:07 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 10:14:41 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 5 Nov 2025 09:27:07 -0600
-Received: from [10.249.37.202] ([10.249.37.202])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A5FR7Vj3874463;
- Wed, 5 Nov 2025 09:27:07 -0600
-Message-ID: <b52acd73-e065-4b5b-9606-f0aa2a64bffa@ti.com>
-Date: Wed, 5 Nov 2025 09:27:07 -0600
+ Transport; Wed, 5 Nov 2025 10:14:41 -0600
+Received: from a0512632.dhcp.ti.com (a0512632.dhcp.ti.com [172.24.233.20])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A5GEbEx3983374;
+ Wed, 5 Nov 2025 10:14:38 -0600
+From: swamiljain <swamil.jain2016@gmail.com>
+To: <devarsht@ti.com>, <aradhya.bhatia@linux.dev>, <n-jain1@ti.com>,
+ <tomi.valkeinen@ideasonboard.com>, <trini@konsulko.com>, <agust@denx.de>
+CC: <vigneshr@ti.com>, <praneeth@ti.com>, <h-shenoy@ti.com>,
+ <u-kumar1@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>,
+ <s-jain1@ti.com>
+Subject: [PATCH v3 0/2] Refactor tidss_drv and enable early splash on AM625
+Date: Wed, 5 Nov 2025 21:44:35 +0530
+Message-ID: <20251105161437.4064391-1-swamil.jain2016@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] kconfig: Add support for out-of-tree config fragment and
- defconfig
-To: Tom Rini <trini@konsulko.com>
-CC: Neha Malcom Francis <n-francis@ti.com>, <ilias.apalodimas@linaro.org>,
- <bb@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>,
- <gehariprasath@ti.com>, <ziyao@disroot.org>
-References: <20251105102316.1713954-1-n-francis@ti.com>
- <20251105144205.GM6688@bill-the-cat>
- <c41d068b-0672-4125-90ff-d68471b4c379@ti.com>
- <20251105151949.GN6688@bill-the-cat>
-Content-Language: en-US
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20251105151949.GN6688@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7C:EE_|MN2PR10MB4253:EE_
-X-MS-Office365-Filtering-Correlation-Id: fed9e524-9ae8-4abe-aefa-08de1c7fc9d2
-X-MS-Exchange-SenderADCheck: 1
+X-MS-TrafficTypeDiagnostic: CO1PEPF000066E7:EE_|SA1PR10MB6543:EE_
+X-MS-Office365-Filtering-Correlation-Id: 183d314f-9fbb-4fb7-832a-08de1c867086
+X-MS-Exchange-SenderADCheck: 0
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013|34020700016; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Yy80SlJuTnhsbTRRc3JOVWdCcitVMVQxSjFyVnoySVhWbFlhWlNkTmhxNzJX?=
- =?utf-8?B?WmlwVlk0dEZpbTVUYTFpVHlWeGZUU3RibVFpTGFiSGVzUFUrWkJJOU5YQkJD?=
- =?utf-8?B?TmsrRitScnd6QW5mZko3Tjgzd0JCaXR4a1JsczBUYS9aRGtrSWVqbDdJUG9C?=
- =?utf-8?B?R0ZBQlA3OHpZN3d2d0xrT281NkdZdFdNT3VWQmtGWHJoQ2hWQ3l1ekJ5SVhv?=
- =?utf-8?B?ZnZhaWdYTnZXZTI2YjFNQVFSc3E0MlIyM2haNEYyOG1jQTdJczQvSWlzRWdn?=
- =?utf-8?B?a1YxU2VHc1hHR2QwMmZKRE9QRnlDVlJVQTdGd1lJdituR1drSFRnUUpzazhT?=
- =?utf-8?B?YVVEM2lDWHhkQitWRVB4S2x2ZjZ6VDFTN2E0eG9SRTlQUHNOVElnUDJoUmI2?=
- =?utf-8?B?L29VREhsaWgwb1NhZ2xNYmRNV1p1UWlPNTJQeGsvZmVSOE1CZVlyODIwZ3Qr?=
- =?utf-8?B?V2ZoTXlYSlNTR3QrVHltSWpLdmtVU1dxcHZHeFVMMEt1NnkyRHFlSklMdVEy?=
- =?utf-8?B?RzZGNWx5VFdhbDUwWkZTVGR2T2JvakVZQ1YzTWxwMDVNSE8vY0svSTk3T2RX?=
- =?utf-8?B?bmpDcFBiMFpZdkZxeGZtMU1PM1ozSWxweEkwZVdvWEJySGhQUzRHRW82OUpo?=
- =?utf-8?B?VWt0U3ExUzJLWWNidTFkN1REaFJmQkdEWmNkYWtzRnhBUm5YRUtIZENpVStj?=
- =?utf-8?B?dWk3cnZJcERISnFESE9CZlBnMWRwVThyTUE3NGZNSy83V1FGRXF3bWNqYk9Y?=
- =?utf-8?B?bnhDTUVzak1yQ290ZitXUEtwcGRJT053Nyswd3RDdlNiTmlwaWk1ME1kSHZ0?=
- =?utf-8?B?TXpPNWZQcWNVR2tKZFZHVEJsNmEyZDdHOXZTd1BWUkQyRHhBd2paNThDSi9F?=
- =?utf-8?B?K0xRUlBqbWtqR1hRT1YyRUkwZG5yaUtWYmlKeUMrakViRjJyUG9SU1FWU1A1?=
- =?utf-8?B?ZG83YXdSSGw3N3FXc0NlcTR0VE8xUXFwZEtvMlB5d1Q5WGZQbkJabW9oZkdU?=
- =?utf-8?B?SllzOXhhaHZjcHp6NEhHam1ZYkRyVm9ucUdaQU0xaHE2ZzMvcmhWZS9MVVJG?=
- =?utf-8?B?VHVUcE5pQkxzY0xXUkl4QXhmNURuZGtHVFUzMWVHNUpGRDM4NWlPNHppdWRv?=
- =?utf-8?B?b0NtMDIrb0xLSXFIbUhhUmVRVE84V0VRaENjYVdUQlZuRFJLOWZKRnhDTTRy?=
- =?utf-8?B?Mlh5WkFSaGovTmllVmg1YU50WW5BMVJsWW9VQVFQZzhJR0hFWUh2T2xXS1hs?=
- =?utf-8?B?R3F3SUFVVVJZSWJ3NE1oWlUyaTdiM0xxZVVZdDZKeC9NSlFmcFIwVWE3VzJs?=
- =?utf-8?B?NmlkeFVhT0htdmNtMENsdS9zakdKZzNmQ0tVSURSbjEzazlQc0NUOGdMQkZ0?=
- =?utf-8?B?NDJKbGcyYUw1a1prK1ZmU0VuMGtxS1Z0V2h3M3haS2tRakFvc1o4eThMdG9Z?=
- =?utf-8?B?QWtySDNnOEJ3K29CWTlhdzJYbXZKbUYyNXFaeEgveFdKZlV0clpYWGVBQ1Uw?=
- =?utf-8?B?WGp4TkVLQ3N3YW9HOVhOT21Ec0Z5KzZlQVJzK1Z3TlV3cktJUTlweFVPQlNq?=
- =?utf-8?B?UzJUdUk5a0RCYzBZZW01d2tXZjRNWS9ES1NsUCt2RVVycHpJZ08yRWxHM1FP?=
- =?utf-8?B?KzRsQzRQQWJjRXovSVp6bzc0YUR3U3gxRzh6MTNLQkpUYm9CNENjSFVqZWQ0?=
- =?utf-8?B?bmVFbXFCbjdaWXo3ejhMZUJ1S0tsVWdvajljSzRsTkk4VDJMdkQxZ0paSjE1?=
- =?utf-8?B?b1BHZ2drbVBEbDRhWE9FVnZUQU80Z1d2ZXFYM1BhRnp0SUs1Yll1M2tGc3NH?=
- =?utf-8?B?d1g5cVhCRi9HVkFFaUw4cHhtS1lJSGJjTnM3eGkxcUU3dVIrVGw4cnZRTGpG?=
- =?utf-8?B?a1hHVzlLL3lEYXdoZ3MrdG80Mm00Z0NQa3NaNWxoLzJ0a3RJNTdrVk4yOGJ5?=
- =?utf-8?B?RXFOWW1EeUpQSHZMRkhIc1Z1WXlZTnowa1NSN3djbDlIOWx4VjF4cTJKbVda?=
- =?utf-8?B?UFdzVUM3elNnNzlIdTBlY2Z2OUVJOUNSUkYzU0UzYkRrdFZIUXpqNE9DRUNy?=
- =?utf-8?B?SHNQZkExdithRUZVaXZRM2ZXWFdLK1dRdUVOQVFqZjh3VUlQSHJKZ1YrSFJI?=
- =?utf-8?Q?XDoI=3D?=
+ ARA:13230040|48200799018|376014|7093399015|82310400026|34020700016|61400799027|36860700013|43062017|35450700002;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Cz+pav4LV255q4PzruhdP748wNz6e7OlK9pMXofMBIT5iJ4CAR4QPhC263t8?=
+ =?us-ascii?Q?rUV5jy7prR8gdRDjDQhaRfkrgz7Ykfxq/h5JhP3wZhH1SjbmWPMiXCDDz/J2?=
+ =?us-ascii?Q?n/9UewD0aO6xQdV+br+e37E2/cFMG5KO7zcvo5DJXirKR2mNtPlB+8ZNYCoC?=
+ =?us-ascii?Q?jDR12lf3GQAzjOT4dxwEZCcrtso81UcLy7rqWDcIYGgZFOkuQQSG93cKl+sT?=
+ =?us-ascii?Q?lL4AvJmGQpJ5ruvMC6vrG+9s4+Nyk6S5HLQzzwyJwJIgyE4eHkfNq6Am7syZ?=
+ =?us-ascii?Q?gpIr9sJOd+ZJhZ30CHrD1PHbyysTFOaQpCpvteRQ/j5cQHTs+PfI9tizNhCE?=
+ =?us-ascii?Q?fA//aQIcS0MM2UXyxBnO/Awl6E5Ec8dnrOfy85bMXhplaab/03EA3HjSALd0?=
+ =?us-ascii?Q?752lzka89xUs4e01tsB5pUcTcWp+91uB3MsmLdgZJyQThGqw5ZUYSSEgI3FA?=
+ =?us-ascii?Q?//CcYBQA/mDSsPEJn88FaOhcqSxHfUcH7iayozg1GW03HWnqNCgl8ql6DkYu?=
+ =?us-ascii?Q?mT94b3ywu1U+0d1PDuql/q65Jz7NCn+2QyXuNzypnJJA3A6MJp8xOwe6l1g+?=
+ =?us-ascii?Q?Lcu1d+V0+L/GmkCjBjlfw3XtrcMw7+7MFPogVqIDK7JHzIm+S8uakLaO6ppD?=
+ =?us-ascii?Q?KSkpKrCjACNIrONOkOkmAlID4Q/cGchw8O5dDWTmsEaKrYL53FxNnOq9r9P4?=
+ =?us-ascii?Q?1Kd4/AvSN4yLn7IV7vVS/EVwHKFsRal6OMqdVurcn/ukYdPpJ9AIsaX2r9zD?=
+ =?us-ascii?Q?q69G41qsGFuNhzC+G/feMgjPPpGWqarURlx+XtO8N+ZkOCvadxmvQlxHllDP?=
+ =?us-ascii?Q?werCutYOYzuwiai2cerEac/J/9JlWgu0TRin/C3s+47Nwx5VgI8/IeN6ig0h?=
+ =?us-ascii?Q?ExM/VyXntLj5lmNSgL/9UY3MmpW/idkYpuHVLwwF7G5r4pcyOzPOF5COhKtV?=
+ =?us-ascii?Q?fsOw3sIgrZgBva5iJ2ql6XrZjRHP1tTQ7WpZ1hft5UFhFISdTPfkgMeAFILs?=
+ =?us-ascii?Q?EzbzRk1TZeEhEI4wz/gorEHWaGHMF28SDwtet9f32Zum9Md35xPzBXzRoWlm?=
+ =?us-ascii?Q?Dd8xy6Uf80L3Jh+D5QIlOnFub5PKwwR41KuzQCgEb1OASSHxjkJH+ocq1y02?=
+ =?us-ascii?Q?yQ9YK13klITVeQuq/1QyKBLB9dQjVAjoe69s3Fle8cq8/fb0oOIZFi/pJGee?=
+ =?us-ascii?Q?tSD53WjJ1bnp5q4sufFky5zzhMngVGg9TBOhM/TIFVlsfF5VdDrc2+E3I7Mq?=
+ =?us-ascii?Q?NBNnNLRpzDl/ZT4EWbn7pXKTVYfpCDfJeg5hH3impDPuKLrQ5fke2zwHp2vQ?=
+ =?us-ascii?Q?NLumd+5/CKvOPGDFsZFNkuXZ2837jqAyUQz2JFhsEL3U2ckqjKM0m57nLPxp?=
+ =?us-ascii?Q?VdI98ezra6kK3/MwqlWa9+3/zj4GivoSlNxGOo8HRWqbneNH20IyxCWoVqnh?=
+ =?us-ascii?Q?0lCSnxe0ToQSl/80YtV0Xvpjtjg89uDO/YfyUInfJJCgxuJZFWcygbS84VS8?=
+ =?us-ascii?Q?Umn7M3P7Bc/jWn88aJIpqx4TUwCR24p/esEnDD9YIirZultwqQf/Fo6fmnAC?=
+ =?us-ascii?Q?LQ9hSqtnv5b8ES3fsD1l+7gPpe4eXeahTV7nsAGOEOJgRYpwH6kKpuQD6FZF?=
+ =?us-ascii?Q?9l5m5TCN/4A4pDST8naUOrk=3D?=
 X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013)(34020700016);
+ SFS:(13230040)(48200799018)(376014)(7093399015)(82310400026)(34020700016)(61400799027)(36860700013)(43062017)(35450700002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2025 15:27:10.4728 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fed9e524-9ae8-4abe-aefa-08de1c7fc9d2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2025 16:14:47.1368 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 183d314f-9fbb-4fb7-832a-08de1c867086
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
  Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000066E7.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR10MB4253
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR10MB6543
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,57 +158,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+- Refactor tidss_drv                                                    
+- Add am62x_a53_splashscreen.config to enable splashscreen at u-boot    
+  SPL
 
+Note:
+- As OLDI specific changes are in progress to be synced to upstream DT,
+use this[1] branch to enable SD-MMC splash on AM62X. Upstream DT changes
+can be found here[2][3].
+- Use TI logo file(ti_logo_414x97_32bpp.bmp.gz) from this link[4].
 
-On 11/5/2025 9:19 AM, Tom Rini wrote:
-> On Wed, Nov 05, 2025 at 09:13:15AM -0600, Ryan Eatmon wrote:
->>
->>
->> On 11/5/2025 8:42 AM, Tom Rini wrote:
->>> On Wed, Nov 05, 2025 at 03:53:16PM +0530, Neha Malcom Francis wrote:
->>>
->>>> Add support for fetching config fragments and defconfigs out-of-tree using
->>>> CONFIG_FRAGMENT_PATH and CONFIG_DEFCONFIG_PATH respectively.
->>>>
->>>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->>>> ---
->>>>    scripts/kconfig/Makefile | 10 +++++++++-
->>>>    1 file changed, 9 insertions(+), 1 deletion(-)
->>>
->>> Isn't this what scripts/kconfig/merge_config.sh is for? No, you can't
->>> just do "make foo_defconfig bar.config" directly, but your tooling that
->>> knows about outside fragments can merge foo_defconfig with
->>> /somewhere/bar.config directly.
->>
->> The problem is the Yocto recipes.  There is a somewhat fixed manner in which
->> the recipe is setup and optionally adding steps is way more invasive than
->> just adding an option to the make command.
-> 
-> The merge_config.sh tool came from the OpenEmbedded community pushing
-> things up to the kernel, so this sounds like a problem to resolve in the
-> u-boot recipes/classes, and not something to change here. Feel free to
-> loop me in on patches / discussions over on the appropriate list(s)
-> there, thanks.
+[1]: https://github.com/swamiljain/u-boot/tree/v3_splash_final
+[2]: https://lore.kernel.org/all/20250913064205.4152249-1-s-jain1@ti.com/
+[3]: https://lore.kernel.org/all/20251017115325.1942591-2-s-jain1@ti.com/
+[4]: https://github.com/swamiljain/ti-splash-logo/blob/main/ti_logo_414x97_32bpp.bmp.gz                                                         
+---                                                                     
+Changelog v2->v3:                                                       
+- Add splashscreen.config fragment to enable splashscreen               
+- Align OLDI mode detection logic with kernel side upstreamed OLDI      
+  series[1]                                                             
+- Address styling issue mentioned by Devarsh                            
+- Pick up R-by tag for PATCH 1/2                                        
+                                                                        
+Link to v2:                                                             
+https://lore.kernel.org/all/20250725043012.1186886-1-s-jain1@ti.com/    
+                                                                        
+Changelog v1->v2                                                        
+- Iterate through all available OLDIs                                   
+- Move dss_oldi_tx_power from tidss_drv.c to tidss_oldi.c               
+- Rename tidss_attach_active_panel to a more generic name               
+- To handle all active hw video ports, add an array for active hw vps   
+- Iterate through all active hw vps to enable respective clks           
+                                                                        
+Link to v1: https://lore.kernel.org/u-boot/20250603105735.4038240-1-s-jain1@ti.com/
+---
 
-There was a recent patch to the uboot classes in yocto that allow for 
-passing extra options to the make command line in for uboot.  This is 
-intended not for "primary" platform configs, but for multiple alternate 
-testing configs that can be built at the same time as the primary. 
-Effectively, the code loops over the multiple configs in different build 
-directories and configures/compiles uboot multiple times and then names 
-all of the output files uniquely.
+Devarsh Thakkar (1):
+  configs: am62x_evm_a53_defconfig: Enable A53 splashscreen at u-boot
+    SPL
 
-That flow has been in Yocto for a very long time and is, again, somewhat 
-rigid in what it can allow for changing for each of the variant builds. 
-It was designed to build different defconfigs which is what we are 
-trying to do here.  But since we do not want to store the defconfigs for 
-all of these variants in the uboot source itself, we need to be able to 
-tell uboot that the config is in a different location other than in the 
-uboot source.  Hence the most straight forward solution was a variable 
-on the make to allow for specifying where to look for the out of tree 
-defconfigs.
+Swamil Jain (1):
+  drivers: video: tidss: Refactor tidss_drv
 
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+ configs/am62x_a53_splashscreen.config |  16 ++
+ configs/am62x_evm_a53_defconfig       |   4 +-
+ drivers/video/tidss/Makefile          |   2 +-
+ drivers/video/tidss/tidss_drv.c       | 235 +++++++++++------
+ drivers/video/tidss/tidss_drv.h       |  40 ++-
+ drivers/video/tidss/tidss_oldi.c      | 364 ++++++++++++++++++++++++++
+ drivers/video/tidss/tidss_oldi.h      |  72 +++++
+ drivers/video/tidss/tidss_regs.h      |  21 --
+ 8 files changed, 631 insertions(+), 123 deletions(-)
+ create mode 100644 configs/am62x_a53_splashscreen.config
+ create mode 100644 drivers/video/tidss/tidss_oldi.c
+ create mode 100644 drivers/video/tidss/tidss_oldi.h
+
