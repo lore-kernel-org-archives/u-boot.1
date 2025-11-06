@@ -4,77 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3A64CCFA03
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 13:09:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D152CCFA05
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 13:09:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA51883B87;
-	Thu,  6 Nov 2025 14:09:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4742483B91;
+	Thu,  6 Nov 2025 14:09:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iumRksfr";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="xasC85sw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57F1D83B8A; Thu,  6 Nov 2025 14:09:13 +0100 (CET)
-Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
- [IPv6:2607:f8b0:4864:20::b130])
+ id 0502F83B82; Thu,  6 Nov 2025 10:46:18 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CBCF83B85
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 14:09:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04FFD83B8F
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 10:46:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb130.google.com with SMTP id
- 956f58d0204a3-63cf0df1abbso881461d50.2
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 05:09:10 -0800 (PST)
+ spf=none smtp.mailfrom=admin@hifiphile.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-471191ac79dso8152455e9.3
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 01:46:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762434549; x=1763039349; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sqAs5BScSPndH3II3LN8n2VbtQRbh6MVpjhSHp+Bxow=;
- b=iumRksfrO+676REraNs9zPkr1OdMucWFlzwOkKj8t/Cl6OaNU5Sj7Ki7W/plYUaSuC
- OOebF7aA8smCIAUQk5wSmsyNrZk3j8xPeGylyz9KFUv2T2gjdZiXDVaoX+ag8kJPJLy+
- JJxDOdjqpcw8Si/HHPBnPV6aaUfH3Etxd7K9S4wa6myQBiROb3fSnXXmDwNb6D/LBbnD
- P2L2tvnt0bhZgd1EcyaSuN9mNeJSmpVNhhLPVGQBWCqchENvVod103Avz1zmGL3qbmj6
- X1M2GlpykC4eqJgHScDFFWhqexa/c50F2jQG7qEoA3ACGEs6lchgnkaJn2yzVQHCcRBw
- Brlw==
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1762422371; x=1763027171;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DI6K/aIdpuSnX15tFEx2SJeo/7Da+vJWPzriBsx9UMk=;
+ b=xasC85sw8a2N3CEgsqvPxu3QUYLpCgLO+0Xp+sz+1gysKpHUpdgRH1F10/0ZyQaWRZ
+ FmxRFTDLpl2qHHlme1qy6Nu5efk4PmnsanrwoK75YxfbM5opA7v0PpGLU+m1rhOLTyxs
+ vdcFUs324lN19MrZAN2s4rNnal0MrniowjuEDSJdrvrc1Y+Umk0qbL7EljMsRlpd/tXV
+ 9mXjJHLdjijJZ1Fg+kJ561xsceDuVBRK480AG8iauFWVYo183pqIbifh5aEL6R/fXkRN
+ lEYc+otACXsEuq7ufDWDC1Aqse0/DbDvvRlWUA9sJzsq66nlhVaHtYWfUAMo+W7eZwIO
+ KgtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762434549; x=1763039349;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1762422371; x=1763027171;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sqAs5BScSPndH3II3LN8n2VbtQRbh6MVpjhSHp+Bxow=;
- b=g7R0xjlwV4QFUig0VtQ4OJZc2wZUiqgAkXbVmdLDQTl5Z0ICC8p5gxpM/8X6BTFotb
- rLATCPBQ/LhbRri7U1N7PF81P/lKvMB90m+gagEwvggUYWZWZlzr4nKxH/w/tkPGcX0Z
- +ePef7zguti6IAIQ4W06GkqgRCh4DjvPmGAE+EkQRi9mRWQcyr8TBz/zM/vRjEUjtd5z
- 0gjpekNb2kFINZSisnY73N9freiptxRZIiZH65O8WHCodJn+cP17+eXzaQcVdVN/IjrY
- UDvjbArlJUTeXrkxY5C/m1O0fnTNawTbTKLa3EA+XI+5K2HgHPt7SOeS1+H2n2ukxPJN
- 0eRg==
-X-Gm-Message-State: AOJu0Yzelxzy8djCk18uHnvSX/mjN9frObB9si/G/+IRdvMb+1dHn46P
- eelkNb9rtQUNB4d/C9kqi1d+mJIe50EP4/8hbgLDYVKj50N6JvGp9YvoYd52fWYM440Mig8QDfL
- kQBeLp2kBtHrJV34tkFw5XTD/M+cSCveDAZGvH5MZGll0yLWA0w+uMPoabw==
-X-Gm-Gg: ASbGnctRA/JVtvllGsClF+wB+sY24TfgBdENLn1uz5ZVqOuOmdQqh9ZBBFCm57h0zJ+
- I/KUPl9qEAZsOPywCuKtiVbwHagfMLWDFjJQaBCnWeTEh4+2g/oJmhNvk6yEjrr25B75EXqyYql
- FiTPc5pBIcdsKITpL57lmKa4ui9Ns65ydHZE03FI1pS3iUlPTGXPGhOuSzgKssqS+QldMQnr4kJ
- BM2yvPQfngIHWhDA1bLJkrJyuAy/JBDppLLFfR6WLvHQl7lbeDQShZPrllSTO1dv/GnuqwMqwXC
- 0HTpO7+O6d2Q/8GbYsPNJlC8vziIIDH8+GW5pwekEA==
-X-Google-Smtp-Source: AGHT+IFZRUgwAMJXvuk6bhH6uhsAKthZ9gqNfxGS12VNEzzkbak3MPZ81+aKC4h40bWG8HfKD8u8sNEcaye5N9rTG1E=
-X-Received: by 2002:a05:690e:418d:b0:63f:abf6:1a7 with SMTP id
- 956f58d0204a3-63fd34b45demr5092707d50.4.1762434548837; Thu, 06 Nov 2025
- 05:09:08 -0800 (PST)
+ bh=DI6K/aIdpuSnX15tFEx2SJeo/7Da+vJWPzriBsx9UMk=;
+ b=TyIl+ZT/o8bg62rQp2r3LUPcs9zafVym3JhK29+yFe/wWd825kqTMtYHBFNZJApElT
+ NnQ9UeBPeElc/Ch8AFduWmHoRCO2qEZUZKbU58kcRTgWhHUehr5/q7j/idWUwCfZdoi0
+ m46vfZTOiJBd906E/5nSGWjS6bMCFd/q5kHOKT3F3EJBrFZLr4ssmUo/LYANG67o3RfX
+ OeuLCQXs4S0qopU+SaVIEI3VN8sadx5ux9LfJxOFEHzfd+mZLh9X2ZeJw8I5xJc0hiLX
+ FB5pAogNctfYZ/cKTQzNi+9IMgzB8ao5pLPJKfNDlXqZoY0QW0Z7xvUitrXTb20wgKlJ
+ r/ug==
+X-Gm-Message-State: AOJu0Yy9hO78W5H8Brfjd04Jf6atIxczLQ+7s2r1ycvS0FWXfIOioF45
+ iun+g/E5edqyGB7cIyc4bHk83goDouUiUDttwd5GzZb2Hm8ZDi40lCQsJNIaOb/84hw=
+X-Gm-Gg: ASbGnctvi5DHPBwe9Vv/DWkUBKYawlcS3nU+bXaai+4b4u+4jsL+KaG1NspA80ogeYP
+ PGFryNWtMvy6BRbOb9bOGAZSRG0iPQi4H301cBqDNBLeSLdKMMXT81Hs2xit4ULmEA5Ylz1L6EM
+ IV1HXM4erobB30mPZe1vz4uNzJQcA7myxOHcVU4Q/UM/7US2ZWWHiNYeeWv9Ldlzy+MDj3VEThC
+ r5x3HdqZ2QarieWlPXIS4NsjLUvNhUMspFRsQMU8Pr4tX7iqt04pU0VPHxOo8k/xvGQCLnL3JxB
+ YFt2vmZ4JGc59p3JFOuETGZVjPQz5hseE5xTxarqZ22mtiFlNoAf1j+7wUkKDi/8B3rBGARDklt
+ QIMIlSLgfaR/CYXTBFbfhDGaWDJEot8r2eHSgth6g8crFImLuH+PZw2KxfD/f/GKn/Hwej786Ul
+ quWgDGlPCN4A==
+X-Google-Smtp-Source: AGHT+IElhMr5pUvSzJ4AXvtv1yfo9NZ0UwHDJXbZZQby00A0aVvPMq5W87xS4UGofkAGiRMeUJiBhQ==
+X-Received: by 2002:a05:600c:1c08:b0:475:df09:c253 with SMTP id
+ 5b1f17b1804b1-4775ce286a7mr50605085e9.38.1762422371118; 
+ Thu, 06 Nov 2025 01:46:11 -0800 (PST)
+Received: from [127.0.1.1] ([78.199.60.143])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-4776363da40sm34520295e9.2.2025.11.06.01.46.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Nov 2025 01:46:10 -0800 (PST)
+From: Zixun LI <admin@hifiphile.com>
+Date: Thu, 06 Nov 2025 10:45:59 +0100
+Subject: [PATCH RESEND] mtd: spi-nor-ids: Add support for AT25SF321B and
+ AT25SF641B
 MIME-Version: 1.0
-References: <20251104214804.18043-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251104214804.18043-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 6 Nov 2025 15:08:32 +0200
-X-Gm-Features: AWmQ_bkD1X-2CPwZoxiQWp3YCn5MIgjpFjbKyXtysBPt5Mr7M3dYTkXbVI4DN6c
-Message-ID: <CAC_iWjJFs3xBn5CZx-9iRwQR2RgdG9=gz0fN5F0mOjg7=S7VNQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: typo 'mange' in efi_net.c
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251106-nor-v1-1-9be914d0178a@hifiphile.com>
+To: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, 
+ Tudor Ambarus <tudor.ambarus@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Zixun LI <admin@hifiphile.com>
+X-Mailer: b4 0.14.2
+X-Mailman-Approved-At: Thu, 06 Nov 2025 14:09:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,31 +100,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 4 Nov 2025 at 23:48, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> %s/mange/manage/
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_net.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> index b8a6e08ba8e..0f8a851e3f2 100644
-> --- a/lib/efi_loader/efi_net.c
-> +++ b/lib/efi_loader/efi_net.c
-> @@ -372,7 +372,7 @@ out:
->  }
->
->  /*
-> - * efi_net_receive_filters() - mange multicast receive filters
-> + * efi_net_receive_filters() - manage multicast receive filters
->   *
->   * This function implements the ReceiveFilters service of the
->   * EFI_SIMPLE_NETWORK_PROTOCOL. See the Unified Extensible Firmware Interface
-> --
-> 2.51.0
->
+These flash chips are similar to AT25DF321A with Quad I/O capacity.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Zixun LI <admin@hifiphile.com>
+---
+Tested on SAM9X60 custom board.
+---
+ drivers/mtd/spi/spi-nor-ids.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index e7e97780d7cdd27104fd7db900b3a779d2188922..18bc6f2f06e9a02594da6ad1880489e78458a60f 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -76,6 +76,8 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO("at45db641d",	0x1f2800, 0, 64 * 1024, 128, SECT_4K) },
+ 	{ INFO("at25sl321",	0x1f4216, 0, 64 * 1024,  64, SECT_4K) },
+ 	{ INFO("at26df081a",	0x1f4501, 0, 64 * 1024,  16, SECT_4K) },
++	{ INFO("at25sf321b",	0x1f8701, 0, 64 * 1024,  64, SECT_4K) },
++	{ INFO("at25sf641b",	0x1f8801, 0, 64 * 1024, 128, SECT_4K) },
+ #endif
+ #ifdef CONFIG_SPI_FLASH_EON		/* EON */
+ 	/* EON -- en25xxx */
+
+---
+base-commit: 4d3b5c679bc9d5c6cbbeedcc1e4a186f1cc35541
+change-id: 20250701-nor-0ee20c630bc4
+
+Best regards,
+-- 
+Zixun LI <admin@hifiphile.com>
+
