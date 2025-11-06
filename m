@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBEBECCFA13
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 21:08:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40ED1CCFA05
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 21:57:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D72E83C0E;
-	Thu,  6 Nov 2025 22:08:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7804083C29;
+	Thu,  6 Nov 2025 22:57:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uKq4XzTg";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nt0y19Eo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TW9Pj5or";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2974883C11; Thu,  6 Nov 2025 22:08:37 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0AE4A83C0C; Thu,  6 Nov 2025 22:57:53 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A30383A15
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 22:08:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2B4E83C0C
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 22:57:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4d2ZYG0BQXz9v75;
- Thu,  6 Nov 2025 22:08:34 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762463314;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=PcH+fUB7ndmiXxipSCg/zTI2Z0PKJ50Xa8zrC24ZzAY=;
- b=uKq4XzTgWyDl8HjaJeKzCIwF7ELvfJQ+urcbqUdOXfbsfc3MqOOkviFw2+4VoZq9cxyOP2
- LSY1ugi3tzvWKthR7Ir1853QNtvWxjqRmNbO09yd8mFBAK4iaX5j/Zg+0ws9QoAm/QCbQL
- uZqHo9/wzOctClZA0mJcfbtjHWTLOMJpGeZnAWRvOTwVUukioWD0XmkCcNioTC2MRtOH+l
- eSDIHJpLRdFD/e1PZUrJXMSMl+Ej8xTH/iRSmdNNFXCvaICFD/0r+FIUKktACCzcsr6835
- g/OcGyUnZQj8nPFwdEZuU9ZQJya5II1g8LBOHQDyZFdne7Lpv2JweCSf+eys4g==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=nt0y19Eo;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762463312;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=PcH+fUB7ndmiXxipSCg/zTI2Z0PKJ50Xa8zrC24ZzAY=;
- b=nt0y19EoPn9tiKO6W/sQTZgmSGWbYBmOqaU46dJoO88MUuQ0FGHvZ5ywq3Txbt2urFxsDw
- PbQ3lEfelpomqEN20KrbIP8XJiMS36srxC9TN3PgXMpuFaWSGqGZzvx8lIEBvEvWpFj5KC
- IWKMnb2U81LRzIhtF87+DDwa1UwclNR7zP/4+mhoKxEZfnpf+ahQQ9CQnDkVyq94B/Vz0b
- Svr0qGPcjhslkeehV32Npp3s49pMm2nxgHF04EY75NMUQE3YNRquITx9M24hD5KNdR3d8W
- IIOiEljJKObQj6aT44Ye57EGeE3Zl8o1qJWhjvnXg8XPHXhDU/WciQsB4w0r9w==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot
- augmented DT if DEVICE_TREE_DEBUG=1
-Date: Thu,  6 Nov 2025 22:08:18 +0100
-Message-ID: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7c28c21aba1so84216a34.0
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 13:57:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762466269; x=1763071069; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uUzusdwiOgX8OVWfAG+IwirxaIO2QjkFcWGsS/Emxgs=;
+ b=TW9Pj5or6Lfa3/rsN45uzRlpge4t237DTB9rMK099feqmAb4Lf+u58hvE4BazsOFyc
+ ZviEZTo1pPBwEFMXEgYm79ZJ5FNMNPqwnXUTmfGnJpyunKg5P9s9oUxRI7ZpAXfM+Vf4
+ mHhRmsEagyCI4JBeaiJgQbNKHWz3tOa+IL7DQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762466269; x=1763071069;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=uUzusdwiOgX8OVWfAG+IwirxaIO2QjkFcWGsS/Emxgs=;
+ b=imev6oo1cDwBAlAvGGImfQ8KhoGB9KR3U4AGAxaIGAAujvaqo0PbMuX5bPFSSsT2o1
+ FmYFQxp/GIktsvnqsSVWgKVKZFtu7vnenSCo06ErsItyQ+90MVMpBmS3MfX/QblAGXQG
+ W8CmmvadTEqDgbfxBfdHROav8qecUCbXXxCTdNzNxwnq883SckzxAkB1Q14892XY3Zzd
+ OyF0FmfiXyyWdo1T6yrAYE8ZMMFteXhSaeHFChBwl0jUlnwvLFReKzTMll9F66Q1rUDE
+ XvQY6M//Dl7ARJYNGrOqnS3n1bdPU/dWHRTCcIRBJlRP41oQJ/Nk6zBdacOFtSojiT9D
+ FKwQ==
+X-Gm-Message-State: AOJu0YzMsbpAhJxaT+Ctlsj6/cGbhrSXn6+5ovHvinHhORhgyOYdVJC8
+ sSt6q5CRIMFi59xhTZP2rUKYbKmHknMaCFPC7VkzKdYcuxiOPYtxoncUipaHeN4y3Ng=
+X-Gm-Gg: ASbGncs2bxv3w7NSf5wnmvZBYuyG6CxzaMLXSNh7H6H1KtLq1bLRWW+4HgO1r3uzZgl
+ qFjiniF6pMqNGczJurCz4PIKJtvEtXzvb/I8e21/237hd6sW7up1eQLVvyOeMqw+AGbhVs+p6jz
+ StMSIgjz49uceN3Q0WgyVpGSDCIMrysxeVkCQpgNd0KybM3gNYRCbB5I2jmcaXxcREUhU8xb0Vb
+ eP3zIGMhPxgAdWBhFzje49o4NbUuEC+zdaew5Rvf65skLDtNKbT0Hch7j0VuS2DQDDHA8eSdFHO
+ VWPzwoUZ8+2hGBn0EDXH+IhQpBJz5WGdfeXOlqpeoNMbDNQEtnXbbW40YxYHaneD7+7148AyrYX
+ 9xUYZlR3yjdbfe8fZkPaTnCwokQNDxE9Zhr3aYxx2xYtvtEyLDsX10Eryyrc9F/fOlRZVjuuvuB
+ V+eFYJjiqMu6rVogbbiMzFyel24eVCMtVI0yxmvg==
+X-Google-Smtp-Source: AGHT+IHorJPH9nCh7bOv5LPfvz6vMAPcLjQj9rSQtlOR2tuxi9XraglctKNdZd5bdeOmkT53SV60mQ==
+X-Received: by 2002:a05:6830:440f:b0:7c6:8c73:ab0c with SMTP id
+ 46e09a7af769-7c6efcc8cc0mr1012699a34.4.1762466269614; 
+ Thu, 06 Nov 2025 13:57:49 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c6f0f0a715sm370514a34.4.2025.11.06.13.57.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Nov 2025 13:57:49 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Samuel Holland <samuel@sholland.org>
+In-Reply-To: <20251101-clang-fixes-v1-0-a8398475226e@gmail.com>
+References: <20251101-clang-fixes-v1-0-a8398475226e@gmail.com>
+Subject: Re: [PATCH 0/2] Fix AArch32 compilation with Clang
+Message-Id: <176246626861.3129497.14948596131312532180.b4-ty@konsulko.com>
+Date: Thu, 06 Nov 2025 15:57:48 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: cbb0de7bb60adc1688b
-X-MBO-RS-META: ypdbkfd3xc9cd6xdpeou7supmstj3cm1
-X-Rspamd-Queue-Id: 4d2ZYG0BQXz9v75
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,81 +99,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT and
-DT with U-Boot extras, to show how much does the U-Boot DT differ from
-the base DT. This is particularly useful together with OF_UPSTREAM, to
-minimize the diff between upstream DTs and U-Boot DTs.
+On Sat, 01 Nov 2025 10:39:57 +0100, Dmitrii Sharshakov wrote:
 
-Example usage:
-$ make r8a779g3_sparrowhawk_defconfig && make DEVICE_TREE_DEBUG=1
-$ cat ./dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dtb.diff
+> I faced some minor compatibility issues when choosing Clang as the cross-compiler for my target.
+> 
+> Please review these two fixes, aiming at enabling Clang-based builds (still using GNU binutils)
+> for 32-bit ARM targets.
+> 
+> Tested to fix build with (also run-tested on qemu arm and arm64 with clang):
+> 
+> [...]
 
-This still has a downside. Even 'dtc -I dts -O dts ...' applied on
-base DT and U-Boot augmented DT can produce different phandle IDs
-for the same node in those two DTs, which results in a lot of noise
-in the resulting diff. The only way I can think of is to patch DTC
-to emit full paths in those phandles instead, something like a
-phandle = <&{/full/path/to/remote/end} ...>;
+Applied to u-boot/master, thanks!
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Adriano Cordova <adrianox@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Cc: Sam Edwards <cfsworks@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- scripts/Makefile.lib | 24 +++++++++++++++++++++++-
- 1 file changed, 23 insertions(+), 1 deletion(-)
-
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 5db2fbc418a..2d8bf3c04f4 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -386,10 +386,31 @@ ifeq ($(CONFIG_OF_LIBFDT_OVERLAY),y)
- DTC_FLAGS += -@
- endif
- 
-+# In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT and
-+# DT with U-Boot extras, to show how much does the U-Boot DT differ from
-+# the base DT. This is particularly useful together with OF_UPSTREAM, to
-+# minimize the diff between upstream DTs and U-Boot DTs.
-+ifdef DEVICE_TREE_DEBUG
-+cmd_dtc_diff = \
-+	$(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtn-tmp) $< ; \
-+	$(DTC) -s -O dts -o $@.clean.dts -b 0 \
-+		-i $(dir $<) $(DTC_FLAGS) $(dtn-tmp) || \
-+		(echo "Check $(shell pwd)/$< for errors" && false); \
-+	$(DTC) -s -O dts -o $@.full.dts -b 0 \
-+		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) $(dtc-tmp) || \
-+		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false); \
-+	(diff -Naru $@.clean.dts $@.full.dts > $@.diff || true)
-+
-+dtn-tmp = $(subst $(comma),_,$(dot-target).dtn.tmp)
-+else
-+cmd_dtc_diff =
-+endif
-+
- quiet_cmd_dtc = DTC     $@
- # Modified for U-Boot
- # Bring in any U-Boot-specific include at the end of the file
- # And finally any custom .dtsi fragments specified with CONFIG_DEVICE_TREE_INCLUDES
-+
- cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
- 	(cat $< > $(pre-tmp)); \
- 	$(foreach f,$(subst $(quote),,$(dtsi_include_list) $(CONFIG_DEVICE_TREE_INCLUDES)), \
-@@ -400,7 +421,8 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
- 		-d $(depfile).dtc.tmp $(dtc-tmp) || \
- 		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
- 		; \
--	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile)
-+	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile) ; \
-+	$(cmd_dtc_diff)
- 
- dtsi_include_list_deps := $(addprefix $(u_boot_dtsi_loc),$(subst $(quote),,$(dtsi_include_list)))
- 
+[1/2] arch: arm: build: only set -mgeneral-regs-only for AArch64
+      commit: e8e3b38def93b5e5d53569961237ce215454e141
+[2/2] build: fix building u-boot.lds with Clang as a cross-compiler
+      commit: f7d177395d73f7747373dfd0ef7329834788106e
 -- 
-2.51.0
+Tom
+
 
