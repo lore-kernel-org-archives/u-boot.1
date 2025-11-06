@@ -4,84 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D152CCFA05
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 13:09:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90DC9CCFA13
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 13:09:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4742483B91;
+	by phobos.denx.de (Postfix) with ESMTP id 818C983B98;
 	Thu,  6 Nov 2025 14:09:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="xasC85sw";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="L01DFOAZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0502F83B82; Thu,  6 Nov 2025 10:46:18 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 4834583B85; Thu,  6 Nov 2025 12:12:41 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04FFD83B8F
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 10:46:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 546D383B5F
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 12:12:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-471191ac79dso8152455e9.3
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 01:46:11 -0800 (PST)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-429b7eecf7cso571633f8f.0
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 03:12:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1762422371; x=1763027171;
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1762427558; x=1763032358;
  darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DI6K/aIdpuSnX15tFEx2SJeo/7Da+vJWPzriBsx9UMk=;
- b=xasC85sw8a2N3CEgsqvPxu3QUYLpCgLO+0Xp+sz+1gysKpHUpdgRH1F10/0ZyQaWRZ
- FmxRFTDLpl2qHHlme1qy6Nu5efk4PmnsanrwoK75YxfbM5opA7v0PpGLU+m1rhOLTyxs
- vdcFUs324lN19MrZAN2s4rNnal0MrniowjuEDSJdrvrc1Y+Umk0qbL7EljMsRlpd/tXV
- 9mXjJHLdjijJZ1Fg+kJ561xsceDuVBRK480AG8iauFWVYo183pqIbifh5aEL6R/fXkRN
- lEYc+otACXsEuq7ufDWDC1Aqse0/DbDvvRlWUA9sJzsq66nlhVaHtYWfUAMo+W7eZwIO
- KgtA==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RNz/JXJvqWgIzVJrgO885d5y+sKiDYZZznDeVle91NM=;
+ b=L01DFOAZlipAfLB1aUb7Ms3c8gaG7DCF1mFZQDyEzrb4yZXA/W+QjkfOJfB5aE3JTW
+ /7HZOD/sfXU1UQwM21Ve6CRU11BoMCj87Ks8Uzk8ihwmP9rAZ4LDkRE2RZ6ZOCsD6hcz
+ wUdbkoQ96nlEcNHC2CkdjzUNNotSANkAeIoGlBZR57isVfmu2oD3NqFLF+0YB9+H9cTi
+ C27/8xGlo8shyrSq6DO/dtXNwB1JYXoM89KXdFIRClRny6rDTLOIFdqztkMEHOwLh09L
+ fzIgTRwD5K5Qcoq9+9mDTYhDvWLNGrK3HOJ4q8gYPU42vqcqtEVMXKwjwn9MB+dcPpX0
+ HREw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762422371; x=1763027171;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1762427558; x=1763032358;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DI6K/aIdpuSnX15tFEx2SJeo/7Da+vJWPzriBsx9UMk=;
- b=TyIl+ZT/o8bg62rQp2r3LUPcs9zafVym3JhK29+yFe/wWd825kqTMtYHBFNZJApElT
- NnQ9UeBPeElc/Ch8AFduWmHoRCO2qEZUZKbU58kcRTgWhHUehr5/q7j/idWUwCfZdoi0
- m46vfZTOiJBd906E/5nSGWjS6bMCFd/q5kHOKT3F3EJBrFZLr4ssmUo/LYANG67o3RfX
- OeuLCQXs4S0qopU+SaVIEI3VN8sadx5ux9LfJxOFEHzfd+mZLh9X2ZeJw8I5xJc0hiLX
- FB5pAogNctfYZ/cKTQzNi+9IMgzB8ao5pLPJKfNDlXqZoY0QW0Z7xvUitrXTb20wgKlJ
- r/ug==
-X-Gm-Message-State: AOJu0Yy9hO78W5H8Brfjd04Jf6atIxczLQ+7s2r1ycvS0FWXfIOioF45
- iun+g/E5edqyGB7cIyc4bHk83goDouUiUDttwd5GzZb2Hm8ZDi40lCQsJNIaOb/84hw=
-X-Gm-Gg: ASbGnctvi5DHPBwe9Vv/DWkUBKYawlcS3nU+bXaai+4b4u+4jsL+KaG1NspA80ogeYP
- PGFryNWtMvy6BRbOb9bOGAZSRG0iPQi4H301cBqDNBLeSLdKMMXT81Hs2xit4ULmEA5Ylz1L6EM
- IV1HXM4erobB30mPZe1vz4uNzJQcA7myxOHcVU4Q/UM/7US2ZWWHiNYeeWv9Ldlzy+MDj3VEThC
- r5x3HdqZ2QarieWlPXIS4NsjLUvNhUMspFRsQMU8Pr4tX7iqt04pU0VPHxOo8k/xvGQCLnL3JxB
- YFt2vmZ4JGc59p3JFOuETGZVjPQz5hseE5xTxarqZ22mtiFlNoAf1j+7wUkKDi/8B3rBGARDklt
- QIMIlSLgfaR/CYXTBFbfhDGaWDJEot8r2eHSgth6g8crFImLuH+PZw2KxfD/f/GKn/Hwej786Ul
- quWgDGlPCN4A==
-X-Google-Smtp-Source: AGHT+IElhMr5pUvSzJ4AXvtv1yfo9NZ0UwHDJXbZZQby00A0aVvPMq5W87xS4UGofkAGiRMeUJiBhQ==
-X-Received: by 2002:a05:600c:1c08:b0:475:df09:c253 with SMTP id
- 5b1f17b1804b1-4775ce286a7mr50605085e9.38.1762422371118; 
- Thu, 06 Nov 2025 01:46:11 -0800 (PST)
+ bh=RNz/JXJvqWgIzVJrgO885d5y+sKiDYZZznDeVle91NM=;
+ b=aHANmS3WhMAFldNbaU1bOi4WsbmU/MVw++fb4IMDdqgbzdJ8J/0g6ELwnvIIWqCGS9
+ yywLoKp1IHtK1u5B8LWRDwROEEll016oFWJTFImnElSRZnY/GJw9ViYPwew8mA/OqRX9
+ pLgsGJVzh94F7ldkw6Hihhp1HqJMZ+VOTsnO82w8SdqXBMBQ6eZftCLGVDxUj4mYqgTs
+ 3EI+4KQnE2/EPrFHcwVVvc6LePOyYKXnSQIS6fqtaUy8Vn7yN2wlrfGJ/zcJQhFwo2v+
+ 1gtkDTVtvM8pVerXoFllRKouJjdRlAXM4Dk/DU2REa5XkiMp98PHO6FjTnWyx+7vW2WH
+ bD9g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXdVWmV5l7e9+ZfEYcYsoxId0pWFyncfIBpdCdxkZOHJISCdO/ziM2cnR6HYfeXLTEk7csbgOI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8RhtRTKQSXFda3XX/DhtDs9aDzqJ1f5qN0xVseCDAojLX6Bf2
+ Sr7SZtkyrQvGRVNa3aQgzXEbWglYFxlnP6J8sz+udtnOd9g9iotPuK8B3+YTt+lCRE8cxIBIE4+
+ lQpH6
+X-Gm-Gg: ASbGncuo4hu02MYk0gum4WlYKKxFlEuJlWeFI/yqfaqBKILCAbCgECpbF+MJqkfrrkl
+ 7jCKqy3sM1t62S9wz9AIP0222jjQoGgVgL3gddhXJTDC2KxsvrBu655gCSmKymiuwoZ1i9Gjiog
+ PiIzmvSnBrr2AmPAON+5isi5xOkmIzyB5sI5xjhDlB05cTJMlMPyc2v6d7eIfOQsZCHwFF+4fbQ
+ 6o6L8eTZYJ7RBEXO7aIeP4HeHhu8qfUWLTeICDyvcyH1LE6qbN6LXOcz+nisqa7eG3LsVsC4vAy
+ 4V7NcdQ9rwj4D/8lJROi9jxEKSqLC2dAxooYdpujs/jwOqF993Awg2KvnOSC45zFNj9l71sVKKJ
+ KAs7UIXB1CC1iYyK5fxNuarC0ihoicPu2MYMFZTpXp+MrPebSESxWL3/eRtUOuWEO96hRY1YhIN
+ m4XxxXYf3Y4w==
+X-Google-Smtp-Source: AGHT+IGySz5srdTbglbQfJ/WhyH5LN+7iBxvV8oWwSTrkZ4xFw5Y6HWn2fXDVD+6V0KWbDclGpQHqA==
+X-Received: by 2002:a05:6000:2089:b0:429:d4e1:cb9f with SMTP id
+ ffacd0b85a97d-429eb18ab6amr2773219f8f.22.1762427557750; 
+ Thu, 06 Nov 2025 03:12:37 -0800 (PST)
 Received: from [127.0.1.1] ([78.199.60.143])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4776363da40sm34520295e9.2.2025.11.06.01.46.10
+ ffacd0b85a97d-429eb3951c6sm4582966f8f.0.2025.11.06.03.12.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 01:46:10 -0800 (PST)
+ Thu, 06 Nov 2025 03:12:37 -0800 (PST)
 From: Zixun LI <admin@hifiphile.com>
-Date: Thu, 06 Nov 2025 10:45:59 +0100
-Subject: [PATCH RESEND] mtd: spi-nor-ids: Add support for AT25SF321B and
- AT25SF641B
+Subject: [PATCH 0/2] mtd: rawnand: atmel: Fix ECC error on SAM9
+Date: Thu, 06 Nov 2025 12:12:00 +0100
+Message-Id: <20251106-pmecc-v1-0-a1f3cf430be9@hifiphile.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251106-nor-v1-1-9be914d0178a@hifiphile.com>
-To: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, 
- Tudor Ambarus <tudor.ambarus@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Zixun LI <admin@hifiphile.com>
+X-B4-Tracking: v=1; b=H4sIAICCDGkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDQwMz3YLc1ORk3URjCxPDZAvDZHMLIyWg2oKi1LTMCrA50bG1tQBa33F
+ SVwAAAA==
+X-Change-ID: 20251106-pmecc-a3841c81c782
+To: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>, 
+ u-boot@lists.denx.de
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Tom Rini <trini@konsulko.com>, Alexander Dahl <ada@thorsis.com>, 
+ Zixun LI <admin@hifiphile.com>
 X-Mailer: b4 0.14.2
 X-Mailman-Approved-At: Thu, 06 Nov 2025 14:09:21 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -100,32 +109,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These flash chips are similar to AT25DF321A with Quad I/O capacity.
+PMECC setup time config was lost in the porting, this patchset backports the
+fix from Linux.
 
 Signed-off-by: Zixun LI <admin@hifiphile.com>
 ---
-Tested on SAM9X60 custom board.
----
- drivers/mtd/spi/spi-nor-ids.c | 2 ++
- 1 file changed, 2 insertions(+)
+Zixun LI (2):
+      mtd: rawnand: atmel: set pmecc data setup time
+      mtd: rawnand: atmel: Remove timing from atmel_pmecc struct
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index e7e97780d7cdd27104fd7db900b3a779d2188922..18bc6f2f06e9a02594da6ad1880489e78458a60f 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -76,6 +76,8 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO("at45db641d",	0x1f2800, 0, 64 * 1024, 128, SECT_4K) },
- 	{ INFO("at25sl321",	0x1f4216, 0, 64 * 1024,  64, SECT_4K) },
- 	{ INFO("at26df081a",	0x1f4501, 0, 64 * 1024,  16, SECT_4K) },
-+	{ INFO("at25sf321b",	0x1f8701, 0, 64 * 1024,  64, SECT_4K) },
-+	{ INFO("at25sf641b",	0x1f8801, 0, 64 * 1024, 128, SECT_4K) },
- #endif
- #ifdef CONFIG_SPI_FLASH_EON		/* EON */
- 	/* EON -- en25xxx */
-
+ drivers/mtd/nand/raw/atmel/pmecc.c | 6 +++++-
+ drivers/mtd/nand/raw/atmel/pmecc.h | 1 -
+ 2 files changed, 5 insertions(+), 2 deletions(-)
 ---
-base-commit: 4d3b5c679bc9d5c6cbbeedcc1e4a186f1cc35541
-change-id: 20250701-nor-0ee20c630bc4
+base-commit: 1c250e444ad3b15315ee8b0fcb3fc3acc26449e2
+change-id: 20251106-pmecc-a3841c81c782
 
 Best regards,
 -- 
