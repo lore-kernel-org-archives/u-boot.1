@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B85ACCF9F8
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 09:18:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD4DCCFA03
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 09:20:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E09183B22;
-	Thu,  6 Nov 2025 10:18:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2EB4F83B4F;
+	Thu,  6 Nov 2025 10:20:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Nzb6bUhq";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="T2Ibdwno";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB49983B4E; Thu,  6 Nov 2025 10:18:10 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 72ECB83B55; Thu,  6 Nov 2025 10:20:29 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A225B83A15
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 10:18:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 39FB583B22
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 10:20:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 93B5760218;
- Thu,  6 Nov 2025 09:18:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8133C4CEFB;
- Thu,  6 Nov 2025 09:18:06 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 157A460218;
+ Thu,  6 Nov 2025 09:20:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68D00C4CEF7;
+ Thu,  6 Nov 2025 09:20:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762420687;
- bh=SqfLcbV/agh4kcCt9QkgrFsscURHz+lKjEzS/SzERSE=;
+ s=k20201202; t=1762420825;
+ bh=Ui9lJDsFUS7QBbbXa79l6fD7k3jkk/xxVNw+WEuDbfE=;
  h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=Nzb6bUhqfBey8ZuXt9vBibOInpS3cZ9KbtuHfMTxPwDI9ANpuRIqEJpfjik6jwIh0
- hi4CHXz3dJHA75Ge81v0FmqS5lIUpsU4GRFGoBxNyFct/2GKpFXJvpzboWkywtiGww
- oDovsY68+pUBKnOZivhzcXvONBHiAnEgV/AkL4Ss9kj2GpxKQJfWjSLdQm1m5Nb1Sc
- cOaa4K+bY0xEDAck6MbMY1hZmVHDgSYL00K9yO2exTeuFfTSfswsX1SKCf8Zjkk3kQ
- rvSET+1z/gPJuFnMkmRksq3Fk87SGvUppM2sKhDwQH2VNyzmSLrnNCYAx1IUR0QsIH
- bTtK1RKyJWukA==
+ b=T2Ibdwno3w1IaMejwXf0bTlCWfTtwzEpGvIPyW2WPe1qiKcESnmxhq5pHGEfowUc9
+ XT4oWhwpdSkJ3G70ZT90NWtPhWOx/vEhVWzk0OFyuYI+1u6pPIHYHhIqbR1R8MtARq
+ 00r7mBIVPz37gFWJhPSG1yhAF4hl3ZCsFPHlvYoKyXHZp/7LtDUKiT1IC+QiB3iY5j
+ J0Pfkb5qlKO8A0ZtQFGfWO/AbtJwbXAT14uKddh5qM97Enz58EanDQ/wnDZQocxRdv
+ 3b0rMZ+sY22vWlFkdH9bn5Y41C97O+ST4J1Alc2iLekk9tnR3a87w4XEOwe7mGY9zw
+ JwZR/kTiW7/bg==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: trini@konsulko.com, lukma@denx.de, peng.fan@nxp.com, 
- marek.vasut+renesas@mailbox.org, anshuld@ti.com, andre.przywara@arm.com, 
- xypron.glpk@gmx.de, ye.li@nxp.com, sjg@chromium.org, 
- dario.binacchi@amarulasolutions.com, a-dutta@ti.com, 
- dinesh.maniyam@altera.com, Hrushikesh Salunke <h-salunke@ti.com>
-Cc: u-boot@lists.denx.de, s-vadapalli@ti.com, danishanwar@ti.com
-In-Reply-To: <20251023080922.3527052-1-h-salunke@ti.com>
-References: <20251023080922.3527052-1-h-salunke@ti.com>
-Subject: Re: [PATCH v4] spl: Add support for Device Firmware Upgrade (DFU)
- over PCIe
-Message-Id: <176242068529.10289.3970876777489060067.b4-ty@kernel.org>
-Date: Thu, 06 Nov 2025 10:18:05 +0100
+To: u-boot@lists.denx.de, 
+ "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ "Nicolas Belin (TI.com)" <nbelin@baylibre.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ george chan <gchan9527@gmail.com>
+In-Reply-To: <20251024-botargsappend-v1-1-0b78f05f9132@baylibre.com>
+References: <20251024-botargsappend-v1-1-0b78f05f9132@baylibre.com>
+Subject: Re: [PATCH] bootstd: android: add the bootargs env to the commandline
+Message-Id: <176242082357.10716.11132988775995410791.b4-ty@kernel.org>
+Date: Thu, 06 Nov 2025 10:20:23 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,29 +76,20 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Thu, 23 Oct 2025 13:39:22 +0530, Hrushikesh Salunke wrote:
-> Introduces support for Device Firmware Upgrade (DFU) over PCIe in
-> U-Boot. Traditionally, the DFU protocol is used over USB, where a
-> device enters DFU mode and allows a host to upload firmware or binary
-> images directly via the USB interface. This is a widely adopted and
-> convenient method for updating firmware.
+On Fri, 24 Oct 2025 16:23:22 +0200, Guillaume La Roque (TI.com) wrote:
+> When previously using script based bootflows, the U-Boot
+> environment variable bootargs was used to customize the kernel
+> commandline at boot time.
+> In order to get the same behaviour, concatenate the bootflow
+> commandline with the contents the bootargs environment variable.
 > 
-> In the context of Texas Instruments (TI) SoCs, PCIe can be used as a
-> boot interface in a manner that differs from the conventional
-> "PCIe Boot" process, which typically refers to booting an OS or
-> firmware image from an NVMe SSD or other PCIe-attached storage devices.
-> Instead, TI SoCs can be configured as a PCIe Endpoint, allowing a
-> connected PCIe Root Complex (host) to transfer images directly into the
-> device’s memory over the PCIe bus for boot purposes. This mechanism is
-> analogous to DFU over USB, but leverages the high-speed PCIe link and
-> does not depend on traditional storage devices.
 > 
 > [...]
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-[1/1] spl: Add support for Device Firmware Upgrade (DFU) over PCIe
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/cde77583cf0b54dd572a38acd159ded7dd5e3e86
+[1/1] bootstd: android: add the bootargs env to the commandline
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/10da28729949f3e2160f98d82df45833d4c175cf
 
 --
 Mattijs
