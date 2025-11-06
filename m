@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4598BCCFA13
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 16:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A8F9CCFA13
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 17:00:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B818283C0E;
-	Thu,  6 Nov 2025 17:59:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F2C2C83C02;
+	Thu,  6 Nov 2025 17:59:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DYDN+bIQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BtKy5Zan";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7635F83C08; Thu,  6 Nov 2025 17:59:49 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id BEE8683C14; Thu,  6 Nov 2025 17:59:50 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E36C83B9B
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 17:59:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 668C583BCF
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 17:59:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7c2816c0495so707503a34.3
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 08:59:47 -0800 (PST)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7c3e2221217so756350a34.3
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 08:59:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762448386; x=1763053186; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762448387; x=1763053187; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0FPOXy54L0g+kMJHN6r2KlwP9D9KXMYuPNV9N87TbLU=;
- b=DYDN+bIQCV6Ruj1UuCPZ9/ZmAbVj6SybmIMhLNjbdArCAr0DmywlFEsG6qoEb5lAAU
- t8ocEccKz39YQ2O8zuQ37XUBz9cSNCTPEiipZngy0Q/mFkx1YxYwropjM7pbNZqsZP0n
- lq2BhI5/siaz2De2QsXk4IREBQGhc0vtfEcyI=
+ bh=DhXT5DKFhc07zyVwFACIjsUHJVZWSqR6ozgq7zGIWcg=;
+ b=BtKy5ZanXBJ+mZUWNsRZq4DGclKcchJoArhUpmTa5pGIeUKlwumlF5UuCRvtuy+aOc
+ KSrD5OXf/FUOv8iqzyADi8hoGqx9T3BU6bQ8V/YYW6RsDOqTiJffNsneNgVRZmZiag66
+ NtuS2IcTD8rcB8AklfZqGJcVHJXFwMcCfWTBA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762448386; x=1763053186;
+ d=1e100.net; s=20230601; t=1762448387; x=1763053187;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=0FPOXy54L0g+kMJHN6r2KlwP9D9KXMYuPNV9N87TbLU=;
- b=K+lbBOUIDRiIOVnW5LrrwA6koP93rrFS1NrZFA7bRjX0queey8XLvtD2BBtq/Zj2ta
- gK/dMXS3dnVir4lOkL/dA+695t4h1IxlphD1F8ISds4jqucAOj6iqsCThJfFkzYy1Ls+
- S41/zWdzydnthGGDIysct/gBxOpHhScETtnetBEHx1bM0F579mWh88ewE/7O7qqlvIyU
- ixrUqOuRdscgeDj2Nf3XBWW3NiCI3YMl6OseXg4Iu50sjTNja/IQUDYt9kDiAn9uY6zU
- EN1vqvKT0uK5YGzRdc0W5UsxpACzfiFAFURyPkAnUzQ/PLmR7zIbAAzs9YpYTZw8l9H0
- 3kMg==
+ bh=DhXT5DKFhc07zyVwFACIjsUHJVZWSqR6ozgq7zGIWcg=;
+ b=dGriLMiwsT0OgZj6ODkWrwE6Vl5dwJIJrwDV0cH3kDkZSpU6F+nZA/JBS9yZkoNM9v
+ bLRQsoM6fruxcMBO2KOrp6+ZAlyig1+WR4W2g2uz3VC3pLcnX0wCM8/3tw5HmA8k9OTt
+ UPTcSVsMtmXloDgvY3MLjzvHOKd2NtQGp8zjz7JR5ncfV7mw2/31t15rCbOg/3crD+Zo
+ ODcrbelDb5oXkc0xQ32gZvGOMpSYt93Bwe6f/pgkoxqs+xd4UpfIMWXVy7ol/rN6n5m7
+ wTFz6a9oqUW+G8pc68frHWOBa3ZrlmflpEILcqNwJMkf8NEO4TIda5qQJqiG2vD/SIeF
+ qsGA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVdFk1Zzi//o5OoYmhJSFR7+0/TjEQ5C5CDqEqd7L3YCBBz8RtDoJoz1EeLwdHYU7ObodzMiLs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOhLWyldB1mMpC4acdm1LBoLAjs08dgDmh808rAV1cn+bCi2dL
- GvV2z85CmaN4NLog3leSd8Jv8EIP/6PA0rUbn4ip3E66FMv7+lAx8gxgTMT/6EJPahw=
-X-Gm-Gg: ASbGncs44ARPEyMIvklnX3SuDgMU590Jqd2k9YrfZauKDxCBUj2XupIGcMxEUpKzBmD
- WWfDfVd6QNjlpmftPwvrFoHSv/dGy5bbMFuKs/vwHVOV4Q5XlJHX2tZronMMUwAWk2WTSR+1pzn
- Fg3HcepqySspRn9+JGXJNlxwZOX6pxfZXciGnoJUxh1ukTj0CQBv7nT5BeqLvIt9rhSJDh4MY5i
- d7q9bE2VO0+nuR1XmmHORzddBEJg78UeoQQUPEKeRx9momKCjnIa5ltnX30CTz4iQ5wsGoKqXWi
- guqbS/QHNqxICgLXTCd3PRhf+z8nvPZTek35YJCP5vmZgllymJ5qTaYzptAmipQrirWJOKCsL6S
- 0e1wO5NGYrar7Mzq9QkPJtq+IGbObjiV5PL0T9kJLjhk73mCxifv8+Z0iWZC0BPDYixmAYObFj4
- 7/L58rrCbqmLINbpgnLIL8STH15Tj3/RHOcfFmSw==
-X-Google-Smtp-Source: AGHT+IGX0aiIhRrU4Ypx8QGwB7+Rjzo6IUkU9r+nRZtqfaZH5R5OBE/7mJntccqd7GNXVkFqdAy8Ag==
-X-Received: by 2002:a05:6830:4410:b0:7c6:76b9:db24 with SMTP id
- 46e09a7af769-7c6efc875e7mr214570a34.4.1762448386168; 
- Thu, 06 Nov 2025 08:59:46 -0800 (PST)
+ AJvYcCUq106oKBkA0uZTFVQAFxpmHwbuKy9tNV3i3jYjFhyYHyRjVw8SQ4UPVdx3TOcsca54RXZbV1Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdidOH2N0nBnPY11Ok+o/TBATTk31YPRcq08qHQKJ1hU6sLhHa
+ t7z5Cvh6prlhwmBFcYA6/UIozue4bH2qdlwnKgk9rOUvi3JjnnKelm6rC2DmyMqMs4oFsrpkJiG
+ VqsnkaK3JBA==
+X-Gm-Gg: ASbGncvCHoEi62g7/LL1yq4b2FVbdO+EZXr6LrvzcfpnWNW35GGMj4vrdk0HJ2zC2/y
+ So2gLjzxP6Nl7PW7nL+zj8ssiu0mr9J4nKSzw3UZ6jJ3vQrpEmK9PPigv1pW0ZC/4RqpqTsocfR
+ oc4uatcQ9q/GSWGFZyMAFsP41CRw/dB9rVF0L6UiMYutZD/P93Nfmrzu16k1XBO8tXtOuyLT94j
+ +37uGLBrwi7XUuL98Q/1fk013XY64fAfj+RuSWiXguoQuV20PVzdC8qbUirg4RArsYq1+9O4Fq6
+ iBkKKyims4yUN8HAiL9TTGeIGzqvuYeWADdaGqKFeSKk6a1tMm2RDJi3mxpPCKMS5MAxVU2jX+T
+ Oavo+nvEqKNqHdXNmVc6UO8b0zTAR5207YClwZo4LaJmPLCFJu+e5YehrpJ3UBqWLAi33/60yYs
+ 8gcLjLwZQjaumbCzyx831q3O6696Xa3t9z1znm2Rpz3TKX8ku7
+X-Google-Smtp-Source: AGHT+IFf9jcLE6LiFmtoNyeX6kd6VauVhShJdHMVhqttvkB6vycAGYyj0w1ei7P9tnQ/DEf72/jhrQ==
+X-Received: by 2002:a05:6830:6aa8:b0:7c5:307e:3d8d with SMTP id
+ 46e09a7af769-7c6f005b8famr130345a34.30.1762448387177; 
+ Thu, 06 Nov 2025 08:59:47 -0800 (PST)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f11323absm24819a34.23.2025.11.06.08.59.45
+ 46e09a7af769-7c6f11323absm24819a34.23.2025.11.06.08.59.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 08:59:45 -0800 (PST)
+ Thu, 06 Nov 2025 08:59:46 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Jonas Karlman <jonas@kwiboo.se>
-Cc: Ye Li <ye.li@nxp.com>, Fabio Estevam <festevam@gmail.com>, 
- Dang Huynh <danct12@riseup.net>, u-boot@lists.denx.de
-In-Reply-To: <20251101203429.1603832-1-jonas@kwiboo.se>
-References: <20251101203429.1603832-1-jonas@kwiboo.se>
-Subject: Re: [PATCH] Revert "power: regulator: Add vin-supply for GPIO and
- Fixed regulators"
-Message-Id: <176244838511.3056677.6474090475924239807.b4-ty@konsulko.com>
-Date: Thu, 06 Nov 2025 10:59:45 -0600
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Matthias Brugger <mbrugger@suse.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de
+In-Reply-To: <20251031195253.621971-1-heinrich.schuchardt@canonical.com>
+References: <20251031195253.621971-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] acpi: use U-Boot ACPI vendor ID
+Message-Id: <176244838628.3056677.13042049609610671230.b4-ty@konsulko.com>
+Date: Thu, 06 Nov 2025 10:59:46 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,24 +102,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 01 Nov 2025 20:34:26 +0000, Jonas Karlman wrote:
+On Fri, 31 Oct 2025 20:52:53 +0100, Heinrich Schuchardt wrote:
 
-> Rockchip boards may depend on a working MMC regulator in SPL to
-> successfully load FIT payload from MMC. Typically, these boards only
-> include the vmmc-supply regulator and not its vin-supply in SPL control
-> FDT.
+> The U-Boot project has been assigned the vendor ID 'UBOO' [1]. Use this
+> vendor ID and our release version in the ACPI table headers.
 > 
-> The commit f98d812e5353 ("power: regulator: Add vin-supply for GPIO and
-> Fixed regulators") breaks loading FIT from MMC in SPL on some of these
-> boards due to now requiring the vin-supply to be included in the SPL
-> control FDT.
+> [1] ACPI ID Registry
+>     https://uefi.org/ACPI_ID_List
+> 
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] Revert "power: regulator: Add vin-supply for GPIO and Fixed regulators"
-      commit: 32ead3c1bada6501a3d34ac7c0a7088cd6bcfbd2
+[1/1] acpi: use U-Boot ACPI vendor ID
+      commit: b790f31752d7650d5f557509f17b1396f0cc1f70
 -- 
 Tom
 
