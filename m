@@ -4,87 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1720CCCFA05
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 13:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A91F1CCFA03
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 13:10:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF1F983BE1;
-	Thu,  6 Nov 2025 14:09:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 5892283BCE;
+	Thu,  6 Nov 2025 14:09:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=nathaniel.land
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Oz7hOmtT";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nathaniel.land header.i=@nathaniel.land header.b="ZIN/FgGk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2F8E83B48; Thu,  6 Nov 2025 08:47:57 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9AB0C83B27; Thu,  6 Nov 2025 05:27:02 +0100 (CET)
+Received: from goldencat.email (goldencat.email [45.45.221.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B09FF83B22
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 08:47:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=andrea.calabrese@amarulasolutions.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b719ca8cb8dso134295266b.0
- for <u-boot@lists.denx.de>; Wed, 05 Nov 2025 23:47:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1762415275; x=1763020075;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DBn2z8/2M9sZd3d0pYrpTTtDhQ8c13zZSJ7bGiNRrw4=;
- b=Oz7hOmtTgsCbVg1Swl8uu9wxIudQ9M4u/mL3HMdi22jXBOWyliFNv5W2UI2Bj7xurF
- ARwcolTYuRW53IrmvcS87VrqQkHHTZqJy+qiK/gn8j09nInWYBJCN8YKh/3tbWw+B3+0
- TbsNGbN4DPO1EH8PszmhRAx0WvWuq3MAYoUEc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762415275; x=1763020075;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DBn2z8/2M9sZd3d0pYrpTTtDhQ8c13zZSJ7bGiNRrw4=;
- b=QrXCTQbRwBdiehWqCXCaQn2smMGga58tvmi1j7kLYVt66LkwRUHt5IQRmC0EA2kwvu
- 1fK6e5MuyusC/NlHeUPPbWa5BvPrrg85Yulg1Gk1rbkFKabtrjdpXYF4rAz0v4OjKmQ/
- 06ZRDnSC7INJhMEZd4Xc1nTmCxaI3K7P2ltwev5eLlLr5iltQIL+dpvRCesUpI0S41rK
- JzjuSxU9vjFHdaecgzlWSUIY9Av4hAvs9ygyUH5ZLKtWAf+Rusn6IKuR+wpzAPMq83Dt
- NyHg4qtnCLfZnqvqH71gCL5UMbjCIceKcWm4++fHrQBQVNpS/mBGHpi56EXQAvLbtBJ4
- z6Ig==
-X-Gm-Message-State: AOJu0Yz7o2lLVrWaMAGZxwLGd5foe8qlN8X99dObcysEpb0wGv/5cDUu
- iaafcCj4OaASfiWIu5zMrVmWxmtlh42sWFcZpP7TVWiaVuDJLs8JhsVqC+iOX4KavPs=
-X-Gm-Gg: ASbGnctIAKdJJG/QMkt3b/Ae9l8KxgaoFW27AG1sxPNHwcG6O0+J3bR9JPIbqozj7ZI
- 3dB5nNYnR48ibdQKqKvif5BTirAz9WxH5WdiP/Ljhy8mQvc4kEk1/lN9X2RScxiJQQCFfjvhAdH
- gMOztgTOpO00DuW9J6wrTBsQSosP2Ys/7KfRKKZl5uGy2cp9HT4pB8Q+rxsx9PXXQ8HVlxV+MLz
- YN/erYc44o7/m3C5jcbqAtvewa+ENJzzHljHPFgxrd8qWiulgDCASRUEbWyWPeeIYCcrMv1lzV/
- e9WOrylmG7/h/k0CJdGOqLU71AgS/Uxbc1r5TdikT0RPMgxZ2Xxd25IpCkmVOmVEXr8MH9n1x8B
- S3PYU58ONBScO/nMkXgmPcIPYncY1ue6WPQunOq9V2d5dTSbZ1kP8saPOBYYiMi0ZH1tS+Gbwsh
- 2O+RZbJbaJHqEebNpGDMOz+DSXyd0lFGT6JJ11JRmzuupQeu3XDL7lDZbphHin9XzsPu9bmRA=
-X-Google-Smtp-Source: AGHT+IF9p7vYHn4RfD3GJbt8Wru5k44irSoZnRFoAK8nX3iUY6ZgCI3AOvrV8Tszpk77c55fbmhzcg==
-X-Received: by 2002:a17:907:1c0a:b0:b72:5983:db09 with SMTP id
- a640c23a62f3a-b7265586fb2mr648549266b.32.1762415273992; 
- Wed, 05 Nov 2025 23:47:53 -0800 (PST)
-Received: from [192.168.1.54] (98-215-98-95.ftth.glasoperator.nl.
- [95.98.215.98]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b729fa4da20sm47189966b.66.2025.11.05.23.47.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Nov 2025 23:47:53 -0800 (PST)
-Message-ID: <edd4ec7b-de13-4db8-89f3-d56f8d8242fd@amarulasolutions.com>
-Date: Thu, 6 Nov 2025 08:47:53 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 70F6E83A15
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 05:26:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nathaniel.land
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=i@nathaniel.land
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 3/3] bsh: imx6ulz_smm_m2: Add imx6ulz BSH SMM M2D board
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, michael@amarulasolutions.com,
- dario.binacchi@amarulasolutions.com, trini@konsulko.com
-References: <20251105140609.117866-1-andrea.calabrese@amarulasolutions.com>
- <CAOMZO5Ach-Dd3R98zD31o1THp_M+yRu8=Pa4Ph6w3aeVJ3MboA@mail.gmail.com>
-Content-Language: en-US, it-IT
-From: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-In-Reply-To: <CAOMZO5Ach-Dd3R98zD31o1THp_M+yRu8=Pa4Ph6w3aeVJ3MboA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 06 Nov 2025 14:09:26 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nathaniel.land;
+ s=dkim; t=1762403217;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Yz1ukubUjRMsx8HVq5HWLVlIDyML/NPE8oGsLSsLw0E=;
+ b=ZIN/FgGk2uxaUqqWROFkvmSfL+kWNSgAdaWvP1xaGYAjfPhu/QodH1pOA7TwhXCxJm77/c
+ 2B8GT9QB2qfdthkM5Of7KELjGmoQjVik2r8rVFBbk7RwYFOejqw4G/fLT5NQISSwhSwjBv
+ nfgwpz+rLF7rSCvbwl7j9/bPaqbEtEpsd8+D3TN2Q6hZqN86xjSGvKCLM2jjjPb+1238Ld
+ +QTIHGRN0SwKUHUZaJmfbd5w8FIH6maeebLzz2HeX5KduzCaQ7OKQhXL77lScCn74HIn4M
+ E0+38rAY6ufacYKxbnVcSuHmjnXILtDDRfmlU5Z5xopuaujFLZfUxORuVYBZ9A==
+Authentication-Results: goldencat.email;
+ auth=pass smtp.mailfrom=i@nathaniel.land
+Date: Wed, 05 Nov 2025 22:26:56 -0600
+From: Nathaniel Hourt <i@nathaniel.land>
+To: Yao Zi <ziyao@disroot.org>
+Cc: UBML <u-boot@lists.denx.de>
+Subject: Re: Build for RISC-V with LLVM
+In-Reply-To: <534beda9eb77a786945ce647aebf7fa7@nathaniel.land>
+References: <aAx9bjXivAAuth-y@pie>
+ <EF1C62F4-2780-4DD4-B0FE-355AA66A10C4@getmailspring.com>
+ <aA2z6ImdniJZm7fq@pie.lan> <cd30d0ef07796710523ac5d55bb67d0e@nathaniel.land>
+ <aBQkbNrT-u6FPm_D@pie.lan> <534beda9eb77a786945ce647aebf7fa7@nathaniel.land>
+Message-ID: <9c0038ed1494e9f293bf4faaf5e66ed8@nathaniel.land>
+X-Sender: i@nathaniel.land
+X-Spamd-Bar: /
+X-Mailman-Approved-At: Thu, 06 Nov 2025 14:09:51 +0100
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,57 +72,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello, sorry for being late, but I wanted to make sure everything builds 
-properly now after the previous mistake.
+On 2025-05-01 21:31, Nathaniel Hourt wrote:
 
-Thank you for your reviews!
+> On 2025-05-01 20:48, Yao Zi wrote: On Thu, May 01, 2025 at 03:54:34PM 
+> -0500, Nathaniel Hourt wrote: Do you have any further information on 
+> the issue of linking with LLD? Is
+> anything more known about this problem yet?
+> Sadly no, without any serial output it's hard to work on the problem 
+> and
+> I haven't searched through the mailing list for similar reports.
+> Additionally, I don't have enough time to dig further on the issue...
+> sorry about it.
+> 
+> I could revisit the linking problem sometime later if it's still there.
+> May you give ld.bfd a try for now?
+> 
+> [1] https://lists.denx.de/pipermail/u-boot/2025-April/588038.html
+> 
+> --
+> Nathaniel
+> Thanks,
+> Yao Zi
 
-Il 05/11/25 15:14, Fabio Estevam ha scritto:
-> On Wed, Nov 5, 2025 at 11:06 AM Andrea Calabrese
-> <andrea.calabrese@amarulasolutions.com> wrote:
->> Introduce the BSH SystemMaster (SMM) M2D board. Notably, the M2D is
->> designed to leverage the existing device tree of its predecessors, the M2B
->> and the M2.
->> The primary distinction arises from memory incompatibilities with the M2B
->> and M2.
->> To address this, we've implemented a configuration system that allows for
->> selective inclusion of the desired memory components.
->>
->> Signed-off-by: Andrea Calabrese <andrea.calabrese@amarulasolutions.com>
-> Nit: the 3/3 in the Subject is incorrect as you are sending a single patch.
->
->   diff --git a/configs/imx6ulz_smm_m2.config b/configs/imx6ulz_smm_m2.config
->> new file mode 100644
->> index 00000000000..67c1ca33074
->> --- /dev/null
->> +++ b/configs/imx6ulz_smm_m2.config
->> @@ -0,0 +1,81 @@
-> Please do as I suggested before:
->
-> 1. PATCH 1/2: Send one patch that introduces
-> configs/imx6ulz_smm_m2.config and converts the existing
-> configs/imx6ulz_smm_m2b_defconfig and configs/imx6ulz_smm_m2_defconfig
-> to use it. Please write in the commit log that the reason for doing
-> this is to make maintainance easier, avoid duplication, and simplify
-> the introduction of new board variants in the future.
->
-> 2. PATCH 2/2: Add M2D support using configs/imx6ulz_smm_m2.config.
+Oh, it's certainly an option. =)
+
+But it'll be more fun to dig in and see if I can get lucky enough to 
+figure out why LLD isn't doing the job correctly. I suppose I'll start 
+by trying to figure out from the make system how the SPL image is 
+derived and begin analyzing it or the build assets from which it is 
+derived to determine what might be going wrong.
+
+Advice and pointers are always welcome!
+
+--
+Nathaniel
+I have found the problem and ~~fixed~~ worked around it! =)
+
+So let's dig in. The problem is, when we link with LLD, the FDT winds up 
+in the wrong place and U-Boot/SPL can't find it.
+
+Now, I'm not completely certain this is the code the SPL runs to find 
+the FDT, but I'm betting it's close enough:
+lib/fdtdec.c, function fdt_find_separate [1]
+```
+
+#ifdef CONFIG_XPL_BUILD
+  /* FDT is at end of BSS unless it is in a different memory region */
+  if (CONFIG_IS_ENABLED(SEPARATE_BSS))
+  fdt_blob = (ulong *)_image_binary_end;
+  else
+  fdt_blob = (ulong *)__bss_end;
+#else
+  /* FDT is at end of image */
+  fdt_blob = (ulong *)_end;
+
+  if (_DEBUG && !fdtdec_prepare_fdt(fdt_blob)) {
+```
+
+So it's looking for the FDT at the end. I do have 
+CONFIG_SPL_SEPARATE_BSS=y (default, I think; I haven't touched it) so 
+SPL is probably looking for the FDT at _image_binary_end, and main uboot 
+at _end. Now, if we make with V=1, we see that both the SPL and main 
+uboot have a step like:
+`cat u-boot-spl-nodtb.bin u-boot-spl.dtb > u-boot-spl-dtb.bin`
+...and this is then used to generate the final images. So the code is 
+expecting to load the FDT from the end, and the build is using a simple 
+cat to put it there.
+
+If this works as it should, we should find that the base address of the 
+SPL/uboot image, plus the size of that -nodtb.bin, will give us the 
+address of the _end marker that the code is using to find the FDT. And 
+with ld.bfd, indeed it does! But with ld.lld...
+The SPL base address is 0x8000000 and _image_binary_end is 0x80248fc, so 
+we expect the size of u-boot-spl-nodtb.bin to be exactly 0x248fc bytes; 
+however, mine is 0x24a98, which is too large! If we concatenate the FDT, 
+it'll wind up 412 bytes beyond where the code looks for it, and the SPL 
+will fail.
+
+The main uboot payload will also fail with a mismatch, because although 
+the fdt very nearly hits the right spot, it actually lands 3 bytes early 
+because u-boot-nofdt.bin is not 8-byte aligned:
+$ grep "\b_end" u-boot.map
+
+         402c9cb0         402c9cb0        0     1 _end = .
+
+$ grep "\b_start" u-boot.map
+
+         40200000         40200000        0     1                 _start
+$ printf "%x\n" `du -b u-boot-nodtb.bin | cut -f1`
+
+c9cad
+
+(Actually, the main uboot seems to be working on the starfive now, even 
+with this misalignment, but it wasn't back in May... Nevertheless, this 
+issue does still seem to affect other boards, particularly one I have 
+which doesn't use an SPL. Padding those last 3 bytes with nulls fixes 
+it.)
+
+Alright, so focusing back on the SPL... Why is the -nofdtb image too 
+long? Well, let's look in the vicinity:
+$ grep 8024 spl/u-boot-spl.map | tail -n5
+          80248fc          80248fc        0     1 _end = .
+          80248fc          80248fc        0     1 _image_binary_end = .
+          80248fc          80248fc        0     1 __image_copy_end = .
+          8024900          8024900      198     8 .got
+         8024900          8024900      198     8         
+<internal>:(.got)
+Hmmm, for some reason, LLD is putting the GOT after the end tag. Should 
+the SPL even _have_ a GOT?
+
+So at last, here is my workaround:
+diff --git a/arch/riscv/cpu/u-boot-spl.lds 
+b/arch/riscv/cpu/u-boot-spl.lds
+index 0717833df55..6e30f2f26dc 100644
+--- a/arch/riscv/cpu/u-boot-spl.lds
++++ b/arch/riscv/cpu/u-boot-spl.lds
+@@ -33,6 +33,14 @@ SECTIONS
+         } > .spl_mem
+         . = ALIGN(4);
+
++       .got : {
++               __got_start = .;
++               *(.got.plt) *(.got)
++               __got_end = .;
++       } > .spl_mem
++
++       . = ALIGN(4);
++
+         __u_boot_list : {
+                 KEEP(*(SORT(__u_boot_list*)));
+         } > .spl_mem
+
+Explicitly position the GOT the same place the main uboot image keeps 
+it, so it doesn't sneak in somewhere it shouldn't.
+
+Now, I'm sure this is not a proper solution (I note that 
+u-boot-nodtb.bin is still wrong), but I have no idea what a proper 
+solution would be, nor do I really know exactly what is going wrong here 
+at all. But I've found a way to get everything running, and I hope I've 
+found enough that someone who _does_ know what they're doing can see the 
+real problem and how to fix it. =)
+
+OK, that's all I've got!
 
 -- 
-Andrea Calabrese
-Embedded Software Developer
-M. +39 339 394 4747
-andrea.calabrese@amarulasolutions.com
+Nathaniel
 
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9170
-info@amarulasolutions.com
-www.amarulasolutions.com
-
-__________________________________
-This message and any file transmitted with it may contain privileged or confidential information. In case you were not listed in the addressed recipient, please notify the sender immediately and delete the message.
-Any other use of this email, including copying it and the disclosure of its content, is prohibited.
-
+Links:
+------
+[1] 
+https://source.denx.de/u-boot/u-boot/-/blob/master/lib/fdtdec.c#L1250
