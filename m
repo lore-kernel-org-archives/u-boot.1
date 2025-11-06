@@ -4,95 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6545ACCF9F8
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 10:22:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4727CCCF9F8
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 10:29:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9377783B5F;
-	Thu,  6 Nov 2025 11:22:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A126783B5F;
+	Thu,  6 Nov 2025 11:29:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ApbuKe58";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="OkNT0ubQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 350B183B63; Thu,  6 Nov 2025 11:22:16 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E93B583B71; Thu,  6 Nov 2025 11:29:26 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D7DC83B49
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 11:22:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5631383B49
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 11:29:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4710665e7deso3214995e9.1
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 02:22:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762424534; x=1763029334; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=L/gX6j1dheFaJUmWAdhRVo4b9KdRDoMhjGsvMyt3X0I=;
- b=ApbuKe58ba1bkFG/kc8Ph+uDdZzYUTd5UJt853Mjk2SPBL2aT2IdvcJtNB5wf1oOJP
- 6jUbU+sHVePsiz75H/TQMkQtsX6Ra0cHbrQfoA9rbArd+dxfLbZp080LqWgAky3tBucW
- v0C6uVwVxJbfXSNZvFALylG8bpp0tsC0fPhtBKfUJHe9szSsOdqjrLMlmsrZnqlp33eo
- vnRI3n9+Kuxfc7urs1VNyLHqijc8dRFWNVM+mk4BdA03knfFTL46CstHFdAt+UbusHq/
- /1S/gGuHEPvqKt4SJewX4INkDdrmwwCevfsMdNJD+B0sdPKoTUiYwTRme72xPI2UYfu8
- 5lOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762424534; x=1763029334;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=L/gX6j1dheFaJUmWAdhRVo4b9KdRDoMhjGsvMyt3X0I=;
- b=sHvYsAcOqrrd/TJrJQsKWgCetgOA+2dlQCrsJEEhyB3xbpC4kLbI8c18ZUg93C6yQk
- gqV2TWdYECZDg1YfYE3gKkyMrc9I5hZPiK5rM/hUgPAh1jTj8xT8T+/NvaeGDwLwQ7CT
- aDy1i8xJzeImXG9Ph3yKpR+uyP2YfYISw0Zdf/LlCDtXSRQ5FNIQdbqHO4EeQTWrFB/4
- I+TljKkaxUjmMOqQt53vyly2zi7QBqOImm56VyQmqv2VHCS0EcmViednqauhUmySp2JP
- oH4JpsLNM5Jkt2vW0vCGVm6P22EqUj46rjd2coH8A3ls5c5zpS1A9hnbJRXk+uXZER1W
- nZgA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW+/7QAfhNTqh8mc56VApiw4nQZGtTjGYFi5eMb1b9Gg+GBkbyLtOpvY52z5DBUiAxNeLP6Sa8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxOE8I2Dnt2cb1wKQSHJYC4FUlenxfFwXO1awq1/Id84Df4ROmR
- LwM7SW3J39Sn0sdwFNWW5uZ6FikQ4ZXeRpTSbmFf3bvG/e5ibqnz99pp
-X-Gm-Gg: ASbGncsLAgNtb/lF65v99v4m5csWSnriM2W7szB7rNfECHShuBj24lw68EYI65JyFK2
- HP4cIrfmP1+ALrouCzt1+rwS/ZWizXAmf1IkaznwCh2e0zkPxiKGpp/aKvduQfXRyJzLv6+CZB5
- DAG5TPdB7xlSWJH3551oVfhHyR6uoCsnrMElSIg0yh90HSWQ1OZsEFfP1/gL54uiFZcQtN4YWKc
- 9OKhTUcD8MaTphskIFR3IBRQjCT1Wc54EVUyVp9QG/1DJbrVNrcM2yNby6a8Hf/LFvYCqbU9zSc
- R255NhElxDqgm2GB8ztrKE+Dx2QVYYvkoBk3Gy5EYrwMGwgjbzv6kfPaO9tR0wjnKoXECYHheSb
- j4Ua6CZ2LdRTTCHKQcK6rsUBG0G+OdiP8y/KXdwEhsDfF6CY5n+tyqQM+fLP1+WQqfbrE7LHBYp
- mDwj92iqRpPDJnhA6R6cc6xubQJQWOK4Od4OgqLZBM4zqo1jT5FA==
-X-Google-Smtp-Source: AGHT+IF3CGyYmEsnLSX2W45bBbPsSX62kelGXThf0YdeCfmJYDqZ765CRviMVK8iS3zbqNSREMh8Dg==
-X-Received: by 2002:a05:600c:a12:b0:477:e09:f0f with SMTP id
- 5b1f17b1804b1-4775cdad66emr49648025e9.8.1762424533401; 
- Thu, 06 Nov 2025 02:22:13 -0800 (PST)
-Received: from ?IPV6:2001:b07:aac:705d:2f96:d64c:2149:c32?
- ([2001:b07:aac:705d:2f96:d64c:2149:c32])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4775ce329a4sm99426835e9.14.2025.11.06.02.22.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Nov 2025 02:22:12 -0800 (PST)
-Message-ID: <3ab1b3a6-b9ab-4571-a7c8-8288d4a8d290@gmail.com>
-Date: Thu, 6 Nov 2025 11:22:11 +0100
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 194B126091;
+ Thu,  6 Nov 2025 11:29:24 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nmBUn_TxajXZ; Thu,  6 Nov 2025 11:29:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1762424962; bh=D3ubo2ceiwcBK5jYKqe/zCH03qcEbpx6j4itTMVWLuc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=OkNT0ubQsXUQE/gL+HCqAEcfB2l07h8YuQDzbnUsjrUGNL+WgSnUONN04mKZOCXyK
+ yrPmhUOrpXubj+S5WuXR1Y+WozIC3/G0EjsexgsUH7zXE5Z/3W3HVoOwFCPQ9rp15x
+ PpFcNKbZkmuc8j7HXSCKSkkygW2GwN0c6dXfdQf/a/92Ps2OhaMD+MON4OUe2uVzyM
+ 00BJ9bG1NRglRYy9/9WNJ6j1xIBv+r8izxJ7RL76h0BUdascVT0fjOI+Co+Ld9Fnkr
+ bQAQ6B1sPeiMK98ALjq48gCwbaRtgqXhxQfNM6SsCjBmwiTvPRcEP0Mpp7VStFmSJy
+ T6J3AoRcGKrbQ==
+Date: Thu, 6 Nov 2025 10:29:11 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Nathaniel Hourt <i@nathaniel.land>
+Cc: UBML <u-boot@lists.denx.de>
+Subject: Re: Build for RISC-V with LLVM
+Message-ID: <aQx4Xk-qsaHXOQ1p@pie>
+References: <aAx9bjXivAAuth-y@pie>
+ <EF1C62F4-2780-4DD4-B0FE-355AA66A10C4@getmailspring.com>
+ <aA2z6ImdniJZm7fq@pie.lan>
+ <cd30d0ef07796710523ac5d55bb67d0e@nathaniel.land>
+ <aBQkbNrT-u6FPm_D@pie.lan>
+ <534beda9eb77a786945ce647aebf7fa7@nathaniel.land>
+ <9c0038ed1494e9f293bf4faaf5e66ed8@nathaniel.land>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] imx: Revert "imx: mx6ull: fix REFTOP_VBGADJ setting" and
- fix comments
-To: uboot-imx@nxp.com, Ye Li <ye.li@nxp.com>,
- Fabio Estevam <festevam@gmail.com>
-Cc: trini@konsulko.com, dario.binacchi@amarulasolutions.com,
- michael@amarulasolutions.com, u-boot@lists.denx.de, u-boot@schwermer.no,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-References: <20251027115638.1186252-1-festevam@gmail.com>
- <CAOMZO5B1sxS8Vh1awupGZd8oqqLhZ55abME07Kf5AZ-w9jUKhQ@mail.gmail.com>
-Content-Language: en-US
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-In-Reply-To: <CAOMZO5B1sxS8Vh1awupGZd8oqqLhZ55abME07Kf5AZ-w9jUKhQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9c0038ed1494e9f293bf4faaf5e66ed8@nathaniel.land>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,71 +73,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 31/10/2025 02:48, Fabio Estevam wrote:
-> On Mon, Oct 27, 2025 at 8:56 AM Fabio Estevam <festevam@gmail.com> wrote:
->>
->> From: Ye Li <ye.li@nxp.com>
->>
->> The change in commit c1af358cf51a ("imx: mx6ull: fix REFTOP_VBGADJ
->> setting") is not correct. According to latest i.MX6ULL fuse table,
->> the REFTOP_TRIM[2:0] fuse is defined as below. So the previous codes
->> are correct, only need to fix the comments.
->>
->> Set the REFTOP_VBGADJ field in PMU_MISC0 register based on the
->> REFTOP_TRIM fuse:
->> '000" - set REFTOP_VBGADJ[2:0] to 3'b000
->> '001" - set REFTOP_VBGADJ[2:0] to 3'b001
->> '010" - set REFTOP_VBGADJ[2:0] to 3'b010
->> '011" - set REFTOP_VBGADJ[2:0] to 3'b011
->> '100" - set REFTOP_VBGADJ[2:0] to 3'b100
->> '101" - set REFTOP_VBGADJ[2:0] to 3'b101
->> '110" - set REFTOP_VBGADJ[2:0] to 3'b110
->> '111" - set REFTOP_VBGADJ[2:0] to 3'b111
->>
->> Sven Schwermer reported:
->>
->> "These are the symptoms: Very few of the thousands of devices that we
->> manufacture (< 1%) fail to decompress a large XZ archive once in Linux
->> userspace. We have not found any form of memory testing or other load
->> that reproduces this issue. Reverting the offending patch fixes this
->> behavior on the affected devices."
->>
->> Revert the offending commit to fix the regression.
->>
->> Reported-by: Sven Schwermer <u-boot@schwermer.no>
->> Signed-off-by: Ye Li <ye.li@nxp.com>
->> [fabio: Fixed checkpatch warning and added Sven's report]
->> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+On Wed, Nov 05, 2025 at 10:26:56PM -0600, Nathaniel Hourt wrote:
+> On 2025-05-01 21:31, Nathaniel Hourt wrote:
 > 
-> Applied, thanks.
-Hi Fabio, Ye,
+> > On 2025-05-01 20:48, Yao Zi wrote: On Thu, May 01, 2025 at 03:54:34PM
+> > -0500, Nathaniel Hourt wrote: Do you have any further information on the
+> > issue of linking with LLD? Is
+> > anything more known about this problem yet?
+> > Sadly no, without any serial output it's hard to work on the problem and
+> > I haven't searched through the mailing list for similar reports.
+> > Additionally, I don't have enough time to dig further on the issue...
+> > sorry about it.
+> > 
+> > I could revisit the linking problem sometime later if it's still there.
+> > May you give ld.bfd a try for now?
+> > 
+> > [1] https://lists.denx.de/pipermail/u-boot/2025-April/588038.html
+> > 
+> > --
+> > Nathaniel
+> > Thanks,
+> > Yao Zi
+> 
+> Oh, it's certainly an option. =)
+> 
+> But it'll be more fun to dig in and see if I can get lucky enough to figure
+> out why LLD isn't doing the job correctly. I suppose I'll start by trying to
+> figure out from the make system how the SPL image is derived and begin
+> analyzing it or the build assets from which it is derived to determine what
+> might be going wrong.
+> 
+> Advice and pointers are always welcome!
+> 
+> --
+> Nathaniel
+> I have found the problem and ~~fixed~~ worked around it! =)
 
-At Toradex we have been struggling since quite some time (back to 2018) with
-the temperature readings and the thermal shutdown behavior on i.MX6ULL. The
-issue we observed is that the thermal shutdown seems to trigger too early.
+Wow, exciting update!
 
-I have investigated the history around this topic and verified some internal
-notes in our bug tracker. With this revert applied, and on the devices we have
-(all trimmed with value 0), the reported temperature increases by about 10 °C
-compared to before the revert. The absolute accuracy of the readout is
-questionable: for example, on a device kept at around 20 °C, the temperature
-readout was ~19 °C before the revert, and ~31 °C after the revert.
+> So let's dig in. The problem is, when we link with LLD, the FDT winds up in
+> the wrong place and U-Boot/SPL can't find it.
 
-Consider that for devices with fuse value of 6, there is a -10 degrees offset
-after this revert (so, the other way around).
+...
 
-I understand that for Sven this revert improves stability during large XZ
-decompression in userspace for few devices, but for us it means that the
-thermal shutdown happens roughly 10 °C earlier, which is a serious issue in
-our case.
+> The main uboot payload will also fail with a mismatch, because although the
+> fdt very nearly hits the right spot, it actually lands 3 bytes early because
+> u-boot-nofdt.bin is not 8-byte aligned:
+> $ grep "\b_end" u-boot.map
+> 
+>         402c9cb0         402c9cb0        0     1 _end = .
+> 
+> $ grep "\b_start" u-boot.map
+> 
+>         40200000         40200000        0     1                 _start
+> $ printf "%x\n" `du -b u-boot-nodtb.bin | cut -f1`
+> 
+> c9cad
+> 
+> (Actually, the main uboot seems to be working on the starfive now, even with
+> this misalignment, but it wasn't back in May... Nevertheless, this issue
+> does still seem to affect other boards, particularly one I have which
+> doesn't use an SPL. Padding those last 3 bytes with nulls fixes it.)
 
-I would kindly ask NXP to double-check how these devices were trimmed. My gut
-feeling is that there might be an inconsistency, either the trimming scheme is
-not backward-compatible (e.g. old and new devices behave differently, and the
-code should cope, I don't know how, with this), or this patch must be reverted
-(because introduces a regression).
+I suspect this doesn't affect RISC-V boards enabling OF_BOARD, since we
+have a default board_fdt_blob_setup() in arch/riscv/lib/board.c, which
+retrieves the FDT address passed by SBI, thus it doesn't matter whether
+fdt_find_separate() succeeds or not.
 
-Thank you and kind regards,
-Emanuele
+starfive_visionfive2_defconfig does enable OF_BOARD, so it isn't a
+problem. But for other ports, it's necessary to correctly pad the binary
+to the alignment enforced for __image_binary_end/__bss_end. What ports
+did you observe issues on without padding?
+
+> Alright, so focusing back on the SPL... Why is the -nofdtb image too long?
+> Well, let's look in the vicinity:
+> $ grep 8024 spl/u-boot-spl.map | tail -n5
+>          80248fc          80248fc        0     1 _end = .
+>          80248fc          80248fc        0     1 _image_binary_end = .
+>          80248fc          80248fc        0     1 __image_copy_end = .
+>          8024900          8024900      198     8 .got
+>         8024900          8024900      198     8         <internal>:(.got)
+> Hmmm, for some reason, LLD is putting the GOT after the end tag. Should the
+> SPL even _have_ a GOT?
+
+I don't think so.
+
+Currently RISC-V SPL works in, at least to me, a crazy way. Both proper
+U-Boot and SPL for RISC-V are now compiled with -fpic flags, which means
+GOT relocations could be generated, and we need a GOT for these
+relocations to work.
+
+We don't have any code in SPL to fill the GOT table, but linkers could
+fill it for us if address of the symbol is determinate at link time,
+which covers basically all symbols for a static executable.
+
+But back to the original question, why should we compile SPL with -fpic
+(see arch/riscv/config.mk) in the first place, and thus (maybe[1]) need
+a GOT? In the current way, SPL won't work, either if it's loaded in an
+address differing from CONFIG_SPL_TEXT_BASE, because symbols won't stay
+in the address specified and pre-filled by the linker.
+
+So compiling SPL with -fno-pic sounds more reasonable to me, and though
+I couldn't test it now, it should fix the boot issue with
+starfive_visionfive2_defconfig and ld.lld, too. This would be a huge
+change to RISC-V port, and I think deserves more discussion.
+
+> So at last, here is my workaround:
+> diff --git a/arch/riscv/cpu/u-boot-spl.lds b/arch/riscv/cpu/u-boot-spl.lds
+> index 0717833df55..6e30f2f26dc 100644
+> --- a/arch/riscv/cpu/u-boot-spl.lds
+> +++ b/arch/riscv/cpu/u-boot-spl.lds
+> @@ -33,6 +33,14 @@ SECTIONS
+>         } > .spl_mem
+>         . = ALIGN(4);
+> 
+> +       .got : {
+> +               __got_start = .;
+> +               *(.got.plt) *(.got)
+> +               __got_end = .;
+> +       } > .spl_mem
+> +
+> +       . = ALIGN(4);
+> +
+>         __u_boot_list : {
+>                 KEEP(*(SORT(__u_boot_list*)));
+>         } > .spl_mem
+> 
+> Explicitly position the GOT the same place the main uboot image keeps it, so
+> it doesn't sneak in somewhere it shouldn't.
+> 
+> Now, I'm sure this is not a proper solution (I note that u-boot-nodtb.bin is
+> still wrong), but I have no idea what a proper solution would be, nor do I
+> really know exactly what is going wrong here at all. But I've found a way to
+> get everything running, and I hope I've found enough that someone who _does_
+> know what they're doing can see the real problem and how to fix it. =)
+> 
+> OK, that's all I've got!
+
+Many thanks for digging into it.
+
+> -- 
+> Nathaniel
+> 
+> Links:
+> ------
+> [1] https://source.denx.de/u-boot/u-boot/-/blob/master/lib/fdtdec.c#L1250
+
+Regards,
+Yao Zi
+
+[1]: Technically for a static binary, we could lower all GOT relocations
+to pcrel ones, and thus it could run anywhere and require no GOT. But
+during my experiment, even building starfive_visionfive2_defconfig with
+ld.bfd still generates a GOT with -fpic in arch/riscv/config.mk changed
+to -fpie, and "la" pseudo-instructions in arch/riscv/start.S replaced
+with "lla". Not sure whether I missed something.
