@@ -4,59 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4727CCCF9F8
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 10:29:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7719CCCFA03
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 11:02:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A126783B5F;
-	Thu,  6 Nov 2025 11:29:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 91A1083B7E;
+	Thu,  6 Nov 2025 12:02:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="OkNT0ubQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kP8FLaLm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E93B583B71; Thu,  6 Nov 2025 11:29:26 +0100 (CET)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0469083B7F; Thu,  6 Nov 2025 12:02:01 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5631383B49
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 11:29:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EEA6183B72
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 12:01:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 194B126091;
- Thu,  6 Nov 2025 11:29:24 +0100 (CET)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nmBUn_TxajXZ; Thu,  6 Nov 2025 11:29:22 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1762424962; bh=D3ubo2ceiwcBK5jYKqe/zCH03qcEbpx6j4itTMVWLuc=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=OkNT0ubQsXUQE/gL+HCqAEcfB2l07h8YuQDzbnUsjrUGNL+WgSnUONN04mKZOCXyK
- yrPmhUOrpXubj+S5WuXR1Y+WozIC3/G0EjsexgsUH7zXE5Z/3W3HVoOwFCPQ9rp15x
- PpFcNKbZkmuc8j7HXSCKSkkygW2GwN0c6dXfdQf/a/92Ps2OhaMD+MON4OUe2uVzyM
- 00BJ9bG1NRglRYy9/9WNJ6j1xIBv+r8izxJ7RL76h0BUdascVT0fjOI+Co+Ld9Fnkr
- bQAQ6B1sPeiMK98ALjq48gCwbaRtgqXhxQfNM6SsCjBmwiTvPRcEP0Mpp7VStFmSJy
- T6J3AoRcGKrbQ==
-Date: Thu, 6 Nov 2025 10:29:11 +0000
-From: Yao Zi <ziyao@disroot.org>
-To: Nathaniel Hourt <i@nathaniel.land>
-Cc: UBML <u-boot@lists.denx.de>
-Subject: Re: Build for RISC-V with LLVM
-Message-ID: <aQx4Xk-qsaHXOQ1p@pie>
-References: <aAx9bjXivAAuth-y@pie>
- <EF1C62F4-2780-4DD4-B0FE-355AA66A10C4@getmailspring.com>
- <aA2z6ImdniJZm7fq@pie.lan>
- <cd30d0ef07796710523ac5d55bb67d0e@nathaniel.land>
- <aBQkbNrT-u6FPm_D@pie.lan>
- <534beda9eb77a786945ce647aebf7fa7@nathaniel.land>
- <9c0038ed1494e9f293bf4faaf5e66ed8@nathaniel.land>
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-429c7e438a8so786663f8f.2
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 03:01:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1762426918; x=1763031718; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qZ5UM7ykr6iHsqZktuLyza1mmgeAcooPHvX25WOqvbM=;
+ b=kP8FLaLmt1dFTBPhrgpRWsj1sFlV+9H70sPGWWiM3TnPsejuC8zF5bOrOmJK8XsEGW
+ OZWpc0LNSCD3CAJ/f/CQGo+HKLMseD3N2w9QmTmLrQpaRBpgrnmG+ikOv98+3TaqdyVa
+ xaX2lzdd5Iul3Pew46P2wxpziRTIHKy5joP3EdpBcnL9A5jLxVIyEweRMDTcBzpay5VR
+ cBcGviO6N85qBIkVmMtDnaGj5uVvK6kY9KuVUJzcDXGTX/DNcZD/4mcNrqY3BUsjdasx
+ hA5z7ADIJvxuf+dvxy2M8bIm0mIRfKDOzkuQzkl+DfQjzUDK0O6LqDnSC5ebwSmXAcvf
+ GfeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762426918; x=1763031718;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qZ5UM7ykr6iHsqZktuLyza1mmgeAcooPHvX25WOqvbM=;
+ b=lDfrn4qji8bSu41qOt1AYqo/J7OrfsCLf+l5cvWYG4WAVn6vzxRfdHSOI4cjW9jJNN
+ mNx2BlObtTzYt50x9gGZztUZbw3i+EFfSgk2Sh3YqNbWsKXRXWHdZuhBesN2YGpmXBOf
+ JSthLNOIkyByh3QmRgmo+e59VnZ19f1XPHdIUMseOLlGWvRQcP1QOeNBsPLap/Y7wIke
+ NSr9LBkFsWHllWHNMkO18Hit28WLi+UAO2X0BlC1oFddpasm+HLu+O9z8bWwGKtjuzHl
+ z6PWQcxF9dAo57G4bVV/AR8K649V99quLQcvOAW9GrX/KTJ6rRJqtr6VcHq2xYDwrxVD
+ gAYw==
+X-Gm-Message-State: AOJu0YzF2M03XfJrBlE6dS3QW+LMN8VlPHtJWVXYuHTQl6UkgjG1YPgk
+ 5/8X18nwCMx2Ct3WQlyPYWKI6y1vKkEziYMDpm1t06FVWUL36j6oZokTUcbyC7Q1wx8=
+X-Gm-Gg: ASbGncv1vWLUVfWgavDkY5HXEDgIvhLz8XbMKK/uDQJaL5bI1A0Rzevsxf1D92/tjvC
+ LKnP/tiDrbFIThZ0c628PndE7Yot6KxtkYmKQ78IwjxHzpzwZsJkfVzwtfOSCkwu8QcbbyZQrZM
+ EypX+HIT3+0yO/FxYofQfuYgR3ij3Gu7o+8JE6jzz5NB2RxlmQLT20k2VPLtv/bYF/dhSgtcKXi
+ LcqHBfFkJFeeCRwW5huozfJ8U9OvPsLfP9GlGmaEKX2NB4+/ZIZwUHoiI4rHg12uOStLqmEL3lE
+ XN9m3r3F2TgmltBNJMUDEDbjNYUjzRDo+X95hbf91B5QPo/BvWPUOl4KaHA/rkwLq7Gd03Mx1Sg
+ QetFqWRoQcy99kY+iLTVtCIZyHF+p5hTEDCaa6fqvIrx8YlAnTEMVcd5YhtfikQ1uVuUvKiSO3G
+ fvj4oAQ5+/dB/x/h27QYkJ
+X-Google-Smtp-Source: AGHT+IGdaKUQP2wORwnYEASzy2AJKRbSwBSUx5QoxwUfxd69enKwo9lXIXwnODwY+cfi8BXMMgc5fw==
+X-Received: by 2002:adf:9d8c:0:b0:429:ef2d:5dc8 with SMTP id
+ ffacd0b85a97d-429ef2d5e0emr858887f8f.49.1762426918173; 
+ Thu, 06 Nov 2025 03:01:58 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-429eb4037d3sm4412640f8f.6.2025.11.06.03.01.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Nov 2025 03:01:57 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Thu, 06 Nov 2025 12:01:48 +0100
+Subject: [PATCH] mach-snapdragon: enable MMU_PGPROT by default
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <9c0038ed1494e9f293bf4faaf5e66ed8@nathaniel.land>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251106-topic-snapdragron-en-pgprot-v1-1-d2b9e802230b@linaro.org>
+X-B4-Tracking: v=1; b=H4sIABuADGkC/x3MMQrDMAwAwK8EzRFYKQmkXykdjK06WmQhhxII/
+ ntNx1vuhsYu3OA53eD8lSZVB2ieIB1RC6PkYVjCshKFDc9qkrBptOyxeFVkRSvm9cTEFNYH5Y1
+ 3gjGY80eu//569/4DfaeTrW0AAAA=
+X-Change-ID: 20251106-topic-snapdragron-en-pgprot-ce10531d6e91
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot-qcom@groups.io, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=782;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=1Kzlf1ovi8ltuvFTbADX1IMhZC6Kx/q+a/5pbCuE1X8=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBpDIAlpb43CPSuWaBNBo4JpLjfHmX6J68hIJ4PF9ZI
+ MR2CICGJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaQyAJQAKCRB33NvayMhJ0frGD/
+ 0Y+Zon8fHnSR1ONDm04eZITZ6JEi23Gth1Po8lSXQFPrEgS3vsfFP0wncxU4iDeJWNTcn42NQkZ343
+ odmcGihDl0Pu3LpYmGnR0Iip6hb/ljdXl6B8p+aKFusutXLWD1NbjMA0m8d5Zk+SQvpX9IJ0tX+i8e
+ LNzMLl8dNpOOSL8E99Wf4j3g2z+YgyaCJdKlVU3yQDMdf0ViNqEHtL/WHGBaVypcNG0+zAJjV0N0iS
+ Gd2wFITzpUyGKzHikRjkJXBJg7jhN64AylAMNYgVGMR9K7hJLlAK9kAW42xJK7sPWZ9c9/K9/LBco3
+ 3FBnHqlYPTzxTIzE/eTqaR8lOATvY9wQJApZj5wotj25KIoVlyTLta2yJy1zebSM0M6kExa+Oy5sxt
+ YUkC0BERB0Ud3mmb25i1CwWxDVGAEeL2FAjqzn9l73DOPGs5RYv0FzHYMMOt4XZ4YXpEEotPtUBYI/
+ jxQ3KIp7crtwqpg5HnVgj3r33r55Yyd+UG7XFzwo6fk1lpww+E0eJQja3zs4QfZaV0MmJFeU1rBOnO
+ Fdb4NeMfXH9+EOcVourOAEh2SbTODqKUNLOrzAtbtcLqTxwTS4Obr3xiLBnWP2pD4guk59+UpeEIyS
+ c2LDS/daAGQ/TdvYIQa7nZLLxPgF9RzL3srM/z0sY3npEOFnVreJLv8Lr4WQ==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,158 +119,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 05, 2025 at 10:26:56PM -0600, Nathaniel Hourt wrote:
-> On 2025-05-01 21:31, Nathaniel Hourt wrote:
-> 
-> > On 2025-05-01 20:48, Yao Zi wrote: On Thu, May 01, 2025 at 03:54:34PM
-> > -0500, Nathaniel Hourt wrote: Do you have any further information on the
-> > issue of linking with LLD? Is
-> > anything more known about this problem yet?
-> > Sadly no, without any serial output it's hard to work on the problem and
-> > I haven't searched through the mailing list for similar reports.
-> > Additionally, I don't have enough time to dig further on the issue...
-> > sorry about it.
-> > 
-> > I could revisit the linking problem sometime later if it's still there.
-> > May you give ld.bfd a try for now?
-> > 
-> > [1] https://lists.denx.de/pipermail/u-boot/2025-April/588038.html
-> > 
-> > --
-> > Nathaniel
-> > Thanks,
-> > Yao Zi
-> 
-> Oh, it's certainly an option. =)
-> 
-> But it'll be more fun to dig in and see if I can get lucky enough to figure
-> out why LLD isn't doing the job correctly. I suppose I'll start by trying to
-> figure out from the make system how the SPL image is derived and begin
-> analyzing it or the build assets from which it is derived to determine what
-> might be going wrong.
-> 
-> Advice and pointers are always welcome!
-> 
-> --
-> Nathaniel
-> I have found the problem and ~~fixed~~ worked around it! =)
+Let's enable proper MMU page table protection to properly
+protect write-protected and non-executable sections.
 
-Wow, exciting update!
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ arch/arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-> So let's dig in. The problem is, when we link with LLD, the FDT winds up in
-> the wrong place and U-Boot/SPL can't find it.
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index ef834542bd4..b200e9c730a 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1142,6 +1142,7 @@ config ARCH_SNAPDRAGON
+ 	select SYSRESET
+ 	select SYSRESET_PSCI
+ 	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
++	select MMU_PGPROT
+ 	imply OF_UPSTREAM
+ 	imply CMD_DM
+ 	imply DM_USB_GADGET
 
-...
+---
+base-commit: 23987e10905146def3ab61e55ec912c6e742efdc
+change-id: 20251106-topic-snapdragron-en-pgprot-ce10531d6e91
 
-> The main uboot payload will also fail with a mismatch, because although the
-> fdt very nearly hits the right spot, it actually lands 3 bytes early because
-> u-boot-nofdt.bin is not 8-byte aligned:
-> $ grep "\b_end" u-boot.map
-> 
->         402c9cb0         402c9cb0        0     1 _end = .
-> 
-> $ grep "\b_start" u-boot.map
-> 
->         40200000         40200000        0     1                 _start
-> $ printf "%x\n" `du -b u-boot-nodtb.bin | cut -f1`
-> 
-> c9cad
-> 
-> (Actually, the main uboot seems to be working on the starfive now, even with
-> this misalignment, but it wasn't back in May... Nevertheless, this issue
-> does still seem to affect other boards, particularly one I have which
-> doesn't use an SPL. Padding those last 3 bytes with nulls fixes it.)
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
 
-I suspect this doesn't affect RISC-V boards enabling OF_BOARD, since we
-have a default board_fdt_blob_setup() in arch/riscv/lib/board.c, which
-retrieves the FDT address passed by SBI, thus it doesn't matter whether
-fdt_find_separate() succeeds or not.
-
-starfive_visionfive2_defconfig does enable OF_BOARD, so it isn't a
-problem. But for other ports, it's necessary to correctly pad the binary
-to the alignment enforced for __image_binary_end/__bss_end. What ports
-did you observe issues on without padding?
-
-> Alright, so focusing back on the SPL... Why is the -nofdtb image too long?
-> Well, let's look in the vicinity:
-> $ grep 8024 spl/u-boot-spl.map | tail -n5
->          80248fc          80248fc        0     1 _end = .
->          80248fc          80248fc        0     1 _image_binary_end = .
->          80248fc          80248fc        0     1 __image_copy_end = .
->          8024900          8024900      198     8 .got
->         8024900          8024900      198     8         <internal>:(.got)
-> Hmmm, for some reason, LLD is putting the GOT after the end tag. Should the
-> SPL even _have_ a GOT?
-
-I don't think so.
-
-Currently RISC-V SPL works in, at least to me, a crazy way. Both proper
-U-Boot and SPL for RISC-V are now compiled with -fpic flags, which means
-GOT relocations could be generated, and we need a GOT for these
-relocations to work.
-
-We don't have any code in SPL to fill the GOT table, but linkers could
-fill it for us if address of the symbol is determinate at link time,
-which covers basically all symbols for a static executable.
-
-But back to the original question, why should we compile SPL with -fpic
-(see arch/riscv/config.mk) in the first place, and thus (maybe[1]) need
-a GOT? In the current way, SPL won't work, either if it's loaded in an
-address differing from CONFIG_SPL_TEXT_BASE, because symbols won't stay
-in the address specified and pre-filled by the linker.
-
-So compiling SPL with -fno-pic sounds more reasonable to me, and though
-I couldn't test it now, it should fix the boot issue with
-starfive_visionfive2_defconfig and ld.lld, too. This would be a huge
-change to RISC-V port, and I think deserves more discussion.
-
-> So at last, here is my workaround:
-> diff --git a/arch/riscv/cpu/u-boot-spl.lds b/arch/riscv/cpu/u-boot-spl.lds
-> index 0717833df55..6e30f2f26dc 100644
-> --- a/arch/riscv/cpu/u-boot-spl.lds
-> +++ b/arch/riscv/cpu/u-boot-spl.lds
-> @@ -33,6 +33,14 @@ SECTIONS
->         } > .spl_mem
->         . = ALIGN(4);
-> 
-> +       .got : {
-> +               __got_start = .;
-> +               *(.got.plt) *(.got)
-> +               __got_end = .;
-> +       } > .spl_mem
-> +
-> +       . = ALIGN(4);
-> +
->         __u_boot_list : {
->                 KEEP(*(SORT(__u_boot_list*)));
->         } > .spl_mem
-> 
-> Explicitly position the GOT the same place the main uboot image keeps it, so
-> it doesn't sneak in somewhere it shouldn't.
-> 
-> Now, I'm sure this is not a proper solution (I note that u-boot-nodtb.bin is
-> still wrong), but I have no idea what a proper solution would be, nor do I
-> really know exactly what is going wrong here at all. But I've found a way to
-> get everything running, and I hope I've found enough that someone who _does_
-> know what they're doing can see the real problem and how to fix it. =)
-> 
-> OK, that's all I've got!
-
-Many thanks for digging into it.
-
-> -- 
-> Nathaniel
-> 
-> Links:
-> ------
-> [1] https://source.denx.de/u-boot/u-boot/-/blob/master/lib/fdtdec.c#L1250
-
-Regards,
-Yao Zi
-
-[1]: Technically for a static binary, we could lower all GOT relocations
-to pcrel ones, and thus it could run anywhere and require no GOT. But
-during my experiment, even building starfive_visionfive2_defconfig with
-ld.bfd still generates a GOT with -fpic in arch/riscv/config.mk changed
-to -fpie, and "la" pseudo-instructions in arch/riscv/start.S replaced
-with "lla". Not sure whether I missed something.
