@@ -4,87 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C50EFCCFA13
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 21:58:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FDE1CCFA13
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 22:10:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B03C783C40;
-	Thu,  6 Nov 2025 22:57:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6DD4A83C0E;
+	Thu,  6 Nov 2025 23:10:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kc1nG7BJ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fz02Bljp";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Qao3/7/3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76DBD83C0C; Thu,  6 Nov 2025 22:57:55 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1204C83C13; Thu,  6 Nov 2025 23:10:52 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1932E83C13
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 22:57:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B2D883C0C
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 23:10:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7c6da42fbd4so53948a34.1
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 13:57:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762466271; x=1763071071; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wYHGgo9+/ggLNjILivjmadyvphPKdECMBcJh1yV5i8s=;
- b=kc1nG7BJSwlyiWWzjaBhvG742sRuNG3wSk1HvK+LKgWslDSGVTh6xacdRPL0lGkoOy
- gQIwuBLYk/mvXbxQqw2gxWdOWlB2SDKQ8lCCcuom6J9g3JfjHDLPvZ568eeBYgVIBwhU
- 6fwhncNJE4Fy/ElAM1lcXgPAw79SHGgS61Ico=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762466271; x=1763071071;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=wYHGgo9+/ggLNjILivjmadyvphPKdECMBcJh1yV5i8s=;
- b=CCASp0+bsfJDvqILsemKL+AtzoZySNLSh5a73UC9Y91Vb0G1wMBjrt+jAoevKBcrdy
- UnTmYQYgYJR0W/52GdTe9RrDxW3GPD/GAFR7r1OfnGxJ8Ftam2Tdm/GAF7i/3x3X2P7t
- z+1enNRKnLVRp/QbZmsKtJ0W7ZiiMUzplbusTBCkBqNPwrlk6AKqvtPufJy5IHRr7e/S
- 1Geadu/VCc6ulTDq89O6SkiX+ZlzQXe6nkV7bhCRKWSjY6MufnrVpBx+OtmLPXeCDu+A
- pkWNxlg2g2w/zYGzaH53UZNx8DNPLrH/9W+OLQhzNS3s8znT0tj4EuvtQDejGYVm1LX3
- AyOQ==
-X-Gm-Message-State: AOJu0Yz8/gpXXYh8eNfCYnCr6skc+2Vj0pW6BBtlbSbCRR9ZwmHfrMXW
- WdCl7UBLfKhBTIpTWR0OtyUwLvugs8Txw0pxM1yo53OVN49Co4xnG3S8+yQlHLokFS0=
-X-Gm-Gg: ASbGncvO8F0pApARJ0Bvcko9FIALIkdygy1xa/4ROrb4VB4zkKUW2dPBzSsFp8iyvkL
- IR0sDSwbpuP2dRjLRr34gC80VKhigYkvsKmPj6qUrEVpvOrTiNxqPOeuOO5QMPnUW0zKMGCM/4N
- bAeWh6ZFqV3NnCv5nSis6g3iTll+lRww5W7xgp8f/yqUDW5l21Qc+Au1rQt+KRAtu5Cw3bTpFLn
- dKg+LOaiRmCj+S7bMITXiv+6NQelaj9t8eWwiPke4MxhlkM1gfhm2QuugG53KHBR3loC1Y6VkGk
- B75v7PzEOIP5NAVosJ5taQu+vIVZQbSoeYzxAfpqtygeS8FezfQO5b4is54GAmt1m58MPgPqIvG
- FcwH/+O1huDD04GeG/5iLCKjVN05Nos7kEEoza+5IB3lemRtxxK6uAi0iaYdKwh+fCvZdyiQzU6
- UjuK29VkVLXG1elI2JMa8V6vJR2BSIxYEH9k7s2HjoiXXu2oCo
-X-Google-Smtp-Source: AGHT+IEJGxvvQTK71qXit81lzq4o7vdq+WREdoPTobPo+LA5MVwF9Qg9aEIxZ6LIpjzBKeuFhEmJWw==
-X-Received: by 2002:a05:6830:2b0b:b0:741:aa58:d500 with SMTP id
- 46e09a7af769-7c6efcf6855mr867091a34.3.1762466270839; 
- Thu, 06 Nov 2025 13:57:50 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f0f0a715sm370514a34.4.2025.11.06.13.57.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 13:57:50 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut@mailbox.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Sam Edwards <cfsworks@gmail.com>, Simon Glass <sjg@chromium.org>
-In-Reply-To: <20251030212359.12824-1-marek.vasut@mailbox.org>
-References: <20251030212359.12824-1-marek.vasut@mailbox.org>
-Subject: Re: [PATCH v4 1/2] ARM: bootm: Add support for starting Linux
- through OPTEE-OS on ARMv7a
-Message-Id: <176246626975.3129497.13093902945137097601.b4-ty@konsulko.com>
-Date: Thu, 06 Nov 2025 15:57:49 -0600
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d2bx52BN5z9tkB;
+ Thu,  6 Nov 2025 23:10:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762467049;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=R5nsUKOmN6DVX5DQBwluKF6MESXnK51exYSVBRQYpc8=;
+ b=fz02BljpmRVJ9JgqRe7KEZX4BUEUgcz5Np14e+czj6PLLM+8ax1WhZl6LCllYDNrJ5VeYy
+ gezpT6mKAVDvarVoQkKOoDMcv1pc5ad8Vs1vj6uOBnoF1z6yNn6h5+wPDAzAwCrSurj/uF
+ G83YkaO7c3REOac4ZAdi7N76iom+4axNffH+903VGl4lwCloZQpZi7J7mCmfEhiXmiBRHw
+ 14GUwV4qlxvvbLh8Pd0eFQcBRBeYsdonmAFpfa6G+DopBxh68bpnMCWu8aYS+oIkhtyn0o
+ syPwAwe0ce35yJUrghfs/c1HYMa1rcsaTCjGiXjyqYU2bGHTV6Tjwp/HXbBPGw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762467047;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=R5nsUKOmN6DVX5DQBwluKF6MESXnK51exYSVBRQYpc8=;
+ b=Qao3/7/3L+bTmXoZRpiDqVQfURyp4HU2FaQqEjF7P4FQTO9LL3TmBA23qXov+GuiMv5mSK
+ wCsxmAsv63SV8GSbwtBl5V45hiSyXmp9DBMarL6Xi8Dmgx7HsefnYtcmCX88vw8bMqWsRG
+ uGnlunB/Evzo9vNDoV+roXN/m5FNmZKEBOVEoCEWWuK+stjWFG1FLhyYTBdyTyworQ/3K9
+ 9Joa/8/ou8hDBaGoc+htd/ttJIdkqCUdPLqI3oaTT0vMidrUbKVJ52s0mE+vKY47Ciccw5
+ 01IeSiCLhRCvf5CgDtCFcKGyU739SMYL0RQlybDMpvqs5qr2yiRNG4RLKErknA==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Hai Pham <hai.pham.ud@renesas.com>, Huy Bui <huy.bui.wm@renesas.com>,
+ Tam Nguyen <tam.nguyen.xa@renesas.com>,
+ Thanh Quan <thanh.quan.xn@renesas.com>
+Subject: [PULL] u-boot-sh/master
+Date: Thu,  6 Nov 2025 23:05:47 +0100
+Message-ID: <20251106221010.373101-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 6cb73361f4485eaa584
+X-MBO-RS-META: 6as5zjz7q3kg9hrzdcr7nc5ot8b4rjpm
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,27 +84,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 30 Oct 2025 22:23:49 +0100, Marek Vasut wrote:
+This is mostly R-Car Gen5 drivers for GPIO, pin control, RSwitch3
+and matching PHYs. There is also a few trivial clean ups for arch
+headers and configs. Board code, DT and clock are coming in follow
+up PR.
 
-> Add support for jumping to Linux kernel through OPTEE-OS on ARMv7a.
-> This is only supported if U-Boot runs in PL1 secure. This change adds
-> two components, one is fitImage OPTEE-OS loadable handler, which makes
-> a note of OPTEE-OS being loaded and stores the load address for later
-> jump to it. The second part is the actual jump to Linux through OPTEE-OS.
-> The jump through OPTEE-OS requires set up of multiple CPU registers, r1
-> and r2 are passed through, r0 and r3 have to be set to 0, lr is set to
-> Linux kernel entry point. This setup is done by new assembler function
-> boot_jump_linux_via_optee().
-> 
-> [...]
+The following changes since commit c488907f91ec90bb6a93803b1db53e24b93b52ea:
 
-Applied to u-boot/master, thanks!
+  Invalidate cached FAT device upon boot error (2025-11-06 08:31:34 -0600)
 
-[1/2] ARM: bootm: Add support for starting Linux through OPTEE-OS on ARMv7a
-      commit: 20861863eb3010581b12e9a77eb7958460edaa82
-[2/2] spl: fit: Add ability to jump to Linux via OPTEE-OS on ARMv7a
-      commit: be0e9ac7c8a141fbc52f658fbfdd96cf2c27d0de
--- 
-Tom
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
 
+for you to fetch changes up to 057b1f8df9b5f6dced7f7db353a175744bf26031:
+
+  arm64: renesas: Clean up default boot command (2025-11-06 20:13:52 +0100)
+
+----------------------------------------------------------------
+Hai Pham (4):
+      pinctrl: renesas: Show bit position in config write
+      pinctrl: renesas: Move drive strength configuration into sh_pfc_soc_operations
+      arm64: renesas: Make CONFIG_SYS_LOAD_ADDR family-specific
+      arm64: renesas: Use reset macro from common header
+
+Huy Bui (2):
+      gpio: renesas: Add R-Car Gen5 support
+      pinctrl: renesas: Add initial R8A78000 R-Car X5H PFC tables
+
+Marek Vasut (20):
+      net: rswitch: Switch indent from spaces to tabs
+      net: rswitch: Drop unused macros
+      net: rswitch: Initialize RX DMA descriptor .die_dt field to DT_FEMPTY
+      net: rswitch: Use bulk clock operations
+      net: rswitch: Add support for split MII and SerDes
+      net: rswitch: Parametize COMA, ETHA, GWCA offsets
+      net: rswitch: Parametrize port count
+      net: rswitch: Parametrize forwarding engine CSD register offset
+      net: rswitch: Inline FWRO, CARO, GWRO, TARO, RMRO macros
+      net: rswitch: Parametrize GWDCBAC, FWPBFCSDC, CABPIRM register offsets
+      net: rswitch: Parametrize MPIC_MDC_CLK_SET clock setting
+      net: rswitch: Add Renesas R-Car X5H Ethernet Switch3 support
+      gpio: renesas: Drop pfc_offset parsing
+      gpio: renesas: Drop unused register macros
+      gpio: renesas: Wrap quirks in struct rcar_gpio_data
+      gpio: renesas: Access INDT, POSNEG, INEN registers via match data offsets
+      pinctrl: renesas: Align Kconfig entry indent
+      arm64: renesas: Drop encoded file name from R-Car Gen3/Gen4 header
+      arm64: renesas: Use BIT() macro in R-Car Gen3 header
+      arm64: renesas: Clean up default boot command
+
+Tam Nguyen (1):
+      phy: renesas: Add PCS driver for Renesas R-Car X5H R8A78000
+
+Thanh Quan (1):
+      phy: renesas: Add Multi-Protocol PHY driver for R-Car X5H
+
+ .../arm/mach-renesas/include/mach/rcar-gen3-base.h |   12 +-
+ .../arm/mach-renesas/include/mach/rcar-gen4-base.h |    4 +-
+ arch/arm/mach-renesas/psci-rcar64.c                |    5 +-
+ board/renesas/common/gen4-common.c                 |    8 -
+ configs/hihope_rzg2_defconfig                      |    2 +-
+ configs/r8a77970_eagle_defconfig                   |    2 +-
+ configs/r8a77980_condor_defconfig                  |    2 +-
+ configs/r8a77990_ebisu_defconfig                   |    2 +-
+ configs/r8a77995_draak_defconfig                   |    2 +-
+ configs/r8a779a0_falcon_defconfig                  |    2 +-
+ configs/r8a779f0_spider_defconfig                  |    2 +-
+ configs/r8a779f4_s4sk_defconfig                    |    2 +-
+ configs/r8a779g0_whitehawk_defconfig               |    2 +-
+ configs/r8a779h0_grayhawk_defconfig                |    2 +-
+ configs/rcar3_salvator-x_defconfig                 |    2 +-
+ configs/rcar3_ulcb_defconfig                       |    2 +-
+ configs/renesas_rcar3.config                       |    1 +
+ configs/renesas_rcar4.config                       |    1 +
+ configs/renesas_rcar64.config                      |    1 -
+ configs/silinux_ek874_defconfig                    |    2 +-
+ drivers/gpio/gpio-rcar.c                           |   84 +-
+ drivers/net/Kconfig                                |    5 +-
+ drivers/net/rswitch.c                              |  441 +-
+ drivers/phy/renesas/Kconfig                        |   12 +
+ drivers/phy/renesas/Makefile                       |    2 +
+ drivers/phy/renesas/r8a78000-ether-pcs.c           |  424 ++
+ drivers/phy/renesas/r8a78000-mp-phy.c              |  225 +
+ drivers/pinctrl/renesas/Kconfig                    |   38 +-
+ drivers/pinctrl/renesas/Makefile                   |    1 +
+ drivers/pinctrl/renesas/pfc-r8a7790.c              |    1 +
+ drivers/pinctrl/renesas/pfc-r8a7791.c              |    1 +
+ drivers/pinctrl/renesas/pfc-r8a7792.c              |    1 +
+ drivers/pinctrl/renesas/pfc-r8a7794.c              |    1 +
+ drivers/pinctrl/renesas/pfc-r8a77951.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a7796.c              |    1 +
+ drivers/pinctrl/renesas/pfc-r8a77965.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a77970.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a77980.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a77990.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a77995.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a779a0.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a779f0.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a779g0.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a779h0.c             |    1 +
+ drivers/pinctrl/renesas/pfc-r8a78000.c             | 5254 ++++++++++++++++++++
+ drivers/pinctrl/renesas/pfc.c                      |   24 +-
+ drivers/pinctrl/renesas/sh_pfc.h                   |    5 +
+ 47 files changed, 6318 insertions(+), 270 deletions(-)
+ create mode 100644 drivers/phy/renesas/r8a78000-ether-pcs.c
+ create mode 100644 drivers/phy/renesas/r8a78000-mp-phy.c
+ create mode 100644 drivers/pinctrl/renesas/pfc-r8a78000.c
