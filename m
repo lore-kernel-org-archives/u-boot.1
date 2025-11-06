@@ -4,89 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E28E8CCFA13
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 19:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBEBECCFA13
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 21:08:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A04183C08;
-	Thu,  6 Nov 2025 20:35:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D72E83C0E;
+	Thu,  6 Nov 2025 22:08:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IlbsnbMZ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uKq4XzTg";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nt0y19Eo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D168C83C0B; Thu,  6 Nov 2025 20:35:34 +0100 (CET)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2974883C11; Thu,  6 Nov 2025 22:08:37 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC12583C02
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 20:35:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A30383A15
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 22:08:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-656b8ca52e8so548665eaf.3
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 11:35:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762457730; x=1763062530; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=a20OL1n8RWtDVnUfGMSZKFS1GpC/C9+70ylc+ECCbFM=;
- b=IlbsnbMZUOL3ByvfYASxrsMFgoK8c2XKF9ByhDPKh8yk50rTmZgfjN3vxb+cVU/YxJ
- KluIhwZOMGrLswMK6XDGuoRWI7exBIoPTrnxcTmgnZ9FXRskYpDiz9FE+bj67i/yfWHL
- GBqUpEZmzsy3RNxu9a77Gy60Ros/18Sn5Ft20=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762457730; x=1763062530;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=a20OL1n8RWtDVnUfGMSZKFS1GpC/C9+70ylc+ECCbFM=;
- b=lEilBVbzYRQsPCYRCl4Z7GSdZPNO6sskjAtX5a2jR5g37hYibWl70hSOsYIKW6DFEC
- 0u2rn8aQNGa5sbhfFTTBCq9Q3gih5esDyojFWRO1q3fFGYGsQ/PhKUr3qecKHOKuJHHn
- 9lBIG4IuADyE8hUiXP9zlcX+Njo6jUA4KSrxT3+1lpZNfmH2XE4s+YmjnqLfm87pOQQj
- j7LeOMMVArshC/+jftOcjIF0boElMrDdxDXeJArc/zLGi18AGYRGyuoPRqI1a25q9n3D
- riNvaCzAdCEeLnTTHqEfGFeDiSsAbZXQpenHx6E0czg6AllUeLlI2dDfGcj6PmDHvbiu
- qWlQ==
-X-Gm-Message-State: AOJu0YxK7/Pkv+U4L84GwM3X0lQcNqfEOdk8KoNiJ4m9C+D4rQfFwQl9
- Sc9wYluVqigZFpGn/FPvLV9KiIekpHCCDBVTaz55evkU5NaLSu6Rz1jC8ObX9SmaVsWClHOU4KV
- 4dQcAaRiuVg==
-X-Gm-Gg: ASbGncsJsRWc0HjRS91WKkJ1NHZoCaydR4Oy8tFF4YAO+8319o9wx0uyxH70akTuS4Q
- oJe/7XgCq84/cEGho2wy/C34Ppj+j0/txJtBDKnEbyV+J5LU4GBM3xjx8Hp1ws0IU82KxjJ4Fa8
- 2fZoFJJj9jmiK1OePh8vZWJhSSN8Cusv1ZXhMHzc2wM9/iyn/WcYMxR+G/RT+ht/76fGANQo69E
- jLUSexaYqyN27f+jmvs5EkRL3v2bYm7EDZd1DokluNglqzyGcGRSVJ4WtYR4ajDHoO7ni4x7Rtu
- 1S7R4DLl7+gZv0m+N3LO3IbjrLAMWyalqgko/fzIa1IumQ+0rR/PCxmEYnGnUciU/mL1qCDxgm8
- 8WHss63MA+4gzBkBm+CmdDTiRBrc+zZAwOaK4jM0AeL63THyfC1tpeV5HkYUjjtMKM020GWxtik
- 2X2+fACdtBepofd1kzKyHScjfv3N6AK0wnKfMRs2hQ5SiV6QRcjw==
-X-Google-Smtp-Source: AGHT+IFM8rzgyKAmr+jfys11kDHxcsI2vLdMi4Pitjlaaa655UBGM7qq3AooXsXNiCu9pv2kQqczUg==
-X-Received: by 2002:a05:6820:80c3:b0:656:84e7:8fde with SMTP id
- 006d021491bc7-656cddc984amr442217eaf.3.1762457730425; 
- Thu, 06 Nov 2025 11:35:30 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-656c56f9f35sm1249755eaf.4.2025.11.06.11.35.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 11:35:29 -0800 (PST)
-Date: Thu, 6 Nov 2025 13:35:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Philippe Schenker <dev@pschenker.ch>
-Cc: u-boot@lists.denx.de, stefan@embear.ch,
- Philippe Schenker <philippe.schenker@impulsing.ch>,
- Andrew Davis <afd@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Beleswar Padhi <b-padhi@ti.com>, Daniel Schultz <d.schultz@phytec.de>,
- Hari Nagalla <hnagalla@ti.com>, Judith Mendez <jm@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>
-Subject: Re: [PATCH v1 0/6] remoteproc: k3-r5: Build fixes and security
- improvements
-Message-ID: <20251106193527.GA3087996@bill-the-cat>
-References: <20251023094631.16742-1-dev@pschenker.ch>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4d2ZYG0BQXz9v75;
+ Thu,  6 Nov 2025 22:08:34 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762463314;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=PcH+fUB7ndmiXxipSCg/zTI2Z0PKJ50Xa8zrC24ZzAY=;
+ b=uKq4XzTgWyDl8HjaJeKzCIwF7ELvfJQ+urcbqUdOXfbsfc3MqOOkviFw2+4VoZq9cxyOP2
+ LSY1ugi3tzvWKthR7Ir1853QNtvWxjqRmNbO09yd8mFBAK4iaX5j/Zg+0ws9QoAm/QCbQL
+ uZqHo9/wzOctClZA0mJcfbtjHWTLOMJpGeZnAWRvOTwVUukioWD0XmkCcNioTC2MRtOH+l
+ eSDIHJpLRdFD/e1PZUrJXMSMl+Ej8xTH/iRSmdNNFXCvaICFD/0r+FIUKktACCzcsr6835
+ g/OcGyUnZQj8nPFwdEZuU9ZQJya5II1g8LBOHQDyZFdne7Lpv2JweCSf+eys4g==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=nt0y19Eo;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762463312;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=PcH+fUB7ndmiXxipSCg/zTI2Z0PKJ50Xa8zrC24ZzAY=;
+ b=nt0y19EoPn9tiKO6W/sQTZgmSGWbYBmOqaU46dJoO88MUuQ0FGHvZ5ywq3Txbt2urFxsDw
+ PbQ3lEfelpomqEN20KrbIP8XJiMS36srxC9TN3PgXMpuFaWSGqGZzvx8lIEBvEvWpFj5KC
+ IWKMnb2U81LRzIhtF87+DDwa1UwclNR7zP/4+mhoKxEZfnpf+ahQQ9CQnDkVyq94B/Vz0b
+ Svr0qGPcjhslkeehV32Npp3s49pMm2nxgHF04EY75NMUQE3YNRquITx9M24hD5KNdR3d8W
+ IIOiEljJKObQj6aT44Ye57EGeE3Zl8o1qJWhjvnXg8XPHXhDU/WciQsB4w0r9w==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot
+ augmented DT if DEVICE_TREE_DEBUG=1
+Date: Thu,  6 Nov 2025 22:08:18 +0100
+Message-ID: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1yZjOaogb8L+dmZA"
-Content-Disposition: inline
-In-Reply-To: <20251023094631.16742-1-dev@pschenker.ch>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: cbb0de7bb60adc1688b
+X-MBO-RS-META: ypdbkfd3xc9cd6xdpeou7supmstj3cm1
+X-Rspamd-Queue-Id: 4d2ZYG0BQXz9v75
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,63 +94,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT and
+DT with U-Boot extras, to show how much does the U-Boot DT differ from
+the base DT. This is particularly useful together with OF_UPSTREAM, to
+minimize the diff between upstream DTs and U-Boot DTs.
 
---1yZjOaogb8L+dmZA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Example usage:
+$ make r8a779g3_sparrowhawk_defconfig && make DEVICE_TREE_DEBUG=1
+$ cat ./dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dtb.diff
 
-On Thu, Oct 23, 2025 at 11:46:18AM +0200, Philippe Schenker wrote:
+This still has a downside. Even 'dtc -I dts -O dts ...' applied on
+base DT and U-Boot augmented DT can produce different phandle IDs
+for the same node in those two DTs, which results in a lot of noise
+in the resulting diff. The only way I can think of is to patch DTC
+to emit full paths in those phandles instead, something like a
+phandle = <&{/full/path/to/remote/end} ...>;
 
-> From: Philippe Schenker <philippe.schenker@impulsing.ch>
->=20
->=20
-> This series fixes compilation errors when building for R5 cores and
-> addresses a security issue where authenticated images were not being
-> used correctly.
->=20
-> Patch 1: Cosmetic removal of duplicate code
->=20
-> Patches 2-3: Fix build errors caused by type mismatches between
-> function signatures and the types used in R5 builds.
->=20
-> Patches 4-5: fix a bug where ti_secure_image_post_process() relocates
-> images during authentication, but callers were still using the original
-> unverified addresses.
->=20
-> Patch 6: Implements is_running operation to allow querying R5F core statu=
-s.
->=20
-> Note: If preferred, I can split this series.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Sam Edwards <cfsworks@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ scripts/Makefile.lib | 24 +++++++++++++++++++++++-
+ 1 file changed, 23 insertions(+), 1 deletion(-)
 
-With the series applied, I see warnings now on:
-j721e_beagleboneai64_r5 am62x_beagleplay_r5 am67a_beagley_ai_r5
-phycore_am62ax_r5 phycore_am62ax_r5_ethboot phycore_am62ax_r5_usbdfu
-phycore_am62x_r5 phycore_am62x_r5_ethboot phycore_am62x_r5_usbdfu
-phycore_am64x_r5 am62ax_evm_r5 am62dx_evm_r5 am62px_evm_r5
-am62px_evm_r5_ethboot am62x_evm_r5 am62x_evm_r5_ethboot am62x_lpsk_r5
-am64x_evm_r5 am65x_evm_r5 am65x_evm_r5_usbdfu am65x_evm_r5_usbmsc
-j7200_evm_r5 j721e_evm_r5 j721e_sk_r5 am68_sk_r5 am68_sk_r5_ethboot
-j721s2_evm_r5 j722s_evm_r5 j722s_evm_r5_ethboot am69_sk_r5
-am69_sk_r5_ethboot j742s2_evm_r5 j784s4_evm_r5 verdin-am62_r5
-verdin-am62p_r5
-like:
-arch/arm/mach-k3/security.c:122:20: error: cast to pointer from integer of =
-different size [-Werror=3Dint-to-pointer-cast]
-   122 |         *p_image =3D (void *)image_addr;
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 5db2fbc418a..2d8bf3c04f4 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -386,10 +386,31 @@ ifeq ($(CONFIG_OF_LIBFDT_OVERLAY),y)
+ DTC_FLAGS += -@
+ endif
+ 
++# In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT and
++# DT with U-Boot extras, to show how much does the U-Boot DT differ from
++# the base DT. This is particularly useful together with OF_UPSTREAM, to
++# minimize the diff between upstream DTs and U-Boot DTs.
++ifdef DEVICE_TREE_DEBUG
++cmd_dtc_diff = \
++	$(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtn-tmp) $< ; \
++	$(DTC) -s -O dts -o $@.clean.dts -b 0 \
++		-i $(dir $<) $(DTC_FLAGS) $(dtn-tmp) || \
++		(echo "Check $(shell pwd)/$< for errors" && false); \
++	$(DTC) -s -O dts -o $@.full.dts -b 0 \
++		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) $(dtc-tmp) || \
++		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false); \
++	(diff -Naru $@.clean.dts $@.full.dts > $@.diff || true)
++
++dtn-tmp = $(subst $(comma),_,$(dot-target).dtn.tmp)
++else
++cmd_dtc_diff =
++endif
++
+ quiet_cmd_dtc = DTC     $@
+ # Modified for U-Boot
+ # Bring in any U-Boot-specific include at the end of the file
+ # And finally any custom .dtsi fragments specified with CONFIG_DEVICE_TREE_INCLUDES
++
+ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+ 	(cat $< > $(pre-tmp)); \
+ 	$(foreach f,$(subst $(quote),,$(dtsi_include_list) $(CONFIG_DEVICE_TREE_INCLUDES)), \
+@@ -400,7 +421,8 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+ 		-d $(depfile).dtc.tmp $(dtc-tmp) || \
+ 		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
+ 		; \
+-	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile)
++	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile) ; \
++	$(cmd_dtc_diff)
+ 
+ dtsi_include_list_deps := $(addprefix $(u_boot_dtsi_loc),$(subst $(quote),,$(dtsi_include_list)))
+ 
+-- 
+2.51.0
 
---=20
-Tom
-
---1yZjOaogb8L+dmZA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQz4fAAKCRAr4qD1Cr/k
-CrmLAQCm8/iJ2+jbtYP9K2kmfWtJG6K07SZP5Wxh9joX9n5luAD8CjME5KeW3w/r
-LNN81m1Ab7agL+PSWFW2JjUGweV19Q8=
-=0oRY
------END PGP SIGNATURE-----
-
---1yZjOaogb8L+dmZA--
