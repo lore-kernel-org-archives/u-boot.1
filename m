@@ -4,55 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C92BFCCFA05
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 12:34:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3A64CCFA03
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 13:09:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A80983B85;
-	Thu,  6 Nov 2025 13:34:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=pschenker.ch
+	by phobos.denx.de (Postfix) with ESMTP id DA51883B87;
+	Thu,  6 Nov 2025 14:09:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="njLTQoJB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iumRksfr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEC7B83B86; Thu,  6 Nov 2025 13:34:16 +0100 (CET)
-Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::8fa9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 57F1D83B8A; Thu,  6 Nov 2025 14:09:13 +0100 (CET)
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75D5183B81
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 13:34:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CBCF83B85
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 14:09:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=pschenker.ch
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dev@pschenker.ch
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d2M7p11drz32P;
- Thu,  6 Nov 2025 13:34:14 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pschenker.ch;
- s=20220412; t=1762432453;
- bh=FTlxLSK8hFA88mkPvwR1R/pbxinBVX/b/FCap4tjXdQ=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=njLTQoJB8LwoiUljRxv5UThXwliJnDyo1dW4WR7RZh8/y/8hY+72VbGKnPDXtwlOH
- kjlkMA60oiQKCUQ2OC11j7dD7juRvR7CfFKa9SoaTwJgEsOeFR6xI0/AmxqMOf950l
- z/hRZC3GpfN6BniCPY0hkheENst0JJW/zSJB9Rzk=
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d2M7n44JQzBbG; Thu,  6 Nov 2025 13:34:13 +0100 (CET)
-Message-ID: <3fbc597ddb07590d36498ca7993df524c002e450.camel@pschenker.ch>
-Subject: Re: [PATCH v1 4/6] mach-k3: security: Propagate verified image addr
-From: Philippe Schenker <dev@pschenker.ch>
-To: Andrew Davis <afd@ti.com>, u-boot@lists.denx.de
-Cc: stefan@embear.ch, Tom Rini <trini@konsulko.com>
-Date: Thu, 06 Nov 2025 13:33:35 +0100
-In-Reply-To: <f499c3ea-72ce-4698-91d2-b10aa8c438bf@ti.com>
-References: <20251023094631.16742-1-dev@pschenker.ch>
- <20251023094631.16742-5-dev@pschenker.ch>
- <f499c3ea-72ce-4698-91d2-b10aa8c438bf@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.1 
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-63cf0df1abbso881461d50.2
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 05:09:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1762434549; x=1763039349; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sqAs5BScSPndH3II3LN8n2VbtQRbh6MVpjhSHp+Bxow=;
+ b=iumRksfrO+676REraNs9zPkr1OdMucWFlzwOkKj8t/Cl6OaNU5Sj7Ki7W/plYUaSuC
+ OOebF7aA8smCIAUQk5wSmsyNrZk3j8xPeGylyz9KFUv2T2gjdZiXDVaoX+ag8kJPJLy+
+ JJxDOdjqpcw8Si/HHPBnPV6aaUfH3Etxd7K9S4wa6myQBiROb3fSnXXmDwNb6D/LBbnD
+ P2L2tvnt0bhZgd1EcyaSuN9mNeJSmpVNhhLPVGQBWCqchENvVod103Avz1zmGL3qbmj6
+ X1M2GlpykC4eqJgHScDFFWhqexa/c50F2jQG7qEoA3ACGEs6lchgnkaJn2yzVQHCcRBw
+ Brlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762434549; x=1763039349;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sqAs5BScSPndH3II3LN8n2VbtQRbh6MVpjhSHp+Bxow=;
+ b=g7R0xjlwV4QFUig0VtQ4OJZc2wZUiqgAkXbVmdLDQTl5Z0ICC8p5gxpM/8X6BTFotb
+ rLATCPBQ/LhbRri7U1N7PF81P/lKvMB90m+gagEwvggUYWZWZlzr4nKxH/w/tkPGcX0Z
+ +ePef7zguti6IAIQ4W06GkqgRCh4DjvPmGAE+EkQRi9mRWQcyr8TBz/zM/vRjEUjtd5z
+ 0gjpekNb2kFINZSisnY73N9freiptxRZIiZH65O8WHCodJn+cP17+eXzaQcVdVN/IjrY
+ UDvjbArlJUTeXrkxY5C/m1O0fnTNawTbTKLa3EA+XI+5K2HgHPt7SOeS1+H2n2ukxPJN
+ 0eRg==
+X-Gm-Message-State: AOJu0Yzelxzy8djCk18uHnvSX/mjN9frObB9si/G/+IRdvMb+1dHn46P
+ eelkNb9rtQUNB4d/C9kqi1d+mJIe50EP4/8hbgLDYVKj50N6JvGp9YvoYd52fWYM440Mig8QDfL
+ kQBeLp2kBtHrJV34tkFw5XTD/M+cSCveDAZGvH5MZGll0yLWA0w+uMPoabw==
+X-Gm-Gg: ASbGnctRA/JVtvllGsClF+wB+sY24TfgBdENLn1uz5ZVqOuOmdQqh9ZBBFCm57h0zJ+
+ I/KUPl9qEAZsOPywCuKtiVbwHagfMLWDFjJQaBCnWeTEh4+2g/oJmhNvk6yEjrr25B75EXqyYql
+ FiTPc5pBIcdsKITpL57lmKa4ui9Ns65ydHZE03FI1pS3iUlPTGXPGhOuSzgKssqS+QldMQnr4kJ
+ BM2yvPQfngIHWhDA1bLJkrJyuAy/JBDppLLFfR6WLvHQl7lbeDQShZPrllSTO1dv/GnuqwMqwXC
+ 0HTpO7+O6d2Q/8GbYsPNJlC8vziIIDH8+GW5pwekEA==
+X-Google-Smtp-Source: AGHT+IFZRUgwAMJXvuk6bhH6uhsAKthZ9gqNfxGS12VNEzzkbak3MPZ81+aKC4h40bWG8HfKD8u8sNEcaye5N9rTG1E=
+X-Received: by 2002:a05:690e:418d:b0:63f:abf6:1a7 with SMTP id
+ 956f58d0204a3-63fd34b45demr5092707d50.4.1762434548837; Thu, 06 Nov 2025
+ 05:09:08 -0800 (PST)
 MIME-Version: 1.0
-X-Infomaniak-Routing: alpha
+References: <20251104214804.18043-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251104214804.18043-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 6 Nov 2025 15:08:32 +0200
+X-Gm-Features: AWmQ_bkD1X-2CPwZoxiQWp3YCn5MIgjpFjbKyXtysBPt5Mr7M3dYTkXbVI4DN6c
+Message-ID: <CAC_iWjJFs3xBn5CZx-9iRwQR2RgdG9=gz0fN5F0mOjg7=S7VNQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: typo 'mange' in efi_net.c
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,60 +91,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 4 Nov 2025 at 23:48, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> %s/mange/manage/
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_loader/efi_net.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+> index b8a6e08ba8e..0f8a851e3f2 100644
+> --- a/lib/efi_loader/efi_net.c
+> +++ b/lib/efi_loader/efi_net.c
+> @@ -372,7 +372,7 @@ out:
+>  }
+>
+>  /*
+> - * efi_net_receive_filters() - mange multicast receive filters
+> + * efi_net_receive_filters() - manage multicast receive filters
+>   *
+>   * This function implements the ReceiveFilters service of the
+>   * EFI_SIMPLE_NETWORK_PROTOCOL. See the Unified Extensible Firmware Interface
+> --
+> 2.51.0
+>
 
-
-On Thu, 2025-10-23 at 09:24 -0500, Andrew Davis wrote:
-> On 10/23/25 4:46 AM, Philippe Schenker wrote:
-> > From: Philippe Schenker <philippe.schenker@impulsing.ch>
-> >=20
-> > The ti_secure_image_check() function may relocate the image during
-> > authentication, updating image_addr to point to the verified
-> > location.
-> > The caller was not updated with this new address, causing it to
-> > reference the original unverified location.
-> >=20
-> > Update p_image with the verified image address after authentication
-> > to ensure subsequent operations use the correct location.
-> >=20
-> > Signed-off-by: Philippe Schenker <philippe.schenker@impulsing.ch>
-> > ---
->=20
-> Seems reasonable,
->=20
-> Acked-by: Andrew Davis <afd@ti.com>
->=20
-> BTW, did you actually run into an issue with having a binary moved
-> by the authentication, or was this found some other way? Normally
-> binaries don't move (but they can, so this is still valid).
-
-Thanks for your acked-by's! Sorry forgot to answer and just now saw it
-again. Yes I ran into an issue where I have a signed elf file. The step
-of loading the elf file was failing because the pointer still pointing
-to the signature.
-
-Philippe
-
->=20
-> >=20
-> > =C2=A0 arch/arm/mach-k3/security.c | 2 ++
-> > =C2=A0 1 file changed, 2 insertions(+)
-> >=20
-> > diff --git a/arch/arm/mach-k3/security.c b/arch/arm/mach-
-> > k3/security.c
-> > index 3468a370a455..9255505a7944 100644
-> > --- a/arch/arm/mach-k3/security.c
-> > +++ b/arch/arm/mach-k3/security.c
-> > @@ -119,6 +119,8 @@ void ti_secure_image_post_process(void
-> > **p_image, size_t *p_size)
-> > =C2=A0=C2=A0 */
-> > =C2=A0=C2=A0 *p_size =3D image_size;
-> > =C2=A0=20
-> > + *p_image =3D (void *)image_addr;
-> > +
-> > =C2=A0=C2=A0 /*
-> > =C2=A0=C2=A0 * Output notification of successful authentication to re-a=
-ssure
-> > the
-> > =C2=A0=C2=A0 * user that the secure code is being processed as expected=
-.
-> > However
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
