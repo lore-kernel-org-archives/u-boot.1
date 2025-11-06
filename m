@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FCBBCCFA13
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 22:14:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 922C1CCFA13
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 22:47:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7534983C0C;
-	Thu,  6 Nov 2025 23:14:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B7A5483B0E;
+	Thu,  6 Nov 2025 23:47:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uct8stK8";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="aspteKzP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2196E83C0E; Thu,  6 Nov 2025 23:14:01 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 1958183C51; Thu,  6 Nov 2025 18:01:45 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F379783BA1
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 23:13:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 018CA83BDD
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 18:01:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-4500b2ec59eso62346b6e.1
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 14:13:58 -0800 (PST)
+ spf=none smtp.mailfrom=admin@hifiphile.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-47117f92e32so10146225e9.1
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 09:01:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762467238; x=1763072038; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=s7kHm1H8Z3QUtI1dTrlqicehFdZqCcvXWAb5xXglo2A=;
- b=uct8stK8sRcX3qPb0INto5uAdcmI8Ey2B2zu/ZXqKv+dHDGk0NML8B7OgRFaq27ex1
- npKYqUnwch4YRT5BeAFcbT4UKWiOTjAPNudAvaVU+3+yfGatlvfWgC/UfZ2jEX1/ApzN
- Zn2B6EgVKUL2LOBqOxQ8MsudUxotpiTJmxdrw=
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1762448499; x=1763053299;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+ewmpIiOxmkDa6VyEV7TtFSD5FesY2Aoh6a2lv+Y1Y8=;
+ b=aspteKzPJXrRrKttrp0jqowasJc0d7wsDQA7mzdf8Ry8zSExd0njF6Vc8tYe7M5cY9
+ UXc+NwiecjaqzxaBlDvtHTQEXX4PrZxjVA04C3xAHcasvuEnw6NpEiWylSuFYrZKuHyW
+ yWYcCk7GkNiAJIhgbtslcSSeqjm4lOIb2sv9VG5r2jsfWXgTrfcKWEanqBsezmXHAg8+
+ KrGkuDR0V8HiEzT0xII+oW1crpQttaTzsCy2X3IRF/cXMIPT5acSSBtA46tHJ8cpHmy8
+ 2BBaZ75HR78fyY+wUYxd8VOlZ8K2ala1evgbUIkz7J7hg2mTLGDXQg1oUYgpjb5lLyvx
+ vlwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762467238; x=1763072038;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=s7kHm1H8Z3QUtI1dTrlqicehFdZqCcvXWAb5xXglo2A=;
- b=PGvo1hinjpao0EB14klJWaZykAlAcd+dM8/ruaSmFqCfyTrRk8CE3UewCj18Su6yiz
- OPvi/8nYP8RNPt3hBDEDo/ATMHKQJWTqgGSU8iTiq1/SrldAywgl8ZB8TL98c/4sP2CT
- IxWyl5P9YGdRLcLMoyTXk7raTxKnC92g91J/uOpWRxm5qUa/aVfi1azFbVu6V6pVe5VU
- xkGNp+OTuHSwATmEjsTHjUAzSdDTj31qklJfBvfSmi2pVTcFuxLrLnNdG+G47T2/Ztjq
- riy5YwHzr/OHuyfLDiNDTlnAq+NALKaPFhGX3LfHYIxljot2P6QTHRJXoCEGqjXNZRV5
- 4IUg==
-X-Gm-Message-State: AOJu0YzyywNDNjvBCrjYCPwCMjt4wvededdTbhii02H2rSDC/wrVsScO
- 67FS6LLq3J3IX+T+ouT6MH5giSJN8gZ1aO0jVVCZW98xVZSbTulgkE0lVBxiwbMYfdD0x9DPlbH
- G3X3Vlvy+kA==
-X-Gm-Gg: ASbGncvVetnFw80JJgbIa24vRJj/OPNrGNvcIoSYtVV2IzTKXrmCikKSloAF5qSx60+
- xb4gYUkZxJJsKoMmMCA2U4QaYFDgSLPhYHrz8d6B3YMbnqOTtIcg9z6AT7Ib8M1XhyumcoqRq5+
- Jl1G6YkWhhyr+50rZC41EH+veAVHMqlDgShcXElzkOTi8f9fiFDaaUCVln/h6xFlMSvuDSlKvbR
- 5BPCcyxKw35nsDpQ8O0Zi/76NXLClF6MBF5uGQFJ9c9IsiUH3P919P5cERQyat7HENQuB1x8/VX
- wL3N4FUGLCgI9pEtHHeWev0/oHtJxJ8CvLBjN/5UYgc69wSpoLzwlCrt/fcVL7M8U1CbFNIk0bd
- wkVQs1EgQyRnciZQjFrRJAMKoH7qY6euNykgtBhODrHYdaqpDg3CJqHXflug8psGp2nuFJoLLi/
- KCQKiSdlbih+TcSnr3ZRJrSDVjipJsXRpyfFHs9TU=
-X-Google-Smtp-Source: AGHT+IG646Z0njm8y5QbxIqxNm0j7DY2H20WpXcW4m3l7bA3Lh+Kap4bGFrUaDbMV3dqvuJGheiVVw==
-X-Received: by 2002:a05:6808:4f66:b0:44f:e6fe:c919 with SMTP id
- 5614622812f47-44fffd46242mr2497897b6e.17.1762467237701; 
- Thu, 06 Nov 2025 14:13:57 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45002592016sm1304657b6e.7.2025.11.06.14.13.56
+ d=1e100.net; s=20230601; t=1762448499; x=1763053299;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+ewmpIiOxmkDa6VyEV7TtFSD5FesY2Aoh6a2lv+Y1Y8=;
+ b=gZ0/eiEZzoGtI6VylTyP8PseEyxqGGrzx6eX2E09+5Kxfp6cY3D/8Tovb5+fRIvy5g
+ Pl3/IIivI+nT0w6kawFvOpb3BodsdcA6M2SrGFYCokt5qIJtjh54jIMD83urrNgg/itX
+ auBzjkV3Uh+dPVTdqFjMy4lBB+GWbc+SWUBytkz5r0sgpWGeT/lHfjcNiCXJffTiCQnO
+ Ebuwl5rvEbRwKs78iF8wisheUSAxQWnb2Gnk4k9YPdZDEC9lIdu6sB2nzfXQWRqYMLkk
+ ua20B6OkKfteE0/1IlBLKWXygR6SlZBYp7tjE/i/nhgoTuFqew8/x4+flnnQjVsiinYN
+ eUVw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV/B4uOQTGlKNUb8g9mTlirtNXsl9dBEKkCwqz1gE3af3YVW+cavWTfCW70ejjZRLpge5gTU30=@lists.denx.de
+X-Gm-Message-State: AOJu0YyzF0rqqXe4K0FjFgRQdIJWuqqsHkYkPe1Qu9QEz9WIhS65TGmN
+ Ngr7Vy6Sj1HhImPdPHHm+i6icUg0hKs9+emcgQAuA5iUjy3WHdzePdUCO6CT/z5P5XA=
+X-Gm-Gg: ASbGncvTerEG2JNf1QJG2lp824kwh+z64Rk8YZT76vK5xTuR+3upQHGjBYrQc+MX/5q
+ 2SPiME8bL0MZnoJLEKZE+3k+NC48uE8fa6d4tt4B2Va+Ap9bE/t6de/+xjkea0yqUZj6muUT5wR
+ hWj82tXPvr/1YAR0EySduylYYNT8GpxRZnSQaUV2OnECsULb858HYzJGhSRLREdaRtaXeSuL9pW
+ ba+8Fs0WIhRGTLP5y2FSyGvZkK1nuOIHESseOkmQbLaSxzyanfoPIZJmWV6rg3MpGqRZotLV1Ki
+ EJVnwFcXd908XBWLEjArt3x7kOwjAwnlssia2H6R/R/z8A4Kc4uiZBMuDBHgGNY0m35Nnlhrjia
+ /t4hk9/EIRKxEH2AbgWfKYWtLNn8C8VLkeWeow5FxOIkQmhnAltFE7SJILtox7yfbNa0r5hbB+F
+ DpNUM1
+X-Google-Smtp-Source: AGHT+IFsBL0J9jUnpscoJh+K3LGrEpS9AQzhtNfA1B0xxfX2wnpc90zdPiouOU741ecEYGa+TxHs/g==
+X-Received: by 2002:a05:600c:6289:b0:477:3543:3a3b with SMTP id
+ 5b1f17b1804b1-4776bcb20a4mr225345e9.6.1762448498949; 
+ Thu, 06 Nov 2025 09:01:38 -0800 (PST)
+Received: from box-zli ([78.199.60.143]) by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-4776bccd41bsm79845e9.2.2025.11.06.09.01.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 14:13:57 -0800 (PST)
-Date: Thu, 6 Nov 2025 16:13:55 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Dmitrii Sharshakov <d3dx12.xx@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Samuel Holland <samuel@sholland.org>
-Subject: Re: [PATCH 0/2] Fix AArch32 compilation with Clang
-Message-ID: <20251106221355.GZ6688@bill-the-cat>
-References: <20251101-clang-fixes-v1-0-a8398475226e@gmail.com>
- <176246626861.3129497.14948596131312532180.b4-ty@konsulko.com>
+ Thu, 06 Nov 2025 09:01:38 -0800 (PST)
+From: Zixun LI <admin@hifiphile.com>
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Zixun LI <admin@hifiphile.com>,
+	u-boot@lists.denx.de
+Subject: [RFC PATCH] mtd: nand: raw: Add ONFI NAND unique id read support.
+Date: Thu,  6 Nov 2025 18:01:23 +0100
+Message-ID: <20251106170124.3992080-1-admin@hifiphile.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/8qfOrNquYtY2rpY"
-Content-Disposition: inline
-In-Reply-To: <176246626861.3129497.14948596131312532180.b4-ty@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 06 Nov 2025 23:47:10 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,57 +101,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch adds support for reading the unique ID from ONFI-compliant NAND
+flash devices.
 
---/8qfOrNquYtY2rpY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The unique ID is a 32 bytes long identifier that is useful for device
+identification and tracking.
 
-On Thu, Nov 06, 2025 at 03:57:48PM -0600, Tom Rini wrote:
+Tested on SAM9G25-EK with Macronix MX60LF8G18AC flash.
 
-> On Sat, 01 Nov 2025 10:39:57 +0100, Dmitrii Sharshakov wrote:
->=20
-> > I faced some minor compatibility issues when choosing Clang as the cros=
-s-compiler for my target.
-> >=20
-> > Please review these two fixes, aiming at enabling Clang-based builds (s=
-till using GNU binutils)
-> > for 32-bit ARM targets.
-> >=20
-> > Tested to fix build with (also run-tested on qemu arm and arm64 with cl=
-ang):
-> >=20
-> > [...]
->=20
-> Applied to u-boot/master, thanks!
->=20
-> [1/2] arch: arm: build: only set -mgeneral-regs-only for AArch64
->       commit: e8e3b38def93b5e5d53569961237ce215454e141
-> [2/2] build: fix building u-boot.lds with Clang as a cross-compiler
->       commit: f7d177395d73f7747373dfd0ef7329834788106e
+Signed-off-by: Zixun LI <admin@hifiphile.com>
+---
+ drivers/mtd/nand/raw/nand_base.c | 69 ++++++++++++++++++++++++++++++++
+ include/linux/mtd/rawnand.h      |  8 ++++
+ 2 files changed, 77 insertions(+)
 
-So, I can replicate your success if I do:
-$ export PATH=3D${PATH}:/opt/gcc-14.2.0-nolibc/aarch64-linux/bin
-$ make O=3D/tmp/rpi4 CROSS_COMPILE=3Daarch64-linux- CC=3Dclang-18 HOSTCC=3D=
-clang-18 rpi_4_config all
+diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
+index 48e3685d995..30aa578e074 100644
+--- a/drivers/mtd/nand/raw/nand_base.c
++++ b/drivers/mtd/nand/raw/nand_base.c
+@@ -991,6 +991,75 @@ static int nand_onfi_set_timings(struct mtd_info *mtd, struct nand_chip *chip)
+ 				       tmode_param);
+ }
+ 
++/**
++ * nand_onfi_read_unique_id - read the ONFI unique ID sequence
++ * @chip: NAND chip descriptor
++ * @buf: destination buffer
++ * @len: size of the destination buffer
++ *
++ * Issues the ONFI UNIQUE_ID command sequence, validates the unique ID and
++ * copies it into @buf.
++ *
++ * Return: 0 on success or negative error code otherwise.
++ */
++int nand_onfi_read_unique_id(struct nand_chip *chip, void *buf,
++			     unsigned int len)
++{
++	struct mtd_info *mtd;
++	unsigned int copy;
++	unsigned int byte;
++	unsigned int copy_len;
++	u8 raw_id[ONFI_UNIQUE_ID_LEN * 2];
++	u8 *out = buf;
++	int ret = -EIO;
++
++	if (!chip)
++		return -EINVAL;
++
++	if (len && !buf)
++		return -EINVAL;
++
++	if (len > ONFI_UNIQUE_ID_LEN)
++		return -EINVAL;
++
++	if (!chip->onfi_version)
++		return -EOPNOTSUPP;
++
++	mtd = nand_to_mtd(chip);
++	nand_get_device(mtd, FL_READING);
++	chip->select_chip(mtd, 0);
++
++	chip->cmdfunc(mtd, NAND_CMD_UNIQUE_ID, 0, -1);
++
++	for (copy = 0; copy < ONFI_UNIQUE_ID_COPIES; copy++) {
++		for (byte = 0; byte < ONFI_UNIQUE_ID_LEN * 2; byte++)
++			raw_id[byte] = chip->read_byte(mtd);
++
++		for (byte = 0; byte < ONFI_UNIQUE_ID_LEN; byte++) {
++			u8 lo = raw_id[byte];
++			u8 hi = raw_id[byte + ONFI_UNIQUE_ID_LEN];
++
++			if ((lo ^ hi) != 0xff)
++				break;
++		}
++
++		if (byte == ONFI_UNIQUE_ID_LEN) {
++			copy_len = min_t(unsigned int, len, ONFI_UNIQUE_ID_LEN);
++
++			if (len)
++				memcpy(out, raw_id, copy_len);
++
++			ret = 0;
++			goto out;
++		}
++	}
++
++out:
++	nand_release_device(mtd);
++	return ret;
++}
++EXPORT_SYMBOL_GPL(nand_onfi_read_unique_id);
++
+ /**
+  * nand_setup_data_interface - Setup the best data interface and timings
+  * @chip: The NAND chip
+diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
+index 3e80b134063..87083c34aed 100644
+--- a/include/linux/mtd/rawnand.h
++++ b/include/linux/mtd/rawnand.h
+@@ -88,6 +88,7 @@ void nand_wait_ready(struct mtd_info *mtd);
+ #define NAND_CMD_READID		0x90
+ #define NAND_CMD_ERASE2		0xd0
+ #define NAND_CMD_PARAM		0xec
++#define NAND_CMD_UNIQUE_ID	0xed
+ #define NAND_CMD_GET_FEATURES	0xee
+ #define NAND_CMD_SET_FEATURES	0xef
+ #define NAND_CMD_RESET		0xff
+@@ -409,6 +410,10 @@ struct onfi_ext_param_page {
+ 	 */
+ } __packed;
+ 
++/* ONFI unique ID */
++#define ONFI_UNIQUE_ID_LEN 16
++#define ONFI_UNIQUE_ID_COPIES 16
++
+ struct jedec_ecc_info {
+ 	u8 ecc_bits;
+ 	u8 codeword_size;
+@@ -1385,4 +1390,7 @@ int nand_write_data_op(struct nand_chip *chip, const void *buf,
+ /* Default extended ID decoding function */
+ void nand_decode_ext_id(struct nand_chip *chip);
+ 
++int nand_onfi_read_unique_id(struct nand_chip *chip, void *buf,
++			     unsigned int len);
++
+ #endif /* __LINUX_MTD_RAWNAND_H */
+-- 
+2.51.0
 
-But if I instead use CROSS_COMPILE=3D/opt/gcc-.../bin/aarch64-linux-
-instead we get /usr/bin/as being used and fail. Any ideas where perhaps
-CROSS_COMPILE isn't being trimmed correctly and passed to clang maybe?
-Thanks!
-
---=20
-Tom
-
---/8qfOrNquYtY2rpY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQ0dmwAKCRAr4qD1Cr/k
-Cts0AP48PlflxgH/g+iTDTwZDVofmhuaey0sO/VkfSG6ahU+5wEAm3yGEWBMUB3F
-hkOxWgQdW1QR5nZYMqHJ1YTvV2j2ewo=
-=Tk2c
------END PGP SIGNATURE-----
-
---/8qfOrNquYtY2rpY--
