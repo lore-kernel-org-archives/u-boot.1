@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F817CCFA05
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 13:09:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5FFACCFA03
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 13:09:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDCE183BAD;
-	Thu,  6 Nov 2025 14:09:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0836983BBE;
+	Thu,  6 Nov 2025 14:09:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="vN/yD9I8";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="zyrxPPKY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A532A83B5F; Thu,  6 Nov 2025 12:12:41 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 35B5583B5F; Thu,  6 Nov 2025 12:12:43 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C055A83B72
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 12:12:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C90BF83B82
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 12:12:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-47754547a38so6546835e9.2
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 03:12:39 -0800 (PST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-426f1574a14so490026f8f.3
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 03:12:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1762427559; x=1763032359;
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1762427560; x=1763032360;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xhePCpc3NHSADsMsxqSNVQRf9XYSN9Jzb0N/PZTzy4Q=;
- b=vN/yD9I8BQI2uSNh78wQxfv+2ggknnlD7Ks14B4UC+b9MEt/8PUc+XLum+93ZXD1Vm
- aoEvN6IG78koB9/WjdI//JeluXQxlT0gHMVFxyyk+Lm0D+kiDXurpHvEjGmxA6rGl4kt
- xW01KDXLFA31cfcSs1I85dF5XBNem3EeNmCfDQ0T3W9W4JcgkgPmE5HTMPtBTTMQAZo5
- UqatZGllzRXt1t6ve120l8GgwAeFOCvntZScyawIBK9IdljzqmT8rutU0xueJ7JWk33s
- NimJNI98c11fJxM77ufGl4GtV5w/LG2xXIvbnslWW71jRgvgucyOjNilcTIdqBFNd+S4
- ui4A==
+ :reply-to; bh=DbZi0DI21xZNXewkcj61ftotkhHEoPwJKqviIM5mbos=;
+ b=zyrxPPKYvkMDS5qvxqZ/TTHmd1l6nfo7wqfV3Stul0i9yVwUPQLai1NExYY0Ba12f3
+ WH6q03ikAqNu7vsN7sh9X/+/o81BhjeO5woO9L4ao2tlrDN+VHorlynrI9ixCK+vMpGI
+ gKuyTtaoOjXvfI5ieZxycTCOf+7rHixMmfConzTww1Br2CyNsvzBE6jO2b8JW0M/uP4W
+ gHaMAZOJfkxChz+bshZi+mUp3q+yQ4GAgCAYhiueoW3FMnAv9kczZFifRJ0ZyiMzGQ2x
+ mgOHfjVYFepzHp6hr9X9KkLgGIWTlmxECeAVuWPi+AptWCqvbHtdSM1mXDHqLfR3jnn2
+ XEBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762427559; x=1763032359;
+ d=1e100.net; s=20230601; t=1762427560; x=1763032360;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xhePCpc3NHSADsMsxqSNVQRf9XYSN9Jzb0N/PZTzy4Q=;
- b=FV7kTpIgHQeolJVb5gV/bKv0rg/+wWKiHq6U+D2NPpTg40/MLHVRey+fXX9csK50d9
- Fl9jly+wu1tb28gZ0O77pX2F/D4Kth07+kTppdMlbupg/KK8zf1lZgRi/Lr2e6MORkWd
- 5BQSUVGWPtrjrBQl7i7tCkQ1PidMnzvYLznku0okagU2n1f+SQuuOERF4RV1V21hHYSW
- Sjelx6IUlghRwtg3xeaW9mMYgt41ETrMN0AwqNkTLzEiBc1v7cOXpbahnWdatcZmm55i
- JvqAXTGy6x727t3LdXLigxxfh5/rHDna1n4d6Slr2nt5pLdT9TIWJpNetFvBPH7LKJZ9
- XyXQ==
+ bh=DbZi0DI21xZNXewkcj61ftotkhHEoPwJKqviIM5mbos=;
+ b=w1Uwntj1/EoUiHg7U408uRmRR2eDbEYBAcADcEtKgkDH9sRFvCK1pY7GRqK8KNOqQ0
+ KE3FVFL4DeQC8ukFYUrbjd3afmDph/Z6nKb7CQj7XMZ2bNcjS4ZFDnkH0/L2+Yx2V4ap
+ 3KrM5FEF29l24VSuXpocvhx6A0dpRiWjHPMq1dQpqDFLcdm2Z+F1l0tihlAenyu9M6n/
+ jKnHKpnMoJC2v/watc1c2xEVBQiTcIY8qHFEbHkAHXnyM0ydSC7XV1Y8ZQvHdTlwmXO4
+ wOvs5NdrYs3lLXQYZvlxOiVMPnCqIZ829Z4WjpSxBA7y7SHg+T69nWoSpnB7/TqQRT7i
+ AuCg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/Q4pwjf2QCEkV9oh/a0J43gQhE3YlhcusCgcPxnlRlELHf+OgyXT/1LPZixzDu1iTNRZLJH8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1qEjnSIhejH5HA79noiieK04ZMMtOr6j+5QgNEJlkoWvaRSbv
- HyFuWAZvtfHfBVXqXGzeC47n60JFWn/Iv94zXh9YOCN1tbkwK5HmdAhvWMEqWxH5MbXK2em1TbI
- VHDxN
-X-Gm-Gg: ASbGnctRDvr3O3n7UuotDVLpBP505sfaMf+nrYPLXJHofg1nQPGaLG/SE8YdVbxZ6X3
- j2ZgL5cLQRJ+17LK/Mz8Xqtkk0IJwbcLRG3FXxd7LgT0NFqIDmZatvsa4GlLiFZjTVQagZcQxDn
- BIAFbeGvoaJc3Lt1Vlx1YNjqBSVNEyg7X8TcVOSn92nEGJMJlpB4Tib5+Xl7jKcC8DKkqUXUlbq
- 7xxn5tf3jg8jNOP7M7IIIWqgr6vGGVXaYvBvTmJqKg6Cc3ft28prtJP2b5XU3waskr+Sxn8LyEc
- 5Cw1J+tZRFOXjlVvsRE1AZ128+WdNk5vLp8QYnSuUUrqHVaMViRWLTDMeiRYcYfYYDAeBOJxgzQ
- 9rFE0ipiUTsF44U7AaLYhy1HIu4CRAI7WEmxj3mPNM4ZEDqmgD/zjYCy3C/a5eqm8iGf9oNkOcF
- w=
-X-Google-Smtp-Source: AGHT+IGrWiJBhXzmk+ctZH+WJAPKXHe8I6yd/OG88kwUSIkh9cGQjS59vf8lI72mijQJrD6Q7FSj5w==
-X-Received: by 2002:a05:600c:5291:b0:477:c71:1fc1 with SMTP id
- 5b1f17b1804b1-4775cdf76d3mr64866125e9.19.1762427558498; 
- Thu, 06 Nov 2025 03:12:38 -0800 (PST)
+ AJvYcCX4X3BPXeNOqiSqiLyjke4eT0H7f+yP+9kA5qN8cNNDc/3Ttd8lh+zRrmOBp69RHCC9aK1FoFQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzDCwxM35X+AkY3cBrv7kFOEav1eSJn95hNfQ4jVhKgXq2zXZFO
+ Rv7BQOFsdkLBUqNL7dyMGbEtTQbho2T9FhFj9OYdrW7Z2E6GjCGohKcUMkGJcyUsufB8SjXFms0
+ 2w1vs
+X-Gm-Gg: ASbGnctSVcuEPYgsmLWBLvJQmRicriPPathDs9lmR5Rwfjg/RBpui6eaQKjlht13lU+
+ HTanqWrtRja+PEmn+3obar5yMNZpzBFlQ12Cwy4o4ozPrYWREg5AA5eADhZP+Nu2t2jkznIK8Mq
+ /3hcXvV/ZskXeaF2byd2zjQ9Lz+j8M9o0Pqf9IvdS8i9M68LjzLtnJ6dOnOfLllSPTgBksV0aJQ
+ l3wWC6HLkJCLNR3Im25YTZ48z+lsrN1U7vFIgpsH1sigCOrCGreNYGDkSYWtaYp+vME4CwZ3/NT
+ GUH4b9N54PvfDUCOITW/GgTuZ11Vk6dkHDZz+QYwBwvOkAV6+T+1A4BjWeE9rF6cRssDkZbramz
+ XxxLesiJrJyQ4Df5eBTsZl5vcKOFye1ElonxJmvhY7maIFGcoGRYWADBYrTpjwPOxWGdKZ57pyy
+ I=
+X-Google-Smtp-Source: AGHT+IFPquUhoKMYcpG2jQlz0AaW7XMPwwgqRLWycXHByS59iw8C+VDo9w1JG/UGzFfWVSxMA5eAAQ==
+X-Received: by 2002:a05:6000:4103:b0:429:c16f:2376 with SMTP id
+ ffacd0b85a97d-429e3311c25mr5069373f8f.63.1762427559856; 
+ Thu, 06 Nov 2025 03:12:39 -0800 (PST)
 Received: from [127.0.1.1] ([78.199.60.143])
  by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-429eb3951c6sm4582966f8f.0.2025.11.06.03.12.37
+ ffacd0b85a97d-429eb3951c6sm4582966f8f.0.2025.11.06.03.12.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 06 Nov 2025 03:12:38 -0800 (PST)
 From: Zixun LI <admin@hifiphile.com>
-Date: Thu, 06 Nov 2025 12:12:01 +0100
-Subject: [PATCH 1/2] mtd: rawnand: atmel: set pmecc data setup time
+Date: Thu, 06 Nov 2025 12:12:02 +0100
+Subject: [PATCH 2/2] mtd: rawnand: atmel: Remove timing from atmel_pmecc struct
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251106-pmecc-v1-1-a1f3cf430be9@hifiphile.com>
+Message-Id: <20251106-pmecc-v1-2-a1f3cf430be9@hifiphile.com>
 References: <20251106-pmecc-v1-0-a1f3cf430be9@hifiphile.com>
 In-Reply-To: <20251106-pmecc-v1-0-a1f3cf430be9@hifiphile.com>
 To: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>, 
@@ -107,50 +107,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Setup the pmecc data setup time as 3 clock cycles for 133MHz as
-recommended by the datasheet.
-
-Backported from Linux: f552a7c7 ("mtd: rawnand: atmel: set pmecc data
-setup time")
-
-Fixes: a490e1b7c017c ("nand: atmel: Add pmecc driver")
+"timing" is unused in atmel_pmecc struct, also it's not exist in Linux
+driver, let's remove it.
 
 Signed-off-by: Zixun LI <admin@hifiphile.com>
 ---
- drivers/mtd/nand/raw/atmel/pmecc.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/mtd/nand/raw/atmel/pmecc.c | 2 --
+ drivers/mtd/nand/raw/atmel/pmecc.h | 1 -
+ 2 files changed, 3 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/atmel/pmecc.c b/drivers/mtd/nand/raw/atmel/pmecc.c
-index e500a0fe3f8671ff08195c94c3383696a7731eb3..7c4e9bd5f9967b119239adf2b39e683ea62b71fd 100644
+index 7c4e9bd5f9967b119239adf2b39e683ea62b71fd..8fc5614cc0091d3e0f4b9280beee9e684fe2a57d 100644
 --- a/drivers/mtd/nand/raw/atmel/pmecc.c
 +++ b/drivers/mtd/nand/raw/atmel/pmecc.c
-@@ -142,6 +142,7 @@ struct atmel_pmecc_caps {
- 	int nstrengths;
- 	int el_offset;
- 	bool correct_erased_chunks;
-+	bool clk_ctrl;
- };
+@@ -839,8 +839,6 @@ atmel_pmecc_create(struct udevice *dev,
+ 	ofnode_read_resource(dev->node_, 1, &res);
+ 	pmecc->regs.errloc = (void *)res.start;
  
- struct atmel_pmecc_user_conf_cache {
-@@ -840,6 +841,10 @@ atmel_pmecc_create(struct udevice *dev,
+-	pmecc->regs.timing = 0;
+-
+ 	/* pmecc data setup time */
+ 	if (caps->clk_ctrl)
+ 		writel(PMECC_CLK_133MHZ, pmecc->regs.base + ATMEL_PMECC_CLK);
+diff --git a/drivers/mtd/nand/raw/atmel/pmecc.h b/drivers/mtd/nand/raw/atmel/pmecc.h
+index 43f96b2f168c7b88e0c907996f2ae64f8554ed58..88b0d18040e7c48f226c74ce9b5caf93b5760360 100644
+--- a/drivers/mtd/nand/raw/atmel/pmecc.h
++++ b/drivers/mtd/nand/raw/atmel/pmecc.h
+@@ -65,7 +65,6 @@ struct atmel_pmecc {
+ 	struct {
+ 		void __iomem *base;
+ 		void __iomem *errloc;
+-		void __iomem *timing;
+ 	} regs;
  
- 	pmecc->regs.timing = 0;
- 
-+	/* pmecc data setup time */
-+	if (caps->clk_ctrl)
-+		writel(PMECC_CLK_133MHZ, pmecc->regs.base + ATMEL_PMECC_CLK);
-+
- 	/* Disable all interrupts before registering the PMECC handler. */
- 	writel(0xffffffff, pmecc->regs.base + ATMEL_PMECC_IDR);
- 	atmel_pmecc_reset(pmecc);
-@@ -884,6 +889,7 @@ static struct atmel_pmecc_caps at91sam9g45_caps = {
- 	.strengths = atmel_pmecc_strengths,
- 	.nstrengths = 5,
- 	.el_offset = 0x8c,
-+	.clk_ctrl = true,
- };
- 
- static struct atmel_pmecc_caps sama5d4_caps = {
+ 	/* Mutex used for pmecc enable/disable */
 
 -- 
 2.51.0
