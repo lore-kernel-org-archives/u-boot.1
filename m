@@ -4,83 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32365CCFA05
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 17:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72AB8CCFA13
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 18:00:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4282683C34;
-	Thu,  6 Nov 2025 17:59:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C24D83BEB;
+	Thu,  6 Nov 2025 19:00:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YGWbU88X";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="O01MWE0/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E38E083C0C; Thu,  6 Nov 2025 17:59:53 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6424583BF1; Thu,  6 Nov 2025 19:00:09 +0100 (CET)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6EA483BEB
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 17:59:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9508D83BE1
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 19:00:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7c284d4867eso331665a34.3
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 08:59:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762448390; x=1763053190; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QDB2vNszl9S3CEKQnDX8YaNz7KeZom0dp6G/mNHF3mY=;
- b=YGWbU88X46nRIT/g8lgv1DamrH7CRRqRQKlVTR0go2+WAj02nW1zIP/GMIMkQUmnM1
- 1ctpzspSUo2RB7x+cH1MJQmwZUNTzhVNTtqybbUfUUGS7yaqr1nyublpwG3G0Fph94R3
- C7zvmTiZnQzWEbthAS4+PEf988KZaGYnr+aro=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762448390; x=1763053190;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=QDB2vNszl9S3CEKQnDX8YaNz7KeZom0dp6G/mNHF3mY=;
- b=J2NCJKJ76YJLAtHBr/1jn3276Op8HYc3Uu4hUWUTq1wfGRbmWFVUQs8qc55MKgmD/h
- Em4s0CweIX9OXQs468V+BpxE7Y+KnHJ+phdvX7b/OFZOfg5ZPXfxcTS86zvI3jkjf8tn
- HKSIj8k9DVKMKcPNTFetJ2d9IxaQFiiqp82jOdA8V1avHY0JQuYsn0ndLCIYNau5zU+P
- N6U4g59mE+dsQEjw+DiayR8dYvsjXr/7cH2adEf41Bwz1GBtvV/EVuWG5cRGoVOfG1oQ
- ElS7S1FSjprN6x4CdC9v1GoIjrdNer/W4O511FXLyXemIeoeuMAdV2ZdJw0/ViBmyiop
- 3nUA==
-X-Gm-Message-State: AOJu0YzDxMCcpi2jtYc9ZtZsSuB3rypkZdZaDK3ONbIBW1y6BXXkM+Sn
- GIdclh0kNGOkeDBO6D9jNDbLWGFb6Rk8NIdww43PjdFMenelHk2XgnfG5UvXw3C7BBI=
-X-Gm-Gg: ASbGncvOwpYVudtX+2FGDlRY1ZpXl1zt4EZTq76+GYdKUn9jVEJwSZkiHwKAmx0Cx3V
- kSWjuvO9jdJTaMmmC9ryg2PY59QeDJ78t00aNqct9cW2+BxybNKsJHwb1qgBYvJoGsegdvJSDDp
- yovWpqiYH9ETAdrzSxb2Lt3NxJW03GpBKNarzfnDydc9IdzcGmKBqOFZodgwS9FdkZ1URgSxPHD
- 3cgiLSbyUu0EaC63Nw/2fdy5ewVbbmB1HRP0TeO0WP3OYRK98FcGf6q6evvFOM7eVuNVTKT1hGf
- QN2MTalASKQ2fnnriWp5/bYdMc+GWqXiSF/32tgayxrEEsT0SeGBciiTJRPJkaJvhzTiDN9q29O
- W1Bl1v99Dms7cmBmrpr4N8cHXMKrcAaaZZ+PdRIJBATuQoYbP3ebdV4FKi9rF7SK2akatsDeM6a
- wOUnvv4SYtZjla7698qCk73wNAY9p5OvK11hRU0g==
-X-Google-Smtp-Source: AGHT+IGl6WH50exq7WJCy/kURlnNi4l4POHNAB7wv7CTtW0N2VxgS6uLLTIzk/pkdkTz0HKT8JFZYg==
-X-Received: by 2002:a05:6830:438b:b0:7c6:b104:e3db with SMTP id
- 46e09a7af769-7c6efee93c4mr183774a34.23.1762448390579; 
- Thu, 06 Nov 2025 08:59:50 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f11323absm24819a34.23.2025.11.06.08.59.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 08:59:50 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Prasad Kale <prasad.kale@live.com>
-Cc: Dan Murphy <dmurphy@ti.com>, Sean Anderson <seanga2@gmail.com>, 
- Anshul Dalal <anshuld@ti.com>
-In-Reply-To: <YT2P288MB00915176E3C7F2F72F4C2A879BFBA@YT2P288MB0091.CANP288.PROD.OUTLOOK.COM>
-References: <YT2P288MB00915176E3C7F2F72F4C2A879BFBA@YT2P288MB0091.CANP288.PROD.OUTLOOK.COM>
-Subject: Re: [PATCH] Invalidate cached FAT device upon boot error
-Message-Id: <176244838981.3056677.4621192779217217053.b4-ty@konsulko.com>
-Date: Thu, 06 Nov 2025 10:59:49 -0600
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id E6B184E41576;
+ Thu,  6 Nov 2025 18:00:05 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 8F233606EE;
+ Thu,  6 Nov 2025 18:00:05 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id EB98111850A25; Thu,  6 Nov 2025 19:00:02 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1762452004; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=XP2JqzW1hFPNpxXiWJet+JKO0CbBXfSV2lCwsRDayVw=;
+ b=O01MWE0/F7qbfJkHM//tjurqaslgoDO+gZmtM6u16aM9rpHBCpE62h3JSb/L8qyBsk7GuM
+ zNMzdJTl+sop8/5nwJkt2r+ML0eMD8veRFpQ1nqOkf7wnXg770rTrZ6LDNVs2tfiP2kL4z
+ wY9ih/xY1sOBmYu1yX23kz7EG+mEoSOk/xz/6XK5uMAewtljSABGDyXVYS43FrB9eT8kgs
+ YpWnrVVBPSXNsGWw9o7PRwv/MvH+toMpyO3FwqPi9scpLLAZtwnBsz7h+4685r13e3cheL
+ EqIUfdTrJ6ufLymHjKIHinH6QUPkjilVlDEhIuJwMmZAXn21cA6uilrkOQvkFw==
+Date: Thu, 6 Nov 2025 19:00:01 +0100
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
+ <u-boot@lists.denx.de>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ "Bajjuri, Praneeth" <praneeth@ti.com>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH 1/2] distro_bootcmd: Add support for customizable
+ find_distro_rootpart
+Message-ID: <20251106190001.0e5a4504@kmaincent-XPS-13-7390>
+In-Reply-To: <20251104163816.GB6688@bill-the-cat>
+References: <20251031-feature_distro_rootpart-v1-0-4e7c465708e8@bootlin.com>
+ <20251031-feature_distro_rootpart-v1-1-4e7c465708e8@bootlin.com>
+ <CAFLszTicHdtY73+asYQ9NF_uEFg7BsSfN2cW+21FbQoxH9V_JA@mail.gmail.com>
+ <20251103115225.381126f1@kmaincent-XPS-13-7390>
+ <20251103171630.4df1efdd@kmaincent-XPS-13-7390>
+ <20251103161905.GP6688@bill-the-cat>
+ <20251104102916.3df33d55@kmaincent-XPS-13-7390>
+ <20251104163816.GB6688@bill-the-cat>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,27 +82,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 30 Oct 2025 22:33:01 +0530, Prasad Kale wrote:
+On Tue, 4 Nov 2025 10:38:16 -0600
+Tom Rini <trini@konsulko.com> wrote:
 
-> When spl boot device list has multiple FAT devices, any previousely
-> registered FAT device should be deregistered before registering
-> next FAT boot device, otherwise the function may not attempt boot
-> from next FAT device.One of the situations where this issue can be
-> observed is when the boot device list has two FAT partitions of a
-> memory device and if booting fails on first partition (because of
-> file or partition related errors), boot from next partition actually
-> gets attempted on previous boot device only, as the previous device
-> has remained marked as registered. Call the function that invalidates
-> cached boot device in case of failure in booting from current FAT
-> boot device.
-> 
-> [...]
+> On Tue, Nov 04, 2025 at 10:29:16AM +0100, Kory Maincent wrote:
+> > On Mon, 3 Nov 2025 10:19:05 -0600
+> > Tom Rini <trini@konsulko.com> wrote:
+> >  =20
+> > > On Mon, Nov 03, 2025 at 05:16:30PM +0100, Kory Maincent wrote: =20
+> > > > On Mon, 3 Nov 2025 11:52:25 +0100
+> > > > Kory Maincent <kory.maincent@bootlin.com> wrote:
+> > > > > > >       =20
+> > > > > >=20
+> > > > > > How about moving to standard boot and look at this there?     =
+=20
+> > > > >=20
+> > > > > Ok, I will take a look at it.   =20
+> > > >=20
+> > > > There is a custom nand boot target [1], and I have not any am335x b=
+oard
+> > > > with nand memory to test it. I am afraid to break it during the upd=
+ate
+> > > > to bootstd. Not sure we can accept that. What do you think?
+> > > >=20
+> > > > [1]https://elixir.bootlin.com/u-boot/v2025.10/source/include/config=
+s/am335x_evm.h#L27
+> > > >   =20
+> > >=20
+> > > I think we can risk it. I'd even be OK with not migrating that portion
+> > > and letting anyone still using those platforms, with NAND only, to ju=
+st
+> > > use a custom boot command instead as I have strong doubts there's any=
+one
+> > > doing anything other than that currently. =20
+> >=20
+> > Ok.
+> >=20
+> > Small questions related to standard boot:
+> > Why do we have a lot of bootmeth selected by default like
+> > BOOTMETH_EFILOADER, BOOTMETH_EFI_BOOTMGR, BOOTMETH_VBE ..., but
+> > BOOTSTD_DEFAULTS not selected by default? Shouldn't it be the contrary?=
+ =20
+>=20
+> Hard to say. We got stuck on trying to find the right balance between
+> features and size growth.
 
-Applied to u-boot/master, thanks!
+I still think we should disable these as default, moreover they are run fir=
+st
+in the bootstd process as they are global bootmeth.
 
-[1/1] Invalidate cached FAT device upon boot error
-      commit: c488907f91ec90bb6a93803b1db53e24b93b52ea
--- 
-Tom
+> > Moreover it is explicitly described that global bootmeth can be slow:
+> > https://elixir.bootlin.com/u-boot/v2025.10/source/doc/develop/bootstd/o=
+verview.rst#L103
+> >=20
+> > The bootmeths environment variable is never read.
+> > Changing this environment in the prompt allows to change the bootmeth o=
+rder
+> > thanks to this callback:
+> > https://elixir.bootlin.com/u-boot/v2025.10/source/boot/bootmeth-uclass.=
+c#L459
+> > But if we set bootmeths in the board environment it doesn't work at all.
+> > Is it intended? =20
+>=20
+> Standard boot is still in development. We're still in the process of
+> getting more SoCs migrated and in turn finding and fixing the rough
+> spots. Global boot meths have changed a bit since v2025.10 as part of
+> hopefully addressing the feedback Andre P. had as part of migrating
+> sunxi, but I think there's still the ordering half of his concerns to be
+> figured out.
 
+Ok thanks for your replies.
 
+Other question: Is it possible to not add the environment to SPL image using
+the new text environment format. I have tried to update am335_evm board to =
+it
+but I got a SPL too big error.
+I have tried to add "#if !defined(XPL_BUILD)" but it is not working.
+It seems the same generated environment file is used for all images.
+I still haven't found were it is included in the build of the SPL image.=20
+
+Regards,
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
