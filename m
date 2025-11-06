@@ -4,81 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6237FCCFA13
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 18:45:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01229CCFA05
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 19:13:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A35FD83C02;
-	Thu,  6 Nov 2025 19:45:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6F3D483B9B;
+	Thu,  6 Nov 2025 20:13:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CpW/EivK";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="I3EbU/RL";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="tw9uwEoU";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="p7GHOwJl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E426E83C04; Thu,  6 Nov 2025 19:45:07 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 9DD6883BF4; Thu,  6 Nov 2025 20:13:47 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D1C483B85
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 19:45:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5D1083B85
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 20:13:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d2WMj2ghNz9v4J;
- Thu,  6 Nov 2025 19:45:05 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4d2X0m2jhvz9tqK;
+ Thu,  6 Nov 2025 20:13:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762454705;
+ s=mail20150812; t=1762456424;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7hm1a7awX6OwwMmrApWPLXnueXnpspcFBd8Y4CWIMbc=;
- b=CpW/EivKMVwzuM3kQwne4Q6eWZwoXjxA0BhgixZVGjUEuQ8WbeoS/Y9hzLwD6UHEkAxEV5
- 2atbHebmu4f3286HgW9ecmFUIekgjFG9Nze4cxSXe1lo3fmx7IIjpZ6L6p4xPNsHCfl76w
- nJjFwHEthNZpyNdfZX2V7duVyrnjIlJe3xDJHiREUoSZV1tgkpXiy6Q4I1KOWC41PKrSfI
- mMwrvADZ1NukVOmhEfPAVYlqxJ+VoAq2CiB/xuez6siGhqh17EkRjFkLlXYv/qvQH8p+F2
- 3SO5BUB8iTIloH7BgSIXsO1KD9QtnwE+WWlfdn+BMs1Vho1kdcBcFmogPcSoMg==
-Message-ID: <b475b895-38b6-483f-b498-5cb4247251c2@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rqZmpVlzJ7EhoBjpXxvqALMjbSHx1VGSgBXY05SJfDU=;
+ b=tw9uwEoUi876q6VuhMCH60P+zo63Y/E/WmaaQ+cO9qMTry2Gc+PFT5f7qiH1i524q+/j0m
+ /zBFJqvzc7if2zfmwzd03D5cRqyZwmVoM5RaLRH15YAa8Uzq+Dibh6cm3E4vEdpzzDohpQ
+ DFYcnlJfS+x40wD+qyJBCbd+DbQq0URhrvCmkVs9C5B8gTlwT2HWrdFTqOZRIQdsL98UYs
+ nAmhCAc6OREBpcVBccm46Bcxw8HmLkkP0yzjz3TlyE9DI8P9uzQikOtRr06elcSVM8EPAq
+ b+kJWtNd0jfIBYGTnxchD78EbeZ8/KKCzFm59DrbwhCiZmJEWl32eGG5ueneoA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762454703;
+ s=mail20150812; t=1762456422;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7hm1a7awX6OwwMmrApWPLXnueXnpspcFBd8Y4CWIMbc=;
- b=I3EbU/RLaXd0mOTbLrVL1K17V3RzdMLPQhLS76tkXqzsEh0r/ZxTMr+SkPY1HkTWAPEAp+
- WLDeMGUBGxCV9w6Bg4A2zslLSQ5XbbtBBpY/vsDTvleR+1o654OFsJwMb4iisfG6IsfTdV
- 435fFMSP7NsmR93eEh6K7+h/FIOYwKjcim3HGHp/9vvsSzdhpCGveCJj9f3zsbAsj4NwC2
- T5IBmIGSSyG1SPnZsSR8f7SiK2Io0LPUvAKuXOlVuC/VHR0GxzL+IwtgsnlfZ9qLKbKtzQ
- GbzggDKFjxyxIYLS4E8f6pcq70xQyiSsFDCQ0yUO4K6fx8AT3Ptl27thELzJ7w==
-Date: Thu, 6 Nov 2025 19:45:00 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH 1/4] clk: scmi: Bulk allocate all sub-driver instance data
-To: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rqZmpVlzJ7EhoBjpXxvqALMjbSHx1VGSgBXY05SJfDU=;
+ b=p7GHOwJl+e/chc67Fh+dZb1DvZP1E2tnU89CAAVwDF/X+EUP9/yij/n8hivy+8b3i20DGr
+ rGNLppEvYvVKz3H81GR4IMzXOe0xHebl4QD2UdzFuYfEEdoJfTvsQS2+/eeDu2EQTTIEhK
+ 6mmrdq2AfLEQ9QjOAiDPkpHCkPf1dmb5BCYz2UPztjK5VwmfoxEkiUQCifh51qIDm/Wsg5
+ lG8ThvM4+EbFz3wOnCTuWs5LndADqsr3iV90qlsACnqLhROKOjj9c+h4EWBpjwGclxcMnR
+ 38hbIse9ylNtB7qNwMXvxPJsVDQzgaf/SZZTUPMOLgHEvvj6bWJC79hX2JCCxA==
+To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Alice Guo
- <alice.guo@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>
-References: <20251028034225.260469-1-marek.vasut+renesas@mailbox.org>
- <PAXPR04MB84590D1D084E14A5D6B6BA7188C4A@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <20251104160631.GY6688@bill-the-cat>
- <PAXPR04MB8459585528148DC8B365867B88C5A@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <PAXPR04MB8459585528148DC8B365867B88C5A@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: d1ce3de6e879ce65989
-X-MBO-RS-META: ub84p4y4r5pmjwztz1xgbks97auiwi4x
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ARM: renesas: Disable CONFIG_ENV_OVERWRITE on all boards
+Date: Thu,  6 Nov 2025 20:13:24 +0100
+Message-ID: <20251106191337.14884-1-marek.vasut+renesas@mailbox.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 2a8c68aacab3fe0c286
+X-MBO-RS-META: mc45dw5nbg5q8j7eubh9micyasisarfe
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,29 +82,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/5/25 1:49 AM, Peng Fan wrote:
+The CONFIG_ENV_OVERWRITE allows easy rewrite of environment variables
+like 'ethaddr' and 'serial#' without any protection against accidental
+removal of those variables. Remove this setting to add extra layer of
+protection to those variables. The variables can still be overridden
+using 'env set -f' (force set) if really needed.
 
-Hello Peng,
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ configs/renesas_rcar.config | 1 -
+ 1 file changed, 1 deletion(-)
 
->> On Tue, Nov 04, 2025 at 08:05:53AM +0000, Peng Fan wrote:
->>> Hi Marek, Tom,
->>>
->>>> Subject: [PATCH 1/4] clk: scmi: Bulk allocate all sub-driver
->>>> instance data
->>>
->>> I just see this patchset was delegated to me in patchwork. But there
->>> is no scmi repo, could I use the u-boot-fsl-qoriq.git repo for
->>> managing the scmi patches?
->>
->> It's a question for you as well. I'm fine with a PR from that repository,
->> but if you want I can make a u-boot-scmi repository fairly easily and
->> add you to that.
-> 
-> No need a new a repo. I could use u-boot-fsl-qoriq.git for scmi
-> patches.
-
-Do you plan to pick any of the patches for 2026.01 still ?
-
+diff --git a/configs/renesas_rcar.config b/configs/renesas_rcar.config
+index 45776be62ea..d9a99e1f428 100644
+--- a/configs/renesas_rcar.config
++++ b/configs/renesas_rcar.config
+@@ -17,7 +17,6 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
+ CONFIG_DM_SPI=y
+ CONFIG_DM_SPI_FLASH=y
+-CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_VARS_UBOOT_CONFIG=y
+ CONFIG_FIT=y
+ CONFIG_HUSH_PARSER=y
 -- 
-Best regards,
-Marek Vasut
+2.51.0
+
