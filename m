@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1ABCCCFA03
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 09:11:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B85ACCF9F8
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 09:18:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7B0983B22;
-	Thu,  6 Nov 2025 10:11:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9E09183B22;
+	Thu,  6 Nov 2025 10:18:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rfXVTx6Z";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Nzb6bUhq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86B4383B47; Thu,  6 Nov 2025 10:11:31 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id EB49983B4E; Thu,  6 Nov 2025 10:18:10 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36986835B3
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 10:11:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A225B83A15
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 10:18:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 62681405B3;
- Thu,  6 Nov 2025 09:11:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2AEBC116C6;
- Thu,  6 Nov 2025 09:11:26 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 93B5760218;
+ Thu,  6 Nov 2025 09:18:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8133C4CEFB;
+ Thu,  6 Nov 2025 09:18:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762420287;
- bh=E981YNv8dCNamTnkTq4gzQzlAcuSkdYTv5z+QsasJMo=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=rfXVTx6Zm68RxIglNvlYTzBPmW5O2K6DSTQptEGkzNRuTupMJ1xryz5HtxMuuHRkb
- BE3NuqvN7qAj1doLf/FyxmdxHP4Pzp+kP4p+aaVllNxmJselObx7x6+Hn2MaHPvZgo
- QWhq2vI/i72+E+eXJ8L6x3wbLYMGtMqnlMlWwaRG18RLB7bSN/8s1LU7yyEGddgVnP
- lhr0o23pMTngFNYC4Y0IVkKcBmPERm2GLb+xQdpKIIdi9rskoKot+6jbmFu3DdAWC5
- NWqdm1/FGWn/Emobi294FJxuS0PCzRn51MSG6b13L0Qo8VZAK9/UrSj+Dn5y1MzXjd
- 3zfGt11lQ3ozA==
+ s=k20201202; t=1762420687;
+ bh=SqfLcbV/agh4kcCt9QkgrFsscURHz+lKjEzS/SzERSE=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+ b=Nzb6bUhqfBey8ZuXt9vBibOInpS3cZ9KbtuHfMTxPwDI9ANpuRIqEJpfjik6jwIh0
+ hi4CHXz3dJHA75Ge81v0FmqS5lIUpsU4GRFGoBxNyFct/2GKpFXJvpzboWkywtiGww
+ oDovsY68+pUBKnOZivhzcXvONBHiAnEgV/AkL4Ss9kj2GpxKQJfWjSLdQm1m5Nb1Sc
+ cOaa4K+bY0xEDAck6MbMY1hZmVHDgSYL00K9yO2exTeuFfTSfswsX1SKCf8Zjkk3kQ
+ rvSET+1z/gPJuFnMkmRksq3Fk87SGvUppM2sKhDwQH2VNyzmSLrnNCYAx1IUR0QsIH
+ bTtK1RKyJWukA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Hrushikesh Salunke <h-salunke@ti.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, trini@konsulko.com, lukma@denx.de,
- peng.fan@nxp.com, marek.vasut+renesas@mailbox.org, anshuld@ti.com,
- andre.przywara@arm.com, xypron.glpk@gmx.de, ye.li@nxp.com,
- sjg@chromium.org, dario.binacchi@amarulasolutions.com, a-dutta@ti.com,
- dinesh.maniyam@altera.com
+To: trini@konsulko.com, lukma@denx.de, peng.fan@nxp.com, 
+ marek.vasut+renesas@mailbox.org, anshuld@ti.com, andre.przywara@arm.com, 
+ xypron.glpk@gmx.de, ye.li@nxp.com, sjg@chromium.org, 
+ dario.binacchi@amarulasolutions.com, a-dutta@ti.com, 
+ dinesh.maniyam@altera.com, Hrushikesh Salunke <h-salunke@ti.com>
 Cc: u-boot@lists.denx.de, s-vadapalli@ti.com, danishanwar@ti.com
+In-Reply-To: <20251023080922.3527052-1-h-salunke@ti.com>
+References: <20251023080922.3527052-1-h-salunke@ti.com>
 Subject: Re: [PATCH v4] spl: Add support for Device Firmware Upgrade (DFU)
  over PCIe
-In-Reply-To: <ded6f86b-4003-4832-8d49-4a7285dddbb4@ti.com>
-References: <20251023080922.3527052-1-h-salunke@ti.com>
- <87tszf5dj0.fsf@kernel.org> <ded6f86b-4003-4832-8d49-4a7285dddbb4@ti.com>
-Date: Thu, 06 Nov 2025 10:11:24 +0100
-Message-ID: <87h5v7r0eb.fsf@kernel.org>
+Message-Id: <176242068529.10289.3970876777489060067.b4-ty@kernel.org>
+Date: Thu, 06 Nov 2025 10:18:05 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,137 +73,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Hrushikesh,
+Hi,
 
-On Mon, Nov 03, 2025 at 11:10, Hrushikesh Salunke <h-salunke@ti.com> wrote:
-
-> On 31/10/25 20:22, Mattijs Korpershoek wrote:
->> Hi Hrushikesh,
->> 
->> Thank you for the patch.
->> 
->> v4 is in good shape already. I have a couple of small remarks below.
->> Please have a look.
->> 
->> On Thu, Oct 23, 2025 at 13:39, Hrushikesh Salunke <h-salunke@ti.com> wrote:
->> 
->>> Introduces support for Device Firmware Upgrade (DFU) over PCIe in
->>> U-Boot. Traditionally, the DFU protocol is used over USB, where a
->
+On Thu, 23 Oct 2025 13:39:22 +0530, Hrushikesh Salunke wrote:
+> Introduces support for Device Firmware Upgrade (DFU) over PCIe in
+> U-Boot. Traditionally, the DFU protocol is used over USB, where a
+> device enters DFU mode and allows a host to upload firmware or binary
+> images directly via the USB interface. This is a widely adopted and
+> convenient method for updating firmware.
+> 
+> In the context of Texas Instruments (TI) SoCs, PCIe can be used as a
+> boot interface in a manner that differs from the conventional
+> "PCIe Boot" process, which typically refers to booting an OS or
+> firmware image from an NVMe SSD or other PCIe-attached storage devices.
+> Instead, TI SoCs can be configured as a PCIe Endpoint, allowing a
+> connected PCIe Root Complex (host) to transfer images directly into the
+> device’s memory over the PCIe bus for boot purposes. This mechanism is
+> analogous to DFU over USB, but leverages the high-speed PCIe link and
+> does not depend on traditional storage devices.
+> 
 > [...]
->
->>>   
->>> +#ifdef CONFIG_SPL_PCI_DFU
->>> +	if (spl_boot_device() == BOOT_DEVICE_PCIE)
->>> +		return dfu_over_pcie();
->>> +#endif
->>> +
->>>   	/* set default environment */
->>>   	env_set_default(NULL, 0);
->>>   	str_env = env_get(dfu_alt_info);
->>> diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
->>> index 71b7a8374bb..0c501cf02f2 100644
->>> --- a/common/spl/spl_ram.c
->>> +++ b/common/spl/spl_ram.c
->>> @@ -27,6 +27,11 @@ static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
->>>   	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
->>>   		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
->>>   				      CONFIG_SPL_LOAD_FIT_ADDRESS);
->>> +
->>> +#ifdef	CONFIG_SPL_PCI_DFU
->>> +		if (spl_boot_device() == BOOT_DEVICE_PCIE)
->>> +			addr = CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
->>> +#endif
->> 
->> Can't we rewrite this using IF_ENABLED_INT() similarly to what has been
->> done for CONFIG_SPL_LOAD_FIT_ADDRESS ?
->> 
->> This should allow us to get rid of the #ifdef CONFIG_SPL_PCI_DFU part.
->> 
->>>   	}
->>>   	addr += sector;
->>>   	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD))
->>> @@ -47,6 +52,11 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
->>>   	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
->>>   		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
->>>   				      CONFIG_SPL_LOAD_FIT_ADDRESS);
->>> +
->>> +#ifdef CONFIG_SPL_PCI_DFU
->>> +		if (spl_boot_device() == BOOT_DEVICE_PCIE)
->>> +			addr = CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
->>> +#endif
->> 
->> Same here
->> 
->>>   	}
->>>   
->>>   	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)) {
->>> @@ -64,6 +74,11 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
->>>   		spl_dfu_cmd(0, "dfu_alt_info_ram", "ram", "0");
->>>   #endif
->>>   
->>> +#if CONFIG_IS_ENABLED(PCI_DFU)
->>> +	if (bootdev->boot_device == BOOT_DEVICE_PCIE)
->>> +		spl_dfu_cmd(0, "dfu_alt_info_ram", "ram", "0");
->>> +#endif
->>> +
->> 
->> Same here. Please rewrite using if (IS_ENABLED(CONFIG_SPL_PCI_DFU)).
->> This way we are consistent with the rest of the file.
->> 
->
->
-> Thank you for the feedback. However, using IS_ENABLED() instead of
-> #ifdef in these locations causes compilation errors on platforms where
-> BOOT_DEVICE_PCIE is not defined. The BOOT_DEVICE_PCIE macro is only
-> defined in platform-specific headers, and is not available universally
-> across all architectures. With IS_ENABLED(CONFIG_SPL_PCI_DFU), the code
-> inside the conditional is still visible to the compiler even when the
-> config is disabled. This means the compiler will try to evaluate
-> BOOT_DEVICE_PCIE on platforms where it doesn't exist, resulting in a
-> compilation error like:
->
-> error: 'BOOT_DEVICE_PCIE' undeclared
 
-I see. Sorry I missed that.
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+[1/1] spl: Add support for Device Firmware Upgrade (DFU) over PCIe
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/cde77583cf0b54dd572a38acd159ded7dd5e3e86
 
-I'll pick this up shortly to try to make it for v2026.01
-
->
-> The #ifdef CONFIG_SPL_PCI_DFU approach ensures that the code referencing
-> BOOT_DEVICE_PCIE is completely removed during preprocessing on platforms
-> that don't support PCIe DFU, preventing the compilation error. This is
-> similar to how other boot device checks are handled in U-Boot when the
-> boot device macro may not be universally defined across all platforms.
->
-> Regards,
-> Hrushikesh.
->
->
->
->>>   	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
->>>   	    image_get_magic(header) == FDT_MAGIC) {
->>>   		struct spl_load_info load;
->>> @@ -102,3 +117,6 @@ SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, spl_ram_load_image);
->>>   #if CONFIG_IS_ENABLED(DFU)
->>>   SPL_LOAD_IMAGE_METHOD("DFU", 0, BOOT_DEVICE_DFU, spl_ram_load_image);
->>>   #endif
->>> +#if CONFIG_IS_ENABLED(PCI_DFU)
->>> +SPL_LOAD_IMAGE_METHOD("PCIE", 0, BOOT_DEVICE_PCIE, spl_ram_load_image);
->>> +#endif
->>> diff --git a/drivers/Makefile b/drivers/Makefile
->>> index 7560008a842..77fc66eb8ba 100644
->>> --- a/drivers/Makefile
->>> +++ b/drivers/Makefile
->>> @@ -26,6 +26,7 @@ obj-$(CONFIG_MULTIPLEXER) += mux/
->>>   obj-$(CONFIG_$(PHASE_)ETH) += net/
->>>   obj-$(CONFIG_$(PHASE_)PCH) += pch/
->>>   obj-$(CONFIG_$(PHASE_)PCI) += pci/
->>> +obj-$(CONFIG_$(PHASE_)PCI_ENDPOINT) += pci_endpoint/
->>>   obj-$(CONFIG_$(PHASE_)PHY) += phy/
->>>   obj-$(CONFIG_$(PHASE_)PINCTRL) += pinctrl/
->>>   obj-$(CONFIG_$(PHASE_)POWER) += power/
->>> -- 
->>> 2.34.1
+--
+Mattijs
