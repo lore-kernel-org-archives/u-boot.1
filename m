@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E28D6CCFA05
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 15:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F5F5CCFA05
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 15:51:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5924883B9B;
-	Thu,  6 Nov 2025 16:51:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9993D83B9B;
+	Thu,  6 Nov 2025 16:51:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="NNSrJgRY";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="X9cQItzH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBEA683BB5; Thu,  6 Nov 2025 16:51:10 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 23E6083BCE; Thu,  6 Nov 2025 16:51:46 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E964583B85
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 16:51:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D15583B85
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 16:51:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=suse.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-47114a40161so11527575e9.3
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 07:51:07 -0800 (PST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-471191ac79dso12740555e9.3
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 07:51:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1762444266; x=1763049066; darn=lists.denx.de;
+ d=suse.com; s=google; t=1762444303; x=1763049103; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:autocrypt:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=hJ3VsqDgRspL7seQ1/HUPtFKMqTT1l3pIvLs/Ah9g48=;
- b=NNSrJgRYr6C27/QJCZDr1dRK9RTWi4FETmW5+Hr+Bqq1sgm6CtLN7h5la9PzZWqO/D
- lRAEg7UUSTU2iJo15Gf/JLpX2T/B2IuBQn4xyA4wyAx11Xms/qCAoJR3j6HawvMAIg0H
- chQPj6sLqOGZUkpq9Azoadx3wMzg0p6Ue+w1p09/OkGUzrwTnuOHLRT+DVbEQzD9qBD3
- /OVhNmpsQCuxQ6jGyl3A6MbAb3yfdLiQ5sewc1Y61zu/UrZfoitjpU+t5z1dYd+6Ixnk
- WLb+GLJGBM7sczGZaZRgx77aNf/rTtIJM2KWWWM681AYbhN57+lC2qu0Y2X1sXX7iXTK
- /vfg==
+ bh=jgiZyDRCXFRjDWCQQdYFuO3a9cIBfhd+iR3hQGyVakI=;
+ b=X9cQItzHv+PMXNUb8MDeMYtga1xiq/Pnl1A0mzsSQmwcLGrYUimgLgN7rN66szkYbL
+ E9OiVYuTkSXC311gdyMre4HjIvQPNkzTfHUD7s6exD2DCVXgJ2Ter2MfVeHn6TNDqxC7
+ kJbwJMoZts//TNnvraqtPm0Jtzmi97IUy6fePK+O6lk4n2rZj/lkBrX//FBCWNpOODwf
+ h+Pq1yCRPU3LmyyeX6BI2Bs/O728oDA2riqNH2g7vnbmh9Em0hV5IEhkGJvPDt7Nkn0w
+ pbFTILXOT5D2Y/UnxivGsOp+/0QKk8gwdmtKUbfr4AIOp37hVOskl3TvmjrirdRgPr89
+ MGEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762444266; x=1763049066;
+ d=1e100.net; s=20230601; t=1762444304; x=1763049104;
  h=content-transfer-encoding:in-reply-to:autocrypt:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hJ3VsqDgRspL7seQ1/HUPtFKMqTT1l3pIvLs/Ah9g48=;
- b=QJ091FWOab3Pcyf2hdyxkFLELSJXk+uiXOLt3HJJweQF/tLVnVXqJHmCVgr0j83swK
- Jos4PVjK9c+IBtakX7HacknkVHNsk7IJnctrdzVt0xT88yX00jsgzB/0MmPAmdBjz9hJ
- kHbvqC/uP3IkOB0pxBwEfa3s9YyTpeEgGmCpDwJieq/s2/BVoElWYaAgpSNEzlyyPolk
- UpAosewrpqTd6ws7IZQVOEhcKcApkCO/Y5tjZKp9nAvfjjCVxmHrH3IZxvffm0MXSq09
- Ul+xExoRGNlBDHhovnSk3AP0DlyEoO4CqWFKVh1VuktH7chPDWC/E5dJkuChFXsaDVcT
- 2Wng==
+ bh=jgiZyDRCXFRjDWCQQdYFuO3a9cIBfhd+iR3hQGyVakI=;
+ b=k6eFH0AKP2swYD2GJ4+itKBI1FbZVecipHDpnkDdwBpz7Cs/w1n5FeRGneuPvb6Suv
+ y9Wm0T/avJ5ELowjk6OpieobX7QHtHJe26fn17Ifx63kYI1IWCeAaJ93AFJiVjgOGlUN
+ 5K61u8JBbMwg9vAG4q7KvnFOA6Nq1KWgbpYNBSar8yEllp3lPsVrskcoXMJa/V4Y5B+U
+ FBQ4Ojk03Zw1lgTBF7cuLNBOXjZ/Vp3TakPScc4ZtloXtpJ3qcSwWUt+yE8vaB51/sRd
+ b+7WQ/NkyoyndBaT0f6gk3ADZu00erlrE1BNGQE5Zb3TVHukcmaM118B/Fgtm55gCQAF
+ 7h/g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVR3o/InWifvQ+Q3KzB0Xs3XC40XRvMAFLyI6HYMfZGGmNdfcfrKs/BBQEyLBUMbt+6jZHifb4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz0uhdTuwsJWlH9hyHsxPGmMsLnUaf5+GxLdj0on1NzDHHJCQms
- Ld8lusztPfdDTUd6yCZWZZhPqzKzh02S31efZo+DBYX75kW1GaO9SBoB2erRwF8d1RY=
-X-Gm-Gg: ASbGncuApHj1L2Yxi3RCuTWKymMeiiU7U6M9qI2hnTbWgAy1anSO27N5ooWCjOcY2ta
- /P01y6mm9yfKtBSvxy7APFhUqDPhAyxUX5O3rJkEo+uT0MXgoaHJUcG2/STWK3VKfkmaO2QA+hA
- 2W09x2zvzYHvjKxac82CFPUHi5wpDmHlxexBNtxWBhMJapCBG0TsbiZG3O8AjjRG5MYm2ppYH5t
- H6d6Gn9pbB+7uIPGltZ1NZIeRV0KN2T9/o5MdcjaMpBj/+SmM4uib4OUFUsOx8v9dGqwdGvcFuH
- Ux67d2ZfuEtVeFQlTBK8kaS98k1UygIMRhsvQxKNEVmQ+ECSdSlue3+SY+0sp6d14+iaOmCk/+0
- giqNiEtZH3JzEYJxDr/mf2TumVzxrgh6J2BsuY+WTaGc6pf6v9PgVUcRo+jKspiHV6QVvt5Nzee
- 5BHeQmKs7+7kPp
-X-Google-Smtp-Source: AGHT+IF1k3DXj9PPGvI0PeH/5OHI3JuCnH2ayuzzEtg6NjXOv7hJQyk10wZYJl7KQ9LbEbreb1nONw==
-X-Received: by 2002:a05:600c:681b:b0:475:dbb5:239e with SMTP id
- 5b1f17b1804b1-4775cd3b301mr91527985e9.0.1762444266344; 
- Thu, 06 Nov 2025 07:51:06 -0800 (PST)
+ AJvYcCWgUPGV4A7Ke91S/MWqFymbm80C56iiowV4nm4yQDiXbhn2fZpYeCxj9GRgu2f0OZotSoQQfqQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwH9ZhPC9j468yqIoRJbhk2upL0vla5i9SObOqscf2WKrZAbeMU
+ DYy0wDax/2ToorVsav39iEX7MUfTbwzgERF8KB+Sy/94MuNUUe2cpk3OtWvPy31+9IM=
+X-Gm-Gg: ASbGncursJW1nyXw7lLrF9CSnmWTiV2pTsFPad0/KnvYPf3cCqXTOjVUrYLaUWWt7/z
+ DP5U7wrDLjLv6wyqC3Zqbw7q+ZScyqueG7wgfVLBoWaLkMx9OYjQj03ha0WvGCUKy7OAl9r1I4t
+ 65327gVv35wprmDrHKBuOUgu9OSocO4aQIhYDXjVCcobG5/wCS0kpI+wwZ7U/VNYC4gY8Mf7xUq
+ /n0I645nnuGZidpuT6GqNv+1hrj9mWAKuDnIOAkeOG5NNMLESJzUi32nG3hk3nRp28Wej9eO9Qh
+ UrxgTVoNfzP5tvGJWN5ZYjZX43yz99/PisWXotKtChyZJQdNOkxICr2huRcKelTPkaLLk0uxa11
+ UGNh6ZrO+APiwbgK88ZlRTk5WXy7tlfwzW7DwMzcBYlOOaieJjuPhaODst7Dp/oMuKeP+2mGqYO
+ rlAxmyGYDYWcFcesMX6LUAGqU=
+X-Google-Smtp-Source: AGHT+IHDH+Kgi11w0YW1LKKwv+9V12ptvK91cXnaIQFlDhD/N1J2JaeIyaBhDiPNisiREoZPrx6AVQ==
+X-Received: by 2002:a05:6000:4282:b0:429:d3c9:b88f with SMTP id
+ ffacd0b85a97d-429e32cb7dcmr5951823f8f.8.1762444303517; 
+ Thu, 06 Nov 2025 07:51:43 -0800 (PST)
 Received: from [192.168.2.177] ([91.116.220.47])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-477622f42b0sm56493065e9.4.2025.11.06.07.51.04
+ ffacd0b85a97d-429eb42a2aasm5704371f8f.21.2025.11.06.07.51.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Nov 2025 07:51:06 -0800 (PST)
-Message-ID: <027c97e7-caa6-45a9-b8d2-21d0743f3b06@suse.com>
-Date: Thu, 6 Nov 2025 16:51:03 +0100
+ Thu, 06 Nov 2025 07:51:43 -0800 (PST)
+Message-ID: <6c967722-18cd-4dfc-a282-b0bb0c37454b@suse.com>
+Date: Thu, 6 Nov 2025 16:51:41 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RESEND PATCH 1/4] macb: wrap asm/arch/clk.h with ifndef CLK
+Subject: Re: [RESEND PATCH 2/4] pci-uclass: respect ofnode_read_pci_vendev
+ retval
 To: Torsten Duwe <duwe@lst.de>, Simon Glass <sjg@chromium.org>
 Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -100,7 +101,7 @@ Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
  <Oleksii_Moisieiev@epam.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  u-boot@lists.denx.de
 References: <20251105163553.15F2A227AAC@verein.lst.de>
- <20251105164426.20BB1227AAA@verein.lst.de>
+ <20251105164432.C8AA4227AAD@verein.lst.de>
 Content-Language: en-US, ca-ES, es-ES
 From: Matthias Brugger <mbrugger@suse.com>
 Autocrypt: addr=mbrugger@suse.com; keydata=
@@ -146,7 +147,7 @@ Autocrypt: addr=mbrugger@suse.com; keydata=
  LV6nybxdRG/jp8ZQdQQixPA9azZDzuTu+NjKtzIA5qtfZfmm8xC+kAwAMZ/ZnfCsKwN0bbnD
  YfO3B5Q131ASmu0kbwY03Mw4PhxDzZNrt4a89Y95dq5YkMtVH2Me1ZP063cFCCYCkvEAK/C8
  PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20251105164426.20BB1227AAA@verein.lst.de>
+In-Reply-To: <20251105164432.C8AA4227AAD@verein.lst.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -168,36 +169,49 @@ X-Virus-Status: Clean
 
 
 On 05/11/2025 17:44, Torsten Duwe wrote:
-> macb.c includes asm/arch/clk.h solely to declare get_macb_pclk_rate().
-> That function is platform specific and only required if CONFIG_CLK
-> is not set. In case the machine does not provide it, compilation fails
-> even when the MACB pclk is detected via the CLK framework.
+> The vendor:device read in pci_uclass_child_post_bind() might fail,
+> which is currently ignored. In that case e.g. the RP1 on the RasPi5
+> is erroneously being treated as a host bridge.
 > 
-> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+> Mark the device's PCI info as invalid in case of failure.
+> 
+> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 > Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 > Signed-off-by: Torsten Duwe <duwe@suse.de>
 > Reviewed-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
-
-It seems you forgot my reviewed-by tag, anyway here it comes again :)
 
 Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 
 > ---
->   drivers/net/macb.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   drivers/pci/pci-uclass.c | 9 ++++++++-
+>   1 file changed, 8 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/net/macb.c b/drivers/net/macb.c
-> index cbf5f605518..a54a268036d 100644
-> --- a/drivers/net/macb.c
-> +++ b/drivers/net/macb.c
-> @@ -38,7 +38,9 @@
->   #include <linux/mii.h>
->   #include <asm/io.h>
->   #include <linux/dma-mapping.h>
-> +#ifndef CONFIG_CLK
->   #include <asm/arch/clk.h>
-> +#endif
->   #include <linux/errno.h>
+> diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+> index c370f8c6400..4092e8ff5a9 100644
+> --- a/drivers/pci/pci-uclass.c
+> +++ b/drivers/pci/pci-uclass.c
+> @@ -1200,6 +1200,7 @@ static int pci_uclass_post_probe(struct udevice *bus)
+>   static int pci_uclass_child_post_bind(struct udevice *dev)
+>   {
+>   	struct pci_child_plat *pplat;
+> +	int err;
 >   
->   #include "macb.h"
+>   	if (!dev_has_ofnode(dev))
+>   		return 0;
+> @@ -1207,7 +1208,13 @@ static int pci_uclass_child_post_bind(struct udevice *dev)
+>   	pplat = dev_get_parent_plat(dev);
+>   
+>   	/* Extract vendor id and device id if available */
+> -	ofnode_read_pci_vendev(dev_ofnode(dev), &pplat->vendor, &pplat->device);
+> +	err = ofnode_read_pci_vendev(dev_ofnode(dev), &pplat->vendor,
+> +				     &pplat->device);
+> +	if (err) {
+> +		/* Mark PCI device structure as invalid */
+> +		pplat->devfn = -1;
+> +		return 0;
+> +	}
+>   
+>   	/* Extract the devfn from fdt_pci_addr */
+>   	pplat->devfn = pci_get_devfn(dev);
 
