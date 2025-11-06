@@ -4,95 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA76CCFA05
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 18:23:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6237FCCFA13
+	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 18:45:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4A3383B85;
-	Thu,  6 Nov 2025 19:23:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A35FD83C02;
+	Thu,  6 Nov 2025 19:45:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lZK9p3yc";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CpW/EivK";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="I3EbU/RL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AB1F83BBE; Thu,  6 Nov 2025 19:23:36 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E426E83C04; Thu,  6 Nov 2025 19:45:07 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C01C483B22
- for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 19:23:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D1C483B85
+ for <u-boot@lists.denx.de>; Thu,  6 Nov 2025 19:45:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-44fe4c3c19cso528891b6e.3
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 10:23:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762453412; x=1763058212; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WfAIS7bOwZ6rQtG0X3AMJSJxln8uL8u07+wcIYlNlVQ=;
- b=lZK9p3yc34vSJgCMtIjMeFDuCwkXbkNp3xbAPIvRmbBWsjxEQhbvX0743YdRVeMyoT
- MQDeBTpfWohsmdquGq+KCll43Mmn688+RioEC2ENMlRxaKtHtUHoukvK8xq6UN06Z8Rx
- KBdtD+c9ZtGSwh1QAgFvh143BenhMoVUshCiw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762453412; x=1763058212;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WfAIS7bOwZ6rQtG0X3AMJSJxln8uL8u07+wcIYlNlVQ=;
- b=oBYEl3dM2c+iTiMYt9l6fFlaipibqIAyOByDUkXrlZnQNTK17djmMZGVHzYPPfOBr9
- 6dcYljZ2KTdSrk9uTMfqAwKfZpAfQ4Cd5UindL7EJWYZoP7O03bqt6TSBd+D80Ol3cK6
- OTgSXb4ixX3MEC9AiafNMfbiHqeyNA2T9tD7jDj4UiV9hzucrASyPVdQjCrhfAhIhcLB
- npTnJJwd89zmnY3fFK+nOQlvIOeud+5HLE2VALytUNY+kQ9a29uFrplDu5Cdl84ZZbeP
- aDcWIR/4F/qG84qqQIcjyQ6jUg3ZzDsBLgrq7+jtsegKXOY+XDRRefqUPBSWS4CV4dzC
- rVsg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDpcw8SLl6tKtuIm5IipQRCEE+O0zjuhgfFZQqrZgv80xiR/naM6zsEJoE1gtyuLZymewRPlo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzE+8nrcY3zu934+QsaGSX/ITbcEeuLu/5LNz+zsMW9BjfQfwom
- McoQeHDQDwxP0/NL3CjO3axTnTTJpcC4ZNJweq8dh7uSnrVqZwcvfHIRD+v1hplC9VM=
-X-Gm-Gg: ASbGnctoeEo/KWG1r38xAOAjDjERb4ovaY8qrWrfzcilZj4NfdhILaWGARX/3pggCAw
- PwpoaLeLTaFluXQasSYtDIiJIEI5zLYfAN+IL89jQGbM5oZS42dX9szY6/1ure5r6SfCn7YbS1H
- gGULeYYs3Uw3zUzoW82bkYqsAymUZpux2hjHh7DpKpqvuytUESSsvWWIXreA0NRoHh7BXkzKeXc
- weyZlHRo+tFfFvqrKJJY7nwp+YumlY21FGz57CJGPPEcwAUUuiMiG8aIOZsphuxRr5L5G3K9atT
- veZVKtW3ZmUgQHYy3QEzF8QOKtG7OV07Yr+W0JKal15ifaWfpZ6bqLfHEWacGErEUZKSIsmzKei
- b/0TW8BV/3ks62OH59dt38mDH8blGZYpBluPAFmaNumJ/L9r0dOdNt6n5YE8MPN/amZtm3vCXrG
- F2a2bNt0wERtb9MXNbCHfOa5/IEvuxym13TL9LZdM=
-X-Google-Smtp-Source: AGHT+IEPIXJ1+34tQqkTHkwmvbqbmFkibDpOfBT78vr5MabV8zVNJt2HLX2n9ljSSB+3nckDWir6Aw==
-X-Received: by 2002:a05:6808:1a28:b0:43f:14d6:82b4 with SMTP id
- 5614622812f47-45015ececb7mr161755b6e.35.1762453412438; 
- Thu, 06 Nov 2025 10:23:32 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450027edca3sm1049203b6e.22.2025.11.06.10.23.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 10:23:31 -0800 (PST)
-Date: Thu, 6 Nov 2025 12:23:29 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- "Bajjuri, Praneeth" <praneeth@ti.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 1/2] distro_bootcmd: Add support for customizable
- find_distro_rootpart
-Message-ID: <20251106182329.GY6688@bill-the-cat>
-References: <20251031-feature_distro_rootpart-v1-0-4e7c465708e8@bootlin.com>
- <20251031-feature_distro_rootpart-v1-1-4e7c465708e8@bootlin.com>
- <CAFLszTicHdtY73+asYQ9NF_uEFg7BsSfN2cW+21FbQoxH9V_JA@mail.gmail.com>
- <20251103115225.381126f1@kmaincent-XPS-13-7390>
- <20251103171630.4df1efdd@kmaincent-XPS-13-7390>
- <20251103161905.GP6688@bill-the-cat>
- <20251104102916.3df33d55@kmaincent-XPS-13-7390>
- <20251104163816.GB6688@bill-the-cat>
- <20251106190001.0e5a4504@kmaincent-XPS-13-7390>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d2WMj2ghNz9v4J;
+ Thu,  6 Nov 2025 19:45:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762454705;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7hm1a7awX6OwwMmrApWPLXnueXnpspcFBd8Y4CWIMbc=;
+ b=CpW/EivKMVwzuM3kQwne4Q6eWZwoXjxA0BhgixZVGjUEuQ8WbeoS/Y9hzLwD6UHEkAxEV5
+ 2atbHebmu4f3286HgW9ecmFUIekgjFG9Nze4cxSXe1lo3fmx7IIjpZ6L6p4xPNsHCfl76w
+ nJjFwHEthNZpyNdfZX2V7duVyrnjIlJe3xDJHiREUoSZV1tgkpXiy6Q4I1KOWC41PKrSfI
+ mMwrvADZ1NukVOmhEfPAVYlqxJ+VoAq2CiB/xuez6siGhqh17EkRjFkLlXYv/qvQH8p+F2
+ 3SO5BUB8iTIloH7BgSIXsO1KD9QtnwE+WWlfdn+BMs1Vho1kdcBcFmogPcSoMg==
+Message-ID: <b475b895-38b6-483f-b498-5cb4247251c2@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762454703;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7hm1a7awX6OwwMmrApWPLXnueXnpspcFBd8Y4CWIMbc=;
+ b=I3EbU/RLaXd0mOTbLrVL1K17V3RzdMLPQhLS76tkXqzsEh0r/ZxTMr+SkPY1HkTWAPEAp+
+ WLDeMGUBGxCV9w6Bg4A2zslLSQ5XbbtBBpY/vsDTvleR+1o654OFsJwMb4iisfG6IsfTdV
+ 435fFMSP7NsmR93eEh6K7+h/FIOYwKjcim3HGHp/9vvsSzdhpCGveCJj9f3zsbAsj4NwC2
+ T5IBmIGSSyG1SPnZsSR8f7SiK2Io0LPUvAKuXOlVuC/VHR0GxzL+IwtgsnlfZ9qLKbKtzQ
+ GbzggDKFjxyxIYLS4E8f6pcq70xQyiSsFDCQ0yUO4K6fx8AT3Ptl27thELzJ7w==
+Date: Thu, 6 Nov 2025 19:45:00 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VjcB9YdweuqPNrFc"
-Content-Disposition: inline
-In-Reply-To: <20251106190001.0e5a4504@kmaincent-XPS-13-7390>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH 1/4] clk: scmi: Bulk allocate all sub-driver instance data
+To: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Alice Guo
+ <alice.guo@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+References: <20251028034225.260469-1-marek.vasut+renesas@mailbox.org>
+ <PAXPR04MB84590D1D084E14A5D6B6BA7188C4A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <20251104160631.GY6688@bill-the-cat>
+ <PAXPR04MB8459585528148DC8B365867B88C5A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <PAXPR04MB8459585528148DC8B365867B88C5A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: d1ce3de6e879ce65989
+X-MBO-RS-META: ub84p4y4r5pmjwztz1xgbks97auiwi4x
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,119 +95,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/5/25 1:49 AM, Peng Fan wrote:
 
---VjcB9YdweuqPNrFc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello Peng,
 
-On Thu, Nov 06, 2025 at 07:00:01PM +0100, Kory Maincent wrote:
-> On Tue, 4 Nov 2025 10:38:16 -0600
-> Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Tue, Nov 04, 2025 at 10:29:16AM +0100, Kory Maincent wrote:
-> > > On Mon, 3 Nov 2025 10:19:05 -0600
-> > > Tom Rini <trini@konsulko.com> wrote:
-> > >  =20
-> > > > On Mon, Nov 03, 2025 at 05:16:30PM +0100, Kory Maincent wrote: =20
-> > > > > On Mon, 3 Nov 2025 11:52:25 +0100
-> > > > > Kory Maincent <kory.maincent@bootlin.com> wrote:
-> > > > > > > >       =20
-> > > > > > >=20
-> > > > > > > How about moving to standard boot and look at this there?    =
- =20
-> > > > > >=20
-> > > > > > Ok, I will take a look at it.   =20
-> > > > >=20
-> > > > > There is a custom nand boot target [1], and I have not any am335x=
- board
-> > > > > with nand memory to test it. I am afraid to break it during the u=
-pdate
-> > > > > to bootstd. Not sure we can accept that. What do you think?
-> > > > >=20
-> > > > > [1]https://elixir.bootlin.com/u-boot/v2025.10/source/include/conf=
-igs/am335x_evm.h#L27
-> > > > >   =20
-> > > >=20
-> > > > I think we can risk it. I'd even be OK with not migrating that port=
-ion
-> > > > and letting anyone still using those platforms, with NAND only, to =
-just
-> > > > use a custom boot command instead as I have strong doubts there's a=
-nyone
-> > > > doing anything other than that currently. =20
-> > >=20
-> > > Ok.
-> > >=20
-> > > Small questions related to standard boot:
-> > > Why do we have a lot of bootmeth selected by default like
-> > > BOOTMETH_EFILOADER, BOOTMETH_EFI_BOOTMGR, BOOTMETH_VBE ..., but
-> > > BOOTSTD_DEFAULTS not selected by default? Shouldn't it be the contrar=
-y? =20
-> >=20
-> > Hard to say. We got stuck on trying to find the right balance between
-> > features and size growth.
->=20
-> I still think we should disable these as default, moreover they are run f=
-irst
-> in the bootstd process as they are global bootmeth.
+>> On Tue, Nov 04, 2025 at 08:05:53AM +0000, Peng Fan wrote:
+>>> Hi Marek, Tom,
+>>>
+>>>> Subject: [PATCH 1/4] clk: scmi: Bulk allocate all sub-driver
+>>>> instance data
+>>>
+>>> I just see this patchset was delegated to me in patchwork. But there
+>>> is no scmi repo, could I use the u-boot-fsl-qoriq.git repo for
+>>> managing the scmi patches?
+>>
+>> It's a question for you as well. I'm fine with a PR from that repository,
+>> but if you want I can make a u-boot-scmi repository fairly easily and
+>> add you to that.
+> 
+> No need a new a repo. I could use u-boot-fsl-qoriq.git for scmi
+> patches.
 
-We changed that just now, but also running efi bootmgr is important for
-the common use case of generic OS support (which is growing more for
-64bit ARM than 32bit ARM).
+Do you plan to pick any of the patches for 2026.01 still ?
 
-> > > Moreover it is explicitly described that global bootmeth can be slow:
-> > > https://elixir.bootlin.com/u-boot/v2025.10/source/doc/develop/bootstd=
-/overview.rst#L103
-> > >=20
-> > > The bootmeths environment variable is never read.
-> > > Changing this environment in the prompt allows to change the bootmeth=
- order
-> > > thanks to this callback:
-> > > https://elixir.bootlin.com/u-boot/v2025.10/source/boot/bootmeth-uclas=
-s.c#L459
-> > > But if we set bootmeths in the board environment it doesn't work at a=
-ll.
-> > > Is it intended? =20
-> >=20
-> > Standard boot is still in development. We're still in the process of
-> > getting more SoCs migrated and in turn finding and fixing the rough
-> > spots. Global boot meths have changed a bit since v2025.10 as part of
-> > hopefully addressing the feedback Andre P. had as part of migrating
-> > sunxi, but I think there's still the ordering half of his concerns to be
-> > figured out.
->=20
-> Ok thanks for your replies.
->=20
-> Other question: Is it possible to not add the environment to SPL image us=
-ing
-> the new text environment format. I have tried to update am335_evm board t=
-o it
-> but I got a SPL too big error.
-> I have tried to add "#if !defined(XPL_BUILD)" but it is not working.
-> It seems the same generated environment file is used for all images.
-> I still haven't found were it is included in the build of the SPL image.=
-=20
-
-It shouldn't change the environment size, but also environment is likely
-being pulled in to SPL for network boot support which does require
-environment. What do you mean by "same generated environment file is
-used for all images" ? And are you building in separate object
-directories for a given board or is it not being re-generated on config
-changes? Or did I misunderstand? Thanks.
-
---=20
-Tom
-
---VjcB9YdweuqPNrFc
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQznlgAKCRAr4qD1Cr/k
-Ckg9AP9iAJBANuoNKZti4xpevLwvxI38RaNl/9y1NxIDZcnUIwEAvbwha/Ir5dOR
-nAXGKVIV2aEUp1YsY8ZyPsiU3NDxOgc=
-=GJMf
------END PGP SIGNATURE-----
-
---VjcB9YdweuqPNrFc--
+-- 
+Best regards,
+Marek Vasut
