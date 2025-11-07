@@ -4,95 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67065CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 15:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F11CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 15:57:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A217583D2E;
-	Fri,  7 Nov 2025 16:52:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C6B2B83D2E;
+	Fri,  7 Nov 2025 16:56:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PNGD6nUS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LC7cnciR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 817D483D62; Fri,  7 Nov 2025 16:52:02 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 3FDF483DA7; Fri,  7 Nov 2025 16:56:57 +0100 (CET)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BCB683D0C
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 16:51:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 216D083D0C
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 16:56:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-656b0bd47b8so177329eaf.0
- for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 07:51:59 -0800 (PST)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-3e3dac349easo554324fac.2
+ for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 07:56:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762530718; x=1763135518; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762531014; x=1763135814; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CWviUrMa903J95l/f+VuD7asq0psy/tdfYN4voQitc0=;
- b=PNGD6nUSSjZzJvhrx1R9i+NGajfO32hAZWH9C2ZU5tjnld5v6tPTurPQUkhyJoOKk3
- A0XFp11RghDPHXQvmmo64PBA0CmUkpVit+/RQo74H06LWX+1+3aI3ET7DZUqzMPr/RdS
- hcEUvyB5k3u+GqCwxrwYJcEqqDurbYcydSxrs=
+ bh=g+iUt2oelOOL2mIXS1HCzyrxw7p5dNRuTfEpGY1pHYk=;
+ b=LC7cnciRgXi6eyi/Pv2ejmBDvYo8HnaOl1WfMuVGOnnOomxwF9ck3FaLdke49R5Umu
+ v+5jtogsrBYePrNKWbok7WpqApzzC+LRY+6qF9UUgs0I/H9vW/LUy5VkeBI3wHvO4N9M
+ 4z/ARFJjHU4ZMXj1MAsQMxkSkWQ3wahjGILVI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762530718; x=1763135518;
+ d=1e100.net; s=20230601; t=1762531014; x=1763135814;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CWviUrMa903J95l/f+VuD7asq0psy/tdfYN4voQitc0=;
- b=EbMWRqSHLANZpFJodZOksmH21ednAztJSo/6y51U4+6vlVUhzH9JXbeuDgmL9Xc3sJ
- WJBwd9xlrOlnDDozR/k52p68SbMP/wKKMc0H45gr06jpNE1d42UgHwqB2daVhiCPyrhV
- 9Fz4+oyKmhYNTyi/ylsasYgWBjMYJAKhD4Hn3pzEvNfisYYJPhGSKl8tUqRQJQ71wsoT
- 8feNa5fZKHuZvbjEp6LceNYy0RnFkoLb187Ys0hjpzY3jeBepfQC+W0FP+HhjATjOD3z
- PRifPvBHxjrN0ShGiZNPPsNZvlemZcncVI7i076FMezkWZEelqUjpsFuZj5xmkRaoX7H
- py8A==
+ bh=g+iUt2oelOOL2mIXS1HCzyrxw7p5dNRuTfEpGY1pHYk=;
+ b=Pv2IrMZEgO328ngkYPXndd+qfxymC6juc67JvMFiro9M52adHZXjEDaf5jDwqFZGxv
+ i6v95+30qHCjKIiqF01jhCCZzf6rpsgzHFpYqwm7b5NTIqKzYGnk2EXv/cPFj7BVeMZ6
+ qYeNsml3hhuEnp6gweCx3QilThbu5ZIlsC2nGE4qjHI0FDmn7CRlWRkQSVgE54hcL082
+ mdg4Xu2EqAq8p3kKPywBIPTNuwcA3iIFYy2JublA3BbhMAjPPPxKcsXNNi6JWHpPj4Gk
+ Gbrpq8V1K4JerOf1XwQBVLlbr75slNf6jq0NLuN709w+4ryt5QTc3ltDvjxcV0Bf3ojT
+ SG4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVrWuBmHLpeR1DDhOgeJspqqBpo//1jXRSLi4In8+GYQ5Tr+l+7nycC+DSg+xJB/R558dlz3Wo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzuk8lS2UakytSMpCLOWUznmFwO82JLNN78sACS7ssTqmhEv33p
- x0IBAR6d/+v8MFyF5KhqNKjGb+LJctgLNiteASkJTE+U4st2BrY6qMr09evoWUh91GY=
-X-Gm-Gg: ASbGnct6cEPiyFqu30jeto90Ue9gMkvsk3BXHjrVeUL3MTj++WnY/VmrP0zEv8OU2Lm
- GAiNLh7S7z+dq6/9DpGAj7mHhjKntFJUkw1mjbQRrhYS3cWxjS+/Qwty0g0aIg4m38qhVDrhlQl
- /vBGiUVo6JV6dSvs4mntRr3hkPk64tDIZ2d6KTF+G+GvVPlT2BXNWBiAHNS6nX+TO6F0UbJzKl8
- BZR0+G8TS7bDCsf16niQDouNS03jboj3JngEhPOxCBmAyAQOhpTpPiRxDjU+4r12/98tCrL/eHC
- 9vpUwUqyCh4vbXZYbv0Cy/dEOz9fna3MUPsyEEezuUvBWPjejW3utmSiuOYYV6xGl2FscJGPoQt
- O0/aQJgQj0Xm8FA/TLDMLB6pHeRrgzTf5rGnxJBPd+q7Nkmau/8eNu6Vz0u0SE9CNkVXVWdO+L9
- 7+l+tYzFRwv+mt1BwRHNbsg0jaoj2ATfKyQ4+g8wU=
-X-Google-Smtp-Source: AGHT+IGvBLaGwaZI6gj9Yq23WnXvk5MGzhizDXVX5pGv05PjYDS+OKrQFyp+8nU0uHJlxiuPKpDmLw==
-X-Received: by 2002:a05:6808:4f2c:b0:44f:eb84:e9e0 with SMTP id
- 5614622812f47-45015da02f5mr2243748b6e.27.1762530717845; 
- Fri, 07 Nov 2025 07:51:57 -0800 (PST)
+ AJvYcCWJTxq1TzH01xLpXQWzzp7NRhZpsgmE41L1/UZU6cJrYzP6vbxWAizmhk42H+NYKnUbZzvriwk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwZcbyVsG/lnQyB3mU3P62QeIMOoBZ8PYP5sBBhExvgEvt7qrLw
+ iO6kJqixjrO9AZZe+t6y8Tu1Vq35C16kstkaCYhKgSGvNmwdo63ygu0wxg+gaEG4+kk=
+X-Gm-Gg: ASbGncujoHh4FMKOBV0MJLZFoLLrpwL6U+kcKq52j/axYducsdEQQVLmwXnQpEW41sy
+ BG+TcXRR668OSgR7CkLDWRj+5+47h0xqfz1Y+Stb8EH9zb1AGGvr+ZGtPTPLk0aVFWkes8HJdwL
+ EVkAPMNofGrhD9YQMT/RX/kT0palwqkKJztgZIfOasCA8AX4rVKELVfGGHadP1h7WsX2Wj14KEE
+ VRJo2qv8iaTyRfPpd6IMz1RdwVX6QS1DG6N8MJHQkviXdsfVck6eu0+sJ8KYdHAWh9F78cN7SCY
+ 4vVT691SjBJzasNUpO8z3+nzddo21KACqkXR94ntQEYo5zooZh5LXp02NXLHc+fmxpwGJ2d7VlW
+ zj6Uoper/5BZpQ/aNJXCYbwVDuWQoJIfKaMVzDKZSB+93JnyiLODyObFpXKmHf5H/RrpUoFOygM
+ kbJl/8BAK8H5MIP42AsL/n7hDqqerWBcikJYnxMOnzw3YzdtxHoA==
+X-Google-Smtp-Source: AGHT+IGW5YwdE9PwUhtVT6OauLqXdlHPgT9l+STMofWEJM6sqos/GEoogHOxZIaCERVUwao2oRLE5Q==
+X-Received: by 2002:a05:6870:ac21:b0:3d2:a262:3d3b with SMTP id
+ 586e51a60fabf-3e41e497ae8mr2565280fac.16.1762531013823; 
+ Fri, 07 Nov 2025 07:56:53 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-656c57d6767sm2376889eaf.15.2025.11.07.07.51.56
+ 586e51a60fabf-3e41f1ec269sm1842706fac.20.2025.11.07.07.56.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Nov 2025 07:51:57 -0800 (PST)
-Date: Fri, 7 Nov 2025 09:51:54 -0600
+ Fri, 07 Nov 2025 07:56:53 -0800 (PST)
+Date: Fri, 7 Nov 2025 09:56:50 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- "Bajjuri, Praneeth" <praneeth@ti.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 1/2] distro_bootcmd: Add support for customizable
- find_distro_rootpart
-Message-ID: <20251107155154.GD6688@bill-the-cat>
-References: <20251031-feature_distro_rootpart-v1-1-4e7c465708e8@bootlin.com>
- <CAFLszTicHdtY73+asYQ9NF_uEFg7BsSfN2cW+21FbQoxH9V_JA@mail.gmail.com>
- <20251103115225.381126f1@kmaincent-XPS-13-7390>
- <20251103171630.4df1efdd@kmaincent-XPS-13-7390>
- <20251103161905.GP6688@bill-the-cat>
- <20251104102916.3df33d55@kmaincent-XPS-13-7390>
- <20251104163816.GB6688@bill-the-cat>
- <20251106190001.0e5a4504@kmaincent-XPS-13-7390>
- <20251106182329.GY6688@bill-the-cat>
- <20251107100517.6c79a976@kmaincent-XPS-13-7390>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Sam Edwards <cfsworks@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot
+ augmented DT if DEVICE_TREE_DEBUG=1
+Message-ID: <20251107155650.GE6688@bill-the-cat>
+References: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
+ <417e1b1a-0346-4297-9a72-7befc5b94311@gmx.de>
+ <537299e3-05a1-4ff4-b594-9c73ed41a0cc@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="t/668wUxH3+uAi+X"
+ protocol="application/pgp-signature"; boundary="yCEIBPFG50m1afp/"
 Content-Disposition: inline
-In-Reply-To: <20251107100517.6c79a976@kmaincent-XPS-13-7390>
+In-Reply-To: <537299e3-05a1-4ff4-b594-9c73ed41a0cc@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,66 +106,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---t/668wUxH3+uAi+X
+--yCEIBPFG50m1afp/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 07, 2025 at 10:05:17AM +0100, Kory Maincent wrote:
-> On Thu, 6 Nov 2025 12:23:29 -0600
-> Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Thu, Nov 06, 2025 at 07:00:01PM +0100, Kory Maincent wrote:
-> > > On Tue, 4 Nov 2025 10:38:16 -0600
-> > > Tom Rini <trini@konsulko.com> wrote:
+On Fri, Nov 07, 2025 at 03:06:47PM +0100, Marek Vasut wrote:
+> On 11/7/25 10:12 AM, Heinrich Schuchardt wrote:
+> > On 11/6/25 22:08, Marek Vasut wrote:
+> > > In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT =
+and
+> > > DT with U-Boot extras, to show how much does the U-Boot DT differ from
+> > > the base DT. This is particularly useful together with OF_UPSTREAM, to
+> > > minimize the diff between upstream DTs and U-Boot DTs.
 > > >=20
-> > > Other question: Is it possible to not add the environment to SPL imag=
-e using
-> > > the new text environment format. I have tried to update am335_evm boa=
-rd to
-> > > it but I got a SPL too big error.
-> > > I have tried to add "#if !defined(XPL_BUILD)" but it is not working.
-> > > It seems the same generated environment file is used for all images.
-> > > I still haven't found were it is included in the build of the SPL ima=
-ge.  =20
-> >=20
-> > It shouldn't change the environment size, but also environment is likely
-> > being pulled in to SPL for network boot support which does require
-> > environment. What do you mean by "same generated environment file is
-> > used for all images" ? And are you building in separate object
-> > directories for a given board or is it not being re-generated on config
-> > changes? Or did I misunderstand? Thanks.
+> > > Example usage:
+> > > $ make r8a779g3_sparrowhawk_defconfig && make DEVICE_TREE_DEBUG=3D1
+> > > $ cat ./dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dtb.diff
+> > >=20
+> > > This still has a downside. Even 'dtc -I dts -O dts ...' applied on
+> > > base DT and U-Boot augmented DT can produce different phandle IDs
+> > > for the same node in those two DTs, which results in a lot of noise
+> > > in the resulting diff. The only way I can think of is to patch DTC
+> > > to emit full paths in those phandles instead, something like a
+> > > phandle =3D <&{/full/path/to/remote/end} ...>;
 >=20
-> Sorry if I was not clear.
-> For the am335x_evm most of the environment is only in the main u-boot ima=
-ge
-> (i.e. not an xPL image).
-> https://elixir.bootlin.com/u-boot/v2025.10/source/include/configs/am335x_=
-evm.h#L78
+> What bothers me is ^ this part.
 >=20
-> I would like to do the same but with the new text environment format. Is =
-it
-> possible? Something like: board/ti/am335x/am335x.env for main image
-> and board/ti/am335x/spl_am335x.env for SPL image.
-> If that is not the case could you point me where the change need to
-> happen to help me on that. I didn't find yet where the text environment is
-> pulled into the images.
+> Hello Heinrich,
+>=20
+> > Without documentation developers will not know about the new feature.
+> > Could you, please, add a doc/build/ change in the next iteration.
+> Sure, although I am not convinced it should go in in its current form.
+> Please see my first line of comment.
 
-Ah. It sounds like we need to add missing logic to generate the text
-environment in each phase rather than once and use it in all phases?
+Maybe we put it in the u-boot-extras repo for now as a standalone
+script, so people can be asked to run it and look at the output?
 
 --=20
 Tom
 
---t/668wUxH3+uAi+X
+--yCEIBPFG50m1afp/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQ4VkwAKCRAr4qD1Cr/k
-Cgx8AP0Q+Xob8e61cdprrofw5hqpLBJVGQs+NkT1Yuyd358JsQD/ahD+SPCrGj4q
-Gz9sSXMFziqeEmYpXMYBzvdOMX5biww=
-=V4EQ
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQ4WwgAKCRAr4qD1Cr/k
+CoXnAQDKOtyxBYkZWHDx5BTc1cr0VAhJGa3mRkdfNykFx61llAD+IQntOWxmx/ML
+ybAcXgeMilhtj6j4ODR+owBNu4ARCwg=
+=i9qW
 -----END PGP SIGNATURE-----
 
---t/668wUxH3+uAi+X--
+--yCEIBPFG50m1afp/--
