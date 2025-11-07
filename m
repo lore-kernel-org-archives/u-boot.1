@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68A32CCF9E3
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 21:35:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B9ACCF9F8
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 21:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B0EB83E60;
+	by phobos.denx.de (Postfix) with ESMTP id CDC3F83E70;
 	Fri,  7 Nov 2025 22:35:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ouq1tsHE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LrC2/yZ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DD3C83E62; Fri,  7 Nov 2025 22:35:03 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id D1B4383E40; Fri,  7 Nov 2025 22:35:04 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35F1783E23
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 22:35:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF31B83E4C
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 22:35:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-3e2fc677775so888352fac.3
- for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 13:35:01 -0800 (PST)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-30cce892b7dso600323fac.1
+ for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 13:35:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762551300; x=1763156100; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762551301; x=1763156101; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ErwCFwuWdk41ey4M1t54dfL/OpNDDyizJDhmZDMx+Uw=;
- b=Ouq1tsHElMDIxlLR+lribevjMqvgKsoKHQ9zG8QPKEaxxnhjT6NG5HMGAwOwlmbGpR
- kMHj5v75IZFJgg5ykSboE6japkB0TXOjcr1FA75QO93HAWEVsyBINLU6QwpzPzKAxDmz
- 2e0g8SXySuG93JB0nrJbdc8AR4cVJVGsGG4iM=
+ bh=MAJfAfqGsecIbl/AWvtNa5EmybuEbrotzUwZKqhEl1U=;
+ b=LrC2/yZ4E2A/QudHQTXKBgVa0YKIeSQKOvGrWEYG4jbYTu4XLMx8krPmuPMeZbr3FA
+ 9aD7oqEhddnzfj1DC2UHC1roXgAwHftSahhYpY5UXqJXuqtWKVEw86w6xtlid4uc9zi+
+ B02A8BqpPBdApy1NR2bfKJxrQ9/6B8kew7I4Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762551300; x=1763156100;
+ d=1e100.net; s=20230601; t=1762551301; x=1763156101;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ErwCFwuWdk41ey4M1t54dfL/OpNDDyizJDhmZDMx+Uw=;
- b=Zohmo6qhRRoG263wEW9VKXy8YO4bMt+b3TwHOd5EgfKH0PulszAS0K41kRiKOEQ4wE
- wrsrWhyGrGfZh943Keqa2SC79U5GXKkpG6RzID/HjxQoJ1VBCyuIItQ2bwTSWwVfn7UO
- JvIpFpHM8nMxzt0E2fj9/3D0FBR1vDprwrtRP/+iNgvRlAkIjLbSP0zti/gPCxqbOcLT
- SY8f9K6QbzGoAaPH21AnwmihWa3+19efUP4C2lFoSeN1t4dfeTWHXcN7ElwNSWBuTCY1
- QsDgyQ/8w1rhB5UrBY9Vp4XHNAQ1uK8oUaoEtux1bDUyNBKbP5xyuOkRErkVIX2QzHnw
- zbXQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUE/QoX2k7k4FyoLTmySbfMG9hiTeO1rxr1SEaOdGvFLWwBFx8ThQ8aO2ql6Jh5BAMTBEjbHfQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwcFCxZA202JkZ1ZzKsW0K34Yaox0KODmQxImtsi6hQ+5XKbiX4
- kLTwgZ+aIh3hY1rtzOdJwdBilECvUzu4xRTMHp4AC26kgQz9Idi7KOTW4Gap1dS1yhs=
-X-Gm-Gg: ASbGncum8IzfUz8gGGF0bjkwFv/fFtcW6TLh7T7SXPO86VJ0/6/wRGtErq/K+VS/5Gc
- DDwh17CneFXNAJ3+iyTI7ZDU4/RFKq+Ee+9m/JocxL+84QMh9605xKnIhMyD4d/5p1UEgUiYfc6
- N+OBlyxlrDYldDjMkOX0L1LzdPj3CaO+608e3xWhKksBhhmlfxQKRQNW076zm4T9+673u/GbGbR
- 1v/4IDKnjXFJ4WoAyCv3zdEpoDkOsMDBBH+g8glgizF4utCwDXtnO1GvdiOOcv1AuF5LWfptzYg
- /uscbogbEDLfrE3Z8lFdVJQY6XBZSJyciVjNyHYhH7heEz0ww0nUUV1zUVo71mxp073LIF4yYyA
- AHafDiKlZ0/V1QaPW/AfGzml3K1/S6jYY3To9UcPFFlVXQGcMqxMdFSJ3gmIORoryJt/Z5hjmjk
- rwSAmWfu5BRQQaBxl7aSdI5Y3nEQT6BXDJaqgz9pZk3zhc65yC
-X-Google-Smtp-Source: AGHT+IFWUXaISevX7CvVgVJJue89Wi75Bx1Bp9E2ij5cje0VN0y8jYDwYCFqsQa3eOWzHcs3VH4aqw==
-X-Received: by 2002:a05:6870:241f:b0:3d5:aec5:77c6 with SMTP id
- 586e51a60fabf-3e7c28f45b5mr711002fac.41.1762551299806; 
- Fri, 07 Nov 2025 13:34:59 -0800 (PST)
+ bh=MAJfAfqGsecIbl/AWvtNa5EmybuEbrotzUwZKqhEl1U=;
+ b=bmOPpmC0dJbAmWHZKfRikdTvqKe45W3jZpOgv6XQHtHTpj8hsXpVD3enesQ0V4wBgc
+ og0uuQDhYNjwHBF0XzZneekY0o70wpXzBo3Va6loAnKa93yBwx72lvKp7CKvniUT1iKf
+ yr7YiL5A8kJrlYGTrEkKuy/4niDTcC8nN8eEE+64/631IxHsp65tBjV5jaeYGcrBYanC
+ cxma9rgYlEVJFNDt2LaqcyjCvptYJ8TbBuBh0ATrKuTXp70xPx51eiNtF3nJ7LruZf7G
+ uL/0dzZYDfZMjshj7aZfR1bZLrbIxZVzAOCmtXpzoKHjVg0Hk5Cho5PXyYGvIMiDQvha
+ aYsg==
+X-Gm-Message-State: AOJu0YxBcY86Jms/yRISYvDau/wWFBgQER66R8bfnS9VVPZHRhay2iXH
+ QrP4IntAZPybdtKUd722M2W1yyO3bdmKIa5v7bwVEYLLSGmccQK1IRxZknWLhdxP3as=
+X-Gm-Gg: ASbGncstTX+VpU9rnXUI34gQ3z5n51JJEcf2ENK0rSqX+nEd/8YpXWtG/rHbDzhYAUw
+ kH98gos0snRIkkEwInhLm/gzKSQGf2+TgGThNNudH+4YdzNx91egQKzXpYJLuhJJ3cfAeNc6ub+
+ QxIiILN2iwFQlo/Xxkkt9mm/u2io6/TzTNO1+/ECxS5qmKQs7wrbE23IJQoNzy0Hu6xEYlGxAQT
+ L67jTJaEs9sX/5bu3yCAnguQis5DVlXrouCKC2PvBkbsM9yxTDPesKhDLCP5obMtQh1U7rjK3PA
+ 1LDttqRGDk6jh6KgNbjTsHP2QA+gx2oTp+pY2rO/XvtUhy+Q2yjBdfWknAWXxuYdPC2FB3Hhz47
+ KLFINF75m8MhwstbgLvlJTrOrrzN+X/0vfX4lFKYrJoNmVtihcm+ZucSAE1JmigAKWZqcKkzmyY
+ Z3ote3wNG6AHf3JV80TJuskDHTek9lkvr0SayCNQ==
+X-Google-Smtp-Source: AGHT+IH+Da4O7Y8flAYvryqCFqSflWYPVYKbLJ9csnEP971L2hgCRgkh66XiXMohUbOHqByzrFlSrA==
+X-Received: by 2002:a05:6870:2cc:b0:3d3:5abf:e09e with SMTP id
+ 586e51a60fabf-3e7c2c1bf29mr656417fac.44.1762551300926; 
+ Fri, 07 Nov 2025 13:35:00 -0800 (PST)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
  586e51a60fabf-3e41ebb0fc6sm2507000fac.2.2025.11.07.13.34.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Nov 2025 13:34:59 -0800 (PST)
+ Fri, 07 Nov 2025 13:35:00 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20251104230203.50404-1-heinrich.schuchardt@canonical.com>
-References: <20251104230203.50404-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] sound: typos 'to be write', 'writen'
-Message-Id: <176255129913.3424353.8671785603235361346.b4-ty@konsulko.com>
+To: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20251104233915.89413-1-heinrich.schuchardt@canonical.com>
+References: <20251104233915.89413-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] virtio: typo complaint
+Message-Id: <176255129993.3424353.45743432929096398.b4-ty@konsulko.com>
 Date: Fri, 07 Nov 2025 15:34:59 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -98,17 +96,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 05 Nov 2025 00:02:03 +0100, Heinrich Schuchardt wrote:
+On Wed, 05 Nov 2025 00:39:15 +0100, Heinrich Schuchardt wrote:
 
-> %s/to be write/to be written/
-> %s/writen/written/
+> %s/v1.0 complaint/v1.0 compliant/
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] sound: typos 'to be write', 'writen'
-      commit: 199341908e3559a306d2726f7e33e2703864f0ed
+[1/1] virtio: typo complaint
+      commit: b9af2d08094cbe785dd5d0018c30912ccd6af23e
 -- 
 Tom
 
