@@ -4,58 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82898CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 16:01:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBDA2CCFA05
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 16:17:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D422783D2E;
-	Fri,  7 Nov 2025 17:01:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=pschenker.ch
+	by phobos.denx.de (Postfix) with ESMTP id 4D9A183DCA;
+	Fri,  7 Nov 2025 17:17:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="Qlx/SmK5";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CFAN3ekj";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LBHngaxm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AF1D83DAE; Fri,  7 Nov 2025 17:01:20 +0100 (CET)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42af])
+ id 3E11E83DDF; Fri,  7 Nov 2025 17:17:21 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AA1B83D0C
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 17:01:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A67EB83D2E
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 17:17:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=pschenker.ch
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dev@pschenker.ch
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d33hG0vgSzk2F;
- Fri,  7 Nov 2025 17:01:18 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pschenker.ch;
- s=20220412; t=1762531277;
- bh=jVlxNDbNMBG2mjUH3QGZTU5+uUp3hyiPwoG8gJyxMfM=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=Qlx/SmK5tr44N6qW90k33GrkjqaQHIla/HBUANiwaKh5Kj5KcAf9joKa66kxJLNVt
- Wv4vGcdEcUmOBL5Z254bcMs1vhvBcco2tK1so/0EBZZFmSIjbIre4tRSEHzidjN4sr
- VoVrxlgINh8vomc8SznR/Htei6Eb20Esy/cpwIWU=
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d33hF136fzNbY; Fri,  7 Nov 2025 17:01:17 +0100 (CET)
-Message-ID: <f429996a374f31d2d9dcdbcb8f143de18b512549.camel@pschenker.ch>
-Subject: Re: [PATCH v2 2/6] remoteproc: k3-r5: cast size to size_t
-From: Philippe Schenker <dev@pschenker.ch>
-To: Andrew Davis <afd@ti.com>, u-boot@lists.denx.de
-Cc: stefan@embear.ch, Andrew Goodbody <andrew.goodbody@linaro.org>, Beleswar
- Padhi <b-padhi@ti.com>, Daniel Schultz <d.schultz@phytec.de>, Hari Nagalla
- <hnagalla@ti.com>,  Neha Malcom Francis	 <n-francis@ti.com>, Peng Fan
- <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
-Date: Fri, 07 Nov 2025 17:00:36 +0100
-In-Reply-To: <57ada562-c774-4ef2-8739-b899e5df416e@ti.com>
-References: <20251107130216.3084134-1-dev@pschenker.ch>
- <20251107130216.3084134-3-dev@pschenker.ch>
- <57ada562-c774-4ef2-8739-b899e5df416e@ti.com>
-Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-4xbZQsuOR0KfkE4r7Zf5"
-User-Agent: Evolution 3.58.1 
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4d342j25cpz9stX;
+ Fri,  7 Nov 2025 17:17:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762532237;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=gQKiZ8VrOZdDqo6LNtm0WBvJdEOCJmNJNnc9khsw/AQ=;
+ b=CFAN3ekjWamU0OY55bBK2MQmJOyo86VOJTKAcixq+QT+L/5MVb4OvKbRsPqNqSfay3Phnx
+ is0XiCjnqeW7qSFFJ6sQjZ3UeXNfzBW6j52EJWJngySxPKDBTm9RVfkElUiOkyfbaU6JNn
+ lQYCqbcBZkgMTOjTrEcvXGwLJGCPieZ65/kji+qCuAS7fg6tv8kETywHfvmfE3v2L6Zjgt
+ /BjK1X3x2UCzgCaZCkj5sDgxBy5aFgVghA8lKmY0x9Rok//8dev4jW0ighDdoRWk3hG/Z2
+ 5zopzLmL+m5/fzvBl4UxoRCAAD2kwdrl0VBCL8JNbfC5xMLbJVYq3a4R8C0dkQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762532235;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=gQKiZ8VrOZdDqo6LNtm0WBvJdEOCJmNJNnc9khsw/AQ=;
+ b=LBHngaxmxVHmJZB0EswQxdwhUJ0+ruIClYTp4eWsCKcGgCKL0SO/pQE+99ulujnBfKF3l/
+ kMndXjfqfcS7oaC47oPGB+8FlRNjWXmXuDo9rNG4wx+Iw+vSIcXkXGNobH1AEds0v+qS+z
+ /XqHaEwB786vvfF6nuZKS8f7M4zfXXazGwmVxQwpTx4CCm0AAMwH5QQxnPf0q8Q+Ez5hIm
+ pBCHutL4oT2p4Q2zn/Fzlfz1FbKSMZlmsIASxhH0qGp8PKLLrPuiOpW1e+Yw0hNZrSPgns
+ WkfPY1WH70Ie4v59IuRHLpwx4c7C6CdjkBkv1UrvWhFnqnZb5sJxZuU6xiDGBA==
+To: u-boot@lists.denx.de
+Cc: Thanh Quan <thanh.quan.xn@renesas.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Hai Pham <hai.pham.ud@renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
+ Huy Bui <huy.bui.wm@renesas.com>
+Subject: [PATCH 1/5] pinctrl: renesas: r8a779g0: Remove AVB[01]_MII
+Date: Fri,  7 Nov 2025 17:16:53 +0100
+Message-ID: <20251107161708.37236-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 5927f32b600c81aa676
+X-MBO-RS-META: prcu9mkybcodz6c6h94crfgjk7cxqpgw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,88 +86,242 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Thanh Quan <thanh.quan.xn@renesas.com>
 
---=-4xbZQsuOR0KfkE4r7Zf5
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Rev.1.30 of the R-Car V4H Series Hardware User’s Manual removed the
+"AVB[01]_MII_*" signals from the pin control register tables.  As these
+are further unused in the pin control driver, they can be removed
+safely.
 
+Signed-off-by: Thanh Quan <thanh.quan.xn@renesas.com>
+Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Linux counterpart: https://lore.kernel.org/all/58662f50136280532bcc8bbe94741d82425bd118.1762274384.git.geert+renesas@glider.be/
+---
+Cc: Geert Uytterhoeven <geert+renesas@glider.be>
+Cc: Hai Pham <hai.pham.ud@renesas.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Thanh Quan <thanh.quan.xn@renesas.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Huy Bui <huy.bui.wm@renesas.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/pinctrl/renesas/pfc-r8a779g0.c | 96 +++++++++-----------------
+ 1 file changed, 32 insertions(+), 64 deletions(-)
 
+diff --git a/drivers/pinctrl/renesas/pfc-r8a779g0.c b/drivers/pinctrl/renesas/pfc-r8a779g0.c
+index ad113cd3e5d..53d364b3517 100644
+--- a/drivers/pinctrl/renesas/pfc-r8a779g0.c
++++ b/drivers/pinctrl/renesas/pfc-r8a779g0.c
+@@ -473,55 +473,55 @@
+ #define IP0SR6_7_4	FM(AVB1_MAGIC)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ #define IP0SR6_11_8	FM(AVB1_MDC)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ #define IP0SR6_15_12	FM(AVB1_PHY_INT)	F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR6_19_16	FM(AVB1_LINK)		FM(AVB1_MII_TX_ER)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR6_23_20	FM(AVB1_AVTP_MATCH)	FM(AVB1_MII_RX_ER)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR6_27_24	FM(AVB1_TXC)		FM(AVB1_MII_TXC)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR6_31_28	FM(AVB1_TX_CTL)		FM(AVB1_MII_TX_EN)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR6_19_16	FM(AVB1_LINK)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR6_23_20	FM(AVB1_AVTP_MATCH)	F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR6_27_24	FM(AVB1_TXC)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR6_31_28	FM(AVB1_TX_CTL)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ 
+ /* IP1SR6 */		/* 0 */			/* 1 */			/* 2 */			/* 3		4	 5	  6	   7	    8	     9	      A	       B	C	 D	  E	   F */
+-#define IP1SR6_3_0	FM(AVB1_RXC)		FM(AVB1_MII_RXC)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR6_7_4	FM(AVB1_RX_CTL)		FM(AVB1_MII_RX_DV)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR6_11_8	FM(AVB1_AVTP_PPS)	FM(AVB1_MII_COL)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR6_15_12	FM(AVB1_AVTP_CAPTURE)	FM(AVB1_MII_CRS)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR6_19_16	FM(AVB1_TD1)		FM(AVB1_MII_TD1)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR6_23_20	FM(AVB1_TD0)		FM(AVB1_MII_TD0)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR6_27_24	FM(AVB1_RD1)		FM(AVB1_MII_RD1)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR6_31_28	FM(AVB1_RD0)		FM(AVB1_MII_RD0)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR6_3_0	FM(AVB1_RXC)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR6_7_4	FM(AVB1_RX_CTL)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR6_11_8	FM(AVB1_AVTP_PPS)	F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR6_15_12	FM(AVB1_AVTP_CAPTURE)	F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR6_19_16	FM(AVB1_TD1)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR6_23_20	FM(AVB1_TD0)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR6_27_24	FM(AVB1_RD1)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR6_31_28	FM(AVB1_RD0)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ 
+ /* IP2SR6 */		/* 0 */			/* 1 */			/* 2 */			/* 3		4	 5	  6	   7	    8	     9	      A	       B	C	 D	  E	   F */
+-#define IP2SR6_3_0	FM(AVB1_TD2)		FM(AVB1_MII_TD2)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP2SR6_7_4	FM(AVB1_RD2)		FM(AVB1_MII_RD2)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP2SR6_11_8	FM(AVB1_TD3)		FM(AVB1_MII_TD3)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP2SR6_15_12	FM(AVB1_RD3)		FM(AVB1_MII_RD3)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP2SR6_3_0	FM(AVB1_TD2)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP2SR6_7_4	FM(AVB1_RD2)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP2SR6_11_8	FM(AVB1_TD3)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP2SR6_15_12	FM(AVB1_RD3)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ #define IP2SR6_19_16	FM(AVB1_TXCREFCLK)	F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ 
+ /* SR7 */
+ /* IP0SR7 */		/* 0 */			/* 1 */			/* 2 */			/* 3		4	 5	  6	   7	    8	     9	      A	       B	C	 D	  E	   F */
+-#define IP0SR7_3_0	FM(AVB0_AVTP_PPS)	FM(AVB0_MII_COL)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR7_7_4	FM(AVB0_AVTP_CAPTURE)	FM(AVB0_MII_CRS)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR7_11_8	FM(AVB0_AVTP_MATCH)	FM(AVB0_MII_RX_ER)	FM(CC5_OSCOUT)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR7_15_12	FM(AVB0_TD3)		FM(AVB0_MII_TD3)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR7_19_16	FM(AVB0_LINK)		FM(AVB0_MII_TX_ER)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR7_3_0	FM(AVB0_AVTP_PPS)	F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR7_7_4	FM(AVB0_AVTP_CAPTURE)	F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR7_11_8	FM(AVB0_AVTP_MATCH)	F_(0, 0)		FM(CC5_OSCOUT)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR7_15_12	FM(AVB0_TD3)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR7_19_16	FM(AVB0_LINK)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ #define IP0SR7_23_20	FM(AVB0_PHY_INT)	F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR7_27_24	FM(AVB0_TD2)		FM(AVB0_MII_TD2)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP0SR7_31_28	FM(AVB0_TD1)		FM(AVB0_MII_TD1)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR7_27_24	FM(AVB0_TD2)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP0SR7_31_28	FM(AVB0_TD1)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ 
+ /* IP1SR7 */		/* 0 */			/* 1 */			/* 2 */			/* 3		4	 5	  6	   7	    8	     9	      A	       B	C	 D	  E	   F */
+-#define IP1SR7_3_0	FM(AVB0_RD3)		FM(AVB0_MII_RD3)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR7_3_0	FM(AVB0_RD3)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ #define IP1SR7_7_4	FM(AVB0_TXCREFCLK)	F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ #define IP1SR7_11_8	FM(AVB0_MAGIC)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR7_15_12	FM(AVB0_TD0)		FM(AVB0_MII_TD0)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR7_19_16	FM(AVB0_RD2)		FM(AVB0_MII_RD2)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR7_15_12	FM(AVB0_TD0)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR7_19_16	FM(AVB0_RD2)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ #define IP1SR7_23_20	FM(AVB0_MDC)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ #define IP1SR7_27_24	FM(AVB0_MDIO)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP1SR7_31_28	FM(AVB0_TXC)		FM(AVB0_MII_TXC)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP1SR7_31_28	FM(AVB0_TXC)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ 
+ /* IP2SR7 */		/* 0 */			/* 1 */			/* 2 */			/* 3		4	 5	  6	   7	    8	     9	      A	       B	C	 D	  E	   F */
+-#define IP2SR7_3_0	FM(AVB0_TX_CTL)		FM(AVB0_MII_TX_EN)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP2SR7_7_4	FM(AVB0_RD1)		FM(AVB0_MII_RD1)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP2SR7_11_8	FM(AVB0_RD0)		FM(AVB0_MII_RD0)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP2SR7_15_12	FM(AVB0_RXC)		FM(AVB0_MII_RXC)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+-#define IP2SR7_19_16	FM(AVB0_RX_CTL)		FM(AVB0_MII_RX_DV)	F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP2SR7_3_0	FM(AVB0_TX_CTL)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP2SR7_7_4	FM(AVB0_RD1)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP2SR7_11_8	FM(AVB0_RD0)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP2SR7_15_12	FM(AVB0_RXC)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
++#define IP2SR7_19_16	FM(AVB0_RX_CTL)		F_(0, 0)		F_(0, 0)		F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
+ 
+ /* SR8 */
+ /* IP0SR8 */		/* 0 */			/* 1 */			/* 2 */			/* 3		4	 5	  6	   7	    8	     9	      A	       B	C	 D	  E	   F */
+@@ -1078,118 +1078,86 @@ static const u16 pinmux_data[] = {
+ 	PINMUX_IPSR_GPSR(IP0SR6_15_12,	AVB1_PHY_INT),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR6_19_16,	AVB1_LINK),
+-	PINMUX_IPSR_GPSR(IP0SR6_19_16,	AVB1_MII_TX_ER),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR6_23_20,	AVB1_AVTP_MATCH),
+-	PINMUX_IPSR_GPSR(IP0SR6_23_20,	AVB1_MII_RX_ER),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR6_27_24,	AVB1_TXC),
+-	PINMUX_IPSR_GPSR(IP0SR6_27_24,	AVB1_MII_TXC),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR6_31_28,	AVB1_TX_CTL),
+-	PINMUX_IPSR_GPSR(IP0SR6_31_28,	AVB1_MII_TX_EN),
+ 
+ 	/* IP1SR6 */
+ 	PINMUX_IPSR_GPSR(IP1SR6_3_0,	AVB1_RXC),
+-	PINMUX_IPSR_GPSR(IP1SR6_3_0,	AVB1_MII_RXC),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR6_7_4,	AVB1_RX_CTL),
+-	PINMUX_IPSR_GPSR(IP1SR6_7_4,	AVB1_MII_RX_DV),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR6_11_8,	AVB1_AVTP_PPS),
+-	PINMUX_IPSR_GPSR(IP1SR6_11_8,	AVB1_MII_COL),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR6_15_12,	AVB1_AVTP_CAPTURE),
+-	PINMUX_IPSR_GPSR(IP1SR6_15_12,	AVB1_MII_CRS),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR6_19_16,	AVB1_TD1),
+-	PINMUX_IPSR_GPSR(IP1SR6_19_16,	AVB1_MII_TD1),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR6_23_20,	AVB1_TD0),
+-	PINMUX_IPSR_GPSR(IP1SR6_23_20,	AVB1_MII_TD0),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR6_27_24,	AVB1_RD1),
+-	PINMUX_IPSR_GPSR(IP1SR6_27_24,	AVB1_MII_RD1),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR6_31_28,	AVB1_RD0),
+-	PINMUX_IPSR_GPSR(IP1SR6_31_28,	AVB1_MII_RD0),
+ 
+ 	/* IP2SR6 */
+ 	PINMUX_IPSR_GPSR(IP2SR6_3_0,	AVB1_TD2),
+-	PINMUX_IPSR_GPSR(IP2SR6_3_0,	AVB1_MII_TD2),
+ 
+ 	PINMUX_IPSR_GPSR(IP2SR6_7_4,	AVB1_RD2),
+-	PINMUX_IPSR_GPSR(IP2SR6_7_4,	AVB1_MII_RD2),
+ 
+ 	PINMUX_IPSR_GPSR(IP2SR6_11_8,	AVB1_TD3),
+-	PINMUX_IPSR_GPSR(IP2SR6_11_8,	AVB1_MII_TD3),
+ 
+ 	PINMUX_IPSR_GPSR(IP2SR6_15_12,	AVB1_RD3),
+-	PINMUX_IPSR_GPSR(IP2SR6_15_12,	AVB1_MII_RD3),
+ 
+ 	PINMUX_IPSR_GPSR(IP2SR6_19_16,	AVB1_TXCREFCLK),
+ 
+ 	/* IP0SR7 */
+ 	PINMUX_IPSR_GPSR(IP0SR7_3_0,	AVB0_AVTP_PPS),
+-	PINMUX_IPSR_GPSR(IP0SR7_3_0,	AVB0_MII_COL),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR7_7_4,	AVB0_AVTP_CAPTURE),
+-	PINMUX_IPSR_GPSR(IP0SR7_7_4,	AVB0_MII_CRS),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR7_11_8,	AVB0_AVTP_MATCH),
+-	PINMUX_IPSR_GPSR(IP0SR7_11_8,	AVB0_MII_RX_ER),
+ 	PINMUX_IPSR_GPSR(IP0SR7_11_8,	CC5_OSCOUT),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR7_15_12,	AVB0_TD3),
+-	PINMUX_IPSR_GPSR(IP0SR7_15_12,	AVB0_MII_TD3),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR7_19_16,	AVB0_LINK),
+-	PINMUX_IPSR_GPSR(IP0SR7_19_16,	AVB0_MII_TX_ER),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR7_23_20,	AVB0_PHY_INT),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR7_27_24,	AVB0_TD2),
+-	PINMUX_IPSR_GPSR(IP0SR7_27_24,	AVB0_MII_TD2),
+ 
+ 	PINMUX_IPSR_GPSR(IP0SR7_31_28,	AVB0_TD1),
+-	PINMUX_IPSR_GPSR(IP0SR7_31_28,	AVB0_MII_TD1),
+ 
+ 	/* IP1SR7 */
+ 	PINMUX_IPSR_GPSR(IP1SR7_3_0,	AVB0_RD3),
+-	PINMUX_IPSR_GPSR(IP1SR7_3_0,	AVB0_MII_RD3),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR7_7_4,	AVB0_TXCREFCLK),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR7_11_8,	AVB0_MAGIC),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR7_15_12,	AVB0_TD0),
+-	PINMUX_IPSR_GPSR(IP1SR7_15_12,	AVB0_MII_TD0),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR7_19_16,	AVB0_RD2),
+-	PINMUX_IPSR_GPSR(IP1SR7_19_16,	AVB0_MII_RD2),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR7_23_20,	AVB0_MDC),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR7_27_24,	AVB0_MDIO),
+ 
+ 	PINMUX_IPSR_GPSR(IP1SR7_31_28,	AVB0_TXC),
+-	PINMUX_IPSR_GPSR(IP1SR7_31_28,	AVB0_MII_TXC),
+ 
+ 	/* IP2SR7 */
+ 	PINMUX_IPSR_GPSR(IP2SR7_3_0,	AVB0_TX_CTL),
+-	PINMUX_IPSR_GPSR(IP2SR7_3_0,	AVB0_MII_TX_EN),
+ 
+ 	PINMUX_IPSR_GPSR(IP2SR7_7_4,	AVB0_RD1),
+-	PINMUX_IPSR_GPSR(IP2SR7_7_4,	AVB0_MII_RD1),
+ 
+ 	PINMUX_IPSR_GPSR(IP2SR7_11_8,	AVB0_RD0),
+-	PINMUX_IPSR_GPSR(IP2SR7_11_8,	AVB0_MII_RD0),
+ 
+ 	PINMUX_IPSR_GPSR(IP2SR7_15_12,	AVB0_RXC),
+-	PINMUX_IPSR_GPSR(IP2SR7_15_12,	AVB0_MII_RXC),
+ 
+ 	PINMUX_IPSR_GPSR(IP2SR7_19_16,	AVB0_RX_CTL),
+-	PINMUX_IPSR_GPSR(IP2SR7_19_16,	AVB0_MII_RX_DV),
+ 
+ 	/* IP0SR8 */
+ 	PINMUX_IPSR_MSEL(IP0SR8_3_0,	SCL0,			SEL_SCL0_0),
+-- 
+2.51.0
 
-On Fri, 2025-11-07 at 09:24 -0600, Andrew Davis wrote:
-> On 11/7/25 7:01 AM, Philippe Schenker wrote:
-> > From: Philippe Schenker <philippe.schenker@impulsing.ch>
-> >=20
-> > When compiling for R5 core with CONFIG_REMOTEPROC_TI_K3_R5F,
-> > passing 'size' (ulong) to ti_secure_image_post_process() caused
-> > a type mismatch compiler error.
-> >=20
-> > Cast 'size' to (size_t *) to fix it.
->=20
-> If the size of `size_t` and `ulong` are not the same this doesn't
-> really fix the issue, just silence the compiler warning. If ulong
-> is smaller than size_t on some platform we will read data outside
-> the variable address when de-referencing.
->=20
-> Might be more correct to assign size to a variable of the correct
-> size first, then pass a pointer to that.
->=20
-> Andrew
-
-Hi Andrew, Thanks for your comment. If I understand it correctly and
-explained in different words: If size_t is larger than ulong unknown
-memory could be accessed. Isn't it very unlikely that this ever
-happens?
-
-At least I did interpret your first comment that way.
-
-Anyway I will send a v3 to really catch all cases.
-
->=20
-> >=20
-> > Signed-off-by: Philippe Schenker <philippe.schenker@impulsing.ch>
-> > Acked-by: Andrew Davis <afd@ti.com>
-> >=20
-> > ---
-> >=20
-> > Changes in v2:
-> > - Added Andrew's Acked-by
-> >=20
-> > =C2=A0 drivers/remoteproc/ti_k3_r5f_rproc.c | 2 +-
-> > =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c
-> > b/drivers/remoteproc/ti_k3_r5f_rproc.c
-> > index c738607c1092..e7bd97a9088b 100644
-> > --- a/drivers/remoteproc/ti_k3_r5f_rproc.c
-> > +++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
-> > @@ -341,7 +341,7 @@ static int k3_r5f_load(struct udevice *dev,
-> > ulong addr, ulong size)
-> > =C2=A0=20
-> > =C2=A0=C2=A0 k3_r5f_init_tcm_memories(core, mem_auto_init);
-> > =C2=A0=20
-> > - ti_secure_image_post_process(&image_addr, &size);
-> > + ti_secure_image_post_process(&image_addr, (size_t *)&size);
-> > =C2=A0=20
-> > =C2=A0=C2=A0 ret =3D rproc_elf_load_image(dev, addr, size);
-> > =C2=A0=C2=A0 if (ret < 0) {
-
---=-4xbZQsuOR0KfkE4r7Zf5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEPaCxfVqqNYSPnRhRjRDjR2hoXxoFAmkOF6QACgkQjRDjR2ho
-XxrboQwAyI3mRk41wXIGoXJFcTu8x88RmewsA1VTM8CfkKBd5NqZqqDQVp1pfTI2
-6yXb8sNgZXEG8Q2G5WYdHx4gMdsa16Jgy1/GKa6oVT2wpAtx9ErVJdvfxCiVbMb/
-tOBFQEtCnaynEmqlRTcAzZYVKdbUsMa5GZdpDMnkgYvKwBoj/AboLdsQA1PeF5u5
-q4LzDf8PpejjC9ST8BE9O8REyMF8YG5SXVm/9B7XC22Qdz1W3ec0CBV6HGM7NY09
-jLXwI0bMGnQqFCIcZr4F+U+x9bSgu6LbW7G+3f0qdw9HAsjwgwharHh6kVaTrGy3
-mfjMLJI6qyj2nIOVDFvBO0aa7nLvl6P4eEKJBPRsipNq/352ZEqCh5Gxg0XlBhmy
-M9yCF7E9H2npkM/IikgHdzIk/oNz3+WeiOaE73gchL6AzB2xsoA/MMd7NhAzQtm8
-alJ2WO61lk+b+sg6n2EPaFw9IEd1FdYN75PIDATdO3FrINuPzv1yEKKzqaCloYej
-Y2Hgpr5V
-=arKJ
------END PGP SIGNATURE-----
-
---=-4xbZQsuOR0KfkE4r7Zf5--
