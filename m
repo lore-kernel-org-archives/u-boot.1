@@ -4,83 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7A92CCFA05
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 16:18:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 609DFCCF9F8
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 16:25:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55D5883DF3;
-	Fri,  7 Nov 2025 17:17:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id BACA083DCA;
+	Fri,  7 Nov 2025 17:25:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="R7NGjvGL";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="DiNK9G0R";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CgM5KEjm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C04283DD7; Fri,  7 Nov 2025 17:17:30 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 2C14C83D2E; Fri,  7 Nov 2025 17:24:59 +0100 (CET)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C531D83DF3
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 17:17:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C464C83D2E
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 17:24:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4d342v3mPcz9t3f;
- Fri,  7 Nov 2025 17:17:27 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762532247;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/ZAsp3DWUfFMpWv+fqTUpbZ7FNWYHosbElPLLRMwKfo=;
- b=R7NGjvGLl8M+abK7zAmpymkHm9PDidfK29Q9tsaeDAebe4SGmSYwExDRTET2O1opt/anZF
- UNhtNp7X74rhcWA2lZW2Vnap3+m1KdH9ISgZlINPc/7H6J1KG1OO6/D81AbHgbuSZ607EU
- 1zB4vOLYSse15KFCSZmoDMocqMeFu6KQgNp6iY6qIhkUHv4L1r1hwd9+zXPdGunu7QBLcQ
- rFtLMip/Svdywti5tNiw4DcYgButHBwxZJS2TtujBRiSuuag+g9Y8rYzhiQ2feMqiRM1lD
- 1vzE00xFH/n1bnTg2uoNfm9/Ap4LInh15bBiQUQu43K5hSdcPL4NK+UHFL81mA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=DiNK9G0R;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762532245;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/ZAsp3DWUfFMpWv+fqTUpbZ7FNWYHosbElPLLRMwKfo=;
- b=DiNK9G0Ro8enzvl+FuF1r88SGjdzltEE4DelK2CVmv0e08Zy/ZPZA7LhF4ScW5lO0tpHaA
- 2c72Abx30IxaJHa/D/ascfwGY2VSeWSxrozNJlvFCgTHHLOK7KTciK2vJpENORrJ0tIa0r
- HFjzczqs9ZQowMp8WQq2pRbALglVEHOPnLfl290DbcegReCJk8syZdF5OhMLsMgjv3l+Nr
- VuFVeSLSP6+meFyrHgyaDpbIGmzA7Oxr6KDhp7cfF7U0FgW9Fm2s0jF8DtAWG06Xa8vgPR
- YyCJ0EK2r59lHvDp/LfwIR108RnpYAVqWo0o3nAZUHrc9/NLrbouW29CFhYkXg==
-To: u-boot@lists.denx.de
-Cc: Geert Uytterhoeven <geert+renesas@glider.be>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Hai Pham <hai.pham.ud@renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Thanh Quan <thanh.quan.xn@renesas.com>, Tom Rini <trini@konsulko.com>,
- Huy Bui <huy.bui.wm@renesas.com>
-Subject: [PATCH 5/5] pinctrl: renesas: r8a779h0: Remove STPWT_EXTFXR
-Date: Fri,  7 Nov 2025 17:16:57 +0100
-Message-ID: <20251107161708.37236-5-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20251107161708.37236-1-marek.vasut+renesas@mailbox.org>
-References: <20251107161708.37236-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=exwY7k+zzc1WrPlglVUWAYCxFVK4lBOkuq3tVwhWieSetKZMWpyFjMt3gCbJxs8FtxmBAbQX61RjQNeG4cq1EZLKTTH0m53fZ5YBN/qzn+7BCCQK1fVhtI+ikBIpqrqW9dNpUHUn3LsLjj116oAIGSCzbGKpboOyXbOqYAhOmgxpJY5rvMvd11A3Zac7k+d/lq6uhe9OjWRqgiCQgtJwrtGgC3GiRt/M4/IY/uebh5YDVKpnldlJa4ByYvbIoJeBDk1vrUQ/nmjtk/4DInxZa5lWtOIv0/VkVG0pxxgHrkxmFGaLqQ9EtLW/Kk6mYBL+JLWkDnH3sUKlwOTcoucbug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=K+YJnGaa9CXxGm5CqaRO/HZ/aOf6WxWs93c+j/zZ/gs=;
+ b=czszZOHv01pWznoZiUNFGxbf7NsTNDiE/xIyuhP8pYbwiOC6RbAElBRTuXN0OJX/oACIejC6E69BQj36oIUxuy1yi+UkMNhaFgqv9EJ414XsdlwVecxmkzYO6imaCmC1NeN1mFMoc7eD8OoY0irFdHqMPQruUKVrRivfeWYWmkmGOaX8GIHXAXOxzjloVzzWGR77lGPlkMjB97hmgmo5SUEQ936aZy1ENCtBQiQmuuzkrYptQF3INq8/7tIlOm7Ad24D2na73S24oAtopTV6Zv0soTfpAGIzhwCRW2j+8lOQUeQ+6XMhfkR2+LS/b3/uYy6fQQ/RBdT+EZ94wljOvQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=K+YJnGaa9CXxGm5CqaRO/HZ/aOf6WxWs93c+j/zZ/gs=;
+ b=CgM5KEjmm/e/C1gK96uOhYZec/aNUxKG2e0M6iqTnWkCa9wFHPZxo5KqfUNVW7nEmqPvnm09KM1+250jBKIpI9056aDzQuabYbA5WEF7yGFSRVxvtH88vyB5HRFXLmluwHD0M6qCY+bj8W9mvJO19alE3QqHlVW23rOx7sFVWLE=
+Received: from BN9PR03CA0296.namprd03.prod.outlook.com (2603:10b6:408:f5::31)
+ by DS0PR10MB7152.namprd10.prod.outlook.com (2603:10b6:8:f1::6) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9298.12; Fri, 7 Nov 2025 16:24:52 +0000
+Received: from BN3PEPF0000B073.namprd04.prod.outlook.com
+ (2603:10b6:408:f5:cafe::99) by BN9PR03CA0296.outlook.office365.com
+ (2603:10b6:408:f5::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.7 via Frontend Transport; Fri, 7
+ Nov 2025 16:24:40 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN3PEPF0000B073.mail.protection.outlook.com (10.167.243.118) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9298.6 via Frontend Transport; Fri, 7 Nov 2025 16:24:51 +0000
+Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 7 Nov
+ 2025 10:24:46 -0600
+Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 7 Nov
+ 2025 10:24:46 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 7 Nov 2025 10:24:46 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A7GOj503271672;
+ Fri, 7 Nov 2025 10:24:45 -0600
+Message-ID: <ca97c8a6-e5bf-4ae4-aede-133c38510321@ti.com>
+Date: Fri, 7 Nov 2025 10:24:45 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/6] remoteproc: k3-r5: cast size to size_t
+To: Philippe Schenker <dev@pschenker.ch>, <u-boot@lists.denx.de>
+CC: <stefan@embear.ch>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ "Beleswar Padhi" <b-padhi@ti.com>, Daniel Schultz <d.schultz@phytec.de>, Hari
+ Nagalla <hnagalla@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Peng Fan
+ <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
+References: <20251107130216.3084134-1-dev@pschenker.ch>
+ <20251107130216.3084134-3-dev@pschenker.ch>
+ <57ada562-c774-4ef2-8739-b899e5df416e@ti.com>
+ <f429996a374f31d2d9dcdbcb8f143de18b512549.camel@pschenker.ch>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <f429996a374f31d2d9dcdbcb8f143de18b512549.camel@pschenker.ch>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: c950880e2148c02c9aa
-X-MBO-RS-META: 1k6cefa1x3ws4n5ysksd4k58zbbqbetb
-X-Rspamd-Queue-Id: 4d342v3mPcz9t3f
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B073:EE_|DS0PR10MB7152:EE_
+X-MS-Office365-Filtering-Correlation-Id: 27fafad0-8627-4857-05e0-08de1e1a2d8e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?T00vMk5mb3lxUG53UXAyWW5wRFJiZ3hWQWVFWGNGbjdZZklKcGhEQWxIVU9o?=
+ =?utf-8?B?dzczRDVudWxaZ1R3c3RTOEhFWGQ3SXZYYWJpckgvaHRFMGlRUWNyQTNvcWcr?=
+ =?utf-8?B?akNYRjdoRkg3MzdQampDTVFUTXh6N25qSDhnOWdxSzBvQUZCRjk1bUZDR1ZX?=
+ =?utf-8?B?QnNIcVl5SkREay9qRnp6T203OFAwZFdXR2t6SDlBNjZlVUNUR095Nzhib3B6?=
+ =?utf-8?B?WENNOUhpVGNtZDJYNWRqUURrOXg2MXZrMGVFWmpObXdpYWpSc3I3TzhiaFh1?=
+ =?utf-8?B?TGE4aXFBeE1MdkdjU1VvLzlWUVhmUTljVk9BQ2xER0lldXlsandPT3Ryd1Ez?=
+ =?utf-8?B?M2ZrZzFoZTEwSllkUWdpNWg5OWV6S3NXT1VpZXprSjB0VFJneksrMmYyOE1X?=
+ =?utf-8?B?c1BkY2N6L0Y4WWIxeDlwVWR1RmYwTDdUaHk4WUFXY05TM0M5YW9FMDJCMWM2?=
+ =?utf-8?B?bldRcVFjRVIwaE1DN21nY25heHR6YVVkMUh2S2FWMkQrd2RPOGlNMlBsUExu?=
+ =?utf-8?B?NTNwczJFRWJzdHl4MTZzekd4RURvR3RXMi9GTG15Q20xcTg5Q1FISDAvV0tX?=
+ =?utf-8?B?KzhzZ0NNZE1jaXNVZmV1VVRyWUZhZjNjTkZlYUx0VS9iTzZjRjZEeWx2alQw?=
+ =?utf-8?B?TDlwM3pZQW1sR05Cd1N1QU1JdnNpdm5yc1BmUUNvL0J2OE92UzgwSVN6dkky?=
+ =?utf-8?B?SjJIc3BramErckVCRk1CTmorcjJwRkRmRllJb2c0YjNPTmtPTkFUTlZDUVRq?=
+ =?utf-8?B?eERGRU1GQXlaNktWRGd1eWNDSTl4NjlJSEFORm9oaWU2dTJidDBMNkU2ZW5N?=
+ =?utf-8?B?T1lDMXVvK1NYU2ZPUXE2MlB3bHI0YkYwWHRmTFI3T2puNE13NkR4YVFubHYy?=
+ =?utf-8?B?TXQ0Rjg0Y2FvdzMwRGU5em1KYTFTOUhWWi9kdmM1TVhSaWpDYURtTFJCSWF6?=
+ =?utf-8?B?NTJ2NU9hbko3U2Q3V2NZSHRybDhGOU5YWlVob3B3NXU3anVYN0lMUWJjazBM?=
+ =?utf-8?B?b0NKaCtPZ29yb2Z5UHBYTHhxL2tiR0Z6VXN1UHdhdW15MGlqdEQzTkJxNkhB?=
+ =?utf-8?B?TzRHMmNsQnlxc2I4Y01aNllXaytrSGMxeHhCaGhoRWlKbEcxN0JOZWFEZ1Bk?=
+ =?utf-8?B?cXJEbzhLbVFERUtCZitCOUFFdU4vZmMyNWUvS1ZpSXROVVVTQ1FnekdvbUpV?=
+ =?utf-8?B?TDdZVGZ6NGl5ZUhJYmMvd3FPUzl1S2pUV2xYMUJMeC9WdmdHU2YyaFRhd2Nk?=
+ =?utf-8?B?bGpBSWhCb3pMMGhET2ZTR3BLMm5OK1dQYTdhY2ZjZTZBaHp1NSthSjhJWGZp?=
+ =?utf-8?B?ODVPM3FyeGEzWVhyM25EcDF3Ykc5czZuUEFRbEQ5dTJ5Rnd4YytnTXV3Q21s?=
+ =?utf-8?B?bjVtbUIvcVZXelNmQ3BQendudlFvQ00wdm9Od2FzQ0dqTnJsOUpqaDFJdE9K?=
+ =?utf-8?B?cDV4S3lmbVB4dDZuOUd2ZFpUNmowY1h1MEtpV25ZS3BjTHBITlhwWlZYUDM3?=
+ =?utf-8?B?VXBzdFZzMlRlT3g3U1lhSFhGT0xCREw3QzhxUlBrVGFVcUR4VGthdzJMWmtJ?=
+ =?utf-8?B?WFFVbURGM0FXeE12OHR2Ujd5Wm1YZjQ1MERGNmE1bnZDL3NxL0Q1NkJ0ZDBL?=
+ =?utf-8?B?ZlE3TUs4VXA1R2dxenNqZENOMlJHVGdvRXNvWnZZNGNvaEZPSDhGeFIwcnFX?=
+ =?utf-8?B?bm8rTzRjMm45UjQ0VlYxRGdoR3VTVzh0cU4yVnNnUld5YW1HeVhMMHJUWU83?=
+ =?utf-8?B?TWIxU0RJeURSeTVuZk52WmJNZlJqdFBiSFNaTlU3b3JMV28ydFJCL252SjZp?=
+ =?utf-8?B?N0VvQ2FuSDdWekc0aFFyL1YrWUJIK1ZRZ2tJNnR3aG1pZDNKb0t4K09VYkZi?=
+ =?utf-8?B?b3FaR0t0YS9DdndkaXFJTS80NURZcGc4ZGJJNzRib2lveUkyQlY4TW11aDRM?=
+ =?utf-8?B?L2MxM2tHSGF3TG9JclRDTFhDR3VWRHc3YzI4N2o1dlA2Sk9xV2JBV21TcWZj?=
+ =?utf-8?B?TlU4VmNxOXc4V25FdFZWeXhncWtua2hmU2lRQzJqaEk1UTM3d2U1RTNQRlZm?=
+ =?utf-8?B?TEpQc2JFWnJQbWxkWVI4b2p0U2EzRlRPeDV5b1h2T20zSDRKNmQrV2tQSGpB?=
+ =?utf-8?Q?iAxw=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 16:24:51.4230 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27fafad0-8627-4857-05e0-08de1e1a2d8e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B073.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB7152
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,50 +170,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Geert Uytterhoeven <geert+renesas@glider.be>
+On 11/7/25 10:00 AM, Philippe Schenker wrote:
+> 
+> 
+> On Fri, 2025-11-07 at 09:24 -0600, Andrew Davis wrote:
+>> On 11/7/25 7:01 AM, Philippe Schenker wrote:
+>>> From: Philippe Schenker <philippe.schenker@impulsing.ch>
+>>>
+>>> When compiling for R5 core with CONFIG_REMOTEPROC_TI_K3_R5F,
+>>> passing 'size' (ulong) to ti_secure_image_post_process() caused
+>>> a type mismatch compiler error.
+>>>
+>>> Cast 'size' to (size_t *) to fix it.
+>>
+>> If the size of `size_t` and `ulong` are not the same this doesn't
+>> really fix the issue, just silence the compiler warning. If ulong
+>> is smaller than size_t on some platform we will read data outside
+>> the variable address when de-referencing.
+>>
+>> Might be more correct to assign size to a variable of the correct
+>> size first, then pass a pointer to that.
+>>
+>> Andrew
+> 
+> Hi Andrew, Thanks for your comment. If I understand it correctly and
+> explained in different words: If size_t is larger than ulong unknown
+> memory could be accessed.
 
-Rev.0.81 of the R-Car V4M Series Hardware User’s Manual removed the
-"STPWT_EXTFXR" signal from the pin control register tables.  As this is
-further unused in the pin control driver, it can be removed safely.
+Correct. And if size_t is smaller then on big-endian systems you
+will read the wrong data.
 
-Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Linux counterpart: https://lore.kernel.org/all/f849fa3b9b516e9dd04b45462b69f52225259480.1762274384.git.geert+renesas@glider.be/
----
-Cc: Geert Uytterhoeven <geert+renesas@glider.be>
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Thanh Quan <thanh.quan.xn@renesas.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Huy Bui <huy.bui.wm@renesas.com>
-Cc: u-boot@lists.denx.de
----
- drivers/pinctrl/renesas/pfc-r8a779h0.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+> Isn't it very unlikely that this ever
+> happens?
+> 
 
-diff --git a/drivers/pinctrl/renesas/pfc-r8a779h0.c b/drivers/pinctrl/renesas/pfc-r8a779h0.c
-index 27502a4a93a..2c6c901f3a4 100644
---- a/drivers/pinctrl/renesas/pfc-r8a779h0.c
-+++ b/drivers/pinctrl/renesas/pfc-r8a779h0.c
-@@ -342,7 +342,7 @@
- #define IP1SR2_3_0	FM(TPU0TO0_A)		F_(0, 0)		F_(0, 0)	FM(TCLK1_B)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
- #define IP1SR2_7_4	FM(CAN_CLK)		FM(FXR_TXENA_N_B)	F_(0, 0)	F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
- #define IP1SR2_11_8	FM(CANFD0_TX)		FM(FXR_TXENB_N_B)	F_(0, 0)	F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
--#define IP1SR2_15_12	FM(CANFD0_RX)		FM(STPWT_EXTFXR)	F_(0, 0)	F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
-+#define IP1SR2_15_12	FM(CANFD0_RX)		F_(0, 0)		F_(0, 0)	F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
- #define IP1SR2_19_16	FM(CANFD2_TX)		FM(TPU0TO2_A)		F_(0, 0)	FM(TCLK3_C)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
- #define IP1SR2_23_20	FM(CANFD2_RX)		FM(TPU0TO3_A)		FM(PWM1_B)	FM(TCLK4_C)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
- #define IP1SR2_27_24	FM(CANFD3_TX)		F_(0, 0)		FM(PWM2_B)	F_(0, 0)	F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0) F_(0, 0)
-@@ -868,7 +868,6 @@ static const u16 pinmux_data[] = {
- 	PINMUX_IPSR_GPSR(IP1SR2_11_8,	FXR_TXENB_N_B),
- 
- 	PINMUX_IPSR_GPSR(IP1SR2_15_12,	CANFD0_RX),
--	PINMUX_IPSR_GPSR(IP1SR2_15_12,	STPWT_EXTFXR),
- 
- 	PINMUX_IPSR_GPSR(IP1SR2_19_16,	CANFD2_TX),
- 	PINMUX_IPSR_GPSR(IP1SR2_19_16,	TPU0TO2_A),
--- 
-2.51.0
+Also correct, I don't think either scenario is likely, it is
+just about formal correctness. And I also didn't think any system
+would have ulong and size_t be different sizes, but guess you
+found a case (not sure why on R5 they are both not 32bits but
+if the compiler is complaining then I guess they aren't).
+
+> At least I did interpret your first comment that way.
+> 
+> Anyway I will send a v3 to really catch all cases.
+> 
+
+Thanks :)
+
+Andrew
+
+>>
+>>>
+>>> Signed-off-by: Philippe Schenker <philippe.schenker@impulsing.ch>
+>>> Acked-by: Andrew Davis <afd@ti.com>
+>>>
+>>> ---
+>>>
+>>> Changes in v2:
+>>> - Added Andrew's Acked-by
+>>>
+>>>    drivers/remoteproc/ti_k3_r5f_rproc.c | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c
+>>> b/drivers/remoteproc/ti_k3_r5f_rproc.c
+>>> index c738607c1092..e7bd97a9088b 100644
+>>> --- a/drivers/remoteproc/ti_k3_r5f_rproc.c
+>>> +++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
+>>> @@ -341,7 +341,7 @@ static int k3_r5f_load(struct udevice *dev,
+>>> ulong addr, ulong size)
+>>>    
+>>>     k3_r5f_init_tcm_memories(core, mem_auto_init);
+>>>    
+>>> - ti_secure_image_post_process(&image_addr, &size);
+>>> + ti_secure_image_post_process(&image_addr, (size_t *)&size);
+>>>    
+>>>     ret = rproc_elf_load_image(dev, addr, size);
+>>>     if (ret < 0) {
 
