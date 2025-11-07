@@ -4,166 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15341CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 10:23:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCBB8CCFA05
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 10:29:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91E3483D00;
-	Fri,  7 Nov 2025 11:23:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nokia.com
+	by phobos.denx.de (Postfix) with ESMTP id 4789F83CDF;
+	Fri,  7 Nov 2025 11:29:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nokia.com header.i=@nokia.com header.b="EK5Bw8bc";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="XYLz/+o2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9352983CA4; Fri,  7 Nov 2025 08:43:33 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id DBA6883CEB; Fri,  7 Nov 2025 11:29:05 +0100 (CET)
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8D3383B85
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 08:43:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A53D283CB8
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 11:29:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=nokia.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=hans.gfirtner@nokia.com
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=P7kBNVhxvJ4jPWmil/0wEVJUOVyVTwT1lfYW7ocSlKNtrmhkbkKx+Uuer0xBUAOf0bWYrNY2L81p9kJOTgo3LZESYiaH1LQKYzWpYbn5QvNUz59p1k6p4PxoN0WmiF33zUnqEkL1dDgxUYB6YzyOvIq24QKMW4Z3GDyA3weSEcIOflzKL/M9YdhjBd+dq0DfnCABR9BhrxvXYBtfYtXGWpo2NJncZOSiS+WugqTTz3HPOv+pmHjEBJv78EUCfmkbX1aDk19OCPUONUEVbQ3snGDweyr5Yv06DjFCBuv2HoZ5dF8u4QhXIT6kob5q+o8+1tr61LcgGgtytcn5TzJZBg==
+ b=IHtk59/URGJGdYjf6GRgcInRVs6buT2V+QVb37G/6KDzFHVEWW6BmS2jFE7uGvfThXmgjImSOY/m0DbE4VurrZdGdiCm99duUA5UAwA4fyPNoWXMUscwBJCvlZqQkzGUrQDpDKWy7A7dOG5nO8lmZY4X7zWNmJuZIHA28zbqpE/3KKADQXGufcCpE/XXv9tCpswLPTrHho4hwGAdyad669GXDnCmtnJMo+t54dqELBX5IwWJMUhOE+UIJI56rNjNlMmWtKLbNXmUAxtcqk0JnLLc6kDARecfW5wzuqpEUFy2G/gmd7mU2S+Ydlwwmz8DFr/4K7BoX8mUu780GCAZXA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=laibpGWrBxT4uel7huJdG6A2Q07heG7P05W59CaKfHA=;
- b=PTdmThE2kjll8JMJvDMrVw4WLm5EYeX2sjKNKjXthQyt1vpBsQCKMbz0v6DPJJ380vG9oiqvJkkVJuEft60lLZ+2qjKNysQkoenLNYixa+ehkqol5t2sYLyG8+k0yTfiUGkxJWvkH4ldvlO+apr0d3/WhCOmDJrQsgnbJ9N2KpxnckR0UjimYvs5Db9c18zHIrxmGmR9jcnFge0b8wgj8VCfF4OF1i4dgWIcHK6xLEjNeaHl35U3ak85JAZ+Nhwy1wdb3JlvOFe2BuA7NyYIc2gc+490tUeaoSrf6w6o+b/6U9P15UkrWo51RNHBArHToc2a0iWitJs4mV9ha7V4pA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nokia.com; dmarc=pass action=none header.from=nokia.com;
- dkim=pass header.d=nokia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com; s=selector2;
+ bh=H+gPlQ4ImQkiRbFDtKDMP5jfKp2izZFU0WKuXO+Wteg=;
+ b=rqKuDqa1nE8AkOOXBoO99+zTw+UENCohf8WkVmAklA7+YpHWtNtLnb49SL5/2h2UkRbgqoH37Tx2QnzVH3k6+ncGwyyyJmoyPDksTu5/no0BwPHlsnOJhaMVK4Yi23h1zaGQi4dYrm4N1uy/HmFnqkhG32VRvKipO9FUwnkWF56sQFJGbeEB5LNyPZn6SBmtw1+gcVHRK0dQlvE60Krcl7M9ew8ae58oEPEAqsb8kJy+rGg0M5OdN+ZW1xy2w0humKY8ZbA0mGgB9S6gW7hY4/iw7/Rkq6OkRjkUbmEqDPY3RoXbDPZryIWBgAGQ6ig7zeY347utyMADOam/cOrw3w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=laibpGWrBxT4uel7huJdG6A2Q07heG7P05W59CaKfHA=;
- b=EK5Bw8bcBetlz7MK712Rn1qu/wB+ujEOtbW24XJ2Ti9+pSxSbb8X6xmNNLfWKeHNUJsZZsjOSJKQzxhvY1pwqx9YWTDucY6SpSSMafaFJpOHR/JbNNdrFCDi1rl7kKRsZr0+cccGc3Z+tSqugGmAqlvGVRzpIEnhPRJvwc/nKn398TxHPjqei3l/0b5nWWjyArnD3L5SadYtsChhl5Gxu/y169+GhhcVT5sBKBfUaHyMsygpC8nm1GIA6uvKyJ1pY/iR4cwEbXDzY59ULWlgDv0/yX3t47pKACz+5bboVKwCfYSxdAmCU7m9nAgXVBIawEelhcbyGFdRX1qw1J/irQ==
-Received: from AS5PR07MB9799.eurprd07.prod.outlook.com (2603:10a6:20b:651::16)
- by VI1PR07MB10017.eurprd07.prod.outlook.com (2603:10a6:800:1e0::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.10; Fri, 7 Nov
- 2025 07:43:27 +0000
-Received: from AS5PR07MB9799.eurprd07.prod.outlook.com
- ([fe80::7360:123a:2446:5a3b]) by AS5PR07MB9799.eurprd07.prod.outlook.com
- ([fe80::7360:123a:2446:5a3b%4]) with mapi id 15.20.9298.010; Fri, 7 Nov 2025
- 07:43:27 +0000
-From: "Hans Gfirtner (Nokia)" <hans.gfirtner@nokia.com>
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Jan Kiszka <jan.kiszka@siemens.com>
-Subject: RE: [PATCH] tools: key2dtsi: Write out modulus and r-squared with the
- correct length
-Thread-Topic: [PATCH] tools: key2dtsi: Write out modulus and r-squared with
- the correct length
-Thread-Index: AQHcSkmvLRQerG+QA0Sk5iquSp9k4bTl6PEAgAD2tnA=
-Date: Fri, 7 Nov 2025 07:43:27 +0000
-Message-ID: <AS5PR07MB9799DFDE39B354BCBE7C6479FAC3A@AS5PR07MB9799.eurprd07.prod.outlook.com>
-References: <f7068c43-db26-434a-b039-9a70e210e395@siemens.com>
- <176244838889.3056677.199439804412593821.b4-ty@konsulko.com>
-In-Reply-To: <176244838889.3056677.199439804412593821.b4-ty@konsulko.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nokia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS5PR07MB9799:EE_|VI1PR07MB10017:EE_
-x-ms-office365-filtering-correlation-id: a7f9e244-73ef-4734-f534-08de1dd156e7
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700021;
-x-microsoft-antispam-message-info: =?utf-8?B?eW9YZUI5cHFxRnA1NFJtQTBaVzNVZFZjWUdWTnMzKzNNWlBHVkFMZWNLcE5Z?=
- =?utf-8?B?QTVoYXlDU1BWTUppRFFPcldCLzV4S2cwUVVYaTIxVG8rV2JnRmo1ZWJKYjZs?=
- =?utf-8?B?Q2VMdTBHd2JYK1h4RGZTK1dSSHdjdGJESmRCdTVNS2xWdUZZSy9sRG9TVVNH?=
- =?utf-8?B?R1oySExWcGhQeHA3WHlOVk8rK1lTUUtJaWhIMGFsWHM1VnpLYStvUUlWK3pk?=
- =?utf-8?B?Q09HYVlXYXYrTFFFK2hFUXNjcWcyaVRHRERpYmF3U2lZMmVRbU42ZTdydm5G?=
- =?utf-8?B?UzhEaUpLSnhnVXdyaU9KdXFudkZBWjYvVzlRRi82WXFFSXNJc1d4VHE4d2FU?=
- =?utf-8?B?RFVpOXo4Z0hyNFlHY2FZWXBhdTQvbnNHeDYzTW9HUXZvbHcxajZlSmhTVGc5?=
- =?utf-8?B?YktnNzg2azZndWtURkNleU5td1NVNFRsRWIvbWVic2lNM3I3Z2FocTZzNzM2?=
- =?utf-8?B?ZzZEQm5lazQ3TGF2RkVMQWltYWw5K1p0MlB4dlRqbjg2UzdMYXhIdktKZFRx?=
- =?utf-8?B?WEVwYVd6OCszSnJjcmJCUEtMVno5TTRyQU9WTVc2OVQyRnZXRVllQi8wWW55?=
- =?utf-8?B?c0FVcWprWXZUeEY5aWs1bDkwS2ZYcUY1MDJUUlZUejFaUTdXWjcvVVhQUVYz?=
- =?utf-8?B?ZG9OOFRlOWVYaGtSY2VHNXdlRU1qTnlrR1ZQK2N0ejJHT1psUkR4YUdSQm0y?=
- =?utf-8?B?M3JlNExSL3VYTVVPY1lZTGh4ZlFPRlMrZStvTDNmbGZWRU5zVklLUUwxUS96?=
- =?utf-8?B?aG5hQUhEcC96aUFIYmplOFdxRGJQaXBQeUQ3dm9tSFZFcWlQVXdQanJLSHdU?=
- =?utf-8?B?czNYeGRMRkE0U0xWTy9YSjB5TVN5WXpzcnY4dXVKU21NZVlWUGJwTitxVkY3?=
- =?utf-8?B?VEg3S00xSkRJTVBHYWUvN3ZXcWxDeUN6bWZyTmJ0cjlHQWFWUjVtUHd6Sk0r?=
- =?utf-8?B?RW1ydWU2L1R4VTBOOUs3V0hYb3U1UzhIRmtaWXNnckVyVEl0VXR3Qi9GNndJ?=
- =?utf-8?B?dDQzVlpoWmhEdHc1V0pXSGs0OGI0N2oxNEh5SVlody9mZTRITVkwdnhmdTRL?=
- =?utf-8?B?ZnFUY0xiUHRaVEs2b1UwOWg4M3YyY1hGbm5WeFE0MjRzRVJaUHV0VU5OamZi?=
- =?utf-8?B?cC9kV0xWMWRhTWhwZGlmZ29VTC9WbHE5NmJSbDhnK2VuZGdmOVBGb3dta2NC?=
- =?utf-8?B?MENaKzlVTnFUaE0ydGhvMUlndTFDczN1VC9mYUVTdVFTdi9qZEtEL2I0UjR1?=
- =?utf-8?B?QVlGdi9jSTdtRTh2Ui9Td3JxbHY4YWNHTjhjUmVKZzA4N01YTGFHeHZ1YU83?=
- =?utf-8?B?UEZ6bk9td2FIQ2lNeDhrc2wzV2NMWmhKVkhlcDByMDJCcjZMOGJkTjNFTGtv?=
- =?utf-8?B?Wk95THpKU2lWdEkxc0ViUTVvY1RIZUxwYXAyY09rV2Z5T3JKcS9RblVKeUpm?=
- =?utf-8?B?TnJlZ3c2N1J0azk4YTlJaDk0eUM0Q25LUGJmMGdrOVJmazNWZ09BZi9Rb1Zz?=
- =?utf-8?B?elpNT0NSNXNtT1JIeGx3ak10U1ZLU3lDSERJWmhRMmxPS2FWQUdlNFFubk5p?=
- =?utf-8?B?RkluKzNKdEs1TXFxb3pZM1BhQ0dWVzcybS90RkpGcEZvRjZyay9MTlZrRWhE?=
- =?utf-8?B?S3psNTNzYmVrakVpNTc5Ri9xVDVjM2w5WEJvUUIwQVBTNDcycDBWenJVZTVF?=
- =?utf-8?B?WlhKRU5TeEZKVGp2eHVzYlVRRjgxdGMyRWtKRzdlQjk4N2NXUlYybmN1VGVH?=
- =?utf-8?B?Rmx6dklMcWx6SE1KaWx4ZlJZUk9hcU5KK0VXbEVTdFFBMmhsT21UbjErdzM1?=
- =?utf-8?B?bHA4TWp1eEtpcEJPVlR4RHRsc3RlNnF4NTdqV052MXJWeE9Sb2d4dXhIQ2Y3?=
- =?utf-8?B?ekFLejhPcFJ5Q0RMcm1NMW9pYzBZdndxb0diVW42U3VybFA2d2dBaDFpNGY0?=
- =?utf-8?B?RlNLYlZRR0F1Y1Z4UFN6MVFRTmU4YWN4Rmc0RGl1YjZ6R0F4ckQ0dWRGRmkv?=
- =?utf-8?B?ME9UV3VVQk05SXBmWmliRURPYjFqQVM4RHdYTzhtYjlJbWIwWWZjZEdCR0tZ?=
- =?utf-8?Q?tEEiXd?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR07MB9799.eurprd07.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(38070700021); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?K0Y2TU1uaE1pNjFwYi9VODcvcmt0OGZJcHo4TENpNFF3K3hoWlpyMzk4R2xn?=
- =?utf-8?B?WWM4cGVDSlFOdkZzU1Y3UGlyT0FrTWlTR3BtbUpDeEZVaGtNN1BVTWlHaEtF?=
- =?utf-8?B?U1c2d3JXSW9naCsxdU4wUzBjeERaaWxPU0t2TVJVdlg1TkFabFAyV0RZM2NZ?=
- =?utf-8?B?b2tzdG5vZXFjc0hXdzU4cVdiRG0reHhmaFc0RWVNSW9Ca2Z5WTVLNk1oZEc1?=
- =?utf-8?B?aDVRMmZiSUV1Rm9RVUQ2NktCODFLVTFBYThreEI3bmRHbUpZM2lsL2h4VGxR?=
- =?utf-8?B?RXc3bXlqdGE1Rm03VkJIeFZJTWtyZWg5ZlkwZlQwbzJKc2tNWkFja2tORTNP?=
- =?utf-8?B?WnBTZFNSYVhWT2pVQ0llUVhSUFg2b2xUK1QyNXdzRm1ldXNLb2ViU285M1FH?=
- =?utf-8?B?Q2VVU2lDbW5oNEJLT2tFelRrM3p4bXE1M1Q4R2JpdXlzck1kUm9MK2hrMVd2?=
- =?utf-8?B?YXhRdXErK3NNVzRlMkduVitoa3VsQzNZWjNzazk1a05kVjJHbUd3ZDI1ZmFw?=
- =?utf-8?B?TjZPS09LZXIyY1krTTZOa1MxRkRtNDhaMzVQcUZtS0R3MVZ5QkV1a1czanl6?=
- =?utf-8?B?QTllck1nSDZjRzdmUlMwYzg0VDQ2MVlWVEF5SWxWSWE1V1FBM1pMV0RUNExa?=
- =?utf-8?B?aFBNNTVQRmw4QWgyZUM1SFM1bmx6Tzl0Nms5TUJxWGdldHJDZ1hjR2xYOTM3?=
- =?utf-8?B?ZVc5U1hJcXg4V2VZTnlQcFcvWTF6azVpWksvTHUzSy9wZmo5WE81cGZuUUU0?=
- =?utf-8?B?amtsTmZ0bGx3Wndid1cxUzJnTnJEMFJ4K1FaRlZKSDJnaTBUZytFOWo4S2x3?=
- =?utf-8?B?cmJhUDJPM1dHbVJVMWVSUnl4M1l1V2ZtT0ZyeEU2cjIyVnJCTkg0L2gyNEdj?=
- =?utf-8?B?dUxwbjRROSsySncvUEtacUVQRHdsMnc3L09ud3ovNEluRHNPd1RHclRrUzRv?=
- =?utf-8?B?RlZkN3lkZytpZ1pjNXRXS2dJZWF2MmVWM2dzblUyMXhaWUJNNXNLei82bDMw?=
- =?utf-8?B?THhBS2VJVzdoZ3dtMXZDcGxOUXdWeHJPakxsbHl0UWRqRXNwb0RmYVNCaE1U?=
- =?utf-8?B?c25VYmpCSGRoMG5PWlpXQTZSOFpZK0p4ZUdUR0ZNT3NZSjYxVCtMMXlURzUy?=
- =?utf-8?B?QjF6QXQ5bnhCbzdSeFRjVW5EbTh4SXVqODJQTjlYYnJmYUpiMnBDeDhvUzds?=
- =?utf-8?B?dER3NkM3WjdSRTFFdVc1SnZzWEk4MEN3ZDIva1BpZE04NzlsSXJOUHc5czc3?=
- =?utf-8?B?RGdBSTluK3RzSTBJNHZ6QW45Rk1DNWZ4NjZaYys2WFEwMEVxVE42UFJLY2ph?=
- =?utf-8?B?UURDRFhINnV5bnFLSzhReEdVTE9JZVRkQ2N2TEl4TjRPYWRvSlFjQ2tCdGpk?=
- =?utf-8?B?WlQ2anJyMENLd1NYZ0kvalBRYk5SNzlQZVk2R2h6RFN0c25kU1NyVGthZzhJ?=
- =?utf-8?B?cmlHRVhjU3RtajNGZXE1dFNFRitHYlBkNks1RDhBL0R3L0E3YjFMMzhFbHph?=
- =?utf-8?B?MHl6UW1oZXluQ0RFRHZreitYSUtDdDVuK1lzQk9MODVaQ1p5UlNuaGFPUGZx?=
- =?utf-8?B?OVZSbU12M3lHQ1FvU2FIeVRjeG4wd2RBT3YwZmJRQWR0eXpHVlhoT0RMWHdu?=
- =?utf-8?B?blMvcWJpRHVNbnN3MVNubXdmNnJ6a2ZvVGxPZjVicTdKNUhFRTVTaDVsVTZk?=
- =?utf-8?B?azF2d0FOZC9TV2tGMEVVdXN6MEhEZWtTT2gzVXV6cTF6cDdZOUpnUU1JS1RF?=
- =?utf-8?B?WEdWUFBlUzR6UE4xWnNaMGo5NHlhQllHTUdTMy9jK2JLVkZBOXBVSDh0NU9Q?=
- =?utf-8?B?dGhwV3BZNmNoTGFRK0J6V0hpT29XMEpkL0Z1S0d0YzdkYkNVNUt5L2o4cERz?=
- =?utf-8?B?RUE0UzB0alQ0SVkwVFM3WlV1ajZTOVNncUFycnlaaGZKVXpVa29tdExCamR3?=
- =?utf-8?B?ZCtvZkc4MUNTMGd1Tmh1SnlaSkZHRGtNZzVWZnFpMnJpcTY5QlFyQXluOTU5?=
- =?utf-8?B?Y2d6Zk1odlVUSHFndFYwTmdqS3dUZnNyNDFoZnp4U0JRVjJ2WG1vMTF0K212?=
- =?utf-8?B?UHZCNFRCM3lSc2pMVS9XMXdoMDViVmplSVFrRzRuYTM0TE9Kb2NtWjFtbXE0?=
- =?utf-8?Q?0Cy5FP/hARS9gRiX38cOVffsW?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ bh=H+gPlQ4ImQkiRbFDtKDMP5jfKp2izZFU0WKuXO+Wteg=;
+ b=XYLz/+o2+fJtO56O5Ilm/RyEkO48TutIT/lmWWpdqfPVeTwx7x1WswNf9TwTQEirnlBgopxBVou+hwEfopfhSfsDyQEz8oqBx+0Hmhtk7h/2PotaTvvrpIKwe1R/CJMstjASTLRWRz/8ZQwc2mvaNdGyBvMxVz/hXDc1Sos8QQ0=
+Received: from BL1PR13CA0259.namprd13.prod.outlook.com (2603:10b6:208:2ba::24)
+ by CH1PPFDA9B3771F.namprd12.prod.outlook.com
+ (2603:10b6:61f:fc00::626) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.13; Fri, 7 Nov
+ 2025 10:28:59 +0000
+Received: from MN1PEPF0000ECDB.namprd02.prod.outlook.com
+ (2603:10b6:208:2ba:cafe::97) by BL1PR13CA0259.outlook.office365.com
+ (2603:10b6:208:2ba::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.8 via Frontend Transport; Fri, 7
+ Nov 2025 10:28:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MN1PEPF0000ECDB.mail.protection.outlook.com (10.167.242.139) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9298.6 via Frontend Transport; Fri, 7 Nov 2025 10:28:59 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 7 Nov
+ 2025 02:28:59 -0800
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 7 Nov
+ 2025 02:28:58 -0800
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Fri, 7 Nov 2025 02:28:57 -0800
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Lukasz Majewski <lukma@denx.de>, Naman Trivedi
+ <naman.trivedimanojbhai@amd.com>, Padmarao Begari <padmarao.begari@amd.com>,
+ Sean Anderson <seanga2@gmail.com>, Senthil Nathan Thangaraj
+ <senthilnathan.thangaraj@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
+ Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] clk: versal: Use __data macro for moving variable to data
+ section
+Date: Fri, 7 Nov 2025 11:28:49 +0100
+Message-ID: <eac8d0ab60a018d6c59aa28c49691839a3eec174.1762511327.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-OriginatorOrg: nokia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR07MB9799.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a7f9e244-73ef-4734-f534-08de1dd156e7
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Nov 2025 07:43:27.6163 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 5d471751-9675-428d-917b-70f44f9630b0
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: fndrEUFlkvtjLxYrZhv3uo35e89WJdFpM5RY+twImmYkWf0sqc7k/ISfAgzKFVC+Fw6HpJK4Jpb3C0F99GGX8A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR07MB10017
-X-Mailman-Approved-At: Fri, 07 Nov 2025 11:22:57 +0100
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1147; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=f6KEvnpejlWTpXZDCLwRgpEed76rfnZijx0eWLHyuok=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWTynnxk+z+xqTzA+WNMMnc1W8rU6t2+ayOmfLt3RuDzK
+ un/d3lXdZSyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBEPvgw/LN/YGxoJ8msbTL9
+ +6b+y8eePw15Fv12R4zAe27PcAXpbY8ZGS7PenmvI/7ZkbNlllLaC48kJVjJC79oebk15hT/Ain
+ JLSwA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECDB:EE_|CH1PPFDA9B3771F:EE_
+X-MS-Office365-Filtering-Correlation-Id: bccd8aab-7932-47a0-e100-08de1de876c7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?iNfPAmn6ANBfNOoDngcZMDDIxlY2Cb1uLFzheDjh2dUjZp+kIYlrV1w8WWmO?=
+ =?us-ascii?Q?gs2PEaskU7bH37ZggKEF/pYxQ7nnLKs2vMTrz4/s1Ux6kjW7xk7Vedy6ooms?=
+ =?us-ascii?Q?TWxOVuDKDSSdp293mVQV4ACExbHmUfX8fQo9DyW1+tXXVcxF6A1Fu4FRze1H?=
+ =?us-ascii?Q?HhkQL551Y4XD/JJQZzYVkYuiKKszBPCdEA4fwaOB+SBO/9AMnPk6NmxGEkq2?=
+ =?us-ascii?Q?dGLIrcEHHFLaejoP+jt7qgpbz9t1u5IzamZGzjsFqfLMqKbe/KSnKDarGbZZ?=
+ =?us-ascii?Q?QKYQ5y2EE+5r1iOpY8B7/ahmK3joo9FMrsT5k03IteN0A8LP/OW2l20c7N9S?=
+ =?us-ascii?Q?vRRlNTUNpeEpc95hh/XM7Ker+yOPU+WsZnfcbDl/TjwIl/oT/cri0HSGpqmT?=
+ =?us-ascii?Q?4LNolhKkp7VDYNBIjsz6xL9LotnnbzH8fNueHiqY6W3r1GXwfAOOeij1VIz/?=
+ =?us-ascii?Q?yOrBju4/hvAm6cyPGpLGLemTXmbcoXr1/MEusA50IO4uRYvdCKDetBYwN9fx?=
+ =?us-ascii?Q?3V+Ooqo9l2w6o0Q8Nr7RU9tcG6hQM1sgGZWEo4btDyetOERd4xEADOAVWZfq?=
+ =?us-ascii?Q?9aCH80AxtDA4vgB69b80ZXsFONwE4VzjF4yERbOsG/nGmEIjJ7azfh1Czjnj?=
+ =?us-ascii?Q?sLIsvkovAoSsEoMSo1ohZjl1VBvJNvjp1wrZssW1uzdK7tDRDwhXB+HcPEO8?=
+ =?us-ascii?Q?WkbW3DeXhPNBFhkr2wCDEjfq1NGEc5uw33iibJyIanz9Dds7y/Ec6YzxV86D?=
+ =?us-ascii?Q?0ZK/QGeTr4KgGNYgrqumGuRFkyGpWBYnu1svgONShc3tueGpYdYxEY5MMc72?=
+ =?us-ascii?Q?rgQSrsFe0156X7fprNfT6tvsqLHsGLKze+gPT+l7sgYJ90jKG1xa3haG01A+?=
+ =?us-ascii?Q?laaLVAvhpe/7QysT6D2VqkJNNq6nH8Id7xIS4az53cFhFWOKxnaO+TiQb8+e?=
+ =?us-ascii?Q?NHjwEtSuKTRl4CCTVOq39wsgXbc/+gd370t7cj1HOYhvG1A/81xJFf5M7yTC?=
+ =?us-ascii?Q?Ihzdkv2C9VVbfsORGNZsW9QoE+ZgkP8jzX6lSaLK2Ame3qfUzdJqiaBFHs8x?=
+ =?us-ascii?Q?aoIrtvH+OY1ZpEHsufJWKn4FlYpLRXIn+YE3cUTZnnZeoVQvpTmZQo4GN8x+?=
+ =?us-ascii?Q?GZCEXaubZ3R12UpLEvKtWp/sldaMV42UPXsDyQc4gdjg6Q/H0/0r5vRvOzWf?=
+ =?us-ascii?Q?iThF6aifMwvd5APTUVsONBjbAuGWo3gQXlaqs9wHc87lfdG+fWq/FgD4jqGM?=
+ =?us-ascii?Q?yc3a9iLuV2K364rBYE48nIxfLiDv83tQinYanKs/o/KWdPATsOkpekhkCSBB?=
+ =?us-ascii?Q?aBDEY0UyGdou5pHztFqyqVrAhS0oj+m3pWL74T35fvwN9G3toTF3fOxd6O2u?=
+ =?us-ascii?Q?TIcWujGxzhmR4Pb8VkQJxbZy1WJgXWxAVLLpAhuB2WIzDHdxiiZssA+niybJ?=
+ =?us-ascii?Q?uisY3b4lvquA0jFM1tt55rlls4pe+KVnXOIcU3KsTBkyrrLuv7tB62nECIik?=
+ =?us-ascii?Q?fmCuay/lS0zd/3w40FLLeFz2HP8u6me46axkzWul7Sxb6pyvkYhPetPqK2NL?=
+ =?us-ascii?Q?heeCMzF69eidVOREQ8E=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 10:28:59.5189 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bccd8aab-7932-47a0-e100-08de1de876c7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECDB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPFDA9B3771F
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,21 +162,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-VGhhbmsgeW91IQ0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogVG9tIFJpbmkg
-PHRyaW5pQGtvbnN1bGtvLmNvbT4gDQpTZW50OiBUaHVyc2RheSwgTm92ZW1iZXIgNiwgMjAyNSA2
-OjAwIFBNDQpUbzogVS1Cb290IE1haWxpbmcgTGlzdCA8dS1ib290QGxpc3RzLmRlbnguZGU+OyBI
-YW5zIEdmaXJ0bmVyIChOb2tpYSkgPGhhbnMuZ2ZpcnRuZXJAbm9raWEuY29tPjsgSmFuIEtpc3pr
-YSA8amFuLmtpc3prYUBzaWVtZW5zLmNvbT4NClN1YmplY3Q6IFJlOiBbUEFUQ0hdIHRvb2xzOiBr
-ZXkyZHRzaTogV3JpdGUgb3V0IG1vZHVsdXMgYW5kIHItc3F1YXJlZCB3aXRoIHRoZSBjb3JyZWN0
-IGxlbmd0aA0KDQoNCkNBVVRJT046IFRoaXMgaXMgYW4gZXh0ZXJuYWwgZW1haWwuIFBsZWFzZSBi
-ZSB2ZXJ5IGNhcmVmdWwgd2hlbiBjbGlja2luZyBsaW5rcyBvciBvcGVuaW5nIGF0dGFjaG1lbnRz
-LiBTZWUgdGhlIFVSTCBub2suaXQvZXh0IGZvciBhZGRpdGlvbmFsIGluZm9ybWF0aW9uLg0KDQoN
-Cg0KT24gRnJpLCAzMSBPY3QgMjAyNSAxMDozNToxNiArMDEwMCwgSmFuIEtpc3prYSB3cm90ZToN
-Cg0KPiBBbGlnbiB0aGUgaW1wbGVtZW50YXRpb24gdG8gcnNhX2FkZF92ZXJpZnlfZGF0YSgpIGJ5
-IHdyaXRpbmcgdGhlIA0KPiBtb2R1bHVzIGFuZCByLXNxdWFyZWQgcHJvcGVydGllcyB3aXRoIHRo
-ZSBzYW1lIGxlbmd0aCBhcyB0aGUga2V5IA0KPiBpdHNlbGYuIFRoaXMgZml4ZXMgc2lnbmF0dXJl
-IHZlcmlmaWNhdGlvbiBpc3N1ZXMgd2hlbiBvbmUgb2YgdGhlIA0KPiBwYXJhbWV0ZXJzIGhhcyBs
-ZWFkaW5nIHplcm9zLg0KPg0KPg0KDQpBcHBsaWVkIHRvIHUtYm9vdC9tYXN0ZXIsIHRoYW5rcyEN
-Cg0KWzEvMV0gdG9vbHM6IGtleTJkdHNpOiBXcml0ZSBvdXQgbW9kdWx1cyBhbmQgci1zcXVhcmVk
-IHdpdGggdGhlIGNvcnJlY3QgbGVuZ3RoDQogICAgICBjb21taXQ6IDc3OTA1YzMzM2U0ZmExMDkz
-MTU0OTg0Y2M2NTU3NWI1Y2I3Y2M5N2QNCi0tDQpUb20NCg0KDQo=
+The commit 1b267fe1824e ("firmware: xilinx: Prepare code for new SMC
+firmware format") introduce new __data macro that's why use it in clock
+driver too.
+
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
+
+ drivers/clk/clk_versal.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/clk/clk_versal.c b/drivers/clk/clk_versal.c
+index c62a747036d9..0c754943deda 100644
+--- a/drivers/clk/clk_versal.c
++++ b/drivers/clk/clk_versal.c
+@@ -106,8 +106,8 @@ struct versal_clk_priv {
+ 	struct versal_clock *clk;
+ };
+ 
+-static ulong pl_alt_ref_clk __section(".data");
+-static ulong ref_clk __section(".data");
++static ulong __data pl_alt_ref_clk;
++static ulong __data ref_clk;
+ 
+ struct versal_pm_query_data {
+ 	u32 qid;
+@@ -116,8 +116,8 @@ struct versal_pm_query_data {
+ 	u32 arg3;
+ };
+ 
+-static struct versal_clock *clock __section(".data");
+-static unsigned int clock_max_idx __section(".data");
++static struct versal_clock __data *clock;
++static unsigned int __data clock_max_idx;
+ 
+ #define PM_QUERY_DATA	35
+ 
+-- 
+2.43.0
+
+base-commit: f15a697077f107ca277a6aa73c165cd1293088a7
