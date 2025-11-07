@@ -4,72 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A430CCFA05
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 12:23:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC038CCFA05
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 12:23:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F06583D17;
-	Fri,  7 Nov 2025 13:23:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C1A5B83D2E;
+	Fri,  7 Nov 2025 13:23:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b1Tq2NLb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L/9L5dFg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE0F183D18; Fri,  7 Nov 2025 13:23:14 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 7554483D3D; Fri,  7 Nov 2025 13:23:19 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9764183CB1
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 13:23:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 801AF83D18
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 13:23:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b727f452fffso113952666b.1
- for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 04:23:12 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-64034284521so1127116a12.1
+ for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 04:23:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1762518192; x=1763122992; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8eGt4sLyz6zrHGm3ziRhNP+2weGnPJOGp6caajF9PM8=;
- b=b1Tq2NLbhMBAwvvQ2rzT7FC9sfXaHgcxfoFi0kUK1m/PCZ7/XACOi7XUx7iyCvOGy5
- nt2gvAnPsdeoXxVh+jcyw6sAp/X60YGVbpmqHU4lK7XgdyQjIIBvfHXoYR3q9ZAAHKFh
- ivbvuj/6OEqVwU/DSR0pdnb7vAhOoc/wW9N2c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762518192; x=1763122992;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1762518197; x=1763122997; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8eGt4sLyz6zrHGm3ziRhNP+2weGnPJOGp6caajF9PM8=;
- b=wDVH5vnfNu3ghH5KcgIztI+EzSjG9bB0ywOmYuVxzG7JthWn7N5sMjMSoE2oJUcLH3
- Vvzt9Hef2DwZA0+z0vH6pEaEKYNH6k1y6Wr5G1/er+R40VqA10uPZqy6xbHMDkx5c6eW
- XPlQm+xr3B+vjkr/9bbvyRxs5j0GQo3Pyn5fpmLwW4qn+P84zoEahZiba0Eex0M+eM2g
- REoHkzXiERYfPEcnX+hK8TB96SGeFM10SWX5aCSpQiPg0GLFEFbyfyObtdX/pz7GSqAs
- VVRGDB/wECfNMsoSiXe5iLAB427b8XGvuLXzk2Y0vPbA8AEaWKUsVoao/hzYLuVOF/+U
- cF7w==
-X-Gm-Message-State: AOJu0YwTkgFj0sqcTnJcEqd/kKogdyI27s8+iOm1yvIuhqNvc6H1bGqC
- MCNoNpI9Mg5+La84fkHZqFlHMYREjUgarD9Dc3jEgyuzjDrYm34bx6MlKgAKV2nE2avWYTKZGT8
- KVNHmQkG+rFcRZWeL5QwfPpeXVanFM1+1SR1R3ISh
-X-Gm-Gg: ASbGncsOm279BrFMLGEZtv4kYVOxETa+bUP9VbFBJQBHLk/PQ7rh4HXfx2+63eQHPwG
- fMZVuAvNQ5o0urJRmpOOY2s+BwPrUVoTFPkLEdAzsru/m4mwtH9SlvJ43fmhiIcJU/5p3UAKpKz
- 8FPS3WsHbsaM4XdK+5Il036r0t+vYYhXizcJgYYmD2pMiTUnyCCcLIuoGIzGa83aEPKK7iyW7Av
- OJ3TBjz+6Su52dEF6GjRytZOdm4cXOy/eAkUC2qd/GLoMVu+yjK0Xwf0N5/98y1ll4p5T0=
-X-Google-Smtp-Source: AGHT+IG2fJuV3ar9AwarU1uLAJdyRxclSb0vVJ5HyKi0e6hzMMDN/ptzOE7mTcEUOQwqYOaP5bz8CJmQaDTKVw60jCw=
-X-Received: by 2002:a17:907:1c12:b0:b53:f93f:bf59 with SMTP id
- a640c23a62f3a-b72d0b3c51fmr195550166b.29.1762518192061; Fri, 07 Nov 2025
- 04:23:12 -0800 (PST)
+ bh=1MiXDavF4Ll8BaTZVXl3o4Jxbv2YT3S1s4Xq5/XTmRQ=;
+ b=L/9L5dFg0IbJUp6fUGTZ2nNvqk32LLUtvZqDAXnlr8MRadvpHdMFZbNIt16XcONOtJ
+ YQHcszkGLg9kx/fr3GTPUYFh/XJ2bI+Ebt7cSymCAq3/UxITJts4b+Fhpkj6CXEDU7L0
+ gCPWnvsymQ7OnioH45s2SvjW2oOLD2HstZ0k8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762518197; x=1763122997;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1MiXDavF4Ll8BaTZVXl3o4Jxbv2YT3S1s4Xq5/XTmRQ=;
+ b=vCo3nANz/vG0cN1fEZC5BoZgQ2nbo8w4S0Pkqkqxzxlp1ODqLz+Ae84nlT2TWTrpt6
+ V2jwvjr8vvf9xeO+0uT3F1acPgm5Y50CH+PPmIyBZyBUvBMZjXMQnjV6IzN2cQFSdEWw
+ /u+LnZcSZt/ixDOAOPt/cG3NdKzkJj8wqDW/NDLfm+ToC6XfmhSw/4/CPPbWGE82uItb
+ 1IBr4/k+e6T2uRg0TzqxkihwEkB28tvx5ZYD8BKurwHtSYoKSeIjK7h1GcHIOdBqhZRb
+ fo215K38UgkEjccJssFzeAU6lqpqF7t/ga/q8Deg29LvvxeADzcHELJtvQ2ovW6zKuMc
+ IOVw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWRyv+PIRNYKeaGJ6GRgUDVVi0CNxXNSC6HWMDF93W4072feHvO6FxKVkJpyeZl0EyRcgZZBuk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0O0uDZTkCXaSQG/V4/qI5UbtpL36XyxE9Gyu2/VvIPb+hpjeh
+ nIxLod3Kwb7Z/sMiRk/mnC6teFKroE2YIYfKPwUHe0mDnmAwcbhD9gmMju5ltJZ3avIKK2DirjM
+ QTly2AvLLvBiy1JHnaZH6bej3MDYRiCMhxvfdDUrv
+X-Gm-Gg: ASbGncsC5A/dJlsphYxLIlu1M6XQj7wN6yaoL4QqD+VyWbO1zw6FlAAWmHODu6g16U5
+ 1KK8m+tRVFSDkBrI/c9W+sHRyTkxYuptIBTxloHiFG78IawWuXjAvkIFllxFimYTsSKKw5H2bWf
+ qP6kJKHKMqTHugCqiBtHcDo75FeYUGnMOzy39cMgFBJcdwGyS1/Wfs42zclTWoZlQcnrflGqUKU
+ d7tSQCWurmxP+aOYGDXy1aRT3iKTdHuWyCRVwdfGGTD8BtnRudkWDujvfEC
+X-Google-Smtp-Source: AGHT+IF4my2olkzLwsOcJsylORDICY0+mzr8LtkOflCiL/H2CZSDx7nd+48Xp5B12UH1lQWeKWeoVxUcC2Ba0jT/3E0=
+X-Received: by 2002:a17:907:3e97:b0:b45:60ad:daf9 with SMTP id
+ a640c23a62f3a-b72c093368bmr327724166b.3.1762518196898; Fri, 07 Nov 2025
+ 04:23:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20251106232836.3243591-1-trini@konsulko.com>
-In-Reply-To: <20251106232836.3243591-1-trini@konsulko.com>
+References: <20251106153009.887102-1-bmeng.cn@gmail.com>
+ <CAEUhbmXBUaWAx0iiQtpp1AKJ13-Nxv46__Z=9Ck5JP+HP+7j9Q@mail.gmail.com>
+In-Reply-To: <CAEUhbmXBUaWAx0iiQtpp1AKJ13-Nxv46__Z=9Ck5JP+HP+7j9Q@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 7 Nov 2025 13:23:00 +0100
-X-Gm-Features: AWmQ_bkBmnvvGUpPWzhH-iFqBGudCxA5iAwBM8qOkczOO0ilN5ZWENyS7us9mHY
-Message-ID: <CAFLszTixiE+gxoOsV1tc0JLi9pce4pgenp2WGObLhED+txfjRA@mail.gmail.com>
-Subject: Re: [PATCH] buildman: Correct override toolchain support for clang
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Fri, 7 Nov 2025 13:23:03 +0100
+X-Gm-Features: AWmQ_bllVZBW6hEPtJ2ApeUZzbvqW01M2wwM6WJZEmBmQl-V2VCRQth-3n32yMs
+Message-ID: <CAFLszTjGNKV+kXiTB5KMOvcimSSOkqJkPKsspcxyX9Gho+05gA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] qemu: arm: Rename QEMU arm* defconfig files
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
+ Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Raymond Mao <raymondmaoca@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,27 +109,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 7 Nov 2025 at 00:28, Tom Rini <trini@konsulko.com> wrote:
+Hi Bin,
+
+On Thu, 6 Nov 2025 at 16:45, Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> When initially adding support for building with clang with buildman,
-> there was some minimum logic in the Makefile to inform clang what the
-> expected target was, without CROSS_COMPILE being set. This has long been
-> deprecated / removed from the Linux kernel, and also not functional in
-> U-Boot. The normal expectation, especially so that an intentional
-> mix-and-match of GNU binutils and LLVM C compiler can be used relies on
-> CROSS_COMPILE also being set and passed. To have buildman do this we
-> only need to remove the logic that was not setting CROSS_COMPILE when
-> we had an override. Correct the comment about what override_toolchain
-> does as it is functional outside of sandbox too.
+> On Thu, Nov 6, 2025 at 11:30=E2=80=AFPM Bin Meng <bmeng.cn@gmail.com> wro=
+te:
+> >
+> > Other QEMU defconfig files use a hyphen between "qemu" and the
+> > architecture name, but ARM uses an underscore. Rename the ARM
+> > defconfigs for consistency.
+> >
+> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> > ---
+> >
+> >  MAINTAINERS                                                 | 2 +-
+> >  arch/arm/dts/qemu-arm.dts                                   | 2 +-
+> >  arch/arm/dts/qemu-arm64.dts                                 | 2 +-
+> >  board/emulation/qemu-arm/MAINTAINERS                        | 2 +-
+> >  ...{qemu_arm64_acpi_defconfig =3D> qemu-arm64_acpi_defconfig} | 2 +-
+> >  configs/{qemu_arm64_defconfig =3D> qemu-arm64_defconfig}      | 0
+> >  ...{qemu_arm64_lwip_defconfig =3D> qemu-arm64_lwip_defconfig} | 2 +-
+> >  configs/{qemu_arm_defconfig =3D> qemu-arm_defconfig}          | 0
+> >  doc/board/emulation/qemu-arm.rst                            | 6 +++---
+> >  doc/develop/driver-model/virtio.rst                         | 6 +++---
+> >  doc/develop/uefi/uefi.rst                                   | 2 +-
+> >  tools/docker/Dockerfile                                     | 4 ++--
+> >  12 files changed, 15 insertions(+), 15 deletions(-)
+> >  rename configs/{qemu_arm64_acpi_defconfig =3D> qemu-arm64_acpi_defconf=
+ig} (54%)
+> >  rename configs/{qemu_arm64_defconfig =3D> qemu-arm64_defconfig} (100%)
+> >  rename configs/{qemu_arm64_lwip_defconfig =3D> qemu-arm64_lwip_defconf=
+ig} (80%)
+> >  rename configs/{qemu_arm_defconfig =3D> qemu-arm_defconfig} (100%)
+> >
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
->
->  tools/buildman/toolchain.py | 7 ++-----
->  1 file changed, 2 insertions(+), 5 deletions(-)
->
+> Oops, I forgot the CI yml files changes. Will do in the next version.
+
+Welcome back!
+
+I have wanted this change for ages :-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-I don't recall trying clang with real boards.
+Regards,
+Simon
