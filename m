@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 007D6CCFA05
-	for <u-boot@archiver.kernel.org>; Thu,  6 Nov 2025 23:29:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1ABCCFA13
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 00:51:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 030BB83C64;
-	Fri,  7 Nov 2025 00:28:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A63583BEB;
+	Fri,  7 Nov 2025 01:51:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k+pvmTBo";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IppI4rEH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEA6183C65; Fri,  7 Nov 2025 00:28:44 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id B3A0983C08; Fri,  7 Nov 2025 01:51:56 +0100 (CET)
+Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
+ [IPv6:2607:f8b0:4864:20::92e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF1B483C63
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 00:28:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DB0983BDD
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 01:51:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7c6ce4f65f7so89633a34.0
- for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 15:28:42 -0800 (PST)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-ua1-x92e.google.com with SMTP id
+ a1e0cc1a2514c-93516cbe2bbso69770241.2
+ for <u-boot@lists.denx.de>; Thu, 06 Nov 2025 16:51:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762471721; x=1763076521; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xo1oUYKy0GRQodStEsKX7URiNdYdu6DMIJ4ElGlaIxk=;
- b=k+pvmTBoe9q4cZypPTWFrjEcmFvJK0qwLBhl98/PJVAeSmos7YWyW4Mo48lsZtZx4Z
- ROrd1UHH7X47ycQwrxW9NA9LEA3FV62x1w6MiYjlSKpT+/IC97eA7kGhe5UXdY4azfj6
- rc+kN6TLdsOV5QAk0xaBUX9zc+FLiZOUhg3og=
+ d=gmail.com; s=20230601; t=1762476713; x=1763081513; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ng/Kmh7x/658zMJgwLpTVYZXXYpZnNCnmQgEMfOKOI4=;
+ b=IppI4rEHDjbrTFYCCdOpiNngo8Hgct8tT4lqpCGIPHg4fMgle/4krnwjERbADley75
+ 2qSIdFyEzYIIJZ6FitQCE7DoQy4Gxb5yS1GgehjYbGMCo0xL0AYG1AVLLcFZXQ8gHL9T
+ wNvaAh0GaFCeuColzE2+XIlynJKfF3jOtsXfcKacqUtnJd5L+Nk28n+8RM27LiAXiTAm
+ n3qXlRCzcdGJP9KZjyt6W5knqWP/h1xH5aL8Hsq1TZLX2omtQ/I2vl5zn5rpf5b++kVg
+ 2+1kN880iJ3ZKKXhwdMgcHJfV4NQ7uaB6mkSts6MmGkCAd4k91dCdTWrhLFQ4V5eDxGk
+ ipIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762471721; x=1763076521;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1762476713; x=1763081513;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xo1oUYKy0GRQodStEsKX7URiNdYdu6DMIJ4ElGlaIxk=;
- b=gTB4dl6QFq+ep1UwSD1JDgfqMRrq1kg9CVw5l8Z8JWlGgo2vDe6rtM4FqbuGjJyCjS
- 2lXt4yoB6EsWrvEs1IVfSp5snnGQ8tnhUXJopZEaqKT/eYmFvW6Y+ZUEaFWzg+oCjbiM
- xtlwLrY0w7i2dnhYxgz9jYqChutbTzw64ai64HziwdzU4LYuNkSEmcFLZvjMaXR40hd5
- eDgAv5hZt2T/1UggMZo8t/+4yzAg7IVi11YM92Vk/BWRUX3uXq8JeN9Wf7pKH+sLwk7E
- QAsXg19t/Fq0+U+ycL74C5saHFpAkbfqn7g0i3WnhTTruwPe1oCgiev/kAqdII307dAN
- 1LKg==
-X-Gm-Message-State: AOJu0YzDjYHU5AtLpFq+L9srS/8px9IT5j0mN3ICZQY23UxrmbbpQuS7
- 6OfgZCHRPmAjASzSQ3TPdKSfp1x1HkZglZLnpjAl+c3dWKzyGgL0OCl5BACPfLkm+mn/1djkqQj
- z+IqddWJXaQ==
-X-Gm-Gg: ASbGnctItWJSTDibjmbpjJREXkpqsr6vEJ3zfP4xSd1vPIgsrjqWSkVI9OyRLSH6fxV
- 7Dpn2qtsWiUXN8m37vsujoA98t0/kl7VzsbVOwF82/3irQvpwOFQWfM3p4Mwi9cqusPu22Am+wT
- 4zJYb2CcoWZUPzSYv1Idk8VeOyQT3clC+EKJkEsgtLkSdsYVPttMIcj0PXDXgd9VD7g0xr4L1Vu
- o58WaZxeuCNbWmySxCxqNtCEKfoLMHW+a9ZJpJKKhcsXLWWvaXty4PjNT9S4hALjTPcNXxL3kKC
- rv/QJWy/e9uzW4KMgWudSSCySmuaWM1k3rQteffMGXA4L/mRxzYtCR7tqnZD+zzW0Cj1kvKVquG
- aBChjVoGMW/EjJJwlAn0U5vg4+hkBoDnpMylaAq8waqaOOvyPJRN9PnCfHm7UCXXwscxOGPFR1v
- yzQl9zFaOoAyTYSHyyYV9GqGn4um1EBb93dnLEvDxYyQ==
-X-Google-Smtp-Source: AGHT+IFvSt8F/3AgJ+kakfb7xPSjRaVS0oV8fMO/Zp1VW5y8IRPF7WwqY2DEcdy8tpFEmuWz6Opnog==
-X-Received: by 2002:a05:6830:4986:b0:7c5:3d8c:f111 with SMTP id
- 46e09a7af769-7c6eff1a11fmr1255099a34.22.1762471721606; 
- Thu, 06 Nov 2025 15:28:41 -0800 (PST)
-Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f10f5c0bsm444852a34.18.2025.11.06.15.28.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Nov 2025 15:28:40 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH] efi_selftest: efi_selftest_snp: Fix warning when building
- with clang
-Date: Thu,  6 Nov 2025 17:28:39 -0600
-Message-ID: <20251106232839.3243622-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ bh=ng/Kmh7x/658zMJgwLpTVYZXXYpZnNCnmQgEMfOKOI4=;
+ b=t+1pWu2IwOh8gi9OSQhWPriNVi7XWR7hUPHcaAyF9MxAd86E/78zKeesrHYhmBJpEm
+ n7XM/U3Ic0g7VDV1gxOBckaW9yRM8bCwgP7h/Xx37wZBmbJl6ZlVnfWtps91cY1o63Nd
+ hyAxoPjI5KI/GPCyf8kNGB2nMySrdONjeJea3PcNSVnAMepxB4yU7eq8yQAcs5g53wpq
+ Us1eJcxQpyAlwJzG8vu3VlXUiV0VUoqXY6OZ9Z9e0iUb3+bzVbSw+AIFbP0UuKsaM5E8
+ Fe5fQAQzmX1b67TRIIHA3JRpLb7nc561Vt3/6PPxfkL3hSKH1RLC6SMEfbUt2bET0YYO
+ 8HMg==
+X-Gm-Message-State: AOJu0Yw3ofNESTOHTvzadGiJX0scTVyW75JjKPggT65LFYM3y5GWGXoO
+ 628GCE7FkxUGrR/9B3nXKTrgDkD+Zk5b+18a7Y1Ev0BrdT9NbPeJU6MaN9Vl5a8ZlnYEOxQuwsO
+ MM1R+l0nBOrBFrdz027N526YjszNE3C0=
+X-Gm-Gg: ASbGncup+kgsE6a1n9TUTLyb57PICfJvQAIoajj89AZlpnKYaAwf504pVg8XG/Ytao0
+ KAFBmo9NrlzGu5Kepbs+9J1n0xi9BC5FeSOHFYAc7k/3Dv/dCcsP2CkcONyDhzEWLI2G9R9QVfw
+ O8oxmgbIYsCzjU1CW80jlBqRjcmQnfD5r6+2Lauu9eEEze4gL4QdpCiKRTSpHDntfMAyj25z6M6
+ 4CIkcdxoSYe2cQG7/LdKYjFdL6q4zc4mxK/4xJ8wUARBqQBm5pr0ebtc7OL0XszrcCLoA==
+X-Google-Smtp-Source: AGHT+IGZkmYvdBr5FicK15G/t7tGU3jCYK0hH7neVUBk+2PTRc2fNCeaixh2DWPK5yp2fzAi6eVDBFGTO1DJVdISozY=
+X-Received: by 2002:a05:6102:418b:b0:5db:ca9e:b589 with SMTP id
+ ada2fe7eead31-5ddb2290a99mr589173137.33.1762476713015; Thu, 06 Nov 2025
+ 16:51:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251106232838.3243607-1-trini@konsulko.com>
+In-Reply-To: <20251106232838.3243607-1-trini@konsulko.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Thu, 6 Nov 2025 19:51:43 -0500
+X-Gm-Features: AWmQ_bkiWkkDnYwMXY2uTzoWnQjdW1HOWC1jNDZrWWxTlU-h3miMkwh-sDlXkMk
+Message-ID: <CAMDkj5wgRA=WQfWSfVw=qO6NiGGm2U6mi0mfd1WfsJLq2AMG3Q@mail.gmail.com>
+Subject: Re: [PATCH] smbios: Fix warning when building with clang
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,37 +93,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When building with clang, we see a warning:
-lib/efi_selftest/efi_selftest_snp.c:63:18: error: field dhcp_hdr within
-'struct dhcp' is less aligned than 'struct dhcp_hdr' and is usually due
-to 'struct dhcp' being packed, which can lead to unaligned accesses
-[-Werror,-Wunaligned-access]
-when building lib/efi_selftest/efi_selftest_snp.c. Resolve this error by
-packing struct dhcp_hdr as well, as the only place it is used also is
-packed.
+Hi Tom,
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Adriano Cordova <adrianox@gmail.com>
----
- lib/efi_selftest/efi_selftest_snp.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Nov 6, 2025 at 6:28=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
 
-diff --git a/lib/efi_selftest/efi_selftest_snp.c b/lib/efi_selftest/efi_selftest_snp.c
-index b00c76c2f172..290ed3a28f2c 100644
---- a/lib/efi_selftest/efi_selftest_snp.c
-+++ b/lib/efi_selftest/efi_selftest_snp.c
-@@ -43,7 +43,7 @@ struct dhcp_hdr {
- 	u8 chaddr[16];
- 	u8 sname[64];
- 	u8 file[128];
--};
-+} __packed;
- 
- /*
-  * Message type option.
--- 
-2.43.0
+> When building with clang, we see warnings such as:
+> error: field max_size within 'struct smbios_type7' is less aligned than
+> 'union cache_size_word' and is usually due to 'struct smbios_type7'
+> being packed, which can lead to unaligned accesses
+> [-Werror,-Wunaligned-access]
+> when building drivers/sysinfo/smbios.c. Resolve this error by packing
+> the unions as well after verifying they are complete (16 or 32 bits).
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Raymond Mao <raymondmaoca@gmail.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
+>  include/smbios.h | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>
+>
+Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 
+Raymond
+
+
+> diff --git a/include/smbios.h b/include/smbios.h
+> index b5fed57aba21..f2f7483bce5a 100644
+> --- a/include/smbios.h
+> +++ b/include/smbios.h
+> @@ -204,7 +204,7 @@ struct __packed smbios_type4 {
+>         char eos[SMBIOS_STRUCT_EOS_BYTES];
+>  };
+>
+> -union cache_config {
+> +union __packed cache_config {
+>         struct {
+>                 u16 level:3;
+>                 u16 bsocketed:1;
+> @@ -217,7 +217,7 @@ union cache_config {
+>         u16 data;
+>  };
+>
+> -union cache_size_word {
+> +union __packed cache_size_word {
+>         struct {
+>                 u16 size:15;
+>                 u16 granu:1;
+> @@ -225,7 +225,7 @@ union cache_size_word {
+>         u16 data;
+>  };
+>
+> -union cache_size_dword {
+> +union __packed cache_size_dword {
+>         struct {
+>                 u32 size:31;
+>                 u32 granu:1;
+> @@ -233,7 +233,7 @@ union cache_size_dword {
+>         u32 data;
+>  };
+>
+> -union cache_sram_type {
+> +union __packed cache_sram_type {
+>         struct {
+>                 u16 other:1;
+>                 u16 unknown:1;
+> --
+> 2.43.0
+>
+>
