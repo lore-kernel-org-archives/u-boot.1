@@ -4,59 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 008BACCFA1B
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 08:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA798CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 09:00:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 508F883C96;
-	Fri,  7 Nov 2025 09:21:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=pschenker.ch
+	by phobos.denx.de (Postfix) with ESMTP id DE5E183C94;
+	Fri,  7 Nov 2025 10:00:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="l0GXoIYi";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QXBnJtq+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29D0F83CA4; Fri,  7 Nov 2025 09:21:56 +0100 (CET)
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [84.16.66.171])
+ id C090083CAD; Fri,  7 Nov 2025 10:00:49 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F027683C94
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 09:21:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D84B783C60
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 10:00:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=pschenker.ch
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dev@pschenker.ch
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d2sV94y2RzQgZ;
- Fri,  7 Nov 2025 09:21:53 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pschenker.ch;
- s=20220412; t=1762503713;
- bh=zEIxSg5QuNkISt2iCpV95R2k4A3CvvGDRSk1FdJ6LnY=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=l0GXoIYimr8bjLkga0okAvdjiL2Q0wacisznYUPj+oHCgv2fj8IqgBx22fIGyG3AS
- KCAFr1Is3iPCj84VG44ydoEYPqpG2E+mW2eDWUwP2fKu5451uzqeil8ucRNYQ6ScDm
- 8sTZEEzats5BqNxmC1jE5mTslHt4IGe3k4TrAXFE=
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d2sV84wnTzpQk; Fri,  7 Nov 2025 09:21:52 +0100 (CET)
-Message-ID: <3459766068b6c38d6c2b316d3975e11661033324.camel@pschenker.ch>
-Subject: Re: [PATCH v1 0/6] remoteproc: k3-r5: Build fixes and security
- improvements
-From: Philippe Schenker <dev@pschenker.ch>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, stefan@embear.ch, Andrew Davis <afd@ti.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Beleswar Padhi
- <b-padhi@ti.com>, Daniel Schultz	 <d.schultz@phytec.de>, Hari Nagalla
- <hnagalla@ti.com>, Judith Mendez <jm@ti.com>,  Neha Malcom Francis	
- <n-francis@ti.com>
-Date: Fri, 07 Nov 2025 09:21:12 +0100
-In-Reply-To: <20251106193527.GA3087996@bill-the-cat>
-References: <20251023094631.16742-1-dev@pschenker.ch>
- <20251106193527.GA3087996@bill-the-cat>
-Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-Vie3tw4LpQntUqK7tPrP"
-User-Agent: Evolution 3.58.1 
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1762506042; x=1763110842; i=xypron.glpk@gmx.de;
+ bh=uq6FK8/pRJG2TlyYP4YkfULU9er7eA5/PRTg82h5ngI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:
+ References:To:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=QXBnJtq+gS2kL50OfLvCP5qEa4cqkzs7b41swLhOsHZElmtgCpMvP8LxWkxrto8T
+ 9GBW2IFtaxBJuf3kq0mHOlrWkmZEdsKwL8Vx3TSOACllunAImlaszu5/eJj1ZJbJG
+ 4A6WgkfZ2oBYbFUf7cts+NT7JZVQIYpm+7dcpjt+sfdGBFEA9bs42wLzfe2e/iHqF
+ NIWq+CnjTGPqsJT6Tw0CfVnNx614zvKpYhiBIahxVzf/6lEePhI1Vk5M6+kA8bxJ/
+ r8SB3XLTcFKEOU+yundpR/byH3ni3E+TTGyb6GigTRB3XKAjoGNqEmBb0dAmRtDI2
+ CvfV+jSHTFtf7GRWKg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.25.183.149] ([93.94.208.154]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MC30Z-1vMUK70A05-006335; Fri, 07
+ Nov 2025 10:00:42 +0100
+Message-ID: <dd079318-795e-46a9-8123-2e8b7c5758fd@gmx.de>
+Date: Fri, 7 Nov 2025 10:00:41 +0100
 MIME-Version: 1.0
-X-Infomaniak-Routing: alpha
+User-Agent: Mozilla Thunderbird
+Subject: Fwd: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot
+ augmented DT if DEVICE_TREE_DEBUG=1
+References: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+To: Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, E Shattow <lucent@gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
+X-Forwarded-Message-Id: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:FOMJaRCERrfoxjLb/8CbaeW6Lgcn68lgmlLT4D3PkGQwryvIhGK
+ xvJ/EfLvzZsoPQhAJWnfhkbm2Jl/QPt1HBbGVEdH/4/f6jaQuhxQJaJ5GCmhJW+ykZLbOwP
+ NRTu1yrKcYO/GJ1rWQS5US3Wffv0S0VFxYM1J4lkoqJKZsUtb1mIAzZEzwPUgc32fxRyPuH
+ 03KbcUbEi5v6MITvRamPQ==
+UI-OutboundReport: notjunk:1;M01:P0:Y0cAx8z7yyE=;iLTypP0vbfiSov5ew0RKz2d5KAr
+ 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
+ tk0T1pZSn/jMwT1Fc=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,75 +153,131 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---=-Vie3tw4LpQntUqK7tPrP
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hello Hal, hello Minda,
 
-Hi Tom,=20
+Marek created the patch below, to find differences between Linux=20
+device-tree and what U-Boot uses.
 
-Sorry for not spotting this. I will improve the patchset and send a v2.
+For all JH7110 boards I find these differences which are due to=20
+arch/riscv/dts/starfive-visionfive2-u-boot.dtsi. Could you, please,=20
+check if these are still intended:
 
-On Thu, 2025-11-06 at 13:35 -0600, Tom Rini wrote:
-> On Thu, Oct 23, 2025 at 11:46:18AM +0200, Philippe Schenker wrote:
->=20
-> > From: Philippe Schenker <philippe.schenker@impulsing.ch>
-> >=20
-> >=20
-> > This series fixes compilation errors when building for R5 cores and
-> > addresses a security issue where authenticated images were not
-> > being
-> > used correctly.
-> >=20
-> > Patch 1: Cosmetic removal of duplicate code
-> >=20
-> > Patches 2-3: Fix build errors caused by type mismatches between
-> > function signatures and the types used in R5 builds.
-> >=20
-> > Patches 4-5: fix a bug where ti_secure_image_post_process()
-> > relocates
-> > images during authentication, but callers were still using the
-> > original
-> > unverified addresses.
-> >=20
-> > Patch 6: Implements is_running operation to allow querying R5F core
-> > status.
-> >=20
-> > Note: If preferred, I can split this series.
->=20
-> With the series applied, I see warnings now on:
-> j721e_beagleboneai64_r5 am62x_beagleplay_r5 am67a_beagley_ai_r5
-> phycore_am62ax_r5 phycore_am62ax_r5_ethboot phycore_am62ax_r5_usbdfu
-> phycore_am62x_r5 phycore_am62x_r5_ethboot phycore_am62x_r5_usbdfu
-> phycore_am64x_r5 am62ax_evm_r5 am62dx_evm_r5 am62px_evm_r5
-> am62px_evm_r5_ethboot am62x_evm_r5 am62x_evm_r5_ethboot am62x_lpsk_r5
-> am64x_evm_r5 am65x_evm_r5 am65x_evm_r5_usbdfu am65x_evm_r5_usbmsc
-> j7200_evm_r5 j721e_evm_r5 j721e_sk_r5 am68_sk_r5 am68_sk_r5_ethboot
-> j721s2_evm_r5 j722s_evm_r5 j722s_evm_r5_ethboot am69_sk_r5
-> am69_sk_r5_ethboot j742s2_evm_r5 j784s4_evm_r5 verdin-am62_r5
-> verdin-am62p_r5
-> like:
-> arch/arm/mach-k3/security.c:122:20: error: cast to pointer from
-> integer of different size [-Werror=3Dint-to-pointer-cast]
-> =C2=A0=C2=A0 122 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *p_ima=
-ge =3D (void *)image_addr;
+@@ -533,7 +617,7 @@
+  			#clock-cells =3D <0x1>;
+  			#reset-cells =3D <0x1>;
+  			assigned-clock-parents =3D <0x28 0x0 0x28 0x2 0x28 0x2 0x3 0x59>;
+-			assigned-clock-rates =3D <0x0 0x0 0x0 0x0 0x1dcd6500 0x59682f00>;
++			assigned-clock-rates =3D <0x0>;
+  			assigned-clocks =3D <0x3 0x0 0x3 0x5 0x3 0x4 0x3 0x5a 0x3 0x1 0x28 0x=
+0>;
+  			bootph-pre-ram;
+  			clock-names =3D "osc", "gmac1_rmii_refin", "gmac1_rgmii_rxin",=20
+"i2stx_bclk_ext", "i2stx_lrck_ext", "i2srx_bclk_ext", "i2srx_lrck_ext",=20
+"tdm_ext", "mclk_ext", "pll0_out", "pll1_out", "pll2_out";
+@@ -996,6 +1080,7 @@
 
---=-Vie3tw4LpQntUqK7tPrP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+  		memory-controller@15700000 {
+  			bootph-pre-ram;
++			clock-frequency =3D <0x855>; // 2133 MHz
+  			clock-names =3D "pll";
+  			clocks =3D <0x3 0x1>;
+  			compatible =3D "starfive,jh7110-dmc";
 
------BEGIN PGP SIGNATURE-----
+Best regards
 
-iQGzBAABCgAdFiEEPaCxfVqqNYSPnRhRjRDjR2hoXxoFAmkNq/gACgkQjRDjR2ho
-Xxq0kwv+OXPalVZ64Zvz5m/BZV7OZGyEpwbACYmxSCQ/E0ejwmybXQV9NIM5L2qM
-6EOj5BL+DmTMXu1mdDZsRQtc3J+i096cOw1ZgrkvONj3BhWdKOULzhfLNmlriChw
-EeSI6bVpGGXrFQS5EjoFi2LqreD1WDlsIPEFi0f4Auov4cItT0kx4xbBBt2+lxTs
-CcgIo6ACik06Egsxlqrw/n/ynPR8b+R4pRRt3zajIV/DdhsbLSUlAIG+8ycDyoFR
-CAZns0eAlH7xO08YX/FbgaFytgDKBrgS7ykPYgZ9wRqyfvof1D9gqOvgbqHLnJ5l
-zUapdmc+/AH56iUVAMW0vHdlHr9YbNNOBwitFk7lR8969AVs+iOd5rkZzVeo5HNL
-CIATh6TDj6dZi414TdX1moGhnXivuZ+DD6h/oU1E3JOXcyG7l+P9s0cFahTIAUdd
-kKubZ1WePU6v2I/bEAYfON01oRSKT9RaZMeRliNBAXC+4YSFDlq+m0Dw+/S6rhFn
-LHvJL9cC
-=0Lwo
------END PGP SIGNATURE-----
+Heinrich
 
---=-Vie3tw4LpQntUqK7tPrP--
+
+=2D------- Forwarded Message --------
+Subject: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot=20
+augmented DT if DEVICE_TREE_DEBUG=3D1
+Date: Thu,  6 Nov 2025 22:08:18 +0100
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+To: u-boot@lists.denx.de
+CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, Adriano Cordova=20
+<adrianox@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias=20
+Apalodimas <ilias.apalodimas@linaro.org>, Peter Robinson=20
+<pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>, Tom Rini=20
+<trini@konsulko.com>
+
+In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT and
+DT with U-Boot extras, to show how much does the U-Boot DT differ from
+the base DT. This is particularly useful together with OF_UPSTREAM, to
+minimize the diff between upstream DTs and U-Boot DTs.
+
+Example usage:
+$ make r8a779g3_sparrowhawk_defconfig && make DEVICE_TREE_DEBUG=3D1
+$ cat ./dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dtb.diff
+
+This still has a downside. Even 'dtc -I dts -O dts ...' applied on
+base DT and U-Boot augmented DT can produce different phandle IDs
+for the same node in those two DTs, which results in a lot of noise
+in the resulting diff. The only way I can think of is to patch DTC
+to emit full paths in those phandles instead, something like a
+phandle =3D <&{/full/path/to/remote/end} ...>;
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+=2D--
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Sam Edwards <cfsworks@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+=2D--
+  scripts/Makefile.lib | 24 +++++++++++++++++++++++-
+  1 file changed, 23 insertions(+), 1 deletion(-)
+
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 5db2fbc418a..2d8bf3c04f4 100644
+=2D-- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -386,10 +386,31 @@ ifeq ($(CONFIG_OF_LIBFDT_OVERLAY),y)
+  DTC_FLAGS +=3D -@
+  endif
+  +# In case DEVICE_TREE_DEBUG is set, produce a diff between the base=20
+DT and
++# DT with U-Boot extras, to show how much does the U-Boot DT differ from
++# the base DT. This is particularly useful together with OF_UPSTREAM, to
++# minimize the diff between upstream DTs and U-Boot DTs.
++ifdef DEVICE_TREE_DEBUG
++cmd_dtc_diff =3D \
++	$(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o=20
+$(dtn-tmp) $< ; \
++	$(DTC) -s -O dts -o $@.clean.dts -b 0 \
++		-i $(dir $<) $(DTC_FLAGS) $(dtn-tmp) || \
++		(echo "Check $(shell pwd)/$< for errors" && false); \
++	$(DTC) -s -O dts -o $@.full.dts -b 0 \
++		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) $(dtc-tmp) || \
++		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false); \
++	(diff -Naru $@.clean.dts $@.full.dts > $@.diff || true)
++
++dtn-tmp =3D $(subst $(comma),_,$(dot-target).dtn.tmp)
++else
++cmd_dtc_diff =3D
++endif
++
+  quiet_cmd_dtc =3D DTC     $@
+  # Modified for U-Boot
+  # Bring in any U-Boot-specific include at the end of the file
+  # And finally any custom .dtsi fragments specified with=20
+CONFIG_DEVICE_TREE_INCLUDES
++
+  cmd_dtc =3D mkdir -p $(dir ${dtc-tmp}) ; \
+  	(cat $< > $(pre-tmp)); \
+  	$(foreach f,$(subst $(quote),,$(dtsi_include_list)=20
+$(CONFIG_DEVICE_TREE_INCLUDES)), \
+@@ -400,7 +421,8 @@ cmd_dtc =3D mkdir -p $(dir ${dtc-tmp}) ; \
+  		-d $(depfile).dtc.tmp $(dtc-tmp) || \
+  		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
+  		; \
+-	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp >=20
+$(depfile)
++	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp >=20
+$(depfile) ; \
++	$(cmd_dtc_diff)
+   dtsi_include_list_deps :=3D $(addprefix $(u_boot_dtsi_loc),$(subst=20
+$(quote),,$(dtsi_include_list)))
+  -- 2.51.0
+
