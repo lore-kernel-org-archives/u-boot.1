@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 372E0CCFA05
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 13:03:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E958CCF9E3
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 13:03:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3263E83D7A;
-	Fri,  7 Nov 2025 14:03:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1BF0483D3C;
+	Fri,  7 Nov 2025 14:03:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=pschenker.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="lWqNTSjQ";
+	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="G1shr6xM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D255E83D8A; Fri,  7 Nov 2025 14:03:07 +0100 (CET)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42af])
+ id 7872B83D90; Fri,  7 Nov 2025 14:03:09 +0100 (CET)
+Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
+ [83.166.143.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C41B83D0C
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 14:03:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBFCC83D62
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 14:03:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=pschenker.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dev@pschenker.ch
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d2zkZ1TDRzmFK;
- Fri,  7 Nov 2025 14:03:02 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d2zkb5bpwzf2D;
+ Fri,  7 Nov 2025 14:03:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pschenker.ch;
- s=20220412; t=1762520582;
- bh=8/djiPHb/LNJf+9hdcipjtsGC+0ETAksC+0KzZczhTU=;
+ s=20220412; t=1762520583;
+ bh=/DFTimXgtDUH0Lkw/vAsUoYMf975Z5cEJbe2DjZASo8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=lWqNTSjQC5bKniOCmEtIs5x3ecLvR6EX+QUrggiBkLsbaBHXxCzjjtWMH+55up7Sr
- ZUzzj1IPb8cM2X5PoyZZLd22Umli41WKZ0ltV4SwVo2S0EHdhMr+3zC4fiBYQLmRc2
- FIxRcx22uOXfeQUAhBzFCNwGxRJQn7cS+MPh8ifs=
+ b=G1shr6xMYDWGLTmnXezJF/VEd1F9cD3RHbZUo9ivUtaPGPXMcJMXif+hyi8F1hQdl
+ GWtWOf522Y0HAG+n2SgPjexIcpCpRsin70852ymFR51vwwRvRG1HUM2OI8uVSL+TAc
+ 3/FG9kOO/y5edZbvCndeA/F7+WeYKp1SdcnibMSU=
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d2zkY4jpxzRg2; Fri,  7 Nov 2025 14:03:01 +0100 (CET)
+ id 4d2zkb1VhmzSLq; Fri,  7 Nov 2025 14:03:03 +0100 (CET)
 From: Philippe Schenker <dev@pschenker.ch>
 To: u-boot@lists.denx.de
 Cc: stefan@embear.ch, Philippe Schenker <philippe.schenker@impulsing.ch>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/6] arm: dts: k3-am642-evm: Remove duplicate node
-Date: Fri,  7 Nov 2025 14:01:00 +0100
-Message-ID: <20251107130216.3084134-2-dev@pschenker.ch>
+Subject: [PATCH v2 3/6] soc: ti: pruss: Fix size ptr type in probe
+Date: Fri,  7 Nov 2025 14:01:02 +0100
+Message-ID: <20251107130216.3084134-4-dev@pschenker.ch>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251107130216.3084134-1-dev@pschenker.ch>
 References: <20251107130216.3084134-1-dev@pschenker.ch>
@@ -69,33 +69,35 @@ X-Virus-Status: Clean
 
 From: Philippe Schenker <philippe.schenker@impulsing.ch>
 
-The device tree contained a duplicate DT node 'main_mmc1_pins_default',
-which was already defined a few lines below. This patch removes the
-redundant entry.
+When compiling for R5 with CONFIG_TI_PRUSS enabled, the
+pruss_probe() function passed a u64* to ofnode_get_addr_size_index(),
+which expects an fdt_size_t*. This caused a compiler error
+about incompatible pointer types.
+
+Cast the size pointer to fdt_size_t* to match the function
+signature.
 
 Signed-off-by: Philippe Schenker <philippe.schenker@impulsing.ch>
 ---
 
 (no changes since v1)
 
- arch/arm/dts/k3-am642-evm-u-boot.dtsi | 4 ----
- 1 file changed, 4 deletions(-)
+ drivers/soc/ti/pruss.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-index 705b3baa81cf..6469f43fca81 100644
---- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-@@ -19,10 +19,6 @@
- 	dr_mode="peripheral";
- };
+diff --git a/drivers/soc/ti/pruss.c b/drivers/soc/ti/pruss.c
+index e3bb2ede554a..4bc0ff8c2c17 100644
+--- a/drivers/soc/ti/pruss.c
++++ b/drivers/soc/ti/pruss.c
+@@ -163,7 +163,7 @@ static int pruss_probe(struct udevice *dev)
+ 	for (i = 0; i < ARRAY_SIZE(mem_names); i++) {
+ 		idx = ofnode_stringlist_search(memories, "reg-names", mem_names[i]);
+ 		priv->mem_regions[i].pa = ofnode_get_addr_size_index(memories, idx,
+-						       (u64 *)&priv->mem_regions[i].size);
++						       (fdt_size_t *)&priv->mem_regions[i].size);
+ 	}
  
--&main_mmc1_pins_default {
--	bootph-all;
--};
--
- &sdhci0 {
- 	bootph-all;
- };
+ 	sub_node = ofnode_find_subnode(node, "cfg");
 -- 
 2.51.2
 
