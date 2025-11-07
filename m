@@ -4,52 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C11CCCF9E3
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 13:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18C5ECCF9F8
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 13:55:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBD9683D0C;
-	Fri,  7 Nov 2025 14:26:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 264F483D4A;
+	Fri,  7 Nov 2025 14:55:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="C5j3Vjcp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ATpJLZAB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E55ED83D1A; Fri,  7 Nov 2025 14:26:02 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 49B4183D5D; Fri,  7 Nov 2025 14:55:57 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 338C783CB1
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 14:26:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 2037A83D0C
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 14:55:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 00786618FF;
- Fri,  7 Nov 2025 13:25:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 548FEC4AF09;
- Fri,  7 Nov 2025 13:25:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762521958;
- bh=kOyEZigEAkmVSqkx3tf1M/5BIinqDTUP0CnT41j0n7w=;
- h=From:To:Cc:Subject:Date:From;
- b=C5j3VjcppKXIxe5OSscP/McL7bs9eFAM1xdAEfrNq/+A1ijooieoCTDYKC8g5pnPL
- myaonm0764nmtex0+2HBvg1mtvv4Eq1V1GXQEwWTWGsBryqBwWVovInXlo3nmVyqXF
- icgDwSuuPQdClgatNR4KKbd9elDv4UTHZcmIUYAIMQjJN7e35fZQrIASadKQREKWL3
- uwU+R3ih7OudH4yqjMbkcoP7DcDoqSSHe43gc5e9XuPYQ4+Xos/dNk+xcGNlXSgLPC
- nEDSArR701ffufzcfnM+n0FhYE7oyFLsBL+AUD8GBnlO7S1PWB3BH9a+g5Gk+dyDhv
- jXMT+kIcoLR6g==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Nicolas Belin (TI.com)
- <nbelin@baylibre.com>, Hrushikesh Salunke <h-salunke@ti.com>
-Subject: [GIT PULL] Please pull u-boot-dfu-20251107 into master
-Date: Fri, 07 Nov 2025 14:25:56 +0100
-Message-ID: <87ikfm9dp7.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7c6d3676455so202708a34.2
+ for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 05:55:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762523754; x=1763128554; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1PdTZ3X9SnaQykIUlY9mf060EI/daA21EPW2TfYmaV4=;
+ b=ATpJLZABIYNotI/tt/koi5XZQH79HeNCt1iF6K6sUXFFHz0Rf/z1XIfw6zjbDDi6+8
+ SA5SGnwcWbTwhRUtg6w4dDpkdGoBoJrnrjx1rC+u6TzSMGzGAAiTgiBIVl4RqrnMuaTz
+ KQcGwdHFWoBel0/1O8GjdEVThdz3W4TMJufO0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762523754; x=1763128554;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1PdTZ3X9SnaQykIUlY9mf060EI/daA21EPW2TfYmaV4=;
+ b=pZTCQ+jbT/s+WqhoH1J25Vfp8Soz4+FhILKW1bMzmnMGvwr1IuuHepPO73Wpr7VzJ6
+ rAH/NE6dZND7JGdfYtEhNU54urH1Wk+ycuN3ovt5mp55QnmQOXr+flBEqOGpWTkjITtK
+ X+dBkg5NeO5KiVENlQCsH4G1XHVIWjEWvK5olJqaJY+95udTutbHahy7twTNhdUwYLpJ
+ W7gxlWeJdKaqN4rjR+v+qU6WLVwnrepNxJ1EX/W4+vI2ECqzD5A1JEoDN6zbeTuDc/iR
+ CQQeM2lY7+ZBHYQkBT+gEJ8kiVeeZ/RSW1S0Ya3NZk+ZhdeyCwvjIjlYBw9QSLvdgayJ
+ dngg==
+X-Gm-Message-State: AOJu0YzYet1Seqckz7LsnK2UOfoHwE/Ql3TWe3yXHEiQtxkSZ5BxnZxA
+ 858WmlN2JKxVqb9xsCA3miS2KDC22ak8MlOfOlvSxq9CSTpwsVeMvKw1yHZI5aH4gtI=
+X-Gm-Gg: ASbGnct0Gr+I2PWBA7BC8OxJTQglHyDQKBrWEjmXyssQPaEYGYGHP5Y2wGm8XMOnxbO
+ L7z5kOybxo3j7dCS4dayS4NtF1I4pkwLCONIKl0a17IgUfBqylpiy7DN8y6bXu4ulL9To+9ZazD
+ 2/EddIRBkR1D6vGlw6nY8FtBHl+xJsjVo86+IuLSwBVFGMrIf8xwE0gixvo7KZuUpkiDyxCE0ZS
+ 67hgXmo2y3g7QJ5T8kHEqNRVGWBvZKIW2ctwGbDOomBjS9qDzVhUkrgUfPKeKEXZbQaqSUSRhI3
+ j1rGdBisAVPfRd13GSKcvM2hrkELnfNXmlElSelttkZIEyHEHxVAECHzEqwBXxTFqj6nYU/BGgp
+ UJ93sJ6/SLlA/15PXfX5vO8LVLP7Fnko1fNC8XqbeV/TDKT9YmOIfjCPqbYalOTl52YL80891am
+ ObsnnDU7aKZp5NJtuQCS43uKmK358/HKW89l8wsqM=
+X-Google-Smtp-Source: AGHT+IHHesDmjDhZj8gpy1cSp0Nm2xxA9Y+htoEsvWKb3iOVaXojuAia+dt3wjZwHoFMxLmx/bMiQw==
+X-Received: by 2002:a05:6830:44a9:b0:7c5:3045:6c6f with SMTP id
+ 46e09a7af769-7c6efee93d1mr2843599a34.20.1762523753706; 
+ Fri, 07 Nov 2025 05:55:53 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c6f112fdd6sm1471362a34.25.2025.11.07.05.55.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Nov 2025 05:55:53 -0800 (PST)
+Date: Fri, 7 Nov 2025 07:55:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] Gitlab CI: Rework our tag usage again
+Message-ID: <20251107135551.GA6688@bill-the-cat>
+References: <20251030043558.2620797-1-trini@konsulko.com>
+ <176246627096.3129497.682434390557357881.b4-ty@konsulko.com>
+ <CAFLszTiCY5z6ZFag87rtM+UpGmYUywhgkH0Oi9WqysB6J4mr1g@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5zdZSBWS7jZP6kWq"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiCY5z6ZFag87rtM+UpGmYUywhgkH0Oi9WqysB6J4mr1g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,53 +98,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Here is a PR for master
+--5zdZSBWS7jZP6kWq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Android:
-* Add bootargs environment to kernel commandline
+On Fri, Nov 07, 2025 at 11:01:17AM +0100, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 6 Nov 2025 at 22:58, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, 29 Oct 2025 22:35:58 -0600, Tom Rini wrote:
+> >
+> > > Now that we've had jobs running on both amd64 and arm64 hosts for a
+> > > while, we have enough data to look at usage and findings. For the wor=
+ld
+> > > build job, make use of the new DEFAULT_FAST_TAG and only build it onc=
+e,
+> > > on either amd64 or arm64 as we don't run in to host specific results
+> > > there. For sandbox, continue to build on both arm64 and amd64 hosts as
+> > > we can find host specific breakage that way. Remove the mistaken
+> > > restriction on sandbox64_lwip.
+> > >
+> > > [...]
+> >
+> > Applied to u-boot/master, thanks!
+> >
+> > [1/1] Gitlab CI: Rework our tag usage again
+> >       commit: ddc916334a7a7e180b532dbb2cf1b778466d2b9b
+> > --
+> > Tom
+> >
+> >
+>=20
+> Good to see this! I would again like to suggest breaking the world
+> build into parts.
 
-DFU:
-* Support DFU over PCIe in SPL
+I would like to ask you to stop suggesting things about CI until you're
+willing to honestly address and review the feedback I have given you
+about your suggestions and why they don't work for many of our use
+cases.
 
-CI:
-* https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/28223
+--=20
+Tom
 
-Regards,
-Mattijs
+--5zdZSBWS7jZP6kWq
+Content-Type: application/pgp-signature; name="signature.asc"
 
-The following changes since commit 1c250e444ad3b15315ee8b0fcb3fc3acc26449e2:
+-----BEGIN PGP SIGNATURE-----
 
-  Merge tag 'u-boot-imx-master-20251104' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2025-11-04 13:06:26 -0600)
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQ36YwAKCRAr4qD1Cr/k
+ClI/AP48Ei0ZEriD/SmOLrqEfRUp/zFR9P+9VNGQ9VytpAaYBgD/USFhMldOAF28
+49WAaKIGOVTSvCCsgIbTvPCFFZ71cQk=
+=L1/N
+-----END PGP SIGNATURE-----
 
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20251107
-
-for you to fetch changes up to 10da28729949f3e2160f98d82df45833d4c175cf:
-
-  bootstd: android: add the bootargs env to the commandline (2025-11-06 10:19:31 +0100)
-
-----------------------------------------------------------------
-u-boot-dfu-20251107
-
-Android:
-* Add bootargs environment to kernel commandline
-
-DFU:
-* Support DFU over PCIe in SPL
-
-----------------------------------------------------------------
-Hrushikesh Salunke (1):
-      spl: Add support for Device Firmware Upgrade (DFU) over PCIe
-
-Nicolas Belin (TI.com) (1):
-      bootstd: android: add the bootargs env to the commandline
-
- boot/bootmeth_android.c | 35 +++++++++++++++++++
- common/spl/Kconfig      | 62 +++++++++++++++++++++++++++++++++
- common/spl/spl_dfu.c    | 91 +++++++++++++++++++++++++++++++++++++++++++++++++
- common/spl/spl_ram.c    | 18 ++++++++++
- drivers/Makefile        |  1 +
- 5 files changed, 207 insertions(+)
+--5zdZSBWS7jZP6kWq--
