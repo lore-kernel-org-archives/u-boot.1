@@ -4,83 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3631CCF9E3
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 18:39:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 015CACCF9F8
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 18:57:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD69983E23;
-	Fri,  7 Nov 2025 19:39:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3F9D983DF3;
+	Fri,  7 Nov 2025 19:57:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cMz3f68P";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pOBd9kls";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFDE083E16; Fri,  7 Nov 2025 19:39:19 +0100 (CET)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 7EE1183E1B; Fri,  7 Nov 2025 19:57:32 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0DC483D8B
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 19:39:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D9A183DF2
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 19:57:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-44fe4c3c19cso376688b6e.3
- for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 10:39:17 -0800 (PST)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c28c21aba1so652901a34.0
+ for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 10:57:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762540757; x=1763145557; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n2DjD6wIhJhTQ6Z3ItimSp0D4PMebFl4+YQo/Q08mjw=;
- b=cMz3f68PBwDwhVgWZgxZKdH56ql1cEthUExVLMULs/Q0sEDgcp82hc1bLz+TUWHxFz
- l2IZBx+ta4dAkHejxrq119KSFV8vz6jvkiRl1mnKuBhSwMEbiYFgnZJtmz4iBzRwUL8X
- NBFOg4BN0b/1dRDkDJEoLTYQskQSJ4As+pghk=
+ d=konsulko.com; s=google; t=1762541849; x=1763146649; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=46hdDnQbyLiTJ7sMe5lBUPsm28B9szhbKT6L4ich5Bk=;
+ b=pOBd9klsNuZGJcZF4w3GOzAhHTOgh3NNJb2rv1/Eq+AnvefRj2PdjdDoA+GZyablID
+ 66aax2VW60j8sV8eadAL+hgNLqcyA0R9tIgMxfN6xVPDSph7FUXOIBmnUOc2caxoyL+h
+ BIffSVYM4Ejud8jSOUXnB8qNlJWhBZ0DHbUDA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762540757; x=1763145557;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=n2DjD6wIhJhTQ6Z3ItimSp0D4PMebFl4+YQo/Q08mjw=;
- b=KOdYMb4IvlUBK71Sov1+oTY/O/8VSti/Ie+zc+vaQvDUiLSxAApZnLWjE1V5xlCYHr
- F8cGZiYgU5jgZ4fbuBRXAn5p16cnSV1acAsY3aguq30TFt4aYjtpkp9oxdTWNRddNp+H
- fIeB2arUYSiDkHrQXK1ecoTIx7dLwiwX0W7mbVUz5l+ecPaw/lh9JItkyRduaPDTn9nF
- E4+2zQVP13kEbt34F3D7fppv6fe+RbPTuB8vmFd9TTb3+tMbiPRocIylvD+CWJyGykF1
- KCq/yxiCad7FmOAyUhAQ8z+cV9bckXdlLJYxC2eozWU7vs0jthyENAPdQW/5xoMdkIdO
- m+0w==
-X-Gm-Message-State: AOJu0Yx7b+araoNBas3xQSMcoA2p/Uorj/XYdijc7h1iJyHOPu0NIYf1
- q+n3bfxp51r/aLK0WB9LLMVuujErL5U2YPkObRKS9AeqcjsYaeE4L3VSVOrF05jUKSE=
-X-Gm-Gg: ASbGncvVBad/tGPCbXCpbmvUKH6Qb6TEelb4hohx04K9TVs4bwt/yzA2PboWgOir9CS
- qbz6/iBnq5NEr62cm4NjDkKiuia9zlWIexMAARAEJh2/THlDFElY9x++kMVFe6FoSQc+kpNEWj9
- dw5F1xlxhy3W8whn9AH6XRmb/EFPMEAEXmZLJIOqOEvzPzWqj+LoHg4TdcaYqyjjCyXdD8Z0xGM
- H7agPmUJdxS8fohfsxCvypUf557LbINHwYgwuoMWLAc/HeSDZz58iIdHMEZ1lXQQRY17KcqChen
- FUFuQQQ+40CzUpuOJdJbHngKp0DJGf2caobNNl3jUqi2+AszzCDEjwNU2nDN0KvAl7UW8XAOb5h
- gQBvH6qvowY+EaoGRtfMhpCE28eGqywFXmO3cc5cXUlliyYXVXhzdlDGojQ+LIe5oWNZ3Jx7zBE
- MDYEb3TldKooQGzcFDvOj+1LnoDTvtEopy4wE/nw==
-X-Google-Smtp-Source: AGHT+IEA2h7FzU3UxmH2wM01KLvMYFugHOJOCn3BIJ1JqD4ENByafEx5L6m2RaB3JNzbiYmr6QPKEA==
-X-Received: by 2002:a05:6808:6a95:b0:43f:5e4b:42ae with SMTP id
- 5614622812f47-4502a1b090cmr159279b6e.17.1762540756629; 
- Fri, 07 Nov 2025 10:39:16 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1762541849; x=1763146649;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=46hdDnQbyLiTJ7sMe5lBUPsm28B9szhbKT6L4ich5Bk=;
+ b=Z9nLVQ859rPVPgkLexitqpJ3kLQXb5pTejtEULhJQt/UW6xj7wguS4s611qKre0I07
+ ivgBXTHiM3Q69cVwwZrOsqe5sDkKLvHXbxc/5HzE1BtOJNJgYVr79WPJD5qai2j/uTUa
+ +/9LBfRoepDp/jBgfpOrorCJ18/uiyiZ6LUaPG3kNLL6YegKLdkRsLLzBuvIlnFvcA7G
+ ozja0buaJX6KIj8cB7ZZqiawaG558FUVH+kTwxj5oote07Zs3kCZIw6a9iDH8Vy3Br3u
+ oYFXG5et8uXqcycGDTd+3q+jASHIm8QCvVqpDIlWgb/bGOlRyJ34Cf/IiD5k1kNLNEUQ
+ 3ZhQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXEWqZlubSomHBBCs0ad14RqNuWi8ZJrWUYb6CySfY0srhO5ITbFfxpYYhOyE1dpYdrsEg7u/c=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZ78z07mJznNhbYEon/3EYrsbI3xt4IPUZZ7gRyPPexdBhrWj+
+ BTuzUk1YrKe1T4kroVgZjXgCmpRnXZK7DZ4N0TIe0Q46+LPECN4HP79pkM1EHYugMss=
+X-Gm-Gg: ASbGnctnPztH9Wjyifa+JcqipADgP9XxD/sQsDgz5pq1p2KnRzVnSXae4pwDoc1TXAG
+ Mq2KEr9R09nMFW2o0nNyJMDQJ2xsbywmmt1/2KKTCTLZ5997UZN+3AbtK/SMWereZxWPuI+TFBR
+ 1JM/UXG/d3yq/ykjIeyeOJg7Wd/CAQRv3alOa8efxJUpZcvzAmAkfgZ1peCRZHgA6uPRHtY+Dnm
+ 6P/eiURfixJYY6zZM4cIEIxP+yH38kLx/6SOD57G2b2ySqlIzn+srx4K+tqThqXTcvEEmm6wYcT
+ HCFcffHnqeW1wUaf+hVYv4I+J1qkB8Yp5iICavpW+ln658RzNM5bQzLPYrGngxiDlXsKx+ezFAp
+ bW5cPCBtnWUfdqaJ7+/+hlrewHr60r8dvdsRQvRh/66+2vpy6G694TWnDsI7dQlMO3++ReSDbwy
+ AgXALpMav2kGdhe5NVW1F2UMgteEZKyeXAHFsu95Xl3vP7pmjy5A==
+X-Google-Smtp-Source: AGHT+IEbUh/KV+t2KSOyedscBD0lR5Dt5+zvszQDki8OXkPfDXZ6LXT7ZQBQMtib/L0EoBJgDXGjNw==
+X-Received: by 2002:a05:6830:718e:b0:759:55bd:9594 with SMTP id
+ 46e09a7af769-7c6fd71b237mr281446a34.6.1762541848692; 
+ Fri, 07 Nov 2025 10:57:28 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450027e19e6sm2587642b6e.21.2025.11.07.10.39.15
+ 46e09a7af769-7c6f0f0a6dasm1955606a34.5.2025.11.07.10.57.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Nov 2025 10:39:16 -0800 (PST)
+ Fri, 07 Nov 2025 10:57:27 -0800 (PST)
+Date: Fri, 7 Nov 2025 12:57:25 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Nicolas Belin <nbelin@baylibre.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>
-In-Reply-To: <87ikfm9dp7.fsf@kernel.org>
-References: <87ikfm9dp7.fsf@kernel.org>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-20251107 into master
-Message-Id: <176254075565.1989038.794245400181412723.b4-ty@konsulko.com>
-Date: Fri, 07 Nov 2025 12:39:15 -0600
+To: Hrushikesh Salunke <h-salunke@ti.com>
+Cc: Bryan Brattlof <bb@ti.com>, vigneshr@ti.com, jm@ti.com, s-k6@ti.com,
+ quentin.schulz@cherry.de, afd@ti.com, j-humphreys@ti.com,
+ anshuld@ti.com, n-francis@ti.com, danishanwar@ti.com,
+ rogerq@kernel.org, w.egorov@phytec.de, sjg@chromium.org,
+ u-boot@lists.denx.de, s-vadapalli@ti.com, srk@ti.com
+Subject: Re: [PATCH v2 0/3] Add PCIe boot support on TI AM64X SoC
+Message-ID: <20251107185725.GA2074336@bill-the-cat>
+References: <20250616165638.632089-1-h-salunke@ti.com>
+ <20250910145656.5lesv67c5tq5tvar@bryanbrattlof.com>
+ <be444e57-fdbb-4e4a-9592-2d48a5626d49@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="r21yYdXOyTd1lJah"
+Content-Disposition: inline
+In-Reply-To: <be444e57-fdbb-4e4a-9592-2d48a5626d49@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,21 +104,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 07 Nov 2025 14:25:56 +0100, Mattijs Korpershoek wrote:
 
-> Here is a PR for master
-> 
-> Android:
-> * Add bootargs environment to kernel commandline
-> 
-> DFU:
-> * Support DFU over PCIe in SPL
-> 
-> [...]
+--r21yYdXOyTd1lJah
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Merged into u-boot/master, thanks!
+On Thu, Sep 11, 2025 at 11:08:03AM +0530, Hrushikesh Salunke wrote:
+>=20
+> On 10/09/25 20:26, Bryan Brattlof wrote:
+> > On June 16, 2025 thus sayeth Hrushikesh Salunke:
+> > > This patch series adds support for booting over PCIe on TI AM64X SoC.
+> > >=20
+> > > AM64X contains single instance of PCIe controller, which can operate =
+in
+> > > endpoint mode to support PCIe boot. This series:
+> > >=20
+> > > - Adds PCIe as a valid boot media for AM64X.
+> > > - Enables necessary config options to support PCIe boot.
+> > >=20
+> > > This feature has been tested on AM64X EVM. Following are the logs
+> > > corresponding to this feature.
+> > > https://gist.github.com/hrushikesh221/bb11746d4325a27f209028573f3255a1
+> > >=20
+> > > Program used to copy bootloaders from PCIe Root-Complex to Endpoint:
+> > > https://gist.github.com/hrushikesh221/6dc406b72f38762357b8e7f81a47db56
+> > >=20
+> >=20
+> > We need to find a way to put this sequence or this example code in the
+> > board docs. I don't want to have to rely on your Github account or my
+> > memory when we need to revisit this in a year or two.
+> >=20
+> > ~Bryan
+>=20
+>=20
+> Hello Bryan,
+>=20
+> Thanks for pointing it out. Some changes were requested for the patch
+> series[1] on which this series is dependent for functionality, so
+> I will be posting the next version for both the series. Along with
+> it I will also post a patch for documenting the PCIe boot.
+>=20
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20250619071841.12653=
+64-1-h-salunke@ti.com/
 
--- 
+Please make sure that v3 also builds warning-free. The trivial update to
+v2 to build on master (now that the generic DFU part is merged) has
+warnings. Thanks.
+
+--=20
 Tom
 
+--r21yYdXOyTd1lJah
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQ5BEgAKCRAr4qD1Cr/k
+Chj7AQChEvjXs36B2N71e2kADIl3SDQklRtlnPDLZCfFH90vPwD+PrijDzNTgCFC
+An6zjpcBY6QGajEHfhPRN6pA7UE0qg0=
+=fAtY
+-----END PGP SIGNATURE-----
+
+--r21yYdXOyTd1lJah--
