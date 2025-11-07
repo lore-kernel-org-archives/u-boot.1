@@ -4,64 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65F9BCCFA13
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 03:04:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16DF0CCFA05
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 03:04:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9511383C5A;
-	Fri,  7 Nov 2025 04:04:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D802183C61;
+	Fri,  7 Nov 2025 04:04:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pLy0dhEi";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="i90LmTwx";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="a470CpIs";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SK3/kRbT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B05C83C64; Fri,  7 Nov 2025 04:04:07 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 5E5E883C6E; Fri,  7 Nov 2025 04:04:09 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 153F683C4B
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 04:04:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F26FE83C60
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 04:04:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4d2kRS62FTz9t9P;
- Fri,  7 Nov 2025 04:04:04 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4d2kRV5Tlsz9tTR;
+ Fri,  7 Nov 2025 04:04:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762484646;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+Vs9liGtc3jnRLtSnln7aX4tRXuxOiiTgPkojW9AZVM=;
+ b=a470CpIs5oOgZk6gU6JqLkGO1UHTg4JJ/+K4RF4gPcJDf7wbpEimXZZBYkBPt6V+hmAa6z
+ XaFt7G3/S44JNU59iZlcafVOmprp1UzG6lUqdZldnuXjXwSRPCObgG1t7pu057N2OWcHE4
+ aIJPs2t9KnthLYA9UjBzDE4yEl7EUyDoi5AWbEeLSMm9hquqPhKbxY9W8leZK6Jwka262V
+ UQukSdUXWMPtm7OcWdc3l+lbAB1qdagFBnKevFExQAgKIjswSWKh7ZANptcImW+X3nUtR2
+ nUrG/9+IXBfx6j3o5Q7epaEZjXHkSwACi2FlUza08D6lR0Om2bTNHhtXB6I07A==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1762484644;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=syP9eImGGhJt6X6FzySaZ628ShRpg12lBTX2ZOTkSNs=;
- b=pLy0dhEiaa8AA9wdAxnzLiUItHZqjbt0b1uHasfclTNHG7SvPpgOgFiZwFPC+Kw5M7bg9/
- SoR7I2f1fIqqGHVX7rXcdqxhoYMtD5+LQs99YuOqJOHgoJdYLahS3EqqYEMgHgm3gxvd5i
- 1qTDQxX96Ndne5Ng5/Gp7KQmEyjpTPBBfpv1Kq37Z0e8DrU3kbealgY1Y1K4t5QWPxw4XD
- 9PjuCB/hR2YSsqmLtfRE/45ySVFwcMsxNcTci0YEdCpLkRkbVDVKsAD6kr/niRaHAlKYop
- SF7xnrDpXl6eLhJqPsyR3nPcDfZYdQC6we2KErMIqP5ZeX6jl0KCFAF9NPc+bQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=i90LmTwx;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762484642;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=syP9eImGGhJt6X6FzySaZ628ShRpg12lBTX2ZOTkSNs=;
- b=i90LmTwxwlx9kHMPGCcww22KjSx/tjlG7QGPbMGBi7aBxxgOmpuRDGeUaVFrDYglsTTC0r
- f9xp9k/ueSRvwrQys3symwPlAdRsPACtYUbhciXNthqzp4+ALEXL+b68RVKpmspWCCyrlE
- QzJ4Bz8bcMWpnO8d6UH2jcpA/0zjF1c7Rx87zc7Mkjg7+4izJKQ2tAMLx67XtUK9IcYEmm
- 7v+cs20KIRBka8cO/uDQOn2C22z85TEHrnBgO6AylSSUXkFJ9luBFgXIDhagyZofClXzP8
- qE4vVe53R0GHZ5PK8KK9FeCdRHXjwZU7uxNIZ8aYfGo4EvaUD1sMBBvg0ws+MA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+Vs9liGtc3jnRLtSnln7aX4tRXuxOiiTgPkojW9AZVM=;
+ b=SK3/kRbTy7fLLugg+m3WUeNTij13d0SK6x72kJjGfuzFDV8wH+aZfDV6CFEc6gG2OJG9uY
+ vtbjpXinatPqwSDGpbqaI7097WQXQu+CgfZjxhD0WNNWZu3oHtQHyiT6LJSbOIokbsmttY
+ VhqjAQP4at89xV4k11DFK/otR5yubP7znYIjebNdQdtq011OHdbAwPwaw2M0RhKtUZARVj
+ uOm1Nr3rJ8JkEDq6vE9mqlAWmczkoNt/02/jhG5/xJ7qPxlPbOYLDkqa0FM2tyPyX0THaB
+ hKg2b+iaIP9mRWCs+hhe3y1DDzmWj+snrrEVN6FO0zpVrVfiUf7SybmiwLEdhw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
  Alice Guo <alice.guo@nxp.com>,
@@ -70,14 +66,15 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
  Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
  Valentin Caron <valentin.caron@foss.st.com>,
  Vinh Nguyen <vinh.nguyen.xz@renesas.com>
-Subject: [PATCH v2 1/4] clk: scmi: Bulk allocate all sub-driver instance data
-Date: Fri,  7 Nov 2025 04:01:23 +0100
-Message-ID: <20251107030352.475169-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 2/4] clk: scmi: Factor out clock control flags resolution
+Date: Fri,  7 Nov 2025 04:01:24 +0100
+Message-ID: <20251107030352.475169-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251107030352.475169-1-marek.vasut+renesas@mailbox.org>
+References: <20251107030352.475169-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 1e3b93d7d8dbbe663f5
-X-MBO-RS-META: 6fm6wnazjrc8keddwg98s76e3m459p6n
-X-Rspamd-Queue-Id: 4d2kRS62FTz9t9P
+X-MBO-RS-ID: 85d18c1a4f17642132c
+X-MBO-RS-META: 4zg3wbzdtas1ryon1rizuou7egabb364
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,18 +91,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allocate all sub-driver instance data at once. The amount of data that
-have to be allocated is known up front, so is the size of the data, so
-there is no need to call malloc() in a loop, mallocate all data at once.
+Pull clock control flags resolution into dedicated function and
+call it from each site that does access clock control flags. No
+functional change.
 
-The upside is, less heap fragmentation and fewer malloc() calls overall,
-and a faster boot time.
-
-The downside is, if some of the clock fail to register, then the clock
-driver cannot free parts of the bulk allocated sub-driver instance data.
-Such a failure can only occur if clk_register() were to fail, and if that
-happens, the system has more significant problems. Worse, if a core clock
-driver fails to probe, the system has even bigger problem.
+This is a preparatory patch for deferred issue of SCMI_CLOCK_ATTRIBUTES.
 
 Reviewed-by: Peng Fan <peng.fan@nxp.com>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
@@ -122,49 +112,127 @@ Cc: u-boot@lists.denx.de
 ---
 V2: Add RB from Peng
 ---
- drivers/clk/clk_scmi.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ drivers/clk/clk_scmi.c | 51 +++++++++++++++++++++++-------------------
+ 1 file changed, 28 insertions(+), 23 deletions(-)
 
 diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index 37e349b9c78..548bbfe14de 100644
+index 548bbfe14de..1a6a6ae464c 100644
 --- a/drivers/clk/clk_scmi.c
 +++ b/drivers/clk/clk_scmi.c
-@@ -283,7 +283,7 @@ static ulong scmi_clk_set_rate(struct clk *clk, ulong rate)
+@@ -163,22 +163,36 @@ static int scmi_clk_gate(struct clk *clk, int enable)
+ 	return scmi_to_linux_errno(out.status);
+ }
  
- static int scmi_clk_probe(struct udevice *dev)
+-static int scmi_clk_enable(struct clk *clk)
++static int scmi_clk_get_ctrl_flags(struct clk *clk, u32 *ctrl_flags)
  {
--	struct clk_scmi *clk_scmi;
-+	struct clk_scmi *clk_scmi_bulk, *clk_scmi;
- 	struct scmi_clock_priv *priv = dev_get_priv(dev);
- 	size_t num_clocks, i;
+ 	struct clk_scmi *clkscmi;
+ 	struct clk *c;
  	int ret;
-@@ -312,20 +312,23 @@ static int scmi_clk_probe(struct udevice *dev)
+ 
+-	if (!CONFIG_IS_ENABLED(CLK_CCF))
+-		return scmi_clk_gate(clk, 1);
+-
+ 	ret = clk_get_by_id(clk->id, &c);
+ 	if (ret)
  		return ret;
- 	}
  
-+	clk_scmi_bulk = kzalloc(num_clocks * sizeof(*clk_scmi), GFP_KERNEL);
-+	if (!clk_scmi_bulk)
-+		return -ENOMEM;
+ 	clkscmi = container_of(c, struct clk_scmi, clk);
+ 
+-	if (clkscmi->ctrl_flags & SUPPORT_CLK_STAT_CONTROL)
++	*ctrl_flags = clkscmi->ctrl_flags;
 +
- 	for (i = 0; i < num_clocks; i++) {
- 		char *clock_name;
- 		u32 attributes;
++	return 0;
++}
++
++static int scmi_clk_enable(struct clk *clk)
++{
++	u32 ctrl_flags;
++	int ret;
++
++	if (!CONFIG_IS_ENABLED(CLK_CCF))
++		return scmi_clk_gate(clk, 1);
++
++	ret = scmi_clk_get_ctrl_flags(clk, &ctrl_flags);
++	if (ret)
++		return ret;
++
++	if (ctrl_flags & SUPPORT_CLK_STAT_CONTROL)
+ 		return scmi_clk_gate(clk, 1);
  
- 		if (!scmi_clk_get_attibute(dev, i, &clock_name, &attributes)) {
--			clk_scmi = kzalloc(sizeof(*clk_scmi), GFP_KERNEL);
--			if (!clk_scmi || !clock_name)
-+			clk_scmi = clk_scmi_bulk + i;
-+			if (!clock_name)
- 				ret = -ENOMEM;
- 			else
- 				ret = clk_register(&clk_scmi->clk, dev->driver->name,
- 						   clock_name, dev->name);
+ 	/* Following Linux drivers/clk/clk-scmi.c, directly return 0 if agent has no permission. */
+@@ -188,20 +202,17 @@ static int scmi_clk_enable(struct clk *clk)
  
- 			if (ret) {
--				free(clk_scmi);
- 				free(clock_name);
- 				return ret;
- 			}
+ static int scmi_clk_disable(struct clk *clk)
+ {
+-	struct clk_scmi *clkscmi;
+-	struct clk *c;
++	u32 ctrl_flags;
+ 	int ret;
+ 
+ 	if (!CONFIG_IS_ENABLED(CLK_CCF))
+ 		return scmi_clk_gate(clk, 0);
+ 
+-	ret = clk_get_by_id(clk->id, &c);
++	ret = scmi_clk_get_ctrl_flags(clk, &ctrl_flags);
+ 	if (ret)
+ 		return ret;
+ 
+-	clkscmi = container_of(c, struct clk_scmi, clk);
+-
+-	if (clkscmi->ctrl_flags & SUPPORT_CLK_STAT_CONTROL)
++	if (ctrl_flags & SUPPORT_CLK_STAT_CONTROL)
+ 		return scmi_clk_gate(clk, 0);
+ 
+ 	/* Following Linux drivers/clk/clk-scmi.c, directly return 0 if agent has no permission. */
+@@ -259,20 +270,17 @@ static ulong __scmi_clk_set_rate(struct clk *clk, ulong rate)
+ 
+ static ulong scmi_clk_set_rate(struct clk *clk, ulong rate)
+ {
+-	struct clk_scmi *clkscmi;
+-	struct clk *c;
++	u32 ctrl_flags;
+ 	int ret;
+ 
+ 	if (!CONFIG_IS_ENABLED(CLK_CCF))
+ 		return __scmi_clk_set_rate(clk, rate);
+ 
+-	ret = clk_get_by_id(clk->id, &c);
++	ret = scmi_clk_get_ctrl_flags(clk, &ctrl_flags);
+ 	if (ret)
+ 		return ret;
+ 
+-	clkscmi = container_of(c, struct clk_scmi, clk);
+-
+-	if (clkscmi->ctrl_flags & SUPPORT_CLK_RATE_CONTROL)
++	if (ctrl_flags & SUPPORT_CLK_RATE_CONTROL)
+ 		return __scmi_clk_set_rate(clk, rate);
+ 
+ 	/* Following Linux drivers/clk/clk-scmi.c, directly return 0 if agent has no permission. */
+@@ -375,20 +383,17 @@ static int __scmi_clk_set_parent(struct clk *clk, struct clk *parent)
+ 
+ static int scmi_clk_set_parent(struct clk *clk, struct clk *parent)
+ {
+-	struct clk_scmi *clkscmi;
+-	struct clk *c;
++	u32 ctrl_flags;
+ 	int ret;
+ 
+ 	if (!CONFIG_IS_ENABLED(CLK_CCF))
+ 		return __scmi_clk_set_parent(clk, parent);
+ 
+-	ret = clk_get_by_id(clk->id, &c);
++	ret = scmi_clk_get_ctrl_flags(clk, &ctrl_flags);
+ 	if (ret)
+ 		return ret;
+ 
+-	clkscmi = container_of(c, struct clk_scmi, clk);
+-
+-	if (clkscmi->ctrl_flags & SUPPORT_CLK_PARENT_CONTROL)
++	if (ctrl_flags & SUPPORT_CLK_PARENT_CONTROL)
+ 		return __scmi_clk_set_parent(clk, parent);
+ 
+ 	/* Following Linux drivers/clk/clk-scmi.c, directly return 0 if agent has no permission. */
 -- 
 2.51.0
 
