@@ -4,91 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F11CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 15:57:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82898CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 16:01:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6B2B83D2E;
-	Fri,  7 Nov 2025 16:56:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D422783D2E;
+	Fri,  7 Nov 2025 17:01:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=pschenker.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LC7cnciR";
+	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="Qlx/SmK5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FDF483DA7; Fri,  7 Nov 2025 16:56:57 +0100 (CET)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9AF1D83DAE; Fri,  7 Nov 2025 17:01:20 +0100 (CET)
+Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42af])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 216D083D0C
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 16:56:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AA1B83D0C
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 17:01:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-3e3dac349easo554324fac.2
- for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 07:56:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762531014; x=1763135814; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=g+iUt2oelOOL2mIXS1HCzyrxw7p5dNRuTfEpGY1pHYk=;
- b=LC7cnciRgXi6eyi/Pv2ejmBDvYo8HnaOl1WfMuVGOnnOomxwF9ck3FaLdke49R5Umu
- v+5jtogsrBYePrNKWbok7WpqApzzC+LRY+6qF9UUgs0I/H9vW/LUy5VkeBI3wHvO4N9M
- 4z/ARFJjHU4ZMXj1MAsQMxkSkWQ3wahjGILVI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762531014; x=1763135814;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=g+iUt2oelOOL2mIXS1HCzyrxw7p5dNRuTfEpGY1pHYk=;
- b=Pv2IrMZEgO328ngkYPXndd+qfxymC6juc67JvMFiro9M52adHZXjEDaf5jDwqFZGxv
- i6v95+30qHCjKIiqF01jhCCZzf6rpsgzHFpYqwm7b5NTIqKzYGnk2EXv/cPFj7BVeMZ6
- qYeNsml3hhuEnp6gweCx3QilThbu5ZIlsC2nGE4qjHI0FDmn7CRlWRkQSVgE54hcL082
- mdg4Xu2EqAq8p3kKPywBIPTNuwcA3iIFYy2JublA3BbhMAjPPPxKcsXNNi6JWHpPj4Gk
- Gbrpq8V1K4JerOf1XwQBVLlbr75slNf6jq0NLuN709w+4ryt5QTc3ltDvjxcV0Bf3ojT
- SG4g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWJTxq1TzH01xLpXQWzzp7NRhZpsgmE41L1/UZU6cJrYzP6vbxWAizmhk42H+NYKnUbZzvriwk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZcbyVsG/lnQyB3mU3P62QeIMOoBZ8PYP5sBBhExvgEvt7qrLw
- iO6kJqixjrO9AZZe+t6y8Tu1Vq35C16kstkaCYhKgSGvNmwdo63ygu0wxg+gaEG4+kk=
-X-Gm-Gg: ASbGncujoHh4FMKOBV0MJLZFoLLrpwL6U+kcKq52j/axYducsdEQQVLmwXnQpEW41sy
- BG+TcXRR668OSgR7CkLDWRj+5+47h0xqfz1Y+Stb8EH9zb1AGGvr+ZGtPTPLk0aVFWkes8HJdwL
- EVkAPMNofGrhD9YQMT/RX/kT0palwqkKJztgZIfOasCA8AX4rVKELVfGGHadP1h7WsX2Wj14KEE
- VRJo2qv8iaTyRfPpd6IMz1RdwVX6QS1DG6N8MJHQkviXdsfVck6eu0+sJ8KYdHAWh9F78cN7SCY
- 4vVT691SjBJzasNUpO8z3+nzddo21KACqkXR94ntQEYo5zooZh5LXp02NXLHc+fmxpwGJ2d7VlW
- zj6Uoper/5BZpQ/aNJXCYbwVDuWQoJIfKaMVzDKZSB+93JnyiLODyObFpXKmHf5H/RrpUoFOygM
- kbJl/8BAK8H5MIP42AsL/n7hDqqerWBcikJYnxMOnzw3YzdtxHoA==
-X-Google-Smtp-Source: AGHT+IGW5YwdE9PwUhtVT6OauLqXdlHPgT9l+STMofWEJM6sqos/GEoogHOxZIaCERVUwao2oRLE5Q==
-X-Received: by 2002:a05:6870:ac21:b0:3d2:a262:3d3b with SMTP id
- 586e51a60fabf-3e41e497ae8mr2565280fac.16.1762531013823; 
- Fri, 07 Nov 2025 07:56:53 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e41f1ec269sm1842706fac.20.2025.11.07.07.56.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Nov 2025 07:56:53 -0800 (PST)
-Date: Fri, 7 Nov 2025 09:56:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Sam Edwards <cfsworks@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot
- augmented DT if DEVICE_TREE_DEBUG=1
-Message-ID: <20251107155650.GE6688@bill-the-cat>
-References: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
- <417e1b1a-0346-4297-9a72-7befc5b94311@gmx.de>
- <537299e3-05a1-4ff4-b594-9c73ed41a0cc@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=pschenker.ch
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dev@pschenker.ch
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d33hG0vgSzk2F;
+ Fri,  7 Nov 2025 17:01:18 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pschenker.ch;
+ s=20220412; t=1762531277;
+ bh=jVlxNDbNMBG2mjUH3QGZTU5+uUp3hyiPwoG8gJyxMfM=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=Qlx/SmK5tr44N6qW90k33GrkjqaQHIla/HBUANiwaKh5Kj5KcAf9joKa66kxJLNVt
+ Wv4vGcdEcUmOBL5Z254bcMs1vhvBcco2tK1so/0EBZZFmSIjbIre4tRSEHzidjN4sr
+ VoVrxlgINh8vomc8SznR/Htei6Eb20Esy/cpwIWU=
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4d33hF136fzNbY; Fri,  7 Nov 2025 17:01:17 +0100 (CET)
+Message-ID: <f429996a374f31d2d9dcdbcb8f143de18b512549.camel@pschenker.ch>
+Subject: Re: [PATCH v2 2/6] remoteproc: k3-r5: cast size to size_t
+From: Philippe Schenker <dev@pschenker.ch>
+To: Andrew Davis <afd@ti.com>, u-boot@lists.denx.de
+Cc: stefan@embear.ch, Andrew Goodbody <andrew.goodbody@linaro.org>, Beleswar
+ Padhi <b-padhi@ti.com>, Daniel Schultz <d.schultz@phytec.de>, Hari Nagalla
+ <hnagalla@ti.com>,  Neha Malcom Francis	 <n-francis@ti.com>, Peng Fan
+ <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
+Date: Fri, 07 Nov 2025 17:00:36 +0100
+In-Reply-To: <57ada562-c774-4ef2-8739-b899e5df416e@ti.com>
+References: <20251107130216.3084134-1-dev@pschenker.ch>
+ <20251107130216.3084134-3-dev@pschenker.ch>
+ <57ada562-c774-4ef2-8739-b899e5df416e@ti.com>
+Content-Type: multipart/signed; micalg="pgp-sha512";
+ protocol="application/pgp-signature"; boundary="=-4xbZQsuOR0KfkE4r7Zf5"
+User-Agent: Evolution 3.58.1 
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yCEIBPFG50m1afp/"
-Content-Disposition: inline
-In-Reply-To: <537299e3-05a1-4ff4-b594-9c73ed41a0cc@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,55 +73,87 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---yCEIBPFG50m1afp/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-4xbZQsuOR0KfkE4r7Zf5
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 07, 2025 at 03:06:47PM +0100, Marek Vasut wrote:
-> On 11/7/25 10:12 AM, Heinrich Schuchardt wrote:
-> > On 11/6/25 22:08, Marek Vasut wrote:
-> > > In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT =
-and
-> > > DT with U-Boot extras, to show how much does the U-Boot DT differ from
-> > > the base DT. This is particularly useful together with OF_UPSTREAM, to
-> > > minimize the diff between upstream DTs and U-Boot DTs.
-> > >=20
-> > > Example usage:
-> > > $ make r8a779g3_sparrowhawk_defconfig && make DEVICE_TREE_DEBUG=3D1
-> > > $ cat ./dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dtb.diff
-> > >=20
-> > > This still has a downside. Even 'dtc -I dts -O dts ...' applied on
-> > > base DT and U-Boot augmented DT can produce different phandle IDs
-> > > for the same node in those two DTs, which results in a lot of noise
-> > > in the resulting diff. The only way I can think of is to patch DTC
-> > > to emit full paths in those phandles instead, something like a
-> > > phandle =3D <&{/full/path/to/remote/end} ...>;
->=20
-> What bothers me is ^ this part.
->=20
-> Hello Heinrich,
->=20
-> > Without documentation developers will not know about the new feature.
-> > Could you, please, add a doc/build/ change in the next iteration.
-> Sure, although I am not convinced it should go in in its current form.
-> Please see my first line of comment.
 
-Maybe we put it in the u-boot-extras repo for now as a standalone
-script, so people can be asked to run it and look at the output?
 
---=20
-Tom
+On Fri, 2025-11-07 at 09:24 -0600, Andrew Davis wrote:
+> On 11/7/25 7:01 AM, Philippe Schenker wrote:
+> > From: Philippe Schenker <philippe.schenker@impulsing.ch>
+> >=20
+> > When compiling for R5 core with CONFIG_REMOTEPROC_TI_K3_R5F,
+> > passing 'size' (ulong) to ti_secure_image_post_process() caused
+> > a type mismatch compiler error.
+> >=20
+> > Cast 'size' to (size_t *) to fix it.
+>=20
+> If the size of `size_t` and `ulong` are not the same this doesn't
+> really fix the issue, just silence the compiler warning. If ulong
+> is smaller than size_t on some platform we will read data outside
+> the variable address when de-referencing.
+>=20
+> Might be more correct to assign size to a variable of the correct
+> size first, then pass a pointer to that.
+>=20
+> Andrew
 
---yCEIBPFG50m1afp/
+Hi Andrew, Thanks for your comment. If I understand it correctly and
+explained in different words: If size_t is larger than ulong unknown
+memory could be accessed. Isn't it very unlikely that this ever
+happens?
+
+At least I did interpret your first comment that way.
+
+Anyway I will send a v3 to really catch all cases.
+
+>=20
+> >=20
+> > Signed-off-by: Philippe Schenker <philippe.schenker@impulsing.ch>
+> > Acked-by: Andrew Davis <afd@ti.com>
+> >=20
+> > ---
+> >=20
+> > Changes in v2:
+> > - Added Andrew's Acked-by
+> >=20
+> > =C2=A0 drivers/remoteproc/ti_k3_r5f_rproc.c | 2 +-
+> > =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c
+> > b/drivers/remoteproc/ti_k3_r5f_rproc.c
+> > index c738607c1092..e7bd97a9088b 100644
+> > --- a/drivers/remoteproc/ti_k3_r5f_rproc.c
+> > +++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
+> > @@ -341,7 +341,7 @@ static int k3_r5f_load(struct udevice *dev,
+> > ulong addr, ulong size)
+> > =C2=A0=20
+> > =C2=A0=C2=A0 k3_r5f_init_tcm_memories(core, mem_auto_init);
+> > =C2=A0=20
+> > - ti_secure_image_post_process(&image_addr, &size);
+> > + ti_secure_image_post_process(&image_addr, (size_t *)&size);
+> > =C2=A0=20
+> > =C2=A0=C2=A0 ret =3D rproc_elf_load_image(dev, addr, size);
+> > =C2=A0=C2=A0 if (ret < 0) {
+
+--=-4xbZQsuOR0KfkE4r7Zf5
 Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQ4WwgAKCRAr4qD1Cr/k
-CoXnAQDKOtyxBYkZWHDx5BTc1cr0VAhJGa3mRkdfNykFx61llAD+IQntOWxmx/ML
-ybAcXgeMilhtj6j4ODR+owBNu4ARCwg=
-=i9qW
+iQGzBAABCgAdFiEEPaCxfVqqNYSPnRhRjRDjR2hoXxoFAmkOF6QACgkQjRDjR2ho
+XxrboQwAyI3mRk41wXIGoXJFcTu8x88RmewsA1VTM8CfkKBd5NqZqqDQVp1pfTI2
+6yXb8sNgZXEG8Q2G5WYdHx4gMdsa16Jgy1/GKa6oVT2wpAtx9ErVJdvfxCiVbMb/
+tOBFQEtCnaynEmqlRTcAzZYVKdbUsMa5GZdpDMnkgYvKwBoj/AboLdsQA1PeF5u5
+q4LzDf8PpejjC9ST8BE9O8REyMF8YG5SXVm/9B7XC22Qdz1W3ec0CBV6HGM7NY09
+jLXwI0bMGnQqFCIcZr4F+U+x9bSgu6LbW7G+3f0qdw9HAsjwgwharHh6kVaTrGy3
+mfjMLJI6qyj2nIOVDFvBO0aa7nLvl6P4eEKJBPRsipNq/352ZEqCh5Gxg0XlBhmy
+M9yCF7E9H2npkM/IikgHdzIk/oNz3+WeiOaE73gchL6AzB2xsoA/MMd7NhAzQtm8
+alJ2WO61lk+b+sg6n2EPaFw9IEd1FdYN75PIDATdO3FrINuPzv1yEKKzqaCloYej
+Y2Hgpr5V
+=arKJ
 -----END PGP SIGNATURE-----
 
---yCEIBPFG50m1afp/--
+--=-4xbZQsuOR0KfkE4r7Zf5--
