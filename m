@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67A92CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 14:52:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94CC0CCFA05
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 14:53:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEA4A83DAE;
-	Fri,  7 Nov 2025 15:52:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 216F783DAE;
+	Fri,  7 Nov 2025 15:53:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UQ2VghIH";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LYD7V3io";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6641E83DBD; Fri,  7 Nov 2025 15:52:16 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 5BF1683DE9; Fri,  7 Nov 2025 15:53:03 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 187B983D90
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 15:52:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6202283DDD
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 15:53:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 51E074375F;
- Fri,  7 Nov 2025 14:52:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7DA6C16AAE;
- Fri,  7 Nov 2025 14:52:11 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 3B5C9601BD;
+ Fri,  7 Nov 2025 14:53:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64441C4CEF7;
+ Fri,  7 Nov 2025 14:52:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762527132;
- bh=dnO+QnETnaoRXhIvwMb0CpSQDB4St0Q/mTg0GXSlj0Y=;
+ s=k20201202; t=1762527179;
+ bh=yqCu2ug8f4ZDolTtGV4wYTOLlJdSeZR1t78/xzlZM5U=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=UQ2VghIHMv0PR050vnyV+Yx+X42+mYa97xZqddxjQhWhDwQvJSUA8Qk67C3bETjuh
- WA/J5X7Bfr35332RwTGbsirtDwlurGrai6occbhuWtRycUC18146VM328DO1+rxAI4
- WiNolJL8VU38D9Hy9K3V7c9mrXBfVyv+EsQooZvdBbWE1Z7FJW0ufEaiDzOVfYPKGI
- 5r3p0Rv9Yut2gh1GwB0CYaDNYfeW0+m1Xj0fdkLKRbbFqdNXOzsEBOuPYOvTR9Pu3W
- rvVgWFl6yRvpfCGFqmpy9yP0dy2pDu2evMTDWL4LPTrJYW78suAuwrSPP58zLkSWHI
- CGrqqTwAnPsfQ==
+ b=LYD7V3iojurotc+62zxUETwHGyDA2kVRkEdzfTf9N6eWePmhRXz3DGQ23sZRzew4V
+ 5PJLqHipqVMidYXEaAc6GXuQGQVHwafnnVvTUU0SzFAS+sXfuh6d6hj3B/HhsPTYzj
+ HqdsMrBXlQe6V45Fr9X8UVZWQ6NkdOzwRvjEeoULA/vHtMC6t+xHJEXbh+PpqGEbDi
+ UmdAD14sRodBPD/1SmF/U5Cfz6pcIBweOCSUVYePlKQ4T+ygKrgbhrtzMVSmapXyLW
+ v1UJKuglHQI3gjRNV+I6osKqXUmrRI8saFaBrnr2grynVCBuxNLg8WLLWph52ZGGUW
+ 3NZ2JugjHCahA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Guillaume La Roque <glaroque@baylibre.com>, Mattijs Korpershoek
  <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>
@@ -49,14 +49,14 @@ Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de, Simon Glass
  Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>,
  Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>,
  Maxime Fournier <mfournier@baylibre.com>
-Subject: Re: [PATCH v2 3/5] boot: android: Add bootconfig support
-In-Reply-To: <5c42a166-1ff4-478a-b76c-9573874a0ca3@baylibre.com>
+Subject: Re: [PATCH v2 5/5] test: abootimg: Add test for bootconfig handling
+In-Reply-To: <cde34459-c4dc-4abc-9ad5-1e709b9753f1@baylibre.com>
 References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
- <20251017-bootconfig-v2-3-8c7c2f2e5474@baylibre.com>
- <87cy635ahz.fsf@kernel.org>
- <5c42a166-1ff4-478a-b76c-9573874a0ca3@baylibre.com>
-Date: Fri, 07 Nov 2025 15:52:09 +0100
-Message-ID: <87frapao9y.fsf@kernel.org>
+ <20251017-bootconfig-v2-5-8c7c2f2e5474@baylibre.com>
+ <877bwb5960.fsf@kernel.org>
+ <cde34459-c4dc-4abc-9ad5-1e709b9753f1@baylibre.com>
+Date: Fri, 07 Nov 2025 15:52:57 +0100
+Message-ID: <87cy5tao8m.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -75,45 +75,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 03, 2025 at 19:52, Guillaume La Roque <glaroque@baylibre.com> wrote:
-
-> Hi,
->
+On Wed, Nov 05, 2025 at 19:14, Guillaume La Roque <glaroque@baylibre.com> wrote:
 
 [...]
 
->>> +		unmap_sysmem(ramdisk_dest);
->> We are here in the "if (img_data.header_version > 2) {" block.
->> What about boot image v3? Why are we forcing bootconfig upon them?
->
-> our right it's not good bootconfig come with version 4 i will fix it in v3.
->
->>
->> Also, please move this to a seperate function. It makes
->> android_image_get_ramdisk() quite long and difficult to read otherwise.
-> i will.
->>
->> Finally, what happens if a kernel does not have bootconfig enabled ?
->> I imagine that everything will crash due to this change. Even if
->> bootconfig is mandatory for boot image v4, I believe we should make this
->> behaviour optional to avoid breaking existing kernels.
->
-> it's enable in android kernel since android-12-5.4.xx so if you enable 
-> boot image version 4 and move androidboot.x in booconfig instead of 
-> kernelcmdline it's because you decide to enable it with 
-> BOARD_KERNEL_CMDLINE += bootconfig and you support android boot image 
-> version 4. it's explained in aosp doc 
-> :https://source.android.com/docs/core/architecture/bootloader/implementing-bootconfig 
+>>> +
+>>> +    # Verify BOOTCONFIG magic is present
+>>> +    assert 'BOOTCONFIG' in response or 'BOOTCON' in response
+>> Can we explain why it's either BOOTCONFIG or BOOTCON? why would the
+>> magic be truncated ?
+> no reason error from me
 
-Ok, so if I understand correctly, boot image v4 without bootconfig
-enabled is not a supported use-case.
+Ok, please fix in v3!
 
->
->
->>
->>>   	} else {
->>>   		/* Ramdisk can be used in-place, use current ptr */
->>>   		if (img_data.ramdisk_addr == 0 ||
->>>
 >>> -- 
 >>> 2.34.1
