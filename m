@@ -4,82 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F92CCF9F8
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 10:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3625ACCFA05
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 10:49:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D306283CB9;
-	Fri,  7 Nov 2025 11:45:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id B912983CB9;
+	Fri,  7 Nov 2025 11:49:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Z5ZXA6ay";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M9oBBmSi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 894B383CEA; Fri,  7 Nov 2025 11:45:43 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id BB99B83CEE; Fri,  7 Nov 2025 11:49:04 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 223E983CB8
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 11:45:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 86A1483CB8
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 11:49:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-787ab220b1cso7838397b3.0
- for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 02:45:41 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b72cbc24637so87160166b.0
+ for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 02:49:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1762512340; x=1763117140;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=I72dYfiPMAwIGCmTEdEGdmExZJC5tURPxTn+j3I41eE=;
- b=Z5ZXA6ay6RBE7HiM/oM0b72cBaJ6aCg53zAuRlZpfetWYTxGji9a9uyqFdhdllLZ/K
- 2feWn2X4OtKmlKDWQ/AzCyY5niaV5J4OYGIur2DrSFgIYbuzj3g3Swk9LxHEY1WDjsGQ
- sHAD6UwH1PBpmQiDqygHQpaavSjUdTYt1H+Ww=
+ d=linaro.org; s=google; t=1762512542; x=1763117342; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=U2rHFYdVqDnk0UVyxY9gl3t+cerOHLpWhVj2vpj1dX4=;
+ b=M9oBBmSio13f+6QuabGxuJ05Xmmu5xbQS3nER6PRcd7sZPKH0BovHmgjFR7vUZeXcX
+ +rq/lHEeKBsWrFaN0nGtEP1wEZbtgqItbDtiEr4zLnOG98LpsfZ8nG6Ms6hfIkkFD96z
+ GriFK2nlJ/fydWy89SQYkBuFRpl7/EVVaajLIINqVHoVJ0XYAg0KXGDYylloVkvoMByw
+ C7vStbL5IR5w2TwswrU0ZOInU6Iwnnno5ey2Q2d47RNT6gQ97nEgUscfqir64HJVdke5
+ Lc1XoQcHOAOQ+E5XSx2xczvfVGZ5xz9nYAb1rz+2969xwPJgXTF53Z5aHc8f3J3Z7U5e
+ vg5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762512340; x=1763117140;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=I72dYfiPMAwIGCmTEdEGdmExZJC5tURPxTn+j3I41eE=;
- b=rzO+E1UaG+esNQ5j03l/G7M2Cf3ZVxK3RUG5FRLMTkI3SB7MhsKOd6CtaqXBG5vrhB
- fH4bYgn1xlE5LRKNWAB0MeSqIdCVUF10genVBa6Gk4mx0wSheWSkvpB5p1oNZ2Fxtgsr
- IO9eOncrYjuqteoe2EXqZDzpNdwsjP3c+3SqRtOSLuneXF7Rpt3YOMUUdq3pf5N/GP5O
- RWhedptl2O8vLPJ+0uz/dJhESU9KH+NYA7JvL2eu9BAF6FQz7Odwoau99yyWTi9WqAXI
- errLrCnuip3lwQGT//d6mN4Wf/41S9otVz7x+WnG2pQiRscEBM7Pj0NL1VzwH4oZ0It2
- 1zyA==
+ d=1e100.net; s=20230601; t=1762512542; x=1763117342;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=U2rHFYdVqDnk0UVyxY9gl3t+cerOHLpWhVj2vpj1dX4=;
+ b=h8wAxB8mRYHuFjUCLX/tx99aZLd+txLu+AVAx7k82RuF0iqT9YG2VnpWJSF8821bBY
+ oxwuVCchjkygFmeXBvQJVzSMGNyqEVHX6t5gnabILp5Kgk3EotZT16p6OZalgXSWX4Zq
+ rUcXQAtVBS4QRMjKaBine/2qc+g4ybHsdqzO7Tk03afECgaG7apOCNqYdTJliCps6J6D
+ hAxWABC5CQuqfTdfQqrhFOinJNwC6Mfooymkbzgs+3QQAVmttWo01u9+0FdubtmKwCZs
+ knZ7wt0EgB1Qy6KkrYF0SSL7KTa8G6qhYvlPazwnJF44DNm+N1kjc8UgwT045SkDHHxW
+ 8Fcw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBDVto487Kb5ecrqk/h2b19l55Rx+sMsfNm7E6mD4ND6D0aGualmMP7VeCOlPaVRgH+Hv3BRw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxeLJgAwdRqgPTZdvCnaoJsEc3AXVU2aoQKNQG2ZIEbep/vbuhp
- iuS5AIMLL1hp4aI7nXnY9rit1YwZvJEXY1nmKPB5TDIeokAVI8QbJIMQ5OHVHhvN+I27Ftu6EO8
- qdYk1bn+BVGjF4KCGlaB4WSIum12uvUDiLYDenVNYNQ==
-X-Gm-Gg: ASbGncsURNd3feEEPX2iunWr0d3+dREG8S3zcn8SCmf5TqjQ9H3XYdOqdFuhabkmk4F
- ibFHGDfX3+WbykU9naEXQvfHfYmXfSVWfSN3BSnHZsVbaJVydtrAu/xPPZ5/8laVGlILVxoFyGl
- 73eUmlJZyGKTnTLMwYSV23ZavRJRATzgaphnX34uqp8zJYNGWr8dvLkL/W4S0qZUJSqGxw81YVd
- pccrhgb64zxMyU49XPwTAD5p5Fsh2GvE8pz06f8Zvfxt0Y9wW87kRAZtvo+9IC+mCd+rtE2jS97
- kvoEo5EEwqtmQg==
-X-Google-Smtp-Source: AGHT+IEAhm/s2pLLdPsdgbJ0HGPJKa8BF/kAdLNTrq5n6CS3bAOt4gVIC3ETJgStCC/W9ItRorbrED86FcSDJb/EeB0=
-X-Received: by 2002:a05:690c:101:b0:787:badd:50 with SMTP id
- 00721157ae682-787cab8e2e3mr9322307b3.27.1762512339760; Fri, 07 Nov 2025
- 02:45:39 -0800 (PST)
+ AJvYcCXREdPgFM6ry/jKReIJK06geh8aQj0cxzyhYuvJrgCrs8BYOVDl4oiyyVK3NaAVxH0jlyeL8to=@lists.denx.de
+X-Gm-Message-State: AOJu0YzySyU4Mzq5i5pa3c1o7U18btOSi1GfzDXwla8t+y9RiPY1jYMf
+ SANdH3EkDWItCZW9g/rbAeO2HCYW15QBfRBekwafbvYegEMhUzWYoeEwH4XTlqFKrjnS8FhU0LD
+ zzMzCnkafbQ==
+X-Gm-Gg: ASbGncs1a9f6m88RUked1ZeZ+HwFjUeokSLAbLGL1q9/+j7YUoB2aM9ChbjdQgnoj8Q
+ f6uniN3F+BMYXNWQ4QcyzuB5bjSkoA+WeeNqniA9ah2GFoGNzEf4eVmF6ioAXjlhuzKvH/0Xbc7
+ SZk/uI2S74xZNfq4/zVwYiacG2flBz3Kve6H6Ni6jCephlrXS9xMbZTqehkWqUxYfQo0scb/7yh
+ NzGGqQ0z6JiCt5gzMc78dWFPVvUE6OHZ6fOoMcO6Z4KFfaW7se/GaZ/bWDHsg9lCx1sWHZX+KFO
+ ZS/mRIuVCXYzM4YJRAG8XV0DShywJKCBTgjWTctUNmwsEAqSqwWbxHBcLmmtX9+6wpeBVaTcKDC
+ BBWVAZY3o9pZj+/cKXmmRg4uWIKEq2KRbmViBL3zdcES0MrA3iUJ66OUaGZhzCZmJgM0Nc8ncd8
+ ZepNt7rtcTPz5Buo0GOgwI
+X-Google-Smtp-Source: AGHT+IEl1PzjOIIrhf+VK7NfbunB8CJWBTxxWrMAAh5QIB4cpGIwkR2b1zsJhdjOKBJVYlvS4M5Q8Q==
+X-Received: by 2002:a17:907:1c10:b0:b6d:5fc8:4a93 with SMTP id
+ a640c23a62f3a-b72c090e481mr284275466b.36.1762512540138; 
+ Fri, 07 Nov 2025 02:49:00 -0800 (PST)
+Received: from [172.20.148.34] ([87.213.113.147])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b72bfa11295sm208109366b.67.2025.11.07.02.48.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 07 Nov 2025 02:48:59 -0800 (PST)
+Message-ID: <633cfe2f-633a-4641-84e7-a6e08359b48f@linaro.org>
+Date: Fri, 7 Nov 2025 12:48:59 +0200
 MIME-Version: 1.0
-References: <20251106170124.3992080-1-admin@hifiphile.com>
- <1116a46b-6261-487b-8418-1c638df56e15@linaro.org>
-In-Reply-To: <1116a46b-6261-487b-8418-1c638df56e15@linaro.org>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Fri, 7 Nov 2025 11:45:28 +0100
-X-Gm-Features: AWmQ_bmUjKmgIRBRitz0tnePls5jF_AY5wBFkCWE80HbSLa37tGnQ-cWW-Cz654
-Message-ID: <CAOf5uwnO_VtG5sajp-_fq4KvK+V3O8V-PnZmQz0d0MNDPEnn8A@mail.gmail.com>
-Subject: Re: [RFC PATCH] mtd: nand: raw: Add ONFI NAND unique id read support.
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: Zixun LI <admin@hifiphile.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] mtd: rawnand: atmel: Fix ECC error on SAM9
+To: Zixun LI <admin@hifiphile.com>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
+ u-boot@lists.denx.de
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Alexander Dahl <ada@thorsis.com>
+References: <20251106-pmecc-v1-0-a1f3cf430be9@hifiphile.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20251106-pmecc-v1-0-a1f3cf430be9@hifiphile.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,166 +108,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all
-
-On Fri, Nov 7, 2025 at 11:41=E2=80=AFAM Eugen Hristev <eugen.hristev@linaro=
-.org> wrote:
->
->
->
-> On 11/6/25 19:01, Zixun LI wrote:
-> > This patch adds support for reading the unique ID from ONFI-compliant N=
-AND
-> > flash devices.
-> >
-> > The unique ID is a 32 bytes long identifier that is useful for device
-> > identification and tracking.
-> >
-> > Tested on SAM9G25-EK with Macronix MX60LF8G18AC flash.
-> >
-> > Signed-off-by: Zixun LI <admin@hifiphile.com>
-> > ---
-> >  drivers/mtd/nand/raw/nand_base.c | 69 ++++++++++++++++++++++++++++++++
-> >  include/linux/mtd/rawnand.h      |  8 ++++
-> >  2 files changed, 77 insertions(+)
-> >
-> > diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/na=
-nd_base.c
-> > index 48e3685d995..30aa578e074 100644
-> > --- a/drivers/mtd/nand/raw/nand_base.c
-> > +++ b/drivers/mtd/nand/raw/nand_base.c
-> > @@ -991,6 +991,75 @@ static int nand_onfi_set_timings(struct mtd_info *=
-mtd, struct nand_chip *chip)
-> >                                      tmode_param);
-> >  }
-> >
-> > +/**
-> > + * nand_onfi_read_unique_id - read the ONFI unique ID sequence
-> > + * @chip: NAND chip descriptor
-> > + * @buf: destination buffer
-> > + * @len: size of the destination buffer
-> > + *
-> > + * Issues the ONFI UNIQUE_ID command sequence, validates the unique ID=
- and
-> > + * copies it into @buf.
-> > + *
-> > + * Return: 0 on success or negative error code otherwise.
-> > + */
-> > +int nand_onfi_read_unique_id(struct nand_chip *chip, void *buf,
-> > +                          unsigned int len)
-> > +{
-> > +     struct mtd_info *mtd;
-> > +     unsigned int copy;
-> > +     unsigned int byte;
-> > +     unsigned int copy_len;
-> > +     u8 raw_id[ONFI_UNIQUE_ID_LEN * 2];
-> > +     u8 *out =3D buf;
-> > +     int ret =3D -EIO;
-> > +
-> > +     if (!chip)
-> > +             return -EINVAL;
-> > +
-> > +     if (len && !buf)
-> > +             return -EINVAL;
-> > +
-> > +     if (len > ONFI_UNIQUE_ID_LEN)
-> > +             return -EINVAL;
-> > +
-> > +     if (!chip->onfi_version)
-> > +             return -EOPNOTSUPP;
-> > +
-> > +     mtd =3D nand_to_mtd(chip);
-> > +     nand_get_device(mtd, FL_READING);
-> > +     chip->select_chip(mtd, 0);
-> > +
-> > +     chip->cmdfunc(mtd, NAND_CMD_UNIQUE_ID, 0, -1);
-> > +
-> > +     for (copy =3D 0; copy < ONFI_UNIQUE_ID_COPIES; copy++) {
-> > +             for (byte =3D 0; byte < ONFI_UNIQUE_ID_LEN * 2; byte++)
-> > +                     raw_id[byte] =3D chip->read_byte(mtd);
-> > +
-> > +             for (byte =3D 0; byte < ONFI_UNIQUE_ID_LEN; byte++) {
-> > +                     u8 lo =3D raw_id[byte];
-> > +                     u8 hi =3D raw_id[byte + ONFI_UNIQUE_ID_LEN];
-> > +
-> > +                     if ((lo ^ hi) !=3D 0xff)
-> > +                             break;
-> > +             }
-> > +
-> > +             if (byte =3D=3D ONFI_UNIQUE_ID_LEN) {
-> > +                     copy_len =3D min_t(unsigned int, len, ONFI_UNIQUE=
-_ID_LEN);
-> > +
-> > +                     if (len)
-> > +                             memcpy(out, raw_id, copy_len);
-> > +
-> > +                     ret =3D 0;
-> > +                     goto out;
-> > +             }
-> > +     }
-> > +
-> > +out:
-> > +     nand_release_device(mtd);
-> > +     return ret;
-> > +}
-> > +EXPORT_SYMBOL_GPL(nand_onfi_read_unique_id);
-> > +
-> >  /**
-> >   * nand_setup_data_interface - Setup the best data interface and timin=
-gs
-> >   * @chip: The NAND chip
-> > diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
-> > index 3e80b134063..87083c34aed 100644
-> > --- a/include/linux/mtd/rawnand.h
-> > +++ b/include/linux/mtd/rawnand.h
-> > @@ -88,6 +88,7 @@ void nand_wait_ready(struct mtd_info *mtd);
-> >  #define NAND_CMD_READID              0x90
-> >  #define NAND_CMD_ERASE2              0xd0
-> >  #define NAND_CMD_PARAM               0xec
-> > +#define NAND_CMD_UNIQUE_ID   0xed
-> >  #define NAND_CMD_GET_FEATURES        0xee
-> >  #define NAND_CMD_SET_FEATURES        0xef
-> >  #define NAND_CMD_RESET               0xff
-> > @@ -409,6 +410,10 @@ struct onfi_ext_param_page {
-> >        */
-> >  } __packed;
-> >
-> > +/* ONFI unique ID */
-> > +#define ONFI_UNIQUE_ID_LEN 16
-> > +#define ONFI_UNIQUE_ID_COPIES 16
-> > +
-> >  struct jedec_ecc_info {
-> >       u8 ecc_bits;
-> >       u8 codeword_size;
-> > @@ -1385,4 +1390,7 @@ int nand_write_data_op(struct nand_chip *chip, co=
-nst void *buf,
-> >  /* Default extended ID decoding function */
-> >  void nand_decode_ext_id(struct nand_chip *chip);
-> >
-> > +int nand_onfi_read_unique_id(struct nand_chip *chip, void *buf,
-> > +                          unsigned int len);
-> > +
->
-> Something appears to be missing. Where is this function called ?
->
-
-I prefer to apply if we have a use case and a consumer of this patch.
-
-Michael
-
-> Eugen>  #endif /* __LINUX_MTD_RAWNAND_H */
->
 
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+On 11/6/25 13:12, Zixun LI wrote:
+> PMECC setup time config was lost in the porting, this patchset backports the
+> fix from Linux.
+> 
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
+> ---
+> Zixun LI (2):
+>       mtd: rawnand: atmel: set pmecc data setup time
+>       mtd: rawnand: atmel: Remove timing from atmel_pmecc struct
+> 
+>  drivers/mtd/nand/raw/atmel/pmecc.c | 6 +++++-
+>  drivers/mtd/nand/raw/atmel/pmecc.h | 1 -
+>  2 files changed, 5 insertions(+), 2 deletions(-)
+> ---
+> base-commit: 1c250e444ad3b15315ee8b0fcb3fc3acc26449e2
+> change-id: 20251106-pmecc-a3841c81c782
+> 
+> Best regards,
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+
+Hi Zixun,
+
+Can you please detail "Fix ECC error", what is the error? you are not
+explaining about it.
+
+Eugen
