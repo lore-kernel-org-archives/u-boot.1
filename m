@@ -4,65 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62812CCFA1A
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 11:17:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E464CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 11:39:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE81183D0C;
-	Fri,  7 Nov 2025 12:17:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id BBDFC83CB1;
+	Fri,  7 Nov 2025 12:39:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="Pq2nW4yh";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 136ED83D0C; Fri,  7 Nov 2025 12:17:44 +0100 (CET)
-Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
+ id 22B4E83D39; Fri,  7 Nov 2025 12:39:34 +0100 (CET)
+Received: from smtp-8fac.mail.infomaniak.ch (smtp-8fac.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::8fac])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB0A983CB1
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 12:17:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5F2181485248; Fri,  7 Nov 2025 12:17:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1762514260; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=d0reGSBj6W9DErgA+Aso/nA85PmzaeWTy9apMhy9wxQ=;
- b=Pq2nW4yhy4xmzKFVQGxp8rPIHYNOIWgKKT9JBVxz3Gcj+hazt9+P/fv/6phd9xpQ96kdCC
- Ah/2Cc0qbf78FbgEA3mwxrEC5hvxi68rBUpWxEwb74+feJqz/2bG0was8jewtdzvRbfjHD
- Q0WKU1oLMK6xaPwD4Tmht45pgotwpO0CvXTC+AmurIlluoSiKWEu4j7cAVjgkGhojfCxN2
- vnxWmgKsX9VcrYW3y4shAbXGkH8esfE48K5j8fiskMVj04cqzlG3IBfgsoQuh5l/h91Bqx
- d/xA7FxseHmcWBXL6betXlcswyyJOFO7UBZpRYQFCcoiF9ndiB7DfnhHDTfnTQ==
-Date: Fri, 7 Nov 2025 12:17:37 +0100
-From: Alexander Dahl <ada@thorsis.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Eugen Hristev <eugen.hristev@linaro.org>, Zixun LI <admin@hifiphile.com>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
- u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Alexander Dahl <ada@thorsis.com>
-Subject: Re: [PATCH 2/2] mtd: rawnand: atmel: Remove timing from atmel_pmecc
- struct
-Message-ID: <20251107-sandpaper-blaming-e68f3c89ccc0@thorsis.com>
-Mail-Followup-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
- Eugen Hristev <eugen.hristev@linaro.org>,
- Zixun LI <admin@hifiphile.com>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
- u-boot@lists.denx.de,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>
-References: <20251106-pmecc-v1-0-a1f3cf430be9@hifiphile.com>
- <20251106-pmecc-v1-2-a1f3cf430be9@hifiphile.com>
- <68d45e9e-8eed-439d-be9b-9d6f9e13fe89@linaro.org>
- <CAOf5uwkZUnUSjJ=CqtZhVf-rQ31eU4gC5o+XDXKJEAtRrY4NKQ@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 355FF83D13
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 12:39:32 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d2xtC6Vl2zw80;
+ Fri,  7 Nov 2025 12:39:31 +0100 (CET)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4d2xtC1djmzvnM; Fri,  7 Nov 2025 12:39:31 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Fri, 07 Nov 2025 12:39:17 +0100
+Subject: [PATCH 1/3] rockchip: i2c: fix incorrect STOP flag for the
+ interrupt enable register
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAOf5uwkZUnUSjJ=CqtZhVf-rQ31eU4gC5o+XDXKJEAtRrY4NKQ@mail.gmail.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251107-rk-i2c-illegal-v1-1-3e5fea13a899@cherry.de>
+References: <20251107-rk-i2c-illegal-v1-0-3e5fea13a899@cherry.de>
+In-Reply-To: <20251107-rk-i2c-illegal-v1-0-3e5fea13a899@cherry.de>
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Wadim Egorov <w.egorov@phytec.de>, Vasily Khoruzhick <anarsoul@gmail.com>, 
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,77 +63,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Michael,
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Am Fri, Nov 07, 2025 at 12:04:16PM +0100 schrieb Michael Nazzareno Trimarchi:
-> Hi
-> 
-> On Fri, Nov 7, 2025 at 11:56 AM Eugen Hristev <eugen.hristev@linaro.org> wrote:
-> >
-> >
-> >
-> > On 11/6/25 13:12, Zixun LI wrote:
-> > > "timing" is unused in atmel_pmecc struct, also it's not exist in Linux
-> > > driver, let's remove it.
-> > >
-> > > Signed-off-by: Zixun LI <admin@hifiphile.com>
-> > > ---
-> > >  drivers/mtd/nand/raw/atmel/pmecc.c | 2 --
-> > >  drivers/mtd/nand/raw/atmel/pmecc.h | 1 -
-> > >  2 files changed, 3 deletions(-)
-> > >
-> > > diff --git a/drivers/mtd/nand/raw/atmel/pmecc.c b/drivers/mtd/nand/raw/atmel/pmecc.c
-> > > index 7c4e9bd5f9967b119239adf2b39e683ea62b71fd..8fc5614cc0091d3e0f4b9280beee9e684fe2a57d 100644
-> > > --- a/drivers/mtd/nand/raw/atmel/pmecc.c
-> > > +++ b/drivers/mtd/nand/raw/atmel/pmecc.c
-> > > @@ -839,8 +839,6 @@ atmel_pmecc_create(struct udevice *dev,
-> > >       ofnode_read_resource(dev->node_, 1, &res);
-> > >       pmecc->regs.errloc = (void *)res.start;
-> > >
-> > > -     pmecc->regs.timing = 0;
-> > > -
-> >
-> > I see there is also an unused parameter to atmel_pmecc_create() called
-> > timing_res_idx .
-> > Maybe this parameter was intended to be passed to the timing mapped memory ?
-> >
-> > If the timing_res_idx is related and unused as well, isn't it supposed
-> > to be removed together ?
-> >
-> > I see it's being called with a hardcoded "2" , does this have any
-> > significance that you know of ? Or it can be safely removed.
-> >
-> > Eugen
-> >
-> > >       /* pmecc data setup time */
-> > >       if (caps->clk_ctrl)
-> > >               writel(PMECC_CLK_133MHZ, pmecc->regs.base + ATMEL_PMECC_CLK);
-> > > diff --git a/drivers/mtd/nand/raw/atmel/pmecc.h b/drivers/mtd/nand/raw/atmel/pmecc.h
-> > > index 43f96b2f168c7b88e0c907996f2ae64f8554ed58..88b0d18040e7c48f226c74ce9b5caf93b5760360 100644
-> > > --- a/drivers/mtd/nand/raw/atmel/pmecc.h
-> > > +++ b/drivers/mtd/nand/raw/atmel/pmecc.h
-> > > @@ -65,7 +65,6 @@ struct atmel_pmecc {
-> > >       struct {
-> > >               void __iomem *base;
-> > >               void __iomem *errloc;
-> > > -             void __iomem *timing;
-> > >       } regs;
-> > >
-> > >       /* Mutex used for pmecc enable/disable */
-> > >
-> >
-> I'm willing to help to clock part of nand, can someone point where I
-> can buy the board?
+I2C_CON_STOP is a flag to be used for the con register, where it is bit
+4 to send the STOP condition.
 
-I use the Microchip SAM9X60 Curiosity:
+To enable the interrupt the controller sends to tell it's finished
+sending the STOP condition, it's the ien register at bit 5.
 
-https://www.microchip.com/en-us/development-tool/ev40e67a
+Let's use the proper offset.
 
-It's also available from Mouser, RS, Digikey, and probably more.
+My hunch is that enabling the interrupt is useless as the interrupt
+status register is always up-to-date and enabling the interrupt is just
+so that the interrupt is available via the GIC. However, U-Boot has no
+interrupt support and the logic was working well before this patch. This
+is just so people aren't side-tracked when debugging I2C issues on
+Rockchip by checking all writes are proper.
 
-The NAND flash populated on that board is an MX30LF4G28AD-XKI [1].
+Fixes: 3437469985df ("rockchip: Add I2C driver")
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+ drivers/i2c/rk_i2c.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Greets
-Alex
+diff --git a/drivers/i2c/rk_i2c.c b/drivers/i2c/rk_i2c.c
+index fa167268ae7..fe09e75d3fb 100644
+--- a/drivers/i2c/rk_i2c.c
++++ b/drivers/i2c/rk_i2c.c
+@@ -137,7 +137,7 @@ static int rk_i2c_send_stop_bit(struct rk_i2c *i2c)
+ 	writel(I2C_IPD_ALL_CLEAN, &regs->ipd);
+ 
+ 	writel(I2C_CON_EN | I2C_CON_STOP, &regs->con);
+-	writel(I2C_CON_STOP, &regs->ien);
++	writel(I2C_STOPIEN, &regs->ien);
+ 
+ 	start = get_timer(0);
+ 	while (1) {
 
-[1] https://www.mxic.com.tw/en-us/products/NAND-Flash/SLC-NAND-Flash/Pages/spec.aspx?p=MX30LF4G28AD&m=SLC+NAND&n=PM2579
+-- 
+2.51.1
+
