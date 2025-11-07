@@ -4,144 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B87CCF9E3
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 09:09:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4CD4CCF9E3
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 09:12:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF96683C94;
-	Fri,  7 Nov 2025 10:09:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 57E8483C94;
+	Fri,  7 Nov 2025 10:12:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="yx9uWPD1";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qsGi55Tk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F79D83C96; Fri,  7 Nov 2025 10:09:32 +0100 (CET)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
+ id 76A2B83CBD; Fri,  7 Nov 2025 10:12:08 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6C3D83C60
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 10:09:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66FE483C60
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 10:12:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ESZQokIP+VX+HyLgQyi7IR79hLhW5zGw2O6WoQbeynKZ8/M77lqKaWNa7ZEhVxUSt8X3U1iRhiZwcN82WbWQlfAyuCI4xa5XGVGnVblMJNrcc9VR0Ppy3dm+ytLQ2vOrWefq+/SPgpXccXdnqAet/NaUPT/zIqxW1KoRrpx1fnYG30n1/580AbLRNfg/iS4zXvg8XjCLBRqAsPNqLlbq+d9KABiLgQ9eTV6uZwIwt1HE7U1q/hL3p4PJns2mHUMA5BRUMLvNkoH1lVhUnqopdc5zBGGFp2008UTfNnm/AWVYeuwTygRz7qIHdlTnKw5LJovMP+s4p6KP52q/hkQ7Fw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lTsfSzheXT2CCz4DqpTtr4MTFZy8RJlc75JEM2qnoYg=;
- b=B8L/J6Gi+3xYmMpM9l0hexS8p8GSj/2nP+sN5J7oWsR/JAgpc8r3dzP8RA4oIRP4ydmixNSUbAZSW/1bDJ8bADHHLy8U8LDkx8gTrs9xKAvFEAP6QmuLImm+xXYWfSZ3DZPyXTj8vpYi04clD0vifXbDpCmBPA7e8cHLoYzPTUrbr/DWzNs4IEGC4mrbiza/2wHsuYMVcq+ctQEE+u9tjTCTVwEA8cTNxggXwiodrQaXeJDAGGyVM8znC9a+OGVF5yIYdCTcQTr/XS8HsVcbmRk7oBlDCjzQOSOiuwIlqNjUJDFzzBDxyZVP9jQUEhFGaZ4Csl0JgGr61gzXaao58Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lTsfSzheXT2CCz4DqpTtr4MTFZy8RJlc75JEM2qnoYg=;
- b=yx9uWPD1QcFnDC+xQZTFc5NIFFJPNkJbWdOM/ot9Sv1ki3hXQsBN5eR2+vCVFyhk+6BgU8+vffCw4AoJPmtu0tFflnLU9tH2CvPo7ogFgpBvdfydWlx8AaQfWc3Zp21vb5rS2mKcoK4UViaFuIWtNTLJMj5jet6mnsRI7rht4Kk=
-Received: from DM6PR11CA0018.namprd11.prod.outlook.com (2603:10b6:5:190::31)
- by SA1PR12MB7176.namprd12.prod.outlook.com (2603:10b6:806:2bd::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Fri, 7 Nov
- 2025 09:09:26 +0000
-Received: from CY4PEPF0000E9D0.namprd03.prod.outlook.com
- (2603:10b6:5:190:cafe::11) by DM6PR11CA0018.outlook.office365.com
- (2603:10b6:5:190::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.13 via Frontend Transport; Fri,
- 7 Nov 2025 09:09:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CY4PEPF0000E9D0.mail.protection.outlook.com (10.167.241.135) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Fri, 7 Nov 2025 09:09:25 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 7 Nov
- 2025 01:09:22 -0800
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 7 Nov
- 2025 01:09:21 -0800
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Fri, 7 Nov 2025 01:09:21 -0800
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>,
- "Venkatesh Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] i2c: muxes: i2c_mux_select/deselect() should be static
-Date: Fri, 7 Nov 2025 10:09:12 +0100
-Message-ID: <28bba1e65f25ef25586916d6069261efb6b26242.1762506549.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1762506726; x=1763111526; i=xypron.glpk@gmx.de;
+ bh=CzpfejjqAoM4H5TWmFGv7s35YvxW7Z0aDzGdjBm3Ji8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=qsGi55Tk3q957uZOeAgChozmqklVy9ZdTj3wbbM8IhnJ4CfMsdWtS7YTvKpyp/KG
+ hCjMCcjevCHpT7404JLQEKtm5lfy8QmaAsvv08Cl79wVGnqSjOoqEsntkhVhsjVoc
+ RB/yp+HRMRKToJjuwLXM6R3eI4FgFMlQHn+Nt0htXTOeD+e0x2helRhgy3giAgRcR
+ JuvVg0WYu3CAfZx033YN9sRDs6LG9yCK+eagFRBrxuOuBBxaKMzXsn4ZKHrP22u61
+ WjgcWW42OilJfGw/YE7n4nBRdHoISvZ9UueVycEUZlbzcuQ8SQjHG30+hA1Ybw7Tm
+ L/+Xp0oetylhllfeaA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.25.183.149] ([93.94.208.154]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MAfYw-1vNs573hdY-004eBt; Fri, 07
+ Nov 2025 10:12:05 +0100
+Message-ID: <417e1b1a-0346-4297-9a72-7befc5b94311@gmx.de>
+Date: Fri, 7 Nov 2025 10:12:04 +0100
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1153; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=PBixUw/rcc7S2gTid/hugF0WOF8p2f5AQdetPQvRWKM=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWTybrfKOPTsFb9p8zbje916MxU8jm7LD0iarnXIqeqTx
- qWnl/8LdJSyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBEppxh+Kexfmpuv7DF2rCE
- rJdMS+5PtCx3YFV93ZnTmMGQmeyYeoPhv88eMTUrnoMGsrN3LNgY8vTYWpH4xO5DXBHzQx68/2D
- SwAwA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D0:EE_|SA1PR12MB7176:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8525548e-50ac-4418-649a-08de1ddd593e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?oJz+8iWRrysfBUuU1ZDYFLzTG+KL+gCaPNkDcTIKyP5IBzccMj4aDcTfAVZ7?=
- =?us-ascii?Q?PRRgNmxNQliEdg6ZXul/Q8j8l2QEXi77wiHIl2H8u2mrO7axFZb/uaS8Q3DC?=
- =?us-ascii?Q?H7SmTMkdK4YLF1Ke1069JJH5GuRNSIJl1CqHu1l3cBxWtrBxzTpcXgX98YcU?=
- =?us-ascii?Q?8OcgI0Co88s34yswobic7FeNdQVuXAmYWrlf2/gGkechtDu2BoU6An6jxgkM?=
- =?us-ascii?Q?t1HZviDak0/4RPHnT1MMLIRnOxtmzz8qdaXo/cj+zQiEnjxJgrZBNt0wQnfs?=
- =?us-ascii?Q?DDhzt7byRmzB3IBkAvDMeAGvG8fbG1yhrfrPNqDrkmMAcMGE5z356RXmwSXS?=
- =?us-ascii?Q?m95yoGyBsN2WLj53+hMftmKITFXDl2GjxuTn1UO6W1DpitI+nY7F/FqlCqme?=
- =?us-ascii?Q?NG54Yu1EJCVk0+XoKpqTkhjSkO3HDLuBNlVZwDE5XqaFdoOAMMZAj2Q3Y96I?=
- =?us-ascii?Q?NYZpHCkiACGOp5dIFg1SzPbmFv50hSKb0Md51z9XQh++r79/Gq4uuDuEsZPG?=
- =?us-ascii?Q?mnsAc4uFtJQoptx3QNcDiVMeBMkVtTlDmfAfYXdxXGVNS0ZwDAAhrIfhQoHM?=
- =?us-ascii?Q?A6YZovAoBrowGJ4VoZT5/lA64YisTETaqVXUxVgReJQRCUL/U4VsOTHjEkNj?=
- =?us-ascii?Q?g6uFas1MlcyfX5PQ/xS6OG5hYbG26ljgS7WsTeSMQDmJT83GbBiADs06X127?=
- =?us-ascii?Q?apTDqPQeNwi75go8DPrFgLlre1BoI+fdglVhXl8WWX7MlenXaVLqlMZ7eC5i?=
- =?us-ascii?Q?1N6ws4M7+obNhvHbvJy4hEybget3NnlmBepFdYDRqpm7B0h86Y+4PKzYH5JN?=
- =?us-ascii?Q?1NwG0N3ShCrsuQbgQ/yf0QW+cJnNiQLfAtwWRJHFUZjvk9B9i8QwGNUBpdeO?=
- =?us-ascii?Q?mKuLKMpBhPNrN0qiFI+u9R9ZkuTx+qJXbYXMmEdHs9ZwM9FCE5DxfbSNk6KS?=
- =?us-ascii?Q?sIW3Gl6e/umkVsyHIo3k8HuT7ZmC+t8S+qkDLKAKzwRuTEdFVtuRShLOPYfV?=
- =?us-ascii?Q?NVol4SbTRBqVznp05QxqzAkyevLHlM4p4VzgkkpWDa3rqpmzsRlbg2d/Vf84?=
- =?us-ascii?Q?ui9TT00XS4MYopvbZo1zajcHRp2UVz8LxVRnobFq/fK+PfGfhSfLTl9jYGTB?=
- =?us-ascii?Q?tIzPbZ2BTDE0/qb0uKQ7YqX7rMdh4wPV/zTI3B/i9qwKnUpiUv6cNxvIh6IG?=
- =?us-ascii?Q?j3RDXvwZkhPkwjJlgLYOsJdl/WT0cZ4ccEs+pnAYNuJev/64M+zWKif9nPCn?=
- =?us-ascii?Q?huV5bgU2l9BRHaKUFlt3bGc4IQREtGsQeRHaGOZQb00odxNIX+Bk1wRyBsWp?=
- =?us-ascii?Q?lxI7Qzvc/+gfFV1DRTIReOTdVz0/E9CIUd7raIY0/HgMB3KJr6LljK3BbZB+?=
- =?us-ascii?Q?U5V8UXbnsKLWeQKfvNPzz/GK9BqijWULpvCS6Rz3qEiftBZgKQsP25CRwm9w?=
- =?us-ascii?Q?k2+TO828nd02O+0/DZSdoUNbisGsg9NdvUmaOIFVLGoPfnsY9OiYYmkDnqIf?=
- =?us-ascii?Q?Bifm2QGLtRLYQavqtnMrQ23bqRPHTnpVM0xCoiQ9PIHlzotUjAw72+804CHU?=
- =?us-ascii?Q?/THtR2qJULjVWE0/u4Y=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 09:09:25.4568 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8525548e-50ac-4418-649a-08de1ddd593e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D0.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7176
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot
+ augmented DT if DEVICE_TREE_DEBUG=1
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:sYkJ09b8MV1U4k0xMDDqqw1NIDZhJi6ck39VyXqea7c+8S3z7En
+ E5j+5kbH77FGnJGnxlIv2TluzLiipLYHOVl9OXlUbxdQrHXSP3TcLfdL1Fv8RlcPpLOGvf2
+ bW6iaXYrrgS5Pz1YnzmJD6L+kOaqoMPfKW4w2ntTTZY5KCY3wpss2nr6Wz0tLCcmOgZVbiC
+ g27ZQuO/x9edQalvY1Krg==
+UI-OutboundReport: notjunk:1;M01:P0:rorKlvttcH8=;g5cuBZ2Kto/9jn0zteu4GC8xsBq
+ ckKn2d4v5y4N2VY5GleCGfmErbWqiICEGOyasI0eeU91two8v//oxyT1AfMPsxO/R8ZCPZXo4
+ 2u9WlQ2udWjeuSHV5mcpSUjbLHDuqBs9RSeOFkku4pxDHYFCnlMBOEL0h0pNGu1mp3zjhNcjj
+ TN5QyhlIKSnf0Oo+zQlvEGWESNVuiSHkibwFzd+wYt7Kxk3LMqVQunb73wlvEERpNo3gz+svO
+ j8K1qdSxqNI7W7fRp2B/OpkAjsPTa0lCj/jEhp4oxdBiFp74ygxyJhweYNUoUruk8C5+fuk/i
+ VA4N1rS7H5gK5to2FKl1y7TcqpFxdTG0bCbtsiyq4zafVBb2uI7Io1WLa4yWlnkYa5iQvCMKi
+ b7Kbbvr6NBGRxRPnZbwiU7WNUYBEmlNFjMNCkxTmRcHoX4evtksv5uCqeaaAuZFUHDgnHfACY
+ d5i3I5sOjYCT7GtKd/RIcVdSaUTzr8TWhucS0Mp0xZWDB4htV8y6MN1geQBhqx/ZTtexIVaur
+ 26i8s5U0nidupc941ZT7ce0XffkWNnWbjb1jt31bqsWn6548uCW+zAO0wRsTAlhlh4d5R4WFd
+ RqtKZNTsptJj9/s7WK4uCwfMJPhuRe3QeWZzvisgWDTRcqQOaXsWmIuQZjnl7ad4itPyRhANs
+ UFvjqfUX9U5YdavjxnOStVzeHzw36DQfiEptCpQLgCPuRgX10tUUplSnPyCSXfvR36Yedn68n
+ tVIWlN/vBLbPz9fIrQYYADgc7PbT5RyZarTTrCj3R1go00dnEFrbz54AeceCmre21tznjCE/3
+ CHkrDYAjYmu7bWlpxDBpPPWqjwL5kPTEhU5bmHYemjGkUt3+VVfuinamjR8prBbXuRdl5z7dX
+ 3LiagGJIylm5o56zE9woFbGN7R3g8MfWB+Gxz27YOUoZdsLSMNiv7Q9xsHxvfbaGvTjbOoFcQ
+ pw47lr0TtI6CoBqXCd7IGBwPSWBKFoQKcBmK39iRVR92inHlei03lUcDlVqzJxpjTjwQpt3yZ
+ PFvFNwb6FFnuNQhP+3Ubvp+GSWYZ6VXMJRJzwh15qPUw+Nq/xUtjrjVkn7dassAdKcm8aIC1q
+ Oq/xqRhmlxi+z6qtu8p//nsWCAoknrSr+E1EHZLWWNqMLIfgVI96prloIn2JlX+HjKIap5GuE
+ FzbjANJB0w5u6zRA9k3ks4TLDHPlCARDIE60ll5VDh/rZ2yka1+DGQ3waVzWWFxN+cwfmwqEq
+ 6lO321bwVfeEk+jlcSRLHOIkTa72kJPbPvVgrAkneuEmHUDMTloe1Ltffabb7UBg+6vf9x8qo
+ UpbsTfpne6+1LBJtQWkbJXjVpl5DGoPkGYLEruWeKJp4KaRBdD7nn2ylR8wzJDwCwMG8pp+o0
+ pFE5rk53kZ9tD0lojPIExDux7/EA3S/QsQc1JRGTH3PcNuMcWlra8wlt0Qf6+fFyODy001FSr
+ bIU6u48YPVsw02GnJbTc1ed6E+tFPzU0Fk2n+2Bym3qH4bz7fyiuZ86tpyEV/SEMUcCdM3Wa+
+ o58dFOLNM3CUcyFRQ12fM5vvv8dZ7QslNVF5qzJPJqW9OOPby+OPJ6rM8BO81aC2auOumCf/A
+ aSiNdVBF+LqmXvg9uXUysa8FGoPMQaGWN+ndpKSlDPJ/kOetigLyqqWzG79HRrQ35mN6CUl4h
+ AuOzkENcIJZNQ+ucKrL1Ugt56DCEIETihRZLqb45fO1LG/xNhppeOfoy1W5m/jxwlUJN7WMRI
+ WSwR+XFXrs0WPTm82FU0fQhvxEkoklSQDWvPTnLkXsm8QpGP/RQGZtF+eJCZQjZtxkm++7H5F
+ zWW3eiDX4ycRs/vwqJwCzjDoHYetkZhpDEKAhoBVqLYCyzFplOwGEj6GPQ9kInsd0oux/VZpY
+ R17aHCyUaM5KOeWyhF5CCTsjGB9nNvw/8U7S5nkTBwLKpQ8cSWH1MwMNLjFb0PbNEyKj4fOiT
+ z83biogpKePTkte78ZLtu2hHsemxQ4sx8II3l0GwNNsnH/vjMdfhZQ4+BU0rk+WUYkiT/UOWh
+ ugmcGAX9IuDw0wrhchaKeObJa8nwRhT+VnjN3PB8pyVp/Anr0wViRE/ltanpE+BjnQbdXtcHJ
+ P+zhdQm/GmRMd74LUZjExD6w61z7LBaq/LWyBCqwO8WAw+Om+abwQmiRJXuxvE6xBURGEYdpg
+ ySOWAxwtMfLCcGKW/Tm+H3gii3fCZG6R//qsIHHEvkufFh5qhdsUPnmDMpMd82QyDhb+jVKFb
+ S0N9he6H3A8dFmSMT3fri3DSazq14GCytgMeN3m+8P9bu3qJP983VlOBdsHRZWvycJUaH/37Y
+ 5qSiCv766/peKfjvtCwovKYlMCAtXVkgZ4lSs9fSrRLXhMaMNbcSmJn+qJMf6ZvMUhvVkUhQ7
+ hDcLG8O+SO/oRR6RAXMAN9OSAPiJozLnVYqCWtJG/LlBQPkuH8Lc3pRc0Xhe4lhxomF8QdMl0
+ Xnq52NjCk12Ealt0N5Y/GzJMxjuX3GmqXrZK7FXP8rdaIAXIB+L/4abwb9TRQH0BERulvcBh2
+ OryrhnP3pYmh1kI4mwx5fTROBC4l8KBniWDUhis6VCpoX05WDZp65VzeG1AZmmlzK91JsXsPn
+ gMtCCduPvTtUDgNg6gfr2uhWoq0Bdvyly9aNa537y41hTD7ejWCxcYSlb28amNVMK806M83AU
+ 0OhPp1Yzo7Cbz1GvJBMGmM69EiAPR75i9CID4sSgGiDEz7pVqrXpp16KTZtoCwZLqZEilZMEV
+ 0zTsczP1/vG3dL9HMSUbOQRheQ3XnS67fWIZIJPRMn+aQVKZ18vr6q0x0sire56GwQ1Hivnvc
+ WwQMZeM4KsFRFbIlsl8HoH6IWiavFbtD5gdDazM0Dt9zFSJSBSq4nRXL8VZJAbq87Jyiaz7Yn
+ vQOzoTvTiJwPFj8tC44l/J3JDoDtUkphrNQCBq4h41ELEgrLKF1gOhiVEkYw2QbYhqlRkOw+s
+ cpHIzw+fqSPVkqc4A5OaYDTFxVdP61ooSqHsVgdUkszyhczqE11BQmj1vZoc7BtT3pb9iPo7U
+ zdCb9urpQ9KWChialsT0/ASSWMgVkH7qM052+px44i2h2ogcLtkztME0xqmIGT2L7IReYB/N8
+ 0R9YLftnPIJIF39zN7gfIG9zEJ5asIY/EU3i0G6VTmf+Gls0ci7rnlcAbSTqoA1+IWw6LhggP
+ rt9e7w5+KIaNqkPPy/sDa3H0ld9Q5tatzF5TEM8fdCe/oNFkIjX5zNCNRxxQmN+rynCi826pm
+ 8RSTo4CbydCbYSkuqaoYbFgpCC5PFc1s94mjxg4Ah5ka0rmgDHfvmVo5NevRjq/N8QB+OSKMt
+ 2G7bIg33eRNfuOnMqc//CJwy7PE7tHrmmOu0fplXF3QuvqzhkliEGiSgNix+sqjTQY6aQaY47
+ 6Ql0kNbFiTckdLZyCwDBuVrVjBOIMYwPqk7NIWWwNvYOk96iYBn5/Bfp6LMgFZr57m6KUZN61
+ NZFftJmI522skVcydVQtCwgwm1PE6tDlkhvV5sXkooOPU5Q4IU0iuD2ynbX8IPaG2OemYs2OM
+ JQ/M0xMyyTDRYjiBJ5lW1mkpAYela2RyDh9C+Sb94czjdxo8TD22ARCg8cjaNbNizEOUoZY/2
+ sk4hKwWAd6iXE/OmpY8oCD6XZITu+vSnHx264nEH18Ay4v4VaVlIfzdc5O953qBtLoi8X5kiX
+ txr58pBT7LPuJ6KgjPrO8ajOCZZV2WIauH0nlATmTWghux1f6dw3O28kKNDHOGAKOlwqaBu4k
+ ulbojilBb038c6sQGw2VvlEaVPFNuSB7kDk7p3JjUxScVOQdRg0b9D8ejkpM/gqf+xs4rtidI
+ M5YBtwaF04G542gj6TF9t0v19/iLMh9K00PJO0f0KbF4Mcrx6c4aXxQzoAlVMR6mBUnFP1Jql
+ 5PE7uVxO0IYf9xdtq+mjTP5HVWJerSRvZHR8IZH0TX8a07wWEyhMSe66TsEvoS3kGq+2KrafT
+ K6lV3upaJLDo6iDFBrNlYLBqmNM1gmo3qvBHgoY2r6BtUDyPw0OOW6VNC7+461FAszpRe5OBY
+ oDqCqbDI9Gtdlau0OYBp/qBn3Vn9Ihs71fCX2v4Nhsq698yvZ0Y+4jLJU+OzNFAhVS4rPhte+
+ 6Frul/KP/A48Ss1wRyAwqfbIMpqhKJxSwjjZyF5x506a4EgOl4l96Cu940LYYvht1jcvsTXuj
+ OSwmwOWhbGJAAn4IexYiuXReDRKrnD/dHALXnE30XAH3KI8aKhr+GiJuT0d/R+6cPuReNshf4
+ lUKKtj+EttlXVkGFpYo2w2Rn1CQW2cdu6x1Sc/6J4DRtnM7nNNpiGdtCkxQn+IK3EJe/zzULr
+ R+eBpCkMla8d1Qh0xES5KbBDwPLi3IJkPttv8cZ3ybrNM9s3Rq7kII+EFyyxQkZh1j9utvgZ/
+ mJpO+EXYcZbajPSv61vgGiNPdSIfDMa/hHxiUu2RHeNgYEVwK5H/vI4kZLyWMpmNGlWSL/XjR
+ abfIBEDR4nuwoWeOjBYVcxdKzBbik6iid3ZmORh/68VEEOUmW59sK+SSm+RhdGMcsGvsJGKiL
+ 1igSCs5DjWdIu2Xh0FnFrE+IznMdDRGdhmqcIia7a2NHUnUNZyKJaIggaUb0ly7P/u1eU/azH
+ 42YesX3tvMcjYsYpwnDh1WjpxJQzSstxzkOU3QkypjrEt4IkovG4uVWGKPy9TJ/ss57DENjC6
+ +J6jIb4gl6fsH1HH2tPauR/GR7vdMaTINxQnVhS1jLh7qjsE9fv5sXXuWb+Vr+XQx9PsctxM5
+ IRrnWXBZp+j+ejdu79nFT4LZdyB0FCWGG84UBDIvlUskhdSQMTVf4ekweON4Q5SARM7Bew451
+ KB6ubregshUQcdtXyy5GNRAEYbs5R+1J0wUYakBlMNgs+8Ufe1CoIeFmAPwMN6SjRP6bXjQZk
+ h1rRNDjWSfI+fhxqmlGwAi4lD3hGMHpCwNJ9F49b7qA1aw6lkw11wU5HdPz/kHJwWX5BVQF2q
+ u0UrM8oBzzQUqw3Qe4Wn/65jouPGVRB9KGc5Y57gL+UiM9yB76RIkajnFXHoeIG2fihkNhozB
+ lm3Y3rIqho+kl29YD/JZ0nPd79LnppSdz3r6pDqxKd+xiGZVIuqW0LNmrViMPNG5VArYQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,39 +152,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-i2c_mux_select/deselect() are not called out of i2c-mux-uclass.c that's why
-they should be static.
+On 11/6/25 22:08, Marek Vasut wrote:
+> In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT and
+> DT with U-Boot extras, to show how much does the U-Boot DT differ from
+> the base DT. This is particularly useful together with OF_UPSTREAM, to
+> minimize the diff between upstream DTs and U-Boot DTs.
+>=20
+> Example usage:
+> $ make r8a779g3_sparrowhawk_defconfig && make DEVICE_TREE_DEBUG=3D1
+> $ cat ./dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dtb.diff
+>=20
+> This still has a downside. Even 'dtc -I dts -O dts ...' applied on
+> base DT and U-Boot augmented DT can produce different phandle IDs
+> for the same node in those two DTs, which results in a lot of noise
+> in the resulting diff. The only way I can think of is to patch DTC
+> to emit full paths in those phandles instead, something like a
+> phandle =3D <&{/full/path/to/remote/end} ...>;
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Adriano Cordova <adrianox@gmail.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Sam Edwards <cfsworks@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+Hello Marek,
 
- drivers/i2c/muxes/i2c-mux-uclass.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Without documentation developers will not know about the new feature.=20
+Could you, please, add a doc/build/ change in the next iteration.
 
-diff --git a/drivers/i2c/muxes/i2c-mux-uclass.c b/drivers/i2c/muxes/i2c-mux-uclass.c
-index 012881de05bf..7f4eb914af2e 100644
---- a/drivers/i2c/muxes/i2c-mux-uclass.c
-+++ b/drivers/i2c/muxes/i2c-mux-uclass.c
-@@ -130,7 +130,7 @@ static int i2c_mux_post_probe(struct udevice *mux)
- 	return 0;
- }
- 
--int i2c_mux_select(struct udevice *dev)
-+static int i2c_mux_select(struct udevice *dev)
- {
- 	struct i2c_mux_bus *plat = dev_get_parent_plat(dev);
- 	struct udevice *mux = dev->parent;
-@@ -142,7 +142,7 @@ int i2c_mux_select(struct udevice *dev)
- 	return ops->select(mux, dev, plat->channel);
- }
- 
--int i2c_mux_deselect(struct udevice *dev)
-+static int i2c_mux_deselect(struct udevice *dev)
- {
- 	struct i2c_mux_bus *plat = dev_get_parent_plat(dev);
- 	struct udevice *mux = dev->parent;
--- 
-2.43.0
+Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-base-commit: 665508d2c55273842f368c497a1bf5e9d32e1f51
-branch: debian-sent3
+
+> ---
+>   scripts/Makefile.lib | 24 +++++++++++++++++++++++-
+>   1 file changed, 23 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> index 5db2fbc418a..2d8bf3c04f4 100644
+> --- a/scripts/Makefile.lib
+> +++ b/scripts/Makefile.lib
+> @@ -386,10 +386,31 @@ ifeq ($(CONFIG_OF_LIBFDT_OVERLAY),y)
+>   DTC_FLAGS +=3D -@
+>   endif
+>  =20
+> +# In case DEVICE_TREE_DEBUG is set, produce a diff between the base DT =
+and
+> +# DT with U-Boot extras, to show how much does the U-Boot DT differ fro=
+m
+> +# the base DT. This is particularly useful together with OF_UPSTREAM, t=
+o
+> +# minimize the diff between upstream DTs and U-Boot DTs.
+> +ifdef DEVICE_TREE_DEBUG
+> +cmd_dtc_diff =3D \
+> +	$(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtn-=
+tmp) $< ; \
+> +	$(DTC) -s -O dts -o $@.clean.dts -b 0 \
+> +		-i $(dir $<) $(DTC_FLAGS) $(dtn-tmp) || \
+> +		(echo "Check $(shell pwd)/$< for errors" && false); \
+> +	$(DTC) -s -O dts -o $@.full.dts -b 0 \
+> +		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) $(dtc-tmp) || \
+> +		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false); \
+> +	(diff -Naru $@.clean.dts $@.full.dts > $@.diff || true)
+> +
+> +dtn-tmp =3D $(subst $(comma),_,$(dot-target).dtn.tmp)
+> +else
+> +cmd_dtc_diff =3D
+> +endif
+> +
+>   quiet_cmd_dtc =3D DTC     $@
+>   # Modified for U-Boot
+>   # Bring in any U-Boot-specific include at the end of the file
+>   # And finally any custom .dtsi fragments specified with CONFIG_DEVICE_=
+TREE_INCLUDES
+> +
+>   cmd_dtc =3D mkdir -p $(dir ${dtc-tmp}) ; \
+>   	(cat $< > $(pre-tmp)); \
+>   	$(foreach f,$(subst $(quote),,$(dtsi_include_list) $(CONFIG_DEVICE_TR=
+EE_INCLUDES)), \
+> @@ -400,7 +421,8 @@ cmd_dtc =3D mkdir -p $(dir ${dtc-tmp}) ; \
+>   		-d $(depfile).dtc.tmp $(dtc-tmp) || \
+>   		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
+>   		; \
+> -	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(dep=
+file)
+> +	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(dep=
+file) ; \
+> +	$(cmd_dtc_diff)
+>  =20
+>   dtsi_include_list_deps :=3D $(addprefix $(u_boot_dtsi_loc),$(subst $(q=
+uote),,$(dtsi_include_list)))
+>  =20
+
