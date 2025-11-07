@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2ADFCCF9E3
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 13:03:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D1ACCFA05
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 13:04:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13BA883DA7;
+	by phobos.denx.de (Postfix) with ESMTP id 4D98083DB6;
 	Fri,  7 Nov 2025 14:03:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=pschenker.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="0zBQFCUS";
+	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="iFqtaaO5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32BD483D4A; Fri,  7 Nov 2025 14:03:11 +0100 (CET)
-Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::8fad])
+ id CD35B83D77; Fri,  7 Nov 2025 14:03:12 +0100 (CET)
+Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42ab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 525CC83D86
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 14:03:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8628583D85
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 14:03:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=pschenker.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dev@pschenker.ch
 Received: from smtp-4-0001.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d2zkf0Qb8zjQZ;
- Fri,  7 Nov 2025 14:03:06 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d2zkd1yMKzlxP;
+ Fri,  7 Nov 2025 14:03:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pschenker.ch;
  s=20220412; t=1762520585;
- bh=5luIxRWBxDJpQQ3++qn75E64V1pl0stsh1hulerxBug=;
+ bh=bBO44FSRtmfUkxHdGoxVjLhVRRIWV5PfbI0abbJtHiU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=0zBQFCUS5sOpiuk1RcWJCJ/VkTmJrlsXPW710Bfl5BUNAMk9xGKl0CoAMTbvqus+E
- EZA+zyOi9bXheeCmgCJa09tgSYhtKxP8eKirodK9gGWvOb+lVNqsm+SLqhwmprsEEl
- D/3tw9fk1YazJ2Yp3y5hB56Ez8Yp/ZpLEZ+2vJPY=
+ b=iFqtaaO5pxYMgRbqB2rQcJZZdDcp4SrMJ+hEgFIKgTyp7kAQ1NHRhfQnEnUKLtAUr
+ 04Tl6u0AHe+RsahZOealpQ9o5+HIt8uXHvMLxA9X+bA3WoRyZaFGbxKbtM1xDniv8w
+ TaRgZhLK94H66XEFIvUlKWmqOQcUfpblWjgst0ek=
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d2zkd3S10zSVJ; Fri,  7 Nov 2025 14:03:05 +0100 (CET)
+ id 4d2zkc4VJBzShD; Fri,  7 Nov 2025 14:03:04 +0100 (CET)
 From: Philippe Schenker <dev@pschenker.ch>
 To: u-boot@lists.denx.de
 Cc: stefan@embear.ch, Philippe Schenker <philippe.schenker@impulsing.ch>,
  Andrew Davis <afd@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
  Beleswar Padhi <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH v2 6/6] remoteproc: k3-r5: Implement is_running operation
-Date: Fri,  7 Nov 2025 14:01:05 +0100
-Message-ID: <20251107130216.3084134-7-dev@pschenker.ch>
+ Judith Mendez <jm@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 5/6] remoteproc: k3-r5: Use verified image address
+Date: Fri,  7 Nov 2025 14:01:04 +0100
+Message-ID: <20251107130216.3084134-6-dev@pschenker.ch>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251107130216.3084134-1-dev@pschenker.ch>
 References: <20251107130216.3084134-1-dev@pschenker.ch>
@@ -72,58 +72,46 @@ X-Virus-Status: Clean
 
 From: Philippe Schenker <philippe.schenker@impulsing.ch>
 
-Add is_running callback to query the R5F core halt status via the
-TI-SCI processor control API. This allows the remoteproc framework
-to determine whether the R5F core is currently runnin.
+After ti_secure_image_post_process() authenticates the image, it may
+relocate it to a different memory location and update image_addr to
+point to the verified image.
 
-The core is considered running when the PROC_BOOT_CTRL_FLAG_R5_CORE_HALT
-bit is not set in the control flags.
+However, rproc_elf_load_image() and rproc_elf_get_boot_addr() were
+still using the original "addr" parameter, potentially operating on
+the unverified or stale image location instead of the authenticated
+image.
+
+Use image_addr (cast to ulong to match function signatures) after
+authentication to ensure all operations work with the verified image.
 
 Signed-off-by: Philippe Schenker <philippe.schenker@impulsing.ch>
-
 ---
 
-Changes in v2:
-- Made sure there are no build-warnings caused by this series.
+(no changes since v1)
 
- drivers/remoteproc/ti_k3_r5f_rproc.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ drivers/remoteproc/ti_k3_r5f_rproc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
-index 36ea449f5121..78739ca55942 100644
+index e7bd97a9088b..36ea449f5121 100644
 --- a/drivers/remoteproc/ti_k3_r5f_rproc.c
 +++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
-@@ -570,6 +570,22 @@ static void *k3_r5f_da_to_va(struct udevice *dev, ulong da, ulong size, bool *is
- 	return map_physmem(da, size, MAP_NOCACHE);
- }
+@@ -343,13 +343,13 @@ static int k3_r5f_load(struct udevice *dev, ulong addr, ulong size)
  
-+static int k3_r5f_is_running(struct udevice *dev)
-+{
-+	struct k3_r5f_core *core = dev_get_priv(dev);
-+	u32 cfg, ctrl, sts;
-+	u64 boot_vec;
-+	int ret;
-+
-+	dev_dbg(dev, "%s\n", __func__);
-+
-+	ret = ti_sci_proc_get_status(&core->tsp, &boot_vec, &cfg, &ctrl, &sts);
-+	if (ret)
-+		return -1;
-+
-+	return !!(ctrl & PROC_BOOT_CTRL_FLAG_R5_CORE_HALT);
-+}
-+
- static int k3_r5f_init(struct udevice *dev)
- {
- 	return 0;
-@@ -587,6 +603,7 @@ static const struct dm_rproc_ops k3_r5f_rproc_ops = {
- 	.stop = k3_r5f_stop,
- 	.load = k3_r5f_load,
- 	.device_to_virt = k3_r5f_da_to_va,
-+	.is_running = k3_r5f_is_running,
- };
+ 	ti_secure_image_post_process(&image_addr, (size_t *)&size);
  
- static int k3_r5f_rproc_configure(struct k3_r5f_core *core)
+-	ret = rproc_elf_load_image(dev, addr, size);
++	ret = rproc_elf_load_image(dev, (ulong)image_addr, size);
+ 	if (ret < 0) {
+ 		dev_err(dev, "Loading elf failedi %d\n", ret);
+ 		goto proc_release;
+ 	}
+ 
+-	boot_vector = rproc_elf_get_boot_addr(dev, addr);
++	boot_vector = rproc_elf_get_boot_addr(dev, (ulong)image_addr);
+ 
+ 	dev_dbg(dev, "%s: Boot vector = 0x%llx\n", __func__, boot_vector);
+ 
 -- 
 2.51.2
 
