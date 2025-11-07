@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4514ECCF9F8
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 21:35:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68A32CCF9E3
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 21:35:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E54F83E4C;
+	by phobos.denx.de (Postfix) with ESMTP id 8B0EB83E60;
 	Fri,  7 Nov 2025 22:35:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F338in1V";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ouq1tsHE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 657B983E44; Fri,  7 Nov 2025 22:35:02 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 5DD3C83E62; Fri,  7 Nov 2025 22:35:03 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5906E83E40
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 22:35:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35F1783E23
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 22:35:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-656b52c0f88so547972eaf.0
- for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 13:35:00 -0800 (PST)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-3e2fc677775so888352fac.3
+ for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 13:35:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762551299; x=1763156099; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762551300; x=1763156100; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DVVkJOco0J374cNDXAsqkaF8ShPVJlRedonTJgtj4Eo=;
- b=F338in1VzV3ayeSdVlbJTHdmXFg11SdFFzE2CpVIyynMZA7Z1WgbYUUbJrwSCaaPiC
- WFugwaq/WG8yid0RjQXnxAs6TBItY0KtqifXG5bszDcOP90XjEf/iZYyTcm2KAF3HfSF
- IHQ74YdUVEw3u7al7DtAjF2lpYlxmm/8x6Muk=
+ bh=ErwCFwuWdk41ey4M1t54dfL/OpNDDyizJDhmZDMx+Uw=;
+ b=Ouq1tsHElMDIxlLR+lribevjMqvgKsoKHQ9zG8QPKEaxxnhjT6NG5HMGAwOwlmbGpR
+ kMHj5v75IZFJgg5ykSboE6japkB0TXOjcr1FA75QO93HAWEVsyBINLU6QwpzPzKAxDmz
+ 2e0g8SXySuG93JB0nrJbdc8AR4cVJVGsGG4iM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762551299; x=1763156099;
+ d=1e100.net; s=20230601; t=1762551300; x=1763156100;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=DVVkJOco0J374cNDXAsqkaF8ShPVJlRedonTJgtj4Eo=;
- b=v/QherH3LCQ/Ur637dnAv/XQXla6YAocxI+6HsSSp7KgA45yBwBT4K4b9KzYLtrNEA
- 0lI6Ci41zQrRKfmverTY/AJkSrCTmMw+hF4l4N2JYSMGee5IxWe1wON5FJlqzU6DLaDd
- G5KDgz/1cApS5IFG8O76sWFYi5THLAfybyXsZkxCaIfCmHBEVofquvV0VmeVqnLR4YrP
- 9n0rmHwsp3sFjlT1PPIisoJ63CeEQhYGNug1W6U8FucG1ZzwZBc3TWDGt78nDkw4b3l6
- 4cEIegBR2aa+BoGagmivtVlpt8Y/1pcJyjJ5F5xCb+1B0qJPxOopZ9pxQ0E7/FnC/MfH
- EfIw==
+ bh=ErwCFwuWdk41ey4M1t54dfL/OpNDDyizJDhmZDMx+Uw=;
+ b=Zohmo6qhRRoG263wEW9VKXy8YO4bMt+b3TwHOd5EgfKH0PulszAS0K41kRiKOEQ4wE
+ wrsrWhyGrGfZh943Keqa2SC79U5GXKkpG6RzID/HjxQoJ1VBCyuIItQ2bwTSWwVfn7UO
+ JvIpFpHM8nMxzt0E2fj9/3D0FBR1vDprwrtRP/+iNgvRlAkIjLbSP0zti/gPCxqbOcLT
+ SY8f9K6QbzGoAaPH21AnwmihWa3+19efUP4C2lFoSeN1t4dfeTWHXcN7ElwNSWBuTCY1
+ QsDgyQ/8w1rhB5UrBY9Vp4XHNAQ1uK8oUaoEtux1bDUyNBKbP5xyuOkRErkVIX2QzHnw
+ zbXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUGXaTGuwLu20s4WdzsxrbIGxMVC8syAZON38Uwjm/Vyo2Yf/sA0XFAU8RWJdJuHdh8kOrooBg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzVJOMQgIHk23uZfAo6Un++KT6TBdPcO+ag+c0JSU3c5zQKwXFU
- 8NHWbOPhdaDjajctpRW+g3U5+vEkaL8CcpulTPDu7dXoM6qXcUKXEmm1Lhxe9NPpS4gbu0osTw+
- kFNxA8Kiy2Q==
-X-Gm-Gg: ASbGncuErPD3evFKMEoa2lRJUfCNE37xRy4yLLF6kZh+lyWCp9WB6VLwPop8qhU8idL
- wnB40knkdBoWwvq5MnU78cHqTjonRi6zOxvaKBph6t4E5KQE752/a3ILyTQIbyrKbC05Lp/jp7Z
- jOlRPc3xuhKg0M6YZtOwPF9MpcsmtZ8EVtZgcVRRrt+f1mpfyr9yv4t4dJBWdGArMdDVh5PxYH8
- 6HUkn7y8G+Hl1+Ni0WmacoqYxachhfyjofZGvCaNmlBx/Mq2QPAU6VjRBC/GsMMQDaA6qY5VMie
- tIogeXlACqgaPAwLW1WfSfcw3WvQbG9JYt5JMPrh9LyJcxvX8Zki+QpS0tSZYr0wminwDpHJAhX
- 9IsPV7u6af7yqRn+FRozrAAEK5oyMKEEYE4XVGNdwdUYK24jh39tpyGSqLAAr/gZlup27fKZCAB
- rYvzLqr7qLABESXKpdHPZWVSW4tKtRR8z5zp1W9R1o+qIGXfOU
-X-Google-Smtp-Source: AGHT+IESr3UQdwfg5YZChs67K6wUDISswHJgIwGRe58n4ydxCLo0gxnrGzLNJTsoUuesIqKHmQq1kA==
-X-Received: by 2002:a05:6870:a546:b0:3d1:d631:64f0 with SMTP id
- 586e51a60fabf-3e7c280b255mr707714fac.41.1762551298970; 
- Fri, 07 Nov 2025 13:34:58 -0800 (PST)
+ AJvYcCUE/QoX2k7k4FyoLTmySbfMG9hiTeO1rxr1SEaOdGvFLWwBFx8ThQ8aO2ql6Jh5BAMTBEjbHfQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwcFCxZA202JkZ1ZzKsW0K34Yaox0KODmQxImtsi6hQ+5XKbiX4
+ kLTwgZ+aIh3hY1rtzOdJwdBilECvUzu4xRTMHp4AC26kgQz9Idi7KOTW4Gap1dS1yhs=
+X-Gm-Gg: ASbGncum8IzfUz8gGGF0bjkwFv/fFtcW6TLh7T7SXPO86VJ0/6/wRGtErq/K+VS/5Gc
+ DDwh17CneFXNAJ3+iyTI7ZDU4/RFKq+Ee+9m/JocxL+84QMh9605xKnIhMyD4d/5p1UEgUiYfc6
+ N+OBlyxlrDYldDjMkOX0L1LzdPj3CaO+608e3xWhKksBhhmlfxQKRQNW076zm4T9+673u/GbGbR
+ 1v/4IDKnjXFJ4WoAyCv3zdEpoDkOsMDBBH+g8glgizF4utCwDXtnO1GvdiOOcv1AuF5LWfptzYg
+ /uscbogbEDLfrE3Z8lFdVJQY6XBZSJyciVjNyHYhH7heEz0ww0nUUV1zUVo71mxp073LIF4yYyA
+ AHafDiKlZ0/V1QaPW/AfGzml3K1/S6jYY3To9UcPFFlVXQGcMqxMdFSJ3gmIORoryJt/Z5hjmjk
+ rwSAmWfu5BRQQaBxl7aSdI5Y3nEQT6BXDJaqgz9pZk3zhc65yC
+X-Google-Smtp-Source: AGHT+IFWUXaISevX7CvVgVJJue89Wi75Bx1Bp9E2ij5cje0VN0y8jYDwYCFqsQa3eOWzHcs3VH4aqw==
+X-Received: by 2002:a05:6870:241f:b0:3d5:aec5:77c6 with SMTP id
+ 586e51a60fabf-3e7c28f45b5mr711002fac.41.1762551299806; 
+ Fri, 07 Nov 2025 13:34:59 -0800 (PST)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e41ebb0fc6sm2507000fac.2.2025.11.07.13.34.58
+ 586e51a60fabf-3e41ebb0fc6sm2507000fac.2.2025.11.07.13.34.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Nov 2025 13:34:58 -0800 (PST)
+ Fri, 07 Nov 2025 13:34:59 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-In-Reply-To: <20251031210700.643712-1-heinrich.schuchardt@canonical.com>
-References: <20251031210700.643712-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] sound: all sound devices must depend on CONFIG_SOUND
-Message-Id: <176255129808.3424353.7301001281272431705.b4-ty@konsulko.com>
-Date: Fri, 07 Nov 2025 15:34:58 -0600
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+In-Reply-To: <20251104230203.50404-1-heinrich.schuchardt@canonical.com>
+References: <20251104230203.50404-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] sound: typos 'to be write', 'writen'
+Message-Id: <176255129913.3424353.8671785603235361346.b4-ty@konsulko.com>
+Date: Fri, 07 Nov 2025 15:34:59 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,21 +98,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 31 Oct 2025 22:07:00 +0100, Heinrich Schuchardt wrote:
+On Wed, 05 Nov 2025 00:02:03 +0100, Heinrich Schuchardt wrote:
 
-> Clean up the sound Kconfig options to let all sound devices depend on
-> CONFIG_SOUND.
-> 
-> Before this patch it was possible to select CONFIG_SOUND_MAX98357A even
-> with CONFIG_SOUND=n.
+> %s/to be write/to be written/
+> %s/writen/written/
 > 
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] sound: all sound devices must depend on CONFIG_SOUND
-      commit: 45860d882f3c32ccb091820d16f02d4aaac4c35c
+[1/1] sound: typos 'to be write', 'writen'
+      commit: 199341908e3559a306d2726f7e33e2703864f0ed
 -- 
 Tom
 
