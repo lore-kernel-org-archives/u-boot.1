@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D1ACCFA05
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 13:04:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C11CCCF9E3
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 13:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D98083DB6;
-	Fri,  7 Nov 2025 14:03:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=pschenker.ch
+	by phobos.denx.de (Postfix) with ESMTP id DBD9683D0C;
+	Fri,  7 Nov 2025 14:26:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="iFqtaaO5";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="C5j3Vjcp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD35B83D77; Fri,  7 Nov 2025 14:03:12 +0100 (CET)
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42ab])
+ id E55ED83D1A; Fri,  7 Nov 2025 14:26:02 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8628583D85
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 14:03:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 338C783CB1
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 14:26:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=pschenker.ch
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dev@pschenker.ch
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d2zkd1yMKzlxP;
- Fri,  7 Nov 2025 14:03:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pschenker.ch;
- s=20220412; t=1762520585;
- bh=bBO44FSRtmfUkxHdGoxVjLhVRRIWV5PfbI0abbJtHiU=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=iFqtaaO5pxYMgRbqB2rQcJZZdDcp4SrMJ+hEgFIKgTyp7kAQ1NHRhfQnEnUKLtAUr
- 04Tl6u0AHe+RsahZOealpQ9o5+HIt8uXHvMLxA9X+bA3WoRyZaFGbxKbtM1xDniv8w
- TaRgZhLK94H66XEFIvUlKWmqOQcUfpblWjgst0ek=
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d2zkc4VJBzShD; Fri,  7 Nov 2025 14:03:04 +0100 (CET)
-From: Philippe Schenker <dev@pschenker.ch>
-To: u-boot@lists.denx.de
-Cc: stefan@embear.ch, Philippe Schenker <philippe.schenker@impulsing.ch>,
- Andrew Davis <afd@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Beleswar Padhi <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Judith Mendez <jm@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 5/6] remoteproc: k3-r5: Use verified image address
-Date: Fri,  7 Nov 2025 14:01:04 +0100
-Message-ID: <20251107130216.3084134-6-dev@pschenker.ch>
-X-Mailer: git-send-email 2.51.2
-In-Reply-To: <20251107130216.3084134-1-dev@pschenker.ch>
-References: <20251107130216.3084134-1-dev@pschenker.ch>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 00786618FF;
+ Fri,  7 Nov 2025 13:25:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 548FEC4AF09;
+ Fri,  7 Nov 2025 13:25:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1762521958;
+ bh=kOyEZigEAkmVSqkx3tf1M/5BIinqDTUP0CnT41j0n7w=;
+ h=From:To:Cc:Subject:Date:From;
+ b=C5j3VjcppKXIxe5OSscP/McL7bs9eFAM1xdAEfrNq/+A1ijooieoCTDYKC8g5pnPL
+ myaonm0764nmtex0+2HBvg1mtvv4Eq1V1GXQEwWTWGsBryqBwWVovInXlo3nmVyqXF
+ icgDwSuuPQdClgatNR4KKbd9elDv4UTHZcmIUYAIMQjJN7e35fZQrIASadKQREKWL3
+ uwU+R3ih7OudH4yqjMbkcoP7DcDoqSSHe43gc5e9XuPYQ4+Xos/dNk+xcGNlXSgLPC
+ nEDSArR701ffufzcfnM+n0FhYE7oyFLsBL+AUD8GBnlO7S1PWB3BH9a+g5Gk+dyDhv
+ jXMT+kIcoLR6g==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Nicolas Belin (TI.com)
+ <nbelin@baylibre.com>, Hrushikesh Salunke <h-salunke@ti.com>
+Subject: [GIT PULL] Please pull u-boot-dfu-20251107 into master
+Date: Fri, 07 Nov 2025 14:25:56 +0100
+Message-ID: <87ikfm9dp7.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,48 +66,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Philippe Schenker <philippe.schenker@impulsing.ch>
+Hi Tom,
 
-After ti_secure_image_post_process() authenticates the image, it may
-relocate it to a different memory location and update image_addr to
-point to the verified image.
+Here is a PR for master
 
-However, rproc_elf_load_image() and rproc_elf_get_boot_addr() were
-still using the original "addr" parameter, potentially operating on
-the unverified or stale image location instead of the authenticated
-image.
+Android:
+* Add bootargs environment to kernel commandline
 
-Use image_addr (cast to ulong to match function signatures) after
-authentication to ensure all operations work with the verified image.
+DFU:
+* Support DFU over PCIe in SPL
 
-Signed-off-by: Philippe Schenker <philippe.schenker@impulsing.ch>
----
+CI:
+* https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/28223
 
-(no changes since v1)
+Regards,
+Mattijs
 
- drivers/remoteproc/ti_k3_r5f_rproc.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+The following changes since commit 1c250e444ad3b15315ee8b0fcb3fc3acc26449e2:
 
-diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
-index e7bd97a9088b..36ea449f5121 100644
---- a/drivers/remoteproc/ti_k3_r5f_rproc.c
-+++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
-@@ -343,13 +343,13 @@ static int k3_r5f_load(struct udevice *dev, ulong addr, ulong size)
- 
- 	ti_secure_image_post_process(&image_addr, (size_t *)&size);
- 
--	ret = rproc_elf_load_image(dev, addr, size);
-+	ret = rproc_elf_load_image(dev, (ulong)image_addr, size);
- 	if (ret < 0) {
- 		dev_err(dev, "Loading elf failedi %d\n", ret);
- 		goto proc_release;
- 	}
- 
--	boot_vector = rproc_elf_get_boot_addr(dev, addr);
-+	boot_vector = rproc_elf_get_boot_addr(dev, (ulong)image_addr);
- 
- 	dev_dbg(dev, "%s: Boot vector = 0x%llx\n", __func__, boot_vector);
- 
--- 
-2.51.2
+  Merge tag 'u-boot-imx-master-20251104' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2025-11-04 13:06:26 -0600)
 
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20251107
+
+for you to fetch changes up to 10da28729949f3e2160f98d82df45833d4c175cf:
+
+  bootstd: android: add the bootargs env to the commandline (2025-11-06 10:19:31 +0100)
+
+----------------------------------------------------------------
+u-boot-dfu-20251107
+
+Android:
+* Add bootargs environment to kernel commandline
+
+DFU:
+* Support DFU over PCIe in SPL
+
+----------------------------------------------------------------
+Hrushikesh Salunke (1):
+      spl: Add support for Device Firmware Upgrade (DFU) over PCIe
+
+Nicolas Belin (TI.com) (1):
+      bootstd: android: add the bootargs env to the commandline
+
+ boot/bootmeth_android.c | 35 +++++++++++++++++++
+ common/spl/Kconfig      | 62 +++++++++++++++++++++++++++++++++
+ common/spl/spl_dfu.c    | 91 +++++++++++++++++++++++++++++++++++++++++++++++++
+ common/spl/spl_ram.c    | 18 ++++++++++
+ drivers/Makefile        |  1 +
+ 5 files changed, 207 insertions(+)
