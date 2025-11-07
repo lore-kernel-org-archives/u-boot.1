@@ -4,64 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA607CCFA05
-	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 17:24:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E98CCF9F8
+	for <u-boot@archiver.kernel.org>; Fri,  7 Nov 2025 18:39:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30CCC83DCA;
-	Fri,  7 Nov 2025 18:24:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 6957683DF3;
+	Fri,  7 Nov 2025 19:39:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="EMGxcDpb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qIJioClW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60EFD83DF2; Fri,  7 Nov 2025 18:24:44 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ED96183E0E; Fri,  7 Nov 2025 19:39:17 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E0F883D8B
- for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 18:24:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E52B583D8B
+ for <u-boot@lists.denx.de>; Fri,  7 Nov 2025 19:39:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=bd30=5Q=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1762536280;
- bh=vAT1FhVc3YYA1Km7E0xF+FDEf98b9mrqjjkk08Qo39I=;
- b=EMGxcDpblm6Gem0gPaLTOCbuxmlpxH661JWMX28NjC+9ByvKh05qt3x6ZUgRAbVA5y5wk3r3+
- jkRjKVTgWJlwSRUk7iYDSEKKEar0DgpkI7BgN6tvk9wtKY3+P2dz3f9GoRcPPxhsKZOA91xphAk
- aUZJLEZJ0jXL550YeBRCMzPtTN6d0O+4FzQE0XD+Etf9mOLCdqvtwG/tY+0HcM5ypl/XTs7ddms
- ES0ailbh2IAbg4o0Mts30/UIdKrCfqI4Z1yFYrFbTgxtFUw661+41dTNt43X5EJeeQ48dyWHd4s
- 00j9HJ4Hf5XfEFXxyI3Z3JmqE0iFHNUzC6PyoozuuKsg==
-X-Forward-Email-ID: 690e2b4d07551ffa40a136b1
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.4.3
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <20e741ac-188c-4a6f-bf24-4555f58303ef@kwiboo.se>
-Date: Fri, 7 Nov 2025 18:24:23 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c6e815310aso650439a34.0
+ for <u-boot@lists.denx.de>; Fri, 07 Nov 2025 10:39:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762540754; x=1763145554; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rnNMMLpYVwi0Zj8DN23sSSmUU9/SMTtT90rU9c7oSww=;
+ b=qIJioClWsY23aOhNUw9BizPbFhtfjE/XnFN2JwGnVjhe3cX+SHrfse23Woz2Wj3EyX
+ FYddJXSXF1p2RefOMVGwwqjBwxryiU7AOkHlbCzi1Rvp78GYchiANCLmfCzpzFT1zuc9
+ cKOTmMZL7jPAOaqYzjSSGsQx1lHnJjwuaFzV8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762540754; x=1763145554;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=rnNMMLpYVwi0Zj8DN23sSSmUU9/SMTtT90rU9c7oSww=;
+ b=TazHW1CJP+G8ECAOA/IUYXPBs86AMb35TJeXJus3rdJtODz8JTSNBifxRSD+ML9lL/
+ +aEmf5UGMC/yrDm6lW5nXwybxJYkKd0P5qnaGg/l/3QkkJb0ha5IIfH8aiMj6HJczqiJ
+ SK8KvPhQi551ZXxxYW44kso5NSvwtfWN2Ur6WW2rZ/67aO6rkvYySVIreOsZqbgXsLNo
+ 6HsvCPD5ZO2pP10CncpZtV7vmePE+jeBCNq2jSM4RqBqgSXuoxAY181ANSNTswXbFJ4r
+ czxoKcDBiheWjw8B08WBhzPEH51z4zAO1a69frj3r/B5pZ0KG40OVODPKnzABGEFngBb
+ TaqQ==
+X-Gm-Message-State: AOJu0YwvrHo+2I73Rpviw5SW/zjsVglQcAVY083xi2qKjrkAeftEcG7a
+ nZSu7uFAGC6blTGhxFqFP8EubGHu+8+hvXosKl6bmrazvyzHGNYTgmqDFuWWtE47MRo=
+X-Gm-Gg: ASbGnctJDe+VowPX9SlHF2V4BsGfYdMBfCakULz0WjhWXKWjsX6iwNOq9SJ9v76SLdR
+ +/FPKduSpbTPv8V0TrTmgbhwwWnIK/WIbc8UffEuyfPW8MIojxnTCMNLDpp2LOsajtzd7mYqBXc
+ 66DsTnmyT6BctVtX9Dti/mXleh1xadLAF6Y5kLNKD8VA2ucSLQusRs17hsCWMeH2ZogF20CtsJy
+ Br2tyRbcFipGHj85YQ6BuIIiurMybIvAAoW8FkAtG3vs/N0WxojllHylOrhsesjONl2I1e6XPY9
+ GcFXs7zQzYMwkPBebaktVp8PKZRmiJc6mLsyCfosxL4g8b2KPWn9aQ6rdoOKNUpPwmczuOxhsTi
+ kZu4vbvfVrXq2xy400J5aPooUkQ4p9SPA2Tcshl0bsFPzHrlZgGLZyRxVMqyGAjjR6aBB92Gz3S
+ UPfoLQeuWnRUR3WwBSjE7uHZ7LOuugu7XBDHEZbg==
+X-Google-Smtp-Source: AGHT+IEGG+pvamwwsll659bFp4EZUz/th0Lha1WjG4SQPvvyvrK0vot0YtOfhiIajHo5KtAddsstqQ==
+X-Received: by 2002:a05:6808:13c4:b0:450:150f:f5a9 with SMTP id
+ 5614622812f47-4502a511943mr97055b6e.57.1762540754469; 
+ Fri, 07 Nov 2025 10:39:14 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-450027e19e6sm2587642b6e.21.2025.11.07.10.39.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Nov 2025 10:39:14 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>
+In-Reply-To: <aQ2ZUlW5i4t7lMr-@nxa18884-linux>
+References: <aQ2ZUlW5i4t7lMr-@nxa18884-linux>
+Subject: Re: [GIT PULL] please pull mmc-master-2025-11-07
+Message-Id: <176254075379.1989038.16666090585266386982.b4-ty@konsulko.com>
+Date: Fri, 07 Nov 2025 12:39:13 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: mkimage: enhance comments for v1 header
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Heiko Stuebner <heiko@sntech.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Xuhui Lin <xuhui.lin@rock-chips.com>,
- Yifeng Zhao <yifeng.zhao@rock-chips.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20251107-rkcommon-hdr-v1-1-6b456bb3dd93@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20251107-rkcommon-hdr-v1-1-6b456bb3dd93@cherry.de>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,96 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On Fri, 07 Nov 2025 15:02:03 +0800, Peng Fan wrote:
 
-On 11/7/2025 5:49 PM, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+> Please pull mmc-master-2025-11-07
 > 
-> Improve the image header documentation for v1 header:
+> --------------------------------------------------
+> - Disabling FMP on Exynos850 to make eMMC functional
+>   when U-Boot is executed during USB boot
+> - Drop extra included errno.h
+> --------------------------------------------------
 > 
-> - specify this applies to all MMC, not only SD cards,
-> - specify the offset for SPI flashes,
-> - specify the key used for RC4 encoding,
-> - specify what "init" refers to, especially since some configs enable
->   TPL,
-> - specify what "init_boot" refers to, especially since some configs
->   enable TPL,
-> - specify the size of a block,
-> - add documentation for init_size and init_boot_size,
-> 
-> Note that the offset on the storage medium isn't necessarily 32KiB (64
-> blocks) for MMC or 0 for SPI flashes, it's just the first offset the
-> BootROM checks. Barebox[1] lists a few options, though those are
-> applicable to RK35xx which use the v2 header, so not guaranteed they can
-> be shared. On RK3399, the binary can at least be stored at offset 0 and
-> 32KiB on SPI flashes.
-> 
-> [1] https://git.pengutronix.de/cgit/barebox/tree/arch/arm/mach-rockchip/bbu.c#n19
-> 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->  tools/rkcommon.c | 19 +++++++++++++++----
->  1 file changed, 15 insertions(+), 4 deletions(-)
-> 
-> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-> index d191ea72c63..6d1f88bcac1 100644
-> --- a/tools/rkcommon.c
-> +++ b/tools/rkcommon.c
-> @@ -76,13 +76,24 @@ struct header0_info_v2 {
->  /**
->   * struct header0_info - header block for boot ROM
->   *
-> - * This is stored at SD card block 64 (where each block is 512 bytes, or at
-> - * the start of SPI flash. It is encoded with RC4.
-> + * This is stored at MMC block 64 (where each block is 512 bytes), or at
-> + * the start of SPI flash. It is encoded with RC4 with the below rc4_key.
-> + *
-> + * In Rockchip terminology:
-> + *
-> + * "init" means TPL if there is one, SPL otherwise.
+> [...]
 
-Maybe mention something about SRAM here?
+Merged into u-boot/master, thanks!
 
-"init" is what BootROM load into SRAM, typically TPL if there is one,
-SPL otherwise.
+-- 
+Tom
 
-> + *
-> + * "init_boot" means the entire software the boot ROM has to load for booting
-> + * U-Boot, typically the TPL if any, and the SPL.
-> + * Basically, it is the content of "init" plus the SPL if relevant.
-
-The "init_boot" naming is very strange, I would probably try to describe
-it as the "boot" or next stage, maybe something like:
-
-"boot" is the next stage that BootROM load into start of DRAM, if "init"
-decide to return back to BROM using 0 as return code and init_boot_size
-exceeds init_size. Typically SPL if there is one, U-Boot proper
-otherwise.
-
-For newer SoCs using the v2 header this basically just continues for up
-to 4 images, BootROM loads next stage/image when prior stage return back
-to BROM using 0 as return code.
-
-Regards,
-Jonas
-
->   *
->   * @magic:		Magic (must be RK_MAGIC)
->   * @disable_rc4:	0 to use rc4 for boot image,  1 to use plain binary
-> - * @init_offset:	Offset in blocks of the SPL code from this header
-> - *			block. E.g. 4 means 2KB after the start of this header.
-> + * @init_offset:	Offset in 512-byte blocks of the "init" code from the
-> + *			start of this header. For instance, 4 means 2KiB.
-> + * @init_size:		Size (in blocks) of the "init" code.
-> + * @init_boot_size:	Size (in blocks) of the "init_boot" code.
-> + *
->   * Other fields are not used by U-Boot
->   */
->  struct header0_info {
-> 
-> ---
-> base-commit: fdf36c2e9ad4f770ee951398a86bd55404d9b7ec
-> change-id: 20251107-rkcommon-hdr-99fef99b4b64
-> 
-> Best regards,
 
