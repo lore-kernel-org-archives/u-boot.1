@@ -4,86 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F34CCFA18
-	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:26:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE00CCFA18
+	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:26:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A44D083E4C;
-	Sat,  8 Nov 2025 14:26:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EB85783E85;
+	Sat,  8 Nov 2025 14:26:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JB3+QOaT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xc67SQv/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DB8A83E4C; Sat,  8 Nov 2025 14:26:04 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 6A8D283E85; Sat,  8 Nov 2025 14:26:06 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1008783D2E
- for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 14:26:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B67283E61
+ for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 14:26:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3d1bc63d5f0so1008452fac.0
- for <u-boot@lists.denx.de>; Sat, 08 Nov 2025 05:26:01 -0800 (PST)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3e3dac349easo1032018fac.2
+ for <u-boot@lists.denx.de>; Sat, 08 Nov 2025 05:26:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762608361; x=1763213161; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762608363; x=1763213163; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V1RE7Vm+ZDoYP0u5gFKfFHsmpHMA2pF1428i7P0uolA=;
- b=JB3+QOaTJwIhmsR3RDrEklfHtqt1ArTNn+kIqd7dQNjALCwR7Wn0KIX6eQizvu9wOd
- i9AYMKbxyFa+RYE1yWdAp+SI4hP6n0wezQX9PDNH9qrFVhbJRm4h+v8LVtpAyxcF5y8o
- w7g4kJggypAWRQM+un7ljTOMh40mOOUTEAUic=
+ bh=B/nd7GTFcnV30sH9d5oGZRPGwvKGh2hqrHzKv7Igxv0=;
+ b=Xc67SQv/Bj8flz3jmj77aB94Db5kcFsXqkp2UZXw3nGkvH5JyK768kRYugWfWxu4Wc
+ X9/reIqCiIOxxAZ9qlKXP8HLl64UxHv8w0EBf8C42SKUFs5SHJtCr6Hwrst/4IxOhUsI
+ xr6AySXq23JcBHM0XHlsAlMWyYIMd0ZmhP/b0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762608361; x=1763213161;
+ d=1e100.net; s=20230601; t=1762608363; x=1763213163;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=V1RE7Vm+ZDoYP0u5gFKfFHsmpHMA2pF1428i7P0uolA=;
- b=SlN0r5OfYMprcWey4OZmdepJiPAbXjLd0T0L1U7mF0W74zKoUj1WlCSBPl51cPF0aC
- zjvH6Du6uZT3QsgcrKyQDdr237fwYxBPvxmj/MFzvynj2JEu5lu+2TaODP4YBRq8izDw
- W/EHjvLbo1X6RJFMVgDRwc2o4AKU7gWH2Y8klln7sFcfzkWMlB9LdqLMHztUnIeh5io3
- g7SVTbDmbg+iWtvuJ9keO/EZsSPLrdigeHsQHkjBTd9G305MguIiQs2+9ySHeHPzfK5b
- SmG9FPh68pFOw6SAYeb4IO82dKR8V3o/6fTO6NAEMXVyA0RJGW32EqkPMWwepGpTDeiO
- F/SA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUmkrAiLaP1aidM+v5dgcxQanmsumTmdv2G9jV5jnHNmd69uZL5X4MAX3AGu16avnNJAMyZoOg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwyCPFCipMotDXOAoUgnVkJpNTqQDbjmhYGPPIFVGDdbiWiuAgi
- 9N8DPFHa00AXO1EPvz4QQrWxhh9du5YbNdNk+ciXWaTU0/fpYYiJDFXh7l3acdVgjuw=
-X-Gm-Gg: ASbGncttXzBYGZKbSHFrnFGd5+KFOgyAKU56aaUW9E0kE/0n8yMHtRnV6jfhR7zE1Cc
- f5Fy4HdJJsZeUqNJfEATatsCNvRz4Ly3wj3Id4PtXZF2tFtmdcVxeCZohQT4SpSF9NBU8ICMUjF
- qqakEA3oz6IdCQfXrBCNCrIewcU2e/LDw3nmgJ4YxR8V6HDjedKXHFia71mSSBp7Wn68fQAJmxR
- 9B4Yk439FkhDCX2Wc0DR9OqioLX6m6p2OI239t3rabXGeWYWTHLAVov+Rs7v/altxKamiNmKzxF
- iK+OtChVWjadnMbLcdyYEl3cNPLRWgRlHfi9eN7X9pXnupfBYa5VKHdghnjkW1eZjSYekJRDriX
- NtlbLlSiJcxYQ9aZ1N8/qj61yTTF2dJ8FVGqSZpNiQaULpRmvhsdeA3FeVlCXW/8PI4cQjvX5zn
- xYiYRdRzeQrPaajGQeSlvLRlDYovZsdsXl3gl+oOsBEFpgmCfb
-X-Google-Smtp-Source: AGHT+IHAg0XEXX1mQuByPlAJh1kE5NqX5y2sVhVcLzSe35JR6z8eu0tMvfuuzLSXWUv1zBNYut3r2A==
-X-Received: by 2002:a05:6870:82a9:b0:3d2:c24:30fc with SMTP id
- 586e51a60fabf-3e7c2912e0cmr1484812fac.48.1762608360782; 
- Sat, 08 Nov 2025 05:26:00 -0800 (PST)
+ bh=B/nd7GTFcnV30sH9d5oGZRPGwvKGh2hqrHzKv7Igxv0=;
+ b=l6/r9+q24Uxlvoiqmh0H5z1hRbVHWPVQDHU6inIXb2y5FzPXw9o3ktlTh6VnF1XX7h
+ t5+gIprx98XLGiKeVy0lR7RIRdWoWr38ZkC2e7mvSR1PLBr3lSJKxiESsO0pZJ3YBcO/
+ D9eIGmfTk9h4gK3+0/wpQ1q4lcDvCj+ka0eOt50csdgw+KoeFoYwY1Jd9vVkvrKAtDSA
+ VRZbWqCiEGmAX9xzLAsuZ7j1V3E1Zjz2q8L96spq+U8fw6MOWFQwlX8IEMqEFMnJHnBk
+ Y7wSUUD3hnv3pNxz2h/kBFdHzRduYganJ9HofnTw6SbsLUY5lzx3XMbg3Zkwd/hgbL3V
+ RE4g==
+X-Gm-Message-State: AOJu0YxvV83FKp+zxCrxfw6dqQ/PdLLVIMU0f8h+/Ox3X5pp9Bg1R6BX
+ rKK1dLymKjjNCoG/NtaOf0ofLdNy4o9qMXss6nbhEhmMO7OAwukeUKsQ9PEbGaOWTrgMPM8zRz3
+ tggATSKE+OQ==
+X-Gm-Gg: ASbGncudYqed0aKF6KbI7g4BWHVkU2RQSfTshPZo6oQGxgQQzJYvDcDTxxh3lA5gTDa
+ 4iHmDtkJtrZj1U8e/MkvH5ewiBmF3MEfN6e6fRpu0xpyY7fXNJhZgn3aSlOQfCN792Amhuzzu/E
+ tkMLrJua+88w1QWH1jPe4de1QoR5LZsAO4LgA09VBuTvWlqfHtk+mP/U/yQYDYTmbvF7h3SOXZn
+ pDbROo+5cOB+p3ykfQl3wFZBiWR9SWxT9qA96IeDF7rk1xR/CmPlRq0o3s3zFqHzCaf1K7EPhYf
+ 1957L0XpQ1fhOjL8fBFgqn6sWym1cVvCkVA6YtAs+aV+Wo4Z3XzuyIhQJL1+RuFpHaUIL/SJOWx
+ R21WiBjdsTBPlrhxgYwOCKomcDiRTUv7xp+r+fsmMpGUPfBieco1y7nwwvXj8UcqtpZf1vP/t3P
+ WV5jI9DatPxeqegAZ0FZpFymVIxY+Ix2D1ye1m4mwwHH+VWzdv
+X-Google-Smtp-Source: AGHT+IE30uUVR/rMGwr/OGLQvL1aq3LcNnYDkt8Cwj619TtCwoXN4VzGgx5GbBfqe3gEDD1kQxmwsg==
+X-Received: by 2002:a05:6870:3c0f:b0:3d2:5b03:f4a1 with SMTP id
+ 586e51a60fabf-3e7c2b9ec77mr1538402fac.42.1762608362995; 
+ Sat, 08 Nov 2025 05:26:02 -0800 (PST)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e41f13a512sm3581636fac.12.2025.11.08.05.25.59
+ 586e51a60fabf-3e41f13a512sm3581636fac.12.2025.11.08.05.26.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Nov 2025 05:26:00 -0800 (PST)
+ Sat, 08 Nov 2025 05:26:02 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Christian Marangi <ansuelsmth@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Andreas Gnau <andreas.gnau@iopsys.eu>
-In-Reply-To: <20251101004503.2379529-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20251101004503.2379529-1-mikhail.kshevetskiy@iopsys.eu>
-Subject: Re: [PATCH 00/19] arm: airoha: add support for en7523 based boards
-Message-Id: <176260835950.3710933.1024986526033880057.b4-ty@konsulko.com>
-Date: Sat, 08 Nov 2025 07:25:59 -0600
+To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, 
+ Bryan Brattlof <bb@ti.com>, 
+ "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
+Cc: Garrett Giordano <ggiordano@phytec.com>, 
+ Wadim Egorov <w.egorov@phytec.de>, Neha Malcom Francis <n-francis@ti.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Santhosh Kumar K <s-k6@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Devarsh Thakkar <devarsht@ti.com>, Prasanth Babu Mantena <p-mantena@ti.com>, 
+ Judith Mendez <jm@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Dhruva Gole <d-gole@ti.com>, Andrew Davis <afd@ti.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Aashvij Shenai <a-shenai@ti.com>, Peng Fan <peng.fan@nxp.com>
+In-Reply-To: <20251103-am62xeeprom-v3-0-e390779c0fc5@baylibre.com>
+References: <20251103-am62xeeprom-v3-0-e390779c0fc5@baylibre.com>
+Subject: Re: [PATCH v3 0/4] board: ti: am62x: Add EEPROM support and
+ refactor board detection
+Message-Id: <176260836097.3710933.12569013432017170226.b4-ty@konsulko.com>
+Date: Sat, 08 Nov 2025 07:26:00 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,59 +111,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 01 Nov 2025 03:44:44 +0300, Mikhail Kshevetskiy wrote:
+On Mon, 03 Nov 2025 19:40:01 +0100, Guillaume La Roque (TI.com) wrote:
 
-> This patch series adds basic support for the boards based on Airoha
-> EN7523/EN7529/EN7562 SoCs. Due to ATF restrictions these boards are
-> able to run 32-bit OS only.
+> This series adds EEPROM board detection support for AM62x and refactors
+> the board detection code across AM6x family boards to eliminate code
+> duplication.
 > 
-> This patch series adds support for the following hardware:
->  * console UART
->  * ethernet controller/switch
->  * spinand flash (in non-dma mode)
+> The series introduces two new generic functions for AM6x boards:
+> - do_board_detect_am6(): Reads the on-board EEPROM with fallback logic
+>   to alternate I2C addresses
+> - setup_serial_am6(): Sets up the serial number environment variable
+>   from EEPROM data
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[01/19] airoha/an7581: add CONFIG_TARGET_AN7581=y to the defconfig
-        commit: ec0cd37f67bffa3e9729605ecedbb5aa093a5e30
-[02/19] arm/airoha: add support for airoha en7523 SoC family
-        commit: 97aa00e0211d1d0b387e69e4a568ec2ceec7815f
-[03/19] arm: airoha: introduce AN7581 helpers to get SCU and CHIP_SCU regmaps
-        commit: 9aa3e440c6e64b9af6a8e679d08686b9e816eecf
-[04/19] arm: airoha: introduce EN7523 helpers to get SCU and CHIP_SCU regmaps
-        commit: 8e21740b68d06f71b4f9fb13b908a8828c5c7e2d
-[05/19] clk: airoha: use CHIP_SCU regmap helper
-        commit: f8cef0b7435b65b0a33b541c28081b357a76d4c3
-[06/19] clk: airoha: add support for airoha en7523 SoC family
-        commit: ee82f804dd52c62cef0d6e4101a9fd897064409d
-[07/19] configs: airoha: en7523: enable clk support
-        commit: 7a656020d8eb9e51d56f778d81722531e38f295a
-[08/19] reset: airoha: convert to regmap API
-        commit: ea9b7975378a1ab216a28d2851335a3db5c2d445
-[09/19] reset: airoha: unify code using SCU regmap helper
-        commit: f1cae1f63d9a483853fb28e9b74607d27a7ed2cc
-[10/19] dt-bindings: reset: Add reset support for Airoha EN7523
-        commit: 168af8e4f4de77053fa7abc60c8e24aeeff858ec
-[11/19] reset: airoha: add support for airoha en7523 SoC family
-        commit: 1b333e40630f42173270b964ed69be494c2df53a
-[12/19] dts: airoha: en7523: add reset controller support
-        commit: 4dd7df70b8415b98d4bfcf23adb018ac39e3dcd0
-[13/19] configs: airoha: en7523: enable reset controller support
-        commit: 4d6da602e3ee7907dc33cadc225f6ab06117f845
-[14/19] net: airoha: unify code using SCU regmap helper
-        commit: 801a84b1a46ac70f49772a2c7069a33cd30cf720
-[15/19] net: airoha: add support for airoha en7523 SoC family
-        commit: 251e27fcc209f840b4f33615f89e4859ddb44242
-[16/19] dts: airoha: en7523: add ethernet controller support
-        commit: 760063efb04dc997e70dd7fd825c7aab0b1d982e
-[17/19] configs: airoha: en7523: enable ethernet controller support
-        commit: 2ccd4b4efb44134a6ebda9c90aaf64e9573f0b66
-[18/19] dts: airoha: en7523: add spinand flash support
-        commit: 4fabdc415c4a4a2a79d88c1d73e69d3d463ef631
-[19/19] configs: airoha: en7523: enable spinand flashes support
-        commit: 475dec28805bf0c84ce83ec06d452b4ee8b5f9a9
+[1/4] board: ti: common: Add generic AM6x board detection functions
+      commit: 46684bb0369879413015c93c61998ff2986e0617
+[2/4] board: am62x: Add support for reading eeprom data
+      commit: ff1b83c095c2b96b6092099180d9a563702ee256
+[3/4] board: am64x: Use generic AM6x board detection functions
+      commit: ce56e553c31377b9cda7c53e2161c8e02071fc4e
+[4/4] board: am65x: Use generic AM6x board detection function
+      commit: 804b80288ac048f3c4403ddbb48f0944a3b5cc7e
 -- 
 Tom
 
