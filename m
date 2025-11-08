@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7154ECCFA18
-	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:07:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A7FCCCFA18
+	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:08:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7979183E8E;
+	by phobos.denx.de (Postfix) with ESMTP id B35A283EE3;
 	Sat,  8 Nov 2025 14:06:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="NTmN4UKe";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HIZ1GwCZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB5C683B03; Sat,  8 Nov 2025 06:38:35 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id C368783E8E; Sat,  8 Nov 2025 06:38:36 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 246FA83E96
+ by phobos.denx.de (Postfix) with ESMTPS id B9C3883E83
  for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 06:38:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+dang.huynh.mainlining.org@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 567E36027E;
+ by sea.source.kernel.org (Postfix) with ESMTP id 47CD7445B6;
  Sat,  8 Nov 2025 05:38:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 129D7C2BCB2;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2008EC4CEF7;
  Sat,  8 Nov 2025 05:38:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1762580308;
- bh=9JqdiapYmG0uWGtJiqnt4qYavBJGjVy5PB9jYrTmpE4=;
+ bh=ZJQrfdjrMrda6LSSzIBT+j/j+KVn/faL/TNhtFTQ4lU=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=NTmN4UKeFOEzU2WCvsR2VAq7iatCC28PMgJSvprcuz6CpTzN8LfuR9YnwvA9e32wK
- +53A/8wNXeBJZ9kqHR6eJ1vtG/cxxOFxPsx29A/orluTDW2Xw/7JsAQc+4s6/wAjcr
- lkCdjUcxRion7gOCcZIZ5IypvcO78cuDGPGEC9sutGmKGuX30FpoJqex9KgJSUrKPE
- 7O/6L8BNvgo6p2a9YQ5HewOHrh4+dhuG2TxOxnaIj8u7Hmb9/lnSoEpRv21mei+qU3
- kz2nHpj1AlnAkCavq2eRPS6LIOlcgssSTIq+CRP78DyIZbPl2VbTd61cQ3BXFivhyn
- 6tXNVNnmGANWg==
+ b=HIZ1GwCZ4A7VrMscIdRf/wZ3aUh6BM9+W4JT3X4t8gopy+2LyxMCLMMBNczzZzQWh
+ 89wc67b1eC0hC2uT4L7tfESbqnPSJ9ZTex4d06+ZXSWuHUbp0DBtiRP5t/0QTiEQ8g
+ zKS5gnkFb41+3JoyfvOxLI1CN6H6ga/pnsHJWc0epgJO94m6jI5BDpsY+d+FnCTZoe
+ ddV2aPyjLzSBFHX72NxmU7Z0yDHXuO+IT0aTm0Xw9fkDpC3vgdbV5x99XbBcbfQ+sk
+ 1f43MePIbjWky9pKmd00EA3rAb6j+UB5V+9EsKnxlKHl7reMErpexT3wS3talXyodv
+ 4Yq1l5U8tsTvw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 0AB0FCCFA1E;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 18358CD1288;
  Sat,  8 Nov 2025 05:38:28 +0000 (UTC)
 From: Dang Huynh via B4 Relay <devnull+dang.huynh.mainlining.org@kernel.org>
-Date: Sat, 08 Nov 2025 12:38:07 +0700
-Subject: [PATCH v6 11/12] configs: pinetab2-rk3566: Enable video and USB
- keyboard
+Date: Sat, 08 Nov 2025 12:38:08 +0700
+Subject: [PATCH v6 12/12] clk: rockchip: rk3568: Use assigned VPLL clock
+ when possible
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251108-vop2-pt2-v6-11-d04c699262fb@mainlining.org>
+Message-Id: <20251108-vop2-pt2-v6-12-d04c699262fb@mainlining.org>
 References: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
 In-Reply-To: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
 To: u-boot@lists.denx.de
@@ -71,11 +71,11 @@ Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
  Piotr Zalewski <pZ010001011111@proton.me>, 
  Dang Huynh <dang.huynh@mainlining.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1762580305; l=1337;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1762580305; l=1072;
  i=dang.huynh@mainlining.org; s=20250917; h=from:subject:message-id;
- bh=3LybyD7S09myln8IiJzG5hWDfGyKNQvXKWnOZhFSv0k=;
- b=YfuVJPfXPVGxQ2OOySv0Kw2dgEEc4OA+znQsb/QW37DskKfEqKNc5svM6QD4RLI+58ODks4+W
- 8D9SgHosqEiB0nK+VbudY0GCLnC4utaDw6/DP9/lqhnMWbICbfWZ1GF
+ bh=YxEY3Xma9RY2BCcT6VkDypXiPdcF8vPSl/CwSJeinL4=;
+ b=W70RC/N8SgwCL5Xlm+lVkcU2Rn1XqJfcc63smqC92VDuvC7AWCe1+Wi5Y0Pc0f7m0cO1SkBpa
+ qsXn0LFbVNZAGXTCny6GG7OTIr1gvWWRs9yPP5He8VgXFvW8WT7NrIN
 X-Developer-Key: i=dang.huynh@mainlining.org; a=ed25519;
  pk=RyzH4CL4YU/ItXYUurA51EVBidfx4lIy8/E4EKRJCUk=
 X-Endpoint-Received: by B4 Relay for dang.huynh@mainlining.org/20250917
@@ -101,47 +101,31 @@ X-Virus-Status: Clean
 
 From: Dang Huynh <dang.huynh@mainlining.org>
 
-Now that we have VOP2 support, let's enable it and support the
-built in USB keyboard.
+This matches how VPLL is configured under Linux and avoid weird
+behaviors when VPLL is reconfigured under Linux.
 
 Signed-off-by: Dang Huynh <dang.huynh@mainlining.org>
 ---
- configs/pinetab2-rk3566_defconfig | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ drivers/clk/rockchip/clk_rk3568.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/configs/pinetab2-rk3566_defconfig b/configs/pinetab2-rk3566_defconfig
-index 6e5fde591d0..3b8441e3552 100644
---- a/configs/pinetab2-rk3566_defconfig
-+++ b/configs/pinetab2-rk3566_defconfig
-@@ -68,6 +68,7 @@ CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPI_FLASH_SILICONKAISER=y
-+CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
- CONFIG_SPL_PINCTRL=y
-@@ -93,6 +94,7 @@ CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC3=y
- CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_USB_ETHER_ASIX88179=y
-@@ -100,4 +102,12 @@ CONFIG_USB_ETHER_RTL8152=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_VIDEO=y
-+CONFIG_VIDEO_LCD_BOE_TH101MB31IG002_28A=y
-+CONFIG_DISPLAY=y
-+CONFIG_VIDEO_ROCKCHIP=y
-+CONFIG_DISPLAY_ROCKCHIP_HDMI=y
-+CONFIG_DISPLAY_ROCKCHIP_DW_MIPI=y
-+CONFIG_VIDEO_BRIDGE=y
-+CONFIG_VIDEO_REMOVE=y
- CONFIG_ERRNO_STR=y
+diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
+index 533031caead..cd0e24d77dc 100644
+--- a/drivers/clk/rockchip/clk_rk3568.c
++++ b/drivers/clk/rockchip/clk_rk3568.c
+@@ -1820,7 +1820,11 @@ static ulong rk3568_dclk_vop_set_clk(struct rk3568_clk_priv *priv,
+ 			     ((div - 1) << DCLK0_VOP_DIV_SHIFT));
+ 		rk3568_pmu_pll_set_rate(priv, HPLL, div * rate);
+ 	} else if (sel == DCLK_VOP_SEL_VPLL) {
+-		div = DIV_ROUND_UP(RK3568_VOP_PLL_LIMIT_FREQ, rate);
++		if (priv->vpll_hz)
++			div = DIV_ROUND_UP(priv->vpll_hz, rate);
++		else
++			div = DIV_ROUND_UP(RK3568_VOP_PLL_LIMIT_FREQ, rate);
++
+ 		rk_clrsetreg(&cru->clksel_con[conid],
+ 			     DCLK0_VOP_DIV_MASK | DCLK0_VOP_SEL_MASK,
+ 			     (DCLK_VOP_SEL_VPLL << DCLK0_VOP_SEL_SHIFT) |
 
 -- 
 2.51.2
