@@ -4,77 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DD98CCFA13
-	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 17:24:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9874FCCFA13
+	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 20:48:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CB8783D2E;
-	Sat,  8 Nov 2025 18:24:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
+	by phobos.denx.de (Postfix) with ESMTP id D4C8383E8E;
+	Sat,  8 Nov 2025 21:48:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="GKMVJ9l1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E7q4wJbZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 920E783E23; Sat,  8 Nov 2025 18:24:08 +0100 (CET)
-Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [IPv6:2a0b:5c81:1c1::37])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BB5F683E8A; Sat,  8 Nov 2025 21:48:50 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 534CD83B03
- for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 18:24:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF60D83E63
+ for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 21:48:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=iki.fi
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marko.makela@iki.fi
-Received: from kehys.lan (dsl-hkibng22-54f98f-8.dhcp.inet.fi [84.249.143.8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
- server-digest SHA256) (No client certificate requested)
- (Authenticated sender: msmakela)
- by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4d3jTF3ynyz49Py8
- for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 19:24:01 +0200 (EET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
- t=1762622641;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QjU+ppVUk8tXKyE1slYXffrQSCS6v82yM9oAsPojDJs=;
- b=GKMVJ9l1TV7Jw6hnhPJv9D1lTd/Jq0xkXR0X3kNNypBQimH6q5rLUJ9tY3rUWdlK4DkQpM
- D5lhFJpOeUBR/7w2ujtU2J7t68WD2nJDP/cPv4dge7lasGep+5dYMVmLhKpavq9T4grzG+
- tmHPgCyarq6+jMf0BLSKQ4Zseq4Yt9xDDec28uggJzY70auEA1oQHkp/hGJqjFvsPppCj5
- 0WgK+YWiyB7J8SZOmesr9ULprb0xa7d0BaJRQR1nrETpqb4im3OB4e6qf/1pLMzHy/spLf
- 739Qdz3HfNIUqmRFz4A/nzvjv0r/uRC88eTkNmWJ3vhn8rB1ObjF/jcOFcPUJA==
-ARC-Seal: i=1; s=lahtoruutu; d=iki.fi; t=1762622641; a=rsa-sha256; cv=none;
- b=ncA4zw35YEv0JU8Ff7xHVEiE25drtsx/+/+UsaqNkorpmYs9xoOn2u8dqKVQ0rtmWzEmC6
- MI69haINIMddC8qb2/S7DMzZ83EZvG+UP7YE5nlgMbc6AXWox670ufKQHkp18IKuxLCYnb
- mcTM9xB0ZNloJG7mAMBa8PRt0frmey54PII5/To4IFPyJSpkpB2ypRVgq1uXaOKu/kC7hd
- yts5/I9st3C2xf+rDTdnOtwHba9IWcCcJ+XCsdmbr0bV2PXzjry6P5wfgBaOPVXlv5PL1S
- DP/wZZfFhV/m34lZ2Cxch8UBMiwxul7bF+fAU+xTi3XjetIEu4VbPVGuT1q6Rg==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
- s=lahtoruutu; t=1762622641;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QjU+ppVUk8tXKyE1slYXffrQSCS6v82yM9oAsPojDJs=;
- b=haSVYUQ/Ic5+RCl73QT+ivaIwKJJjib3sqj4lYRYTIq5r5LWK48T9QvBZQpih1AAp1ZmX8
- xFNY/kDTe07N2PzZ1rdFK7oXH24d15TniJea8gCFsuA0cZaVJ/3gqKMuLKvbFuM88jlyAa
- EwxskMOSceIiDRK7TSdkcNumBqETQQtO5UTQT4BuyTpOgrcyRHdmcgLAUwlUbmRSWi75dP
- WqjveQBr7HY3aAmromhXiOFrXP7V65nEOBmdiPe3vB5sVcGVGLjwz236/XGCLt6jvGbwrx
- ju7s2gpcyQtKAfA0KVgCqu9TTMihSwUncgyiGrSFEt/St39n9Q9kT/5vcUqoUQ==
-Date: Sat, 8 Nov 2025 19:24:00 +0200
-From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
-To: u-boot@lists.denx.de
-Subject: Re: How to use ECDSA for signature verification?
-Message-ID: <aQ98sHenb3G1MQDi@kehys.lan>
-References: <aO1GvGrXUw-co84_@kehys.lan>
+ spf=pass smtp.mailfrom=d3dx12.xx@gmail.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b626a4cd9d6so288325866b.3
+ for <u-boot@lists.denx.de>; Sat, 08 Nov 2025 12:48:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1762634928; x=1763239728; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bfntuLjqI8ECA91b/L7VUtC3m667vuDWT94iW3acEg0=;
+ b=E7q4wJbZsHa7ZQLRZZDxtIwWuHNAobkrwCsFjbiQS71ZSN1IdWmdXVF02uriEhRjo8
+ zcXuyWFUkYqeEccMiDYKu2rlUjHd2BCiGBbm1HyPu2Gh1erVdysk2hAKS0USjH44vRh5
+ 1PAZRhgV7Y5Uu3luGiPIJL660IJ2npaGcjzJV3jD7suB44aYliJm0EweAxZ6Wm/1HxRP
+ O3lb5+oDBhKtyJbsxfj5CtO+chpxu3cSJuQorXK8F0/ZOm8H7SlA0ryDxjN0LnDOQF3w
+ 9CjjFe4IZe3+ojdYTYlyqqiCJrSL6J8j64x8p3mJMi8nN3Q8fSXJW8g0bh04xWA/CWhD
+ q4yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762634928; x=1763239728;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bfntuLjqI8ECA91b/L7VUtC3m667vuDWT94iW3acEg0=;
+ b=cuNeXcspPqnuS60Ml2NN07/AIDmfWjwGwbV4OTut8755Fh4Ev6KOLqS82eh9/jHyPS
+ G1an9PIbeS8+UQo0Uc5OE2Vjurgkgku1l6umDu6j9/5Un4YAH6ZFajxhOlCmfx4vRJM4
+ fDI3sR5b3i9jb6U6ceHMNy6Fjns5Z3R8bY2gqpFaw7LZPBnKEM5tjHgIGMtZfCvCmEnd
+ mF+6shXPKG9f9u7CZ6AOv0uIz6eZtXDRYUi/rqJGt2rm2aXmo5BE0mzLlNUNtpq+tLMe
+ 8CfmIfc/mgckaCRfrshp5YMkZd3PiAdqIqgR8S0/o2rR8iLf4Zg9gdHFq/1mYcrLaUBQ
+ BL5w==
+X-Gm-Message-State: AOJu0YxnufC4D6ccyn+ipvfcVa/AO0bpj1p1VrUBqft45dt8KHYhDibr
+ UX9/Zc7HSGrj4g2S0bcgcGAOmANbPNDrcnOum06ZCUO05sjHaL3JZMXm
+X-Gm-Gg: ASbGncs8bcB7Ntr8pndG0Q17NcKCoORUYgBaikUepxsrv5R/BXRcj4oWHlXBeAA20pc
+ X/B4E1pzFqPEIgOrKlCq161qrcNIEQC666zIfBqjxx38SYTV1hrPk33BPjbVL6PlIdKiEIfeWB8
+ dn6P2Vk+3YugswWIZdVYx11UuF4fk8n0OWm4/sfsmlNXY7MIUU01Erq0aAOpvd/mFn3FlIxSk2M
+ eRXzMJPLL6/HtEv+FdQ4hODvrxqr39fref/B5bZvYftAJQkKqbFcD7nnzVp2vdKL9m/6e0X0b/C
+ 5WTZioJtVoZrhghx7GSi/zQnMcRig/nJJnPrkaRv811ZqOybA8ZuzWrfvCn7FtJKS7/ValSLCDC
+ +m8EX1uiQ96qgyBS8+8XwRzVz6LaCdlGVWvr5qkl23jo7rjouS0njsfAIKGY20sS872/92M3UOG
+ RAbghZ+IwKxi7IfEkxuBC+7Cs2
+X-Google-Smtp-Source: AGHT+IFYa3bB5pd84lZg78+492e/foVOVKHJC/XtgKzSs6iBRRQLG6qawRKxXApu/CbGT0rZA6XsqQ==
+X-Received: by 2002:a17:907:9482:b0:b5c:74fb:b618 with SMTP id
+ a640c23a62f3a-b72e02ca213mr351382066b.12.1762634928203; 
+ Sat, 08 Nov 2025 12:48:48 -0800 (PST)
+Received: from [127.0.0.1] (B-228.ahl.uni-linz.ac.at. [193.171.46.128])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b72bf9bd3d1sm642067366b.58.2025.11.08.12.48.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 08 Nov 2025 12:48:47 -0800 (PST)
+From: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+Subject: [PATCH 0/2] Fixes for Clang builds for AArch64, improve
+ CROSS_COMPILE handling
+Date: Sat, 08 Nov 2025 21:48:45 +0100
+Message-Id: <20251108-clang-cross-fixes-v1-0-ea6c4282844a@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <aO1GvGrXUw-co84_@kehys.lan>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAK2sD2kC/x2LQQqAMAzAviI9W9gK6vAr4sHNqgWZsoII4t8tH
+ pOQB5SLsEJfPVD4EpUjG/i6grRNeWWU2RjIUeO9C5h2s5jKoYqL3KzouzkGR8QUW7DvLPwH24b
+ xfT8dt4izYwAAAA==
+X-Change-ID: 20251108-clang-cross-fixes-17db8022e2b6
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,162 +105,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Initially fix the inconsistency reported in reply to the previous
+series[1] and also make sure AArch64 images can be built with latest
+Clang versions by guarding AArch32-specific options behind extra
+config checks.
 
-I am new to u-boot, please bear with me. I got CONFIG_FIT_SIGNATURE=y to 
-work with the RSA algorithm, but not with ECDSA.
+Tested qemu_arm_defconfig and qemu_arm64_defconfig with Clang 21,
+mainline (to be 22) ce7f9f9c and also Clang 18 (for AArch64 only, as I
+have not managed to build an AArch32 image with clang-18).
 
-My two main questions are:
+Please review these patches, feel free to suggest other parts of the
+LLVM/Clang compatibility task I should take a look at.
 
-Is CONFIG_ECDSA_VERIFY only implemented for the two targets:
-rom_api_ops in arch/arm/mach-stm32mp/ecdsa_romapi.c
-cptra_ecdsa_ops in drivers/crypto/aspeed/cptra_ecdsa.c. 
+Thank you!
 
-Is it feasible to support something more modern than RSA signatures on a 
-reasonably high-end target, such as ARMv8? Are there any suggestions or 
-git commits that you would suggest as a reference?
+Signed-off-by: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+---
+Dmitrii Sharshakov (2):
+      build: fix prefix for Clang when CROSS_COMPILE is an absolute path
+      arch: arm: fix AArch64 builds with Clang 21+
 
-Mon, Oct 13, 2025 at 09:36:50PM +0300, Marko Mäkelä wrote:
->Hi all,
->
->Yesterday, I successfully built the u-boot master branch with 
->CONFIG_FIT_SIGNATURE=y and CONFIG_RSA=y and got the signature 
->verification working with sha256,rsa2048.
->
->Today, I wanted to try out CONFIG_ECDSA=y, but I am facing some 
->trouble.  I am generating the key and trying to add its public part to 
->the device tree blob as with fdt_add_pubkey as follows:
+ Makefile           |  2 +-
+ arch/arm/config.mk | 11 ++++++-----
+ 2 files changed, 7 insertions(+), 6 deletions(-)
+---
+base-commit: 928af44314a1a086e946ef3c0901d40bdb3e19a9
+change-id: 20251108-clang-cross-fixes-17db8022e2b6
 
-I got a bit further with this, using the algorithm sha256,ecdsa256.
+Best regards,
+-- 
+Dmitrii Sharshakov <d3dx12.xx@gmail.com>
 
-With a patch and some work-arounds, I think I understood the host-side 
-workflow. However, the signature check on my target (TI Sitara am62x) is 
-failing.
-
-Unlike with RSA, the mkimage command expects the ECDSA private key in a 
-file like dev.pem, not dev.key. I successfully created a private key and 
-constructed a signed FIT image with the following commands:
-
-openssl ecparam -name prime256v1 -genkey -noout -out dev.pem
-mkimage -k . -f fitImage.its fitImage
-
-I verified the presence of a signature by running the following command, 
-which produced the signature in a "value" subnode:
-
-dtc -I dtb fitImage|grep -A10 signature
-
-For the algorithm sha256,ecdsa256 that I chose, the fdt_add_pubkey tool 
-requires a patch to avoid SIGSEGV, which I am copying below from my 
-previous message:
-
-diff --git a/tools/fdt_add_pubkey.c b/tools/fdt_add_pubkey.c
-index 5582d7a8efe..4f7028cc15c 100644
---- a/tools/fdt_add_pubkey.c
-+++ b/tools/fdt_add_pubkey.c
-@@ -73,9 +73,10 @@ static void reset_info(struct image_sign_info *info)
-  	info->keyname = keyname;
-  	info->name = algo_name;
-  	info->require_keys = require_keys;
-+	info->checksum = image_get_checksum_algo(algo_name);
-  	info->crypto = image_get_crypto_algo(algo_name);
-  
--	if (!info->crypto) {
-+	if (!info->checksum || !info->crypto) {
-  		fprintf(stderr, "Unsupported signature algorithm '%s'\n",
-  			algo_name);
-  		exit(EXIT_FAILURE);
-
-Unlike with RSA, fdt_add_pubkey does not accept a public key:
-
-fdt_add_pubkey: Cannot add public key to FIT blob: Unknown error -5
-
-I am able to work around this by invoking the tool on a _private_ key 
-dev.pem that the fitImage had been signed with.
-
-I don't know if there is a cleaner way, but here's how I am embedding 
-the public key to the image. I first build U-boot from the scratch, 
-modify the generated u-boot.dtb, and finally rebuild to have the 
-modified DTB included:
-
-make clean
-make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- ...
-cp u-boot.dtb u-boot-pubkey.dtb
-fdt_add_pubkey -a sha256,ecdsa256 -n dev -k . -r conf u-boot-pubkey.dtb
-fit_check_sign -f fitImage -k u-boot-pubkey.dtb
-make EXT_DTB=u-boot-pubkey.dtb \
--j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- ...
-
-Even though fit_check_sign passes on the host system, the signature 
-check would fail on the target system (TI AM62x) as follows:
-
-8304957 bytes read in 346 ms (22.9 MiB/s)
-## Executing script at 90000000
-sha256,ecdsa256:dev-  error!
-Unknown signature algorithm for '<NULL>' hash node in 'conf-1' config node
-Failed to verify required signature 'dev'
-Boot failed (err=1)
-
-It turns out that for ECDSA signature verification, at least three 
-configuration options will be needed:
-
-CONFIG_FIT_SIGNATURE=y
-CONFIG_ECDSA=y
-CONFIG_ECDSA_VERIFY=y
-
-Rebuilding with CONFIG_ECDSA_VERIFY=y changed the error message to the 
-following:
-
-sha256,ecdsa256:dev-  error!
-Verification failed for '<NULL>' hash node in 'conf-1' config node
-Failed to verify required signature 'dev'
-
-I did not attach a debugger to the target, but I am rather sure that the 
-verification fails because of the following:
-
-static int ecdsa_verify_hash(struct udevice *dev,
-			     const struct image_sign_info *info,
-			     const void *hash, const void *sig, uint sig_len)
-{
-	const struct ecdsa_ops *ops = device_get_ops(dev);
-	const struct checksum_algo *algo = info->checksum;
-	struct ecdsa_public_key key;
-	int sig_node, key_node, ret;
-
-	if (!ops || !ops->verify)
-		return -ENODEV;
-
-I found only two definitions of ecdsa_ops, and it does not look like 
-either one should be available on my target system.
-
-The cosmetic error <NULL> in the error message occurs because the local 
-variable "noffset" in fit_image_verify_sig() will only be valid if the 
-for loop is executing "goto error". This bug is tricky to fix, because 
-as far as I understand, we want to allow multiple signatures to be 
-verified.
-
-One more thing that I noticed is that the function fit_check_sign() has 
-an unused parameter:
-
-diff --git a/tools/fit_check_sign.c b/tools/fit_check_sign.c
-index ab3266aff20..3d1e66f2b58 100644
---- a/tools/fit_check_sign.c
-+++ b/tools/fit_check_sign.c
-@@ -80,7 +80,7 @@ int main(int argc, char **argv)
-  			return EXIT_FAILURE;
-  	}
-  	image_set_host_blob(key_blob);
--	ret = fit_check_sign(fit_blob, key_blob, config_name);
-+	ret = fit_check_sign(fit_blob, NULL, config_name);
-  	if (!ret) {
-  		ret = EXIT_SUCCESS;
-  		fprintf(stderr, "Signature check OK\n");
-
-The above patch shows the only caller of the function. It also shows 
-that the caller is invoking image_set_host_blob() on that parameter, 
-which is why the check is able to work. Maybe that call should be made 
-part of fit_check_sign() itself? Anyway, this code does not execute on 
-the target.
-
-With best regards,
-
-	Marko Mäkelä
