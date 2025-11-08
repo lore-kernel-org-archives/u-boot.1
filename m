@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E69D3CCFA13
-	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 15:02:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DD98CCFA13
+	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 17:24:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0128683E4C;
-	Sat,  8 Nov 2025 16:02:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6CB8783D2E;
+	Sat,  8 Nov 2025 18:24:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K/W2xjtF";
+	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="GKMVJ9l1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FD0783E61; Sat,  8 Nov 2025 16:01:59 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 920E783E23; Sat,  8 Nov 2025 18:24:08 +0100 (CET)
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [IPv6:2a0b:5c81:1c1::37])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5F8483DF3
- for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 16:01:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 534CD83B03
+ for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 18:24:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-4439ecf6004so843937b6e.1
- for <u-boot@lists.denx.de>; Sat, 08 Nov 2025 07:01:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762614115; x=1763218915; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=V/bQi2pmzn95cZtu844o8W9U5h0kHDutH7rPrbW9jaM=;
- b=K/W2xjtF6If69bs03EdqexJbbPLZdiMTuJiNrJAmV/hI02mRJUS6GNfcoAcuWIHe3D
- 1qXdAgATm0qZKKA6pLfCTB7YHlbcsBuSztZS82suSXjwjUS0OPqmu+S1TaM+AIFyQK2J
- +m1uwViX5zRrigTeEkOpSdc8fLWoM6PrKis6c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762614115; x=1763218915;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=V/bQi2pmzn95cZtu844o8W9U5h0kHDutH7rPrbW9jaM=;
- b=bhi9bbJOHH1eG7LNEuRVgGMaRoVDb6lR8d+n/4eHsJ/C4AvwO4CHv7svnWtBxHZrMK
- SRR0VAXtg0VfFVMxuHssVYEXYRWrN2Abl94dy1wioZBI24O+aCJZYGEBo72x4Yw244EO
- DZqUv84NDbcdxwK3StmaSxD7V4nCr0/uIqN77u2ebq2CxLbKNF3gXQ96VbXStx4hrMO6
- IS7uzpKhjUe9cymRsYfLzobFwVwqX0HMSsLxuKtOBybJYoYUMvRSLzKtrj2DBC1VMPuL
- uwoDairIyCOudRMjReAqeifA7UgeGyTD5p0R/NvoadVneovAR6c+p+a2AdzTRsABovfH
- q+/A==
-X-Gm-Message-State: AOJu0YzBbnTX3ZW8w08tHVJZXkFtvjTqB8W/qwA/O4a7Fhw1WpeKdyJz
- W33mL6oIIuqg8FGl+938EqysrT9W/j2j/xAWuRzVtaRgGnN+2UZKQr4KK4wklGPSLMNjE8sRAxf
- mTgqb7t5K9Q==
-X-Gm-Gg: ASbGncvBEzzAAGbv0fXkg2HweCTMVfsXQ0fZ1yFuCnk/Dy9KTxsJ5P4c4mUzugwO0mH
- VD/vxZhA6trprUZ6BLU9Iwhtp90JoOmcEGxJqfRr6W3STRQuMTbwumiAJZiEBoZlZKBgTWdOtF2
- qvpNTFb3ev9E1a+OwFTUKK5+AGc/XJxLYuWspIuNers9Dg0lP5OkxQYhjXgVNNIZxFoLx1/FhjG
- c6wbJpP7rUyMOwQ6jCxoqBppTnvDVsQHpPYIXTK5oFV5jGiVjwxcKliSfwCareY1jr8xcaOSNfX
- aiD3HiSEAuwxDge/x6nIn/ztb+UW0vMcn6sixDik6+hK1u5adTc6hK3QB8orDhlYYJQfilN5N/2
- O3G8ybGc6wSgvgUUVT1Cu6BoBbKrNjepdk80raQfVkWWfyEHEWVsZr+1VI0BNIKwoXRFFqussnb
- pvgKy9bC2BS3Vw+d35StciTZJo6OGGnHmKKYWn7N9PxCN6pLgwFQ==
-X-Google-Smtp-Source: AGHT+IH7ihw+M0hIOr6DLPri51xPRpVs/LWq+JFEYAWxTnCc5Gll8MeWy23t1WzHQ/jCAAOKn4i9xw==
-X-Received: by 2002:a05:6808:1903:b0:44f:9b51:2256 with SMTP id
- 5614622812f47-4501c746d03mr2719957b6e.10.1762614115364; 
- Sat, 08 Nov 2025 07:01:55 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f0f5ea20sm3102955a34.13.2025.11.08.07.01.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Nov 2025 07:01:54 -0800 (PST)
-Date: Sat, 8 Nov 2025 09:01:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v2 0/2] 'part name' subcommand and some robustification
-Message-ID: <20251108150152.GJ6688@bill-the-cat>
-References: <20251020121100.1742812-1-ravi@prevas.dk>
- <20251107201927.GA2243313@bill-the-cat> <87pl9tcry1.fsf@prevas.dk>
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng22-54f98f-8.dhcp.inet.fi [84.249.143.8])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
+ server-digest SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4d3jTF3ynyz49Py8
+ for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 19:24:01 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
+ t=1762622641;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QjU+ppVUk8tXKyE1slYXffrQSCS6v82yM9oAsPojDJs=;
+ b=GKMVJ9l1TV7Jw6hnhPJv9D1lTd/Jq0xkXR0X3kNNypBQimH6q5rLUJ9tY3rUWdlK4DkQpM
+ D5lhFJpOeUBR/7w2ujtU2J7t68WD2nJDP/cPv4dge7lasGep+5dYMVmLhKpavq9T4grzG+
+ tmHPgCyarq6+jMf0BLSKQ4Zseq4Yt9xDDec28uggJzY70auEA1oQHkp/hGJqjFvsPppCj5
+ 0WgK+YWiyB7J8SZOmesr9ULprb0xa7d0BaJRQR1nrETpqb4im3OB4e6qf/1pLMzHy/spLf
+ 739Qdz3HfNIUqmRFz4A/nzvjv0r/uRC88eTkNmWJ3vhn8rB1ObjF/jcOFcPUJA==
+ARC-Seal: i=1; s=lahtoruutu; d=iki.fi; t=1762622641; a=rsa-sha256; cv=none;
+ b=ncA4zw35YEv0JU8Ff7xHVEiE25drtsx/+/+UsaqNkorpmYs9xoOn2u8dqKVQ0rtmWzEmC6
+ MI69haINIMddC8qb2/S7DMzZ83EZvG+UP7YE5nlgMbc6AXWox670ufKQHkp18IKuxLCYnb
+ mcTM9xB0ZNloJG7mAMBa8PRt0frmey54PII5/To4IFPyJSpkpB2ypRVgq1uXaOKu/kC7hd
+ yts5/I9st3C2xf+rDTdnOtwHba9IWcCcJ+XCsdmbr0bV2PXzjry6P5wfgBaOPVXlv5PL1S
+ DP/wZZfFhV/m34lZ2Cxch8UBMiwxul7bF+fAU+xTi3XjetIEu4VbPVGuT1q6Rg==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=lahtoruutu; t=1762622641;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QjU+ppVUk8tXKyE1slYXffrQSCS6v82yM9oAsPojDJs=;
+ b=haSVYUQ/Ic5+RCl73QT+ivaIwKJJjib3sqj4lYRYTIq5r5LWK48T9QvBZQpih1AAp1ZmX8
+ xFNY/kDTe07N2PzZ1rdFK7oXH24d15TniJea8gCFsuA0cZaVJ/3gqKMuLKvbFuM88jlyAa
+ EwxskMOSceIiDRK7TSdkcNumBqETQQtO5UTQT4BuyTpOgrcyRHdmcgLAUwlUbmRSWi75dP
+ WqjveQBr7HY3aAmromhXiOFrXP7V65nEOBmdiPe3vB5sVcGVGLjwz236/XGCLt6jvGbwrx
+ ju7s2gpcyQtKAfA0KVgCqu9TTMihSwUncgyiGrSFEt/St39n9Q9kT/5vcUqoUQ==
+Date: Sat, 8 Nov 2025 19:24:00 +0200
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: u-boot@lists.denx.de
+Subject: Re: How to use ECDSA for signature verification?
+Message-ID: <aQ98sHenb3G1MQDi@kehys.lan>
+References: <aO1GvGrXUw-co84_@kehys.lan>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iHoUbJCLXSa3KtEW"
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
 Content-Disposition: inline
-In-Reply-To: <87pl9tcry1.fsf@prevas.dk>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <aO1GvGrXUw-co84_@kehys.lan>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,70 +91,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
 
---iHoUbJCLXSa3KtEW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I am new to u-boot, please bear with me. I got CONFIG_FIT_SIGNATURE=y to 
+work with the RSA algorithm, but not with ECDSA.
 
-On Sat, Nov 08, 2025 at 01:02:14AM +0100, Rasmus Villemoes wrote:
-> On Fri, Nov 07 2025, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Mon, Oct 20, 2025 at 02:10:58PM +0200, Rasmus Villemoes wrote:
-> >
-> >> Implement a "part name" subcommand, mirroring the existing "part
-> >> number" subcommand.
-> >>=20
-> >> In the discussion for v1 of that, it came up that there's a bit of
-> >> inconsistency in how much and what one can assume to be initialized in
-> >> 'struct disk_partition' after a successful call of one of the
-> >> get_info* family of functions. The new patch 1/2 tries to consolidate
-> >> that by making sure all ->get_info invocations go through a common
-> >> helper that at least always initializes the string members.
-> >>=20
-> >> Rasmus Villemoes (2):
-> >>   disk/part.c: ensure strings in struct disk_partition are valid after
-> >>     successful get_info
-> >>   cmd/part.c: implement "part name" subcommand
-> >>=20
-> >>  cmd/gpt.c              |  4 +--
-> >>  cmd/part.c             | 16 ++++++++++-
-> >>  disk/part.c            | 62 ++++++++++++++++++++++++------------------
-> >>  doc/usage/cmd/part.rst | 13 +++++++++
-> >>  include/part.h         | 16 +++++++++++
-> >>  5 files changed, 81 insertions(+), 30 deletions(-)
-> >
-> > This leads to some of the bootstd tests failing in CI, unfortunately.
->=20
-> Do you have a link?
+My two main questions are:
 
-Right, sorry:
-https://source.denx.de/u-boot/u-boot/-/jobs/1292597
+Is CONFIG_ECDSA_VERIFY only implemented for the two targets:
+rom_api_ops in arch/arm/mach-stm32mp/ecdsa_romapi.c
+cptra_ecdsa_ops in drivers/crypto/aspeed/cptra_ecdsa.c. 
 
-> Also, how exactly should one run those bootstd tests? When I just build
-> sandbox_defconfig and do 'ut bootstd', I get 130 failures, so I assume I
-> need to do something extra.
+Is it feasible to support something more modern than RSA signatures on a 
+reasonably high-end target, such as ARMv8? Are there any suggestions or 
+git commits that you would suggest as a reference?
 
-So, you want to run it through pytest rather than directly, I find:
-https://docs.u-boot.org/en/latest/develop/pytest/usage.html
-And then
-https://lore.kernel.org/all/20251029143346.1320868-1-kory.maincent@bootlin.=
-com
-has the full rather than partial list of host requirements, if you don't
-want to grab the docker container CI uses and run inside that.
+Mon, Oct 13, 2025 at 09:36:50PM +0300, Marko Mäkelä wrote:
+>Hi all,
+>
+>Yesterday, I successfully built the u-boot master branch with 
+>CONFIG_FIT_SIGNATURE=y and CONFIG_RSA=y and got the signature 
+>verification working with sha256,rsa2048.
+>
+>Today, I wanted to try out CONFIG_ECDSA=y, but I am facing some 
+>trouble.  I am generating the key and trying to add its public part to 
+>the device tree blob as with fdt_add_pubkey as follows:
 
---=20
-Tom
+I got a bit further with this, using the algorithm sha256,ecdsa256.
 
---iHoUbJCLXSa3KtEW
-Content-Type: application/pgp-signature; name="signature.asc"
+With a patch and some work-arounds, I think I understood the host-side 
+workflow. However, the signature check on my target (TI Sitara am62x) is 
+failing.
 
------BEGIN PGP SIGNATURE-----
+Unlike with RSA, the mkimage command expects the ECDSA private key in a 
+file like dev.pem, not dev.key. I successfully created a private key and 
+constructed a signed FIT image with the following commands:
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaQ9bWAAKCRAr4qD1Cr/k
-ClUYAQCUT8v2CARH1Dx0sneKccPYFq1+lYuu7oxANrqwsxOxcwD/YzXYa/MnVb1E
-CWqWg7TWraBt0IuBcqtDz/bckb/DjwM=
-=eyUk
------END PGP SIGNATURE-----
+openssl ecparam -name prime256v1 -genkey -noout -out dev.pem
+mkimage -k . -f fitImage.its fitImage
 
---iHoUbJCLXSa3KtEW--
+I verified the presence of a signature by running the following command, 
+which produced the signature in a "value" subnode:
+
+dtc -I dtb fitImage|grep -A10 signature
+
+For the algorithm sha256,ecdsa256 that I chose, the fdt_add_pubkey tool 
+requires a patch to avoid SIGSEGV, which I am copying below from my 
+previous message:
+
+diff --git a/tools/fdt_add_pubkey.c b/tools/fdt_add_pubkey.c
+index 5582d7a8efe..4f7028cc15c 100644
+--- a/tools/fdt_add_pubkey.c
++++ b/tools/fdt_add_pubkey.c
+@@ -73,9 +73,10 @@ static void reset_info(struct image_sign_info *info)
+  	info->keyname = keyname;
+  	info->name = algo_name;
+  	info->require_keys = require_keys;
++	info->checksum = image_get_checksum_algo(algo_name);
+  	info->crypto = image_get_crypto_algo(algo_name);
+  
+-	if (!info->crypto) {
++	if (!info->checksum || !info->crypto) {
+  		fprintf(stderr, "Unsupported signature algorithm '%s'\n",
+  			algo_name);
+  		exit(EXIT_FAILURE);
+
+Unlike with RSA, fdt_add_pubkey does not accept a public key:
+
+fdt_add_pubkey: Cannot add public key to FIT blob: Unknown error -5
+
+I am able to work around this by invoking the tool on a _private_ key 
+dev.pem that the fitImage had been signed with.
+
+I don't know if there is a cleaner way, but here's how I am embedding 
+the public key to the image. I first build U-boot from the scratch, 
+modify the generated u-boot.dtb, and finally rebuild to have the 
+modified DTB included:
+
+make clean
+make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- ...
+cp u-boot.dtb u-boot-pubkey.dtb
+fdt_add_pubkey -a sha256,ecdsa256 -n dev -k . -r conf u-boot-pubkey.dtb
+fit_check_sign -f fitImage -k u-boot-pubkey.dtb
+make EXT_DTB=u-boot-pubkey.dtb \
+-j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- ...
+
+Even though fit_check_sign passes on the host system, the signature 
+check would fail on the target system (TI AM62x) as follows:
+
+8304957 bytes read in 346 ms (22.9 MiB/s)
+## Executing script at 90000000
+sha256,ecdsa256:dev-  error!
+Unknown signature algorithm for '<NULL>' hash node in 'conf-1' config node
+Failed to verify required signature 'dev'
+Boot failed (err=1)
+
+It turns out that for ECDSA signature verification, at least three 
+configuration options will be needed:
+
+CONFIG_FIT_SIGNATURE=y
+CONFIG_ECDSA=y
+CONFIG_ECDSA_VERIFY=y
+
+Rebuilding with CONFIG_ECDSA_VERIFY=y changed the error message to the 
+following:
+
+sha256,ecdsa256:dev-  error!
+Verification failed for '<NULL>' hash node in 'conf-1' config node
+Failed to verify required signature 'dev'
+
+I did not attach a debugger to the target, but I am rather sure that the 
+verification fails because of the following:
+
+static int ecdsa_verify_hash(struct udevice *dev,
+			     const struct image_sign_info *info,
+			     const void *hash, const void *sig, uint sig_len)
+{
+	const struct ecdsa_ops *ops = device_get_ops(dev);
+	const struct checksum_algo *algo = info->checksum;
+	struct ecdsa_public_key key;
+	int sig_node, key_node, ret;
+
+	if (!ops || !ops->verify)
+		return -ENODEV;
+
+I found only two definitions of ecdsa_ops, and it does not look like 
+either one should be available on my target system.
+
+The cosmetic error <NULL> in the error message occurs because the local 
+variable "noffset" in fit_image_verify_sig() will only be valid if the 
+for loop is executing "goto error". This bug is tricky to fix, because 
+as far as I understand, we want to allow multiple signatures to be 
+verified.
+
+One more thing that I noticed is that the function fit_check_sign() has 
+an unused parameter:
+
+diff --git a/tools/fit_check_sign.c b/tools/fit_check_sign.c
+index ab3266aff20..3d1e66f2b58 100644
+--- a/tools/fit_check_sign.c
++++ b/tools/fit_check_sign.c
+@@ -80,7 +80,7 @@ int main(int argc, char **argv)
+  			return EXIT_FAILURE;
+  	}
+  	image_set_host_blob(key_blob);
+-	ret = fit_check_sign(fit_blob, key_blob, config_name);
++	ret = fit_check_sign(fit_blob, NULL, config_name);
+  	if (!ret) {
+  		ret = EXIT_SUCCESS;
+  		fprintf(stderr, "Signature check OK\n");
+
+The above patch shows the only caller of the function. It also shows 
+that the caller is invoking image_set_host_blob() on that parameter, 
+which is why the check is able to work. Maybe that call should be made 
+part of fit_check_sign() itself? Anyway, this code does not execute on 
+the target.
+
+With best regards,
+
+	Marko Mäkelä
