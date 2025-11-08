@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F28CCFA13
-	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:06:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 856BCCCFA13
+	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5223383E86;
+	by phobos.denx.de (Postfix) with ESMTP id 903DA83E92;
 	Sat,  8 Nov 2025 14:06:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kj38rFp+";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QFPox9cp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1876E83E8A; Sat,  8 Nov 2025 06:38:33 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 41CB383E86; Sat,  8 Nov 2025 06:38:33 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59B5183E70
+ by phobos.denx.de (Postfix) with ESMTPS id 72B9C83E85
  for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 06:38:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+dang.huynh.mainlining.org@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id BDCF1416DA;
+ by tor.source.kernel.org (Postfix) with ESMTP id E33D560273;
  Sat,  8 Nov 2025 05:38:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 984D8C116D0;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B0372C19423;
  Sat,  8 Nov 2025 05:38:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1762580307;
- bh=mppM/m/Ggacp0ymL4g6Uc730ia4VuxrO646K0/WudfY=;
+ bh=AUFPTQHnUK8AczDzWeO4SqAbZ09m1DK+0/iq5S92mdQ=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=kj38rFp+56Mzaa500obewoz5IvCqLU1sDdzXanzPsHh+NejDhUMGFlYwXkKbGDHix
- QL1UDnrXDorYU/Hhk46OByZkGrAZWNQXMb1i3stGcEnQZ/OgliptCchW3cQrW17PmL
- gmoQ3Ruq5aFgZefB9LnZyqPND9bu3EtBgGSXSoKBQMAHrYuen6VlssjEnR1A3CmhBI
- fk3o0Pir6HXz1cUXcu0hSKk8q3NIW7pqVpMIg9ngkKpQh7RfZq6D8afqMQplcVesI+
- 7hzC7iU4QmR/By0wqAMtZRTpgkmSV+GWHE9UXwXs7hvwppYeowecElct2DpE+F2SUO
- AEGaObbke8C9Q==
+ b=QFPox9cpHETs+H7OXWI6xetUVDvIZyO04866U93nyVatf/Q43YflZOrPnEknnPkqT
+ +uzvBKR57NF3kEBizhUumphGcabhBEd7SR7n9CjFJSceMSXyFZauFlcdSoeiQN7scc
+ jxF+fA/sPbXo1czq+W8RemJRXlDZ7fP1E9deBsmHNTO9IRy9t7hNLwegPnaI75BK2c
+ GoBqSK/h+uhIWGgLkI4+L7waBhlFogtQTHCkuXlHaxBeIqE4NwuYUmerffwEb0f24W
+ Ty5SdQC34bOzKn6yeTWwW2XWX7Ig5beidmAPa/ANauDSxa3sZyhgcFHks1xho4kJcx
+ /jW0TGFMy0wqw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 91549CCFA1D;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id A0693CD11C2;
  Sat,  8 Nov 2025 05:38:27 +0000 (UTC)
 From: Dang Huynh via B4 Relay <devnull+dang.huynh.mainlining.org@kernel.org>
-Date: Sat, 08 Nov 2025 12:38:00 +0700
-Subject: [PATCH v6 04/12] video: rockchip: dw-mipi-dsi: Add
- get_display_timing support
+Date: Sat, 08 Nov 2025 12:38:01 +0700
+Subject: [PATCH v6 05/12] video: Add BOE TH101MB31IG002-28A MIPI-DSI panel
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251108-vop2-pt2-v6-4-d04c699262fb@mainlining.org>
+Message-Id: <20251108-vop2-pt2-v6-5-d04c699262fb@mainlining.org>
 References: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
 In-Reply-To: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
 To: u-boot@lists.denx.de
@@ -72,11 +71,11 @@ Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
  Piotr Zalewski <pZ010001011111@proton.me>, 
  Dang Huynh <dang.huynh@mainlining.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1762580305; l=2654;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1762580305; l=9620;
  i=dang.huynh@mainlining.org; s=20250917; h=from:subject:message-id;
- bh=iUQXySfSUyJ+Buba3j5JH3Z53jTKZsMqDkzdlnhApc8=;
- b=tDCCT/IsbMPUg3cCS6B6sD+4NX32AyEvaKk1U8g/wjW3ZrRPqre3o9sX44qFAHouGd20u5HZK
- eu+Fwir+i53B8k4R92g8j8Au4gP+8LVek4IFMeHLzE360GPR4BGxNtf
+ bh=LVjK5ZM3mh8NFyXfUIVNddy6ApWOpG26Riu8e1cbYjg=;
+ b=4PJqM5zlwRRQ0yoNYK3WM5Lc4KYdO7vD8/92UR3ZnZDLedkkuafGoOo5UkfiHJhukAdRVvmbE
+ S785z7DyKojCHEJC2OUW3nsMnF7wFdXDxYdO9OdjXR9AeYY4xXyy507
 X-Developer-Key: i=dang.huynh@mainlining.org; a=ed25519;
  pk=RyzH4CL4YU/ItXYUurA51EVBidfx4lIy8/E4EKRJCUk=
 X-Endpoint-Received: by B4 Relay for dang.huynh@mainlining.org/20250917
@@ -102,78 +101,292 @@ X-Virus-Status: Clean
 
 From: Dang Huynh <dang.huynh@mainlining.org>
 
-This allows video drivers to obtain display timings from the video
-bridge.
+BOE TH101MB31IG002-28A is a MIPI-DSI panel used in the Pine64
+PineTab2.
 
 Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Signed-off-by: Dang Huynh <dang.huynh@mainlining.org>
 ---
- drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 19 +++++++++++++++----
- 1 file changed, 15 insertions(+), 4 deletions(-)
+ drivers/video/Kconfig                  |  10 ++
+ drivers/video/Makefile                 |   1 +
+ drivers/video/boe-th101mb31ig002-28a.c | 236 +++++++++++++++++++++++++++++++++
+ 3 files changed, 247 insertions(+)
 
-diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-index 95e825eb3d6..d21ea7953a6 100644
---- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-+++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-@@ -224,6 +224,7 @@ struct dw_rockchip_dsi_priv {
- 	struct mipi_dsi_device device;
- 	void __iomem *base;
- 	struct udevice *panel;
-+	struct display_timing timings;
- 	void __iomem *grf;
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index b5777da5218..aeb3c56ec09 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -530,6 +530,16 @@ config VIDEO_BCM2835
+ 	  that same resolution (or as near as possible) and 32bpp depth, so
+ 	  that U-Boot can access it with full colour depth.
  
- 	/* Optional external dphy */
-@@ -709,7 +710,7 @@ static int dw_mipi_dsi_rockchip_attach(struct udevice *dev)
- 	struct dw_rockchip_dsi_priv *priv = dev_get_priv(dev);
- 	struct mipi_dsi_device *device = &priv->device;
- 	struct mipi_dsi_panel_plat *mplat;
--	struct display_timing timings;
-+	struct display_timing *timings = &priv->timings;
- 	int ret;
- 
- 	ret = uclass_first_device_err(UCLASS_PANEL, &priv->panel);
-@@ -724,10 +725,10 @@ static int dw_mipi_dsi_rockchip_attach(struct udevice *dev)
- 	device->format = mplat->format;
- 	device->mode_flags = mplat->mode_flags;
- 
--	ret = panel_get_display_timing(priv->panel, &timings);
-+	ret = panel_get_display_timing(priv->panel, timings);
- 	if (ret) {
- 		ret = ofnode_decode_display_timing(dev_ofnode(priv->panel),
--						   0, &timings);
-+						   0, timings);
- 		if (ret) {
- 			dev_err(dev, "decode display timing error %d\n", ret);
- 			return ret;
-@@ -740,7 +741,7 @@ static int dw_mipi_dsi_rockchip_attach(struct udevice *dev)
- 		return ret;
- 	}
- 
--	ret = dsi_host_init(priv->dsi_host, device, &timings, 4,
-+	ret = dsi_host_init(priv->dsi_host, device, timings, 4,
- 			    &dsi_rockchip_phy_ops);
- 	if (ret) {
- 		dev_err(dev, "failed to initialize mipi dsi host\n");
-@@ -902,9 +903,19 @@ static int dw_mipi_dsi_rockchip_probe(struct udevice *dev)
- 	return 0;
- }
- 
-+static int dw_mipi_dsi_rockchip_get_dt(struct udevice *dev,
-+				       struct display_timing *timings)
-+{
-+	struct dw_rockchip_dsi_priv *priv = dev_get_priv(dev);
++config VIDEO_LCD_BOE_TH101MB31IG002_28A
++	bool "BOE TH101MB31IG002-28A DSI LCD panel support"
++	depends on PANEL && BACKLIGHT
++	select VIDEO_MIPI_DSI
++	help
++	  Say Y here if you want to enable support for BOE TH101MB31IG002-28A
++	  panel.
 +
-+	memcpy(timings, &priv->timings, sizeof(*timings));
++	  This panel has a 800x1280 resolution and uses 24 bit RGB per pixel.
++
+ config VIDEO_LCD_ENDEAVORU
+ 	tristate "Endeavoru 720x1280 DSI video mode panel"
+ 	depends on PANEL && BACKLIGHT
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index 96c7ce7bb09..e5c3b46b1fd 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -58,6 +58,7 @@ obj-$(CONFIG_VIDEO_EFI) += efi.o
+ obj-y += imx/
+ obj-$(CONFIG_VIDEO_IVYBRIDGE_IGD) += ivybridge_igd.o
+ obj-$(CONFIG_VIDEO_LCD_ANX9804) += anx9804.o
++obj-$(CONFIG_VIDEO_LCD_BOE_TH101MB31IG002_28A) += boe-th101mb31ig002-28a.o
+ obj-$(CONFIG_VIDEO_LCD_ENDEAVORU) += endeavoru-panel.o
+ obj-$(CONFIG_VIDEO_LCD_HIMAX_HX8394) += himax-hx8394.o
+ obj-$(CONFIG_VIDEO_LCD_HITACHI_TX10D07VM0BAA) += hitachi-tx10d07vm0baa.o
+diff --git a/drivers/video/boe-th101mb31ig002-28a.c b/drivers/video/boe-th101mb31ig002-28a.c
+new file mode 100644
+index 00000000000..2c377a31669
+--- /dev/null
++++ b/drivers/video/boe-th101mb31ig002-28a.c
+@@ -0,0 +1,236 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) 2023 Alexander Warnecke <awarnecke002@hotmail.com>
++ * Copyright (c) 2023 Manuel Traut <manut@mecka.net>
++ * Copyright (c) 2023 - 2025 Dang Huynh <dang.huynh@mainlining.org>
++ */
++
++#include <backlight.h>
++#include <dm.h>
++#include <log.h>
++#include <mipi_dsi.h>
++#include <panel.h>
++#include <asm/gpio.h>
++#include <dm/device_compat.h>
++#include <linux/delay.h>
++#include <power/regulator.h>
++
++struct th101mb31ig002_28a_panel_priv {
++	struct udevice *backlight;
++	struct udevice *reg_power;
++	struct gpio_desc enable;
++	struct gpio_desc reset;
++};
++
++static const struct display_timing boe_th101mb31ig002_default_timing = {
++	.pixelclock.typ		= 73500000,
++	.hactive.typ		= 800,
++	.hfront_porch.typ	= 64,
++	.hback_porch.typ	= 64,
++	.hsync_len.typ		= 16,
++	.vactive.typ		= 1280,
++	.vfront_porch.typ	= 2,
++	.vback_porch.typ	= 12,
++	.vsync_len.typ		= 4,
++};
++
++#define dsi_dcs_write_seq(device, seq...) do {					\
++		static const u8 d[] = { seq };					\
++		int ret;							\
++		ret = mipi_dsi_dcs_write_buffer(device, d, ARRAY_SIZE(d));	\
++		if (ret < 0)							\
++			return ret;						\
++	} while (0)
++
++static int th101mb31ig002_28a_init_sequence(struct udevice *dev)
++{
++	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
++	struct mipi_dsi_device *device = plat->device;
++	int ret;
++
++	dsi_dcs_write_seq(device, 0xE0, 0xAB, 0xBA);
++	dsi_dcs_write_seq(device, 0xE1, 0xBA, 0xAB);
++	dsi_dcs_write_seq(device, 0xB1, 0x10, 0x01, 0x47, 0xFF);
++	dsi_dcs_write_seq(device, 0xB2, 0x0C, 0x14, 0x04, 0x50, 0x50, 0x14);
++	dsi_dcs_write_seq(device, 0xB3, 0x56, 0x53, 0x00);
++	dsi_dcs_write_seq(device, 0xB4, 0x33, 0x30, 0x04);
++	dsi_dcs_write_seq(device, 0xB6, 0xB0, 0x00, 0x00, 0x10, 0x00, 0x10, 0x00);
++	dsi_dcs_write_seq(device, 0xB8, 0x05, 0x12, 0x29, 0x49, 0x48, 0x00, 0x00);
++	dsi_dcs_write_seq(device, 0xB9, 0x7C, 0x65, 0x55, 0x49, 0x46, 0x36, 0x3B, 0x24, 0x3D,
++			  0x3C, 0x3D, 0x5C, 0x4C, 0x55, 0x47, 0x46, 0x39, 0x26, 0x06, 0x7C, 0x65,
++			  0x55, 0x49, 0x46, 0x36, 0x3B, 0x24, 0x3D, 0x3C, 0x3D, 0x5C, 0x4C, 0x55,
++			  0x47, 0x46, 0x39, 0x26, 0x06);
++	dsi_dcs_write_seq(device, 0xC0, 0xFF, 0x87, 0x12, 0x34, 0x44, 0x44, 0x44,
++			  0x44, 0x98, 0x04, 0x98, 0x04, 0x0F, 0x00, 0x00, 0xC1);
++	dsi_dcs_write_seq(device, 0xC1, 0x54, 0x94, 0x02, 0x85, 0x9F, 0x00, 0x7F, 0x00, 0x54,
++			  0x00);
++	dsi_dcs_write_seq(device, 0xC2, 0x17, 0x09, 0x08, 0x89, 0x08, 0x11, 0x22, 0x20, 0x44,
++			  0xFF, 0x18, 0x00);
++	dsi_dcs_write_seq(device, 0xC3, 0x86, 0x46, 0x05, 0x05, 0x1C, 0x1C, 0x1D, 0x1D, 0x02,
++			  0x1F, 0x1F, 0x1E, 0x1E, 0x0F, 0x0F, 0x0D, 0x0D, 0x13, 0x13, 0x11, 0x11,
++			  0x00);
++	dsi_dcs_write_seq(device, 0xC4, 0x07, 0x07, 0x04, 0x04, 0x1C, 0x1C, 0x1D, 0x1D, 0x02,
++			  0x1F, 0x1F, 0x1E, 0x1E, 0x0E, 0x0E, 0x0C, 0x0C, 0x12, 0x12, 0x10, 0x10,
++			  0x00);
++	dsi_dcs_write_seq(device, 0xC6, 0x2A, 0x2A);
++	dsi_dcs_write_seq(device, 0xC8, 0x21, 0x00, 0x31, 0x42, 0x34, 0x16);
++	dsi_dcs_write_seq(device, 0xCA, 0xCB, 0x43);
++	dsi_dcs_write_seq(device, 0xCD, 0x0E, 0x4B, 0x4B, 0x20, 0x19, 0x6B, 0x06, 0xB3);
++	dsi_dcs_write_seq(device, 0xD2, 0xE3, 0x2B, 0x38, 0x00);
++	dsi_dcs_write_seq(device, 0xD4, 0x00, 0x01, 0x00, 0x0E, 0x04, 0x44, 0x08, 0x10, 0x00,
++			  0x00, 0x00);
++	dsi_dcs_write_seq(device, 0xE6, 0x80, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
++	dsi_dcs_write_seq(device, 0xF0, 0x12, 0x03, 0x20, 0x00, 0xFF);
++	dsi_dcs_write_seq(device, 0xF3, 0x00);
++
++	ret = mipi_dsi_dcs_exit_sleep_mode(device);
++	if (ret)
++		return ret;
++
++	mdelay(120);
++
++	ret = mipi_dsi_dcs_set_display_on(device);
++	if (ret)
++		return ret;
++
 +	return 0;
 +}
 +
- struct video_bridge_ops dw_mipi_dsi_rockchip_ops = {
- 	.attach = dw_mipi_dsi_rockchip_attach,
- 	.set_backlight = dw_mipi_dsi_rockchip_set_bl,
-+	.get_display_timing = dw_mipi_dsi_rockchip_get_dt,
- };
- 
- static const struct rockchip_dw_dsi_chip_data rk3399_chip_data[] = {
++static int th101mb31ig002_28a_panel_enable_backlight(struct udevice *dev)
++{
++	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
++	struct mipi_dsi_device *device = plat->device;
++	struct th101mb31ig002_28a_panel_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = mipi_dsi_attach(device);
++	if (ret < 0) {
++		dev_err(dev, "Failed to attach display: %d\n", ret);
++		return ret;
++	}
++
++	ret = th101mb31ig002_28a_init_sequence(dev);
++	if (ret) {
++		dev_err(dev, "Failed to init display: %d\n", ret);
++		return ret;
++	}
++
++	if (priv->backlight) {
++		ret = backlight_enable(priv->backlight);
++		if (ret) {
++			dev_err(dev, "Failed to enable backlight: %d\n", ret);
++			return ret;
++		}
++	}
++
++	return 0;
++}
++
++static int th101mb31ig002_28a_panel_set_backlight(struct udevice *dev, int percent)
++{
++	struct th101mb31ig002_28a_panel_priv *priv = dev_get_priv(dev);
++
++	return backlight_set_brightness(priv->backlight, percent);
++}
++
++static int th101mb31ig002_28a_panel_get_display_timing(struct udevice *dev,
++						       struct display_timing *timings)
++{
++	memcpy(timings, &boe_th101mb31ig002_default_timing, sizeof(*timings));
++
++	return 0;
++}
++
++static int th101mb31ig002_28a_panel_of_to_plat(struct udevice *dev)
++{
++	struct th101mb31ig002_28a_panel_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
++		ret =  device_get_supply_regulator(dev, "power-supply",
++						   &priv->reg_power);
++		if (ret && ret != -ENOENT) {
++			dev_err(dev, "Warning: cannot get power supply\n");
++			return ret;
++		}
++	}
++
++	ret = uclass_get_device_by_phandle(UCLASS_PANEL_BACKLIGHT, dev,
++					   "backlight", &priv->backlight);
++	if (ret)
++		dev_warn(dev, "failed to get backlight\n");
++
++	ret = gpio_request_by_name(dev, "enable-gpios", 0, &priv->enable,
++				   GPIOD_IS_OUT);
++	if (ret) {
++		dev_err(dev, "Failed to get enable GPIO (%d)\n", ret);
++		if (ret != -ENOENT)
++			return ret;
++	}
++
++	ret = gpio_request_by_name(dev, "reset-gpios", 0, &priv->reset,
++				   GPIOD_IS_OUT);
++	if (ret) {
++		dev_err(dev, "Failed to get reset GPIO (%d)\n", ret);
++		if (ret != -ENOENT)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int th101mb31ig002_28a_panel_probe(struct udevice *dev)
++{
++	struct th101mb31ig002_28a_panel_priv *priv = dev_get_priv(dev);
++	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
++	int ret;
++
++	if (CONFIG_IS_ENABLED(DM_REGULATOR) && priv->reg_power) {
++		ret = regulator_set_enable(priv->reg_power, true);
++		if (ret)
++			return ret;
++	}
++
++	/* enable panel */
++	dm_gpio_set_value(&priv->enable, 1);
++	mdelay(50);
++
++	/* reset panel */
++	dm_gpio_set_value(&priv->reset, 0);
++	udelay(10);
++	dm_gpio_set_value(&priv->reset, 1);
++	udelay(10);
++	dm_gpio_set_value(&priv->reset, 0);
++	mdelay(5);
++
++	plat->lanes = 4;
++	plat->format = MIPI_DSI_FMT_RGB888;
++	plat->mode_flags = MIPI_DSI_MODE_VIDEO |
++			   MIPI_DSI_MODE_VIDEO_BURST |
++			   MIPI_DSI_MODE_EOT_PACKET |
++			   MIPI_DSI_MODE_LPM;
++
++	return 0;
++}
++
++static const struct panel_ops th101mb31ig002_28a_panel_ops = {
++	.enable_backlight = th101mb31ig002_28a_panel_enable_backlight,
++	.set_backlight = th101mb31ig002_28a_panel_set_backlight,
++	.get_display_timing = th101mb31ig002_28a_panel_get_display_timing,
++};
++
++static const struct udevice_id th101mb31ig002_28a_ids[] = {
++	{ .compatible = "boe,th101mb31ig002-28a", },
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(th101mb31ig002_28a_panel) = {
++	.name		= "th101mb31ig002_28a_panel",
++	.id			= UCLASS_PANEL,
++	.of_match	= th101mb31ig002_28a_ids,
++	.ops		= &th101mb31ig002_28a_panel_ops,
++	.of_to_plat	= th101mb31ig002_28a_panel_of_to_plat,
++	.probe		= th101mb31ig002_28a_panel_probe,
++	.plat_auto	= sizeof(struct mipi_dsi_panel_plat),
++	.priv_auto	= sizeof(struct th101mb31ig002_28a_panel_priv),
++};
 
 -- 
 2.51.2
