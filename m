@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0359CCFA13
-	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:07:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8341BCCFA13
+	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:07:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7303283EB7;
+	by phobos.denx.de (Postfix) with ESMTP id ADCBE83EC0;
 	Sat,  8 Nov 2025 14:06:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DMtaAFB0";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jpPURKBb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E257883E72; Sat,  8 Nov 2025 06:38:34 +0100 (CET)
+ id EBF0083E60; Sat,  8 Nov 2025 06:38:34 +0100 (CET)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDC9583E81
+ by phobos.denx.de (Postfix) with ESMTPS id 9C31483E73
  for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 06:38:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+dang.huynh.mainlining.org@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id F2A1744493;
+ by sea.source.kernel.org (Postfix) with ESMTP id E5CF243640;
  Sat,  8 Nov 2025 05:38:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D650BC19425;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C86E1C4CEF5;
  Sat,  8 Nov 2025 05:38:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1762580307;
- bh=E2iyK7L5hZGjVAvJ3XeyONClrO7qN9WiC0rPIx3lsSY=;
+ bh=nccQpaGKtHeDPdcwotuMGll4aA14wHvwbtfkRjkfP5Y=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=DMtaAFB0VAB0TZTnQpXzDS4JEQb+5VIdKUtweKSZV8aMQlZF6ayruD/xgg+l3/Pyx
- e7fvQ69YHyNQWq3oWVkGQrGKd3gHkNVRAZaJEy5+Mrrvj41rY4fZjMtNZBvN+isl05
- L7L8punuac2k5FxtZ1RrxFtTGEbvnrCKGs+pVsOrdukxayKAjMT/Nym9R8iod3PsJO
- 5ZsRa+rVm7Fno+DN4gvpynV7TU1sew2N2nemxOJGblwh9mpF7pQcYDXdLfsAv0+OWK
- RfcN40OjFt/ilk3COhqULHOlg+atkvbbwkXPHFjZqhY3HN60nroxuNhKKT32eIENHP
- TSrFaAGScohrQ==
+ b=jpPURKBbz1rXLy5gXXkLKMjTDnsG26uhjbgKvHmqluh1gr17fN0rac3bb4E4uCKDC
+ HFynWze9NHzYpZBSBJiDML0RUYFYmqhH1LpoOSPRm/81E/7tZh8l8FthANulF03P5M
+ NRXWegBZ29WHzx5a2HgAJ3e2cT9a4EKDAlJU3kuKYSrIAsla7uhr5NUTFLflKoSgay
+ bJWXJDLM4DmCGC311NzuWi4TpQaImGCMMp440Kb0b8hcatzLXLDB3+0DfCaV0uqoMa
+ FRGsKocXCb5Bw4tOyt38MNLPth6MxXuGGH3Cu1Ttmz5xKteBouHvG0AnRZTScBFNH1
+ v5agRA3tnvQaw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id D0C55CCFA1A;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id C26CFCCFA1E;
  Sat,  8 Nov 2025 05:38:27 +0000 (UTC)
 From: Dang Huynh via B4 Relay <devnull+dang.huynh.mainlining.org@kernel.org>
-Date: Sat, 08 Nov 2025 12:38:04 +0700
-Subject: [PATCH v6 08/12] arm: dts: rockchip: rk356x: Prerelocate VOP in
- U-Boot proper
+Date: Sat, 08 Nov 2025 12:38:03 +0700
+Subject: [PATCH v6 07/12] video: rockchip: vop2: Add video bridge support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251108-vop2-pt2-v6-8-d04c699262fb@mainlining.org>
+Message-Id: <20251108-vop2-pt2-v6-7-d04c699262fb@mainlining.org>
 References: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
 In-Reply-To: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
 To: u-boot@lists.denx.de
@@ -71,11 +70,11 @@ Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
  Piotr Zalewski <pZ010001011111@proton.me>, 
  Dang Huynh <dang.huynh@mainlining.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1762580305; l=566;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1762580305; l=4191;
  i=dang.huynh@mainlining.org; s=20250917; h=from:subject:message-id;
- bh=5I30AlGYVLKJp+oQjDrislkk86yMIEw46an0SuM8cSY=;
- b=ZFsaj5B/5KdIYDVNubYZ4NBkx8o4HXGH2rWDz4uK0YTNy10jQEG/0j7d4wUhCtoP5JW5Emih2
- DK9mwHFZyKtCUfstOMSlSMKV3U2xeT2Jcfh2tkzA4W8nK8W+k9kQzAP
+ bh=RR/ibHpd7ymZ9sm6i+4d0pvcoswDlx9VYfmp0daWhuM=;
+ b=h2K2YySJeZoBKRnlv/z2H/h714ra02QAt/NjFFmypjdShqRJ9XN3lyYPPMbCIg2PGUashu9Sg
+ +jiu3GuRlnWBmAmkgiYlQ3tBz0xwAr02uhPzBr9NFbPoWnYcQJWRKDR
 X-Developer-Key: i=dang.huynh@mainlining.org; a=ed25519;
  pk=RyzH4CL4YU/ItXYUurA51EVBidfx4lIy8/E4EKRJCUk=
 X-Endpoint-Received: by B4 Relay for dang.huynh@mainlining.org/20250917
@@ -101,29 +100,143 @@ X-Virus-Status: Clean
 
 From: Dang Huynh <dang.huynh@mainlining.org>
 
-We need to prerelocate VOP2 memory so the driver can work. This
-will only support U-Boot proper.
+Add support for video bridge to VOP2 so we can use the MIPI DSI
+bridge driver that we have.
 
+Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Signed-off-by: Dang Huynh <dang.huynh@mainlining.org>
 ---
- arch/arm/dts/rk356x-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/video/rockchip/rk_vop2.c | 81 +++++++++++++++++++++++++++++-----------
+ 1 file changed, 59 insertions(+), 22 deletions(-)
 
-diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
-index 738b9673d35..1ed06239f05 100644
---- a/arch/arm/dts/rk356x-u-boot.dtsi
-+++ b/arch/arm/dts/rk356x-u-boot.dtsi
-@@ -170,6 +170,10 @@
- 	bootph-all;
- };
+diff --git a/drivers/video/rockchip/rk_vop2.c b/drivers/video/rockchip/rk_vop2.c
+index 992f215d416..156daafa0c3 100644
+--- a/drivers/video/rockchip/rk_vop2.c
++++ b/drivers/video/rockchip/rk_vop2.c
+@@ -13,10 +13,12 @@
+ #include <dm/device_compat.h>
+ #include <edid.h>
+ #include <log.h>
++#include <panel.h>
+ #include <regmap.h>
+ #include <reset.h>
+ #include <syscon.h>
+ #include <video.h>
++#include <video_bridge.h>
+ #include <asm/global_data.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+@@ -291,6 +293,7 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+ 	int vop_id, port_id, win_id;
+ 	struct display_timing timing;
+ 	struct udevice *disp;
++	struct udevice *bridge;
+ 	int ret;
+ 	u32 remote_phandle;
+ 	struct display_plat *disp_uc_plat;
+@@ -357,8 +360,11 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+ 			return -EINVAL;
+ 		}
  
-+&vop {
-+	bootph-some-ram;
-+};
++		if (IS_ENABLED(CONFIG_VIDEO_BRIDGE))
++			uclass_find_device_by_ofnode(UCLASS_VIDEO_BRIDGE, remote, &bridge);
 +
- &xin24m {
- 	bootph-all;
- };
+ 		uclass_find_device_by_ofnode(UCLASS_DISPLAY, remote, &disp);
+-		if (disp)
++		if (disp || bridge)
+ 			break;
+ 	};
+ 	compat = ofnode_get_property(remote, "compatible", NULL);
+@@ -390,27 +396,49 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	disp_uc_plat = dev_get_uclass_plat(disp);
+-	debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
+-	if (display_in_use(disp)) {
+-		debug("   - device in use\n");
+-		return -EBUSY;
+-	}
++	if (bridge) {
++		/* video bridge detected, probe it */
++		ret = device_probe(bridge);
++		if (ret) {
++			dev_err(dev, "Failed to probe video bridge: %d\n", ret);
++			return ret;
++		}
+ 
+-	disp_uc_plat->source_id = vop_id;
+-	disp_uc_plat->src_dev = dev;
++		/* Attach the DSI controller and the display to the bridge. */
++		ret = video_bridge_attach(bridge);
++		if (ret) {
++			dev_err(dev, "Failed to attach video bridge: %d\n", ret);
++			return ret;
++		}
+ 
+-	ret = device_probe(disp);
+-	if (ret) {
+-		debug("%s: device '%s' display won't probe (ret=%d)\n",
+-		      __func__, dev->name, ret);
+-		return ret;
+-	}
++		ret = video_bridge_get_display_timing(bridge, &timing);
++		if (ret) {
++			dev_err(dev, "Failed to read timings: %d\n", ret);
++			return ret;
++		}
++	} else {
++		disp_uc_plat = dev_get_uclass_plat(disp);
++		debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
++		if (display_in_use(disp)) {
++			debug("   - device in use\n");
++			return -EBUSY;
++		}
+ 
+-	ret = display_read_timing(disp, &timing);
+-	if (ret) {
+-		debug("%s: Failed to read timings\n", __func__);
+-		return ret;
++		disp_uc_plat->source_id = vop_id;
++		disp_uc_plat->src_dev = dev;
++
++		ret = device_probe(disp);
++		if (ret) {
++			debug("%s: device '%s' display won't probe (ret=%d)\n",
++			      __func__, dev->name, ret);
++			return ret;
++		}
++
++		ret = display_read_timing(disp, &timing);
++		if (ret) {
++			debug("%s: Failed to read timings\n", __func__);
++			return ret;
++		}
+ 	}
+ 
+ 	/* Set clock rate on video port to display timings */
+@@ -453,9 +481,18 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+ 
+ 	rkvop2_mode_set(dev, &timing, vop_id, port_id, platdata);
+ 
+-	ret = display_enable(disp, 1 << l2bpp, &timing);
+-	if (ret)
+-		return ret;
++	if (bridge) {
++		/* Attach the DSI controller and the display to the bridge. */
++		ret = video_bridge_set_backlight(bridge, 60);
++		if (ret) {
++			dev_err(dev, "Failed to start the video bridge: %d\n", ret);
++			return ret;
++		}
++	} else {
++		ret = display_enable(disp, 1 << l2bpp, &timing);
++		if (ret)
++			return ret;
++	}
+ 
+ 	uc_priv->xsize = timing.hactive.typ;
+ 	uc_priv->ysize = timing.vactive.typ;
 
 -- 
 2.51.2
