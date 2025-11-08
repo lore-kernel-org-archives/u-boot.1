@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2557CCFA18
-	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EFFCCCFA18
+	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 13:07:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E96E483ECF;
-	Sat,  8 Nov 2025 14:06:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3A0E083EDC;
+	Sat,  8 Nov 2025 14:06:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="C7UYANdK";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nt/67jP9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C2FA83E23; Sat,  8 Nov 2025 06:38:35 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 52C9583E23; Sat,  8 Nov 2025 06:38:35 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE0B483E88
- for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 06:38:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 23C4A83EA0
+ for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 06:38:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+dang.huynh.mainlining.org@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 18ACE44574;
+ by tor.source.kernel.org (Postfix) with ESMTP id 3437960194;
  Sat,  8 Nov 2025 05:38:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E6128C116D0;
- Sat,  8 Nov 2025 05:38:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 007D9C2BCB1;
+ Sat,  8 Nov 2025 05:38:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1762580307;
- bh=S80zIueIcCP6gnBxYNbTenXZhnpm91VkcKYwXn8yTcE=;
+ s=k20201202; t=1762580308;
+ bh=GZA7/EYqjcvUgHBPtKlKcvs+/wGImrN1b9vnC1vhHBc=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=C7UYANdKQQ8wEY0EG+c6dmG2oDbmeGo8fUgLUk3Pfy2FxqEknrL4+KUpK9b7F0OiG
- CC7Kt9Fnrw9yOuD3oB4P4p9FOfkbElOmCvuSLwx0O6lJ7+T/qaapMH+2YAR+KzZ3Bl
- N7KT+aDKXoL/o8YlYSk7nflCZAvnIkirwgzIfRkdqWhxaqCTzOY/xrRoUjoEJoGddR
- xR1y7eCrCvyZvDoASnrSoM4+3ypURpk+IjBKQwEF9ENs+9mm4uZ04IgA7wAV/dTLLM
- lNWAHzv8j9WAn7D+UTXdWQavtwgzyPwZOlJSsd8SVVmksz14KZWWCRWKJckQsrarhL
- dITPiwf10qhHA==
+ b=nt/67jP94HjNx5o4rtxjvLNWnWDMu7w41C+7dGN27s5WWrHoHSfedZtqvb568NyjS
+ /ryj9yrRDHOeSQPoz6oJX862pa6CmRarT/DWZEepw3k2DpMtn/HxUPXjRkNIAL1lkS
+ CVfWLRw7z8kzKHdCAclKB6Avas4T2rmsgWGRn38dxEhm7XPWKAPWqL5N//gNwiIDgU
+ JQu/bPF0b6dl9jwGvPxKVKcsKePgI/l7y4LT/M8kVQLXz3FdRZvNM4kfBngPHnFtul
+ 39rbxQKN518K6GgCBeUzXhL1UW8YzXl2qjl1ImYv7HT7GiZ5tBFvAJqhFmmxHbCKcm
+ GHYHUV3jek1hg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id E04D4CCFA1E;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id EEDCCCCFA1A;
  Sat,  8 Nov 2025 05:38:27 +0000 (UTC)
 From: Dang Huynh via B4 Relay <devnull+dang.huynh.mainlining.org@kernel.org>
-Date: Sat, 08 Nov 2025 12:38:05 +0700
-Subject: [PATCH v6 09/12] configs: quartz64: Enable vidconsole
+Date: Sat, 08 Nov 2025 12:38:06 +0700
+Subject: [PATCH v6 10/12] video: rockchip: Add HDMI support for RK3568
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251108-vop2-pt2-v6-9-d04c699262fb@mainlining.org>
+Message-Id: <20251108-vop2-pt2-v6-10-d04c699262fb@mainlining.org>
 References: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
 In-Reply-To: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
 To: u-boot@lists.denx.de
@@ -70,11 +71,11 @@ Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
  Piotr Zalewski <pZ010001011111@proton.me>, 
  Dang Huynh <dang.huynh@mainlining.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1762580305; l=734;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1762580305; l=3057;
  i=dang.huynh@mainlining.org; s=20250917; h=from:subject:message-id;
- bh=tt4UdpGYzFYKfoz0nxzvuPA8/EELm6sx+CANf9C7ERQ=;
- b=HsUuwN9V9HFdCzoAW13Z6KksBekVQx5YUNHkNOoFFze7NZk5gIyXQWuYVOoyiG+f3wA4U5A5q
- gTwIhVPe48WBDBYiWA4vrinHFoKFuq6PWQHBBaT02XcLeqRH1NZknw1
+ bh=HcwcQsOZwDtIzK0lURcjerdicekXC6tCgRYLSXj8rhY=;
+ b=DzOmvAkQYvE8/trv228yAo0NkqCi0TVSYYJwLzeDG5I342dgJQv2CMKVxkvLx3vor8W/lBmzY
+ 6yr8jwX9lSLBzPraP6PFoNzFogdZHIaZXj87Ql+E5f8Qv9zUT3gPFaN
 X-Developer-Key: i=dang.huynh@mainlining.org; a=ed25519;
  pk=RyzH4CL4YU/ItXYUurA51EVBidfx4lIy8/E4EKRJCUk=
 X-Endpoint-Received: by B4 Relay for dang.huynh@mainlining.org/20250917
@@ -100,29 +101,104 @@ X-Virus-Status: Clean
 
 From: Dang Huynh <dang.huynh@mainlining.org>
 
-Now that we have VOP2 support, we should enable vidconsole.
+HDMI on RK3568 is mostly simplified, all this does is enabling
+DDC for display timings and HPD.
 
 Signed-off-by: Dang Huynh <dang.huynh@mainlining.org>
 ---
- include/configs/quartz64_rk3566.h | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ drivers/video/rockchip/Makefile      |  1 +
+ drivers/video/rockchip/rk3568_hdmi.c | 71 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 72 insertions(+)
 
-diff --git a/include/configs/quartz64_rk3566.h b/include/configs/quartz64_rk3566.h
-index dfe0fee94cd..bf391458219 100644
---- a/include/configs/quartz64_rk3566.h
-+++ b/include/configs/quartz64_rk3566.h
-@@ -3,7 +3,10 @@
- #ifndef __QUARTZ64_RK3566_H
- #define __QUARTZ64_RK3566_H
- 
--#define ROCKCHIP_DEVICE_SETTINGS
-+#define ROCKCHIP_DEVICE_SETTINGS \
-+		"stdin=serial,usbkbd\0" \
-+		"stdout=serial,vidconsole\0" \
-+		"stderr=serial,vidconsole\0"
- 
- #include <configs/rk3568_common.h>
- 
+diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Makefile
+index 2f89a979a28..b751c969b46 100644
+--- a/drivers/video/rockchip/Makefile
++++ b/drivers/video/rockchip/Makefile
+@@ -14,6 +14,7 @@ obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) += rk_lvds.o
+ obj-hdmi-$(CONFIG_ROCKCHIP_RK3288) += rk3288_hdmi.o
+ obj-hdmi-$(CONFIG_ROCKCHIP_RK3328) += rk3328_hdmi.o
+ obj-hdmi-$(CONFIG_ROCKCHIP_RK3399) += rk3399_hdmi.o
++obj-hdmi-$(CONFIG_ROCKCHIP_RK3568) += rk3568_hdmi.o
+ obj-$(CONFIG_DISPLAY_ROCKCHIP_HDMI) += rk_hdmi.o $(obj-hdmi-y)
+ obj-mipi-$(CONFIG_ROCKCHIP_RK3288) += rk3288_mipi.o
+ obj-mipi-$(CONFIG_ROCKCHIP_RK3399) += rk3399_mipi.o
+diff --git a/drivers/video/rockchip/rk3568_hdmi.c b/drivers/video/rockchip/rk3568_hdmi.c
+new file mode 100644
+index 00000000000..c3f4504ca8f
+--- /dev/null
++++ b/drivers/video/rockchip/rk3568_hdmi.c
+@@ -0,0 +1,71 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 - 2025 Dang Huynh <dang.huynh@mainlining.org>
++ */
++
++#include <display.h>
++#include <dm.h>
++#include <dw_hdmi.h>
++#include <edid.h>
++#include <asm/arch-rockchip/hardware.h>
++#include <asm/arch-rockchip/grf_rk3568.h>
++#include "rk_hdmi.h"
++
++#define RK3568_IO_DDC_IN_MSK             ((3 << 14) | (3 << (14 + 16)))
++
++static int rk3568_hdmi_enable(struct udevice *dev, int panel_bpp,
++			      const struct display_timing *edid)
++{
++	struct rk_hdmi_priv *priv = dev_get_priv(dev);
++
++	return dw_hdmi_enable(&priv->hdmi, edid);
++}
++
++static int rk3568_hdmi_of_to_plat(struct udevice *dev)
++{
++	struct rk_hdmi_priv *priv = dev_get_priv(dev);
++	struct dw_hdmi *hdmi = &priv->hdmi;
++
++	hdmi->i2c_clk_high = 0x6c;
++	hdmi->i2c_clk_low = 0x7d;
++
++	return rk_hdmi_of_to_plat(dev);
++}
++
++static const char * const rk3568_hdmi_reg_names[] = {
++	"avdd-0v9",
++	"avdd-1v8"
++};
++
++static int rk3568_hdmi_probe(struct udevice *dev)
++{
++	struct rk_hdmi_priv *priv = dev_get_priv(dev);
++	struct rk3568_grf *grf = priv->grf;
++
++	rk_hdmi_probe_regulators(dev, rk3568_hdmi_reg_names,
++				 ARRAY_SIZE(rk3568_hdmi_reg_names));
++
++	writel(RK3568_IO_DDC_IN_MSK, &grf->vo_con1);
++
++	return rk_hdmi_probe(dev);
++}
++
++static const struct dm_display_ops rk3568_hdmi_ops = {
++	.read_edid = rk_hdmi_read_edid,
++	.enable = rk3568_hdmi_enable,
++};
++
++static const struct udevice_id rk3568_hdmi_ids[] = {
++	{ .compatible = "rockchip,rk3568-dw-hdmi" },
++	{ }
++};
++
++U_BOOT_DRIVER(rk3568_hdmi_rockchip) = {
++	.name = "rk3568_hdmi_rockchip",
++	.id = UCLASS_DISPLAY,
++	.of_match = rk3568_hdmi_ids,
++	.ops = &rk3568_hdmi_ops,
++	.of_to_plat = rk3568_hdmi_of_to_plat,
++	.probe = rk3568_hdmi_probe,
++	.priv_auto = sizeof(struct rk_hdmi_priv),
++};
 
 -- 
 2.51.2
