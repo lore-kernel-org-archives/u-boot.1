@@ -4,51 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6D79CCFA1A
-	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 19:47:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C762CCFA1A
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 19:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A54883D52;
-	Sun,  9 Nov 2025 20:47:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9049383F26;
+	Sun,  9 Nov 2025 20:47:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FbIx0Y7U";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IBvUDG9b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE0AF83E2B; Sun,  9 Nov 2025 20:47:05 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id EDA1383F2F; Sun,  9 Nov 2025 20:47:08 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91A74838CE
- for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 20:47:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 108E183F24
+ for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 20:47:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4d4Nbn4plYz9v6Q;
- Sun,  9 Nov 2025 20:47:01 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4d4Nbs0lmZz9sqV;
+ Sun,  9 Nov 2025 20:47:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762717621;
+ s=mail20150812; t=1762717625;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6OgXkP0Ln8GpqP0VbmJdXL+harljAZqm35XiWajwne0=;
- b=FbIx0Y7Uk3fqpnWnRXf7xuF8lZp1UN2RXJMqbgHHt24ghplzGY2a62gsbbTAG+gOJqzI6g
- jdLWJOFpOibAy7/zkMv23pgPGhI16UgfeFSOWkhMnIt7l5naXSH7VikTr2jXdFMA/gAMen
- ybNZ4Hf4Pv232oBBmAQDO74ymlS2xa/nvR0NSSNT3ZjHUZ1Spn95GZXAiOtj9HsO6+CgPl
- tUc9xpKVMlHikiWLePEHXLDB5qj3xsQRbMQ79JxYxzzJi7p57G94RlZeHHnvNagS+ixNgv
- uFxBqY7SKZC8Q//IFJIvSm/QuSd+uEk0fPOPm4XiLRMtz+MItldxUwutQIf4zA==
-Message-ID: <73d7e852-b2c3-4ef2-a9f6-af4e37941ceb@mailbox.org>
-Date: Sun, 9 Nov 2025 19:41:13 +0100
+ bh=jmMxZpFRrtWmqwzLqxkjGOXy6R01ZHnjwHYyxGg9i/o=;
+ b=IBvUDG9b2tPlVUiY1ulPMxGnSP1MvQIGsJrE3NAdg+W3kKEPVL0se8Kdjt/mcIezPWUMUI
+ urbjXaMMeePPO/FMshR1kfFO7VrOK91LQhUadq4L5trKI68IuMsqAydEtmXuT1uPbxFLHV
+ WrXJkcE9mc/IyiQNS8k22dowXiUY6gGmueL20B/aFzgzQ3iKYmQ+AirAdebTa3+rmCyIXA
+ E8AZ6hjk719Cplu/m8WZ2g4bXWXIJa7bXIjcYUnUmmnNrTe7VPfV/POC1iz/4CGU0lExP9
+ MYFSW6wzLgXD0gaRLgZksQWKZuCG3zNwh5cFX43hLxYU6c1czh/oAHEbBMLpzQ==
+Message-ID: <47e110a8-dbf4-4a00-b35d-72ad69d4d7a6@mailbox.org>
+Date: Sun, 9 Nov 2025 19:55:06 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 1/3] Image size checks: Use HAS_SIZE_LIMIT consistently
+Subject: Re: [PATCH v4 2/3] Image size checks: Clarify help texts
 To: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de
 Cc: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -61,14 +59,14 @@ Cc: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
  Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
  Ye Li <ye.li@nxp.com>
 References: <20251015012320.2331007-1-pro@denx.de>
- <20251015012320.2331007-2-pro@denx.de>
+ <20251015012320.2331007-3-pro@denx.de>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251015012320.2331007-2-pro@denx.de>
+In-Reply-To: <20251015012320.2331007-3-pro@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 99d379590c9ede0749f
-X-MBO-RS-META: 84s6rn5jpmck9qaby8cpwh5y9xuxo41j
+X-MBO-RS-ID: 4ef6c95c4e1cebda028
+X-MBO-RS-META: 7phu56xn6o6ujexac3thn9k9gjh969e5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,60 +84,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/15/25 3:23 AM, Philip Oberfichtner wrote:
-> Use a consistent logic for image size checks. No functional change.
-> 
-> Before this commit, there were two concurrent approaches of how image
-> size checks are disabled: Whereas BOARD_SIZE_LIMIT was gated through a
-> dedicated Kconfig symbol to achieve this, all the other size checks were
-> disabled by assigning them a limit of zero bytes.
-> 
-> By this commit we achieve a consistent logic for size limiting, by
-> introducing CONFIG_HAS_XXX_SIZE_LIMIT for all those options that don't
-> have it yet.
 
 [...]
 
-> diff --git a/Makefile b/Makefile
-> index 2402f9313d8..e68dce2c1d5 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1109,19 +1109,19 @@ else
->   BOARD_SIZE_CHECK =
->   endif
->   
-> -ifneq ($(CONFIG_SPL_SIZE_LIMIT),0x0)
-> +ifneq ($(CONFIG_SPL_SIZE_LIMIT),)
+> @@ -550,8 +550,8 @@ config BOARD_SIZE_LIMIT
+>   	default 1048576 if RCAR_64
+>   	depends on HAS_BOARD_SIZE_LIMIT
+>   	help
+> -	  Maximum size of the U-Boot image. When defined, the build system
+> -	  checks that the actual size does not exceed it.  This does not
+> +	  Maximum size of the U-Boot image. The build system will throw an
+> +	  error if the actual image size exceeds this value. This does not
 
-Why does this check not use HAS_SPL_SIZE_LIMIT introduced below ?
+Simply keep the original text with "check" keyword in it, and drop the 
+"When defined" part, since this is now gated by the HAS_... symbols, 
+then reuse the same for SPL/TPL/VPL :
 
->   SPL_SIZE_CHECK = @$(call size_check,$@,$$(tools/spl_size_limit))
->   else
->   SPL_SIZE_CHECK =
->   endif
->   
-> -ifneq ($(CONFIG_TPL_SIZE_LIMIT),0x0)
-> +ifneq ($(CONFIG_TPL_SIZE_LIMIT),)
+"
+The build system checks that the actual image size does not exceed this 
+value.
+"
 
-DTTO
+or this if you want the error out part in there:
 
->   TPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_TPL_SIZE_LIMIT))
->   else
->   TPL_SIZE_CHECK =
->   endif
->   
-> -ifneq ($(CONFIG_VPL_SIZE_LIMIT),0x0)
-> +ifneq ($(CONFIG_VPL_SIZE_LIMIT),)
-
-DTTO
-
-[...]
-
-> +++ b/common/spl/Kconfig
-> @@ -36,19 +36,33 @@ config SPL_FRAMEWORK_BOARD_INIT_F
->   	  - initialize the serial (preloader_console_init)
->   	  Unless you want to provide your own board_init_f, you should say Y.
->   
-> +config HAS_SPL_SIZE_LIMIT
-> +	bool "Enable size limit check for the SPL image"
-> +	depends on !COMPILE_TEST
-[...]
+"
+The build system checks that the actual image size does not exceed this 
+value, and fails the build if it does.
+"
