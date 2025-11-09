@@ -4,81 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB2B0CCFA13
-	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 01:41:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E3CFCCF9F8
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 07:05:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55C8383E8A;
-	Sun,  9 Nov 2025 02:41:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2531883E8A;
+	Sun,  9 Nov 2025 08:05:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kyQZcpm1";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Kqk3rFVY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 479F783EA0; Sun,  9 Nov 2025 00:23:56 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3944983EA0; Sun,  9 Nov 2025 08:05:29 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5690383E4C
- for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 00:23:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E77A683E7F
+ for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 08:05:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cingel.marian@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-64168416cddso96028a12.2
- for <u-boot@lists.denx.de>; Sat, 08 Nov 2025 15:23:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762644234; x=1763249034; darn=lists.denx.de;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/Clc3ux+Ku3pbmeYZ6je5jQ0jIPUtEofU1CftwWnhAg=;
- b=kyQZcpm18nNLfmiRb8W+ZaBvae3LwtpvD+wgNSzjNYXvvAurOmJ9kxYpXyOe61A+v8
- A8OpQwDH+d8DpfzeUP0WCpp0mcgHSiSOcYMfDG+STW/AOJRHziLZ7K6mDyiD3NWyAt7k
- 5hjJKwy0JjCm8CAb8dOsBIQrqLFvTmD6rCNGoTDdfMMA2JLoPIaqG4ZSbJCH5++P+BXf
- 9ddJY7okUfkqHvABfYNsuPryEOB3gqF+4Deh4BkLPkXe9akkZy2Wa20mNV906v+GAXfd
- JGcWuDPM5CN3TPSIzhDgTWybzc2CrjWbdDJWcsCQqi4i2b+9TcVkhSF6kCd9th4fDCs9
- Porg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762644234; x=1763249034;
- h=message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=/Clc3ux+Ku3pbmeYZ6je5jQ0jIPUtEofU1CftwWnhAg=;
- b=lL3Wt2kD2UimB6qaAXx28PrHxeSI3Xd7TRczllUgZ2L2SOarHLhyQdbZXhtoPD0ij/
- gLKSnTbuLkICt81iCqJEUjYwyccE4vX+6Xxq93PBm6kq0sGYkmyRNDXXWp4HR7cSrAhs
- YqEd6lqEtbLUlGNyGVJccUCUFAwJMvZQPXYRu+Zx3vAZ8189TSiYB1kq2X3rzkyQtySO
- Y7/xEywNYbbWzELaNjCPM3mjPga4vmo2RHwLpGR3/XXdn2Etl3RbTFHC1cKM8+AnzcTt
- hDfJHWtD8dS8FcEjq3SmZFCn3ZVmiHgRYaIvw/8tEaThFstIeDpTFhhXbUAs8878BbzT
- EIkg==
-X-Gm-Message-State: AOJu0Yyv1XaBY54mu6a7kT6hZoKJovJm/pUzna3r1mY8+n7uFdy+E1Rc
- UUvdq49QfwJknlzzgFdHVfe8hmvZ/ZNwsKRmqhULCzH6rIUpUHj/8huQVrD6K2m6
-X-Gm-Gg: ASbGncvnCWfBWM5fkqm2VaItryVsAI4xZoixdSOzU8AoPzcZFsJUX3jHvXUR738VKs8
- jjKEzTEi4yYiNT0EKPfdFL3Y9E2By3fc5PeRReBDs+ukgkvKFTNzXlTFObR0QOMynM3qa6iyC63
- GFK5nECKrDMW44Rm8XwgVWdaU/zt2zDaVEX0XuT4vtlwYCa8UmMTYk4051hJl91T7sGa0xxuDLf
- 4IeRIqT7rpscjoCC9IwMpZXeo8G188tXh9MXXBwUN266aHNlHnFX9pu6zbjn2y5xbZQxPh6sLjE
- ebB00kOBaKV3U4MLpEF2/03mRXwl4SmtZ0+AjjnGHG2t8FT1TArzDyvDjmuzM6PmpKZX1p9kxwT
- wm+FbBon+31Ooid4Zd7JgEkWmoiMTHgg1OUXBnTx7GcBLMQZppRHJVAaJ6wqo7qI12iD+dB1YqM
- DVnD+2u7PczYQfZ/PIuJM=
-X-Google-Smtp-Source: AGHT+IGvAeYUQZ9GP/GmZky5MaK9QXqTAfHOTedB0rxddqtOE+LeqKlq3BzVg5gefkvxpDnQO/dFfA==
-X-Received: by 2002:a17:907:6d0b:b0:b72:ae08:a4d3 with SMTP id
- a640c23a62f3a-b72e05ec763mr211547466b.9.1762644233650; 
- Sat, 08 Nov 2025 15:23:53 -0800 (PST)
-Received: from risotto.lablan ([178.143.191.80])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b72bdbc9656sm656019166b.7.2025.11.08.15.23.52
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 08 Nov 2025 15:23:53 -0800 (PST)
-From: Marian Cingel <cingel.marian@gmail.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com,
-	Marian Cingel <cingel.marian@gmail.com>
-Subject: [PATCH] board: ti: CAT24C256WI-GT3 require min. 5ms delay (tWR)
- between write/read
-Date: Sat,  8 Nov 2025 23:23:25 +0000
-Message-Id: <1762644205-58930-1-git-send-email-cingel.marian@gmail.com>
-X-Mailer: git-send-email 2.7.4
-X-Mailman-Approved-At: Sun, 09 Nov 2025 02:41:53 +0100
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id C9562403F8; 
+ Sun,  9 Nov 2025 07:05:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1762671926;
+ bh=GTUCPSpEAx8etcAe31AbSzuTg/zINNFmHJI3M8zN8lg=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Kqk3rFVYqoUFuYK2id17+B7MnzLVjTElwIuSBf5+pkGvVAbGz4Xfrtv1TKS6nTUwI
+ q5JZRllvirhmEHI19x5t325p25ddtyK8p0FNMhoAYNKbJigOb0amkcL+4oVR0j4nlK
+ ReX/LNATqQT7gf6Cv1VdlQLI+6tfp+eZ/lxOCbFba45TMSD8XoSVuF4B1hoI6PXKka
+ Vt4rwvLugXMaXi3J4MGQSHTZhPjC4qx78fHM7mKOqUeqaK8K9CDlcuymB90vK44oqR
+ 8PQZ2QTobIppv7S9Mj4R9FhVQs3Cr9kIixd/xWDM9GLtfYh6WDwLXlmHY0gTcpA9xw
+ haeb8v4Q8hqNnE4Can0V2+7LnI2fQb/DrMDwL0KKw0XiQ84ZFn/F2IGOnZ+5TzQ4Hu
+ DxCuGoo2DPNCwlItz8Gi1o0Q0MyCxFYw3J/FmCzwPAs5iu7khfz0D2cnWExiwuMF1y
+ OckoYnTifPp15ZQja+1vmeGOQBlF5TLhUFlU0lfx2u9U+wYUniJl7M6r6TLQclOyIZ
+ By4CvnJRWy/lHX0L/yHoVeD5OD8kdkC8qSnfeFrOR0/7WKYjFr8pLbeBK8qIw/jUNo
+ UXcl8ucjKHGz76GT64RkoZsx+nPy/psEQSrNdGHLU9E2p0YmkrEA/eG4CpgkOUnRg9
+ Mc4SEeBRI8CzYy/Fu4UNPH40=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Janne Grunau <j@jannau.net>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] dm: typo programmaticaly
+Date: Sun,  9 Nov 2025 08:05:21 +0100
+Message-ID: <20251109070521.142477-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,36 +74,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- Otherwise the custom-cape eeprom (at adress 57) reports NACK which results into
- "i2c_write: error waiting for data ACK (status=0x116)"
- and terminates further scanning.
+%s/programmaticaly/programmatically/
 
-Signed-off-by: Marian Cingel <cingel.marian@gmail.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- board/ti/common/cape_detect.c | 3 +++
- 1 file changed, 3 insertions(+)
+ include/dm/root.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/ti/common/cape_detect.c b/board/ti/common/cape_detect.c
-index 0bd4a38..88fa6ae 100644
---- a/board/ti/common/cape_detect.c
-+++ b/board/ti/common/cape_detect.c
-@@ -9,6 +9,7 @@
- #include <i2c.h>
- #include <extension_board.h>
- #include <vsprintf.h>
-+#include <linux/delay.h>
- 
- #include "cape_detect.h"
- 
-@@ -43,6 +44,8 @@ static int ti_extension_board_scan(struct udevice *dev,
- 
- 		/* Move the read cursor to the beginning of the EEPROM */
- 		dm_i2c_write(dev, 0, &cursor, 1);
-+		/* Need 5ms (tWR) to complete internal write */
-+		mdelay(6);
- 		ret = dm_i2c_read(dev, 0, (uint8_t *)&eeprom_header,
- 				  sizeof(struct am335x_cape_eeprom_id));
- 		if (ret) {
+diff --git a/include/dm/root.h b/include/dm/root.h
+index 286bd9a2ddd..61a61e1ce46 100644
+--- a/include/dm/root.h
++++ b/include/dm/root.h
+@@ -114,7 +114,7 @@ int dm_extended_scan(bool pre_reloc_only);
+  *
+  * Some devices may not be visible to Driver Model. This weak function can
+  * be provided by boards which wish to create their own devices
+- * programmaticaly. They should do this by calling device_bind() on each
++ * programmatically. They should do this by calling device_bind() on each
+  * device.
+  *
+  * @pre_reloc_only: If true, bind only nodes with special devicetree properties,
 -- 
-2.7.4
+2.51.0
 
