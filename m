@@ -4,96 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E6C8CCFA13
-	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 12:31:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFAC8CCFA13
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 13:51:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70E8E83EDC;
-	Sun,  9 Nov 2025 13:31:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3F36483EC0;
+	Sun,  9 Nov 2025 14:51:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pUoHH39T";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aYUwFy9m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A52AD83EDC; Sun,  9 Nov 2025 13:31:31 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id C916C83EF2; Sun,  9 Nov 2025 14:51:18 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F7CC83B9B
- for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 13:31:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A751483EA9
+ for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 14:51:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b728a43e410so466996766b.1
- for <u-boot@lists.denx.de>; Sun, 09 Nov 2025 04:31:29 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-3e3dac349easo1458680fac.2
+ for <u-boot@lists.denx.de>; Sun, 09 Nov 2025 05:51:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762691489; x=1763296289; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=j7mByhbd6WtL/yfLkVu01VeuwNMpv6AIew0KTNOu3e4=;
- b=pUoHH39T7qLGYsR3RNJFJHqxEr6otWJm6JftWU4EHVy8G4V3xwa3Zarax933hBv32a
- iFMiaMXgDUq4T6idMif9lB8UNnSjp5EPBr1FxJcCEyGPNllAOr12ozBQykZUoljziuio
- b/afuL6uBWV5+ZKQJc6Ju5K2lLp7LjfSntynVS9BGh+XlpCNgPREgxwTU8KA9fPZkIQH
- JqTfYaqVrvE7bepxvM8mi6XtS2VgtL6/8J2MWTtifmq7pGuHFX4/g5+0UhltsBGGQUua
- dRDTBW23uZWWHQ5A5F5ECniN3KrTHm1b2GNV05KTIABuszQ0O0Z4FtKWm/UfmQB9/IVG
- F4YA==
+ d=konsulko.com; s=google; t=1762696275; x=1763301075; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bf9ihVqdnDmHR80tptWSf0DUFcE+1twPA6yTJ3A1vjM=;
+ b=aYUwFy9mci93pgvPVLQnjL+ikWKcUOIzu0eXbsW7iT7Ku7uNYPBwUo0u0LReXm+NQE
+ 0E/N0Jcx6CYVbsDAJiUGs5SpfZXNp0v7utBOiYx/JwD42SAsHDRkAm4cLp6rJXv7UZAe
+ RuyION92w9W+kjNNas1nuTKITTpOOswopd9l8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762691489; x=1763296289;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=j7mByhbd6WtL/yfLkVu01VeuwNMpv6AIew0KTNOu3e4=;
- b=MLgXPDxamz8XqMTx0FeTuj/lxEYYwBvLt6qkD/yxC8Uo/e1wXTPjmdv6jB30EvfLZY
- HLyhh52hFfy7ArFHuOLDxGnmwu7o0pzePKXxdtGVxalKayvth6aBe4JA71hoxd2tpiVv
- hig6h/nYVkmQu0dgzEcuL00CbrHFxpSqWvo9nn02fyqXPr0Lj0Dp5GexD/sZ1ZZQLHe8
- g0ZGalhXujHq/qVEsSUk3CQWM8en2V8eWWb4ml5Lv2Cf77YuwN0n5dACIWQdaWVBTyMd
- otqWcQMZQODDG6p5T+kTOtwC3jHHSFumveYT3eC1yuf7bEhnmmSlEnC8eKPlF6PeNPsl
- xHVw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUoz80HckR0DuzxEX8SvTJRl2T8rO4uKgxew9VPd3LghbA2NzLMmmbibJUX8rJynG4yT7MWw+I=@lists.denx.de
-X-Gm-Message-State: AOJu0YyjsFSIkCvSRKtbMh4c0CqH2RdylNFq2BtVRsQGqmdBys8ISuCg
- AR4RW4kdqjAHXY7HUst1ZURX6SNS3r2Vzx+waIdxi3cg5zFm3HvpEr6ifMB5OepC8AQ=
-X-Gm-Gg: ASbGnctDzltY4jChH+5msY1/Dn9ZIZov4vCwuDWdvl7lsVIQKbTMOary22F3mtSUcn2
- 0YccVqXLTzNZoEjqd9Vph3F9NS/tN4Bo2XgARNIQ1AXKfMFsseQJSPcxHyVhxESvCKgfzV9QA9H
- a9CnJXp8PEwEMbjXjmvJcKQmyTOBMUMOcR/gCkjnNXNlWeosXOoyyimWAidK0otMMVIxw466DUK
- edWMixBcFuOBgwQW7GALWfJLlOgrOmhyoHUZ/TXDtNt6QuUUU0/BffFWQ/Cnt17QF5PeNMzas5o
- ctZ961fMWur0JkXdiLSwfxxyLZeAI9KrkJw7Y6KUcJ/JV8IFPgygu83W1FMPgLAGYeHFOKJWHYa
- N4wiF5CAKKBMhTCMxo7G6KOlz+REfpt0dYjHBcFTFCcFc8Utkdu48ay9R3Uic0MTnP5Bnzp1m2y
- 090Y6nc2jJPbHcV92tqyU9dUbFgZNGldt3jjstth3nHjTo7pw9rqHjXmxgthDW8ahNMS1fFUDfO
- Bku8+lsyBJhslY1PU9z8k90lRK8fYF8DKcffClHGLoyLu6xgzAsSOh/p/J4Lh9a3g==
-X-Google-Smtp-Source: AGHT+IEOQhHZ9mP3c+cH+fb2jb/qjZoFASdzp4tgxS94eYw1hPukCQsOu1b+altmlyVbntbVSH+iUw==
-X-Received: by 2002:a17:907:96ab:b0:b72:588:2976 with SMTP id
- a640c23a62f3a-b72e0623e83mr514403966b.60.1762691488632; 
- Sun, 09 Nov 2025 04:31:28 -0800 (PST)
-Received: from ?IPV6:2001:1c00:3b8a:ea00:4729:b0ef:dcc4:b0b6?
- (2001-1c00-3b8a-ea00-4729-b0ef-dcc4-b0b6.cable.dynamic.v6.ziggo.nl.
- [2001:1c00:3b8a:ea00:4729:b0ef:dcc4:b0b6])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b72bf9be184sm781157866b.56.2025.11.09.04.31.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 09 Nov 2025 04:31:27 -0800 (PST)
-Message-ID: <3b7285d3-17eb-4c54-886c-872f26d1318d@linaro.org>
-Date: Sun, 9 Nov 2025 13:31:26 +0100
+ d=1e100.net; s=20230601; t=1762696275; x=1763301075;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=bf9ihVqdnDmHR80tptWSf0DUFcE+1twPA6yTJ3A1vjM=;
+ b=Qy/rIuzHgwft2NViOhJLdiliWO5exDsJ+cu5vp4wZoMnboB5f7bCttyFGPnv7A+pPJ
+ xiGYXnD6hU+Rm4IRmoBdNqD/BWdEu1G0pS3ixUczHLUJdJebllKB0YWlNT/cSet1b3rh
+ Qf7ObN7RCEJhnQ0ZTF9x3zTaoiYQupYJcHClyO9spODur5VcvBnhjabpjAlj2d0FsKjN
+ CPFz+Dcbrx60jbcFbYlRqUH13xgTuJxIRILTGno8yR9sWKaTCg6qHum8LgZW/72OeQok
+ 7dMYa6uv/wJBoZD6ihT8CncYt1yq5Ke+Nk8Mw8rRScMLUHDpaZPhspWKp34k31inVboh
+ orzg==
+X-Gm-Message-State: AOJu0YxwzVIvAr5Gx6+wCJ3gVyR0CgNs7G+7+2BElOE8OvRzYsj6yVzY
+ w3DpauklcYY1GgobsviYYrt6PPjRiXvjyfAQa0vtmic4hbp9JjE7NugNqtDKHv2fKBg=
+X-Gm-Gg: ASbGnctSIWOIm/aWvJd2U6X7jJOusu/egG24aDQFuw5/Gap/q7D7m7vQAN67rrrorLY
+ Dnoqqj03+DaCfljaWjoDVYgwpHE+75rhQ1Q/noZI73NawGZ8Mwt/njwCQMyRiFTy1xKjxrP6Hyg
+ lr1eREpkqq5JMHRz3nk3e3qo5cArc+/CqRU+80ZPAV2nPjPpqC1P+C2v6MghxoU+uI1lLVihFfD
+ uSaItfmaVI4t+H7zHPkntMdYjHTVx2/zB4aYBP0km7VFFiKCsMke6sXi+fv4qy2leLWZzs0Kaec
+ fvutbhTM2PBiZZrE0RhOzoAOEXHv17AZJ2XiNJRUYk5DaMrycPxHq+ZUjhSfl6+BAk8b7tPhClb
+ ahMIxLiCMn++2uXiIpE3YZWxrPT1ExDvtSSUgwMoCeYYO5qb0km0zYpSXsnh7t9J3nHJbRmutT6
+ a8UO9v5QjH62re+diQGfeOnx3hzDNqpddBRx8tkD885MijZP1NkqbfvoPQPog=
+X-Google-Smtp-Source: AGHT+IFGbZmunz/tZ16U5G4cL6KU0RMSUaK3UJEy8bSy5LGJME65Sb682FHMAlYrtkgLQg95sBafjw==
+X-Received: by 2002:a05:6808:6503:b0:450:4cbc:b20e with SMTP id
+ 5614622812f47-4504cbcc04amr18824b6e.31.1762696275390; 
+ Sun, 09 Nov 2025 05:51:15 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-45002752ca9sm4622376b6e.14.2025.11.09.05.51.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 09 Nov 2025 05:51:14 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Hai Pham <hai.pham.ud@renesas.com>
+In-Reply-To: <20251107232811.480532-1-marek.vasut+renesas@mailbox.org>
+References: <20251107232811.480532-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PULL] u-boot-sh/master
+Message-Id: <176269627388.3997959.17208358368956040732.b4-ty@konsulko.com>
+Date: Sun, 09 Nov 2025 07:51:13 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mach-snapdragon: capsule_update: Fix eMMC detection for
- non-UFS devices
-To: Alexey Minnekhanov <alexeymin@minlexx.ru>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, ~postmarketos/upstreaming@lists.sr.ht
-References: <20251107232935.283843-1-alexeymin@minlexx.ru>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20251107232935.283843-1-alexeymin@minlexx.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,102 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+On Sat, 08 Nov 2025 00:27:20 +0100, Marek Vasut wrote:
 
-Thanks for this detailed explanation and fix!
+> Remaining R-Car Gen5 driver patches, MMC, clock.
+> Also a trivial adjustment for mailbox core to
+> allow operation without .recv callback.
+> 
+> The following changes since commit fdf36c2e9ad4f770ee951398a86bd55404d9b7ec:
+> 
+>   spl: remove redundant prints in boot_from_devices (2025-11-06 17:42:07 -0600)
+> 
+> [...]
 
-On 11/8/25 00:29, Alexey Minnekhanov wrote:
-> Currently (since 2026.01-rc) on all SDM630/660 based devices this is
-> printed, after observing long boot delay (several seconds) before
-> executing preboot commands:
-> 
->   QCOM-FMP: Failed to find boot partition
-> 
-> find_target_partition() function incorrectly assumes that eMMC is always
-> at number 0. In general you can't rely on device numbering to determine if
-> particular block device is eMMC or SD-card, because it depends on how
-> aliases are defined in device tree "chosen" node. Some SoCs have MMC
-> numbers starting at 1, not 0; so mmc1 is eMMC, mmc2 is SD-card.
-> 
-> Make eMMC detection reliable by using IS_SD() macro from mmc.h header.
-> Using this method target boot partition can be found successfully.
-> With debug prints enabled, this is printed:
-> 
->   QCOM-FMP: skipped SD-Card (devnum 2)
->   QCOM-FMP: Capsule update target: boot (disk 1:60)
->   QCOM-FMP: DFU string: 'mmc 0=u-boot.bin part 1 60'
-> 
-> Without debug prints nothing is printed, no error about failure to find
-> boot partition.>
-> Fixes: fe80a5f80095 ("mach-snapdragon: CapsuleUpdate: support all boot methods")
-> Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
+Merged into u-boot/master, thanks!
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+-- 
+Tom
 
-> ---
->   arch/arm/mach-snapdragon/capsule_update.c | 28 +++++++++++++++++++----
->   1 file changed, 24 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/capsule_update.c b/arch/arm/mach-snapdragon/capsule_update.c
-> index 3699d91852d..586682434b7 100644
-> --- a/arch/arm/mach-snapdragon/capsule_update.c
-> +++ b/arch/arm/mach-snapdragon/capsule_update.c
-> @@ -13,6 +13,7 @@
->   #include <efi.h>
->   #include <efi_loader.h>
->   #include <malloc.h>
-> +#include <mmc.h>
->   #include <scsi.h>
->   #include <part.h>
->   #include <linux/err.h>
-> @@ -80,6 +81,23 @@ static enum ab_slot get_part_slot(const char *partname)
->   	return SLOT_NONE;
->   }
->   
-> +/* Shamelessly copied from lib/efi_loader/efi_device_path.c @ 33 */
-> +/*
-> + * Determine if an MMC device is an SD card.
-> + *
-> + * @desc	block device descriptor
-> + * Return:	true if the device is an SD card
-> + */
-> +static bool is_sd(struct blk_desc *desc)
-> +{
-> +	struct mmc *mmc = find_mmc_device(desc->devnum);
-> +
-> +	if (!mmc)
-> +		return false;
-> +
-> +	return IS_SD(mmc) != 0U;
-> +}
-> +
->   /*
->    * Determine which partition U-Boot is flashed to based on the boot source (ABL/XBL),
->    * the slot status, and prioritizing the uefi partition over xbl if found.
-> @@ -109,19 +127,21 @@ static int find_target_partition(int *devnum, enum uclass_id *uclass,
->   		if (device_get_uclass_id(dev) != UCLASS_BLK)
->   			continue;
->   
-> +		desc = dev_get_uclass_plat(dev);
-> +
->   		/* If we have a UFS then don't look at any other block devices */
->   		if (have_ufs) {
->   			if (device_get_uclass_id(dev->parent->parent) != UCLASS_UFS)
->   				continue;
-> +		}
->   		/*
-> -		 * If we don't have UFS, then U-Boot must be on the eMMC which is always the first
-> -		 * MMC device.
-> +		 * If we don't have UFS, then U-Boot must be on the eMMC
->   		 */
-> -		} else if (dev->parent->seq_ > 0) {
-> +		else if (IS_ENABLED(CONFIG_MMC) && is_sd(desc)) {
-> +			log_debug("skipped SD-Card (devnum %d)\n", desc->devnum);
->   			continue;
->   		}
->   
-> -		desc = dev_get_uclass_plat(dev);
->   		if (!desc || desc->part_type == PART_TYPE_UNKNOWN)
->   			continue;
->   		for (partnum = 1;; partnum++) {
 
