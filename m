@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A07E1CCFA13
-	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 10:11:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 674E5CD1297
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 10:11:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA10D83F15;
-	Sun,  9 Nov 2025 11:10:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 108DE83F32;
+	Sun,  9 Nov 2025 11:10:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="JvpRKJ08";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="J3TiTV8r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85CC083F32; Sun,  9 Nov 2025 11:10:41 +0100 (CET)
+ id 8ED4483F15; Sun,  9 Nov 2025 11:10:42 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88D6E83F1F
- for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 11:10:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A3B783E8A
+ for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 11:10:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-046-114-110-120.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id CD6EE409F0; 
- Sun,  9 Nov 2025 10:10:30 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 2FD55409F1; 
+ Sun,  9 Nov 2025 10:10:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762683031;
- bh=SMJ83y7JEYPU8zElhT/+wbq9+Pth48PcezxtAkbMT4U=;
+ s=20251003; t=1762683032;
+ bh=St9c5t5aXrQYmsuMz7DhcjMr5JwkSSZXNMLWjqZCEQY=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=JvpRKJ08+gvpS7W20g9EszWAtjH4ndc6OmfHyKK/HfWp8TbDBW4/fihRSdAqTll0l
- WT3p23jjIN9vDK3sQJP3fPRPh3FDmcSWGDvazFGTrHTN/968hGqPFJhstM0vXW7SNf
- ITKK1anlWstlohFC4Srd2iI1aQqxqNV78EnRq0wJWJ0exYAHR1PQtKYxxnV303wG0t
- FtWpKynKMLufrGidTXIkuR5ujIqEpNaX9DkgL5boP9ZQj+rb1iYnyTMj94pIJD9F1H
- phYU3DQ5J89THY7H0SziohoaISA6hyGu78wIzcy5+o/ij5vw+eFhi5Rux1UF0p580X
- /988SE8aLnnRYFcIIYjrJwhs9kIq2cSk8LI9qFAdMaUy61RUNt2ag9AhM7wWFNdrFt
- yHrSuN4/lT+96N6ZnCSlIDDwgHVdkZdR1n0g1zbY65KEIA5ib/9nGbg1grUh9jJXbN
- RM2nqxym0Mhl/c1ZkdN+PgnmHTXZF887QEXJ5Iau+j6o7iAx5qAtUSOUoH1GNz9Edn
- f0hsdruSK+3g6nvodc1P+oZh1CNxU6Yu3ERjxvx3+Lf2Og+haMvtQb2nMJTs6OaDrf
- oHThL09H9C4mF6hAgW088g+WOrUvfdAqo61TyD6NYpu17FRRuYbQn2rDRqetzGJoXf
- mITGQhFsitXd2kghIV/YWXXI=
+ b=J3TiTV8rtdIm6UF/b50lxGD14yufZBBXVLyj1qEdIUCz3ONcYzOmG3hq7Tk9rBUiW
+ JCNyrbE1aISeNcEDAxVWtVXtnXIPV2/6a70AuZl8N1CCGjpbR3HgcmZxk34VM83Hni
+ t0B7D4ZVTXgTHOwo2JjmHyRg16xn8q4axRDzIJNZ2GER3YEB4i98jkHMt3asO9V0SJ
+ /kjfvN4p4Yl6aeW5CUNS4EEWJX3lmUWtA+wTcXGDUyDVzNZUmb7omKn10bE25eEoIY
+ 69XFYfHdjNFB636DeTobsOb8yzl3/MXhR2Sz2UlafLiOETDiUD8HV2Vz//iPRTXohV
+ rOcDV6FYeEnAGSB9ywIIAVZwx7ATeGBSHjxjvzPgHI0z7lcukGYbwL9DQDqVee8mQh
+ wdKtQ/vPNqUiRwY40El7pQjLagQKQXKDpjs/r679p4nUClnJZD8Zu5Dv1kXdxR88Zm
+ 1dV3NGues+oceqfapopIU8Wnaj3z5uqF4cTH6vtxWoubf17ksG9pcAzT7ktGPsaRCU
+ L76SvxCTIQVdsVpfPWLD7Qb2tbqx0qSXcURQ+XdY9LeL1YKXzCxI83nYgUcZJKWCum
+ Ku1N5im3so1zoL1KgmO+eMY2jwrvQZB9K5npBwIuIqk/0lCxtTtX52xK16GDczZ8um
+ aUVIXMTbus4sQIsMSYbpgekg=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -65,9 +65,9 @@ Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 5/9] test: common/print: do not use fixed buffer addresses
-Date: Sun,  9 Nov 2025 11:10:06 +0100
-Message-ID: <20251109101010.306268-6-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 6/9] test: cmd/fdt: do not use fixed buffer addresses
+Date: Sun,  9 Nov 2025 11:10:07 +0100
+Message-ID: <20251109101010.306268-7-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
 References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
@@ -90,180 +90,152 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 The location of memory depends on the board. Do not assume memory at fixed
-memory locations. Use calloc() instead to allocate buffers.
+memory locations. Use memalign() instead to allocate a buffer.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/common/print.c | 76 ++++++++++++++++++++++++---------------------
- 1 file changed, 40 insertions(+), 36 deletions(-)
+ test/cmd/fdt.c      |  8 ++++++--
+ test/common/print.c | 37 ++++++++++++++++---------------------
+ 2 files changed, 22 insertions(+), 23 deletions(-)
 
-diff --git a/test/common/print.c b/test/common/print.c
-index 76ee851fe6a..2ac7eeed2c1 100644
---- a/test/common/print.c
-+++ b/test/common/print.c
-@@ -168,12 +168,8 @@ static int print_display_buffer(struct unit_test_state *uts)
- 	u8 *buf;
- 	int i;
+diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+index b950123b6da..4c3c6308ab4 100644
+--- a/test/cmd/fdt.c
++++ b/test/cmd/fdt.c
+@@ -265,7 +265,7 @@ FDT_TEST(fdt_test_addr_resize, UTF_CONSOLE);
+ static int fdt_test_move(struct unit_test_state *uts)
+ {
+ 	char fdt[256];
+-	ulong addr, newaddr = 0x10000;
++	ulong addr, newaddr;
+ 	const int size = sizeof(fdt);
+ 	uint32_t ts;
+ 	void *buf;
+@@ -275,8 +275,10 @@ static int fdt_test_move(struct unit_test_state *uts)
+ 	ts = fdt_totalsize(fdt);
  
--	/* This test requires writable memory at zero */
--	if (IS_ENABLED(CONFIG_X86))
--		return -EAGAIN;
--
--	buf = map_sysmem(0, BUF_SIZE);
--	memset(buf, '\0', BUF_SIZE);
-+	buf = calloc(1, BUF_SIZE);
+ 	/* Moved target DT location */
+-	buf = map_sysmem(newaddr, size);
++	buf = memalign(8, size);
 +	ut_assertnonnull(buf);
- 	for (i = 0; i < 0x11; i++)
- 		buf[i] = i * 0x11;
+ 	memset(buf, 0, size);
++	newaddr = map_to_sysmem(buf);
  
-@@ -232,7 +228,7 @@ static int print_display_buffer(struct unit_test_state *uts)
- 	ut_assert_nextline("00000000: 00 1f 20 21 7e 7f 80 81 ff 99                    .. !~.....");
+ 	/* Test moving the working FDT to a new location */
+ 	ut_assertok(run_commandf("fdt move %08lx %08lx %x", addr, newaddr, ts));
+@@ -288,6 +290,8 @@ static int fdt_test_move(struct unit_test_state *uts)
+ 	ut_assert_nextline("Total of %d byte(s) were the same", ts);
  	ut_assert_console_end();
  
--	unmap_sysmem(buf);
 +	free(buf);
- 
++
  	return 0;
  }
-@@ -244,13 +240,14 @@ static int print_hexdump_line(struct unit_test_state *uts)
+ FDT_TEST(fdt_test_move, UTF_CONSOLE);
+diff --git a/test/common/print.c b/test/common/print.c
+index 2ac7eeed2c1..f33476a36b4 100644
+--- a/test/common/print.c
++++ b/test/common/print.c
+@@ -266,74 +266,70 @@ static int print_do_hex_dump(struct unit_test_state *uts)
+ {
  	u8 *buf;
  	int i;
++	ulong addr;
  
--	buf = map_sysmem(0, BUF_SIZE);
--	memset(buf, '\0', BUF_SIZE);
-+	buf = calloc(1, BUF_SIZE);
-+	ut_assertnonnull(buf);
- 	for (i = 0; i < 0x11; i++)
- 		buf[i] = i * 0x11;
- 
- 	/* Check buffer size calculations */
--	linebuf = map_sysmem(0x400, BUF_SIZE);
-+	linebuf = calloc(1, BUF_SIZE);
-+	ut_assertnonnull(buf);
- 	memset(linebuf, '\xff', BUF_SIZE);
- 	ut_asserteq(-ENOSPC, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 75));
- 	ut_asserteq(0xff, linebuf[0]);
-@@ -258,7 +255,8 @@ static int print_hexdump_line(struct unit_test_state *uts)
- 	ut_asserteq('\0', linebuf[75]);
- 	ut_asserteq(0xff, linebuf[76]);
- 
--	unmap_sysmem(buf);
-+	free(linebuf);
-+	free(buf);
- 
- 	return 0;
- }
-@@ -269,69 +267,74 @@ static int print_do_hex_dump(struct unit_test_state *uts)
- 	u8 *buf;
- 	int i;
- 
--	/* This test requires writable memory at zero */
--	if (IS_ENABLED(CONFIG_X86))
--		return -EAGAIN;
--
--	buf = map_sysmem(0, BUF_SIZE);
--	memset(buf, '\0', BUF_SIZE);
-+	buf = calloc(1, BUF_SIZE);
-+	ut_assertnonnull(buf);
+ 	buf = calloc(1, BUF_SIZE);
+ 	ut_assertnonnull(buf);
++	addr = map_to_sysmem(buf);
  	for (i = 0; i < 0x11; i++)
  		buf[i] = i * 0x11;
  
  	/* bytes */
  	print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, buf, 0x12);
  	ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff  ..\"3DUfw........",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf);
+-			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf);
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
  	ut_assert_nextline("%0*lx: 10 00                                            ..",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf + 0x10UL);
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf + 0x10UL);
++			   addr + 0x10UL);
  	ut_assert_console_end();
  
  	/* line length */
  	print_hex_dump("", DUMP_PREFIX_ADDRESS, 8, 1, buf, 0x12, true);
  	ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77  ..\"3DUfw",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf);
+-			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf);
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
  	ut_assert_nextline("%0*lx: 88 99 aa bb cc dd ee ff  ........",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x8UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf + 0x8UL);
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf + 0x8UL);
++			   addr + 0x8UL);
  	ut_assert_nextline("%0*lx: 10 00                    ..",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf + 0x10UL);
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf + 0x10UL);
++			   addr + 0x10UL);
  	ut_assert_console_end();
--	unmap_sysmem(buf);
  
  	/* long line */
  	buf[0x41] = 0x41;
  	print_hex_dump("", DUMP_PREFIX_ADDRESS, 0x40, 1, buf, 0x42, true);
  	ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ..\"3DUfw........................................................",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf);
+-			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf);
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
  	ut_assert_nextline("%0*lx: 00 41                                                                                                                                                                                            .A",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x40UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf + 0x40UL);
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf + 0x40UL);
++			   addr + 0x40UL);
  	ut_assert_console_end();
  
  	/* 16-bit */
  	print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 2, buf, 0x12, true);
  	ut_assert_nextline("%0*lx: 1100 3322 5544 7766 9988 bbaa ddcc ffee  ..\"3DUfw........",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf);
+-			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf);
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
  	ut_assert_nextline("%0*lx: 0010                                     ..",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf + 0x10UL);
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf + 0x10UL);
++			   addr + 0x10UL);
  	ut_assert_console_end();
--	unmap_sysmem(buf);
  
  	/* 32-bit */
  	print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 4, buf, 0x14, true);
  	ut_assert_nextline("%0*lx: 33221100 77665544 bbaa9988 ffeeddcc  ..\"3DUfw........",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf);
+-			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf);
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
  	ut_assert_nextline("%0*lx: 00000010                             ....",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf + 0x10UL);
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf + 0x10UL);
++			   addr + 0x10UL);
  	ut_assert_console_end();
--	unmap_sysmem(buf);
  
  	/* 64-bit */
  	print_hex_dump("", DUMP_PREFIX_ADDRESS, 16, 8, buf, 0x18, true);
  	ut_assert_nextline("%0*lx: 7766554433221100 ffeeddccbbaa9988  ..\"3DUfw........",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf);
+-			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf);
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
  	ut_assert_nextline("%0*lx: 0000000000000010                   ........",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf + 0x10UL);
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf + 0x10UL);
++			   addr + 0x10UL);
  	ut_assert_console_end();
--	unmap_sysmem(buf);
  
  	/* ASCII */
- 	buf[1] = 31;
-@@ -342,9 +345,10 @@ static int print_do_hex_dump(struct unit_test_state *uts)
+@@ -345,8 +341,7 @@ static int print_do_hex_dump(struct unit_test_state *uts)
  	buf[8] = 255;
  	print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 1, buf, 10, true);
  	ut_assert_nextline("%0*lx: 00 1f 20 21 7e 7f 80 81 ff 99                    .. !~.....",
--			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL);
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   (uintptr_t)buf);
+-			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+-			   (uintptr_t)buf);
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
  	ut_assert_console_end();
--	unmap_sysmem(buf);
-+	free(buf);
+ 	free(buf);
  
- 	return 0;
- }
 -- 
 2.51.0
 
