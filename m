@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C762CCFA1A
-	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 19:47:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB56ECCF9F8
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 19:47:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9049383F26;
-	Sun,  9 Nov 2025 20:47:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E55D683F3D;
+	Sun,  9 Nov 2025 20:47:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IBvUDG9b";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="T8hipxCM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDA1383F2F; Sun,  9 Nov 2025 20:47:08 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 5F09783F4C; Sun,  9 Nov 2025 20:47:12 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 108E183F24
- for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 20:47:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BFD083F37
+ for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 20:47:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4d4Nbs0lmZz9sqV;
- Sun,  9 Nov 2025 20:47:05 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d4Nbw4M7Bz9tBc;
+ Sun,  9 Nov 2025 20:47:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762717625;
+ s=mail20150812; t=1762717628;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jmMxZpFRrtWmqwzLqxkjGOXy6R01ZHnjwHYyxGg9i/o=;
- b=IBvUDG9b2tPlVUiY1ulPMxGnSP1MvQIGsJrE3NAdg+W3kKEPVL0se8Kdjt/mcIezPWUMUI
- urbjXaMMeePPO/FMshR1kfFO7VrOK91LQhUadq4L5trKI68IuMsqAydEtmXuT1uPbxFLHV
- WrXJkcE9mc/IyiQNS8k22dowXiUY6gGmueL20B/aFzgzQ3iKYmQ+AirAdebTa3+rmCyIXA
- E8AZ6hjk719Cplu/m8WZ2g4bXWXIJa7bXIjcYUnUmmnNrTe7VPfV/POC1iz/4CGU0lExP9
- MYFSW6wzLgXD0gaRLgZksQWKZuCG3zNwh5cFX43hLxYU6c1czh/oAHEbBMLpzQ==
-Message-ID: <47e110a8-dbf4-4a00-b35d-72ad69d4d7a6@mailbox.org>
-Date: Sun, 9 Nov 2025 19:55:06 +0100
+ bh=vp4ASMGGtPtzw1l/Hc18eoGedeQ5ZoOfm7UhieZbbjU=;
+ b=T8hipxCMvJ3PIByg2LqBdpgGq4SSL4eosX2g/0uoII+wEshIbPuTCxWQYNmMYwGJDDne3N
+ aQN5THWew7W7FR5Q8tkcw65S+rEQAJSABwubZDj+v7fdyjZXi7KjZthpNoP+LOJflipilD
+ 1cwQiJ0azFmLyzXIqmGZL059wpm8asZ/K7fnleZhh+CMMwDa4WAcoBU1B7IHI3P8WXMaZx
+ z2hldXg1uz+/sI4Ep8ozWKH1AZzsES4Qo/2QAepwt77mvd0stXMx2wzr1cXpiaWBez8TQO
+ 0q3EWvFqU59PQNn/8Ay2C6bfUXkRUseoZH/8cIBeUsArubYkqqwXuQNCMoPB0Q==
+Message-ID: <005646e0-a7ed-43c0-9b20-e115d577b431@mailbox.org>
+Date: Sun, 9 Nov 2025 20:00:06 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 2/3] Image size checks: Clarify help texts
+Subject: Re: [PATCH v4 3/3] Image size checks: Deduplicate Makefile
 To: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de
 Cc: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -59,14 +60,14 @@ Cc: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
  Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
  Ye Li <ye.li@nxp.com>
 References: <20251015012320.2331007-1-pro@denx.de>
- <20251015012320.2331007-3-pro@denx.de>
+ <20251015012320.2331007-4-pro@denx.de>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251015012320.2331007-3-pro@denx.de>
+In-Reply-To: <20251015012320.2331007-4-pro@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 4ef6c95c4e1cebda028
-X-MBO-RS-META: 7phu56xn6o6ujexac3thn9k9gjh969e5
+X-MBO-RS-ID: 954a5945fad04d2d099
+X-MBO-RS-META: 9aagb13m1ask3zgw84595hximesejp89
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,29 +86,8 @@ X-Virus-Status: Clean
 
 On 10/15/25 3:23 AM, Philip Oberfichtner wrote:
 
-[...]
+The subject tag is wrong, it should be "Makefile:" or "kbuild:" .
 
-> @@ -550,8 +550,8 @@ config BOARD_SIZE_LIMIT
->   	default 1048576 if RCAR_64
->   	depends on HAS_BOARD_SIZE_LIMIT
->   	help
-> -	  Maximum size of the U-Boot image. When defined, the build system
-> -	  checks that the actual size does not exceed it.  This does not
-> +	  Maximum size of the U-Boot image. The build system will throw an
-> +	  error if the actual image size exceeds this value. This does not
-
-Simply keep the original text with "check" keyword in it, and drop the 
-"When defined" part, since this is now gated by the HAS_... symbols, 
-then reuse the same for SPL/TPL/VPL :
-
-"
-The build system checks that the actual image size does not exceed this 
-value.
-"
-
-or this if you want the error out part in there:
-
-"
-The build system checks that the actual image size does not exceed this 
-value, and fails the build if it does.
-"
+> Deduplicate some redundancies within the SIZE_CHECK code in the toplevel
+> Makefile. No functional changes.
+The rest is fine, thanks !
