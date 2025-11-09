@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FA74CD1297
-	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 10:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8E1ACCFA13
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 10:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46B6A83EE2;
-	Sun,  9 Nov 2025 11:10:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8CB3F83F24;
+	Sun,  9 Nov 2025 11:10:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pojzW7/a";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Aogrhawk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27BEC83F15; Sun,  9 Nov 2025 11:10:37 +0100 (CET)
+ id A9FE883E8A; Sun,  9 Nov 2025 11:10:37 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CF2783E8A
+ by phobos.denx.de (Postfix) with ESMTPS id CFC1883EE8
  for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 11:10:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-046-114-110-120.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 98091409EE; 
- Sun,  9 Nov 2025 10:10:28 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 7BFED409EF; 
+ Sun,  9 Nov 2025 10:10:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762683029;
- bh=ykT3MtrMN5Vg2uyeCJjlm2CrwnWMMhBqwxBQnOPtqZQ=;
+ s=20251003; t=1762683030;
+ bh=Swlr1HDFJVPMon1wV5glISZh6zGgMbpivRUNN3+UaM8=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=pojzW7/aszyc2fbYkyAC3+pIIHBCny2bcOB0yZaSwEsgqYGqUXvUDnOEwHNxqE49N
- mgqxQd+Vf/I5E0AnDm+bHFV8AnimTsZ7jse/kXj+BBJ3i5WwcdxR154ugACLuB+857
- njsPPuocWxZOAVDUEhHpovnEP4rE4HhPiislsze5YLmx1AKG65DWcHZIOunn28Pmkp
- BOUgbURfXlL9k/DJnt3rIrCSz1cE8OVPcU/FWKUagGX5DJkYCZoAGSwWQlrOnt800t
- EYHeIwksMHhMmOlI1WIZyZuruZc4/DbEJpD2pPzrqW6f9HaUfSq4xRVYeOcjPCOEhS
- PqpH2B67o5PV94zN7iCWqVNx87yiBLuhSVbw4r8kZ9GVe4Z6DIKAZcno3eK8LlxVrX
- jDqKrnd+6pQl3S+NmUnflVZ0wKS+FWfr1M8OdmxNrUAfHKzRdKA/009cBONAtZ2IDU
- saB6llacseeqmokTKAvO+dqwoZ+z0ToYr5tDpOsffwow4K0TqvGmw68fjVCO06OKbB
- WejnI2sX23hEtiACa0yn9ycpAyqVDYzsg588lcRFeHPNH7knVTUplFrpuXpdAEv0Xp
- doo748/cUhIaDbxdrIk3a6BFUaCSTewrNeXRejmOKm92l1UI1QMM0LXLNMz171n/eC
- l4XCP7MXsrf5l148CzXhxeYI=
+ b=AogrhawkKLK8mOXmPfmRhvJHP70npJDVdBldFnOHPoZCX8A8WTFOqamA2ALxoaoP7
+ W7eLXPE1q42mL93kReuEIHrW3N2+aGoDEM9uifkt4KIWE97Fai/TD2+FV1DwpUGjPi
+ m8aHnA0LX458O659N8G8oPoeZMpyj7fTVl1DDToLrA4DmaLP1yznZcK1oz0Ljw/qxF
+ fU0qCNHA/TjVNdgykjj/e6lIOBR7y1A9Emt56GczyZ1BmNPlLI25L1OYIm8o0p30b5
+ CmpmQeEb86B04mbbDdVRtNGaG0w/PCeIHWk/PuB9ygBNzFo8a4qzv9fH3mNq570p5l
+ T42HnWgLbxYqA68vjaJ0nGeNVscpI4Kg3NYcD1nh7vvlkqUW0By/xHix/Hh5xZ0L/X
+ SxjsMXUDvIbZ9gsqb3ME/qUQUl/Yr5TBTB2LSg6d3Ghzh1Sqg9NwGYm0lD6r1pS1YR
+ X9y3NuMw0QDmAJfFLcElJKj3HuZjLj1HfPbyOgEvRZnTo9sSAtuVWyj/pqaZKg30IK
+ +HlkvoOeW0ig+E100GAgXuPsrwtTMZHKtwSDLM+5pjMVU4pQwMuoBstr4wVxgD+C9X
+ /x1yUr9DfUBPZPRTFaKRzUeso332yqtMhHTVwovYrhICinrm7p0XZY8hN9cz7x4TVn
+ owUsUa5iimRPfp+ChHEi0B0k=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -65,9 +65,9 @@ Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/9] test: cmd/bdinfo: make no flash assumption
-Date: Sun,  9 Nov 2025 11:10:04 +0100
-Message-ID: <20251109101010.306268-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 4/9] test: cmd/bdinfo: consider arch_print_bdinfo() output
+Date: Sun,  9 Nov 2025 11:10:05 +0100
+Message-ID: <20251109101010.306268-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
 References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
@@ -89,31 +89,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The location and size of flash is device-dependent. Do not make any
-assumption about the location and size.
+On x86 commit 9b35dbc93fd4 ("x86: Show the timestamp counter with bdinfo")
+has added another bdinfo output line.
 
+On RISC-V commit 66b5ee9c558e ("riscv: add RISC-V fields to bdinfo
+command") implemented arch_print_bdinfo().
+
+Update the bdinfo test accordingly.
+
+Fixes: 9b35dbc93fd4 ("x86: Show the timestamp counter with bdinfo")
+Fixes: 66b5ee9c558e ("riscv: add RISC-V fields to bdinfo command")
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/cmd/bdinfo.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ test/cmd/bdinfo.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 09f44ee41ed..214b237152b 100644
+index 214b237152b..28d448a0866 100644
 --- a/test/cmd/bdinfo.c
 +++ b/test/cmd/bdinfo.c
-@@ -161,9 +161,9 @@ static int bdinfo_test_all(struct unit_test_state *uts)
- 	ut_assertok(bdinfo_check_mem(uts));
+@@ -215,8 +215,15 @@ static int bdinfo_test_all(struct unit_test_state *uts)
+ 		ut_assertok(test_num_l(uts, "malloc base", gd_malloc_start()));
+ 	}
  
- 	/* CONFIG_SYS_HAS_SRAM testing not supported */
--	ut_assertok(test_num_l(uts, "flashstart", 0));
--	ut_assertok(test_num_l(uts, "flashsize", 0));
--	ut_assertok(test_num_l(uts, "flashoffset", 0));
-+	ut_check_console_linen(uts, "flashstart");
-+	ut_check_console_linen(uts, "flashsize");
-+	ut_check_console_linen(uts, "flashoffset");
- 	ut_assert_nextline("baudrate    = %lu bps",
- 			   env_get_ulong("baudrate", 10, 1234));
- 	ut_assertok(test_num_l(uts, "relocaddr", gd->relocaddr));
++	/* Check arch_print_bdinfo() output */
+ 	if (IS_ENABLED(CONFIG_X86))
+-		ut_check_skip_to_linen(uts, " high end   =");
++		ut_check_skip_to_linen(uts, "tsc");
++
++#ifdef CONFIG_RISCV
++	ut_check_console_linen(uts, "boot hart");
++	if (gd->arch.firmware_fdt_addr)
++		ut_check_console_linen(uts, "firmware fdt");
++#endif
+ 
+ 	return 0;
+ }
 -- 
 2.51.0
 
