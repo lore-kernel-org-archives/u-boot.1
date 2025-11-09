@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 561D1CCFA18
-	for <u-boot@archiver.kernel.org>; Sat,  8 Nov 2025 20:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EF2ACCFA13
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 01:35:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AEB283E8A;
-	Sat,  8 Nov 2025 21:55:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AF14083EA9;
+	Sun,  9 Nov 2025 02:35:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R09l+J7S";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Pmpr/n+z";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VsJus5eA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08D4A83E8E; Sat,  8 Nov 2025 21:55:15 +0100 (CET)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3A8EB83EAC; Sun,  9 Nov 2025 02:35:45 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 940DA83E7F
- for <u-boot@lists.denx.de>; Sat,  8 Nov 2025 21:55:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2372683E7F
+ for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 02:35:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=d3dx12.xx@gmail.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-656cd6c1c5eso794737eaf.0
- for <u-boot@lists.denx.de>; Sat, 08 Nov 2025 12:55:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762635311; x=1763240111; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WTW6SyY05JSaPiamqc8fA5dE2dfmd1gMFUMaAf3ki2c=;
- b=R09l+J7SQD0WAIfOyGWnpnwHuN+xg1+PAiPPGfC8Jtio9dia6g0hiinES8Ig7+UwsC
- rpj3XY7/v/eeG/ZMHCMKlGmnbZTxMlXncFfhlvHZgqxhmyf5HvB8BwB9B4WgyBBMCTvN
- 3gU8zhG6S1B+wIlmDEwmnAKFO7cnRYmjiSlfdyP1eLKZjf/MtGsSlv3lxekEkRFz647b
- radtlZhlUYV17I/bRM8xgxwVy7tY8Jhrx+9hB/ufSF/yKwVThX86M6D+DPYxc6tc5cdi
- Ots9xgfRs+ev+RW28mXNmSjA15XhjoCXkmKBCmFpDDDHPVxDH7uibkcSwah7byQUDrF2
- 36Fg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762635311; x=1763240111;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=WTW6SyY05JSaPiamqc8fA5dE2dfmd1gMFUMaAf3ki2c=;
- b=fukjYRF1ASQV0Xn2T9QBUcTVbdMXJzcMsSvuoFW0q/VsQTfiBD4W49dWNLP/OCWhI2
- g6JfI2HZB6L/WlwfP4XNZME2JH1JHijgCR+SExPrdI2jrLLNThQT6U1noLKzPCtllZa3
- 3DbgxQlVFCERks46FJwU1JetVa9uVQ8Ln61JiFJDLBDls2Yevz7XbJaRoQT9Kaa73DsJ
- CmA5XDspGUxs44xGfWAs97BoWNuXFHZQx2oI/BrKQTb0eP0Paivr2QicBkNtJ4UfAU0H
- TNPycHXIRe+A/jXtXxsWfTKo8f14ydMXtfWDBvdqFa62DWKGgnOjrThSgUj9eecig/bg
- efJA==
-X-Gm-Message-State: AOJu0Yxry0HmE95YRGrDq+IG1aCIp4dNeJNubE2NhDTp5H5wLbQXa7jK
- 8Citeh1zez7Q+R07qLZPH0Unx8pVge124EsjX07+EZA8RMBEcaw4MSkyq6UKlaxP1knvrFlgdLG
- DRp068LxBhsRS5J3w21bk+azVOhdiJ0I=
-X-Gm-Gg: ASbGncv8DRXQXdGG3eWbZutMhLkUp9YqjzntZDJBZ9qZ7EOwUaaQZ4AHUQd1+yBmoEq
- OEHP3vzsc8RKWwJETDz4KWY0jsbA8j+mZzkRlMUd6S3s0WIl/aThkF3BfC3XFdwr4DG4TtbW2TE
- Zz1qzYrahx7ksCdJJPauWW3uQjaSjp3VM9yPERAt8khb/p+N5jU50+1ZrF0aDz/GdliUzrkWkeS
- ey3An9oETNV5OVcAL1SRaxP5zvxtIKFM+EzSoBPOmV41DuFStbswdFecxeujA==
-X-Google-Smtp-Source: AGHT+IEyKIiPb9oZ6k4N7mz4Z4/HyRWAQYU9BYlmLCF/yHYq0BWpfmD5oWUW2gVJpCTqM84gB4TmRuiaomk3j6dpxHU=
-X-Received: by 2002:a05:6808:2f08:b0:450:3c7b:e7d0 with SMTP id
- 5614622812f47-4503c7bfa17mr543337b6e.48.1762635311197; Sat, 08 Nov 2025
- 12:55:11 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d3wNY6nJHz9t8R;
+ Sun,  9 Nov 2025 02:35:41 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762652142;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=GlaZYbqBOkItcqCSdF4ob3HYhGOrL3boCrY7EDB76Go=;
+ b=Pmpr/n+zpcKHWQFCvyfd0pDyV+vxQ5zwbRVsjzZJNMrmsX0esJbrgUw9pChxol/MzR0gaG
+ 6l/GY/0nvBQySbhkMQWvdH6utoEYmVlPRTAtIxmNAfrFooG6VYC2MIBI5ygwcd73YffgIB
+ xN81/E45XIB0QqrXN0giLgRuPjHqR5JLs0W7Qv4mRoQ3SvVDn+tzg3GIjMwgB7sDgMF0ax
+ PzzVoE5cxdUoBiu8pOR/zDtArVgFi4X+BoVYwIXQhgKRjVHdG8MO2rvsn5g6iW41S3y66/
+ vjBwv9Ewpk1zsgTiXr51LZ9vEKKeIiuzSpxhB8XfX6fe/hSfFM51TYKvZmPUwg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=VsJus5eA;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762652140;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=GlaZYbqBOkItcqCSdF4ob3HYhGOrL3boCrY7EDB76Go=;
+ b=VsJus5eAhrMKO1RkMVNWwY09bse7RydAvod4zaffGzpGuJcsRTXibojjPqCZs5JjWrqjMz
+ pvnnTxh3a7pogK6sgHw+Fi4uzYVQoJyDAObmYnt731ohJyQnirFeCTHTQ70wcn6FHXY6+t
+ StL/pkRVC5icFXMdwnnpu6vx8bD7fcvnycZmVa2NGwhnri69aHpu37NtZbEpVr93npktcc
+ bWMH9NM7h2M0L3U0UR6ftgtihvh5C4CmvYhuyWgvRnLYoumAWytkZbxqXMSY3kUNVur9JU
+ hIP896fFTjdnioOwdnRMkjNVAoNRxInVPd3mlaWY1jv3jxA3IUmpk4/hLRv1Pg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+Subject: [PATCH v3 1/4] clk: scmi: Bulk allocate all sub-driver instance data
+Date: Sun,  9 Nov 2025 02:35:06 +0100
+Message-ID: <20251109013533.816361-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20251101-clang-fixes-v1-0-a8398475226e@gmail.com>
- <176246626861.3129497.14948596131312532180.b4-ty@konsulko.com>
- <20251106221355.GZ6688@bill-the-cat>
-In-Reply-To: <20251106221355.GZ6688@bill-the-cat>
-From: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
-Date: Sat, 8 Nov 2025 21:55:00 +0100
-X-Gm-Features: AWmQ_blqJS5vS134xUnVYeSvTQneDHDatyWsoI9jZU3diDXI1zV24UF-tBnOPSc
-Message-ID: <CAChbrCYcFua=B9ZaS8_tbzugUh6MyLMJo3T9tEDZhA-Y6zdsOA@mail.gmail.com>
-Subject: Re: [PATCH 0/2] Fix AArch32 compilation with Clang
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Samuel Holland <samuel@sholland.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 2c33fa0e423a543ac5d
+X-MBO-RS-META: ufhs3dynwfnwfg94u35os9w8c1ema757
+X-Rspamd-Queue-Id: 4d3wNY6nJHz9t8R
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,56 +93,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you for your reply.
+Allocate all sub-driver instance data at once. The amount of data that
+have to be allocated is known up front, so is the size of the data, so
+there is no need to call malloc() in a loop, mallocate all data at once.
 
-Please review a fix for the aforementioned issue[1] and let me know
-whether this enables your
-local and CI builds with Clang!
+The upside is, less heap fragmentation and fewer malloc() calls overall,
+and a faster boot time.
 
-Thank you!
+The downside is, if some of the clock fail to register, then the clock
+driver cannot free parts of the bulk allocated sub-driver instance data.
+Such a failure can only occur if clk_register() were to fail, and if that
+happens, the system has more significant problems. Worse, if a core clock
+driver fails to probe, the system has even bigger problem.
 
-Best regards,
-Dmitrii
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Alice Guo <alice.guo@nxp.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Valentin Caron <valentin.caron@foss.st.com>
+Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+Cc: u-boot@lists.denx.de
+---
+V2: Add RB from Peng
+V3: No change
+---
+ drivers/clk/clk_scmi.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-[1] https://lore.kernel.org/u-boot/20251108-clang-cross-fixes-v1-1-ea6c4282=
-844a@gmail.com/
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index 37e349b9c78..548bbfe14de 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
+@@ -283,7 +283,7 @@ static ulong scmi_clk_set_rate(struct clk *clk, ulong rate)
+ 
+ static int scmi_clk_probe(struct udevice *dev)
+ {
+-	struct clk_scmi *clk_scmi;
++	struct clk_scmi *clk_scmi_bulk, *clk_scmi;
+ 	struct scmi_clock_priv *priv = dev_get_priv(dev);
+ 	size_t num_clocks, i;
+ 	int ret;
+@@ -312,20 +312,23 @@ static int scmi_clk_probe(struct udevice *dev)
+ 		return ret;
+ 	}
+ 
++	clk_scmi_bulk = kzalloc(num_clocks * sizeof(*clk_scmi), GFP_KERNEL);
++	if (!clk_scmi_bulk)
++		return -ENOMEM;
++
+ 	for (i = 0; i < num_clocks; i++) {
+ 		char *clock_name;
+ 		u32 attributes;
+ 
+ 		if (!scmi_clk_get_attibute(dev, i, &clock_name, &attributes)) {
+-			clk_scmi = kzalloc(sizeof(*clk_scmi), GFP_KERNEL);
+-			if (!clk_scmi || !clock_name)
++			clk_scmi = clk_scmi_bulk + i;
++			if (!clock_name)
+ 				ret = -ENOMEM;
+ 			else
+ 				ret = clk_register(&clk_scmi->clk, dev->driver->name,
+ 						   clock_name, dev->name);
+ 
+ 			if (ret) {
+-				free(clk_scmi);
+ 				free(clock_name);
+ 				return ret;
+ 			}
+-- 
+2.51.0
 
-
-On Thu, Nov 6, 2025 at 11:13=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Thu, Nov 06, 2025 at 03:57:48PM -0600, Tom Rini wrote:
->
-> > On Sat, 01 Nov 2025 10:39:57 +0100, Dmitrii Sharshakov wrote:
-> >
-> > > I faced some minor compatibility issues when choosing Clang as the cr=
-oss-compiler for my target.
-> > >
-> > > Please review these two fixes, aiming at enabling Clang-based builds =
-(still using GNU binutils)
-> > > for 32-bit ARM targets.
-> > >
-> > > Tested to fix build with (also run-tested on qemu arm and arm64 with =
-clang):
-> > >
-> > > [...]
-> >
-> > Applied to u-boot/master, thanks!
-> >
-> > [1/2] arch: arm: build: only set -mgeneral-regs-only for AArch64
-> >       commit: e8e3b38def93b5e5d53569961237ce215454e141
-> > [2/2] build: fix building u-boot.lds with Clang as a cross-compiler
-> >       commit: f7d177395d73f7747373dfd0ef7329834788106e
->
-> So, I can replicate your success if I do:
-> $ export PATH=3D${PATH}:/opt/gcc-14.2.0-nolibc/aarch64-linux/bin
-> $ make O=3D/tmp/rpi4 CROSS_COMPILE=3Daarch64-linux- CC=3Dclang-18 HOSTCC=
-=3Dclang-18 rpi_4_config all
->
-> But if I instead use CROSS_COMPILE=3D/opt/gcc-.../bin/aarch64-linux-
-> instead we get /usr/bin/as being used and fail. Any ideas where perhaps
-> CROSS_COMPILE isn't being trimmed correctly and passed to clang maybe?
-> Thanks!
->
-> --
-> Tom
