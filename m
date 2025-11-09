@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFAC8CCFA13
-	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 13:51:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73A54CCFA1A
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 18:37:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F36483EC0;
-	Sun,  9 Nov 2025 14:51:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A0BBD83EF8;
+	Sun,  9 Nov 2025 19:37:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aYUwFy9m";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qDMTtETL";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dLo8BiKX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C916C83EF2; Sun,  9 Nov 2025 14:51:18 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E967E83EF8; Sun,  9 Nov 2025 19:37:35 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A751483EA9
- for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 14:51:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E0EA183EEF
+ for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 19:37:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3e3dac349easo1458680fac.2
- for <u-boot@lists.denx.de>; Sun, 09 Nov 2025 05:51:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762696275; x=1763301075; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bf9ihVqdnDmHR80tptWSf0DUFcE+1twPA6yTJ3A1vjM=;
- b=aYUwFy9mci93pgvPVLQnjL+ikWKcUOIzu0eXbsW7iT7Ku7uNYPBwUo0u0LReXm+NQE
- 0E/N0Jcx6CYVbsDAJiUGs5SpfZXNp0v7utBOiYx/JwD42SAsHDRkAm4cLp6rJXv7UZAe
- RuyION92w9W+kjNNas1nuTKITTpOOswopd9l8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762696275; x=1763301075;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=bf9ihVqdnDmHR80tptWSf0DUFcE+1twPA6yTJ3A1vjM=;
- b=Qy/rIuzHgwft2NViOhJLdiliWO5exDsJ+cu5vp4wZoMnboB5f7bCttyFGPnv7A+pPJ
- xiGYXnD6hU+Rm4IRmoBdNqD/BWdEu1G0pS3ixUczHLUJdJebllKB0YWlNT/cSet1b3rh
- Qf7ObN7RCEJhnQ0ZTF9x3zTaoiYQupYJcHClyO9spODur5VcvBnhjabpjAlj2d0FsKjN
- CPFz+Dcbrx60jbcFbYlRqUH13xgTuJxIRILTGno8yR9sWKaTCg6qHum8LgZW/72OeQok
- 7dMYa6uv/wJBoZD6ihT8CncYt1yq5Ke+Nk8Mw8rRScMLUHDpaZPhspWKp34k31inVboh
- orzg==
-X-Gm-Message-State: AOJu0YxwzVIvAr5Gx6+wCJ3gVyR0CgNs7G+7+2BElOE8OvRzYsj6yVzY
- w3DpauklcYY1GgobsviYYrt6PPjRiXvjyfAQa0vtmic4hbp9JjE7NugNqtDKHv2fKBg=
-X-Gm-Gg: ASbGnctSIWOIm/aWvJd2U6X7jJOusu/egG24aDQFuw5/Gap/q7D7m7vQAN67rrrorLY
- Dnoqqj03+DaCfljaWjoDVYgwpHE+75rhQ1Q/noZI73NawGZ8Mwt/njwCQMyRiFTy1xKjxrP6Hyg
- lr1eREpkqq5JMHRz3nk3e3qo5cArc+/CqRU+80ZPAV2nPjPpqC1P+C2v6MghxoU+uI1lLVihFfD
- uSaItfmaVI4t+H7zHPkntMdYjHTVx2/zB4aYBP0km7VFFiKCsMke6sXi+fv4qy2leLWZzs0Kaec
- fvutbhTM2PBiZZrE0RhOzoAOEXHv17AZJ2XiNJRUYk5DaMrycPxHq+ZUjhSfl6+BAk8b7tPhClb
- ahMIxLiCMn++2uXiIpE3YZWxrPT1ExDvtSSUgwMoCeYYO5qb0km0zYpSXsnh7t9J3nHJbRmutT6
- a8UO9v5QjH62re+diQGfeOnx3hzDNqpddBRx8tkD885MijZP1NkqbfvoPQPog=
-X-Google-Smtp-Source: AGHT+IFGbZmunz/tZ16U5G4cL6KU0RMSUaK3UJEy8bSy5LGJME65Sb682FHMAlYrtkgLQg95sBafjw==
-X-Received: by 2002:a05:6808:6503:b0:450:4cbc:b20e with SMTP id
- 5614622812f47-4504cbcc04amr18824b6e.31.1762696275390; 
- Sun, 09 Nov 2025 05:51:15 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45002752ca9sm4622376b6e.14.2025.11.09.05.51.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Nov 2025 05:51:14 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-In-Reply-To: <20251107232811.480532-1-marek.vasut+renesas@mailbox.org>
-References: <20251107232811.480532-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/master
-Message-Id: <176269627388.3997959.17208358368956040732.b4-ty@konsulko.com>
-Date: Sun, 09 Nov 2025 07:51:13 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4d4M3Z4XDNz9sqF;
+ Sun,  9 Nov 2025 19:37:30 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762713450;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CtdLhmotCzr5QDVMNBtPBh9S0WBT03IBp9u0+xK/pvs=;
+ b=qDMTtETLpFUFZ0e/jK4u2Mnlb1AU/Gh3NmWQS1bz3OGj7AU1OdNwtr69GlZGZy+4NIqeyp
+ vEGo8SaU43mZ7jTynndgJ7YhixIDmE4ePemNIZK2Eyjw5zX0C9Hur34N0vRD64PGQzRkOM
+ tjX5xsfJV7okmHTVB8r/jVDVodf6pchqYx92GmA5iIc5bUh4IyY6f+xtBOd5bSkAdCVuLD
+ N1DMW6O1JujZTBgpNu0CVR9ZWPdqPokWNONWkvkBFQiAiCrVLe05fPgfRxwVFyQqnzM9H/
+ MhYJJgW3BPrb9m8nj/Yd7piWS6MMzqdOGjVBTTV8LOr/MRflpJf+9A6zwXYutA==
+Message-ID: <83d8df11-d27f-47d7-86d7-073bfe72b627@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762713448;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CtdLhmotCzr5QDVMNBtPBh9S0WBT03IBp9u0+xK/pvs=;
+ b=dLo8BiKXFhIxNhUKo/s8S0fcizfa0vluqu46z/tURRVVwHqsuzW+SvixP1EkRVn+UnYqwJ
+ cP0CX15BBBrWkcYIsGXka+/Py1HkCP8/tdnBVQdKKWvt3KEPCXIB6CjS4IPqUCdv1MXheX
+ YYdSRAyqjmObGtY4GEk29Acf9BVljQDhkfzraD/zf0e4XPTurqjqVZLuSVlCJMgICz+cqM
+ H5FDhKgoPf3/3n+RxffdT4PNBG6gLnEBLGeSE6JCE3Q/K6Z3nzmGH37e7JWg5LJkioztXz
+ lPhYYdKvhunYkVcXRk/vV9Uc7XDE0O/a0nlivvEQ9oJJ6eLVtFXq5REYicUpyg==
+Date: Sun, 9 Nov 2025 19:37:23 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [U-Boot, v5, 1/1]net: phy: Add the Airoha EN8811H PHY driver
+To: "Lucien.Jheng" <lucienzx159@gmail.com>, trini@konsulko.com,
+ joe.hershberger@ni.com, marek.vasut+renesas@mailbox.org,
+ rfried.dev@gmail.com, jerome.forissier@linaro.org, ansuelsmth@gmail.com,
+ weijie.gao@mediatek.com, SkyLake.Huang@mediatek.com,
+ romain.gantois@bootlin.com, s-vadapalli@ti.com, u-boot@lists.denx.de
+Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org,
+ ericwouds@gmail.com
+References: <20251109163735.44320-1-lucienzx159@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251109163735.44320-1-lucienzx159@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-MBO-RS-ID: 6150d9f41a43c025751
+X-MBO-RS-META: mbxtgxq61tmrqb55u6xxm3khttfytug8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +91,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 08 Nov 2025 00:27:20 +0100, Marek Vasut wrote:
+On 11/9/25 5:37 PM, Lucien.Jheng wrote:
 
-> Remaining R-Car Gen5 driver patches, MMC, clock.
-> Also a trivial adjustment for mailbox core to
-> allow operation without .recv callback.
-> 
-> The following changes since commit fdf36c2e9ad4f770ee951398a86bd55404d9b7ec:
-> 
->   spl: remove redundant prints in boot_from_devices (2025-11-06 17:42:07 -0600)
-> 
-> [...]
+[...]
 
-Merged into u-boot/master, thanks!
+> +#define AIR_EXT_PAGE_ACCESS		0x1f
+> +#define AIR_PHY_PAGE_STANDARD		0x0000
+> +#define AIR_PHY_PAGE_EXTENDED_4		0x0004
+> +
+> +/* MII Registers Page 4*/
 
--- 
-Tom
+4[SPACE]*/ ... missing space before *
 
+> +#define AIR_BPBUS_MODE			0x10
+> +#define AIR_BPBUS_MODE_ADDR_FIXED	0x0000
+> +#define AIR_BPBUS_MODE_ADDR_INCR	BIT(15)
+> +#define AIR_BPBUS_WR_ADDR_HIGH		0x11
+> +#define AIR_BPBUS_WR_ADDR_LOW		0x12
+> +#define AIR_BPBUS_WR_DATA_HIGH		0x13
+> +#define AIR_BPBUS_WR_DATA_LOW		0x14
+> +#define AIR_BPBUS_RD_ADDR_HIGH		0x15
+> +#define AIR_BPBUS_RD_ADDR_LOW		0x16
+> +#define AIR_BPBUS_RD_DATA_HIGH		0x17
+> +#define AIR_BPBUS_RD_DATA_LOW		0x18
 
+[...]
+
+> +static int air_buckpbus_reg_write(struct phy_device *phydev,
+> +				  u32 pbus_address, u32 pbus_data)
+> +{
+> +	int ret, saved_page;
+> +
+> +	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
+> +	if (saved_page < 0)
+> +		return saved_page;
+> +
+> +	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
+> +			AIR_BPBUS_MODE_ADDR_FIXED);
+> +	if (ret < 0)
+> +		goto restore_page;
+> +
+> +	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
+> +			upper_16_bits(pbus_address));
+> +	if (ret < 0)
+> +		goto restore_page;
+> +
+> +	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
+> +			lower_16_bits(pbus_address));
+> +	if (ret < 0)
+> +		goto restore_page;
+> +
+> +	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
+> +			upper_16_bits(pbus_data));
+> +	if (ret < 0)
+> +		goto restore_page;
+> +
+> +	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
+> +			lower_16_bits(pbus_data));
+> +	if (ret < 0)
+> +		goto restore_page;
+> +
+> +restore_page:
+> +	if (ret < 0)
+> +		printf("%s 0x%08x failed: %d\n", __func__,
+> +		       pbus_address, ret);
+
+Can you use dev_err(phydev->dev, "%s..... here ? The struct phy_device 
+has access to udevice and with dev_err(), you will get automatic device 
+instance identifier in the print (useful if you have multiple PHYs).
+
+> +	return phy_restore_page(phydev, saved_page, ret);
+> +}
+
+[...]
+
+> +static int en8811h_wait_mcu_ready(struct phy_device *phydev)
+> +{
+> +	int ret, reg_value;
+> +
+> +	/* Because of mdio-lock, may have to wait for multiple loads */
+> +	ret = phy_read_mmd_poll_timeout(phydev, MDIO_MMD_VEND1,
+> +					EN8811H_PHY_FW_STATUS, reg_value,
+> +					reg_value == EN8811H_PHY_READY,
+> +					20000, 7500000, true);
+> +	if (ret) {
+> +		printf("MCU not ready: 0x%x\n", reg_value);
+> +		return -ENODEV;
+
+return ret; should be fine here ?
+
+> +	}
+> +
+> +	return 0;
+> +}
+With those fixed:
+
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+
+Thank you for your hard work !
