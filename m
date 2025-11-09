@@ -4,81 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C8F3CCF9F8
-	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 08:38:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74DCDCD1297
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 10:10:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B59D83EC9;
-	Sun,  9 Nov 2025 09:38:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 946F083EC0;
+	Sun,  9 Nov 2025 11:10:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HH5DmhPy";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZSmXUjuX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88D5C83EC9; Sun,  9 Nov 2025 09:38:07 +0100 (CET)
-Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
- [IPv6:2607:f8b0:4864:20::b12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8DAAE83EDC; Sun,  9 Nov 2025 11:10:28 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71D6683EBB
- for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 09:38:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D7B683E8A
+ for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 11:10:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-yx1-xb12d.google.com with SMTP id
- 956f58d0204a3-63f976ef4bdso1661593d50.1
- for <u-boot@lists.denx.de>; Sun, 09 Nov 2025 00:38:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762677484; x=1763282284; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hnMZgMyw2+3AVfjHgEkZm9DCWpsL5SoUwGFFOme7AcM=;
- b=HH5DmhPyusIeQZbd2vxEjJQFY1YU86tWDsDbsQvpwTpYfSIea9VC54q6ls5gFO8mAv
- jgMa/A5KOskOgIB1VgeOUIh8PTRDHf6bpyWSKYiGbZWcGC9b6fSF6ACcGta/icDpPBzf
- 549ZaERFV+dmKib7FieEjHV3HWFcYlta3Epvif3UxXLolSbEHoXNNuD8y08QcNDVyxSI
- 7H0rcqI/uaEhZEHl6iwrI0GJJ2ui9ujk6wdCPAjm4X7lfMttnqpv3iOC384RtHJNHQF4
- IMHAF7krugYAfqyddDNYsEnYPXPE0BNZP1WhpDQ0MnNgxoLkFIPX0ZD7jQQtKYwGBNcJ
- Wm7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762677484; x=1763282284;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=hnMZgMyw2+3AVfjHgEkZm9DCWpsL5SoUwGFFOme7AcM=;
- b=AkyGG4MxM+mU+jceYKgj+K4Pk05zf9Y5abSPUtvnGb780vqJ55FEdpePVShk6vwGwf
- XBFVGVFcw6JvejO9SseePmF+fg/BqZgFe4qygdqySCc2etefLKkIFpIm8xyYLta8NVlr
- mtCgLwY53eM+KBJdBtARGAPqUW1NZXb34iwcoxdXgPeubsypeYhO6OAu9Lfm5lCa8RDy
- 5rTO1nrnbQbNYQ1KW0B6jZIaPQzQRS0h1z5V+NocbAuoSjWJpJ/VA6Pnq4yp1Slda7Ut
- gNvy08+NeBawiriF4wSa2GA6Gc1oy7JPWbbZO2VYEaVjpYpUCpiyV1d5bBR9TKDHVDgP
- njPQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXmAZgxXnMB2uIhHTD6yYmpu1TqNqzx//YVXHlJ74Qa9LJP09DTC7JZSp0+PEOTHt4OdqImJEg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxtpm4850EVg9zqa6JbSsKIuVaMnK8M17+4iHAAK70vTSdPTZRX
- OGDG7Pq+m4GUAJ95QKF4HMLPRPJEk9cs0MvkQaJ6U2YkmhwxFGhX2qfAAqXDIBw3H6rOXOWz9tO
- UDebqJ/QkevlKyF+8kvxqUqtGHMiJXFkEaj0tHmGgKw==
-X-Gm-Gg: ASbGnctraKfgn7GqnmEoSlYdQFg8tNgV3fXg933eTfq0jyRcezvKA0mvqFnQm6ZDzR1
- 8L3UhEamoBJnecTrhjWqbO/H23aywdaYS00gDhFaW345iPu6qerKhVDzcjquTO0gkt+Egqi50ch
- cj9SMzAjvpSM8WmQ1lp/QGHX3XeSvNUOhotPlqee32BJleAB8/DB67uEz7kttZ2+nRvh9u5G7Ct
- 5Q9yf9LMhwc7HbQBEy3j1lp81dCcWwM+NwS0Nxqs0HSn3JOOgip46HeueA8p4sWkLSGAIVt6Q==
-X-Google-Smtp-Source: AGHT+IGOeE4jEXfNi8jeDluHWffZrQc6KREKe0VTqBb7vqVAqAE6Ij4f5nZFWSrffCLxJlFzLL07QTEvUhluEgg8PRU=
-X-Received: by 2002:a05:690e:1507:b0:63f:b4b4:4fa5 with SMTP id
- 956f58d0204a3-640d45b4bd0mr3255797d50.46.1762677483752; Sun, 09 Nov 2025
- 00:38:03 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03 (dynamic-046-114-110-120.46.114.pool.telefonica.de
+ [46.114.110.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 27A33408CF; 
+ Sun,  9 Nov 2025 10:10:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1762683024;
+ bh=R/fb7zlJ5ZGJH07qTWo927FCCe6gCFSWi3yXmm0hTbA=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=ZSmXUjuXmi1OMt1EAG8cyTL+gPMcyOEzkH9Pf+ClCRGuxB4goyhlxK/u4cJWDw9Qk
+ PkUJBdlcRNPSVoxv120SnmuZPS9F8mIapleh+trE9L04rEOr5SJYocMxyvlIWlHnKn
+ IBqe175wiN+nWsN6Oebo3EFmVSdaCZsRURUsWujmj2P9UHplXfCkjdSXva5YIrgCaX
+ Psw83hia07UMfxu7GGAWxO6dLzZ4rolAS3tr76T6JSPyimXAhiWHAPWZAgyJ3m4H8m
+ KqsiQ2Y+nEUoh6dP44JvQRwvnxP6cLlW65L97xwl/MxQhAN9qpkrj8LCb/2eLq8tS0
+ 2eaXea8EXZ+VBvqBnj3LI+R07KooSr1eVWgfArCuPfEf4hYLVDusT/d2GFl9mj51N0
+ 6C/C6PhoF3np3NbDuMeo2YAT7jd+mKw7VPEgEqujcnf4WkEMTMmnbSdXR002x+XOF2
+ pqiHU1qmit8kFfwHRylK8aUUtxMMjJEaegPgVyMhxxACLo5xwaEMs57n0XMT1OntjY
+ yMvZ1elSllJ3e8/usNcKBN5Es0zV6nQWkJlEbeE5a17KQosVT7VesL5mEojM89R1pa
+ 5Z+ZlzXtjwTXO5ebCdtq5JTUPnDeIWF30zlJ9DGee+9o8ocNa1ucP2ix0gaocqBEIm
+ TQ7SpanoJTC+83f47AgJ2Qm0=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Harrison Mutai <harrison.mutai@arm.com>, Peng Fan <peng.fan@nxp.com>,
+ Ben Dooks <ben.dooks@codethink.co.uk>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/9] CI: test qemu-riscv64_smode[_acpi]
+Date: Sun,  9 Nov 2025 11:10:01 +0100
+Message-ID: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251109070521.142477-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251109070521.142477-1-heinrich.schuchardt@canonical.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 9 Nov 2025 16:37:52 +0800
-X-Gm-Features: AWmQ_bl7RHS3fYXbhprgi7pGDYBbyuVrEj0tGRQLDFDNa4l1nlaUj5R4E5pi55o
-Message-ID: <CAEUhbmU7HWj8a7i-XMi36Omp9yO4FQZL6+U2M54qLmS67oB56A@mail.gmail.com>
-Subject: Re: [PATCH 1/1] dm: typo programmaticaly
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Janne Grunau <j@jannau.net>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,15 +86,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Nov 9, 2025 at 3:23=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> %s/programmaticaly/programmatically/
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  include/dm/root.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+ACPI via QFW was broken since the 2025.01 release and we did not observe
+it due to missing CI testing. This bug has been fixed in the meanwhile.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+This series
+
+* introduces prerequisite corrections of unit tests
+* provides the necessary console record size for command line tests
+* enables CI testing for qemu-riscv64_smode and qemu-riscv64_smode_acpi
+
+The following patches are just resent to show how all belongs together:
+
+* test: fdt_test_apply requires CONFIG_OF_LIBFDT_OVERLAY
+* CI: test qemu-riscv64_smode[_acpi]
+
+Heinrich Schuchardt (9):
+  test: fdt_test_apply requires CONFIG_OF_LIBFDT_OVERLAY
+  test: cmd/fdt: do not assume RNG device exists
+  test: cmd/bdinfo: make no flash assumption
+  test: cmd/bdinfo: consider arch_print_bdinfo() output
+  test: common/print: do not use fixed buffer addresses
+  test: cmd/fdt: do not use fixed buffer addresses
+  common: default CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
+  configs: CONFIG_CONSOLE_RECORD=y on qemu-riscv64_smode_acpi
+  CI: test qemu-riscv64_smode[_acpi]
+
+ .azure-pipelines.yml                      |  6 ++
+ .gitlab-ci.yml                            | 12 ++++
+ common/Kconfig                            |  2 +-
+ configs/qemu-riscv64_smode_acpi_defconfig |  1 +
+ test/cmd/bdinfo.c                         | 15 +++--
+ test/cmd/fdt.c                            | 31 ++++++++--
+ test/common/print.c                       | 71 +++++++++++------------
+ 7 files changed, 91 insertions(+), 47 deletions(-)
+
+-- 
+2.51.0
+
