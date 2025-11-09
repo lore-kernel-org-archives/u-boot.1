@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74DCDCD1297
-	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 10:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15FA5CD1297
+	for <u-boot@archiver.kernel.org>; Sun,  9 Nov 2025 10:10:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 946F083EC0;
-	Sun,  9 Nov 2025 11:10:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BA9D583EF2;
+	Sun,  9 Nov 2025 11:10:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZSmXUjuX";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MSM2eVVj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DAAE83EDC; Sun,  9 Nov 2025 11:10:28 +0100 (CET)
+ id 18E9F83E8A; Sun,  9 Nov 2025 11:10:29 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D7B683E8A
- for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 11:10:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BA8F83EAF
+ for <u-boot@lists.denx.de>; Sun,  9 Nov 2025 11:10:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,23 +31,24 @@ Received: from LT03 (dynamic-046-114-110-120.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 27A33408CF; 
- Sun,  9 Nov 2025 10:10:24 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 8292F409EC; 
+ Sun,  9 Nov 2025 10:10:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1762683024;
- bh=R/fb7zlJ5ZGJH07qTWo927FCCe6gCFSWi3yXmm0hTbA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=ZSmXUjuXmi1OMt1EAG8cyTL+gPMcyOEzkH9Pf+ClCRGuxB4goyhlxK/u4cJWDw9Qk
- PkUJBdlcRNPSVoxv120SnmuZPS9F8mIapleh+trE9L04rEOr5SJYocMxyvlIWlHnKn
- IBqe175wiN+nWsN6Oebo3EFmVSdaCZsRURUsWujmj2P9UHplXfCkjdSXva5YIrgCaX
- Psw83hia07UMfxu7GGAWxO6dLzZ4rolAS3tr76T6JSPyimXAhiWHAPWZAgyJ3m4H8m
- KqsiQ2Y+nEUoh6dP44JvQRwvnxP6cLlW65L97xwl/MxQhAN9qpkrj8LCb/2eLq8tS0
- 2eaXea8EXZ+VBvqBnj3LI+R07KooSr1eVWgfArCuPfEf4hYLVDusT/d2GFl9mj51N0
- 6C/C6PhoF3np3NbDuMeo2YAT7jd+mKw7VPEgEqujcnf4WkEMTMmnbSdXR002x+XOF2
- pqiHU1qmit8kFfwHRylK8aUUtxMMjJEaegPgVyMhxxACLo5xwaEMs57n0XMT1OntjY
- yMvZ1elSllJ3e8/usNcKBN5Es0zV6nQWkJlEbeE5a17KQosVT7VesL5mEojM89R1pa
- 5Z+ZlzXtjwTXO5ebCdtq5JTUPnDeIWF30zlJ9DGee+9o8ocNa1ucP2ix0gaocqBEIm
- TQ7SpanoJTC+83f47AgJ2Qm0=
+ s=20251003; t=1762683026;
+ bh=0hmFeRxmLNN9LdZV49eb48C/f/YtEJZllSpHqlreNIo=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=MSM2eVVjRBwK6Ad41O2IDJ2A/CAiu+zwrprL4G7m1NBxKwyDg8HnCTQLMp+gVFQs1
+ hI8AcxR33Rlww9u8hk3mhZ+qrcJng5GCCF0/Tmn3yd/AoOLASDoANF7j+ANGiwwvXN
+ q1VsIsjZDhk4kBrADAV65u4cjm0wEDy1JhAhoxJbtyuLTxLoU/eZGU4+TeHlePWF02
+ GX0mb463EbJ+q/6Psl+FK5Ucnxpr7HKVq27QqSImAbgPzb/wfTsjBuUghU4kjWoHpJ
+ 8ezVnqw/xU4HKjhps2kdhwOeQbopMhJ/iaSurW2kNLpWR+aXiZRiou4aANfBXEWrlX
+ X9erUJRuOLKY37/HSYSf2vRUUuDWFJrNrF9RxBtHMvKpBbdEW0qVT6O9yVDBDiT6D/
+ 2kE45EtCAwKRYGLaAj9/1WafnJrQK6vPN6r6UZfd4eYlo8IIxTMZFZRKX8NAZy/6Fi
+ mvXU8OBbQahAg3ekFqg/naZXO/EJ6QwaiMQpose9a9LnzgpO4qhHZBUaPZdKpEqbWf
+ AOwXWBLwVLRqHuU3m/R6RtUIFNamUBRZoQuQi2ajlWY/jwMAA60PHvRCOcAK0g3ted
+ 2D5xfa6UPSF4LPh86tV3VwRF5ZfCREF4s2GO7u3mhlAunqVJObm4P/chsHzs0pwEBz
+ E1oj2ELm3MROsqi37qAUfErk=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -64,10 +65,13 @@ Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/9] CI: test qemu-riscv64_smode[_acpi]
-Date: Sun,  9 Nov 2025 11:10:01 +0100
-Message-ID: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH RESEND 1/9] test: fdt_test_apply requires
+ CONFIG_OF_LIBFDT_OVERLAY
+Date: Sun,  9 Nov 2025 11:10:02 +0100
+Message-ID: <20251109101010.306268-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
+References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -86,40 +90,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ACPI via QFW was broken since the 2025.01 release and we did not observe
-it due to missing CI testing. This bug has been fixed in the meanwhile.
+The `fdt apply` sub-command is only available if CONFIG_OF_LIBFDT_OVERLAY
+is enabled.
 
-This series
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ test/cmd/fdt.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-* introduces prerequisite corrections of unit tests
-* provides the necessary console record size for command line tests
-* enables CI testing for qemu-riscv64_smode and qemu-riscv64_smode_acpi
-
-The following patches are just resent to show how all belongs together:
-
-* test: fdt_test_apply requires CONFIG_OF_LIBFDT_OVERLAY
-* CI: test qemu-riscv64_smode[_acpi]
-
-Heinrich Schuchardt (9):
-  test: fdt_test_apply requires CONFIG_OF_LIBFDT_OVERLAY
-  test: cmd/fdt: do not assume RNG device exists
-  test: cmd/bdinfo: make no flash assumption
-  test: cmd/bdinfo: consider arch_print_bdinfo() output
-  test: common/print: do not use fixed buffer addresses
-  test: cmd/fdt: do not use fixed buffer addresses
-  common: default CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
-  configs: CONFIG_CONSOLE_RECORD=y on qemu-riscv64_smode_acpi
-  CI: test qemu-riscv64_smode[_acpi]
-
- .azure-pipelines.yml                      |  6 ++
- .gitlab-ci.yml                            | 12 ++++
- common/Kconfig                            |  2 +-
- configs/qemu-riscv64_smode_acpi_defconfig |  1 +
- test/cmd/bdinfo.c                         | 15 +++--
- test/cmd/fdt.c                            | 31 ++++++++--
- test/common/print.c                       | 71 +++++++++++------------
- 7 files changed, 91 insertions(+), 47 deletions(-)
-
+diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+index 96a8488e172..a36f2dcdda8 100644
+--- a/test/cmd/fdt.c
++++ b/test/cmd/fdt.c
+@@ -1319,6 +1319,9 @@ static int fdt_test_apply(struct unit_test_state *uts)
+ 	char fdt[8192], fdto[8192];
+ 	ulong addr, addro;
+ 
++	if (!IS_ENABLED(CONFIG_OF_LIBFDT_OVERLAY))
++		return -EAGAIN;
++
+ 	/* Create base DT with __symbols__ node */
+ 	ut_assertok(fdt_create(fdt, sizeof(fdt)));
+ 	ut_assertok(fdt_finish_reservemap(fdt));
 -- 
 2.51.0
 
