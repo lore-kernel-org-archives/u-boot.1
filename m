@@ -4,73 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A85DCCCFA13
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 09:13:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C06BECCFA13
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 09:22:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C53E8839E2;
-	Mon, 10 Nov 2025 10:13:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1C49C83968;
+	Mon, 10 Nov 2025 10:22:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1762766025;
-	bh=sPfSpi6BKj9TAZaFaxngNO1CZmJIHX0Px/6gmkCEBbc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=T+A3en3PGsUuTH+joUh1sN0ApVpwQv1A+MGbuGC/obLMROVekhX1eNlc3WKSHjfiw
-	 wox0Fbv2tR9WNbwVg0vzuHGtv674XG1viTRLxvNQq6zi5rSmjj1vNfsFL/vmCEkuNN
-	 260nC7QtgCMdoWCfnUgLDWbukfZbYRJRnnjL2XJFcYXTNyhK2Zfnt4sed4p5D8fMz0
-	 bnOZ8WEe5QHWjYj5efwCU8Nm8THwPb5zqqoa02GwzEQUw76w1DSxb9RK0q4acCLAoN
-	 G9/mecpmdFqlNoZ/JOoqwT61sB6TvD+aXI2LkOB7R51vQ1qEPPxJZsQhx/LT1UbLMv
-	 M9cnLNeLIq+zA==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="j9UYuJRA";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C063839DE; Mon, 10 Nov 2025 10:13:44 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id C773483990; Mon, 10 Nov 2025 10:22:06 +0100 (CET)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86D0A839E2
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 10:13:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8800083959
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 10:22:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="E1HC/Pz7"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0DA501003BD63; Mon, 10 Nov 2025 10:13:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1762766022; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=sPfSpi6BKj9TAZaFaxngNO1CZmJIHX0Px/6gmkCEBbc=;
- b=E1HC/Pz7EY+2wqS3V5YctxCBD+7G17yscQohbTyOfrrvbDrPHzzW/ZempzQRv/8BD5o9z8
- jtwMUHbpuBab5UHZP8GFmk90a+zYk3aJVnmzq1yxdG2RBOWVYWeFFiDtVoTFtAGzAbGpMY
- xb2bvjYBDQDALJhrE/UsJnfHO6uXD/rW879ltuTLRPKZYsQN9TPZlpyj+B9PrVFYfHFAtz
- 4e41lpPTinLVh7fYHqB5vDu7WU5N4JWuQLmMmDeubbmKXZ75iweS+y1kslWvJm9DQ5le26
- 3GLI1eEHaMWb/vUavr1yEs4wmg55ubTRosxFzhf/VAbZVrMi2aAU8/S4xMH+pA==
-From: Philip Oberfichtner <pro@denx.de>
-To: u-boot@lists.denx.de
-Cc: Philip Oberfichtner <pro@denx.de>, Andre Przywara <andre.przywara@arm.com>,
- Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH v5 3/3] Makefile: Deduplicate image size checks
-Date: Mon, 10 Nov 2025 10:12:56 +0100
-Message-Id: <20251110091256.2422534-4-pro@denx.de>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20251110091256.2422534-1-pro@denx.de>
-References: <20251110091256.2422534-1-pro@denx.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xNUpHkUVndjq4exEF7bL6oDlHqq932ygiy34CC5cHog8t4DeYDXec6UMhi1A2kmx9kjT3dtjdDZOhpHa6xG4qsXU/LA6uJGF2J80F5xZYR3Mv1SYnW2XdiSDAvWDbFOKr7pPpzy0eIQORoOp7zYlS8rD8jexDL1pSTG+O4To+sYsFx5wZmcuPQKbz62kjQuLhwfYMpoOwdqJYH7za6rEPAYB92cyYptFHVRTgS5ogynxcJ0a9CcQ90OKxQnDmV3LA0pgbRarqE9Za/TzReZCfjJ83ZYTt6d5unufVyVYtiBtCLAiZJMA2dzxvTt3+5J4BQDlzQ3uVUr+3Qk/tN4CWg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3S4nMBKXy2KfHrJYBWO8AaFJIEXa/NaXM0oA9a1o6II=;
+ b=GLgmY0fSq0kl0cE39LExmu/152gzMYbyrAa4NIFlUG2N/ZrHfhaSGEatCV5BWM+atXO34qoV12JGdXq9TELitP5uom8R8IiZ1CCmU9Eh3eBkNFEBzQyB9SbWHd1dTUh4chA3IP+iLL3WhPSxgfpz85IWoyEoIfAK17NLvhs6aisT3weaHFQc20P88epZOlmPRKSzQzLETlh17RIH5dtQ13lbiTIYNodTQvYgjfG1S4gCYbcexLutUSr3SvcO1B0CE3bALVwSwZAuaD9SjsdhSbA0zWeyJ1JjmKQlABZ9drRTjRgoJ7Wf355jc46ye4q3T1tpSw59YEgXmoqcLFrEHg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3S4nMBKXy2KfHrJYBWO8AaFJIEXa/NaXM0oA9a1o6II=;
+ b=j9UYuJRAykDNcX/jC+TgMBBWryc4v9Yd5pGe61g+4chHI1PDNZFgxbjls/Klxbv6CwhwPq8T2K1FIT1rG7RNxxIJw+l2w6XLsnmyM73jhKW43JxdkVWiZNHdWYM5KK772eD/30fTJDO2C9LkxbU20KepT3LF7mOQvtyY1fbLCm8=
+Received: from DS7PR03CA0026.namprd03.prod.outlook.com (2603:10b6:5:3b8::31)
+ by BY5PR10MB4228.namprd10.prod.outlook.com (2603:10b6:a03:200::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.12; Mon, 10 Nov
+ 2025 09:21:59 +0000
+Received: from DS3PEPF0000C37C.namprd04.prod.outlook.com
+ (2603:10b6:5:3b8:cafe::df) by DS7PR03CA0026.outlook.office365.com
+ (2603:10b6:5:3b8::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.14 via Frontend Transport; Mon,
+ 10 Nov 2025 09:21:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ DS3PEPF0000C37C.mail.protection.outlook.com (10.167.23.6) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9320.13 via Frontend Transport; Mon, 10 Nov 2025 09:21:56 +0000
+Received: from DFLE105.ent.ti.com (10.64.6.26) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.2.2562.20; Mon, 10 Nov
+ 2025 03:21:52 -0600
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 10
+ Nov 2025 03:21:52 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 10 Nov 2025 03:21:52 -0600
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AA9Lppu3130059;
+ Mon, 10 Nov 2025 03:21:51 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Mon, 10 Nov 2025 14:51:50 +0530
+Message-ID: <DE4WKRML5VTN.1HQSCYE9S8XCY@ti.com>
+CC: <stefan@embear.ch>, Philippe Schenker <philippe.schenker@impulsing.ch>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 1/6] arm: dts: k3-am642-evm: Remove duplicate node
+From: Anshul Dalal <anshuld@ti.com>
+To: Philippe Schenker <dev@pschenker.ch>, <u-boot@lists.denx.de>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20251107130216.3084134-1-dev@pschenker.ch>
+ <20251107130216.3084134-2-dev@pschenker.ch>
+In-Reply-To: <20251107130216.3084134-2-dev@pschenker.ch>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF0000C37C:EE_|BY5PR10MB4228:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7f6069dc-ec91-469e-eff9-08de203a982d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NmorYzdBMzMrQ0hiazR4aFVHZVhaOThOVXVBczd4NmJXOVliU2tKN3kyWnZW?=
+ =?utf-8?B?Y2JMODY3Y2FtQmQ3a3k2TU5pSTJySm0xNXRBSXZOLzhJUHJxV0Z1citZVmJC?=
+ =?utf-8?B?NjdiWEUvYWhwSmF1RkQxM3luQ3hzamozUnhlTHMwRFk3VU1XaFFESGMrcWxR?=
+ =?utf-8?B?OWdMdFplRWIzNk9CV0FYTVJ5Vkdad1BvVFhjcUdBMDZKbE51VmloMVoxZm4r?=
+ =?utf-8?B?K09OS29JQlo1WnFVdmZwMlVTc1FTdVVCN2JuT3ViUnE4ZkNNR0h3QzdZaWJB?=
+ =?utf-8?B?aWRwNzlPQUVrdEllY2FMK3dtVExoaThXclloR2dOQ2hhVEtmcllNZkU0eit5?=
+ =?utf-8?B?VXdKZnF0ZzJjVmRGK0pROEx3OVVIUkZIQmxMK0xzY2JTaHd4aVlpM3F5cS9t?=
+ =?utf-8?B?MG9TQ1lLczZkL0dOOElVY3hESFNlQmFDVFkxN1YrWjhwanNBMVlCeWlPRkZ6?=
+ =?utf-8?B?bVlrRzljcENVcG9lS0xQTW45M1h0WGtvVnRLbmJTbXIwY1lqZGdSVzBYNlYz?=
+ =?utf-8?B?Y1lFRWEvZ0ZHcG5WQkkvR0o5cmdtZm9xa3dsakt4NUhyN2l4SlA0TDlSb2RJ?=
+ =?utf-8?B?ZHNwTlVNMWo4ZUM2Zkc2ZTF4TExxTDBRemI3T0V5cWJvYjdxdkVTZGtOYmNw?=
+ =?utf-8?B?Qzh4TmtLcUhkS0EyYy83TmxGOG1iTTBVUk1hMzlRNndSYjlIL3VtYjE4Q3l2?=
+ =?utf-8?B?Zm0xb2NiSVU5YjN3d3BkL21TM0lZcFhZRUNOMjlXZzJVb1Vra0duU3BLWWl1?=
+ =?utf-8?B?UnJId0pMNVNwT0Y0Sm8yaDExbzlGMzlsR29DR0JUZDMwMHZsYys0SXNPcW1l?=
+ =?utf-8?B?amdvQ3NCUytacElBcXpSdkRNNkF2RG91a0tPUlFNTVZ6MGszOWdPMzdadU5r?=
+ =?utf-8?B?aDRNazRabVFoYmtONjlxek5UcTBsaHNFeERCcWVQMW5zQzZSYy9LUjdBYkl0?=
+ =?utf-8?B?N0pIdkJVYXdUUE9BeW9lN3hlMGN3dW0zTUUrRXdocnZmVk05eEZOV3FPZ0VE?=
+ =?utf-8?B?eUtRSkl1UGRmcTR3ckt2SWUzUjdkVXc3M1I4MDJaRXJtd1UzcXMreFo4d0hm?=
+ =?utf-8?B?b3Z6RllJNThVZFVzcXdYMGtxaENwNHZUNmFtVE9QY0ZzdG9TZ1RldC94RThk?=
+ =?utf-8?B?OVhEV0dsSlNlckVnbzNaSTVtVm9lZWcvOGRDc2o0dHVPS0ZtQ213Qk1OWktC?=
+ =?utf-8?B?TDRYelpPWWxZV1lGMEdoVFRvSExQZzZQd2JWcUpkNk1tZHNwK1BuVmR3YTFP?=
+ =?utf-8?B?RDZLcFBHWHNEeHg5N2NkOEE1dFo0WDQrRWthMmhzYVBZL0JzdEpPSEVlclk0?=
+ =?utf-8?B?T3lxSGNtb3pZWFIrT1p0enJtMEgxVmU5WEpCb0dzUlNORWlaK240M25uTjFy?=
+ =?utf-8?B?Wm1UZU1uNm1tUE52N1dmV29nNmRoc0dmUnRrVWw3eDVvdk5LamZPT240bDdT?=
+ =?utf-8?B?dGVrNCs2VFE0Z0ZScyt5YmxiWnNSMDR6Q1VReVkzNytkam1hdGZ0OURVU1hu?=
+ =?utf-8?B?dEgveFlzS3o5V2FGalNlYjFqODl0MXpFZWJ1NHcvQVVGSmdmakdIcUNVV29z?=
+ =?utf-8?B?djdZbVFqbDlyVXp0amtDUGJpMHlvb2o4R29ySzIraGU5N1VpdEhZRVViM3Ur?=
+ =?utf-8?B?Y1FNZ0szOXluN3M4MHdXaEtCRkdrc0NkeTZaeHF6S3kxRkdleGZ1Qm4yWTNp?=
+ =?utf-8?B?UTQvdEFqMXY5VjM5ZjJkcTF4ditjMHpoc2xpSXQ3RlRpc2ZUclN0aDVPZG5Q?=
+ =?utf-8?B?Qit6MlBQOGk3SFdDQWgvaE9zanNkKzVQV05qZnFPaU84S3FPNStQd1NpWXBV?=
+ =?utf-8?B?WWFuWndhekc0aHI3cmV1M1pVMEU2TzRWMnJmNGkyRENmREhadURnQ0xMUGg0?=
+ =?utf-8?B?bXl6aDhGSmJZMjc5NVcxeGdPVzgySmVaMXlnMTV6dERMbXNXTXhhdUl3RWxn?=
+ =?utf-8?B?RFkwYVJZcEUrUmZ0RnZzcTZwNzFMMjArZTh6Ymc5NFhSbjUrZDAvRnc4TklT?=
+ =?utf-8?B?RkJhYkNQMFBtZnZzdHdwY3dBaGVFdXkvYkVPYVJpWlJDSUphTjRXb3ZTR0tE?=
+ =?utf-8?B?eFdwMFRpRGFQL3hESDVmcG5lOSt4Tk9LaDM0aUZpOFJ1NVRpenFHT0lwRFh0?=
+ =?utf-8?Q?J8XA=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2025 09:21:56.5548 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7f6069dc-ec91-469e-eff9-08de203a982d
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF0000C37C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4228
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,141 +165,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Deduplicate some redundancies within the SIZE_CHECK code in the toplevel
-Makefile. No functional changes.
+On Fri Nov 7, 2025 at 6:31 PM IST, Philippe Schenker wrote:
+> From: Philippe Schenker <philippe.schenker@impulsing.ch>
+>
+> The device tree contained a duplicate DT node 'main_mmc1_pins_default',
+> which was already defined a few lines below. This patch removes the
+> redundant entry.
+>
+> Signed-off-by: Philippe Schenker <philippe.schenker@impulsing.ch>
 
-Signed-off-by: Philip Oberfichtner <pro@denx.de>
----
+Reviewed-by: Anshul Dalal <anshuld@ti.com>
 
-Notes:
-    Changes in v5: Improve commit message
-
- Makefile | 48 +++++++++++++-----------------------------------
- 1 file changed, 13 insertions(+), 35 deletions(-)
-
-diff --git a/Makefile b/Makefile
-index 617106ad79e..423a86ff4e8 100644
---- a/Makefile
-+++ b/Makefile
-@@ -428,10 +428,12 @@ KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
- # Check ths size of a binary:
- # Args:
- #   $1: File to check
--#   #2: Size limit in bytes (decimal or 0xhex)
-+#   $2: Always return OK if this is not "y".
-+#   $3: Size limit in bytes (decimal or 0xhex)
- define size_check
-+	test "$2" = "y" || exit 0; \
- 	actual=$$( wc -c $1 | awk '{print $$1}'); \
--	limit=$$( printf "%d" $2 ); \
-+	limit=$$( printf "%d" $3 ); \
- 	if test $$actual -gt $$limit; then \
- 		echo "$1 exceeds file size limit:" >&2; \
- 		echo "  limit:  $$(printf %#x $$limit) bytes" >&2; \
-@@ -1104,30 +1106,6 @@ LDPPFLAGS += \
- #########################################################################
- #########################################################################
- 
--ifeq ($(CONFIG_HAS_BOARD_SIZE_LIMIT),y)
--BOARD_SIZE_CHECK= @ $(call size_check,$@,$(CONFIG_BOARD_SIZE_LIMIT))
--else
--BOARD_SIZE_CHECK =
--endif
--
--ifeq ($(CONFIG_HAS_SPL_SIZE_LIMIT),y)
--SPL_SIZE_CHECK = @$(call size_check,$@,$$(tools/spl_size_limit))
--else
--SPL_SIZE_CHECK =
--endif
--
--ifeq ($(CONFIG_HAS_TPL_SIZE_LIMIT),y)
--TPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_TPL_SIZE_LIMIT))
--else
--TPL_SIZE_CHECK =
--endif
--
--ifeq ($(CONFIG_HAS_VPL_SIZE_LIMIT),y)
--VPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_VPL_SIZE_LIMIT))
--else
--VPL_SIZE_CHECK =
--endif
--
- # Statically apply RELA-style relocations (currently arm64 only)
- # This is useful for arm64 where static relocation needs to be performed on
- # the raw binary, but certain simulators only accept an ELF file (but don't
-@@ -1471,7 +1449,7 @@ endif
- 
- %.imx: $(IMX_DEPS) %.bin
- 	$(Q)$(MAKE) $(build)=arch/arm/mach-imx $@
--	$(BOARD_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_HAS_BOARD_SIZE_LIMIT),$(CONFIG_BOARD_SIZE_LIMIT))
- 
- %.vyb: %.imx
- 	$(Q)$(MAKE) $(build)=arch/arm/cpu/armv7/vf610 $@
-@@ -1572,11 +1550,11 @@ endif
- 
- u-boot-nodtb.bin: u-boot FORCE
- 	$(call if_changed,objcopy_uboot)
--	$(BOARD_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_HAS_BOARD_SIZE_LIMIT),$(CONFIG_BOARD_SIZE_LIMIT))
- 
- u-boot.ldr:	u-boot
- 		$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
--		$(BOARD_SIZE_CHECK)
-+		@$(call size_check,$@,$(CONFIG_HAS_BOARD_SIZE_LIMIT),$(CONFIG_BOARD_SIZE_LIMIT))
- 
- # binman
- # ---------------------------------------------------------------------------
-@@ -1703,7 +1681,7 @@ u-boot-dtb.img u-boot.img u-boot.kwb u-boot.pbl u-boot-ivt.img: \
- 			$(if $(CONFIG_OF_SEPARATE)$(CONFIG_OF_EMBED)$(CONFIG_SANDBOX),dts/dt.dtb) \
- 		,$(UBOOT_BIN)) FORCE
- 	$(call if_changed,mkimage)
--	$(BOARD_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_HAS_BOARD_SIZE_LIMIT),$(CONFIG_BOARD_SIZE_LIMIT))
- 
- ifeq ($(CONFIG_SPL_LOAD_FIT_FULL),y)
- MKIMAGEFLAGS_u-boot.itb =
-@@ -1718,12 +1696,12 @@ u-boot.itb: u-boot-nodtb.bin \
- 		$(if $(CONFIG_MULTI_DTB_FIT),$(FINAL_DTB_CONTAINER)) \
- 		$(U_BOOT_ITS) FORCE
- 	$(call if_changed,mkfitimage)
--	$(BOARD_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_HAS_BOARD_SIZE_LIMIT),$(CONFIG_BOARD_SIZE_LIMIT))
- endif
- 
- u-boot-with-spl.kwb: u-boot.bin spl/u-boot-spl.bin FORCE
- 	$(call if_changed,mkimage)
--	$(BOARD_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_HAS_BOARD_SIZE_LIMIT),$(CONFIG_BOARD_SIZE_LIMIT))
- 
- u-boot.dis:	u-boot
- 		$(OBJDUMP) -d $< > $@
-@@ -2347,7 +2325,7 @@ u-boot.lds: $(LDSCRIPT) prepare FORCE
- 
- spl/u-boot-spl.bin: spl/u-boot-spl
- 	@:
--	$(SPL_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_HAS_SPL_SIZE_LIMIT),$$(tools/spl_size_limit))
- 
- spl/u-boot-spl-dtb.bin: spl/u-boot-spl
- 	@:
-@@ -2372,14 +2350,14 @@ spl/boot.bin: spl/u-boot-spl
- 
- tpl/u-boot-tpl.bin: tpl/u-boot-tpl
- 	@:
--	$(TPL_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_HAS_TPL_SIZE_LIMIT),$(CONFIG_TPL_SIZE_LIMIT))
- 
- tpl/u-boot-tpl: tools prepare $(if $(CONFIG_TPL_OF_CONTROL),dts/dt.dtb)
- 	$(Q)$(MAKE) obj=tpl -f $(srctree)/scripts/Makefile.xpl all
- 
- vpl/u-boot-vpl.bin: vpl/u-boot-vpl
- 	@:
--	$(VPL_SIZE_CHECK)
-+	@$(call size_check,$@,$(CONFIG_HAS_VPL_SIZE_LIMIT),$(CONFIG_VPL_SIZE_LIMIT))
- 
- vpl/u-boot-vpl: tools prepare $(if $(CONFIG_TPL_OF_CONTROL),dts/dt.dtb)
- 	$(Q)$(MAKE) obj=vpl -f $(srctree)/scripts/Makefile.xpl all
--- 
-2.39.5
+> ---
+>
+> (no changes since v1)
+>
+>  arch/arm/dts/k3-am642-evm-u-boot.dtsi | 4 ----
+>  1 file changed, 4 deletions(-)
+>
+> diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am64=
+2-evm-u-boot.dtsi
+> index 705b3baa81cf..6469f43fca81 100644
+> --- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+> @@ -19,10 +19,6 @@
+>  	dr_mode=3D"peripheral";
+>  };
+> =20
+> -&main_mmc1_pins_default {
+> -	bootph-all;
+> -};
+> -
+>  &sdhci0 {
+>  	bootph-all;
+>  };
 
