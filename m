@@ -4,51 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 240DFCCF9E3
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 12:41:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23DD8CCFA13
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 12:48:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8938D839B7;
-	Mon, 10 Nov 2025 13:41:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id A563283A2D;
+	Mon, 10 Nov 2025 13:48:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="AdoOcbD8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JhFJg+Hd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A1DA83A07; Mon, 10 Nov 2025 13:41:20 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 12F628397A; Mon, 10 Nov 2025 13:48:09 +0100 (CET)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A7908391C
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 13:41:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id CE92E8397A
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 13:48:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukma@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D7D4A108BCE; Mon, 10 Nov 2025 13:41:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1762778477; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=xm5+/qBT2UGHvqxy3lh5PsqY7ZQWjo4wLhVNJVHrP9Y=;
- b=AdoOcbD85dLlkK1sbvt8LAkWZXSPr8R/xuabTYFLck2hTUozL6oi4/RE4vPRv2z8JDrFQj
- +jf2vVBCblKnytLQGC7lD+9fpLFPTGSztJx7utdrfjGPFxl5zKY1TUQzirZMkAGjKr9cA7
- nD/5N3yA9ezkCUup01GNaZnmkFl6Qv5H7N98uDgcgc1l0N8RgkbuDITpKX11AVdT0keoXy
- 53a65QEmkEpllbKqwxawfVdO3RwJfltP2YnBgSVRsiWUN+nxDGxFuxU+oFkHKtw9KU0ICH
- 3d3OHCh+jukHpx2j9b43I0icxvUUsh66SYE6C2bC9HzhpA/R0HqbPBJKxLmPiw==
-From: Lukasz Majewski <lukma@nabladev.com>
-To: Stefano Babic <sbabic@nabladev.com>,
-	Fabio Estevam <festevam@gmail.com>
-Cc: uboot-imx@nxp.com, Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- John Ripple <john.ripple@keysight.com>, Peng Fan <peng.fan@nxp.com>,
- Ji Luo <ji.luo@nxp.com>, Lukasz Majewski <lukma@nabladev.com>
-Subject: [PATCH] arm: imx: Add command to get offset of first image in AHAB OS
- container
-Date: Mon, 10 Nov 2025 13:41:00 +0100
-Message-Id: <20251110124100.4193259-1-lukma@nabladev.com>
-X-Mailer: git-send-email 2.39.5
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-ba599137cf7so2205626a12.0
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 04:48:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1762778885; x=1763383685; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6krbzXvUvZ6wdYeV8wERppIk6uLxbgDGpq8jOkSi7Hs=;
+ b=JhFJg+Hdugry3rlKmvjKyuBKL2guCDrqUlO+DskMC/G7JQDUtEV8hZif7aBQcrhLta
+ AHwR1G2wFGpE3lTxPGCNQv7Mco7zHuCNh6KSyhHHcWaViRUmU+gNjBk6hLmxz7Fiyzws
+ eCBVNQ2VPJx2qVDDkGawBYIEfZ3zhOo8qMJenkP3hhF2VDk7k2zFXDf+L/iWj/PYcrqK
+ RwpI7H61fhZQ3dJ8vQ2Fvc7wltOkK+BWlHBvTW0jYVfTCMOG+BGc7C7T+ymY/431/o+B
+ GwNvxG8IrMaGj6yA6l2AJhyCEEn+Xkipu16VvxxTKoHhd3NbPcmhG9zexAAC1ckJWW/P
+ nj1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762778885; x=1763383685;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6krbzXvUvZ6wdYeV8wERppIk6uLxbgDGpq8jOkSi7Hs=;
+ b=uM9wAh2vcMcyNfb5Xm+z9LVax1QEbYWeiKuoD5UTmMk/roKu0JjtPOU6yhd7TAVlKZ
+ Ux5+WaPm9qjqhNfNmn2qSGEsw7Yk2FVxfEn8auypbcaejFGH57pXmo/OgkgIqBaeTsgg
+ G9LDwHBUXNTwCoQoTU2wlOpX83hS3Cy+45wyLMF4Xg05vQrrMcWhFTvf0oV0Y+OyUwPD
+ Hw0ytBi8ISpY2ISBap8VqM7ltSrnTMnmvalO422oiNJLPjx+yLfUt53dsgou1c8aC4GL
+ KyJHJp6NHEa54oJYM6BxVAdnI39MdXe150yX83XcelvA8CH/FApdRMsaA3GJYrWsgvJO
+ l2Bg==
+X-Gm-Message-State: AOJu0YyzUw7R6SBQhQkdGxsO2teG7wnL/O86wAbCc6MKO32wBTL4zN4E
+ yKNVYfHaHdDIQ4tUdsw1W8hKyUY78YK1yj8NokX2H0Sj58ijAhHfRMIlDOMF9UEy
+X-Gm-Gg: ASbGncuJ3kXsH3L9/VFMm+he2MswIC/Ah7St5exHOESGQNYdhgfq/XznQof6ZLNwMqc
+ u7CyP61eKOvrRck4skcOsnzKqtGm+fR0slwk6Wljks6QSQL/cYm9qlUQSYyvnhNNzbCnRZDdqG5
+ Hw7KsRAthf2MWstEZAItrs9I7GWsiL6sAMysw4lViWZ590GPT2sPkYJhvw6rCeeqrHhxdaIXD8Q
+ XnuxgNcQyWTARk7c0uGRZ6ubW/pQd8hd+dp5RklUDKeEPeZPRrXWu71BSEejimxyhX14XtT9HEz
+ TKxv0utMp0DHJmedURuOzZIVbyCvmA3rnojKbyY17ZAMNXv+JgbTr9Sr+1UwZY+R762pCj81vxJ
+ 3Y3kPlM5qXxwO0QrXrs6/SB66r7xMDxKaPlan2eilhwqg15tjL01upM3eClclKXjCCrzHmKkhHk
+ A1V7pJXw==
+X-Google-Smtp-Source: AGHT+IFQvRZn+VRiapXT4gbgSY/1OrnMnCfcB4IFNCMS41nte6R7o0wt9QM4WZR9nUo6byK/U39Gsw==
+X-Received: by 2002:a17:902:f684:b0:274:777b:ca6d with SMTP id
+ d9443c01a7336-297e56cc02cmr102414695ad.43.1762778885025; 
+ Mon, 10 Nov 2025 04:48:05 -0800 (PST)
+Received: from ubuntu.. ([111.196.133.211]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-29651ccec04sm145345885ad.102.2025.11.10.04.48.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Nov 2025 04:48:04 -0800 (PST)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH 1/2] bin: Fix the broken symbolic link of qemu_arm64 config
+ file
+Date: Mon, 10 Nov 2025 20:47:59 +0800
+Message-Id: <20251110124800.1642591-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,91 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With current mainline it is possible to check with AHAB if system OS image
-can be trusted (with 'auth_cntr' command).
-However, after the validation one needs to use the image (fitImage in this
-case) itself. Such operation requires getting the offset in the image
-eligible for AHAB validation to start execution of the fitImage.
+Commit 48a0f7fa renamed the conf.qemu_arm64_na to conf.qemu_arm64
+but it forgot to update the symbolic link in the bin/ellesmere dir.
 
-Command in this patch allows it, so with:
-auth_cntr_offset ${addr} auth_cntr_os_offset;
-setexpr addr ${kernel_addr_r} + ${auth_cntr_os_offset};
-
-it is possible to boot the fitImage after AHAB IP block vaidation.
-
-Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
+Fixes: 48a0f7fa ("bin: Run the conf without board_ident as default")
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- arch/arm/mach-imx/imx8/ahab.c | 50 +++++++++++++++++++++++++++++++++++
- 1 file changed, 50 insertions(+)
 
-diff --git a/arch/arm/mach-imx/imx8/ahab.c b/arch/arm/mach-imx/imx8/ahab.c
-index f13baa871cc..da0e1f3382b 100644
---- a/arch/arm/mach-imx/imx8/ahab.c
-+++ b/arch/arm/mach-imx/imx8/ahab.c
-@@ -7,6 +7,7 @@
- #include <errno.h>
- #include <imx_container.h>
- #include <log.h>
-+#include <env.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <firmware/imx/sci/sci.h>
-@@ -424,6 +425,55 @@ static int do_ahab_commit(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return CMD_RET_SUCCESS;
- }
- 
-+static int do_ahab_get_offset(struct cmd_tbl *cmdtp, int flag, int argc,
-+			      char *const argv[])
-+{
-+	struct container_hdr *phdr;
-+	const char *name = argv[2];
-+	struct boot_img_t *img;
-+	u16 length;
-+	ulong cntr;
-+	int err;
-+
-+	if (argc != 3)
-+		return CMD_RET_USAGE;
-+
-+	if (!name)
-+		return CMD_RET_USAGE;
-+
-+	cntr = hextoul(argv[1], NULL);
-+
-+	phdr = (struct container_hdr *)cntr;
-+	length = phdr->length_lsb + (phdr->length_msb << 8);
-+
-+	err = ahab_auth_cntr_hdr(phdr, length);
-+	if (err) {
-+		printf("Authenticate OS container header has failed!\n");
-+		return 1;
-+	}
-+
-+	ahab_auth_release();
-+
-+	/*
-+	 * Get the offset for first image (Image0Offset at Fitgure 1.
-+	 * of AN12312)
-+	 */
-+	img = (struct boot_img_t *)
-+		((ulong)phdr + sizeof(struct container_hdr));
-+
-+	debug("%s=0x%x\n", name, img->offset);
-+
-+	return env_set_hex(name, img->offset);
-+}
-+
-+U_BOOT_CMD(auth_cntr_offset, CONFIG_SYS_MAXARGS, 1, do_ahab_get_offset,
-+	   "provide first image offset from AHAB OS container",
-+	   "addr name\n"
-+	   "addr - OS container hex address\n"
-+	   "name - name of the env variable to store offset of the first\n"
-+	   "       image from AHAB OS container\n"
-+);
-+
- U_BOOT_CMD(auth_cntr, CONFIG_SYS_MAXARGS, 1, do_authenticate,
- 	   "autenticate OS container via AHAB",
- 	   "addr\n"
+ bin/ellesmere/conf.qemu_arm64    | 1 +
+ bin/ellesmere/conf.qemu_arm64_na | 1 -
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ create mode 120000 bin/ellesmere/conf.qemu_arm64
+ delete mode 120000 bin/ellesmere/conf.qemu_arm64_na
+
+diff --git a/bin/ellesmere/conf.qemu_arm64 b/bin/ellesmere/conf.qemu_arm64
+new file mode 120000
+index 0000000..dee6855
+--- /dev/null
++++ b/bin/ellesmere/conf.qemu_arm64
+@@ -0,0 +1 @@
++../travis-ci/conf.qemu_arm64
+\ No newline at end of file
+diff --git a/bin/ellesmere/conf.qemu_arm64_na b/bin/ellesmere/conf.qemu_arm64_na
+deleted file mode 120000
+index cf56db1..0000000
+--- a/bin/ellesmere/conf.qemu_arm64_na
++++ /dev/null
+@@ -1 +0,0 @@
+-../travis-ci/conf.qemu_arm64_na
+\ No newline at end of file
 -- 
-2.39.5
+2.34.1
 
