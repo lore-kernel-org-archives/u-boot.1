@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D93B0CCFA13
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 20:13:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFA06CCF9E3
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 20:13:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 280F383AAD;
+	by phobos.denx.de (Postfix) with ESMTP id 75A1083ABF;
 	Mon, 10 Nov 2025 21:13:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="IqMY3UML";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="s2yL6W9c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8481783A98; Mon, 10 Nov 2025 21:11:42 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 9954783AA0; Mon, 10 Nov 2025 21:11:44 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6378C83AA1
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 21:11:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 988CB83AA0
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 21:11:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b3d196b7eeeso528830266b.0
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 12:11:40 -0800 (PST)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-640b4a52950so5225529a12.1
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 12:11:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1762805500; x=1763410300;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1762805502; x=1763410302;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=SDisJLmcA7K4baTvHZIaHLscN2TVSUxPwLAViDIcFbQ=;
- b=IqMY3UMLLaN+c4wQZfxEH0XacVbphPD182zK1pJ/2k9kc0FQKksUMcIyzELKluVegG
- Pd+bfOaFD3eKs0IZufWxnfOA1Txw97Ksf+ZQQ0ILf2ZAklrBa5L1wlbVDNMqYx3twHvZ
- GWmZeCaw6sBXPXCw25XGICEzmMFyXxXmT5FKbr3sEHuQfkTkFfRVvKVrhtMMxL6s4uNQ
- RTecXXvoupssltIMqXBHBZY+aP3vCGwPDzpmBWAklWS6HBvZWBeP74AgwcXLEzAbTrSU
- 8bJTnHOoxzbFNrTygjTLb1QJA4S0iiJq9O0Lr1WdGFB0Dhl7bht08lsIugRruiVY9P3O
- Mpvg==
+ :reply-to; bh=zSqgheeDYHCKxW5YgUOjbEwqqHvLgbAUrpzhFuoZ3xw=;
+ b=s2yL6W9cIUWoDGdC9O0kjp4dU0gSzj4FjlEbNCv8FD44tYAK7z8eZPmJSOar6Jx6LN
+ Um5L6WoYwmzbpqpF33xqn4tll5fZXJaSnittK2jHw47dLfx4nBJbv1ZsseFLjAstowzM
+ 15mzibC33kBGgueUoOrydq86Y+uw0pVxGsftj0VEQ+qFLj5NN/bkk1Tlvym8VkYVWGv0
+ +LrTPLIjTD/ukDqEdBVwpClvT1/+Vi3Uf6TSDThPABdzegCCgOspViTxAZAZjCrlTiIo
+ VsKBgnu+/79CBuX3Uj/b58V9/+upFQ3AhGI26+3WbmDmqX7bUfC7Ro3n/+mbmOwpDFbV
+ kBYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762805500; x=1763410300;
+ d=1e100.net; s=20230601; t=1762805502; x=1763410302;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=SDisJLmcA7K4baTvHZIaHLscN2TVSUxPwLAViDIcFbQ=;
- b=dRkonqI5JSLmgb95y6TTY+hJQcQvqBPvXIrzgpI66l3UIO1A+B3scsR3b+hqmIMN7t
- Bvt7W1mxU9oVBaYzwwc8YllCbzxx7vwdXD/fFmPEM1Sy1hUGF86+rW0opEmkoPXOQHsd
- LQmBsjA6sjuuiRMW/pV4R0qI65W9MdtGSMiEr+FeHvnbNfMeEOL1OEJXuqy/XbdB/y2d
- ghRzrLZAZEFcBLCnrLC2zXbvaMD+dFI1w0Vac7rNmuf/qlWwlZ4ClcGg6O9P8GoKXHzu
- tJqMBuqz7Dsrp6nsheynV++1zRrt39MI3RUCspJVvBZFvQXwEiqskaLC4Xbp4Ibu7l/i
- lCuQ==
+ bh=zSqgheeDYHCKxW5YgUOjbEwqqHvLgbAUrpzhFuoZ3xw=;
+ b=VAZlTqj2ofvgH0iQkwnMV9YbAsi4ZPgV1XiYZlRayJFK5rykZFnfNvXgAER8Nos7Rz
+ UfhzIaoBEY9QT9G+nzAg/gejkFSGhbD5yxLWapKK18ZCaSjZ/lvOfx5jNcTMheJ9SgIW
+ yPTT1MKMO5og2b9366GB1iUjRqU6b8ISzhgJa/yWsDHW6kZq9BapGtf7RPwYblwNPDXC
+ HlzSg0UJGOpPQM4d0h+inZ6/3Il67m83vqkvg33VvzB3eQbtwoDnd18A/loZzEyzJtyv
+ B+eypl2Os83Z0dkV8t7/OhYgaG9SxK96JzFQn6SNBCAoTY8e0AOCZcoyZrBl6GJY28hU
+ JrNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU07cPVpkfapsv59j4KftYkOVACpUZ/L417Bg2zYyZIOtkVtBeDqNDc/WesD7BBnfw/mb8bHHc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTmr8PvXTzLfAfCOcflCs7VRsBXdjelXPKWJjIhXZ5vY6/xH20
- 13vHb8D13pkZ3nqSwmHF3hWZnNM0uBfZahmT1w0hLGiks+HV2Wf1FpLWAvPQAyQluKg=
-X-Gm-Gg: ASbGncvIcjmWNOe2e4yd3uZdVbcknY/zIRZ2kxNiCiMfgiabWln7KTww27S/1oht15Q
- YglBaCiLibqlgSiWfw2xjJ/SIJwRg/xDTLAVTBV89H2O6DrWKAws86jrMi+rp3DXNRVP8chTQ81
- OmZzpOFz/NVxRcbUkXa1wSc1UQQ5i9ZgeMXb1zcsScGMRxUKsh8MtUIKywQ0XeMsR+adTRHpZk/
- Rn3Na+Hza1fX/q6ZHeD7ElbFXoCru65vj/EFHmwmwlP8h1q1I8ec52+YNkavrqw2K3+C3hu0sLm
- Sd5mIgCgllKpFQ/YzEuuOGkDqsTdbxLI9pfXqJnO9hQQeQuwlPC+JdAnrkIC+HLCGhDoSnMfegL
- bocHga6op0Nv1BAiNcVhQqv1NQZHQGC20hUnRH4Z84QQTUnIS6IS8lii06imoXRun1wTE0yyfJP
- jEwrWtWA==
-X-Google-Smtp-Source: AGHT+IHVhH6pv7/YKGZGjajwrX9eDArrVzdu48w/zfPI49m5OjTl5ybnibXpf+xU8PTileSzifFwRA==
-X-Received: by 2002:a17:907:7e85:b0:b2d:830a:8c01 with SMTP id
- a640c23a62f3a-b72e0547d84mr982052366b.61.1762805499710; 
- Mon, 10 Nov 2025 12:11:39 -0800 (PST)
+ AJvYcCWvf3uvH433tgwkPJLzb6KTPEwgsxwS8m67DCrOT3YcyMJ9W7gHW8PRzu6/ahOK2eWyAqy4XvE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMmTs5cI9UipPsWDGV3bFfKy1OaiP1b0limqULKcfb9OWzV2mH
+ klwFw6yapaiGqaHT0+EsNeOsFwz9YzPDMSRxD+WLUZf2Z711T24K1mkHd1qLeiJi/1o=
+X-Gm-Gg: ASbGncuVfD0ZWj0XgEXZXXx+9LVe3Snr0vx1JRngOam2p3WEniOpkS2+zHhY+zLnVOB
+ 0BHx8F6ePW90bzQVLPJEBi8OgDL2eQvYLBgwi9BxAf9PTaaceKlVqoRRkcbHX8SDiotLJuKejBF
+ /VOiiP0yvFPeMjMYhnmPN1lMphz9q9Gf9jeVAjQk8spCWitU21JJT2dkVV4Epe73oPTubUvtbHK
+ r+SHrpsqXFMOH3kfh4qb7RA1WsA7D6k9Su0Pfk1mMZ5CE3MVtLL60AA1NhKl9pn3DfYBE+WwDAA
+ 1MElcup7LJsgI0tdcoAJjPox5shLLQLPK+t+VVFhqbhtZ7+s0JetlO7Xz9DntAe16rny1ZFEEBQ
+ pqiAc0UyugSppYEkqIEvRm+keqNaYyXIcT+xcYZlwImc5hCZsJpdpM/ytKxYCJwwzJ6JnGkmm7i
+ nH+H2anw==
+X-Google-Smtp-Source: AGHT+IFu08SvqwAxvik9tBA/QvxvRcfxx6v3rc5r/IeVeTXKY6AD4Sa9btsWY543WtcJTS6CapsS6g==
+X-Received: by 2002:a05:6402:280c:b0:640:af04:d718 with SMTP id
+ 4fb4d7f45d1cf-6415e8559f2mr6309422a12.30.1762805501975; 
+ Mon, 10 Nov 2025 12:11:41 -0800 (PST)
 Received: from localhost ([2001:4090:a247:830a:fe22:a8:f29a:a5c3])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-b72bf407a22sm1168699166b.29.2025.11.10.12.11.39
+ 4fb4d7f45d1cf-6412a27d68dsm11151549a12.9.2025.11.10.12.11.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Nov 2025 12:11:39 -0800 (PST)
+ Mon, 10 Nov 2025 12:11:40 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Mon, 10 Nov 2025 21:10:25 +0100
-Subject: [PATCH v5 01/13] arm: mach-k3: Remove CANUART IO isolation
+Date: Mon, 10 Nov 2025 21:10:26 +0100
+Subject: [PATCH v5 02/13] arm: mach-k3: Kconfig: Add symbols for IO+DDR Low
+ Power Mode
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-1-980ee0036c26@baylibre.com>
+Message-Id: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-2-980ee0036c26@baylibre.com>
 References: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-0-980ee0036c26@baylibre.com>
 In-Reply-To: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-0-980ee0036c26@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,12 +109,12 @@ Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7668; i=msp@baylibre.com;
- h=from:subject:message-id; bh=B4XFtAqKGQ/Mry4W/vnrhcuAzRarALEZTryNZiOttvo=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwhtx1Nb1e/u/hSUF1Xa/I3ISUZxmqFKZ46rLESPBc+m
- 1RyWH/oKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIl49zD8U6jcXXNygeS5v5fC
- 041eeaoyxCeGHJvX5hB8dllXkyLfY0aGF7/nSj66cDfpt+d5tybvfaLax0wuvugRijCzPu4jcaG
- GDQA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1240; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=HO/gadQbNdCPL9w2QbwpZ+6BWlxDxjQcNAQingd8540=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwht70rb33//32r77aAfzN0ojf0TJy1Lf1YYPEBdXfmt
+ +9i5kT+7ChlYRDjYpAVU2TpTAxN+y+/81jyomWbYeawMoEMYeDiFICJlO1gZJhwb4mD1/pv/5V8
+ 1dNXRP1U2j1bQ92suZFpb8D5JWqlZ1oY/idt08i84adVsvlqpmkz7+KNyfOnsCot7ptTc7134l3
+ 787wA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 10 Nov 2025 21:13:08 +0100
@@ -133,189 +134,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After leaving the Partial-IO mode or other deep sleep states, the IO
-isolation needs to be removed. This routine is shared by at least am62,
-am62a and am62p.
+There is one new symbol to enable support to resume from IO+DDR where
+the SoC is turned off and DDR is in self-refresh.
 
-The original function for testing was developed by
-Akashdeep Kaur <a-kaur@ti.com>
+The other symbol is the address of a memory region to be used to store
+meta data. This has to be the same address as is used by the firmware.
 
 Tested-by: Anshul Dalal <anshuld@ti.com>
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- arch/arm/mach-k3/am62ax/am62a7_init.c    |  2 ++
- arch/arm/mach-k3/am62px/am62p5_init.c    |  2 ++
- arch/arm/mach-k3/am62x/am625_init.c      |  2 ++
- arch/arm/mach-k3/common.c                | 56 ++++++++++++++++++++++++++++++++
- arch/arm/mach-k3/common.h                |  1 +
- arch/arm/mach-k3/include/mach/hardware.h | 29 +++++++++++++++++
- 6 files changed, 92 insertions(+)
+ arch/arm/mach-k3/Kconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
-index 48d578e7d6f180f06b42003313bf643c725eae7e..60645272c816023798cc5d6fa46a2c569143343b 100644
---- a/arch/arm/mach-k3/am62ax/am62a7_init.c
-+++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
-@@ -101,6 +101,8 @@ void board_init_f(ulong dummy)
- 	/* Init DM early */
- 	spl_early_init();
+diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+index 1b8c0b1eb968f0414107c0bf3142f744ce8364c8..4b7cef64935c7b403051c080eba7bdb48f727bf1 100644
+--- a/arch/arm/mach-k3/Kconfig
++++ b/arch/arm/mach-k3/Kconfig
+@@ -148,6 +148,14 @@ config K3_DM_FW
+ 	  bootloader, it makes RM and PM services not being available
+ 	  during R5 SPL execution time.
  
-+	wkup_ctrl_remove_can_io_isolation_if_set();
++config K3_IODDR
++	bool "Enable IO+DDR Low Power Mode support"
++	depends on SPL && (SOC_K3_AM62A7 || SOC_K3_AM62P5)
++	help
++	  Enable support for IO+DDR Low Power Mode. If this is enabled and a
++	  resume from IO+DDR is detected, metadata in the DDR is used to
++	  restore TIFS and resume DM.
 +
- 	/*
- 	 * Process pinctrl for the serial0 and serial3, aka WKUP_UART0 and
- 	 * MAIN_UART1 modules and continue regardless of the result of pinctrl.
-diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
-index aebd5200b0db9959805d04408b34d283e21b6e2c..1c47debca61598ecacae03d83b4001a72dda164a 100644
---- a/arch/arm/mach-k3/am62px/am62p5_init.c
-+++ b/arch/arm/mach-k3/am62px/am62p5_init.c
-@@ -160,6 +160,8 @@ void board_init_f(ulong dummy)
- 	if (ret)
- 		panic("spl_early_init() failed: %d\n", ret);
- 
-+	wkup_ctrl_remove_can_io_isolation_if_set();
-+
- 	/*
- 	 * Process pinctrl for the serial0 and serial3, aka WKUP_UART0 and
- 	 * MAIN_UART1 modules and continue regardless of the result of pinctrl.
-diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
-index 14f93ac998f7d11997b753550c0ea38926e35e64..6eae8929ef7722ff46f67c82d2e17eff618eaff2 100644
---- a/arch/arm/mach-k3/am62x/am625_init.c
-+++ b/arch/arm/mach-k3/am62x/am625_init.c
-@@ -201,6 +201,8 @@ void board_init_f(ulong dummy)
- 	/* Init DM early */
- 	spl_early_init();
- 
-+	wkup_ctrl_remove_can_io_isolation_if_set();
-+
- 	/*
- 	 * Process pinctrl for the serial0 and serial3, aka WKUP_UART0 and
- 	 * MAIN_UART1 modules and continue regardless of the result of pinctrl.
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index 7c06764af8256b7fd27f8e7f208a597b1b91652b..b4a605503d27b29d0fb962fbe4c94650a1f6c54f 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -33,6 +33,9 @@
- #include <asm/armv8/mmu.h>
- #include <mach/k3-common-fdt.h>
- #include <mach/k3-ddr.h>
-+#include <wait_bit.h>
-+
-+#define CLKSTOP_TRANSITION_TIMEOUT_MS	10
- 
- #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
- #define PROC_BOOT_STATUS_FLAG_R5_WFI		0x00000002
-@@ -115,6 +118,59 @@ void mmr_unlock(uintptr_t base, u32 partition)
- 	writel(CTRLMMR_LOCK_KICK1_UNLOCK_VAL, part_base + CTRLMMR_LOCK_KICK1);
- }
- 
-+static void wkup_ctrl_remove_can_io_isolation(void)
-+{
-+	const void *wait_reg = (const void *)(WKUP_CTRL_MMR0_BASE +
-+					      WKUP_CTRL_MMR_CANUART_WAKE_STAT1);
-+	int ret;
-+	u32 reg = 0;
-+
-+	/* Program magic word */
-+	reg = readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_CTRL);
-+	reg |= WKUP_CTRL_MMR_CANUART_WAKE_CTRL_MW << WKUP_CTRL_MMR_CANUART_WAKE_CTRL_MW_SHIFT;
-+	writel(reg, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_CTRL);
-+
-+	/* Set enable bit. */
-+	reg |= WKUP_CTRL_MMR_CANUART_WAKE_CTRL_MW_LOAD_EN;
-+	writel(reg, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_CTRL);
-+
-+	/* Clear enable bit. */
-+	reg &= ~WKUP_CTRL_MMR_CANUART_WAKE_CTRL_MW_LOAD_EN;
-+	writel(reg, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_CTRL);
-+
-+	/* wait for CAN_ONLY_IO signal to be 0 */
-+	ret = wait_for_bit_32(wait_reg,
-+			      WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE,
-+			      false,
-+			      CLKSTOP_TRANSITION_TIMEOUT_MS,
-+			      false);
-+	if (ret < 0)
-+		return;
-+
-+	/* Reset magic word */
-+	writel(0, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_CTRL);
-+
-+	/* Remove WKUP IO isolation */
-+	reg = readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_PMCTRL_IO_0);
-+	reg = reg & WKUP_CTRL_MMR_PMCTRL_IO_0_WRITE_MASK & ~WKUP_CTRL_MMR_PMCTRL_IO_0_GLOBAL_WUEN_0;
-+	writel(reg, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_PMCTRL_IO_0);
-+
-+	/* clear global IO isolation */
-+	reg = readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_PMCTRL_IO_0);
-+	reg = reg & WKUP_CTRL_MMR_PMCTRL_IO_0_WRITE_MASK & ~WKUP_CTRL_MMR_PMCTRL_IO_0_IO_ISO_CTRL_0;
-+	writel(reg, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_PMCTRL_IO_0);
-+
-+	writel(0, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_DEEPSLEEP_CTRL);
-+	writel(0, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_PMCTRL_IO_GLB);
-+}
-+
-+void wkup_ctrl_remove_can_io_isolation_if_set(void)
-+{
-+	if (readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_STAT1) &
-+	    WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE)
-+		wkup_ctrl_remove_can_io_isolation();
-+}
-+
- bool is_rom_loaded_sysfw(struct rom_extended_boot_data *data)
- {
- 	if (strncmp(data->header, K3_ROM_BOOT_HEADER_MAGIC, 7))
-diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-index 52d3faaab5c94578cf4f7e288cbf840500d490a1..49417679e2ec7210d5c95540f476a5d8ee548617 100644
---- a/arch/arm/mach-k3/common.h
-+++ b/arch/arm/mach-k3/common.h
-@@ -51,6 +51,7 @@ struct ti_sci_handle *get_ti_sci_handle(void);
- void do_board_detect(void);
- void ti_secure_image_check_binary(void **p_image, size_t *p_size);
- int shutdown_mcu_r5_core1(void);
-+void wkup_ctrl_remove_can_io_isolation_if_set(void);
- 
- #if (IS_ENABLED(CONFIG_K3_QOS))
- void setup_qos(void);
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index 81b5f1fa45ea30456a43c6640aad01388ea6a3f2..d7c759420524faf48ea26c66607c6a899d1321b3 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -117,6 +117,35 @@ K3_SOC_ID(j722s, J722S)
- #define CTRLMMR_LOCK_KICK1			0x100c
- #define CTRLMMR_LOCK_KICK1_UNLOCK_VAL		0xd172bc5a
- 
-+/*
-+ * Shared WKUP_CTRL_MMR0 definitions used to remove IO isolation
-+ */
-+#define WKUP_CTRL_MMR_CANUART_WAKE_CTRL				0x18300
-+#define WKUP_CTRL_MMR_CANUART_WAKE_CTRL_MW			0x2aaaaaaa
-+#define WKUP_CTRL_MMR_CANUART_WAKE_CTRL_MW_SHIFT		1
-+#define WKUP_CTRL_MMR_CANUART_WAKE_CTRL_MW_LOAD_EN		BIT(0)
-+
-+#define WKUP_CTRL_MMR_CANUART_WAKE_STAT1			0x1830c
-+#define WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE	BIT(0)
-+
-+#define WKUP_CTRL_MMR_PMCTRL_IO_0				0x18084
-+#define WKUP_CTRL_MMR_PMCTRL_IO_0_ISOCLK_OVRD_0			BIT(0)
-+#define WKUP_CTRL_MMR_PMCTRL_IO_0_ISOOVR_EXTEND_0		BIT(4)
-+#define WKUP_CTRL_MMR_PMCTRL_IO_0_ISO_BYPASS_OVR_0		BIT(6)
-+#define WKUP_CTRL_MMR_PMCTRL_IO_0_WUCLK_CTRL_0			BIT(8)
-+#define WKUP_CTRL_MMR_PMCTRL_IO_0_GLOBAL_WUEN_0			BIT(16)
-+#define WKUP_CTRL_MMR_PMCTRL_IO_0_IO_ISO_CTRL_0			BIT(24)
-+#define WKUP_CTRL_MMR_PMCTRL_IO_0_WRITE_MASK ( \
-+		WKUP_CTRL_MMR_PMCTRL_IO_0_ISOCLK_OVRD_0 |	\
-+		WKUP_CTRL_MMR_PMCTRL_IO_0_ISOOVR_EXTEND_0 |	\
-+		WKUP_CTRL_MMR_PMCTRL_IO_0_ISO_BYPASS_OVR_0 |	\
-+		WKUP_CTRL_MMR_PMCTRL_IO_0_WUCLK_CTRL_0 |	\
-+		WKUP_CTRL_MMR_PMCTRL_IO_0_GLOBAL_WUEN_0 |	\
-+		WKUP_CTRL_MMR_PMCTRL_IO_0_IO_ISO_CTRL_0)
-+
-+#define WKUP_CTRL_MMR_PMCTRL_IO_GLB				0x1809c
-+#define WKUP_CTRL_MMR_DEEPSLEEP_CTRL				0x18160
-+
- #define K3_ROM_BOOT_HEADER_MAGIC	"EXTBOOT"
- 
- struct rom_extended_boot_data {
+ config K3_X509_SWRV
+ 	int "SWRV for X509 certificate used for boot images"
+ 	default 1
 
 -- 
 2.51.0
