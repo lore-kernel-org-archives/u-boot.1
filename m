@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8BD6CCF9E3
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 20:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46808CCFA13
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 20:13:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFFEF83ACD;
-	Mon, 10 Nov 2025 21:13:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1794B83AE9;
+	Mon, 10 Nov 2025 21:13:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="zIbOhKUT";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="o3Tn9lE5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11EFE83AB0; Mon, 10 Nov 2025 21:11:46 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 037F683AAC; Mon, 10 Nov 2025 21:11:47 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE23E83AA9
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 21:11:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB95183A98
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 21:11:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b6d402422c2so692930766b.2
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 12:11:43 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b7277324054so510722566b.0
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 12:11:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1762805503; x=1763410303;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1762805504; x=1763410304;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=wo96BrivufG0raKJiGi2t4H/NoWv1Y5sUIUPEFoa3f8=;
- b=zIbOhKUT0DwZzZYWzz2wp3Q0FHE7ARKjLDRjYUtPJjrkgl03VMumJ8be/rNgB4wSUc
- 9jcw2m8xMCi2H33s3xuotUxHfFhyIY7C2jMTeujDh5OmJcYQqmf++cc6jG14FXqG5Ng2
- BFkepLrERCGMOAabd9DyMOsLxADkHY8TMLbg+/XCHgEdkPUyM/zLD5CGJtQNGGdciAUS
- N0t/ilQYjJ+B82xRRna9Ao6rdaAJWV88gurfMn9RlC7Ar6lwRm/T1MXR0sMmR1XNAsfL
- UxyulOO4xb3hjcvHyesTaQq5h5wrL5GWTYU2maRbqxugSDrGujG6w/2IN7Xdr99/lipl
- f4oA==
+ :reply-to; bh=pPw92q6W04yGrglPzrZU9FUz0DpT6vCa0OS2edbdxC0=;
+ b=o3Tn9lE5faJ8DgLT9PWyZHMzJgJYUWRX9e3GOIPKC/DoGSzGiHK8NcyYcMDdgd7knb
+ Kfs5uY28wzNpGdMClKvYp+fcEbZ3ZqaL3PfIFuu942Bqz8xRJuykOeRfJah/IG0bmsYx
+ POkDvR0GgosP3vYsMthE1Uq41f2OUpcK1G0Ry5iZ8saBMvRtrxePQkgTjEDO9+y+nXRb
+ zxzAaEze51wzXqHX1AEItCX8oHCxSyD8fKrR+zQ1v27k1FW1Qt4B8YOgIgg7QyyIL94L
+ 35JmD1DtnPrhZ9mCOxs1Q1HW33H6JfmRPk0XaixWlNoM2SNKKndSUwvF4h7ROUnzDQba
+ bRRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762805503; x=1763410303;
+ d=1e100.net; s=20230601; t=1762805504; x=1763410304;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=wo96BrivufG0raKJiGi2t4H/NoWv1Y5sUIUPEFoa3f8=;
- b=ZRGH9+MqXcePa/Y3T1YAq62VMufxV2Zv67awdpGsD7EcFBac3o/83zIKr8a8cETc8w
- rvgDS5ChCBYDy5d0hir0nicGgLgGxH+Ea1I4HTFKjJDZmkvvO6DhabrO/rqV41F9npd5
- N3f+LFOFvoa9Gu3R2+RmUaQ1qMRXdCHo6LrCQwhUyGy/fdRJTRteEYMwCVSVSPZ27YMI
- 1CjC1Oz6E54u1XQfTZsdcXLytAilQ1YD1Ev1M1zkp7iovOtHRjMccNfc0tXZDpzavXew
- vUEoIJ8mfrwtAaNK1xl0XgT1mIn8GmAfNG2sTBErFaClH3q5d6l4i2p+V/SU0L23ZDLh
- QNzg==
+ bh=pPw92q6W04yGrglPzrZU9FUz0DpT6vCa0OS2edbdxC0=;
+ b=YBiNW5OEXgLoYV9fE5t1sWXQqmLKN6YMday934V5xD2pMn3h5cxt1K3m75qQNFDpPv
+ lb+gBrLsjYdwGIMf5fzxq+1dkE0E01iqucTXRh5WqmBs10UXzP+IHm3oJN46OSQXVcnS
+ Q1U09A37M/d8Cw8IP86QIk54i1oXZcUixgMXEXwWgK/iLFAaNb9FmMxoo6jrtsuf+pm1
+ 3clNeRTKZpNnzLZMz2hFVCrkNRpSqySOm13ErMHdyT8xN6SboE5Lf+026kw6Ae1dGVOm
+ r38xLEN/rOep5k68rzLPczcChAZb4D/ln2iXs/S0ADzIY0ZaF7yQ9Qgda9CV32BhK8Tj
+ Ioug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVF39rZYKVMaBRTsDN4IYx5gR89U66ymDylrPynhfUg/o0jNV1gfNzy32mRKzJjIRHSG3hkyMs=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywek8ldSnwH8ghUf9nQ428bs5znVdL3R8Jg5TkCrAzX2HjqY32G
- 0vvUwstqcdFbNzy6kfeyEqO75FH+jufoCnIDFQOy6oQd36+krJPidRDWGTxufOK9QfM=
-X-Gm-Gg: ASbGncsuVHhFAapWIBOZcfrzXeUaXiSskJNw9yAfjBo/J0XQg8RttkscMvev+/tbcIj
- w8YTLT/z3QH2wLPzfAw747wVjCGBnf4lU3yocq/3VdmTo9+LSNRVH/Jo8Navu4gue7QrwrOOS5c
- X+1pFeFRxg/+p1gJ1/XMuJOP3BXScW17LV93uEfZ81A5LCCcENKY5ZKc+KlsioUZKS7AoH8aqIj
- asWJdLt5RGm4Y3E8vKJtx9qye8ukfam3IbkG11LWbISoJdtT40B2G00YgE2EZFf1GmLzwreJBzi
- R60JvZrWecWnuBzsWaCwq8BSBEgZygJebVs4IaRAy1AtK3MXmG0+vo35qaxDGSTfdI6X+2QxbDV
- sEw23StZAcajXNRWMoX7QfokpqrKn+BsGJ+8pyAqC9n1QxTe0RRP6voKGXX7wsJEOjyeUFzCH+y
- p5Ys75hg==
-X-Google-Smtp-Source: AGHT+IHtjqwsQtTkAqbd4wgqTXBzc/kom6YgoG4clT68ly/oM5s97aHBGpIYXVhZaCmAEgUgSHCYHg==
-X-Received: by 2002:a17:907:3ccb:b0:b0c:b51b:81f6 with SMTP id
- a640c23a62f3a-b72e04ca5ccmr955457266b.43.1762805503251; 
- Mon, 10 Nov 2025 12:11:43 -0800 (PST)
+ AJvYcCUFriob/VDUKblsAQtOuPIax7KMA+QWpXVS1h7sJz2WTR7LlOjCsNMF72rWdZ/2+UajGTg0E3E=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxvd3qtxLxGRBKgNG4ugpJX7OGYMkfWFyFuJomtjIx1T90LW8mf
+ sNvWJSeZqImKc9SqcHMuO01QWrx+etuh25TL4SH2KGFLPHmATYyg2EnOhSY4ijCq8EY=
+X-Gm-Gg: ASbGncsvXJH5V1ylySfNDq3N44dUJPuB9UkYT2054LUKbYqQqdsI0j/ArR6dYHucK3A
+ aeJ14ezEDK7WAdeLWKLPC3xKp834nNvueiFFncBskiEsIJgzmusDYDpXI4+NVfmtPzBegkpEch3
+ qR/2iXlT8Ba0QlZ7Otdv0tRMCeIP/OdJkLXjTGt8k20nVwmDKnGh5ORbeqJ34QysugC216fj9dm
+ hpkhzR6L4+7OmJl2Z8jFb12Sibd4Rio4Q9cVLXt9L8ZOha8OsRRI1H8SjN9t0P60btACyhO+BS2
+ fJk/KzDVmChZ0IQz7pb7GXRK46XWHwtlL7qEzEsy8vh8UV+UbPXSCwUGdzPsNPGcgRJZ70AvkfH
+ B3EniMlPb0g7dgV3Z19YoBxPG6m9B4oi3dgCkHU27bUbsAEjoaVzIcR48/9oWepf155LfGjkxaa
+ ludoUNeQ==
+X-Google-Smtp-Source: AGHT+IHJ3D62zXOGqmlFEXsOg2XoVidg/UXug3+RbKmUxcp80ttD3WXeaiDJMG9Tri7xS1p2uShwPg==
+X-Received: by 2002:a17:906:794e:b0:b72:7dbd:3a4 with SMTP id
+ a640c23a62f3a-b72e0312dc0mr974673266b.18.1762805504335; 
+ Mon, 10 Nov 2025 12:11:44 -0800 (PST)
 Received: from localhost ([2001:4090:a247:830a:fe22:a8:f29a:a5c3])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-b72bfa11367sm1152644066b.68.2025.11.10.12.11.42
+ a640c23a62f3a-b72bf312e51sm1158606466b.17.2025.11.10.12.11.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Nov 2025 12:11:42 -0800 (PST)
+ Mon, 10 Nov 2025 12:11:44 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Mon, 10 Nov 2025 21:10:27 +0100
-Subject: [PATCH v5 03/13] ram: k3-ddrss: Add support for DDR in
- self-refresh
+Date: Mon, 10 Nov 2025 21:10:28 +0100
+Subject: [PATCH v5 04/13] firmware: ti_sci: Add TI_SCI_MSG_MIN_CONTEXT_RESTORE
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-3-980ee0036c26@baylibre.com>
+Message-Id: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-4-980ee0036c26@baylibre.com>
 References: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-0-980ee0036c26@baylibre.com>
 In-Reply-To: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-0-980ee0036c26@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
@@ -109,12 +108,12 @@ Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8744; i=msp@baylibre.com;
- h=from:subject:message-id; bh=wUpAlAJzL4lXPZiURDK6O8oXzxrYPtW6zb8Pf2it00o=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwht0OTBHetXG8fuIRRJLIhdk9kc+tWwXV7PpbpbohWU
- TcsvLu5o5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACZyaibDb5YHj8zWLQxRUHg+
- gbXBUWey47FAY3HBw0fC3rM+/Vn8YT7DP3NJCxHxeZ5ns589+f7C1fbK7+1Mc3sj3sm/39PdsuV
- DAxMA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4618; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=tEFYccWVNswH5w5+Ml4KSc+ccLOzSoRZWocU0AmuqMY=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwht+NnzI7wtPS9XPuloNvU/KcO38tSe09bJ7XguZIfE
+ uXcfv3qKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIm8uMXwP6P3S/rMn7Kb1+mJ
+ SvBO+mdaE7nCpfI4/4PrR1u3/d/WY8PwvyJW7geTwdrsiNr3VRskNqywP85w7jPXq2fbjB833rx
+ 5kBEA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 10 Nov 2025 21:13:08 +0100
@@ -134,245 +133,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In IO+DDR the DDR is kept in self-refresh while the SoC cores are
-powered off completely. During boot the normal initialization routine of
-DDR is slightly different to exit self-refresh and keep the DDR contents.
+This patch adds code to be able to call TI_SCI_MSG_MIN_CONTEXT_RESTORE.
+The context needs to be restored after booting SPL when resuming from
+IO+DDR.
 
 Tested-by: Anshul Dalal <anshuld@ti.com>
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- drivers/ram/k3-ddrss/k3-ddrss.c | 177 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 177 insertions(+)
+ drivers/firmware/ti_sci.c              | 38 ++++++++++++++++++++++++++++++++++
+ drivers/firmware/ti_sci.h              | 16 ++++++++++++++
+ include/linux/soc/ti/ti_sci_protocol.h |  9 ++++++++
+ 3 files changed, 63 insertions(+)
 
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index 5144470b931384534e78fbfcea5e66b7083c9f07..5aca55129326ab4f369ae6e4f2c048df6e971eff 100644
---- a/drivers/ram/k3-ddrss/k3-ddrss.c
-+++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -57,6 +57,16 @@
- #define DDRSS_V2A_INT_SET_REG_ECC2BERR_EN	BIT(4)
- #define DDRSS_V2A_INT_SET_REG_ECCM1BERR_EN	BIT(5)
- 
-+#define K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL			0x430080d0
-+#define K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD		BIT(31)
-+#define K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK	GENMASK(3, 0)
-+
-+#define K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1			0x4301830c
-+#define K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE	BIT(0)
-+
-+#define K3_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT		0x43018318
-+#define K3_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW		0x555555
-+
- #define SINGLE_DDR_SUBSYSTEM	0x1
- #define MULTI_DDR_SUBSYSTEM	0x2
- #define MAX_MULTI_DDR 4
-@@ -211,6 +221,32 @@ struct reginitdata {
- #define DENALI_CTL_0_DRAM_CLASS_DDR4		0xA
- #define DENALI_CTL_0_DRAM_CLASS_LPDDR4		0xB
- 
-+#define K3_DDRSS_CFG_DENALI_CTL_20				0x0050
-+#define K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE		BIT(24)
-+#define K3_DDRSS_CFG_DENALI_CTL_21				0x0054
-+#define K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE		BIT(8)
-+#define K3_DDRSS_CFG_DENALI_CTL_106				0x01a8
-+#define K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT		BIT(16)
-+#define K3_DDRSS_CFG_DENALI_CTL_160				0x0280
-+#define K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK			GENMASK(14, 8)
-+#define K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY		BIT(9)
-+#define K3_DDRSS_CFG_DENALI_CTL_169				0x02a4
-+#define K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK	GENMASK(27, 24)
-+#define K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK	GENMASK(19, 16)
-+#define K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK		GENMASK(14, 8)
-+#define K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT		8
-+#define K3_DDRSS_CFG_DENALI_CTL_345				0x0564
-+#define K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT	16
-+#define K3_DDRSS_CFG_DENALI_CTL_353				0x0584
-+#define K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT	16
-+#define K3_DDRSS_CFG_DENALI_PI_6				0x2018
-+#define K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R	BIT(8)
-+#define K3_DDRSS_CFG_DENALI_PI_146				0x2248
-+#define K3_DDRSS_CFG_DENALI_PI_150				0x2258
-+#define K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN		BIT(8)
-+#define K3_DDRSS_CFG_DENALI_PHY_1820				0x5C70
-+#define K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT	16
-+
- #define TH_OFFSET_FROM_REG(REG, SHIFT, offset) do {\
- 	char *i, *pstr = xstr(REG); offset = 0;\
- 	for (i = &pstr[SHIFT]; *i != '\0'; ++i) {\
-@@ -864,6 +900,132 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
- 	writel(val, base + DDRSS_ECC_CTRL_REG);
+diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+index 6f57dcfe8de8f874318cd53372c798d182faae73..f1cb871e8f45013097f6f8188222770ffe3653dc 100644
+--- a/drivers/firmware/ti_sci.c
++++ b/drivers/firmware/ti_sci.c
+@@ -2710,6 +2710,41 @@ static int ti_sci_cmd_change_fwl_owner(const struct ti_sci_handle *handle,
+ 	return ret;
  }
  
-+static void k3_ddrss_reg_update_bits(void __iomem *addr, u32 offset, u32 mask, u32 set)
++static int ti_sci_cmd_restore_context(const struct ti_sci_handle *handle, u64 ctx_addr)
 +{
-+	u32 val = readl(addr + offset);
++	struct ti_sci_msg_min_restore_context_req req;
++	struct ti_sci_msg_hdr *resp;
++	struct ti_sci_info *info;
++	struct ti_sci_xfer *xfer;
++	int ret = 0;
 +
-+	val &= ~mask;
-+	val |= set;
-+	writel(val, addr + offset);
-+}
++	if (IS_ERR(handle))
++		return PTR_ERR(handle);
++	if (!handle)
++		return -EINVAL;
 +
-+static void k3_ddrss_self_refresh_exit(struct k3_ddrss_desc *ddrss)
-+{
-+	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_169,
-+				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK |
-+				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK,
-+				 0x0);
-+	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_PHY_1820,
-+				 0,
-+				 BIT(2) << K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT);
-+	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_106,
-+				 0,
-+				 K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT);
-+	writel(0, ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_PI_146);
-+	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_PI_150,
-+				 K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN,
-+				 0x0);
-+	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_PI_6,
-+				 0,
-+				 K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R);
-+	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_21,
-+				 K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE,
-+				 0);
-+	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_20,
-+				 0,
-+				 K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE);
-+}
++	info = handle_to_ti_sci_info(handle);
 +
-+static void k3_ddrss_lpm_resume(struct k3_ddrss_desc *ddrss)
-+{
-+	int ret;
-+	unsigned long timeout_start;
-+
-+	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_160,
-+				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK,
-+				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY);
-+	ret = wait_for_bit_32(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_345,
-+			      (1 << K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT),
-+			      true, 5000, false);
-+	if (ret)
-+		panic("Failed waiting for low power command %d\n", ret);
-+
-+	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-+				 K3_DDRSS_CFG_DENALI_CTL_353,
-+				 0,
-+				 1 << K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT);
-+
-+	timeout_start = get_timer(0);
-+	while (1) {
-+		if (get_timer(timeout_start) > 5000)
-+			panic("Failed waiting for low power state\n");
-+
-+		if ((readl(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_169) &
-+		     K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK) ==
-+		    0x40 << K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT)
-+			break;
++	xfer = ti_sci_setup_one_xfer(info, TI_SCI_MSG_MIN_CONTEXT_RESTORE,
++				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
++				     (u32 *)&req, sizeof(req), sizeof(*resp));
++	if (IS_ERR(xfer)) {
++		ret = PTR_ERR(xfer);
++		return ret;
 +	}
++
++	req.ctx_lo = (u32)(ctx_addr & 0xffffffff);
++	req.ctx_hi = (u32)(ctx_addr >> 32);
++
++	ret = ti_sci_do_xfer(info, xfer);
++	if (ret) {
++		dev_err(info->dev, "Failed restoring context %d\n", ret);
++		return ret;
++	}
++
++	return ret;
 +}
 +
-+static void k3_ddrss_deassert_retention(struct k3_ddrss_desc *ddrss)
-+{
-+	int ret;
-+
-+	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-+				 0x0,
-+				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD |
-+				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK,
-+				 0);
-+	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-+				 0x0,
-+				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-+				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD);
-+
-+	ret = wait_for_bit_32((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-+			      K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-+			      true, 5000, false);
-+	if (ret)
-+		panic("Failed waiting for latching of retention %d\n", ret);
-+
-+	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-+				 0x0,
-+				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-+				 0);
-+}
-+
-+static bool k3_ddrss_wkup_conf_canuart_wakeup_active(struct k3_ddrss_desc *ddrss)
-+{
-+	u32 active;
-+
-+	active = readl((void *)K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1);
-+
-+	return !!(active & K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE);
-+}
-+
-+static bool k3_ddrss_wkup_conf_canuart_magic_word_set(struct k3_ddrss_desc *ddrss)
-+{
-+	u32 magic_word;
-+
-+	magic_word = readl((void *)K3_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT);
-+
-+	return magic_word == K3_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW;
-+}
-+
-+static bool k3_ddrss_wkup_conf_boot_is_resume(struct k3_ddrss_desc *ddrss)
-+{
-+	return IS_ENABLED(CONFIG_K3_IODDR) &&
-+		k3_ddrss_wkup_conf_canuart_wakeup_active(ddrss) &&
-+		k3_ddrss_wkup_conf_canuart_magic_word_set(ddrss);
-+}
-+
- static int k3_ddrss_probe(struct udevice *dev)
- {
- 	u64 end, bank0, bank1, bank0_size;
-@@ -873,6 +1035,7 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	__maybe_unused u32 inst;
- 	__maybe_unused struct k3_ddrss_ecc_region *range = ddrss->ecc_ranges;
- 	__maybe_unused struct k3_msmc *msmc_parent = NULL;
-+	bool is_lpm_resume;
+ /*
+  * ti_sci_setup_ops() - Setup the operations structures
+  * @info:	pointer to TISCI pointer
+@@ -2728,6 +2763,7 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
+ 	struct ti_sci_rm_psil_ops *psilops = &ops->rm_psil_ops;
+ 	struct ti_sci_rm_udmap_ops *udmap_ops = &ops->rm_udmap_ops;
+ 	struct ti_sci_fwl_ops *fwl_ops = &ops->fwl_ops;
++	struct ti_sci_lpm_ops *lpm_ops = &ops->lpm_ops;
  
- 	debug("%s(dev=%p)\n", __func__, dev);
+ 	bops->board_config = ti_sci_cmd_set_board_config;
+ 	bops->board_config_rm = ti_sci_cmd_set_board_config_rm;
+@@ -2795,6 +2831,8 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
  
-@@ -880,6 +1043,11 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	if (ret)
- 		return ret;
+ 	fw_ops->get_dm_version = ti_sci_cmd_get_dm_version;
+ 	fw_ops->query_dm_cap = ti_sci_cmd_query_dm_cap;
++
++	lpm_ops->restore_context = ti_sci_cmd_restore_context;
+ }
  
-+	is_lpm_resume = k3_ddrss_wkup_conf_boot_is_resume(ddrss);
-+
-+	if (is_lpm_resume)
-+		dev_info(dev, "Detected IO+DDR resume\n");
-+
- 	ddrss->dev = dev;
- 	ret = k3_ddrss_power_on(ddrss);
- 	if (ret)
-@@ -895,12 +1063,21 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	k3_lpddr4_init(ddrss);
- 	k3_lpddr4_hardware_reg_init(ddrss);
+ /**
+diff --git a/drivers/firmware/ti_sci.h b/drivers/firmware/ti_sci.h
+index ce50bf6800eb1fee70a872d8ae648b1a9582b681..3f8c27c7d8c5b35cc55c18ed33225e7b5262b3da 100644
+--- a/drivers/firmware/ti_sci.h
++++ b/drivers/firmware/ti_sci.h
+@@ -45,6 +45,9 @@
+ #define TI_SCI_MSG_QUERY_CLOCK_FREQ	0x010d
+ #define TI_SCI_MSG_GET_CLOCK_FREQ	0x010e
  
-+	if (is_lpm_resume)
-+		k3_ddrss_self_refresh_exit(ddrss);
++/* Low Power Mode Requests */
++#define TI_SCI_MSG_MIN_CONTEXT_RESTORE	0x0308
 +
- 	ret = k3_ddrss_init_freq(ddrss);
- 	if (ret)
- 		return ret;
+ /* Processor Control Messages */
+ #define TISCI_MSG_PROC_REQUEST		0xc000
+ #define TISCI_MSG_PROC_RELEASE		0xc001
+@@ -1572,4 +1575,17 @@ struct ti_sci_msg_fwl_change_owner_info_resp {
+ 	u16			owner_permission_bits;
+ } __packed;
  
-+	if (is_lpm_resume)
-+		k3_ddrss_deassert_retention(ddrss);
++/**
++ * struct ti_sci_msg_min_restore_context_req - Request to restore context from DDR
++ *
++ * @hdr:		Generic Header
++ * @ctx_lo		Low 32-bits of physical pointer to address to use for context save.
++ * @ctx_hi		High 32-bits of physical pointer to address to use for context save.
++ */
++struct ti_sci_msg_min_restore_context_req {
++	struct ti_sci_msg_hdr	hdr;
++	u32			ctx_lo;
++	u32			ctx_hi;
++} __packed;
 +
- 	k3_lpddr4_start(ddrss);
+ #endif /* __TI_SCI_H */
+diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
+index 52696763ecf6bc2336e796978e1cc02896db13ab..cb9798c8546617bcea9cc0f49f19c70e1e2c16f1 100644
+--- a/include/linux/soc/ti/ti_sci_protocol.h
++++ b/include/linux/soc/ti/ti_sci_protocol.h
+@@ -632,6 +632,14 @@ struct ti_sci_fwl_ops {
+ 	int (*change_fwl_owner)(const struct ti_sci_handle *handle, struct ti_sci_msg_fwl_owner *owner);
+ };
  
-+	if (is_lpm_resume)
-+		k3_ddrss_lpm_resume(ddrss);
++/**
++ * struct ti_sci_lpm_ops - Low Power Mode operations
++ * @restore_context: Request restoring context from DDR.
++ */
++struct ti_sci_lpm_ops {
++	int (*restore_context)(const struct ti_sci_handle *handle, u64 ctx_addr);
++};
 +
- 	if (IS_ENABLED(CONFIG_K3_INLINE_ECC)) {
- 		if (!ddrss->ddrss_ss_cfg) {
- 			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
+ /**
+  * struct ti_sci_ops - Function support for TI SCI
+  * @board_ops:	Miscellaneous operations
+@@ -654,6 +662,7 @@ struct ti_sci_ops {
+ 	struct ti_sci_rm_psil_ops rm_psil_ops;
+ 	struct ti_sci_rm_udmap_ops rm_udmap_ops;
+ 	struct ti_sci_fwl_ops fwl_ops;
++	struct ti_sci_lpm_ops lpm_ops;
+ };
+ 
+ /**
 
 -- 
 2.51.0
