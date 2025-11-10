@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFECACCF9E3
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 15:42:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 468E2CCF9E3
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 15:42:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5496683A03;
-	Mon, 10 Nov 2025 16:42:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9229A83A71;
+	Mon, 10 Nov 2025 16:42:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pAozupYV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JSjqCf0y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C1C183A56; Mon, 10 Nov 2025 16:42:33 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 2634183980; Mon, 10 Nov 2025 16:42:37 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D243D83980
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 16:42:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63DE183A71
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 16:42:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7c6da42fbd4so1446772a34.1
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 07:42:30 -0800 (PST)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-45033024e55so852765b6e.2
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 07:42:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762789349; x=1763394149; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762789353; x=1763394153; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=T8y8aw+J49Z9O75PNjdy3LOjZUZX9UEvwdRkpq85o5M=;
- b=pAozupYVrerZ+g9YA0/l+jp8jlIy8Zp7/7cwUDSjSI7WRe2dtRMSS69NkGpy9w5mZM
- j98JbVBIz4q9dfJd4yQNg+gILRlIC/il/s2uxxki+mk1ou0ajTUGUKGM81G0RfuevBI8
- 00VsX8fXU/AT2ViLjF7tqZ4dPdyPotu0ElfWI=
+ bh=D7WM2O7uhk5qpHF0i9T3hhi7riKWQFmOkra1ISFSZqo=;
+ b=JSjqCf0yNbewyZiotJue/m9jGwxeE2yI7/aSKKskgXcOSeuH8OxufvT5yDGgWIHrtT
+ fEe9s0IvLh6/NCQXwgZbE2cy9cNwrQHArUMbNyxuu8xtZGJtGB2uo1gBTXCPYBp+D3xE
+ BUFtiSm5mytulOPyrLadA2BV910MUlPYFRNBU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762789349; x=1763394149;
+ d=1e100.net; s=20230601; t=1762789353; x=1763394153;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=T8y8aw+J49Z9O75PNjdy3LOjZUZX9UEvwdRkpq85o5M=;
- b=w3xHBw4ixWRn2gyEvgLOWN3paiYKrIKScVenYgRWQ6Wp4SH2EbNjOqQTKcJFpPLQ1k
- kmkf2Axo+vU0etaY04uhScob9m7axUk+LZKZeNUw1nkPECWJWW4xPI5x0so2Zwj0Drqu
- xXEKb6Wh321M5qTaRwz4OZivSLSZd8eNv7aEzxipIArAlzB7tn2k85CAPtwQo0Gj14cM
- q/vDDRmeCvl2iYWoiJJujNEL57VLJNW51fLrzYpkp1TMGBXJ01mFvE7av2Ll+4DTqtgL
- vMmmMYsYxulHyXe4L3n/OzrHPJeGWFiZ4FiZr2yAX2FeyIYuJs7Nlwg4/nUdhNTp0yhu
- e7dA==
-X-Gm-Message-State: AOJu0YzMl3q5M0FR9SfSXmDdz9zNI9MTXGIBKkMwUzUBccu60G62V/9j
- wSk7PSHetwq02r3bCbmx/y327gCLLv58T5IWKX9voMoF/M4SHR2otT2y65IMnkB5ojk1vctEieP
- iw/N0AdumSg==
-X-Gm-Gg: ASbGncvy3TpA92ZSz3lcoxYq3qB6N3e4H0jJATATNHRcN8UOLLupHmgd/XDJRSjHdqK
- fmuKAsLjBQgvViubCu2dq9O8C7+8ND4Q31BPCEDDtCpSoPfNaAb8qKpnw/+6GwVDSmZcugY6OXp
- oTRejnNSv6Gl6XaMl+yQ+zJ6x2WHZ2JN0J+a6NhHv46KkeIt8eXTbwqFwghG+ufAinmozjelcrT
- fReRLVNShYPIvW6Smlr+FF6Z1U8m1z8vSiyqdVJqrQWlOK8Jd9UmVlnotzg1Lrda7vaH7XpkPZg
- uor5lki0MwT/LsWrwDn48FWKeHJeBXD31xp7ST/Dn0nHorl7jOPlm8DTBRvbG0iLc9Nwz6iUThT
- TAJWvvslnHZjcsuHvqUrIa8dEDXnpQh5NYFmwwqpTFNdZOpBYRsUtDzFvnd+SMV+S/eiImdNvgH
- y1p9iXlCzPAGzEM+Ozf2H/GcEHmHhOZsLkdVDNXwkGHg==
-X-Google-Smtp-Source: AGHT+IGqE5i4AXpn2qU7LuseXzvCUwKFzdOCKKSVhI6UCEYd2bOKjG75e2c1XcLGp+9Oscf/WA8Utg==
-X-Received: by 2002:a05:6808:22a3:b0:450:5e3a:6f0c with SMTP id
- 5614622812f47-4505e3a7725mr49324b6e.5.1762789349241; 
- Mon, 10 Nov 2025 07:42:29 -0800 (PST)
+ bh=D7WM2O7uhk5qpHF0i9T3hhi7riKWQFmOkra1ISFSZqo=;
+ b=PL5wwVn81Gi27wTTI1zUVfTN03JTrWe1yGN7MXIWsrwUzr7EMiT4ye//SXZUAxsOqZ
+ S1gwLniuV6cu7PgdqLA67ILzfn0G7qjTpz/iA9v7Dx1+aBZjqhET3TcF5m5jZZE/cySm
+ OTAbYI30dRkosmk44NMj0ILQfmTsLuvXi0VEXDCUyrIrw/izvtpOdPy+Mw0oAhwxu1q1
+ ii5ZTUwd7l6yXctNj687zmd0myZf+Dez6mmT0H0AwRHHnPW7qwA9pYiUUPz+vGQVWF8C
+ hghX2Llg/3PvYsMfm455dVs+pyxbsxqa1oAsbAmEsEOGG+B1lx1XwrdB/CsjnqqRkCwx
+ 3aog==
+X-Gm-Message-State: AOJu0Yx7QdLwST6OlzwCTwDTVZfimZ87IoiuKEdYEsUMpacpIkWDMbtF
+ 93eEIy7lew7rstK9nsheR6eqJGrq0EYvqXjHahq0Ap4XWJRuI0CrvtfhE0rhoCfJDxta8L7GxiE
+ AzywhwRDzFg==
+X-Gm-Gg: ASbGncuKXUnW8RfYQDrV9erKucyuR61Pyw+m0AXbeFp+I+eiH5c0KRVYf43w4t8I83m
+ TxIw94CUV+KqcAdPhEMJtZIlxrlMjIZkGktIrxFp2JQtG/QjWglBIdRPAhW8bTVW47NNNKWw2W8
+ WBwzx2xE86TWyG/t42SO6yxTyyp5SsGhnW9wPTo9bzLmDt0QzXSLfU4kB2v2nMCMTupdf4Zkwi5
+ 0IvqiiEezivlBOOZJPiyUJ/jPNvhrzVjzk6UYiE4SKF7rIDprqQh9cdPPXH8V4I6VcaSBjS7R+d
+ eVl3mj98Y0FXiYzC6skB0+DqH7bnox0HtlEj9cHN63OxM3K8Avv6IgPo0fLOAXNxcIMvzGpZref
+ L2s1zo0tB8er9fxAkyyuI0yT4sc3Wk6V3bxT0Ylris4KTr3pAWl5Fo3axUL/FqgnpJHvZ3n7veQ
+ i4yjwA45daAGtVePFeednHjNLSVLEFTtaBT4aivyH1Iw==
+X-Google-Smtp-Source: AGHT+IGkCYjkLlECKMpbdulkhw+AKgltwzcf03MOxIkzxSbc9bWvLsoTrC3GJLEagLVcm/6mGEqxFA==
+X-Received: by 2002:a05:6808:190f:b0:44f:6ab9:4aee with SMTP id
+ 5614622812f47-4502a38ae6cmr4012657b6e.63.1762789352953; 
+ Mon, 10 Nov 2025 07:42:32 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45038ffad27sm2388506b6e.9.2025.11.10.07.42.28
+ 5614622812f47-4503c6b7688sm2251666b6e.21.2025.11.10.07.42.32
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Nov 2025 07:42:28 -0800 (PST)
+ Mon, 10 Nov 2025 07:42:32 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [u-boot-test-hooks][PATCH] labgrid: sage: Add new lab
-Date: Mon, 10 Nov 2025 09:42:27 -0600
-Message-ID: <20251110154227.2629695-1-trini@konsulko.com>
+Subject: [PATCH] Gitlab: Add a "sage-lab" stage to access a board farm
+Date: Mon, 10 Nov 2025 09:42:31 -0600
+Message-ID: <20251110154231.2629710-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,501 +93,249 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds support for the "sage" lab, that is utilizing stock labgrid to
-control a Raspberry Pi 3, a Raspberry Pi 4 and a SolidRun Hummingboard 2.
-The board environment files enable additional tests by pointing to content
-which is any of:
-- Copy/pasted from the documentation for a test.
-- Obvious in its source (e.g. Linux Kernel or GRUB).
-- Random content (1MiBtest.bin was created with dd from /dev/urandom).
+This is the Gitlab side of adding support for the board lab connected to
+the "konsulko-sage" runner. On the software side, this lab uses only
+upstream labgrid. On the hardware side, each device under test is
+connected to its own exporter (typically a Raspberry Pi 4) that must be
+turned on (and cleanly turned off) as part of a given test cycle.
 
-The file bin/sage/labgrid-sage-env.yaml is the file normally used either in the
-LG_ENV environment variable or passed to labgrid-client as the environment to
-use. This shows that each of the above targets is attached to its own labgrid
-exporter node and so all parts of the system can be power cycled to help clear
-transient USB errors.
+Add support for testing on a SolidRun Hummingboard 2 (imx6), Raspberry
+Pi 3 and Raspberry Pi 4. In all cases, we enable additional options to
+run more tests on the board. As we have some networking tests, we test
+both the legacy network stack and lwIP. In the case of Pi platforms, we
+test all of 32bit configuration, plain configuration and rpi_arm64, and
+again with and without lwIP.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- bin/sage/conf.mx6cuboxi_na              | 24 +++++++
- bin/sage/conf.rpi_3_32b_na              |  1 +
- bin/sage/conf.rpi_3_na                  |  1 +
- bin/sage/conf.rpi_4_32b_na              |  1 +
- bin/sage/conf.rpi_4_na                  |  1 +
- bin/sage/conf.rpi_arm64_na              | 24 +++++++
- bin/sage/labgrid-sage-env.yaml          | 87 +++++++++++++++++++++++++
- py/sage/u_boot_boardenv_mx6cuboxi_na.py | 78 ++++++++++++++++++++++
- py/sage/u_boot_boardenv_rpi_3.py        |  1 +
- py/sage/u_boot_boardenv_rpi_3_32b.py    | 67 +++++++++++++++++++
- py/sage/u_boot_boardenv_rpi_4.py        |  1 +
- py/sage/u_boot_boardenv_rpi_4_32b.py    |  1 +
- py/sage/u_boot_boardenv_rpi_arm64.py    | 79 ++++++++++++++++++++++
- 13 files changed, 366 insertions(+)
- create mode 100644 bin/sage/conf.mx6cuboxi_na
- create mode 120000 bin/sage/conf.rpi_3_32b_na
- create mode 120000 bin/sage/conf.rpi_3_na
- create mode 120000 bin/sage/conf.rpi_4_32b_na
- create mode 120000 bin/sage/conf.rpi_4_na
- create mode 100644 bin/sage/conf.rpi_arm64_na
- create mode 100644 bin/sage/labgrid-sage-env.yaml
- create mode 100644 py/sage/u_boot_boardenv_mx6cuboxi_na.py
- create mode 120000 py/sage/u_boot_boardenv_rpi_3.py
- create mode 100644 py/sage/u_boot_boardenv_rpi_3_32b.py
- create mode 120000 py/sage/u_boot_boardenv_rpi_4.py
- create mode 120000 py/sage/u_boot_boardenv_rpi_4_32b.py
- create mode 100644 py/sage/u_boot_boardenv_rpi_arm64.py
+Note that for the Pi platforms we enable/disable CMD_BOOTEFI_SELFTEST
+based on overall binary size. I've created
+https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/issues/2
+to track addressing that issue.
+---
+ .gitlab-ci-sage-lab.yml | 182 ++++++++++++++++++++++++++++++++++++++++
+ .gitlab-ci.yml          |   5 ++
+ 2 files changed, 187 insertions(+)
+ create mode 100644 .gitlab-ci-sage-lab.yml
 
-diff --git a/bin/sage/conf.mx6cuboxi_na b/bin/sage/conf.mx6cuboxi_na
+diff --git a/.gitlab-ci-sage-lab.yml b/.gitlab-ci-sage-lab.yml
 new file mode 100644
-index 000000000000..31989c2eb8fa
+index 000000000000..26a055f93121
 --- /dev/null
-+++ b/bin/sage/conf.mx6cuboxi_na
-@@ -0,0 +1,24 @@
-+# Copyright (c) 2024 Konsulko Group. All rights reserved.
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
++++ b/.gitlab-ci-sage-lab.yml
+@@ -0,0 +1,182 @@
++# Definition for the lab connected to the "sage" host and managed with labgrid
 +
-+console_impl=labgrid-trini
-+reset_impl=labgrid-trini
-+flash_impl=labgrid-trini.sd-mux
-+flash_writer=labgrid-trini.imx
-diff --git a/bin/sage/conf.rpi_3_32b_na b/bin/sage/conf.rpi_3_32b_na
-new file mode 120000
-index 000000000000..d33d959874cb
---- /dev/null
-+++ b/bin/sage/conf.rpi_3_32b_na
-@@ -0,0 +1 @@
-+conf.rpi_arm64_na
-\ No newline at end of file
-diff --git a/bin/sage/conf.rpi_3_na b/bin/sage/conf.rpi_3_na
-new file mode 120000
-index 000000000000..d33d959874cb
---- /dev/null
-+++ b/bin/sage/conf.rpi_3_na
-@@ -0,0 +1 @@
-+conf.rpi_arm64_na
-\ No newline at end of file
-diff --git a/bin/sage/conf.rpi_4_32b_na b/bin/sage/conf.rpi_4_32b_na
-new file mode 120000
-index 000000000000..d33d959874cb
---- /dev/null
-+++ b/bin/sage/conf.rpi_4_32b_na
-@@ -0,0 +1 @@
-+conf.rpi_arm64_na
-\ No newline at end of file
-diff --git a/bin/sage/conf.rpi_4_na b/bin/sage/conf.rpi_4_na
-new file mode 120000
-index 000000000000..d33d959874cb
---- /dev/null
-+++ b/bin/sage/conf.rpi_4_na
-@@ -0,0 +1 @@
-+conf.rpi_arm64_na
-\ No newline at end of file
-diff --git a/bin/sage/conf.rpi_arm64_na b/bin/sage/conf.rpi_arm64_na
-new file mode 100644
-index 000000000000..a22e62f0f9c0
---- /dev/null
-+++ b/bin/sage/conf.rpi_arm64_na
-@@ -0,0 +1,24 @@
-+# Copyright (c) 2024 Konsulko Group. All rights reserved.
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
++.sage_lab_template: &sage_lab_dfn
++  stage: sage-lab
++  rules:
++    - if: $SAGE_LAB == "1"
++      when: always
++    - if: $SAGE_LAB != "1"
++      when: manual
++      allow_failure: true
++  # USB can be unreliable.
++  retry: 2
++  dependencies: []
++  needs: [ "sandbox test.py" ]
++  tags: [ 'konsulko-sage-labgrid' ]
++  before_script:
++    # Clone uboot-test-hooks
++    - git config --global --add safe.directory "${CI_PROJECT_DIR}"
++    - git clone --depth=1 -b sage-labgrid https://github.com/trini/u-boot-test-hooks.git /tmp/uboot-test-hooks
++    - ln -s sage /tmp/uboot-test-hooks/bin/`hostname`
++    - ln -s sage /tmp/uboot-test-hooks/py/`hostname`
++    - export LG_ENV="/tmp/uboot-test-hooks/bin/sage/labgrid-sage-env.yaml"
++    # Prepare python environment
++    - python3 -m venv /tmp/venv;
++      . /tmp/venv/bin/activate;
++      pip install -r test/py/requirements.txt -r tools/binman/requirements.txt
++        -r tools/buildman/requirements.txt -r tools/u_boot_pylib/requirements.txt
++        labgrid
++    # Add more tools
++    - sudo apt-get update && sudo apt-get -y install snmp rsync
++    # Acquire and turn on the exporter.
++    - labgrid-client -p ${LABGRID_EXPORTER} acquire &&
++      labgrid-client -p ${LABGRID_EXPORTER} power on
++    # Prepare ssh
++    - mkdir --mode=0700 ~/.ssh;
++      printf 'Host sage-exporter-*\n\tUser labgrid\n' > ~/.ssh/config
++  script:
++    - export UBOOT_TRAVIS_BUILD_DIR=/tmp/${TEST_PY_BD}
++    # Sage is 16 threads and has 3 devices attached, so 6 builder threads.
++    - tools/buildman/buildman -o ${UBOOT_TRAVIS_BUILD_DIR} -w -E -W -e
++        --board ${TEST_PY_BD} ${OVERRIDE} -T 6
++    # Wait for the exporter to have the device ready
++    - while test `labgrid-client resources |
++        grep -q ${LABGRID_EXPORTER}/${LG_PLACE}/; echo $?` -ne 0; do sleep 1;
++      done
++    # Fingerprint the exporter
++    - ssh-keyscan ${LABGRID_EXPORTER} > ~/.ssh/known_hosts 2>/dev/null
++    # Don't stop on non-zero exit codes now, to provide as much chance as
++    # possible to ensure we don't leave lab resources acquired.
++    - set +e;
++    # Run the tests, save the results.
++    - export PATH=/tmp/uboot-test-hooks/bin:${PATH};
++      export PYTHONPATH=/tmp/uboot-test-hooks/py/sage;
++      labgrid-client -p ${LG_PLACE} acquire;
++      ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID}
++        ${TEST_PY_EXTRA:-"--capture=tee-sys"}
++        ${TEST_PY_TEST_SPEC:+"-k ${TEST_PY_TEST_SPEC}"}
++        --build-dir "$UBOOT_TRAVIS_BUILD_DIR"
++        --junitxml=/tmp/${TEST_PY_BD}/results.xml;
++      RC=`echo $?`;
++      cp -v /tmp/${TEST_PY_BD}/*.{html,css,xml} .;
++    # Release and power off everything.
++    - labgrid-client -p ${LG_PLACE} power off
++    - labgrid-client -p ${LG_PLACE} release
++    - labgrid-client -p ${LABGRID_EXPORTER} ssh sudo poweroff && sleep 15 &&
++      labgrid-client -p ${LABGRID_EXPORTER} power off
++    - labgrid-client -p ${LABGRID_EXPORTER} release
++    - exit $RC
++  artifacts:
++    when: always
++    paths:
++      - "*.html"
++      - "*.css"
++      - results.xml
++    reports:
++      junit: results.xml
++    expire_in: 1 week
 +
-+console_impl=labgrid-trini
-+reset_impl=labgrid-trini
-+flash_impl=labgrid-trini.sd-mux
-+flash_writer=labgrid-trini.rpi
-diff --git a/bin/sage/labgrid-sage-env.yaml b/bin/sage/labgrid-sage-env.yaml
-new file mode 100644
-index 000000000000..82b642731c3d
---- /dev/null
-+++ b/bin/sage/labgrid-sage-env.yaml
-@@ -0,0 +1,87 @@
-+# Sage environment
++SolidRun Hummingboard 2:
++  <<: *sage_lab_dfn
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-hb-1"
++    LG_PLACE: "hb-1"
++    TEST_PY_BD: "mx6cuboxi"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG"
 +
-+options:
-+  coordinator_address: 172.17.0.1:20408
++SolidRun Hummingboard 2 (lwIP):
++  <<: *sage_lab_dfn
++  needs: [ "SolidRun Hummingboard 2" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-hb-1"
++    LG_PLACE: "hb-1"
++    TEST_PY_BD: "mx6cuboxi"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a NET_LWIP"
 +
-+targets:
-+  rpi3-1:
-+    resources:
-+      RemotePlace:
-+        name: rpi3-1
-+    drivers:
-+      power:
-+        cls: NetworkPowerDriver
-+      serial:
-+        cls: SerialDriver
-+      mux:
-+        cls: USBSDWireDriver
-+      storage:
-+        cls: USBStorageDriver
-+      shell:
-+        cls: ShellDriver
-+        prompt: 'root@.*:~# '
-+        login_prompt: 'login: '
-+        username: 'root'
-+  rpi4-1:
-+    resources:
-+      RemotePlace:
-+        name: rpi4-1
-+    drivers:
-+      power:
-+        cls: NetworkPowerDriver
-+      serial:
-+        cls: SerialDriver
-+      mux:
-+        cls: USBSDWireDriver
-+      storage:
-+        cls: USBStorageDriver
-+      shell:
-+        cls: ShellDriver
-+        prompt: 'root@.*:~# '
-+        login_prompt: 'login: '
-+        username: 'root'
-+  hb-1:
-+    resources:
-+      RemotePlace:
-+        name: hb-1
-+    drivers:
-+      power:
-+        cls: NetworkPowerDriver
-+      serial:
-+        cls: SerialDriver
-+      mux:
-+        cls: USBSDWireDriver
-+      storage:
-+        cls: USBStorageDriver
-+      shell:
-+        cls: ShellDriver
-+        prompt: 'root@.*:~# '
-+        login_prompt: 'login: '
-+        username: 'root'
-+  sage-exporter-rpi3-1:
-+    resources:
-+      RemotePlace:
-+        name: sage-exporter-rpi3-1
-+    drivers:
-+      power:
-+        cls: NetworkPowerDriver
-+      ssh:
-+        cls: SSHDriver
-+  sage-exporter-rpi4-1:
-+    resources:
-+      RemotePlace:
-+        name: sage-exporter-rpi4-1
-+    drivers:
-+      power:
-+        cls: NetworkPowerDriver
-+      ssh:
-+        cls: SSHDriver
-+  sage-exporter-hb-1:
-+    resources:
-+      RemotePlace:
-+        name: sage-exporter-hb-1
-+    drivers:
-+      power:
-+        cls: NetworkPowerDriver
-+      ssh:
-+        cls: SSHDriver
-diff --git a/py/sage/u_boot_boardenv_mx6cuboxi_na.py b/py/sage/u_boot_boardenv_mx6cuboxi_na.py
-new file mode 100644
-index 000000000000..0c7b682f5def
---- /dev/null
-+++ b/py/sage/u_boot_boardenv_mx6cuboxi_na.py
-@@ -0,0 +1,78 @@
-+# Copyright (c) 2024 Konsulko Group. All rights reserved.
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
++Raspberry Pi 4:
++  <<: *sage_lab_dfn
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi4-1"
++    LG_PLACE: "rpi4-1"
++    TEST_PY_BD: "rpi_4"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a IPV6 -a IPV6_ROUTER_DISCOVERY -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
 +
-+env__net_dhcp_server = True
++Raspberry Pi 4 (rpi_arm64):
++  <<: *sage_lab_dfn
++  needs: [ "Raspberry Pi 4" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi4-1"
++    LG_PLACE: "rpi4-1"
++    TEST_PY_BD: "rpi_arm64"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a IPV6 -a IPV6_ROUTER_DISCOVERY -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
 +
-+env__net_tftp_readable_file = {
-+    "fn": "1MiBtest.bin",
-+    "size": 1048576,
-+    "crc32": "2fa737e0",
-+}
++Raspberry Pi 4 (rpi_arm64, lwIP):
++  <<: *sage_lab_dfn
++  needs: [ "Raspberry Pi 4 (rpi_arm64)" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi4-1"
++    LG_PLACE: "rpi4-1"
++    TEST_PY_BD: "rpi_arm64"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000 -a NET_LWIP"
 +
-+# Fails with "invalid device tree"
-+#env__efi_loader_helloworld_file = {
-+#    'fn': 'EFI/arm/helloworld.efi',
-+#    'size': 2320,
-+#    'addr': 0x12000000,
-+#    'crc32': 'e37e06d4',
-+#}
-+#env__efi_helloworld_net_http_test_skip = False
-+#
-+#env__efi_loader_grub_file = {
-+#    'fn': 'EFI/arm/grubarm.efi',
-+#    'size': 471040,
-+#    'addr': 0x12000000,
-+#    'crc32': '4a84b065',
-+#}
++Raspberry Pi 4 (rpi_4_32b):
++  <<: *sage_lab_dfn
++  needs: [ "Raspberry Pi 4 (rpi_arm64, lwIP)" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi4-1"
++    LG_PLACE: "rpi4-1"
++    TEST_PY_BD: "rpi_4_32b"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a IPV6 -a IPV6_ROUTER_DISCOVERY -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
 +
-+# No console output from Linux
-+#env__tftp_boot_test_skip = False
-+#
-+#env__net_tftp_bootable_file = {
-+#    'fn': 'v6.13/image.fit.arm',
-+#    'config': 'conf-577', # SolidRun HummingBoard Solo/DualLite
-+#    'addr': 0x12000000,
-+#    'size': 22348800,
-+#    'crc32': 'cecdd6f1',
-+#    'pattern': 'Booting Linux on physical CPU',
-+#}
++Raspberry Pi 4 (rpi_4_32b, lwIP):
++  <<: *sage_lab_dfn
++  needs: [ "Raspberry Pi 4 (rpi_4_32b)" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi4-1"
++    LG_PLACE: "rpi4-1"
++    TEST_PY_BD: "rpi_4_32b"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000 -a NET_LWIP"
 +
-+# Details regarding a file that may be read from a TFTP server. This variable
-+# may be omitted or set to None if PXE testing is not possible or desired.
-+env__net_pxe_bootable_file = {
-+    'fn': 'default',
-+    'addr': 0x12000000,
-+    'size': 64,
-+    'timeout': 50000,
-+    'pattern': 'Linux',
-+    'valid_label': '1',
-+    'invalid_label': '2',
-+    'exp_str_invalid': 'Skipping install for failure retrieving',
-+    'local_label': '3',
-+    'exp_str_local': 'missing environment variable: localcmd',
-+    'empty_label': '4',
-+    'exp_str_empty': 'No kernel given, skipping boot',
-+}
++Raspberry Pi 3:
++  <<: *sage_lab_dfn
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi3-1"
++    LG_PLACE: "rpi3-1"
++    TEST_PY_BD: "rpi_3"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a IPV6 -a IPV6_ROUTER_DISCOVERY -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
 +
-+# False or omitted if a PXE boot test should be tested.
-+# If PXE boot testing is not possible or desired, set this variable to True.
++Raspberry Pi 3 (rpi_arm64):
++  <<: *sage_lab_dfn
++  needs: [ "Raspberry Pi 3" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi3-1"
++    LG_PLACE: "rpi3-1"
++    TEST_PY_BD: "rpi_arm64"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a IPV6 -a IPV6_ROUTER_DISCOVERY -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
 +
-+# For example: If pxe configuration file is not proper to boot
-+env__pxe_boot_test_skip = False
-diff --git a/py/sage/u_boot_boardenv_rpi_3.py b/py/sage/u_boot_boardenv_rpi_3.py
-new file mode 120000
-index 000000000000..d6f7a632f391
---- /dev/null
-+++ b/py/sage/u_boot_boardenv_rpi_3.py
-@@ -0,0 +1 @@
-+u_boot_boardenv_rpi_arm64.py
-\ No newline at end of file
-diff --git a/py/sage/u_boot_boardenv_rpi_3_32b.py b/py/sage/u_boot_boardenv_rpi_3_32b.py
-new file mode 100644
-index 000000000000..da50b3212a70
---- /dev/null
-+++ b/py/sage/u_boot_boardenv_rpi_3_32b.py
-@@ -0,0 +1,67 @@
-+# Copyright (c) 2024 Konsulko Group. All rights reserved.
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
++Raspberry Pi 3 (rpi_arm64, lwIP):
++  <<: *sage_lab_dfn
++  needs: [ "Raspberry Pi 3 (rpi_arm64)" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi3-1"
++    LG_PLACE: "rpi3-1"
++    TEST_PY_BD: "rpi_arm64"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000 -a NET_LWIP"
 +
-+env__net_uses_usb = True
++Raspberry Pi 3 (rpi_3_32b):
++  <<: *sage_lab_dfn
++  needs: [ "Raspberry Pi 3 (rpi_arm64, lwIP)" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi3-1"
++    LG_PLACE: "rpi3-1"
++    TEST_PY_BD: "rpi_3_32b"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a IPV6 -a IPV6_ROUTER_DISCOVERY -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
 +
-+env__net_dhcp_server = True
++Raspberry Pi 3 (rpi_3_32b, lwIP):
++  <<: *sage_lab_dfn
++  needs: [ "Raspberry Pi 3 (rpi_3_32b)" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-rpi3-1"
++    LG_PLACE: "rpi3-1"
++    TEST_PY_BD: "rpi_3_32b"
++    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000 -a NET_LWIP"
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 6a36513c3b75..b32e6ade230d 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -5,6 +5,7 @@ variables:
+   DEFAULT_AMD64_TAG: "amd64"
+   DEFAULT_FAST_TAG: "fast"
+   MIRROR_DOCKER: docker.io
++  SAGE_LAB: ""
+   SJG_LAB: ""
+   PLATFORM: linux/amd64,linux/arm64
+ 
+@@ -24,6 +25,7 @@ image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20251001-04Nov2025
+ stages:
+   - testsuites
+   - test.py
++  - sage-lab
+   - sjg-lab
+   - world build
+ 
+@@ -597,6 +599,9 @@ coreboot test.py:
+     TEST_PY_ID: "--id qemu"
+   <<: *buildman_and_testpy_dfn
+ 
++# Add sage-lab stage
++include: .gitlab-ci-sage-lab.yml
 +
-+env__net_tftp_readable_file = {
-+    "fn": "1MiBtest.bin",
-+    "size": 1048576,
-+    "crc32": "2fa737e0",
-+    "fnu": "ubtest-upload.bin",
-+}
-+
-+env__efi_loader_helloworld_file = {
-+    'fn': 'EFI/arm/helloworld.efi',
-+    'size': 2320,
-+    'addr': 0x00200000,
-+    'crc32': 'e37e06d4',
-+}
-+env__efi_helloworld_net_http_test_skip = False
-+
-+env__efi_loader_grub_file = {
-+    'fn': 'EFI/arm/grubarm.efi',
-+    'size': 471040,
-+    'addr': 0x00200000,
-+    'crc32': '4a84b065',
-+}
-+
-+# Details regarding a file that may be read from a TFTP server. This variable
-+# may be omitted or set to None if PXE testing is not possible or desired.
-+env__net_pxe_bootable_file = {
-+    'fn': 'default',
-+    'addr': 0x00200000,
-+    'size': 64,
-+    'timeout': 50000,
-+    'pattern': 'Linux',
-+    'valid_label': '1',
-+    'invalid_label': '2',
-+    'exp_str_invalid': 'Skipping install for failure retrieving',
-+    'local_label': '3',
-+    'exp_str_local': 'missing environment variable: localcmd',
-+    'empty_label': '4',
-+    'exp_str_empty': 'No kernel given, skipping boot',
-+}
-+
-+# False or omitted if a PXE boot test should be tested.
-+# If PXE boot testing is not possible or desired, set this variable to True.
-+# For example: If pxe configuration file is not proper to boot
-+env__pxe_boot_test_skip = False
-diff --git a/py/sage/u_boot_boardenv_rpi_4.py b/py/sage/u_boot_boardenv_rpi_4.py
-new file mode 120000
-index 000000000000..d6f7a632f391
---- /dev/null
-+++ b/py/sage/u_boot_boardenv_rpi_4.py
-@@ -0,0 +1 @@
-+u_boot_boardenv_rpi_arm64.py
-\ No newline at end of file
-diff --git a/py/sage/u_boot_boardenv_rpi_4_32b.py b/py/sage/u_boot_boardenv_rpi_4_32b.py
-new file mode 120000
-index 000000000000..583f36ea9b3b
---- /dev/null
-+++ b/py/sage/u_boot_boardenv_rpi_4_32b.py
-@@ -0,0 +1 @@
-+u_boot_boardenv_rpi_3_32b.py
-\ No newline at end of file
-diff --git a/py/sage/u_boot_boardenv_rpi_arm64.py b/py/sage/u_boot_boardenv_rpi_arm64.py
-new file mode 100644
-index 000000000000..4d164dede744
---- /dev/null
-+++ b/py/sage/u_boot_boardenv_rpi_arm64.py
-@@ -0,0 +1,79 @@
-+# Copyright (c) 2024 Konsulko Group. All rights reserved.
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+env__net_uses_usb = True
-+
-+env__net_dhcp_server = True
-+
-+env__net_tftp_readable_file = {
-+    "fn": "1MiBtest.bin",
-+    "size": 1048576,
-+    "crc32": "2fa737e0",
-+    "fnu": "ubtest-upload.bin",
-+}
-+
-+env__efi_loader_helloworld_file = {
-+    'fn': 'EFI/arm64/helloworld.efi',
-+    'size': 4528,
-+    'addr': 0x00200000,
-+    'crc32': '2b466005',
-+}
-+env__efi_helloworld_net_http_test_skip = False
-+
-+env__efi_loader_grub_file = {
-+    'fn': 'EFI/arm64/grubaa64.efi',
-+    'size': 724992,
-+    'addr': 0x00200000,
-+    'crc32': '8db3f0f1',
-+}
-+
-+env__tftp_boot_test_skip = False
-+
-+env__net_tftp_bootable_file = {
-+    'fn': 'v6.13/image.fit.arm64',
-+    'addr': 0x00200000,
-+    'size': 28574720,
-+    'crc32': '8513595c',
-+    'pattern': 'Booting Linux on physical CPU',
-+}
-+
-+# Details regarding a file that may be read from a TFTP server. This variable
-+# may be omitted or set to None if PXE testing is not possible or desired.
-+env__net_pxe_bootable_file = {
-+    'fn': 'default',
-+    'addr': 0x00200000,
-+    'size': 64,
-+    'timeout': 50000,
-+    'pattern': 'Linux',
-+    'valid_label': '1',
-+    'invalid_label': '2',
-+    'exp_str_invalid': 'Skipping install for failure retrieving',
-+    'local_label': '3',
-+    'exp_str_local': 'missing environment variable: localcmd',
-+    'empty_label': '4',
-+    'exp_str_empty': 'No kernel given, skipping boot',
-+}
-+
-+# False or omitted if a PXE boot test should be tested.
-+# If PXE boot testing is not possible or desired, set this variable to True.
-+# For example: If pxe configuration file is not proper to boot
-+env__pxe_boot_test_skip = False
-+
-+#env__net_pxe_readable_file = env__net_pxe_bootable_file
+ .sjg_lab_template: &sjg_lab_dfn
+   stage: sjg-lab
+   rules:
 -- 
 2.43.0
 
