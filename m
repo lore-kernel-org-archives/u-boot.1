@@ -4,72 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5F0CCCF9E3
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 07:47:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E188FCCF9E3
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 09:13:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08614839B7;
-	Mon, 10 Nov 2025 08:47:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF70383968;
+	Mon, 10 Nov 2025 10:13:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1762760829;
-	bh=LS8Gmej63tKT5NT7Q05EPGsKWWpjSDz5pVqkIlZ90Cg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=e3gbo6gHKo+ff5pQ5raj0aFXNcyAKyt9PdupvGb0QUQ2M+wevjeFOMtUNM/zOpE/G
-	 yBqo+jvJVSLjz8bbMWc9I8R4JvlkUKhcvh0d1cmgTaAsmpna5f4XMAe1hER9GvQ/Sm
-	 lHUzd3Vodxrisu1iuE4cRvLR0QjNnikqY2TmCzSjrireBu6Mbi1eN2tDFYOHvKAayg
-	 U67ZDbPl0MAF7AYfS33aZ37hxjz/aySuJ/riPFqhWyCNgZQKQT98E1aoJVzvJWyjoE
-	 CVLIcDmEXoT+oLisywMur8tmiwPzJj6jOBZZhtWNo+8fQB5SqQ0jljYSXAS1Lgbiyk
-	 qPUlD+JiBcF4Q==
+	s=phobos-20191101; t=1762766001;
+	bh=4r4UCn9qESM8L2LyMOmO1Ard9vqn8NJi8FYILu7HTeE=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=LGOWjdlOc4Ua76b0Hwn/dl+bpgQeuslTT68uJ495SZwGkooFIGnZo+itWMRI89VBn
+	 lxI4YtaEr+etefyisZH1U89GSo2QuJ7spTPRTyV+9iPj2sdxkyJ+eWrQVtIcZzgVCs
+	 l7aWbiPCqymcHP7xaiVZ4t2QFjBEIjXxwkB1r39rOiubDKU1Wavs8RSmmuSdwE+CH1
+	 WonZVIAJ4qvrj4LHwvHlUYh7zG2V3xCZL9n5Qn7/ekmvJO653JgpLuuUoTCIVlxnhd
+	 AEOKv/25pihJHyp0UwCjzIOfpONIRIkT3Gx2Jzckn+0UVYA5mWbUJYg5tqVSpNpGSP
+	 oX/ayvMWmPMIw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 819B2839B9; Mon, 10 Nov 2025 08:47:07 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 2E6AE83981; Mon, 10 Nov 2025 10:13:20 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A5B8839B1
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 08:47:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E6E683959
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 10:13:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="M5gPtQeY"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="A3VRouGL"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2BA8A103CF2A2; Mon, 10 Nov 2025 08:47:00 +0100 (CET)
+ with ESMTPSA id 5BBBD103ABB45; Mon, 10 Nov 2025 10:13:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1762760824; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=LS8Gmej63tKT5NT7Q05EPGsKWWpjSDz5pVqkIlZ90Cg=;
- b=M5gPtQeYXrLKi6v2eKUFCdmDH23XrENb8PoI25CSfVpaxRN/K6hz0z/sY2DXjd4VRh7ZJM
- FmGka/ceA02x8ugmhbZM0XUa81lf8xaajWxt9rdFV8vTZN8ZvhbIqZW4QLOOB7/bcnXVrk
- gMffF2KpbtHF4dRP6tfcmfUbkmxvZj6J0pJXJrkiNTHN+xlK6YVuKnXjmrNUVtwKT1fWJn
- 2LwzVUz1e69x5a4p6GRSAJMm+VuMA2KbklRpEUTbSCCxaKKt46HkJmcE7ABUwbGhBMyPkk
- Z/pBzVh1b8JADjOhHnR9ovtJ5FI2p8KZVvGxr0eBmrg9vz/Z6sYru+m/dkMr+w==
-Date: Mon, 10 Nov 2025 08:46:57 +0100
+ t=1762765997; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=4r4UCn9qESM8L2LyMOmO1Ard9vqn8NJi8FYILu7HTeE=;
+ b=A3VRouGLVKj9ZvgE0OgEpJnT0MRceMgiOIpzFQP5l7vyHTZ6wy6kQ8IYYDeW13iV3RHI9I
+ GEuLys3Ek/zvTmF7rGqMa4l9x1hem1fV68HxkbIcSwXgqFP/CXUurTGV3azXiSP6hAwIRM
+ DdhKQLzmeX6gggmQnWQ1POQrqB5ZSOUbUJr7FBP2BHcGrDGVswKpvXBPR04MI7BWlrpYXm
+ PhJV21o/r/J567foVQ4jCDBAHpXVBjOyLHCcymfcSk3xMatmf+RGlvp5dIyu1bnqkv+24b
+ qDCDJ0f9pZLibxOJU4hY0GYwAR4RPtOwH6l4+FGWnE6hBFwNZPwFSaqJdmrGWw==
 From: Philip Oberfichtner <pro@denx.de>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
+To: u-boot@lists.denx.de
+Cc: Philip Oberfichtner <pro@denx.de>, Andre Przywara <andre.przywara@arm.com>,
  Anshul Dalal <anshuld@ti.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Greg Malysa <malysagreg@gmail.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut@mailbox.org>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
  Ye Li <ye.li@nxp.com>
-Subject: Re: [PATCH v4 1/3] Image size checks: Use HAS_SIZE_LIMIT consistently
-Message-ID: <aRGYcTQQAVVJQGJa@aristophanes>
-References: <20251015012320.2331007-1-pro@denx.de>
- <20251015012320.2331007-2-pro@denx.de>
- <73d7e852-b2c3-4ef2-a9f6-af4e37941ceb@mailbox.org>
+Subject: [PATCH v5 0/3] Harmonize image size checks
+Date: Mon, 10 Nov 2025 10:12:53 +0100
+Message-Id: <20251110091256.2422534-1-pro@denx.de>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <73d7e852-b2c3-4ef2-a9f6-af4e37941ceb@mailbox.org>
+Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,23 +82,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+This patch series aims at harmonizing image size checks, which are
+currently represented by the following Kconfig symbols:
 
-Thank you for the feedback!
+	CONFIG_HAS_BOARD_SIZE_LIMIT
+	CONFIG_BOARD_SIZE_LIMIT
+	CONFIG_SPL_SIZE_LIMIT
+	CONFIG_TPL_SIZE_LIMIT
+	CONFIG_VPL_SIZE_LIMIT
 
-On Sun, Nov 09, 2025 at 07:41:13PM +0100, Marek Vasut wrote:
+After this series, we would have
+	- Consistent logic
+	- Consistent help texts
+	- Less code duplication in the toplevel Makefile
 
-[...]
-> > diff --git a/Makefile b/Makefile
-> > index 2402f9313d8..e68dce2c1d5 100644
-> > --- a/Makefile
-> > +++ b/Makefile
-> > @@ -1109,19 +1109,19 @@ else
-> >   BOARD_SIZE_CHECK =
-> >   endif
-> > -ifneq ($(CONFIG_SPL_SIZE_LIMIT),0x0)
-> > +ifneq ($(CONFIG_SPL_SIZE_LIMIT),)
-> 
-> Why does this check not use HAS_SPL_SIZE_LIMIT introduced below ?
+Changes in v5:
+	- Minor style improvements
 
-You're right, that was nonesense. See v5.
+Changes in v4:
+	- Minimize the number of defconfig changes
+	- Drop patch "Simplify SPL_SIZE_LIMIT logic"
+	- Drop patch "Move all configs in one place"
+	- Improve help texts
+	- Use XXX_HAS_SIZE_LIMIT in the Makefile code
+	- Move "default y" statements to the respective main Kconfigs
+
+Changes in v3:
+	V3 is a complete remake of the series. In the discussions on V2 we
+	decided to follow the approach of using CONFIG_HAS_XXX_SIZE_LIMIT
+	instead of my initial proposal, which was to disable a size check
+	by setting its limit to zero.
+
+Changes in v2:
+	- Rebase on current master
+	- Rebase on my pending mips patch series (linked above)
+	- Incorporated Heinrich's Review
+
+Philip Oberfichtner (3):
+  Image size checks: Use HAS_SIZE_LIMIT consistently
+  Image size checks: Clarify help texts
+  Makefile: Deduplicate image size checks
+
+ Kconfig                               | 10 +++---
+ Makefile                              | 48 ++++++++-------------------
+ arch/arm/mach-socfpga/Kconfig         |  6 ----
+ arch/mips/mach-mtmips/Kconfig         |  3 --
+ arch/x86/cpu/apollolake/Kconfig       |  3 --
+ common/spl/Kconfig                    | 29 ++++++++++++----
+ common/spl/Kconfig.tpl                | 15 ++++++---
+ common/spl/Kconfig.vpl                | 13 +++++---
+ configs/am64x_evm_r5_defconfig        |  1 +
+ configs/am65x_evm_r5_defconfig        |  1 +
+ configs/am65x_evm_r5_usbmsc_defconfig |  1 +
+ configs/brcp150_defconfig             |  1 +
+ configs/brcp170_defconfig             |  1 +
+ configs/brcp1_1r_defconfig            |  1 +
+ configs/brcp1_1r_switch_defconfig     |  1 +
+ configs/brcp1_2r_defconfig            |  1 +
+ configs/brsmarc2_defconfig            |  1 +
+ configs/evb-ast2600_defconfig         |  1 +
+ configs/evb-rk3288_defconfig          |  1 +
+ configs/firefly-rk3288_defconfig      |  1 +
+ configs/ibex-ast2700_defconfig        |  1 +
+ configs/ibm-sbp1_defconfig            |  1 +
+ configs/imx28_btt3_defconfig          |  1 +
+ configs/imx28_xea_defconfig           |  1 +
+ configs/imxrt1020-evk_defconfig       |  1 +
+ configs/imxrt1050-evk_defconfig       |  1 +
+ configs/imxrt1050-evk_fspi_defconfig  |  1 +
+ configs/imxrt1170-evk_defconfig       |  1 +
+ configs/kontron_sl28_defconfig        |  1 +
+ configs/phycore_am64x_r5_defconfig    |  1 +
+ configs/stm32746g-eval_spl_defconfig  |  1 +
+ configs/stm32f746-disco_spl_defconfig |  1 +
+ configs/stm32f769-disco_spl_defconfig |  1 +
+ configs/tinker-rk3288_defconfig       |  1 +
+ configs/tinker-s-rk3288_defconfig     |  1 +
+ configs/verdin-am62p_a53_defconfig    |  1 +
+ configs/xilinx_mbv32_defconfig        |  1 +
+ configs/xilinx_zynqmp_kria_defconfig  |  1 +
+ configs/xilinx_zynqmp_virt_defconfig  |  1 +
+ 39 files changed, 91 insertions(+), 67 deletions(-)
+
+-- 
+2.39.5
+
