@@ -4,83 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89387CCF9E3
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 05:01:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83118CCF9E3
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 05:52:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC93483990;
-	Mon, 10 Nov 2025 06:01:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B774083923;
+	Mon, 10 Nov 2025 06:52:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GcI+UO+o";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="im8ksJZh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8856D839A8; Mon, 10 Nov 2025 06:01:01 +0100 (CET)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 09BB98393F; Mon, 10 Nov 2025 06:52:11 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58E3883979
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 06:00:59 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-7aae5f2633dso3015045b3a.3
- for <u-boot@lists.denx.de>; Sun, 09 Nov 2025 21:00:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762750858; x=1763355658; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=pX13JscueWUK/Xg/2wkv9mXIhzGeQAm/8Sg2GP1iI0s=;
- b=GcI+UO+ouRlwH6D7koKeBfEn0QSYUxwzeZXZx/RbpZepxqF6Eyt1NOnsrN3g5OI/Qo
- vOwX3FDksxk+Ut120Su1rsYGJsz0/VWjeQbSJoXmY9XBB3pq3KA7ZzxLAWxZ5VDPeTi4
- v/wIRleslBynuX3rPsORsT0Vnc4QTL2ZOSLHhMtWeg89aIV5UjE0GeykV7dW79zFPc9c
- 0/EzxzObJxuIedTTkmGd4Z1TQcJJ7BuZYQBpmJLt0hwPK8+1d6N4cNFylDV6CVbCIRVn
- MuPx0nX8JHoVGrB7Vj19jVt25Q10dNKMsRGY8OWEXKcapz+brp/dlo7AErJhlz2hpGMY
- Bjgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762750858; x=1763355658;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pX13JscueWUK/Xg/2wkv9mXIhzGeQAm/8Sg2GP1iI0s=;
- b=BabmEXxXtWBOHUh5XBXfDLUf/tzeY5fPMsKhgP99GChhPp9RDxTNXBm2DtbifdSunG
- OibF/HYMpIG2yAYRHPXj0vKqoaqyeNxtmXCR09Tndf0XgYErdY9PI6BQ5s4dZLpRppWj
- z0B0p6hNXsbV8rR+cmztNrDmciPnot4TDEO+RIb47fs5EGQHDDOeKTBD8jckWQcbPGYF
- 7EW1RGDZR7fPWA77NtFkzhng3q/+0EMIGtamBGwQhvAE83sYjlc8W8Bvuy9w+LI17Vot
- SQNk7CgfNSAfjHAL5Y769H0K3Knu7Y2e9NpCT4HtOUgdUiodW+u9t5KJpOqQOyVREQCg
- Y5Ew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVx75J0Ikl7uItt6uAtqueC++xjiEt/iO5nbRR8fbWzFRPI/Jgy8ofB+4zkLFcsjhBH6BJ0jKQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHleBALXrIa1L9yW67nW02/1MwJ/TX7FYaunwD+DFpGt6AjrYH
- gY/p75r981i08TtRlO0aFwh7U/5LQ8QaJhZpKMtgOjq4IMFcG+Z00J+X
-X-Gm-Gg: ASbGncvbCeUia4rnwbqVlP1obbZ75e0Pv0z/ElMJ8J6ueNHMniIk9/c+aeOOkJ59mbO
- 9IUla6+7fAdmnhkYOlA2B0QS4R2QYlmbdT0ENKee7s1+7nRH4J+SHWL9BvHZLxVaEPRp/SgqDE6
- iJxhx+5nQEHCzRoCts06iqmkONNHf56occjkqj3N7tsyI76j+RHtVE1/J8q0aK0hYGKfGKOKUdF
- W5N7cw72V6lFLAgmjGf2S48oMVx+ACKB0cbSVB1V83QOt10E8e+p2jenRi9xEfpA8piK+GjfuSO
- plvlQIs/4SeTkLGFYZ/O8B58D/O/s8NwgS8k2yduN+WyEum6XPENgCSz9dBgWQrRhjKJ8DLhPxF
- nqfQ0lZOTS3j/uNwupT41InuIaUAo4Ih4W6S4Z58nGHQk1tZk4q4QSalCvG73LP+xLmMOx8XLOb
- jWgOMWUXAwaxLhycH9ksBhCclAC79Okv7XtucRhA==
-X-Google-Smtp-Source: AGHT+IGCkCKG7td/AC9A73f5p2ZXX6MQqHZFD7KGddozngPrp5ZQYd8bMyHpuCC/c3jDVXN77vOajg==
-X-Received: by 2002:a05:6a00:1823:b0:792:f084:404f with SMTP id
- d2e1a72fcca58-7b222f0f4ddmr7610812b3a.0.1762750857613; 
- Sun, 09 Nov 2025 21:00:57 -0800 (PST)
-Received: from localhost.localdomain ([185.213.82.189])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7b0cd05d17asm10293631b3a.72.2025.11.09.21.00.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Nov 2025 21:00:57 -0800 (PST)
-From: Brian Sune <briansune@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v1] sync socfpga common u-boot dts
-Date: Mon, 10 Nov 2025 13:00:40 +0800
-Message-ID: <20251110050040.183-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.47.1.windows.1
+ by phobos.denx.de (Postfix) with ESMTPS id BA1E0832AD
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 06:52:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 63CAF10A491; Mon, 10 Nov 2025 06:52:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1762753928;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=+3oDhhoRouR6bi7a+2nd89rCAyfTy5nygGVb5IuSctE=;
+ b=im8ksJZh0FGjOYAO/5a4Mq/pSbrrctlH93EY4JF6B5w29S4ScNoE3CS9Kb2TTlXK2H4wuJ
+ 6UXWFYhT7SOCH3E0HmaOymE0OX4TMLSg4d4BcU5/Hr836jpGYLaRRKVfCzm67Qw+MIy5Xz
+ QkSstb155VVURxQzjaIm4Q/p/hPEtq5xrcXKTpplNsrw88V4jr64kqA4fHlSoF5U/WudZA
+ 5w+Ml7m6wTL5Uiv7hKoPNkyRFVoizuviWDRDM9mSOsRiOreO3kQteLctUE/gMDkepaFAU1
+ VAJ4bMBfqEQ2ACPVmkUxJau9GuWDZZsiAzQ6MVkWfBTvjIspoGGhSsL1z5Xfeg==
+Message-ID: <9df41faa-c58b-791b-167d-db73c8c195c2@nabladev.com>
+Date: Mon, 10 Nov 2025 06:52:28 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] i2c: muxes: i2c_mux_select/deselect() should be static
+Content-Language: en-US
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
+Cc: Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <28bba1e65f25ef25586916d6069261efb6b26242.1762506549.git.michal.simek@amd.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <28bba1e65f25ef25586916d6069261efb6b26242.1762506549.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,41 +68,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The dtsi for socfpga common should
-turn on L2 and memory and no reason not
-to do so
+Hello Michal,
 
-Signed-off-by: Brian Sune <briansune@gmail.com>
----
- arch/arm/dts/socfpga-common-u-boot.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+On 07.11.25 10:09, Michal Simek wrote:
+> i2c_mux_select/deselect() are not called out of i2c-mux-uclass.c that's why
+> they should be static.
+> 
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+> 
+>   drivers/i2c/muxes/i2c-mux-uclass.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/socfpga-common-u-boot.dtsi b/arch/arm/dts/socfpga-common-u-boot.dtsi
-index eb3d1039314..ff9da15665f 100644
---- a/arch/arm/dts/socfpga-common-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga-common-u-boot.dtsi
-@@ -5,6 +5,10 @@
-  * Copyright (c) 2019 Simon Goldschmidt
-  */
- /{
-+	memory {
-+		bootph-all;
-+	};
-+
- 	soc {
- 		bootph-all;
- 	};
-@@ -14,6 +18,10 @@
- 	bootph-all;
- };
- 
-+&L2 {
-+	bootph-all;
-+};
-+
- &rst {
- 	bootph-all;
- };
+Reviewed-by: Heiko Schocher <hs@nabladev.com>
+
+bye,
+Heiko
 -- 
-2.25.1
-
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
