@@ -4,146 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1258CCCFA13
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 15:24:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4D7DCCF9E3
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 15:25:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D38A83A57;
-	Mon, 10 Nov 2025 16:24:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B2AAC83A56;
+	Mon, 10 Nov 2025 16:25:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Von/sTgE";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="qnOPIXP0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55C9883A57; Mon, 10 Nov 2025 16:24:56 +0100 (CET)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
+ id 60ED683A56; Mon, 10 Nov 2025 16:25:01 +0100 (CET)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c101::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44B0583A03
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 16:24:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EAF883A03
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 16:24:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=t3LS/EX7yyRINGBoQ8LTy++7zuZgKmdIf9h8kzUE/ZwVADrkyDUQTpQ/uzZs9Hc2UGYILI9eIHJFqtG7j9fUeQcuHjQHLtLlxTINyKKESsHmaPKUpQTPsEeMKxU+BC4y6f6dgYC8J04SOlsw2JU6bPAdAor99OhsGvCtMkDgb5NQJw+W6IDrmjvwpF1981TuNBISBPnk1vzVYgHpCHdmQioBAhAlRmaEnmgZ1bHR/qyjpayL8OPzmn1jkBaVBpFcqfcoWiBoPsaGFeP/GMI5aa7wyEqe1LEacSOk7bh4KxiREyG337Kcx+3wtGGFND23I+SV2Pj31+IdohFV6bWz6Q==
+ b=RihGf3O8m92gt46g/HeJSI6G+WpIeMXZAYxstfRW1LWibUwZFz1Kt9TG+zI5Zd2uHTyJpiQ1P1eN/Ikjh1o4ikgtd+zxtqHZTPIaxycSsvpIq8RrkkruvW0/u461M/VB9s4YlR+X9JWCFQGMhmoZkTN3aLX/7otC2H8ulYHuzo+B2Utl9lJjIKY7KKjsHRKam/fE85Xebap3HF4WRClR+ksrhoLzRGidhS5r36wzwGEftgLol/Mh1S8LC7t1RhvYiraSGF5fEYCmUsPokW+qkPpkXSeGrzipVq7EtX5BYlAFlCAr0vnmFyXadudzM/R6gD+pjfk1LORucFdoqgOpXA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ociwRP3RETSZawtRwbqItk5f6tWGsj0u14ZqXN+hl3U=;
- b=G3NuGQN/1BFzrek2mD5mQ4EgVQA+RTnfWbuEtof73P7Yj1Pr+TP/9HebvDF53Pt7w1ZgbYUI5D+1o5RJhi//94q0AaZ6VyKbpkUU70nrrGk5iPrmI+Ce7z6ZV2HLzcTR26G4e3+vSM2RNG3zBR01wSxZMimsjOKgprGrRuzxiQrUk2A0K1HUI1qbJMf5LqEWVUlxyYIglS0VThi2Kp3C24pqc02fasLrTGxvxTJm0HDt1Rz7tnNUxLMDaXmi33i5xOSBOnLSp5cwHgo1i83aBB0fPB1IrSKpJSf0yN/C9PBCVSK5RriFK5f9yFUlDM7T2MD6/vkxZ1ivS/KT4Isnvg==
+ bh=8eXtGV5qk/vXZUJ0eJsX1KxLv+Ak85a9d5K6N+YiiM0=;
+ b=VusM/WcqN+m3hht0yigpMmHSFCMD7ILQkeU/3+2L4/xvRjo+QHrqmaY5Pi05ieXq3tmKuX8rvuE7R6QAJ8vYQsIOwgXMx3dUlu278UgAHIuvJM2rInSALRTXtjUGw0X61Niqq7vE1cV2mCjAzJdKcfBUYCjWgCeVFNMNoX2RchbvkvihNX3PQ8pcd/1ksGvASXQbS/QMhwBnInvMqSJ71fhyda8rT8P9aN/vf3O11sMzwOkHgEhqy3ruXSVVT+f8LG6tkOIwak86Hm75lMNpie7J2AbXRdpTs+abkIfapp14VbN59ZZmQoSUxnq4aEdoIOpAYNxXSm+wrjxwAPsLtQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ociwRP3RETSZawtRwbqItk5f6tWGsj0u14ZqXN+hl3U=;
- b=Von/sTgEzu5Y5DamkXEBDg5ezpMQoTbfoXOD78vdzAfGshNYnKko3EawB1Za/de6K8OwfRacrlxcTAvTC8k5eiggA5joYPXKiquoHlLuDH8FMY0uWxUz+I5ybYhEkTW8Cm6T4++6Bte3QxVo1QurHl47/0nHI4V0VTE+M2IVmHA=
-Received: from BN0PR02CA0018.namprd02.prod.outlook.com (2603:10b6:408:e4::23)
- by DM4PR12MB6012.namprd12.prod.outlook.com (2603:10b6:8:6c::5) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.16; Mon, 10 Nov 2025 15:24:49 +0000
-Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
- (2603:10b6:408:e4:cafe::c3) by BN0PR02CA0018.outlook.office365.com
- (2603:10b6:408:e4::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.16 via Frontend Transport; Mon,
- 10 Nov 2025 15:24:49 +0000
+ bh=8eXtGV5qk/vXZUJ0eJsX1KxLv+Ak85a9d5K6N+YiiM0=;
+ b=qnOPIXP00hzGOhqUwMU0llhvfYy0DxWsvdjltRvdF4rA9UQyd2qtN17f6lPOXjYCzFprEuqvk5vCglTfdK4qlMoSfaZyA2hTBKZCHpDPH5LTY/HxTkD437wtJEH5wO50xxahV6quK7KqH9LPvRhaDqWo2gtgTcTeAUPNIMCguW0=
+Received: from SA0PR13CA0023.namprd13.prod.outlook.com (2603:10b6:806:130::28)
+ by MN0PR12MB6293.namprd12.prod.outlook.com (2603:10b6:208:3c2::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Mon, 10 Nov
+ 2025 15:24:46 +0000
+Received: from SA2PEPF00001509.namprd04.prod.outlook.com
+ (2603:10b6:806:130:cafe::b1) by SA0PR13CA0023.outlook.office365.com
+ (2603:10b6:806:130::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.15 via Frontend Transport; Mon,
+ 10 Nov 2025 15:24:45 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.0 via Frontend Transport; Mon, 10 Nov 2025 15:24:49 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Mon, 10 Nov
- 2025 07:24:24 -0800
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 10 Nov
- 2025 09:24:22 -0600
+ 15.20.9320.13 via Frontend Transport; Mon, 10 Nov 2025 15:24:46 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 10 Nov
+ 2025 07:24:25 -0800
 Received: from localhost (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Mon, 10 Nov 2025 07:24:22 -0800
+ Transport; Mon, 10 Nov 2025 07:24:25 -0800
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Naman Trivedi <naman.trivedimanojbhai@amd.com>, Prasad Kummari
- <prasad.kummari@amd.com>, Senthil Nathan Thangaraj
+CC: Casey Connolly <casey.connolly@linaro.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Lukasz Majewski <lukma@denx.de>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Naman Trivedi
+ <naman.trivedimanojbhai@amd.com>, Padmarao Begari <padmarao.begari@amd.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Prasad Kummari <prasad.kummari@amd.com>,
+ "Sean Anderson" <seanga2@gmail.com>, Senthil Nathan Thangaraj
  <senthilnathan.thangaraj@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
- Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
-Subject: [PATCH 1/2] firmware: xilinx: Add support for enhancement SMC format
-Date: Mon, 10 Nov 2025 16:24:12 +0100
-Message-ID: <16bdee56fd75113c6d531bae7a8a34900b10280d.1762788250.git.michal.simek@amd.com>
+ Yadav Abbarapu" <venkatesh.abbarapu@amd.com>, Yao Zi <ziyao@disroot.org>
+Subject: [PATCH 2/2] clk: versal: Enable clock driver for Versal Gen 2
+Date: Mon, 10 Nov 2025 16:24:13 +0100
+Message-ID: <e83c665408d1453a464dd02cd2a25bb0ed267131.1762788250.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <16bdee56fd75113c6d531bae7a8a34900b10280d.1762788250.git.michal.simek@amd.com>
+References: <16bdee56fd75113c6d531bae7a8a34900b10280d.1762788250.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2981; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=A20NjSgJa05Hf/3i05U9PpB4L0Wk9f0sR4obNCiXQME=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQKMc/Tb/jXJJ8QeFmK3cO97uhGAXnFbVr70+Q/ueg+v
- OIQ8Kmgo5SFQYyDQVZMkWU6k47Dmm/Xlootj8yHmcPKBDKEgYtTACZy04yR4TCP8BZr5jWfjfnn
- Ghlt6FdhzfVWePjhh+Ns/X8/dggzWjD8U1rco9Kfuujh9jzTAAZToYvlRgenfHgx796uyz1Be61
- t2QA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2598; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=OJhe86U1579yamWmC+mnziGa2SH7jTNd9dMOwTqF1Mg=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQKMc873O7S8/2pdPYdC6m2gkM7l+3103+68YT0dyuL+
+ 5ET/ph97ihlYRDjYJAVU2SZzqTjsObbtaViyyPzYeawMoEMYeDiFICJdHcyMky8Oz/p+gnGBt6l
+ n6Z1SM9+JyIUkbP8lzyPY/dUa5GCpnKG36w/lCVVpMJ67NJsv/Fu2vHWVbIl8G7YsQNGjz/7f/U
+ OZAQA
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|DM4PR12MB6012:EE_
-X-MS-Office365-Filtering-Correlation-Id: 449c9b5f-5a94-4d88-660a-08de206d49d6
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|MN0PR12MB6293:EE_
+X-MS-Office365-Filtering-Correlation-Id: e41b84ba-9fe3-4b74-fd32-08de206d47d7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DUy/rUXYNQYpcyFpuoHneqo/G1uGDIlXbp2suIFS3M0P5BzNzJd3VK3irh8O?=
- =?us-ascii?Q?DuYt4cQIIWpL25Ffj1ag6pJFaDE0vD1Wom3BMGjud/o+2daFvhqJKPhZjwC9?=
- =?us-ascii?Q?urXjekfOXLVInXAbkVWO9SbxZG4RBJ2qk2fmDhcMhR296I7yL1EcprOSOxi/?=
- =?us-ascii?Q?carwDu+A6lgfbrg+jXNavB2dJR0U84RmivA5cV3DA/4DgN3MD1Utf2yILqT5?=
- =?us-ascii?Q?Jpd7+pnH/SIPyoBbfk1RGwrJujuZ3CuJmqmaniMQhaffTBbSfnWz6GJUFo9r?=
- =?us-ascii?Q?fcO0TDqQJeAL9Ac28tKZ0rw6SUcZaUlgYDc0wuUw8v92/rkxs3D01+SwLqF3?=
- =?us-ascii?Q?hMFu8T3ZI5/bhv66soyGGkyxRjKo8bTNTVwPQmK/T4DlYh85GZ1FemRp2l7q?=
- =?us-ascii?Q?40ZJ+YhBxdWAMw2FdSNq+DuOv+8Qc3iiVMPPZRZq9/+UfcoUfn6JgHX7xLrY?=
- =?us-ascii?Q?HeaSUYZy77IAZTzF2A2jcDc+qTiK5ZDM5sxC9oG/q9WUys1kE3XGRnrGP9ci?=
- =?us-ascii?Q?sLfy1d17qokMKx9BTd6Bul/vUsWEZ20nYM3q9lJARSIIND/4k0lqwZ1Qoo4V?=
- =?us-ascii?Q?CuozrNmTgE6G7BoKLxFsfgB24rKl1/HT/6FfFjYf+TCu8jRqXAbJyvdmCWco?=
- =?us-ascii?Q?eX7c505uLTSNETeA93ZSwm2wQgowXa9bnAieZQkrm9TTJvpsFfbEun/kh2it?=
- =?us-ascii?Q?xRf0X15BdTEhxgZrC1JbkiDPFQTxOKQ+f3FRo4sdL1xoZaBbvsIgmawrBOdP?=
- =?us-ascii?Q?tjXDazFvTU2nxC3hevRpCyfCTVI53AKO10mtSd+NwFS57gcHqcaELTLfc0vY?=
- =?us-ascii?Q?qP8hTlBXfpP+fSz4sssRiSywkmLv/ecb68OjngbeA4s0tr+1c5yeu92oioKA?=
- =?us-ascii?Q?iPQISMXeooVW8fFzNkaV3HqoLNCmP+fNS+DB8h2JMgqByP6AAhZhU/LjyBaG?=
- =?us-ascii?Q?XWYxG5VkYbfrySeCJEQqmdYcXvXqSorfc2yO9vonVgU9COMjSqNlEKlZwyLv?=
- =?us-ascii?Q?Ok6uNB+lvzycjDibP4WXEXZ6e3zOYm5KjhK14IdkOkNtU3zHVVMjukMht1Vb?=
- =?us-ascii?Q?HPMwUHr7xYyh3KC2MeVVG6NOPEHaSChkFItB0fC39YiM5WIlsUV+8S8ou526?=
- =?us-ascii?Q?ox1JbWvHB8pZzkO8jm/b3nYzGheGc7bwQAQ9UqXdSOCO3k2HrOS7db5j31dp?=
- =?us-ascii?Q?PuUg7XW92DkIuyfFUYJ02N+05fXX+x8U2PhUWzPT2CphE4izvxxdPoFMNsXP?=
- =?us-ascii?Q?i4G8Q6wE9mKS/c2qGRV+tdnKRpfmY1C+ukB6N0EjOhALNLuU6yp/Ob+iL52c?=
- =?us-ascii?Q?oNxTBntBDxgl8kL2AwrieRjMaFp7dyW0pkScLdwux5DQa/tjBA4OG+53mU3v?=
- =?us-ascii?Q?uCGpo4VRpeOBvchaNrYTy+BJneGANe4rIQL2n66xQoOrhYGVDq05NQDcR81D?=
- =?us-ascii?Q?+MMjZeVJlrHXtLSlEG5ENZJzMRMfc6tBGhLZglBeFcV6VxFTco9510pffJfi?=
- =?us-ascii?Q?V0idE2qFgDRi/7JNLDoXP+KstumFCHw+UmKA6Tshm2gBswxcEK1VDjsH0b7f?=
- =?us-ascii?Q?aCC4t7JyxKfKrDICPP4=3D?=
+ ARA:13230040|82310400026|1800799024|376014|7416014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?MMzQ9dh0Ney1BJUmfHDKVXD/EogygeE4Z9KI1wmX+WX4Jh/HqRM6YfQ0g+km?=
+ =?us-ascii?Q?c9Qis3YuAmVCoccGBvmvuaQ3kK6/LHaQ5CYagVzYvifljM7xKHbE2loIhQXj?=
+ =?us-ascii?Q?77RDGbaJGK3khwkTHVL/q1oBithu7cdqq1nE06ATxhCAKmC6qggsP9mlLWnS?=
+ =?us-ascii?Q?VwaieLH/OCCq2cBgSm+v9Rnaur+RAJVNRqB7bl9efoy8HseD+kthhExlMag3?=
+ =?us-ascii?Q?T+y+8yzmNOutrjT6SJlKAFqRzGhCAD7l+6phT40E6yK3Zap/lJ1jisFCBghD?=
+ =?us-ascii?Q?rnGVhGywUQv8jOqEQlZLbyV3ymX2DKCfZVi9Q/W2FTNtk1ebQKhl1Ob3oQEB?=
+ =?us-ascii?Q?B+o/EJQ8fprxbNpr3WNpIB4/Un2jaI8dAg9PqAw/MO42LDRKiwwOHRBpkFEq?=
+ =?us-ascii?Q?aXaembUdov3iztGbEIUip8Nv9QN0bsuAOr75y47dnp2V1T4ApNBInAngNFma?=
+ =?us-ascii?Q?7Y+M0IM/KC//VevOx4LHlAUab1to7YPm7BXa+uzJnwQB5ArlXF5wroVlVNur?=
+ =?us-ascii?Q?qnsclkQJEcfPNRk85Z7y6y5ZJaY5aNVmud7tp+qMCu18DAyDW/4YtKWebb6k?=
+ =?us-ascii?Q?UeYgYB/MBl2aYNQqKHPYeKhJVse5fGBkVnkFiSAMJ7LsWGiN2Z4ctzmHOkr+?=
+ =?us-ascii?Q?Z27bXpMOMmHyAjhbF0xHVLQuoeg5JTVyTUKfo0ej8gt4TAb8sKNRSJ+3vCm5?=
+ =?us-ascii?Q?2f9kpZM+U+NfvGmor8A+DRApsGEeTubon+9QLIJw9w0vi4qBaaPVrC6dirtf?=
+ =?us-ascii?Q?XeWHSb+mItYYXAaxo52t2IyOpo23GJw9zVjuhi5S/3+cmnDzxXcJ3S9c+TZ7?=
+ =?us-ascii?Q?vnWhZubtQC5FaE/S+ontH822ZWj2xZTdxZutvbZFTg2Rf0s9R91U5LHN7gBZ?=
+ =?us-ascii?Q?HsZUteGw8gBdXpGTKnDwcuXJ6MFv9d13Ribhg7Zryj46fcul9Vusmj7lN/GY?=
+ =?us-ascii?Q?9CDDTixQWAQIf/5iMIyjqkqAiSGUT2SXTp+5o2nEaORizJAqKX1odsavNkrh?=
+ =?us-ascii?Q?7RLODEqe+wXD4J0nVHPhTkpnrbCUTCy8ehSsu12mUOVKgpBSvf9QER7OBAlT?=
+ =?us-ascii?Q?gx6zrXOnojZkInvsHye3CKXhAOW+YiR0R6IHgDuTrrRpT9rnRbY77d7KFKd6?=
+ =?us-ascii?Q?plmUCaho7TV/8AdLqMAIRnWnU0oEvFRIXPODn8kSwjTTnktGIO/JKPCF9ipf?=
+ =?us-ascii?Q?JZc4dqKLAWU+HXOwk23fP62SD6DxTeSyh6aqOTUPhEVlOoCdEi8sjH8tERi5?=
+ =?us-ascii?Q?XPDVJ5EfNAT1ja0WlbaQXElAokeU5ffretIEen5oVpzBWvBWPON71lxbwY58?=
+ =?us-ascii?Q?JoFAjkV8FEbzI+2MleQWwYIq1Ztt3rWdPR1IaguX5oCEFj/6VQB4hReQFxDv?=
+ =?us-ascii?Q?ux9RaxfDoym3kogGUC4a1Xhl0przHICRCIhkhzuIAcJ+MaKTqcHVdk3mMdyP?=
+ =?us-ascii?Q?JzUY+fhw0lIu5Sq2yw+icNJUx3iuSLf07SgJdxquTZgTohyhIoS7OeJYPrwG?=
+ =?us-ascii?Q?c0PRic5s3hUdFAHrQbs3h8f8H4lilGMfv2mxtFdQwERZSEB7FnizL6WebYIC?=
+ =?us-ascii?Q?D8FhILFZj+7VoYWR7cw=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(7416014)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2025 15:24:49.5076 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 449c9b5f-5a94-4d88-660a-08de206d49d6
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2025 15:24:46.1448 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e41b84ba-9fe3-4b74-fd32-08de206d47d7
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B06C.namprd21.prod.outlook.com
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6012
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6293
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,90 +163,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Versal Gen 2 is using different SMC format that's why firmware and clock
-drivers needs to be align with it.
+Versal Gen 2 is using enhancement SMC format but in near future SCMI client
+should be used. This patch is just bridging this gap till SCMI server is
+fully tested.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- drivers/firmware/firmware-zynqmp.c | 34 ++++++++++++++++++++++++++++++
- include/zynqmp_firmware.h          |  6 ++++++
- 2 files changed, 40 insertions(+)
+ configs/amd_versal2_virt_defconfig |  1 +
+ drivers/clk/Kconfig                |  2 +-
+ drivers/clk/clk_versal.c           | 20 ++++++++++++++++++++
+ 3 files changed, 22 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
-index 3742467caee1..2ef499bf4084 100644
---- a/drivers/firmware/firmware-zynqmp.c
-+++ b/drivers/firmware/firmware-zynqmp.c
-@@ -16,6 +16,7 @@
- #include <zynqmp_firmware.h>
- #include <asm/cache.h>
- #include <asm/ptrace.h>
-+#include <linux/bitfield.h>
+diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+index caf4aefe898d..4f0c4ba5c967 100644
+--- a/configs/amd_versal2_virt_defconfig
++++ b/configs/amd_versal2_virt_defconfig
+@@ -75,6 +75,7 @@ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SIMPLE_PM_BUS=y
+ CONFIG_CLK_CCF=y
+ CONFIG_CLK_SCMI=y
++CONFIG_CLK_VERSAL=y
+ CONFIG_DFU_RAM=y
+ CONFIG_ARM_FFA_TRANSPORT=y
+ CONFIG_FPGA_XILINX=y
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index b884a02bdeba..85cc472b4cb9 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -224,7 +224,7 @@ config CLK_VERSACLOCK
  
- #if defined(CONFIG_ZYNQMP_IPI)
- #include <mailbox.h>
-@@ -451,6 +452,38 @@ static int smc_call_legacy(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
- 	return (ret_payload) ? ret_payload[0] : 0;
+ config CLK_VERSAL
+ 	bool "Enable clock driver support for Versal"
+-	depends on (ARCH_VERSAL || ARCH_VERSAL_NET)
++	depends on (ARCH_VERSAL || ARCH_VERSAL_NET || ARCH_VERSAL2)
+ 	depends on ZYNQMP_FIRMWARE
+ 	help
+ 	  This clock driver adds support for clock realted settings for
+diff --git a/drivers/clk/clk_versal.c b/drivers/clk/clk_versal.c
+index 4a498e22f967..78a2410ca21c 100644
+--- a/drivers/clk/clk_versal.c
++++ b/drivers/clk/clk_versal.c
+@@ -136,6 +136,25 @@ static int versal_pm_query_legacy(struct versal_pm_query_data qdata,
+ 	return qdata.qid == PM_QID_CLOCK_GET_NAME ? 0 : ret;
  }
  
-+static int smc_call_enhanced(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
-+			     u32 arg3, u32 arg4, u32 arg5, u32 *ret_payload)
++static int versal_pm_query_enhanced(struct versal_pm_query_data qdata,
++				    u32 *ret_payload)
 +{
-+	struct pt_regs regs;
-+	u32 module_id = FIELD_GET(PLM_MODULE_ID_MASK, api_id);
++	int ret;
 +
-+	if (module_id == 0)
-+		module_id = PM_MODULE_ID;
++	ret = smc_call_handler(PM_QUERY_DATA, qdata.qid, qdata.arg1, qdata.arg2,
++			       qdata.arg3, 0, 0, ret_payload);
 +
-+	regs.regs[0] = PM_SIP_SVC | PASS_THROUGH_FW_CMD_ID;
-+	regs.regs[1] = ((u64)arg0 << 32U) |
-+			FIELD_PREP(PLM_MODULE_ID_MASK, module_id) |
-+			(api_id & API_ID_MASK);
-+	regs.regs[2] = arg1 | ((u64)arg2 << 32);
-+	regs.regs[3] = arg3 | ((u64)arg4 << 32);
-+	regs.regs[4] = arg5;
-+
-+	smc_call(&regs);
-+
-+	if (ret_payload) {
-+		ret_payload[0] = regs.regs[0];
-+		ret_payload[1] = upper_32_bits(regs.regs[0]);
-+		ret_payload[2] = (u32)regs.regs[1];
-+		ret_payload[3] = upper_32_bits(regs.regs[1]);
-+		ret_payload[4] = (u32)regs.regs[2];
-+		ret_payload[5] = upper_32_bits((u32)regs.regs[2]);
-+		ret_payload[6] = (u32)regs.regs[3];
++	if (qdata.qid == PM_QID_CLOCK_GET_NAME) {
++		ret_payload[0] = ret_payload[1];
++		ret_payload[1] = ret_payload[2];
++		ret_payload[2] = ret_payload[3];
++		ret_payload[3] = ret_payload[4];
++		ret_payload[4] = 0;
 +	}
 +
-+	return regs.regs[0];
++	return ret;
 +}
 +
- int __maybe_unused xilinx_pm_request(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
- 				     u32 arg3, u32 arg4, u32 arg5, u32 *ret_payload)
+ static inline int versal_is_valid_clock(u32 clk_id)
  {
-@@ -494,6 +527,7 @@ static const struct udevice_id zynqmp_firmware_ids[] = {
- 	{ .compatible = "xlnx,zynqmp-firmware", .data = (ulong)smc_call_legacy },
- 	{ .compatible = "xlnx,versal-firmware", .data = (ulong)smc_call_legacy},
- 	{ .compatible = "xlnx,versal-net-firmware", .data = (ulong)smc_call_legacy },
-+	{ .compatible = "xlnx,versal2-firmware", .data = (ulong)smc_call_enhanced},
+ 	if (clk_id >= clock_max_idx)
+@@ -794,6 +813,7 @@ static struct clk_ops versal_clk_ops = {
+ 
+ static const struct udevice_id versal_clk_ids[] = {
+ 	{ .compatible = "xlnx,versal-clk", .data = (ulong)versal_pm_query_legacy },
++	{ .compatible = "xlnx,versal2-clk", .data = (ulong)versal_pm_query_enhanced },
  	{ }
  };
  
-diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
-index 7f93241b1932..72f6459b91c8 100644
---- a/include/zynqmp_firmware.h
-+++ b/include/zynqmp_firmware.h
-@@ -521,4 +521,10 @@ typedef int (*smc_call_handler_t)(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
- 
- extern smc_call_handler_t __data smc_call_handler;
- 
-+#define PM_MODULE_ID		2
-+
-+#define PASS_THROUGH_FW_CMD_ID	GENMASK(11, 0)
-+#define PLM_MODULE_ID_MASK	GENMASK(15, 8)
-+#define API_ID_MASK		GENMASK(7, 0)
-+
- #endif /* _ZYNQMP_FIRMWARE_H_ */
 -- 
 2.43.0
 
