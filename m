@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05C42CCFA13
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 18:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6DC2CCFA13
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 18:55:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6815483A8C;
-	Mon, 10 Nov 2025 19:32:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 73A2F83A83;
+	Mon, 10 Nov 2025 19:55:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q5DlX7zu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gb8SPAwY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BA09835B3; Mon, 10 Nov 2025 19:32:55 +0100 (CET)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 7AA5583A8C; Mon, 10 Nov 2025 19:55:13 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12DA383A8C
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 19:32:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B98783A79
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 19:55:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-3e7ead70738so818118fac.0
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 10:32:51 -0800 (PST)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7c6ce4f65f7so1953447a34.0
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 10:55:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762799570; x=1763404370; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ d=konsulko.com; s=google; t=1762800910; x=1763405710; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=HBDl8aKlNT6qNUThiNkQcWw1c1xE7utB5o5amA63tsc=;
- b=Q5DlX7zubfcqZZxrb3K1aiu840zUm/4gLVUxFeJHtEl81qbV0wpY4IlARCBngcnczX
- PUJzRhin2CSaUY2PVhP4LDgWnkn/Xn04Lo5TmunIpmeKmBt711pjplqzdDE0s5SwQh9w
- k3x98UAykNfvR5c3PIVzOb6+v7AtEvt+jbGbw=
+ bh=Agyb4lrdPtnP7TUeiPfqdZijmR8GhMyOP9UckRZxLSM=;
+ b=Gb8SPAwYWhNbl/xIE6vdeSMkimxobmDM8Ryr9KCbTMdDfprPloI27ACo1D5d5WgUr+
+ ux3sLPRD0GEM2IQSg+MstIXDhw7dvbhaZg0QSWPUczuudHdZrha7j+JYuQfk2jx8BL1M
+ CQmQowaMZ/rc3B4zAKkZK0cyBbHRUrXLJhxlk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762799570; x=1763404370;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1762800910; x=1763405710;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HBDl8aKlNT6qNUThiNkQcWw1c1xE7utB5o5amA63tsc=;
- b=R2sY7JeXdouwhbj8Ge2uQ9a4fD12Sl61IOzhaDxb/YXnIquqj/0JYRlABFGm6IkEcu
- tcAlGfWqCbUo1oovMjIPTZCg3bej1EcnFg4rMmSe0jtaWStX8c9TLFplBlYDT6ygiMX6
- jCngsqP+PC7mfTViFWVCYNNZtyEi8flPMvn8WRHqbx3Q84wlBvlFk/sckLxWCwaeNAuF
- flKG0n+7PdBCRz9LE8R7ECloDCnI+yxx3fA0pI0KKqjL/BQH8etWWir8vZp5rpFkpusL
- Gb23oSBrZCSzSmSLPAKHs9cemhNv8MJsFfhnNff9noWEtWPatGQzuOHdhcAEPyGa9GWH
- HiFA==
-X-Gm-Message-State: AOJu0Yy9w4YmuoX3zgqvXnm2+oTZugDRC9TRpVzLAMsfCs3XESugsIsj
- DcViYhYk3g8HV1PCesheI5n+/ruuksj0EQxsjzWl9dS/NXj5qV7BLN6Miqmfkdx1jZhdfzHCFeh
- 4TgP+DmWxJw==
-X-Gm-Gg: ASbGncshck3UxMbT+XGEFOMtDGNfac8K+UAdiOzfH3JoCFHUhcoJaWxJ49fG+4ZHTzh
- O7xoACSvudzXrnSz5K/hkMHw3Z+g/BaObedUbwR/baZR6Y/PoIevPMo3HL7PqDSLnuNfwgaUJJV
- C+lPTthhptU0xV2rqN4J/RxbClonfuCw6EvvHLgbjuBXLZwCzSJqFyZaeTAs3OPiqFtlDWau0b2
- C9iPCyA7jFQfUDxt4VGpWykbRxn7IMfkiddyNMbs7LVNlXtDGtsrc7ZnudPeZ2MaL4BZXuX8VpO
- hvPccbmUwGeoLGPGQtyBWI9io6Tnc7XDKUvdfNLeDmV3QlnVbwyuG3FHZfNdW0skfxCL1ZYSv1H
- 1NarcGwNRsDAvTH8pgOQ6wyN8r637SVGbfvgAEPRuSDYUUe3+XSe+okyQsGX06j4ZXr+pjlDPI4
- 2UfgmZvg63l/jYdpl7n5YplvvGC4/rvmXELHKA2+I1BHlIS57WqqFUfOSqZKYC
-X-Google-Smtp-Source: AGHT+IFTeD192z61cr5bNOsfGVwMZB7vh5AlEsEtmxQrD7WbwQWlXnVwDvNibWLdGtKSZKfR/g689w==
-X-Received: by 2002:a05:6870:d1d3:b0:306:f5cc:5645 with SMTP id
- 586e51a60fabf-3e7c279617bmr4499022fac.31.1762799569709; 
- Mon, 10 Nov 2025 10:32:49 -0800 (PST)
+ bh=Agyb4lrdPtnP7TUeiPfqdZijmR8GhMyOP9UckRZxLSM=;
+ b=Y5YycM9DjP8yLtl6vGawr+6CmVgFjArg8ZdMnkOAb/o7Of5cEl8JxvKx0Yu3ZdwN21
+ q6maeHbPdPJIaOgWa+Y9FMhbCKGxMdXBnq0tuMyZd8uGZh2qoZahVskaW6UAiuedadXA
+ 2CQJ3kK8FiwTDpC6Ifk1IcLKqIQCUWYczqJhfn8CE924BsFIQnJiA1/PWKQNv40qu738
+ dJ/uNtc17EOeDC7XfQafTm8MuZE4MtLYkxY2L3GOETlGJ+ktJ4lh/kD8USCVfsnNbKvu
+ ocfYkXcDcWR6VFvDB9uY2/LrinIFSQFI/W/wWTL12msK+jUPnn0rdH9YX2XU9kFqSGYD
+ mw4A==
+X-Gm-Message-State: AOJu0YwURUcWOh1zXzUL2LZ0CRFPos8oi/khDu9mixHzWmrBxUOLdgU/
+ dtCbvU15bWbH87xlPuxLBQfm4+4wFoMLWN/OcE1/lXowVKCjHjL3ihwyssJyhRLCsNI5i+Y01KO
+ MfqldQGNLxg==
+X-Gm-Gg: ASbGncsHyYTyA7OWmlMLDc5Lhxlaxm+pluCvw7lBfr0x8Ol0obhofcn/SlU0v2j8XG4
+ j+4OIBmLVGTmI4rGpRH6eGY6PAgTTq/LfUl/qHxzGeAewxuGqR1lY+8ew1D0dDi+vZK0f0Ic2V/
+ E1uu5mfpwdB9sd15C4phZeske3aNdlWpJsSsjoXcoeZIZN3U4f9bt8RotQTXTAHqckrLENgsbpe
+ nvDG+MsG5tsgmKuWtFr9WNtvXUNpH2lDGWf78MxBMBrrW1A/5hRn4eIqys+ytVF8RvMswWIb4Al
+ mucHbAkuCWdGvo14RV9oGdb2wAUT9nfZaWx54TFNYlwaderW4848s7EOY2wdjXu4gM43ptZ2Ssa
+ W3e5TG6BosLCo64yZLoe/aLLT2U0DmE/d2YviVuxxPqyU1KEQoMPlSFmqRECmOl1eWX8SH+NkR0
+ LgFNSUwun4n17udW2/AMjn9Kw1/T39Yd29kP9C2YWsfvasY7X8DQ==
+X-Google-Smtp-Source: AGHT+IH+CgL7Wt470nHT8u83fDQqzcPmhWMIEira2bHzOB4YzTF4qedM4csYITO9JKyyMAWg7FixCA==
+X-Received: by 2002:a05:6808:80c1:b0:43f:7a07:44d7 with SMTP id
+ 5614622812f47-4502a472e2emr5082136b6e.47.1762800909612; 
+ Mon, 10 Nov 2025 10:55:09 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e41f13d088sm6811596fac.13.2025.11.10.10.32.48
+ 5614622812f47-45002752e8dsm6009019b6e.13.2025.11.10.10.55.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Nov 2025 10:32:49 -0800 (PST)
-Date: Mon, 10 Nov 2025 12:32:47 -0600
+ Mon, 10 Nov 2025 10:55:09 -0800 (PST)
+Date: Mon, 10 Nov 2025 12:55:07 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2026.01-rc2 released
-Message-ID: <20251110183247.GP6688@bill-the-cat>
+To: u-boot@lists.denx.de, Kory Maincent <kory.maincent@bootlin.com>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20251110185507.GQ6688@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="thmUADWXFAr8b1Xc"
+ protocol="application/pgp-signature"; boundary="Z+HlPLO+22j/w9xN"
 Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,63 +95,105 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---thmUADWXFAr8b1Xc
-Content-Type: text/plain; charset=us-ascii
+--Z+HlPLO+22j/w9xN
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+Here's the latest report. Just 2 new issues, both from the extensions
+series. Can we please address these shortly? Thanks!
 
-So it's release day and I have tagged and pushed things out. Looking at
-my own queue, I see some small changes I can still pull in (spelling
-fixes, Kconfig dependency fixes and so on), but anything else is for
--next now. And there will be some bigger sized things going to -next,
-including updating our host containers and updating LLVM.
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Mon, Nov 10, 2025 at 12:44=E2=80=AFPM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
 
-We're continuing with a community meeting following the release and the
-calendar link is
-https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DZGNsNT=
-h2YWQ2YTB0ajAzZXRkdDVhdjFuNmpfMjAyNTEwMjhUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
-mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
-89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
-lendar.google.com&scp=3DALL
-and once again this is the same time as the previous meeting. The
-meeting details itself are:
-https://meet.google.com/btj-wgcg-euw
-November 11th, 2025. 9am (GMT -06:00)
 
-To join by phone:
-https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
+Hi,
 
-In terms of a rough changelog:
-- Pulled in more fixes for issues found by smatch.
-- More platform updates that were outstanding after -rc1.
-  - We now have QEMU for testing transfer list support so vexpress_fvp
-    has been taken out of Gitlab CI where it was failing due to race
-    condtions for console quite often.
-- Subsystem updates (MMC, UFS, USB, board extensions support, UEFI, DFU,
-  documentation)
-- Falcon mode support for secure platforms
-- We can use clang to build on 64bit ARM platforms again (and there's
-  some further fixes here to pull in).
+Please find the latest report on new defect(s) introduced to *Das U-Boot*
+found with Coverity Scan.
 
-I continue to plan to do an rc release every two weeks and the final
-release will be 05 January 2026.
+   - *New Defects Found:* 2
+   - 1 defect(s), reported by Coverity Scan earlier, were marked fixed in
+   the recent build analyzed by Coverity Scan.
+   - *Defects Shown:* Showing 2 of 2 defect(s)
 
-Thanks all!
+Defect Details
+
+** CID 638558:       Memory - illegal accesses  (UNINIT)
+/boot/pxe_utils.c: 485           in label_boot_extension()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 638558:         Memory - illegal accesses  (UNINIT)
+/boot/pxe_utils.c: 485             in label_boot_extension()
+479     			return;
+480
+481     		snprintf(overlay_dir, dir_len, "%s%s", label->fdtdir,
+482     			 slash);
+483     	} else {
+484     		dir_len =3D 2;
+>>>     CID 638558:         Memory - illegal accesses  (UNINIT)
+>>>     Using uninitialized value "overlay_dir" when calling "snprintf". [N=
+ote: The source code implementation of the function has been overridden by =
+a builtin model.]
+485     		snprintf(overlay_dir, dir_len, "/");
+486     	}
+487
+488     	alist_for_each(extension, extension_list) {
+489     		char *overlay_file;
+490     		ulong size;
+
+** CID 638557:       Null pointer dereferences  (NULL_RETURNS)
+
+
+___________________________________________________________________________=
+__________________
+*** CID 638557:         Null pointer dereferences  (NULL_RETURNS)
+/cmd/extension_board.c: 102             in do_extension_list()
+96     {
+97     	struct alist *extension_list;
+98     	struct extension *extension;
+99     	int i =3D 0;
+100
+101     	extension_list =3D extension_get_list();
+>>>     CID 638557:         Null pointer dereferences  (NULL_RETURNS)
+>>>     Dereferencing a pointer that might be "NULL" "extension_list" when =
+calling "alist_get_ptr".
+102     	if (!alist_get_ptr(extension_list, 0)) {
+103     		printf("No extension registered - Please run \"extension scan\"\n=
+");
+104     		return CMD_RET_SUCCESS;
+105     	}
+106
+107     	alist_for_each(extension, extension_list) {
+
+
+
+View Defects in Coverity Scan
+<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+
+Best regards,
+
+The Coverity Scan Admin Team
+
+----- End forwarded message -----
 
 --=20
 Tom
 
---thmUADWXFAr8b1Xc
+--Z+HlPLO+22j/w9xN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRIvzwAKCRAr4qD1Cr/k
-Cp57AQCogAmCuxHJ9Cgve6sqhjhx1N/34QgkMEC0ICgpA8gIoQD8C/AR6wFQZIQx
-VRPxJVDAtYQvZIYd+x3nwEh7edhgfAA=
-=yLoS
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRI1AwAKCRAr4qD1Cr/k
+ChnBAQDnRMzjR4DD/ybozldFVd8XyCTWtFu8fo7+4QTQFOQCpAD8CHRWLL0pSgWL
+zvU0WNyBRShFbZCf+PrEQdjFTwjwdAU=
+=jfbu
 -----END PGP SIGNATURE-----
 
---thmUADWXFAr8b1Xc--
+--Z+HlPLO+22j/w9xN--
