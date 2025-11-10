@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B109CCF9E3
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 11:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC3EACCF9E3
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 11:53:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C10B839A5;
-	Mon, 10 Nov 2025 12:52:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 52775839A5;
+	Mon, 10 Nov 2025 12:53:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YapMABde";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bYDNyTaZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC236839C6; Mon, 10 Nov 2025 12:52:02 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 4F6D2839D7; Mon, 10 Nov 2025 12:53:47 +0100 (CET)
+Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
+ [IPv6:2607:f8b0:4864:20::b12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8BBB83980
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 12:51:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0802583980
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 12:53:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-786d1658793so24974007b3.1
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 03:51:59 -0800 (PST)
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-63fbbad0ac3so2680828d50.1
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 03:53:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762775519; x=1763380319; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1762775624; x=1763380424; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NYhdCYJR6JaLWFu7XszOFJ8EUkm6FIm7j+rmbJue3As=;
- b=YapMABdejH5CT85zOL4zytwLDLDWubYfWQaTh9mYRArObSMDNr/wW+ZPBhyKmOX0NZ
- 5WYTFYZGNfFQ+j/3m1+5hO7HTmd4PytmbDuxsSayvgbLjKDssDDA/P7TAUUQRwQM81+5
- X6VgRUoJlrdrhKG8y0qa1bUzVKXJ5Bi8Fhu64uJr8Fm1eWd0xOQaECI7Vt8Dtl+1GT2G
- 7Wlci+I61pwZ4Ke+mkYmsmiVQVg1/47DvruecOimZeXiOwhs76omRBBs9vPV0WMSXFUT
- 2yJkzhRfvdhPru4ukMuy0SK1ZiS35uOJdDXI7xBmNWXhD3uUDhXUBAyVJ6mZAT0X3nuO
- 9YLw==
+ bh=3NRuyD6RYh6i0NdR9upENUAOkmAbNLoLOmIB1QW8siQ=;
+ b=bYDNyTaZ7TEWQzrslPa7kLdA74Bxh1+OfAaJF4ebqrscuXRGwwouD161h7PhGvXftM
+ qZn1cnu0fc+ZU6tbPEyhv9+nqXoslMmfdr3M6OfkZdYahmMYnFUSthHWNXryG6lyEsSO
+ UrX971JIE3EVVwN5oKF+rzu/rskolQeuCCHyGK5wS364skb1i3XdFhfmmbNS7ngC8lAh
+ 4sHnV/XH+ZVWSYafXhT9MKmptiNMlUcxwBLjxUnHkwx3KqxXLU2HAveP9J5IVUidpafC
+ eXqGg3lJgv5KswG3TqGXFePz7yt1rvhC4tHTaZ2vqpyQZp4dlwPp8tTwgYSLaqA+CSO8
+ /L/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762775519; x=1763380319;
+ d=1e100.net; s=20230601; t=1762775624; x=1763380424;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NYhdCYJR6JaLWFu7XszOFJ8EUkm6FIm7j+rmbJue3As=;
- b=YTGvL35KB1oRr2U9pi2AHdItmEDt8jGTgk4env2Xj2ZhWImHrtLxDctQyyc9OL083E
- ADh68BWt5xlnjOsbrHsvRDu2yzII6NdV2WOqswrU54UNevYLorqkHMSZKSVLvwiLcwMh
- 6JbXv2l6qt5VJ8p+MlH/j/AJQoLD1cE3aEu+LaBMnCXuaZQ+0vbdJEzK3wsPhoThJ3tf
- rKN9RO1wssgdGjR9WorImITrcqPgCD+Q6Flxib5Og1U1HhEH4gc5tljfpuaFZen8u5TW
- loQGrYFZZZ2HmeihrDScvoYzcisTiLprcCy6BSQuwd35FjmhpsFztSoO5X/YG/Jv0fot
- +pBA==
-X-Gm-Message-State: AOJu0YxksF5NdbKw7Aq7A8tBsHk5OI2Bwb2l3TxhOmmmbdn7vnZlGC68
- z3alDQjsF3e5yFOeBpeW2Z/RoXm3bfB39rHqRL3zOVB7tca4cqEMBkiPWmc9qIQdO60x28o6c3W
- bv7DncBkoOCdo96K+jMo+UAxnyYNE6UBxkP7RC5nLWg==
-X-Gm-Gg: ASbGncvT/padoU6J9RDpc8+cofKjeeetZ0Pf4KG4Gzf8QGHyloJeB/tgconqPHcaSWh
- PCYHzaYodJjai7HyBX+oqQKg2myOiJxnYN5KSd7Koy2p30RTRv21SJXtPP5SWEGAZ01kiYS8BIf
- D7M9u/xHhu/kcsw4BpRIcACY9M0iAbCkd/z0uAsxlK2xuqvY4jMrsusQvVczZC/hUlhQykK/+yO
- 9a7PAhzux+aP7SXHHFwDXeukXKqel/pYQb0EMifCgssMdKBMzX5/D7eX9TdAhYpBinGrzgzysl0
- JWdyC//ER7ojsEI5XjfbVoHIOSiegbUYdxbOY/tM
-X-Google-Smtp-Source: AGHT+IFmsv2QL1u9+/cuts2GTN1gCBDtR7Y07HSGpWT/bBhu8QWwOmbLuYQM0DbGQ1eP35FYvoGyinygCe/Z5Xf7nEA=
-X-Received: by 2002:a05:690c:6f13:b0:786:8331:6a02 with SMTP id
- 00721157ae682-787d5476d40mr123709517b3.69.1762775518671; Mon, 10 Nov 2025
- 03:51:58 -0800 (PST)
+ bh=3NRuyD6RYh6i0NdR9upENUAOkmAbNLoLOmIB1QW8siQ=;
+ b=APFzWaoX2WEOk3lZE8qL5IWHlARgJqawC9H4V0L4DOXGKFTbx1FjAmd09RRZZbcL/+
+ a6xl4PJ2gBFUJSWiQ8+kXW61gItE1HZcA6N7FxuTE0GYaB69OuKV2YEvtCwuaHhi5EkO
+ C8x7nAiyM79N2ZsGBMS+11/G7P+TRwIgTGCoYkaQLj8Vbkx2aRLkY3GLtBYp457piiwl
+ 0YjVON06UDcyYv+m2Q8r8i6aJr0slm1MfQ/Ugw/vRRzYxyn8xDapHQr0YX5jOcZHHcqQ
+ EO3pRkbi7kxJJh1K5BbLZc6CFaQMINP06hCyLceyvxKpO8jbTveM/E6F5ttZHheI11Fm
+ 1pfA==
+X-Gm-Message-State: AOJu0Ywz/n+Xk8HIVa7MFls/+Fjn00ox9p4BAKnaGeS6sYJLQX9lDGjm
+ LyeSB4LJYbD49FEDgftjitYmhbb78DD7RSznWzD0hE7hQZkZXPmm9p2H28lY8sEktqZ84Yc/BAz
+ ipF+w9oyREw4ATNHrWbqckaIhsex31JhytTjSsrqh/qkCsSqSOFO/XQI=
+X-Gm-Gg: ASbGncsdA7UQSiGSH9KrZJXYuBT/zUzFCc2QfkKu0PriHDEGOx9vxHjbdm/wtv9ST2s
+ rgeQrlgdHwe6QEIkjlmLDxzLox+qKbTLmjRjZ2QqBIukFoJyCssZ2DmYE/3o1yPp3JOkFvT5VEY
+ VuIwyOLqYU01/1UCA7uVJnesS4gDUXd/wnCAnDmm9i9Jt4FF/HJtUzyRk96aCV51jbR0YsoXNYq
+ NoMkrp7ArqznxvxQnj6Fv5BrJbY3Z/Q3wPp1RfSBOJ1kSAe2XLDM5nAcOCeexgXD0RmPywlIjws
+ KBCF17SalseBD8IQRtX/nVTNuhadr4dSEbqs63Mb
+X-Google-Smtp-Source: AGHT+IG1n5dnH01o4xyDt5gEBKTerV2av32X+hEWGb7PqIULDht+SqMo1giNMBgwZIjXuRt0E9WNytr8OyXNfYxJTAM=
+X-Received: by 2002:a05:690e:d46:b0:640:dda6:e956 with SMTP id
+ 956f58d0204a3-640dda6ed5emr5417938d50.40.1762775623784; Mon, 10 Nov 2025
+ 03:53:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20251101064907.5037-1-hs@nabladev.com>
- <20251101064907.5037-5-hs@nabladev.com>
-In-Reply-To: <20251101064907.5037-5-hs@nabladev.com>
+References: <20251104205646.14454-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251104205646.14454-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 10 Nov 2025 13:51:22 +0200
-X-Gm-Features: AWmQ_bnL_HVaDSEDG9Pk6JpPLww0FyWI8AQymQ-ly6KwQ8O0X9V26goPBxREABs
-Message-ID: <CAC_iWj+GH3kFfHJTpE57M4q+L+jmxtACuQqFP-+WiAvhPLk76Q@mail.gmail.com>
-Subject: Re: [PATCH v1 4/5] tpm2: add sm3 256 hash support
-To: Heiko Schocher <hs@nabladev.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Date: Mon, 10 Nov 2025 13:53:07 +0200
+X-Gm-Features: AWmQ_blaVluiJnyrvl7GSGGqMmaoBLlHboBc2rREx0JUoEXjOs9cNiXwLmQc8tw
+Message-ID: <CAC_iWj+EqMYuXHCLZ_i4y9UzD=cVosi__AjTHdZKx87cVHhkUw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_selftest: use Sphinx style comments in
+ efi_console.c
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,47 +92,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Heiko,
-
-Thanks for doing this.
-This patch is fine. I do think we should extend this more though.
-
-Adding the missing SM3 algo is indeed needed. But when using a TPM,
-the specs that currently describe it require all the PCR banks to be
-extended. IOW we need to add some code to lib/tpm_tcg2.c as well.
-I haven't looked at all the details yet, but we at least need to add
-the new algo to tcg2_create_digest(). I am happy to help if you need
-more details.
-
-[...]
-
+On Tue, 4 Nov 2025 at 22:56, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
->  /* NV index attributes */
-> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> index 5b21c57ae42..0fea35e5ae0 100644
-> --- a/lib/tpm-v2.c
-> +++ b/lib/tpm-v2.c
-> @@ -686,10 +686,10 @@ int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs)
+> Convert function comments in efi_selftest_console.c to match
+> Sphinx style.
 >
->         pcrs->count = get_unaligned_be32(response);
->         /*
-> -        * We only support 4 algorithms for now so check against that
-> +        * We only support 5 algorithms for now so check against that
->          * instead of TPM2_NUM_PCR_BANKS
->          */
-> -       if (pcrs->count > 4 || pcrs->count < 1) {
-> +       if (pcrs->count > 5 || pcrs->count < 1) {
+> Correct function name in print_uuid() comment.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Since you are changing this we might as well make it future proof.
-Can you please change this and just use the ARRAY_SIZE() of the
-hash_algo_list[] instead?
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->                 printf("%s: too many pcrs: %u\n", __func__, pcrs->count);
->                 return -EMSGSIZE;
+> ---
+>  lib/efi_selftest/efi_selftest_console.c | 44 ++++++++++++-------------
+>  1 file changed, 22 insertions(+), 22 deletions(-)
+>
+> diff --git a/lib/efi_selftest/efi_selftest_console.c b/lib/efi_selftest/efi_selftest_console.c
+> index fd2b3d09abc..0f8e9d28ef4 100644
+> --- a/lib/efi_selftest/efi_selftest_console.c
+> +++ b/lib/efi_selftest/efi_selftest_console.c
+> @@ -12,12 +12,12 @@
+>  struct efi_simple_text_output_protocol *con_out;
+>  struct efi_simple_text_input_protocol *con_in;
+>
+> -/*
+> - * Print a MAC address to an u16 string
+> +/**
+> + * mac() - print a MAC address to an u16 string
+>   *
+> - * @pointer: mac address
+> - * @buf: pointer to buffer address
+> - * on return position of terminating zero word
+> + * @pointer:   mac address
+> + * @buf:       pointer to buffer address,
+> + *             on return position of terminating zero word
+>   */
+>  static void mac(void *pointer, u16 **buf)
+>  {
+> @@ -43,7 +43,7 @@ static void mac(void *pointer, u16 **buf)
+>         *buf = pos;
+>  }
+>
+> -/*
+> +/**
+>   * printx() - print hexadecimal number to an u16 string
+>   *
+>   * @p:         value to print
+> @@ -71,7 +71,7 @@ static void printx(u64 p, int prec, u16 **buf)
+>  }
+>
+>  /**
+> - * print_guid() - print GUID to an u16 string
+> + * print_uuid() - print GUID to an u16 string
+>   *
+>   * @p:         GUID to print
+>   * @buf:       pointer to buffer address,
+> @@ -92,12 +92,12 @@ static void print_uuid(u8 *p, u16 **buf)
 >         }
-> --
-> 2.20.1
+>  }
 >
-
-Regards
-/Ilias
+> -/*
+> - * Print an unsigned 32bit value as decimal number to an u16 string
+> +/**
+> + * uint2dec() - print an unsigned 32bit value as decimal number to an u16 string
+>   *
+>   * @value:     value to be printed
+>   * @prec:      minimum number of digits to display
+> - * @buf:       pointer to buffer address
+> + * @buf:       pointer to buffer address,
+>   *             on return position of terminating zero word
+>   */
+>  static void uint2dec(u32 value, int prec, u16 **buf)
+> @@ -132,13 +132,13 @@ static void uint2dec(u32 value, int prec, u16 **buf)
+>         *buf = pos;
+>  }
+>
+> -/*
+> - * Print a signed 32bit value as decimal number to an u16 string
+> +/**
+> + * int2dec() - print a signed 32bit value as decimal number to an u16 string
+>   *
+>   * @value:     value to be printed
+>   * @prec:      minimum number of digits to display
+> - * @buf:       pointer to buffer address
+> - * on return position of terminating zero word
+> + * @buf:       pointer to buffer address,
+> + *             on return position of terminating zero word
+>   */
+>  static void int2dec(s32 value, int prec, u16 **buf)
+>  {
+> @@ -155,12 +155,12 @@ static void int2dec(s32 value, int prec, u16 **buf)
+>         *buf = pos;
+>  }
+>
+> -/*
+> - * Print a colored formatted string to the EFI console
+> +/**
+> + * efi_st_printc() - print a colored message
+>   *
+> - * @color      color, see constants in efi_api.h, use -1 for no color
+> - * @fmt                format string
+> - * @...                optional arguments
+> + * @color:     color, see constants in efi_api.h, use -1 for no color
+> + * @fmt:       printf style format string
+> + * @...:       arguments to be printed
+>   */
+>  void efi_st_printc(int color, const char *fmt, ...)
+>  {
+> @@ -271,10 +271,10 @@ void efi_st_printc(int color, const char *fmt, ...)
+>                 con_out->set_attribute(con_out, EFI_LIGHTGRAY);
+>  }
+>
+> -/*
+> - * Reads an Unicode character from the input device.
+> +/**
+> + * efi_st_get_key() - read an Unicode character from the input device
+>   *
+> - * Return: Unicode character
+> + * Return:     Unicode character
+>   */
+>  u16 efi_st_get_key(void)
+>  {
+> --
+> 2.51.0
+>
