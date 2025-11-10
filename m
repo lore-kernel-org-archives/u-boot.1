@@ -4,94 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5526CCF9E3
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 16:48:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3DBECCF9E3
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 17:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BB8483A32;
-	Mon, 10 Nov 2025 17:48:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 097C2839D6;
+	Mon, 10 Nov 2025 18:37:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B4qn2pRL";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="og/Wwxul";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3C9183A41; Mon, 10 Nov 2025 17:47:58 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2060283A5E; Mon, 10 Nov 2025 18:37:53 +0100 (CET)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A672F839D6
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 17:47:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC6DD83957
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 18:37:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7c707e11e01so1320428a34.0
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 08:47:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762793275; x=1763398075; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nWesKivi+BvLf7A9GqPZB29jYSOYZwrQZUgORdgqHpo=;
- b=B4qn2pRLn9StdgbzJo9wDrP7eisKCVkRZ2oWOk6njaaEQiLv2KvBYGVTHL0i8G6NaX
- rHJPZhqaD1cnkDBehmRy2dx90sZZwH3rciJLegXZMLbBhLr/YEophhbT44H9QyYsTj0C
- mhtD6fOAf3+JQV2X1NmOpPKIrkbl0oy58CRBc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762793275; x=1763398075;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nWesKivi+BvLf7A9GqPZB29jYSOYZwrQZUgORdgqHpo=;
- b=VhevxsVUA/5DGV0TiYhWUGuPM/giGuu5IP6y1rKj80REeEbhZFg4VRDEIFzva/fxj5
- 1lehWattyir8byIyE5cghdclt9uUHq8LA3XkXegC+nNLWfud9eQyg8ZyRjCl7r9xq65Y
- iMdrLuY1/8P3hA7dyw+ELclXAQlOGRAcVqS6EqJ6UGjcxOhOe44lJ/3gv5s/bElYMVK9
- c+tQ7jGeotzcig6OPUECHhepSGVO4Y8VnMMGfCqDI3idHtJNulWKrOj5naqrCYvZL4op
- +hMgjRPhn37R63UjQLYDQBqqs3X++3DbNhyBhF8fClTySIkB4KfQkr5gkZljH4LO9jt3
- LaWA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX+VrBgDvsTHodP0jbJgRG7mnRpyuDpuBCC6e1TiEA5ZyGWjIf0suMuQ38BLJWYty6qmCwt5aI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzI7cc3DkCJzB7aFaVOK2ze1nWdPpnkrLuJb3RPcybvILTDXJeo
- nrfMZ9tqRdBsGcSm5mZR6sGBIYIbp/j6yDpo3cBTgXK0QMebsfwjqC7qaao1Hvb0LAs=
-X-Gm-Gg: ASbGncv3JM4iKMoAkLWIo25kg5zhv3Zi37X6B+y2X0XEEmMeYFdFlmIAqp9/vP6gxrp
- sPTbeRgCdbTOHxBFfFpyq2W/DvBu4p95aIdMIzPZ7/7QGoKy7QyBcSInBVCVx75J94bGiOyOQWe
- jNdbAg6gA7VHoDyY/VUHDPL48nTlS0ibCvStThOPxSaFoeP+3zdqQiBmslmx3q1IREHLbg954Gj
- 2KkbKlwlAVuYJXOPJmxs4QnaliBmZKQYkWDh59Su4Yq7epOd/z/dqdg9ehxhBr40TtG6BgO9TJP
- uR14CGey+ypC6bQ5qufmuwCv4oYeAgG8r1VsZyZX82IDVUCCwQXST5IFwRLraKQU/pqs8wsJZwh
- mBdO/rvaR4VS9Fd0OkEry90ywBB/e0ZHX9ARTJhT0KQcDt0EXF7Qcz5/sXApMX5tP4sya0YFh9+
- 5gp9Py0/sqEmnM6q1MZVOg7GD2vJPQrivvv8KvU6HlrMm/70pARQ==
-X-Google-Smtp-Source: AGHT+IFbKJ4o2yYbMVRJnMwzr21NzDM9cDfYdBzwyrKi5aqSmZSS+1KSm5ghLPFukCZ42XyhRFX/rw==
-X-Received: by 2002:a05:6830:2aa7:b0:745:4f2e:4508 with SMTP id
- 46e09a7af769-7c6fd827f5fmr4245042a34.36.1762793275374; 
- Mon, 10 Nov 2025 08:47:55 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f1132123sm5834099a34.29.2025.11.10.08.47.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Nov 2025 08:47:54 -0800 (PST)
-Date: Mon, 10 Nov 2025 10:47:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Sam Edwards <cfsworks@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot
- augmented DT if DEVICE_TREE_DEBUG=1
-Message-ID: <20251110164752.GL6688@bill-the-cat>
-References: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
- <417e1b1a-0346-4297-9a72-7befc5b94311@gmx.de>
- <537299e3-05a1-4ff4-b594-9c73ed41a0cc@mailbox.org>
- <20251107155650.GE6688@bill-the-cat>
- <4b14ce54-6ba0-4e35-abad-6787b2d994fb@mailbox.org>
- <58fe0639-d545-4573-8e6d-1990ff416027@mailbox.org>
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=n36EYAE/fhQPpBvyXoVz6wiLH+AwuUXaB3PEp1WSB7y3K1yCYLCN19HuBsejXDxAMTiZi1K70Ke1icrCZAlmM6mRTCIJpbgPa5hctb1r3ZvjTtyHLC620vC+K1Q9FFOkJu2rj6yRZuUv9Dd+KDImgsu+5S5bEHYCDVe9Ct1liLlJqyrUuS70SAY5O/9XTcjuTGS6cYp90tFRQRbPPTZl9rYGCZOxZ0qnYxga70H9rNuuLuOP5YzroZTO5fu8fPd3I+xDXEhVgZ7YD5cAwi6l1i9r9PZ6dr54JwVBvDjoyeCToWq2k5+MLlDNRQADWslQF7MqNc7klwCGIUa/mtdLwQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VNA3gbXC2F3eR/i/Txxg66gdl554Y1FqLnicf2igDIA=;
+ b=AVxocmhmsTsbZ2uUBnmezZcOfKjNytRbFFON1mbfVSbLVykFEsdVfHb2MlH8MpGtsZTsq+jxl4c443sPc4NsmiyBV3uhDUk7chx6ED9k13DcbQMFb3uOKo1IkGwoaD7hHpTYGhTbv4MMcziVTfoWqVBLp1T+TpUVJ6kzxZTnA8r4Y6Q5z/6JYBSFPYfmy2HICJEtYYYKHzle8K1wwBjNNAB3+pZALvvFdcEQ9/ZZA29hbU4JuBnbmfj5cH+1cDfUqjsJN80lOBImrgWFR/d1tStT3Q27uj+nu2LPwHLVZC0yYQ4zMOCdBhYY3tx+o6WDjvoi6l7FPHMdFvJXweDDIA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VNA3gbXC2F3eR/i/Txxg66gdl554Y1FqLnicf2igDIA=;
+ b=og/WwxulRfzTXCj9ElYA6WVa0XCMkdWr9JA68I8J727Lraex2SRfsqGyZ5J4p8uUBMf6v5sD6LNmeYyc2esHxyI/5V8qHMgXfsXFtos7mXELcJi0jgbZmLBlCMnoLf2jt6Ew8QHC6DnQBEDksVFO3kaYl5tQJig6Y/PfhIQ4iv4ZzmY9nnl1LHsS0IZa9/aQDbdCmy4Fw6XzxRUZ9vOpdDrJ1Uwlc/Yl97/gY9fBoL6GR3YJ2oQcfIaqBb9OSqmIjXzgsxi8F2ie6kjV3SxbNb4No5OnZia7ETQtxwKYG5O0OCyVwHWTLv08p36wTwY/7hSzv8BTGoUjC1pt1/Zzxg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by BY1PR03MB7802.namprd03.prod.outlook.com (2603:10b6:a03:5b2::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Mon, 10 Nov
+ 2025 17:37:46 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844%3]) with mapi id 15.20.9298.015; Mon, 10 Nov 2025
+ 17:37:46 +0000
+From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+To: u-boot@lists.denx.de
+Cc: peng.fan@nxp.com, jh80.chung@samsung.com, trini@konsulko.com,
+ marex@denx.de, tien.fong.chee@altera.com, tanmay.kathpalia@altera.com,
+ balsundar.ponnusamy@altera.com
+Subject: [PATCH 0/8] mmc: sdhci-cadence: Improvements and fixes for Cadence
+ SDHCI driver 
+Date: Mon, 10 Nov 2025 09:37:29 -0800
+Message-Id: <20251110173737.24545-1-tanmay.kathpalia@altera.com>
+X-Mailer: git-send-email 2.19.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: BY1P220CA0007.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:a03:59d::13) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Z1246teUDhjw0Jor"
-Content-Disposition: inline
-In-Reply-To: <58fe0639-d545-4573-8e6d-1990ff416027@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|BY1PR03MB7802:EE_
+X-MS-Office365-Filtering-Correlation-Id: 09173c4f-51bd-4928-bad5-08de207fdc29
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VWhkeVZPWkJkQkdKWnBHWWs0VTBPYjN6SHNJdW1lVVgvemIra1RkOVRoSWdS?=
+ =?utf-8?B?aUpzZ2Y2RVJlQldoK25iUmdBTE85UDJybjZFZnFaTjdJeWlHdktNaExvV3Fi?=
+ =?utf-8?B?cjd4VmpmL2Fmekl6M0sxYncrLzNISTNETGJOWjd4dXpud1VLUnBhb1pJOVNj?=
+ =?utf-8?B?VmwveW1xZGIvZWpOQWdiZHhNRDdDdFQ3QkdDbjJxRE1IT0dlUDlYT2V6TExP?=
+ =?utf-8?B?TFNUM3RXUC9qaHF2eXlrZmlPb1pKZFpEZVlrblZ2ZVFVTGhlOHJBWjhta0s0?=
+ =?utf-8?B?TSttcktMV2g1aUhiMU8wODFrMnF5VkNuQjJmVVJaTjV2OXZkZkR3M2g3VGF5?=
+ =?utf-8?B?NUIrVEFsUVl6TmxsSkF3MkVJVHIwZVQ5dTd0K2gwa3UvaXdwdEExcmFYemxu?=
+ =?utf-8?B?K0F0YjcvQ3F2RFlsZnZpUDdpQjZ1NDkvQ1lmWkdKWTM4RGdLQk5nMG4zU000?=
+ =?utf-8?B?QkFpemt4eUVqT2RnOGZ5OEhsZXl5Z3I2TE90cGM3bE1vcWtmSlkzYVljRU5O?=
+ =?utf-8?B?My9zL1lTdzF6VzhHSU5DU0QwMnlDVnlocVpONFA4cFQ2NnNxekRYb3VPTUsv?=
+ =?utf-8?B?bE1VQk00ZlkrT2tuNTVEZWhVWmZURW9NdmpKcVpqWm1PRVdDWlg4cGRzUjVY?=
+ =?utf-8?B?VGFlUWZKVnRkM25uajN6bVRFS2cxenRKZ1FuaU9rRW9NTjhwcERaOUJlY2d2?=
+ =?utf-8?B?dmhnOTNVZ1hScldpTXNadm50TVFneTRGZ203UGdjSnM2S2NCMnE5UDZWMnRn?=
+ =?utf-8?B?ZlMrMDhOQVNzN29CQ3cyd0JPcjdTRytWOHo0VlpMc25jZkpnMUNOWXozRVow?=
+ =?utf-8?B?ZUdZbVZYb1luQ1NIdmdGdUJCdXZKVjR6NW1oWjVDT1AvVEFEdHJGcXdsMnJ0?=
+ =?utf-8?B?MTJnNVJJdnlnODY3ZlBPQ1p6aXZ3SE9zeHpvcXZOMWF0Q3F0Z3kyZm1UV0pi?=
+ =?utf-8?B?OThUazI5dm5XK3hwYzFUZTA5Njl2SlVhbEtiYkMwRVNjMkxEQ09IQUtVcDQy?=
+ =?utf-8?B?K0ptZkE4MDlUL0N0bWR5dmhmUDc0Wjd1MWFPMUs1MlAraks0bzZqTWZRaEN0?=
+ =?utf-8?B?UnhGUnVSbXpBNzZ5WE9aMDFJTi94Lzd0VGsrOE51OGZ6bmJHMnZ0Nnl4RzVX?=
+ =?utf-8?B?ZUtlQzA1SG02OExmQzU5ckQwMk1mY1BNYUdQY1BBRThlcTBLeFJSZEhJTW9i?=
+ =?utf-8?B?dXVEbXcxWGsrWnZkSk82cTUzZnZmOFp2OCtpYkZRcEx1dFhMMTVXNHFOcFhu?=
+ =?utf-8?B?d2FSNWZPd0JzdzBqaUlKQWFieURjYTJ1RHRILzZxU1Rya3VmWERocXNNWFBP?=
+ =?utf-8?B?TE9zU3lGeTRGWWIxYmN3VGwrajFsRURISGc5cE13bDZGVVRTSFNKZGlGYThn?=
+ =?utf-8?B?dll2UThWdVdXaVZJUHBIaUZXRTVOMFBXMkIzb2xTK3ZibTRFVjNaZ3pGSGRO?=
+ =?utf-8?B?UVVPQXlEeXN2UDdDVXc1S1RaUm1sbVZJczdveTJUdVNYMTlQQU9yQlNBa1V2?=
+ =?utf-8?B?bmRlQVlzT2dRdGJmK3lxTEZMM2V3NSswWk1aWmRNMm9ENm5WN1pOUTI5WmFh?=
+ =?utf-8?B?VDEvMmVydHBDK1F4U3BxdUxvaUJkTzZsT0N6RGNVOWc5RjF3cVh1dmJycHFT?=
+ =?utf-8?B?L3hEVHAxV3ZJNkJ1bU5kYTI5dkV2Mmp1THRwWTFzaDVLaTJ2dlkvallBQVhp?=
+ =?utf-8?B?dU1tZTZhOTJTYTBCcWdqRjZhQ29yWVdiUWVWT2E2a1pVV1AzUS83anhvVzBD?=
+ =?utf-8?B?cno1KzBmcjZQY2lGNHVIK2JLaUJMdHhLU0R5RzBaNGZYZmx5dXdRem9iVDB6?=
+ =?utf-8?B?VmNreUhONXRSRzlDMThCaS82UnkyVWkxM0hzZ3Q4VWtSOHZSSjB0R213N3gx?=
+ =?utf-8?B?c0dVV0xpWUF3eHZBOHA0azVnMlQ4TVp3QWxmdExObUpacURranZ4TmVCRzRS?=
+ =?utf-8?Q?I9vjdP190HRNG1dbhR91ADWxbnwVbTG1?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Q2llSHcvdUNkUGl3UWF5dzYzRXhPRkd1VENaYUoybm4zd0QwcCtPbW1tZzVS?=
+ =?utf-8?B?cGwvaldMaWZ3WmQ3OUR4TFI5cjJNeWhldlhhbzQzNmRrM3VCbWM3UGp4RFJu?=
+ =?utf-8?B?V2YzcnVUQVpWTVM5cVNtVGQ3d0lZd21oZUk3RFQxZ2VCYnAycVZPeEF2ZWlp?=
+ =?utf-8?B?d3QzQWNPQ09jYkhxeUpiSDByTVdVcmZDOTNXMThndHgrY0JPM1N1dmdSeENR?=
+ =?utf-8?B?VGIwc2VydjYwRmlwVmtQNWF4NDV1K09PMkI5VU54RWhLVjlBUEp4b2oyL0N1?=
+ =?utf-8?B?akVkS2FrMUUrd2NmdHZFYUdiN2NHMndGd0MvUmkyY0JtMU1BL0Nxd1J0SWhp?=
+ =?utf-8?B?RWdMZUVldVRCYlI1RU5XczZ4YjJ4b3ZRTnFPY3JodnplL0ljREdqMGhVbzhE?=
+ =?utf-8?B?aFREMzhUeGsxT3luUnN6RE9VK2FuMHMrZXN4Qy9KUFJmKys4R0s3S3NwdnRj?=
+ =?utf-8?B?dlNMVEU1WTlyVWVZcXRzb0Nqejgyc1ZsVUVQYVNFRHJEUVNqbWFRWDNZeS9O?=
+ =?utf-8?B?TitFUFZnM2FaODlyTjlWY0F4R3FTQlZVbWQ5a0gvTi9rMUNXSlZzc2xNM2xz?=
+ =?utf-8?B?NytRQ1dnMHVMbTZ1Zm1wckJuNDlMeDVwdVpaN0VSTVdzQlhiUzBPQ3phQmNJ?=
+ =?utf-8?B?cndaNlEveUVtZEpicW9rRmZScEZrWDBhVXJCV1V3bXRmaUJvb2sxeFd1RWNq?=
+ =?utf-8?B?dFI2ZUhscGREbmphL0dta1pRbGlkNjdOZjZmK29YRlIwcjVyWmJDNFlNMmtC?=
+ =?utf-8?B?bkRXN0ZlRU40Z3NjejdqZlpwb3JxMkk1UXlOb1hrcUljTTA2VFJJT2ZQZEtC?=
+ =?utf-8?B?bkZxU1M2WU5EV2xRdzAxWEIyR0xQRHhjb1R2T2JQNjYzai9Rd0JXNnI3aDhP?=
+ =?utf-8?B?Ui9ISEdpSjdNUmRrY1MzL0NuN2NzOVNtR3FPc2NPMmFqQVlJUG9qQWRZY0hZ?=
+ =?utf-8?B?SStKR3NyL05OMmJuc3lSYjNuNHZzUHZ0dUZuZ2l4N01LWXZrTVFzZkZINjQ2?=
+ =?utf-8?B?aFQrZEN6anRxaUYrMHp3YmczTHQxSVduNHpHRkQvZHBrODc1aFhPbXlSYTdU?=
+ =?utf-8?B?T1loRHNDeHhOYXcvYVEwRmRlckVvb0tQL3E4eFhBTGhtNkxhdzNWOTR2Z082?=
+ =?utf-8?B?SGtrOUViY3BTN21FZjd6RmpGMnFDaU9lbFB5T1NXMTZnMWpmdGRBWnhTV0s4?=
+ =?utf-8?B?eEo1MkluN25Ick1FMG1Dbm11ZXF2aTZIVCsvdU44dmFpNzlYOGMwYkhLRzBl?=
+ =?utf-8?B?MC92Y3QremtBMTNUMDdvd2FPUTJnUDVHcGR6ajRqSnMxVlRINUFabmRXSnpX?=
+ =?utf-8?B?Z3hvWGpjNlpqN0hxZnEvNFdPNEhIaTB4MEFyZFhDaWk3eC9uSkJiMlI3b0s4?=
+ =?utf-8?B?ZWxKZzNhRW1YeDZBV1hEVU1udGUrdFFkajVOLzJJOXh5ekxWQkFxdGtnNm1K?=
+ =?utf-8?B?QU93UTdDM3lKZ2xoRURwT2pFUTByblNLQkthOWw0MXgxN2RZMTVHTEJwdFU0?=
+ =?utf-8?B?TW5NcUdKZ1VsbWE2dWJHaHpxeXhOcStXYlp4QUtlYVpGYVh5U1BhL0xJYmRK?=
+ =?utf-8?B?U2JkT1U5bXgxQ1pZb3lQV2dXOW9BbHJZd3BXQlRoRWc4azZkWFEveUdtSm8v?=
+ =?utf-8?B?YVRlV3Z1emlhTThtUjh3cGNPanRId2s1MmV2blJjZ2k0SThqa05jbDA3UnNX?=
+ =?utf-8?B?QXBsOEhvSGsycDltMDJNTEJPVHA1OERrSGFXKzV0QXRicDNJQ2MwSWo3RGVL?=
+ =?utf-8?B?NENVNGVJWHRqdGdHRVRaTUR5eFgwR1JHeEdrb1QyWlR3bTZzWEtoVHlvTkZm?=
+ =?utf-8?B?RUVZSG94aUZEckx5TkpVRHdKUVIzRWZseEU0dGpGV0ZjY2Q1WUdXOVhRb1dn?=
+ =?utf-8?B?V2RHUEZSNkFKVkNoemhBZnMxMUNzc1RkSXVqeVJON3pUVHNRcXVqcXN4UllC?=
+ =?utf-8?B?SEZ4eEg5WTQrbHZTR0hNQW9NUXFBckxHaU5ZTlJiL0VnMHZSM1ZBUEFFcGdp?=
+ =?utf-8?B?OTltOThnMlNSSGoxQUNXMEpob1ZCMUJRaG5oZlJWRTVDTHNQRVQ4Ri93RG9Y?=
+ =?utf-8?B?eml6ckRhemF3eXdLc29ia2d5RDBhOUptd2ttSGIrZXh4elJmcWlxQ2VZSFNC?=
+ =?utf-8?B?TjRubExGQjAwSjFJMk5ucFAxZFhtKy9HYitKdzlwYXdqb2RkWDlOMnZVQ2ZT?=
+ =?utf-8?B?Q3c9PQ==?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 09173c4f-51bd-4928-bad5-08de207fdc29
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2025 17:37:46.3687 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Wf9fKWLwjfZcJxyiyleocFrBqCC5MAIiybAcLdP5tXtMJLbEqKAAzeKQYyjzH34RZhg/JfHb5RMqdUSSAn5y4VnuOvKfhTEggkMN87+k9kQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR03MB7802
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,84 +176,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch series introduces improvements and fixes to the Cadence SDHCI
+driver, correct timing mode handling, device tree integration, SD/eMMC
+tuning, and compliance with SDHCI specification updates.
 
---Z1246teUDhjw0Jor
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Summary of changes:
 
-On Mon, Nov 10, 2025 at 12:44:31AM +0100, Marek Vasut wrote:
-> On 11/7/25 5:44 PM, Marek Vasut wrote:
-> > On 11/7/25 4:56 PM, Tom Rini wrote:
-> > > On Fri, Nov 07, 2025 at 03:06:47PM +0100, Marek Vasut wrote:
-> > > > On 11/7/25 10:12 AM, Heinrich Schuchardt wrote:
-> > > > > On 11/6/25 22:08, Marek Vasut wrote:
-> > > > > > In case DEVICE_TREE_DEBUG is set, produce a diff between
-> > > > > > the base DT and
-> > > > > > DT with U-Boot extras, to show how much does the U-Boot DT diff=
-er from
-> > > > > > the base DT. This is particularly useful together with OF_UPSTR=
-EAM, to
-> > > > > > minimize the diff between upstream DTs and U-Boot DTs.
-> > > > > >=20
-> > > > > > Example usage:
-> > > > > > $ make r8a779g3_sparrowhawk_defconfig && make DEVICE_TREE_DEBUG=
-=3D1
-> > > > > > $ cat ./dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dt=
-b.diff
-> > > > > >=20
-> > > > > > This still has a downside. Even 'dtc -I dts -O dts ...' applied=
- on
-> > > > > > base DT and U-Boot augmented DT can produce different phandle I=
-Ds
-> > > > > > for the same node in those two DTs, which results in a lot of n=
-oise
-> > > > > > in the resulting diff. The only way I can think of is to patch =
-DTC
-> > > > > > to emit full paths in those phandles instead, something like a
-> > > > > > phandle =3D <&{/full/path/to/remote/end} ...>;
-> > > >=20
-> > > > What bothers me is ^ this part.
-> > > >=20
-> > > > Hello Heinrich,
-> > > >=20
-> > > > > Without documentation developers will not know about the new feat=
-ure.
-> > > > > Could you, please, add a doc/build/ change in the next iteration.
-> > > > Sure, although I am not convinced it should go in in its current fo=
-rm.
-> > > > Please see my first line of comment.
-> > >=20
-> > > Maybe we put it in the u-boot-extras repo for now as a standalone
-> > > script, so people can be asked to run it and look at the output?
-> > I'd say no, because the output is full of noise unless the phandle non-
-> > resolution gets somehow improved.
->=20
-> If I run this with "DTC=3D/usr/bin/dtc make ..." , then the phandles are
-> correctly retained. This uses system DTC 1.7.2 instead of in-tree DTC 1.4=
-=2E6+
-> .
->=20
-> Is there still any reason for us to carry our own copy of DTC ?
+- Add reset control support
+  Ensures proper controller reset during probe for reliable initialization.
 
-I think the answers last time came down to needing to first re-sync the
-dtc flags with upstream kernel again (to ignore new things that won't be
-fixed), then possibly fixing at least any big scary warnings that do
-exist, and then we can just document and use host dtc. Dealing with
-pylibfdt may have been its own issue as well.
+- Respect max-frequency from device tree
+  Uses the max-frequency property for configuration instead of default
+  hardware values.
 
---=20
-Tom
+- Correct timing mode and PHY/control configuration
+  Refactors timing mode selection for SD and eMMC cards, implements new
+  mode mapping, and updates PHY/control settings for UHS and legacy modes.
 
---Z1246teUDhjw0Jor
-Content-Type: application/pgp-signature; name="signature.asc"
+- Add SDHCI_SPEC_400, _410, _420 defines
+  Introduces new specification macros for SDHCI v4.0+ compatibility.
 
------BEGIN PGP SIGNATURE-----
+- Use hardware version field for controller detection
+  Switches from compatible string checks to hardware version detection for
+  controller capabilities.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRIXMAAKCRAr4qD1Cr/k
-CvgyAP9yxqlLuWVKjY0O3lnu+S0yymqUugFClXHiPDBVplwerAEAiuWsalfIxE7l
-2wO5nont+7VEC/APAPRKFxaRK+ewgwg=
-=ZIlz
------END PGP SIGNATURE-----
+- Enable software tuning for SD and eMMC
+  Extends tuning logic to support both SD and eMMC devices, improving
+  reliability.
 
---Z1246teUDhjw0Jor--
+- Fix device tree property naming conventions
+  Updates DT property names for compliance and corrects minor typos.
+
+- Add DLL master control and improve tuning reliability
+  Adds support for PHY DLL master control and enhances tuning robustness.
+
+Please review the series and provide your feedback.
+
+Regards,
+Tanmay Kathpalia
+tanmay.kathpalia@altera.com
+
+Tanmay Kathpalia (8):
+  mmc: sdhci-cadence: Add reset control support
+  mmc: sdhci-cadence: Use max-frequency property from device tree
+  mmc: sdhci-cadence: Set controller and PHY speed modes for SD and eMMC
+    cards
+  mmc: sdhci: Add SDHCI_SPEC_400, _410, and _420 version defines
+  mmc: sdhci-cadence: Use hardware version field for Cadence SDHCI
+    controller
+  mmc: sdhci-cadence: Enable software tuning for both SD and eMMC
+    interfaces
+  mmc: sdhci-cadence6: socfpga: Fix DT property naming convention
+  mmc: sdhci-cadence6: Add DLL master control and improve tuning
+    reliability
+
+ drivers/mmc/sdhci-cadence.c  | 100 ++++++++++++++++++++++++-----------
+ drivers/mmc/sdhci-cadence6.c |  82 +++++++++++++++++++++-------
+ include/sdhci.h              |   3 ++
+ 3 files changed, 137 insertions(+), 48 deletions(-)
+
+-- 
+2.19.0
+
