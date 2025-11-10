@@ -4,119 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D85E8CCF9E3
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 20:15:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D1C6CCF9E3
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 20:46:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BF9383F5D;
-	Mon, 10 Nov 2025 21:13:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id CC88C83ABF;
+	Mon, 10 Nov 2025 21:46:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="zF2xlMmU";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="HjmIUfmV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7885183A98; Mon, 10 Nov 2025 21:11:57 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E3A4583ACA; Mon, 10 Nov 2025 21:46:43 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 910B483AA1
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 21:11:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2B2A83AB8
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 21:46:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b3e7cc84b82so649660766b.0
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 12:11:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1762805515; x=1763410315;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=TPlhNJYJ2bp34zf3iWtlyd49cNmFUmc7Y7jbQrgWnC0=;
- b=zF2xlMmUR7WogwhAc9f1wHz/GssyKtEd/iC+/7+Pkhwpim8/y9fHd97XpsA4RgIR77
- C8e80KlxeAjXdx99Fjl4EIyq7Okuo7I7pn3WdUSf9O9ictWjPpwWYgg9xGkqZfRhjnZk
- 5UCV8acRkRg1I2NnCwA8JcN2/C4E8EAxRYZw0kjSitpqcfLVZ6nKxBlwCjp345NeGY1b
- 3GSoXRhrwigMgib3SIq6E7WIWfT0vBUri2jzZ3lVgm2hSstuaHuX6/2Vk9KJKjb/mwMK
- Ys3mKB72HUF0fZC6HCV+K9p0pOeihXuzH/kvKizYfBbuJKp8QiPJhDrynTDWDzDSpOUz
- 4VWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762805515; x=1763410315;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=TPlhNJYJ2bp34zf3iWtlyd49cNmFUmc7Y7jbQrgWnC0=;
- b=xGuyfDDyEZwKlo1/unWFbBbBlUxEmIksSYkvmtSznku/jZMHKujNUTu2PonxG2pKh0
- LBYcCSwYhB2LPUZLYpDk8Fcm2vtnzdQGxt/K05NDoHRyBawd/103Jbh/gHDT4ZrIutGT
- bYjWdasAB2eZLJ9U6rz8i/GObck+U0lTGRgddN+KesU83pehW5OJT6hBSTKjt7lPcj+L
- U9dbjMkPVJqY0w6HQoBZgBM0NnoG7wIJlY1nZD4KG3FdnRcfHSPqSP26FHZEvz2Dre/K
- rPC2mlqtyD1OGbJSCQaQ0IbVfjZjCzZb+nARzc6WQ0eSAk1RxxP5BJtJjkkQ4iRutHp2
- CTqw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVFbOoFVy9gdnhzrWf+liS3nDDbIzpKk+v89qgim3lUq1q2z/6aAMgytteKjM/j7xtnuHSFwJk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8Ze2GQyu3ErD0GWWpkmyy/6Onm8MynVfH13bVi/bzK+m/+KkE
- 3LPZ+9drRpcvzvTJpuT+HAPO8B96CdYLGbtkvt9wgGetWmq49GtlcPjhCSJ07CGYGg8=
-X-Gm-Gg: ASbGncuKHSwpq/RgKgCYSY4JtZS+by5dx1HWoYa17CvDFi+uYW1kGGc4C7Ui01JUaQ+
- c3omCBJhuDf0/xFuuCxAxVKLFLAw74gSGKP5KX5WN2j5c9wHLBz7iGjgxeyB3z178SLSMvNtFXU
- 5tAUW3MHCnWR1nboRQuSupIqHiiP+MrbGxyBBwSsL/7FhM2hZtBn35W1wHAQi3H/6LfGCcVhNdA
- uHLQxVtCKOQdit1Pc+UmYd94/R0EHTBk1ndBdcBSf9/czdbWpfFX4HxZHxWS+i0F9VSrWSgBRMP
- uz/Y646YnJwKMmz1SnBmEozhbXvsZQY1NJniyrWFWciZDHKIttVPo0Adbwv3WI8Wd/kteIJbJfi
- pPr3u5JD8gsCNzYsWCEyhAwXVisDdb22k5YQO1rqgutpnX8Vl1vbQhI9epYFkA8AYc18JZsQ=
-X-Google-Smtp-Source: AGHT+IEZ43tSexj4VvJ/88fu/FXPQ7dDd+sxqJvPPb8vD3/AcV6c8sD2XiXHWtj2p+rTgih9NX10QA==
-X-Received: by 2002:a17:906:ef04:b0:b70:ac7a:2a8b with SMTP id
- a640c23a62f3a-b72e040f8b2mr936558966b.19.1762805514972; 
- Mon, 10 Nov 2025 12:11:54 -0800 (PST)
-Received: from localhost ([2001:4090:a247:830a:fe22:a8:f29a:a5c3])
- by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-b72bfa0f37csm1163752266b.64.2025.11.10.12.11.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Nov 2025 12:11:54 -0800 (PST)
-From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Mon, 10 Nov 2025 21:10:37 +0100
-Subject: [PATCH v5 13/13] configs: am62p_evm_r5_defconfig: Enable IODDR
- resume support
+ spf=pass smtp.mailfrom=C.Stoidner@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=zT10L8oF56+RhBodXBufSVQs9B8o7vXHTgRVqYkii6jKOCZ/fASeA/cY600He6hwSoQdDJEtfpY1ItM06fD0zCNkSqrN4xsswLOI/Vtk3pjjLUuTTV8s+Oy2nzeDxqlzeIHgLlf0AWEqQLmQyTj0UHl2ip/YEMWz51JNoZ+JgE/3UCGvMMdHdaRs+uPCyuT7G2fsx1hscND/jK5HcIdIHJBbnzlSiwHo8fTkH5j76Q/o9T5P15CwuhTKSvagy6vPfylcnVw7PFZ1RlXJZYSbQTu7iffux2vdN0W+gVT15ZKFO5bRB+dDvRYHdj0a0fOEyLdwTnR/ym6/qDvUiaVE5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=c/WhfxqsakB6QsErCeTtR+sS6Px59jmxYzZLHObXMIQ=;
+ b=B/3CHFmtMO3YN7m+LAqL20dOMyesr21h6l32v2lFGcGE+MLQI/r4+O0TzvreETT3Fn3zdePY2v6HzBW7yfGAaqOpy8RIeg3qMTJaXl4Y53LMvK4Tbh1WxWlSLxr6KHNlUBroFxCM53lqAGbetvSbZM2UGNDP+tVDuI2RnDFCG4hSWtEB6dx/W3i7HEnegxwvfXyMJwCrK9NukToRU7vJMrhp5qRMYASrDEvTnEGGnKlUytgXO1C3ZDkMzOrr+7c8FP450xuCJmYB8Qlb20c6L56VTEiLeSMw3+N/17ldhv/O12M/5G4HR7PtV1SmFa/7ibM7imOc4ZsIZKZ6iWr5sw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=c/WhfxqsakB6QsErCeTtR+sS6Px59jmxYzZLHObXMIQ=;
+ b=HjmIUfmVJdXhQnqSUpFUjUb1X754/RINL0et+lfaIpCaaKeR6r7+m0+qa97EBPA11I0q98RKS4uBk+ddJDd2VMjb8yrTw5jqMtr/KVf4ue4oEi/MDNxk6v1dQOZAj4PE/Br7G8lfsdsyNtZQVcDr1KcWhIPkmvmF4KoJxEUSDIFSaVzmhy3KYYsgzPDvn052opevfWWOEr1UViDbaNbnvskwWbR+d6te7suf+J/IvgxOtF0Nq1i71YxDmvV2WQOnhCYpQp8RRIFWZmJRCyW5dv2KU/oc3yPT+c0ZzI7lt44lId6Gwf3uR4MBuBjuJRhTHs7lD9GDLndZnGnitsaTdg==
+Received: from DB9P195MB1212.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:294::16)
+ by BESP195MB2928.EURP195.PROD.OUTLOOK.COM (2603:10a6:b10:e8::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Mon, 10 Nov
+ 2025 20:46:40 +0000
+Received: from DB9P195MB1212.EURP195.PROD.OUTLOOK.COM
+ ([fe80::2d26:fa56:5972:5247]) by DB9P195MB1212.EURP195.PROD.OUTLOOK.COM
+ ([fe80::2d26:fa56:5972:5247%4]) with mapi id 15.20.9298.015; Mon, 10 Nov 2025
+ 20:46:39 +0000
+From: Christoph Stoidner <C.Stoidner@phytec.de>
+To: Peng Fan <peng.fan@nxp.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Jaehoon Chung <jh80.chung@samsung.com>
+Subject: AW: [PATCH] mmc: Fix missing 1 ms delay after mmc power up
+Thread-Topic: [PATCH] mmc: Fix missing 1 ms delay after mmc power up
+Thread-Index: AQHcSncZNZsJS+1bXEyYkUZGyGb30bTiNqIAgAo2ozE=
+Date: Mon, 10 Nov 2025 20:46:39 +0000
+Message-ID: <DB9P195MB1212DC55E27674A4194719C497CEA@DB9P195MB1212.EURP195.PROD.OUTLOOK.COM>
+References: <20251031145951.535376-1-c.stoidner@phytec.de>
+ <PAXPR04MB84594BDB0690A1C0285F90A588C4A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB84594BDB0690A1C0285F90A588C4A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9P195MB1212:EE_|BESP195MB2928:EE_
+x-ms-office365-filtering-correlation-id: bade8981-5572-4e2b-9a30-08de209a3fb3
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700021;
+x-microsoft-antispam-message-info: =?Windows-1252?Q?+9BT1a2SBMdNTBWOL2xHxHcd/qn6eguZiM1jHPM9SzV/OI35Go88UEHp?=
+ =?Windows-1252?Q?Xj6kSFnYPDUTDIYKE9CrkFLi7j4ZcA4gYL3ZvXCBhHR8p66djf0n7lrB?=
+ =?Windows-1252?Q?smuNXVRf6Zl31jSX5tM4qPIsFY4XRevhApcmJoRG6pyIeTW/+rgwzzWt?=
+ =?Windows-1252?Q?/QXHRp8PK7Aueg4U3WVmjwWOuoniyJFww9mjuJbGVbY2ZGnYkuwy+Z/b?=
+ =?Windows-1252?Q?PaRWHmCM+ZhL5cgPzc88vC9DtigYCcUnt0l6JGWLjnwKmNTdwiPJQ/G8?=
+ =?Windows-1252?Q?pqvh39L7ImpPw49rrwLS1WXrO72vz84CLjQx7tR8+aK1mI2qlHSkByrK?=
+ =?Windows-1252?Q?e5iJI/Cv3VRdUK/sAYWeL1d4JeSuumkhQkhdZTVavvKXqpSNF2Fxnl4a?=
+ =?Windows-1252?Q?hLl+OxWdbCzqeWGbQtgSP5ZZtV6FbitRoA5sb0ymXAuiW6DeCjGZ+iG/?=
+ =?Windows-1252?Q?f8/tmx3fOEdazQOrQj/ZjGnOxgUzy5N3KzbFMQmN5ZNves6V7LhrQiHE?=
+ =?Windows-1252?Q?FL5gQC7bvEfug2ife/RTgwpIY6lCLJ2fMZRc50q4AWfh/SC7o7AfKd8a?=
+ =?Windows-1252?Q?9bwKLK1GViQOmIaidI/y5BgNZd8ZJITGYY3desRfnnGeF0EdeicWANPA?=
+ =?Windows-1252?Q?PrPHKjX6L99QqnpJsGpDNUwSca+zvgqXnWz6+eDgQvL0VAYuLrHt92xT?=
+ =?Windows-1252?Q?pyxA7d1D6INJW0XPUjMD8qkRIdAn/Mr9Ydvs3hkLIdcvJ6ORXvZyUfld?=
+ =?Windows-1252?Q?JoFg6mL/i/EGMtBJ9bqLJ8Is/CoO++dzBVxrPi0DYtpFt2yuahg43ftu?=
+ =?Windows-1252?Q?pJ1GaN5EIux+cln+YIT/edE/svdLDaYRxlIip2um1ABJ59edgfKHAhwD?=
+ =?Windows-1252?Q?LqCX1x7krELQd77l/eaYkh6KjteNQtcd+oV0d/XZ/9AmgVP0k/6ZyrRH?=
+ =?Windows-1252?Q?9IYml2ozf56ohZh766o2B2zQ3DVj6kNGSrvHhj6Asbnnt9orMIsPhow5?=
+ =?Windows-1252?Q?fxBxkH2VrdnYXQeMPEHsfxIxGYxOlXiZozRLAhCy4encDzOeYj7aZ+1L?=
+ =?Windows-1252?Q?C7cvApgZkQeOQDYfJXCqSMQ/9KxUrjukXUKEYwPXJz2J6TTbm6Ubw+q7?=
+ =?Windows-1252?Q?+FFH/3h3JglLTjYuD8TOGL2ENnDCxyZ7OkqE3uqA33jpJNoCvNxQee8+?=
+ =?Windows-1252?Q?PcNwj43JS2dRVjsi5YtB6P53t3mPy4easug038qkqja9sEE8WDyqxzj6?=
+ =?Windows-1252?Q?kF2erxGfsT4f7E0fwprSsL5XDHc3VdqNKhkPCwGLbUkH8ra9bjkJ4gmz?=
+ =?Windows-1252?Q?IbCXOfVfjIrUUbUmuU2a2+NvaX3g5i7FleugCNyiEGrjA/M0szAg8BBd?=
+ =?Windows-1252?Q?eM8loxmIQccGBth+me08pfGotwfNOefUL53NlDQc3E4UulDZrcv42Xjk?=
+ =?Windows-1252?Q?Yh1YnoiH5qBJ4Y3+SYjzQWLArrtzuZ/7CNjCFiG8Wya1LTgG+MNyFTUR?=
+ =?Windows-1252?Q?1VJrzceUCRu6/bMqTgg5ZuuYuAoHWxW2FTIDo89eiaSeSP3vlW9o3RDG?=
+ =?Windows-1252?Q?RxhOKe8LVD+dKJguc9S4Mo1BkTk7xgw/48lB1zl0g9cDyDRTafV5BYvK?=
+ =?Windows-1252?Q?Y0FW22fzjAVXoCNUfOogJf0F?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9P195MB1212.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(38070700021); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?Zs/zKUaByt8Aqhg55ugJt6d5Fu+gj0h/9GkLL+sK5jLtGDCm+x3Tzige?=
+ =?Windows-1252?Q?j4/Y+k3IKwOTxgLYNOr3NMrwdcxtglMcyDVejC3bedYp9Dzi+AzixqPw?=
+ =?Windows-1252?Q?gg1N96+I7aMm7VEoLkszJPby5EyqfznJpXp1Uf0M1vXOscIotELLSPjP?=
+ =?Windows-1252?Q?VL1jIamzukqN3to09E+NOXKDYGddQ6HRrh2uzWPgoNr+rn2P3ZTviZlI?=
+ =?Windows-1252?Q?C6y6zqUdsysOgg5id81dNHMqNLO7+5+5IdSviyy+EBpxCcpoX/eLD8bJ?=
+ =?Windows-1252?Q?22+RvtyfvN+sojy2ctBvzXHM98vEiAD3QO8zCeOeHTJIMpC8keQikAT5?=
+ =?Windows-1252?Q?SZUF54s750FLfrtuU3Anv/Vp31cvM7CD79ZatULkYLveN6PttGL+P6bM?=
+ =?Windows-1252?Q?6/xIkFqeDPZezv967INS3elvw3wNh2Gkt2sIgNvoVx6MIr+bUUlc0M6j?=
+ =?Windows-1252?Q?7ALrn1NfiQCNNG6z9amc8Sy0+pRgS0royarbQDvPe5f5yvklnP2y9x9k?=
+ =?Windows-1252?Q?F1uNUkKrIxW6+BhmeLi+nu2O/8u8YJNhN+9A7XdpM0iWktQGO0/rMejj?=
+ =?Windows-1252?Q?Ke1VXl76lPxBdqKPz7HJoEbgtFX8voUQLzrkbc3DAAmP7gooyeqWvD9V?=
+ =?Windows-1252?Q?9T25vRF5HGle0zUCDjEtcfg6t+A9DG8ANlZy37bf3WemPNtrZkFuV7HY?=
+ =?Windows-1252?Q?ymhqUfaY0o/AhEFyRnncxm4uILKkoSH0qBvBKzv61tPN8zp8vYpeHH9Z?=
+ =?Windows-1252?Q?xdBBht4taRToS0LS/cK/XLomcMhTz/0gniymobbFxN74Uhd62/Haq7D0?=
+ =?Windows-1252?Q?cugnEXT+pAw4Rv8oBNFVK0ke/dRluKdLRjPw6oQkwpaPrdpMI6D4ETmv?=
+ =?Windows-1252?Q?hsw+8Sdyclik05+u8uiU553fVObmfTxW2BX4T5CBipYnP3tyAzYM0H6n?=
+ =?Windows-1252?Q?/qBhaoEieaLj+KR0+iqEfI4DKSeQvCTLhxTp/bJWjBEQs6Bh5Mlhovma?=
+ =?Windows-1252?Q?+t/Gl6foRYJ/Xvwv5FVsorh43UlijWfIwOAz/1uFPFcCkOsF7U6PebZt?=
+ =?Windows-1252?Q?1zghQNXOLj/VWtJy1qriDwV/u9Mgly62oTqtlKcIuyeMasIT+sKKa8OK?=
+ =?Windows-1252?Q?nWfmB5/u3jsqxWRr7IHfp+NSCqBnYCHXF0CdufEKXR0EUUgPZ4zNQCYH?=
+ =?Windows-1252?Q?ULf0r7kZU6ySIK/xYMv8BHtHGXD2JRAuuYvbxaUR18a28y8HyJnDgfyD?=
+ =?Windows-1252?Q?Ol8NjfFBSROJsMrt0CHTwlbR4t5UR9kUrOi8YQ0U+BZ6P2UlxFjf/eFq?=
+ =?Windows-1252?Q?9fTmrxKgtk9Jth+3KlMgbUcnncePTl7Yl8/B1bhXG2tRLQGmZiHWEJy1?=
+ =?Windows-1252?Q?PpROickdqfoJpdfNkpTdsHWpb2gk6jrBkvy1HLEDBlycVm3h7C6Aqjq9?=
+ =?Windows-1252?Q?r9tVWMEyxMc6WRxqM40L/D72TG0AHgE5+vq86kQoINgNupoltLVL11Hg?=
+ =?Windows-1252?Q?RCc6bhoPHgk5R9xnfBiWg6pFQotWtZdgQ+qqZq098kMj5q31Lt/tRU0v?=
+ =?Windows-1252?Q?L+zF/8QnQq87Ykrqwu/qkhuF0QMEXEHWRu0S1hqR5zUXlSX/M9/pyNBG?=
+ =?Windows-1252?Q?JObmyvXnBl2dh9sXCa+psxqPLzmW+ylY7XPYQV/iowcPksQnC5NwRG5r?=
+ =?Windows-1252?Q?+9CILYdZ20o=3D?=
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-13-980ee0036c26@baylibre.com>
-References: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-0-980ee0036c26@baylibre.com>
-In-Reply-To: <20251110-topic-am62-ioddr-v2025-04-rc1-v5-0-980ee0036c26@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>
-Cc: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>, 
- Dhruva Gole <d-gole@ti.com>, Sebin Francis <sebin.francis@ti.com>, 
- Kendall Willis <k-willis@ti.com>, Akashdeep Kaur <a-kaur@ti.com>, 
- u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, 
- Moteen Shah <m-shah@ti.com>, Santhosh Kumar K <s-k6@ti.com>, 
- Nathan Morrisson <nmorrisson@phytec.com>, 
- Garrett Giordano <ggiordano@phytec.com>, Judith Mendez <jm@ti.com>, 
- Aparna Patra <a-patra@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
- Chintan Vankar <c-vankar@ti.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Prasanth Babu Mantena <p-mantena@ti.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Beleswar Padhi <b-padhi@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Andrew Davis <afd@ti.com>, 
- Wadim Egorov <w.egorov@phytec.de>, Udit Kumar <u-kumar1@ti.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, E Shattow <e@freeshell.de>, 
- Devarsh Thakkar <devarsht@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Andre Przywara <andre.przywara@arm.com>, 
- =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=675; i=msp@baylibre.com;
- h=from:subject:message-id; bh=xE312MwWJYB3Y+TfxMO9glPGHryfuKbJAtBHWFon+ww=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwhty9ab1ao5J5m/5mWv13PvbXp3j2VzXtnKLi3K0e8+
- 588P/NcRykLgxgXg6yYIktnYmjaf/mdx5IXLdsMM4eVCWQIAxenAExElpvhN3uB7cUFPJNeWs7e
- 7dP+afH1I8YHps4q5BV4+rOjvejnkzSGv8KttpuM6soUV5/dcJlZ9/vuWEvPZqPvJzIfbyn/cf9
- qBBMA
-X-Developer-Key: i=msp@baylibre.com; a=openpgp;
- fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
-X-Mailman-Approved-At: Mon, 10 Nov 2025 21:13:08 +0100
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9P195MB1212.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: bade8981-5572-4e2b-9a30-08de209a3fb3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2025 20:46:39.8504 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: bcVMNFYwJ/owlZAzGUYtaNk8pJm4CDiwk0Jymsx/rZw4nGdJl2UdKSt8927iXoBRbI9X96TjZLBQXdSK/N3zFQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BESP195MB2928
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,25 +164,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable K3_IODDR to enable support to resume from DDR after exiting
-IO+DDR.
-
-Tested-by: Anshul Dalal <anshuld@ti.com>
-Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
----
- configs/am62px_evm_r5_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
-index c9592d7b6c4cc037a886fe81385791269a825aa3..39e8093597352e6ed3fb67ac59e0494239a51352 100644
---- a/configs/am62px_evm_r5_defconfig
-+++ b/configs/am62px_evm_r5_defconfig
-@@ -123,3 +123,4 @@ CONFIG_SPL_TIMER=y
- CONFIG_OMAP_TIMER=y
- CONFIG_LIB_RATIONAL=y
- CONFIG_SPL_LIB_RATIONAL=y
-+CONFIG_K3_IODDR=y
-
--- 
-2.51.0
-
+Hi Peng, thanks for your feedback.=0A=
+=0A=
+> Hi Christoph=0A=
+> =0A=
+> Thanks for your patch.=0A=
+> =0A=
+> > Subject: [PATCH] mmc: Fix missing 1 ms delay after mmc power up=0A=
+...=0A=
+> > +     udelay(2000);=0A=
+> =0A=
+> Per spec,=0A=
+> From Figure 6-4: Power-up Diagram of Card=0A=
+> the 1ms is voltageSupply ramp up time, so I am thinking the fix=0A=
+> should be in your regulator side, saying startup-delay-us property=0A=
+> in your regulator node.=0A=
+=0A=
+True, this could also be handled via the regulator=92s DTS properties, and=
+=0A=
+some boards already do that. However, from my point of view, that=92s not=
+=0A=
+the right place for this particular delay.=0A=
+=0A=
+The SD specification distinguishes between two different delays=0A=
+(see Figure 6-5 =93Power-Up Diagram (Host)=94 in SD Spec 6.00, =A76.4.1):=
+=0A=
+=0A=
+   1) "Power ramp up"=0A=
+   2) "Stable voltage delay"=0A=
+=0A=
+The first one (power ramp up) is regulator-specific and should indeed be=0A=
+covered by the regulator=92s startup-delay-us property in the device tree.=
+=0A=
+But this patch is about the second one - the "stable voltage delay".=0A=
+=0A=
+That delay is completely independent of any regulator/voltage-supply or=0A=
+board characteristics; it is a constant 1ms delay by the SD interface itsel=
+f=0A=
+to ensure correct card initialization timing. =0A=
+Decoupling it from the regulators would make board-code developers=0A=
+live easier, and can make U-Boot=92s MMC initialization more robust across=
+=0A=
+all boards.=0A=
+=0A=
+What do you think about that?=0A=
+=0A=
+Regards,=0A=
+Christoph=0A=
+=0A=
+> Thanks,=0A=
+> Peng.=0A=
+> =0A=
+> > +     return ret;=0A=
+...=
