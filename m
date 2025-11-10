@@ -4,145 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DE8CCCFA13
-	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 09:42:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22A3ACCF9E3
+	for <u-boot@archiver.kernel.org>; Mon, 10 Nov 2025 10:58:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A195683A1A;
-	Mon, 10 Nov 2025 10:42:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 70C9A839D7;
+	Mon, 10 Nov 2025 11:58:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aRKPlkaW";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="lL3mgBt5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E90C83A1E; Mon, 10 Nov 2025 10:42:27 +0100 (CET)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 87E0B839DE; Mon, 10 Nov 2025 11:58:18 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 305DA83AA4
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 10:42:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 93B73839AD
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 11:58:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RD8aEWBH1EuljIe8QxyJxQjz5LunmXPkg87WsjDnisWeohI3sUnG0XxSS+JdsurwQKlXVP3cRotJe94uGoq9bEl46NvCO81BIpOU4X25iLfHJI3uaXRiax9g9YBVpea2FPkbJN1ubPdP3N2t13uosRK+i35V5FkJ6Ny+OMpBiXqcMz5ADf/fQEwlkdX+wpdrIDOZh03fbTIQaPk6ygNJ1jscUs2ICsxEaDdW5ygroGSeWiY2+egVJ/7F1ck0d8CENPVPPHkq+CE+c37m/nACS1k1Chg95wjsUD2cXxfhcAhEC3nz78u/11oQxKOf3iIwn5LLK1pwiecbMi4/gI0UhQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kNz67oxvMBHnq5F88vmTGqF2JTothu8BydOB7SR2sIU=;
- b=rTMKeO+lYIVDy7E14hpOt6yt6Yy0gS6KwVsR6kuExmd0kzgH7CMnD/79InRvgH8JRcLB9V2xlojDEx30zu8JcpLyfTBTK/rH3wmQTjNDhLx/r5TxqpIjGONi58/Ln+0C/reM43hy5URd6t7h7d+Cjcip2K1STG2zaWeYrU8WSYVZDV8r4dd3cK28502zpr33b5/WGYEBXtV1NoE18Hdu5m6VPmWjq4jaWcHcwEkTSeQ+56tMNlCd0bP1WGXiJNBIyxm82CA4vF3+pwQID8krBFofAxe7HLjE92xWBi3YVMxjrlAymVxwk34Knptv52RKGQTDzH5EHFz7vntvbs8cSw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kNz67oxvMBHnq5F88vmTGqF2JTothu8BydOB7SR2sIU=;
- b=aRKPlkaWFslNijlgGbvQ8b9IAGBUfMcKvv06QHVJp4a5hlWmplMNtJnpq+gm3IlJsKXs1Jx+eLwDa/wGDE6fMKVZa32pjnIrxiqkhKk0OP3VML4im+gQk3yJZFd+s2y/LsQJlZsAGyQ4xsELTMUBQYMM4sqG9yzivkyGHApQwfA=
-Received: from DM6PR10CA0011.namprd10.prod.outlook.com (2603:10b6:5:60::24) by
- PH0PR10MB4647.namprd10.prod.outlook.com (2603:10b6:510:43::22) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.16; Mon, 10 Nov 2025 09:42:21 +0000
-Received: from DS1PEPF00017093.namprd03.prod.outlook.com
- (2603:10b6:5:60:cafe::fb) by DM6PR10CA0011.outlook.office365.com
- (2603:10b6:5:60::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.16 via Frontend Transport; Mon,
- 10 Nov 2025 09:42:24 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- DS1PEPF00017093.mail.protection.outlook.com (10.167.17.136) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Mon, 10 Nov 2025 09:42:19 +0000
-Received: from DFLE200.ent.ti.com (10.64.6.58) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 10 Nov
- 2025 03:42:12 -0600
-Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 10 Nov
- 2025 03:42:10 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE205.ent.ti.com
- (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 10 Nov 2025 03:42:10 -0600
-Received: from hp-z2-tower.dhcp.ti.com (hp-z2-tower.dhcp.ti.com
- [172.24.231.157])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AA9fit53156252;
- Mon, 10 Nov 2025 03:42:06 -0600
-From: Hrushikesh Salunke <h-salunke@ti.com>
-To: <trini@konsulko.com>, <a-nandan@ti.com>, <c-vankar@ti.com>,
- <u-kumar1@ti.com>, <marek.vasut+renesas@mailbox.org>, <n-francis@ti.com>,
- <peng.fan@nxp.com>, <semen.protsenko@linaro.org>, <s-vadapalli@ti.com>,
- <jm@ti.com>, <m-chawdhry@ti.com>, <ahalaney@redhat.com>
-CC: <u-boot@lists.denx.de>, <h-salunke@ti.com>, <danishanwar@ti.com>
-Subject: [PATCH 5/5] configs: j784s4_evm_a72_defconfig: Enable configs for
- PCIe boot
-Date: Mon, 10 Nov 2025 15:11:44 +0530
-Message-ID: <20251110094144.886956-6-h-salunke@ti.com>
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b728a43e410so613302066b.1
+ for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 02:58:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20230601; t=1762772295; x=1763377095; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6erHCoCjH1UEujcY3Y5p+Sjo7Kxe0pA02ZFhZPbwNBw=;
+ b=lL3mgBt5uJnw7trLabdmdpXmxn85u0mLeWWUEaGXJoRq9mOpTTHEUQK2OT4EGx6oj1
+ jtUNrAPedLypYlySHdD4y3zx8dAS8NL5cBpC2ykkoEZ5/C4pu53pinYyEOAVcCajQFiG
+ O1AyDm7Sewx2Hz/ofMpCrx9iW1zUOsoz2uGti2SKoQnj0VG7Epv7aT+ZUFExZX/C2zXq
+ CUGKuTX1PbVkIRS7Iwg9QRfFF8dC5h5Lz+0kxrE3TaLdtb4nqyjnhOia7GaqpysC8M3z
+ A7PFaLv49CQkqOGBF24vE41vZdHGKJ3A56dQr9UbWPivXlwz5kzUcGIqgNl5o+v6YJtH
+ 86hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762772295; x=1763377095;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6erHCoCjH1UEujcY3Y5p+Sjo7Kxe0pA02ZFhZPbwNBw=;
+ b=Wvu/pRB7oySYRt3xIlXrC+bokdYxD+EVLOMvwFhMrdCEAdPmq1SOqM9iZRYKYOJa+j
+ 41zB+LMIzkLtVognRFm0raddGlG/X5LTkw4r8p6ENlAC+rR82Vzo+ZpLnXJjQ3NoXcQA
+ TapJUih/nYceRGPJP9DrUcwgv2SBK1cghLh3+1ybtByN8vX4Q4UecsocPb0KJDpH1VYx
+ BmrB39R8xE7SNujZC+k0tMZ3PIvYIHmN//bXF8RFG6dBwdZfDw4ELWXXbefb0+5AZi37
+ C4T7WBwo1Q4eu5nA7jGGnzgYlQG+y5b87Xnd5lm5kGjkYKx79c8xGLuBd9iDZSDcxOUQ
+ zTzQ==
+X-Gm-Message-State: AOJu0Yxj0fLteL+kmBMvIKINgOjkv/i8CcmAy/nUvc659msz0nnRGW+2
+ ImztkaNkFrBidWKkmF4KWBPQUxABTce5lmDJ/V8aHcLdI+F6rQJUgl4lEBgKK7Yu
+X-Gm-Gg: ASbGncsE28b0qAOK6gB9uiyamvuRWzEIT+N+MsNPIDe2yQz8QOFtpuAKwOdbFXg8PRW
+ VFhAfKhlQrflBmsoCAB4C9zRJew5PET8wzezZouGhy1RusYffK6KkaYcVe0+P1NcUkdavB2CP7P
+ zxo2XnwUuXnbBVGSDT+kaoDY+SfvUBQ96b6sKl+0QDAztpYEe44FbGqB61ui4z7swpsz1kBz/0I
+ WOrSMz6Vft8J6jmkjDNDKmY8ri2IKg3+IYowsmzallf5e/mmkuJogx1xoKHWbSnEftT30JfWIdC
+ N6KAPjTBXJcG/C4yXYRLgB8DtgBNOUKmPPwt6o3gTsYqFYU9q8JgQxB+B9l6FyWE8LTgG6eK4zg
+ cNnhyyakrRt72m1PLDRJZKO2bJaoWDzrnN43k0STD4qnxccZo7JZyfzRMqlaHygCJASe74C1sLw
+ 4rhZfTZuma7PdhfnqywB4ApEhXfbOzwBhIRmpZn7ax+ylsQIvWCaDQwE5qJzrcjT8PMT4=
+X-Google-Smtp-Source: AGHT+IGhVMjGCX0vf+GgJ1Ak1mquJVWnyuJV0NakM4PXE9o45DXUBFBsgi5Wb5Vtkf+OQNvDX+8ZYA==
+X-Received: by 2002:a17:907:86a1:b0:b71:9c99:7b8a with SMTP id
+ a640c23a62f3a-b72e05e5a1bmr664374566b.49.1762772295278; 
+ Mon, 10 Nov 2025 02:58:15 -0800 (PST)
+Received: from development2.visionsystems.local (mail.visionsystems.de.
+ [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b72bdbcadb5sm1102658166b.9.2025.11.10.02.58.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Nov 2025 02:58:14 -0800 (PST)
+From: yegorslists@googlemail.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Yegor Yefremov <yegorslists@googlemail.com>
+Subject: [PATCH] .gitignore: ignore more files generated for the sandbox
+Date: Mon, 10 Nov 2025 11:58:12 +0100
+Message-Id: <20251110105812.427041-1-yegorslists@googlemail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20251110094144.886956-1-h-salunke@ti.com>
-References: <20251110094144.886956-1-h-salunke@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017093:EE_|PH0PR10MB4647:EE_
-X-MS-Office365-Filtering-Correlation-Id: a475ec28-9337-4945-dfc0-08de203d710d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?cQG+goc+Vx44gCk5bjykHbzt9vIXc6CBHrPMeI9TOvIby5xRIXY6L8HgQByQ?=
- =?us-ascii?Q?ZAYEGAWlH7UoCyPAabhcjhGRowbf6GkqO37nQVptl1G8kQ+H+GxtFDURCgal?=
- =?us-ascii?Q?UcoKDtbRgoDhEUsg1rD/uwiVjp5tNlQCKcahvRUGxGAsgGzJFp12e3/ciDiv?=
- =?us-ascii?Q?P57/UVyIuQHv9McExK+gGeX1ycjZmzX5Ln8ABG0oEQAy98wTMwdBJyBU85dL?=
- =?us-ascii?Q?+31lIiF3mRpuPwPXB7rOZ84FaIleNmVJZnX7+Qotn7cnRWHezdhUsOBJSSOO?=
- =?us-ascii?Q?l5dD7o6nqsY6UnwBlB8AvjlCCdvkLBl/C8djNDlmR5nozJGnmwAPnQfbsopx?=
- =?us-ascii?Q?H3VjxofEFevcMRsgtt4fqQkJJqjuaUdDZr5McIDP++ugcwgrVODhXpLxWT0e?=
- =?us-ascii?Q?lAUQEIiOhDAW0pQ2sU0EeA0No5GhVSn9BMRGNtfx4djaLwa0Lsj435nQvN6T?=
- =?us-ascii?Q?P6Yp7Da3dg8fUH8/7W54cADyNGqvD7uH5XWKw0kKE/neXdWc0pMRTBNfaTC1?=
- =?us-ascii?Q?ejYTdT9raw/I97cgBwJc4L8zuOmE8uh6mLGQSqDilnSKkHezYxFV1TLlwCcK?=
- =?us-ascii?Q?ENQA+f/nh34IaUn9Xg35SYz475UOea1vWsntg6vM1FuWramyo9rhrfoTYMe1?=
- =?us-ascii?Q?SBXNJ5PMdacrOXv3ZE+JMvkmPo9aXzT52cNKDw144hSC8keeMNsnzLJGCX/w?=
- =?us-ascii?Q?brhJLB6djpdZvZXDDK68rXePKxAcoCdEOBHsTyrY/nukNUid/hlnRrWKxS7u?=
- =?us-ascii?Q?GIx0ocNwmRep42k+8Yd3YIx/ALF/n98iqbmyXXIz9wrFV2DwQ0AHJkyoY2mV?=
- =?us-ascii?Q?QmnSSEhJ5J9lBlVkYBIjX7kXK8nQu5S0TiIr+/AHrSGthlc2/WnuV0uLLgKU?=
- =?us-ascii?Q?D3v0PZdYDj9v7ziuNZJxIEpJiiWHwgUHZiaJ/QqMnae2f4VrlkXoWe1DFQSw?=
- =?us-ascii?Q?0ieYiQv81I35KfBROkj9f8qQVspnHprclJxNBzHubgXdVktHqxayCzZ134HF?=
- =?us-ascii?Q?23W9HPr645P0jnCIzCb1Vdk1qL4PNMN8jr98dtMwYKkcU2HgtlZpxkVCxOgc?=
- =?us-ascii?Q?IYWR3l9oU++bweHHbbaETJdhPv2ZQJFSmc+mc9YPocmtb5aXB5oBGtq/QN1e?=
- =?us-ascii?Q?q6+2yEzqci+fazVm3TBQpqFzHaJRMhzEEkFMQyrld28oK9Ma33kW13uanzwy?=
- =?us-ascii?Q?1WwZ1p/W+xirFkWoErbMa1Z6E17tWqwoPlEYmW76aD4k+jLNU085cIBCdw7A?=
- =?us-ascii?Q?cg8pbCYawSf8DAHvlJxv1kpZpsZvo7AYfAW76NJLO9cCOBBTrtEjgBrIpDUh?=
- =?us-ascii?Q?a7EeNnthn9teUaoLVxo/ZdO3iIoC6mAQM2qkGnO0KUsCzX5jayzlb63oyS2i?=
- =?us-ascii?Q?tndVgbzUNWIFj2Gm0z/y3InTjHFnGGJRy86ghj6amKj0opB6ogXkjPoxSdmE?=
- =?us-ascii?Q?xbpYZRjtNlAwYx72LZtzqhstJ+AGltFQpZ4FugfCc/1RieVdbZFEXDEhZc4q?=
- =?us-ascii?Q?gWyI+FZao6yj1fv5kx05WgrI1BJ14Nk9UImi6fYyz7DNUj3bW1NGi0V1cZgv?=
- =?us-ascii?Q?R29Qpnw/FtnyT3GA96GUCbVVuMSqRhhKNrov1jdI?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013)(921020); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2025 09:42:19.4142 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a475ec28-9337-4945-dfc0-08de203d710d
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017093.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB4647
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,36 +96,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-J784S4 SoC has two instances of PCIe, namely PCIe0 and PCIe1. The
-PCIe1 instance is used for PCIe endpoint boot. Enable the configs
-required for PCIe boot on the J784S4 platform.
+From: Yegor Yefremov <yegorslists@googlemail.com>
 
-Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
+Change the existing regex "/capsule.*.efi-capsule" to
+also ignore the following files when building the sandbox:
+
+capsule_in.capsule1.efi-capsule
+capsule_in.capsule10.efi-capsule
+capsule_in.capsule11.efi-capsule
+capsule_in.capsule2.efi-capsule
+capsule_in.capsule3.efi-capsule
+capsule_in.capsule4.efi-capsule
+capsule_in.capsule5.efi-capsule
+capsule_in.capsule6.efi-capsule
+capsule_in.capsule7.efi-capsule
+capsule_in.capsule8.efi-capsule
+capsule_in.capsule9.efi-capsule
+
+As test/overlay folder was renamed to test/fdt_overlay,
+fix the related ignore entries:
+
+test/fdt_overlay/test-fdt-overlay-stacked.dtbo.S
+test/fdt_overlay/test-fdt-overlay.dtbo.S
+
+Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
 ---
- configs/j784s4_evm_a72_defconfig | 7 +++++++
- 1 file changed, 7 insertions(+)
+ .gitignore | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
-index fc7acbae694..f3c23470295 100644
---- a/configs/j784s4_evm_a72_defconfig
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -46,9 +46,16 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
- CONFIG_SPL_I2C=y
- CONFIG_SPL_DM_MAILBOX=y
- CONFIG_SPL_DM_SPI_FLASH=y
-+CONFIG_SPL_PCI_ENDPOINT=y
- CONFIG_SPL_DM_RESET=y
- CONFIG_SPL_POWER_DOMAIN=y
- CONFIG_SPL_RAM_DEVICE=y
-+CONFIG_SPL_PCI_DFU=y
-+CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS=0x81000000
-+CONFIG_SPL_PCI_DFU_BAR_SIZE=0x400000
-+CONFIG_SPL_PCI_DFU_VENDOR_ID=0x104c
-+CONFIG_SPL_PCI_DFU_DEVICE_ID=0xb010
-+CONFIG_SPL_PCI_DFU_BOOT_PHASE="tispl.bin"
- # CONFIG_SPL_SPI_FLASH_TINY is not set
- CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPL_SPI_LOAD=y
+diff --git a/.gitignore b/.gitignore
+index 1ac737d2718..2bf86a6b5d6 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -73,15 +73,15 @@ fit-dtb.blob*
+ /defconfig
+ /generated_defconfig
+ /Test*
+-/capsule.*.efi-capsule
++/capsule*.efi-capsule
+ /capsule*.map
+ /keep-syms-lto.*
+ /*imx8mimage*
+ /*imx8mcst*
+ /*rcar4-sa0*
+ /drivers/video/u_boot_logo.S
+-/test/overlay/test-fdt-overlay.dtbo.S
+-/test/overlay/test-fdt-overlay-stacked.dtbo.S
++/test/fdt_overlay/test-fdt-overlay-stacked.dtbo.S
++/test/fdt_overlay/test-fdt-overlay.dtbo.S
+ capsule_esl_file
+ 
+ #
 -- 
 2.34.1
 
