@@ -4,148 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EC95CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:00:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91838CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:18:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B178E83AB4;
-	Tue, 11 Nov 2025 09:00:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 13A5D83AB4;
+	Tue, 11 Nov 2025 09:18:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="MKNJX/gT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K6JcEJUx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1722983B27; Tue, 11 Nov 2025 09:00:39 +0100 (CET)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BAB8D83B2C; Tue, 11 Nov 2025 09:18:56 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26B8C83A79
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:00:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB93183A91
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:18:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y/QmGqjO4EZ4DR40Ez7nz7zrfRlG91TI+0FxDk+iudOoFIn3aYh+doil3P3BZ3DVX+DR/IDWMbiDJYR0kPrVyVvgTSZOmZZKXNssvZa3bwnQU1wEMtyGRiE49VraiKYfSOGed4EeQA2BXNGADo1X0xZIGarpbmvMtfwA68cc7wqUkSaluDLJUIBThWndENAVFGkhN3Y6ulPqjLz42Ghuunsllng1rN9qoWw2i2b/nmcUyyOnHo/qs39fUnJPTDwNjTgn/CXanpy88T1e10ytDRBeqy+MobpbakE58gqNWSO057ILdo+Iq4BAMOLWzlAHWRDhBaGErQr2e4lVnyzyGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D9oQ2neCVwftavwJ1+bLgHj1Iyx16XFZwNv8tmNSSYU=;
- b=KKDc4076lEnJeNZkBPJgPUDbT9FVWwsn56HUizqFRKmChozapM4zZA73+ghTSYztesL0qvGDnv1pc/GRxXGeNwCkElLx3MG5/q2Q34RygamMIKey+G7XoxDe/qSIrgK5rl9yLgb1zpdN2rWs+TJAqFiH96fF9TQVuePTfnkmIjFdAFl2kzy0kfTr1iCgLBzYySIp0uSOBrKftr/UYZ50oAgocCUsFhbZf1+06k+D65oBQM578MBwqz9tS0JPY98Pllpx9gmNsSY/YXLGpcD3q/EL+i2VaeFzHhAVp9h0WoTJzht4jizvmM0KyWGN7iLV/Z/Yw7T0HIFhlN1Ia+TCTw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D9oQ2neCVwftavwJ1+bLgHj1Iyx16XFZwNv8tmNSSYU=;
- b=MKNJX/gTOzegRdXxUpOgbdSLO2ziDQAlH51AoIM5PPpNKev3fijBdF9hAwWAXf8vozLOJOLZg8GAAPmVt2qKit5cildJw+I0lL6C42oFcg1bAbeJWeWciN/6urOubeU3Gdpe7HS/icpgM2gJ+MKWm4wzSJrea+hgrBXFnn4f7Rk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by AS8PR10MB7042.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5a9::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Tue, 11 Nov
- 2025 08:00:34 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.9275.013; Tue, 11 Nov 2025
- 08:00:34 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: <u-boot@lists.denx.de>,  Quentin Schulz <quentin.schulz@cherry.de>,  Tom
- Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 2/2] cmd/part.c: implement "part name" subcommand
-In-Reply-To: <DE5M6LMZV9EI.NS7NVSZR63W9@ti.com> (Anshul Dalal's message of
- "Tue, 11 Nov 2025 10:55:49 +0530")
-References: <20251110205411.4075351-1-ravi@prevas.dk>
- <20251110205411.4075351-3-ravi@prevas.dk>
- <DE5M6LMZV9EI.NS7NVSZR63W9@ti.com>
-Date: Tue, 11 Nov 2025 09:00:33 +0100
-Message-ID: <87cy5pc82m.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0029.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:a::17) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-4edacc41dc5so19492161cf.0
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:18:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1762849133; x=1763453933; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lyI3gF/xaKrWWr8Zj0/ajtvVzYdfUWvQ3SMHggzMXEU=;
+ b=K6JcEJUxO1kUar9xDR4ZDWFQbq4KecuQv8XVfdH66aMe6IkA+yUWbiyEHo79FI3itz
+ ul7TcwTjFlOu7wjiI3NXFr1wBgl0mV8iRAfkktEdEnFYK2A60/Y87SpB+eKGEnJQIDaQ
+ RTvvh81F0U+QX2QiKb3FhlLzH4r8YK6pSn+qa7aUTTHMrFPVCthNSFEiG9pXHg5o418R
+ iPnSJE4qiiJ63LaKu/NNb0Hr6lPH7S731ZQpElHaJFkZyMBpsMB63r315l9cBajtzWax
+ bQTeYEJ0SBYsfoUgHvB/nqviQFlhb8uFVqocoMU8c00otV0sdAcaBwiJmJnkOoneK6gm
+ mUbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762849133; x=1763453933;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lyI3gF/xaKrWWr8Zj0/ajtvVzYdfUWvQ3SMHggzMXEU=;
+ b=wLDmd9Gw6nPV2FMndBkJqoY8PuLbUd/z+LFoPCreiI1qtHjTrNYaaRjkaX3o7LNUAj
+ 8YjsGmiF5Awl1la20wZ54ycuePnT8tuQqDUkYNlR2o5+xyxEYOZ1M0sHiIZgoFIPLc3h
+ KZX4b1ZhXqZSAH9VZb/i4aGPmclHeEuxaH0RQnt4Humz2pW3+71fTFG+Ogn2vcs+uuTm
+ d0dEOuPlAO3wipNvWwZ5ywvZ9N++sB/vviNLoVGJIBWcAYay4LqBtcNqTlMYwujPAAmo
+ iHtaSr7kiJeqTWWVDEobKfWiycXtzSix54lt2nmrGqVkzCuebu4rtkqUzXktwdDyC8wi
+ x8wQ==
+X-Gm-Message-State: AOJu0YyW+F+LsNiwqDkc46R2qdqWbGby34iKLuOdmxc5tRSLTA+zvsl6
+ YoRfe38UdB5jsPC7HTM7GXHiOcltGHlFDMrxrVPf5a4Lm9mO3Wojvp05BhOxQLQSvcSzuDXFrNi
+ KblsgZIo3bm6bjzu2lO1jufvjMkqKmW7ENpGHAr8MHQ==
+X-Gm-Gg: ASbGncv4Cf4AERmG+WpRg+f6CHyLx6n4+p6MgNbOWpQJZjTztqPYkvRNtNwv6IK865p
+ H9XnAr+TQk2Ve79gO74ewCsj5yofFQcLtvrhVO9+MhGb82G5bvwKtqX4DJQ57pZcHS5dQGbtZUJ
+ s8EduaRAAVAan+mQai4f9TrKuOyvPrOwJsv/1PlZl//v7zFPv2soEuTS4IHqYhpanejiXqja0jx
+ cuMx3THG69Oi99C8d0vJ5ipLuD81XGAzyxMdI+eRJuW5jUoVNbGppu8o8xJgA==
+X-Google-Smtp-Source: AGHT+IGBS1u4MHtcZs0gJTSgFNHQI/IGcuCu+w17Ve+0WbD3k2EIrFPpf4RMCE7WqpHCtp4XUyHNWijKXaL3nFID/iE=
+X-Received: by 2002:ac8:5856:0:b0:4e8:baad:9875 with SMTP id
+ d75a77b69052e-4eda4e70d87mr134855991cf.4.1762849132463; Tue, 11 Nov 2025
+ 00:18:52 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AS8PR10MB7042:EE_
-X-MS-Office365-Filtering-Correlation-Id: 26cd12ed-58e4-485b-b9dc-08de20f864a1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|366016|1800799024|38350700014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?WXK/9izyG2vezjcMwx5bfj+KkulFHW37msvtt0dqTLdIcLuv1nHu7NG/ed1X?=
- =?us-ascii?Q?P6jSVkMHF/GYzp8bXmEBcVJhJXMxB7vXwctkFANcGd2cO/xwyFCpl/aprw9d?=
- =?us-ascii?Q?/nJ+nqDsy0DHQ3f+6L2Xp+VNBLrcf78rpC/QeodfR6pnWW7JfWzSWst1ZV1/?=
- =?us-ascii?Q?LBGVNbdS7FNN4lEbYaE0xGF1oAlanrdOsWpRZVofeFqMTgrhlNpIwKoH8PYp?=
- =?us-ascii?Q?ltPNoerWsT0QR1rc8qiErgakXnq32QN4Kt25nvwPq2Lajh2ZpmV6l4CtaV6Y?=
- =?us-ascii?Q?4dDvYOB8ryBFeJD4SuLomprkqcqhCoV7g5uIeFPNc9ma/eWHpede41Vx1A48?=
- =?us-ascii?Q?0W4G6GFHIQwCZOpn6EAPqW9JpLUE1DyAbUDCdBLZFNNmzwLdeSCVnSyDUntq?=
- =?us-ascii?Q?4LyGVYzrKkH+bforOAU+AUGWegYkVjmXjM95NNP2qcvE70D26FN1s8jom98z?=
- =?us-ascii?Q?mTsXcotdenYUqQ0bf6oLNNtzyG1FHlCAIdPV/dtsWHWuxqyszOmH4nv32WC2?=
- =?us-ascii?Q?qOFfTnuPzpiyNLfLLaUgFHscDtRiNoOcODzCM9rE+9sMHmmNsXOHrHr/o/rk?=
- =?us-ascii?Q?QmtLtCvJ9Ke9r6UjtHMlv9lP2q8E7jjah0ylWp2imCyIHS7kzbudQtRlbQYu?=
- =?us-ascii?Q?ijS6DFphOcTjzhdTiVholGcE/Y0AJ1LLkXSFw5IcuZZMbM2X8B4U8P+iyHiX?=
- =?us-ascii?Q?DvRCTCyCDqnyVV0cVwcQiMB/YRLONKhvS8fLfLu6+1RzMPQD63Xlxd+Rpyk6?=
- =?us-ascii?Q?hBypZP97cioU/pTZmKtkJSYTURVfG6d9dBdj4wdwndvAlCfopThDQxPqPhre?=
- =?us-ascii?Q?IgtEPErgRYkK8j+SmWboxI8iC3intXL8AuV1vbXD1gni+ALrbwwwb0bKD3rz?=
- =?us-ascii?Q?AekF/EDGmU8+Bjh4GnrhAJwAzP4XU/cU7TFaf8IaGWPYVTlUYzq8w30fofF3?=
- =?us-ascii?Q?oITPE0bIrkRA7YjPsliZElWh60EDggLgAwGEU2XyXHycIRe55iPvbB7LS+tk?=
- =?us-ascii?Q?r0jqwpluxY+BAaQQAkU6kPVa2oFOC9/ZTzXVshOvTID+nWPGXs9AC7QNlY7Y?=
- =?us-ascii?Q?Q/hqs4rCeMyswNAFHJfqTRQCeeU3hLJCvjg9kifnaTvRfpWuz3N1Kp4T3c4c?=
- =?us-ascii?Q?3efnL1x0mhv3qqTUhTCeDVP7sBs1QSNBUQvOKg9MOBp4RkZyfMHBKUyLVOuL?=
- =?us-ascii?Q?7V0cDVxajxloV2JV+pvUWLc/GNtJRByrRQnmJ1MEgrL/wUzV/Pr1yEYQkyAx?=
- =?us-ascii?Q?ICQO2XN/Ek6yTCrhKhFBwC4saZDdFRWsEPGn7mGceZ3P0gJAMpIjS4sbp2j9?=
- =?us-ascii?Q?vEu9GY1f/MLgzLTyqHluOwtllmUY+/5aKeOn688ZZLknjOMLJ11H9OMANx1m?=
- =?us-ascii?Q?/ZAu47EdZuJe77azw2Jp7fm+dZFlNMCnMN8hpLEbRqR00s0RhK0ROuOMBO4n?=
- =?us-ascii?Q?dqO36taushZUNUbT/8rfCja5sXU5lCnF2ne/3LFVI5tB1VEFFUCXj6+XbCWo?=
- =?us-ascii?Q?DRLE/8KYwj+2l02/1BocnVhjcuKckxdLvaxn?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?U7jhtwqc6u7Yt7BYGM+ibL/KulVG9dmjQ1HNqzQVke1WYi5Faqs0rybIpYIe?=
- =?us-ascii?Q?9wIdXsHbsc9SRTbwH8XfZsqWNrf4m+3FeI3fNklxQ4pVbQxtFUwTCPW0QvuL?=
- =?us-ascii?Q?wVEMB3pFuklaednA1qQ8S63uRRAsOo6gQ5kuyMgV2663/X/zyRtN/LDnheoW?=
- =?us-ascii?Q?BvNkTMu4N3/LDsTEGdxwFDXHidRytW04CYWV5TWuW5PGSwlVNi88Tt7PZ5wV?=
- =?us-ascii?Q?aZcJWBS0bnIr+HO/7URIO0jX/cnY79nS8y60tMbCDXFjRDkYa6KbQ6lbN0hn?=
- =?us-ascii?Q?a0Z+IreAg8JcZ9UXwgLI3RYwy7DcbGQvSGCkJ528Qgg3zdJVykbURulNiaqD?=
- =?us-ascii?Q?sbYPxI1QslvtGAkzxx7tF7CW4uqLDdey0izAyZwJjFKJq0Ph2XnVA3z43JpM?=
- =?us-ascii?Q?BV/A11YWyKJzTwB5j3krv21RvIxXRMdzlpqAMqimaI3q6dHzSXvZ36S1+Elh?=
- =?us-ascii?Q?ngKuETVcHUNGG0Be63tyHUq14UPgW0u8F0QMZoYRD0+32pXjdvOOJs66r5Yy?=
- =?us-ascii?Q?Y1sT+TAMzPwlnKydcWBXPe5N5UzysCULEoNM7VYc+geyVmwbqfofNYobXpsb?=
- =?us-ascii?Q?M9iI+PYvro6smz7I1o9esOI1lxjEmmSOsXGJkPHQC/2xdLgoPEP92+Kscou3?=
- =?us-ascii?Q?kgKJGDBgZNqm50wbZKujna0X+EmUeIFitZa4OY2+rXmW9l4Kqpw85rTIm7/J?=
- =?us-ascii?Q?0/K9UN1U+x+LKt13fCcA6rV3T00hkPvf9tpSmSmrFM2C8+cQeMY0b0WhpvZD?=
- =?us-ascii?Q?Lcq1QJqIT7puZvHHFarTfmr6Gl3BzMTdUeMHlC/xuEzkvVe4NRoTW5ODx9g6?=
- =?us-ascii?Q?f6NxnIL7ImeNMBP7fE3X0MxotAKZfkcwmgN3fGjxMOS31ogu9GyAMtywP74v?=
- =?us-ascii?Q?5zaz8vkjZiBJDzhQw05z3TZSRR6CUxb3XnRkME//P1nS59L/0WqqwsgTuLtb?=
- =?us-ascii?Q?5OkR5kV+3L1Bus6DNtWndl7XatRKPHeqex+pouREex3zK4QErsjFkHlaJKig?=
- =?us-ascii?Q?TmtyFI9WBeydLOD9qBYqFJl9QkZrFaJrTKXjaNy3L/ZFpb/F7orPr930u8cG?=
- =?us-ascii?Q?38+w3S/SE0WD8AlvnYYGN4yXcrIi0OfjCFsZXxvHPZa/8ePtcM0Sf24olNhz?=
- =?us-ascii?Q?WEsW2FwbEmw+vXfkJJvIi8FN/YH8le1k5JzgIYI4FxcsU8cExaNQYDWmDCeL?=
- =?us-ascii?Q?HqagD9m6BF12fTuzX/Beby8EChKrp4a9blATrjceY8EtCVRgC7k2n/obKeVF?=
- =?us-ascii?Q?ej8fVxpi5tGdXsuhkcaKde7fuLC5s4DOd97P3j5hPEwa2eGid4A1L+IEKZ1z?=
- =?us-ascii?Q?fFRv7rl5j7h3JrGXaps1D3Ke+ScaAzBhK3NO7AxOK7S83tE+jFSzcJUYS9LJ?=
- =?us-ascii?Q?uBFo4qKN3JblHafDaUlijcs83Rz1l1B6v/DAx2d6RZQeLyCj5y84wF8OQgpJ?=
- =?us-ascii?Q?St/7dy01T8wwBwfIQKO1Pau8UtkGia+bSqa+l1VAs8IzXnuJZt9sXphsbU1G?=
- =?us-ascii?Q?o99tmR2lmlHtzsMcR6ExZ2tZbmhBEkD+Wihv2xgwrAyd4HAnRqaT1Jmihm84?=
- =?us-ascii?Q?hVK67hX2XFt8uk2pVP7jMpIf0CZPY/bSb360xuipmiY+jOqx1W7VnVb/Z1R1?=
- =?us-ascii?Q?cw=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 26cd12ed-58e4-485b-b9dc-08de20f864a1
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2025 08:00:34.7363 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DNQtHX1SN9zj71vrIvYHkeCiMFgnUbh7hPlqxPM1Nun4/0hUi2xvz7ZwWTuo+xZl9TjEDl2QRam6DuUDbD6eaZheDJuMDiSaSxo9hHo4i2M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB7042
+References: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
+In-Reply-To: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 11 Nov 2025 13:48:40 +0530
+X-Gm-Features: AWmQ_bn2rKXNuktXam_Sh1eRiH8PhqZ3kEqO_-58Sl8Pvli0CMc9H69byWEDORM
+Message-ID: <CADg8p96wRz75JzMZ+ce3ZWsUMwPezeh3qp-ohDxgAjCBRhM48g@mail.gmail.com>
+Subject: Re: [PATCH v5 00/24] Introduce Firmware Update Support for Arm PSA
+To: abdellatif.elkhlifi@arm.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Davidson kumaresan <davidson.kumaresan@arm.com>, 
+ Adam Johnston <Adam.Johnston@arm.com>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
+ Srinivas Kalaga <Srinivas.Kalaga2@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,31 +102,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Nov 11 2025, Anshul Dalal <anshuld@ti.com> wrote:
-
->>  static int do_part_set(int argc, char *const argv[])
->>  {
->>  	const char *devname, *partstr, *typestr;
->> @@ -273,6 +282,8 @@ static int do_part(struct cmd_tbl *cmdtp, int flag, int argc,
->>  		return do_part_size(argc - 2, argv + 2);
->>  	else if (!strcmp(argv[1], "number"))
->>  		return do_part_number(argc - 2, argv + 2);
->> +	else if (!strcmp(argv[1], "name"))
->> +		return do_part_name(argc - 2, argv + 2);
->>  	else if (!strcmp(argv[1], "types"))
->>  		return do_part_types(argc - 2, argv + 2);
->>  	else if (!strcmp(argv[1], "set"))
->> @@ -305,6 +316,9 @@ U_BOOT_CMD(
->>  	"part number <interface> <dev> <part> <varname>\n"
->>  	"    - set environment variable to the partition number using the partition name\n"
->>  	"      part must be specified as partition name\n"
->> +	"part name <interface> <dev> <part> <varname>\n"
+On Fri, 26 Sept 2025 at 19:44, <abdellatif.elkhlifi@arm.com> wrote:
 >
-> Nit: Shouldn't this be part name <interface> <dev> <part> [varname]
-> instead?
+> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 >
+> This patch series adds Firmware Update (FWU) support for Arm PSA
+> Certified platforms [1], enabling U-Boot to serve as
+> the FWU Client, with the Secure World acting as the Update Agent that
+> manages the firmware store and its metadata.
+>
+> This implementation adheres to the Platform Security Firmware Update
+> specification [3] for the A-profile Arm Architecture and leverages the
+> Trusted Services framework [4] to interact with the Secure World update
+> agent. By delegating update management to the Secure World, U-Boot
+> handles only the client-side coordination, invoking a well-defined set
+> of ABIs over the FF-A interface [5] to deliver update capsules.
+>
+> Key features include:
+>
+> - Generic, platform-agnostic design.
+> - FF-A-based ABI: All interactions between U-Boot and the update agent
+>     occur over the FF-A interface, ensuring compatibility across
+>     PSA-compliant systems.
+> - Multi-payload capsules: Support for capsules containing multiple
+>     payloads, start/end markers, signed firmware images.
+> - ESRT support: Capsule payloads may be signed for authenticity, and
+>     U-Boot can populate the EFI System Resource Table (ESRT) for
+>      OS-level firmware management.
+> - On-disk and standard capsule handling.
+>
+> For implementation details, please refer to the documentation [6].
+> For a real world example, please see the Arm PSA FWU logs [7] when used
+> for on-disk capsule update in Corstone-1000 [2].
+> For trying the implementation on Corstone-1000 FVP, please follow these steps [8].
 
-Yes, probably, I did notice that, but I preferred being consistent with
-the existing cases which also do not indicate varname as optional.
 
-Rasmus
+As mentioned in our offline conversation, I am not sure why this code
+also compiling in the normal-world based FWU implementation in U-Boot.
+That portion of code should not be built on platforms which are going
+to have U-Boot working as a FWU update client. This includes the FWU
+metadata access driver code and the code under lib/fwu_updates/.
+Please check how this can be kept separate. Thanks.
+
+-sughosh
+
+>
+> Changes in v5:
+>
+> * As suggested by Ilias:
+>     - Make PSA handling simpler for the payload acceptance logic
+>     - Use efi_fill_image_desc_array() for PSA
+>       instead of changing efi_firmware_get_image_info()
+>
+> * Add CONFIG_FWU_KEEP_FMP_HEADER to control whether
+>   the user wants to keep the FMP header or strip it from the payload
+>
+> * Address kernel-doc warnings
+>
+> Cheers,
+> Abdellatif
+>
+> [1]: PSA: https://www.psacertified.org
+> [2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
+> [3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest
+> [4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
+> [5]: FF-A interface: doc/arch/arm64.ffa.rst
+> [6]: Documentation of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
+> [7]: Arm PSA FWU logs when used for on-disk capsule update in Corstone-1000
+> [8]: Performing Capsule update on Corstone-1000 FVP and MPS3:
+>      https://git.yoctoproject.org/meta-arm/tree/meta-arm-bsp/documentation/corstone1000/user-guide.rst#n838
+>
+> ```
+> CapsuleApp: capsule block/size              0xDD741040/0x25ACE
+> Found EFI system partition on Boot0001: OnDiskFWU
+> FS2:;HD0b:;BLK4:
+> Succeed to write edk2-corstone1000-fvp-v6.uefi.capsule
+> resetting ...
+> NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
+> ...
+> U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64
+> ...
+> FWU: System booting in Regular State
+> FWU: ABI version 1.0 detected
+> FWU: Updating 1 payload(s)
+> Applying capsule edk2-corstone1000-fvp-v6.uefi.capsule succeeded.
+> Reboot after firmware update.
+> NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
+> ...
+> U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64
+> ...
+> FWU: System booting in Trial State
+> ...
+> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+> ...
+> root@corstone1000-fvp:~# reboot
+> ...
+> U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64
+> ...
+> FWU: System booting in Regular State
+> ...
+> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+>
+> corstone1000-fvp login:
+>
+> root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
+> 0x0
+> f1d883f9-dfeb-5363-98d8-686ee3b69f4f
+> 0
+> 6
+> 0
+> 6
+> 0
+> 0x0
+> 7fad470e-5ec5-5c03-a2c1-4756b495de61
+> 0
+> 0
+> 0
+> 0
+> 0
+> 0x0
+> f1933675-5a8c-5b6d-9ef4-846739e89bc8
+> 0
+> 0
+> 0
+> 0
+> 0
+> 0x0
+> f771aff9-c7e9-5f99-9eda-2369dd694f61
+> 0
+> 0
+> 0
+> 0
+> 0
+> root@corstone1000-fvp:~#
+> ```
+>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jens Wiklander <jens.wiklander@linaro.org>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> Cc: Adriano Cordova <adrianox@gmail.com>
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Cc: Davidson kumaresan <davidson.kumaresan@arm.com>
+> Cc: Adam Johnston <Adam.Johnston@arm.com>
+> Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+> Cc: Srinivas Kalaga <Srinivas.Kalaga2@arm.com>
+>
+> Abdellatif El Khlifi (23):
+>   arm_ffa: Add FFA_MEM_SHARE support
+>   arm_ffa: Add FFA_MEM_RECLAIM support
+>   arm_ffa: sandbox: Replace the emulator error log with debug log
+>   arm_ffa: sandbox: Improve the readability of clearing the X registers
+>   arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
+>   arm_ffa: sandbox: Add FFA_MEM_SHARE tests
+>   arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
+>   arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
+>   fwu_arm_psa: Initialize the update agent
+>   fwu_arm_psa: Read the FWU directory through get_image_info()
+>   fwu_arm_psa: Add staging ABIs
+>   efi_loader: fwu_arm_psa: Add set_image() support
+>   efi_loader: fwu_arm_psa: Allow keeping the FMP payload header
+>   efi_loader: fwu: fwu_arm_psa: Skip accepting the payload after
+>     set_image()
+>   efi_loader: fwu: fwu_arm_psa: Disable trial state handling
+>   fwu_arm_psa: Add FWU acceptance mechanism
+>   fwu_arm_psa: Add ESRT support
+>   fwu_arm_psa: Add ExitBootService() notification handler
+>   fwu_arm_psa: corstone1000: Enable FWU support
+>   fwu_arm_psa: corstone1000: Perform bank logic when reading boot index
+>   fwu_arm_psa: corstone1000: Notify SE Proxy SP on ExitBootService()
+>   fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
+>   fwu_arm_psa: Document FWU support for Arm PSA
+>
+> Emekcan Aras (1):
+>   efi_loader: capsule: Add runtime capsule flags checks
+>
+>  MAINTAINERS                                   |    8 +
+>  .../include/asm/sandbox_arm_ffa_priv.h        |   21 +-
+>  board/armltd/corstone1000/corstone1000.c      |  252 ++-
+>  board/armltd/corstone1000/corstone1000.env    |    8 +
+>  configs/corstone1000_defconfig                |   13 +-
+>  doc/arch/arm64.ffa.rst                        |    4 +
+>  doc/develop/uefi/fwu_arm_psa.rst              |  154 ++
+>  doc/develop/uefi/index.rst                    |    1 +
+>  drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  285 +++-
+>  drivers/firmware/arm-ffa/arm-ffa.c            |    4 +-
+>  drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  108 +-
+>  drivers/firmware/arm-ffa/sandbox_ffa.c        |    4 +-
+>  include/arm_ffa.h                             |  128 +-
+>  include/arm_ffa_priv.h                        |  153 +-
+>  include/efi_api.h                             |    8 +
+>  include/efi_loader.h                          |    8 +
+>  include/fwu_arm_psa.h                         |  403 +++++
+>  lib/efi_loader/efi_capsule.c                  |   46 +-
+>  lib/efi_loader/efi_firmware.c                 |   32 +-
+>  lib/fwu_updates/Kconfig                       |   34 +
+>  lib/fwu_updates/Makefile                      |    2 +
+>  lib/fwu_updates/fwu.c                         |   24 +-
+>  lib/fwu_updates/fwu_arm_psa.c                 | 1467 +++++++++++++++++
+>  test/dm/ffa.c                                 |   73 +-
+>  24 files changed, 3154 insertions(+), 86 deletions(-)
+>  create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+>  create mode 100644 include/fwu_arm_psa.h
+>  create mode 100644 lib/fwu_updates/fwu_arm_psa.c
+>
+>
+> base-commit: 59e6462d7c08eeba744afa0f17846c398b8ef9e1
+> --
+> 2.43.0
+>
