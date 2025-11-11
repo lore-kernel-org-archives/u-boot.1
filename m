@@ -4,79 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38EE6CCFA18
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 21:17:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 664E3CCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 21:18:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8977A83B8C;
-	Tue, 11 Nov 2025 22:17:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=egym.com
+	by phobos.denx.de (Postfix) with ESMTP id E3CF083BB5;
+	Tue, 11 Nov 2025 22:18:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=egym.com header.i=@egym.com header.b="GCRcjvCK";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="F5rBjGAi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA72F83BC7; Tue, 11 Nov 2025 22:17:45 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3EC4783BBE; Tue, 11 Nov 2025 22:18:57 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 868AA83B8A
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 22:17:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4275F83B8C
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 22:18:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=egym.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cibil.pankiras@egym.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-37a34702a20so997931fa.3
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 13:17:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=egym.com; s=egymcom; t=1762895863; x=1763500663; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=18VaMK3ONlIM9AG9I8VoBLa/u/rjeo2Gd3CzpacwVEE=;
- b=GCRcjvCKkhY3LEhMaQAjiMXGgmvqCRuNUoSvRhUwGpMPUAU/G66UL4sM7YsaVWakQK
- pHE7Il7b9KNbs0Wwiw128ALdeQNkBjdTeAJHFkYeBR8bt42iQpOtlOEp2VQtzXYE6WQe
- SSjyfKZLZ0gp2269BkkpAxbXbe6UV+PuQWmJk=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 433FA3F7D1
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 21:18:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1762895925;
+ bh=6SgaDKCW0p7stY3O0ET8GoQDiHMxMV02b+wZ2oGxmDU=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=F5rBjGAi6JZoXasKAfyOnygYYFg7W42brGNI4Gwgh2NGxd0zzqnSBrqR6Vsd01WYT
+ WJy1OPQjZMQd3kR0Ko9TxFFjpuCrBxoWlwZB4xOcHS1y7NbvB/5O+D4wJ6yYHOm0fz
+ bl7lZePb7P605pKJv4rvOVtw/gd3DJXF6wzvlogLvtLSEy4fLyEUUJf5Yt6ZAtfI/U
+ pLOkYC/68XLIUhxcsd2Gndu4hOisnqHyG85fXn7P17lk9A8xmHTHBK6AbjLjnRyRaB
+ Qc0Gvrl3cCCqpfy80Wtw8eSRzh9Y1ejSAfndKqq+dAifdExWXRRLleqFEM+GyPAEHO
+ BreoOXONri/1+7V9XdH3TLAc02xH2FVMXiLlfk8jWB9K3xrJTHsyP/v1sAb27DX14U
+ ie6NTtNcK6Q7ZvOtIWQa3c18kocTNBupZT/M3z92OlSCf4xNqfWcandAxqTkx8An+z
+ Nzxpmyjyp6HN38X4PIWB60+vm6tkMgHi28LvteXFVH121RNqo6kshxTOv3X+fyYQhl
+ bTBpo+2MCETq09MtrhJ72L2s9j4ylLSXoP0FrF5ESJkHhpQd6KUl2EApKN18/kaO4l
+ b0lrtpcYRU3v+XopS+CDjdDdC/cl0uwLq3bSpw1lRJbzpO/RSttHuwFsPgShxUtz6q
+ Ah+mWXzpgraCwhlzGPHMoLU4=
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-475dabb63f2so713905e9.3
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 13:18:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762895863; x=1763500663;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=18VaMK3ONlIM9AG9I8VoBLa/u/rjeo2Gd3CzpacwVEE=;
- b=jMd0k/QFe4qAtGWxaWUSyzqk8Td7cLO70b+1Y8jGWkklWgAqTM73ZwBgOPnNAbcWgG
- +mf4we+SKa3XMwfLoGEB9C13yamy/5MBeafgzhBEt58IzCwuNO0ujh6OvaG7PwpgfM1a
- eg6kJ8u7xE86oy6ETYS+2VVAdskmOKQFMzJppG0wW8ebo6pbVyuu5BJWPmgxjfxjfP2H
- LQkxbIGdMhwenisMauChQMLnakXD3zBr057iy/9nfKDvwexZOBQZ4Utm0LRdHUVHKL2g
- BveqCayvZnV1cq6vtDAOXMsLVGNdHFucE+F7qS3RuP8MHLfp6LTCcEjkCLMzUGEVrP5s
- atFg==
-X-Gm-Message-State: AOJu0YyyZfgFOZG3PHN+KhwFXiv6Xk3Anm8OBxxmbvz5U3GbjN0yunf1
- 0wyJmmqQZPzGgyBL0bz221SRjt2xkxtHebkRJWiTEKNBHm8Qk2rErQu42zWvG3YLaqCTurdjwtP
- olOwdH7kw97kruNUvlNfSkhsuFbETfS1iNtDdBDOy1UZiyqRiDSG3bEVRr0qca7jtUjtq+UzFEy
- az41AlVbJ1eS01L2P09sn5qA==
-X-Gm-Gg: ASbGncvkuDtHGGqewkpOgTs5a78iQ33TKPwktrFaG57i0Uz/bRNW8VmDBokh/BWFDW1
- DVecM8NZO1yzNcNjsyEIdRuJWx+GnBr/uLWoUETqc94eWs8ABAR/zYSvlxERW1sCop8qZfTDRSf
- VPQ0kzMyAcyApQOjXTqmeGStRBbDcGn99ZEzY9XTnQkjL3GER5YbDuiulhirlebfUnYIJKdYAO6
- FM6d5ZKXZw0D0MOVczQpcjJCNCs+mh1bB1PKBe8dNvzJbghce6jySN3NacDQ6JWo8bB
-X-Google-Smtp-Source: AGHT+IEPj2SVDdQxEe+2S+hNBaBcW3rzD0fyChN5wn4jN/b/T1tuEx7cWcelkeKIn5gtWsj2EI7WJ69kNebCYHugRiQ=
-X-Received: by 2002:a2e:98d2:0:b0:37a:9558:5bf8 with SMTP id
- 38308e7fff4ca-37b8c3dca00mr1628531fa.32.1762895862711; Tue, 11 Nov 2025
- 13:17:42 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762895925; x=1763500725;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6SgaDKCW0p7stY3O0ET8GoQDiHMxMV02b+wZ2oGxmDU=;
+ b=S4lqpbEp26wV5F5xMTkcFsMaxkhwingSbAJXy+zmEQhXGURIfarJNqrP81N2Gvw8YP
+ DJ2sKoLIm+vzMfr6nRArDVOmkzsodJmJVdI9dgQ9TMw6DZnjxCikxniaPuom3zRUZ00L
+ MR+k/7DdfGydB1uxew0xMSzttpb2BWV81KIFU2iypsAVMKGaxkW9XbHadaVyUtE/RaPC
+ WOuxzoW7vDjpY8/lx/z8yLEEoPsIpYxPcEe9Km3r74F6NvdfRSjN1PoZ7nXfLbIvSW0k
+ pru7WhO5RNebCX6nkEHsEVAZ5Bd2MH+QbLJ85v1BkBvlVKivEbFOI7W0Ym+aU0CNLW63
+ wAag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWEzvptQtuW13JHTWGIf8YYJqgQ1o+MjL7HvkQJrORk4vE3uSPvsTVpCPZETOlIDEKhshi+Rzw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyDZvrK3eTmaBWPqyR05+FBK4xq1gTAJe/jO/rMTF0vPDnloIvt
+ FCWv7UJKXvjfEazvcLv7mO+Tkn1TowhoFTWYpZNzgB1W1QawdZYCA/W0LwmJ9POpzRGkwcvcgKc
+ V0XtsmaJJ6AfFfNEDW6VyICIXXQ017YGy94Gfa0PwiV2wnhbKlZffJqMTpQ185cyBvHiYFUk=
+X-Gm-Gg: ASbGncueJsigRv4wxH1t1XrcMLixHS2O6dBXK7Q7jdgdtzZezQrXOIbeHc5P7XtoPgo
+ ZTgBvf+QPUHCafxgRLr43LqlPjKaMs540n15wMyfmiEiDFioK8oScjrbQhkIU2p9ZD4sQ8tpc6R
+ LGaydRhxhD9Gx3q7QVbVGSAL7vfcfJ6B2Q9KBFVr1haR4u5yHj/Jtw5O6w5/hGqcAsU7YqtpD8B
+ yjOLBqarYDVkyrxhMrFUnzMwmM0pw/7tsbrBJ7RkZXXes6wTdVdiz/1ajZbpDnbGpPZRPaXXqDP
+ vLDdBGzaRVFM7zI3ti10Q1Kz792N98DcJqpbySBv5dz8H/iZgsH2EIzWklwcpuf72b5yCo3flAC
+ zZz+WhlKHmcNLhvINn/5FqC6ke9ONoQFCfzYGceAg5FpgYfZSlixLAYC5YiKifnCqAIL4KoU4
+X-Received: by 2002:a05:600c:1d0a:b0:46e:32f7:98fc with SMTP id
+ 5b1f17b1804b1-477870962bemr6596325e9.21.1762895924799; 
+ Tue, 11 Nov 2025 13:18:44 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IETOcTg+QYIPq0Ro2K0sDS3V11YIH8rLreUZWpv9VdFufxUUnlQI0OzSDaAMsj8sSlXTOG5Vw==
+X-Received: by 2002:a05:600c:1d0a:b0:46e:32f7:98fc with SMTP id
+ 5b1f17b1804b1-477870962bemr6596095e9.21.1762895924378; 
+ Tue, 11 Nov 2025 13:18:44 -0800 (PST)
+Received: from [192.168.123.154]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-42ac679607esm29649293f8f.43.2025.11.11.13.18.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Nov 2025 13:18:43 -0800 (PST)
+Message-ID: <7247453e-e164-4d96-936e-a3fa5b61cae6@canonical.com>
+Date: Tue, 11 Nov 2025 22:18:41 +0100
 MIME-Version: 1.0
-References: <20251110112426.534118-1-cibil.pankiras@egym.com>
- <b637c777-d4aa-47ad-baf8-1f825dd379b8@suse.com>
-In-Reply-To: <b637c777-d4aa-47ad-baf8-1f825dd379b8@suse.com>
-From: Cibil Pankiras <cibil.pankiras@egym.com>
-Date: Tue, 11 Nov 2025 22:17:30 +0100
-X-Gm-Features: AWmQ_bndMMj1058zDSh2rndV_8rq8umFAms-SOu4hugFfnc8Qmu-K-a2jelFfPQ
-Message-ID: <CAK3EG+mu-Q05KiusOhe16vYPGHopWPGi_o1_8kzQbHDGWQyb-A@mail.gmail.com>
-Subject: Re: [PATCH] pinctrl: bcm283x: Add GPIO pull-up/down control for
- BCM2835 and BCM2711
-To: Matthias Brugger <mbrugger@suse.com>
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RESEND 1/9] test: fdt_test_apply requires
+ CONFIG_OF_LIBFDT_OVERLAY
+To: Tom Rini <trini@konsulko.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Raymond Mao <raymond.mao@linaro.org>, Michal Simek <michal.simek@amd.com>,
+ Adriano Cordova <adrianox@gmail.com>, Harrison Mutai
+ <harrison.mutai@arm.com>, Peng Fan <peng.fan@nxp.com>,
+ Ben Dooks <ben.dooks@codethink.co.uk>, Svyatoslav Ryhel
+ <clamor95@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
+ u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-2-heinrich.schuchardt@canonical.com>
+ <CAC_iWjK_SUEZsEzT3zb2BK-dwcXdp1gZoU880Wc1efSPAzftMw@mail.gmail.com>
+ <20251111133205.GR6688@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251111133205.GR6688@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,200 +132,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Matthias,
+On 11/11/25 14:32, Tom Rini wrote:
+> On Tue, Nov 11, 2025 at 10:29:23AM +0200, Ilias Apalodimas wrote:
+>> Hi Heinrich
+>>
+>> On Sun, 9 Nov 2025 at 12:10, Heinrich Schuchardt
+>> <heinrich.schuchardt@canonical.com> wrote:
+>>>
+>>> The `fdt apply` sub-command is only available if CONFIG_OF_LIBFDT_OVERLAY
+>>> is enabled.
+>>>
+>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>> ---
+>>>   test/cmd/fdt.c | 3 +++
+>>>   1 file changed, 3 insertions(+)
+>>>
+>>> diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+>>> index 96a8488e172..a36f2dcdda8 100644
+>>> --- a/test/cmd/fdt.c
+>>> +++ b/test/cmd/fdt.c
+>>> @@ -1319,6 +1319,9 @@ static int fdt_test_apply(struct unit_test_state *uts)
+>>>          char fdt[8192], fdto[8192];
+>>>          ulong addr, addro;
+>>>
+>>> +       if (!IS_ENABLED(CONFIG_OF_LIBFDT_OVERLAY))
+>>> +               return -EAGAIN;
+>>
+>> The asserts return CMD_RET_FAILURE on failures. Should't we use the same here?
+>>
+>>> +
+>>>          /* Create base DT with __symbols__ node */
+>>>          ut_assertok(fdt_create(fdt, sizeof(fdt)));
+>>>          ut_assertok(fdt_finish_reservemap(fdt));
+> 
+> Or just guard the whole test if #ifdef CONFIG_OF_LIBFDT_OVERLAY ...
+> #endif.
+> 
 
-On Mon, Nov 10, 2025 at 4:42=E2=80=AFPM Matthias Brugger <mbrugger@suse.com=
-> wrote:
->
->
->
-> On 10/11/2025 12:24, Cibil Pankiras wrote:
-> > This patch adds support for configuring GPIO pull-up and pull-down
-> > resistors in the BCM283x pinctrl driver. It implements the brcm,pull
-> > device tree property to control pin bias settings.
-> >
-> > The implementation follows the hardware-specific pull control
-> > mechanisms:
-> > - BCM2835: two-step GPPUD register sequence
-> > - BCM2711: direct per-pin control registers
-> >
-> > This enables device tree configurations to specify pull-up, pull-down,
-> > or no bias for individual GPIO pins.
-> >
-> > Tested on Raspberry Pi boards with both BCM2835 and BCM2711 SoCs.
-> >
-> > Signed-off-by: Cibil Pankiras <cibil.pankiras@egym.com>
-> > ---
-> >   arch/arm/mach-bcm283x/include/mach/gpio.h  |  10 ++
-> >   drivers/pinctrl/broadcom/pinctrl-bcm283x.c | 102 ++++++++++++++++++++=
--
-> >   2 files changed, 109 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/arch/arm/mach-bcm283x/include/mach/gpio.h b/arch/arm/mach-=
-bcm283x/include/mach/gpio.h
-> > index 4aeb48eeb20..c54414a012c 100644
-> > --- a/arch/arm/mach-bcm283x/include/mach/gpio.h
-> > +++ b/arch/arm/mach-bcm283x/include/mach/gpio.h
-> > @@ -26,6 +26,16 @@
-> >   #define BCM2835_GPIO_FSEL_BANK(gpio)        (gpio / 10)
-> >   #define BCM2835_GPIO_FSEL_SHIFT(gpio)       ((gpio % 10) * 3)
-> >
-> > +/* BCM2835 GPIO Pull-up/down register offsets */
-> > +#define BCM2835_GPPUD                37
-> > +#define BCM2835_GPPUDCLK0    38
-> > +
-> > +/* BCM2711 GPIO Pull-up/down control */
-> > +#define BCM2711_GPPUD_CNTRL_REG0     57
-> > +#define BCM2711_PUD_REG_OFFSET(gpio) ((gpio) / 16)
-> > +#define BCM2711_PUD_REG_SHIFT(gpio)  (((gpio) % 16) * 2)
-> > +#define BCM2711_PUD_2711_MASK                0x3
-> > +
-> >   struct bcm2835_gpio_regs {
-> >       u32 gpfsel[6];
-> >       u32 reserved1;
-> > diff --git a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c b/drivers/pinct=
-rl/broadcom/pinctrl-bcm283x.c
-> > index cf9350c151e..c588015905d 100644
-> > --- a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-> > +++ b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-> > @@ -21,6 +21,8 @@
-> >   #include <asm/system.h>
-> >   #include <asm/io.h>
-> >   #include <asm/gpio.h>
-> > +#include <dt-bindings/pinctrl/bcm2835.h>
-> > +#include <linux/delay.h>
-> >
-> >   struct bcm283x_pinctrl_priv {
-> >       u32 *base_reg;
-> > @@ -54,7 +56,66 @@ static int bcm2835_gpio_get_func_id(struct udevice *=
-dev, unsigned int gpio)
-> >   }
-> >
-> >   /*
-> > - * bcm283x_pinctrl_set_state: configure pin functions.
-> > + * bcm2835_gpio_set_pull: Set GPIO pull-up/down resistor for BCM2835
-> > + * @dev: the pinctrl device
-> > + * @gpio: the GPIO pin number
-> > + * @pull: pull setting (BCM2835_PUD_OFF, BCM2835_PUD_DOWN, BCM2835_PUD=
-_UP)
-> > + */
-> > +static void bcm2835_gpio_set_pull(struct udevice *dev, unsigned int gp=
-io, int pull)
-> > +{
-> > +     struct bcm283x_pinctrl_priv *priv =3D dev_get_priv(dev);
-> > +     u32 bank =3D BCM2835_GPPUDCLK0 + BCM2835_GPIO_COMMON_BANK(gpio);
-> > +     u32 bit =3D BCM2835_GPIO_COMMON_SHIFT(gpio);
-> > +
-> > +     /* Set required control signal */
-> > +     writel(pull & 0x3, &priv->base_reg[BCM2835_GPPUD]);
-> > +     udelay(1);
-> > +
-> > +     /* Clock the control signal into the GPIO pads */
-> > +     writel(1 << bit, &priv->base_reg[bank]);
-> > +     udelay(1);
-> > +
-> > +     /* Remove the control signal and clock */
-> > +     writel(0, &priv->base_reg[BCM2835_GPPUD]);
-> > +     writel(0, &priv->base_reg[bank]);
-> > +}
-> > +
-> > +/*
-> > + * bcm2711_gpio_set_pull: Set GPIO pull-up/down resistor for BCM2711
-> > + * @dev: the pinctrl device
-> > + * @gpio: the GPIO pin number
-> > + * @pull: pull setting (BCM2835_PUD_OFF, BCM2835_PUD_DOWN, BCM2835_PUD=
-_UP)
-> > + */
-> > +static void bcm2711_gpio_set_pull(struct udevice *dev, unsigned int gp=
-io, int pull)
-> > +{
-> > +     struct bcm283x_pinctrl_priv *priv =3D dev_get_priv(dev);
-> > +     u32 reg_offset;
-> > +     u32 bit_shift;
-> > +     u32 pull_bits;
-> > +
-> > +     /* Findout which GPIO_PUP_PDN_CNTRL register to use */
-> > +     reg_offset =3D BCM2711_GPPUD_CNTRL_REG0 + BCM2711_PUD_REG_OFFSET(=
-gpio);
-> > +
-> > +     /* Findout the bit position */
-> > +     bit_shift =3D BCM2711_PUD_REG_SHIFT(gpio);
-> > +
-> > +     /* Update the 2-bit field for this GPIO */
-> > +     pull_bits =3D pull & BCM2711_PUD_2711_MASK;
-> > +     clrsetbits_le32(&priv->base_reg[reg_offset],
-> > +                     BCM2711_PUD_2711_MASK << bit_shift,
-> > +                     pull_bits << bit_shift);
-> > +}
-> > +
-> > +static void bcm283x_gpio_set_pull(struct udevice *dev, unsigned int gp=
-io, int pull)
-> > +{
-> > +     if (device_is_compatible(dev, "brcm,bcm2835-gpio"))
-> > +             bcm2835_gpio_set_pull(dev, gpio, pull);
-> > +     else
-> > +             bcm2711_gpio_set_pull(dev, gpio, pull);
-> > +}
-> > +
-> > +/*
-> > + * bcm283x_pinctrl_set_state: configure pin functions and pull states.
-> >    * @dev: the pinctrl device to be configured.
-> >    * @config: the state to be configured.
-> >    * @return: 0 in success
-> > @@ -62,8 +123,9 @@ static int bcm2835_gpio_get_func_id(struct udevice *=
-dev, unsigned int gpio)
-> >   int bcm283x_pinctrl_set_state(struct udevice *dev, struct udevice *co=
-nfig)
-> >   {
-> >       u32 pin_arr[MAX_PINS_PER_BANK];
-> > +     u32 pull_arr[MAX_PINS_PER_BANK];
-> >       int function;
-> > -     int i, len, pin_count =3D 0;
-> > +     int i, len, pin_count =3D 0, pull_len =3D 0, pull_count =3D 0;
-> >
-> >       if (!dev_read_prop(config, "brcm,pins", &len) || !len ||
-> >           len & 0x3 || dev_read_u32_array(config, "brcm,pins", pin_arr,
-> > @@ -82,8 +144,42 @@ int bcm283x_pinctrl_set_state(struct udevice *dev, =
-struct udevice *config)
-> >               return -EINVAL;
-> >       }
-> >
-> > -     for (i =3D 0; i < pin_count; i++)
-> > +     /* Check if brcm,pull property exists */
-> > +     if (dev_read_prop(config, "brcm,pull", &pull_len) && pull_len > 0=
-) {
-> > +             if (pull_len & 0x3) {
->
-> We should check for arbitrary values, so check should be, pull_len > 0x2
+-EGAIN is used for skipping in a good number of tests.
+See also the usage in test/test-main.c.
 
-In the current version of the patch, I validate each element in
-pull_arr[] as follows:
-    for (i =3D 0; i < pull_count; i++) {
-        if (pull_arr[i] > 2) {
-            debug("Invalid pull value %d for pin %d in pinconfig %s\n",
-                  pull_arr[i], pin_arr[i], config->name);
-            return -EINVAL;
+Best regards
 
-Could you please clarify? Did you mean to replace the alignment check
-`if (pull_len & 0x3)` with `pull_len > 0x2` ?
-
-Regards,
-Cibil
-
-
-
-        }
-    }
-
->
-> With that change:
-> Reviewed-by: Matthias Brugger <mbrugger@suse.com>
->
-
---=20
-EGYM SE, Einsteinstra=C3=9Fe 172, 81677 M=C3=BCnchen
-Gesch=C3=A4ftsf=C3=BChrende Direktoren:=20
-Patrick Meininger, Philipp Roesch-Schlanderer, Florian Sauter
-Gerichtsstand=20
-M=C3=BCnchen | Amtsgericht M=C3=BCnchen HRB 303509=C2=A0|=C2=A0USt.-Id. DE2=
-75313632
+Heinrich
