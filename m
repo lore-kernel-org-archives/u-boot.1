@@ -4,87 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91838CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:18:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 664BFCCFA18
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:23:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13A5D83AB4;
-	Tue, 11 Nov 2025 09:18:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C2DCD83AB4;
+	Tue, 11 Nov 2025 09:22:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K6JcEJUx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="na7JeLI9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAB8D83B2C; Tue, 11 Nov 2025 09:18:56 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 0620D83B30; Tue, 11 Nov 2025 09:22:58 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB93183A91
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:18:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2281E83A91
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:22:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-4edacc41dc5so19492161cf.0
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:18:53 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-8b22a30986fso386626785a.2
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:22:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762849133; x=1763453933; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1762849374; x=1763454174; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lyI3gF/xaKrWWr8Zj0/ajtvVzYdfUWvQ3SMHggzMXEU=;
- b=K6JcEJUxO1kUar9xDR4ZDWFQbq4KecuQv8XVfdH66aMe6IkA+yUWbiyEHo79FI3itz
- ul7TcwTjFlOu7wjiI3NXFr1wBgl0mV8iRAfkktEdEnFYK2A60/Y87SpB+eKGEnJQIDaQ
- RTvvh81F0U+QX2QiKb3FhlLzH4r8YK6pSn+qa7aUTTHMrFPVCthNSFEiG9pXHg5o418R
- iPnSJE4qiiJ63LaKu/NNb0Hr6lPH7S731ZQpElHaJFkZyMBpsMB63r315l9cBajtzWax
- bQTeYEJ0SBYsfoUgHvB/nqviQFlhb8uFVqocoMU8c00otV0sdAcaBwiJmJnkOoneK6gm
- mUbA==
+ bh=6L9tSVM5AOdd/LGCuKJDmuYlplmaR7FiU05onLA85Tc=;
+ b=na7JeLI9EPF0tm/dEw0IYAR9Y95arOD63I4IGYeYUTtPU8R1dU5wezMdqgZzP3MOzQ
+ gd0Nstxb+/WWG2WCP9rzcWg9pRJGJyb54jxQ37GEcmZeh5FeyakMaqXFWOX0Pbh2O08Q
+ OA5JTVpB4MzOrmW41b5RL2Dvnfp6kbsz/U+U4txuK3FcbkmtbFES3LvU6ZIpU5X5C4jf
+ fy5w/2fk897LyXZOrBpIZGq5Dwj3TwSqS+jYjDc4tIveC6oU+j5jgwJKvkIsuO6Bhxi5
+ nfmdoZpldEc7RR1k+8q67TP9lq6XNXlr5J40Cg1uZfJK8JizgADP8+0Uyp1sPC+KAigQ
+ qphw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762849133; x=1763453933;
+ d=1e100.net; s=20230601; t=1762849374; x=1763454174;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lyI3gF/xaKrWWr8Zj0/ajtvVzYdfUWvQ3SMHggzMXEU=;
- b=wLDmd9Gw6nPV2FMndBkJqoY8PuLbUd/z+LFoPCreiI1qtHjTrNYaaRjkaX3o7LNUAj
- 8YjsGmiF5Awl1la20wZ54ycuePnT8tuQqDUkYNlR2o5+xyxEYOZ1M0sHiIZgoFIPLc3h
- KZX4b1ZhXqZSAH9VZb/i4aGPmclHeEuxaH0RQnt4Humz2pW3+71fTFG+Ogn2vcs+uuTm
- d0dEOuPlAO3wipNvWwZ5ywvZ9N++sB/vviNLoVGJIBWcAYay4LqBtcNqTlMYwujPAAmo
- iHtaSr7kiJeqTWWVDEobKfWiycXtzSix54lt2nmrGqVkzCuebu4rtkqUzXktwdDyC8wi
- x8wQ==
-X-Gm-Message-State: AOJu0YyW+F+LsNiwqDkc46R2qdqWbGby34iKLuOdmxc5tRSLTA+zvsl6
- YoRfe38UdB5jsPC7HTM7GXHiOcltGHlFDMrxrVPf5a4Lm9mO3Wojvp05BhOxQLQSvcSzuDXFrNi
- KblsgZIo3bm6bjzu2lO1jufvjMkqKmW7ENpGHAr8MHQ==
-X-Gm-Gg: ASbGncv4Cf4AERmG+WpRg+f6CHyLx6n4+p6MgNbOWpQJZjTztqPYkvRNtNwv6IK865p
- H9XnAr+TQk2Ve79gO74ewCsj5yofFQcLtvrhVO9+MhGb82G5bvwKtqX4DJQ57pZcHS5dQGbtZUJ
- s8EduaRAAVAan+mQai4f9TrKuOyvPrOwJsv/1PlZl//v7zFPv2soEuTS4IHqYhpanejiXqja0jx
- cuMx3THG69Oi99C8d0vJ5ipLuD81XGAzyxMdI+eRJuW5jUoVNbGppu8o8xJgA==
-X-Google-Smtp-Source: AGHT+IGBS1u4MHtcZs0gJTSgFNHQI/IGcuCu+w17Ve+0WbD3k2EIrFPpf4RMCE7WqpHCtp4XUyHNWijKXaL3nFID/iE=
-X-Received: by 2002:ac8:5856:0:b0:4e8:baad:9875 with SMTP id
- d75a77b69052e-4eda4e70d87mr134855991cf.4.1762849132463; Tue, 11 Nov 2025
- 00:18:52 -0800 (PST)
+ bh=6L9tSVM5AOdd/LGCuKJDmuYlplmaR7FiU05onLA85Tc=;
+ b=I9EKGvoEK+96NzEZv63njH1nueETuYULt76CPk83rhae81YZCNkHlkdOM31g8eNNp7
+ 8VGxDfqQZWrWpWgK0wvgVcc5As8WyWQL8o361zG30g+R+ab2KB/hwFqYJQ00iqbPZcqo
+ Y2rlHZK4zOLx0954GQ0G2rjHbM6P16sN05C5b/L9YpFUoE1f2fCk7DZIbc6dMS/p0uJF
+ ezklDNWo/9mRrbMruiWABR+SfS+zF0F6I4dhdPbtbbzGs1fK3CJEEYvJ2hMV6OeQnYrL
+ 4fQUu76HoJMjsnvsi4FRP8oVxYTzIhDWIEFOfzIm+QYvbIL5bWCzz1EMa3oYizPM0V0A
+ JKYg==
+X-Gm-Message-State: AOJu0Yzv+j8wYoYX8Fh95P7EZzq3VyevHSS7w1otF2posXRl7e5qm4ue
+ mh7yQPWhhNDTzcvERjPgvuhkwJjx0Bcpb+Y2D5ZXeXm7z06qlC7iNJANGzxspNnR6ucYFSbPglJ
+ yUOLb92htBNFSIVVr/6lZCeGi2Rjenr0MYMpbicgWGA==
+X-Gm-Gg: ASbGncudS/RgBKHYOT64ZcYzGJACUbjkMSH3VH1n/F5/rxdvMZ7F8ceamEaTWFBHgJ5
+ d93kAeTUauPrZaAf3v40VwSIL3PTBKQ5fvCnfnTlkvWBy/iLJ/1LtsorXyKep69k3TXN1/ZaQmH
+ nAdiHXQCcIb5ZHviEtK6mMcPH5L7WsFmNWPW1b0CujdgjerBzwOB+uKrzhV3dXrxTMAbtYftzQS
+ MELIsW/4fKKydbEEvq4OHIiFutUSKrZHVyP3cROSzPuL66yUfSkZDf/RgolmA==
+X-Google-Smtp-Source: AGHT+IEcsOikfR7fT+dFVm2Cy66qEVbNiJmZsYvLq49vZjHyO8pl8yEpJqB6P3focP0D0ti/xMsaaFEWR2szpVNcgAg=
+X-Received: by 2002:a05:620a:480a:b0:85c:bb2:ad8c with SMTP id
+ af79cd13be357-8b257f50ca2mr1365414985a.74.1762849373866; Tue, 11 Nov 2025
+ 00:22:53 -0800 (PST)
 MIME-Version: 1.0
 References: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
-In-Reply-To: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
+ <20250926141351.1755829-10-abdellatif.elkhlifi@arm.com>
+In-Reply-To: <20250926141351.1755829-10-abdellatif.elkhlifi@arm.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 11 Nov 2025 13:48:40 +0530
-X-Gm-Features: AWmQ_bn2rKXNuktXam_Sh1eRiH8PhqZ3kEqO_-58Sl8Pvli0CMc9H69byWEDORM
-Message-ID: <CADg8p96wRz75JzMZ+ce3ZWsUMwPezeh3qp-ohDxgAjCBRhM48g@mail.gmail.com>
-Subject: Re: [PATCH v5 00/24] Introduce Firmware Update Support for Arm PSA
+Date: Tue, 11 Nov 2025 13:52:42 +0530
+X-Gm-Features: AWmQ_bngAd_4RIGEU1qyccMINrMfdwynDJcYOdpkhD9toQpo8X6WnrogjA80peg
+Message-ID: <CADg8p95fUPu3U7mvPu47ZnFP4t_-uU4qVFOyRoQMtAw9whtfXw@mail.gmail.com>
+Subject: Re: [PATCH v5 09/24] fwu_arm_psa: Initialize the update agent
 To: abdellatif.elkhlifi@arm.com
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Michal Simek <michal.simek@amd.com>,
+Cc: u-boot@lists.denx.de, Davidson kumaresan <davidson.kumaresan@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Davidson kumaresan <davidson.kumaresan@arm.com>, 
- Adam Johnston <Adam.Johnston@arm.com>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>, 
- Srinivas Kalaga <Srinivas.Kalaga2@arm.com>
+ Casey Connolly <casey.connolly@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,213 +99,469 @@ On Fri, 26 Sept 2025 at 19:44, <abdellatif.elkhlifi@arm.com> wrote:
 >
 > From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 >
-> This patch series adds Firmware Update (FWU) support for Arm PSA
-> Certified platforms [1], enabling U-Boot to serve as
-> the FWU Client, with the Secure World acting as the Update Agent that
-> manages the firmware store and its metadata.
+> Add the initializations required for the update agent
 >
-> This implementation adheres to the Platform Security Firmware Update
-> specification [3] for the A-profile Arm Architecture and leverages the
-> Trusted Services framework [4] to interact with the Secure World update
-> agent. By delegating update management to the Secure World, U-Boot
-> handles only the client-side coordination, invoking a well-defined set
-> of ABIs over the FF-A interface [5] to deliver update capsules.
+> The aim is adding support for the Trusted Services (aka TS)
+> Firmware Update API. This API allows the interaction with
+> the FWU services provided by Secure world.
+> At U-Boot level, we provide the PSA FWU ABI built on top of the
+> FF-A bus to invoke the FWU services in Secure world.
 >
-> Key features include:
+> The design is based on the Platform Security Firmware Update
+> for the A-profile Arm Architecture specification [1].
 >
-> - Generic, platform-agnostic design.
-> - FF-A-based ABI: All interactions between U-Boot and the update agent
->     occur over the FF-A interface, ensuring compatibility across
->     PSA-compliant systems.
-> - Multi-payload capsules: Support for capsules containing multiple
->     payloads, start/end markers, signed firmware images.
-> - ESRT support: Capsule payloads may be signed for authenticity, and
->     U-Boot can populate the EFI System Resource Table (ESRT) for
->      OS-level firmware management.
-> - On-disk and standard capsule handling.
+> In our design, the Secure world is the update agent. U-Boot
+> is the update client.
 >
-> For implementation details, please refer to the documentation [6].
-> For a real world example, please see the Arm PSA FWU logs [7] when used
-> for on-disk capsule update in Corstone-1000 [2].
-> For trying the implementation on Corstone-1000 FVP, please follow these steps [8].
-
-
-As mentioned in our offline conversation, I am not sure why this code
-also compiling in the normal-world based FWU implementation in U-Boot.
-That portion of code should not be built on platforms which are going
-to have U-Boot working as a FWU update client. This includes the FWU
-metadata access driver code and the code under lib/fwu_updates/.
-Please check how this can be kept separate. Thanks.
-
--sughosh
-
+> The update agent is initialized as follows:
 >
-> Changes in v5:
+> - Trusted Services FWU SP discovery
+> - Setting up the shared buffer between the Normal world (U-Boot) and
+>   Secure world (Trusted Services)
+> - Notifying FWU SP about the shared buffer
 >
-> * As suggested by Ilias:
->     - Make PSA handling simpler for the payload acceptance logic
->     - Use efi_fill_image_desc_array() for PSA
->       instead of changing efi_firmware_get_image_info()
+> [1]: DEN0118, 1.0 A:
+>     https://developer.arm.com/documentation/den0118/latest/
 >
-> * Add CONFIG_FWU_KEEP_FMP_HEADER to control whether
->   the user wants to keep the FMP header or strip it from the payload
->
-> * Address kernel-doc warnings
->
-> Cheers,
-> Abdellatif
->
-> [1]: PSA: https://www.psacertified.org
-> [2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
-> [3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest
-> [4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
-> [5]: FF-A interface: doc/arch/arm64.ffa.rst
-> [6]: Documentation of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
-> [7]: Arm PSA FWU logs when used for on-disk capsule update in Corstone-1000
-> [8]: Performing Capsule update on Corstone-1000 FVP and MPS3:
->      https://git.yoctoproject.org/meta-arm/tree/meta-arm-bsp/documentation/corstone1000/user-guide.rst#n838
->
-> ```
-> CapsuleApp: capsule block/size              0xDD741040/0x25ACE
-> Found EFI system partition on Boot0001: OnDiskFWU
-> FS2:;HD0b:;BLK4:
-> Succeed to write edk2-corstone1000-fvp-v6.uefi.capsule
-> resetting ...
-> NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
-> ...
-> U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64
-> ...
-> FWU: System booting in Regular State
-> FWU: ABI version 1.0 detected
-> FWU: Updating 1 payload(s)
-> Applying capsule edk2-corstone1000-fvp-v6.uefi.capsule succeeded.
-> Reboot after firmware update.
-> NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
-> ...
-> U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64
-> ...
-> FWU: System booting in Trial State
-> ...
-> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
-> ...
-> root@corstone1000-fvp:~# reboot
-> ...
-> U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64
-> ...
-> FWU: System booting in Regular State
-> ...
-> Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
->
-> corstone1000-fvp login:
->
-> root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
-> 0x0
-> f1d883f9-dfeb-5363-98d8-686ee3b69f4f
-> 0
-> 6
-> 0
-> 6
-> 0
-> 0x0
-> 7fad470e-5ec5-5c03-a2c1-4756b495de61
-> 0
-> 0
-> 0
-> 0
-> 0
-> 0x0
-> f1933675-5a8c-5b6d-9ef4-846739e89bc8
-> 0
-> 0
-> 0
-> 0
-> 0
-> 0x0
-> f771aff9-c7e9-5f99-9eda-2369dd694f61
-> 0
-> 0
-> 0
-> 0
-> 0
-> root@corstone1000-fvp:~#
-> ```
->
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> Signed-off-by: Davidson kumaresan <davidson.kumaresan@arm.com>
 > Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Tom Rini <trini@konsulko.com>
 > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Jens Wiklander <jens.wiklander@linaro.org>
+> Cc: Simon Glass <sjg@chromium.org>
 > Cc: Michal Simek <michal.simek@amd.com>
 > Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Adriano Cordova <adrianox@gmail.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Davidson kumaresan <davidson.kumaresan@arm.com>
-> Cc: Adam Johnston <Adam.Johnston@arm.com>
-> Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
-> Cc: Srinivas Kalaga <Srinivas.Kalaga2@arm.com>
 >
-> Abdellatif El Khlifi (23):
->   arm_ffa: Add FFA_MEM_SHARE support
->   arm_ffa: Add FFA_MEM_RECLAIM support
->   arm_ffa: sandbox: Replace the emulator error log with debug log
->   arm_ffa: sandbox: Improve the readability of clearing the X registers
->   arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
->   arm_ffa: sandbox: Add FFA_MEM_SHARE tests
->   arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
->   arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
->   fwu_arm_psa: Initialize the update agent
->   fwu_arm_psa: Read the FWU directory through get_image_info()
->   fwu_arm_psa: Add staging ABIs
->   efi_loader: fwu_arm_psa: Add set_image() support
->   efi_loader: fwu_arm_psa: Allow keeping the FMP payload header
->   efi_loader: fwu: fwu_arm_psa: Skip accepting the payload after
->     set_image()
->   efi_loader: fwu: fwu_arm_psa: Disable trial state handling
->   fwu_arm_psa: Add FWU acceptance mechanism
->   fwu_arm_psa: Add ESRT support
->   fwu_arm_psa: Add ExitBootService() notification handler
->   fwu_arm_psa: corstone1000: Enable FWU support
->   fwu_arm_psa: corstone1000: Perform bank logic when reading boot index
->   fwu_arm_psa: corstone1000: Notify SE Proxy SP on ExitBootService()
->   fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
->   fwu_arm_psa: Document FWU support for Arm PSA
+> ---
 >
-> Emekcan Aras (1):
->   efi_loader: capsule: Add runtime capsule flags checks
+> Changelog of changes:
+> ===========================
 >
->  MAINTAINERS                                   |    8 +
->  .../include/asm/sandbox_arm_ffa_priv.h        |   21 +-
->  board/armltd/corstone1000/corstone1000.c      |  252 ++-
->  board/armltd/corstone1000/corstone1000.env    |    8 +
->  configs/corstone1000_defconfig                |   13 +-
->  doc/arch/arm64.ffa.rst                        |    4 +
->  doc/develop/uefi/fwu_arm_psa.rst              |  154 ++
->  doc/develop/uefi/index.rst                    |    1 +
->  drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  285 +++-
->  drivers/firmware/arm-ffa/arm-ffa.c            |    4 +-
->  drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  108 +-
->  drivers/firmware/arm-ffa/sandbox_ffa.c        |    4 +-
->  include/arm_ffa.h                             |  128 +-
->  include/arm_ffa_priv.h                        |  153 +-
->  include/efi_api.h                             |    8 +
->  include/efi_loader.h                          |    8 +
->  include/fwu_arm_psa.h                         |  403 +++++
->  lib/efi_loader/efi_capsule.c                  |   46 +-
->  lib/efi_loader/efi_firmware.c                 |   32 +-
->  lib/fwu_updates/Kconfig                       |   34 +
->  lib/fwu_updates/Makefile                      |    2 +
->  lib/fwu_updates/fwu.c                         |   24 +-
->  lib/fwu_updates/fwu_arm_psa.c                 | 1467 +++++++++++++++++
->  test/dm/ffa.c                                 |   73 +-
->  24 files changed, 3154 insertions(+), 86 deletions(-)
->  create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+> v5:
+>
+> * Address kernel-doc warnings
+>
+> v4:
+>
+> * Update the function headers in fwu_arm_psa.c to pass kernel-doc tests
+>
+> v1:
+>
+> * Add the feature
+>
+>  MAINTAINERS                   |   7 +
+>  include/fwu_arm_psa.h         |  55 +++++++
+>  lib/fwu_updates/Kconfig       |  18 +++
+>  lib/fwu_updates/Makefile      |   2 +
+>  lib/fwu_updates/fwu_arm_psa.c | 263 ++++++++++++++++++++++++++++++++++
+>  5 files changed, 345 insertions(+)
 >  create mode 100644 include/fwu_arm_psa.h
 >  create mode 100644 lib/fwu_updates/fwu_arm_psa.c
 >
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 92119667618..fdf34c74049 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1227,6 +1227,13 @@ T:       git https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git
+>  F:     drivers/watchdog/sp805_wdt.c
+>  F:     drivers/watchdog/sbsa_gwdt.c
 >
-> base-commit: 59e6462d7c08eeba744afa0f17846c398b8ef9e1
+> +FWU ARM PSA
+> +M:     Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> +M:     Davidson kumaresan <davidson.kumaresan@arm.com>
+> +S:     Maintained
+> +F:     include/fwu_arm_psa.h
+> +F:     lib/fwu_updates/fwu_arm_psa.c
+> +
+>  FWU Multi Bank Update
+>  M:     Sughosh Ganu <sughosh.ganu@linaro.org>
+>  S:     Maintained
+> diff --git a/include/fwu_arm_psa.h b/include/fwu_arm_psa.h
+> new file mode 100644
+> index 00000000000..5e1229f3bdb
+> --- /dev/null
+> +++ b/include/fwu_arm_psa.h
+> @@ -0,0 +1,55 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+> + *
+> + * Authors:
+> + *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> + *   Davidson kumaresan <davidson.kumaresan@arm.com>
+> + */
+> +
+> +#ifndef __FWU_ARM_PSA_H
+> +#define __FWU_ARM_PSA_H
+> +
+> +#include <linux/bitfield.h>
+> +#include <u-boot/uuid.h>
+> +
+> +#define FWU_BUFFER_PAGES               (1024)
+> +
+> +/* 4 MB buffer shared with secure world */
+> +#define FWU_BUFFER_SIZE                        (FWU_BUFFER_PAGES * EFI_PAGE_SIZE)
+> +
+> +/* TS UUID string for detecting all SPs  (in big-endian format) */
+> +#define ALL_TS_SP_UUID                 "d776cdbd-5e82-5147-3b96-ac4349f8d486"
+> +/* In little-endian equivalent to: bdcd76d7-825e-4751-963b-86d4f84943ac */
+> +
+> +/* TS FWU service UUID string (in big-endian format) */
+> +#define TS_FWU_SERVICE_UUID            "38a82368-061b-0e47-7497-fd53fb8bce0c"
+> +/* In little-endian equivalent to:  6823a838-1b06-470e-9774-0cce8bfb53fd */
+> +
+> +#define TS_RPC_MEM_RETRIEVE            (0xff0001)
+> +#define TS_RPC_SERVICE_INFO_GET                (0xff0003)
+> +#define RPC_SUCCESS                    (0)
+> +
+> +#define SVC_IFACE_ID_GET_MASK          GENMASK(7, 0)
+> +#define GET_SVC_IFACE_ID(x)            \
+> +                        ((u8)(FIELD_GET(SVC_IFACE_ID_GET_MASK, (x))))
+> +
+> +#define HANDLE_MSW_MASK                        GENMASK(63, 32)
+> +#define HANDLE_LSW_MASK                        GENMASK(31, 0)
+> +#define GET_FWU_BUF_MSW(x)             \
+> +                               ((u32)(FIELD_GET(HANDLE_MSW_MASK, (x))))
+> +#define GET_FWU_BUF_LSW(x)             \
+> +                               ((u32)(FIELD_GET(HANDLE_LSW_MASK, (x))))
+> +
+> +/**
+> + * fwu_agent_init() - Setup the FWU agent
+> + * Perform the initializations required to communicate
+> + * and use the FWU agent in secure world.
+> + * The frontend of the FWU agent is the Trusted Services (aka TS)
+> + * FWU SP (aka Secure Partition).
+> + *
+> + * Return: 0 on success. Otherwise, failure
+> + */
+> +int fwu_agent_init(void);
+> +
+> +#endif
+> diff --git a/lib/fwu_updates/Kconfig b/lib/fwu_updates/Kconfig
+> index a722107c129..cdc96109f0a 100644
+> --- a/lib/fwu_updates/Kconfig
+> +++ b/lib/fwu_updates/Kconfig
+> @@ -46,4 +46,22 @@ config FWU_MDATA_V2
+>           metadata structure. This option enables support for FWU
+>           Metadata version 2 access.
+>
+> +config FWU_ARM_PSA
+> +       bool "FMP driver for Arm PSA FWU specification"
+> +       depends on EFI_CAPSULE_FIRMWARE_MANAGEMENT && \
+> +               EFI_CAPSULE_FIRMWARE_RAW && \
+> +               ARM_FFA_TRANSPORT && (ARM64 || SANDBOX)
+> +       select EFI_CAPSULE_FIRMWARE
+> +       help
+> +         Select this option if you want to enable firmware management protocol
+> +         driver that supports the Arm PSA firmware update specification as
+> +         mentioned in https://developer.arm.com/documentation/den0118/a/
+> +
+> +config FWU_BUFFER_PAGES
+> +       int "Number of 4KB pages in the FWU shared buffer"
+> +       depends on FWU_ARM_PSA
+> +       default 1024
+> +       help
+> +         This defines the size of the FWU shared buffer used for communication.
+> +
+>  endif
+> diff --git a/lib/fwu_updates/Makefile b/lib/fwu_updates/Makefile
+> index 3681bef46cd..ae8e4b27793 100644
+> --- a/lib/fwu_updates/Makefile
+> +++ b/lib/fwu_updates/Makefile
+> @@ -1,6 +1,7 @@
+>  # SPDX-License-Identifier: GPL-2.0-or-later
+>  #
+>  # Copyright (c) 2022, Linaro Limited
+> +# Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+>  #
+
+I don't think adding a single line justifies adding a copyright.
+
+>
+>  obj-$(CONFIG_FWU_MULTI_BANK_UPDATE) += fwu.o
+> @@ -8,3 +9,4 @@ obj-$(CONFIG_FWU_MDATA_GPT_BLK) += fwu_gpt.o
+>  obj-$(CONFIG_FWU_MDATA_MTD) += fwu_mtd.o
+>  obj-$(CONFIG_FWU_MDATA_V1) += fwu_v1.o
+>  obj-$(CONFIG_FWU_MDATA_V2) += fwu_v2.o
+> +obj-$(CONFIG_FWU_ARM_PSA) += fwu_arm_psa.o
+> diff --git a/lib/fwu_updates/fwu_arm_psa.c b/lib/fwu_updates/fwu_arm_psa.c
+> new file mode 100644
+> index 00000000000..8ac53cc9152
+> --- /dev/null
+> +++ b/lib/fwu_updates/fwu_arm_psa.c
+> @@ -0,0 +1,263 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+> + *
+> + * Authors:
+> + *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> + *   Davidson kumaresan <davidson.kumaresan@arm.com>
+> + */
+> +#include <arm_ffa.h>
+> +#include <dm.h>
+> +#include <fwu_arm_psa.h>
+> +#include <efi_loader.h>
+> +#include <fwu.h>
+> +#include <log.h>
+> +#include <malloc.h>
+> +#include <mapmem.h>
+> +#include <linux/errno.h>
+> +
+> +static void *g_fwu_buf;
+> +static u64 g_fwu_buf_handle;
+> +static u16 g_fwu_sp_id;
+> +static struct udevice *g_dev;
+> +static u16 g_svc_interface_id;
+> +static bool g_fwu_initialized;
+> +
+> +/**
+> + * fwu_discover_ts_sp_id() - Query the FWU partition ID
+> + *
+> + * Description: Use the FF-A driver to get the FWU partition ID.
+> + * If multiple partitions are found, use the first one.
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_discover_ts_sp_id(void)
+> +{
+> +       u32 count = 0;
+> +       int ret;
+> +       u32 i;
+> +       struct ffa_partition_desc *descs = NULL;
+> +       struct ffa_send_direct_data msg;
+> +       struct ffa_partition_uuid fwu_service_uuid = {0};
+> +
+> +       /* Ask the driver to fill the buffer with the SPs info */
+> +
+> +       ret = ffa_partition_info_get(g_dev, ALL_TS_SP_UUID, &count, &descs);
+> +       if (ret) {
+> +               log_err("FWU: Failure in querying partitions (err: %d)\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       if (!count) {
+> +               log_err("FWU: No Trusted Service partition found\n");
+> +               return -ENODATA;
+> +       }
+> +
+> +       if (!descs) {
+> +               log_err("FWU: No partitions descriptors filled\n");
+> +               return -EINVAL;
+> +       }
+> +
+> +       if (uuid_str_to_le_bin(TS_FWU_SERVICE_UUID,
+> +                              (unsigned char *)&fwu_service_uuid)) {
+> +               log_err("FWU: invalid FWU SP  UUID\n");
+> +               return -EINVAL;
+> +       }
+> +
+> +       for (i = 0; i < count ; i++) {
+> +               log_debug("FWU: Enquiring service from SP 0x%x\n",
+> +                         descs[i].info.id);
+> +
+> +               msg.data0 = TS_RPC_SERVICE_INFO_GET;
+> +               msg.data1 = fwu_service_uuid.a1;
+> +               msg.data2 = fwu_service_uuid.a2;
+> +               msg.data3 = fwu_service_uuid.a3;
+> +               msg.data4 = fwu_service_uuid.a4;
+> +
+> +               ret = ffa_sync_send_receive(g_dev, descs[i].info.id, &msg, 0);
+> +               if (ret) {
+> +                       log_err("FWU: FF-A error for SERVICE_INFO_GET (err: %d)\n",
+> +                               ret);
+> +                       return ret;
+> +               }
+> +
+> +               if (msg.data0 != TS_RPC_SERVICE_INFO_GET) {
+> +                       log_err("FWU: Wrong SERVICE_INFO_GET return: (%lx)\n",
+> +                               msg.data0);
+> +                       continue;
+> +               }
+> +
+> +               if (msg.data1 == RPC_SUCCESS) {
+> +                       g_svc_interface_id = GET_SVC_IFACE_ID(msg.data2);
+> +                       g_fwu_sp_id = descs[i].info.id;
+> +                       log_debug("FWU: Service interface ID 0x%x found\n",
+> +                                 g_svc_interface_id);
+> +                       return 0;
+> +               }
+> +
+> +               log_debug("FWU: service not found\n");
+> +       }
+> +
+> +       log_err("FWU: No SP provides the service\n");
+> +
+> +       return -ENOENT;
+> +}
+> +
+> +/**
+> + * fwu_shared_buf_reclaim() - Reclaim the shared communication buffer
+> + *
+> + * Description: In case of errors, this function can be called to retrieve
+> + * the FWU shared buffer.
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_shared_buf_reclaim(void)
+> +{
+> +       int reclaim_ret;
+> +
+> +       reclaim_ret = ffa_memory_reclaim(g_dev, g_fwu_buf_handle, 0);
+> +       if (reclaim_ret)
+> +               log_err("FWU: FF-A memory reclaim failure (err: %d)\n",
+> +                       reclaim_ret);
+> +       else
+> +               log_debug("FWU: Shared buffer reclaimed\n");
+> +
+> +       free(g_fwu_buf);
+> +       g_fwu_buf = NULL;
+> +
+> +       return reclaim_ret;
+> +}
+> +
+> +/**
+> + * fwu_shared_buf_init() - Setup the FWU shared communication buffer
+> + *
+> + * Description: The communication with the TS FWU SP is based on a buffer shared
+> + * between U-Boot and TS FWU SP allocated in normal world and accessed
+> + * by both sides. The buffer contains the data exchanged between both sides
+> + * such as the payloads data.
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_shared_buf_init(void)
+> +{
+> +       struct ffa_mem_ops_args args = {0};
+> +       struct ffa_mem_region_attributes attrs = {0};
+> +       struct ffa_send_direct_data msg;
+> +       int ret;
+> +
+> +       g_fwu_buf = memalign(EFI_PAGE_SIZE, FWU_BUFFER_SIZE);
+> +       if (!g_fwu_buf) {
+> +               log_err("FWU: Failure to allocate the shared buffer\n");
+> +               return -ENOMEM;
+> +       }
+> +
+> +       /* Setting up user arguments */
+> +       args.use_txbuf = true;
+> +       args.address = g_fwu_buf;
+> +       args.pg_cnt = FWU_BUFFER_PAGES;
+> +       args.nattrs = 1;
+> +       attrs.receiver = g_fwu_sp_id;
+> +       attrs.attrs = FFA_MEM_RW;
+> +       args.attrs = &attrs;
+> +
+> +       /* Registering the shared buffer with secure world (Trusted Services) */
+> +       ret = ffa_memory_share(g_dev, &args);
+> +       if (ret) {
+> +               free(g_fwu_buf);
+> +               g_fwu_buf = NULL;
+> +               log_err("FWU: Failure setting up the shared buffer (err: %d)\n",
+> +                       ret);
+> +               return ret;
+> +       }
+> +
+> +       g_fwu_buf_handle = args.g_handle;
+> +
+> +       log_debug("FWU: shared buffer handle 0x%llx\n", g_fwu_buf_handle);
+> +
+> +       /* Inform the FWU SP know about the shared buffer */
+> +
+> +       msg.data0 = TS_RPC_MEM_RETRIEVE;
+> +       msg.data1 = GET_FWU_BUF_LSW(g_fwu_buf_handle);
+> +       msg.data2 = GET_FWU_BUF_MSW(g_fwu_buf_handle);
+> +
+> +       ret = ffa_sync_send_receive(g_dev, g_fwu_sp_id, &msg, 0);
+> +       if (ret) {
+> +               log_err("FWU: FF-A message error for MEM_RETRIEVE (err: %d)\n",
+> +                       ret);
+> +               goto failure;
+> +       }
+> +
+> +       if (msg.data0 != TS_RPC_MEM_RETRIEVE) {
+> +               log_err("FWU: Unexpected MEM_RETRIEVE return: (%lx)\n",
+> +                       msg.data0);
+> +               ret = -EINVAL;
+> +               goto failure;
+> +       }
+> +
+> +       if (msg.data1 != RPC_SUCCESS) {
+> +               log_err("FWU: MEM_RETRIEVE failed\n");
+> +               ret = -EOPNOTSUPP;
+> +               goto failure;
+> +       }
+> +
+> +       log_debug("FWU: MEM_RETRIEVE success for SP 0x%x\n", g_fwu_sp_id);
+> +
+> +       return 0;
+> +
+> +failure:
+> +       fwu_shared_buf_reclaim();
+> +       return ret;
+> +}
+> +
+> +/**
+> + * fwu_agent_init() - Setup the FWU agent
+> + *
+> + * Description: Perform the initializations required to communicate
+> + * and use the FWU agent in secure world.
+> + * The frontend of the FWU agent is the Trusted Services (aka TS)
+> + * FWU SP (aka Secure Partition).
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +int fwu_agent_init(void)
+> +{
+> +       int ret;
+> +       struct fwu_data *fwu_data;
+> +       u32 active_idx;
+> +
+> +       fwu_data = fwu_get_data();
+> +       if (!fwu_data) {
+> +               log_err("FWU: Cannot get FWU data\n");
+> +               return -EINVAL;
+> +       }
+
+Why are you calling this function?
+
+> +
+> +       ret = fwu_get_active_index(&active_idx);
+> +       if (ret) {
+> +               log_err("FWU: Failed to read boot index, err (%d)\n",
+> +                       ret);
+> +               return ret;
+> +       }
+
+Same here. Why is this function being called when U-Boot is a update client?
+
+-sughosh
+
+> +
+> +       if (fwu_data->trial_state)
+> +               log_info("FWU: System booting in Trial State\n");
+> +       else
+> +               log_info("FWU: System booting in Regular State\n");
+> +
+> +       ret = uclass_first_device_err(UCLASS_FFA, &g_dev);
+> +       if (ret) {
+> +               log_err("FWU: Cannot find FF-A bus device, err (%d)\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       ret = fwu_discover_ts_sp_id();
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret = fwu_shared_buf_init();
+> +       if (ret)
+> +               return ret;
+> +
+> +       g_fwu_initialized = true;
+> +
+> +       return 0;
+> +}
 > --
 > 2.43.0
 >
