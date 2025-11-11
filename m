@@ -4,82 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428ACCCFA1A
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:56:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF9FDCCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 14:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9862E83B8A;
-	Tue, 11 Nov 2025 14:56:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3CBB283BD2;
+	Tue, 11 Nov 2025 15:04:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C12gAxs9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Okx2PBRv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FAFB83BC8; Tue, 11 Nov 2025 14:56:45 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 1B60583BFE; Tue, 11 Nov 2025 15:04:44 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C116783A79
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:56:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A175D83B8A
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 15:04:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-656c07e3241so1820764eaf.1
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 05:56:42 -0800 (PST)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3e37ad3d95aso2791136fac.3
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 06:04:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762869401; x=1763474201; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762869880; x=1763474680; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=e+An5XwjkXRnp90quCnYaNxJrVxlGPF8Waq1KL3HOSA=;
- b=C12gAxs9ZjtgMT7JWNkH1IbgmJshLTDgX5iBskvhB28xAO7zvHZLEfYRoav4xCD0Ue
- GB/mpbIGxhRkF028qu3chchl61Aa9ZXjmGG1eNvFn2nSx8Nj5gvEtsCYoyJOpXQfpEHF
- cvG0zjwC6+OVptkQbfyjEjEwitZsnTNObfZMU=
+ bh=IjIGEHs6ZWEmNBAgWdqnMQrkMByNBYIklcH8kJw7OPo=;
+ b=Okx2PBRvs7qpw+3dGjFpdVLCW8/gezwMGaNb0xFm16bKOVZ3XsUR4nJsVEbxt3l+qR
+ 3uMgajGOQnSUKhsw2FYGOhR4LLF+WAM10PvHwemXyrAxy/tlqtyzH/7ol7gSQy8q8DQx
+ TR1GdHDhELvmOi50E9s7i57So0mJsOyq7KWBw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762869401; x=1763474201;
+ d=1e100.net; s=20230601; t=1762869880; x=1763474680;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e+An5XwjkXRnp90quCnYaNxJrVxlGPF8Waq1KL3HOSA=;
- b=t7Qj8zaQHb8/HFHiLDDKvzEdUmZfWMOTGcZP6Enk6JfCO/ZFA/asTxTZKEt0MQYg9+
- CYnZTm+QStTdtGkWckg6eLZcf3YWkKZvwffqFVx190uKVKPA6XQL4ZdyzABHEI5OwR3e
- P0MGXpYlBAYHP4f/Mw3RdEVj9pu+g09ZUjxw/EAX09E7qdU3FQVsg4TQdBR7aGAoUre6
- eYRKIZ4VpjrhCEIh1dz+620z2XCqN7S8zlb95QteRW8IRZH4QKQv8hQsof5chyOCZ8qG
- Hnp8fHo+oQrKW/OO16YALbICZVbBBd81iWE5LLLBJjS0wUV6KWPDkbHrLV3sz8DWRq6S
- mxiA==
-X-Gm-Message-State: AOJu0Yy4/zPgY9ej9xl/c9tuLsyqSDPVfwZo7QrHuvXIVMh5HTugMJnA
- E0w5eNiG1YBc7qU+xSb+FhKutHCBj0Q/R10p4GgMVxF8aPER8ct65/TMC2bmYexlbGQ=
-X-Gm-Gg: ASbGncv9dtEg9qawiiiPFvlEnsScYW4Qnv0ouuu9pYDsblrHDMpqGDTNvh2sxl5OdWd
- PizkGxvCzFUGKPPSjhPM6SIgXnP74nUrccOLgtQIGBhyJDQ7shb4gLU0S8aWqLtxY6wdImr58fF
- Xx9HtdoJZtYryCHNa+hhJ4i0/3w6sPMj3JnEj4Tfj1C2qqdznTuRRs/vAhp182fpQzm9ax4lCFT
- Bfov41Zuj+GufecNjSmaarIIYLkPhu559rH9uUrpA+W98MRLhWDVytS3eUPCLvNzClCImXJExOL
- Ct7sp6PMZoopThJ4zSFleMmYRiK3p4pQ/jviKztwwtrMRrfI6HbEYPZ9opT9avA5OwBx4FJYE82
- +xyF4prCleXFynKp4/92bDG3+OTQO9d1Nl/uYJspNBO/y2qzYdeoFvwebMebp9YiNlyAyQ7ZuhE
- 1GC/SbmBivGMzeXVDTItnFfJjkVgrCd9KtxiCwF84=
-X-Google-Smtp-Source: AGHT+IF2Bsieo4QUMgHtaXdJZnqwAB0rabuRs5D/1CnsKWw1G7ewaI8TBZ8fnRm/p+5ra8wor6/x6A==
-X-Received: by 2002:a05:6820:2905:b0:63e:effa:86f5 with SMTP id
- 006d021491bc7-656d8eb8572mr5666118eaf.7.1762869401369; 
- Tue, 11 Nov 2025 05:56:41 -0800 (PST)
+ bh=IjIGEHs6ZWEmNBAgWdqnMQrkMByNBYIklcH8kJw7OPo=;
+ b=qnBvGB42zRLHH8aNFyQipgfxWdZYVXNN0Io+hlVrzamp9yMetPjLe9Ba6XElOABfI9
+ bWDIA8NF8RbNWClL3W19hEY/b6bRFvfLed9YGeyGLcAhkSSZs1/rKhvPOIftiQKtldOG
+ GSAxbNBxopjQ84IPfw0FXjQ+YBrgdHxTFvFkjdbtsFYqtumcz1eDCKtHMBDeteUWe8Zh
+ URc+RjJ+URwoSZZ6fhSeE6ygVRnvp4nBGBQjUXSodDB8HIa3MW3TnRp4Z1z1w5x9MWmb
+ MCphrZ9WWJAyIW0egZ2RGeYWnijTyHfSXxWR3H5YQ94D74ZEnm9SbckzUkzOUrnpbxLC
+ O9Dg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWImns4pynHUVSv5Llrq4ScKwFMJTFUFVviQS2OT41FJbjZU8Rx3Dr6x8fwiZy6SRQ7k+msftE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzkuY29al/00oUzSz9bXvUUEB2i2KUcsNBXJecxsfroqATScxGN
+ gL5Ty1jfDCcwWTunEcz9+CF4fyMEpMYf+UpIFe1DoG7Wsg0Osa1KmgfhQS0Q6am5lt4=
+X-Gm-Gg: ASbGncuycIZxI3lwG+OORjgzlC1hucZZO7fW4l5ASLKe8qkadWmutWOVJO6QwWGr0gr
+ zBZQPty3r5OKCv+Ganu8UeqovcQ/UZFDcTmHAneG5NRJ2EC1yJKIjbp5Va8W7CAXNM2I1oBoo1K
+ AilbsWVAEnfxBAzhOSvrFWb6aauCqNqH7IYsdD73oVqB4dGAD0/Mh+KuffLULHRVjuFuV/B5PST
+ S3xsJGtJgzcQFcRKGVA5tc7RztmgLFr50iRL27n6GSt/Z18xvlbHU4OVU0zX9iyOvkHetnXJPS/
+ ao4PXPIvH154s8IQjs9LVRWGEGWhkDlIZrla89HqRWU7k2vB0Pm1U763EhFC/EP32kvdBkfQh7W
+ ps6rvzY0tGpy/RdqXv+OTxfK2W88Bym/Ra8R9U+wZ4L9r0k0ofR1e4WZVXrytqEuCOzaHA4hq7q
+ mlD6HWCxtvAiWsnJGiv5SK/KCJCBZ6LyA31IQzsh4=
+X-Google-Smtp-Source: AGHT+IHheNCIxibAoopM6V5ktNBS2LPqquJInMmd2Uk/zLrw6BZWmLCXWO+nNK3oVCq3NXGXJPPYHA==
+X-Received: by 2002:a05:6870:6486:b0:31d:63f9:b247 with SMTP id
+ 586e51a60fabf-3e7c279d413mr5901459fac.25.1762869880235; 
+ Tue, 11 Nov 2025 06:04:40 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-656f3ba2650sm2847822eaf.11.2025.11.11.05.56.40
+ 586e51a60fabf-3e41f2583casm8031215fac.23.2025.11.11.06.04.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 05:56:40 -0800 (PST)
-Date: Tue, 11 Nov 2025 07:56:38 -0600
+ Tue, 11 Nov 2025 06:04:39 -0800 (PST)
+Date: Tue, 11 Nov 2025 08:04:37 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] Gitlab: Add a "sage-lab" stage to access a board farm
-Message-ID: <20251111135638.GT6688@bill-the-cat>
-References: <20251110154231.2629710-1-trini@konsulko.com>
- <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Frieder Schrempf <frieder@fris.de>, Stefano Babic <sbabic@nabladev.com>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Shawn Guo <shawnguo@kernel.org>
+Subject: Re: [PATCH 2/4] arm64: dts: imx8mp-kontron: Fix USB OTG role switching
+Message-ID: <20251111140437.GU6688@bill-the-cat>
+References: <20251111102904.157931-1-frieder@fris.de>
+ <20251111102904.157931-3-frieder@fris.de>
+ <CAOMZO5Do9AdqZ+j4Kpp8qU21mQ6yBNuvi614n_Q4-Uzebf16eg@mail.gmail.com>
+ <ae7084f3-9df8-4e69-ad6f-5e80df9e4237@kontron.de>
+ <CAOMZO5Dz0UjTrQv+kWeputL6haSMHQ+eNzYp-5F6mKS4DeJiEA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6KLrv1lapLqB29bG"
+ protocol="application/pgp-signature"; boundary="UlNR+Pdc9mNQCHoE"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
+In-Reply-To: <CAOMZO5Dz0UjTrQv+kWeputL6haSMHQ+eNzYp-5F6mKS4DeJiEA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,62 +107,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---6KLrv1lapLqB29bG
-Content-Type: text/plain; charset=us-ascii
+--UlNR+Pdc9mNQCHoE
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 11, 2025 at 05:58:22AM -0700, Simon Glass wrote:
-> Hi Tom,
+On Tue, Nov 11, 2025 at 10:14:33AM -0300, Fabio Estevam wrote:
+> On Tue, Nov 11, 2025 at 9:38=E2=80=AFAM Frieder Schrempf
+> <frieder.schrempf@kontron.de> wrote:
 >=20
-> On Mon, 10 Nov 2025 at 08:42, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > This is the Gitlab side of adding support for the board lab connected to
-> > the "konsulko-sage" runner. On the software side, this lab uses only
-> > upstream labgrid. On the hardware side, each device under test is
-> > connected to its own exporter (typically a Raspberry Pi 4) that must be
-> > turned on (and cleanly turned off) as part of a given test cycle.
-> >
-> > Add support for testing on a SolidRun Hummingboard 2 (imx6), Raspberry
-> > Pi 3 and Raspberry Pi 4. In all cases, we enable additional options to
-> > run more tests on the board. As we have some networking tests, we test
-> > both the legacy network stack and lwIP. In the case of Pi platforms, we
-> > test all of 32bit configuration, plain configuration and rpi_arm64, and
-> > again with and without lwIP.
-> >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Note that for the Pi platforms we enable/disable CMD_BOOTEFI_SELFTEST
-> > based on overall binary size. I've created
-> > https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/issues/2
-> > to track addressing that issue.
-> > ---
-> >  .gitlab-ci-sage-lab.yml | 182 ++++++++++++++++++++++++++++++++++++++++
-> >  .gitlab-ci.yml          |   5 ++
-> >  2 files changed, 187 insertions(+)
-> >  create mode 100644 .gitlab-ci-sage-lab.yml
+> > Both would be fine for me. If applying to dts/upstream/src is not
+> > desired, even dropping this for now and waiting for the next sync would
+> > be okay, I think.
 >=20
-> Would it be possible to add some docs about this? Does the exporting
-> rpi do a full system boot and then run some scripts to load things
-> onto the board, then shut down?
+> Please send a v2 that puts this change into -u-boot.dtsi and mention
+> the linux-nex commit ID.
 
-I don't understand your question. Yes, the exporter is powered on/off in
-the test job, as explained in the commit message. When it comes up it
-registers the device under test with the coordinator (and unregisters
-when powering off).
+Yes, if we can't cherry-pick it from devicetree-rebasing it goes to
+-u-bot.dtsi.
+https://docs.u-boot.org/en/latest/develop/devicetree/control.html#resyncing=
+-with-devicetree-rebasing
 
 --=20
 Tom
 
---6KLrv1lapLqB29bG
+--UlNR+Pdc9mNQCHoE
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRNAkwAKCRAr4qD1Cr/k
-CoeUAQD3Iw9dCpQ9uAxuuQyAf5Ewi02h2P5MObzHBvlAM27BuQD/RvfCGEBcgcj2
-klLjagTH7rgq27bNfAqm6gyxbbfPHgI=
-=1RYD
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRNCdQAKCRAr4qD1Cr/k
+CoLTAQDym6JIhxkC0Ekaw4skbdMGBiITjTlJU5dxMXpESXUFYgD6ArxVvD5Bze9G
+e5YJuN7LyTLLHEGk37XmbWZQhgpbGQs=
+=OubC
 -----END PGP SIGNATURE-----
 
---6KLrv1lapLqB29bG--
+--UlNR+Pdc9mNQCHoE--
