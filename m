@@ -4,55 +4,157 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7447ACCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 05:49:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E473CCFA18
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 05:54:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C4DF83B23;
-	Tue, 11 Nov 2025 06:48:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id C40F383AB4;
+	Tue, 11 Nov 2025 06:54:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="PhZuA72x";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kTE9YrMv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8107183B1B; Tue, 11 Nov 2025 06:48:45 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id E033E83AEE; Tue, 11 Nov 2025 06:53:58 +0100 (CET)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29B2983AEC
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 06:48:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8306710A4E8; Tue, 11 Nov 2025 06:48:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1762840121; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=wWItPzadFt140VH90PDFlCtYi3zrc0JDqnWVp0QqZIw=;
- b=PhZuA72x5gb0Mc3KTBUXFnN+bVDX6xZO/MFUpSl9jiF7rrmNgFJ1XdfTEG6wGQI4dIU6sY
- DD+0aP0vT5kShbeqIApobvCdu8BjRia71QXhg/GDRx4jFNe9YOoDY5jOFsbG6On2YcwfmM
- jkDpwByinMKMcClcfltyHk+9ffq7SlDreYx+RgMRVGsydg8O6eom+5d88kjtIDVnS0wq1K
- 7UfRtE17qkg0Hkms+m+SL3l4dWykt0r1Aik9UrW5Zy785boaKr96JUqL1PXVm/OiD8fya3
- MCDvt/xUepVgO1kwYghBZEkg/SBXyBI1NV0HubEQvkvbUK3d7fUXB4ws+XqicA==
-From: Heiko Schocher <hs@nabladev.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 4/5] tpm2: add sm3 256 hash support
-Date: Tue, 11 Nov 2025 06:48:11 +0100
-Message-Id: <20251111054813.1966-5-hs@nabladev.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20251111054813.1966-1-hs@nabladev.com>
-References: <20251111054813.1966-1-hs@nabladev.com>
+ by phobos.denx.de (Postfix) with ESMTPS id B904D83A98
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 06:53:56 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TantUXsFvl/blYiySOuDW2Z3Ptq85Vt4nlw8mJG88AxQ4NI/ify6f7E5Kke8x7EOYpJdCTGrUHlPD3GSO9CzCzBgruhUcvK0LuWPVvG52cmVdKcKfKJx0lD1m/9/5UGeG/SOX4utahiHaBGlz2TJ/jQvCS8MGOEQJfInwHgtrXF/Cbz3GG7cK6mYwxZ1Ktia3+72zk4O8Lrd2kpYdvDItGW7+3ldp4/zXVGUpupNkF533cvQJGnPvdJDEMn0r1ZE50wD7FD1ntYKOp5zBUrZFmCOAwLi4i1X0NtgtIS2nGfVdeI1seRaqP0HkBeuRpja6NBb8xBFjQ0qzgRKjsVjxA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tBypzpBMup1TxSncpw47obl6HMjn2TukaStnSb7nV6Q=;
+ b=ycmBELhWLGSC/35GP7QXYJWj2B48MVfx/Mvix7syJOiqtALHNIxnYjqlGwKXWRdl33AR89gj2Z1BzOhOs3Bw/zP8VZh2bYz/JRF3DdV2eWE0Xj829J9Od+5o4hHoR91A1i0q7QfnDnzGV5Rq0afVvNOzsk7LGsEcFWHsF7RqigGxZnWsZ3tDDt2ty9Tpt6+DI90pGSLtp1yJ9fsGNGY0QIFCyNH0dhDbOKZk2xl/R4AY/uMhmJxjNVsy3WWTA1A7Iw+TJApE5BW9xr9TAr47Ce0FHHCxoTjosumuMTlo7CwnR/jGh/HsZR8dEe/qngQWUujHZEuhL/39w17kVYNLPQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tBypzpBMup1TxSncpw47obl6HMjn2TukaStnSb7nV6Q=;
+ b=kTE9YrMvdIh3zkBDvHa+beLD7hEsFrSiZDLD8EmYU1ZnSYQQAnx2Obrc6RQhunDWucLsTPRQsP0SoW++OxhkPSAAiI2apec7ImS1DAQuMuE6UrWj4dEuZY3xWMqD7egVFNyC/yoexNEyXIi32xmWZw+LEfiBBJnIZeJ99MFXT8s=
+Received: from SA1P222CA0173.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:3c3::16)
+ by SJ0PR10MB4654.namprd10.prod.outlook.com (2603:10b6:a03:2d2::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Tue, 11 Nov
+ 2025 05:53:53 +0000
+Received: from SN1PEPF0002529E.namprd05.prod.outlook.com
+ (2603:10b6:806:3c3:cafe::c2) by SA1P222CA0173.outlook.office365.com
+ (2603:10b6:806:3c3::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.16 via Frontend Transport; Tue,
+ 11 Nov 2025 05:53:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ SN1PEPF0002529E.mail.protection.outlook.com (10.167.242.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9320.13 via Frontend Transport; Tue, 11 Nov 2025 05:53:52 +0000
+Received: from DFLE207.ent.ti.com (10.64.6.65) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 10 Nov
+ 2025 23:53:48 -0600
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 10 Nov
+ 2025 23:53:47 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 10 Nov 2025 23:53:47 -0600
+Received: from [172.24.231.157] (hp-z2-tower.dhcp.ti.com [172.24.231.157])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AB5rgr1412751;
+ Mon, 10 Nov 2025 23:53:43 -0600
+Message-ID: <6665b274-3a23-4b11-82e2-2f2f92ed8d61@ti.com>
+Date: Tue, 11 Nov 2025 11:23:41 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] arm: mach-k3: j784s4: Update SoC autogen data to
+ enable PCIe boot
+To: Tom Rini <trini@konsulko.com>
+CC: <a-nandan@ti.com>, <c-vankar@ti.com>, <u-kumar1@ti.com>,
+ <marek.vasut+renesas@mailbox.org>, <n-francis@ti.com>, <peng.fan@nxp.com>,
+ <semen.protsenko@linaro.org>, <s-vadapalli@ti.com>, <jm@ti.com>,
+ <m-chawdhry@ti.com>, <ahalaney@redhat.com>, <u-boot@lists.denx.de>,
+ <danishanwar@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>
+References: <20251110094144.886956-1-h-salunke@ti.com>
+ <20251110094144.886956-2-h-salunke@ti.com>
+ <20251110174744.GM6688@bill-the-cat>
+Content-Language: en-US
+From: Hrushikesh Salunke <h-salunke@ti.com>
+In-Reply-To: <20251110174744.GM6688@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002529E:EE_|SJ0PR10MB4654:EE_
+X-MS-Office365-Filtering-Correlation-Id: 37fb4b64-c83d-4f07-a669-08de20e6b192
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WGMvUkc2UTJ0MFJnWTZaUFQvMGxyRHAzS1JBVWgzQkMraTJBWGVBQStGS2gy?=
+ =?utf-8?B?YURmZk5BRllMa0pYc01uT0NGaU5GYysyME1hWC9YaG9wVHJEY2tqZENqMXVw?=
+ =?utf-8?B?c0x3dDZxSTYvSVlUeTA4MTgyUzBBQXdyS0pLK1U2T3VqYTVvU3ZjeHVodGVq?=
+ =?utf-8?B?MDNkK21aN2h6ZkxNUmd4U3JHMHkzSkJiUUY1ekpPZFJPclJKWks2bW54MWRY?=
+ =?utf-8?B?TFNrd2J4V0dCWkt1MG1SWHhkSkJHSXBGY2hWeDV0ZnFUaktOTk0rcHJ1WnUv?=
+ =?utf-8?B?R25sWFlZRDUvOGtKNVpyNzZXWmVicmc5WExncWlvWDIrSnZjS0RGeDB3dDhi?=
+ =?utf-8?B?WEdySzEzZHhweUtENmxmVDQ3aFc4RE9mRFhqZ0draGdIYnBMWmZENHVYNWVM?=
+ =?utf-8?B?SXRadDgyMi9aK3RveDA4c29PcGlGNTVCd3ptZWhVQitFYU5xZGxXN2c3ZHhM?=
+ =?utf-8?B?akkrZUZtR1l4YkVIOXNUS1RsMjF5b2REUFN1Y243T1BXNjZxZ2F3Nkc0Sndn?=
+ =?utf-8?B?MjZwNzBWcGMxUWF6ZXVlNkRrR0ozVkVhbHBudFdKeFhXbnR3cXl2eUNvVzlv?=
+ =?utf-8?B?SFduayt6dnQxWmxIdU1RUmxSWEdrMmNPTHMwNWdVa2VCYXVVbmE2L3VzQTh3?=
+ =?utf-8?B?VVdkZ2FhQ1g1V1FEdHpreU03SElodG4zWE02SGxpa29DWkR3bGMvbXgwUEZo?=
+ =?utf-8?B?dmtwaDBIcVpmcm5vblVYK3Q1MlY4S2JMYmlEbENIeU9KWW5Td0VVZnpmQ3o5?=
+ =?utf-8?B?ODhsL09STnVzNmpqUnNQYWE1WVZ5eElhMTE2RkFvTWJwSjBwcGVzTjljbnpz?=
+ =?utf-8?B?Q0tYaGd3eU8reEZ2eTVKUTNsTEYvbVpDTTQ1bUZwNThLVndOTWJhaXhYWWEz?=
+ =?utf-8?B?eG5ZQ2diN0Njc2grZUliR0tuRE9KRHd2bUFSYStrSGN0eEM0VjIxZmtvWXVW?=
+ =?utf-8?B?UzR2Q1NCc2FwVGk5Y0NDYndCSXQvTWU3bE9vWHd0bzBkRStmalFISmY1eTFI?=
+ =?utf-8?B?U1FhMTZCZnpoQTdhK1JnRy9vVnFFa2tObkl1TGg4Yjk2YThnVHd5ZXZZemFZ?=
+ =?utf-8?B?TmM4dGxEUnRzSGJ5UEFqaCswcXRBN25PVElvR2g5UFpmWmVQM2wzMWFPeTMv?=
+ =?utf-8?B?TTdHWjVrUFBrVUF4TTlNTUJXZlprNmxEd3RuZDdlQm5wbzVSYUNvd0RxTDBp?=
+ =?utf-8?B?OGdhZUFWcnBKc1hnNng3NjJwdTNZanFIUnZBTEk0MVJiMmliQVNFNlhzNXo2?=
+ =?utf-8?B?bEpzU1cvSlVQY2dGYUc0b0FUYWpFMUF0aytNUlFCeG1TQnAwOGVIVEpyT0Ja?=
+ =?utf-8?B?Vms2czYzcUtnRzJhZ0hBWXY0Z2RkZmlubFFtMmJuVmtyU2pQTTVUL0JGT3l2?=
+ =?utf-8?B?OEZWSFNlbkl4VDNMak8xVlk2VU9MeG9VTVNleW8wUUZUcW4wSFlmcG1OMms4?=
+ =?utf-8?B?NG9DOVdHZzVhbEk3b2dSSythKzl3eHJJaWNmUzJKQmluT1VuZnFLcXVsWnhW?=
+ =?utf-8?B?cjllOVdSV1ZudmUyaitOOFFFTkxsRk55aS93TWE0emlKLzAzK2VVdWFzZW9T?=
+ =?utf-8?B?aVJyVGpYdmE0NXRlcWpvemxTZEoxMm1QSEhTRDRwMzcvU1JIM3RST0czcG1R?=
+ =?utf-8?B?alJ0aDgwTnVLRW1XMy9Qa1hKd2ZndERnV0xrWHA1V0VodXF4YkFDcHNLWWEy?=
+ =?utf-8?B?K25BSzVhais4cE41RWtNa0RMa1NQNjkzK2huTkdPTnJFTDJKWGpsTE5RMytY?=
+ =?utf-8?B?amNrUVB0OC9PMHFheDNRLzU5MzRzWmhzSGxqSWF6VzRUQ2t4c1VzS3lZanRj?=
+ =?utf-8?B?L1lJdFZHU0tUNWI4VzNmV2kzUnhmWmFZdW8xL3UvdC8xU2sxOHdzQ0w0ZzFY?=
+ =?utf-8?B?bVVqNmJ1VkpLZnB4TENZVXJreGtldFBXaHhZWXl0Yy8rNStPaklOK3Jza1E1?=
+ =?utf-8?B?TW81c0xxRDloRDJRYzBRK2RJMXByZVNTVk9tOUJ2UmhFTFhBOTkyTys3OElP?=
+ =?utf-8?B?T21jVTdWLzN3clJlcUJTZzkraG1zSnVLT2NOUUNaSW5RZkpwZnhzMmUyb05X?=
+ =?utf-8?B?WGluNXZxNVhGRzZCU1pBN1A1Uk8zVzZmVTZ0Q0xWbCtSN2kvTkwrWWFCQWFo?=
+ =?utf-8?Q?3svQ=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2025 05:53:52.6509 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 37fb4b64-c83d-4f07-a669-08de20e6b192
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002529E.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4654
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,123 +171,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-add sm3 256 hash support, so TPM2 chips which report
-5 pcrs with sm3 hash do not fail with:
 
-  u-boot=> tpm2 autostart
-  tpm2_get_pcr_info: too many pcrs: 5
-  Error: -90
 
-Signed-off-by: Heiko Schocher <hs@nabladev.com>
+On 10/11/25 23:17, Tom Rini wrote:
+> On Mon, Nov 10, 2025 at 03:11:40PM +0530, Hrushikesh Salunke wrote:
+> 
+>> To enable PCIe boot on J784S4 SoC SERDES0 and PCIE1 should be enabled
+>> and configured at r5 stage. Add the required clk-data and dev-data
+>> for SERDES0 and PCIE1.
+>>
+>> Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
+>> ---
+>>   arch/arm/mach-k3/r5/j784s4/clk-data.c | 211 ++++++++++++++++++++++++--
+>>   arch/arm/mach-k3/r5/j784s4/dev-data.c |  45 +++---
+>>   2 files changed, 227 insertions(+), 29 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-k3/r5/j784s4/clk-data.c b/arch/arm/mach-k3/r5/j784s4/clk-data.c
+>> index 24780eb6562..7ea67ce38f5 100644
+>> --- a/arch/arm/mach-k3/r5/j784s4/clk-data.c
+>> +++ b/arch/arm/mach-k3/r5/j784s4/clk-data.c
+>> @@ -1,11 +1,11 @@
+>> -// SPDX-License-Identifier: GPL-2.0-or-later
+>> +// SPDX-License-Identifier: GPL-2.0+
+> 
+> This is wrong, "GPL-2.0-or-later" is the newer SPDX tag. Please go fix
+> the tooling if needed, thanks.
+> 
 
----
 
-Changes in v2:
-add comments from Ilias
-- use ARRAY_SIZE(hash_algo_list) instead of a fix number
-  in tpm2_get_pcr_info() for the count of supported hashes
-  in U-Boot.
-- add SM3 hash in tpm_tcg2
+Thanks for the feedback, I will address your comments in v2.
 
- cmd/tpm-v2.c     |  1 +
- include/tpm-v2.h | 12 ++++++++++++
- lib/tpm-v2.c     |  4 ++--
- lib/tpm_tcg2.c   |  9 +++++++++
- 4 files changed, 24 insertions(+), 2 deletions(-)
-
-diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-index 346e21d27bb..847b2691581 100644
---- a/cmd/tpm-v2.c
-+++ b/cmd/tpm-v2.c
-@@ -589,6 +589,7 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_tpm, "Issue a TPMv2.x command",
- "        * sha256\n"
- "        * sha384\n"
- "        * sha512\n"
-+"        * sm3_256\n"
- "    <on|off> is one of:\n"
- "        * on  - Select all available PCRs associated with the specified\n"
- "                algorithm (bank)\n"
-diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index f3eb2ef5643..a776d24d71f 100644
---- a/include/tpm-v2.h
-+++ b/include/tpm-v2.h
-@@ -345,6 +345,18 @@ static const struct digest_info hash_algo_list[] = {
- 		false,
- #endif
- 	},
-+	{
-+		"sm3_256",
-+		TPM2_ALG_SM3_256,
-+		TCG2_BOOT_HASH_ALG_SM3_256,
-+		TPM2_SM3_256_DIGEST_SIZE,
-+#if IS_ENABLED(CONFIG_SM3)
-+		true,
-+#else
-+		false,
-+#endif
-+	},
-+
- };
- 
- /* NV index attributes */
-diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 5b21c57ae42..f443b738f82 100644
---- a/lib/tpm-v2.c
-+++ b/lib/tpm-v2.c
-@@ -686,10 +686,10 @@ int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs)
- 
- 	pcrs->count = get_unaligned_be32(response);
- 	/*
--	 * We only support 4 algorithms for now so check against that
-+	 * check against the supported algorithms in hash_algo_list,
- 	 * instead of TPM2_NUM_PCR_BANKS
- 	 */
--	if (pcrs->count > 4 || pcrs->count < 1) {
-+	if (pcrs->count > ARRAY_SIZE(hash_algo_list) || pcrs->count < 1) {
- 		printf("%s: too many pcrs: %u\n", __func__, pcrs->count);
- 		return -EMSGSIZE;
- 	}
-diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index c314b401d0b..d41228f75a9 100644
---- a/lib/tpm_tcg2.c
-+++ b/lib/tpm_tcg2.c
-@@ -12,6 +12,7 @@
- #include <u-boot/sha1.h>
- #include <u-boot/sha256.h>
- #include <u-boot/sha512.h>
-+#include <u-boot/sm3.h>
- #include <version_string.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-@@ -143,6 +144,12 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
- 			sha512_finish(&ctx_512, final);
- 			len = TPM2_SHA512_DIGEST_SIZE;
- 			break;
-+#endif
-+#if IS_ENABLED(CONFIG_SM3)
-+		case TPM2_ALG_SM3_256:
-+			sm3_hash(input, length, final);
-+			len = TPM2_SM3_256_DIGEST_SIZE;
-+			break;
- #endif
- 		default:
- 			printf("%s: unsupported algorithm %x\n", __func__,
-@@ -319,6 +326,7 @@ static int tcg2_replay_eventlog(struct tcg2_event_log *elog,
- 			case TPM2_ALG_SHA256:
- 			case TPM2_ALG_SHA384:
- 			case TPM2_ALG_SHA512:
-+			case TPM2_ALG_SM3_256:
- 				len = tpm2_algorithm_to_len(algo);
- 				break;
- 			default:
-@@ -431,6 +439,7 @@ static int tcg2_log_parse(struct udevice *dev, struct tcg2_event_log *elog,
- 		case TPM2_ALG_SHA256:
- 		case TPM2_ALG_SHA384:
- 		case TPM2_ALG_SHA512:
-+		case TPM2_ALG_SM3_256:
- 			len = get_unaligned_le16(&event->digest_sizes[i].digest_size);
- 			if (tpm2_algorithm_to_len(algo) != len) {
- 				log_err("EventLog invalid algorithm length\n");
--- 
-2.20.1
-
+Regards,
+Hrushikesh.
