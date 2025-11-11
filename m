@@ -4,63 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B716CCFA18
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:17:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E80CCFA18
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:19:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2301383923;
-	Tue, 11 Nov 2025 14:17:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id A5D1A83B4E;
+	Tue, 11 Nov 2025 14:19:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="EWLhtW3X";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="1w3mW9h9";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="Z8LwAAfr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAC2183B55; Tue, 11 Nov 2025 14:17:09 +0100 (CET)
-Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
+ id 2DB0983B86; Tue, 11 Nov 2025 14:19:54 +0100 (CET)
+Received: from delivery.antispam.mailspamprotection.com
+ (delivery.antispam.mailspamprotection.com [185.56.87.0])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2161833C6
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:17:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0F8CA1480022; Tue, 11 Nov 2025 14:17:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1762867026; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=r3cvuC5bugnbN84F574M7KULoLh1M74MKmIDHqFcNzE=;
- b=EWLhtW3XvlD2eWLbtWOlXyQNfhOcKWv68k36373TtnZwT3/5j0Ji83Zf1f0FoPITW8EbWi
- EKrFBUFEXm4Ks7YUsWsYx/khhL3JEpQlfM1M4hJbDMnA+WdW2pQk6dOqNCUibSa9Bd6XVj
- 4IyXxmBoMdYGdWemQEZcplKCwamBYiHuElr9eiujdRaK1GFxE9YINhORjFFjCTOWzIxz7f
- dOF8OtAwaWauDFcQ4SZR1BWv4vVQ5ISmVWNAvJLSU6wiSN8BPqO/kI2LHjfOZcchqOsC7a
- SySbN1kx06Qt3Tmo9efBjmg4W0jShPWlH9VkfR04AzEaiQFVyTMv53O2nREWDQ==
-Date: Tue, 11 Nov 2025 14:17:04 +0100
-From: Alexander Dahl <ada@thorsis.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Manikandan Muralidharan <manikandan.m@microchip.com>,
- Zixun LI <admin@hifiphile.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] ARM: dts: at91: sam9x60: Add spi0 node (flexcom 0)
-Message-ID: <20251111-removing-frantic-1f2a3670eed6@thorsis.com>
-Mail-Followup-To: Eugen Hristev <eugen.hristev@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Manikandan Muralidharan <manikandan.m@microchip.com>,
- Zixun LI <admin@hifiphile.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-References: <20251111112637.919074-1-ada@thorsis.com>
- <20251111112637.919074-4-ada@thorsis.com>
- <dec7e0eb-5df4-4d3e-878a-13587291ade1@linaro.org>
- <20251111-landfall-rockslide-407d7bf1a9c5@thorsis.com>
- <b6f9327c-aa5c-452f-b1ce-1cddbd640fdc@linaro.org>
+ by phobos.denx.de (Postfix) with ESMTPS id DA5F883923
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:19:51 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=valla.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@valla.it
+ARC-Seal: i=1; cv=none; a=rsa-sha256;
+ d=outgoing.instance-europe-west4-4z53.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1762867191; 
+ b=i3+G936fKufq0+nzF7h91qpESYyE31yWkfnxBEK13Sea2XDUjDXD8EWvMOWyAVj5V8r06lH5Dm
+ 9ng0x/KQcj5HsTSSKJughmTBK2jkX1TBWcLSzgTC+P85Q87BEoAU1FE7brr1CpwOu8VpdrGxNo
+ 9G+R5j50cx/ahQyC0Nyxj8rkWfe5NKKcpt2CLlepVdAFFRuIgF2gy9QmaGyHa6f+Y7T1qBMVa3
+ Ag278SCbN/ZueGtxQsQzFS1AV67L7EU7hk5wGvhyWbswv/NBlhtsR8ZjsAaHH4awIP7k8FvRJa
+ 9wKH0fuZSqQvIlS/UHTwzPKOoXIougaGRboC/UK0OzWxag==;
+ARC-Authentication-Results: i=1;
+ outgoing.instance-europe-west4-4z53.prod.antispam.mailspamprotection.com;
+ smtp.remote-ip=35.214.173.214; 
+ iprev=pass (214.173.214.35.bc.googleusercontent.com)
+ smtp.remote-ip=35.214.173.214; 
+ auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+ dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+ arc=none
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
+ d=outgoing.instance-europe-west4-4z53.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1762867191; 
+ bh=ru9WWR3T/3GfvebN53lEDzHhp6hkWTrvObufVCBSb7Q=;
+ h=Cc:To:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Subject:Date:From:DKIM-Signature:DKIM-Signature;
+ b=AOazTtFDuNMnQtoecTbvJ7D2OKipjNKUbhtVESeIAYXyL/HlTRVgdoxR8e3PeEIxviCBUsJIuf
+ n0AlVei9wQHEnuLbGOesfO9TXOmxajAkOwVwaKXjhijmfg5UiaYlohnzgQnW8uMYkY/SADh+fZ
+ 5/t6emiCUQlRB3glzniCZq48pMh2qU5humaa5EwSHvMy5hvltmHWXNL+mV1lTLiT+ztC6MDjqv
+ m8FbMBXhYCembpzMEalpxTBPrbWDIh0vbqpxqdI3GZvFGrjoQs60Usg56RMfoqI2Pk1Ns4H8aZ
+ onNq9ef/t62Y5DZGNyacHboBVyHlqUiBdrfgH5HzKPu1Fw==;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
+ :Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
+ :Date:From:Reply-To:List-Unsubscribe;
+ bh=KDCQ+HNJdvymeLxliZJsiuqIyCUwvTXfnJSgmKuUUdo=; b=1w3mW9h9t2+uvIQ3M88FWlNB2R
+ bJTu+SuUWq6aNc7SSnXc3pzN1rpYCxcOGzBE1aybnOhTYP8yOmP07+Xth/jHIg5zp+c3MZQph+mUY
+ /nN/vTdjNPl8D1A4tCt+VN67E4DKDsqiJ0SlOVJ08AGfw5takXeWhJvDaCNzWnt+UD0M=;
+Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
+ helo=esm19.siteground.biz)
+ by instance-europe-west4-4z53.prod.antispam.mailspamprotection.com with
+ esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.98.1)
+ (envelope-from <francesco@valla.it>) id 1vIoHl-00000000TN2-1qa8
+ for u-boot@lists.denx.de; Tue, 11 Nov 2025 13:19:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
+ s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
+ list-subscribe:list-post:list-owner:list-archive;
+ bh=KDCQ+HNJdvymeLxliZJsiuqIyCUwvTXfnJSgmKuUUdo=; b=Z8LwAAfrKZKBzKRx+jBFBkP4nQ
+ H5/JXHUkEMzMC4Jq5DS/i61z261AWd5b7ar+01AO216gMjjNGAnmEZXzHXRXZngrp5KbzX33bbcF2
+ RUPubRsofNz8rFLdOfYiDaP7dy611ERrwkhXgDI9w0e69hCwBvBEAMYtYSudAeZIhrCM=;
+Received: from [95.75.41.194] (port=31868 helo=[10.132.253.42])
+ by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.98.1) (envelope-from <francesco@valla.it>)
+ id 1vIoHZ-000000000LE-0tRL; Tue, 11 Nov 2025 13:19:37 +0000
+From: Francesco Valla <francesco@valla.it>
+Date: Tue, 11 Nov 2025 14:18:32 +0100
+Subject: [PATCH] imx91: fix ENET1_TD3 pinmux for GPIO function
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <b6f9327c-aa5c-452f-b1ce-1cddbd640fdc@linaro.org>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251111-imx91_pins_fix-v1-1-f9347f896cd4@valla.it>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDINDNzK2wNIwvyMwrjk/LrNA1S0pLTDWzNDE0NUtWAmoqKEoFCoMNjI6
+ trQUA3oImXmAAAAA=
+X-Change-ID: 20251111-imx91_pins_fix-6bfae694156c
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Ye Li <ye.li@nxp.com>, 
+ Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Francesco Valla <francesco@valla.it>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3654; i=francesco@valla.it;
+ h=from:subject:message-id; bh=ru9WWR3T/3GfvebN53lEDzHhp6hkWTrvObufVCBSb7Q=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJnC5vf/Gk8/ur9px1ODxUsCkmJuM5oJL/+8YgKbm2veh
+ agdv0tCO0pZGMS4GGTFFFlC1t24t2eu+be0DYyPYOawMoEMYeDiFICJvFZn+MNxUvZ10gHm9ktL
+ Mh4r31s97fv9/5P/n5H89/m179zs1Yc0Gf7X/F/Nc8Nz26ZPO5vO/Hbqbfzcfk5k94slllOsth6
+ /nfCEEwA=
+X-Developer-Key: i=francesco@valla.it; a=openpgp;
+ fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - esm19.siteground.biz
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - valla.it
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SGantispam-id: 9412ffd991f5807b78a96f29fe1ed662
+AntiSpam-DLS: false
+AntiSpam-DLSP: 
+AntiSpam-DLSRS: 
+AntiSpam-TS: 1.0
+CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
+CFBL-Feedback-ID: 1vIoHl-00000000TN2-1qa8-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-4z53.prod.antispam.mailspamprotection.com; 
+ iprev=pass (214.173.214.35.bc.googleusercontent.com)
+ smtp.remote-ip=35.214.173.214; 
+ auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+ dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+ arc=none
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,109 +140,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Eugen,
+Fix a typo in the GPIO function for the ENET1_TD3 pad, aligning it to
+the function specified in the datasheet.
 
-Am Tue, Nov 11, 2025 at 02:33:31PM +0200 schrieb Eugen Hristev:
-> 
-> 
-> On 11/11/25 14:15, Alexander Dahl wrote:
-> > Hello Eugen,
-> > 
-> > Am Tue, Nov 11, 2025 at 01:34:35PM +0200 schrieb Eugen Hristev:
-> >>
-> >>
-> >> On 11/11/25 13:26, Alexander Dahl wrote:
-> >>> Copied from linux kernel v6.18-rc4.  Stripped attributes not supported
-> >>> by U-Boot drivers (dma, interrupt, fifo-size).
-> >>
-> >> Hello Alexander,
-> >>
-> >> Have you tried to configure the build to use upstream DTS ? this should
-> >> be available in the U-boot dir. CONFIG_OF_UPSTREAM I believe.
-> > 
-> > Quick try with _just_ enabling CONFIG_OF_UPSTREAM and adding the
-> > obligatory folder to CONFIG_DEFAULT_DEVICE_TREE leads to the expected
-> > build errors:
-> > 
-> >   DTC     dts/upstream/src/arm/microchip/at91-sam9x60_curiosity.dtb
-> > Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:43.1-7 Label or path clk32 not found
-> > Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:51.1-9 Label or path main_rc not found
-> > Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:67.1-16 Label or path pinctrl_sdhci0 not found
-> > Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:79.1-9 Label or path pit64b0 not found
-> > Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:87.1-8 Label or path sdhci0 not found
-> > Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:91.1-13 Label or path slow_rc_osc not found
-> > FATAL ERROR: Syntax error parsing input tree
-> > 
-> > Not bad for the first shot, but I guess at least the clock related
-> > issues might get challenging.  However I need to put this aside for later.
-> > 
-> > One question though, while we are at it:  Would it be possible to
-> > define a custom dts in U-Boot and include an upstream .dtsi?
-> 
-> There is a custom dts in U-boot, in your case sam9x60-u-boot.dtsi, and
-> this should be automatically included by the build tool.
-> This applies on top of the upstream dts if you select it, or, the
-> in-tree DTS.
-> You want to do some combo of both or something ? I didn't fully
-> understand it.
+Fixes: a9d562daa3c3 ("imx: Add iMX91 support")
 
-Sorry, was not clear enough.  For the sam9x60_curiosity case of course
-at91-sam9x60_curiosity.dts _and_ sam9x60.dtsi should come from
-UPSTREAM, with u-boot specific quirks coming from in-tree
-…-u-boot.dtsi files as usual, for both parts.
+Signed-off-by: Francesco Valla <francesco@valla.it>
+---
+ arch/arm/dts/imx91-11x11-evk.dts            | 2 +-
+ arch/arm/dts/imx91-pinfunc.h                | 2 +-
+ arch/arm/include/asm/arch-imx9/imx91_pins.h | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-A custom board dts missing in upstream, would be added to (downstream)
-U-Boot in-tree, but it should pick up upstream sam9x60.dtsi,
-especially if U-Boot in-tree dtsi gets removed eventually.  Wonder if
-that's possible?  Alas, one could simply try, later. ;-)
+diff --git a/arch/arm/dts/imx91-11x11-evk.dts b/arch/arm/dts/imx91-11x11-evk.dts
+index 65571fc223b779d5aafc87da3940624db32418cf..ca9070a4c76440e72ecb2534ab55596fecb758d5 100644
+--- a/arch/arm/dts/imx91-11x11-evk.dts
++++ b/arch/arm/dts/imx91-11x11-evk.dts
+@@ -503,7 +503,7 @@
+ 			MX91_PAD_ENET1_TD0__GPIO4_IO5                          0x31e
+ 			MX91_PAD_ENET1_TD1__GPIO4_IO4                          0x31e
+ 			MX91_PAD_ENET1_TD2__GPIO4_IO3				0x31e
+-			MX91_PAD_ENET1_TD3__GPIO4_IO3				0x31e
++			MX91_PAD_ENET1_TD3__GPIO4_IO2				0x31e
+ 			MX91_PAD_ENET1_TXC__GPIO4_IO7                          0x31e
+ 			MX91_PAD_ENET1_TX_CTL__GPIO4_IO6                       0x31e
+ 		>;
+diff --git a/arch/arm/dts/imx91-pinfunc.h b/arch/arm/dts/imx91-pinfunc.h
+index b0066df173b1386f040b0776fd798406a6e39e06..1e15a0cacf8a8f83ad1e7d602c24cb622f94f078 100644
+--- a/arch/arm/dts/imx91-pinfunc.h
++++ b/arch/arm/dts/imx91-pinfunc.h
+@@ -330,7 +330,7 @@
+ #define MX91_PAD_ENET1_TD3__CAN2_TX                                              0x00a0 0x0250 0x0000 0x02 0x00
+ #define MX91_PAD_ENET1_TD3__HSIOMIX_OTG_ID2                                      0x00a0 0x0250 0x0000 0x03 0x00
+ #define MX91_PAD_ENET1_TD3__FLEXIO2_FLEXIO2                                      0x00a0 0x0250 0x0000 0x04 0x00
+-#define MX91_PAD_ENET1_TD3__GPIO4_IO3                                            0x00a0 0x0250 0x0000 0x05 0x00
++#define MX91_PAD_ENET1_TD3__GPIO4_IO2                                            0x00a0 0x0250 0x0000 0x05 0x00
+ #define MX91_PAD_ENET1_TD3__LPI2C2_SCL                                           0x00a0 0x0250 0x03e8 0x06 0x00
+ 
+ #define MX91_PAD_ENET1_TD2__ENET_QOS_RGMII_TD2                                   0x00a4 0x0254 0x0000 0x00 0x00
+diff --git a/arch/arm/include/asm/arch-imx9/imx91_pins.h b/arch/arm/include/asm/arch-imx9/imx91_pins.h
+index 26246702a9607cd1ba6c8a15be9313db63b2a4af..64bc4de4b2b0964cac56ddff372baa2b389750da 100644
+--- a/arch/arm/include/asm/arch-imx9/imx91_pins.h
++++ b/arch/arm/include/asm/arch-imx9/imx91_pins.h
+@@ -329,7 +329,7 @@ enum {
+ 	MX91_PAD_ENET1_TD3__CAN2_TX                                                     = IOMUX_PAD(0x0250, 0x00A0, 0x02, 0x0000, 0x00, 0x00),
+ 	MX91_PAD_ENET1_TD3__HSIOMIX_OTG_ID2                                             = IOMUX_PAD(0x0250, 0x00A0, 0x03, 0x0000, 0x00, 0x00),
+ 	MX91_PAD_ENET1_TD3__FLEXIO2_FLEXIO2                                             = IOMUX_PAD(0x0250, 0x00A0, 0x04, 0x0000, 0x00, 0x00),
+-	MX91_PAD_ENET1_TD3__GPIO4_IO3                                                   = IOMUX_PAD(0x0250, 0x00A0, 0x05, 0x0000, 0x00, 0x00),
++	MX91_PAD_ENET1_TD3__GPIO4_IO2                                                   = IOMUX_PAD(0x0250, 0x00A0, 0x05, 0x0000, 0x00, 0x00),
+ 	MX91_PAD_ENET1_TD3__LPI2C2_SCL                                                  = IOMUX_PAD(0x0250, 0x00A0, 0x06, 0x03E8, 0x00, 0x00),
+ 
+ 	MX91_PAD_ENET1_TD2__ENET_QOS_RGMII_TD2                                          = IOMUX_PAD(0x0254, 0x00A4, 0x00, 0x0000, 0x00, 0x00),
 
-> In the case of the above errors, it appears the *-u-boot.dtsi  is at
-> fault for referencing non-upstream nodes
+---
+base-commit: 365a7079fb918643da0f0709660a7d8ea76dd6f3
+change-id: 20251111-imx91_pins_fix-6bfae694156c
 
-Probably.
-
-Greets
-Alex
-
-
-> 
-> > 
-> > Greets
-> > Alex
-> > 
-> >>
-> >> Also, if you really want to update this u-boot DT, you would have to
-> >> copy it as-is, no stripping. Even if the props are unused. The only real
-> >> issue would be if Uboot stops working or gets confused by these extra props
-> >>
-> >> Eugen>
-> >>> Signed-off-by: Alexander Dahl <ada@thorsis.com>
-> >>> ---
-> >>>  arch/arm/dts/sam9x60.dtsi | 10 ++++++++++
-> >>>  1 file changed, 10 insertions(+)
-> >>>
-> >>> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
-> >>> index a33c0d57398..1ee30422518 100644
-> >>> --- a/arch/arm/dts/sam9x60.dtsi
-> >>> +++ b/arch/arm/dts/sam9x60.dtsi
-> >>> @@ -182,6 +182,16 @@
-> >>>  				ranges = <0x0 0xf801c000 0x800>;
-> >>>  				status = "disabled";
-> >>>  
-> >>> +				spi0: spi@400 {
-> >>> +					compatible = "microchip,sam9x60-spi", "atmel,at91rm9200-spi";
-> >>> +					reg = <0x400 0x200>;
-> >>> +					#address-cells = <1>;
-> >>> +					#size-cells = <0>;
-> >>> +					clocks = <&pmc PMC_TYPE_PERIPHERAL 5>;
-> >>> +					clock-names = "spi_clk";
-> >>> +					status = "disabled";
-> >>> +				};
-> >>> +
-> >>>  				i2c0: i2c@600 {
-> >>>  					compatible = "microchip,sam9x60-i2c";
-> >>>  					reg = <0x600 0x200>;
-> >>
-> > 
-> 
+Best regards,
+-- 
+Francesco Valla <francesco@valla.it>
 
