@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72468CCFA18
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:48:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428ACCCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:56:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8563C83B8A;
-	Tue, 11 Nov 2025 14:48:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9862E83B8A;
+	Tue, 11 Nov 2025 14:56:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lmeWLSxq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C12gAxs9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D139383BC4; Tue, 11 Nov 2025 14:48:04 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 2FAFB83BC8; Tue, 11 Nov 2025 14:56:45 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5B9E83A03
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:48:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C116783A79
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:56:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5943b7bdc37so845639e87.1
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 05:48:02 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-656c07e3241so1820764eaf.1
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 05:56:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762868882; x=1763473682; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+MG51CJ8i53q5LmX9YQRfOgutze2VmPEJTBM9qSwXhw=;
- b=lmeWLSxqXNw/FeBF1kUfEeV4JA0OK+NehExiwZQQdmozouGhGIBP6/8ANWuE9IpNqo
- ZhPiKQ46g7XECiJ2MgVmV/4WXvbXUrYeZPgtDB7HCY10yIQKJyl1LMFMkIyBGlCTqSp+
- 0PR9aapDsZrfj/ZRPOgKM/cyQeKddGDwKPwOEQgXnfI5oWxQLrIJtNkkURQxhF7y9Zvp
- ka9GxSj6R43HdwWFUP4j/5FbK7S3ZEvwWzdougnSmO0cRKAZFG9gkWR0u6lYYISiVjDN
- gKnNlitW+Ibtt5U+P4wmxhiOc+ao6N1us5LIMTP8EMwJCEKRailT3fbixlG+9DWkWLHK
- Eyhg==
+ d=konsulko.com; s=google; t=1762869401; x=1763474201; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=e+An5XwjkXRnp90quCnYaNxJrVxlGPF8Waq1KL3HOSA=;
+ b=C12gAxs9ZjtgMT7JWNkH1IbgmJshLTDgX5iBskvhB28xAO7zvHZLEfYRoav4xCD0Ue
+ GB/mpbIGxhRkF028qu3chchl61Aa9ZXjmGG1eNvFn2nSx8Nj5gvEtsCYoyJOpXQfpEHF
+ cvG0zjwC6+OVptkQbfyjEjEwitZsnTNObfZMU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762868882; x=1763473682;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=+MG51CJ8i53q5LmX9YQRfOgutze2VmPEJTBM9qSwXhw=;
- b=aHJeZxgX86lDrFj0nKII/Oo3WKBqcMGVpwO3scUK2oAS2hjOJqmJ8c96LmOOotSvAx
- YdCZ0EJXqWVkTTGUgpquTK7dngMJ82E8g2ghQoNEJ/TMm5sBURyzmtVXm9g1da6wJm1g
- /KJmD4tAQ8QdwHASUF+ECKA9nmO069tRAAin/tHV4SUwd4Em7uV66ddgjDOmkxHCxrCH
- eysrOXK6JRDKjCZxkLQIIsMU0Ph/k1lQzzEViJzrM9mGzJkDFJMg5B2wl+1k4xthUr7T
- jJKd1QRtcKeUi37q9TxPmHTlOhclkTNxK/ROJeMQPLtFc0MdmbaCv8AyNfz6hZ+fmwK4
- +aaQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX4So3VL/UZcPUZMc1o7b/CU1yaH3dvSXVJzt8kpQMK1F+PYpKWwVtoNqBYU9NCIsEv4fwzdVM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzsKi1x779JQS94fQC/IavOx/PFzjBQ2S3BCYQkmwQvXgAQ3UfM
- p1Nvk8GdJkeOi/rauFIKxSdJT0BeKx8clcNX/XeTOlHSP2ZJ4MHulVgvOgD/hIBXE5Wkms4p4OF
- Kx4tuKF/WDUdvQCrq7ewvRTZwLDga19c=
-X-Gm-Gg: ASbGncv2Npv+13ojEicjFPagPv8GKc1nlQrM8A22gjIdidXKqyllXYA2AB3Q6+n6eXj
- ZzL2LFj9CHCTNO4/qiBkTf7Q47OFr6tMZJMSsKovJaHRYXXGp36c1lGKmpLOzUpp6DCF998wDAy
- tRUdGHrT40RrB+fSt2vgQEjewsSHJHSsxC471ZkGkarz8wjS14h0K0cQMNhUPi18z9Yo0WeDoJd
- 24GJMWD0DClSA2kZR0Wsn4CMTKQP0QAcguQEBtI7vQg3Q9Pv6AJqB6Fw3bE/B6B2qrel8zb76Vg
- 6wpz1NEoohLG3fWcNgasYsvG5us=
-X-Google-Smtp-Source: AGHT+IH44FmNg9W7Uhknoa5fVjZyxuH5nu6lwklm1ZHy7G8ycIr6ZFTubjioG28LXXVGqT8fDWsFJHBp726omsxq0Sg=
-X-Received: by 2002:a05:6512:23a8:b0:594:2876:c901 with SMTP id
- 2adb3069b0e04-594745ff370mr1059946e87.25.1762868881985; Tue, 11 Nov 2025
- 05:48:01 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762869401; x=1763474201;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=e+An5XwjkXRnp90quCnYaNxJrVxlGPF8Waq1KL3HOSA=;
+ b=t7Qj8zaQHb8/HFHiLDDKvzEdUmZfWMOTGcZP6Enk6JfCO/ZFA/asTxTZKEt0MQYg9+
+ CYnZTm+QStTdtGkWckg6eLZcf3YWkKZvwffqFVx190uKVKPA6XQL4ZdyzABHEI5OwR3e
+ P0MGXpYlBAYHP4f/Mw3RdEVj9pu+g09ZUjxw/EAX09E7qdU3FQVsg4TQdBR7aGAoUre6
+ eYRKIZ4VpjrhCEIh1dz+620z2XCqN7S8zlb95QteRW8IRZH4QKQv8hQsof5chyOCZ8qG
+ Hnp8fHo+oQrKW/OO16YALbICZVbBBd81iWE5LLLBJjS0wUV6KWPDkbHrLV3sz8DWRq6S
+ mxiA==
+X-Gm-Message-State: AOJu0Yy4/zPgY9ej9xl/c9tuLsyqSDPVfwZo7QrHuvXIVMh5HTugMJnA
+ E0w5eNiG1YBc7qU+xSb+FhKutHCBj0Q/R10p4GgMVxF8aPER8ct65/TMC2bmYexlbGQ=
+X-Gm-Gg: ASbGncv9dtEg9qawiiiPFvlEnsScYW4Qnv0ouuu9pYDsblrHDMpqGDTNvh2sxl5OdWd
+ PizkGxvCzFUGKPPSjhPM6SIgXnP74nUrccOLgtQIGBhyJDQ7shb4gLU0S8aWqLtxY6wdImr58fF
+ Xx9HtdoJZtYryCHNa+hhJ4i0/3w6sPMj3JnEj4Tfj1C2qqdznTuRRs/vAhp182fpQzm9ax4lCFT
+ Bfov41Zuj+GufecNjSmaarIIYLkPhu559rH9uUrpA+W98MRLhWDVytS3eUPCLvNzClCImXJExOL
+ Ct7sp6PMZoopThJ4zSFleMmYRiK3p4pQ/jviKztwwtrMRrfI6HbEYPZ9opT9avA5OwBx4FJYE82
+ +xyF4prCleXFynKp4/92bDG3+OTQO9d1Nl/uYJspNBO/y2qzYdeoFvwebMebp9YiNlyAyQ7ZuhE
+ 1GC/SbmBivGMzeXVDTItnFfJjkVgrCd9KtxiCwF84=
+X-Google-Smtp-Source: AGHT+IF2Bsieo4QUMgHtaXdJZnqwAB0rabuRs5D/1CnsKWw1G7ewaI8TBZ8fnRm/p+5ra8wor6/x6A==
+X-Received: by 2002:a05:6820:2905:b0:63e:effa:86f5 with SMTP id
+ 006d021491bc7-656d8eb8572mr5666118eaf.7.1762869401369; 
+ Tue, 11 Nov 2025 05:56:41 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-656f3ba2650sm2847822eaf.11.2025.11.11.05.56.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Nov 2025 05:56:40 -0800 (PST)
+Date: Tue, 11 Nov 2025 07:56:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] Gitlab: Add a "sage-lab" stage to access a board farm
+Message-ID: <20251111135638.GT6688@bill-the-cat>
+References: <20251110154231.2629710-1-trini@konsulko.com>
+ <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20251027115638.1186252-1-festevam@gmail.com>
- <CAOMZO5B1sxS8Vh1awupGZd8oqqLhZ55abME07Kf5AZ-w9jUKhQ@mail.gmail.com>
- <3ab1b3a6-b9ab-4571-a7c8-8288d4a8d290@gmail.com>
-In-Reply-To: <3ab1b3a6-b9ab-4571-a7c8-8288d4a8d290@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 11 Nov 2025 10:47:50 -0300
-X-Gm-Features: AWmQ_bmF8dN8b-rO6-akFdPnpIWdYpKlzc5gNxQ1CtIfwYblHIQVK5SY8Zy6KbQ
-Message-ID: <CAOMZO5BcMu_94qn4vhDgxmdWVx0N-mCD9wYTvAPbXaK45EUFBA@mail.gmail.com>
-Subject: Re: [PATCH] imx: Revert "imx: mx6ull: fix REFTOP_VBGADJ setting" and
- fix comments
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>, Ye Li <ye.li@nxp.com>, 
- Peng Fan <peng.fan@nxp.com>
-Cc: uboot-imx@nxp.com, trini@konsulko.com, dario.binacchi@amarulasolutions.com,
- michael@amarulasolutions.com, u-boot@lists.denx.de, u-boot@schwermer.no, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6KLrv1lapLqB29bG"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,60 +97,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Emanuele,
 
-On Thu, Nov 6, 2025 at 7:22=E2=80=AFAM Emanuele Ghidoli
-<ghidoliemanuele@gmail.com> wrote:
+--6KLrv1lapLqB29bG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hi Fabio, Ye,
->
-> At Toradex we have been struggling since quite some time (back to 2018) w=
-ith
+On Tue, Nov 11, 2025 at 05:58:22AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 10 Nov 2025 at 08:42, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > This is the Gitlab side of adding support for the board lab connected to
+> > the "konsulko-sage" runner. On the software side, this lab uses only
+> > upstream labgrid. On the hardware side, each device under test is
+> > connected to its own exporter (typically a Raspberry Pi 4) that must be
+> > turned on (and cleanly turned off) as part of a given test cycle.
+> >
+> > Add support for testing on a SolidRun Hummingboard 2 (imx6), Raspberry
+> > Pi 3 and Raspberry Pi 4. In all cases, we enable additional options to
+> > run more tests on the board. As we have some networking tests, we test
+> > both the legacy network stack and lwIP. In the case of Pi platforms, we
+> > test all of 32bit configuration, plain configuration and rpi_arm64, and
+> > again with and without lwIP.
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Note that for the Pi platforms we enable/disable CMD_BOOTEFI_SELFTEST
+> > based on overall binary size. I've created
+> > https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/issues/2
+> > to track addressing that issue.
+> > ---
+> >  .gitlab-ci-sage-lab.yml | 182 ++++++++++++++++++++++++++++++++++++++++
+> >  .gitlab-ci.yml          |   5 ++
+> >  2 files changed, 187 insertions(+)
+> >  create mode 100644 .gitlab-ci-sage-lab.yml
+>=20
+> Would it be possible to add some docs about this? Does the exporting
+> rpi do a full system boot and then run some scripts to load things
+> onto the board, then shut down?
 
-Does this problem only affect early i.MX6ULL silicon samples?
+I don't understand your question. Yes, the exporter is powered on/off in
+the test job, as explained in the commit message. When it comes up it
+registers the device under test with the coordinator (and unregisters
+when powering off).
 
-> the temperature readings and the thermal shutdown behavior on i.MX6ULL. T=
-he
-> issue we observed is that the thermal shutdown seems to trigger too early=
-.
->
-> I have investigated the history around this topic and verified some inter=
-nal
-> notes in our bug tracker. With this revert applied, and on the devices we=
- have
-> (all trimmed with value 0), the reported temperature increases by about 1=
-0 =C2=B0C
-> compared to before the revert. The absolute accuracy of the readout is
-> questionable: for example, on a device kept at around 20 =C2=B0C, the tem=
-perature
-> readout was ~19 =C2=B0C before the revert, and ~31 =C2=B0C after the reve=
-rt.
->
-> Consider that for devices with fuse value of 6, there is a -10 degrees of=
-fset
-> after this revert (so, the other way around).
->
-> I understand that for Sven this revert improves stability during large XZ
-> decompression in userspace for few devices, but for us it means that the
-> thermal shutdown happens roughly 10 =C2=B0C earlier, which is a serious i=
-ssue in
-> our case.
->
-> I would kindly ask NXP to double-check how these devices were trimmed. My=
- gut
-> feeling is that there might be an inconsistency, either the trimming sche=
-me is
-> not backward-compatible (e.g. old and new devices behave differently, and=
- the
-> code should cope, I don't know how, with this), or this patch must be rev=
-erted
-> (because introduces a regression).
+--=20
+Tom
 
-Peng/Ye Li,
+--6KLrv1lapLqB29bG
+Content-Type: application/pgp-signature; name="signature.asc"
 
-How does NXP suggest we handle this? Were the early i.MX6ULL parts
-incorrectly fused?
+-----BEGIN PGP SIGNATURE-----
 
-Can the fuse be read and dynamically adjusted?
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRNAkwAKCRAr4qD1Cr/k
+CoeUAQD3Iw9dCpQ9uAxuuQyAf5Ewi02h2P5MObzHBvlAM27BuQD/RvfCGEBcgcj2
+klLjagTH7rgq27bNfAqm6gyxbbfPHgI=
+=1RYD
+-----END PGP SIGNATURE-----
 
-Please advise, thanks.
+--6KLrv1lapLqB29bG--
