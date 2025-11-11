@@ -4,90 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72D1FCCFA18
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72468CCFA18
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:48:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0659E839D6;
-	Tue, 11 Nov 2025 14:35:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8563C83B8A;
+	Tue, 11 Nov 2025 14:48:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="luL+sMr1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lmeWLSxq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BB6C83BB1; Tue, 11 Nov 2025 14:35:11 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id D139383BC4; Tue, 11 Nov 2025 14:48:04 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4C1283946
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:35:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D5B9E83A03
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:48:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7c6d13986f8so522251a34.0
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 05:35:08 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5943b7bdc37so845639e87.1
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 05:48:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762868107; x=1763472907; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=K8T7iTSqJNNBRmyDnqyoNmSmHpLVhOYDhdJ41HulPJE=;
- b=luL+sMr1izQ1pyGsJ9BjmH1xsoO2TEpqhbbCczE/cblznqhanGM6X4yRfSrPvC4tXB
- RVu201sEOENETksd3Q9Qo6Qq/ak+8++VVr8nJ4KhyM2rFXX8kFbYC50kF8XVHZHoVrQu
- ZvomppA22kgie3ompBIY4VEQFq7ZYlSx8R/hs=
+ d=gmail.com; s=20230601; t=1762868882; x=1763473682; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+MG51CJ8i53q5LmX9YQRfOgutze2VmPEJTBM9qSwXhw=;
+ b=lmeWLSxqXNw/FeBF1kUfEeV4JA0OK+NehExiwZQQdmozouGhGIBP6/8ANWuE9IpNqo
+ ZhPiKQ46g7XECiJ2MgVmV/4WXvbXUrYeZPgtDB7HCY10yIQKJyl1LMFMkIyBGlCTqSp+
+ 0PR9aapDsZrfj/ZRPOgKM/cyQeKddGDwKPwOEQgXnfI5oWxQLrIJtNkkURQxhF7y9Zvp
+ ka9GxSj6R43HdwWFUP4j/5FbK7S3ZEvwWzdougnSmO0cRKAZFG9gkWR0u6lYYISiVjDN
+ gKnNlitW+Ibtt5U+P4wmxhiOc+ao6N1us5LIMTP8EMwJCEKRailT3fbixlG+9DWkWLHK
+ Eyhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762868107; x=1763472907;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=K8T7iTSqJNNBRmyDnqyoNmSmHpLVhOYDhdJ41HulPJE=;
- b=g+PTNXbcMhU67kWMgcQi7U1ZeD+E6vsJFm/MMlmSWL2knGS+S6e9L6AcvNcCF5YNuz
- e9kOTgzpE9nNHChOGY68Js4R8+ea8yGBo28IIxbJ6JTtDV8VeUbbiCPgoC6dVv77148d
- wQ3iOf0pHDr/qzAaQBvc4vg6sLNd4nI4tcbB13bhEHENMtTYyErBbZ6Cr9D0BhPRiU0O
- kgM0BjKQfLGy+o7bFO0r1lGWSDSyW8xSGGCHKHabpNMXT/TPHn8Pia3n0WV4UeWUM8mF
- gEY9v8LjE6CIxMrmXcWaEvJrm66Chv4mlF51P2YwAeFAHkjKQGLloMkQr5jxXP/h8Fhq
- S2Fw==
+ d=1e100.net; s=20230601; t=1762868882; x=1763473682;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+MG51CJ8i53q5LmX9YQRfOgutze2VmPEJTBM9qSwXhw=;
+ b=aHJeZxgX86lDrFj0nKII/Oo3WKBqcMGVpwO3scUK2oAS2hjOJqmJ8c96LmOOotSvAx
+ YdCZ0EJXqWVkTTGUgpquTK7dngMJ82E8g2ghQoNEJ/TMm5sBURyzmtVXm9g1da6wJm1g
+ /KJmD4tAQ8QdwHASUF+ECKA9nmO069tRAAin/tHV4SUwd4Em7uV66ddgjDOmkxHCxrCH
+ eysrOXK6JRDKjCZxkLQIIsMU0Ph/k1lQzzEViJzrM9mGzJkDFJMg5B2wl+1k4xthUr7T
+ jJKd1QRtcKeUi37q9TxPmHTlOhclkTNxK/ROJeMQPLtFc0MdmbaCv8AyNfz6hZ+fmwK4
+ +aaQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVc0/sJvGT6wrvLlnlzjMJysHefgamL8jmoYiNqHG80Swm3P0yExR9PL6CyVs4g2SqA54ock3o=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMmnVeWJ+SYFuliAgFyCyq8/19x5marJtr11YlQjAX4OorssLY
- Aq5aum/uU443fviv8jlYrtLAReKQrYVaMKvN3hacCefyN9pCUbtyYwUYznUTQ/zqFak=
-X-Gm-Gg: ASbGncuCpXnByMJT9Rva/2sJKp3pSzEq+zOfy1KRAi4MX1OJA/5cYOLE3nWQ1cMHWcV
- rMDunCNGrO2X8qnQjdvIn2phlfn5nuE2HIQIX8ZzDg5+mgO5b5x41ocCd8OO1P+njvGhMI23tOg
- 32nRQherIYt15kRyzW2vNoYiIXP1TZgKUI9SlWkoloQ2j4i1j9Ois3/z2ghIuBwz2DbSKxSDfup
- TScz1AIBNDTiHobdawKyrEMi6eB1c0UEYengOMJflmD9ltGl2MUtAC+qBwnd5zB2ip1b2AtlD+P
- Gu/e8u2uo7D/KRl4fZ6f/PqkexLhi19oQfGIB4C0D+7g06Fnz7vCpE2H2iIsRLceC1EOOLiQUj+
- wbS1fvmG0rFFAXw1rkWBXlXhBb0yT3wovwt29asP8Zs7qG1EumWM24T3LrvDmlYPWS3bty8R1n+
- TNhqUUrvlpJvCkAsnFd3MQ+FHjbS4AbKDv21HLiI4=
-X-Google-Smtp-Source: AGHT+IE5s7SisIT4c2zE3BuxFCE5c/VW0R01IQmGM9I4kP9RS+JYZai6f99mR0aWa/IVxKtYm/NWBQ==
-X-Received: by 2002:a05:6830:4427:b0:7c7:26e:4686 with SMTP id
- 46e09a7af769-7c720b7e730mr1907591a34.5.1762868107512; 
- Tue, 11 Nov 2025 05:35:07 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f0f0a715sm7042126a34.4.2025.11.11.05.35.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 05:35:06 -0800 (PST)
-Date: Tue, 11 Nov 2025 07:35:04 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Swamil Jain <s-jain1@ti.com>
-Cc: Anshul Dalal <anshuld@ti.com>, devarsht@ti.com,
- aradhya.bhatia@linux.dev, n-jain1@ti.com,
- tomi.valkeinen@ideasonboard.com, vigneshr@ti.com, praneeth@ti.com,
- h-shenoy@ti.com, u-kumar1@ti.com, n-francis@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 0/2] Refactor tidss_drv and enable early splash on AM625
-Message-ID: <20251111133504.GS6688@bill-the-cat>
-References: <20251106085842.629521-1-s-jain1@ti.com>
- <DE1M02OMYGCG.UGUVC26WQW5I@ti.com>
- <20251106133745.GX6688@bill-the-cat>
- <15de746b-85f1-4cbf-a803-a225d7cc2d44@ti.com>
+ AJvYcCX4So3VL/UZcPUZMc1o7b/CU1yaH3dvSXVJzt8kpQMK1F+PYpKWwVtoNqBYU9NCIsEv4fwzdVM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzsKi1x779JQS94fQC/IavOx/PFzjBQ2S3BCYQkmwQvXgAQ3UfM
+ p1Nvk8GdJkeOi/rauFIKxSdJT0BeKx8clcNX/XeTOlHSP2ZJ4MHulVgvOgD/hIBXE5Wkms4p4OF
+ Kx4tuKF/WDUdvQCrq7ewvRTZwLDga19c=
+X-Gm-Gg: ASbGncv2Npv+13ojEicjFPagPv8GKc1nlQrM8A22gjIdidXKqyllXYA2AB3Q6+n6eXj
+ ZzL2LFj9CHCTNO4/qiBkTf7Q47OFr6tMZJMSsKovJaHRYXXGp36c1lGKmpLOzUpp6DCF998wDAy
+ tRUdGHrT40RrB+fSt2vgQEjewsSHJHSsxC471ZkGkarz8wjS14h0K0cQMNhUPi18z9Yo0WeDoJd
+ 24GJMWD0DClSA2kZR0Wsn4CMTKQP0QAcguQEBtI7vQg3Q9Pv6AJqB6Fw3bE/B6B2qrel8zb76Vg
+ 6wpz1NEoohLG3fWcNgasYsvG5us=
+X-Google-Smtp-Source: AGHT+IH44FmNg9W7Uhknoa5fVjZyxuH5nu6lwklm1ZHy7G8ycIr6ZFTubjioG28LXXVGqT8fDWsFJHBp726omsxq0Sg=
+X-Received: by 2002:a05:6512:23a8:b0:594:2876:c901 with SMTP id
+ 2adb3069b0e04-594745ff370mr1059946e87.25.1762868881985; Tue, 11 Nov 2025
+ 05:48:01 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VEtaeOluGyuyNU4l"
-Content-Disposition: inline
-In-Reply-To: <15de746b-85f1-4cbf-a803-a225d7cc2d44@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251027115638.1186252-1-festevam@gmail.com>
+ <CAOMZO5B1sxS8Vh1awupGZd8oqqLhZ55abME07Kf5AZ-w9jUKhQ@mail.gmail.com>
+ <3ab1b3a6-b9ab-4571-a7c8-8288d4a8d290@gmail.com>
+In-Reply-To: <3ab1b3a6-b9ab-4571-a7c8-8288d4a8d290@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 11 Nov 2025 10:47:50 -0300
+X-Gm-Features: AWmQ_bmF8dN8b-rO6-akFdPnpIWdYpKlzc5gNxQ1CtIfwYblHIQVK5SY8Zy6KbQ
+Message-ID: <CAOMZO5BcMu_94qn4vhDgxmdWVx0N-mCD9wYTvAPbXaK45EUFBA@mail.gmail.com>
+Subject: Re: [PATCH] imx: Revert "imx: mx6ull: fix REFTOP_VBGADJ setting" and
+ fix comments
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>, Ye Li <ye.li@nxp.com>, 
+ Peng Fan <peng.fan@nxp.com>
+Cc: uboot-imx@nxp.com, trini@konsulko.com, dario.binacchi@amarulasolutions.com,
+ michael@amarulasolutions.com, u-boot@lists.denx.de, u-boot@schwermer.no, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,62 +102,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Emanuele,
 
---VEtaeOluGyuyNU4l
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Nov 6, 2025 at 7:22=E2=80=AFAM Emanuele Ghidoli
+<ghidoliemanuele@gmail.com> wrote:
 
-On Tue, Nov 11, 2025 at 02:38:10PM +0530, Swamil Jain wrote:
->=20
-> On 06-11-2025 19:07, Tom Rini wrote:
-> > On Thu, Nov 06, 2025 at 05:56:38PM +0530, Anshul Dalal wrote:
-> > > On Thu Nov 6, 2025 at 2:28 PM IST, Swamil Jain wrote:
-> > > > This series:
-> > > > - Refactors tidss_drv
-> > > > - Adds am62x_a53_splashscreen.config to enable splashscreen at u-bo=
-ot
-> > > >    SPL
-> > > >=20
-> > > > Signed-off-by: Swamil Jain <s-jain1@ti.com>
-> > > > ---
-> > >=20
-> > > Tested-by: Anshul Dalal <anshuld@ti.com>
-> > >=20
-> > > I also went ahead and did a sandbox build and the driver seems to bui=
-ld
-> > > fine contrary to what Tom saw[1].
-> > >=20
-> > > Below are the steps I followed, am I missing something here?
-> > >   1. make sandbox_defconfig
-> > >   2. Select CONFIG_VIDEO_TIDSS via menuconfig
-> > >   3. make -j`nproc`
-> > >=20
-> > > [1]: https://lore.kernel.org/u-boot/20251105164114.GQ6688@bill-the-ca=
-t/
-> >=20
-> > v4 drops the header in question :)
-> >=20
->=20
-> Hi Tom, as we have the patches tested and sandbox builds also fine, does =
-the
-> series look good, could it be possible to pick it?
+> Hi Fabio, Ye,
+>
+> At Toradex we have been struggling since quite some time (back to 2018) w=
+ith
 
-I've assigned it to the video custodian as yes it looks generally fine,
-thanks.
+Does this problem only affect early i.MX6ULL silicon samples?
 
---=20
-Tom
+> the temperature readings and the thermal shutdown behavior on i.MX6ULL. T=
+he
+> issue we observed is that the thermal shutdown seems to trigger too early=
+.
+>
+> I have investigated the history around this topic and verified some inter=
+nal
+> notes in our bug tracker. With this revert applied, and on the devices we=
+ have
+> (all trimmed with value 0), the reported temperature increases by about 1=
+0 =C2=B0C
+> compared to before the revert. The absolute accuracy of the readout is
+> questionable: for example, on a device kept at around 20 =C2=B0C, the tem=
+perature
+> readout was ~19 =C2=B0C before the revert, and ~31 =C2=B0C after the reve=
+rt.
+>
+> Consider that for devices with fuse value of 6, there is a -10 degrees of=
+fset
+> after this revert (so, the other way around).
+>
+> I understand that for Sven this revert improves stability during large XZ
+> decompression in userspace for few devices, but for us it means that the
+> thermal shutdown happens roughly 10 =C2=B0C earlier, which is a serious i=
+ssue in
+> our case.
+>
+> I would kindly ask NXP to double-check how these devices were trimmed. My=
+ gut
+> feeling is that there might be an inconsistency, either the trimming sche=
+me is
+> not backward-compatible (e.g. old and new devices behave differently, and=
+ the
+> code should cope, I don't know how, with this), or this patch must be rev=
+erted
+> (because introduces a regression).
 
---VEtaeOluGyuyNU4l
-Content-Type: application/pgp-signature; name="signature.asc"
+Peng/Ye Li,
 
------BEGIN PGP SIGNATURE-----
+How does NXP suggest we handle this? Were the early i.MX6ULL parts
+incorrectly fused?
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRM7iAAKCRAr4qD1Cr/k
-CmQdAQCUJK2zdIMKEuTcTm8Z83F8GbR7qNJC+oLxXKVEu8heuwEAkUEud3/aAJ3c
-Eff4wud26gjN03jicBUH7lH6vpnWKQM=
-=WM06
------END PGP SIGNATURE-----
+Can the fuse be read and dynamically adjusted?
 
---VEtaeOluGyuyNU4l--
+Please advise, thanks.
