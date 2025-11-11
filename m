@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1DF4CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 10:12:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94ED1CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 10:14:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 684D383B5E;
-	Tue, 11 Nov 2025 11:12:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2325383B4E;
+	Tue, 11 Nov 2025 11:14:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=br-automation.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=br-automation.com header.i=@br-automation.com header.b="gSR88b/D";
+	dkim=pass (2048-bit key; unprotected) header.d=br-automation.com header.i=@br-automation.com header.b="X47rR9OT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB66D83F66; Tue, 11 Nov 2025 11:12:04 +0100 (CET)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 3577183B5D; Tue, 11 Nov 2025 11:14:26 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E63D183B55
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 11:12:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C42883A6A
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 11:14:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=br-automation.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=wolfgang.wallner@br-automation.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XoxW+9W6hxlr925lgi4jMunIxsCItiV+MyTulpdEsjOCcarLxWpckfkmaxZgvu0TZL/ymqogoLAW7oGlVGDkkgM4NTHs8XxjAkWszIaPqDSsnZV+oaG03tjLSfhoimARts8mRaZKpe3FKITnzAwAAZD3ITFO1hpyH7bY4sCWprY1PotmjKdo5ZF9u/lzRvLZPCNp0Eicv7iQjY+wXS8dANJYX5Ho2wI5IBY8ZejUjhqMhoawhQEXe57NErEsGdqDQ1B6NWK4eg5mR3hhDVp1/wTe7YhSLQPnaEhhkhdgyhERus/GhXRBOllkgDHGYwuUiEj34rbcjzrbwAwfoZ+GbQ==
+ b=LlakSvlr51F/U5gdJBbunieAoX1LSzl1nQWKWQMvQdG1MfFN0Yk8GuoVfNCexaV75cOvHuprpIurAWtWMVL3nlMJnkSzDHn1u43MnQzmw2+9Cxkg/C9yk+yxVIQ85As4aUPO8tlxpQou6azPAkqok0WU74hUqxE9nofw/3qVqsJrM7rZwZhG4GGX5OJ5nYsyBSBU3N1MscOOr9IL/03PMtymM0V58u9c8Lgyo3eKLnDIbuiQXfLrsCX4tDixAQspC1P2fNJQ9bI9Qc563clX9cxXYTw1xmQLYVcnTLxeaW0Zeocz1x1ayARsWWB6Xm3vOltb1z4e4Y7WldDQi6o2bQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1wy8tAAphpMTZAoGfuVydJU6CBNt2aW+2ya5twhJqpw=;
- b=Z4L/aDkuBhX3ANfHLlVvfBf14zVQT4UGsjcEdlvElPHl3QBP+SaTZMotx7fAda8XDylznk/AR362+QxjVdfYueqou1sifDr38itykOnB7tTSaks57dQfRa8Lc7XSgyq3McGTty14hqupMlQlQqTCBYNOtdKVQ5fM0ALB9DjPBADHTY4Kkdx//VBbfkYPLa0wUqD2k8q2PY/IPCdMdsDbeussyK7mlCX5KhEEhwY9KL1kPtzp8Pa8DGUJMg2L1088GR+X7yFsWVlmPBIp1Fj31i4lxMvoABjhwHYXiNFytYDorchLaJOa7iNeYklUBDn2IQHa3klCPN+BM/eqWf4SQg==
+ bh=Je2K1aBAnxXtLJfxrNZd4QdEzgcbyaTHiDDAmjAKvq4=;
+ b=r2vMGfgcs0zZZjoot558Si4e5UWVNgkvWNmwP3hQR4O0YzMuzkVzk5i1LdvrtAWUUYcknkugi83OETb0nnmbmFR+mx4sJhrSc9kn9VGruqGoZjPyP/aB4we836ZMrfiGl3/ge1qxDyhtPesyEss3Ro8ic00DJEAFUzdLohvXlB1HxGBPzpvbJzSE+s0DZlmMdX4yZ6lOFBbpvaoX4YEo1Ps1YNB9SrUFVUes0H0+IEPDLYJMtlD1oEN1m09kuns7o7SKH4LY+mxIGnxMogMFBrh45Fs1njmAxIApfWyppAS38wCXPa/VZulufeo54UtsDmZg/O0hlqIUXP2M89+TOg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=br-automation.com; dmarc=pass action=none
  header.from=br-automation.com; dkim=pass header.d=br-automation.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=br-automation.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1wy8tAAphpMTZAoGfuVydJU6CBNt2aW+2ya5twhJqpw=;
- b=gSR88b/DHcNjZZm0twLNr92GS/O6PXfbaes+04MJIIwkKtkzVrA//ZtYsoy9+eBttwqnQgBVLfuREMcLoOhuLUpfQhvfiI+RqA9g3PQcAkD0w0ljHptDrHNEF92Nl5uAXpFkbjHJwALGmTYz2GnGO/he4CuxmKTBgGLFYWs8TzAlJOIiijde8U3D9CzkKW+tIHB3KEtA4YH13fddxaJ+x1iJTOg7O5N//Jwv+kEgmJHBjFea2GxYU8fAgtRGSdNE78kfD/JzvNDOoDMW3cCuOqL/Me3wbHoboNRdWQADappKuESSwMvnPVIcwGUG83BbKbJ/KdVWzz5/IlAvuq21pw==
+ bh=Je2K1aBAnxXtLJfxrNZd4QdEzgcbyaTHiDDAmjAKvq4=;
+ b=X47rR9OT8pmSWAIR3UkmXSQxYW2aQ0EBsbxBk6SWN1kGyfX5VsNZCi0jrCvFalM70LC2qMKCv3AoxHjRFPchOddDy5bpkPVhdc2PJSsSmPQ9hiWg2UgOLw/5iz8Lm3Co0XLkFF5OcDbC51OEUlPRoqjiQGrzGhz++m3nWZ+xeuVNxYpYgbt1qbDv4QLeXxkMyExB23L3abtrC/EgkskK1hvB90SMm20OfjY+GUHp5oGOw4mrmqYlJz+yS/RqvQ9eJTJ2fLDyDXpiZ1tiGHGteQGXS0ESHtkhVCfECzDhfmW9HSE2fdECaKwC1U/5w08GzGI8fBwOZuIg00mZjNzAIQ==
 Received: from DB9PR06MB8512.eurprd06.prod.outlook.com (2603:10a6:10:36c::17)
- by PA1PR06MB10090.eurprd06.prod.outlook.com (2603:10a6:102:4f7::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Tue, 11 Nov
- 2025 10:12:01 +0000
+ by DBAPR06MB6837.eurprd06.prod.outlook.com (2603:10a6:10:1a8::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.15; Tue, 11 Nov
+ 2025 10:14:22 +0000
 Received: from DB9PR06MB8512.eurprd06.prod.outlook.com
  ([fe80::5f8:554f:fee1:6cd5]) by DB9PR06MB8512.eurprd06.prod.outlook.com
  ([fe80::5f8:554f:fee1:6cd5%4]) with mapi id 15.20.9298.015; Tue, 11 Nov 2025
- 10:12:01 +0000
+ 10:14:22 +0000
 From: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-To: Quentin Schulz <foss+uboot@0leil.net>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Aristo Chen <jj251510319013@gmail.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, Paul
- HENRYS <paul.henrys_ext@softathome.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Shiji Yang <yangshiji66@outlook.com>, Anton Moryakov
- <ant.v.moryakov@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Alice Guo <alice.guo@nxp.com>, Bryan Brattlof <bb@ti.com>, Quentin Schulz
- <quentin.schulz@cherry.de>
+To: Peter Robinson <pbrobinson@gmail.com>, Quentin Schulz
+ <foss+uboot@0leil.net>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Aristo Chen <jj251510319013@gmail.com>, Rasmus
+ Villemoes <ravi@prevas.dk>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Shiji Yang
+ <yangshiji66@outlook.com>, Anton Moryakov <ant.v.moryakov@gmail.com>, Alper
+ Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>, Bryan
+ Brattlof <bb@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>
 Subject: Re: [PATCH 3/3] tools: binman: fit: add support for OpenSSL engines
 Thread-Topic: [PATCH 3/3] tools: binman: fit: add support for OpenSSL engines
-Thread-Index: AQHcSnpWtbOTkZTLRUmDzdHZnSoPTLTtUHxJ
-Date: Tue, 11 Nov 2025 10:12:01 +0000
-Message-ID: <DB9PR06MB8512CB13F3863D35D335EAB5CBCFA@DB9PR06MB8512.eurprd06.prod.outlook.com>
+Thread-Index: AQHcSnpWtbOTkZTLRUmDzdHZnSoPTLThJukAgAwo0Nk=
+Date: Tue, 11 Nov 2025 10:14:22 +0000
+Message-ID: <DB9PR06MB85123A4CF4B3A698386F9EE9CBCFA@DB9PR06MB8512.eurprd06.prod.outlook.com>
 References: <20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de>
  <20251031-binman-engine-v1-3-c13c1b5dac43@cherry.de>
-In-Reply-To: <20251031-binman-engine-v1-3-c13c1b5dac43@cherry.de>
+ <CALeDE9MYi2+u_ek1Rapmzx2_T9uE_cQcH8paKgxKwZjtGJ2gzg@mail.gmail.com>
+In-Reply-To: <CALeDE9MYi2+u_ek1Rapmzx2_T9uE_cQcH8paKgxKwZjtGJ2gzg@mail.gmail.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 msip_labels: MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Enabled=True;
  MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_SiteId=372ee9e0-9ce0-4033-a64a-c07073a91ecd;
- MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_SetDate=2025-11-11T10:12:00.542Z;
+ MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_SetDate=2025-11-11T10:14:21.422Z;
  MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Name=Internal;
  MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_ContentBits=1;
  MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Method=Standard; 
@@ -86,73 +87,73 @@ templafy-owa-emailsignature-version: 1.1.0.1
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=br-automation.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB9PR06MB8512:EE_|PA1PR06MB10090:EE_
-x-ms-office365-filtering-correlation-id: adecd315-1f98-4ff9-7b0c-08de210ac17c
+x-ms-traffictypediagnostic: DB9PR06MB8512:EE_|DBAPR06MB6837:EE_
+x-ms-office365-filtering-correlation-id: 68722124-bda4-4ae2-3154-08de210b1582
 x-abb-o365-outbound: ABBOUTBOUND1
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|7416014|38070700021; 
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?OKYXSW0/voV3H4R/Y2T4rOEU6DSq3V1OM2OQux1TOWd6kmif/NMG5d/NDS?=
- =?iso-8859-1?Q?rZNVkwYE78KVyAttV2nKw6vkILeItnbb5QeoNyq6lFu1+wj3EuA92Jj2iD?=
- =?iso-8859-1?Q?CwqolYDA9OwMA+gsBtsQgUxY+zBodLkaXXgxZTlgAt+PFTVmbgWwvXYVx7?=
- =?iso-8859-1?Q?u8U23Qv8l+2An/mp6FRoVx+r27S5Pl89uJimlR8uStkkOR1waUOKLCxtgl?=
- =?iso-8859-1?Q?tL+YCa5v6eClNzklrARuHkCE58aggMCdak2hjNikobqc2boggOXvRUq0Ff?=
- =?iso-8859-1?Q?YPDFg2o9/mJ1Z/Tx2R79g3wrw9dVmuZbECfG9hvyQukQbLymeJub80noDX?=
- =?iso-8859-1?Q?Qv8I6aZgXVQyO5EewDsF5n0h6w7HXFL/2K5se+sVS7FLqtPKSnci1KV5oN?=
- =?iso-8859-1?Q?8uuSzUAa31sE3ZrfygQx4317PJeQpOvgwarxZA1+QLuxoaouTr36GJT6bu?=
- =?iso-8859-1?Q?v3awFqd4lepvc3pB+MFkn6zqPSzVPeeoWRhbi4+1Qb2b6GIF/G4boSCHWL?=
- =?iso-8859-1?Q?y6k3ymsIowch+wMzKvTyEwIeIS9P+0r7WuPUdPiNBq5HeEZkrGG34Cp3r0?=
- =?iso-8859-1?Q?4LWmXcfbet82G5CknFLho6ego93uFZcmmY2sIZfsRJtkcdTmQvXetBwD2K?=
- =?iso-8859-1?Q?1sV11XLSByc2+C1dXiB+crzG5i2oeaV9NB3T6c9DwQlgRKGml9jmcwKJwC?=
- =?iso-8859-1?Q?bj01CIqgbqMqt9SRY6epDH5zB+LxF2FtVz1/4wjvMxQi9Cu3dR+hQrzXCp?=
- =?iso-8859-1?Q?x0/7zsPbRegpDBCwqoC+k6lSQ7JFfpFCt8g8aml38wtwKE+DJRW/oR09Eo?=
- =?iso-8859-1?Q?X4c7MvrmWIApEMaG0wkFCKYMAjQV2n7NoxrJduSy50PkFuiuwDl+G4gcQe?=
- =?iso-8859-1?Q?hBl0Jgr6mB8quKj2mjUGBK3H9j0tqI9YYEykcbGSWfnMlIpO3L+Q/yAnaD?=
- =?iso-8859-1?Q?qQDcBAJ/GfWU95pFNRf6P9KunXBnHiCN+p9EuJT9CCbGkMsqclDeU2fau8?=
- =?iso-8859-1?Q?W0CxpXBDxXjXvxw/BzkNGPdnIQUMum12xL11440Be72HVhagkPBdfunu9j?=
- =?iso-8859-1?Q?XSxIccyzoNe1/7v5daICdGTYcD549kdfGo2yqPhOMTMDHRHE+zHnMfgyaY?=
- =?iso-8859-1?Q?9FasNL3Sbm6uXbjsYG0OR1aXTbalFiS4FDDZQVUd8Ijjnne+zVOxYp9Ktc?=
- =?iso-8859-1?Q?8PzYDv3rK8lZUaOpgrfpQadYC44O9t0sIa5hG8iA4b6MGVV8nhRjo8N+om?=
- =?iso-8859-1?Q?x1aSc/kQ2j418QzEWkN7hl6K+vqlC7QzIuipSv06Uv6EtoiRLlFvTbrjTI?=
- =?iso-8859-1?Q?f9P4amHqatgNEctlGv8SMTElZ+I1PTpwaZ/W3Ro8CKZRmloilboXLBKp7s?=
- =?iso-8859-1?Q?W3nMm46Z0+jzTtk+uk7/M+czKGGAbRdTnm7dP6bFoOHwQLl8e1iXNu1vMi?=
- =?iso-8859-1?Q?jd33tJFpfQ0+3qFYMjoEQQHv7M5qqPmsnDiTBr0mhby1VDRyVwpCWz7a8p?=
- =?iso-8859-1?Q?uSKJ5sz+z0QRtTGglxbQmXZ/YzkTS+9x6pXFs5xPsuDE4fsudAz+b7kALY?=
- =?iso-8859-1?Q?aUUQ5LquxAZqxhlHJ4am0wMip+fQ?=
+ ARA:13230040|7416014|376014|366016|1800799024|38070700021; 
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?hYpOiULf+4aYzQR8GrikCxY74rmuXHEpgPDBiE0gOTphXHAb7PWf8TMxG4?=
+ =?iso-8859-1?Q?QXgkoAb1RBHJH7Gl9vvs8FHW5URH0iqtGf7VYGoeAhSetWZaVjHW/luuiF?=
+ =?iso-8859-1?Q?5vOQgpdlE4qkjJBI1lOf2OexUGscJ37F52QLxv+BSMTpzOv+MWvCZV7B69?=
+ =?iso-8859-1?Q?4X86+ROKSTlXGtjoBr0Q9qxE0OV17RrHmvGOqtAfYr5cZsK4rfxpnWRrRm?=
+ =?iso-8859-1?Q?3yGgye8lMPZh3BehIraifFlRXPSIyppgLdQBvWNW3xIxxeM+UCm8h836Fm?=
+ =?iso-8859-1?Q?a0uewa5hIWKP5SoDxejuV4yEh50IsdObX3FyFvi4jMEnqEd6TYEHeAgSFv?=
+ =?iso-8859-1?Q?v6c6C+AKhDdAlo6sW1I7FvkP12HfjT0wRnMwkkIvQR+SDpnGddTj3LlQXi?=
+ =?iso-8859-1?Q?LNff1atkL4Guj1CTScEK2amT8f19TCxaa4F9E5vNKBE2IqZpXOW29k33+U?=
+ =?iso-8859-1?Q?hRdT1979FL5GgEUwdhJB3+Mb1KBlPrY1DeYhMj/bgOYX7WU/uFc8e52iSE?=
+ =?iso-8859-1?Q?OjEIIN8zZj+pmoPvdp20Cd88fBoxuDGs/vryq8Wp7ssSFYOltTFIwM1olB?=
+ =?iso-8859-1?Q?v30MiKpapSzyhWdN/E3weScd//SaOr6iBSomMdqB+rDkmV/wtt5Ak3u4Bl?=
+ =?iso-8859-1?Q?fYiMvTbAfVeDMxYDYt4hJbLecuqDsrD4aNfg5NnkO1sB0Sxb3dJRWxghvC?=
+ =?iso-8859-1?Q?9t4nPWWcvygYdn4oBJnhJ+g63J29A8/6YRhCZjFkZY8AubvVXn+MdXDRR2?=
+ =?iso-8859-1?Q?kKFhDJBkLLkDBXzHHcyzEEWGEGIil7hzhh/4pAerwlCzSKN7813PyT35uW?=
+ =?iso-8859-1?Q?cmOAIqFNWnofVOU2EuQpyvjKGGIxazTCs9NgG/NceBC5kpgQdYddLvPD9t?=
+ =?iso-8859-1?Q?f6gXSo353ZrvWu5QsOfWAi8BTIAEguc1/Lm6KhqHA5MtTxSx/0sbmqnAks?=
+ =?iso-8859-1?Q?8Tjmrc/Hb8cHNat+Rf1ev+KnKaumHSnySccBW7/P64eJszm6+AEIwdhdd+?=
+ =?iso-8859-1?Q?6lI7rPzGPQz6L7yBRyXzlJVWAscn2ZANtLuSzNF8juv/uSnoK3MubPYr2C?=
+ =?iso-8859-1?Q?p88F5un4JnJLA0ku6R4c5v/xidMcWKBOF12r8ofd+N/g1QYJ6xDA6pO7LW?=
+ =?iso-8859-1?Q?OVlpgHrEp4eeZd9LV2ppuioRIraFcKQxic/8c9IDn/XiSow7hx4EBXv2F6?=
+ =?iso-8859-1?Q?p711Z+d99vEPcs8v/BnnEQGPDo1UpX83irh1dQkaZwa6j83+IBEwSXhtap?=
+ =?iso-8859-1?Q?sa65NW05cHIFHuvLsx5JktFaTHV5DKje62NsewKM3wF13Mr9mgsBqhJjxH?=
+ =?iso-8859-1?Q?jji6/WUucSENeN5xRR1Q1vPLPWLapREZ/YHJ84zdnwLtFuVDbjn+PrAFZn?=
+ =?iso-8859-1?Q?3y1IPkbqhHWZ0sTRMaB70leyP1cvo5vvSqkIjekpeyiRvAmC+nP1+JaXEQ?=
+ =?iso-8859-1?Q?wZ13QSXpcgCIyTFbgJlCIlP5HBdv08gG1z+hQCvz3E2xGgS2QsWqS9zd9G?=
+ =?iso-8859-1?Q?e45J7C5gDem3idhkfmBiZ7Zb5eH+NolzMvTTtK6BMo/pFOsNtiqeBOKAja?=
+ =?iso-8859-1?Q?XLen098hEeqG4/0VbS1oQJg+G1VB?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR06MB8512.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(7416014)(38070700021); DIR:OUT;
+ SFS:(13230040)(7416014)(376014)(366016)(1800799024)(38070700021); DIR:OUT;
  SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?sT1m9AudVUpX0SQpaILhZI+Xy2Wj0F0JUv0x4oNe0e3WDmkgHwhHRBQmG6?=
- =?iso-8859-1?Q?Wkj9EKA39IJ0K15QyrTsfUEm+ZCebigfDdtDE2D7xiLh5XryGntLWZm8mY?=
- =?iso-8859-1?Q?ZVsfYADHrbFKT71VJD0qv5JWhix8Uue2a5Ed0io1tkWGUQnZtwA1E20wFT?=
- =?iso-8859-1?Q?AL3wKg8c3faqZ/ZfS29YBu4a82B5k0CarWnZ1fZXqOZmxHseWCLbPS7R/+?=
- =?iso-8859-1?Q?Tl1bH0K8DZu6cOVcL1c1DEiK2BnW63EPGTCpNzLmHJHzMx8VZOL6s4u7sr?=
- =?iso-8859-1?Q?NfN5HW7ZytphAvuChEANmeXbmWHcJME0V/elFwiPMPkbcNC/mPD+G+Wr28?=
- =?iso-8859-1?Q?+z3tET0jB+NjqBTXDrFSkUt2TEtvEm87R2mYnds6t8v30h4JQzdoR/QfYk?=
- =?iso-8859-1?Q?Pd4sDft6nBrbztbbW0+1nQnvgZI3g3fkRwFjuq4aHaJy5NE7TitPZuWU7l?=
- =?iso-8859-1?Q?8e/wtxcqpm/cKclVXoTNsAm7CK5fTFs2EBIGxuE0dwGn530ldUexudhMyG?=
- =?iso-8859-1?Q?7n9dAjyAus9bIzRjYeACYdQ3rKA8kCl38IDdk/rpJpHxkElN2BIp9RxYKY?=
- =?iso-8859-1?Q?4ss75n8W8ZSwDC2hu92drjJ76MpUbG61zFcSKkKk1SxeNhgcRwplZRe46k?=
- =?iso-8859-1?Q?HNEsOTeXg/z3sP5256u4xwQBTZQnmLIGqcgp8Nc8Brih2N3XKlDxJP2kvh?=
- =?iso-8859-1?Q?09RknRWrybRJlf2vvhz2Ur26lR9/rShbuyjt5a/reuFyQhE7xzbN74o1uK?=
- =?iso-8859-1?Q?8yha5cjVhDWsfJ6YNFkBhQMaoMCb9GJr8RE2PRQmWDi/1OCBsmpyBQ0rHM?=
- =?iso-8859-1?Q?OOzlsCqYsxOOzKTIA61DKFAZZnQTemxEwJn4E0c3zqSAu5JxMwl3cOxz9N?=
- =?iso-8859-1?Q?aCQux2nfQsazpRohRCTrZJEzpCfoww+41NcuB3LcJVOLmxMpITD4AVTn1J?=
- =?iso-8859-1?Q?Jl6lkrDuIOYq0JsQy38+YtvVIeMuu7I/rCBbVCwIuDnV4aV/mG9dBphoot?=
- =?iso-8859-1?Q?1rkaHe2l/124gW0O15lRqp2OkIR6gPQAMNpDPIPc5kQwIYI0aBy9Flet1R?=
- =?iso-8859-1?Q?tRkfCkrdwCCQTC3mqO9jYDFWXBvIFevWLFINxLV/L7egIpxtoAYnvMagT6?=
- =?iso-8859-1?Q?2xVr4bS5Ah3yetLOX5a8Ftt6DzX0p2oqzW+adB7XCBAtwp2OsbklkBu7Da?=
- =?iso-8859-1?Q?ER8Pjo+f0ewP5Ik/7uwFAYaqHkOS06bs1fu4wpaU+pKuXKbW0sp4Pv15lK?=
- =?iso-8859-1?Q?LSxffwecL2P9ruL2jzq0VcZl9DY1ucMGawzcpwtmoJv2NppxVciWPbaa6q?=
- =?iso-8859-1?Q?qUqCfPyDo9sL2s8tOrTiYw5dM6nnW2T2HgPUKMefFDmuLkPsAChGo0GT5y?=
- =?iso-8859-1?Q?nGVjtQUmZ+KOx+PQw+NHOWo/JXPvDCnlaHP7dlnSke08GFBU9ABzjPMBNj?=
- =?iso-8859-1?Q?VdP7+M69Wuwp6DBXJLKvGf/3paV2dJyUVrcxchHmZckB1UCaZVIl+YR1+2?=
- =?iso-8859-1?Q?RkzX8p/dtfzbmYd0JEGIFQSey3bJT7I655uXDhTABCuWS9EQniWY7sL4XH?=
- =?iso-8859-1?Q?y3jjC90TOwuM4bOkLSINDikZr3joWotfzAREJszIeqr6RTlrw0fkbTSkRy?=
- =?iso-8859-1?Q?6KO94Yc8/mtcgCrcuaUkNPT/HM3rJEkZXtUdV4vF+yLNqjr80eOfjpeA?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?X5Sr3xndwcKftNcDFHQ3MSBOcXiSClXVcDiH1KLEyi4kySEtsbXXPCICAW?=
+ =?iso-8859-1?Q?tcx3tq10x99RWLtYZeqeGDxPfMUNSjAPqfbuHBGCPsBt7KfDCZeXLpYrby?=
+ =?iso-8859-1?Q?EP2l+qslY04tewP5a5v1p11iN35me5SZ2QUrrtcumS3RcVgDWFZ57P9CtG?=
+ =?iso-8859-1?Q?Z/ppcJwFT0hlcaJq37xg7bh4AX+rcpd1v1zxJsLWo8EH1/G90nKVAV/NmV?=
+ =?iso-8859-1?Q?jgR5YgF95yKI++6U8LVb/kXCBxA3A3/SriyA+9dK/2Drhply0k99KwYB/B?=
+ =?iso-8859-1?Q?wA5g6aZFI6u0RO+5QiZUntMTU+bFL+Jgfbs+iB9wc+10s2008srKSPFbIA?=
+ =?iso-8859-1?Q?7XN96Je3rsIC4TM4J01gnLJ31hEFjb2MSD12fwpEHtxuVWJvh/WHRbEBoE?=
+ =?iso-8859-1?Q?FPQtzL19PJvfVYwCd6T7TrP5YF1sH5cl5SQFKUHNuWvMA7ypqHCnG0AXUl?=
+ =?iso-8859-1?Q?fhmZh8ddXjbMLS6hnlUOOA3FmAUO5+XIYF76GjMomeMyzMro2QxdQVpMR/?=
+ =?iso-8859-1?Q?+eQ7SVpF41itg67XsUIvvOrKGAfX+BI9AipCJ+dU60iBK8bRSFzVW3xV/j?=
+ =?iso-8859-1?Q?MmqDdW2AEi++ZIxJ13VL47LZXM3nHt/I9J1bnTk9F2+VZaY196z34OHnxk?=
+ =?iso-8859-1?Q?/opLc/eRVVq0vKB9BqosmNO5mVDl5tV0i1Amqh6YK+HOLf7RMZZnTd0nr/?=
+ =?iso-8859-1?Q?uLeCAPkaP8KVHCm6VrE0UqsYI5wmOp5vJ7jZg+l1cx+VFSnsKcjw8mKHpe?=
+ =?iso-8859-1?Q?81s6+E9PfXcrz+gaPJ8ZwVLVlsyKR8Fj9WLNTi391M3rjzjDehLWcwbwzl?=
+ =?iso-8859-1?Q?zUrONWk1nMZJFubkpauXmW4BEhaPuwYTb/elpIDp9HjHcvgXlJdb1XroST?=
+ =?iso-8859-1?Q?WRkzf/p/Vk2Qu1QDoo+cbAj8zvjW+Eq/WK4NIFaMBW40wQru8KZ7rc8F7t?=
+ =?iso-8859-1?Q?z0Sh87BGGNjZPogXJba+e9/x9MYJQZCgaQQNlZ6RzTTZoWjAMg6hMf3ZRd?=
+ =?iso-8859-1?Q?O1GFQ405BR7zt8BhoYvzUzFUgKxAXYJ50fQVDXarGeIYfxllAa40W6VOJj?=
+ =?iso-8859-1?Q?vFN4J9TXC8EwybXm46e8yL6RwAu1hVGge6sRszSeTQdACAB1N2UCNNmGdJ?=
+ =?iso-8859-1?Q?GMNDXy+pBDZiwXWO37h1ZMEkSgMdqokJ4flJ5tiVNgfrLxYqMC2YQuVBnL?=
+ =?iso-8859-1?Q?O9LVl4NEq2RNVAKswKIasjhsbzzhUAthaodvrqKqbOHW8nxf5YdxBJHiPe?=
+ =?iso-8859-1?Q?TrUmte60X4j8ytY7pxIT9JSW7xOfJOruWrnmgFsjJtxnNLBeXy4DGM45x7?=
+ =?iso-8859-1?Q?wxemgxdaRiAY50noVyvHN+6J93pNkY7/RQtChi6pLxeUp2FPtAXKku5cQe?=
+ =?iso-8859-1?Q?VyZjUZfEdNXGX4izkh/m2LUZ1oz/oDkx65hTOYbAhMrCTsjlP0gVsaG9rc?=
+ =?iso-8859-1?Q?q3Km1rBOYlZycflQ9shPrWkCzQQcG4akFc+oDPjDuTLnBwOnpnCd9IoA9U?=
+ =?iso-8859-1?Q?WyS1vAYF/iv1DYvTQSJp0N68AgAyZfo0Fd9MBYBwoWYQ63Sh9z4w1w7G1d?=
+ =?iso-8859-1?Q?GIQ9bgZEh1Dadng02qBm8RCl3pbLNzGemxpL9bK8wh3km1ZDKXA2+qMndc?=
+ =?iso-8859-1?Q?DnEUsK46OvuuKsbcYrCBPoWKQJFW2HtnjaIIm5j4hGoOS3iy2/KNV81A?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -160,13 +161,13 @@ MIME-Version: 1.0
 X-OriginatorOrg: br-automation.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR06MB8512.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: adecd315-1f98-4ff9-7b0c-08de210ac17c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Nov 2025 10:12:01.2421 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68722124-bda4-4ae2-3154-08de210b1582
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Nov 2025 10:14:22.1999 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 372ee9e0-9ce0-4033-a64a-c07073a91ecd
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: P0gs53/ElrCiIRqfYp3GD1Di+I7Cg0vQBlQeIueudYzy5f+g6YYVePss0OSloV5I5KyTR5ngelovIaxtZKGRrTSYIcAfRE0iJTm/Nqm9YpR4LKKSP417IukIb+PLIHrR
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR06MB10090
+X-MS-Exchange-CrossTenant-userprincipalname: Bg22fl3gGBYPPvNP3SAPlZVSqSTMAc9K0Q6+AWRuH6+PHOJAJT9cC/xvzSMgIt8+ixqgEHmai2hTiDRnwnK67GUz366Xeom/44NzYN0uJIEpGMpQUonEdMeTPz61fjYC
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR06MB6837
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -183,43 +184,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,=0A=
+Hi Peter,=0A=
+           =0A=
+> > This adds support for using an OpenSSL engine for signing a FIT image.=
 =0A=
-From: Quentin Schulz <quentin.schulz@cherry.de>=0A=
-> This adds support for using an OpenSSL engine for signing a FIT image.=0A=
-> To use it, one should set the fit,sign-engine property at the FIT node=0A=
-> level with the engine to use. This will in turn call mkimage with the -N=
+> > To use it, one should set the fit,sign-engine property at the FIT node=
 =0A=
-> option.=0A=
+> > level with the engine to use. This will in turn call mkimage with the -=
+N=0A=
+> > option.=0A=
 > =0A=
-> The key-name-hint property in the signature node will be used verbatim=0A=
-> as key_id in OpenSSL engine API.=0A=
-> =0A=
-> We could somehow still decide to pass some keys_dir to mkimage when=0A=
-> signing with an engine is enabled (mkimage does support that!),=0A=
-> unfortunately binman resolves key paths absolutely. I don't believe an=0A=
-> OpenSSL engine will happen to have the exact same key_id than the path=0A=
-> to the encryption key, so fit,encrypt and fit,sign-engine cannot=0A=
-> cohabit.=0A=
-> =0A=
-> The public key (with .crt extension) is still required if it needs to be=
+> Just to be aware this should likely be a OpenSSL provider, engines in=0A=
+> OpenSSL are deprecated and due to be removed in 4.0. A lot of distros=0A=
+> are already dropping support for engines. There's a patch [1] adding=0A=
+> support for Providers support to U-Boot, I suspect we shouldn't be=0A=
+> adding more deps on the Engine support. OpenSSL 4 is due in March.=0A=
+         =0A=
+I'm aware that the engine API is deprecated in OpenSSL, and that the provid=
+er=0A=
+API is the way to go forward.=0A=
 =0A=
-> embedded in the SPL DTB for example.=0A=
-> =0A=
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>=0A=
-> ---=0A=
->  tools/binman/entries.rst  | 22 +++++++++++++++++++---=0A=
->  tools/binman/etype/fit.py | 41 +++++++++++++++++++++++++++++++++++++----=
+But the PKI provider of my employer currently only provides a PKCS#11 libra=
+ry=0A=
+with an engine API, and I'm not aware of any plans yet if/when they will=0A=
+be supporting the provider API.=0A=
 =0A=
->  2 files changed, 56 insertions(+), 7 deletions(-)=0A=
+So for the transition period it would be nice to keep the engine API around=
+ as=0A=
+such use cases still depend on it.=0A=
 =0A=
-Reviewed-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>=0A=
-Tested-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>=0A=
-=0A=
-Test case: Signed FIT image with U-Boot Proper booted from SPL=0A=
-           sha256,rsa2048, openSSL with a PKCS11 library using the engine A=
-PI=0A=
-           fit,sign-engine =3D "pkcs11";=0A=
-           key-name-hint =3D "pkcs11:<pkcs11-id>=0A=
-=0A=
-Regards, Wolfgang=
+Kind regards, Wolfgang=
