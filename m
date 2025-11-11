@@ -4,94 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA760CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 12:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FFCDCCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 12:38:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E73B583F6A;
-	Tue, 11 Nov 2025 13:33:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C6E3383A79;
+	Tue, 11 Nov 2025 13:38:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KtTOEvRZ";
+	dkim=pass (2048-bit key; unprotected) header.d=kontron.de header.i=@kontron.de header.b="BxNXi218";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7058D83F6C; Tue, 11 Nov 2025 13:33:35 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D554E83B7E; Tue, 11 Nov 2025 13:38:18 +0100 (CET)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76F2883A79
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 13:33:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C12838334F
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 13:38:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-47112edf9f7so19811425e9.0
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 04:33:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762864413; x=1763469213; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=HmlTlbM0F3ZMy0bDW0Kzaobuh8AsE3DBSL70op813Us=;
- b=KtTOEvRZpDync8FXDKcAOWf9YRBzOf9Xj1r77gsx8fB13XmGzRKnAVAYrx+eXWP3qB
- 8O14ML6iBgYboZ7/0UxyR63UitvlK1eVNI2oYaAisxF74lIpSWBf8hJA96nWHVwi2smU
- GHeRuEAZcFD+cPAk1MQJMX5dFPdi2gVesEhz9Y85y7uwW53SMPLfw9xZtDO8jczcUmzE
- RThp47yHb2mTd5YIXdvqxjHAFFbqsnW2jKffc0s6/3OEBUtokhOMdGKr7Io4AHIspM4Q
- cTNm6M5GBM2y/7SsKe2wJVRymgW6aHjqA/lFMXegxvj0fzZAJ/PIO0mJGKtC9TMYwUn/
- 1O+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762864413; x=1763469213;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HmlTlbM0F3ZMy0bDW0Kzaobuh8AsE3DBSL70op813Us=;
- b=fDPJstNCsJgetcP84+/6u9sBk2uQIYaNNve63Ns+209KheHI2c7GPpRWa1Mwuswf2r
- ACUhgclv4Rb+y6ZC9GnDtm3/RW0unHZHtRGmdNkcw+xslvskWEAH7ILTRXX610Q7yCa/
- A2Zt/pjHWbGZI+v+iv4465rPTr3H4G/3VI1gaknJrGMILB3oGwhxCVkOaFNcOW5RZpzV
- +gOW6ia30Tob1Nyt96GtQ3mgN0FFsxn+kNcstA4i5f6FW7eoyHcD+cXMymn3MZH2zpgG
- xg/YlWLrsrW3qyzflHTm/leyFmi90TPccW/H21bZf4yhifbgI9YBfvKne/VNPltQLXfA
- 7IwA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUZiiiqfCSZNLcJsWTjJYzIe1UMP13jzs5aoOWbXmAmf5EYUD2vUVPm6RFi46xyjsJK8BfPtGw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxgEgUw8YZqXMYICCH8bitgE+tkQdsXG3/CViVoYZ6BoNBsH9IO
- quB4mmGMQgDvLmz4viJvABWSdm6tU1elHpirQK0RASesCaEEU4i+jC5X1s7YD80f5Pc=
-X-Gm-Gg: ASbGncsMB4+oHuohCYyRdR5juV+Njy+3VfPzD6lo6XvLDkYCbUldl+fSflBBdnAwYxY
- kREhKeio7yJX5as1oDSPCeLb1WFdZTZGIUDahySgfr/mtPr/NaT/L/qCl4o/NuY+XTfYD/aOOim
- W/r3+HIueAvnGbM2HJnxgaMroUjcRSZu1B+917Ubhz9qZ7tSnwn3jXL/TDgnsFyF9ENZR8hQh7i
- E4HVE0if2YBYAvffmzKpDbus4s7AsxoINMm2JjFTSDvpeQveAae+Ni+s/2dDAFUAAvMPL3sWGVj
- 1Fjyw5n0o2eHGIl16T76I0Mh9EfZ64r/ZTX3++XHFcNLpwyaNM69qMzFGgGm+t37DhZvo1utqrO
- R9MzgVDvkN6iExEf3kETB8UkCmgNKAlnjJEW3d6vMXQqOwleCFSuB4WKH32SX59Qn5j46E/DxpZ
- ny1CxfTNKyDeK/JweOLA==
-X-Google-Smtp-Source: AGHT+IH5hNPKeUIjHLoJmTXzN+ege8XM446yvIyvSzbCmUC9qzIJGSs7R0G7lcOYKnpVFvLVNnEYKA==
-X-Received: by 2002:a05:600c:45cf:b0:477:7b16:5fa6 with SMTP id
- 5b1f17b1804b1-4777b16628emr66485805e9.3.1762864412837; 
- Tue, 11 Nov 2025 04:33:32 -0800 (PST)
-Received: from [192.168.0.39] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4775cd45466sm366863905e9.0.2025.11.11.04.33.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Nov 2025 04:33:32 -0800 (PST)
-Message-ID: <b6f9327c-aa5c-452f-b1ce-1cddbd640fdc@linaro.org>
-Date: Tue, 11 Nov 2025 14:33:31 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HW1dLrMD4Om9BdqCRNGkWTHWeMfOpl6+npu4jXT9JF6cr9vKKlKa2e8oTDMjjuse5XyDAjndIAbT71ThDihJix6fs6bYmHy6xVxE6lmsfcQFgDGJmOfZEzMdJn2dp3yr/AkO7A+klCTe/NT87WcZZI8Aga8uBw/FJ0s6ew88j4aPy2ywFAfpG0qkGOqWjmNoLhcqxvIz+EbRI3fH6V0Gy0YhclmhpiCmzs33NGNiK4Whse319pr/4U7eWqaVyJprhJ5Z45E6PZ8yLWjDiTIKNbY8NEJei/kPy9p7cPufLjzStdO0pvODf1iFCdl+GuPLf7A7alLVokdLTAWPozw5VQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xBYjr5/9KZYRzt4YplvPtVJEa7Y5kP7UjqEJIlYsEnk=;
+ b=AJBsSFu56HsPq+Hp2zxui9wjK3zPgNAfWGEp6NCUqvf2Oxk7MG4uitTj0nnU1QG0VVv+2ib6sQmfWnSUc2NNSR/kRi4Pkxk+kqwW+KhxCGLPGDM/MDl5iPnW96cAKdC2lgMd8NLTyKKCJ0D/JQeGcTCcsY+zux2bWZ1pH5oOAZ+zLGy5Y1PIr9fhUm+BRsgKGZt7TcDX5yubqoicdyHQ+M/YvORP2gquhWzVbkOfan+CFDpTBBq0wEdLNB5z/+xD1GQ62XJhFViDSGeKHMUDPj4EiZ/Tize4BZsarnNmygNGZPwfSli2PDk00XG/pBZ3AozGMNnI+cToKsrdwxqaiA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xBYjr5/9KZYRzt4YplvPtVJEa7Y5kP7UjqEJIlYsEnk=;
+ b=BxNXi218JYYIhCkcdmdS1Oo2YAKJe7yQGa/VV5OiYgdR8wFeMUvj9rsNYNDEn1jJGSNDlBBfpB0Fjm4z2XMydzjzjVA6aMyWqt8ieYFm6shujWAQNA5fPEB2zJ9Y0N0WAiKxGlRNMZox3hHywQbFVB7T0RxWW2ySIgjb/fQ9XQT5Up6MnTM0neUEDZcHu+13Fv4osPgirP6YpeOObsb24zpQvTGiydIeUAejyKFueM8rBNI2vZMGspyDoq27HQTy+JLvu4Bhg6+1ZoZaVtI4inRnhaOYJUbnTmQL5m/li3Fo/ysOn9hodXwK/a1NOJc8wyEBjP+Fx3w+/Iq2nfMhUw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:1fb::23)
+ by AM0PR10MB3649.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:15d::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Tue, 11 Nov
+ 2025 12:38:14 +0000
+Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::6d2d:1b1:a857:461e]) by AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::6d2d:1b1:a857:461e%5]) with mapi id 15.20.9298.015; Tue, 11 Nov 2025
+ 12:38:14 +0000
+Message-ID: <ae7084f3-9df8-4e69-ad6f-5e80df9e4237@kontron.de>
+Date: Tue, 11 Nov 2025 13:38:12 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] ARM: dts: at91: sam9x60: Add spi0 node (flexcom 0)
-To: Tom Rini <trini@konsulko.com>,
- Manikandan Muralidharan <manikandan.m@microchip.com>,
- Zixun LI <admin@hifiphile.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-References: <20251111112637.919074-1-ada@thorsis.com>
- <20251111112637.919074-4-ada@thorsis.com>
- <dec7e0eb-5df4-4d3e-878a-13587291ade1@linaro.org>
- <20251111-landfall-rockslide-407d7bf1a9c5@thorsis.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20251111-landfall-rockslide-407d7bf1a9c5@thorsis.com>
+Subject: Re: [PATCH 2/4] arm64: dts: imx8mp-kontron: Fix USB OTG role switching
+To: Fabio Estevam <festevam@gmail.com>, Frieder Schrempf <frieder@fris.de>,
+ Tom Rini <trini@konsulko.com>
+Cc: Stefano Babic <sbabic@nabladev.com>, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Shawn Guo <shawnguo@kernel.org>
+References: <20251111102904.157931-1-frieder@fris.de>
+ <20251111102904.157931-3-frieder@fris.de>
+ <CAOMZO5Do9AdqZ+j4Kpp8qU21mQ6yBNuvi614n_Q4-Uzebf16eg@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <CAOMZO5Do9AdqZ+j4Kpp8qU21mQ6yBNuvi614n_Q4-Uzebf16eg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR2P281CA0132.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9e::6) To AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:1fb::23)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM9PR10MB4277:EE_|AM0PR10MB3649:EE_
+X-MS-Office365-Filtering-Correlation-Id: fa79a9e6-c336-4e00-b665-08de211f2e53
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RHlLUjEvTE00bHBqK2JIQmlsSkxDcGVFM0xsRi9BTk9pU1RwTEsra0IxQ3Vx?=
+ =?utf-8?B?N2hvSGlWNGhlb3hDN2RqYXJzYmNFMjFxa2xtalkzZTJmaUxzSWFXZG85TGFt?=
+ =?utf-8?B?OUJFWWtEWjRJWXV6NVUwclhCSmpqMlR1ZDZ2cnBjcXJiQXJKL1E4NzdlampB?=
+ =?utf-8?B?eSttMXRaUVRKUVBsSkwyMG9YR0RvSTdncjV0V2psR0xvNXJDWkRHVVFHdDFO?=
+ =?utf-8?B?bHM4bVJkQmFpbmpzbFFZOGx6SWM4UHNHUkE5QzVXLzIvL3JpWDhwM0dDcGJX?=
+ =?utf-8?B?L1YrTzVYZnZLM1ZwREJCTEJIMlFtVFdJRU5yN0pKcjdyOURFTGVtcnNKQXBo?=
+ =?utf-8?B?dkY3VkhjK04xNHpnRzNiTDVhMVkxdlhrbzBGU0FZTlhDUm0yYTJTbEVXb2xt?=
+ =?utf-8?B?bi94V1J2V3hENFV0MTRkNk1JVFV3QUJUcVE1UEJVbFJSRnk2Y3gzVVRQaTlP?=
+ =?utf-8?B?YitLM3NYK3RmU3FzZEFNemlZaGIzcHo2MWNpU0VwZ080Q0tLaUlLSGN3Z1Yv?=
+ =?utf-8?B?NHRKYk54bkd3dXpZOTRtTkd5NXdLYzIyMzY3QisvUWhEOGQyOXp3YUlQeWV1?=
+ =?utf-8?B?VWRyYnQ3V0xPNDhxdG5LOTFtYklpazBhOU1MbTEvWm11RzYrNVBnd20wVTYz?=
+ =?utf-8?B?aFdVcGdUNys1SkhLWVduUWFnaFMxeGpUazBBbEJOUHJQZUN3dGZ4ZVhDQkVP?=
+ =?utf-8?B?dkFRRFphRUpENUdqUi9LL3dDRzNYMUJXVEI0aFdjNWlWbXo5d2V1OENtV0xN?=
+ =?utf-8?B?RFozOUFPQ3RiaE8yZXo4WWVpUDNXUnhmTW1pVXFLSVFCc0JXOCswZHhaM0w2?=
+ =?utf-8?B?aE8za3dSN2N6b0tCQnNQcENxY2djSUhncjEvZnFRZ2NXdzZJWGpvNjZsY0FT?=
+ =?utf-8?B?RzMvUnc5SFo2amNlbm9xMjU0WDJZQTdFdVFWdUJjMXFDVlRVeE5uM1JPcXVs?=
+ =?utf-8?B?TXc1WlVOb2F2VVZoQnkvT09Odi83UEtnV3NVQStrVkxiMVNQMnR2MU5ld3Nx?=
+ =?utf-8?B?R0k0WmgrRHM5Rnlod1BsMzNTSmpPQ2gwemtTbTBLeEpNdllFYlpQVUpSQmlK?=
+ =?utf-8?B?MFJUaXIwT0k3dU9PSThreEtpbkNYaTFRUzFEU0dnTmUwTWYzWW1oZ2orVG1O?=
+ =?utf-8?B?SFFzTzJlNVlzZE9wSmpCVWJwenlwYzh5eXJwRFUvSDAva0JkWDhaamNzZGZo?=
+ =?utf-8?B?enNtem16WExIeDlDMjRkMGJTd2ltb3h6d3krSXpzRGtHdGdVTlRsN2ZOZnVB?=
+ =?utf-8?B?cWl2b1dGL21SNnZTMEoveGM5WkZoOWpZY3JoQUFRUEZZQmdialB6SzlDcXMv?=
+ =?utf-8?B?MkVJYnc2NlZ5Q0M2aktMYlJPZCtrRWQwdGpWQ2VEeTNpampvcDQvSmliSVVI?=
+ =?utf-8?B?TkJKT1lHYmFmK1VFSFJaVVpYaXlIdkpuTWZyUFF6aHJXcWNrMnQ5MUlkZ0NM?=
+ =?utf-8?B?Y2xiempZVnJ5TmovM3lFTzIrN1R0NGlzZVdCN2xNWFNyTmtjWnhnZW52SjJ2?=
+ =?utf-8?B?T25OY3BOeG44M2dPQzd3SlVLVWMzeFB6bDVud083NjRGMnFUeFdMMENtY0Y1?=
+ =?utf-8?B?OEdJem1yZVJLVWdiSGF3V2JxTWswTnBvWWtCRHkwOWRyQUFCa1MySmtPOVQ0?=
+ =?utf-8?B?aVhmRElyTkdxR3NINXZXWHN2eDlQN3BLVEZ4UFZwTkNvRytOL2tqcUY2eEZ4?=
+ =?utf-8?B?Z3UwOEQ2WDN4TTM4L1RENzdrRjJWMXI1SXRuSVR2QkJuTHlSRGlGQ2o2WlhG?=
+ =?utf-8?B?djVkL1VxN0Q1V2RiWGg2WUZpTSttb3lLRzI2VnhiSzQ5TENFdExHRkJ6bXky?=
+ =?utf-8?B?NTUvOFR1bms3VzVkM1A3N3dyTkZ3MldUM2lPbTFySGxUeXo0TTdjYW1QM3dD?=
+ =?utf-8?B?aU5oMWM1U1ZGMnB5K2c2Rm5yUjZDKzhwcEIxS3ErYkkrZWsxbHJnVGlacnZy?=
+ =?utf-8?Q?49oV1lfQrwwUvinwtdnnWSg6CUvQbKyF?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TTVObGNiWlA4YjdlcjgyVlR2WFowVkdHRnpXb1ZxU3RFNDUyd1hscGViaDkr?=
+ =?utf-8?B?ckpZVllpR2d0VXNWQXJaaklUSHBPdGVua2ZPNjZLZmg5YStHcHFpcHk5SlNF?=
+ =?utf-8?B?dkhNWTVmZUdSL0N4REdQVSsxYm5vZHpKdENrRHRnYUNObGFzaVNwZ290OHpN?=
+ =?utf-8?B?RmV6RVlzWFByL1BQT2dzMkNnc1FFdjBPTzVQb1ZrR3pjL2ErVGFQSlZDb1VZ?=
+ =?utf-8?B?MGNvbzVhT00xY2pHZlVLeGhtYjNMYnZLNWg0WW5iODVEUlZKMHBjejZyWTcy?=
+ =?utf-8?B?YllwRkhHZGplSjN0OVhyWkQrMGJKR2d3WitGSXBtbmhobGorU1ZvVkt0L0k3?=
+ =?utf-8?B?TWEyYVd2ekU4dWdvdWRoUnZaYTZ0Ui9wbW1Sa01iMVpVaTREbVpVeFdUNnk1?=
+ =?utf-8?B?ZFJJL0dGZmJFODNXS1FWRnlpS1dwYXBjemhBZnhKekRZY3lrVjVQY0czalZi?=
+ =?utf-8?B?TXN5eEhWS0k5NG0wMnVvOVlwNmRQWS95WENoSC91ajVmRjRTQkR2TjFUdFlB?=
+ =?utf-8?B?VzNQazVFZzhBWEpZb2dMVWdQZUdSdC9vQ3Fja0kvNWhOTzFUaGYzaUM4aU1S?=
+ =?utf-8?B?c21oZXpJT29wTEZDdzViSHRFZmVMdURGczBtVFNKRTlsQkY3SmRkZ3gvWXBW?=
+ =?utf-8?B?b3pZMXVvUlNHSm4zZEpPaW9oUmtDZ25ZZnRYd1JNb0hsaXFyaTNVUEsxMU16?=
+ =?utf-8?B?ZlNiUFlFamdiSDdGM3FaYkhmd3BCN1RySGlhWmhXSFRMRVF1UjBmaHlMM2I1?=
+ =?utf-8?B?ZEFuSW9qVkMrT3F2SysrY2hXY1NkVFBlQS9BaXBvOTRwRVI0YzR1eDBkeTJ0?=
+ =?utf-8?B?VUN5aTNPNDZpL1BVcm96Rm1nS0lob0M0U0lnc0JMUEdaTlpWaEpsdDBJZEYr?=
+ =?utf-8?B?MmNtWmR1MUFKbHJMTlQyMnV4ZWpDSUFvQTVqeTdUTFF1UVFWNFdEKzlRWGFv?=
+ =?utf-8?B?YVNIWHdJeHJyenRZQmdTVEl6T09hQ0w5WVBWYUU1V3g1MVNVbCtOQTArZWE3?=
+ =?utf-8?B?SzFJUDJydno5NDFKbnNlanhRTUUwcEtEZnhIWW1uZXkvOS9YV3VXMTdLUE55?=
+ =?utf-8?B?Yy9hN1F3cFJLK2E3MGU3dE5WTWZqenp4TnRDNVU1OWt6ck1mMU9ZbXJ6SXBN?=
+ =?utf-8?B?M2x5Y3gvTTBpcXh6MjlndmZYNUg2TjQ4VDBFVElSOUZTNEVnbDZPMDlqT21Q?=
+ =?utf-8?B?a3F4WVJtTnM5QmJlVkIrK2h3aFFQM2NFNmZxSlZSaEZzR1hRNFNpTUJBRnBj?=
+ =?utf-8?B?VFFIYzZwcDhITFdaSG5CVUNRT1A1YVliaHp0MHRQTnNuM05xOHZhYUUvQkJh?=
+ =?utf-8?B?RFk3clpvY1ZJMDJHc09CcWUzMml4QTNwNSt2NXVrd1hrMDFsOTROekFuSGI3?=
+ =?utf-8?B?YkVOZG05VmdSTEpCeStNODNwYWdIS3hBallRcXAzVFNoS2gxQm5NWW1KakRp?=
+ =?utf-8?B?Z3NzWGZ0UUtla2NqQW9WVEcrT0xKaTN4VW9ONGtON2x4S2Rma1FVSVY5WE01?=
+ =?utf-8?B?ZytWeGIwZXZsZGxUbVQwNkcwM2ZsWEFlVmttZ3dCRUkrVzZoUmgwNlNMaGhN?=
+ =?utf-8?B?emE5d3RzYlkxdE1paTU2cmtJUW81Z2JkUDhFVFZ1M2MvdUV6czd1bmI2KzIz?=
+ =?utf-8?B?MUhNYzdmOTNVcTRhWTFvVzZUbUlJUktpZnBrdjFvWVp3R29ZSWY4elN5c0k4?=
+ =?utf-8?B?TVJ2eDhBVTVRck43QkZEdnVtSXg3RmtmZWNodDYrM2Z6Z1FPQ05zdWx3cFRQ?=
+ =?utf-8?B?SHZJTmlaU3pqK1ZwUTd1V0VMcVZGd1NDbEdjVFZ3dVovTlBUWitkSzJpMnY5?=
+ =?utf-8?B?Q0lWQWZ6ZWYycW9RTUM2RXRMSzVIWWRBSUtVRHZDSzhTR0Foc1dHbGRESXU5?=
+ =?utf-8?B?djdzS1BRUTZES0gvZlM5bk00YUtTSHdmVXhvREpIallaN0NBUkpmTlNnQVRa?=
+ =?utf-8?B?WmlRL0JGUzBQVFduZjN0alpQbEo0SisrUnhhSXNVcFFma3crSVJOMkw4ZUQv?=
+ =?utf-8?B?dXZtc2JzQ3A1ZW5CUHRLWFBSK3Znd09VaDZ1djF6R29TUkpmSFJBR0haMUxF?=
+ =?utf-8?B?S1YrNm51R1BsbEVRdy9kL0NTdkdkWkk3UzEwL1Bjck9LN0VNS1N4V0RBRHVT?=
+ =?utf-8?B?clNjSy9SYmdsWE9JK0RKSUh3OGtzNGJ4YkJqRHNBcGpNTUJKdWk3MlZxYk9D?=
+ =?utf-8?B?bHc9PQ==?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: fa79a9e6-c336-4e00-b665-08de211f2e53
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2025 12:38:13.9981 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1KgsFywuBP2af6nQFbwGP0l4f8Dt+MY1xEsEc6bIBTXShC/QvSHte0tDpoO3HbDJaqcG8e6PlnWVvFmqGvcMnfIH47H/mGQMalblGLW958A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB3649
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,88 +180,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 11/11/25 14:15, Alexander Dahl wrote:
-> Hello Eugen,
+Am 11.11.25 um 13:20 schrieb Fabio Estevam:
+> Hi Frieder,
 > 
-> Am Tue, Nov 11, 2025 at 01:34:35PM +0200 schrieb Eugen Hristev:
+> On Tue, Nov 11, 2025 at 7:31 AM Frieder Schrempf <frieder@fris.de> wrote:
 >>
+>> From: Frieder Schrempf <frieder.schrempf@kontron.de>
 >>
->> On 11/11/25 13:26, Alexander Dahl wrote:
->>> Copied from linux kernel v6.18-rc4.  Stripped attributes not supported
->>> by U-Boot drivers (dma, interrupt, fifo-size).
+>> The VBUS supply regulator is currently assigned to the PHY node.
+>> This causes the VBUS to be always on, even when the controller
+>> needs to be switched to peripheral mode.
 >>
->> Hello Alexander,
+>> Fix the OTG role switching by adding a connector node and moving
+>> the VBUS supply regulator to that node. This way the VBUS gets
+>> correctly switched according to the current role.
 >>
->> Have you tried to configure the build to use upstream DTS ? this should
->> be available in the U-boot dir. CONFIG_OF_UPSTREAM I believe.
+>> Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+>> Signed-off-by: Shawn Guo <shawnguo@kernel.org>
 > 
-> Quick try with _just_ enabling CONFIG_OF_UPSTREAM and adding the
-> obligatory folder to CONFIG_DEFAULT_DEVICE_TREE leads to the expected
-> build errors:
-> 
->   DTC     dts/upstream/src/arm/microchip/at91-sam9x60_curiosity.dtb
-> Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:43.1-7 Label or path clk32 not found
-> Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:51.1-9 Label or path main_rc not found
-> Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:67.1-16 Label or path pinctrl_sdhci0 not found
-> Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:79.1-9 Label or path pit64b0 not found
-> Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:87.1-8 Label or path sdhci0 not found
-> Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:91.1-13 Label or path slow_rc_osc not found
-> FATAL ERROR: Syntax error parsing input tree
-> 
-> Not bad for the first shot, but I guess at least the clock related
-> issues might get challenging.  However I need to put this aside for later.
-> 
-> One question though, while we are at it:  Would it be possible to
-> define a custom dts in U-Boot and include an upstream .dtsi?
+> Is this an upstream kernel commit? If so, please mention the commit ID.
 
-There is a custom dts in U-boot, in your case sam9x60-u-boot.dtsi, and
-this should be automatically included by the build tool.
-This applies on top of the upstream dts if you select it, or, the
-in-tree DTS.
-You want to do some combo of both or something ? I didn't fully
-understand it.
-
-In the case of the above errors, it appears the *-u-boot.dtsi  is at
-fault for referencing non-upstream nodes
+This is picked from current linux-next. I just removed the Fixes tag,
+because my checkpatch and get_maintainers were complaining as they
+couldn't find the commit hash in the U-Boot tree.
 
 > 
-> Greets
-> Alex
+> Tom,
 > 
->>
->> Also, if you really want to update this u-boot DT, you would have to
->> copy it as-is, no stripping. Even if the props are unused. The only real
->> issue would be if Uboot stops working or gets confused by these extra props
->>
->> Eugen>
->>> Signed-off-by: Alexander Dahl <ada@thorsis.com>
->>> ---
->>>  arch/arm/dts/sam9x60.dtsi | 10 ++++++++++
->>>  1 file changed, 10 insertions(+)
->>>
->>> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
->>> index a33c0d57398..1ee30422518 100644
->>> --- a/arch/arm/dts/sam9x60.dtsi
->>> +++ b/arch/arm/dts/sam9x60.dtsi
->>> @@ -182,6 +182,16 @@
->>>  				ranges = <0x0 0xf801c000 0x800>;
->>>  				status = "disabled";
->>>  
->>> +				spi0: spi@400 {
->>> +					compatible = "microchip,sam9x60-spi", "atmel,at91rm9200-spi";
->>> +					reg = <0x400 0x200>;
->>> +					#address-cells = <1>;
->>> +					#size-cells = <0>;
->>> +					clocks = <&pmc PMC_TYPE_PERIPHERAL 5>;
->>> +					clock-names = "spi_clk";
->>> +					status = "disabled";
->>> +				};
->>> +
->>>  				i2c0: i2c@600 {
->>>  					compatible = "microchip,sam9x60-i2c";
->>>  					reg = <0x600 0x200>;
->>
-> 
-
+> Should we patch dts/upstream/src or modify the -u-boot.dtsi until the
+> fix lands upstream
+Both would be fine for me. If applying to dts/upstream/src is not
+desired, even dropping this for now and waiting for the next sync would
+be okay, I think.
