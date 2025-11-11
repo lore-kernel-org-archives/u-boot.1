@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA790CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 05:19:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A2CCCFA1E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 05:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40C9483A98;
-	Tue, 11 Nov 2025 06:19:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 22D6883AB4;
+	Tue, 11 Nov 2025 06:26:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RKfGnSSv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RCadsXI5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1063183AA0; Tue, 11 Nov 2025 06:19:03 +0100 (CET)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
+ id 8503483AD1; Tue, 11 Nov 2025 06:26:03 +0100 (CET)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70C1C83936
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 06:19:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44E5383A98
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 06:25:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=e9ru0isOFv7t5lp+Dh/Eul+znbEYcyFX0vnUlrP1HVrJNrEiIWryWfnZIF7dlu0vzGKl49jLc2x2J8E+Z9/Qxvr7rEZtQGiIqR0qLAZH8c9F9MnX5tB0qVd0S+LP8Skvsotv803ok3zD8K8E6yqIOeaQamTEp0xCjv0P3Z3Z7pU30BAMQ3wvlG63BZLifh4NmpQ0dYG8/uZ2FHZtvEkrgvigbHjblQBI07o4hQTYJXXSZJnZaNtkX4eREz0gvv4s7X/l6TlomirF1o0zjeVJPQSba2ibAVXGbubmbaP8eIYgiywYC2mPFRqNUzylIkdYTu/YbYUfwLW2SXzeIE5jDA==
+ b=CCdlA2L/HbYekUTT7obX6JMBMdtWjHQkjH7Tt62MWPs9mjGS7cEoLpzDrj+zHU8bYi7Wldn3jjBF6etmO59iLc4WLbUrwNf62gBuYh9tqBnTZCLK7fQhdJdCGe5jNTbMRUlslsicLKDvo353XC42B604gwRkna5q0VuhxcZh+D2e9r8mBcQOu0MS4qliAW8vDNsItxdFTQB5kE7OqAFMcXL2A2q0xFZJWl9CCZH+EPHmFrYqO4YFfw43Lpj65Pj23vtJP1p4qATlsHpvokH3U10pnPIFj/WG8Uyg9sRIcEcDFBRaW6C+CYPl1/VkAMrEHsCt2Qwj3MbDCb3x77zL1A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6cIBnf5qrmVBdqyj56KYFZ2IHSKqbdhPEJXsdT1jWEA=;
- b=OUUzXXItYG1gXLGgv0WxVGo8WoEg4DYsxPS4cDyZ5R6+R7T6AXPJ3ICyHBqN308BczuoA3kLwvuWvHLFQ5e9iYnijrWaHoavxKsFG04EayCg2Y/ssLN1/j158ZFrv2SxMXyrJo+MFGwBogc4DIBvNy06H4W8h4t7Q0PVKuhsI1lJd+pGC70WSNgvQ/sJZpkI4hvfgbTAs7RYbvu7kGc8qXLY/AE6P2kEbnkzTaYSaUv90AQ6aK3rNndv29AK//Ya+jSU/08Yinia8avjAxjA7NXaFDUmziI9N2P11R7wOruRZnrdPk9ZJcwqJIX4p1BnxypWbJtaqLY5MSXLpVuxCQ==
+ bh=XLxw4izpOMhoEtEWumsJLQm4D3LAljIh6f0K7YrUisw=;
+ b=q97vI1ztEBkVtwAc4Jl1S7j36S0ivvhPXeV7PtUIVEcT+c+QVSNvjlnzxT8VMdsYzMo4Ko2IdZ6Vz5Zs1w4tPu6EvddFRGhkTvxLvMDTGlOY2e8eW78Ye/2CD4szvTJo9HMruFVq52+eYmWP7symxzUQsfxpLGHW/T3kK3zzMhDFRf42CZnh1aSswmOeyZvDFrx+XiMdHtayzLBq1/9tVsqMm2dg9vfynakOaMKqm/hVkrSayFTBXUeGFNYx0Su0jc+KtxNABAbUvapS3H/VX3opLZYUPupKeOd10LNqOcPwIBqeC3b0kmf/VVKY6NqEddaAqY1bGjkCYFotCj6K1g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6cIBnf5qrmVBdqyj56KYFZ2IHSKqbdhPEJXsdT1jWEA=;
- b=RKfGnSSv+365v6Q9gTq9nx81nCbBtXNSs4DjUAXgbyfRwAZfWVh3IFu4NIwiWS6QanTPCRD2RfxV9Gr/owYPYR4t4i0TUE5eqhkgQOfIfHXM4xNJIVjWOk/vMoHfSmCecEVczz2gjn0yOz/JY2NMT3bWvI5SozO2l4CIXrG9h8o=
-Received: from DM6PR06CA0089.namprd06.prod.outlook.com (2603:10b6:5:336::22)
- by IA1PR10MB7448.namprd10.prod.outlook.com (2603:10b6:208:44d::8) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=XLxw4izpOMhoEtEWumsJLQm4D3LAljIh6f0K7YrUisw=;
+ b=RCadsXI5V6tNaJZ2XitsoiKjB43tNHo1QWTiq4PtTddUU5coJFRBdtKNJrPrZBPs1P5hNfm65O7QYBHTsRcL25kkw4Kexp0vKkmiyh4j6e28s3MleBrre7SjJISNXCt+yM33unDGKA7zLAXaD7QQIwMHL8uK0YvxF3zE1M3xV94=
+Received: from BL1PR13CA0427.namprd13.prod.outlook.com (2603:10b6:208:2c3::12)
+ by SJ5PPF2BB505D96.namprd10.prod.outlook.com
+ (2603:10b6:a0f:fc02::796) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Tue, 11 Nov
- 2025 05:18:57 +0000
-Received: from DS3PEPF000099D7.namprd04.prod.outlook.com
- (2603:10b6:5:336:cafe::ec) by DM6PR06CA0089.outlook.office365.com
- (2603:10b6:5:336::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.16 via Frontend Transport; Tue,
- 11 Nov 2025 05:18:25 +0000
+ 2025 05:25:55 +0000
+Received: from BL6PEPF00020E61.namprd04.prod.outlook.com
+ (2603:10b6:208:2c3:cafe::2) by BL1PR13CA0427.outlook.office365.com
+ (2603:10b6:208:2c3::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.15 via Frontend Transport; Tue,
+ 11 Nov 2025 05:25:45 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -58,97 +58,96 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.21.194 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
 Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- DS3PEPF000099D7.mail.protection.outlook.com (10.167.17.8) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Tue, 11 Nov 2025 05:18:55 +0000
-Received: from DFLE112.ent.ti.com (10.64.6.33) by flwvzet200.ext.ti.com
+ BL6PEPF00020E61.mail.protection.outlook.com (10.167.249.22) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9320.13 via Frontend Transport; Tue, 11 Nov 2025 05:25:53 +0000
+Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet200.ext.ti.com
  (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.2.2562.20; Mon, 10 Nov
- 2025 23:18:51 -0600
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 10
- Nov 2025 23:18:51 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 10 Nov
+ 2025 23:25:51 -0600
+Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE201.ent.ti.com
  (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 10 Nov
+ 2025 23:25:51 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 10 Nov 2025 23:18:51 -0600
+ Transport; Mon, 10 Nov 2025 23:25:51 -0600
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AB5IoM7369621;
- Mon, 10 Nov 2025 23:18:51 -0600
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AB5Pn6F421625;
+ Mon, 10 Nov 2025 23:25:50 -0600
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 11 Nov 2025 10:48:49 +0530
-Message-ID: <DE5M18VIB15A.2TVG99O546D0T@ti.com>
+Date: Tue, 11 Nov 2025 10:55:49 +0530
+Message-ID: <DE5M6LMZV9EI.NS7NVSZR63W9@ti.com>
 CC: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 1/2] disk/part.c: ensure strings in struct
- disk_partition are valid after successful get_info
+Subject: Re: [PATCH v3 2/2] cmd/part.c: implement "part name" subcommand
 From: Anshul Dalal <anshuld@ti.com>
 To: Rasmus Villemoes <ravi@prevas.dk>, <u-boot@lists.denx.de>
 X-Mailer: aerc 0.21.0-0-g5549850facc2
 References: <20251110205411.4075351-1-ravi@prevas.dk>
- <20251110205411.4075351-2-ravi@prevas.dk>
-In-Reply-To: <20251110205411.4075351-2-ravi@prevas.dk>
+ <20251110205411.4075351-3-ravi@prevas.dk>
+In-Reply-To: <20251110205411.4075351-3-ravi@prevas.dk>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D7:EE_|IA1PR10MB7448:EE_
-X-MS-Office365-Filtering-Correlation-Id: afc059bf-d94a-452d-db21-08de20e1cfc2
+X-MS-TrafficTypeDiagnostic: BL6PEPF00020E61:EE_|SJ5PPF2BB505D96:EE_
+X-MS-Office365-Filtering-Correlation-Id: 22a9ed18-8027-4c08-ac64-08de20e2c8cb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TjROZk9tTFJXL0JCcndtQnFTUURXbHZseDA2RU5jVDhjWGxQODVTZHRmUHBa?=
- =?utf-8?B?U0tlbnBuV1JXb2RRTXEwZVdPR2ZhVHhiWjNOWlNEYmlIZ3d3dnk0SnRnUE5v?=
- =?utf-8?B?NnhLMmVodkxQanVwTnMzN0tOWW1NQk9VVDdDK0FKT2hXUlhHUGducFYrYnVz?=
- =?utf-8?B?ZDVWVnJSdzA0WnFqTUZjczJYM0FWK1JjOWdVZ05SMG40WGRLRGo0cGVIYWha?=
- =?utf-8?B?Vnh2QzJxdWxwZ2Y4eWZIUEF2dFdiUXc3bk1JUmxIdGoyZ3VHNitPUjQrNlda?=
- =?utf-8?B?QzNGeHQrbVJ5UEhBai9FOFZheGk3NTRBUE1VeXVBVWd6ZEo4OFZpaDFsUXBw?=
- =?utf-8?B?M093K0VPdms2bHpiL2NoKzhiaVV4TTJ3b1cwTWFmR0JMVFFFdU82SXRoeGpr?=
- =?utf-8?B?QWhEMlNDRFBPYi80dWEyT1RRekErVk9ZUkU1bFllUm91VWx6OEZURmk4YXNS?=
- =?utf-8?B?dFpPdUZQeGxuemlVTWRkbHV0OERKc3lTRFlXZ0d4cW96amlvb3FObEg4WUEv?=
- =?utf-8?B?eEZnTXpJVkNMMzAzcW91N3Ztd2FrYXo5aWF2ancyUUFycy81OGU3dGdvenla?=
- =?utf-8?B?QWc5UFpwRi9md0UrbExUb0tFR1lZekJmRTl0QjlzVVpLRTlEZkRjOWJ3UTJY?=
- =?utf-8?B?L2RPMzJ1OVVkM0ZIb2FjVlRpU3EwdU5yeE5ZTHpwNFJhRFRYeGU3Qisvd2I2?=
- =?utf-8?B?c0VaZE9LTmovRHdubDFsOGRidGxtd0pKb2dlRnZJaW1uS242WEFLSU84Tk5S?=
- =?utf-8?B?NHJIN1dxajY1QWlQSy8za3dUR21zb3BMV0RxMzROTXVqOHRyT081UVRVdnZz?=
- =?utf-8?B?UUlmMDgzVzI0YXV0NDlTSkJrSEVtTitpaTFVU3k1dHZIQW11WnUvMnlIWVlX?=
- =?utf-8?B?ellkVm1hTjNta0R1Yi9IVEZYL3lrQzd6eE9SMTlveW82MU53R2ZYc00zOHF6?=
- =?utf-8?B?bkhhSFVGTVFKUlFrUUdjMHZZZXptWVR3aGFVTHVVZytzN1JudVovRVIzTUw3?=
- =?utf-8?B?OG11SFB5cmRwRWwzbjhJMzUvNFhWSm80UTRJb1krUHh5dFdqOVRHclRRaGwv?=
- =?utf-8?B?MVFSMWF3dVkyUW9IWndLaE40eE5yR25ZdjdYS0pHZEZreVNsSjZlQWVLNU9r?=
- =?utf-8?B?eXNxS1dqbXdGNUVFK0t3TUJTc3FlYkh5c2gzaUVJV1MxditxUVltN3FkL0tU?=
- =?utf-8?B?YzlUZHpzSmdQdEppaGRNUkJiTFhUem9KSDJlR0RxU1hXYVJWV2V5NmpXdE9q?=
- =?utf-8?B?ZU5GZzBLbGU2K2pLUTRaRnRNak92NkQyUERqdHp3Wk1GNEFXblByeWhiMUR1?=
- =?utf-8?B?UmhPdllWTWQ5RXoxNmpGU2U5Z2cvcTduWk5aNVF3Z0V4WHliYk4zYVVkZktN?=
- =?utf-8?B?K0ZIeWk0VFdXSkNaeXJVSUdMekJMSDRCWFA1bmoyMytLVVpZRkJka0UrYXlX?=
- =?utf-8?B?SnFWOEJGRVNBSkZXWkd5d1VmYjMyQWt3czVBaFZwZ0F6L0FDcC9sbWxaL3VJ?=
- =?utf-8?B?NVRjaVc4RmNFUjRILy9NZWlqamZIVGRtR085OGlwQWMzbWFvTHUrUDZ5L2lx?=
- =?utf-8?B?L291R0N6dXZwQlJIRXpwYzhsMHNxOFdxVDkwY0JvUm1mL1NzS1ZwUGRpSjVj?=
- =?utf-8?B?UzhGaHNhQ0Y3RE1pKzdWRUxBR3cvbUx1Q1R1MllEd2pHVGdqVlRKMmtVMDRK?=
- =?utf-8?B?Vk1MVjJXdUZVV2NVcGNxbnYyRnhFSmdOVnJmOXlyYVZNNzl1Y0JxTWltczd4?=
- =?utf-8?B?SFowenJSMW1nc3VwM2tmZ2pUQ0xkeThZekxrUWtXN0lVNktGOVRRNWVNNW4z?=
- =?utf-8?B?ZzJGTHpDNS9ZOVplUnpVZXo2bTlVeTU4T1FvazRsdHY2UEZqZXJobzl0OUtZ?=
- =?utf-8?B?UlNxVnhKSURDSkNRYk9UMHR6S2tYUFpiZ0txT1NJUDhYcVNIL2E0dkFJV3J5?=
- =?utf-8?B?OEpvcDVhQ3VGNzBMK2dLTmQyeDBaWUVFNVoxUEdXQkw5MW5vYkZ3VFpCWFJW?=
- =?utf-8?B?M2N2NStnOFR1em9UR2JaWUVSaDkzNS95d3g5TXZzM1BnZXptS2d2K1BTZUlB?=
- =?utf-8?B?NmgweGxVVmxna3l3cGtxclJxemQzMllWd0loZitFTkVvajBhekhpQithdFgr?=
- =?utf-8?Q?wRWk=3D?=
+ ARA:13230040|1800799024|82310400026|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NjR4YTByRnZLMWhIa2V0RTBZRzdEZzVYVkk5OVZsL2tWVUNHQW15V05IcXIy?=
+ =?utf-8?B?ZHlJcklGVkJmcDhmME5FOTlpbGpRU0MxZFVXVmJBNnZjbkQ3eE1FbDBIdkRp?=
+ =?utf-8?B?ZFo2a2tVZk9tRFJMQlRTL1JncWNKbFF6U3dBTHZoR1FYM1FSRHdERHFsd3BQ?=
+ =?utf-8?B?RDNrUkM3cWwwOGl6Z21ldnVvd3ZvSXVGQ3Fad0JwTktFVlpaaVA1dWJLYVBx?=
+ =?utf-8?B?cFN4ZzdnTWpiWEtleGhaSnMxUmJGNGx3RnhONytaZGIrN2lpamZHaXh2RHB3?=
+ =?utf-8?B?L0NxcU42MG1BNCtuSHkzVnhMbVpOR2U0NnFrMHFpL1VzVFJKUktXblAzbkhG?=
+ =?utf-8?B?WGRINktFdmVCTS8ySWNzTjFhWVpyczQxY2NkS04vWVkwd29qVzc3NzNBbVpM?=
+ =?utf-8?B?VGpPMno5djRKSG40Zzc2UHdaeFRwT3NDTzJpR2h6Y042SHVZQ1p3dlNlR1FK?=
+ =?utf-8?B?V0o0N1hSMnpZZ1hsaVQrRWlWbzByUHQxUiszN1dreTdMSm1US0ZsSTBvNjNM?=
+ =?utf-8?B?czJNZFJQUWxiTGdERFI0Z3hLcEV1RGdlaEQ5YXhzOGk3UFhVS0k4ZUdIK2Ny?=
+ =?utf-8?B?RzAxREpjY3lHaUZOaUsycFNEVXNMWVg2R2h3VFpSTnhod0ZSQmpqMUxtOW56?=
+ =?utf-8?B?RitSTFN2WS92SXVlb2E2eDdrSW5aS0VWRXdXdmdXUHRMbTkvay9xNnZwQkJy?=
+ =?utf-8?B?Z092UnlHSDVOQ2Z0cHpsQytaVHBoTjRnck9oOEhWWUhPWUJOZDU4ZUE5VUJY?=
+ =?utf-8?B?RzRkU0YxcWIyaE1vcnRlSWVkSHpvVFE4UnNSdjBZbmxMQzFVenBwNFdPOHV0?=
+ =?utf-8?B?TExodG1TN3cxU0JKbkt0WDMzNEQ2VDFlaUJCc05FMGNQT3lPaVlkUVVXK1lH?=
+ =?utf-8?B?UysvZktXMk5ta0xKS2tNQUtzZHZBUHMydCtPbE44N3pFcWtVM1Y2Z2w1RjZX?=
+ =?utf-8?B?NTJOWlN6QVB3Tzh3UEY5MXBVbDU4Z084MXJFOG5kVjRFSW0yZEFiWndoOGZM?=
+ =?utf-8?B?TnJXVGJsMjVmK2hOcTdNZXpNZnVRNWdSdXZuYWZEOEEwalVwcytvTDZtWU5q?=
+ =?utf-8?B?L0J5UXN4QldKYVFDUnU4emliSW8xSzB5K1NwanVjQWF1TFVIdDE5RnpnQnA2?=
+ =?utf-8?B?MHBMdzNSK0MrQmVveFJLeGQrL203SStLQzliaklDbG9ZUXpBOS9iRitjOVkz?=
+ =?utf-8?B?RE1KU3RDS2RKc2VwcDc3dUw2MnFqNUdRY0dXZHF6OVRWdTVpczZqc0FLMStM?=
+ =?utf-8?B?SW1uSkQwOVVPeitUcjBRYnFkM1FCYStqK21TbGc2dHJLL2NtdEZOd3dXakNm?=
+ =?utf-8?B?MzdDS0hrcUJxcmo0eDYxc3NCNzZiTVFRMDBZMFFsV1luRk02Q1QraW5tMkR0?=
+ =?utf-8?B?cGZtamM2allCdGtnV3owMFdQcC9IVGVLU0J5aGtLQ05OSDk4d2c5Ump4bnlQ?=
+ =?utf-8?B?M1BZaWZRNFhpQkxqdUZrbC9BZUh2UmR5NFlaUWxlUXNaYllrWktDMTI2MjZp?=
+ =?utf-8?B?NXJOQ2oyYmYvM2xMM3FBQmZBVjZIRGoybnZoM3oxVFd2RVhaNVEzS1E2T0lS?=
+ =?utf-8?B?M1o2M0tQNTAvMWIwbkYvbWZyTVIyUDc4ZGRYdmcvaE1NTlM5Z1JoSVpsL1kr?=
+ =?utf-8?B?Uk05THZDUWVOODRlVUZsZ0U5aWkrNFhhT0tYS2NXL3VmRXVENEUwVVRhMzBU?=
+ =?utf-8?B?U0haSXpqR2V5ZjNqZUpRVWJ3UXdzL0E0ZmhDSzdnTlg2MUJoM082alZsK1hY?=
+ =?utf-8?B?WHZhZmtoN2JoOVBLY3BlRjd2YzVyOTBZaUVHYlpWYmd5blpxb1ZoS1kxNFR4?=
+ =?utf-8?B?Um1oZ3puTnBhSERzbXVYdFFTSjBnay9OeEFTekYyeVMwaG5wNG9pRGpkOGhU?=
+ =?utf-8?B?dm16NFZFYUE0YktWMGU1eEFGbGpWUkZHSDhGT3VkVDlFRitJRHpERXNmQ1U2?=
+ =?utf-8?B?a00rUU9zODZGaXNHNFFyUlY3bEk2VVQ1NkJmdmdMaEgwd0hjRUU5RW8zbXdZ?=
+ =?utf-8?B?M2hyMy93Z0NGcUx2V3QxcUd0ZWg4NGczdEZHTUNpQ0lpMVFpOUZxZmFFOTEv?=
+ =?utf-8?B?T01YZ1lXZVZyRkNQZ0JzbmlKSldxZWRDSEdCeDNIdHcrR2lwTkU0K1FSWFJ0?=
+ =?utf-8?Q?EHYQ=3D?=
 X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2025 05:18:55.7995 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: afc059bf-d94a-452d-db21-08de20e1cfc2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2025 05:25:53.5461 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 22a9ed18-8027-4c08-ac64-08de20e2c8cb
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
  Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D7.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00020E61.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB7448
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF2BB505D96
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,214 +164,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
-
 On Tue Nov 11, 2025 at 2:24 AM IST, Rasmus Villemoes wrote:
-> Not all ->get_info implementations necessarily populate all the string
-> members of struct disk_partition.
->
-> Currently, only part_get_info_by_type() (and thereby part_get_info)
-> ensure that the uuid strings are initialized; part_get_info_by_type()
-> and part_get_info_by_uuid() do not. In fact, the latter could lead to
-> a false positive match - if the ->get_info backend does not populate
-> info->uuid, stale contents in info could cause the strncasecmp() to
-> succeed.
->
-> None of the functions currently ensure that the ->name and ->type
-> strings are initialized.
->
-> Instead of forcing all callers of any of these functions to
-> pre-initialize info, or all implementations of the ->get_info method
-> to ensure there are valid C strings in all four fields, create a small
-> helper function and factor all invocations of ->get_info through that.
->
-> This also consolidates the -ENOSYS check and standardizes on using
-> log_debug() for reporting absence, instead of the current mix of
-> PRINTF and log_debug(). It does mean we have to special-case -ENOSYS
-> in the error cases inside the loops in the _by_uuid() and _by_name()
-> functions, but it's still a net win in #LOC.
+> This is a natural buddy to the existing "part number", allowing one to
+> get the partition name for a given partition number.
 >
 > Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
 > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 > ---
->  cmd/gpt.c      |  4 ++--
->  disk/part.c    | 63 +++++++++++++++++++++++++++++---------------------
->  include/part.h | 16 +++++++++++++
->  3 files changed, 55 insertions(+), 28 deletions(-)
+>  cmd/part.c             | 16 +++++++++++++++-
+>  doc/usage/cmd/part.rst | 13 +++++++++++++
+>  2 files changed, 28 insertions(+), 1 deletion(-)
 >
-> diff --git a/cmd/gpt.c b/cmd/gpt.c
-> index e18e5036a06..84221881c39 100644
-> --- a/cmd/gpt.c
-> +++ b/cmd/gpt.c
-> @@ -724,7 +724,7 @@ static int gpt_enumerate(struct blk_desc *desc)
->  			continue;
+> diff --git a/cmd/part.c b/cmd/part.c
+> index db7bc5819c0..975a0a08a99 100644
+> --- a/cmd/part.c
+> +++ b/cmd/part.c
+> @@ -25,7 +25,8 @@
+>  enum cmd_part_info {
+>  	CMD_PART_INFO_START =3D 0,
+>  	CMD_PART_INFO_SIZE,
+> -	CMD_PART_INFO_NUMBER
+> +	CMD_PART_INFO_NUMBER,
+> +	CMD_PART_INFO_NAME,
+>  };
 > =20
->  		for (i =3D 1; i < part_drv->max_entries; i++) {
-> -			ret =3D part_drv->get_info(desc, i, &pinfo);
-> +			ret =3D part_driver_get_info(part_drv, desc, i, &pinfo);
->  			if (ret)
->  				continue;
-> =20
-> @@ -820,7 +820,7 @@ static int gpt_setenv(struct blk_desc *desc, const ch=
-ar *name)
->  		int i;
-> =20
->  		for (i =3D 1; i < part_drv->max_entries; i++) {
-> -			ret =3D part_drv->get_info(desc, i, &pinfo);
-> +			ret =3D part_driver_get_info(part_drv, desc, i, &pinfo);
->  			if (ret)
->  				continue;
-> =20
-> diff --git a/disk/part.c b/disk/part.c
-> index be2b45d5a29..49a0fca6b89 100644
-> --- a/disk/part.c
-> +++ b/disk/part.c
-> @@ -72,6 +72,28 @@ struct part_driver *part_driver_lookup_type(struct blk=
-_desc *desc)
->  	return NULL;
+>  static int do_part_uuid(int argc, char *const argv[])
+> @@ -154,6 +155,9 @@ static int do_part_info(int argc, char *const argv[],=
+ enum cmd_part_info param)
+>  	case CMD_PART_INFO_NUMBER:
+>  		snprintf(buf, sizeof(buf), "0x%x", part);
+>  		break;
+> +	case CMD_PART_INFO_NAME:
+> +		snprintf(buf, sizeof(buf), "%s", info.name);
+> +		break;
+>  	default:
+>  		printf("** Unknown cmd_part_info value: %d\n", param);
+>  		return 1;
+> @@ -182,6 +186,11 @@ static int do_part_number(int argc, char *const argv=
+[])
+>  	return do_part_info(argc, argv, CMD_PART_INFO_NUMBER);
 >  }
 > =20
-> +static void disk_partition_clr(struct disk_partition *info)
+> +static int do_part_name(int argc, char *const argv[])
 > +{
-> +	/* The common case is no UUID support */
-> +	disk_partition_clr_uuid(info);
-> +	disk_partition_clr_type_guid(info);
-> +	info->name[0] =3D '\0';
-> +	info->type[0] =3D '\0';
+> +	return do_part_info(argc, argv, CMD_PART_INFO_NAME);
 > +}
 > +
-> +int part_driver_get_info(struct part_driver *drv, struct blk_desc *desc,=
- int part,
-> +			 struct disk_partition *info)
-> +{
-> +	if (!drv->get_info) {
-> +		log_debug("## Driver %s does not have the get_info() method\n",
-> +			  drv->name);
-> +		return -ENOSYS;
-> +	}
-> +
-> +	disk_partition_clr(info);
-> +	return drv->get_info(desc, part, info);
-> +}
-> +
->  int part_get_type_by_name(const char *name)
+>  static int do_part_set(int argc, char *const argv[])
 >  {
->  	struct part_driver *drv =3D
-> @@ -322,12 +344,9 @@ int part_get_info_by_type(struct blk_desc *desc, int=
- part, int part_type,
->  			  struct disk_partition *info)
->  {
->  	struct part_driver *drv;
-> +	int ret =3D -ENOENT;
-> =20
->  	if (blk_enabled()) {
-> -		/* The common case is no UUID support */
-> -		disk_partition_clr_uuid(info);
-> -		disk_partition_clr_type_guid(info);
-> -
->  		if (part_type =3D=3D PART_TYPE_UNKNOWN) {
->  			drv =3D part_driver_lookup_type(desc);
->  		} else {
-> @@ -339,18 +358,16 @@ int part_get_info_by_type(struct blk_desc *desc, in=
-t part, int part_type,
->  			      desc->part_type);
->  			return -EPROTONOSUPPORT;
->  		}
-> -		if (!drv->get_info) {
-> -			PRINTF("## Driver %s does not have the get_info() method\n",
-> -			       drv->name);
-> -			return -ENOSYS;
-> -		}
-> -		if (drv->get_info(desc, part, info) =3D=3D 0) {
-> +
-> +		ret =3D part_driver_get_info(drv, desc, part, info);
-> +		if (ret && ret !=3D -ENOSYS) {
-> +			ret =3D -ENOENT;
+>  	const char *devname, *partstr, *typestr;
+> @@ -273,6 +282,8 @@ static int do_part(struct cmd_tbl *cmdtp, int flag, i=
+nt argc,
+>  		return do_part_size(argc - 2, argv + 2);
+>  	else if (!strcmp(argv[1], "number"))
+>  		return do_part_number(argc - 2, argv + 2);
+> +	else if (!strcmp(argv[1], "name"))
+> +		return do_part_name(argc - 2, argv + 2);
+>  	else if (!strcmp(argv[1], "types"))
+>  		return do_part_types(argc - 2, argv + 2);
+>  	else if (!strcmp(argv[1], "set"))
+> @@ -305,6 +316,9 @@ U_BOOT_CMD(
+>  	"part number <interface> <dev> <part> <varname>\n"
+>  	"    - set environment variable to the partition number using the parti=
+tion name\n"
+>  	"      part must be specified as partition name\n"
+> +	"part name <interface> <dev> <part> <varname>\n"
 
-Why are we overwriting the err code from part_driver_get_info here?
+Nit: Shouldn't this be part name <interface> <dev> <part> [varname]
+instead?
+
+> +	"    - set environment variable to the partition name using the partiti=
+on number\n"
+> +	"      part must be specified as partition number\n"
+>  #ifdef CONFIG_PARTITION_TYPE_GUID
+>  	"part type <interface> <dev>:<part>\n"
+>  	"    - print partition type\n"
+> diff --git a/doc/usage/cmd/part.rst b/doc/usage/cmd/part.rst
+> index 72f5d8b8de7..299f2ac15c5 100644
+> --- a/doc/usage/cmd/part.rst
+> +++ b/doc/usage/cmd/part.rst
+> @@ -16,6 +16,7 @@ Synopsis
+>      part start <interface> <dev> <part> <varname>
+>      part size <interface> <dev> <part> <varname>
+>      part number <interface> <dev> <part> <varname>
+> +    part name <interface> <dev> <part> <varname>
+
+Same here.
 
 Regards,
 Anshul
 
-> +		} else {
->  			PRINTF("## Valid %s partition found ##\n", drv->name);
-> -			return 0;
->  		}
->  	}
+>      part set <interface> <dev> <part> <type>
+>      part type <interface> <dev>:<part> [varname]
+>      part types
+> @@ -86,6 +87,18 @@ part must be specified as partition name.
+>      varname
+>          a variable to store the current partition number value into
 > =20
-> -	return -ENOENT;
-> +	return ret;
->  }
-> =20
->  int part_get_info(struct blk_desc *desc, int part,
-> @@ -657,15 +674,12 @@ int part_get_info_by_name(struct blk_desc *desc, co=
-nst char *name,
->  	if (!part_drv)
->  		return -1;
-> =20
-> -	if (!part_drv->get_info) {
-> -		log_debug("## Driver %s does not have the get_info() method\n",
-> -			  part_drv->name);
-> -		return -ENOSYS;
-> -	}
-> -
->  	for (i =3D 1; i < part_drv->max_entries; i++) {
-> -		ret =3D part_drv->get_info(desc, i, info);
-> +		ret =3D part_driver_get_info(part_drv, desc, i, info);
->  		if (ret !=3D 0) {
-> +			/* -ENOSYS means no ->get_info method. */
-> +			if (ret =3D=3D -ENOSYS)
-> +				return ret;
->  			/*
->  			 * Partition with this index can't be obtained, but
->  			 * further partitions might be, so keep checking.
-> @@ -695,15 +709,12 @@ int part_get_info_by_uuid(struct blk_desc *desc, co=
-nst char *uuid,
->  	if (!part_drv)
->  		return -1;
-> =20
-> -	if (!part_drv->get_info) {
-> -		log_debug("## Driver %s does not have the get_info() method\n",
-> -			  part_drv->name);
-> -		return -ENOSYS;
-> -	}
-> -
->  	for (i =3D 1; i < part_drv->max_entries; i++) {
-> -		ret =3D part_drv->get_info(desc, i, info);
-> +		ret =3D part_driver_get_info(part_drv, desc, i, info);
->  		if (ret !=3D 0) {
-> +			/* -ENOSYS means no ->get_info method. */
-> +			if (ret =3D=3D -ENOSYS)
-> +				return ret;
->  			/*
->  			 * Partition with this index can't be obtained, but
->  			 * further partitions might be, so keep checking.
-> diff --git a/include/part.h b/include/part.h
-> index 6caaa6526aa..d940f8b5d0e 100644
-> --- a/include/part.h
-> +++ b/include/part.h
-> @@ -509,6 +509,22 @@ struct part_driver {
->  	int (*test)(struct blk_desc *desc);
->  };
-> =20
-> +/**
-> + * part_driver_get_info() - Call the part_driver's get_info method
-> + *
-> + * On success, string members of info are guaranteed to be properly
-> + * initialized, though they may be empty.
-> + *
-> + * @drv:	Partition driver
-> + * @desc:	Block device descriptor
-> + * @part:	Partition number to read
-> + * @info:	Returned partition information
-> + *
-> + * Return: 0 on success, negative errno on failure.
-> + */
-> +int part_driver_get_info(struct part_driver *drv, struct blk_desc *desc,=
- int part,
-> +			 struct disk_partition *info);
+> +The 'part name' command sets an environment variable to the partition na=
+me using the partition number,
+> +part must be specified as partition number.
 > +
->  /* Declare a new U-Boot partition 'driver' */
->  #define U_BOOT_PART_TYPE(__name)					\
->  	ll_entry_declare(struct part_driver, __name, part_driver)
+> +    interface
+> +        interface for accessing the block device (mmc, sata, scsi, usb, =
+....)
+> +    dev
+> +        device number
+> +    part
+> +        partition number
+> +    varname
+> +        a variable to store the current partition name into
+> +
+>  The 'part set' command sets the type of a partition. This is useful when
+>  autodetection fails or does not do the correct thing:
+> =20
 
