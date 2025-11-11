@@ -4,59 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE4ACCFA1A
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 14:08:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD21CCFA18
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 14:42:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CC0E83F87;
-	Tue, 11 Nov 2025 15:08:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id C0B5A83B97;
+	Tue, 11 Nov 2025 15:42:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="RQqqL1Fl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HhDm8rqO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4A4E83F87; Tue, 11 Nov 2025 15:08:00 +0100 (CET)
-Received: from mail-m21468.qiye.163.com (mail-m21468.qiye.163.com
- [117.135.214.68])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A870883BDF; Tue, 11 Nov 2025 15:42:48 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16DA583BD2
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 15:07:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8338583B95
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 15:42:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.1.64] (unknown [120.36.73.234])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2934dfe85;
- Tue, 11 Nov 2025 22:07:52 +0800 (GMT+08:00)
-Message-ID: <028365bd-f5cf-4fe2-addd-780c359c064f@rock-chips.com>
-Date: Tue, 11 Nov 2025 22:07:51 +0800
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7c284d4867eso1154679a34.3
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 06:42:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1762872165; x=1763476965; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NCycZxtOLBJg8NwP3r3ApGF8aGio7f6yqCqOI+dHZTQ=;
+ b=HhDm8rqOZpROUj8JShKY0j2ehk3E+4VyAbIaY1G7OXDbqknEXMdRlzwl/P/7HtmGfS
+ 6UABZQciZZz4/mYMc7FXTw/N9MY1i7CHkbspNdQT4awoQ37m7Xzio/9RHQ7Ie+57/xyS
+ fgpfc+vNSjee4ErZO5MoAHbYv6MUm36mk3jRI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762872165; x=1763476965;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NCycZxtOLBJg8NwP3r3ApGF8aGio7f6yqCqOI+dHZTQ=;
+ b=UtXLGEw7S8kb5i3Q/OPrUe2SFeuZLHf2XDVeywWKdN2M6gtUPHBseI4IZ0k68JV+20
+ 2IThEsWBOVuqkq0lqLvPvGXaurmpSPBQvpo8C9ckktjchcdq9jgUMsPh5F+LS8Zbb+dS
+ detyF5q1Wz7PsUruhtOVm+lnZDWA74r+pJMOUmx0uCrYhY35ehvWnSv6Am2694dPySmp
+ FG64BbahOIQ0fk3SR2rU0Z7x5do8ci7wbcd/htGLT0Tl9HIwWpAXGQINHmMTtZWgdXjQ
+ ggnncBMROshGLNl5npVV8jYm39NhfyKOC7SAhwWg02dOGkSBcblWsTUC9ZiBZyY8NwPr
+ hswg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXZgV3bCKNGGnuLCuSkf9hcHHrAFupvc8LhmwBAqMqvYsWWIZVBB4jmk55gWqbFwXiGRdViV70=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyy0dnK4SXoDjuLcULHCyKJvf81PH4g5LBioDgp4IIfaTDS9EyD
+ LkBqFu0X2bj2wdeKHniC5LAuo/Fn3qmvospP1a0jVV8Q2ZBSYW/fhJpDd8GEOwP+kok=
+X-Gm-Gg: ASbGnctyzwaFEuWtyN9o4YZwh+MaTo1YwSeSz2Ck3xh56T5kd94LSmUlUd5m3Cw5qkz
+ nmsTGmdlf2U5uEUUaG0diNN+AI4qIRePwbW5bxvwcDFQ9TYdnZuF8SVMbm6sxYTGx6zGNpTuxTo
+ Z46W//tv6gXROT3qO3WYOJ6DBCI8shgOmf9CYgGIRcZnpvuFszfdje3WSLIgHXQUb35RnaToeko
+ GccynSz9P17JJReQheFkrvVHwngC1FT03vuGAMEMMM1Q7e7iVx9AYkp+cdRbFY9zqJWgm83GdI6
+ fUF6eUhMWQrTzB8GTUxku0mkmOWA6RmOncWiaYV+mk2AmcMi9+pnGcdzYoTC7wIswY6Jr2z1a4H
+ DMldjZW8RXGOnhzO/y8JDHojBgUKvOV9qYQUO+BhXXhnk07qfVx08bnxlDbHYqM1wj2LIqWDXDT
+ TiPLNSl7YxcS1BU/22szNmpmWJx7w7YljRGLTpRreQ2Ahzt6jntQ==
+X-Google-Smtp-Source: AGHT+IHgKwjtWQTQBG2W8VOm/g8A0UHVI3YBDdqovTw9mQWyhBjJ0Goa+qDqkcwwCsBeU8+95QJCtg==
+X-Received: by 2002:a05:6830:2a91:b0:7c7:dc3:d0d1 with SMTP id
+ 46e09a7af769-7c70dc3d3admr3922538a34.36.1762872165255; 
+ Tue, 11 Nov 2025 06:42:45 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c6f10f7ab4sm7017598a34.22.2025.11.11.06.42.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Nov 2025 06:42:44 -0800 (PST)
+Date: Tue, 11 Nov 2025 08:42:42 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Ng, Boon Khai" <boon.khai.ng@altera.com>
+Cc: Nikunj Kela <nikunj.kela@sima.ai>,
+ "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
+ "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>
+Subject: Re: [PATCH v3] net: xgmac: Augment mdio read/write with cl-45 format
+ support
+Message-ID: <20251111144242.GV6688@bill-the-cat>
+References: <20250829041232.1160655-1-nikunj.kela@sima.ai>
+ <SA3PR03MB7187A45D6B0588067C348FDAB406A@SA3PR03MB7187.namprd03.prod.outlook.com>
+ <SA3PR03MB71877E9BB24B98DB4120000BB4CFA@SA3PR03MB7187.namprd03.prod.outlook.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] rockchip: i2c: fix illegal I2C START/STOP condition
-To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Wadim Egorov <w.egorov@phytec.de>, Vasily Khoruzhick <anarsoul@gmail.com>
-Cc: Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <20251107-rk-i2c-illegal-v1-0-3e5fea13a899@cherry.de>
- <20251107-rk-i2c-illegal-v1-3-3e5fea13a899@cherry.de>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20251107-rk-i2c-illegal-v1-3-3e5fea13a899@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9a733e956803afkunm3513440534697
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZThlNVktOGE0dT04eH0lJSVYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKSUtVSE1VTEhVSUhPWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-DKIM-Signature: a=rsa-sha256;
- b=RQqqL1FlQfUUG9J5Ue+7sBG9G3cJP/O6pVPRJ2QZ14la2j62tS+eny6J32q4n7hmnYNjB/Wi6dxWNvgM8Jr+gaD5iIZnHcpRLwScWjrIGDIOEBL7y1hiIMUJioGQvNhzos80+K0+opy52/mTuXRRpuusdwONGN8NNu0cqPpAf7k=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=ysTvKnczoz08MT9lH5qz6JnQ0eUZpbIaFPeBdZft+Kw=;
- h=date:mime-version:subject:message-id:from;
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LpgQhExvqZhqKJKH"
+Content-Disposition: inline
+In-Reply-To: <SA3PR03MB71877E9BB24B98DB4120000BB4CFA@SA3PR03MB7187.namprd03.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,118 +106,31 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/11/7 19:39, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->
-> In the last message sent in rockchip_i2c_xfer, the controller is
-> disabled (see rk_i2c_disable() in rk_i2c_read()/rk_i2c_write()), then
-> the STOP condition is sent (see rk_i2c_send_stop_bit() in
-> rockchip_i2c_xfer()) and the controller is disabled once again (see
-> rk_i2c_disable() right after).
->
-> The issue is that re-enabling the controller just to send the STOP
-> condition doesn't work. When, the controller is disabled, the SCL and
-> SDA lanes are not driven anymore and thus enter the idle mode where they
-> are kept high by the external HW pull-up. To send a STOP condition, one
-> needs to drive the SDA line so that a rising edge happens while SCL is
-> high. Experimentally (on PX30 and RK3399), when enabling the controller
-> to send a STOP condition after it's been disabled, the controller only
-> drives the SDA line to trigger the rising edge for the STOP condition,
-> leaving SCL undriven (and thus, high). This means, that because SDA is
-> high before this happens and that we need a rising edge, the controller
-> drives the SDA line low and then releases it, meaning we trigger a START
-> condition followed by a STOP condition:
->
-> SCL
->          _________
-> _____...
->          __  _____
-> _____...  \/
-> SDA
-> 	    ^ STOP
-> 	  ^ START
->
-> This is illegal in I2C protocol[1]:
->
->   5. A START condition immediately followed by a STOP condition (void
->      message) is an illegal format. Many devices however are designed to
->      operate properly under this condition.
->
-> My guess is that the I2C controller IP knows that it makes only sense to
-> send a STOP condition after a START condition, meaning the controller is
-> already driving the SCL line low and neither the device nor controller
-> drive the SDA line after the last ACK/NACK as there's no need to, then
-> it needs to drive SDA, release SCL to make it high and then release the
-> SDA line. However, after it's been disabled, the SCL is already released
-> so the controller only essentially drives SDA and then releases it.
->
-> It happens that this seems to be breaking the SE050 Secure Element after
-> a few transfers in the middle of a transfer where it starts clock
-> stretching the bus forever. It may be related to Errata 3.2[2] but the
-> description of the setup isn't an exact match to the current situation.
->
-> It seems to be required to disable the I2C controller between messages
-> as the Linux kernel states that "The HW is actually not capable of
-> REPEATED START. But we can get the intended effect by resetting its
-> internal state and issuing an ordinary START.". Between messages, this
-> logic seems fine as I get an Sr (repeated START condition) before
-> starting the next message in the transfer without a STOP condition.
-> However, we should NOT disable the controller after the last message in
-> the transfer otherwise we do this illegal START condition followed by
-> the STOP condition, hence the added check.
->
-> [1] https://www.nxp.com/docs/en/user-guide/UM10204.pdf 3.1.10 The target address and R/W bit point 5
-> [2] https://www.nxp.com/docs/en/errata/SE050_Erratasheet.pdf
->
-> Fixes: c9fca5ec8849 ("rockchip: i2c: don't sent stop bit after each message")
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+--LpgQhExvqZhqKJKH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks,
-- Kever
-> ---
->   drivers/i2c/rk_i2c.c | 16 ++++++++++++----
->   1 file changed, 12 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/i2c/rk_i2c.c b/drivers/i2c/rk_i2c.c
-> index 3c44d0e65f5..def07018148 100644
-> --- a/drivers/i2c/rk_i2c.c
-> +++ b/drivers/i2c/rk_i2c.c
-> @@ -255,8 +255,6 @@ static int rk_i2c_read(struct rk_i2c *i2c, uchar chip, uint reg, uint r_len,
->   	}
->   
->   i2c_exit:
-> -	rk_i2c_disable(i2c);
-> -
->   	return err;
->   }
->   
-> @@ -333,8 +331,6 @@ static int rk_i2c_write(struct rk_i2c *i2c, uchar chip, uint reg, uint r_len,
->   	}
->   
->   i2c_exit:
-> -	rk_i2c_disable(i2c);
-> -
->   	return err;
->   }
->   
-> @@ -359,6 +355,18 @@ static int rockchip_i2c_xfer(struct udevice *bus, struct i2c_msg *msg,
->   			ret = -EREMOTEIO;
->   			break;
->   		}
-> +
-> +		/*
-> +		 * The HW is actually not capable of REPEATED START. But we can
-> +		 * get the intended effect by resetting its internal state
-> +		 * and issuing an ordinary START.
-> +		 *
-> +		 * Do NOT disable the controller after the last message (before
-> +		 * sending the STOP condition) as this triggers an illegal
-> +		 * START condition followed by a STOP condition.
-> +		 */
-> +		if (nmsgs > 1)
-> +			rk_i2c_disable(i2c);
->   	}
->   
->   	rk_i2c_send_stop_bit(i2c);
->
+On Tue, Nov 11, 2025 at 09:31:23AM +0000, Ng, Boon Khai wrote:
+
+> Hi Tom,
+>=20
+> Can you help to take a look at this patchwork?
+
+As it's socfpga specific I've re-assigned it to Tien Fong Chee now.
+
+--=20
+Tom
+
+--LpgQhExvqZhqKJKH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRNLWwAKCRAr4qD1Cr/k
+CuYMAPwM1R6bnE/xUlWTMJrxf86+STAIdz3eZw3zwKcfucCupQEAlkUgYJmn0qww
+eF4EuYGs1L/2H8+eT1X3oa1l9i3UDgo=
+=9dy3
+-----END PGP SIGNATURE-----
+
+--LpgQhExvqZhqKJKH--
