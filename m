@@ -4,90 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD21CCFA18
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 14:42:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6D9FCCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 14:43:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0B5A83B97;
-	Tue, 11 Nov 2025 15:42:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D3BD83B97;
+	Tue, 11 Nov 2025 15:43:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HhDm8rqO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D1diu+m0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A870883BDF; Tue, 11 Nov 2025 15:42:48 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 19F5883B97; Tue, 11 Nov 2025 15:43:15 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8338583B95
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 15:42:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2BAD83B95
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 15:43:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7c284d4867eso1154679a34.3
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 06:42:46 -0800 (PST)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7c71cca8fc2so818259a34.1
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 06:43:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762872165; x=1763476965; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762872191; x=1763476991; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NCycZxtOLBJg8NwP3r3ApGF8aGio7f6yqCqOI+dHZTQ=;
- b=HhDm8rqOZpROUj8JShKY0j2ehk3E+4VyAbIaY1G7OXDbqknEXMdRlzwl/P/7HtmGfS
- 6UABZQciZZz4/mYMc7FXTw/N9MY1i7CHkbspNdQT4awoQ37m7Xzio/9RHQ7Ie+57/xyS
- fgpfc+vNSjee4ErZO5MoAHbYv6MUm36mk3jRI=
+ bh=s2AnFKJpOsmeH4C0HLp9g7jzvDkOZQneTd2y4X/g7qQ=;
+ b=D1diu+m0weCIeJzZ2C35NSvpsFg4AZzC73gzsvCGZE03KGuvbtYOZpGceIHjZSkRPm
+ Opo6sUJIff9lDtrukX1+j3cN0Cy1TYpQpdpOVdNwNYeWbapOXddfrN1AvKOKCoMO17YQ
+ dKo2NUtbI6Z3yxI+aC66AHhTO0W4+0cW9oGCU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762872165; x=1763476965;
+ d=1e100.net; s=20230601; t=1762872191; x=1763476991;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NCycZxtOLBJg8NwP3r3ApGF8aGio7f6yqCqOI+dHZTQ=;
- b=UtXLGEw7S8kb5i3Q/OPrUe2SFeuZLHf2XDVeywWKdN2M6gtUPHBseI4IZ0k68JV+20
- 2IThEsWBOVuqkq0lqLvPvGXaurmpSPBQvpo8C9ckktjchcdq9jgUMsPh5F+LS8Zbb+dS
- detyF5q1Wz7PsUruhtOVm+lnZDWA74r+pJMOUmx0uCrYhY35ehvWnSv6Am2694dPySmp
- FG64BbahOIQ0fk3SR2rU0Z7x5do8ci7wbcd/htGLT0Tl9HIwWpAXGQINHmMTtZWgdXjQ
- ggnncBMROshGLNl5npVV8jYm39NhfyKOC7SAhwWg02dOGkSBcblWsTUC9ZiBZyY8NwPr
- hswg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZgV3bCKNGGnuLCuSkf9hcHHrAFupvc8LhmwBAqMqvYsWWIZVBB4jmk55gWqbFwXiGRdViV70=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyy0dnK4SXoDjuLcULHCyKJvf81PH4g5LBioDgp4IIfaTDS9EyD
- LkBqFu0X2bj2wdeKHniC5LAuo/Fn3qmvospP1a0jVV8Q2ZBSYW/fhJpDd8GEOwP+kok=
-X-Gm-Gg: ASbGnctyzwaFEuWtyN9o4YZwh+MaTo1YwSeSz2Ck3xh56T5kd94LSmUlUd5m3Cw5qkz
- nmsTGmdlf2U5uEUUaG0diNN+AI4qIRePwbW5bxvwcDFQ9TYdnZuF8SVMbm6sxYTGx6zGNpTuxTo
- Z46W//tv6gXROT3qO3WYOJ6DBCI8shgOmf9CYgGIRcZnpvuFszfdje3WSLIgHXQUb35RnaToeko
- GccynSz9P17JJReQheFkrvVHwngC1FT03vuGAMEMMM1Q7e7iVx9AYkp+cdRbFY9zqJWgm83GdI6
- fUF6eUhMWQrTzB8GTUxku0mkmOWA6RmOncWiaYV+mk2AmcMi9+pnGcdzYoTC7wIswY6Jr2z1a4H
- DMldjZW8RXGOnhzO/y8JDHojBgUKvOV9qYQUO+BhXXhnk07qfVx08bnxlDbHYqM1wj2LIqWDXDT
- TiPLNSl7YxcS1BU/22szNmpmWJx7w7YljRGLTpRreQ2Ahzt6jntQ==
-X-Google-Smtp-Source: AGHT+IHgKwjtWQTQBG2W8VOm/g8A0UHVI3YBDdqovTw9mQWyhBjJ0Goa+qDqkcwwCsBeU8+95QJCtg==
-X-Received: by 2002:a05:6830:2a91:b0:7c7:dc3:d0d1 with SMTP id
- 46e09a7af769-7c70dc3d3admr3922538a34.36.1762872165255; 
- Tue, 11 Nov 2025 06:42:45 -0800 (PST)
+ bh=s2AnFKJpOsmeH4C0HLp9g7jzvDkOZQneTd2y4X/g7qQ=;
+ b=LO3CMXuSnPANl9uEQOjYOzOC2zNv+tBnMacBYJbNWTWkpPUuC2Jms2kL0F2uRgpmes
+ NjAc+a1Wzaalsgkxl/usaYfR/4MOZZSHK9Lp5MUd3ZzGv+gIZ54uCq0Q0/VOTBa5Yt6z
+ LxK2+LXijdGh0UC9xDy/ncQPyidnXtGfwpd4McUkHu15zVBBNClcnoYdpmYsHcyT/gqN
+ aLWTsWbyAg2wKFU9hrn+cotSJ3aGBrt6WY6Eut0kOkzfM7SGi1jggdVCNasU8CNQEOO/
+ SYNl4r371cVULD+vwwDJgfQoz7TnClkwnVnykv9qGZRu6te0aTnWHYiuH8cFUf70fRKl
+ Ex8A==
+X-Gm-Message-State: AOJu0Yz0cpu23PQ4SNXuVw5oc7BduEikuscSvXl8BdWkWm64CBhO3KtP
+ JQEYHsJFTGxRJq9Q13rHBn1o1/WLZvFQer88cXYzCz/nR7jz2IiIaBQsqvXkMkCRfdo=
+X-Gm-Gg: ASbGncuwoWJlz4AJi1Ni0v1NZlCeifpII+cidS25cU+aOCFH1REyVdLYSWfNXkn5TZx
+ o6xeMEJaa0Ll0519pgl9vpfTIbJabbk/NitPzJQFH1q9nLxuwsfhBGZnZjV4kwP5vC2KGfUHl0w
+ iiEvi6cTPg0D8gyZ/nnHwFHHdmRTlD43CTXMlivim0LH1iQXnTnH86jMDzmTanOSxQaMbPjsLeF
+ WlXIlxR/TiOWLOLmfw/rNry/Zc5w/kg9jo+4d28/OfaizmB4ioERAekIt/HnnhsLqF5550n/vdR
+ KokQJvx8X7EjjM/dlOwA42n2QuUlreGO9/NOkRy3FcW6d9+J7d3FGunevlD+FkaRhsAIbmw3EvR
+ ESl3I1vSeubuq5u3uws6LhXk5tfPQCOjK0q+Vt857OgbSe000aMyiRHT0Kd+pc9BuQlFyWGQ+Xt
+ 7zuuIC/88L5DUXya4hAtxw4P384AFXqqUYidVzsx3FT8TvRkhPYg==
+X-Google-Smtp-Source: AGHT+IGRtBKtexYMVQiaAMf4GOcY0YsVz1tkNxXkjYxesRP9sFcstLkAMdwGr5ODa5mK6wOCIEbf9g==
+X-Received: by 2002:a05:6808:180e:b0:450:13d3:fccc with SMTP id
+ 5614622812f47-4502a321df8mr7003798b6e.12.1762872191476; 
+ Tue, 11 Nov 2025 06:43:11 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f10f7ab4sm7017598a34.22.2025.11.11.06.42.44
+ 5614622812f47-4500275053bsm6913064b6e.12.2025.11.11.06.43.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 06:42:44 -0800 (PST)
-Date: Tue, 11 Nov 2025 08:42:42 -0600
+ Tue, 11 Nov 2025 06:43:10 -0800 (PST)
+Date: Tue, 11 Nov 2025 08:43:08 -0600
 From: Tom Rini <trini@konsulko.com>
-To: "Ng, Boon Khai" <boon.khai.ng@altera.com>
-Cc: Nikunj Kela <nikunj.kela@sima.ai>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Tien Fong Chee <tien.fong.chee@altera.com>
-Subject: Re: [PATCH v3] net: xgmac: Augment mdio read/write with cl-45 format
- support
-Message-ID: <20251111144242.GV6688@bill-the-cat>
-References: <20250829041232.1160655-1-nikunj.kela@sima.ai>
- <SA3PR03MB7187A45D6B0588067C348FDAB406A@SA3PR03MB7187.namprd03.prod.outlook.com>
- <SA3PR03MB71877E9BB24B98DB4120000BB4CFA@SA3PR03MB7187.namprd03.prod.outlook.com>
+To: Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Samuel Holland <samuel@sholland.org>
+Subject: Re: [PATCH 0/2] Fix AArch32 compilation with Clang
+Message-ID: <20251111144308.GW6688@bill-the-cat>
+References: <20251101-clang-fixes-v1-0-a8398475226e@gmail.com>
+ <176246626861.3129497.14948596131312532180.b4-ty@konsulko.com>
+ <20251106221355.GZ6688@bill-the-cat>
+ <CAChbrCYcFua=B9ZaS8_tbzugUh6MyLMJo3T9tEDZhA-Y6zdsOA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LpgQhExvqZhqKJKH"
+ protocol="application/pgp-signature"; boundary="rekqnKCHm4yov3I9"
 Content-Disposition: inline
-In-Reply-To: <SA3PR03MB71877E9BB24B98DB4120000BB4CFA@SA3PR03MB7187.namprd03.prod.outlook.com>
+In-Reply-To: <CAChbrCYcFua=B9ZaS8_tbzugUh6MyLMJo3T9tEDZhA-Y6zdsOA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,31 +103,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---LpgQhExvqZhqKJKH
-Content-Type: text/plain; charset=us-ascii
+--rekqnKCHm4yov3I9
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 11, 2025 at 09:31:23AM +0000, Ng, Boon Khai wrote:
-
-> Hi Tom,
+On Sat, Nov 08, 2025 at 09:55:00PM +0100, Dmitrii Sharshakov wrote:
+> Thank you for your reply.
 >=20
-> Can you help to take a look at this patchwork?
+> Please review a fix for the aforementioned issue[1] and let me know
+> whether this enables your
+> local and CI builds with Clang!
 
-As it's socfpga specific I've re-assigned it to Tien Fong Chee now.
+That fixed what I ran in to, thanks!
+
+>=20
+> Thank you!
+>=20
+> Best regards,
+> Dmitrii
+>=20
+> [1] https://lore.kernel.org/u-boot/20251108-clang-cross-fixes-v1-1-ea6c42=
+82844a@gmail.com/
+>=20
+>=20
+> On Thu, Nov 6, 2025 at 11:13=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Thu, Nov 06, 2025 at 03:57:48PM -0600, Tom Rini wrote:
+> >
+> > > On Sat, 01 Nov 2025 10:39:57 +0100, Dmitrii Sharshakov wrote:
+> > >
+> > > > I faced some minor compatibility issues when choosing Clang as the =
+cross-compiler for my target.
+> > > >
+> > > > Please review these two fixes, aiming at enabling Clang-based build=
+s (still using GNU binutils)
+> > > > for 32-bit ARM targets.
+> > > >
+> > > > Tested to fix build with (also run-tested on qemu arm and arm64 wit=
+h clang):
+> > > >
+> > > > [...]
+> > >
+> > > Applied to u-boot/master, thanks!
+> > >
+> > > [1/2] arch: arm: build: only set -mgeneral-regs-only for AArch64
+> > >       commit: e8e3b38def93b5e5d53569961237ce215454e141
+> > > [2/2] build: fix building u-boot.lds with Clang as a cross-compiler
+> > >       commit: f7d177395d73f7747373dfd0ef7329834788106e
+> >
+> > So, I can replicate your success if I do:
+> > $ export PATH=3D${PATH}:/opt/gcc-14.2.0-nolibc/aarch64-linux/bin
+> > $ make O=3D/tmp/rpi4 CROSS_COMPILE=3Daarch64-linux- CC=3Dclang-18 HOSTC=
+C=3Dclang-18 rpi_4_config all
+> >
+> > But if I instead use CROSS_COMPILE=3D/opt/gcc-.../bin/aarch64-linux-
+> > instead we get /usr/bin/as being used and fail. Any ideas where perhaps
+> > CROSS_COMPILE isn't being trimmed correctly and passed to clang maybe?
+> > Thanks!
+> >
+> > --
+> > Tom
 
 --=20
 Tom
 
---LpgQhExvqZhqKJKH
+--rekqnKCHm4yov3I9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRNLWwAKCRAr4qD1Cr/k
-CuYMAPwM1R6bnE/xUlWTMJrxf86+STAIdz3eZw3zwKcfucCupQEAlkUgYJmn0qww
-eF4EuYGs1L/2H8+eT1X3oa1l9i3UDgo=
-=9dy3
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRNLfAAKCRAr4qD1Cr/k
+Cs4pAP9jIMqC9GrMRX4IDNyFZGe+PGxlgWn88Uaik9JyMDzAIQD/f8uHxn9FF6LX
+B0ZpF5I7afXrjU6isqqyspLvsi9VuwE=
+=g+7K
 -----END PGP SIGNATURE-----
 
---LpgQhExvqZhqKJKH--
+--rekqnKCHm4yov3I9--
