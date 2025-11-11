@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30B9DCCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:44:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8156ECCFA18
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:44:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C178C83AEC;
-	Tue, 11 Nov 2025 09:44:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1FA6983F24;
+	Tue, 11 Nov 2025 09:44:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rbGqZKQr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="apEbWqvm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAB7E83EC0; Tue, 11 Nov 2025 09:44:19 +0100 (CET)
-Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
- [IPv6:2607:f8b0:4864:20::b131])
+ id F262A83F37; Tue, 11 Nov 2025 09:44:46 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC92383AB4
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:44:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB77883AB4
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:44:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-640e065991dso2972573d50.3
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:44:16 -0800 (PST)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-85a4ceb4c3dso361226985a.3
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:44:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762850655; x=1763455455; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xf1zq4jyHOWbwK01xk+oBgwyMuSyq580Nu2cX28XsRs=;
- b=rbGqZKQr8f01nG0YuFOWW08CnpZkoQ21HyuQfTw7sach8Un7dmCrze9oHzNQISMMqh
- G0IPtx/MD34SksTAnVIHYc916x3taeZ5EtHfn4Rjt7NGRTj0Q5Wa54IpInRWMvIcRy5H
- n0XLjaSYC29FvfdnxC6kQk4HhlF0cfkZr2LOf553yZotpOozrV87LHeFBlbwg5gjgAK2
- VP0IYd6yqlg44wHzq64FURzRdGpzOJanU57LVB/g33JstFPVMvlgCG6kRysVl7M91S3B
- ML20HbezB6otSOeyi1shl0gc5Q/ZKLsp/f2Rr6HOjBZk/6NwWsrdreU1c+7xkz4WJ8x8
- otfg==
+ d=linaro.org; s=google; t=1762850682; x=1763455482; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Am8ezp823Xr90r1GvGTIHKQe90mGwatBZ+Td45nu04A=;
+ b=apEbWqvm1OUraQIsEj5f9ulFQB+aKzc6xMRrcEEsYop0/WXkArumA5aeZ2131pchz/
+ cpzySsS+UjktIa7GAWWTHdFwuvGQLtS9LoyD0iirgbIMoUmbNZWLpdSRaSrT9Pr2ea4l
+ QfH2MeIrwiRU6FP/FRrVzCQe+sJMVS6p90sFgda5jGGExki/pO/bq5wFlhiKdDqt3Nl4
+ B8cWjVdTMJDbCUpAcIryM2sfNCKESzXIihmyvinRgxEuIqR8ut7+mzAw0G91XMezRLMs
+ 2oLBFkJLfr2TyFLzttPDE9ffJpYHUyN1NdEUOab6HNvv6BSYPpKWZigPcjHZ3WJaXf3g
+ 3FNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762850655; x=1763455455;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=xf1zq4jyHOWbwK01xk+oBgwyMuSyq580Nu2cX28XsRs=;
- b=lnWomSP0/vIvN9Xq3OPHRilJNgtLW88zMKg3h3zmpRBGwI8iOsPVazgvaaYjHglZpF
- SqKFLzfeAhYWK6w21A77ocBxRgkmDuModv2duv9+SxTma2E6gPknPCSI2Hwz/yYKqw7k
- t2Ly+eO8/a8sk9Bs6ZU5I3rOmqXQYUs25DcwojK5exdu42xyAEX3f7ugvpz+WwW3s7qv
- jKUDebdqBit2G/78tXqnkBNcgx8hHioVzT0Akuftf39pEdRky3/AulVqo3LiccSqiF0R
- /gnqDSIGPx37dXUKH9W6BmrQq/wfe4rMrZ/E9hyFu3H6V5qoQKQNpYWZd/DX8tCoV7NU
- Jb/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW716RV/nVOo237HE+g+FalR9GpVZJ+674fiYbebatGxOrJU1EWEsMR6dlqX9hvtcVOC6M+DJg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yym/9M0PtqBimXaG8tPU2xnF2C619ODsViknG5vsCAeU/vabq+0
- ch0T1EJlthcgB4Zc2yeVFceNeYY/JMRbGsS/XYQKP4pD76BWmTEP5tbT0W37rprQsWMYd219dSQ
- ISD1qSs9AyS4Aae+qDC1+n+CHYF6b99quygyJcdxqPQ==
-X-Gm-Gg: ASbGnctQX5Tcgd3i+gGrqDQjgmmG27kf3wj3CHjgW3GPpyOzfSKx1rdXOnpF5M2qlWG
- t+OO+MAzWvyq+yoxOSa3O/IrujrP5zo9SH0VV6J5VtmQ52F0k0AemCWCA/k+jZHAXCX9/RQnUVy
- mWlOK+YctpwOE7GL0BmCVmdULuRajELrmNsAFyAt5Q6K8IKtFe0mb1ZaO/7tbB5R0F7Yo0ZRE5F
- 6o7TTIZIBvnxJZP/ZVDsP1NrPfU9VtkyeAj5fzQuYm/xvSc+5kuqto3PaqgmcETYhW0My/2a2Rh
- KF3yh3kz4vI2ZwI91bVIKzmBqrFAER0x20tZck6dYBqyAjd2BEc=
-X-Google-Smtp-Source: AGHT+IHuri/yWdbeUmXYd8oeK1BYoI1lnc8pxq4qC7jIOxOEcdaggeVqkKtzKAerSFYstKotkeCmlKDD+tdUux5b+2E=
-X-Received: by 2002:a05:690c:6c86:b0:788:284:39e3 with SMTP id
- 00721157ae682-78802843f98mr27126757b3.26.1762850655452; Tue, 11 Nov 2025
- 00:44:15 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762850682; x=1763455482;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Am8ezp823Xr90r1GvGTIHKQe90mGwatBZ+Td45nu04A=;
+ b=DlFgY9WSLFoIUyHg+UVZeuGExrqtFWV8BVsd8IRFyJEi3+UOYFHatPpyb28dlLzDkP
+ nq/p4BssKe1XWlmvycHuPZMKiE4Nt7vDu2vPhidNCzMVwmLzssDTyUrWBL/c1hJkrNyo
+ F+ODfsZ1WpxM9i5UJQpGNjuQqVSwnQ37VxR2Zy32Tw62S7VWFLAKOGzrtPGq4p2hnYdT
+ yTl23OeaHJQ/ld0NTLJLLR22MEEE4K5TIhugNcFOPbMUr3zVq013PVgOhVXNpn/KuIOH
+ VuUebpqna2u07WxJuozd4DCH3Uo4wQzmAtXqONGb2cUDQCkPMRFGrUe9tDkMb/d3vb7P
+ CoTw==
+X-Gm-Message-State: AOJu0YzehITAR8/R2gA1rcghUaU6S8MuzdJhDeNIRhlAltovuJRg7Szd
+ HMJrK5gcGZ+DpiWrky9ErT2mj/K10tbyqxVWoPQsqbuJo8YtcDkI9RbpMYqvfk07yAjl0GYmL9J
+ wQCVfmYpw9NebM9eCXroqSqj9ehPa3dmOh0/yBfIBwQ==
+X-Gm-Gg: ASbGncu4BrFWzrKXdCpb2EyKY1yKn0+R/hMqct06FFfEqeMfAnCTo6vdB82n4xKu9zx
+ 97nOyXKJn3tSJWQkZDJO2H6ynFg5hm8vdy34wbnQZULOkiMn5f5lMxLkp9h+jUXLXFrnbSNFQdY
+ ALz3GG/rxJJJ8d6/WlY0emgE7bhiqzv2vooVXU1fr8BrGN2J1rSyRb02rNKemAM1DsaatQyrEeL
+ TglNKkxf4Ihk6l7b3ulcQNHwQFvWUTu12JVjdHBS+IS7FwFXObP19ifXnNfdw==
+X-Google-Smtp-Source: AGHT+IGOHryPw0JJd5j2sK60UO99w8b8ujEDbGnDnspcN2oT1RhZaFr4/U5vq0jH17p/JICUY53L8wu/SjVOm6Jb6ps=
+X-Received: by 2002:a05:620a:3729:b0:8b2:6eba:c45f with SMTP id
+ af79cd13be357-8b26ebac841mr939483085a.11.1762850682467; Tue, 11 Nov 2025
+ 00:44:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-7-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251109101010.306268-7-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Nov 2025 10:43:38 +0200
-X-Gm-Features: AWmQ_bnrxRka7YB55_M1Hl8MJ0NR6J8Mn6l6RkDO4V7YMECVh2ItvQ3ARBMKFn8
-Message-ID: <CAC_iWjKQke5sO+n2rwODWGi0OPi6xAHSNyKBBFyAG-j+zmDR1A@mail.gmail.com>
-Subject: Re: [PATCH 6/9] test: cmd/fdt: do not use fixed buffer addresses
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>, 
- Harrison Mutai <harrison.mutai@arm.com>, Peng Fan <peng.fan@nxp.com>, 
- Ben Dooks <ben.dooks@codethink.co.uk>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
+References: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
+ <20250926141351.1755829-11-abdellatif.elkhlifi@arm.com>
+In-Reply-To: <20250926141351.1755829-11-abdellatif.elkhlifi@arm.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 11 Nov 2025 14:14:31 +0530
+X-Gm-Features: AWmQ_bkCMjY4h0e-8EhDFkw3nFfWnlC_j9_EgtOSLt7DD9zSg3iDg_f-jZ6rGpY
+Message-ID: <CADg8p94TqW1bvS7nqx8wuvo03w8wZ7T5jLbRG7Crquyc6MABFQ@mail.gmail.com>
+Subject: Re: [PATCH v5 10/24] fwu_arm_psa: Read the FWU directory through
+ get_image_info()
+To: abdellatif.elkhlifi@arm.com
+Cc: u-boot@lists.denx.de, Davidson kumaresan <davidson.kumaresan@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Casey Connolly <casey.connolly@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,179 +96,906 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 9 Nov 2025 at 12:10, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Fri, 26 Sept 2025 at 19:44, <abdellatif.elkhlifi@arm.com> wrote:
 >
-> The location of memory depends on the board. Do not assume memory at fixe=
-d
-> memory locations. Use memalign() instead to allocate a buffer.
+> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Implement efi_fill_image_desc_array()
+>
+> Arm PSA implementation of efi_fill_image_desc_array() reads
+> the images information from the cached directory in Secure
+> world then populates the images descriptors.
+>
+> The FWU Arm PSA setup ABIs have been implemented to allow
+> reading the directory data.
+>
+> The ABIs are specified by the Platform Security Firmware Update for
+> the A-profile Arm Architecture specification [1].
+>
+> For more details about PSA please see [2].
+>
+> The implemented ABIs are as follows:
+>
+> FWU_DISCOVER
+> FWU_OPEN
+> FWU_READ_STREAM
+> FWU_COMMIT
+>
+> [1]: DEN0118, 1.0 A:
+>     https://developer.arm.com/documentation/den0118/latest/
+> [2]: https://www.psacertified.org/
+>
+> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> Signed-off-by: Davidson kumaresan <davidson.kumaresan@arm.com>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+>
 > ---
->  test/cmd/fdt.c      |  8 ++++++--
->  test/common/print.c | 37 ++++++++++++++++---------------------
->  2 files changed, 22 insertions(+), 23 deletions(-)
 >
-> diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
-> index b950123b6da..4c3c6308ab4 100644
-> --- a/test/cmd/fdt.c
-> +++ b/test/cmd/fdt.c
-> @@ -265,7 +265,7 @@ FDT_TEST(fdt_test_addr_resize, UTF_CONSOLE);
->  static int fdt_test_move(struct unit_test_state *uts)
->  {
->         char fdt[256];
-> -       ulong addr, newaddr =3D 0x10000;
-> +       ulong addr, newaddr;
->         const int size =3D sizeof(fdt);
->         uint32_t ts;
->         void *buf;
-> @@ -275,8 +275,10 @@ static int fdt_test_move(struct unit_test_state *uts=
-)
->         ts =3D fdt_totalsize(fdt);
+> Changelog of changes:
+> ===========================
 >
->         /* Moved target DT location */
-> -       buf =3D map_sysmem(newaddr, size);
-> +       buf =3D memalign(8, size);
-> +       ut_assertnonnull(buf);
->         memset(buf, 0, size);
-> +       newaddr =3D map_to_sysmem(buf);
+> v5:
 >
->         /* Test moving the working FDT to a new location */
->         ut_assertok(run_commandf("fdt move %08lx %08lx %x", addr, newaddr=
-, ts));
-> @@ -288,6 +290,8 @@ static int fdt_test_move(struct unit_test_state *uts)
->         ut_assert_nextline("Total of %d byte(s) were the same", ts);
->         ut_assert_console_end();
+> * As suggested by Ilias: Implement efi_fill_image_desc_array() for PSA
+>    instead of changing efi_firmware_get_image_info()
+> * Address kernel-doc warnings
 >
-> +       free(buf);
+> v4:
+>
+> * Update the function headers in fwu_arm_psa.c to pass kernel-doc tests
+>
+> v2:
+>
+> * As suggested by Michal: Add /** for marking kernel-doc format
+>
+> v1:
+>
+> * Implement get_image_info()
+>
+>  include/fwu_arm_psa.h         | 187 +++++++++++
+>  lib/fwu_updates/fwu_arm_psa.c | 573 +++++++++++++++++++++++++++++++++-
+>  2 files changed, 759 insertions(+), 1 deletion(-)
+>
+> diff --git a/include/fwu_arm_psa.h b/include/fwu_arm_psa.h
+> index 5e1229f3bdb..9eb67ef4243 100644
+> --- a/include/fwu_arm_psa.h
+> +++ b/include/fwu_arm_psa.h
+> @@ -10,9 +10,16 @@
+>  #ifndef __FWU_ARM_PSA_H
+>  #define __FWU_ARM_PSA_H
+>
+> +#include <efi_loader.h>
+>  #include <linux/bitfield.h>
+>  #include <u-boot/uuid.h>
+>
+> +#define DEFAULT_HW_INSTANCE            (1)
 > +
->         return 0;
->  }
->  FDT_TEST(fdt_test_move, UTF_CONSOLE);
-> diff --git a/test/common/print.c b/test/common/print.c
-> index 2ac7eeed2c1..f33476a36b4 100644
-> --- a/test/common/print.c
-> +++ b/test/common/print.c
-> @@ -266,74 +266,70 @@ static int print_do_hex_dump(struct unit_test_state=
- *uts)
->  {
->         u8 *buf;
->         int i;
-> +       ulong addr;
+> +/* Default values of the ESRT fields which are not supported at this stage */
+> +#define PACKAGE_VERSION_NOT_SUP                (0xffffffff)
+> +#define LAST_ATTEMPT_NOT_SUP           (0)
+> +
+>  #define FWU_BUFFER_PAGES               (1024)
 >
->         buf =3D calloc(1, BUF_SIZE);
->         ut_assertnonnull(buf);
-> +       addr =3D map_to_sysmem(buf);
->         for (i =3D 0; i < 0x11; i++)
->                 buf[i] =3D i * 0x11;
+>  /* 4 MB buffer shared with secure world */
+> @@ -26,6 +33,13 @@
+>  #define TS_FWU_SERVICE_UUID            "38a82368-061b-0e47-7497-fd53fb8bce0c"
+>  /* In little-endian equivalent to:  6823a838-1b06-470e-9774-0cce8bfb53fd */
 >
->         /* bytes */
->         print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, buf, 0x12);
->         ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc=
- dd ee ff  ..\"3DUfw........",
-> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf);
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->         ut_assert_nextline("%0*lx: 10 00                                 =
-           ..",
->                            IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf + 0x10UL);
-> +                          addr + 0x10UL);
->         ut_assert_console_end();
+> +/* TS FWU directory UUID string (in big-endian format) */
+> +#define FWU_DIRECTORY_CANONICAL_UUID   "d958eede-4751-d34a-90a2-a541236e6677"
+> +/* In little-endian equivalent to:  deee58d9-5147-4ad3-a290-77666e2341a5 */
+> +
+> +/* The entries correspond to the payloads in the storage device and the fake ESRT image */
+> +#define FWU_DIRECTORY_IMAGE_ENTRIES_COUNT (CONFIG_FWU_NUM_IMAGES_PER_BANK + 1)
+> +
+>  #define TS_RPC_MEM_RETRIEVE            (0xff0001)
+>  #define TS_RPC_SERVICE_INFO_GET                (0xff0003)
+>  #define RPC_SUCCESS                    (0)
+> @@ -34,6 +48,11 @@
+>  #define GET_SVC_IFACE_ID(x)            \
+>                          ((u8)(FIELD_GET(SVC_IFACE_ID_GET_MASK, (x))))
 >
->         /* line length */
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 8, 1, buf, 0x12, true);
->         ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77  ..\"3DUfw",
-> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf);
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->         ut_assert_nextline("%0*lx: 88 99 aa bb cc dd ee ff  ........",
->                            IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf + 0x8UL);
-> +                          addr + 0x8UL);
->         ut_assert_nextline("%0*lx: 10 00                    ..",
->                            IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf + 0x10UL);
-> +                          addr + 0x10UL);
->         ut_assert_console_end();
+> +#define SVC_ID_MASK                    GENMASK(15, 0)
+> +#define SVC_IFACE_ID_SET_MASK          GENMASK(23, 16)
+> +#define PACK_SVC_IFACE_ID(svc, iface)  (FIELD_PREP(SVC_ID_MASK, (svc)) | \
+> +                                       FIELD_PREP(SVC_IFACE_ID_SET_MASK, (iface)))
+> +
+>  #define HANDLE_MSW_MASK                        GENMASK(63, 32)
+>  #define HANDLE_LSW_MASK                        GENMASK(31, 0)
+>  #define GET_FWU_BUF_MSW(x)             \
+> @@ -41,6 +60,174 @@
+>  #define GET_FWU_BUF_LSW(x)             \
+>                                 ((u32)(FIELD_GET(HANDLE_LSW_MASK, (x))))
 >
->         /* long line */
->         buf[0x41] =3D 0x41;
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0x40, 1, buf, 0x42, true)=
-;
->         ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc=
- dd ee ff 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00=
- 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00=
- 00  ..\"3DUfw........................................................",
-> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf);
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->         ut_assert_nextline("%0*lx: 00 41                                 =
-                                                                           =
-                                                                           =
-     .A",
->                            IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf + 0x40UL);
-> +                          addr + 0x40UL);
->         ut_assert_console_end();
->
->         /* 16-bit */
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 2, buf, 0x12, true);
->         ut_assert_nextline("%0*lx: 1100 3322 5544 7766 9988 bbaa ddcc ffe=
-e  ..\"3DUfw........",
-> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf);
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->         ut_assert_nextline("%0*lx: 0010                                  =
-   ..",
->                            IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf + 0x10UL);
-> +                          addr + 0x10UL);
->         ut_assert_console_end();
->
->         /* 32-bit */
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 4, buf, 0x14, true);
->         ut_assert_nextline("%0*lx: 33221100 77665544 bbaa9988 ffeeddcc  .=
-.\"3DUfw........",
-> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf);
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->         ut_assert_nextline("%0*lx: 00000010                             .=
-...",
->                            IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf + 0x10UL);
-> +                          addr + 0x10UL);
->         ut_assert_console_end();
->
->         /* 64-bit */
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 16, 8, buf, 0x18, true);
->         ut_assert_nextline("%0*lx: 7766554433221100 ffeeddccbbaa9988  ..\=
-"3DUfw........",
-> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf);
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->         ut_assert_nextline("%0*lx: 0000000000000010                   ...=
-.....",
->                            IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf + 0x10UL);
-> +                          addr + 0x10UL);
->         ut_assert_console_end();
->
->         /* ASCII */
-> @@ -345,8 +341,7 @@ static int print_do_hex_dump(struct unit_test_state *=
-uts)
->         buf[8] =3D 255;
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 1, buf, 10, true);
->         ut_assert_nextline("%0*lx: 00 1f 20 21 7e 7f 80 81 ff 99         =
-           .. !~.....",
-> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> -                          (uintptr_t)buf);
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->         ut_assert_console_end();
->         free(buf);
->
-> --
-> 2.51.0
->
+> +enum fwu_abis {
+> +       FWU_DISCOVER = 0,
+> +       FWU_OPEN = 19,
+> +       FWU_READ_STREAM = 21,
+> +       FWU_COMMIT = 22,
+> +       /* To be updated when adding new FWU IDs */
+> +       FWU_FIRST_ID = FWU_DISCOVER, /* Lowest number ID */
+> +       FWU_LAST_ID = FWU_COMMIT, /* Highest number ID */
+> +};
+> +
+> +enum fwu_abi_errcode {
+> +       FWU_UNKNOWN = 1,
+> +       FWU_BUSY,
+> +       FWU_OUT_OF_BOUNDS,
+> +       FWU_AUTH_FAIL,
+> +       FWU_NO_PERMISSION,
+> +       FWU_DENIED,
+> +       FWU_RESUME,
+> +       FWU_NOT_AVAILABLE,
+> +       MAX_NUMBER_FWU_ERR
+> +};
+> +
+> +/* Container structure and helper macros to map between an FF-A error and relevant error log */
+> +struct fwu_abi_errmap {
+> +       char *err_str[MAX_NUMBER_FWU_ERR];
+> +};
+> +
+> +#define FWU_ERRMAP_COUNT (FWU_LAST_ID - FWU_FIRST_ID + 1)
+> +#define FWU_ID_TO_ERRMAP_ID(fwu_id) ((fwu_id) - FWU_FIRST_ID)
+> +
+> +/**
+> + * struct fwu_open_args - fwu_open ABI arguments
+> + * @function_id: fwu_open service ID
+> + * @image_type_guid: GUID of the image to be opened
+> + * @op_type: The operation that the Client will perform on the image
+> + */
+> +struct __packed fwu_open_args {
+> +       u32 function_id;
+> +       efi_guid_t image_type_guid;
+> +#define FWU_OP_TYPE_READ 0
+> +#define FWU_OP_TYPE_WRITE 1
+> +       u8  op_type;
+> +};
+> +
+> +/**
+> + * struct fwu_open_resp - fwu_open ABI returns
+> + * @status: The ABI return status
+> + * @handle: Staging context identifier
+> + */
+> +struct __packed fwu_open_resp {
+> +       int status;
+> +       u32  handle;
+> +};
+> +
+> +/**
+> + * struct fwu_discover_args - fwu_discover ABI arguments
+> + * @function_id: fwu_discover service ID
+> + */
+> +struct __packed fwu_discover_args {
+> +       u32 function_id;
+> +};
+> +
+> +/**
+> + * struct fwu_discover_resp - fwu_discover ABI returns
+> + * @status: The ABI return status
+> + * @service_status: the status of the service provider
+> + * @version_major: the ABI major version
+> + * @version_minor: the ABI minor version
+> + * @off_function_presence: the offset (in bytes) of the function_presence array
+> + *                         relative to the start of this data structure
+> + * @num_func: the number of entries in the function_presence array
+> + * @max_payload_size: the maximum number of bytes that a payload can contain
+> + * @flags: flags listing the update capabilities
+> + * @vendor_specific_flags: Vendor specific update capabilities flags
+> + * @function_presence: array of bytes indicating functions that are implemented
+> + */
+> +struct __packed fwu_discover_resp {
+> +       int status;
+> +       u16 service_status;
+> +       u8 version_major;
+> +       u8 version_minor;
+> +       u16 off_function_presence;
+> +       u16 num_func;
+> +       u64 max_payload_size;
+> +       u32 flags;
+> +       u32 vendor_specific_flags;
+> +       void *function_presence;
+> +};
+> +
+> +/**
+> + * struct fwu_read_stream_args - fwu_read_stream ABI arguments
+> + * @function_id: fwu_read_stream service ID
+> + * @handle: The handle of the context being read from
+> + */
+> +struct __packed fwu_read_stream_args {
+> +       u32 function_id;
+> +       u32  handle;
+> +};
+> +
+> +/**
+> + * struct fwu_read_stream_resp - fwu_read_stream ABI returns
+> + * @status: The ABI return status
+> + * @read_bytes: Number of bytes read by the current ABI call
+> + * @total_bytes: Total number of bytes that can be read
+> + * @payload: The read data by the current ABI call
+> + */
+> +struct __packed fwu_read_stream_resp {
+> +       int status;
+> +       u32  read_bytes;
+> +       u32  total_bytes;
+> +       u8  payload[];
+> +};
+> +
+> +/**
+> + * struct fwu_commit_args - fwu_commit ABI arguments
+> + * @function_id: fwu_commit service ID
+> + * @handle: The handle of the context being closed
+> + * @acceptance_req: If positive, the Client requests the image to be marked as
+> + *                  unaccepted
+> + * @max_atomic_len: Hint, maximum time (in ns) that the Update Agent can execute
+> + *                  continuously without yielding back to the Client state
+> + */
+> +struct __packed fwu_commit_args {
+> +       u32 function_id;
+> +       u32 handle;
+> +#define FWU_IMG_ACCEPTED 0
+> +#define FWU_IMG_NOT_ACCEPTED 1
+> +       u32 acceptance_req;
+> +       u32 max_atomic_len;
+> +};
+> +
+> +/**
+> + * struct fwu_commit_resp - fwu_commit ABI returns
+> + * @status: The ABI return status
+> + * @progress: Units of work already completed by the Update Agent
+> + * @total_work: Units of work the Update Agent must perform until fwu_commit
+> + *              returns successfully
+> + */
+> +struct __packed fwu_commit_resp {
+> +       int status;
+> +       u32 progress;
+> +       u32 total_work;
+> +};
+> +
+> +/*
+> + * FWU directory information structures
+> + */
+> +
+> +struct __packed fwu_image_info_entry {
+> +       efi_guid_t image_guid;
+> +       u32 client_permissions;
+> +       u32 img_max_size;
+> +       u32 lowest_acceptable_version;
+> +       u32 img_version;
+> +       u32 accepted;
+> +       u32 reserved;
+> +};
+> +
+> +struct __packed fwu_image_directory {
+> +       u32 directory_version;
+> +       u32 img_info_offset;
+> +       u32 num_images;
+> +       u32 correct_boot;
+> +       u32 img_info_size;
+> +       u32 reserved;
+> +       struct fwu_image_info_entry entries[FWU_DIRECTORY_IMAGE_ENTRIES_COUNT];
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+This can be a runtime allocation, similar to how it is implemented for
+the v2 metadata structure. That way, there won't be an issue of a
+mismatch between the above macro and the num_images field.
+
+> +};
+> +
+>  /**
+>   * fwu_agent_init() - Setup the FWU agent
+>   * Perform the initializations required to communicate
+> diff --git a/lib/fwu_updates/fwu_arm_psa.c b/lib/fwu_updates/fwu_arm_psa.c
+> index 8ac53cc9152..589a6283611 100644
+> --- a/lib/fwu_updates/fwu_arm_psa.c
+> +++ b/lib/fwu_updates/fwu_arm_psa.c
+> @@ -9,7 +9,6 @@
+>  #include <arm_ffa.h>
+>  #include <dm.h>
+>  #include <fwu_arm_psa.h>
+> -#include <efi_loader.h>
+>  #include <fwu.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> @@ -21,7 +20,465 @@ static u64 g_fwu_buf_handle;
+>  static u16 g_fwu_sp_id;
+>  static struct udevice *g_dev;
+>  static u16 g_svc_interface_id;
+> +static u64 g_max_payload_size;
+> +static u8 g_fwu_version_major;
+> +static u8 g_fwu_version_minor;
+>  static bool g_fwu_initialized;
+> +struct fwu_image_directory g_fwu_cached_directory;
+> +
+> +/* Error mapping declarations */
+> +
+> +int fwu_to_std_errmap[MAX_NUMBER_FWU_ERR] = {
+> +       [FWU_UNKNOWN] = -EOPNOTSUPP,
+> +       [FWU_OUT_OF_BOUNDS] = -ERANGE,
+> +       [FWU_AUTH_FAIL] = -EFAULT,
+> +       [FWU_BUSY] = -EBUSY,
+> +       [FWU_NO_PERMISSION] = -EPERM,
+> +       [FWU_DENIED] = -EACCES,
+> +       [FWU_RESUME] = -EAGAIN,
+> +       [FWU_NOT_AVAILABLE] = -ENAVAIL,
+> +};
+> +
+> +static struct fwu_abi_errmap err_msg_map[FWU_ERRMAP_COUNT] = {
+> +       [FWU_ID_TO_ERRMAP_ID(FWU_OPEN)] = {
+> +               {
+> +                       [FWU_UNKNOWN] =
+> +                       "FWU_UNKNOWN: Image type with GUID=image_type_guid does not exist",
+> +                       [FWU_DENIED] =
+> +                       "FWU_DENIED: An image cannot be opened for writing outside of this Staging state",
+> +                       [FWU_NOT_AVAILABLE] =
+> +                       "FWU_NOT_AVAILABLE: The Update Agent does not support the op_type for this image",
+> +               },
+> +       },
+> +       [FWU_ID_TO_ERRMAP_ID(FWU_READ_STREAM)] = {
+> +               {
+> +                       [FWU_UNKNOWN] =
+> +                       "FWU_UNKNOWN: Handle is not recognized",
+> +                       [FWU_DENIED] =
+> +                       "FWU_DENIED: The image cannot be temporarily read from",
+> +                       [FWU_NO_PERMISSION] =
+> +                       "FWU_NO_PERMISSION: The image cannot be read from",
+> +               },
+> +       },
+> +       [FWU_ID_TO_ERRMAP_ID(FWU_COMMIT)] = {
+> +               {
+> +                       [FWU_UNKNOWN] =
+> +                       "FWU_UNKNOWN: Handle is not recognized",
+> +                       [FWU_DENIED] =
+> +                       "FWU_DENIED: The image can only be accepted after activation",
+> +                       [FWU_AUTH_FAIL] =
+> +                       "FWU_AUTH_FAIL: Image closed, authentication failed",
+> +                       [FWU_RESUME] =
+> +                       "FWU_RESUME: The Update Agent yielded",
+> +               },
+> +       },
+> +};
+> +
+> +/**
+> + * fwu_to_std_errno() - convert FWU error code to standard error code
+> + * @fwu_errno: Error code returned by the FWU ABI
+> + *
+> + * Description: Map the given FWU error code as specified
+> + * by the spec to a U-Boot standard error code.
+> + *
+> + * Return: The standard error code on success. . Otherwise, failure.
+> + */
+> +static int fwu_to_std_errno(int fwu_errno)
+> +{
+> +       int err_idx = -fwu_errno;
+> +
+> +       /* Map the FWU error code to the standard u-boot error code */
+> +       if (err_idx > 0 && err_idx < MAX_NUMBER_FWU_ERR)
+> +               return fwu_to_std_errmap[err_idx];
+> +       return -EINVAL;
+> +}
+> +
+> +/**
+> + * fwu_print_error_log() - print the error log of the selected FWU ABI
+> + * @fwu_id:    FWU ABI ID
+> + * @fwu_errno: Error code returned by the FWU ABI
+> + *
+> + * Description: Map the FWU error code to the error log relevant to the
+> + * selected FWU ABI. Then the error log is printed.
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_print_error_log(u32 fwu_id, int fwu_errno)
+> +{
+> +       int err_idx = -fwu_errno, abi_idx = 0;
+> +
+> +       /* Map the FWU error code to the corresponding error log */
+> +
+> +       if (err_idx <= 0 || err_idx >= MAX_NUMBER_FWU_ERR)
+> +               return -EINVAL;
+> +
+> +       if (fwu_id < FWU_FIRST_ID || fwu_id > FWU_LAST_ID)
+> +               return -EINVAL;
+> +
+> +       abi_idx = FWU_ID_TO_ERRMAP_ID(fwu_id);
+> +
+> +       if (!err_msg_map[abi_idx].err_str[err_idx])
+> +               return -EINVAL;
+> +
+> +       log_err("%s\n", err_msg_map[abi_idx].err_str[err_idx]);
+> +
+> +       return 0;
+> +}
+> +
+> +/**
+> + * fwu_invoke_svc() - FWU service call request
+> + * @svc_id: FWU ABI function ID
+> + * @svc_name: FWU ABI function name
+> + * @req_args_sz: Size in bytes of the arguments of the FWU ABI function
+> + * @expect_resp_sz: Size in bytes of the response of the FWU ABI function
+> + * @extra_resp_bytes: Size in bytes of the extra response data
+> + *
+> + * Description: Invoke a FWU ABI by issuing a TS service call request.
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_invoke_svc(u32 svc_id, const char *svc_name,
+> +                         u32 req_args_sz, u32 expect_resp_sz,
+> +                         u32 *extra_resp_bytes)
+> +{
+> +       struct ffa_send_direct_data msg;
+> +       int ret;
+> +       int *svc_status_in_buf = g_fwu_buf, svc_status_in_reg;
+> +       u32 expect_total_resp_sz;
+> +
+> +       log_debug("FWU: Invoking %s\n", svc_name);
+> +
+> +       if (!expect_resp_sz || !svc_name || !req_args_sz) {
+> +               log_err("%s: Invalid invoke arguments\n", svc_name);
+> +               return -EINVAL;
+> +       }
+> +
+> +       msg.data0 = PACK_SVC_IFACE_ID(svc_id, g_svc_interface_id);
+> +       msg.data1 = GET_FWU_BUF_LSW(g_fwu_buf_handle);
+> +       msg.data2 = GET_FWU_BUF_MSW(g_fwu_buf_handle);
+> +       msg.data3 = req_args_sz;
+> +       msg.data4 = 0;
+> +
+> +       ret = ffa_sync_send_receive(g_dev, g_fwu_sp_id, &msg, 0);
+> +       if (ret) {
+> +               log_err("%s: FF-A error %d\n", svc_name, ret);
+> +               return ret;
+> +       }
+> +
+> +       if (msg.data0 != PACK_SVC_IFACE_ID(svc_id, g_svc_interface_id)) {
+> +               log_err("%s: Unexpected service/interface ID 0x%lx\n",
+> +                       svc_name, msg.data0);
+> +               return -EINVAL;
+> +       }
+> +
+> +       if (msg.data1 != RPC_SUCCESS) {
+> +               log_err("%s: TS RPC error 0x%lx\n", svc_name, msg.data1);
+> +               return -ECOMM;
+> +       }
+> +
+> +       svc_status_in_reg = (int)msg.data2;
+> +       if (*svc_status_in_buf != svc_status_in_reg) {
+> +               log_err("%s: Status mismatch (reg %d , buf %d)\n",
+> +                       svc_name, svc_status_in_reg, *svc_status_in_buf);
+> +               return -EINVAL;
+> +       }
+> +
+> +       if (svc_status_in_reg < 0) {
+> +               fwu_print_error_log(svc_id, svc_status_in_reg);
+> +               if (svc_status_in_reg != -FWU_RESUME)
+> +                       return fwu_to_std_errno(svc_status_in_reg);
+> +       }
+> +
+> +       if (!extra_resp_bytes)
+> +               expect_total_resp_sz = expect_resp_sz;
+> +       else
+> +               expect_total_resp_sz = expect_resp_sz + *extra_resp_bytes;
+> +
+> +       if (msg.data3 != expect_total_resp_sz) {
+> +               log_err("%s: Unexpected response size (%ld , %d)\n",
+> +                       svc_name, msg.data3, expect_total_resp_sz);
+> +               return -EINVAL;
+> +       }
+> +
+> +       if (svc_status_in_reg == -FWU_RESUME)
+> +               return fwu_to_std_errno(svc_status_in_reg);
+> +
+> +       return 0;
+> +}
+> +
+> +/**
+> + * fwu_discover() -  fwu_discover ABI
+> + *
+> + * Description: This call indicates the version of the ABI alongside a list of
+> + * the implemented functions (aka services).
+> + * Only max_payload_size is saved for future use.
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_discover(void)
+> +{
+> +       int ret;
+> +       struct fwu_discover_args *args = g_fwu_buf;
+> +       struct fwu_discover_resp *resp = g_fwu_buf;
+> +       char *svc_name = "FWU_DISCOVER";
+> +
+> +       /* Filling the arguments in the shared buffer */
+> +       args->function_id = FWU_DISCOVER;
+> +
+> +       /* Executing the FWU ABI through the FF-A bus */
+> +       ret = fwu_invoke_svc(args->function_id, svc_name, sizeof(*args),
+> +                            sizeof(int), NULL);
+> +       if (ret) {
+> +               log_debug("FWU_DISCOVER: error %d\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       g_max_payload_size = resp->max_payload_size;
+> +       g_fwu_version_major = resp->version_major;
+> +       g_fwu_version_minor = resp->version_minor;
+> +
+> +       log_debug("FWU: max_payload_size %llu\n", g_max_payload_size);
+> +       log_info("FWU: ABI version %d.%d detected\n", g_fwu_version_major,
+> +                g_fwu_version_minor);
+> +
+> +       return 0;
+> +}
+> +
+> +/**
+> + * fwu_open() -  fwu_open ABI
+> + * @guid: GUID of the image to be opened
+> + * @op_type: The operation that the Client will perform on the image
+> + * @handle: Staging context identifier
+> + *
+> + * Description: Returns a handle to the image with a given GUID.
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_open(const efi_guid_t *guid, u8  op_type,
+> +                   u32 *handle)
+> +{
+> +       int ret;
+> +       struct fwu_open_args *args = g_fwu_buf;
+> +       struct fwu_open_resp *resp = g_fwu_buf;
+> +       char *svc_name = "FWU_OPEN";
+> +
+> +       if (!guid || !handle)
+> +               return -EINVAL;
+> +
+> +       /* Filling the arguments in the shared buffer */
+> +       args->function_id = FWU_OPEN;
+> +
+> +       guidcpy(&args->image_type_guid, guid);
+> +       args->op_type = op_type;
+> +
+> +       /* Executing the FWU ABI through the FF-A bus */
+> +       ret = fwu_invoke_svc(args->function_id, svc_name,
+> +                            sizeof(*args), sizeof(*resp), NULL);
+> +       if (ret)
+> +               return ret;
+> +
+> +       *handle = resp->handle;
+> +
+> +       return 0;
+> +}
+> +
+> +/**
+> + * fwu_read_stream() -  fwu_read_stream ABI
+> + * @handle: The handle of the context being read from
+> + * @buffer: The destination buffer where the data will be copied to
+> + * @buffer_size: The size of the destination buffer
+> + *
+> + * Description: The call reads at most g_max_payload_size bytes from the Update
+> + * Agent context pointed to by handle.
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_read_stream(u32 handle, u8 *buffer, u32 buffer_size)
+> +{
+> +       int ret;
+> +       u32 curr_read_offset = 0, new_read_offset, fwu_buf_bytes_left;
+> +       struct fwu_read_stream_args *args = g_fwu_buf;
+> +       struct fwu_read_stream_resp *resp = g_fwu_buf;
+> +       char *svc_name = "FWU_READ_STREAM";
+> +
+> +       if (!buffer || !buffer_size)
+> +               return -EINVAL;
+> +
+> +       do {
+> +               /* Filling the arguments in the shared buffer */
+> +               args->function_id = FWU_READ_STREAM;
+> +               args->handle = handle;
+> +
+> +               /* Executing the FWU ABI through the FF-A bus */
+> +               ret = fwu_invoke_svc(args->function_id, svc_name, sizeof(*args),
+> +                                    sizeof(*resp), &resp->read_bytes);
+> +               if (ret)
+> +                       return ret;
+> +
+> +               if (resp->read_bytes > g_max_payload_size) {
+> +                       log_err("%s: Bytes read > max_payload_size (%d , %llu)\n",
+> +                               svc_name, resp->read_bytes,
+> +                               g_max_payload_size);
+> +                       return -EINVAL;
+> +               }
+> +
+> +               fwu_buf_bytes_left = FWU_BUFFER_SIZE - sizeof(*resp);
+> +
+> +               if (resp->read_bytes > fwu_buf_bytes_left) {
+> +                       log_err("%s: Bytes read > shared buffer (%d , %d)\n",
+> +                               svc_name, resp->read_bytes, fwu_buf_bytes_left);
+> +                       return -EINVAL;
+> +               }
+> +
+> +               if (resp->total_bytes > buffer_size) {
+> +                       log_err("%s: Total bytes > dest buffer (%d , %d)\n",
+> +                               svc_name, resp->total_bytes, buffer_size);
+> +                       return -EINVAL;
+> +               }
+> +
+> +               new_read_offset = resp->read_bytes + curr_read_offset;
+> +
+> +               if (new_read_offset > buffer_size) {
+> +                       log_err("%s: Bytes read > dest buffer (%d , %d)\n",
+> +                               svc_name, new_read_offset, buffer_size);
+> +                       return -EINVAL;
+> +               }
+> +
+> +               memcpy(buffer + curr_read_offset, resp->payload,
+> +                      resp->read_bytes);
+> +
+> +               curr_read_offset = new_read_offset;
+> +
+> +               if (curr_read_offset > resp->total_bytes) {
+> +                       log_err("%s: Offset bypassed total bytes (%d , %d)\n",
+> +                               svc_name, curr_read_offset, resp->total_bytes);
+> +                       return -EINVAL;
+> +               }
+> +
+> +       } while (curr_read_offset != resp->total_bytes);
+> +
+> +       return ret;
+> +}
+> +
+> +/**
+> + * fwu_commit() -  fwu_commit ABI
+> + * @handle: The handle of the context being closed
+> + * @acceptance_req: Acceptance status set by the Client
+> + * @max_atomic_len: Hint, maximum time (in ns) that the Update Agent can execute
+> + *                  continuously without yielding back to the Client state
+> + *
+> + * Description: The call closes the image pointed to by handle. The image can be
+> + * any entity opened with fwu_open().
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_commit(u32 handle, u32 acceptance_req, u32 max_atomic_len)
+> +{
+> +       struct fwu_commit_args *args = g_fwu_buf;
+> +       struct fwu_commit_resp *resp = g_fwu_buf;
+> +       char *svc_name = "FWU_COMMIT";
+> +       int ret;
+> +
+> +       /* Filling the arguments in the shared buffer */
+> +       args->function_id = FWU_COMMIT;
+> +       args->handle = handle;
+> +       args->acceptance_req = acceptance_req;
+> +       args->max_atomic_len = max_atomic_len;
+> +
+> +       /* Executing the FWU ABI through the FF-A bus */
+> +       ret = fwu_invoke_svc(args->function_id, svc_name,
+> +                            sizeof(*args), sizeof(*resp), NULL);
+> +
+> +       while (resp->status == -FWU_RESUME)
+> +               ret = fwu_invoke_svc(args->function_id, svc_name, sizeof(*args),
+> +                                    sizeof(*resp), NULL);
+> +
+> +       if (ret)
+> +               return ret;
+> +
+> +       log_debug("%s:  Progress %d/%d\n", svc_name, resp->progress,
+> +                 resp->total_work);
+> +
+> +       return 0;
+> +}
+> +
+> +/**
+> + * fwu_read_directory() - Read FWU directory information
+> + *
+> + * Description: Read FWU directory information.
+> + * For more details see fwu_image_directory structure.
+> + *
+> + * Return: 0 on success. Otherwise, failure.
+> + */
+> +static int fwu_read_directory(void)
+> +{
+> +       int ret, close_ret;
+> +       u32 handle = 0;
+> +       efi_guid_t dir_guid = {0};
+> +       char *uuid_str = FWU_DIRECTORY_CANONICAL_UUID;
+
+This has been defined in the spec as a GUID. Why are you declaring it
+as a UUID and then doing the conversion. Why can this not be used
+directly as a GUID?
+
+-sughosh
+
+> +
+> +       if (!uuid_str) {
+> +               log_err("FWU: No directory UUID provided\n");
+> +               return -EINVAL;
+> +       }
+> +
+> +       if (uuid_str_to_le_bin(uuid_str, dir_guid.b)) {
+> +               log_err("FWU: Invalid directory UUID\n");
+> +               return -EINVAL;
+> +       }
+> +
+> +       ret = fwu_open(&dir_guid, FWU_OP_TYPE_READ, &handle);
+> +       if (ret) {
+> +               log_err("FWU: Open image directory failed (err: %d)\n",
+> +                       ret);
+> +               return ret;
+> +       }
+> +
+> +       log_debug("FWU: Image directory handle (0x%x)\n", handle);
+> +
+> +       ret = fwu_read_stream(handle, (u8 *)&g_fwu_cached_directory,
+> +                             sizeof(g_fwu_cached_directory));
+> +       if (ret) {
+> +               log_err("FWU: Read image directory failed (err: %d)\n",
+> +                       ret);
+> +               goto close_handle;
+> +       }
+> +
+> +       log_debug("FWU: directory_version (%d)\n",
+> +                 g_fwu_cached_directory.directory_version);
+> +
+> +       /*
+> +        * Note: The expected images in the directory are:
+> +        * - The images to be updated
+> +        * - The ESRT image (an image containing ESRT data)
+> +        * The ESRT image is not involved in the FWU.
+> +        * It should be removed from the count.
+> +        */
+> +       g_fwu_cached_directory.num_images -= 1;
+> +
+> +       if (g_fwu_cached_directory.num_images !=
+> +           CONFIG_FWU_NUM_IMAGES_PER_BANK) {
+> +               log_err("FWU: Unexpected image count (%d , %d)\n",
+> +                       g_fwu_cached_directory.num_images,
+> +                       CONFIG_FWU_NUM_IMAGES_PER_BANK);
+> +               ret = -EINVAL;
+> +               goto close_handle;
+> +       }
+> +
+> +       log_debug("FWU: images to be updated (%d)\n",
+> +                 g_fwu_cached_directory.num_images);
+> +       log_debug("FWU: img_info_size (%d)\n",
+> +                 g_fwu_cached_directory.img_info_size);
+> +
+> +close_handle:
+> +       /* The Update Agent can execute for an unbounded time */
+> +       close_ret = fwu_commit(handle, FWU_IMG_NOT_ACCEPTED, 0);
+> +       if (close_ret)
+> +               log_err("FWU: Close image directory handle failed (err: %d)\n",
+> +                       close_ret);
+> +
+> +       return ret;
+> +}
+>
+>  /**
+>   * fwu_discover_ts_sp_id() - Query the FWU partition ID
+> @@ -257,7 +714,121 @@ int fwu_agent_init(void)
+>         if (ret)
+>                 return ret;
+>
+> +       ret = fwu_discover();
+> +       if (ret)
+> +               goto failure;
+> +
+>         g_fwu_initialized = true;
+>
+>         return 0;
+> +
+> +failure:
+> +       fwu_shared_buf_reclaim();
+> +       return ret;
+> +}
+> +
+> +/**
+> + * efi_fill_image_desc_array - PSA implementation for populating image descriptors
+> + * @image_info_size:           Size of @image_info
+> + * @image_info:                        Image information
+> + * @descriptor_version:                Pointer to version number
+> + * @descriptor_count:          Image count
+> + * @descriptor_size:           Pointer to descriptor size
+> + * @package_version:           Package version
+> + * @package_version_name:      Package version's name
+> + *
+> + * Initialize the update agent in secure world if not initialized.
+> + * Then, read the FWU directory information including the current
+> + * images information. For more details refer to fwu_image_directory structure.
+> + *
+> + * Return information about the current firmware image in @image_info.
+> + * @image_info will consist of a number of descriptors.
+> + * Each descriptor will be created based on efi_fw_image array.
+> + *
+> + * Return: EFI_SUCCESS on success. Otherwise, failure
+> + */
+> +efi_status_t efi_fill_image_desc_array(efi_uintn_t *image_info_size,
+> +                                      struct efi_firmware_image_descriptor *image_info,
+> +                                      u32 *descriptor_version,
+> +                                      u8 *descriptor_count,
+> +                                      efi_uintn_t *descriptor_size,
+> +                                      u32 *package_version,
+> +                                      u16 **package_version_name)
+> +{
+> +       int ret;
+> +       int required_image_info_size;
+> +       size_t image_info_desc_size = sizeof(*image_info);
+> +
+> +       if (!g_fwu_initialized) {
+> +               ret = fwu_agent_init();
+> +               if (ret) {
+> +                       log_err("FWU: Update agent init failed, ret = %d\n",
+> +                               ret);
+> +                       return EFI_EXIT(EFI_DEVICE_ERROR);
+> +               }
+> +       }
+> +
+> +       ret = fwu_read_directory();
+> +       if (ret)
+> +               return EFI_NOT_READY;
+> +
+> +       required_image_info_size = g_fwu_cached_directory.num_images *
+> +               image_info_desc_size;
+> +
+> +       if (*image_info_size < required_image_info_size) {
+> +               *image_info_size = required_image_info_size;
+> +               return EFI_BUFFER_TOO_SMALL;
+> +       }
+> +
+> +       *descriptor_version = EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION;
+> +       *descriptor_count = g_fwu_cached_directory.num_images;
+> +       *descriptor_size = image_info_desc_size;
+> +       *package_version = PACKAGE_VERSION_NOT_SUP; /* Not supported */
+> +       *package_version_name = NULL; /* Not supported */
+> +
+> +       for (int i = 0; i < g_fwu_cached_directory.num_images; i++) {
+> +               /* Only image indexes starting from 1 are supported */
+> +               image_info[i].image_index = i + 1;
+> +
+> +               /* Corresponding ESRT field: FwClass */
+> +               guidcpy(&image_info[i].image_type_id,
+> +                       &g_fwu_cached_directory.entries[i].image_guid);
+> +
+> +               image_info[i].image_id = image_info[i].image_index;
+> +               image_info[i].image_id_name = NULL; /* Not supported */
+> +
+> +               /* Corresponding ESRT field: FwVersion */
+> +               image_info[i].version =
+> +                       g_fwu_cached_directory.entries[i].img_version;
+> +
+> +               image_info[i].version_name = NULL; /* Not supported */
+> +               image_info[i].size =
+> +                       g_fwu_cached_directory.entries[i].img_max_size;
+> +
+> +               image_info[i].attributes_supported =
+> +                       IMAGE_ATTRIBUTE_IMAGE_UPDATABLE |
+> +                       IMAGE_ATTRIBUTE_AUTHENTICATION_REQUIRED;
+> +               image_info[i].attributes_setting =
+> +                               IMAGE_ATTRIBUTE_IMAGE_UPDATABLE;
+> +
+> +               /* Check if the capsule authentication is enabled */
+> +               if (IS_ENABLED(CONFIG_EFI_CAPSULE_AUTHENTICATE))
+> +                       image_info[i].attributes_setting |=
+> +                               IMAGE_ATTRIBUTE_AUTHENTICATION_REQUIRED;
+> +
+> +               /* Corresponding ESRT field: LowestSupportedFwVersion */
+> +               image_info[i].lowest_supported_image_version =
+> +                       g_fwu_cached_directory.entries[i].lowest_acceptable_version;
+> +
+> +               /* Corresponding ESRT field: LastAttemptVersion (not supported) */
+> +               image_info[i].last_attempt_version = LAST_ATTEMPT_NOT_SUP;
+> +
+> +               /* Corresponding ESRT field: LastAttemptStatus (not supported) */
+> +               image_info[i].last_attempt_status = LAST_ATTEMPT_NOT_SUP;
+> +
+> +               image_info[i].hardware_instance = DEFAULT_HW_INSTANCE;
+> +               image_info[i].dependencies = NULL; /* Not supported */
+> +       }
+> +
+> +       return EFI_SUCCESS;
+>  }
+> --
+> 2.43.0
+>
