@@ -4,73 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC328CCFA1A
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 12:58:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502A3CCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:08:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD88783B55;
-	Tue, 11 Nov 2025 13:58:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B8B1183B55;
+	Tue, 11 Nov 2025 14:08:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f3MaGwV1";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="R/Fuaok3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1E4B83015; Tue, 11 Nov 2025 13:58:36 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8667E83A98; Tue, 11 Nov 2025 06:48:41 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3502983B55
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 13:58:34 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b5a8184144dso546658066b.1
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 04:58:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1762865914; x=1763470714; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=v4d52rx9QfnT6y3SM6r7AaWMmeVwcE76O5MUFJZ0E28=;
- b=f3MaGwV1fj1Ynu1mHYwAgJS8fSr7Q4fkZwi8C6stzTDEWi80bxsO7muGCy5TjM9moS
- 4b2WZBEXfZdZl5hrfbLGgyrN7tcLoKZbJp6JeFxq206D1cjqJ+22LszdPDEVByTon9CX
- 4j9zB5INs7o3idQRWyU+37YT+BsVZWYoR4o1M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762865914; x=1763470714;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v4d52rx9QfnT6y3SM6r7AaWMmeVwcE76O5MUFJZ0E28=;
- b=ULz86aU9/ivHFe0TfDgBjheXmJIPqLV5sQEYORGK8ETFE/P+wbk4JNGYMYc0dPA3sX
- N5UCSaDOtB5CVZAgMvqRP3zHQvjeBCdvewj5wUNOJIHODWETqwBh7VChDq1unJ0otTwx
- /D69KhPtmR4/c6hVGxYl2+Enq8NTrEp7zCQOUs8eoAMq3EqHA0DYmp3TC55bZhXtC0YP
- 3xdiHWbC4BTqRneSfav96z7qO76/25xzetYuDxpZiQS+wnZ214/2ozNHUCWOHOYWT3hP
- LOSoGimttn+Rst06D6aDhzWSy9Bso+ZlCTSPz4OjQ9aPexOvEzm7fCF08ucB75KI9B2F
- V+FA==
-X-Gm-Message-State: AOJu0YxjqUKdV1MJ5ZCkNTX+7Vq9v4eCjnWcHr0iwJ0OQGCCG+d678At
- XeYSKr0awwQJ6IYsp4B0yPiOEwTWMTXJYXwxnwCXUuyyJYuAYk5BhBCEn4iAXwKphBXznjSGD1R
- SLaKHmQl552/+HZoB2uYnXeHvcWwh/v6JxUsBBbQePprSWDWrEB8=
-X-Gm-Gg: ASbGncsylkQ7bGozs2nOOrGQof5Pe/4187BV36BhjYS5L5/brFuHKFRudhH4ALn79Bm
- I/L0kheMbOehbfbQDdO/S6wIi/Q2alokVigtA5atIfHWhQqz2XQgNa5Y4C7H1k1+5npsQrKR9wV
- 5qeMisV6QDVnJcS7lk4S2mZo8SxAR5bv1Me2r/nmM5fyQW2fpFNWbVUf8DPB5ZIhw79L8F1fGti
- AAJ0DO7r7mrs+bskT0rHzRROvhhP95GA2Il/akhFwBoWrzltlkXsVkV21Xr0FU6dOyOjUueucjE
- REus
-X-Google-Smtp-Source: AGHT+IFZER7AxKm7qPC7akawALoCP9QPJ2ySXqyUL568QTrvFGqBBziw69sr7C/uDafewhYHGY15jE85q0WXbZx4pGQ=
-X-Received: by 2002:a17:907:3e10:b0:b73:2299:b891 with SMTP id
- a640c23a62f3a-b732299b912mr204602566b.8.1762865913608; Tue, 11 Nov 2025
- 04:58:33 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42C2383AB4
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 06:48:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id B8878108FD6; Tue, 11 Nov 2025 06:48:30 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1762840117; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=Rt54J3cE4O8S5JyVDRSdQekzd61B5ayFld/HX0TVafc=;
+ b=R/Fuaok3ZZjS2u48hO/WWsVA0MXWKUrDP7wprFSbpTvnByuwFPC9q6GaiZwEoMh3M8BJ9t
+ y3SvGyaj8Wht6s0cKH7vIySWiHv/UgFVkmZDwDrIP+sUTxhaTmpUHAi5aWRzI7zPVT5qT/
+ xj0rYfViHgmso7G/WLXbXwCEHYcO74imIqwB1Y0pRBTYZzl9eCgr8j691rkts1ZBS2hIvu
+ H3s1gP+8TbYo2Rn2Ngs7+ftnI55v/5OffCQg2ETQsaWaC1yLmRm5S2fv9FZMxXT0hYsVxJ
+ AFbnFadF7ehStZVwL7rL+WhMDTTUTmjFGsB2MxeHBAQDnKqxM5nByLiX41OeJg==
+From: Heiko Schocher <hs@nabladev.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sean Edmond <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Yao Zi <ziyao@disroot.org>, briansune <briansune@gmail.com>
+Subject: [PATCH v2 0/5] Add support for SM3 secure hash
+Date: Tue, 11 Nov 2025 06:48:07 +0100
+Message-Id: <20251111054813.1966-1-hs@nabladev.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20251110154231.2629710-1-trini@konsulko.com>
-In-Reply-To: <20251110154231.2629710-1-trini@konsulko.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 11 Nov 2025 05:58:22 -0700
-X-Gm-Features: AWmQ_bm595rPRVPhUuCjjfrgnRZnPwxUwRKPWQ21PYg_o03o1wj5RQfwXKWkSHk
-Message-ID: <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
-Subject: Re: [PATCH] Gitlab: Add a "sage-lab" stage to access a board farm
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Tue, 11 Nov 2025 14:08:29 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,38 +93,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, 10 Nov 2025 at 08:42, Tom Rini <trini@konsulko.com> wrote:
->
-> This is the Gitlab side of adding support for the board lab connected to
-> the "konsulko-sage" runner. On the software side, this lab uses only
-> upstream labgrid. On the hardware side, each device under test is
-> connected to its own exporter (typically a Raspberry Pi 4) that must be
-> turned on (and cleanly turned off) as part of a given test cycle.
->
-> Add support for testing on a SolidRun Hummingboard 2 (imx6), Raspberry
-> Pi 3 and Raspberry Pi 4. In all cases, we enable additional options to
-> run more tests on the board. As we have some networking tests, we test
-> both the legacy network stack and lwIP. In the case of Pi platforms, we
-> test all of 32bit configuration, plain configuration and rpi_arm64, and
-> again with and without lwIP.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Note that for the Pi platforms we enable/disable CMD_BOOTEFI_SELFTEST
-> based on overall binary size. I've created
-> https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/issues/2
-> to track addressing that issue.
-> ---
->  .gitlab-ci-sage-lab.yml | 182 ++++++++++++++++++++++++++++++++++++++++
->  .gitlab-ci.yml          |   5 ++
->  2 files changed, 187 insertions(+)
->  create mode 100644 .gitlab-ci-sage-lab.yml
+Add SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and described
+at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
 
-Would it be possible to add some docs about this? Does the exporting
-rpi do a full system boot and then run some scripts to load things
-onto the board, then shut down?
+TPMv2 defines hash algo sm3_256, which is currently
+not supported and prevented TPMv2 chip with newer
+firmware to work with U-Boot. Seen this on a ST33TPHF2XI2C
 
-Regards,
-Simon
+    u-boot=> tpm2 init
+    u-boot=> tpm2 autostart
+    tpm2_get_pcr_info: too many pcrs: 5
+    Error: -90
+    u-boot=>
+
+Implement sm3 hash, so we can fix this problem.
+
+Azure build:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=190&view=results
+
+Changes in v2:
+rebase to
+6b27b688694: ("Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh")
+add Ilias to Series-cc
+add sm3_hash to header file, so we can use it.
+add comments from Ilias
+- use ARRAY_SIZE(hash_algo_list) instead of a fix number
+  in tpm2_get_pcr_info() for the count of supported hashes
+  in U-Boot.
+- add SM3 hash in tpm_tcg2
+Added Reviewed-by tag from Heinrich
+
+Heiko Schocher (5):
+  lib: Import rol32 function from Linux
+  lib: implement sm3 256 hash
+  test: cmd: hash: add unit test for sm3_256
+  tpm2: add sm3 256 hash support
+  test: cmd: fix a typo in md5 test
+
+ MAINTAINERS            |   7 +
+ boot/Kconfig           |   1 +
+ cmd/Kconfig            |  15 ++
+ cmd/Makefile           |   1 +
+ cmd/sm3sum.c           |  48 +++++++
+ cmd/tpm-v2.c           |   1 +
+ common/hash.c          |  43 +++++-
+ include/linux/bitops.h |  11 ++
+ include/tpm-v2.h       |  12 ++
+ include/u-boot/sm3.h   |  35 +++++
+ lib/Kconfig            |   7 +
+ lib/Makefile           |   1 +
+ lib/sm3.c              | 313 +++++++++++++++++++++++++++++++++++++++++
+ lib/tpm-v2.c           |   4 +-
+ lib/tpm_tcg2.c         |   9 ++
+ test/cmd/hash.c        |  48 ++++++-
+ 16 files changed, 552 insertions(+), 4 deletions(-)
+ create mode 100644 cmd/sm3sum.c
+ create mode 100644 include/u-boot/sm3.h
+ create mode 100644 lib/sm3.c
+
+-- 
+2.20.1
+
+base-commit: 9094482ca7576877b2bfaa57c8e73cfeb536f8b9
