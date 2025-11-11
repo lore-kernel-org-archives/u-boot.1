@@ -4,100 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40FF0CCFA1A
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 21:26:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E5ACCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 22:16:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B03B683BB5;
-	Tue, 11 Nov 2025 22:26:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2451283B83;
+	Tue, 11 Nov 2025 23:16:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ooAubT7K";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hfoHKgqg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E07183BE1; Tue, 11 Nov 2025 22:26:27 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id B74B083BB5; Tue, 11 Nov 2025 23:16:36 +0100 (CET)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CEBA83B8C
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 22:26:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63EB283AB4
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 23:16:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7c6dbdaced8so141068a34.1
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 13:26:25 -0800 (PST)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-656b7a2e7dcso78968eaf.1
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:16:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762896384; x=1763501184; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zlqctRYzh0Uucuzf7DFzI+AiJTcyWVUp+i8DxaHKU6g=;
- b=ooAubT7KvrA079y72roJDy1L1AO4TmuM1LTQ++K1NSJncIlpBLO6KgFiIipRL1t1tT
- c+X3+d4lYzMgvwOLXZkKGQnthVoT9LL9/P1sJsBk6roJ0ct5tRnJod3YqzJ2K1hBefPz
- 3+fdm+z+1eZi2wYaDFxVRuI7F1E+EKniT0Olw=
+ d=konsulko.com; s=google; t=1762899393; x=1763504193; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vp2eZY9iOUIhhqS/jb63Fggrx+r0Id8ueo4HIqSrG/g=;
+ b=hfoHKgqgZ84SjW/CicNg/Ex20ePjl6zFnkfBQjGzY8LQEaZLaEkG6OEJcsnLCoglbM
+ Jojy3KYeIfIhm+Km+GWWyUwkOJ3CVx5LBF14v5Arcf5MLVKIZJs75AeyAbg+pfwRF4jI
+ Tgd6Ol8d4CNTfLXIdTxjMU6fgClRPBX9RqEMw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762896384; x=1763501184;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zlqctRYzh0Uucuzf7DFzI+AiJTcyWVUp+i8DxaHKU6g=;
- b=n0SRPV4vpDGisSyfZHm+VPf4sIYqoSQxqyz3EaIaqTBY+l6/Vq9LFrpifFdNKMJHrD
- JWfJo+C80Sli7ymXzg+Us16OWq1JHF0d6Bz40hupnBkHtf5x5LyS/dbyQAy2fVEXC2c/
- P95a+pjf8+hzHvPda4BSCsRyXXd/AXBH7YaMjsg/LqE4hLtDdwKWCQf2d47NK7xzQZnE
- cGQev13xPMVpzdydP8r/ypta+7s3eULtzSgwlPPkG3KP+mJpwSJPnuQBS279iAsNAn1H
- VLz8KUirugaoLwHxknje4M+4164JHwiReM9vV7jyxeuZPcPdvxW+TxV+y6IeTRM9k3zf
- IWxg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXKVkq+Fh71kr0giKVVBrGV/HxrU4mrBDKY2YqJg03N4EDPt5hAjEwvyRM2+46JaEgGh/uaoxk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzyXcGCg2JvF+P/q6+G2pGhCob3agVqfR59sBaTumrPinhTtTwu
- wQCbLbsX9hwqsnNUaH2nMBtZg5e8w3OPPbzM3PWMiexYTOWlG0vytdvDJV631abtys8=
-X-Gm-Gg: ASbGnct9EZw3waQeZ/7voaZGPfGicNrKr92R8A2UnUfRSwVcIVx47Jz9mZ105jf2ktU
- r+6CcTFNHfJ8Rkf+5BrerIVFq3t2UrDeRFhhBBpdYqk1We07yfhjvqCagz3vMkewnWyVxuw01kc
- kerx4njdTChF4txDJ72bGGQceGRq5cWV6uOfhbiJ57UZkCcuea2L0Ja5XhOK3dOVyT1rvd3QRTe
- Peh41kwhx9g+wF4UnMbv0+W00a+hyRpIP8Vb/0DdMPqG/Kq/W8uTDpmxvkToumJND7GjOY2cFcs
- Fvp+3WKdcCcUh0yRREzGVa9w3CmmaF7KhUL2CG0kiApUiM0TPNCe51Qu4n05TRxOjRsy4/jilwm
- bHmji+batog1cNmpl9TqAZ5Do9YJpREYdcpWYeEH93TDx8BrCbusg86waTUze9mnImCyPua5bTE
- XcWeEeO0LipRi8tCv1FTz0F/175iPnl/PrQsgu2nA=
-X-Google-Smtp-Source: AGHT+IF6IoV8RW33nCwzOCZekw7tHyfrttgSosLH9lWc4aozA2jaR9s06IyZsWvfhPh1N3AONPV41g==
-X-Received: by 2002:a05:6830:7106:b0:7c7:471:55ff with SMTP id
- 46e09a7af769-7c72e203b08mr314000a34.10.1762896384171; 
- Tue, 11 Nov 2025 13:26:24 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1762899393; x=1763504193;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vp2eZY9iOUIhhqS/jb63Fggrx+r0Id8ueo4HIqSrG/g=;
+ b=fOOkU/P3Th7aj0+7bu29hedm65B50QZHKsWvPkNiMyiX4Mbj3EtYGbymWuGPvFjwjL
+ e+q9mEaKV19TLPSTec+sKifdulxl0u1C1+nyjyQw7TPB/C5xjGKcf4tm9oiC5DKg9RXu
+ /X0qy31/Rd/JebbEOr9VrusDrE9ao3iG5bid/Adq811CrVSXXSLxWMQtYDLl37IDstxD
+ fNzrj0is94me+SemVbcm5d6vQa1XDhmugzG0Ob1ugI9cCzsh4qp7gtNEGLcFO6aMHyH0
+ gi6vLYahwRCWmno/60dJFcC5SACI2pfnZIp9bKAAbh/7PWqO8GqgxXojlx7YZIpbwwgq
+ n5jw==
+X-Gm-Message-State: AOJu0Yww7dkY40pJmkJQao4r2adOS73bPWxvpZd0DbkHzePuItvfdL9s
+ wLye+YSRCcmAbHKDmLfUBLSqt0h4amrShUTas93gBuDcSXXpt3suehsSf5W3tyO2X3s=
+X-Gm-Gg: ASbGncuBGYmwtqURR1hDf3B0eymuRWWtBwsxth6y5h61q7e9wNSZ0h/ff8wJ8l1AEwC
+ YinQM5VRtGw+UWJIAFyNUiHuzl+SApLBLoa9C7I+KThytmcYhAEDtyBDWvg4TDH72RG8j7Oj39p
+ JwhTnQ6VxswXiGoEcN1Sz74R+p37KyJUfmCddab0QlHQt0eg4nleMVmZrzmXMfSc9onKPkRY8XY
+ Au4V04b55T7LBfsOizEts3uG79afnFH5LkOViA7ECUOzhwAiVzyREJ7Apr/T3PiKUV4ZrNw/w98
+ LCj0S3FsYoazNF9F67NEH0UNLqmBlw4yUayCMReuCIrjqoA4LtZ3odvHYo11y1eD1LR2/f4WXdO
+ x+U6Ow8EvTPjJXi8nEaogMHNlhYkOGs8H/A/ZR5FmYL7LJjU73j48qSlMbfIdmDyjKCy08wkzV2
+ xvjGWy/KXRekKYFbc6X7uztecyQqwoCMaKuhOzrTrBon4T9Kh3
+X-Google-Smtp-Source: AGHT+IFrTkhxvP+X/AdR2/DdIKnGEubp0MtUFioJ3L0iXV+NDT0RCdkz6eUTnu0FQUkbF6IgHVKn1Q==
+X-Received: by 2002:a05:6808:1a19:b0:450:b14:7a6a with SMTP id
+ 5614622812f47-450745f4052mr353204b6e.60.1762899393076; 
+ Tue, 11 Nov 2025 14:16:33 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f0f583a9sm7529158a34.9.2025.11.11.13.26.22
+ 5614622812f47-4500253ce65sm7448872b6e.5.2025.11.11.14.16.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 13:26:23 -0800 (PST)
-Date: Tue, 11 Nov 2025 15:26:21 -0600
+ Tue, 11 Nov 2025 14:16:32 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Raymond Mao <raymond.mao@linaro.org>, Michal Simek <michal.simek@amd.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Peng Fan <peng.fan@nxp.com>, Ben Dooks <ben.dooks@codethink.co.uk>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH RESEND 1/9] test: fdt_test_apply requires
- CONFIG_OF_LIBFDT_OVERLAY
-Message-ID: <20251111212621.GX6688@bill-the-cat>
-References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-2-heinrich.schuchardt@canonical.com>
- <CAC_iWjK_SUEZsEzT3zb2BK-dwcXdp1gZoU880Wc1efSPAzftMw@mail.gmail.com>
- <b02be747-1843-4688-acf4-690366493635@canonical.com>
+To: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>, 
+ Quentin Schulz <foss+uboot@0leil.net>
+Cc: Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martin Schwan <m.schwan@phytec.de>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Alexander Graf <agraf@csgraf.de>, Loic Poulain <loic.poulain@linaro.org>, 
+ Tobias Olausson <tobias@eub.se>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Shiji Yang <yangshiji66@outlook.com>, 
+ Anton Moryakov <ant.v.moryakov@gmail.com>, E Shattow <e@freeshell.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251031-rsa-pss-always-v2-0-a29184ea064d@cherry.de>
+References: <20251031-rsa-pss-always-v2-0-a29184ea064d@cherry.de>
+Subject: Re: [PATCH v2 0/5] rsa: fix dependency, rename and relocate RSASSA
+ PSS symbols
+Message-Id: <176289939147.812914.10339160350215456166.b4-ty@konsulko.com>
+Date: Tue, 11 Nov 2025 16:16:31 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LdkmIZoWwtvCWxYS"
-Content-Disposition: inline
-In-Reply-To: <b02be747-1843-4688-acf4-690366493635@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,66 +114,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 31 Oct 2025 18:08:19 +0100, Quentin Schulz wrote:
 
---LdkmIZoWwtvCWxYS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> While historically signature verification is mostly done for FIT such
+> FIT_SIGNATURE dependency for signature algorithm makes sense, it isn't
+> the only kind of file we can verify signatures of. It can also be done
+> manually with rsa_verify_hash() with an embedded public key.
+> 
+> Considering the impacted code is guarded by RSA_VERIFY, let's make the
+> symbol depend on that otherwise selecting it without RSA_VERIFY won't do
+> anything. The FIT_SIGNATURE dependency wasn't also enough before as it
+> only implied RSA_VERIFY.
+> 
+> [...]
 
-On Tue, Nov 11, 2025 at 10:12:58PM +0100, Heinrich Schuchardt wrote:
-> On 11/11/25 09:29, Ilias Apalodimas wrote:
-> > Hi Heinrich
-> >=20
-> > On Sun, 9 Nov 2025 at 12:10, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> > >=20
-> > > The `fdt apply` sub-command is only available if CONFIG_OF_LIBFDT_OVE=
-RLAY
-> > > is enabled.
-> > >=20
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > ---
-> > >   test/cmd/fdt.c | 3 +++
-> > >   1 file changed, 3 insertions(+)
-> > >=20
-> > > diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
-> > > index 96a8488e172..a36f2dcdda8 100644
-> > > --- a/test/cmd/fdt.c
-> > > +++ b/test/cmd/fdt.c
-> > > @@ -1319,6 +1319,9 @@ static int fdt_test_apply(struct unit_test_stat=
-e *uts)
-> > >          char fdt[8192], fdto[8192];
-> > >          ulong addr, addro;
-> > >=20
-> > > +       if (!IS_ENABLED(CONFIG_OF_LIBFDT_OVERLAY))
-> > > +               return -EAGAIN;
-> >=20
-> > The asserts return CMD_RET_FAILURE on failures. Should't we use the sam=
-e here?
->=20
-> There is nothing wrong in CONFIG_OF_LIBFDT_OVERLAY=3Dn. This is not a fai=
-lure.
->=20
-> -EAGAIN signals a skipped test.
-> Look for EAGAIN in test/test-main.c.
->=20
-> We should describe this in doc/develop/tests_writing.rst.
+Applied to u-boot/next, thanks!
 
-We should document it, yes. I don't have a strong preference over using
-this rather than just not compiling the test in to start with.
-
---=20
+[1/5] boot: fix incorrect dependency of FIT_RSASSA_PSS
+      commit: 63686bf6e02b57a259e6e08d6439a7d1e154f5cc
+[2/5] boot: remove duplicate config entry for VPL_FIT
+      commit: 013033a2f9bd2bc634688bbaa0fbd91eb729d108
+[3/5] boot: group SPL_FIT symbols together
+      commit: 973019000c2734ae560e5f4f5a58c9cdf85cffbb
+[4/5] rsa: rename FIT_RSASSA_PSS to RSASSA_PSS and move symbols under lib/rsa
+      commit: 360dd89b361dde2a0bbad65763538e1eea7d3c94
+[5/5] rsa: update doxygen doc for RSA signature verification to mention PSS
+      commit: c50f6b11b3242adba0c8a3a6a50082a2eca01772
+-- 
 Tom
 
---LdkmIZoWwtvCWxYS
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaROp+QAKCRAr4qD1Cr/k
-CmVEAP4xtDbEDVI3J7Wo9YG/B/SQXeAXyC++ygCc1JedY4FMygEAiUb2ez9M18MT
-LzbUdOq8w4eltoyB0pJ1/yNLoqSdPgE=
-=VDeK
------END PGP SIGNATURE-----
-
---LdkmIZoWwtvCWxYS--
