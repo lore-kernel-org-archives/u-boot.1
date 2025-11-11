@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F7ADCCFA1A
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 15:26:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7092BCCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 15:56:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDCDC83B87;
-	Tue, 11 Nov 2025 16:26:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B1E9583B95;
+	Tue, 11 Nov 2025 16:56:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MYn6AlX6";
+	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="yamBwt+D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C2FF83B8F; Tue, 11 Nov 2025 16:26:40 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id C0ABB83B9D; Tue, 11 Nov 2025 16:56:30 +0100 (CET)
+Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44A7783966
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 16:26:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F9F883B91
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 16:56:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng22-54f98f-8.dhcp.inet.fi [84.249.143.8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d5VkQ5pdgz9tYp;
- Tue, 11 Nov 2025 16:26:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762874798;
+ key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
+ server-digest SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by meesny.iki.fi (Postfix) with ESMTPSA id 4d5WNs29FbzyTh;
+ Tue, 11 Nov 2025 17:56:29 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+ t=1762876589;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fGTSDQvA5JzO6WsCmWew5/2jH3ZoosiB8OqaE6zw0s8=;
- b=MYn6AlX65p7BjvRyPdKvQVV7l4Ka7SPj8sQwqd7XSwp1JJ1kqNstZq+20RRSlfzzdoassx
- 62AsVplLoiyhxKa6cdSvUYDuvbPXFs4UY4NJ9Hl1wv99RZ1CcpRxOxEdPEFceazYZKJ99I
- pfVdgd2Ds/WsZRPFc3JTNYMXqa6dPBchIsWb8qAPgJtTvm+mBMs5LQ7M9uN+cz4GBu2hAL
- ffzATUuIcZP9/JV46jmkpULi9epfaFQKhhzmrjv+REyG+vWQi9JJeOraAQXU6MV4jdG7+i
- lFLrEVSrYUfbaAoOsAJ5HqSETS6DeBmq8JnnwmoyaxibocGO9Jeco6Uguhex7w==
-Message-ID: <f1f10508-4767-4943-8411-8eb4bb0618aa@mailbox.org>
-Date: Tue, 11 Nov 2025 14:50:30 +0100
+ bh=briBkyX9X5oBs4aVSJciQHbaG9XsZRTFef9tD/631gw=;
+ b=yamBwt+DmFkRTlqzjxswmott/kC8DxXwBWGafJkloMHxcWqbzuaYoyJOlVXYheVLZqJgTs
+ oyoBw1d3w/mgblrjW7MQjYW2qh+mKazRH8c4jD6hVdvWmz13GEvRY7CRavUgJY2Wm6gao5
+ 4jLHi2NumUuahMn5w82V2fPXbU+fm7U=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=meesny; t=1762876589;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=briBkyX9X5oBs4aVSJciQHbaG9XsZRTFef9tD/631gw=;
+ b=UhIZKQ7/0ikGAC72hQBQzf7+1tW6WCv9PfNdezVfPYjbyNpFayyXWb1eGIVFZJcdWBsCgT
+ Wz6LHfxCCVUxUrI4Kltzg5KSpriNFgAcMYR0RLMoQOMXEYj5hPIGwLUERIooCA5o2owVYo
+ aNOzHN1+hX/cV1iBPIBq+Z4/E2k5+So=
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+ARC-Seal: i=1; s=meesny; d=iki.fi; t=1762876589; a=rsa-sha256; cv=none;
+ b=YwFCyCt/1OsLYumclvWlIN5AaIj4WszCpOpd5O7jC9SpeG/QJhFq1XrTHabTOrNcGNLHdP
+ Lb4LlAiuPHAgCGQTZNC+650XEYBEwMVt3BxEQs3VugbLL3eLBtr3nUzrZF0kHaEQjvgREc
+ QivldOKpks13rtag149xLIBjwu0D+vE=
+Date: Tue, 11 Nov 2025 17:56:27 +0200
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: How to use ECDSA for signature verification?
+Message-ID: <aRNcq79cr08IN5HE@kehys.lan>
+References: <aO1GvGrXUw-co84_@kehys.lan> <aQ98sHenb3G1MQDi@kehys.lan>
+ <DE5KUDXKQ20P.86VFM203YPJS@ti.com>
 MIME-Version: 1.0
-Subject: Re: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot
- augmented DT if DEVICE_TREE_DEBUG=1
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
- u-boot@lists.denx.de
-References: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
- <417e1b1a-0346-4297-9a72-7befc5b94311@gmx.de>
- <537299e3-05a1-4ff4-b594-9c73ed41a0cc@mailbox.org>
- <20251107155650.GE6688@bill-the-cat>
- <4b14ce54-6ba0-4e35-abad-6787b2d994fb@mailbox.org>
- <CAFLszTjjhOj8g63vs_hprykYrWvEM=YuwT4ZNDnuppuJ-8aXZw@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAFLszTjjhOj8g63vs_hprykYrWvEM=YuwT4ZNDnuppuJ-8aXZw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 1be22e79ae3aa86c59a
-X-MBO-RS-META: guc98hfgqg14wp3xj1mu4jrputf3fq8d
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <DE5KUDXKQ20P.86VFM203YPJS@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,21 +87,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/11/25 1:38 PM, Simon Glass wrote:
+Hello Anshul,
 
-Hello Simon,
+Tue, Nov 11, 2025 at 09:52:51AM +0530, Anshul Dalal wrote:
+>Hello Marko,
+>
+>On Sat Nov 8, 2025 at 10:54 PM IST, Marko Mäkelä wrote:
+>> Hi all,
+>>
+>> I am new to u-boot, please bear with me. I got CONFIG_FIT_SIGNATURE=y to
+>> work with the RSA algorithm, but not with ECDSA.
+>>
+>> My two main questions are:
+>>
+>> Is CONFIG_ECDSA_VERIFY only implemented for the two targets:
+>> rom_api_ops in arch/arm/mach-stm32mp/ecdsa_romapi.c
+>> cptra_ecdsa_ops in drivers/crypto/aspeed/cptra_ecdsa.c.
+>>
+>
+>Yes, those two seem to be the only one's implementing UCLASS_ECDSA.
+>
+>> Is it feasible to support something more modern than RSA signatures on a
+>> reasonably high-end target, such as ARMv8? Are there any suggestions or
+>> git commits that you would suggest as a reference?
+>>
+>
+>Should be possible, you can look at the current implementaitons of RSA
+>and lib/ecdsa/ecdsa-libcrypto.c for reference.
 
->>> Maybe we put it in the u-boot-extras repo for now as a standalone
->>> script, so people can be asked to run it and look at the output?
->> I'd say no, because the output is full of noise unless the phandle
->> non-resolution gets somehow improved.
-> 
-> Another idea would be to create an fdtdiff tool which does this. We
-> already have fdtgrep[1]
+Thank you. I will look at that.
 
-A new tool is not needed, up to date DTC retains the phandles across dtc 
--I dts -O dts and the result can be diff'd using regular diff.
+[snip]
 
--- 
+>> Rebuilding with CONFIG_ECDSA_VERIFY=y changed the error message to 
+>> the
+>> following:
+>>
+>> sha256,ecdsa256:dev-  error!
+>> Verification failed for '<NULL>' hash node in 'conf-1' config node
+>> Failed to verify required signature 'dev'
+>>
+>
+>This is probably due to U-Boot failing to find a driver with
+>UCLASS_ECDSA, you can verify by adding a "#define DEBUG" to the top of
+>lib/ecdsa/ecdsa-verify.c and check if the following error shows up:
+>
+>	ECDSA: Could not find ECDSA implementation: -19
+
+Thank you for the tip. So, the #define DEBUG would enable the debug() 
+statements. This indeed confirms my hypothesis:
+
+## Executing script at 90000000
+sha256,ecdsa256:devECDSA: Could not find ECDSA implementation: -19
+-  error!
+Verification failed for '<NULL>' hash node in 'conf-1' config node
+Failed to verify required signature 'dev'
+Boot failed (err=1)
+
+I'm working on this on a hobby basis for now, and it may take some time 
+before I will submit any patches for review.
+
 Best regards,
-Marek Vasut
+
+	Marko
