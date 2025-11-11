@@ -4,96 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E5ACCFA1A
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 22:16:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 296D6CD13D3
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 22:16:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2451283B83;
-	Tue, 11 Nov 2025 23:16:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 65E6D83BD2;
+	Tue, 11 Nov 2025 23:16:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hfoHKgqg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cUMYaiT1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B74B083BB5; Tue, 11 Nov 2025 23:16:36 +0100 (CET)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 6412483AB4; Tue, 11 Nov 2025 23:16:37 +0100 (CET)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63EB283AB4
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 23:16:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4548783B8C
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 23:16:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-656b7a2e7dcso78968eaf.1
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:16:34 -0800 (PST)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-3c97709a4fbso85020fac.0
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:16:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762899393; x=1763504193; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762899394; x=1763504194; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vp2eZY9iOUIhhqS/jb63Fggrx+r0Id8ueo4HIqSrG/g=;
- b=hfoHKgqgZ84SjW/CicNg/Ex20ePjl6zFnkfBQjGzY8LQEaZLaEkG6OEJcsnLCoglbM
- Jojy3KYeIfIhm+Km+GWWyUwkOJ3CVx5LBF14v5Arcf5MLVKIZJs75AeyAbg+pfwRF4jI
- Tgd6Ol8d4CNTfLXIdTxjMU6fgClRPBX9RqEMw=
+ bh=pEZ4Ycix8Qx8H6C6YJE8ME2XMdFLamVMbHOm1xrEU4A=;
+ b=cUMYaiT1NPhrmr4NEtrjG7TKB2u8yMa7qQvKOPmVmFXXqvyzqUvP7Zvz3gALqiHkYW
+ GQ94vwIiJgiTl5R88flPjsfx+1IflW/MF2J91fWskVmLo0cS7SGn/Z42CVWmU3YlFKzw
+ VGgtqKoQB/7HjGj9vK5oQY17UuNCiSGc+dJkY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762899393; x=1763504193;
+ d=1e100.net; s=20230601; t=1762899394; x=1763504194;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=vp2eZY9iOUIhhqS/jb63Fggrx+r0Id8ueo4HIqSrG/g=;
- b=fOOkU/P3Th7aj0+7bu29hedm65B50QZHKsWvPkNiMyiX4Mbj3EtYGbymWuGPvFjwjL
- e+q9mEaKV19TLPSTec+sKifdulxl0u1C1+nyjyQw7TPB/C5xjGKcf4tm9oiC5DKg9RXu
- /X0qy31/Rd/JebbEOr9VrusDrE9ao3iG5bid/Adq811CrVSXXSLxWMQtYDLl37IDstxD
- fNzrj0is94me+SemVbcm5d6vQa1XDhmugzG0Ob1ugI9cCzsh4qp7gtNEGLcFO6aMHyH0
- gi6vLYahwRCWmno/60dJFcC5SACI2pfnZIp9bKAAbh/7PWqO8GqgxXojlx7YZIpbwwgq
- n5jw==
-X-Gm-Message-State: AOJu0Yww7dkY40pJmkJQao4r2adOS73bPWxvpZd0DbkHzePuItvfdL9s
- wLye+YSRCcmAbHKDmLfUBLSqt0h4amrShUTas93gBuDcSXXpt3suehsSf5W3tyO2X3s=
-X-Gm-Gg: ASbGncuBGYmwtqURR1hDf3B0eymuRWWtBwsxth6y5h61q7e9wNSZ0h/ff8wJ8l1AEwC
- YinQM5VRtGw+UWJIAFyNUiHuzl+SApLBLoa9C7I+KThytmcYhAEDtyBDWvg4TDH72RG8j7Oj39p
- JwhTnQ6VxswXiGoEcN1Sz74R+p37KyJUfmCddab0QlHQt0eg4nleMVmZrzmXMfSc9onKPkRY8XY
- Au4V04b55T7LBfsOizEts3uG79afnFH5LkOViA7ECUOzhwAiVzyREJ7Apr/T3PiKUV4ZrNw/w98
- LCj0S3FsYoazNF9F67NEH0UNLqmBlw4yUayCMReuCIrjqoA4LtZ3odvHYo11y1eD1LR2/f4WXdO
- x+U6Ow8EvTPjJXi8nEaogMHNlhYkOGs8H/A/ZR5FmYL7LJjU73j48qSlMbfIdmDyjKCy08wkzV2
- xvjGWy/KXRekKYFbc6X7uztecyQqwoCMaKuhOzrTrBon4T9Kh3
-X-Google-Smtp-Source: AGHT+IFrTkhxvP+X/AdR2/DdIKnGEubp0MtUFioJ3L0iXV+NDT0RCdkz6eUTnu0FQUkbF6IgHVKn1Q==
-X-Received: by 2002:a05:6808:1a19:b0:450:b14:7a6a with SMTP id
- 5614622812f47-450745f4052mr353204b6e.60.1762899393076; 
- Tue, 11 Nov 2025 14:16:33 -0800 (PST)
+ bh=pEZ4Ycix8Qx8H6C6YJE8ME2XMdFLamVMbHOm1xrEU4A=;
+ b=HMmj8EDT0IJrtVxJuTTyAGqHUJr5RMp3R5L22eg270bkfx/xR62eN4/wmVna71udaW
+ Gaeno+AoLZHC6zca2efJdakMUXVEP2z5huvzkvAWL/aieKO02KCLPsT+fiw2iKNkAQJp
+ uZJKDIo1K5zNvKbAWJEb9hQ1SQVywffBzyUKHzDBTrIl9id+TnjLjEz1QK5gZ9D6N4NA
+ h7fwaNOdkeJlfUT5JQoXAN0aJx+tLk8Y789mnEhrpkVclWZosSypMqKLSnzikG71mpZN
+ mrv8lRhDQSVHrtOfCuFTn8EVIeNTKq5bUiprWity6h4fem4Hir5k2MJMjy8dmtnoKAaH
+ 3OgA==
+X-Gm-Message-State: AOJu0YyWYPl/HrSThG/WWldJI1LzhKz9BPOyfV8s1hqDJyuHN1fdaH41
+ qlx5k+yXHYZjzzw/NLL3KzXaLTNb1D4EZBkS+VQP6NSEBYVYMuHGjmVYVs4Y/Wr2AQk=
+X-Gm-Gg: ASbGncve6gk+F179SeK/3FAzh7UxmLGVIv407faXI3CHJ0sZCq1doBbwoISA1bz3Ncf
+ 7EWzvFDqfgc4L0Jl1TI1ghvvfxvjn7Pdq3phrxuMGDGgKjkeVzlRSkJ9a4jltxg3otU2yXvyLvO
+ 2A+7KD/aBzlGrRCLZW/uyKKjQuVnb9vJ/WfkPoupH4jiMMqN5o8dcs4sU2/yKgUFbkSh7FCinY+
+ Xv6W0c61LBM3GlDQ7POXeKI7zPSOLKwVv0w0eFt7BDEHXsyJRBMDHEbWo2Gq9qZIGSSnJRdHabP
+ tT4NsCsLwsZ6IQ0D7lN/l+cuZj+U7Ai/yzF2gnQPDpOo1dbL2ueicfcQVk0xrPOwX6r6qAhQYc5
+ B4T7NflJ1gFmPQLEEbozmeYgYh0o/nyxI6a12CP9pTiLSlQmJ34+MtOUC6ZMCgehvchbqEF4s9y
+ 2uT15EIRyt4r6Tc3A8nVB+I3ivHGYSyOSK9teLiEHDbjg5oDxUukgOhJqT9YE=
+X-Google-Smtp-Source: AGHT+IEppffCMndZJSJrHtJjM8oq1GqGtlbu5MzqhYyFNrdQyyB9GTXTzAKDAVO4t4lR3SsiRt0p2Q==
+X-Received: by 2002:a05:6808:4497:b0:44d:b7e9:2067 with SMTP id
+ 5614622812f47-45074626febmr385674b6e.65.1762899394013; 
+ Tue, 11 Nov 2025 14:16:34 -0800 (PST)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4500253ce65sm7448872b6e.5.2025.11.11.14.16.31
+ 5614622812f47-4500253ce65sm7448872b6e.5.2025.11.11.14.16.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 14:16:32 -0800 (PST)
+ Tue, 11 Nov 2025 14:16:33 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>, 
- Quentin Schulz <foss+uboot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Michal Simek <michal.simek@amd.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martin Schwan <m.schwan@phytec.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Pieter Van Trappen <pieter.van.trappen@cern.ch>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Alexander Graf <agraf@csgraf.de>, Loic Poulain <loic.poulain@linaro.org>, 
- Tobias Olausson <tobias@eub.se>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Shiji Yang <yangshiji66@outlook.com>, 
- Anton Moryakov <ant.v.moryakov@gmail.com>, E Shattow <e@freeshell.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251031-rsa-pss-always-v2-0-a29184ea064d@cherry.de>
-References: <20251031-rsa-pss-always-v2-0-a29184ea064d@cherry.de>
-Subject: Re: [PATCH v2 0/5] rsa: fix dependency, rename and relocate RSASSA
- PSS symbols
-Message-Id: <176289939147.812914.10339160350215456166.b4-ty@konsulko.com>
-Date: Tue, 11 Nov 2025 16:16:31 -0600
+To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20251104174458.3385564-1-ravi@prevas.dk>
+References: <20251104174458.3385564-1-ravi@prevas.dk>
+Subject: Re: [PATCH v3 0/3] reenable dm_gpio tests, add support for
+ gpio-line-names lookup
+Message-Id: <176289939326.812914.8693428012068189486.b4-ty@konsulko.com>
+Date: Tue, 11 Nov 2025 16:16:33 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -114,32 +98,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 31 Oct 2025 18:08:19 +0100, Quentin Schulz wrote:
+On Tue, 04 Nov 2025 18:44:55 +0100, Rasmus Villemoes wrote:
 
-> While historically signature verification is mostly done for FIT such
-> FIT_SIGNATURE dependency for signature algorithm makes sense, it isn't
-> the only kind of file we can verify signatures of. It can also be done
-> manually with rsa_verify_hash() with an embedded public key.
+> Hopefully third time's the charm.
 > 
-> Considering the impacted code is guarded by RSA_VERIFY, let's make the
-> symbol depend on that otherwise selecting it without RSA_VERIFY won't do
-> anything. The FIT_SIGNATURE dependency wasn't also enough before as it
-> only implied RSA_VERIFY.
+> I merely wanted to add support (mostly for use by the 'gpio' shell
+> command) for looking up a gpio via the gpio-line-names DT property. We
+> already have a "gpio_request_by_line_name()", but cmd/gpio.c does a
+> separate "lookup + request", so it felt more natural to teach the
+> lookup machinery this as well. That ran into
+> OF_CONTROL-but-not-OF_LIBFDT being a thing for SPL, so here's yet
+> another attempt.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/5] boot: fix incorrect dependency of FIT_RSASSA_PSS
-      commit: 63686bf6e02b57a259e6e08d6439a7d1e154f5cc
-[2/5] boot: remove duplicate config entry for VPL_FIT
-      commit: 013033a2f9bd2bc634688bbaa0fbd91eb729d108
-[3/5] boot: group SPL_FIT symbols together
-      commit: 973019000c2734ae560e5f4f5a58c9cdf85cffbb
-[4/5] rsa: rename FIT_RSASSA_PSS to RSASSA_PSS and move symbols under lib/rsa
-      commit: 360dd89b361dde2a0bbad65763538e1eea7d3c94
-[5/5] rsa: update doxygen doc for RSA signature verification to mention PSS
-      commit: c50f6b11b3242adba0c8a3a6a50082a2eca01772
+[1/3] test: gpio: include in build, and fixup bitrot
+      commit: 23908d8f248f0aa912c7f05e276722e5caf4dc02
+[2/3] gpio: search gpio-line-names property in dm_gpio_lookup_name
+      commit: c92c3768b61aa84dd6adc214308d69814a8c0af0
+[3/3] test: gpio: add test for gpio-line-names lookup
+      commit: e5e4b60c55e448e6a9a6bf6f7e9cfd01fe3103e1
 -- 
 Tom
 
