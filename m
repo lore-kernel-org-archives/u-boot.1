@@ -4,50 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC52ECCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 11:52:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60634CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 12:15:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6534E833C6;
-	Tue, 11 Nov 2025 12:52:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id AD28A83A91;
+	Tue, 11 Nov 2025 13:15:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="lF9yV2vC";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A13183B71; Tue, 11 Nov 2025 12:52:45 +0100 (CET)
-Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
- [45.157.188.14])
+ id 218F983EC9; Tue, 11 Nov 2025 13:15:47 +0100 (CET)
+Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96C4B8309A
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 12:52:42 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d5PzZ15vfzQK8;
- Tue, 11 Nov 2025 12:52:42 +0100 (CET)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d5PzY3ltkzKdM; Tue, 11 Nov 2025 12:52:41 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 11 Nov 2025 12:52:34 +0100
-Subject: [PATCH v2] lib: optee: forbid OP-TEE OS loading without adding
- OP-TEE OS reserved-memory nodes
+ by phobos.denx.de (Postfix) with ESMTPS id E9D1583A79
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 13:15:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id C806D14800B1; Tue, 11 Nov 2025 13:15:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1762863343; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=I92feC3+4tic6LxCk/uzjivPPNc2rJ+bU0ZiL/Un9Ms=;
+ b=lF9yV2vC3JeGfeAV41tfJAHnwMFcdpj4TTk0Gz7GpoQ6dGG8C/jXXDo45aH8WFfXpaBH/e
+ bVwDscJXDpY62YflzA0aB/cvUKfkwCGvm8djr6P+ghhdDgDwQukFqLQfvnxkmmTDOkMgjS
+ TF/Ds9jKBCpbs0DM0mCAZYfC7YnBY1MnGIaIUcsqlOHoQsZguKSb1+2VwjKSOI5hiYZ8Zh
+ R2qwBUYnCYoQBtqB5EfQUt2n1iCvkkNtut/1k6NM0Fx/9dGTRlrmWDA8C4RcXAT6hYvucr
+ qLbnAGvw4vUhiLi2OjzWMqp/dvsOMIM+Wed3XCD88OSEPZT9scVJMVW9I3865A==
+Date: Tue, 11 Nov 2025 13:15:41 +0100
+From: Alexander Dahl <ada@thorsis.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>
+Cc: Alexander Dahl <ada@thorsis.com>, Tom Rini <trini@konsulko.com>,
+ Manikandan Muralidharan <manikandan.m@microchip.com>,
+ Zixun LI <admin@hifiphile.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 3/3] ARM: dts: at91: sam9x60: Add spi0 node (flexcom 0)
+Message-ID: <20251111-landfall-rockslide-407d7bf1a9c5@thorsis.com>
+Mail-Followup-To: Eugen Hristev <eugen.hristev@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Manikandan Muralidharan <manikandan.m@microchip.com>,
+ Zixun LI <admin@hifiphile.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+References: <20251111112637.919074-1-ada@thorsis.com>
+ <20251111112637.919074-4-ada@thorsis.com>
+ <dec7e0eb-5df4-4d3e-878a-13587291ade1@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251111-tee-env-needs-optee-lib-v2-1-272a2c675a77@cherry.de>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4XNQQqDMBQE0KvIX/eXJBLUrnqP4sImY/1QYkkkV
- MS7N3qBLt/AzGyUEAWJbtVGEVmSzKHAXCpy0xBeYPHFZJSxqtMdLwAjZA6ATzx/Dr/lybWBGmo
- H19YtlfYnYpTvufzoiydJyxzX8yjrI/2/mTVrNt4aNHZsbKvubkKM69WD+n3ff0mDEru+AAAA
-X-Change-ID: 20250919-tee-env-needs-optee-lib-32e0a3cec838
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.3
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <dec7e0eb-5df4-4d3e-878a-13587291ade1@linaro.org>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,119 +75,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hello Eugen,
 
-I've spent time trying to figure out why my board (Rockchip PX30-based)
-suddenly boot loops when running a specific program in Linux userspace
-after working on a U-Boot upgrade. I actually inadvertently had the TEE
-environment variable set for a device which doesn't actually need to run
-any TEE OS (so had OPTEE_LIB disabled).
+Am Tue, Nov 11, 2025 at 01:34:35PM +0200 schrieb Eugen Hristev:
+> 
+> 
+> On 11/11/25 13:26, Alexander Dahl wrote:
+> > Copied from linux kernel v6.18-rc4.  Stripped attributes not supported
+> > by U-Boot drivers (dma, interrupt, fifo-size).
+> 
+> Hello Alexander,
+> 
+> Have you tried to configure the build to use upstream DTS ? this should
+> be available in the U-boot dir. CONFIG_OF_UPSTREAM I believe.
 
-It is currently possible to build an image with an OP-TEE OS (via the
-TEE environment variable) without OPTEE_LIB. U-Boot will happily load
-the TEE OS and the next OS (e.g. the Linux kernel).
+Quick try with _just_ enabling CONFIG_OF_UPSTREAM and adding the
+obligatory folder to CONFIG_DEFAULT_DEVICE_TREE leads to the expected
+build errors:
 
-This is an issue because on FDT-enabled devices, OP-TEE OS adds nodes to
-the reserved-memory FDT node for the memory regions it just reserved for
-itself. This updated FDT is then passed to U-Boot proper which should
-know better not to use memory from there. The actual issue is that
-without OPTEE_LIB and OF_LIBFDT enabled, U-Boot proper will not copy
-those nodes over to the next OS's FDT before starting it. This results
-in the next OS's (e.g. Linux kernel) to not be aware of reserved memory,
-incurring random crashes or device reboots when it tries to access
-secure reserved memory area.
+  DTC     dts/upstream/src/arm/microchip/at91-sam9x60_curiosity.dtb
+Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:43.1-7 Label or path clk32 not found
+Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:51.1-9 Label or path main_rc not found
+Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:67.1-16 Label or path pinctrl_sdhci0 not found
+Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:79.1-9 Label or path pit64b0 not found
+Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:87.1-8 Label or path sdhci0 not found
+Error: …/u-boot/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi:91.1-13 Label or path slow_rc_osc not found
+FATAL ERROR: Syntax error parsing input tree
 
-On Rockchip, the U-Boot FIT image which contains both the TEE OS and
-U-Boot proper is generated by binman. Unfortunately, binman doesn't seem
-to have access to Kconfig symbols (grep CONFIG_ doesn't return anything
-meaningful and binman is either configured through FDT nodes or via CLI
-arguments, c.f. cmd_binman in the root Makefile) so we cannot try to be
-smart and guide the user to the correct Kconfig option to select if TEE
-is set. We could add a property based on the presence of OPTEE_LIB in
-rockchip-u-boot.dtsi for example and have a custom message based on
-that, the issue is that I assume all FDT-based platforms do actually
-need to do this dance, and not only Rockchip.
+Not bad for the first shot, but I guess at least the clock related
+issues might get challenging.  However I need to put this aside for later.
 
-Another option could be to add a CLI argument to binman through which
-we would pass the state of OPTEE_LIB and error out the build in that
-case, but that feels like opening the door to other various dirty hacks.
+One question though, while we are at it:  Would it be possible to
+define a custom dts in U-Boot and include an upstream .dtsi?
 
-Another option is to propagate the TEE environment variable to the
-preprocessor of the FDT (via dtc_cpp_flags) and then we can do
+Greets
+Alex
 
-  #if defined(TEE) && !IS_ENABLED(CONFIG_OPTEE_LIB)
-  #error "CONFIG_OPTEE_LIB must be enabled!"
-  #endif
+> 
+> Also, if you really want to update this u-boot DT, you would have to
+> copy it as-is, no stripping. Even if the props are unused. The only real
+> issue would be if Uboot stops working or gets confused by these extra props
+> 
+> Eugen>
+> > Signed-off-by: Alexander Dahl <ada@thorsis.com>
+> > ---
+> >  arch/arm/dts/sam9x60.dtsi | 10 ++++++++++
+> >  1 file changed, 10 insertions(+)
+> > 
+> > diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+> > index a33c0d57398..1ee30422518 100644
+> > --- a/arch/arm/dts/sam9x60.dtsi
+> > +++ b/arch/arm/dts/sam9x60.dtsi
+> > @@ -182,6 +182,16 @@
+> >  				ranges = <0x0 0xf801c000 0x800>;
+> >  				status = "disabled";
+> >  
+> > +				spi0: spi@400 {
+> > +					compatible = "microchip,sam9x60-spi", "atmel,at91rm9200-spi";
+> > +					reg = <0x400 0x200>;
+> > +					#address-cells = <1>;
+> > +					#size-cells = <0>;
+> > +					clocks = <&pmc PMC_TYPE_PERIPHERAL 5>;
+> > +					clock-names = "spi_clk";
+> > +					status = "disabled";
+> > +				};
+> > +
+> >  				i2c0: i2c@600 {
+> >  					compatible = "microchip,sam9x60-i2c";
+> >  					reg = <0x600 0x200>;
+> 
 
-but we have the same issue as above, it is then Rockchip-specific and
-doesn't feel right to me.
-
-Yet another option is to remove the @tee-SEQ node from the binman FIT
-description when OPTEE_LIB isn't set but then we would lose the
-following nice message when no TEE is provided:
-
-Image 'simple-bin' is missing optional external blobs but is still functional: tee-os
-
-and even worse, build without any TEE OS even though we could provide
-one via the TEE environment variable.
-
-Finally, another option could be to move this hack under
-arch/arm/mach-rockchip/Kconfig to make it Rockchip-specific or add a
-depends on ARCH_ROCKCHIP. However OP-TEE OS on Aarch32 Rockchip boards
-doesn't actually need any of that if SPL_OPTEE_IMAGE is set because
-arch/arm/mach-rockchip/sdram.c then marks some hardcoded memory regions
-in RAM as holes in DRAM, which has the same effect as reserved memory
-regions I guess. I assume other platforms may use something different,
-so it may be casting too wide of a net.
-
-This commit is what I could come up with as a stopgap measure to avoid
-building images that simply cannot reliably work and fail randomly.
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
-Changes in v2:
-- removed RFC tag as requested by Tom,
-- merged v1 commit log with v1 cover letter into the commit log of v2,
----
- lib/optee/Kconfig | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
-
-diff --git a/lib/optee/Kconfig b/lib/optee/Kconfig
-index e6834d4d3e1..34b9d8afe67 100644
---- a/lib/optee/Kconfig
-+++ b/lib/optee/Kconfig
-@@ -4,6 +4,25 @@ config OPTEE_LIB
- 	help
- 	  Selecting this option will enable the shared OPTEE library code.
- 
-+config HAS_TEE_IN_BUILD_ENV
-+	def_bool $(success, test -n "$(TEE)")
-+	select OPTEE_LIB if OF_CONTROL
-+	select OF_LIBFDT if OF_CONTROL
-+	help
-+	  It is typical whenever OP-TEE OS is loaded before U-Boot proper that
-+	  it modifies the FDT passed to U-Boot proper to add reserved-memory
-+	  nodes for the RAM it just reserved for itself.
-+
-+	  U-Boot must copy those reserved-nodes in the FDT for the next OS to
-+	  boot.
-+
-+	  Failing to do so will incur random crashes or device reboots once the
-+	  next OS is running.
-+
-+	  This makes sure that whenever TEE is present in the environment,
-+	  meaning a TEE OS will be part of the boot flow, the copy made by the
-+	  OP-TEE lib will happen.
-+
- config OPTEE_IMAGE
- 	bool "Support OPTEE images"
- 	help
-
----
-base-commit: 365a7079fb918643da0f0709660a7d8ea76dd6f3
-change-id: 20250919-tee-env-needs-optee-lib-32e0a3cec838
-
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+Alexander Dahl           Thorsis Technologies GmbH   T +49 391 544 563 1000
+Industrieautomation      Oststr. 18                  F +49 391 544 563 9099
+T +49 391 544 563 3036   39114 Magdeburg             https://www.thorsis.com/
 
+Sitz der Gesellschaft: Magdeburg
+Amtsgericht Stendal HRB 30646
+Geschäftsführer: Dipl.-Inf. Michael Huschke
