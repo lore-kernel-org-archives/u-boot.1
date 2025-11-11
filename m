@@ -4,152 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72A8ACCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 06:22:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61BADCCFA18
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 06:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8CB583AB4;
-	Tue, 11 Nov 2025 07:22:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AF1A083AEC;
+	Tue, 11 Nov 2025 07:39:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cJzN4+O3";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="LFMof7i1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B45383AF6; Tue, 11 Nov 2025 07:22:43 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id C318D83B0B; Tue, 11 Nov 2025 07:39:54 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1519483A98
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 07:22:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD32F83AB4
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 07:39:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=F2nl4ymBbZm28agCF406z6BoNcyhycDUv2fRGhOhaGoINqeJ1QGvScyYDMOMZMezaHgHIdZ19Wn76ov4mpQUdPuzYrKY2k+4tR0Bi4bh8N3fjQHvavD5/E+Eh93j4T5GpJ6S+ob8NgD4pBu8tBItP/S+lULfLM2cHkn86V6cKAeTJq6WXVNgGTRzXDt4nR/5ItAD+9RtCsa1P1w0OHe21OSipn9H7EwWhSr4p0rfpl+7eU1TZXbYexWA3ZIGcwYTvMsixMioMNaQlvocwu/BEsoTd05vSfPqGPcILZkSMqxf7Xpzzvf4OBDp7y6H3faHmlyEsEYeeVP5vuxLpcBr0g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ptfdfEvvo1HfbJnsRavwfBPo6rUmNAtvDLIjTsoO5m8=;
- b=W3LQnH8cvWS5CfcDe6PDkrclBYcw2hh2Or13g0Pe4eB21O6j0ZB0Ca4S3Y4Qe+7rJiMB6bHs+vgAfs5PXoH+NBWVNiayXLCddOT1HkrlO0ZFrYTUpfNidLJzSXlPoyOrdhjBm8PC/cUFk5X21ZuHwYWFhCoExYfEK1IEv80sULTpGCC+UKyhy1ERegwLT25VERDiAVNJKjPdfn/IQdZiAhy4OhDQRu7hVTveeSq89kIiVxyvJCesVbRhqGyp+/geEWnpa7DM21qUrDduKJtSH4P5DwRNO2mIFzsoVMpEak3tBy/srlsueeiRCbgIrYXkhNdabBGopcELXYZ+unzD1g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ptfdfEvvo1HfbJnsRavwfBPo6rUmNAtvDLIjTsoO5m8=;
- b=cJzN4+O3pfRFcJuRK5LqiVqEuAwMl+7kc9seWu50k5BAT51YR0bpdMKb9M5Cv8lnEGLClfueVIRnqH0oxFwf/CWLBySzq8wVPTfugzcNZIvohJzzKlVceQxhZPZYlvVobB1hdebouvQ6qh3dvgk4Kw7Nj5k1Zy+S24QMEIYxIcg=
-Received: from MW4P220CA0030.NAMP220.PROD.OUTLOOK.COM (2603:10b6:303:115::35)
- by DM6PR10MB4281.namprd10.prod.outlook.com (2603:10b6:5:216::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.15; Tue, 11 Nov
- 2025 06:22:37 +0000
-Received: from SJ5PEPF000001CF.namprd05.prod.outlook.com
- (2603:10b6:303:115:cafe::a0) by MW4P220CA0030.outlook.office365.com
- (2603:10b6:303:115::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.16 via Frontend Transport; Tue,
- 11 Nov 2025 06:22:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ5PEPF000001CF.mail.protection.outlook.com (10.167.242.43) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Tue, 11 Nov 2025 06:22:35 +0000
-Received: from DFLE200.ent.ti.com (10.64.6.58) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 11 Nov
- 2025 00:22:25 -0600
-Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 11 Nov
- 2025 00:22:23 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 11 Nov 2025 00:22:23 -0600
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AB6MM60457229;
- Tue, 11 Nov 2025 00:22:23 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1762843191; x=1763447991; i=xypron.glpk@gmx.de;
+ bh=VrDr+8v4FbzROj5SqLgUTEKI2+y6j54eVh03ipX0Tfs=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=LFMof7i1CAh9vgRTElbtHHA++IpaBGAL5LsoPe7FiOlfU+DlnqLUgOGx9cGtJRHF
+ lTaI3Nmn414zPz/hZZw7Kdts3UY/REZDIXwPJU1QE6UANapBj+JkmuQ4mOaoMwsmn
+ k9zVse+zDy/98+QEfuRSn6g8DKM9qONRU5tqtUorgMiCR2PfwvQVKhopc1BT/bjTb
+ n6wYHuzOtqr6lY6/t6Xeqdf9aqljksZwfoP8TXz4aCNXw2S8ihTkCWHKrnr6mctfI
+ 03unfYlgX8H5xqskfC2CtGLHN8Boew6wLQ72E5z3BeGeGbP3Zl+nQWOBsdd+Ka62M
+ XxNuCsAEGgNQ/D4JYw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from ehlo.thunderbird.net ([143.58.85.124]) by mail.gmx.net
+ (mrgmx004 [212.227.17.190]) with ESMTPSA (Nemesis) id
+ 1MAONd-1vTSTU1fAZ-007nJw; Tue, 11 Nov 2025 07:39:51 +0100
+Date: Tue, 11 Nov 2025 07:39:50 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Heiko Schocher <hs@nabladev.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 3/5] test: cmd: hash: add unit test for sm3_256
+User-Agent: Thunderbird for Android
+In-Reply-To: <20251111054813.1966-4-hs@nabladev.com>
+References: <20251111054813.1966-1-hs@nabladev.com>
+ <20251111054813.1966-4-hs@nabladev.com>
+Message-ID: <AF767FFD-6798-455F-A1C8-F433C509680A@gmx.de>
 MIME-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 11 Nov 2025 11:52:22 +0530
-Message-ID: <DE5NDW3OC26M.16ZWOENW17GM@ti.com>
-CC: <u-boot@lists.denx.de>, <danishanwar@ti.com>
-Subject: Re: [PATCH v2 0/5] arm: k3: j784s4: Add PCIe boot support
-From: Anshul Dalal <anshuld@ti.com>
-To: Hrushikesh Salunke <h-salunke@ti.com>, <trini@konsulko.com>,
- <a-nandan@ti.com>, <c-vankar@ti.com>, <u-kumar1@ti.com>,
- <marek.vasut+renesas@mailbox.org>, <n-francis@ti.com>, <peng.fan@nxp.com>,
- <semen.protsenko@linaro.org>, <s-vadapalli@ti.com>, <jm@ti.com>,
- <m-chawdhry@ti.com>, <ahalaney@redhat.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20251111061645.1004382-1-h-salunke@ti.com>
-In-Reply-To: <20251111061645.1004382-1-h-salunke@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CF:EE_|DM6PR10MB4281:EE_
-X-MS-Office365-Filtering-Correlation-Id: e387336e-2c63-4f6a-c9a1-08de20eab48e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024|921020; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Mm5qVlIzYTlZaWM1OWFUSjVjSmxZT080SHBnbUtjY0RmZFhKQzdVd3FLOWFY?=
- =?utf-8?B?MzZkTG1NZGdmUmdkV0h5SW1UQnY2ZitJa0RIMWt5bllGTEdaMzFYTTRCaGIy?=
- =?utf-8?B?VU1MRVYybWhCZmoxZ2xkampIUjd2M2pkVDhSWGtYT0NPQkpBRzNjYVpvRGZQ?=
- =?utf-8?B?dit6MFU2aENkRDh3MWsxVElNUWdGS2Zzd1RRbGcvTGp5M0k1STBjem95Zi9G?=
- =?utf-8?B?T1JEeThodVluZmgvMGpZdkN0SHVJTTh2Q2JIRkVxSWRHdEFyc2Q4Vi9NS3lZ?=
- =?utf-8?B?WURRQTh0dm8xRTVCM3l0L2VuRzZ1bnA5eG9qVllEVnFLRGdyR3JJcmV4K09Q?=
- =?utf-8?B?ZTlabDVmK0JoZm95YzA1VFplZG9maWRyV2xvckxJNFFCc2xncjJ2eHBwc2Z0?=
- =?utf-8?B?dE9FNjdvclg2YkNZZEJXSjdVQmlMMUVSUGg5VkJHY09vTXRRZ2d5OVlqTHJR?=
- =?utf-8?B?SjMyd0ZsQzd6bUFzVmRpaUdsUkRqWmh0Q2dMUE4wRHFUTlRiYlc1SkpGUVBF?=
- =?utf-8?B?VUFsSjFud2xFaEV2R0daN0h1L0dHL1k1RFQ1UXV0SjduUVp2WkllZkYxRVNJ?=
- =?utf-8?B?WnpYckxnaFpaMks0ajU5Q2ZMMzJWWXc5WlBOQXkxSTAvQk5SM2ZIblI2cXQr?=
- =?utf-8?B?VWNBUmFmSjhFTmM2MGRsQXRnQVhWTEdLdW5sL2tzVGcxQzZNYm9GSXlycSsz?=
- =?utf-8?B?N1BuZndoWlNnTS93ZVhmclNGay94US9HMWhTbldXKytTWlo0WXIyMVZ2dktZ?=
- =?utf-8?B?MEU4NTYrSW9td3NySTNmVjI3YXVuYjMrc3JWNkpGMmxVWHU1cHdyUXN5cjdU?=
- =?utf-8?B?clVDZ0psL2ZKMmM0MVNybnJ4dCtZUDA4T2ZEMDBpZmx0ZyswdHRxQ09UZk9J?=
- =?utf-8?B?WVJ2ajRqSjBLT0h3RUgwdlY1dU1mTVc4MW5HY3JZeHNxWGl3bFBBamtqSHVa?=
- =?utf-8?B?SGNzcUpUdTVVbHdqeUcwdnpzTHhWbTNmL0Y0R1Zwd1V1WWQ3SHlpeVZMb1lx?=
- =?utf-8?B?WllzSW1ISmJjWC9FZzlpRVI1dll3QndXbUxwTW9Zby95c2NOclV3ZTJkaEtk?=
- =?utf-8?B?VEdFcko2UUVMclhxTmNiSXkrVXJGZEtic1ZHTExMNWw1OXg2TDBBbVRZdTUy?=
- =?utf-8?B?MmRKUFhYVnpCRGpLMUVIcDFnYnRVVEZ1NjJ5QTdCaWVzUXdIMS8zNjU1cUhG?=
- =?utf-8?B?MlUyK3BXZzFpeEZ6bmJsazZxVW8zaERCcDExV1dZZm9wZS9TaktVNHRFNWUr?=
- =?utf-8?B?L0hQOERENDVmR3RJblBZRXIvTXlpc2RxR1lyOTZzN1J2TkNLZ2N2d2U3cjI2?=
- =?utf-8?B?T3pEUUZLcWU3YUpIMnBSaEd3dEVyS29IR1Bwc0hqWmdpU3pBdUROQkV2K2pL?=
- =?utf-8?B?Y1FhOWlEbE4vT1hnaWFqOFNpR29ZTDdIUVBzQlhnUTF6Q2habDZaVGYyMmxP?=
- =?utf-8?B?c0R1NlF0SE1XcWx5SUhwdGN0eTN0a1lOMWNVaGRkdVhrUGczMzdScUFiWGVy?=
- =?utf-8?B?MXNDNnhUMFErSFBnbmk0SnVrT3dWNmJFWHljcVFNNUU0RmlocG5tV0JjVzI5?=
- =?utf-8?B?VklSTFV5dnJGSThla05LY09uNnpqWEo0R3d2Q3htMmxRUms5eHJFZko1ajRV?=
- =?utf-8?B?SmZacTlJMTgwamFDRnFQQlUycTBsYjJuaHppcTd2V2tFYmZIT0pEdzRaS1Zm?=
- =?utf-8?B?VFZDNmhsVDNPdEZzZy9lMXBhd1BaT3U4QWt6WnBUYTVlT2JUcUdPWFV4MjRo?=
- =?utf-8?B?RzQyM3JaNXk2aDhTRS9YbkFVa0ZpclhGL1NrWkdxYVZkZG1pUlhBdEFPYXBU?=
- =?utf-8?B?TUdxcXlzMlBOZk9CSEI4d2c5TWovL0tkbFpGRmhZSHRyZHZZVU8zYkhMNmNm?=
- =?utf-8?B?TDdGSVFXK21oNjZGQUlvSVRUOHBaRGpDU041Y0o2T0dIOTkwVFFRSEhqL0RU?=
- =?utf-8?B?aWVRbGUremlubFpjbmpNTWFBVXZkRy9lSXhFTTAyWGJ4YXdiYi9Ta2paT25I?=
- =?utf-8?B?WG1ieTdqU3R1UWlHN1AvVTFqM2JPS0Q2bWdXM25zV1RpN1JGS21MT3VsOUts?=
- =?utf-8?Q?IEfGkV?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024)(921020); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2025 06:22:35.5592 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e387336e-2c63-4f6a-c9a1-08de20eab48e
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CF.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB4281
+X-Provags-ID: V03:K1:wMdrnRlVY1mOmAQvdxWTaP5SOz//pQCfJYK9FPG7GGPVcZ54yjb
+ dQ7GiKB5bx+mukABvmauRwfsjH+V6FjkbANWJvYYfi7T6ymq5SSgMyEEUhIo2li1bnM9gBU
+ KhtHRRBkSIjee8unaK/1mkAbUcZGnySgqlD1johTsz6/tqOJ/bZHP0tumKhyQgZMmue+wvS
+ qL8gliRBRBk1CFSSYUrJA==
+UI-OutboundReport: notjunk:1;M01:P0:LbIPal1llxQ=;3vnH7QC3f7f2EQRokUJAliG9uWS
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,60 +151,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Nov 11, 2025 at 11:46 AM IST, Hrushikesh Salunke wrote:
-> This series adds PCIe endpoint boot support for the TI J784S4 SoC.
+Am 11=2E November 2025 06:48:10 MEZ schrieb Heiko Schocher <hs@nabladev=2Ec=
+om>:
+>add simple test for sm3 256 hash
 >
-> PCIe boot allows the device to boot as a PCIe endpoint, where the
-> bootloader images are loaded by a PCIe host through Device Firmware
-> Upgrade (DFU) over PCIe.
->
-> The J784S4 SoC uses PCIe1 instance with SERDES0 for endpoint boot.
-> To enable this functionality, the SERDES and PCIe peripherals must be
-> configured early in the R5 SPL stage before the bootloader images can
-> be transferred from the host.
->
-> This series:
-> 1. Adds the required clock and device data for SERDES0 and PCIe1
-> 2. Enables Cadence Torrent PHY driver at SPL stage
-> 3. Enables J721E WIZ SERDES wrapper driver at SPL stage
-> 4. Enables PCIe boot configs for R5 and A72 stage
->
-> This feature has been tested on J784S4 EVM. Following are the logs
-> corresponding to this feature.
->
-> https://gist.github.com/hrushikesh221/cf48b512eb4cd90c1612ad2e531b8ffe
->
-> Program used to copy bootloaders from PCIe Root-Complex to Endpoint:
->
-> https://gist.github.com/hrushikesh221/94e6042dbd717c74b74a5c9fc8ec5b6c
->
-> This series is based on commit :
-> 6b27b688694 Merge branch 'master' of https://source.denx.de/u-boot/custod=
-ians/u-boot-sh
->
-> Changes in v2:
-> - Fixed SPDX license identifier to use "GPL-2.0-or-later" instead of "GPL=
--2.0+"
->   in clk-data.c and dev-data.c
-> - Changed SPL_PHY_CADENCE_TORRENT config type from "tristate" to "bool"
-> - Changed SPL_PHY_J721E_WIZ config type from "tristate" to "bool"
->
-> Hrushikesh Salunke (5):
->   arm: mach-k3: j784s4: Update SoC autogen data to enable PCIe boot
->   phy: cadence: Add config to enable Cadence Torrent PHY at SPL stage
->   phy: ti: Add config to enable J721E WIZ SERDES wrapper at SPL stage
->   configs: j784s4_evm_r5_defconfig: Enable configs for PCIe boot
->   configs: j784s4_evm_a72_defconfig: Enable configs for PCIe boot
->
->  arch/arm/mach-k3/r5/j784s4/clk-data.c | 209 +++++++++++++++++++++++++-
->  arch/arm/mach-k3/r5/j784s4/dev-data.c |  43 +++---
->  configs/j784s4_evm_a72_defconfig      |   7 +
->  configs/j784s4_evm_r5_defconfig       |  13 ++
->  drivers/phy/cadence/Kconfig           |   7 +
->  drivers/phy/ti/Kconfig                |  10 ++
->  6 files changed, 262 insertions(+), 27 deletions(-)
+>Signed-off-by: Heiko Schocher <hs@nabladev=2Ecom>
+>---
+>I wonder why this tests are under DM and not under CMD
+>Should we move them to CMD ?
 
-Acked-by: Anshul Dalal <anshuld@ti.com>
+We should use CMD_TEST() in the test/cmd/  directory=2E
 
-Regards,
-Anshul
+Best regards=20
+
+Heinrich=20
+
+>
+>Ignored checkpatch warnings for too long lines=2E
+>
+>(no changes since v1)
+>
+> test/cmd/hash=2Ec | 46 ++++++++++++++++++++++++++++++++++++++++++++++
+> 1 file changed, 46 insertions(+)
+>
+>diff --git a/test/cmd/hash=2Ec b/test/cmd/hash=2Ec
+>index bb96380c351=2E=2E3f7f64d27d3 100644
+>--- a/test/cmd/hash=2Ec
+>+++ b/test/cmd/hash=2Ec
+>@@ -103,3 +103,49 @@ static int dm_test_cmd_hash_sha256(struct unit_test_=
+state *uts)
+> 	return 0;
+> }
+> DM_TEST(dm_test_cmd_hash_sha256, UTF_CONSOLE);
+>+
+>+static int dm_test_cmd_hash_sm3_256(struct unit_test_state *uts)
+>+{
+>+	const char *sum =3D "1ab21d8355cfa17f8e61194831e81a8f22bec8c728fefb747e=
+d035eb5082aa2b";
+>+
+>+	if (!CONFIG_IS_ENABLED(SM3)) {
+>+		ut_assert(run_command("hash sm3_256 $loadaddr 0", 0));
+>+
+>+		return 0;
+>+	}
+>+
+>+	ut_assertok(run_command("hash sm3_256 $loadaddr 0", 0));
+>+	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+>+	ut_asserteq_ptr(uts->actual_str,
+>+			strstr(uts->actual_str, "sm3_256 for "));
+>+	ut_assert(strstr(uts->actual_str, sum));
+>+	ut_assert_console_end();
+>+
+>+	ut_assertok(run_command("hash sm3_256 $loadaddr 0 foo; echo $foo", 0));
+>+	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+>+	ut_asserteq_ptr(uts->actual_str,
+>+			strstr(uts->actual_str, "sm3_256 for "));
+>+	ut_assert(strstr(uts->actual_str, sum));
+>+	ut_assertok(ut_check_console_line(uts, sum));
+>+
+>+	if (!CONFIG_IS_ENABLED(HASH_VERIFY)) {
+>+		ut_assert(run_command("hash -v sm3_256 $loadaddr 0 foo", 0));
+>+		ut_assertok(ut_check_console_line(uts,
+>+						  "hash - compute hash message digest"));
+>+
+>+		return 0;
+>+	}
+>+
+>+	ut_assertok(run_command("hash -v sm3_256 $loadaddr 0 foo", 0));
+>+	ut_assert_console_end();
+>+
+>+	env_set("foo",
+>+		"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+>+	ut_assert(run_command("hash -v sm3_256 $loadaddr 0 foo", 0));
+>+	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+>+	ut_assert(strstr(uts->actual_str, "!=3D"));
+>+	ut_assert_console_end();
+>+
+>+	return 0;
+>+}
+>+DM_TEST(dm_test_cmd_hash_sm3_256, UTF_CONSOLE);
+
