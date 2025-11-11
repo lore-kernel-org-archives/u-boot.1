@@ -4,81 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9563ECCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:49:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F0DCCF9E3
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:49:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D67583AB4;
+	by phobos.denx.de (Postfix) with ESMTP id 6CCDF83F56;
 	Tue, 11 Nov 2025 09:49:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ie44Lp3R";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k7kLcgIz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA23383F4D; Tue, 11 Nov 2025 09:49:28 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 8BB2983936; Tue, 11 Nov 2025 09:49:29 +0100 (CET)
+Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
+ [IPv6:2607:f8b0:4864:20::b12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CBEA83936
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:49:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4282983AEC
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:49:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-8b22a30986fso388229285a.2
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:49:25 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12f.google.com with SMTP id
+ 956f58d0204a3-640f88b8613so453097d50.2
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:49:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762850964; x=1763455764; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cUFm7wLPxa8wsEPnEF9OE0PrN8hxYmB+1QQmmnMjf2A=;
- b=ie44Lp3RX1VIHQEwoz1+i1ZXvBEJobMmQYx0lKqpnoq/thr+r/mC2zeC0AT3BB6qZf
- bxfY7hKueqbnhKEK+ByFDCj2SIwzDjV0EhOrvMrX0TttHYACBUI2vdeZVLxi1WYz5F4i
- duAHZHQu2Je6Qwab4km++DBbhpBTvXnQP2y8KjMHIJ8eV9g4VHotAi1fGEsF2aS4INgF
- kD5ODN+LV//RulDoJBncRkiSZwtS+wD60UogyWTtEvAtSHjljnANjstr+3Tq2nFymKhA
- oV9yTdhnFt58S1Nt8sl9Qstf9EP2fKqOGQPjMfg7lraVGeXqH7lI3CwZEuIRMqQPfGjz
- N4HA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762850964; x=1763455764;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1762850966; x=1763455766; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cUFm7wLPxa8wsEPnEF9OE0PrN8hxYmB+1QQmmnMjf2A=;
- b=KWJKYa/ykbDmIrd0DX4bpavjSBsNK2Pt8t+cfjYA0bI1eqs6lf3gg+eKnviiu7WRXj
- /zAivU32cS901IYkx+56QxFy4sED6hVdDj7ncz823RlEhPhQL8v9FOgwPP713Dip0emL
- 2fakeqNRoAjg7cTn/jlk99CQYZHJT9rZhhJ7HywohzDZPgtleLzDAo8xeZcp9qQczX+/
- X7o2aGJpYyQkLotfDOZYU7wiZATAUN5XJfHmOXxuFXtlpTJ15l+PHgEMpqcsdXoFNiBy
- 7WBIUOrpWZEsn06Tx+gj9DS2VN/s89TuNpUXoaoGd7tptGomaYV2mQvtfTjgm0Om8BsK
- cvjw==
-X-Gm-Message-State: AOJu0YxOCFyrwp1CR1MrtRuWJsuJ8weRJcKOyFL2EHfHJEs2R97Z6evk
- vYRRqYjuT75aQFoNTsvtHqsAW8AcHaeCz30j2LbMXm3Icu1hS8nsB19as4Sq9z26d6Bma5oOO65
- rKyP5ChoZTq1mtqrDk7Qs6M/ti+kQz5pUhy7ILq2Rvw==
-X-Gm-Gg: ASbGncstjSZL9gvjwhHP04Od2+UhG7Lhwc+mX5SSYqRT/Thk1Nl7uH4jEkD7WLDUQrO
- juj69DgLYq79K+fHxtS34CSUmzy5l5ylvjTzzAKm7CipcV1wHK5ANZjarAxEyDjn/gMX+IHJJUr
- KzHCoINTbXPCtsiM1YiwHGD27/4qd1yydFZoHI3NQ4v4h++G3VIGoxfFlOV/Q+ksUiTjF2M1Qz5
- w9oOMsNVQB217JNJcvR/o9JTX28RURBQCa0UbRux1zYsYDECq/TdxWrJevI8ELbjXWS0Xgo
-X-Google-Smtp-Source: AGHT+IHTMhomgPZ9E8ok1U8LZwX8T6qIBqGZxckhGadHAPRvVu0JhkRlGpIPQFyrQOStRV9vUhuImQoh/d7cAO4kYZg=
-X-Received: by 2002:a05:620a:31a0:b0:892:43af:ba4b with SMTP id
- af79cd13be357-8b257eee911mr1375875185a.29.1762850964143; Tue, 11 Nov 2025
- 00:49:24 -0800 (PST)
+ bh=N/90REf1OOY2n50IgV7XeVJrijfgWYWPrqrA3C1sEbs=;
+ b=k7kLcgIzBIhoD7eF/GP/eVgWb+Gj9tk86csnA2OBxqx02Pt6IiEUEb8P2J5J4hL0FX
+ IJDn2+TbENgEprDZ/5kRiloJWi5e++p0DWNOaP8ZaPn6ldw+NICqO5WAZ8IF0hPpbq0z
+ OOKb1hIuVeLHLCvfMQ5ky7tucPgo70JhytIeR/ujY1REgxKp5vPc1CcFBnhCIg8DL3cy
+ 969PzYdUlWnJdlg1Ik/tmZSMFA+K/snJDOvkroIlKbIryz+FRi+ioezSHplMI6yqLi3d
+ VDmf7a+HhMm+JEpW2tPr31wyaUcbmSlJJdLSYSxG4/Xg9y5e54RKvfFOr+Fv+JLT7hzE
+ 3rFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762850966; x=1763455766;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=N/90REf1OOY2n50IgV7XeVJrijfgWYWPrqrA3C1sEbs=;
+ b=dHIDiBsA4/cea1Tc57PMcXCak5pxd6YNg6yYCO9Jh5eMlo2HF19qp8JnIZ+BEo3dOZ
+ QbYPIWujVLleC28UB7Gwx4FVWtR8LqH/SvnbXxlFb/77AaZTPrd67HvNjq30lPG/VtPD
+ vwmkS1i27pW3mfP+XLWgvvai6i/4JO/6E1Kz8FEDhJF62sZGL1UM2EUhEU0YNSQVX58P
+ Ev2YU2XHZJ2wsmZ6BjfeLd8CuCTW+9ESAff9KncgzdcXGucnWx5fR1SUOWBba9hxAGuR
+ tQ6ocY7UfR9z3BWXQ332pyLKBD9B6S+ljOHhEkkSye5rjnlCeescJQk53kpCzNA6yFwg
+ Zcbw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUw8mng6z8rHzUT7+tugd6RkyLgnobzDvqPwsm5wS8j3x695r0GVupfPrMx5Z4hZwhZoISnyRs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMg2UXx8qBksjdaaQ1lRmn++04E6PREC2nYf/ByIysOiuaocEX
+ mlN7j40lawFneSjBbOV158/rybYqqsBJmv6LBCmaN9q74PFCfaDFtqKutIKFNfX03Y42L3dvJjY
+ YRfKeF9RVFOBzd6ATmpScVk7DrcpxwVs1bv3fcBR9j4u+/JN5ssE/bdI=
+X-Gm-Gg: ASbGncthMb2qj9iPT8dpHjHeYiMYOHBrnOgxvuxRawPEt4J7jAbCbIDwBTcspVKoQd/
+ Kgqh2yMu5o9KPQNcC3qknX92HkKQY/VnWPO9MXhnSsy5Hh+FlyUQX7Dglw9KsqxC3nZGs/kV74F
+ R4yxu8TbeWQvvctHKTlfmMBJNs0KI5X9Hgonlndu2VnLHyQkGSDot3y9sAN3yrUzAQD/XDebmPh
+ mNInFOie2hLjujTfwxodcemWbBv/hx3ZggNyuMd8/zp+VNEqkUr86YmTC8DRyBTTCXqx3+YvrF9
+ T/sDQd2eh//udmhlQTmatfO9h0t0QJ/FPLB8PP3C9TZH1r20MP0=
+X-Google-Smtp-Source: AGHT+IGQu1IdIKEtl60okJCjBDAjOhPHij/BSlXAkAWyFufT1MwVHyx4C/CKnMpnscEJtPDnfuL9jUjDaB/uAs1aHc0=
+X-Received: by 2002:a05:690e:4254:b0:63f:b1d4:f9f1 with SMTP id
+ 956f58d0204a3-640d45d39bamr8492539d50.50.1762850966061; Tue, 11 Nov 2025
+ 00:49:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
- <20250926141351.1755829-12-abdellatif.elkhlifi@arm.com>
-In-Reply-To: <20250926141351.1755829-12-abdellatif.elkhlifi@arm.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 11 Nov 2025 14:19:13 +0530
-X-Gm-Features: AWmQ_bnpGIp7PcbGwSSbX5ibqUdXxcSR2Og2bRHgWE8uaZScwvaE7Jn4AhYrFyY
-Message-ID: <CADg8p94jUR7xmo4U0oeLSN694Phxe_G3rQO6-QoJX0BN9tSOnw@mail.gmail.com>
-Subject: Re: [PATCH v5 11/24] fwu_arm_psa: Add staging ABIs
-To: abdellatif.elkhlifi@arm.com
-Cc: u-boot@lists.denx.de, Davidson kumaresan <davidson.kumaresan@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>
+References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-6-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251109101010.306268-6-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 11 Nov 2025 10:48:49 +0200
+X-Gm-Features: AWmQ_bkAuM8nHlAiG6OAEVa3T-r_QEYbXnBKASqTHiaSIaQe8NmXQvVnX2SWi94
+Message-ID: <CAC_iWjJMFhmtkMKDuWJNnH-HBBfo6_LWPVNrbJiG_Fj83n0Uag@mail.gmail.com>
+Subject: Re: [PATCH 5/9] test: common/print: do not use fixed buffer addresses
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>, 
+ Harrison Mutai <harrison.mutai@arm.com>, Peng Fan <peng.fan@nxp.com>, 
+ Ben Dooks <ben.dooks@codethink.co.uk>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,775 +106,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 26 Sept 2025 at 19:44, <abdellatif.elkhlifi@arm.com> wrote:
+On Sun, 9 Nov 2025 at 12:10, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> The location of memory depends on the board. Do not assume memory at fixe=
+d
+> memory locations. Use calloc() instead to allocate buffers.
 >
-> Implement the ABIs and logic for updating images
->
-> The staging process defined by the Platform Security Firmware
-> Update for the A-profile Arm Architecture specification [1] is
-> executed through the staging ABIs.
->
-> The capsule should contain at least 3 payloads (2 dummy payloads
-> to indicate the start and the end of the staging process.
-> In addition, one or multiple payloads to write in the storage device).
->
-> The implemented ABIs are as follows:
->
-> FWU_BEGIN_STAGING
-> FWU_END_STAGING
-> FWU_CANCEL_STAGING
-> FWU_WRITE_STREAM
->
-> [1]: DEN0118, 1.0 A:
->     https://developer.arm.com/documentation/den0118/latest/
->
-> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> Signed-off-by: Davidson kumaresan <davidson.kumaresan@arm.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Adriano Cordova <adrianox@gmail.com>
-> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Cc: Michal Simek <michal.simek@amd.com>
->
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
 > ---
+>  test/common/print.c | 76 ++++++++++++++++++++++++---------------------
+>  1 file changed, 40 insertions(+), 36 deletions(-)
 >
-> Changelog of changes:
-> ===========================
+> diff --git a/test/common/print.c b/test/common/print.c
+> index 76ee851fe6a..2ac7eeed2c1 100644
+> --- a/test/common/print.c
+> +++ b/test/common/print.c
+> @@ -168,12 +168,8 @@ static int print_display_buffer(struct unit_test_sta=
+te *uts)
+>         u8 *buf;
+>         int i;
 >
-> v5:
+> -       /* This test requires writable memory at zero */
+> -       if (IS_ENABLED(CONFIG_X86))
+> -               return -EAGAIN;
+> -
+> -       buf =3D map_sysmem(0, BUF_SIZE);
+> -       memset(buf, '\0', BUF_SIZE);
+> +       buf =3D calloc(1, BUF_SIZE);
+> +       ut_assertnonnull(buf);
+>         for (i =3D 0; i < 0x11; i++)
+>                 buf[i] =3D i * 0x11;
 >
-> * Address kernel-doc warnings
+> @@ -232,7 +228,7 @@ static int print_display_buffer(struct unit_test_stat=
+e *uts)
+>         ut_assert_nextline("00000000: 00 1f 20 21 7e 7f 80 81 ff 99      =
+              .. !~.....");
+>         ut_assert_console_end();
 >
-> v4:
+> -       unmap_sysmem(buf);
+> +       free(buf);
 >
-> * Update the function headers in fwu_arm_psa.c to pass kernel-doc tests
->
-> v2:
->
-> * As suggested by Michal: Add /** for marking kernel-doc format
->
-> v1:
->
-> * Add staging ABIs
->
->  include/efi_api.h             |   8 +
->  include/efi_loader.h          |   8 +
->  include/fwu_arm_psa.h         | 128 +++++++++++++
->  lib/efi_loader/efi_capsule.c  |  23 ++-
->  lib/fwu_updates/fwu_arm_psa.c | 350 ++++++++++++++++++++++++++++++++++
->  5 files changed, 515 insertions(+), 2 deletions(-)
->
-> diff --git a/include/efi_api.h b/include/efi_api.h
-> index eb61eafa028..cd19ec5e22c 100644
-> --- a/include/efi_api.h
-> +++ b/include/efi_api.h
-> @@ -10,6 +10,11 @@
->   *     David Mosberger-Tang <davidm@hpl.hp.com>
->   *     Stephane Eranian <eranian@hpl.hp.com>
->   *
-> + * Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
-> + *
-> + * Author:
-> + *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> + *
-
-Again, I am not sure if adding a couple of macros warrants putting a
-copyright. This is applicable to multiple of your patches. Maybe
-Ilias/Heinrich can comment here.
-
->   * From include/linux/efi.h in kernel 4.1 with some additions/subtractions
->   */
->
-> @@ -25,6 +30,9 @@
->   */
->  #define EFI_SPECIFICATION_VERSION (2 << 16 | 110)
->
-> +#define EFI_FIRMWARE_MANAGEMENT_CAPSULE_HEADER_VERSION 0x00000001
-> +#define EFI_FIRMWARE_MANAGEMENT_CAPSULE_IMAGE_HEADER_VERSION 0x00000003
-> +
->  /* Types and defines for EFI CreateEvent */
->  enum efi_timer_delay {
->         EFI_TIMER_STOP = 0,
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 8fd09aad2d0..3ad1d84a113 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -3,6 +3,11 @@
->   *  EFI application loader
->   *
->   *  Copyright (c) 2016 Alexander Graf
-> + *
-> + * Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
-> + *
-> + * Author:
-> + *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
->   */
->
->  #ifndef _EFI_LOADER_H
-> @@ -392,6 +397,9 @@ extern const efi_guid_t smbios3_guid;
->  extern const efi_guid_t efi_guid_text_input_protocol;
->  extern const efi_guid_t efi_guid_text_output_protocol;
->
-> +/*The current processed capsule */
-> +extern struct efi_capsule_header *g_capsule_data;
-> +
->  /**
->   * struct efi_open_protocol_info_item - open protocol info item
->   *
-> diff --git a/include/fwu_arm_psa.h b/include/fwu_arm_psa.h
-> index 9eb67ef4243..a7b7faf2b59 100644
-> --- a/include/fwu_arm_psa.h
-> +++ b/include/fwu_arm_psa.h
-> @@ -40,6 +40,21 @@
->  /* The entries correspond to the payloads in the storage device and the fake ESRT image */
->  #define FWU_DIRECTORY_IMAGE_ENTRIES_COUNT (CONFIG_FWU_NUM_IMAGES_PER_BANK + 1)
->
-> +/*
-> + * GUIDs for dummy payloads
-> + *
-> + * The GUIDs are generated with the UUIDv5 format.
-> + * Namespace: 7b5c472e-5671-4fb7-a824-36a8e86f05c1
-> + * Names: DUMMY_START, DUMMY_END
-> + */
-> +#define FWU_DUMMY_START_IMAGE_GUID \
-> +       EFI_GUID(0x6f784cbf, 0x7938, 0x5c23, 0x8d, 0x6e, \
-> +               0x24, 0xd2, 0xf1, 0x41, 0x0f, 0xa9)
-> +
-> +#define FWU_DUMMY_END_IMAGE_GUID \
-> +       EFI_GUID(0xb57e432b, 0xa250, 0x5c73, 0x93, 0xe3, \
-> +               0x90, 0x20, 0x5e, 0x64, 0xba, 0xba)
-> +
->  #define TS_RPC_MEM_RETRIEVE            (0xff0001)
->  #define TS_RPC_SERVICE_INFO_GET                (0xff0003)
->  #define RPC_SUCCESS                    (0)
-> @@ -62,7 +77,11 @@
->
->  enum fwu_abis {
->         FWU_DISCOVER = 0,
-> +       FWU_BEGIN_STAGING = 16,
-> +       FWU_END_STAGING = 17,
-> +       FWU_CANCEL_STAGING = 18,
->         FWU_OPEN = 19,
-> +       FWU_WRITE_STREAM = 20,
->         FWU_READ_STREAM = 21,
->         FWU_COMMIT = 22,
->         /* To be updated when adding new FWU IDs */
-> @@ -82,6 +101,14 @@ enum fwu_abi_errcode {
->         MAX_NUMBER_FWU_ERR
->  };
->
-> +/* Enum to classify the possible type of payloads */
-> +enum fwu_payload_type {
-> +       FWU_PAYLOAD_TYPE_REAL = 1, /* Real payload */
-> +       FWU_PAYLOAD_TYPE_DUMMY_START, /* The start dummy payload */
-> +       FWU_PAYLOAD_TYPE_DUMMY_END, /* The end dummy payload */
-> +       FWU_PAYLOAD_TYPE_INVALID, /* Invalid image_index */
-> +};
-> +
->  /* Container structure and helper macros to map between an FF-A error and relevant error log */
->  struct fwu_abi_errmap {
->         char *err_str[MAX_NUMBER_FWU_ERR];
-> @@ -173,6 +200,63 @@ struct __packed fwu_read_stream_resp {
->         u8  payload[];
->  };
->
-> +/**
-> + * struct fwu_begin_staging_args - fwu_begin_staging ABI arguments
-> + * @function_id: fwu_begin_staging service ID
-> + * @reserved: Reserved, must be zero
-> + * @vendor_flags: Vendor specific staging flags
-> + * @partial_update_count: The number of elements in the update_guid
-> + * @update_guid: An array of image type GUIDs that the update Client will update
-> + *               during the Staging state
-> + */
-> +struct __packed fwu_begin_staging_args {
-> +       u32 function_id;
-> +       u32 reserved;
-> +       u32 vendor_flags;
-> +       u32 partial_update_count;
-> +       efi_guid_t update_guid[];
-> +};
-> +
-> +/**
-> + * struct fwu_begin_staging_resp - fwu_begin_staging ABI returns
-> + * @status: The ABI return status
-> + */
-> +struct __packed fwu_begin_staging_resp {
-> +       int status;
-> +};
-> +
-> +/**
-> + * struct fwu_end_staging_args - fwu_end_staging ABI arguments
-> + * @function_id: fwu_end_staging service ID state
-> + */
-> +struct __packed fwu_end_staging_args {
-> +       u32 function_id;
-> +};
-> +
-> +/**
-> + * struct fwu_end_staging_resp - fwu_end_staging ABI returns
-> + * @status: The ABI return status
-> + */
-> +struct __packed fwu_end_staging_resp {
-> +       int status;
-> +};
-> +
-> +/**
-> + * struct fwu_cancel_staging_args - fwu_cancel_staging ABI arguments
-> + * @function_id: fwu_cancel_staging service ID state
-> + */
-> +struct __packed fwu_cancel_staging_args {
-> +       u32 function_id;
-> +};
-> +
-> +/**
-> + * struct fwu_cancel_staging_resp - fwu_cancel_staging ABI returns
-> + * @status: The ABI return status
-> + */
-> +struct __packed fwu_cancel_staging_resp {
-> +       int status;
-> +};
-> +
->  /**
->   * struct fwu_commit_args - fwu_commit ABI arguments
->   * @function_id: fwu_commit service ID
-> @@ -204,6 +288,28 @@ struct __packed fwu_commit_resp {
->         u32 total_work;
->  };
->
-> +/**
-> + * struct fwu_write_stream_args - fwu_write_stream ABI arguments
-> + * @function_id: fwu_write_stream service ID
-> + * @handle: The handle of the context being written to
-> + * @data_len: Size of the data present in the payload
-> + * @payload: The data to be transferred
-> + */
-> +struct __packed fwu_write_stream_args {
-> +       u32 function_id;
-> +       u32  handle;
-> +       u32 data_len;
-> +       u8 payload[];
-> +};
-> +
-> +/**
-> + * struct fwu_write_stream_resp - fwu_write_stream ABI returns
-> + * @status: The ABI return status
-> + */
-> +struct __packed fwu_write_stream_resp {
-> +       int status;
-> +};
-> +
->  /*
->   * FWU directory information structures
->   */
-> @@ -239,4 +345,26 @@ struct __packed fwu_image_directory {
->   */
->  int fwu_agent_init(void);
->
-> +/**
-> + * fwu_update_image() - Update an image
-> + * @image: Pointer to the payload
-> + * @image_index: Payload index
-> + * @image_size: Payload size in bytes
-> + *
-> + * Perform staging with multiple payloads support.
-> + *
-> + * Return: 0 on success
-> + */
-> +int fwu_update_image(const void *image, u8 image_index, u32 image_size);
-> +
-> +/**
-> + * fwu_get_payload_type() - Identifies the payload type
-> + * @image_index:       The payload index
-> + *
-> + * Identifies the FWU payload type based on the image index.
-> + *
-> + * Return: See @fwu_payload_type for details
-> + */
-> +enum fwu_payload_type fwu_get_payload_type(u32 image_index);
-> +
->  #endif
-> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-> index f19e78ae9d1..234e3c1b3c0 100644
-> --- a/lib/efi_loader/efi_capsule.c
-> +++ b/lib/efi_loader/efi_capsule.c
-> @@ -4,6 +4,11 @@
->   *
->   *  Copyright (c) 2018 Linaro Limited
->   *                     Author: AKASHI Takahiro
-> + *
-> + * Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
-> + *
-> + * Author:
-> + *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
->   */
-
-Same here as well.
-
--sughosh
-
->
->  #define LOG_CATEGORY LOGC_EFI
-> @@ -15,6 +20,7 @@
->  #include <fdtdec.h>
->  #include <fs.h>
->  #include <fwu.h>
-> +#include <fwu_arm_psa.h>
->  #include <hang.h>
->  #include <malloc.h>
->  #include <mapmem.h>
-> @@ -40,6 +46,8 @@ const efi_guid_t fwu_guid_os_request_fw_revert =
->  const efi_guid_t fwu_guid_os_request_fw_accept =
->                 FWU_OS_REQUEST_FW_ACCEPT_GUID;
->
-> +struct efi_capsule_header *g_capsule_data;
-> +
->  #define FW_ACCEPT_OS   (u32)0x8000
->
->  #ifdef CONFIG_EFI_CAPSULE_ON_DISK
-> @@ -196,6 +204,12 @@ efi_fmp_find(efi_guid_t *image_type, u8 image_index, u64 instance,
->                         continue;
->                 fmp = fmp_handler->protocol_interface;
->
-> +               if (IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
-> +                       if (fwu_get_payload_type(image_index) !=
-> +                               FWU_PAYLOAD_TYPE_REAL)
-> +                               return fmp;
-> +               }
-> +
->                 /* get device's image info */
->                 info_size = 0;
->                 image_info = NULL;
-> @@ -586,7 +600,7 @@ static efi_status_t efi_capsule_update_firmware(
->         capsule_size = capsule_data->capsule_image_size
->                         - capsule_data->header_size;
->
-> -       if (capsule->version != 0x00000001)
-> +       if (capsule->version != EFI_FIRMWARE_MANAGEMENT_CAPSULE_HEADER_VERSION)
->                 return EFI_UNSUPPORTED;
->
->         handles = NULL;
-> @@ -597,6 +611,10 @@ static efi_status_t efi_capsule_update_firmware(
->         if (ret != EFI_SUCCESS)
->                 return EFI_UNSUPPORTED;
->
-> +       if (IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
-> +               g_capsule_data = capsule_data;
-> +       }
-> +
->         /* Payload */
->         for (item = capsule->embedded_driver_count;
->              item < capsule->embedded_driver_count
-> @@ -611,7 +629,8 @@ static efi_status_t efi_capsule_update_firmware(
->
->                 image = (void *)capsule + capsule->item_offset_list[item];
->
-> -               if (image->version != 0x00000003) {
-> +               if (image->version !=
-> +                       EFI_FIRMWARE_MANAGEMENT_CAPSULE_IMAGE_HEADER_VERSION) {
->                         ret = EFI_UNSUPPORTED;
->                         goto out;
->                 }
-> diff --git a/lib/fwu_updates/fwu_arm_psa.c b/lib/fwu_updates/fwu_arm_psa.c
-> index 589a6283611..5dad906a021 100644
-> --- a/lib/fwu_updates/fwu_arm_psa.c
-> +++ b/lib/fwu_updates/fwu_arm_psa.c
-> @@ -25,6 +25,7 @@ static u8 g_fwu_version_major;
->  static u8 g_fwu_version_minor;
->  static bool g_fwu_initialized;
->  struct fwu_image_directory g_fwu_cached_directory;
-> +efi_guid_t g_update_guid[CONFIG_FWU_NUM_IMAGES_PER_BANK];
->
->  /* Error mapping declarations */
->
-> @@ -60,6 +61,18 @@ static struct fwu_abi_errmap err_msg_map[FWU_ERRMAP_COUNT] = {
->                         "FWU_NO_PERMISSION: The image cannot be read from",
->                 },
->         },
-> +       [FWU_ID_TO_ERRMAP_ID(FWU_WRITE_STREAM)] = {
-> +               {
-> +                       [FWU_UNKNOWN] =
-> +                       "FWU_UNKNOWN: Unrecognized handle",
-> +                       [FWU_DENIED] =
-> +                       "FWU_DENIED: The system is not in a Staging state",
-> +                       [FWU_NO_PERMISSION] =
-> +                       "FWU_NO_PERMISSION: The image cannot be written to",
-> +                       [FWU_OUT_OF_BOUNDS] =
-> +                       "FWU_OUT_OF_BOUNDS: less than data_len bytes available in the image",
-> +               },
-> +       },
->         [FWU_ID_TO_ERRMAP_ID(FWU_COMMIT)] = {
->                 {
->                         [FWU_UNKNOWN] =
-> @@ -72,6 +85,34 @@ static struct fwu_abi_errmap err_msg_map[FWU_ERRMAP_COUNT] = {
->                         "FWU_RESUME: The Update Agent yielded",
->                 },
->         },
-> +       [FWU_ID_TO_ERRMAP_ID(FWU_BEGIN_STAGING)] = {
-> +               {
-> +                       [FWU_UNKNOWN] =
-> +                       "FWU_UNKNOWN: One of more GUIDs in the update_guid field are unknown to the Update Agent",
-> +                       [FWU_DENIED] =
-> +                       "FWU_DENIED: The Firmware Store is in the Trial state or the platform did not boot correctly",
-> +                       [FWU_BUSY] =
-> +                       "FWU_BUSY: The Client is temporarily prevented from entering the Staging state",
-> +               },
-> +       },
-> +       [FWU_ID_TO_ERRMAP_ID(FWU_END_STAGING)] = {
-> +               {
-> +                       [FWU_BUSY] =
-> +                       "FWU_BUSY: There are open image handles",
-> +                       [FWU_DENIED] =
-> +                       "FWU_DENIED: The system is not in a Staging state",
-> +                       [FWU_AUTH_FAIL] =
-> +                       "FWU_AUTH_FAIL: At least one of the updated images fails to authenticate",
-> +                       [FWU_NOT_AVAILABLE] =
-> +                       "FWU_NOT_AVAILABLE: The Update Agent does not support partial updates",
-> +               },
-> +       },
-> +       [FWU_ID_TO_ERRMAP_ID(FWU_CANCEL_STAGING)] = {
-> +               {
-> +                       [FWU_DENIED] =
-> +                       "FWU_DENIED: The system is not in a Staging state",
-> +               },
-> +       },
->  };
->
->  /**
-> @@ -125,6 +166,104 @@ static int fwu_print_error_log(u32 fwu_id, int fwu_errno)
 >         return 0;
 >  }
+> @@ -244,13 +240,14 @@ static int print_hexdump_line(struct unit_test_stat=
+e *uts)
+>         u8 *buf;
+>         int i;
 >
-> +/**
-> + * fwu_get_payload_type() - Identifies the payload type
-> + * @image_index:       The payload index
-> + *
-> + * Description: Identifies the FWU payload type based on the image index.
-> + *
-> + * Return: See @fwu_payload_type for details
-> + */
-> +enum fwu_payload_type fwu_get_payload_type(u32 image_index)
-> +{
-> +       efi_guid_t *image_guid = NULL;
-> +       int i;
-> +       struct efi_fw_image *fw_array;
-> +
-> +       fw_array = update_info.images;
-> +       for (i = 0; i < update_info.num_images; i++) {
-> +               if (fw_array[i].image_index == image_index) {
-> +                       image_guid = &fw_array[i].image_type_id;
-> +                       break;
-> +               }
-> +       }
-> +
-> +       if (!image_guid)
-> +               return FWU_PAYLOAD_TYPE_INVALID;
-> +
-> +       if (!guidcmp(image_guid,
-> +                    &((efi_guid_t)FWU_DUMMY_START_IMAGE_GUID)))
-> +               return FWU_PAYLOAD_TYPE_DUMMY_START;
-> +
-> +       if (!guidcmp(image_guid,
-> +                    &((efi_guid_t)FWU_DUMMY_END_IMAGE_GUID)))
-> +               return FWU_PAYLOAD_TYPE_DUMMY_END;
-> +
-> +       return FWU_PAYLOAD_TYPE_REAL;
-> +}
-> +
-> +/**
-> + * fwu_get_capsule_guids() - Detect the payloads GUIDs in the caspsule
-> + *
-> + * @partial_update_count:      A pointer to the number of payloads to update
-> + * @saved_guids:       A pointer to a GUIDs array for the payloads GUIDs
-> + *
-> + * Description: Parse the current capsule and detect the payloads GUIDs.
-> + *
-> + * Return: EFI_SUCCESS on success. Otherwise, failure.
-> + */
-> +static efi_status_t fwu_get_capsule_guids(u32 *partial_update_count,
-> +                                         efi_guid_t saved_guids[])
-> +{
-> +       struct efi_firmware_management_capsule_header *capsule;
-> +       struct efi_firmware_management_capsule_image_header *image;
-> +       int item;
-> +       size_t capsule_size;
-> +       efi_status_t ret = EFI_SUCCESS;
-> +
-> +       if (!saved_guids || !partial_update_count)
-> +               return EFI_INVALID_PARAMETER;
-> +
-> +       *partial_update_count = 0;
-> +       capsule = (void *)g_capsule_data + g_capsule_data->header_size;
-> +       capsule_size = g_capsule_data->capsule_image_size
-> +               - g_capsule_data->header_size;
-> +
-> +       /* Payload */
-> +       for (item = capsule->embedded_driver_count;
-> +            item < capsule->embedded_driver_count
-> +                    + capsule->payload_item_count; item++) {
-> +               /* sanity check */
-> +               if ((capsule->item_offset_list[item] + sizeof(*image)
-> +                               >= capsule_size)) {
-> +                       ret = EFI_INVALID_PARAMETER;
-> +                       log_err("FWU: Insufficient data, err (0x%lx)\n", ret);
-> +                       break;
-> +               }
-> +
-> +               image = (void *)capsule + capsule->item_offset_list[item];
-> +
-> +               if (image->version !=
-> +                       EFI_FIRMWARE_MANAGEMENT_CAPSULE_IMAGE_HEADER_VERSION) {
-> +                       ret = EFI_UNSUPPORTED;
-> +                       log_err("FWU: Version check failed, err (0x%lx)\n",
-> +                               ret);
-> +                       break;
-> +               }
-> +
-> +               if (fwu_get_payload_type(image->update_image_index) !=
-> +                                        FWU_PAYLOAD_TYPE_REAL)
-> +                       continue;
-> +
-> +               guidcpy(&saved_guids[*partial_update_count],
-> +                       &image->update_image_type_id);
-> +
-> +               (*partial_update_count)++;
-> +       }
-> +
-> +       return ret;
-> +}
-> +
->  /**
->   * fwu_invoke_svc() - FWU service call request
->   * @svc_id: FWU ABI function ID
-> @@ -360,6 +499,86 @@ static int fwu_read_stream(u32 handle, u8 *buffer, u32 buffer_size)
->         return ret;
->  }
+> -       buf =3D map_sysmem(0, BUF_SIZE);
+> -       memset(buf, '\0', BUF_SIZE);
+> +       buf =3D calloc(1, BUF_SIZE);
+> +       ut_assertnonnull(buf);
+>         for (i =3D 0; i < 0x11; i++)
+>                 buf[i] =3D i * 0x11;
 >
-> +/**
-> + * fwu_begin_staging() -  fwu_begin_staging ABI
-> + *
-> + * Description: This call indicates to the Update Agent that a new staging
-> + *  process will commence.
-> + *
-> + * Return: 0 on success. Otherwise, failure.
-> + */
-> +static int fwu_begin_staging(void)
-> +{
-> +       struct fwu_begin_staging_args *args = g_fwu_buf;
-> +       struct fwu_begin_staging_resp *resp = g_fwu_buf;
-> +       char *svc_name = "FWU_BEGIN_STAGING";
-> +       efi_status_t ret;
-> +
-> +       /* Filling the arguments in the shared buffer */
-> +       args->function_id = FWU_BEGIN_STAGING;
-> +
-> +       args->reserved = 0;
-> +       args->vendor_flags = 0;
-> +
-> +       ret = fwu_get_capsule_guids(&args->partial_update_count,
-> +                                   args->update_guid);
-> +       if (ret) {
-> +               log_err("FWU: Failure to get the payloads GUIDs\n");
-> +               return -ENODATA;
-> +       }
-> +
-> +       log_info("FWU: Updating %d payload(s)\n", args->partial_update_count);
-> +
-> +       /* Executing the FWU ABI through the FF-A bus */
-> +       return fwu_invoke_svc(args->function_id, svc_name,
-> +                             sizeof(*args), sizeof(*resp), NULL);
-> +}
-> +
-> +/**
-> + * fwu_end_staging() -  fwu_end_staging ABI
-> + *
-> + * Description: The Client informs the Update Agent that all the images, meant
-> + * to be updated, have been transferred to the Update Agent and that the staging
-> + * has terminated.
-> + *
-> + * Return: 0 on success. Otherwise, failure.
-> + */
-> +static int fwu_end_staging(void)
-> +{
-> +       struct fwu_end_staging_args *args = g_fwu_buf;
-> +       struct fwu_end_staging_resp *resp = g_fwu_buf;
-> +       char *svc_name = "FWU_END_STAGING";
-> +
-> +       /* Filling the arguments in the shared buffer */
-> +       args->function_id = FWU_END_STAGING;
-> +
-> +       /* Executing the FWU ABI through the FF-A bus */
-> +       return fwu_invoke_svc(args->function_id, svc_name,
-> +                             sizeof(*args), sizeof(*resp), NULL);
-> +}
-> +
-> +/**
-> + * fwu_cancel_staging() -  fwu_cancel_staging ABI
-> + *
-> + * Description: The Client cancels the staging procedure and the system
-> + * transitions back to the Regular state.
-> + *
-> + * Return: 0 on success. Otherwise, failure.
-> + */
-> +static int fwu_cancel_staging(void)
-> +{
-> +       struct fwu_cancel_staging_args *args = g_fwu_buf;
-> +       struct fwu_cancel_staging_resp *resp = g_fwu_buf;
-> +       char *svc_name = "FWU_CANCEL_STAGING";
-> +
-> +       /* Filling the arguments in the shared buffer */
-> +       args->function_id = FWU_CANCEL_STAGING;
-> +
-> +       /* Executing the FWU ABI through the FF-A bus */
-> +       return fwu_invoke_svc(args->function_id, svc_name,
-> +                             sizeof(*args), sizeof(*resp), NULL);
-> +}
-> +
->  /**
->   * fwu_commit() -  fwu_commit ABI
->   * @handle: The handle of the context being closed
-> @@ -402,6 +621,137 @@ static int fwu_commit(u32 handle, u32 acceptance_req, u32 max_atomic_len)
+>         /* Check buffer size calculations */
+> -       linebuf =3D map_sysmem(0x400, BUF_SIZE);
+> +       linebuf =3D calloc(1, BUF_SIZE);
+> +       ut_assertnonnull(buf);
+>         memset(linebuf, '\xff', BUF_SIZE);
+>         ut_asserteq(-ENOSPC, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 75=
+));
+>         ut_asserteq(0xff, linebuf[0]);
+> @@ -258,7 +255,8 @@ static int print_hexdump_line(struct unit_test_state =
+*uts)
+>         ut_asserteq('\0', linebuf[75]);
+>         ut_asserteq(0xff, linebuf[76]);
+>
+> -       unmap_sysmem(buf);
+> +       free(linebuf);
+> +       free(buf);
+>
 >         return 0;
 >  }
+> @@ -269,69 +267,74 @@ static int print_do_hex_dump(struct unit_test_state=
+ *uts)
+>         u8 *buf;
+>         int i;
 >
-> +/**
-> + * fwu_write_stream() -  fwu_write_stream ABI
-> + * @handle: The handle of the context being writen to
-> + * @payload: The data to be transferred
-> + * @payload_size: Size of the data present in the payload
-> + *
-> + *  Description: The call writes at most max_payload_size bytes to the Update
-> + *  Agent context pointed to by handle.
-> + *
-> + * Return: 0 on success. Otherwise, failure
-> + */
-> +static int fwu_write_stream(u32 handle, const u8 *payload, u32 payload_size)
-> +{
-> +       int ret;
-> +       u32 write_size, max_write_size, curr_write_offset = 0;
-> +       u32 payload_bytes_left = payload_size, fwu_buf_bytes_left;
-> +       struct fwu_write_stream_args *args = g_fwu_buf;
-> +       struct fwu_write_stream_resp *resp = g_fwu_buf;
-> +       char *svc_name = "FWU_WRITE_STREAM";
-> +
-> +       if (!payload || !payload_size)
-> +               return -EINVAL;
-> +
-> +       fwu_buf_bytes_left = FWU_BUFFER_SIZE - sizeof(*args);
-> +
-> +       if (g_max_payload_size <= fwu_buf_bytes_left)
-> +               max_write_size = g_max_payload_size;
-> +       else
-> +               max_write_size = fwu_buf_bytes_left;
-> +
-> +       while (curr_write_offset < payload_size) {
-> +               if (payload_bytes_left <= max_write_size)
-> +                       write_size = payload_bytes_left;
-> +               else
-> +                       write_size = max_write_size;
-> +
-> +               /* Filling the arguments in the shared buffer */
-> +               args->function_id = FWU_WRITE_STREAM;
-> +               args->handle = handle;
-> +               args->data_len = write_size;
-> +               memcpy(args->payload, payload + curr_write_offset, write_size);
-> +
-> +               /* Executing the FWU ABI through the FF-A bus */
-> +               ret = fwu_invoke_svc(args->function_id, svc_name, sizeof(*args),
-> +                                    sizeof(*resp), NULL);
-> +               if (ret)
-> +                       return ret;
-> +
-> +               curr_write_offset += write_size;
-> +               payload_bytes_left -= write_size;
-> +
-> +               log_debug("%s:  %d bytes written, remaining %d bytes\n",
-> +                         svc_name, write_size, payload_bytes_left);
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +/**
-> + * fwu_update_image() - Update an image
-> + *
-> + * @image: Pointer to the payload to write
-> + * @image_index: The payload index
-> + * @image_size: The payload size
-> + *
-> + * Description: Perform staging with multiple payloads support.
-> + * The capsule is expected to:
-> + *     - Start with a dummy payload to mark the start of the payloads sequence
-> + *     - One or more payloads to be written to the storage device
-> + *     - End with a dummy payload to mark the end of the payloads sequence
-> + *
-> + * The possible payloads in the capsule are described in the board file
-> + * through struct efi_fw_image. This includes the dummy payloads.
-> + * The dummy payloads image indexes must be >= CONFIG_FWU_NUM_IMAGES_PER_BANK
-> + * The dummy payloads are not sent to the Secure world and are not written to
-> + * the storage device.
-> + *
-> + * Return: 0 on success. Otherwise, failure.
-> + */
-> +int fwu_update_image(const void *image, u8 image_index, u32 image_size)
-> +{
-> +       int ret;
-> +       u32 handle;
-> +
-> +       if (!image)
-> +               return -EINVAL;
-> +
-> +       /* Only image indexes starting from 1 are supported */
-> +       if (!image_index || image_index > update_info.num_images)
-> +               return -EINVAL;
-> +
-> +       if (fwu_get_payload_type(image_index) ==
-> +               FWU_PAYLOAD_TYPE_DUMMY_START) {
-> +               return fwu_begin_staging();
-> +       }
-> +
-> +       if (fwu_get_payload_type(image_index) ==
-> +               FWU_PAYLOAD_TYPE_DUMMY_END) {
-> +               ret = fwu_end_staging();
-> +               if (ret)
-> +                       goto cancel_staging;
-> +               return 0;
-> +       }
-> +
-> +       ret = fwu_open(&g_fwu_cached_directory.entries[image_index - 1].image_guid,
-> +                      FWU_OP_TYPE_WRITE, &handle);
-> +       if (ret)
-> +               goto cancel_staging;
-> +
-> +       ret = fwu_write_stream(handle, image, image_size);
-> +       if (ret)
-> +               goto cancel_staging;
-> +
-> +       /*
-> +        * The Update Agent can execute for an unbounded time.
-> +        * The image should be tried before being accepted.
-> +        * So, we put the acceptance request as 'not accepted'.
-> +        */
-> +       ret = fwu_commit(handle, FWU_IMG_NOT_ACCEPTED, 0);
-> +       if (ret)
-> +               goto cancel_staging;
-> +
-> +       log_debug("FWU: Image at index %d updated\n", image_index);
-> +
-> +       return 0;
-> +
-> +cancel_staging:
-> +
-> +       return fwu_cancel_staging();
-> +}
-> +
->  /**
->   * fwu_read_directory() - Read FWU directory information
->   *
+> -       /* This test requires writable memory at zero */
+> -       if (IS_ENABLED(CONFIG_X86))
+> -               return -EAGAIN;
+> -
+> -       buf =3D map_sysmem(0, BUF_SIZE);
+> -       memset(buf, '\0', BUF_SIZE);
+> +       buf =3D calloc(1, BUF_SIZE);
+> +       ut_assertnonnull(buf);
+>         for (i =3D 0; i < 0x11; i++)
+>                 buf[i] =3D i * 0x11;
+>
+>         /* bytes */
+>         print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, buf, 0x12);
+>         ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc=
+ dd ee ff  ..\"3DUfw........",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
+;
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf);
+>         ut_assert_nextline("%0*lx: 10 00                                 =
+           ..",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
+);
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf + 0x10UL);
+>         ut_assert_console_end();
+>
+>         /* line length */
+>         print_hex_dump("", DUMP_PREFIX_ADDRESS, 8, 1, buf, 0x12, true);
+>         ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77  ..\"3DUfw",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
+;
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf);
+>         ut_assert_nextline("%0*lx: 88 99 aa bb cc dd ee ff  ........",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x8UL)=
+;
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf + 0x8UL);
+>         ut_assert_nextline("%0*lx: 10 00                    ..",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
+);
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf + 0x10UL);
+>         ut_assert_console_end();
+> -       unmap_sysmem(buf);
+>
+>         /* long line */
+>         buf[0x41] =3D 0x41;
+>         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0x40, 1, buf, 0x42, true)=
+;
+>         ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc=
+ dd ee ff 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00=
+ 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00=
+ 00  ..\"3DUfw........................................................",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
+;
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf);
+>         ut_assert_nextline("%0*lx: 00 41                                 =
+                                                                           =
+                                                                           =
+     .A",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x40UL=
+);
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf + 0x40UL);
+>         ut_assert_console_end();
+>
+>         /* 16-bit */
+>         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 2, buf, 0x12, true);
+>         ut_assert_nextline("%0*lx: 1100 3322 5544 7766 9988 bbaa ddcc ffe=
+e  ..\"3DUfw........",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
+;
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf);
+>         ut_assert_nextline("%0*lx: 0010                                  =
+   ..",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
+);
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf + 0x10UL);
+>         ut_assert_console_end();
+> -       unmap_sysmem(buf);
+>
+>         /* 32-bit */
+>         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 4, buf, 0x14, true);
+>         ut_assert_nextline("%0*lx: 33221100 77665544 bbaa9988 ffeeddcc  .=
+.\"3DUfw........",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
+;
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf);
+>         ut_assert_nextline("%0*lx: 00000010                             .=
+...",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
+);
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf + 0x10UL);
+>         ut_assert_console_end();
+> -       unmap_sysmem(buf);
+>
+>         /* 64-bit */
+>         print_hex_dump("", DUMP_PREFIX_ADDRESS, 16, 8, buf, 0x18, true);
+>         ut_assert_nextline("%0*lx: 7766554433221100 ffeeddccbbaa9988  ..\=
+"3DUfw........",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
+;
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf);
+>         ut_assert_nextline("%0*lx: 0000000000000010                   ...=
+.....",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
+);
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf + 0x10UL);
+>         ut_assert_console_end();
+> -       unmap_sysmem(buf);
+>
+>         /* ASCII */
+>         buf[1] =3D 31;
+> @@ -342,9 +345,10 @@ static int print_do_hex_dump(struct unit_test_state =
+*uts)
+>         buf[8] =3D 255;
+>         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 1, buf, 10, true);
+>         ut_assert_nextline("%0*lx: 00 1f 20 21 7e 7f 80 81 ff 99         =
+           .. !~.....",
+> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
+;
+> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> +                          (uintptr_t)buf);
+>         ut_assert_console_end();
+> -       unmap_sysmem(buf);
+> +       free(buf);
+>
+>         return 0;
+>  }
 > --
-> 2.43.0
+> 2.51.0
 >
