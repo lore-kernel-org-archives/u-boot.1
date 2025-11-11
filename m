@@ -4,82 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ECF3CCFA1A
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:31:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199AECCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 13:32:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C0C6839D6;
-	Tue, 11 Nov 2025 14:31:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86502839D6;
+	Tue, 11 Nov 2025 14:32:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XmKNmqPs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WrjEf6VN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 408DF83B4E; Tue, 11 Nov 2025 14:31:05 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id E442383B99; Tue, 11 Nov 2025 14:32:12 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23A7D8312A
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:31:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C80BA8312A
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 14:32:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c281c649ccso2467457a34.2
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 05:31:03 -0800 (PST)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3e2bceca89eso1211022fac.0
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 05:32:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762867862; x=1763472662; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Fs8PM7FMtkbhJR/R7XgxX3FsMrKW73jioNlULmsUlOM=;
- b=XmKNmqPsER/Glrm2PxdJB69+dokU96Y0OCVgmnrNzc57Gd8LkteagFiIqkBQUZoYcA
- CvMQq8mu+0/nbm4Y4VFJJA2yBGgCDHiCPZvKmsjZ6CPYtANTNg0U1NWPjVtJ48oYRDIW
- Sx697byW/X5b4RePLDop6fKwEb8U9nLaXZI2w=
+ d=konsulko.com; s=google; t=1762867929; x=1763472729; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+vtm51afeLgakGklAe4KWtlaK3sl949EVNq2RO7md2s=;
+ b=WrjEf6VNWui9lGHiWYZHaVvbd7gtXaKXvTjA+Zrh17wEP1pDTHe/NGArBfCXmTj++Q
+ gH5tFpmJ/oGYkOGfpJAlZLV3Ln3kwn42JeTE+R1UGyoJUA2ZlQoqPz21ascA1Xve2qkJ
+ dtBNXxG8hLikPDosHpmvCZrvwycIpQ5tZoaIs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762867862; x=1763472662;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Fs8PM7FMtkbhJR/R7XgxX3FsMrKW73jioNlULmsUlOM=;
- b=QmmTYDGtR7y5ubxsajgPDax03NwdcN1TditUgu1aDal5XnQC1wcg4aJ8wpUtOP7LwX
- GVNUUO6+b6WUPAytljixod0VusXC42+/9wAES7SoBsRT0c4alSCp2L+OSTeC1k4O0PXN
- toprdP7JQGsOfM+7sLZPxViZcQBpxiuBLocm0ceHhuzWVAuDU+yolGj1aSMAGwHaOd+I
- WorbqMSULM5fnAsw3p5fyEhr4HWwgLX6oVH9CqSV7N/nxmSBvviVk6Txn3495Nvp8zNh
- ksX3iyirxHZM/d0A09/14j9O2MDz24JGJZY2t8cc3uZp5JdkZpQEHcx73v57lNjW43WN
- ghXg==
-X-Gm-Message-State: AOJu0YzRS6tYj0ab/81fM15DoO8oXhhwlCT0YVNgIM1LM7AsX/FcMnFX
- isp8/Wlba70tEue1i1AH/ILQIklmSQWWmtxB2QOP3arO4SaZ+7LxYkyU3QYCMoIsmCU=
-X-Gm-Gg: ASbGncskxMzdwEUvrXTtZbkEhghoVzkTcI3ZIifCaQ69XxPTQv+QfzKhwhHdmMS9qiC
- n5h8QB+G2Wi90LyX+NBgjYzKMuAXGtE3pPXy18QWA72zod+y1nFm33NIdMGzqI6KcXg6vTish4g
- UvpBv6qrsZmxCwoPaMudLivIMPqmnSn72NMEN7qCG7ab/+5zQRiqyCfj6CC4/2ixynDx7yGhdUi
- Ms+f9juxjIvEwNuRRF7T7oIWdyef6NyA8FDAAGSlqYq0sIHfKxLGkdeYwp2dycxB6veK+PUHvd1
- fDSEDuwWTj48ERV7yK0p37BUyDThp4ERZZ47UEI8j3DYQs35pOhUgqN09BXRlceZnSix425TFOZ
- mu0X9kjHz5wc6Ofgb29dKJycLnzKeyMpNZOxHJgMGS08SJ7aWAEVU05TIgB4ASicj6SO4C/J9RH
- ZZPPPw2PrQdFdZyDkDK24tpID16kNlS99her2gmntwrVUsi/IrVk0TCRZEsXU=
-X-Google-Smtp-Source: AGHT+IFOU6/EmzOOX1Kk1HL/YMAiXh/HLQfUfmUi+HzOrhGnoCym9Ej3LuSHIoQ9Sgl1YrWyOSZYvA==
-X-Received: by 2002:a05:6830:4412:b0:7c6:9572:fd96 with SMTP id
- 46e09a7af769-7c6fd73989dmr7587195a34.7.1762867861815; 
- Tue, 11 Nov 2025 05:31:01 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1762867929; x=1763472729;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+vtm51afeLgakGklAe4KWtlaK3sl949EVNq2RO7md2s=;
+ b=do7HEmdSQytbcw79Wc8RsEuIn4xjG8+iTEcLc9bJMioCJjzUaMlE2awxoh9cuMxHUf
+ yzhCtjJhFeCkFOy1fi0RPZTdj31zexeydzlOIy8+/LJCZq7CFCNFG7X9HNVxMfxX9z6Q
+ XjLEhTtsd+z1XwVpqnVwuaUnPOXinHzZNR2aa9MBNob7q8N+YQ7OGCZ2G22Vq08nsi1V
+ mkzMvMAN3UYuikLEWv01emmj+fjjt8uZ/R1wyIUQV6oiqiqmDFgL2/LrUV2Yph6WXKPU
+ 0/5BtA1ieKRxfBis83f72AGyOj0h6cYGgVz3UoEHZkYmsQcGClkZw2SKn42AbrCcQrWF
+ mKoA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX9ml/giI3iSQT3fx4ZqkKIISWQR9mRHPjyCIqn3GpfW4lJCearwJ3OjDIsCFbxp43jnRpto7g=@lists.denx.de
+X-Gm-Message-State: AOJu0YznVk/Lc3arxzVcFsgidUWIoAaLxFRcnORTSJ7aOuzfmKxkQ9oT
+ dIwTtZPsyP4/N4qmUiOW+mKq/GvGEZBNjfCCHbGwneW2MbkRwZz4WQGjNsWaCO35fZU=
+X-Gm-Gg: ASbGnct7Iu9hz4k+2VYI2DicdhvDjtFCjiRAZ8J6quJ+p5JhDxkrQnyHhQeELfhIODc
+ US1mwBu9UGIOp1qi7rSTqFMci6Rl5IFikouh64L16pxZGUXQesh50k7tQAJRVp4QYaHobjcuRpr
+ zGLBE0JlIjP6VaOaphhAGYbJHfNBrZKO/Pnr+66px/8RcgwHr3H8bEEVXWQRRtp5rtjc+iXWIqY
+ FniaZj43TNcs6Bu5s9EMthwuiAuzvh149kKsbWBIYVJk6gZmM8X+dQx+V0wfrTmrSd6SZmcIIGR
+ hASKZc9xFnrGiZDVAZFGVS3UAS7IJc+iG4VytJbfa0F3o+Q/alAr12CaMkcg+DLH8SxC+xnHANo
+ F8YCqyXIXc99HGvF/nIgTXoYRBQVuKY5LNSk0mJ+vdtCnjLp93y3cqsAgZlXjvsUJJCE/Pbalvg
+ FaS+EMG0hboyTdJL8BH9Z4FdZyGgbw6QbkeetdioClApwgXDcBBg==
+X-Google-Smtp-Source: AGHT+IH/9rcUuCvFr0WCPpDQrH30PvcSW/FnPpBPQECAleRVGzWpIrTtNHqq2q89zGylunY34xanzg==
+X-Received: by 2002:a05:6870:e254:b0:3d2:8e66:d5f7 with SMTP id
+ 586e51a60fabf-3e7c289a0f7mr7408490fac.32.1762867929517; 
+ Tue, 11 Nov 2025 05:32:09 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f10f5c0bsm6946869a34.18.2025.11.11.05.31.01
+ 586e51a60fabf-3e41ebb108csm7956871fac.1.2025.11.11.05.32.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 05:31:01 -0800 (PST)
+ Tue, 11 Nov 2025 05:32:08 -0800 (PST)
+Date: Tue, 11 Nov 2025 07:32:05 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <aRKPvJEo6IbR3d0b@nxa18884-linux>
-References: <aRKPvJEo6IbR3d0b@nxa18884-linux>
-Subject: Re: [GIT PULL] please pull scmi-master-2025-11-11
-Message-Id: <176286786115.3306098.14122428542189179188.b4-ty@konsulko.com>
-Date: Tue, 11 Nov 2025 07:31:01 -0600
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Raymond Mao <raymond.mao@linaro.org>, Michal Simek <michal.simek@amd.com>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Peng Fan <peng.fan@nxp.com>, Ben Dooks <ben.dooks@codethink.co.uk>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH RESEND 1/9] test: fdt_test_apply requires
+ CONFIG_OF_LIBFDT_OVERLAY
+Message-ID: <20251111133205.GR6688@bill-the-cat>
+References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-2-heinrich.schuchardt@canonical.com>
+ <CAC_iWjK_SUEZsEzT3zb2BK-dwcXdp1gZoU880Wc1efSPAzftMw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3yx6Z+KJwWJ5kXWc"
+Content-Disposition: inline
+In-Reply-To: <CAC_iWjK_SUEZsEzT3zb2BK-dwcXdp1gZoU880Wc1efSPAzftMw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,23 +113,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Nov 2025 09:22:04 +0800, Peng Fan wrote:
 
-> Please pull scmi-master-2025-11-11
-> 
-> -------------------------------------------------------
-> - Support scmi v3.2 CONFIG_SET for clock protocol
-> - A patchset from Marek to optimize the scmi clk
->   booting time
-> - Fix scmi clk set_parent in non-CCF case
-> - Drop mmu_set_region_dcache_behaviour in firmware scmi
-> -------------------------------------------------------
-> 
-> [...]
+--3yx6Z+KJwWJ5kXWc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Merged into u-boot/master, thanks!
+On Tue, Nov 11, 2025 at 10:29:23AM +0200, Ilias Apalodimas wrote:
+> Hi Heinrich
+>=20
+> On Sun, 9 Nov 2025 at 12:10, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > The `fdt apply` sub-command is only available if CONFIG_OF_LIBFDT_OVERL=
+AY
+> > is enabled.
+> >
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  test/cmd/fdt.c | 3 +++
+> >  1 file changed, 3 insertions(+)
+> >
+> > diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+> > index 96a8488e172..a36f2dcdda8 100644
+> > --- a/test/cmd/fdt.c
+> > +++ b/test/cmd/fdt.c
+> > @@ -1319,6 +1319,9 @@ static int fdt_test_apply(struct unit_test_state =
+*uts)
+> >         char fdt[8192], fdto[8192];
+> >         ulong addr, addro;
+> >
+> > +       if (!IS_ENABLED(CONFIG_OF_LIBFDT_OVERLAY))
+> > +               return -EAGAIN;
+>=20
+> The asserts return CMD_RET_FAILURE on failures. Should't we use the same =
+here?
+>=20
+> > +
+> >         /* Create base DT with __symbols__ node */
+> >         ut_assertok(fdt_create(fdt, sizeof(fdt)));
+> >         ut_assertok(fdt_finish_reservemap(fdt));
 
--- 
+Or just guard the whole test if #ifdef CONFIG_OF_LIBFDT_OVERLAY ...
+#endif.
+
+--=20
 Tom
 
+--3yx6Z+KJwWJ5kXWc
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRM60gAKCRAr4qD1Cr/k
+CoDqAP4ojHJKlasLgBZdXMISLIoTNhZ5/JWFbsX0o/LIDbSYoAD+LzxitJvZaP2z
+Z+qfFQcAuOrLnl/xcLFDdR71Bs9ggQ8=
+=ZRR6
+-----END PGP SIGNATURE-----
+
+--3yx6Z+KJwWJ5kXWc--
