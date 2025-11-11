@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EDD3CCFA18
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 20:15:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB7FCCFA1A
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 20:15:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 256CE83F98;
-	Tue, 11 Nov 2025 21:15:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6E6C483BBE;
+	Tue, 11 Nov 2025 21:15:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U85DaLvw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i6s4U43g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D37BB83C35; Tue, 11 Nov 2025 21:15:03 +0100 (CET)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 461B483F97; Tue, 11 Nov 2025 21:15:08 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7317F83B83
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 21:14:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4508983BBE
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 21:14:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4501b097976so51518b6e.0
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 12:14:58 -0800 (PST)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7c70fcc8561so67292a34.0
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 12:14:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762892097; x=1763496897; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762892098; x=1763496898; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=FKLEJMFV+UsAQMhDE4M3s3Bf1Jf79w1nnJn99l5Qb6w=;
- b=U85DaLvwRbRDW8egM+TSlRzmU2WkKhx1mbAoR8IsvgQ/Sh20JQm8M0U3FyBDrKM0EV
- vfJGIkB65YesiTbKObL3Q7gr+gCH82w+XFtEHduaYfJKYCIczwwBJYQxCEW1xubhDIVf
- 5yxQ8WV+EWV9BquozWoICgBM1F0VY3ydmWYjw=
+ :reply-to; bh=hQW1mJQwyiU7E+b4jygQ7iwwZWpXyJpOMt+PKWHpYJI=;
+ b=i6s4U43gNwuAQH6qqQwJqL1bpgOrEqZC7WwlVd2XgpBLdEyYfZRnusowXCo4TqGxRb
+ E6FP/CeINnBoXNj9pNL8kVvUj7ravodB2rvi4sUSF9tKB3uBtu+/kggFFELRfZ0U3pCA
+ Od7Khig8uRYqRnOQJVAdsk05H7JLUJ2O29Zmk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762892097; x=1763496897;
+ d=1e100.net; s=20230601; t=1762892098; x=1763496898;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=FKLEJMFV+UsAQMhDE4M3s3Bf1Jf79w1nnJn99l5Qb6w=;
- b=xNkS5FweMNcXfyl6eMjLMcSWR9iuZyy6BE+JsapbXGEt9yBUGE4vgS0PHfMboQ2xoA
- yWIXdiPupAh59U7gAP2qA+U0EIiGeS63v2JSxeKUvIyd5lh3aRSDqFegVGXHrcN8mmyg
- MGhUrpR3BfK2NA/TGUekMQx86fWR56AQqp4X5Uyf9J3/E68N+qmvntBmtMTzKlSaWZdD
- 1ahtnJFN5mCCXOCSBtkJDAh8Qgpqtvq9mVL1dRoj6Bb59Qeu7QmHpa4YrTU5VF+ZJPyJ
- qQNp8f5L2LKJYPwdj0d/HWPyJY4XamRtA4IFLu0mCvwX/4T80QZ6h6o7un4VRY2LqSOW
- Jveg==
-X-Gm-Message-State: AOJu0Yx1ki3pfGSmiAljZ8vxd7eY4lbDa91nrOY3DEznoTu5n+ZYs/OP
- KYWo4e/jYyF2x4xr8UywrE9pwlgmLEqgavmNcFTo0L+Ieh0P8EcLPjvnzJaazvthnyXlT7NvTym
- CnWY2chVzXg==
-X-Gm-Gg: ASbGncuoS1UWoUecJ3gHwYJ906gXX2NoEAmOcOV88EqTXkDu3qdGlIMta1pQkbxkDYT
- DCO6eIvhSqleE8Jb1+o8UVwcEZDBFaKaLcmz2exZJMmb12exlGzcm+KPrhM6nejHIFhuvSaccqG
- vBSHokoss/6bW/yO6BpI5qpX3Ge4FHWk8vA0JSxJB94t35XByCiWxrCPwe25dro1csqJrNxISTy
- MVf411H8IlajGT6t/D73mdl6kad0Uza3NT8nfg3WgdNwS2/mevhR4KatMUJaS2QybbbkgG0H768
- 2IUSfSxhd6DY7xLTYVUwNr0fwZePUckzioNVgbVcJlevPUQmYIT5W5k3a49euV9hF9cBoqlwe4c
- K0kPyTBn5kp+fsG/rzJo9t9AdX/sGImeM+EyqK155oTxu5u/PbSMB02J69F5TZG2hWfeztKY5EK
- uz17I2R6V9dqrbWqksZEi1D0SmpknVfybdKSormw==
-X-Google-Smtp-Source: AGHT+IH4WV6HSNhL0ZPvTQoPRCMMRwATqwn8WpOsgzwJgZc6GAd/kT7N5i0BNLbMSSlX/IWRMh0QsQ==
-X-Received: by 2002:a05:6808:6f91:b0:437:dade:463f with SMTP id
- 5614622812f47-45074583a1dmr213468b6e.34.1762892097175; 
- Tue, 11 Nov 2025 12:14:57 -0800 (PST)
+ bh=hQW1mJQwyiU7E+b4jygQ7iwwZWpXyJpOMt+PKWHpYJI=;
+ b=LXKMWDQc50xH6Su+XwvHsyimmYk/1HF9vG7/rS0+c+VFYFs06qYn6sxOT7GuT7+xpC
+ iH5WNYFkE6EmkgWXc3klJO0In4EnnZol/a42lv80dS995+Vgnms4bl5uRZk8YFhoyHMd
+ gVBcDFuhoqWwUxI3dSLyOdWk6KiRgm7JLl3dwvDwMzoE8rp86q+cbkWgbU5GoDQ3mmbQ
+ aXGt9J0AC3aD9izdSfU6WNT0vQGygMd+jnH48366p2GWNS/fQad0ydqji7EynsdG4YFs
+ z1hVNgRBFAjWThORrx4dp22khsw7NHB7qln9cx3xp5ZKI6vemYXEnS4JPFGrbrK+vSvB
+ pXkQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXqJNLzaW7rNAyd2NXIietRAnkpuSpXB8PI10EU1Sfytj9yZtkRPy1EH7K5UtR8H2Ls97bpsq4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxAPiKe6P43LNAkzSq4rOgtW7kcSqXdBs/HOWjsa3z06rUNzWC/
+ WSNKa4RG8HlRmxoLUbYbEvX9D7L5ZRou6zjFKVNQmWbhwnuhcvi+ar/DgCSt0qkTrpVRsLTideO
+ YJTNjrdKtJQ==
+X-Gm-Gg: ASbGncsGIu+hxrpyVI8cWVIF4bLjSkjFMPmcud6VgRVnlRbrIdTYOVRtuqquu076Oi+
+ 1ppZgBVrL2TrQBKBqGBqQjIwtXuhcdIEfcAYNLd/18eNJeHIvD4xkLpRdhzy3XrlPiU6nkGg81j
+ mkSb1kyjKHjQzZVwpt9LhHHgFxKHRcKogn8nBhOW0d9nzOOz7LFdfSJlqV+n/HJ5loYWJjd73Qh
+ wWL407krraml00oDbjCmKueuhrOnkCxYe5Rjti1hNZ4XfZkALqlSnVFh8vBi1F8MIiR9u19aCTj
+ gY18kx2il6ckLKedS0+CyU1YDCR97+ayrwxx2hz/oypU7N+D+INMi7oD/DCTdmTrCIkJbLKksEb
+ FJAMECr7NXzwdD6nxPOvZsfuaqSn0bJp0cIMeqDea1646lZLE3aUCXrwXabMwuE22LX0r2Jyj57
+ 1boDVvIwv7WK18JFt8WV6sRWsSzyrIbVvi+7WldmIOVmikaNXgHAP4AoaL1XY=
+X-Google-Smtp-Source: AGHT+IHVmnOybzS1GBlyvGXYLhLEnXj9/pUWZZcLs4PP01QCEvBQDZIgKQOrZ8WlG3m3tNN8/j90xA==
+X-Received: by 2002:a05:6808:308d:b0:450:5bbe:642c with SMTP id
+ 5614622812f47-4507444e178mr254694b6e.12.1762892098026; 
+ Tue, 11 Nov 2025 12:14:58 -0800 (PST)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45031835261sm4197443b6e.16.2025.11.11.12.14.56
+ 5614622812f47-45031835261sm4197443b6e.16.2025.11.11.12.14.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Nov 2025 12:14:56 -0800 (PST)
+ Tue, 11 Nov 2025 12:14:57 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, yegorslists@googlemail.com
-In-Reply-To: <20251104104028.3813594-1-yegorslists@googlemail.com>
-References: <20251104104028.3813594-1-yegorslists@googlemail.com>
-Subject: Re: [PATCH] gpio: OMAP: add dependency to TI_SYSC
-Message-Id: <176289209651.737015.1661177842135521980.b4-ty@konsulko.com>
-Date: Tue, 11 Nov 2025 14:14:56 -0600
+To: Simon Glass <sjg@chromium.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>
+In-Reply-To: <20251105110724.634741-1-bmeng.cn@gmail.com>
+References: <20251105110724.634741-1-bmeng.cn@gmail.com>
+Subject: Re: [PATCH] scsi: Fix the name string memory leak during scsi scan
+Message-Id: <176289209735.737015.4207981471427904584.b4-ty@konsulko.com>
+Date: Tue, 11 Nov 2025 14:14:57 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,17 +99,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 04 Nov 2025 11:40:28 +0100, yegorslists@googlemail.com wrote:
+On Wed, 05 Nov 2025 19:07:24 +0800, Bin Meng wrote:
 
-> OMAP GPIO driver needs TI_SYSC to initialize its clocks when
-> using a devicetree-based setup.
+> There is a memory leak during the scsi scan process due to the
+> strdup'ed name string is never freed. Actually it is unnecessary
+> to pass a strdup'ed name string to blk_create_devicef() as we can
+> use the name string on the stack directly.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] gpio: OMAP: add dependency to TI_SYSC
-      commit: 749ec886046d1a5dff87aa41f3d46a06ef558169
+[1/1] scsi: Fix the name string memory leak during scsi scan
+      commit: c6e8befd4b8da4a99c779a0fddd92690e2f611fa
 -- 
 Tom
 
