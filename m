@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25107CCFA18
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:31:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76229CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:31:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A59583AEC;
-	Tue, 11 Nov 2025 09:31:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D708F83AEC;
+	Tue, 11 Nov 2025 09:31:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FlKT6Dl6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s/SdN/br";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0760C83E36; Tue, 11 Nov 2025 09:31:07 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 9FFCC83B9B; Tue, 11 Nov 2025 09:31:50 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BB1183AB4
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:31:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B7FD83AB4
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:31:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-786572c14e3so37978957b3.2
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:31:01 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-7868b7b90b8so37366507b3.1
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:31:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762849860; x=1763454660; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1762849907; x=1763454707; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SjrGmcln1b+l5tGcqaKUtHN72tWF1/WRQncbXhnIJ/c=;
- b=FlKT6Dl6zJK8kTJdg78/0vEckbsGPpHEdhxJQT2PY+HE8cixjxbJ6tmipAX/DPsOmk
- sNsNzmg27nojGorWlUJSnwUZLuqWy7KO9VCNussWRK8pCCXV3hSwLfrjJdge6zcAzOC8
- fcOcVBK+o2cbCIifOp6Ge6VDmoVp4fqqNSnlG/wTd4o2WwX+z9Onv6YYNeWJyaObrb+i
- UYQY4i04DPXxru1ztBRCd7OnjQfFWZkPWEgsBXWk1KrwfDfkFSh/WfuNP3Wz2f2Q9Np2
- N09kBYV/n5MkxjCX51zyKKJJle+XMZGYdNhHs5GTzvUky0lOve7oJKifOe07SsgTUMNp
- t6lg==
+ bh=yxIxCgHjCkCFKfqW1hXaAY7fdM12G//7xzGJb1mg1qM=;
+ b=s/SdN/brQMzpFPSXKF9xApN0vmhXe047joiHRkcBztxgqN5uJ84p9uMSLQI5nhPVYD
+ NH8h2UUTQXktnrX79Fa3QdxgaorKoX12tNa6yL5VdSnxQlJtrIASPTXsFogz+BsahgKA
+ EO41X/Ji5SLpxFK8z4brycQEfs2oT6wuQ9BVgwjdeLsqCB1eFHZEgnrDRp2ZA1EP5csC
+ 7a/sK/kPoJ8z+Zu/4wRMfu8+8IXIsDveDibRlHYjogXzfcpqzQSXjtroHtR+zn9H6IRB
+ r5OUYjq4P95Q5HLzpAU2Kqof/R2lQ2JG3AgR6OAx3PwapQp3ShbBYjH1E8DpiQuliWD8
+ WsKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762849860; x=1763454660;
+ d=1e100.net; s=20230601; t=1762849907; x=1763454707;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SjrGmcln1b+l5tGcqaKUtHN72tWF1/WRQncbXhnIJ/c=;
- b=k6XOxssddoRZYYOF/pauxBAobyeIZu6VI3CZoCqKHWQrYOxDV0swG/vLxMsKsaP4HM
- 0LS2RVSDoL96ZLWQo9UwytWsXHJe07tP7P8UPpQf4qFI3B2rt9m3tzAI9I+5plX1WCSn
- mJ99buXe1R6fz2dGPhSinQUGiSFp2Eshp8qW1o3ckD6VFlOtVLOBqAh8wELGBZER0daX
- FUYSw8kWHOAs3cMc+jo9qWn5WtyE6bz6IsdYrhmH9UMgQIdCFBIEJ51Z2bPB/wpevLk5
- SmC1cX6hBGR+e+Z644qAkUvRvXV7nPDerHwO3qV19nb2fm+DCrTcxjodpyBW4affFfR0
- zz0A==
+ bh=yxIxCgHjCkCFKfqW1hXaAY7fdM12G//7xzGJb1mg1qM=;
+ b=MEF9NcSnFPtMZEGpEtJmuTbu/HhZpEUpTcw3EF8/z94IoV2zo9sHBaSuortLiUj31u
+ 0vlyGyoZ7ewHZw39UgtmYAaiXK2UgP6yTHrkxNv/liDJYAiD3ShzTo1bqf3KH0U8/d0f
+ +HL6/sEoehzQkDsakL0UChhwNNDQC39eqjJspqXWdYt1S6PZdCSr7cafcS0Zh2hYt2BM
+ V4puaF9YHjWxOQgowckzgt9U7Ee7TCyGdNvnu3gQmlmZp8mCl2V8iCw6RMxA4fPIuUtS
+ 33ZPBKaidoWD+ja8GJkbCwsY2mB3Y2fhGopGAsJBoEPw9HZTJgbw7MH6MNEh+Jh1Yd3d
+ CGKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWal5uzbMXASqQkH26+Xjeyzr+R45EgPuGNWf+X1MbaPm8G/6XzwR6fGqCrzafHNUIG2XCSxnQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywml+zRzCJY7v+FR6pau81CVcnkvW8208W9UwHba4YTGsOtr2E4
- iBWUDo9MZ9ZNdvuN6RY8DAyb97If4BrElbt+1ob0wzn1Yh7RGgQiwBIFoj2eP6SNF+E5HLzGuuJ
- 4lVnGdSaWptMV4zPQmUTy2KXaYMumhmjdSZICMiWj6w==
-X-Gm-Gg: ASbGnct7KaohUPpgUELWCn1modXLuV1ai4Vl50lIqG9HlcdKS1ssJ1nusIftEmbkpZz
- p/r2haqXlBiFafn/9rz6rNM3y4Tg9rZxO+OkkhAaAF6n8AFJAi0yBlS2tYumlwtxqgyH4xbBayQ
- OZ6jwljcIpWVWHvchW6u82OZRF1WmbwZ+EOstgV+7F8FMMDtfvK0boBvrPYTsUR/wnZK6fU+m70
- NNNVqJAYMiFUJM0AHLiNuC457z1qVTcmWzRQjGd4Nu81qcMn9CWyqXlmTlHxUzYBgssoIzFu2ah
- Ye/G46Vy3C6Mcs3/2RdkRHmNUBeAaiwnYUM6iozL
-X-Google-Smtp-Source: AGHT+IE4B+iWAytcLDLL19nqBjLXyS9UXDzSf2j1GOW3KKq4v4vOgh2PxAgvCmEk4iwhHfMEL+xZZKav6ZrXguvmPME=
-X-Received: by 2002:a05:690c:2f82:b0:786:7797:6d73 with SMTP id
- 00721157ae682-787d543da0emr72769157b3.40.1762849860227; Tue, 11 Nov 2025
- 00:31:00 -0800 (PST)
+ AJvYcCXcoKEmFUOv1zFLzNyRqlwVDRXYqfrKgL8Q1VJL2Dc74KbhL9Adh0MRGncDEo+j7HO2G6v5XyA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyNSAJvvDGxsxHqwhrppPKDKAuDTd96E85yjbga9kAQGRJfpOki
+ 7I9pc/ZyctIuoNoT4h/eV8hhsuncVcRUmS599Agd+ABo8n1MmszJmepjYrvs6Xgno4mNwMKmPmW
+ IsQRKpglQ3GUfWQJ0P7siFVGBsxBimTtw7bxl95hluQ==
+X-Gm-Gg: ASbGncvJMmtaEze4eOL3peeJHCfi1xrUXXCke015xQ2Lnxv8UAp8D0Xb5m2oX3Nv9Cx
+ phyd5DG9mM1qnmlt/NCagKiLFQpI9rlTsVwv9Mfoo8EGq1BT20E7zQep1r8qDHEvbLQR++LzfVj
+ p+kjM5zOa4UozzpAkG4+1zwZxs9gWGqWI9A2Mjwluh9PGq0KKad96RK+COpBWoFvfpGLak3Rn7x
+ Ul9lUaneUXWMVXSHgo3fYwbF+IPD9RR8bvit6SRIl6NcM9eQA2U9t8o9qpjaeq5w8JLgLgAKpxA
+ GnL9USvqGOKK5qMKpSE9FXJrnsp8PH0YwwSkxUdlUzqszi+R96YX+SFew0VLkA==
+X-Google-Smtp-Source: AGHT+IH8uODyvDXlLst/v5EX5C4EXtFlkeLOYGmG+CzR1Auh/Fe7gZ/RpJiMmZARsbVgPKtLolp8XrAkT1xe9w40LV4=
+X-Received: by 2002:a05:690c:670f:b0:786:61c6:7e70 with SMTP id
+ 00721157ae682-787d543858bmr106074357b3.38.1762849907386; Tue, 11 Nov 2025
+ 00:31:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-4-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251109101010.306268-4-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-8-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251109101010.306268-8-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Nov 2025 10:30:24 +0200
-X-Gm-Features: AWmQ_bkglcFU_EftT-QrzUXAC8lpv_hW0NhtY6QzTKOD31g78HL-BdDxc2SnBOA
-Message-ID: <CAC_iWjJwOwm+Uno4ULvna0wSKZYbKVgC8E-NF6+x_Q=EtvnEZQ@mail.gmail.com>
-Subject: Re: [PATCH 3/9] test: cmd/bdinfo: make no flash assumption
+Date: Tue, 11 Nov 2025 10:31:11 +0200
+X-Gm-Features: AWmQ_bmJvOyiBlh45-vRnM8oSEINE-4T_QfM9QGiYXkbPTZwWlcyAd_ZKKK3we0
+Message-ID: <CAC_iWjKmwO=UGpGoHG3E=P+6mkSBS1E0n-WFxX0SNj6nTwC7Mw@mail.gmail.com>
+Subject: Re: [PATCH 7/9] common: default CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
  Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>, 
@@ -107,33 +107,31 @@ X-Virus-Status: Clean
 On Sun, 9 Nov 2025 at 12:10, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> The location and size of flash is device-dependent. Do not make any
-> assumption about the location and size.
+> For some tests the current default of 0x400 for
+> CONFIG_CONSOLE_RECORD_OUT_SIZE is too small.
+>
+> Raise the value to 0x6000 which is already the most common value.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  test/cmd/bdinfo.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  common/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-> index 09f44ee41ed..214b237152b 100644
-> --- a/test/cmd/bdinfo.c
-> +++ b/test/cmd/bdinfo.c
-> @@ -161,9 +161,9 @@ static int bdinfo_test_all(struct unit_test_state *uts)
->         ut_assertok(bdinfo_check_mem(uts));
->
->         /* CONFIG_SYS_HAS_SRAM testing not supported */
-> -       ut_assertok(test_num_l(uts, "flashstart", 0));
-> -       ut_assertok(test_num_l(uts, "flashsize", 0));
-> -       ut_assertok(test_num_l(uts, "flashoffset", 0));
-> +       ut_check_console_linen(uts, "flashstart");
-> +       ut_check_console_linen(uts, "flashsize");
-> +       ut_check_console_linen(uts, "flashoffset");
->         ut_assert_nextline("baudrate    = %lu bps",
->                            env_get_ulong("baudrate", 10, 1234));
->         ut_assertok(test_num_l(uts, "relocaddr", gd->relocaddr));
+> diff --git a/common/Kconfig b/common/Kconfig
+> index 0c25a8fc866..47d17f4e7c6 100644
+> --- a/common/Kconfig
+> +++ b/common/Kconfig
+> @@ -26,7 +26,7 @@ config CONSOLE_RECORD_INIT_F
+>  config CONSOLE_RECORD_OUT_SIZE
+>         hex "Output buffer size"
+>         depends on CONSOLE_RECORD
+> -       default 0x400 if CONSOLE_RECORD
+> +       default 0x6000
+>         help
+>           Set the size of the console recording output buffer. When this fills
+>           up, no more data will be recorded until some is removed. The buffer
 > --
 > 2.51.0
 >
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
