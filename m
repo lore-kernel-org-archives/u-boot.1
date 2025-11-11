@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76229CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:31:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 418A5CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:34:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D708F83AEC;
-	Tue, 11 Nov 2025 09:31:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C270983AEC;
+	Tue, 11 Nov 2025 09:34:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s/SdN/br";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ua4viDCx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FFCC83B9B; Tue, 11 Nov 2025 09:31:50 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 7F56783E4C; Tue, 11 Nov 2025 09:34:02 +0100 (CET)
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B7FD83AB4
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:31:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B54983AB4
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:34:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-7868b7b90b8so37366507b3.1
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:31:48 -0800 (PST)
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-640f88b873bso457789d50.3
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:34:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762849907; x=1763454707; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1762850039; x=1763454839; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yxIxCgHjCkCFKfqW1hXaAY7fdM12G//7xzGJb1mg1qM=;
- b=s/SdN/brQMzpFPSXKF9xApN0vmhXe047joiHRkcBztxgqN5uJ84p9uMSLQI5nhPVYD
- NH8h2UUTQXktnrX79Fa3QdxgaorKoX12tNa6yL5VdSnxQlJtrIASPTXsFogz+BsahgKA
- EO41X/Ji5SLpxFK8z4brycQEfs2oT6wuQ9BVgwjdeLsqCB1eFHZEgnrDRp2ZA1EP5csC
- 7a/sK/kPoJ8z+Zu/4wRMfu8+8IXIsDveDibRlHYjogXzfcpqzQSXjtroHtR+zn9H6IRB
- r5OUYjq4P95Q5HLzpAU2Kqof/R2lQ2JG3AgR6OAx3PwapQp3ShbBYjH1E8DpiQuliWD8
- WsKA==
+ bh=393irxKGcuQmHr3OGh0/fJV/cDse8CsCVOKLTiHkcAA=;
+ b=Ua4viDCxYnYsFHwKq7WAOATAugFAZ6u+/+HnXtQ2XyyxVaxaxKYUBz7YMRT2kfeIIR
+ S/uYzguzK+skXfZrznci4ymOte7xFXuZ0xm1DcdBexBC1DHDOWG0M/cZT81IWXavyPQw
+ wechfORNDp0Xhyak1fVIecDM5rqVwNtuaZNFqfenM3sCJQhBP15arZTj9nbQ7D9YsOjF
+ Hqovrnxd0vdejgLGfmsFFG9fB66Y//woBplPZRXOrY+DOti90x9UeWgZw/SWXA0Saq5R
+ bHr/aFayUFCQ1DUaO6ACJiPwYYG5lGfIvwAxlp9SSfVKDop8tnKIOdxVskVxTzVFa3vy
+ Y76w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762849907; x=1763454707;
+ d=1e100.net; s=20230601; t=1762850039; x=1763454839;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yxIxCgHjCkCFKfqW1hXaAY7fdM12G//7xzGJb1mg1qM=;
- b=MEF9NcSnFPtMZEGpEtJmuTbu/HhZpEUpTcw3EF8/z94IoV2zo9sHBaSuortLiUj31u
- 0vlyGyoZ7ewHZw39UgtmYAaiXK2UgP6yTHrkxNv/liDJYAiD3ShzTo1bqf3KH0U8/d0f
- +HL6/sEoehzQkDsakL0UChhwNNDQC39eqjJspqXWdYt1S6PZdCSr7cafcS0Zh2hYt2BM
- V4puaF9YHjWxOQgowckzgt9U7Ee7TCyGdNvnu3gQmlmZp8mCl2V8iCw6RMxA4fPIuUtS
- 33ZPBKaidoWD+ja8GJkbCwsY2mB3Y2fhGopGAsJBoEPw9HZTJgbw7MH6MNEh+Jh1Yd3d
- CGKQ==
+ bh=393irxKGcuQmHr3OGh0/fJV/cDse8CsCVOKLTiHkcAA=;
+ b=EWn8ndXzdFGKZSuVizcaX+a0dgSrQmtYni1un7d4jyhOSzi5CClwIwi4rFRv3rnioM
+ 2XoFURQIcvXWDFJUiA+pOo412Yn0JzBgtk3a9pu1KYnJeJcz8VUxcwTQvZU+gs+L20NJ
+ R4FH0ttJr2kqk+jNcRm9DoVRgOOJrUsIKgK6T8AcgmSaR1CBTAB39BAoEjEqjBkt4PDi
+ B8NFSCTFUSiMkDdMJw6B26uIQpt1QciRkCDz0wjXIPime+W1+1tjNgIWOE8pGnTG+KI9
+ /KfZVrumhcY2NXbC+lYZTuYVNwfZDwZXQlYG+mCA3BTkwIgvSqtUBNhtaJ1C38F7IfcO
+ Eo5g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXcoKEmFUOv1zFLzNyRqlwVDRXYqfrKgL8Q1VJL2Dc74KbhL9Adh0MRGncDEo+j7HO2G6v5XyA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyNSAJvvDGxsxHqwhrppPKDKAuDTd96E85yjbga9kAQGRJfpOki
- 7I9pc/ZyctIuoNoT4h/eV8hhsuncVcRUmS599Agd+ABo8n1MmszJmepjYrvs6Xgno4mNwMKmPmW
- IsQRKpglQ3GUfWQJ0P7siFVGBsxBimTtw7bxl95hluQ==
-X-Gm-Gg: ASbGncvJMmtaEze4eOL3peeJHCfi1xrUXXCke015xQ2Lnxv8UAp8D0Xb5m2oX3Nv9Cx
- phyd5DG9mM1qnmlt/NCagKiLFQpI9rlTsVwv9Mfoo8EGq1BT20E7zQep1r8qDHEvbLQR++LzfVj
- p+kjM5zOa4UozzpAkG4+1zwZxs9gWGqWI9A2Mjwluh9PGq0KKad96RK+COpBWoFvfpGLak3Rn7x
- Ul9lUaneUXWMVXSHgo3fYwbF+IPD9RR8bvit6SRIl6NcM9eQA2U9t8o9qpjaeq5w8JLgLgAKpxA
- GnL9USvqGOKK5qMKpSE9FXJrnsp8PH0YwwSkxUdlUzqszi+R96YX+SFew0VLkA==
-X-Google-Smtp-Source: AGHT+IH8uODyvDXlLst/v5EX5C4EXtFlkeLOYGmG+CzR1Auh/Fe7gZ/RpJiMmZARsbVgPKtLolp8XrAkT1xe9w40LV4=
-X-Received: by 2002:a05:690c:670f:b0:786:61c6:7e70 with SMTP id
- 00721157ae682-787d543858bmr106074357b3.38.1762849907386; Tue, 11 Nov 2025
- 00:31:47 -0800 (PST)
+ AJvYcCUb2/vrOm/h4CZ01kxEOqwoyk4/VkBdSWKpxi0ZOsbrDoVW+RWcUh5ErcpkUq/lqZGVFw2/Z34=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxzd1lcCwrSqu8xo8mn+iBCYzEbYJWBuPhy2OoVSH4gnrx583q+
+ EcfN6vBforLdgu3GhPvIxYk1rs/6oKiV4FYe/5VP2yz5yGKCaHaxs6Lq7YVn9pFTJIeJhAKvVk/
+ kyn8M43oN2wM1es9P0VNnbi1fPlBAhI0yy/6d5N0xmg==
+X-Gm-Gg: ASbGncsuUlXYpvqoHCYllmhZd/q4NGbE0/xSyYKDlazNMLD54sBlZO1KO/KYWJ2uVMP
+ GNvJfRyKmLViz6zKtl4HvN+znfMSZGkdqrro6nUTPCEF1ZOsYjYstnn4ec+pImDnPMwcbf55qOn
+ VivA2uWy1j8fXZHoWEfwu8uKRq/0WpOQTfBmMiIs68Q7sW+68yC4iyTF1fe4wiDpGbmuv3u4CjZ
+ Dq+RbPCzmss3r7ta9k/1IKhqrPsERLX0H79sOO2bXIOHDdQCcK0iUDLv4A0E7fWgMyiC3IhJWUt
+ 70zCcJA2UQsvDkAzMQN54REn8dleCBkfCKEL8h8w
+X-Google-Smtp-Source: AGHT+IFstWYZtbr0Krtcz4MM2KZrXBSHRyvOP+32boQ7P9NqkPYe7m8MQZ36HK1OxQm3Lmdz9kwtujBznX9lI/Q2Ouw=
+X-Received: by 2002:a05:690e:1610:b0:63f:95dd:b2c9 with SMTP id
+ 956f58d0204a3-640d45fed2dmr7889138d50.58.1762850039042; Tue, 11 Nov 2025
+ 00:33:59 -0800 (PST)
 MIME-Version: 1.0
 References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-8-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251109101010.306268-8-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251109101010.306268-3-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Nov 2025 10:31:11 +0200
-X-Gm-Features: AWmQ_bmJvOyiBlh45-vRnM8oSEINE-4T_QfM9QGiYXkbPTZwWlcyAd_ZKKK3we0
-Message-ID: <CAC_iWjKmwO=UGpGoHG3E=P+6mkSBS1E0n-WFxX0SNj6nTwC7Mw@mail.gmail.com>
-Subject: Re: [PATCH 7/9] common: default CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
+Date: Tue, 11 Nov 2025 10:33:22 +0200
+X-Gm-Features: AWmQ_bksGwNnSkVjopzGKsY167CCfvHfJZ6zygXJW-X-zsAFvSsRzou1kuG0blM
+Message-ID: <CAC_iWjLWTrtqT3K=uryYunnDD-wmYhQ1ufZ70E4Ts+ufU=_JTw@mail.gmail.com>
+Subject: Re: [PATCH 2/9] test: cmd/fdt: do not assume RNG device exists
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
  Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>, 
@@ -107,31 +107,84 @@ X-Virus-Status: Clean
 On Sun, 9 Nov 2025 at 12:10, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> For some tests the current default of 0x400 for
-> CONFIG_CONSOLE_RECORD_OUT_SIZE is too small.
+> In fdt_test_chosen() currently we test if DM_RNG is configured.
+> CONFIG_DM_RNG=y does not imply that a RNG device actually exists.
+> For instance QEMU may be called with -device virtio-rng-device or not.
+> The current test framework evicts the virtio RNG device even if QEMU is
+> called with -device virtio-rng-device.
 >
-> Raise the value to 0x6000 which is already the most common value.
+> In the fdt_test_chosen() check if a RNG device exists.
+> Ignore 'No RNG device' messages.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  common/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  test/cmd/fdt.c | 20 ++++++++++++++++----
+>  1 file changed, 16 insertions(+), 4 deletions(-)
 >
-> diff --git a/common/Kconfig b/common/Kconfig
-> index 0c25a8fc866..47d17f4e7c6 100644
-> --- a/common/Kconfig
-> +++ b/common/Kconfig
-> @@ -26,7 +26,7 @@ config CONSOLE_RECORD_INIT_F
->  config CONSOLE_RECORD_OUT_SIZE
->         hex "Output buffer size"
->         depends on CONSOLE_RECORD
-> -       default 0x400 if CONSOLE_RECORD
-> +       default 0x6000
->         help
->           Set the size of the console recording output buffer. When this fills
->           up, no more data will be recorded until some is removed. The buffer
+> diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+> index a36f2dcdda8..b950123b6da 100644
+> --- a/test/cmd/fdt.c
+> +++ b/test/cmd/fdt.c
+> @@ -10,6 +10,7 @@
+>  #include <fdt_support.h>
+>  #include <mapmem.h>
+>  #include <asm/global_data.h>
+> +#include <dm/uclass.h>
+>  #include <linux/libfdt.h>
+>  #include <test/ut.h>
+>
+> @@ -1267,6 +1268,7 @@ static int fdt_test_chosen(struct unit_test_state *uts)
+>  {
+>         const char *env_bootargs = env_get("bootargs");
+>         char fdt[8192];
+> +       struct udevice *dev;
+>         ulong addr;
+>
+>         ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
+> @@ -1280,11 +1282,16 @@ static int fdt_test_chosen(struct unit_test_state *uts)
+>         /* Test add new chosen node without initrd */
+>         ut_assertok(run_commandf("fdt chosen"));
+>         ut_assertok(run_commandf("fdt print /chosen"));
+> -       ut_assert_nextline("chosen {");
+> +       ut_assert(0 < console_record_readline(uts->actual_str,
+> +                                             sizeof(uts->actual_str)));
+> +       if (!strcmp("No RNG device", uts->actual_str))
+> +               ut_assert(0 < console_record_readline(uts->actual_str,
+> +                                                     sizeof(uts->actual_str)));
+> +       ut_asserteq_str("chosen {", uts->actual_str);
+>         ut_assert_nextlinen("\tu-boot,version = "); /* Ignore the version string */
+>         if (env_bootargs)
+>                 ut_assert_nextline("\tbootargs = \"%s\";", env_bootargs);
+> -       if (IS_ENABLED(CONFIG_DM_RNG) &&
+> +       if (!uclass_get_device(UCLASS_RNG, 0, &dev) &&
+>             !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
+>             !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
+>                 ut_assert_nextlinen("\tkaslr-seed = ");
+> @@ -1294,7 +1301,12 @@ static int fdt_test_chosen(struct unit_test_state *uts)
+>         /* Test add new chosen node with initrd */
+>         ut_assertok(run_commandf("fdt chosen 0x1234 0x5678"));
+>         ut_assertok(run_commandf("fdt print /chosen"));
+> -       ut_assert_nextline("chosen {");
+> +       ut_assert(0 < console_record_readline(uts->actual_str,
+> +                                             sizeof(uts->actual_str)));
+> +       if (!strcmp("No RNG device", uts->actual_str))
+> +               ut_assert(0 < console_record_readline(uts->actual_str,
+> +                                                     sizeof(uts->actual_str)));
+> +       ut_asserteq_str("chosen {", uts->actual_str);
+>         ut_assert_nextline("\tlinux,initrd-end = <0x%08x 0x%08x>;",
+>                            upper_32_bits(0x1234 + 0x5678 - 1),
+>                            lower_32_bits(0x1234 + 0x5678 - 1));
+> @@ -1303,7 +1315,7 @@ static int fdt_test_chosen(struct unit_test_state *uts)
+>         ut_assert_nextlinen("\tu-boot,version = "); /* Ignore the version string */
+>         if (env_bootargs)
+>                 ut_assert_nextline("\tbootargs = \"%s\";", env_bootargs);
+> -       if (IS_ENABLED(CONFIG_DM_RNG) &&
+> +       if (!uclass_get_device(UCLASS_RNG, 0, &dev) &&
+>             !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
+>             !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
+>                 ut_assert_nextlinen("\tkaslr-seed = ");
 > --
 > 2.51.0
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
