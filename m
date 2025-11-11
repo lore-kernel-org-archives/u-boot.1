@@ -4,96 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF804CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 10:29:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06FA5CCF9E3
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 10:31:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 532DE83EC9;
-	Tue, 11 Nov 2025 11:29:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 803DC83EC9;
+	Tue, 11 Nov 2025 11:31:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bQj/LnxV";
+	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="j7ehxbIu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D04B83F56; Tue, 11 Nov 2025 11:29:34 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5F9E983F5B; Tue, 11 Nov 2025 11:31:44 +0100 (CET)
+Received: from mail.fris.de (mail.fris.de [IPv6:2a01:4f8:c2c:390b::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 121C183968
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 11:29:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6656E83968
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 11:31:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4775ae77516so47124555e9.1
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 02:29:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762856971; x=1763461771; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=iLQLaAYoF5sBEMqynPRbqYUuXnmPm7GhyIu6xJejd50=;
- b=bQj/LnxV2bI9R4li+yfm3yPIVWVpglJGqeHaKvf0RJanWftE7H8o649qa7QRo6RcOn
- 4GP2E+mhf48ppt8c9QzJSAUCEMQod1+ulpxnZRKRu7Z9j9ENJ6ij+sihKUN2oyH+hHW9
- g9A/4F6VpPfNS2oGqBY1Mv5IgS4sDA0S+81nmaqqCwUIBgdXFmgnWiWuB2qvyOmqA8au
- 9MhkAiJcxzr+th+g2x9rE8iFuhnQkrikbJaRpCqfMYAU538s9YixlVthTKVwScnziUsp
- Uxwt6MYZBB5/17mEAKuaHNrCVzUOrc6lbyrG4FkNJ8jxGKd5lx2GWkNHGpmnI8IgQcSD
- 1a/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762856971; x=1763461771;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=iLQLaAYoF5sBEMqynPRbqYUuXnmPm7GhyIu6xJejd50=;
- b=JOk7WCe1s383jxXJ6M9ZlZ82hlX+wzAoaj4jfN3DtpIvMONtnqAQpA8dldb/W4u9N/
- qYNyQU3fx6sWBnc99wel/KCO8EtI68LKVWOZn96ZYEJPeedUBXY03zo+MKMy5NwhqoW7
- SUE/gvNOUk//5uyGLHu1GJHlrbIiyVgnzohXG+4ijPSs3QjvbbuD+wl7MlBWa38bCKqY
- r2NsVjdQg8V2XqUfkkZ6VCYr3g6IwqMl3B9Pj0nZAtKwBPdYJIbyUH03F8UPtbW8fdPW
- 8MpeN7HjHRphG2b4xFO478MNXLUZa3loGw2b9C4KcQ2Ka9RCvvpfFHu4SrtsZog8UgDL
- 4qaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHkPCRoUwIobzkjnkGW/7ZYQAeomSQNwwd5v4PCV5Dkhy6YQWahcxWj2AILhcFIvsXgOOEOVA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJe1V9ihLQh3mUKdFtseAmYBaeB9pndpgvaKS4sX67CeAkmoq4
- RXf40jvZ8WllsToJBA4R1ni4RW3TItevj9D1Uaws28+4WhsIiv5o66zmkXxgd4mJG55MhLqONlU
- DSRe1oIU=
-X-Gm-Gg: ASbGncvs859UyuCv3A2LSabGTsJwByQV5BhksOr7minYzTdClO5nIo4Au5AH3/bAvdl
- TPpIQCDyYjUQCNB68/9PJ463PqIXtaXxxoQ6psHQrPQGHqC4o/8BG/QvNFJ4gpKTDRZOo83xUvi
- rZK0mBler3lWJWMYetjvJrfJZVSIOD4Tb/fl0Wj/o1vztzYwEL5FDzokxe3i5VkR+rORE/0Qb3E
- dzkXaQujnA3IZoZVTYRI9muaQ/jSlyQnM5L7tN39NHZib37oDFMfea/1AOc/4NNNrn+69OAKTjL
- m5nJWMUOUXVKcaxShToxH8/rjooViRzZBdR99rA4zcTtnMxeX5otZZ6vXLQnBHX+zMfYMMWcvNX
- SmO/sDvjnKVU9FogR1CQhADgJONz0OtxWjlQonyOoIE+dYYaXzlxIG0rfhIfohGgQ7VpBjQK/Pa
- iguZUPAx4=
-X-Google-Smtp-Source: AGHT+IEn1W72Y+A7EDG6TFeN1YT4LKeKnIb9TGtVi9vbzkRZtg2xKTdtGJZ/gIprybNseuKahLLK/A==
-X-Received: by 2002:a05:600c:474c:b0:475:da13:256b with SMTP id
- 5b1f17b1804b1-4777329777amr103063405e9.38.1762856970946; 
- Tue, 11 Nov 2025 02:29:30 -0800 (PST)
-Received: from [192.168.0.39] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4778164b7fdsm17154125e9.3.2025.11.11.02.29.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Nov 2025 02:29:30 -0800 (PST)
-Message-ID: <36ad560d-48d6-4ffb-bcde-b031bdcc3f33@linaro.org>
-Date: Tue, 11 Nov 2025 12:29:29 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=fris.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=frieder@fris.de
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 52205C9EEB; Tue, 11 Nov 2025 11:31:37 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
+ t=1762857100; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=nMsupRzruwFyO5WWR3Vq5w6stYjl55OAndQMOEYmYRc=;
+ b=j7ehxbIuHeQnZthGHAetIXThCSGuBHc8EPPlPOcvEIaaZGW+n+F4Nhtnsq/AVAPaTFNLnH
+ dZd4EI6Ff00UDEg7d5bMZkj5S9X4V7oCQf3+uuOeM/XQti8J+7sGe7YfdWbM2yc4/MYhsF
+ 96+4u1QMwGPsbWlE4hq4a1GRlxx7CFS23PudBGUvtpY1YfXHPC5pBQW7BYxjeALAK6Wg7M
+ LpsXrd+BfmODbkb8y0MTA8E2lPyEwcMnYMVnfM9NFTOTHsqfFoVUZA+/rfd/h0pbEemDlz
+ 7RZkIVrfqePCKWIGuUU9Aup3EuPWu6IqmdjAGFi7xHmmlYS+57JT5BjByfFZrQ==
+From: Frieder Schrempf <frieder@fris.de>
+To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Cc: "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Adam Ford <aford173@gmail.com>, Alice Guo <alice.guo@nxp.com>,
+ Benjamin Hahn <B.Hahn@phytec.de>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Eberhard Stoll <eberhard.stoll@kontron.de>,
+ =?UTF-8?q?Jo=C3=A3o=20Paulo=20Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Primoz Fiser <primoz.fiser@norik.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Shawn Guo <shawnguo@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Vitor Soares <vitor.soares@toradex.com>, Wadim Egorov <w.egorov@phytec.de>,
+ Yannic Moog <y.moog@phytec.de>, Ye Li <ye.li@nxp.com>
+Subject: [PATCH 0/4] Add support for Kontron i.MX8MP and i.MX93 OSM hardware
+Date: Tue, 11 Nov 2025 11:28:09 +0100
+Message-ID: <20251111102904.157931-1-frieder@fris.de>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] mtd: rawnand: atmel: set pmecc data setup time
-To: Zixun LI <admin@hifiphile.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
-References: <20251106-pmecc-v1-0-a1f3cf430be9@hifiphile.com>
- <20251106-pmecc-v1-1-a1f3cf430be9@hifiphile.com>
- <e0a9b9af-330c-4504-8ef3-ba4c3433ce4f@linaro.org>
- <20251107-condone-percolate-51ec103f3ef4@thorsis.com>
-From: Eugen Hristev <eugen.hristev@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20251107-condone-percolate-51ec103f3ef4@thorsis.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,100 +75,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
+This adds support for Kontron hardware based on i.MX8MP and i.MX93
+OSM (Open Standard Module) SoMs.
 
-On 11/7/25 13:01, Alexander Dahl wrote:
-> Hello Eugen,
-> 
-> Am Fri, Nov 07, 2025 at 12:52:05PM +0200 schrieb Eugen Hristev:
->> Hello Zixun, Alexander,
->>
->> On 11/6/25 13:12, Zixun LI wrote:
->>> Setup the pmecc data setup time as 3 clock cycles for 133MHz as
->>> recommended by the datasheet.
->>>
->>> Backported from Linux: f552a7c7 ("mtd: rawnand: atmel: set pmecc data
->>> setup time")
->>
->> Maybe use 12 digits commit hash ? I cannot find this commit in Linux
-> 
-> v6.16-rc4-10-gf552a7c7e0a14 aka
-> f552a7c7e0a14215cb8a6fd89e60fa3932a74786 from July 2025.
-> 
->>
->>>
->>> Fixes: a490e1b7c017c ("nand: atmel: Add pmecc driver")
->>>
->>> Signed-off-by: Zixun LI <admin@hifiphile.com>
->>> ---
->>>  drivers/mtd/nand/raw/atmel/pmecc.c | 6 ++++++
->>>  1 file changed, 6 insertions(+)
->>>
->>> diff --git a/drivers/mtd/nand/raw/atmel/pmecc.c b/drivers/mtd/nand/raw/atmel/pmecc.c
->>> index e500a0fe3f8671ff08195c94c3383696a7731eb3..7c4e9bd5f9967b119239adf2b39e683ea62b71fd 100644
->>> --- a/drivers/mtd/nand/raw/atmel/pmecc.c
->>> +++ b/drivers/mtd/nand/raw/atmel/pmecc.c
->>> @@ -142,6 +142,7 @@ struct atmel_pmecc_caps {
->>>  	int nstrengths;
->>>  	int el_offset;
->>>  	bool correct_erased_chunks;
->>> +	bool clk_ctrl;
->>>  };
->>>  
->>>  struct atmel_pmecc_user_conf_cache {
->>> @@ -840,6 +841,10 @@ atmel_pmecc_create(struct udevice *dev,
->>>  
->>>  	pmecc->regs.timing = 0;
->>>  
->>> +	/* pmecc data setup time */
->>> +	if (caps->clk_ctrl)
->>> +		writel(PMECC_CLK_133MHZ, pmecc->regs.base + ATMEL_PMECC_CLK);
->>> +
->>>  	/* Disable all interrupts before registering the PMECC handler. */
->>>  	writel(0xffffffff, pmecc->regs.base + ATMEL_PMECC_IDR);
->>>  	atmel_pmecc_reset(pmecc);
->>> @@ -884,6 +889,7 @@ static struct atmel_pmecc_caps at91sam9g45_caps = {
->>>  	.strengths = atmel_pmecc_strengths,
->>>  	.nstrengths = 5,
->>>  	.el_offset = 0x8c,
->>> +	.clk_ctrl = true,
->>
->> This appears to be done only for sam9g45.
->>
->> So, Alexander, this should not impact sam9x60 .
-> 
-> Yes it should.  According to arch/arm/boot/dts/microchip/sam9x60.dtsi
-> the compatible used on sam9x60 is "atmel,at91sam9g45-pmecc", see:
-> 
-> 	pmecc: ecc-engine@ffffe000 {
-> 			compatible = "microchip,sam9x60-pmecc", "atmel,at91sam9g45-pmecc";
-> 			reg = <0xffffe000 0x300>,
-> 					<0xffffe600 0x100>;
-> 	};
-> 
+Frieder Schrempf (4):
+  imx: Add support for Kontron i.MX8MP OSM-S SoM and BL carrier board
+  arm64: dts: imx8mp-kontron: Fix USB OTG role switching
+  arm: imx: imx9: Use arch override for env_get_location()
+  imx: Add support for Kontron i.MX93 OSM-S SoM and BL carrier board
 
-Yes it looks you are right. sam9x60 does not have a dedicated caps but
-reusing the sam9g45 one, and I missed that.
+ .../dts/imx8mp-kontron-bl-osm-s-u-boot.dtsi   |  115 +
+ .../dts/imx93-kontron-bl-osm-s-u-boot.dtsi    |  153 +
+ arch/arm/mach-imx/imx8m/Kconfig               |   14 +
+ arch/arm/mach-imx/imx9/Kconfig                |   11 +-
+ arch/arm/mach-imx/imx9/soc.c                  |    2 +-
+ board/kontron/osm-s-mx8mp/Kconfig             |   17 +
+ board/kontron/osm-s-mx8mp/MAINTAINERS         |    7 +
+ board/kontron/osm-s-mx8mp/Makefile            |    9 +
+ board/kontron/osm-s-mx8mp/imximage.cfg        |    8 +
+ board/kontron/osm-s-mx8mp/lpddr4_timing.c     | 2474 +++++++++++++++++
+ board/kontron/osm-s-mx8mp/osm-s-mx8mp.c       |  175 ++
+ board/kontron/osm-s-mx8mp/osm-s-mx8mp.env     |    6 +
+ board/kontron/osm-s-mx8mp/spl.c               |  358 +++
+ board/kontron/osm-s-mx93/Kconfig              |   17 +
+ board/kontron/osm-s-mx93/MAINTAINERS          |    7 +
+ board/kontron/osm-s-mx93/Makefile             |    9 +
+ board/kontron/osm-s-mx93/lpddr4x_timing.c     | 1992 +++++++++++++
+ board/kontron/osm-s-mx93/osm-s-mx93.c         |  168 ++
+ board/kontron/osm-s-mx93/osm-s-mx93.env       |    6 +
+ board/kontron/osm-s-mx93/spl.c                |  169 ++
+ configs/kontron-osm-s-mx8mp.config            |  203 ++
+ configs/kontron-osm-s-mx8mp_defconfig         |    3 +
+ configs/kontron-osm-s-mx93.config             |  197 ++
+ configs/kontron-osm-s-mx93_defconfig          |    3 +
+ doc/board/kontron/index.rst                   |    2 +
+ doc/board/kontron/osm-s-mx8mp.rst             |  104 +
+ doc/board/kontron/osm-s-mx93.rst              |   95 +
+ .../freescale/imx8mp-kontron-bl-osm-s.dts     |   24 +-
+ include/configs/kontron-osm-s-mx8mp.h         |   30 +
+ include/configs/kontron-osm-s-mx93.h          |   30 +
+ 30 files changed, 6401 insertions(+), 7 deletions(-)
+ create mode 100644 arch/arm/dts/imx8mp-kontron-bl-osm-s-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx93-kontron-bl-osm-s-u-boot.dtsi
+ create mode 100644 board/kontron/osm-s-mx8mp/Kconfig
+ create mode 100644 board/kontron/osm-s-mx8mp/MAINTAINERS
+ create mode 100644 board/kontron/osm-s-mx8mp/Makefile
+ create mode 100644 board/kontron/osm-s-mx8mp/imximage.cfg
+ create mode 100644 board/kontron/osm-s-mx8mp/lpddr4_timing.c
+ create mode 100644 board/kontron/osm-s-mx8mp/osm-s-mx8mp.c
+ create mode 100644 board/kontron/osm-s-mx8mp/osm-s-mx8mp.env
+ create mode 100644 board/kontron/osm-s-mx8mp/spl.c
+ create mode 100644 board/kontron/osm-s-mx93/Kconfig
+ create mode 100644 board/kontron/osm-s-mx93/MAINTAINERS
+ create mode 100644 board/kontron/osm-s-mx93/Makefile
+ create mode 100644 board/kontron/osm-s-mx93/lpddr4x_timing.c
+ create mode 100644 board/kontron/osm-s-mx93/osm-s-mx93.c
+ create mode 100644 board/kontron/osm-s-mx93/osm-s-mx93.env
+ create mode 100644 board/kontron/osm-s-mx93/spl.c
+ create mode 100644 configs/kontron-osm-s-mx8mp.config
+ create mode 100644 configs/kontron-osm-s-mx8mp_defconfig
+ create mode 100644 configs/kontron-osm-s-mx93.config
+ create mode 100644 configs/kontron-osm-s-mx93_defconfig
+ create mode 100644 doc/board/kontron/osm-s-mx8mp.rst
+ create mode 100644 doc/board/kontron/osm-s-mx93.rst
+ create mode 100644 include/configs/kontron-osm-s-mx8mp.h
+ create mode 100644 include/configs/kontron-osm-s-mx93.h
 
-Thanks
-
->> I looked a bit in the Linux driver and this appears to be just as bad:
->> 133 Mhz clock config hardcoded. I would expect this clock to be taken
->> from a clock input and not hardcoded. But oh well, if this clock is to
->> be changed in another device, it would be exposed somewhere...
-> 
-> I did not look into that deeply, but if it is like you said, someone
-> should.  This sounds bad.
-> 
-> Greets
-> Alex
-> 
->>
->> Eugen
->>
->>>  };
->>>  
->>>  static struct atmel_pmecc_caps sama5d4_caps = {
->>>
->>
+-- 
+2.51.0
 
