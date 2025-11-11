@@ -4,89 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9002CCFA13
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 00:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C6ACCFA13
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 00:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 202C183AA0;
+	by phobos.denx.de (Postfix) with ESMTP id 6615E83AB8;
 	Tue, 11 Nov 2025 01:10:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="msmQboIm";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="PDPqCiBi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B03E83AA9; Tue, 11 Nov 2025 01:06:01 +0100 (CET)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC05983AA9; Tue, 11 Nov 2025 01:09:31 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AA0783A94
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 01:05:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F6BA83A94
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 01:09:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-b6ceb3b68eeso2256277a12.2
- for <u-boot@lists.denx.de>; Mon, 10 Nov 2025 16:05:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762819557; x=1763424357; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=T3lDq7b8tJojqCQkcsiEhMozdKfG0U+exWSGdvQsmdY=;
- b=msmQboImc+AnsF5p3T5qS5tWX4j4nc9T6YFzTmHfHvJqXk42xWKtB2eGrVhlNdqUEl
- bBALsT7RZ0VKNI0LYZkaBxfmwvAsycALJuQBRlg/hFpsetu2si/TYDi+tBF0mhKYZYJK
- qukZYvSUTKcWhm/5hziWhgawd/Gv2JP1k2uytGX5+hpVNaDxyLxZCGhK9CxpKtdRlvsQ
- VCT/x1k0onBKVTgnRS6+61qphT2QzIb+Hk3awbQ+QJAW0/gv6pD0ZBlEAZ6AcEvjkIxj
- 0DV0qxHGCD7MuarHk2vwICs3OdFxgn8/RnqhajISs8pKEcZQsv26tLIMyZa00IEC4bux
- ME9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762819557; x=1763424357;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T3lDq7b8tJojqCQkcsiEhMozdKfG0U+exWSGdvQsmdY=;
- b=AKqYtP6i3xLcydugoR2PsF3wSDfZ6Zuze+aAtw3lOYu6iMeaZU/qv6pdvcYOUvS6LO
- wv7kGTZLADYRs7jXQZfyvVnn+pga410PHkPFLT9UyY/Af3YD8L9pyax4/jfcyfMh8jZO
- ZCqTdbvuzwi7Nqbs73JaKxI3wgthL+lqBdhVMXFby6DHNxCRUAb5B3qgQ6AdreQ7+qKS
- b1kpyzEmM1eROS+HLlQsu5gDF9lcHdkNQrLXkwqDsrLKt48cQ50D9/p8O4kiKpwXvQP7
- Kbo4Zlr7ak29vNCvl7sqFkx7y5qT6pyp5ASw6tHZKKGJ31XtXN1ZyiMX9hhq2fRf+bLw
- cIYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWYV3Mg9zk0BxSNevPTLctRgybdPVPOIES6/yQAqBAL8uHcomCIrH98Vrn3wXo6M/8ffoPlGw4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyFBs8aMd++zXseFHE+9SFW8kVF3n9gsfTBh7gIXB230ukA2udE
- zUXGcdKkbNk3vKH84M+hQFn7269MUShlyj1Tje8zn4ADViF1O0Ha86yq
-X-Gm-Gg: ASbGncu8aMh7h+PL8chNIMm6cTLJCGptwZ4gLcKlxotReINMa9lOnEEzV2drWWTF/ww
- 0jUarMH0RHUyVu+qZTB1W4vj2p7f36TCugZVBCBrPHtFw2U9OQxRkSc5s91fwgiOrm230DzYuxL
- anT4JoVhun9XEN0CPMFEIWvRLOj/nKnh+tyrtBAoe754h8JHoEheibYTkKFwqyCyE1XYioQ52oU
- syUKuTAQ8ZwAVI7PIzVv1F+cf0Whoo3bGdBoNcwo5e3H1V55ZqobRD17zq4GXfAxTeJmbDwAtEc
- cVWQsyzXKKq1XhnR8tV7xLTWwbYUzyboWbxRg2YNHEtRxnL1sQ2gXfelgmFT6XSUKpSDAzyNwSQ
- m0EGbiQkyCoxWq/st8wdGhS9pzue+WTLJIRbtzXAc+Wwd5v+Wutrxe7WAReqmyxcMCD65ayXTtO
- bwLKjwu8pK2eWwu5S0rjlZpMyI2Kju1D2c9vhPO7/mWQUUjkP/xhUpsSeObyPBYC6yPPfkaO0=
-X-Google-Smtp-Source: AGHT+IFRvtiWaP0ekbjO2gd49a8VnrabjAOaY1d8uAa8zWlxHi8gk8bTD+M7wj8RoJEGoJyLL4cbZg==
-X-Received: by 2002:a17:902:f70a:b0:295:5dbe:f629 with SMTP id
- d9443c01a7336-297e540dd62mr100401215ad.8.1762819556425; 
- Mon, 10 Nov 2025 16:05:56 -0800 (PST)
-Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-ba9024e6e17sm13594196a12.34.2025.11.10.16.05.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Nov 2025 16:05:55 -0800 (PST)
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-To: trini@konsulko.com, joe.hershberger@ni.com,
- marek.vasut+renesas@mailbox.org, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, lucienzx159@gmail.com, ansuelsmth@gmail.com,
- weijie.gao@mediatek.com, SkyLake.Huang@mediatek.com,
- romain.gantois@bootlin.com, s-vadapalli@ti.com, u-boot@lists.denx.de
-Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org,
- ericwouds@gmail.com
-Subject: [PATCH 1/1] [U-Boot, v6,
- 1/1]net: phy: Add the Airoha EN8811H PHY driver
-Date: Tue, 11 Nov 2025 08:05:06 +0800
-Message-Id: <20251111000506.18366-1-lucienzx159@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VZkSj2/m4Q6c/LtCxo1u3ctQSuY5gYLvditYa/plEfVwfiF2DfkQ9pJi5PlEvPGnLCGBfdEjWTguK373HBXArxWmXbmBtQRB98jPM9JwriFxwqnFlFfDp8Ca+CO3om2J351U6K08Z06B3f1Lh23rRjrqGO+uc7KYvzjfx9iGopN4z11HBdd/VTRpq+OQCAn4YCcmP9+ceXeYJaBUCmbZnQ4gDzGhRY/q9144AoAVu9pAHen0E5OEz4qZhiDptGea/OD8HeYBcYZdsuvX78CAGtkfzOunlUyyzr8/cBycermkZJcN2Bb6lynOrCbX9196Eb90L/jxma+yfh19gkNu3g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iNXOy4SYc9GHsJHguj6iKCI4C/nmbtCM+JgvJFJPgHc=;
+ b=UACFGNhQ/6c6LQTNs8ZRSOrSMKBYIf9X62wsrLFu+zc+ofj46Fm5oM/nYiS1EQRZssOWuaij4+iJo0NVJEHFOhYU8rQTN5ZUEXXACGnVkKn8s722kARwVvA+80qITrMOc41qunaCei0iRHsqRm2UwKokn+iKUaTbVmrHgxGclnjPd1+6UrVhplOEQRQuQc8DmzIdDmcqwzHQJX39XzXxTcNxmdGL87qfPXh7A6Cfy9Zi4TF93XNt2tILDJ4a4aEQyirBE9SaESIqPE+VlO7lAqcSqpVslVGjy/h4QtPjRNKJPTkjuKPC1iFFaSsMinZyJBU+bI5iFP7jIqznxes+Ng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iNXOy4SYc9GHsJHguj6iKCI4C/nmbtCM+JgvJFJPgHc=;
+ b=PDPqCiBiIoF4QF7Qup1qoEaTtKAR1YBvCb9F507v+joYg5TD48mQrjJLuUJ6D+ezEK51+wztUfQdiaE3X1UjdZ6hoE/eyPCGc42nUOpsyBYEheslorumM8K5aLdS1ml0bI7FU4InBhmVP5iN4IzWQ8bW2743nStAMF234jDM7l5dhxfhxD24TNxbzgSDYUZFpVv9sbuuJ4GxB0ljWI7XTOpobn/vsu/fe5xVaYRhbrjWnXL4jn74CLZBv5Z82O5/w02su0CPmmxXfiUow+fubeozb3dlvidgIxVsGxwSPCxF+dTIdMx6MH6sGLRs43NJ5NTN0WuDKBB14J0Sccttpg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by VI2PR04MB10192.eurprd04.prod.outlook.com (2603:10a6:800:229::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Tue, 11 Nov
+ 2025 00:09:26 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9298.015; Tue, 11 Nov 2025
+ 00:09:26 +0000
+Date: Tue, 11 Nov 2025 09:22:04 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] please pull scmi-master-2025-11-11
+Message-ID: <aRKPvJEo6IbR3d0b@nxa18884-linux>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-ClientProxiedBy: SI2PR02CA0031.apcprd02.prod.outlook.com
+ (2603:1096:4:195::16) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI2PR04MB10192:EE_
+X-MS-Office365-Filtering-Correlation-Id: 15313fc5-0dad-47bc-9035-08de20b6931b
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|366016|1800799024|19092799006|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?JYE6KitT5RlQ1Nq8yIHEKOl22EduYwkzbB+jCeY9WCGDT4O1/UXEZ6j9wIEB?=
+ =?us-ascii?Q?LTA3jZdqsOkPNpqquecgfr2n9Sjx8yiJ9y83+hriKjxQVsKk4OV2B9dW+B3O?=
+ =?us-ascii?Q?x6qLBzbyglzjx7ytjea+iBkSTsDf5snI6+FPcOJU4MnEuza72bgcQP8BTas9?=
+ =?us-ascii?Q?9wiL84DKUkQKKqoS4eVptWdgIoQIZNQjsP/TfwMGoPYRtYC4hW/YDDUs9lSz?=
+ =?us-ascii?Q?RMy4Kdsyk7hNCHd4uobP5JCv95MLrRDe532N70WJADpnFCXkrvTPVy38kk9k?=
+ =?us-ascii?Q?kgf/Gzo9ZegEfzYwOgvpYrSsxudKUbJiCwXYwUHKanANMNPC4QUnXWP3wblX?=
+ =?us-ascii?Q?GvhsG1RMCYESlEplZf9jDyi+WeOXwiud0nVk6Jqt/LRyIvRdZ6kzrl0prxv7?=
+ =?us-ascii?Q?dMFZ9JXsFntY4kYgK4oZp7+JyNSvwp8aPQqqk2F5eidezZW+HsWQ7WqeIFpH?=
+ =?us-ascii?Q?CWSjXCDlJfTqFi6wHbSm1ntd5hdBlkIPrRFOke4AbKKq8m6ruw2UKnb4JcVH?=
+ =?us-ascii?Q?sn502GtLwUae/EtJ6zBrbj4fJ10wQJF48tiw6MURBon2r1Uub/pgBRyxfBO4?=
+ =?us-ascii?Q?1c2je+2Wh7Usjuv8nCMgfrigzwuZq9RDCHgr3f5D06/j3Rzv/sc91MlPEHP3?=
+ =?us-ascii?Q?MAUd6wMscoGhpHCk3ZvecIpjWaAyz+BUWvy3yuqXyrPiYBw5D+j4ZmeIxDJF?=
+ =?us-ascii?Q?PzTLn+r8njKtQ6G+OCUcWJK6C52m1dWmDLj67YYutiIjmgWPV+XP4ZYVNTZR?=
+ =?us-ascii?Q?UO9eU2plLpH2F8TYvfak2+HIv5Kr7Ld8ac3Yu/LiW2p8wrFRfRGgd1P2DSWF?=
+ =?us-ascii?Q?JM/eNM6P1RMGOE/bAk3s0OLRaN2ych5EAlDNedYX5BJ3l2kZqwh0vm9Ji56R?=
+ =?us-ascii?Q?Xyr0I75N7Nm7RltGSdxO8UXnbq9x8CWhjuBY6zJdF6949Et3CixTDyGWO+RN?=
+ =?us-ascii?Q?jvnHsxuTMXfO1U/LfxUsqnA6V9wK2+advyQjjEBkj23H7eC7Y2gCL05/fuwY?=
+ =?us-ascii?Q?ABZ30zzJziFwlA9yGW6JbLNX5eLjvQKqxt8tl1+mvmc7Ea0O0tWTUvDILgbQ?=
+ =?us-ascii?Q?01pYjhB06WCx2+s3PkMEmhHd8rSjuzc5gvKs6dMCyw11iZGNGnqPj/0/SxCS?=
+ =?us-ascii?Q?cv9u7f9+0RMG9MbAvNzF52U+vkMn+2JuW5HqbKlLPxV5SZ6pHmTuM/rPhIYo?=
+ =?us-ascii?Q?Qp/kiElT/kdclLFotPXO8JPDL7XNzABHwmE98Vwi9GiBXlo/Ewmlabd09jLO?=
+ =?us-ascii?Q?xIsupZ/JUCMm1GhD3xEkHsup154P9h18lnJZn4KaFsAsxFaa9qx3on+I+SSO?=
+ =?us-ascii?Q?T6W2/cMvPf3dzDS5hLQ8TlnqrIRtmHeJSs8LwPNPX3n/hqIhryMCr/QT9rvD?=
+ =?us-ascii?Q?UbjS5FvPt9InhxOoPaRlDWZ4G4rrCFIiUZRusRWgpTz+hVHnDQChwYdGXj3D?=
+ =?us-ascii?Q?+0bl8DVn9XWyQUnukqcJKwbgDRV4Btqwv2xCpZlbFmSiSbCLEh5u+A=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(366016)(1800799024)(19092799006)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kjfX+9QXVIiuRvXDhVGB+r4rzOjSMaCR6BVWV4GYe0Xx1Gs+Hz1gW5v/uNdD?=
+ =?us-ascii?Q?bCZDUVNN8u2ytkJA9SqeL9z/bq194slHvXs5AQoaXlOZFxpBvZYGyGJ57m38?=
+ =?us-ascii?Q?JIvGB0yLwnCC/ekae5OcSPo9eIw6da+vD3rG2sh46uFG/S6kGWySGs06h9cO?=
+ =?us-ascii?Q?LZc7UBaxvagZciFRH4HPbjGp9cM8FVOQYJOBTSy2E/pFjTz5DLK0pCoIxsYN?=
+ =?us-ascii?Q?o1CLksU85U8NjvsEhlU6Q0HF+VZx0RmFsSlIFRcvWDwGMrCho9PuMXS1J0C6?=
+ =?us-ascii?Q?Nep0FsTJvmeFd60USN0Dy3OcGCxrcGL/x67np3ZxOJa1crL2gLKnvfrhE89E?=
+ =?us-ascii?Q?1RgjZxa9uxm0xHNo1dij5vj/fLO50JSEji3ymX5b3TKlv6nFGIi1tEEc7I+1?=
+ =?us-ascii?Q?KMPx/OcSv/wGhnX86vw3RUckxST7KRuNUIlDn60zdYd2Ofe4UxHaqaysu/Q/?=
+ =?us-ascii?Q?Vy4v/BT7uO1HSDMjfwwO+1GL127F6fJ1wg5PBDkLQNpt2eurWKVVhkEsc3zj?=
+ =?us-ascii?Q?FuXax64jtS33fKwRKzoe/Kpk9JlNFgClETGlo+3pCD6FLre2aMqtsrkITpz8?=
+ =?us-ascii?Q?X0adf4WGmZMEzWIOv6WnYRqht11BuIIrH2A5EePYizhohE6EWwjwNsDa/5Vr?=
+ =?us-ascii?Q?6WKKOVWFeuXixILi5C9JfOq3RoMncYuyQ40iNdmD9MILPsvhRvan8tsVpPXd?=
+ =?us-ascii?Q?SyB8/V7DIdahmfPwgG59TFtoiUpw9WiBqsYMDtmWZmRVFabkDUeBxK6gEnnW?=
+ =?us-ascii?Q?urK3vmDSyMupdu38V2Xc8x3v0rmgzRKTjfLJ9+sOuYogdYduGeHGsVcp8Wrp?=
+ =?us-ascii?Q?8S+YBE85uDtPoELK0efArOqsT+5wLYsCGOg5rwe+OtRHdYc/97JSrpDZTLCd?=
+ =?us-ascii?Q?LisfYp6squuhk30cybZeT2CHgP9ul58dKlTdOX/3Di1+tr5Z9390orOqW8yG?=
+ =?us-ascii?Q?KywLFTmqupHY9kKU8xAmGEf4qL63H3SWX+dkBrlMy1QkNVQH8lnYcJvX+2ai?=
+ =?us-ascii?Q?zRm2IlrLDCn23N5ebUFJKKb5568e0EfC0FsmEaw41VNxMD/3kY/EqsLoKz9G?=
+ =?us-ascii?Q?6GboKPAZ0DWehtguHKYf6McSQmn4LocsMidKwhqWW/Afn8I5vyhgH859CHTn?=
+ =?us-ascii?Q?f2vf2p5d6DVpkReF+GMUms+Zg6kB4qyMbvNoGUq1GCr6r6MH19+lIsmKAeME?=
+ =?us-ascii?Q?hksqFm59KM4MpX9i2JTMUOw7t1/ZWVql1dM+mLEMxBsgLwut44P0WK7GIj03?=
+ =?us-ascii?Q?5ESRS8x/Lntw83frzMpByGUZ2rVNs6w+Nv1jYgxwAkXn7Kx3elpoXFgxsKsN?=
+ =?us-ascii?Q?UwQ8s3ALsm01odKuFQ6NKgzoeESZDWGKFKmHoECXDr5xmHyNTK4Iwe7sPuQg?=
+ =?us-ascii?Q?nJG4xTyuL6/FUqnfGVZsa1/ptRo+Gn94eLGeDtsrDIo8o7KWmDvbXWkwaysd?=
+ =?us-ascii?Q?3xCkOb5mcw7jQRyQSXdHdiNd5xIuj+fYW8Y8+f95QlxAYYPHHaWVZEOQqHbB?=
+ =?us-ascii?Q?wB78Rmrk2UUZhe3EXCGnXC+HNxCPuu5Y1uzr+Z/EpoGJdRMMJ6qxb2aCu7EH?=
+ =?us-ascii?Q?HJ+07XZZhxo5PQfxZ6ll/3kyjWY1u9UBGTLZnDee?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 15313fc5-0dad-47bc-9035-08de20b6931b
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2025 00:09:26.1135 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VQ2sQmPLkol2bYN9frVIyEHSCK2y/VtqV8lkDr/IuZ1nzRavCboZqE+WCuWuanBenoS82NIatEvyWDzOY5R38Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10192
 X-Mailman-Approved-At: Tue, 11 Nov 2025 01:10:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,937 +158,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the driver for the Airoha EN8811H 2.5 Gigabit PHY. The PHY supports
-100/1000/2500 Mbps with auto negotiation only.
+Hi Tom,
 
-The driver uses two firmware files, for which updated versions are added to
-linux-firmware already.
+Please pull scmi-master-2025-11-11
 
-Locating the AIROHA FW within the filesystem at the designated partition
-and path will trigger its automatic loading and writing to the PHY via MDIO.
-If need board specific loading override,
-please override the en8811h_read_fw function on board or architecture level.
+-------------------------------------------------------
+- Support scmi v3.2 CONFIG_SET for clock protocol
+- A patchset from Marek to optimize the scmi clk
+  booting time
+- Fix scmi clk set_parent in non-CCF case
+- Drop mmu_set_region_dcache_behaviour in firmware scmi
+-------------------------------------------------------
 
-Based on the Linux upstream AIROHA EN8811H driver code(air_en8811h.c),
-I have modified the relevant process to align with the U-Boot boot sequence.
-and have validated this on Banana Pi BPI-R3 Mini.
+CI: https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq/-/pipelines/28272
 
-Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
----
-Change in PATCH v6:
-air_en8811.c:
- * Use dev_err() instead of printf() for error messages
- * Use dev_info() instead of printf() for error messages
- * Return actual error code in en8811h_wait_mcu_ready()
- * Fix comment formatting for MII Registers Page 4
+Thanks,
+Peng
 
-Change in PATCH v5:
-air_en8811.c:
- * Add read_page & write_page functions for page access.
- * Change fs_loader to fw_loader.
- * Remove unnecessary debug prints.
+The following changes since commit 6b27b6886945a9351fcea8c9acf9418844f46670:
 
-Change in PATCH v4:
-air_en8811.c:
- * Create the airoha folder to store all future airoha phy drivers.
- * Use `request_firmware_into_buf_via_script` for firmware loading.
+  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2025-11-08 09:03:54 -0600)
 
-Change in PATCH v3:
-air_en8811.c:
- * Add U-Boot environment variable(en8811h_fw_part, en8811h_fw_dm_dir, en8811h_fw_dsp_dir)
-   support for firmware loading.
+are available in the Git repository at:
 
-Regarding the firmware loading mechanism,
-Please refer to the following script example for guidance:
-1.  `env set en8811h_load_firmware 'env set en8811h_load_firmware_addr 0x46000000 && env set en8811h_load_firmware_size 0x24000 && mw.b ${en8811h_load_firmware_addr} 0 ${en8811h_load_firmware_size} && load mmc 0:3 0x46000000 /boot/EthMD32.dm.bin && if test ${filesize} -eq 4000; then load mmc 0:3 0x46004000 /boot/EthMD32.DSP.bin; else echo "loading MD32 FW failed"; env set en8811h_load_firmware_size 0; exit 1;fi'`
-````Test Log````
-Net:   16384 bytes read in 1 ms (15.6 MiB/s)
-131072 bytes read in 9 ms (13.9 MiB/s)
-addr: 0x46000000, size: 0x24000
-Found Airoha Firmware.
-MD32 firmware version: 24112802
-````End of Test Log````
+  https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git tags/scmi-master-2025-11-11
 
-2.  `env set en8811h_load_firmware 'env set en8811h_load_firmware_addr 0x46000000 && env set en8811h_load_firmware_size 0x24000 && mmc partconf 0 1 2 2 && mmc read $en8811h_load_firmware_addr 0x0 0x120 && mmc partconf 0 1 1 0'`
-````Test Log````
-Net:   MMC read: dev # 0, block # 0, count 288 ... 288 blocks read: OK
-addr: 0x46000000, size: 0x24000
-Found Airoha Firmware.
-MD32 firmware version: 24112802
-````End of Test Log````
+for you to fetch changes up to 3547e315c188cdbb24312543d67d132b113eb01e:
 
- drivers/net/phy/Kconfig             |   2 +
- drivers/net/phy/Makefile            |   1 +
- drivers/net/phy/airoha/Kconfig      |  11 +
- drivers/net/phy/airoha/Makefile     |   3 +
- drivers/net/phy/airoha/air_en8811.c | 805 ++++++++++++++++++++++++++++
- 5 files changed, 822 insertions(+)
- create mode 100644 drivers/net/phy/airoha/Kconfig
- create mode 100644 drivers/net/phy/airoha/Makefile
- create mode 100644 drivers/net/phy/airoha/air_en8811.c
+  clk: scmi: Defer issue of SCMI_CLOCK_ATTRIBUTES (2025-11-10 20:57:49 +0800)
 
-diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-index 018be98705a..b254a0f4591 100644
---- a/drivers/net/phy/Kconfig
-+++ b/drivers/net/phy/Kconfig
-@@ -188,6 +188,8 @@ config PHY_MARVELL_10G
+----------------------------------------------------------------
+Kamlesh Gurudasani (1):
+      clk: scmi: fix set_parent support when CCF is not being used
 
- source "drivers/net/phy/mediatek/Kconfig"
+Marek Vasut (6):
+      firmware: scmi: Fix up code comments
+      firmware: scmi: Drop mmu_set_region_dcache_behaviour() misuse
+      clk: scmi: Bulk allocate all sub-driver instance data
+      clk: scmi: Factor out clock control flags resolution
+      clk: scmi: Postpone clock name resolution
+      clk: scmi: Defer issue of SCMI_CLOCK_ATTRIBUTES
 
-+source "drivers/net/phy/airoha/Kconfig"
-+
- config PHY_MESON_GXL
- 	bool "Amlogic Meson GXL Internal PHY support"
+Vinh Nguyen (1):
+      firmware: scmi: Add clock v3.2 CONFIG_SET support
 
-diff --git a/drivers/net/phy/Makefile b/drivers/net/phy/Makefile
-index a339b8ac29d..83520de7f1f 100644
---- a/drivers/net/phy/Makefile
-+++ b/drivers/net/phy/Makefile
-@@ -22,6 +22,7 @@ obj-$(CONFIG_PHY_LXT) += lxt.o
- obj-$(CONFIG_PHY_MARVELL) += marvell.o
- obj-$(CONFIG_PHY_MARVELL_10G) += marvell10g.o
- obj-y += mediatek/
-+obj-y += airoha/
- obj-$(CONFIG_PHY_MICREL_KSZ8XXX) += micrel_ksz8xxx.o
- obj-$(CONFIG_PHY_MICREL_KSZ90X1) += micrel_ksz90x1.o
- obj-$(CONFIG_PHY_MESON_GXL) += meson-gxl.o
-diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
-new file mode 100644
-index 00000000000..999564e4848
---- /dev/null
-+++ b/drivers/net/phy/airoha/Kconfig
-@@ -0,0 +1,11 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+menuconfig PHY_AIROHA
-+	bool "Airoha Ethernet PHYs support"
-+
-+config PHY_AIROHA_EN8811
-+	bool "Airoha Ethernet EN8811H support"
-+	depends on PHY_AIROHA
-+	select FW_LOADER
-+	help
-+	  AIROHA EN8811H supported.
-+
-diff --git a/drivers/net/phy/airoha/Makefile b/drivers/net/phy/airoha/Makefile
-new file mode 100644
-index 00000000000..84d23b19ab0
---- /dev/null
-+++ b/drivers/net/phy/airoha/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0
-+
-+obj-$(CONFIG_PHY_AIROHA_EN8811) += air_en8811.o
-diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
-new file mode 100644
-index 00000000000..1a628ede82b
---- /dev/null
-+++ b/drivers/net/phy/airoha/air_en8811.c
-@@ -0,0 +1,805 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Driver for the Airoha EN8811H 2.5 Gigabit PHY.
-+ *
-+ * Limitations of the EN8811H:
-+ * - Only full duplex supported
-+ * - Forced speed (AN off) is not supported by hardware (100Mbps)
-+ *
-+ * Source originated from linux air_en8811h.c
-+ *
-+ * Copyright (C) 2025 Airoha Technology Corp.
-+ */
-+
-+#include <phy.h>
-+#include <errno.h>
-+#include <log.h>
-+#include <env.h>
-+#include <malloc.h>
-+#include <fw_loader.h>
-+#include <asm/unaligned.h>
-+#include <linux/iopoll.h>
-+#include <linux/bitops.h>
-+#include <linux/compat.h>
-+#include <dm/device_compat.h>
-+#include <u-boot/crc.h>
-+
-+#define EN8811H_PHY_ID		0x03a2a411
-+
-+#define AIR_FW_ADDR_DM		0x00000000
-+#define AIR_FW_ADDR_DSP		0x00100000
-+
-+#define EN8811H_MD32_DM_SIZE	0x4000
-+#define EN8811H_MD32_DSP_SIZE	0x20000
-+
-+#define EN8811H_FW_CTRL_1		0x0f0018
-+#define EN8811H_FW_CTRL_1_START		0x0
-+#define EN8811H_FW_CTRL_1_FINISH	0x1
-+#define EN8811H_FW_CTRL_2		0x800000
-+#define EN8811H_FW_CTRL_2_LOADING	BIT(11)
-+
-+/* MII Registers */
-+#define AIR_AUX_CTRL_STATUS		0x1d
-+#define AIR_AUX_CTRL_STATUS_SPEED_MASK	GENMASK(4, 2)
-+#define AIR_AUX_CTRL_STATUS_SPEED_100	0x4
-+#define AIR_AUX_CTRL_STATUS_SPEED_1000	0x8
-+#define AIR_AUX_CTRL_STATUS_SPEED_2500	0xc
-+
-+#define AIR_EXT_PAGE_ACCESS		0x1f
-+#define AIR_PHY_PAGE_STANDARD		0x0000
-+#define AIR_PHY_PAGE_EXTENDED_4		0x0004
-+
-+/* MII Registers Page 4 */
-+#define AIR_BPBUS_MODE			0x10
-+#define AIR_BPBUS_MODE_ADDR_FIXED	0x0000
-+#define AIR_BPBUS_MODE_ADDR_INCR	BIT(15)
-+#define AIR_BPBUS_WR_ADDR_HIGH		0x11
-+#define AIR_BPBUS_WR_ADDR_LOW		0x12
-+#define AIR_BPBUS_WR_DATA_HIGH		0x13
-+#define AIR_BPBUS_WR_DATA_LOW		0x14
-+#define AIR_BPBUS_RD_ADDR_HIGH		0x15
-+#define AIR_BPBUS_RD_ADDR_LOW		0x16
-+#define AIR_BPBUS_RD_DATA_HIGH		0x17
-+#define AIR_BPBUS_RD_DATA_LOW		0x18
-+
-+/* Registers on MDIO_MMD_VEND1 */
-+#define EN8811H_PHY_FW_STATUS		0x8009
-+#define EN8811H_PHY_READY		0x02
-+
-+/* Registers on MDIO_MMD_VEND2 */
-+#define AIR_PHY_LED_BCR			0x021
-+#define AIR_PHY_LED_BCR_MODE_MASK	GENMASK(1, 0)
-+#define AIR_PHY_LED_BCR_TIME_TEST	BIT(2)
-+#define AIR_PHY_LED_BCR_CLK_EN		BIT(3)
-+#define AIR_PHY_LED_BCR_EXT_CTRL	BIT(15)
-+
-+#define AIR_PHY_LED_DUR_ON		0x022
-+
-+#define AIR_PHY_LED_DUR_BLINK		0x023
-+
-+#define AIR_PHY_LED_ON(i)	       (0x024 + ((i) * 2))
-+#define AIR_PHY_LED_ON_MASK		(GENMASK(6, 0) | BIT(8))
-+#define AIR_PHY_LED_ON_LINK1000		BIT(0)
-+#define AIR_PHY_LED_ON_LINK100		BIT(1)
-+#define AIR_PHY_LED_ON_LINK10		BIT(2)
-+#define AIR_PHY_LED_ON_LINKDOWN		BIT(3)
-+#define AIR_PHY_LED_ON_FDX		BIT(4) /* Full duplex */
-+#define AIR_PHY_LED_ON_HDX		BIT(5) /* Half duplex */
-+#define AIR_PHY_LED_ON_FORCE_ON		BIT(6)
-+#define AIR_PHY_LED_ON_LINK2500		BIT(8)
-+#define AIR_PHY_LED_ON_POLARITY		BIT(14)
-+#define AIR_PHY_LED_ON_ENABLE		BIT(15)
-+
-+#define AIR_PHY_LED_BLINK(i)	       (0x025 + ((i) * 2))
-+#define AIR_PHY_LED_BLINK_1000TX	BIT(0)
-+#define AIR_PHY_LED_BLINK_1000RX	BIT(1)
-+#define AIR_PHY_LED_BLINK_100TX		BIT(2)
-+#define AIR_PHY_LED_BLINK_100RX		BIT(3)
-+#define AIR_PHY_LED_BLINK_10TX		BIT(4)
-+#define AIR_PHY_LED_BLINK_10RX		BIT(5)
-+#define AIR_PHY_LED_BLINK_COLLISION	BIT(6)
-+#define AIR_PHY_LED_BLINK_RX_CRC_ERR	BIT(7)
-+#define AIR_PHY_LED_BLINK_RX_IDLE_ERR	BIT(8)
-+#define AIR_PHY_LED_BLINK_FORCE_BLINK	BIT(9)
-+#define AIR_PHY_LED_BLINK_2500TX	BIT(10)
-+#define AIR_PHY_LED_BLINK_2500RX	BIT(11)
-+
-+#define EN8811H_FW_VERSION		0x3b3c
-+
-+#define EN8811H_POLARITY		0xca0f8
-+#define EN8811H_POLARITY_TX_NORMAL	BIT(0)
-+#define EN8811H_POLARITY_RX_REVERSE	BIT(1)
-+
-+#define EN8811H_CLK_CGM			0xcf958
-+#define EN8811H_CLK_CGM_CKO		BIT(26)
-+#define EN8811H_HWTRAP1			0xcf914
-+#define EN8811H_HWTRAP1_CKO		BIT(12)
-+
-+#define clear_bit(bit, bitmap)	__clear_bit(bit, bitmap)
-+
-+/* Led definitions */
-+#define EN8811H_LED_COUNT	3
-+
-+struct led {
-+	unsigned long rules;
-+	unsigned long state;
-+};
-+
-+enum {
-+	AIR_PHY_LED_STATE_FORCE_ON,
-+	AIR_PHY_LED_STATE_FORCE_BLINK,
-+};
-+
-+enum {
-+	AIR_PHY_LED_DUR_BLINK_32MS,
-+	AIR_PHY_LED_DUR_BLINK_64MS,
-+	AIR_PHY_LED_DUR_BLINK_128MS,
-+	AIR_PHY_LED_DUR_BLINK_256MS,
-+	AIR_PHY_LED_DUR_BLINK_512MS,
-+	AIR_PHY_LED_DUR_BLINK_1024MS,
-+};
-+
-+enum {
-+	AIR_LED_DISABLE,
-+	AIR_LED_ENABLE,
-+};
-+
-+enum {
-+	AIR_ACTIVE_LOW,
-+	AIR_ACTIVE_HIGH,
-+};
-+
-+enum {
-+	AIR_LED_MODE_DISABLE,
-+	AIR_LED_MODE_USER_DEFINE,
-+};
-+
-+/* Trigger specific enum */
-+enum air_led_trigger_netdev_modes {
-+	AIR_TRIGGER_NETDEV_LINK = 0,
-+	AIR_TRIGGER_NETDEV_LINK_10,
-+	AIR_TRIGGER_NETDEV_LINK_100,
-+	AIR_TRIGGER_NETDEV_LINK_1000,
-+	AIR_TRIGGER_NETDEV_LINK_2500,
-+	AIR_TRIGGER_NETDEV_LINK_5000,
-+	AIR_TRIGGER_NETDEV_LINK_10000,
-+	AIR_TRIGGER_NETDEV_HALF_DUPLEX,
-+	AIR_TRIGGER_NETDEV_FULL_DUPLEX,
-+	AIR_TRIGGER_NETDEV_TX,
-+	AIR_TRIGGER_NETDEV_RX,
-+	AIR_TRIGGER_NETDEV_TX_ERR,
-+	AIR_TRIGGER_NETDEV_RX_ERR,
-+
-+	/* Keep last */
-+	__AIR_TRIGGER_NETDEV_MAX,
-+};
-+
-+/* Default LED setup:
-+ * GPIO5 <-> LED0  On: Link detected, blink Rx/Tx
-+ * GPIO4 <-> LED1  On: Link detected at 2500 and 1000 Mbps
-+ * GPIO3 <-> LED2  On: Link detected at 2500 and  100 Mbps
-+ */
-+#define AIR_DEFAULT_TRIGGER_LED0 (BIT(AIR_TRIGGER_NETDEV_LINK)      | \
-+				  BIT(AIR_TRIGGER_NETDEV_RX)        | \
-+				  BIT(AIR_TRIGGER_NETDEV_TX))
-+#define AIR_DEFAULT_TRIGGER_LED1 (BIT(AIR_TRIGGER_NETDEV_LINK_2500) | \
-+				  BIT(AIR_TRIGGER_NETDEV_LINK_1000))
-+#define AIR_DEFAULT_TRIGGER_LED2 (BIT(AIR_TRIGGER_NETDEV_LINK_2500) | \
-+				  BIT(AIR_TRIGGER_NETDEV_LINK_100))
-+
-+#define AIR_PHY_LED_DUR_UNIT	781
-+#define AIR_PHY_LED_DUR (AIR_PHY_LED_DUR_UNIT << AIR_PHY_LED_DUR_BLINK_64MS)
-+
-+struct en8811h_priv {
-+	int firmware_version;
-+	bool		mcu_needs_restart;
-+	struct led	led[EN8811H_LED_COUNT];
-+};
-+
-+static int air_buckpbus_reg_write(struct phy_device *phydev,
-+				  u32 pbus_address, u32 pbus_data)
-+{
-+	int ret, saved_page;
-+
-+	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+	if (saved_page < 0)
-+		return saved_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_FIXED);
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
-+			upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
-+			lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
-+			upper_16_bits(pbus_data));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
-+			lower_16_bits(pbus_data));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+restore_page:
-+	if (ret < 0)
-+		dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
-+			pbus_address, ret);
-+
-+	return phy_restore_page(phydev, saved_page, ret);
-+}
-+
-+static int air_buckpbus_reg_read(struct phy_device *phydev,
-+				 u32 pbus_address, u32 *pbus_data)
-+{
-+	int pbus_data_low, pbus_data_high;
-+	int ret = 0, saved_page;
-+
-+	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+	if (saved_page < 0)
-+		return saved_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_FIXED);
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_HIGH,
-+			upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_LOW,
-+			lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	pbus_data_high = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_HIGH);
-+	if (pbus_data_high < 0) {
-+		ret = pbus_data_high;
-+		goto restore_page;
-+	}
-+
-+	pbus_data_low = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_LOW);
-+	if (pbus_data_low < 0) {
-+		ret = pbus_data_low;
-+		goto restore_page;
-+	}
-+
-+	*pbus_data = pbus_data_low | (pbus_data_high << 16);
-+
-+restore_page:
-+	if (ret < 0)
-+		dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
-+			pbus_address, ret);
-+
-+	return phy_restore_page(phydev, saved_page, ret);
-+}
-+
-+static int air_buckpbus_reg_modify(struct phy_device *phydev,
-+				   u32 pbus_address, u32 mask, u32 set)
-+{
-+	int pbus_data_low, pbus_data_high;
-+	u32 pbus_data_old, pbus_data_new;
-+	int ret = 0, saved_page;
-+
-+	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+	if (saved_page < 0)
-+		return saved_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_FIXED);
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_HIGH,
-+			upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_LOW,
-+			lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	pbus_data_high = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_HIGH);
-+	if (pbus_data_high < 0) {
-+		ret = pbus_data_high;
-+		goto restore_page;
-+	}
-+
-+	pbus_data_low = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_LOW);
-+	if (pbus_data_low < 0) {
-+		ret = pbus_data_low;
-+		goto restore_page;
-+	}
-+
-+	pbus_data_old = pbus_data_low | (pbus_data_high << 16);
-+	pbus_data_new = (pbus_data_old & ~mask) | set;
-+	if (pbus_data_new == pbus_data_old)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
-+			upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
-+			lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
-+			upper_16_bits(pbus_data_new));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
-+			lower_16_bits(pbus_data_new));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+restore_page:
-+	if (ret < 0)
-+		dev_err(phydev->dev, "%s 0x%08x failed: %d\n", __func__,
-+			pbus_address, ret);
-+
-+	return phy_restore_page(phydev, saved_page, ret);
-+}
-+
-+static int air_write_buf(struct phy_device *phydev, unsigned long address,
-+			 unsigned long array_size, const unsigned char *buffer)
-+{
-+	unsigned int offset;
-+	int ret, saved_page;
-+	u16 val;
-+
-+	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+	if (saved_page < 0)
-+		return saved_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_INCR);
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
-+			upper_16_bits(address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
-+			lower_16_bits(address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	for (offset = 0; offset < array_size; offset += 4) {
-+		val = get_unaligned_le16(&buffer[offset + 2]);
-+		ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH, val);
-+		if (ret < 0)
-+			goto restore_page;
-+
-+		val = get_unaligned_le16(&buffer[offset]);
-+		ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW, val);
-+		if (ret < 0)
-+			goto restore_page;
-+	}
-+
-+restore_page:
-+	if (ret < 0)
-+		dev_err(phydev->dev, "%s 0x%08lx failed: %d\n", __func__,
-+			address, ret);
-+
-+	return phy_restore_page(phydev, saved_page, ret);
-+}
-+
-+static int en8811h_wait_mcu_ready(struct phy_device *phydev)
-+{
-+	int ret, reg_value;
-+
-+	/* Because of mdio-lock, may have to wait for multiple loads */
-+	ret = phy_read_mmd_poll_timeout(phydev, MDIO_MMD_VEND1,
-+					EN8811H_PHY_FW_STATUS, reg_value,
-+					reg_value == EN8811H_PHY_READY,
-+					20000, 7500000, true);
-+	if (ret) {
-+		dev_err(phydev->dev, "MCU not ready: 0x%x\n", reg_value);
-+		return ret;
-+	}
-+
-+	return ret;
-+}
-+
-+int en8811h_read_fw(void **fw, size_t *fwsize)
-+{
-+	void *buffer;
-+	int ret;
-+
-+	buffer = malloc(EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE);
-+	if (!buffer)
-+		return -ENOMEM;
-+
-+	ret = request_firmware_into_buf_via_script(buffer,
-+						   EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE,
-+						   "en8811h_load_firmware", fwsize);
-+	if (ret) {
-+		free(buffer);
-+		return ret;
-+	}
-+
-+	*fw = buffer;
-+
-+	debug("Found Airoha Firmware.\n");
-+
-+	return 0;
-+}
-+
-+static int en8811h_load_firmware(struct phy_device *phydev)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	size_t fw_size;
-+	void *buffer;
-+	int ret;
-+
-+	ret = en8811h_read_fw(&buffer, &fw_size);
-+	if (ret < 0) {
-+		dev_err(phydev->dev, "Failed to get firmware data\n");
-+		return -EINVAL;
-+	}
-+
-+	if (fw_size != EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE) {
-+		dev_err(phydev->dev,
-+			"MD32 firmware size mismatch (0x%zx != 0x%x)\n",
-+			fw_size, EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE);
-+		ret = -EINVAL;
-+		goto en8811h_load_firmware_out;
-+	}
-+
-+	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+				     EN8811H_FW_CTRL_1_START);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
-+				      EN8811H_FW_CTRL_2_LOADING,
-+				      EN8811H_FW_CTRL_2_LOADING);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, EN8811H_MD32_DM_SIZE,
-+			    (unsigned char *)buffer);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, EN8811H_MD32_DSP_SIZE,
-+			    (unsigned char *)buffer + EN8811H_MD32_DM_SIZE);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
-+				      EN8811H_FW_CTRL_2_LOADING, 0);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+				     EN8811H_FW_CTRL_1_FINISH);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = en8811h_wait_mcu_ready(phydev);
-+
-+	air_buckpbus_reg_read(phydev, EN8811H_FW_VERSION,
-+			      &priv->firmware_version);
-+	dev_info(phydev->dev, "MD32 firmware version: %08x\n",
-+		 priv->firmware_version);
-+
-+en8811h_load_firmware_out:
-+	free(buffer);
-+	if (ret < 0)
-+		dev_err(phydev->dev, "Firmware loading failed: %d\n", ret);
-+
-+	return ret;
-+}
-+
-+static int en8811h_restart_mcu(struct phy_device *phydev)
-+{
-+	int ret;
-+
-+	ret = phy_write_mmd(phydev, 0x1e, 0x8009, 0x0);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+				     EN8811H_FW_CTRL_1_START);
-+	if (ret < 0)
-+		return ret;
-+
-+	return air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+				      EN8811H_FW_CTRL_1_FINISH);
-+}
-+
-+static int air_led_hw_control_set(struct phy_device *phydev, u8 index,
-+				  unsigned long rules)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	u16 on = 0, blink = 0;
-+	int ret;
-+
-+	if (index >= EN8811H_LED_COUNT)
-+		return -EINVAL;
-+
-+	priv->led[index].rules = rules;
-+
-+	if (rules & BIT(AIR_TRIGGER_NETDEV_FULL_DUPLEX))
-+		on |= AIR_PHY_LED_ON_FDX;
-+
-+	if (rules & (BIT(AIR_TRIGGER_NETDEV_LINK_10) | BIT(AIR_TRIGGER_NETDEV_LINK)))
-+		on |= AIR_PHY_LED_ON_LINK10;
-+
-+	if (rules & (BIT(AIR_TRIGGER_NETDEV_LINK_100) | BIT(AIR_TRIGGER_NETDEV_LINK)))
-+		on |= AIR_PHY_LED_ON_LINK100;
-+
-+	if (rules & (BIT(AIR_TRIGGER_NETDEV_LINK_1000) | BIT(AIR_TRIGGER_NETDEV_LINK)))
-+		on |= AIR_PHY_LED_ON_LINK1000;
-+
-+	if (rules & (BIT(AIR_TRIGGER_NETDEV_LINK_2500) | BIT(AIR_TRIGGER_NETDEV_LINK)))
-+		on |= AIR_PHY_LED_ON_LINK2500;
-+
-+	if (rules & BIT(AIR_TRIGGER_NETDEV_RX)) {
-+		blink |= AIR_PHY_LED_BLINK_10RX   |
-+			 AIR_PHY_LED_BLINK_100RX  |
-+			 AIR_PHY_LED_BLINK_1000RX |
-+			 AIR_PHY_LED_BLINK_2500RX;
-+	}
-+
-+	if (rules & BIT(AIR_TRIGGER_NETDEV_TX)) {
-+		blink |= AIR_PHY_LED_BLINK_10TX   |
-+			 AIR_PHY_LED_BLINK_100TX  |
-+			 AIR_PHY_LED_BLINK_1000TX |
-+			 AIR_PHY_LED_BLINK_2500TX;
-+	}
-+
-+	if (blink || on) {
-+		/* switch hw-control on, so led-on and led-blink are off */
-+		clear_bit(AIR_PHY_LED_STATE_FORCE_ON,
-+			  &priv->led[index].state);
-+		clear_bit(AIR_PHY_LED_STATE_FORCE_BLINK,
-+			  &priv->led[index].state);
-+	} else {
-+		priv->led[index].rules = 0;
-+	}
-+
-+	ret = phy_modify_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_ON(index),
-+			     AIR_PHY_LED_ON_MASK, on);
-+
-+	if (ret < 0)
-+		return ret;
-+
-+	return phy_write_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_BLINK(index),
-+			     blink);
-+};
-+
-+static int air_led_init(struct phy_device *phydev, u8 index, u8 state, u8 pol)
-+{
-+	int val = 0;
-+	int err;
-+
-+	if (index >= EN8811H_LED_COUNT)
-+		return -EINVAL;
-+
-+	if (state == AIR_LED_ENABLE)
-+		val |= AIR_PHY_LED_ON_ENABLE;
-+	else
-+		val &= ~AIR_PHY_LED_ON_ENABLE;
-+
-+	if (pol == AIR_ACTIVE_HIGH)
-+		val |= AIR_PHY_LED_ON_POLARITY;
-+	else
-+		val &= ~AIR_PHY_LED_ON_POLARITY;
-+
-+	err = phy_write_mmd(phydev, 0x1f, AIR_PHY_LED_ON(index), val);
-+	if (err < 0)
-+		return err;
-+
-+	return 0;
-+}
-+
-+static int air_leds_init(struct phy_device *phydev, int num, u16 dur, int mode)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	int ret, i;
-+
-+	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_DUR_BLINK,
-+			    dur);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_DUR_ON,
-+			    dur >> 1);
-+	if (ret < 0)
-+		return ret;
-+
-+	switch (mode) {
-+	case AIR_LED_MODE_DISABLE:
-+		ret = phy_modify_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_BCR,
-+				     AIR_PHY_LED_BCR_EXT_CTRL |
-+				     AIR_PHY_LED_BCR_MODE_MASK, 0);
-+		break;
-+	case AIR_LED_MODE_USER_DEFINE:
-+		ret = phy_modify_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_BCR,
-+				     AIR_PHY_LED_BCR_EXT_CTRL |
-+				     AIR_PHY_LED_BCR_CLK_EN,
-+				     AIR_PHY_LED_BCR_EXT_CTRL |
-+				     AIR_PHY_LED_BCR_CLK_EN);
-+		if (ret < 0)
-+			return ret;
-+		break;
-+	default:
-+		dev_err(phydev->dev, "LED mode %d is not supported\n", mode);
-+		return -EINVAL;
-+	}
-+
-+	for (i = 0; i < num; ++i) {
-+		ret = air_led_init(phydev, i, AIR_LED_ENABLE, AIR_ACTIVE_HIGH);
-+		if (ret < 0) {
-+			dev_err(phydev->dev, "LED%d init failed: %d\n", i, ret);
-+			return ret;
-+		}
-+		air_led_hw_control_set(phydev, i, priv->led[i].rules);
-+	}
-+
-+	return 0;
-+}
-+
-+static int en8811h_config(struct phy_device *phydev)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	ofnode node = phy_get_ofnode(phydev);
-+	u32 pbus_value = 0;
-+	int ret = 0;
-+
-+	/* If restart happened in .probe(), no need to restart now */
-+	if (priv->mcu_needs_restart) {
-+		ret = en8811h_restart_mcu(phydev);
-+		if (ret < 0)
-+			return ret;
-+	} else {
-+		ret = en8811h_load_firmware(phydev);
-+		if (ret) {
-+			dev_err(phydev->dev, "Load firmware fail.\n");
-+			return ret;
-+		}
-+		/* Next calls to .config() mcu needs to restart */
-+		priv->mcu_needs_restart = true;
-+	}
-+
-+	ret = phy_write_mmd(phydev, 0x1e, 0x800c, 0x0);
-+	if (ret < 0)
-+		return ret;
-+	ret = phy_write_mmd(phydev, 0x1e, 0x800d, 0x0);
-+	if (ret < 0)
-+		return ret;
-+	ret = phy_write_mmd(phydev, 0x1e, 0x800e, 0x1101);
-+	if (ret < 0)
-+		return ret;
-+	ret = phy_write_mmd(phydev, 0x1e, 0x800f, 0x0002);
-+	if (ret < 0)
-+		return ret;
-+
-+	/* Serdes polarity */
-+	pbus_value = 0;
-+	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
-+		pbus_value |=  EN8811H_POLARITY_RX_REVERSE;
-+	else
-+		pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
-+	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
-+		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
-+	else
-+		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
-+	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
-+				      EN8811H_POLARITY_RX_REVERSE |
-+				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = air_leds_init(phydev, EN8811H_LED_COUNT, AIR_PHY_LED_DUR,
-+			    AIR_LED_MODE_USER_DEFINE);
-+	if (ret < 0) {
-+		dev_err(phydev->dev, "Failed to disable leds: %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int en8811h_parse_status(struct phy_device *phydev)
-+{
-+	int ret = 0, reg_value;
-+
-+	phydev->duplex = DUPLEX_FULL;
-+
-+	reg_value = phy_read(phydev, MDIO_DEVAD_NONE, AIR_AUX_CTRL_STATUS);
-+	if (reg_value < 0)
-+		return reg_value;
-+
-+	switch (reg_value & AIR_AUX_CTRL_STATUS_SPEED_MASK) {
-+	case AIR_AUX_CTRL_STATUS_SPEED_2500:
-+		phydev->speed = SPEED_2500;
-+		break;
-+	case AIR_AUX_CTRL_STATUS_SPEED_1000:
-+		phydev->speed = SPEED_1000;
-+		break;
-+	case AIR_AUX_CTRL_STATUS_SPEED_100:
-+		phydev->speed = SPEED_100;
-+		break;
-+	default:
-+		dev_err(phydev->dev, "Auto-neg error, defaulting to 2500M/FD\n");
-+		phydev->speed = SPEED_2500;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static int en8811h_startup(struct phy_device *phydev)
-+{
-+	int ret = 0;
-+
-+	ret = genphy_update_link(phydev);
-+	if (ret)
-+		return ret;
-+
-+	return en8811h_parse_status(phydev);
-+}
-+
-+static int en8811h_probe(struct phy_device *phydev)
-+{
-+	struct en8811h_priv *priv;
-+
-+	priv = malloc(sizeof(*priv));
-+	if (!priv)
-+		return -ENOMEM;
-+	memset(priv, 0, sizeof(*priv));
-+
-+	priv->led[0].rules = AIR_DEFAULT_TRIGGER_LED0;
-+	priv->led[1].rules = AIR_DEFAULT_TRIGGER_LED1;
-+	priv->led[2].rules = AIR_DEFAULT_TRIGGER_LED2;
-+
-+	/* mcu has just restarted after firmware load */
-+	priv->mcu_needs_restart = false;
-+
-+	phydev->priv = priv;
-+
-+	return 0;
-+}
-+
-+static int en8811h_read_page(struct phy_device *phydev)
-+{
-+	return phy_read(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS);
-+}
-+
-+static int en8811h_write_page(struct phy_device *phydev, int page)
-+{
-+	return phy_write(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS, page);
-+}
-+
-+U_BOOT_PHY_DRIVER(en8811h) = {
-+	.name = "Airoha EN8811H",
-+	.uid = EN8811H_PHY_ID,
-+	.mask = 0x0ffffff0,
-+	.config = &en8811h_config,
-+	.probe = &en8811h_probe,
-+	.read_page = &en8811h_read_page,
-+	.write_page = &en8811h_write_page,
-+	.startup = &en8811h_startup,
-+	.shutdown = &genphy_shutdown,
-+};
---
-2.34.1
-
+ arch/arm/mach-imx/imx9/scmi/clock_scmi.c   |   2 +-
+ drivers/clk/clk_scmi.c                     | 160 +++++++++++++++++------------
+ drivers/firmware/scmi/sandbox-scmi_agent.c |   4 +-
+ drivers/firmware/scmi/smt.c                |  14 ---
+ include/scmi_protocols.h                   |  37 +++++--
+ 5 files changed, 125 insertions(+), 92 deletions(-)
