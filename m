@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82889CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:30:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25107CCFA18
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:31:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE71D83AEC;
-	Tue, 11 Nov 2025 09:30:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8A59583AEC;
+	Tue, 11 Nov 2025 09:31:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JsjP33MF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FlKT6Dl6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FA7E83B4A; Tue, 11 Nov 2025 09:30:04 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 0760C83E36; Tue, 11 Nov 2025 09:31:07 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9BC783AB4
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:30:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BB1183AB4
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:31:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-787eb2d86bfso21231107b3.2
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:30:01 -0800 (PST)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-786572c14e3so37978957b3.2
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:31:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762849800; x=1763454600; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1762849860; x=1763454660; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zIzsuh+zIc+UJUAlZpredXa6psH3TeZCMi80OsC6TIk=;
- b=JsjP33MFfhKtZ/qulglLbdF1kHnU2uec1pJ6ogY2TX011f+iWAzKpiGxsN3naQ7jBV
- Z5N9sHdEpvIXRTkEj0PA8ZYKxFnwLcX3EpKtBZ2nFCno0ioMU2HIuk5f+GeM4Tc6uezL
- IExqJ9H09PkvqlZ7Bq9tjiXtc2YedUFiXe9gYKi1bSlX+hbGvj4Rsq7tUy1YjTnMAnBP
- bsHm0L5sLkxAowJYGErf7K461zEA7jsMFKqUk+1v0K8U1HvV7f/V1P4Z4Ru2TO+ZAIoo
- m9oMFd6OLRh1jlVzEHQny/VKDqTybKeDDvfKN43Ghc25VIXJlHr2j6ucB9KCJVyR+Ngd
- pong==
+ bh=SjrGmcln1b+l5tGcqaKUtHN72tWF1/WRQncbXhnIJ/c=;
+ b=FlKT6Dl6zJK8kTJdg78/0vEckbsGPpHEdhxJQT2PY+HE8cixjxbJ6tmipAX/DPsOmk
+ sNsNzmg27nojGorWlUJSnwUZLuqWy7KO9VCNussWRK8pCCXV3hSwLfrjJdge6zcAzOC8
+ fcOcVBK+o2cbCIifOp6Ge6VDmoVp4fqqNSnlG/wTd4o2WwX+z9Onv6YYNeWJyaObrb+i
+ UYQY4i04DPXxru1ztBRCd7OnjQfFWZkPWEgsBXWk1KrwfDfkFSh/WfuNP3Wz2f2Q9Np2
+ N09kBYV/n5MkxjCX51zyKKJJle+XMZGYdNhHs5GTzvUky0lOve7oJKifOe07SsgTUMNp
+ t6lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762849800; x=1763454600;
+ d=1e100.net; s=20230601; t=1762849860; x=1763454660;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zIzsuh+zIc+UJUAlZpredXa6psH3TeZCMi80OsC6TIk=;
- b=eHIprIyChuLBWoi4/e6dRJweMJOJybiK+V6pBeqR9IojKps8zaonzk+bKQc+rrRBUd
- /MeBO6jnASZGUhiJVcS2QSsu+KgW82uhceLUYYNhfAznH17vV2E7s+dGyzUTGoQUfs/1
- gNJpo5P4shQe4i+DKotLw3VxG6SRjh1xRmC2lWEphf0fI0xfq4ZK4yscwncLw97nL/KN
- mRJsXSHluaVSNY/ZbzgOgD9zkLu3PZA/mJ5j/YDFLP4aaDRtq402T/ul+HGBIB/IeDQ1
- qu/yllEl9v335YTDosNqj/PNPeDBv8fTDHyCQtWoZOTFAIeQQDTNMCE5DkPHUVvmkxna
- otkQ==
+ bh=SjrGmcln1b+l5tGcqaKUtHN72tWF1/WRQncbXhnIJ/c=;
+ b=k6XOxssddoRZYYOF/pauxBAobyeIZu6VI3CZoCqKHWQrYOxDV0swG/vLxMsKsaP4HM
+ 0LS2RVSDoL96ZLWQo9UwytWsXHJe07tP7P8UPpQf4qFI3B2rt9m3tzAI9I+5plX1WCSn
+ mJ99buXe1R6fz2dGPhSinQUGiSFp2Eshp8qW1o3ckD6VFlOtVLOBqAh8wELGBZER0daX
+ FUYSw8kWHOAs3cMc+jo9qWn5WtyE6bz6IsdYrhmH9UMgQIdCFBIEJ51Z2bPB/wpevLk5
+ SmC1cX6hBGR+e+Z644qAkUvRvXV7nPDerHwO3qV19nb2fm+DCrTcxjodpyBW4affFfR0
+ zz0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnGjRxNrrWMIXGRBwdAMu/O++n9avNEcPYs4BhKdkhpn0JJeeEx9wju/lsVbqr7WCq3UhqFYw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz00XPOlomkptGOlcMxP6GobmcHHqWpNoUgd/B5MCVHmn5vYREN
- swiD6qKeVV9+ptOmCwbNnvq16xeDnm9GQsiLozyi4F94pUsg2g/wveXEYH0ivqtOptMjuM8wcpc
- sSKpuzPUoDR+e7J9kvT/9oRwOkI7V29v12Q8ONT1O9g==
-X-Gm-Gg: ASbGncvO+iJMqRapgc6woL/D3y8VYeE9TLnc0MK1MpeWmjlVu75zw4nVjS2Zy56vAq0
- aVEihNXDSxt19q2kMVW0HVeRdPNZp98bNKCAIreGB1no50L0U5MmG8VHtXmnaeB9jBaKMNKgbut
- EGgVNuO/5G6LikfHbE/KfZBWgQvaMH+hg6mtdjZUxyI6BuDYJQ+CejRi/j4SkGnS/EQfpYJxxCd
- gaoB0Avd1lvLGjdtA14VgyNr34TeTeLtH2g8lfX8gActWbPakMSb5Tv3jgeABoLq4kvrYAhAOds
- 7OnraHPonSSUpd0friswaQypSg2ck51BfNzzPRTp
-X-Google-Smtp-Source: AGHT+IE9U8IOwNH/mUiKyjkiGCFMpdsJj3Ouc3ZVBqkcjwckNEhvN5aAoCPEhtzyqdQCoqaUuDerWmHGqjK9yF3Ul/I=
-X-Received: by 2002:a05:690c:370a:b0:786:4fd5:e5e0 with SMTP id
- 00721157ae682-787d543a95dmr95062127b3.47.1762849800503; Tue, 11 Nov 2025
- 00:30:00 -0800 (PST)
+ AJvYcCWal5uzbMXASqQkH26+Xjeyzr+R45EgPuGNWf+X1MbaPm8G/6XzwR6fGqCrzafHNUIG2XCSxnQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywml+zRzCJY7v+FR6pau81CVcnkvW8208W9UwHba4YTGsOtr2E4
+ iBWUDo9MZ9ZNdvuN6RY8DAyb97If4BrElbt+1ob0wzn1Yh7RGgQiwBIFoj2eP6SNF+E5HLzGuuJ
+ 4lVnGdSaWptMV4zPQmUTy2KXaYMumhmjdSZICMiWj6w==
+X-Gm-Gg: ASbGnct7KaohUPpgUELWCn1modXLuV1ai4Vl50lIqG9HlcdKS1ssJ1nusIftEmbkpZz
+ p/r2haqXlBiFafn/9rz6rNM3y4Tg9rZxO+OkkhAaAF6n8AFJAi0yBlS2tYumlwtxqgyH4xbBayQ
+ OZ6jwljcIpWVWHvchW6u82OZRF1WmbwZ+EOstgV+7F8FMMDtfvK0boBvrPYTsUR/wnZK6fU+m70
+ NNNVqJAYMiFUJM0AHLiNuC457z1qVTcmWzRQjGd4Nu81qcMn9CWyqXlmTlHxUzYBgssoIzFu2ah
+ Ye/G46Vy3C6Mcs3/2RdkRHmNUBeAaiwnYUM6iozL
+X-Google-Smtp-Source: AGHT+IE4B+iWAytcLDLL19nqBjLXyS9UXDzSf2j1GOW3KKq4v4vOgh2PxAgvCmEk4iwhHfMEL+xZZKav6ZrXguvmPME=
+X-Received: by 2002:a05:690c:2f82:b0:786:7797:6d73 with SMTP id
+ 00721157ae682-787d543da0emr72769157b3.40.1762849860227; Tue, 11 Nov 2025
+ 00:31:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251109101010.306268-2-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251109101010.306268-4-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Nov 2025 10:29:23 +0200
-X-Gm-Features: AWmQ_bmXMwh8wQA-RLC2BLoYFy5P_A7uDQUMlDjavrQeD5l_fLN_HpiiKzk5qhg
-Message-ID: <CAC_iWjK_SUEZsEzT3zb2BK-dwcXdp1gZoU880Wc1efSPAzftMw@mail.gmail.com>
-Subject: Re: [PATCH RESEND 1/9] test: fdt_test_apply requires
- CONFIG_OF_LIBFDT_OVERLAY
+Date: Tue, 11 Nov 2025 10:30:24 +0200
+X-Gm-Features: AWmQ_bkglcFU_EftT-QrzUXAC8lpv_hW0NhtY6QzTKOD31g78HL-BdDxc2SnBOA
+Message-ID: <CAC_iWjJwOwm+Uno4ULvna0wSKZYbKVgC8E-NF6+x_Q=EtvnEZQ@mail.gmail.com>
+Subject: Re: [PATCH 3/9] test: cmd/bdinfo: make no flash assumption
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
  Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>, 
@@ -105,39 +104,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
-
 On Sun, 9 Nov 2025 at 12:10, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> The `fdt apply` sub-command is only available if CONFIG_OF_LIBFDT_OVERLAY
-> is enabled.
+> The location and size of flash is device-dependent. Do not make any
+> assumption about the location and size.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  test/cmd/fdt.c | 3 +++
->  1 file changed, 3 insertions(+)
+>  test/cmd/bdinfo.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
-> index 96a8488e172..a36f2dcdda8 100644
-> --- a/test/cmd/fdt.c
-> +++ b/test/cmd/fdt.c
-> @@ -1319,6 +1319,9 @@ static int fdt_test_apply(struct unit_test_state *uts)
->         char fdt[8192], fdto[8192];
->         ulong addr, addro;
+> diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
+> index 09f44ee41ed..214b237152b 100644
+> --- a/test/cmd/bdinfo.c
+> +++ b/test/cmd/bdinfo.c
+> @@ -161,9 +161,9 @@ static int bdinfo_test_all(struct unit_test_state *uts)
+>         ut_assertok(bdinfo_check_mem(uts));
 >
-> +       if (!IS_ENABLED(CONFIG_OF_LIBFDT_OVERLAY))
-> +               return -EAGAIN;
-
-The asserts return CMD_RET_FAILURE on failures. Should't we use the same here?
-
-> +
->         /* Create base DT with __symbols__ node */
->         ut_assertok(fdt_create(fdt, sizeof(fdt)));
->         ut_assertok(fdt_finish_reservemap(fdt));
+>         /* CONFIG_SYS_HAS_SRAM testing not supported */
+> -       ut_assertok(test_num_l(uts, "flashstart", 0));
+> -       ut_assertok(test_num_l(uts, "flashsize", 0));
+> -       ut_assertok(test_num_l(uts, "flashoffset", 0));
+> +       ut_check_console_linen(uts, "flashstart");
+> +       ut_check_console_linen(uts, "flashsize");
+> +       ut_check_console_linen(uts, "flashoffset");
+>         ut_assert_nextline("baudrate    = %lu bps",
+>                            env_get_ulong("baudrate", 10, 1234));
+>         ut_assertok(test_num_l(uts, "relocaddr", gd->relocaddr));
 > --
 > 2.51.0
 >
 
-Regards
-/Ilias
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
