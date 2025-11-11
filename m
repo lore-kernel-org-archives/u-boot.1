@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 418A5CCF9E3
-	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:34:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E64BFCCFA18
+	for <u-boot@archiver.kernel.org>; Tue, 11 Nov 2025 08:42:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C270983AEC;
-	Tue, 11 Nov 2025 09:34:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 64B9183AEC;
+	Tue, 11 Nov 2025 09:42:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ua4viDCx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TNPsb9Pl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F56783E4C; Tue, 11 Nov 2025 09:34:02 +0100 (CET)
-Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
- [IPv6:2607:f8b0:4864:20::b130])
+ id 7475583E63; Tue, 11 Nov 2025 09:42:31 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B54983AB4
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:34:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 000A283AB4
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 09:42:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb130.google.com with SMTP id
- 956f58d0204a3-640f88b873bso457789d50.3
- for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:34:00 -0800 (PST)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-787e7aa1631so6713817b3.1
+ for <u-boot@lists.denx.de>; Tue, 11 Nov 2025 00:42:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762850039; x=1763454839; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1762850548; x=1763455348; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=393irxKGcuQmHr3OGh0/fJV/cDse8CsCVOKLTiHkcAA=;
- b=Ua4viDCxYnYsFHwKq7WAOATAugFAZ6u+/+HnXtQ2XyyxVaxaxKYUBz7YMRT2kfeIIR
- S/uYzguzK+skXfZrznci4ymOte7xFXuZ0xm1DcdBexBC1DHDOWG0M/cZT81IWXavyPQw
- wechfORNDp0Xhyak1fVIecDM5rqVwNtuaZNFqfenM3sCJQhBP15arZTj9nbQ7D9YsOjF
- Hqovrnxd0vdejgLGfmsFFG9fB66Y//woBplPZRXOrY+DOti90x9UeWgZw/SWXA0Saq5R
- bHr/aFayUFCQ1DUaO6ACJiPwYYG5lGfIvwAxlp9SSfVKDop8tnKIOdxVskVxTzVFa3vy
- Y76w==
+ bh=ds/6K9ltPJo3yZW5rrgr/wvWcnU3Nh9SWLzOh8KeJ0M=;
+ b=TNPsb9Pl7OvjjviV0eIDj/s534NejDf6lNXk8q8cMVbygAfQHIQ2FcVFcZXgvCC5hy
+ r6Q0O9hFrrr/g9uMl53Duaa+IzbeWA5a4f4Lgvys5xVMq2aYbcqIn2Rz1vpNQ/aM4/L0
+ dZDYEG0VrXB/Sw6vqOSaRbyZ3uVBRZF9O8lBXBVHDysOTbqj+EODqh/JEVMwkgdXIMUN
+ HldXK902fhTDrGLgzcHKbvujL9i7zAUgA9oInuy/LLDfWcBj963puzghHogsKKipaGnz
+ 7W4FLPvR+rO6XISrB1wyM6zCib7IERt75SRza00JUG5F8IiRhuLTRduPpQGG0K2IhOki
+ AFnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762850039; x=1763454839;
+ d=1e100.net; s=20230601; t=1762850548; x=1763455348;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=393irxKGcuQmHr3OGh0/fJV/cDse8CsCVOKLTiHkcAA=;
- b=EWn8ndXzdFGKZSuVizcaX+a0dgSrQmtYni1un7d4jyhOSzi5CClwIwi4rFRv3rnioM
- 2XoFURQIcvXWDFJUiA+pOo412Yn0JzBgtk3a9pu1KYnJeJcz8VUxcwTQvZU+gs+L20NJ
- R4FH0ttJr2kqk+jNcRm9DoVRgOOJrUsIKgK6T8AcgmSaR1CBTAB39BAoEjEqjBkt4PDi
- B8NFSCTFUSiMkDdMJw6B26uIQpt1QciRkCDz0wjXIPime+W1+1tjNgIWOE8pGnTG+KI9
- /KfZVrumhcY2NXbC+lYZTuYVNwfZDwZXQlYG+mCA3BTkwIgvSqtUBNhtaJ1C38F7IfcO
- Eo5g==
+ bh=ds/6K9ltPJo3yZW5rrgr/wvWcnU3Nh9SWLzOh8KeJ0M=;
+ b=Zv+8/WrQ+JrVyqOmzVKfqXsZpGIpsxaUwlluaRZ5fZefdZUQ/0NXFwvw3+UB1dJAHa
+ D6suOTKyOu7fhRYkYUEXxasyzLyapQoDwJheSKl2/BIA3JbtTz5BgN5uhUrQQ/Av/iLI
+ jlsDhJdJ8eley9byGSAiyUmVFDBEYAzrKwzH+745s114c68xYi9KkCqSV3wnt6wFWFJ/
+ Ep+qMoQkLOIHdDyRXkT+73cWnntJd/vjy4JSsloOR9GpZgylS30tBFSqI0E9dI9C+AXy
+ knXCUUCEb9xdumODDUg9KGXM6Xd2cRF8hXrEjj3fBHTzKG6n5IJCNC5rl3bJD76jmBKC
+ h1rw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUb2/vrOm/h4CZ01kxEOqwoyk4/VkBdSWKpxi0ZOsbrDoVW+RWcUh5ErcpkUq/lqZGVFw2/Z34=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxzd1lcCwrSqu8xo8mn+iBCYzEbYJWBuPhy2OoVSH4gnrx583q+
- EcfN6vBforLdgu3GhPvIxYk1rs/6oKiV4FYe/5VP2yz5yGKCaHaxs6Lq7YVn9pFTJIeJhAKvVk/
- kyn8M43oN2wM1es9P0VNnbi1fPlBAhI0yy/6d5N0xmg==
-X-Gm-Gg: ASbGncsuUlXYpvqoHCYllmhZd/q4NGbE0/xSyYKDlazNMLD54sBlZO1KO/KYWJ2uVMP
- GNvJfRyKmLViz6zKtl4HvN+znfMSZGkdqrro6nUTPCEF1ZOsYjYstnn4ec+pImDnPMwcbf55qOn
- VivA2uWy1j8fXZHoWEfwu8uKRq/0WpOQTfBmMiIs68Q7sW+68yC4iyTF1fe4wiDpGbmuv3u4CjZ
- Dq+RbPCzmss3r7ta9k/1IKhqrPsERLX0H79sOO2bXIOHDdQCcK0iUDLv4A0E7fWgMyiC3IhJWUt
- 70zCcJA2UQsvDkAzMQN54REn8dleCBkfCKEL8h8w
-X-Google-Smtp-Source: AGHT+IFstWYZtbr0Krtcz4MM2KZrXBSHRyvOP+32boQ7P9NqkPYe7m8MQZ36HK1OxQm3Lmdz9kwtujBznX9lI/Q2Ouw=
-X-Received: by 2002:a05:690e:1610:b0:63f:95dd:b2c9 with SMTP id
- 956f58d0204a3-640d45fed2dmr7889138d50.58.1762850039042; Tue, 11 Nov 2025
- 00:33:59 -0800 (PST)
+ AJvYcCXiX6McP2KCa963S3bDohXmUdP+WJelvEI2MGZTF1+uCJIcfcoMtRLu/R/2eBWD8Udl/bD1rAM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyehGKa1x2cWSaNdDAkQpJYYd8BYL+KMjbf4gxeG0OdhFWIAgOx
+ dii9I0BSCfyqS4i69oPqquiwhw6z09ipqYX1M5mIsjaybTUWZrUN4RKZOGdv/MhbGTN+0l1EccJ
+ nQmJaLwatkseIsoOGunua/EmHLHfuw2r28XSsjZMv3A==
+X-Gm-Gg: ASbGncuOQgz50W8jWqXef+W/f5gRHybvSzDYZoxw+cYEtY1FhnJd0Jjlqk1pWfkRz/M
+ 6vE8ypiwuNd32iiA9/2Z5wzefSlAo6VM5b4ZneFUGSsvufj+XvXkVUpa67Y1oem4szYbhiZLtzK
+ dYxGytfICQwSpKEs0mb5hpab/1AfWrln6855bcnOJ7u7nRjzbdIeW9mZ4zqqjmwxLMLydtGOdmV
+ Rb9xUnyn3BNvxkReaEvORh7eaciRIjw9N19fWR1z9AQO5/8sq6GCYgilfGqMDYEKCR1zbvSwxtl
+ Rlks5hEcGGEp2KqGETQGlrlnLghNll3u7estR2u3
+X-Google-Smtp-Source: AGHT+IH6VWrKxqXKctqmF8xXII95zFJrjYyAeX+t8EXzbfrlJ051XwJPY8tKqlzt+BysTDdD+vVxcQFNhmBpFsoGjJA=
+X-Received: by 2002:a05:690c:289:b0:786:86e3:a494 with SMTP id
+ 00721157ae682-78803510d5amr21524537b3.2.1762850547724; Tue, 11 Nov 2025
+ 00:42:27 -0800 (PST)
 MIME-Version: 1.0
-References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251109101010.306268-3-heinrich.schuchardt@canonical.com>
+References: <20251110125828.1643327-1-bmeng.cn@gmail.com>
+ <20251110125828.1643327-2-bmeng.cn@gmail.com>
+In-Reply-To: <20251110125828.1643327-2-bmeng.cn@gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Nov 2025 10:33:22 +0200
-X-Gm-Features: AWmQ_bksGwNnSkVjopzGKsY167CCfvHfJZ6zygXJW-X-zsAFvSsRzou1kuG0blM
-Message-ID: <CAC_iWjLWTrtqT3K=uryYunnDD-wmYhQ1ufZ70E4Ts+ufU=_JTw@mail.gmail.com>
-Subject: Re: [PATCH 2/9] test: cmd/fdt: do not assume RNG device exists
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>, 
- Harrison Mutai <harrison.mutai@arm.com>, Peng Fan <peng.fan@nxp.com>, 
- Ben Dooks <ben.dooks@codethink.co.uk>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
+Date: Tue, 11 Nov 2025 10:41:51 +0200
+X-Gm-Features: AWmQ_blJgzBVh6LrGYgu9mr0M-ipLDKOYi6LxYtcg6dREFcyE9qQc8J8xygc_Ro
+Message-ID: <CAC_iWj+bQLC87QEA3aNfrYX8_njT55_RFAiRHiBWfhRXa9xnJw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] qemu: arm: sbsa: Rename sbsa defconfig to arm64
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Peng Fan <peng.fan@nxp.com>, Raymond Mao <raymond.mao@linaro.org>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,87 +102,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 9 Nov 2025 at 12:10, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Mon, 10 Nov 2025 at 14:58, Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> In fdt_test_chosen() currently we test if DM_RNG is configured.
-> CONFIG_DM_RNG=y does not imply that a RNG device actually exists.
-> For instance QEMU may be called with -device virtio-rng-device or not.
-> The current test framework evicts the virtio RNG device even if QEMU is
-> called with -device virtio-rng-device.
+> The QEMU ARM SBSA virtual platform is 64-bit, so rename its defconfig
+> to include 'arm64' for clarity.
 >
-> In the fdt_test_chosen() check if a RNG device exists.
-> Ignore 'No RNG device' messages.
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  test/cmd/fdt.c | 20 ++++++++++++++++----
->  1 file changed, 16 insertions(+), 4 deletions(-)
 >
-> diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
-> index a36f2dcdda8..b950123b6da 100644
-> --- a/test/cmd/fdt.c
-> +++ b/test/cmd/fdt.c
-> @@ -10,6 +10,7 @@
->  #include <fdt_support.h>
->  #include <mapmem.h>
->  #include <asm/global_data.h>
-> +#include <dm/uclass.h>
->  #include <linux/libfdt.h>
->  #include <test/ut.h>
+> Changes in v2:
+> - Add missing azure and gitlab ci changes
 >
-> @@ -1267,6 +1268,7 @@ static int fdt_test_chosen(struct unit_test_state *uts)
->  {
->         const char *env_bootargs = env_get("bootargs");
->         char fdt[8192];
-> +       struct udevice *dev;
->         ulong addr;
+>  .azure-pipelines.yml                                        | 6 +++---
+>  .gitlab-ci.yml                                              | 6 +++---
+>  board/emulation/qemu-arm/MAINTAINERS                        | 2 +-
+>  .../{qemu-arm-sbsa_defconfig => qemu-arm64-sbsa_defconfig}  | 0
+>  doc/develop/driver-model/virtio.rst                         | 2 +-
+>  5 files changed, 8 insertions(+), 8 deletions(-)
+>  rename configs/{qemu-arm-sbsa_defconfig => qemu-arm64-sbsa_defconfig} (100%)
 >
->         ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
-> @@ -1280,11 +1282,16 @@ static int fdt_test_chosen(struct unit_test_state *uts)
->         /* Test add new chosen node without initrd */
->         ut_assertok(run_commandf("fdt chosen"));
->         ut_assertok(run_commandf("fdt print /chosen"));
-> -       ut_assert_nextline("chosen {");
-> +       ut_assert(0 < console_record_readline(uts->actual_str,
-> +                                             sizeof(uts->actual_str)));
-> +       if (!strcmp("No RNG device", uts->actual_str))
-> +               ut_assert(0 < console_record_readline(uts->actual_str,
-> +                                                     sizeof(uts->actual_str)));
-> +       ut_asserteq_str("chosen {", uts->actual_str);
->         ut_assert_nextlinen("\tu-boot,version = "); /* Ignore the version string */
->         if (env_bootargs)
->                 ut_assert_nextline("\tbootargs = \"%s\";", env_bootargs);
-> -       if (IS_ENABLED(CONFIG_DM_RNG) &&
-> +       if (!uclass_get_device(UCLASS_RNG, 0, &dev) &&
->             !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
->             !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
->                 ut_assert_nextlinen("\tkaslr-seed = ");
-> @@ -1294,7 +1301,12 @@ static int fdt_test_chosen(struct unit_test_state *uts)
->         /* Test add new chosen node with initrd */
->         ut_assertok(run_commandf("fdt chosen 0x1234 0x5678"));
->         ut_assertok(run_commandf("fdt print /chosen"));
-> -       ut_assert_nextline("chosen {");
-> +       ut_assert(0 < console_record_readline(uts->actual_str,
-> +                                             sizeof(uts->actual_str)));
-> +       if (!strcmp("No RNG device", uts->actual_str))
-> +               ut_assert(0 < console_record_readline(uts->actual_str,
-> +                                                     sizeof(uts->actual_str)));
-> +       ut_asserteq_str("chosen {", uts->actual_str);
->         ut_assert_nextline("\tlinux,initrd-end = <0x%08x 0x%08x>;",
->                            upper_32_bits(0x1234 + 0x5678 - 1),
->                            lower_32_bits(0x1234 + 0x5678 - 1));
-> @@ -1303,7 +1315,7 @@ static int fdt_test_chosen(struct unit_test_state *uts)
->         ut_assert_nextlinen("\tu-boot,version = "); /* Ignore the version string */
->         if (env_bootargs)
->                 ut_assert_nextline("\tbootargs = \"%s\";", env_bootargs);
-> -       if (IS_ENABLED(CONFIG_DM_RNG) &&
-> +       if (!uclass_get_device(UCLASS_RNG, 0, &dev) &&
->             !IS_ENABLED(CONFIG_MEASURED_BOOT) &&
->             !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
->                 ut_assert_nextlinen("\tkaslr-seed = ");
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index 1009938f332..9216df16f70 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -268,7 +268,7 @@ stages:
+>                wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+>                export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
+>            fi
+> -          if [[ "\${TEST_PY_BD}" == "qemu-arm-sbsa" ]]; then
+> +          if [[ "\${TEST_PY_BD}" == "qemu-arm64-sbsa" ]]; then
+>                wget -O /tmp/bl1.bin https://artifacts.codelinaro.org/artifactory/linaro-419-sbsa-ref/latest/tf-a/bl1.bin;
+>                wget -O /tmp/fip.bin https://artifacts.codelinaro.org/artifactory/linaro-419-sbsa-ref/latest/tf-a/fip.bin;
+>                export BINMAN_INDIRS=/tmp
+> @@ -483,8 +483,8 @@ stages:
+>            TEST_PY_BD: "qemu-arm64"
+>            TEST_PY_ID: "--id fw_handoff_tfa_optee"
+>            TEST_PY_TEST_SPEC: "test_fw_handoff"
+> -        qemu-arm_sbsa_ref:
+> -          TEST_PY_BD: "qemu-arm-sbsa"
+> +        qemu-arm64-sbsa_ref:
+> +          TEST_PY_BD: "qemu-arm64-sbsa"
+>            TEST_PY_TEST_SPEC: "not sleep"
+>          qemu_m68k:
+>            TEST_PY_BD: "M5208EVBE"
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 5f91780c764..19ab1ad53a0 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -49,7 +49,7 @@ stages:
+>          wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+>          export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
+>        fi
+> -    - if [[ "${TEST_PY_BD}" == "qemu-arm-sbsa" ]]; then
+> +    - if [[ "${TEST_PY_BD}" == "qemu-arm64-sbsa" ]]; then
+>          wget -O /tmp/bl1.bin https://artifacts.codelinaro.org/artifactory/linaro-419-sbsa-ref/latest/tf-a/bl1.bin;
+>          wget -O /tmp/fip.bin https://artifacts.codelinaro.org/artifactory/linaro-419-sbsa-ref/latest/tf-a/fip.bin;
+>          export BINMAN_INDIRS=/tmp;
+> @@ -402,9 +402,9 @@ qemu-arm64_tfa_fw_handoff test.py:
+>      TEST_PY_TEST_SPEC: "test_fw_handoff"
+>    <<: *buildman_and_testpy_dfn
+>
+> -qemu-arm_sbsa test.py:
+> +qemu-arm64-sbsa test.py:
+>    variables:
+> -    TEST_PY_BD: "qemu-arm-sbsa"
+> +    TEST_PY_BD: "qemu-arm64-sbsa"
+>      TEST_PY_TEST_SPEC: "not sleep"
+>    <<: *buildman_and_testpy_dfn
+>
+> diff --git a/board/emulation/qemu-arm/MAINTAINERS b/board/emulation/qemu-arm/MAINTAINERS
+> index b2b1fce75cf..fea9e97f868 100644
+> --- a/board/emulation/qemu-arm/MAINTAINERS
+> +++ b/board/emulation/qemu-arm/MAINTAINERS
+> @@ -6,4 +6,4 @@ F:      board/emulation/common/
+>  F:     include/configs/qemu-arm.h
+>  F:     include/configs/qemu-sbsa.h
+>  F:     configs/qemu-arm*
+> -F:     configs/qemu-arm-sbsa_defconfig
+> +F:     configs/qemu-arm64-sbsa_defconfig
+> diff --git a/configs/qemu-arm-sbsa_defconfig b/configs/qemu-arm64-sbsa_defconfig
+> similarity index 100%
+> rename from configs/qemu-arm-sbsa_defconfig
+> rename to configs/qemu-arm64-sbsa_defconfig
+> diff --git a/doc/develop/driver-model/virtio.rst b/doc/develop/driver-model/virtio.rst
+> index 8750228693b..df07a0658b2 100644
+> --- a/doc/develop/driver-model/virtio.rst
+> +++ b/doc/develop/driver-model/virtio.rst
+> @@ -34,7 +34,7 @@ The following QEMU targets are supported.
+>
+>    - qemu-arm_defconfig
+>    - qemu-arm64_defconfig
+> -  - qemu-arm-sbsa_defconfig
+> +  - qemu-arm64-sbsa_defconfig
+>    - qemu-riscv32_defconfig
+>    - qemu-riscv64_defconfig
+>    - qemu-x86_defconfig
 > --
-> 2.51.0
+> 2.34.1
 >
 
 Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
