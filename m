@@ -4,133 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55EA2CD3442
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 19:06:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC59CCD37BF
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 20:03:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D885583CEB;
-	Wed, 12 Nov 2025 20:06:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 08BD583CF2;
+	Wed, 12 Nov 2025 21:03:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="d/CJG3g4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FbZUTQvr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD4B183D03; Wed, 12 Nov 2025 20:06:20 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 162F483CEA; Wed, 12 Nov 2025 21:03:26 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 713D683A94
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 20:06:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id 93D0483CEA
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 21:03:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-42b3669ca3dso14596f8f.0
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 11:06:18 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-3c9859913d0so3158fac.0
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 12:03:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1762974378; x=1763579178; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=AG2ulzOLbWO8bazu2drslbPTDF7jeqwpyubZ+ez97ic=;
- b=d/CJG3g4Uv/tAwPYTzNqnL9f8p79alIiMYxyQHnpge/wzZKxP4nszR/1juqQX9XWMA
- q5ASmRPdcBZZ2YFTirrfKlfkHwrO3r2EOJXJztB9zUpu5fbNCkWxPonKGHz9owhJZZkb
- uJtKUBpt9/o51CSBT/oeUBB9Auw7ndybHWqs/xwfV1EsqQxOkphKjJHaV/RSWrn2/ykB
- 35JE9KvpdsFOzG9zQaSdV0ix3otikgRxZGs+xY2JE3gKwJICJayKzsTnkfFsniF6Ib53
- oZsI8dwPZtYs7yNJzp6z3A1BmGRuvXzfSBT+bm7yT0F0VexPhjl66cQRuQjgwxcsrh0g
- /oGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762974378; x=1763579178;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1762977802; x=1763582602; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AG2ulzOLbWO8bazu2drslbPTDF7jeqwpyubZ+ez97ic=;
- b=IltC1hO36siEWJ98vIxsLXOSQfZSAEba4kcnK3uVzyCxWQ3JwJa7w6V7yKROf/w1WR
- LFVZSmLE4eIiag9Tj5PfmZ2ZSx0lpC4f2GdCDhh0JQUz0Z7AgR22YAzfMCNuuKP1Bxyp
- Ax92A/DrOuiGViH2ggfgXsBW8LPPoyZzcUmYgC2n1xekfF7vNBqcQ0p0YEXW0Fq7KuKi
- AWOUEo+erwinhYOfuDx+Nbr/rXZX18/5WTUkauTjSMkRHasEDOhlyZUOML4AtWUT3Uqu
- ZSEV11rTRY4rsaFYolxfHkxLtdb74WS7Wd+n19qAsabl1IwKcktwQurpePrd+ncvXebf
- a/hA==
-X-Gm-Message-State: AOJu0YxQrEjBoiLtsv49XaL9mCIaLDp48eKF+7efy0pCDo0PO9AJu4UE
- ERgM83cwh8HjtOCapmj8bi8gClTsgJBNwGs2j7cbfHNKxd4dVR1/fQXFhXBUSxku8Ic=
-X-Gm-Gg: ASbGncsYWI4n1cdvxR70s0ype6wrtnIAeJwc0Zq3GOQ8iZHkF5l6sYan3QYUmXKYbHS
- bQIpFNJ7LlKbOMO0B+4ZExVztE9lJkDPRYAev/5ZeAfPTtdjc5pkMa7zWNnULw2hzHkh7kXZ/bm
- TexrNyNgJyX50HSWMxVVVieIwt/aYa8wWVbgi0BzWOa2GVp5C6wt6tDkG/EbvPGbUVLBgXx5r61
- HU0BbfqXSxI3uIkFSP9g5QadqneEIqIgED7I4lEumTrtSj4w9RIbyRX6UfDPZee8wQDAPO/ysxo
- Kud51yyuznV7kXrvAV3i0i54C/rDyaJhJyYE4xrZN1TPaPR57YEZThsEjbdbRJB9cCcMknBRgUr
- AfgJWeSPQYsunyFEjVwvqjoaU3K1VX7vgqfzak6e/frY9OPgee5nB68u+wMRmpRNbxYiXt0bOr1
- 1AZmkTpTHaQsNqRZAZVGnMfzmTAHlL4wk6Tef0
-X-Google-Smtp-Source: AGHT+IHRct+r4hX/rEx2vHYzuVRHkOxDodahBQmSj5wXTVFp9zQFC+2/FC+d7xPpnV9OjS0kho7r7A==
-X-Received: by 2002:a5d:5d10:0:b0:427:6a3:e72f with SMTP id
- ffacd0b85a97d-42b4bdb001dmr3326522f8f.34.1762974377723; 
- Wed, 12 Nov 2025 11:06:17 -0800 (PST)
-Received: from [192.168.0.29] (89.140.93.122.static.user.ono.com.
- [89.140.93.122]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42b35ad7c16sm22872370f8f.15.2025.11.12.11.06.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Nov 2025 11:06:17 -0800 (PST)
-Message-ID: <f46e987a-c1b9-45f2-9086-0a0584c9b130@suse.com>
-Date: Wed, 12 Nov 2025 20:06:15 +0100
+ bh=xC6FM0i1ZnACV7BNLCJXdzXzS97qR/VVmfOLf5V6my4=;
+ b=FbZUTQvrhp1S7d1RLXk1sa/4JxO6zAnaS9QMBZ0HajiNJmrERHQiFQNiP070km8eja
+ /p9NSNzJ5o2LX61Qt65N9f6egetLmaTlSF3v8FZhpuBEYmpvviIl+xV73wZ6eKmjuhd3
+ 4kObwBWA1FkOvQDywjruZjAWrb67dcbmyov8g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762977802; x=1763582602;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=xC6FM0i1ZnACV7BNLCJXdzXzS97qR/VVmfOLf5V6my4=;
+ b=T/kSr8715raPcBCf6i9/RbEpATlDkX36D3WjuuoQJhYaVR9egXxf34wYUSqpJq1e2K
+ kPdastGO3NykA0I6nt0FozgxIPeASin4BYK4+TCxzbtxukVSlRZHbK16shwnUHaJxC5y
+ bl43brUvqUHZaRFdVjhlaHklKLM2sTW+TKprj5RgtJekOoZrzW41rTdDuy8hfGpu+apn
+ doYyHxuUUhk7Moz6Pvwk0vNx5nQ1vjBH8rradE2SYD+EVGtSB0EBumjBTdS9X9VhdnqS
+ hyHXLRw9xtMJe+w+ty78vjXVjRzYq1hUt5TAwPOteJ+02Jc/lFgABfZWQTdOp29IlEww
+ 2+Xw==
+X-Gm-Message-State: AOJu0Yyx3H8WOQz4dKmXgbkQia0qLFEdNfp8WdVks0IykwYbpkfc3ZnB
+ pFKCgUWlRr7Q0tsS04SgUhc8dORcFcNvZDYZuKi6/hhtClTF+1i8gaPHQn1UUBbMPrkO16hFNeO
+ Q+fQOIUqVPQ==
+X-Gm-Gg: ASbGncvY1DWIHf2bFgPx4U2LyykUR7pS80c38Qq3sBT5XC41XbK4lC2XItwRRh61VQU
+ iHo0XF3sSdmlkJLNcO/pX+jM/hWdBfZm2tHl4KcS3z3wy6BnPg+n5Bh2tA37fdvwpXBLZ3FMhJ7
+ FWHyt7aq6Zfvypk01ArkhWLaBpxddSbpRZnX90mjSCZDT7gNzJz6PXrUTw6s4atzkuji9f9QDrM
+ RXG9Ky4BJGg1LqGusWXScStpRjmtnY6jVqLSwHrJ0fhtnSAtu+3iu5+GtP96O7sJ9Bs2Fd9pkB9
+ sdpxYxQpBvxmkGfOD4wnj3kWAb+u1zX0u49Xt8CWGLfTPaoL4JItrWxve7vZu2owEkCg3G0GBn/
+ 54wUC+9G30zWdZHlxykX/omOhLScCMD7fx7HnbFepavgaebKis/Ove/TqzesgxXYzxOw81qPIEz
+ muvEQwM4oLkkl+uTSF4W1oEzCuySEqN33L5mhW/1Nl8ryI9tDluqW1
+X-Google-Smtp-Source: AGHT+IGrTaqALBbS7m1XkPAncrK0Ha/YDxRQWpDs1+zUtuO4WNaET4kIVzpxoavN+Dcf3I2P2NblSA==
+X-Received: by 2002:a05:6870:700d:b0:37d:50fd:2d60 with SMTP id
+ 586e51a60fabf-3e833ff9894mr2145668fac.21.1762977802221; 
+ Wed, 12 Nov 2025 12:03:22 -0800 (PST)
+Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3e83281c9bbsm2169596fac.18.2025.11.12.12.03.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Nov 2025 12:03:21 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
+Subject: [PATCHv2 1/7] video: mali_dp: Remove unused driver
+Date: Wed, 12 Nov 2025 14:00:02 -0600
+Message-ID: <20251112200315.1111980-2-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251112200315.1111980-1-trini@konsulko.com>
+References: <20251112200315.1111980-1-trini@konsulko.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pinctrl: bcm283x: Add GPIO pull-up/down control for
- BCM2835 and BCM2711
-To: Cibil Pankiras <cibil.pankiras@egym.com>
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>,
- Tom Rini <trini@konsulko.com>
-References: <20251110112426.534118-1-cibil.pankiras@egym.com>
- <b637c777-d4aa-47ad-baf8-1f825dd379b8@suse.com>
- <CAK3EG+mu-Q05KiusOhe16vYPGHopWPGi_o1_8kzQbHDGWQyb-A@mail.gmail.com>
-Content-Language: en-US, ca-ES, es-ES
-From: Matthias Brugger <mbrugger@suse.com>
-Autocrypt: addr=mbrugger@suse.com; keydata=
- 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
- PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <CAK3EG+mu-Q05KiusOhe16vYPGHopWPGi_o1_8kzQbHDGWQyb-A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -148,190 +96,454 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This driver is unused. Remove it.
 
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ drivers/video/Kconfig   |   8 -
+ drivers/video/Makefile  |   1 -
+ drivers/video/mali_dp.c | 401 ----------------------------------------
+ 3 files changed, 410 deletions(-)
+ delete mode 100644 drivers/video/mali_dp.c
 
-On 11/11/2025 22:17, Cibil Pankiras wrote:
-> Hi Matthias,
-> 
-> On Mon, Nov 10, 2025 at 4:42 PM Matthias Brugger <mbrugger@suse.com> wrote:
->>
->>
->>
->> On 10/11/2025 12:24, Cibil Pankiras wrote:
->>> This patch adds support for configuring GPIO pull-up and pull-down
->>> resistors in the BCM283x pinctrl driver. It implements the brcm,pull
->>> device tree property to control pin bias settings.
->>>
->>> The implementation follows the hardware-specific pull control
->>> mechanisms:
->>> - BCM2835: two-step GPPUD register sequence
->>> - BCM2711: direct per-pin control registers
->>>
->>> This enables device tree configurations to specify pull-up, pull-down,
->>> or no bias for individual GPIO pins.
->>>
->>> Tested on Raspberry Pi boards with both BCM2835 and BCM2711 SoCs.
->>>
->>> Signed-off-by: Cibil Pankiras <cibil.pankiras@egym.com>
->>> ---
->>>    arch/arm/mach-bcm283x/include/mach/gpio.h  |  10 ++
->>>    drivers/pinctrl/broadcom/pinctrl-bcm283x.c | 102 ++++++++++++++++++++-
->>>    2 files changed, 109 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/arch/arm/mach-bcm283x/include/mach/gpio.h b/arch/arm/mach-bcm283x/include/mach/gpio.h
->>> index 4aeb48eeb20..c54414a012c 100644
->>> --- a/arch/arm/mach-bcm283x/include/mach/gpio.h
->>> +++ b/arch/arm/mach-bcm283x/include/mach/gpio.h
->>> @@ -26,6 +26,16 @@
->>>    #define BCM2835_GPIO_FSEL_BANK(gpio)        (gpio / 10)
->>>    #define BCM2835_GPIO_FSEL_SHIFT(gpio)       ((gpio % 10) * 3)
->>>
->>> +/* BCM2835 GPIO Pull-up/down register offsets */
->>> +#define BCM2835_GPPUD                37
->>> +#define BCM2835_GPPUDCLK0    38
->>> +
->>> +/* BCM2711 GPIO Pull-up/down control */
->>> +#define BCM2711_GPPUD_CNTRL_REG0     57
->>> +#define BCM2711_PUD_REG_OFFSET(gpio) ((gpio) / 16)
->>> +#define BCM2711_PUD_REG_SHIFT(gpio)  (((gpio) % 16) * 2)
->>> +#define BCM2711_PUD_2711_MASK                0x3
->>> +
->>>    struct bcm2835_gpio_regs {
->>>        u32 gpfsel[6];
->>>        u32 reserved1;
->>> diff --git a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
->>> index cf9350c151e..c588015905d 100644
->>> --- a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
->>> +++ b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
->>> @@ -21,6 +21,8 @@
->>>    #include <asm/system.h>
->>>    #include <asm/io.h>
->>>    #include <asm/gpio.h>
->>> +#include <dt-bindings/pinctrl/bcm2835.h>
->>> +#include <linux/delay.h>
->>>
->>>    struct bcm283x_pinctrl_priv {
->>>        u32 *base_reg;
->>> @@ -54,7 +56,66 @@ static int bcm2835_gpio_get_func_id(struct udevice *dev, unsigned int gpio)
->>>    }
->>>
->>>    /*
->>> - * bcm283x_pinctrl_set_state: configure pin functions.
->>> + * bcm2835_gpio_set_pull: Set GPIO pull-up/down resistor for BCM2835
->>> + * @dev: the pinctrl device
->>> + * @gpio: the GPIO pin number
->>> + * @pull: pull setting (BCM2835_PUD_OFF, BCM2835_PUD_DOWN, BCM2835_PUD_UP)
->>> + */
->>> +static void bcm2835_gpio_set_pull(struct udevice *dev, unsigned int gpio, int pull)
->>> +{
->>> +     struct bcm283x_pinctrl_priv *priv = dev_get_priv(dev);
->>> +     u32 bank = BCM2835_GPPUDCLK0 + BCM2835_GPIO_COMMON_BANK(gpio);
->>> +     u32 bit = BCM2835_GPIO_COMMON_SHIFT(gpio);
->>> +
->>> +     /* Set required control signal */
->>> +     writel(pull & 0x3, &priv->base_reg[BCM2835_GPPUD]);
->>> +     udelay(1);
->>> +
->>> +     /* Clock the control signal into the GPIO pads */
->>> +     writel(1 << bit, &priv->base_reg[bank]);
->>> +     udelay(1);
->>> +
->>> +     /* Remove the control signal and clock */
->>> +     writel(0, &priv->base_reg[BCM2835_GPPUD]);
->>> +     writel(0, &priv->base_reg[bank]);
->>> +}
->>> +
->>> +/*
->>> + * bcm2711_gpio_set_pull: Set GPIO pull-up/down resistor for BCM2711
->>> + * @dev: the pinctrl device
->>> + * @gpio: the GPIO pin number
->>> + * @pull: pull setting (BCM2835_PUD_OFF, BCM2835_PUD_DOWN, BCM2835_PUD_UP)
->>> + */
->>> +static void bcm2711_gpio_set_pull(struct udevice *dev, unsigned int gpio, int pull)
->>> +{
->>> +     struct bcm283x_pinctrl_priv *priv = dev_get_priv(dev);
->>> +     u32 reg_offset;
->>> +     u32 bit_shift;
->>> +     u32 pull_bits;
->>> +
->>> +     /* Findout which GPIO_PUP_PDN_CNTRL register to use */
->>> +     reg_offset = BCM2711_GPPUD_CNTRL_REG0 + BCM2711_PUD_REG_OFFSET(gpio);
->>> +
->>> +     /* Findout the bit position */
->>> +     bit_shift = BCM2711_PUD_REG_SHIFT(gpio);
->>> +
->>> +     /* Update the 2-bit field for this GPIO */
->>> +     pull_bits = pull & BCM2711_PUD_2711_MASK;
->>> +     clrsetbits_le32(&priv->base_reg[reg_offset],
->>> +                     BCM2711_PUD_2711_MASK << bit_shift,
->>> +                     pull_bits << bit_shift);
->>> +}
->>> +
->>> +static void bcm283x_gpio_set_pull(struct udevice *dev, unsigned int gpio, int pull)
->>> +{
->>> +     if (device_is_compatible(dev, "brcm,bcm2835-gpio"))
->>> +             bcm2835_gpio_set_pull(dev, gpio, pull);
->>> +     else
->>> +             bcm2711_gpio_set_pull(dev, gpio, pull);
->>> +}
->>> +
->>> +/*
->>> + * bcm283x_pinctrl_set_state: configure pin functions and pull states.
->>>     * @dev: the pinctrl device to be configured.
->>>     * @config: the state to be configured.
->>>     * @return: 0 in success
->>> @@ -62,8 +123,9 @@ static int bcm2835_gpio_get_func_id(struct udevice *dev, unsigned int gpio)
->>>    int bcm283x_pinctrl_set_state(struct udevice *dev, struct udevice *config)
->>>    {
->>>        u32 pin_arr[MAX_PINS_PER_BANK];
->>> +     u32 pull_arr[MAX_PINS_PER_BANK];
->>>        int function;
->>> -     int i, len, pin_count = 0;
->>> +     int i, len, pin_count = 0, pull_len = 0, pull_count = 0;
->>>
->>>        if (!dev_read_prop(config, "brcm,pins", &len) || !len ||
->>>            len & 0x3 || dev_read_u32_array(config, "brcm,pins", pin_arr,
->>> @@ -82,8 +144,42 @@ int bcm283x_pinctrl_set_state(struct udevice *dev, struct udevice *config)
->>>                return -EINVAL;
->>>        }
->>>
->>> -     for (i = 0; i < pin_count; i++)
->>> +     /* Check if brcm,pull property exists */
->>> +     if (dev_read_prop(config, "brcm,pull", &pull_len) && pull_len > 0) {
->>> +             if (pull_len & 0x3) {
->>
->> We should check for arbitrary values, so check should be, pull_len > 0x2
-> 
-> In the current version of the patch, I validate each element in
-> pull_arr[] as follows:
->      for (i = 0; i < pull_count; i++) {
->          if (pull_arr[i] > 2) {
->              debug("Invalid pull value %d for pin %d in pinconfig %s\n",
->                    pull_arr[i], pin_arr[i], config->name);
->              return -EINVAL;
-> 
-> Could you please clarify? Did you mean to replace the alignment check
-> `if (pull_len & 0x3)` with `pull_len > 0x2` ?
-> 
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index b5777da5218a..a12df55f84ff 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -886,14 +886,6 @@ config VIDEO_IVYBRIDGE_IGD
+ 
+ source "drivers/video/rockchip/Kconfig"
+ 
+-config VIDEO_ARM_MALIDP
+-	bool "Enable Arm Mali Display Processor support"
+-	depends on OF_CONTROL
+-	select VEXPRESS_CLK
+-	help
+-	  This enables support for Arm Ltd Mali Display Processors from
+-	  the DP500, DP550 and DP650 family.
+-
+ config VIDEO_SANDBOX_SDL
+ 	bool "Enable sandbox video console using SDL"
+ 	depends on SANDBOX_SDL
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index 96c7ce7bb093..4189b81ba6b3 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -47,7 +47,6 @@ obj-$(CONFIG_LOGICORE_DP_TX) += logicore_dp_tx.o
+ obj-$(CONFIG_NXP_TDA19988) += tda19988.o
+ obj-$(CONFIG_OSD) += video_osd-uclass.o
+ obj-$(CONFIG_SANDBOX_OSD) += sandbox_osd.o
+-obj-$(CONFIG_VIDEO_ARM_MALIDP) += mali_dp.o
+ obj-$(CONFIG_VIDEO_BCM2835) += bcm2835.o
+ obj-$(CONFIG_VIDEO_BOCHS) += bochs.o
+ obj-$(CONFIG_VIDEO_BROADWELL_IGD) += broadwell_igd.o
+diff --git a/drivers/video/mali_dp.c b/drivers/video/mali_dp.c
+deleted file mode 100644
+index c89212674624..000000000000
+--- a/drivers/video/mali_dp.c
++++ /dev/null
+@@ -1,401 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2016-2018 ARM Ltd.
+- * Author: Liviu Dudau <liviu.dudau@foss.arm.com>
+- *
+- */
+-#define DEBUG
+-#include <malloc.h>
+-#include <video.h>
+-#include <dm.h>
+-#ifdef CONFIG_DISPLAY
+-#include <display.h>
+-#endif
+-#include <fdtdec.h>
+-#include <asm/global_data.h>
+-#include <asm/io.h>
+-#include <os.h>
+-#include <fdt_support.h>
+-#include <clk.h>
+-#include <dm/device_compat.h>
+-#include <linux/delay.h>
+-#include <linux/sizes.h>
+-
+-#define MALIDP_CORE_ID		0x0018
+-#define MALIDP_REG_BG_COLOR	0x0044
+-#define MALIDP_LAYER_LV1	0x0100
+-#define MALIDP_DC_STATUS	0xc000
+-#define MALIDP_DC_CONTROL	0xc010
+-#define MALIDP_DC_CFG_VALID	0xc014
+-
+-/* offsets inside the modesetting register block */
+-#define MALIDP_H_INTERVALS	0x0000
+-#define MALIDP_V_INTERVALS	0x0004
+-#define MALIDP_SYNC_CONTROL	0x0008
+-#define MALIDP_HV_ACTIVESIZE	0x000c
+-#define MALIDP_OUTPUT_DEPTH	0x001c
+-
+-/* offsets inside the layer register block */
+-#define MALIDP_LAYER_FORMAT	0x0000
+-#define MALIDP_LAYER_CONTROL	0x0004
+-#define MALIDP_LAYER_IN_SIZE	0x000c
+-#define MALIDP_LAYER_CMP_SIZE	0x0010
+-#define MALIDP_LAYER_STRIDE	0x0018
+-#define MALIDP_LAYER_PTR_LOW	0x0024
+-#define MALIDP_LAYER_PTR_HIGH	0x0028
+-
+-/* offsets inside the IRQ control blocks */
+-#define MALIDP_REG_MASKIRQ	0x0008
+-#define MALIDP_REG_CLEARIRQ	0x000c
+-
+-#define M1BITS	0x0001
+-#define M2BITS	0x0003
+-#define M4BITS	0x000f
+-#define M8BITS	0x00ff
+-#define M10BITS	0x03ff
+-#define M12BITS	0x0fff
+-#define M13BITS	0x1fff
+-#define M16BITS	0xffff
+-#define M17BITS	0x1ffff
+-
+-#define MALIDP_H_FRONTPORCH(x)	(((x) & M12BITS) << 0)
+-#define MALIDP_H_BACKPORCH(x)	(((x) & M10BITS) << 16)
+-#define MALIDP_V_FRONTPORCH(x)	(((x) & M12BITS) << 0)
+-#define MALIDP_V_BACKPORCH(x)	(((x) & M8BITS) << 16)
+-#define MALIDP_H_SYNCWIDTH(x)	(((x) & M10BITS) << 0)
+-#define MALIDP_V_SYNCWIDTH(x)	(((x) & M8BITS) << 16)
+-#define MALIDP_H_ACTIVE(x)	(((x) & M13BITS) << 0)
+-#define MALIDP_V_ACTIVE(x)	(((x) & M13BITS) << 16)
+-
+-#define MALIDP_CMP_V_SIZE(x)	(((x) & M13BITS) << 16)
+-#define MALIDP_CMP_H_SIZE(x)	(((x) & M13BITS) << 0)
+-
+-#define MALIDP_IN_V_SIZE(x)	(((x) & M13BITS) << 16)
+-#define MALIDP_IN_H_SIZE(x)	(((x) & M13BITS) << 0)
+-
+-#define MALIDP_DC_CM_CONTROL(x)	((x) & M1BITS) << 16, 1 << 16
+-#define MALIDP_DC_STATUS_GET_CM(reg) (((reg) >> 16) & M1BITS)
+-
+-#define MALIDP_FORMAT_ARGB8888	0x08
+-#define MALIDP_DEFAULT_BG_R 0x0
+-#define MALIDP_DEFAULT_BG_G 0x0
+-#define MALIDP_DEFAULT_BG_B 0x0
+-
+-#define MALIDP_PRODUCT_ID(core_id)	((u32)(core_id) >> 16)
+-
+-#define MALIDP500	0x500
+-
+-DECLARE_GLOBAL_DATA_PTR;
+-
+-struct malidp_priv {
+-	phys_addr_t base_addr;
+-	phys_addr_t dc_status_addr;
+-	phys_addr_t dc_control_addr;
+-	phys_addr_t cval_addr;
+-	struct udevice *display;	/* display device attached */
+-	struct clk aclk;
+-	struct clk pxlclk;
+-	u16 modeset_regs_offset;
+-	u8 config_bit_shift;
+-	u8 clear_irq;			/* offset for IRQ clear register */
+-};
+-
+-static const struct video_ops malidp_ops = {
+-};
+-
+-static int malidp_get_hwid(phys_addr_t base_addr)
+-{
+-	int hwid;
+-
+-	/*
+-	 * reading from the old CORE_ID offset will always
+-	 * return 0x5000000 on DP500
+-	 */
+-	hwid = readl(base_addr + MALIDP_CORE_ID);
+-	if (MALIDP_PRODUCT_ID(hwid) == MALIDP500)
+-		return hwid;
+-	/* otherwise try the other gen CORE_ID offset */
+-	hwid = readl(base_addr + MALIDP_DC_STATUS + MALIDP_CORE_ID);
+-
+-	return hwid;
+-}
+-
+-/*
+- * wait for config mode bit setup to be acted upon by the hardware
+- */
+-static int malidp_wait_configdone(struct malidp_priv *malidp)
+-{
+-	u32 status, tries = 300;
+-
+-	while (tries--) {
+-		status = readl(malidp->dc_status_addr);
+-		if ((status >> malidp->config_bit_shift) & 1)
+-			break;
+-		udelay(500);
+-	}
+-
+-	if (!tries)
+-		return -ETIMEDOUT;
+-
+-	return 0;
+-}
+-
+-/*
+- * signal the hardware to enter configuration mode
+- */
+-static int malidp_enter_config(struct malidp_priv *malidp)
+-{
+-	setbits_le32(malidp->dc_control_addr, 1 << malidp->config_bit_shift);
+-	return malidp_wait_configdone(malidp);
+-}
+-
+-/*
+- * signal the hardware to exit configuration mode
+- */
+-static int malidp_leave_config(struct malidp_priv *malidp)
+-{
+-	clrbits_le32(malidp->dc_control_addr, 1 << malidp->config_bit_shift);
+-	return malidp_wait_configdone(malidp);
+-}
+-
+-static void malidp_setup_timings(struct malidp_priv *malidp,
+-				 struct display_timing *timings)
+-{
+-	u32 val = MALIDP_H_SYNCWIDTH(timings->hsync_len.typ) |
+-		  MALIDP_V_SYNCWIDTH(timings->vsync_len.typ);
+-	writel(val, malidp->base_addr + malidp->modeset_regs_offset +
+-	       MALIDP_SYNC_CONTROL);
+-	val = MALIDP_H_BACKPORCH(timings->hback_porch.typ) |
+-		MALIDP_H_FRONTPORCH(timings->hfront_porch.typ);
+-	writel(val, malidp->base_addr + malidp->modeset_regs_offset +
+-	       MALIDP_H_INTERVALS);
+-	val = MALIDP_V_BACKPORCH(timings->vback_porch.typ) |
+-		MALIDP_V_FRONTPORCH(timings->vfront_porch.typ);
+-	writel(val, malidp->base_addr + malidp->modeset_regs_offset +
+-	       MALIDP_V_INTERVALS);
+-	val = MALIDP_H_ACTIVE(timings->hactive.typ) |
+-		MALIDP_V_ACTIVE(timings->vactive.typ);
+-	writel(val, malidp->base_addr + malidp->modeset_regs_offset +
+-	       MALIDP_HV_ACTIVESIZE);
+-	/* default output bit-depth per colour is 8 bits */
+-	writel(0x080808, malidp->base_addr + malidp->modeset_regs_offset +
+-	       MALIDP_OUTPUT_DEPTH);
+-}
+-
+-static int malidp_setup_mode(struct malidp_priv *malidp,
+-			     struct display_timing *timings)
+-{
+-	int err;
+-
+-	if (clk_set_rate(&malidp->pxlclk, timings->pixelclock.typ) == 0)
+-		return -EIO;
+-
+-	malidp_setup_timings(malidp, timings);
+-
+-	err = display_enable(malidp->display, 8, timings);
+-	if (err)
+-		printf("display_enable failed with %d\n", err);
+-
+-	return err;
+-}
+-
+-static void malidp_setup_layer(struct malidp_priv *malidp,
+-			       struct display_timing *timings,
+-			       u32 layer_offset, phys_addr_t fb_addr)
+-{
+-	u32 val;
+-
+-	/* setup the base layer's pixel format to A8R8G8B8 */
+-	writel(MALIDP_FORMAT_ARGB8888, malidp->base_addr + layer_offset +
+-	       MALIDP_LAYER_FORMAT);
+-	/* setup layer composition size */
+-	val = MALIDP_CMP_V_SIZE(timings->vactive.typ) |
+-		MALIDP_CMP_H_SIZE(timings->hactive.typ);
+-	writel(val, malidp->base_addr + layer_offset +
+-	       MALIDP_LAYER_CMP_SIZE);
+-	/* setup layer input size */
+-	val = MALIDP_IN_V_SIZE(timings->vactive.typ) |
+-		MALIDP_IN_H_SIZE(timings->hactive.typ);
+-	writel(val, malidp->base_addr + layer_offset + MALIDP_LAYER_IN_SIZE);
+-	/* setup layer stride in bytes */
+-	writel(timings->hactive.typ << 2, malidp->base_addr + layer_offset +
+-	       MALIDP_LAYER_STRIDE);
+-	/* set framebuffer address */
+-	writel(lower_32_bits(fb_addr), malidp->base_addr + layer_offset +
+-	       MALIDP_LAYER_PTR_LOW);
+-	writel(upper_32_bits(fb_addr), malidp->base_addr + layer_offset +
+-	       MALIDP_LAYER_PTR_HIGH);
+-	/* enable layer */
+-	setbits_le32(malidp->base_addr + layer_offset +
+-		     MALIDP_LAYER_CONTROL, 1);
+-}
+-
+-static void malidp_set_configvalid(struct malidp_priv *malidp)
+-{
+-	setbits_le32(malidp->cval_addr, 1);
+-}
+-
+-static int malidp_update_timings_from_edid(struct udevice *dev,
+-					   struct display_timing *timings)
+-{
+-#ifdef CONFIG_DISPLAY
+-	struct malidp_priv *priv = dev_get_priv(dev);
+-	struct udevice *disp_dev;
+-	int err;
+-
+-	err = uclass_first_device_err(UCLASS_DISPLAY, &disp_dev);
+-	if (err)
+-		return err;
+-
+-	priv->display = disp_dev;
+-
+-	err = display_read_timing(disp_dev, timings);
+-	if (err)
+-		return err;
+-
+-#endif
+-	return 0;
+-}
+-
+-static int malidp_probe(struct udevice *dev)
+-{
+-	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
+-	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+-	ofnode framebuffer = ofnode_find_subnode(dev_ofnode(dev), "framebuffer");
+-	struct malidp_priv *priv = dev_get_priv(dev);
+-	struct display_timing timings;
+-	phys_addr_t fb_base, fb_size;
+-	const char *format;
+-	u32 value;
+-	int err;
+-
+-	if (!ofnode_valid(framebuffer))
+-		return -EINVAL;
+-
+-	err = clk_get_by_name(dev, "pxlclk", &priv->pxlclk);
+-	if (err) {
+-		dev_err(dev, "failed to get pixel clock\n");
+-		return err;
+-	}
+-	err = clk_get_by_name(dev, "aclk", &priv->aclk);
+-	if (err) {
+-		dev_err(dev, "failed to get AXI clock\n");
+-		goto fail_aclk;
+-	}
+-
+-	err = ofnode_decode_display_timing(dev_ofnode(dev), 1, &timings);
+-	if (err) {
+-		dev_err(dev, "failed to get any display timings\n");
+-		goto fail_timings;
+-	}
+-
+-	err = malidp_update_timings_from_edid(dev, &timings);
+-	if (err) {
+-		printf("malidp_update_timings_from_edid failed: %d\n", err);
+-		goto fail_timings;
+-	}
+-
+-	fb_base = ofnode_get_addr_size(framebuffer, "reg", &fb_size);
+-	if (fb_base != FDT_ADDR_T_NONE) {
+-		uc_plat->base = fb_base;
+-		uc_plat->size = fb_size;
+-	} else {
+-		printf("cannot get address size for framebuffer\n");
+-	}
+-
+-	err = ofnode_read_u32(framebuffer, "width", &value);
+-	if (err)
+-		goto fail_timings;
+-	uc_priv->xsize = (ushort)value;
+-
+-	err = ofnode_read_u32(framebuffer, "height", &value);
+-	if (err)
+-		goto fail_timings;
+-	uc_priv->ysize = (ushort)value;
+-
+-	format = ofnode_read_string(framebuffer, "format");
+-	if (!format) {
+-		err = -EINVAL;
+-		goto fail_timings;
+-	} else if (!strncmp(format, "a8r8g8b8", 8)) {
+-		uc_priv->bpix = VIDEO_BPP32;
+-	}
+-
+-	uc_priv->rot = 0;
+-	priv->base_addr = (phys_addr_t)dev_read_addr(dev);
+-
+-	clk_enable(&priv->pxlclk);
+-	clk_enable(&priv->aclk);
+-
+-	value = malidp_get_hwid(priv->base_addr);
+-	printf("Display: Arm Mali DP%3x r%dp%d\n", MALIDP_PRODUCT_ID(value),
+-	       (value >> 12) & 0xf, (value >> 8) & 0xf);
+-
+-	if (MALIDP_PRODUCT_ID(value) == MALIDP500) {
+-		/* DP500 is special */
+-		priv->modeset_regs_offset = 0x28;
+-		priv->dc_status_addr = priv->base_addr;
+-		priv->dc_control_addr = priv->base_addr + 0xc;
+-		priv->cval_addr = priv->base_addr + 0xf00;
+-		priv->config_bit_shift = 17;
+-		priv->clear_irq = 0;
+-	} else {
+-		priv->modeset_regs_offset = 0x30;
+-		priv->dc_status_addr = priv->base_addr + MALIDP_DC_STATUS;
+-		priv->dc_control_addr = priv->base_addr + MALIDP_DC_CONTROL;
+-		priv->cval_addr = priv->base_addr + MALIDP_DC_CFG_VALID;
+-		priv->config_bit_shift = 16;
+-		priv->clear_irq = MALIDP_REG_CLEARIRQ;
+-	}
+-
+-	/* enter config mode */
+-	err  = malidp_enter_config(priv);
+-	if (err)
+-		return err;
+-
+-	/* disable interrupts */
+-	writel(0, priv->dc_status_addr + MALIDP_REG_MASKIRQ);
+-	writel(0xffffffff, priv->dc_status_addr + priv->clear_irq);
+-
+-	err = malidp_setup_mode(priv, &timings);
+-	if (err)
+-		return err;
+-
+-	malidp_setup_layer(priv, &timings, MALIDP_LAYER_LV1,
+-			   (phys_addr_t)uc_plat->base);
+-
+-	err = malidp_leave_config(priv);
+-	if (err)
+-		return err;
+-
+-	malidp_set_configvalid(priv);
+-
+-	return 0;
+-}
+-
+-static int malidp_bind(struct udevice *dev)
+-{
+-	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+-
+-	/* choose max possible size: 2K x 2K, XRGB888 framebuffer */
+-	uc_plat->size = 4 * 2048 * 2048;
+-
+-	return 0;
+-}
+-
+-static const struct udevice_id malidp_ids[] = {
+-	{ .compatible = "arm,mali-dp500" },
+-	{ .compatible = "arm,mali-dp550" },
+-	{ .compatible = "arm,mali-dp650" },
+-	{ }
+-};
+-
+-U_BOOT_DRIVER(mali_dp) = {
+-	.name		= "mali_dp",
+-	.id		= UCLASS_VIDEO,
+-	.of_match	= malidp_ids,
+-	.bind		= malidp_bind,
+-	.probe		= malidp_probe,
+-	.priv_auto	= sizeof(struct malidp_priv),
+-	.ops		= &malidp_ops,
+-};
+-- 
+2.43.0
 
-I think I miss some basic understanding here. Please help me with that. From
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/pinctrl/brcm,bcm2835-gpio.yaml?h=v6.18-rc5#n88
-<snip>
-         brcm,pull:
-           description: >
-             Legacy pull setting for the pins (0=none, 1=pull-down, 2=pull-up).
-           $ref: /schemas/types.yaml#/definitions/uint32-array
-           maximum: 2
-</snip>
-
-So if I understand correctly you are reading the number of bytes in brcm,pull, 
-which should be either one or two u32 values. But you error out only if the 
-pull_len is 0x3. How is that? My gut feeling tells me it should be either 0x2 or 
-0x4 everything else is an invalid DTB. But as I said I think I miss some 
-fundamental understanding here. Can you please elaborate.
-
-By the way, I suppose we implement the deprecated binding because the RPi FW 
-still uses this, correct?
-
-Regards,
-Matthias
