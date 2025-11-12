@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35FFECCFA1A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 12:24:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A33CCF9F8
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 12:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F86883BDD;
-	Wed, 12 Nov 2025 13:24:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5CAB583C54;
+	Wed, 12 Nov 2025 13:47:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vXe5Ut0S";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b98O1+G9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D90E83C08; Wed, 12 Nov 2025 13:24:32 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 6DD0683C5A; Wed, 12 Nov 2025 13:47:01 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7226A83B1A
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 13:24:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5897883BDD
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 13:46:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-78817f3af10so3872617b3.2
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 04:24:30 -0800 (PST)
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-78802ac2296so8543667b3.3
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 04:46:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762950269; x=1763555069; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3guYru47Czic8KFRBAlkR2Fs9Xyirv0IfAi9DILYg9A=;
- b=vXe5Ut0SFg4RxrEwdOpzDW4M1CTWMpZpywPasxtZfPC0wlI8KpX+QYmeZGqZukLqaH
- HfwXxBAeWamF5CxSWX0PLTyF4xXBFS8SviaEhZ/+baxAu1FRnTV6bxrSjbHg00mnYL4t
- rbIu0McnCoq5OBCexFjIdUIg91ddcX31e2FUVhzTeYzMxsVqR0BavnP4pocy14BZvxu1
- 9zK7lippBSXtE1q4inV/a86uTAtU/lIPenKJujCrsTnUBq5dlFb56Dih3Reo9UEVLwk4
- wa0AbnRvA39jF7DSHVdR3z4rfSeAYAnxgaYTxC+ruPJZJHoHaE/0o/NE/O3j+acuepY2
- Pe9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762950269; x=1763555069;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1762951618; x=1763556418; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3guYru47Czic8KFRBAlkR2Fs9Xyirv0IfAi9DILYg9A=;
- b=Ys+j+lBPnv+kga4xUR5F0ePCuec5HttR+XnA9+wt0YpBfZs/9TCmFtB0o7XUFdkE6k
- xVjWlA5OGF25y4QroHewUdm0yQPH/zdjhA9RkitlKci2AjzBySXI/WG4TOGsOi8+nfVo
- NHhBaukcWvuFCRhWRerVFgkmv2YKVYHDoziOjUn8rwW0WThn+p8ZV2jbKYtffH+tj/Ak
- MNgpf83Z/aODyUufzckMPRXykFPIqYejb94jlSOHnPy7afwm4FsrpiIzwQcJjdTYrK7U
- kLXwqDgCnDoIy9rN79pWitJmrFVjWabYgDiv+2SZ1GUOQiX7dgTpPa7MA9xkBuwg32Io
- bfdg==
-X-Gm-Message-State: AOJu0YwzBD+UFxlxhLPkL7JPYaGC4qMymDcUgXnS9Rzw2wIgVddh3FeV
- /M37Od+JE2sTngFoMqc2+Xld4A8uRv0+PKRd3pobPG/GZNPTAo++fsti2s6euDKTdbA+60YTh2j
- F56Wlf9HQOo8X5Ixsmz/nCJ6M884GBfvkfRW1qakW2cdFe/uVT3EpgTU=
-X-Gm-Gg: ASbGncsycncpHI9Jtv0x4PUSiZ3xYc9jHvoBgNcz1VjJA9BOHGiyoL+5fM/OKzjAkQE
- YepusWrAMovXq7fp83BIPAMJ/ygPwpYVYXRKhj2IzY0YDarU2Ep+bJu1XP4peRTXBnAFnJDYnAv
- sQz4nw3xbCZyw5VZ1+3oTOM4ydsMTKugczuUOZbov4yCsdsQLxKDQuCO64CEZ4BEAmqhwonTSLd
- gC7MzUzqlcbChICUMAHEF/75jj5XkPv/EYATRWr0dnXEBB0z90FJBbwy/L3wFInEMnnbaTp8jFO
- ylVuQM4pQQqXKZOxHEAXWo0xRZSwr/YgHZrYeFr+
-X-Google-Smtp-Source: AGHT+IH3kEpVOsNPHYhdhbwTL1ViN43YBkh2/EPdkjXwEWvii4+1yTBTZsWXvUp2DrfVz7sPobRG0ELcjNi0mxNiQZY=
-X-Received: by 2002:a05:690c:fd1:b0:786:91ac:e15d with SMTP id
- 00721157ae682-78813627136mr22924867b3.27.1762950269141; Wed, 12 Nov 2025
- 04:24:29 -0800 (PST)
+ bh=LQqlvEoUxZ2HtvuMjtg9KQ/23f0QnS5L/eFk4Hpo0QU=;
+ b=b98O1+G9wlpVVYGRqrMp+2mTSN515ABasJsZKpvjmrYuhe7ZSKD3oHHDVTbJQLbVw4
+ QhyT0YHTCOaNePqCfqu5sKjb2tf30nVxdz0Jek43CILTY8nHlZPUTjthRoJePEY41nay
+ 6FPWBBQVNFQ5Bgu0+V4LvN22oVvpA/BV5JB/rPt+fzQhG9XapbaZpdGlvUTZqT0L/7ZB
+ PVTNQo0zWVMNUZUf1vKGghq84NVZgg+K1SStGSJwvZdExM1gXwNLKYC807MwK/1Hem4j
+ kt4Vv389HYoegqF0WjdZaZn13RMF70x+uv0yuHQ9MppKe+rrFG0Ux/D95SpdgS6h3uxV
+ TybQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762951618; x=1763556418;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=LQqlvEoUxZ2HtvuMjtg9KQ/23f0QnS5L/eFk4Hpo0QU=;
+ b=O6fgV7O1NKwflqvco72HpJCLH2BWWx+pW0XP4g0QbYzTEPfmaB02D4EzvKwuINzjse
+ i92aCkbCII5VR3ByUClIOIfJdUdJcfN979wsaa0Y7Z9TuBF5GiMphbYzdR6p3d6XVhSH
+ 4jLl5V9JPkq09GSMRWsaH/HjqBb8SVr/G0IzHE8hor2KF303Y4jZRYvEvM897phLN3zG
+ JvT+WzPJV1p2D7t3mD9uK93uD+OmJiNuFstMDW3CTyB3a0XEDan+fXJR38lIbXCc2tPV
+ 4ulGG0dGp67VUYqGVFXqxIgl+n8Hf2R5VSvnd+NrxqGSVkjoOWq9Ty/bMMxIvy0tysGK
+ 6lxg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUEiz1gIqE44Ns/2FBHjPTM1LFNJBuR1YtHL1wPNSkuC4Y84zmIMt+UaEyUmCGNn79ChaivLec=@lists.denx.de
+X-Gm-Message-State: AOJu0YwvujyZjGNmxnUxGe64nujYtw3JQ2lJxKkE4iqF8nC7Slcq8JsA
+ Tu25gAPTOJqvlxpgtQOC9LGuOVhoDwktq7V9dn6eO19/BEKLe+sZXFisLJ4bsEtamA2eSehgxuH
+ gQm2tkoZaTqzGmswQ//jE4KdQZ00/ujJRBL61
+X-Gm-Gg: ASbGncs9siCSHf73V2/zCMf7TWD8DaaKx3UcdHA2CnKFc6dBF5OEFIfd8THyOsAjr1d
+ a7CvB0vfWFx1KuG9TpX0KVPPhozrXLNDW80Wu7Gomh/JD1FJBJsqBS4dWRGXo0mINcaEZE4MzHI
+ eZP/418epTsCIWEDWbmqjmtMsKokbvHZsrXjczOslRj3D33pmOV6AiVmw4/jUrxLxdVGhrqNO26
+ A6gcayuZTFipeYnljGiJVRJySJnlBuhnONi75Mj0DQsm5UJHMvcD7rtSVv6
+X-Google-Smtp-Source: AGHT+IFbbpiDi8doVBBCrEmzBaTa2ETumRf+avKKsXcVOfNBn0OyfDBHWo+ZbXxAM3KOLZA399j4tFRJ4+dAtVsWCjk=
+X-Received: by 2002:a05:690c:a6da:b0:787:f545:c520 with SMTP id
+ 00721157ae682-7881363a694mr18845397b3.30.1762951618130; Wed, 12 Nov 2025
+ 04:46:58 -0800 (PST)
 MIME-Version: 1.0
-References: <20251106232838.3243607-1-trini@konsulko.com>
-In-Reply-To: <20251106232838.3243607-1-trini@konsulko.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 12 Nov 2025 14:23:53 +0200
-X-Gm-Features: AWmQ_bl7-bqE9bz4pD_oNA-mvhjYK1McWjEaGGyMnzmlppx7qBGpBXOUP6LMngM
-Message-ID: <CAC_iWjLZsDGtNE9POzdcG92DV1ABCFmss2H2f09kKhr40XVizw@mail.gmail.com>
-Subject: Re: [PATCH] smbios: Fix warning when building with clang
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Raymond Mao <raymondmaoca@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <20250911-fix_fit_zimage-v1-1-bd779ef56b22@gmail.com>
+In-Reply-To: <20250911-fix_fit_zimage-v1-1-bd779ef56b22@gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 12 Nov 2025 20:46:47 +0800
+X-Gm-Features: AWmQ_bmBPzwYgHjJKp_R1P8iTEOxwbWa41vYhAxjeO83e5b4PBVeHKWeK0TeygQ
+Message-ID: <CAEUhbmVJDegKW+aaewNS6UYrXYvB=u-Aj+2GyG6uMedNCjGKrg@mail.gmail.com>
+Subject: Re: [PATCH] x86: boot: fix unreachable else branch in boot_prep_linux
+To: Guillaume Ranquet <ranquet.guillaume@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,68 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 7 Nov 2025 at 01:28, Tom Rini <trini@konsulko.com> wrote:
+On Thu, Sep 11, 2025 at 9:35=E2=80=AFPM Guillaume Ranquet
+<ranquet.guillaume@gmail.com> wrote:
 >
-> When building with clang, we see warnings such as:
-> error: field max_size within 'struct smbios_type7' is less aligned than
-> 'union cache_size_word' and is usually due to 'struct smbios_type7'
-> being packed, which can lead to unaligned accesses
-> [-Werror,-Wunaligned-access]
-> when building drivers/sysinfo/smbios.c. Resolve this error by packing
-> the unions as well after verifying they are complete (16 or 32 bits).
+> The else if branch uses the is_zimage boolean which is initialized to 0
+> and never set before being tested here.
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
+> remove the test on is_zimage to make this code reachable.
+>
+> Signed-off-by: Guillaume Ranquet <ranquet.guillaume@gmail.com>
 > ---
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Raymond Mao <raymondmaoca@gmail.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->  include/smbios.h | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  arch/x86/lib/bootm.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/include/smbios.h b/include/smbios.h
-> index b5fed57aba21..f2f7483bce5a 100644
-> --- a/include/smbios.h
-> +++ b/include/smbios.h
-> @@ -204,7 +204,7 @@ struct __packed smbios_type4 {
->         char eos[SMBIOS_STRUCT_EOS_BYTES];
->  };
->
-> -union cache_config {
-> +union __packed cache_config {
->         struct {
->                 u16 level:3;
->                 u16 bsocketed:1;
-> @@ -217,7 +217,7 @@ union cache_config {
->         u16 data;
->  };
->
-> -union cache_size_word {
-> +union __packed cache_size_word {
->         struct {
->                 u16 size:15;
->                 u16 granu:1;
-> @@ -225,7 +225,7 @@ union cache_size_word {
->         u16 data;
->  };
->
-> -union cache_size_dword {
-> +union __packed cache_size_dword {
->         struct {
->                 u32 size:31;
->                 u32 granu:1;
-> @@ -233,7 +233,7 @@ union cache_size_dword {
->         u32 data;
->  };
->
-> -union cache_sram_type {
-> +union __packed cache_sram_type {
->         struct {
->                 u16 other:1;
->                 u16 unknown:1;
-> --
-> 2.43.0
->
+
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
