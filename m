@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9430ACD3429
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:49:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ECABCD3429
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:49:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50EB583D7A;
+	by phobos.denx.de (Postfix) with ESMTP id 938AC83D9C;
 	Wed, 12 Nov 2025 18:48:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53CD683D7A; Wed, 12 Nov 2025 18:48:49 +0100 (CET)
-Received: from smtp-190b.mail.infomaniak.ch (smtp-190b.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::190b])
+ id 2CA5583D39; Wed, 12 Nov 2025 18:48:50 +0100 (CET)
+Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42ab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 263F783C62
+ by phobos.denx.de (Postfix) with ESMTPS id F07D683CF2
  for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 18:48:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d69qy6HD3z6Yh;
- Wed, 12 Nov 2025 18:48:46 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6c])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d69qz53fwz7gp;
+ Wed, 12 Nov 2025 18:48:47 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d69qx6hzjzrqm; Wed, 12 Nov 2025 18:48:45 +0100 (CET)
+ id 4d69qy6BNNzr2F; Wed, 12 Nov 2025 18:48:46 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 12 Nov 2025 18:48:11 +0100
-Subject: [PATCH 06/11] rockchip: rk3188: remove setup_led from xPL
+Date: Wed, 12 Nov 2025 18:48:12 +0100
+Subject: [PATCH 07/11] arm: dts: rockchip: rk3399-puma: remove u-boot,boot-led
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251112-led-old-dt-v1-6-2892d49517db@cherry.de>
+Message-Id: <20251112-led-old-dt-v1-7-2892d49517db@cherry.de>
 References: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
 In-Reply-To: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
 To: Ziping Chen <techping.chan@gmail.com>, Simon Glass <sjg@chromium.org>, 
@@ -73,77 +73,38 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-There's not a single device making use of that code and it anyway
-shouldn't be using the old deprecated u-boot,boot-led /config property
-anymore but rather boot-led from /options/u-boot[1] Device Tree node.
+There's no code to make use of it.
 
-Because spl_board_init() is only present to call this now removed
-function, we can remove it as well as SPL_BOARD_INIT which is the symbol
-guarding calls to spl_board_init() (which is now also removed).
+Further more, the HW default state of that LED is on and migrating this
+to the LED_BOOT implem brings no benefit as it'll stay on if U-Boot
+reaches its main-loop. Blinking the LED_BOOT also doesn't help because
+it doesn't blink for long enough to be noticeable before it's kept on.
 
-[1] https://github.com/devicetree-org/dt-schema/blob/v2025.08/dtschema/schemas/options/u-boot.yaml#L113-L116
+This is by design, c.f.
+https://source.denx.de/u-boot/u-boot/-/blob/v2025.10/include/led.h#L32-34
+
+If we want this LED to be doing something different, it'll need to be
+handled by a board file anyway.
+
+Considering it hasn't worked in many years, let's just remove it.
+
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/mach-rockchip/Kconfig         |  1 -
- arch/arm/mach-rockchip/rk3188/rk3188.c | 36 ----------------------------------
- 2 files changed, 37 deletions(-)
+ arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 342933ca509..f78eaf52c2a 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -76,7 +76,6 @@ config ROCKCHIP_RK3128
- config ROCKCHIP_RK3188
- 	bool "Support Rockchip RK3188"
- 	select CPU_V7A
--	select SPL_BOARD_INIT if SPL
- 	select SUPPORT_SPL
- 	select SPL
- 	select SPL_CLK
-diff --git a/arch/arm/mach-rockchip/rk3188/rk3188.c b/arch/arm/mach-rockchip/rk3188/rk3188.c
-index 7cce1112fbd..8aed46f0b3b 100644
---- a/arch/arm/mach-rockchip/rk3188/rk3188.c
-+++ b/arch/arm/mach-rockchip/rk3188/rk3188.c
-@@ -105,39 +105,3 @@ int rk_board_late_init(void)
+diff --git a/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi b/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
+index 55895d0dd19..76e091be232 100644
+--- a/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
+@@ -17,7 +17,6 @@
+ 		u-boot,spl-payload-offset = <0x80000>; /* @ 512KB */
+ 		u-boot,mmc-env-offset = <0x5000>;      /* @  20KB */
+ 		u-boot,efi-partition-entries-offset = <0x200000>; /* 2MB */
+-		u-boot,boot-led = "module_led";
+ 		sysreset-gpio = <&gpio1 RK_PA6 GPIO_ACTIVE_HIGH>;
+ 	};
  
- 	return rk3188_board_late_init();
- }
--
--#ifdef CONFIG_XPL_BUILD
--static int setup_led(void)
--{
--#ifdef CONFIG_SPL_LED
--	struct udevice *dev;
--	char *led_name;
--	int ret;
--
--	led_name = ofnode_conf_read_str("u-boot,boot-led");
--	if (!led_name)
--		return 0;
--	ret = led_get_by_label(led_name, &dev);
--	if (ret) {
--		debug("%s: get=%d\n", __func__, ret);
--		return ret;
--	}
--	ret = led_set_state(dev, LEDST_ON);
--	if (ret)
--		return ret;
--#endif
--
--	return 0;
--}
--
--void spl_board_init(void)
--{
--	int ret;
--
--	ret = setup_led();
--	if (ret) {
--		debug("LED ret=%d\n", ret);
--		hang();
--	}
--}
--#endif
 
 -- 
 2.51.1
