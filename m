@@ -4,69 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59C39CCFA1A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 02:02:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24BE4CCFA1A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 04:44:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D45183B81;
-	Wed, 12 Nov 2025 03:02:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4CFA783AB4;
+	Wed, 12 Nov 2025 05:44:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JlQ7Ue3Q";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="h7Eb9/eu";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="BOEZUnDL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8BD483BCF; Wed, 12 Nov 2025 03:02:44 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id E0CFB83B81; Wed, 12 Nov 2025 05:44:53 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1485F83AB4
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 03:02:42 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d5mrK5g70z9shs;
- Wed, 12 Nov 2025 03:02:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762912961;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=bfY42FQ1rd+17IN+KCvu1JbFZyR+mvGzR3dOtdR8+ig=;
- b=JlQ7Ue3QZFzhJAVwBD1PSqQ+ruDlwKNSuodDsR/bHJ3iQb5hMJhDd01YalFWofxLsiNr81
- kTR6jjzz4s65cZAEJ6EXqffvqAmJDTfO0SXu6lJFL9M9V67czRElU0ngn2yhm27CIHYjh+
- mVTkHcvS6xtqA/q/bLi3P09V4lucWZrB53zhkoYxqLkrpQw2rnJx57lITFDmweGUoOwCK5
- Cur/yNVgeYvCj4+015XyS4/Hx9Ossn59XdPOaGidNnKkumwaHl1HB41pKJeD0WJHqj5J6Z
- d200nA+/YEaddHvIRnewKj1Pq2zkYjFD6fv4/SEnZ7Lp2jsTUqPvLUq40ijJ2w==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762912960;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=bfY42FQ1rd+17IN+KCvu1JbFZyR+mvGzR3dOtdR8+ig=;
- b=h7Eb9/euv5QYR5gbcJYnJipSp+RzxWvQuyh1UYnvhuUk1foBxvG0qJuh8dwjQpB0tARbl/
- vg2qEKy9SYSg3+3dG3DeMGkNz6EhlheAa8uBqoGfLBf6RbRY7fpBYTq5Y7bXHaaaVqHU3A
- BwikhjT6z3Eagqp2THCt8YNXd12YPOMQZ61jVRe5ek23i+FXH3mxkTFtZkdxP2dSNTCX3X
- XvNLLSVkmV45CZymfkw+Yswgs5r/avW6ipGra/cVR0BJ4KMjTQ9ZSF0jgEcBNOycGV7zY9
- CVNVJ3w8Lj4olfU22Y70eS/GaqZkkprVG5FQV8iugocm9EI8ErKgAvUMqPUt2w==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] test/py: Use aligned address for overlays in 'extension' test
-Date: Wed, 12 Nov 2025 03:02:21 +0100
-Message-ID: <20251112020230.414101-1-marek.vasut+renesas@mailbox.org>
+ by phobos.denx.de (Postfix) with ESMTPS id F32D583AAD
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 05:44:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 3734410A706; Wed, 12 Nov 2025 05:44:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1762922691;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=pX0DsBrgGA0DR1EHT4PDDTa6bC2XPj+J48yo8zZuN/M=;
+ b=BOEZUnDLYuxh+5e46UlQj36ZTpH33EP8rlG5Piv+CmmJfaCXgL7FK/JfeBwChRGRD7p+aG
+ zHC5k7CKkzlmlDoUxqJVsJVPzJkcxKaJPHeQxzozHL2Ql98nlTVBhpT1XIOYw2GwmrvYni
+ Y2PZMs0dfcL7Wvm2ljxvNntfJ5S6i+Qi8jsiaa+KUpu6kcz2klIT9+SETmODAiOSOHha3/
+ U6qiYMRZr0VM+IMuqGWBlTZ+Ivm+5qY/2JXy3dHaVeDGvcurCQZeirCTD8Mv4wisSb3f5n
+ EudiraFs/7SftgKjTVJAGGZeVBBvFzGOXaqvrV0v2Guo0SYEwEoURZMMweCE3g==
+Message-ID: <d50ea803-18fc-f928-8d2e-56eb20f8ead4@nabladev.com>
+Date: Wed, 12 Nov 2025 05:44:56 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+From: Heiko Schocher <hs@nabladev.com>
+Subject: Re: [PATCH v2 3/5] test: cmd: hash: add unit test for sm3_256
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>
+References: <20251111054813.1966-1-hs@nabladev.com>
+ <20251111054813.1966-4-hs@nabladev.com>
+ <AF767FFD-6798-455F-A1C8-F433C509680A@gmx.de>
+Content-Language: en-US
+In-Reply-To: <AF767FFD-6798-455F-A1C8-F433C509680A@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: f694fea0afc965353cc
-X-MBO-RS-META: 7jqx71m9weesid1dbk99kyxxu8wpw77k
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,37 +72,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 'extension' test would set 'extension_overlay_addr' variable to
-decimal 4096 due to conversion in python. The 'extension_overlay_addr'
-is however sampled using env_get_hex("extension_overlay_addr", 0);
-which converts the 4096 to 0x4096 and uses that as DT overlay address,
-which is unaligned. Fix this by setting extension_overlay_addr to 0x1000
-as intended, which is aligned.
+Hello Heinrich,
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- test/py/tests/test_extension.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 11.11.25 07:39, Heinrich Schuchardt wrote:
+> Am 11. November 2025 06:48:10 MEZ schrieb Heiko Schocher <hs@nabladev.com>:
+>> add simple test for sm3 256 hash
+>>
+>> Signed-off-by: Heiko Schocher <hs@nabladev.com>
+>> ---
+>> I wonder why this tests are under DM and not under CMD
+>> Should we move them to CMD ?
+> 
+> We should use CMD_TEST() in the test/cmd/  directory.
 
-diff --git a/test/py/tests/test_extension.py b/test/py/tests/test_extension.py
-index 61223496054..ddc62e7d5ca 100644
---- a/test/py/tests/test_extension.py
-+++ b/test/py/tests/test_extension.py
-@@ -38,7 +38,7 @@ def test_extension(ubman):
-     assert('overlay1.dtbo' in output)
- 
-     ubman.run_command_list([
--        'setenv extension_overlay_addr %s' % (overlay_addr),
-+        'setenv extension_overlay_addr 0x%x' % (overlay_addr),
-         'setenv extension_overlay_cmd \'host load hostfs - ${extension_overlay_addr} %s${extension_overlay_name}\'' % (os.path.join(ubman.config.build_dir, OVERLAY_DIR))])
- 
-     output = ubman.run_command('extension apply 0')
+I aggree... candidates would be:
+
+$ grep -lr DM_TEST test/cmd
+test/cmd/temperature.c
+test/cmd/pwm.c
+test/cmd/hash.c
+test/cmd/pinmux.c
+test/cmd/rw.c
+test/cmd/armffa.c
+test/cmd/loadm.c
+test/cmd/i3c.c
+
+but that change should be done in seperate series...
+
+I can make such a series, if this one is acceppted?
+
+Thanks!
+
+bye,
+Heiko
+
+> 
+> Best regards
+> 
+> Heinrich
+> 
+>>
+>> Ignored checkpatch warnings for too long lines.
+>>
+>> (no changes since v1)
+>>
+>> test/cmd/hash.c | 46 ++++++++++++++++++++++++++++++++++++++++++++++
+>> 1 file changed, 46 insertions(+)
+>>
+>> diff --git a/test/cmd/hash.c b/test/cmd/hash.c
+>> index bb96380c351..3f7f64d27d3 100644
+>> --- a/test/cmd/hash.c
+>> +++ b/test/cmd/hash.c
+>> @@ -103,3 +103,49 @@ static int dm_test_cmd_hash_sha256(struct unit_test_state *uts)
+>> 	return 0;
+>> }
+>> DM_TEST(dm_test_cmd_hash_sha256, UTF_CONSOLE);
+>> +
+>> +static int dm_test_cmd_hash_sm3_256(struct unit_test_state *uts)
+>> +{
+>> +	const char *sum = "1ab21d8355cfa17f8e61194831e81a8f22bec8c728fefb747ed035eb5082aa2b";
+>> +
+>> +	if (!CONFIG_IS_ENABLED(SM3)) {
+>> +		ut_assert(run_command("hash sm3_256 $loadaddr 0", 0));
+>> +
+>> +		return 0;
+>> +	}
+>> +
+>> +	ut_assertok(run_command("hash sm3_256 $loadaddr 0", 0));
+>> +	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+>> +	ut_asserteq_ptr(uts->actual_str,
+>> +			strstr(uts->actual_str, "sm3_256 for "));
+>> +	ut_assert(strstr(uts->actual_str, sum));
+>> +	ut_assert_console_end();
+>> +
+>> +	ut_assertok(run_command("hash sm3_256 $loadaddr 0 foo; echo $foo", 0));
+>> +	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+>> +	ut_asserteq_ptr(uts->actual_str,
+>> +			strstr(uts->actual_str, "sm3_256 for "));
+>> +	ut_assert(strstr(uts->actual_str, sum));
+>> +	ut_assertok(ut_check_console_line(uts, sum));
+>> +
+>> +	if (!CONFIG_IS_ENABLED(HASH_VERIFY)) {
+>> +		ut_assert(run_command("hash -v sm3_256 $loadaddr 0 foo", 0));
+>> +		ut_assertok(ut_check_console_line(uts,
+>> +						  "hash - compute hash message digest"));
+>> +
+>> +		return 0;
+>> +	}
+>> +
+>> +	ut_assertok(run_command("hash -v sm3_256 $loadaddr 0 foo", 0));
+>> +	ut_assert_console_end();
+>> +
+>> +	env_set("foo",
+>> +		"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+>> +	ut_assert(run_command("hash -v sm3_256 $loadaddr 0 foo", 0));
+>> +	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+>> +	ut_assert(strstr(uts->actual_str, "!="));
+>> +	ut_assert_console_end();
+>> +
+>> +	return 0;
+>> +}
+>> +DM_TEST(dm_test_cmd_hash_sm3_256, UTF_CONSOLE);
+> 
+
 -- 
-2.51.0
-
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
