@@ -4,141 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71322CCF9F8
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 10:44:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0233BCCFA1A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 10:50:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE6E183C46;
-	Wed, 12 Nov 2025 11:44:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 44D5283C46;
+	Wed, 12 Nov 2025 11:50:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NARQv0en";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W+ymAE21";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DE1483C4B; Wed, 12 Nov 2025 11:44:12 +0100 (CET)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EF1C883C51; Wed, 12 Nov 2025 11:50:31 +0100 (CET)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CC8E83B91
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 11:44:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A01A83C08
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 11:50:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AJtlTioPd7BO0z/BIZHQAK8p3IGZVKP1uMzRIyJTU8nD9y9fXEr1BqwWCxbUmyE7dJ2rR0cOWw6ZLFD7n8J3dVZ+bGCre1iNeBIKWDLxK+sRoovQ6WvPwxVNaofXRdD7fuSXzRUJhDT5AanBT+F4bq/Kq7zJCwQEG2bxu/lPX3gwZveTVex1PrhyHZL2HS6RyiPwBO3KVQ/+/YxlnPWd1rBqM3QgepQwbG1U59KD3u/3NlUqagNtAwTGDgx+Gu0DklPSvr8K8+dM3QQjIk1vMWRMtlp/RG99H4l4w20QsRUeznmWSTwtmV9Dj/2mpQBzGogy171KWI5uzPcx++ngyQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5Zpp/mAfMq+/ofUvZbapQijtYwlB0sCYGkhL0RWDsm8=;
- b=d/DRJcrA2mKHQhTQ/3EtuGFaXgvs/ZkSvh+zdsdQSo87F+pl7JtwhZ9zd+z665dSMLnfPqZWmJLUFynsJo5YxuGzPxvQBf3UU42/Yr7shzjbNrwnFF0YriyVeIS9HvwOTHTwBCgjhrIWctdgneoF3W6Dzf6PNr4M/bVN9vrvkpgpP0ers1WpqJB/sdcB6bE6Akz+oA8Gmg/jFYhBSBm0vgZ/ZvT9aQwT1zXZn4U4Q76T0aTzsRT/uptUknjOLik1Ug/fPsg6PjQ9pkdqXeVB/jDSTZaYinG3bVA6QSdefybjlZsDVOJnoXiVct87HJiGVipM1eWd5EKhajTP8TSjZw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5Zpp/mAfMq+/ofUvZbapQijtYwlB0sCYGkhL0RWDsm8=;
- b=NARQv0en8IwFA+g6FD/CrTV2GeaZxHmWbbuklHIX6B8chViHK6cc+yUPm1sLe2SEMQjrtyzviXoUWz+3D7IzPAkqlFLSGXgfgZQKeE5ITUsDlScJ2C0dhnmpefWYGBl3maqn41AhGrRKI7LTKu1XbVL6/ui2saHv/81kCIHpoeg=
-Received: from SA9P221CA0015.NAMP221.PROD.OUTLOOK.COM (2603:10b6:806:25::20)
- by MW6PR10MB7658.namprd10.prod.outlook.com (2603:10b6:303:244::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Wed, 12 Nov
- 2025 10:44:06 +0000
-Received: from SN1PEPF000397B5.namprd05.prod.outlook.com
- (2603:10b6:806:25:cafe::2e) by SA9P221CA0015.outlook.office365.com
- (2603:10b6:806:25::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.16 via Frontend Transport; Wed,
- 12 Nov 2025 10:44:06 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SN1PEPF000397B5.mail.protection.outlook.com (10.167.248.59) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Wed, 12 Nov 2025 10:44:06 +0000
-Received: from DLEE209.ent.ti.com (157.170.170.98) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 12 Nov
- 2025 04:44:02 -0600
-Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 12 Nov
- 2025 04:44:02 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 12 Nov 2025 04:44:02 -0600
-Received: from uda0132425.dhcp.ti.com (uda0132425.dhcp.ti.com [172.24.233.103])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5ACAhx4Z2518388;
- Wed, 12 Nov 2025 04:44:00 -0600
-From: Vignesh Raghavendra <vigneshr@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- Nishanth Menon <nm@ti.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
- <n-francis@ti.com>
-Subject: [PATCH] doc: board: ti: k3: Update TI firmware repository URL to
- GitHub
-Date: Wed, 12 Nov 2025 16:12:17 +0530
-Message-ID: <20251112104218.487754-1-vigneshr@ti.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ranquet.guillaume@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7afd7789ccdso608539b3a.2
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 02:50:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1762944628; x=1763549428; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7/zioW7Q/pgup7bbh7O0s79YhTPcyAJ2acEDRHir4sI=;
+ b=W+ymAE21G7ss+h2o85t4GsWzhM3mwIqIqQqtVnLoUBKkCTUraZdM0XlK2wKHdM1OdM
+ 2Ez3M7JdU/fXBEDpUABON2XJewcf7yMEsMzSagnK5FFxhzqUtXoDzgHMyWjOM/l93AqS
+ f9de/AVyXnSTSSygRk1HDCODOgRUQLPYHrzZ9hyk18nwrEw3CkL7WAa9XLoe1x+Oivtt
+ r0aUUHxYU4wlS2hxOYU9CzXpJvIURjDZJyJYEZ5y+ylGsw3O3DzwiYP935Llyd5yrV/H
+ s/xaguXJx5PE2mqrOTjoDqGlwbmmSxh+Oo7RSQQE9OP3JxTh1pQ78YHXNumpO6AYgpbT
+ /9BA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1762944628; x=1763549428;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=7/zioW7Q/pgup7bbh7O0s79YhTPcyAJ2acEDRHir4sI=;
+ b=FSrBMOS8RYZ6eJglzdNJbl8AaC0bvhoivfA6igfOb1/POZ8jE3G6w+p3kN9VID1+fN
+ zjDolS6+VPJcg+PKOb9lsBDWXjPZ1oYyODf+g6C3gOjd867lLFX7OW7JfzfB2AEIURQW
+ B+dhjeXhalER44TZS6btoDitgCdpZk5IBvrbMKyV2I52ga6PSOdq6Cv/Bj03SWtiPSs+
+ gLUYnPCbXYBLCKg/zFfJRfxiorQjqwGgUrKFhbI7IMB0GCFY382iz1JVARkfeknlREUO
+ md1Kq8hofM9P+YEYdGvHtkjZO84o5roPL3WFA+YmcGhFOM4w7yf0lHe3VG8TmOHDQagG
+ S3Dg==
+X-Gm-Message-State: AOJu0Ywxnv38wZV1Lasa02le1gfqjX615FZ71eeKPfnMyOpB+9O4S6Yu
+ cspQjRnnMQM+xPdCN55PJEd0n20eTdOrbNpC2955P9J1RkTzt63E9Qi64A4f+RxQRwpUPDRzsKA
+ HAd+vngMfxyZOg6kukDpW/W/FdI4ifvE=
+X-Gm-Gg: ASbGncswWlt54/jNtTm286xgmidiU511ZuGnl9p97SHKs/TeWyUc71YtSot9K/Yx4oM
+ c7F8jMUh5km+Mmhy9MpCqLD77l7yIS/dJ+bdFh3raAnVhu8DeO4laAulYMb7UkiUeEhYi4K8EFk
+ FWT59Mda6xQ2gty67SN0PSYlNUxaRABVuzeCxZb67Z2PNISD6zG3nkaWrOk8w66RTMINeMs0MkO
+ A8SWqPSIJBbIQYwN7PHtLqtAegpJH7ba06cMyvGbxQPL9s4NU2/AMEVKg==
+X-Google-Smtp-Source: AGHT+IFSA97y9CePWsNWz2peU+GpdUwP611kinBGjhsW9IYq4w7IkL/Hi/3ZvKTD1GFpfYshYgvtUWjmxK6A5ngyY3Y=
+X-Received: by 2002:a17:90b:50:b0:33b:938c:570a with SMTP id
+ 98e67ed59e1d1-343ddefbbbemr3286894a91.33.1762944627887; Wed, 12 Nov 2025
+ 02:50:27 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000397B5:EE_|MW6PR10MB7658:EE_
-X-MS-Office365-Filtering-Correlation-Id: 352ff512-e397-473b-2520-08de21d8674b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?GnBQFzM+d2354ktIEVhPcA1OBIoTonOn/uYEC1AbCFucHPQ2rlQGmbd4w78B?=
- =?us-ascii?Q?MYGqedncnBVRPb3iKosglnv2PC8zXTFwtUNk/WTU3VakRViSz06fLZ3BzaAK?=
- =?us-ascii?Q?MI0Bjsp3BwJsDyELVIplvwx/P8OFJDz8d7NklY/EORN8zeCkAcBTPnajCIjS?=
- =?us-ascii?Q?vmqRaDdN9+LaMnIbEsGciVpLHnVTkdnKpN3tCqrqgushPoQCHB0hAVE+TwgM?=
- =?us-ascii?Q?B0INijAZRS8I5Uq4Bd+JOnVzSmATQfouKHBGDjVL2xrHQH79oceE+/rjY7sj?=
- =?us-ascii?Q?1POdydUKPk8WjkskFQNDQ71bZL7Yw5MyAnsoKfE15EhszHufZYeu+sC8BYij?=
- =?us-ascii?Q?O6xvVWFg5D5Yn0e9mbO++KIFE1unVcr3N7yYU320oyQr5IBizgcTKiJ1Bt6L?=
- =?us-ascii?Q?XwSJ+lj5/K3s3gwrIj5imWEMjVLjgwX0I/NU1B3RYpSGPDOJ8u8OfpjjrWQl?=
- =?us-ascii?Q?4jiENMqWJdzAePGNZZh0+VU7BeOVv+L/5beRrlqhKyX4VuclzbXgChHGjdeH?=
- =?us-ascii?Q?0QdHV0AptE4XwKHI/u6NUHkENtbfJqH6BCIaGkOGF7tOvChAiRBALBggONjA?=
- =?us-ascii?Q?1Hyp3ov0irF6Uquy+cCapw+H/+4Nkff51n3jAHguOBiN/HSCseeOHfTn8B9p?=
- =?us-ascii?Q?WmHvpUICKDJEtLmfgZvge1FfclyDN/GT1AGFVtPwp2XbIKkeJB/e+GX+NRGb?=
- =?us-ascii?Q?CsNueL/wzOzhVPGeekhT60LNeCuHI21k3fwDnfebZCnNmB35Pm7J9oJwgGy7?=
- =?us-ascii?Q?bR3n92myQr5HYAsChbEfTdnHpXNO20DIATuvRN6HLl9ms1OkfodbSqe3IZHT?=
- =?us-ascii?Q?ZD8m9x/pk6lgRFzIbpsVYIxx1+RnetKaV0OIpus6uV5TPnLrH+X7tNd7E9jb?=
- =?us-ascii?Q?SHnEVaPjrCPymVlh4eFcGB9Ml7Nv36biH3oOnQdVX+fgHVExdMxhac6EbSpA?=
- =?us-ascii?Q?XRj9D7n1lrCGDow06GVrdSljqdX2OKDD1igIchbSFBAWDFOcJz0VR8AAn/gb?=
- =?us-ascii?Q?8LfmyczL5M9sWpM4VWZQDu0WGP0uDelQqA+6mRJYC09AlN4QX+ul1kCx5eJb?=
- =?us-ascii?Q?cOUgex5d+xZGkFEE93GmAywwFq6y49PYyHkNKnUBQ33p8RuTtTx14qRTjSHG?=
- =?us-ascii?Q?dOgB1tj41d6hHYloUff1aZu9SJ6lHCCOtgnZobowQBtCZvzpBF/yzruKNYgQ?=
- =?us-ascii?Q?hsxAYSaIFgQqn/JnrgS9apiKf/DHJTL4JM+J0qL/UXlYD6IfMfVYsy9CkRF+?=
- =?us-ascii?Q?KGAzNGf281XtlO96jPZ0b7PWP3Fs1uSafXYTj8ilddmh61yD4ZAvP+KFNSwY?=
- =?us-ascii?Q?FYRLw+znl17DO4//MMdLReZhDN9XVe1hhNTanVNIF2IzPNEo8nTLOnOXyUp0?=
- =?us-ascii?Q?puuN9d05WzydFrwP01vHNSAm0RBPvP7vsX7+S1pplDtshexaxyTrUxhXw7ZI?=
- =?us-ascii?Q?sGJux+BQ9VHsCrg+CcS+CcU6Yu79Moka2Lq3hEXcu2FZI6Ih68exSCEsJQAG?=
- =?us-ascii?Q?O9HOFT3OuRkC/i1IgQjPC+e0P5sjK+fyZGCN?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2025 10:44:06.2368 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 352ff512-e397-473b-2520-08de21d8674b
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000397B5.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR10MB7658
+References: <20250911-fix_fit_zimage-v1-1-bd779ef56b22@gmail.com>
+In-Reply-To: <20250911-fix_fit_zimage-v1-1-bd779ef56b22@gmail.com>
+From: ranquet guillaume <ranquet.guillaume@gmail.com>
+Date: Wed, 12 Nov 2025 11:50:16 +0100
+X-Gm-Features: AWmQ_bn-w3SqDKYwSJwk_O82vPWEErg0b1tfVEx-HDzRBkLi7V68tkaeZk1XMt0
+Message-ID: <CAD+NunZzju5gJjrCBTVrC7xFBftaLpW5JOc0n+MgDDCpYgYjsw@mail.gmail.com>
+Subject: Re: [PATCH] x86: boot: fix unreachable else branch in boot_prep_linux
+To: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,28 +93,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the TI firmware repository URL from git.ti.com to the
-GitHub mirror at github.com/TexasInstruments/ti-linux-firmware
-which is much more reliable.
+On Thu, Sep 11, 2025 at 3:35=E2=80=AFPM Guillaume Ranquet
+<ranquet.guillaume@gmail.com> wrote:
+>
+> The else if branch uses the is_zimage boolean which is initialized to 0
+> and never set before being tested here.
+>
+> remove the test on is_zimage to make this code reachable.
+>
+> Signed-off-by: Guillaume Ranquet <ranquet.guillaume@gmail.com>
+> ---
+>  arch/x86/lib/bootm.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
+> index 0827a884b1d245ecb8a55d46105a1d67d0cdfb56..7a94dc877e31dc8c02131699b=
+9318c35e4fcfe79 100644
+> --- a/arch/x86/lib/bootm.c
+> +++ b/arch/x86/lib/bootm.c
+> @@ -103,7 +103,7 @@ static int boot_prep_linux(struct bootm_headers *imag=
+es)
+>                 }
+>                 is_zimage =3D 1;
+>  #if defined(CONFIG_FIT)
+> -       } else if (images->fit_uname_os && is_zimage) {
+> +       } else if (images->fit_uname_os) {
+>                 ret =3D fit_image_get_data(images->fit_hdr_os,
+>                                          images->fit_noffset_os,
+>                                          (const void **)&data, &len);
+>
+> ---
+> base-commit: c85b8071e7d3fd333f8a2fdd28083cb5ec3a0645
+> change-id: 20250703-fix_fit_zimage-57bd629f5ab5
+>
+> Best regards,
+> --
+> Guillaume Ranquet <ranquet.guillaume@gmail.com>
+>
 
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
----
- doc/board/ti/k3.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hello.
 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 01fb94116887..d9d802393923 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -183,7 +183,7 @@ online
- 
- * **TI Firmware (TIFS, DM, SYSFW)**
- 
--  | **source:** https://git.ti.com/git/processor-firmware/ti-linux-firmware.git
-+  | **source:** https://github.com/TexasInstruments/ti-linux-firmware
-   | **branch:** ti-linux-firmware
- 
- .. note::
--- 
-2.49.0
+Seems this has gone a bit unnoticed. So let me try to add a bit of
+context on why I ended up sending this fix.
 
+I'm running Xen on x86 using fitImage with hyperlaunch (I can give
+details on what is hyperlaunch and how I'm using it, but this [1]
+should help already).
+So my fitImage has 2 configurations:
+* Xen with Linux as a loadable
+* Linux as a baremetal image (used for recovery/provisioning)
+
+Why am I using a bzImage as a linux loadable for Xen? Because this is
+the easiest thing to start with Xen (it might be possible to load a
+gzipped elf without the setup bit of the bzImage) but I haven't spent
+time looking into it and a bzImage is what my OEM is working with.
+
+So, in order to keep things simple, I want to also boot linux as a
+bzImage from a fit image in my recovery configuration.
+
+Hope this bit of context helps with the review.
+
+Thx,
+Guillaume.
+
+[1]: https://docs.u-boot.org/en/latest/usage/fit/multi-with-loadables.html
