@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DAC5CD3435
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:49:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BFF5CD3429
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC5B183D03;
-	Wed, 12 Nov 2025 18:48:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 24A0C83D8A;
+	Wed, 12 Nov 2025 18:48:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1675683D6C; Wed, 12 Nov 2025 18:48:51 +0100 (CET)
-Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42a9])
+ id B179583C62; Wed, 12 Nov 2025 18:48:51 +0100 (CET)
+Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42ad])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D22E583D28
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 18:48:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9952383C62
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 18:48:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d69r048L9z9TQ;
- Wed, 12 Nov 2025 18:48:48 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d69r12zjMz7wB;
+ Wed, 12 Nov 2025 18:48:49 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d69qz4y90zsvC; Wed, 12 Nov 2025 18:48:47 +0100 (CET)
+ id 4d69r043YHzsH7; Wed, 12 Nov 2025 18:48:48 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 12 Nov 2025 18:48:13 +0100
-Subject: [PATCH 08/11] arm: dts: rockchip: px30-ringneck: remove
+Date: Wed, 12 Nov 2025 18:48:14 +0100
+Subject: [PATCH 09/11] arm: dts: rockchip: rk3066a-mk808: remove unused
  u-boot,boot-led
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251112-led-old-dt-v1-8-2892d49517db@cherry.de>
+Message-Id: <20251112-led-old-dt-v1-9-2892d49517db@cherry.de>
 References: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
 In-Reply-To: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
 To: Ziping Chen <techping.chan@gmail.com>, Simon Glass <sjg@chromium.org>, 
@@ -76,37 +76,35 @@ From: Quentin Schulz <quentin.schulz@cherry.de>
 
 There's no code to make use of it.
 
-Further more, the HW default state of that LED is on and migrating this
-to the LED_BOOT implem brings no benefit as it'll stay on if U-Boot
-reaches its main-loop. Blinking the LED_BOOT also doesn't help because
-it doesn't blink for long enough to be noticeable before it's kept on.
+Additionally, if we ever want to enable this LED as Boot LED, we should
+instead be using boot-led phandle property in /options/u-boot[1] Device
+Tree node with the "new" LED UCLASS devices.
 
-This is by design, c.f.
-https://source.denx.de/u-boot/u-boot/-/blob/v2025.10/include/led.h#L32-34
+So let's simply remove this unused property to not mislead users.
 
-If we want this LED to be doing something different, it'll need to be
-handled by a board file anyway.
-
-Considering it hasn't worked in many years (if ever), let's just remove
-it.
-
+[1] https://github.com/devicetree-org/dt-schema/blob/v2025.08/dtschema/schemas/options/u-boot.yaml#L113-L116
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi | 1 -
- 1 file changed, 1 deletion(-)
+ arch/arm/dts/rk3066a-mk808-u-boot.dtsi | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi b/arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi
-index 29ea2763636..8f4c9ad1f4a 100644
---- a/arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi
-+++ b/arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi
-@@ -6,7 +6,6 @@
- 	config {
- 		u-boot,mmc-env-offset = <0x5000>;      /* @  20KB */
- 		u-boot,efi-partition-entries-offset = <0x200000>; /* 2MB */
--		u-boot,boot-led = "module_led";
- 	};
+diff --git a/arch/arm/dts/rk3066a-mk808-u-boot.dtsi b/arch/arm/dts/rk3066a-mk808-u-boot.dtsi
+index 4474be962df..dd2eff529e9 100644
+--- a/arch/arm/dts/rk3066a-mk808-u-boot.dtsi
++++ b/arch/arm/dts/rk3066a-mk808-u-boot.dtsi
+@@ -2,12 +2,6 @@
  
- 	chosen {
+ #include "rk3066a-u-boot.dtsi"
+ 
+-/ {
+-	config {
+-		u-boot,boot-led = "mk808:blue:power";
+-	};
+-};
+-
+ &cru {
+ 	bootph-all;
+ };
 
 -- 
 2.51.1
