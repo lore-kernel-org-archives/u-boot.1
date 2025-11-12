@@ -4,87 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5624CD3431
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:44:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32FFECD3435
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:48:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8AAD83CB5;
-	Wed, 12 Nov 2025 18:44:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B3F1E83D0D;
+	Wed, 12 Nov 2025 18:48:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JtT90E1T";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A7AD83CB9; Wed, 12 Nov 2025 18:44:07 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 251CB83D0B; Wed, 12 Nov 2025 18:48:44 +0100 (CET)
+Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
+ [83.166.143.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B81A83C62
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 18:44:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C738283C62
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 18:48:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7c704bdd57aso548015a34.3
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 09:44:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762969444; x=1763574244; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DrIRKAUjL+svc6zjXOO5BKXJSqkG6itMV/b66objrNA=;
- b=JtT90E1T6Dw0lI5ToRRTQaUpbSH2fgCo5v+vLHgXE1Ye/AsGvgYrigK+LhHAxvCHvq
- iYkAgpdHoiqzrrmQdv+93bqxotIwXa3hOfg/JkefllJJxE///iQc7anEfoWveMEPuEgN
- Mhu5/3aGMN+XtHOWEpLUq6k0VGcl/ZexUOIhs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762969444; x=1763574244;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=DrIRKAUjL+svc6zjXOO5BKXJSqkG6itMV/b66objrNA=;
- b=X6Q8DROM/Sl0pVMhvWDCrgtYTsMmRpPa5TjKeRjxanBKeHj74SmfXkiwxDkPrLhrj2
- HTsJ61xdPa1FgyYmkcwaV7RihoT3ZuPh2R2N32Uid0rNO9qOulPDmNrR67YEzBynTIij
- baDpwm3Tklz2zgUQPJPU8Kq0RdtzPkCCaAKtS9gUZFihX4goST0+BlSknvFE04c60NPc
- FgDointiGI1OS4XsKJVUe39Gp6F0sFxAxKmi3nSrZMZ8bXeagYIPxzfLrL7U0OghwB+Q
- QNNTjVeWp60OniFpLtoGOvLiKjjaXRxmdYN2VBCsNzKarcP91rjzLYlPcK/OJy+gqUgb
- RDEQ==
-X-Gm-Message-State: AOJu0YxpyA6W3yoe9ctA5x8TvOVmuyQhyPDudnTzdpMg+79Pw1Xi7ZY4
- KPys21037efNShctutBlIbPi0PqdYhrIKNleGCWKYXAiO4wg9zRQVGnMSJAB0WoabMS1oTybsIw
- ElaDGHVLVsQ==
-X-Gm-Gg: ASbGncsW+Rlphnu01HHycsg4rwCrKHkBOH9E8evxk2ZSuN/C3BuvZg/TqCDn5x0vTo3
- yTkQIKswTv2QYUXshsLoUdZx3Nta3OuHksBt0Zw+lsKYWeRcf3Zzx85GkQgvltYEqcTHjyqz61e
- PJc9d2QZdVMY+8gmS7IFWeqXXL0M33XREr9kvPuRAz10B0oOxAKy9ZWSsX8oRpPuDr1QrEP0kaN
- LAxSTeO4WRfzyXhpebMFr/CBs2S34W6hirjJLwNyb4/4vh2O9u8+0iCbbtpyGFAv9GYKRoFIcat
- zI/MBEBjKP5vJNfHBxGxby274Go9VMsXBWWvbcmr/P5s8KoalpMwoajB3trM041iMJbRSPb+zxl
- b3UyPfPIX6+Xj7J5i41aRWQ0XRIhoYodU2QiC+QrRiU/tIWlK4IWbB2OUgi6i1YoyDfmUyRXQw4
- 3dXK+E4sUaSVkr07HpxQNwMKwfJiFpJ0VRY95Mrw==
-X-Google-Smtp-Source: AGHT+IEEaYOn/LUZlhek8CfHsGSgfYNEfmemPm2wuMPmEWHVMtNCquvsMWVFj2NXnE8OMiMELCrKaA==
-X-Received: by 2002:a05:6830:917:b0:7c7:9b7:1bf with SMTP id
- 46e09a7af769-7c72e39ead5mr2075305a34.24.1762969443970; 
- Wed, 12 Nov 2025 09:44:03 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c6f1132705sm8991050a34.28.2025.11.12.09.44.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Nov 2025 09:44:03 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: Aparna Patra <a-patra@ti.com>, Bryan Brattlof <bb@ti.com>, 
- Udit Kumar <u-kumar1@ti.com>, Dhruva Gole <d-gole@ti.com>, 
- Judith Mendez <jm@ti.com>, Beleswar Padhi <b-padhi@ti.com>, 
- Andrew Davis <afd@ti.com>, Aniket Limaye <a-limaye@ti.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>
-In-Reply-To: <20251030-ti_speed_grade_fix-v1-0-703e4189640a@ti.com>
-References: <20251030-ti_speed_grade_fix-v1-0-703e4189640a@ti.com>
-Subject: Re: [PATCH 0/3] ti: add speed grades support for AM62a
-Message-Id: <176296944226.1085282.16058927799444796107.b4-ty@konsulko.com>
-Date: Wed, 12 Nov 2025 11:44:02 -0600
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6c])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d69qs42Msz8Gc;
+ Wed, 12 Nov 2025 18:48:41 +0100 (CET)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4d69qq4f7JzsYj; Wed, 12 Nov 2025 18:48:39 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH 00/11] led: remove u-boot,boot-led and u-boot,error-led +
+ add cmd doc
+Date: Wed, 12 Nov 2025 18:48:05 +0100
+Message-Id: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDQ0Mj3ZzUFN38nBTdlBLdlGQjEzMD05SUZAsLJaCGgqLUtMwKsGHRsbW
+ 1AIVnCjNcAAAA
+X-Change-ID: 20251112-led-old-dt-dc24605ddc88
+To: Ziping Chen <techping.chan@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Klaus Goger <klaus.goger@cherry.de>, 
+ Eugen Hristev <eugen.hristev@linaro.org>, 
+ Durai Manickam KR <durai.manickamkr@microchip.com>, 
+ Stefan Roese <sr@denx.de>, Zixun LI <admin@hifiphile.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, 
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Alexander Dahl <ada@thorsis.com>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,28 +74,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 30 Oct 2025 18:33:19 +0530, Anshul Dalal wrote:
+u-boot,boot-led and u-boot,error-led aren't actually handled by some
+generic code but rather by board or architecture specific code. They
+also aren't properties that are part of the official dt-binding so they
+cannot be upstreamed. For u-boot,boot-led, there's actually a proper
+replacement which is /options/u-boot/boot-led[1] (+ CONFIG_LED_BOOT=y).
 
-> TI offers SoCs in various speed grades, each speed grade specifies a
-> certain maximum operating frequency of the clocks for each core.
-> 
-> In K3's boot flow, the R5 SPL starts the A53 or A72 core and configures
-> the correct clocks and power using the K3 ARM64 rproc driver
-> (compatible: ti,am654-rproc). However, the driver expects the dt node
-> for the ARM64 core to be set with a correct "assigned-clock-rates"
-> value.
-> 
-> [...]
+For Rockchip boards, either nothing (for RK3066, PX30 and RK3399) was
+using that property or (for RK3188) the code handling it was guarded by
+symbols that were not enabled in the defconfig. For those, the property
+and guarded code are removed.
 
-Applied to u-boot/next, thanks!
+For the Sam9x60 Curiosity, it seems that even though the LED is
+controlled whenever CONFIG_LED is enabled, it isn't enabled by default
+in the defconfig (but the code was added without modifying the
+defconfig, explicitly leaving a choice to the user). I decided to keep
+that feature by simply migrating it to the new API, though I cannot test
+it as I do not own the device.
 
-[1/3] mach-k3: am62px: remove fdt_fixup_cpu_freq_nodes_am62p
-      commit: 2a909c3da7197f9640a016e69a7b7984f1d6fa45
-[2/3] mach-k3: refactor A53 speed grade clock-rate fixup
-      commit: 65a6b83a9b7faff58e2ca60ddebbf5dc364c6ec9
-[3/3] mach-k3: am62a: add support for speed grades
-      commit: d4c0b8fed70d6cbce9f981611cd876dcdb1eae48
+The STM32 boards will be migrated in the near future once their upstream
+(kernel) Device Trees gain the new way to specify this (via
+/options/u-boot/boot-led). I'll let Patrice handle this, see
+https://lore.kernel.org/u-boot/94ed1988-13e8-4fe3-bdff-ba2c9973c556@foss.st.com/
+and
+https://lore.kernel.org/u-boot/2a3aa43a-ce19-41e1-ab56-556629ce5cf9@foss.st.com/
+
+After this, only one user of u-boot,boot-led will be left, based on
+STM32: board/dhelectronics/dh_stm32mp1/board.c. @Patrice, maybe that's
+something you want to have a look at as well, this seems to be some
+evaluation kit?
+
+The only users of u-boot,error-led are STM32 boards, so I'll leave this
+to Patrice as well, I do not know what's the way to go for that one.
+
+In any case, I would like to not encourage people to use out-of-spec DT
+properties when there is another option (u-boot,boot-led), so I remove
+the properties from the dt-binding document from U-Boot.
+
+The help text for the blink subcommand of the led command was misleading
+so this is now fixed.
+
+This also moves the content of doc/README.LED into the doc/api/led.rst,
+while clearly stating one shouldn't be using this anymore.
+
+This also gets rid of dt-binding that we already have in dts/upstream.
+
+Finally, this adds documentation for the led shell command.
+
+[1] https://github.com/devicetree-org/dt-schema/blob/v2025.08/dtschema/schemas/options/u-boot.yaml#L113-L116
+
+Reported-by: Yegor Yefremov <yegorslists@googlemail.com>
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Quentin Schulz (11):
+      cmd: led: fix help text for blink subcommand
+      doc: move legacy API documented in README.LED to doc/api/led.rst
+      doc: cmd: document the led shell command
+      doc: dt-bindings: remove duplicates with dts/upstream
+      arm: dts: rockchip: rk3188-radxarock: remove unused u-boot,boot-led
+      rockchip: rk3188: remove setup_led from xPL
+      arm: dts: rockchip: rk3399-puma: remove u-boot,boot-led
+      arm: dts: rockchip: px30-ringneck: remove u-boot,boot-led
+      arm: dts: rockchip: rk3066a-mk808: remove unused u-boot,boot-led
+      sam9x60-curiosity: migrate Boot LED setup to use /options/u-boot/boot-led
+      doc: remove u-boot,boot-led and u-boot,error-led from "binding"
+
+ arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi   |   9 +-
+ arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi     |   1 -
+ arch/arm/dts/rk3066a-mk808-u-boot.dtsi            |   6 -
+ arch/arm/dts/rk3188-radxarock-u-boot.dtsi         |   5 -
+ arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi       |   1 -
+ arch/arm/mach-rockchip/Kconfig                    |   1 -
+ arch/arm/mach-rockchip/rk3188/rk3188.c            |  36 ------
+ board/atmel/sam9x60_curiosity/sam9x60_curiosity.c |  16 +--
+ cmd/led.c                                         |  11 +-
+ doc/README.LED                                    |  77 ------------
+ doc/api/led.rst                                   |  89 +++++++++++++-
+ doc/device-tree-bindings/config.txt               |   5 -
+ doc/device-tree-bindings/leds/leds-bcm6328.txt    | 106 ----------------
+ doc/device-tree-bindings/leds/leds-bcm6358.txt    | 141 ----------------------
+ doc/device-tree-bindings/leds/leds-gpio.txt       |  52 --------
+ doc/device-tree-bindings/leds/leds-lp5562.txt     |  63 ----------
+ doc/usage/cmd/led.rst                             |  95 +++++++++++++++
+ 17 files changed, 194 insertions(+), 520 deletions(-)
+---
+base-commit: caa740df9cae5ddc74b18b88a4fea43e27b2fdf6
+change-id: 20251112-led-old-dt-dc24605ddc88
+
+Best regards,
 -- 
-Tom
-
+Quentin Schulz <quentin.schulz@cherry.de>
 
