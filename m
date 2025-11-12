@@ -4,85 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5166CCFA1A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 08:55:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6618FCCFA1A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 09:57:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC5DA83C14;
-	Wed, 12 Nov 2025 09:55:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A2BD483A6A;
+	Wed, 12 Nov 2025 10:57:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gBVZVymJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jm08l5Xa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5827183C40; Wed, 12 Nov 2025 09:55:30 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 7ACDE83C14; Wed, 12 Nov 2025 10:57:36 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E828583C08
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 09:55:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D52583A03
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 10:57:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-787da30c50fso5214787b3.3
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 00:55:27 -0800 (PST)
+ spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-6406f3dcc66so1006514a12.3
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 01:57:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1762937727; x=1763542527; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=p/Q2KTzlplL10uQuMP3btr9ww8m6X830FDaSyfTwVxM=;
- b=gBVZVymJfxQA4Cj+H5hBpzOvaPrkYWnwpvVTg/bC1uU7i4QFuKeGAD5mpnH7Iquron
- ft5etC4k63rRj0ydcRnlkT2TQxQxRB8C8WVNoq3lfFwk2+UwXQupkBOk9sFBC5Vo6EiO
- cuF8AA7Qcoil+LL+/eGrhtJE2zQzYjoQ7GuyTqHGZO48JGVE6KroNZxR5yb29B2CqMOO
- vpP88XLRFFajkeUjO1so82kq7eQ6bvYjFFXybPw5eEvJ07JyXqmmwXIUEkd/oqsvnRzw
- 6f3BW+4hKSI8pfEIQzzIaxZP+QemtSgPNHZXTDcJa9GQcH/c5Gud9XEP4YJrBwfvNG6N
- uxXw==
+ d=gmail.com; s=20230601; t=1762941454; x=1763546254; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Ro74g+muccl7h7tmgvmCdkdBVn5SRU7CLHdeW44xNDg=;
+ b=Jm08l5XaUD/+grvS5oMRnOKik4UciSW5BAXqD9ASf6VX8fUaN/fCZj6BYLeR6kDGs5
+ LSmOkCRynUCSdg7dIq4P9Uz2LvlHbVh+mxeI1AUDMMcJGKQqcuy63J/92wGZ7dtlOrAZ
+ 4oKiqW5PUjZfQT9+Y0U24Hn0zXn47hevBlqF7XvzfEaJCZL5YXning7ny5GWRWN1NY3H
+ BB5/GRmm/DDqIUt5NZpdm52rGAHO2IVNxOuM4frDfUE1DXCvKjmX9+FMlZxZLtpFSXzY
+ xP50LkC6AdpERjWkQ6O8okyOxouXcaVvEFe+vHODhLNbHJZN1NcvbKg5XlwxuTwhwKmo
+ ky4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762937727; x=1763542527;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=p/Q2KTzlplL10uQuMP3btr9ww8m6X830FDaSyfTwVxM=;
- b=UGH7idABkk0+17gvxJwudJUolBaG74h28qb8vx/o7PLmNFDKYM3ry2zitulCadYDPY
- ZUYxXoZi+lZrOCHwzjpu+lzxgrLoDdd/kAJMB8qTr27k16uXOwb1VysmB/cMPz4HOCM4
- bJX/GZs7d4LgcHQ7u95MHZR17jJutoeI8H1GfJ+ooljngiMyAAwLphYyMl0bbUeo4lh/
- wzsucLZO7FeTTX55uVCHVYMGBRTw0rnM1EnMoPLFlUED8C+e85aENF180f6DyWgfuB6i
- ByxU81wnOJYxgI2Owv/fQknpYP1yhyfrxBb4K9LYKr8tRkn/kuLljah2fh7nHwPa3/ID
- /XzA==
-X-Gm-Message-State: AOJu0YzQgem3R5JktBsBu/19J/A20m8ag1qzO+UpztGmCsy8AjpHau5s
- Xj7NFH4jhHdYjnKv7AP7h1MeBVWlxJQD/er31qhtpnAimFDOY+eHSWzintWnYYXy/vsL4NBUEyr
- PrvsQwQGWrGwYldVlCXSmmzghunhSRzHhDBuiQK526w==
-X-Gm-Gg: ASbGncv0O2Q4trrufxoqXJwnEJ8063sJOXL9qyZ9CFFxudp3lgN9pYRnvbq/Hp/7qvT
- /eFjI7Od8XQUFpQrHZDV+kojk5juhdhiIPKC46tDGA5K8RdqfVzISr24kux0KOmxCrAr9GEj5yR
- 4WUtKt0QQgpj7SDpnk4GorytYdBeywNKXtbeeRz6JBNGqbpElO8LyIB8zY4IXJ8g6tf98zR2O0b
- y8fdnuyKCSz9gMfH/laGYRtK4L6/h4+bhUzhiRg9GWAl86xvI26pH4BzpH1pSbCaI4VjhTlUli5
- BjgP+ksNunUZJ9ipTDo4ioYsDuQ7A6CltwvNvfSFWKMUudr/xBE=
-X-Google-Smtp-Source: AGHT+IEJdGo87ScW5pjGEPk414EUQaNu2qZFpAz25f1ro5NMhavGYeXUUk0m5EITr/64KSdOQcgfG4PUnOx8PATFXhQ=
-X-Received: by 2002:a05:690c:a7c8:b0:781:64f:2b18 with SMTP id
- 00721157ae682-788136acb1amr24938607b3.58.1762937726758; Wed, 12 Nov 2025
- 00:55:26 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762941454; x=1763546254;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ro74g+muccl7h7tmgvmCdkdBVn5SRU7CLHdeW44xNDg=;
+ b=wKOu1mkyt9kkMMXFy0Xq2Gu6yCIlfGCuBRg6pni6oMftWDAJrXXsFbIMf6484GeLW4
+ SvonSti4geqzzVirI+WcslZeyijSHHL1PT0KPJ88O6BOzokLav4+qriu63uUrNFNBfj0
+ ZaBjl5C77UwAHEO1DQ00rwt5oDoMqRwJrt3YcYcIRJdLZle4gkliswWb74++PKhjxdOr
+ 4kq3fzf2IlKTdskI4oBmKMCPiMzw0WlomL66gPHGzEVYoK5LiBiDdaQvN3buAXD+Wnno
+ 5X3d/2AAdjZAGEch0NCFjo55Ev++A8c0XsRUZ+F5fya1pJ36mPd8QBPdDjYLEIp5zb9g
+ JrUg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWsVcL9fqLtFsFzyVobyOw2s+1kJU0rOvu9YqmUex5PUwxv6vrnKow5jDdNsNgDAWfkaSGGXo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzhPBZskjWuBF+j316o2Ot/hHmTYdOvuI0nGjSNOCTPxSiH1CO
+ isPklCD6a+9lRFISOtHEs0zLbBzNIoEgub4xcYak6wYd9kJhfV41tY/M
+X-Gm-Gg: ASbGnct9SbYRzJDMg/PP7DTvPRYZHnXK6NgMgTTZNxB7I89E7SHyWlcqaN8KRPb6Pwx
+ gcpHpbKvWKMFYg+bo/B5GxkKDfqYB+A9aF9zrM0dhfmwAl0TeTlmuFJc2/dauV6/cj5HpErtXEV
+ A2KDVt4vNikriFX7ZyX8keWYjYo41LdkgXfqo7qwSwRUvD6Qp75lXpDwCofvaewCbRGG+8F6HKl
+ uoPffP9Uy7EGJTow1bOJxFS/3JvTuXIBVz5uV3KlyDWFOVnZ1svKywKtfuUicEPcXM5jllStlb1
+ ohriCyKaxsDnFKbOZwWwUP/wyK1WDofdoi1wuu9dIExKA8efcrSdLENAhWSCLYhLB6FrX7yPY0h
+ QK1Pn86hti54U05rSqZm+Ks96IFPhW0GM8UH40d6Ufl4f/rIRbwD766RFkVz/WGjc/09bcr2ioH
+ ZfoK/X80xW6Pn4f/WF0groKJ/M63+5hLf49T9hNMx1vS0d4X3ONVPfpLFyqw6bp7s1eiFpH4CRY
+ oLISZw=
+X-Google-Smtp-Source: AGHT+IH/rzjUBNVpfE80/Do96oCQ6wAEabKxXicxzfq1s5+yPfAYBL5S6JC402a64Xt7CqvG9+/iDA==
+X-Received: by 2002:a05:6402:50c6:b0:641:2cf3:ec3e with SMTP id
+ 4fb4d7f45d1cf-6431a4ca1d2mr1998018a12.11.1762941453693; 
+ Wed, 12 Nov 2025 01:57:33 -0800 (PST)
+Received: from [10.0.1.60]
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6411f862bd0sm15700018a12.26.2025.11.12.01.57.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Nov 2025 01:57:33 -0800 (PST)
+Message-ID: <e9c56d66-b2b9-456c-856e-2ef01a009e16@gmail.com>
+Date: Wed, 12 Nov 2025 10:57:32 +0100
 MIME-Version: 1.0
-References: <20251104-smbios-v1-1-99b79a8f59b3@arista.com>
-In-Reply-To: <20251104-smbios-v1-1-99b79a8f59b3@arista.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 12 Nov 2025 10:54:51 +0200
-X-Gm-Features: AWmQ_blK_6JPxNHfzkLZ372WErff5i5pjn5DnRSsYy2DwweR9QqANbebIYHRovc
-Message-ID: <CAC_iWj+bCFQ8xyavApfzS4MTsyh4TKt1KP-fCO6GXw97+g0RJQ@mail.gmail.com>
-Subject: Re: [PATCH] boot/bootfdt: Add smbios3-entrypoint to FDT for non-EFI
- boots
-To: adriana <adriana@arista.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Richard Weinberger <richard@nod.at>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] imx: Revert "imx: mx6ull: fix REFTOP_VBGADJ setting" and
+ fix comments
+To: Ye Li <ye.li@oss.nxp.com>, Fabio Estevam <festevam@gmail.com>,
+ Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
+Cc: uboot-imx@nxp.com, trini@konsulko.com,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ u-boot@lists.denx.de, u-boot@schwermer.no,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, Jacky Bai <ping.bai@nxp.com>
+References: <20251027115638.1186252-1-festevam@gmail.com>
+ <CAOMZO5B1sxS8Vh1awupGZd8oqqLhZ55abME07Kf5AZ-w9jUKhQ@mail.gmail.com>
+ <3ab1b3a6-b9ab-4571-a7c8-8288d4a8d290@gmail.com>
+ <CAOMZO5BcMu_94qn4vhDgxmdWVx0N-mCD9wYTvAPbXaK45EUFBA@mail.gmail.com>
+ <b6b82482-ec7d-4703-ad93-ccdd7a651b57@oss.nxp.com>
+Content-Language: en-US
+From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+In-Reply-To: <b6b82482-ec7d-4703-ad93-ccdd7a651b57@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,96 +115,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Adriana,
 
-I agree with Tom that we should pull a version of this once the spec
-changes are merged
 
->
-> +/**
-> + * board_fdt_chosen_smbios - boards may override this function to provide
-> + *                           specific SMBIOS address
-> + */
-> +__weak phys_addr_t board_fdt_chosen_smbios(void)
-> +{
-> +       phys_addr_t ret = 0;
-> +       const struct smbios3_entry *entry;
-> +
-> +       /* Only provide SMBIOS address if EFI is not enabled */
-> +       if (IS_ENABLED(CONFIG_EFI_LOADER))
-> +               return 0;
-> +
-> +       /* Only proceed if SMBIOS support is compiled in */
-> +#if defined(CONFIG_SMBIOS) || defined(CONFIG_GENERATE_SMBIOS_TABLE)
+On 12/11/2025 09:16, Ye Li wrote:
+> 
+> 
+> On 11/11/2025 9:47 PM, Fabio Estevam wrote:
+>> Hi Emanuele,
+>>
+>> On Thu, Nov 6, 2025 at 7:22 AM Emanuele Ghidoli
+>> <ghidoliemanuele@gmail.com> wrote:
+>>
+>>> Hi Fabio, Ye,
+>>>
+>>> At Toradex we have been struggling since quite some time (back to 2018) with
+>>
+>> Does this problem only affect early i.MX6ULL silicon samples?
+> Hi Emanuele,
+> 
+>     I have same question as Fabio. Are these samples are early? Do you know
+> the time of receiving these sample? And could you show the part number printed
+> on the chip.
+It could take a little to answer to the first two question. I can say that the
+SoM I'm using to validate the patch was assembled in September 2021. Let me
+know if this information are needed giving that I can report the marking on
+the chip:
+MCIMX6Y2CVM08AB CTDQ2107 1N70S CHINA QGDQCTA
 
-IS_ENABLED() is the preferred macro instead of ifdefs. Also
-CONFIG_GENERATE_SMBIOS_TABLE depends on CONFIG_SMBIOS.
 
-> +       ret = gd->arch.smbios_start;
-> +       if (!ret)
-> +               return 0;
-> +
-> +       /* Verify this is SMBIOS 3 */
-> +       entry = (struct smbios3_entry *)(uintptr_t)ret;
-> +
-> +       /* Check for "_SM3_" signature */
-> +       if (memcmp(entry->anchor, "_SM3_", 5) != 0) {
-> +               printf("SMBIOS: Not version 3, skipping DTB injection\n");
-> +               return 0;
-> +       }
-> +
-> +       /* Verify entry point length and version */
-> +       if (entry->length < sizeof(struct smbios3_entry)) {
-> +               printf("SMBIOS: Invalid entry length %d\n", entry->length);
-> +               return 0;
-> +       }
-> +
-> +       printf("SMBIOS: Found version %d.%d at 0x%llx\n",
-> +              entry->major_ver, entry->minor_ver, (u64)ret);
-> +#endif /* CONFIG_SMBIOS || CONFIG_GENERATE_SMBIOS_TABLE */
-> +
-> +       return ret;
-> +}
-> +
->  int fdt_chosen(void *fdt)
->  {
->         struct abuf buf = {};
->         int   nodeoffset;
->         int   err;
->         const char *str;                /* used to set string properties */
-> +       phys_addr_t smbiosaddr; /* SMBIOS table address */
->
->         err = fdt_check_header(fdt);
->         if (err < 0) {
-> @@ -387,6 +429,19 @@ int fdt_chosen(void *fdt)
->                 return err;
->         }
->
-> +       /* Inject SMBIOS address when we have a valid address.
-> +        * This is useful for systems using booti/bootm instead of bootefi.
-> +        */
-> +       smbiosaddr = board_fdt_chosen_smbios();
-> +       if (smbiosaddr) {
-> +               err = fdt_setprop_u64(fdt, nodeoffset, "linux,smbios3-entrypoint",
-> +                                     smbiosaddr);
-> +               if (err < 0) {
-> +                       printf("WARNING: could not set linux,smbios3-entrypoint %s.\n",
-> +                              fdt_strerror(err));
+> 
+>>
+>>> the temperature readings and the thermal shutdown behavior on i.MX6ULL. The
+>>> issue we observed is that the thermal shutdown seems to trigger too early.
+>>>
+>>> I have investigated the history around this topic and verified some internal
+>>> notes in our bug tracker. With this revert applied, and on the devices we have
+>>> (all trimmed with value 0), the reported temperature increases by about 10 °C
+>>> compared to before the revert. The absolute accuracy of the readout is
+>>> questionable: for example, on a device kept at around 20 °C, the temperature
+>>> readout was ~19 °C before the revert, and ~31 °C after the revert.
+>>>
+>>> Consider that for devices with fuse value of 6, there is a -10 degrees offset
+>>> after this revert (so, the other way around).
+>>>
+>>> I understand that for Sven this revert improves stability during large XZ
+>>> decompression in userspace for few devices, but for us it means that the
+>>> thermal shutdown happens roughly 10 °C earlier, which is a serious issue in
+>>> our case.
+>>>
+>>> I would kindly ask NXP to double-check how these devices were trimmed. My gut
+>>> feeling is that there might be an inconsistency, either the trimming scheme is
+>>> not backward-compatible (e.g. old and new devices behave differently, and the
+>>> code should cope, I don't know how, with this), or this patch must be reverted
+>>> (because introduces a regression).
+>>
+>> Peng/Ye Li,
+>>
+>> How does NXP suggest we handle this? Were the early i.MX6ULL parts
+>> incorrectly fused?
+> I need to discuss it internally, will feedback you later.
+> 
+>>
+>> Can the fuse be read and dynamically adjusted?
+>>
+> The fuse is locked by MEM_TRIM_LOCK. Emanuele, can you help to read it by
+> "fuse read 0 0 1".
+Colibri iMX6ULL # fuse read 0 0 1
+Reading bank 0:
 
-The errors are treated as fatal and return without running
-fdt_fixup_stdout(). Arguably some of the errors should be fatal -- e.g
-failing to set bootargs, while others shouldn't and only produce a
-warning, like setting the rng-seed.
-IMHO SMBIOS is fine and we should only print a warning, just making
-sure that everyone is ok with that.
+Word 0x00000000: 00320003
+Colibri iMX6ULL # fuse read 1 0 1
+Reading bank 1:
 
-> +               }
-> +       }
-> +
->         return fdt_fixup_stdout(fdt, nodeoffset);
->  }
->
-[...]
+Word 0x00000000: 00000080
 
-Thanks
-/Ilias
+Kind regards,
+Emanuele
+
+> 
+> Best regards,
+> Ye Li
+>> Please advise, thanks.
+> 
+
