@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2091CD3429
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC943CD3436
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:50:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61C1B83DA7;
-	Wed, 12 Nov 2025 18:48:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A21FD83CF2;
+	Wed, 12 Nov 2025 18:48:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6479183DA7; Wed, 12 Nov 2025 18:48:52 +0100 (CET)
-Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
- [185.125.25.9])
+ id 3C40A83CF2; Wed, 12 Nov 2025 18:48:53 +0100 (CET)
+Received: from smtp-190b.mail.infomaniak.ch (smtp-190b.mail.infomaniak.ch
+ [185.125.25.11])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D4D483CF2
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 18:48:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 572C883D7D
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 18:48:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d69r21szHz7yX;
- Wed, 12 Nov 2025 18:48:50 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d69r30qFMz9jx;
+ Wed, 12 Nov 2025 18:48:51 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d69r12v6mzsy9; Wed, 12 Nov 2025 18:48:49 +0100 (CET)
+ id 4d69r21n0sztCK; Wed, 12 Nov 2025 18:48:50 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 12 Nov 2025 18:48:15 +0100
-Subject: [PATCH 10/11] sam9x60-curiosity: migrate Boot LED setup to use
- /options/u-boot/boot-led
+Date: Wed, 12 Nov 2025 18:48:16 +0100
+Subject: [PATCH 11/11] doc: remove u-boot,boot-led and u-boot,error-led
+ from "binding"
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251112-led-old-dt-v1-10-2892d49517db@cherry.de>
+Message-Id: <20251112-led-old-dt-v1-11-2892d49517db@cherry.de>
 References: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
 In-Reply-To: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
 To: Ziping Chen <techping.chan@gmail.com>, Simon Glass <sjg@chromium.org>, 
@@ -53,7 +53,7 @@ Cc: Tom Rini <trini@konsulko.com>,
  Stefan Roese <sr@denx.de>, Zixun LI <admin@hifiphile.com>, 
  Patrice CHOTARD <patrice.chotard@foss.st.com>, 
  Yegor Yefremov <yegorslists@googlemail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Alexander Dahl <ada@thorsis.com>
+ Quentin Schulz <quentin.schulz@cherry.de>
 X-Mailer: b4 0.14.3
 X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
@@ -74,80 +74,37 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This board is one of the last users of /config/u-boot,boot-led property
-which is a U-Boot property out of the DT spec.
+We're aiming to reduce the amount of U-Boot-specific and out-of-spec
+Device Tree additions.
 
-Let's migrate it to use the in-spec /options/u-boot/boot-led property.
-When enabling LED_BOOT, U-Boot proper will lit the LED right before
-entering the main loop, so nothing needs to be done in board files.
+Those two properties haven't been doing anything for a long time
+already, except when read by board files manually. This is still the
+case for STM32 boards but those will be migrated in the near future
+according to their maintainer. In any case, let's not encourage people
+to add either of these properties to new or existing Device Trees and
+remove it from the bindings.
 
-As explained in the commit adding support for this u-boot,boot-led
-property, let's keep backward compatibility in case LED_BOOT isn't
-selected.
-
-Note that this is not tested as I do not own this device.
-
-Cc: Alexander Dahl <ada@thorsis.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi   |  9 ++++++---
- board/atmel/sam9x60_curiosity/sam9x60_curiosity.c | 16 +---------------
- 2 files changed, 7 insertions(+), 18 deletions(-)
+ doc/device-tree-bindings/config.txt | 5 -----
+ 1 file changed, 5 deletions(-)
 
-diff --git a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-index 9144387861e..b8f16c0b0c0 100644
---- a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-+++ b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-@@ -21,8 +21,11 @@
- 		bootph-all;
- 	};
+diff --git a/doc/device-tree-bindings/config.txt b/doc/device-tree-bindings/config.txt
+index fffb69e75de..3756f57bf44 100644
+--- a/doc/device-tree-bindings/config.txt
++++ b/doc/device-tree-bindings/config.txt
+@@ -26,11 +26,6 @@ bootdelay (int)
+ 	images is being packed for testing or a user holds down a button, it may
+ 	allow a delay, but disable it for production.
  
--	config {
--		u-boot,boot-led = "blue";
-+	options {
-+		u-boot {
-+			compatible = "u-boot,config";
-+			boot-led = <&led_blue>;
-+		};
- 	};
- 
- 	leds {
-@@ -34,7 +37,7 @@
- 			default-state = "off";
- 		};
- 
--		led-blue {
-+		led_blue: led-blue {
- 			default-state = "off";
- 		};
- 	};
-diff --git a/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c b/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c
-index e75043ec00f..3393478e4c8 100644
---- a/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c
-+++ b/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c
-@@ -28,21 +28,7 @@ void at91_prepare_cpu_var(void);
- 
- static void board_leds_init(void)
- {
--#if CONFIG_IS_ENABLED(LED)
--	const char *led_name;
--	struct udevice *dev;
--	int ret;
+-u-boot,boot-led (string)
+-u-boot,error-led (string)
+-	This is used to specify the label for an LED to indicate an error and
+-	a successful boot, on supported hardware.
 -
--	led_name = ofnode_conf_read_str("u-boot,boot-led");
--	if (!led_name)
--		return;
--
--	ret = led_get_by_label(led_name, &dev);
--	if (ret)
--		return;
--
--	led_set_state(dev, LEDST_ON);
--#else
-+#if !CONFIG_IS_ENABLED(LED_BOOT)
- 	at91_set_pio_output(AT91_PIO_PORTD, 17, 0);	/* LED RED */
- 	at91_set_pio_output(AT91_PIO_PORTD, 19, 0);	/* LED GREEN */
- 	at91_set_pio_output(AT91_PIO_PORTD, 21, 1);	/* LED BLUE */
+ bootsecure (int)
+ 	Indicates that U-Boot should use secure_boot_cmd() to run commands,
+ 	rather than the normal CLI. This can be used in production images, to
 
 -- 
 2.51.1
