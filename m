@@ -4,62 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3BAECCFA1A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 14:50:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D5F6CCFA1A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 14:58:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19F0D839D6;
-	Wed, 12 Nov 2025 15:50:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id DC0E483966;
+	Wed, 12 Nov 2025 15:58:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="z0YtdWEn";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E28A83CA4; Wed, 12 Nov 2025 15:50:43 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id 8F66C83966; Wed, 12 Nov 2025 15:58:12 +0100 (CET)
+Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc0d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 468F983966
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 15:50:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B68878391B
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 15:58:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id C0C264E41667;
- Wed, 12 Nov 2025 14:50:40 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 96BF36070B;
- Wed, 12 Nov 2025 14:50:40 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A5D37102F187F; Wed, 12 Nov 2025 15:50:37 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1762959040; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=k/nEKo3ki6IEUXi4Imigqr70cJelAJMFiSfevmoDQtA=;
- b=z0YtdWEnea44ANlHNO2u2J25WqU+sSyfbUmbi8O+7VDRP0efd4lkMR8PVhYOHphdtMUHRh
- 2Eef4YE+Qe7rtLaQ3eFIoqjlEQ0JzPaVsl9VKKmF3Eb/qvxjvdy1B7Ila43cTYN3+dyNlP
- iucEqefqyTRMSsA2wDsyKKC8YCKoH2sZEhQu6LX1Hf6uq9ywZZd5gT9W2x1g33Vm77DeS2
- A2Syb5xB6z5A0WQcA0Z6PYoIEhOqmCWYNly+IHmYcJ0WCGiZYPsdf2nxj4RDFsFJDlFa3N
- Ov0ft4O1+2nHC6jx3b5wJv6S/t2YXmYpimWWfLXTcwM1qFk6mthXRobTWAtFJw==
-Date: Wed, 12 Nov 2025 15:50:36 +0100
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Bajjuri Praneeth <praneeth@ti.com>,
- thomas.petazzoni@bootlin.com, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Jerome
- Forissier <jerome.forissier@linaro.org>
-Subject: Re: [PATCH] cmd: extension: Fix possible null pointer dereference
-Message-ID: <20251112155036.501b7d0c@kmaincent-XPS-13-7390>
-In-Reply-To: <896ae93d-0b37-4a6e-b244-fcee50b496f7@cherry.de>
-References: <20251112130742.97473-1-kory.maincent@bootlin.com>
- <896ae93d-0b37-4a6e-b244-fcee50b496f7@cherry.de>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6c])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d663527Kqzbrx;
+ Wed, 12 Nov 2025 15:58:09 +0100 (CET)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4d66340sF2z1ZH; Wed, 12 Nov 2025 15:58:08 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Wed, 12 Nov 2025 15:58:00 +0100
+Subject: [PATCH v2] rockchip: mkimage: enhance comments for v1 header
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251112-rkcommon-hdr-v2-1-49e6747f2460@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3XMQQ7CIBCF4as0sxZTKMXgynuYLgQGIaalGQyxa
+ bi72L3L/yXv2yEjRcxw7XYgLDHHtLQQpw5seCxPZNG1BtGLkfP+wuhl0zynhQVHTGuPXmsjjZL
+ QLiuhj5+Du0+tQ8zvRNuhF/5b/0CFM86UkaMyZnBODzcbkGg7O4Sp1voFvODuR6gAAAA=
+X-Change-ID: 20251107-rkcommon-hdr-99fef99b4b64
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Xuhui Lin <xuhui.lin@rock-chips.com>, 
+ Yifeng Zhao <yifeng.zhao@rock-chips.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,63 +67,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 12 Nov 2025 15:12:34 +0100
-Quentin Schulz <quentin.schulz@cherry.de> wrote:
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-> Hi K=C3=B6ry,
->=20
-> On 11/12/25 2:07 PM, Kory Maincent wrote:
-> > From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-> >=20
-> > Add a null check for extension_list before calling alist_get_ptr() to
-> > prevent a potential null pointer dereference. If extension_get_list()
-> > returns NULL, alist_get_ptr() would attempt to dereference it, leading
-> > to undefined behavior.
-> >=20
-> > The fix ensures both extension_list and its first element are checked
-> > before proceeding with the list operation.
-> >=20
-> > Closes: https://lists.denx.de/pipermail/u-boot/2025-November/602892.html
-> > Fixes: 2d12958ee71b ("boot: Remove legacy extension board support")
-> > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
-> > ---
-> >   cmd/extension_board.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/cmd/extension_board.c b/cmd/extension_board.c
-> > index 86e4795ba8a..1b92be82611 100644
-> > --- a/cmd/extension_board.c
-> > +++ b/cmd/extension_board.c
-> > @@ -99,7 +99,7 @@ static int do_extension_list(struct cmd_tbl *cmdtp, i=
-nt
-> > flag, int i =3D 0;
-> >  =20
-> >   	extension_list =3D extension_get_list();
-> > -	if (!alist_get_ptr(extension_list, 0)) {
-> > +	if (!extension_list || !alist_get_ptr(extension_list, 0)) { =20
->=20
-> Is it possible that one runs extension scan which returns no supported=20
-> extension (alist_empty(), the default state before calling the scan()=20
-> ops for the extension uclass driver)?
+Improve the image header documentation for v1 header:
 
-Yes, we can have no extension plugged, therefore the scan won't find any
-extension. i.e. empty list.
-=20
-> In which case, we should only check whether extension_list is NULL and=20
-> not whether there's at least one extension?
+- specify this applies to all MMC, not only SD cards,
+- specify the offset for SPI flashes,
+- specify the key used for RC4 encoding,
+- specify what "init" refers to, especially since some configs enable
+  TPL,
+- specify what "init_boot_size" refers to, especially since some configs
+  enable TPL,
+- specify the size of a block,
+- add documentation for init_size and init_boot_size,
 
-extension_list being NULL mean that there is no support for board specific
-extension driver. Maybe we could have another error message for that case.
-"Extension not supported"
-=20
-> Or at least have a different error code between "scan wasn't run" and=20
-> "scan returned no extension", if that is a distinction we can make?
+Note that the offset on the storage medium isn't necessarily 32KiB (64
+blocks) for MMC or 0 for SPI flashes, it's just the first offset the
+BootROM checks. Barebox[1] lists a few options, though those are
+applicable to RK35xx which use the v2 header, so not guaranteed they can
+be shared. On RK3399, the binary can at least be stored at offset 0 and
+32KiB on SPI flashes.
 
-We could plug or unplug an extension. So it could change over time.
-I wrote it similarly to mmc rescan command.
+[1] https://git.pengutronix.de/cgit/barebox/tree/arch/arm/mach-rockchip/bbu.c#n19
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Changes in v2:
+- specify init stage is loaded into SRAM by BootROM,
+- specify boot stages are loaded into DRAM by BootROM,
+- reworded explanation of the "boot" stages to mention multiple stages
+  and possibly U-Boot proper, as well as the conditions for BootROM to
+  load those, suggestions from Jonas (thanks!),
+- Link to v1: https://patch.msgid.link/20251107-rkcommon-hdr-v1-1-6b456bb3dd93@cherry.de
+---
+ tools/rkcommon.c | 24 ++++++++++++++++++++----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
+
+diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+index d191ea72c63..e7e78ef7e5b 100644
+--- a/tools/rkcommon.c
++++ b/tools/rkcommon.c
+@@ -76,13 +76,29 @@ struct header0_info_v2 {
+ /**
+  * struct header0_info - header block for boot ROM
+  *
+- * This is stored at SD card block 64 (where each block is 512 bytes, or at
+- * the start of SPI flash. It is encoded with RC4.
++ * This is stored at MMC block 64 (where each block is 512 bytes), or at
++ * the start of SPI flash. It is encoded with RC4 with the below rc4_key.
++ *
++ * In Rockchip terminology:
++ *
++ * "init" means the stage that is loaded into SRAM. TPL if there is one, SPL
++ * otherwise.
++ *
++ * "boot" means the next stages after "init" stage that are loaded by the
++ * BootROM into DRAM. Only applicable if "init" stage returns to BootROM (via
++ * the appropriate ROCKCHIP_BACK_TO_BROM symbol, BOOT_DEVICE_BOOTROM is used as
++ * boot device for the next stage and the "init" stage successfully booted) and
++ * if "init_boot_size" > "init_size".
++ * Basically, it is the content of "init" plus the SPL or even U-Boot proper if
++ * relevant.
+  *
+  * @magic:		Magic (must be RK_MAGIC)
+  * @disable_rc4:	0 to use rc4 for boot image,  1 to use plain binary
+- * @init_offset:	Offset in blocks of the SPL code from this header
+- *			block. E.g. 4 means 2KB after the start of this header.
++ * @init_offset:	Offset in 512-byte blocks of the "init" code from the
++ *			start of this header. For instance, 4 means 2KiB.
++ * @init_size:		Size (in blocks) of the "init" code.
++ * @init_boot_size:	Size (in blocks) of the "init" and "boot" code combined.
++ *
+  * Other fields are not used by U-Boot
+  */
+ struct header0_info {
+
+---
+base-commit: fdf36c2e9ad4f770ee951398a86bd55404d9b7ec
+change-id: 20251107-rkcommon-hdr-99fef99b4b64
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
