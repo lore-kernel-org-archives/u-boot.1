@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F446CD3435
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:49:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0583BCD3435
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 17:49:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45AC883D3C;
+	by phobos.denx.de (Postfix) with ESMTP id 84B3783D5D;
 	Wed, 12 Nov 2025 18:48:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 286A883D03; Wed, 12 Nov 2025 18:48:46 +0100 (CET)
-Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::bc09])
+ id 858DE83D39; Wed, 12 Nov 2025 18:48:46 +0100 (CET)
+Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42af])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 999A483D03
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 18:48:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 91CC683CB5
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 18:48:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d69qv2hntz9L4;
- Wed, 12 Nov 2025 18:48:43 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d69qw2J9xz8bl;
+ Wed, 12 Nov 2025 18:48:44 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d69qt334HzqZc; Wed, 12 Nov 2025 18:48:42 +0100 (CET)
+ id 4d69qv2cCHztgx; Wed, 12 Nov 2025 18:48:43 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 12 Nov 2025 18:48:07 +0100
-Subject: [PATCH 02/11] doc: move legacy API documented in README.LED to
- doc/api/led.rst
+Date: Wed, 12 Nov 2025 18:48:08 +0100
+Subject: [PATCH 03/11] doc: cmd: document the led shell command
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251112-led-old-dt-v1-2-2892d49517db@cherry.de>
+Message-Id: <20251112-led-old-dt-v1-3-2892d49517db@cherry.de>
 References: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
 In-Reply-To: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
 To: Ziping Chen <techping.chan@gmail.com>, Simon Glass <sjg@chromium.org>, 
@@ -74,198 +73,114 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This moves the content of the legacy LED API from doc/READ.LED to
-doc/api/led.rst, applying minimal cosmetic changes to "nicely" integrate
-it with the current docs and adding a small introduction to the legacy
-API section.
+This adds documentation on how to use the led shell command.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- doc/README.LED  | 77 -------------------------------------------------
- doc/api/led.rst | 89 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 88 insertions(+), 78 deletions(-)
+ doc/usage/cmd/led.rst | 95 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 95 insertions(+)
 
-diff --git a/doc/README.LED b/doc/README.LED
-deleted file mode 100644
-index c21c9d53ec3..00000000000
---- a/doc/README.LED
-+++ /dev/null
-@@ -1,77 +0,0 @@
--Status LED
--========================================
--
--This README describes the status LED API.
--
--The API is defined by the include file include/status_led.h
--
--The first step is to enable CONFIG_LED_STATUS in menuconfig:
--> Device Drivers > LED Support.
--
--If the LED support is only for specific board, enable
--CONFIG_LED_STATUS_BOARD_SPECIFIC in the menuconfig.
--
--Status LEDS 0 to 5 are enabled by the following configurations at menuconfig:
--CONFIG_STATUS_LED0, CONFIG_STATUS_LED1, ... CONFIG_STATUS_LED5
--
--The following should be configured for each of the enabled LEDs:
--CONFIG_STATUS_LED_BIT<n>
--CONFIG_STATUS_LED_STATE<n>
--CONFIG_STATUS_LED_FREQ<n>
--Where <n> is an integer 1 through 5 (empty for 0).
--
--CONFIG_STATUS_LED_BIT is passed into the __led_* functions to identify which LED
--is being acted on. As such, the value choose must be unique with with respect to
--the other CONFIG_STATUS_LED_BIT's. Mapping the value to a physical LED is the
--reponsiblity of the __led_* function.
--
--CONFIG_STATUS_LED_STATE is the initial state of the LED. It should be set to one
--of these values: CONFIG_LED_STATUS_OFF or CONFIG_LED_STATUS_ON.
--
--CONFIG_STATUS_LED_FREQ determines the LED blink frequency.
--Values range from 2 to 10.
--
--Some other LED macros
-----------------------
--
--CONFIG_STATUS_LED_BOOT is the LED to light when the board is booting.
--This must be a valid LED number (0-5).
--
--CONFIG_STATUS_LED_RED is the red LED. It is used to signal errors. This must be
--a valid LED number (0-5). Other similar color LED's macros are
--CONFIG_STATUS_LED_GREEN, CONFIG_STATUS_LED_YELLOW and CONFIG_STATUS_LED_BLUE.
--
--General LED functions
-----------------------
--The following functions should be defined:
--
--__led_init is called once to initialize the LED to CONFIG_STATUS_LED_STATE.
--One time start up code should be placed here.
--
--__led_set is called to change the state of the LED.
--
--__led_toggle is called to toggle the current state of the LED.
--
--Colour LED
--========================================
--
--Colour LED's are at present only used by ARM.
--
--The functions names explain their purpose.
--
--coloured_LED_init
--red_LED_on
--red_LED_off
--green_LED_on
--green_LED_off
--yellow_LED_on
--yellow_LED_off
--blue_LED_on
--blue_LED_off
--
--These are weakly defined in arch/arm/lib/board.c to noops. Where applicable, define
--these functions in the board specific source.
--
--TBD : Describe older board dependent macros similar to what is done for
--
--TBD : Describe general support via asm/status_led.h
-diff --git a/doc/api/led.rst b/doc/api/led.rst
-index e52e350d1bb..661d1379620 100644
---- a/doc/api/led.rst
-+++ b/doc/api/led.rst
-@@ -7,4 +7,91 @@ LED
-    :doc: Overview
- 
- .. kernel-doc:: include/led.h
--   :internal:
-\ No newline at end of file
-+   :internal:
+diff --git a/doc/usage/cmd/led.rst b/doc/usage/cmd/led.rst
+new file mode 100644
+index 00000000000..b5623895c7e
+--- /dev/null
++++ b/doc/usage/cmd/led.rst
+@@ -0,0 +1,95 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
 +
-+Legacy LED
-+==========
++.. index::
++   single: led (command)
 +
-+Please use the new LED API as defined above. This section is only for reference
-+for currently supported devices and to aid for migration to the new API.
++led command
++===========
 +
-+Status LED
-+----------
++Synopsis
++--------
 +
-+This README describes the status LED API.
++::
 +
-+The API is defined by the include file include/status_led.h
++    led <led_label> <on|off|toggle>
++    led <led_label> blink <blink-freq in ms>
++    led <led_label>
++    led list
 +
-+The first step is to enable CONFIG_LED_STATUS in menuconfig::
++led <led_label>
++---------------
 +
-+   > Device Drivers > LED Support.
++Get state of the LED whose label is the one passed as ``<led_label>`` argument.
 +
-+If the LED support is only for specific board, enable
-+CONFIG_LED_STATUS_BOARD_SPECIFIC in the menuconfig.
++Provided ``<led_label>`` is *module_led*, the possible outputs for this command
++are::
 +
-+Status LEDS 0 to 5 are enabled by the following configurations at menuconfig:
-+CONFIG_STATUS_LED0, CONFIG_STATUS_LED1, ... CONFIG_STATUS_LED5
++    LED 'module_led': off
++    LED 'module_led': on
++    LED 'module_led': blink
 +
-+The following should be configured for each of the enabled LEDs:
++led <led_label> on|off|toggle
++-----------------------------
 +
-+- CONFIG_STATUS_LED_BIT<n>
-+- CONFIG_STATUS_LED_STATE<n>
-+- CONFIG_STATUS_LED_FREQ<n>
++Turn on, off or toggle state of the LED whose label is the one passed as
++``<led_label>`` argument.
 +
-+Where <n> is an integer 1 through 5 (empty for 0).
++led <led_label> blink <blink-freq in ms>
++----------------------------------------
 +
-+CONFIG_STATUS_LED_BIT is passed into the __led_* functions to identify which LED
-+is being acted on. As such, the value choose must be unique with with respect to
-+the other CONFIG_STATUS_LED_BIT's. Mapping the value to a physical LED is the
-+reponsiblity of the __led_* function.
++Make the LED whose label is the one passed as ``<led_label>`` argument blink at
++a frequency specified by the argument ``<blink-freq in ms>``.
 +
-+CONFIG_STATUS_LED_STATE is the initial state of the LED. It should be set to one
-+of these values: CONFIG_LED_STATUS_OFF or CONFIG_LED_STATUS_ON.
++The frequency is parsed as a decimal number and its unit is milliseconds. The
++duty cycle is 50%. Example::
 +
-+CONFIG_STATUS_LED_FREQ determines the LED blink frequency.
-+Values range from 2 to 10.
++    led blue blink 1000
 +
-+Some other LED macros
-+~~~~~~~~~~~~~~~~~~~~~
++will make the *blue*-labeled LED blink with a state (on or off) kept for 500ms
++before switching to the other state (respectively off or on) for 500ms,
++looping endlessly.
 +
-+CONFIG_STATUS_LED_BOOT is the LED to light when the board is booting.
-+This must be a valid LED number (0-5).
++led list
++--------
 +
-+CONFIG_STATUS_LED_RED is the red LED. It is used to signal errors. This must be
-+a valid LED number (0-5). Other similar color LED's macros are
-+CONFIG_STATUS_LED_GREEN, CONFIG_STATUS_LED_YELLOW and CONFIG_STATUS_LED_BLUE.
++List all available LEDs by their label and provide their known state, which can
++be either *off*, *on* or *blink*.
 +
-+General LED functions
-+~~~~~~~~~~~~~~~~~~~~~
-+The following functions should be defined:
++If a LED has not been probed yet, its state will be shown as *<inactive>* in the
++list.
 +
-+__led_init is called once to initialize the LED to CONFIG_STATUS_LED_STATE.
-+One time start up code should be placed here.
++Examples
++--------
 +
-+__led_set is called to change the state of the LED.
++::
 +
-+__led_toggle is called to toggle the current state of the LED.
++    => led list
++    module_led      on
++    sd_card_led     <inactive>
++    => led module_led
++    LED 'module_led': on
++    => led module_led off
++    => led module_led
++    LED 'module_led': off
++    => led module_led toggle
++    => led module_led
++    LED 'module_led': on
++    => led module_led toggle
++    => led module_led
++    LED 'module_led': off
++    => led module_led blink 1000
++    => led module_led
++    LED 'module_led': blink
++    => led sd_card_led
++    LED 'sd_card_led': off
++    => led list
++    module_led      blink
++    sd_card_led     off
 +
-+Colour LED
-+----------
++Configuration
++-------------
 +
-+Colour LED's are at present only used by ARM.
++The *led* commands are only available if ``CONFIG_CMD_LED=y``.
 +
-+The functions names explain their purpose.
-+
-+- coloured_LED_init
-+- red_LED_on
-+- red_LED_off
-+- green_LED_on
-+- green_LED_off
-+- yellow_LED_on
-+- yellow_LED_off
-+- blue_LED_on
-+- blue_LED_off
-+
-+These are weakly defined in arch/arm/lib/board.c to noops. Where applicable, define
-+these functions in the board specific source.
-+
-+TBD : Describe older board dependent macros similar to what is done for
-+
-+TBD : Describe general support via asm/status_led.h
++The *led <led_label> blink* command is only available if ``CONFIG_CMD_LED=y``
++and either ``CONFIG_LED_BLINK=y`` or ``CONFIG_LED_SW_BLINK=y``.
 
 -- 
 2.51.1
