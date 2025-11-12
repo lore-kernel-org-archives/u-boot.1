@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A33CCF9F8
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 12:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE0F0CCFA1A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 13:12:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CAB583C54;
-	Wed, 12 Nov 2025 13:47:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CCA0483C54;
+	Wed, 12 Nov 2025 14:12:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b98O1+G9";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="EnR5b+zM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DD0683C5A; Wed, 12 Nov 2025 13:47:01 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1406283C01; Wed, 12 Nov 2025 06:05:39 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5897883BDD
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 13:46:59 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-78802ac2296so8543667b3.3
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 04:46:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1762951618; x=1763556418; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LQqlvEoUxZ2HtvuMjtg9KQ/23f0QnS5L/eFk4Hpo0QU=;
- b=b98O1+G9wlpVVYGRqrMp+2mTSN515ABasJsZKpvjmrYuhe7ZSKD3oHHDVTbJQLbVw4
- QhyT0YHTCOaNePqCfqu5sKjb2tf30nVxdz0Jek43CILTY8nHlZPUTjthRoJePEY41nay
- 6FPWBBQVNFQ5Bgu0+V4LvN22oVvpA/BV5JB/rPt+fzQhG9XapbaZpdGlvUTZqT0L/7ZB
- PVTNQo0zWVMNUZUf1vKGghq84NVZgg+K1SStGSJwvZdExM1gXwNLKYC807MwK/1Hem4j
- kt4Vv389HYoegqF0WjdZaZn13RMF70x+uv0yuHQ9MppKe+rrFG0Ux/D95SpdgS6h3uxV
- TybQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762951618; x=1763556418;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=LQqlvEoUxZ2HtvuMjtg9KQ/23f0QnS5L/eFk4Hpo0QU=;
- b=O6fgV7O1NKwflqvco72HpJCLH2BWWx+pW0XP4g0QbYzTEPfmaB02D4EzvKwuINzjse
- i92aCkbCII5VR3ByUClIOIfJdUdJcfN979wsaa0Y7Z9TuBF5GiMphbYzdR6p3d6XVhSH
- 4jLl5V9JPkq09GSMRWsaH/HjqBb8SVr/G0IzHE8hor2KF303Y4jZRYvEvM897phLN3zG
- JvT+WzPJV1p2D7t3mD9uK93uD+OmJiNuFstMDW3CTyB3a0XEDan+fXJR38lIbXCc2tPV
- 4ulGG0dGp67VUYqGVFXqxIgl+n8Hf2R5VSvnd+NrxqGSVkjoOWq9Ty/bMMxIvy0tysGK
- 6lxg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUEiz1gIqE44Ns/2FBHjPTM1LFNJBuR1YtHL1wPNSkuC4Y84zmIMt+UaEyUmCGNn79ChaivLec=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvujyZjGNmxnUxGe64nujYtw3JQ2lJxKkE4iqF8nC7Slcq8JsA
- Tu25gAPTOJqvlxpgtQOC9LGuOVhoDwktq7V9dn6eO19/BEKLe+sZXFisLJ4bsEtamA2eSehgxuH
- gQm2tkoZaTqzGmswQ//jE4KdQZ00/ujJRBL61
-X-Gm-Gg: ASbGncs9siCSHf73V2/zCMf7TWD8DaaKx3UcdHA2CnKFc6dBF5OEFIfd8THyOsAjr1d
- a7CvB0vfWFx1KuG9TpX0KVPPhozrXLNDW80Wu7Gomh/JD1FJBJsqBS4dWRGXo0mINcaEZE4MzHI
- eZP/418epTsCIWEDWbmqjmtMsKokbvHZsrXjczOslRj3D33pmOV6AiVmw4/jUrxLxdVGhrqNO26
- A6gcayuZTFipeYnljGiJVRJySJnlBuhnONi75Mj0DQsm5UJHMvcD7rtSVv6
-X-Google-Smtp-Source: AGHT+IFbbpiDi8doVBBCrEmzBaTa2ETumRf+avKKsXcVOfNBn0OyfDBHWo+ZbXxAM3KOLZA399j4tFRJ4+dAtVsWCjk=
-X-Received: by 2002:a05:690c:a6da:b0:787:f545:c520 with SMTP id
- 00721157ae682-7881363a694mr18845397b3.30.1762951618130; Wed, 12 Nov 2025
- 04:46:58 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EBAA83AAD
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 06:05:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 13C1310A01C; Wed, 12 Nov 2025 06:05:25 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1762923935;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=ZC3i+jvRSMtgka5yxPRk4glGUwDccdPm3tkHV1XptP8=;
+ b=EnR5b+zMepTg/m9lAm+SjiZpxo6oGcYugkHnfXO5af3BZWpusOhi6i6qvEp607VjzWHfgs
+ dJYvhFV1IkhQK10xFxrUo5XPkjoEz5NWK0qw3vgVd+i3lS9YJrd7ErUHC1IgwLEzD28AVv
+ 2gNGKCWWk8AR7xDCYsF3IWd4nmHS3AMnyeKKFtwj3dPzT/qxeVdm3UhSKEz0tP8H2VMGcK
+ gwmt2dCZHGvrS/804c65Z5zjTX7sB47ZiqSuQLyb8GwnDyLRsNOr/z890qQdSfd4ztOdS5
+ brRgoIz7GpGI2X2h5cEwwYus+TQyxwJ0ELlJNgMm6x+iiwHeix2q8ns532FMqw==
+Message-ID: <fc3615dd-39a5-54f3-548a-472e13c14326@nabladev.com>
+Date: Wed, 12 Nov 2025 06:05:46 +0100
 MIME-Version: 1.0
-References: <20250911-fix_fit_zimage-v1-1-bd779ef56b22@gmail.com>
-In-Reply-To: <20250911-fix_fit_zimage-v1-1-bd779ef56b22@gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 12 Nov 2025 20:46:47 +0800
-X-Gm-Features: AWmQ_bmBPzwYgHjJKp_R1P8iTEOxwbWa41vYhAxjeO83e5b4PBVeHKWeK0TeygQ
-Message-ID: <CAEUhbmVJDegKW+aaewNS6UYrXYvB=u-Aj+2GyG6uMedNCjGKrg@mail.gmail.com>
-Subject: Re: [PATCH] x86: boot: fix unreachable else branch in boot_prep_linux
-To: Guillaume Ranquet <ranquet.guillaume@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 2/5] lib: implement sm3 256 hash
+Content-Language: en-US
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Greg Malysa <malysagreg@gmail.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Sean Edmond
+ <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Yao Zi <ziyao@disroot.org>, briansune <briansune@gmail.com>
+References: <20251111054813.1966-1-hs@nabladev.com>
+ <20251111054813.1966-3-hs@nabladev.com>
+ <CAC_iWj+6gXzHi85zsZ_ewpjAGMCHGTGPxuxTRXMNxhiXKW=4FA@mail.gmail.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <CAC_iWj+6gXzHi85zsZ_ewpjAGMCHGTGPxuxTRXMNxhiXKW=4FA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Wed, 12 Nov 2025 14:12:01 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,18 +96,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 11, 2025 at 9:35=E2=80=AFPM Guillaume Ranquet
-<ranquet.guillaume@gmail.com> wrote:
->
-> The else if branch uses the is_zimage boolean which is initialized to 0
-> and never set before being tested here.
->
-> remove the test on is_zimage to make this code reachable.
->
-> Signed-off-by: Guillaume Ranquet <ranquet.guillaume@gmail.com>
-> ---
->  arch/x86/lib/bootm.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+Hello Ilias,
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+On 11.11.25 10:47, Ilias Apalodimas wrote:
+> I think this would be easier to review/ack if you split the cmd
+> implementation from the actual hashing algo.
+
+Okay, I will split it in v3 into 2 patches.
+
+> 
+> [...]
+> 
+>> +void sm3_init(struct sm3_context *sctx)
+>> +{
+>> +       memset(sctx, 0, sizeof(struct sm3_context));
+> 
+> I usually prefer sizeof(*sctx), but up to you
+
+Hmm.. I have no preference here ... so I change it.
+
+>> +
+>> +       /* Load initial values */
+>> +       sctx->state[0] = SM3_IVA;
+>> +       sctx->state[1] = SM3_IVB;
+>> +       sctx->state[2] = SM3_IVC;
+>> +       sctx->state[3] = SM3_IVD;
+>> +       sctx->state[4] = SM3_IVE;
+>> +       sctx->state[5] = SM3_IVF;
+>> +       sctx->state[6] = SM3_IVG;
+>> +       sctx->state[7] = SM3_IVH;
+>> +       sctx->count = 0;
+>> +}
+>> +
+>> +static inline void sm3_block(struct sm3_context *sctx,
+>> +               u8 const *data, int blocks, u32 W[16])
+>> +{
+>> +       while (blocks--) {
+>> +               sm3_transform(sctx, data, W);
+>> +               data += SM3_BLOCK_SIZE;
+>> +       }
+>> +}
+>> +
+>> +void sm3_update(struct sm3_context *sctx, const uint8_t *input, size_t ilen)
+>> +{
+>> +       unsigned int partial = sctx->count % SM3_BLOCK_SIZE;
+>> +       u32 W[16];
+>> +
+>> +       sctx->count += ilen;
+>> +
+>> +       if ((partial + ilen) >= SM3_BLOCK_SIZE) {
+>> +               int blocks;
+>> +
+>> +               if (partial) {
+>> +                       int p = SM3_BLOCK_SIZE - partial;
+>> +
+>> +                       memcpy(sctx->buffer + partial, input, p);
+>> +                       input += p;
+>> +                       ilen -= p;
+>> +
+>> +                       sm3_block(sctx, sctx->buffer, 1, W);
+>> +               }
+>> +
+>> +               blocks = ilen / SM3_BLOCK_SIZE;
+>> +               ilen %= SM3_BLOCK_SIZE;
+>> +
+>> +               if (blocks) {
+>> +                       sm3_block(sctx, input, blocks, W);
+>> +                       input += blocks * SM3_BLOCK_SIZE;
+>> +               }
+>> +
+>> +               memset(W, 0, sizeof(W));
+>> +
+>> +               partial = 0;
+>> +       }
+>> +       if (ilen)
+>> +               memcpy(sctx->buffer + partial, input, ilen);
+>> +}
+>> +
+>> +void sm3_final(struct sm3_context *sctx, uint8_t output[SM3_DIGEST_SIZE])
+> 
+> I think it's more readable to just define this as output[]
+> [...]
+
+okay, I also change it in sm3_hash()
+
+> 
+>> +/**
+>> + * sm3_hash - Calculate SM3 hash of input data
+>> + * @input: Input data
+>> + * @ilen: Input data length in bytes
+>> + * @output: Output buffer for hash (32 bytes)
+>> + */
+>> +void sm3_hash(const uint8_t *input, size_t ilen, uint8_t output[SM3_DIGEST_SIZE])
+>> +{
+>> +       struct sm3_context sctx;
+>> +
+>> +       sm3_init(&sctx);
+>> +       sm3_update(&sctx, input, ilen);
+>> +       sm3_final(&sctx, output);
+> 
+> Ah ignore my comment on patch #4
+> init, update, final is wrapped in this function
+
+Yep, it saves in lib/tpm_tcg2.c tcg2_create_digest() another ifdef
+in the variable declaration part.
+
+bye,
+Heiko
+> 
+> [...]
+> 
+> Thanks
+> /Ilias
+> 
+
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
