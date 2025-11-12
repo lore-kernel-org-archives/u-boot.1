@@ -4,131 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1650CD13DD
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 16:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28C3CD3425
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 16:55:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80C0783CB9;
+	by phobos.denx.de (Postfix) with ESMTP id C1B6083CEE;
 	Wed, 12 Nov 2025 17:55:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Qzm7M3eE";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PlQsj+BN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FGabkFl2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56EED83CEB; Wed, 12 Nov 2025 17:55:19 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3EB8583959; Wed, 12 Nov 2025 17:55:20 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B85F583959
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 17:55:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2D2A883CD2
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 17:55:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5AC9hVLT907661
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 16:55:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=dwbmNOBiSNuidu2tAZ2oYkIkGkkEYCko8OL
- Gguj2JIc=; b=Qzm7M3eE8CJN5yI715N5w07jpKzDRj87KiC4ZQTJNdt14ISCxoZ
- 6aVq8qUaVp7AY6C2L/xDSpUHKnvQqcn5mqsNPPtR8X2Hk6fn4u30/uSkJgOjN1M/
- OJ3U5NclFNhGD4hZVTZcWsP5zhA5GMo1xH7i5cR7lwiAFncvQqkMF1m+0o/TsYlB
- M9+Qxrx0Tm/FokpXXVBw6xizReeKc3cJtQfAozw7HCLQN/GhOAHbtBgu/8B+bjfa
- VGogSCzkoG6cijiu9fA1oqiOP3uAhE6f/DUewKYGcx640Og7gtNhUP8xoMl+xgD3
- lJBwojgnnnb9a5BQNpDZbGBuL0ZZcxZyYUQ==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4acqur99ku-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 16:55:15 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-340c261fb38so2136209a91.0
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 08:55:14 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c707e11e01so920491a34.0
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 08:55:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1762966514; x=1763571314; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=dwbmNOBiSNuidu2tAZ2oYkIkGkkEYCko8OLGguj2JIc=;
- b=PlQsj+BNBZDWahizfDcVCCg9ZZ73gJXuJDGx0wCFyA+luuUDnmONiKR6hknHVnEYxZ
- w3r3znE323VeqUdPiraocOQINrusthWV804UBNrH87y/42LYdLadJq9/slgTPR/dp8EL
- g1ayU6o0amnm/DK0q1s/Z8EGOSTP63RJVy/mfvl6G0RlQBkVQL+pFzckXcvfXEQ7dntU
- 0BJB20fzkSfzEP1d1E0jL4I1skZuMtNxEM4DAX5yO19ybdkEUu1wNPdQo8glkwuiTN26
- BvITw0UOhh9hTgjRtT0v/qmM+oeui1zoVkjr24CsAi1ntaCmOySi9gVfrUC2ngAxKtfR
- JEhw==
+ d=gmail.com; s=20230601; t=1762966517; x=1763571317; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=iJlc0PJ1moKgqOm6UKgHy/d9sfcANwxOtYNpMmxdq/0=;
+ b=FGabkFl2PJoI/8tISdLpYnmGo/FL+4cUWkE1I21SZ0Ueb0cu6dP5vIKx04Pz1shuJX
+ LGrTAHklv0uKdkLzxv/Pg/SDWamOWx5s4P64rIWXECfuNwzNhaDQQjqlIdFMhH1izIsS
+ Zkm9ekixNIC8AwJRjD8vH02BqwOXwAOwTH8+R6Llpy0zlpk1UO/QDs7/9B2oItgCFEaQ
+ SZZx+GXZVqSuMrYHk8jp+icjIK7h5GeNJbnCwRSgD6V9OSRS0uTntexN1JlCIfCA/Kae
+ yoWQN3QjOiBRF0XkOVJD13nF83T8lCnRJw3Svrqse+kg+Be3zsc5x6zHM6hVWHYcIVGC
+ YlVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762966514; x=1763571314;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dwbmNOBiSNuidu2tAZ2oYkIkGkkEYCko8OLGguj2JIc=;
- b=J82zvWnydeH6wWzKZ9ho1JVmYqi76MJZHGvodHQeJY32fV6N8FE6sLBqQOWde1pKbm
- iNB/W4XPyWVFW4Wsm9MNf079EsQN9y1QW4kVSad65poKQXggtOwUP2pQnF7qLaYh56nM
- doPijY/5+hTq16xpMOQq/dawQw+6ib/IwYcJaUwf50HxszwZEkRhFZgjbcyB5G5tBqBN
- XmSUHkSuoWD5w3AAcrPkGd9x5FYjWE4Q2snIyHqXLtBxMBUsEVqR/sqxzDe8/GjsmJy8
- ZC/aGUrYjqlEj7+wNkNZPw//XJKpEhu9Q0Ds38L7D2EDfKh9TWFeIYbYGP+ZmiFLtjW4
- r/Fg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW+Erv1sf1vkapiEZ8a2gq2bzxjDcNm9T3Aylcx/DC9izVSCp+X5TehTWQnAOowL+tD1ciF4Oc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwOdwTbIpCmfpzbPjRYTXOU+GJcD1ffVZGP88zteu1I+4BZ7Hvh
- t9Iq8XlbpvC9h6FGC4cHstv3gcYZic60gf0h1nrz3hiwTi9eghl7U5dTwKRvbOxUFj80QaAQ+Fq
- ii0bJqn64+dvfq8Q03dHuYc424qA1rFzfaW0DS7tM6seQ8uhyeh/n8wh7
-X-Gm-Gg: ASbGncuburO+j5HyRl0LdnlanrPrFOI+HzvOQH0r+KIyLgm6BS2/QAPbx2e0XLTQq9B
- V8HIVDXm2Z1l+98Om+TOK5ZTPNMEnFJxWBvO/af5euc+KvnvqekPjbXmz7ctiFG8DFxCm8HGIDR
- YU77XY3hrQ+avMxG61OBtPwVOJf+15rxfukLEM1blenIwPJ21kcZ50UK3ZNKSjyGkYDe7Kz8cHA
- uTMhNieFIE1V22LC5tn/UjHixvUdlr8/aF6tYEhk6MV/HVjOWOpaI3kuz4D1vyv36t51wz4tgpt
- CA+DxINDtuaPRx8k04KChdpZ3NT6qQ0XkfG6s49nSNDJh9Zo9zYWFzXjeEpYaZU/591HgMIRUle
- 5SMndbzdUqbSjhmSBBVNP4GavtFkt356c+EYkauSOVc1eEp3tHo6Glur/0SqlBhZawgn+dN0luY
- ZwO3EgkZ+CXQRz/PqgxQ==
-X-Received: by 2002:a17:90b:3a45:b0:33b:ba50:fccc with SMTP id
- 98e67ed59e1d1-343dde6f153mr4560998a91.18.1762966513754; 
- Wed, 12 Nov 2025 08:55:13 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGpW0Iobfak1Rn6XNw1YtZWOL66nBt5AoFq0TCgGRjhcIujY82eajW5WiZUnkbH3bkIxz6F7g==
-X-Received: by 2002:a17:90b:3a45:b0:33b:ba50:fccc with SMTP id
- 98e67ed59e1d1-343dde6f153mr4560941a91.18.1762966513076; 
- Wed, 12 Nov 2025 08:55:13 -0800 (PST)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-343ea714016sm67024a91.2.2025.11.12.08.55.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Nov 2025 08:55:12 -0800 (PST)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com,
- aswin.murugan@oss.qualcomm.com, luca.weiss@fairphone.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v1] pinctrl: qcom: Add pingroup definitions for SC7280
-Date: Wed, 12 Nov 2025 22:24:59 +0530
-Message-Id: <20251112165459.1560966-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1762966517; x=1763571317;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iJlc0PJ1moKgqOm6UKgHy/d9sfcANwxOtYNpMmxdq/0=;
+ b=wtHp7SrckVmIEr0mvNqVc+Soqa+IaT3QbfVavFul7GNPVVX0yByY0JopWgAPWN7Tnz
+ uUL9+S/fFSROIVa3Tjd7rZAfxNntZm/3ZPBVtY79EMqzYq91g48Z2mTdMXhgVE90aE51
+ AFV7nBxd4UfD+63lSvxE+Trp9FZHRlkoVveS4f7BBu2h6UQKfOT9AfLBkzZZxWp2ug3w
+ QfTbZbUK6e7VWgPhGYCHCi0f69e1FbZvgTZSzMEKB5L1Yd9Jw2NjEAVt5iKSLakDKwg+
+ QOQa+bpmPBIpFznn90g82IYGq5WWwZsnaQeuD8yje1zts/i2u4fMjuFsozQt3lLg2wrn
+ BwZg==
+X-Gm-Message-State: AOJu0Yxfe4c6RAdu7EnX+AHKBMphLcRxDzxTABojpc8rNxrT8WzprKmT
+ F5WoJWcvhENQJO+laZQ9OwIquFfIv1AXMauGSUUrmBzAxduP5QqfSdgZpImaqB9jpwZbKeUqqwd
+ hHtH5pobpEoMd4JPViNqY08I2p4JxUBnXfg==
+X-Gm-Gg: ASbGncu2y9fbpAttIE0yL1KJxEggI3Mf56YwTZh5wOxFTSaqcs2Io1nPwPQhGCOfVgE
+ thm5dsdj0W9EpCy0SuU/CRdg7pgiAXPIpR1JsTYOQu1mMCyCUOGhjXpjdMtitnzh3yuZ1ik+tFs
+ jpxyp4aQOWa7CilG11eOHwkw7mjswst+/sQ7Cgs3Zahv6V4rGbBiBfEItG2Kp1OyBkTXx4u3i1o
+ IIWqrhJLktTITPsb2po/ek8KWHmQ3Km08s/mUUBEZ992Fm3NpQ+/q6po4XChw==
+X-Google-Smtp-Source: AGHT+IFS4e65GwHGEMMOh/HDrM8jii0yKTC0GS1BgOKcVKfEffQEGzL3xQ4kTR/1UpyPTfbxuRb4vxM2m8QEdG8ZhkQ=
+X-Received: by 2002:a05:6830:718c:b0:78d:a443:8c93 with SMTP id
+ 46e09a7af769-7c72e2616d8mr2087434a34.6.1762966516900; Wed, 12 Nov 2025
+ 08:55:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEyMDEzNiBTYWx0ZWRfX1uy0Wqxvjhvb
- Y9fwsCz8Ong1+6s7BGxaR5DC7Bwh41n2TcdpqFc92/B0jUjOS8t2//FOtH1Gx/Nm7tep4/T2GJx
- tdz4DptaG5BEQOzLMhqPY/XqoKa4sYK9480n/cd+gnHIWAkh50FatCN8igBIsKPLQsSv2i34E8N
- bVSZyrcNHRnJfAOEIbD/IFyOb/xBNDwNiFQa25tyP8TcmncqqQ3Ui03rxQkn+FX1AYe4uZjRmqR
- r/Vv/aFzM7DrakgkRYmcnZVjgK+L6xSXors03gphhjtPaLW+HpfvCf0YROVkH1SVTGpZluFJ5V1
- X3Fh9gZVWdfIzXBvaDTMOD3o8jLuFDjfkErHs0dmZchGZJpwtELBBXekIkHjgt3caSPCNUcMa+f
- 2WWVmS1fXLPORdz2kuScC6ZVI08mWg==
-X-Proofpoint-GUID: 2_p7JnZZ9nixVD-ksDqyw6ItjyFdA87A
-X-Authority-Analysis: v=2.4 cv=bbBmkePB c=1 sm=1 tr=0 ts=6914bbf3 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=EUspDBNiAAAA:8 a=zKN7Sk3A5U3brr7tjBMA:9 a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-ORIG-GUID: 2_p7JnZZ9nixVD-ksDqyw6ItjyFdA87A
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-12_05,2025-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0
- priorityscore=1501 malwarescore=0 phishscore=0 spamscore=0 clxscore=1015
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
- definitions=main-2511120136
+References: <20251110050040.183-1-briansune@gmail.com>
+ <CAN7C2SDGh+PZaP2DNOhn3=D9Stw680-7k=Tus_+2r9UQYoAOyQ@mail.gmail.com>
+ <20251112164118.GB6688@bill-the-cat>
+In-Reply-To: <20251112164118.GB6688@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Thu, 13 Nov 2025 00:55:04 +0800
+X-Gm-Features: AWmQ_bnSCbXhnMN90DrunT6zIqYsPAMCmO0snz6ElhbnPHJol7vkMpe2uSdDwzI
+Message-ID: <CAN7C2SB25LPkVWMKYFS=DURg2GkarHqo=n0ogOJVn4Ra0+CnAQ@mail.gmail.com>
+Subject: Re: [PATCH v1] sync socfpga common u-boot dts
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,561 +92,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added pingrp support to sc7280 pinctrl driver based on the
-similar U-Boot and Linux drivers.
+> > Do TIENFONG still handles patches on SoCFPGA? Seems like there are
+> > no action or response on all SoCFPGA related patches?
+>
+> Yes, he's Tien Fong is still active, it's just that most subsystems are
+> fairly slow moving.
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
- drivers/pinctrl/qcom/pinctrl-sc7280.c | 522 +++++++++++++++++++++++++-
- 1 file changed, 516 insertions(+), 6 deletions(-)
+For patches that really affect normal boot should push back
+to mainstream. Those patches really fixes the boot and w/o it
+system completely stall.
+For those that are more less critical can be handle in slower pace.
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-sc7280.c b/drivers/pinctrl/qcom/pinctrl-sc7280.c
-index d62b2cc6fb6..d0242fc1c17 100644
---- a/drivers/pinctrl/qcom/pinctrl-sc7280.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sc7280.c
-@@ -13,11 +13,22 @@
- #define MAX_PIN_NAME_LEN 32
- static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
- 
--static const struct pinctrl_function msm_pinctrl_functions[] = {
--	{ "qup05", 1 },
--	{ "gpio", 0 },
--	{ "pcie1_clkreqn", 3},
--};
-+typedef unsigned int msm_pin_function[10];
-+
-+#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9)\
-+	{					        \
-+		msm_mux_gpio, /* gpio mode */		\
-+		msm_mux_##f1,				\
-+		msm_mux_##f2,				\
-+		msm_mux_##f3,				\
-+		msm_mux_##f4,				\
-+		msm_mux_##f5,				\
-+		msm_mux_##f6,				\
-+		msm_mux_##f7,				\
-+		msm_mux_##f8,				\
-+		msm_mux_##f9				\
-+	}
-+
- #define SDC_PINGROUP(pg_name, ctl, pull, drv)		\
- 	{						\
- 		.name = pg_name,			\
-@@ -42,6 +53,492 @@ static const struct pinctrl_function msm_pinctrl_functions[] = {
- 		.out_bit = 0,				\
- 	}
- 
-+enum sc7280_functions {
-+	msm_mux_atest_char,
-+	msm_mux_atest_char0,
-+	msm_mux_atest_char1,
-+	msm_mux_atest_char2,
-+	msm_mux_atest_char3,
-+	msm_mux_atest_usb0,
-+	msm_mux_atest_usb00,
-+	msm_mux_atest_usb01,
-+	msm_mux_atest_usb02,
-+	msm_mux_atest_usb03,
-+	msm_mux_atest_usb1,
-+	msm_mux_atest_usb10,
-+	msm_mux_atest_usb11,
-+	msm_mux_atest_usb12,
-+	msm_mux_atest_usb13,
-+	msm_mux_audio_ref,
-+	msm_mux_cam_mclk,
-+	msm_mux_cci_async,
-+	msm_mux_cci_i2c,
-+	msm_mux_cci_timer0,
-+	msm_mux_cci_timer1,
-+	msm_mux_cci_timer2,
-+	msm_mux_cci_timer3,
-+	msm_mux_cci_timer4,
-+	msm_mux_cmu_rng0,
-+	msm_mux_cmu_rng1,
-+	msm_mux_cmu_rng2,
-+	msm_mux_cmu_rng3,
-+	msm_mux_coex_uart1,
-+	msm_mux_cri_trng,
-+	msm_mux_cri_trng0,
-+	msm_mux_cri_trng1,
-+	msm_mux_dbg_out,
-+	msm_mux_ddr_bist,
-+	msm_mux_ddr_pxi0,
-+	msm_mux_ddr_pxi1,
-+	msm_mux_dp_hot,
-+	msm_mux_dp_lcd,
-+	msm_mux_edp_hot,
-+	msm_mux_edp_lcd,
-+	msm_mux_egpio,
-+	msm_mux_gcc_gp1,
-+	msm_mux_gcc_gp2,
-+	msm_mux_gcc_gp3,
-+	msm_mux_gpio,
-+	msm_mux_host2wlan_sol,
-+	msm_mux_ibi_i3c,
-+	msm_mux_jitter_bist,
-+	msm_mux_lpass_slimbus,
-+	msm_mux_mdp_vsync,
-+	msm_mux_mdp_vsync0,
-+	msm_mux_mdp_vsync1,
-+	msm_mux_mdp_vsync2,
-+	msm_mux_mdp_vsync3,
-+	msm_mux_mdp_vsync4,
-+	msm_mux_mdp_vsync5,
-+	msm_mux_mi2s0_data0,
-+	msm_mux_mi2s0_data1,
-+	msm_mux_mi2s0_sck,
-+	msm_mux_mi2s0_ws,
-+	msm_mux_mi2s1_data0,
-+	msm_mux_mi2s1_data1,
-+	msm_mux_mi2s1_sck,
-+	msm_mux_mi2s1_ws,
-+	msm_mux_mi2s2_data0,
-+	msm_mux_mi2s2_data1,
-+	msm_mux_mi2s2_sck,
-+	msm_mux_mi2s2_ws,
-+	msm_mux_mss_grfc0,
-+	msm_mux_mss_grfc1,
-+	msm_mux_mss_grfc10,
-+	msm_mux_mss_grfc11,
-+	msm_mux_mss_grfc12,
-+	msm_mux_mss_grfc2,
-+	msm_mux_mss_grfc3,
-+	msm_mux_mss_grfc4,
-+	msm_mux_mss_grfc5,
-+	msm_mux_mss_grfc6,
-+	msm_mux_mss_grfc7,
-+	msm_mux_mss_grfc8,
-+	msm_mux_mss_grfc9,
-+	msm_mux_nav_gpio0,
-+	msm_mux_nav_gpio1,
-+	msm_mux_nav_gpio2,
-+	msm_mux_pa_indicator,
-+	msm_mux_pcie0_clkreqn,
-+	msm_mux_pcie1_clkreqn,
-+	msm_mux_phase_flag,
-+	msm_mux_pll_bist,
-+	msm_mux_pll_bypassnl,
-+	msm_mux_pll_clk,
-+	msm_mux_pll_reset,
-+	msm_mux_pri_mi2s,
-+	msm_mux_prng_rosc,
-+	msm_mux_qdss,
-+	msm_mux_qdss_cti,
-+	msm_mux_qlink0_enable,
-+	msm_mux_qlink0_request,
-+	msm_mux_qlink0_wmss,
-+	msm_mux_qlink1_enable,
-+	msm_mux_qlink1_request,
-+	msm_mux_qlink1_wmss,
-+	msm_mux_qspi_clk,
-+	msm_mux_qspi_cs,
-+	msm_mux_qspi_data,
-+	msm_mux_qup00,
-+	msm_mux_qup01,
-+	msm_mux_qup02,
-+	msm_mux_qup03,
-+	msm_mux_qup04,
-+	msm_mux_qup05,
-+	msm_mux_qup06,
-+	msm_mux_qup07,
-+	msm_mux_qup10,
-+	msm_mux_qup11,
-+	msm_mux_qup12,
-+	msm_mux_qup13,
-+	msm_mux_qup14,
-+	msm_mux_qup15,
-+	msm_mux_qup16,
-+	msm_mux_qup17,
-+	msm_mux_sd_write,
-+	msm_mux_sdc40,
-+	msm_mux_sdc41,
-+	msm_mux_sdc42,
-+	msm_mux_sdc43,
-+	msm_mux_sdc4_clk,
-+	msm_mux_sdc4_cmd,
-+	msm_mux_sec_mi2s,
-+	msm_mux_tb_trig,
-+	msm_mux_tgu_ch0,
-+	msm_mux_tgu_ch1,
-+	msm_mux_tsense_pwm1,
-+	msm_mux_tsense_pwm2,
-+	msm_mux_uim0_clk,
-+	msm_mux_uim0_data,
-+	msm_mux_uim0_present,
-+	msm_mux_uim0_reset,
-+	msm_mux_uim1_clk,
-+	msm_mux_uim1_data,
-+	msm_mux_uim1_present,
-+	msm_mux_uim1_reset,
-+	msm_mux_usb2phy_ac,
-+	msm_mux_usb_phy,
-+	msm_mux_vfr_0,
-+	msm_mux_vfr_1,
-+	msm_mux_vsense_trigger,
-+	msm_mux__,
-+};
-+
-+#define MSM_PIN_FUNCTION(fname)                         \
-+	[msm_mux_##fname] = {#fname, msm_mux_##fname}
-+
-+static const struct pinctrl_function msm_pinctrl_functions[] = {
-+	MSM_PIN_FUNCTION(atest_char),
-+	MSM_PIN_FUNCTION(atest_char0),
-+	MSM_PIN_FUNCTION(atest_char1),
-+	MSM_PIN_FUNCTION(atest_char2),
-+	MSM_PIN_FUNCTION(atest_char3),
-+	MSM_PIN_FUNCTION(atest_usb0),
-+	MSM_PIN_FUNCTION(atest_usb00),
-+	MSM_PIN_FUNCTION(atest_usb01),
-+	MSM_PIN_FUNCTION(atest_usb02),
-+	MSM_PIN_FUNCTION(atest_usb03),
-+	MSM_PIN_FUNCTION(atest_usb1),
-+	MSM_PIN_FUNCTION(atest_usb10),
-+	MSM_PIN_FUNCTION(atest_usb11),
-+	MSM_PIN_FUNCTION(atest_usb12),
-+	MSM_PIN_FUNCTION(atest_usb13),
-+	MSM_PIN_FUNCTION(audio_ref),
-+	MSM_PIN_FUNCTION(cam_mclk),
-+	MSM_PIN_FUNCTION(cci_async),
-+	MSM_PIN_FUNCTION(cci_i2c),
-+	MSM_PIN_FUNCTION(cci_timer0),
-+	MSM_PIN_FUNCTION(cci_timer1),
-+	MSM_PIN_FUNCTION(cci_timer2),
-+	MSM_PIN_FUNCTION(cci_timer3),
-+	MSM_PIN_FUNCTION(cci_timer4),
-+	MSM_PIN_FUNCTION(cmu_rng0),
-+	MSM_PIN_FUNCTION(cmu_rng1),
-+	MSM_PIN_FUNCTION(cmu_rng2),
-+	MSM_PIN_FUNCTION(cmu_rng3),
-+	MSM_PIN_FUNCTION(coex_uart1),
-+	MSM_PIN_FUNCTION(cri_trng),
-+	MSM_PIN_FUNCTION(cri_trng0),
-+	MSM_PIN_FUNCTION(cri_trng1),
-+	MSM_PIN_FUNCTION(dbg_out),
-+	MSM_PIN_FUNCTION(ddr_bist),
-+	MSM_PIN_FUNCTION(ddr_pxi0),
-+	MSM_PIN_FUNCTION(ddr_pxi1),
-+	MSM_PIN_FUNCTION(dp_hot),
-+	MSM_PIN_FUNCTION(dp_lcd),
-+	MSM_PIN_FUNCTION(edp_hot),
-+	MSM_PIN_FUNCTION(edp_lcd),
-+	MSM_PIN_FUNCTION(egpio),
-+	MSM_PIN_FUNCTION(gcc_gp1),
-+	MSM_PIN_FUNCTION(gcc_gp2),
-+	MSM_PIN_FUNCTION(gcc_gp3),
-+	MSM_PIN_FUNCTION(gpio),
-+	MSM_PIN_FUNCTION(host2wlan_sol),
-+	MSM_PIN_FUNCTION(ibi_i3c),
-+	MSM_PIN_FUNCTION(jitter_bist),
-+	MSM_PIN_FUNCTION(lpass_slimbus),
-+	MSM_PIN_FUNCTION(mdp_vsync),
-+	MSM_PIN_FUNCTION(mdp_vsync0),
-+	MSM_PIN_FUNCTION(mdp_vsync1),
-+	MSM_PIN_FUNCTION(mdp_vsync2),
-+	MSM_PIN_FUNCTION(mdp_vsync3),
-+	MSM_PIN_FUNCTION(mdp_vsync4),
-+	MSM_PIN_FUNCTION(mdp_vsync5),
-+	MSM_PIN_FUNCTION(mi2s0_data0),
-+	MSM_PIN_FUNCTION(mi2s0_data1),
-+	MSM_PIN_FUNCTION(mi2s0_sck),
-+	MSM_PIN_FUNCTION(mi2s0_ws),
-+	MSM_PIN_FUNCTION(mi2s1_data0),
-+	MSM_PIN_FUNCTION(mi2s1_data1),
-+	MSM_PIN_FUNCTION(mi2s1_sck),
-+	MSM_PIN_FUNCTION(mi2s1_ws),
-+	MSM_PIN_FUNCTION(mi2s2_data0),
-+	MSM_PIN_FUNCTION(mi2s2_data1),
-+	MSM_PIN_FUNCTION(mi2s2_sck),
-+	MSM_PIN_FUNCTION(mi2s2_ws),
-+	MSM_PIN_FUNCTION(mss_grfc0),
-+	MSM_PIN_FUNCTION(mss_grfc1),
-+	MSM_PIN_FUNCTION(mss_grfc10),
-+	MSM_PIN_FUNCTION(mss_grfc11),
-+	MSM_PIN_FUNCTION(mss_grfc12),
-+	MSM_PIN_FUNCTION(mss_grfc2),
-+	MSM_PIN_FUNCTION(mss_grfc3),
-+	MSM_PIN_FUNCTION(mss_grfc4),
-+	MSM_PIN_FUNCTION(mss_grfc5),
-+	MSM_PIN_FUNCTION(mss_grfc6),
-+	MSM_PIN_FUNCTION(mss_grfc7),
-+	MSM_PIN_FUNCTION(mss_grfc8),
-+	MSM_PIN_FUNCTION(mss_grfc9),
-+	MSM_PIN_FUNCTION(nav_gpio0),
-+	MSM_PIN_FUNCTION(nav_gpio1),
-+	MSM_PIN_FUNCTION(nav_gpio2),
-+	MSM_PIN_FUNCTION(pa_indicator),
-+	MSM_PIN_FUNCTION(pcie0_clkreqn),
-+	MSM_PIN_FUNCTION(pcie1_clkreqn),
-+	MSM_PIN_FUNCTION(phase_flag),
-+	MSM_PIN_FUNCTION(pll_bist),
-+	MSM_PIN_FUNCTION(pll_bypassnl),
-+	MSM_PIN_FUNCTION(pll_clk),
-+	MSM_PIN_FUNCTION(pll_reset),
-+	MSM_PIN_FUNCTION(pri_mi2s),
-+	MSM_PIN_FUNCTION(prng_rosc),
-+	MSM_PIN_FUNCTION(qdss),
-+	MSM_PIN_FUNCTION(qdss_cti),
-+	MSM_PIN_FUNCTION(qlink0_enable),
-+	MSM_PIN_FUNCTION(qlink0_request),
-+	MSM_PIN_FUNCTION(qlink0_wmss),
-+	MSM_PIN_FUNCTION(qlink1_enable),
-+	MSM_PIN_FUNCTION(qlink1_request),
-+	MSM_PIN_FUNCTION(qlink1_wmss),
-+	MSM_PIN_FUNCTION(qspi_clk),
-+	MSM_PIN_FUNCTION(qspi_cs),
-+	MSM_PIN_FUNCTION(qspi_data),
-+	MSM_PIN_FUNCTION(qup00),
-+	MSM_PIN_FUNCTION(qup01),
-+	MSM_PIN_FUNCTION(qup02),
-+	MSM_PIN_FUNCTION(qup03),
-+	MSM_PIN_FUNCTION(qup04),
-+	MSM_PIN_FUNCTION(qup05),
-+	MSM_PIN_FUNCTION(qup06),
-+	MSM_PIN_FUNCTION(qup07),
-+	MSM_PIN_FUNCTION(qup10),
-+	MSM_PIN_FUNCTION(qup11),
-+	MSM_PIN_FUNCTION(qup12),
-+	MSM_PIN_FUNCTION(qup13),
-+	MSM_PIN_FUNCTION(qup14),
-+	MSM_PIN_FUNCTION(qup15),
-+	MSM_PIN_FUNCTION(qup16),
-+	MSM_PIN_FUNCTION(qup17),
-+	MSM_PIN_FUNCTION(sd_write),
-+	MSM_PIN_FUNCTION(sdc40),
-+	MSM_PIN_FUNCTION(sdc41),
-+	MSM_PIN_FUNCTION(sdc42),
-+	MSM_PIN_FUNCTION(sdc43),
-+	MSM_PIN_FUNCTION(sdc4_clk),
-+	MSM_PIN_FUNCTION(sdc4_cmd),
-+	MSM_PIN_FUNCTION(sec_mi2s),
-+	MSM_PIN_FUNCTION(tb_trig),
-+	MSM_PIN_FUNCTION(tgu_ch0),
-+	MSM_PIN_FUNCTION(tgu_ch1),
-+	MSM_PIN_FUNCTION(tsense_pwm1),
-+	MSM_PIN_FUNCTION(tsense_pwm2),
-+	MSM_PIN_FUNCTION(uim0_clk),
-+	MSM_PIN_FUNCTION(uim0_data),
-+	MSM_PIN_FUNCTION(uim0_present),
-+	MSM_PIN_FUNCTION(uim0_reset),
-+	MSM_PIN_FUNCTION(uim1_clk),
-+	MSM_PIN_FUNCTION(uim1_data),
-+	MSM_PIN_FUNCTION(uim1_present),
-+	MSM_PIN_FUNCTION(uim1_reset),
-+	MSM_PIN_FUNCTION(usb2phy_ac),
-+	MSM_PIN_FUNCTION(usb_phy),
-+	MSM_PIN_FUNCTION(vfr_0),
-+	MSM_PIN_FUNCTION(vfr_1),
-+	MSM_PIN_FUNCTION(vsense_trigger),
-+};
-+
-+static const msm_pin_function sc7280_pin_functions[] = {
-+	[0] = PINGROUP(0, qup00, ibi_i3c, _, _, _, _, _, _, _),
-+	[1] = PINGROUP(1, qup00, ibi_i3c, _, _, _, _, _, _, _),
-+	[2] = PINGROUP(2, qup00, qup07, _, qdss, _, _, _, _, _),
-+	[3] = PINGROUP(3, qup00, qup07, _, qdss, _, _, _, _, _),
-+	[4] = PINGROUP(4, qup01, ibi_i3c, _, _, _, _, _, _, _),
-+	[5] = PINGROUP(5, qup01, ibi_i3c, _, _, _, _, _, _, _),
-+	[6] = PINGROUP(6, qup01, qup07, _, _, _, _, _, _, _),
-+	[7] = PINGROUP(7, qup01, _, _, _, _, _, _, _, _),
-+	[8] = PINGROUP(8, qup02, _, qdss, _, _, _, _, _, _),
-+	[9] = PINGROUP(9, qup02, _, qdss, _, _, _, _, _, _),
-+	[10] = PINGROUP(10, qup02, _, qdss, _, _, _, _, _, _),
-+	[11] = PINGROUP(11, qup02, _, qdss, _, _, _, _, _, _),
-+	[12] = PINGROUP(12, qup03, qspi_data, sdc40, tb_trig, phase_flag, qdss, ddr_pxi1, _, _),
-+	[13] = PINGROUP(13, qup03, qspi_data, sdc41, tb_trig, phase_flag, qdss, ddr_pxi1, _, _),
-+	[14] = PINGROUP(14, qup03, qspi_clk, sdc4_clk, mdp_vsync, phase_flag, ddr_pxi0, _, _, _),
-+	[15] = PINGROUP(15, qup03, qspi_cs, tb_trig, phase_flag, qdss_cti, ddr_pxi0, _, _, _),
-+	[16] = PINGROUP(16, qup04, qspi_data, sdc42, mdp_vsync, phase_flag, qdss_cti, _, _, _),
-+	[17] = PINGROUP(17, qup04, qspi_data, sdc43, _, phase_flag, _, _, _, _),
-+	[18] = PINGROUP(18, qup04, _, phase_flag, qdss_cti, _, _, _, _, _),
-+	[19] = PINGROUP(19, qup04, qspi_cs, sdc4_cmd, _, phase_flag, qdss_cti, _, _, _),
-+	[20] = PINGROUP(20, qup05, cci_timer0, _, qdss, _, _, _, _, _),
-+	[21] = PINGROUP(21, qup05, cci_timer1, _, qdss, _, _, _, _, _),
-+	[22] = PINGROUP(22, qup05, _, qdss, _, _, _, _, _, _),
-+	[23] = PINGROUP(23, qup05, _, qdss, _, _, _, _, _, _),
-+	[24] = PINGROUP(24, qup06, _, qdss, _, _, _, _, _, _),
-+	[25] = PINGROUP(25, qup06, _, qdss, _, _, _, _, _, _),
-+	[26] = PINGROUP(26, qup06, host2wlan_sol, _, qdss, _, _, _, _, _),
-+	[27] = PINGROUP(27, qup06, _, qdss, _, _, _, _, _, _),
-+	[28] = PINGROUP(28, qup07, _, qdss, _, _, _, _, _, _),
-+	[29] = PINGROUP(29, qup07, qdss, _, _, _, _, _, _, _),
-+	[30] = PINGROUP(30, qup07, _, _, _, _, _, _, _, _),
-+	[31] = PINGROUP(31, qup07, _, _, _, _, _, _, _, _),
-+	[32] = PINGROUP(32, qup10, _, _, _, _, _, _, _, _),
-+	[33] = PINGROUP(33, qup10, _, _, _, _, _, _, _, _),
-+	[34] = PINGROUP(34, qup10, _, _, _, _, _, _, _, _),
-+	[35] = PINGROUP(35, qup10, _, _, _, _, _, _, _, _),
-+	[36] = PINGROUP(36, qup11, ibi_i3c, _, _, _, _, _, _, _),
-+	[37] = PINGROUP(37, qup11, ibi_i3c, _, _, _, _, _, _, _),
-+	[38] = PINGROUP(38, qup11, qup14, dbg_out, _, _, _, _, _, _),
-+	[39] = PINGROUP(39, qup11, _, _, _, _, _, _, _, _),
-+	[40] = PINGROUP(40, qup12, _, _, _, _, _, _, _, _),
-+	[41] = PINGROUP(41, qup12, _, _, _, _, _, _, _, _),
-+	[42] = PINGROUP(42, qup12, _, _, _, _, _, _, _, _),
-+	[43] = PINGROUP(43, qup12, _, _, _, _, _, _, _, _),
-+	[44] = PINGROUP(44, qup13, _, _, _, _, _, _, _, _),
-+	[45] = PINGROUP(45, qup13, _, _, _, _, _, _, _, _),
-+	[46] = PINGROUP(46, qup13, edp_lcd, _, _, _, _, _, _, _),
-+	[47] = PINGROUP(47, qup13, dp_hot, _, _, _, _, _, _, _),
-+	[48] = PINGROUP(48, qup14, _, _, _, _, _, _, _, _),
-+	[49] = PINGROUP(49, qup14, _, _, _, _, _, _, _, _),
-+	[50] = PINGROUP(50, qup14, qup16, _, _, _, _, _, _, _),
-+	[51] = PINGROUP(51, qup14, _, _, _, _, _, _, _, _),
-+	[52] = PINGROUP(52, qup15, _, _, _, _, _, _, _, _),
-+	[53] = PINGROUP(53, qup15, _, _, _, _, _, _, _, _),
-+	[54] = PINGROUP(54, qup15, qup14, _, _, _, _, _, _, _),
-+	[55] = PINGROUP(55, qup15, qup14, _, _, _, _, _, _, _),
-+	[56] = PINGROUP(56, qup16, ddr_bist, phase_flag, _, _, _, _, _, _),
-+	[57] = PINGROUP(57, qup16, ddr_bist, phase_flag, _, _, _, _, _, _),
-+	[58] = PINGROUP(58, qup16, ddr_bist, phase_flag, qdss, _, _, _, _, _),
-+	[59] = PINGROUP(59, qup16, ddr_bist, phase_flag, qdss, _, _, _, _, _),
-+	[60] = PINGROUP(60, qup17, edp_hot, _, phase_flag, _, _, _, _, _),
-+	[61] = PINGROUP(61, qup17, sd_write, phase_flag, tsense_pwm1, tsense_pwm2, _, _, _, _),
-+	[62] = PINGROUP(62, qup17, qup16, phase_flag, _, _, _, _, _, _),
-+	[63] = PINGROUP(63, qup17, qup16, phase_flag, _, _, _, _, _, _),
-+	[64] = PINGROUP(64, cam_mclk, _, _, _, _, _, _, _, _),
-+	[65] = PINGROUP(65, cam_mclk, tgu_ch0, _, _, _, _, _, _, _),
-+	[66] = PINGROUP(66, cam_mclk, pll_bypassnl, tgu_ch1, _, _, _, _, _, _),
-+	[67] = PINGROUP(67, cam_mclk, pll_reset, _, _, _, _, _, _, _),
-+	[68] = PINGROUP(68, cam_mclk, _, _, _, _, _, _, _, _),
-+	[69] = PINGROUP(69, cci_i2c, _, _, _, _, _, _, _, _),
-+	[70] = PINGROUP(70, cci_i2c, _, _, _, _, _, _, _, _),
-+	[71] = PINGROUP(71, cci_i2c, _, _, _, _, _, _, _, _),
-+	[72] = PINGROUP(72, cci_i2c, _, _, _, _, _, _, _, _),
-+	[73] = PINGROUP(73, cci_i2c, _, _, _, _, _, _, _, _),
-+	[74] = PINGROUP(74, cci_i2c, _, _, _, _, _, _, _, _),
-+	[75] = PINGROUP(75, cci_i2c, _, _, _, _, _, _, _, _),
-+	[76] = PINGROUP(76, cci_i2c, gcc_gp1, _, _, _, _, _, _, _),
-+	[77] = PINGROUP(77, cci_timer2, gcc_gp2, _, atest_usb13, atest_char0, _, _, _, _),
-+	[78] = PINGROUP(78, cci_timer3, cci_async, gcc_gp3, _, atest_usb12, atest_char1, _, _, _),
-+	[79] = PINGROUP(79, cci_timer4, cci_async, pcie1_clkreqn, mdp_vsync, jitter_bist,
-+			atest_usb11, atest_char2, _, _),
-+	[80] = PINGROUP(80, mdp_vsync, vfr_0, mdp_vsync0, mdp_vsync1, mdp_vsync4, pll_bist,
-+			atest_usb10, atest_char3, _),
-+	[81] = PINGROUP(81, mdp_vsync, dp_lcd, mdp_vsync2, mdp_vsync3, mdp_vsync5, atest_usb1,
-+			atest_char, _, _),
-+	[82] = PINGROUP(82, _, _, _, _, _, _, _, _, _),
-+	[83] = PINGROUP(83, _, _, _, _, _, _, _, _, _),
-+	[84] = PINGROUP(84, usb2phy_ac, _, _, _, _, _, _, _, _),
-+	[85] = PINGROUP(85, usb2phy_ac, _, _, _, _, _, _, _, _),
-+	[86] = PINGROUP(86, _, _, _, _, _, _, _, _, _),
-+	[87] = PINGROUP(87, _, _, _, _, _, _, _, _, _),
-+	[88] = PINGROUP(88, pcie0_clkreqn, _, _, _, _, _, _, _, _),
-+	[89] = PINGROUP(89, _, _, _, _, _, _, _, _, _),
-+	[90] = PINGROUP(90, _, _, _, _, _, _, _, _, _),
-+	[91] = PINGROUP(91, _, _, _, _, _, _, _, _, _),
-+	[92] = PINGROUP(92, _, _, _, _, _, _, _, _, _),
-+	[93] = PINGROUP(93, cam_mclk, cci_async, _, _, _, _, _, _, _),
-+	[94] = PINGROUP(94, lpass_slimbus, _, _, _, _, _, _, _, _),
-+	[95] = PINGROUP(95, lpass_slimbus, _, _, _, _, _, _, _, _),
-+	[96] = PINGROUP(96, pri_mi2s, _, _, _, _, _, _, _, _),
-+	[97] = PINGROUP(97, mi2s0_sck, _, _, _, _, _, _, _, _),
-+	[98] = PINGROUP(98, mi2s0_data0, _, _, _, _, _, _, _, _),
-+	[99] = PINGROUP(99, mi2s0_data1, _, _, _, _, _, _, _, _),
-+	[100] = PINGROUP(100, mi2s0_ws, _, vsense_trigger, _, _, _, _, _, _),
-+	[101] = PINGROUP(101, mi2s2_sck, _, qdss, _, _, _, _, _, _),
-+	[102] = PINGROUP(102, mi2s2_data0, _, _, qdss, _, _, _, _, _),
-+	[103] = PINGROUP(103, mi2s2_ws, vfr_1, _, _, qdss, _, atest_usb03, _, _),
-+	[104] = PINGROUP(104, mi2s2_data1, _, _, qdss, _, atest_usb02, _, _, _),
-+	[105] = PINGROUP(105, sec_mi2s, mi2s1_data1, audio_ref, gcc_gp1, _, qdss,
-+			 atest_usb01, _, _),
-+	[106] = PINGROUP(106, mi2s1_sck, gcc_gp2, _, qdss, atest_usb00, _, _, _, _),
-+	[107] = PINGROUP(107, mi2s1_data0, gcc_gp3, _, qdss, atest_usb0, _, _, _, _),
-+	[108] = PINGROUP(108, mi2s1_ws, _, qdss, _, _, _, _, _, _),
-+	[109] = PINGROUP(109, uim1_data, _, _, _, _, _, _, _, _),
-+	[110] = PINGROUP(110, uim1_clk, _, _, _, _, _, _, _, _),
-+	[111] = PINGROUP(111, uim1_reset, _, _, _, _, _, _, _, _),
-+	[112] = PINGROUP(112, uim1_present, _, _, _, _, _, _, _, _),
-+	[113] = PINGROUP(113, uim0_data, _, _, _, _, _, _, _, _),
-+	[114] = PINGROUP(114, uim0_clk, _, _, _, _, _, _, _, _),
-+	[115] = PINGROUP(115, uim0_reset, _, _, _, _, _, _, _, _),
-+	[116] = PINGROUP(116, uim0_present, _, _, _, _, _, _, _, _),
-+	[117] = PINGROUP(117, _, mss_grfc0, cmu_rng3, phase_flag, _, _, _, _, _),
-+	[118] = PINGROUP(118, _, mss_grfc1, cmu_rng2, phase_flag, _, _, _, _, _),
-+	[119] = PINGROUP(119, _, mss_grfc2, cmu_rng1, phase_flag, _, _, _, _, _),
-+	[120] = PINGROUP(120, _, mss_grfc3, cmu_rng0, phase_flag, _, _, _, _, _),
-+	[121] = PINGROUP(121, _, mss_grfc4, cri_trng0, phase_flag, _, _, _, _, _),
-+	[122] = PINGROUP(122, _, mss_grfc5, cri_trng1, phase_flag, _, _, _, _, _),
-+	[123] = PINGROUP(123, _, mss_grfc6, prng_rosc, phase_flag, _, _, _, _, _),
-+	[124] = PINGROUP(124, _, mss_grfc7, cri_trng, phase_flag, _, _, _, _, _),
-+	[125] = PINGROUP(125, _, mss_grfc8, phase_flag, _, _, _, _, _, _),
-+	[126] = PINGROUP(126, _, mss_grfc9, phase_flag, _, _, _, _, _, _),
-+	[127] = PINGROUP(127, coex_uart1, mss_grfc10, phase_flag, _, _, _, _, _, _),
-+	[128] = PINGROUP(128, coex_uart1, mss_grfc11, phase_flag, _, _, _, _, _, _),
-+	[129] = PINGROUP(129, nav_gpio0, phase_flag, _, _, _, _, _, _, _),
-+	[130] = PINGROUP(130, nav_gpio1, phase_flag, _, _, _, _, _, _, _),
-+	[131] = PINGROUP(131, mss_grfc12, nav_gpio2, pa_indicator, phase_flag, _, _, _, _, _),
-+	[132] = PINGROUP(132, mss_grfc0, phase_flag, _, _, _, _, _, _, _),
-+	[133] = PINGROUP(133, qlink0_request, _, _, _, _, _, _, _, _),
-+	[134] = PINGROUP(134, qlink0_enable, _, _, _, _, _, _, _, _),
-+	[135] = PINGROUP(135, qlink0_wmss, _, _, _, _, _, _, _, _),
-+	[136] = PINGROUP(136, qlink1_request, _, _, _, _, _, _, _, _),
-+	[137] = PINGROUP(137, qlink1_enable, _, _, _, _, _, _, _, _),
-+	[138] = PINGROUP(138, qlink1_wmss, _, _, _, _, _, _, _, _),
-+	[139] = PINGROUP(139, _, _, _, _, _, _, _, _, _),
-+	[140] = PINGROUP(140, usb_phy, pll_clk, _, _, _, _, _, _, _),
-+	[141] = PINGROUP(141, _, _, _, _, _, _, _, _, _),
-+	[142] = PINGROUP(142, _, _, _, _, _, _, _, _, _),
-+	[143] = PINGROUP(143, _, _, _, _, _, _, _, _, _),
-+	[144] = PINGROUP(144, _, _, _, _, _, _, _, _, egpio),
-+	[145] = PINGROUP(145, _, _, _, _, _, _, _, _, egpio),
-+	[146] = PINGROUP(146, _, _, _, _, _, _, _, _, egpio),
-+	[147] = PINGROUP(147, _, _, _, _, _, _, _, _, egpio),
-+	[148] = PINGROUP(148, _, _, _, _, _, _, _, _, egpio),
-+	[149] = PINGROUP(149, _, _, _, _, _, _, _, _, egpio),
-+	[150] = PINGROUP(150, qdss, _, _, _, _, _, _, _, egpio),
-+	[151] = PINGROUP(151, qdss, _, _, _, _, _, _, _, egpio),
-+	[152] = PINGROUP(152, qdss, _, _, _, _, _, _, _, egpio),
-+	[153] = PINGROUP(153, qdss, _, _, _, _, _, _, _, egpio),
-+	[154] = PINGROUP(154, _, _, _, _, _, _, _, _, egpio),
-+	[155] = PINGROUP(155, _, _, _, _, _, _, _, _, egpio),
-+	[156] = PINGROUP(156, qdss_cti, _, _, _, _, _, _, _, egpio),
-+	[157] = PINGROUP(157, qdss_cti, _, _, _, _, _, _, _, egpio),
-+	[158] = PINGROUP(158, _, _, _, _, _, _, _, _, egpio),
-+	[159] = PINGROUP(159, _, _, _, _, _, _, _, _, egpio),
-+	[160] = PINGROUP(160, _, _, _, _, _, _, _, _, egpio),
-+	[161] = PINGROUP(161, _, _, _, _, _, _, _, _, egpio),
-+	[162] = PINGROUP(162, _, _, _, _, _, _, _, _, egpio),
-+	[163] = PINGROUP(163, _, _, _, _, _, _, _, _, egpio),
-+	[164] = PINGROUP(164, _, _, _, _, _, _, _, _, egpio),
-+	[165] = PINGROUP(165, qdss_cti, _, _, _, _, _, _, _, egpio),
-+	[166] = PINGROUP(166, qdss_cti, _, _, _, _, _, _, _, egpio),
-+	[167] = PINGROUP(167, _, _, _, _, _, _, _, _, egpio),
-+	[168] = PINGROUP(168, _, _, _, _, _, _, _, _, egpio),
-+	[169] = PINGROUP(169, _, _, _, _, _, _, _, _, egpio),
-+	[170] = PINGROUP(170, _, _, _, _, _, _, _, _, egpio),
-+	[171] = PINGROUP(171, qdss, _, _, _, _, _, _, _, egpio),
-+	[172] = PINGROUP(172, qdss, _, _, _, _, _, _, _, egpio),
-+	[173] = PINGROUP(173, qdss, _, _, _, _, _, _, _, egpio),
-+	[174] = PINGROUP(174, qdss, _, _, _, _, _, _, _, egpio),
-+};
-+
- static const struct msm_special_pin_data sc7280_special_pins_data[] = {
- 	[0] = UFS_RESET("ufs_reset", 0xbe000),
- 	[1] = SDC_PINGROUP("sdc1_rclk", 0xb3004, 0, 6),
-@@ -71,7 +568,20 @@ static const char *sc7280_get_pin_name(struct udevice *dev, unsigned int selecto
- 
- static int sc7280_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
- {
--	return msm_pinctrl_functions[selector].val;
-+	unsigned int i;
-+	const msm_pin_function *func = NULL;
-+
-+	if (pin >= ARRAY_SIZE(sc7280_pin_functions))
-+		return -EINVAL;
-+
-+	func = sc7280_pin_functions + pin;
-+	for (i = 0; i < 10; i++)
-+		if ((*func)[i] == selector)
-+			return i;
-+
-+	pr_err("Can't find requested function for pin %u pin\n", pin);
-+
-+	return -EINVAL;
- }
- 
- static struct msm_pinctrl_data sc7280_data = {
--- 
-2.34.1
-
+Brian
