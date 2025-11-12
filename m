@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2508CD4841
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 20:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 076DACD4842
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 20:04:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D068783D6C;
-	Wed, 12 Nov 2025 21:03:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 39C0C83D9C;
+	Wed, 12 Nov 2025 21:03:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Fj+jDv+F";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fdiQYHr+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 570FB83D6C; Wed, 12 Nov 2025 21:03:28 +0100 (CET)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id AE22883D77; Wed, 12 Nov 2025 21:03:29 +0100 (CET)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13F4C83D40
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 21:03:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 939ED83D4A
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 21:03:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-3e12fd71984so780726fac.2
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 12:03:26 -0800 (PST)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-656eb0b1294so44163eaf.2
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 12:03:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762977805; x=1763582605; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1762977806; x=1763582606; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5iP/zfW7DBdKbuKl1imuFeCNV0fYIFEoczaJuBRBDLo=;
- b=Fj+jDv+FSv++vaeVIMk0T1eL5w6pz+8jH/RIwh7cipqlpTUfSN9c4kWUZ+zkfhZyhM
- ugwE5ROrSRaylKKTiMqMKKnxO2jlexInPfsav1V9rDDktAEiPZYSYvXfVXGQAaEAFrNj
- xObwbN2v7/ZKRygxlXyfHNVWcMy7rmSKJZSQY=
+ bh=e/dMe8/C0p3BiNhRUdmsUyoiYatcXX0KGhAvgUHr7vI=;
+ b=fdiQYHr+UYcMP2j1BxaVWYkl2DvWTte1XQq6GONZ8BpTeoxAYN1+18GyGp3r1q0Py+
+ OfdV0WrJ4WfDiSpTgmv4C4GPeWI3/s5qRM0LAv6nRBEF/sOJzYbcxXkS21na1Srh4xdh
+ EWv/6M2PHbfRQYeKSTJGCWQvA+qFkS2CrYhc4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762977805; x=1763582605;
+ d=1e100.net; s=20230601; t=1762977806; x=1763582606;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=5iP/zfW7DBdKbuKl1imuFeCNV0fYIFEoczaJuBRBDLo=;
- b=GQJfyhVM8ZqoorrqSKpSIIt6k+NIqsxCWdTHevhBrdZuUDFOh1eKu9+JpT0B9qstwo
- Qj0j50wQF34vU0mbyTzuKuFaD2Ue1gkZ0PsUfMSSxbKq0dcPRLjTEtFgZI0CfgfNTWxm
- tIfvvw5RqUqT35mi197/06C46nLXkZB8mY6YUXmRJl8TiP7bWIqU94oMKZy6S8NQ2q9/
- 8DXye261OBF1YKvgBvEEwR1w2/2/08yKbzA3knQpR8hGih2fCYIDNDsyJAj4u+29SrBY
- ZQlrIigYZ0eBLtaqPabjAPAsX7hI0sxgBPntT4TgxtDVhfajn0mdmgX0E6JOhgR+D79q
- VR3g==
-X-Gm-Message-State: AOJu0YwSn78zn5pCnFgSQs7h2OLAa2S8pedJ8wCezZVaUpAHloCxEWic
- pkD1VkC3E/xTxy5NJQwFNqaF1as+1BfyncjjnHbKWvZ7XdrJQKYTKM+jpBfMgAyxszMVxipEcIP
- dZyXohhGbzQ==
-X-Gm-Gg: ASbGncsiFdX2TotQwKnWIgwDv40WBC+AmK2xeTC8kZ8IARZjFkZ2Tmk0dbTaAWKL6Vy
- eanHE9DWJQ6v5awd2t9CGuaqOjyi2yzYPHf9SGZzbjKFIVmjUcoWvNiwg2Si12TWM/5V9KgTurl
- RufMeCgMpkqY2ZFZOrB/AUGBn5CpbYOGMmUR5OXq68bydV36Fbpsmp8GljHnhWiJQ1iruSQ74IH
- DghQVw7JUKomhgt1cmqiBH3wxadkHitfh7FUfJC5eZY/ev7JivRp3Zo3uxFZkT4FiaKp98aRKh/
- yfkTgNVLXNmJfOMmXd2twnjcB3X8aY4XosmgTbn1Hi+vcYpzQxtHIlxvLAsmPl5adPkB3ZE/a62
- NQqyXH119ZP3RRB6OMFzq/aYmT7fDaQXXcTWeodRgJO4GMSnEuBd2ql642WX/SAoTucD+3hiwja
- 58GN6ZXaVBOFJVKroYUWRTMv64mzFj4yCksXOdoV3bZw==
-X-Google-Smtp-Source: AGHT+IHyjMs+N8N8UFUhGfpLHfYji8I13VStVbXRObN4MVt1vLqomgGESDX6Dl67PatFjSnf2vsfig==
-X-Received: by 2002:a05:6871:332a:b0:307:b1b1:aeb9 with SMTP id
- 586e51a60fabf-3e834217b1dmr2341953fac.35.1762977804643; 
- Wed, 12 Nov 2025 12:03:24 -0800 (PST)
+ bh=e/dMe8/C0p3BiNhRUdmsUyoiYatcXX0KGhAvgUHr7vI=;
+ b=AhJT/UV3aAXLXZ8n49Elq5DomUCoblo6ME5q8GCybqMDjwBRL78jsPN0XewUhwE3P6
+ pi/vQn1j6FJyy47X1x8gR10hg/U5LNjNEFP1BSW0JChV/QbtXNqY32MVrUfZzPQbnzGT
+ akACgPeRh/u73ZupLbmoZAE7zE+h0NWOKrjvef1qVZrYFmz+eS9Te87pqNkPtFtGo+tn
+ Dg6Z1E6n7xgsn5BkQ+/C9RWIXMWRKeIzzbGpdosBnF25+c0su25nbbjx5jQi4fM0Dp+a
+ dvQXJDOYfWi7gwD8G4fnwp84+IsL4KkDPy/oTvGJOF9JulvN0ojOoxUE0gVxlS6MMQYT
+ DxRQ==
+X-Gm-Message-State: AOJu0YzLAnAyDo+3+7YJacyqogZtE46otdhmatFf/zQky2BZbnW/s3YN
+ qFtdSVlrFEznUg/mYhIMtn43+GD8/YbncbBlsbgsm8vuHtR0qcT7fuZ6gYJQohSszA1doqu1xqh
+ yPWOiNAqaRQ==
+X-Gm-Gg: ASbGnctXE9V5tu+sPWwVV9ZYy6dbEqxFqQuBzkQn0IPEMnRwELzfJHSEFHd5u2QL5yY
+ thr5uMfAMOnxUSRmRa1QG4QoiSgzkZyErJVKLB+zPFX1U4PaUDLSOnsQ36LqreV100lsLD12rKG
+ YQ6auc1JOLFXOlRe3fQOoxxPqa8I3R/ZHfz05Hya7I6VmzMJwW2gBDKPFPKpS8r99kX5oa75iEI
+ sxfkS/SjIMQaC67lQ3nJ3+0irmlskWDL/osTxAPWXOIIBqXx/rGoC4hU4wGapQwli9gwNoQvD4J
+ jAIi/dAYqEDpOP238Xm+N1+0VajNJz7YUlFk2eWCNqNMdEgJ0DsQ9sbQ6HjFFbgxwR5Mg+MtseD
+ IDyH2/3lY5ofyXW6fpwJFLibR7Faryv5V6QEDWLmyLjFP1H62XZcMJte5SjqYShCxOtd6TKUeVf
+ qm7x1y8QCXxqerTFbS3YdEENFmztzArjBv8jxZSxJiS7MmaCvPZvEc
+X-Google-Smtp-Source: AGHT+IFV8ZBfVVb8Zl3VPrayku8Sy/0077fKxUdlzFJIM9sY2Y0bsvz7j2h9lIQ9V2FaRlkeBq9ZrQ==
+X-Received: by 2002:a05:6808:190d:b0:450:5ca:5170 with SMTP id
+ 5614622812f47-4507460c425mr1837869b6e.33.1762977806098; 
+ Wed, 12 Nov 2025 12:03:26 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e83281c9bbsm2169596fac.18.2025.11.12.12.03.23
+ 586e51a60fabf-3e83281c9bbsm2169596fac.18.2025.11.12.12.03.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Nov 2025 12:03:24 -0800 (PST)
+ Wed, 12 Nov 2025 12:03:25 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Subject: [PATCHv2 3/7] video: Tighten some video driver dependencies
-Date: Wed, 12 Nov 2025 14:00:04 -0600
-Message-ID: <20251112200315.1111980-4-trini@konsulko.com>
+Subject: [PATCHv2 4/7] video: anx9804: Only build when needed
+Date: Wed, 12 Nov 2025 14:00:05 -0600
+Message-ID: <20251112200315.1111980-5-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251112200315.1111980-1-trini@konsulko.com>
 References: <20251112200315.1111980-1-trini@konsulko.com>
@@ -96,141 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A few video drivers cannot build without access to some platform
-specific header files. Express those requirements in Kconfig as well.
+The logic for how to handle this video driver is slightly odd. Only in
+the case of when CONFIG_VIDEO_LCD_PANEL_EDP_4_LANE_1620M_VIA_ANX9804 is
+enabled do we need to have this file built, and otherwise we have a
+dummy function in use. Correct the logic by only building this file when
+needed.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/video/Kconfig          | 4 ++++
- drivers/video/bridge/Kconfig   | 2 +-
- drivers/video/exynos/Kconfig   | 2 +-
- drivers/video/imx/Kconfig      | 1 +
- drivers/video/meson/Kconfig    | 2 +-
- drivers/video/rockchip/Kconfig | 2 +-
- drivers/video/stm32/Kconfig    | 1 -
- drivers/video/ti/Kconfig       | 1 +
- 8 files changed, 10 insertions(+), 5 deletions(-)
+ drivers/video/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index a12df55f84ff..0fc1c161541e 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -523,6 +523,7 @@ config ATMEL_LCD_BGR555
- 
- config VIDEO_BCM2835
- 	bool "Display support for BCM2835"
-+	depends on ARCH_BCM283X
- 	imply VIDEO_DAMAGE
- 	help
- 	  The graphics processor already sets up the display so this driver
-@@ -755,6 +756,7 @@ source "drivers/video/meson/Kconfig"
- 
- config VIDEO_MVEBU
- 	bool "Armada XP LCD controller"
-+	depends on ARCH_MVEBU
- 	imply VIDEO_DAMAGE
- 	---help---
- 	Support for the LCD controller integrated in the Marvell
-@@ -796,6 +798,7 @@ config NXP_TDA19988
- 
- config ATMEL_HLCD
- 	bool "Enable ATMEL video support using HLCDC"
-+	depends on ARCH_AT91
- 	imply VIDEO_DAMAGE
- 	help
- 	   HLCDC supports video output to an attached LCD panel.
-@@ -907,6 +910,7 @@ source "drivers/video/imx/Kconfig"
- 
- config VIDEO_MXS
- 	bool "Enable video support on i.MX28/i.MX6UL/i.MX7 SoCs"
-+	depends on MACH_IMX
- 	imply VIDEO_DAMAGE
- 	help
- 	  Enable framebuffer driver for i.MX28/i.MX6UL/i.MX7 processors
-diff --git a/drivers/video/bridge/Kconfig b/drivers/video/bridge/Kconfig
-index a48cec7a1384..5322a0029285 100644
---- a/drivers/video/bridge/Kconfig
-+++ b/drivers/video/bridge/Kconfig
-@@ -53,7 +53,7 @@ config VIDEO_BRIDGE_SOLOMON_SSD2825
- 
- config VIDEO_BRIDGE_TOSHIBA_TC358768
- 	bool "Support Toshiba TC358768 MIPI DSI bridge"
--	depends on VIDEO_BRIDGE && PANEL && DM_GPIO
-+	depends on VIDEO_BRIDGE && PANEL && DM_GPIO && !64BIT
- 	select VIDEO_MIPI_DSI
- 	select DM_I2C
- 	help
-diff --git a/drivers/video/exynos/Kconfig b/drivers/video/exynos/Kconfig
-index a2cf752aac03..1fffec5c9c5e 100644
---- a/drivers/video/exynos/Kconfig
-+++ b/drivers/video/exynos/Kconfig
-@@ -1,7 +1,7 @@
- 
- menuconfig VIDEO_EXYNOS
- 	bool "Enable Exynos video support"
--	depends on VIDEO
-+	depends on VIDEO && ARCH_EXYNOS
- 	help
- 	  Enable support for various video output options on Exynos SoCs.
- 
-diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
-index 4a1927c66d7d..b35ba965efc3 100644
---- a/drivers/video/imx/Kconfig
-+++ b/drivers/video/imx/Kconfig
-@@ -23,3 +23,4 @@ config IMX_LDB
- 
- config IMX_LCDIF
- 	bool "i.MX LCDIFv3 LCD controller"
-+	depends on MACH_IMX
-diff --git a/drivers/video/meson/Kconfig b/drivers/video/meson/Kconfig
-index fcf486ca0a3a..77c3017382eb 100644
---- a/drivers/video/meson/Kconfig
-+++ b/drivers/video/meson/Kconfig
-@@ -6,7 +6,7 @@
- 
- config VIDEO_MESON
- 	bool "Enable Amlogic Meson video support"
--	depends on VIDEO
-+	depends on VIDEO && ARCH_MESON
- 	select DISPLAY
- 	imply VIDEO_DAMAGE
- 	help
-diff --git a/drivers/video/rockchip/Kconfig b/drivers/video/rockchip/Kconfig
-index 0f4550a29e38..96af6d28ef0b 100644
---- a/drivers/video/rockchip/Kconfig
-+++ b/drivers/video/rockchip/Kconfig
-@@ -10,7 +10,7 @@
- 
- menuconfig VIDEO_ROCKCHIP
- 	bool "Enable Rockchip Video Support"
--	depends on VIDEO
-+	depends on VIDEO && ARCH_ROCKCHIP
- 	imply VIDEO_DAMAGE
- 	help
- 	  Rockchip SoCs provide video output capabilities for High-Definition
-diff --git a/drivers/video/stm32/Kconfig b/drivers/video/stm32/Kconfig
-index c354c402c288..ea4ce6799fda 100644
---- a/drivers/video/stm32/Kconfig
-+++ b/drivers/video/stm32/Kconfig
-@@ -7,7 +7,6 @@
- 
- menuconfig VIDEO_STM32
- 	bool "Enable STM32 video support"
--	depends on VIDEO
- 	imply VIDEO_DAMAGE
- 	help
- 	  STM32 supports many video output options including RGB and
-diff --git a/drivers/video/ti/Kconfig b/drivers/video/ti/Kconfig
-index 3081e9e8c09b..0483f760ea19 100644
---- a/drivers/video/ti/Kconfig
-+++ b/drivers/video/ti/Kconfig
-@@ -4,5 +4,6 @@
- #
- config AM335X_LCD
- 	bool "Enable AM335x video support"
-+	depends on ARCH_OMAP2PLUS
- 	help
- 	   Supports video output to an attached LCD panel.
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index 4189b81ba6b3..984768ea156d 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -56,7 +56,7 @@ obj-$(CONFIG_VIDEO_DW_MIPI_DSI) += dw_mipi_dsi.o
+ obj-$(CONFIG_VIDEO_EFI) += efi.o
+ obj-y += imx/
+ obj-$(CONFIG_VIDEO_IVYBRIDGE_IGD) += ivybridge_igd.o
+-obj-$(CONFIG_VIDEO_LCD_ANX9804) += anx9804.o
++obj-$(CONFIG_VIDEO_LCD_PANEL_EDP_4_LANE_1620M_VIA_ANX9804) += anx9804.o
+ obj-$(CONFIG_VIDEO_LCD_ENDEAVORU) += endeavoru-panel.o
+ obj-$(CONFIG_VIDEO_LCD_HIMAX_HX8394) += himax-hx8394.o
+ obj-$(CONFIG_VIDEO_LCD_HITACHI_TX10D07VM0BAA) += hitachi-tx10d07vm0baa.o
 -- 
 2.43.0
 
