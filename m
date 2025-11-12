@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED4BCCFA18
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 01:17:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A34CCFA1A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 01:17:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 704D383AB4;
+	by phobos.denx.de (Postfix) with ESMTP id AD5E483C01;
 	Wed, 12 Nov 2025 02:17:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Jl8HfHzP";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QdY0mBH9";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GyugqJ+7";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="o2RfYCWH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA5883BD2; Wed, 12 Nov 2025 02:17:29 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 13C4283A94; Wed, 12 Nov 2025 02:17:30 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 304A283A94
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 02:17:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BEB783B22
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 02:17:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,31 +31,33 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4d5lr563mCz9v6M;
- Wed, 12 Nov 2025 02:17:25 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4d5lr760XNz9sqF;
+ Wed, 12 Nov 2025 02:17:27 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1762910247;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CgfYK3uh9Ak4VWeACsKqaZeewygJcAzyxqiIfnqfR34=;
+ b=GyugqJ+7R2QgUDlyDzChW/ANtu4XSbhp8TVmlDzCUG7V6Y8TGWUshfb20WHKDDL2AcEo2U
+ WofAiboNGr/tvIcVjtOuaoZYpSSXMzcL2FNL5pdK+gh1O2uiToy2imKo1DseqkKT98eGmn
+ yvG+LYJiU3FUPqLOU5CFoVSuVTSlqlBEzYTQqAExVK7kdU+B9T7D4v3rJei5h5dbe1uL+H
+ cusfpOhMdlUcCldmDYteWBCePQzJ+mJEpUU9LuqdlCPXmt1Z6MZ7VuH/67OWlmfSuQpC4m
+ Ne9tBnmMiW/BWTI//YzDqdq3Ntt6sCGWI9B/yje/sZFe8PM3mqWVg7nbPen4oQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1762910245;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=AOUfQx0InHOkxv4SmSMX2t1V5yyovXbjxeTYOsQfh8E=;
- b=Jl8HfHzPEhE3MzrK8ND8tnSGkPgf0DUWg4ncPSCK6Aq0OarRzUIEg823WLxayi2EeWVwu9
- 9a1ms/NxTbGNVu5/bE3877MT7pIvN47mm2EnGLtmXCSEzDHzHT3PS/yo2ki+QrPqz9b77i
- yKjfPeBiL3CydvBUCbPlc6jKl92Onzw39HDYmy+zHVdLHPfZJ2JbgEywPYHwV63RvrA0fa
- b5S3uxmRDXhMabq35OZB+w0LvEoJmSvsxI4DMX/G5j6uNS6JQ+d0Ud9GkCUqz3Vq1h/oXu
- gza0isXk8eIab8nuumFtPjpaJkTyQ7ICXSGGfWjTGuwtRZexdUjERzcECNyRlA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1762910244;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=AOUfQx0InHOkxv4SmSMX2t1V5yyovXbjxeTYOsQfh8E=;
- b=QdY0mBH9TCt91ZbQZIMQhePZ1DTSqlINo1ZXLggDDs55/zkE4wxvV8RvDzgx9Bj8jaMG9s
- vf3vx36n/ks5rpmGoKKFQlxl61XrxE5MtLnoqh2cIzIbjLqb4eT0mLiHGkT55xDjA2tP/C
- Lg3qLiY7729FqxOlqRiMxQdIDb7ttFxRaQPq2QSIWkZtnTxnZnmSSrtE0DUb954cpIRQBL
- IUWxNCXxp3kW0vM1GSKWfIWqwkwUWUhH/KxLF8x8W0dUYKPJo0l3ieoqgF6rW0PMqDe75M
- ueQO8Ql9JB/hu5HU60322yJ6WHT6ob1JfzUygIuCA+crLd1KKAckjc9zdUf+aA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CgfYK3uh9Ak4VWeACsKqaZeewygJcAzyxqiIfnqfR34=;
+ b=o2RfYCWHMOCIBHhXMafyglaCe9q/ZwB1uefinamwb0AoTFJzkfFo2zNnmF6a7rMxmUCvsU
+ HvhAxWSZGKjNDOWe+sEelTNWRlLoBEa7nrtT5NGxCUup9DAdlon3BGrMjgeUzzo0ChGu1e
+ WjxgYwVsyePTeqOZX6PdywuUqE3MCN7BIZayuC9vihUV/wBn+o5zmAhBocz0CoNWXwQGGQ
+ 2IRAUJXxZpztHs9rCD1QHVni+yaNEvVU2jyDVCvEJyG7oj208mCZzGyMVZ5jzj6vxQ03EN
+ byJICvrU/PKb/t+R2LxSptzo3ZYS/QD9kVqSa/yD7BUmKKXyMBn2+fHfpIniuQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Aaron Kling <webgeek1234@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>,
@@ -63,13 +65,15 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] boot: android: Always use 8-byte aligned DT with libfdt
-Date: Wed, 12 Nov 2025 02:16:20 +0100
-Message-ID: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 2/2] test/py: android: Point fdt command to aligned addresses
+Date: Wed, 12 Nov 2025 02:16:21 +0100
+Message-ID: <20251112011717.360045-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
+References: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 613317fadd51fab9a76
-X-MBO-RS-META: pq5bpp387tgy48pbmof5d7m49xiwbxwt
+X-MBO-RS-ID: 47b55830b050c171f9f
+X-MBO-RS-META: guj361y5no4o7xjp51mq7niry74suy8w
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,20 +93,10 @@ X-Virus-Status: Clean
 Newer versions of libfdt strictly check whether the FDT blob
 passed to them is at 8-byte aligned offset, if it is not, then
 the library fails checks with -FDT_ERR_ALIGNMENT . Currently,
-android_image_print_dtb_contents() passed FDT directly mapped
-from abootimg to libfdt, and this FDT is not always aligned to
-8-byte offset. Specifically, the FDTs are somewhat packed in
-the abootimg, therefore if the first FDT blob is e.g. 0xfd bytes
-long, then the next FDT blob ends up at 0xfd offset, which is
-not 8-byte aligned.
-
-Fix this by first extracting the header into 8-byte aligned buffer,
-checking only the header for validity, and then by copying the
-entire FDT into newly allocated 8-byte aligned buffer. While this
-is not efficient, it is the correct way to handle DTs, which must
-be at 8-byte aligned offsets. Mitigate the inefficiency for the
-common case by checking whether the DT might be 8-byte aligned and
-if it is, map it directly.
+'abootimg get dtb --index=1 addr size' may return non 8-byte
+aligned FDT address which points directly into the abootimg.
+Copy the result into temporary location before validation to
+avoid FDT alignment check failure.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -117,90 +111,71 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- boot/image-android.c | 46 +++++++++++++++++++++++++++++++++-----------
- 1 file changed, 35 insertions(+), 11 deletions(-)
+ test/py/tests/test_android/test_abootimg.py | 28 ++++++++++++++++-----
+ 1 file changed, 22 insertions(+), 6 deletions(-)
 
-diff --git a/boot/image-android.c b/boot/image-android.c
-index e46dee0d9b3..5ff2bf664e5 100644
---- a/boot/image-android.c
-+++ b/boot/image-android.c
-@@ -721,17 +721,19 @@ bool android_image_get_dtb_by_index(ulong hdr_addr, ulong vendor_boot_img,
- 	dtb_addr = dtb_img_addr;
- 	while (dtb_addr < dtb_img_addr + dtb_img_size) {
- 		const struct fdt_header *fdt;
-+		struct fdt_header fdth __aligned(8);
- 		u32 dtb_size;
+diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
+index 2aadb692b30..daa87643e93 100644
+--- a/test/py/tests/test_android/test_abootimg.py
++++ b/test/py/tests/test_android/test_abootimg.py
+@@ -93,10 +93,16 @@ dtb_dump_resp="""## DTB area contents (concat format):
+ loadaddr = 0x1000
+ # Address in RAM where to load the vendor boot image ('abootimg' looks in $vloadaddr)
+ vloadaddr= 0x10000
++# Expected DTB #1 size
++dtb1_size = 0x7d
++# Expected DTB #2 size
++dtb2_size = 0x7d
+ # Expected DTB #1 offset from the boot image start address
+-dtb1_offset = 0x187d
++dtb1_offset = 0x1800 + dtb1_size
+ # Expected DTB offset from the vendor boot image start address
+-dtb2_offset = 0x207d
++dtb2_offset = 0x2000 + dtb2_size
++# Expected DTB aligned offset
++dtba_offset = 0x4000
+ # DTB #1 start address in RAM
+ dtb1_addr = loadaddr + dtb1_offset
+ # DTB #2 start address in RAM
+@@ -214,11 +220,16 @@ def test_abootimg(abootimg_disk_image, ubman):
+     assert response == 'a=11f00000'
  
- 		fdt = map_sysmem(dtb_addr, sizeof(*fdt));
--		if (fdt_check_header(fdt) != 0) {
--			unmap_sysmem(fdt);
-+		memcpy(&fdth, fdt, sizeof(*fdt));
-+		unmap_sysmem(fdt);
-+
-+		if (fdt_check_header(&fdth) != 0) {
- 			printf("Error: Invalid FDT header for index %u\n", i);
- 			return false;
- 		}
+     ubman.log.action('Testing \'abootimg get dtb --index\'...')
+-    ubman.run_command('abootimg get dtb --index=1 dtb1_start')
++    ubman.run_command('abootimg get dtb --index=1 dtb1_start dtb1_size')
+     response = ubman.run_command('env print dtb1_start')
+     correct_str = "dtb1_start=%x" % (dtb1_addr)
+     assert response == correct_str
+-    ubman.run_command('fdt addr $dtb1_start')
++    response = ubman.run_command('env print dtb1_size')
++    correct_str = "dtb1_size=%x" % (dtb1_size)
++    assert response == correct_str
++    ubman.run_command('setenv dtbaaddr 0x%x' % (dtba_offset))
++    ubman.run_command('cp.b $dtb1_start $dtbaaddr $dtb1_size')
++    ubman.run_command('fdt addr $dtbaaddr')
+     ubman.run_command('fdt get value v / model')
+     response = ubman.run_command('env print v')
+     assert response == 'v=x2'
+@@ -257,12 +268,17 @@ def test_abootimgv4(abootimgv4_disk_image_vboot, abootimgv4_disk_image_boot, ubm
+     assert response == 'a=11f00000'
  
--		dtb_size = fdt_totalsize(fdt);
--		unmap_sysmem(fdt);
-+		dtb_size = fdt_totalsize(&fdth);
+     ubman.log.action('Testing \'abootimg get dtb --index\'...')
+-    ubman.run_command('abootimg get dtb --index=1 dtb2_start')
++    ubman.run_command('abootimg get dtb --index=1 dtb2_start dtb2_size')
+     response = ubman.run_command('env print dtb2_start')
+     correct_str = "dtb2_start=%x" % (dtb2_addr)
+     assert response == correct_str
++    response = ubman.run_command('env print dtb2_size')
++    correct_str = "dtb2_size=%x" % (dtb2_size)
++    assert response == correct_str
  
- 		if (i == index) {
- 			if (size)
-@@ -885,23 +887,45 @@ bool android_image_print_dtb_contents(ulong hdr_addr)
- 	dtb_addr = dtb_img_addr;
- 	while (dtb_addr < dtb_img_addr + dtb_img_size) {
- 		const struct fdt_header *fdt;
-+		struct fdt_header *fulldt;
-+		struct fdt_header fdth __aligned(8);
- 		u32 dtb_size;
- 
- 		fdt = map_sysmem(dtb_addr, sizeof(*fdt));
--		if (fdt_check_header(fdt) != 0) {
--			unmap_sysmem(fdt);
-+		memcpy(&fdth, fdt, sizeof(*fdt));
-+		unmap_sysmem(fdt);
-+
-+		if (fdt_check_header(&fdth) != 0) {
- 			printf("Error: Invalid FDT header for index %u\n", i);
- 			return false;
- 		}
- 
--		res = android_image_print_dtb_info(fdt, i);
--		if (!res) {
-+		dtb_size = fdt_totalsize(&fdth);
-+
-+		/* The device tree must be at an 8-byte aligned address */
-+		if ((uintptr_t)fdt & 7) {
-+			fulldt = memalign(8, dtb_size);
-+			if (!fulldt)
-+				return false;
-+
-+			fdt = map_sysmem(dtb_addr, dtb_size);
-+			memcpy(fulldt, fdt, dtb_size);
- 			unmap_sysmem(fdt);
--			return false;
-+		} else {
-+			fulldt = map_sysmem(dtb_addr, dtb_size);
- 		}
- 
--		dtb_size = fdt_totalsize(fdt);
--		unmap_sysmem(fdt);
-+		res = android_image_print_dtb_info(fulldt, i);
-+
-+		/* The device tree must be at an 8-byte aligned address */
-+		if ((uintptr_t)fdt & 7)
-+			free(fulldt);
-+		else
-+			unmap_sysmem(fulldt);
-+
-+		if (!res)
-+			return false;
-+
- 		dtb_addr += dtb_size;
- 		++i;
- 	}
+-    ubman.run_command('fdt addr $dtb2_start')
++    ubman.run_command('setenv dtbaaddr 0x%x' % (dtba_offset))
++    ubman.run_command('cp.b $dtb2_start $dtbaaddr $dtb2_size')
++    ubman.run_command('fdt addr $dtbaaddr')
+     ubman.run_command('fdt get value v / model')
+     response = ubman.run_command('env print v')
+     assert response == 'v=x2'
 -- 
 2.51.0
 
