@@ -4,55 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24BE4CCFA1A
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 04:44:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 879A5CCFA1A
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 04:46:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CFA783AB4;
-	Wed, 12 Nov 2025 05:44:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A812283AB4;
+	Wed, 12 Nov 2025 05:46:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="BOEZUnDL";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="RQ61RoeR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0CFB83B81; Wed, 12 Nov 2025 05:44:53 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id E901383BD2; Wed, 12 Nov 2025 05:46:00 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F32D583AAD
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 05:44:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0433983AAD
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 05:45:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3734410A706; Wed, 12 Nov 2025 05:44:50 +0100 (CET)
+ with ESMTPSA id 78DDE104178; Wed, 12 Nov 2025 05:45:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1762922691;
+ s=dkim; t=1762922757;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=pX0DsBrgGA0DR1EHT4PDDTa6bC2XPj+J48yo8zZuN/M=;
- b=BOEZUnDLYuxh+5e46UlQj36ZTpH33EP8rlG5Piv+CmmJfaCXgL7FK/JfeBwChRGRD7p+aG
- zHC5k7CKkzlmlDoUxqJVsJVPzJkcxKaJPHeQxzozHL2Ql98nlTVBhpT1XIOYw2GwmrvYni
- Y2PZMs0dfcL7Wvm2ljxvNntfJ5S6i+Qi8jsiaa+KUpu6kcz2klIT9+SETmODAiOSOHha3/
- U6qiYMRZr0VM+IMuqGWBlTZ+Ivm+5qY/2JXy3dHaVeDGvcurCQZeirCTD8Mv4wisSb3f5n
- EudiraFs/7SftgKjTVJAGGZeVBBvFzGOXaqvrV0v2Guo0SYEwEoURZMMweCE3g==
-Message-ID: <d50ea803-18fc-f928-8d2e-56eb20f8ead4@nabladev.com>
-Date: Wed, 12 Nov 2025 05:44:56 +0100
+ bh=anMV+CJM5QDOiX9CihIT44DD6oWINRMFyPaPlJ1o/7w=;
+ b=RQ61RoeR8ShlV2tfFB8Y+TGjNqAkj29JwgGV/HXcisgQOOmTwo23e4Zwvk9YcvVk207piH
+ K6i7pbH7SS2t1wpTd7SNi1cbhq+VStNNQY6GgndcYh8sbJAX3Eh4VNpSRl9ZLDiJ46OXEo
+ y2i+XQvu//chY5LG7A9Y9UfVHj7aab1grsJN+/xmNbpRPKh059eQscJAn/hOS1n/V9sYpU
+ rFuATkaAzy9Rt/y1ICLRqAZG3sxH6c3juzTcy7Wvcs8sfsnr0xzJuwLTFEhDdf+p4UtbCM
+ 2lzxXoqibgHqNF5azW0YLZmU79yMnLNFk4blo8Mp5ve0W13MfhjbU4VwdvvfbA==
+Message-ID: <2320d85c-d7ed-6b46-3b1f-218e680e971b@nabladev.com>
+Date: Wed, 12 Nov 2025 05:46:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-From: Heiko Schocher <hs@nabladev.com>
-Subject: Re: [PATCH v2 3/5] test: cmd: hash: add unit test for sm3_256
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>
-References: <20251111054813.1966-1-hs@nabladev.com>
- <20251111054813.1966-4-hs@nabladev.com>
- <AF767FFD-6798-455F-A1C8-F433C509680A@gmx.de>
+Subject: Re: [PATCH v2 4/5] tpm2: add sm3 256 hash support
 Content-Language: en-US
-In-Reply-To: <AF767FFD-6798-455F-A1C8-F433C509680A@gmx.de>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20251111054813.1966-1-hs@nabladev.com>
+ <20251111054813.1966-5-hs@nabladev.com>
+ <CAC_iWjLjxtPV0SF0XHmB3WJ_4EOzPRLC-YvLXt0QpUUrZDnmtg@mail.gmail.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <CAC_iWjLjxtPV0SF0XHmB3WJ_4EOzPRLC-YvLXt0QpUUrZDnmtg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -72,108 +74,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Heinrich,
+Hello Ilias,
 
-On 11.11.25 07:39, Heinrich Schuchardt wrote:
-> Am 11. November 2025 06:48:10 MEZ schrieb Heiko Schocher <hs@nabladev.com>:
->> add simple test for sm3 256 hash
->>
->> Signed-off-by: Heiko Schocher <hs@nabladev.com>
->> ---
->> I wonder why this tests are under DM and not under CMD
->> Should we move them to CMD ?
+On 11.11.25 10:34, Ilias Apalodimas wrote:
+> Hi Heiko,
 > 
-> We should use CMD_TEST() in the test/cmd/  directory.
+> This all looks reasonable.
+> There's one place I forgot to mention though.   tcg2_hash_pe_image()
+> also needs SM3 support.
 
-I aggree... candidates would be:
+I take a look!
 
-$ grep -lr DM_TEST test/cmd
-test/cmd/temperature.c
-test/cmd/pwm.c
-test/cmd/hash.c
-test/cmd/pinmux.c
-test/cmd/rw.c
-test/cmd/armffa.c
-test/cmd/loadm.c
-test/cmd/i3c.c
+> The easier way to test that SM3 is working is boot your device and
+> look at the PCR measurements
+> - 'tpm2_pcrread' -- The SM3 bank should be != 0
+> - tpm2_eventlog /sys/kernel/security/tpm0/binary_bios_measurements
+> should also include SM3
 
-but that change should be done in seperate series...
-
-I can make such a series, if this one is acceppted?
+I give it a try ...
 
 Thanks!
 
 bye,
 Heiko
-
 > 
-> Best regards
+> Thanks
+> /Ilias
 > 
-> Heinrich
-> 
+> On Tue, 11 Nov 2025 at 07:48, Heiko Schocher <hs@nabladev.com> wrote:
 >>
->> Ignored checkpatch warnings for too long lines.
+>> add sm3 256 hash support, so TPM2 chips which report
+>> 5 pcrs with sm3 hash do not fail with:
 >>
->> (no changes since v1)
+>>    u-boot=> tpm2 autostart
+>>    tpm2_get_pcr_info: too many pcrs: 5
+>>    Error: -90
 >>
->> test/cmd/hash.c | 46 ++++++++++++++++++++++++++++++++++++++++++++++
->> 1 file changed, 46 insertions(+)
+>> Signed-off-by: Heiko Schocher <hs@nabladev.com>
 >>
->> diff --git a/test/cmd/hash.c b/test/cmd/hash.c
->> index bb96380c351..3f7f64d27d3 100644
->> --- a/test/cmd/hash.c
->> +++ b/test/cmd/hash.c
->> @@ -103,3 +103,49 @@ static int dm_test_cmd_hash_sha256(struct unit_test_state *uts)
->> 	return 0;
->> }
->> DM_TEST(dm_test_cmd_hash_sha256, UTF_CONSOLE);
+>> ---
+>>
+>> Changes in v2:
+>> add comments from Ilias
+>> - use ARRAY_SIZE(hash_algo_list) instead of a fix number
+>>    in tpm2_get_pcr_info() for the count of supported hashes
+>>    in U-Boot.
+>> - add SM3 hash in tpm_tcg2
+>>
+>>   cmd/tpm-v2.c     |  1 +
+>>   include/tpm-v2.h | 12 ++++++++++++
+>>   lib/tpm-v2.c     |  4 ++--
+>>   lib/tpm_tcg2.c   |  9 +++++++++
+>>   4 files changed, 24 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
+>> index 346e21d27bb..847b2691581 100644
+>> --- a/cmd/tpm-v2.c
+>> +++ b/cmd/tpm-v2.c
+>> @@ -589,6 +589,7 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_tpm, "Issue a TPMv2.x command",
+>>   "        * sha256\n"
+>>   "        * sha384\n"
+>>   "        * sha512\n"
+>> +"        * sm3_256\n"
+>>   "    <on|off> is one of:\n"
+>>   "        * on  - Select all available PCRs associated with the specified\n"
+>>   "                algorithm (bank)\n"
+>> diff --git a/include/tpm-v2.h b/include/tpm-v2.h
+>> index f3eb2ef5643..a776d24d71f 100644
+>> --- a/include/tpm-v2.h
+>> +++ b/include/tpm-v2.h
+>> @@ -345,6 +345,18 @@ static const struct digest_info hash_algo_list[] = {
+>>                  false,
+>>   #endif
+>>          },
+>> +       {
+>> +               "sm3_256",
+>> +               TPM2_ALG_SM3_256,
+>> +               TCG2_BOOT_HASH_ALG_SM3_256,
+>> +               TPM2_SM3_256_DIGEST_SIZE,
+>> +#if IS_ENABLED(CONFIG_SM3)
+>> +               true,
+>> +#else
+>> +               false,
+>> +#endif
+>> +       },
 >> +
->> +static int dm_test_cmd_hash_sm3_256(struct unit_test_state *uts)
->> +{
->> +	const char *sum = "1ab21d8355cfa17f8e61194831e81a8f22bec8c728fefb747ed035eb5082aa2b";
->> +
->> +	if (!CONFIG_IS_ENABLED(SM3)) {
->> +		ut_assert(run_command("hash sm3_256 $loadaddr 0", 0));
->> +
->> +		return 0;
->> +	}
->> +
->> +	ut_assertok(run_command("hash sm3_256 $loadaddr 0", 0));
->> +	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
->> +	ut_asserteq_ptr(uts->actual_str,
->> +			strstr(uts->actual_str, "sm3_256 for "));
->> +	ut_assert(strstr(uts->actual_str, sum));
->> +	ut_assert_console_end();
->> +
->> +	ut_assertok(run_command("hash sm3_256 $loadaddr 0 foo; echo $foo", 0));
->> +	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
->> +	ut_asserteq_ptr(uts->actual_str,
->> +			strstr(uts->actual_str, "sm3_256 for "));
->> +	ut_assert(strstr(uts->actual_str, sum));
->> +	ut_assertok(ut_check_console_line(uts, sum));
->> +
->> +	if (!CONFIG_IS_ENABLED(HASH_VERIFY)) {
->> +		ut_assert(run_command("hash -v sm3_256 $loadaddr 0 foo", 0));
->> +		ut_assertok(ut_check_console_line(uts,
->> +						  "hash - compute hash message digest"));
->> +
->> +		return 0;
->> +	}
->> +
->> +	ut_assertok(run_command("hash -v sm3_256 $loadaddr 0 foo", 0));
->> +	ut_assert_console_end();
->> +
->> +	env_set("foo",
->> +		"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
->> +	ut_assert(run_command("hash -v sm3_256 $loadaddr 0 foo", 0));
->> +	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
->> +	ut_assert(strstr(uts->actual_str, "!="));
->> +	ut_assert_console_end();
->> +
->> +	return 0;
->> +}
->> +DM_TEST(dm_test_cmd_hash_sm3_256, UTF_CONSOLE);
-> 
+>>   };
+>>
+>>   /* NV index attributes */
+>> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+>> index 5b21c57ae42..f443b738f82 100644
+>> --- a/lib/tpm-v2.c
+>> +++ b/lib/tpm-v2.c
+>> @@ -686,10 +686,10 @@ int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs)
+>>
+>>          pcrs->count = get_unaligned_be32(response);
+>>          /*
+>> -        * We only support 4 algorithms for now so check against that
+>> +        * check against the supported algorithms in hash_algo_list,
+>>           * instead of TPM2_NUM_PCR_BANKS
+>>           */
+>> -       if (pcrs->count > 4 || pcrs->count < 1) {
+>> +       if (pcrs->count > ARRAY_SIZE(hash_algo_list) || pcrs->count < 1) {
+>>                  printf("%s: too many pcrs: %u\n", __func__, pcrs->count);
+>>                  return -EMSGSIZE;
+>>          }
+>> diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+>> index c314b401d0b..d41228f75a9 100644
+>> --- a/lib/tpm_tcg2.c
+>> +++ b/lib/tpm_tcg2.c
+>> @@ -12,6 +12,7 @@
+>>   #include <u-boot/sha1.h>
+>>   #include <u-boot/sha256.h>
+>>   #include <u-boot/sha512.h>
+>> +#include <u-boot/sm3.h>
+>>   #include <version_string.h>
+>>   #include <asm/io.h>
+>>   #include <linux/bitops.h>
+>> @@ -143,6 +144,12 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
+>>                          sha512_finish(&ctx_512, final);
+>>                          len = TPM2_SHA512_DIGEST_SIZE;
+>>                          break;
+>> +#endif
+>> +#if IS_ENABLED(CONFIG_SM3)
+>> +               case TPM2_ALG_SM3_256:
+>> +                       sm3_hash(input, length, final);
+>> +                       len = TPM2_SM3_256_DIGEST_SIZE;
+>> +                       break;
+>>   #endif
+>>                  default:
+>>                          printf("%s: unsupported algorithm %x\n", __func__,
+>> @@ -319,6 +326,7 @@ static int tcg2_replay_eventlog(struct tcg2_event_log *elog,
+>>                          case TPM2_ALG_SHA256:
+>>                          case TPM2_ALG_SHA384:
+>>                          case TPM2_ALG_SHA512:
+>> +                       case TPM2_ALG_SM3_256:
+>>                                  len = tpm2_algorithm_to_len(algo);
+>>                                  break;
+>>                          default:
+>> @@ -431,6 +439,7 @@ static int tcg2_log_parse(struct udevice *dev, struct tcg2_event_log *elog,
+>>                  case TPM2_ALG_SHA256:
+>>                  case TPM2_ALG_SHA384:
+>>                  case TPM2_ALG_SHA512:
+>> +               case TPM2_ALG_SM3_256:
+>>                          len = get_unaligned_le16(&event->digest_sizes[i].digest_size);
+>>                          if (tpm2_algorithm_to_len(algo) != len) {
+>>                                  log_err("EventLog invalid algorithm length\n");
+>> --
+>> 2.20.1
+>>
 
 -- 
 Nabla Software Engineering
