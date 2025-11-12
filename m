@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAA61CD4849
-	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 21:18:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E30CD4847
+	for <u-boot@archiver.kernel.org>; Wed, 12 Nov 2025 21:19:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D47383D0D;
-	Wed, 12 Nov 2025 22:18:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 114C083D4A;
+	Wed, 12 Nov 2025 22:19:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cwVkdT4N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P7F6HVzC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3B2983D40; Wed, 12 Nov 2025 22:18:46 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 0394E83D6C; Wed, 12 Nov 2025 22:19:47 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F78483CEA
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 22:18:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E377883D0D
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 22:19:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c2846c961fso105154a34.2
- for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 13:18:44 -0800 (PST)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-450252e3bceso26017b6e.3
+ for <u-boot@lists.denx.de>; Wed, 12 Nov 2025 13:19:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1762982323; x=1763587123; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ud7xwnS/HbI9AnV9+rol708eiFeeMmMkWefgpMx8ssU=;
- b=cwVkdT4NCM+DgEJcRb6yGkC35GODWPCaQLbqHwphElG69V9imHXz92PH+Q2XZB6wd4
- dm/R8MZPT6Ue0+dMy/IIdXy0BJFUNd+g+NdXmdzw5MK8Byy0UpcCS6TmKc4RFkJChUnk
- 6ycKCu88TK4rghW8Wly9EjWN1C0/e2H87TAzU=
+ d=konsulko.com; s=google; t=1762982383; x=1763587183; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7ZFOuiWJGiu9qy37ovCXyUr3s1hhf36jjCJrPwF8TBA=;
+ b=P7F6HVzCbB1QnD/JrzkKCuiLTmMQCNcbW6Ro773a8sTBoecPyOIYyarJkRNSpg7lxd
+ HLCCraOcrxwgLub0hp0/hUE2g9Z83Ql/5P1iJ4CVPjtvwiUujf3untA4DDnQntg415xZ
+ aOG6kdKoFSSyaFrlu84qivpCCMSLLo8vZSZpI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1762982323; x=1763587123;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ud7xwnS/HbI9AnV9+rol708eiFeeMmMkWefgpMx8ssU=;
- b=jGI0Bm9leNHh/4DCcA53UB0jMUUN9ANgml5gigLaNYp5zmNcVpgSOALn13l8HVyaKf
- pQQHi6qNIIf7DOvyJID+JPJYGdzEnlNHtICPaYVBZIAzf8y+3Thdq1b36D2lX/be9EBS
- 9xJHdRlNmT4kPf8pQXXY6YonEIIb8zEKFbvY9AqbzGSulAmSZiOTD5d9MpXVjoL7pH+s
- LkrAVVQrQ1RWa9XmeSYV7qhMTPV3WHWOr5thO5M8pwI7hb2LJ4s/71PtjFvkzqLYl1Rd
- GhQ6nTPV482BMMG+A8/yNhrnriuxP8UTUKAYIwyt6gsbbTjdY11K8oaEfWG6mYVJjLf1
- iIJQ==
-X-Gm-Message-State: AOJu0YzIUeIuSoQByNRZZHRCM90MIqTzI2uD1cMj7cdyrPqjcrYCjutt
- 7iyzyAbfb79Zxgr8feDNtc06UVLoGIkdVCu/2CuowIq5gRy2Os0iSTBpKXkUv50sOCQpOXi3QJd
- zyvglGGt6Hg==
-X-Gm-Gg: ASbGnctS/1h4aLgm6QRwhJySeg5HHK4+lyf2iAcXORw/mQHu27O1kOeCaJZaQmgIwz0
- ZGOr2vTWYQDF8ERysp3aF/XQtZsRXcCV6k2qShjfZ1OfTsyvC4DUokIJGgj8GSrQ1L3w8Xh9ZDh
- OwoxOzXOH/5RFpiw9GsgC/Qqv9IQa1va0reeLUXZEHEwhIEugXWWbN0tQDxTA+z4YUxn3pld27K
- f7XyJc30VudGPxB5LqFbyoTtMgZrua2mihH1vBjCaJPGmZFEDUYpnKgQ4i8vKVjGqx381ASGoX6
- pEJoJW9FwX97xlEbzFTJLqEBroUgnrSw9E8+raCydBPaitrc+jXZwkGln1DM9HNEwqQziGqREF4
- 4Jg+aV6PXEy3avoZay8JRWIeLNUdTj07qXvTEMCT4e4zZp226P56NXcN49nj12em8sNWUzX1SUw
- Uk4tfBCsmnszOYkcQalIJgYSm61wRSDLP+UP8Brkws1A==
-X-Google-Smtp-Source: AGHT+IH5OoywjO2tPG2YqGtsr1u3KwhEG/piCLCATKDYT8KiB6Y9yvWaCaeunaEK1XtXvfElOacCTg==
-X-Received: by 2002:a05:6808:66dc:b0:450:7dc5:541e with SMTP id
- 5614622812f47-4507dc557b1mr1140192b6e.54.1762982323249; 
- Wed, 12 Nov 2025 13:18:43 -0800 (PST)
+ d=1e100.net; s=20230601; t=1762982383; x=1763587183;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7ZFOuiWJGiu9qy37ovCXyUr3s1hhf36jjCJrPwF8TBA=;
+ b=vM9pmlI6knKvTLMw4/9sYHjKxbuq4T1Cem6LZO4AwkVDYzR5xwXcW6c1js49u+kF+K
+ LYJ4uk652i4gmUFhHGGLEKe5Pg/YNa0xeNAdB68b4n22Hy80xHW/sP7rMI1y/+7M3vtI
+ 15tE8Z8MRD+V0Yl0rb8W7kUE9Nsrd50hjLXy9Oe1OBok8l+4hkCJrti3OJqM62Rnucz/
+ /lz39dOEKln6xovRu10h2BnBQHBl69fTCSWfOLRvcMrlMyUN10fGrsazqHHztOQ5dK3O
+ f54IFHvHBX0GGg0FYsHixmftUD8aF2SJH176kGqR2XKsf6upHFKzbFr5ErCXRzZBvbvw
+ qkIg==
+X-Gm-Message-State: AOJu0YyUtbQYjWZGyxWB34BtnjinoJ0McTfYqkUmlpe4+7oDq/arayjv
+ sWmkB/tpBsn1N1CnUuT3++oeKqocLvWC6kjjE9SxsdBNCZ5G4RseluxYLcpi6k4ksyhL+ePsxWA
+ l6KTi26k2og==
+X-Gm-Gg: ASbGncuYpX1NkoWQGuRmAEctL1m1Hl6u88F9hgSessLQHRf+1N0Qj++Hc3bwDx1rm6a
+ gnkqmJBOGkhDtmeIYc9jvRlFW8nhLtgyB67FRDAlZQvoShXs7Wevs0F+pqKuNEftv16iz8ik8Gq
+ mzsgINiDkUVJfP0JYaUqyDvceb6KFl+RQ/YmdIlzDueoX6oMRLnCAHSTWn1LTu+RemdcGLAhmoS
+ uXRF8OCheKU7R8q3AYgm6k2IrmlRTV1ECkIWDT2RFpSEZIyM9X0mbpmJJGhJhzaWY6w5+SR3gRz
+ Bih09/gatOnGvkGLQqNumORykZh+G8z+f0BgMKjnlB752IS6i4f+dQcj99jWUh6hfkiscEn9mwN
+ N4BmZprU36MAGL3LzhwE8J7sj5mWl6hiC6OpP6Ea6KTFr6htaS3oAQZ3mRgQ6a3VZeTghShiLeQ
+ twFWs2tpH9s/s4p/1OjY5QONjfBbcbpqBdW74FcbFBYYrmdDN1fMfP
+X-Google-Smtp-Source: AGHT+IHzAp26E6WcScJUQsu9PB+wrxVZgHQ7uBHH8lyFnUrJTYH1J+Dqtt17qvblfF1FycjDJEWUmA==
+X-Received: by 2002:a05:6808:1794:b0:450:10b:a541 with SMTP id
+ 5614622812f47-450745ae582mr1962818b6e.33.1762982383655; 
+ Wed, 12 Nov 2025 13:19:43 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45002752ca9sm8895186b6e.14.2025.11.12.13.18.42
+ 5614622812f47-450027c574csm8750328b6e.19.2025.11.12.13.19.42
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Nov 2025 13:18:42 -0800 (PST)
+ Wed, 12 Nov 2025 13:19:43 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH] ufs: rcar-gen5: Use a unique U_BOOT_DRIVER name
-Date: Wed, 12 Nov 2025 15:18:41 -0600
-Message-ID: <20251112211841.1428696-1-trini@konsulko.com>
+Subject: [PATCH] fs/jffs2: Make depend on !64BIT
+Date: Wed, 12 Nov 2025 15:19:42 -0600
+Message-ID: <20251112211942.1429056-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -95,34 +93,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All instances of U_BOOT_DRIVER must be unique or we will have link time
-failures. It is possible to enable both ufs-renesas-rcar.c and
-ufs-renesas-rcar-gen5.c at the same time, so give
-ufs-renesas-rcar-gen5.c a new unique U_BOOT_DRIVER name.
+Building this code on 64bit platforms leads to warnings (and so errors
+in CI). Rather than rework the code, as this is a deprecated filesystem,
+don't try and disallow building on 64bit hosts.
 
-Fixes: 3351fe7ecc1a ("ufs: Add UFS driver for Renesas R-Car X5H")
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
----
- drivers/ufs/ufs-renesas-rcar-gen5.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ cmd/Kconfig      | 1 +
+ fs/jffs2/Kconfig | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/drivers/ufs/ufs-renesas-rcar-gen5.c b/drivers/ufs/ufs-renesas-rcar-gen5.c
-index 3c66022579fc..cc53e91449c3 100644
---- a/drivers/ufs/ufs-renesas-rcar-gen5.c
-+++ b/drivers/ufs/ufs-renesas-rcar-gen5.c
-@@ -258,7 +258,7 @@ static const struct udevice_id ufs_renesas_pltfm_ids[] = {
- 	{ /* sentinel */ }
- };
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 5b9c13d85e76..278c6eaf0f3e 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2912,6 +2912,7 @@ config CMD_FS_UUID
  
--U_BOOT_DRIVER(ufs_renesas) = {
-+U_BOOT_DRIVER(ufs_renesas_gen5) = {
- 	.name		= "ufs-renesas-gen5",
- 	.id		= UCLASS_UFS,
- 	.of_match	= ufs_renesas_pltfm_ids,
+ config CMD_JFFS2
+ 	bool "jffs2 command"
++	depends on !64BIT
+ 	select FS_JFFS2
+ 	help
+ 	  Enables commands to support the JFFS2 (Journalling Flash File System
+diff --git a/fs/jffs2/Kconfig b/fs/jffs2/Kconfig
+index 3bf01cd03137..dede59ee3362 100644
+--- a/fs/jffs2/Kconfig
++++ b/fs/jffs2/Kconfig
+@@ -1,5 +1,6 @@
+ config FS_JFFS2
+ 	bool "Enable JFFS2 filesystem support"
++	depends on !64BIT
+ 	help
+ 	  This provides support for reading images from JFFS2 (Journalling
+ 	  Flash File System version 2). JFFS2 is a log-structured file system
 -- 
 2.43.0
 
