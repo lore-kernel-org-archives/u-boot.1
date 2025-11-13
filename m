@@ -4,180 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5252CD8CAF
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 17:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E515BCD8CB0
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 17:46:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C94983FBF;
-	Thu, 13 Nov 2025 18:46:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 7868283FC6;
+	Thu, 13 Nov 2025 18:46:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ofMBO4Pc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iXbn8MnA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F171C83FC0; Thu, 13 Nov 2025 18:46:02 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9868083FBF; Thu, 13 Nov 2025 18:46:29 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D3FE830A0
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 18:46:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D4FE83FC6
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 18:46:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=3412314e69=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5ADHg2O0215890; Thu, 13 Nov 2025 18:45:58 +0100
-Received: from gvxpr05cu001.outbound.protection.outlook.com
- (mail-swedencentralazon11013019.outbound.protection.outlook.com
- [52.101.83.19])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4acqa7eqa5-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Thu, 13 Nov 2025 18:45:58 +0100 (CET)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=c1DcPkgd3A0G7RSps0wnxFhK89zXwSVmvU0Xd7vDKTZOBbscVoETxVzjzACQ4Tq/BDM4pt8FkH0c9Hm0iWUvtZraOgS2a5xoH5aW0Ebi3iTTUAt74ZK9jzXUANca2ZYHnoh+1sV9FU6kOdLTEmkagC76JfAH3G42uwGcDH2QWYGR8UdtkIvO4y9NEQJY5y8T0PrKHnbM8YVd2N6ACKlBOxd2rEQvdRbUKs/ZRwPEFqa6M0GRp6QUOomW/2LXVPmW3JtTwBJ/IhFfjTk9QfH1gkV4D4SVflViKSICfgs0ZuFeJ4CtBKYixo8GuMFM6yw5X3gOG00+CrtW772dJ9ikyg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/ybKV7602xM7ZXtGK8CuyoTmli15kH3A0X4WrHi2G04=;
- b=E2+xwqO5R38mohOO9ZShdkQwEha8AoXS88gMcrlq5Ix4SARW5qaEUz1G0d0VBsOsFMdRLo5pabBkWpnEAYrHnZo920imtjW9JvCZ+DPhHfGlcVcaG0hgKgvEjwQBJEocwntQdn3lFstlF5FpUbF/gygwsW1EvN+alZiheFvRBvszcGRXfsy4arm2Q3HW9NLq7O28wKqKBlhTTLE80lJyuZZSDLF8eq2CsqWV6k9zqN2Z1ecu8I13LPWzQ99fzc7hbBdv10IJfX7Ys9oHFTjF+4pXy4ZbQyyUf5Xhw2FYJYCEvJ01LzuFIlC3dwbvAqBFZyt2mCtxsJh2MmGTBElsQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/ybKV7602xM7ZXtGK8CuyoTmli15kH3A0X4WrHi2G04=;
- b=ofMBO4PcuQfwVOKnsTTC2wg+CVO1Grijj+iZumO6UhJvMWgzBH6otzaqPdNspllVglkpAop09mycijzugeTmwxfJe+/PZ6O1NW201nOc7Wqs8Y3YStbq7vVdzLRNFZyLOlNUQmMxaKUnDEQMsftOq3p49HgXGuPlvYhH169jme5mvqBozSzX/Bfe03PvPruiJ9Qm8RqV6wLbnnyoYbtys6gLtGKLZFuA9YWNqewSVDh3EyosrOG1FVkOKCoEXRFPJZnRcIs9gAy4FCrJUa8YO6LBjwxYDEDPO4zpvR07+5VXiWOJriwklSTazOhlTFrSjJbmsG82OPiBCqHvgHiKgQ==
-Received: from AS4P189CA0036.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5dd::7)
- by AM7PR10MB3655.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:13a::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Thu, 13 Nov
- 2025 17:45:56 +0000
-Received: from AMS0EPF000001A8.eurprd05.prod.outlook.com
- (2603:10a6:20b:5dd:cafe::69) by AS4P189CA0036.outlook.office365.com
- (2603:10a6:20b:5dd::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.17 via Frontend Transport; Thu,
- 13 Nov 2025 17:45:51 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS0EPF000001A8.mail.protection.outlook.com (10.167.16.148) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Thu, 13 Nov 2025 17:45:55 +0000
-Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 13 Nov
- 2025 18:46:05 +0100
-Received: from [10.48.87.108] (10.48.87.108) by STKDAG1NODE2.st.com
- (10.75.128.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 13 Nov
- 2025 18:45:53 +0100
-Message-ID: <993e5192-5d7a-4dab-ab90-c73ba5b32b4c@foss.st.com>
-Date: Thu, 13 Nov 2025 18:45:52 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c70fcc8561so425414a34.0
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 09:46:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763055986; x=1763660786; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Alb5dvqR3kEEvrR+vWKK9n8gphKNJI7ROgugzjQyhhM=;
+ b=iXbn8MnAqWe/gwzHzyKSStfazMb3NIFxARhKO2dr4MegvY7q4JfpZvTRCK+80PUz/9
+ 0wCMp6P+bPS4p4yyc3aZbSPG5FogZ6vsBjIIe1EMN5Db3ysuwcydoc2wqMzdPoe/JmeG
+ xpo+cwzGWPydmdGg2thJRbylPXue9lTh1Eh8g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763055986; x=1763660786;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Alb5dvqR3kEEvrR+vWKK9n8gphKNJI7ROgugzjQyhhM=;
+ b=Lyfl9XGvgZ0rkU0QYEffgEGr8VxjiWt1okYxwBbr+VhCCJZMW4B/ETMP3sC2dE5a7b
+ 8oKCP+N9Jl8u68kUqmk4jpePM//iFetOAFwNfd7w9KHzmXmw4B474aT75PH9bdrtov2q
+ luthAUk/aWMBFMkJ6uZpzxd+0/A4QL3B4za8QT/Nwe2TBOD9MKCglEekAxZBZbG1waYZ
+ ATTjjGY4SGDF2p2nmbSIMp7MnrBT5S/XUkC/zJa+HZ0x+6yGOhQGcGQZmE0drl3fz92w
+ 2RiBaVJxXKfc9hvfaPxq2NsHpL7n/JNV49nQ0z3XoDjmuJcxATebOYoDZScVdy9t6Xgi
+ 6jHg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUMzBBC0AliSr+TvQZcd66XMkTYlXy/hWM2tUa8zYJL3kx4FJ/Dl4em8j/F6mK5Ery4/sylsSc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxOv1ZClVSg6s1D4vJbqIiae2Ti0cBy/4W/ZPBFIRsXZJNvz8N7
+ rJ7/dnrIhy/5f5HYrjFOQbrMHza+q4R8HmmKdDxsKEdMimBPnREm9G8Kx+jHxePFIHU=
+X-Gm-Gg: ASbGnctaxZ+q6hWfHf5C9hdGfDoK0yudoAbeMxfGQ5En7u1t41sAr7Tm1e47x+rtUS4
+ Rzo3SFXhI/HoyF8HbF155EDPj9gObhfkofy3EQsjIAMpuDlmSVWoZ6dthyt3v3r8Wc2T2Zu0jop
+ 0UvmOpBMLtVC1oH3e3RAmvye3jG1SA36cudq44rObrmdg3TcyULyHKNcukdm9PJEHEZyl5gMj3B
+ zV0XxeYJuQA0cqc/Z2B1jxbqyJ/5uVGymeI7gShRXO3WYQZw2eO8RRssBw8OV7wBt3MiqmQ6uJ7
+ pWSh4Qg+O7SRWr8WsfjJQhxj/SVOeoBKuYKq629AWqtaG8LBE89nlaqeB7IKNdzyRRu6N/rx1se
+ kPAK7qsTDncaflmXZWkKx8iY8eNSnoNZPaGKksXaHdKVC2M9RgSY47xT5tFXTSupJ7/pk0W4tv2
+ ewdgZbnKlJeT5Y5/Ai6uTNijFsAn4dSSTQZSF7JhE=
+X-Google-Smtp-Source: AGHT+IH9O8czq7gWKeMmaKXZhKRrucpK4cg9UuCq64n+c/HetRQ2zmeGNvgtm9E0dIrVokIlhS/4WQ==
+X-Received: by 2002:a05:6830:6da0:b0:7c5:31b6:435c with SMTP id
+ 46e09a7af769-7c74453907bmr200760a34.29.1763055985898; 
+ Thu, 13 Nov 2025 09:46:25 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c73a29d716sm1579419a34.13.2025.11.13.09.46.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Nov 2025 09:46:25 -0800 (PST)
+Date: Thu, 13 Nov 2025 11:46:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Quentin Schulz <foss+uboot@0leil.net>,
+ Ziping Chen <techping.chan@gmail.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Johan Jonker <jbx6244@gmail.com>, Xuhui Lin <xuhui.lin@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Klaus Goger <klaus.goger@cherry.de>,
+ Eugen Hristev <eugen.hristev@linaro.org>,
+ Durai Manickam KR <durai.manickamkr@microchip.com>,
+ Stefan Roese <sr@denx.de>, Zixun LI <admin@hifiphile.com>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>
+Subject: Re: [PATCH 03/11] doc: cmd: document the led shell command
+Message-ID: <20251113174622.GL6688@bill-the-cat>
+References: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
+ <20251112-led-old-dt-v1-3-2892d49517db@cherry.de>
+ <c10c2b6b-5daa-4128-aeae-977bb0f72be9@cherry.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] stm32mp: Add stm32mp23 support for syscon driver
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
- <trini@konsulko.com>
-References: <20251017121852.109561-1-patrice.chotard@foss.st.com>
- <20251017121852.109561-6-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20251017121852.109561-6-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.108]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE2.st.com
- (10.75.128.133)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001A8:EE_|AM7PR10MB3655:EE_
-X-MS-Office365-Filtering-Correlation-Id: b2c6e611-c557-416a-4288-08de22dc7f7b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?M1RwL0dpYW9YOFdYbENKL0wvYkVic2pQaDltZW9CV0IxRGtLdkJQRXdmekJS?=
- =?utf-8?B?Nm80QzJKT00ydzRETWJQelhWQ1A3OU9MeE9JdDdGWFV2NUdvYktvSUNHV3h5?=
- =?utf-8?B?Sjh2ZTh2VjVUS2tpbHdhcnAza1dwbk5NbE10Uk5KY3lJUzhER3dpdnhoa09S?=
- =?utf-8?B?b2EzQkRFa3JwbDArOUZqZ1BBcEJqYmlwWVVOYWlheUZVWXNHQ3FkTys3SWtR?=
- =?utf-8?B?RjdWUDV1NHBCZklWV2RUMmFsZys4cWVudk5HR2dpeWh4UTg2aHB5dms1cXBr?=
- =?utf-8?B?azlpYStvZWxNbWQvUlAxK0h3Nkw3R1ZYR1h5YllRbU1LRW9GM3lrdWZZVkJL?=
- =?utf-8?B?dlExN2NyaVUrK2NPZFlKaHZLeFBoTTRHN1Y4bTVhcGxZYVFtNUt4VTZTVEc3?=
- =?utf-8?B?U2NwMW1jb09Ic3pxWWdlQit1SjBsYUQ1NUxvNms1WUJ6N0ZVZ3RmT3c1SEow?=
- =?utf-8?B?bytzNHlvbGxJd0YxSk1NR2ZLMkRVbDNQd2plSGljeGVPUE1OMitsOVJ0Mytq?=
- =?utf-8?B?eGFYWFkweXZJTFc1akhsUGtLZHUzUk55OUVwQ3FCTzJBNTQ1d0xzS0lBekpo?=
- =?utf-8?B?OHZHMlByWTN6aTh4SlZqLzFtTFFvYnE1Zk1IVmV2bzh2ZUhsUlRreVZxVURj?=
- =?utf-8?B?UEw1OFMraThWQXJKNkdnV0UxVlhWcHBISTc5YVdSVHdYa0grS2E2MHJjTnho?=
- =?utf-8?B?V1Z3VWxpVlVWMjZ4QWNsdUhQSlh2RzIrUmloaVQrZjFOZDlkdnkvSFE2VUJ0?=
- =?utf-8?B?ODVaTWZvMVR0NTJENzJOSEtWVTdBT2ZSR0NlQ200UzNNWTZVeFFzYkJvNytJ?=
- =?utf-8?B?VjF5S1FNRzBmbzgrRk91c29TWUw3V04rRkozVWhxL3l3REZVUS9Kc09ERjlk?=
- =?utf-8?B?UGZTM3VOUmRkMGRjNEg4RElTYTEwY245V2liVm85L2RzUTZoOGlMZ25IeGlt?=
- =?utf-8?B?OHd2dk50NGo1cnB3MVNNdnZjU3lERVNUVHA4RkNMYTVFNTBIVktTaGw4bFlU?=
- =?utf-8?B?dlhIOU5MdTc2cUlNTk0xT1ZuYjNiR1VzRU80TkZiQ1p2ZW90MkQzSmhUMzJK?=
- =?utf-8?B?WUN3aDdsQ1pMVEM2ZElUNHQ3eW4xaW11SWxlK1lVQnYxZFF1MDlscmRBcFg4?=
- =?utf-8?B?TDBVVS9zWnlBaWM3WUEwY2VnMWFuanozR3prNjA2d1NScXBseGc2SGpGNzVC?=
- =?utf-8?B?SUdOc3JGbTZLc1BGbmZaK2FnZ21LRlh5OHRzS0dBWmdvSWdCSFlZZUo2QXJk?=
- =?utf-8?B?c1kxcFRCL2RUWU5yZEpxY3YzZm5GYk1GQjFHclFGSTZyMkJHMUNyd1lZOXV4?=
- =?utf-8?B?WXEzZ3EvMjlPREFTTTR1ZXpiTTJmNUtTazVaTERoakpUVjhJVjRqaW00S1ZB?=
- =?utf-8?B?cmtWNktIR1ZWYlB3VEVqWGRlb3hYODJ5RnhBVjZMY3FXcVlXa2Y4dndtdks5?=
- =?utf-8?B?RDcxWVVNZ2UwT3pmKytiY2lTaEk5QzdKVlRNaXkzeWY3d00zYjU5N3NUQ0ZJ?=
- =?utf-8?B?WDFxQnVqcVFVK2ZLTmF1QjVPZ01rNG5neHZ6dUF1bGRoakJYSFVOTHUzRVlq?=
- =?utf-8?B?WjI1OEtFYjJjeEZVbVd2bVNqNG9rUDM1bE5xSlJkRC9SRFVTN2hhVTMrZEJm?=
- =?utf-8?B?MjQ2ZUUycWNYVGFrOXRrSG9ZNWZXWFNzSzRHUGRaZEp3TDRWbUU5R2JVWE5L?=
- =?utf-8?B?eUREQzRMZ3gySWRUOWc3TndMR25ESEFoUjdhelZoOCtVcXFiRDNPT0lDZDlO?=
- =?utf-8?B?a1JwMnVVVDkrd092T2hlWk1pNEtTZ1ZBWkdlell4WE5LWXVjT3JCZ2ZXallm?=
- =?utf-8?B?UjNPV0hVM09wTG82WkhVc1dMTzZmaU9PTWNUNEtxVjJCOEdLMTVNZTFuUXRZ?=
- =?utf-8?B?dW1veEZnY0pVNUh0aXhJSUVLd213L1Z0a2l3RmNQWmJoc29xODhpZ283Qkty?=
- =?utf-8?B?N1N6b3QxdTkrbEhHT1BhRFE5cUIway95Q2w5NUd1dHZ0UndzYjBhdmxJY1JJ?=
- =?utf-8?B?ei9WZTVlTTExOWNXUHdaTldjbm1UZWJlZFRhcU0yWWx1d3hGNXcrNmhjWEJl?=
- =?utf-8?B?cHd1VVRKaGEwV3lPckpXWVBwWHQ5MFhNenJxS0VDL2EwNVIyelZFMWx2cnI1?=
- =?utf-8?Q?Uneg=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 17:45:55.9268 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b2c6e611-c557-416a-4288-08de22dc7f7b
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001A8.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3655
-X-Proofpoint-GUID: xvvZofECw2dF_EOnr2EmLXT4tGqr2JbJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEzMDEzOCBTYWx0ZWRfXzf1YZKbMvSZI
- Vf9St8r3jlWUreqC2dJg8KxnfwE5Qp+2mgDjCK3Lcj2x2CUx3FaQwE+DPZi1TEA6/IQXiyr1tKk
- E7clYsv9I8nc4x+vt5YNplbHtvbG5rweBMGFVWN8azglf1rOPXYafBWyiaUN9C2RufEDHSX5wll
- Aq0gqLu9CgD+UXXvDb/9XeLd07FdUuRIipA5tM6gTPEjIU/0hwrmQ6YKfj282nl+W+oX6XfSjbd
- ZPOkV9FdPKLDwh8g9nLCzuTz/p5z5i8hyFd9ex2lwVFtwWiBJYUaeLcDtktioJfrAagCXJTYcLJ
- HuVhrFdWnZwGpnuP9qlhPP2p4hZyRvuVrwhA6wRTqo0dXk4NoOcX+4nJk12fQXsz2KfGYx3PA00
- emVtb+5cgwX5j7LCaSmZnv5oHOUViw==
-X-Proofpoint-ORIG-GUID: xvvZofECw2dF_EOnr2EmLXT4tGqr2JbJ
-X-Authority-Analysis: v=2.4 cv=VoAuwu2n c=1 sm=1 tr=0 ts=69161956 cx=c_pps
- a=yGpyVr8xkxB+PwK9r0fouA==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=q6CKDgr7omsA:10 a=IkcTkHD0fZMA:10
- a=6UeiqGixMTsA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=8b9GpE9nAAAA:8 a=8Fl8rnC1YPDXN3uPh78A:9
- a=QEXdDO2ut3YA:10 a=T3LWEMljR5ZiDmsYVIUa:22 a=HhbK4dLum7pmb74im6QT:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-13_03,2025-11-13_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1015
- impostorscore=0 adultscore=0 priorityscore=1501 phishscore=0 suspectscore=0
- malwarescore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511130138
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="c94XsnvcoPcc0VY7"
+Content-Disposition: inline
+In-Reply-To: <c10c2b6b-5daa-4128-aeae-977bb0f72be9@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -194,37 +113,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 10/17/25 14:18, Patrice Chotard wrote:
-> Add "st,stm32mp23-syscfg" compatible.
->
-> Fixes: fdd30ee308a2 ("ARM: stm32mp: Add STM32MP23 support")
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->
-> ---
->
->   arch/arm/mach-stm32mp/syscon.c | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/arch/arm/mach-stm32mp/syscon.c b/arch/arm/mach-stm32mp/syscon.c
-> index 8bcbd979340..b00897e87ec 100644
-> --- a/arch/arm/mach-stm32mp/syscon.c
-> +++ b/arch/arm/mach-stm32mp/syscon.c
-> @@ -10,6 +10,7 @@
->   
->   static const struct udevice_id stm32mp_syscon_ids[] = {
->   	{ .compatible = "st,stm32mp157-syscfg", .data = STM32MP_SYSCON_SYSCFG },
-> +	{ .compatible = "st,stm32mp23-syscfg", .data = STM32MP_SYSCON_SYSCFG},
->   	{ .compatible = "st,stm32mp25-syscfg", .data = STM32MP_SYSCON_SYSCFG},
->   	{ }
->   };
+--c94XsnvcoPcc0VY7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Nov 13, 2025 at 11:58:23AM +0100, Quentin Schulz wrote:
+> Hi all,
+>=20
+> On 11/12/25 6:48 PM, Quentin Schulz wrote:
+> > From: Quentin Schulz <quentin.schulz@cherry.de>
+> >=20
+> > This adds documentation on how to use the led shell command.
+> >=20
+> > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> > ---
+> >   doc/usage/cmd/led.rst | 95 ++++++++++++++++++++++++++++++++++++++++++=
++++++++++
+> >   1 file changed, 95 insertions(+)
+> >=20
+> > diff --git a/doc/usage/cmd/led.rst b/doc/usage/cmd/led.rst
+> > new file mode 100644
+> > index 00000000000..b5623895c7e
+> > --- /dev/null
+> > +++ b/doc/usage/cmd/led.rst
+> > @@ -0,0 +1,95 @@
+> > +.. SPDX-License-Identifier: GPL-2.0-or-later
+> > +
+> > +.. index::
+> > +   single: led (command)
+> > +
+> > +led command
+> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > +
+> > +Synopsis
+> > +--------
+> > +
+> > +::
+> > +
+> > +    led <led_label> <on|off|toggle>
+> > +    led <led_label> blink <blink-freq in ms>
+> > +    led <led_label>
+> > +    led list
+> > +
+> > +led <led_label>
+> > +---------------
+> > +
+> > +Get state of the LED whose label is the one passed as ``<led_label>`` =
+argument.
+> > +
+> > +Provided ``<led_label>`` is *module_led*, the possible outputs for thi=
+s command
+> > +are::
+> > +
+> > +    LED 'module_led': off
+> > +    LED 'module_led': on
+> > +    LED 'module_led': blink
+> > +
+> > +led <led_label> on|off|toggle
+> > +-----------------------------
+> > +
+> > +Turn on, off or toggle state of the LED whose label is the one passed =
+as
+> > +``<led_label>`` argument.
+> > +
+> > +led <led_label> blink <blink-freq in ms>
+> > +----------------------------------------
+> > +
+> > +Make the LED whose label is the one passed as ``<led_label>`` argument=
+ blink at
+> > +a frequency specified by the argument ``<blink-freq in ms>``.
+> > +
+> > +The frequency is parsed as a decimal number and its unit is millisecon=
+ds. The
+> > +duty cycle is 50%. Example::
+> > +
+> > +    led blue blink 1000
+> > +
+> > +will make the *blue*-labeled LED blink with a state (on or off) kept f=
+or 500ms
+> > +before switching to the other state (respectively off or on) for 500ms,
+> > +looping endlessly.
+> > +
+> > +led list
+> > +--------
+> > +
+> > +List all available LEDs by their label and provide their known state, =
+which can
+> > +be either *off*, *on* or *blink*.
+> > +
+> > +If a LED has not been probed yet, its state will be shown as *<inactiv=
+e>* in the
+> > +list.
+> > +
+> > +Examples
+> > +--------
+> > +
+> > +::
+> > +
+> > +    =3D> led list
+> > +    module_led      on
+> > +    sd_card_led     <inactive>
+> > +    =3D> led module_led
+> > +    LED 'module_led': on
+> > +    =3D> led module_led off
+> > +    =3D> led module_led
+> > +    LED 'module_led': off
+> > +    =3D> led module_led toggle
+> > +    =3D> led module_led
+> > +    LED 'module_led': on
+> > +    =3D> led module_led toggle
+> > +    =3D> led module_led
+> > +    LED 'module_led': off
+> > +    =3D> led module_led blink 1000
+> > +    =3D> led module_led
+> > +    LED 'module_led': blink
+> > +    =3D> led sd_card_led
+> > +    LED 'sd_card_led': off
+> > +    =3D> led list
+> > +    module_led      blink
+> > +    sd_card_led     off
+> > +
+> > +Configuration
+> > +-------------
+> > +
+> > +The *led* commands are only available if ``CONFIG_CMD_LED=3Dy``.
+> > +
+> > +The *led <led_label> blink* command is only available if ``CONFIG_CMD_=
+LED=3Dy``
+> > +and either ``CONFIG_LED_BLINK=3Dy`` or ``CONFIG_LED_SW_BLINK=3Dy``.
+> >=20
+>=20
+> It seems like there's another led shell command that you can build with
+> CONFIG_LED_STATUS_CMD=3Dy that uses the legacy LED API... Should it be
+> mentioned/have its own documentation page?
+>=20
+> Maybe we should spend time porting the 5 defconfigs that make use of this
+> legacy API to the new one and entirely retire the legacy LED API. However,
+> there seems to be some discrepancies between the LED_BOOT behavior and th=
+at
+> of CONFIG_LED_STATUS_BOOT. The former blinks for a brief period of time a=
+nd
+> then is solid on once reaching U-Boot's main loop. The latter is blinking
+> sometime after relocation and then turned off on first BOOTP packet.
+>=20
+> Out of the 5 defconfigs, 3 are using GPIO LEDs with CONFIG_LED_STATUS_GPI=
+O=3Dy
+> so it shouldn't be too difficult to migrate to the new API just to get the
+> LEDs working (I am not talking about keeping the same behavior). The other
+> two are configs/eb_cpu5282_defconfig and
+> configs/eb_cpu5282_internal_defconfig which I assume are for the same
+> product, but it has not seen actual updates (aside from tree-wide
+> migrations) in the last 13 years. From what I could tell, this is also GP=
+IO
+> leds, but controlled by writing directly to the GPIO registers instead of
+> using a driver. Maybe we can issue a deprecation notice and tell the
+> maintainers/users of that board they have X releases to migrate else it g=
+ets
+> support for the LEDs removed.
+> For the other boards, we probably need to check how to use the DT for the
+> LEDs that are currently configured via the legacy API.
+>=20
+> This is at the end of my todo list though.
 
+Yes, when discussions around the legacy LED stuff have come up, it's
+come down to now that we finally have nominal parity in APIs, can we
+migrate the older users? For the two m68k platforms, I'm OK with just
+removing the code and letting someone that has interest and can test
+re-introducing the functionality. Of the other three, I think pinephone
+is the hardest / most important case. I forget if previous migration
+attempts ran in to non-obvious problems.
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+--=20
+Tom
 
-Thanks
-Patrick
+--c94XsnvcoPcc0VY7
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRYZawAKCRAr4qD1Cr/k
+Co9kAQDDNzOZWNCxu1BEHtjQCVaY5UUWvszZhWhTIvLassEKrAD/VlwKCuhFmHL2
+TA7DsL80CTOyOQHfrJys8zzBok4baAg=
+=yMNN
+-----END PGP SIGNATURE-----
+
+--c94XsnvcoPcc0VY7--
