@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 310AECD98D0
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 19:34:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 771C3CD98D4
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 19:34:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B922284014;
-	Thu, 13 Nov 2025 20:33:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 068F38401F;
+	Thu, 13 Nov 2025 20:34:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EsAJ9/88";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eX8b+iJq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAF0084014; Thu, 13 Nov 2025 20:33:57 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id B53DC8400F; Thu, 13 Nov 2025 20:34:12 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BB6184015
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 20:33:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BB078401A
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 20:34:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-341988c720aso1051519a91.3
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 11:33:55 -0800 (PST)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-3418ac74bffso928341a91.1
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 11:34:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763062434; x=1763667234; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763062449; x=1763667249; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KKS3ZOKelOfMRW8CVN/ynAi9vYcTh7nzwCkxYOxlw+Y=;
- b=EsAJ9/88fEG/jXBL2fOHgbQ0+mZCV7XW1o59W/0H8DcCbdMJa0ltrtnhIz7y0KLl/b
- TSqZ13oDjUjprECvUtG5JeG9xOUicAnKiA73iU0T47YEKo2ZbT3KvmCJALc5KP0GGk1/
- 2uXrgIKmAPT2U0daNuBx6CcNbwTaghZLP2q9U=
+ bh=kvUDaIEUh1D62UvwaCrlfFhEjdbhUKoCFK/+Zs4PCDw=;
+ b=eX8b+iJqs+TNdj/IITNVUlR/hhFgcNMG9paWS/TzjfoNexdRQQSzGWIvJqHZiYazHn
+ AqasaC3l+5tZDFRRlULGI8H1hdprJwI4k0LwihOFVbtPFrlcM4Mq1olbYw8N9/7HytdJ
+ Tl87Y1+mObkqbX864a+/unokyKPXv5HtplqLo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763062434; x=1763667234;
+ d=1e100.net; s=20230601; t=1763062449; x=1763667249;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KKS3ZOKelOfMRW8CVN/ynAi9vYcTh7nzwCkxYOxlw+Y=;
- b=OXM8bwbS+oKnANLEDge/sZjg2X0aQ0Dji9HWY0a65JBcfXiV9M94jmJkiQzrpwgVIX
- KV4LxMRa1THda9SDv3ssBYBECiSbihmFSiG8M9UbeV8K9hjRg/YWomMOum/YnF1Kkfo9
- I82l/iyydPm/ykUolmW9rjUs3QdiQ7ygrpD4LzILnsNEfdjNFiNoU1wva5R8FBqqmKbJ
- iGJUF/ffcKYPAXRkV8p3YgluuFRq2DJTM8WAIzv2swpzVos6DHdtdz8cOs/Zy/cXn7mh
- PH187VS2GkzcJ8Fzsui2D6mVD+vbgVFepWpf6XA1j8bRHxX1MQ84yEh/Aq7yV9ecPRza
- 3xqA==
-X-Gm-Message-State: AOJu0Yzd6xWxFM3xxa+e8RUqm2sARun0QOB4pk2/+GduSfgKNORG/xHW
- 9RBFg7nNohssFYQ8PMzdssp0qTY7QYI86j1KU5iDbVLIjNZE2sXkhf0ZYcUVNj9kL1p8BXOQ+LB
- TLfnDPigJrNnEbCo0fMlhJGHv4ZY9kHXMcGfpUp3YLzo/nYUMaIs=
-X-Gm-Gg: ASbGncvB+QvJVNOG6KCUsd+zKYYT4vJp5iSWSDdTlZzmyMkMR1gfkxque9m5fxqVHBW
- xhmuYWDNvJbgYQaQlBguGuu0DOC37xfkvi4kurzW//YpnLRRj5ogp+hWdAduHN9tEJLY1tQ2xN7
- M2gK6/q0emmeUNz0/CLPfVparHNmOHAM94jBSm5r4EYWkFlVpzW4V45XMNW6nouh6f/tRTuF+3V
- tFtG8g+d3QnkK4VNaF6/5W20cRe982995C6GDNcGLCyr8qeQ9Fd9pM0NUfrhe7H8tGbLIZnkzLS
- O4XQ
-X-Google-Smtp-Source: AGHT+IHf0MHfy7phILdUlBKoiKNnOB+KyMhjzrbjXEXAlj5sCVBiShEFBhQ8NepN7x1EWzSDZggEOyGpyQ1sp2BlucI=
-X-Received: by 2002:a17:90a:c2c7:b0:341:8bda:d0ae with SMTP id
- 98e67ed59e1d1-343fa63366emr418329a91.20.1763062434113; Thu, 13 Nov 2025
- 11:33:54 -0800 (PST)
+ bh=kvUDaIEUh1D62UvwaCrlfFhEjdbhUKoCFK/+Zs4PCDw=;
+ b=NoXgzOzaHw27ydNW8llegqteYcidrNhBX9yAYSQ5fXpOfXkS7JdB/n/Ba8D17WnAZA
+ RE81S9aB06wNhFIXAFlVdkU+e19nojfxtB+gAckAejG1SPOHCoCagFGDDj9BTM7T4FSp
+ vKeeOT/xKv0zkIj6zbj4GunFSH02rE1AO2twH89r9rw3OsLmb599H6fP/DzmXyJpIC4h
+ /6DOkDlHnzB8s8eFClbpbMvYwBzA1pQw9lkA6pboSvUzBUxCeTuSjKr8ryjoeUvU/8N8
+ VW7q3JIjxbNE6qMBhmcbyKlE/Whav8WBlv64k/kFA4PB7JX1aEi1H6i3Vfch36MNQIHg
+ ZrWA==
+X-Gm-Message-State: AOJu0Yzrr3IZFULR6ZVrOzoo3pb1o3d7WuKwX1KAConjcZcIuyXmQH62
+ XI5vPF2mUYxDz5K3QJg25QSOJwxaHupE4OddsxNn4yh3ca16vIlrMgbw2oWShOnyCecjRXSdqHs
+ Khu4NB5hreTIG5N7zaiEakNBa07HQvtbyO1hkfqRI
+X-Gm-Gg: ASbGncsRBk0BlSXtdVVvOh8bu08czXOfVSRFNnvUzEJ46DCDtrB35+8U+Hvtnb5Bvka
+ LxWbJEu6SC8LCgmTuMTL+VZ7Mc1Mf6xVGGP+gaLVjTiukTbvYi8XdChOkKsmnyJVR7deOZzy35z
+ fDxU2GnT1Tb2Dti0aQHzl0Vvyxf9DtcU37R/XjzYRi57vWg01btNv9pfjwJ9piyyGXeCMRg/YAb
+ 6o4oKy2qOq0UqlA9V34xRGTfmsbOZ/K1XrFFyes9fG/SBFLdrz6ABe1lZXr59/FxSTe2Q==
+X-Google-Smtp-Source: AGHT+IELg3d+VA8qaWa1SWw4vHJEBTCQvdyBTbmif8IvD3ndQGRTTMlpW4KyBqUJkDO5S4oLn8VpyHvm0mDDxFMjQ2o=
+X-Received: by 2002:a17:90b:4f92:b0:32e:d599:1f66 with SMTP id
+ 98e67ed59e1d1-343fa7412d4mr385382a91.30.1763062448965; Thu, 13 Nov 2025
+ 11:34:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
+References: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 13 Nov 2025 12:33:12 -0700
-X-Gm-Features: AWmQ_bkorSq-5J_CN8gLgp5uR5nFsft-wM0uyLQdlw9JEPFO7kWEc7IZj-wxwto
-Message-ID: <CAFLszTg0ByjUGgX4MSbU=i0oG7fuidM4J0J128ER6Aq+r6HW9A@mail.gmail.com>
-Subject: Re: [PATCH] boot: Assure FDT is always at 8-byte aligned address
+Date: Thu, 13 Nov 2025 12:33:24 -0700
+X-Gm-Features: AWmQ_bkaUuJlJLrAzg6T1QhCfjqPGcmVE2dXZIU3CZbJoYm9nMZIlsYicgIwjuo
+Message-ID: <CAFLszTjofjQ_zmwJrGZ-sLejQ=x=-8tyqr4SBPYgt3683GVAbQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] boot: android: Always use 8-byte aligned DT with
+ libfdt
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+Cc: u-boot@lists.denx.de, Aaron Kling <webgeek1234@gmail.com>, 
+ Eddie Kovsky <ekovsky@redhat.com>, George Chan <gchan9527@gmail.com>, 
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,78 +94,47 @@ X-Virus-Status: Clean
 
 Hi Marek,
 
-On Thu, 13 Nov 2025 at 04:55, Marek Vasut
+On Tue, 11 Nov 2025 at 18:17, Marek Vasut
 <marek.vasut+renesas@mailbox.org> wrote:
 >
-> The fitImage may contain FDT at 4-byte aligned address, because alignment
-> of DT tags is 4 bytes. However, libfdt and also Linux expects DT to be at
-> 8-byte aligned address. Make sure that the DTs embedded in fitImages are
-> always used from 8-byte aligned addresses. In case the DT is decompressed,
-> make sure the target buffer is 8-byte aligned. In case the DT is only
-> loaded, make sure the target buffer is 8-byte aligned too.
+> Newer versions of libfdt strictly check whether the FDT blob
+> passed to them is at 8-byte aligned offset, if it is not, then
+> the library fails checks with -FDT_ERR_ALIGNMENT . Currently,
+> android_image_print_dtb_contents() passed FDT directly mapped
+> from abootimg to libfdt, and this FDT is not always aligned to
+> 8-byte offset. Specifically, the FDTs are somewhat packed in
+> the abootimg, therefore if the first FDT blob is e.g. 0xfd bytes
+> long, then the next FDT blob ends up at 0xfd offset, which is
+> not 8-byte aligned.
+>
+> Fix this by first extracting the header into 8-byte aligned buffer,
+> checking only the header for validity, and then by copying the
+> entire FDT into newly allocated 8-byte aligned buffer. While this
+> is not efficient, it is the correct way to handle DTs, which must
+> be at 8-byte aligned offsets. Mitigate the inefficiency for the
+> common case by checking whether the DT might be 8-byte aligned and
+> if it is, map it directly.
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> Cc: Aaron Kling <webgeek1234@gmail.com>
+> Cc: Eddie Kovsky <ekovsky@redhat.com>
+> Cc: George Chan <gchan9527@gmail.com>
+> Cc: Julien Masson <jmasson@baylibre.com>
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Cc: Nicolas Belin <nbelin@baylibre.com>
+> Cc: Sam Day <me@samcday.com>
 > Cc: Simon Glass <sjg@chromium.org>
 > Cc: Tom Rini <trini@konsulko.com>
-> Cc: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 > Cc: u-boot@lists.denx.de
 > ---
->  boot/image-fit.c | 9 +++++++--
->  1 file changed, 7 insertions(+), 2 deletions(-)
->
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> index 2f2d3e9304d..cccaa48f683 100644
-> --- a/boot/image-fit.c
-> +++ b/boot/image-fit.c
-> @@ -23,7 +23,6 @@
->  #include <log.h>
->  #include <mapmem.h>
->  #include <asm/io.h>
-> -#include <malloc.h>
->  #include <memalign.h>
->  #include <asm/global_data.h>
->  #ifdef CONFIG_DM_HASH
-> @@ -36,6 +35,7 @@ DECLARE_GLOBAL_DATA_PTR;
->  #include <bootm.h>
->  #include <image.h>
->  #include <bootstage.h>
-> +#include <malloc.h>
->  #include <upl.h>
->  #include <u-boot/crc.h>
->
-> @@ -2279,7 +2279,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
->
->                 log_debug("decompressing image\n");
->                 if (load == data) {
-> -                       loadbuf = malloc(max_decomp_len);
-> +                       loadbuf = memalign(8, max_decomp_len);
->                         load = map_to_sysmem(loadbuf);
->                 } else {
->                         loadbuf = map_sysmem(load, max_decomp_len);
-> @@ -2291,6 +2291,11 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
->                         return -ENOEXEC;
->                 }
->                 len = load_end - load;
-> +       } else if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
-> +                  ((uintptr_t)buf & 7)) {
-> +               loadbuf = memalign(8, len);
-> +               load = map_to_sysmem(loadbuf);
-> +               memcpy(loadbuf, buf, len);
->         } else if (load != data) {
->                 log_debug("copying\n");
->                 loadbuf = map_sysmem(load, len);
-> --
-> 2.51.0
+>  boot/image-android.c | 46 +++++++++++++++++++++++++++++++++-----------
+>  1 file changed, 35 insertions(+), 11 deletions(-)
 >
 
-We really can't do a memory allocation in fit_image_load() !
-
-The problem should be fixed higher up, in its callers, etc. For one
-thing, the caller knows whether it is a DT or not, so putting this
-logic here is messy. See boot_get_fdt_fit()
+OK, we need to adjust mkimage etc. to handle this. Until then I think
+we should have a way to disable the 8-byte-alignment check as it seems
+to have an enormous blast radius :-)
 
 Regards,
 Simon
