@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7021CD5BC2
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 10:58:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B118CD5BC6
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 11:17:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED07D83734;
-	Thu, 13 Nov 2025 11:58:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C51FA83B1A;
+	Thu, 13 Nov 2025 12:16:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ZZyJTHUi";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="oOP8Qzfu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7D1483DBD; Thu, 13 Nov 2025 11:58:43 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id A072283DEA; Thu, 13 Nov 2025 12:16:58 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3B408004F
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 11:58:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4619D83AAD
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 12:16:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TxuMh7B0iucAHpxCaVkvT4aDnJ1tqDuEjit5Nmpgeb8qufFdnwWrLdEFi9IhqDNIcub1TwiNLxHhfsTBrRZyu1O+IJyPqa8JLEXN/XiG/j4OnYWdmK+zLz3ezFVP8waIuzb6mlI5/oP3o6RbrydjYQzrJzy71JMY0DHMNeJfNEFm5UPYgKhe/99071/5psnVhm/0JXXMrXeFJKZQzD03mjtYevUgUW3qkO6luPvrhYR5ybJxFqnFDRcE0+aPYpHKrI1gjZ4c69nDQ9QU35O2PgG2mOGUg+ccYXk1fknxmHEIvO5daJyDwXog6ZfRnr/geXAbZLLIBNczhlm8e4dpOw==
+ b=X7sFSxwo6OyqCdDGLYhwtzEdrbBRo6l8dcOdL8K5QvqANHK+JUNrn1U2urD37p+cHU+lCTTV1bjlXKIPIHqd8JJUoK4lP1/T5SGA2BGwYcMj0vLKpTi9pIUQBjO/2SHolRSI1wPHezgYRnsuVxVzYLgRkKCzkepn6+UJFGySqGYNLj5Gq5ajYmXvO+FioZgeHMQmocZhXRwhvZCN81LPGFFnl28DCTRgPg4KFUW/K0kbIps5hq4cSH3U+8crSYJjiUK1YhptV+pnVBbPog21PAlqswdXiojR2MiE4gTZJGK5OdpadvxaOnZFREG5wQxIWqnZ4RjjnA/VVa2FV0hr1w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HVCqAsuyzzEX9Hv5psMBc+bQX8DWwqJQZ6UfEjmr8i4=;
- b=AZ7yxZGQVp4ysZYXoIq2y1C2dgJccVMu1qvkCgrBSQmwC0gwZqY4Qw6N5VDLHB409p3HOC7iwKbl6VUcuZLLkaUa8M2Mr5iw3uFjBZNsfWoP8b9xcZSniyozwKU2b0gc/hCI++uOQMhhNQYfDOOPkLXfEwVv6Ndxu4JkrAFUj52p0WVneB1BJ7bRluwxrXBL3rAc3wkxLXpCzr/pPCEAZT5rtBiVIA9Xqe1c4segVkwBSbl5dX6T43DpbzwyiC/X96/bh21rzPWr9Uwl3Isx1AlykMhwWeYMMYi8sBiN++hgia62CJ8w0SmfY+j4abZipDJXM6CHoW6aBfrR3R8V0g==
+ bh=4ecUHkr2Wt5EPIZWoFyePVAonKkUwI0AIbCrFjW9ON4=;
+ b=g+p838N4h3ruywTfr8wZ5gem2C69QIQpnXn4iqxPvzrTsM9nfhBz0z139MHxrkPqKgb1Uc9x9dEHq8/yhhdir8yE6+Vhq3y2duOWVZU54PeJHcNs4+4oFGpNBMHDtauKlnu1uabDPGcnVQtUnyZcgdu2RmJzF2Fa/QiuLY9FPr9n0oRTn5O0SvgTX8ZHQq3CF2Y7RZkLbVVAN9AHI/RBj6RrseQgcrtIIxTQngKCQutMaf1YAgKdkiChKgIXhysnh3rGBnDZc43L3f5CbAt185op39w+3hkbu/vmAr8BPUjWkzyLi+swNvAJn+ofb87ohEqxZC5BZbrCONF22ghCCw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HVCqAsuyzzEX9Hv5psMBc+bQX8DWwqJQZ6UfEjmr8i4=;
- b=ZZyJTHUi4mB6BEhHLxV8WAvfE6+YWY+fvJTbWoktn3TqJsOSe5FBbeXUeE7oxlxQDcTmsdzYNxX5CjGj+tt1nv7k5ldknZNUylGO2kS6dwtrpH81ipmw+UN9al6sBWOGcFrdw2Mni/IJftAXC02WS0H9jR0/4fqe8YNd674l0DY=
+ bh=4ecUHkr2Wt5EPIZWoFyePVAonKkUwI0AIbCrFjW9ON4=;
+ b=oOP8QzfufGnRMBKwIp0XJyMIUMPtdggBhJpGrYHwBIS2zTrcajBEjlej1Lyhqr75THtonP+mMw50UZyulGXiFfsg51Tq3HDuw8Bc+x7GeMBJEEH490/7SegADKoyEW+ZmGEvhqMPbNEnz3OzXGHusy05B38MQ5Nh4roYhjZjMLs=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by GV1PR04MB11040.eurprd04.prod.outlook.com (2603:10a6:150:206::10)
+ by GV2PR04MB11350.eurprd04.prod.outlook.com (2603:10a6:150:2ae::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.15; Thu, 13 Nov
- 2025 10:58:37 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Thu, 13 Nov
+ 2025 11:16:50 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9320.013; Thu, 13 Nov 2025
- 10:58:25 +0000
-Message-ID: <c10c2b6b-5daa-4128-aeae-977bb0f72be9@cherry.de>
-Date: Thu, 13 Nov 2025 11:58:23 +0100
+ 11:16:50 +0000
+Message-ID: <44351bcf-64af-4060-89b5-cc0ff666d4a3@cherry.de>
+Date: Thu, 13 Nov 2025 12:16:49 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/11] doc: cmd: document the led shell command
+Subject: Re: [PATCH 10/11] sam9x60-curiosity: migrate Boot LED setup to use
+ /options/u-boot/boot-led
 To: Quentin Schulz <foss+uboot@0leil.net>,
  Ziping Chen <techping.chan@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>,
- Jonas Karlman <jonas@kwiboo.se>,
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
  Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
  Johan Jonker <jbx6244@gmail.com>, Xuhui Lin <xuhui.lin@rock-chips.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -72,106 +72,108 @@ Cc: Tom Rini <trini@konsulko.com>, Philipp Tomsich
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  Yegor Yefremov <yegorslists@googlemail.com>
 References: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
- <20251112-led-old-dt-v1-3-2892d49517db@cherry.de>
+ <20251112-led-old-dt-v1-10-2892d49517db@cherry.de>
+ <20251113-naming-upper-470ba8be1c25@thorsis.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251112-led-old-dt-v1-3-2892d49517db@cherry.de>
+In-Reply-To: <20251113-naming-upper-470ba8be1c25@thorsis.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIXP296CA0012.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:2a9::6) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR5P281CA0011.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f2::19) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GV1PR04MB11040:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9124b08-7f80-48f5-9a4b-08de22a3916b
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GV2PR04MB11350:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5934de43-5126-4abe-0e9d-08de22a62486
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NkVGam1CL1ZaQnZ5NVM4WE9YRVdxeEc4V1NKTGZzbTRic1U5b28veElXT2RV?=
- =?utf-8?B?VVdOK09HZjdNcVJSQ2VsOUxaL2tKZUR1UDMwV1hmZjIwaDl6WndzcHRnazcw?=
- =?utf-8?B?N1BST0FWMEtWMWFqSUlTTGZxOUZqM2g1UG10TTlpdnBaWENnMmwzOWxiQ09o?=
- =?utf-8?B?TEYwSThnTXh2NHJFWjdoa3labkp4NERXeUUxb0NKNEQ5Sk9vRzdQc2pmMlox?=
- =?utf-8?B?OHZOWTZnc1FOU0w0YUhPcHJnajRTekJSVmdpSmhYUTkrL29RM0dIZUN3Z0Ux?=
- =?utf-8?B?cGVxa0JZMUQyU0ZFNUNmRFVZWTVIN3d0d1BqSDhtWldoMjNXTkYvY1ZXbThi?=
- =?utf-8?B?a3A4Qjc0eVJNYWptTUw0Tzhkeko1dWZNYWErdzhRSko5WGp2a0tYQjczbXBY?=
- =?utf-8?B?a1RreVYwbjltZ0ZCVUpjNnVESThEclFSM09XRCs3N3lVZlZVcE5WejVvWDk2?=
- =?utf-8?B?NVo3RHBzVEFOK0xCYXJ4SnVCT250b0lma1Urc2NZMGx3c2xLU3BTUTNlVy9U?=
- =?utf-8?B?dmhHQWNpbk0zVEo5NTVVQlhtU2hVUXcvR3pHUXg1QWxpajEzNGJabFNmU0lR?=
- =?utf-8?B?VnVUME5JSGhSNFRiMTBHMis4QTR2ZjE4ZzhQSTRqaVU1eTlQOERiU2JaaFhH?=
- =?utf-8?B?enR5cDVYY0RRRzNjRjJxR05lN21VZ0tURFdFRzlCZEtJL2NuV2VkVkRxQlRG?=
- =?utf-8?B?OXVPVVNMZ1VHVStiU09TMGZwNlVYblFlN1FQY1FrUnV4NmhYWWZrZWdDOXlC?=
- =?utf-8?B?aHVDSlNSMDF4SVVjdE1BSGZYNVhHRERTRVJ4RlQwYnBXUTh0WkN5RmdDbEt1?=
- =?utf-8?B?K2JmT1JZQ0pKMFVydDhoa0tIekYrSGRCMlphWmNOZUppckZKbzBDZVNQWEJ4?=
- =?utf-8?B?bUc3ZkdSM3VRTGNKVzNmOElrVzg5a3hZVEVOTHVueG5waTVvdDFudE1LWm1u?=
- =?utf-8?B?am9kL0FBSTJFaDFGcVh6RDlBTEgwZXYwUXEwcXkvbk1tSHIzQXVlWm5iZnRk?=
- =?utf-8?B?MUZZLzVGRUQ4akZUb3NiNEYxMElZWWdvQU1kc0N2Nml1b2VxRVZMdDVENnFj?=
- =?utf-8?B?cWI1Ujg5WUFIRkx6czJPcENyZ2FrV2Z6SkNJVXA4VzJQMndTbjRzK29RZWxE?=
- =?utf-8?B?TnVnZ0EwaUQ4M1BUZmdDTmZMVXhNM0tLMDYzakVaUzY5UksxaElTaEgvMEN6?=
- =?utf-8?B?UU83WXhQYmxUS29PaFBDb0p1RWJaWWdwMFV3aEUxcTA5WFp1TTgwUXBPZTgz?=
- =?utf-8?B?Wk14SkFoemI3aDVFNzBNcVZYazV4NklhTk16b01uZVdJb3paMjZaNVlMTkM1?=
- =?utf-8?B?QzZSTzlIelhrck53UjFjRXJHcFZGdzY2UVpDdCtXdDhZQXVGTVFIcStlTmRK?=
- =?utf-8?B?d1VmNGpKT0R4ZzB0eWxCRXZKWnpmd1FzSERON0FlNFMzRlR4Vi9yd0pZQ1do?=
- =?utf-8?B?UUh2Q21pYUZDUVN0bDdnMVo2MFZKZVJBczdibUxidHRtQWlYZjR3TW9MNks0?=
- =?utf-8?B?VnFkWXV2K1BNKzRTeTFoN0JUOTY3L3pqejZvMG9Zc21pVmlrT1dleFg2ZnRN?=
- =?utf-8?B?SzVzbUI4TzB5VGE5Y0FLZERrbDRiRS9lRkdCdGZNOWNHTkptalBiN2dvV2Fy?=
- =?utf-8?B?ZE55NnJ5L1VnRmxDM2k3eTh5VnpqK1pMaVRXSUw5a2dScWlpanlTZnUyV0Mx?=
- =?utf-8?B?SWQxZ3c4TXZOcStRSHphdVFSRmJJOHVFbVdSbXdMbzREbEQrVTdnK0EyUXRy?=
- =?utf-8?B?djZjM01TK0Z4Nmd3Umhlc3NMWklKcXUvZFFoSkUvc0dEY2ZHVk5QUzhFRWt0?=
- =?utf-8?B?U3hTZFBDMTRiOSs4R1FhL3BOcnZNL28rWnFJSlFESCt4WDV0eXJFQUpOUktI?=
- =?utf-8?B?aE9qVWlkcS9vaDhKczJpVEkrdTFoS3ZpVFpwTmNaNXJoYURaZjcrRU9vMnpJ?=
- =?utf-8?Q?BgN+D0BbLVFe0pHUj8EhX1QqW/ve7CZg?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|1800799024|7416014|921020; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?S1I2V2U1ZVdxLzY3bUJ4Q09xeExIcGNEek54eXpzREpiQURUcFA2bnJCWWhT?=
+ =?utf-8?B?Q3FKUWxGOW5MQlRvZ3Q0YU1jM1AvdWZwaTV4UHI5cGJNdzVIVmtpaDFCQ241?=
+ =?utf-8?B?d2hUNmFlNVhMR29MOTNlMmkrZXk5ZVVJRWxFVkQ2Yk9ETFMwR2lFdHZDTFZj?=
+ =?utf-8?B?cHRLWk1kRHpMNmZTM0hpZS92bHE0dXZCWUhRVU9ZOEFrMGxSRU10WkRMVzRT?=
+ =?utf-8?B?eGZ2R1IyaThiMElSeHl5R0RaNk1kUkhCdXpiV2J5bmJtRmh0eU1lYkJreFoy?=
+ =?utf-8?B?UDRXVmV4bVQ1VkpMVmk3VU9ldWJVcTZSdWNvUThqanZLcUplQWJSUTd0NTBa?=
+ =?utf-8?B?azZlNUlSbVRMYXFiMVZOVkJUNWhrRDNBYno2SFBCb3ZuMVk5S05rRS9CZ21s?=
+ =?utf-8?B?KzAvZk4wWXNKZUFkUU9jUzN0TkliTERIdlZVcllWVWpXWm13T0ZzUFUvb3Jy?=
+ =?utf-8?B?RzRuQk4vaERMaXJibWY1RDRzdFRCNmRTL2pwRVp5b0h4bkRNZ2pCMlErQjhZ?=
+ =?utf-8?B?MVVvN0tBbUo3MFhEczk3ejhmSGY0MDcxbnJOWUhWVXhodjN0YlY0OWpSOHZM?=
+ =?utf-8?B?STQ1RXRxQ0pqd2JRWFJKM21lWjlyNzZsSDJ1cUJUM3k5aUxBZlZITWJiMEVp?=
+ =?utf-8?B?OU12b3NzWVFNYXlNM1VkdzZIcVI1MVQ5NGxxNy90UFlGV3ZER2ZVTzMrb3Jz?=
+ =?utf-8?B?Yk5NNUgwRWtDZ2lEOVRnMFppaksrL2gyOHpBNExUVmQxcDg2RVBpMFc1OUlF?=
+ =?utf-8?B?Z2hyd1daakNOdnpmS1JjRmN1RDIweFhEY0NFN3lhbS9zbUR1Vnlla0s1MEFu?=
+ =?utf-8?B?WjRpUEpsS1BmMjk2TElOaTlucXRGeUxLcUw2SmV5ajlqNDlFWEpRZ3RrWkhZ?=
+ =?utf-8?B?aXdKQ3dFVDc5aG00NC91K09TemdpNk9menV5L3FIV1hQbWh2VVdvNUg0Umlh?=
+ =?utf-8?B?ZXlPbmI3ZGEwVm82R0swR2Z3MmpVYVVmUDN6d1l6a1EyZ2o2RXRxWWhsRjM1?=
+ =?utf-8?B?NTFLb0ZQYnowZ1VNU0RmZ05QQjhvdW50WlRidlVlUElsSmN1cEgySDBBVVJV?=
+ =?utf-8?B?UjVSQlc3bVFNVzRGOGQzSlZ0eVNDVWVMOXpRRHZ2UHhHUVlKU0duaDBCVmJJ?=
+ =?utf-8?B?OFFpbFBGZ0JpMFBaRTg0ZDMxNmNnS01hR3ZzM1lXT3AxTFI5UVJTbUNkYzIx?=
+ =?utf-8?B?Ymw1NnN5Z0Q5UVA3V1JEU2NzaEo0WUVzN3ZMUVUzMCtqMVNaRHNlQnRxR29F?=
+ =?utf-8?B?Sjc1K1ZTNFQ3STZUNVlOcGhiLzc4S25IYmtGTUxNTUd0cUtIb1pwYXl3T21w?=
+ =?utf-8?B?VDRiZno5a0J4RExHRWJiQVF2WnpmWXRkYi9HbHdyMEVBZHE1UHZ3dVJwRWhR?=
+ =?utf-8?B?Yng2MWFrSGFUZkh1L1lZRHMvVVA0UUszR0dPbnFhVjlJQ2lRVkRNbXZqN3Fk?=
+ =?utf-8?B?c1FiRUxYZ093eENjak5TeE9Rei90K3IrUzFVVkNNWkFGMnR1Y1VqVVVrR1Z4?=
+ =?utf-8?B?a2ZLV2V4bEtoU1NlVkNzM2dGR1lxTC94K25oU0ZHN2F0czh5VFBaSmowRnRz?=
+ =?utf-8?B?a3ZRNGp5cWxyZGdhVGszN0hINENodVZ6NFdiTnlGekdabi9yN0VDUGhHWmxP?=
+ =?utf-8?B?c0kvMzRHUzdaRXdMMmJ5Rm9BSVlOQnNSa21IbE9wbjZvYitkT0Z2Wk8wN09t?=
+ =?utf-8?B?Z0NOUFY5d1dMTUFCYmxaK1RUUnJYQmdWdm5PT3IzcGxCVGdEQXhJMUtFbUFx?=
+ =?utf-8?B?dnVFVHJUZ1VWMWZNZiszZlI3OVhqU1FPeVBlbDZMT0hRQk1wYzQzbUE1U0Vy?=
+ =?utf-8?B?K04rZE5kZXhDaXU1TTBYVG9HOW8rYUtBbnZTb1h0VmNLTWxweGZvb05JUGFn?=
+ =?utf-8?B?clBQL05ScUpOQWVtbjlJaEt6OTYzVlZsUzdyU3YyNU5VTEhGVTJaNlhoenpX?=
+ =?utf-8?Q?JfCcy6TFpwMb8qpKKio09wDlVWIu0D4w?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(366016)(1800799024)(7416014)(921020); DIR:OUT; SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Q2ZaMW9VRnNDZjhCYnI4cktBV0RYU2VWUzBCZ1hud0FYTkFMR2FpRUFCSHhk?=
- =?utf-8?B?SHFkR3R2Z3hzcjJTcEpJMGdRVzd4R1VFcGw2RnhTd1JlRXJuU2o1dGQ1ZnB4?=
- =?utf-8?B?bHMrcTJ4MWt1VE8zWUZ1U0dMcDNtRjBCWlBDbUd2d256ZGwzeTI5MnJEZzhI?=
- =?utf-8?B?YW84ZjU3Q1liaXZCSWwvcHNtQ3dYalhhN01kajJVVkRWU3R3MWUzRFl1MmJV?=
- =?utf-8?B?OCszc2lEdytOYUpUcVNqT3lJeS9mbzZEV0Q4c0UxTU5pcmhsektjZ09DTm9L?=
- =?utf-8?B?NTBmK1VmVUxUelJCOWRER0lHM085QkZOdnM1d1VqZ3R0ZkxPZlc0ZGxlbytX?=
- =?utf-8?B?ZnJqaUVGREJycGVva3VESlNPY2k5dzB4NUVUNFVkdmdXSkNIMWR1cHBNbTJ5?=
- =?utf-8?B?OC81T1Blbk15N1hwaGRIbEhFb3BXamFrOENQMm9zR0cvT3BwWDc3S20raXRw?=
- =?utf-8?B?YlNvazNEVHh2SUR2MVVOVHVSMzZmcmpDb1VGbnlCRmhqZ25Zc2x4STVMMHVu?=
- =?utf-8?B?anQzNmtVN0JRcmZyS1cyb2htZUdKMm9CczlaU09OczIwenBLN2JhRTA4RWw0?=
- =?utf-8?B?b1h5RUlnUi95Y2JwUlY1dm9ZQWQ2eGFJRE1xYUFmZUVIUGZzZkdhS0VDMk4z?=
- =?utf-8?B?Yk9YT0UxeDY2VHVsMmJjeW1qRkZKY0FXeHREdWpEYm9zUGdob1FJdVRNanI0?=
- =?utf-8?B?aC9NK1M1SUJtdHdlb01oalpqdVBzSytVSnluanF5MUJqa01aTnJFWFlNTlBM?=
- =?utf-8?B?NjJyaEgzY2tYMkY2N291cUpPRUJpbnpudEdlUlZqVUhqYytjYkk0Nk5YV0lF?=
- =?utf-8?B?YUNUVjFQZnhLZFRtUWJmVE1BYzJzaDJmZHlOeUo0NjFqNW1mcGEwSGxvWkhM?=
- =?utf-8?B?R3NlNnNRaDJQanREWDRiSllwN3RyeGg4WVZTOXIrMzh1M0dSWkt2VmkxRTZx?=
- =?utf-8?B?dmNzSWlnOC9DMjZucE1uYUE4MTI3REp0OEZmZmxROGlXZ1R1Q0xBbUFVR3RI?=
- =?utf-8?B?djhDajhub0ZLTW4xL1pKQ3M2T0xKNnNSWFNsSjlaTE05bHBpeTNzd05PMEY0?=
- =?utf-8?B?YnNzK0o3UHpZbmI3UXNkY2R3K3NYc05Ld1JWS252ZEhiNzEweWxocyswQUl4?=
- =?utf-8?B?ZWIvNWFuTEdvbzRvUUR1bTF2RlM5UkVxVDRLM003OGhPQUhPWHRDSkpTQ1NU?=
- =?utf-8?B?Ym80YnRyeGo2WDBHVzJaMFZvQXQ2cXArZVUwTW5teTNXbjE2UDI4N203MGxH?=
- =?utf-8?B?QlFtcEllNGpXWnYrZlB6ekFmeVJFaEsrTkNUaFZKQzM1OVJFaXY3eHRiS3h6?=
- =?utf-8?B?WERKaUlvbHUvQ1kzUFRFbVVER2JUSHhHUUwwVGtYUy9ERHhnSGVQK085V3Ey?=
- =?utf-8?B?dG52SGFWYWZ6K2QwWWFLa2VTUVhqZDhMWFduei9La2s0K20xb2szU2FQVkJT?=
- =?utf-8?B?U25haXR3RVE3aVk5Q212ZVZWby9FR0MwRFQvcW9oMXJwRUphS2d5bng2Umxv?=
- =?utf-8?B?cmpBREtSWmNzaGw3cXpQYnk2a01MN2pjcXUzczREZXgzRGwyeHdyWEtYcEdu?=
- =?utf-8?B?d0VEdGNva0xleXExNXNKV0ZrTGxNU25LMndGMEFWS0JhcWNpQkRBa1pNbEJD?=
- =?utf-8?B?cDg5SmpmdjJ5T1FQbitpQzVTWmJaRHlocGdzc3Y1TkgrTFZkNENZY2JDZ1gz?=
- =?utf-8?B?T2ZWRkM4TW0xQzcvMHphMHFjVTBjdVdMeGdkalBvQWdYTUlPUExEZFp3RXli?=
- =?utf-8?B?NFZQQTI4UlBEclRtczJ4V0hNUjF4ZUdDWnZLMVFjOTAyM2c2L3MvTzA4RW1i?=
- =?utf-8?B?UGxtMjFqQW5nWkV5dXBLd3NObzZ3TkNja3VDSFQwSjJqdFJtUzF6VXc1aHI2?=
- =?utf-8?B?TjdHblVibmVHRWdTNGZGM1Q0WVg4TFZHdVJCQmE5cXNuaXlzRGYzbURLZUxx?=
- =?utf-8?B?elhlK3lQb2VtZkxqZmRwcHUrR3hsbGJzUGt1TVlNRnBLV3V6ckU5SUJHMTA2?=
- =?utf-8?B?OGppdnpINjNPRllvNGpHNDM0b0lEUVhJUGpDT29UMHplcWhISlJWeWxoejky?=
- =?utf-8?B?cDFNR3lCcXRuamc5OEIrL3hLelU4QlE0RmVxZnhmQVBqaGYrM3dBcEMvMUZM?=
- =?utf-8?B?cmlZNTNab2ZxS045UUlxajNsZ3pDQ3FGQzZsWE1TQ1FYbUs5ZEE2OU1rVzFF?=
- =?utf-8?B?eXc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?akhzdkRwcEd4OGYrMys5alUvWThmZmoydWtDcWhYOXVTdVd2N0QyY3VUVmJq?=
+ =?utf-8?B?Vmkxd1ZrQlc3RzBjemp0U1FDRjFzak14TDJ2dXQ0QTBFcXpyRDcwY0o4WVM3?=
+ =?utf-8?B?dUZKQ0hWOG54V3BjQW8zM29CZGthek5NUHNtb004cmxNaFhIaHJUQXFJbWRX?=
+ =?utf-8?B?b0w0M1hteklrMW12bEtEZWdDQTVtS3RmMGZtN3lkMjdmZS9kOTh5Um0xSFp1?=
+ =?utf-8?B?VVhoL2F2SWJTdlpTbGp5eU1iQW1uY1BuYk5aTmo2QWx1MWMvN2c3VnRyUTY3?=
+ =?utf-8?B?UFFncHo5YSs2ek1FNjFJYWpQcDVFTmpCa2xQQ3ZSeXRYdnpXa3YxUVYzYUtt?=
+ =?utf-8?B?YlIxQ2FjRHFHR2JKSloxcWFRTDlJWGpuL29xUzRJSEo3ek1nQ082QU1BNFJD?=
+ =?utf-8?B?cllWS1FwQnliYjV5WlZ4dmlwV0gvVDFrUzZHb1hIOC82dEt6bW9SNjN2eWZR?=
+ =?utf-8?B?STRHdXBNVmh0dHpNTlJwU3ZDU0NVVzVweFJocjQ2MjN0U1VOR1RxZEtqYUh2?=
+ =?utf-8?B?UndhRTVYSWlyVDY2QnMzM1FzZU9lUVVMUEYrVXNaZ1Qwc3NEQ29FYmp0NEs4?=
+ =?utf-8?B?bTlVQ3ZXY1VMQTc4bXIrZ2Z5KzFpVG9zT1ltcTdjKzBMRFFhQ1FSM0VIYWUr?=
+ =?utf-8?B?V1NQdTJTa2czYkhKLzMxUkFmZDJPUkxBL09BS0UyUW00elBZWU10WVRSNGtX?=
+ =?utf-8?B?MTNPNkJCb2ZoOVIxTnh5SENtVEtVWUtiZ2N5cWNaWThUUnlVL1lhdy9lTDlx?=
+ =?utf-8?B?QlRZQWxoc1d3NnRkVlhQbGJWQWtBTkhmVVRvZTVNNWo1cTNCalJsRVFud3pB?=
+ =?utf-8?B?TWpmeDVRaS9WVUJ3SDNtODl3QkVTSTBuR05HaHI2MkVGVmJTSDhhN0ZWMVpl?=
+ =?utf-8?B?THhBOURuekZkRmpLSVBwN2wxdkhPWTFZV3NsWVFOc2Erak5RdUhSVGt2ODJq?=
+ =?utf-8?B?OHJVT0ZsVlRFb0thV2d4ekRCWXlFNlVVWEEvbmdlbG16YVB3eW10OGU5Z3Zz?=
+ =?utf-8?B?U0lEK1RkdDZDOXVBa2Jtem03S1pEL0c2RDBpb2RBOFRaTjJTOGFlUlJRaGIx?=
+ =?utf-8?B?dHNnTHVNdTRiMTN3d1BOR0daRzdIK011anpHMGlMVlR5STRUNkxkdlpML3ZZ?=
+ =?utf-8?B?Z0FaYlk5MG1kSXlpZWJXMnZwMGY4MXZsbTBaVlkyU21sa3BCVHRvYzBUNFpO?=
+ =?utf-8?B?bEpESk5yUTdCUEFWRHZ4QVpYNlZXeWNrYWJOR2UzV1hxSE03MzBUeFBpa0hi?=
+ =?utf-8?B?ZVN6THJsZWk5NllnWkR1alZkdERQenV2enFGS3pFajhaVFFPelc2SFg2NzRF?=
+ =?utf-8?B?N2lvS3VSTzJxczRiMGlSeFpMNkFXdDJCaTk2cThZZWxJZ1BIRzd1Zi9aaUFi?=
+ =?utf-8?B?bG5sY3NGbVlRWVJzeFJDSEtjbHBYOVBRN2RNd1hQTHFUN2htZitZbHhzbXQy?=
+ =?utf-8?B?YmhXaGJwMlc3cTlrL1ZhWlUrYTBqME1QZ243LzdIc0FKVHo3TXRNdG1MV1Yv?=
+ =?utf-8?B?Z28yQitXU0tuZzVYZVY0bWQrL0RHQmd0Vi9mWVJFM00zSWtCdXlYNjVJQjhS?=
+ =?utf-8?B?eEJzeXNDVTFHamtnWllWcHJtZXBFcEF3Vk1Vd2pFL25oNnZwSEpzRTJ6dVBt?=
+ =?utf-8?B?TWhSTHVmZy9OTmFEVXBuRHlnS1pOQllwL1VVSG85TEFVcktnYk8zMXFubEVB?=
+ =?utf-8?B?Ly9hZG81WC9INmdZNGZPMUtPZDRCbEM1SDFHaG11Qjh6M1FmRTdwVndxdmtp?=
+ =?utf-8?B?L0V4TWxwOFU3NzRHK0twMjdoajNyS0xKWmlaNVBpU0VxODFXSzBFV1EyaldP?=
+ =?utf-8?B?R3NOaWpCSWwvckY3WGRqV1hVVW1XWm1rWi94aXFTUllySUZtWi9QQU1WenA1?=
+ =?utf-8?B?Mllyd0NhK2k1ZFlWQjFXSDlJMGZLdzc0a2dqOE1LS0xWUHJ5enhtcEtYblBr?=
+ =?utf-8?B?SjlhYXlROTBWVGhaT0ZKSVlndGo2aTMwbzRYdG1SV00rWSt3ZXYxcUVOMC9H?=
+ =?utf-8?B?a2ZQcVZtQU9yQU5IdHVyN203Q2ZTTFlXWkdLVWJXZVZZTlBqNE9BQkdGc3RC?=
+ =?utf-8?B?ejIvTE15eWdqanM4MzhOeEhaMHZkRldaeTB4ZjZNK05lSVVZNkFnMmlMMFRP?=
+ =?utf-8?B?RGpLN3hUZStSS0MvWWV5cGJaSHBSNngrSis5SjNEemVIeTYvS2RadkphNU8y?=
+ =?utf-8?B?aVE9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9124b08-7f80-48f5-9a4b-08de22a3916b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5934de43-5126-4abe-0e9d-08de22a62486
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 10:58:25.0012 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 11:16:50.7500 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TV1VWFA+kgQMW17o4N4AK5uNfHXt+3YYIxbbtyg87bu72M6aHnIxFH8xjTE8YbBb881sUAVWLjsl9YUkn48bPVnF6T9ZJ59XW1taV2YlnH4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB11040
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1FB1wOqOqPAMqVm47VixdA2ogftVTmDEH/Y+Egh3dmYHqKKCyGe75fCip5ZV1ymwApPRro6eRgIJi1/k5tWFsJ0Yt9+fn7pO1pEKU8+1d9w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB11350
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -188,148 +190,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi Alex,
 
-On 11/12/25 6:48 PM, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 11/13/25 9:44 AM, Alexander Dahl wrote:
+> Hello Quentin,
 > 
-> This adds documentation on how to use the led shell command.
+> thanks for your effort.  I'm all in for common behaviour.
+> See more remarks below.
 > 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->   doc/usage/cmd/led.rst | 95 +++++++++++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 95 insertions(+)
+> Am Wed, Nov 12, 2025 at 06:48:15PM +0100 schrieb Quentin Schulz:
+>> From: Quentin Schulz <quentin.schulz@cherry.de>
+>>
+>> This board is one of the last users of /config/u-boot,boot-led property
+>> which is a U-Boot property out of the DT spec.
 > 
-> diff --git a/doc/usage/cmd/led.rst b/doc/usage/cmd/led.rst
-> new file mode 100644
-> index 00000000000..b5623895c7e
-> --- /dev/null
-> +++ b/doc/usage/cmd/led.rst
-> @@ -0,0 +1,95 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +.. index::
-> +   single: led (command)
-> +
-> +led command
-> +===========
-> +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +    led <led_label> <on|off|toggle>
-> +    led <led_label> blink <blink-freq in ms>
-> +    led <led_label>
-> +    led list
-> +
-> +led <led_label>
-> +---------------
-> +
-> +Get state of the LED whose label is the one passed as ``<led_label>`` argument.
-> +
-> +Provided ``<led_label>`` is *module_led*, the possible outputs for this command
-> +are::
-> +
-> +    LED 'module_led': off
-> +    LED 'module_led': on
-> +    LED 'module_led': blink
-> +
-> +led <led_label> on|off|toggle
-> +-----------------------------
-> +
-> +Turn on, off or toggle state of the LED whose label is the one passed as
-> +``<led_label>`` argument.
-> +
-> +led <led_label> blink <blink-freq in ms>
-> +----------------------------------------
-> +
-> +Make the LED whose label is the one passed as ``<led_label>`` argument blink at
-> +a frequency specified by the argument ``<blink-freq in ms>``.
-> +
-> +The frequency is parsed as a decimal number and its unit is milliseconds. The
-> +duty cycle is 50%. Example::
-> +
-> +    led blue blink 1000
-> +
-> +will make the *blue*-labeled LED blink with a state (on or off) kept for 500ms
-> +before switching to the other state (respectively off or on) for 500ms,
-> +looping endlessly.
-> +
-> +led list
-> +--------
-> +
-> +List all available LEDs by their label and provide their known state, which can
-> +be either *off*, *on* or *blink*.
-> +
-> +If a LED has not been probed yet, its state will be shown as *<inactive>* in the
-> +list.
-> +
-> +Examples
-> +--------
-> +
-> +::
-> +
-> +    => led list
-> +    module_led      on
-> +    sd_card_led     <inactive>
-> +    => led module_led
-> +    LED 'module_led': on
-> +    => led module_led off
-> +    => led module_led
-> +    LED 'module_led': off
-> +    => led module_led toggle
-> +    => led module_led
-> +    LED 'module_led': on
-> +    => led module_led toggle
-> +    => led module_led
-> +    LED 'module_led': off
-> +    => led module_led blink 1000
-> +    => led module_led
-> +    LED 'module_led': blink
-> +    => led sd_card_led
-> +    LED 'sd_card_led': off
-> +    => led list
-> +    module_led      blink
-> +    sd_card_led     off
-> +
-> +Configuration
-> +-------------
-> +
-> +The *led* commands are only available if ``CONFIG_CMD_LED=y``.
-> +
-> +The *led <led_label> blink* command is only available if ``CONFIG_CMD_LED=y``
-> +and either ``CONFIG_LED_BLINK=y`` or ``CONFIG_LED_SW_BLINK=y``.
+> Well, I introduced it back in 2023 with commit 1818b44b7bc ("board:
+> sam9x60-curiosity: Let LED subsystem init leds if enabled"), maybe
+> because I found the old property in the documentation?
+> 
+> Not sure since when CONFIG_LED_BOOT and the new property is a thing,
+> but I have no hard feelings here.
 > 
 
-It seems like there's another led shell command that you can build with 
-CONFIG_LED_STATUS_CMD=y that uses the legacy LED API... Should it be 
-mentioned/have its own documentation page?
+https://github.com/devicetree-org/dt-schema/commit/3033f0b3479760db047fd58f38ed777dc7e2a856 
+for the new property, that is, a year ago, so pretty new :)
 
-Maybe we should spend time porting the 5 defconfigs that make use of 
-this legacy API to the new one and entirely retire the legacy LED API. 
-However, there seems to be some discrepancies between the LED_BOOT 
-behavior and that of CONFIG_LED_STATUS_BOOT. The former blinks for a 
-brief period of time and then is solid on once reaching U-Boot's main 
-loop. The latter is blinking sometime after relocation and then turned 
-off on first BOOTP packet.
+914fd75a5d2f ("led: implement LED boot API") for the first commit for 
+LED_BOOT, about a year ago as well.
 
-Out of the 5 defconfigs, 3 are using GPIO LEDs with 
-CONFIG_LED_STATUS_GPIO=y so it shouldn't be too difficult to migrate to 
-the new API just to get the LEDs working (I am not talking about keeping 
-the same behavior). The other two are configs/eb_cpu5282_defconfig and 
-configs/eb_cpu5282_internal_defconfig which I assume are for the same 
-product, but it has not seen actual updates (aside from tree-wide 
-migrations) in the last 13 years. From what I could tell, this is also 
-GPIO leds, but controlled by writing directly to the GPIO registers 
-instead of using a driver. Maybe we can issue a deprecation notice and 
-tell the maintainers/users of that board they have X releases to migrate 
-else it gets support for the LEDs removed.
-For the other boards, we probably need to check how to use the DT for 
-the LEDs that are currently configured via the legacy API.
+>> Let's migrate it to use the in-spec /options/u-boot/boot-led property.
+>> When enabling LED_BOOT, U-Boot proper will lit the LED right before
+>> entering the main loop, so nothing needs to be done in board files.
+> 
+> Fine.  Using specified properties and having less board code are both
+> good things!
+> 
+>> As explained in the commit adding support for this u-boot,boot-led
+>> property, let's keep backward compatibility in case LED_BOOT isn't
+>> selected.
+> 
+> Would be nice to hear the opinion of someone from Microchip for this?!
+> These properties did not gain adoption on their new boards.  It's a
+> bit dissapointing their boards are not maintained in mainline U-Boot
+> by themselves anymore.  :-/
+> 
+>> Note that this is not tested as I do not own this device.
+> 
+> Tested-by: Alexander Dahl <ada@thorsis.com>
+> 
 
-This is at the end of my todo list though.
+Thanks!
+
+> Note: With CONFIG_LED_BOOT enabled, the LED turns to on in a later boot
+> phase as with that option disabled.  I don't think this is a problem,
+> just wanted to share the observation.
+> 
+
+Mmmmm... Yes, so the board-specific LED thing for this board is done in 
+board_init() which is very early in the list of callbacks called after 
+relocation (c.f. initcall_run_r() in common/board_r.c). The generic 
+support is done in initr_boot_led_on() which is essentially the last 
+callback before U-Boot enters the main loop. It will blink (but maybe 
+doesn't have time to actually blink) for the time it takes the few 
+callbacks between that and initr_boot_led_blink() a few callbacks earlier.
+
+It's still in the same phase (that is the U-Boot phase, e.g. TPL, SPL, 
+U-Boot proper, before/after relocation), but much later in the boot 
+process. I'm not sure why it's so late in the boot process except that 
+blinking probably requires some sort of timer (or whatever CYCLIC is 
+using under the hood) that needs to be enabled before being able to blink.
+
+If this is an issue, I **think** we could simply call led_boot_on() in 
+board_leds_init() when CONFIG_IS_ENABLED(LED_BOOT) is true, but I'm not 
+sure if everything's in place for uclass and DM.
 
 Cheers,
 Quentin
