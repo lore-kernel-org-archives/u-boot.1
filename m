@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E30D4CD4F2F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 13:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B74D5CD6E63
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 14:03:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42C8483E43;
-	Thu, 13 Nov 2025 14:59:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1116483E43;
+	Thu, 13 Nov 2025 15:03:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A+Bfrc/p";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UU9RLToL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C37F183E52; Thu, 13 Nov 2025 14:59:52 +0100 (CET)
+ id B311B83E5D; Thu, 13 Nov 2025 15:03:31 +0100 (CET)
 Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
  [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41B4E83956
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 14:59:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 614FF83956
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 15:03:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-65704dae718so380583eaf.3
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 05:59:50 -0800 (PST)
+ 006d021491bc7-6571763793bso365360eaf.1
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 06:03:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763042389; x=1763647189; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763042608; x=1763647408; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PJ90nmwxteME2xN3kV0KKXpt8IGVpAjinSypplxjBs4=;
- b=A+Bfrc/pLwMJdwEW+TX9sERl5fgt8kHJ8vU7saUCf6DPKvL+BKp/kCSBmp4b+ES+I9
- S16w9VW6hnN+157T/12ILtR9AUQA7KhnQar12y+mIXTNLHoGzLZTI0AkmBwV+/on8xxZ
- EyutB4vCelGEDBK2Fy1paK1MWizI+LHPP4rPk=
+ bh=xtALxTAdiMcGYPNTSftmnkxBO9CqpS2Ya7cUTnb+6DI=;
+ b=UU9RLToL4+1RnFkL2ZPi1AU1gbd7iGKINgwCWmwD0FUR0Wxa/aR/Fa6EhAAcsLBadx
+ 0Jg5rkNMKzkGZQ4T8GLyqcD6MPz4l9kWn08y+Jq7n23Di/EeGOQ+uAkK2O1aWQXxmWUY
+ 2mgEWkLWcVqKWYiMElPhL3vKTSU4+h/U7KKpg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763042389; x=1763647189;
+ d=1e100.net; s=20230601; t=1763042608; x=1763647408;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PJ90nmwxteME2xN3kV0KKXpt8IGVpAjinSypplxjBs4=;
- b=CbLRCNY2Th5S98Irb7sqoEFpRB6bRxIy1BMTg+pVJ5sfDoSItCEYf/3lB8zp5RyJgF
- yfN1hdAbv3MI4maptGNmmebztQWiXnFGy/P9dcLJ/7xhzpTm7iLBCsc3REL8rB/aBAtN
- mZnhroZf05+gMBDqZuP7THsSm5EhWOyAXt8uwF2w6JbWpJnyrOLLvT8xn6NVdht2FYGM
- EfBJy7yxAJ3PA3xOR7g0MtHffQXAdVoqGpWVUVaOM9lsI/5TFGAb9iy64oYBjHE8zUe7
- cHz18vWxCAIFnbHtc56P/FnStTWnW8NkX374Ho2kIDwtE9okRGVFlaHe3cPtG1nvluQe
- yWnw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUottbPUgs9fFUtBfHF0tN6xeGjniZ/Q2x3gImDt2ZWEaq9vseac6kLAnJQiV/H1/PIR71VOxw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2SHHRgDw7yAPQet9Gikn80G3xlqQ6j+dTTI6DY45knEvvBFtc
- Ny7tDtHXEmdW1z/0FYmkz9K8cW41t84tumraRcHaDfm/cdgKCp6YeINHh+4XdLbTlhE=
-X-Gm-Gg: ASbGnctkc5pdFLSVIypIWHT0K9n02gkv/YSSRHdtUR6RwqXXsb6n/8TrEHr8SNzMjYq
- 7Fpo+tYjI0lMa+yeFUXmSpnKv9CQOt+9ShXe/w/I9utSszOXHR26n4qct2Exe+FDy31Bh5fQGnV
- ga9tv+85eHbhrb2gXjEsrNl46DHQoq88zDKb/DPvibaF7Yj7Q0HKBLQ1keaShrNDcI51f9WZuQC
- mWKPVszzzxwjAA8dhquL9G17dkf4FfH18ZuDBHCmz6PYWqZISFhX9miM+fl93f45g8XioUGrwZF
- r3WciLAwmK9gUEbhA1iGNjtWewFlTvVkc1cckp2eiVgtsuKF1WlZJX0Mw9EEAVuRfF37C5zc+kW
- CihcKnLMB2ako/ck7MZRe6RXakIPu/wfcTa0d2swDKL20wqqp1aOLcSW++jt/jTCFYv6RRJGr1y
- FryDLD8WOdPRrNaztaDKgSGqWGjuXhoiBs/vBebLo=
-X-Google-Smtp-Source: AGHT+IFeW1+3xYjAyOj+SY8bgyM7PwWPk7BJTpkYmJbh+EMZ7RrXZ80UgstIKg6KmDNHj90FzwndTw==
-X-Received: by 2002:a05:6808:80b2:b0:450:3b8b:b472 with SMTP id
- 5614622812f47-450745ca240mr3549221b6e.63.1763042388949; 
- Thu, 13 Nov 2025 05:59:48 -0800 (PST)
+ bh=xtALxTAdiMcGYPNTSftmnkxBO9CqpS2Ya7cUTnb+6DI=;
+ b=uh9MK/WcTkeXLm2xfNcWfWaK/rxV0dttpVIAkXAuGVwRhtV6sOnaoQbuGl/HiTZ+NA
+ 2kRGdl5wyn/K9GdisB/uREjXC24menp4shSC+8HKC3eSDWRZruLi+u/EhF0Apqof5dz3
+ Xzzv83ZNY7HUaDklmzvh571MQYg589C5f/mZzaJVusWn1B16qUwq2i9DGeR6kLr1HPgL
+ eTGxHLsdK6kQtU+gkSTSz6MfFo9Zp+Fw46WbW/turSf1RWsE1R/as88nY/KRFzhoGlPM
+ jeOMa0868NvEdzmdsdpx//XMGHPNc76uxF8ITVAHaJWkirAxbr4MrUr/vkobfofM/HCA
+ 0kRg==
+X-Gm-Message-State: AOJu0Yx59ysDWkxjQDivM5G1ZsOWFoB+6tIfYer3j51+B/d/hybd4pa/
+ hpzBhtZJL+RtFyOTRW/VK3pfO8XrjB0X35olLHYx89j15Kp6+vjjQACWNFfKxGLQBZY=
+X-Gm-Gg: ASbGncuqG3ggww9k/2hHIGMW3/305spp/4h3yS7W0qqRZXX3FyHbr7o4CiN6uKX/ls6
+ b7mQgI8Fp0Ormesduly5rq2uiveiR2n8vlYHX+LRYNDmcS3SOA246V5SShX8WGEsuXRz3qUpVtW
+ Bda25wSFQROJpcesiVL5UOLgYVoIONB4HszdJmVEmN4deNXcfOFk2YMX7iwUI9qI0IdcvAuzYJW
+ eTMnVKQ/Umg3SNxEj3+xHiP7xG/yJOWnUkFACDXt22A3fMXGfuCpFMm1s3chD9tXYh1E56yW5wW
+ J7iis7OhxfY4FHuUYxcJuDM/VlAbI69QjSnV0tWSaU75EbpexmQ5Lw0Omp/QKnljjjs0CCsrGlM
+ VAYLFnVIZt1+uvb6v3chFz78dYSKTkzVcfYPQcOEfhremmV4R3JdK73MgRrear2a/B4F3nSkigT
+ 0JuoNTGy5rSGvM8IWH5S0SrU+BOMjY977ku7tILjs=
+X-Google-Smtp-Source: AGHT+IHIsGVDZY9LZPqXi7l/txgeFQtyqXsq8cF9Fh6CK8EZp/VuKPvNhBrBjJ1+Jb1XETvQgHHruQ==
+X-Received: by 2002:a05:6808:150e:b0:450:3da1:aecb with SMTP id
+ 5614622812f47-450743f810fmr3306829b6e.1.1763042607743; 
+ Thu, 13 Nov 2025 06:03:27 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4508a553decsm991363b6e.6.2025.11.13.05.59.47
+ 5614622812f47-4508a684611sm995854b6e.15.2025.11.13.06.03.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Nov 2025 05:59:48 -0800 (PST)
-Date: Thu, 13 Nov 2025 07:59:46 -0600
+ Thu, 13 Nov 2025 06:03:26 -0800 (PST)
+Date: Thu, 13 Nov 2025 08:03:24 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <simon.glass@canonical.com>,
- Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/6] fat: Some code improvements
-Message-ID: <20251113135946.GG6688@bill-the-cat>
-References: <20251113064656.245394-1-heinrich.schuchardt@canonical.com>
- <20251113133038.GF6688@bill-the-cat>
- <deef0753-517e-4dc4-b2c0-9d25b1e56e5f@canonical.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: Re: [PATCH] arm: qemu: Eliminate fdt_high and initrd_high misuse
+Message-ID: <20251113140324.GH6688@bill-the-cat>
+References: <20251113115539.947871-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FIaNrIRWXej7c+N+"
+ protocol="application/pgp-signature"; boundary="vJFP/g8/pcUkyrHa"
 Content-Disposition: inline
-In-Reply-To: <deef0753-517e-4dc4-b2c0-9d25b1e56e5f@canonical.com>
+In-Reply-To: <20251113115539.947871-1-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,74 +97,38 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FIaNrIRWXej7c+N+
+--vJFP/g8/pcUkyrHa
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 13, 2025 at 02:45:37PM +0100, Heinrich Schuchardt wrote:
-> On 11/13/25 14:30, Tom Rini wrote:
-> > On Thu, Nov 13, 2025 at 07:46:50AM +0100, Heinrich Schuchardt wrote:
-> >=20
-> > > From: Simon Glass <simon.glass@canonical.com>
-> > >=20
-> > > This is an attempt to improve the structure of the FAT code, since it
-> > > doesn't fully follow the U-Boot conventions:
-> > >=20
-> > > - fat_write.c includes fat.c which is odd
-> > > - use of __u32 and its ilk
-> > > - use of typedef
-> > > - old-style struct comments
-> > >=20
-> > > This series resolves these problems, making it easier to take on other
-> > > improvements in future.
-> >=20
-> > We don't have an AI policy for the project at this time. My current
-> > inclination is we should follow:
-> > https://docs.postmarketos.org/policies-and-processes/development/contri=
-buting-and-ai.html
+On Thu, Nov 13, 2025 at 12:55:28PM +0100, Marek Vasut wrote:
+
+> The fdt_high and initrd_high have nasty side-effects , which may lead
+> to DT placed at 4-byte aligned offset when used in place, which then
+> prevents Linux on arm64 from booting. This is difficult to debug and
+> inobvious, with little to no gain. Remove this to let U-Boot place the
+> DT at correctly aligned address.
 >=20
-> I cannot see that Simon's work would violate a policy like the one above.
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-The "please, don't" part. There's no reason to have Claude or any other
-LLM do basic clean up and refactor work that a human could easily do.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-> > So I'm inclined to defer this until there's some "other improvements in
-> > the future", that are both useful
->=20
-> Could you, please, describe what you dislike about the content of the
-> changes.
-
-Sure. I've seen first hand how hard it is to get current Claude to
-really actually do what you tell it, and not make subtle changes on its
-own, even when you tell it to not do that, really. I have no time to
-review patches that should be simple and if were done by a human would
-be simple to see what subtle bugs may have been introduced in code that
-can suffer from both subtle functional bugs and subtle security bugs.
-
-> > and hopefully only human developed.
->=20
-> With your reaction you will probably push contributors to simply not ment=
-ion
-> which tools they have used.
-
-https://blog.xkeeper.net/thoughts/rants/arguing-against-inevitability/
-
-And if we can't trust contributors to follow the rules, they shouldn't
-be in the project.
+And this is something that needs to be done more widely too. I'll look
+at that once we get this series landed to -next. Thanks!
 
 --=20
 Tom
 
---FIaNrIRWXej7c+N+
+--vJFP/g8/pcUkyrHa
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRXkTgAKCRAr4qD1Cr/k
-Cs3qAQDsgxXid4RpZeZxud17LQk9nyfHF5+x3CrwvgIDc8LqaQD/byRFHQqJjZRe
-G64b96McIT41uCSo4tSbkUWxDQEbrQI=
-=KiIU
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRXlLAAKCRAr4qD1Cr/k
+CqcYAQCxe1wygCu4Giab1cke5pzDIFYchWS9JuDCp6bfBSe9wgD6AzX8WUiGMVJK
+TWRzm3GhdkS4NHcuWMmKW4mX+A3pbAU=
+=689q
 -----END PGP SIGNATURE-----
 
---FIaNrIRWXej7c+N+--
+--vJFP/g8/pcUkyrHa--
