@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E91CD98D3
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 19:33:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 310AECD98D0
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 19:34:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F0F58400F;
-	Thu, 13 Nov 2025 20:33:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B922284014;
+	Thu, 13 Nov 2025 20:33:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KP6cd8s5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EsAJ9/88";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFADE8400E; Thu, 13 Nov 2025 20:33:47 +0100 (CET)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id DAF0084014; Thu, 13 Nov 2025 20:33:57 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 508528400F
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 20:33:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BB6184015
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 20:33:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-343ee44d89aso1580017a91.2
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 11:33:42 -0800 (PST)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-341988c720aso1051519a91.3
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 11:33:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763062421; x=1763667221; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763062434; x=1763667234; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MjmJSQG0ZxuRnGOxAcKuzKjtlvNpK8FAy0OOw4TTSYo=;
- b=KP6cd8s58OSLgAC+ZzCdyZLeoc8p77hH3uOiT4FQlYwXcTSthKUYOa4fsXewaXMmdN
- dD3CrAjwqMv3fBYCQqdLDLz0Q60Axmzhwbh5YHsDE3IQ3tNyEDbaScnhoIUl+moiz9sf
- nz64inHWmBS9p2safSAn16TJtt+4O8bSqNd7Q=
+ bh=KKS3ZOKelOfMRW8CVN/ynAi9vYcTh7nzwCkxYOxlw+Y=;
+ b=EsAJ9/88fEG/jXBL2fOHgbQ0+mZCV7XW1o59W/0H8DcCbdMJa0ltrtnhIz7y0KLl/b
+ TSqZ13oDjUjprECvUtG5JeG9xOUicAnKiA73iU0T47YEKo2ZbT3KvmCJALc5KP0GGk1/
+ 2uXrgIKmAPT2U0daNuBx6CcNbwTaghZLP2q9U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763062421; x=1763667221;
+ d=1e100.net; s=20230601; t=1763062434; x=1763667234;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MjmJSQG0ZxuRnGOxAcKuzKjtlvNpK8FAy0OOw4TTSYo=;
- b=CpME4JZZyEIEJGuHQQ2yjLn89AD3Hlz59omtdDYClMw27xCNQudD6vgjQhkp5kerd7
- FComXfKOgzvG/gVA/Afb9YCLHNxOY3gx/R7LQZ1njbO60WpEpRXviY3OFKUmHTOETqKf
- wVYDyGungyanXEbqF/DjQMfgpeSrgWKCFX5T8ySi37HjoqA07LLlm6MGO6rRyadircHq
- 6UbzV+IpNfduMySrCGX1el8HlxPPgOwp1s+PbE+yjyqrslpEmMG7+uUxWfQT/ybyTLEb
- Gzqs1k6ug0GPCZiEhWfg+xGBumK8pZIjTj9Jq8WR3ukG85HQrGVA1TGnJX0AUl2jijIe
- NBFw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXda4hWUfIoI62BeQaVjB2DnYdT1Twlf5T8VMeZfmGdHlGi1OypBfC1XLkVwikNQsmuZ85gLiA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxS6TKupYgO9I+k7scvIJHONrUaXqWfijFIRayzHnuv07YTqiyT
- cxLVLBOxFMVRaHH0+vP52RrWsGz0mJvXVnRlTxFKZhVd6eusyCNpFpgzhVcJFytWtOohBlvr9xE
- Oz5XislbLSXn94Ryp0iYSyM+lvcaRkyh7Tq/wU5aS
-X-Gm-Gg: ASbGncspxawMen29t4uTbwOv4M439VD/wd2VKom8OSpfgsjqjJYO7QSVnDHuYwu9ga1
- 4prRdPE7JmNKjJJWq5xfjRL5szMDGgz7qWRckuAPNVs+LW4+xCveqK9KIXB9XrRZUuu5PCulVL+
- 1ETe5gNnLPDOBj/xZU9z3i60nVTxJOU5k5oTG13DRJFOiyeR51eOvvW0bRqNPAp979ISe+r7WAD
- pBl/WUHpX2H8D8XfoUGzdp9gDoUgWayONefwXItYTLbrroSkVHHLms+RaOn+ShXy6F7BEZ2P5RW
- vkEH
-X-Google-Smtp-Source: AGHT+IHu452efcOpMWlcn1XxosDVCnBwtmOSECaPu2mJ6Ef7B6OOT20yCdZ/RTfJqn674Uk8PvgYkWwx17UAkYnMVjs=
-X-Received: by 2002:a17:90b:4c86:b0:341:8ac7:24d3 with SMTP id
- 98e67ed59e1d1-343fa793c5cmr393042a91.34.1763062420848; Thu, 13 Nov 2025
- 11:33:40 -0800 (PST)
+ bh=KKS3ZOKelOfMRW8CVN/ynAi9vYcTh7nzwCkxYOxlw+Y=;
+ b=OXM8bwbS+oKnANLEDge/sZjg2X0aQ0Dji9HWY0a65JBcfXiV9M94jmJkiQzrpwgVIX
+ KV4LxMRa1THda9SDv3ssBYBECiSbihmFSiG8M9UbeV8K9hjRg/YWomMOum/YnF1Kkfo9
+ I82l/iyydPm/ykUolmW9rjUs3QdiQ7ygrpD4LzILnsNEfdjNFiNoU1wva5R8FBqqmKbJ
+ iGJUF/ffcKYPAXRkV8p3YgluuFRq2DJTM8WAIzv2swpzVos6DHdtdz8cOs/Zy/cXn7mh
+ PH187VS2GkzcJ8Fzsui2D6mVD+vbgVFepWpf6XA1j8bRHxX1MQ84yEh/Aq7yV9ecPRza
+ 3xqA==
+X-Gm-Message-State: AOJu0Yzd6xWxFM3xxa+e8RUqm2sARun0QOB4pk2/+GduSfgKNORG/xHW
+ 9RBFg7nNohssFYQ8PMzdssp0qTY7QYI86j1KU5iDbVLIjNZE2sXkhf0ZYcUVNj9kL1p8BXOQ+LB
+ TLfnDPigJrNnEbCo0fMlhJGHv4ZY9kHXMcGfpUp3YLzo/nYUMaIs=
+X-Gm-Gg: ASbGncvB+QvJVNOG6KCUsd+zKYYT4vJp5iSWSDdTlZzmyMkMR1gfkxque9m5fxqVHBW
+ xhmuYWDNvJbgYQaQlBguGuu0DOC37xfkvi4kurzW//YpnLRRj5ogp+hWdAduHN9tEJLY1tQ2xN7
+ M2gK6/q0emmeUNz0/CLPfVparHNmOHAM94jBSm5r4EYWkFlVpzW4V45XMNW6nouh6f/tRTuF+3V
+ tFtG8g+d3QnkK4VNaF6/5W20cRe982995C6GDNcGLCyr8qeQ9Fd9pM0NUfrhe7H8tGbLIZnkzLS
+ O4XQ
+X-Google-Smtp-Source: AGHT+IHf0MHfy7phILdUlBKoiKNnOB+KyMhjzrbjXEXAlj5sCVBiShEFBhQ8NepN7x1EWzSDZggEOyGpyQ1sp2BlucI=
+X-Received: by 2002:a17:90a:c2c7:b0:341:8bda:d0ae with SMTP id
+ 98e67ed59e1d1-343fa63366emr418329a91.20.1763062434113; Thu, 13 Nov 2025
+ 11:33:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
- <20251113175700.GM6688@bill-the-cat>
- <63d6a47c-99cc-48d1-9d71-869c58e2eb69@mailbox.org>
- <20251113184917.GN6688@bill-the-cat>
-In-Reply-To: <20251113184917.GN6688@bill-the-cat>
+References: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 13 Nov 2025 12:32:58 -0700
-X-Gm-Features: AWmQ_blEjQx1acK_8w3RrnWAyF8738UvbXyHvdWM2ws40RAgLzWQLWWVEeBXKyw
-Message-ID: <CAFLszTh7f--1tZZmtq5Q+dUkCbStkoi-LUXLVAsZzDGbTxY6Hw@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Synchronize DTC to 1.7.2
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de, 
- Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Sam Edwards <cfsworks@gmail.com>
+Date: Thu, 13 Nov 2025 12:33:12 -0700
+X-Gm-Features: AWmQ_bkorSq-5J_CN8gLgp5uR5nFsft-wM0uyLQdlw9JEPFO7kWEc7IZj-wxwto
+Message-ID: <CAFLszTg0ByjUGgX4MSbU=i0oG7fuidM4J0J128ER6Aq+r6HW9A@mail.gmail.com>
+Subject: Re: [PATCH] boot: Assure FDT is always at 8-byte aligned address
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,60 +89,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Marek,
+Hi Marek,
 
-On Thu, 13 Nov 2025 at 11:49, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 13 Nov 2025 at 04:55, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
 >
-> On Thu, Nov 13, 2025 at 07:40:29PM +0100, Marek Vasut wrote:
-> > On 11/13/25 6:57 PM, Tom Rini wrote:
-> >
-> > Hello Tom,
-> >
-> > > So, taking a look at the test branch you pointed me at, my big concern
-> > > is size growth. On imx8mp_dhcom_drc02 (where we're already LTO'ing),
-> > > with the CI gcc-14.2.0 toolchain full U-Boot grows by more than 6KiB and
-> > > SPL by a bit more than 2KiB. This is a bit of a worst-case, imx8mp_navqp
-> > > is a bit more than 3KiB / 548 bytes, with the average feeling like
-> > > ~4KiB/1KiB for aarch64.
-> >
-> > Do you know why this growth happened ? Is that in libfdt ? How did you find
-> > it ?
+> The fitImage may contain FDT at 4-byte aligned address, because alignment
+> of DT tags is 4 bytes. However, libfdt and also Linux expects DT to be at
+> 8-byte aligned address. Make sure that the DTs embedded in fitImages are
+> always used from 8-byte aligned addresses. In case the DT is decompressed,
+> make sure the target buffer is 8-byte aligned. In case the DT is only
+> loaded, make sure the target buffer is 8-byte aligned too.
 >
-> Using buildman. To make it easier I put my wrapper around it at:
-> https://source.denx.de/u-boot/u-boot-extras/-/blob/master/contrib/trini/u-boot-size-test.sh?ref_type=heads
-> a while ago. I can also send you off-list the world build comparison
-> (it's 446KiB gzip'd).
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  boot/image-fit.c | 9 +++++++--
+>  1 file changed, 7 insertions(+), 2 deletions(-)
 >
-> > [...]
-> >
-> > > Rather than a full-resync for the last time we needed a feature found
-> > > upstream.
-> >
-> > I really don't want to do partial resync, it will only make it harder to
-> > maintain obsolete code base going forward. Even this resync was hard due to
-> > that exact current divergence.
-> >
-> > > There are things we *need* like to be 8-byte aligned and also the
-> > > phandle resolution thing I believe inspired your investigations here,
-> > > but I don't know if we can take the whole sync. Or maybe needing to work
-> > > with upstream to shrink down some parts, I'm unsure.
-> >
-> > CI does show that no boards went oversize . If there is some growth on
-> > existing devices, maybe we can shrink that, but maintaining obsolete DTC
-> > code base going forward and picking random updates into it, that will only
-> > lead to increasing maintenance pain, so I don't want to do that.
+> diff --git a/boot/image-fit.c b/boot/image-fit.c
+> index 2f2d3e9304d..cccaa48f683 100644
+> --- a/boot/image-fit.c
+> +++ b/boot/image-fit.c
+> @@ -23,7 +23,6 @@
+>  #include <log.h>
+>  #include <mapmem.h>
+>  #include <asm/io.h>
+> -#include <malloc.h>
+>  #include <memalign.h>
+>  #include <asm/global_data.h>
+>  #ifdef CONFIG_DM_HASH
+> @@ -36,6 +35,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>  #include <bootm.h>
+>  #include <image.h>
+>  #include <bootstage.h>
+> +#include <malloc.h>
+>  #include <upl.h>
+>  #include <u-boot/crc.h>
 >
-> Yeah, it's not an easy spot. But I'm really not happy with growing main
-> U-Boot almost everywhere by 2KiB - 4KiB, and SPL by ~512 bytes or more
-> just to keep up. I do see that integratorcp_cm1136 barely grows at all,
-> so maybe there's something that can be done more widely and just wasn't
-> clear at first. m68k only grows an average of 500 bytes and MIPS is
-> ~1KiB. PowerPC grows a lot. RISC-V a little.
+> @@ -2279,7 +2279,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+>
+>                 log_debug("decompressing image\n");
+>                 if (load == data) {
+> -                       loadbuf = malloc(max_decomp_len);
+> +                       loadbuf = memalign(8, max_decomp_len);
+>                         load = map_to_sysmem(loadbuf);
+>                 } else {
+>                         loadbuf = map_sysmem(load, max_decomp_len);
+> @@ -2291,6 +2291,11 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+>                         return -ENOEXEC;
+>                 }
+>                 len = load_end - load;
+> +       } else if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
+> +                  ((uintptr_t)buf & 7)) {
+> +               loadbuf = memalign(8, len);
+> +               load = map_to_sysmem(loadbuf);
+> +               memcpy(loadbuf, buf, len);
+>         } else if (load != data) {
+>                 log_debug("copying\n");
+>                 loadbuf = map_sysmem(load, len);
+> --
+> 2.51.0
+>
 
-FDT_ASSUME_MASK was my attempt to handle this upstream. It is likely
-that people have not been using that very much upstream and some more
-of the code needs to check fdt_chk_extra() before address/value
-checks, etc.
+We really can't do a memory allocation in fit_image_load() !
+
+The problem should be fixed higher up, in its callers, etc. For one
+thing, the caller knows whether it is a DT or not, so putting this
+logic here is messy. See boot_get_fdt_fit()
 
 Regards,
 Simon
