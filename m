@@ -4,79 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC15ECD98D4
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 19:34:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20779CD98D5
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 19:38:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 984F58401A;
-	Thu, 13 Nov 2025 20:34:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9EE5484014;
+	Thu, 13 Nov 2025 20:38:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Oz7hzskm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R4EnkW64";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DBE084033; Thu, 13 Nov 2025 20:34:15 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 0CAAB84019; Thu, 13 Nov 2025 20:38:23 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C84B8400F
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 20:34:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CC88884013
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 20:38:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b403bb7843eso242569866b.3
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 11:34:13 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c707e11e01so1266564a34.0
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 11:38:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763062453; x=1763667253; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RkyqNGIOXHXQNyg3JQ6OnnVL89SyiHixTEDOyMcu9is=;
- b=Oz7hzskm4ChG9znkUl6yDr618BItyy1OTVCUP7iRLFR+IPuEOeaLPfTKgjhGM+I6/A
- VeH1b2ZPigzmkoSyAYT7f/kWWAdlqPTZ3oWpVnK5gPsCkmOd91jBiwtKfEvSifjOSclX
- 7ySS9Xe7QJRsZLPfqUUTA7jKbqsMZwhT2d+wk=
+ d=konsulko.com; s=google; t=1763062699; x=1763667499; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pD7w7fpz7YnCodrRxcr/FY86de48wB0yB8WRgsrzVz8=;
+ b=R4EnkW64pNcaz/MufcUj9dLCUow2yoKxsWO87JZ8rsRYlyHK0Bw9qvo4ys5KQaPYlz
+ ciWWeAp215U7G1JFUNNsRYrAadZudKE89pBRcescSe2gsIupxxshhFuWW48LYHPbAmr1
+ +/qO899iO5hj/vGO3B9OGzb1miu2KpdfEeEHg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763062453; x=1763667253;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RkyqNGIOXHXQNyg3JQ6OnnVL89SyiHixTEDOyMcu9is=;
- b=SO2M+4VqjKEevdxceVghg5EAcORsBgDQc+5wAGqzgmM00dnm1HIEOsqvuvekfav6Gh
- VKWbUZzwzPJoswZAyFwwPsVT+DW2PsgRIe1+yUNaG9im2vNWgjKgyPteK+wn0hE6eNQ4
- ANDp/9nVv+ctko6xFVYaIws9zsZPuYA+giN6Fqz2kGwGgkYEuZ1fwFxOw0lhnHlJlF4W
- 4I3Et5g6ZVrrhSqjt6MSZlK9lDy0HRXYnb9M+BF0pvjrwoCgRZXn+dP3e9bJ2xvwfgCX
- aP5AypykKYhmmcRNmqvqXcDyM3h5qUb7vJxl3TyM26m8Adynihlxs1CeGIitiDX7PQ6a
- wbwA==
-X-Gm-Message-State: AOJu0YwRKX8l0LAHH3ONenkG5ibqy/EEjF3hIhFrioUheuzv1nlgeusp
- FXzYUrR5Opn6Wk0SuFhKUwvPict3uT4TTytionEWy5eUnTWOM6SWDFkVEoaDZgKYWKxY2ym+pet
- mIJz/xW6WyGjpaLOEukdCkK88zJ1x7Ea4UPY8EQcW
-X-Gm-Gg: ASbGncsciaMUtpQhEvWwakH80vhRPw26jAb0zU/K9sxGHsO8TGaswoMga9MiOosppbm
- 22/susbhkPBgquu5WOuh70ZNymwbx460lCPF9hlUuHgv+4W1Gc1gkwc0606DGqTLucgBHIne34Z
- 8xQX1q0NlCiKB89bfdcE4vcOkeKErSXNr7fLGcgmcws+IvDORS2Z0vAECc7JPrBZAzgqRyNbNIr
- n2B2FvCS3+ksCHhp6gtYfxd5OgUIltRZTbti6HuO4Lt54L/6LqjNY84cjw6b6LSuDLJbA==
-X-Google-Smtp-Source: AGHT+IFcixB5XQtYK2WoFfK0HU3PkCX42kKtC24QbaUEjB1YO44cS8XN6I5bFiR/DermuE4nlQLeo1S1Ekp7jGg3w5I=
-X-Received: by 2002:a17:907:7f19:b0:b71:3045:f73f with SMTP id
- a640c23a62f3a-b7367961db9mr34422966b.40.1763062452789; Thu, 13 Nov 2025
- 11:34:12 -0800 (PST)
+ d=1e100.net; s=20230601; t=1763062699; x=1763667499;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pD7w7fpz7YnCodrRxcr/FY86de48wB0yB8WRgsrzVz8=;
+ b=Tk2thbnEWrRSSOkygDnruLoWdLocDIX+QiuzsP4TDzJHG1EjXsXodUuYiNA9kL1rDz
+ ppawCRj+IoYg7SObiE94dumxrdSZL8Uv5rLCos4GcTGH7UCRQ5GMC5uPp83nvPOinZ67
+ tmrh7at8lcldCum5tm3MFsO3VJs7NgcB08QBOCkJAwmFhMqxkf6SgEHarelyQQrT4d/d
+ xYMBy4PzqKqlFQjghFQpQRxQ0BJ6iRM+YxfwhRCDD5uOw9wZXZJ6A3trwFKY5s/D/C/0
+ d9e8WvCOwfza9S2dd/XYe+rzTkl2UuO88j0dlJgvOQAJIE/lXmwRCg8djeIIl2tYlb9I
+ UFYA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWc+p09duRqIH9tkdTNjky6tcglxyAHyF+9lZ+6eTLFTgdAiCRRF6MLdQJUSVFGZus/6H//vHw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGHp8Yom0ma+uP0nzokrxYykL/iPK+Nuq+r9CNTNFQnnUWxcnh
+ /+FEqdvlfdN5GPDR2mC/pazZYoS45t3K5yn2swkBu9uJDZCFdPIK98Y1mdXsdMn9gEc=
+X-Gm-Gg: ASbGncsQSdN02VmKOzY8WcDMrT910NeWBydWNNS438ZTD6f3qaosI2OzQ5TMe+wH7ia
+ ziSf/v2dsVQH72zgQ8nDOpeH/586118VUKwdstQEDRGQgzs54Bk5nCVsUiqWlDGTONHkKVOtnYR
+ FSlI+DAKHTsGoVunZ+7oPrmYqKdbTRvJarl8FcmJsxVUIgkBohLYoy1kJSFr5IH+XiyrBqaNhgT
+ NzvQD2/I4PYfBDsbXN0wjUAivtbCHh1WhMGxv3fAaMgFNSY4vaPvq+d/vJsSDeF6Zpww73AEkk5
+ 0+Q1Xf70fmdr4PHAgqYpYTtowVsOzp7NUbiHoqnm8gbs3tsRs/IVIxqGPDDtuJlNCviwm/F+T/H
+ dPSPfPtVK+Vyg/Oq3VMCvNwIQw+q1M8C6oSSFf5lnSRvHunCV1v4otEzQRRe484uPvbXi7aFzGw
+ lWbhFQOW360cVVKu7yfvpbOGHEzOA+Y2w3XLYnoas=
+X-Google-Smtp-Source: AGHT+IGDU6HUZe/httaE5Jyh1mYyOIESsskTxu2i9r//sFpUK6UN062MmP4tmZUK7XWBzYQJ9gTojA==
+X-Received: by 2002:a05:6830:40c4:b0:7c7:3416:ff89 with SMTP id
+ 46e09a7af769-7c744619017mr395650a34.36.1763062699544; 
+ Thu, 13 Nov 2025 11:38:19 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c73a29cc67sm1721990a34.12.2025.11.13.11.38.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Nov 2025 11:38:19 -0800 (PST)
+Date: Thu, 13 Nov 2025 13:38:16 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Aaron Kling <webgeek1234@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>,
+ George Chan <gchan9527@gmail.com>, Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>
+Subject: Re: [PATCH 1/2] boot: android: Always use 8-byte aligned DT with
+ libfdt
+Message-ID: <20251113193816.GP6688@bill-the-cat>
+References: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
+ <CAFLszTjofjQ_zmwJrGZ-sLejQ=x=-8tyqr4SBPYgt3683GVAbQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
- <20251113122145.949112-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20251113122145.949112-2-marek.vasut+renesas@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 13 Nov 2025 12:33:16 -0700
-X-Gm-Features: AWmQ_blFwH1yvkbN8ey6bJN8UlHnC2WVMBglUHEhvP42H_mtac6op0vGxFBVWIY
-Message-ID: <CAFLszTigJHK9H18rZG=AHRo09RPqKGHQmmVrHZ40mHPk-KkwqQ@mail.gmail.com>
-Subject: Re: [PATCH 1/3] dm: core: Check ofnode_to_offset() return value
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Sam Edwards <cfsworks@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dX0Q+Asg2MENfVzZ"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjofjQ_zmwJrGZ-sLejQ=x=-8tyqr4SBPYgt3683GVAbQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,62 +104,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
 
-On Thu, 13 Nov 2025 at 05:21, Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
->
-> The ofnode_to_offset() may return -1 , which is not a valid value
-> and is not accepted by modern libfdt 1.7.2. Check the return value
-> from ofnode_to_offset() and exit early in case it is not a valid
-> offset.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Adriano Cordova <adrianox@gmail.com>
-> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-> Cc: Christian Marangi <ansuelsmth@gmail.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Sam Edwards <cfsworks@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/core/ofnode.c | 384 +++++++++++++++++++++++++++++++-----------
->  1 file changed, 284 insertions(+), 100 deletions(-)
->
-> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> index 071d998a0a5..55c2b3a10bb 100644
-> --- a/drivers/core/ofnode.c
-> +++ b/drivers/core/ofnode.c
-> @@ -335,7 +335,7 @@ bool ofnode_name_eq_unit(ofnode node, const char *name)
->  int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
->  {
->         const u8 *cell;
-> -       int len;
-> +       int len, off;
->
->         assert(ofnode_valid(node));
->         log_debug("%s: %s: ", __func__, propname);
-> @@ -343,8 +343,13 @@ int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
->         if (ofnode_is_np(node))
->                 return of_read_u8(ofnode_to_np(node), propname, outp);
->
-> -       cell = fdt_getprop(gd->fdt_blob, ofnode_to_offset(node), propname,
-> -                          &len);
-> +       off = ofnode_to_offset(node);
-> +       if (off < 0) {
-> +               log_debug("(not valid)\n");
-> +               return -EINVAL;
-> +       }
+--dX0Q+Asg2MENfVzZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ugh this is really horrible, sorry :-)
+On Thu, Nov 13, 2025 at 12:33:24PM -0700, Simon Glass wrote:
+> Hi Marek,
+>=20
+> On Tue, 11 Nov 2025 at 18:17, Marek Vasut
+> <marek.vasut+renesas@mailbox.org> wrote:
+> >
+> > Newer versions of libfdt strictly check whether the FDT blob
+> > passed to them is at 8-byte aligned offset, if it is not, then
+> > the library fails checks with -FDT_ERR_ALIGNMENT . Currently,
+> > android_image_print_dtb_contents() passed FDT directly mapped
+> > from abootimg to libfdt, and this FDT is not always aligned to
+> > 8-byte offset. Specifically, the FDTs are somewhat packed in
+> > the abootimg, therefore if the first FDT blob is e.g. 0xfd bytes
+> > long, then the next FDT blob ends up at 0xfd offset, which is
+> > not 8-byte aligned.
+> >
+> > Fix this by first extracting the header into 8-byte aligned buffer,
+> > checking only the header for validity, and then by copying the
+> > entire FDT into newly allocated 8-byte aligned buffer. While this
+> > is not efficient, it is the correct way to handle DTs, which must
+> > be at 8-byte aligned offsets. Mitigate the inefficiency for the
+> > common case by checking whether the DT might be 8-byte aligned and
+> > if it is, map it directly.
+> >
+> > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > ---
+> > Cc: Aaron Kling <webgeek1234@gmail.com>
+> > Cc: Eddie Kovsky <ekovsky@redhat.com>
+> > Cc: George Chan <gchan9527@gmail.com>
+> > Cc: Julien Masson <jmasson@baylibre.com>
+> > Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> > Cc: Nicolas Belin <nbelin@baylibre.com>
+> > Cc: Sam Day <me@samcday.com>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > Cc: u-boot@lists.denx.de
+> > ---
+> >  boot/image-android.c | 46 +++++++++++++++++++++++++++++++++-----------
+> >  1 file changed, 35 insertions(+), 11 deletions(-)
+> >
+>=20
+> OK, we need to adjust mkimage etc. to handle this. Until then I think
+> we should have a way to disable the 8-byte-alignment check as it seems
+> to have an enormous blast radius :-)
 
-Better to put a wrapper around it than add all these checks, extra
-code size, etc. Also in many cases the ofnode is known to be valid(TM)
-so it might just be a waste.
+We can't. We really can't. Passing misaligned device trees results in,
+and has already resulted in for years:
+- Silent Linux crashes
+- When Linux doesn't crash so many of the read functions go wrong the
+  result is incomprehensible.
 
-Regards,
-Simon
+It's something that has and continues to waste untold engineering time.
+The only reason it's not worse is that we've killed off *most* of the
+platforms that disabled device tree relocation and that's how
+misalignment happens downstream most often.
+
+--=20
+Tom
+
+--dX0Q+Asg2MENfVzZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRYzpQAKCRAr4qD1Cr/k
+CrFbAP4x4+TIL8dGpjAU+HwIzggpqq0pZKueQ1B8b7BTlsH+lwD/SAJBh6Vg6y+b
+acBWNSk751dL1gGZA8m4ZTlObWTIwwQ=
+=W9cC
+-----END PGP SIGNATURE-----
+
+--dX0Q+Asg2MENfVzZ--
