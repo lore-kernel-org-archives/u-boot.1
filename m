@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6D54CD98F6
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 22:47:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D53CD98F6
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 22:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2078683E23;
-	Thu, 13 Nov 2025 23:47:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 637AB83FC5;
+	Thu, 13 Nov 2025 23:47:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FYetFXAD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eJJcgoCQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4880E83EAB; Thu, 13 Nov 2025 23:47:06 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 802AD83FD3; Thu, 13 Nov 2025 23:47:10 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3809783A94
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 23:47:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 793B583FBF
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 23:47:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b472842981fso172127066b.1
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 14:47:04 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-b733707e0b5so202100266b.2
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 14:47:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763074023; x=1763678823; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763074028; x=1763678828; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6gG1Ar9Q5J6kIeX9QEpAHDJFAE3qJzVcojI3iufJfrY=;
- b=FYetFXADQRlwj8KNiZIVqYxbx6FvoQMV/wVLV3ROo/weyU+xHKek49mjqA161CXpdF
- ZM0NNaerUGsdRJ2re2d9Elaic5AZMVvKySLebjTo6vmNyxX8XdhRG1AokztblAjrTl/J
- HQx69ErbR+83KdimTQDtVNe4HsnXN4Wk6ZJlI=
+ bh=YqxL2Fh5Kd5quCb75BiaVp+zQUgXoU9cxjO0tXEB+a4=;
+ b=eJJcgoCQi/aaWETudkUNTQ1f/ZmmJfKC0vGlCyhB2NYaWSiBHi5KxzOTViNZPCCepJ
+ r9pHOGe6o+b1o9g+CCu0K4KT/+JQRamivPD01LF3JeUuBC+nRBguyGMWjmaGVQ3NfbBD
+ bMFZ9c0c/qLH2AlDtHnBvCPaxtrsqHYjE5GIY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763074023; x=1763678823;
+ d=1e100.net; s=20230601; t=1763074028; x=1763678828;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6gG1Ar9Q5J6kIeX9QEpAHDJFAE3qJzVcojI3iufJfrY=;
- b=rvYZy85mnDFMEVIJDcq0S6CiKFSkcWrrl0LgQj5UoSBtsdmxAn2aiA8PqHO0o6dAZ0
- mOogiAIAQwppUurjY0uHMxeqiKVdzDaxvxG4V4/tMql3ZhUJfFIZwYMauEDdobqbh/b9
- QwrLU4Kcq5fE//kGH4Qac7uzCJzTmC19DmkL+RVvnax/4PszA4+WC++wBoFVR70Hn14M
- IlIKTUDkOCqVZJVxbZGKNTAYeJgyoLRIElXLyRIJMYi1lEb+B7hVG30i9s50yyxta9Tu
- AUFoxC5mSw2mLsoMKqZfFGVVlS+n5mjJvQiyO67+lFWRhpNSm6krLk41P3toqejqZxsZ
- xl9w==
+ bh=YqxL2Fh5Kd5quCb75BiaVp+zQUgXoU9cxjO0tXEB+a4=;
+ b=hhQe8BeLjFb4mG6ABV8rUqFCzPL1TfdP5AdmQ/Gxq442uGGVzUUMFgZZf5C7OayRDh
+ TvlUTUBquEr1lr9ustYH0AVGt5A+2oq5EU7D43Honlv6TdKH95OBU1BJb14eb4D3EKtx
+ UEdaKtCLNOkdXyaA+7dRV+KYCO2rxlFSj2ockko4rKabuURV2M+fOsb10uxAodwDDEB9
+ CsQJ6/tAGVqdNcPYtnOHASH+d7EQUQ9/8E+lTO2eTGYKi0gZanXkMoN29iVb+AiSq7cV
+ TiJBVMzO2jxAu9kOlicrL4ZBfOQhHzlGvDvUSyzlcIo3zYUeN0T+OOEMHjHQhoQkogkz
+ UAqg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXM6woGlj5vI/Dyx+YebgSHtBjgnBmcZ63Gu3Gaz7oznBUmeb6TphD4xkEYj2VQqunH2WsI3o=@lists.denx.de
-X-Gm-Message-State: AOJu0YwNrV6q0Pp+E7LgNY5g8eAdpwi/Tm40sne1aGJj225cqX9xSwzZ
- ZaeE16LMdlyhWTv7agznZXguuLnXgpWZsx+zUjY9ITK0cSqcRwCkR9+Q0FdOXEZW3kVqB1zqf0R
- RGvnbVo1npU3/OTNd64Ow26Wnrf9FbdTxGA9+9F2+
-X-Gm-Gg: ASbGncsR9mAXw5K5DP9JEkfzSkVeO9YWxmvwtivFMTqlyfe/g27JptifQ9hlkxTciSK
- tSIr/tzuJ24Pv4RR1CwKVPgzvf73jd2hziLVaYYmJg1y81td8fJnSV5koUMJ5VM0Ty2fpSpk/WS
- JTtZ+jOjVRw34WwqkhL62X89RDvRSpwZEgTAyMoHy9VWZRys9slEFGYm45huNZY2Hz+lwGLZBMq
- pHwtoJ4wCeC/ba/A3o3Pl2/bLl0TC6S+hKWCTCbEmMSjXrY4ahueC3dxt3zpxsw2HwQIQ==
-X-Google-Smtp-Source: AGHT+IG8adhbRvZGcQHjrtTxTveRoG9wGb4KQGw29NK7iBKRw+xzG7Jb2zkw6YtOyBVZOXrm4Q+nP2pOeEET1YaDtTc=
-X-Received: by 2002:a17:907:944a:b0:b73:21a9:d3bc with SMTP id
- a640c23a62f3a-b73677ed400mr65900466b.11.1763074023616; Thu, 13 Nov 2025
- 14:47:03 -0800 (PST)
+ AJvYcCW8uYHqE7OhYpUXPUGjSJYAGJ0bHB9rXXL2unpj87jH5d4YVn4dVMv+9gP/NdWHy0cRDqHe7K8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBeZhZJI8CB+Wr71eha09T/EhCLuy3APwFedJhKaFjca/e/ReK
+ /PfS2a7OvNI8WhP7GcTF4qQgH4VuP1JG/jvrm2LZlFP9/MaXESjEKiI+ymWaYj9rXfU7NXcO+51
+ /B4eNztkbSFDfs2DHgyn0l7xBRLz22HQIW9iNufaC
+X-Gm-Gg: ASbGncvwz8SRkQtS/JDXg31ZTQ5AvKMHFqrV61kQ2m/WE9mZEaTirjEmlMtU3OItmAY
+ I34kZJL8b2mqQW1sqMjbv4Tls3XB3iroXJxw7Z/VfxfZEgmISVrgq95S1mA1UetmRpk2lZF0sWB
+ ARcaCL+SG+y8vPYDwxTM6aaha2vsf+pFejXxsSPvl4RDiXW9kt7GR+TrnjyqIMN+CsCt47sOBHk
+ XJrD2F/HHKGuKedebQIgyNB4puwYWs6JtCYwa5HmKhhoTHJ7HbkXYl2kExpmQWDv8QwVewV54xK
+ yjP0
+X-Google-Smtp-Source: AGHT+IGII9rz7ZN0c+bNlS4NKv6J2SLIOJKyAoq8nQfkBX0NtUUQyT2i6KRXfEggqANsPcZj/gK+dUPtI5raxiWLKXE=
+X-Received: by 2002:a17:907:9692:b0:b6f:9da9:4b46 with SMTP id
+ a640c23a62f3a-b7367949557mr94917466b.43.1763074027884; Thu, 13 Nov 2025
+ 14:47:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
- <20251113122145.949112-2-marek.vasut+renesas@mailbox.org>
- <CAFLszTigJHK9H18rZG=AHRo09RPqKGHQmmVrHZ40mHPk-KkwqQ@mail.gmail.com>
- <7a083302-1096-47fa-90a9-aa350eea6884@mailbox.org>
-In-Reply-To: <7a083302-1096-47fa-90a9-aa350eea6884@mailbox.org>
+References: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
+ <CAFLszTg0ByjUGgX4MSbU=i0oG7fuidM4J0J128ER6Aq+r6HW9A@mail.gmail.com>
+ <81115588-50c7-4ecc-975e-13994101955f@mailbox.org>
+In-Reply-To: <81115588-50c7-4ecc-975e-13994101955f@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 13 Nov 2025 15:46:51 -0700
-X-Gm-Features: AWmQ_bkEX7B3dUXgzVO51_Oa9my0WmyhVWm6Cneg4kWZ4nUgi87ir9CPdLUlvZs
-Message-ID: <CAFLszTjktw3yS9Dp9KGC=BAnpJAHg46f--NRRfnzXApQVOiuUQ@mail.gmail.com>
-Subject: Re: [PATCH 1/3] dm: core: Check ofnode_to_offset() return value
+Date: Thu, 13 Nov 2025 15:46:52 -0700
+X-Gm-Features: AWmQ_bmxAp4Qty9Slbtzi273kFAlNfWGC-zs4b34vqPjvlj5wpanKytllbaQ_hA
+Message-ID: <CAFLszThNLoS7j0pe_8G93dHtX91j331DCBiUgWpUPXi4Oi2-9w@mail.gmail.com>
+Subject: Re: [PATCH] boot: Assure FDT is always at 8-byte aligned address
 To: Marek Vasut <marek.vasut@mailbox.org>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Sam Edwards <cfsworks@gmail.com>, Tom Rini <trini@konsulko.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,52 +102,90 @@ On Thu, 13 Nov 2025 at 14:57, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >
 > Hello Simon,
 >
-> >> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> >> index 071d998a0a5..55c2b3a10bb 100644
-> >> --- a/drivers/core/ofnode.c
-> >> +++ b/drivers/core/ofnode.c
-> >> @@ -335,7 +335,7 @@ bool ofnode_name_eq_unit(ofnode node, const char *name)
-> >>   int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
-> >>   {
-> >>          const u8 *cell;
-> >> -       int len;
-> >> +       int len, off;
+> >> The fitImage may contain FDT at 4-byte aligned address, because alignment
+> >> of DT tags is 4 bytes. However, libfdt and also Linux expects DT to be at
+> >> 8-byte aligned address. Make sure that the DTs embedded in fitImages are
+> >> always used from 8-byte aligned addresses. In case the DT is decompressed,
+> >> make sure the target buffer is 8-byte aligned. In case the DT is only
+> >> loaded, make sure the target buffer is 8-byte aligned too.
 > >>
-> >>          assert(ofnode_valid(node));
-> >>          log_debug("%s: %s: ", __func__, propname);
-> >> @@ -343,8 +343,13 @@ int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
-> >>          if (ofnode_is_np(node))
-> >>                  return of_read_u8(ofnode_to_np(node), propname, outp);
+> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >> ---
+> >> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> >> Cc: Simon Glass <sjg@chromium.org>
+> >> Cc: Tom Rini <trini@konsulko.com>
+> >> Cc: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+> >> Cc: u-boot@lists.denx.de
+> >> ---
+> >>   boot/image-fit.c | 9 +++++++--
+> >>   1 file changed, 7 insertions(+), 2 deletions(-)
 > >>
-> >> -       cell = fdt_getprop(gd->fdt_blob, ofnode_to_offset(node), propname,
-> >> -                          &len);
-> >> +       off = ofnode_to_offset(node);
-> >> +       if (off < 0) {
-> >> +               log_debug("(not valid)\n");
-> >> +               return -EINVAL;
-> >> +       }
+> >> diff --git a/boot/image-fit.c b/boot/image-fit.c
+> >> index 2f2d3e9304d..cccaa48f683 100644
+> >> --- a/boot/image-fit.c
+> >> +++ b/boot/image-fit.c
+> >> @@ -23,7 +23,6 @@
+> >>   #include <log.h>
+> >>   #include <mapmem.h>
+> >>   #include <asm/io.h>
+> >> -#include <malloc.h>
+> >>   #include <memalign.h>
+> >>   #include <asm/global_data.h>
+> >>   #ifdef CONFIG_DM_HASH
+> >> @@ -36,6 +35,7 @@ DECLARE_GLOBAL_DATA_PTR;
+> >>   #include <bootm.h>
+> >>   #include <image.h>
+> >>   #include <bootstage.h>
+> >> +#include <malloc.h>
+> >>   #include <upl.h>
+> >>   #include <u-boot/crc.h>
+> >>
+> >> @@ -2279,7 +2279,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+> >>
+> >>                  log_debug("decompressing image\n");
+> >>                  if (load == data) {
+> >> -                       loadbuf = malloc(max_decomp_len);
+> >> +                       loadbuf = memalign(8, max_decomp_len);
+> >>                          load = map_to_sysmem(loadbuf);
+> >>                  } else {
+> >>                          loadbuf = map_sysmem(load, max_decomp_len);
+> >> @@ -2291,6 +2291,11 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+> >>                          return -ENOEXEC;
+> >>                  }
+> >>                  len = load_end - load;
+> >> +       } else if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
+> >> +                  ((uintptr_t)buf & 7)) {
+> >> +               loadbuf = memalign(8, len);
+> >> +               load = map_to_sysmem(loadbuf);
+> >> +               memcpy(loadbuf, buf, len);
+> >>          } else if (load != data) {
+> >>                  log_debug("copying\n");
+> >>                  loadbuf = map_sysmem(load, len);
+> >> --
+> >> 2.51.0
+> >>
 > >
-> > Ugh this is really horrible, sorry :-)
-> >
-> > Better to put a wrapper around it than add all these checks, extra
-> > code size, etc. Also in many cases the ofnode is known to be valid(TM)
-> > so it might just be a waste.
+> > We really can't do a memory allocation in fit_image_load() !
 >
-> How would you propose the wrapper should look like ?
+> We already do, notice the malloc() when "decompressing image" part.
 >
-> Keep in mind, not everything is fdt_getprop( ... ofnode_to_offset() ...)
-> in this patch.
+> > The problem should be fixed higher up, in its callers, etc. For one
+> > thing, the caller knows whether it is a DT or not, so putting this
+> > logic here is messy. See boot_get_fdt_fit()
+>
+> This is triggered by a fitImage with DT embedded in that fitImage as
+> non-external-data. That DT is at 4-byte aligned address, so how can the
+> caller deal with it ? The caller gets a fitImage, which itself is at
+> 8-byte aligned address, but the DT in it is not at 8-byte aligned
+> address, so that DT has to be relocated somehow and that happens here.
 
-I was thinking of
+OK, but don't put the code in here...see boot_get_fdt_fit(). But even
+then, why does it matter where the FDT is? We are going to use
+fdt_openinto() at some point and put it elsewhere, right, so we can do
+pre-boot fixups?
 
-my_fdt_getprop(fdt, node, propname, lenp)
-{
-if (node is not valid)
-   return NULL;
-return fdt_getprop();
-}
-
-What does fdt_getprop() return when the offset is -1 ?
+Perhaps we should deprecate FITs with internal data, too?
 
 Regards,
 Simon
