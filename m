@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4B6CD4F2F
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 13:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72A5CD4F2F
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 13:17:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7BB683C62;
+	by phobos.denx.de (Postfix) with ESMTP id F1A3B83E3A;
 	Thu, 13 Nov 2025 14:16:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WokVu0vD";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="YzJubzNS";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="F/eZmatg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25F7583D4A; Thu, 13 Nov 2025 06:44:50 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 38F0A83DA9; Thu, 13 Nov 2025 10:44:43 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16F4C83C54
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 06:44:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 99EBE83C62
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 10:44:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4d6Tk657TYz9tlB;
- Thu, 13 Nov 2025 06:44:46 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763012686;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Sec5ecNDZO6BMd87C9IE5sb5mXz2qVb4CABG0gTiquA=;
- b=WokVu0vDZZ2y9+MHKIToYJ9GXb3D63NrNentF42RWGVBrlIOR31aJGXYHFR87/pHpF6ZIz
- iPt/6LWogKsSZQAmPxpf90n0w0/qwuIhYJ68dtsDCadh5CNhE//clPV9sWzmbIIYTr0ThK
- 0PxbnYOYksarptacYBe520dtOvmgdMspaeUfrZ7DuxA3fqLHRMdnUjAgByeNzRSILJ2BXF
- wDh8S5f489we6Pww/J/CdVTw/y1JTpCdDCct4xl4XuqZuD1SbS019CzlqIWwl4Y3f7T1tY
- rJjotd6NXrL6/embVPNuPmqNPjwopbmilgxeqUk+5xgIRgmMFHKjAxu0KW6k4A==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=YzJubzNS;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+usb@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+usb@mailbox.org
-From: Marek Vasut <marek.vasut+usb@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763012684;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Sec5ecNDZO6BMd87C9IE5sb5mXz2qVb4CABG0gTiquA=;
- b=YzJubzNSCbhpcImyrRHtwV8RZrGRfUQQ3inJB8acc3VWYgBsxNt3GjVIqnHP1Y1mibjDHX
- OkXrFFkhsg88//jqo9eQ72vQIv/t0mZqsusbF8vuVeoU7VcUeUkspNv3UnqCjHAWL6qHQd
- hlPoAylQkd50jmJIdN8eJs4UryzIV7dmRFFipe8nfayucHv7zkUVOI+Cp9sa+t2y7sKWvE
- rzknG6hljrTehjy1sF+r/pQq10HK6K0i67sZA0h9lWSyGcPE5bgM1rttV7oZB9cdodHnky
- eiR6b7hBIXMDqSLOeWfEtsUbTx8Q1LSUcp4VT6MCzketszd5YH3nQiPx7j/2wQ==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: [PULL] u-boot-usb/master
-Date: Thu, 13 Nov 2025 06:44:23 +0100
-Message-ID: <20251113054431.5981-1-marek.vasut+usb@mailbox.org>
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 361561A1A74;
+ Thu, 13 Nov 2025 09:44:40 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 0C3D76068C;
+ Thu, 13 Nov 2025 09:44:40 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id E4CED102F21A5; Thu, 13 Nov 2025 10:44:36 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1763027079; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=urz5ZzP+tJ4E3PFh7eu6mohhLOuIOOeiZjHA/Tw0sxc=;
+ b=F/eZmatgdDdhUIq5kEeovrIx0Hd/ZDecBEeOXourU93ybAyqywHXUseRQd5+smKAGFMLP7
+ 0Hp3yLCP68e1kony3pMf/m+oynfrDN+7c1YL9fNMpld8PEaLfIXFdocFB8d3X3G/OilCbD
+ llCZL5FlbDwzdPJfib8JWscj1K0hzTUWAOTZERU/x+PAjopQIfVtTpFZtYEngMYZlSS61L
+ tAYytkQlF1pkMh1n+pAnNdynEAg/dS50wAlx7mnTpsHU6tS8u/bgkV0bFBAIWnh7ryXjYr
+ Jl+p7q/XgX80GbB/FqyumCepJaNN8q44Fh3/ipiq5Q7rYWEXnQZYsFbFVsMrSQ==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: "Raghavendra, Vignesh" <vigneshr@ti.com>,  Jagan Teki
+ <jagan@amarulasolutions.com>,  Tom Rini <trini@konsulko.com>,  Steam Lin
+ <stlin2@winbond.com>,  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] mtd: spi-nor: winbond: Make sure w25q{01,02}jv behave
+ correctly
+In-Reply-To: <CAOf5uwk5gHPkhF1emwpUyp8aDYXhsO-6JQ_x1gicEK4kkajiiw@mail.gmail.com>
+ (Michael Nazzareno Trimarchi's message of "Wed, 10 Sep 2025 07:28:22
+ +0200")
+References: <20250702092313.970234-1-miquel.raynal@bootlin.com>
+ <87a534exwc.fsf@bootlin.com>
+ <CAMty3ZDG=MtRbzNPaRs=dz9AUkcTA5cHX+0=wgqyEbMqPhyxrQ@mail.gmail.com>
+ <0efa621a-6cc5-4c1b-a5c9-9ab86f84692f@ti.com>
+ <CAOf5uwk5gHPkhF1emwpUyp8aDYXhsO-6JQ_x1gicEK4kkajiiw@mail.gmail.com>
+User-Agent: mu4e 1.12.7; emacs 30.2
+Date: Thu, 13 Nov 2025 10:44:36 +0100
+Message-ID: <87bjl6gtbv.fsf@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 1rdqp5i7ohwdy51dznkj5xfqnzhngn78
-X-MBO-RS-ID: efd3ba92a0e21f33499
-X-Rspamd-Queue-Id: 4d6Tk657TYz9tlB
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
+X-Rspamd-Fuzzy: 9299dda3c33891dfa44c1ad75bc5b09508782e39bae4a2e1fd99eb354a45618e54d43865ca2b915174e8b1f71dda412dc3a9d349748cf0db987cb526a54f69b8
 X-Mailman-Approved-At: Thu, 13 Nov 2025 14:16:58 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,61 +83,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit caa740df9cae5ddc74b18b88a4fea43e27b2fdf6:
+Hi Michael,
 
-  Gitlab: Optimize the job dependency list more (2025-11-11 11:55:16 -0600)
+On 10/09/2025 at 07:28:22 +02, Michael Nazzareno Trimarchi <michael@amarula=
+solutions.com> wrote:
 
-are available in the Git repository at:
+> Hi all
+>
+> On Tue, Sep 9, 2025 at 7:08=E2=80=AFPM Raghavendra, Vignesh <vigneshr@ti.=
+com> wrote:
+>>
+>>
+>>
+>> On 9/9/2025 5:37 PM, Jagan Teki wrote:
+>> > On Tue, Sep 9, 2025 at 3:43=E2=80=AFPM Miquel Raynal <miquel.raynal@bo=
+otlin.com> wrote:
+>> >>
+>> >> Hello,
+>> >>
+>> >> On 02/07/2025 at 11:23:13 +02, Miquel Raynal <miquel.raynal@bootlin.c=
+om> wrote:
+>> >>
+>> >>> These chips are internally made of two/four dies with linear address=
+ing
+>> >>> capabilities to make it transparent to the user that two/four dies w=
+ere
+>> >>> used. There is one drawback however, the read status operation is ra=
+cy
+>> >>> as the status bit only gives the active die status and not the statu=
+s of
+>> >>> the other die. For commands affecting the two dies, it means if anot=
+her
+>> >>> command is sent too fast after the first die has returned a valid
+>> >>> status (deviation can be up to 200us), the chip will get corrupted/i=
+n an
+>> >>> unstable state.
+>> >>>
+>> >>> The solution adopted here is to iterate manually over all internal
+>> >>> dies (which takes about 30us per die) until all are ready. This appr=
+oach
+>> >>> will always be faster than a blind delay which represents the maximum
+>> >>> deviation, while also being totally safe.
+>> >>>
+>> >>> A flash-specific hook for the status register read had to be
+>> >>> implemented. Testing with the flash_speed benchmark in Linux shown no
+>> >>> difference with the existing performances (using the regular status =
+read
+>> >>> core function).
+>> >>>
+>> >>> As the presence of multiple dies is not filled in these chips SFDP
+>> >>> tables (the table containing the crucial information is optional), we
+>> >>> need to manually wire the hook.
+>> >>>
+>> >>> This change is adapted from Linux.
+>> >>>
+>> >>> Link: https://lore.kernel.org/all/20250110-winbond-6-12-rc1-nor-vola=
+tile-bit-v3-1-735363f8cc7d@bootlin.com/
+>> >>> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+>> >>
+>> >> Same question for this one, no feedback for the past 2 months, I'm not
+>> >> sure who's supposed to take these, Jagan and Vignesh you are marked M:
+>> >> in maintainers, any chances this can get it?
+>> >
+>> > Unfortunately, I was off quite some-time. Need little bit of time.
+>> > Vighnesh is off for years.
+>>
+>> Thats not true. I dont have access to U-Boot SPI trees. So patches have
+>> been flowing through individual "platfor/SoC" maintainers trees
+>> unfortunately. Tom picks the patches from TI contributors once
+>> me/Nishanth Acks where as AMD/Xlinix bits have been picked up by Michal
+>> Simek and so on...
+>>
+>> Happy to help out if you help to manage a merge window every now and
+>> then or just review things. Most of the SPI NOR/NAND follow from linux
+>> where its reviewed by set of maintainers and tested (example this one is
+>> tested on TI board).
+>
+> I will go through the patches over the weekend and review them. I will
+> prepare a branch
+> spi-nor-next and try to ask to test from there
+>
+> Michael
+>
+>>
+>> > In the meantime, Michael will help in
+>> > review but need help on testing.
+>> >
+>> > Thanks,
+>> > Jagan.
+>>
 
-  git://source.denx.de/u-boot-usb.git master
+I still do not see these patches in any upstream tree. Am I missing
+something? If I may, these patches have been reviewed during the Linux
+contribution process already, and submission happened in July, almost 5
+months ago.
 
-for you to fetch changes up to 70c3b4c3185c224211dda7273c5ce5f97ffffc5e:
-
-  usb: gadget: Tighten CI_UDC dependencies (2025-11-12 22:13:03 +0100)
-
-----------------------------------------------------------------
-Peter Robinson (2):
-      omap3: evm: Drop old musb omap3 driver
-      usb: musb: drop musb legacy drivers
-
-Tom Rini (4):
-      usb: gadget: spl: Add missing dependency for SPL_USB_GADGET
-      usb: gadget: Tighten the dependency for DWC2 OTG support
-      usb: host: xhci: Make U_BOOT_DRIVER entries unique
-      usb: gadget: Tighten CI_UDC dependencies
-
- Makefile                        |    1 -
- configs/omap3_evm_defconfig     |    1 -
- drivers/usb/Kconfig             |    2 -
- drivers/usb/gadget/Kconfig      |    3 +
- drivers/usb/host/xhci-brcm.c    |    2 +-
- drivers/usb/host/xhci-exynos5.c |    2 +-
- drivers/usb/host/xhci-generic.c |    2 +-
- drivers/usb/host/xhci-mtk.c     |    2 +-
- drivers/usb/host/xhci-mvebu.c   |    2 +-
- drivers/usb/host/xhci-rcar.c    |    2 +-
- drivers/usb/musb/Kconfig        |   20 -
- drivers/usb/musb/Makefile       |    9 -
- drivers/usb/musb/am35x.c        |  138 -----
- drivers/usb/musb/am35x.h        |   81 ---
- drivers/usb/musb/musb_core.c    |  150 -----
- drivers/usb/musb/musb_core.h    |  343 ------------
- drivers/usb/musb/musb_debug.h   |  191 -------
- drivers/usb/musb/musb_hcd.c     | 1161 ---------------------------------------
- drivers/usb/musb/musb_hcd.h     |   93 ----
- drivers/usb/musb/musb_udc.c     |  953 --------------------------------
- drivers/usb/musb/omap3.c        |  129 -----
- drivers/usb/musb/omap3.h        |   38 --
- 22 files changed, 9 insertions(+), 3316 deletions(-)
- delete mode 100644 drivers/usb/musb/Kconfig
- delete mode 100644 drivers/usb/musb/Makefile
- delete mode 100644 drivers/usb/musb/am35x.c
- delete mode 100644 drivers/usb/musb/am35x.h
- delete mode 100644 drivers/usb/musb/musb_core.c
- delete mode 100644 drivers/usb/musb/musb_core.h
- delete mode 100644 drivers/usb/musb/musb_debug.h
- delete mode 100644 drivers/usb/musb/musb_hcd.c
- delete mode 100644 drivers/usb/musb/musb_hcd.h
- delete mode 100644 drivers/usb/musb/musb_udc.c
- delete mode 100644 drivers/usb/musb/omap3.c
- delete mode 100644 drivers/usb/musb/omap3.h
+Thanks,
+Miqu=C3=A8l
