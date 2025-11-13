@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 265D8CD4F28
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 06:47:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDC83CD4F28
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 06:48:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7525783DEA;
-	Thu, 13 Nov 2025 07:47:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B728783D77;
+	Thu, 13 Nov 2025 07:47:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ftP0UGoS";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="I+0c6wTp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8A9483D77; Thu, 13 Nov 2025 07:47:30 +0100 (CET)
+ id 4A36183DEE; Thu, 13 Nov 2025 07:47:33 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0BF683D7A
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 07:47:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0247B83DBD
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 07:47:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 08E6740A0B; 
- Thu, 13 Nov 2025 06:47:27 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 5C9E340A17; 
+ Thu, 13 Nov 2025 06:47:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763016447;
- bh=+wpt3nibEU3zb0S+Im3JJvY15sDST2PBRHoFtQMErDQ=;
+ s=20251003; t=1763016449;
+ bh=LTDrID5Kvw2VH6EUhlVmMYat64IXkyka8OkyMrNGm8E=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=ftP0UGoSLGC31icmMVze1yExwm2CoPLU2xtdG6+hhLZbfkxUU9G68Yv9xM7OEBS8k
- UBU/QretgELW1OZROdN346qNQ6IDlHa7fmYFtLh5reFTcNnq3TBUfsNGiF2HSbFKSt
- g0swW/LGSNhGnkYpih7JXGCANhuQjCg13dgDwRCcMzkQP5U2W3baf5XO4lR0l2yzxD
- 3l99LADJ67g5umRSBiVvyRdPIBMTGdT02yNHrwzESZ6TiBTZRPEKMna/nqNy03Ucu/
- ZZyboAA1r4Ucd9InorF/DJtA4BsKJxF4M5155J6MwgZ7yghfvWF0g4ypplYgbmLMkY
- 1v3KvYKBSsR2/XuKjivIZhyfF17En5F/jYGcsbN7y/iPYADv3OnuPw7n/oLObXps1A
- js4UarsiGpVL2bw4HBoUO1SDRaACswstI5UyvvIlh6El5vvejUMOSqNxs1LbP43IXZ
- aZHETRTOb+f26a9MUR1itQyYQxaRFdQ7VoxKE+AnzDQoI5es5ZudQGiKmp+GMoGu2B
- 044FSwsVMWPdvZe8eUGGKLyiv7yLvQgdizPe8/N6mrngLXjnrebPzzjYHp0A4TWBi1
- r6oZ8Ss4DiKpxU0z5mKz92tz5RfLexc+Nx8EvxDOJ4UbLGvxr3QgjNRgqT3EHFlgoJ
- mmyWh42DOywoe7WcTd8Io6fk=
+ b=I+0c6wTps+KcXYD7b/ejma4CuiU0UHcF4+rogRZSUP8oLPbS1FNefuSZmrC1d+WSZ
+ g32nae82jXu1B+RdxEoOBtn3hyyT3dHtQGM2l8rVSx5pFoK7EVHiu3tz2CeqSx3gyD
+ PmpgjFXQ4CBcmKW9pKj7VdynMpnrkcCnwGdXIFzcd4Aih3FyaGmXypGew2vhfqFmHr
+ nOF5B3RoVvpRCoQkRhoSsHpvyE0XiMYpU3R3honv+UwbyOS/EpwpYEjzW/sVyScuvK
+ MPCpvDbg2rc9wrbP4yaCfTZomVsOxz6UiUQsUAg8T7lms7jzc9D3U100Ztn9oIa+uC
+ IZTaJyT0ISl9Wc7H2F+JqPfZ49NaUaDskPmLgt0a4yGclQTr8oY7z9EtiyUgK6cR1T
+ FuPhaenULx5+eEVxE0biN7Sj4zyiJuf5HxUydhcM8JkAMyHqyfF1OVEJrL0uvsKLvh
+ yXpLldilRpPh9dVtQVeLPjqDGoJKjVff//0rbr8zLcyl1eEK2Kbo0qI0aEWmQBSLKh
+ HE5cgv5tU6IPjm4mIlSn6Swqs+KEivIlr0BnwPX/kZv5NrqDqMGS6F+Ct+NCdTn4oq
+ ybS3UwVRaOYcHldKFrPKyS+b1xHOaihNKsacJjnxxi1GmybilIZgtwIyl8mJ9Y9UI7
+ pNveieUJ3Z0q4nW4QBlvn6m0=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <simon.glass@canonical.com>,
@@ -56,9 +56,9 @@ Cc: Simon Glass <simon.glass@canonical.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
  Claude <noreply@anthropic.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/6] fat: Separate fat.c from fat_write.c
-Date: Thu, 13 Nov 2025 07:46:52 +0100
-Message-ID: <20251113064656.245394-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 5/6] fat: Convert fat.h to kernel-doc style
+Date: Thu, 13 Nov 2025 07:46:55 +0100
+Message-ID: <20251113064656.245394-6-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251113064656.245394-1-heinrich.schuchardt@canonical.com>
 References: <20251113064656.245394-1-heinrich.schuchardt@canonical.com>
@@ -82,343 +82,434 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Currently fat_write.c includes fat.c directly, which is unusual and
-makes the code harder to maintain. Use the internal header file to hold
-shared functions, to avoid this.
+Add kernel-doc comments to structs and public functions in fat.h so that
+it is easier to understand the code.
 
 Co-developed-by: Claude <noreply@anthropic.com>
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
-Tested-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- fs/fat/Makefile       |  2 +-
- fs/fat/fat.c          | 91 ++++++-----------------------------------
- fs/fat/fat_internal.h | 95 +++++++++++++++++++++++++++++++++++++++++--
- fs/fat/fat_write.c    |  5 ++-
- 4 files changed, 108 insertions(+), 85 deletions(-)
+ include/fat.h | 349 ++++++++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 284 insertions(+), 65 deletions(-)
 
-diff --git a/fs/fat/Makefile b/fs/fat/Makefile
-index 3e739044537..f3982fca4c6 100644
---- a/fs/fat/Makefile
-+++ b/fs/fat/Makefile
-@@ -2,4 +2,4 @@
- #
+diff --git a/include/fat.h b/include/fat.h
+index 3e6065f845b..f6b31b2de49 100644
+--- a/include/fat.h
++++ b/include/fat.h
+@@ -83,129 +83,348 @@ struct disk_partition;
+ 					((fatsize) != 16 ? 0xff0 : 0xfff0) : \
+ 					0xffffff0))
  
- obj-$(CONFIG_$(PHASE_)FS_FAT) = fat.o
--obj-$(CONFIG_$(PHASE_)FAT_WRITE) = fat_write.o
-+obj-$(CONFIG_$(PHASE_)FAT_WRITE) += fat_write.o
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index 5114e97e924..0fdbd411901 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -33,7 +33,7 @@
-  * 'len' may be larger than the length of 'str' if 'str' is NULL
-  * terminated.
-  */
--static void downcase(char *str, size_t len)
-+void downcase(char *str, size_t len)
- {
- 	while (*str != '\0' && len--) {
- 		*str = tolower(*str);
-@@ -41,10 +41,10 @@ static void downcase(char *str, size_t len)
- 	}
- }
++/**
++ * struct boot_sector - FAT boot sector structure
++ * @ignored: bootstrap code (first 3 bytes)
++ * @system_id: name of filesystem (8 bytes)
++ * @sector_size: bytes per sector
++ * @cluster_size: sectors per cluster
++ * @reserved: number of reserved sectors
++ * @fats: number of FAT copies
++ * @dir_entries: number of root directory entries
++ * @sectors: number of sectors (for small disks)
++ * @media: media descriptor code
++ * @fat_length: sectors per FAT (for FAT12/16)
++ * @secs_track: sectors per track
++ * @heads: number of heads
++ * @hidden: number of hidden sectors
++ * @total_sect: total number of sectors (for larger disks)
++ * @fat32_length: sectors per FAT (FAT32 only)
++ * @flags: flags (bit 8: fat mirroring, low 4: active fat)
++ * @version: filesystem version (FAT32 only)
++ * @root_cluster: first cluster of root directory (FAT32 only)
++ * @info_sector: filesystem info sector (FAT32 only)
++ * @backup_boot: backup boot sector location (FAT32 only)
++ * @reserved2: unused (FAT32 only)
++ */
+ struct boot_sector {
+-	__u8	ignored[3];	/* Bootstrap code */
+-	char	system_id[8];	/* Name of fs */
+-	__u8	sector_size[2];	/* Bytes/sector */
+-	__u8	cluster_size;	/* Sectors/cluster */
+-	__u16	reserved;	/* Number of reserved sectors */
+-	__u8	fats;		/* Number of FATs */
+-	__u8	dir_entries[2];	/* Number of root directory entries */
+-	__u8	sectors[2];	/* Number of sectors */
+-	__u8	media;		/* Media code */
+-	__u16	fat_length;	/* Sectors/FAT */
+-	__u16	secs_track;	/* Sectors/track */
+-	__u16	heads;		/* Number of heads */
+-	__u32	hidden;		/* Number of hidden sectors */
+-	__u32	total_sect;	/* Number of sectors (if sectors == 0) */
++	__u8	ignored[3];
++	char	system_id[8];
++	__u8	sector_size[2];
++	__u8	cluster_size;
++	__u16	reserved;
++	__u8	fats;
++	__u8	dir_entries[2];
++	__u8	sectors[2];
++	__u8	media;
++	__u16	fat_length;
++	__u16	secs_track;
++	__u16	heads;
++	__u32	hidden;
++	__u32	total_sect;
  
--static struct blk_desc *cur_dev;
--static struct disk_partition cur_part_info;
-+struct blk_desc *cur_dev;
-+struct disk_partition cur_part_info;
- 
--static int disk_read(__u32 block, __u32 nr_blocks, void *buf)
-+int disk_read(__u32 block, __u32 nr_blocks, void *buf)
- {
- 	ulong ret;
- 
-@@ -145,8 +145,6 @@ static void get_name(dir_entry *dirent, char *s_name)
- 		*s_name = DELETED_FLAG;
- }
- 
--static int flush_dirty_fat_buffer(fsdata *mydata);
--
- #if !CONFIG_IS_ENABLED(FAT_WRITE)
- /* Stub for read only operation */
- int flush_dirty_fat_buffer(fsdata *mydata)
-@@ -160,7 +158,7 @@ int flush_dirty_fat_buffer(fsdata *mydata)
-  * Get the entry at index 'entry' in a FAT (12/16/32) table.
-  * On failure 0x00 is returned.
-  */
--static __u32 get_fatent(fsdata *mydata, __u32 entry)
-+__u32 get_fatent(fsdata *mydata, __u32 entry)
- {
- 	__u32 bufnum;
- 	__u32 offset, off8;
-@@ -469,7 +467,7 @@ static int slot2str(dir_slot *slotptr, char *l_name, int *idx)
- }
- 
- /* Calculate short name checksum */
--static __u8 mkcksum(struct nameext *nameext)
-+__u8 mkcksum(struct nameext *nameext)
- {
- 	int i;
- 	u8 *pos = (void *)nameext;
-@@ -699,17 +697,7 @@ static int get_fs_info(fsdata *mydata)
- 	return 0;
- }
- 
--static int fat_itr_isdir(fat_itr *itr);
--
--/**
-- * fat_itr_root() - initialize an iterator to start at the root
-- * directory
-- *
-- * @itr: iterator to initialize
-- * @fsdata: filesystem data for the partition
-- * Return: 0 on success, else -errno
-- */
--static int fat_itr_root(fat_itr *itr, fsdata *fsdata)
-+int fat_itr_root(fat_itr *itr, fsdata *fsdata)
- {
- 	if (get_fs_info(fsdata))
- 		return -ENXIO;
-@@ -726,24 +714,7 @@ static int fat_itr_root(fat_itr *itr, fsdata *fsdata)
- 	return 0;
- }
- 
--/**
-- * fat_itr_child() - initialize an iterator to descend into a sub-
-- * directory
-- *
-- * Initializes 'itr' to iterate the contents of the directory at
-- * the current cursor position of 'parent'.  It is an error to
-- * call this if the current cursor of 'parent' is pointing at a
-- * regular file.
-- *
-- * Note that 'itr' and 'parent' can be the same pointer if you do
-- * not need to preserve 'parent' after this call, which is useful
-- * for traversing directory structure to resolve a file/directory.
-- *
-- * @itr: iterator to initialize
-- * @parent: the iterator pointing at a directory entry in the
-- *    parent directory of the directory to iterate
-- */
--static void fat_itr_child(fat_itr *itr, fat_itr *parent)
-+void fat_itr_child(fat_itr *itr, fat_itr *parent)
- {
- 	fsdata *mydata = parent->fsdata;  /* for silly macros */
- 	unsigned clustnum = START(parent->dent);
-@@ -844,7 +815,7 @@ void *fat_next_cluster(fat_itr *itr, unsigned int *nbytes)
- 	return itr->block;
- }
- 
--static dir_entry *next_dent(fat_itr *itr)
-+dir_entry *next_dent(fat_itr *itr)
- {
- 	if (itr->remaining == 0) {
- 		unsigned nbytes;
-@@ -920,16 +891,7 @@ static dir_entry *extract_vfat_name(fat_itr *itr)
- 	return dent;
- }
- 
--/**
-- * fat_itr_next() - step to the next entry in a directory
-- *
-- * Must be called once on a new iterator before the cursor is valid.
-- *
-- * @itr: the iterator to iterate
-- * Return: boolean, 1 if success or 0 if no more entries in the
-- *    current directory
-- */
--static int fat_itr_next(fat_itr *itr)
-+int fat_itr_next(fat_itr *itr)
- {
- 	dir_entry *dent;
- 
-@@ -992,41 +954,12 @@ static int fat_itr_next(fat_itr *itr)
- 	return 1;
- }
- 
--/**
-- * fat_itr_isdir() - is current cursor position pointing to a directory
-- *
-- * @itr: the iterator
-- * Return: true if cursor is at a directory
-- */
--static int fat_itr_isdir(fat_itr *itr)
-+int fat_itr_isdir(fat_itr *itr)
- {
- 	return !!(itr->dent->attr & ATTR_DIR);
- }
- 
--/*
-- * Helpers:
-- */
--
--#define TYPE_FILE 0x1
--#define TYPE_DIR  0x2
--#define TYPE_ANY  (TYPE_FILE | TYPE_DIR)
--
--/**
-- * fat_itr_resolve() - traverse directory structure to resolve the
-- * requested path.
-- *
-- * Traverse directory structure to the requested path.  If the specified
-- * path is to a directory, this will descend into the directory and
-- * leave it iterator at the start of the directory.  If the path is to a
-- * file, it will leave the iterator in the parent directory with current
-- * cursor at file's entry in the directory.
-- *
-- * @itr: iterator initialized to root
-- * @path: the requested path
-- * @type: bitmask of allowable file types
-- * Return: 0 on success or -errno
-- */
--static int fat_itr_resolve(fat_itr *itr, const char *path, unsigned type)
-+int fat_itr_resolve(fat_itr *itr, const char *path, unsigned int type)
- {
- 	const char *next;
- 
-diff --git a/fs/fat/fat_internal.h b/fs/fat/fat_internal.h
-index 0174cd611e7..10881a15569 100644
---- a/fs/fat/fat_internal.h
-+++ b/fs/fat/fat_internal.h
-@@ -22,6 +22,14 @@ struct disk_partition;
- #define DOS_FS_TYPE_OFFSET	0x36
- #define DOS_FS32_TYPE_OFFSET	0x52
- 
-+#define TYPE_FILE 0x1
-+#define TYPE_DIR  0x2
-+#define TYPE_ANY  (TYPE_FILE | TYPE_DIR)
-+
-+/* Global variables shared between fat.c and fat_write.c */
-+extern struct blk_desc *cur_dev;
-+extern struct disk_partition cur_part_info;
-+
- /**
-  * struct fat_itr - directory iterator, to simplify filesystem traversal
-  *
-@@ -105,8 +113,89 @@ struct fat_itr {
- 	u8 block[MAX_CLUSTSIZE] __aligned(ARCH_DMA_MINALIGN);
+ 	/* FAT32 only */
+-	__u32	fat32_length;	/* Sectors/FAT */
+-	__u16	flags;		/* Bit 8: fat mirroring, low 4: active fat */
+-	__u8	version[2];	/* Filesystem version */
+-	__u32	root_cluster;	/* First cluster in root directory */
+-	__u16	info_sector;	/* Filesystem info sector */
+-	__u16	backup_boot;	/* Backup boot sector */
+-	__u16	reserved2[6];	/* Unused */
++	__u32	fat32_length;
++	__u16	flags;
++	__u8	version[2];
++	__u32	root_cluster;
++	__u16	info_sector;
++	__u16	backup_boot;
++	__u16	reserved2[6];
  };
  
--#define TYPE_FILE 0x1
--#define TYPE_DIR  0x2
--#define TYPE_ANY  (TYPE_FILE | TYPE_DIR)
 +/**
-+ * downcase() - convert a string to lowercase
-+ * @str: string to convert
-+ * @len: maximum number of characters to convert
++ * struct volume_info - FAT volume information structure
++ * @drive_number: BIOS drive number
++ * @reserved: unused field
++ * @ext_boot_sign: extended boot signature (0x29 if fields below exist)
++ * @volume_id: volume serial number (4 bytes)
++ * @volume_label: volume label (11 bytes, padded with spaces)
++ * @fs_type: filesystem type string (typically "FAT12", "FAT16", or "FAT32")
++ *
++ * This structure is part of the boot sector, located after the common fields.
++ * Boot code follows this structure, with boot signature at the end of sector.
 + */
-+void downcase(char *str, size_t len);
-+
+ struct volume_info {
+-	__u8 drive_number;	/* BIOS drive number */
+-	__u8 reserved;		/* Unused */
+-	__u8 ext_boot_sign;	/* 0x29 if fields below exist (DOS 3.3+) */
+-	__u8 volume_id[4];	/* Volume ID number */
+-	char volume_label[11];	/* Volume label */
+-	char fs_type[8];	/* Typically FAT12, FAT16, or FAT32 */
+-	/* Boot code comes next, all but 2 bytes to fill up sector */
+-	/* Boot sign comes last, 2 bytes */
++	__u8 drive_number;
++	__u8 reserved;
++	__u8 ext_boot_sign;
++	__u8 volume_id[4];
++	char volume_label[11];
++	char fs_type[8];
+ };
+ 
+ /* see dir_entry::lcase: */
+ #define CASE_LOWER_BASE	8	/* base (name) is lower case */
+ #define CASE_LOWER_EXT	16	/* extension is lower case */
+ 
 +/**
-+ * next_dent() - get next directory entry
-+ * @itr: directory iterator
-+ * Return: pointer to next directory entry, or NULL if at end
++ * struct nameext - 8.3 filename components
++ * @name: filename (8 bytes)
++ * @ext: extension (3 bytes)
 + */
-+dir_entry *next_dent(fat_itr *itr);
-+
+ struct nameext {
+ 	char name[8];
+ 	char ext[3];
+ };
+ 
 +/**
-+ * disk_read() - read sectors from the current FAT device
-+ * @block: logical block number
-+ * @nr_blocks: number of blocks to read
-+ * @buf: buffer to read data into
-+ * Return: number of blocks read, -1 on error
++ * struct dir_entry - FAT directory entry
++ * @nameext: filename and extension (8.3 format)
++ * @attr: file attributes (ATTR_* flags)
++ * @lcase: case flags for name and extension (CASE_LOWER_* flags)
++ * @ctime_ms: creation time (milliseconds)
++ * @ctime: creation time (hours, minutes, seconds)
++ * @cdate: creation date
++ * @adate: last access date
++ * @starthi: high 16 bits of cluster number (FAT32 only)
++ * @time: modification time
++ * @date: modification date
++ * @start: low 16 bits of cluster number
++ * @size: file size in bytes
 + */
-+int disk_read(__u32 block, __u32 nr_blocks, void *buf);
-+
+ struct dir_entry {
+-	struct nameext nameext;	/* Name and extension */
+-	__u8	attr;		/* Attribute bits */
+-	__u8	lcase;		/* Case for name and ext (CASE_LOWER_x) */
+-	__u8	ctime_ms;	/* Creation time, milliseconds */
+-	__u16	ctime;		/* Creation time */
+-	__u16	cdate;		/* Creation date */
+-	__u16	adate;		/* Last access date */
+-	__u16	starthi;	/* High 16 bits of cluster in FAT32 */
+-	__u16	time,date,start;/* Time, date and first cluster */
+-	__u32	size;		/* File size in bytes */
++	struct nameext nameext;
++	__u8	attr;
++	__u8	lcase;
++	__u8	ctime_ms;
++	__u16	ctime;
++	__u16	cdate;
++	__u16	adate;
++	__u16	starthi;
++	__u16	time;
++	__u16	date;
++	__u16	start;
++	__u32	size;
+ };
+ 
 +/**
-+ * flush_dirty_fat_buffer() - write fat buffer to disk if dirty
-+ * @mydata: filesystem data
++ * struct dir_slot - VFAT long filename entry
++ * @id: sequence number (bit 6 = last entry, bits 0-4 = sequence)
++ * @name0_4: characters 0-4 of long filename (UTF-16LE)
++ * @attr: must be ATTR_VFAT (0x0F)
++ * @reserved: unused field
++ * @alias_checksum: checksum of 8.3 alias for this long name
++ * @name5_10: characters 5-10 of long filename (UTF-16LE)
++ * @start: unused (always 0)
++ * @name11_12: characters 11-12 of long filename (UTF-16LE)
++ *
++ * Long filename entries precede the corresponding short entry in directory.
++ * Multiple entries may be used to store names longer than 13 characters.
++ */
+ struct dir_slot {
+-	__u8	id;		/* Sequence number for slot */
+-	__u8	name0_4[10];	/* First 5 characters in name */
+-	__u8	attr;		/* Attribute byte */
+-	__u8	reserved;	/* Unused */
+-	__u8	alias_checksum;/* Checksum for 8.3 alias */
+-	__u8	name5_10[12];	/* 6 more characters in name */
+-	__u16	start;		/* Unused */
+-	__u8	name11_12[4];	/* Last 2 characters in name */
++	__u8	id;
++	__u8	name0_4[10];
++	__u8	attr;
++	__u8	reserved;
++	__u8	alias_checksum;
++	__u8	name5_10[12];
++	__u16	start;
++	__u8	name11_12[4];
+ };
+ 
+-/*
+- * Private filesystem parameters
++/**
++ * struct fsdata - FAT filesystem instance data
++ * @fatbuf: buffer for reading/writing FAT (must be 32-bit aligned for FAT32)
++ * @fatsize: size of FAT in bits (12, 16, or 32)
++ * @fatlength: length of FAT in sectors
++ * @fat_sect: starting sector of the FAT
++ * @fat_dirty: flag indicating if fatbuf has been modified
++ * @rootdir_sect: starting sector of root directory
++ * @sect_size: size of sectors in bytes
++ * @clust_size: size of clusters in sectors
++ * @data_begin: sector offset of first data cluster (can be negative)
++ * @fatbufnum: currently buffered FAT sector number (init to -1)
++ * @rootdir_size: size of root directory in entries (for non-FAT32)
++ * @root_cluster: first cluster of root directory (FAT32 only)
++ * @total_sect: total number of sectors
++ * @fats: number of FAT copies
+  *
+- * Note: FAT buffer has to be 32 bit aligned
+- * (see FAT32 accesses)
++ * This structure holds the runtime state of a mounted FAT filesystem.
++ * The fatbuf must be 32-bit aligned due to FAT32 sector access requirements.
+  */
+ struct fsdata {
+-	__u8	*fatbuf;	/* Current FAT buffer */
+-	int	fatsize;	/* Size of FAT in bits */
+-	__u32	fatlength;	/* Length of FAT in sectors */
+-	__u16	fat_sect;	/* Starting sector of the FAT */
+-	__u8	fat_dirty;      /* Set if fatbuf has been modified */
+-	__u32	rootdir_sect;	/* Start sector of root directory */
+-	__u16	sect_size;	/* Size of sectors in bytes */
+-	__u16	clust_size;	/* Size of clusters in sectors */
+-	int	data_begin;	/* The sector of the first cluster, can be negative */
+-	int	fatbufnum;	/* Used by get_fatent, init to -1 */
+-	int	rootdir_size;	/* Size of root dir for non-FAT32 */
+-	__u32	root_cluster;	/* First cluster of root dir for FAT32 */
+-	u32	total_sect;	/* Number of sectors */
+-	int	fats;		/* Number of FATs */
++	__u8	*fatbuf;
++	int	fatsize;
++	__u32	fatlength;
++	__u16	fat_sect;
++	__u8	fat_dirty;
++	__u32	rootdir_sect;
++	__u16	sect_size;
++	__u16	clust_size;
++	int	data_begin;
++	int	fatbufnum;
++	int	rootdir_size;
++	__u32	root_cluster;
++	u32	total_sect;
++	int	fats;
+ };
+ 
+ struct fat_itr;
+ 
++/**
++ * clust_to_sect() - convert cluster number to sector number
++ * @fsdata: filesystem instance data
++ * @clust: cluster number
++ *
++ * Return: sector number corresponding to the given cluster
++ */
+ static inline u32 clust_to_sect(struct fsdata *fsdata, u32 clust)
+ {
+ 	return fsdata->data_begin + clust * fsdata->clust_size;
+ }
+ 
++/**
++ * sect_to_clust() - convert sector number to cluster number
++ * @fsdata: filesystem instance data
++ * @sect: sector number
++ *
++ * Return: cluster number corresponding to the given sector
++ */
+ static inline u32 sect_to_clust(struct fsdata *fsdata, int sect)
+ {
+ 	return (sect - fsdata->data_begin) / fsdata->clust_size;
+ }
+ 
++/**
++ * file_fat_detectfs() - detect and initialize the FAT filesystem
++ *
 + * Return: 0 on success, -1 on error
 + */
-+int flush_dirty_fat_buffer(fsdata *mydata);
-+
-+/* Internal function declarations */
+ int file_fat_detectfs(void);
 +
 +/**
-+ * get_fatent() - get the entry at index 'entry' in a FAT (12/16/32) table
-+ * @mydata: filesystem data
-+ * @entry: FAT entry index
-+ * Return: FAT entry value, 0x00 on failure
++ * fat_exists() - check if a file exists
++ * @filename: full path to file
++ *
++ * Return: 0 if file exists, -1 if not found or error
 + */
-+__u32 get_fatent(fsdata *mydata, __u32 entry);
+ int fat_exists(const char *filename);
 +
 +/**
-+ * mkcksum() - calculate short name checksum
-+ * @nameext: name and extension structure
-+ * Return: checksum value
++ * fat_size() - get the size of a file
++ * @filename: full path to file
++ * @size: pointer to store file size
++ *
++ * Return: 0 on success, -1 on error
 + */
-+__u8 mkcksum(struct nameext *nameext);
+ int fat_size(const char *filename, loff_t *size);
 +
 +/**
-+ * fat_itr_root() - initialize an iterator to start at the root directory
-+ * @itr: iterator to initialize
-+ * @fsdata: filesystem data for the partition
-+ * Return: 0 on success, else -errno
++ * file_fat_read() - read a file from FAT filesystem
++ * @filename: full path to file
++ * @buffer: buffer to read data into
++ * @maxsize: maximum number of bytes to read
++ *
++ * Return: number of bytes read, -1 on error
 + */
-+int fat_itr_root(fat_itr *itr, fsdata *fsdata);
+ int file_fat_read(const char *filename, void *buffer, int maxsize);
 +
 +/**
-+ * fat_itr_child() - initialize an iterator to descend into a sub-directory
-+ * @itr: iterator to initialize
-+ * @parent: the iterator pointing at a directory entry in the parent directory
++ * fat_set_blk_dev() - set the block device and partition for FAT operations
++ * @rbdd: block device descriptor
++ * @info: partition information
++ *
++ * Return: 0 on success, -1 on error
 + */
-+void fat_itr_child(fat_itr *itr, fat_itr *parent);
+ int fat_set_blk_dev(struct blk_desc *rbdd, struct disk_partition *info);
 +
 +/**
-+ * fat_itr_next() - step to the next entry in a directory
-+ * @itr: the iterator to iterate
-+ * Return: 1 if success or 0 if no more entries in the current directory
++ * fat_register_device() - register a FAT filesystem on a block device
++ * @dev_desc: block device descriptor
++ * @part_no: partition number (0 = whole device)
++ *
++ * Return: 0 on success, -1 on error
 + */
-+int fat_itr_next(fat_itr *itr);
-+
-+/**
-+ * fat_itr_isdir() - is current cursor position pointing to a directory
-+ * @itr: the iterator
-+ * Return: true if cursor is at a directory
-+ */
-+int fat_itr_isdir(fat_itr *itr);
-+
-+/**
-+ * fat_itr_resolve() - traverse directory structure to resolve the requested path
-+ * @itr: iterator initialized to root
-+ * @path: the requested path
-+ * @type: bitmask of allowable file types
-+ * Return: 0 on success or -errno
-+ */
-+int fat_itr_resolve(fat_itr *itr, const char *path, uint type);
+ int fat_register_device(struct blk_desc *dev_desc, int part_no);
  
- #endif /* _FAT_INTERNAL_H_ */
-diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-index 45a2eef712b..638a6223700 100644
---- a/fs/fat/fat_write.c
-+++ b/fs/fat/fat_write.c
-@@ -13,15 +13,16 @@
- #include <fat.h>
- #include <log.h>
- #include <malloc.h>
-+#include <memalign.h>
- #include <part.h>
- #include <rand.h>
-+#include <rtc.h>
- #include <asm/byteorder.h>
- #include <asm/cache.h>
- #include <dm/uclass.h>
- #include <linux/ctype.h>
- #include <linux/math64.h>
- #include "fat_internal.h"
--#include "fat.c"
++/**
++ * file_fat_write() - write to a file on FAT filesystem
++ * @filename: full path to file
++ * @buf: buffer containing data to write
++ * @offset: offset in file to start writing
++ * @len: number of bytes to write
++ * @actwrite: pointer to store actual number of bytes written
++ *
++ * Return: 0 on success, -1 on error
++ */
+ int file_fat_write(const char *filename, void *buf, loff_t offset, loff_t len,
+ 		   loff_t *actwrite);
++
++/**
++ * fat_read_file() - read from a file on FAT filesystem
++ * @filename: full path to file
++ * @buf: buffer to read data into
++ * @offset: offset in file to start reading
++ * @len: number of bytes to read
++ * @actread: pointer to store actual number of bytes read
++ *
++ * Return: 0 on success, -1 on error
++ */
+ int fat_read_file(const char *filename, void *buf, loff_t offset, loff_t len,
+ 		  loff_t *actread);
++
++/**
++ * fat_opendir() - open a directory for reading
++ * @filename: full path to directory
++ * @dirsp: pointer to store directory stream handle
++ *
++ * Return: 0 on success, -1 on error
++ */
+ int fat_opendir(const char *filename, struct fs_dir_stream **dirsp);
++
++/**
++ * fat_readdir() - read next entry from directory
++ * @dirs: directory stream handle
++ * @dentp: pointer to store directory entry
++ *
++ * Return: 0 on success, -1 on error or end of directory
++ */
+ int fat_readdir(struct fs_dir_stream *dirs, struct fs_dirent **dentp);
++
++/**
++ * fat_closedir() - close a directory stream
++ * @dirs: directory stream handle
++ */
+ void fat_closedir(struct fs_dir_stream *dirs);
++
++/**
++ * fat_unlink() - delete a file or empty directory
++ * @filename: full path to file or directory
++ *
++ * Return: 0 on success, -1 on error
++ */
+ int fat_unlink(const char *filename);
++
++/**
++ * fat_rename() - rename a file or directory
++ * @old_path: current full path
++ * @new_path: new full path
++ *
++ * Return: 0 on success, -1 on error
++ */
+ int fat_rename(const char *old_path, const char *new_path);
++
++/**
++ * fat_mkdir() - create a directory
++ * @dirname: full path to new directory
++ *
++ * Return: 0 on success, -1 on error
++ */
+ int fat_mkdir(const char *dirname);
++
++/**
++ * fat_close() - close FAT filesystem and release resources
++ */
+ void fat_close(void);
++
++/**
++ * fat_next_cluster() - get the next cluster in a chain
++ * @itr: directory iterator
++ * @nbytes: pointer to store number of bytes in cluster
++ *
++ * Return: pointer to cluster data buffer
++ */
+ void *fat_next_cluster(struct fat_itr *itr, unsigned int *nbytes);
  
- static dir_entry *find_directory_entry(fat_itr *itr, char *filename);
- static int new_dir_table(fat_itr *itr);
-@@ -216,7 +217,7 @@ static int disk_write(__u32 block, __u32 nr_blocks, void *buf)
- /*
-  * Write fat buffer into block device
-  */
--static int flush_dirty_fat_buffer(fsdata *mydata)
-+int flush_dirty_fat_buffer(fsdata *mydata)
- {
- 	int getsize = FATBUFBLOCKS;
- 	__u32 fatlength = mydata->fatlength;
+ /**
 -- 
 2.51.0
 
