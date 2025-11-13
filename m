@@ -4,127 +4,180 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DB95CD8CA4
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 17:04:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87DACCD8CAF
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 17:28:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1AB58394E;
-	Thu, 13 Nov 2025 18:04:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
+	by phobos.denx.de (Postfix) with ESMTP id C7BD783EE4;
+	Thu, 13 Nov 2025 18:28:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="blBMEIVx";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="LrIwxXfP";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="VwgZUSBF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA2AC83E61; Thu, 13 Nov 2025 18:04:53 +0100 (CET)
-Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.11])
+ id 7676F83F97; Thu, 13 Nov 2025 18:28:23 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57D4A83936
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 18:04:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 533AC83AAD
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 18:28:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=valla.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256;
- d=outgoing.instance-europe-west4-ms9j.prod.antispam.mailspamprotection.com;
- s=arckey; t=1763053491; 
- b=Xvt0DiCAtiBJHUoMuxs4jgqj1SYUdh8SjsCADVcbWkpVZICzJSgiQpe6stDI3FOqwKjpuXxz0f
- L131yQhnoMSVvEB0MsKVpyiRBQu84ZqhGcWjEHPv9vPbZ13cfHk0nu99YfiJ8nXNpNTNRsIF95
- 9oFvE/Ni1AnoAtTRsx4zPBHgfX5RE/1nWDVyf/M5975fd6flSmLLCtyKuIswVANOdGTyk+pm/v
- CQM7EwHJRD9zlTdsXiXjIKguUnqNtz+Uz4sAKVcVIeG+JV4Ew1PFSHcQWPVi4CJEluyd8uwBFj
- FK3T1eZ2Bxs41ZXGjIiYhEZbOzFaKkCDc6OUB6XgeSwj4g==;
-ARC-Authentication-Results: i=1;
- outgoing.instance-europe-west4-ms9j.prod.antispam.mailspamprotection.com;
- smtp.remote-ip=35.214.173.214; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
- d=outgoing.instance-europe-west4-ms9j.prod.antispam.mailspamprotection.com;
- s=arckey; t=1763053491; 
- bh=RmLyQsN46sblR36nd9PZqhPp9Y2ADldOeuN92jYZgs8=;
- h=Cc:To:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:
- Subject:Date:From:DKIM-Signature:DKIM-Signature;
- b=ce0uiI5RY2su6Z430WC3QgHHJoRPQEVjYJzRBDPVmIlvulDyu4JVp2OUNtnhWT70K9swLd2cjn
- pgIp/VzFzE7uKVjDFUAb9MhMCLaZYzY5ZRMzTyZ4VxvHAU8+SSfpMSXOYD9O7AXxZoRn2oAzAH
- ifoav61FGixCzKBi5qbBcjWkMcFhbSGmoBDFVsfEIFy1wJSQwWVc/qbDWVsclMDxRIBejSfSF6
- DDBMkf81k7/vSPFWxcD7/WbEReK6PkDH7FKVqEo25441u99QyrL8a6g5Lg1e+gSRk37WhIRnMM
- 4EZNspAhC9rwSC+wsQf8QND79CIWD30vOQ2wCvVF2ZPJuA==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
- :Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
- :Date:From:Reply-To:List-Unsubscribe;
- bh=8nVgssRCtwPQtjNLNrp422SazD/FEkMSed24WzDWC70=; b=blBMEIVxQZt/DDF5YKVH+w0Sqv
- UKbOzC/tgCNiACRTCfbzVYGJQLVLClSHewCoGlq1wT8nw6v1nmybdJTcrF1lcXKYsc1g6xD3gJUP+
- DLRs0BdPvAalg/mlDCBROcYGAXJfrSu6t2ea/QnPIq3aSz9f1fzYzjYCLwi6S14UGEvE=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
- helo=esm19.siteground.biz)
- by instance-europe-west4-ms9j.prod.antispam.mailspamprotection.com with
- esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.98.1)
- (envelope-from <francesco@valla.it>) id 1vJaka-0000000Aq03-2Hda
- for u-boot@lists.denx.de; Thu, 13 Nov 2025 17:04:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
- s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
- list-subscribe:list-post:list-owner:list-archive;
- bh=8nVgssRCtwPQtjNLNrp422SazD/FEkMSed24WzDWC70=; b=LrIwxXfPVVq4CAsvPpch/HNXto
- zACLO0cJOkY+4SNfcJSEMglzBRy/dg1bYUMpkG1RAN+W+60xvHB2xSyIEeblCJgXTRjmpcfaw/6Ja
- R/19abrcctSEoMCM4JXljFG2FEKq5zdT9U2YC39gsM0t4eb89OqNaCIcEE04Se54p4O8=;
-Received: from [87.14.44.186] (port=63433 helo=[192.168.178.65])
- by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.98.1) (envelope-from <francesco@valla.it>)
- id 1vJakO-00000000NKZ-0p85; Thu, 13 Nov 2025 17:04:36 +0000
-From: Francesco Valla <francesco@valla.it>
-Date: Thu, 13 Nov 2025 18:03:55 +0100
-Subject: [PATCH] imx91: fix pinmux macros for ENET1_TD3 and I2C2_SCL
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=3412314e69=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5ADGrLQ2150985; Thu, 13 Nov 2025 18:28:20 +0100
+Received: from am0pr02cu008.outbound.protection.outlook.com
+ (mail-westeuropeazon11013066.outbound.protection.outlook.com [52.101.72.66])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4adan2jh8b-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 13 Nov 2025 18:28:20 +0100 (CET)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OTj6U5QS+QAioSiTNDsgXTUKTMXlmqkArvskWT5naR2gsowQAn5qx4k8QPPQzUpQAdO95UnF/t25R1UDrUfZNw+o6+OyIR7Evl4weQ3jPmOdvJ/iwS32Ij/W/rDKDQCXIBJgTLNomg/1QS79h46KywgJmieU7nyH6qtYfOUifbM5lPoPrHs/7wRNytM8yKcsVCGYlEPsRektj0/fgFBdvQcOGHo5j3s7Gz8ipXlJI70wrOF8ZbZpVSqBBnjq0CsMDeGNYDsrpCaFrCW76F4rQ78sgbrTp6snFbgoEWleb7XkNqNoCQ8t02TCvxtVL95e3xJDoxeVp8785PM5H+D3+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mFTI2iT8fJbvGu7NOUMyPaq65pQHOWvSnppEhyCYrCk=;
+ b=QUmwNkPROMuSfWtGpCDergwdUKixWZ44e6iUmbb05/q9+wLQQcxCuDc1NQJheU1nQiSkSB4EbmrYVIFd+wheCT1j/+ZNGB8XlqLeW5SV+aW3DeZ/A3xMUc4mY0PSSGKcYZtPaBSdIoUCJeWRqSmsccFoBaiZWftUnnEwoQB//psvxqOdqChbnpJDJ9pMnZt752BNwzGwnV35yxjXgOvjUHo1eZ1Kjl1GhyBPFi45AF8Q237aApB/3u5oC/IFeijUmh3tnDOddyPlY5/jJpMyz/SVhpkapoHDYXyiBP0NQEHNyTobBHf/ZH/OccAQVpJJ6uPto91FD6a6+hRu1DtdQw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mFTI2iT8fJbvGu7NOUMyPaq65pQHOWvSnppEhyCYrCk=;
+ b=VwgZUSBFB3eyDS9tvHhJ2qGtL+vPPKPwMsrYnMqCUwfdmJqQV+Az9Eg+fULRg3WeCbmcIHKf7qVJ66gM61C/GSKxFmb1ZSl5Tfm2uCndUhmEUSLTXrZXpurtAZKvhrGq8GFKAVbb0VrZV47kJKkG1kDXB0h9Zj/+vmbaLcA5owK1tQQMvK0aWQtkPRDIJlpU4paaWM1gjis7UywJaRCE/UsATfp3f1Gebfl+yar0mdzU10TRAPlGumgJ6HxN8F/DgLvRrAklVJBodQgD/9dJ3M5kSYtfzgxGIX4yUteK3zCxwt4bUO4cKqMrO+lrNPz7vveOnaQv1HDeWMyhxuG4VA==
+Received: from DU2PR04CA0355.eurprd04.prod.outlook.com (2603:10a6:10:2b4::34)
+ by PA4PR10MB5732.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:269::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Thu, 13 Nov
+ 2025 17:28:15 +0000
+Received: from DU6PEPF0000A7DF.eurprd02.prod.outlook.com
+ (2603:10a6:10:2b4:cafe::b6) by DU2PR04CA0355.outlook.office365.com
+ (2603:10a6:10:2b4::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.16 via Frontend Transport; Thu,
+ 13 Nov 2025 17:28:13 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ DU6PEPF0000A7DF.mail.protection.outlook.com (10.167.8.36) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9320.13 via Frontend Transport; Thu, 13 Nov 2025 17:28:14 +0000
+Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 13 Nov
+ 2025 18:28:25 +0100
+Received: from [10.48.87.108] (10.48.87.108) by STKDAG1NODE2.st.com
+ (10.75.128.133) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 13 Nov
+ 2025 18:28:13 +0100
+Message-ID: <4afefb55-b8da-4a2c-90b5-a188662c7181@foss.st.com>
+Date: Thu, 13 Nov 2025 18:28:13 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] ARM: dts: Add stm32mp257f-dk-u-boot.dtsi
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
+ <trini@konsulko.com>
+References: <20251017121852.109561-1-patrice.chotard@foss.st.com>
+ <20251017121852.109561-2-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20251017121852.109561-2-patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251113-imx91_pins_fix-v1-1-820933392e7f@valla.it>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WMQQ6CMBBFr0JmbY2DpVpX3sMQUksrk2AhLWkwp
- Hd3ZO/fvZf8t0FykVyCW7VBdJkSTYEBDxXYwYSXE9QzQ32qG+QJeq8au5lC6jytQj29cUpLbJQ
- FPs3Rsd6Dj5Z5oLRM8bP3M/7s31RGgcLrs7z4q1a2l/dsxtEcaYG2lPIFOQdADKsAAAA=
-X-Change-ID: 20251111-imx91_pins_fix-6bfae694156c
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Ye Li <ye.li@nxp.com>, 
- Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
- Javier Viguera <javier.viguera@digi.com>, 
- Francesco Valla <francesco@valla.it>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6097; i=francesco@valla.it;
- h=from:subject:message-id; bh=RmLyQsN46sblR36nd9PZqhPp9Y2ADldOeuN92jYZgs8=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJli/Is3rN199cd0qbepP2b1XTununjCQ/Vl2S/XL2+p7
- 37f/jG8tqOUhUGMi0FWTJElZN2Ne3vmmn9L28D4CGYOKxPIEAYuTgGYiJ8WI8OzetfZEsJGMxd1
- NyybeLVt5k2mfymLZhVLWNlvE0pb8GgSwz8jvmfdvC4bZ8t3+lgI3zwtu4irTSYx7tIpG3udfdP
- id3ICAA==
-X-Developer-Key: i=francesco@valla.it; a=openpgp;
- fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - esm19.siteground.biz
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - valla.it
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SGantispam-id: c6409236c34be70ec5921ff9f69cbb7f
-AntiSpam-DLS: false
-AntiSpam-DLSP: 
-AntiSpam-DLSRS: 
-AntiSpam-TS: 1.0
-CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vJaka-0000000Aq03-2Hda-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-ms9j.prod.antispam.mailspamprotection.com; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
+X-Originating-IP: [10.48.87.108]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE2.st.com
+ (10.75.128.133)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU6PEPF0000A7DF:EE_|PA4PR10MB5732:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7f4c7c9-d337-443e-771a-08de22da06e8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|1800799024|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YVF6cWF0QnpuS0JUNEF4L3dJaXZ2WGxIZzJ0T285RVBEdVJHV1JjWWMvRUd6?=
+ =?utf-8?B?dXpXazZucVpzNm9NamRWelI0RXA1eW9FeURyTnRiMDFyQ0YvcS9lUjdJQXpK?=
+ =?utf-8?B?M1pLVjh3dmNETE44aHJPMkMzci9ubitQc2pzbmFFaW54bFIyYkJ0T1NmVnlz?=
+ =?utf-8?B?SjU3SW1IVkFYaXQ0R2hmTzIrL0dIbHNJSTdaNHE1ZlNINjJ0cU1FUzBndTVk?=
+ =?utf-8?B?VVphSEZ1U0w4WnNVck9COGRMSWxKUHlKT0NtVWVvb1hGQ1pYR2lUVi9ZcUxX?=
+ =?utf-8?B?WDQ0SjhSWTM4TXJ5M2piem5GbzdoWm1xVnRyYlVla28wcE5oK3dabHcvdFBU?=
+ =?utf-8?B?amljcWY3SlluMUREWldnY1pJSTViK1hhT2FrSEtiQll0emwrU3ljYlArVWVB?=
+ =?utf-8?B?T0w2Q3hJK3lNWllOZGVuZGJjaUd1U2RKdS9CU3JDOVFiejhvaHpmMWI5NDhk?=
+ =?utf-8?B?Q2hneXdPbUxZVFJOdUFkN3VvS3ZoZW9oQm9mbWNRaGZhM3lycFByOHRUVUR0?=
+ =?utf-8?B?UGMybjNNVmtTOHZGQktMNXQ4clpBWTBlMVFsQk55NlVUT1RQUFRBRjFrb3l2?=
+ =?utf-8?B?SjlENEh5QnkxRkVIZUNMY0NxRzdTWjJoMTAyamJoL0IzWVYvMjErNjdXVEsw?=
+ =?utf-8?B?VGtRQzZzTDhkR0IzazhLazYwVjVpSjQ0Sk9RdURXK285dzRBcXhWTXVsUThV?=
+ =?utf-8?B?aTg2dlhLb3p0bU90K2tjSERSTWYyT3JmT09nekM4SENhcFhETkx6Ry9LTlMy?=
+ =?utf-8?B?Ty9RU2ZEc3BjQzJ1ZXFsR3RmdmdsQXpBTlVyaVV0OUJEOW5UTmZWbGNhdi9s?=
+ =?utf-8?B?VVF5cHVidWhvMytnTjdlUnVCc2RxWDhBWnFRVUNBc0VxbUdCQkpXTjF6Wkkx?=
+ =?utf-8?B?aElNNUxzdXdDczdoajVSZDR4OUNyUUFTYWNZZ2FFc0ZrUXRNcFlERWNPZFIx?=
+ =?utf-8?B?TktONmYvS3lhU0k1bFFkZ3huRmJIQ0xLSXRnYzlNSmRxdytYTmJZMHBOMXlH?=
+ =?utf-8?B?MUNQQ0lGQkVoQ3VzMXJqVXA5SlRER3c5OUdFbGJRZE1Ob0RFK0lTZ3JudERq?=
+ =?utf-8?B?ZUVzTzVWYUFBN1NJU29QMkZnNUg2akJJeFpiblVQNWNzT01qM3IxWmtLMUJV?=
+ =?utf-8?B?N2FhV2dzRkgvMHpvVjJHZTB2QWxvRVJtMDJpLzluRGxWZDhrY0lwTkQ4SHhN?=
+ =?utf-8?B?RDlKRElqOVpWU0E1WUU5TkhaWGxZZmFpN1JuL1hUbktOVTg2MDRLOWE3Nzhm?=
+ =?utf-8?B?QUZWQXJGZGcrVngwekVEUDAyK010YUEyV3cxMG5YcmJDNE9wWmxBWlVPdFFn?=
+ =?utf-8?B?eFpqQ2FzL0M3VzE2RkFBbUVkSnBlbjNwZkJyOXJYcFdJYXRlOWtkckNyVGdU?=
+ =?utf-8?B?Sng4SnJpN0NYTnZJMXpraEFEcjZpWGRvWGs5ZGJRRFNUaVZYeFcwL2srd2RT?=
+ =?utf-8?B?dHNqZHI0bUxiRU9HMmJrKzRBV3U3SXhRZjc5ZVdvSnRhKzM3VjJDeWlKZW9y?=
+ =?utf-8?B?K0t1aGJSQWxKd0NSLy94a21ud2dySEZUMFNuRldNSC9wOXZkNy92RXVMbjFr?=
+ =?utf-8?B?T2FCZjlHckZWbHkvNUtSc3RwQ0dLZjdGdnNEYy83ekJJQlJ0QlZNQU5KTUdz?=
+ =?utf-8?B?bjB0aDcydTNYOW81VlRUMGt6c2xjL0V6MjhRWFl4NElubkFIQmVNclMzUGQ0?=
+ =?utf-8?B?NVc5MVBXb1JBYlpOaElmYmNVS1ZyaFNKT05lbFY2dTNLUysyV0NGdUxxMXc0?=
+ =?utf-8?B?Y1FCT0pwbnpBNWcvOW5TSC9yZVovR3NFOHZhK2RSOGhWOHhmOUFsM0FoM3pl?=
+ =?utf-8?B?aDg1MCt0c2NhOVN4c1Z0U2QybXhzc0VUbGtiR3pob1VGUTZiSmVVUzVjYUdi?=
+ =?utf-8?B?RjNra21YeGxPVk1XYTM2MEdkUzdtOXFBa3ZkSkIwTGhQMUR4N09ZaFJlNUdL?=
+ =?utf-8?B?TVliRCtlZ0dhZkJOWSt2TTNyVVJCM2E2T2NDc2YyY2tVTy9KWGhrdjhKMnd5?=
+ =?utf-8?B?YUV2S252cmJ0VUVkS3gyVyt0bTRNZ2MxdnVTWkJVTy9HK2x1M0s0ZTh1MExY?=
+ =?utf-8?B?T2NVQmlBWXJGY3VPRm1EdjV6azI0WjFHcVU4ZjN5dkVJU2hXZVVPaTJ3MnRM?=
+ =?utf-8?Q?Fkfs=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 17:28:14.6246 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7f4c7c9-d337-443e-771a-08de22da06e8
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF0000A7DF.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR10MB5732
+X-Proofpoint-ORIG-GUID: WyT1C5XtShcR19DV8QDEsY_07fhRF9gE
+X-Authority-Analysis: v=2.4 cv=DOiCIiNb c=1 sm=1 tr=0 ts=69161534 cx=c_pps
+ a=tE6WatfC+N3twNTB5x6S4A==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=q6CKDgr7omsA:10 a=IkcTkHD0fZMA:10
+ a=6UeiqGixMTsA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=8b9GpE9nAAAA:8 a=NH04S8JGbfqLuQlt0QQA:9
+ a=QEXdDO2ut3YA:10 a=T3LWEMljR5ZiDmsYVIUa:22 a=HhbK4dLum7pmb74im6QT:22
+X-Proofpoint-GUID: WyT1C5XtShcR19DV8QDEsY_07fhRF9gE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEzMDEzNiBTYWx0ZWRfX9uHw19De5QYm
+ 07TKtwqWUIwL7F7ZFuN0ydBK+rCBu0/BmZQG+c9WJm9gc2C23rL/E/RyopJCh1EI8kUxTok8E4Z
+ QHB1ukQGcuags+qBwQaRk0mK31vsDPjnie++giIWofcxBLloLGmy33J2Pnviz7OHikldfW0t9S/
+ BLLVARxvEpIeuN5scjbk39sN39hI3MRH8qYKwIkYQVyqrjLKOI8/FkYnDkT+noLDwaearY6rJ4x
+ 3HkljDK1AvS5KghMGRoCHBsTxvpQKRfGlIsK/nU0Z1kkD1lO3xi0SuDYuSAxDXtZVaO2i8prO/u
+ 8rvvOlpMfNzKWEmb9evDH3LDsbG25q8gViRp68OgwArltOhzWFq1nxcfxcO0+b57qQDWjY7PE/E
+ Uk9dJjblf9obHx6UZhJktsOYkiqUqA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-13_03,2025-11-13_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ spamscore=0 lowpriorityscore=0 clxscore=1015
+ bulkscore=0 priorityscore=1501
+ malwarescore=0 impostorscore=0 phishscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511130136
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,98 +194,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix macros for the GPIO function for two pads (ENET1_TD3 and I2C2_SCL),
-aligning them to the functions specified in the datasheet.
+Hi,
 
-Fixes: a9d562daa3c3 ("imx: Add iMX91 support")
+On 10/17/25 14:18, Patrice Chotard wrote:
+> Add U-Boot support for stm32mp257f-dk board.
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>
+>   arch/arm/dts/stm32mp257f-dk-u-boot.dtsi | 26 +++++++++++++++++++++++++
+>   1 file changed, 26 insertions(+)
+>   create mode 100644 arch/arm/dts/stm32mp257f-dk-u-boot.dtsi
+>
+> diff --git a/arch/arm/dts/stm32mp257f-dk-u-boot.dtsi b/arch/arm/dts/stm32mp257f-dk-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..fe3fe9c5166
+> --- /dev/null
+> +++ b/arch/arm/dts/stm32mp257f-dk-u-boot.dtsi
+> @@ -0,0 +1,26 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+> +/*
+> + * Copyright (C) STMicroelectronics 2025 - All Rights Reserved
+> + */
+> +
+> +#include "stm32mp25-u-boot.dtsi"
+> +
+> +/ {
+> +	config {
+> +		u-boot,mmc-env-partition = "u-boot-env";
+> +	};
+> +};
+> +
+> +&usart2 {
+> +	bootph-all;
+> +};
+> +
+> +&usart2_pins_a {
+> +	bootph-all;
+> +	pins1 {
+> +		bootph-all;
+> +	};
+> +	pins2 {
+> +		bootph-all;
+> +	};
+> +};
 
-Suggested-by: Javier Viguera <javier.viguera@digi.com>
-Signed-off-by: Francesco Valla <francesco@valla.it>
----
-Part of this patch was initially sent under a different commit message,
-[1] but was then completed with another related bugfix (thanks Javier).
-I decided to merge the two because they can be seen as targeted to the
-same purpose: proper support of OF_UPSTREAM for any device based on the
-i.MX91 SoC.
 
-Since the content is changed, I dropped the R-b tag by Fabio (hoping it
-can be gained also for this version).
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-[1] https://lore.kernel.org/r/20251111-imx91_pins_fix-v1-1-f9347f896cd4@valla.it
+Thanks
+Patrick
 
-Thank you!
-
-Regards,
-Francesco
----
- arch/arm/dts/imx91-11x11-evk.dts            | 2 +-
- arch/arm/dts/imx91-pinfunc.h                | 4 ++--
- arch/arm/include/asm/arch-imx9/imx91_pins.h | 4 ++--
- 3 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/arch/arm/dts/imx91-11x11-evk.dts b/arch/arm/dts/imx91-11x11-evk.dts
-index 65571fc223b779d5aafc87da3940624db32418cf..ca9070a4c76440e72ecb2534ab55596fecb758d5 100644
---- a/arch/arm/dts/imx91-11x11-evk.dts
-+++ b/arch/arm/dts/imx91-11x11-evk.dts
-@@ -503,7 +503,7 @@
- 			MX91_PAD_ENET1_TD0__GPIO4_IO5                          0x31e
- 			MX91_PAD_ENET1_TD1__GPIO4_IO4                          0x31e
- 			MX91_PAD_ENET1_TD2__GPIO4_IO3				0x31e
--			MX91_PAD_ENET1_TD3__GPIO4_IO3				0x31e
-+			MX91_PAD_ENET1_TD3__GPIO4_IO2				0x31e
- 			MX91_PAD_ENET1_TXC__GPIO4_IO7                          0x31e
- 			MX91_PAD_ENET1_TX_CTL__GPIO4_IO6                       0x31e
- 		>;
-diff --git a/arch/arm/dts/imx91-pinfunc.h b/arch/arm/dts/imx91-pinfunc.h
-index b0066df173b1386f040b0776fd798406a6e39e06..5677928ab7c4bdc1cfa02d7a1107e9c1da94d329 100644
---- a/arch/arm/dts/imx91-pinfunc.h
-+++ b/arch/arm/dts/imx91-pinfunc.h
-@@ -330,7 +330,7 @@
- #define MX91_PAD_ENET1_TD3__CAN2_TX                                              0x00a0 0x0250 0x0000 0x02 0x00
- #define MX91_PAD_ENET1_TD3__HSIOMIX_OTG_ID2                                      0x00a0 0x0250 0x0000 0x03 0x00
- #define MX91_PAD_ENET1_TD3__FLEXIO2_FLEXIO2                                      0x00a0 0x0250 0x0000 0x04 0x00
--#define MX91_PAD_ENET1_TD3__GPIO4_IO3                                            0x00a0 0x0250 0x0000 0x05 0x00
-+#define MX91_PAD_ENET1_TD3__GPIO4_IO2                                            0x00a0 0x0250 0x0000 0x05 0x00
- #define MX91_PAD_ENET1_TD3__LPI2C2_SCL                                           0x00a0 0x0250 0x03e8 0x06 0x00
- 
- #define MX91_PAD_ENET1_TD2__ENET_QOS_RGMII_TD2                                   0x00a4 0x0254 0x0000 0x00 0x00
-@@ -680,7 +680,7 @@
- #define MX91_PAD_I2C2_SCL__LPUART2_DCB_B                                         0x0178 0x0328 0x0000 0x02 0x00
- #define MX91_PAD_I2C2_SCL__TPM2_CH2                                              0x0178 0x0328 0x0000 0x03 0x00
- #define MX91_PAD_I2C2_SCL__SAI1_RX_SYNC                                          0x0178 0x0328 0x0000 0x04 0x00
--#define MX91_PAD_I2C2_SCL__GPIO1_IO3                                             0x0178 0x0328 0x0000 0x05 0x00
-+#define MX91_PAD_I2C2_SCL__GPIO1_IO2                                             0x0178 0x0328 0x0000 0x05 0x00
- #define MX91_PAD_I2C2_SCL__I3C1_PUR_B                                            0x0178 0x0328 0x0000 0x06 0x00
- 
- #define MX91_PAD_I2C2_SDA__LPI2C2_SDA                                            0x017c 0x032c 0x03ec 0x00 0x01
-diff --git a/arch/arm/include/asm/arch-imx9/imx91_pins.h b/arch/arm/include/asm/arch-imx9/imx91_pins.h
-index 26246702a9607cd1ba6c8a15be9313db63b2a4af..838a81422575cd99726e8bfc74a94f34e6d38f50 100644
---- a/arch/arm/include/asm/arch-imx9/imx91_pins.h
-+++ b/arch/arm/include/asm/arch-imx9/imx91_pins.h
-@@ -329,7 +329,7 @@ enum {
- 	MX91_PAD_ENET1_TD3__CAN2_TX                                                     = IOMUX_PAD(0x0250, 0x00A0, 0x02, 0x0000, 0x00, 0x00),
- 	MX91_PAD_ENET1_TD3__HSIOMIX_OTG_ID2                                             = IOMUX_PAD(0x0250, 0x00A0, 0x03, 0x0000, 0x00, 0x00),
- 	MX91_PAD_ENET1_TD3__FLEXIO2_FLEXIO2                                             = IOMUX_PAD(0x0250, 0x00A0, 0x04, 0x0000, 0x00, 0x00),
--	MX91_PAD_ENET1_TD3__GPIO4_IO3                                                   = IOMUX_PAD(0x0250, 0x00A0, 0x05, 0x0000, 0x00, 0x00),
-+	MX91_PAD_ENET1_TD3__GPIO4_IO2                                                   = IOMUX_PAD(0x0250, 0x00A0, 0x05, 0x0000, 0x00, 0x00),
- 	MX91_PAD_ENET1_TD3__LPI2C2_SCL                                                  = IOMUX_PAD(0x0250, 0x00A0, 0x06, 0x03E8, 0x00, 0x00),
- 
- 	MX91_PAD_ENET1_TD2__ENET_QOS_RGMII_TD2                                          = IOMUX_PAD(0x0254, 0x00A4, 0x00, 0x0000, 0x00, 0x00),
-@@ -679,7 +679,7 @@ enum {
- 	MX91_PAD_I2C2_SCL__LPUART2_DCB_B                                                = IOMUX_PAD(0x0328, 0x0178, 0x02, 0x0000, 0x00, 0x00),
- 	MX91_PAD_I2C2_SCL__TPM2_CH2                                                     = IOMUX_PAD(0x0328, 0x0178, 0x03, 0x0000, 0x00, 0x00),
- 	MX91_PAD_I2C2_SCL__SAI1_RX_SYNC                                                 = IOMUX_PAD(0x0328, 0x0178, 0x04, 0x0000, 0x00, 0x00),
--	MX91_PAD_I2C2_SCL__GPIO1_IO3                                                    = IOMUX_PAD(0x0328, 0x0178, 0x05, 0x0000, 0x00, 0x00),
-+	MX91_PAD_I2C2_SCL__GPIO1_IO2                                                    = IOMUX_PAD(0x0328, 0x0178, 0x05, 0x0000, 0x00, 0x00),
- 	MX91_PAD_I2C2_SCL__I3C1_PUR_B                                                   = IOMUX_PAD(0x0328, 0x0178, 0x06, 0x0000, 0x00, 0x00),
- 
- 	MX91_PAD_I2C2_SDA__LPI2C2_SDA                                                   = IOMUX_PAD(0x032C, 0x017C, 0x00, 0x03EC, 0x01, 0x00),
-
----
-base-commit: 365a7079fb918643da0f0709660a7d8ea76dd6f3
-change-id: 20251111-imx91_pins_fix-6bfae694156c
-
-Best regards,
--- 
-Francesco Valla <francesco@valla.it>
 
