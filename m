@@ -4,119 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AEAECD6E6C
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 14:39:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B30CD8C82
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 15:07:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9E9883E86;
-	Thu, 13 Nov 2025 15:39:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
+	by phobos.denx.de (Postfix) with ESMTP id 020AE83E3A;
+	Thu, 13 Nov 2025 16:07:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="jwe0WwG+";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="Ll6lgoXR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IEIfroAh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B36A83E96; Thu, 13 Nov 2025 15:39:27 +0100 (CET)
-Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3606883E40; Thu, 13 Nov 2025 16:07:05 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4529D8394E
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 15:39:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD0FA83B1A
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 16:07:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=valla.it
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256;
- d=outgoing.instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com;
- s=arckey; t=1763044765; 
- b=GAO9B3WjEnMD5r62yQXBw1u+gh7PFeRfDh0ibbPDqJcs012lkgLSYS84IjsL4rJ5rilvV8pmYi
- jpZ2pxp2Y5RS0jwicVe3yx9cGvwkic/f1cG0K7gY/uIime+CBBQOHfghSAT+FiUJdvty6iNReX
- QNfjWJVbMbRpnmt7iQezFaDl93w4AUVIk5GA1ahbAZrDTZcBYRzDd7pIsAHtqjL7WE1JTR+x6t
- 6aKDPpzp91xyrzn8Yohcmomb4WGtWfpyT79UR4pBP//A0y9Dnl1cc8N04zfjHdZk3ei5sDZVxN
- kaPpxTLW+1JdUMlus2CKwsWZKbGN5OFOlf6YXA6cDMw4hA==;
-ARC-Authentication-Results: i=1;
- outgoing.instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com;
- smtp.remote-ip=35.214.173.214; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
- d=outgoing.instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com;
- s=arckey; t=1763044765; 
- bh=NeJK8em8Z5opohseF6YgXbUEJndECdJgV4+PP896Bl0=;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:DKIM-Signature:DKIM-Signature;
- b=iCwHptnW8t59zhgH2hq3Mz/kRycoait6rWks89NuSQgBPyIZIs9B3b480koFCU+Rc8hYPebA49
- q5NLQHq7BEI9bDMhh5Kh/xa1bC4bleAknaRGHw4M3XVbmypv321V0j7i3r9AhQYor8SWmC0hkK
- /WLC8qi0Wb68Vpy2YSizuhGxjlEARtShWn5Fl5kxNSPgvIE+DxQ758dw3eEBd9Gc7po2p/IYoO
- lz+5jLUhqmz70PhZw3YhLj03cfzBzbYS0YzNVkuLKKLTy+aaOPbmkYDIrhnfG3vG2ET+FKXSrv
- 2e8Dn55IGhi1YkdRbI79ao6Iaeiyi/sqS+/vMVN57Sr6jg==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
- :Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Subject:Cc:To
- :From:Date:Reply-To:List-Unsubscribe;
- bh=KWcdzDZsHZh73TlqNxd1kybmZoiKu+HW5adhOrPXiTg=; b=jwe0WwG+l10IO/sy8ZX7VTUbPe
- ifUT50TbuVfp+VQDbSxtO5xDfid8lg6HmCZmSz7aUV7gJ+vSXsgFuZJ1+zZurb+tkI/YcEMdhozr8
- ZBfobX54UJEcqjnHVswfvqGAomcKId1nZOpHx6GsVRhB7HonXWQ7JQp4K43uD2G+Zjhc=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
- helo=esm19.siteground.biz)
- by instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com with
- esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.98.1)
- (envelope-from <francesco@valla.it>) id 1vJYTq-00000004TW5-2SUx
- for u-boot@lists.denx.de; Thu, 13 Nov 2025 14:39:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
- s=default; h=Subject:Cc:To:From:Date:list-help:list-unsubscribe:
- list-subscribe:list-post:list-owner:list-archive;
- bh=KWcdzDZsHZh73TlqNxd1kybmZoiKu+HW5adhOrPXiTg=; b=Ll6lgoXRV+tb2DV/N97qhPcpAX
- uEyO7kp/GYhbmQy4teihPW1BJ/szfN9CbAuZr4enyONO7X2b+uj3rN3pCjm5e5aE9obcFjsrjVjV3
- zUQQv7lAMQvnUWHMdtF7tcKwkEgbonkM+MOYDzxgHPJjRR6DR7M8JlWnV8poJo8REO80=;
-Received: from [217.201.253.235] (port=36171 helo=bywater)
- by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.98.1) (envelope-from <francesco@valla.it>)
- id 1vJYTl-000000009Ly-1DLY; Thu, 13 Nov 2025 14:39:17 +0000
-Date: Thu, 13 Nov 2025 15:39:16 +0100
-From: Francesco Valla <francesco@valla.it>
-To: Javier Viguera <javier.viguera@digi.com>
-Cc: Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: Re: [PATCH] imx91: fix ENET1_TD3 pinmux for GPIO function
-Message-ID: <aRXtlIBXvl-nBriQ@bywater>
-References: <20251111-imx91_pins_fix-v1-1-f9347f896cd4@valla.it>
- <CAOMZO5AD6BQP3WhcP_NBMm33Fs2Lxao7yvbC9DWrPz8q3_5nNQ@mail.gmail.com>
- <dff97ea3-5b81-4624-b120-ba43da8b280c@digi.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-45076d89e56so445319b6e.1
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 07:07:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763046421; x=1763651221; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/wPMU94a3Qfj19bYulsX6IlO1NTwB17HjP604tWbDHA=;
+ b=IEIfroAhoOAmZ2L+atLHibeBDRa0hqNJOjMk3nUaoLVqVbb9RFdk1woDXt04UdxhJ8
+ +4ygUmM85kadPmb1xqRJUzyParIheGunNEmmxh72pVQ8c1z1K+U0OzmFJgHFpGVAie0n
+ LYDThDpWWybwTqPFvb79K/rgcjwijUgTVBO3s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763046421; x=1763651221;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=/wPMU94a3Qfj19bYulsX6IlO1NTwB17HjP604tWbDHA=;
+ b=No9lNPwsZivEgWikpghzQMHaBp62INsY6ssAh+ZdTNLiWOR5an5fG73DtlSWZtNGTL
+ P7GsQNtiFas/H3uL4dQBpGcIpwY5IKOOsYySSE0Lsl2qr1BjF0nt5XjZDFU+qr6sip3l
+ xfH7HP4RncwG1lW+jMpeiYvUAONQAaLh4jMgLxh+cUpSJPiY7S0noGDG5sroiuNyvwgx
+ WtV3XSaZ2r5hWLv60BzH/zdVZcZsPVWHI+dmFVZNl47gqWZ6FGvUAX+MmZgodKQzzsr2
+ zRzfs080TQU7Aa4qbDP0/retLOEosI8jRePJtb7asGlNgwYv9ydGQeeYtDh3fpEAvP5J
+ w+NA==
+X-Gm-Message-State: AOJu0YwIZQFZhV/PDIYX7ubq4MkGevr3sUZoS24gfH8+geyfS+fNqJG5
+ quIkBwDkCTGhq3plogolLNF6Kp2jrJOdVhHSI5mhmbIuPpjee3WXAqtZzTZVlg/9Ff8=
+X-Gm-Gg: ASbGncuBA9wGeTw2JG1wTn+aeDyVyjO78VEupm5g+yVen6iTKOOj5CaKXvtYiVkiqMx
+ z562Pg0wDbtkSxBF+XogO3pOKdpc4BSNFYC1um9/GndAFnLZqlLPOGHM4RlcQ24vMw8f24Whdgh
+ sWKFPLJ1GWj+vBxTuJ0TDEh0yEfCyK5TLpw3GoxDfUZziMgDedk60uq9J+B0wQGuFolX2hbUV7y
+ 91LEbaabe/+z2snIaPCz+bJ4ZqVux39q5LdkvxmwFO+4khKab3clKM+sRAl7a7B9Ui1edJ9JC3Y
+ VKZh3OQlEqkQ1K1YtK/c2e9GvdWhyYpyzCAZ2zlzNHweDyHjZ/K3REZXH04zxS4k2lj3ZkJZ7M0
+ FzTl74K7MDQVvhFNXor/hc32IcQwzadLTgIKtEisP0PjLsgVVSUHXuYOWF3/XYk5cvn2VCSYG0T
+ NXi58rX/xckNYIImIHxfZqFQR/bC1a7+SB3LBYXA==
+X-Google-Smtp-Source: AGHT+IG0s3+7gZeOXAAsGw60W4pkg7FKNOqY9PcZqs5sBhVDK+cpkPgAr32Yp7S8uX+1YeONw73yxg==
+X-Received: by 2002:a05:6808:152b:b0:43c:8714:fe3c with SMTP id
+ 5614622812f47-4507459d904mr3030595b6e.51.1763046421235; 
+ Thu, 13 Nov 2025 07:07:01 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c73a283a44sm1350677a34.2.2025.11.13.07.06.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Nov 2025 07:07:00 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+In-Reply-To: <20251113054431.5981-1-marek.vasut+usb@mailbox.org>
+References: <20251113054431.5981-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <176304641966.1685428.15564826322539092753.b4-ty@konsulko.com>
+Date: Thu, 13 Nov 2025 09:06:59 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <dff97ea3-5b81-4624-b120-ba43da8b280c@digi.com>
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - esm19.siteground.biz
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - valla.it
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SGantispam-id: 774e49e0289a8848e1e2f283234eb951
-AntiSpam-DLS: false
-AntiSpam-DLSP: 
-AntiSpam-DLSRS: 
-AntiSpam-TS: 1.0
-CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vJYTq-00000004TW5-2SUx-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,42 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Thu, 13 Nov 2025 06:44:23 +0100, Marek Vasut wrote:
 
-On Thu, Nov 13, 2025 at 02:33:05PM +0100, Javier Viguera wrote:
-> On 12/11/25 22:15, Fabio Estevam wrote:
-> > Hi Francesco,
-> > 
-> > On Tue, Nov 11, 2025 at 10:19 AM Francesco Valla <francesco@valla.it> wrote:
-> > > 
-> > > Fix a typo in the GPIO function for the ENET1_TD3 pad, aligning it to
-> > > the function specified in the datasheet.
-> > > 
-> > > Fixes: a9d562daa3c3 ("imx: Add iMX91 support")
-> > > 
-> > > Signed-off-by: Francesco Valla <francesco@valla.it>
-> > 
-> > Nice catch!
-> > 
-> > Reviewed-by: Fabio Estevam <festevam@gmail.com>
-> > 
+> The following changes since commit caa740df9cae5ddc74b18b88a4fea43e27b2fdf6:
 > 
-> Just for completeness, I think there is another one:
-> MX91_PAD_I2C2_SCL__GPIO1_IO3 should e MX91_PAD_I2C2_SCL__GPIO1_IO2
+>   Gitlab: Optimize the job dependency list more (2025-11-11 11:55:16 -0600)
 > 
-
-Another nice catch. I'll send an updated patch with this fix too (and
-your R-b tag).
-
-Thank you
-
-> --
-> Regards
-> Javier Viguera
-> Digi International Inc.
+> are available in the Git repository at:
 > 
->
+>   git://source.denx.de/u-boot-usb.git master
+> 
+> [...]
 
-Regards,
-Francesco
+Merged into u-boot/master, thanks!
+
+-- 
+Tom
+
 
