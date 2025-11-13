@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40104CD6E48
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 12:52:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6449CD6E48
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 12:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E5F383F98;
-	Thu, 13 Nov 2025 13:52:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0CB9683D77;
+	Thu, 13 Nov 2025 13:54:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="CQ5Uzwk9";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="BKfF0jME";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE83583F98; Thu, 13 Nov 2025 13:52:33 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id 76BD083DDD; Thu, 13 Nov 2025 13:54:17 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C494F839B7
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 13:52:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D98583C62
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 13:54:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8BE51108FF1; Thu, 13 Nov 2025 13:52:27 +0100 (CET)
+ with ESMTPSA id EA88C103621; Thu, 13 Nov 2025 13:54:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1763038349;
+ s=dkim; t=1763038454;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=caIywPJ72iVbUC+HuwhNcuAY1Wi8ks6TLeQ4fR1eEnQ=;
- b=CQ5Uzwk94ubYE2OaGOxymCE4RTtQCeTiKgmib4LGyySF97BVZjA3fIlCj1K4eQWCjHSpET
- XMYNP8Go36v56k48YpJbs/FHHKvNKdwm5cRpPFCWtYSwzmiq1FgKSyyx0ZbLXj+GJiI/An
- CYLDSpJAw6SccxTraaIe0xBKqiFEc3KLkuri5yARZocGojG/CVqgQPrroz0VCAQgH2NIXs
- mdQ188hABvmYGEZ6b4J1nnvsyQ8SlY0iDzfEChUXgJD0Ac/OJN8jk7DMNqny0H2AYOmsCf
- pFQdD5NoJTyJTlWFW4ce+KYC6Tvei1qund3AUd3jD3l29U4MG8rjF60nBwLIjw==
-Message-ID: <34249203-6c09-06b2-3d8b-3389e7fe34f7@nabladev.com>
-Date: Thu, 13 Nov 2025 13:52:46 +0100
+ bh=sbn6n/g6/AM+F7LADATre8WDOOTs8ckGT11iPLosAyw=;
+ b=BKfF0jME4ZohNzptOPnF2bqjz+L5dVwyuHR38axYX2IPB2jXIOGy6EXEvjfzq2G1/sinez
+ IeqPEC2y9Y7KKPJh/w5sKqQmZyPQipaq7s3BE26Ar9LqV6rfEQJcy0Duaydu/HHbvTFRpc
+ kWza+WAQdwOs+68tX1C/LLkvr1oX5NHCpybbOE4KPCY4o2p9kWMz54jEz2Vgej2UcOLPV1
+ PCIQRYUvLrloYcPEE2pjej7CBehw1xYkDTpO6FcqZhU60uRXlX5dAk+x+0BbdRC5b+PG3r
+ uv9GcBGURn5KDYA/g7BUKhePVfcaLY8FdF/vK49mAIrATT75m35e6bb1HDiDVg==
+Message-ID: <5a76ffc8-c41e-b2ff-4d95-8f93048dfd21@nabladev.com>
+Date: Thu, 13 Nov 2025 13:54:32 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH 1/2] sandbox: Fix DT compiler address warnings in sandbox
- DTs
+Subject: Re: [PATCH 2/2] sandbox: Fix DT compiler pin warnings in sandbox DTs
 Content-Language: en-US
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Christian Marangi <ansuelsmth@gmail.com>,
@@ -53,8 +51,9 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>
 References: <20251113115658.947953-1-marek.vasut+renesas@mailbox.org>
+ <20251113115658.947953-2-marek.vasut+renesas@mailbox.org>
 From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20251113115658.947953-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251113115658.947953-2-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -78,22 +77,17 @@ Hello Marek,
 
 On 13.11.25 12:56, Marek Vasut wrote:
 > Trivially fix the following warnings in sandbox DTs, which show up with
-> DTC 1.7.2. Fill in the missing address and adjust emulated I2C address
-> to fit the 7bit address limit:
+> DTC 1.7.2. Assign pin groups less confusing node names with pins- prefix
+> to avoid confusing DT compiler into thinking the node is really a bus node:
 > 
 > "
-> arch/sandbox/dts/sandbox.dtsi:138.30-140.5: Warning (i2c_bus_reg): /i2c@0/sandbox_pmic: I2C bus unit address format error, expected "40"
-> arch/sandbox/dts/sandbox.dtsi:146.18-161.5: Warning (i2c_bus_reg): /i2c@0/emul: I2C bus unit address format error, expected "ff"
-> arch/sandbox/dts/sandbox.dtsi:148.4-17: Warning (i2c_bus_reg): /i2c@0/emul:reg: I2C address must be less than 7-bits, got "0xff". Set I2C_TEN_BIT_ADDRESS for 10 bit addresses or fix the property
+> arch/sandbox/dts/.test.dtb.pre.tmp:1831.20-1841.5: Warning (i2c_bus_bridge): /pinctrl/i2c: incorrect #address-cells for I2C bus
+> arch/sandbox/dts/.test.dtb.pre.tmp:1831.20-1841.5: Warning (i2c_bus_bridge): /pinctrl/i2c: incorrect #size-cells for I2C bus
+> arch/sandbox/dts/test.dtb: Warning (i2c_bus_reg): Failed prerequisite 'i2c_bus_bridge'
+> arch/sandbox/dts/.test.dtb.pre.tmp:1848.20-1856.5: Warning (spi_bus_bridge): /pinctrl/spi: incorrect #address-cells for SPI bus
+> arch/sandbox/dts/.test.dtb.pre.tmp:1848.20-1856.5: Warning (spi_bus_bridge): /pinctrl/spi: incorrect #size-cells for SPI bus
+> arch/sandbox/dts/test.dtb: Warning (spi_bus_reg): Failed prerequisite 'spi_bus_bridge'
 > "
-> 
-> "
-> arch/sandbox/dts/.test.dtb.pre.tmp:912.18-926.5: Warning (i2c_bus_reg): /i2c@0/emul: I2C bus unit address format error, expected "ff"
-> arch/sandbox/dts/.test.dtb.pre.tmp:913.4-17: Warning (i2c_bus_reg): /i2c@0/emul:reg: I2C address must be less than 7-bits, got "0xff". Set I2C_TEN_BIT_ADDRESS for 10 bit addresses or fix the property
-> arch/sandbox/dts/.test.dtb.pre.tmp:928.30-931.5: Warning (i2c_bus_reg): /i2c@0/sandbox_pmic: I2C bus unit address format error, expected "40"
-> "
-> 
-> Fix up pmic test to match.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -107,12 +101,8 @@ On 13.11.25 12:56, Marek Vasut wrote:
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
->   arch/sandbox/dts/sandbox.dtsi | 6 +++---
->   arch/sandbox/dts/test.dts     | 6 +++---
->   test/dm/pmic.c                | 4 ++--
->   3 files changed, 8 insertions(+), 8 deletions(-)
-
-Good catch, thanks!
+>   arch/sandbox/dts/test.dts | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
 
 Reviewed-by: Heiko Schocher <hs@nabladev.com>
 
