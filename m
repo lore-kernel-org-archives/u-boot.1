@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28776CD6E6C
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 14:30:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE6DCD6E71
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 14:36:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 824EC8394E;
-	Thu, 13 Nov 2025 15:30:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 36B5583E86;
+	Thu, 13 Nov 2025 15:36:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hFHgnoTc";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="rx7c7XKi";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="HSsTDph0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69C8583E7A; Thu, 13 Nov 2025 15:30:12 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 13B8683E86; Thu, 13 Nov 2025 15:36:17 +0100 (CET)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70E2E8003E
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 15:30:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 641D68394E
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 15:36:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d6jNL0gYTz9sbt;
- Thu, 13 Nov 2025 15:30:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763044210;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=CZmDFbGtpLfQD/oewnAyR4IpKA6RE2NrE+aG+Q7fEeQ=;
- b=hFHgnoTcL53A2lufdcw9PcWsOwbXyrzsuCQBgCXUVjnEucj/1W63DYq9XtrNQ/h4gjIZCF
- eAs4uQoyrW7LKhorcT9lyAU6RIfGPJD62Na6Nh/ahpcCMWpxwKB9LquSkB0Ln/xG+dDEqi
- 9kH0Te+rpE60xA/nGxYG2HPiy7SVYKyday1u0CKasBAb06qusRsemuPWDc3Y0d8gpML+oa
- vDL/YrSkYN6okP4GaNT1NJpLTXgxZbNNg0jzFNTs3X2+cC1GF+8Wrig0TsvvfVp5rh8gbj
- cQK4XiyYFvU+1pdSxofuC+g0yXiRhsgzSPnyL17XePgwozWhss4V9ySULU5zdg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=rx7c7XKi;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763044207;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=CZmDFbGtpLfQD/oewnAyR4IpKA6RE2NrE+aG+Q7fEeQ=;
- b=rx7c7XKicWmXqvsjDcXY1zkptdTaZ+Ua8cNjDVGqQdjZzUwgBa7hXJBz2SFg0RraGhgkxy
- UBVQQCMNz7eloPavjt3SkeaUTV9n825x4pqTvDqGw4xJp9+XmhZF/2Af0AQvAx8a98ajck
- DiVVo8E8AptbVmtrE4vpZrK5GZSumQ+s0ho9f0KOM3SgNOG1e+L1Evm223U+AHmX/uYAAd
- zKHXN7Wajt6VHzCTAK6DOC62VAom7qpy0Mfa8LpRxzfdKHmO6TOiiGTsdjfFsMBDhSF+Ug
- Cv4W3NgBamhR7lSYUUwVRd3EBRfUt4eYeM62ZI1PPUWQ8TiIzi972xSKGEQwYQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- =?UTF-8?q?Jo=C3=A3o=20Paulo=20Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] boot: Warn users about fdt_high=~0 usage
-Date: Thu, 13 Nov 2025 15:29:51 +0100
-Message-ID: <20251113142957.1069909-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-b98983bae8eso499651a12.0
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 06:36:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1763044573; x=1763649373;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lRkiR1VGtb+CJQ7EwAwY1IeFpfYP5dyzVZPfqTK2fIo=;
+ b=HSsTDph0TONep+sUBBABxfCuMH9LeiRGkP88WfwQxFyEM9l823y8TE+/rBX9VhBGSq
+ zOnZmFK1p/0Uv+AWlIjXAISX8EJKChDqHsYdqQqMickzsDtfFpT+BJM2JyuVQqPBlh3T
+ P+TzDoSO/iYwVidA78WQl3NCUH4HArDHJwa4I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763044573; x=1763649373;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lRkiR1VGtb+CJQ7EwAwY1IeFpfYP5dyzVZPfqTK2fIo=;
+ b=w/PbDoEFR5QI17WoL/jQrVrjo5J3NJZrJ1szSEYuHIXkG4gTzyxUZdQuzh9tCYENVe
+ KGSEkhJvPDN43KipNZqAeri718sKtSOvzUCNgCRT3xsIZp26jwxuCkN9JuCMLupwClOG
+ d7R9dEuNOmpCSjOditbVt66WOh+Gpjvn+JDxPVYL0H6MGJ0t+R/VWZ++J27ms/Kw9YJD
+ p9KxnDrqEKVYrAfXia6mmG2ZAs7gxR4NAH/ExlMVBZCLkY5eFKjw6P/6xhCWD+GdZYcW
+ QsWItebOCCbdAGkrdI8g6g5WV8MhdoETCZwfv6SG27hXofZGL5nbSf7jEuNJ4qRHnsJF
+ a2Ng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWzfUwthw1aWNu1ua1jkEClThC3qngLZLyCrcQiPU8pXXQKqkcnGKImWux15xM2/SXeCRiovWA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzsqLSB009yi26G/RuR10VIf5za4FrkkjDKSdypr9+vEAC0BV4Z
+ nBdPAaJ84jK+hgNGLEQGNiWAyfhzrrI0DJFIomBYj9qZlFJL8Tfayu3JbN+nlTXjyffbFr4kHfW
+ CmNCy0KLyYYeBFd/sk9Vfg4EDX7W1pT8zFD9qev6W8Q==
+X-Gm-Gg: ASbGncs/UeiS8iZo8S7NAjJf2d+vnnj7xpx8x0w/0VnpbDYrBU/uJHpPsNV3qUSV/OD
+ MXqRbr0/GE45NQb111N4zWdxe7S8CbbdhcA83/O6E9p+1jcX1wmjBq9nJg1tUHry0NGy2VgleLB
+ Id5rlYB7Hy+b7OdpguqC84TlyCfEI1YG4c8Sr9B9jtJ33xm2Iko0gEO9QizM9x7gU0W1VJbr1k+
+ OewGJNsaAAUk4YjPHDgW6PgZ1Lw8AP2U47Jnsl6lsIw0XuiNGT0JW6HxU+i2ZTdpwa4VrzAOfsm
+ cueerfekKfujMA==
+X-Google-Smtp-Source: AGHT+IHt/cvO6YmIeQyHLAKTecKG74H0Elk5xO5qerZ1l2tDTkOaq58T3UyK6pNZ1nEJJllfEcyy5voB4U7cYH98wPY=
+X-Received: by 2002:a05:693c:40d5:b0:2a4:3592:cf6e with SMTP id
+ 5a478bee46e88-2a48b5246f3mr1791eec.18.1763044572633; Thu, 13 Nov 2025
+ 06:36:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ea4f354e8731671f9a2
-X-MBO-RS-META: idj3esz7xqwdhg45qc6hxbkpyxopfze1
-X-Rspamd-Queue-Id: 4d6jNL0gYTz9sbt
+References: <20250703170253.1231818-1-miquel.raynal@bootlin.com>
+ <87frcwexyt.fsf@bootlin.com> <875xbegt1x.fsf@bootlin.com>
+ <20251113142745.GI6688@bill-the-cat>
+In-Reply-To: <20251113142745.GI6688@bill-the-cat>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 13 Nov 2025 15:36:00 +0100
+X-Gm-Features: AWmQ_bmc54yWh5FMC_CJ5JN6T0mhqj3UE_bMA-lxmuD4eRrLftb9SzVlBaEnN70
+Message-ID: <CAOf5uwn_ggFp-KW6qDcKYn1kKA6+FabyQLCT1ecVoBdv9s3UqQ@mail.gmail.com>
+Subject: Re: [PATCH] mtd: spinor: winbond: Describe several chips
+To: Tom Rini <trini@konsulko.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, Vignesh R <vigneshr@ti.com>, 
+ Tudor Ambarus <tudor.ambarus@linaro.org>, U-Boot-Denx <u-boot@lists.denx.de>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, Steam Lin <stlin2@winbond.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,38 +98,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case the 'fdt_high' environment variable is set to ~0 and DT is
-at non-8-byte aligned offset, warn users about the dangers of the
-fdt_high usage. This will hopefully lead to removal of most of the
-fdt_high ~0 usage over time.
+Hi
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: "João Paulo Gonçalves" <joao.goncalves@toradex.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- boot/image-fdt.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Conference. I will pick him up this weekend together with others. Sorry for
+it
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 3f0ac54f76f..e88525a3846 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -189,6 +189,10 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
- 			/* All ones means use fdt in place */
- 			of_start = fdt_blob;
- 			addr = map_to_sysmem(fdt_blob);
-+			if (addr & 7) {
-+				printf("WARNING: The 'fdt_high' environment variable is set to ~0 and DT is at non-8-byte aligned address.\nWARNING: This system will likely fail to boot. Unset 'fdt_high' environment variable and submit fix upstream.\n");
-+			}
-+
- 			err = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &addr,
- 					    of_len, LMB_NONE);
- 			if (err) {
--- 
-2.51.0
+Michael
 
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
+
+Il gio 13 nov 2025, 15:27 Tom Rini <trini@konsulko.com> ha scritto:
+
+> On Thu, Nov 13, 2025 at 10:50:34AM +0100, Miquel Raynal wrote:
+> > Hi,
+> >
+> > I am manually adding Michael, as apparently he was not listed
+> > automatically.
+> >
+> > On 09/09/2025 at 12:12:26 +02, Miquel Raynal <miquel.raynal@bootlin.com>
+> wrote:
+> >
+> > > Hello,
+> > >
+> > > On 03/07/2025 at 19:02:53 +02, Miquel Raynal <
+> miquel.raynal@bootlin.com> wrote:
+> > >
+> > >> All these chips are dual and quad capable. They are also DTR capable,
+> > >> but the core is not yet ready for that.
+> > >>
+> > >> Performances of all chips are comparable at 30MHz and are as follow:
+> > >> Eraseblock single read speed: 938kiB/s
+> > >> Eraseblock dual read speed:  1068kiB/s
+> > >> Eraseblock quad read speed:  3751kiB/s
+> > >>
+> > >> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> > >
+> > > I believe this patch has been out for more than 2 months and is simple
+> > > enough, any plans for taking it soon?
+> >
+> > It's now been few more months and I haven't been notified this patch got
+> > merged. It is also not visible in upstream U-Boot. Could we please speed
+> > up the merging process, especially for such simple change?
+>
+> Jagan, Michael, Dario, do you need some help with the mtd/spi related
+> patches? This hass been going on for some time. Thanks!
+>
+> --
+> Tom
+>
