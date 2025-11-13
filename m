@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 994CECD98F2
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 22:08:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F9CECD98F5
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 22:10:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 119AA84064;
-	Thu, 13 Nov 2025 23:08:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EEB028406D;
+	Thu, 13 Nov 2025 23:10:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Bdqp/pYN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RXTDxpO1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41FE284066; Thu, 13 Nov 2025 23:08:34 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 095568407B; Thu, 13 Nov 2025 23:10:01 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D46F84057
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 23:08:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E327384064
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 23:09:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c6da42fbd4so557639a34.1
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 14:08:32 -0800 (PST)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c707e11e01so1379836a34.0
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 14:09:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763071711; x=1763676511; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n0dWPLW4t9ZbbZjm/Qfk8N6/X2HpA84wUyC808RpFKo=;
- b=Bdqp/pYNr2WagTJQUJxRor1EOsvCtA7OsG+UIhNRnbdoK1JE7GYVSj/MmyE1de6X5M
- XE9WK3MsTmuap2berPDzUfgiAMof3s+4hkSjUeUCIasw7i49ExdqT/gkPshVf46h6yWc
- vLz5EXof/fJ2Wl6xIJJQSBuoqr8/WHBcaP8sA=
+ d=konsulko.com; s=google; t=1763071797; x=1763676597; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qoaOsPe+HhSGnkjavoGm17+q0dy+W9CS9lcJtQD8OD0=;
+ b=RXTDxpO1Zr7SLb2eoS6mS5wkAfLmHKWxLkcwPozrK6DagEQ8mMpwzI1cBmGvcHJzxo
+ kXSCYHnnr73EyCJPrfElujqJnHIBRdKOMjTl+8WgfW8iNs9mVo2e7YIP0ZA1n4Ldmfmt
+ ZsuqSGH7OvMufLG4TviMW3lcsg4bBPGjD913c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763071711; x=1763676511;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=n0dWPLW4t9ZbbZjm/Qfk8N6/X2HpA84wUyC808RpFKo=;
- b=Q9SRzjqtHZgDNgC6IneyUKuFa4yl1CoN43h6Sua2lXOrLn87n53XCX3DDgDTBdR0c/
- Pt1uFcH9dwG7uULqWeEliEOBSxbqbEeIc+/ajlGCiYZZKJ4j5LCF/3Lj80pXYFXF7Zgo
- 7emZdmWpeIctLOLhGadDwtZgtjGIXCDkcZf9Af89+gCA0poHILRJgsRfPTqNSt8TdPbV
- 44jr+wbb+tnKLV35aFuOKHqxWti2cC2DQXldi7UmlhxsOree4pUDY6UAsyKYWhI4e3qG
- GwvYriPdxbUVDnfOlNof6H91wcV2O+VxeR26cqfay4JTzw+fY1SAj25JFrBMUgAUxWCB
- wsqA==
-X-Gm-Message-State: AOJu0Yz6Z6lngGCwO6hDAql3ePg4zq5gB25dlXQlMtKYmwaXBFGVWEpb
- HtIJDYFBHBy9zI0chfx6gHGoTLnun4r4xM/MzAQ5CBot4QcSfxCyHIg4jvyExXZUIx1LESiBnwC
- VC460NQA0QQ==
-X-Gm-Gg: ASbGncvwepbQiEUqAW7t8iEhvFtKEqTHuJWGoLaJFRb4ekTnnMLISE5XYzIr0QJmfoL
- 0bq9RuQkMixz69xvs5ePABKiPfxk4/zl5rNntgLJkS7BONv1hgg/z2/06ulLe2xf61Z1MExjWSI
- Wf1DACi8qzxnW/1NfD6oNsXGf0K+cXrYn9IWDPEDXON9Tj5SbX8MxXllbCyRTOPxrtnvFEmOwnj
- Rc3GybmSBkep8SL5EUH444TPtb7ZzSrydufBEFntRPzAk/WYdbikoJxBc/nvQH6rgDYFeEGZ4JY
- MGCgy+mdlUi1TsYhHeK+B0cy1U1dOhz5UVDBm5w2RC34O10efxZzfqjKUax1i7qRIbyyN/i58QT
- HJgEz2NV9nyailepdMwuz40zjQ9nZoA/mMfFSTeTWZfVhJ/No1E+GWSx+bfZP3vDyzmI3kfMgyq
- fwI4XteNIFDs/4x0P28jK3aTSHSi3jNC+18lNtK+yV5I8jgAwTFg==
-X-Google-Smtp-Source: AGHT+IGRIjtP7slf1YAsqy9ZRi+k7JCuLEMvIWATb9pvLHDDfebsbr0JcmqpIqEimBU+ZQEMsmH8lg==
-X-Received: by 2002:a05:6830:dc8:b0:7c6:8c73:aafb with SMTP id
- 46e09a7af769-7c744594aa5mr838806a34.35.1763071710798; 
- Thu, 13 Nov 2025 14:08:30 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1763071797; x=1763676597;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qoaOsPe+HhSGnkjavoGm17+q0dy+W9CS9lcJtQD8OD0=;
+ b=q4QsVyyFf8FFwAgRp67q0gGR6S7P0QrJAXV0oQ9AIS40izpCcDLH8VM41WApSpDulK
+ 6B4QIcdxPSpuSfjhMljMEl1h0bf6NGe8McAbG2kdB1fbDgqPiZZLQb1Bn0HmDgiNM92S
+ wNB929ASXPAh97Rw/2+l6+PuoYnpuuOorMuJKs3IsNEAOM+OXoAuQnbFR3pBR9hrMzIq
+ klVL4/TOYAfXe0C62EZ2i0KCqf/+xvC+U9opI80+MHcKQb6e5tlayh3Sa2HHoBZ1Yn78
+ dEZC0MuN2EenbTOUfB/hFoVwj1Uuf8F/7MVk7BQok8Qp2Q/CeYrtlJFTHI4Vlbj2GnSa
+ VdHQ==
+X-Gm-Message-State: AOJu0YxDNpdQKYVQFuT6yjRo54c/78EpKzqC1mi+tNx7z0/aiTzXo/DO
+ qt1VZ4fVUyS/eTgOYyEVEwkrOpWNMDZWfPKZ4SvogDx3WD5nwst1ytqWAF1EHFevY9qp5l7Pcjl
+ ll2DYwyDEgg==
+X-Gm-Gg: ASbGncuLXzDekI/Cqr3mTlRXZsjNoKqPMM+1ze1UFVbyB9XtyCKl04KmWK4BntAjc3/
+ HHhtalzYNaNqvuTYWpzUsHGy05BUEJ0w7qaNryom1QTXJyDgYg1z2nSJcRX2H/Ab+Dfj15BLBmI
+ SGPkHMoQpVUx4vqUf3bBtFw8cNpd0REEhRyEorhmHPGwQw0GLFpJPVknjqkVu/5EPYuWnpoCAgQ
+ QN6oH13aKsKqmhKrzN5h9s2H7ngEGbWmAUGDu3TYTMKypSosfoDTwHIHBWlhOKmZUdqtW7VKWtw
+ qFYCY9JCJ4hYnZO0dZZUayxNXZIVIKAAudFHW8NUcx34IsuMElR3hv8uB6rIIIznBTkbTcJMEHv
+ 9n8K1NytdS9B3FbdihWrXHuCfZGWYrFEJlPH35f5ViYCpxhCfsRnTHRrnJB42PG5pC4Z9kT53EW
+ hIdubUaTitl1DnV+ME0mB1fdzcwhoCTtfVYE1sNPCXFcpfxfIVWszl
+X-Google-Smtp-Source: AGHT+IFTZ+mo6xU6wWVAY9PnAELKYVX3IvoMvJFyrZnwz5TZCAy2ZTCm/O2SjnmgRhXRocA3X6yruA==
+X-Received: by 2002:a05:6830:348f:b0:79d:eccc:96eb with SMTP id
+ 46e09a7af769-7c7445d6dd3mr850314a34.26.1763071797752; 
+ Thu, 13 Nov 2025 14:09:57 -0800 (PST)
+Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c73a2c2602sm1879159a34.15.2025.11.13.14.08.30
+ 46e09a7af769-7c73a29cdd8sm1881275a34.11.2025.11.13.14.09.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Nov 2025 14:08:30 -0800 (PST)
-Date: Thu, 13 Nov 2025 16:08:28 -0600
+ Thu, 13 Nov 2025 14:09:57 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] Dockerfile: Include python3-tk for FATtools
-Message-ID: <20251113220828.GS6688@bill-the-cat>
-References: <20251113205733.1818836-1-trini@konsulko.com>
- <eddacbad-b443-4597-ac18-fd9265b9ef2d@mailbox.org>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+Subject: [PATCHv2] Dockerfile: Include python3-tk for FATtools
+Date: Thu, 13 Nov 2025 16:09:56 -0600
+Message-ID: <20251113220956.1833225-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OzpsgFJ2MWjzJzaz"
-Content-Disposition: inline
-In-Reply-To: <eddacbad-b443-4597-ac18-fd9265b9ef2d@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,54 +93,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In some cases our tests for exFAT don't run because we fail to be able
+to create the underlying image. This is in turn because while creation
+of the image succeeds, it seems that some way of how we invoke FATtools
+wants to import tkinter, that fails and so the test stops there. Having
+tkinter available (and then presumably a fallback to non-GUI because
+it's not available) leads to the tests running as expected.
 
---OzpsgFJ2MWjzJzaz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v2:
+- Alphabetize, per Marek
 
-On Thu, Nov 13, 2025 at 10:37:17PM +0100, Marek Vasut wrote:
-> On 11/13/25 9:57 PM, Tom Rini wrote:
-> > In some cases our tests for exFAT don't run because we fail to be able
-> > to create the underlying image. This is in turn because while creation
-> > of the image succeeds, it seems that some way of how we invoke FATtools
-> > wants to import tkinter, that fails and so the test stops there. Having
-> > tkinter available (and then presumably a fallback to non-GUI because
-> > it's not available) leads to the tests running as expected.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Marek Vasut <marek.vasut@mailbox.org>
-> > ---
-> >   tools/docker/Dockerfile | 1 +
-> >   1 file changed, 1 insertion(+)
-> >=20
-> > diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> > index d2384219c06a..f62513b86b2c 100644
-> > --- a/tools/docker/Dockerfile
-> > +++ b/tools/docker/Dockerfile
-> > @@ -127,6 +127,7 @@ RUN --mount=3Dtype=3Dcache,target=3D/var/cache/apt,=
-sharing=3Dlocked \
-> >   	python3-pyelftools \
-> >   	python3-sphinx \
-> >   	python3-tomli \
-> > +	python3-tk \
-> Keep the list sorted please.
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+---
+ tools/docker/Dockerfile | 1 +
+ 1 file changed, 1 insertion(+)
 
-Ah whoops, k does come before o.
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index d2384219c06a..91edd22918b4 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -126,6 +126,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+ 	python3-pip \
+ 	python3-pyelftools \
+ 	python3-sphinx \
++	python3-tk \
+ 	python3-tomli \
+ 	python3-venv \
+ 	rpm2cpio \
+-- 
+2.43.0
 
---=20
-Tom
-
---OzpsgFJ2MWjzJzaz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRZW2AAKCRAr4qD1Cr/k
-Ct5IAQDvKw02SoDoJCOjVSZT4JNGKVL4DLfutOXHbNli43wk7AEAyq54cfO1tixQ
-2cJdbt8p/2P2PZ+FRFgRGDH6kCgSwgw=
-=CunV
------END PGP SIGNATURE-----
-
---OzpsgFJ2MWjzJzaz--
