@@ -4,84 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE6DCD6E71
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 14:36:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AEAECD6E6C
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 14:39:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36B5583E86;
-	Thu, 13 Nov 2025 15:36:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id E9E9883E86;
+	Thu, 13 Nov 2025 15:39:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="HSsTDph0";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="jwe0WwG+";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="Ll6lgoXR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13B8683E86; Thu, 13 Nov 2025 15:36:17 +0100 (CET)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9B36A83E96; Thu, 13 Nov 2025 15:39:27 +0100 (CET)
+Received: from delivery.antispam.mailspamprotection.com
+ (delivery.antispam.mailspamprotection.com [185.56.87.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 641D68394E
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 15:36:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4529D8394E
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 15:39:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-b98983bae8eso499651a12.0
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 06:36:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1763044573; x=1763649373;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lRkiR1VGtb+CJQ7EwAwY1IeFpfYP5dyzVZPfqTK2fIo=;
- b=HSsTDph0TONep+sUBBABxfCuMH9LeiRGkP88WfwQxFyEM9l823y8TE+/rBX9VhBGSq
- zOnZmFK1p/0Uv+AWlIjXAISX8EJKChDqHsYdqQqMickzsDtfFpT+BJM2JyuVQqPBlh3T
- P+TzDoSO/iYwVidA78WQl3NCUH4HArDHJwa4I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763044573; x=1763649373;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lRkiR1VGtb+CJQ7EwAwY1IeFpfYP5dyzVZPfqTK2fIo=;
- b=w/PbDoEFR5QI17WoL/jQrVrjo5J3NJZrJ1szSEYuHIXkG4gTzyxUZdQuzh9tCYENVe
- KGSEkhJvPDN43KipNZqAeri718sKtSOvzUCNgCRT3xsIZp26jwxuCkN9JuCMLupwClOG
- d7R9dEuNOmpCSjOditbVt66WOh+Gpjvn+JDxPVYL0H6MGJ0t+R/VWZ++J27ms/Kw9YJD
- p9KxnDrqEKVYrAfXia6mmG2ZAs7gxR4NAH/ExlMVBZCLkY5eFKjw6P/6xhCWD+GdZYcW
- QsWItebOCCbdAGkrdI8g6g5WV8MhdoETCZwfv6SG27hXofZGL5nbSf7jEuNJ4qRHnsJF
- a2Ng==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWzfUwthw1aWNu1ua1jkEClThC3qngLZLyCrcQiPU8pXXQKqkcnGKImWux15xM2/SXeCRiovWA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzsqLSB009yi26G/RuR10VIf5za4FrkkjDKSdypr9+vEAC0BV4Z
- nBdPAaJ84jK+hgNGLEQGNiWAyfhzrrI0DJFIomBYj9qZlFJL8Tfayu3JbN+nlTXjyffbFr4kHfW
- CmNCy0KLyYYeBFd/sk9Vfg4EDX7W1pT8zFD9qev6W8Q==
-X-Gm-Gg: ASbGncs/UeiS8iZo8S7NAjJf2d+vnnj7xpx8x0w/0VnpbDYrBU/uJHpPsNV3qUSV/OD
- MXqRbr0/GE45NQb111N4zWdxe7S8CbbdhcA83/O6E9p+1jcX1wmjBq9nJg1tUHry0NGy2VgleLB
- Id5rlYB7Hy+b7OdpguqC84TlyCfEI1YG4c8Sr9B9jtJ33xm2Iko0gEO9QizM9x7gU0W1VJbr1k+
- OewGJNsaAAUk4YjPHDgW6PgZ1Lw8AP2U47Jnsl6lsIw0XuiNGT0JW6HxU+i2ZTdpwa4VrzAOfsm
- cueerfekKfujMA==
-X-Google-Smtp-Source: AGHT+IHt/cvO6YmIeQyHLAKTecKG74H0Elk5xO5qerZ1l2tDTkOaq58T3UyK6pNZ1nEJJllfEcyy5voB4U7cYH98wPY=
-X-Received: by 2002:a05:693c:40d5:b0:2a4:3592:cf6e with SMTP id
- 5a478bee46e88-2a48b5246f3mr1791eec.18.1763044572633; Thu, 13 Nov 2025
- 06:36:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=valla.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@valla.it
+ARC-Seal: i=1; cv=none; a=rsa-sha256;
+ d=outgoing.instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1763044765; 
+ b=GAO9B3WjEnMD5r62yQXBw1u+gh7PFeRfDh0ibbPDqJcs012lkgLSYS84IjsL4rJ5rilvV8pmYi
+ jpZ2pxp2Y5RS0jwicVe3yx9cGvwkic/f1cG0K7gY/uIime+CBBQOHfghSAT+FiUJdvty6iNReX
+ QNfjWJVbMbRpnmt7iQezFaDl93w4AUVIk5GA1ahbAZrDTZcBYRzDd7pIsAHtqjL7WE1JTR+x6t
+ 6aKDPpzp91xyrzn8Yohcmomb4WGtWfpyT79UR4pBP//A0y9Dnl1cc8N04zfjHdZk3ei5sDZVxN
+ kaPpxTLW+1JdUMlus2CKwsWZKbGN5OFOlf6YXA6cDMw4hA==;
+ARC-Authentication-Results: i=1;
+ outgoing.instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com;
+ smtp.remote-ip=35.214.173.214; 
+ iprev=pass (214.173.214.35.bc.googleusercontent.com)
+ smtp.remote-ip=35.214.173.214; 
+ auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+ dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+ arc=none
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
+ d=outgoing.instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1763044765; 
+ bh=NeJK8em8Z5opohseF6YgXbUEJndECdJgV4+PP896Bl0=;
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:DKIM-Signature:DKIM-Signature;
+ b=iCwHptnW8t59zhgH2hq3Mz/kRycoait6rWks89NuSQgBPyIZIs9B3b480koFCU+Rc8hYPebA49
+ q5NLQHq7BEI9bDMhh5Kh/xa1bC4bleAknaRGHw4M3XVbmypv321V0j7i3r9AhQYor8SWmC0hkK
+ /WLC8qi0Wb68Vpy2YSizuhGxjlEARtShWn5Fl5kxNSPgvIE+DxQ758dw3eEBd9Gc7po2p/IYoO
+ lz+5jLUhqmz70PhZw3YhLj03cfzBzbYS0YzNVkuLKKLTy+aaOPbmkYDIrhnfG3vG2ET+FKXSrv
+ 2e8Dn55IGhi1YkdRbI79ao6Iaeiyi/sqS+/vMVN57Sr6jg==;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
+ :Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Subject:Cc:To
+ :From:Date:Reply-To:List-Unsubscribe;
+ bh=KWcdzDZsHZh73TlqNxd1kybmZoiKu+HW5adhOrPXiTg=; b=jwe0WwG+l10IO/sy8ZX7VTUbPe
+ ifUT50TbuVfp+VQDbSxtO5xDfid8lg6HmCZmSz7aUV7gJ+vSXsgFuZJ1+zZurb+tkI/YcEMdhozr8
+ ZBfobX54UJEcqjnHVswfvqGAomcKId1nZOpHx6GsVRhB7HonXWQ7JQp4K43uD2G+Zjhc=;
+Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
+ helo=esm19.siteground.biz)
+ by instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com with
+ esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.98.1)
+ (envelope-from <francesco@valla.it>) id 1vJYTq-00000004TW5-2SUx
+ for u-boot@lists.denx.de; Thu, 13 Nov 2025 14:39:24 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
+ s=default; h=Subject:Cc:To:From:Date:list-help:list-unsubscribe:
+ list-subscribe:list-post:list-owner:list-archive;
+ bh=KWcdzDZsHZh73TlqNxd1kybmZoiKu+HW5adhOrPXiTg=; b=Ll6lgoXRV+tb2DV/N97qhPcpAX
+ uEyO7kp/GYhbmQy4teihPW1BJ/szfN9CbAuZr4enyONO7X2b+uj3rN3pCjm5e5aE9obcFjsrjVjV3
+ zUQQv7lAMQvnUWHMdtF7tcKwkEgbonkM+MOYDzxgHPJjRR6DR7M8JlWnV8poJo8REO80=;
+Received: from [217.201.253.235] (port=36171 helo=bywater)
+ by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.98.1) (envelope-from <francesco@valla.it>)
+ id 1vJYTl-000000009Ly-1DLY; Thu, 13 Nov 2025 14:39:17 +0000
+Date: Thu, 13 Nov 2025 15:39:16 +0100
+From: Francesco Valla <francesco@valla.it>
+To: Javier Viguera <javier.viguera@digi.com>
+Cc: Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: Re: [PATCH] imx91: fix ENET1_TD3 pinmux for GPIO function
+Message-ID: <aRXtlIBXvl-nBriQ@bywater>
+References: <20251111-imx91_pins_fix-v1-1-f9347f896cd4@valla.it>
+ <CAOMZO5AD6BQP3WhcP_NBMm33Fs2Lxao7yvbC9DWrPz8q3_5nNQ@mail.gmail.com>
+ <dff97ea3-5b81-4624-b120-ba43da8b280c@digi.com>
 MIME-Version: 1.0
-References: <20250703170253.1231818-1-miquel.raynal@bootlin.com>
- <87frcwexyt.fsf@bootlin.com> <875xbegt1x.fsf@bootlin.com>
- <20251113142745.GI6688@bill-the-cat>
-In-Reply-To: <20251113142745.GI6688@bill-the-cat>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 13 Nov 2025 15:36:00 +0100
-X-Gm-Features: AWmQ_bmc54yWh5FMC_CJ5JN6T0mhqj3UE_bMA-lxmuD4eRrLftb9SzVlBaEnN70
-Message-ID: <CAOf5uwn_ggFp-KW6qDcKYn1kKA6+FabyQLCT1ecVoBdv9s3UqQ@mail.gmail.com>
-Subject: Re: [PATCH] mtd: spinor: winbond: Describe several chips
-To: Tom Rini <trini@konsulko.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Vignesh R <vigneshr@ti.com>, 
- Tudor Ambarus <tudor.ambarus@linaro.org>, U-Boot-Denx <u-boot@lists.denx.de>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, Steam Lin <stlin2@winbond.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <dff97ea3-5b81-4624-b120-ba43da8b280c@digi.com>
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - esm19.siteground.biz
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - valla.it
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SGantispam-id: 774e49e0289a8848e1e2f283234eb951
+AntiSpam-DLS: false
+AntiSpam-DLSP: 
+AntiSpam-DLSRS: 
+AntiSpam-TS: 1.0
+CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
+CFBL-Feedback-ID: 1vJYTq-00000004TW5-2SUx-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-cnd8.prod.antispam.mailspamprotection.com; 
+ iprev=pass (214.173.214.35.bc.googleusercontent.com)
+ smtp.remote-ip=35.214.173.214; 
+ auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+ dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+ arc=none
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,61 +133,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi,
 
-Conference. I will pick him up this weekend together with others. Sorry for
-it
+On Thu, Nov 13, 2025 at 02:33:05PM +0100, Javier Viguera wrote:
+> On 12/11/25 22:15, Fabio Estevam wrote:
+> > Hi Francesco,
+> > 
+> > On Tue, Nov 11, 2025 at 10:19 AM Francesco Valla <francesco@valla.it> wrote:
+> > > 
+> > > Fix a typo in the GPIO function for the ENET1_TD3 pad, aligning it to
+> > > the function specified in the datasheet.
+> > > 
+> > > Fixes: a9d562daa3c3 ("imx: Add iMX91 support")
+> > > 
+> > > Signed-off-by: Francesco Valla <francesco@valla.it>
+> > 
+> > Nice catch!
+> > 
+> > Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> > 
+> 
+> Just for completeness, I think there is another one:
+> MX91_PAD_I2C2_SCL__GPIO1_IO3 should e MX91_PAD_I2C2_SCL__GPIO1_IO2
+> 
 
-Michael
+Another nice catch. I'll send an updated patch with this fix too (and
+your R-b tag).
 
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+Thank you
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
-
-Il gio 13 nov 2025, 15:27 Tom Rini <trini@konsulko.com> ha scritto:
-
-> On Thu, Nov 13, 2025 at 10:50:34AM +0100, Miquel Raynal wrote:
-> > Hi,
-> >
-> > I am manually adding Michael, as apparently he was not listed
-> > automatically.
-> >
-> > On 09/09/2025 at 12:12:26 +02, Miquel Raynal <miquel.raynal@bootlin.com>
-> wrote:
-> >
-> > > Hello,
-> > >
-> > > On 03/07/2025 at 19:02:53 +02, Miquel Raynal <
-> miquel.raynal@bootlin.com> wrote:
-> > >
-> > >> All these chips are dual and quad capable. They are also DTR capable,
-> > >> but the core is not yet ready for that.
-> > >>
-> > >> Performances of all chips are comparable at 30MHz and are as follow:
-> > >> Eraseblock single read speed: 938kiB/s
-> > >> Eraseblock dual read speed:  1068kiB/s
-> > >> Eraseblock quad read speed:  3751kiB/s
-> > >>
-> > >> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> > >
-> > > I believe this patch has been out for more than 2 months and is simple
-> > > enough, any plans for taking it soon?
-> >
-> > It's now been few more months and I haven't been notified this patch got
-> > merged. It is also not visible in upstream U-Boot. Could we please speed
-> > up the merging process, especially for such simple change?
->
-> Jagan, Michael, Dario, do you need some help with the mtd/spi related
-> patches? This hass been going on for some time. Thanks!
->
 > --
-> Tom
+> Regards
+> Javier Viguera
+> Digi International Inc.
+> 
 >
+
+Regards,
+Francesco
+
