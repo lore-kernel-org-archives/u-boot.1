@@ -4,66 +4,192 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F0DCD4F28
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 06:48:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D246FCCFA18
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 07:04:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5063E83DEE;
-	Thu, 13 Nov 2025 07:47:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C63683D77;
+	Thu, 13 Nov 2025 08:04:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IQBhnlgp";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Bgw0tpms";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A215F83DA7; Thu, 13 Nov 2025 07:47:35 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 7198583DA7; Thu, 13 Nov 2025 08:04:28 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5875283DCA
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 07:47:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C0E8B83C62
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 08:04:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id EE2FC40A18; 
- Thu, 13 Nov 2025 06:47:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763016450;
- bh=lElHFntk59h4WabfODOLQ8om7PTe70Ml/u44S2euOSY=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=IQBhnlgpEc1bUgiLA0B/qDUaE7yG5fxdpzZ7xxRS+JopvC4QoylvUxIvf7uSqjjg4
- 2I0EXVJ3zsi562p0cN0Wp3gGdZjav+xlGslfCtWRiDwPqqrt4uvo+s3g0QKyKy5hJR
- xvncuSV5wXxA0+n+TXaQKvNm8Jkot1UmbuHUUxmSjAOcUWUT7049g/JZXoKK2rdX3K
- UQ132XmYS6oztw6hM69zUUn3kU0ZCmVoSyiMjfxcN10pycF2lpcZMuwKgY91U5uJjp
- JYW2xjE6rUQt6JIu/b9JwyOUtXEcdOArg8PtbxHQKu7QhgjeTuD9QBqRoOCQT1Kftx
- 3e77RFtnCCuYupJCC/9KPi8duPaVf/wpJ63eoVYxzc2ISsP65qdUqcVmKfz44aDrvf
- Yvp7UiNn09GSRPnnbBVoy2FGQvtkOGc0oanZEzT43IoBvTpJWNcpWyYH0LtpFNx/ye
- LOQRgf3/OIl9caE6Fw5t/ejg+/rmOhNj1GQnPqGNkYjCg3DsEwV/GwlDCJo1rNt93h
- t3TjHUZV2hCJ+EzQcEGTC2h7zBnzU+aoRDXj1UeKm8d4jx2Rdt8Y2vet+oiX/RkEle
- ZOUrx+SJFzLUwPL7D1N2/NOQWDGWxib8HOT4sGrGwEmMbaCLIrsm7VOlED39sFsz/d
- +MXeA/g9QEDqEgWSOpgsqUzs=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <simon.glass@canonical.com>,
- Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
- Claude <noreply@anthropic.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 6/6] fat: Use standard types for fixed-size values
-Date: Thu, 13 Nov 2025 07:46:56 +0100
-Message-ID: <20251113064656.245394-7-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251113064656.245394-1-heinrich.schuchardt@canonical.com>
-References: <20251113064656.245394-1-heinrich.schuchardt@canonical.com>
+ smtp.mailfrom=prvs=34122f89ed=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5AD6uAGT3059037; Thu, 13 Nov 2025 08:03:59 +0100
+Received: from duzpr83cu001.outbound.protection.outlook.com
+ (mail-northeuropeazon11012054.outbound.protection.outlook.com [52.101.66.54])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4acreu3nnu-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 13 Nov 2025 08:03:58 +0100 (CET)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=t2KAWgrPw82IyXzpYnGPsoGsRIq7RsCtwioR+9R5LOPVZUOVDn9iHFn6Udi+7UiZepO5CCOPGhhWh7B4Yj5cBXKzrC0GfIGbm277XS3mcUHzKgoO5iuGsknqPiP7Sa6a3CkYTPO1pI9mCdfbYGf5whQ4cNZe50cbQNhvZeTsuCnicK9RYNo7/41HYkfn+oZ5G2kpGxr6ORKfODmiFH4UeK09qrPy4nprqR4kpIJoC99jXCgpesCoyY8OUjq2KYz9siyb10TyV5W2F6riQuSzTrHh+UHeLFIzYvZCWVSEoc0+4WqLSpQWOV36znix6AM1iVp6c0KRJS+kwxpRwjl8DA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=R77zIw57hr0lASCGdTcfHfhcY1wHPcxXhWzfSZt/OrM=;
+ b=gjJHVAiPPjD+7U8UxIAchaMcK1tY7UKWOrJ3Icxo34CosCc5AaY7dgTLDUDCru4BuqCzcHh5yDzZX2YLT0c67jy5HpUyvQ+RoqjlDymB6pOTbFyrcu0MRWzQEyQ3vK9zbS717rX+/nG7Y5e6vrX0S+S0HmKpWc25PsYgph8ciju66uwX+Z66G8q91W84EO9e/ExHh6Rl75a/bwM9ArTBS/Oyre6wjXd8XApPM8nDCbk9Hfo33yhw67hqdg5Kxmsb9/lCfMzTZNwh0kKPAb/ErGA4qLMenQyO9jIRllUciYrHQbmGPHDUAgpK4plHLy5y/ehmyUGGtrulyN+r6hYGsQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=0leil.net smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=R77zIw57hr0lASCGdTcfHfhcY1wHPcxXhWzfSZt/OrM=;
+ b=Bgw0tpmsfmt76E6Evw3QBdI4gxnAPl8dtI90Awoly8xeMDImAjg/mR/l1QG/wX9Om9mpsevaaghm7+5ZR8N5+plomwE2fdAfZixZ+ddwGeF1o2Yzjzto9SklxqDE+IeePlQK7gwoKBNLUWQTZtZMpXd0zSA9Lq/SnKuh5UUMh4jtr9cRPVrjEihr0R819b1woKbYRdUsEFzTBogLBye4TwWncXG/6mH0ycXuAM+4hVrxqNum3zGTCM8XNlHP49e0v9X9dmaWoAoev/EYuSv2BCIWWHn1EqX0Bf1cXuJnJBb5Nu+Ag0/rFcyho/gZJfekNN/8s3Ihb1qfEJpv+Jol5w==
+Received: from DU2PR04CA0164.eurprd04.prod.outlook.com (2603:10a6:10:2b0::19)
+ by PA2PR10MB8328.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:419::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.16; Thu, 13 Nov
+ 2025 07:03:55 +0000
+Received: from DB1PEPF000509FA.eurprd03.prod.outlook.com
+ (2603:10a6:10:2b0:cafe::85) by DU2PR04CA0164.outlook.office365.com
+ (2603:10a6:10:2b0::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.17 via Frontend Transport; Thu,
+ 13 Nov 2025 07:03:55 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB1PEPF000509FA.mail.protection.outlook.com (10.167.242.36) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9320.13 via Frontend Transport; Thu, 13 Nov 2025 07:03:55 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 13 Nov
+ 2025 08:04:04 +0100
+Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 13 Nov
+ 2025 08:03:53 +0100
+Message-ID: <9e1ac6f7-ba6a-42d3-b70c-c2eca078eecb@foss.st.com>
+Date: Thu, 13 Nov 2025 08:03:52 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/11] led: remove u-boot, boot-led and u-boot, error-led +
+ add cmd doc
+To: Quentin Schulz <foss+uboot@0leil.net>, Ziping Chen
+ <techping.chan@gmail.com>, Simon Glass <sjg@chromium.org>,
+ <u-boot@lists.denx.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>
+CC: Tom Rini <trini@konsulko.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, Johan Jonker
+ <jbx6244@gmail.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Klaus Goger <klaus.goger@cherry.de>,
+ "Eugen Hristev" <eugen.hristev@linaro.org>, Durai Manickam KR
+ <durai.manickamkr@microchip.com>, Stefan Roese <sr@denx.de>, Zixun LI
+ <admin@hifiphile.com>, Yegor Yefremov <yegorslists@googlemail.com>,
+ "Quentin Schulz" <quentin.schulz@cherry.de>,
+ Alexander Dahl <ada@thorsis.com>
+References: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB1PEPF000509FA:EE_|PA2PR10MB8328:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9b08f060-e334-48b6-d3d4-08de2282cf40
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|7416014|376014|82310400026|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UTJ3MWk5cnRPK0dvenhJZmlUeTBYTk9YL3BoWjFZK0hIZzY0SGFnVldRdEVj?=
+ =?utf-8?B?QlA3WTNDcnVaSDVKVlhuOTlBQW51cnFEMGN5OUY1TEVtQk9oeWVvbEdWaEVr?=
+ =?utf-8?B?QkN4QzdCbHNqbXkxclR0Q3lDR2hrVjNLT1djTUlHSmFPVVZXTVlZZllRVjdK?=
+ =?utf-8?B?T2ladFVFY2x0bDM4NkJaa0xpdVhQNnNQa0dmZ1Q1ZTZpUWVHYUNaSXR5ekc2?=
+ =?utf-8?B?MHZ5RlNGbGZUdyt0SGM2dVhmYmhVSTRrN0FCdFRuMk9DYWZIRG5WTkhJWldw?=
+ =?utf-8?B?VVdwN3VNNHBFT3BsRFBXd1Q0VWxpN0Nta1kvUm4vR1BHZFNvdG9CZkpsc2ts?=
+ =?utf-8?B?dVpJMnlMK1N4NHVVUCtiVkx5bzE0U05pVjJCRkZJNzVoRHNkajBFQ1NVL3hK?=
+ =?utf-8?B?bXVPREZaNnVQeTZEOWlkYWNKNlZOZkE4R2RxanQ0R3Vlb2lDV2Jyd1JieENS?=
+ =?utf-8?B?ZFpnVktWekdtS0ViRm5aT3ducVFxekJtRzE5YnoxWnBWS1NkZUlMYmMydzRv?=
+ =?utf-8?B?Z1ZoKzBRbHlTandzeVFjcVRiNW9wYUQ1dWVUcUxvaEtkU21WK0ptTUViTG9l?=
+ =?utf-8?B?dU9ZUGhEOW1QWXpxblBzRy8vTFltVnBGUXlPZkkwWWpvU0JOeWdUa012eS9B?=
+ =?utf-8?B?d2VBeG9UZWt3eHYrTG5MbnpyR3EweTFCZ3dDT0dhY21ZZmloVEVzelNDSnJO?=
+ =?utf-8?B?U1BMSFpXdlFib0FOL2l4RGwrQWFTNEVqRWVOd21yMWt2WDJ2MTlaK0JHTFVD?=
+ =?utf-8?B?blRVSW9zRFhzTHJmV3JURm5sd1kyV01wRWl2czFzaW9ieDErS1dUS21ZRnl0?=
+ =?utf-8?B?U0pKMkpsZHp0bVBEWkJ4d2R0RUV4RnIwRE0yYVlzTG5ORFRRa0QrVUNmZHNi?=
+ =?utf-8?B?M0kyY25tYjR4UDV0MHhNYUlQVWdkcWk1SGRxOUFiSDRqWkFjMnAxRWd0a1NS?=
+ =?utf-8?B?TklZREcvaEVIREliZmFwSUFrb213QVNsTFVtSWZYSFZHTTZLSDZRUEtxaWEr?=
+ =?utf-8?B?RVFQSVdlbFNCSVJ6KzYrTkRaVVJUU1JXcS9jaFNKRWVmTklWbUNReWxPQ1h1?=
+ =?utf-8?B?c0VYRzQya3U4Y1hKa1UweGQzcys3eUZLcTdrNkk3T096ak84TlhWeUYwN3Z3?=
+ =?utf-8?B?SjZQQnBmak9BVFQ5YkxvcUoyRmxhRzNxRFQwZTNrejhRb0tuRFZvZFlZSzl1?=
+ =?utf-8?B?QzZIL0hROThWVzRoaC8zK3JuYzRSa0xIYU5RYStMM0Z3dXg0RExCZDNaOHlt?=
+ =?utf-8?B?WE5wTXJnTDBHSkdLdEZQU0JPSEQ5S0syOE9NcnlHUHgxK3M1VmQxTXh2MXBC?=
+ =?utf-8?B?TktDUlVjbThDdXY5NlpxVUtockZycFVXbUdUQXVHR3BoM2d6RVQ4UmF6UFFh?=
+ =?utf-8?B?TWh4TDJqNlZwSkpiMG83dzJ3bi9zYVBjODdLWnViWHVLU05jbUwxS0VQZmY4?=
+ =?utf-8?B?NGRFTzRvL2V6TFpETGR0UE1tOWJOaFpjQzhvaWlPazBGV3FLOS9MemZSNTIv?=
+ =?utf-8?B?aGN5b3c2NEZ4RHU0a0xwSHRSMHVuTHZ2d3NtTFE5S0RiLzdyWVp6N0VUR0pp?=
+ =?utf-8?B?R2h1VHpnK2ljOXZ6V3l0aWdjMC94d0UyazBtVkNDeUFYOG9oeGVmVGk1aDg0?=
+ =?utf-8?B?aVN3ZkFBOEZrNW4rekNVVnZrdWlhUGV3VnFHZnJDdFpvK1VPbExGWjF4Z0ha?=
+ =?utf-8?B?U2ZTYnhMSEpJeVFUZC82N1ZmUCtkdERrbktlbTRXSStrenJDejVmUkl1bDhk?=
+ =?utf-8?B?ZER3NUhrSmFWdm5vSTFZUlM0WFFhM2RFZjhReDMwS25RN3VkR3ZpalVOemtk?=
+ =?utf-8?B?TmlKc2kzZ09XZ0ZoS2lVcjdtNVk3L1U3WmdBZDN0dWNscFFZZGtVQ2tGN3cw?=
+ =?utf-8?B?a3c3U0g2bVFod1hXcEdqM3ZQQmoySjZvQUw5V2hDdFAxWU4zaDhSei9CT2M4?=
+ =?utf-8?B?V3JTdFJNcG5LL2t2anh6MFVTUzRIZDlpcFFoMzUxNmpPM2pBQVhWZ2Vza09i?=
+ =?utf-8?B?a0Z0YTlGQTg0Q3F0WFlzZkx3OGs3KzJqaTROOXNpWVowbTVSZGdGZkR2Vytr?=
+ =?utf-8?Q?hXJb6e?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(7416014)(376014)(82310400026)(13003099007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 07:03:55.0404 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b08f060-e334-48b6-d3d4-08de2282cf40
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509FA.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR10MB8328
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEzMDA0OCBTYWx0ZWRfX1AINOcGu4TBh
+ B2jN6yZ7gcuvXHxHIEFGlGpe82gTrGBFGteZJW2boNfypLhqomVWcHjckxnV2IBuMIS3gDG2ojF
+ nNFz4pX5M9/UGyaSD6/RW9gaYpu2AyHHFJdWzPA/ilTEGaSDuCsAtqk0WLXkqXD+UrptWFmTrb5
+ tZG0IjZAT1sow6WeU/8jXDM6JE+7TFyVXa1taSf4BXnji069om+D/dSTKbILGjxlc16s6DTojsR
+ 3F2aX2fEbwYXRzpuT4LYEU+RFoN151yw1apBg+Rmq/a8YlIrJvOvpRMN70E41tbhFbwNEV3LNjX
+ DuhgWQS5W5pAqwTovAP/9YaqRjwANwQfX3ubJBJsn3LFLM+dn3SwjskKyqt71yp7oVXsUKCfukS
+ mAIdB+/R5y7ckQnMbZRYQmqcboksrw==
+X-Authority-Analysis: v=2.4 cv=D+hK6/Rj c=1 sm=1 tr=0 ts=691582de cx=c_pps
+ a=TPI4aLKDjCd1EbHbt8/hbw==:117 a=d6reE3nDawwanmLcZTMRXA==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=IkcTkHD0fZMA:10
+ a=6UeiqGixMTsA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=8b9GpE9nAAAA:8 a=YG64nluAAAAA:20
+ a=mK_AVkanAAAA:8 a=N90x5TpfRo0ZKSvJ48YA:9 a=QEXdDO2ut3YA:10
+ a=T3LWEMljR5ZiDmsYVIUa:22 a=3gWm3jAn84ENXaBijsEo:22 a=bA3UWDv6hWIuX7UZL3qL:22
+ a=nl4s5V0KI7Kw-pW0DWrs:22 a=yULaImgL6KKpOYXvFmjq:22 a=pHzHmUro8NiASowvMSCR:22
+ a=6VlIyEUom7LUIeUMNQJH:22
+X-Proofpoint-ORIG-GUID: Zmk_7Hirr9x68M8IpQ-S1k4XqcUDnSGk
+X-Proofpoint-GUID: Zmk_7Hirr9x68M8IpQ-S1k4XqcUDnSGk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-12_06,2025-11-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
+ clxscore=1011 lowpriorityscore=0 spamscore=0
+ priorityscore=1501 adultscore=0
+ suspectscore=0 bulkscore=0 phishscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511130048
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,653 +206,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <simon.glass@canonical.com>
 
-Convert all __u8, __u16, and __u32 types to their u8, u16, u32
-equivalents throughout the FAT filesystem code.
 
-Co-developed-by: Claude <noreply@anthropic.com>
-Signed-off-by: Simon Glass <simon.glass@canonical.com>
-Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- fs/fat/fat.c          |  48 +++++++++----------
- fs/fat/fat_internal.h |   6 +--
- fs/fat/fat_write.c    | 104 +++++++++++++++++++++---------------------
- include/fat.h         | 102 ++++++++++++++++++++---------------------
- 4 files changed, 130 insertions(+), 130 deletions(-)
+On 11/12/25 18:48, Quentin Schulz wrote:
+> u-boot,boot-led and u-boot,error-led aren't actually handled by some
+> generic code but rather by board or architecture specific code. They
+> also aren't properties that are part of the official dt-binding so they
+> cannot be upstreamed. For u-boot,boot-led, there's actually a proper
+> replacement which is /options/u-boot/boot-led[1] (+ CONFIG_LED_BOOT=y).
+> 
+> For Rockchip boards, either nothing (for RK3066, PX30 and RK3399) was
+> using that property or (for RK3188) the code handling it was guarded by
+> symbols that were not enabled in the defconfig. For those, the property
+> and guarded code are removed.
+> 
+> For the Sam9x60 Curiosity, it seems that even though the LED is
+> controlled whenever CONFIG_LED is enabled, it isn't enabled by default
+> in the defconfig (but the code was added without modifying the
+> defconfig, explicitly leaving a choice to the user). I decided to keep
+> that feature by simply migrating it to the new API, though I cannot test
+> it as I do not own the device.
+> 
+> The STM32 boards will be migrated in the near future once their upstream
+> (kernel) Device Trees gain the new way to specify this (via
+> /options/u-boot/boot-led). I'll let Patrice handle this, see
+> https://lore.kernel.org/u-boot/94ed1988-13e8-4fe3-bdff-ba2c9973c556@foss.st.com/
+> and
+> https://lore.kernel.org/u-boot/2a3aa43a-ce19-41e1-ab56-556629ce5cf9@foss.st.com/
+> 
 
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index 9e439fc5879..299ee0a8e39 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -44,7 +44,7 @@ void downcase(char *str, size_t len)
- struct blk_desc *cur_dev;
- struct disk_partition cur_part_info;
- 
--int disk_read(__u32 block, __u32 nr_blocks, void *buf)
-+int disk_read(u32 block, u32 nr_blocks, void *buf)
- {
- 	ulong ret;
- 
-@@ -158,11 +158,11 @@ int flush_dirty_fat_buffer(struct fsdata *mydata)
-  * Get the entry at index 'entry' in a FAT (12/16/32) table.
-  * On failure 0x00 is returned.
-  */
--__u32 get_fatent(struct fsdata *mydata, __u32 entry)
-+u32 get_fatent(struct fsdata *mydata, u32 entry)
- {
--	__u32 bufnum;
--	__u32 offset, off8;
--	__u32 ret = 0x00;
-+	u32 bufnum;
-+	u32 offset, off8;
-+	u32 ret = 0x00;
- 
- 	if (CHECK_CLUST(entry, mydata->fatsize)) {
- 		log_err("Invalid FAT entry: %#08x\n", entry);
-@@ -193,10 +193,10 @@ __u32 get_fatent(struct fsdata *mydata, __u32 entry)
- 
- 	/* Read a new block of FAT entries into the cache. */
- 	if (bufnum != mydata->fatbufnum) {
--		__u32 getsize = FATBUFBLOCKS;
--		__u8 *bufptr = mydata->fatbuf;
--		__u32 fatlength = mydata->fatlength;
--		__u32 startblock = bufnum * FATBUFBLOCKS;
-+		u32 getsize = FATBUFBLOCKS;
-+		u8 *bufptr = mydata->fatbuf;
-+		u32 fatlength = mydata->fatlength;
-+		u32 startblock = bufnum * FATBUFBLOCKS;
- 
- 		/* Cap length if fatlength is not a multiple of FATBUFBLOCKS */
- 		if (startblock + getsize > fatlength)
-@@ -218,10 +218,10 @@ __u32 get_fatent(struct fsdata *mydata, __u32 entry)
- 	/* Get the actual entry from the table */
- 	switch (mydata->fatsize) {
- 	case 32:
--		ret = FAT2CPU32(((__u32 *) mydata->fatbuf)[offset]);
-+		ret = FAT2CPU32(((u32 *)mydata->fatbuf)[offset]);
- 		break;
- 	case 16:
--		ret = FAT2CPU16(((__u16 *) mydata->fatbuf)[offset]);
-+		ret = FAT2CPU16(((u16 *)mydata->fatbuf)[offset]);
- 		break;
- 	case 12:
- 		off8 = (offset * 3) / 2;
-@@ -243,9 +243,9 @@ __u32 get_fatent(struct fsdata *mydata, __u32 entry)
-  * Return 0 on success, -1 otherwise.
-  */
- static int
--get_cluster(struct fsdata *mydata, __u32 clustnum, __u8 *buffer, unsigned long size)
-+get_cluster(struct fsdata *mydata, u32 clustnum, u8 *buffer, unsigned long size)
- {
--	__u32 startsect;
-+	u32 startsect;
- 	int ret;
- 
- 	if (clustnum > 0) {
-@@ -257,7 +257,7 @@ get_cluster(struct fsdata *mydata, __u32 clustnum, __u8 *buffer, unsigned long s
- 	debug("gc - clustnum: %d, startsect: %d\n", clustnum, startsect);
- 
- 	if ((unsigned long)buffer & (ARCH_DMA_MINALIGN - 1)) {
--		ALLOC_CACHE_ALIGN_BUFFER(__u8, tmpbuf, mydata->sect_size);
-+		ALLOC_CACHE_ALIGN_BUFFER(u8, tmpbuf, mydata->sect_size);
- 
- 		debug("FAT: Misaligned buffer address (%p)\n", buffer);
- 
-@@ -273,8 +273,8 @@ get_cluster(struct fsdata *mydata, __u32 clustnum, __u8 *buffer, unsigned long s
- 			size -= mydata->sect_size;
- 		}
- 	} else if (size >= mydata->sect_size) {
--		__u32 bytes_read;
--		__u32 sect_count = size / mydata->sect_size;
-+		u32 bytes_read;
-+		u32 sect_count = size / mydata->sect_size;
- 
- 		ret = disk_read(startsect, sect_count, buffer);
- 		if (ret != sect_count) {
-@@ -287,7 +287,7 @@ get_cluster(struct fsdata *mydata, __u32 clustnum, __u8 *buffer, unsigned long s
- 		size -= bytes_read;
- 	}
- 	if (size) {
--		ALLOC_CACHE_ALIGN_BUFFER(__u8, tmpbuf, mydata->sect_size);
-+		ALLOC_CACHE_ALIGN_BUFFER(u8, tmpbuf, mydata->sect_size);
- 
- 		ret = disk_read(startsect, 1, tmpbuf);
- 		if (ret != 1) {
-@@ -317,12 +317,12 @@ get_cluster(struct fsdata *mydata, __u32 clustnum, __u8 *buffer, unsigned long s
-  * Return:	-1 on error, otherwise 0
-  */
- static int get_contents(struct fsdata *mydata, struct dir_entry *dentptr, loff_t pos,
--			__u8 *buffer, loff_t maxsize, loff_t *gotsize)
-+			u8 *buffer, loff_t maxsize, loff_t *gotsize)
- {
- 	loff_t filesize = FAT2CPU32(dentptr->size);
- 	unsigned int bytesperclust = mydata->clust_size * mydata->sect_size;
--	__u32 curclust = START(dentptr);
--	__u32 endclust, newclust;
-+	u32 curclust = START(dentptr);
-+	u32 endclust, newclust;
- 	loff_t actsize;
- 
- 	*gotsize = 0;
-@@ -358,7 +358,7 @@ static int get_contents(struct fsdata *mydata, struct dir_entry *dentptr, loff_t
- 
- 	/* align to beginning of next cluster if any */
- 	if (pos) {
--		__u8 *tmp_buffer;
-+		u8 *tmp_buffer;
- 
- 		actsize = min(filesize, (loff_t)bytesperclust);
- 		tmp_buffer = malloc_cache_aligned(actsize);
-@@ -467,12 +467,12 @@ static int slot2str(struct dir_slot *slotptr, char *l_name, int *idx)
- }
- 
- /* Calculate short name checksum */
--__u8 mkcksum(struct nameext *nameext)
-+u8 mkcksum(struct nameext *nameext)
- {
- 	int i;
- 	u8 *pos = (void *)nameext;
- 
--	__u8 ret = 0;
-+	u8 ret = 0;
- 
- 	for (i = 0; i < 11; i++)
- 		ret = (((ret & 1) << 7) | ((ret & 0xfe) >> 1)) + pos[i];
-@@ -553,7 +553,7 @@ static int is_bootsector_valid(const struct boot_sector *bs)
- static int
- read_bootsectandvi(struct boot_sector *bs, struct volume_info *volinfo, int *fatsize)
- {
--	__u8 *block;
-+	u8 *block;
- 	struct volume_info *vistart;
- 	int ret = 0;
- 
-diff --git a/fs/fat/fat_internal.h b/fs/fat/fat_internal.h
-index cefe28c8d00..7063db62a32 100644
---- a/fs/fat/fat_internal.h
-+++ b/fs/fat/fat_internal.h
-@@ -104,7 +104,7 @@ struct dir_entry *next_dent(struct fat_itr *itr);
-  * @buf: buffer to read data into
-  * Return: number of blocks read, -1 on error
-  */
--int disk_read(__u32 block, __u32 nr_blocks, void *buf);
-+int disk_read(u32 block, u32 nr_blocks, void *buf);
- 
- /**
-  * flush_dirty_fat_buffer() - write fat buffer to disk if dirty
-@@ -121,14 +121,14 @@ int flush_dirty_fat_buffer(struct fsdata *mydata);
-  * @entry: FAT entry index
-  * Return: FAT entry value, 0x00 on failure
-  */
--__u32 get_fatent(struct fsdata *mydata, __u32 entry);
-+u32 get_fatent(struct fsdata *mydata, u32 entry);
- 
- /**
-  * mkcksum() - calculate short name checksum
-  * @nameext: name and extension structure
-  * Return: checksum value
-  */
--__u8 mkcksum(struct nameext *nameext);
-+u8 mkcksum(struct nameext *nameext);
- 
- /**
-  * fat_itr_root() - initialize an iterator to start at the root directory
-diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-index f2aa3402adb..fdb837bfdae 100644
---- a/fs/fat/fat_write.c
-+++ b/fs/fat/fat_write.c
-@@ -194,7 +194,7 @@ out:
- }
- 
- static int total_sector;
--static int disk_write(__u32 block, __u32 nr_blocks, void *buf)
-+static int disk_write(u32 block, u32 nr_blocks, void *buf)
- {
- 	ulong ret;
- 
-@@ -220,9 +220,9 @@ static int disk_write(__u32 block, __u32 nr_blocks, void *buf)
- int flush_dirty_fat_buffer(struct fsdata *mydata)
- {
- 	int getsize = FATBUFBLOCKS;
--	__u32 fatlength = mydata->fatlength;
--	__u8 *bufptr = mydata->fatbuf;
--	__u32 startblock = mydata->fatbufnum * FATBUFBLOCKS;
-+	u32 fatlength = mydata->fatlength;
-+	u8 *bufptr = mydata->fatbuf;
-+	u32 startblock = mydata->fatbufnum * FATBUFBLOCKS;
- 
- 	debug("debug: evicting %d, dirty: %d\n", mydata->fatbufnum,
- 	      (int)mydata->fat_dirty);
-@@ -397,9 +397,9 @@ static int flush_dir(struct fat_itr *itr);
- static int
- fill_dir_slot(struct fat_itr *itr, const char *l_name, const char *shortname)
- {
--	__u8 temp_dir_slot_buffer[MAX_LFN_SLOT * sizeof(struct dir_slot)];
-+	u8 temp_dir_slot_buffer[MAX_LFN_SLOT * sizeof(struct dir_slot)];
- 	struct dir_slot *slotptr = (struct dir_slot *)temp_dir_slot_buffer;
--	__u8 counter = 0, checksum;
-+	u8 counter = 0, checksum;
- 	int idx = 0, ret;
- 
- 	/* Get short file name checksum value */
-@@ -440,10 +440,10 @@ fill_dir_slot(struct fat_itr *itr, const char *l_name, const char *shortname)
- /*
-  * Set the entry at index 'entry' in a FAT (12/16/32) table.
-  */
--static int set_fatent_value(struct fsdata *mydata, __u32 entry, __u32 entry_value)
-+static int set_fatent_value(struct fsdata *mydata, u32 entry, u32 entry_value)
- {
--	__u32 bufnum, offset, off16;
--	__u16 val1, val2;
-+	u32 bufnum, offset, off16;
-+	u16 val1, val2;
- 
- 	switch (mydata->fatsize) {
- 	case 32:
-@@ -466,9 +466,9 @@ static int set_fatent_value(struct fsdata *mydata, __u32 entry, __u32 entry_valu
- 	/* Read a new block of FAT entries into the cache. */
- 	if (bufnum != mydata->fatbufnum) {
- 		int getsize = FATBUFBLOCKS;
--		__u8 *bufptr = mydata->fatbuf;
--		__u32 fatlength = mydata->fatlength;
--		__u32 startblock = bufnum * FATBUFBLOCKS;
-+		u8 *bufptr = mydata->fatbuf;
-+		u32 fatlength = mydata->fatlength;
-+		u32 startblock = bufnum * FATBUFBLOCKS;
- 
- 		/* Cap length if fatlength is not a multiple of FATBUFBLOCKS */
- 		if (startblock + getsize > fatlength)
-@@ -492,10 +492,10 @@ static int set_fatent_value(struct fsdata *mydata, __u32 entry, __u32 entry_valu
- 	/* Set the actual entry */
- 	switch (mydata->fatsize) {
- 	case 32:
--		((__u32 *) mydata->fatbuf)[offset] = cpu_to_le32(entry_value);
-+		((u32 *)mydata->fatbuf)[offset] = cpu_to_le32(entry_value);
- 		break;
- 	case 16:
--		((__u16 *) mydata->fatbuf)[offset] = cpu_to_le16(entry_value);
-+		((u16 *)mydata->fatbuf)[offset] = cpu_to_le16(entry_value);
- 		break;
- 	case 12:
- 		off16 = (offset * 3) / 4;
-@@ -503,33 +503,33 @@ static int set_fatent_value(struct fsdata *mydata, __u32 entry, __u32 entry_valu
- 		switch (offset & 0x3) {
- 		case 0:
- 			val1 = cpu_to_le16(entry_value) & 0xfff;
--			((__u16 *)mydata->fatbuf)[off16] &= ~0xfff;
--			((__u16 *)mydata->fatbuf)[off16] |= val1;
-+			((u16 *)mydata->fatbuf)[off16] &= ~0xfff;
-+			((u16 *)mydata->fatbuf)[off16] |= val1;
- 			break;
- 		case 1:
- 			val1 = cpu_to_le16(entry_value) & 0xf;
- 			val2 = (cpu_to_le16(entry_value) >> 4) & 0xff;
- 
--			((__u16 *)mydata->fatbuf)[off16] &= ~0xf000;
--			((__u16 *)mydata->fatbuf)[off16] |= (val1 << 12);
-+			((u16 *)mydata->fatbuf)[off16] &= ~0xf000;
-+			((u16 *)mydata->fatbuf)[off16] |= (val1 << 12);
- 
--			((__u16 *)mydata->fatbuf)[off16 + 1] &= ~0xff;
--			((__u16 *)mydata->fatbuf)[off16 + 1] |= val2;
-+			((u16 *)mydata->fatbuf)[off16 + 1] &= ~0xff;
-+			((u16 *)mydata->fatbuf)[off16 + 1] |= val2;
- 			break;
- 		case 2:
- 			val1 = cpu_to_le16(entry_value) & 0xff;
- 			val2 = (cpu_to_le16(entry_value) >> 8) & 0xf;
- 
--			((__u16 *)mydata->fatbuf)[off16] &= ~0xff00;
--			((__u16 *)mydata->fatbuf)[off16] |= (val1 << 8);
-+			((u16 *)mydata->fatbuf)[off16] &= ~0xff00;
-+			((u16 *)mydata->fatbuf)[off16] |= (val1 << 8);
- 
--			((__u16 *)mydata->fatbuf)[off16 + 1] &= ~0xf;
--			((__u16 *)mydata->fatbuf)[off16 + 1] |= val2;
-+			((u16 *)mydata->fatbuf)[off16 + 1] &= ~0xf;
-+			((u16 *)mydata->fatbuf)[off16 + 1] |= val2;
- 			break;
- 		case 3:
- 			val1 = cpu_to_le16(entry_value) & 0xfff;
--			((__u16 *)mydata->fatbuf)[off16] &= ~0xfff0;
--			((__u16 *)mydata->fatbuf)[off16] |= (val1 << 4);
-+			((u16 *)mydata->fatbuf)[off16] &= ~0xfff0;
-+			((u16 *)mydata->fatbuf)[off16] |= (val1 << 4);
- 			break;
- 		default:
- 			break;
-@@ -547,9 +547,9 @@ static int set_fatent_value(struct fsdata *mydata, __u32 entry, __u32 entry_valu
-  * Determine the next free cluster after 'entry' in a FAT (12/16/32) table
-  * and link it to 'entry'. EOC marker is not set on returned entry.
-  */
--static __u32 determine_fatent(struct fsdata *mydata, __u32 entry)
-+static u32 determine_fatent(struct fsdata *mydata, u32 entry)
- {
--	__u32 next_fat, next_entry = entry + 1;
-+	u32 next_fat, next_entry = entry + 1;
- 
- 	while (1) {
- 		next_fat = get_fatent(mydata, next_entry);
-@@ -585,7 +585,7 @@ set_sectors(struct fsdata *mydata, u32 startsect, u8 *buffer, u32 size)
- 	debug("startsect: %d\n", startsect);
- 
- 	if ((unsigned long)buffer & (ARCH_DMA_MINALIGN - 1)) {
--		ALLOC_CACHE_ALIGN_BUFFER(__u8, tmpbuf, mydata->sect_size);
-+		ALLOC_CACHE_ALIGN_BUFFER(u8, tmpbuf, mydata->sect_size);
- 
- 		debug("FAT: Misaligned buffer address (%p)\n", buffer);
- 
-@@ -616,7 +616,7 @@ set_sectors(struct fsdata *mydata, u32 startsect, u8 *buffer, u32 size)
- 	}
- 
- 	if (size) {
--		ALLOC_CACHE_ALIGN_BUFFER(__u8, tmpbuf, mydata->sect_size);
-+		ALLOC_CACHE_ALIGN_BUFFER(u8, tmpbuf, mydata->sect_size);
- 		/* Do not leak content of stack */
- 		memset(tmpbuf, 0, mydata->sect_size);
- 		memcpy(tmpbuf, buffer, size);
-@@ -686,12 +686,12 @@ out:
-  * Read and modify data on existing and consecutive cluster blocks
-  */
- static int
--get_set_cluster(struct fsdata *mydata, __u32 clustnum, loff_t pos, __u8 *buffer,
-+get_set_cluster(struct fsdata *mydata, u32 clustnum, loff_t pos, u8 *buffer,
- 		loff_t size, loff_t *gotsize)
- {
- 	static u8 *tmpbuf_cluster;
- 	unsigned int bytesperclust = mydata->clust_size * mydata->sect_size;
--	__u32 startsect;
-+	u32 startsect;
- 	loff_t clustcount, wsize;
- 	int i, ret;
- 
-@@ -806,7 +806,7 @@ get_set_cluster(struct fsdata *mydata, __u32 clustnum, loff_t pos, __u8 *buffer,
-  */
- static int find_empty_cluster(struct fsdata *mydata)
- {
--	__u32 fat_val, entry = 3;
-+	u32 fat_val, entry = 3;
- 
- 	while (1) {
- 		fat_val = get_fatent(mydata, entry);
-@@ -864,9 +864,9 @@ static int new_dir_table(struct fat_itr *itr)
- /*
-  * Set empty cluster from 'entry' to the end of a file
-  */
--static int clear_fatent(struct fsdata *mydata, __u32 entry)
-+static int clear_fatent(struct fsdata *mydata, u32 entry)
- {
--	__u32 fat_val;
-+	u32 fat_val;
- 
- 	while (!CHECK_CLUST(entry, mydata->fatsize)) {
- 		fat_val = get_fatent(mydata, entry);
-@@ -889,7 +889,7 @@ static int clear_fatent(struct fsdata *mydata, __u32 entry)
-  * Set start cluster in directory entry
-  */
- static void set_start_cluster(const struct fsdata *mydata, struct dir_entry *dentptr,
--			      __u32 start_cluster)
-+			      u32 start_cluster)
- {
- 	if (mydata->fatsize == 32)
- 		dentptr->starthi =
-@@ -902,9 +902,9 @@ static void set_start_cluster(const struct fsdata *mydata, struct dir_entry *den
-  * exceed the size of the block device
-  * Return -1 when overflow occurs, otherwise return 0
-  */
--static int check_overflow(struct fsdata *mydata, __u32 clustnum, loff_t size)
-+static int check_overflow(struct fsdata *mydata, u32 clustnum, loff_t size)
- {
--	__u32 startsect, sect_num, offset;
-+	u32 startsect, sect_num, offset;
- 
- 	if (clustnum > 0)
- 		startsect = clust_to_sect(mydata, clustnum);
-@@ -928,12 +928,12 @@ static int check_overflow(struct fsdata *mydata, __u32 clustnum, loff_t size)
-  * or return -1 on fatal errors.
-  */
- static int
--set_contents(struct fsdata *mydata, struct dir_entry *dentptr, loff_t pos, __u8 *buffer,
-+set_contents(struct fsdata *mydata, struct dir_entry *dentptr, loff_t pos, u8 *buffer,
- 	     loff_t maxsize, loff_t *gotsize)
- {
- 	unsigned int bytesperclust = mydata->clust_size * mydata->sect_size;
--	__u32 curclust = START(dentptr);
--	__u32 endclust = 0, newclust = 0;
-+	u32 curclust = START(dentptr);
-+	u32 endclust = 0, newclust = 0;
- 	u64 cur_pos, filesize;
- 	loff_t offset, actsize, wsize;
- 
-@@ -1199,8 +1199,8 @@ err:
-  * @attr:		file attributes
-  */
- static void fill_dentry(struct fsdata *mydata, struct dir_entry *dentptr,
--			const char *shortname, __u32 start_cluster, __u32 size,
--			__u8 attr)
-+			const char *shortname, u32 start_cluster, u32 size,
-+			u8 attr)
- {
- 	memset(dentptr, 0, sizeof(*dentptr));
- 
-@@ -1253,7 +1253,7 @@ static int update_parent_dir_props(struct fat_itr *dir_itr)
- 
- 	struct fat_itr itr;
- 	struct fsdata fsdata = { .fatbuf = NULL, }, *mydata = &fsdata;
--	__u32 target_clust = dir_itr->start_clust;
-+	u32 target_clust = dir_itr->start_clust;
- 
- 	/* Short circuit if no RTC because it only updates timestamps */
- 	if (!CONFIG_IS_ENABLED(DM_RTC))
-@@ -1309,8 +1309,8 @@ exit:
-  * @attr:	file attributes
-  * Return:	0 for success
-  */
--static int create_link(struct fat_itr *itr, char *basename, __u32 clust, __u32 size,
--		       __u8 attr)
-+static int create_link(struct fat_itr *itr, char *basename, u32 clust, u32 size,
-+		       u8 attr)
- {
- 	char shortname[SHORT_NAME_SIZE];
- 	int ndent;
-@@ -1878,7 +1878,7 @@ int fat_mkdir(const char *dirname)
- 	else
- 		set_start_cluster(mydata, &dotdent[1], itr->start_clust);
- 
--	ret = set_contents(mydata, retdent, 0, (__u8 *)dotdent,
-+	ret = set_contents(mydata, retdent, 0, (u8 *)dotdent,
- 			   bytesperclust, &actwrite);
- 	if (ret < 0) {
- 		printf("Error: writing contents\n");
-@@ -1886,7 +1886,7 @@ int fat_mkdir(const char *dirname)
- 	}
- 	/* Write twice for "." */
- 	set_start_cluster(mydata, &dotdent[0], START(retdent));
--	ret = set_contents(mydata, retdent, 0, (__u8 *)dotdent,
-+	ret = set_contents(mydata, retdent, 0, (u8 *)dotdent,
- 			   bytesperclust, &actwrite);
- 	if (ret < 0) {
- 		printf("Error: writing contents\n");
-@@ -1997,10 +1997,10 @@ int fat_rename(const char *old_path, const char *new_path)
- 	char *old_path_copy, *old_dirname, *old_basename;
- 	char *new_path_copy, *new_dirname, *new_basename;
- 	char l_new_basename[VFAT_MAXLEN_BYTES];
--	__u32 old_clust;
-+	u32 old_clust;
- 	struct dir_entry *found_existing;
- 	/* only set if found_existing != NULL */
--	__u32 new_clust;
-+	u32 new_clust;
- 
- 	old_path_copy = strdup(old_path);
- 	new_path_copy = strdup(new_path);
-@@ -2094,7 +2094,7 @@ int fat_rename(const char *old_path, const char *new_path)
- 	/* create/update dentry to point to old_path's data cluster */
- 	if (found_existing) {
- 		struct nameext new_name = new_itr->dent->nameext;
--		__u8 lcase = new_itr->dent->lcase;
-+		u8 lcase = new_itr->dent->lcase;
- 
- 		if (is_old_dir) {
- 			int n_entries = fat_dir_entries(new_itr);
-@@ -2144,7 +2144,7 @@ int fat_rename(const char *old_path, const char *new_path)
- 
- 	/* update moved directory so the parent is new_path */
- 	if (is_old_dir) {
--		__u32 clust = new_itr->start_clust;
-+		u32 clust = new_itr->start_clust;
- 		struct dir_entry *dent;
- 
- 		fat_itr_child(new_itr, new_itr);
-diff --git a/include/fat.h b/include/fat.h
-index f6b31b2de49..2e63160c924 100644
---- a/include/fat.h
-+++ b/include/fat.h
-@@ -108,29 +108,29 @@ struct disk_partition;
-  * @reserved2: unused (FAT32 only)
-  */
- struct boot_sector {
--	__u8	ignored[3];
-+	u8	ignored[3];
- 	char	system_id[8];
--	__u8	sector_size[2];
--	__u8	cluster_size;
--	__u16	reserved;
--	__u8	fats;
--	__u8	dir_entries[2];
--	__u8	sectors[2];
--	__u8	media;
--	__u16	fat_length;
--	__u16	secs_track;
--	__u16	heads;
--	__u32	hidden;
--	__u32	total_sect;
-+	u8	sector_size[2];
-+	u8	cluster_size;
-+	u16	reserved;
-+	u8	fats;
-+	u8	dir_entries[2];
-+	u8	sectors[2];
-+	u8	media;
-+	u16	fat_length;
-+	u16	secs_track;
-+	u16	heads;
-+	u32	hidden;
-+	u32	total_sect;
- 
- 	/* FAT32 only */
--	__u32	fat32_length;
--	__u16	flags;
--	__u8	version[2];
--	__u32	root_cluster;
--	__u16	info_sector;
--	__u16	backup_boot;
--	__u16	reserved2[6];
-+	u32	fat32_length;
-+	u16	flags;
-+	u8	version[2];
-+	u32	root_cluster;
-+	u16	info_sector;
-+	u16	backup_boot;
-+	u16	reserved2[6];
- };
- 
- /**
-@@ -146,10 +146,10 @@ struct boot_sector {
-  * Boot code follows this structure, with boot signature at the end of sector.
-  */
- struct volume_info {
--	__u8 drive_number;
--	__u8 reserved;
--	__u8 ext_boot_sign;
--	__u8 volume_id[4];
-+	u8 drive_number;
-+	u8 reserved;
-+	u8 ext_boot_sign;
-+	u8 volume_id[4];
- 	char volume_label[11];
- 	char fs_type[8];
- };
-@@ -185,17 +185,17 @@ struct nameext {
-  */
- struct dir_entry {
- 	struct nameext nameext;
--	__u8	attr;
--	__u8	lcase;
--	__u8	ctime_ms;
--	__u16	ctime;
--	__u16	cdate;
--	__u16	adate;
--	__u16	starthi;
--	__u16	time;
--	__u16	date;
--	__u16	start;
--	__u32	size;
-+	u8	attr;
-+	u8	lcase;
-+	u8	ctime_ms;
-+	u16	ctime;
-+	u16	cdate;
-+	u16	adate;
-+	u16	starthi;
-+	u16	time;
-+	u16	date;
-+	u16	start;
-+	u32	size;
- };
- 
- /**
-@@ -213,14 +213,14 @@ struct dir_entry {
-  * Multiple entries may be used to store names longer than 13 characters.
-  */
- struct dir_slot {
--	__u8	id;
--	__u8	name0_4[10];
--	__u8	attr;
--	__u8	reserved;
--	__u8	alias_checksum;
--	__u8	name5_10[12];
--	__u16	start;
--	__u8	name11_12[4];
-+	u8	id;
-+	u8	name0_4[10];
-+	u8	attr;
-+	u8	reserved;
-+	u8	alias_checksum;
-+	u8	name5_10[12];
-+	u16	start;
-+	u8	name11_12[4];
- };
- 
- /**
-@@ -244,18 +244,18 @@ struct dir_slot {
-  * The fatbuf must be 32-bit aligned due to FAT32 sector access requirements.
-  */
- struct fsdata {
--	__u8	*fatbuf;
-+	u8	*fatbuf;
- 	int	fatsize;
--	__u32	fatlength;
--	__u16	fat_sect;
--	__u8	fat_dirty;
--	__u32	rootdir_sect;
--	__u16	sect_size;
--	__u16	clust_size;
-+	u32	fatlength;
-+	u16	fat_sect;
-+	u8	fat_dirty;
-+	u32	rootdir_sect;
-+	u16	sect_size;
-+	u16	clust_size;
- 	int	data_begin;
- 	int	fatbufnum;
- 	int	rootdir_size;
--	__u32	root_cluster;
-+	u32	root_cluster;
- 	u32	total_sect;
- 	int	fats;
- };
--- 
-2.51.0
+Hi Quentin
+
+As mentioned, the 2 above U-Boot series about STM32 led update will be soon superseeded 
+by a new series.
+
+On kernel side i submitted a DTS update for STMicroelectronics boards: 
+
+https://patchwork.kernel.org/project/linux-arm-kernel/list/?series=1022526
+https://patchwork.kernel.org/project/linux-arm-kernel/list/?series=1022570
+
+We will heritate of this update when U-Boot DT will be synchronized with kernel DT
+(probably linux v6.19 i guess).
+
+> After this, only one user of u-boot,boot-led will be left, based on
+> STM32: board/dhelectronics/dh_stm32mp1/board.c. @Patrice, maybe that's
+> something you want to have a look at as well, this seems to be some
+> evaluation kit?
+
+I will let Marek to take care of dhelectronics board.
+
+Thanks
+
+> 
+> The only users of u-boot,error-led are STM32 boards, so I'll leave this
+> to Patrice as well, I do not know what's the way to go for that one.
+> 
+> In any case, I would like to not encourage people to use out-of-spec DT
+> properties when there is another option (u-boot,boot-led), so I remove
+> the properties from the dt-binding document from U-Boot.
+> 
+> The help text for the blink subcommand of the led command was misleading
+> so this is now fixed.
+> 
+> This also moves the content of doc/README.LED into the doc/api/led.rst,
+> while clearly stating one shouldn't be using this anymore.
+> 
+> This also gets rid of dt-binding that we already have in dts/upstream.
+> 
+> Finally, this adds documentation for the led shell command.
+> 
+> [1] https://github.com/devicetree-org/dt-schema/blob/v2025.08/dtschema/schemas/options/u-boot.yaml#L113-L116
+> 
+> Reported-by: Yegor Yefremov <yegorslists@googlemail.com>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+> Quentin Schulz (11):
+>       cmd: led: fix help text for blink subcommand
+>       doc: move legacy API documented in README.LED to doc/api/led.rst
+>       doc: cmd: document the led shell command
+>       doc: dt-bindings: remove duplicates with dts/upstream
+>       arm: dts: rockchip: rk3188-radxarock: remove unused u-boot,boot-led
+>       rockchip: rk3188: remove setup_led from xPL
+>       arm: dts: rockchip: rk3399-puma: remove u-boot,boot-led
+>       arm: dts: rockchip: px30-ringneck: remove u-boot,boot-led
+>       arm: dts: rockchip: rk3066a-mk808: remove unused u-boot,boot-led
+>       sam9x60-curiosity: migrate Boot LED setup to use /options/u-boot/boot-led
+>       doc: remove u-boot,boot-led and u-boot,error-led from "binding"
+> 
+>  arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi   |   9 +-
+>  arch/arm/dts/px30-ringneck-haikou-u-boot.dtsi     |   1 -
+>  arch/arm/dts/rk3066a-mk808-u-boot.dtsi            |   6 -
+>  arch/arm/dts/rk3188-radxarock-u-boot.dtsi         |   5 -
+>  arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi       |   1 -
+>  arch/arm/mach-rockchip/Kconfig                    |   1 -
+>  arch/arm/mach-rockchip/rk3188/rk3188.c            |  36 ------
+>  board/atmel/sam9x60_curiosity/sam9x60_curiosity.c |  16 +--
+>  cmd/led.c                                         |  11 +-
+>  doc/README.LED                                    |  77 ------------
+>  doc/api/led.rst                                   |  89 +++++++++++++-
+>  doc/device-tree-bindings/config.txt               |   5 -
+>  doc/device-tree-bindings/leds/leds-bcm6328.txt    | 106 ----------------
+>  doc/device-tree-bindings/leds/leds-bcm6358.txt    | 141 ----------------------
+>  doc/device-tree-bindings/leds/leds-gpio.txt       |  52 --------
+>  doc/device-tree-bindings/leds/leds-lp5562.txt     |  63 ----------
+>  doc/usage/cmd/led.rst                             |  95 +++++++++++++++
+>  17 files changed, 194 insertions(+), 520 deletions(-)
+> ---
+> base-commit: caa740df9cae5ddc74b18b88a4fea43e27b2fdf6
+> change-id: 20251112-led-old-dt-dc24605ddc88
+> 
+> Best regards,
 
