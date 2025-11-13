@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 771C3CD98D4
-	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 19:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B98DCD98D4
+	for <u-boot@archiver.kernel.org>; Thu, 13 Nov 2025 19:34:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 068F38401F;
+	by phobos.denx.de (Postfix) with ESMTP id 5C1AF84027;
 	Thu, 13 Nov 2025 20:34:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eX8b+iJq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CUJcIBOn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B53DC8400F; Thu, 13 Nov 2025 20:34:12 +0100 (CET)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id CEDAB8401B; Thu, 13 Nov 2025 20:34:13 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BB078401A
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 20:34:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ECF18401F
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 20:34:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-3418ac74bffso928341a91.1
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 11:34:10 -0800 (PST)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-343774bd9b4so1142292a91.2
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 11:34:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763062449; x=1763667249; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763062450; x=1763667250; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kvUDaIEUh1D62UvwaCrlfFhEjdbhUKoCFK/+Zs4PCDw=;
- b=eX8b+iJqs+TNdj/IITNVUlR/hhFgcNMG9paWS/TzjfoNexdRQQSzGWIvJqHZiYazHn
- AqasaC3l+5tZDFRRlULGI8H1hdprJwI4k0LwihOFVbtPFrlcM4Mq1olbYw8N9/7HytdJ
- Tl87Y1+mObkqbX864a+/unokyKPXv5HtplqLo=
+ bh=bOVVp7ucszrf1jek582vGtvRpW2gc86uTWxfZGJcEz0=;
+ b=CUJcIBOn6IXhx8jiGszkvNC+5yqk/OxYNm1kmLsbOnTLBOUSPpmCFbUiFCXoz+3SRZ
+ fYNX/cdsvYbRqEMyXyN95WF+niT++11zo4xrdYLsQlX9b+36cGm42NUe3XpkpUMr8VzK
+ eiHO+NXanaVCMLlS+qk/d4baN+/GGCH4/myu8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763062449; x=1763667249;
+ d=1e100.net; s=20230601; t=1763062450; x=1763667250;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kvUDaIEUh1D62UvwaCrlfFhEjdbhUKoCFK/+Zs4PCDw=;
- b=NoXgzOzaHw27ydNW8llegqteYcidrNhBX9yAYSQ5fXpOfXkS7JdB/n/Ba8D17WnAZA
- RE81S9aB06wNhFIXAFlVdkU+e19nojfxtB+gAckAejG1SPOHCoCagFGDDj9BTM7T4FSp
- vKeeOT/xKv0zkIj6zbj4GunFSH02rE1AO2twH89r9rw3OsLmb599H6fP/DzmXyJpIC4h
- /6DOkDlHnzB8s8eFClbpbMvYwBzA1pQw9lkA6pboSvUzBUxCeTuSjKr8ryjoeUvU/8N8
- VW7q3JIjxbNE6qMBhmcbyKlE/Whav8WBlv64k/kFA4PB7JX1aEi1H6i3Vfch36MNQIHg
- ZrWA==
-X-Gm-Message-State: AOJu0Yzrr3IZFULR6ZVrOzoo3pb1o3d7WuKwX1KAConjcZcIuyXmQH62
- XI5vPF2mUYxDz5K3QJg25QSOJwxaHupE4OddsxNn4yh3ca16vIlrMgbw2oWShOnyCecjRXSdqHs
- Khu4NB5hreTIG5N7zaiEakNBa07HQvtbyO1hkfqRI
-X-Gm-Gg: ASbGncsRBk0BlSXtdVVvOh8bu08czXOfVSRFNnvUzEJ46DCDtrB35+8U+Hvtnb5Bvka
- LxWbJEu6SC8LCgmTuMTL+VZ7Mc1Mf6xVGGP+gaLVjTiukTbvYi8XdChOkKsmnyJVR7deOZzy35z
- fDxU2GnT1Tb2Dti0aQHzl0Vvyxf9DtcU37R/XjzYRi57vWg01btNv9pfjwJ9piyyGXeCMRg/YAb
- 6o4oKy2qOq0UqlA9V34xRGTfmsbOZ/K1XrFFyes9fG/SBFLdrz6ABe1lZXr59/FxSTe2Q==
-X-Google-Smtp-Source: AGHT+IELg3d+VA8qaWa1SWw4vHJEBTCQvdyBTbmif8IvD3ndQGRTTMlpW4KyBqUJkDO5S4oLn8VpyHvm0mDDxFMjQ2o=
-X-Received: by 2002:a17:90b:4f92:b0:32e:d599:1f66 with SMTP id
- 98e67ed59e1d1-343fa7412d4mr385382a91.30.1763062448965; Thu, 13 Nov 2025
- 11:34:08 -0800 (PST)
+ bh=bOVVp7ucszrf1jek582vGtvRpW2gc86uTWxfZGJcEz0=;
+ b=wHYkiXvRs1HjjQbFz7fjlqQLI9d+YPm5+ogoSmAZPmBYsvNPBGE+x/lE04ztozMFuX
+ 6m5pteojpbpBEr+mzPaEypXlXu5imWUy/H0Y41YIP1U0gtIFngklbu9oajnysAs6s/AL
+ rMEXABjdzhn7H+5MDgLR/doDYTtlCPQSgfv1Td/G2/g8OWooRXNYQqeFRL0VgxZLLK22
+ UkAO/B41hVYDiDkjFJVVe2kt1KWDzS6ppCeFJpxV0ZwaTmCsGsOPzSgII9VBMaVgtHGO
+ G2v++abwgLRGQSHvS0R1A/Xpge1nC8ARW7waPQBhGCmd0XYvAjiV7rBv0WzxvRmY/Hwk
+ xoWQ==
+X-Gm-Message-State: AOJu0Yzj0B9GiQCFlxeGlYBj/FGJFy1OgXgSgeR16i9HFr1giO1Mf4Bx
+ DWZvMUFm3kWtONlmg+UBHTXAjjPvAKjiesQ6jnLSo2ds4fEfPdtcEWADaJww7CpNgsSm0xAKQ9Q
+ caO+Hn+gvBNSKMoL0F1qFGaQ9/lE3YrHAY3c6jeWg
+X-Gm-Gg: ASbGncv7VaBwAen1xjXMRqbYKdhr5PMBHAXFYKInfPkNggDGzdOQGiCE8eIMZIeuF6P
+ Z0cFn0kChSFxPsVon7cW2iv/mgOaoHTdBJbpECyDxOigfpHRqaA8HaD/IrQOKL2MGLvxB0JPCI/
+ 1Yi9kCHSSntkbuJQIgqV1JFzfiLHn9gG+bKyqQnDuoI/29K9xMNLofgnVBB0h0oXogz806LW84o
+ 63l54mjOHf7ZLqX2gTaw3iIXWwt35RATskwf/EuHudVL199TWKzLQvlfOqMsK/zSZhhzw==
+X-Google-Smtp-Source: AGHT+IEDWLUMz100GOcEGbsrPlBAyPY0uWHN52yZP646/Ad00CcBUEB0u5W+CcAyp/hm+AI6eGPTBzyvOYOgx2Yn4CQ=
+X-Received: by 2002:a17:90b:28cc:b0:33f:ebc2:643 with SMTP id
+ 98e67ed59e1d1-343fa527f01mr390705a91.23.1763062450044; Thu, 13 Nov 2025
+ 11:34:10 -0800 (PST)
 MIME-Version: 1.0
-References: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
+References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
+ <20251113122145.949112-4-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251113122145.949112-4-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 13 Nov 2025 12:33:24 -0700
-X-Gm-Features: AWmQ_bkaUuJlJLrAzg6T1QhCfjqPGcmVE2dXZIU3CZbJoYm9nMZIlsYicgIwjuo
-Message-ID: <CAFLszTjofjQ_zmwJrGZ-sLejQ=x=-8tyqr4SBPYgt3683GVAbQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] boot: android: Always use 8-byte aligned DT with
- libfdt
+Date: Thu, 13 Nov 2025 12:33:19 -0700
+X-Gm-Features: AWmQ_bnCzThkBSRPEE7HBWl7sdrViFFCwV2jW303Ytp_9J7uVrwlLCUUBymMqQY
+Message-ID: <CAFLszTgRxLTWjCCbxxme9XtG2E80CrYOesry_86YuagL8uPJ-w@mail.gmail.com>
+Subject: Re: [PATCH 3/3] libfdt: Check fdt_offset_ptr() return value
+ unconditionally
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Aaron Kling <webgeek1234@gmail.com>, 
- Eddie Kovsky <ekovsky@redhat.com>, George Chan <gchan9527@gmail.com>, 
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>,
+Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Sam Edwards <cfsworks@gmail.com>,
  Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -94,47 +96,57 @@ X-Virus-Status: Clean
 
 Hi Marek,
 
-On Tue, 11 Nov 2025 at 18:17, Marek Vasut
+On Thu, 13 Nov 2025 at 05:22, Marek Vasut
 <marek.vasut+renesas@mailbox.org> wrote:
 >
-> Newer versions of libfdt strictly check whether the FDT blob
-> passed to them is at 8-byte aligned offset, if it is not, then
-> the library fails checks with -FDT_ERR_ALIGNMENT . Currently,
-> android_image_print_dtb_contents() passed FDT directly mapped
-> from abootimg to libfdt, and this FDT is not always aligned to
-> 8-byte offset. Specifically, the FDTs are somewhat packed in
-> the abootimg, therefore if the first FDT blob is e.g. 0xfd bytes
-> long, then the next FDT blob ends up at 0xfd offset, which is
-> not 8-byte aligned.
->
-> Fix this by first extracting the header into 8-byte aligned buffer,
-> checking only the header for validity, and then by copying the
-> entire FDT into newly allocated 8-byte aligned buffer. While this
-> is not efficient, it is the correct way to handle DTs, which must
-> be at 8-byte aligned offsets. Mitigate the inefficiency for the
-> common case by checking whether the DT might be 8-byte aligned and
-> if it is, map it directly.
+> The fdt_offset_ptr() may return NULL pointer, check the return
+> value from fdt_offset_ptr() for NULL unconditionally to prevent
+> sandbox crashes.
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
-> Cc: Aaron Kling <webgeek1234@gmail.com>
-> Cc: Eddie Kovsky <ekovsky@redhat.com>
-> Cc: George Chan <gchan9527@gmail.com>
-> Cc: Julien Masson <jmasson@baylibre.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Nicolas Belin <nbelin@baylibre.com>
-> Cc: Sam Day <me@samcday.com>
+> Cc: Adriano Cordova <adrianox@gmail.com>
+> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Cc: Christian Marangi <ansuelsmth@gmail.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Sam Edwards <cfsworks@gmail.com>
 > Cc: Simon Glass <sjg@chromium.org>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
->  boot/image-android.c | 46 +++++++++++++++++++++++++++++++++-----------
->  1 file changed, 35 insertions(+), 11 deletions(-)
+>  scripts/dtc/libfdt/fdt.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/scripts/dtc/libfdt/fdt.c b/scripts/dtc/libfdt/fdt.c
+> index 95f644c31f9..d16cc3d4730 100644
+> --- a/scripts/dtc/libfdt/fdt.c
+> +++ b/scripts/dtc/libfdt/fdt.c
+> @@ -168,7 +168,7 @@ uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
+>
+>         *nextoffset = -FDT_ERR_TRUNCATED;
+>         tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
+> -       if (!can_assume(VALID_DTB) && !tagp)
+> +       if (!tagp)
+>                 return FDT_END; /* premature end */
+>         tag = fdt32_to_cpu(*tagp);
+>         offset += FDT_TAGSIZE;
+> @@ -186,7 +186,7 @@ uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
+>
+>         case FDT_PROP:
+>                 lenp = fdt_offset_ptr(fdt, offset, sizeof(*lenp));
+> -               if (!can_assume(VALID_DTB) && !lenp)
+> +               if (!lenp)
+>                         return FDT_END; /* premature end */
+>
+>                 len = fdt32_to_cpu(*lenp);
+> --
+> 2.51.0
 >
 
-OK, we need to adjust mkimage etc. to handle this. Until then I think
-we should have a way to disable the 8-byte-alignment check as it seems
-to have an enormous blast radius :-)
+The can_assume() is there to be respected and helps to reduce code
+size. What problem are you actually seeing?
 
 Regards,
 Simon
