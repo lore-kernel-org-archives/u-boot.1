@@ -4,99 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3B8BCE7AEF
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 14:39:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D5BCE7AEF
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 14:43:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 411B984105;
-	Fri, 14 Nov 2025 15:39:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id B6DE384121;
+	Fri, 14 Nov 2025 15:43:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GfbSGwKY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oR4dSlcu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDC7384114; Fri, 14 Nov 2025 15:39:53 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 737A083EF5; Fri, 14 Nov 2025 15:43:38 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7EDC83EF5
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 15:39:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D55983EF5
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 15:43:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 3DAE84012C
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 14:39:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763131191;
- bh=CE/vwoHTXmeGpT2AZc7qVxDE/kVZuQF2z9KhaeSVTmc=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=GfbSGwKYarZQDr9uAyQAfGMHjKxz+5j+tzjFtOadDgxebzgglK2ZY2WbIPDV333Ea
- 77fSRd9lb2IRro8bGtfF1nxtKnxu1hN7DeBMsTJ1oOn+ttuPnXFVZj2Jrwcnjgs01j
- cPG+MO8gDnRx8T2vQXNESv7QkholyojhfTfpKlWftFIzPlRW04GZw1saoR3oiXJyAz
- 7MdLTyNtKa3X77CRQRjeYKEg396ao0wBSrpX+rYHOf4tkz4RsHb65l3UfkTCNkp82W
- Jyg6UFJweWqJ1L6ur3zO5DInxbIqbs6d84+CGe9/+B2n7dWBmrTX1cUFauIvppIw43
- 2Oe8AiA0UWwhboyimue8VJXhKVxyrCUrWpgy2l7vfwlk9RwOomXn481qsLPKdnZTfj
- pzSr5hwhAYkXeNp/f4OEGUfmkwtd44vDLYR7KR9IG4kzHKaw9DQkUlBu+ga4CRb7yq
- sJRGZBjfiSEzXaSa0mIBsIiO5M5SkV2pWsvRKdNlSFdx1ch12qCs/7VCpxg+TPC+0P
- cwmnTXJpq81eaoRXHzEEqwMm4vjL76nW6C0w047HcyKGZ+lC62Sys5W6I786XiXpit
- be2qTmr2ycrLlZVDEBoKxZlIVv8ptCGjskW8Xdx27x7S8pJTxSwk9/XoCPx4+nzfKu
- jQWne57HBkWpl+eFCjM5Icm4=
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4776079ada3so22219875e9.1
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:39:51 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3d2ea93836bso965600fac.3
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:43:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763131415; x=1763736215; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=cbcnrU8Mtc2BYxe0rX5NAcuxo9mQOecq5MYOCSDJoyo=;
+ b=oR4dSlcu+b9R6dMZ/NLzFmxvlIUO06aW+uIIYk5US9ffjjXrF6o43HNxE43HIAg8xk
+ M0HBhs23lUSv+1nqEHUyMDGXBXE/PkflxYqqjdgwjPBvqdYd/Ei7/0GpzWZ9pOIn5u4H
+ EHiSSYmV+GcaAjqydcUz76S09UPx1RhvY6ozc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763131191; x=1763735991;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CE/vwoHTXmeGpT2AZc7qVxDE/kVZuQF2z9KhaeSVTmc=;
- b=WQCTa1jhvgHPX3z9KJMGXEoHJ43ayWIbA0nl/jQGRuUY3SQTXk7JnhGNkE0Uqkvybu
- A0xO8CA21TeSbsQKEEgM/gzYXqFFoCs1t6zYl2OqYo8T0yKhv3N0a5dh1kCD7LxpQOiy
- S9uJxcOSCKwJFfEyZvMVq/yqMHuPgcztKNy5i9IcqsE1PKSvTs+kW1mpDYWtRmXg9Qn5
- MqqNz1bo8TF4XRKEiaLSU3nShRDbSvU1RR+gKjGOAZnrgWxLjVIzs0U4OGrzc3NPbDn1
- 1L5uTmvE01asCFW4GmGi509H+EtcR1wM4yuTAJiV/hSdOkbwX+c8VGewVwZFBI/mtm6o
- Kb6w==
+ d=1e100.net; s=20230601; t=1763131415; x=1763736215;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cbcnrU8Mtc2BYxe0rX5NAcuxo9mQOecq5MYOCSDJoyo=;
+ b=CUiHLO4o0Xwv6zlora3durRqRictGVW4n9moUZuZnpc4Nwph/957J1asKn5/BDRQxJ
+ os+Ahgo8MSe7mG6iTnSlnAbc1V1G7Levf+6pqV8dJBGlfjVzIQsQXFrRA13Ed7WAW5GF
+ CFA7Kpuoy3njs1cNdwSfLmStc3JqSRINCehSQACRBVvdTPo+HZuyqyMnLfB9XVjtB/WA
+ 9Tw3cK0utJWl1X3XpSnPZybqjjLgf0f6FisdLNauvQ8twgWrzV0rdfzVFOcBUeKvH21e
+ GeQ3GmTHXMEf6TjSLWM7+3xMzrCnIl+S7x2mZzwZuAG8v6IJnhjm/eZAQTUvYqYWx6ie
+ dTfg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUGRsmTmgmPhaJE+LdCTCedDFVCc911Agpgf63KNQ/jXiAut+ypob1H3zjqZx5Oeu0EqdLE8i4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz4Z64/WszmIA9qlbndMfFaqD3Y2g+65asJ0dmdOHqo7nDKe3y7
- KAyrv8Rjvrju8kGkEF++cW8N39cIYLw/hRjdtGRPLXXfQCcs1QxMBlKdSWUXTSFY646+PTQcK61
- Imldbnpumrzd/d53VGWr4khXa60VqFIRK4mrZZ1CANNuzgAHs/K/6QXG/itH6akk+eU/zEJU=
-X-Gm-Gg: ASbGncv/JILWsnr815vP1V7AwW8M8LRp5YSTZhB8x999X1dwFb9LUrR0apwBAPkEjFK
- pwlBTXSjKy+Oq7+Uobx9MezGjPWcsnWQ6ngyjtwc8WsPT0e8maNlWUFXGQdpyAIFMZQK1PYFWHn
- bYgY7BqXy3cwwjLvKpuRpAuVZ316Vl6NwGjEnWXoVRXysFkdbBXeOJh2MXRRyY44nb8uHd4hfC/
- 4dSI/mGTQk0DmDHQSS+5CZW4rnZW9iYPRjuCNZO2NGKVg6UY0aXEWnO4uGAbLZPSPlEXhvotit8
- PonrN9xLjGUnXnm0x9bVU056u6F1qmpU/LNT8Ohbd28gQHbdLQ0hn8S8UnI1cZ1rXfpLr7ISyJC
- CHQhMydNUkMGwYx2VY1alEZuV6AblAnEQY4wpKmtFahYTs2YxsfFSMe7I+TgVUPEA+A==
-X-Received: by 2002:a05:600c:3b19:b0:471:989:9d7b with SMTP id
- 5b1f17b1804b1-4778fe95fe2mr32836805e9.21.1763131190740; 
- Fri, 14 Nov 2025 06:39:50 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGzG6L53XSrDOqS65uts39UKKSVIRlp7qKv5psNaWLV453rtAy2ZMrv28sX9Io1XFslAUxAHQ==
-X-Received: by 2002:a05:600c:3b19:b0:471:989:9d7b with SMTP id
- 5b1f17b1804b1-4778fe95fe2mr32836575e9.21.1763131190352; 
- Fri, 14 Nov 2025 06:39:50 -0800 (PST)
-Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
- [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47795751d08sm5680185e9.7.2025.11.14.06.39.49
+ AJvYcCU1+AJch6zXgDEzZ8H3UOgVCPY7HNO05kG5jwvIaQUI9csLPEzQQkRXSklkaedWe1YJx/BVCn8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyX5cRv9uPE/UYg8Xm8/M8Vv1po/+VD/E5gaOBju/nE40fsuUwg
+ mEhmWUz6ubJXFw/IturKDQPXx74rLA0Hq4Kj9JxT6D3pf0+PtEeDP0ZRZkk3y/AI6P0=
+X-Gm-Gg: ASbGncufUMQX55QuWUua1pMSGTnOtPZFCcDif2BCvLUYBREmTdTDyH2lEhY8xxpJeEX
+ 5oudjmP/6GVSQ39WsWxJhiDggxKJa6yHzs9zdl8NUmy/Y2QEjuTUy5yVKjG4UqSSqOH+EiPHvCc
+ mJCAbZW8ROBVNKxmck0c30wqb+/VAhC2QnhGNQVBhg4VqSHbpKYiIgWu60dGRDT4bUVSQ1BC/5t
+ R9AGrcDuiBJJuvhtMxfHt/x8GP8n3XMUeHXKr87NvhKeAWrdx6FfLYkb/v3xYQnVJr3xSDpMLpx
+ F23Ze7diSPdCkWcDpB7jemzH5o8qwPMBqzJe1Z3Y0e0aTnONP4nB0HUYN9BPH/bfuwUrsVJ9Q7N
+ z+y8m6oXuHjef8zX8n8jmiGo6wZcbZBISAmIVux9KmkOTke3w0FIjWTlziWyN+xD4uTTnHnKxj7
+ HrLY6ummPYWjoWuTVLNiBtPbV3hNJkLQGdmNEzB5A=
+X-Google-Smtp-Source: AGHT+IGzxb1/+vXC7PCZpQQx8MF3jobmUltfb2lWfip1pJAjB+oCUouvROeNzD7W1TVJ07Zjl0Xhew==
+X-Received: by 2002:a05:6870:1990:b0:3e0:788f:2615 with SMTP id
+ 586e51a60fabf-3e868ea6375mr1693314fac.3.1763131414875; 
+ Fri, 14 Nov 2025 06:43:34 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3e8522640casm2784461fac.15.2025.11.14.06.43.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 06:39:49 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Raymond Mao <raymondmaoca@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] .mailmap: add Raymond Mao
-Date: Fri, 14 Nov 2025 15:39:24 +0100
-Message-ID: <20251114143924.155639-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
+ Fri, 14 Nov 2025 06:43:34 -0800 (PST)
+Date: Fri, 14 Nov 2025 08:43:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Peng Fan <peng.fan@nxp.com>, Ben Dooks <ben.dooks@codethink.co.uk>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 6/9] test: cmd/fdt: do not use fixed buffer addresses
+Message-ID: <20251114144331.GA6688@bill-the-cat>
+References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-7-heinrich.schuchardt@canonical.com>
+ <CAFLszTiHVqgn5eox3p7CWt0=XjAcYMBjR7F03UqweRftZg5fDg@mail.gmail.com>
+ <20251114141943.GV6688@bill-the-cat>
+ <CAFLszThhPVcKhcbxA77HCwrRcq9H1+p_YvEmir3p6TEkLb1YQA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="jcMgVVHEKO/gyt44"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThhPVcKhcbxA77HCwrRcq9H1+p_YvEmir3p6TEkLb1YQA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,26 +114,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Linaro email address is no longer valid.
-See commit 4cad9faf8d28 ("MAINTAINERS: update my email address")
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- .mailmap | 1 +
- 1 file changed, 1 insertion(+)
+--jcMgVVHEKO/gyt44
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/.mailmap b/.mailmap
-index e08dfd3a526..04cb2419bfc 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -114,6 +114,7 @@ Radhey Shyam Pandey <radhey.shyam.pandey@amd.com> <radhey.shyam.pandey@xilinx.co
- Rajeshwari Shinde <rajeshwari.s@samsung.com>
- Raju Kumar Pothuraju <rajukumar.pothuraju@amd.com> <raju.kumar-pothuraju@xilinx.com>
- Ravi Patel <ravi.patel@amd.com> <ravi.patel@xilinx.com>
-+Raymond Mao <raymondmaoca@gmail.com> <raymond.mao@linaro.org>
- Ricardo Ribalda <ricardo@ribalda.com> <ricardo.ribalda@gmail.com>
- Ricardo Ribalda <ricardo@ribalda.com> <ricardo.ribalda@uam.es>
- Rohit Visavalia <rohit.visavalia@amd.com> <rohit.visavalia@xilinx.com>
--- 
-2.51.0
+On Fri, Nov 14, 2025 at 07:24:53AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 14 Nov 2025 at 07:19, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Nov 14, 2025 at 05:31:40AM -0700, Simon Glass wrote:
+> > > Hi Heinrich,
+> > >
+> > > On Sun, 9 Nov 2025 at 03:10, Heinrich Schuchardt
+> > > <heinrich.schuchardt@canonical.com> wrote:
+> > > >
+> > > > The location of memory depends on the board. Do not assume memory a=
+t fixed
+> > > > memory locations. Use memalign() instead to allocate a buffer.
+> > > >
+> > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.c=
+om>
+> > [snip]
+> > > >         /* bytes */
+> > > >         print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, buf, 0x12);
+> > > >         ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa=
+ bb cc dd ee ff  ..\"3DUfw........",
+> > > > -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+> > > > -                          (uintptr_t)buf);
+> > > > +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, =
+addr);
+> > [snip]
+> > > This is adding memory allocations to a test for hex dumping.
+> > >
+> > > It would be better and simpler to use a fixed address and make this a
+> > > sandbox-only test. I struggle to see the value of running these sorts
+> > > of tests under QEMU?
+> >
+> > Removing context to highlight value of running tests on multiple
+> > platforms.
+>=20
+> $ ./tools/qconfig.py -f ~PHYS_64BIT -l |grep sandbox
+> sandbox
+> sandbox_flattree
+> sandbox_nocmdline
+> sandbox_noinst
+> sandbox_spl
+> sandbox_vpl
+> $ ./tools/qconfig.py -f PHYS_64BIT -l |grep sandbox
+> sandbox64
+> sandbox64_lwip
 
+Good, and as soon as you restrict to "sandbox" we stop running
+"sandbox64", it's why sandbox64 runs so much quicker in CI.
+
+--=20
+Tom
+
+--jcMgVVHEKO/gyt44
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRdAEwAKCRAr4qD1Cr/k
+CkF9AQCiQOxpHXrvFuy6Pdytw3PqgRj2Ro7bLTt9vbNjtgOMLAEAmSzKWCESc3tR
+NeqPZKqyBKH5nI/tFE5wDp2cIIZQkgg=
+=GtiM
+-----END PGP SIGNATURE-----
+
+--jcMgVVHEKO/gyt44--
