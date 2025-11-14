@@ -4,82 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B6D2CE7AEE
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 11:46:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23833CE7AF4
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 11:49:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1B9C840A2;
-	Fri, 14 Nov 2025 12:46:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B1E8B83F33;
+	Fri, 14 Nov 2025 12:49:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LtbDTZxk";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="o75v61TQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B151C840A6; Fri, 14 Nov 2025 12:46:28 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3571E8409E; Fri, 14 Nov 2025 12:49:54 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B4678409E
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 12:46:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C5F383EF5
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 12:49:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7c70fcc8561so677964a34.0
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 03:46:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763120785; x=1763725585; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8tvr8lroF92CICnuHQBhwxyWWVGgJ2MDh5Af+LX+pPQ=;
- b=LtbDTZxk+TqQQd6Z3omTOeAJ3GO1YzT2aBNf4vxTZ8Zq2qeCadFtDwCJw0Cd6Cdb5R
- snBQukdUIZf1Pb9QsQ9QTAGT58/oPtBW8IkCBcOFFNab0Qg29zq+y2WzlwTuwbsV/DuQ
- 5f1W2IkPpCzsohTV2n/4Xd26UuHRx7bqwWoie/fbRnWBNsJHrA3vDH9TVFw1DzzMNTin
- BM8p87GAhpgiUE4Ycyt0afZ5BVOTfdO9cuyyqnXduZFxWwcTaLlOQePfknqrJJuDTfd7
- PvCzXkm5PEH9rEGtN2IQIxwuLsyrw4jemr7IIaNHYwe9AMOwI59RsfjKZItPovCZPZZA
- tgxA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 1A6723FCA1
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 11:49:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1763120990;
+ bh=bbyxxH7zTZ8IWOU8hcPuNeq3UlssIVNsOyVsT0Gn5bc=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=o75v61TQR17RsZE6vimceCdduUyUzLz3Pkza61wif1L7QgckD1hc500nH6G41feC3
+ 1PBQuu5fNvAQZR1WGgZ8qHhqCGDb9qVkpwfxb5XV1ERnfe5qzUvdBNGiJDYkVFCjvx
+ N09NhvreCVPjloLIe7knq/mR6zgdVPF8YXWu/mhWuNTPOZ+HdIbofBq3c3D2f1Osfq
+ oqfkEMTpGZpY0kdaVYdF97SimllEVL17Q/Xihnh81OqeU9zoAHAPsBiPtFPBhiXQJe
+ AThB5/cNay5u51Zh/ourr5gfqYTM5ho3hzEPFXOSCkNPXG7kG6CDQH1L/RDLWX0eIX
+ ynIPrbCI6dTOZ5nSzjvyQ0oRxuHWFPNSs4QzYoxIDOZ2tocqLgOc8DWrXrxfQIGbKO
+ XigOtStEAijShFYFUNVaQhY84wdOVg5qU7TtsGHH7uOjHGJgV/vEtZjTQn5r1P+uat
+ T4f6zjHE2jbgInJW8C58PjY/xJD3AUXfIQZcUaa1QzbnoR4Ekc/C46RWBruJHDvXXr
+ zkC4PjR5znf4/qOO5fajssmQ7i1SPiNjGOP0Fy8mYE/qi6JRMLJI7AFVVWTcaE7/LG
+ DgCVftX4c4PL3op2Qbd+uhSQEJwjxOIiV3sY4hbdxW7451jrXRlHXKxgmD9ynHV2iW
+ hYNY0HXbRyyzv4Uz2loPKfIs=
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4775e00b16fso13018705e9.2
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 03:49:50 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763120785; x=1763725585;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8tvr8lroF92CICnuHQBhwxyWWVGgJ2MDh5Af+LX+pPQ=;
- b=XgWTD7qw6oyy6uNz/8QnCf0mvfgypyrl6lRwZZ4XqEglXfRyjG6jZ2bmCEUyEWyCTk
- dI5Ogre4FI0iHPjXmvp6CZJtfS//mF0uRaXX0/SbVolE6gI20XeAwDliDsTfN5wVOztD
- Gj/S8iCLrJ/Qr9su49x8GoFfjzg6eezdWRdq+B7JdY2BgNHUwsC3QPk0CfKAH1Il+qRa
- SH/YkrIqIv4T3HZIFRmhSGHf6MmCLYrY0Lw0No2UzHpKZiqcThI36tXEbGbf/cFPL1Oy
- wbo1TYlG0EJp1mthwFwM3cY90M8iN/sAfJCVNf7iQt7XqOBk4LcEieWqODN4d2dRFGnh
- 2iEA==
+ d=1e100.net; s=20230601; t=1763120989; x=1763725789;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bbyxxH7zTZ8IWOU8hcPuNeq3UlssIVNsOyVsT0Gn5bc=;
+ b=d+A2o/c1zFBWBQ7xfqBMAMlPIBxj40t3DvTgdaCNG9ja7OHajXwKprzQ94+Jfgcyo4
+ 86hW44WFbCqOdt1YjF7WF6rcV2x4V/f+DlP7HkND2TsmoeV49Sv8X/TCn/Od40P+RXoh
+ HgPhCJcB5KULM2JdbEhpd6NBDA8AAlEXtjaMSIXUlsKAzMTB8efh1z+lyXb6mmCUhcVq
+ ShVMzqpPT+J1C+yM2PZklNwszuKxHp4lZI4oG9tSArRwDJaDzcrtcJPTU8XP4KFCkCWX
+ SwDN4HSHP4arLQ619SVnRMBgTDXA2iC2GdQC1rgFuyWCoUA2Pr5CLkp5wgAz/7SgdrKJ
+ aGyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUq2TCw5yuEBp7VVygJ3OYmruU7ea/h+KbWf3Rw9hgs6K4H181X78lFi2ra5WSvpbrb64QoRRM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzUVEBIGCCIMgy7oW4BCZOo965N2dodgS7lvOg9WtYi4EzWq18Z
- Ao+ScnrQpqEyz1Lr7kgb5fHKYeBtkuY5sYH5RSs9XWpzNyf7Vq3HZk9T4Xyd0OElCh/B+iwREqi
- Y5tGDksD4Zi7axm/E+lslgJ+6X3vz2Do=
-X-Gm-Gg: ASbGncvlXdsesxncPmEzu8x2tADJT3yyLGBF8jIgoJD2y9FzbTFpTycbIuikaFWttDP
- VA4IEy7yAY4jQ3JGgYp1cSQUPgFQtqqNQfEPKjS2dwQVNObf/RyIeBtSgV/OnZfxAQCJxzZjir4
- xN6Z63chD8kzyOYo/HVp6QiTORsEhd8naVO1LQpzZkhowHE0RTYAoilr3EoFtU6T2VjRlDePoQY
- cGGqbvQJ4EsoA5M00YrAjbZyZriTiSKCo+LnJluzs/qTq2mnzrYQRi9un8rTDmzRi+GQdSt
-X-Google-Smtp-Source: AGHT+IEfoyins5mCbUWS3sOHidBLD/wgsJsFw139XLyJvr9Wpv1C9BC8HCfjepApBdXVaw2HM8/JyxYdFO2Kp/6EJDk=
-X-Received: by 2002:a05:6830:2b2a:b0:749:fac2:92fe with SMTP id
- 46e09a7af769-7c74408b8f9mr1448468a34.0.1763120785178; Fri, 14 Nov 2025
- 03:46:25 -0800 (PST)
+ AJvYcCXx5E9H6i8T+qF8Dy7s2wV+cNbounI+Jk+E2yPC1NOHxTAvdyHlpqoJJShcP/7QmOhTuR8u6S8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxIHXpcm7TCpPXvVgi+QpRR2KuAa+HpsJDcSZfTO5jQg60FL3g3
+ EBabeYXvGE+hX2FUgH/JS09EAcImhBZT86Xndi86ED/KhwxLpuCaSQWhk7peAUVIKHrZgnkDBgJ
+ 11INCK/1w3hmj1hKHLTObodXEq+sMwhaxcZO+bR87MUaUpkND+AmB9L/y/uS4qlmZR0fvHLV1hk
+ 5M0uzaag==
+X-Gm-Gg: ASbGncvuKhJieTujvUaiEWIN6HTXcBND2JmEXNdSJ9wzd2Q47y6VlCOR1zRG7haOzod
+ 0lJdZdxMSD1ayJi7nTh09h7QrqKqi3MzMnjc633YzOvpHjsPacmPInU2swGFyVN6E8la9LxPSzh
+ aPlEL1VlxbB1ujtTa3EzU0kumI04r048qszsFGVlYLucuvPO7OlXTLCNYDflbvInyHOoQIxvy7M
+ yo1F0/4MgHrtFTPoZOUhcqcI9KptqPt68CXjsI5abIFg9SvkTlRJnlkGa8pEVXfvFb80wMGFR/P
+ zU47HrhKcEhZJCVRfKTF9tyOgsfb5A2V/t9/GsVefjwD0AbSc/Vn/11AQpyWMyJPYPrD3nigoN4
+ yKNwEukQX8wY3in347MASlrWNbpzwu+nuqyq2WQ8F8xiyXatPipqvQrQ3nGJNJlCHrQQgIX+/
+X-Received: by 2002:a05:600c:4503:b0:477:a9e:859a with SMTP id
+ 5b1f17b1804b1-4778fea8b8dmr25878575e9.22.1763120989450; 
+ Fri, 14 Nov 2025 03:49:49 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG7hQRsiC6mJ15LAmj5U+5pSXyYnfN4HaHAVK6xD1uWW1PejCfa+IDR4lYaXVOKGmYzuY4ePQ==
+X-Received: by 2002:a05:600c:4503:b0:477:a9e:859a with SMTP id
+ 5b1f17b1804b1-4778fea8b8dmr25878265e9.22.1763120988931; 
+ Fri, 14 Nov 2025 03:49:48 -0800 (PST)
+Received: from [192.168.103.118]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47787e8e6a1sm137965465e9.11.2025.11.14.03.49.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Nov 2025 03:49:48 -0800 (PST)
+Message-ID: <3090dfe9-8f44-459f-b2c5-193b9ccda5a2@canonical.com>
+Date: Fri, 14 Nov 2025 12:49:47 +0100
 MIME-Version: 1.0
-References: <20251020133455.1870-1-briansune@gmail.com>
- <adaf5081-3b9b-4cdc-b7d3-ec9756f60ead@altera.com>
- <CAN7C2SDVD+bpF=CGDPXDqLE3U9cMm2YqxnwXScvxiFh3OypP=A@mail.gmail.com>
- <009323c1-98b3-490a-912a-35249efbfd9d@altera.com>
-In-Reply-To: <009323c1-98b3-490a-912a-35249efbfd9d@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Fri, 14 Nov 2025 19:46:13 +0800
-X-Gm-Features: AWmQ_bkpyxY-nssg2o-voUT01sLcwoPFIwtrUI3VZG9wW0z9qXBM1LNUc_yzRPM
-Message-ID: <CAN7C2SCB+ENfHQ2T9X9d_vokxLFzS=WayyAjSkznmt+2pmihTg@mail.gmail.com>
-Subject: Re: [PATCH v4] Altera SoCFpga Boot Stall Fix
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>
-Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] fat: Separate fat.c from fat_write.c
+To: Maarten Brock <Maarten.Brock@sttls.nl>,
+ Simon Glass <simon.glass@canonical.com>
+Cc: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Claude
+ <noreply@anthropic.com>, Tom Rini <trini@konsulko.com>
+References: <20251113064656.245394-1-heinrich.schuchardt@canonical.com>
+ <20251113064656.245394-3-heinrich.schuchardt@canonical.com>
+ <GV2PR05MB11941F7E4872C47E87283CCDB83CAA@GV2PR05MB11941.eurprd05.prod.outlook.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <GV2PR05MB11941F7E4872C47E87283CCDB83CAA@GV2PR05MB11941.eurprd05.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +125,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> To clarify, as of today, the driver model has already been implemented
-> for Agilex, Agilex7M, and Agilex5. For older SoCFPGA platforms, we will
-> ensure that SD boot and existing functionality continue to work while
-> maintaining compatibility during this staged migration.
+On 11/14/25 11:55, Maarten Brock wrote:
+> Hello Heinrich,
+> 
+> Don't you run the risk of getting into namespace problems when you make these
+> static functions and global variables non-static? Esp. the ones without the word
+> 'fat' in them seem to be in danger here.
+> 
+> E.g. downcase(), cur_dev, disk_read()
+> 
+> Kind Regards,
+> Maarten
 
-No, there is no ensure that SD boot by just checking what the previous
-patch or patches had done.
+Thank you for reviewing. You are right. These functions should be 
+renamed with a "fat_" prefix.
 
-Simply deleting the most critical line and just feed-in new SoCFPGA required
-code breaks the SD boot or possible ROM as well.
-And this is not the proper way to patch things.
+Best regards
 
-There is nothing to do with drivers here, in this patch.
+Heinrich
 
-So either you revert the old patch or repatch a new patch is your choice.
-I had no right and no place to tell Altera what to do, however, simply
-breaking mainstream u-boot code is completely unacceptable.
+> 
+>> -----Original Message-----
+>> From: U-Boot<u-boot-bounces@lists.denx.de> On Behalf Of Heinrich Schuchardt
+>> Sent: Thursday, 13 November 2025 07:47
+>> To: Tom Rini<trini@konsulko.com>
+>> Cc: Simon Glass<simon.glass@canonical.com>; Gabriel Dalimonte
+>> <gabriel.dalimonte@gmail.com>; AKASHI Takahiro<akashi.tkhro@gmail.com>; u-
+>> boot@lists.denx.de; Claude<noreply@anthropic.com>; Heinrich Schuchardt
+>> <heinrich.schuchardt@canonical.com>
+>> Subject: [PATCH 2/6] fat: Separate fat.c from fat_write.c
+>>
+>> From: Simon Glass<simon.glass@canonical.com>
+>>
+>> Currently fat_write.c includes fat.c directly, which is unusual and
+>> makes the code harder to maintain. Use the internal header file to hold
+>> shared functions, to avoid this.
+>>
+>> Co-developed-by: Claude<noreply@anthropic.com>
+>> Signed-off-by: Simon Glass<simon.glass@canonical.com>
+>> Tested-by: Heinrich Schuchardt<heinrich.schuchardt@canonical.com>
 
-Brian
