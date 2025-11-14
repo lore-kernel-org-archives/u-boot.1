@@ -4,54 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B67CE7B1E
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 15:13:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C89BCE8D44
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 15:22:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0D7A84141;
-	Fri, 14 Nov 2025 16:13:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 529DC84132;
+	Fri, 14 Nov 2025 16:22:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RKtQEfNO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ngKzYnlt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AF908414B; Fri, 14 Nov 2025 16:13:07 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4E92284141; Fri, 14 Nov 2025 16:22:42 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4468584137
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 16:13:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 381F784105
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 16:22:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 1467160174;
- Fri, 14 Nov 2025 15:13:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E0779C116B1;
- Fri, 14 Nov 2025 15:13:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1763133183;
- bh=Wpldo3HVLfjFqSwFw02NgNuCH9TrQfw3sOIBVepyX98=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=RKtQEfNOmLiGIdJnSFYlpL4jFgqaE7GBJSOZMWiQQRh+BJqU2KaAVsENFgrMcpPj4
- OfKkBgFRRuvYU2VQYbwvXUvir65BJ+bnGs+4DkVK2EVfO852dNHcAR/YhYsgw2mcLE
- nGJK1S/Mv91NNJCVJIv/Dsfu8hIB3U4o/KLpHAm/4q3Vxqhpdr9Wodq1wn0cWNPMD/
- K771aSyMROxLexLfpxTj8EUHtXe6HR+QtCaJHgIQn5LwSUgblXxPgY0Yv2EFRvoEvS
- 1GuaxwpWhQ2T9oOYRJwP/+XQ3mIqvd0t1bEV/1ZNfNs0S2gygoPsI+GHHTJfYL0K4C
- DpbAHjrrlhBew==
-From: Michael Walle <mwalle@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Michael Walle <mwalle@kernel.org>
-Subject: [PATCH 2/2] drivers: rtc: add RV3032 support
-Date: Fri, 14 Nov 2025 16:12:48 +0100
-Message-ID: <20251114151255.2008694-3-mwalle@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20251114151255.2008694-1-mwalle@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-4501b097976so1027673b6e.0
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:22:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763133759; x=1763738559; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0OpP25wMjrgj62pqTtMKC5lUyIPuAl51ZoOSKtHq+2s=;
+ b=ngKzYnltn20acur+bFH8IJYueIh22jcEjdrx0Kf880l7l2kz33VEC/e62mafxBK+Qf
+ R+8QX9FlyqhoQyQzzRX4NZQdDpRL0jnLTkKUbpJSfiHxmWJJeECmWN4gQdANpo4DfHYX
+ XuPY8oT6J9TlkGWtOgSjHQp+aAj/QJmQn9NMQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763133759; x=1763738559;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0OpP25wMjrgj62pqTtMKC5lUyIPuAl51ZoOSKtHq+2s=;
+ b=O0QbqF+88pM5kIlb0ioHAC1oLdN/EJy7v6INmKPeSitcnpkVxf+HZOV/+ndibixMUw
+ ieIqFu7sDSfWwrN4lDtaM/UalZnXGjrBG28ybevn4Sk+Ja8HR2ZXycZcpQ8yY3ylHPJ3
+ W24XParfhUgat7+5wiLt4e1svCBkgKInCeDEJGbYQOfUMbBsebEaeWcWCwft0E9FeT+V
+ D42El+/kBZ2Bd5K8hJ4RW2AckSBAafpV5HEEHrtchKml1yTZi1uoaB10TAdUOTzt5A/9
+ H8thWaig9PlZU6QRwcyHcy+mxzbcxe+2Tebt6WbLYg0kEXanuP65Ho4CYJn7PiYzkpdJ
+ jLiQ==
+X-Gm-Message-State: AOJu0YzNtuj6H+ykaRHexo8j0055WJj22z5SMcC/eqP8/EmL7/syA2lm
+ MwAHZYJk3bil02vi/XADocfoU5iJSh8uCwiNBGDxhKKIU8HGRB8FVw/jRxsG04T5N2o=
+X-Gm-Gg: ASbGncufciCt+8UG8gTROeBza6QfL1gcJgcx48+3XvOmBvFXiS7ZAN5rm9hZIcJ0qpE
+ 5TjcLWEJd5Vcchubec5FKF44hzNDJa+zqRbnOlrmZ3QFdAHECoTg2VbknE46ZJxt1o5+2SQMgV3
+ Rj3CvnH8R40aGZVYkd0e3grW1Xy5uS2SVXX2RJUyS8PLW0kbZhUmtHSFiFp2bXBrar4gu+Kook7
+ Z90UYsrlrUaK8aFuiUjkpTW1rBd/dL554Q3rtQSS9ddO8Ufnhq/WJWfjVLSBjXAKhX7KRJCSgCj
+ dHeoGIi8SiS0DooQHmFXy3OD0S8FbYQ+x1dbvIR41GeB3/fV+pkl7lbtJzRLFYlO6EHyq64jnUZ
+ cshP4TQP4U6cSmoCFGfjzotjmH1wyXqDyfpqLzL6gfq9xIRl1rlmn/go0z94e+3cm81flbFQTBa
+ ehzJYGNlzpSsWfU+eSG1XFY5/QRgpuGnXYfqFFyZM=
+X-Google-Smtp-Source: AGHT+IE4I8Tpg4LBhnRwLQuFBB7IRLOshRVlr/uj1g3s243ahAulbh69CmrFBlhIPBstOY/HSyuYXA==
+X-Received: by 2002:a05:6808:3096:b0:450:65dc:1fce with SMTP id
+ 5614622812f47-450973fb954mr1551819b6e.3.1763133758918; 
+ Fri, 14 Nov 2025 07:22:38 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4508a6d7b24sm2081325b6e.21.2025.11.14.07.22.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Nov 2025 07:22:38 -0800 (PST)
+Date: Fri, 14 Nov 2025 09:22:36 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michael Walle <mwalle@kernel.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] drivers: rtc: add PCF85063 support
+Message-ID: <20251114152236.GB6688@bill-the-cat>
 References: <20251114151255.2008694-1-mwalle@kernel.org>
+ <20251114151255.2008694-2-mwalle@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zJs7JjGVG+dGuJXM"
+Content-Disposition: inline
+In-Reply-To: <20251114151255.2008694-2-mwalle@kernel.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,173 +97,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the Microcrystal RV3032 RTC.
 
-Signed-off-by: Michael Walle <mwalle@kernel.org>
----
- drivers/rtc/Kconfig  |   7 +++
- drivers/rtc/Makefile |   1 +
- drivers/rtc/rv3032.c | 121 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 129 insertions(+)
- create mode 100644 drivers/rtc/rv3032.c
+--zJs7JjGVG+dGuJXM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
-index 2336f2e57c9..c6c6a02221a 100644
---- a/drivers/rtc/Kconfig
-+++ b/drivers/rtc/Kconfig
-@@ -194,6 +194,13 @@ config RTC_RV3029
- 	  This driver supports reading and writing the RTC/calendar and the
- 	  battery-baced SRAM section.
- 
-+config RTC_RV3032
-+	bool "Enable RV3032 driver"
-+	depends on DM_RTC
-+	help
-+	  If you say yes here you get support for the Micro Crystal RV3032
-+	  RTC.
-+
- config RTC_RV8803
- 	bool "Enable RV8803 driver"
- 	depends on DM_RTC
-diff --git a/drivers/rtc/Makefile b/drivers/rtc/Makefile
-index 9d84aa836a1..9df373d5148 100644
---- a/drivers/rtc/Makefile
-+++ b/drivers/rtc/Makefile
-@@ -34,6 +34,7 @@ obj-$(CONFIG_RTC_PL031) += pl031.o
- obj-$(CONFIG_RTC_PT7C4338) += pt7c4338.o
- obj-$(CONFIG_RTC_RV3028) += rv3028.o
- obj-$(CONFIG_RTC_RV3029) += rv3029.o
-+obj-$(CONFIG_RTC_RV3032) += rv3032.o
- obj-$(CONFIG_RTC_RV8803) += rv8803.o
- obj-$(CONFIG_RTC_RX8025) += rx8025.o
- obj-$(CONFIG_RTC_RX8010SJ) += rx8010sj.o
-diff --git a/drivers/rtc/rv3032.c b/drivers/rtc/rv3032.c
-new file mode 100644
-index 00000000000..87ff5204e73
---- /dev/null
-+++ b/drivers/rtc/rv3032.c
-@@ -0,0 +1,121 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Micro Crystal RV3032 I2C RTC driver
-+ *
-+ * Copyright (c) 2025 Kontron Europe GmbH.
-+ */
-+
-+#include <dm.h>
-+#include <i2c.h>
-+#include <rtc.h>
-+#include <dm/device_compat.h>
-+
-+#define RV3032_REG_SEC			0x01
-+#define RV3032_REG_STATUS		0x0d
-+#define RV3032_REG_STATUS_VLF		BIT(0)
-+#define RV3032_REG_STATUS_PORF		BIT(1)
-+
-+static int rv3032_get_time(struct udevice *dev, struct rtc_time *tm)
-+{
-+	int ret, status;
-+	u8 regs[7];
-+
-+	status = dm_i2c_reg_read(dev, RV3032_REG_STATUS);
-+	if (status < 0)
-+		return status;
-+
-+	if (status & (RV3032_REG_STATUS_PORF | RV3032_REG_STATUS_VLF)) {
-+		dev_err(dev, "Power loss detected, Invalid time\n");
-+		return -EINVAL;
-+	}
-+
-+	ret = dm_i2c_read(dev, RV3032_REG_SEC, regs, sizeof(regs));
-+	if (ret)
-+		return ret;
-+
-+	tm->tm_sec = bcd2bin(regs[0] & 0x7f);
-+	tm->tm_min = bcd2bin(regs[1] & 0x7f);
-+	tm->tm_hour = bcd2bin(regs[2] & 0x3f);
-+	tm->tm_mday = bcd2bin(regs[3] & 0x3f);
-+	tm->tm_wday = regs[4] & 0x07;
-+	tm->tm_mon = bcd2bin(regs[5] & 0x1f) - 1;
-+	tm->tm_year = bcd2bin(regs[6]) + 2000;
-+
-+	return 0;
-+}
-+
-+static int rv3032_set_time(struct udevice *dev, const struct rtc_time *tm)
-+{
-+	u8 regs[7];
-+	int ret;
-+
-+	if (tm->tm_year < 2000 || tm->tm_year > 2099) {
-+		dev_err(dev, "Year must be between 2000 and 2099.\n");
-+		return -EINVAL;
-+	}
-+
-+	regs[0] = bin2bcd(tm->tm_sec);
-+	regs[1] = bin2bcd(tm->tm_min);
-+	regs[2] = bin2bcd(tm->tm_hour);
-+	regs[3] = bin2bcd(tm->tm_mday);
-+	regs[4] = tm->tm_wday;
-+	regs[5] = bin2bcd(tm->tm_mon + 1);
-+	regs[6] = bin2bcd(tm->tm_year % 100);
-+
-+	ret = dm_i2c_write(dev, RV3032_REG_SEC, regs, sizeof(regs));
-+	if (ret)
-+		return ret;
-+
-+	return dm_i2c_reg_clrset(dev, RV3032_REG_STATUS,
-+				 RV3032_REG_STATUS_PORF | RV3032_REG_STATUS_VLF,
-+				 0);
-+}
-+
-+static int rv3032_read(struct udevice *dev, unsigned int offset, u8 *buf,
-+		       unsigned int len)
-+{
-+	return dm_i2c_read(dev, offset, buf, len);
-+}
-+
-+static int rv3032_write(struct udevice *dev, unsigned int offset,
-+			const u8 *buf, unsigned int len)
-+{
-+	return dm_i2c_write(dev, offset, buf, len);
-+}
-+
-+static int rv3032_reset(struct udevice *dev)
-+{
-+	/*
-+	 * There is no reset, but the "date reset" command needs this op to
-+	 * actually set the default time
-+	 */
-+	return 0;
-+}
-+
-+static const struct rtc_ops rv3032_rtc_ops = {
-+	.get = rv3032_get_time,
-+	.set = rv3032_set_time,
-+	.read = rv3032_read,
-+	.write = rv3032_write,
-+	.reset = rv3032_reset,
-+};
-+
-+static int rv3032_probe(struct udevice *dev)
-+{
-+	i2c_set_chip_flags(dev, DM_I2C_CHIP_RD_ADDRESS | DM_I2C_CHIP_WR_ADDRESS);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id rv3032_of_id[] = {
-+	{ .compatible = "microcrystal,rv3032" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(rtc_rv3032) = {
-+	.name	= "rtc-rv3032",
-+	.id     = UCLASS_RTC,
-+	.probe  = rv3032_probe,
-+	.of_match = rv3032_of_id,
-+	.ops    = &rv3032_rtc_ops,
-+};
--- 
-2.47.3
+On Fri, Nov 14, 2025 at 04:12:47PM +0100, Michael Walle wrote:
 
+> Add support for the Microcrystal RV8263 and compatible RTCs. The
+> driver's name was taken from linux. It should work with any NXP PCF85063
+> compatible RTCs. It was tested with a RV8263.
+>=20
+> Signed-off-by: Michael Walle <mwalle@kernel.org>
+> ---
+>  drivers/rtc/Kconfig    |   8 +++
+>  drivers/rtc/Makefile   |   1 +
+>  drivers/rtc/pcf85063.c | 107 +++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 116 insertions(+)
+>  create mode 100644 drivers/rtc/pcf85063.c
+>=20
+> diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
+> index ed903999f06..2336f2e57c9 100644
+> --- a/drivers/rtc/Kconfig
+> +++ b/drivers/rtc/Kconfig
+> @@ -161,6 +161,14 @@ config RTC_MAX313XX
+>  	  - Temperature sensor
+>  	  - CLKOUT generation
+> =20
+> +config RTC_PCF85063
+> +	tristate "Enable PCF85063 driver"
+
+tristate is wrong for U-Boot, only bool is meaningful (and I need to go
+update checkpatch.pl to complain about this). This is I assume otherwise
+checkpatch warning free and compiles on sandbox?
+
+--=20
+Tom
+
+--zJs7JjGVG+dGuJXM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRdJNAAKCRAr4qD1Cr/k
+Co0TAP0RP/8CkNNtH5bUvtQslLwkHDz7Yxqj2Yhr+kO+/cgSZAEA+Tem5vCdzYPR
+kNL5fCT1EO1N0rWOFkRrW5QZWRQG7wc=
+=1L+n
+-----END PGP SIGNATURE-----
+
+--zJs7JjGVG+dGuJXM--
