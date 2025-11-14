@@ -4,78 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E33ADCE7AF9
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 12:04:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF09CE7AF9
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 12:07:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DB9483F33;
-	Fri, 14 Nov 2025 13:04:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F0C2683F33;
+	Fri, 14 Nov 2025 13:07:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="WH/gjSQZ";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="JGZUy6vJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2773F8409C; Fri, 14 Nov 2025 13:04:19 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 93B7B840AB; Fri, 14 Nov 2025 13:07:33 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3D3C83EF5
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 13:04:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9897E83EF5
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 13:07:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VoRnXuwh1ewMxdXjW/BEmomlg6FF6K/95htiqkfv8gQq9bkpGEiOso0KSiTrnJHdw2uWEv/PxJDrtAYci/q7DR5hwJNNFwMmctjfZm1tRcznO1d3AyVYfUfPOXUHuW27dxVt0VYYHXcExNaL/HytHg+B5TOprDBh8SeP/NlD26aPX7jx99VDo54tpu/FVlPiqQY2CINI0VK/+7DC7X7SLk1g8RPMItc+BCREcCyVjFx7I1484MM1d8f5vMCL4ld49mNjX5k0hihEHiQvufubUZ6DUGtADDyvd08mQ897XbTFLTE7kYpcy5NdpDaYjU3YJ78vpYdLzd3wYoExT454yg==
+ b=h3ycCijHxK2SK+QHjYRwG+DQuG8ld7jApcQCD2hyjrdk/tmHeHdX+QGqa+g7r/VC0kw7xBGBKnhyUXerOghobOSzZWwlc0MlzY2IxKNlpj8rKJxD9uqVrxZjqgIXcv9D1iAG1j3fwf7TYO6UfLz5smZLHIrgbzu6eA2OInNRVHIA21ByII4xqliW90AY8hWXf0LO48/+BHfYnZinZC8aIitS2ASC0OfMNIe7/U29ioQLNGtyYn3ty7hOpjCVNIFonr4xAy1giHWWkqi6w1CFmUhDKWww8yePI26pm5lz/T2xTkh1D55qL0zrp5jLo5H0JpUiP6yWx//oNJNxI48ruA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yL30IRJqHVOclIqXN1hgDwnNb4U4I1l6h9cARAdBH+E=;
- b=Ov7WyCgPGpLmOgj1o3P+dlLK9yJwOaEsumz8yvK0ntI3yeiJwhXXmZz/iQgde5RWZsKI5jC1KFEozND6+pG/vuNwscaxcvFcWhAhLRu0lcTR0df3c2EQ4+NSd29dKdOe4t/Nr6Lze5d7WEpiy3v7Ri1eUj1NsPT6fcby2HUEzm9FHgB3Gkdn7WYHYu+vJDoYRVti2rQ6x6iI9F2Zr6JW9j19SWjp932zVPYUy24hiFZfG/sWp4R8TrXDy/or5EQ/4CsghI6pQCRLrvSso8oLaRaeLZcJPdjhbiSlbNHDWkUbGz8FEEUjRcIoFxp2jgCVdF+6W7C3o26KsvVC6QOzpw==
+ bh=InRIretYstJMM4On4XwuxCZNEYMPnGZkopBOfVOJYmc=;
+ b=XPG43np3LkuAoNqgw4t3T8LvY2271deW/6BAzdIPLzV+9cYdB7eax2An9aRSxqkkixsp8aK627GcJDidP7/ItTgEDZW1Ycw+skgfbZCbvCBsiuntlIRY78aLTm+R13NQm/vbH+/zjmasmUfNeazHT/I87kNI3rTY6Law9oNgv9xrKrw6lpgpLydsNbzlgO1PJ/xIwukKrjRCGVY7KYdNKlSnVe9MHpM2vJwPsl641gQwNQTa2WCG78O/pqejTefN73tI26LZxuO59QxNJXqy6p13x0Vb32fH/0pRwf2w12E/q20N8vxrSQkEbGIE8OV1KpR/nnu+bRNW0XYT3o8+jQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
  dkim=pass header.d=siemens.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yL30IRJqHVOclIqXN1hgDwnNb4U4I1l6h9cARAdBH+E=;
- b=WH/gjSQZjIwceOPkRsI+8vdxXKkDoa+PtUQXcvQ6fLbzGAaPp0mSk1CKC8CO6ZJgPUs3P6mqk7HZj5DiboHI8F7s7i4e91cHRcupWBalxFDahs2pn2ffOItjB1U5K9GMeOrHdR0LC4CV4Hs2pLsiCDIw3y79g2s5vW6piCw4UiSBnTj1PM4Obf5IBUeBRbsC3cu9eZmEPZy2ZXJ5V0j141zDAn8iWIqzwGeL7bwmVTNleObCm7n5uWW2EJr73p3lGgnT6rx7WIdQChloj9ZdPo9uzYSggnvK4QkVly/oCbXoo0INgGknNX/WAuBLO9bWA93on1knQRCiYR8m7C7Xdg==
+ bh=InRIretYstJMM4On4XwuxCZNEYMPnGZkopBOfVOJYmc=;
+ b=JGZUy6vJzbA94ZRh2YfU5NWw85/3fiUdHZXJSpENksWHeWAA83uwo4ePZ+52JWCz967w3ecVgNsQN5nMb7l3BVEx3y6AJarPvLEMCRbmnG63L2u1++E6pO/Et4YQMneNzuJQxqVGbycmvidAnImFBcajhnLCSGNrjfmOYBYMSmip+wwUS7HmFmBJbUyOf/I3R5zJ1LlLbpJB7MBxdV1QO1T5m+SKDNymdMTZBfvPnL77suq5/2PQeCML7PMEJ/RK0Bcv16yOzddLsX77XqKEWpRYoXC9oZm4wl1az7MYQ/uSDNtOX0qMbL/hhmtZG3DMOHcLrQwRueLZbfedToXlRg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=siemens.com;
 Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
  by GV2PR10MB9588.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:2f8::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.16; Fri, 14 Nov
- 2025 12:04:13 +0000
+ 2025 12:07:29 +0000
 Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8fe1:7e71:cf4a:7408%6]) with mapi id 15.20.9320.013; Fri, 14 Nov 2025
- 12:04:13 +0000
-Message-ID: <77f4cc84-9272-4af3-8694-66f60c01d755@siemens.com>
-Date: Fri, 14 Nov 2025 13:04:12 +0100
+ 12:07:29 +0000
+Message-ID: <99585fee-dd5d-4f9f-aa88-0ee34fe02181@siemens.com>
+Date: Fri, 14 Nov 2025 13:07:28 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/26] arm: socfpga: agilex5: Add new driver model for
- system manager in Agilex5
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>,
- "Chee, Tien Fong" <tien.fong.chee@intel.com>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Tingting Meng <tingting.meng@altera.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>
-References: <20250218083511.29249-1-alif.zakuan.yuslaimi@intel.com>
- <20250218083511.29249-2-alif.zakuan.yuslaimi@intel.com>
- <DM8PR11MB559296B2DEB7CB7AA6253B7BD2C52@DM8PR11MB5592.namprd11.prod.outlook.com>
- <0c48f4de-0da8-4d95-8070-f4382ef344f8@siemens.com>
- <a35f16ba-5334-45c2-adb1-e0b6291cd004@altera.com>
 From: Jan Kiszka <jan.kiszka@siemens.com>
+Subject: [PATCH] arch: arm: mach-socfpga: Fix non-Agilex targets
 Content-Language: en-US
+To: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Autocrypt: addr=jan.kiszka@siemens.com; keydata=
  xsFNBGZY+hkBEACkdtFD81AUVtTVX+UEiUFs7ZQPQsdFpzVmr6R3D059f+lzr4Mlg6KKAcNZ
  uNUqthIkgLGWzKugodvkcCK8Wbyw+1vxcl4Lw56WezLsOTfu7oi7Z0vp1XkrLcM0tofTbClW
@@ -119,102 +106,102 @@ Autocrypt: addr=jan.kiszka@siemens.com; keydata=
  qH4kDzsqKX8zzTzfAWFxrkXA/kFpR3JsMzNmvextkN2kOLCCHkym0zz5Y3vxaYtbXG2wTrqJ
  8WpkWIE8STUhQa9AkezgucXN7r6uSrzW8IQXxBInZwFIyBgM0f/fzyNqzThFT15QMrYUqhhW
  ZffO4PeNJOUYfXdH13A6rbU0y6xE7Okuoa01EqNi9yqyLA8gPgg/DhOpGtK8KokCsdYsTbk=
-In-Reply-To: <a35f16ba-5334-45c2-adb1-e0b6291cd004@altera.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AS4PR09CA0010.eurprd09.prod.outlook.com
- (2603:10a6:20b:5e0::14) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0345.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ea::6) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:588::19)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|GV2PR10MB9588:EE_
-X-MS-Office365-Filtering-Correlation-Id: 04ca9d03-2e87-44a6-df74-08de2375ed7c
+X-MS-Office365-Filtering-Correlation-Id: 73e904f1-7076-4cfc-0458-08de23766256
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QWhEbDA5MVNxdkpEN1hQSndMc05UZ2dTcFhQTGhzZXVlV0RiUWFhM0JmbVFQ?=
- =?utf-8?B?VVd4ekNWTTZ5cithSkE4UVlEVjhUZUhOUk1xNXpNTWZFNUt3MkxuTlJ6SERh?=
- =?utf-8?B?Y0hOY3pnVmRDMVhyWDNuOElCT1hEOU5oTFhvOVo5VUxlT2xicTFiSlUyQ081?=
- =?utf-8?B?SEhhSm90djVZT0gxblBnY3drM0s0TjQ4MzJzKysyQVNCdGdwenZxWHNnVnkr?=
- =?utf-8?B?L2NOUHpnOVlVUFVCbEsvTG9UNVNFZUExKy92NXZudm9COHZndG9rd0cyUjMw?=
- =?utf-8?B?S0gzM05iV29RTmUzUnhRQkhPaEpXYnpYZzBvQnhnRnptRlFOM1JsZkF1QnAw?=
- =?utf-8?B?Uzh6SDd2K3Jsbnp4ZEszMFIzSU9WN2FiY0s4WUJGMitidmZQZGFzSWcwK3VR?=
- =?utf-8?B?eEZ0ZmgvK1NIREo5cHB2M1R3QW5Qbkl3cGtreFRjQzJuTmFCcWlzeHZQWnND?=
- =?utf-8?B?QTJvL1hqZGhlcjZwNWJORFJveXZFWXhzWHNQdjNVRWx2UDBiR2VBL2R5Tm1T?=
- =?utf-8?B?USt3eVpLVTkwbmJ3U1lZS1FVaHdDZ2djV1IxK1ErRnJ2a1FtMlF1Nk1iZkNl?=
- =?utf-8?B?NE5Kei9qWnNFNkkwTExsbnkyNXkxWHc1RjBPSEw0cVVBOE4vMHlER25hK2FV?=
- =?utf-8?B?VTJ3TkFQd2NYSUVyNStZYlZtNlB2ZUZlZkpnS1VTK01HempKWHJxYzk3YUhk?=
- =?utf-8?B?M25tZmoyMnc5S0cvSmhZemhPVFFKRnVWcTJDR3JhT0Jkdk1LaEZVYzJxcDJE?=
- =?utf-8?B?MytHNEEvcnBwOG01dFFqNFpLeUNmelhNQVh3U2krWURIYzlmZ29sa3YxM1Vq?=
- =?utf-8?B?czlDTTl3bkttRS9jQTJMeVluVE1pNHZlc0N3L3h0RUZ6ai8xb2FKNnkzdmZG?=
- =?utf-8?B?Z1VQdDVlN0VQRy9YODZJZUY5b1UxNnVVN1ptTjJQNzloN0FWT0Q4ZXpBbFJx?=
- =?utf-8?B?WHV1U3IxV3puY2x2dEptU2ZQMS9mSENZemR3Z0I1OWVKS3ZoYmhjZkUvS0J3?=
- =?utf-8?B?S2VjR2ZnSTBSL2hkR3ByL1ZYSkZZK3ZjYWlJSTdJM0Nxc3REd2NsakRFdjAz?=
- =?utf-8?B?aVpqa2dwZHk5czMrRzlsQVdNUzNzYVlPVTRNanlRWm1KWGJGSWNpYWVBN3dX?=
- =?utf-8?B?VE80Q2llN1pnR2tIVkhtSEo3bUpsNHZ5Mml0RUpGd2liRk9lZWR5S3QvckRi?=
- =?utf-8?B?blllQTdXS2pxeUhINGhsRW16Wmx1R0tqNWtySEJ1TUNwUUdpTjZQWjRwVW1u?=
- =?utf-8?B?azEvUXJxcWk4SkQybEZ3YzAyU2w5Ymo5ZWJsRFJlRVRRWG9uemh1Z3BjWTNZ?=
- =?utf-8?B?VVd3QWtTMlpmSDQyNUtPR0ZiZnNqSGJ6ekNISC9uWU82U1crdDRiSUtWeFdi?=
- =?utf-8?B?T1ZpbEpLbjdrLzhGR0tHTGNTdXhhbUZOaVd3Y28zc3o2Y2l4VWw5MDFxVDlB?=
- =?utf-8?B?aUhiS0ZDTndGdDFnQXVxL0tGK1BNMHpOZlJzbW1ENDk1NzJUUUZBUzBrZG5Y?=
- =?utf-8?B?Ynprc2RQZEZtYmZRYlhYSjRTUnhzSXFaYkxLblRaWG55dlJMdlRUOCtsTkNL?=
- =?utf-8?B?TzFrSjlZVUROaEpZeTJsRVc4bTdZTDFPMnRoNnNkQTNvdzFLWHg1U1Qzam5q?=
- =?utf-8?B?MC82S1ErTXVoZUZldDlnRzZhWXJPZWszVTNhRWhDcTk0d3l5eGE5R1VwaVhp?=
- =?utf-8?B?ZW5TUXNKRUlNOU5VdGF2dkhhNk50SjVYWEtJQUZTQU9jbisyMWhuNUp1SjRp?=
- =?utf-8?B?cTNWY1ZSM3NkN1FLZUJDMGlHN3N3d0Y1M3EwdWk4aExSUCttSGh0MDllZHY2?=
- =?utf-8?B?UG4vTXdzN0xvQVpBMkFoZ1FvZjhERFp4N0FPdjFudkdkM05KdnZrNGpMYjJ6?=
- =?utf-8?B?Tk1VNkJlR05wS3JpR0NRMnlHN3ZJM1E3NzdXZ2h0UUZQdzdhMm9VNG84VXFN?=
- =?utf-8?Q?e492o1Q0oFngD/V4XqXd8uOSJgre9+eQ?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WDkxeEZVMkhqc3dESWEzdVRzZzNyWHZKSGR6QXd3aWtrRlBDM1krb2pmV1FL?=
+ =?utf-8?B?NjNuN2dNSEcxVzN6cnc3dzB1WlA4SWRhaEZ3MWs3Q2VBSWlzQ0REaldTcmsv?=
+ =?utf-8?B?c2E0MllCa1BrbUhYa2hqMVhRSnYwRzkzdzZkbTd5VCtnQWVuK3QzdkZtbUMy?=
+ =?utf-8?B?c2RSY3JLTTVEMVFWaUpvY2piV29iS2wwVFJOektJcVNMaVN3ZUdweElyRWs4?=
+ =?utf-8?B?L3FEelZRTmRlT0kxa3dSWHdUSnkydE9Fci9BYnFlN1ZlZGxVczBJbFNCK1lw?=
+ =?utf-8?B?VTlQZ2NJUzNiSjIrTGlhVXQ2MmZkemlzZ1lGM3Awbzg4cFpEY3dmRmtIM2Rp?=
+ =?utf-8?B?TWkyaGFPb0tBUitLTUZaSE80T0l3Y29xTUordlFjMVdpd2UzVXhUWE12ZHJD?=
+ =?utf-8?B?a0x5YU53eDdBSkJJNnlLYktaUXhzOTJzU2lYTzRxUWhMQVBqK2NjK3lBM2Zz?=
+ =?utf-8?B?MXlMQXF6ZmwvSHN5c3FwMGx4d1ViVGJWOTJNaVNwMTRiOUJXd04wSkRJZk8y?=
+ =?utf-8?B?NkhlcVdOZWlQWnIxdUtyVVM1clRzZ000M3kvNkU5V3BvZU9ZVkt1NTAxSERa?=
+ =?utf-8?B?QlBoWHVtYkJiS2d4RHNScW5XMWJEZDIwQ3p2aEdDaFRHdFNtNnlCMVlZUFBX?=
+ =?utf-8?B?V3F3TDNmdEdKOVhoOGxwRWcwS3pBNTZxNkxpL3R2QlhzeFZGYlZJUUpNeXlQ?=
+ =?utf-8?B?YzVVQ2prQzA4VEp2NmxWd21Ydk5KUUFBNmJzUHBPcFYydEtYR1U1MWJyd0Fw?=
+ =?utf-8?B?aUhkbllVM3RwNFFRYzZqdjR4MjExNm5zVXZaQXJCQU5VUzVpSFJHakpZMGJT?=
+ =?utf-8?B?WVplakRiV2dtbjJ5YVZIVWhWVVlqYVJ0bGlpVHF3UGN1d1daS29vS1RwTDJH?=
+ =?utf-8?B?MmxVdEZrbWN0R0FXcVlTWXBlbGVucHNISE5KTm1WL1Q4c05xSUdqdHR1d2JG?=
+ =?utf-8?B?WFc4NWI5TVVqTTJXMkhya3NiblE5cFBNbmVWaG4vUmprd0trWjlCTnNJRElR?=
+ =?utf-8?B?V0h5Y0RRbk1rVmRKRUE1RE8zNURHN1MxQ0RyYi9WbjlpTzM5dVdiUitZbkZn?=
+ =?utf-8?B?cGNaRDN1WGh3MTdtOVB0SkoyU3AwdUNtaUd4MlhvbTlpbEZOcGgybENCWGhi?=
+ =?utf-8?B?RzhFb0JNTTNOS0lReHN2TkhqN0hndkdzSHpVenQ2QjI3MTFzR3lNb0UvckE5?=
+ =?utf-8?B?N3BvOHkyejFMNkZpT0Z1R01RakVrSjJvL2VRanNmejJjSVUxM0VsNDJqcnVx?=
+ =?utf-8?B?Q1JMZkJPb1VIMnAxb1owV21MeEhLeHBRVlBOakQ3ZmJlU3BBNnRXSUZwb2dt?=
+ =?utf-8?B?cEp3WDBoUlV1K0tzdDhUWnljNFBKdHhvY01lYkRORmVJRXRydDN2TkE0QlJW?=
+ =?utf-8?B?WU5LcHFSQUxoOStVZkZBcnk4Yk5tbFlscFk3dUVYOUVsWUkvbE9RY3haMXJj?=
+ =?utf-8?B?RGo4TE5NUnhlamc0aWQ2a0VDZllhR2xOWkgva0YrMGEvN0dDYXFCLzFXMmI1?=
+ =?utf-8?B?eVovTVgwSmhwMTE5cy9QSG1HRzdyZWthMEIyTjZRcVlybEhoRFFMUUVZSEJV?=
+ =?utf-8?B?c1pMZFp1RWJ1bmZqNVhMa1ErNEQvOWFtbHROb0JhZ1pWclRPN3U2ZUFKd3Fr?=
+ =?utf-8?B?T3hVeHhzemF0TnBVQm4xSnltWGI4bTMxdm5vakdTVC9TRkh0cHh2eklhS2wv?=
+ =?utf-8?B?eUFocjdNc3hOUDFaUXhIcDMvT2Z0bnZmdWExNS82cnBpa3lTQ2dTRUtqNnFz?=
+ =?utf-8?B?Y3Q0L04wZlFIRTNHVWFTdEJ1elYwZmQ5QnZ2ZFlzd2gwUVVMMG82ZlY2Q2Ur?=
+ =?utf-8?B?U2NyNFMwQk5pclpNSHJrMEEwSjRPdjZpck5SbFkvcEJvcDQ2UmNTRHdraDZQ?=
+ =?utf-8?B?d0E0YW8yWGsxU2xLdlcrdHhMTG16TTVTdFB0ZWVXeS80RkcyQVNSSDZ2OG9x?=
+ =?utf-8?Q?aLc4gZHG6YJE0JV6gQ14/42X1OtLL6g2?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MDRFbm5PbzhoUW5UL3VZOVBsYnlXa0JsWVRHMlp6K25xemtWU2N0MlhzWUZ1?=
- =?utf-8?B?MEd4Ym9ua1FXUXBMdWRjYkxLWUZLa05XQ1ltdzNWNTdxY2ZUeDFxNXdwWkN0?=
- =?utf-8?B?Uy9SakJ2OTJnMkd6aXZ3Wmd1QmlOT2lGd0pPWHY1OTNnNEN0KzZuY3VDYW9q?=
- =?utf-8?B?anNQS1BsblMrL0lxd0RCN085ODlRSnVzRzI5YjB0L2kvUEVFY2VqTVpSL0hk?=
- =?utf-8?B?SDZIanpHL1dlM0FtK05oTXl0SFhMRmNVbVFrd3VKTElCTWN3eUxzM1NPcm82?=
- =?utf-8?B?UCt0c3oyNWJ1Yk4rZk5iZWJDcEFwUHExa1RBU0c2YW81cW9iNFdubGMveE9U?=
- =?utf-8?B?WnZyOHI2eTMzNFJKd25VeTArTHNveUFUNm5xM2ZJemNZSjBDRFRxMk1lRVJI?=
- =?utf-8?B?MklCQjJlUEp4VFNpSnRGUHJYekVaMDExa0JIRS9OcHdlWDU2aE5hYlczeGpj?=
- =?utf-8?B?R3BqbWUrd0Q4bDduR1hsZWREaUpiRHJ1cit5NHlUYTNCcG9DTUhRWmZiRGJj?=
- =?utf-8?B?bkQ0VEJSRjUwMEtabHQ2L2RkVFVZdi9TeWFJdG5vZlgyK1RVUThITnJEOEgw?=
- =?utf-8?B?MUpscy92d0E3R0FncEJmU3FpT29ER3g2MlFTVHhSS25mZnlwdGx4U3ZTbXBu?=
- =?utf-8?B?NjA4TVVPZ0psODhnODF2M1M0YnZIVDhvWm9nRTM1WmpmTCtsNnRkaTlFeG9I?=
- =?utf-8?B?Y0xGSlZ1eUZFTDgzQ2doU1V1SzlhSTNrUnptUE5USEgyeEFrZkVDV3l1Nnhr?=
- =?utf-8?B?QTFyT2gySTd2UlJ6WXF5WEJJYlVOZTBDbzYyaXVWWW14R0tNTklTNU5vNUVD?=
- =?utf-8?B?eE82UHhRRTJOb2VrRlMzbHhtNUNkem9ScDBBakl2TFJiYStRQk9vTXJKSjFi?=
- =?utf-8?B?bzNqWmlnbkV4K1lLb2RucjNjbGR0c3JEVkdxS0pYL1JuZlZ3L2piRjlXUTlH?=
- =?utf-8?B?Zi9YdFI2Vk1YeEV0bk9wWnI0MndtRmdVbmNmaXQrSEp6UFNDZG1odlJLSXlm?=
- =?utf-8?B?SVpvanhYWlg3OUFJWDFoelc3V0JZeWVxUU0xbExnQVFnM0hVemJLb29PQlFh?=
- =?utf-8?B?bUpESi9VWVB5QkNpKzlKT3pqQmRqTldBSVVGbHFsYkF3OWVycjYzUEZva1RE?=
- =?utf-8?B?cXN6RzZXWGVIL203UG9wdFdWbEF0MTRlWmI0S2FNakJYMkpsRXF2bEJ6NFov?=
- =?utf-8?B?NHBKWG5tdEpsQ1RKVGRoUCtvT1p4NnpMMTZwYkFZNnJQQW9CMlkzU05HRUhl?=
- =?utf-8?B?RE90c2NqODJVSTkwWUppdHJYZ2JCV3U4WHNtTW9HWFV0ekdRQlpETWsrWUI3?=
- =?utf-8?B?WlF1NEliNDIraHdmVDY4VzMzcnRlcXlXRXdYNjVOTDJHdktWMGRxdGY5eVlW?=
- =?utf-8?B?bm5BNHRsSHlHTmpMSklKRVdOU0ljZ0xtNGJUK3p6YTI5ZmoxTll5Tmh0RUxm?=
- =?utf-8?B?MVBybGNib2Z4azFrWXVpRVFjN1YxalBndWVGaFRyUENvdmhRVmxJQlZ1UC9p?=
- =?utf-8?B?eDlzVmJtUUdZaWMwQzRycGRjRzBIK3ZqTGJ3Y2NUblFMQWVrMjlUMnZGTVZn?=
- =?utf-8?B?WG4yRnRUdDgweGZwVEJYMFB1K0dUUFR4L2JvR083eFl4SUhmR1NpQ0RHMVVZ?=
- =?utf-8?B?QzhTd2I2UkRxMm5zYm1hTVkyc3IzRFRYdVpDcFhmaU9NREpUMnJ2SlRuelRC?=
- =?utf-8?B?TjJpZGcvRk9ROThtcS9CNFI2RnVEc3NWTFFmaEp6SzIrTWhFRDM5VWFmMnBl?=
- =?utf-8?B?MklteDZNeVpFcUFOeEwyT1ZOZDVNTEJGYXczd0JjNHJ4aStZUFZKaHkwMENj?=
- =?utf-8?B?SWVLTEw1UTV0SmZJSWxPZ2Rnd1dLSWdmV2xrVnNMOTdJT0NjeDFqWDR0bHJz?=
- =?utf-8?B?MG5ZOS80cTcxNGUzb0Jic0VUeHVOWjJSdHB2NnhsRE1Da3JEMm01L2VhMTBn?=
- =?utf-8?B?UUNPOC81Z29xSnhJOFhEQUcxTkJMYmhBeWF6MU5Yc2RrMHl5RVVWWFlZUFJn?=
- =?utf-8?B?SjlMOXRkc0p6dDg2WmU3b0drMWFRbWxGRmN6dG0xRllDWi9yVzAwS0poM2FU?=
- =?utf-8?B?K211RDRRbWRmNGpySWsxU01pQllVdXF1QmYvbDVvN3o1VVg4V2RYT2xYK24w?=
- =?utf-8?Q?QBSbdQyIHo7hnpAJh4NeIKnjO?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WEowK01sSVg5YitUcEswRHVFaEp5MmZZWUlqWVBJeE5na2p0ZWxDY285UVAw?=
+ =?utf-8?B?K1JFM2dqQlJ1aTVTTEhaRHR1bGo1VmxIeDBqcVQ3eTFUaXdsempVem45dE5N?=
+ =?utf-8?B?YldnSHFxcGt4dk9BT3NrYlUrekdGUmEyUGlrUExYMDhac0FEWmRxbVozaC9G?=
+ =?utf-8?B?cElqMVc3VEVpcklucHhOM2sxcjdCdTBXL1BIdlA4d0x3V0VGYy9qcVdDRzRa?=
+ =?utf-8?B?dGw2RDNuajRSYklIaktHZjN3a3dDMllrdmZGSE0wRW5zdW5CWUNubDZuai9v?=
+ =?utf-8?B?Rld1WG80RXlXT1RmM0ovaDI1a29YanhWR3hIVVRRZnRVMjdPb0JhVUZCa2lH?=
+ =?utf-8?B?U0NIQ09WK1FFaGlUZVBHUk9tN0JxVW5Id1ZsU2g4ZEV1dFp5eEZKQ1A5NTRv?=
+ =?utf-8?B?ZFpDWU1zMzkwcjZ2aUx3VTZwN3lpRVcwRGpUNXpHazZGU2M1UGlkL1R6bzRI?=
+ =?utf-8?B?QzBrOHg5b3dXN1ptakY3Z3RNc3BQckdLYk1nTlNQTWVkQjF4L0xPd01XSGJV?=
+ =?utf-8?B?Ylh0RFZtUFc2SmllUGlSNlh3eGJ4T0s1VGFRZitWdnZpelIyaVYvd0QrRlY0?=
+ =?utf-8?B?OVFyQ0MrOTVmQUNTRk13NUc3TUpBaFFJbjNyVXdEbXdWYWthb29za2hCdHUr?=
+ =?utf-8?B?azU2M1VqMmMrMVpaQTJiR2NpK2hRL2VqalM4RVMrY3EyeHpFYWxLeFlpWmFx?=
+ =?utf-8?B?SzhLaFo0ak5xV0hsQlZ2Ums3NXAyVFRqOG9aVDdDdmJyTHZsWXRUNFU4UzB1?=
+ =?utf-8?B?QnI2RHN6NHRWQml3LzNrR2dwa3ZsWFRaWHhldmgwck5ZMWZ3QlRCd2pGa3d2?=
+ =?utf-8?B?QzhrMEYwRkgvbE1DWnRpVFpCdUtWNlB3TUY0RyszV0JhV2RIUTRmNXJuOStn?=
+ =?utf-8?B?UHB1NUN1dHpVTzlxdStFVkxBWmlaNkk3TTlzOEdPQWtXREZQbVkvNUluUHJt?=
+ =?utf-8?B?bmpmNjNIbXNRYjhEb2Z4cGtWRzZwTVpVRis5S2grdWZQdldMeWw0UWxZUkt5?=
+ =?utf-8?B?bE1UZFpyVUFMLzdZcGVKa0tFZEdBZ1JVTThlUVFMVjVSYURoakJiREV3RU1w?=
+ =?utf-8?B?TUZtcWpScUdPK2Zka2VkeWthZ1VqcjRBcXl6TUFvaDQxNS85MHNoSXFtaVBR?=
+ =?utf-8?B?by9aTmNwTE1Zdk90cHdBclV4RnpRaHVHZTlianpmVm5mbWVzYldZNmxaakJY?=
+ =?utf-8?B?SUQ4SzdyRGZwUFgwUTJnaXgrMXhLVVRtOEhVbjNLa1padUFMYXVIcmp4K0I4?=
+ =?utf-8?B?RUdOaEhBK0g3MVZvazdLYWpaTXJ5dlNJWjNpbTNWbFJ3ck41UlNCVUFWV0Ey?=
+ =?utf-8?B?ZmNRTmUxOFRZQVhSNGlwRGhEYy90MU9oT1hha1JyL1p5UHZVdTFONlhHSjla?=
+ =?utf-8?B?Mys3WTR5dVRKbVAvTm03ZTBxMlFzVjY2VkwzU1piMDVkNmpjaVRlWitTL2JD?=
+ =?utf-8?B?VzdKZkxiSFBXT2d5UkV6T0lpYzVDN2g4YWZOemFDaUhXaXhEeWRsYzV6TmJ4?=
+ =?utf-8?B?bGNLK2RLYlpXemRnelA0UDhkZXJXSE5TUmtlaVdsQm4vODdkTmlGOXFOenhr?=
+ =?utf-8?B?U1VsZ0k0RTNDKytuM2VGam85b2xXR3lYNFhNTW1Pck4wL20wOXQwQ3RaQm1P?=
+ =?utf-8?B?cXNhd0ozLzhNWUE5VTlkUjJLTmkranlvOG1OUHJhakk4WlpTZ1A1UzB5RHF0?=
+ =?utf-8?B?UjJmbEJZY0IxWGQ5TjBQVWdxTHExRFVldmpCaktxWTFCYTFqckxKbXFSWTUv?=
+ =?utf-8?B?UjFZVUdRdTVlaDRjTWlQRXg2LzMybWY1K1JTR2dTbHdxVStJTkFqZGovZ2tU?=
+ =?utf-8?B?WWhMRG1QSEMxT1luK2dXeEF4aG9Rc3EvNjdkdXNyUXFMS09DakNKbHc3bGhF?=
+ =?utf-8?B?VVYzZUN2Q1hGSmQ2TjdNSGM0T29jbnVtbWxVU1JDazV0WDVGTHJwT2ZrVitt?=
+ =?utf-8?B?czJFc2o3UzgzSi9mdnFWV1Y1ZXFoVGROdy8rWEpvdXgrSkVYekk2TnBVVWhR?=
+ =?utf-8?B?NG5FOWN6dUxuVFJFbEFqQjNHY1U4c3NvOUxLREJzYnNYRU5nTnZqY0ttY0J1?=
+ =?utf-8?B?VE5seXc0K0RTUDNsVmJ3MG1reEVTZmk4algvVDVXYmlQR2lNTGJkd3lNYmZL?=
+ =?utf-8?B?dVpybytNcjN2dGxma2R5SFl0T3dNbm1ST3dTandpT3RpK3pJL2VuVFB1L25K?=
+ =?utf-8?B?NEE9PQ==?=
 X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 04ca9d03-2e87-44a6-df74-08de2375ed7c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73e904f1-7076-4cfc-0458-08de23766256
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2025 12:04:13.8248 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2025 12:07:29.7965 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6eZzEchRBmuXYAqQPexoRQpB+oLytSnCK9YsQX9RPO7vEGnjRDS40ryG6fQy90aiJ5SjOGLJIr244mvhUzH7wQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3k+teDCoRrQ941Tpy/WX+s+LV5G7qsJg2czP/Ii1hM36YbGbaXjWAKVVeSCG3lB5v4gDb2ATlzo7Y9hGxH6WWw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB9588
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -232,138 +219,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14.11.25 12:15, Chee, Tien Fong wrote:
-> Hi,
-> 
-> On 14/11/2025 6:54 pm, Jan Kiszka wrote:
->> [CAUTION: This email is from outside your organization. Unless you
->> trust the sender, do not click on links or open attachments as it may
->> be a fraudulent email attempting to steal your information and/or
->> compromise your computer.]
->>
->> On 19.02.25 07:37, Chee, Tien Fong wrote:
->>>
->>> -----Original Message-----
->>> From: Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@intel.com>
->>> Sent: Tuesday, February 18, 2025 4:35 PM
->>> To: u-boot@lists.denx.de
->>> Cc: Marek Vasut <marex@denx.de>; Simon Goldschmidt
->>> <simon.k.r.goldschmidt@gmail.com>; Tien Fong Chee
->>> <tien.fong.chee@altera.com>; Alif Zakuan Yuslaimi
->>> <alif.zakuan.yuslaimi@altera.com>; Tingting Meng
->>> <tingting.meng@altera.com>; Boon Khai Ng <boon.khai.ng@altera.com>;
->>> Kok Kiang Hea <kok.kiang.hea@altera.com>; Chee, Tien Fong
->>> <tien.fong.chee@intel.com>
->>> Subject: [PATCH v2 01/26] arm: socfpga: agilex5: Add new driver model
->>> for system manager in Agilex5
->>>
->>> From: Tien Fong Chee <tien.fong.chee@intel.com>
->>>
->>> Initial creation of new system manager driver.
->>>
->>> Add supports for the SOCFPGA System Manager Register block which
->>> aggregates different peripheral function into one area.
->>> On 64 bit ARM parts, the system manager only can be accessed during
->>> EL3 mode, this driver model provide user the high level access to
->>> system register and abstract user from low level access.
->>>
->>> The base address of system manager can be retrieved using DT
->>> framework through the System Manager driver.
->>>
->>> Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
->>> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
->>>
->>> ---
->>>
->>> v1->v2
->>> - Implement system manager driver to move towards DT probing
->>> ---
->>>   arch/arm/mach-socfpga/Makefile                |   3 +-
->>>   arch/arm/mach-socfpga/altera-sysmgr.c         | 113 ++++++++++++++++
->>>   .../mach-socfpga/include/mach/altera-sysmgr.h |  16 +++
->>>   arch/arm/mach-socfpga/include/mach/misc.h     |   2 +
->>>   .../include/mach/system_manager_soc64.h       | 128 ++++++++++++------
->>>   arch/arm/mach-socfpga/misc.c                  |  18 ++-
->>>   board/intel/agilex5-socdk/Makefile            |   7 +
->>>   board/intel/agilex5-socdk/socfpga.c           |  12 ++
->>>   configs/socfpga_agilex5_defconfig             |   1 +
->>>   9 files changed, 250 insertions(+), 50 deletions(-)  create mode
->>> 100644 arch/arm/mach-socfpga/altera-sysmgr.c
->>>   create mode 100644 arch/arm/mach-socfpga/include/mach/altera-sysmgr.h
->>>   create mode 100644 board/intel/agilex5-socdk/Makefile
->>>   create mode 100644 board/intel/agilex5-socdk/socfpga.c
->>>
->>> [...]
->>>
->>> Reviewed-by: Tien Fong Chee <tien.fong.chee@intel.com>
->>>
->>> Best regards,
->>> Tien Fong
->> This very likely broke all targets except for the agilex5. It definitely
->> broke the cyclone5.
->>
->> diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
->> index 9d464307665..e0ed1b8e954 100644
->> --- a/arch/arm/mach-socfpga/misc.c
->> +++ b/arch/arm/mach-socfpga/misc.c
->> @@ -248,6 +248,12 @@ void socfpga_get_managers_addr(void)
->>          if (ret)
->>                  hang();
->>
->> +#ifndef CONFIG_TARGET_SOCFPGA_AGILEX
->> +       ret = socfpga_get_base_addr("altr,sys-mgr",
->> &socfpga_sysmgr_base);
->> +       if (ret)
->> +               hang();
->> +#endif
->> +
->>   #ifdef CONFIG_TARGET_SOCFPGA_AGILEX
->>          ret = socfpga_get_base_addr("intel,agilex-clkmgr",
->>                                      &socfpga_clkmgr_base);
->>
->> Arent't you testing for older designs anymore?
-> 
-> 
-> You are correct , the patch as-is focuses on Agilex5 and does not fully
-> account for older platforms like Cyclone5. Our initial plan assumed
-> users would follow the Altera official release repo at https://
-> github.com/altera-fpga/u-boot-socfpga , where we are gradually migrating
-> platform devices, including Agilex, Agilex7M, and Agilex5 to the driver
-> model stage by stage.
+From: Jan Kiszka <jan.kiszka@siemens.com>
 
-We never used downstream U-Boot, we rather invested into upstream
-contributions - quality and sustainability reasons. We do this rather
-consistently with our suppliers, BTW.
+The Altera system manager device is only provided for the Agilex
+targets. All others were left with an uninitialized socfpga_sysmgr_base
+after that refactoring, breaking any boot attempts already in SPL.
 
-> 
-> To clarify, as of today, the platform devices for Agilex, Agilex7M, and
-> Agilex5 have already been migrated to the driver model. Older platforms
-> like Cyclone5 still follow the previous non-driver model path.
-> 
-> We are now aware that some users are still using mainline U-Boot. To
-> address this, we will update mainline to ensure that existing platforms,
-> including Cyclone5, continue to work as before while maintaining support
-> for the newly migrated Agilex platforms.
+Tested only on Cyclone5 / DE0-Nano-SoC.
 
-You cannot simply break existing support in mainline just because there
-are some legacy vendor trees that still happen to work. If you confess
-that you don't care about it in mainline, I guess your feature
-contributions will be looked at differently here in the future.
+Fixes: 35638172f99a ("arm: socfpga: agilex5: Add new driver model for system manager in Agilex5")
+Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+---
+ arch/arm/mach-socfpga/misc.c     | 7 +++++++
+ arch/arm/mach-socfpga/spl_a10.c  | 1 +
+ arch/arm/mach-socfpga/spl_gen5.c | 1 +
+ arch/arm/mach-socfpga/spl_n5x.c  | 1 +
+ arch/arm/mach-socfpga/spl_s10.c  | 1 +
+ 5 files changed, 11 insertions(+)
 
-> 
-> We appreciate your patience and will make sure mainline remains
-> functional for all currently supported platforms during this staged
-> migration.
-
-I have a first patch ready and will send it in a minute. It will not yet
-migrate to the driver model but it should unbreak all the non-agilex
-targets (I only have a cyclone5 to confirm that).
-
-There is in fact more broken when it comes to loading U-Boot proper from
-SD cards, but that's not your fault this time.
-
-Jan
-
+diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
+index 76747c2196a..f859d54dce4 100644
+--- a/arch/arm/mach-socfpga/misc.c
++++ b/arch/arm/mach-socfpga/misc.c
+@@ -277,6 +277,8 @@ void socfpga_get_managers_addr(void)
+ void socfpga_get_sys_mgr_addr(void)
+ {
+ 	int ret;
++#if defined(CONFIG_TARGET_SOCFPGA_AGILEX) || \
++    defined(TARGET_SOCFPGA_AGILEX7M) || defined(TARGET_SOCFPGA_AGILEX5)
+ 	struct udevice *dev;
+ 
+ 	ofnode node = ofnode_get_aliases_node("sysmgr");
+@@ -293,6 +295,11 @@ void socfpga_get_sys_mgr_addr(void)
+ 	} else {
+ 		socfpga_sysmgr_base = (phys_addr_t)dev_read_addr(dev);
+ 	}
++#else
++	ret = socfpga_get_base_addr("altr,sys-mgr", &socfpga_sysmgr_base);
++	if (ret)
++		hang();
++#endif
+ }
+ 
+ phys_addr_t socfpga_get_rstmgr_addr(void)
+diff --git a/arch/arm/mach-socfpga/spl_a10.c b/arch/arm/mach-socfpga/spl_a10.c
+index c20376f7f8e..26828077c51 100644
+--- a/arch/arm/mach-socfpga/spl_a10.c
++++ b/arch/arm/mach-socfpga/spl_a10.c
+@@ -250,6 +250,7 @@ void board_init_f(ulong dummy)
+ 	if (spl_early_init())
+ 		hang();
+ 
++	socfpga_get_sys_mgr_addr();
+ 	socfpga_get_managers_addr();
+ 
+ 	dcache_disable();
+diff --git a/arch/arm/mach-socfpga/spl_gen5.c b/arch/arm/mach-socfpga/spl_gen5.c
+index df79cfe0f7f..f1c654e1566 100644
+--- a/arch/arm/mach-socfpga/spl_gen5.c
++++ b/arch/arm/mach-socfpga/spl_gen5.c
+@@ -72,6 +72,7 @@ void board_init_f(ulong dummy)
+ 	if (ret)
+ 		hang();
+ 
++	socfpga_get_sys_mgr_addr();
+ 	socfpga_get_managers_addr();
+ 
+ 	/*
+diff --git a/arch/arm/mach-socfpga/spl_n5x.c b/arch/arm/mach-socfpga/spl_n5x.c
+index 81283ef7162..ed4e6f38b31 100644
+--- a/arch/arm/mach-socfpga/spl_n5x.c
++++ b/arch/arm/mach-socfpga/spl_n5x.c
+@@ -31,6 +31,7 @@ void board_init_f(ulong dummy)
+ 	if (ret)
+ 		hang();
+ 
++	socfpga_get_sys_mgr_addr();
+ 	socfpga_get_managers_addr();
+ 
+ 	/* Ensure watchdog is paused when debugging is happening */
+diff --git a/arch/arm/mach-socfpga/spl_s10.c b/arch/arm/mach-socfpga/spl_s10.c
+index fa83ff96adc..460a6f88416 100644
+--- a/arch/arm/mach-socfpga/spl_s10.c
++++ b/arch/arm/mach-socfpga/spl_s10.c
+@@ -33,6 +33,7 @@ void board_init_f(ulong dummy)
+ 	if (ret)
+ 		hang();
+ 
++	socfpga_get_sys_mgr_addr();
+ 	socfpga_get_managers_addr();
+ 
+ 	/* Ensure watchdog is paused when debugging is happening */
 -- 
-Siemens AG, Foundational Technologies
-Linux Expert Center
+2.51.0
