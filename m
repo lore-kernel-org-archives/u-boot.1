@@ -4,84 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B68CCDE004
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 05:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 958A7CDE013
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 06:35:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B126283E8E;
-	Fri, 14 Nov 2025 06:17:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0239783E83;
+	Fri, 14 Nov 2025 07:35:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="cbuETYZM";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="jXDRxyhs";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="FFrNL7k1";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AdRC3ENf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BBF583EAC; Fri, 14 Nov 2025 06:17:34 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 94EE883E86; Fri, 14 Nov 2025 07:35:20 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36AD283E83
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:17:32 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4d754C6kpcz9v4c;
- Fri, 14 Nov 2025 06:17:31 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763097452;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=V6CspUaAq9CqCrRhA0/zrkY86hcqt/cVC1GnTgUj3Bc=;
- b=cbuETYZMig5BrVeYDIDlZwYUm2QGSY3GQmeV4hmB7Jar7cgL+gs0Hp81J65BTH7UyG8q1l
- a5ZAQLuTfgkWwM0Fpt5iG3diL/4vRFuEybT9GdSIi8rJvFzgTQWvIz6LRjP7nlKgjwIU5W
- cRSBKBEvCtkQLVzK+3CWLJVvSKCusTL8M12PlStQIcnmZwTRMhZ6+7vt9kD0qgDzr4ESR6
- xueyVV3yk6iI+dW43hcZubfO47jz0BYn1hDGalweczHH81BMlBMV49CE1JCg+KisWw8uon
- nqEfAicftl4JGQV6Hu7msox9MLKWeXIDEySvDPXQtUydhKfv1aXwg+//+IVLGg==
-Message-ID: <fd30d6ca-fdfe-4096-8057-a952a6a4bb7e@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763097450;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=V6CspUaAq9CqCrRhA0/zrkY86hcqt/cVC1GnTgUj3Bc=;
- b=jXDRxyhsFi7srS2WbCG6hcmkuhY1+hsOT4qIzPiONcdAsA61yerqavJ9eciKuqKxAo/MSp
- um7tL4DCyakb7mgVHc8iMOhnP7XlQRcWlT4QmWAFQHE2K3adQzM9amhZXckjp14fMXNG19
- GfAjVwA9IEuScxdumZ4hYAhhlo4D3/R+uASH9VKZRDTnPlVZ+tRNCLWbpRKpHW8gwc4j6l
- iiH2HPdzhFlMq88XK0OE5pK0llxYVECPr8055Q99uY3Xh1BfDLikUzN9p7zuQz+Ru8EZzG
- gVsVdN6yfDiIAPJlDDTUiJiJcomjauUHXVwHMie/Fa0gYGwx1eKm/J/I0KC4BQ==
-Date: Fri, 14 Nov 2025 06:17:27 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 63F3883E76
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:35:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5ADMatgw1426033
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:35:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=bY2ubOGwx7VoNXiMkyGAEERz18v0Il36X/h
+ YDjM83dM=; b=FFrNL7k1uqH78vx8C8trpt8tXqf4he1ZPl0/rHCGZp0ESGsfJ2a
+ xfKcdoi0qrzBf7afGz6jBhNA89Qq7RoYNObZxZYOrmRQqxd+YFMUYlaBcZ3yOao2
+ 0q4SXqFL7LZ+tZf0GHGdlCnB6PgUQ+1kYWvzNN7K4J6Eb9LxbfuzmJ3n2U38Lom6
+ ZfTt6bn4xE/Ke5gKQx7dC0AMOFUiCvc2/oGU6VITjyo/FfWxImlHEJdP1wodTpzz
+ llktVRl14eCXq2utfAxy8U87yiCF8yFC1e4JmKfUYskaERW1eUBiSXKh/Ow0By1K
+ ZwKDBjmkj7goU+Dhvyop26TCY2W7FEFjszA==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4adr9g12xv-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:35:16 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id
+ d2e1a72fcca58-7a432101881so3072800b3a.0
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 22:35:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1763102116; x=1763706916; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bY2ubOGwx7VoNXiMkyGAEERz18v0Il36X/hYDjM83dM=;
+ b=AdRC3ENfkJq6GCC8UDZ9SWsM/FNZiH0omQrll7UPrGo9spMys2KTPsI/oGoJ6Wjr5Q
+ XPF+zILC+DgKIdl5tmeyEF5oivXfD6AMdb01D3uX7am2g/n5sZJolfJTLKkzdyNCWuLr
+ A6iLNYoxH/7Ix+SjjKLN10aS2eMQ5mYj4BdlwWdFcFs+5O3sJ0zX2XmgY/YtBT8SK42K
+ p3cvs5isuzhGFN3cpyEDm6dcGDeZGwrVI5oqlGm6PRLd/sW9M9tJV1za6COs2psXYUJG
+ 99JntqpcOQUsHf4N4hp6i4YgmUlZ09RVt0wXcomMkx14g5tm5+7mOzKnAtMop0kA56M4
+ EiPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763102116; x=1763706916;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bY2ubOGwx7VoNXiMkyGAEERz18v0Il36X/hYDjM83dM=;
+ b=khCfu8K6qh8aDX15xfIygM2vdzrjx9QdNIBkMXB28gxZgPSMgiTU26Uj6jOTphlri2
+ jMFHvCj1UYBnIyhHhEUJkeFw0RCwKSgEqCE1E5mJU76e37jovgLpCR1GzOJhhlnec8Jw
+ fsIR/nA+WPKMItlmsNYAMpOxKrGC4lnRr/+W+d9NHM34FPuUpzLR3ruOB/xrRrvln9vz
+ uJ7/s/Jix2hxAQ1B1kWvX4DJ9BTEhn7Ga0suCY9oNCz8bfXhps/D6Pvm/umzL0HyNjN9
+ r3MguzgYutyUmhcs8UGks3JUTY0u9kCJkYH/h1q0+2iq5tU345TjGNuQLqUEvqXBUcgY
+ TKVQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWc+RktP/VQcZRzWcPkrLpfnv2fGodSyZNbNyRd7veWMAlbSq/hId/H0oucpvXXjpycWUVVMJI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwXc+3wFQhfgKN3l2lM+MpsMmAB9P5q1UOarxhHMgY++mLHAC9x
+ AvfQcy7tss1H4LnHWN88PB5A6YTyAzZqFH+R8fT315b4T5r4YcRwJhceW606KCoR/0k4lIDU8zI
+ MizniIc67CqYW71gdpPMtaRkv2KutCUv9hXkkxQScSExH3Hy0BldVMlZ3
+X-Gm-Gg: ASbGncuMRGFiPap3OkRD5y412sEnp1+ktcw85LbLYVd9MwAM9nl7D7i+f7rLa9phLH/
+ 1c700T55z9cfS5qGruevDGQ5ICxqHoN94UqPrcNag5L2scsAHWIRzt/iCvFphITztA54qVWTPoI
+ 0CjJ/ZDM22XDLydreo3zQWKp08wqXkPeclKyoNhp5oQmA018O93gm0fWQ/S6IPojEfStuRU1RPR
+ e1AysBFTtQ1PpIcLYRIV3uI3aHe4H6nE4x0nsI93b2Do9jsA/OxYU0CKTrnp8soMryrNAZnd0Tr
+ B3RODflEpD8b4A3IDq5Ac1d+NrsNu0nIu3siRcb8GKanpEhrCPlqrzrsU1lK2aIqQoKQqNiAzmH
+ sjZi7Jkrrw8Qk0AsId4Pj0XxK03KTwstMGdiKaoNjSAKwNad+P+DK8XtPq1CeKcnzJrxlDbhYTe
+ Fqq+pO4jQEI7C4gK+YWCFlamWC3fCx2rlO2eAamg==
+X-Received: by 2002:a05:6a00:3cc8:b0:7a2:8529:259 with SMTP id
+ d2e1a72fcca58-7ba39b918e8mr2693759b3a.9.1763102115866; 
+ Thu, 13 Nov 2025 22:35:15 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGc+I958CiysTulAp9/ErHhrUN77SUO0VqWPctAbHinWfukm9v9Z+jP9GyoXd3ngqfXha3+wQ==
+X-Received: by 2002:a05:6a00:3cc8:b0:7a2:8529:259 with SMTP id
+ d2e1a72fcca58-7ba39b918e8mr2693738b3a.9.1763102115410; 
+ Thu, 13 Nov 2025 22:35:15 -0800 (PST)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7b9271502c9sm4044685b3a.36.2025.11.13.22.35.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Nov 2025 22:35:15 -0800 (PST)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
+ christopher.obbard@linaro.org, sajattack@postmarketos.org,
+ balaji.selvanathan@oss.qualcomm.com, me@samcday.com,
+ marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: [PATCH v1] configs: qcom_defconfig: Configure USB gadget for fastboot
+ support
+Date: Fri, 14 Nov 2025 12:05:07 +0530
+Message-Id: <20251114063507.3834973-1-balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/3] dm: core: Check ofnode_to_offset() return value
-To: Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sam Edwards <cfsworks@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
- <20251113122145.949112-2-marek.vasut+renesas@mailbox.org>
- <CAFLszTigJHK9H18rZG=AHRo09RPqKGHQmmVrHZ40mHPk-KkwqQ@mail.gmail.com>
- <7a083302-1096-47fa-90a9-aa350eea6884@mailbox.org>
- <CAFLszTjktw3yS9Dp9KGC=BAnpJAHg46f--NRRfnzXApQVOiuUQ@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAFLszTjktw3yS9Dp9KGC=BAnpJAHg46f--NRRfnzXApQVOiuUQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: z69c57qce9s9xxbzyxut6b9s86rw3msa
-X-MBO-RS-ID: 7db64c671ca385d7c47
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=L+AQguT8 c=1 sm=1 tr=0 ts=6916cda4 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=EUspDBNiAAAA:8 a=7txCI4ylUhOV7w6tKwcA:9 a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE0MDA0OSBTYWx0ZWRfX1QUM4feZPHt0
+ xqufwqO2CD8Gq9xcA26c1bUq7KKSavhjq32O5xUujCUiA1GcVed4WEFD04x1R9hu0CirFwbZifU
+ FUvqJ8HDaAfLWJJa/5rWu/Jym7Ss/G5Yc/2Kus8e4JEO1dRxBotlWjgoF3u+odP0TMLfC6xRitF
+ nY7xCo+db1HjYsObgMlwtHV7LtspKqg6xLI4H8crl0G0/TNrgPrJVgEHND/HkWmgYsJG4gqSpgQ
+ IiMJCzg4zSGNhfDbdskasRWjpSWe3A6F4LpxSHlS/XlCeSSU0207KshwfHS7g28UF8n1GksbQqv
+ cGn/qVCv4v1JzNGf5Boai8kTaoyKvN7xAox3QRoWGUJ1n57VIQTDJcur+3TvehkOJmLiX1pBcI2
+ nVSdo5H5isD8uqBoXKE7f0apPfqOhw==
+X-Proofpoint-ORIG-GUID: 5D2-Wn6MvLtpIvt7Q4MKWvTqlC8mO0rj
+X-Proofpoint-GUID: 5D2-Wn6MvLtpIvt7Q4MKWvTqlC8mO0rj
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-14_01,2025-11-13_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 impostorscore=0 priorityscore=1501 adultscore=0
+ clxscore=1011 bulkscore=0 malwarescore=0 lowpriorityscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511140049
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,58 +147,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/13/25 11:46 PM, Simon Glass wrote:
+Added USB gadget configuration to enable fastboot functionality on
+Qualcomm platforms. This configures the USB device with Google's
+vendor ID and the standard fastboot product ID, which are required
+for proper fastboot protocol operation.
 
-Hello Simon,
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+ configs/qcom_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
->>>> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
->>>> index 071d998a0a5..55c2b3a10bb 100644
->>>> --- a/drivers/core/ofnode.c
->>>> +++ b/drivers/core/ofnode.c
->>>> @@ -335,7 +335,7 @@ bool ofnode_name_eq_unit(ofnode node, const char *name)
->>>>    int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
->>>>    {
->>>>           const u8 *cell;
->>>> -       int len;
->>>> +       int len, off;
->>>>
->>>>           assert(ofnode_valid(node));
->>>>           log_debug("%s: %s: ", __func__, propname);
->>>> @@ -343,8 +343,13 @@ int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
->>>>           if (ofnode_is_np(node))
->>>>                   return of_read_u8(ofnode_to_np(node), propname, outp);
->>>>
->>>> -       cell = fdt_getprop(gd->fdt_blob, ofnode_to_offset(node), propname,
->>>> -                          &len);
->>>> +       off = ofnode_to_offset(node);
->>>> +       if (off < 0) {
->>>> +               log_debug("(not valid)\n");
->>>> +               return -EINVAL;
->>>> +       }
->>>
->>> Ugh this is really horrible, sorry :-)
->>>
->>> Better to put a wrapper around it than add all these checks, extra
->>> code size, etc. Also in many cases the ofnode is known to be valid(TM)
->>> so it might just be a waste.
->>
->> How would you propose the wrapper should look like ?
->>
->> Keep in mind, not everything is fdt_getprop( ... ofnode_to_offset() ...)
->> in this patch.
-> 
-> I was thinking of
-> 
-> my_fdt_getprop(fdt, node, propname, lenp)
-> {
-> if (node is not valid)
->     return NULL;
-> return fdt_getprop();
-> }
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index e686ea857b9..1510dbdcfd3 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -150,6 +150,9 @@ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="fastboot"
++CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
++CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
+ CONFIG_UFS=y
+ CONFIG_QCOM_UFS=y
+ CONFIG_VIDEO=y
+-- 
+2.34.1
 
-We would need a wrapper for almost every libfdt call, which isn't really 
-better.
-
-> What does fdt_getprop() return when the offset is -1 ?
-If can_assume(VALID_DTB) , then crash on NULL pointer dereference .
-If not, I think FDT_END (premature end) or an error code.
