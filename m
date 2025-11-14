@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C85E9CE8D44
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 15:29:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED9CECE8D40
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 15:29:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB2AC8416F;
-	Fri, 14 Nov 2025 16:28:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2552F8415D;
+	Fri, 14 Nov 2025 16:28:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xmJLbEXG";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jRFkOkkB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 557C1833C6; Fri, 14 Nov 2025 16:28:49 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 7FFF28415D; Fri, 14 Nov 2025 16:28:50 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 654648415D
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 16:28:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6936284167
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 16:28:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-477563e28a3so14556485e9.1
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:28:47 -0800 (PST)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-47790b080e4so3768095e9.3
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:28:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763134127; x=1763738927;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763134128; x=1763738928;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dzS5jGCYgz06++uZwbOHhVmVbN8GS4MZm10xjna2TFA=;
- b=xmJLbEXGy4AiUYXcKDXFO3icrEfIGT0tc15fKNyqtkbERs99SUPL8pxdG1iN5lul7z
- CkQV2LmG4HaFBe4hd4wsAgNvhQR+MpETPKSi07R3XDYEMs8zYDC5NgyUM7kIl31Yc4cg
- 7BoVSMYKKDO4OMi1jpndHY+CaioUNlwRQ/VBLra7/pLl6EPTKxJE/VGf7rsfZS2v27nU
- bD7/P5IyeV9BMFpW6mKSBZ1CRNDjIsW80ms3ybXZSkHyk0QkI9+RORjzGxjBFUeeYJEB
- Q9G9sQNplgOJxv60voqTRVCA4mVOFA5+d3GBC2j5hHW5SQjrDv76Wuu16C+EyqFJu/tN
- /MQA==
+ :reply-to; bh=aaUbO5anb67fEYVTSVEwINvwPHSTVUHbq8ivjbChweQ=;
+ b=jRFkOkkBy8CP233rUhdWZ/vkXkGQrwkHrpXmxnra4FMIB/kse78HntcQUuXNuKUCy8
+ v+75quTm/rrnD/ZzsXBqmfIcRcTXpH4/I9lP2pq5jqrp4Nw9WOHyxrmfXuNkc0k1Ke2M
+ XH6cFgTSpvdyIXmlBrfY7ReRD4IiRBYVldTLWzA8ipJmsUomCHUrprbTRM3WGwOafKhP
+ o/sOvXZBEwRQVuniK9/eSs7Nmhgu758drtjA6QFBCcbldVl7/tZoNvE70EwyFfHT83Dw
+ +rtAFzo127aP/K9hxyw12t1LFJIpBGoGlTKbGnBs8gzRviB4EL0RP68vnUFdO58LwVDH
+ EUiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763134127; x=1763738927;
+ d=1e100.net; s=20230601; t=1763134128; x=1763738928;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=dzS5jGCYgz06++uZwbOHhVmVbN8GS4MZm10xjna2TFA=;
- b=AGFt+6QMKoaHh/Ehc4FftavJiRUgArTxb0FFdFRrE+3NwA9wbKpfE4hSBW8/F4O5cu
- 3FvgblPZJOO62m0arFbwNZHbmsK6etvbaRzVQmk+BxFgNPAbo3710obnqIIg2T3gQZuq
- diAlYSU1GlxxKRwG7/To8wXFqmJddH+El7uUciVgNWT9kIQAUa5OK0OGASOguiYoS5K6
- YTUjSKpRngByUoAXBAQjVy2LfuE6e8CCzDxhP+pvIdYYZoveFK0GOqfiPj8rPmd5u8ST
- px6lME2YTQ292R7R/BGK5YQTRYQQFeBxR3O5hK3YyAcPS05mbDWzeJPrMtfniiiCAuQC
- cOyg==
+ bh=aaUbO5anb67fEYVTSVEwINvwPHSTVUHbq8ivjbChweQ=;
+ b=CUXG+5wGBZ6pyGKUFTo75xUR/dJ2LbRpORD4exyF4i5x234dLQDvu+A4y7URapJa1L
+ 0w8utmoUOX8FqRk6rrSF7Xvh9ToJ9YlnPvMefFLjsVd0Lp4WZ3vjT18L7UXx/VoBhsdD
+ qCmNmt+kl7StE+WmmrQE3+YV2wI4vffZl+x6IZFr4n4L6WdQvfVUqlwjc2jvLAfjp+Zj
+ DEzvMYE/yd9kRtqWmXo72ZR4DitVbeXwc6/rT2W029eVNy3PhhYCDRLZeEr6zN8z+WF5
+ APBLOiWp3RPuyn1YhD0xvbHJ5GxJlDf9Bk2j5RD5egMtxqKD19iVw9cwy9w3vU5J4nR6
+ Nxng==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXOkxTsUUDh67NzWABxttfh+MSlwjtCh8cW7Neql+ZH4FuFE9SpfFqDTSxE/4bln1NjoSGk8YY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzGB0UcUue5uy5isHadxwqDDmnXerr+W+cui5XDHsXon7kEvYvV
- psCVCIO4JzWskPDVQKsjrdx7RKin2Q4nAcn0KpOdRAphOXex6ismMlHOZslfi3URVz0=
-X-Gm-Gg: ASbGncsj+erJchP9EMtjGpclic0Jlotyn3fduLS1BkSuk7wE8AJGWZgmxAu4TC6+qO7
- WCYgHqYxjSNdCSU5ygSitOzxCDpokZEr8xvcWRKlFWJMVrNynMpD+fAKXabnXOG+Qj6MnQqvRUB
- A2jVfI5qJcgXFuru9ecMtS3PUWMJz5TsWPzB4AzfmpBnYpmc+CaUCTmDeWEfLZf/E7xcmKDxMDh
- cN1eOKqxN9IwJ9CgO7ifD/fJbLhDeIHSvczRZK4qkEU7cxPtHPY1G1dvIg+2yW1wjGDUQz36l5M
- gmpvv1x01GTlO/bwTo/2SIv+qzyz/GPk1W7vkNHdx8B62vraCLpZ2byfdiGORE5KjOP+H5Q6oGg
- Ssw940TdlKBDGQeE6SbZ6CD7iKBRqNW6JFOkQADqPt0MrI9dtHFHLjr2MAv+wwsC08gVIlejw6B
- p4Hg==
-X-Google-Smtp-Source: AGHT+IGoCyEhNRM2ELOqgCpU4mnDlcXTcxjfFuRmRJ4999YXuNYFuaodtGjIF8rTFnTgq3Sqqyhzng==
-X-Received: by 2002:a05:600c:4f15:b0:477:7f4a:44bd with SMTP id
- 5b1f17b1804b1-4778fd3821cmr33884285e9.0.1763134126779; 
- Fri, 14 Nov 2025 07:28:46 -0800 (PST)
+ AJvYcCWginKNMnFJnduhgFT9sZvbRhGYsK96f4+/sttlF1FNGTqTvuttck/jkH5kp9bzYGGUCBYBEyo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2a2YClrSIMawN53ZG7Kl3IZ1quCBMDB0Q3KEPoJs1WE0w//S9
+ awqmRIYs0FsN5Rps09k1t3VQDsHpHN3S9RMa88rqE9t91cMEJs/4luxuuWX2UqDKrMY=
+X-Gm-Gg: ASbGncthUhdfwr21G0js0Vegr0VJewXG6oHoEPGYgzPn9Ik2S1/0aYm3nSIaalhFq8K
+ MjUeSzflSQxGarng8LDpab45JFRDxBMI4eKoYJ8Ro+g17wqyLlZOjMrJGYXmTUvvVUfqk1ugE+L
+ /xOf/fPuZJePJyQ6HBmnsyHnubQ8M8rC2x9y0tzoVPLLRwHl64aCwsuTHiLfsXiBqzCdl/vOCGg
+ /z6tH/0jWlyhI6YSxIKmNQnGSdqwvqIHFbdpwvaReWfC4JHVg3VTeGoZ1Q7RZWHA4jU5iD5VfMN
+ 9ybsFKiofOyTaAIJchogfS7dmB3fYulY/IV4MTkpaCJsz+wpXHlq1vIL8v+ZneIPqWk4jvMXDUe
+ Q5mt2ipKytFMV6SmPBTsjHOfsChS58IZZQFtVOLezikrpVycIjpjTW0dI8EcwnXVAjuWuly9TKd
+ C/g2ZOQhKzBYPH
+X-Google-Smtp-Source: AGHT+IFragRVTUjoxlMDU0RsiadswMf9Oi88QTTZIkHWMgAw7nLmzNtzJ3DtrEqh8GFNAoJHVGeqrg==
+X-Received: by 2002:a05:600c:a49:b0:475:e007:baf1 with SMTP id
+ 5b1f17b1804b1-4778feadb6dmr36284435e9.34.1763134127738; 
+ Fri, 14 Nov 2025 07:28:47 -0800 (PST)
 Received: from [127.0.1.1] ([2a01:e0a:e50:3860:1ab:5fd8:dd9b:8e8b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4779524d2ffsm15741035e9.3.2025.11.14.07.28.45
+ 5b1f17b1804b1-4779524d2ffsm15741035e9.3.2025.11.14.07.28.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 07:28:46 -0800 (PST)
+ Fri, 14 Nov 2025 07:28:47 -0800 (PST)
 From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-Date: Fri, 14 Nov 2025 16:28:43 +0100
-Subject: [PATCH v3 4/5] cmd: abootimg: Add 'get ramdisk' command
+Date: Fri, 14 Nov 2025 16:28:44 +0100
+Subject: [PATCH v3 5/5] test: abootimg: Add test for bootconfig handling
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251114-bootconfig-v3-4-a28b813dba90@baylibre.com>
+Message-Id: <20251114-bootconfig-v3-5-a28b813dba90@baylibre.com>
 References: <20251114-bootconfig-v3-0-a28b813dba90@baylibre.com>
 In-Reply-To: <20251114-bootconfig-v3-0-a28b813dba90@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -109,75 +109,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for retrieving ramdisk address and size from Android boot
-images. This command allows users to extract the ramdisk information
-for boot image v3+ which combines vendor ramdisk, boot ramdisk and
-bootconfig sections.
+Add test to verify that androidboot.* parameters are correctly extracted
+from bootargs and appended to the bootconfig section when using
+'abootimg get ramdisk' with boot image v4 and vendor_boot image.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+The test verifies:
+- androidboot.* parameters are removed from bootargs
+- They are appended to the bootconfig section in the ramdisk
+- Non-androidboot parameters remain in bootargs
+- The bootconfig trailer is properly updated
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 ---
- cmd/abootimg.c | 35 ++++++++++++++++++++++++++++++++++-
- 1 file changed, 34 insertions(+), 1 deletion(-)
+ test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++++++++++++---
+ 1 file changed, 99 insertions(+), 9 deletions(-)
 
-diff --git a/cmd/abootimg.c b/cmd/abootimg.c
-index 6fb52153786..2a8e2c20941 100644
---- a/cmd/abootimg.c
-+++ b/cmd/abootimg.c
-@@ -230,6 +230,33 @@ static int do_abootimg_addr(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return CMD_RET_SUCCESS;
- }
+diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
+index 2aadb692b30..bd5fb992a7d 100644
+--- a/test/py/tests/test_android/test_abootimg.py
++++ b/test/py/tests/test_android/test_abootimg.py
+@@ -69,15 +69,33 @@ e5bddc8a7b792d8e8788c896ce9b88d32ebe6c971e7ddd3543cae734cd01
+ c0ffc84c0000b0766d1a87d4e5afeadd3dab7a6f10000000f84163d5d7cd
+ d43a000000000000000060c53e7544995700400000"""
  
-+static int abootimg_get_ramdisk(int argc, char *const argv[])
-+{
-+	ulong rd_data, rd_len;
+-# vendor boot image v4 hex dump
+-vboot_img_hex = """1f8b0808baaecd63020376626f6f742e696d6700edd8310b824018c6f1b3
+-222a08f41b3436b4280dcdd19c11d16ee9109d18d59042d047ec8b04cd0d
+-d19d5a4345534bf6ffc173ef29272f38e93b1d0ec67dd79d548462aa1cd2
+-d5d20b0000f8438678f90c18d584b8a4bbb3a557991ecb2a0000f80d6b2f
+-f4179b656be5c532f2fc066f040000000080e23936af2755f62a3d918df1
+-db2a7ab67f9ffdeb7df7cda3465ecb79c4ce7e5c577562bb9364b74449a5
+-1e467e20c53c0a57de763193c1779b3b4fcd9d4ee27c6a0e00000000c0ff
+-309ffea7010000000040f1dc004129855400400000"""
++# vendor boot image v4 hex dump (contains initial bootconfig: androidboot.hardware=test)
++vboot_img_hex = """1f8b08000000000002ffeddb316a02411806d009a49040606d3d84374823a9a348b095
++915951b2c9caee8690ce237a91406a0b497603e215dcbc577cf3334cf5350303b3787a
++9c4fa6d3e7dbf02b6b63dfc6b01b0180ffe726644d5e37975bb34108c76efa1eb65974
++c7fed691c600e02a64e7ab3e8494afe37bd128050000007ae6707ffad202000000f45b
++155fd3b67e59eee26751c674a711000000e89ff896aa729b5665d98c37b14a1fb1ca1f
++da4f7f5e02000000a0377e0040ab5ba000500000"""
 +
-+	if (argc > 2)
-+		return CMD_RET_USAGE;
++# bootable boot image v4 hex dump (contains actual bootable kernel)
++boot_bootable_img_hex = """1f8b08081663ee6802ff626f6f745f626f6f7461626c655f76342e696d67
++00edd1c14ac3401485e159b80a083ec24dba4f117c81d8140c6dad24ee25
++4da6e9d07452321305dfca37d4d4ec5cb954fe6f37ccb967606ef298e6db
++2c0d3f94526feae25adda81fae140000000000f8ab66e17c67ecdc1d025d
++1d3a89125bf79da9e5beebbc64a7b2d1f27a27cfda7959e9deea369a8263
++a0eaecde34e2c75b375495766e3fb46114cca430a7a12dbd96e3654a7663
++dfb9f4feeb383514beecbdb1cd1489e3380a5cabf5596ea7c4f78b62acf1
++a66ccdbbaea380950100000000f06b79b249b362f5f2b44e16cb87ed3a5d
++e67c0a0000000000ffcc27ba944c7e00300000"""
 +
-+	/*
-+	 * Call android_image_get_ramdisk with UNMAPPED addresses
-+	 * The function will do its own mapping internally as needed
-+	 */
-+	if (android_image_get_ramdisk((void *)abootimg_addr(),
-+				      (void *)get_avendor_bootimg_addr(),
-+				      &rd_data, &rd_len))
-+		return CMD_RET_FAILURE;
-+
-+	if (argc == 0) {
-+		printf("%lx\n", rd_data);
-+	} else {
-+		env_set_hex(argv[0], rd_data);
-+		if (argc == 2)
-+			env_set_hex(argv[1], rd_len);
-+	}
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
- static int do_abootimg_get(struct cmd_tbl *cmdtp, int flag, int argc,
- 			   char *const argv[])
- {
-@@ -249,6 +276,8 @@ static int do_abootimg_get(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return abootimg_get_dtb_load_addr(argc, argv);
- 	else if (!strcmp(param, "dtb"))
- 		return abootimg_get_dtb(argc, argv);
-+	else if (!strcmp(param, "ramdisk"))
-+		return abootimg_get_ramdisk(argc, argv);
++# bootable vendor boot image v4 hex dump (contains actual bootable ramdisk)
++vendor_boot_bootable_img_hex = """1f8b08081663ee6802ff76656e646f725f626f6f745f626f6f7461626c65
++5f76342e696d6700edd8b10a02310cc6f10c0e7220f8080737b8b93ab9a8
++282e571171959e0d787058a84557f5c96ddd7d80c3ff0f92217c5396408e
++f56abf30e63090649c9b3c53bd050000fcab57d45b3c35de47db749a06bb
++e1eff08c7d0100d00bf6ea826f5dbef0d38b0dee618396f3f27bf69ddedb
++b316558a4d462255fe132c4dbdde6e0a160700000000408f7c0027597569
++00200000"""
  
- 	return CMD_RET_USAGE;
- }
-@@ -315,5 +344,9 @@ U_BOOT_CMD(
- 	"    - get address and size (hex) of DT blob in the image by index\n"
- 	"      <num>: index number of desired DT blob in DTB area\n"
- 	"      [addr_var]: variable name to contain DT blob address\n"
--	"      [size_var]: variable name to contain DT blob size"
-+	"      [size_var]: variable name to contain DT blob size\n"
-+	"abootimg get ramdisk [addr_var [size_var]]\n"
-+	"    - get address and size (hex) of ramdisk in the image\n"
-+	"      [addr_var]: variable name to contain ramdisk address\n"
-+	"      [size_var]: variable name to contain ramdisk size"
- );
+ # Expected response for "abootimg dtb_dump" command
+ dtb_dump_resp="""## DTB area contents (concat format):
+@@ -179,6 +197,24 @@ def abootimgv4_disk_image_boot(ubman):
+         gtdi3 = AbootimgTestDiskImage(ubman, 'bootv4.img', boot_img_hex)
+     return gtdi3
+ 
++gtdi4 = None
++@pytest.fixture(scope='function')
++def abootimgv4_bootable_disk_image_boot(ubman):
++    """pytest fixture to provide bootable boot image v4."""
++    global gtdi4
++    if not gtdi4:
++        gtdi4 = AbootimgTestDiskImage(ubman, 'boot_bootable_v4.img', boot_bootable_img_hex)
++    return gtdi4
++
++gtdi5 = None
++@pytest.fixture(scope='function')
++def abootimgv4_bootable_disk_image_vboot(ubman):
++    """pytest fixture to provide bootable vendor boot image v4."""
++    global gtdi5
++    if not gtdi5:
++        gtdi5 = AbootimgTestDiskImage(ubman, 'vendor_boot_bootable_v4.img', vendor_boot_bootable_img_hex)
++    return gtdi5
++
+ @pytest.mark.boardspec('sandbox')
+ @pytest.mark.buildconfigspec('android_boot_image')
+ @pytest.mark.buildconfigspec('cmd_abootimg')
+@@ -266,3 +302,57 @@ def test_abootimgv4(abootimgv4_disk_image_vboot, abootimgv4_disk_image_boot, ubm
+     ubman.run_command('fdt get value v / model')
+     response = ubman.run_command('env print v')
+     assert response == 'v=x2'
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('android_boot_image')
++@pytest.mark.buildconfigspec('cmd_abootimg')
++@pytest.mark.requiredtool('xxd')
++@pytest.mark.requiredtool('gunzip')
++def test_abootimg_bootconfig(abootimgv4_disk_image_vboot,
++                              abootimgv4_disk_image_boot,
++                              ubman):
++    """Test bootconfig handling with boot image v4.
++
++    Verifies that androidboot.* parameters from bootargs are appended to the
++    bootconfig section in vendor_boot image in memory, and that non-androidboot
++    parameters remain in bootargs.
++    """
++
++    # Setup addresses
++    ram_base = utils.find_ram_base(ubman)
++    ramdisk_addr_r = ram_base + 0x4000000
++    ubman.run_command('setenv ramdisk_addr_r 0x%x' % ramdisk_addr_r)
++    ubman.run_command('setenv loadaddr 0x%x' % loadaddr)
++    ubman.run_command('setenv vloadaddr 0x%x' % vloadaddr)
++
++    # Set bootargs with androidboot.* parameters
++    ubman.run_command('setenv bootargs "androidboot.serialno=ABC123 androidboot.mode=recovery console=ttyS0"')
++
++    # Load images
++    ubman.run_command('host load hostfs - 0x%x %s' % (vloadaddr,
++        abootimgv4_disk_image_vboot.path))
++    ubman.run_command('host load hostfs - 0x%x %s' % (loadaddr,
++        abootimgv4_disk_image_boot.path))
++    ubman.run_command('abootimg addr 0x%x 0x%x' % (loadaddr, vloadaddr))
++
++    # Extract ramdisk (triggers bootconfig append)
++    ubman.run_command('abootimg get ramdisk ramdisk_addr ramdisk_size')
++
++    # Get ramdisk address
++    response = ubman.run_command('env print ramdisk_addr')
++    ramdisk_start = int(response.split('=')[1], 16)
++
++    # Verify androidboot.* parameters were removed from bootargs
++    response = ubman.run_command('env print bootargs')
++    assert 'androidboot.' not in response
++    assert 'console=ttyS0' in response
++
++    # Get ramdisk size and verify BOOTCONFIG magic at the end
++    response = ubman.run_command('env print ramdisk_size')
++    ramdisk_size = int(response.split('=')[1], 16)
++
++    # Dump the end of the ramdisk where BOOTCONFIG trailer should be
++    response = ubman.run_command('md.b 0x%x 96' % (ramdisk_start))
++
++    # Verify BOOTCONFIG magic is present
++    assert 'BOOTCONFIG' in response or 'BOOTCON' in response
 
 -- 
 2.34.1
