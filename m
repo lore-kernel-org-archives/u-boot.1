@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56EA0CE7B01
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 12:46:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95F77CE7B0E
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 13:47:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D58C4840CF;
-	Fri, 14 Nov 2025 13:46:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B4B3A840BD;
+	Fri, 14 Nov 2025 14:47:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="THjsUw9D";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JiND7Awh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8DF3840E0; Fri, 14 Nov 2025 13:46:17 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id B7EF9840BE; Fri, 14 Nov 2025 14:47:04 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE801838CE
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 13:46:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98DF4840B5
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 14:47:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-64180bd67b7so2710556a12.0
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 04:46:15 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b403bb7843eso382396566b.3
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 05:47:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763124375; x=1763729175; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763128022; x=1763732822; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=74SiY4q7HoN+NWCBAhQ9JzmPYxbb10tUorLnzOp0C2o=;
- b=THjsUw9Dt4tejiY+Xrptx9EMjSwe7/GXFUScXkfyO4WtfIErg5GuDY310FFNDnaeOE
- YjeSe5Ks8T7JrS9y2U9rBOUckHp+Ws+YzVHDJo0US6OZxSMD/YwM3Zhchqlxrd0AfGf/
- 52ARI6fLAoOA0Li8mSZh5Q62AEoFAgO5mhF14=
+ bh=TsznzVyE2DI6CoZ5lp+A6jHv0aeiAl2g9/H1o6iXkfA=;
+ b=JiND7Awhx8H6UVmCYZxkez9ElPt/YEgG4hplSzRMsF8x8D2KIx1BNUrrwpVsId/9Pc
+ xvuJdt+rMnA6/DiGOt6Y5NeLfGx8jDLFY+eyhtmC1W2qqj2GzhOeqIgk6IQe1H6epOOh
+ M/rRPoNecM+iwKk0QKJ0yZ76WlwJKVdGxdoGE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763124375; x=1763729175;
+ d=1e100.net; s=20230601; t=1763128022; x=1763732822;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=74SiY4q7HoN+NWCBAhQ9JzmPYxbb10tUorLnzOp0C2o=;
- b=wLh31kP5ahhL8Q/+4vLB9591B1T1o4vH5d5SOAak89F5evuWUz7jas07Q5DOrwzVNu
- kWJUb/J9hXXF2YtUZZomA03ubKmZ3522B7OXYX2NNiyUbqVlsP853Tv2lUUVmiRuJWUl
- 51NY782/ESCTXxUGA5L48XTx+ryrmxdFZCAx4gGNF1p49N2K9lLXY9mCc5NXMN4PtkTq
- dMupbiZmmhaMRpScDN7qKq7hbpbuTBnnIUstRukLv9ZxjwQIbQBlbCkikXyV9Z9Sjusz
- R04NQlV4axrF8WPKLthanb2ewJpb91Ltmc/qO0TBeRqRlGPjNiYNQfFJBCCAIY9CDHTo
- smzg==
+ bh=TsznzVyE2DI6CoZ5lp+A6jHv0aeiAl2g9/H1o6iXkfA=;
+ b=C/N0ZSO18hEMObVkh3ZJyEHl2bq2LDv7d1ZuuQujQGnOvKyD5pDvdZx8DaJudy6xPL
+ idSGFIR6VXP+m6mQxSu/QSVIOph3Fphme0sscGvK3dZOZglOsRaJgbIBRpFjpNaWFMwm
+ 16ddkr2sT6jp93jdBFpdRGKPDVdiZBV69xb61zo4PQ9q9xdT0f9wV/khIFA6JduAem50
+ SzjYnCx22NmkpBw232MCI5cjq/hRevDbFO3Pz4S1linfht5Lcqx1m0sx54cz/U33ZZwG
+ OrwcWfhLPyZn3hvmaZUxCQjlwjMaSAGf2/p+HlBZk/F9ytu47cd5qVIfFgNzCi+rhgtH
+ QJdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6gBm2kY03yj5930GHPjZWJVrTmlTr7/kE+anASJzwbmdoNfswrz7RwXvM3RmDYGf3amdtGWI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyu0GkvQENqGHR0NvRH7cHvv5P63Q+pXDci3y/dPugWcjEbaEaz
- lOOkrSll95hSBgpX5GYtSet6L2LmR0/e6b8HiAeh7Kq2SszClwQfmalY3PggVQFEkOP77TISqDz
- HX0VW54blpjixTencd/7EkddH5CJdMOCGfX/SLyCx
-X-Gm-Gg: ASbGncv2nzn88B2LQMVWVchC7We1y3bsZPa+CehETa4K4iszdDgTjOK1Sw2wDGrdUDx
- 7QV3FZy6HnNYhpNXGTvlybpiSuw/iufiYWtl1WyrtJGsti2hDaW+AsSLYDqx4OTYKEspcK7BTug
- eWC/3qIq3NWddKYP5L4h7qE2BXAlgt/ugQeSmHBo5djz+5T7Q+pTE1Vqc9AOoqWBNqP+yUwaRc1
- AUQ4A9bjMJGXp2aBgy2DTuYyX4lqc/O4ZboYVnsonXGroPLd+wWmzguabLXbfDMpNL9DQ==
-X-Google-Smtp-Source: AGHT+IEXbc8X3r5UhvlYf0/WknsLEyHqbJB9ZGOT3JUOGA9oQ+bEJO97+lb+pJwpfFHTvq9bYinUFa30kCX7++Ye/6E=
-X-Received: by 2002:a17:907:7eaa:b0:b72:d6a9:e1d9 with SMTP id
- a640c23a62f3a-b73678ea6ecmr302299866b.41.1763124374830; Fri, 14 Nov 2025
- 04:46:14 -0800 (PST)
+ AJvYcCWmqMoTjIjQ756ntVkIH7PnslUsO2y11UCObExyDMlBmY6ZOwTZnzPml5jka8fiatyIFTUCZRQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzN6ZaXmPHjt3vDGkpH6iLmkQy9Js1HOuPtUg5ao9R6tV9dn2uH
+ MR7q7xSTvx3P6+FnKUrk2GBdsHLwClya/yZmMdiu8jdZejCSibCyxxNLOu2vh8Lt86ymywBR2hE
+ W2zLFtPnJ7T5L6DIRLnvAC4C5ZBv0QV/LmiA/xxcJ
+X-Gm-Gg: ASbGncunkZD3w8DwPQtBv6UNFFbs/2I+okLocGGZPGL1tIISgUv/N4cVpOkGowCoYrK
+ ALZIZm6vFMI4w+Fse1cR8FdfoNQXUU9umv4SvbhHekjylihunt3RGsnk6ll/V7Vh+OPEdE5cQri
+ 97C4hfVQyhZRJPy83Na6li6NmWQGOgtdfYH5vpzTr7I0sUvUW3S7bkeFNJm9q01itWFjN61YBm1
+ nCrZzJitJkWTV22VzBlfLZC6oVetYlYd3+8oKTybrzWfugllxGVD6QQI9A3I1B6AaRJfg==
+X-Google-Smtp-Source: AGHT+IG3I8iFunHM2BTf09cFCUWSMykbVTRQ4N+YwzYR9jKGwuHY/kzLvTOOiZfUpsiTQTxhk3RS+J2GsLoBqkzMrXE=
+X-Received: by 2002:a17:907:1b1b:b0:b72:af1f:af7d with SMTP id
+ a640c23a62f3a-b736789cb8dmr320803566b.29.1763128021938; Fri, 14 Nov 2025
+ 05:47:01 -0800 (PST)
 MIME-Version: 1.0
-References: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTjofjQ_zmwJrGZ-sLejQ=x=-8tyqr4SBPYgt3683GVAbQ@mail.gmail.com>
- <20251113193816.GP6688@bill-the-cat>
- <CAFLszTjwpoCwCKKvJX5cZMLK480EK-=BWaFd5A6yLMrfsVWC6g@mail.gmail.com>
- <20251113200527.GQ6688@bill-the-cat>
- <CAFLszTjydNqmo=6qLv--m4fB07QzWd01XHGY3hxgTEbarJF-VA@mail.gmail.com>
- <20251113203654.GR6688@bill-the-cat>
- <385cdc16-cf73-443b-a0a1-440e233d4506@mailbox.org>
-In-Reply-To: <385cdc16-cf73-443b-a0a1-440e233d4506@mailbox.org>
+References: <20251106210826.371672-1-marek.vasut+renesas@mailbox.org>
+ <417e1b1a-0346-4297-9a72-7befc5b94311@gmx.de>
+ <537299e3-05a1-4ff4-b594-9c73ed41a0cc@mailbox.org>
+ <20251107155650.GE6688@bill-the-cat>
+ <4b14ce54-6ba0-4e35-abad-6787b2d994fb@mailbox.org>
+ <CAFLszTjjhOj8g63vs_hprykYrWvEM=YuwT4ZNDnuppuJ-8aXZw@mail.gmail.com>
+ <f1f10508-4767-4943-8411-8eb4bb0618aa@mailbox.org>
+In-Reply-To: <f1f10508-4767-4943-8411-8eb4bb0618aa@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Nov 2025 05:45:32 -0700
-X-Gm-Features: AWmQ_bnHBSrj4MzruUdIyBy4xtQts5UF1MQdfqtvrgnKlIjNqx9TViwoTB2APq8
-Message-ID: <CAFLszThc4YC6mKp5sNsiuCFfaMNqMWJjVV27d4UkyLU4rPWY6A@mail.gmail.com>
-Subject: Re: [PATCH 1/2] boot: android: Always use 8-byte aligned DT with
- libfdt
+Date: Fri, 14 Nov 2025 06:46:49 -0700
+X-Gm-Features: AWmQ_bk7Kz1yCWtdMWGV7CkE4m9HtxyfMP1ZAZ23ZHlcb2ryNm1l0GOCDU0ROCU
+Message-ID: <CAFLszTjkpB-CMZNVBrsXDbexDG0saNcvGDKugQgxhES9MV1+tg@mail.gmail.com>
+Subject: Re: [RFC][PATCH] kbuild: Produce diff between base DT and U-Boot
+ augmented DT if DEVICE_TREE_DEBUG=1
 To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- u-boot@lists.denx.de, Aaron Kling <webgeek1234@gmail.com>, 
- Eddie Kovsky <ekovsky@redhat.com>, George Chan <gchan9527@gmail.com>, 
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,40 +101,24 @@ X-Virus-Status: Clean
 
 Hi Marek,
 
-On Thu, 13 Nov 2025 at 14:57, Marek Vasut <marek.vasut@mailbox.org> wrote:
+On Tue, 11 Nov 2025 at 08:26, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >
-> On 11/13/25 9:36 PM, Tom Rini wrote:
+> On 11/11/25 1:38 PM, Simon Glass wrote:
 >
-> Hello everyone,
+> Hello Simon,
 >
-> >>> Which is different from disagreeing with your specific feedback about
-> >>> how we get there, to be clear.
+> >>> Maybe we put it in the u-boot-extras repo for now as a standalone
+> >>> script, so people can be asked to run it and look at the output?
+> >> I'd say no, because the output is full of noise unless the phandle
+> >> non-resolution gets somehow improved.
 > >
-> > And again, since your feedback to this patch was "Don't?", I'm saying we
-> > need to. But the rest of your feedback was structural on moving towards
-> > resolving it and so I assume Marek will respond.
+> > Another idea would be to create an fdtdiff tool which does this. We
+> > already have fdtgrep[1]
 >
-> The "blast radius" are these patches, that's all that tripped the tests:
->
->   - boot: android: Always use 8-byte aligned DT with libfdt
->   - test/py: android: Point fdt command to aligned addresses
->   - test/py: Use aligned address for overlays in 'extension' test
->   - sandbox: Fix DT compiler address warnings in sandbox DTs
->   - sandbox: Fix DT compiler pin warnings in sandbox DTs
->   - boot: Assure FDT is always at 8-byte aligned address
->   - arm: qemu: Eliminate fdt_high and initrd_high misuse
->   - efi_loader: Assure fitImage from capsule is used from 8-byte aligned
-> address
->   - MIPS: Assure end of U-Boot is at 8-byte aligned offset
->
-> Regarding last minute alignment, the problem with this android image
-> seems to be in the android image itself, which packs in badly aligned
-> FDT. We therefore have to copy it out and realign.
+> A new tool is not needed, up to date DTC retains the phandles across dtc
+> -I dts -O dts and the result can be diff'd using regular diff.
 
-My request is to implement these checks as part of the boot flow
-(bootm, etc.) rather than adding memory allocations in leaf function.
-We already support copying the FDT to a different address so we can
-expand it and add things. Can we make use of that code?
+That's good! Sounds like it was a bug.
 
 Regards,
-SImon
+Simon
