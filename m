@@ -4,50 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD94CE8D5F
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 17:13:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7114BCE8D5F
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 17:13:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8B3E842A1;
-	Fri, 14 Nov 2025 18:13:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 11750842BF;
+	Fri, 14 Nov 2025 18:13:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="MxFTgIbR";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="Am6IL96l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E47448429E; Fri, 14 Nov 2025 18:13:44 +0100 (CET)
+ id 0BDD683F33; Fri, 14 Nov 2025 18:13:45 +0100 (CET)
 Received: from mta-64-228.siemens.flowmailer.net
  (mta-64-228.siemens.flowmailer.net [185.136.64.228])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C85B08419A
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 18:13:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 17BE083F4F
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 18:13:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
- 20251114171342b7f22352080002074c for <u-boot@lists.denx.de>;
+ 20251114171342a31b5fe1fa000207d8 for <u-boot@lists.denx.de>;
  Fri, 14 Nov 2025 18:13:42 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=jan.kiszka@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=BpQ9pXFoM4P3yzEz8UYP5oFIuiKAmt19GTEXGH4ZqSI=;
- b=MxFTgIbRV2T/9+r3KBe62jtvMP8OLekZmDrhinvTtlwGkFeNqnuAgy3zbR2Hr39aZbRVbD
- QqwT5Q5Y4bQp0BSe9+FoxjPcC6j8Af0Im68lggf//SH67i/gUmpz/JJhWEJeCVLf0FFBvG7U
- kULbKRLRr7qvNu3tMJi/H3ybYfHvTMBypPPFCXwGroP3OEWLhTsDbBERUzikXfpyIb52xzjp
- cZh2W329nBi4WrdOP7h5xZ05sHlfdI9AmRIYNysptNzT40/ArRo9M3mKfplCqAKZku/YAq9r
- 1qOiPWzOsN6JhzLOEesnLJdH36rPqpv3gtxzQx2nYP9Dwwb5DnfpVhwQ==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=NEA4vXhM7/hjosDySiYYAiBLKg/E8wYuyRZRF70usmU=;
+ b=Am6IL96lIDpi7gWdjeKSTTvacldvl5hHd9bk0NzvJa/lHZngKCq0qrPkALx7spM/dzFK98
+ IuZji4Z8c3+ap2jTcKHW1Zv+SFlQ/Gjudhe5GlmJoqd4tTAz6OCBb65QD3endIpqf0rafqn4
+ WudXIuQEW+7PI5r6LF2CuwLmfrXmtbTpl0sR8od1QWoo8cPnLSaqhas9Qtw1e74wzyYhcH2n
+ uqjhDKXmhUua7obWuBam5baY/H6ALer5vQehUfVOW1uJDw5l1cjLqYwmr34IkKUy2/IXoFlN
+ Sc0MjHSQyxF7c/WOrnjKhvVcMICyIJioDXEljlzB6zidfb3SzX6EHdKg==;
 From: Jan Kiszka <jan.kiszka@siemens.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Marek Vasut <marex@nabladev.com>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 0/4] Fixes for CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION*
- and for SOCFPGA
-Date: Fri, 14 Nov 2025 18:13:37 +0100
-Message-ID: <cover.1763140421.git.jan.kiszka@siemens.com>
+Subject: [PATCH 2/4] spl: mmc: Account for
+ SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE being a choice
+Date: Fri, 14 Nov 2025 18:13:39 +0100
+Message-ID: <2a3e21ea1dd00565857793228cf1a0ee27d550db.1763140421.git.jan.kiszka@siemens.com>
+In-Reply-To: <cover.1763140421.git.jan.kiszka@siemens.com>
+References: <cover.1763140421.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -68,31 +70,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Several fixes needed after the mmc raw-mode was consolidated a while
-ago. Not all the fallouts can be blamed to that refactoring. It also
-looks to me like booting from mmc just worked by chance before.
+From: Jan Kiszka <jan.kiszka@siemens.com>
 
-This series now permits U-Boot proper loading from SPL via partition
-type, at least on the DE0-Nano-SoC (other boards not available for
-testing).
+Add SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE as condition where so
+far SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION was enough - though often
+by chance as both options were enabled.
 
-Jan
+We also need to explicitly select SPL_LOAD_BLOCK when UES_PARTITION_TYPE
+is enabled, just like the other choices do.
 
-Jan Kiszka (4):
-  spl: mmc: Respect sector value passed to mmc_load_image_raw_partition
-  spl: mmc: Account for SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
-    being a choice
-  arch: arm: mach-socfpga: Adjust a raw sectors for MMC loading of
-    U-Boot from SPL
-  configs: socfpga: Fix de0_nano_soc boot
+Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+---
+ common/spl/Kconfig   |  1 +
+ common/spl/spl_mmc.c | 16 ++++++++--------
+ include/part.h       |  3 ++-
+ 3 files changed, 11 insertions(+), 9 deletions(-)
 
- arch/arm/mach-socfpga/board.c          |  9 +++++++++
- common/spl/Kconfig                     |  1 +
- common/spl/spl_mmc.c                   | 20 ++++++++------------
- configs/socfpga_de0_nano_soc_defconfig |  1 +
- include/part.h                         |  3 ++-
- 5 files changed, 21 insertions(+), 13 deletions(-)
-
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 8dade2b501e..d24466b0c66 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -573,6 +573,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+ 
+ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+ 	bool "MMC raw mode: by partition type"
++	select SPL_LOAD_BLOCK
+ 	depends on DOS_PARTITION
+ 	help
+ 	  Use partition type for specifying U-Boot partition on MMC/SD in
+diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+index 467114f8d9a..09e881c464c 100644
+--- a/common/spl/spl_mmc.c
++++ b/common/spl/spl_mmc.c
+@@ -106,7 +106,8 @@ static int spl_mmc_find_device(struct mmc **mmcp, int mmc_dev)
+ 	return 0;
+ }
+ 
+-#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
++#if defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
++    defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
+ static int mmc_load_image_raw_partition(struct spl_image_info *spl_image,
+ 					struct spl_boot_device *bootdev,
+ 					struct mmc *mmc, int partition,
+@@ -415,19 +416,18 @@ int spl_mmc_load(struct spl_image_info *spl_image,
+ 
+ 		raw_sect = spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
+ 
+-#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+-		ret = mmc_load_image_raw_partition(spl_image, bootdev,
+-						   mmc, raw_part,
+-						   raw_sect);
+-		if (!ret)
+-			return 0;
+-#endif
+ #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+ 		ret = mmc_load_image_raw_sector(spl_image, bootdev, mmc,
+ 						raw_sect +
+ 						spl_mmc_raw_uboot_offset(part));
+ 		if (!ret)
+ 			return 0;
++#else
++		ret = mmc_load_image_raw_partition(spl_image, bootdev,
++						   mmc, raw_part,
++						   raw_sect);
++		if (!ret)
++			return 0;
+ #endif
+ 		/* If RAW mode fails, try FS mode. */
+ 		fallthrough;
+diff --git a/include/part.h b/include/part.h
+index 6caaa6526aa..ba4a63ddc75 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -461,7 +461,8 @@ ulong disk_blk_erase(struct udevice *dev, lbaint_t start, lbaint_t blkcnt);
+ #ifdef CONFIG_XPL_BUILD
+ # define part_print_ptr(x)	NULL
+ # if defined(CONFIG_SPL_FS_EXT4) || defined(CONFIG_SPL_FS_FAT) || \
+-	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION)
++	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
++	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
+ #  define part_get_info_ptr(x)	x
+ # else
+ #  define part_get_info_ptr(x)	NULL
 -- 
 2.51.0
 
