@@ -4,95 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED9CECE8D40
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 15:29:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13314CE8D47
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 15:35:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2552F8415D;
-	Fri, 14 Nov 2025 16:28:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B20583A6A;
+	Fri, 14 Nov 2025 16:35:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jRFkOkkB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pj3EMl00";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FFF28415D; Fri, 14 Nov 2025 16:28:50 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 12A4783E83; Fri, 14 Nov 2025 16:35:38 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6936284167
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 16:28:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1A3783623
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 16:35:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-47790b080e4so3768095e9.3
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:28:48 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7c2846c961fso1489917a34.2
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:35:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763134128; x=1763738928;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=aaUbO5anb67fEYVTSVEwINvwPHSTVUHbq8ivjbChweQ=;
- b=jRFkOkkBy8CP233rUhdWZ/vkXkGQrwkHrpXmxnra4FMIB/kse78HntcQUuXNuKUCy8
- v+75quTm/rrnD/ZzsXBqmfIcRcTXpH4/I9lP2pq5jqrp4Nw9WOHyxrmfXuNkc0k1Ke2M
- XH6cFgTSpvdyIXmlBrfY7ReRD4IiRBYVldTLWzA8ipJmsUomCHUrprbTRM3WGwOafKhP
- o/sOvXZBEwRQVuniK9/eSs7Nmhgu758drtjA6QFBCcbldVl7/tZoNvE70EwyFfHT83Dw
- +rtAFzo127aP/K9hxyw12t1LFJIpBGoGlTKbGnBs8gzRviB4EL0RP68vnUFdO58LwVDH
- EUiw==
+ d=gmail.com; s=20230601; t=1763134534; x=1763739334; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=k31iPHeqZEGPAm/zf6QY1RMHK6+t70dRohkwK7lN2vo=;
+ b=Pj3EMl00iydXNplRIfcymn7MlymW/pPjOr7zX5aWc8IbkQrsjURgIrp6yYSuo3XFqU
+ h/gHXJRpJ0qPIqKjK9grUU3jp4CfaWtJxxn9SZL35Pr3zkQ2gXlGS2i2hZPMuRisf8qf
+ /DmLRzKmZjK6EN3q9Pg3d5CicPRViHjgnXv4Md6ZaVm/RhSoOHoEVRtQm8fawR7Ea38n
+ J3/YvW5lqLCm6EnfL8rKGx0hXKs+CLXXT7ZShxClAN1ePreoth64XpBOBcG/eVRa9CGY
+ Isjpq+6jr/LNyo0uU8L1slYiEiFKTqOlOqK22ed4iw7VpjX5bEcgHkXHqeO/YDq2noYX
+ KrRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763134128; x=1763738928;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=aaUbO5anb67fEYVTSVEwINvwPHSTVUHbq8ivjbChweQ=;
- b=CUXG+5wGBZ6pyGKUFTo75xUR/dJ2LbRpORD4exyF4i5x234dLQDvu+A4y7URapJa1L
- 0w8utmoUOX8FqRk6rrSF7Xvh9ToJ9YlnPvMefFLjsVd0Lp4WZ3vjT18L7UXx/VoBhsdD
- qCmNmt+kl7StE+WmmrQE3+YV2wI4vffZl+x6IZFr4n4L6WdQvfVUqlwjc2jvLAfjp+Zj
- DEzvMYE/yd9kRtqWmXo72ZR4DitVbeXwc6/rT2W029eVNy3PhhYCDRLZeEr6zN8z+WF5
- APBLOiWp3RPuyn1YhD0xvbHJ5GxJlDf9Bk2j5RD5egMtxqKD19iVw9cwy9w3vU5J4nR6
- Nxng==
+ d=1e100.net; s=20230601; t=1763134534; x=1763739334;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=k31iPHeqZEGPAm/zf6QY1RMHK6+t70dRohkwK7lN2vo=;
+ b=u0/Fj/B2L8tsOyuX7Z9Y9+2yEaGJm5AMxgPJP4WkOEF3thSKepY8PY6HLh52CT70eU
+ n6+XBEf30zxYq9Z5BTzrA8wHppvijBaQscYymaLSnYkFZxV2B2i34whCXup5a+4FtpFK
+ BsmK45yIInGSn5+J1n35yIzcV3rKBrdjR0pgNqBR5cNPn64lqPgibP70rhzrc0eJv0nz
+ b2brdmFLdMHRHj+YFuZ/qHCImGaN69/+TmrxrpsQyBJIc8p3q3i4W2ZE/3vaq8ndiCrS
+ vZmo7NB6qDZbMlPvfqKmAmtmX8FybYYodcUfqQTbdjqRoShIy9BsLkpJfsKzn+Fsx7Ot
+ nTuQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWginKNMnFJnduhgFT9sZvbRhGYsK96f4+/sttlF1FNGTqTvuttck/jkH5kp9bzYGGUCBYBEyo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz2a2YClrSIMawN53ZG7Kl3IZ1quCBMDB0Q3KEPoJs1WE0w//S9
- awqmRIYs0FsN5Rps09k1t3VQDsHpHN3S9RMa88rqE9t91cMEJs/4luxuuWX2UqDKrMY=
-X-Gm-Gg: ASbGncthUhdfwr21G0js0Vegr0VJewXG6oHoEPGYgzPn9Ik2S1/0aYm3nSIaalhFq8K
- MjUeSzflSQxGarng8LDpab45JFRDxBMI4eKoYJ8Ro+g17wqyLlZOjMrJGYXmTUvvVUfqk1ugE+L
- /xOf/fPuZJePJyQ6HBmnsyHnubQ8M8rC2x9y0tzoVPLLRwHl64aCwsuTHiLfsXiBqzCdl/vOCGg
- /z6tH/0jWlyhI6YSxIKmNQnGSdqwvqIHFbdpwvaReWfC4JHVg3VTeGoZ1Q7RZWHA4jU5iD5VfMN
- 9ybsFKiofOyTaAIJchogfS7dmB3fYulY/IV4MTkpaCJsz+wpXHlq1vIL8v+ZneIPqWk4jvMXDUe
- Q5mt2ipKytFMV6SmPBTsjHOfsChS58IZZQFtVOLezikrpVycIjpjTW0dI8EcwnXVAjuWuly9TKd
- C/g2ZOQhKzBYPH
-X-Google-Smtp-Source: AGHT+IFragRVTUjoxlMDU0RsiadswMf9Oi88QTTZIkHWMgAw7nLmzNtzJ3DtrEqh8GFNAoJHVGeqrg==
-X-Received: by 2002:a05:600c:a49:b0:475:e007:baf1 with SMTP id
- 5b1f17b1804b1-4778feadb6dmr36284435e9.34.1763134127738; 
- Fri, 14 Nov 2025 07:28:47 -0800 (PST)
-Received: from [127.0.1.1] ([2a01:e0a:e50:3860:1ab:5fd8:dd9b:8e8b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4779524d2ffsm15741035e9.3.2025.11.14.07.28.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 07:28:47 -0800 (PST)
-From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-Date: Fri, 14 Nov 2025 16:28:44 +0100
-Subject: [PATCH v3 5/5] test: abootimg: Add test for bootconfig handling
+ AJvYcCWsy1/3qLs8G7KXu9g8BnZxbKQIMjFRl4P2/oruc0b1VoCcCxfut5oULTHPHkWbcuPbXQjLgKQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVXi4crEyNpYMXYCzz0WJ5miIf3sWWNXg8JyaCsfz+Wa+z4lS0
+ NmLz0EKaBIXHZiU25yRSw3n6W3noUEfnBOB5c+jcXsw/3upBZvXkwmLzp2w+RRfQjzk4xA89HWf
+ GCm0gG6Of5QFWrCCubP/KrkLLBC08bbg=
+X-Gm-Gg: ASbGnctTV08wJXz3tV9uaKfPJSjijQlvo8ztROR6sXjfqZzWNZu1biItxyGvGCDE1/q
+ DnsfgoxQT10a+kTh0zcWVBOll4F1+7ABUIzmacugNo4zZDTBJZH+oJmVBR8rYx/H7YlArSSGRXJ
+ LfZ2f/Eqr6smt3j3NPJmj6AhJwbXInvcLcgSMqVj5XwkpghPax69tmMIjRxGrPfPdsE24DRzHYq
+ kYmdZG+auKuPGh+4cOpNVUHt4OUFZUdo4/dnW8CFVWyWuVhWCYKKsX9m1Ji9g==
+X-Google-Smtp-Source: AGHT+IFeFwCgAWubjFvsVWFVqkOBzCbNhaTA60XGtxkZCr1At6dq3cCQ8dxuHM2e1AclN2EJXo1F+ALblZ10OVbQi5U=
+X-Received: by 2002:a05:6830:440e:b0:7c5:3e0c:487f with SMTP id
+ 46e09a7af769-7c74430d334mr2409816a34.9.1763134533006; Fri, 14 Nov 2025
+ 07:35:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251114-bootconfig-v3-5-a28b813dba90@baylibre.com>
-References: <20251114-bootconfig-v3-0-a28b813dba90@baylibre.com>
-In-Reply-To: <20251114-bootconfig-v3-0-a28b813dba90@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Julien Masson <jmasson@baylibre.com>, 
- Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>, 
- Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
- Maxime Fournier <mfournier@baylibre.com>, Eddie Kovsky <ekovsky@redhat.com>
-X-Mailer: b4 0.14.3
+References: <20251020133455.1870-1-briansune@gmail.com>
+ <adaf5081-3b9b-4cdc-b7d3-ec9756f60ead@altera.com>
+ <CAN7C2SDVD+bpF=CGDPXDqLE3U9cMm2YqxnwXScvxiFh3OypP=A@mail.gmail.com>
+ <009323c1-98b3-490a-912a-35249efbfd9d@altera.com>
+In-Reply-To: <009323c1-98b3-490a-912a-35249efbfd9d@altera.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Fri, 14 Nov 2025 23:35:21 +0800
+X-Gm-Features: AWmQ_bmO5e-eyksjWI7V9TLAda3KsKEOqU0yijQ4c-nJZUjD4vQgaXei83ivImU
+Message-ID: <CAN7C2SBU1xozPwfRG_tdcqos4jDZRm-qzXR5MEVTG7jXebp_7Q@mail.gmail.com>
+Subject: Re: [PATCH v4] Altera SoCFpga Boot Stall Fix
+To: Tom Rini <trini@konsulko.com>
+Cc: "Chee, Tien Fong" <tienfong.chee@altera.com>,
+ Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,153 +96,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test to verify that androidboot.* parameters are correctly extracted
-from bootargs and appended to the bootconfig section when using
-'abootimg get ramdisk' with boot image v4 and vendor_boot image.
+> like Cyclone V, and Arria 10. Our initial assumption was that users
+> would primarily use the Altera official release repo, where we have been
+> gradually migrating platform devices to the driver model stage by stage,
+> including clk driver used in MMC driver.
 
-The test verifies:
-- androidboot.* parameters are removed from bootargs
-- They are appended to the bootconfig section in the ramdisk
-- Non-androidboot parameters remain in bootargs
-- The bootconfig trailer is properly updated
+Tom, with all respect. I don't see those previous patches really improved
+nor introduced a proper build environment for supported SoCFPGA series.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
----
- test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++++++++++++---
- 1 file changed, 99 insertions(+), 9 deletions(-)
+Assumption is not considered as a proper way nor correct way to patch things.
+Simply removing critical code and breaking other SoCFPGA families is completely
+unacceptable.
 
-diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
-index 2aadb692b30..bd5fb992a7d 100644
---- a/test/py/tests/test_android/test_abootimg.py
-+++ b/test/py/tests/test_android/test_abootimg.py
-@@ -69,15 +69,33 @@ e5bddc8a7b792d8e8788c896ce9b88d32ebe6c971e7ddd3543cae734cd01
- c0ffc84c0000b0766d1a87d4e5afeadd3dab7a6f10000000f84163d5d7cd
- d43a000000000000000060c53e7544995700400000"""
- 
--# vendor boot image v4 hex dump
--vboot_img_hex = """1f8b0808baaecd63020376626f6f742e696d6700edd8310b824018c6f1b3
--222a08f41b3436b4280dcdd19c11d16ee9109d18d59042d047ec8b04cd0d
--d19d5a4345534bf6ffc173ef29272f38e93b1d0ec67dd79d548462aa1cd2
--d5d20b0000f8438678f90c18d584b8a4bbb3a557991ecb2a0000f80d6b2f
--f4179b656be5c532f2fc066f040000000080e23936af2755f62a3d918df1
--db2a7ab67f9ffdeb7df7cda3465ecb79c4ce7e5c577562bb9364b74449a5
--1e467e20c53c0a57de763193c1779b3b4fcd9d4ee27c6a0e00000000c0ff
--309ffea7010000000040f1dc004129855400400000"""
-+# vendor boot image v4 hex dump (contains initial bootconfig: androidboot.hardware=test)
-+vboot_img_hex = """1f8b08000000000002ffeddb316a02411806d009a49040606d3d84374823a9a348b095
-+915951b2c9caee8690ce237a91406a0b497603e215dcbc577cf3334cf5350303b3787a
-+9c4fa6d3e7dbf02b6b63dfc6b01b0180ffe726644d5e37975bb34108c76efa1eb65974
-+c7fed691c600e02a64e7ab3e8494afe37bd128050000007ae6707ffad202000000f45b
-+155fd3b67e59eee26751c674a711000000e89ff896aa729b5665d98c37b14a1fb1ca1f
-+da4f7f5e02000000a0377e0040ab5ba000500000"""
-+
-+# bootable boot image v4 hex dump (contains actual bootable kernel)
-+boot_bootable_img_hex = """1f8b08081663ee6802ff626f6f745f626f6f7461626c655f76342e696d67
-+00edd1c14ac3401485e159b80a083ec24dba4f117c81d8140c6dad24ee25
-+4da6e9d07452321305dfca37d4d4ec5cb954fe6f37ccb967606ef298e6db
-+2c0d3f94526feae25adda81fae140000000000f8ab66e17c67ecdc1d025d
-+1d3a89125bf79da9e5beebbc64a7b2d1f27a27cfda7959e9deea369a8263
-+a0eaecde34e2c75b375495766e3fb46114cca430a7a12dbd96e3654a7663
-+dfb9f4feeb383514beecbdb1cd1489e3380a5cabf5596ea7c4f78b62acf1
-+a66ccdbbaea380950100000000f06b79b249b362f5f2b44e16cb87ed3a5d
-+e67c0a0000000000ffcc27ba944c7e00300000"""
-+
-+# bootable vendor boot image v4 hex dump (contains actual bootable ramdisk)
-+vendor_boot_bootable_img_hex = """1f8b08081663ee6802ff76656e646f725f626f6f745f626f6f7461626c65
-+5f76342e696d6700edd8b10a02310cc6f10c0e7220f8080737b8b93ab9a8
-+282e571171959e0d787058a84557f5c96ddd7d80c3ff0f92217c5396408e
-+f56abf30e63090649c9b3c53bd050000fcab57d45b3c35de47db749a06bb
-+e1eff08c7d0100d00bf6ea826f5dbef0d38b0dee618396f3f27bf69ddedb
-+b316558a4d462255fe132c4dbdde6e0a160700000000408f7c0027597569
-+00200000"""
- 
- # Expected response for "abootimg dtb_dump" command
- dtb_dump_resp="""## DTB area contents (concat format):
-@@ -179,6 +197,24 @@ def abootimgv4_disk_image_boot(ubman):
-         gtdi3 = AbootimgTestDiskImage(ubman, 'bootv4.img', boot_img_hex)
-     return gtdi3
- 
-+gtdi4 = None
-+@pytest.fixture(scope='function')
-+def abootimgv4_bootable_disk_image_boot(ubman):
-+    """pytest fixture to provide bootable boot image v4."""
-+    global gtdi4
-+    if not gtdi4:
-+        gtdi4 = AbootimgTestDiskImage(ubman, 'boot_bootable_v4.img', boot_bootable_img_hex)
-+    return gtdi4
-+
-+gtdi5 = None
-+@pytest.fixture(scope='function')
-+def abootimgv4_bootable_disk_image_vboot(ubman):
-+    """pytest fixture to provide bootable vendor boot image v4."""
-+    global gtdi5
-+    if not gtdi5:
-+        gtdi5 = AbootimgTestDiskImage(ubman, 'vendor_boot_bootable_v4.img', vendor_boot_bootable_img_hex)
-+    return gtdi5
-+
- @pytest.mark.boardspec('sandbox')
- @pytest.mark.buildconfigspec('android_boot_image')
- @pytest.mark.buildconfigspec('cmd_abootimg')
-@@ -266,3 +302,57 @@ def test_abootimgv4(abootimgv4_disk_image_vboot, abootimgv4_disk_image_boot, ubm
-     ubman.run_command('fdt get value v / model')
-     response = ubman.run_command('env print v')
-     assert response == 'v=x2'
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('android_boot_image')
-+@pytest.mark.buildconfigspec('cmd_abootimg')
-+@pytest.mark.requiredtool('xxd')
-+@pytest.mark.requiredtool('gunzip')
-+def test_abootimg_bootconfig(abootimgv4_disk_image_vboot,
-+                              abootimgv4_disk_image_boot,
-+                              ubman):
-+    """Test bootconfig handling with boot image v4.
-+
-+    Verifies that androidboot.* parameters from bootargs are appended to the
-+    bootconfig section in vendor_boot image in memory, and that non-androidboot
-+    parameters remain in bootargs.
-+    """
-+
-+    # Setup addresses
-+    ram_base = utils.find_ram_base(ubman)
-+    ramdisk_addr_r = ram_base + 0x4000000
-+    ubman.run_command('setenv ramdisk_addr_r 0x%x' % ramdisk_addr_r)
-+    ubman.run_command('setenv loadaddr 0x%x' % loadaddr)
-+    ubman.run_command('setenv vloadaddr 0x%x' % vloadaddr)
-+
-+    # Set bootargs with androidboot.* parameters
-+    ubman.run_command('setenv bootargs "androidboot.serialno=ABC123 androidboot.mode=recovery console=ttyS0"')
-+
-+    # Load images
-+    ubman.run_command('host load hostfs - 0x%x %s' % (vloadaddr,
-+        abootimgv4_disk_image_vboot.path))
-+    ubman.run_command('host load hostfs - 0x%x %s' % (loadaddr,
-+        abootimgv4_disk_image_boot.path))
-+    ubman.run_command('abootimg addr 0x%x 0x%x' % (loadaddr, vloadaddr))
-+
-+    # Extract ramdisk (triggers bootconfig append)
-+    ubman.run_command('abootimg get ramdisk ramdisk_addr ramdisk_size')
-+
-+    # Get ramdisk address
-+    response = ubman.run_command('env print ramdisk_addr')
-+    ramdisk_start = int(response.split('=')[1], 16)
-+
-+    # Verify androidboot.* parameters were removed from bootargs
-+    response = ubman.run_command('env print bootargs')
-+    assert 'androidboot.' not in response
-+    assert 'console=ttyS0' in response
-+
-+    # Get ramdisk size and verify BOOTCONFIG magic at the end
-+    response = ubman.run_command('env print ramdisk_size')
-+    ramdisk_size = int(response.split('=')[1], 16)
-+
-+    # Dump the end of the ramdisk where BOOTCONFIG trailer should be
-+    response = ubman.run_command('md.b 0x%x 96' % (ramdisk_start))
-+
-+    # Verify BOOTCONFIG magic is present
-+    assert 'BOOTCONFIG' in response or 'BOOTCON' in response
+We are not talking about code improvement nor cleanup.
+What the previous patch actually did is simply remove old generation SoCFPGA
+codes and w/o coherently coexist old and new generations.
 
--- 
-2.34.1
-
+Brian
