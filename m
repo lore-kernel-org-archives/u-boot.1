@@ -4,99 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 391FCCE7A9B
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 09:34:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD9BCE7AA3
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 09:53:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0A588402F;
-	Fri, 14 Nov 2025 10:33:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 124F883B1A;
+	Fri, 14 Nov 2025 10:53:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="LZuQiSnt";
+	dkim=pass (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="nikB603f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4952D84013; Fri, 14 Nov 2025 10:33:08 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id C52AE83EF1; Fri, 14 Nov 2025 10:53:29 +0100 (CET)
+Received: from mout.web.de (mout.web.de [212.227.15.3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46E348400F
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 10:33:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2AA883968
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 10:53:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B822F3FE2B
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 09:33:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763112780;
- bh=MF7a8fk98XdXH9ana3u1mEFm7OmP3ztGzKINUQkTsxo=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=LZuQiSnt3cEqAqY0X0tYKkjhof7K7kj/B/ICWqniUfPtUFNFs4rHv1EYNI+yKCsKV
- 298Bj/1SIwZY9/u6BNuQKKrcKT+Bdo6EXgbg/OxjBTJZhmjQzFr5SIYP6hzkR/eWU7
- 5bB4mIeakmcrEQq2JhjSqRmya4BckfXBmm7rocG9fsK06C4m8ykDSvHqokj9GVbXsy
- RcBGL/SFVNapmbS9ABVJGzgEgZ+FwRCMcRjZ+QMdhuG6g96Wt0jspf9Eh+2tnr4ef+
- Rf7EI7rsBqvOKVVgTOFgFWVm2NjNdqNIYDRM55xuFkkoZnUKRWTR+C80PquNneeke6
- /+WTBSC7De8A+aXoy5cgWT26zjyhASxqxUpWiUrj+3u8ZFHthvCZhwEmX9ICTCUvez
- A0as0B8/x/D6L4qcABpf0wN045V4iELeoDAEUNuDwFcxYFwwOZROlBoPp+YfmcHIv5
- 0SmUK4/IWq0tY6krfxCah4Df7Qf+ajK0SNajwJQABTULpyxAm+IKrjx6x8NIBCcLrZ
- UL7cQqEfbAMnDiBHdWo3qZ8SKEwkI+1rZRXzPLRB9NfW7YlwZXcoFKmtTCw0UDFXth
- aPx5NNUgp9L9yxem/8Zyy8RxYDJa5zmdX9GlaNRlkEd3varrd9CIGoUsSSbdj5hfPU
- bnG3FKIxhe3P0vMZEKelt1lQ=
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-47778daa4d2so14348145e9.2
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 01:33:00 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763112776; x=1763717576;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=MF7a8fk98XdXH9ana3u1mEFm7OmP3ztGzKINUQkTsxo=;
- b=K9uGfqGW+9GTx11nCFv+MZpHCJuQxWtXdyLKN98BkotApMXxlGunNSPCEcgdesGng9
- 7inrlPHWeDw02Xm+0HTZjcvlceeJoEzIlEWDnNpKsdR2KOjnSRcPBnzhNi0G8seM5+yD
- Hf009txsKHiPmPchhNnjJkjG8pxGLtyxuNDS7VoRBJ3KueFOha8yyMMYJOlpYspGWuC7
- k1gd1Ap2+0+DaTj2Rw+s5AvJWrBGFMvBcSIunntqUvnkYuDU6ZKSn1UR40eQ++hPNPb6
- o6CFq6JeGjpzl522N1xSKFH9komZfRlk/wwt1ccZ+dmjqFalr4YGn+yIzylaivQZT7S+
- iUeA==
-X-Gm-Message-State: AOJu0YyphrjSaJGRgNZCq44TAUcNEkm2hjDy/9lcteIwR84t+I4Sxbyy
- IvAUUVOXj0VMCcyJqjNMREHHeXJ1JANzDrm2tHbBlUM7m7wBhhdEKYQxHf8bh7ZijDZD/LyjX5F
- s5iHLQ8LB4vmqHVRPXQm0Z1sr11LiQmV6CqvZgf/XXWQqUExhln/owq3ajM338EMh0UGPXy4=
-X-Gm-Gg: ASbGncv6pN5EFXhbU4W7jVuilMruTtSNOR9V/tZfuFbEfDyQ8XWYshGUI1QeqvLJ49m
- Ifs6U06X67QR0+5GQdzfGfCTOwePcosr3gCK+rrPvy2Ih7o0awtzRcISCKLI0UR9BnJBC0aNpEa
- 03Ga2rDcd7eYy0hxmwEdB3i2LnkhQ2QQ2Kicpj0R+xghOzZNoJAoirEokYtG/XmyKP1qwGoI8VQ
- S02G81aotGSCGVeQtENhyG2TAYKeJbMsPAkj6tL3EHlf9zcPSgSeSrb1W2yODyesoVLEKO8IHVN
- vwfY8dXo16Md2JyFQGRlfCmha5KJzjo++b+AVLeALCrbK7u3l5hen+NRs85c4WKNV0MMtzunR6a
- pSUh7lHYuIb9fNHj/bUrPkWhFmvsQvk14evEn/q9GVlU3rrxezEaDE6iAXPWDZ6dT7g==
-X-Received: by 2002:a05:600c:1910:b0:477:7d94:5d28 with SMTP id
- 5b1f17b1804b1-4778fe4ea78mr21204095e9.7.1763112776144; 
- Fri, 14 Nov 2025 01:32:56 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFJAZPbRkudgdBdyuaT3WaXXWrWyn7qC5YdGruvtTrZfJcV7fD8AmojGuHwwf+lQV2TOP8e8w==
-X-Received: by 2002:a05:600c:1910:b0:477:7d94:5d28 with SMTP id
- 5b1f17b1804b1-4778fe4ea78mr21203835e9.7.1763112775709; 
- Fri, 14 Nov 2025 01:32:55 -0800 (PST)
-Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
- [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4778c857311sm85462825e9.8.2025.11.14.01.32.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 01:32:55 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 6/7] efi_selftest: simplify efi_selftest_variables
-Date: Fri, 14 Nov 2025 10:32:45 +0100
-Message-ID: <20251114093246.56422-7-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251114093246.56422-1-heinrich.schuchardt@canonical.com>
-References: <20251114093246.56422-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+ s=s29768273; t=1763113997; x=1763718797; i=smoch@web.de;
+ bh=sfnvE4yK9HHRkAS3AeBlxwcihLwF45lSEFb1kio/OzY=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=nikB603foUX7uvVhEfi48G/Gt3Vd9z96M9Yd8MLHkJrcabXUlVtUnjIUJYDgPPrb
+ Guc+ij70+Xyl3riTeU2RacYZ10Hf3f45jq5HaRqcFeIdfWt0xEihoBjNGgWEVnse7
+ x7YFr3iCNXVl7owgW3kNkpaawixpxPEKeOBf3nyd578D2sbjbg9VoSgrXlWVKmsJr
+ HQsDJd+DL57E16/XSTl+qS1henVEF7wv8Znba0J2zT/OIxcV/cAlsg9Oqh6OF+jWt
+ quhsvyXpfwQ9TckbapvpjZamlsqimceFJ0N4kqP/9TlSR4RI5RW39cH6l/yAHoGme
+ Xw0Pz3leySNfhO5T9w==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [192.168.1.40] ([78.54.190.247]) by smtp.web.de (mrweb006
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1MhFlm-1vnwS63XD0-00mE3Q; Fri, 14
+ Nov 2025 10:53:16 +0100
+Message-ID: <4298f3c8-5aa6-49d7-a8c8-693590dbdc32@web.de>
+Date: Fri, 14 Nov 2025 10:53:15 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: tbs2910: Disable EFI partition, MP, sysboot, bind
+ commands
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Dragan Simic <dsimic@manjaro.org>, Tom Rini <trini@konsulko.com>
+References: <20251113151858.1072774-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US, de-DE
+From: =?UTF-8?Q?S=C3=B6ren_Moch?= <smoch@web.de>
+In-Reply-To: <20251113151858.1072774-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Provags-ID: V03:K1:n4Iyk5ccb2KgGY0SE9Kf3BkvTnCgRYh/1OLZSntrE2Kr+LdBIWI
+ CkzpjwK2CUvcygMdqnkTx2suGnhZ1tVaXZBQMUCjM37vvPVb+yoG/xc645w4fuhsHCILL/L
+ g+PwUm38bfa5LM8rrIm17i62brY9tOsSzxPvoinRgQA8BqVYB8V1/CdjJzIGrpInIBJruI1
+ ZX/WYjXbG0dFmcfcJhY0w==
+UI-OutboundReport: notjunk:1;M01:P0:wIY7NtRayOA=;kxtzN3lhqRb1Piy6Bw7av2llj8X
+ F/XgnDwYUBUShEqCgCk/bvGUAv92qSO5K8nti5qNYVccnWZZxAwtp5IWf1sbI0znmsP10uEa2
+ rDU+Kpge6j6qxrpzY1khzFxtvT2MA1kl8t8uTpuKyaXg3d4/FzQwucRmDdrnsgv+w/VKooBtT
+ yQJEy0me0FPQvaKrRpf3j9ORZcMAKDvweqJ1KK5bcmwfm/IfgP0scJa7XwkFY3eMNDXuo5nlh
+ LWa5sW9u9ArksbIhSUOeV9v/GBf/KkQtzEG89ygb4KRVSiz44L8pyt7VvWuNA93k3+nvKTvmv
+ ZL6Z0lS/O/lngFxFr0z2Y0grMbpwl7f2F82PugWVx8qWmN4gL5Cn+z3WjJrT3Hxu00V57Xgsn
+ NoJLdQTIusbCyOuHHkmnrniOtukrAEIhX+csxUeYMYNPiQw977BNnJk3Nzq173oLCpUtRHNMD
+ BGVbmvONdXfWO0W8ZhfIfPH4GXQ4y7jkEcno3QYd5W95qrdULmjQEj7bG8qD1PQVMCM8+2ScV
+ GCO5Y6R0bhvrJkMvRseWyFBogUibRvR+NYU96DUMGapKQM58BkRwXyNFT4yduB+ROf7hGtX6f
+ 8C+wYFTuDl7tccsVDPAJoEZEg5ZitSSiLI+6C4nV78vZ/7Rc+f+8bnNN1pWg2TwQEFwgdxhxn
+ S442pXKMASqtLTSGGIRoHri1mofUgKl8D5wHrbAlew5jhHx2ejRQV6hVM7rHRgtBxUIqhhVKr
+ iT6ZJ07by/K47jm73bwnSmJDEIEj8LL8oQf55rWWfHyB1xzpOyQIbdUB5z97P2zWMS40I2LM4
+ FRf8q7XtcA4Yr7fOCmPCX3+Yw4DEvbO01eLN+Em5QKukZVDVsxxXJYO49D43+2yfUJHxrpzGS
+ VMguW4uX6l8aeQdvvmjwl6uWtiuPsKLp+wlyyfxlozXN2bMQwcuvhjkqhUIdin9vsnXmSGUWK
+ nxNLifff80MPswfg2eey98niw6fu8L3hxErQCKAE+rfEpb/cmKxz3f6b0s8ZgWGsNb2HoGCfG
+ cbxpeytq1AJ2yOEPo9aDDmDMu5sXguklZkifijGlLe6cFf5XQFVMkpvU+ZMrI/GOL5xkXvUnB
+ ZIH3LVk6Ehg958qF7Rh2JUdZsZTLp+Usl27Qr+SXwClGSg52LMulAh0RBF2K+M5sCu7XeOL6z
+ yyqJtzN482+Z99oNRf9RYpjz45eCP7rBsZmnJDZJm/6nxeBhPMp5B97G3r+kEZNjpFKlbosZz
+ RdMrWTcSW8S7cMMqUT1uKYIaeJ+whvSZuGBTYKuf9PlUh+XWwyERNU6ZtBL/ltPl9GBbaIMAE
+ S4r3uQP3j9PQJoFHAjTbscDk5f8dQZYhfbUy6EHUVYUkIEGnur0jeSai3qNqn1RQvvwYmooN1
+ J8cpeuNM1shC5IC1U9FDObzcKbQVTbkM9WvtgZKLMJgS2CBrpjOUANDDeMSVQWPl/ymkH3fmZ
+ pOYi9h1WLuDDk0835QJr3fc92acHr4HobWZ7z0j54kOOWO0MvyU7BMt7T8WZnl7oYTsmhE9uS
+ TvNDUGfcj06/GfTJKvXd+5ICcf7xBZ0DgBxbvcqJAVvoZ0lWUJLtN/yrlrsb+mcHInr6LcP/A
+ euq0WQh92agJ0/ZDjA7F+rBMOFHYa79snPaqiK0gKD5SloPibKQCVbU3IQa+C07Vzg8hKgTx9
+ b6b8k4Vv5lJROIH4w8zNP4myr+h6g1ZMsdevKY+zT2uqwgzGOjA/w3z1lqSMyr6IAlLB0NIhO
+ LhKDBlqeH16xgzJqsqYCQRJenyKqAXnKeDIyWbAz2XkKBwADYX8mQfm90bjxxWH6aeXVPeQLl
+ j9voUC6kZWBGPI7+eQNTSZLTHtiEXvHSsNQHJJ+WwjSnumeiLBFvn7E757VhJdYnw58D4iHz3
+ LR5I8XmntnDDn/d3aVXq2TjFUkMGvDNQODLijS2mv0MfGfcOIPsaPv07/vZi8FH+65zVmUmGu
+ RaMbWJX+9iZ8TkxOC/q4lEUjTYhI1ZclfW/ZBBGRY2cKSecgxV/0MbHl64LLMhzEoAbMdKIhZ
+ FVk1Ah0JhdFfszYmxSRpSATXnRp3/cBhk+6UEwwaG977j6myU69bxesj9qncAEwh7O/usxpBW
+ k4caEXY9VlUHZpx27HJCMbw/rISxH0cKlRzfEq/y44mrNwN17Ii4Fv/YHqKDNaOjb8sh5/EPm
+ KcmJAj4sMymTR0qLlpUNFwGe6iINIj5h8Ewzq7YlZw4+J/f/EAgGx18oTLNf5PqE6HSFn6s2v
+ HH8+yaxDdnfZl8mZH0zjB8bQwrPerY2BYKl4Yj627O9OWhYowtSPYrx4JHbpBaVygtxan+rWR
+ IP8AA7ZE3+DFTMNlfdMny9u2WIjzDYHX9k18ye7mcgdqnl39J6MF+pgcWg2aExBxFk/wv0DGw
+ Mx9znwiWCeflUvZcOfMH/0a1sv8YnDE7QDSO/yBjVKp3VqywgyEYNJ7yrMr44Yq+Tl2FLcjaL
+ pkhmWCZp0oD2NO0joijfJNXL8sAUaZ9aJ+iucV68VV4UL8DB9/QgV+xyD5zZWWUmcXeG7ygyo
+ xkCZEKOylEmVqT0YrNHRD6ptLvT1WcDWr7WTGD26QeesjrQTm6NTEbIrT7gwgdap8MKjpcgs3
+ EXkmk+mDfDVjZBeCpiJV3AD2X4Ybw/ym7/57tLuoZJxrGUrThv3OwLqT4KnT6KjyE66elUgH4
+ UbLQQu8ELGct717RMkMJCt07qB0jsR3sUeBTVRUyAWCEW7/QTGecPbYQ+Fr98QC7QezEoZcZr
+ yp5R/41uJkpRGpZl/M2w0K2xklwlzXWn8VGhpElZlLfg65ZjmAUPS/q/Ibyc/HB1PsLan4Uov
+ dFcT7nCv3oYI1gSK829GtAkmerMOGdMycgLz4PWTIjM3BTr1p+ECwn3CpzbemP57ew6ERgp5T
+ 6jG2ZzBqMFUlhnsbofE4TuKeduuL9+BtpAV/vWNvnVqiS+/j41MfUFzZ5xGm9HEX1E3dzkpav
+ PQSelrsrkm/PoiEG+N812zyVVi028ytesYeSzSJEUCopvxy4H+Kx/lYH3N2XM/khsldYTOeiW
+ hMOUAeZXK6y+1Qbqc85q5FIC/eM+A8IjUTCRJxHFQidPIVb59WN66gScjqwkGlVpLrv5sDfoi
+ laGGAbYYUQYJvTQ5//yYM2axYm/UvG5a51rM2QE/I5JjjgDn1Kqz9wBf4kpNdHPZMoKi8f1Nz
+ TF2DbX0QTopm4r657QO5ny2Svjh0un2/z0QmoIcepsKjrDe/LLK1XI3q+TiAy22Vj8LxHI+Oi
+ P+m2e+tINdwXpZZpKUXt9TaUSoI1nM840Vt5zO9F8uQp/dV2LsWGtlXabKXGEFMmzmqjKqsad
+ ctgLRHy1OYNWOg1qLU+sfCxNLIXDxKC0u9N3Ru9L8xRG+0FH/QmcJicFDQgaDCtlCfMSuR83Z
+ Iwqhiimfx/cSD12/8P+FYczKKf2ZuqRGrYPcARng1DyUhz8bpPQYdYtDWAOU0agyOAFTSmdL+
+ /JyfubA8C5y88cu3ZsyYhesyhWu5lmfi8Y17vRrSam7L4PvbGeKyqWtHyInG0YUfJHohYsXpw
+ u9K7hmPq90qKXK5QjoW1wn00XzFMb/md6YxirsrnHzf3aKyLW776wn+BBlBUeT4VBhD+sfYrm
+ peXtAO/66P6JeBJniGMaPNZoMF4HferZVFc/sNjR00uf+g69MX12KqQ+x7LwL0TBclOy6D1Xn
+ qIKkF/Ou8g94c4/34dBBPXOwgIOskK6oHkv+qCQC/O2xbNuoJiyYZUXbN/KhjtFYMEledJ2iz
+ cHv4kXR08cTQmlVl+gU3uf8YdEetPCCF+MW55vSOSOXWPP/b64PFe8h8J+qU5NCtYuESoLTw/
+ j0ezz7/ZAWT/Cx1W+XzB31U3y5IXrzLj3Fwxg4p50t9ISxVBtZ3WEP79Qf9Bk/3JYVhi8w0t3
+ FWzW4VPQXucVvaRgOhdRwuvVRePgcZkeZBAu0h7oi2Fva7iiLHDU10dH6GAqwv+DdfKAZtTJS
+ NPV30cKMbOcjdYj8mWYyPhXMokaFDI08YHS7z84LPARFZkv99ZTV+rzBkNk7lYWsIpZhkYNCP
+ 9l1m04s9ysCuvWtVszjypN+16sIY70Iqa+QSi8nwLS3wIepbJCVb9yDibJrr93tpkVbaerzkt
+ 9epV+uSroJ4VsCA1I1E6Htaez0flc91RqDHLSw3Zv9QgXSwH9AI7cBlKkJSqWsrA/on4Z97fE
+ x8MRaqqWx8cAz3D2k7ok6RTe9plI1uV4UJZDlahOQd/DXX7jwt/48KW84Km1OhBDjlhm5O0RZ
+ WMeVOUZvNFmdgY0do9/To8ZQfNL1yMe8vmQ59DbZthqzgQKekSwdL03vmdXFtVUgfAn484A0Y
+ GpwXY6JQyvFnrTCvXTW5Q4PeZTva/9M2WzQqbxaBJmjIRGukxcwjUS29y2dmPQ78tyvJofi+w
+ yuE8Z7+cdPEyEh9sLGIT5Wsjxott523eD433G1BZgUc1roKDqkDgJ64ThdnhOA1fT5mTz9E02
+ OhhunTAMIYoxzOI4mxokpeCjX/mv5bxeGjyHqjLSOsCvPLlQhKNyGN7wd8EqJpt1JEwqnYaA6
+ LKKzRUEk+GTkksX2oviwTEHPrP2RuVclxNyWUEI9LfHAF9NIztOCnG6H2e+fDsc3mvdBzWB0y
+ 1E9fhe5gADlZzdvH1P023ZoF4Oq6ETcj7XZ2YTmOZtkWslLbyq0z3tlc1ORaQxMhuBgHJ3Glp
+ VDc7je3xgptYF57UyoJtFQc/R8fZw7DstWsZFmZ1Eaq8GFYzxe9gGHsib8t4Y/SXqevA0eoX6
+ VF60l0x1x6piWePkVqKF+wc3hC5MjVdAyL2gSRNt0Wfq2yDdivaZa2fg12Dax3gMeiOomVwjD
+ 5tB+g7Gz+RvNTQBJIubPnBRMLROhWca8kDv8oKaHEuwGRvmKSTxDCBcKWmtmLqUWjGwGkKiwd
+ ML3gEP5z7X5vCDhE7LfUh/wW4q1JKKwbs5ALYaa8ERRCjZNxzNz3N+oQca7ZMl+M5HE0MqTnG
+ r8A5s84I0hnIHtH3oCl3puv/Ym0RnIQibCvcKfVS8xcIAXLQOhBLka57cjOYH5JPZ2sKoaeMV
+ vIdGaRY98QhKD5oqCYB4ZCNLOGobYHnC4j6IGxkcu4+HoRm3TfzboTnx5BSPc/dCZGSQ2Qcom
+ CSRY4di/o0bAMwJIhJdnA/dvuLqa2sMEKovczUJhhLDh6UUObwg7JkiFpsMLe5vA9wnaEnYZq
+ GRo9F/iChONv0CvCcces3u+q5ubxN
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,294 +150,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use global st_boottime and st_runtime.
+On 13.11.25 16:18, Marek Vasut wrote:
+> This board is just short of overflowing the size limit, disable
+> support for EFI partition since EFI support is already disabled,
+> and disable a couple of commands which are also likely unused to
+> keep the board below limit.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Thanks for finding additional useful options to reduce code size!
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_selftest/efi_selftest_variables.c | 118 +++++++++-------------
- 1 file changed, 50 insertions(+), 68 deletions(-)
-
-diff --git a/lib/efi_selftest/efi_selftest_variables.c b/lib/efi_selftest/efi_selftest_variables.c
-index b92c3276b61..976eee8dcef 100644
---- a/lib/efi_selftest/efi_selftest_variables.c
-+++ b/lib/efi_selftest/efi_selftest_variables.c
-@@ -13,8 +13,6 @@
- #define EFI_ST_MAX_DATA_SIZE 16
- #define EFI_ST_MAX_VARNAME_SIZE 80
- 
--static struct efi_boot_services *boottime;
--static struct efi_runtime_services *runtime;
- static const efi_guid_t guid_vendor0 =
- 	EFI_GUID(0x67029eb5, 0x0af2, 0xf6b1,
- 		 0xda, 0x53, 0xfc, 0xb5, 0x66, 0xdd, 0x1c, 0xe6);
-@@ -22,21 +20,6 @@ static const efi_guid_t guid_vendor1 =
- 	EFI_GUID(0xff629290, 0x1fc1, 0xd73f,
- 		 0x8f, 0xb1, 0x32, 0xf9, 0x0c, 0xa0, 0x42, 0xea);
- 
--/*
-- * Setup unit test.
-- *
-- * @handle	handle of the loaded image
-- * @systable	system table
-- */
--static int setup(const efi_handle_t img_handle,
--		 const struct efi_system_table *systable)
--{
--	boottime = systable->boottime;
--	runtime = systable->runtime;
--
--	return EFI_ST_SUCCESS;
--}
--
- /*
-  * Execute unit test.
-  */
-@@ -59,17 +42,17 @@ static int execute(void)
- 		return EFI_ST_FAILURE;
- 	}
- 	/* Set variable 0 */
--	ret = runtime->set_variable(u"efi_st_var0", &guid_vendor0,
--				    EFI_VARIABLE_BOOTSERVICE_ACCESS,
--				    3, v + 4);
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS, 3,
-+				       v + 4);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("SetVariable failed\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	data[3] = 0xff;
- 	len = 3;
--	ret = runtime->get_variable(u"efi_st_var0", &guid_vendor0,
--				    &attr, &len, data);
-+	ret = st_runtime->get_variable(u"efi_st_var0", &guid_vendor0, &attr,
-+				       &len, data);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("GetVariable failed\n");
- 		return EFI_ST_FAILURE;
-@@ -83,16 +66,15 @@ static int execute(void)
- 		return EFI_ST_FAILURE;
- 	}
- 	/* Set variable 1 */
--	ret = runtime->set_variable(u"efi_st_var1", &guid_vendor1,
--				    EFI_VARIABLE_BOOTSERVICE_ACCESS,
--				    8, v);
-+	ret = st_runtime->set_variable(u"efi_st_var1", &guid_vendor1,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS, 8, v);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("SetVariable failed\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	len = EFI_ST_MAX_DATA_SIZE;
--	ret = runtime->get_variable(u"efi_st_var1", &guid_vendor1,
--				    &attr, &len, data);
-+	ret = st_runtime->get_variable(u"efi_st_var1", &guid_vendor1, &attr,
-+				       &len, data);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("GetVariable failed\n");
- 		return EFI_ST_FAILURE;
-@@ -107,17 +89,17 @@ static int execute(void)
- 		return EFI_ST_FAILURE;
- 	}
- 	/* Append variable 1 */
--	ret = runtime->set_variable(u"efi_st_var1", &guid_vendor1,
--				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				    EFI_VARIABLE_APPEND_WRITE,
--				    7, v + 8);
-+	ret = st_runtime->set_variable(u"efi_st_var1", &guid_vendor1,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					       EFI_VARIABLE_APPEND_WRITE,
-+				       7, v + 8);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("SetVariable(APPEND_WRITE) failed\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	len = EFI_ST_MAX_DATA_SIZE;
--	ret = runtime->get_variable(u"efi_st_var1", &guid_vendor1,
--				    &attr, &len, data);
-+	ret = st_runtime->get_variable(u"efi_st_var1", &guid_vendor1, &attr,
-+				       &len, data);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("GetVariable failed\n");
- 		return EFI_ST_FAILURE;
-@@ -129,34 +111,35 @@ static int execute(void)
- 		efi_st_todo("GetVariable returned wrong value\n");
- 
- 	/* Append variable 2, write to non-existent variable with datasize=0 */
--	ret = runtime->set_variable(u"efi_none", &guid_vendor1,
--				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				    EFI_VARIABLE_APPEND_WRITE,
--				    0, v);
-+	ret = st_runtime->set_variable(u"efi_none", &guid_vendor1,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					       EFI_VARIABLE_APPEND_WRITE,
-+				       0, v);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error(
- 			"SetVariable(APPEND_WRITE) with size 0 to non-existent variable returns wrong code\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	len = EFI_ST_MAX_DATA_SIZE;
--	ret = runtime->get_variable(u"efi_none", &guid_vendor1,
--				    &attr, &len, data);
-+	ret = st_runtime->get_variable(u"efi_none", &guid_vendor1, &attr, &len,
-+				       data);
- 	if (ret != EFI_NOT_FOUND) {
- 		efi_st_error("Variable must not be created\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	/* Append variable 2, write to non-existent variable with valid data size*/
--	ret = runtime->set_variable(u"efi_none", &guid_vendor1,
--				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
--				    EFI_VARIABLE_APPEND_WRITE,
--				    15, v);
-+	ret = st_runtime->set_variable(u"efi_none", &guid_vendor1,
-+				       EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					       EFI_VARIABLE_APPEND_WRITE,
-+				       15, v);
- 	if (ret != EFI_SUCCESS) {
--		efi_st_error("SetVariable(APPEND_WRITE) with valid size and data to non-existent variable must be succcessful\n");
-+		efi_st_error(
-+			"SetVariable(APPEND_WRITE) with valid size and data to non-existent variable must be succcessful\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	len = EFI_ST_MAX_DATA_SIZE;
--	ret = runtime->get_variable(u"efi_none", &guid_vendor1,
--				    &attr, &len, data);
-+	ret = st_runtime->get_variable(u"efi_none", &guid_vendor1, &attr, &len,
-+				       data);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("GetVariable failed\n");
- 		return EFI_ST_FAILURE;
-@@ -167,61 +150,60 @@ static int execute(void)
- 	if (memcmp(data, v, len))
- 		efi_st_todo("GetVariable returned wrong value\n");
- 	/* Delete variable efi_none */
--	ret = runtime->set_variable(u"efi_none", &guid_vendor1,
--				    0, 0, NULL);
-+	ret = st_runtime->set_variable(u"efi_none", &guid_vendor1, 0, 0, NULL);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("SetVariable failed\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	len = EFI_ST_MAX_DATA_SIZE;
--	ret = runtime->get_variable(u"efi_none", &guid_vendor1,
--				    &attr, &len, data);
-+	ret = st_runtime->get_variable(u"efi_none", &guid_vendor1, &attr, &len,
-+				       data);
- 	if (ret != EFI_NOT_FOUND) {
- 		efi_st_error("Variable was not deleted\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	/* Enumerate variables */
- 
--	ret = runtime->get_next_variable_name(NULL, u"efi_st_var1", &guid);
-+	ret = st_runtime->get_next_variable_name(NULL, u"efi_st_var1", &guid);
- 	if (ret != EFI_INVALID_PARAMETER) {
- 		efi_st_error("GetNextVariableName missing parameter check\n");
- 		return EFI_ST_FAILURE;
- 	}
- 
- 	len = 24;
--	ret = runtime->get_next_variable_name(&len, NULL, &guid);
-+	ret = st_runtime->get_next_variable_name(&len, NULL, &guid);
- 	if (ret != EFI_INVALID_PARAMETER) {
- 		efi_st_error("GetNextVariableName missing parameter check\n");
- 		return EFI_ST_FAILURE;
- 	}
- 
- 	len = 24;
--	ret = runtime->get_next_variable_name(&len, u"efi_st_var1", NULL);
-+	ret = st_runtime->get_next_variable_name(&len, u"efi_st_var1", NULL);
- 	if (ret != EFI_INVALID_PARAMETER) {
- 		efi_st_error("GetNextVariableName missing parameter check\n");
- 		return EFI_ST_FAILURE;
- 	}
- 
- 	len = 1;
--	ret = runtime->get_next_variable_name(&len, u"", &guid);
-+	ret = st_runtime->get_next_variable_name(&len, u"", &guid);
- 	if (ret != EFI_INVALID_PARAMETER) {
- 		efi_st_error("GetNextVariableName missing parameter check\n");
- 		return EFI_ST_FAILURE;
- 	}
- 
- 	len = 16;
--	ret = runtime->get_next_variable_name(&len, u"efi_st_var1", &guid);
-+	ret = st_runtime->get_next_variable_name(&len, u"efi_st_var1", &guid);
- 	if (ret != EFI_INVALID_PARAMETER) {
- 		efi_st_error("GetNextVariableName missing parameter check\n");
- 		return EFI_ST_FAILURE;
- 	}
- 
--	boottime->set_mem(&guid, 16, 0);
-+	st_boottime->set_mem(&guid, 16, 0);
- 	*varname = 0;
- 	flag = 0;
- 	for (;;) {
- 		len = EFI_ST_MAX_VARNAME_SIZE;
--		ret = runtime->get_next_variable_name(&len, varname, &guid);
-+		ret = st_runtime->get_next_variable_name(&len, varname, &guid);
- 		if (ret == EFI_NOT_FOUND)
- 			break;
- 		if (ret != EFI_SUCCESS) {
-@@ -233,8 +215,9 @@ static int execute(void)
- 		    !efi_st_strcmp_16_8(varname, "efi_st_var0")) {
- 			flag |= 1;
- 			if (len != 24) {
--				efi_st_error("GetNextVariableName report wrong length %u, expected 24\n",
--					     (unsigned int)len);
-+				efi_st_error(
-+					"GetNextVariableName report wrong length %u, expected 24\n",
-+					(unsigned int)len);
- 				return EFI_ST_FAILURE;
- 			}
- 		}
-@@ -248,29 +231,29 @@ static int execute(void)
- 		return EFI_ST_FAILURE;
- 	}
- 	/* Delete variable 1 */
--	ret = runtime->set_variable(u"efi_st_var1", &guid_vendor1,
--				    0, 0, NULL);
-+	ret = st_runtime->set_variable(u"efi_st_var1", &guid_vendor1, 0, 0,
-+				       NULL);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("SetVariable failed\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	len = EFI_ST_MAX_DATA_SIZE;
--	ret = runtime->get_variable(u"efi_st_var1", &guid_vendor1,
--				    &attr, &len, data);
-+	ret = st_runtime->get_variable(u"efi_st_var1", &guid_vendor1, &attr,
-+				       &len, data);
- 	if (ret != EFI_NOT_FOUND) {
- 		efi_st_error("Variable was not deleted\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	/* Delete variable 0 */
--	ret = runtime->set_variable(u"efi_st_var0", &guid_vendor0,
--				    0, 0, NULL);
-+	ret = st_runtime->set_variable(u"efi_st_var0", &guid_vendor0, 0, 0,
-+				       NULL);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("SetVariable failed\n");
- 		return EFI_ST_FAILURE;
- 	}
- 	len = EFI_ST_MAX_DATA_SIZE;
--	ret = runtime->get_variable(u"efi_st_var0", &guid_vendor0,
--				    &attr, &len, data);
-+	ret = st_runtime->get_variable(u"efi_st_var0", &guid_vendor0, &attr,
-+				       &len, data);
- 	if (ret != EFI_NOT_FOUND) {
- 		efi_st_error("Variable was not deleted\n");
- 		return EFI_ST_FAILURE;
-@@ -282,6 +265,5 @@ static int execute(void)
- EFI_UNIT_TEST(variables) = {
- 	.name = "variables",
- 	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
--	.setup = setup,
- 	.execute = execute,
- };
--- 
-2.51.0
+Acked-by: Soeren Moch <smoch@web.de>
+> ---
+> Cc: Dragan Simic <dsimic@manjaro.org>
+> Cc: Soeren Moch <smoch@web.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>   configs/tbs2910_defconfig | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/configs/tbs2910_defconfig b/configs/tbs2910_defconfig
+> index 070dce234d6..ef7d5ca3e2c 100644
+> --- a/configs/tbs2910_defconfig
+> +++ b/configs/tbs2910_defconfig
+> @@ -38,6 +38,8 @@ CONFIG_CMD_BOOTZ=y
+>   # CONFIG_BOOTM_VXWORKS is not set
+>   # CONFIG_CMD_FDT is not set
+>   CONFIG_CMD_MEMTEST=y
+> +# CONFIG_CMD_BIND is not set
+> +CONFIG_CMD_DM=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_I2C=y
+>   # CONFIG_CMD_LOADB is not set
+> @@ -53,14 +55,13 @@ CONFIG_CMD_MII=y
+>   CONFIG_CMD_PING=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_TIME=y
+> -CONFIG_CMD_SYSBOOT=y
+> +# CONFIG_CMD_MP is not set
+>   # CONFIG_CMD_VIDCONSOLE is not set
+>   CONFIG_CMD_EXT2=y
+>   CONFIG_CMD_EXT4=y
+>   CONFIG_CMD_EXT4_WRITE=y
+>   CONFIG_CMD_FAT=y
+>   CONFIG_CMD_FS_GENERIC=y
+> -CONFIG_EFI_PARTITION=y
+>   CONFIG_OF_CONTROL=y
+>   CONFIG_OF_EMBED=y
+>   CONFIG_OF_DTB_PROPS_REMOVE=y
 
