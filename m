@@ -4,84 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FF79CE7AEF
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 14:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D858ECE7B13
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 14:36:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D092183F54;
-	Fri, 14 Nov 2025 15:34:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6C51C84114;
+	Fri, 14 Nov 2025 15:36:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="APMlcK3H";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fpXqfEKM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1401E84109; Fri, 14 Nov 2025 15:34:32 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 9A41284118; Fri, 14 Nov 2025 15:36:15 +0100 (CET)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96EED83EF5
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 15:34:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 671A983F54
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 15:36:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-651c743b2d9so939795eaf.3
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:34:29 -0800 (PST)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-656e585587bso441697eaf.3
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:36:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763130868; x=1763735668; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763130972; x=1763735772; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SbG7iyih+UXGn1ZfQSAYMbVg5ho1tBECZJQ64fTmriM=;
- b=APMlcK3HbdbR2rfWjdbQPttFBaRrU/Ls3/i6ENLVDZkrAoSJlI5ofxY3kqe9XL4+NB
- KxzbfZeelASdT/mPPeYA3n2aXvguX/KsAcGrUYuHyCRHOJD9On2FyB9KMyBD8XXGD279
- URf7+aht4/ksk/CzorjgNVFGsVKpYqP+O1c+I=
+ bh=TG/GK95ZLXnHkTghJKPf7Yfzg5BES1naTm/erF5eV08=;
+ b=fpXqfEKMdBgDchfT7VYVmxca3sEBcH2oCt8I0ZHQY0RcwQIYewrlANNNZHHZZR5bAt
+ ONle3IJzRtJwRk/E0F0cAhWKihDtpGtzZEFiJARANPqqhlOXSwoWniX/wbmEDmfOcxpQ
+ hIzdNtLL19262rECOOWmc4AWO8jkFirDgpPKg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763130868; x=1763735668;
+ d=1e100.net; s=20230601; t=1763130972; x=1763735772;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SbG7iyih+UXGn1ZfQSAYMbVg5ho1tBECZJQ64fTmriM=;
- b=JnN5f2XGS3sLfw4wUBybJsB3otq30urscOyuOCzDJbP0lgHcEvsBWJ7upqN3Yy3pfi
- 3sOHvrfSjK2oSIeOClYRWf7E+GU+t3MqcukUPUtldnxiLT2Thw+rG4QXAES78Y8ngq83
- UYAwG4x6mJxa004zgo4H0IITU/63GmyLGhQrK5PeezKv4njCJmnShh8fB5jhMgwDbSqu
- rHCcYwyQnJ6/DZIMPEIaZjtKxEg7p2WvsJsQqQ6pRC0HOXfReDM9/12Pgp3SZl8jzCJh
- f+Q9gF07dxsTVq2BWJ0hfwyJ7VgLIZ8UUPxeO43PR0nM18jB6xIQn9tKAOzK26ELdFTS
- 37gw==
-X-Gm-Message-State: AOJu0Yytu9DlEw+GQf9/P5FyC0anFQ++Ep8nLsSMGDzaYor+MCd9nHKp
- ESI4Raeby3szpKELljyOi6iY7O1Z23RLd4v2hq3rJPLVyf6/gKUptMHkA7un1efPBmo=
-X-Gm-Gg: ASbGncsPV9eBqJ5ajkaAskQNgf/czx+uGXzvD7hmWCej1NxGCiwyLvELqoy77UgNMV/
- GtbSrJZ/jCVKiDCfnFwEWZ9Xa/kqhpQ1PtEsuMZd3w2qtWRkQw5MG9RkTuXrO8Dd+GQIup59c7P
- WENHYkR7upNN1gE/vK8X29fUVXRruunS5thTN4TADXFhUgCky0iFSRHoIkWogb1zu5ftK9wdKKp
- CwtUhbHnJOsH+g/lF+iB8qRCney+Z7lMBomb7XDln27Ek1jCAb2owAWu1GAOrJjkQ05rl+Thwnt
- ORq4nZu62IeYv0qbowTIBRloSH49V9RQh6DYArObmJLo12RmwYzZyJ/ENQazMfMzbt28ZS/VJ6S
- uv/tpLalVy5FLDX8xmpWuwWtC8c/ey/jroBHPnjpx2nFM26doSRs37WKpABhvUlGsn7TSzgYybX
- Ss7XuFevmzcSbze1UvBAVz+62hGQ+7qw/9Ma9K2BY=
-X-Google-Smtp-Source: AGHT+IE4DpBRw2AYXsjSidux3pS0LFZydxkvy5lfF4lsGrGPtdULN+/KtCp5s6X+7pq3gg3q5yawkg==
-X-Received: by 2002:a05:6820:2d83:10b0:657:2d96:2cfb with SMTP id
- 006d021491bc7-65733cf207dmr1247271eaf.6.1763130868243; 
- Fri, 14 Nov 2025 06:34:28 -0800 (PST)
+ bh=TG/GK95ZLXnHkTghJKPf7Yfzg5BES1naTm/erF5eV08=;
+ b=qDsH8VGsTNHgmZcua42YKcofn4iidfQbSBIb5ougaNVbsQfR/w/isNVZ4MVMlmJmXE
+ T/6iCQ4TjN2XoSWqm2bX5tRxTG19XR8aUvcXQtulzPHKhMsv+vHoDzFsXRcPmgLaGtJt
+ s2M0AWpJ2oYgoro8YKdmRd3dFVuHBNIpSKiI5XheH7baHMLCipOnM5xZUYjUYkz0JPdh
+ BPZqiPywYuorN/xQCsAV6lDOl5CFbEFEvBoc80zMmZdslW9yz/ky/+7MZw03MY1MswoD
+ RqQluwksSFT3i/3Uw1R48+oItXhXjvtJ8BtRMu3zozkiIuwUoByjUVhfq3UK1UVsH4LP
+ 5M3Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUFHzVSwtwwDL4Dwqs3yXyo0bS89Iwa6KHP+F9pCoGAhNVp4Ji4qUT4djSVY82EBXGrHZxxJR0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyCI3SF5X7EWor7CLBgadOtxxxy/Fv68GpkRKdnrZTaVNfKNWMM
+ EAM47jdhQmVj4KsVjHA5hVs/DwVKBcBE2BMZbpMUhsHTScBiXJ/wlgx5/fhltSPmCyk=
+X-Gm-Gg: ASbGncuBOscikXezfgofr3YmmXP2fcGxp9sKhZkRhqSiXVm8GEDBw/ZVceGAZVBIUbq
+ g6vGJkRsyG1R702k8EuPElRgnMJVTUJt0yJPe+xv8G9+1COub0RLMdQpGvDmDFgqq2cKCynl0cK
+ CvBYVHwWvD+3ilyZQYVZahSbdR3kqK0C09XMYH6eF+ZR5trD9ySQJPf3l+Ni/wKzx6ddjS2JK7E
+ 1HQrq8Nb786vWWV6VPI1/unEthsUFWzABuXM4kiRJEZdlXciBneCHcB3ZwTEyHLX7fkr9S9iPJk
+ 0LXBKspUYTWgIq/4dz6+t0tFn89xnRlHCYkBllcrL7DZbWljXBPyzpzQSZJ9gy9h5BY40GcaOu0
+ rh9Ulv0QUlLsBKAcFW1RIhqGVBsnPIZNvrWImsKDhmlEtrNXUorbrv8xYwzXa/yUpoVQLkTbSQj
+ 4DxCFKxO5OvE45UU/ZbAj+Rad4ucmqA0gjM6PLJTeu4cT4fl3t8g==
+X-Google-Smtp-Source: AGHT+IHwxvqWFEjBLHGmjyKNuzzIFrqbtvJYMIdZYjZX6C6YesmKokjhIGOMdO5yr670iFJxt29qKQ==
+X-Received: by 2002:a05:6871:bb0d:b0:3d3:9857:57f6 with SMTP id
+ 586e51a60fabf-3e869186c03mr1419565fac.43.1763130972127; 
+ Fri, 14 Nov 2025 06:36:12 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65724cb8732sm2014057eaf.1.2025.11.14.06.34.27
+ 586e51a60fabf-3e8522ae6e2sm2724192fac.16.2025.11.14.06.36.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 06:34:27 -0800 (PST)
-Date: Fri, 14 Nov 2025 08:34:25 -0600
+ Fri, 14 Nov 2025 06:36:11 -0800 (PST)
+Date: Fri, 14 Nov 2025 08:36:09 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] Gitlab: Add a "sage-lab" stage to access a board farm
-Message-ID: <20251114143425.GY6688@bill-the-cat>
-References: <20251110154231.2629710-1-trini@konsulko.com>
- <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
- <20251111135638.GT6688@bill-the-cat>
- <CAFLszThrucj38rULiXB3HAsHRq5veZo6zBgHekcjymQecZSP5A@mail.gmail.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Adriano Cordova <adrianox@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sam Edwards <cfsworks@gmail.com>
+Subject: Re: [PATCH 1/3] dm: core: Check ofnode_to_offset() return value
+Message-ID: <20251114143609.GZ6688@bill-the-cat>
+References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
+ <20251113122145.949112-2-marek.vasut+renesas@mailbox.org>
+ <CAFLszTigJHK9H18rZG=AHRo09RPqKGHQmmVrHZ40mHPk-KkwqQ@mail.gmail.com>
+ <7a083302-1096-47fa-90a9-aa350eea6884@mailbox.org>
+ <CAFLszTjktw3yS9Dp9KGC=BAnpJAHg46f--NRRfnzXApQVOiuUQ@mail.gmail.com>
+ <fd30d6ca-fdfe-4096-8057-a952a6a4bb7e@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Qf5uEfX7902zBDkk"
+ protocol="application/pgp-signature"; boundary="2X/+qqlxOCBgn6xK"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThrucj38rULiXB3HAsHRq5veZo6zBgHekcjymQecZSP5A@mail.gmail.com>
+In-Reply-To: <fd30d6ca-fdfe-4096-8057-a952a6a4bb7e@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,93 +112,89 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Qf5uEfX7902zBDkk
+--2X/+qqlxOCBgn6xK
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 14, 2025 at 05:43:57AM -0700, Simon Glass wrote:
-> Hi Tom,
+On Fri, Nov 14, 2025 at 06:17:27AM +0100, Marek Vasut wrote:
+> On 11/13/25 11:46 PM, Simon Glass wrote:
 >=20
-> On Tue, 11 Nov 2025 at 06:56, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Nov 11, 2025 at 05:58:22AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 10 Nov 2025 at 08:42, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > This is the Gitlab side of adding support for the board lab connect=
-ed to
-> > > > the "konsulko-sage" runner. On the software side, this lab uses only
-> > > > upstream labgrid. On the hardware side, each device under test is
-> > > > connected to its own exporter (typically a Raspberry Pi 4) that mus=
-t be
-> > > > turned on (and cleanly turned off) as part of a given test cycle.
-> > > >
-> > > > Add support for testing on a SolidRun Hummingboard 2 (imx6), Raspbe=
-rry
-> > > > Pi 3 and Raspberry Pi 4. In all cases, we enable additional options=
- to
-> > > > run more tests on the board. As we have some networking tests, we t=
-est
-> > > > both the legacy network stack and lwIP. In the case of Pi platforms=
-, we
-> > > > test all of 32bit configuration, plain configuration and rpi_arm64,=
- and
-> > > > again with and without lwIP.
-> > > >
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > > Note that for the Pi platforms we enable/disable CMD_BOOTEFI_SELFTE=
-ST
-> > > > based on overall binary size. I've created
-> > > > https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/issue=
-s/2
-> > > > to track addressing that issue.
-> > > > ---
-> > > >  .gitlab-ci-sage-lab.yml | 182 ++++++++++++++++++++++++++++++++++++=
-++++
-> > > >  .gitlab-ci.yml          |   5 ++
-> > > >  2 files changed, 187 insertions(+)
-> > > >  create mode 100644 .gitlab-ci-sage-lab.yml
-> > >
-> > > Would it be possible to add some docs about this? Does the exporting
-> > > rpi do a full system boot and then run some scripts to load things
-> > > onto the board, then shut down?
-> >
-> > I don't understand your question. Yes, the exporter is powered on/off in
-> > the test job, as explained in the commit message. When it comes up it
-> > registers the device under test with the coordinator (and unregisters
-> > when powering off).
+> Hello Simon,
 >=20
-> So does that mean that all the logic for talking to the board is not
-> in the hooks or Labgrid, but somewhere else? I'm just trying to
-> understand how it is put together and compare it with what I did.
+> > > > > diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> > > > > index 071d998a0a5..55c2b3a10bb 100644
+> > > > > --- a/drivers/core/ofnode.c
+> > > > > +++ b/drivers/core/ofnode.c
+> > > > > @@ -335,7 +335,7 @@ bool ofnode_name_eq_unit(ofnode node, const c=
+har *name)
+> > > > >    int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
+> > > > >    {
+> > > > >           const u8 *cell;
+> > > > > -       int len;
+> > > > > +       int len, off;
+> > > > >=20
+> > > > >           assert(ofnode_valid(node));
+> > > > >           log_debug("%s: %s: ", __func__, propname);
+> > > > > @@ -343,8 +343,13 @@ int ofnode_read_u8(ofnode node, const char *=
+propname, u8 *outp)
+> > > > >           if (ofnode_is_np(node))
+> > > > >                   return of_read_u8(ofnode_to_np(node), propname,=
+ outp);
+> > > > >=20
+> > > > > -       cell =3D fdt_getprop(gd->fdt_blob, ofnode_to_offset(node)=
+, propname,
+> > > > > -                          &len);
+> > > > > +       off =3D ofnode_to_offset(node);
+> > > > > +       if (off < 0) {
+> > > > > +               log_debug("(not valid)\n");
+> > > > > +               return -EINVAL;
+> > > > > +       }
+> > > >=20
+> > > > Ugh this is really horrible, sorry :-)
+> > > >=20
+> > > > Better to put a wrapper around it than add all these checks, extra
+> > > > code size, etc. Also in many cases the ofnode is known to be valid(=
+TM)
+> > > > so it might just be a waste.
+> > >=20
+> > > How would you propose the wrapper should look like ?
+> > >=20
+> > > Keep in mind, not everything is fdt_getprop( ... ofnode_to_offset() .=
+=2E.)
+> > > in this patch.
+> >=20
+> > I was thinking of
+> >=20
+> > my_fdt_getprop(fdt, node, propname, lenp)
+> > {
+> > if (node is not valid)
+> >     return NULL;
+> > return fdt_getprop();
+> > }
+>=20
+> We would need a wrapper for almost every libfdt call, which isn't really
+> better.
+>=20
+> > What does fdt_getprop() return when the offset is -1 ?
+> If can_assume(VALID_DTB) , then crash on NULL pointer dereference .
+> If not, I think FDT_END (premature end) or an error code.
 
-I still don't understand what you're asking. Maybe you missed the patch
-that added sage to u-boot-test-hooks as well? That contains the labgrid
-environment yaml file. The boards are just in labgrid, the exporter
-registers them with the coordinator when the exporter comes online.
-
-And FWIW, this isn't ideally how I'd do the labgrid integration, but
-tees up the next steps nicely. We need to abstract how our pytest
-portion grabs console/flashes/etc so that someone could write a python
-native set of classes (since labgrid supports pytest directly).
-Iterating on that is easier however when starting with something that
-works.
+How are we now getting in this state is a question. Are we being passed
+an unaligned DT and trying to work around/with it?
 
 --=20
 Tom
 
---Qf5uEfX7902zBDkk
+--2X/+qqlxOCBgn6xK
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRc97gAKCRAr4qD1Cr/k
-CikXAQDpQdaubv6zSS1NlbxUYyCYzvCALfJIKksUxcm4K/IQKgD5AUPurTzyrZle
-wQSGJJrYjbLdtCpr1jf/dtBStIbrqQw=
-=YjnV
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRc+WQAKCRAr4qD1Cr/k
+CsEkAQC98PkSKMPIt87kgx8N2xnvv3u68m1aYHLZl1IY3cDe5QD/RqqsxOfVGgPE
+iUAoiNSCdqs98K6OLR93ZIXIRdF9vgU=
+=uqMC
 -----END PGP SIGNATURE-----
 
---Qf5uEfX7902zBDkk--
+--2X/+qqlxOCBgn6xK--
