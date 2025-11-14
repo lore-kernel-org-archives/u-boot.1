@@ -4,117 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9048CCE7B13
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 14:30:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FF79CE7AEF
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 14:34:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1482383F54;
-	Fri, 14 Nov 2025 15:30:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id D092183F54;
+	Fri, 14 Nov 2025 15:34:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Uq+u5mGx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="APMlcK3H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CB158410D; Fri, 14 Nov 2025 15:29:59 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1401E84109; Fri, 14 Nov 2025 15:34:32 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B93D83968
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 15:29:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96EED83EF5
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 15:34:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D67F14013C
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 14:29:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763130594;
- bh=s4PQFg1ie2DAW2KcqJCqA5zU1u8kdtHq2XCZwz7CukY=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Uq+u5mGxPE68TJHMT6jm7AsAEQ271TTRjGnM71WIFxCSTDdH1xV0JSCG6aeYn1E4P
- 0ihe3RzLEaPkWs3nlWspKfe1eRFA91jErjz6o/PtngJ3tXfo7im+4Bk9fUOrP/WHSH
- lbGavCuhjMQaVPFSjeP03ooRfRHGo+pAdSd2Hq8pHC2q3F3oXII7IC0+KBV+Y+Rqv6
- byAyd09EPku8D0O9LW2zyFB0uFGJEMWckUf/gWeM09I7kbXZK47tErW7sDu7k1nvxg
- lIEhU58xBeh//qJJT3GPrZhjc3+2L9rzJwRFO+dG16yJH9QUu/3yTPdsk/sr6r9Id7
- BevuStOsOhw5tAgQfW4zQzVLCoRE5oWxxnmZNE8KeHzIX02uNV6i44Ee/qHbTbIoqe
- fYO4ZAEIy1FmQ0b7RkWpaTzTlOmSftmNa3+Z6HI+D6ZLuukIOh7lm4rZQRvxlPnLx6
- C6fG3Uc2PdWX03uay/8Uf+s0C8v3cMb1Na9wx1C2P9oHOroiBasIjsepFOz8hOQD4e
- sItk+5A7GJMRN5jteRmYHUhz8EkUcXZxyd2syB4kxuqBjFb7s0PXoW6Yew6n7osSUU
- WVoYKKxAFPExUKzBDB60RsLhncXXKaVDjrxpFNKflCwFpYV11zwsfOzDYEyNrAIe4l
- p2Dvq18P62OlfUIm0C1XejDU=
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-47788165c97so13325425e9.0
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:29:54 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-651c743b2d9so939795eaf.3
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:34:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763130868; x=1763735668; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=SbG7iyih+UXGn1ZfQSAYMbVg5ho1tBECZJQ64fTmriM=;
+ b=APMlcK3HbdbR2rfWjdbQPttFBaRrU/Ls3/i6ENLVDZkrAoSJlI5ofxY3kqe9XL4+NB
+ KxzbfZeelASdT/mPPeYA3n2aXvguX/KsAcGrUYuHyCRHOJD9On2FyB9KMyBD8XXGD279
+ URf7+aht4/ksk/CzorjgNVFGsVKpYqP+O1c+I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763130593; x=1763735393;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=s4PQFg1ie2DAW2KcqJCqA5zU1u8kdtHq2XCZwz7CukY=;
- b=qpdTGAgjG0/SLR75QVdtnZjzxe7LMrKkYq6NPaCoOS4zVwpgZKV7y7bny0stf8Xxbs
- U6SxDgOvCV0rfWqVW/cfSaUAxsRUiYLeu5duTcZeZYIWtXSxyndmqHP36NSLRBKeaDLx
- DuXK4cKMKN7H2LbnMuKBfIKQKuqxcNODHC85e9r3bLTflt4MC31Ii0r6zxsaR7E67EnG
- F7BzFCEG5ivQfVG+eyDYGL28o+u3icVkn823r2a0aZC2V3Hw4yjDP14UoDnX4ymX1yf+
- O0c8Hah/ey7+XgJ2i9ve2CGYAjqOdaJFjdLiIORZplgTA2rJF2/P8vFtImCRlY+ap5Mp
- Wvxg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXuQ7KV5wmiPuYHBkOSvpk3IcTeoCvCMHq4xak34b09B9spVh8ewoXfEMRREqwZJpYTjTkIrGM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzU/KkBkKgEnmxZoHyf7Akw/SPlCT8SlPUAZUjYOYSZdn8cwEtG
- czQdA0BHitS38vbF5ol/pIJzKaGbiYwnLFGxj/+Xc7vp04g3WPAspEuGU7AdUdQtLtjH7qXBLBy
- 6mMdmT0BMSXDbmQmnkJDUVo43hOSh2NAoOGJ4xWGULRp/8HYuLVXVof/x6649FfakULSZ5A4=
-X-Gm-Gg: ASbGnctaAp5m5c5O38i9nQqehBZqMpInGU9jUufDXYYa7mRv0cQdFcepwGUq8onbedV
- K/NmHNqxUGKNUw8txK1o49GySPlrFdnXzkmHO6YMood9FOsoUVBtX5Clus2AavMVEPoQhbexoax
- dLbVp+YFPYOzrDSG+qh4kAMBHnKB5ZyQuzBQUb7M0oozUX8L/j1FTi+UuuUaiATYOJ5NYv4YEil
- fX7eecIhUGJhlZUPA47jXCbwc8O0JhLANpGZVf2jqbKEPY57YaTEUWJbwZzgOEG8OfkCi413n+S
- m+TppQAF8KVlZDgFN6bLAZbgziF4lPsbBwsrsWS32xL8C8zERYASiq6VLiZwEpEiB37eG+BoGr2
- Si3r9WuYJnxdQ4BStAYpaBktsavPwsNK0JoAlgUmW9/y8pAZdHueT86/w1bGAkjxOdH2IJpAa
-X-Received: by 2002:a05:600c:a44:b0:477:5aaa:57a6 with SMTP id
- 5b1f17b1804b1-4778fe69cb3mr34469845e9.10.1763130593576; 
- Fri, 14 Nov 2025 06:29:53 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEtFKLR7UN2iyKjN/l9mgMjPac0a+dQpHpS02rE0s0HaAFhgds3a5yl/xwVEW2DyeItoYDSLw==
-X-Received: by 2002:a05:600c:a44:b0:477:5aaa:57a6 with SMTP id
- 5b1f17b1804b1-4778fe69cb3mr34469305e9.10.1763130593085; 
- Fri, 14 Nov 2025 06:29:53 -0800 (PST)
-Received: from [192.168.103.118]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4778bcfa2e9sm45639325e9.12.2025.11.14.06.29.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Nov 2025 06:29:52 -0800 (PST)
-Message-ID: <986f59b2-6cf2-4195-ba1f-4249428b9009@canonical.com>
-Date: Fri, 14 Nov 2025 15:29:51 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/9] test: cmd/fdt: do not use fixed buffer addresses
+ d=1e100.net; s=20230601; t=1763130868; x=1763735668;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SbG7iyih+UXGn1ZfQSAYMbVg5ho1tBECZJQ64fTmriM=;
+ b=JnN5f2XGS3sLfw4wUBybJsB3otq30urscOyuOCzDJbP0lgHcEvsBWJ7upqN3Yy3pfi
+ 3sOHvrfSjK2oSIeOClYRWf7E+GU+t3MqcukUPUtldnxiLT2Thw+rG4QXAES78Y8ngq83
+ UYAwG4x6mJxa004zgo4H0IITU/63GmyLGhQrK5PeezKv4njCJmnShh8fB5jhMgwDbSqu
+ rHCcYwyQnJ6/DZIMPEIaZjtKxEg7p2WvsJsQqQ6pRC0HOXfReDM9/12Pgp3SZl8jzCJh
+ f+Q9gF07dxsTVq2BWJ0hfwyJ7VgLIZ8UUPxeO43PR0nM18jB6xIQn9tKAOzK26ELdFTS
+ 37gw==
+X-Gm-Message-State: AOJu0Yytu9DlEw+GQf9/P5FyC0anFQ++Ep8nLsSMGDzaYor+MCd9nHKp
+ ESI4Raeby3szpKELljyOi6iY7O1Z23RLd4v2hq3rJPLVyf6/gKUptMHkA7un1efPBmo=
+X-Gm-Gg: ASbGncsPV9eBqJ5ajkaAskQNgf/czx+uGXzvD7hmWCej1NxGCiwyLvELqoy77UgNMV/
+ GtbSrJZ/jCVKiDCfnFwEWZ9Xa/kqhpQ1PtEsuMZd3w2qtWRkQw5MG9RkTuXrO8Dd+GQIup59c7P
+ WENHYkR7upNN1gE/vK8X29fUVXRruunS5thTN4TADXFhUgCky0iFSRHoIkWogb1zu5ftK9wdKKp
+ CwtUhbHnJOsH+g/lF+iB8qRCney+Z7lMBomb7XDln27Ek1jCAb2owAWu1GAOrJjkQ05rl+Thwnt
+ ORq4nZu62IeYv0qbowTIBRloSH49V9RQh6DYArObmJLo12RmwYzZyJ/ENQazMfMzbt28ZS/VJ6S
+ uv/tpLalVy5FLDX8xmpWuwWtC8c/ey/jroBHPnjpx2nFM26doSRs37WKpABhvUlGsn7TSzgYybX
+ Ss7XuFevmzcSbze1UvBAVz+62hGQ+7qw/9Ma9K2BY=
+X-Google-Smtp-Source: AGHT+IE4DpBRw2AYXsjSidux3pS0LFZydxkvy5lfF4lsGrGPtdULN+/KtCp5s6X+7pq3gg3q5yawkg==
+X-Received: by 2002:a05:6820:2d83:10b0:657:2d96:2cfb with SMTP id
+ 006d021491bc7-65733cf207dmr1247271eaf.6.1763130868243; 
+ Fri, 14 Nov 2025 06:34:28 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65724cb8732sm2014057eaf.1.2025.11.14.06.34.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Nov 2025 06:34:27 -0800 (PST)
+Date: Fri, 14 Nov 2025 08:34:25 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
- Harrison Mutai <harrison.mutai@arm.com>, Peng Fan <peng.fan@nxp.com>,
- Ben Dooks <ben.dooks@codethink.co.uk>, Svyatoslav Ryhel
- <clamor95@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
- u-boot@lists.denx.de
-References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-7-heinrich.schuchardt@canonical.com>
- <CAFLszTiHVqgn5eox3p7CWt0=XjAcYMBjR7F03UqweRftZg5fDg@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTiHVqgn5eox3p7CWt0=XjAcYMBjR7F03UqweRftZg5fDg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] Gitlab: Add a "sage-lab" stage to access a board farm
+Message-ID: <20251114143425.GY6688@bill-the-cat>
+References: <20251110154231.2629710-1-trini@konsulko.com>
+ <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
+ <20251111135638.GT6688@bill-the-cat>
+ <CAFLszThrucj38rULiXB3HAsHRq5veZo6zBgHekcjymQecZSP5A@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Qf5uEfX7902zBDkk"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThrucj38rULiXB3HAsHRq5veZo6zBgHekcjymQecZSP5A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,176 +99,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/14/25 13:31, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On Sun, 9 Nov 2025 at 03:10, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> The location of memory depends on the board. Do not assume memory at fixed
->> memory locations. Use memalign() instead to allocate a buffer.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   test/cmd/fdt.c      |  8 ++++++--
->>   test/common/print.c | 37 ++++++++++++++++---------------------
->>   2 files changed, 22 insertions(+), 23 deletions(-)
->>
->> diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
->> index b950123b6da..4c3c6308ab4 100644
->> --- a/test/cmd/fdt.c
->> +++ b/test/cmd/fdt.c
->> @@ -265,7 +265,7 @@ FDT_TEST(fdt_test_addr_resize, UTF_CONSOLE);
->>   static int fdt_test_move(struct unit_test_state *uts)
->>   {
->>          char fdt[256];
->> -       ulong addr, newaddr = 0x10000;
->> +       ulong addr, newaddr;
->>          const int size = sizeof(fdt);
->>          uint32_t ts;
->>          void *buf;
->> @@ -275,8 +275,10 @@ static int fdt_test_move(struct unit_test_state *uts)
->>          ts = fdt_totalsize(fdt);
->>
->>          /* Moved target DT location */
->> -       buf = map_sysmem(newaddr, size);
->> +       buf = memalign(8, size);
->> +       ut_assertnonnull(buf);
->>          memset(buf, 0, size);
->> +       newaddr = map_to_sysmem(buf);
->>
->>          /* Test moving the working FDT to a new location */
->>          ut_assertok(run_commandf("fdt move %08lx %08lx %x", addr, newaddr, ts));
->> @@ -288,6 +290,8 @@ static int fdt_test_move(struct unit_test_state *uts)
->>          ut_assert_nextline("Total of %d byte(s) were the same", ts);
->>          ut_assert_console_end();
->>
->> +       free(buf);
->> +
->>          return 0;
->>   }
->>   FDT_TEST(fdt_test_move, UTF_CONSOLE);
->> diff --git a/test/common/print.c b/test/common/print.c
->> index 2ac7eeed2c1..f33476a36b4 100644
->> --- a/test/common/print.c
->> +++ b/test/common/print.c
->> @@ -266,74 +266,70 @@ static int print_do_hex_dump(struct unit_test_state *uts)
->>   {
->>          u8 *buf;
->>          int i;
->> +       ulong addr;
->>
->>          buf = calloc(1, BUF_SIZE);
->>          ut_assertnonnull(buf);
->> +       addr = map_to_sysmem(buf);
->>          for (i = 0; i < 0x11; i++)
->>                  buf[i] = i * 0x11;
->>
->>          /* bytes */
->>          print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, buf, 0x12);
->>          ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff  ..\"3DUfw........",
->> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf);
->> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->>          ut_assert_nextline("%0*lx: 10 00                                            ..",
->>                             IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf + 0x10UL);
->> +                          addr + 0x10UL);
->>          ut_assert_console_end();
->>
->>          /* line length */
->>          print_hex_dump("", DUMP_PREFIX_ADDRESS, 8, 1, buf, 0x12, true);
->>          ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77  ..\"3DUfw",
->> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf);
->> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->>          ut_assert_nextline("%0*lx: 88 99 aa bb cc dd ee ff  ........",
->>                             IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf + 0x8UL);
->> +                          addr + 0x8UL);
->>          ut_assert_nextline("%0*lx: 10 00                    ..",
->>                             IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf + 0x10UL);
->> +                          addr + 0x10UL);
->>          ut_assert_console_end();
->>
->>          /* long line */
->>          buf[0x41] = 0x41;
->>          print_hex_dump("", DUMP_PREFIX_ADDRESS, 0x40, 1, buf, 0x42, true);
->>          ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ..\"3DUfw........................................................",
->> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf);
->> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->>          ut_assert_nextline("%0*lx: 00 41                                                                                                                                                                                            .A",
->>                             IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf + 0x40UL);
->> +                          addr + 0x40UL);
->>          ut_assert_console_end();
->>
->>          /* 16-bit */
->>          print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 2, buf, 0x12, true);
->>          ut_assert_nextline("%0*lx: 1100 3322 5544 7766 9988 bbaa ddcc ffee  ..\"3DUfw........",
->> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf);
->> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->>          ut_assert_nextline("%0*lx: 0010                                     ..",
->>                             IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf + 0x10UL);
->> +                          addr + 0x10UL);
->>          ut_assert_console_end();
->>
->>          /* 32-bit */
->>          print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 4, buf, 0x14, true);
->>          ut_assert_nextline("%0*lx: 33221100 77665544 bbaa9988 ffeeddcc  ..\"3DUfw........",
->> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf);
->> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->>          ut_assert_nextline("%0*lx: 00000010                             ....",
->>                             IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf + 0x10UL);
->> +                          addr + 0x10UL);
->>          ut_assert_console_end();
->>
->>          /* 64-bit */
->>          print_hex_dump("", DUMP_PREFIX_ADDRESS, 16, 8, buf, 0x18, true);
->>          ut_assert_nextline("%0*lx: 7766554433221100 ffeeddccbbaa9988  ..\"3DUfw........",
->> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf);
->> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->>          ut_assert_nextline("%0*lx: 0000000000000010                   ........",
->>                             IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf + 0x10UL);
->> +                          addr + 0x10UL);
->>          ut_assert_console_end();
->>
->>          /* ASCII */
->> @@ -345,8 +341,7 @@ static int print_do_hex_dump(struct unit_test_state *uts)
->>          buf[8] = 255;
->>          print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 1, buf, 10, true);
->>          ut_assert_nextline("%0*lx: 00 1f 20 21 7e 7f 80 81 ff 99                    .. !~.....",
->> -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
->> -                          (uintptr_t)buf);
->> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
->>          ut_assert_console_end();
->>          free(buf);
->>
->> --
->> 2.51.0
->>
-> 
-> This is adding memory allocations to a test for hex dumping.
-> 
-> It would be better and simpler to use a fixed address and make this a
-> sandbox-only test. I struggle to see the value of running these sorts
-> of tests under QEMU?
 
-I cannot see any added value in restricting a test such that it can only 
-be run on the sandbox.
+--Qf5uEfX7902zBDkk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-My expectation is that tests should be executable on any platform be it 
-a physical board or a virtual machine. There are few use cases for the 
-sandbox in real life.
+On Fri, Nov 14, 2025 at 05:43:57AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 11 Nov 2025 at 06:56, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Nov 11, 2025 at 05:58:22AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Mon, 10 Nov 2025 at 08:42, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > This is the Gitlab side of adding support for the board lab connect=
+ed to
+> > > > the "konsulko-sage" runner. On the software side, this lab uses only
+> > > > upstream labgrid. On the hardware side, each device under test is
+> > > > connected to its own exporter (typically a Raspberry Pi 4) that mus=
+t be
+> > > > turned on (and cleanly turned off) as part of a given test cycle.
+> > > >
+> > > > Add support for testing on a SolidRun Hummingboard 2 (imx6), Raspbe=
+rry
+> > > > Pi 3 and Raspberry Pi 4. In all cases, we enable additional options=
+ to
+> > > > run more tests on the board. As we have some networking tests, we t=
+est
+> > > > both the legacy network stack and lwIP. In the case of Pi platforms=
+, we
+> > > > test all of 32bit configuration, plain configuration and rpi_arm64,=
+ and
+> > > > again with and without lwIP.
+> > > >
+> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > > ---
+> > > > Note that for the Pi platforms we enable/disable CMD_BOOTEFI_SELFTE=
+ST
+> > > > based on overall binary size. I've created
+> > > > https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/issue=
+s/2
+> > > > to track addressing that issue.
+> > > > ---
+> > > >  .gitlab-ci-sage-lab.yml | 182 ++++++++++++++++++++++++++++++++++++=
+++++
+> > > >  .gitlab-ci.yml          |   5 ++
+> > > >  2 files changed, 187 insertions(+)
+> > > >  create mode 100644 .gitlab-ci-sage-lab.yml
+> > >
+> > > Would it be possible to add some docs about this? Does the exporting
+> > > rpi do a full system boot and then run some scripts to load things
+> > > onto the board, then shut down?
+> >
+> > I don't understand your question. Yes, the exporter is powered on/off in
+> > the test job, as explained in the commit message. When it comes up it
+> > registers the device under test with the coordinator (and unregisters
+> > when powering off).
+>=20
+> So does that mean that all the logic for talking to the board is not
+> in the hooks or Labgrid, but somewhere else? I'm just trying to
+> understand how it is put together and compare it with what I did.
 
-Best regards
+I still don't understand what you're asking. Maybe you missed the patch
+that added sage to u-boot-test-hooks as well? That contains the labgrid
+environment yaml file. The boards are just in labgrid, the exporter
+registers them with the coordinator when the exporter comes online.
 
-Heinrich
+And FWIW, this isn't ideally how I'd do the labgrid integration, but
+tees up the next steps nicely. We need to abstract how our pytest
+portion grabs console/flashes/etc so that someone could write a python
+native set of classes (since labgrid supports pytest directly).
+Iterating on that is easier however when starting with something that
+works.
+
+--=20
+Tom
+
+--Qf5uEfX7902zBDkk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRc97gAKCRAr4qD1Cr/k
+CikXAQDpQdaubv6zSS1NlbxUYyCYzvCALfJIKksUxcm4K/IQKgD5AUPurTzyrZle
+wQSGJJrYjbLdtCpr1jf/dtBStIbrqQw=
+=YjnV
+-----END PGP SIGNATURE-----
+
+--Qf5uEfX7902zBDkk--
