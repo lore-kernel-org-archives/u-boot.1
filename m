@@ -4,154 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C1ACE7B1B
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 14:53:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A0DACE7B13
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 15:02:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1623284127;
-	Fri, 14 Nov 2025 15:53:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A286184105;
+	Fri, 14 Nov 2025 16:02:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mcdZqfbx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bl0VopAe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C74958412C; Fri, 14 Nov 2025 15:53:52 +0100 (CET)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id CF24A84127; Fri, 14 Nov 2025 16:02:44 +0100 (CET)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDE9184105
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 15:53:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62B8183F54
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 16:02:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ljUF4OpTTHsL//RDd8qDGPnkKnsp0Lla/uClpKZJFE7RyJa4BawPvOVciwEjVH2DRzGT4rh7VT6Rd4sCS+8hRJ3KTsdJbTMkcr3CfG5JdePPoO3v2jXSKBePUlP3Kr5KUzCEbyeok7jjaGoTRO4GWXOZ7n0DPcDkEbdq3t3NBp0LSOtVA5IX1EFPrgvVG1Us2/VDEL5E2Yz/D8YyxZy5XjLGE57ZldyTUeKyqdgFn8zwfSjIFxec9Dz5EEXqLHHJchEC5s60Xa5d7sOnItoT7dVRpVTqV/6EL8E2SecXPRIpsFcF0fwE7RewPSBzXianujIxPS6R31kK3qoM+N7ZlQ==
+ b=wZP4P8UiuqLfXnUALIdiN/PoQw1CQHNLDZatDjToBw+1eyp2UEDf2LN8G0oFSWYszWblsjAJhwOQr3bAr/L/vZBOzIyiqusHwnD11txF6BNOj5MMGcbA4qB1YiGRLlixWt48E8MB4Z8VRfbWn3fzKi+aPIIjm6ORY08Pqj6DPvrdyS0U17JxAS6w84qRdUDHHot74B1UmwP36XwQ4rnkm62kuWXzSkvdssATkZ/vZLvzHnXWJnSUcPIvPeveD/av3qdK7+bKrpJQTPeL57JDdiNTF+NECorg7J7dnYB/RSwPq3ncEYlCpUaMQMWnWiLJGSrZDH4OMboqkWw5tnZRFQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=thPCHmtKXYKCoNXLmRMN5gk9+Tiv+zwk6X6/yDePigM=;
- b=hdlhknapFu5qGv4xB53t/GAhUb7V/CTO1kn9+mOe7qQUyrN6/A73kXzA39CMzAplcg3wcQROwPrptaEzkJxtpTP78SWoINgiNxUwm3G4ezveZP9VDcgj9v/Tb6zz3co3NounkVMKiF0ZB8aSFQrbn9F5Q3o+WZnnfWSs6f0t4fNjaGIn+fqxkZTYBoEKlb9Pt5CZT30EztUgZ/BrH/fVTxFhZrXg7LQThF6bpLUpa6U0lcnQOeKmKIQmmmpXG+jmRBzktuWWOsc8iZsOZzoXi7LX4+XpVUmvDJPys1inu9HHxfYyubBKcPr99lM26O4ZPrGrX8xLxksRmFOEJq60YA==
+ bh=sy3AvojDR+JFC4NronUdAvRE3uflfn1QGyf3qffjrH0=;
+ b=k88oymO7IymTRIFlsi8QePlOOElnx8+EXu4WF+uSx3uTbTR/Cfk9HOK5hiSXvHEB7Oe24puDwqasjgvOzqfnAKn6mkZq7xPlEDWV8PPlpWXoNpax4V6qxcP/MPMtJw3nV4Utft0wyu/LBknhZFNJ6ux7UIu0iyvgfnInRqVVJSmkH0/pai/4+kHjLLvaDA/rUi3gsPMp+QeUQx2VFK5ABwluynhBm6D6cCNfdLXS3/2xor5JhHhTWsLGM4oPC6Cb/TektWaL03fnZaeQ1qnnQ2gCAESVZAIrbjby5Vr8A0jMHbo08KyqgPpnUcJMx0hkBFLz1JiDynUYG/5OuaoeGA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=thPCHmtKXYKCoNXLmRMN5gk9+Tiv+zwk6X6/yDePigM=;
- b=mcdZqfbxbjRJ6jeVpfhOrM0xKinCbllH/TZaJFa1G0BoEz0lh0ayn2YGcYvrnYJM8WyLTZp1uwBeImI6jnMd8F/rxr5EwsgzX0Dd375AHorglVg/7JHn0r819MiC5Z3BPM7Cxr2lMU571Tz5dISgOKDbJQEcxTj2etvqJCxGmTk=
-Received: from MN2PR22CA0006.namprd22.prod.outlook.com (2603:10b6:208:238::11)
- by CHAPR10MB997723.namprd10.prod.outlook.com (2603:10b6:610:2f6::14)
+ bh=sy3AvojDR+JFC4NronUdAvRE3uflfn1QGyf3qffjrH0=;
+ b=bl0VopAeNylw/3EEwOhdN+O6vfJIZGD8CfHGtIaOiXKrhBTm+NFXPv2Y7fv98LrFsxLRYmrSHE0I2nSGO9Os1U1FmfFATmCXd+W6ZdoFJzcJU8edw6eJqmalJdNGbCj9uBhKnJAXY+mBfbAa1u8yc9A8l4gcTBz/mV2JWjlbkTQ=
+Received: from SJ0PR03CA0201.namprd03.prod.outlook.com (2603:10b6:a03:2ef::26)
+ by PH7PR10MB5879.namprd10.prod.outlook.com (2603:10b6:510:130::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.18; Fri, 14 Nov
- 2025 14:53:46 +0000
-Received: from BL02EPF0001A0F9.namprd03.prod.outlook.com
- (2603:10b6:208:238:cafe::30) by MN2PR22CA0006.outlook.office365.com
- (2603:10b6:208:238::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.18 via Frontend Transport; Fri,
- 14 Nov 2025 14:53:46 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.16; Fri, 14 Nov
+ 2025 15:02:38 +0000
+Received: from MWH0EPF000989EB.namprd02.prod.outlook.com
+ (2603:10b6:a03:2ef:cafe::b8) by SJ0PR03CA0201.outlook.office365.com
+ (2603:10b6:a03:2ef::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.16 via Frontend Transport; Fri,
+ 14 Nov 2025 15:02:31 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BL02EPF0001A0F9.mail.protection.outlook.com (10.167.242.100) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ MWH0EPF000989EB.mail.protection.outlook.com (10.167.241.138) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Fri, 14 Nov 2025 14:53:45 +0000
-Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9320.13 via Frontend Transport; Fri, 14 Nov 2025 15:02:38 +0000
+Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 14 Nov
- 2025 08:53:40 -0600
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 09:02:31 -0600
+Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 14 Nov
- 2025 08:53:38 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 09:02:30 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 14 Nov 2025 08:53:38 -0600
-Received: from [10.249.139.123] ([10.249.139.123])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AEErYXp2152095;
- Fri, 14 Nov 2025 08:53:35 -0600
-Message-ID: <2136a803-617f-4dcf-9dac-3459d6b132e3@ti.com>
-Date: Fri, 14 Nov 2025 20:23:34 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] power: domain: ti: fix ti_pd_get() to return after
- verifying transition
-To: <trini@konsulko.com>, <jh80.chung@samsung.com>, <peng.fan@nxp.com>,
- <afd@ti.com>, <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <t-kristo@ti.com>
-CC: <h-salunke@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>,
- <s-vadapalli@ti.com>
-References: <20251114114611.57032-1-s-vadapalli@ti.com>
-Content-Language: en-US
+ Transport; Fri, 14 Nov 2025 09:02:30 -0600
+Received: from toolbox.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.73.74])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AEF2ReM2204877;
+ Fri, 14 Nov 2025 09:02:28 -0600
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <20251114114611.57032-1-s-vadapalli@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+To: <trini@konsulko.com>, <jh80.chung@samsung.com>, <peng.fan@nxp.com>,
+ <u-kumar1@ti.com>, <afd@ti.com>, <m-chawdhry@ti.com>, <t-kristo@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH v2] power: domain: ti: fix ti_pd_get() to return after
+ verifying transition
+Date: Fri, 14 Nov 2025 20:32:41 +0530
+Message-ID: <20251114150243.96429-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.51.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A0F9:EE_|CHAPR10MB997723:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6a3b8b44-3d28-48a4-4039-08de238d9c33
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989EB:EE_|PH7PR10MB5879:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9b259f25-224b-4141-8ed5-08de238eda23
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RmlHRThnSDU4L2k0MFFXNUx4eTM2WkhhQXd0b2I3eFlEYnhSNVhvdnJyVTBQ?=
- =?utf-8?B?YW1manFHU2lFaVowNUNsMFdJYU8zWEYwNVRpZVYvbitJRFBwa21JV3JOYTdZ?=
- =?utf-8?B?Q3FBb0I2T0VsTjVGL2RLQjRiN2FSN3lkTGVtemFiZkltVWJ3VU9rMWdwWXZh?=
- =?utf-8?B?N0wzRjJkSzJkNk9kbzVsR2lSTi9jVVBzbFZuSnNDcXlMY2NEa2dsTnVSUVJX?=
- =?utf-8?B?N3VsdzYvelpBVlhYZ01iYk1GQld5Z1ZiMVlibjdZMUgyMlZ3WlU4djFSWWJF?=
- =?utf-8?B?dW85Ny9rZTkvRjh4MHpxLzZSb3hZSVcvZVBRSFVaZUtDUGhzTkgzSU13STQ5?=
- =?utf-8?B?OTJZOTFpL1NDMmwzYlRiYTNnSjNWWnFhZjlZNVJCM084ZHoySERwWFMzR1RD?=
- =?utf-8?B?aENHbkx0RWVtN211TnhqL0JsZ01scWhyQmk0ei8vWHcycGFHYWRsdWlCRk4r?=
- =?utf-8?B?cWpwQVBPK1YvenhiOExBSTlMRDlJeDU4ZnFocEh6MFNhR1J4YVpDTzlHc3lw?=
- =?utf-8?B?V21SOElscWdNR0tWMXVXb3NXMmlVZTdYMVdzSmYxUzhzYVA5aUdUYjVOUkhF?=
- =?utf-8?B?UXAxbStuZzlSRld4dDBJZ1FMU0Y1bnZBU0ZtMC9ROThXaDgyeENBYzgxMytC?=
- =?utf-8?B?TmVnby85RFNBc3Q0ZmIzbTNzQXFMWmdMdGJ2b255QTV5L2xDSzhZWU1wYm1n?=
- =?utf-8?B?eXNvalA3dVcwWVhjMCtTdkgvaDY2WmJvV3g4ekxHYlVzOEV1a0xiQkFkcXQ3?=
- =?utf-8?B?SzNFZGZnanNnbVdKVXo1WVBhMmYrVkNiUWdYL3N2cjhSRFNaTVVPWnFVVnJm?=
- =?utf-8?B?eWJyUTYrWTBicU1iOHJ4QWlPWDNhbm04eVl0NW1Bd0xnc2ZjcFpYT3lUclJS?=
- =?utf-8?B?aDdUK014T3JWemdLRVl0byt4QnRnYkNoV1BTdmo1R2xCWGYvV2RHNGQzNXVY?=
- =?utf-8?B?MmtiZkQrczZsVmZONlRTWjFGNWNOdXFLamdrOWlldFZsRmVISTIwSW0xQXYw?=
- =?utf-8?B?cDYyQU96UnVUMWducXdtbEpCZ0gzZzRRY0NmSExzRTJZU3EzbkFlQU9lajVV?=
- =?utf-8?B?bWZ6NWJaeHk4TEQxcEUwY2MrVGdMVnFLSGR6SVRXZVFzSnM1aW1zSjdJRVhT?=
- =?utf-8?B?Y05wZTV1WkZ5cWFUSmlvajM1TzBqQ1R4ZWdtVzZxQkpzZjZsRnFFY0o5a0hY?=
- =?utf-8?B?VVM5d20vd211bXZFcGJ0dUJPbHgvZlFPaUFvcjZsbS9WZTlyVHRJR1dTM3FD?=
- =?utf-8?B?NmpwdkxvWDgxWElHRXM0cHJ3dHRzb0k1NEVWM0ZYemdIWkNCbitmRklBb2Vh?=
- =?utf-8?B?UnIxTU1LVWM5ZldaUGNwN2xrQUtDSWsyVi96em95ZkRiRHNVUld1ZkJwbjZr?=
- =?utf-8?B?NDVWVFRYaW9mWVBYb1R5MEQzbGRZZVZWaVNwTVMvc2tYZFVmcWY4YnlIY3Zo?=
- =?utf-8?B?T2oxVTFtWUNnQUhuMDJnNmMrd21CSUFNbHRwQ2ZvbHZjai9IVE1rNGVaQk1s?=
- =?utf-8?B?NDJMaVlZMHdOaGhRU1BvMGxnN3ZhRy8wRDJjbU9oUXBzMjNXalBmOWhyajFU?=
- =?utf-8?B?bzFubFhBZkxDRHByMzdmdWVrUHMraGhKU2hXWXhtMU12aHJLRis1V2pndXpx?=
- =?utf-8?B?UTMwZ21YQzBBQzhpaWVqT2c1Um43SnlLUkEvTEVmRmtXUjRNcU5yanVtajhW?=
- =?utf-8?B?bzRPOForNmFyZyszMThYSGd6NTZrQnRiQW1seHhNMVpuZjlKZ2p0YXpVTDFT?=
- =?utf-8?B?VnVEUFlKVmwrYVpyakxvZWM2U2JBYnB6VDNIekxvdkMwSFV1VzJyY2V0ZDNM?=
- =?utf-8?B?NVpCK3lFb040b0o4R0ZTYllDbUpPTkt4T2g1c2pMNGpxR2NwdUNZVUl4QUZG?=
- =?utf-8?B?VXQ2aUlWUU5XNEgyMmxjMnhSTHJxM1lDRTVnVFFPMnFUdnlKMHZJQ2tvUmE4?=
- =?utf-8?B?RlVmazlMcUlFaUt5cVZ1SHRHTkJmZGRPREw0V0s1eDg1QXFuand6SzlMM2Vv?=
- =?utf-8?B?WUhxMWdDcmdZMm1vMDhZUUhXeXFIdmFnNVdWcTUxV015Q2FaZDJsTlRVMXQ5?=
- =?utf-8?B?SnlJUHhiK1dVOUd4RlI4R3NmMm9XY1ZFMTAwZDRyS05xQXhvOGZ2ZVhObnlZ?=
- =?utf-8?Q?cjKA=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
+ ARA:13230040|36860700013|376014|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9R0LlkFFsdOlVpt0HKwQypV9G8cZOO+8SoxsoyFrxzGNCg+mdqxTA9MRvvt9?=
+ =?us-ascii?Q?og4dJLjFAhUBVcjWHvMo05Js5YfKELyndyUJFNJI87Fkf6Y2pHTa347ncVRr?=
+ =?us-ascii?Q?hYAQ9O436E8bMgz/CaHAvT/UjrRgy1PRXECtBsjQQtfnghWrycQXXymzBXsj?=
+ =?us-ascii?Q?zZyJUGbla8UrYcDsoLcAM6NNQpXOcSTilb0bBM3oujhSDd2HXYUKS86swP5M?=
+ =?us-ascii?Q?CxogOZ7CzQ29WmSvgd5AF7IZXbnNEGZt6PDfT1K5bgRBT4JBo/9eochanTjk?=
+ =?us-ascii?Q?YIUkwbpiRmdUiD1sqLwLknhDkq3GG1sw0NfF5WvWaLn34nNzWn8mvWvPXwoz?=
+ =?us-ascii?Q?Xw+xblhQEbSYlD4JBKDX7oqzGiJu20roHhxAVWU4B8xS32ZrPBVnsu7WufvO?=
+ =?us-ascii?Q?GB7YDmVnQ7OFvvtG386jKYm/IBxDowP1znRvWVViN6uq9CGew8bVgM20eTx1?=
+ =?us-ascii?Q?3fm/qStdJfJsQstF8R5cbM6rqL15AQ5Sbxcj231ZBqo+B2U1u5g0OxJgH1AT?=
+ =?us-ascii?Q?6UXFQU8nX7A2T79+paePEU8qu0A/MZTJuHx7oTQM3l/k4C4gjuTiwWf2HAGx?=
+ =?us-ascii?Q?J4ARj3BxG89IkTjBSdE2GA7/BXxO4+JjcZMnFsDhByifZ49tJ0dk6RlLZAv4?=
+ =?us-ascii?Q?AaSBU8LtZOH8IVBtMb10gQX9/W0rQvLJ+m+oG7Nuf6wEZud3bQKp2K5ZZMq3?=
+ =?us-ascii?Q?KqE81HWFszor8GU4+UPVj2ViMhMly1w9NlYoIGkYqmkXwfYuTcjmyVeCSHSG?=
+ =?us-ascii?Q?whYjnJAQzcOTOpDtgYvsOU1d9jpy4hnOGDI4o7UbDGva2HB+ggetAL4gcUBF?=
+ =?us-ascii?Q?JArL1RXb8zTXByQtUg9hwyherPpLrbml/kO+lANhmj+zINYX9lhjNBrFbXb3?=
+ =?us-ascii?Q?rTifENgotdghMrzhhW1Uh+qE7QKAoQcYgnjz91EbgdxyIJiosdDIw5T6vB4V?=
+ =?us-ascii?Q?KZb+tkFu36EwOL+DtA7SLYo6i/pom4wRKSLH7SWlxApk0ZJHg9SjwDHwUBiv?=
+ =?us-ascii?Q?sDJd9/Da5mZhfRVURkVOV9UlQlj0esp94SA9cLM1kU/yy6nrpUA3oQyrAziR?=
+ =?us-ascii?Q?8VOYoBbaTcq14SIutBXcAPyO9BRBaz2asoRoo58BT+lqlTgkA2wkg5aFF5xU?=
+ =?us-ascii?Q?yqw9Kwv3XEZH3IsMficHKk2TKwDBlDwaspGgH9/kLC4GgiQK6UBHLMTdEIG2?=
+ =?us-ascii?Q?JMTqR+YSU5cC6dPMz7WeH/txwbze6xdUIOiF3DiG6jbh07OmEDQu+siAdof7?=
+ =?us-ascii?Q?75EoJ897v5K9R5/D6/ru9k6pY6i/wowcS/beJ4dx/8UjTsoKkk+nyWbqc/IX?=
+ =?us-ascii?Q?/9cbIilDTMVvNynLlNegE3ncaonE3MZ7Yw3skM98NY/1a5VmQ3h3joFqzts7?=
+ =?us-ascii?Q?zQs9Xyhzk8OQjcs+CnPxQmit9wHZHsHtl8/PhDpPtfG/pDi8dSmqBbBFTK5V?=
+ =?us-ascii?Q?Q5wqT4d8YVEvnbbYXu3YD+klFUnd7qTC+/Sv48iUlqKYMQ3tu0u+wmsCeOeH?=
+ =?us-ascii?Q?A9gyU/Y2SC6OK02YKduxIGv1wkMDtTZqVmQqRkATzoRo/yeZHpVkvRvtzEOQ?=
+ =?us-ascii?Q?k98d1aI0rXswjrlTakA=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026);
+ DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2025 14:53:45.0035 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6a3b8b44-3d28-48a4-4039-08de238d9c33
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2025 15:02:38.4536 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b259f25-224b-4141-8ed5-08de238eda23
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0F9.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989EB.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CHAPR10MB997723
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB5879
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,58 +155,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14/11/25 5:16 PM, Siddharth Vadapalli wrote:
-> The helper function "ti_pd_get()" is responsible for powering on a
-> domain if it is powered off. In the current implementation, if a power
-> domain is determined to be powered off - no prior users and the PDCTL
-> register indicates that the user desired state is OFF, then powering on
-> the domain constitutes setting 'PDCTL_STATE_ON' field of the PDCTL
-> register.
-> 
-> While the current implementation indeed requests the power domain to be
-> transition to the ON state, the helper function "ti_pd_get()" doesn't
-> verify that the power domain has 'transitioned' to the ON state before
-> returning to its caller. As a result, it is possible that the device(s)
-> belonging to the power domain may be accessed before it is truly powered
-> on, leading to a bus abort.
-> 
-> Fix this by waiting for the power domain to transition to the ON state
-> before returning from "ti_pd_get()".
-> 
-> Fixes: 144464bd2c67 ("power: domain: Introduce driver for raw TI K3 PDs")
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> ---
-> 
-> Hello,
-> 
-> This patch is based on commit
-> 6c2f2d9aa63 Merge branch 'master' of git://source.denx.de/u-boot-usb
-> of the master branch of Mainline U-Boot.
-> 
-> Regards,
-> Siddharth.
-> 
->   drivers/power/domain/ti-power-domain.c | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
-> index c3519307340..8f43d0fed30 100644
-> --- a/drivers/power/domain/ti-power-domain.c
-> +++ b/drivers/power/domain/ti-power-domain.c
-> @@ -227,6 +227,10 @@ static int ti_pd_get(struct ti_pd *pd)
->   
->   	pd_write(pdctl, pd, PSC_PDCTL);
->   
-> +	ret = ti_pd_wait(psc_pd);
-> +	if (ret)
-> +		return ret;
-> +
->   	return 0;
+The helper function "ti_pd_get()" is responsible for powering on a
+domain if it is powered off. In the current implementation, if a power
+domain is determined to be powered off - no prior users and the PDCTL
+register indicates that the user desired state is OFF, then powering on
+the domain constitutes setting 'PDCTL_STATE_ON' field of the PDCTL
+register.
 
-The above section could be replaced by:
-	return ti_pd_wait(psc_pd);
+While the current implementation indeed requests the power domain to be
+transition to the ON state, the helper function "ti_pd_get()" doesn't
+verify that the power domain has 'transitioned' to the ON state before
+returning to its caller. As a result, it is possible that the device(s)
+belonging to the power domain may be accessed before it is truly powered
+on, leading to a bus abort.
 
-I will post the v2 patch implementing this.
+Fix this by waiting for the power domain to transition to the ON state
+by using "ti_pd_wait()" before returning from "ti_pd_get()".
+
+Fixes: 144464bd2c67 ("power: domain: Introduce driver for raw TI K3 PDs")
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
+
+Hello,
+
+This patch is based on commit
+6c2f2d9aa63 Merge branch 'master' of git://source.denx.de/u-boot-usb
+of the master branch of Mainline U-Boot.
+
+v1 of this patch is at:
+https://lore.kernel.org/r/20251114114611.57032-1-s-vadapalli@ti.com/
+Changes since v1:
+- Replaced the following:
+	+	ret = ti_pd_wait(psc_pd);
+	+	if (ret)
+	+		return ret;
+	+
+		return 0;
+  with:
+  	return ti_pd_wait(psc_pd);
+- Updated the last paragraph of commit message by mentioning
+  "ti_pd_wait()".
 
 Regards,
 Siddharth.
+
+ drivers/power/domain/ti-power-domain.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
+index c3519307340..09d9e1b3159 100644
+--- a/drivers/power/domain/ti-power-domain.c
++++ b/drivers/power/domain/ti-power-domain.c
+@@ -227,7 +227,7 @@ static int ti_pd_get(struct ti_pd *pd)
+ 
+ 	pd_write(pdctl, pd, PSC_PDCTL);
+ 
+-	return 0;
++	return ti_pd_wait(psc_pd);
+ }
+ 
+ static int ti_pd_put(struct ti_pd *pd)
+-- 
+2.51.1
+
