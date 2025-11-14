@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77801CE7B13
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 14:25:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFCDDCE7B13
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 14:25:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13B6283F54;
-	Fri, 14 Nov 2025 15:25:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5DB6F8410D;
+	Fri, 14 Nov 2025 15:25:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UTodRdv2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dcDpQh5+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AA708410B; Fri, 14 Nov 2025 15:25:07 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id A2C9584111; Fri, 14 Nov 2025 15:25:44 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53ED480077
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 15:25:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B245E83F54
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 15:25:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b71397df721so267865766b.1
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:25:05 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-afcb7ae6ed0so310719666b.3
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:25:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763130305; x=1763735105; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763130342; x=1763735142; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=X0ICHYYq29JPCFTciLpg4aOnoaUUunT5qtJO0AkGh38=;
- b=UTodRdv2PjxZJSTy38Z8AZEqPYcl8AB3qxZ6nDke5lGIBkZM1BblzCtwuRoy8XdKOz
- g5UB9tp6dbw4psrqVJyye7uaoRXIa//b7Iw0DTnRf4XtsRL4cs01G+5Kn/Egka1K8qvJ
- Px/DYsKXKX47XDYnZpkstIR1BJcBiwK9Wky1U=
+ bh=ZB9uYHa6o9GFIJ/G3FWmQ6cEH+zHfVaXqwczCxfTZVA=;
+ b=dcDpQh5+gGwMVTIBjtkDHaxB+uzEQa4dYnA3nkmYta9ehltdQ3+32qdAdkw625tWb0
+ DdwbUmgKEinqgZEeCR2bYTUisrlpSjc3my1a4Sl+2yySlboDFuxQ94xskdd4Oun39qqV
+ HL0xcQW6AhG14pdVBzdzMgogQR5JjMP9YuW/8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763130305; x=1763735105;
+ d=1e100.net; s=20230601; t=1763130342; x=1763735142;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X0ICHYYq29JPCFTciLpg4aOnoaUUunT5qtJO0AkGh38=;
- b=NLTraVZbxUyxKIy4IAvocvTA91CfzSr0HYsBEY8ykZ7HpPuTlPTqrDctB1YoZArJw/
- 0QtVA1AvqiIBgjTRONmrAhBylwPJ/sCdOVTWpiqInckdJsuWwu5D+vomV5o+ZT2vhRaC
- kzz7rXrc32reHYShKqWqZxNF2z/mB0jpYupoDALcEuJesKsVkqfDa29hn6UExlwjyTYd
- 5DAet9ghaBEybkygz56XybZRcons8vmew56uGRmmActd84nC1OEAe5Gvs2vGdMARJWom
- llHUAZORSMixWJQc1rPiIPda49XsBE3ts2Ag9IpcLBUw4bK8L/n0lQlkI18OJ7582i1z
- J8Lg==
+ bh=ZB9uYHa6o9GFIJ/G3FWmQ6cEH+zHfVaXqwczCxfTZVA=;
+ b=SZQE5sDcHiKtEi7uk+TMoPorfjtPga/yOgr/igxsUVGwFIrxAI8AwFm1BThsoBSbF+
+ vkAVgufyweNMLLeXzT4z2J0oQHzRctVkQegebLudJeFjxa1dNZmyijLCofjUt7dNm/dV
+ jMe8Qn2ox8MsjEj/Icsn/zXv80l8WhSsSGEIsqGVtEBBybCoPzHse878PSRnckjqgoUB
+ L/FH5O1LeJfZCoxZMU2N9aIALlVN+8GMyJtuX5ep+vejy+lGOj43ZxP693rdU2EfYm9n
+ ssCC/Hj6dlVVIusVpYW1ZpWuGwe7yUdSPrLT3tD4uorVauzVMNRj1yTxnjNlaBLN1CGS
+ nA0w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3TfHOqh8inK8ZsXcT1U3MZbAVWej42fo9umFDjoKi7I7G0EfPlmr25AhMmXRpE+pbHjb1zXQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxav6AbhWsodfKYrlh4ZDISh9+CZQbEYWfS5fXCY78bqlcRgNsB
- gyMpymfn1YYgzB5CKMapNoZTgfMAMFS6zY4T5lRPkLQm4BcIvrViC5I0BegAJouLXJMnX8gj+TD
- 2PzGKXrXgUAJ/51SNIztR6omQDV1wA/BDPp1ZUAPg
-X-Gm-Gg: ASbGnctSvcg17o5sh0K9N7zw7alZDv92LKrT/04ZsD/dwob/vxvHlYHGzYp9jbXspFl
- eOmfshcRcocThIYuPmpelxQyB7+ZLE78izu7heIkxNPmt1cALDUAyC4mAc7RrRINIPtTL6AMXhL
- uiGIQ3fbGO8cZMSLujUiQpMh7LQmhqxyZrDmmHlmamuw1EreZ9a+8Hbfxa0FrZZtXPcaN1IaxsG
- MK7PUxx0uA3nP3g0xizaoXH331xWCQciOM7nAUWvaFw2hfWH4tVKUfYYhUzTPlfUp+Lxg==
-X-Google-Smtp-Source: AGHT+IEcy6Zruz1RrD6IyX7iy+3dG/Rljnu6DXUy23qAPKyIu8rixwk38H5bxZuY2Gs/29+utRHOviqOnmVlFEWIUGs=
-X-Received: by 2002:a17:907:3e03:b0:b73:59b0:34d6 with SMTP id
- a640c23a62f3a-b73678ecc12mr383547466b.33.1763130304778; Fri, 14 Nov 2025
- 06:25:04 -0800 (PST)
+ AJvYcCWCtOlheweLQjNzlru2uiD29RkuJ9+6TqAYdxCdpJNGy/b1xe9SL2eH+D5Q3qnOpBW+HdroXPk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyb3NqBSLJAuSuDGc2ks7bmmaFlPJszvvU+BgBnZNoW486CFLvL
+ tRUxngN9MeU7OUKPM3vgC1Eewh10moRhSy1c3q4+5mhf9sohcT0GB5wFplYbQqRtVHU67s9s6wN
+ mR8/5+QU7PUqGvB4ILFwCRf6Ej0HUqjDpRfNqCSjNICxWF2O+caA=
+X-Gm-Gg: ASbGncv1mY1KTLWjfQNEtdq/Q9A4D69vHdBqQgTFyyYEKL3FH8GireDUptc7WhY18ZU
+ x15v8uAPwnZAchg+YVrPXMlo7blqJZZJsbu/vBzlqfr91nWk8o24NRcQgKoFFjj8mriapRSwotz
+ OREWOCM4zEogvf4W0I/6ZhVKX9oYI6/8euAJP9VYyh5rN5rHq/m+pr8nmTt0NK4pbhiUruPAoNr
+ olNPldvn/ku/sOFpz5JSUqg6F2lxrhKdvNIaCp3jM6tSo51daGqS4vlNih0xNV03Ru5bA==
+X-Google-Smtp-Source: AGHT+IE2ll5jSXiMbbLqql4S50WQqEND2/il+20I1NFThwh/Z+LaJxpI+yq980mafPAkaTxbCsnhemNczVhxYpMJnpY=
+X-Received: by 2002:a17:907:749:b0:b72:3765:eda9 with SMTP id
+ a640c23a62f3a-b736796a3ffmr360201966b.60.1763130341977; Fri, 14 Nov 2025
+ 06:25:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-7-heinrich.schuchardt@canonical.com>
- <CAFLszTiHVqgn5eox3p7CWt0=XjAcYMBjR7F03UqweRftZg5fDg@mail.gmail.com>
- <20251114141943.GV6688@bill-the-cat>
-In-Reply-To: <20251114141943.GV6688@bill-the-cat>
+References: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
+ <CAFLszTjofjQ_zmwJrGZ-sLejQ=x=-8tyqr4SBPYgt3683GVAbQ@mail.gmail.com>
+ <20251113193816.GP6688@bill-the-cat>
+ <CAFLszTjwpoCwCKKvJX5cZMLK480EK-=BWaFd5A6yLMrfsVWC6g@mail.gmail.com>
+ <20251113200527.GQ6688@bill-the-cat>
+ <CAFLszTjydNqmo=6qLv--m4fB07QzWd01XHGY3hxgTEbarJF-VA@mail.gmail.com>
+ <20251113203654.GR6688@bill-the-cat>
+ <385cdc16-cf73-443b-a0a1-440e233d4506@mailbox.org>
+ <CAFLszThc4YC6mKp5sNsiuCFfaMNqMWJjVV27d4UkyLU4rPWY6A@mail.gmail.com>
+ <20251114142359.GX6688@bill-the-cat>
+In-Reply-To: <20251114142359.GX6688@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Nov 2025 07:24:53 -0700
-X-Gm-Features: AWmQ_blEiJywkVWVFYtAXpa6xtWlNNofVjseVVF832IhqjbjRgctlC9kf8B7cbo
-Message-ID: <CAFLszThhPVcKhcbxA77HCwrRcq9H1+p_YvEmir3p6TEkLb1YQA@mail.gmail.com>
-Subject: Re: [PATCH 6/9] test: cmd/fdt: do not use fixed buffer addresses
+Date: Fri, 14 Nov 2025 07:25:30 -0700
+X-Gm-Features: AWmQ_bkbZMR50yivWD0SefvsfFl5EuGUMV9VDtszChyrkzatimFmBzb7UnjVEYI
+Message-ID: <CAFLszTj3Pwzfp+g_rv=AkWVCsdXBuMaB=1OrkgJcGe2gov+D-w@mail.gmail.com>
+Subject: Re: [PATCH 1/2] boot: android: Always use 8-byte aligned DT with
+ libfdt
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Bin Meng <bmeng.cn@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>, 
- Harrison Mutai <harrison.mutai@arm.com>, Peng Fan <peng.fan@nxp.com>, 
- Ben Dooks <ben.dooks@codethink.co.uk>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
+Cc: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ u-boot@lists.denx.de, Aaron Kling <webgeek1234@gmail.com>, 
+ Eddie Kovsky <ekovsky@redhat.com>, George Chan <gchan9527@gmail.com>, 
+ Julien Masson <jmasson@baylibre.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
+ Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,47 +104,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-On Fri, 14 Nov 2025 at 07:19, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 14 Nov 2025 at 07:24, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, Nov 14, 2025 at 05:31:40AM -0700, Simon Glass wrote:
-> > Hi Heinrich,
+> On Fri, Nov 14, 2025 at 05:45:32AM -0700, Simon Glass wrote:
+> > Hi Marek,
 > >
-> > On Sun, 9 Nov 2025 at 03:10, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
+> > On Thu, 13 Nov 2025 at 14:57, Marek Vasut <marek.vasut@mailbox.org> wrote:
 > > >
-> > > The location of memory depends on the board. Do not assume memory at fixed
-> > > memory locations. Use memalign() instead to allocate a buffer.
+> > > On 11/13/25 9:36 PM, Tom Rini wrote:
 > > >
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> [snip]
-> > >         /* bytes */
-> > >         print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, buf, 0x12);
-> > >         ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff  ..\"3DUfw........",
-> > > -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> > > -                          (uintptr_t)buf);
-> > > +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
-> [snip]
-> > This is adding memory allocations to a test for hex dumping.
+> > > Hello everyone,
+> > >
+> > > >>> Which is different from disagreeing with your specific feedback about
+> > > >>> how we get there, to be clear.
+> > > >
+> > > > And again, since your feedback to this patch was "Don't?", I'm saying we
+> > > > need to. But the rest of your feedback was structural on moving towards
+> > > > resolving it and so I assume Marek will respond.
+> > >
+> > > The "blast radius" are these patches, that's all that tripped the tests:
+> > >
+> > >   - boot: android: Always use 8-byte aligned DT with libfdt
+> > >   - test/py: android: Point fdt command to aligned addresses
+> > >   - test/py: Use aligned address for overlays in 'extension' test
+> > >   - sandbox: Fix DT compiler address warnings in sandbox DTs
+> > >   - sandbox: Fix DT compiler pin warnings in sandbox DTs
+> > >   - boot: Assure FDT is always at 8-byte aligned address
+> > >   - arm: qemu: Eliminate fdt_high and initrd_high misuse
+> > >   - efi_loader: Assure fitImage from capsule is used from 8-byte aligned
+> > > address
+> > >   - MIPS: Assure end of U-Boot is at 8-byte aligned offset
+> > >
+> > > Regarding last minute alignment, the problem with this android image
+> > > seems to be in the android image itself, which packs in badly aligned
+> > > FDT. We therefore have to copy it out and realign.
 > >
-> > It would be better and simpler to use a fixed address and make this a
-> > sandbox-only test. I struggle to see the value of running these sorts
-> > of tests under QEMU?
+> > My request is to implement these checks as part of the boot flow
+> > (bootm, etc.) rather than adding memory allocations in leaf function.
+> > We already support copying the FDT to a different address so we can
+> > expand it and add things. Can we make use of that code?
 >
-> Removing context to highlight value of running tests on multiple
-> platforms.
+> There are likely some cases where we should do the check-and-move
+> elsewhere, but others such as MIPS where we shouldn't get it wrong to
+> start with. I believe we've had a few other patches that also fix the
+> other cases where we don't ensure correct alignment to start with, and
+> really must.
 
-$ ./tools/qconfig.py -f ~PHYS_64BIT -l |grep sandbox
-sandbox
-sandbox_flattree
-sandbox_nocmdline
-sandbox_noinst
-sandbox_spl
-sandbox_vpl
-$ ./tools/qconfig.py -f PHYS_64BIT -l |grep sandbox
-sandbox64
-sandbox64_lwip
+I'm going to leave this to you and Marek.
 
 Regards,
 Simon
