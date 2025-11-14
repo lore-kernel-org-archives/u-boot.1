@@ -4,89 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3E34CE8D5F
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 17:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E954CE8D68
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 17:51:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6592C842A1;
-	Fri, 14 Nov 2025 18:35:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AA916842A1;
+	Fri, 14 Nov 2025 18:51:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KrI5Uh6k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YM9ikfNP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23833842CE; Fri, 14 Nov 2025 18:35:41 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 0BBFD83EAC; Fri, 14 Nov 2025 05:41:59 +0100 (CET)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFE3B8429E
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 18:35:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C88E783E86
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 05:41:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-30cce892b7dso1089806fac.1
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 09:35:38 -0800 (PST)
+ spf=pass smtp.mailfrom=geraldogabriel@gmail.com
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-ba2450aba80so915370a12.1
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 20:41:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763141738; x=1763746538; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1763095315; x=1763700115; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kE7/5OKejgq6wglgvvKCzN0JDsihW1wcU0ysLXTpIII=;
- b=KrI5Uh6kStUtPbp/BIGC8ohazSiWvL44QHRMLzEaHcWxvoArxqMBnKw44bK8wIIXBa
- 6uqmfM3DxeW4IMITee2RPo4ommfW3pNXs/opFKg/EQzHGKPkH/ztCecl1OXVsTksYb/T
- 7E0kUQhhYXNubH2Tof9bhY/9ljT1PxivJ9neM=
+ bh=jYITvpqCiW1DtaQqw+zoQjW9fGy8Lts1f9UcjxkD50s=;
+ b=YM9ikfNPt1yPCVy8ZCN+RHY9yxyMRsbUdvP4vvwgLCLDF8ixbFr9/tKGLL10pvvEZg
+ bMw6MGXrEsfZZ2bxkYWNBpzJP+FrkUv7f1/AIZK3yEcP5vZ2PyNt3W4CZRiOz8D2G1LW
+ ZBX50dCiQ1mSM1ut26v0dMu4yEdKS6KudhdckgO4ZnHcGINReDAgB1efQ4nHCinGO9bt
+ mqsbzXfamwLY9uPAT9XeJtaKvTF2vSLijAh00/NNqL88N8bifh7S8hjVT0VZNRTxZlB7
+ uQjvbDjmg4hm0Oox4Tgf5QH1lA4kdqSuXi/Iw9aLcgTDJli2jPkE3P0c5IkzB21BllNz
+ zIhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763141738; x=1763746538;
+ d=1e100.net; s=20230601; t=1763095315; x=1763700115;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kE7/5OKejgq6wglgvvKCzN0JDsihW1wcU0ysLXTpIII=;
- b=kCD39wkcYx6vljizZPBMNvSH8jz4kq3OL0ps9srVhZCj+ojJzz4xf2UA9LkaNx3iM9
- vcGnLizDORkPyEShjj16c29gvhn1MaBFemuK2rVW0Uk3quHISDaiJdbXq5NEUo0PIsQl
- KNBveUjRaR8w9XRIRbXrnJJFdyP8jBjybbimsqFaN8Wx7J93dFXurb4PbI1ZeKFpYJ/i
- 2Zlg7jEmla62WK2h+jMeBScx8X9G6I754nr/UChQhmRUpfJY0+ljGn6jh3D8uyLNVFYI
- eNLjLQ+F8AiqE6v0Xsvgth5isj6+7118UVMihTkMAZwD3Q3CdhDLrUNuSwE0WV1wTOqf
- dN/A==
+ bh=jYITvpqCiW1DtaQqw+zoQjW9fGy8Lts1f9UcjxkD50s=;
+ b=kbX6dzgcDpkm/Ms91uGbaLVsLvhBt5r+d602Gb2XcIGHt8x6jhshzd1jbxt8adA1vc
+ GxFggGiu7Takj9kD/ER8XZ2XT4t/b+YPD1qiisZxKXXFMNVoF/hHbDLRvpnte7UCVbbq
+ zp5GCOM87IG+c53ULVCdA3BgqWGJYfciIIQFFqXINCnYrct6Xs5Owhof/MKDGrUC1DeX
+ DIW0TOQSBY5Jye9Tek98HlexelXzzt73ef6c3jh7Y7U52KNiSy0sb1TBJarWTORpvaDb
+ 0R6dD80HOOBNcLM0bqPuV69LIVZo9RbE37MXtuEBX247Gs8OIhaxEQ6I/aPIcHY/2LT5
+ ssHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU12km222DFlmUeahGYes2d58VQcFxmqW8gi/4U8np66s+52zVv6MkUOV3jHnrv11xm7/ZzSk0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzj/nBVBklg09jU9FYAYK6afaNCemxpxVpuSQv3IGGwBMzPRt96
- G8/NOWxy/gmLNmQ4KoREAXyo3c98Gn6aY1R6R/xe0CCZDkmY3P7Yeq209XB3DeIlGmo=
-X-Gm-Gg: ASbGncvhbwAEA6k8/4Vxo3tuIQThq8MOTLVX6+gZXZql8ZF4ma7A3yIqgbzezDMr6lT
- 2inhwz7Dy/0r8N2mNVcE3r676bt6yBc47J40pYvet5OHntZct6Z2h7Olc9s/T09XjihuO6fEq/H
- FmebfjwGnxdnA8iIr89Y18/j3uSmxU0FqwOO0ESiSjqv3Kx1/qq9m+PcE2rMZDVUI1igEnKyBxK
- R20cVUxaTOGPctLi+GQZIszxyEaN8qhn6zOm0Dj0zROJr6FycxcTd9ET5niNtvXaUPPimYbNifL
- NCAc/inIH+o5RbKabG+UljsTXrNpQHBGsWuSQa6luRcYCROVP3nWnsVMZGmv3cQdLdxRh1CUV7v
- q9pw1s8WrT0HfQZ6iyXM+GPj55mlncvbUZnyVDUxyBtgjq6VYdj+4qQm9zVTKAQfpwSCZ9VCVHR
- 8ZRUR9d8O/dTuihEuxdZuRNt+OYiruaK1dM1zqSfM=
-X-Google-Smtp-Source: AGHT+IEiHphE6bG5+9kCvNp6CBa2jQ+TIJsy1kqhpMtgDzKnUdjrranxXRgZXnV7nlequ6dpL+3cxQ==
-X-Received: by 2002:a05:6870:a693:b0:331:cbf1:e04b with SMTP id
- 586e51a60fabf-3e86918450fmr2079286fac.46.1763141737716; 
- Fri, 14 Nov 2025 09:35:37 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e851ffc62dsm3050460fac.5.2025.11.14.09.35.36
+ AJvYcCWwQcbkTO1zKcWNeJsnZQeh3rjFwUaUo1e/gLiDZzI1CMdU0l8OlZt+zJ2LNdcQGtuDOTXupiM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzikP2Xzo3RGMNPJ74vBrvnL6cnjlxCQuTo62ffUc8jzoHEkU92
+ jVCyVW2S6/NBFAaONyFXz9A+vTdnqhIdWeoOJ1+T67qhypIiRA5T0De4
+X-Gm-Gg: ASbGncusxP0COo+uthDe8OYGUrER/l5IeFb90GimQwZxzPobH37suSDoF1TMZx8zyYY
+ NUqSqPh7Xek+Y1+knUvZcbxfK7OqD39mxW6Kd398hunK1aWyJ43Mr+jZCz6GerMato1hs+V1vau
+ DQNamk7r41hRnso2QipCATD4P/78uX0u9oK9lw1Z0M6VZGISr22yPpgSprhEK4mCa/UFopjIcq1
+ Xg6HUm819ULfizH43W5pl4IXyj8Xvwb4kiOIDgSbGeraoJLX3MGw0pZW/JcY66GrxttqDWprL8p
+ GPrxZvs7xggTh4tBal7NSjq8log17BYUipv4wBZelgHAvm8DSPHzMc3EUs3vrKNirmyUxYhx5cP
+ gICKk44+HtnYuApehJ2R40G95+DRMlth+4NBp9dpVgb8eJwTJ5eRJkG7HLGfDhYo+A9kUzoMfWv
+ D0ZlAv2rPg
+X-Google-Smtp-Source: AGHT+IEYHLOamGM5/rhDQ8pIrx2agy7W4DgZWwY06i1uk7cuxizAxZJhIaEBAx3eQH7DJBOHIqA7NQ==
+X-Received: by 2002:a05:7022:5f09:b0:119:e56b:989c with SMTP id
+ a92af1059eb24-11b40f82b10mr512024c88.3.1763095314813; 
+ Thu, 13 Nov 2025 20:41:54 -0800 (PST)
+Received: from geday ([2804:7f2:8082:36cd::1])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-11b060885cdsm5676123c88.6.2025.11.13.20.41.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 09:35:37 -0800 (PST)
-Date: Fri, 14 Nov 2025 11:35:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>
-Cc: Sune Brian <briansune@gmail.com>, Fabio Estevam <festevam@gmail.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v4] Altera SoCFpga Boot Stall Fix
-Message-ID: <20251114173535.GD6688@bill-the-cat>
-References: <20251020133455.1870-1-briansune@gmail.com>
- <adaf5081-3b9b-4cdc-b7d3-ec9756f60ead@altera.com>
- <CAN7C2SDVD+bpF=CGDPXDqLE3U9cMm2YqxnwXScvxiFh3OypP=A@mail.gmail.com>
- <009323c1-98b3-490a-912a-35249efbfd9d@altera.com>
- <CAN7C2SBU1xozPwfRG_tdcqos4jDZRm-qzXR5MEVTG7jXebp_7Q@mail.gmail.com>
+ Thu, 13 Nov 2025 20:41:53 -0800 (PST)
+Date: Fri, 14 Nov 2025 01:41:46 -0300
+From: Geraldo Nascimento <geraldogabriel@gmail.com>
+To: =?utf-8?B?5byg54Oo?= <ye.zhang@rock-chips.com>
+Cc: Shawn Lin <shawn.lin@rock-chips.com>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Heiko Stuebner <heiko@sntech.de>, linux-pci <linux-pci@vger.kernel.org>,
+ linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ devicetree <devicetree@vger.kernel.org>,
+ krzk+dt <krzk+dt@kernel.org>, conor+dt <conor+dt@kernel.org>,
+ Johan Jonker <jbx6244@gmail.com>,
+ linux-rockchip <linux-rockchip@lists.infradead.org>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] arm64: dts: rockchip: align bindings to PCIe spec
+Message-ID: <aRazCssWVdAOmy7D@geday>
+References: <4b5ffcccfef2a61838aa563521672a171acb27b2.1762321976.git.geraldogabriel@gmail.com>
+ <ba120577-42da-424d-8102-9d085c1494c8@rock-chips.com>
+ <aQsIXcQzeYop6a0B@geday>
+ <67b605b0-7046-448a-bc9b-d3ac56333809@rock-chips.com>
+ <aQ1c7ZDycxiOIy8Y@geday>
+ <d9e257bd-806c-48b4-bb22-f1342e9fc15a@rock-chips.com>
+ <aRLEbfsmXnGwyigS@geday>
+ <AGsAmwCFJj0ZQ4vKzrqC84rs.3.1762847224180.Hmail.ye.zhang@rock-chips.com>
+ <aRQ_R90S8T82th45@geday> <aRUvr0UggTYkkCZ_@geday>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SWTJUfNaMQWbqzXC"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAN7C2SBU1xozPwfRG_tdcqos4jDZRm-qzXR5MEVTG7jXebp_7Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <aRUvr0UggTYkkCZ_@geday>
+X-Mailman-Approved-At: Fri, 14 Nov 2025 18:51:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,57 +122,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Nov 12, 2025 at 10:09:15PM -0300, Geraldo Nascimento wrote:
+> Hi Ye, Shawn,
+> 
+> Here's more contained workaround without resorting to clearing DDR to
+> INPUT for every GPIO:
+> 
+> diff --git a/drivers/pci/controller/pcie-rockchip-host.c b/drivers/pci/controller/pcie-rockchip-host.c
+> index ee1822ca01db..1d89131ec6ac 100644
+> --- a/drivers/pci/controller/pcie-rockchip-host.c
+> +++ b/drivers/pci/controller/pcie-rockchip-host.c
+> @@ -315,7 +315,8 @@ static int rockchip_pcie_host_init_port(struct rockchip_pcie *rockchip)
+>  			    PCIE_CLIENT_CONFIG);
+>  
+>  	msleep(PCIE_T_PVPERL_MS);
+> -	gpiod_set_value_cansleep(rockchip->perst_gpio, 1);
+> +	gpiod_direction_input(rockchip->perst_gpio);
+> +	gpiod_direction_output(rockchip->perst_gpio, 1);
+>  
+>  	msleep(PCIE_RESET_CONFIG_WAIT_MS);
+>  
+> This results in working PCIe for me, pass initial link training.
 
---SWTJUfNaMQWbqzXC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Sorry for the inconvenience of more mail, but I'm providing as much
+detail as I can.
 
-On Fri, Nov 14, 2025 at 11:35:21PM +0800, Sune Brian wrote:
-> > like Cyclone V, and Arria 10. Our initial assumption was that users
-> > would primarily use the Altera official release repo, where we have been
-> > gradually migrating platform devices to the driver model stage by stage,
-> > including clk driver used in MMC driver.
->=20
-> Tom, with all respect. I don't see those previous patches really improved
-> nor introduced a proper build environment for supported SoCFPGA series.
->=20
-> Assumption is not considered as a proper way nor correct way to patch thi=
-ngs.
-> Simply removing critical code and breaking other SoCFPGA families is comp=
-letely
-> unacceptable.
->=20
-> We are not talking about code improvement nor cleanup.
-> What the previous patch actually did is simply remove old generation SoCF=
-PGA
-> codes and w/o coherently coexist old and new generations.
+This hack has been confirmed to work in U-boot also.
 
-Something like this recently happened on the i.MX side of things, and it
-was fixed because once the rest of the community found out, it was made
-clear breaking / removing older used devices is not allowed.
+diff --git a/drivers/pci/pcie_rockchip.c b/drivers/pci/pcie_rockchip.c
+index 19f9e58a640..5702b607ee6 100644
+--- a/drivers/pci/pcie_rockchip.c
++++ b/drivers/pci/pcie_rockchip.c
+@@ -329,8 +329,10 @@ static int rockchip_pcie_init_port(struct udevice *dev)
+ 	writel(PCIE_CLIENT_LINK_TRAIN_ENABLE,
+ 	       priv->apb_base + PCIE_CLIENT_CONFIG);
+ 
+-	if (dm_gpio_is_valid(&priv->ep_gpio))
+-		dm_gpio_set_value(&priv->ep_gpio, 1);
++	if (dm_gpio_is_valid(&priv->ep_gpio)) {
++		dm_gpio_set_dir_flags(&priv->ep_gpio, (priv->ep_gpio.flags & ~GPIOD_IS_OUT) | GPIOD_IS_IN);
++		dm_gpio_set_dir_flags(&priv->ep_gpio, (priv->ep_gpio.flags & ~GPIOD_IS_IN) | GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
++	}
+ 
+ 	ret = readl_poll_sleep_timeout
+ 			(priv->apb_base + PCIE_CLIENT_BASIC_STATUS1,
 
-So, Tien, Altera in general, please do whatever is needed to restore
-functionality to older devices that are still quite clearly being used
-by both the community and your own customers. If more CI of older
-targets is needed, get that going. Breaking older devices to support
-newer devices is not appropriate.
+So my report suggests this is not specific to Linux and because same
+workaround works in U-boot simplified driver model I suggest you check
+from your side.
 
->=20
-> Brian
+Previously PCIe link training timeout, not working. Now I'm very happy
+with working PCIe in Linux and U-boot.
 
---=20
-Tom
-
---SWTJUfNaMQWbqzXC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRdoZAAKCRAr4qD1Cr/k
-CuaLAP92fiogn0U6J0RXx4IcwI2LBYdAVUulSEwXJMJL82lQeAEAj3M5PyntQTsJ
-PnkgduAekqiA+8X821PCe4bhotLInQs=
-=BA+L
------END PGP SIGNATURE-----
-
---SWTJUfNaMQWbqzXC--
+Thanks,
+Geraldo Nascimento
