@@ -4,134 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D443CDE006
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 06:38:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BFD9CDE014
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 06:40:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A21983FF5;
-	Fri, 14 Nov 2025 07:38:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A04E783FF4;
+	Fri, 14 Nov 2025 07:40:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="lJsU/uGz";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Fb+JHarn";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="OIAU3VjI";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ja/OgGqR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DA2983EC8; Fri, 14 Nov 2025 07:38:28 +0100 (CET)
+ id C780E839B7; Fri, 14 Nov 2025 07:40:52 +0100 (CET)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B7B783FEC
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:38:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACAC882A9E
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:40:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5ADManUf1484894
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:38:22 GMT
+ 5AE41H392263210
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:40:49 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=gCI+lZGG2t+
- pnINj15BeBNm/VaY+psicjD4UqrzIYws=; b=lJsU/uGziGiPv4tS4bLhSOYDAdw
- 6SHaMROwqZ3Gmwsev6YkWnV29ReUaofLI5EEunkwTsowh1kMcE1FtrNlyOV+7Ig0
- Of7MKw9pn9ispf+Tm+8+9y/78ou5OcdTRZ5IzTzogkKJeCE5mBqBye8Bbdq8UcdX
- cJZuzjz5sD3kA8btD77jyudROM/Is+PdiQkm7DTT+1Pudpld2xjc915DvCAvM3xQ
- YGf49kdFLzHAqjm4/ITjHdJp3NR7H6RIxQcGUZ/b2yK3cMdq/EXExTFzLwBAFWqt
- mXQuZ9stsjQKhViG7j+3iIkm5ZRcqJkubTzqP60IjdQufhvIT0YMV5P+r3A==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4adr9ch4pg-1
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=wKFciuafTEbrwV4XccjTDtl77QerWWgMotb
+ WY4HtSjQ=; b=OIAU3VjIw6sBj8QJqGfYT9sOGVi2FoupaKwuffSmCTkoAA/Xh92
+ j4WfsNnyzV93tvOpaCb7xZfIfIbtoWxfCSA86ohlGr1PFRUHMvk0vkmoZRQIDNyM
+ zbTMuVb0KJOcixTl0Q+BRsInKLIUy8SKwux5T3iDTOrTJ+tLT7hPq6XuKyD8TNIV
+ otyn9gHKSAU82zqGf853fCpJ76Gx8y3OMRnKXe0N+67FkLOEMxnzD2okBV+Yiyh4
+ D6yUfEORvaeeWVL8CVg4xsEebMK7FH5qCBpp3Jw8VmoUuYyOqFAh33McB6kNKVFO
+ Q9FU5pgDSGQGtWpWVJc8XpgjTnZ6Qy6GIhQ==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4adw1j0bxc-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:38:22 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-3418ad76023so4114358a91.0
- for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 22:38:22 -0800 (PST)
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 06:40:48 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-295952a4dd6so34166075ad.1
+ for <u-boot@lists.denx.de>; Thu, 13 Nov 2025 22:40:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1763102302; x=1763707102; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=gCI+lZGG2t+pnINj15BeBNm/VaY+psicjD4UqrzIYws=;
- b=Fb+JHarn4d44YSagAaH96ZACKm+VXIIvDy/w3V7oWKygPUGrWCy9Z08sBYzjEMzS/s
- LbxVWDJXKMn/M8a//sOTuKznSu38g769AgTXigX0E9uPsiju1WMXF8itpAjQ1iC9aoIp
- rJmcluTkvpgDHhJIVHiZzG+BANfAij885z8I1MUpPOerKh8az4m5ZtB5tMoFQltR+XHR
- RZOzcN+S3bQblvXNA+fqMyoHtP10sagKDt3XuSe7GDCTrFzJ6cDSuZxvmttyApNFRpnw
- C+fsSxDUO5bKhK45aOp+c7A2gf8cIQfyyfnJCTA7CrZ6xrPnx1+MfrdjpQgMmvCgqGIi
- GT8A==
+ d=oss.qualcomm.com; s=google; t=1763102448; x=1763707248; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wKFciuafTEbrwV4XccjTDtl77QerWWgMotbWY4HtSjQ=;
+ b=Ja/OgGqRgcn13iqugSI96PwyPWmp6qZyE7uv8nVUitkml2GLSRk+r67vGyB3Kk2Q36
+ PJWVjkZZnyfQ7rKsjVuOq1wD9C+dRbGxZbPv5ggvPO4LPh3KUwBgTS0FTiFVIhMucwaj
+ SvMAA8DBZud0i7Blcdpxv9zA1Wq5aw7HVdTbbapV64wnOnE1lrMrBquTirEaSE9AU4wu
+ LwS43NBglcSde9ZCwL8wW7q8D3Zaw+3ZPAs2ZktJWUt/MTBF1ec4nRpeyh3sTGl5oojR
+ g1bLXcQndGL7m4JK25NaffHZsC2atq13MjqKqUlJhN+B0xGZSI3+synioFsY2libkpo8
+ qzgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763102302; x=1763707102;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=gCI+lZGG2t+pnINj15BeBNm/VaY+psicjD4UqrzIYws=;
- b=EF9gUgSYBWiSY3DKD1Rw6DE16MWDva5dAanQO2JmuGjLsIM0byEKmHsb3D52S0JW8H
- 5ljyY3l8lFwHAL5CK0eioORl1/4OfjVWth4vURhTrYX+4Sw0CGifzp9PWQ2mg0FQHhHP
- uuGxXIvJzg5YWo2BhlIH3NRn4eHDBV0fXm0/6msxaEYIskuX1f1SvjiXwajmZnPNGgte
- GTqQf4mzlSsw7Vvt0TgadK2zeWcIkD4Ese83MtMpuuvObhryqQ2CtmqRDEUlOAlZNsSB
- RdaHnOhGxkG62Y53Pc/4aqBObPSqam1Nxw3ClhBLsv9tBUk+w7VONJpgUn3+dcIwKXlP
- jGmw==
+ d=1e100.net; s=20230601; t=1763102448; x=1763707248;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wKFciuafTEbrwV4XccjTDtl77QerWWgMotbWY4HtSjQ=;
+ b=OXdulnwYFx/b/4qlUawKRXpktuJtBY9V/8gb43dOdbYrroFRiQJ8cVwMmUV51xpnS1
+ Wv12lfr85gtenVHEgVt0Y26YaBM7yN2l/csK8p9hqgAkpteICf00yclYUyNljICZHszK
+ sFJoscFrtV3llpA+lN+oOuG4OFRAxLXFOHe32xYXXzmLXRHb2rusWYkP2IBqIhDMNWEu
+ hDlqsxJrqNWr2PP19maMRioBh/avAK1rXx2OXom1/JEqvZIn082kBspHo3MFuP6n+o2I
+ S6oK9vgTormVW5Pp08WyAfnVa5rvsX5nIFkHTbGNwDNXydlG6xnXJzdrNBktlb/RIbld
+ YL2A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVItP2uU+20lLeewPFA1/YruJQPIvpO5TtshWh4arbgph7493Ol2duiNBIGY/eb+c1SbMK9580=@lists.denx.de
-X-Gm-Message-State: AOJu0YwpF6gdaRSr4L7BDp5PMebxp/g/sZeNxZRgBUsRkuhDi6LE0mWd
- nN+lo8HWxXjXXFbbzRPS0mkX3skgwB+D4JK0P5Sit6xxwp6hpHtxS/h2CSVWY9an1LJ22707PdR
- sYMD6wC7uw9ZQuZXyffU7XAxdewIvDgAcajUKiHTcCGD1mJ/5nxt4Yle/
-X-Gm-Gg: ASbGncvGq1dU+s80AQdILNZlsCumw6Lirw0ZFH5cqg4MhhAyTk6hPhwV16peT74IsOz
- trzlWiHbHuDS4Fbnv6U+kX4l/V0VEX//H3ywmG3PmCI2O6tvK/VYx2lsdvg46g2QF3JteBHJTTw
- 8m8OnIeCN96AIkBJk6/MM2jCDuCKZpHZzrl925Vf3ml+2Xx0Ms7vaFvZdwIGyss5C1kbJEUuvU5
- m26wlBY3lSGGRZTTAdUuFt1VXsZkw8gKqkG6EiGYl9S76rCu5J1mST4dbM8N1SmLzV4bbdv2PUK
- CF2enQKS69hKze3hTtRakgcJ6VnwY5bYhjqX2BID6JJE7aWV7aBhxNLf76u+rkuiztp8aLO9g+m
- kE+tAtFN9pWeEcPJoFrG0n4JSbsAoBnJzEOkye8tXsOAFGSa71WAsl/D0aHg13T8CoHyFq6AkML
- f+oCF2Ob0FHIe1l+N4WNgfNY/f77Z8BTVrR/gh/w==
-X-Received: by 2002:a17:90b:2e0b:b0:343:747e:2cac with SMTP id
- 98e67ed59e1d1-343fa761482mr2288788a91.31.1763102301947; 
- Thu, 13 Nov 2025 22:38:21 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHqEPEtD6PUechEo5SpnU3GnJzUtWgAJ1wVBO957zaMkcEA6kEICo91XNyw3cnxUghMR+5Sdg==
-X-Received: by 2002:a17:90b:2e0b:b0:343:747e:2cac with SMTP id
- 98e67ed59e1d1-343fa761482mr2288750a91.31.1763102301503; 
- Thu, 13 Nov 2025 22:38:21 -0800 (PST)
+ AJvYcCXrb4He51PVjklxAvSK4LfjmhCHx6hsx3f0IA7jps0O2z0nDUssxs8gPMvzWKF8qYUl9Rrzr4U=@lists.denx.de
+X-Gm-Message-State: AOJu0YxoouZhnUuzeSb3yuCvGk3/aDV8o+PeYYwQgTSSDD31OwNUf7nH
+ IXrNk5ZyTHTbJzUMWYQZrKyjKs4DZSoCIs3Xd+EKdTZ8P/FFMLE2kxue7uL7xoaD2m1rSK43H6I
+ vHu7FcIrO8wWmSIympFpIei2KFhryQwhMZPeUDjNNyEi0ykBrTm2wHTWx
+X-Gm-Gg: ASbGnctdno8+HUQXo2wTl0WsOaWg8UM+UwgC7yoGFTy+EBPxPPryNG9XvemFoqC8s38
+ qyCWBovj6TmAG8+M8QT1MrBAVf4GPKt01TqGM8zq4CAfJBAlKyJqo7LfGAxXKsR2+Ri1oZw4CSI
+ 80W3p5KHVy42w0WryLxQI2BXixjPRrYIUKTC4PsKuZjQfL8koOQ/27u6KPXqLlSfQ6qa2MLNsjz
+ I1Jk9p12yKJaNDUlrtVad8bV8Y0lqrsgqUsnWipNhudiukhQ4C62BW61RTmCKgXZyTu7UF3pzQH
+ XmaiiorEjXSs4fqi+0DWa3ruBMBA4jxREv1JSME7Fq3X+mpKIfgme6GtXT2CtBagU7+EpwreffS
+ IZnIppURKgDjRmcuPM+VqTHUZC0MAvwk8U1gZawePKNdLnRLyAXKIqkQt9nsmgaK8CbYH4UutBU
+ jXuqEgcxj8NmyQxTp4GgLu724l6flH82uHXseG2w==
+X-Received: by 2002:a17:902:e80a:b0:266:57f7:25f5 with SMTP id
+ d9443c01a7336-2985a4ccc61mr76652615ad.7.1763102448231; 
+ Thu, 13 Nov 2025 22:40:48 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFdtx9UHQTWh56BPxvRUDb9rZ00uMbk7WOjnK8/EG7PnGBgeVv8LWxz3kvymBKJoITSkTe+Ew==
+X-Received: by 2002:a17:902:e80a:b0:266:57f7:25f5 with SMTP id
+ d9443c01a7336-2985a4ccc61mr76652525ad.7.1763102447711; 
+ Thu, 13 Nov 2025 22:40:47 -0800 (PST)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-343eac7fc34sm2706559a91.1.2025.11.13.22.38.18
+ d9443c01a7336-2985c2ccbb7sm44104315ad.107.2025.11.13.22.40.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Nov 2025 22:38:21 -0800 (PST)
+ Thu, 13 Nov 2025 22:40:47 -0800 (PST)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-To: trini@konsulko.com, aswin.murugan@oss.qualcomm.com, lukma@denx.de,
- seanga2@gmail.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, sumit.garg@kernel.org,
- balaji.selvanathan@oss.qualcomm.com, alexeymin@postmarketos.org,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v1 3/3] phy: qcom: qusb2: Add QCS615 QUSB2 PHY support
-Date: Fri, 14 Nov 2025 12:08:04 +0530
-Message-Id: <20251114063804.3835132-4-balaji.selvanathan@oss.qualcomm.com>
+To: trini@konsulko.com, casey.connolly@linaro.org,
+ balaji.selvanathan@oss.qualcomm.com, u-boot@lists.denx.de
+Subject: [PATCH v1] dts: qcs6490-rb3gen2: Switch USB controller to peripheral
+ mode
+Date: Fri, 14 Nov 2025 12:10:42 +0530
+Message-Id: <20251114064042.3835312-1-balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20251114063804.3835132-1-balaji.selvanathan@oss.qualcomm.com>
-References: <20251114063804.3835132-1-balaji.selvanathan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: TbL058Yi3rHeJX-Ks6O8A9jCFmRLjgCD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE0MDA1MCBTYWx0ZWRfX3B95c4/vvzbd
- TMOEQ/5+wsKokfKr1hea33Fr1dEmHkY6geqwf0LJNpdUKkuGllC0IuSOJ98XwNWemf3XvFNqRLj
- e1Kl/E1GRIEyhWb8fOrsBoyY+uzK8RIbI0QFEWgY+Lkkeq8VzaLOdcsTqr8EFwDHZuoh8ISm7/4
- dCfA/h1b2g97ryCvfz6weoFgVMZIWCeOKM90jNb2NC5yXU1PwJnDDySHFQ2JGMD/vC+/oEh0h2J
- yAwojWxRkCo8c+qgfzb/ul/t2g7P+djioBUMMJW5BsgtdIUrzzDPeqDO3cCs+nmNFM0eTPGij1N
- VMPzMFVIODftyws0hodE6h6QCWy1v8EqkoC0JOYMDWb6cLqk/X/3nXMNd35AnG9V/5tPjQr/34Y
- awyTtMl5odXwDzqM/fOcqVLnQF/gWQ==
-X-Authority-Analysis: v=2.4 cv=MNdtWcZl c=1 sm=1 tr=0 ts=6916ce5e cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Authority-Analysis: v=2.4 cv=Jv38bc4C c=1 sm=1 tr=0 ts=6916cef0 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=32XPU3MRu1Wd0bsjkHcA:9
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: TbL058Yi3rHeJX-Ks6O8A9jCFmRLjgCD
+ a=EUspDBNiAAAA:8 a=dDU778MKnIizena4DrUA:9 a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE0MDA1MCBTYWx0ZWRfXxtxg7vm60g2N
+ 9AZDhh7ANzaOXOQ7M01FsqQyU0ptHzEIAiUOZgT5CluQyrwbXAE+nKKSCF5/gGTTrl9KxK7ySgq
+ SksOGhDFHZmx3VJvXbEUO0J1kfd9CDrSCNizO1VRisLCB8JvioWC3CEk3EB+ZhHQX9m5geU0WaN
+ O3QDhf6Hy6ktRbdK/ioh0/rq6oGuILSVn73hIc53uDQwtp3rZTZ1b7/AlK9D7zQwaig3BNKao7J
+ abA/7maJPKA/8d3QqvBv3+EVToyeuSrDdg4XtB52YvWSSd95bUyVVhLli6lu3isin4kyhPKDy/w
+ oGEw7P/jCgob6FR5j0yKx6y/i6RtK3DtYwlE9MJwZA9IrIq1/tPgOVOQ1ReH6cZBfNa8Qwunhs1
+ PNg+aERcMfBkSJ0JKuIq8pnp+gFdlQ==
+X-Proofpoint-ORIG-GUID: DlF-dHQ_GHdVMh8Wo-0yetgIVCIdCXVW
+X-Proofpoint-GUID: DlF-dHQ_GHdVMh8Wo-0yetgIVCIdCXVW
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-11-14_01,2025-11-13_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 priorityscore=1501 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 adultscore=0 malwarescore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511140050
+ bulkscore=0 malwarescore=0 adultscore=0 phishscore=0 impostorscore=0
+ suspectscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ definitions=main-2511140050
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,89 +144,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for QCS615 QUSB2 PHY by introducing platform-specific
-initialization table and register layout. The implementation reuses
-the IPQ6018 register layout and defines QCS615-specific tuning
-parameters for proper USB PHY operation.
-
-This change is based on the upstream Linux kernel implementation:
-https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/phy/qualcomm/phy-qcom-qusb2.c?id=3d25d46a255a83f94d7d4d4216f38aafc8e116b0
+Change USB controller dr_mode from "host" to "peripheral" to enable
+fastboot support on the QCS6490 RB3Gen2 board.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
- drivers/phy/qcom/phy-qcom-qusb2.c | 38 +++++++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+ arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
-index d98f6108e69..a5d724eebd4 100644
---- a/drivers/phy/qcom/phy-qcom-qusb2.c
-+++ b/drivers/phy/qcom/phy-qcom-qusb2.c
-@@ -176,6 +176,19 @@ static const unsigned int sm6115_regs_layout[] = {
- 	[QUSB2PHY_PORT_POWERDOWN] = 0xb4, [QUSB2PHY_INTR_CTRL] = 0xbc,
+diff --git a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
+index fbe72595f5a..50674b692ed 100644
+--- a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
++++ b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
+@@ -18,7 +18,7 @@
  };
  
-+static const unsigned int ipq6018_regs_layout[] = {
-+	[QUSB2PHY_PLL_STATUS] = 0x38,
-+	[QUSB2PHY_PORT_TUNE1] = 0x80,
-+	[QUSB2PHY_PORT_TUNE2] = 0x84,
-+	[QUSB2PHY_PORT_TUNE3] = 0x88,
-+	[QUSB2PHY_PORT_TUNE4] = 0x8C,
-+	[QUSB2PHY_PORT_TUNE5] = 0x90,
-+	[QUSB2PHY_PORT_TEST1] = 0x98,
-+	[QUSB2PHY_PORT_TEST2] = 0x9C,
-+	[QUSB2PHY_PORT_POWERDOWN] = 0xB4,
-+	[QUSB2PHY_INTR_CTRL] = 0xBC,
-+};
-+
- static const struct qusb2_phy_init_tbl msm8996_init_tbl[] = {
- 	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0xf8),
- 	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0xb3),
-@@ -189,6 +202,19 @@ static const struct qusb2_phy_init_tbl msm8996_init_tbl[] = {
- 	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_PWR_CTRL, 0x00),
+ &usb_1_dwc3 {
+-	dr_mode = "host";
++	dr_mode = "peripheral";
+ 	/delete-property/ usb-role-switch;
  };
  
-+static const struct qusb2_phy_init_tbl qcs615_init_tbl[] = {
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0xc8),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0xb3),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE3, 0x83),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE4, 0xc0),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_TUNE, 0x30),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL1, 0x79),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL2, 0x21),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TEST2, 0x14),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_AUTOPGM_CTL1, 0x9f),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_PWR_CTRL, 0x00),
-+};
-+
- static const struct qusb2_phy_init_tbl qusb2_v2_init_tbl[] = {
- 	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_ANALOG_CONTROLS_TWO, 0x03),
- 	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_CLOCK_INVERTERS, 0x7c),
-@@ -248,6 +274,16 @@ static const struct qusb2_phy_cfg sdm660_phy_cfg = {
- 	.autoresume_en = BIT(3),
- };
- 
-+static const struct qusb2_phy_cfg qcs615_phy_cfg = {
-+	.tbl = qcs615_init_tbl,
-+	.tbl_num = ARRAY_SIZE(qcs615_init_tbl),
-+	.regs = ipq6018_regs_layout,
-+
-+	.disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
-+	.mask_core_ready = PLL_LOCKED,
-+	.autoresume_en = BIT(0),
-+};
-+
- static const struct qusb2_phy_cfg qusb2_v2_phy_cfg = {
- 	.tbl = qusb2_v2_init_tbl,
- 	.tbl_num = ARRAY_SIZE(qusb2_v2_init_tbl),
-@@ -453,6 +489,8 @@ static const struct udevice_id qusb2phy_ids[] = {
- 	{ .compatible = "qcom,qusb2-phy" },
- 	{ .compatible = "qcom,qcm2290-qusb2-phy",
- 	  .data = (ulong)&sm6115_phy_cfg },
-+	{ .compatible = "qcom,qcs615-qusb2-phy",
-+	  .data = (ulong)&qcs615_phy_cfg },
- 	{ .compatible = "qcom,sdm660-qusb2-phy",
- 	  .data = (ulong)&sdm660_phy_cfg },
- 	{ .compatible = "qcom,sm6115-qusb2-phy",
 -- 
 2.34.1
 
