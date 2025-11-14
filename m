@@ -4,83 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C89BCE8D44
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 15:22:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 582A9CE8D40
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 15:28:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 529DC84132;
-	Fri, 14 Nov 2025 16:22:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D5A0D83623;
+	Fri, 14 Nov 2025 16:28:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ngKzYnlt";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="HyhS2UiH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E92284141; Fri, 14 Nov 2025 16:22:42 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id E386584142; Fri, 14 Nov 2025 16:28:45 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 381F784105
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 16:22:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 884EC80433
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 16:28:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-4501b097976so1027673b6e.0
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:22:40 -0800 (PST)
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4775638d819so12506765e9.1
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 07:28:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763133759; x=1763738559; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0OpP25wMjrgj62pqTtMKC5lUyIPuAl51ZoOSKtHq+2s=;
- b=ngKzYnltn20acur+bFH8IJYueIh22jcEjdrx0Kf880l7l2kz33VEC/e62mafxBK+Qf
- R+8QX9FlyqhoQyQzzRX4NZQdDpRL0jnLTkKUbpJSfiHxmWJJeECmWN4gQdANpo4DfHYX
- XuPY8oT6J9TlkGWtOgSjHQp+aAj/QJmQn9NMQ=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763134123; x=1763738923;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pIMTNXLK0EnW3YHSYty6+EavwVdpJ86AdbJXDqctkuI=;
+ b=HyhS2UiHi7alwKFTmC16b2N7sEqURPyfRKwfIe8/RuOfeFthnZaxQNiwOwBmfzNQFk
+ 4wNVykqpxQpPgukNtkW2/mdKX5yGUWfiYSEQ2VDDJjKNhIjjIrRgyGP4NeRiF3oUF/sB
+ lqcZv5AE5vcTpGpfeqLDrBYaUQJqElywci/88eBVf/pibJUNwXJBOOzK6Fwdga4GYkJD
+ nxVMlsVJS82wEjrK1YcFxdiU1qQwojmBSfZ/FWWVTztqxs7KqhRgdUojBNzB8vTJwBns
+ M2wktYcuitOib3NdWrInC2H90A7tbWrH1GoTPnc1CS8clgEs0bepqX5dwrLRjeb9+QV0
+ KKIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763133759; x=1763738559;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0OpP25wMjrgj62pqTtMKC5lUyIPuAl51ZoOSKtHq+2s=;
- b=O0QbqF+88pM5kIlb0ioHAC1oLdN/EJy7v6INmKPeSitcnpkVxf+HZOV/+ndibixMUw
- ieIqFu7sDSfWwrN4lDtaM/UalZnXGjrBG28ybevn4Sk+Ja8HR2ZXycZcpQ8yY3ylHPJ3
- W24XParfhUgat7+5wiLt4e1svCBkgKInCeDEJGbYQOfUMbBsebEaeWcWCwft0E9FeT+V
- D42El+/kBZ2Bd5K8hJ4RW2AckSBAafpV5HEEHrtchKml1yTZi1uoaB10TAdUOTzt5A/9
- H8thWaig9PlZU6QRwcyHcy+mxzbcxe+2Tebt6WbLYg0kEXanuP65Ho4CYJn7PiYzkpdJ
- jLiQ==
-X-Gm-Message-State: AOJu0YzNtuj6H+ykaRHexo8j0055WJj22z5SMcC/eqP8/EmL7/syA2lm
- MwAHZYJk3bil02vi/XADocfoU5iJSh8uCwiNBGDxhKKIU8HGRB8FVw/jRxsG04T5N2o=
-X-Gm-Gg: ASbGncufciCt+8UG8gTROeBza6QfL1gcJgcx48+3XvOmBvFXiS7ZAN5rm9hZIcJ0qpE
- 5TjcLWEJd5Vcchubec5FKF44hzNDJa+zqRbnOlrmZ3QFdAHECoTg2VbknE46ZJxt1o5+2SQMgV3
- Rj3CvnH8R40aGZVYkd0e3grW1Xy5uS2SVXX2RJUyS8PLW0kbZhUmtHSFiFp2bXBrar4gu+Kook7
- Z90UYsrlrUaK8aFuiUjkpTW1rBd/dL554Q3rtQSS9ddO8Ufnhq/WJWfjVLSBjXAKhX7KRJCSgCj
- dHeoGIi8SiS0DooQHmFXy3OD0S8FbYQ+x1dbvIR41GeB3/fV+pkl7lbtJzRLFYlO6EHyq64jnUZ
- cshP4TQP4U6cSmoCFGfjzotjmH1wyXqDyfpqLzL6gfq9xIRl1rlmn/go0z94e+3cm81flbFQTBa
- ehzJYGNlzpSsWfU+eSG1XFY5/QRgpuGnXYfqFFyZM=
-X-Google-Smtp-Source: AGHT+IE4I8Tpg4LBhnRwLQuFBB7IRLOshRVlr/uj1g3s243ahAulbh69CmrFBlhIPBstOY/HSyuYXA==
-X-Received: by 2002:a05:6808:3096:b0:450:65dc:1fce with SMTP id
- 5614622812f47-450973fb954mr1551819b6e.3.1763133758918; 
- Fri, 14 Nov 2025 07:22:38 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4508a6d7b24sm2081325b6e.21.2025.11.14.07.22.37
+ d=1e100.net; s=20230601; t=1763134123; x=1763738923;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pIMTNXLK0EnW3YHSYty6+EavwVdpJ86AdbJXDqctkuI=;
+ b=iCJ649KnoKrswjxWrQQqp6AMnXSuxIH03SnLcV18a5d1y/8icFefdzCEZf3d4JlXR/
+ T+rlG9uNMslOauu/Fj3CYsMSGxJtTLYot5cAQI+JZ+bWCfx7xliz2R5k7uyEnhKAZY0n
+ 3hKNWZOCpfCK//jQ0v9FFP0ppfCUDtAcOllDetgtg3IlB9cVlnLJqgrLF6iyJa8zLNwZ
+ BWZg9IAOXX6Mt9G5UKTS+IwYqhLX5Qa5M9AX0PJN9eVuik9XDXSuRrKU//AVEUIYB2tG
+ D1TLrSHw8THjNbOkJEFlrBqAdm7hOcmZ+cmAmvHC4OQWhDU+NHUAqaoLIXVuzdkCD319
+ Qm6Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW3PKGsnvtvB5W4ezeSu45+a39pH0Y7EK1mW/ftuJSVHTni8tG5ZCDZCeAfmRkAoiF/uf5MkDw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQ3y1c1l2xjOOY5+2gypCDvuTLmML5vOuJuHt4ez0ZxEtqR7zg
+ 08QjuDXdaluL5fg30qo2+q/IkQ7/t5jYIixkv78/a/VmhidZCv+8sP2qYImRu3tudcOeDcmxA+r
+ WvsnGook=
+X-Gm-Gg: ASbGncs75D3ULvxBu1NbOuoVSKgCaZ1gFMqbeTg6y6EsfI+PwgH22/Hkp6F8CFXpTFH
+ k98w7TjYou2FapZEQR7Gz4cOq0L45EQfVDRmeBxl0S1+SN7GstMVsxT1t87eD3aeXl2Rbw6GMf1
+ 62zK7iXwWDLaWBPxTu6d4uEAmGuXTudJMv3CxG/cQHyJ24v7XWFFogd6EiM3UB3cjL6Adz21fJE
+ 0dUCQ0tQfv42q3vti4f2lPyC2GjpO/nhZoUpcBZfzxjYO00Wgl59uRW1VA8S9oT1TRcuMa+sejc
+ wyoRSzJ7r5AhwtQmcOQqZxOA62QuM/oJiuxVne6PAeM59Pw/qE4wwX2WWjpcJyBkIkmeyLG0Fja
+ wyROiRqEvI58++kPFLNKXnpAA+ZhqKcmW/3ueccQtoct4G+8kNL0vOd2TdHziU0a3pUPoa19Avz
+ njWW521Iu9x15o
+X-Google-Smtp-Source: AGHT+IGRwgwpwdG1NHHVqLYfCRbX3VLZbZvh4iU9krv13CY2c8PCU7LJx2R6nkfDJuFwaSINULszWA==
+X-Received: by 2002:a05:600c:1387:b0:477:7b30:a6fc with SMTP id
+ 5b1f17b1804b1-4778feb13femr40624555e9.30.1763134122917; 
+ Fri, 14 Nov 2025 07:28:42 -0800 (PST)
+Received: from [127.0.1.1] ([2a01:e0a:e50:3860:1ab:5fd8:dd9b:8e8b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4779524d2ffsm15741035e9.3.2025.11.14.07.28.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Nov 2025 07:22:38 -0800 (PST)
-Date: Fri, 14 Nov 2025 09:22:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Walle <mwalle@kernel.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] drivers: rtc: add PCF85063 support
-Message-ID: <20251114152236.GB6688@bill-the-cat>
-References: <20251114151255.2008694-1-mwalle@kernel.org>
- <20251114151255.2008694-2-mwalle@kernel.org>
+ Fri, 14 Nov 2025 07:28:42 -0800 (PST)
+From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
+Subject: [PATCH v3 0/5] android: add bootconfig support
+Date: Fri, 14 Nov 2025 16:28:39 +0100
+Message-Id: <20251114-bootconfig-v3-0-a28b813dba90@baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zJs7JjGVG+dGuJXM"
-Content-Disposition: inline
-In-Reply-To: <20251114151255.2008694-2-mwalle@kernel.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKdKF2kC/03MQQ6CMBCF4auQWVtDx2LBlfcwLGidwiRKTUsaC
+ endLaxc/i953waRAlOEW7VBoMSR/VzicqrATsM8kuBnacAalZTYCuP9Yv3seBSor4RKG+o6hHL
+ 4BHL8PbBHX3riuPiwHnbCfd2ZRtZS/zMJRS1aqy06pEZpdTfD+mIT6Gz9G/qc8w/BtMsLpwAAA
+ A==
+X-Change-ID: 20241128-bootconfig-276e247be992
+To: Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Julien Masson <jmasson@baylibre.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>, 
+ Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
+ Maxime Fournier <mfournier@baylibre.com>, Eddie Kovsky <ekovsky@redhat.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,53 +113,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patchset add support of android bootconfig partition[1] in u-boot.
+With Android boot image v4, all androidboot.* arguments must be
+passed via bootconfig instead of using the kernel commandline.
 
---zJs7JjGVG+dGuJXM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+[1] https://source.android.com/docs/core/architecture/bootloader/implementing-bootconfig
 
-On Fri, Nov 14, 2025 at 04:12:47PM +0100, Michael Walle wrote:
+Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+---
+Changes in v3:
+- fix test check
+- reate subfunction for bootconfig append
+- Link to v2: https://lore.kernel.org/r/20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com
 
-> Add support for the Microcrystal RV8263 and compatible RTCs. The
-> driver's name was taken from linux. It should work with any NXP PCF85063
-> compatible RTCs. It was tested with a RV8263.
->=20
-> Signed-off-by: Michael Walle <mwalle@kernel.org>
-> ---
->  drivers/rtc/Kconfig    |   8 +++
->  drivers/rtc/Makefile   |   1 +
->  drivers/rtc/pcf85063.c | 107 +++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 116 insertions(+)
->  create mode 100644 drivers/rtc/pcf85063.c
->=20
-> diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
-> index ed903999f06..2336f2e57c9 100644
-> --- a/drivers/rtc/Kconfig
-> +++ b/drivers/rtc/Kconfig
-> @@ -161,6 +161,14 @@ config RTC_MAX313XX
->  	  - Temperature sensor
->  	  - CLKOUT generation
-> =20
-> +config RTC_PCF85063
-> +	tristate "Enable PCF85063 driver"
+Changes in v2:
+- Add test
+- Add new command to be able to load and read bootconfig before booting
+- Somes fixes to works with sandbox test
+- Link to v1: https://lore.kernel.org/all/20241128-bootconfig-v1-0-0e63a5dae82c@baylibre.com/
 
-tristate is wrong for U-Boot, only bool is meaningful (and I need to go
-update checkpatch.pl to complain about this). This is I assume otherwise
-checkpatch warning free and compiles on sandbox?
+---
+Guillaume La Roque (TI.com) (4):
+      boot: android: Add sandbox memory mapping support
+      boot: android: Add bootconfig support
+      cmd: abootimg: Add 'get ramdisk' command
+      test: abootimg: Add test for bootconfig handling
 
---=20
-Tom
+Mattijs Korpershoek (TI.com) (1):
+      boot: android: import addBootConfigParameters() from AOSP
 
---zJs7JjGVG+dGuJXM
-Content-Type: application/pgp-signature; name="signature.asc"
+ boot/image-android.c                        | 199 ++++++++++++++++++++++++----
+ cmd/abootimg.c                              |  35 ++++-
+ test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++--
+ 3 files changed, 308 insertions(+), 34 deletions(-)
+---
+base-commit: bf1d8c1fec863b7da2f0d1ed4bd5526275d70dc2
+change-id: 20241128-bootconfig-276e247be992
 
------BEGIN PGP SIGNATURE-----
+Best regards,
+-- 
+Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRdJNAAKCRAr4qD1Cr/k
-Co0TAP0RP/8CkNNtH5bUvtQslLwkHDz7Yxqj2Yhr+kO+/cgSZAEA+Tem5vCdzYPR
-kNL5fCT1EO1N0rWOFkRrW5QZWRQG7wc=
-=1L+n
------END PGP SIGNATURE-----
-
---zJs7JjGVG+dGuJXM--
