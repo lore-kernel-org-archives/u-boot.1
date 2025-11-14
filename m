@@ -4,74 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2C02CE7A9A
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 09:16:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72CECE7A9B
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 09:32:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3757C83EE3;
-	Fri, 14 Nov 2025 10:16:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 0EC0A80433;
+	Fri, 14 Nov 2025 10:32:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="OanU7ELu";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="QFwhJCfw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B416583EFC; Fri, 14 Nov 2025 10:16:31 +0100 (CET)
-Received: from mail-m19731120.qiye.163.com (mail-m19731120.qiye.163.com
- [220.197.31.120])
+ id 0E3C183F30; Fri, 14 Nov 2025 10:32:55 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CD8583EDF
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 10:16:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 14C75801CF
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 10:32:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=shawn.lin@rock-chips.com
-Received: from [172.16.12.129] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 29992e5be;
- Fri, 14 Nov 2025 17:16:22 +0800 (GMT+08:00)
-Message-ID: <e8524bf8-a90c-423f-8a58-9ef05a3db1dd@rock-chips.com>
-Date: Fri, 14 Nov 2025 17:16:21 +0800
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A86F03FB52
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 09:32:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1763112771;
+ bh=6980VSu48a3+iAPAWt49K77JfvDApQYnXdEGhyk9P8A=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=QFwhJCfwA7HclOWzclqOxPY4Xk72APy36TAR0p5O2DMjyGPiNQVThVOyEXjENEIQf
+ AGXdyH+lQUKUkQpuVozPz0pRfiuWoeSvCnFZf8LTtKG5iJ9BSJpBXFJEu9McRyqz/3
+ l7ig/VnZeqGohG+36+Eju6cJyrLTrnOnRFjGtMJGzNWB+J9tz69BR1OdSduRBaA6tk
+ ooTBi0I1qjDsBfWnQjFzLvPsZfGjHL8ESFCoADw36/qWJ15P/NnDg2K8ntdlOC4o3Q
+ oIKR8Z9EMRINGestIy+t8VPbFLnHZb8kVii3V+wUKPsK8RSr57to5Zrysg3rnD+dz1
+ Crh01wOLksxT8D23jDoKgPDm3Kg4L8PwzovazRnp/0w3Q/nh71KGDW+NTpVvs+0ErA
+ yhGOgVvql2FJT2wM+yOzYjiGnB/7vwKs1oJLYX33JblvchwQ82z3h3opvcPO7ZQbYf
+ uksuDvfIMMNanUweIW5vE1SAYslPb1XleaaKo06tD+q7Y7q9vNM3jFeiYnGACzScjL
+ xm9XyFaGnojv7/0Ds2PXJKniu+b0K7TGppzdlen470uXGjrQDYqFmVYDLJZK38ZQy/
+ 9gquYjTGPpFEMJSOehM9VoIrl/IrFrcVStE1GXxFL+lw6WF1PLldP5fA0Qs4fJNt5T
+ jjmfU30CL5lhlj0lOtTo9YO0=
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-477939321e6so1216515e9.0
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 01:32:51 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763112771; x=1763717571;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6980VSu48a3+iAPAWt49K77JfvDApQYnXdEGhyk9P8A=;
+ b=BanUSXM4FkT88TpdjCF0f+hVBk6cvwxx45oh0fBrKLh/w7It32zXZ9HVL+m8XjHXGs
+ VooEDl3HaECP2reQWjShkC0WG+QyligJTeQugTlDWbC+hjhDGjPbyX3nAM4rTB4usmbO
+ hx8vW1oDy2DffiQHkA5+LLHzWgQPe+nqWKKcle/BboaVQS5pqAUrS91MVdZgOaXPytax
+ /B0LwdfG74SwXTVMCYWcPVxH3SZJsHxe15PjGYcdnEU8r11+X+lM5OVtpmGoh09vLvWI
+ 1eRiibP4ivrg3PH+FiI7xtuRhi7Xb2wO5pzoeitSLM3UCiUxOJ06m1ykiVaZ5t7R2cyf
+ tRjQ==
+X-Gm-Message-State: AOJu0Yx/96qMKMwd/sX5PYmO8Odn4B+BDa0VToo9pYO4w1qVzdmKAER0
+ 9qns0s96ZzF9IUVA7KIjEm2CfEHksLCyvu0NVJknubOKFcZcEZQs0Tv0oRevIlermYpbtV66vK8
+ XXFMt1Xkn2sScv33I21mWOG2GEW3URiGLARpyzyP5eik8QPDgNtkHuLSsXpLTBFK6IJ+MBjY=
+X-Gm-Gg: ASbGncvNohYn8Gtbb1wFwLT+DUZw6XcsQEHeQ+M0JdmfyAXHWNQ6AUF1IyT3spbe3LR
+ 9WhUSvkRs/dnOFgwOPYAlAgYeJsGUerK9u1I526AkVoQV4t3xhv8QioRNF601WBSsxtSOTGHAV2
+ 7QHLT6/hf899bkzx6hiMNnTfjruLtXEGqw6LRgFtMLkyLBLrsSKEw+zs9CGWRJ/UDYDfUl4Tq8a
+ awwHfpVqbCkfluulF/MZKGD1KB/huPp3BDAyJFtRivrxDXL6kn3Mrf+c+m/oK2IjyO/yw1hzXYD
+ j+8bqUYh5WKNtSW0bQNI1pZMqxEDskzLFYSckukGhP5t1/rFpoOTuMtnRYrw2n3Aex/IQR2aWCN
+ W62Tfd2hc+KqjbGMHn/N/AsaeWWQ8PGgN1cKa3QMvrJX/b/hbB2mg3b8yP3fz/ttEsg==
+X-Received: by 2002:a05:600c:4594:b0:477:73e9:dc17 with SMTP id
+ 5b1f17b1804b1-4778feba6c6mr23141725e9.35.1763112771165; 
+ Fri, 14 Nov 2025 01:32:51 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEEN7EAC5ren3/zqGqx3bbu1iqgx4wHrPx3AO3Jl82FYy4Xy8Q+IdMN+gu20loraQbk6LLL2g==
+X-Received: by 2002:a05:600c:4594:b0:477:73e9:dc17 with SMTP id
+ 5b1f17b1804b1-4778feba6c6mr23141505e9.35.1763112770766; 
+ Fri, 14 Nov 2025 01:32:50 -0800 (PST)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4778c857311sm85462825e9.8.2025.11.14.01.32.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Nov 2025 01:32:50 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/7] efi_selftest: expose runtime table address
+Date: Fri, 14 Nov 2025 10:32:39 +0100
+Message-ID: <20251114093246.56422-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Cc: shawn.lin@rock-chips.com, Lorenzo Pieralisi <lpieralisi@kernel.org>,
- =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
- Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>, Heiko Stuebner <heiko@sntech.de>,
- linux-pci <linux-pci@vger.kernel.org>,
- linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
- linux-kernel <linux-kernel@vger.kernel.org>,
- devicetree <devicetree@vger.kernel.org>, krzk+dt <krzk+dt@kernel.org>,
- conor+dt <conor+dt@kernel.org>, Johan Jonker <jbx6244@gmail.com>,
- linux-rockchip <linux-rockchip@lists.infradead.org>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, =?UTF-8?B?5byg54Oo?= <ye.zhang@rock-chips.com>
-Subject: Re: [PATCH] arm64: dts: rockchip: align bindings to PCIe spec
-To: Geraldo Nascimento <geraldogabriel@gmail.com>
-References: <4b5ffcccfef2a61838aa563521672a171acb27b2.1762321976.git.geraldogabriel@gmail.com>
- <ba120577-42da-424d-8102-9d085c1494c8@rock-chips.com>
- <aQsIXcQzeYop6a0B@geday>
- <67b605b0-7046-448a-bc9b-d3ac56333809@rock-chips.com>
- <aQ1c7ZDycxiOIy8Y@geday>
- <d9e257bd-806c-48b4-bb22-f1342e9fc15a@rock-chips.com>
- <aRLEbfsmXnGwyigS@geday>
- <AGsAmwCFJj0ZQ4vKzrqC84rs.3.1762847224180.Hmail.ye.zhang@rock-chips.com>
- <aRQ_R90S8T82th45@geday> <aRUvr0UggTYkkCZ_@geday> <aRazCssWVdAOmy7D@geday>
-From: Shawn Lin <shawn.lin@rock-chips.com>
-In-Reply-To: <aRazCssWVdAOmy7D@geday>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a81a6c7ff09cckunm83f5efda44ea74
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQhgYQlZCQx9JSU5DSkNPSh9WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-DKIM-Signature: a=rsa-sha256;
- b=OanU7ELuu0i6QxNwaBwYgLpQCUE6kBkXnosBpB5xJa+/1c8gaH9JjY3Crn4xM7igJavW9mLTplYkYMO2WXlXr40/yHnKDOGRpyQQRywI3wvtfothQLLLSpusqui0Vwx57upf1ejVQaFOQ/Bxnq8U70SFQxa91P3HMX8M5OD1UuE=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=pAiVqyQ+kiQN8Phi43cHK6Tl1rhV/2RbqIHqDBjVGzk=;
- h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,77 +110,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-在 2025/11/14 星期五 12:41, Geraldo Nascimento 写道:
-> On Wed, Nov 12, 2025 at 10:09:15PM -0300, Geraldo Nascimento wrote:
->> Hi Ye, Shawn,
->>
->> Here's more contained workaround without resorting to clearing DDR to
->> INPUT for every GPIO:
->>
->> diff --git a/drivers/pci/controller/pcie-rockchip-host.c b/drivers/pci/controller/pcie-rockchip-host.c
->> index ee1822ca01db..1d89131ec6ac 100644
->> --- a/drivers/pci/controller/pcie-rockchip-host.c
->> +++ b/drivers/pci/controller/pcie-rockchip-host.c
->> @@ -315,7 +315,8 @@ static int rockchip_pcie_host_init_port(struct rockchip_pcie *rockchip)
->>   			    PCIE_CLIENT_CONFIG);
->>   
->>   	msleep(PCIE_T_PVPERL_MS);
->> -	gpiod_set_value_cansleep(rockchip->perst_gpio, 1);
->> +	gpiod_direction_input(rockchip->perst_gpio);
->> +	gpiod_direction_output(rockchip->perst_gpio, 1);
->>   
->>   	msleep(PCIE_RESET_CONFIG_WAIT_MS);
->>   
->> This results in working PCIe for me, pass initial link training.
-> 
-> Sorry for the inconvenience of more mail, but I'm providing as much
-> detail as I can.
-> 
+Save the address of the EFI runtime as a global variable.
 
-Don't worry, it's helpful, so I think Ye could have a look.
-May I ask if the failure only happened to one specific board?
+Simplify most tests accessing the EFI runtime.
 
-Another thing I noticed is about one commit:
-114b06ee108c ("PCI: rockchip: Set Target Link Speed to 5.0 GT/s before 
-retraining")
+Heinrich Schuchardt (7):
+  efi_selftest: expose runtime table address
+  efi_selftest: simplify efi_selftest_reset
+  efi_selftest: simplify efi_selftest_rtc
+  efi_selftest: simplify efi_selftest_set_virtual_address_map
+  efi_selftest: simplify efi_st_query_variable_common
+  efi_selftest: simplify efi_selftest_variables
+  efi_selftest: simplify efi_selftest_variables_runtime
 
-It said: "Rockchip controllers can support up to 5.0 GT/s link speed."
-But we issued an errata long time ago to announced it doesn't, you could
-also check the PCIe part of RK3399 datasheet:
-https://opensource.rock-chips.com/images/d/d7/Rockchip_RK3399_Datasheet_V2.1-20200323.pdf
+ include/efi_selftest.h                        |   5 +-
+ lib/efi_selftest/efi_selftest.c               |   8 +-
+ lib/efi_selftest/efi_selftest_reset.c         |  20 +-
+ lib/efi_selftest/efi_selftest_rtc.c           |  25 +--
+ .../efi_selftest_set_virtual_address_map.c    |  38 ++--
+ lib/efi_selftest/efi_selftest_variables.c     | 121 +++++-------
+ .../efi_selftest_variables_common.c           |  55 +++---
+ .../efi_selftest_variables_runtime.c          | 183 +++++++++---------
+ 8 files changed, 190 insertions(+), 265 deletions(-)
 
-Also we set max-link-speed to ONE in rk3399-base.dtsi but seems another
-patch slip in: 755fff528b1b ("arm64: dts: rockchip: add variables for 
-pcie completion to helios64")
-
-> This hack has been confirmed to work in U-boot also.
-> 
-> diff --git a/drivers/pci/pcie_rockchip.c b/drivers/pci/pcie_rockchip.c
-> index 19f9e58a640..5702b607ee6 100644
-> --- a/drivers/pci/pcie_rockchip.c
-> +++ b/drivers/pci/pcie_rockchip.c
-> @@ -329,8 +329,10 @@ static int rockchip_pcie_init_port(struct udevice *dev)
->   	writel(PCIE_CLIENT_LINK_TRAIN_ENABLE,
->   	       priv->apb_base + PCIE_CLIENT_CONFIG);
->   
-> -	if (dm_gpio_is_valid(&priv->ep_gpio))
-> -		dm_gpio_set_value(&priv->ep_gpio, 1);
-> +	if (dm_gpio_is_valid(&priv->ep_gpio)) {
-> +		dm_gpio_set_dir_flags(&priv->ep_gpio, (priv->ep_gpio.flags & ~GPIOD_IS_OUT) | GPIOD_IS_IN);
-> +		dm_gpio_set_dir_flags(&priv->ep_gpio, (priv->ep_gpio.flags & ~GPIOD_IS_IN) | GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> +	}
->   
->   	ret = readl_poll_sleep_timeout
->   			(priv->apb_base + PCIE_CLIENT_BASIC_STATUS1,
-> 
-> So my report suggests this is not specific to Linux and because same
-> workaround works in U-boot simplified driver model I suggest you check
-> from your side.
-> 
-> Previously PCIe link training timeout, not working. Now I'm very happy
-> with working PCIe in Linux and U-boot.
-> 
-> Thanks,
-> Geraldo Nascimento
-> 
+-- 
+2.51.0
 
