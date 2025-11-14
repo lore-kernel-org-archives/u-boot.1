@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1CCCE7B01
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 12:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C76C9CE7B01
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 12:46:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1822A840CF;
-	Fri, 14 Nov 2025 13:45:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 60926840ED;
+	Fri, 14 Nov 2025 13:46:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jTIZ2cpM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GVa+yoD0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CB3D840B0; Fri, 14 Nov 2025 13:45:42 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id A8D2E840F1; Fri, 14 Nov 2025 13:46:00 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 128AE840DF
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 13:45:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8603B840E0
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 13:45:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2957850c63bso20136215ad.0
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 04:45:39 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2957850c63bso20139915ad.0
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 04:45:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763124337; x=1763729137; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763124357; x=1763729157; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mneKsGhR+16uisjWtcjHl/MU2mm0hqzK63J6Vi/YKnA=;
- b=jTIZ2cpMmlMhp+eYHQpycrNSIvGaXy0fKyLHvoMGq/31Li8OIiriWNSYQqDgxrDW2W
- FzgJszqBpL4u827AJPOZbSi/4OSfMBLwUoM/bCoE5tIB16IffXuN/Oq1NJTc076CJZUj
- 8BCoZ1ksYn1bEyJTW41ijHVUoeooQr16zXLuo=
+ bh=7/cgqc7aIn8CWpzRF693pUqnXd4MuUbDb3RZmSR7fXQ=;
+ b=GVa+yoD0tUi96FMsnV5os3VN6dX+evZo9XvWn+brtnmch2++7QyEd6GcypM1WuKVv2
+ FMQrTzDHKuy+4lwXgOVC3YqM+UZW22en48UXCzB+X1gvpJ2u91B5NXEGm8sZ7LBGDH4t
+ TAcseX5s+BZnzZttCNtWT1a8dbizUz6LISvJ4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763124337; x=1763729137;
+ d=1e100.net; s=20230601; t=1763124357; x=1763729157;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mneKsGhR+16uisjWtcjHl/MU2mm0hqzK63J6Vi/YKnA=;
- b=E2yNNAwoGcsS9wjx2PyTCzT7mcx6UIKt13w2E6O6mWuoY0B64pUqEDhIco+LKsrfIh
- LqH6qz0PCSQEBjNwhmTS/czkPJPNTcpaKYll9x3W/zNSt+6SA+BPRGicG4cXJmCbmaJT
- 2mQsRsapiRwnfDDDgTM+3vDqeR/P0QkYWzFgxPNd0G4zw65QLxlg85UMuc2Hx2Fikggm
- YfZWlTFfGNWpVaPgvWaBrV8jmFIHD9lsh/F1WdMLvXDrdqRFZBsiM5ZL42qarBKgeSZ5
- lAepWl56+DBrTwUf9NUwqd/0fNHgEINrOzgxyZdnVKcJIQ9+li/Elr3gSEkxNKS8oVw6
- pXrA==
+ bh=7/cgqc7aIn8CWpzRF693pUqnXd4MuUbDb3RZmSR7fXQ=;
+ b=TKX8GLgpw4UNQpOWj3PWxabujYcsXcu91+JcvndPIPmftjflnxwZ5TzWuUG6uw2aGh
+ pWos8SowClE7J7E1/pwIYbfr4f0aTmHkV54ubXuKSkNW3mg2ALfYtqHdDgyqY8g+G8dy
+ 3879yrz7yElMpW9hz/jCj/rmi/BXbCSFSo9YWGK33kkjIfJtFavGzffdXiVkExz1GVTn
+ VLh7s93mJwZ5bIzhpLZdO1+569ZLDQ+fI+YLFIf/O+uHpTqFjJWVyqS6Yg8WLt+01WcJ
+ PRU6lErRMUnhFSUazTwd/ooNxYr3WwSt6tf+0asTeUKdl0ZlwhcqhCyIUGVdGP+w/3I3
+ okxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUinbTKUcibM1c1/yMRndk7EVEaVc3zSxPVVgroUea8ZEQpoHzdEHFolM7ZvmjetwfTInRWvmQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyUA93CV7pWxDU2DWG23i5fl6LgaX7n/R/aDODubU4nJ9IDhzVs
- XoKsWULllLJgNCNPkWHva+NwAluNlJYaP4k/McxDf6kbTWiHy6J9Np8cpu4qnnWSaAan2JgmCTV
- 8abLM6oVgLTxCDXclNWiEL/xa6ZCfSQpEUkxWT66dafxlOzc0j2Q=
-X-Gm-Gg: ASbGnctfj+PTw/snNjj+UN+UVRvIEzWhHmsQCXE1ItnsvxEI73hwRVZqd/0fuwu2s/w
- NnAyYRBvWRft4ZLy+lJo2pCJV9yi04ysxLGZHqEfx/5e4bGACEjxmHnXuhTwl2CVOFlQ05WFFD4
- +jE3DDE93YQWG2f7VZL0at+ufJfhX7CT3t+B7FaDUVCUSni2N8SpiHx3KhTKWWL0sYXbClB+q/s
- uKf7KDlYjtvJY7UyrsVidfLu8GXug63p9N0Sd0oHUJZdBFsHOCTHZiPbycJ6ShfqJ0XNQ==
-X-Google-Smtp-Source: AGHT+IE1TLtJROLu0YV7Ota6sGD0JPc93a/zQOIOgmBlAIt59B5stGQdtgbdlJA/oV3a4dZXVARGPdTn4AKlmgIzDvI=
-X-Received: by 2002:a17:902:e949:b0:297:e897:6f6d with SMTP id
- d9443c01a7336-2985a4cecb8mr76727375ad.9.1763124337469; Fri, 14 Nov 2025
- 04:45:37 -0800 (PST)
+ AJvYcCXL+3yFnLDVyCRdlZz592jOR345sdWr4pFAmrSUJMim4ZcG+4RkhkUHZC3PkyPKj6YlIEuNjbU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwoGdOmgrjiky9NHb4Is9wEvL7tWFf8rbWHxDka/ZyojE7WaDCL
+ dahnauWXIdkSWtngJXGPfWgk/8kiiUbIL2upTN8oh+HodpxhnRRpbkRjP43x6OTH+2spFHBFYv6
+ nUxh5Br4dFR+vxO9Sbtmzlzq49kt7eR29n+tyd8bo
+X-Gm-Gg: ASbGncuJLKnx7SVFtJb+vgqlpbMsSQnRvlhR2fWcb93Xn1JY0GgjUnOEHkFxDzX9fg8
+ 0x6MYdMmpcH1HWPvd5EaFrbhTfgv5A2i/608t0pKnSrvZyauWunVDN8TFuFMwzQsmMxvr8lz4Wh
+ E1fFTfonEHCWurTSAVU2CwLeaB59BOGdHhlWd1GhXW394vQlCTqi2ESexJ599QAipa0DSQh8COm
+ Hs65hMsGOOSYb4niFa6nbua+bvIO94bzFWjX8j4l5Z3ej0fELsHZ+i6R2J7mNprhieUizOtL/s1
+ 3jll
+X-Google-Smtp-Source: AGHT+IEmztzGGddEFXGCnq6kO4JIXWt8dBv2Da+Bfvj0xwhj73rdo3TxTc4QrdmEa/xGMmeyX9aSSFNc74r3fnOXs1U=
+X-Received: by 2002:a17:903:1112:b0:295:7423:530a with SMTP id
+ d9443c01a7336-2986801b5a3mr37206505ad.29.1763124356908; Fri, 14 Nov 2025
+ 04:45:56 -0800 (PST)
 MIME-Version: 1.0
 References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251109101010.306268-5-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-6-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251109101010.306268-6-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Nov 2025 05:44:52 -0700
-X-Gm-Features: AWmQ_bkQ_J3GyAj2GdTdVnDOpaoGoeOqgzOC945n6gI8IhrkBqsEJrE-ggVD2X8
-Message-ID: <CAFLszThE3Ntmr_P9TDBrW_y89p6+u2AwXv6Rcmhe=wcgznao_A@mail.gmail.com>
-Subject: Re: [PATCH 4/9] test: cmd/bdinfo: consider arch_print_bdinfo() output
+Date: Fri, 14 Nov 2025 05:44:59 -0700
+X-Gm-Features: AWmQ_bmWOZxD81YU-A_1luBipK6wIkmZcIAWLzYYNUDSmRShNhsqZa4K0ZbLS_k
+Message-ID: <CAFLszTi-Mv7LBvbT9K-QLRykNdgQD=iO4VvMVxrrd4xRmV=L7A@mail.gmail.com>
+Subject: Re: [PATCH 5/9] test: common/print: do not use fixed buffer addresses
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
  Raymond Mao <raymond.mao@linaro.org>,
@@ -105,50 +106,17 @@ Hi Heinrich,
 On Sun, 9 Nov 2025 at 03:10, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> On x86 commit 9b35dbc93fd4 ("x86: Show the timestamp counter with bdinfo")
-> has added another bdinfo output line.
+> The location of memory depends on the board. Do not assume memory at fixed
+> memory locations. Use calloc() instead to allocate buffers.
 >
-> On RISC-V commit 66b5ee9c558e ("riscv: add RISC-V fields to bdinfo
-> command") implemented arch_print_bdinfo().
->
-> Update the bdinfo test accordingly.
->
-> Fixes: 9b35dbc93fd4 ("x86: Show the timestamp counter with bdinfo")
-> Fixes: 66b5ee9c558e ("riscv: add RISC-V fields to bdinfo command")
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  test/cmd/bdinfo.c | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
->
-> diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-> index 214b237152b..28d448a0866 100644
-> --- a/test/cmd/bdinfo.c
-> +++ b/test/cmd/bdinfo.c
-> @@ -215,8 +215,15 @@ static int bdinfo_test_all(struct unit_test_state *uts)
->                 ut_assertok(test_num_l(uts, "malloc base", gd_malloc_start()));
->         }
->
-> +       /* Check arch_print_bdinfo() output */
->         if (IS_ENABLED(CONFIG_X86))
-> -               ut_check_skip_to_linen(uts, " high end   =");
-> +               ut_check_skip_to_linen(uts, "tsc");
-> +
-> +#ifdef CONFIG_RISCV
-> +       ut_check_console_linen(uts, "boot hart");
-> +       if (gd->arch.firmware_fdt_addr)
-> +               ut_check_console_linen(uts, "firmware fdt");
-> +#endif
-
-How about creating an accessor so the #ifdef is in global_data.h and
-you can use if (IS_ENABLED()) here?
->
->         return 0;
->  }
-> --
-> 2.51.0
+>  test/common/print.c | 76 ++++++++++++++++++++++++---------------------
+>  1 file changed, 40 insertions(+), 36 deletions(-)
 >
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+I have the same question, as to the value of this test when it is
+already covered by sandbox.
 
 Regards,
-SImon
+Simon
