@@ -4,165 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 719CFCE7AAE
-	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 10:57:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98430CE7AAE
+	for <u-boot@archiver.kernel.org>; Fri, 14 Nov 2025 10:57:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C7883F54;
-	Fri, 14 Nov 2025 11:57:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 54D5084088;
+	Fri, 14 Nov 2025 11:57:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="PJlb5Fjm";
+	dkim=pass (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="nyUJgrwE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A844C84014; Fri, 14 Nov 2025 11:57:11 +0100 (CET)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
+ id B813E83F4F; Fri, 14 Nov 2025 11:57:16 +0100 (CET)
+Received: from mout.web.de (mout.web.de [212.227.15.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47F3183F4F
- for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 11:57:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C35BA84068
+ for <u-boot@lists.denx.de>; Fri, 14 Nov 2025 11:57:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Bqy5eGPytKWa495g5QlV5clTngVuvKdzjYvDbnoGSwne+PCo/Z4Dpsn1yBp8WWcWcHFZL0gq7zaQEmCK1Hw1suS91vFLiSjAeUD8uOKUPLOp1KNICUWexXm6oY/d286H+o3hav6lVb84s1Mvx6FrXjc2l1Cs+cgi9AYHAQRQq7CqXsiKLMBgQ5Eo6oismct0CeC8otBQ6R6v0w6j5sFLCAuyHTayH5ip7nI21nC75UGvvk7YmsNB3OrloJ31j/qBc/4X3TJ/XrTxyddArC4WzRADELT3wfUsLbew1ip+UZp9myigqzGKwY8Kccwt1p2fUU4EO1r2/9Pu2PV5kV5ecQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yzpKkm3EVyn9Qs4Lbyk7mX/pcSf6PUc0cb0NY5urWgU=;
- b=eJ4BiY12T2Een6395k67hDkKbLo4WQeRZyxRPo6z06G/1a1nwVCZDcmKaUpc4cbkzccpVl839tESAPwmHw7iCKoKLJmGuVBAZiwR7kBtafueALASa2RajQpN1ys7ECLzxQZ8PD5IrUZGyHO8sok9K54CjqDZRpM1dEFRzchv+VdD9kHYTvVBq31AYi7q9JNgMqxlEaASv5Vp5UqFbv/cHqfHAl/Kcyn/A1T1U6z8VDMhJd7KEt6Lt0DAHlPvUwiUESYcZRo/UnBRVHKAz9uzJlpLjPVGJMUZQIxLeaUAU9+yrLhjhh5PlDnyQ6rNfR+7HRChYELdWK8BibSFYtOAEA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yzpKkm3EVyn9Qs4Lbyk7mX/pcSf6PUc0cb0NY5urWgU=;
- b=PJlb5Fjm1IVnLF8o52KnqySeLDcLdPBrlXznWFm41mdJIt2mvGbzXR4519zzOzj+qyyVjeEz1+I/En/VbjyHZpan+OhOu1gvr563Yy7MBg/8xhWbkmzP4AyCfGnM+lYjUqJNXWOJeBTf+olNeSUCA497ymAQa7+3uAMq3GZga9jsD54XHNnE86FoacPGkPQ0mPF2vk9iMBA5qKvULH3N/Hnr1qVbbhZCiiQzbPNQvnn24odmMNyNlrxR3w9lPUqgMM3AOqV2aHI78tZUkEkb1dFvRkv+fE/GgU+1Ik3Y43rCtnBx0CopuLVxR+PadpKpThacZXgkQGhxqL4v5bra+A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by BN9PR03MB6202.namprd03.prod.outlook.com (2603:10b6:408:11f::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Fri, 14 Nov
- 2025 10:57:06 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9320.013; Fri, 14 Nov 2025
- 10:57:05 +0000
-Message-ID: <adaf5081-3b9b-4cdc-b7d3-ec9756f60ead@altera.com>
-Date: Fri, 14 Nov 2025 18:56:58 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] Altera SoCFpga Boot Stall Fix
-To: Brian Sune <briansune@gmail.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20251020133455.1870-1-briansune@gmail.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tienfong.chee@altera.com>
-In-Reply-To: <20251020133455.1870-1-briansune@gmail.com>
-X-ClientProxiedBy: SGBP274CA0015.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b0::27)
- To LV8PR03MB8137.namprd03.prod.outlook.com
- (2603:10b6:408:295::8)
+ dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+ s=s29768273; t=1763117834; x=1763722634; i=smoch@web.de;
+ bh=e1ym1lN95NolqzDT08JlpRyjac74RcuxWFU4QkhCju8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=nyUJgrwENcf1DP3WXLFvoD4BRbbBOsi/BxnHuyfuzCdUDSBU8el7r9qnYgb2B5oz
+ KsBn+bn749zXP7sUsoZTMVgHAegK54AzZtls4zOLKaWalFUSCoRrtmaQEH8Xg+5gl
+ F2p9nLJ8iWKsMOW+xeYCmB9vjZadAI/CZZ8e/+3Ab0ZuIwvW6QKX2Ylz0sfQ8n/2c
+ S19tLMTrHlfQv9zkC+wPXRKlcmBkPyujdghJg8hJHbv5aJVuHL3fYBUh4M51lb7q8
+ +Y+Z9sc1Y4DCao+DxwiT+2T1UHd6EcMMjbXEiRSuz14BPW42xQfrO5F2mp2avi3mE
+ KPkqvU2jijMtfRu6Bg==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [192.168.1.40] ([78.54.190.247]) by smtp.web.de (mrweb005
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1MLifk-1vbWtm150q-00KDhu; Fri, 14
+ Nov 2025 11:57:14 +0100
+Message-ID: <36f11b16-2389-4636-9cfb-c8d05cf81b7e@web.de>
+Date: Fri, 14 Nov 2025 11:57:13 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|BN9PR03MB6202:EE_
-X-MS-Office365-Filtering-Correlation-Id: 21bc8b77-b0a5-493a-a78b-08de236c8c76
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|7053199007|8096899003; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YnJlb3Rqb0pQMW51Z2diVk8zaVBRNkVzZDc3SjRRc2E1T2dNQ2Z0c2htQm9H?=
- =?utf-8?B?WXh3TkRTYVdCam5zUGkwbXhyaU0zZ2lmZUt6Lzh2bjVFV1dhQVBIaGhsTWJk?=
- =?utf-8?B?RXNSUzNabHRzSkdLNDAwNUhJaVpNY29udEpSdW1iTXI5bnFSUzRBSnF6alJU?=
- =?utf-8?B?YTJQdVhWT3hrbFVlQXd6bmoxRjY3czZHRnEybC9kWUNqMWdFNFFGcE5KeFhL?=
- =?utf-8?B?WStFdDVobkZWRnQ2d1EwQXViMDQyVkNzdCt5ZWErRUlxbVNwTFdybDgxZ1do?=
- =?utf-8?B?TFZlQ1BweHpmYWJ5QXlZR1FmRnVmUlc0TlFQS1Q5VGpoRGtjMzE4WDh3TC9o?=
- =?utf-8?B?YWtpaGxsSExDRHBZYkRYUXJhZHdLbXNlMkJHOVBvaHFIN3ZGcE51bURKQXMx?=
- =?utf-8?B?YW5WNUZUL1owZnU5YVJFbVBvRlJNZ1FtTFpuZDZ3d2NXK1ROKzVXaGs0M1Jm?=
- =?utf-8?B?Tyt1RHljNHVBVkhOZE1wNjFoNEFKakpiVkhXWUhpRWZLNGlJbjNrcXh6YVVX?=
- =?utf-8?B?RHFoZXczWWhVYmZpeWplWE5MRlhLMS9JUVFoUFNlNGN1SVljY3hQUTJUbExZ?=
- =?utf-8?B?MTBiNldsY3ZPM0pmWDc0dmNVVWJpOFh2dUFpeDF5M0w3ajlvWmtnditnaG9O?=
- =?utf-8?B?Tk5ZVzFTbFVhVjlYQTZmREJBNnNGZEhiODUwZG1lQTY0clpUSjBrMmZySG9m?=
- =?utf-8?B?eE9heFdQbStxVFJWK3pnTEZKaTY5cXRzU0xtMUlHc1hXeW5RN05wN3EzSzRk?=
- =?utf-8?B?aS9WejFtd1JoYWR0VHczemJ1UDFrZ0Y1Wms0MnJlRm5rcjFUejVmUTRiNFJ6?=
- =?utf-8?B?aEEvZXk4NHBNUVJCbkRRZ2QydkhNdkJ3b2prczRJNk1oKzNyQ2w3VkZFR3FC?=
- =?utf-8?B?emhPNnM5cithYU96SVc3aE8vaGtTRjFLM1hMRUxTVk9GT2RmUG1NZTNYTEcr?=
- =?utf-8?B?YnpQMkc0WjhCZFJNUkJDSDJ2VlpaeUFObDhWV3FzYjlaOStDZ29XVDFrZDRZ?=
- =?utf-8?B?ZFJqVk90RkJOY2RYSnNFZVN2QXJzelJVcW9WcU42aDhDVmk1b0laNVE3OXhy?=
- =?utf-8?B?V004b2JHbVJ4UHcvUjBNYXlGSHBUaDMrUDh0VHlEL1hIelhPR0JMaHhYZURQ?=
- =?utf-8?B?ajNvajMxVWVKU3UzRkVTRFg1eWxDRHJid2I1aSt1b0luNVkzdjNJTERORGRF?=
- =?utf-8?B?QThHc3RqbUExaWFucVBqOTNSVllMcys2MGhzb1VvMTdJak1tUFpZYkJDTkVI?=
- =?utf-8?B?cUpaSzA0K2tqYUNTNEZxSEhnQ1MzUWMvYzdmU1hldTN5emo3R2c5YWhaTTNB?=
- =?utf-8?B?ZndQNGc2Z2pJMkVSWHdTaVFXUWhjQmdOWVk5NFB5b291VS8yWTRpYzArVUlh?=
- =?utf-8?B?V2dLcGN2dWlIbzQ4emFPSkxjVGFEekRhb0luaDg5WktxSGQ0UVB1eDRCRGU1?=
- =?utf-8?B?OStpcGV0QS9oWXpxN21NbWhaV2NkQW92ZEkwbHZVQTVpZXNRUjYxSWpzbFFG?=
- =?utf-8?B?aFhNR3lJZjBMdXlLR2J6a0NqcGgwdHZsRmdEb1BmZmJvdWNBeVZmVi9QakZB?=
- =?utf-8?B?T05XUEtqZ0drcG5pWXVURjY3emk0VloyMDU4b05Md2MvYzg3bnhkSExPSjlk?=
- =?utf-8?B?cXZMNGJPVHcvaitRRFN2bk5IdThnQXdNS0s0M2N1bFppT3oreTZ1MkNRMHZN?=
- =?utf-8?B?U3dYc1MzZ2dzZ2d5T0xNZ1V6c1AyRHhpOEY3RTNtTVYvRzVrWEVYaE5FSVU3?=
- =?utf-8?B?NHZVYTU2UjVXR0VHSUlpYkE5WHZrd0RkZGVRSkVFNEszVUlPckM3MUF4UldE?=
- =?utf-8?B?c20wbkxXVXRac3FHUFdXM1huV2Q4MEhsOVUwTjlZQjdUeTRVRjJyQ3FhMTZj?=
- =?utf-8?B?UVZLaTYzTUdlcGRQNzFXVUFXb2dpRzVleGxLcHY5RG9GYk9Ib05rVEhYdDYx?=
- =?utf-8?Q?5S0phkCXmNGSXpt2xnNQRjJLgM51Mvaz?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(7053199007)(8096899003); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aFY0Y29NUktmQXFrdWxhQmtXbDhiNGMrS3IzSVlhTmxLRTljY0pJQ25pS045?=
- =?utf-8?B?SGVLemR5bkNPamtlODh5NjFlNmhlb0IvTDN6VlNQWnFnVURtMDBhV29PVlV6?=
- =?utf-8?B?MEJiMGN6K3FRZTgrMm8wMStOeUk5bW14V2YweXpaNHVycTJ3c1ZnQnpmWG5j?=
- =?utf-8?B?QU5WWWdwNVR6U2o2SnBtbHhFKzNWVFduandMZUpEbDltc3owV1NKUlhNWC9h?=
- =?utf-8?B?OFFxT3V6WDRPVzliV080ZmpCdkFYMlE1N0ltTjlISHZINTlJVmpwTld2SUh6?=
- =?utf-8?B?ektqWFRFYmcwNVg2a2tLczBlQkcvUjhTNUNRWXE4V2h5alRzOVlGVVZacHgr?=
- =?utf-8?B?QkRSS3dJVnZrOVJwYmZNcmtjZE5CYVA5ak4rNkVqQzhyMDg5bzFncDJuVmpu?=
- =?utf-8?B?anJzTUNqS2NtU3MrSng1TDFYM09tdzFHQmxCRmNxOS9uaitUd0NiYS9VMjlS?=
- =?utf-8?B?c0JFNFAxNFVmS0ZMU21JRFJneVBBRGMrQlRGOUV3N2syVlc4cEZqNjNPMWdz?=
- =?utf-8?B?c3MzMmZGRmdDR01NWUhJcjB0K01YWjVCc0lHNUdXTDV4em9SdVFwTTE5Wk9y?=
- =?utf-8?B?YmlCQ3JoUFAzS2JoSzZCdlVEZXBTU1Q0Z1pNenFwV1dwZ0tZVXd0TzFSN3BK?=
- =?utf-8?B?QU5Sb3VSSkFLaW5xQnBSTnNoeE5CNTgySzdzcE9MOVJrV25VSUlyZ2w2N3Rv?=
- =?utf-8?B?MHlWaE5FM240VnRhYUNVcnVjNjBYUXorZVV2czAyOGtIeWZtUERESXJBd3VI?=
- =?utf-8?B?eEpPR0o1UVFBV09NcjI1UVV5K1VjaGRubm5sUlVta25vNnJ5UDROSWlPT1dE?=
- =?utf-8?B?Z1RrL1dEcmV1NDduV2c5OE8wMXRiVE5lVEVNUWNPNXRDRjFBU2M5WE5oWld3?=
- =?utf-8?B?VkpCNitFNWFsMERQbi9rVmtFQ2JJNnVoRTUwdjc5bk9tNTNVSVM1eTFzT3FN?=
- =?utf-8?B?ZUhwOEovaC9URW9iRHk1bXFtTXBMbktjd2JwOTYrYWZNaWt0S3RpLzhxdTdx?=
- =?utf-8?B?TlFTWFdUL21WdDIwNE91RFduMFdtWU5rWHlGRml6czBGVVR6dmNvK0Fmanln?=
- =?utf-8?B?TVFOZzcxVENSYjNEMkhjaWxTaFhOV0pyektodXRyTVdMdjdsK2R0SG9EU2dT?=
- =?utf-8?B?K096WWpILzZWTUc2Q0YzZjF4ZWR0eWV1SEVGenY3bWNXTXNaQWd3U3RuaXBS?=
- =?utf-8?B?VXhENEl2T2dSU3c2ZFdUUmdjZ2pTQlVkTTNaRHBPb1lneVhHSFFoZWNWbDlx?=
- =?utf-8?B?bkt4VTFqQm9XTjdnUjVPOU9aRzRXaUNVSk4yRHpYVEN2Zm1MVjdjMXdrNzlZ?=
- =?utf-8?B?N3ZhaXRmclQ4U2RRYUlNMFFla0hSVGVMMnBJRm5hK0loVFJuOE9HNEZjOUtJ?=
- =?utf-8?B?ZGs4UzV3N1daQTNyWFNYbnJzUVBGaHJlZkpqRm5RSGJZb01SNVQ2aTZ4bDVV?=
- =?utf-8?B?TDk5bk9wdFBISElNa2FQMEQ0aHU0cjNsU2diaFA0TUJyU2FyU1FvM0EyclRm?=
- =?utf-8?B?NytkVk12d0t4VXZScW45QmlkN2lkUUV1b0FiaXM4QXpSQXdoVG0xMHFPU2Nq?=
- =?utf-8?B?SERoNmt6Vjl6N3hQNEQxazQ0Mi9EQUlNYXZXWE9KZUcvS3N0OHluUktGK2gz?=
- =?utf-8?B?ajluUWFzTTZUMng3bFA4Y1UzQzJ3RlRDblVqcTl1SGM1b3pSR3QrVWNoTVdh?=
- =?utf-8?B?UGgwVDRaUVNqcGpmcEV6a2FFN0V3VEd1ZVdBZXhwTk1Zc01SUUhRUjJwZnNT?=
- =?utf-8?B?N0dMMVZxdW9sN3Q0b1k5aEM3NVQ0UkFrVjhxdEgzYjdnNTgvOTlhUnpYa1kw?=
- =?utf-8?B?S0lKaHhNT1hHdEZDb3IwYUNSZDNtWURGampyOTZ5L1pQZVk5SkNvM2ZETm8r?=
- =?utf-8?B?c3pSdDFEdldsdjB1cUhDUkdBL3lMVDdjRUVpZTZ3TG5GRzVuRkhrK0VBaklW?=
- =?utf-8?B?L0k4aEczdjZhekcrSTNOMWlxN3dhRFhoM2pVQk9nd2pKWTN4T3pVUVd6SUNq?=
- =?utf-8?B?NlR2SGhHNHVqSG5VWEtVeC9WNVhnejkvQXFxOWQyM1llS1cxTW1kSS9nakxF?=
- =?utf-8?B?RmdhbnVWaGw5c0tqUjZ6K2dhZjlCN3JsalhmNTR4MU5lcElUSXFQeU9KNEh6?=
- =?utf-8?B?Rk1vaDM2c3JaZ2R4bGxsWGxwZW1Eb28vSHFGMWduOEFjaWZ4NlNtVGcwOHE3?=
- =?utf-8?B?VXc9PQ==?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 21bc8b77-b0a5-493a-a78b-08de236c8c76
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2025 10:57:05.7058 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lrscVTHTkNpkYywoIlrSAEsLIbpzJ46dQH9ea6h0Eo+6+Ui7NwHsTGnWgrqMd4QDcReKO1vMiyzrpvHUbGx3w3kgUJDJoY+FRtBjI8uBOvM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR03MB6202
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: tbs2910: Disable EFI partition, MP, sysboot, bind
+ commands
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Dragan Simic <dsimic@manjaro.org>, Tom Rini <trini@konsulko.com>
+References: <20251113151858.1072774-1-marek.vasut+renesas@mailbox.org>
+ <4298f3c8-5aa6-49d7-a8c8-693590dbdc32@web.de>
+ <8d5f1351-5ab7-4650-a84c-d8991acc3cf4@mailbox.org>
+Content-Language: en-US, de-DE
+From: Soeren Moch <smoch@web.de>
+In-Reply-To: <8d5f1351-5ab7-4650-a84c-d8991acc3cf4@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:BDRS47qgDtHH78Ft7sPTG3OzuJ+Xe023ckJTVtB/TD4JPyMmzOm
+ uwkjKZudd55YulZBGmF1rl/JGRm+TOzeFYG5606J173VByh7HZqWTuuou2vnHM4vtmdaHpC
+ TJCgaUV3w2XiPo/D9kZ3Wps/euB5S3cHm6ZzPE2ZPYyrL3UMQulGoXxpFBAUn63InAR4R1I
+ 8DOLQcsCpKFEsBX6XEnrg==
+UI-OutboundReport: notjunk:1;M01:P0:NPSvOOxmwgQ=;FrYT/bexcwgv5jJ0SQwrtNXIcJr
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,107 +152,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On 20/10/2025 9:34 pm, Brian Sune wrote:
-> Since U-Boot 2025.07 pure SD Card
-> boot no longer works. Now Altera released 2025.07
-> shows the different on the u-boot files.
-> After testing, the major root case is
-> get_managers_addr. And this patch fix the
-> SD boot stall via pulling from offical.
+On 14.11.25 11:36, Marek Vasut wrote:
+> On 11/14/25 10:53 AM, S=C3=B6ren Moch wrote:
+>> On 13.11.25 16:18, Marek Vasut wrote:
+>>> This board is just short of overflowing the size limit, disable
+>>> support for EFI partition since EFI support is already disabled,
+>>> and disable a couple of commands which are also likely unused to
+>>> keep the board below limit.
+>>>
+>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> Thanks for finding additional useful options to reduce code size!
+> More like use-less options,=20
+If you want to make this distinction, fine with me.
+This just should read: Thanks for you efforts to improve the defconfig=20
+towards reduced code size, which indeed is very critical for this board.
+> but can you please at least try whether the machine still boots and=20
+> check whether those options are really not used on this system ?
 >
-> Signed-off-by: Brian Sune<briansune@gmail.com>
-> ---
->   arch/arm/mach-socfpga/misc.c | 26 ++++++++++++++++++++++++--
->   1 file changed, 24 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
-> index 76747c2196a..c54f5e32454 100644
-> --- a/arch/arm/mach-socfpga/misc.c
-> +++ b/arch/arm/mach-socfpga/misc.c
-> @@ -178,7 +178,10 @@ int arch_cpu_init(void)
->   	 * timeout value is still active which might too short for Linux
->   	 * booting.
->   	 */
-> +#if !(IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5_SIMICS) || \
-> +	IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5_EMU))
->   	hw_watchdog_init();
-> +#endif
+> Thank you !
+Do you really think I (as board maintainer) would Ack this patch when I=20
+wouldn't find the changes reasonable!?
+And of course I also tested this (on top of v2025.10) and the board=20
+still boots.
 
-
-This is intended for internal use and should be removed.
-
-
->   #else
->   	/*
->   	 * If the HW watchdog is NOT enabled, make sure it is not running,
-> @@ -223,8 +226,16 @@ static int do_bridge(struct cmd_tbl *cmdtp, int flag, int argc,
->   
->   U_BOOT_CMD(bridge, 3, 1, do_bridge,
->   	   "SoCFPGA HPS FPGA bridge control",
-> -	   "enable [mask] - Enable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2) bridges\n"
-> -	   "bridge disable [mask] - Disable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2) bridges\n"
-> +	   "enable [mask] - Enable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2), F2SDRAM0 (Bit 3), F2SDRAM1 (Bit 4), F2SDRAM2 (Bit 5) bridges\n"
-> +	   "bridge disable [mask] - Disable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2), F2SDRAM0 (Bit 3), F2SDRAM1 (Bit 4), F2SDRAM2 (Bit 5) bridges\n"
-> +	   "Bit 3, Bit 4 and Bit 5 bridges only available in Stratix 10\n"
-> +	   "For example:\n"
-> +	   "1) To enable and disable all bridges (command without mask):\n"
-> +	   "	a) bridge enable\n"
-> +	   "	b) bridge disable\n"
-> +	   "2) To enable and disable HPS-to-FPGA and LWHPS-to-FPGA bridges (command with mask):\n"
-> +	   "	a) bridge enable 0x3\n"
-> +	   "	b) bridge disable 0x3\n"
->   	   ""
->   );
->   
-> @@ -261,6 +272,17 @@ void socfpga_get_managers_addr(void)
->   	if (ret)
->   		hang();
->   
-> +	if (!IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)) {
-
-if (!IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX) &&
-         !IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX7M) &&
-         !IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)) {
-
-
-The condition for non-Agilex5 platforms should be rewritten because 
-|sys-mgr| has already moved to the driver model for these platforms.
-
-
-> +		ret = socfpga_get_base_addr("altr,sys-mgr",
-> +					    &socfpga_sysmgr_base);
-> +		if (ret)
-> +			hang();
-> +	}
-> +
-> +	if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX) ||
-> +	    IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX7M))
-> +		ret = socfpga_get_base_addr("intel,agilex-clkmgr",
-> +					    &socfpga_clkmgr_base);
-
-
-Similarly, the section for Agilex and Agilex7M using |clkmgr| can be 
-removed, as both now use the driver model.
-
-
->   	else if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X))
-
-
-The N5X section should be updated as:  "if 
-(IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X))"
-
-The remaining part of the function can remain intact.
-
-
->   		ret = socfpga_get_base_addr("intel,n5x-clkmgr",
->   					    &socfpga_clkmgr_base);
-
-
-We’ve already tested the above changes and they work as expected.
-
-
-Thanks.
-
-Tien Fong
+Regards,
+Soeren
