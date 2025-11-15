@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 340C2CEB2CD
-	for <u-boot@archiver.kernel.org>; Sat, 15 Nov 2025 11:25:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EABCACEB2CC
+	for <u-boot@archiver.kernel.org>; Sat, 15 Nov 2025 11:31:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABC8D8415D;
-	Sat, 15 Nov 2025 12:25:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 372A5842EB;
+	Sat, 15 Nov 2025 12:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LsaiWNZ8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AAoy7+A/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E79638416F; Sat, 15 Nov 2025 12:25:20 +0100 (CET)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 59EFB842F4; Sat, 15 Nov 2025 12:31:37 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3C8A84158
- for <u-boot@lists.denx.de>; Sat, 15 Nov 2025 12:25:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28DC9839DF
+ for <u-boot@lists.denx.de>; Sat, 15 Nov 2025 12:31:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-3e41b6469f5so1249931fac.2
- for <u-boot@lists.denx.de>; Sat, 15 Nov 2025 03:25:18 -0800 (PST)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-34372216275so3221026a91.2
+ for <u-boot@lists.denx.de>; Sat, 15 Nov 2025 03:31:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763205917; x=1763810717; darn=lists.denx.de;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OtPz+I/DMCWMb6DgKmHiR93nQfT0kYrQ2b0JkUQrXI8=;
- b=LsaiWNZ8HfXKx5zAzRZ3RUtM+QIBPNO8r9zgVujscISVcL8rmzemKLP1FwkSwd71eh
- 5OWaBCNOtubt2XPWI2XrgKlIFTDvZqRz3OpQcQinYb5oLN4VJ8lmKB528V/0gJf/oIjU
- JjKPaAC4qoVqU+HArPYeOIteXk0oK5+gVjgye7ir49gQ0KVGTcRureb78aKG9DyFrGYq
- JOhT8bRJzbUKi/hm7aVanGLfi7/4GmaQnNwNNAZ5B3NVEFOlynnbai0gQFGJM44kqN/H
- M377UTMT0H+WXmClxKv0XoDe1FbB5I6uyaQxGjyx2d9bs4oGLSN8PFW9z55hBqswZZFU
- 8tKg==
+ d=gmail.com; s=20230601; t=1763206293; x=1763811093; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rc2YHLrOD1udY/Z66pGzZlfjbBdR8LhkEWq9hcIPIWM=;
+ b=AAoy7+A/iQb2tfyPN2E/J7rRGLuyQKYX0FnDc7rzT+pl21TUIQqb8bHZwZZN5yIDio
+ NkrarPvvGKO1AYgp68jCIvH/kaWveoUzf5tTT0dHW2Vsob3mMEXeRFwpESJ/NTCAu/1t
+ J2GcO4qBQWAxIri97DHHnPiPvx1TnsENvF2iRxvKGm2v+nLOdvgZ9IjZ8RIpSs2m1GJC
+ FXZMNS7rbOtuDD1aNM5m5lyo3uzg1Uv1TtgGtdI3/a7HiCNZ8l2TBGBnSCpEcYhoZwLC
+ Tgq0pLNV67vVlFsbpx03GJT0luwj89B3n2JWojKSfe6kSIlMPYPXb+iZQARDgwGuZ/+J
+ 99Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763205917; x=1763810717;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1763206293; x=1763811093;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OtPz+I/DMCWMb6DgKmHiR93nQfT0kYrQ2b0JkUQrXI8=;
- b=IowAlFZOgxKijJ5WjhVpfpSMc5lDW91ij/dSBJNGYLvYYSgD4mqtBtdIQOKWBkSjgA
- 1s4Pqwrh6v24fImL0CvkMxBkRZwovR2qVgIbEmFprJn1UDghVhEaAKkhs0o8loX6zwbL
- aR0Cbk0oK+FbuJ/FS7kVm2UQLPkVxIZSp4d2mgcYntDbAnvxcAKU3AZ4kPtUO4pLO7R+
- NSvP7bYpJOZXR+jtrPGtwH/SHfDSQNrc28JOFX2oM0XzEhJqk+NCJWfd/YF4i7Ixtfq4
- OJxv1n2KJ/1RbC2QS6DxE2/0ewT4snlMj3mOOK6oBQqVKM2CmM9I7uOAdPPPKZBrjvet
- Rb0Q==
+ bh=Rc2YHLrOD1udY/Z66pGzZlfjbBdR8LhkEWq9hcIPIWM=;
+ b=JJjpVWZbw5HO8ktrTdXagBAjZSk18uFeWls3gQii4mVqYvC/AlMTvN3rWfRsqcncdL
+ 4Hw1sJzyx0aaOzEh5ywqrFjmhRUIvp5tONMX4NsaKqm+2zuk0ZNVAHMqy37JlqzTngJ7
+ 28CE7ZmpLucIgiXqEHF2V0Ed48bCA18kba9LEwLmmMV7V7J1ZWOYzJz/iLJe39UGoUIV
+ BPrwNOWv3XZG+9LEfAYx/oQwuNZAHmb+A+XxXPaln7pFZN0ucyAW34CO0ULnen5dxr5K
+ RXZ6PKR5uoifRHifDP9Oj0EXiWLpA9yw/K5Hc8o/1mmSKuWSi1ve7ANaGPXtPck7ShuN
+ zdDQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVlBuF1dTzmUuK5jy/fv/+vPhlCetUOkNkQlzKp9NF8ppiJYkI7Spk7mjXMByTK5/J8Xxji1Ug=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2Pfiq37uhdit8QgWhR71HaGKN61r0g346lCeWU2XPRxiqB+Pm
- UYEws3bijNsIKFmLOJem1z8yI4g7wzz16re5lPVBbaiFP8Wjvd0BTcvT9O+AYx0s9RR15iCBCVv
- OEyw1yFgY+ctHCYYmcxUTHBnowAwlmmWa/8AQbjE=
-X-Gm-Gg: ASbGncsc48adcVDAm0TxpTaKP8Ol5V6A8Vtxfifdg2j8mfPToPSV4xREepjtLdqLGge
- 9BVL9YIqCeP1grvItJn8Wka9PABuVEoIKQGhecMEFDkNdq74nv7aPGyJvkIBMS84He5JRBJS4Jn
- BiGnJYf7OYIdnbyNFLfpqnVr8BFQ4TcCmpLRmgCYs3wKEfPuABrY05ENpraIsBz5DaDQCzB4K/U
- 2msbdy0Pltd/bb2nfZfQQ41IgA5gc6VM8PlFV9zb6SRT7EgXexDpe+oD8mQ44Us/ufQUUjqtFqZ
- siN8ygY=
-X-Google-Smtp-Source: AGHT+IGQvVh9UoOEHlWJU9SvjkynEdksvaXndGWCrb8NYpzFDWt1sULsot7RUHmRJ8L5RRECEebPPBumYzIY6DBXXiM=
-X-Received: by 2002:a05:6871:878f:b0:3e8:9837:dae7 with SMTP id
- 586e51a60fabf-3e89837e3e1mr329925fac.51.1763205917372; Sat, 15 Nov 2025
- 03:25:17 -0800 (PST)
+ AJvYcCUu/XlSsM8T/JOmLwFW1e0jwirMtGjDery6mLTMU8rDGyHIVjy9J/MpPL+zsBrEqgIKxiWLbz4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOqXBbZvrOwFsn67gCrXLc/3DcKR/fxK4hCgnKHlIsPAZrynpY
+ 4Rde15dE37Eq1LCJ9/z3j36pbI/kN61rWFFJT4H49pYFSqNREiI5n++E
+X-Gm-Gg: ASbGncvN03m9mvu7GSPIe5KvFrKcPlj+ePvEDT4Xeaa88EVkjDcpK0dBvmGb2Xe/lEp
+ taHgDUM3wokKpbkOhpMImL8b7sNDL6HTxp8BtTOLyKBpUlSO85BjkmQQfD/XmNYbH+FJM6JlkEg
+ ZZm28cIVnfhHYIccjp3R+dlB+koJ4J9gjy4NbE50TOzxgiod8UMRiY2rzHZZwH1S/DFZqcS3YXl
+ j+HnVxixTC7s9i66R3T/8dj1f5Gh+RxqT3cQNaPwIf/UusdCQgAzZtCZWqqa4xyK201Zpo0mUNt
+ p6SBXR0ZU7RnAUtTLbYO7IIphNYAxRMLazMMzYvR4VVKE/6QDMZc0T3CLLBpPGe8iOnJy13NABN
+ hnPsk8bU4b6dS5cjni6F5a7dUY3JACAZZU5mwrXoQTwM/ss7+5N6LjLlUvRfFLIYg2Jel0KYCVT
+ hH+0LRe49oi/Xb0MFGlPPWq3ufnw3+K5ivPfMXdhzkkeD5MQzR
+X-Google-Smtp-Source: AGHT+IEC6CflGtTcF1mF6DvhFC0OQPEmVrAeKwUz+0QuT+Hi1EExLbHe3RqIE17OS6A4WBA2fGOb3A==
+X-Received: by 2002:a17:90b:1c04:b0:32d:d5f1:fe7f with SMTP id
+ 98e67ed59e1d1-343f9ed32bcmr6775202a91.15.1763206293510; 
+ Sat, 15 Nov 2025 03:31:33 -0800 (PST)
+Received: from localhost.localdomain ([185.213.82.113])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-343e0715737sm12541404a91.6.2025.11.15.03.31.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 15 Nov 2025 03:31:33 -0800 (PST)
+From: Brian Sune <briansune@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v1] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+Date: Sat, 15 Nov 2025 19:31:18 +0800
+Message-ID: <20251115113118.783-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.47.1.windows.1
 MIME-Version: 1.0
-References: <CAN7C2SBxZ2-A9=akV3z4dNdzqUtq_Sq8pq7WvzVDtVub50cabg@mail.gmail.com>
-In-Reply-To: <CAN7C2SBxZ2-A9=akV3z4dNdzqUtq_Sq8pq7WvzVDtVub50cabg@mail.gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Sat, 15 Nov 2025 19:25:05 +0800
-X-Gm-Features: AWmQ_bnBGSob0r9GSJ44g6L8bzPe1_mrfkmH5vU65RxbEA8l_q11R_v5gLLJA1c
-Message-ID: <CAN7C2SCwonGW4uC7oqqWY85XBfA0iuJoCJ7oY3bzm1cfxmSOHQ@mail.gmail.com>
-Subject: Re: [DEBUG] U-Boot SDRAM Calibration breaks and unstable
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,41 +97,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> a) reset
-> b) clock manager
+This is a quick fix to stablize what
+currently users encountered bootup stall.
+This fix is found under board boot trials.
+No logical code can be explained why it
+fails the SDRAM calibration but applying.
 
-Short investigation and test shown that the watchdog is the
-root cause. (Not proved by code review just test run proposed)
+Signed-off-by: Brian Sune <briansune@gmail.com>
+---
+ arch/arm/mach-socfpga/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-This is not 100% sure but what is observed from the board boot via
-terminal repetitively stop at SDRAM calibration.
+diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
+index f2e959b5662..4011fe4784b 100644
+--- a/arch/arm/mach-socfpga/Kconfig
++++ b/arch/arm/mach-socfpga/Kconfig
+@@ -117,6 +117,8 @@ config TARGET_SOCFPGA_CYCLONE5
+ 
+ config TARGET_SOCFPGA_GEN5
+ 	bool
++	select WDT
++	select DESIGNWARE_WATCHDOG
+ 	select SPL_ALTERA_SDRAM
+ 	imply FPGA_SOCFPGA
+ 	imply SPL_SIZE_LIMIT_SUBTRACT_GD
+-- 
+2.34.1
 
-Doing a cross-check from Altera SoCFPGA trunk shows a Kconfig
-different.
-
-After modified the Kconfig and select WDT and required driver.
-The SDRAM calibration fail no longer triggered.
-Power cycling and soft reset shows no issue.
-
-Patch will be applied to fix this issue.
-
-```
-U-Boot 2026.01-rc2-00033-gbee3c63434db-dirty (Nov 15 2025 - 19:17:31 +0800)
-
-CPU:   Altera SoCFPGA Platform
-FPGA:  Altera Cyclone V, SE/A5 or SX/C5 or ST/D5, version 0x0
-BOOT:  SD/MMC Internal Transceiver (3.0V)
-DRAM:  2 GiB
-Core:  33 devices, 18 uclasses, devicetree: separate
-WDT:   Started watchdog@ffd02000 with servicing every 1000ms (10s timeout)
-MMC:   dwmmc0@ff704000: 0
-Loading Environment from MMC... Reading from MMC(0)... OK
-In:    serial
-Out:   serial
-Err:   serial
-Model: Altera SOCFPGA Cyclone V SoC Development Kit
-Net:   eth0: ethernet@ff702000
-Hit any key to stop autoboot:  3
-```
-
-Brian
