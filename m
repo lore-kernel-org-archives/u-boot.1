@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 051CACEB2CA
-	for <u-boot@archiver.kernel.org>; Sat, 15 Nov 2025 07:55:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8282ECEB2CA
+	for <u-boot@archiver.kernel.org>; Sat, 15 Nov 2025 09:05:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 400A183F2F;
-	Sat, 15 Nov 2025 08:55:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
+	by phobos.denx.de (Postfix) with ESMTP id AFF8083F4F;
+	Sat, 15 Nov 2025 10:05:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="sFPpf/lE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mr/a0A3b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AAEF84137; Sat, 15 Nov 2025 08:55:40 +0100 (CET)
-Received: from outbound.pv.icloud.com
- (p-west1-cluster2-host5-snip4-5.eps.apple.com [57.103.64.216])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8AD88840B0; Sat, 15 Nov 2025 10:05:52 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0878883F15
- for <u-boot@lists.denx.de>; Sat, 15 Nov 2025 08:55:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1998B83F4C
+ for <u-boot@lists.denx.de>; Sat, 15 Nov 2025 10:05:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=infi.wang
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
-Received: from outbound.pv.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-west-1a-60-percent-5 (Postfix) with ESMTPS id
- 871181800172; Sat, 15 Nov 2025 07:55:31 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
- bh=NFwG5A1ZCSl+s7U3lAvELX8HRvZVhFE9FMYcI/jwR3U=;
- h=Content-Type:From:Mime-Version:Subject:Date:Message-Id:To:x-icloud-hme;
- b=sFPpf/lE6H0dBmnUSPHuAZcwxckEMV0FDcx71I0/4j5saLGtCDhnNleE3wgOzKkxU9s7S9/7zHuZjfXHJjOiLINRq/uNQWcHwNEhYkXl+hIqoB5ePMRW/cXCskVTkRhWtfQVm0VXxszLncrtkOMR2SvpoZ/qYl9PGLeeQSAh0YReANU5ousuqlt4nGSa7k7nm/CdJLILPsIaTrCyUvIM5Q38pfpE3B6Dv20AIglqBfcjCdUIXKNCzGudE6lUvHN9OT2d54t5aOjip4JrDqH8xadEd3/gGd1C4b87jnmIQAGHoMmghICvKLzw8PHex+WermKbMFR1kGHRm9DWk7JZlQ==
-mail-alias-created-date: 1549370554000
-Received: from smtpclient.apple (unknown [17.56.9.36])
- by p00-icloudmta-asmtp-us-west-1a-60-percent-5 (Postfix) with ESMTPSA id
- A55501800157; Sat, 15 Nov 2025 07:55:29 +0000 (UTC)
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-From: Beiyan Yun <root@infi.wang>
-Mime-Version: 1.0 (1.0)
-Subject: Re: [PATCH v5 0/2] net: phy: aquantia: Switch to generic firmware
- loader
-Date: Sat, 15 Nov 2025 15:48:56 +0800
-Message-Id: <4D63D655-F67F-4FC7-B02F-653BF49754EB@infi.wang>
-References: <20251101123401.110681-1-root@infi.wang>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Zi Yao <ziyao@disroot.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Sky Huang <SkyLake.Huang@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>
-In-Reply-To: <20251101123401.110681-1-root@infi.wang>
-To: Beiyan Yun <root@infi.wang>
-X-Mailer: iPhone Mail (22H124)
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE1MDA2MiBTYWx0ZWRfX8au3vtS/OQJV
- OfRyLbFq+KWnrAzMFiPIDvvzbKIwZ5OG2OrRPnbU8/6/L1+h2WN+OxKiokbQbWitlLWGraCkGUE
- nsvIMUHeRYyXp41daC4JVqyNCSgVG4j5rhZjwtgYggzbj683Bel6OFMnwPo+xOt4v9QcrQp4tj2
- ps4mSG8UPhpl7L0pq13zFXa8vHun5LuSdojSESwa0BBi0eSGeni3ctk8idqJZdTONTOWByrKTH2
- zDsKMUrC30sda+jacDlEOOkgpQjunbcQcVY0WLscaS3RqD+nvij3wliUNzq0jWc5J4YV7qBQkpH
- 9qydBmOG7XkQS3sLoek
-X-Authority-Info: v=2.4 cv=Uf9ciaSN c=1 sm=1 tr=0 ts=691831f5 cx=c_apl:c_pps
- a=azHRBMxVc17uSn+fyuI/eg==:117 a=azHRBMxVc17uSn+fyuI/eg==:17
- a=IkcTkHD0fZMA:10 a=MKtGQD3n3ToA:10 a=1oJP67jkp3AA:10 a=6UeiqGixMTsA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=juaZcWxvmjS43f8_BdkA:9 a=QEXdDO2ut3YA:10
- a=8iqKRNYe-yLjZuHCO3rH:22 a=HhbK4dLum7pmb74im6QT:22 a=cPQSjfK2_nFv0Q5t_7PE:22
- a=eeDtFMHqlkPJeBvn9BwJ:22 a=Z5ABNNGmrOfJ6cZ5bIyy:22 a=jd6J4Gguk5HxikPWLKER:22
-X-Proofpoint-GUID: dUaL1qnd4kAuXLyX1njqBqyWFQMNXEct
-X-Proofpoint-ORIG-GUID: dUaL1qnd4kAuXLyX1njqBqyWFQMNXEct
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-15_03,2025-11-13_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- suspectscore=0 mlxscore=0 malwarescore=0 phishscore=0 spamscore=0
- adultscore=0 clxscore=1030 mlxlogscore=999 classifier=spam authscore=0
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
- definitions=main-2511150062
-X-JNJ: AAAAAAABw95RknG8e3BvTg/andc/s4ghkdhtUpq6J94TIOeKLYGUvihkz61rlyKkJNerr0l5fcF6EL9YeUDVT/Bi/+fksdymbWJQhlgr3NPnBaOFip5lIs4QbCdZaU4li4TnifsvhfuzuVgZMjSFxUbuL9UsPhzlPxZDN3uT0K+7lva3RPvauHDBC6KCBZsbm3A9pDn4rvNtE9sD53CwwTUh2TeLaoq3KwgKfrqy+yNM2S9rN0PlgqAMKsBH1eLzoyiLarewicCMYCt+B730pzasfQH9wvBX+j+995RJYsU+KtJXGnYEyujRHGvLQ7yGsySsFAvRZksaAzyX7h1dUD5RVueb8eMaeU5QL/7egKWLPeBCYH49oFaCZyWHBueTPYGVJ8l5mMHh/0fvuQoh465D2Cc2avr1QO/4CX4fpjnd6NrGMr6by/VL0BQVLQtwTVfq0IsZfvTk+1XfI4sgAOu3F/SDtnaMbiOeUjMvIs4rKa31umS7eBo4T12DycesZJpb0DYmPQq3K+pqb4x2/SY5YAmRc2++9ApfQgQzuC+EIzqJUSt12IQgFeFMNBkPODg2HPxlfpxNErMeYZpHZqdg+dNO/wCh941grBen8q1a1HeEJFO6xLDmhsWanIUaT3lfXRJXDp5ZRNVqiaXRI2nMNDqpGNH0yllgEPjbwE7CgZ35iw5gBnPT895Xp4hIDm+tHMfpa0FyO0gpv/8Eijl106WRE4bSYktz5WEEnU9jiRD4wo53jHSyKD3QYhbWhSi0LZwejbiyWhZhnQWyZFjrE0OqEcHV5rT5moR4/w==
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3d18422565eso1944292fac.1
+ for <u-boot@lists.denx.de>; Sat, 15 Nov 2025 01:05:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1763197549; x=1763802349; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=fHWR6ajM+ybEvprshCJki1037FgsTnA1V6F4AGJaQwE=;
+ b=mr/a0A3bSpGF8a1ybqdHIMXNw4n5fZtJGJttnQvqcOEXX3BMj/Gb1cWxb9rS2zqZDR
+ yGafklLS8pAgwNC7R6aKkzwJsd2c+9E7unZLFYGIEZUbDx9ca+lcSatbsUOEujxsduVd
+ 0DVW4IiI1vcd0ACSPp5Y5XFcaX10KKYjJIgaDaRbeAHreZ15x7WXMo3Idow/Orca1rcI
+ +phOuQSavdBVVFbqo0u959qQ6oU3rA/QB5cyMlx0g66CRvRBIGsTJf51n4BEr2LqROW6
+ kjnsUaYgowOynSxxdgcW46uT/ZUVqYLaDEx1UdAac6snE6kFjL3XkVtwspBtenu7Pbon
+ L26A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763197549; x=1763802349;
+ h=to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fHWR6ajM+ybEvprshCJki1037FgsTnA1V6F4AGJaQwE=;
+ b=to+mdNC0gA0FQ7nUrY7QEYn1lRWSYehZQRVDUo+xz7a4jk76O4KQ2+1XS9zIU1epFO
+ e7b9Jw5Ve4ElFl9GISX1Jw6ZkKVA7nQzcCQAloqa5LEm8sGaKsueVPEhMYHRBbjFZU+A
+ qilRP+c1e9hartcb7y0MmG7JZUphUC0f7qxBCaSbR3Dy/Ic+lJeC2JGj9J+rUVHpxlhz
+ 9O8vPABFLK6Q61ciGp/4lROy/pNZSt8s/fnlWwKKHt0qvjbVeiUJD47Fd9WJ/vExQoK1
+ lrZHj4SU9MxfsnOLlXS9bicmh3KTT18IOH/nNwJOvPrs/AHnkRb/bGMP5TA9tfybKKId
+ I1xg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWBSvK4RuUCmModnOStaRHcZfRM2aTBTYuDETGzwNrPhyzXxMr8+o5l6QPwtlQ63UF619TXqMg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzyFlNY+3WFlnyc3z60uzGjg1cjz+zWJRub8UKQSKcVxdCPyKF+
+ 5c2TNRI8+WOfmHmHo4SWmlLRTzcKBaMYLVnY3OyPizmyFhmMlHwQWGi+03OD9LUSXBMT7yFTTSY
+ Jjo166Hxrv9di8ptBdGY90rpOn9j7tIU=
+X-Gm-Gg: ASbGncuK4eKlj3JllahVm0pexEGNHlrg6fwOoG1BjCCyW2iQhSEIabomutHc0MzrJmQ
+ FsjYvyl2KjrahZHIbgfjkN9Ia8qx43Glu05TEYNBSq2SOmcW3POWb1XuMEX9NmAqEgOpwSSxqvt
+ GYZM9iwB6UfCqVvy/sgJ7fbHmrpBZAncCf5GidIRTWeFFDwGNtvXYHBiyz0RoNb2fGRhfMBAMXA
+ mrc9ZGyK/odFw4wOH53UABQW5mPIs9DfulqtbQSOLbg1TwnT3OgTsuFAMi86Q==
+X-Google-Smtp-Source: AGHT+IEC9lnUTKQ6nl4UYpsCFOOZOn+dy7J/XO251PATQ4kt4MPGnRPmUc2gCG91X3ZZeHQv1F3tyvpUuC3ACvuwAhs=
+X-Received: by 2002:a05:6871:6a7:b0:2d5:ba2d:80df with SMTP id
+ 586e51a60fabf-3e868f04817mr2685090fac.8.1763197548664; Sat, 15 Nov 2025
+ 01:05:48 -0800 (PST)
+MIME-Version: 1.0
+From: Sune Brian <briansune@gmail.com>
+Date: Sat, 15 Nov 2025 17:05:37 +0800
+X-Gm-Features: AWmQ_bmX1bl0ZwGaQtn52oXBk-vaXf8aPjI01vosJaPkN3kJz4wQHsaGW7T7u1o
+Message-ID: <CAN7C2SBxZ2-A9=akV3z4dNdzqUtq_Sq8pq7WvzVDtVub50cabg@mail.gmail.com>
+Subject: [DEBUG] U-Boot SDRAM Calibration breaks and unstable
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,64 +88,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Dear all,
 
-Gentle ping. Any comments on this patch?
+It is found that the latest commits had introduce
+some kind of calibration fail.
 
-Thanks,
-Yun
+1) Seems like ECC had been removed or not even
+introduce to mainstream U-Boot
 
-> Beiyan Yun <root@infi.wang>=E6=96=BC2025=E5=B9=B411=E6=9C=881=E6=97=A5 =E4=
-=B8=8B=E5=8D=888:34=E5=AF=AB=E9=81=93=EF=BC=9A
->=20
-> =EF=BB=BF
-> Hi,
->=20
-> This patch series refactors the Aquantia PHY firmware loader to use
-> the generic fwloader framework.
->=20
-> The existing loader is limited to loading firmware from an MMC device,
-> which restricts its use on many devices (e.g., routers) that may use
-> other storage like USB or have a UBIFS root filesystem. Migrating to the
-> generic firmware loader allows firmware to be sourced from any backend
-> supported by the fwloader scripting framework.
->=20
-> The series is structured as follows:
-> - The first patch prepares current loading code for fwloader.
-> - The second and main patch replaces the custom loader with generic one.
->=20
-> This change has been tested on a Buffalo WXR18000BE10P router, loading
-> firmware from a UBIFS volume for Marvell CUX3410.
->=20
-> Changes in v5:
-> - Remove fsloader codepath
-> - Drop binding changes
-> - Make script name static
-> - Minor refactor
->=20
-> Changes in v4:
-> - Split firmware upload helpers change
-> - Reorder `aquantia_read_fw`
-> - Make `aquantia_read_fw` weak to allow overide
-> - Rename exit label in `aquantia_read_fw`
-> - Kconfig polish
->=20
-> Changes in v3:
-> - Select FW_LOADER with PHY_AQUANTIA_UPLOAD_FW
->=20
-> Changes in v2:
-> - Add support for script based loader
->=20
-> Beiyan Yun (2):
->  net: phy: aquantia: refactor firmware upload helpers
->  net: phy: aquantia: use generic firmware loader
->=20
-> drivers/net/phy/Kconfig    |  23 ++++-----
-> drivers/net/phy/aquantia.c | 103 +++++++++++++++++--------------------
-> 2 files changed, 59 insertions(+), 67 deletions(-)
->=20
-> --
-> 2.47.3
->=20
-> base-commit: 62b45e82bdbf703571450e97f605893fe0d50530
-> branch: aquantia-fsloader-v5
+2) Code diff shows no major driver/ddr change before
+the calibration aka sdram_probe.
+
+Based on the above simple checks, There must be
+s.t. to do with
+
+a) reset
+b) clock manager
+
+Please maintainers have a look and resolve this trouble.
+Issue had been reported in altera forum as well [1], [2].
+
+Meanwhile, rolling back to altera uboot trunk 2025.07
+shows no issue.
+
+Both 2026.01-xxx and 2025.10 also can trigger the issue.
+Master reset can trigger a good boot very unlikely.
+
+[1] https://community.altera.com/discussions/soc-system/hps-sdram-calibration-failed/337594
+[2] https://community.altera.com/discussions/soc-system/sdram-calibration-failed-/337648
+
+Brian
