@@ -4,21 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E705DCD4F3E
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 14:45:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5C37CD4F3E
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 14:45:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8766483B07;
-	Sun, 16 Nov 2025 15:45:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D206183B24;
+	Sun, 16 Nov 2025 15:45:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 750F983AE6; Sun, 16 Nov 2025 15:45:19 +0100 (CET)
-Received: from smtp.gentoo.org (dev.gentoo.org
- [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
+ id 62782839AC; Sun, 16 Nov 2025 15:45:24 +0100 (CET)
+Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF653839A8
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 15:45:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4173F83B1E
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 15:45:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
@@ -26,15 +25,15 @@ Received: from ofovo.local (unknown [116.232.48.119])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: dlan)
- by smtp.gentoo.org (Postfix) with ESMTPSA id BF87E33C1EB;
- Sun, 16 Nov 2025 14:45:10 +0000 (UTC)
+ by smtp.gentoo.org (Postfix) with ESMTPSA id 52AD033BF0E;
+ Sun, 16 Nov 2025 14:45:16 +0000 (UTC)
 From: Yixun Lan <dlan@gentoo.org>
-Date: Sun, 16 Nov 2025 14:43:57 +0000
-Subject: [PATCH 06/11] clock: reset: a733: add initial support
+Date: Sun, 16 Nov 2025 14:43:58 +0000
+Subject: [PATCH 07/11] gpio: a733: add initial support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251116-01-a733-soc-support-v1-6-fb4c8db78e75@gentoo.org>
+Message-Id: <20251116-01-a733-soc-support-v1-7-fb4c8db78e75@gentoo.org>
 References: <20251116-01-a733-soc-support-v1-0-fb4c8db78e75@gentoo.org>
 In-Reply-To: <20251116-01-a733-soc-support-v1-0-fb4c8db78e75@gentoo.org>
 To: u-boot@lists.denx.de
@@ -44,21 +43,21 @@ Cc: Andre Przywara <andre.przywara@arm.com>,
  Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>, 
  Yixun Lan <dlan@gentoo.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=17895; i=dlan@gentoo.org;
- h=from:subject:message-id; bh=IPzZlbcBNuEJq/FOSoDRVsTPdaPDqd9RKjv4yV7Mu5U=;
- b=owEBzQIy/ZANAwAKATGq6kdZTbvtAcsmYgBpGeNIfUI3DMBHA8HhqFIpAhYARB0NGuyfsoVIm
- lGOPyTClkSJApMEAAEKAH0WIQS1urjJwxtxFWcCI9wxqupHWU277QUCaRnjSF8UgAAAAAAuAChp
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4141; i=dlan@gentoo.org;
+ h=from:subject:message-id; bh=mWYJAy8bqzXTuaxqv1nhF4kHyaOaIFky7f00AxvVNIw=;
+ b=owEBzQIy/ZANAwAKATGq6kdZTbvtAcsmYgBpGeNMwsVTTPhAGre2ztFTIGDk62TtrEIPJzgXv
+ i+N0myUdcSJApMEAAEKAH0WIQS1urjJwxtxFWcCI9wxqupHWU277QUCaRnjTF8UgAAAAAAuAChp
  c3N1ZXItZnByQG5vdGF0aW9ucy5vcGVucGdwLmZpZnRoaG9yc2VtYW4ubmV0QjVCQUI4QzlDMzF
- CNzExNTY3MDIyM0RDMzFBQUVBNDc1OTREQkJFRAAKCRAxqupHWU277XnpD/9GdiQ0kBKiJdWjQa
- 8hBgXC6zkPsA8crRGrU1uplX1k7oSn/if1iAKIi7zklirsIwZ1OLo40Up7Ds97LHZAqxbnf05Xk
- o5n+acX41+XKf3A5bRPogAMYxEqIteu8IJJB66VdOzP9huyfImVKFGW4jANuRgh4PN5poopDVma
- KbyHzeytqULBGeq8TWPQOnKwMhZH2sEcJJWxYMaYXrdSQB6fcVs1XjX+xpOzQcApIT9fZDBKTjk
- 11cYejiAJoRc78FA3k1Oj6w0plyn9Eih09dzHzDAVUmCt2Ax24sGiq3vZTfM2mBvDVbznxayGL2
- w5pCwp4gBkFpq0o8H5v2fiM9zkxUeeLo3bkH4v5wQE7fot5q4QOiVud+ySv2yyofdoN1Ad0jXgS
- tn3EW/757Ecd/A5igGVb/LmYKvv9l59d3mKg4iea64rrPt/BN8tKZtwmL2sDMbXyQZpOkdxq0ee
- 3wzqBK4Rrd/hkAZTBviedPJa/jF2kYZ0TlOoe43eB5QdE7hO2wlKRIx8HadMZCR226iNKI7cnYU
- e65HWGOhNdLMKs//GwXY4mfnBayjivOo5CnicFDOyouhbGv1Cw4eHXTnfE8fyWcVUwbc7dbaXkR
- lPciIdMxM8B6n5ow418N2lu9EOGLrjT/kn38//3w1PBHQ3EVS/IKG2mDV4tmo6mDDZ9A==
+ CNzExNTY3MDIyM0RDMzFBQUVBNDc1OTREQkJFRAAKCRAxqupHWU277Vn7D/9iZhMIEt1Hvdzq9/
+ eOnQzb+S4dGWJZF7hGHcJcaXEo9RGSX292PvtWUDC9phJyu8fEanH6+Sc8A7ufYXjl8kLLzrEIl
+ 8wZB0YLieqP7rX5FjUSuRz0hfzMXQc6AIL1sTtj0Uxq/p/04ZroDYoyjacRgrwXjprlBoeyOIoH
+ ALJvI+smq+/LAZDM43mNfosxd7rzNlDmxMWu7OZbEF7ESwWleLNoquEp8+3JPKrQO7yeGOKNL9u
+ o5UxSutWVodq4v13tsqZqzX6hNLW+9ZkA4IWcWvIAf4yxI7tyLbfwf9svDRgEXNyIHoNZOu+t40
+ 4hVjs5DC4QLdPU+nXoshWLnGjHyhPAutXBzSw66KtB1nKVafJovsYivUzXh8XgeQAqqJFA1RPT6
+ A5IHNgzNBL7z2kxQu8xvZIQqqrQjumRRJwqIqajTZPuMyh4Nxgp1oY0Ys32mYTlwlJ2WaBLNycO
+ 1XfyAr4qePwSih/xA4bR+L6CjvEs4RCnBO5HdeoMI/gh4EobYeqxyd4HhUwzjmm4Np+T1LJXkA4
+ cXdGiRdX4sup9PRf02x/MEcW8hskS8j769z0Rx0idA4YT1LgpuNw96BgcXxkN+/PeWovyCmPWqR
+ whHPl3FMnfp6p9a3zfklxiTr5CUrbiFxlQsjqFbYD9t7MgZkIMNRI3B2DXsULxYJCY7w==
 X-Developer-Key: i=dlan@gentoo.org; a=openpgp;
  fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.denx.de
@@ -77,559 +76,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the clock and reset support to A733 SoC which cover
-devices of gmac, mmc, I2C, SPI, uart, usb.
+In A733 SoC, the GPIO IP block has changed its arrangement, so initial
+GPIO base address and port size need to be adjusted.
+
+Introduce new SUNXI_NEW2_PINCTRL in order to reuse the driver in future.
+
+There is no PA port exist in A733, but introducing a virtual one as offset
+0x80, and with the port size 0x80, it will iterate other port correctly
+starting from PB as offset 0x100.
 
 Signed-off-by: Yixun Lan <dlan@gentoo.org>
 ---
- drivers/clk/sunxi/Kconfig                     |  14 ++
- drivers/clk/sunxi/Makefile                    |   2 +
- drivers/clk/sunxi/clk_a733.c                  |  75 ++++++++++
- drivers/clk/sunxi/clk_a733_r.c                |  36 +++++
- drivers/clk/sunxi/clk_sunxi.c                 |  10 ++
- include/dt-bindings/clock/sun60i-a733-ccu.h   | 188 ++++++++++++++++++++++++++
- include/dt-bindings/clock/sun60i-a733-r-ccu.h |  34 +++++
- include/dt-bindings/reset/sun60i-a733-ccu.h   |  85 ++++++++++++
- include/dt-bindings/reset/sun60i-a733-r-ccu.h |  22 +++
- 9 files changed, 466 insertions(+)
+ arch/arm/mach-sunxi/Kconfig |  1 +
+ drivers/gpio/Kconfig        |  7 +++++++
+ drivers/gpio/sunxi_gpio.c   | 12 ++++++++++--
+ include/sunxi_gpio.h        | 11 ++++++++++-
+ 4 files changed, 28 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
-index 1c1cc82719c..03133ba86df 100644
---- a/drivers/clk/sunxi/Kconfig
-+++ b/drivers/clk/sunxi/Kconfig
-@@ -143,4 +143,18 @@ config CLK_SUN55I_A523_R
- 	  This enables common clock driver support for the PRCM
- 	  in Allwinner A523/T527 SoCs.
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index d16ffddf482..81dea29964a 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -560,6 +560,7 @@ config MACH_SUN55I_A523
+ config MACH_SUN60I_A733
+ 	bool "sun60i (Allwinner A733)"
+ 	select ARM64
++	select SUNXI_NEW2_PINCTRL
+ 	select FIT
+ 	select SPL_LOAD_FIT if SPL
+ 	select SUPPORT_SPL
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index db077e472a8..8a578b872c2 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -426,6 +426,13 @@ config SUNXI_NEW_PINCTRL
+ 	The Allwinner D1 and other new SoCs use a different register map
+ 	for the GPIO block, which we need to know about in the SPL.
  
-+config CLK_SUN60I_A733
-+	bool "Clock driver for Allwinner A733"
-+	default MACH_SUN60I_A733
-+	help
-+	  This enables common clock driver support for platforms based
-+	  on Allwinner A733 SoC.
++config SUNXI_NEW2_PINCTRL
++	bool
++	depends on SUNXI_GPIO
++	---help---
++	The Allwinner A733 SoCs use a different register map
++	for the GPIO block, which we need to know about in the SPL.
 +
-+config CLK_SUN60I_A733_R
-+	bool "Clock driver for Allwinner A733 generation PRCM"
-+	default MACH_SUN60I_A733
-+	help
-+	  This enables common clock driver support for the PRCM
-+	  in Allwinner A733 SoCs.
-+
- endif # CLK_SUNXI
-diff --git a/drivers/clk/sunxi/Makefile b/drivers/clk/sunxi/Makefile
-index 93b542cebcd..943e47612ce 100644
---- a/drivers/clk/sunxi/Makefile
-+++ b/drivers/clk/sunxi/Makefile
-@@ -27,3 +27,5 @@ obj-$(CONFIG_CLK_SUN50I_A64) += clk_a64.o
- obj-$(CONFIG_CLK_SUN50I_A100) += clk_a100.o
- obj-$(CONFIG_CLK_SUN55I_A523) += clk_a523.o
- obj-$(CONFIG_CLK_SUN55I_A523_R) += clk_a523_r.o
-+obj-$(CONFIG_CLK_SUN60I_A733) += clk_a733.o
-+obj-$(CONFIG_CLK_SUN60I_A733_R) += clk_a733_r.o
-diff --git a/drivers/clk/sunxi/clk_a733.c b/drivers/clk/sunxi/clk_a733.c
-new file mode 100644
-index 00000000000..e83f616628a
---- /dev/null
-+++ b/drivers/clk/sunxi/clk_a733.c
-@@ -0,0 +1,75 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <errno.h>
-+#include <clk/sunxi.h>
-+#include <linux/bitops.h>
-+
-+#include <dt-bindings/clock/sun60i-a733-ccu.h>
-+#include <dt-bindings/reset/sun60i-a733-ccu.h>
-+
-+static struct ccu_clk_gate a733_gates[] = {
-+	[CLK_PLL_PERIPH0_200M]	= GATE_DUMMY,
-+	[CLK_APB1]			= GATE_DUMMY,
-+	[CLK_MBUS_GMAC0]	= GATE(0x05e4, BIT(11)),
-+	[CLK_BUS_MMC0]		= GATE(0x0d0c, BIT(0)),
-+	[CLK_BUS_MMC1]		= GATE(0x0d1c, BIT(0)),
-+	[CLK_BUS_MMC2]		= GATE(0x0d2c, BIT(0)),
-+	[CLK_BUS_UART0]		= GATE(0x0e00, BIT(0)),
-+	[CLK_BUS_UART1]		= GATE(0x0e04, BIT(0)),
-+	[CLK_BUS_UART2]		= GATE(0x0e08, BIT(0)),
-+	[CLK_BUS_UART3]		= GATE(0x0e0c, BIT(0)),
-+	[CLK_BUS_UART4]		= GATE(0x0e10, BIT(0)),
-+	[CLK_BUS_UART5]		= GATE(0x0e14, BIT(0)),
-+	[CLK_BUS_I2C0]		= GATE(0x0e80, BIT(0)),
-+	[CLK_BUS_I2C1]		= GATE(0x0e84, BIT(0)),
-+	[CLK_BUS_I2C2]		= GATE(0x0e88, BIT(0)),
-+	[CLK_BUS_I2C3]		= GATE(0x0e8c, BIT(0)),
-+	[CLK_SPI0]			= GATE(0x0f00, BIT(31)),
-+	[CLK_SPI1]			= GATE(0x0f08, BIT(31)),
-+	[CLK_BUS_SPI0]		= GATE(0x0f04, BIT(0)),
-+	[CLK_BUS_SPI1]		= GATE(0x0f0c, BIT(0)),
-+	[CLK_GMAC0_PHY]		= GATE(0x1410, BIT(31)),
-+	[CLK_BUS_GMAC0]		= GATE(0x141c, BIT(0)),
-+	[CLK_USB_OHCI0]		= GATE(0x1300, BIT(31)),
-+	[CLK_USB_OHCI1]		= GATE(0x1308, BIT(31)),
-+	[CLK_BUS_OHCI0]		= GATE(0x1304, BIT(0)),
-+	[CLK_BUS_OHCI1]		= GATE(0x130c, BIT(0)),
-+	[CLK_BUS_EHCI0]		= GATE(0x1304, BIT(4)),
-+	[CLK_BUS_EHCI1]		= GATE(0x130c, BIT(4)),
-+	[CLK_USB_GATE0]		= GATE(0x1304, BIT(8)),
-+	[CLK_USB_GATE1]		= GATE(0x130c, BIT(8)),
-+};
-+
-+static struct ccu_reset a733_resets[] = {
-+	[RST_BUS_MMC0]		= RESET(0x0d0c, BIT(16)),
-+	[RST_BUS_MMC1]		= RESET(0x0d1c, BIT(16)),
-+	[RST_BUS_MMC2]		= RESET(0x0d2c, BIT(16)),
-+	[RST_BUS_UART0]		= RESET(0x0e00, BIT(16)),
-+	[RST_BUS_UART1]		= RESET(0x0e04, BIT(16)),
-+	[RST_BUS_UART2]		= RESET(0x0e08, BIT(16)),
-+	[RST_BUS_UART3]		= RESET(0x0e0c, BIT(16)),
-+	[RST_BUS_UART4]		= RESET(0x0e10, BIT(16)),
-+	[RST_BUS_UART5]		= RESET(0x0e14, BIT(16)),
-+	[RST_BUS_I2C0]		= RESET(0x0e80, BIT(16)),
-+	[RST_BUS_I2C1]		= RESET(0x0e84, BIT(16)),
-+	[RST_BUS_I2C2]		= RESET(0x0e8c, BIT(16)),
-+	[RST_BUS_I2C3]		= RESET(0x0e10, BIT(16)),
-+	[RST_BUS_SPI0]		= RESET(0x0f04, BIT(16)),
-+	[RST_BUS_SPI1]		= RESET(0x0f0c, BIT(16)),
-+	[RST_BUS_GMAC0]		= RESET(0x141c, BIT(16) | BIT(17)),
-+	[RST_USB_PHY0]		= RESET(0x1300, BIT(30)),
-+	[RST_USB_PHY1]		= RESET(0x1308, BIT(30)),
-+	[RST_BUS_OHCI0]		= RESET(0x1304, BIT(16)),
-+	[RST_BUS_OHCI1]		= RESET(0x130c, BIT(16)),
-+	[RST_BUS_EHCI0]		= RESET(0x1304, BIT(20)),
-+	[RST_BUS_EHCI1]		= RESET(0x130c, BIT(20)),
-+};
-+
-+const struct ccu_desc a733_ccu_desc = {
-+	.gates	= a733_gates,
-+	.resets	= a733_resets,
-+	.num_gates = ARRAY_SIZE(a733_gates),
-+	.num_resets = ARRAY_SIZE(a733_resets),
-+};
-diff --git a/drivers/clk/sunxi/clk_a733_r.c b/drivers/clk/sunxi/clk_a733_r.c
-new file mode 100644
-index 00000000000..a500cd2831d
---- /dev/null
-+++ b/drivers/clk/sunxi/clk_a733_r.c
-@@ -0,0 +1,36 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <clk/sunxi.h>
-+#include <dt-bindings/clock/sun60i-a733-r-ccu.h>
-+#include <dt-bindings/reset/sun60i-a733-r-ccu.h>
-+#include <linux/bitops.h>
-+
-+static struct ccu_clk_gate a733_r_gates[] = {
-+	[CLK_R_AHB]             = GATE_DUMMY,
-+	[CLK_R_APB0]            = GATE_DUMMY,
-+	[CLK_R_APB1]            = GATE_DUMMY,
-+	[CLK_BUS_R_TWD]         = GATE(0x12c, BIT(0)),
-+	[CLK_BUS_R_UART0]       = GATE(0x18c, BIT(0)),
-+	[CLK_BUS_R_I2C0]        = GATE(0x19c, BIT(0)),
-+	[CLK_BUS_R_I2C1]        = GATE(0x19c, BIT(1)),
-+	[CLK_BUS_R_I2C2]        = GATE(0x19c, BIT(2)),
-+	[CLK_BUS_R_RTC]         = GATE(0x20c, BIT(0)),
-+};
-+
-+static struct ccu_reset a733_r_resets[] = {
-+	[RST_BUS_R_TWD]         = RESET(0x12c, BIT(16)),
-+	[RST_BUS_R_UART0]       = RESET(0x18c, BIT(16)),
-+	[RST_BUS_R_I2C0]        = RESET(0x19c, BIT(16)),
-+	[RST_BUS_R_I2C1]        = RESET(0x19c, BIT(17)),
-+	[RST_BUS_R_I2C2]        = RESET(0x19c, BIT(18)),
-+	[RST_BUS_R_RTC]         = RESET(0x20c, BIT(16)),
-+};
-+
-+const struct ccu_desc a733_r_ccu_desc = {
-+	.gates = a733_r_gates,
-+	.resets = a733_r_resets,
-+	.num_gates = ARRAY_SIZE(a733_r_gates),
-+	.num_resets = ARRAY_SIZE(a733_r_resets),
-+};
-diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunxi.c
-index 842a0541bd6..ad90a3744a2 100644
---- a/drivers/clk/sunxi/clk_sunxi.c
-+++ b/drivers/clk/sunxi/clk_sunxi.c
-@@ -128,6 +128,8 @@ extern const struct ccu_desc r40_ccu_desc;
- extern const struct ccu_desc v3s_ccu_desc;
- extern const struct ccu_desc a523_ccu_desc;
- extern const struct ccu_desc a523_r_ccu_desc;
-+extern const struct ccu_desc a733_ccu_desc;
-+extern const struct ccu_desc a733_r_ccu_desc;
+ config XILINX_GPIO
+ 	bool "Xilinx GPIO driver"
+ 	depends on DM_GPIO
+diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
+index 094c45a6927..6fa74e5c599 100644
+--- a/drivers/gpio/sunxi_gpio.c
++++ b/drivers/gpio/sunxi_gpio.c
+@@ -38,18 +38,26 @@
  
- static const struct udevice_id sunxi_clk_ids[] = {
- #ifdef CONFIG_CLK_SUN4I_A10
-@@ -233,6 +235,14 @@ static const struct udevice_id sunxi_clk_ids[] = {
- #ifdef CONFIG_CLK_SUN55I_A523_R
- 	{ .compatible = "allwinner,sun55i-a523-r-ccu",
- 	  .data = (ulong)&a523_r_ccu_desc },
-+#endif
-+#ifdef CONFIG_CLK_SUN60I_A733
-+	{ .compatible = "allwinner,sun60i-a733-ccu",
-+	  .data = (ulong)&a733_ccu_desc },
-+#endif
-+#ifdef CONFIG_CLK_SUN60I_A733_R
-+	{ .compatible = "allwinner,sun60i-a733-r-ccu",
-+	  .data = (ulong)&a733_r_ccu_desc },
+ #define GPIO_DAT_REG_OFFSET	0x10
+ 
+-#define GPIO_DRV_REG_OFFSET	0x14
+ 
+ /*		Newer SoCs use a slightly different register layout */
+ #ifdef CONFIG_SUNXI_NEW_PINCTRL
+ /* pin drive strength: 4 bits per pin */
++#define GPIO_DRV_REG_OFFSET	0x14
+ #define GPIO_DRV_INDEX(pin)	((pin) / 8)
+ #define GPIO_DRV_OFFSET(pin)	(((pin) % 8) * 4)
+ 
+ #define GPIO_PULL_REG_OFFSET	0x24
+ 
++#elif CONFIG_SUNXI_NEW2_PINCTRL
++#define GPIO_DRV_REG_OFFSET	0x20
++#define GPIO_DRV_INDEX(pin)	((pin) / 8)
++#define GPIO_DRV_OFFSET(pin)	(((pin) % 8) * 4)
++
++#define GPIO_PULL_REG_OFFSET	0x30
++
+ #else /* older generation pin controllers */
+ /* pin drive strength: 2 bits per pin */
++#define GPIO_DRV_REG_OFFSET	0x14
+ #define GPIO_DRV_INDEX(pin)	((pin) / 16)
+ #define GPIO_DRV_OFFSET(pin)	(((pin) % 16) * 2)
+ 
+@@ -64,7 +72,7 @@ static void* BANK_TO_GPIO(int bank)
+ 	void *pio_base;
+ 
+ 	if (bank < SUNXI_GPIO_L) {
+-		pio_base = (void *)(uintptr_t)SUNXI_PIO_BASE;
++		pio_base = (void *)(uintptr_t)(SUNXI_PIO_BASE + SUNXI_PIO_OFFSET);
+ 	} else {
+ 		pio_base = (void *)(uintptr_t)SUNXI_R_PIO_BASE;
+ 		bank -= SUNXI_GPIO_L;
+diff --git a/include/sunxi_gpio.h b/include/sunxi_gpio.h
+index 12b54c8dda4..ba8e5428900 100644
+--- a/include/sunxi_gpio.h
++++ b/include/sunxi_gpio.h
+@@ -19,7 +19,7 @@
+ #elif defined(CONFIG_SUN50I_GEN_H6)
+ #define SUNXI_PIO_BASE		0x0300b000
+ #define SUNXI_R_PIO_BASE	0x07022000
+-#elif defined(CONFIG_SUNXI_GEN_NCAT2)
++#elif defined(CONFIG_SUNXI_GEN_NCAT2) || defined(CONFIG_SUNXI_NEW2_PINCTRL)
+ #define SUNXI_PIO_BASE		0x02000000
+ #define SUNXI_R_PIO_BASE	0x07022000
+ #else
+@@ -27,6 +27,12 @@
+ #define SUNXI_R_PIO_BASE	0x01f02c00
  #endif
- 	{ }
- };
-diff --git a/include/dt-bindings/clock/sun60i-a733-ccu.h b/include/dt-bindings/clock/sun60i-a733-ccu.h
-new file mode 100644
-index 00000000000..113738ebd7e
---- /dev/null
-+++ b/include/dt-bindings/clock/sun60i-a733-ccu.h
-@@ -0,0 +1,188 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
+ 
++#if CONFIG_SUNXI_NEW2_PINCTRL
++#define SUNXI_PIO_OFFSET	0x80 /* offset for virtual PA port */
++#else
++#define SUNXI_PIO_OFFSET	0x00
++#endif
 +
-+#ifndef _DT_BINDINGS_CLK_SUN60I_A733_CCU_H_
-+#define _DT_BINDINGS_CLK_SUN60I_A733_CCU_H_
-+
-+#define CLK_PLL_DDR0		0
-+#define CLK_PLL_PERIPH0_4X	1
-+#define CLK_PLL_PERIPH0_2X	2
-+#define CLK_PLL_PERIPH0_800M	3
-+#define CLK_PLL_PERIPH0_480M	4
-+#define CLK_PLL_PERIPH0_600M	5
-+#define CLK_PLL_PERIPH0_400M	6
-+#define CLK_PLL_PERIPH0_300M	7
-+#define CLK_PLL_PERIPH0_200M	8
-+#define CLK_PLL_PERIPH0_160M	9
-+#define CLK_PLL_PERIPH0_150M	10
-+#define CLK_PLL_PERIPH1_4X	11
-+#define CLK_PLL_PERIPH1_2X	12
-+#define CLK_PLL_PERIPH1_800M	13
-+#define CLK_PLL_PERIPH1_480M	14
-+#define CLK_PLL_PERIPH1_600M	15
-+#define CLK_PLL_PERIPH1_400M	16
-+#define CLK_PLL_PERIPH1_300M	17
-+#define CLK_PLL_PERIPH1_200M	18
-+#define CLK_PLL_PERIPH1_160M	19
-+#define CLK_PLL_PERIPH1_150M	20
-+#define CLK_PLL_GPU		21
-+#define CLK_PLL_VIDEO0_8X	22
-+#define CLK_PLL_VIDEO0_4X	23
-+#define CLK_PLL_VIDEO0_3X	24
-+#define CLK_PLL_VIDEO1_8X	25
-+#define CLK_PLL_VIDEO1_4X	26
-+#define CLK_PLL_VIDEO1_3X	27
-+#define CLK_PLL_VIDEO2_8X	28
-+#define CLK_PLL_VIDEO2_4X	29
-+#define CLK_PLL_VIDEO2_3X	30
-+#define CLK_PLL_VIDEO3_8X	31
-+#define CLK_PLL_VIDEO3_4X	32
-+#define CLK_PLL_VIDEO3_3X	33
-+#define CLK_PLL_VE		34
-+#define CLK_PLL_AUDIO0_4X	35
-+#define CLK_PLL_AUDIO0_2X	36
-+#define CLK_PLL_AUDIO0		37
-+#define CLK_PLL_NPU_4X		38
-+#define CLK_PLL_NPU_2X		39
-+#define CLK_PLL_NPU		40
-+#define CLK_AHB			41
-+#define CLK_APB0		42
-+#define CLK_APB1		43
-+#define CLK_MBUS		44
-+#define CLK_DE			45
-+#define CLK_BUS_DE		46
-+#define CLK_DI			47
-+#define CLK_BUS_DI		48
-+#define CLK_G2D			49
-+#define CLK_BUS_G2D		50
-+#define CLK_GPU			51
-+#define CLK_BUS_GPU		52
-+#define CLK_CE			53
-+#define CLK_BUS_CE		54
-+#define CLK_BUS_CE_SYS		55
-+#define CLK_VE			56
-+#define CLK_BUS_VE		57
-+#define CLK_BUS_DMA		58
-+#define CLK_BUS_MSGBOX		59
-+#define CLK_BUS_SPINLOCK	60
-+#define CLK_HSTIMER0		61
-+#define CLK_HSTIMER1		62
-+#define CLK_HSTIMER2		63
-+#define CLK_HSTIMER3		64
-+#define CLK_HSTIMER4		65
-+#define CLK_HSTIMER5		66
-+#define CLK_BUS_HSTIMER		67
-+#define CLK_BUS_DBG		68
-+#define CLK_BUS_PWM0		69
-+#define CLK_BUS_PWM1		70
-+#define CLK_IOMMU		71
-+#define CLK_BUS_IOMMU		72
-+#define CLK_DRAM		73
-+#define CLK_MBUS_DMA		74
-+#define CLK_MBUS_VE		75
-+#define CLK_MBUS_CE		76
-+#define CLK_MBUS_CSI		77
-+#define CLK_MBUS_ISP		78
-+#define CLK_MBUS_GMAC0		79
-+#define CLK_BUS_DRAM		80
-+#define CLK_NAND0		81
-+#define CLK_NAND1		82
-+#define CLK_BUS_NAND		83
-+#define CLK_MMC0		84
-+#define CLK_MMC1		85
-+#define CLK_MMC2		86
-+#define CLK_BUS_SYSDAP		87
-+#define CLK_BUS_MMC0		88
-+#define CLK_BUS_MMC1		89
-+#define CLK_BUS_MMC2		90
-+#define CLK_BUS_UART0		91
-+#define CLK_BUS_UART1		92
-+#define CLK_BUS_UART2		93
-+#define CLK_BUS_UART3		94
-+#define CLK_BUS_UART4		95
-+#define CLK_BUS_UART5		96
-+#define CLK_BUS_UART6		97
-+#define CLK_BUS_UART7		98
-+#define CLK_BUS_I2C0		99
-+#define CLK_BUS_I2C1		100
-+#define CLK_BUS_I2C2		101
-+#define CLK_BUS_I2C3		102
-+#define CLK_BUS_I2C4		103
-+#define CLK_BUS_I2C5		104
-+#define CLK_BUS_CAN		105
-+#define CLK_SPI0		106
-+#define CLK_SPI1		107
-+#define CLK_SPI2		108
-+#define CLK_SPIFC		109
-+#define CLK_BUS_SPI0		110
-+#define CLK_BUS_SPI1		111
-+#define CLK_BUS_SPI2		112
-+#define CLK_BUS_SPIFC		113
-+#define CLK_GMAC0_PHY		114
-+#define CLK_EMAC1_25M		115
-+#define CLK_BUS_GMAC0		116
-+#define CLK_BUS_GMAC1		117
-+#define CLK_IR_RX		118
-+#define CLK_BUS_IR_RX		119
-+#define CLK_IR_TX		120
-+#define CLK_BUS_IR_TX		121
-+#define CLK_GPADC0		122
-+#define CLK_GPADC1		123
-+#define CLK_BUS_GPADC0		124
-+#define CLK_BUS_GPADC1		125
-+#define CLK_BUS_THS		126
-+#define CLK_USB_OHCI0		127
-+#define CLK_USB_OHCI1		128
-+#define CLK_BUS_OHCI0		129
-+#define CLK_BUS_OHCI1		130
-+#define CLK_BUS_EHCI0		131
-+#define CLK_BUS_EHCI1		132
-+#define CLK_BUS_OTG		133
-+#define CLK_BUS_LRADC		134
-+#define CLK_PCIE_AUX		135
-+#define CLK_BUS_DISPLAY0_TOP	136
-+#define CLK_BUS_DISPLAY1_TOP	137
-+#define CLK_HDMI_24M		138
-+#define CLK_HDMI_CEC_32K	139
-+#define CLK_HDMI_CEC		140
-+#define CLK_BUS_HDMI		141
-+#define CLK_MIPI_DSI0		142
-+#define CLK_MIPI_DSI1		143
-+#define CLK_BUS_MIPI_DSI0	144
-+#define CLK_BUS_MIPI_DSI1	145
-+#define CLK_TCON_LCD0		146
-+#define CLK_TCON_LCD1		147
-+#define CLK_TCON_LCD2		148
-+#define CLK_COMBOPHY_DSI0	149
-+#define CLK_COMBOPHY_DSI1	150
-+#define CLK_BUS_TCON_LCD0	151
-+#define CLK_BUS_TCON_LCD1	152
-+#define CLK_BUS_TCON_LCD2	153
-+#define CLK_TCON_TV0		154
-+#define CLK_TCON_TV1		155
-+#define CLK_BUS_TCON_TV0	156
-+#define CLK_BUS_TCON_TV1	157
-+#define CLK_EDP			158
-+#define CLK_BUS_EDP		159
-+#define CLK_LEDC		160
-+#define CLK_BUS_LEDC		161
-+#define CLK_CSI_TOP		162
-+#define CLK_CSI_MCLK0		163
-+#define CLK_CSI_MCLK1		164
-+#define CLK_CSI_MCLK2		165
-+#define CLK_CSI_MCLK3		166
-+#define CLK_BUS_CSI		167
-+#define CLK_ISP			168
-+#define CLK_DSP			169
-+#define CLK_FANOUT_24M		170
-+#define CLK_FANOUT_12M		171
-+#define CLK_FANOUT_16M		172
-+#define CLK_FANOUT_25M		173
-+#define CLK_FANOUT_27M		174
-+#define CLK_FANOUT_PCLK		175
-+#define CLK_FANOUT0		176
-+#define CLK_FANOUT1		177
-+#define CLK_FANOUT2		178
-+#define CLK_USB_GATE0		179
-+#define CLK_USB_GATE1		180
-+
-+#endif /* _DT_BINDINGS_CLK_SUN60I_A733_CCU_H_ */
-diff --git a/include/dt-bindings/clock/sun60i-a733-r-ccu.h b/include/dt-bindings/clock/sun60i-a733-r-ccu.h
-new file mode 100644
-index 00000000000..e16ee48968d
---- /dev/null
-+++ b/include/dt-bindings/clock/sun60i-a733-r-ccu.h
-@@ -0,0 +1,34 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
-+
-+#ifndef _DT_BINDINGS_CLK_SUN60I_A733_R_CCU_H_
-+#define _DT_BINDINGS_CLK_SUN60I_A733_R_CCU_H_
-+
-+#define CLK_R_AHB		0
-+#define CLK_R_APB0		1
-+#define CLK_R_APB1		2
-+#define CLK_R_TIMER0		3
-+#define CLK_R_TIMER1		4
-+#define CLK_R_TIMER2		5
-+#define CLK_BUS_R_TIMER		6
-+#define CLK_BUS_R_TWD		7
-+#define CLK_R_PWMCTRL		8
-+#define CLK_BUS_R_PWMCTRL	9
-+#define CLK_R_SPI		10
-+#define CLK_BUS_R_SPI		11
-+#define CLK_BUS_R_SPINLOCK	12
-+#define CLK_BUS_R_MSGBOX	13
-+#define CLK_BUS_R_UART0		14
-+#define CLK_BUS_R_UART1		15
-+#define CLK_BUS_R_I2C0		16
-+#define CLK_BUS_R_I2C1		17
-+#define CLK_BUS_R_I2C2		18
-+#define CLK_BUS_R_PPU0		19
-+#define CLK_BUS_R_PPU1		20
-+#define CLK_BUS_R_CPU_BIST	21
-+#define CLK_R_IR_RX		22
-+#define CLK_BUS_R_IR_RX		23
-+#define CLK_BUS_R_DMA		24
-+#define CLK_BUS_R_RTC		25
-+#define CLK_BUS_R_CPUCFG	26
-+
-+#endif /* _DT_BINDINGS_CLK_SUN60I_A733_R_CCU_H_ */
-diff --git a/include/dt-bindings/reset/sun60i-a733-ccu.h b/include/dt-bindings/reset/sun60i-a733-ccu.h
-new file mode 100644
-index 00000000000..ed81633c80b
---- /dev/null
-+++ b/include/dt-bindings/reset/sun60i-a733-ccu.h
-@@ -0,0 +1,85 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
-+
-+#ifndef _DT_BINDINGS_RST_SUN60I_A733_CCU_H_
-+#define _DT_BINDINGS_RST_SUN60I_A733_CCU_H_
-+
-+#define RST_MBUS		0
-+#define RST_BUS_NSI		1
-+#define RST_BUS_DE		2
-+#define RST_BUS_DI		3
-+#define RST_BUS_G2D		4
-+#define RST_BUS_SYS		5
-+#define RST_BUS_GPU		6
-+#define RST_BUS_CE		7
-+#define RST_BUS_SYS_CE		8
-+#define RST_BUS_VE		9
-+#define RST_BUS_DMA		10
-+#define RST_BUS_MSGBOX		11
-+#define RST_BUS_SPINLOCK	12
-+#define RST_BUS_CPUXTIMER	13
-+#define RST_BUS_DBG		14
-+#define RST_BUS_PWM0		15
-+#define RST_BUS_PWM1		16
-+#define RST_BUS_DRAM		17
-+#define RST_BUS_NAND		18
-+#define RST_BUS_MMC0		19
-+#define RST_BUS_MMC1		20
-+#define RST_BUS_MMC2		21
-+#define RST_BUS_SYSDAP		22
-+#define RST_BUS_UART0		23
-+#define RST_BUS_UART1		24
-+#define RST_BUS_UART2		25
-+#define RST_BUS_UART3		26
-+#define RST_BUS_UART4		27
-+#define RST_BUS_UART5		28
-+#define RST_BUS_UART6		29
-+#define RST_BUS_UART7		30
-+#define RST_BUS_I2C0		31
-+#define RST_BUS_I2C1		32
-+#define RST_BUS_I2C2		33
-+#define RST_BUS_I2C3		34
-+#define RST_BUS_I2C4		35
-+#define RST_BUS_I2C5		36
-+#define RST_BUS_CAN		37
-+#define RST_BUS_SPI0		38
-+#define RST_BUS_SPI1		39
-+#define RST_BUS_SPI2		40
-+#define RST_BUS_SPIFC		41
-+#define RST_BUS_GMAC0		42
-+#define RST_BUS_GMAC1		43
-+#define RST_BUS_IR_RX		44
-+#define RST_BUS_IR_TX		45
-+#define RST_BUS_GPADC0		46
-+#define RST_BUS_GPADC1		47
-+#define RST_BUS_THS		48
-+#define RST_USB_PHY0		49
-+#define RST_USB_PHY1		50
-+#define RST_BUS_OHCI0		51
-+#define RST_BUS_OHCI1		52
-+#define RST_BUS_EHCI0		53
-+#define RST_BUS_EHCI1		54
-+#define RST_BUS_OTG		55
-+#define RST_BUS_3		56
-+#define RST_BUS_LRADC		57
-+#define RST_BUS_PCIE_USB3	58
-+#define RST_BUS_DISPLAY0_TOP	59
-+#define RST_BUS_DISPLAY1_TOP	60
-+#define RST_BUS_HDMI_MAIN	61
-+#define RST_BUS_HDMI_SUB	62
-+#define RST_BUS_MIPI_DSI0	63
-+#define RST_BUS_MIPI_DSI1	64
-+#define RST_BUS_TCON_LCD0	65
-+#define RST_BUS_TCON_LCD1	66
-+#define RST_BUS_TCON_LCD2	67
-+#define RST_BUS_TCON_TV0	68
-+#define RST_BUS_TCON_TV1	69
-+#define RST_BUS_LVDS0		70
-+#define RST_BUS_LVDS1		71
-+#define RST_BUS_EDP		72
-+#define RST_BUS_VIDEO_OUT0	73
-+#define RST_BUS_VIDEO_OUT1	74
-+#define RST_BUS_LEDC		75
-+#define RST_BUS_CSI		76
-+#define RST_BUS_ISP		77
-+
-+#endif /* _DT_BINDINGS_RST_SUN60I_A733_CCU_H_ */
-diff --git a/include/dt-bindings/reset/sun60i-a733-r-ccu.h b/include/dt-bindings/reset/sun60i-a733-r-ccu.h
-new file mode 100644
-index 00000000000..fbf48f883b7
---- /dev/null
-+++ b/include/dt-bindings/reset/sun60i-a733-r-ccu.h
-@@ -0,0 +1,22 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
-+
-+#ifndef _DT_BINDINGS_RST_SUN60I_A733_R_CCU_H_
-+#define _DT_BINDINGS_RST_SUN60I_A733_R_CCU_H_
-+
-+#define RST_BUS_R_TIMER		0
-+#define RST_BUS_R_TWD		1
-+#define RST_BUS_R_PWMCTRL	2
-+#define RST_BUS_R_SPI		3
-+#define RST_BUS_R_SPINLOCK	4
-+#define RST_BUS_R_MSGBOX	5
-+#define RST_BUS_R_UART0		6
-+#define RST_BUS_R_UART1		7
-+#define RST_BUS_R_I2C0		8
-+#define RST_BUS_R_I2C1		9
-+#define RST_BUS_R_I2C2		10
-+#define RST_BUS_R_PPU1		11
-+#define RST_BUS_R_IR_RX		12
-+#define RST_BUS_R_RTC		13
-+#define RST_BUS_R_CPUCFG	14
-+
-+#endif /* _DT_BINDINGS_RST_SUN60I_A733_R_CCU_H_ */
+ /*
+  * sunxi has 9 banks of gpio, they are:
+  * PA0 - PA17 | PB0 - PB23 | PC0 - PC24
+@@ -172,6 +178,9 @@ enum sunxi_gpio_number {
+ #ifdef CONFIG_SUNXI_NEW_PINCTRL
+ 	#define SUNXI_PINCTRL_BANK_SIZE	0x30
+ 	#define SUNXI_GPIO_DISABLE	0xf
++#elif CONFIG_SUNXI_NEW2_PINCTRL
++	#define SUNXI_PINCTRL_BANK_SIZE	0x80
++	#define SUNXI_GPIO_DISABLE	0xf
+ #else
+ 	#define SUNXI_PINCTRL_BANK_SIZE	0x24
+ 	#define SUNXI_GPIO_DISABLE	0x7
 
 -- 
 2.51.2
