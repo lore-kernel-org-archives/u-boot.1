@@ -4,99 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D594CD4F3E
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 14:13:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C75CCD4F3E
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 14:44:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C0C38398C;
-	Sun, 16 Nov 2025 15:13:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DBD3F839AC;
+	Sun, 16 Nov 2025 15:44:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J+vLz71b";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 897198398C; Sun, 16 Nov 2025 15:13:28 +0100 (CET)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 36FC0839B1; Sun, 16 Nov 2025 15:44:54 +0100 (CET)
+Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E66A483979
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 15:13:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DEC01839A8
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 15:44:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-656de56ce7aso699223eaf.3
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 06:13:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763302404; x=1763907204; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eCkyCm/x1DrVJaiM6K3TRJjyGLS5mrbB1Xh/Rtjmpb4=;
- b=J+vLz71bRkTnTt8XVC2gnw7xyl4AdFkwuHSwRxNL0C0UEFOftA7rb3KR+F0kq/MsG9
- 3uKzEhvhi8DW1psXm/XH52PxfgvgvEjiXAAxtJcJeF3dcIwi+0+heBfWdpB0pRUF4aLQ
- FC/OueUiUwtmwRUaBkHljv8bWUpc077iQEjag=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763302404; x=1763907204;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eCkyCm/x1DrVJaiM6K3TRJjyGLS5mrbB1Xh/Rtjmpb4=;
- b=Rmq+2BiYfyug3mX0Trajd6Kc4dznb5GgT/1Tc/q/C4E5WkBsySS6ZIfWV3hYGm42R2
- 5JjBtBjYdupCh/1kg8UNsBl+mnEiPD7BIi8VF/3Vqylr/JKPYJRH7uWxY1g5O5fu5MNc
- bnzvVrdx6y498Ougctq7vnLCCfnIx8DzGWPuxBM3QPQ0DBjvrStuzg0vuEvub2rlUiyS
- nYBUMQzezYFGTI4DC9R6hAUscnZW6KSybqjCnSvpZsEUWtcLHch//X+I5T0DQ7I2SCio
- SZWp783Xafjt+JoZo2mjJkNyyr+iM4y+Nz+de1LmRH0Qrk/nmDU5B7zCR9BFP1BJeXud
- HCjg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWMtTCvzsnVaGSamU/aMvDjJ4Wh1DOny/uHIh9GMSrKKi++J2WxsM2FAqiXP4mvzzrc4LzARl8=@lists.denx.de
-X-Gm-Message-State: AOJu0YysFc/kGcIEmQ9R5FSYG3YLYoaUk/A2AGUaYZO10PH8lzDfWylv
- ZiryMscouoR2VIG6Sxe/MFZHB3mMHUfsJ/U5SpyCYAGu9MPEZvXM2m21ZI0xYkYjZ7k=
-X-Gm-Gg: ASbGnctBG4DOw0x2mqLws2laqZDDhs0mafrT2yJA0brsZMjaTA+CEYJZ5GbPJiwi2MU
- 6/JSwgdCz2p1j24spJnuuRjSfavv/qDuq+4C+SMMNvH9bHiaGg7UgQybjHo3TaB2+FG7/4UKDj5
- OaeaxB+RUMY4CfaeEJyPQby2kZ52IO4dC7V1bXbfps8ZmTo+B1YHexo6DQDlfzndIVDeByln8Pl
- 8nAN457JI8hmJvdl9XGTNvLiTrE2VqQXCLSvfu1fajGq/X2bs5CBovwH0agAfQ3nn4uUoEF6YAU
- BRVvIxirXkJdtZOWXDM0KcOAx8BYlaXTLQz8bdVx2WWFtvArzwCzIj63jTVEHKtCiOKC4fRdkLa
- CQaOdb7Iqv7kQPSCGedFP2+kihZbN5MQmfr44EC7c2bJZKv3a7nMB/NiS13c4uB1PcklObwvDge
- Z/GLBWJ1bZB9caKh5hk43Ni/cHMAPfIEkToyOAIhYKGID+nTdoog==
-X-Google-Smtp-Source: AGHT+IGA+sFNstlE+Zs3v4htBMKWnRX/MbDJJoR4OsZXGkGZngyAKfbUTRtyxcrxsiAOk3N1XrijxA==
-X-Received: by 2002:a05:6808:4fe7:b0:450:4782:2b0e with SMTP id
- 5614622812f47-45097455d7emr4597707b6e.15.1763302404651; 
- Sun, 16 Nov 2025 06:13:24 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450a5f5e1a9sm1513068b6e.12.2025.11.16.06.13.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Nov 2025 06:13:23 -0800 (PST)
-Date: Sun, 16 Nov 2025 08:13:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sam Edwards <cfsworks@gmail.com>
-Subject: Re: [PATCH 1/3] dm: core: Check ofnode_to_offset() return value
-Message-ID: <20251116141321.GD2125796@bill-the-cat>
-References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
- <20251113122145.949112-2-marek.vasut+renesas@mailbox.org>
- <CAFLszTigJHK9H18rZG=AHRo09RPqKGHQmmVrHZ40mHPk-KkwqQ@mail.gmail.com>
- <7a083302-1096-47fa-90a9-aa350eea6884@mailbox.org>
- <CAFLszTjktw3yS9Dp9KGC=BAnpJAHg46f--NRRfnzXApQVOiuUQ@mail.gmail.com>
- <fd30d6ca-fdfe-4096-8057-a952a6a4bb7e@mailbox.org>
- <20251114143609.GZ6688@bill-the-cat>
- <4ccf5adb-6e66-4842-8e4b-1c6f37ec966d@mailbox.org>
+ dmarc=fail (p=none dis=none) header.from=gentoo.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
+Received: from ofovo.local (unknown [116.232.48.119])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: dlan)
+ by smtp.gentoo.org (Postfix) with ESMTPSA id 699D23415C9;
+ Sun, 16 Nov 2025 14:44:44 +0000 (UTC)
+From: Yixun Lan <dlan@gentoo.org>
+Subject: [PATCH 00/11] sunxi: Add support for A733 SoC
+Date: Sun, 16 Nov 2025 14:43:51 +0000
+Message-Id: <20251116-01-a733-soc-support-v1-0-fb4c8db78e75@gentoo.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2+WS71kzCVbSbu6O"
-Content-Disposition: inline
-In-Reply-To: <4ccf5adb-6e66-4842-8e4b-1c6f37ec966d@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACfjGWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDQ0NTXQND3URzY2Pd4vxk3eLSgoL8ohJdM/MkAzMD42RLC4NUJaDOgqL
+ UtMwKsKnRsbW1APypurplAAAA
+X-Change-ID: 20251115-01-a733-soc-support-67b0603c980e
+To: u-boot@lists.denx.de
+Cc: Andre Przywara <andre.przywara@arm.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
+ Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>, 
+ Yixun Lan <dlan@gentoo.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4028; i=dlan@gentoo.org;
+ h=from:subject:message-id; bh=xxVzzucA7wP1MqaHAIVyZF6ulkl6ci0luT5lT4aA0Xs=;
+ b=owEBzQIy/ZANAwAKATGq6kdZTbvtAcsmYgBpGeM1z5IuUBagGXY5enmDge/aTyq6xzJ7YPoGN
+ 7ewsfsfIk2JApMEAAEKAH0WIQS1urjJwxtxFWcCI9wxqupHWU277QUCaRnjNV8UgAAAAAAuAChp
+ c3N1ZXItZnByQG5vdGF0aW9ucy5vcGVucGdwLmZpZnRoaG9yc2VtYW4ubmV0QjVCQUI4QzlDMzF
+ CNzExNTY3MDIyM0RDMzFBQUVBNDc1OTREQkJFRAAKCRAxqupHWU277UTSD/9fgmJNFavycMJv2T
+ csqt09kR7RxvPPiY4XK1L92TNwRP1ikE/emhf8rWB3GamkufNrUzm0azVZPMWXJMqzT3NyF+Qm9
+ d3FgtA9DCy0qF5wHNLWXlYFOh1F00OHFw/dfyzEJkwaRAyGqOOdcqHPzbp6BcqRiIESZsLb0PU7
+ MqxQv5iJf5WNLEuyNigYdd0W2/VqQaKzWi29BE2TCUD+Ij8PCRNdViy2AlC2a1ZdjRmfefVxkTA
+ 4CwmSJ98UUkgtQBWdWpyKYcQa/qNt+xZsu8sTWwjq2nbzYtB5kKFNu6QlNnyQmgH5178j0EJXU6
+ nrIw+3A6mV+hHDwvuiYzEi1WCxEgItNeGdxfkU2EyMAySZ/3tfWqGPJKK4ygfJJzJ/qZmnD1j6Y
+ Rux+jteuVD8e+g+ANSGGiLRjdmXnCdIpfpl8dVDpgKwUbfBNmbLFrO8TGiiMglKv1lpcPeELbbx
+ eTOrsyMWunz97KgWWVJ3z/pjCT46XeBJ5YjIJew7d0zKG3O4tQusjS9WMEXG5Ye9zTH+fYFmxbm
+ rw0Tt8Hk2Fi95A3rRDU9TAZUQVNuIAX1KIO5q87e/5z0oZogdN46hEjewCj2ynSEgwutJV33Jm4
+ LnzGG/Gwq8RIUQVbqUD/I+MhO8gaxzHSuS2KstSj34KJgyRpLWwrIrefnvhXFVg2CwcQ==
+X-Developer-Key: i=dlan@gentoo.org; a=openpgp;
+ fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,53 +78,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Allwinner A733 SoC[1] is an octa-core Cortex-A76/A55 processor, below
+list the brief features. 
 
---2+WS71kzCVbSbu6O
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+- Dual-core Cortex-A76, Hexa-core Cortex-A55, RISC-V E902 core
+- UP to 16GB RAM, 192K+512K SRAM
+- Imagination BXM-4-64 MC1 GPU
+- Optional 3 TOPS NPU
+- UFS3.0 storage
+- eMMC, SD, SDIO
+- Octal SPI
+- HDMI, RGB, LVDS, eDP, MIPI display interface
+- MIPI CSI, up 4 lanes
+- Audio 5x I2S
+- GMAC Ethernet
+- USB3.1, 2.0 support
+- PCIe 3.0 DM
 
-On Sun, Nov 16, 2025 at 01:16:53AM +0100, Marek Vasut wrote:
-> On 11/14/25 3:36 PM, Tom Rini wrote:
->=20
-> Hello Tom,
->=20
-> > > We would need a wrapper for almost every libfdt call, which isn't rea=
-lly
-> > > better.
-> > >=20
-> > > > What does fdt_getprop() return when the offset is -1 ?
-> > > If can_assume(VALID_DTB) , then crash on NULL pointer dereference .
-> > > If not, I think FDT_END (premature end) or an error code.
-> >=20
-> > How are we now getting in this state is a question. Are we being passed
-> > an unaligned DT and trying to work around/with it?
-> This is superseded by:
->=20
-> [PATCH] xtensa: Assure end of U-Boot is at 8-byte aligned offset
->=20
-> It turns out the problem was yet another unaligned appended DT, on xtensa
-> this time.
+Add support for Allwinner A733 SoC, target to support booting mainline
+U-boot via FEL download mode, also add eMMC driver support, mmake it
+able to load images from the eMMC/SD storage device.
 
-I wonder if we have still more places. I've seen patches in your series
-for many but not all of
-https://lore.kernel.org/all/20221215115825.827111-1-eugen.hristev@microchip=
-=2Ecom/
-and I don't recall how many of those were done individually instead
-afterwards.
+I've not pushed DT part patches, but put a more complete working branch
+at my development branch[2] for reference or testing if people
+interested. Please note, we reply on vendor boot0 firmware for the DDR
+initialization, then use sunxi-fel to down and execute U-Boot, see doc[3].
 
---=20
-Tom
+Link: https://linux-sunxi.org/A733 [1]
+Link: https://github.com/dlan17/u-boot/tree/allwinner/A733/next [2]
+Link: https://github.com/dlan17/a733/blob/main/boot-fel.md [3]
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+Yixun Lan (11):
+      sunxi: sun60i: initial support for A733 SoC
+      sunxi: a733: config TF-A load address
+      sunxi: spl: a733: config text and stack address
+      sunxi: a733: uart: setup serial console
+      clock: a733: implement support for mmc/uart
+      clock: reset: a733: add initial support
+      gpio: a733: add initial support
+      pinctrl: sunxi: a733: add initial support
+      sunxi: i2c: add support for A733
+      pmu: axp318w: implement pmic/regulator support
+      sunxi: mmc: enable support for A733
 
---2+WS71kzCVbSbu6O
-Content-Type: application/pgp-signature; name="signature.asc"
+ arch/arm/include/asm/arch-sunxi/clock.h            |   2 +
+ .../arm/include/asm/arch-sunxi/clock_sun60i_a733.h | 179 ++++++++++++++++++++
+ arch/arm/include/asm/arch-sunxi/cpu.h              |   2 +
+ arch/arm/include/asm/arch-sunxi/cpu_sunxi_a733.h   |  41 +++++
+ arch/arm/include/asm/arch-sunxi/serial.h           |   2 +-
+ arch/arm/mach-sunxi/Kconfig                        |  14 ++
+ arch/arm/mach-sunxi/Makefile                       |   1 +
+ arch/arm/mach-sunxi/board.c                        |   3 +-
+ arch/arm/mach-sunxi/clock_sun60i_a733.c            |  80 +++++++++
+ arch/arm/mach-sunxi/cpu_info.c                     |   2 +
+ common/spl/Kconfig                                 |   3 +
+ drivers/clk/sunxi/Kconfig                          |  14 ++
+ drivers/clk/sunxi/Makefile                         |   2 +
+ drivers/clk/sunxi/clk_a733.c                       |  75 ++++++++
+ drivers/clk/sunxi/clk_a733_r.c                     |  36 ++++
+ drivers/clk/sunxi/clk_sunxi.c                      |  10 ++
+ drivers/gpio/Kconfig                               |   7 +
+ drivers/gpio/sunxi_gpio.c                          |  12 +-
+ drivers/i2c/mvtwsi.c                               |   2 +-
+ drivers/mmc/sunxi_mmc.c                            |  32 +++-
+ drivers/mmc/sunxi_mmc.h                            |   3 +-
+ drivers/pinctrl/sunxi/Kconfig                      |  10 ++
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c              |  57 +++++++
+ drivers/power/Kconfig                              |  10 ++
+ drivers/power/pmic/axp.c                           |   1 +
+ drivers/power/regulator/axp_regulator.c            |  50 ++++++
+ include/axp_pmic.h                                 |   1 +
+ include/configs/sun60i.h                           |  11 ++
+ include/dt-bindings/clock/sun60i-a733-ccu.h        | 188 +++++++++++++++++++++
+ include/dt-bindings/clock/sun60i-a733-r-ccu.h      |  34 ++++
+ include/dt-bindings/reset/sun60i-a733-ccu.h        |  85 ++++++++++
+ include/dt-bindings/reset/sun60i-a733-r-ccu.h      |  22 +++
+ include/sunxi_gpio.h                               |  11 +-
+ 33 files changed, 989 insertions(+), 13 deletions(-)
+---
+base-commit: 23987e10905146def3ab61e55ec912c6e742efdc
+change-id: 20251115-01-a733-soc-support-67b0603c980e
 
------BEGIN PGP SIGNATURE-----
+Best regards,
+-- 
+Yixun Lan <dlan@gentoo.org>
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRncAQAKCRAr4qD1Cr/k
-CpnnAQCPSp8emdP9mn9Avhqde9p7ssKuXRHTs7aNbe5ANKNxYAEA9nN3Kmu6AHhc
-vR0Lp1BImB28wu1QY9jHc/gdaII/Egw=
-=B1/V
------END PGP SIGNATURE-----
-
---2+WS71kzCVbSbu6O--
