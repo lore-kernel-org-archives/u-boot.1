@@ -4,89 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E83B8CCD19A
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 16:07:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 380ADCCD19A
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 22:55:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E33983AB0;
-	Sun, 16 Nov 2025 17:07:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5609C839DE;
+	Sun, 16 Nov 2025 23:55:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IJ4Zl1T7";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xOrv7SlO";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="HaDhyyCY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E822583AB0; Sun, 16 Nov 2025 17:07:33 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8103383ABF; Sun, 16 Nov 2025 23:55:49 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6EC7839D7
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 17:07:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61B24839B1
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 23:55:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-6408f9cb1dcso5197890a12.3
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 08:07:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763309251; x=1763914051; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hgrEzEI/5UpLz+Uapsw/SFitveho5C/myXic3Iw0/Yc=;
- b=IJ4Zl1T771YF1zN6PZg6ki0eUjKByTJcFUDoxmIuEof2SHEF5o4pUwkb5nh9L9bykz
- 9USEnJi/5jadi/B9ek3tOS/J+XjHydF7YNUAP+WRNKSXc+JhqzeA8qSYMkuB9HejbsO4
- JjjJsrnEogttk0DWFz2bTkJ10mPjrYPPsOYXU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763309251; x=1763914051;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hgrEzEI/5UpLz+Uapsw/SFitveho5C/myXic3Iw0/Yc=;
- b=edUNcF6oOb2vs2Se4G8Z450HWNRwFVX/WS+/x3qAiM+XlpU30gmKvUn1fLyhD+cGcI
- A/yrPhwfa/OLFsZrs6he8VtKt1ujpWCKyr6WFAJwUWGegwZsWQbr69R+ayWaJn2/XBCh
- 2xjF5lEpp0NlDBV1tx0Fc/tBvo5c+qyY73EoFoO5bRy1Z5VQKpSZ1QVc/bXPKNPtpnQ1
- WQc7475dU4L4UCZtTms4lslWP4ThFlK/Wdty2lbe6wfqi6I8eMkTfP6wT0Abgg3+fkgu
- p1leLHivtZUD4LdF5xm292QHoSkeEGnbrD7aMMsXveCxSdzEBYMwJyVUjKb+5BfdreMu
- didw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVnIyCMb9eTU4Y5QYjDa2D2JPbejBNakSf7LhVJe6bWgpPyYMT4GFpbdn9tV7e6KS3Sx5zNfg8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy9r+VTi9EX1AbdGuoIgM48P9c8zOLr07epz3IlXm0bJvZutKeh
- JaG8bN2m3ny6SGkk6HJBkEhDQrZNICSU3OiVPL3aRlux41DV+ZXHMZbirg5ZUfbjpzUb+I3vRA8
- InwHCJmdxsyvCNx7Ek1jGimiX/wsl05pHaj+WfSFH
-X-Gm-Gg: ASbGncscmJZRdWgOzUfceKrTxz4/KkvX3X+++XlbtMzBJg1iaHkr/1aQAdLeaHz2CTY
- uFCBBe1cj1AY9RTVS1Lh2OqWeCQz0cPyXl4NtntNnAleflzKlg8QSrZsMXu+wvo/xxR7TVF49td
- UI/4RK+ViiyKWU7nIYna2fT4ebBzLRr/8EqbGVKfafE8fb30IkJ0P+P6STINF6EtYMBy78OyuIq
- ExslQ5JffCOqM/T66pkLbvZ5/pKhrsiJdzknKy7iSAa7fBL4EavX1kUeX5+qdbpiiDxGREPSEbh
- Q14oAL4=
-X-Google-Smtp-Source: AGHT+IFjGPUycPakNLQJ9wISKmE3/ghh30Ij8Xp4CynWPaeGZWDQcMmP2ZhvXyy7cMqMdZ0km2Rfg7oOZmEnb+mwL6A=
-X-Received: by 2002:a17:907:7f0c:b0:b72:6de0:44a1 with SMTP id
- a640c23a62f3a-b73674cf6a6mr870910866b.0.1763309251300; Sun, 16 Nov 2025
- 08:07:31 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4d8mSL0H77z9tYM;
+ Sun, 16 Nov 2025 23:55:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1763333746;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IB9BwD0fa2tqEmf5pU4PgLdue+I/7JxSG+rcPHy716A=;
+ b=xOrv7SlOxPGkzsReKDJ4SC4B1L+JDPTqBwoAFliPG/7gCXK4kx+n/U4BQHlwSmnxoSbsAM
+ +T5cb7/vidg25b0egW7AO5xQn7+2u6Hs8ak67GyFJOFpqVOjTv1LS9QukgYV54Ife0EfNp
+ Y7JqWtJL4wb/1TCKFqV/jCLviueSrp4xyzR8qt4VjKMGVE/8zes6JhuHAa3r3lBzwpRyoP
+ O8HGih0lVxHGaR/FEXNZd9r5zaLcvdTLtQswYhBjPMn5likaGvvXe8T92M535o7U+i0lAB
+ oS+3diZ9X3bbzkEs36MNodnSBkEv1ZIo0ReStwqEWhOB+ZI2wgF6MhV2GlmBzw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=HaDhyyCY;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <93432931-3bfb-4c2d-a3a8-fe938d3ddf64@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1763333743;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IB9BwD0fa2tqEmf5pU4PgLdue+I/7JxSG+rcPHy716A=;
+ b=HaDhyyCYso9NZRhcBj7clQ/z5PpZ8y1sHuImEwuHkAG2SBSyTPaeADol+47lxa2Il+ECq0
+ qRujwMH6pN/kBpmt51CyaCAFQqaWxSY/IfjNWBKTatXQ/7u2LCT5Ci7TvMhsNV7TWQV6yP
+ Lq2kncSIipTRgEtAZUsmdo/ggNF/rxvdrA9NFDhPQK25V83Ooz+J7+wwzl9KVMT26VR7nM
+ bwq/4xR5Y9l2tjA8rvD4iEoK3e4k7r44KGXVblUrvGtxJ+n8iT4LO+rXFvZPf/+dl2ok6Q
+ qPMj8gZDz+QLbobHxKFlc32ZuMQRdtefT4Xx0nr0d9LGJJliBtz3Iy2rCMBHpg==
+Date: Sun, 16 Nov 2025 22:28:28 +0100
 MIME-Version: 1.0
-References: <20251112011717.360045-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTjofjQ_zmwJrGZ-sLejQ=x=-8tyqr4SBPYgt3683GVAbQ@mail.gmail.com>
- <20251113193816.GP6688@bill-the-cat>
- <CAFLszTjwpoCwCKKvJX5cZMLK480EK-=BWaFd5A6yLMrfsVWC6g@mail.gmail.com>
- <20251113200527.GQ6688@bill-the-cat>
- <CAFLszTjydNqmo=6qLv--m4fB07QzWd01XHGY3hxgTEbarJF-VA@mail.gmail.com>
- <20251113203654.GR6688@bill-the-cat>
- <385cdc16-cf73-443b-a0a1-440e233d4506@mailbox.org>
- <CAFLszThc4YC6mKp5sNsiuCFfaMNqMWJjVV27d4UkyLU4rPWY6A@mail.gmail.com>
- <bed4a846-6356-463f-a8a9-3d4bf05439a4@mailbox.org>
-In-Reply-To: <bed4a846-6356-463f-a8a9-3d4bf05439a4@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 16 Nov 2025 09:07:19 -0700
-X-Gm-Features: AWmQ_blz6MaEaYfYVReggEjsvUg0cFmWXnvduXkqPXsussKqJTjQh9fVgxkskJ0
-Message-ID: <CAFLszTiLZaMkCUxk2_x=gwKBxJeg-02iO-w=JufXEtqhqHZyTA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] boot: android: Always use 8-byte aligned DT with
- libfdt
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Aaron Kling <webgeek1234@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>, 
- George Chan <gchan9527@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH 1/3] dm: core: Check ofnode_to_offset() return value
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Adriano Cordova <adrianox@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sam Edwards <cfsworks@gmail.com>
+References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
+ <20251113122145.949112-2-marek.vasut+renesas@mailbox.org>
+ <CAFLszTigJHK9H18rZG=AHRo09RPqKGHQmmVrHZ40mHPk-KkwqQ@mail.gmail.com>
+ <7a083302-1096-47fa-90a9-aa350eea6884@mailbox.org>
+ <CAFLszTjktw3yS9Dp9KGC=BAnpJAHg46f--NRRfnzXApQVOiuUQ@mail.gmail.com>
+ <fd30d6ca-fdfe-4096-8057-a952a6a4bb7e@mailbox.org>
+ <20251114143609.GZ6688@bill-the-cat>
+ <4ccf5adb-6e66-4842-8e4b-1c6f37ec966d@mailbox.org>
+ <20251116141321.GD2125796@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251116141321.GD2125796@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: dj5kpedtebfrb7s988nwtokrozy8nu3t
+X-MBO-RS-ID: deb2725e69577e5e8ba
+X-Rspamd-Queue-Id: 4d8mSL0H77z9tYM
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,94 +110,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
-
-On Sat, 15 Nov 2025 at 17:20, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 11/14/25 1:45 PM, Simon Glass wrote:
->
-> Hello Simon,
->
-> >>>>> Which is different from disagreeing with your specific feedback about
-> >>>>> how we get there, to be clear.
-> >>>
-> >>> And again, since your feedback to this patch was "Don't?", I'm saying we
-> >>> need to. But the rest of your feedback was structural on moving towards
-> >>> resolving it and so I assume Marek will respond.
-> >>
-> >> The "blast radius" are these patches, that's all that tripped the tests:
-> >>
-> >>    - boot: android: Always use 8-byte aligned DT with libfdt
-> >>    - test/py: android: Point fdt command to aligned addresses
-> >>    - test/py: Use aligned address for overlays in 'extension' test
-> >>    - sandbox: Fix DT compiler address warnings in sandbox DTs
-> >>    - sandbox: Fix DT compiler pin warnings in sandbox DTs
-> >>    - boot: Assure FDT is always at 8-byte aligned address
-> >>    - arm: qemu: Eliminate fdt_high and initrd_high misuse
-> >>    - efi_loader: Assure fitImage from capsule is used from 8-byte aligned
-> >> address
-> >>    - MIPS: Assure end of U-Boot is at 8-byte aligned offset
-> >>
-> >> Regarding last minute alignment, the problem with this android image
-> >> seems to be in the android image itself, which packs in badly aligned
-> >> FDT. We therefore have to copy it out and realign.
-> >
-> > My request is to implement these checks as part of the boot flow
-> > (bootm, etc.) rather than adding memory allocations in leaf function.
-> > We already support copying the FDT to a different address so we can
-> > expand it and add things. Can we make use of that code?
-> It seems the 'abootomg' command is extracting DTB from a container where
-> the DTB can be at 4-byte aligned address. Thus far, the command
-> internally used that possibly 4-byte aligned address, which is wrong. It
-> also returned that address which was used by further U-Boot commands
-> as-is, which is also wrong.
->
-> This DTB usage here has nothing to do with any boot flow, this is
-> incorrect DTB alignment during manipulation, which is not part of boot.
->
-> What exactly do you propose should be changed with this patch ?
-
-Actually this patch seems to adjust code which is just handling a
-command. How about creating a common function which can put an FDT
-into an abuf, either just using it in place, or allocating memory and
-copying it? An abuf is ideal for this. E.g. something like (untested):
-
-/**
- * fdt_ensure_aligned() - Obtain an abuf with a devicetree, aligning if needed
- *
- * @buf: Returns abuf containing FDT on success; caller must abuf_uninit(buf)
- * @addr: Address of FDT
- * Return: 0 on success, -EINVAL if not an FDT, -ENOMEM if out of memory
- */
-int fdt_ensure_aligned(struct abuf *buf, void *fdt)
-{
-   struct fdt_header fdth __aligned(8);
-
-   memcpy(&fdth, fdt, sizeof(struct fdt_header));
-   if (fdt_check_header(&fdth) != 0)
-      return -EINVAL;
-
-   abuf_init_const(buf, fdt, fdt_totalsize(&fdth));
-
-   /* The device tree must be at an 8-byte aligned address */
-   if ((uintptr_t)fdt & 7) {
-      void *fulldt;
-
-      // a function like abuf_realloc_align(struct abuf *buf, int
-align) would help
-      fulldt = memalign(8, buf->size);
-      if (!fulldt)
-         return -ENOMEM;
-
-      memcpy(fulldt, fdt, buf->size);
-      buf->data = fulldt;
-      buf->alloced = true;
-   }
-
-   return 0;
-}
-
-Then you can use this in various places as needed.
-
-Regards,
-Simon
+On 11/16/25 3:13 PM, Tom Rini wrote:
+> On Sun, Nov 16, 2025 at 01:16:53AM +0100, Marek Vasut wrote:
+>> On 11/14/25 3:36 PM, Tom Rini wrote:
+>>
+>> Hello Tom,
+>>
+>>>> We would need a wrapper for almost every libfdt call, which isn't really
+>>>> better.
+>>>>
+>>>>> What does fdt_getprop() return when the offset is -1 ?
+>>>> If can_assume(VALID_DTB) , then crash on NULL pointer dereference .
+>>>> If not, I think FDT_END (premature end) or an error code.
+>>>
+>>> How are we now getting in this state is a question. Are we being passed
+>>> an unaligned DT and trying to work around/with it?
+>> This is superseded by:
+>>
+>> [PATCH] xtensa: Assure end of U-Boot is at 8-byte aligned offset
+>>
+>> It turns out the problem was yet another unaligned appended DT, on xtensa
+>> this time.
+> 
+> I wonder if we have still more places. I've seen patches in your series
+> for many but not all of
+> https://lore.kernel.org/all/20221215115825.827111-1-eugen.hristev@microchip.com/
+> and I don't recall how many of those were done individually instead
+> afterwards.
+Was there any reason why that patch (or subset of) was not picked up ?
