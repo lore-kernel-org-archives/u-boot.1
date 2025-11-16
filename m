@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E21ACEACEF
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 12:38:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75BB6CEACEF
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 12:41:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77FCF83AAE;
-	Sun, 16 Nov 2025 13:38:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE3EB839DE;
+	Sun, 16 Nov 2025 13:41:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Zglzd/hB";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="YkhqqgD0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3176783AB7; Sun, 16 Nov 2025 13:38:08 +0100 (CET)
-Received: from mail-m32114.qiye.163.com (mail-m32114.qiye.163.com
- [220.197.32.114])
+ id 04F2083ABF; Sun, 16 Nov 2025 13:41:11 +0100 (CET)
+Received: from mail-m15592.qiye.163.com (mail-m15592.qiye.163.com
+ [101.71.155.92])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC1C283AAC
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 13:38:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0886F83959
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 13:41:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [120.36.73.234])
- by smtp.qiye.163.com (Hmail) with ESMTP id 29bbf1dde;
- Sun, 16 Nov 2025 20:38:00 +0800 (GMT+08:00)
-Message-ID: <b6fb94e9-b714-4c1b-b61e-8f44d2cf541e@rock-chips.com>
-Date: Sun, 16 Nov 2025 20:38:00 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 29bbf1e44;
+ Sun, 16 Nov 2025 20:41:03 +0800 (GMT+08:00)
+Message-ID: <d056c97b-3d59-4340-b948-d7ea6e5f3ff3@rock-chips.com>
+Date: Sun, 16 Nov 2025 20:41:02 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] rockchip: sdram: Add fallback that fixup DRAM gaps
- on RK3588
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Arnaud Patard <arnaud.patard@collabora.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
- u-boot@lists.denx.de
-References: <20250802220738.3018910-1-jonas@kwiboo.se>
- <20250802220738.3018910-4-jonas@kwiboo.se>
+Subject: Re: [PATCH v2] rockchip: mkimage: enhance comments for v1 header
+To: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Xuhui Lin <xuhui.lin@rock-chips.com>,
+ Yifeng Zhao <yifeng.zhao@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20251112-rkcommon-hdr-v2-1-49e6747f2460@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250802220738.3018910-4-jonas@kwiboo.se>
+In-Reply-To: <20251112-rkcommon-hdr-v2-1-49e6747f2460@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9a8cac1bb503afkunm9954fc0f89e397
+X-HM-Tid: 0a9a8caee3c203afkunm43478ee589ef6d
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZT0wYVklNT0xKQkxKSE9NQ1YVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaSk5NVktCSR9NQ0tKTR4YS1YVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUtVSE1VTEhVSUhPWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=Zglzd/hB9N4bRdO7ESr4ihk9cdtxj5AiraHjMlmGGdUrk3OYbwnX6rBiLF+3UM83T9vMzXHRiVIJB6+xFVgURXSspEmkqW7ap+MftQmhs4IfaP8Jm9ojxWzrNdKFcFQDK0m9YXgiFOCHuUpOf3qdu1YiVnV61CNQTAazfHtVinY=;
+ b=YkhqqgD0mgUp3YeodpQllS3OIf6sCoC8yfjkSTpbNsdOUjaQ/hcAsj6Sujwffkz8XsDehoD0WroJU+Y6XJNjy3HnDAQaiX9AuIT7BiXXtS3uPLP4cs9BMy1Hj0ITzRKuM05wWaiVLt2O1yzktl3rgqlLAG+FAl/IRczriQpsWr8=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=euqGQoaV2C1YPxZfW8mmNKEzenKrzqKk9fChe4FnDqg=;
+ bh=FxsEcOgk0b5KVzpJnmug5IlfG1cbG+ntbKJrYfKGVCE=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,96 +76,88 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/8/3 06:07, Jonas Karlman wrote:
-> RK3588 has two known memory gaps when using 16+ GiB DRAM,
-> [0x3fc000000, 0x3fc500000) and [0x3fff00000, 0x400000000).
+On 2025/11/12 22:58, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> The vendor TPL blob encodes this information in the DDR_MEM tag data
-> passed to later boot phases. U-Boot proper will normally use this
-> information to configure the DRAM banks.
+> Improve the image header documentation for v1 header:
 >
-> When a DDR_MEM tag cannot be found the fallback is to use the entire
-> range above 4 GiB. Something that will cause issues when OS try to use
-> memory from the two known memory gaps.
+> - specify this applies to all MMC, not only SD cards,
+> - specify the offset for SPI flashes,
+> - specify the key used for RC4 encoding,
+> - specify what "init" refers to, especially since some configs enable
+>    TPL,
+> - specify what "init_boot_size" refers to, especially since some configs
+>    enable TPL,
+> - specify the size of a block,
+> - add documentation for init_size and init_boot_size,
 >
-> Add a weak dram init banksize fixup function and implement it for RK3588
-> to fix issues observed when trying to RAM boot RK3588 boards with 16+
-> GiB DRAM into Linux.
+> Note that the offset on the storage medium isn't necessarily 32KiB (64
+> blocks) for MMC or 0 for SPI flashes, it's just the first offset the
+> BootROM checks. Barebox[1] lists a few options, though those are
+> applicable to RK35xx which use the v2 header, so not guaranteed they can
+> be shared. On RK3399, the binary can at least be stored at offset 0 and
+> 32KiB on SPI flashes.
 >
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> [1] https://git.pengutronix.de/cgit/barebox/tree/arch/arm/mach-rockchip/bbu.c#n19
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> v3: No change
-> v2: New patch to fix booting into OS on RK3588 boards with 16+ GiB DRAM
+> Changes in v2:
+> - specify init stage is loaded into SRAM by BootROM,
+> - specify boot stages are loaded into DRAM by BootROM,
+> - reworded explanation of the "boot" stages to mention multiple stages
+>    and possibly U-Boot proper, as well as the conditions for BootROM to
+>    load those, suggestions from Jonas (thanks!),
+> - Link to v1: https://patch.msgid.link/20251107-rkcommon-hdr-v1-1-6b456bb3dd93@cherry.de
 > ---
->   arch/arm/mach-rockchip/rk3588/rk3588.c | 27 ++++++++++++++++++++++++++
->   arch/arm/mach-rockchip/sdram.c         |  7 ++++++-
->   2 files changed, 33 insertions(+), 1 deletion(-)
+>   tools/rkcommon.c | 24 ++++++++++++++++++++----
+>   1 file changed, 20 insertions(+), 4 deletions(-)
 >
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index c01a40020896..719daa7714e3 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -198,6 +198,33 @@ int arch_cpu_init(void)
->   }
->   #endif
->   
-> +/*
-> + * RK3588 has two known memory gaps when using 16+ GiB DRAM,
-> + * [0x3fc000000, 0x3fc500000) and [0x3fff00000, 0x400000000).
+> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+> index d191ea72c63..e7e78ef7e5b 100644
+> --- a/tools/rkcommon.c
+> +++ b/tools/rkcommon.c
+> @@ -76,13 +76,29 @@ struct header0_info_v2 {
+>   /**
+>    * struct header0_info - header block for boot ROM
+>    *
+> - * This is stored at SD card block 64 (where each block is 512 bytes, or at
+> - * the start of SPI flash. It is encoded with RC4.
+> + * This is stored at MMC block 64 (where each block is 512 bytes), or at
+> + * the start of SPI flash. It is encoded with RC4 with the below rc4_key.
 > + *
-> + * Remove the [0x3fc000000, 0x400000000) range to ensure OS does not
-> + * use memory from these gaps when a DDR_MEM tag cannot be found.
-> + */
-> +
-> +#define DRAM_GAP_START		0x3FC000000
-> +#define DRAM_GAP_END		0x400000000
-> +
-> +int rockchip_dram_init_banksize_fixup(struct bd_info *bd)
-> +{
-> +	size_t ram_top = bd->bi_dram[1].start + bd->bi_dram[1].size;
-> +
-> +	if (ram_top > DRAM_GAP_START) {
-> +		bd->bi_dram[1].size = DRAM_GAP_START - bd->bi_dram[1].start;
-> +
-> +		if (ram_top > DRAM_GAP_END && CONFIG_NR_DRAM_BANKS > 2) {
-> +			bd->bi_dram[2].start = DRAM_GAP_END;
-> +			bd->bi_dram[2].size = ram_top - bd->bi_dram[2].start;
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->   #define RK3588_OTP_CPU_CODE_OFFSET		0x02
->   #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
->   
-> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-> index d560f90e873d..ea0e3621af72 100644
-> --- a/arch/arm/mach-rockchip/sdram.c
-> +++ b/arch/arm/mach-rockchip/sdram.c
-> @@ -289,6 +289,11 @@ static int rockchip_dram_init_banksize(void)
->   }
->   #endif
->   
-> +__weak int rockchip_dram_init_banksize_fixup(struct bd_info *bd)
-> +{
-> +	return 0;
-> +}
-> +
->   int dram_init_banksize(void)
->   {
->   	size_t ram_top = (unsigned long)(gd->ram_size + CFG_SYS_SDRAM_BASE);
-> @@ -342,7 +347,7 @@ int dram_init_banksize(void)
->   #endif
->   #endif
->   
-> -	return 0;
-> +	return rockchip_dram_init_banksize_fixup(gd->bd);
->   }
->   
->   u8 rockchip_sdram_type(phys_addr_t reg)
-
+> + * In Rockchip terminology:
+> + *
+> + * "init" means the stage that is loaded into SRAM. TPL if there is one, SPL
+> + * otherwise.
+> + *
+> + * "boot" means the next stages after "init" stage that are loaded by the
+> + * BootROM into DRAM. Only applicable if "init" stage returns to BootROM (via
+> + * the appropriate ROCKCHIP_BACK_TO_BROM symbol, BOOT_DEVICE_BOOTROM is used as
+> + * boot device for the next stage and the "init" stage successfully booted) and
+> + * if "init_boot_size" > "init_size".
+> + * Basically, it is the content of "init" plus the SPL or even U-Boot proper if
+> + * relevant.
+>    *
+>    * @magic:		Magic (must be RK_MAGIC)
+>    * @disable_rc4:	0 to use rc4 for boot image,  1 to use plain binary
+> - * @init_offset:	Offset in blocks of the SPL code from this header
+> - *			block. E.g. 4 means 2KB after the start of this header.
+> + * @init_offset:	Offset in 512-byte blocks of the "init" code from the
+> + *			start of this header. For instance, 4 means 2KiB.
+> + * @init_size:		Size (in blocks) of the "init" code.
+> + * @init_boot_size:	Size (in blocks) of the "init" and "boot" code combined.
+> + *
+>    * Other fields are not used by U-Boot
+>    */
+>   struct header0_info {
+>
+> ---
+> base-commit: fdf36c2e9ad4f770ee951398a86bd55404d9b7ec
+> change-id: 20251107-rkcommon-hdr-99fef99b4b64
+>
+> Best regards,
