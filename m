@@ -4,57 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119CCCEACEF
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 13:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 891F7CD4F3E
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 14:09:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84F7983A3D;
-	Sun, 16 Nov 2025 14:00:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id A16F98398C;
+	Sun, 16 Nov 2025 15:09:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="EiAV8HlN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WiBk5UrP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5070B83AA7; Sun, 16 Nov 2025 14:00:08 +0100 (CET)
-Received: from mail-m1973178.qiye.163.com (mail-m1973178.qiye.163.com
- [220.197.31.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7185D8398C; Sun, 16 Nov 2025 15:09:20 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A62C28398D
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 14:00:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1976883979
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 15:09:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.1.64] (unknown [120.36.73.234])
- by smtp.qiye.163.com (Hmail) with ESMTP id 29bbf213f;
- Sun, 16 Nov 2025 21:00:01 +0800 (GMT+08:00)
-Message-ID: <7a7cfd6f-599d-4491-bde6-a84471073ba1@rock-chips.com>
-Date: Sun, 16 Nov 2025 21:00:00 +0800
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-450c9057988so31529b6e.1
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 06:09:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763302157; x=1763906957; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=s8K9s1UmBJUMsuZrhkWgWSumAlKW5Klcee6h9IaOlC0=;
+ b=WiBk5UrPs6Fq1oD6D2v1c+nOTnb1TuaAoWkW3FsDLFmsZFS1UnCr0kb+Crz+jaF46C
+ +n7HBqh9xC3vzD7NptkOGk2/wHvnoJNkjWH4k0nKRP2j9jYHvlcyuS9nfWNc+a7Sj7JC
+ 2cQ8UFsb/6rKLJvOki//ChPFibe+NyERlao3g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763302157; x=1763906957;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=s8K9s1UmBJUMsuZrhkWgWSumAlKW5Klcee6h9IaOlC0=;
+ b=aeT4mSfg+NMEBASKAkP7kQtGE1b40Mngb7xtdwAbRqd11kOgo02L2pqotSc+MV+X8X
+ MnsGTiXJ1EQrYLEVTeSWqA54kMEcywb+fqB2ZyOVrWHQxXbeqKqoij9RzK2ASrj/LDE6
+ Xc98D20YA7LsRYPgNe81bcx9t2UQdHc5RoH+5oUPL9zuDL0m9YBt0m3INUPNsy4ITi50
+ gIvnpLpFYy2v00fNU4gJE5ogBhFQN7iccgqfE7ozpjLHqCp3G7OYb3Fm+WHIDDIcqYIN
+ ojJOicTuBxXRFCem+lBbCP7CDhj/IR7mFfsWUMoUpuWHkJl/y7dTFrZ62wEnAH5ZKPbx
+ 41Ag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWdD3xXZ/ZbgnAO/V6/I7eK5Yfz+U6jYhz4V7LEMvoxER31kVOFFZuWrHhPJpIu24bCRSrFY0s=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCkoYxWJ6grlN2s98LOKoRuZJff+7a7vLRpg0f60tXdliKfaGh
+ PridCovtZXAaTUnbog5A8TUUv0tV00JS6mweiFcIWp74YggU5PfHoaiB+d1FwjymSho=
+X-Gm-Gg: ASbGncvz4UEnR7ZTp+qrBd9LdzKEMnrbTMl0Rmu6tGyZbC0shh7U7gRfX4nKOci75GR
+ g8xDrf5Fj8Qb0C+fUB4+4TRIYjs0tSx/B4r+0bQKW7v9b91G1pZDS3z+7j9JOETUls0CPUhG31R
+ 15X6RsYXK2hdRsoWy/RHH/WzFqfqMhO+U/xpH01ap0Enb/hRUfnNFAhyRKCe6PpD1pY4/1qonXg
+ 6k7Af+pPcFsgZRmSyDQZJVbwsLyDU13Z0a+N30ewFBZ5u6m8pBV2B6c+0U7UmOf9M6Q/RJmuH5i
+ D1Hp3+NyXCc64xRWXXCz7Rox+r9gjNOxhGFOXViekhjCGXdePJMtTM+8VyNds7zg7wtpzbvfjd2
+ DHcroq/K6w5rnyXrksceKAykqsgvkCmfxA616CABT7+GQOxQK2Bx+m9HjlCZZmW+aYhdA3om2+9
+ 9ie5Wd1H9viIg9pIY8ls35rcZouTMdTsY/B1vjbZI=
+X-Google-Smtp-Source: AGHT+IHJEDoxqolBaN5xYNQLdRxDStpXQX3i0xhmpWRvJCkmzUh8/iBsTn8g+sDFVlSvtao/kTY0BA==
+X-Received: by 2002:a05:6808:4703:b0:450:32f0:4887 with SMTP id
+ 5614622812f47-4509751b179mr4283395b6e.31.1763302156788; 
+ Sun, 16 Nov 2025 06:09:16 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4508a6d3218sm3579466b6e.20.2025.11.16.06.09.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 16 Nov 2025 06:09:15 -0800 (PST)
+Date: Sun, 16 Nov 2025 08:09:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH] boot: Warn users about fdt_high=~0 usage
+Message-ID: <20251116140913.GB2125796@bill-the-cat>
+References: <20251113142957.1069909-1-marek.vasut+renesas@mailbox.org>
+ <20251113154900.GJ6688@bill-the-cat>
+ <07424e88-16f8-4332-b93c-f0baeed5758c@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rock5b-rk3588: Add support for Radxa ROCK 5T
-To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
- eugen.hristev@linaro.org, jonas@kwiboo.se, heiko@sntech.de,
- cnsztl@gmail.com, xuhui.lin@rock-chips.com
-References: <20251107064716.27196-1-naoki@radxa.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20251107064716.27196-1-naoki@radxa.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a8cc0413403afkunmcfb3075b8a3583
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZQxlIVh5JTU8eGU4dSEgeQlYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKSUtVSE1VTEhVSUhPWVdZFhoPEhUdFFlBWU9LSFVKS0hKSkJMVUpLS1
- VKQktLWQY+
-DKIM-Signature: a=rsa-sha256;
- b=EiAV8HlNpAUnScfZttmLc+jFLoUHKdiLMTxuzeW08VgfNOEIhH1ipIA7EVRpMEw+vA7grk7dgS/xFccydJic1Uwrz4dM9GpgjjzlXxkXiaFkcVD/N4+RmormbW+jbGuSWEA4wXIKzyt7+344jUc07dUS+BoE4tXiKAK0O+/c2Mw=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=SElMDnaJ42gT2ihUpLgF7n75xpqIyGTqBAUdgmgEM8c=;
- h=date:mime-version:subject:message-id:from;
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="F1reAYFAFq6Bu5Yo"
+Content-Disposition: inline
+In-Reply-To: <07424e88-16f8-4332-b93c-f0baeed5758c@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,81 +105,111 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/11/7 14:47, FUKAUMI Naoki wrote:
-> Include the FDT for Radxa ROCK 5T in the FIT, in addition to those for
-> 5B and 5B+, and add board selection code to load the 5T FDT when the
-> DRAM type is LPDDR5 and ADC channel 5 value is close to 1016.
->
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+--F1reAYFAFq6Bu5Yo
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks,
-- Kever
-> ---
-> This patch depends on the following Jonas's patch series:
->   https://patchwork.ozlabs.org/project/uboot/list/?series=467612
-> ---
->   arch/arm/dts/rk3588-rock-5t-u-boot.dtsi   | 3 +++
->   board/radxa/rock5b-rk3588/rock5b-rk3588.c | 1 +
->   configs/rock5b-rk3588_defconfig           | 2 +-
->   doc/board/rockchip/rockchip.rst           | 2 +-
->   4 files changed, 6 insertions(+), 2 deletions(-)
->   create mode 100644 arch/arm/dts/rk3588-rock-5t-u-boot.dtsi
->
-> diff --git a/arch/arm/dts/rk3588-rock-5t-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5t-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..c07696c8391
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-rock-5t-u-boot.dtsi
-> @@ -0,0 +1,3 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3588-rock-5b-u-boot.dtsi"
-> diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> index 6bf4497ce3a..2c172d04499 100644
-> --- a/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> +++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> @@ -23,6 +23,7 @@ struct board_model {
->   };
->   
->   static const struct board_model board_models[] = {
-> +	{ LPDDR5,  926, 1106, "rockchip/rk3588-rock-5t.dtb" },
->   	{ LPDDR5, 4005, 4185, "rockchip/rk3588-rock-5b-plus.dtb" },
->   };
->   
-> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-> index 967cebc2054..567f649ea69 100644
-> --- a/configs/rock5b-rk3588_defconfig
-> +++ b/configs/rock5b-rk3588_defconfig
-> @@ -47,7 +47,7 @@ CONFIG_CMD_REGULATOR=y
->   # CONFIG_SPL_DOS_PARTITION is not set
->   CONFIG_SPL_OF_CONTROL=y
->   CONFIG_OF_LIVE=y
-> -CONFIG_OF_LIST="rockchip/rk3588-rock-5b rockchip/rk3588-rock-5b-plus"
-> +CONFIG_OF_LIST="rockchip/rk3588-rock-5b rockchip/rk3588-rock-5b-plus rockchip/rk3588-rock-5t"
->   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
->   CONFIG_SPL_DM_SEQ_ALIAS=y
->   CONFIG_SPL_REGMAP=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 9af701feb5d..6ae4d4371ff 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -162,7 +162,7 @@ List of mainline supported Rockchip boards:
->        - Pine64 QuartzPro64 (quartzpro64-rk3588)
->        - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
->        - Radxa ROCK 5A (rock5a-rk3588s)
-> -     - Radxa ROCK 5B/5B+ (rock5b-rk3588)
-> +     - Radxa ROCK 5B/5B+/5T (rock5b-rk3588)
->        - Radxa ROCK 5C (rock-5c-rk3588s)
->        - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
->        - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
+On Sat, Nov 15, 2025 at 06:34:24PM +0100, Marek Vasut wrote:
+> On 11/13/25 4:49 PM, Tom Rini wrote:
+>=20
+> Hello Tom,
+>=20
+> > > diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> > > index 3f0ac54f76f..e88525a3846 100644
+> > > --- a/boot/image-fdt.c
+> > > +++ b/boot/image-fdt.c
+> > > @@ -189,6 +189,10 @@ int boot_relocate_fdt(char **of_flat_tree, ulong=
+ *of_size)
+> > >   			/* All ones means use fdt in place */
+> > >   			of_start =3D fdt_blob;
+> > >   			addr =3D map_to_sysmem(fdt_blob);
+> > > +			if (addr & 7) {
+> > > +				printf("WARNING: The 'fdt_high' environment variable is set to ~=
+0 and DT is at non-8-byte aligned address.\nWARNING: This system will likel=
+y fail to boot. Unset 'fdt_high' environment variable and submit fix upstre=
+am.\n");
+> > > +			}
+> > > +
+> > >   			err =3D lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &addr,
+> > >   					    of_len, LMB_NONE);
+> > >   			if (err) {
+> >=20
+> > I think we need to yell about it sooner.
+>=20
+> I don't think so, for two reasons:
+>=20
+> - If the user uses e.g. bootz to boot their kernel, which on arm32 is sti=
+ll
+> sadly happening, they wouldn't trigger this problem at all and they would=
+n't
+> care about whichever way their fdt_high is set.
 
--- 
-Thanks & Best regards,
-   Kever Yang
-**************************************************************************************************
-杨凯  市场部             Kever Yang      Marketing Department
-瑞芯微电子股份有限公司                Rockchip Electronics Co.，Ltd。
-地址：福建省福州市铜盘路软件大道89号软件园A区18号楼 (350003)
-Addr : No.18 Building，A District，No.89，Fuzhou Software Boulevard，Fuzhou，Fujian，PRC
+Which part of the problem? If the dtb is not 8-byte aligned the kernel
+will fail. All the accessors require 8 byte alignment.
 
+> - If the user sets 'fdt_high' as part of their boot command, they would n=
+ot
+> get any warning print if we warn earlier, but they would get one when they
+> boot and trigger this affected code path.
+>=20
+> Maybe we need warnings in two locations ?
+
+Maybe? I was thinking it should be around this in boot/image-fdt.c:
+        /* If fdt_high is set use it to select the relocation address */
+        fdt_high =3D env_get("fdt_high");
+        if (fdt_high) {
+                ulong high_addr =3D hextoul(fdt_high, NULL);
+
+                if (high_addr =3D=3D ~0UL) {
+                        /* All ones means use fdt in place */
+
+
+As that's where all of the code paths end up calling, I think. But if
+it's multiple paths, yes, multiple warnings if we can't abstract it out
+to a common path.
+
+> > Today (and for quite some
+> > years) if you pass a 4 byte and not 8 byte aligned DT to Linux, it fails
+> > to boot or breaks in loud
+>=20
+> Worse, not loud, but silent.
+
+Also true, yes.
+
+> > and odd ways. This has in turn lead to much
+> > time spent and some of our older threads with the libfdt folks years
+> > ago. So I think we need something earlier in code where we're seeing
+> > that fdt_high is set to ~0 and that's where we say "Stop doing this, it
+> > will be removed soon".
+>=20
+> We cannot remove this functionality, someone might actually depend on it =
+for
+> whatever reason. It is part of the command line ABI now.
+
+The valid use case is boot time optimization. It's also a
+micro-optimization (as actually megabyte sized device trees like when
+people wanted to pass FPGA bitstreams in 15+ years ago are not allowed)
+I think really. I am loath to break ABI like this but I'm not entirely
+sure we have a choice. Maybe we detect disabled relocation and
+misaligned device tree and fall back to prompt? Or if it's too late,
+panic with an explanation? Or maybe we just move it 4 bytes higher. The
+device is in a going to fail state anyhow, so trying to recover it might
+be OK, and since the device tree needs to be modified by us it has to be
+in writable memory.
+
+--=20
+Tom
+
+--F1reAYFAFq6Bu5Yo
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRnbBgAKCRAr4qD1Cr/k
+ChRcAQC2+MFY5PMfprD/ySG2Hhii6td2Osn8wmP9PsuCU3D/qQD+Lil73QxGl/5n
+8mHVlGGOPPpxoN5CDDDZ5OH8QU15fQA=
+=ZsS2
+-----END PGP SIGNATURE-----
+
+--F1reAYFAFq6Bu5Yo--
