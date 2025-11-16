@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10C2DCEBF61
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 11:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC2ADCD4F3E
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 11:42:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C5CB83A3D;
-	Sun, 16 Nov 2025 12:25:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 02DC083A3D;
+	Sun, 16 Nov 2025 12:42:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XOyQx+CD";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bzBVsYlf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E92D983A64; Sun, 16 Nov 2025 12:25:01 +0100 (CET)
+ id 88ED183A8A; Sun, 16 Nov 2025 12:42:02 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4691839DE
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 12:24:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51DCF839B7
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 12:42:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,32 +31,32 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C664C40203; 
- Sun, 16 Nov 2025 11:24:58 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id A11DD40994; 
+ Sun, 16 Nov 2025 11:41:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763292299;
- bh=ZEJfyp8IVRKD9hormcU11gFfKomhfr7OYV/Y+Keu1og=;
+ s=20251003; t=1763293318;
+ bh=vP0VWijIja846QtKK8U6EBysshTh4xPTgZcTYKjr1O0=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=XOyQx+CDnWPTH/j3jYk7K+SbKI11rzSGLWpXQqqcDl8qW/TZzBcjODaF1rmzwrO2D
- PhUtdV6Fqv/Qubb/2NrdWA1m4TPAwXBwgTDZgwN+279x5mNJNTaOKm9OKQk8u0HZrw
- 99u5rgSMnYREkTp8radWWO13fax+DHM8X6Ph2kQzfUSqFRWmgcZM/KyMB9bi2I/1Ji
- TP2OiOiIkzyWmz5P6iKGGVOOo9CtPPnyGJu/Oe18cLoyj7vuNPmv/UPgIxxssYRkDB
- X0radmvxhwXkl/ASH1O+0evPhNiI4k5A7RZKSLYfGdGg0Z/NUp3dhvEuD2NHuTwdyd
- jnvKCNPlGKPsEQsUkQuh+wllCoEy/F45DAiwQwg2RB5JQTPmxGpHsHuy5kS8azSzQO
- CNLQFjtztKn8eiAC18gxzg6zEptMtQrEVQi5RkctfBS+9DwqDaA+exF/butSrXgQU1
- MOWSMhyvG/m3cGHd+CiAh3vajcKwyZWxp/4kZyVDNsr0wngV5b/awOL/zo/dvwfquf
- 8vl69ud13N3VCL3WmG7Nc9WIjWhwL719X3HKfHGzEh0di6xRi1zlynJNepnhdmIOHf
- n8Dr6pdsDoydQcq+89/b+tJPTCaYUcnmLNtTcyj0grHpZR+DysxHXs98t1ipKdmuPj
- hCVIf3q6IQWGVQjQi4I3jkEg=
+ b=bzBVsYlf6L2Z8IWosfS2gO4ru4fJWWKmJ9AI3NP4cjTS45NJqtWzIOnKRcv1louXU
+ 6/hTqpBcWJAWeHma8m4fQBp5jNGVVuI6UYvd4+rWDvvyUVi+1qE97KKxAXez/994JZ
+ MBM7bkQUpOoOph9HCnf7109gJ2g0HI1EGpbu2yhpZdg8p0YSPfK8AlIrfnSNl38owA
+ Rh52aSKP+tEP7Ym/dr0d+knjUe2t+Bs61/2zsuWDF1akw6IXIQdgaDUPr/8px4OYu/
+ ZjKRhyeTBYnw2pRS0/uCgBwkWiM0d8CYOFESAXcbvafVEsCJ6+DX8uUwq7yNRK9vrM
+ Zd1ZFm9cBY6I1GegbH7BDTGyZlU793Z4seQZQP1FIFABQWLOr2J2Kv5lB5du8vY3Et
+ EFJ1JhFw9OjKdAjgVjK/+I+6xlAQ0LZrqXwmCyvTzbwZaXbfDLsq7GGmMuS8jxv+Zk
+ 6LmSnEhW6Tu4lp8PzA6pUdd8AeITFv0MgcN701Jqufh//EfGW8OA+bDmlWC0EvQc5m
+ 46DsfeUAtnIOxI5uxbgZjZkODmYBSqUNYwuYpqGNxDuMriOlK6HrmYbaPplhEbR4ly
+ Vi14P8CPWOdRra9SizNuVQt8Wd+ZIzseNv9AOfpnDGajxP/+NjNO6ab7JaxjQVUWVe
+ S42DwcPrpmXNYMXg+0M34XEo=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Kory Maincent <kory.maincent@bootlin.com>,
-	Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de,
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] boot: pxe_utils: avoid illegal memory access
-Date: Sun, 16 Nov 2025 12:24:54 +0100
-Message-ID: <20251116112454.92966-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] cmd/extension: avoid NULL pointer dereference
+Date: Sun, 16 Nov 2025 12:41:53 +0100
+Message-ID: <20251116114153.118217-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -76,95 +76,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We must not use an uninitialized pointer as target for snprintf() if
-label->fdtdir == NULL.
+extension_get_list() will return NULL if there is no extension device.
+Check for this situation.
 
-Avoid a buffer overrun due to allocating len bytes but calling snprintf()
-with a larger value dir_len.
-
-Fixes: 935109cd9e97 ("boot: pxe_utils: Add extension board devicetree overlay support")
-Addresses-Coverity-ID: 638558 Memory - illegal accesses (UNINIT)
+Addresses-Coverity-ID: 638557 - Null pointer dereferences (NULL_RETURNS)
+Fixes: 2d12958ee71b ("boot: Remove legacy extension board support")
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
-Hello Kory,
+ cmd/extension_board.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Please, provide a test case for your patch
-935109cd9e97 ("boot: pxe_utils: Add extension board devicetree overlay support")
-
-It is unclear to me why you use
-
-    overlay_dir = './' if label->fdtdir == "" and
-    overlay_dir = "/" if label->fdtdir == NULL.
-
-When opening a file in U-Boot './foo" and "/foo" anyway point to the same
-file foo in the root directory.
-
-Shouldn't we use the same value "/" in both cases?
-
-Best regards
-
-Heinrich
----
- boot/pxe_utils.c | 37 ++++++++++++++++++-------------------
- 1 file changed, 18 insertions(+), 19 deletions(-)
-
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 038416203fc..e2bf44c776f 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -445,7 +445,7 @@ static void label_boot_extension(struct pxe_context *ctx,
- 	struct fdt_header *working_fdt;
- 	struct alist *extension_list;
- 	int ret, dir_len, len;
--	char *overlay_dir;
-+	char *overlay_dir, *fdtdir;
- 	const char *slash;
- 	ulong fdt_addr;
+diff --git a/cmd/extension_board.c b/cmd/extension_board.c
+index 86e4795ba8a..75358abf666 100644
+--- a/cmd/extension_board.c
++++ b/cmd/extension_board.c
+@@ -99,6 +99,10 @@ static int do_extension_list(struct cmd_tbl *cmdtp, int flag,
+ 	int i = 0;
  
-@@ -464,26 +464,25 @@ static void label_boot_extension(struct pxe_context *ctx,
- 		return;
- 
- 	/* Use fdtdir for now as the overlay devicetree directory */
--	if (label->fdtdir) {
--		len = strlen(label->fdtdir);
--		if (!len)
--			slash = "./";
--		else if (label->fdtdir[len - 1] != '/')
--			slash = "/";
--		else
--			slash = "";
-+	if (label->fdtdir)
-+		fdtdir = label->fdtdir;
-+	else
-+		fdtdir = "/";
- 
--		dir_len = strlen(label->fdtdir) + strlen(slash) + 1;
--		overlay_dir = calloc(1, len);
--		if (!overlay_dir)
--			return;
-+	len = strlen(label->fdtdir);
-+	if (!len)
-+		slash = "./";
-+	else if (label->fdtdir[len - 1] != '/')
-+		slash = "/";
-+	else
-+		slash = "";
- 
--		snprintf(overlay_dir, dir_len, "%s%s", label->fdtdir,
--			 slash);
--	} else {
--		dir_len = 2;
--		snprintf(overlay_dir, dir_len, "/");
--	}
-+	dir_len = len + strlen(slash) + 1;
-+	overlay_dir = calloc(1, dir_len);
-+	if (!overlay_dir)
-+		return;
-+
-+	snprintf(overlay_dir, dir_len, "%s%s", fdtdir, slash);
- 
- 	alist_for_each(extension, extension_list) {
- 		char *overlay_file;
+ 	extension_list = extension_get_list();
++	if (!extension_list) {
++		printf("No extension device\n");
++		return CMD_RET_FAILURE;
++	}
+ 	if (!alist_get_ptr(extension_list, 0)) {
+ 		printf("No extension registered - Please run \"extension scan\"\n");
+ 		return CMD_RET_SUCCESS;
 -- 
 2.51.0
 
