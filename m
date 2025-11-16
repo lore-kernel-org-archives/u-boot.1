@@ -4,33 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34A03CEBF61
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 22:56:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B69BCCD19A
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 22:56:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95F2A83ABF;
-	Sun, 16 Nov 2025 23:55:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CFE4F83AE9;
+	Sun, 16 Nov 2025 23:55:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jhZtHRJn";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="t/dmkbI2";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kJ6wTUav";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E08F9839B1; Sun, 16 Nov 2025 23:55:49 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 74E4683A64; Sun, 16 Nov 2025 23:55:51 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0BFC83A3D
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 23:55:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A27E83AAC
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 23:55:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4d8mSM4QX6z9t8t;
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4d8mSM2vnyz9sTl;
  Sun, 16 Nov 2025 23:55:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1763333747;
@@ -38,45 +39,37 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1elrWF4pRbxG4OqUzmdRbj8cqZmjOQluwR0LdY6YmjY=;
- b=jhZtHRJnPnTtxLFSuK9gTIw8kh7T5TM7tVT/atwKaP51L4Mgv00IKQpllWVstBGvCUieoV
- D33zGvsX50LaBJm9VIjYdjzRkYt/caHuN7wxgUEcQnm6DdX0PICe8SIERDbxZRrPBXsWyD
- LrAgo5caVnLfDiL8mYgoYqZDVcAsKn3nRHXENoLUa6rZOwZOGoQWvL/8dD0wNgtw77B0YQ
- OkH/YYNv6N4wbvAK4jrNEm3aCoEFbDLOHWri4cQlKP428i2hVrQKV9pn7fgRPZUdFNFBGJ
- GOQlBwEHlXop88tbdWTYLAxWWytVhIJ6vo0cxIJJAtmPQadtOeZCgndQIIFKWw==
-Message-ID: <e619b3ac-d99a-468c-8275-a8db5b406e62@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763333745;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1elrWF4pRbxG4OqUzmdRbj8cqZmjOQluwR0LdY6YmjY=;
- b=t/dmkbI2pLwC5dRkSxOaTmnhpHKX0eUYcBQRJ69/GhbEbA2m2crudmDWSzsgOLEj63V3wq
- I0UU20HwpTynWW9/NqmrpIhujmzpuvgaoP0OcoB2+YGssEEu1FiHX0viWz8LFMuwg4c3SP
- XsY6oiDnt0bhh3cJyGKHILC29hH11x63GTn+S83nvdrnbZ2z5J+95J1kgYCgyKiRe3aLDz
- 2dHy/iyTeKJp09DezMEJYxkgzRYPEv6rpeI/P8Hmj768zi3N50+xSjtMieb4MIb3+1lHER
- OX1hOQAM6PBZCDO9+Qbm8z8GFlN4H/akUbGDr+DSABwo2dDZqJw6T7DVu+zjMg==
-Date: Sun, 16 Nov 2025 22:43:47 +0100
+ bh=Zo3Diek2Sxn52mFOGWnugLZWl5ANLZP2PSTBVGCN4Fk=;
+ b=kJ6wTUavZr6xm5Cc9K0HOSyHXAJyr9ZEsEq2mnmc0XbfZbem2uDrtvqw7eqn3LG2HVQvJb
+ MrA6RnL//8BpAQxbIYtD+QwuG5fDnmGAZgV2YTpZfphTDek6/GxfanRlnLukGSwG2QKYRJ
+ 1SuQFRggNLA4d4cJxPxIhaEyQz53VBjh+ufdtu9iRJvner1PD+jZL+r79bTOB+Fm0M8TRU
+ j1pXy4bA3bNxZVMgn5mLJbyhpst4g7I76InMELqEvIlxLwamiPbAcjPaXLIMEj7oVYBUzr
+ 2PYLjaVGt/6N6IDSoCI9RRbhiijp5b7WbVsmfrNRYBzka/AtPcdY6UrTrIH3og==
+Message-ID: <11a631a3-644a-4c4f-8b09-7202687a4a90@mailbox.org>
+Date: Sun, 16 Nov 2025 22:48:45 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] boot: Warn users about fdt_high=~0 usage
+Subject: Re: [PATCH 0/3] Synchronize DTC to 1.7.2
 To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
+Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-References: <20251113142957.1069909-1-marek.vasut+renesas@mailbox.org>
- <20251113154900.GJ6688@bill-the-cat>
- <07424e88-16f8-4332-b93c-f0baeed5758c@mailbox.org>
- <20251116140913.GB2125796@bill-the-cat>
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sam Edwards <cfsworks@gmail.com>, Simon Glass <sjg@chromium.org>
+References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
+ <20251113175700.GM6688@bill-the-cat>
+ <63d6a47c-99cc-48d1-9d71-869c58e2eb69@mailbox.org>
+ <20251113184917.GN6688@bill-the-cat>
+ <71261c83-0a3e-46b6-a0db-d3587a54d71c@mailbox.org>
+ <20251116141151.GC2125796@bill-the-cat>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251116140913.GB2125796@bill-the-cat>
+In-Reply-To: <20251116141151.GC2125796@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 07eafeeb792fac98048
-X-MBO-RS-META: a511mwyhfs13mfufbuft1moopftheobg
+X-MBO-RS-ID: 707a8f295f826354ee6
+X-MBO-RS-META: 51h6jitf6b87adzipdxehfx3gbwi6icx
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,100 +86,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/16/25 3:09 PM, Tom Rini wrote:
-
-Hello Tom,
-
->>>> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
->>>> index 3f0ac54f76f..e88525a3846 100644
->>>> --- a/boot/image-fdt.c
->>>> +++ b/boot/image-fdt.c
->>>> @@ -189,6 +189,10 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
->>>>    			/* All ones means use fdt in place */
->>>>    			of_start = fdt_blob;
->>>>    			addr = map_to_sysmem(fdt_blob);
->>>> +			if (addr & 7) {
->>>> +				printf("WARNING: The 'fdt_high' environment variable is set to ~0 and DT is at non-8-byte aligned address.\nWARNING: This system will likely fail to boot. Unset 'fdt_high' environment variable and submit fix upstream.\n");
->>>> +			}
->>>> +
->>>>    			err = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &addr,
->>>>    					    of_len, LMB_NONE);
->>>>    			if (err) {
+On 11/16/25 3:11 PM, Tom Rini wrote:
+> On Sun, Nov 16, 2025 at 12:23:30AM +0100, Marek Vasut wrote:
+>> On 11/13/25 7:49 PM, Tom Rini wrote:
+>>
+>> Hello Tom,
+>>
+>>>> CI does show that no boards went oversize . If there is some growth on
+>>>> existing devices, maybe we can shrink that, but maintaining obsolete DTC
+>>>> code base going forward and picking random updates into it, that will only
+>>>> lead to increasing maintenance pain, so I don't want to do that.
 >>>
->>> I think we need to yell about it sooner.
+>>> Yeah, it's not an easy spot. But I'm really not happy with growing main
+>>> U-Boot almost everywhere by 2KiB - 4KiB, and SPL by ~512 bytes or more
+>>> just to keep up. I do see that integratorcp_cm1136 barely grows at all,
+>>> so maybe there's something that can be done more widely and just wasn't
+>>> clear at first. m68k only grows an average of 500 bytes and MIPS is
+>>> ~1KiB. PowerPC grows a lot. RISC-V a little.
+>> I suspect this might have to do with DTO support. The imx8mp_dhcom do use
+>> DTOs and the fdt_overlay.c code grew a lot.
 >>
->> I don't think so, for two reasons:
->>
->> - If the user uses e.g. bootz to boot their kernel, which on arm32 is still
->> sadly happening, they wouldn't trigger this problem at all and they wouldn't
->> care about whichever way their fdt_high is set.
+>> I also found out that if I patch out can_assume() and replace it with plain
+>> 1 , then the size drops by 1-2 kiB, but that's probably not what we want to
+>> do.
 > 
-> Which part of the problem? If the dtb is not 8-byte aligned the kernel
-> will fail. All the accessors require 8 byte alignment.
+> I'm not sure, maybe we do? Or maybe we need to look and have *one* place
+> that confirms correct alignment and either fixes/complains
 
-On 64bit systems, yes. On 32bit systems it is not so clear cut, they 
-might boot with 4-byte aligned DTs. I might be wrong about this, but if 
-I recall it right, bootz is very simplistic and it doesn't handle much 
-in terms of DT relocation, and ignores fdt_high, so the users on those 
-32bit systems that use bootz to boot also don't care about fdt_high much.
+That's already part of new libfdt, that is also what triggered the 
+various fixes I posted recently:
 
->> - If the user sets 'fdt_high' as part of their boot command, they would not
->> get any warning print if we warn earlier, but they would get one when they
->> boot and trigger this affected code path.
->>
->> Maybe we need warnings in two locations ?
-> 
-> Maybe? I was thinking it should be around this in boot/image-fdt.c:
->          /* If fdt_high is set use it to select the relocation address */
->          fdt_high = env_get("fdt_high");
->          if (fdt_high) {
->                  ulong high_addr = hextoul(fdt_high, NULL);
-> 
->                  if (high_addr == ~0UL) {
->                          /* All ones means use fdt in place */
+scripts/dtc/libfdt/fdt.c:       if ((uintptr_t)fdt & 7)
+scripts/dtc/libfdt/fdt.c:       if ((uintptr_t)fdt & 7)
 
-This is exactly the code that this patch modifies . Where in the above 
-do you think this change should be ?
+> , and then
+> every follow-up location doesn't need to perform that (or possibly many
+> other as well) validation checks. My impression from when I looked at
+> the code last, a few year ago, was that it was designed with "validate
+> with most? every? function" and we would be happy enough with "validate
+> once".
 
-> As that's where all of the code paths end up calling, I think. But if
-> it's multiple paths, yes, multiple warnings if we can't abstract it out
-> to a common path.
-> 
->>> Today (and for quite some
->>> years) if you pass a 4 byte and not 8 byte aligned DT to Linux, it fails
->>> to boot or breaks in loud
->>
->> Worse, not loud, but silent.
-> 
-> Also true, yes.
-> 
->>> and odd ways. This has in turn lead to much
->>> time spent and some of our older threads with the libfdt folks years
->>> ago. So I think we need something earlier in code where we're seeing
->>> that fdt_high is set to ~0 and that's where we say "Stop doing this, it
->>> will be removed soon".
->>
->> We cannot remove this functionality, someone might actually depend on it for
->> whatever reason. It is part of the command line ABI now.
-> 
-> The valid use case is boot time optimization. It's also a
-> micro-optimization (as actually megabyte sized device trees like when
-> people wanted to pass FPGA bitstreams in 15+ years ago are not allowed)
-
-( not allowed where exactly ? fitImage is a DT too )
-
-> I think really. I am loath to break ABI like this but I'm not entirely
-> sure we have a choice.
-
-We do, we simply warn users and remove the usage and fdt_high=~0 
-assignments from the tree. The functionality itself does not have to be 
-removed.
-
-> Maybe we detect disabled relocation and
-> misaligned device tree and fall back to prompt? Or if it's too late,
-> panic with an explanation? Or maybe we just move it 4 bytes higher. The
-> device is in a going to fail state anyhow, so trying to recover it might
-> be OK, and since the device tree needs to be modified by us it has to be
-> in writable memory.
-Keep in mind, on arm32 it may not necessarily fail to boot with 4-byte 
-aligned DT.
+If you can make that assumption -- that whatever we feed into libfdt is 
+valid -- then we can simply patch out can_assume() .
