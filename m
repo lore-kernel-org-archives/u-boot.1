@@ -4,75 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF904CEBF86
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 00:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D361CEBF86
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 00:19:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE9F8839E4;
-	Sun, 16 Nov 2025 01:15:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9B359839E4;
+	Sun, 16 Nov 2025 01:19:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KDSrtm21";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="NXY2dit2";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="feXHJomZ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ACIg3oKJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 554CD839E8; Sun, 16 Nov 2025 01:15:11 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 112F183A1B; Sun, 16 Nov 2025 01:19:41 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A676839DF
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 01:15:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35A04839DF
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 01:19:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4d8BGN6cnnz9tJt;
- Sun, 16 Nov 2025 01:15:08 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4d8BMZ5V0vz9twF;
+ Sun, 16 Nov 2025 01:19:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763252108;
+ s=mail20150812; t=1763252378;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=COfNAFz2s440dc/6Iime7Az9kdv/GOo2g1XW+scsj4E=;
- b=KDSrtm21zc92ppIB4g6UeSm/ALSW8VW5BjrGOwhE/LAl0GvGDguuU8OSXZf9MAjq3eWxp5
- d13PPLLOoA4c0XB6BzJi6fnwJTGrM/OxYDGQCqB95GiEm74mOEg2BJF7AYOoaaSVEHqNLD
- wTFGDMT1dwkTn8xT0qZ/M17nh8FuGSUHou++sc415R4xOEcshI83OEyEj6nU5Gw8GmabTM
- sQ6xvFGcRDdd7bOt4K4bV03nfBImF/KTAKg1NDpvnp/wCXSkzO9eecm0mzayfOFJeJzqVm
- NzKyyaIVD9hAeRHYNyju813f7qm3vABGg63ZntTqEwj8pLBSynxi52/VaF0ZgQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=NXY2dit2;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ bh=m+WdoBgoy82fXZNjbhPq1APH9oTVVXP7zz0S4b8XYwA=;
+ b=feXHJomZ6dHG8nnEGqrMvpY2rob5Ke9I6pxGShOikwzH4T4b0AR48bRr2/yKB2NONqSL6v
+ TIdrubbyP0bUl0NhQn/26CqEWtQp33EUW6Je/PyzhhkOkCw8TwLonE7DD4kS0yjKCgvQG2
+ rXMLSlBXrV4frN4qhw0uR5PQNsL7GMueOPE4qwuB0i6kgx8qTr90JNxn5irqoEZoWTZEZ8
+ U18/dreiorNWgLt2RVS9+1P38Vj2mZATtIHo9fZK8J2soFQfUmByGmsclWM56AUJ9GAD3Q
+ /jPA55h6Nx1j74aP4TwnYHY8gEf2sqbAiQG1Hk7TVMnzkl5b6VumTzU2DMKQpw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763252107;
+ s=mail20150812; t=1763252376;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=COfNAFz2s440dc/6Iime7Az9kdv/GOo2g1XW+scsj4E=;
- b=NXY2dit2NPSaB3fIgakJaKii5pwrFRrn8U6FzN3xaZGAIpH7vZVra0pLOb1SUYrfd/5jg2
- 3d1dKwIn25tb+nW47b+AxIwpwGn2rVeeLS+oQhCupRLPvkKe6Jw2T4ubyFx+F5pxadDWfq
- 3rqwP1f2Mw0MA2uAkWrM3Oyw1ZaHelvgpXSn0Mvm5TLOphKn/z0xip7R8ACoOaaLZUdiOD
- AwtJL5CeQds3fZqRzRb6FEGAFU9ddOG2dUg95QhYwysmdZD2MM1BCR91cfv8ICFkfz8Z73
- xZS1NaCsVbNnXCqT8xf43JkiTkVXkTzXTJ2SbnPCdsGgCpxfhlZuJmuYnBubVQ==
+ bh=m+WdoBgoy82fXZNjbhPq1APH9oTVVXP7zz0S4b8XYwA=;
+ b=ACIg3oKJWQPjBoxguawUvguBkHQCiGVkwOnxKaMHiD5onpaEIqNNnIjG99DbPGO4N0gm3q
+ wYmFVcrXeSo6vPvzp6Q/Jwg9nearqcCbn3pzBy3LetMS9zfEabfuoEG3koN6z/HSsEU9fs
+ Q4VqRff+jak673ap38xnPYuiAOe7vhPrisYYppRCaTDfiMTU1PdSSViXDVqT2DEpcp6v8Y
+ wobE8RT7ZFZN6301JR2DgWWUfQZDempLDxTBAMMs9yEjN6nwafxC3tkBbQ/1NLnycZZsIJ
+ hgkb0mqdOlx6x+exSUXjXm+v4BSZWQd1RR28Z0fuX6lUQv5FIBeh4k9ffQ4hYg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Max Filippov <jcmvbkbc@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] xtensa: Assure end of U-Boot is at 8-byte aligned offset
-Date: Sun, 16 Nov 2025 01:14:32 +0100
-Message-ID: <20251116001455.674808-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] xtensa: Fix big endian build
+Date: Sun, 16 Nov 2025 01:19:01 +0100
+Message-ID: <20251116001934.675130-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: addbd3eabaf51e5e547
-X-MBO-RS-META: m6bs3yow7i6ws51s4mbcdxt6dqc9n8qx
-X-Rspamd-Queue-Id: 4d8BGN6cnnz9tJt
+X-MBO-RS-ID: 9f662c5993e43ffd24c
+X-MBO-RS-META: m1hkszahc7nrkw4tn7qngkw3y7qgeutr
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,10 +81,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make sure the end of U-Boot is at 8-byte aligned offset, not 4-byte
-aligned offset. This allows safely appending DT at the end of U-Boot
-with the guarantee that the DT will be at 8-byte aligned offset. This
-8-byte alignment is now checked by newer libfdt 1.7.2 .
+Make sure the correct PLATFORM_...FLAGS are assigned in each
+case, consistently. Assign PLATFORM_ELFFLAGS for both LE and
+BE case. The previous PLATFORM_CPPFLAGS makes no sense for
+these particular parameters, which are passed to objcopy.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -100,53 +92,22 @@ Cc: Max Filippov <jcmvbkbc@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/xtensa/cpu/u-boot.lds         | 2 +-
- arch/xtensa/include/asm/ldscript.h | 5 +++++
- 2 files changed, 6 insertions(+), 1 deletion(-)
+ arch/xtensa/config.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/xtensa/cpu/u-boot.lds b/arch/xtensa/cpu/u-boot.lds
-index 72e4b9a706e..6894d4c327b 100644
---- a/arch/xtensa/cpu/u-boot.lds
-+++ b/arch/xtensa/cpu/u-boot.lds
-@@ -78,7 +78,7 @@ SECTIONS
-   SECTION_text(XTENSA_SYS_TEXT_ADDR, FOLLOWING(.DoubleExceptionVector.text))
-   SECTION_rodata(ALIGN(16), FOLLOWING(.text))
-   SECTION_u_boot_list(ALIGN(16), FOLLOWING(.rodata))
--  SECTION_data(ALIGN(16), FOLLOWING(__u_boot_list))
-+  SECTION_data(ALIGN(16), FOLLOWINGDT(__u_boot_list))
+diff --git a/arch/xtensa/config.mk b/arch/xtensa/config.mk
+index 200b66f8504..75888720d4a 100644
+--- a/arch/xtensa/config.mk
++++ b/arch/xtensa/config.mk
+@@ -9,7 +9,7 @@ PLATFORM_CPPFLAGS += -D__XTENSA__ -mlongcalls -mforce-no-pic \
+ LDFLAGS_FINAL += --gc-sections
  
-   __reloc_end = .;
-   __init_end = .;
-diff --git a/arch/xtensa/include/asm/ldscript.h b/arch/xtensa/include/asm/ldscript.h
-index bcf0fd5a744..50d3b390405 100644
---- a/arch/xtensa/include/asm/ldscript.h
-+++ b/arch/xtensa/include/asm/ldscript.h
-@@ -21,6 +21,9 @@
- #define FORCE_OUTPUT	. = .
- #define FOLLOWING(sec)							\
- 	AT(((LOADADDR(sec) + SIZEOF(sec) + ALIGN_LMA-1)) & ~(ALIGN_LMA-1))
-+#define ALIGN_LMA_DT	8
-+#define FOLLOWINGDT(sec)						\
-+	AT(((LOADADDR(sec) + SIZEOF(sec) + ALIGN_LMA_DT-1)) & ~(ALIGN_LMA_DT-1))
- 
- /*
-  * Specify an output section that will be added to the ROM store table
-@@ -110,6 +113,7 @@
- 		___u_boot_list_start = ABSOLUTE(.);			\
- 		KEEP(*(SORT(__u_boot_list*)));				\
- 		___u_boot_list_end = ABSOLUTE(.);			\
-+		. = ALIGN(ALIGN_LMA_DT);				\
- 	}
- 
- #define SECTION_data(_vma_, _lma_)					\
-@@ -130,6 +134,7 @@
- 		*(.eh_frame)						\
- 		*(.dynamic)						\
- 		*(.gnu.version_d)					\
-+		. = ALIGN(ALIGN_LMA_DT);				\
- 		_data_end = ABSOLUTE(.);				\
- 	}
- 
+ ifeq ($(CONFIG_SYS_BIG_ENDIAN),y)
+-PLATFORM_CPPFLAGS += -B xtensa -O elf32-xtensa-be
++PLATFORM_ELFFLAGS += -B xtensa -O elf32-xtensa-be
+ else
+ PLATFORM_ELFFLAGS += -B xtensa -O elf32-xtensa-le
+ endif
 -- 
 2.51.0
 
