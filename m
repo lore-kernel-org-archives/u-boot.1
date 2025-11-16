@@ -4,20 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C75CCD4F3E
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 14:44:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A7B3CD4F3E
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 14:45:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBD3F839AC;
-	Sun, 16 Nov 2025 15:44:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 24D8F839DE;
+	Sun, 16 Nov 2025 15:44:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36FC0839B1; Sun, 16 Nov 2025 15:44:54 +0100 (CET)
-Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
+ id E6CF283A3D; Sun, 16 Nov 2025 15:44:57 +0100 (CET)
+Received: from smtp.gentoo.org (dev.gentoo.org
+ [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEC01839A8
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 15:44:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2D39839D5
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 15:44:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
@@ -25,19 +26,17 @@ Received: from ofovo.local (unknown [116.232.48.119])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: dlan)
- by smtp.gentoo.org (Postfix) with ESMTPSA id 699D23415C9;
- Sun, 16 Nov 2025 14:44:44 +0000 (UTC)
+ by smtp.gentoo.org (Postfix) with ESMTPSA id B54303415D0;
+ Sun, 16 Nov 2025 14:44:49 +0000 (UTC)
 From: Yixun Lan <dlan@gentoo.org>
-Subject: [PATCH 00/11] sunxi: Add support for A733 SoC
-Date: Sun, 16 Nov 2025 14:43:51 +0000
-Message-Id: <20251116-01-a733-soc-support-v1-0-fb4c8db78e75@gentoo.org>
+Date: Sun, 16 Nov 2025 14:43:52 +0000
+Subject: [PATCH 01/11] sunxi: sun60i: initial support for A733 SoC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACfjGWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDQ0NTXQND3URzY2Pd4vxk3eLSgoL8ohJdM/MkAzMD42RLC4NUJaDOgqL
- UtMwKsKnRsbW1APypurplAAAA
-X-Change-ID: 20251115-01-a733-soc-support-67b0603c980e
+Message-Id: <20251116-01-a733-soc-support-v1-1-fb4c8db78e75@gentoo.org>
+References: <20251116-01-a733-soc-support-v1-0-fb4c8db78e75@gentoo.org>
+In-Reply-To: <20251116-01-a733-soc-support-v1-0-fb4c8db78e75@gentoo.org>
 To: u-boot@lists.denx.de
 Cc: Andre Przywara <andre.przywara@arm.com>, 
  Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -45,21 +44,21 @@ Cc: Andre Przywara <andre.przywara@arm.com>,
  Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>, 
  Yixun Lan <dlan@gentoo.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4028; i=dlan@gentoo.org;
- h=from:subject:message-id; bh=xxVzzucA7wP1MqaHAIVyZF6ulkl6ci0luT5lT4aA0Xs=;
- b=owEBzQIy/ZANAwAKATGq6kdZTbvtAcsmYgBpGeM1z5IuUBagGXY5enmDge/aTyq6xzJ7YPoGN
- 7ewsfsfIk2JApMEAAEKAH0WIQS1urjJwxtxFWcCI9wxqupHWU277QUCaRnjNV8UgAAAAAAuAChp
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5019; i=dlan@gentoo.org;
+ h=from:subject:message-id; bh=ha+uhTabjDTj+axxVpQ5TNW5me8CQ5qc38LNG5nYTdE=;
+ b=owEBzQIy/ZANAwAKATGq6kdZTbvtAcsmYgBpGeM4gqLAGjtqYLj2tps2VzEOoFytfnkCUpnry
+ 9RodRWjAYSJApMEAAEKAH0WIQS1urjJwxtxFWcCI9wxqupHWU277QUCaRnjOF8UgAAAAAAuAChp
  c3N1ZXItZnByQG5vdGF0aW9ucy5vcGVucGdwLmZpZnRoaG9yc2VtYW4ubmV0QjVCQUI4QzlDMzF
- CNzExNTY3MDIyM0RDMzFBQUVBNDc1OTREQkJFRAAKCRAxqupHWU277UTSD/9fgmJNFavycMJv2T
- csqt09kR7RxvPPiY4XK1L92TNwRP1ikE/emhf8rWB3GamkufNrUzm0azVZPMWXJMqzT3NyF+Qm9
- d3FgtA9DCy0qF5wHNLWXlYFOh1F00OHFw/dfyzEJkwaRAyGqOOdcqHPzbp6BcqRiIESZsLb0PU7
- MqxQv5iJf5WNLEuyNigYdd0W2/VqQaKzWi29BE2TCUD+Ij8PCRNdViy2AlC2a1ZdjRmfefVxkTA
- 4CwmSJ98UUkgtQBWdWpyKYcQa/qNt+xZsu8sTWwjq2nbzYtB5kKFNu6QlNnyQmgH5178j0EJXU6
- nrIw+3A6mV+hHDwvuiYzEi1WCxEgItNeGdxfkU2EyMAySZ/3tfWqGPJKK4ygfJJzJ/qZmnD1j6Y
- Rux+jteuVD8e+g+ANSGGiLRjdmXnCdIpfpl8dVDpgKwUbfBNmbLFrO8TGiiMglKv1lpcPeELbbx
- eTOrsyMWunz97KgWWVJ3z/pjCT46XeBJ5YjIJew7d0zKG3O4tQusjS9WMEXG5Ye9zTH+fYFmxbm
- rw0Tt8Hk2Fi95A3rRDU9TAZUQVNuIAX1KIO5q87e/5z0oZogdN46hEjewCj2ynSEgwutJV33Jm4
- LnzGG/Gwq8RIUQVbqUD/I+MhO8gaxzHSuS2KstSj34KJgyRpLWwrIrefnvhXFVg2CwcQ==
+ CNzExNTY3MDIyM0RDMzFBQUVBNDc1OTREQkJFRAAKCRAxqupHWU277YzCD/9r7H+52pXvvqPJGy
+ 4uWu/eEZqdOcqdRJOuYsIZeQBXetB0maKj1ALCytUxODsHUvdqG6LZ9JU08xYgPPvVEZ58NRF0E
+ arPIts+uoTvJ6PTRCsb9PblA91jOXWkEAVJchiumViMg/gmkWMTNEMSOlWrxC6+mEmu5TtxDwe2
+ v+vV6t4Kfm7Z5Ctk79OVWoOHs3K1QjQOtITQ/Q3vYYReXTwixSKzaVTMASx5TyAOZGBItz6NN3u
+ I/JsC9n9E7LO7Jy6KCNkXrGpR6SY8uWRPCMaYq7HAIBEW9Gxz1/xdMRORUFaMUzZaIlnSSKju0D
+ qL4cYtrfnKH2OVGuFEjhNOwLN48yV58qZrEPpo9Kpxygb6hus1CgCcGf0D/oDR31Gj6DZcKS/ZC
+ IUo6vvtIsV4bkqCZFD6e0gqFs77TJs2q/yMdEd7LVbGBd2I1gCMQfiAA5kAQ+2fmkwFoTx0RksZ
+ Gzm6rOBU/XqBIEsuJS0g18p5v6DvCkR5MIS2QOYwTyT+GrKpeC7nsjEqc0F8bMR9ck5dj1LHxqx
+ 3r2T8DmxspZaQhibdKhTf/GHYv/ShI9TumYUUD+akmg0I70RK0KPeW08fib1wBq8Ni6JT6x+Yp1
+ MfZQrC51sVQqk6erlp+nzJECFt54PMfcS9RR9OlpfyuhWjiFF0oqzGCgLJrW68ca8Obw==
 X-Developer-Key: i=dlan@gentoo.org; a=openpgp;
  fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.denx.de
@@ -78,89 +77,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allwinner A733 SoC[1] is an octa-core Cortex-A76/A55 processor, below
-list the brief features. 
+Add basic support for Allwinner A733 SoC.
 
-- Dual-core Cortex-A76, Hexa-core Cortex-A55, RISC-V E902 core
-- UP to 16GB RAM, 192K+512K SRAM
-- Imagination BXM-4-64 MC1 GPU
-- Optional 3 TOPS NPU
-- UFS3.0 storage
-- eMMC, SD, SDIO
-- Octal SPI
-- HDMI, RGB, LVDS, eDP, MIPI display interface
-- MIPI CSI, up 4 lanes
-- Audio 5x I2S
-- GMAC Ethernet
-- USB3.1, 2.0 support
-- PCIe 3.0 DM
+- Include some basic register definitions
+- Introduce a new SUN60I A733 Kconfig option
+- Ssetup RVBAR register properly according to docs
+- Config max DDR size 16GB
 
-Add support for Allwinner A733 SoC, target to support booting mainline
-U-boot via FEL download mode, also add eMMC driver support, mmake it
-able to load images from the eMMC/SD storage device.
-
-I've not pushed DT part patches, but put a more complete working branch
-at my development branch[2] for reference or testing if people
-interested. Please note, we reply on vendor boot0 firmware for the DDR
-initialization, then use sunxi-fel to down and execute U-Boot, see doc[3].
-
-Link: https://linux-sunxi.org/A733 [1]
-Link: https://github.com/dlan17/u-boot/tree/allwinner/A733/next [2]
-Link: https://github.com/dlan17/a733/blob/main/boot-fel.md [3]
 Signed-off-by: Yixun Lan <dlan@gentoo.org>
 ---
-Yixun Lan (11):
-      sunxi: sun60i: initial support for A733 SoC
-      sunxi: a733: config TF-A load address
-      sunxi: spl: a733: config text and stack address
-      sunxi: a733: uart: setup serial console
-      clock: a733: implement support for mmc/uart
-      clock: reset: a733: add initial support
-      gpio: a733: add initial support
-      pinctrl: sunxi: a733: add initial support
-      sunxi: i2c: add support for A733
-      pmu: axp318w: implement pmic/regulator support
-      sunxi: mmc: enable support for A733
+ arch/arm/include/asm/arch-sunxi/cpu_sunxi_a733.h | 41 ++++++++++++++++++++++++
+ arch/arm/mach-sunxi/Kconfig                      | 12 +++++++
+ arch/arm/mach-sunxi/cpu_info.c                   |  2 ++
+ include/configs/sun60i.h                         | 11 +++++++
+ 4 files changed, 66 insertions(+)
 
- arch/arm/include/asm/arch-sunxi/clock.h            |   2 +
- .../arm/include/asm/arch-sunxi/clock_sun60i_a733.h | 179 ++++++++++++++++++++
- arch/arm/include/asm/arch-sunxi/cpu.h              |   2 +
- arch/arm/include/asm/arch-sunxi/cpu_sunxi_a733.h   |  41 +++++
- arch/arm/include/asm/arch-sunxi/serial.h           |   2 +-
- arch/arm/mach-sunxi/Kconfig                        |  14 ++
- arch/arm/mach-sunxi/Makefile                       |   1 +
- arch/arm/mach-sunxi/board.c                        |   3 +-
- arch/arm/mach-sunxi/clock_sun60i_a733.c            |  80 +++++++++
- arch/arm/mach-sunxi/cpu_info.c                     |   2 +
- common/spl/Kconfig                                 |   3 +
- drivers/clk/sunxi/Kconfig                          |  14 ++
- drivers/clk/sunxi/Makefile                         |   2 +
- drivers/clk/sunxi/clk_a733.c                       |  75 ++++++++
- drivers/clk/sunxi/clk_a733_r.c                     |  36 ++++
- drivers/clk/sunxi/clk_sunxi.c                      |  10 ++
- drivers/gpio/Kconfig                               |   7 +
- drivers/gpio/sunxi_gpio.c                          |  12 +-
- drivers/i2c/mvtwsi.c                               |   2 +-
- drivers/mmc/sunxi_mmc.c                            |  32 +++-
- drivers/mmc/sunxi_mmc.h                            |   3 +-
- drivers/pinctrl/sunxi/Kconfig                      |  10 ++
- drivers/pinctrl/sunxi/pinctrl-sunxi.c              |  57 +++++++
- drivers/power/Kconfig                              |  10 ++
- drivers/power/pmic/axp.c                           |   1 +
- drivers/power/regulator/axp_regulator.c            |  50 ++++++
- include/axp_pmic.h                                 |   1 +
- include/configs/sun60i.h                           |  11 ++
- include/dt-bindings/clock/sun60i-a733-ccu.h        | 188 +++++++++++++++++++++
- include/dt-bindings/clock/sun60i-a733-r-ccu.h      |  34 ++++
- include/dt-bindings/reset/sun60i-a733-ccu.h        |  85 ++++++++++
- include/dt-bindings/reset/sun60i-a733-r-ccu.h      |  22 +++
- include/sunxi_gpio.h                               |  11 +-
- 33 files changed, 989 insertions(+), 13 deletions(-)
----
-base-commit: 23987e10905146def3ab61e55ec912c6e742efdc
-change-id: 20251115-01-a733-soc-support-67b0603c980e
+diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_a733.h b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_a733.h
+new file mode 100644
+index 00000000000..3c0a03c85cb
+--- /dev/null
++++ b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_a733.h
+@@ -0,0 +1,41 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef _SUNXI_CPU_SUNXI_A733_H
++#define _SUNXI_CPU_SUNXI_A733_H
++
++#define SUNXI_CCM_BASE			0x02002000
++
++#define SUNXI_WDT_BASE			0x02050000
++#define SUNXI_TIMER_BASE		0x02052000
++
++#define SUNXI_TWI0_BASE			0x02510000
++#define SUNXI_TWI1_BASE			0x02511000
++#define SUNXI_TWI2_BASE			0x02512000
++#define SUNXI_TWI3_BASE			0x02513000
++
++#define SUNXI_SRAMC_BASE		0x03000000
++/* SID address space starts at 0x03006000, but e-fuse is at offset 0x200 */
++#define SUNXI_SIDC_BASE			0x03006000
++#define SUNXI_SID_BASE			0x03006200
++#define SUNXI_GIC400_BASE		0x03020000
++
++#define SUNXI_MMC0_BASE			0x04020000
++#define SUNXI_MMC1_BASE			0x04021000
++#define SUNXI_MMC2_BASE			0x04022000
++
++#define SUNXI_PRCM_BASE			0x07010000
++#define SUNXI_R_WDOG_BASE		0x07020400
++#define SUNXI_R_CPUCFG_BASE		0x07050000
++#define SUNXI_R_TWI_BASE		0x07083000
++#define SUNXI_RTC_BASE			0x07090000
++
++#define SUNXI_CPUCFG_BASE		0x08815000 // FIXME
++#define SUNXI_CPU_PLL_CFG_BASE		0x08870000
++
++#ifndef __ASSEMBLY__
++void sunxi_board_init(void);
++void sunxi_reset(void);
++int sunxi_get_sid(unsigned int *sid);
++#endif
++
++#endif /* _SUNXI_CPU_SUNXI_A733_H */
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index e979ee4a2cc..c0b4fdaa370 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -215,6 +215,7 @@ config SUNXI_SRAM_ADDRESS
+ 	hex
+ 	default 0x10000 if MACH_SUN9I || MACH_SUN50I || MACH_SUN50I_H5
+ 	default 0x44000 if MACH_SUN55I_A523
++	default 0x47000 if MACH_SUN60I_A733
+ 	default 0x20000 if SUN50I_GEN_H6 || SUNXI_GEN_NCAT2
+ 	default 0x0
+ 	---help---
+@@ -228,6 +229,7 @@ config SUNXI_RVBAR_ADDRESS
+ 	depends on ARM64
+ 	default 0x08100040 if MACH_SUN50I_A133
+ 	default 0x08000040 if MACH_SUN55I_A523
++	default 0x08001004 if MACH_SUN60I_A733
+ 	default 0x09010040 if SUN50I_GEN_H6
+ 	default 0x017000a0
+ 	---help---
+@@ -339,6 +341,7 @@ config MACH_SUNXI_H3_H5
+ config SUNXI_DRAM_MAX_SIZE
+ 	hex
+ 	default 0x100000000 if MACH_SUN50I_H616 || MACH_SUN50I_A133 || MACH_SUN55I_A523
++	default 0x400000000 if MACH_SUN60I_A733
+ 	default 0xC0000000 if MACH_SUN50I || MACH_SUN50I_H5 || MACH_SUN50I_H6
+ 	default 0x80000000
+ 
+@@ -553,6 +556,13 @@ config MACH_SUN55I_A523
+ 	select SPL_LOAD_FIT if SPL
+ 	imply OF_UPSTREAM
+ 
++config MACH_SUN60I_A733
++	bool "sun60i (Allwinner A733)"
++	select ARM64
++	select FIT
++	select SPL_LOAD_FIT if SPL
++	select SUPPORT_SPL
++
+ endchoice
+ 
+ # The sun8i SoCs share a lot, this helps to avoid a lot of "if A23 || A33"
+@@ -870,6 +880,7 @@ config SYS_CONFIG_NAME
+ 	default "sun50i" if MACH_SUN50I_H616
+ 	default "sun50i" if MACH_SUN50I_A133
+ 	default "sun55i" if MACH_SUN55I_A523
++	default "sun60i" if MACH_SUN60I_A733
+ 
+ config SYS_BOARD
+ 	default "sunxi"
+@@ -1186,6 +1197,7 @@ config SPL_STACK_R_ADDR
+ 	default 0x4fe00000 if MACH_SUN50I
+ 	default 0x4fe00000 if SUN50I_GEN_H6
+ 	default 0x4fe00000 if SUNXI_GEN_NCAT2
++	default 0x4fe00000 if MACH_SUN60I_A733
+ 
+ config SPL_SPI_SUNXI
+ 	bool "Support for SPI Flash on Allwinner SoCs in SPL"
+diff --git a/arch/arm/mach-sunxi/cpu_info.c b/arch/arm/mach-sunxi/cpu_info.c
+index c3a51d9956e..f0b33bb9097 100644
+--- a/arch/arm/mach-sunxi/cpu_info.c
++++ b/arch/arm/mach-sunxi/cpu_info.c
+@@ -108,6 +108,8 @@ int print_cpuinfo(void)
+ 	puts("CPU:   Allwinner A133 (SUN50I)\n");
+ #elif defined CONFIG_MACH_SUN55I_A523
+ 	puts("CPU:   Allwinner A523 (SUN55I)\n");
++#elif defined CONFIG_MACH_SUN60I_A733
++	puts("CPU:   Allwinner A733 (SUN60I)\n");
+ #else
+ #warning Please update cpu_info.c with correct CPU information
+ 	puts("CPU:   SUNXI Family\n");
+diff --git a/include/configs/sun60i.h b/include/configs/sun60i.h
+new file mode 100644
+index 00000000000..70649366c1c
+--- /dev/null
++++ b/include/configs/sun60i.h
+@@ -0,0 +1,11 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Placeholder wrapper to allow addressing Allwinner devices with Cortex-A55
++ * cores separately. Please do not add anything in here.
++ */
++#ifndef __CONFIG_H
++#define __CONFIG_H
++
++#include <configs/sunxi-common.h>
++
++#endif /* __CONFIG_H */
 
-Best regards,
 -- 
-Yixun Lan <dlan@gentoo.org>
+2.51.2
 
