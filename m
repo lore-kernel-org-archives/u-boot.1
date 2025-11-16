@@ -4,87 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A3CECEB2F1
-	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 00:20:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54F02CEBF87
+	for <u-boot@archiver.kernel.org>; Sun, 16 Nov 2025 01:45:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84FE083A9A;
-	Sun, 16 Nov 2025 01:20:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 855FF83A35;
+	Sun, 16 Nov 2025 02:45:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uxcMwJ2u";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dFVG3Wmz";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="SAWX0Pzn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0A73839E4; Sun, 16 Nov 2025 01:20:23 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 6F64983A56; Sun, 16 Nov 2025 02:45:50 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B795983A61
- for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 01:20:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0761983A2D
+ for <u-boot@lists.denx.de>; Sun, 16 Nov 2025 02:45:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4d8BNN3Rb5z9tKj;
- Sun, 16 Nov 2025 01:20:20 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763252420;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xYCAoOl2sg/xB64WtNqmVsHFL3+o++A6nh7rhrDdUWU=;
- b=uxcMwJ2ulQTO91A/uw2YIsD+YtL+Q2Pc40Xg7KwIkrA2TVOri3zDsXs7Gk8/bVE0+LQCTM
- xahUw8XNxE2ZFATM81+cgKeu4/q6qfz4qaaMrUMK/RcBoaCX75IOdjEh1LBJfYShkfIxsv
- nYnKOxXBzRscBlfth5DDvKkCK1lpYg8cVjS87xS8vRg6pljF0yGBqK55uztimJfszcoIcs
- 6E9x3xEB0Xs3QupGfiWzQVD2KKw/N4FFtF2mmSQhlQstIjbOzxYSfmCAaLHTeXWpd2IZmf
- cfsXPXOIbEvz2Pz5mbiFw7slPnteZRKcvX1f1WG7EQ4ZDVjYC7C5aF7Ju7OlcA==
-Message-ID: <4ccf5adb-6e66-4842-8e4b-1c6f37ec966d@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763252418;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xYCAoOl2sg/xB64WtNqmVsHFL3+o++A6nh7rhrDdUWU=;
- b=dFVG3Wmz8w1W5sdt9UtRwoMlPB7XosSmn0tFj/y54/bwOn67DyGnt5BRqIsFPap0C3DR3U
- M0fBpl0E5eFdBEh6CCrnxH43koM+rBATu91D+zuNcccme62IbfSZCFoN13Zy60mC6JeIIv
- gPjDDqbQHfevTfyuYebxHzGaURf2tnenez1CBaHKpVOFbNuup8YhhMf+SyUGr5vOs/Iv6m
- qf+XnbrK4Yr8q6zfZPZxYQUynwWpTv2i8ih3m1pw+mNlmY7/puheIdHhcjK35WiHax8LVX
- caY4MTuLTwwRTIiC61PwXHRbafCyafHnO/K3xZX6MmrEWBk9M696ga23FFC9vw==
-Date: Sun, 16 Nov 2025 01:16:53 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=62e4=5Y=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1763257546;
+ bh=Pf+s+YWhb0kt9r2I12R6L3ATL/ejZnLaFTxix3sOiRs=;
+ b=SAWX0PznJf1lQnPf8HLF2ojWBSPjkpSOBbyjrbN75OXhNQQTQEvsadpz4cKsGYSANekenX8yr
+ x5V7UCCFNgvcY7J9ozE8dRSrlv8N5S9Jjp1ZL3rsJqwmXazubmF2mr70it3NoRuK6NUxxNdkyyl
+ ICKRwx/1xabyp+ENv7UBNSzvwnqLZcEM8JQz/i1Pcyepp9cSjU4S3THd/zktqZ8nRYCgA3/0K+u
+ T3jrq3Bi/Rcj5IM7mQn7DsGwkbA5gTB4rarAdTHMCX8nNZHqe7dlwKQcE3p2BoFfATfAVygCSOf
+ z++IHku7m931DmrtLkPGxJy2S5LKlK+Y0/5xrhMAFnxg==
+X-Forward-Email-ID: 69192cc2874de5639c1150c0
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.4.5
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+Subject: [PATCH] rockchip: rk3588: Map SCMI shared memory area as non-cacheable
+Date: Sun, 16 Nov 2025 01:45:29 +0000
+Message-ID: <20251116014531.2133243-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.51.2
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/3] dm: core: Check ofnode_to_offset() return value
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sam Edwards <cfsworks@gmail.com>
-References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
- <20251113122145.949112-2-marek.vasut+renesas@mailbox.org>
- <CAFLszTigJHK9H18rZG=AHRo09RPqKGHQmmVrHZ40mHPk-KkwqQ@mail.gmail.com>
- <7a083302-1096-47fa-90a9-aa350eea6884@mailbox.org>
- <CAFLszTjktw3yS9Dp9KGC=BAnpJAHg46f--NRRfnzXApQVOiuUQ@mail.gmail.com>
- <fd30d6ca-fdfe-4096-8057-a952a6a4bb7e@mailbox.org>
- <20251114143609.GZ6688@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251114143609.GZ6688@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 323663efcdb1c21a571
-X-MBO-RS-META: ckhf9u38aydzr8stto874eawzotwsrd5
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,22 +70,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/14/25 3:36 PM, Tom Rini wrote:
+The SCMI shared memory area is no longer automatically marked as
+non-cacheable after the commit a5a0134570c8 ("firmware: scmi: Drop
+mmu_set_region_dcache_behaviour() misuse").
 
-Hello Tom,
+This change in behavior cause Rockchip RK3588 boards to fail boot with:
 
->> We would need a wrapper for almost every libfdt call, which isn't really
->> better.
->>
->>> What does fdt_getprop() return when the offset is -1 ?
->> If can_assume(VALID_DTB) , then crash on NULL pointer dereference .
->> If not, I think FDT_END (premature end) or an error code.
-> 
-> How are we now getting in this state is a question. Are we being passed
-> an unaligned DT and trying to work around/with it?
-This is superseded by:
+  SoC:   RK3588
+  DRAM:  8 GiB
+  scmi-over-smccc scmi: Channel unexpectedly busy
+  scmi_base_drv scmi-base.0: getting protocol version failed
+  scmi-over-smccc scmi: failed to probe base protocol
+  initcall_run_r(): initcall initr_dm() failed
+  ### ERROR ### Please RESET the board ###
 
-[PATCH] xtensa: Assure end of U-Boot is at 8-byte aligned offset
+Update the memory mapping on RK3588 to mark the SCMI shared memory area
+as non-cacheable to fix the SCMI shared memory based transport issue
+that prevented RK3588 boards from booting.
 
-It turns out the problem was yet another unaligned appended DT, on 
-xtensa this time.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ arch/arm/mach-rockchip/rk3588/rk3588.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+index c01a40020896..55d2caab4fec 100644
+--- a/arch/arm/mach-rockchip/rk3588/rk3588.c
++++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+@@ -63,7 +63,20 @@ static struct mm_region rk3588_mem_map[] = {
+ 	{
+ 		.virt = 0x0UL,
+ 		.phys = 0x0UL,
+-		.size = 0xf0000000UL,
++		.size = 0x10f000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		/* SCMI shared memory area must be mapped as non-cacheable. */
++		.virt = 0x10f000UL,
++		.phys = 0x10f000UL,
++		.size = 0x1000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		.virt = 0x110000UL,
++		.phys = 0x110000UL,
++		.size = 0xefef0000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+ 			 PTE_BLOCK_INNER_SHARE
+ 	}, {
+-- 
+2.51.2
+
