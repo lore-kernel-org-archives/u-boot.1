@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 678F3CE8D6B
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 10:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D93CACE8D6B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 10:49:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFC0183A79;
-	Mon, 17 Nov 2025 11:49:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 12D1E83B2C;
+	Mon, 17 Nov 2025 11:49:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cV7CtOGC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l029meqj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AC6D83B43; Mon, 17 Nov 2025 11:49:47 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 5FEF983B8C; Mon, 17 Nov 2025 11:49:48 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A4E58397A
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 11:49:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44B9E83A8F
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 11:49:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-429c82bf86bso2320666f8f.1
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 02:49:44 -0800 (PST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-42b39d51dcfso2234467f8f.2
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 02:49:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763376583; x=1763981383; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1763376585; x=1763981385; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NMl0TKG/R59XYqrbFqGR2atFb3oteqxzXaweAtZlps8=;
- b=cV7CtOGCurQop0VscBwyRlhbr/PCThPFoFnLYeLZNchpOn0x/fJc7hh3eZ56HI9bxC
- ijtIJ5VKbFbVFPaiAO3zSyIH7Du3Y0ggul1YhmLiqMWEviRKdSXe7+GR+LUI+XmDbBqb
- rsWxwdR7R9AfJ7vd2HfSUp0aSYwbBpQdo2xCKfFdRIJVbhPVD/ZBkxBcE36PeJ8l+yK+
- 32yOciOokHsNYwezBG/Z/T9fSIFj2KrU4agStXpUhwdMIRapKz2VTxY29y4/ACPWOaxi
- UilCg36gcv/2dpVDHuLah8fV1uVNNaZlPvu/lq33NhoICOrXLdmtYI5CXOj2/L5TBVmU
- ttiw==
+ bh=M/e99HPS1vJtSl/6kE8dVRXJFKHvJt3L9OFtu8w8Hu8=;
+ b=l029meqj205XMIE7wNGFHY2umcJsHrTLEUOCO8UXiF0UsMfKgksmCM5WvzEqC1HfvF
+ 8LH3wgpb6/7pM1EOMZTsj2ABRU+TfPF4F057uvgXnZaQscgHBr/QBLHU/9BZhhPV74Ev
+ 0mpG1b1e8lCsKmfhsZo2rvTJWsxHKYLcbsmLJtbPxwthX4R+p+65K0jSiPABDfvUBZjL
+ APPmJohj6Snea17IUOOcF8+9AN0Q7Wu6gxJDGFopBjvtiO+F8W+N4LP0/+DEyennYJiD
+ 4t23NzmaiLXfWN3UeFqth7soKmmWR2hIbszxUuTLSGqf+3ZTnS5TUifKVVMH3Eri3/Li
+ W+LQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763376583; x=1763981383;
+ d=1e100.net; s=20230601; t=1763376585; x=1763981385;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=NMl0TKG/R59XYqrbFqGR2atFb3oteqxzXaweAtZlps8=;
- b=WrrKt5g5bnrEI3EjN6C7sptRnNjjSjByggWoMcM1dAwpao9LvnISMfs77HCD8hjVOo
- 4AoITK6qU85wVHnnIew0oicQgcugZopgdH7o/SJ7vHJP2b/fLPlsej5AiyASt/BAFQyI
- X0l+4PN8ZxvJvJpUcwb8iCwqgnrpMGBHHqtppuoh81wNZ5958C0as+hJkag9nvOR9NCc
- qsQfo3qU/7mf1Rw3b9uWEOFKttPXnABVbQ0jSX5ZfKEA31dGCQDYU89wIM0IGL8jehxR
- xKHm9cat2lRt5ji6IHiJrzAy3CWssvDuj4bIzncwg9l1Je5MDY2SbyOhUESaTSCYcoBn
- 22xg==
-X-Gm-Message-State: AOJu0YyQQ1GClW5SFJKwRdWy1BfgfEm/01KT8MFHfLuCxqf0JsZX/SnG
- nLvCm0Jq5ZKANsHbj9ofqtYtBuaSJe0E63jYDun+Yw/9+5bZmvYqFNCU41f77HidCWk=
-X-Gm-Gg: ASbGnctSlXuk4UruqzuYa8Cs0ZPQ7H3KEgYnt+pMyTh2rZxXXpEU0rRrFCBfStdgx7K
- FJtAKQw34+7WojnBRXOtct3w95BPTaEJDEmAwPPFhny4ruDFhEwRyu3BCIfoYBacRcDcfzQV5TK
- 9LjRWYBzoPCLSVooXCWGbgU2+w8cp+vlQoD6aTvMZ2Yto/BHjWsXXGpKCIIEMQEhZqKPy+E7F6B
- 1+/XHNBa0n0cZLy7VwCajvX+SHC9llTU74/Hy+NNzIEfF8hNEWr9UWGk7UgiG49OzoHlM7ZKMT5
- DA1dYvrpkb5GhNA9U0ZTLXGj0iuP2rn7fVQSAML/el2TrEoV2ozYGNV05sBHxfF8JoAs3fSmlJl
- mH8c2dP9HQdREtFS1Ln2iMMiCR6nM+pk1JxhEELaFjpd9zT1vCGWFZfTjBXRAMpwSEX2/RZdu7+
- den4tPcOldI9ZnH2AAW8kY
-X-Google-Smtp-Source: AGHT+IGzcyt8SwFZ4scWDWsqn7FOxZV1hAqsZJuqi0WJbI6oUYRkF2ikA9EtpLs6ryRWIg1jxZf7Tg==
-X-Received: by 2002:a05:6000:2893:b0:42b:3806:2bb5 with SMTP id
- ffacd0b85a97d-42b5933915amr11819491f8f.12.1763376583465; 
- Mon, 17 Nov 2025 02:49:43 -0800 (PST)
+ bh=M/e99HPS1vJtSl/6kE8dVRXJFKHvJt3L9OFtu8w8Hu8=;
+ b=KYWpupYlPZrgmRkyVJ66obiHKFK69Viy46WvB6zd95Jvnhpwlkyuw9wBScVwj5KNBd
+ 03X2JLK9awSyCJOrCnb45xciBMPGTHsw2x/jEAfc0edgBcEHxqZuLmcVwH5W7U7953jY
+ d2hUHqdrR0U3zVFcjrWHAdqs92gJpKAK85fINwsBCC5fqaYtE8Lf4EblpfAqqCWtoHSc
+ cYtkFfHTwsnf1+2Bjt40/gYyRg8hE+m4Sh+uJkjj1sOOkPevxdIfsG4ci5UGbT9WJE+b
+ tEki+9nmgSi4fsRigXZZ/2TXWTw5WtM+U4sOr10kNWLAxZhe2ObZp+qc4KK56U7lxklb
+ K3TA==
+X-Gm-Message-State: AOJu0Yx1tMXlyAwpq+vE9SDrUfRDMWpS5eb06FUgrA++0uK4IU3R3zSU
+ p6nreLRC+DUZCXknKq1u32ZJhAKSaMie43R2Vxqf5lG1B+kd0XDDecoJL/IjdPYTYsVQi4aeNiP
+ d0nMr
+X-Gm-Gg: ASbGncsRcpAKrWMatsuUsGw8hAGqmv25XZsHi5UPnQgmw3IOHIrFJdOL8sTcqxwJVfC
+ sSPruSrfwaVI5AG5+anJ1/27qmEphKr1C5NrJjsCtIfQjYntWJ5FoCsYRqTlVm69WVbG/b2d2Fi
+ kNB7IctTE0u44fSbtDFFKbqxJtBBEx7gtk3HVW/d3YcjEreciVMQW9/LhB6LT8yy2a67WxdnJTE
+ QGSmFlOP12qPP5cJchNhcz13x3JJkMnVPsqE8GtJerJuZoTRTnyxjZjpQwJUNhzIBOHm2UV5R2Q
+ +//9gEMfjwesyiHCXHjW38f3uKRWZSyHlSP/R9a3ahqJ/EYXOWZ2uN5Aa6zcF1JDZ7vkKEI5q5P
+ yBdRhK+4sksMA75GnbOHCFvSeTPpcSgrN+NbHSf9hJ3cSnVv1MKFLTNt7UPyUxi2BS8MZ7MX0au
+ Qjx+8ReHk5DMCjQ/JkBnSDMYdbQvd9G5B0v/EuYNa2jQ==
+X-Google-Smtp-Source: AGHT+IGCUM2BSn432Sww4Na2tP3esgQL1AsvVb+GmD5G1Wd2Yf13b0ISNBSom8VNkSFERVKLBGU8wQ==
+X-Received: by 2002:a05:6000:310b:b0:42b:41d3:dafa with SMTP id
+ ffacd0b85a97d-42b59389c39mr10623417f8f.46.1763376584500; 
+ Mon, 17 Nov 2025 02:49:44 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42c97745f79sm11422514f8f.23.2025.11.17.02.49.42
+ ffacd0b85a97d-42c97745f79sm11422514f8f.23.2025.11.17.02.49.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 02:49:42 -0800 (PST)
+ Mon, 17 Nov 2025 02:49:43 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Shawn Lin <shawn.lin@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, 
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-In-Reply-To: <20251029201435.215966-1-marek.vasut+renesas@mailbox.org>
-References: <20251029201435.215966-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] ufs: Keep Makefile and Kconfig sorted one more time
-Message-Id: <176337658261.3830363.8241027223111268361.b4-ty@linaro.org>
-Date: Mon, 17 Nov 2025 11:49:42 +0100
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251112211841.1428696-1-trini@konsulko.com>
+References: <20251112211841.1428696-1-trini@konsulko.com>
+Subject: Re: [PATCH] ufs: rcar-gen5: Use a unique U_BOOT_DRIVER name
+Message-Id: <176337658354.3830363.10042938881205083768.b4-ty@linaro.org>
+Date: Mon, 17 Nov 2025 11:49:43 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -106,15 +103,18 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Wed, 29 Oct 2025 21:14:10 +0100, Marek Vasut wrote:
-> Sort the Makefile and Kconfig alphabetically again. No functional change.
+On Wed, 12 Nov 2025 15:18:41 -0600, Tom Rini wrote:
+> All instances of U_BOOT_DRIVER must be unique or we will have link time
+> failures. It is possible to enable both ufs-renesas-rcar.c and
+> ufs-renesas-rcar-gen5.c at the same time, so give
+> ufs-renesas-rcar-gen5.c a new unique U_BOOT_DRIVER name.
 > 
 > 
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (master)
 
-[1/1] ufs: Keep Makefile and Kconfig sorted one more time
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/65c843ebe515aa56f4526f91c37268e07a42b00c
+[1/1] ufs: rcar-gen5: Use a unique U_BOOT_DRIVER name
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/d4f80bddc58115744d681a332144e9a9371d1f59
 
 -- 
 Neil
