@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FFA5CE8D6B
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 17:04:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D1FDCEACEF
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 17:14:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D756783C02;
-	Mon, 17 Nov 2025 18:04:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 12F1683BE1;
+	Mon, 17 Nov 2025 18:14:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V83wydDX";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nDxMRsOp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D095B83C04; Mon, 17 Nov 2025 18:04:35 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id ABD2383BFE; Mon, 17 Nov 2025 18:14:11 +0100 (CET)
+Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
+ [IPv6:2607:f8b0:4864:20::e32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3A0B83BFE
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 18:04:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C0CB183B9D
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 18:14:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b735ce67d1dso559721466b.3
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 09:04:33 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-5dfa9c01c54so2884203137.0
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 09:14:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763399073; x=1764003873; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1763399647; x=1764004447; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aAS8LuphrYusWP0XrFRtLq/j5Fi48MzkOkS7B1IKwRg=;
- b=V83wydDXREh0PYl4LYZeptOrqDwUtrBxADJ9qnV2lUJ3RHd/Qi/j3JmfT7tMln5mfl
- ovh5MJ8VY9wHTezul+k9WsX+xY+sKfucw4YWHwHZv1Izjdnd2tJYdp9wcp4/K+oH7Odm
- 29ixO2jfXcSOlCFjTQ/rYuXam9OkaIHfO7oFE=
+ bh=jP8zI5d2alqqI328rVW97GUkjlMaaQotj8zRLhO+9n0=;
+ b=nDxMRsOptizfJlnDWic7Szm+XhnLuWZ3AeGDJWWsbx+4SK+donG5mnmt2OusaNgsZ+
+ umTfCqI53L9abUECchqJoY6s5cnS/A8CDf49E7WlwyePIbjPtiDVS4hNZPBQeiiDAuml
+ ZxwTtD3vY1w4A2VEIwwD9oAXn90YQ/jWBSFe9Jmp4W7SyFtFN/rRTj3RTVD5vpY5kUDX
+ VH/h7VKBiMl6NF3D2LqqbAIOdYOrpytyeAw0susxsiTHUQNrTCVQywUz4dIekRzEdcWI
+ w1KCRKb2msBXhiCS5IOAnPEiTqcH7OerKFEoP1J1wKMCMoJ3cZ1i2kzjz+6egDCeLMKV
+ 2V0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763399073; x=1764003873;
+ d=1e100.net; s=20230601; t=1763399647; x=1764004447;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aAS8LuphrYusWP0XrFRtLq/j5Fi48MzkOkS7B1IKwRg=;
- b=OaaagwINAd96fpSqI+LpeEa7giUroT13U+6LDlWj7OML1V98S6FI46nZAsDA9sYKJo
- HfYnc1zAf6wHRmaWFNUKoTQwOSmZkVZhajDiUVBtZSOuk+0D9LURflqKpLgDQVlzp3nm
- ouZMtuzBqn510ukmgBq1giXNTbzgJVHz6UNcZHm4haXd+4U56r+uXxLx5iy9KIUwNvYx
- rrZW9zOQcUT++l/ojT4WVQ27+D/uvVmsATCoK2Xv0b1cN0/g2PXoyg0ORbmswB5mzBGe
- tsB45XpByeezZFIzLvuVrMgaZZVy1bfAmjGfd8uUTJie/vVXNjid35r/lFbzI+peGoFF
- XwHA==
+ bh=jP8zI5d2alqqI328rVW97GUkjlMaaQotj8zRLhO+9n0=;
+ b=YofiKRkGJg6rP9Jnx+yzTd++LZVHxv0iEKnWRvaxl1UVizOR8k4rlFPAs0VuMymuHm
+ HPcK6Ad4Yn0eROMGWxQNOZ3M9/KnNz4VEzXXGPvaW6TpWX3NxorT/w27M2McoyDajEVn
+ qrFH005TW8hOk94R3Og96D6SfbSxBgnT1axbNtxDdCardqIuQI6DFk7mS9WIvTFCD13g
+ 7VyFMTQ3ZMJbcG1511JPzGcwgrwXhhDEFYPAQ2R11H85y7wbw5/MMNNBqqmwgpOOB1Ry
+ uzG0ZVgM5Ep02nd7RpIyIp3n8RwCgQ85NWRUEo9yiQujFCtewpHjNMV/FLFjYXkVvIb8
+ 1jSw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVct70fRaznf9IHjaweTQNQveqNNQrIDc2HnYXZMl+G9aIJTRgP1DkxEAKzNwr0HB7wmHz04pY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwgPdO1I/TDwjTKkhzHODU4a1lOrNoqGzoNbeIy6iLLmpulPpFj
- Q4DFelEQw9ahpi3ddAgFTZOTTkxP3L+9cnW6nE2sHBW07GjwIt6CO7AOyl/N7Ao/e/Td1nzteYu
- rflnWMsG/+nu2MGO4ZiuFVuKfBXlWzYhvD426iBuj
-X-Gm-Gg: ASbGncuGi3Ce2qJbi/3jRP3wvkrkX6M6tMXbO3xTfEWGW/A7i9BZaQxjtiJlayxkJdu
- MIEW0b1zeRpWQaOZIKb0Hzy0ktIx5GaLxNTO+BSNeJ3i3V6M6uoUIvsem1IGTUcjSLHWqeMG7bE
- hG8EbyDMLpJddsiCFyi3QiNZASAbVjcrGw15HqL/JX5nBZDshkUm0cFr16pYnVnCsFALjz3GPhg
- 7jkj5Dfdcb0qJBajxxUSjLOd+cbh5QJ00QEITIs5ENWEh4uzHEc1UjG35m0e4sT9nqAow==
-X-Google-Smtp-Source: AGHT+IGg+WsdjLsKKqo4F6ZMyzf1kYV87FXMzJO+59MRvsr1S4lEWtLicJnimk20DZQI+tMRUB6nLHlYX9kLX8hUuNw=
-X-Received: by 2002:a17:907:3f0a:b0:b6d:2c75:3c57 with SMTP id
- a640c23a62f3a-b736793d1c3mr1313938666b.39.1763399073302; Mon, 17 Nov 2025
- 09:04:33 -0800 (PST)
+ AJvYcCX6pOf3+R46X/aJi1J/BSNdx5XRLIJVWGk8Tlb18kV3YHciQmFk7U56Q5VNto7X2+bIJowaMgM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzsKz9Fn12YsXBh05GIEmLlsijmKMofNqQvTLgFpOFV08hAGYvG
+ wz2W98H4rlfKWAb1EkYUdXtmVVDGYhomk5wZHPqTGbq8D9jUAqXZx3vPeVe9RNIpcTg4OXVU/p9
+ 08QlRgWYGcX5crqmsqM0g5kfUuniBQlSwV0dMAPxCOw==
+X-Gm-Gg: ASbGncsiWbr3Mjt85bFRn91coFSlFC7sMargYhWRg3+Z30Sld4IbhqA/pHL0gNRapkZ
+ qcARfR7FtPO7kz+7NUrRNdm0zAg2vZpxpLojmtwqNo36v3xK9vqbuZq4oRYJ23j6plbv+Rw78JV
+ qbbheJEk1OovmKlUrqWFvMo4XiyYJefFzFx3v5VToOUpY4AcukWhJoZ/EuqaT+uj8TfJ5ludbe7
+ cExq6rEsXA6rm4G7YiIzNIDXjDJUas02xP2fnPDyvuhviUvuaAjx1cjJnluEZ/Fvp+lwVPRWaib
+ Yd1WsefvrfrQcpI=
+X-Google-Smtp-Source: AGHT+IGmTEZt6WdWydjBev6ZJyMTjuUpy+1ITvW1ffYPmpMb9urF4F3CeY98bej+9+ttd0JUqj+6ujRX68ISwooY+lg=
+X-Received: by 2002:a05:6102:41a2:b0:5db:fce3:af72 with SMTP id
+ ada2fe7eead31-5dfc54fe9b1mr5304272137.11.1763399647344; Mon, 17 Nov 2025
+ 09:14:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTg0ByjUGgX4MSbU=i0oG7fuidM4J0J128ER6Aq+r6HW9A@mail.gmail.com>
- <81115588-50c7-4ecc-975e-13994101955f@mailbox.org>
- <CAFLszThNLoS7j0pe_8G93dHtX91j331DCBiUgWpUPXi4Oi2-9w@mail.gmail.com>
- <c5300029-9bab-4a06-b426-ccc443d0928c@mailbox.org>
-In-Reply-To: <c5300029-9bab-4a06-b426-ccc443d0928c@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 17 Nov 2025 10:04:20 -0700
-X-Gm-Features: AWmQ_bk1eG68FGbG0dhAwlpk0fg88z-eiGLzsvF3I64xc8o7f2FJP-InNVMqVnQ
-Message-ID: <CAFLszTiV2jTWcWU+27QxX82Ap9YnhZNTK1sXrFvF_e53ydc5_g@mail.gmail.com>
-Subject: Re: [PATCH] boot: Assure FDT is always at 8-byte aligned address
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+References: <20251116103934.63668-1-heinrich.schuchardt@canonical.com>
+ <CAMDkj5wQ=pRGFrf_S-HPUs9Zd-uWGFyLFDk3S2TRGCCuvJCMgA@mail.gmail.com>
+ <15d4a8ae-5fd2-45df-af9d-e879faf6be1f@canonical.com>
+In-Reply-To: <15d4a8ae-5fd2-45df-af9d-e879faf6be1f@canonical.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Mon, 17 Nov 2025 12:13:53 -0500
+X-Gm-Features: AWmQ_bmD5tlZM6jBba6IB60NTHa6CdnHGc9CxIZ31hf1AB2Cu_cY99_gaZIyq0I
+Message-ID: <CAMDkj5ya41Ea8_VU_VrmRHfMgYJ2q2qLexv14AT1CGYW7vYtwA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] cmd: smbios: correct output for table type 4
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,61 +98,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Heinrich,
 
-On Sat, 15 Nov 2025 at 17:20, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 11/13/25 11:46 PM, Simon Glass wrote:
->
-> Hello Simon,
->
-> >>> The problem should be fixed higher up, in its callers, etc. For one
-> >>> thing, the caller knows whether it is a DT or not, so putting this
-> >>> logic here is messy. See boot_get_fdt_fit()
-> >>
-> >> This is triggered by a fitImage with DT embedded in that fitImage as
-> >> non-external-data. That DT is at 4-byte aligned address, so how can the
-> >> caller deal with it ? The caller gets a fitImage, which itself is at
-> >> 8-byte aligned address, but the DT in it is not at 8-byte aligned
-> >> address, so that DT has to be relocated somehow and that happens here.
+On Mon, Nov 17, 2025 at 11:43=E2=80=AFAM Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> wrote:
+
+> On 11/17/25 16:48, Raymond Mao wrote:
+> > Hi Heinrich,
 > >
-> > OK, but don't put the code in here...see boot_get_fdt_fit(). But even
-> > then, why does it matter where the FDT is?
+> > On Sun, Nov 16, 2025 at 5:39=E2=80=AFAM Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com
+> > <mailto:heinrich.schuchardt@canonical.com>> wrote:
+> >
+> >     In the QFW case the SMBIOS specification version is controlled by
+> QEMU.
+> >     Field 'Thread Enable' is not available before SMBIOS v3.6.
+> >
+> >     We should not print the core, core enabled, and thread counts twice=
+.
+> >     Use the appropriate based on the SMBIOS version.
+> >     Use decimal output which is easier to read for humans.
+> >
+> >     Signed-off-by: Heinrich Schuchardt
+> >     <heinrich.schuchardt@canonical.com
+> >     <mailto:heinrich.schuchardt@canonical.com>>
+> >     ---
+> >       cmd/smbios.c | 21 +++++++++++++++------
+> >       1 file changed, 15 insertions(+), 6 deletions(-)
+> >
+> >     diff --git a/cmd/smbios.c b/cmd/smbios.c
+> >     index 671c14e05b5..f9a352c107d 100644
+> >     --- a/cmd/smbios.c
+> >     +++ b/cmd/smbios.c
+> >     @@ -262,6 +262,8 @@ static const struct str_lookup_table
+> >     md_tech_strings[] =3D {
+> >              { SMBIOS_MD_TECH_OPTANE,        "Intel Optane persistent
+> >     memory" },
+> >       };
+> >
+> >     +static u16 smbios_version;
+> >     +
+> >       /**
+> >        * smbios_get_string() - get SMBIOS string from table
+> >        *
+> >     @@ -504,18 +506,23 @@ static void smbios_print_type4(struct
+> >     smbios_type4 *table)
+> >              smbios_print_str("Serial Number", table,
+> table->serial_number);
+> >              smbios_print_str("Asset Tag", table, table->asset_tag);
+> >              smbios_print_str("Part Number", table, table->part_number)=
+;
+> >     -       printf("\tCore Count: 0x%02x\n", table->core_count);
+> >     -       printf("\tCore Enabled: 0x%02x\n", table->core_enabled);
+> >     -       printf("\tThread Count: 0x%02x\n", table->thread_count);
+> >     +       if (smbios_version < 0x0300) {
+> >     +               printf("\tCore Count: %d\n", table->core_count);
+> >     +               printf("\tCore Enabled: %d\n", table->core_enabled)=
+;
+> >     +               printf("\tThread Count: %d\n", table->thread_count)=
+;
+> >     +       } else {
+> >     +               printf("\tCore Count: %d\n", table->core_count2);
+> >     +               printf("\tCore Enabled: %d\n", table->core_enabled2=
+);
+> >     +               printf("\tThread Count: %d\n", table->thread_count2=
+);
+> >     +       }
+> >
+> >
+> > I think for ">=3D 0x0300", both parts are needed.
+> >
+> > Below is the description of " Core Count 2" in spec: https://
+> > www.dmtf.org/sites/default/files/standards/documents/DSP0134_3.8.0.pdf
+> > <https://www.dmtf.org/sites/default/files/standards/documents/
+> > DSP0134_3.8.0.pdf>
+> > Number of Cores per processor socket. Supports core counts >255. If thi=
+s
+> > field is present, it holds the core count for the processor socket. Cor=
+e
+> > Count will also hold the core count, except for core counts that are 25=
+6
+> > or greater. In that case, Core Count shall be set to FFh and Core Count
+> > 2 will hold the count. See 7.5.6. Legal values: 0000h =3D unknown
+> > 0001h-00FFh =3D core counts 1 to 255. Matches Core Count value. 0100h-
+> > FFFEh =3D Core counts 256 to 65534, respectively. FFFFh =3D reserved.
+> >
+> > Similar for core_enabled2 and thread_count2, they are all extensions
+> > when values above 255.
 >
-> The FDT has to be at 8-byte aligned offset.
+> The descriptions of fields "Core Count 2", "Core Enabled 2", "Thread
+> Count 2" all say: "If this field is present, it holds the ... for the
+> processor socket."
 >
-> > We are going to use
-> > fdt_openinto() at some point and put it elsewhere, right, so we can do
-> > pre-boot fixups?
+> So there is no need to look into the old fields "Core Count", "Core
+> Enabled", "Thread Count" for SMBIOS version >=3D 3.0 and test for 0xff.
 >
-> Look at the fit load code, cca. 10 lines below, it checks the FDT for
-> validity using fdt_check_header() . At that point, the FDT must be at
-> 8-byte aligned address already:
 >
-> 2294         } else if (load_op != FIT_LOAD_IGNORED && image_type ==
-> IH_TYPE_FLATDT &&
-> 2295                    ((uintptr_t)buf & 7)) {
-> 2296                 loadbuf = memalign(8, len);
-> 2297                 load = map_to_sysmem(loadbuf);
-> 2298                 memcpy(loadbuf, buf, len);
->
-> ...
->
-> 2309         /* verify that image data is a proper FDT blob */
-> 2310         if (load_op != FIT_LOAD_IGNORED && image_type ==
-> IH_TYPE_FLATDT &&
-> 2311             fdt_check_header(loadbuf)) { <----------------- this
-> 2312                 puts("Subimage data is not a FDT\n");
-> 2313                 return -ENOEXEC;
-> 2314         }
->
-> > Perhaps we should deprecate FITs with internal data, too?
-> We cannot break compatibility and stop supporting old fitImage, so this
-> is irrelevant here.
+But it also says: " Core Count will also hold the core count, except for
+core counts that are 256 or greater. In that case, Core Count shall be set
+to FFh and Core Count 2 will hold the count."
+So the "old" fields might be with the same values as the "new" ones, or
+they might be "FFh".
+That is the reason I believe it is still valuable to print and show whether
+it is aligned to the spec.
 
-OK, so please create a function which can detect an FDT header without
-it being aligned, like the other code you wrote. Then it will be safe
-to call that here, even if unaligned.
+But anyway, it is not really a big deal to print them or not in cmd - it is
+just for demo/debug purposes, what I wanted to highlight is the logic to
+exclude fields for old versions < 0x0300 should be needed in lib/smbios.
 
 Regards,
-Simon
+Raymond
+
+
+
+> We should avoid printing duplicate information.
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > So, if for the consideration of the old versions of spec, the change
+> > should be:
+> > ```
+> > -       printf("\tCore Count 2: 0x%04x\n", table->core_count2);
+> > -       printf("\tCore Enabled 2: 0x%04x\n", table->core_enabled2);
+> > -       printf("\tThread Count 2: 0x%04x\n", table->thread_count2);
+> > +      if (smbios_version >=3D 0x0300) {
+> > +               printf("\tCore Count 2: %d\n", table->core_count2);
+> > +               printf("\tCore Enabled 2: %d\n", table->core_enabled2);
+> > +               printf("\tThread Count 2: %d\n", table->thread_count2);
+> > +       }
+> > ```
+> > Moreover, I think the same logic should be done when the table is being
+> > constructed in lib/smbios.c, where the real content of tables is locate=
+d.
+> >
+> > Regards,
+> > Raymond
+> >
+> >              printf("\tProcessor Characteristics: 0x%04x\n",
+> >                     table->processor_characteristics);
+> >              smbios_print_lookup_str(processor_family_strings,
+> >                                      table->processor_family2,
+> >
+> ARRAY_SIZE(processor_family_strings),
+> >                                      "Processor Family 2");
+> >     -       printf("\tCore Count 2: 0x%04x\n", table->core_count2);
+> >     -       printf("\tCore Enabled 2: 0x%04x\n", table->core_enabled2);
+> >     -       printf("\tThread Count 2: 0x%04x\n", table->thread_count2);
+> >     +       if (smbios_version < 0x0306)
+> >     +               return;
+> >              printf("\tThread Enabled: 0x%04x\n", table->thread_enabled=
+);
+> >       }
+> >
+> >     @@ -719,6 +726,8 @@ static int do_smbios(struct cmd_tbl *cmdtp, int
+> >     flag, int argc,
+> >                      struct smbios3_entry *entry3 =3D entry;
+> >
+> >                      table =3D (void *)(uintptr_t)entry3-
+> >      >struct_table_address;
+> >     +               smbios_version =3D ((u16)entry3->major_ver << 16) +
+> >     +                                (u16)entry3->minor_ver;
+> >                      snprintf(version, sizeof(version), "%d.%d.%d",
+> >                               entry3->major_ver, entry3->minor_ver,
+> >     entry3->doc_rev);
+> >                      table =3D (void *)(uintptr_t)entry3-
+> >      >struct_table_address;
+> >     --
+> >     2.51.0
+> >
+>
+>
