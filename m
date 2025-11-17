@@ -4,82 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E228CE8D6B
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 09:40:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94D4FCEACEF
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 09:45:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 671EF83A3D;
-	Mon, 17 Nov 2025 10:40:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
+	by phobos.denx.de (Postfix) with ESMTP id 10B9B83A3D;
+	Mon, 17 Nov 2025 10:45:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="ljLMW6d7";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="htywqEli";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 862D683B0A; Mon, 17 Nov 2025 10:40:04 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1FC9B83B4A; Mon, 17 Nov 2025 10:45:52 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EBBC8398C
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:40:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=googlemail.com
+ by phobos.denx.de (Postfix) with ESMTPS id 364D2839AC
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:45:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yegorslists@googlemail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-63c489f1e6cso2285198a12.1
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 01:40:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20230601; t=1763372401; x=1763977201; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=OWGkSzLQ9uaLnyrc25IcjQ1MJa20tGhmvdOG4AJ3mHI=;
- b=ljLMW6d7cNvHXPuZmc04ZedBqIcCWEbLtvm5BKAd6BusDTaUSltZxVVHE4syIJxHEP
- FeEAW4GdZOk0WZLMGvdsrPDhQqqtkCyK737RrKTePz3wZCJI3bJnCX5ZlTOczL82DRiV
- 6bdD5LXvn3n9ENa8hWY13j/btluqIdt7pBOT0W+enXa1MAOKVOMM8fqUj/jbk7DblfYz
- /sY1EamT4ibTLgMSM+uQgzizAilcwu9zziseUkB6F3XfsoBiwqaRhp6X7eXSYtjGhpE3
- UY/HdhGxt0UbLBFp/jiLxwg9cjzu6NtWyKzH4AirDRTI4UpMNApeiydi8DYs+Yf+kNzp
- hi1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763372401; x=1763977201;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OWGkSzLQ9uaLnyrc25IcjQ1MJa20tGhmvdOG4AJ3mHI=;
- b=DSFokKMDe/TFXcs/j2sxEeCDYcW32WRqs1YHfVXMj5vktWlg59P8h5faFDuyAWH9PB
- RykvYNXOgroid1Lz6qPFnH+cEJ56OAZq/FGamnZtv/hr6kyj2ThMckVZO/8ipeTH+rvL
- EjkMm+PlsQQWUacQ+SccPeDsNlOVGm/sbSDfHJn1QtrevfJKIk/If2x03ZrzPQ+7rE9u
- 0r3z+bjlJIGr9Rp9TRpzxgWBLrzDY7l+d/TCFIamM/Lz9WPo38a9NX9uoOaqmKSeHsSn
- nMRBWkT4r1fsaLCaIn6EXaHU1VYIUTUrnG4wmrq0xB4Jh/w2Rjut+vVKi/azZf+YWVDY
- JaRQ==
-X-Gm-Message-State: AOJu0YwGHhkXuFWIOLCWjPJF9j0xWmc88pwGBGa3bEGEwIt5NcKF4g0I
- lSyfkxvf8j37wWSqw8ORD9ay+6kGQ70nBSB4NTsYypwioQp/zGZSke6gPZufew==
-X-Gm-Gg: ASbGnctxFfo762HtALzKTJiqLKktXCuhzBG5wKu0HKzMFweA1+zzA0viF2Vk2LPQ4/V
- BGKtL5QAfPAEqODA00cpnzP3lHqxnXh7DIoiepFtEnJ6OK1HLnyXExWMEI7KEEXq3zYwA1wSxID
- EapHW2WZuyjpZ2ptFH4faMUjnKfkBmpqWy0uRjBHTMC4zgOtkdTVhOiavDIQXb5PDWfukdypW3p
- gjwDF4Ktb1r+zYC4Vzc8kz4m9KZqFkWtCRFVLepaISfImFJo7FscGHpteZZSEy83hSHPHHFH7Iy
- /yweg2EEAsQzU275uvhdIljJ+Xuch/u5sm+68qrPBVIuQ6aNxV2MFFE26oEjIM4au5R3me0NH2X
- ro+74+7Cux+ZFc959lUvCLRtv7wDFWQPxY/TJtkTBjYkXSUygOnbIWMx+QLj1zIaPnbwF32PTf1
- wDK05AhcSr9mFof0x94iyYYw/WFcqcSkUwjhuINpgLw73vr1N0LEZ+qCzL2U7cIGAdRBw=
-X-Google-Smtp-Source: AGHT+IGzCo37H6NtsebsQd7URj2l6ErXPcSwXSDbFSSPYuJTlJfTkULSKCeG03fvtpDcy+EkuFhxdQ==
-X-Received: by 2002:a05:6402:51cf:b0:640:cf58:47f9 with SMTP id
- 4fb4d7f45d1cf-6434f86acafmr12271726a12.9.1763372401275; 
- Mon, 17 Nov 2025 01:40:01 -0800 (PST)
-Received: from development2.visionsystems.local (mail.visionsystems.de.
- [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6433a4ce83dsm9740877a12.34.2025.11.17.01.40.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 01:40:00 -0800 (PST)
-From: yegorslists@googlemail.com
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com,
-	Yegor Yefremov <yegorslists@googlemail.com>
-Subject: [PATCH] bus: ti-sysc: select CLK_TI_CTRL driver
-Date: Mon, 17 Nov 2025 10:39:54 +0100
-Message-Id: <20251117093954.1580394-1-yegorslists@googlemail.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=R24Jb1xjY+zuxUgvmpfZ1gzMIxsFCvthOfRpFcrqh8i6iBXgC4DPL33F4KgYJXrbkxWj7DsEW0uPVCVZZIpE17fDbN6Qf8xQigwrt/JwkQ6jP25MrWRB1xX+xIW5nHLHes5Y9R1pCmhIsfGXo1qxhm3vf76PoNMxc4JBL2DFE6/p/WBsYlFrdthxor0/pV0FJ+n8YtTZnSmDGmfeTsc9AYI6WX8E/KNMYHriFPjenQyXrjE2YyowHZXQQbLtZ1bbjaal2P0eQJMzCA/oa5CVdFPop8wdV3WtKiNF+hpx7EAfHrvSD9lIW/Tu4CEmfGHTzHf1/Umkq7BW83fWtd+z5w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=obOF6vaqfZyKG3Z5JGNhqAd2lpBdYESN9qXAYAbkEOU=;
+ b=W+3PAlNJQ+mkn29yW1vsTlol49skME+XJe8IT2pFbGnAOYvNDi3cArYiCJUL9Ds8MhP9/vDXjNKEZE4fmxjPil+T90Pj/eOLobKK1kKIdQpolNLFm8xp7yjeACUlqb3wqllu2U5HhPAM9wm79AjrVF6zS0um2QAMbAMQvBumINrsaf2eJQDQfF6whkBFFCcb/Df2iPvYRRxMy738bqA/5oX3V0Q5bRZSrsp9R65w3puukf8CaosN31wlDFTEI1Z147zvw6+8BVDffQxDqsv+enjKk/YyzYJhfWXjOfY01FMDOZ/D4xm+hfhfCAttLZLIPBxlmONgblRIPCZL0r8law==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=obOF6vaqfZyKG3Z5JGNhqAd2lpBdYESN9qXAYAbkEOU=;
+ b=htywqEli68vgoonNc5k5bc9L5AUMtmEn1iDywKvo67QIUg0+UN6hzC5LzKFQ0blEzBjZWifSgxoetP8MqiS3hQwjdQ6C9N6B4lxs5gHRqTK2I+xljoZW5AsM7QGTEj/Ct0AmYi0coT6AwHRcqUSOXh7eRm0uEKkM5crhwerHWr0Nyj/zgbwwVcAxGA4tsCxDb8yB8IMSHAWVac/0HiOZVNSbcD5ZsYyQ70CBpKAj4Wv9ZlrnRFdry6OMcP0yFEsKr2SByrN9AVJsW5I/kpqVPaVrOldYlvHrUiyHxSkLWrW6WZd7fy2eJtsLgBix6i+s6mJO7NJft6GLoPm89+Cy7g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by AS8PR04MB7622.eurprd04.prod.outlook.com (2603:10a6:20b:23f::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.21; Mon, 17 Nov
+ 2025 09:45:48 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9320.021; Mon, 17 Nov 2025
+ 09:45:48 +0000
+From: alice.guo@oss.nxp.com
+To: u-boot@lists.denx.de, uboot-imx@nxp.com, sbabic@nabladev.com,
+ festevam@gmail.com, trini@konsulko.com
+Cc: alice.guo@nxp.com,
+	peng.fan@nxp.com,
+	lukma@denx.de
+Subject: [PATCH v1] arm: dts: imx8ulp: Update device tree to fix boot issue on
+ i.MX8ULP EVK
+Date: Mon, 17 Nov 2025 17:44:49 +0800
+Message-ID: <20251117094449.1109636-1-alice.guo@oss.nxp.com>
+X-Mailer: git-send-email 2.43.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2P153CA0002.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:4:140::16) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS8PR04MB7622:EE_
+X-MS-Office365-Filtering-Correlation-Id: c6d770fd-500f-45bf-a73c-08de25be1606
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|376014|52116014|1800799024|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?E7c/Tznt8dqOlaLftQEX1fsUg8BUZE9ZeVlCEnY4Rtf6Ivw/evyj0JpIVX/D?=
+ =?us-ascii?Q?YAM0av/DBscjcRtVbpJhz1IbG9mdfONYMmDTTED95eFxWF+9CinjdP2TwGdO?=
+ =?us-ascii?Q?2KArPUt27sJAgmcnrNqGs2ZP770R6ep9IKV0WzB1zFEu9MKlWJMnSE/Wrlo2?=
+ =?us-ascii?Q?/R6IWd+gP9oNOQ1qq/I1MRG5Atx30Wo0O/ksISFTiLRSYBR9WOYFeOJIr3ck?=
+ =?us-ascii?Q?SuYO1Yv5rppplSBj2wnAYrIUujqMKs/mi02f6Or8VX9Hmlu6wrGKRgctV/lx?=
+ =?us-ascii?Q?ZG81jQH77vFHUJdJ3rgXUSktn/im2ixQnwk9vtPh3BOw5TIPPLoB72paqkHm?=
+ =?us-ascii?Q?lpnhWsaEfdT0x63d/+DtJQ28eB5yilI7PYHhrm1iWbgsoFJ643dRls1icYrN?=
+ =?us-ascii?Q?VUghxHDKKQuQnbkW+fx08+WhrX/etcIM+Tnc+Rb0AY1INc4ssRROInlCjMdp?=
+ =?us-ascii?Q?JrUR0f1eDBDc6iFTtDZRGMYxSIAsOiUoOwEwQ/7nHzI0YhXa0t+rmS1kKP/C?=
+ =?us-ascii?Q?3XlWuShLy6z1FNvBM6aKnd6ZbzbExfGBro9nqUqXBXRT4fgCfA8RiBRToAAp?=
+ =?us-ascii?Q?R25ddbKnin72vLFMb7EzU6iYBr4wVLFYlN0eezBRbIbSOmZgFqSQwMqkKjaN?=
+ =?us-ascii?Q?D90znvSjDgWjnh3eAW2Fq7Cip3fePKM/P6LAFozc68NJqrGaTBZVTX062u+s?=
+ =?us-ascii?Q?OMxN2ZaZTAsws9631rCBLHgcnKI3zMELZHgVEw6ALXSuuRhFJgsAiv3Gk99+?=
+ =?us-ascii?Q?xgnV6lAnXjHrKvtxyK59gpCj7ZKXWl2FrxNPW0HEifxdhXUCX8wNApIomy5z?=
+ =?us-ascii?Q?qdVnxnuPOmknam5UyegH8xkO6mcAiS21URLc3iANbPxBSeUX3s0tkmWcvIZU?=
+ =?us-ascii?Q?bD6Qy1IXS9PINRmblzMIHlvCRzEdi5Pawv0gE15q6FvLneXvwidc9MnNjGS6?=
+ =?us-ascii?Q?QNgPsxmyfoliV7Y/LFg7k7Cg+W3wcVGMx1zGVSwnxbfsNR+O0gVY/xXrHEMC?=
+ =?us-ascii?Q?M60QfvC24qeUZzcK10Jh7k2F6NFizLhiXDU75m/OdIyDI1VtdpoQqIgKoJuW?=
+ =?us-ascii?Q?bab8FZrlthISUcGUbAb110KsO8awsdzJNJP9B0gYcGoZP0i2C1XcZDLU/pPf?=
+ =?us-ascii?Q?nts32UQBAT0S3x9k4iyIhQkJeMoQrd5AKWZ8ouKn85HvmL0LO+2NfrbaSPEm?=
+ =?us-ascii?Q?cnmHHwDvvVqHWCU928MlajVHem5rTifgOJ7DLQApxkr1VmdLrlnpKsKw1QKM?=
+ =?us-ascii?Q?MMax1NDeYI/X4+o7fus+PjGtJXGvn+4Unn0iB98RE3qwmbup3yuzwFm+Z9u6?=
+ =?us-ascii?Q?SIYj0R5zBqRzCQEAFQNRA7+R5ZuDqkzER3S+7G+aSuZoRhGN+45Sr25WSgUS?=
+ =?us-ascii?Q?px+m0jlJHdaXke4ooy7nP3Y26Vgh0ZJsh7BPk2leXHgmIYLRigsSpp+LQ8eJ?=
+ =?us-ascii?Q?Wl4fB6RaXdCWyjesSAO7xwfAPa2WAfIFFv6MlThptk/1Ofn4ohXyDRplssPo?=
+ =?us-ascii?Q?5g9LZ/gfrZBWeDGJHFXBJCvL9GvBk4ErSXTI?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(376014)(52116014)(1800799024)(366016)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tdD5Ge5xmCWixPVwh579EIbavMl/sWkiOxCvBbOhJsRn3xlsN2EDqc0Jf5rC?=
+ =?us-ascii?Q?Fe3eS3Lc5IuhNIi+zOEAvqzwHyfDOQjGMR1Miojsf/+cOfsNtrqug5Iehgu2?=
+ =?us-ascii?Q?X42/KeqnJ1kQL7CNQmkhfcR3wS7I1l58XBbjZ1aZG90cu6rQG85Ts/BircQG?=
+ =?us-ascii?Q?Sx86sA8DMZcICFl6Q1ucHSNxWakRaMhXlJyrJzmNe7oiZoKKDg/b107DAUsG?=
+ =?us-ascii?Q?Pf8CMJwsFlVBDtOz6GlkbJv46jh/1oM1+YDT4pdKID3MvK+Bw0LuNtInDYPu?=
+ =?us-ascii?Q?Nt3RQOqLxzzOpc0VzrMUG+eLUJ22O8Q6XW7McnVD+ogBeid5YIaiVo4xm853?=
+ =?us-ascii?Q?PG7oobaNnz1Uer6rNbVDNmmmFvQ1+WHurirA2zuoMTLET/BgeZsfd7P/yhHv?=
+ =?us-ascii?Q?Xcubu/BinDzmUEIMmAftY7GggUEoOtaLe/U4jAPjiLjW1RudsGS2oOmk2Ewe?=
+ =?us-ascii?Q?7JSqvNc1Ir+wowZNtKBzFJIB3VKhwKdK+bT/dMT6jdKZ436No31DXxq3hEKI?=
+ =?us-ascii?Q?uRPhrL+NHUlCCh0M9r4+1a/H/f9hDiZw4xvqfusmQ4zM6Ow1gqI06q0fBJm+?=
+ =?us-ascii?Q?Lv6sLX8N1cVaMOaIBLDpdrIExw1XgMkYFoep1/EFD4FBcvSlKuXgYACMgrjI?=
+ =?us-ascii?Q?iGXMKacOjWpVj5QXioP/ITzOcMwsj/NV0Ur6mS0V72Cnf++/VYReOFd+UG97?=
+ =?us-ascii?Q?n6JFmAO1RxJO5zW9gppBqzH15+LstKGYFqjF2iO2zM0QUfSl7r+f7FEC43ZS?=
+ =?us-ascii?Q?OjnX4xYCQ1tU0Q6MvgXuFoRpk8Ndrw5Fm50nrqKrIMOD/dG43ER5ZpwwrhQi?=
+ =?us-ascii?Q?0UYNmNFRnYtKoKAJz6CzZh1OxjItD81uDj0/ELJwuf6GdfjHwe7s8nnrgVT+?=
+ =?us-ascii?Q?C9AZWItV7PZl7QttXjzfpcp5AFBD0XSO/Recgfr5t6Q9tISKbPTtA0XxQIpm?=
+ =?us-ascii?Q?dzju/c7fCjG9rjF7mAj+jxdu9j+/ZQBS7S/H8GVNPAv/oENYFV7lxu5xXqr9?=
+ =?us-ascii?Q?xfDbrHW4i1oeQRQEQhXCl0g0HEfjheSK+lZmNjg3cQcq7Dn2qsI6YN+7vjBl?=
+ =?us-ascii?Q?/f9++LWYGow3DE7dI+XScn0GWNs9ktwh9TPK4B7U+M7miO7BtbkFSrAlYxyX?=
+ =?us-ascii?Q?cgzDcPf9s8IQ91qEhfOPU64EKeErAvQ4NqG22CZRRqhj70hby4LmWk2IW56F?=
+ =?us-ascii?Q?XZByfgKaRwwOUSFvm2VqgCy1+2TuPdL+MUNkoB3+a5KWuFWLMstspyrPp9lw?=
+ =?us-ascii?Q?DjHxNv5LXG/Y6uTPCKVX+/iR9/Sr27zP76yqcoJotYG1Ws5XisZslPtUqvqI?=
+ =?us-ascii?Q?9T44J+3H68a8OkmdcetEoTB7id8guasT6eiIMOdrqv+DsDOPhZ9hFt3lvxoL?=
+ =?us-ascii?Q?HIubvQ4maAaDI6BXd+jgFEG5F5wyHetS/hGV/ALz+tqzuFVHZjwQNQ1r3ym5?=
+ =?us-ascii?Q?Rtlyu5ttLEOQF8vVWWL5gIsWuIYnvHcZVM81ccWffc6s+Z3wKF+uk3tNkxjS?=
+ =?us-ascii?Q?QRDb3fzHT/L3hI71yPfb/zUQazrFeoPb7+Eo06wbpJvcy1ZHno6vx6gPEYrG?=
+ =?us-ascii?Q?EK+tgnA+R9G65how2TVfMKaJ0zMDi8XGNUngAms3?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c6d770fd-500f-45bf-a73c-08de25be1606
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2025 09:45:48.0427 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sZK4t7ulAfFFrf6d5AK34u61G/Rkk6OtghRgz8O8DkqPO9xXFcebJ+ektkzJaqwZpQiX0RscFscSGqNM/FtPLQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7622
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,37 +163,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yegor Yefremov <yegorslists@googlemail.com>
+From: Alice Guo <alice.guo@nxp.com>
 
-The TI System Controller (TI_SYSC) driver utilizes clock management
-functions provided by the TI Clock Controller (CLK_TI_CTRL) driver.
+Update imx8ulp-evk-u-boot.dtsi and imx8ulp-evk.dts to resolve boot
+issues observed on i.MX8ULP EVK board.
 
-Specifically, the TI_SYSC driver relies on the 'ti,syscon' support,
-which is used to access system registers for tasks like reset control
-and power management. These operations often involve manipulating
-clock-gating or reset signals managed by the underlying clock hardware.
-
-Therefore, to ensure that the necessary register access and clock
-manipulation functions are available for the System Controller
-operations, CLK_TI_CTRL must be selected when TI_SYSC is enabled.
-
-Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
- drivers/bus/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/imx8ulp-evk-u-boot.dtsi | 18 +++++++++---------
+ arch/arm/dts/imx8ulp-evk.dts         |  4 ++++
+ 2 files changed, 13 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/bus/Kconfig b/drivers/bus/Kconfig
-index a786fe430e4..05492c63bf0 100644
---- a/drivers/bus/Kconfig
-+++ b/drivers/bus/Kconfig
-@@ -15,6 +15,7 @@ config TI_SYSC
- 	bool "TI sysc interconnect target module driver"
- 	depends on DM && ARCH_OMAP2PLUS
- 	select CLK
-+	select CLK_TI_CTRL
- 	help
- 	  Generic driver for Texas Instruments interconnect target module
- 	  found on many TI SoCs.
+diff --git a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
+index 845fe205925..3485e6e3f2d 100644
+--- a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
+@@ -10,38 +10,38 @@
+ 		compatible = "fsl,imx8ulp-mu";
+ 		reg = <0 0x27020000 0 0x10000>;
+ 		status = "okay";
+-		bootph-pre-ram;
++		bootph-all;
+ 	};
+ };
+ 
+ &soc {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &per_bridge3 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &per_bridge4 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &iomuxc1 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &pinctrl_lpuart5 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &lpuart5 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &usdhc0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &pinctrl_usdhc0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+diff --git a/arch/arm/dts/imx8ulp-evk.dts b/arch/arm/dts/imx8ulp-evk.dts
+index f1c6d933a17..7aec1706382 100644
+--- a/arch/arm/dts/imx8ulp-evk.dts
++++ b/arch/arm/dts/imx8ulp-evk.dts
+@@ -119,3 +119,7 @@
+ 		>;
+ 	};
+ };
++
++&wdog3 {
++	status = "disabled";
++};
 -- 
-2.34.1
+2.43.0
 
