@@ -4,97 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA636CEACEF
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 14:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77F41CEBF61
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 14:32:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FFB883956;
-	Mon, 17 Nov 2025 15:21:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BFDC183946;
+	Mon, 17 Nov 2025 15:32:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KlXzbHNe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tA93n4Jj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D0AF839A1; Mon, 17 Nov 2025 15:21:12 +0100 (CET)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id AD4B08399B; Mon, 17 Nov 2025 15:32:51 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDEC683623
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 15:21:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1865A8391B
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 15:32:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-65745a436e6so626821eaf.0
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 06:21:09 -0800 (PST)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c75b829eb6so1018348a34.1
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 06:32:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763389268; x=1763994068; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763389968; x=1763994768; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fIwUnRXCLoDvBytr7TNWl5kqvxtNHlQSrq5Pu4TldxI=;
- b=KlXzbHNe53dYT9igELn6qE68M0cT/iBfOn23JZgyDVn8cFZfSaHUSmU1z1zNFAoiEd
- TjWpmRYvg+Vc8u0A9/luAuUQBdPL6Jy3Esr/OHs1YxQepP3Vows4yBXQeUa8TaSr0b+Y
- TyRX/fBZ06nOitJQ1iLaF9fkHoNjXJI1EJo1Q=
+ bh=OSmB2ChVvYEE/+XoR0XZAbV+5fsjVNgMOsj2vBDRwt8=;
+ b=tA93n4Jj7HRnSxWQb5jbe3qDauIQbYfX9cReLN22B5BDQ7f7s0bCtiNK0/bsm2RwUJ
+ MTbVxs2PJDDSMvApxa4/klP2X7jJGMI1ZsWq/nBTps2/nhpOr00F0hC5B42oSGoeX2td
+ xvYbsiul73D+jrsAn8hP7T0LLylh6RbcaRwR0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763389268; x=1763994068;
+ d=1e100.net; s=20230601; t=1763389968; x=1763994768;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fIwUnRXCLoDvBytr7TNWl5kqvxtNHlQSrq5Pu4TldxI=;
- b=VfrePcTs0fyX7ia7fauZAIS0Uex9pq5CD0lJSqgoj4IliBwX26m9fY5BYiO04VBX59
- h08tVxUtbmwPdgiBVEGRYlDJUMzDDFjnjZJC2QR/+JE7nrDM9zqM3sEZ4lsDnq6KqLvh
- /HDKpdXcqMjyFIHOnmiZ0b8JBj6GAxNVXLyF0vc2SZoC2ZHYq7hrPAsZ3WqLIkgUqpNW
- PUyxa08VD9frK/Te+eoQj6cvf8B5K2fiK7pcpTC+2xZB1VYJi7nZXDPzHD0Kj9kvPO6b
- IGCNqMBu9ilmHtbXgLX83WEau9ugxSZz8ywTYYVv3zP+5jsr5jotcPSLlxxh0yNiEQRo
- VZtA==
+ bh=OSmB2ChVvYEE/+XoR0XZAbV+5fsjVNgMOsj2vBDRwt8=;
+ b=tSqoQ4uYRr7FJmV9jWqRaukTgi0sX9qQ+e9B/pWl61XhSLaG2d3tONtsTsA1BJPbkH
+ MKlAzKVF2wMhlKRhO1UtrvrXWp8IzMdc/Y+mS1wm3JcKMSZgpZVMnBbiJvmtlgwJ2jBu
+ BJiJ5fr32RpDMsUA9IDXhM68lfBNQKD6HkZz7y3QqXZ4j2weDzaBuixgQCPD+rXm8DGD
+ OJVgGQO7Zww9KUTe/sdtepPoRowcfU2GUPb/tiwRa/loMt+TbVn2xUR1fBzNseYvCGZ7
+ T+2ST973JjYOqahaJD7DiauuHsOkhuD9LTrbkqnxqBUvkN7o8MXwJ9AYBZZqoMIIBE1k
+ t+OQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUm+zpWRm/CMFA5nsYoeXLDXeprI8Jyg2PlqwJm7MlYS81eapAqo2MRyNF6/7A3NGpjJB1a6sw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzpaseNm1FdyG2G/mouvFVfBGx/cSZaZKSJX5LvDRKtngBUjUo5
- o40Y6UC6TauyY7ds9nNGkgIiu+sI562rSHr/tWewptbN7K3RwlylWS9DqvICvY5kFxU=
-X-Gm-Gg: ASbGnctcaNUmcnQb2xbubE6VhUXzTy+Em1flirSIYXkQAhbjgPLqHgKpvniP4kNxrXC
- cIhOPsNmdLAd0iOevhtODAui3nhavXhmNtwpj+i4B0t+VIIsZfQuwUEO7JA9nLSCJkJoZ4sEt7V
- Ewymu+Mp9iR7JbUETN+OgQ7FikhMvzKHcF/SBhLyhbMz4E73oTQbxeKrn6yd+djG35W+SxT7oOj
- FCLai8Y79RU2cMO5qcLli+E7RC+pQOlw2GH0algMgXqC3l7Hqlh+sexi1rtFQP9TZvsNC90MJs4
- jf2r8eM1hp9IAHzsaDHPr9Uc2QafT5xi2yqx5m2PeV7n/fKZNdpK0D5CXYzeER7L1kLhoXTsEwO
- vuQ/S3pzAoFirYaGVvSapDghaSenYEmS3dG9zY8rA32FwN06I8bhFSCY8UEH1IsvgNqJPCHW2IV
- T/ZYjpxW2nMO8c/WVzL/69oHx/9a7NRqOEfw7zMzk=
-X-Google-Smtp-Source: AGHT+IEPIlv5DonLqrs8k3+Vw23B7cBCchsK07dZTC0lfVcHm569vJIFT+W7SWi59yBPw9+dbrmtYg==
-X-Received: by 2002:a05:6820:290b:b0:657:4d77:55c4 with SMTP id
- 006d021491bc7-6574d7756f8mr2331078eaf.2.1763389268506; 
- Mon, 17 Nov 2025 06:21:08 -0800 (PST)
+ AJvYcCUsuZ99QPAcu+q/NlKnxHU/7FVFrsJnUF6cWQ+qITsO/bGrz3VCUFFjszIv8sepq3lPd4HHLgM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxeAV3No9glOWGltgoYLV62S2E0jk+mcE0lt19MTip1aKjTI58f
+ RIO4lgHTssm95ud9hPvZfKFW5tXmxdagqgmV1u79x8PBi+VXM20g6lHNsc/hphdPkR0=
+X-Gm-Gg: ASbGncsxnzmL5R4Q87tTb0/LU4nsFJsqnOmzIFXkJRKu9Fs56drbiGYkLDebroL5ho4
+ c7tp8siXZQZBeW37vj7+XHUBJ5RSn3KTNPHhKk+QPZHYjuWEjNYIYDxGPgJpNr/kxE6sMWETLdF
+ wzNZDw51onZ0NqSDLbbKbzMGOdZDyczwMqE2jl7ZBKsSlq6rKE4nuN8XehK838CfoPTC9ayGplv
+ ZBD185S7BE+36OL6idxGEYTfm/krvCG7/3S0ezz89d6ZxH3m53hGzCuu8qDbIJMVMdNiKFuPxxD
+ c2nKo2n0lML7Uu6HpRdpRz06ZES7EGCg73HV+N4/ARYrLFv6uLPcd7ZQN1O9E1nEo0uZ2JamFWH
+ d2K/n0jacnNCTOGvQqBYPDekjn1N07lPCVhUAGAw6OomN6Zc4rBtzfTtpYJify+xGhjIsz3lWwK
+ gRMPARUFiyBK2ASfpHr6nvBmkGB0UF72f4j7JpP9wL8Uefe4DXYA==
+X-Google-Smtp-Source: AGHT+IEeFXNZnBwe2rz8EPvvKpk4SO/3kHY35FWIJc+1FW8Ix9XNmIa+b+mBzS06BfRv8Q7hrkQR0Q==
+X-Received: by 2002:a05:6830:3081:b0:7c6:cf19:1dec with SMTP id
+ 46e09a7af769-7c7445fa032mr5369054a34.33.1763389967595; 
+ Mon, 17 Nov 2025 06:32:47 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6575c42ab42sm439266eaf.2.2025.11.17.06.21.07
+ 46e09a7af769-7c73a3bddd2sm5419101a34.25.2025.11.17.06.32.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 06:21:07 -0800 (PST)
-Date: Mon, 17 Nov 2025 08:21:05 -0600
+ Mon, 17 Nov 2025 06:32:47 -0800 (PST)
+Date: Mon, 17 Nov 2025 08:32:45 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- Aaron Kling <webgeek1234@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>,
- George Chan <gchan9527@gmail.com>, Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>
-Subject: Re: [PATCH 1/2] boot: android: Always use 8-byte aligned DT with
- libfdt
-Message-ID: <20251117142105.GG2125796@bill-the-cat>
-References: <CAFLszTjofjQ_zmwJrGZ-sLejQ=x=-8tyqr4SBPYgt3683GVAbQ@mail.gmail.com>
- <20251113193816.GP6688@bill-the-cat>
- <CAFLszTjwpoCwCKKvJX5cZMLK480EK-=BWaFd5A6yLMrfsVWC6g@mail.gmail.com>
- <20251113200527.GQ6688@bill-the-cat>
- <CAFLszTjydNqmo=6qLv--m4fB07QzWd01XHGY3hxgTEbarJF-VA@mail.gmail.com>
- <20251113203654.GR6688@bill-the-cat>
- <385cdc16-cf73-443b-a0a1-440e233d4506@mailbox.org>
- <CAFLszThc4YC6mKp5sNsiuCFfaMNqMWJjVV27d4UkyLU4rPWY6A@mail.gmail.com>
- <bed4a846-6356-463f-a8a9-3d4bf05439a4@mailbox.org>
- <CAFLszTiLZaMkCUxk2_x=gwKBxJeg-02iO-w=JufXEtqhqHZyTA@mail.gmail.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH] boot: Warn users about fdt_high=~0 usage
+Message-ID: <20251117143245.GH2125796@bill-the-cat>
+References: <20251113142957.1069909-1-marek.vasut+renesas@mailbox.org>
+ <20251113154900.GJ6688@bill-the-cat>
+ <07424e88-16f8-4332-b93c-f0baeed5758c@mailbox.org>
+ <20251116140913.GB2125796@bill-the-cat>
+ <e619b3ac-d99a-468c-8275-a8db5b406e62@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ba4K9yj5Zznnd6Tw"
+ protocol="application/pgp-signature"; boundary="tM1NHUK/1gTVbeeY"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiLZaMkCUxk2_x=gwKBxJeg-02iO-w=JufXEtqhqHZyTA@mail.gmail.com>
+In-Reply-To: <e619b3ac-d99a-468c-8275-a8db5b406e62@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,124 +107,179 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Ba4K9yj5Zznnd6Tw
+--tM1NHUK/1gTVbeeY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 16, 2025 at 09:07:19AM -0700, Simon Glass wrote:
-> Hi Marek,
+On Sun, Nov 16, 2025 at 10:43:47PM +0100, Marek Vasut wrote:
+> On 11/16/25 3:09 PM, Tom Rini wrote:
 >=20
-> On Sat, 15 Nov 2025 at 17:20, Marek Vasut <marek.vasut@mailbox.org> wrote:
-> >
-> > On 11/14/25 1:45 PM, Simon Glass wrote:
-> >
-> > Hello Simon,
-> >
-> > >>>>> Which is different from disagreeing with your specific feedback a=
-bout
-> > >>>>> how we get there, to be clear.
-> > >>>
-> > >>> And again, since your feedback to this patch was "Don't?", I'm sayi=
-ng we
-> > >>> need to. But the rest of your feedback was structural on moving tow=
-ards
-> > >>> resolving it and so I assume Marek will respond.
-> > >>
-> > >> The "blast radius" are these patches, that's all that tripped the te=
-sts:
-> > >>
-> > >>    - boot: android: Always use 8-byte aligned DT with libfdt
-> > >>    - test/py: android: Point fdt command to aligned addresses
-> > >>    - test/py: Use aligned address for overlays in 'extension' test
-> > >>    - sandbox: Fix DT compiler address warnings in sandbox DTs
-> > >>    - sandbox: Fix DT compiler pin warnings in sandbox DTs
-> > >>    - boot: Assure FDT is always at 8-byte aligned address
-> > >>    - arm: qemu: Eliminate fdt_high and initrd_high misuse
-> > >>    - efi_loader: Assure fitImage from capsule is used from 8-byte al=
-igned
-> > >> address
-> > >>    - MIPS: Assure end of U-Boot is at 8-byte aligned offset
-> > >>
-> > >> Regarding last minute alignment, the problem with this android image
-> > >> seems to be in the android image itself, which packs in badly aligned
-> > >> FDT. We therefore have to copy it out and realign.
-> > >
-> > > My request is to implement these checks as part of the boot flow
-> > > (bootm, etc.) rather than adding memory allocations in leaf function.
-> > > We already support copying the FDT to a different address so we can
-> > > expand it and add things. Can we make use of that code?
-> > It seems the 'abootomg' command is extracting DTB from a container where
-> > the DTB can be at 4-byte aligned address. Thus far, the command
-> > internally used that possibly 4-byte aligned address, which is wrong. It
-> > also returned that address which was used by further U-Boot commands
-> > as-is, which is also wrong.
-> >
-> > This DTB usage here has nothing to do with any boot flow, this is
-> > incorrect DTB alignment during manipulation, which is not part of boot.
-> >
-> > What exactly do you propose should be changed with this patch ?
+> Hello Tom,
 >=20
-> Actually this patch seems to adjust code which is just handling a
-> command. How about creating a common function which can put an FDT
-> into an abuf, either just using it in place, or allocating memory and
-> copying it? An abuf is ideal for this. E.g. something like (untested):
+> > > > > diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> > > > > index 3f0ac54f76f..e88525a3846 100644
+> > > > > --- a/boot/image-fdt.c
+> > > > > +++ b/boot/image-fdt.c
+> > > > > @@ -189,6 +189,10 @@ int boot_relocate_fdt(char **of_flat_tree, u=
+long *of_size)
+> > > > >    			/* All ones means use fdt in place */
+> > > > >    			of_start =3D fdt_blob;
+> > > > >    			addr =3D map_to_sysmem(fdt_blob);
+> > > > > +			if (addr & 7) {
+> > > > > +				printf("WARNING: The 'fdt_high' environment variable is set =
+to ~0 and DT is at non-8-byte aligned address.\nWARNING: This system will l=
+ikely fail to boot. Unset 'fdt_high' environment variable and submit fix up=
+stream.\n");
+> > > > > +			}
+> > > > > +
+> > > > >    			err =3D lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &addr,
+> > > > >    					    of_len, LMB_NONE);
+> > > > >    			if (err) {
+> > > >=20
+> > > > I think we need to yell about it sooner.
+> > >=20
+> > > I don't think so, for two reasons:
+> > >=20
+> > > - If the user uses e.g. bootz to boot their kernel, which on arm32 is=
+ still
+> > > sadly happening, they wouldn't trigger this problem at all and they w=
+ouldn't
+> > > care about whichever way their fdt_high is set.
+> >=20
+> > Which part of the problem? If the dtb is not 8-byte aligned the kernel
+> > will fail. All the accessors require 8 byte alignment.
 >=20
-> /**
->  * fdt_ensure_aligned() - Obtain an abuf with a devicetree, aligning if n=
-eeded
->  *
->  * @buf: Returns abuf containing FDT on success; caller must abuf_uninit(=
-buf)
->  * @addr: Address of FDT
->  * Return: 0 on success, -EINVAL if not an FDT, -ENOMEM if out of memory
->  */
-> int fdt_ensure_aligned(struct abuf *buf, void *fdt)
-> {
->    struct fdt_header fdth __aligned(8);
+> On 64bit systems, yes. On 32bit systems it is not so clear cut, they might
+> boot with 4-byte aligned DTs. I might be wrong about this, but if I recall
+> it right, bootz is very simplistic and it doesn't handle much in terms of=
+ DT
+> relocation, and ignores fdt_high, so the users on those 32bit systems that
+> use bootz to boot also don't care about fdt_high much.
 >=20
->    memcpy(&fdth, fdt, sizeof(struct fdt_header));
->    if (fdt_check_header(&fdth) !=3D 0)
->       return -EINVAL;
+> > > - If the user sets 'fdt_high' as part of their boot command, they wou=
+ld not
+> > > get any warning print if we warn earlier, but they would get one when=
+ they
+> > > boot and trigger this affected code path.
+> > >=20
+> > > Maybe we need warnings in two locations ?
+> >=20
+> > Maybe? I was thinking it should be around this in boot/image-fdt.c:
+> >          /* If fdt_high is set use it to select the relocation address =
+*/
+> >          fdt_high =3D env_get("fdt_high");
+> >          if (fdt_high) {
+> >                  ulong high_addr =3D hextoul(fdt_high, NULL);
+> >=20
+> >                  if (high_addr =3D=3D ~0UL) {
+> >                          /* All ones means use fdt in place */
 >=20
->    abuf_init_const(buf, fdt, fdt_totalsize(&fdth));
->=20
->    /* The device tree must be at an 8-byte aligned address */
->    if ((uintptr_t)fdt & 7) {
->       void *fulldt;
->=20
->       // a function like abuf_realloc_align(struct abuf *buf, int
-> align) would help
->       fulldt =3D memalign(8, buf->size);
->       if (!fulldt)
->          return -ENOMEM;
->=20
->       memcpy(fulldt, fdt, buf->size);
->       buf->data =3D fulldt;
->       buf->alloced =3D true;
->    }
->=20
->    return 0;
-> }
->=20
-> Then you can use this in various places as needed.
+> This is exactly the code that this patch modifies . Where in the above do
+> you think this change should be ?
 
-That looks like massively more code than is needed to just ensure that
-the thing we deal with today is also correctly aligned? We don't need to
-pull abuf into everything.
+You're right and I did post the last line of context that's the first
+line of your patch. I really meant that we shouldn't even be checking if
+the current location is misaligned. We should tell people to stop
+disabling relocation.
+
+> > As that's where all of the code paths end up calling, I think. But if
+> > it's multiple paths, yes, multiple warnings if we can't abstract it out
+> > to a common path.
+> >=20
+> > > > Today (and for quite some
+> > > > years) if you pass a 4 byte and not 8 byte aligned DT to Linux, it =
+fails
+> > > > to boot or breaks in loud
+> > >=20
+> > > Worse, not loud, but silent.
+> >=20
+> > Also true, yes.
+> >=20
+> > > > and odd ways. This has in turn lead to much
+> > > > time spent and some of our older threads with the libfdt folks years
+> > > > ago. So I think we need something earlier in code where we're seeing
+> > > > that fdt_high is set to ~0 and that's where we say "Stop doing this=
+, it
+> > > > will be removed soon".
+> > >=20
+> > > We cannot remove this functionality, someone might actually depend on=
+ it for
+> > > whatever reason. It is part of the command line ABI now.
+> >=20
+> > The valid use case is boot time optimization. It's also a
+> > micro-optimization (as actually megabyte sized device trees like when
+> > people wanted to pass FPGA bitstreams in 15+ years ago are not allowed)
+>=20
+> ( not allowed where exactly ? fitImage is a DT too )
+
+I wasn't clear enough. I mean having the FPGA bitstream as a device tree
+node, for the linux kernel to parse. Because that's what fdt_high is
+about, not FIT images :)
+
+> > I think really. I am loath to break ABI like this but I'm not entirely
+> > sure we have a choice.
+>=20
+> We do, we simply warn users and remove the usage and fdt_high=3D~0 assign=
+ments
+> from the tree. The functionality itself does not have to be removed.
+
+The problem is the functionality has always been for a hack workaround
+and bootm_low/bootm_size/etc were the right answer.
+
+But maybe step one is just remove the in-tree usage and a big loud
+warning when it's set telling people to not do that.
+
+> > Maybe we detect disabled relocation and
+> > misaligned device tree and fall back to prompt? Or if it's too late,
+> > panic with an explanation? Or maybe we just move it 4 bytes higher. The
+> > device is in a going to fail state anyhow, so trying to recover it might
+> > be OK, and since the device tree needs to be modified by us it has to be
+> > in writable memory.
+> Keep in mind, on arm32 it may not necessarily fail to boot with 4-byte
+> aligned DT.
+
+I'm pretty sure it is. It's not a problem about doing misaligned reads
+it's that the data structure and it's accessors require 8 byte
+alignment. That's what I recall right now from everything around:
+commit e8c2d25845c72c7202a628a97d45e31beea40668
+Author: Tom Rini <trini@konsulko.com>
+Date:   Mon Jan 27 12:10:31 2020 -0500
+
+    libfdt: Revert 6dcb8ba4 from upstream libfdt
+   =20
+    In upstream libfdt, 6dcb8ba4 "libfdt: Add helpers for accessing
+    unaligned words" introduced changes to support unaligned reads for ARM
+    platforms and 11738cf01f15 "libfdt: Don't use memcpy to handle unaligned
+    reads on ARM" improved the performance of these helpers.
+   =20
+    In practice however, this only occurs when the user has forced the
+    device tree to be placed in memory in a non-aligned way, which in turn
+    violates both our rules and the Linux Kernel rules for how things must
+    reside in memory to function.
+   =20
+    This "in practice" part is important as handling these other cases adds
+    visible (1 second or more) delay to boot in what would be considered the
+    fast path of the code.
+   =20
+    Cc: Patrice CHOTARD <patrice.chotard@st.com>
+    Cc: Patrick DELAUNAY <patrick.delaunay@st.com>
+    Link: https://www.spinics.net/lists/devicetree-compiler/msg02972.html
+    Signed-off-by: Tom Rini <trini@konsulko.com>
+    Tested-by: Patrice Chotard <patrice.chotard@st.com>
 
 --=20
 Tom
 
---Ba4K9yj5Zznnd6Tw
+--tM1NHUK/1gTVbeeY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRsvUQAKCRAr4qD1Cr/k
-CjJCAQD1DLkNZ06JZyDzpY10vW/lUY5H9r88M4qUXCd6BDQa1wEAx23pl23qUvxd
-6BmDL3/SUIiSXtZe/1ELRpfEn54xUwQ=
-=6eAP
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRsyCQAKCRAr4qD1Cr/k
+ClOHAP4j/75Simyw1wunYnG27ApyLBEzOUSqNXEUNiWGHR6QIQD/bEDNTqIS0QOW
+sjiTf+ceekZBwgd1JmH6UlfWI5lRGAo=
+=f7hL
 -----END PGP SIGNATURE-----
 
---Ba4K9yj5Zznnd6Tw--
+--tM1NHUK/1gTVbeeY--
