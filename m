@@ -4,92 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA1BCEACEF
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 18:16:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D35ACEACEF
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 18:30:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ECE683C19;
-	Mon, 17 Nov 2025 19:16:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 252D083946;
+	Mon, 17 Nov 2025 19:30:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Re8N0q3n";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n0k2oMep";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF70E83C29; Mon, 17 Nov 2025 19:16:39 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 37FFC839D6; Mon, 17 Nov 2025 19:30:14 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77B7A83C16
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 19:16:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D86E80433
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 19:30:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-29853ec5b8cso54461375ad.3
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:16:37 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-3ec4d494383so571924fac.3
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:30:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763403396; x=1764008196; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VDCt3KKwuRQBPIFxd5px9qBTjdj5urVvtLTw9qT7bEg=;
- b=Re8N0q3nFYlZsLWPbIi/sWGOJla6cgIq8iD7zYGageKpQa3N80xJRvtlHXTM5C0aiV
- VsdUanyDZbnymMomm5SxcO9GgqdA28//QMneYr91zlriXmZlmXGohvGJf4cFmV6GTEx+
- hdjV5V7di/Vdc93UDpVF2CebBSh4p52J75DjY=
+ d=konsulko.com; s=google; t=1763404210; x=1764009010; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UW1VvZFC8KVRdQDAHgCch0MypXud66extR5EfXtNUK4=;
+ b=n0k2oMepT0mVyDz+X47+/ItaU+j36QzcuY55XBUqWzEux89Ttesb8YomiJq6+ovRFI
+ Qnq7gUaLX5aTpC8gvZMf5TLDBLjMS6/1B1biTlZ9hJWEzpKmt21nuEHN1MV26TeRhJri
+ 2uMlCkEdu0eLLwbLqtWTMb2UOEdgJ7liQkUxQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763403396; x=1764008196;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VDCt3KKwuRQBPIFxd5px9qBTjdj5urVvtLTw9qT7bEg=;
- b=LYB57HlyamTJHe8nVPwfJwfYwils/n3PJsam/AAEibHQYZXJ2pJGu6LB1OoThM+1DB
- SQ/Jom6bhNMiIwvpg9BURvbMR+Gb+ngVgBlORNQMhD0FjcQ8C2lXJjVQewl9hFb7F/Gz
- gszRstUdAVsrpdC81FLnkqvsR4zbdbZREYWTsYl/JTUkIPfm5ZV+d/INMc796l9WgEBh
- Vlwh91jIKlKm4VgP4TbROPLQwYUP63J8r60XXA7cO2b1MieQUCES7r7rbuAqiblZE38M
- Y/ZISQzP+daOjjIZ8awwzrJZjzbwWawpHOcINIw5pU9k+dawOU679rUDrYgUV/KP6oKI
- 0+pQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUW9/CjUrTwBgFMkYAzedXFjqDqjPGgf/Fn4Gxj0/ySqG73l/XE8n6cZK7mEAZHQoEVrxk9hiM=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywdy5cRNpD3VSq/tFh6INq8Ie2I8RwvfiHQe5xRF8cR+fZpkwK3
- gqrjyUfebGHMeYq+9FnfQXOmP4YCstICYV9CSYW11qUpoiI6A835kHUbOuq9i0rwZ+ofwjwA0kc
- W0JQrSBuSPlMovPurtY+GuD/84FyT2x9bbODLvpuq
-X-Gm-Gg: ASbGncthOC+GV83ECmAHNxBUz+nlGObSJhrk0UWk3RBveLPrTzpNgWVjKLZA2j9U2Y4
- 6KT7j0RcQ3wwSwGBcDGPm465rIsIzwMShXjTUKbYp6FPxaTWJ6dr6JCoOs6ehnhxVYB8QzEu6oX
- m+SPF5aysbWRy5S2FL/qdjTdyQGN9W5HgTT0MU8kn4ipr0MT+i2ZHjJrQrp+61kzwpLR5G+GgC/
- xlZoWLBxKx/pfTPLhJ4L/DbwNLE5BmCY3mjctDknuZCZ+oNdwGrKNEUT+Y0mi5xXEVVqg==
-X-Google-Smtp-Source: AGHT+IE25XtL7uL3BoaZChgVV3WG8fUPp/mzrpGFjgYHdndn3kxrd2ELWwYDWa9AVSkhkK9EdY++uQJ/Y7Gj3rIcnVU=
-X-Received: by 2002:a17:903:2c0d:b0:290:2a14:2ed5 with SMTP id
- d9443c01a7336-2986a6bc3c9mr136684355ad.4.1763403395902; Mon, 17 Nov 2025
- 10:16:35 -0800 (PST)
+ d=1e100.net; s=20230601; t=1763404210; x=1764009010;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UW1VvZFC8KVRdQDAHgCch0MypXud66extR5EfXtNUK4=;
+ b=k4nvII6aPb82LFez51RbYYhnEZPlmVhiN3PlFxdOmwZ0GYtBnXEbLoJRhNWwyAU4go
+ E01zsRV34lhbT7/RCyZxAzNwadNO5heSKCM6GS8FrYbNDyj9YMK+Y/DLUB1eIoy0AZ8S
+ TnJ02XyZPSfXtQ+LMEAWhGg4N2swU5XRQBmUH0NMDVTXtDD0m+qzIYh+c3WP7NaMuixk
+ I/N3rjEBqZfUJCeg5ca/CqGb9b5A72Bz1bIzBbFM7i38LyQnArY57maUnnjMU/36HLIf
+ ZfS9mjC4fP3vh0lrFW4HmI8iQmgA1Wsb6gwCsOgD5VbCovZVUVq+SHbhcDKL+fVJHICO
+ BZQw==
+X-Gm-Message-State: AOJu0Yyhaks1z402/3CjE3bckOu5YyJIw01DHq7Ints1z7wOj4yRmiOW
+ p2yDYTEUEhwO3+XcII8mUIJi8tyBDK39eQTSnpmS35YqhZC68nCE1dyOajh//bv6cKiDeP2yYyt
+ 1AFHBqgE5uA==
+X-Gm-Gg: ASbGncuAApSR9GjG+pOjLx4jIZ7TlQj2q0DBof2mYfZcGutxuv4TBAXe8JDSDlY1zsq
+ IFit2fqFJO6ibqa+pJWYVAjKmu4leLfGlGUkyxk3AUM+rjQ6ZNolaoGCYpoJaRjRM8LeH5PfDiw
+ pk5+ej9/vw8z+fvhEuxfqREZx+tKC5lvhaVQ97xZs/clbAmxa17O3MoqpWjRCvVDFZpryb6QObz
+ 41FfP7eQX8Cgj/NJiCz16PxaRrMfITc92H9UIG8I1Mxz8pafDlfq292PiTg9CG76NvrLHuFQtrj
+ 0umVSJFdaU58IqMgCddyO9eRjAO0aFuRzo1GIyIQHghf8/s7dNbLT62Fj84vAbych8So+l8hj/Z
+ eFWxMKlBoqSBwlEE/stVMdtdzxno//GC5UVkx2ds0AdqoB3BIHmSY3Ln2/da7MY5ZwNc4D9D4bw
+ euKtoZ9GY72uGiENsvzOObuBNCektL0k02xYypTQA6sIJvxsPBSQ==
+X-Google-Smtp-Source: AGHT+IF3OpNuhAzl4QA504Jl7pJz2LxQk+pl4IMGwVlxELGleKi2Ls1ei9XsFX5ThShEllcgwVQokA==
+X-Received: by 2002:a05:6871:60e:b0:3e8:915b:41fb with SMTP id
+ 586e51a60fabf-3e8915b454bmr4128831fac.41.1763404210203; 
+ Mon, 17 Nov 2025 10:30:10 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3e89697fedcsm2565041fac.1.2025.11.17.10.30.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Nov 2025 10:30:09 -0800 (PST)
+Date: Mon, 17 Nov 2025 12:30:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] Gitlab: Add a "sage-lab" stage to access a board farm
+Message-ID: <20251117183007.GM2125796@bill-the-cat>
+References: <20251110154231.2629710-1-trini@konsulko.com>
+ <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
+ <20251111135638.GT6688@bill-the-cat>
+ <CAFLszThrucj38rULiXB3HAsHRq5veZo6zBgHekcjymQecZSP5A@mail.gmail.com>
+ <20251114143425.GY6688@bill-the-cat>
+ <CAFLszTi+1UbZ-ut1qYs--Mnv9QSA1A6Z=U4f3B+6tQfSFA8FKA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
- <20251109101010.306268-7-heinrich.schuchardt@canonical.com>
- <CAFLszTiHVqgn5eox3p7CWt0=XjAcYMBjR7F03UqweRftZg5fDg@mail.gmail.com>
- <20251114141943.GV6688@bill-the-cat>
- <CAFLszThhPVcKhcbxA77HCwrRcq9H1+p_YvEmir3p6TEkLb1YQA@mail.gmail.com>
- <20251114144331.GA6688@bill-the-cat>
- <CAFLszTibCE57HPEgEnkVkzmcLVMbQsk5mDKP5+mrn+ZHQOGeAA@mail.gmail.com>
- <20251114185450.GA2125796@bill-the-cat>
-In-Reply-To: <20251114185450.GA2125796@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 17 Nov 2025 11:16:07 -0700
-X-Gm-Features: AWmQ_bmMYkydXrCDqOFh1czIBt8x1dkl_eOWeGAYKKk-vSHF-Nm1d9fyvhRyVrg
-Message-ID: <CAFLszTi0nD5Fkur8Hin5yNvQhmdj72CBV9SRzdsY=NSLK+H8Nw@mail.gmail.com>
-Subject: Re: [PATCH 6/9] test: cmd/fdt: do not use fixed buffer addresses
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Bin Meng <bmeng.cn@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>, 
- Harrison Mutai <harrison.mutai@arm.com>, Peng Fan <peng.fan@nxp.com>, 
- Ben Dooks <ben.dooks@codethink.co.uk>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Hk8n2FuqBh96TR1w"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTi+1UbZ-ut1qYs--Mnv9QSA1A6Z=U4f3B+6tQfSFA8FKA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,115 +102,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Fri, 14 Nov 2025 at 11:54, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Nov 14, 2025 at 11:10:59AM -0700, Simon Glass wrote:
-> > On Fri, 14 Nov 2025 at 07:43, Tom Rini <trini@konsulko.com> wrote:
+--Hk8n2FuqBh96TR1w
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Nov 17, 2025 at 11:16:05AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 14 Nov 2025 at 07:34, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Nov 14, 2025 at 05:43:57AM -0700, Simon Glass wrote:
+> > > Hi Tom,
 > > >
-> > > On Fri, Nov 14, 2025 at 07:24:53AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
+> > > On Tue, 11 Nov 2025 at 06:56, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Fri, 14 Nov 2025 at 07:19, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Tue, Nov 11, 2025 at 05:58:22AM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
 > > > > >
-> > > > > On Fri, Nov 14, 2025 at 05:31:40AM -0700, Simon Glass wrote:
-> > > > > > Hi Heinrich,
+> > > > > On Mon, 10 Nov 2025 at 08:42, Tom Rini <trini@konsulko.com> wrote:
 > > > > > >
-> > > > > > On Sun, 9 Nov 2025 at 03:10, Heinrich Schuchardt
-> > > > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > > > > >
-> > > > > > > The location of memory depends on the board. Do not assume memory at fixed
-> > > > > > > memory locations. Use memalign() instead to allocate a buffer.
-> > > > > > >
-> > > > > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > > > [snip]
-> > > > > > >         /* bytes */
-> > > > > > >         print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, buf, 0x12);
-> > > > > > >         ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff  ..\"3DUfw........",
-> > > > > > > -                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-> > > > > > > -                          (uintptr_t)buf);
-> > > > > > > +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
-> > > > > [snip]
-> > > > > > This is adding memory allocations to a test for hex dumping.
+> > > > > > This is the Gitlab side of adding support for the board lab con=
+nected to
+> > > > > > the "konsulko-sage" runner. On the software side, this lab uses=
+ only
+> > > > > > upstream labgrid. On the hardware side, each device under test =
+is
+> > > > > > connected to its own exporter (typically a Raspberry Pi 4) that=
+ must be
+> > > > > > turned on (and cleanly turned off) as part of a given test cycl=
+e.
 > > > > > >
-> > > > > > It would be better and simpler to use a fixed address and make this a
-> > > > > > sandbox-only test. I struggle to see the value of running these sorts
-> > > > > > of tests under QEMU?
+> > > > > > Add support for testing on a SolidRun Hummingboard 2 (imx6), Ra=
+spberry
+> > > > > > Pi 3 and Raspberry Pi 4. In all cases, we enable additional opt=
+ions to
+> > > > > > run more tests on the board. As we have some networking tests, =
+we test
+> > > > > > both the legacy network stack and lwIP. In the case of Pi platf=
+orms, we
+> > > > > > test all of 32bit configuration, plain configuration and rpi_ar=
+m64, and
+> > > > > > again with and without lwIP.
+> > > > > >
+> > > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > > > > ---
+> > > > > > Note that for the Pi platforms we enable/disable CMD_BOOTEFI_SE=
+LFTEST
+> > > > > > based on overall binary size. I've created
+> > > > > > https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/i=
+ssues/2
+> > > > > > to track addressing that issue.
+> > > > > > ---
+> > > > > >  .gitlab-ci-sage-lab.yml | 182 ++++++++++++++++++++++++++++++++=
+++++++++
+> > > > > >  .gitlab-ci.yml          |   5 ++
+> > > > > >  2 files changed, 187 insertions(+)
+> > > > > >  create mode 100644 .gitlab-ci-sage-lab.yml
 > > > > >
-> > > > > Removing context to highlight value of running tests on multiple
-> > > > > platforms.
+> > > > > Would it be possible to add some docs about this? Does the export=
+ing
+> > > > > rpi do a full system boot and then run some scripts to load things
+> > > > > onto the board, then shut down?
 > > > >
-> > > > $ ./tools/qconfig.py -f ~PHYS_64BIT -l |grep sandbox
-> > > > sandbox
-> > > > sandbox_flattree
-> > > > sandbox_nocmdline
-> > > > sandbox_noinst
-> > > > sandbox_spl
-> > > > sandbox_vpl
-> > > > $ ./tools/qconfig.py -f PHYS_64BIT -l |grep sandbox
-> > > > sandbox64
-> > > > sandbox64_lwip
+> > > > I don't understand your question. Yes, the exporter is powered on/o=
+ff in
+> > > > the test job, as explained in the commit message. When it comes up =
+it
+> > > > registers the device under test with the coordinator (and unregiste=
+rs
+> > > > when powering off).
+> > >
+> > > So does that mean that all the logic for talking to the board is not
+> > > in the hooks or Labgrid, but somewhere else? I'm just trying to
+> > > understand how it is put together and compare it with what I did.
 > >
-> > If at any point you have made up your mind, please say so, rather than
-> > continuing what I intended to be a discussion of the pros and cons of
-> > this patch.
->
-> Yes, both Heinrich and I agree we should be running these tests on
-> hardware. Don't run them on hardware as a position has been rejected.
-> You can stop reading here if you don't want an explanation.
+> > I still don't understand what you're asking. Maybe you missed the patch
+> > that added sage to u-boot-test-hooks as well? That contains the labgrid
+> > environment yaml file. The boards are just in labgrid, the exporter
+> > registers them with the coordinator when the exporter comes online.
+>=20
+> I saw the hooks patch. But I am missing the logic that actually writes
+> U-Boot to the board, powers it on/off, etc. Where is that?
 
-OK. I'll discuss this with Heinrich at some point to understand his POV.
+Already in the repository or a different patch I posted for a new SoC.
+It's just calls to the appropriate labgrid-client subcommand.
 
->
-> > > Good, and as soon as you restrict to "sandbox" we stop running
-> > > "sandbox64", it's why sandbox64 runs so much quicker in CI.
-> >
-> > This is a C test - test/cmd/fdt.c so it is built for all sandbox
-> > boards. The restriction you are referring to here is for pytests, I
-> > believe. The core of my argument is that running sandbox tests on
-> > other architectures is mostly a waste of time, assuming the compiler
-> > is functioning correctly. This patch is also devaluing sandbox, the
-> > major advantages of which is its fast, native code execution and fixed
-> > execution environment (memory map, etc.).
-> >
-> > At the very least, it would help to be clear what bugs we are hoping
-> > to find with this change.
->
-> The position of "don't run tests on hardware, only on sandbox" does not
-> sound sensible in general. In practice we need to do more, not less, on
-> device testing and saving milliseconds by skipping tests is noise lost
-> in the time it takes to acquire a runner and clone the source code or
-> even which runner we test things on. Spending time on "should this run
-> on hardware or only sandbox" is time not well spent. Finally, "do a
-> bunch of stuff on hardware" is still the best overall method for finding
-> unexpected platform bugs. It's how we catch "some clocks are wrong" or
-> "we configured thermals wrong" or "we configured memory wrong" and so
-> forth.
+> > And FWIW, this isn't ideally how I'd do the labgrid integration, but
+> > tees up the next steps nicely. We need to abstract how our pytest
+> > portion grabs console/flashes/etc so that someone could write a python
+> > native set of classes (since labgrid supports pytest directly).
+> > Iterating on that is easier however when starting with something that
+> > works.
+>=20
+> Yes, that would be nice. It would also make it easier to know when to
+> expect the board to respond, rather than the long timeouts we have
+> today. I started looking at this in June but didn't finish.
 
-Those bugs will not be found by this test. If the platform is unable
-to reliably execute code, we should have a test which boots to a
-prompt, runs dhrystone, or something like that.
+I'm not sure how one is connected to the other there, but yes, doing it
+all within python might make some cleanup / configuration easier too.
 
->
-> You mention QEMU, and yes, we will be executing these on QEMU in CI, on
-> some platforms, which are our fastest pytest pipelines. But we will also
-> being running these on hardware, which is my point and I believe
-> Heinrich's as well.
+--=20
+Tom
 
-OK I read this far.
+--Hk8n2FuqBh96TR1w
+Content-Type: application/pgp-signature; name="signature.asc"
 
-1. If a test has *never* failed on a board and never can, what benefit
-are we getting? This is not just about test time. It is also about
-making the tests more complicated to deal with non-sandbox
-environments. It's about the poor people who have to maintain all this
-stuff.
+-----BEGIN PGP SIGNATURE-----
 
-2. Sandbox is basically the unit-test platform. Some of the tests do
-quite a bit more than simple unit testing. But they are unit tests.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRtpqAAKCRAr4qD1Cr/k
+CgcLAQD+mfEwOFVmD/dcRkMcapM8iRJX1HqD00XUL6CCMPAOsgD8DZoj5XG2ZgDt
+dK1j383CXBX9Z+7XXiaN1B5s9XjQ1A0=
+=z+5g
+-----END PGP SIGNATURE-----
 
-3. We should be clear about the goals of testing, not just blindly
-enable all our unit tests on all boards.
-
-Regards,
-Simon
+--Hk8n2FuqBh96TR1w--
