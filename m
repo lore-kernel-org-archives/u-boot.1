@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BFA4CEACEF
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 09:26:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E228CE8D6B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 09:40:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0156683A3D;
-	Mon, 17 Nov 2025 10:26:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=egym.com
+	by phobos.denx.de (Postfix) with ESMTP id 671EF83A3D;
+	Mon, 17 Nov 2025 10:40:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=egym.com header.i=@egym.com header.b="HGXFdASl";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="ljLMW6d7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82C5983A3D; Mon, 17 Nov 2025 10:26:27 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 862D683B0A; Mon, 17 Nov 2025 10:40:04 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 327C38398C
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:26:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EBBC8398C
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:40:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=egym.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cibil.pankiras@egym.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-37a4e329a90so31242821fa.0
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 01:26:25 -0800 (PST)
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-63c489f1e6cso2285198a12.1
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 01:40:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=egym.com; s=egymcom; t=1763371584; x=1763976384; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=We/uOa4gt5GR5QAAkAoX9VeBqL+HB6iE+iDDs6qu8hs=;
- b=HGXFdASljS2klz/MGZow12WoiY42O3BnYjqnHU0XY4ST+rEixhL52phtUDEZDB+f5Y
- CA8pkmtTGgqm6eDLCSgDj8iX/P4uXYV1LMcET/WFCT9Rah96NWKxCOt8PGrRSXhkddn/
- 9f7A+4ySeHJDUfcszBmAnzZLnqBIc5+JxDrVA=
+ d=googlemail.com; s=20230601; t=1763372401; x=1763977201; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OWGkSzLQ9uaLnyrc25IcjQ1MJa20tGhmvdOG4AJ3mHI=;
+ b=ljLMW6d7cNvHXPuZmc04ZedBqIcCWEbLtvm5BKAd6BusDTaUSltZxVVHE4syIJxHEP
+ FeEAW4GdZOk0WZLMGvdsrPDhQqqtkCyK737RrKTePz3wZCJI3bJnCX5ZlTOczL82DRiV
+ 6bdD5LXvn3n9ENa8hWY13j/btluqIdt7pBOT0W+enXa1MAOKVOMM8fqUj/jbk7DblfYz
+ /sY1EamT4ibTLgMSM+uQgzizAilcwu9zziseUkB6F3XfsoBiwqaRhp6X7eXSYtjGhpE3
+ UY/HdhGxt0UbLBFp/jiLxwg9cjzu6NtWyKzH4AirDRTI4UpMNApeiydi8DYs+Yf+kNzp
+ hi1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763371584; x=1763976384;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=We/uOa4gt5GR5QAAkAoX9VeBqL+HB6iE+iDDs6qu8hs=;
- b=dDWV2YmHs8UzWgi62sFnbiZo2j2uRPxrl5ww5RTP+dZfJ3f+XZ6KMuakw6i1vVTC29
- CgVylspzsvGyE6kPZRCMBX00HjXwlsPFIygSdqCpnWB4Cr1jJFrnR+UN5nHphn/v+bgL
- 0L+gY8MUC4UmdJ2BvEIuN85ovKrnPL1Ib0cUZQxyPAPHrwM6FG9Nqf2+kiOtvIXvjbS8
- P/wvqXAYL3lq4qBSocb47Edh2+SsLU37rkAeBR9LbqkRCMDqynE/N9DhgFREEXRWg1gx
- ef2utALd0qvT392VvVWZUXVcc1G47YazIf3kbuZnShAoammGoCD9ACc2tZ/PmrhYCCZw
- I3OQ==
-X-Gm-Message-State: AOJu0Yzz6Zq1GooBGmlc0jrZl7jT26ADEByKgIt7146V8dY92NdiedDk
- hRxC1/APTK7QuYO9+1eigHGMJOMaG+4KGmyb27iAbv9fwIJauLp2WlXeEZqGIXWTFTEb1LsSf8Q
- 31FGR3VAWbZ6yjxdb38ld6klxhkuS6S4G7529nJ/Enr5Hf85kP7ZX0sBt8Q0u+FCM9gfGCfrlEl
- d6qdO3PXraWKyZ4bCPeAY9q4vmDBlEFCeCSiw=
-X-Gm-Gg: ASbGncuDoChK67QBhyOVmKCorx6E/yWNo7W9vw2CAY3Plv9zQmMbY4iOos4YIA7MpML
- npxwXSgc70NEe1ay/EYWjZxMRyfoWINfdpioz8M67qvNcesZ4H+gHXyVb9YvKhuCk9ctq8/8aBg
- iPjHzWIMhD4t/pC7P+s9UIOAXRvRMvIJwAGDGUPMyYJKOKeK3xjw2EiJxf/zqzOpRdXOpPTPU59
- aUovaYXK+cGPS8DawfUnRRvBEtO792TINTuqj5FGpWs+85NaGyUgKGokhM2u1YBiyuQyXv8N6V6
- LVA8pQ==
-X-Google-Smtp-Source: AGHT+IGPkCrFXjtqWBqWtCe5DJ68G8IrLclsnwpkjBVD8x7X/K/DyZInVrfQXHtGaFLM5+42WHuY344osyUGT4FkhSw=
-X-Received: by 2002:a05:651c:31c8:b0:373:a465:292c with SMTP id
- 38308e7fff4ca-37babb7643fmr30462011fa.21.1763371584375; Mon, 17 Nov 2025
- 01:26:24 -0800 (PST)
+ d=1e100.net; s=20230601; t=1763372401; x=1763977201;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OWGkSzLQ9uaLnyrc25IcjQ1MJa20tGhmvdOG4AJ3mHI=;
+ b=DSFokKMDe/TFXcs/j2sxEeCDYcW32WRqs1YHfVXMj5vktWlg59P8h5faFDuyAWH9PB
+ RykvYNXOgroid1Lz6qPFnH+cEJ56OAZq/FGamnZtv/hr6kyj2ThMckVZO/8ipeTH+rvL
+ EjkMm+PlsQQWUacQ+SccPeDsNlOVGm/sbSDfHJn1QtrevfJKIk/If2x03ZrzPQ+7rE9u
+ 0r3z+bjlJIGr9Rp9TRpzxgWBLrzDY7l+d/TCFIamM/Lz9WPo38a9NX9uoOaqmKSeHsSn
+ nMRBWkT4r1fsaLCaIn6EXaHU1VYIUTUrnG4wmrq0xB4Jh/w2Rjut+vVKi/azZf+YWVDY
+ JaRQ==
+X-Gm-Message-State: AOJu0YwGHhkXuFWIOLCWjPJF9j0xWmc88pwGBGa3bEGEwIt5NcKF4g0I
+ lSyfkxvf8j37wWSqw8ORD9ay+6kGQ70nBSB4NTsYypwioQp/zGZSke6gPZufew==
+X-Gm-Gg: ASbGnctxFfo762HtALzKTJiqLKktXCuhzBG5wKu0HKzMFweA1+zzA0viF2Vk2LPQ4/V
+ BGKtL5QAfPAEqODA00cpnzP3lHqxnXh7DIoiepFtEnJ6OK1HLnyXExWMEI7KEEXq3zYwA1wSxID
+ EapHW2WZuyjpZ2ptFH4faMUjnKfkBmpqWy0uRjBHTMC4zgOtkdTVhOiavDIQXb5PDWfukdypW3p
+ gjwDF4Ktb1r+zYC4Vzc8kz4m9KZqFkWtCRFVLepaISfImFJo7FscGHpteZZSEy83hSHPHHFH7Iy
+ /yweg2EEAsQzU275uvhdIljJ+Xuch/u5sm+68qrPBVIuQ6aNxV2MFFE26oEjIM4au5R3me0NH2X
+ ro+74+7Cux+ZFc959lUvCLRtv7wDFWQPxY/TJtkTBjYkXSUygOnbIWMx+QLj1zIaPnbwF32PTf1
+ wDK05AhcSr9mFof0x94iyYYw/WFcqcSkUwjhuINpgLw73vr1N0LEZ+qCzL2U7cIGAdRBw=
+X-Google-Smtp-Source: AGHT+IGzCo37H6NtsebsQd7URj2l6ErXPcSwXSDbFSSPYuJTlJfTkULSKCeG03fvtpDcy+EkuFhxdQ==
+X-Received: by 2002:a05:6402:51cf:b0:640:cf58:47f9 with SMTP id
+ 4fb4d7f45d1cf-6434f86acafmr12271726a12.9.1763372401275; 
+ Mon, 17 Nov 2025 01:40:01 -0800 (PST)
+Received: from development2.visionsystems.local (mail.visionsystems.de.
+ [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6433a4ce83dsm9740877a12.34.2025.11.17.01.40.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Nov 2025 01:40:00 -0800 (PST)
+From: yegorslists@googlemail.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Yegor Yefremov <yegorslists@googlemail.com>
+Subject: [PATCH] bus: ti-sysc: select CLK_TI_CTRL driver
+Date: Mon, 17 Nov 2025 10:39:54 +0100
+Message-Id: <20251117093954.1580394-1-yegorslists@googlemail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20251113234532.22653-1-cibil.pankiras@egym.com>
- <0ee621ec-ae27-4452-913f-44372b97ca30@suse.com>
-In-Reply-To: <0ee621ec-ae27-4452-913f-44372b97ca30@suse.com>
-From: Cibil Pankiras <cibil.pankiras@egym.com>
-Date: Mon, 17 Nov 2025 10:26:13 +0100
-X-Gm-Features: AWmQ_blfQM06nuLi7Xpls1XiSglqq6tm6DXzDov7ZXvCUIgH-jqts-vKi1x1Gz4
-Message-ID: <CAK3EG+mtr9bZLbi9T5AF3790HprsD8vLrBZ_j4wC1Wc27QkJbw@mail.gmail.com>
-Subject: Re: [PATCH v2] pinctrl: bcm283x: Add GPIO pull-up/down control for
- BCM2835 and BCM2711
-To: Matthias Brugger <mbrugger@suse.com>
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,241 +96,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Matthias,
+From: Yegor Yefremov <yegorslists@googlemail.com>
 
-On Fri, Nov 14, 2025 at 9:51=E2=80=AFAM Matthias Brugger <mbrugger@suse.com=
-> wrote:
->
->
->
-> On 14/11/25 00:45, Cibil Pankiras wrote:
-> > This patch adds support for configuring GPIO pull-up and pull-down
-> > resistors in the BCM283x pinctrl driver. It implements the brcm,pull
-> > device tree property to control pin bias settings.
-> >
-> > The implementation follows the hardware-specific pull control
-> > mechanisms:
-> > - BCM2835: two-step GPPUD register sequence
-> > - BCM2711: direct per-pin control registers
-> >
-> > This enables device tree configurations to specify pull-up, pull-down,
-> > or no bias for individual GPIO pins.
-> >
-> > Tested on Raspberry Pi boards with both BCM2835 and BCM2711 SoCs.
-> >
-> > Signed-off-by: Cibil Pankiras <cibil.pankiras@egym.com>
->
-> We check the brcm,pull byte lenght to be on par with the DT binding.
-> That's not something I would expect normally to be done in a driver. But
-> as this is also done for brcm,pin in this driver and also done in the
-> kernel: let's not bike-shed.
->
-> Reviewed-by: Matthias Brugger <mbrugger@suse.com>
-Thanks for reviewing my patch
-Should I resend the patch with the Reviewed-by tag, or will it be
-added when the patch is applied to the tree?
-Is there anything else needed from my side?
+The TI System Controller (TI_SYSC) driver utilizes clock management
+functions provided by the TI Clock Controller (CLK_TI_CTRL) driver.
 
-Regards,
-Cibil
->
-> > ---
-> > Changes in v2:
-> > - If brcm,pull contains a single value, apply it to all pins listed in =
-brcm,pins
-> > ---
-> >   arch/arm/mach-bcm283x/include/mach/gpio.h  |  10 ++
-> >   drivers/pinctrl/broadcom/pinctrl-bcm283x.c | 105 ++++++++++++++++++++=
--
-> >   2 files changed, 112 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/arch/arm/mach-bcm283x/include/mach/gpio.h b/arch/arm/mach-=
-bcm283x/include/mach/gpio.h
-> > index 4aeb48eeb20..c54414a012c 100644
-> > --- a/arch/arm/mach-bcm283x/include/mach/gpio.h
-> > +++ b/arch/arm/mach-bcm283x/include/mach/gpio.h
-> > @@ -26,6 +26,16 @@
-> >   #define BCM2835_GPIO_FSEL_BANK(gpio)        (gpio / 10)
-> >   #define BCM2835_GPIO_FSEL_SHIFT(gpio)       ((gpio % 10) * 3)
-> >
-> > +/* BCM2835 GPIO Pull-up/down register offsets */
-> > +#define BCM2835_GPPUD                37
-> > +#define BCM2835_GPPUDCLK0    38
-> > +
-> > +/* BCM2711 GPIO Pull-up/down control */
-> > +#define BCM2711_GPPUD_CNTRL_REG0     57
-> > +#define BCM2711_PUD_REG_OFFSET(gpio) ((gpio) / 16)
-> > +#define BCM2711_PUD_REG_SHIFT(gpio)  (((gpio) % 16) * 2)
-> > +#define BCM2711_PUD_2711_MASK                0x3
-> > +
-> >   struct bcm2835_gpio_regs {
-> >       u32 gpfsel[6];
-> >       u32 reserved1;
-> > diff --git a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c b/drivers/pinct=
-rl/broadcom/pinctrl-bcm283x.c
-> > index cf9350c151e..4ecc8bac645 100644
-> > --- a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-> > +++ b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-> > @@ -21,6 +21,8 @@
-> >   #include <asm/system.h>
-> >   #include <asm/io.h>
-> >   #include <asm/gpio.h>
-> > +#include <dt-bindings/pinctrl/bcm2835.h>
-> > +#include <linux/delay.h>
-> >
-> >   struct bcm283x_pinctrl_priv {
-> >       u32 *base_reg;
-> > @@ -54,7 +56,66 @@ static int bcm2835_gpio_get_func_id(struct udevice *=
-dev, unsigned int gpio)
-> >   }
-> >
-> >   /*
-> > - * bcm283x_pinctrl_set_state: configure pin functions.
-> > + * bcm2835_gpio_set_pull: Set GPIO pull-up/down resistor for BCM2835
-> > + * @dev: the pinctrl device
-> > + * @gpio: the GPIO pin number
-> > + * @pull: pull setting (BCM2835_PUD_OFF, BCM2835_PUD_DOWN, BCM2835_PUD=
-_UP)
-> > + */
-> > +static void bcm2835_gpio_set_pull(struct udevice *dev, unsigned int gp=
-io, int pull)
-> > +{
-> > +     struct bcm283x_pinctrl_priv *priv =3D dev_get_priv(dev);
-> > +     u32 bank =3D BCM2835_GPPUDCLK0 + BCM2835_GPIO_COMMON_BANK(gpio);
-> > +     u32 bit =3D BCM2835_GPIO_COMMON_SHIFT(gpio);
-> > +
-> > +     /* Set required control signal */
-> > +     writel(pull & 0x3, &priv->base_reg[BCM2835_GPPUD]);
-> > +     udelay(1);
-> > +
-> > +     /* Clock the control signal into the GPIO pads */
-> > +     writel(1 << bit, &priv->base_reg[bank]);
-> > +     udelay(1);
-> > +
-> > +     /* Remove the control signal and clock */
-> > +     writel(0, &priv->base_reg[BCM2835_GPPUD]);
-> > +     writel(0, &priv->base_reg[bank]);
-> > +}
-> > +
-> > +/*
-> > + * bcm2711_gpio_set_pull: Set GPIO pull-up/down resistor for BCM2711
-> > + * @dev: the pinctrl device
-> > + * @gpio: the GPIO pin number
-> > + * @pull: pull setting (BCM2835_PUD_OFF, BCM2835_PUD_DOWN, BCM2835_PUD=
-_UP)
-> > + */
-> > +static void bcm2711_gpio_set_pull(struct udevice *dev, unsigned int gp=
-io, int pull)
-> > +{
-> > +     struct bcm283x_pinctrl_priv *priv =3D dev_get_priv(dev);
-> > +     u32 reg_offset;
-> > +     u32 bit_shift;
-> > +     u32 pull_bits;
-> > +
-> > +     /* Findout which GPIO_PUP_PDN_CNTRL register to use */
-> > +     reg_offset =3D BCM2711_GPPUD_CNTRL_REG0 + BCM2711_PUD_REG_OFFSET(=
-gpio);
-> > +
-> > +     /* Findout the bit position */
-> > +     bit_shift =3D BCM2711_PUD_REG_SHIFT(gpio);
-> > +
-> > +     /* Update the 2-bit field for this GPIO */
-> > +     pull_bits =3D pull & BCM2711_PUD_2711_MASK;
-> > +     clrsetbits_le32(&priv->base_reg[reg_offset],
-> > +                     BCM2711_PUD_2711_MASK << bit_shift,
-> > +                     pull_bits << bit_shift);
-> > +}
-> > +
-> > +static void bcm283x_gpio_set_pull(struct udevice *dev, unsigned int gp=
-io, int pull)
-> > +{
-> > +     if (device_is_compatible(dev, "brcm,bcm2835-gpio"))
-> > +             bcm2835_gpio_set_pull(dev, gpio, pull);
-> > +     else
-> > +             bcm2711_gpio_set_pull(dev, gpio, pull);
-> > +}
-> > +
-> > +/*
-> > + * bcm283x_pinctrl_set_state: configure pin functions and pull states.
-> >    * @dev: the pinctrl device to be configured.
-> >    * @config: the state to be configured.
-> >    * @return: 0 in success
-> > @@ -62,8 +123,10 @@ static int bcm2835_gpio_get_func_id(struct udevice =
-*dev, unsigned int gpio)
-> >   int bcm283x_pinctrl_set_state(struct udevice *dev, struct udevice *co=
-nfig)
-> >   {
-> >       u32 pin_arr[MAX_PINS_PER_BANK];
-> > +     u32 pull_arr[MAX_PINS_PER_BANK];
-> >       int function;
-> > -     int i, len, pin_count =3D 0;
-> > +     int i, len, pin_count =3D 0, pull_len =3D 0, pull_count =3D 0;
-> > +     int pull_value;
-> >
-> >       if (!dev_read_prop(config, "brcm,pins", &len) || !len ||
-> >           len & 0x3 || dev_read_u32_array(config, "brcm,pins", pin_arr,
-> > @@ -82,8 +145,44 @@ int bcm283x_pinctrl_set_state(struct udevice *dev, =
-struct udevice *config)
-> >               return -EINVAL;
-> >       }
-> >
-> > -     for (i =3D 0; i < pin_count; i++)
-> > +     /* Check if brcm,pull property exists */
-> > +     if (dev_read_prop(config, "brcm,pull", &pull_len) && pull_len > 0=
-) {
-> > +             if (pull_len & 0x3) {
-> > +                     debug("Invalid pull array length for pinconfig %s=
- (%d)\n",
-> > +                           config->name, pull_len);
-> > +                     return -EINVAL;
-> > +             }
-> > +
-> > +             pull_count =3D pull_len / sizeof(u32);
-> > +
-> > +             if (pull_count !=3D 1 && pull_count !=3D pin_count) {
-> > +                     debug("Pull array count (%d) must be 1 or match p=
-in count (%d) for pinconfig %s\n",
-> > +                           pull_count, pin_count, config->name);
-> > +                     return -EINVAL;
-> > +             }
-> > +
-> > +             if (dev_read_u32_array(config, "brcm,pull", pull_arr, pul=
-l_count)) {
-> > +                     debug("Failed reading pull array for pinconfig %s=
-\n", config->name);
-> > +                     return -EINVAL;
-> > +             }
-> > +
-> > +             /* Validate pull values */
-> > +             for (i =3D 0; i < pull_count; i++) {
-> > +                     if (pull_arr[i] > 2) {
-> > +                             debug("Invalid pull value %d for pin %d i=
-n pinconfig %s\n",
-> > +                                   pull_arr[i], pin_arr[i], config->na=
-me);
-> > +                             return -EINVAL;
-> > +                     }
-> > +             }
-> > +     }
-> > +
-> > +     for (i =3D 0; i < pin_count; i++) {
-> >               bcm2835_gpio_set_func_id(dev, pin_arr[i], function);
-> > +             if (pull_count > 0) {
-> > +                     pull_value =3D (pull_count =3D=3D 1) ? pull_arr[0=
-] : pull_arr[i];
-> > +                     bcm283x_gpio_set_pull(dev, pin_arr[i], pull_value=
-);
-> > +             }
-> > +     }
-> >
-> >       return 0;
-> >   }
->
+Specifically, the TI_SYSC driver relies on the 'ti,syscon' support,
+which is used to access system registers for tasks like reset control
+and power management. These operations often involve manipulating
+clock-gating or reset signals managed by the underlying clock hardware.
 
---=20
-EGYM SE, Einsteinstra=C3=9Fe 172, 81677 M=C3=BCnchen
-Gesch=C3=A4ftsf=C3=BChrende Direktoren:=20
-Patrick Meininger, Philipp Roesch-Schlanderer, Florian Sauter
-Gerichtsstand=20
-M=C3=BCnchen | Amtsgericht M=C3=BCnchen HRB 303509=C2=A0|=C2=A0USt.-Id. DE2=
-75313632
+Therefore, to ensure that the necessary register access and clock
+manipulation functions are available for the System Controller
+operations, CLK_TI_CTRL must be selected when TI_SYSC is enabled.
+
+Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+---
+ drivers/bus/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/bus/Kconfig b/drivers/bus/Kconfig
+index a786fe430e4..05492c63bf0 100644
+--- a/drivers/bus/Kconfig
++++ b/drivers/bus/Kconfig
+@@ -15,6 +15,7 @@ config TI_SYSC
+ 	bool "TI sysc interconnect target module driver"
+ 	depends on DM && ARCH_OMAP2PLUS
+ 	select CLK
++	select CLK_TI_CTRL
+ 	help
+ 	  Generic driver for Texas Instruments interconnect target module
+ 	  found on many TI SoCs.
+-- 
+2.34.1
+
