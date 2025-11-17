@@ -4,190 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6050CEACEF
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 16:37:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86176CE8D6B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 16:43:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D99AF83B99;
-	Mon, 17 Nov 2025 17:37:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E05B83B99;
+	Mon, 17 Nov 2025 17:43:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="eodyUWsw";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="NTCtSTRJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BAC383B99; Mon, 17 Nov 2025 17:37:03 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id A833283BF1; Mon, 17 Nov 2025 17:43:39 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8721483A8F
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 17:37:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41C8183A8F
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 17:43:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=3416482c8e=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5AHGTN3n1695375; Mon, 17 Nov 2025 17:36:42 +0100
-Received: from osppr02cu001.outbound.protection.outlook.com
- (mail-norwayeastazon11013033.outbound.protection.outlook.com [40.107.159.33])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4ag6nw85r4-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Mon, 17 Nov 2025 17:36:42 +0100 (CET)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tN9b89LR7uEatFUJZ0x2JhwFYrL4Re+bp+zJ2aOSQIKBSEN71gxrUR4JRjq40hKMNYmhqgL/S8tDX343S0d5CSkf71eZ0Ijq4NT2xBdGLp2G5eIYG4YUzmM0f8Xbl5NNwrYnw5O+FsOA5CIjAZzpI/jYqSS9p0vaRKELBtbzP/NOaEpxZ/dE7PD05u+JOpADAk74Ju3Cs5EQzQJBONagbSIdzn6shDXyD/7eiqlnQaKUCf/Acmv7kyt0dP5xUHKIYxAygfhI2hWJexrhf1+5NWMbJF1oXrwA3IY6Nb+akwjMpG0+0ux94S0GL6uoobNDdSAiWpnJsG3PnPGT1MDEUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ucd8qXGOO2Kd+JLNv2l1GLyfj8D+4UzZLyhuGckBxHs=;
- b=Ezn7yiHIWd8AkB+D82Ofi6g5YSHPAir6IP7SMR1eY6k2rP/5lQx91tvRrbh/EQIlB9i55e+Q/qIBscGWyIGyio1WvsgaYOHzT9MUCPzbIjCNPCgsJEGAZ3ZAf7/TH6Dv4364WS6D6a5zqbz3q3IA+Kdtkv5ZtY7Lf+H0eOk5UnXpLbonBJe3BwwgJdd8pREWMGJX8MZhIhIP6oXHP2GXcHaeLlITSvdIjmminaZzJzUUD5SeecgGuE+xO5GDx2Wah7+9oHr+gUnqSVb5QNfiQOLKTKrdWjA1tQzytOIWkVLF0cSsXLdoiviN2V6VFf/ygGYjX+K04t3jJ6wOx6KRqg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ucd8qXGOO2Kd+JLNv2l1GLyfj8D+4UzZLyhuGckBxHs=;
- b=eodyUWsw3ectxPxkpyPobuZWNYeN5VRXQR0zk5XS3Fcuxm+9LsbViQrY01x0SRusHkKS2royRN5yDFNoDB09BJCanbihZa+Uz4KSFCurq2rolWxYzGLT0P+qjX1dGgGi3zbnz5VmtlXBgit4DG33u4K72FHzeubN6S3nsRiBqwDe1ivvSfGffG8tbJnfx44JnnXiAih0S5WR+i5jPz8DhsfraHEs4Wnj0tWMpD7FBw72kj1b3tkottT4MgbG8/yhXwJFxb3EtH7fAY3the/MxMtEE8EITP8kFeXowruj8DLiG1H3EEPuRPDDRuVWc8Z5RrPVUuUyexqqmHatTnr8uA==
-Received: from CWLP123CA0142.GBRP123.PROD.OUTLOOK.COM (2603:10a6:401:87::34)
- by PA2PR10MB8338.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:415::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Mon, 17 Nov
- 2025 16:36:38 +0000
-Received: from AMS1EPF00000043.eurprd04.prod.outlook.com
- (2603:10a6:401:87:cafe::30) by CWLP123CA0142.outlook.office365.com
- (2603:10a6:401:87::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.22 via Frontend Transport; Mon,
- 17 Nov 2025 16:36:39 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS1EPF00000043.mail.protection.outlook.com (10.167.16.40) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.9 via Frontend Transport; Mon, 17 Nov 2025 16:36:37 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 17 Nov
- 2025 17:37:01 +0100
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 17 Nov
- 2025 17:36:36 +0100
-Message-ID: <71047e69-164e-4c65-9eb7-587de4f147ff@foss.st.com>
-Date: Mon, 17 Nov 2025 17:36:35 +0100
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E537E3F7C1
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 16:43:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1763397815;
+ bh=u/H6W3dzWAKqq5EBgGNoHIHRofM8VSExWL2o4ndUTck=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=NTCtSTRJuvs9hsNY6OoXWQKqVhTVOuUhrJwojJ8jzNAmpq0y4lC+5oy6FFz7RZ1GS
+ zh8KNGsa2ixjAPrBXGY2xyXLG/EzbTV9YHcHrtJl9dK4sWXgHTMEAvhjQzw86YJzMY
+ RP67EyVJ53dYGLalqHzQzVEvXHzTALUVPEO/JPBuubU0EJyVxGhVITjfiraXqg3DFH
+ GAvetoiYuoVOSRTNHHmOw4mZfSQNUigVYCkAQ2CtJz8CMguwqmD+kxCwPSSCaeig2o
+ bcrIhwmVH1XW5ewRZS1uM2gkSzrtYG3qUPR7GMmRaylQszjX1DKVbLvW1cx4aypVfh
+ Ae+Jb92AhmSdamjDCdvI29XuJHYYSRs+iZrMWzdfo8RpegL1u10AYmS9Uk9D8erbKe
+ ass9LudxZgQK86AiK/lIbkHwGKHcYXpBYqsnoNG1foBk0DEnrKfCIQlSd7s4ZCIRQ8
+ FwxO1GWOsWaXk07LOEVlJzeVHTgVyBskkNBMDM9prHmjZnpz78YYEx6rXKvSHGAi0Z
+ mqXJFbbimdDlrEYs4LAgRYNfZBRGhgu5AccGsYe2DpfV8VvKL4A3RX33CfuK0psLLZ
+ NrDD+OjMi0NT9Ii5Ol9EIx74KhDHl9GJITI6jaPArgI9fwNGg3B6wQkx+aHkTNxvpT
+ xsG2ofxTOt7Bsnt9/0YB+J8U=
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-42b3339cab7so3566913f8f.0
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 08:43:35 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763397813; x=1764002613;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=u/H6W3dzWAKqq5EBgGNoHIHRofM8VSExWL2o4ndUTck=;
+ b=BjFpyoIgHVHLvwMFe8osNtY4S9mznbHezOSgRBAuA7EUR0UO4RK4sLuvkcFaPbvgWA
+ 0r37+qt1jRZwo9EsfzTE5OpGAu3+Y2iw8xKSGGqaIRS+jaxkILto78K868YyONunFwnk
+ EeJf2uJI+lOdfUrsAK6/lQSQ2evinRqfcHBud/ikrcHzPpJy+Q4jgHuGCo/m1GOrotJT
+ BFI0ecaBa5Jb5vibKQk0YPze474Uyw2AgwDIYwX4j662c5DMZN7ki34KH6aE9fbo0PRI
+ ZTcvwQjz3EoVXh7mv1QbDJuKvaT+ALD7xxVn9wKlOJ7FlhPdetWb3rpklNFe6hfVWo1N
+ NpTA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU3lkFRAJ9Mc5q0gZ3OOnCaU/f+NKUaPbPDndd6SFMLQJGnjVsOdIPrcpVvQn92w1f3W5CQr1o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw2tFQzpsQkoonOUJB8KyOuOznHy7WCbhBLQRSUubx0LFTISvXk
+ kPU7w8ItQd5o2571WJ7HtPXyP4B1HzRUHU6agWgbKjpx9fQiybF/QivryjMnN0/pyiZIdQ+sxIg
+ n7J4Q7TdE7sg6gnwtrs5wnKCBQgdGOAFS29VmlfI+g3/e1LlfuNhkVcXE03UDgr4izz5Eooo=
+X-Gm-Gg: ASbGncvrmnGZY7wynRhtQXvZUiwoGb8u1meHPQsrgKOd/tPzGBCFvij+tC+NtRzSomv
+ vZVB5TBgB7HfyL/oTUSEdmkM1QZBxjtE8tCZJb/kkwV1X1ol1scDhfpC266eW8QKxj6Tmi0IMS2
+ MnvSvNybS/U72j3LLM8x11RCm+37GdjowIpTKsYcoPVHPgiFXXxv33mnIf/miGJrUKHe5D/tk+s
+ zaA9LYla9ZU9Iy2rkoNq6VNE+4HxwJQsPUcjLik2empsA8wcLNeNjbipcT+pVrh68S3aKAiTwwA
+ vdg6dRXnv51LjE06VizYs4S4kGV0PkYeORL2/DZhRMuGs+95LI4nzTo21HMuwZDrs7nzqZdLrnI
+ OrQKh8aC4sLwHkjPT8oOakZ+2TNfnWfl48Q+vIluJnUqWv1hdyyaDV/aAhc9JZvmIE05Yk89v
+X-Received: by 2002:a05:6000:230d:b0:42b:2e94:5a8f with SMTP id
+ ffacd0b85a97d-42b5939dc13mr11913332f8f.52.1763397812737; 
+ Mon, 17 Nov 2025 08:43:32 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEVZpqhyIapJWWQiVIgUioatARoKl7/jm0CpyJYjpQWg/T2M/wmqkACwY0DpfyQnJyZEBmk/Q==
+X-Received: by 2002:a05:6000:230d:b0:42b:2e94:5a8f with SMTP id
+ ffacd0b85a97d-42b5939dc13mr11913309f8f.52.1763397812327; 
+ Mon, 17 Nov 2025 08:43:32 -0800 (PST)
+Received: from [192.168.103.118]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-42b53f0b894sm27679885f8f.26.2025.11.17.08.43.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Nov 2025 08:43:31 -0800 (PST)
+Message-ID: <15d4a8ae-5fd2-45df-af9d-e879faf6be1f@canonical.com>
+Date: Mon, 17 Nov 2025 17:43:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] clk: scmi: Force call of scmi_clk_get_attribute()
- during probe
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Alice Guo <alice.guo@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, "Valentin
- Caron" <valentin.caron@foss.st.com>, Vinh Nguyen
- <vinh.nguyen.xz@renesas.com>, Casey Connolly <casey.connolly@linaro.org>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Leo Yu-Chi Liang
- <ycliang@andestech.com>, Lukasz Majewski <lukma@denx.de>, Michal Simek
- <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>, Yao Zi
- <ziyao@disroot.org>
-References: <20251114154259.4035206-1-patrice.chotard@foss.st.com>
- <20251114154259.4035206-3-patrice.chotard@foss.st.com>
- <4a71038b-ce5b-4119-9493-4e33642a8528@mailbox.org>
+Subject: Re: [PATCH 1/1] cmd: smbios: correct output for table type 4
+To: Raymond Mao <raymondmaoca@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
+ u-boot@lists.denx.de
+References: <20251116103934.63668-1-heinrich.schuchardt@canonical.com>
+ <CAMDkj5wQ=pRGFrf_S-HPUs9Zd-uWGFyLFDk3S2TRGCCuvJCMgA@mail.gmail.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <4a71038b-ce5b-4119-9493-4e33642a8528@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF00000043:EE_|PA2PR10MB8338:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9e30fff1-c13a-4f3e-6712-08de25f77ac2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|82310400026|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?azYzdVhPeVhWK2xMK0hUekV1UEpvMFpxanFNZGxDSThWRytYK3p0b3FPSkxo?=
- =?utf-8?B?UU9xd1IyYWc1Z1pTc2dNMTQ2eEdGN3M1bEVIMjcvT3N1Q2tzOThMR3dva1dC?=
- =?utf-8?B?OXJGVGxMMEFZaE1najdGbkJGNFFtVU5VN3U3d1VnQllEU0ZncGNkL01FVzBB?=
- =?utf-8?B?ZnZwQ2kyN3RickJpbzQ2WURBY1hUejlJdU1xQmZCS1ZiYWRDcjF6ZmZjMXFl?=
- =?utf-8?B?cnRJUnJ1VHFzQzRMTmJISnU3UWYwMWJxd1ZMcUZmOWVpbGZtR3VRUS9WUDlG?=
- =?utf-8?B?cHpYbWF3R1RZZ0xTVnZ2bUFJdEVWOWFhTGQ5eGpTMkpUUmp1V2QvNXh4YXZH?=
- =?utf-8?B?KzVDVDhiV0RtT2J3Zk16VDYzZ0F3WGh4NVFZeHQ4dmlNdzJVVElKMzVuWGQ2?=
- =?utf-8?B?azNKUXhqeTVTRzRENm1iT3lzN3BrQUxNeU1LZjBHQVgzS2Njc01zY1p1anhY?=
- =?utf-8?B?TDYrYXNZL0wwM3FxQzhORjlkc2o2a3Ird29PZzdVaElTTzZpZkNEOGtSY2w2?=
- =?utf-8?B?eENtZ2ZIcXBtQjIwTlkyeWg5WDBGK1dQbGNndHIzVkM4TDN0clFHcFczYWZR?=
- =?utf-8?B?dFF0SGc5YzJ0dnFZY09xYytiRWo2d0pyYVZDRkpDczlPZmxsQTJSZ0FHMmxz?=
- =?utf-8?B?ZDdsZTFoV1VuZ01SOGUyZ296dHY2eXFBWDVVOUpOcXVzZW43eGRSc1JWaXlB?=
- =?utf-8?B?TysrMUhBcVhQdjB2MTEzTXN4MmRtbEQ3akZEdDBhVmNPQytlU2pBbGRINmc5?=
- =?utf-8?B?RVpWQmoxdlBmYW84QjlSSWY3R1RIdGlVRU5xRzhVYktLZzVXM21zbTZmUUM5?=
- =?utf-8?B?cklsNWE3YXN6cklIMXN0U3lCWHBjN3NZaEdzblFyWU9NazZkejc0NVhqM0Z3?=
- =?utf-8?B?Z0NDY0pLaE5VVjRzcFpnZG9iN2k2dzRJdUhmT0dnNzFaT0RMQUt1UjRxRGFu?=
- =?utf-8?B?WnVObWQrQW9FcXlKUWtOTUoya3lMaDhXMEs5QWNUMkFleHhFbnFRM1ZVQkJP?=
- =?utf-8?B?UUxmWmJJbFpnc2srWXR0RlFSenJERWJkRXRGMVllN2J6TGYySm9yR2owRTdQ?=
- =?utf-8?B?SWxIRnBSUDJHMWRIakc4QldBREhWRHdZTjlYMis3SVEvL3VhTDJxUHdGUm5v?=
- =?utf-8?B?YktNS3JheUZTU1U3OEtNSnN4TE5nRXc3M1VPdm84b0dEN1czcVltR1l5OE5Q?=
- =?utf-8?B?NW5oaUUrWVRTVVlpYm1NOHRSR3FoS1VUaCs1cWJHeUtOQjQ0bkhjZ3dDVUdR?=
- =?utf-8?B?Q3E4Z1l2WHphRmNieFFYTkNFNmZNdE1OaU9OaFhaY0pUem1DOVg2dVVNTGhS?=
- =?utf-8?B?SmVoMFpoeUxGaU44Y1JqbDh5ZytHdjhhT01pQUhmWmMzeE1GQ0ZhNE8yWE9M?=
- =?utf-8?B?WGl2bVgrS0xRaGdRUzJ0ZHdsYVNjYnpYQmRlRnFBSGhEQ090bzR6bTZoRy9K?=
- =?utf-8?B?eEE4bFlFNHRRVjZ4eVhPaGVWRGZ0NDNGbVhUTE83R2gxd1pUanVTOHBmalU2?=
- =?utf-8?B?VlVMTzNVNFRNbDBBZnJUU25uNDl4aVc0S2lNOGlkWDErQU4xUU9lSURoNkVx?=
- =?utf-8?B?NWlNRkEzOGRhNmdqWGovWTgxL2t4RWJiNytwb2hHRVdzYXlPWUNxWFA3Ujlp?=
- =?utf-8?B?R1EwYzRlaXhCZ1RTMDVBeldJUTVzcW5ESUtROG1sMmlMMVAvZ2tLSUNrc2J3?=
- =?utf-8?B?K2U4TEZTaEhlWm1kRzVtcGxrRjlsUnhtc1llT0RlcWs1dUdZK1E2dVQxOVpC?=
- =?utf-8?B?Si80L1J2WmZKaHh0YUJQSVdhTlZpTldsVjVNOXZ5ZWpQNXBKYmtMMm9EUHRj?=
- =?utf-8?B?cXQycW1hRnZRdFpBbkJNRGhZTnBjWVRuOUVkMlRlMUFOUkIvT0tPRWh6MFpa?=
- =?utf-8?B?WjlhSkJTYTVvUytxVkpXQUhxekcrU25JYnhwREs3YmwrYURoT2s1ZmhtRzRj?=
- =?utf-8?B?WSsrT0NuTWhUblN6S21DZnF2VGl2bmpHdTU2cXkyd29pTzZNcVU3cnRGc1Bh?=
- =?utf-8?B?QWZDRTd2eU9MUWhYRktXYnllWW9POVZWUGRZWTdNV200UGZxSFAzTFd1bW02?=
- =?utf-8?B?ZzQ4bElsNmhMVi9BaUg0eXJoUXkvWVNSU3FSUDFadENqUHJQNDIwcmp6Y3Uw?=
- =?utf-8?Q?TOiI=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(82310400026)(376014)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2025 16:36:37.9136 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9e30fff1-c13a-4f3e-6712-08de25f77ac2
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000043.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR10MB8338
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE3MDE0MCBTYWx0ZWRfXyFTyRbH1CjFg
- khnWTed6P9nwv6s2O2HPrUrsf/Ux3fCApCPycXjo7BhAIREIcYLPCMcoDFPp3jbOy4X72GjMv4M
- 5Bv+VbN/NXx5hrFID6W0eeeg0d6vrryfnYNPOeafQxabzzAqrxNLzkZsi/TH6nCF2/LEiB/XKXA
- rDET0ZDw14Zt5FdDsPcQgpYSWqPveSL6jzyXM2+J1oMh5zSh8OA3NvUIdEF6WDx+oAKMWJ0j+Wo
- MJCNaDz8gobAvjzwAO82tcZjpBIkwMbz5FD3VtdSpAb0Y8Kt98Vc6R5AfHA/ISPGWXzFR9QRG1g
- WcgqOP7Yr2k8U7G5LKbP1RUcO73tpf3BaRYlcWF7L3FkRLoa8pijDPorGbXc5Py0AxGTuTIWXZT
- CRjf16rDC5cA4GpLeg3o7ntOMaLtkw==
-X-Authority-Analysis: v=2.4 cv=WPVyn3sR c=1 sm=1 tr=0 ts=691b4f1a cx=c_pps
- a=Kb+jYgIXhKC87qzND7NMaw==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=IkcTkHD0fZMA:10
- a=6UeiqGixMTsA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=3CZomJY1uvxBjMX92_AA:9 a=QEXdDO2ut3YA:10
- a=cPQSjfK2_nFv0Q5t_7PE:22
-X-Proofpoint-GUID: 9t_p8rb072bkwT0uPpZDzJ437_lEVtgX
-X-Proofpoint-ORIG-GUID: 9t_p8rb072bkwT0uPpZDzJ437_lEVtgX
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-17_03,2025-11-13_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- phishscore=0 clxscore=1015 impostorscore=0 adultscore=0 bulkscore=0
- suspectscore=0 malwarescore=0 lowpriorityscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511170140
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAMDkj5wQ=pRGFrf_S-HPUs9Zd-uWGFyLFDk3S2TRGCCuvJCMgA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -204,35 +120,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/17/25 16:48, Raymond Mao wrote:
+> Hi Heinrich,
+> 
+> On Sun, Nov 16, 2025 at 5:39 AM Heinrich Schuchardt 
+> <heinrich.schuchardt@canonical.com 
+> <mailto:heinrich.schuchardt@canonical.com>> wrote:
+> 
+>     In the QFW case the SMBIOS specification version is controlled by QEMU.
+>     Field 'Thread Enable' is not available before SMBIOS v3.6.
+> 
+>     We should not print the core, core enabled, and thread counts twice.
+>     Use the appropriate based on the SMBIOS version.
+>     Use decimal output which is easier to read for humans.
+> 
+>     Signed-off-by: Heinrich Schuchardt
+>     <heinrich.schuchardt@canonical.com
+>     <mailto:heinrich.schuchardt@canonical.com>>
+>     ---
+>       cmd/smbios.c | 21 +++++++++++++++------
+>       1 file changed, 15 insertions(+), 6 deletions(-)
+> 
+>     diff --git a/cmd/smbios.c b/cmd/smbios.c
+>     index 671c14e05b5..f9a352c107d 100644
+>     --- a/cmd/smbios.c
+>     +++ b/cmd/smbios.c
+>     @@ -262,6 +262,8 @@ static const struct str_lookup_table
+>     md_tech_strings[] = {
+>              { SMBIOS_MD_TECH_OPTANE,        "Intel Optane persistent
+>     memory" },
+>       };
+> 
+>     +static u16 smbios_version;
+>     +
+>       /**
+>        * smbios_get_string() - get SMBIOS string from table
+>        *
+>     @@ -504,18 +506,23 @@ static void smbios_print_type4(struct
+>     smbios_type4 *table)
+>              smbios_print_str("Serial Number", table, table->serial_number);
+>              smbios_print_str("Asset Tag", table, table->asset_tag);
+>              smbios_print_str("Part Number", table, table->part_number);
+>     -       printf("\tCore Count: 0x%02x\n", table->core_count);
+>     -       printf("\tCore Enabled: 0x%02x\n", table->core_enabled);
+>     -       printf("\tThread Count: 0x%02x\n", table->thread_count);
+>     +       if (smbios_version < 0x0300) {
+>     +               printf("\tCore Count: %d\n", table->core_count);
+>     +               printf("\tCore Enabled: %d\n", table->core_enabled);
+>     +               printf("\tThread Count: %d\n", table->thread_count);
+>     +       } else {
+>     +               printf("\tCore Count: %d\n", table->core_count2);
+>     +               printf("\tCore Enabled: %d\n", table->core_enabled2);
+>     +               printf("\tThread Count: %d\n", table->thread_count2);
+>     +       }
+> 
+> 
+> I think for ">= 0x0300", both parts are needed.
+> 
+> Below is the description of " Core Count 2" in spec: https:// 
+> www.dmtf.org/sites/default/files/standards/documents/DSP0134_3.8.0.pdf 
+> <https://www.dmtf.org/sites/default/files/standards/documents/ 
+> DSP0134_3.8.0.pdf>
+> Number of Cores per processor socket. Supports core counts >255. If this 
+> field is present, it holds the core count for the processor socket. Core 
+> Count will also hold the core count, except for core counts that are 256 
+> or greater. In that case, Core Count shall be set to FFh and Core Count 
+> 2 will hold the count. See 7.5.6. Legal values: 0000h = unknown 
+> 0001h-00FFh = core counts 1 to 255. Matches Core Count value. 0100h- 
+> FFFEh = Core counts 256 to 65534, respectively. FFFFh = reserved.
+> 
+> Similar for core_enabled2 and thread_count2, they are all extensions 
+> when values above 255.
 
+The descriptions of fields "Core Count 2", "Core Enabled 2", "Thread 
+Count 2" all say: "If this field is present, it holds the ... for the 
+processor socket."
 
-On 11/15/25 00:08, Marek Vasut wrote:
-> On 11/14/25 4:41 PM, Patrice Chotard wrote:
->> Since commit fdb1bffe2827 ("clk: scmi: Postpone clock name resolution"),
->> all clocks which are parent clocks are name "scmi-%zu" which
->> leads to error during their children clocks registration.
->>
->> In order to not cancel boot time optimization done in
->> commit 3547e315c188 ("clk: scmi: Defer issue of SCMI_CLOCK_ATTRIBUTES"),
->> choice has been done to re-introduce scmi_clk_get_attribute() call
->> during scmi_clk_probe() under new CLK_SCMI_FORCE_ATTRIBUTE flag.
->>
->> This restores boot on stm32mp13 and stm32mp2 family boards.
->>
->> Fixes: fdb1bffe2827 ("clk: scmi: Postpone clock name resolution")
-> SCMI spec says that clock IDs have to be monotonic and incrementing, without gaps . This driver registers all SCMI clock for you exactly this way. What exactly is the problem on STM32 ? Are you maybe missing some reparenting somewhere else ? Maybe the clock parent resolution should happen when the clock are first used, just like attributes are now resolved when the clock are first used ?
+So there is no need to look into the old fields "Core Count", "Core 
+Enabled", "Thread Count" for SMBIOS version >= 3.0 and test for 0xff.
 
-Hi Marek
+We should avoid printing duplicate information.
 
-Initially, on STM32 we first registered SCMI clocks with their real names and then we registered all RCC clocks 
-in stm32_rcc_init(). For most of these latter clocks, their parent are SCMI clocks.
+Best regards
 
-After commit fdb1bffe2827 ("clk: scmi: Postpone clock name resolution"), the name of these SCMI "parent" clocks
-becames "scmi-%zu" which makes clk_register() failed as we still try to register RCC clocks using their parent's "real names".
+Heinrich
 
-For example: for STM32MP13, clock "ck_hse" becames "scmi-0", so all clocks which are "ck_hse"'s child can't be registered.
-
-Patrice> 
-> This kind of a workaround with Kconfig symbol is not the right solution.
-
+> 
+> So, if for the consideration of the old versions of spec, the change 
+> should be:
+> ```
+> -       printf("\tCore Count 2: 0x%04x\n", table->core_count2);
+> -       printf("\tCore Enabled 2: 0x%04x\n", table->core_enabled2);
+> -       printf("\tThread Count 2: 0x%04x\n", table->thread_count2);
+> +      if (smbios_version >= 0x0300) {
+> +               printf("\tCore Count 2: %d\n", table->core_count2);
+> +               printf("\tCore Enabled 2: %d\n", table->core_enabled2);
+> +               printf("\tThread Count 2: %d\n", table->thread_count2);
+> +       }
+> ```
+> Moreover, I think the same logic should be done when the table is being 
+> constructed in lib/smbios.c, where the real content of tables is located.
+> 
+> Regards,
+> Raymond
+> 
+>              printf("\tProcessor Characteristics: 0x%04x\n",
+>                     table->processor_characteristics);
+>              smbios_print_lookup_str(processor_family_strings,
+>                                      table->processor_family2,
+>                                      ARRAY_SIZE(processor_family_strings),
+>                                      "Processor Family 2");
+>     -       printf("\tCore Count 2: 0x%04x\n", table->core_count2);
+>     -       printf("\tCore Enabled 2: 0x%04x\n", table->core_enabled2);
+>     -       printf("\tThread Count 2: 0x%04x\n", table->thread_count2);
+>     +       if (smbios_version < 0x0306)
+>     +               return;
+>              printf("\tThread Enabled: 0x%04x\n", table->thread_enabled);
+>       }
+> 
+>     @@ -719,6 +726,8 @@ static int do_smbios(struct cmd_tbl *cmdtp, int
+>     flag, int argc,
+>                      struct smbios3_entry *entry3 = entry;
+> 
+>                      table = (void *)(uintptr_t)entry3-
+>      >struct_table_address;
+>     +               smbios_version = ((u16)entry3->major_ver << 16) +
+>     +                                (u16)entry3->minor_ver;
+>                      snprintf(version, sizeof(version), "%d.%d.%d",
+>                               entry3->major_ver, entry3->minor_ver,
+>     entry3->doc_rev);
+>                      table = (void *)(uintptr_t)entry3-
+>      >struct_table_address;
+>     -- 
+>     2.51.0
+> 
 
