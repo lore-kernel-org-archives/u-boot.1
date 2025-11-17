@@ -4,94 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A6ACEACEF
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 18:40:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1395CE8D6B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 19:43:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FBEB839A1;
-	Mon, 17 Nov 2025 19:40:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 27FE683BDD;
+	Mon, 17 Nov 2025 20:43:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gGeTwPCY";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAB65839D6; Mon, 17 Nov 2025 19:40:33 +0100 (CET)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 95BEB83C19; Mon, 17 Nov 2025 20:43:46 +0100 (CET)
+Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42ad])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 849F983979
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 19:40:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 08BB783B99
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 20:43:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-657534478a0so626776eaf.1
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:40:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763404830; x=1764009630; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=W7je+gMSAU4jlPntQgLA3wkPYQU2cs+oSotqPUCbPoY=;
- b=gGeTwPCYKgmZPWW8okP+ikMHHd4FYnH2a9jzbOMsuz3IX99nuBhWM+/l72PzzK8Sum
- 9JltBe1ChfET7N657QrqY0YQqJrZ/dwfSVEAi2akb68QRE3sErB/3bggKQP2zAuRRriJ
- lZ+0PYx1hp2nrt698qW/PYNWMisXknm1D23KU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763404830; x=1764009630;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=W7je+gMSAU4jlPntQgLA3wkPYQU2cs+oSotqPUCbPoY=;
- b=Aef7V3IxpWGVfmDUpI+VHglmEjNf+kHn2XpEN4wF0l8sdlqNotkP0xuyZ9jTECVYI7
- Oow37tc21GSKWv4JVRrw24PmyySDf53sepE3+yzPVSDJepQ/d3SwiGSZ+xyKg7oEb7ZQ
- wpHf6jPYcxyFrPALyctQ7t03sRqhbhXlvu8vcNt1OI7p6U7ovheUzYmdwVllHaX5Pvdh
- NC/elGPoJnRxK4PNYS2xgsnJ+lwn33ER15zvJG0GrOd6XifB2dzFlKeGtCAkqgD8wea5
- vj/Q169a0aYIuXB221gPNckvJiSIgHE0Fv8Z3xrM4Wk3YwYwuF5hjU1u+zsbxaL/nbG8
- EFcg==
-X-Gm-Message-State: AOJu0YxY/yyz362TL70rUGCwzzVp13rjHAdX4s32r3AiBW3HDnaMNf8l
- pIzc+nVEBGQ9DmmgKJv4vvvhjC/+qmUObq9JfPb8t/f5HtF+6lraMKl3WeAGR6Ihszk=
-X-Gm-Gg: ASbGnctoWzeBZOj69KleAU75O8xjF+jID43jXHo3CXb6+Ol8bri5K+JoJVR/zh22XyQ
- 3u2YSpKXI3wh7XiIigi+kOTw8x6lGH2lVexBSujYK+GoHo5dA5d2pcyz8pETMheMvCSqUhRZyiM
- 0VhpMzxUA/T6kpOwzgeuj7AGzQzERkPyxczLRASGetbecvxSoBgu5ZzM293eruqkXnPT49UOnrY
- CQj5yphLeUQZJ1ii+YWRHHTxobDKSzxEJ8j0ouxcyyFwvywaC9YcgpaIFvRlCMXyxYggBfTgm6f
- Yf8zsUfGbO1xvOwqlISRuqfw8YKV45MsrPkiIXAqW8ryQyeNYjqHazHxdk2WNjyqsuCkU+/chuz
- L4slxzS0Dyo5qazLIW5rdZYe8WTNtb9cRjir4Ec3QFK/u1nSitLH9FPzXRbflEpYis7TKjRcAv7
- Y5ZblwZlASm4zTHoNOMi+3oY6vXAxu9V/gCB08DeIkQX+vGt9QOQ==
-X-Google-Smtp-Source: AGHT+IEKefT7sWqtdw1wysD7nojNlSM/UhofwTrbeOiME/cInJ5zYE7NTUWQ/umkfi66clPzn/T4eA==
-X-Received: by 2002:a05:6820:4b15:b0:657:4e02:34a7 with SMTP id
- 006d021491bc7-6574e023697mr2595316eaf.1.1763404830170; 
- Mon, 17 Nov 2025 10:40:30 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6574484261esm2158625eaf.3.2025.11.17.10.40.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 10:40:29 -0800 (PST)
-Date: Mon, 17 Nov 2025 12:40:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sam Edwards <cfsworks@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 0/3] Synchronize DTC to 1.7.2
-Message-ID: <20251117184027.GN2125796@bill-the-cat>
-References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
- <20251113175700.GM6688@bill-the-cat>
- <63d6a47c-99cc-48d1-9d71-869c58e2eb69@mailbox.org>
- <20251113184917.GN6688@bill-the-cat>
- <71261c83-0a3e-46b6-a0db-d3587a54d71c@mailbox.org>
- <20251116141151.GC2125796@bill-the-cat>
- <11a631a3-644a-4c4f-8b09-7202687a4a90@mailbox.org>
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d9J8H375pzn3s;
+ Mon, 17 Nov 2025 20:43:43 +0100 (CET)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4d9J8D0N4gztn2; Mon, 17 Nov 2025 20:43:39 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH v2 0/4] fit: allow signing with an OpenSSL engine
+Date: Mon, 17 Nov 2025 20:43:28 +0100
+Message-Id: <20251117-binman-engine-v2-0-e053f683c0b8@cherry.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="USKbliA5ZVkQJQ5l"
-Content-Disposition: inline
-In-Reply-To: <11a631a3-644a-4c4f-8b09-7202687a4a90@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/13MywrCMBCF4VcpszaSSdpCXfke0kUuYzMLU0kkW
+ Ere3Vhw4/I/cL4dMiWmDJduh0SFM6+xhTp14IKJCwn2rUFJNaDUUliODxMFxYUjCdL9ZKUap9F
+ LaJ9noju/D+82tw6cX2vaDr7gd/1J+CcVFFI41A7t4I3r9dUFSmk7e4K51voBEAEEqKoAAAA=
+X-Change-ID: 20251030-binman-engine-e349b02696d0
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Aristo Chen <jj251510319013@gmail.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Shiji Yang <yangshiji66@outlook.com>, 
+ Anton Moryakov <ant.v.moryakov@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>, 
+ Bryan Brattlof <bb@ti.com>, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Yannic Moog <y.moog@phytec.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,83 +73,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+I have a couple of products whose U-Boot FIT is signed via a proprietary
+OpenSSL engine which only expects the name of a "slot" to select the key
+to sign data with.
 
---USKbliA5ZVkQJQ5l
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Currently mkimage fit support expects either a key-dir (-k) or a
+key-file (-G) as a toggle for signing, however this doesn't apply to our
+usecase because we use an OpenSSL engine (so no key-file to provide)
+which doesn't mimic a directory layout like key-dir implies. Moreover,
+binman really expects private keys (.key extension) to be available in
+this key-dir directory, which we of course cannot provide.
 
-On Sun, Nov 16, 2025 at 10:48:45PM +0100, Marek Vasut wrote:
-> On 11/16/25 3:11 PM, Tom Rini wrote:
-> > On Sun, Nov 16, 2025 at 12:23:30AM +0100, Marek Vasut wrote:
-> > > On 11/13/25 7:49 PM, Tom Rini wrote:
-> > >=20
-> > > Hello Tom,
-> > >=20
-> > > > > CI does show that no boards went oversize . If there is some grow=
-th on
-> > > > > existing devices, maybe we can shrink that, but maintaining obsol=
-ete DTC
-> > > > > code base going forward and picking random updates into it, that =
-will only
-> > > > > lead to increasing maintenance pain, so I don't want to do that.
-> > > >=20
-> > > > Yeah, it's not an easy spot. But I'm really not happy with growing =
-main
-> > > > U-Boot almost everywhere by 2KiB - 4KiB, and SPL by ~512 bytes or m=
-ore
-> > > > just to keep up. I do see that integratorcp_cm1136 barely grows at =
-all,
-> > > > so maybe there's something that can be done more widely and just wa=
-sn't
-> > > > clear at first. m68k only grows an average of 500 bytes and MIPS is
-> > > > ~1KiB. PowerPC grows a lot. RISC-V a little.
-> > > I suspect this might have to do with DTO support. The imx8mp_dhcom do=
- use
-> > > DTOs and the fdt_overlay.c code grew a lot.
-> > >=20
-> > > I also found out that if I patch out can_assume() and replace it with=
- plain
-> > > 1 , then the size drops by 1-2 kiB, but that's probably not what we w=
-ant to
-> > > do.
-> >=20
-> > I'm not sure, maybe we do? Or maybe we need to look and have *one* place
-> > that confirms correct alignment and either fixes/complains
->=20
-> That's already part of new libfdt, that is also what triggered the various
-> fixes I posted recently:
->=20
-> scripts/dtc/libfdt/fdt.c:       if ((uintptr_t)fdt & 7)
-> scripts/dtc/libfdt/fdt.c:       if ((uintptr_t)fdt & 7)
->=20
-> > , and then
-> > every follow-up location doesn't need to perform that (or possibly many
-> > other as well) validation checks. My impression from when I looked at
-> > the code last, a few year ago, was that it was designed with "validate
-> > with most? every? function" and we would be happy enough with "validate
-> > once".
->=20
-> If you can make that assumption -- that whatever we feed into libfdt is
-> valid -- then we can simply patch out can_assume() .
+This series allows to sign a FIT image with mkimage (and binman) with
+an OpenSSL engine, including PKCS11 and custom engines. If a key-dir
+needs to be passed (which is typical for PKCS11), one can do so by using
+fit,engine-keydir.
 
-Maybe the question I have then is, why isn't can_assume being optimized
-out at compile time, if we set the mask right. Makes me wonder if
-there's not something to fix upstream too. Or maybe we need to change
-the default to higher than 0?
+Note that the public key (.crt extension) still needs to be available if
+one wants to embed it for signature verification (which is probably what
+one wants to do :) ). It is probably possible to use the engine for
+getting the public key instead of storing it on disk, but this needs to
+be added to fdt_add_pubkey and then binman, through a mechanism
+different from fit,engine*.
 
---=20
-Tom
+One issue though is that since binman resolves key paths absolutely and
+that I don't believe an OpenSSL engine would happen to have the exact
+same key_id value than a local absolute path, fit,encrypt and
+fit,engine cannot cohabit. An issue for the next person who wants
+an OpenSSL engine AND encrypt the same FIT image, I don't.
 
---USKbliA5ZVkQJQ5l
-Content-Type: application/pgp-signature; name="signature.asc"
+Note that LibreSSL supports neither engines nor providers as far as I
+could tell (engine support has been explicitly removed).
 
------BEGIN PGP SIGNATURE-----
+Note that OpenSSL engines have been deprecated since 3.0 (Q3-2021),
+however note that OpenSSL 3.5 still seems to support engines (git grep)
+and is EOL end of Q1 2030.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRtsGAAKCRAr4qD1Cr/k
-ClR/AQDqAHzyvLVr51lnGHd36mx5VsgZ1yhhpnnu4E4H+qlVrwEA/NQ8DGHA9X94
-+3cmkhc5zXq3Kbk+dzaJUCTILSZ59Qo=
-=3p98
------END PGP SIGNATURE-----
+I am not entirely sure if the setup for the PKCS11 tests package
+requirements is implemented the proper way (the double try:catch).
 
---USKbliA5ZVkQJQ5l--
++Cc Eddie who's working on OpenSSL provider support, maybe we can work
+together on supporting both engines and providers via the same API we
+expose to the user?
++Cc Wolfgang who seems interested in signing with PKCS11 engine which
+should now be supported.
++Cc Peter who seems interested according to v1
+
+@Wolfgang, key-name-hint will only be a hint to use when verifying (as
+well as being used for the node name), but if you have a
+fit,engine-keydir which contains object= or id= in it, key-name-hint
+won't be passed to your engine.
+
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Changes in v2:
+- added R-b on patch 1,
+- did NOT add T-b and R-B on patch 3 since there's been some rework,
+- added binman test for signing with dummy RSA engine,
+- added binman test for signing with SoftHSMv2 PKCS11 engine,
+- added binman test for signing with SoftHSMv2 PKCS11 engine and
+  specific keydir (which contains an object= to tackle that special
+  case)
+- added dummy RSA engine for binman test,
+- renamed property to fit,engine as my hunch is that it could be used
+  for encrypting as well (from the same engine with the same keydir but
+  likely a different key-name-hint so that a different keypair is used)
+- added fit,engine-keydir to easily support PKCS11 with arguments other
+  than object= taken from key-name-hint,
+- Link to v1: https://patch.msgid.link/20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de
+
+---
+Quentin Schulz (4):
+      fit: support signing with only an engine_id
+      tools: binman: mkimage: add support for passing the engine
+      tools: binman: fit: add support for OpenSSL engines
+      tools: binman: fit: add tests for signing with an OpenSSL engine
+
+ tools/binman/btool/mkimage.py                      |   5 +-
+ tools/binman/btool/softhsm2_util.py                |  21 +++
+ tools/binman/entries.rst                           |  45 ++++-
+ tools/binman/etype/fit.py                          |  61 ++++++-
+ tools/binman/ftest.py                              | 193 +++++++++++++++++++++
+ tools/binman/test/340_dummy-rsa4096.crt            |  31 ++++
+ tools/binman/test/340_fit_signature_engine.dts     |  99 +++++++++++
+ .../test/340_fit_signature_engine_pkcs11.dts       |  99 +++++++++++
+ .../340_fit_signature_engine_pkcs11_object.dts     | 100 +++++++++++
+ tools/binman/test/340_openssl.conf                 |  10 ++
+ tools/binman/test/340_softhsm2.conf                |  16 ++
+ tools/binman/test/Makefile                         |   6 +-
+ tools/binman/test/dummy-rsa-engine.c               | 149 ++++++++++++++++
+ tools/fit_image.c                                  |   3 +-
+ tools/image-host.c                                 |   4 +-
+ 15 files changed, 830 insertions(+), 12 deletions(-)
+---
+base-commit: 089d92860e1ba63c52fba9b2ac8aa42bf03ebc03
+change-id: 20251030-binman-engine-e349b02696d0
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
