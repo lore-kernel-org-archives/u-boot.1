@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDC35CEACEF
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 19:44:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7422BCEACEF
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 19:44:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0B0A83C35;
-	Mon, 17 Nov 2025 20:43:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D942783B9D;
+	Mon, 17 Nov 2025 20:43:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C98B83C2B; Mon, 17 Nov 2025 20:43:48 +0100 (CET)
-Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::8fad])
+ id 14F4183655; Mon, 17 Nov 2025 20:43:50 +0100 (CET)
+Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
+ [45.157.188.11])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74BE283C13
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 20:43:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0587883C19
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 20:43:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d9J8L1RjpzpVs;
- Mon, 17 Nov 2025 20:43:46 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4d9J8M5QwWzmcs;
+ Mon, 17 Nov 2025 20:43:47 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4d9J8J5zyBzsQn; Mon, 17 Nov 2025 20:43:44 +0100 (CET)
+ id 4d9J8L2tdwzsDc; Mon, 17 Nov 2025 20:43:46 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 17 Nov 2025 20:43:30 +0100
-Subject: [PATCH v2 2/4] tools: binman: mkimage: add support for passing the
- engine
+Date: Mon, 17 Nov 2025 20:43:31 +0100
+Subject: [PATCH v2 3/4] tools: binman: fit: add support for OpenSSL engines
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251117-binman-engine-v2-2-e053f683c0b8@cherry.de>
+Message-Id: <20251117-binman-engine-v2-3-e053f683c0b8@cherry.de>
 References: <20251117-binman-engine-v2-0-e053f683c0b8@cherry.de>
 In-Reply-To: <20251117-binman-engine-v2-0-e053f683c0b8@cherry.de>
 To: u-boot@lists.denx.de
@@ -74,46 +73,190 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-mkimage has support for OpenSSL engines but binman currently doesn't for
-direct callers of mkimage (e.g. the fit etype). This prepares for adding
-support for OpenSSL engines for signing elements of a FIT image, which
-will done in the next commit.
+This adds support for using an OpenSSL engine for signing a FIT image.
+To use it, one should set the fit,engine property at the FIT node level
+with the engine to use. This will in turn call mkimage with the -N
+option.
+
+The -k argument to mkimage can be specified via fit,engine-keydir. This
+is especially useful for pkcs11 engine to specify slots, token label,
+etc...
+
+The -k argument to mkimage can be specified by setting fit,engine-keydir
+property, if missing no -k argument will be passed.
+
+As far as I could tell, mkimage encrypts and signs a FIT in one go, thus
+the -k argument applies to both signing and encrypting. Considering we
+reuse the -k argument for two different meanings (info to pass to the
+engine when using an engine otherwise the directory where keys are
+stored), we cannot reasonably encrypt using local keys and signing with
+an engine, hence the enforced check. I believe it should be possible to
+support encrypting and signing with the same engine (using different
+key pairs of course, via different key-name-hint likely), but this is
+left for the next person to implement.
+This is why the property is named fit,engine and not fit,sign-engine.
+Ditto for fit,engine-keydir.
+
+The public key (with .crt extension) is still required if it needs to be
+embedded in the SPL DTB for example. We could probably support
+retrieving the public key from an engine, but this is a change to make
+to fdt_add_pubkey.c.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- tools/binman/btool/mkimage.py | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ tools/binman/entries.rst  | 45 +++++++++++++++++++++++++++++++---
+ tools/binman/etype/fit.py | 61 +++++++++++++++++++++++++++++++++++++++++++----
+ 2 files changed, 99 insertions(+), 7 deletions(-)
 
-diff --git a/tools/binman/btool/mkimage.py b/tools/binman/btool/mkimage.py
-index 23c0a8e490d..1dbd466f438 100644
---- a/tools/binman/btool/mkimage.py
-+++ b/tools/binman/btool/mkimage.py
-@@ -22,7 +22,7 @@ class Bintoolmkimage(bintool.Bintool):
+diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+index 8922d6cd070..fb17157cd79 100644
+--- a/tools/binman/entries.rst
++++ b/tools/binman/entries.rst
+@@ -885,9 +885,10 @@ The top-level 'fit' node supports the following special properties:
  
-     # pylint: disable=R0913
-     def run(self, reset_timestamp=False, output_fname=None, external=False,
--            pad=None, align=None, keys_dir=None):
-+            pad=None, align=None, keys_dir=None, engine=None):
-         """Run mkimage
+     fit,sign
+         Enable signing FIT images via mkimage as described in
+-        verified-boot.rst. If the property is found, the private keys path
+-        is detected among binman include directories and passed to mkimage
+-        via  -k flag. All the keys required for signing FIT must be
++        verified-boot.rst.
++        If the property is found and fit,engine is not set, the private
++        keys path is detected among binman include directories and passed to
++        mkimage via -k flag. All the keys required for signing FIT must be
+         available at time of signing and must be located in single include
+         directory.
  
-         Args:
-@@ -35,6 +35,7 @@ class Bintoolmkimage(bintool.Bintool):
-                 signatures
-             align: Bytes to use for alignment of the FIT and its external data
-             keys_dir: Path to directory containing private and encryption keys
-+            engine: Name of the OpenSSL engine to use
-         """
-         args = []
-         if external:
-@@ -49,6 +50,8 @@ class Bintoolmkimage(bintool.Bintool):
-             args += ['-k', f'{keys_dir}']
-         if output_fname:
-             args += ['-F', output_fname]
-+        if engine:
-+            args += ['-N', engine]
-         return self.run_cmd(*args)
+@@ -898,6 +899,44 @@ The top-level 'fit' node supports the following special properties:
+         required for encrypting the FIT must be available at the time of
+         encrypting and must be located in a single include directory.
  
-     def fetch(self, method):
++        Incompatible with fit,engine.
++
++    fit,engine
++        Indicates the OpenSSL engine to use for signing the FIT image. This
++        is passed to mkimage via the `-N` flag. Example::
++
++            fit,engine = "my-engine";
++
++        A `-k` argument for mkimage may be passed via `fit,engine-keydir`.
++
++        When `fit,engine` is set to `pkcs11`, the value of
++        `fit,engine-keydir` (if present) is concatenated with `;object=` and
++        the value of `key-name-hint`, and passed as-is to the OpenSSL engine
++        API. If the value of `fit,engine-keydir` contains `object=` or
++        `id=`, only the value of `fit,engine-keydir` is passed as-is to the
++        OpenSSL engine API. If no `fit,engine-keydir` is present,
++        `pkcs11:object=` is concatenated with the value of `key-name-hint`,
++        and passed as-is to the OpenSSL engine API.
++
++        For all other values of `fit,engine`, the value of
++        `fit,engine-keydir` (if present) is concatenated with the value of
++        `key-name-hint` and passed as-is to the OpenSSL engine API.
++
++        Depends on fit,sign.
++
++        Incompatible with fit,encrypt.
++
++    fit,engine-keydir
++        Indicates the `-k` argument to pass to mkimage if an OpenSSL engine
++        is to be used for signing the FIT image. Example::
++
++            fit,engine-keydir = "pkcs11:model=xxx;manufacturer=xxx";
++
++        Read `fit,engine` documentation for more info on special cases when
++        using `pkcs11` as engine.
++
++        Depends on fit,engine.
++
+ Substitutions
+ ~~~~~~~~~~~~~
+ 
+diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+index db40479d30e..6547d0314b9 100644
+--- a/tools/binman/etype/fit.py
++++ b/tools/binman/etype/fit.py
+@@ -104,9 +104,10 @@ class Entry_fit(Entry_section):
+ 
+         fit,sign
+             Enable signing FIT images via mkimage as described in
+-            verified-boot.rst. If the property is found, the private keys path
+-            is detected among binman include directories and passed to mkimage
+-            via  -k flag. All the keys required for signing FIT must be
++            verified-boot.rst.
++            If the property is found and fit,engine is not set, the private
++            keys path is detected among binman include directories and passed to
++            mkimage via -k flag. All the keys required for signing FIT must be
+             available at time of signing and must be located in single include
+             directory.
+ 
+@@ -117,6 +118,44 @@ class Entry_fit(Entry_section):
+             required for encrypting the FIT must be available at the time of
+             encrypting and must be located in a single include directory.
+ 
++            Incompatible with fit,engine.
++
++        fit,engine
++            Indicates the OpenSSL engine to use for signing the FIT image. This
++            is passed to mkimage via the `-N` flag. Example::
++
++                fit,engine = "my-engine";
++
++            A `-k` argument for mkimage may be passed via `fit,engine-keydir`.
++
++            When `fit,engine` is set to `pkcs11`, the value of
++            `fit,engine-keydir` (if present) is concatenated with `;object=` and
++            the value of `key-name-hint`, and passed as-is to the OpenSSL engine
++            API. If the value of `fit,engine-keydir` contains `object=` or
++            `id=`, only the value of `fit,engine-keydir` is passed as-is to the
++            OpenSSL engine API. If no `fit,engine-keydir` is present,
++            `pkcs11:object=` is concatenated with the value of `key-name-hint`,
++            and passed as-is to the OpenSSL engine API.
++
++            For all other values of `fit,engine`, the value of
++            `fit,engine-keydir` (if present) is concatenated with the value of
++            `key-name-hint` and passed as-is to the OpenSSL engine API.
++
++            Depends on fit,sign.
++
++            Incompatible with fit,encrypt.
++
++        fit,engine-keydir
++            Indicates the `-k` argument to pass to mkimage if an OpenSSL engine
++            is to be used for signing the FIT image. Example::
++
++                fit,engine-keydir = "pkcs11:model=xxx;manufacturer=xxx";
++
++            Read `fit,engine` documentation for more info on special cases when
++            using `pkcs11` as engine.
++
++            Depends on fit,engine.
++
+     Substitutions
+     ~~~~~~~~~~~~~
+ 
+@@ -620,7 +659,21 @@ class Entry_fit(Entry_section):
+             args.update({'align': fdt_util.fdt32_to_cpu(align.value)})
+         if (self._fit_props.get('fit,sign') is not None or
+             self._fit_props.get('fit,encrypt') is not None):
+-            args.update({'keys_dir': self._get_keys_dir(data)})
++            engine = None
++            if self._fit_props.get('fit,sign') is not None:
++                engine_prop = self._fit_props.get('fit,engine')
++                if engine_prop is not None:
++                    engine = engine_prop.value
++                    args.update({'engine': engine})
++                engine_keydir_prop = self._fit_props.get('fit,engine-keydir')
++                if engine_keydir_prop is not None:
++                    engine_keydir = engine_keydir_prop.value
++                    if engine_keydir:
++                        args.update({'keys_dir': engine_keydir})
++            if engine is None:
++                args.update({'keys_dir': self._get_keys_dir(data)})
++            elif self._fit_props.get('fit,encrypt') is not None:
++                self.Raise('fit,engine currently does not support encryption')
+         if self.mkimage.run(reset_timestamp=True, output_fname=output_fname,
+                             **args) is None:
+             if not self.GetAllowMissing():
 
 -- 
 2.51.1
