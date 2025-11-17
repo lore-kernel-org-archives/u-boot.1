@@ -4,104 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE51ECEACEF
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 14:00:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABDD5CEACEF
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 14:05:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86281839A8;
-	Mon, 17 Nov 2025 15:00:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 01351832AD;
+	Mon, 17 Nov 2025 15:05:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="P8PSlywl";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="QvW49rfF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E07B6839AC; Mon, 17 Nov 2025 14:59:59 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 9122683623; Mon, 17 Nov 2025 15:05:24 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0875839A1
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 14:59:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C000F8051F
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 15:05:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 71EBE3F641
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 13:59:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763387997;
- bh=7K8hSI8LfJk+VjqWMFrG34zkkUqKLOHY6H9bGNE80Eo=;
- h=Message-ID:Date:MIME-Version:To:Cc:From:Subject:Content-Type;
- b=P8PSlywlT/aJuRK3YptWIEKNOyk024PkXcc+QTZi8o0+CsY5WGh01H8xFjmbQDIpE
- Yxsk+TTRkF4mt+I+gBwJbUIQXvx6NvMek898XUbCsC+Hb/jl42JSQvuC1lCgeyNOUr
- hodI9t91zbaS00XyNFUPCkIlQhqJEoYztLGm05r/qpJOZZgOP6ZkNiuA3ftzvpd4h2
- ur/7x4lMMjJVAL/bPPt37irZDoWalj956avO8pQD4cSiijD8M0bccfdyivcoG2pCuv
- Kd6ph6FuUatfUtSgX4abNeIA1ZyWWT4bFSesLJpM3Cs1axblznZ9oEq6NiGHoAsstI
- XLycrSHi5iOr82upVOuHcMDObWgaY4fIsde7HBjshY/MV4iOPH6319x200Lmi/BZ7J
- 9n+0LsaEKiFG0yBE/dKeCRc9Tlgbi4qZ6gmpS2TQp0xmu1gnTBn+Fkt480IRsB1I8o
- oVO2w9qStZlvWa+yKWp123+uMAoUKIsfKoJi9g4zqp7U5quzh8rrXRG4dKkGcy6dPE
- iZfP7FsoF9oBF+75oUGlpXnIik04SieYuV079wRqGMYL0zIb2QMMolomImkD5a96DP
- EyThABfaonQVX8pEU/YS7hbG/GzjfLEXQKD58GPffk8qlwWEYa9/ziNnIMZY8sP5Pq
- SgFrDtaMULBs11eGCXQPMVZU=
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-429c93a28ebso3389164f8f.1
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 05:59:57 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763387997; x=1763992797;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7K8hSI8LfJk+VjqWMFrG34zkkUqKLOHY6H9bGNE80Eo=;
- b=bLjPme/R1EN9yLINfC1xu9hBVmYHNj46Q50jEhvIb0/QZ97Kz3geEm5tEicM/RN3/+
- 8nxqi43x3ufh8BkPGFNGAI3ghDSNwQsKk3uOGibqo9U0rToj9k0/QLctqdtDkVRfcn7X
- vPr3gNLi8GFbOHLUtGVnY3tZvEnCnGxM6CeQu2rvDASHFt4fGo2+9KPwq+MkUZTon1pq
- 9pup1PSP/xtU7W9TXeGuAHcAuH2GWAp3g80eZ8rOnqkKa8aH3bJMJCX5eMa3BIxXpPWw
- stXhXlHv3cnX7uftnqOlKC59HKi7pIpiU04lsIQ+T1z1Es7VsjjmP7gDzXmgFBnmlSTS
- 8CDg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXKMvRG9czrDe0nIv2EHAiq6Ls+geHL+8bs4YwUWQ1sWEsqdKeyB6uWkzJIDxD6VK3jgFYmttw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxlm0cyyZKfrJ34yi34Ic2m/ylyxqNGwTqfQX4FXQNUqnPwDkVT
- pcclRnj9WK38SNIV04jLX5Kqwfu5OFFYxFAq6m6tm9ukbzhs33gZM8DVGYKvbeudX7+Myj1j5OT
- bKvUNOuOGnQcZzfBHGEizOCSc7FDL5d7jnQGCCWXe0h2rSVs1UaRknH+NrkPNcbCfG9OSkJGhQJ
- 70zM5W7Q==
-X-Gm-Gg: ASbGncssAR+/3ftG3XKzSQ8Ukbydqb3eOrkOHvhDuLEsy7TuwVLP2/ON0C5U2gQJFuA
- fygxXB8//bMBo7LgDXsoF/gi7Xl9dh3TVSLUaL/re4lDiRgOkU900+A4TFr1WuR3tqIyqxUk3qm
- 0D2W+1ZjvR/wrSP2Hc34YTGfpgGQdWJzu/ZZc4m3szFe6Iq0x/kidGL3HU9OrUOaZc+PMJcxjXF
- 1c3WqZuv+SZR77y7DcDx12oTAG/PeLu5mhQcZhBG5eC3V1Z2VaMVUkH3RCouArCfzbHgLPs2K1Q
- LkaejS9ANF8a4EVF4PHh/DJA4GuPUmDQkaReH4GukrhNW2nZH+foV0kivrQEgsqxoN31HLSyQOw
- yylPEEpw/cKxmCu4RZJ6gdrNvAotmiBzXupE6k04aH95S8p9ggVEOj4dCoOw6uvZ8ec39FyyxO7
- XYIiAVURM=
-X-Received: by 2002:a05:6000:3110:b0:42b:394a:9e3 with SMTP id
- ffacd0b85a97d-42b593821d8mr10790910f8f.38.1763387996989; 
- Mon, 17 Nov 2025 05:59:56 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGDhJgfa6zeDa6exmfMsXm4FmRpFG7Ql7DqHOjhGKEVF6g2Jp2EjAh9qa27XzcNlEYGJouUQw==
-X-Received: by 2002:a05:6000:3110:b0:42b:394a:9e3 with SMTP id
- ffacd0b85a97d-42b593821d8mr10790882f8f.38.1763387996512; 
- Mon, 17 Nov 2025 05:59:56 -0800 (PST)
-Received: from [192.168.103.118]
- (dynamic-046-114-108-197.46.114.pool.telefonica.de. [46.114.108.197])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42b53e845bdsm25522943f8f.12.2025.11.17.05.59.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Nov 2025 05:59:55 -0800 (PST)
-Message-ID: <9d9357c5-4c09-46a4-bf33-f53399c176f9@canonical.com>
-Date: Mon, 17 Nov 2025 14:59:54 +0100
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 5C8711A1B73;
+ Mon, 17 Nov 2025 14:05:21 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 27AF4606B9;
+ Mon, 17 Nov 2025 14:05:21 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 9709510371D21; Mon, 17 Nov 2025 15:05:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1763388320; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=91FMwVXN1GCSBVxubla7tKmFtjRImYzszCFb1A/Jx68=;
+ b=QvW49rfFTSH8WidnVwUsyyVUsQCkZvMNEF7Zni4Wa8LjSycgOwXVIqPydTaJlcXgNmRWzm
+ TAxjhFtP8cmGCTWiXQ1JVcJRy/P2P/6KDrp8LYLGNwhmoCe0hTPMW8RWLPfR6gbqQdxAlw
+ tdnQqqlE9UgJsyQZUrU8CSPu6RkQEAbITqFlduGoaVSN97AHDdJWBn2zpJumRj/jabox2a
+ jV01jhhJitGN+NAJyE1A+bAet3E7wZy3CLw3oUqAs/P7JcNCes96JJPVv58oNm7YWWETdN
+ gZlJoNdR5Sely1wL/P2ML3T9JW8BiU4dGHNy7j+7E/7HBZ27STVKlvLnUNbAVw==
+Date: Mon, 17 Nov 2025 15:05:18 +0100
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] cmd/extension: avoid NULL pointer dereference
+Message-ID: <20251117150518.7117ca59@kmaincent-XPS-13-7390>
+In-Reply-To: <20251117100001.4a55ff5e@kmaincent-XPS-13-7390>
+References: <20251116114153.118217-1-heinrich.schuchardt@canonical.com>
+ <20251117100001.4a55ff5e@kmaincent-XPS-13-7390>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Hal Feng <hal.feng@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>
-Cc: E Shattow <lucent@gmail.com>, Marek Vasut <marex@denx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [BUG] Broken USB on StarFive VisionFive 2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,88 +75,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Hal, hello Minda,
+On Mon, 17 Nov 2025 10:00:01 +0100
+Kory Maincent <kory.maincent@bootlin.com> wrote:
 
-USB on the StarFive VisionFive 2 is somehow broken.
+> On Sun, 16 Nov 2025 12:41:53 +0100
+> Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+>=20
+> > extension_get_list() will return NULL if there is no extension device.
+> > Check for this situation.
+> >=20
+> > Addresses-Coverity-ID: 638557 - Null pointer dereferences (NULL_RETURNS)
+> > Fixes: 2d12958ee71b ("boot: Remove legacy extension board support")
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com> =
+=20
+>=20
+> Hello Heinrich, I have already sent a fix for this. Sorry I forgot to add=
+ you
+> in Cc.
+> https://patchwork.ozlabs.org/project/uboot/patch/20251112130742.97473-1-k=
+ory.maincent@bootlin.com/
+>=20
+> Your patch is better as it adds a custom log in case of no extension_list.
 
-The `usb start` via preboot results in an error.
-When I stop and restart USB it works.
+We will take your patch. This avoids writing a v2 for mine ;)
+Acked-by: Kory Maincent <kory.maincent@bootlin.com>
 
-I am on origin/master (v2026.01-rc2-41-g69cc92d6869).
+Thank you!
 
-I have a single USB stick plugged in. I tried with different devices.
-
-Best regards
-
-Heinrich
-
-
-starting USB...
-Register 5000420 NbrPorts 5
-Starting the controller
-USB XHCI 1.00
-Adding block device usb_mass_storage.lun0 failed, r = 20
-Bus xhci_pci: 3 USB Device(s) found
-        scanning usb for storage devices... 2 Storage Device(s) found
-Working FDT set to ff718640
-Hit any key to stop autoboot: 0
-StarFive # usb tree
-USB device tree:
-   1  Hub (5 Gb/s, 0mA)
-   |  U-Boot XHCI Host Controller
-   |
-   +-2  Hub (480 Mb/s, 100mA)
-     |   USB2.0 Hub
-     |
-     +-3  Mass Storage (480 Mb/s, 224mA)
-          SanDisk Cruzer Fit 4C530102811224103381
-
-StarFive # part list usb 0
-
-Partition Map for usb device 0  --   Partition Type: DOS
-
-Part    Start Sector    Num Sectors     UUID            Type
-   1     64              4802720         00000000-01     cd
-   2     4802784         14112           00000000-02     ef Boot
-   3     4816896         56672256        00000000-03     83
-StarFive # ls usb 0:2
-WARN endpoint is halted
-WARN endpoint is halted
-Resetting EP 3...
-WARN endpoint is halted
-WARN endpoint is halted
-WARN endpoint is halted
-Resetting EP 3...
-WARN endpoint is halted
-WARN endpoint is halted
-WARN endpoint is halted
-Resetting EP 3...
-WARN endpoint is halted
-WARN endpoint is halted
-WARN endpoint is halted
-Resetting EP 3...
-WARN endpoint is halted
-WARN endpoint is halted
-WARN endpoint is halted
-Resetting EP 3...
-WARN endpoint is halted
-WARN endpoint is halted
-WARN endpoint is halted
-
-0 file(s), 0 dir(s)
-
-StarFive # usb stop
-stopping USB..
-StarFive # usb start
-starting USB...
-Register 5000420 NbrPorts 5
-Starting the controller
-USB XHCI 1.00
-Bus xhci_pci: 3 USB Device(s) found
-        scanning usb for storage devices... 1 Storage Device(s) found
-StarFive # ls usb 0:2
-             EFI/
-
-0 file(s), 1 dir(s)
+>=20
+> > ---
+> >  cmd/extension_board.c | 4 ++++
+> >  1 file changed, 4 insertions(+)
+> >=20
+> > diff --git a/cmd/extension_board.c b/cmd/extension_board.c
+> > index 86e4795ba8a..75358abf666 100644
+> > --- a/cmd/extension_board.c
+> > +++ b/cmd/extension_board.c
+> > @@ -99,6 +99,10 @@ static int do_extension_list(struct cmd_tbl *cmdtp, =
+int
+> > flag, int i =3D 0;
+> > =20
+> >  	extension_list =3D extension_get_list();
+> > +	if (!extension_list) {
+> > +		printf("No extension device\n");
+> > +		return CMD_RET_FAILURE;
+> > +	}
+> >  	if (!alist_get_ptr(extension_list, 0)) {
+> >  		printf("No extension registered - Please run \"extension
+> > scan\"\n"); return CMD_RET_SUCCESS; =20
+>=20
+>=20
+>=20
 
 
+
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
