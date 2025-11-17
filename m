@@ -4,166 +4,176 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A771BCE8D6B
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 15:57:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1DD4CE8D6B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 16:09:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5C3B839D6;
-	Mon, 17 Nov 2025 16:57:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D14483B99;
+	Mon, 17 Nov 2025 17:09:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="FWtmdvHV";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="H+s6T2BN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FA8883AEF; Mon, 17 Nov 2025 16:57:06 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 38BE283BBE; Mon, 17 Nov 2025 17:09:31 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7A1D8399B
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 16:57:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E1B5A83A8F
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 17:09:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wPHFHx00H0RM7SDb4lH40ycby2hP2GVdS7sguczXCYoQAVEvz8/iV7z+WWUMxqFz1G3t1IYjQp9awWfIXrBwQfEexM/Beg/UC0CshLg/fGo3j5kD+tin6CIVhl8I6eFAE26q6VUQYf+dwgNIzqqTZEkJx23K8SeacMp4sxSZ02U77Lx3Zv9a4Zcx2o/qgTHmtKmbxJIulwQFYswCV65Rpi8d+tAULsfvCnz+fgFE88ahH8i0HdJU4i0iHRdQgqX0JvIvifEIKxPXdgqYJByhyh4VLEnR16fGYW7TqMdl7czMRm7yZJ40n55NFCmDMpfDltbDeOftSn8HxJ+xMyoAEQ==
+ b=Gg4cbdCVaLJ8Us4C5OWnhZjzinnBVKHJPvrwTZci6YCZmSULFdO6doYHKXQOVNNG/uwLKPVv1S4Op+AJEqf89d9FHzdy9XkM407j2AOnY3vSwD19LTmOT8pVLpJqGRZkbPIhO0x3sG3leSh0chLBaabP3hnZNH01J0l20084SrOPW6MErRvxCvdncvkASrvlFFjGE8Gxf/oQHR8FI+r1eLTAQ4Z7ZU3+MT2TvNPp6ir6ut3zGD8uyV5EGQ3zFQqhgWKMh6bAj9R3xz7zmWAsj5WZbM/hwjbhFgguuk5k2wY81PYxe88WuMp2DlN4X9Mmi1V62Y354a6vBAuLyLOUrQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5iAhnRare2KSuz9mpY6U66tTgKmizwrniActniFM1ig=;
- b=sHmJr+XTmLw3lnMNne7LPwAk0u2kpIJY2qg2087VApWch029WaeLiu16Cq/1P2hT5iZjAon7FS/G5FzinrT2spSQXI4qRhbj1TezWllkErVsQqkru/xeqAjypw8+hJm6SnHXS3GvczIChdbw/rG6rORxiVJl5jcTJEUlA89y6JBdOdyEDqOUubboWTBYejgM0fmzuAqBcREUwyIPnHJ/WXom2HEpOqtXx2gxG+2sE9GMGUALbGFWL2WKV3P0eh02LEFnrgVT16GczYbGn9/k2i30pR4oKV9VRpjd/SA4xkTIdjvOM868verMOcq3qxvuhiVi7wnrDy0trFS1twjrkw==
+ bh=wQkOhnGaCs3tdLhgjqemDcRxHKQblzagRn3l0jfG2/Y=;
+ b=J8//OC+bsHuKbGLmcv8qCkOz07m1KKjZVQs2xbE4egAbwI7ecvzk7SlvA6W2QV+cIh5VzhWbWmWHqNu2sULA8j9XMuadfE2RhrQvYE09HsRs2wwSdFRYNc6xebVgelau7ykgkD0aB2G0+9OlOurEk37PphLaL87+RS1W7o51nl8Px9ZCqtpItd+F1e+zKncMxr5JYsw5bFfN2T99CMR0uvvAYOezPEZxZge6rILr6i2rn9Wd/aR2GFkwhNF+OyEe3D3Pza8Biw0l5m36mVnUZL15YUZojcW+SPYT2BBSP6LQwbyFQGxbq3tEdYucupi6gSclVImhlB8XpeIV72FRlw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5iAhnRare2KSuz9mpY6U66tTgKmizwrniActniFM1ig=;
- b=FWtmdvHVrLO8xu1y+t1rGdup6bcecwS1Zm5XuEV/WbsbAlJV4DpjBsep3Lj7ioPGuGh0nqInG0Xdqj0/VWhAsyNfHC+JDh3JxyFayGbHUuoVlFcEzXvAtF2MSvq4dzV28ZB/dnFGU3AU6rg0KexHYlmgCSD2spcpb3eP5JLPARw=
+ bh=wQkOhnGaCs3tdLhgjqemDcRxHKQblzagRn3l0jfG2/Y=;
+ b=H+s6T2BNGG/8FlpqbQ2poVg0rYOVZy9mTkfFZwUsbvErDlFe+6Dl1yonKDvGnL5CMujhQBcKaQUDooYRx+PXN8KeEeG6Y0Y/WxgOXbuTm57bpOsqQcOhN43LTVPz3V+UVKsjDo9As/u31UvwhE7Y9h+paqt0Yaebf9MQwJW3Vwk=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AMBPR04MB11812.eurprd04.prod.outlook.com (2603:10a6:20b:6f6::13)
+ by GV1PR04MB10378.eurprd04.prod.outlook.com (2603:10a6:150:1d4::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.16; Mon, 17 Nov
- 2025 15:57:01 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Mon, 17 Nov
+ 2025 16:09:25 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9320.021; Mon, 17 Nov 2025
- 15:57:01 +0000
-Message-ID: <c2b48b27-9d4e-4be8-b94a-4aac7ef922a8@cherry.de>
-Date: Mon, 17 Nov 2025 16:56:59 +0100
+ 16:09:23 +0000
+Message-ID: <6ae23071-0749-4015-969a-036dbd3277b4@cherry.de>
+Date: Mon, 17 Nov 2025 17:09:21 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] Add support for OpenSSL Provider API
-To: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>,
- Tobias Olausson <tobias@eub.se>, Paul HENRYS
- <paul.henrys_ext@softathome.com>, Simon Glass <sjg@chromium.org>,
- Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>, a.fatoum@pengutronix.de,
- mark.kettenis@xs4all.nl
-Cc: u-boot@lists.denx.de
-References: <20251027195834.71109-1-ekovsky@redhat.com>
+Subject: Re: [PATCH 3/3] tools: binman: fit: add support for OpenSSL engines
+To: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>
+Cc: Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ Quentin Schulz <foss+uboot@0leil.net>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass
+ <sjg@chromium.org>, Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Anton Moryakov <ant.v.moryakov@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
+ Bryan Brattlof <bb@ti.com>
+References: <20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de>
+ <20251031-binman-engine-v1-3-c13c1b5dac43@cherry.de>
+ <CALeDE9MYi2+u_ek1Rapmzx2_T9uE_cQcH8paKgxKwZjtGJ2gzg@mail.gmail.com>
+ <DB9PR06MB85123A4CF4B3A698386F9EE9CBCFA@DB9PR06MB8512.eurprd06.prod.outlook.com>
+ <CALeDE9PswgDAG=1Ouy5W02FKZRFskqc3tx967SVms+MTL8Z1Ng@mail.gmail.com>
+ <20251117153834.GJ2125796@bill-the-cat>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251027195834.71109-1-ekovsky@redhat.com>
+In-Reply-To: <20251117153834.GJ2125796@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0182.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ab::13) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: BE1P281CA0020.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:15::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AMBPR04MB11812:EE_
-X-MS-Office365-Filtering-Correlation-Id: 03cee11a-918c-4d22-648b-08de25f1f1d9
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GV1PR04MB10378:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0c36cdfa-a823-45ab-273e-08de25f3ac68
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|7416014|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Tnl5ajhQdzVKQUExKzNLeUxQajlHMkRIN0xYSjAyRnRjVkFkU3ZyWEdpazhH?=
- =?utf-8?B?UG1DU01nRVN0Ym8vZ2hOMDFHekZ3UmNzb1JkRldGaTdYeGVuNlQyeUsxNTBT?=
- =?utf-8?B?Z2ZWVW4wY3lUS05mY1FGTU0rVlhGV1RSeERvWFNvUWN4aXRwTnpFSXJkaG9l?=
- =?utf-8?B?QTNmdVgwZkxpQURqV0VLSmd0WTVKUUhTbUMzMTBXbkJaM05CNFhGc0VpTWF4?=
- =?utf-8?B?RWMzOGFacU1RbW1Makd5OU4wekRwbFpZQU9MeEFlbFdwRlIxU0UzMWdUZlZ2?=
- =?utf-8?B?cEVyM25XRm1WTFFHWk5BUENXM25hM2psSEU3L1N1SjhXdWhuUlZaYkxjL0VX?=
- =?utf-8?B?MEdoUTk3K3gvSWF3Zkhxd01VTmxKT0R4b01uVk1pdVlJUnkzREUxaVlhWGkz?=
- =?utf-8?B?UG1WVzdsREFPbU03b3ZLS1dGN2w0R283aGVFT3BFTis0MVNrNU1TdlRqcUVP?=
- =?utf-8?B?ekgxam9OTVU1SlVacjk5blI4UVJnTHJXZnA5ekIzaTgzRTh3dXpxUnBsS3NZ?=
- =?utf-8?B?MHZBMVFSY214d2IrOFlOWlBuenNiQ0FSRjVEMWF1MlpSbXBkQXVWYlpRaHBk?=
- =?utf-8?B?MW9ZWnkxOWhVMEJqN3BkL0ZvQzFlZmdjdzhOQ2dCeFBrM0pwaExqMDlub1Zo?=
- =?utf-8?B?c3M1RVdRT2xhYmYrRnRWMDJNMWJIUzhVUTJkaEpZWTUxb0dOREVBekwzNktZ?=
- =?utf-8?B?ajFhbW8xVWpiOUZSTG9wb1ZCbFpBT05KSlVPYTNFbDJpMTZzWEFVVHpJY1Np?=
- =?utf-8?B?NzF6WFRxcHYydFo0NlI1UlBMTXkxMFBOTCsraUQxeUxOZ2hmUkY2TGQ4R3Q4?=
- =?utf-8?B?YThTL3Zja3ZWV1duR2N1VGdvNUh3VGRGVnZiaDBpUm01dGE4ZElMZTk3cjRE?=
- =?utf-8?B?dUE3YSttdkUwVzVIVUI4R0RYeWM2ZGxLRnZ5azViY1Q0U05icXU3bitDY0ZW?=
- =?utf-8?B?alNXcncyb1F2bC96b3hKaExEdnJ0YlNDZVk4OERUQWR2TGJXNjEvNE9yNFZO?=
- =?utf-8?B?aGZpWWowKytsdXRjempleEFDWXFYU1dBdmlBT0s2WlRaNGxZNmo3cE9oYmhN?=
- =?utf-8?B?UFdydHZQTTY4MGJ1Tk16UW5Lc2ZrMnR4Y3plR0V4ZCtwOUVqdWJoZnJwbUMy?=
- =?utf-8?B?Wjkvd2NteGE5RkRLUjJQT0Z2TWpvMHVrVjIwZ0J4RWRTLzdoc2QwdTZuZHJn?=
- =?utf-8?B?QU1aZzcwMit3YTRuTWRrY1ZkVTREc2F1dVpPMUxkaE1uVEk0MWRsZ2pQMERH?=
- =?utf-8?B?VWVKeS9yTlVqV2srNVUyTCtWV0tmVHlKODJUc2srbERKbVhoL2VOSnpLRGV0?=
- =?utf-8?B?ZjNiNUxXSk9Gby9HVTdYeURLQTFIb3BySzZsY0tCTzhLdjdUTTErT2ZiV1Jv?=
- =?utf-8?B?Vml6UHlCem56blp1NU4zOVhhN3JUd2tVZE5GWnBMbXI2SzlybU5TWC85d21G?=
- =?utf-8?B?OXJQR0g5WmY5dW44bHhLQ0d2VzM5L21QajQza01UN0tTWUlEZ1lZd011QVo4?=
- =?utf-8?B?OURVRHFhNmV0S3g3MXgyVGM3T3o0Vy8zWklIclVBT2tQVXVUb3lzVUQ3Nm9L?=
- =?utf-8?B?VWZMSWlSYUhtZnA2V3lpV2JDRG9WZ2NaL1dSN3g5RnZyUXN2TlZLVEJGNGNt?=
- =?utf-8?B?TytFRlM2TWxjV2ZZdmRyZDZxUEo4VG51OVdmUHhmQStuMjJFVDdFZ1MxYkZZ?=
- =?utf-8?B?NTR0ZElJdnB2dzZUYWljOEVGZ0hJWUlIY05jR0llNzVYWVVZemFzdmVGNU16?=
- =?utf-8?B?bk5PdnJXdUhvT1czM1kycFlCS3RFeEh0WXM2bzZQT1Q0RmVtT3dWeEwzR3Bp?=
- =?utf-8?B?R0lkMndwUDUvWHB1WHl5U1JrbmtUTitlRWdjbjg2VkViM3ZiMXJWTWc0em5s?=
- =?utf-8?B?WXoyTXkvZitmeXc3Yzc2TkFIbDhzTVJIYjFocHBFdHpTWnc9PQ==?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?OG10ZEFIYlVBSnExNWVmMGZma0sySWVzK1d2N0tqVUJaUzdnWkhxOHpqQUlr?=
+ =?utf-8?B?U3ljMnY2cTBHcGYvQ0gwMURSYmtjemNmUmMrQ0NuSkQ3NEFsZVJZTFViT0d5?=
+ =?utf-8?B?aXZ0b1VSU3BHVFBDTmdxY0dwMUh0Z3JOclpZbGw1V2pBM1lNcnI2eWp1UFp4?=
+ =?utf-8?B?WVNWTUF2MU1rK2NTY2RPaTJrdXNaNEtvNjVwNHUwcFBHUGI4RXFkUll2c3c3?=
+ =?utf-8?B?K0xTcVJvWGp1WTFNQlBNY0tsNUZ4OXg1SjJEbytzVFlxdXZ5RnNDVEE3azFu?=
+ =?utf-8?B?NVI5L2FIQUthUHlwUHFZdElYRzR1MitZMjRTVjFmM0NvVEdjZU00QUpSTm1J?=
+ =?utf-8?B?Q2JYM3ljSFk0UVJGNHNjcmgzNGxlZVU3a2N2V2lJNlZ2aTJzNmhGaUxyUjhl?=
+ =?utf-8?B?Ny8wN2NnUzFRTk1qck1PVi80c2RsSytNZ2JJclVDTm5ZYmxLL1M4NUw4UkRx?=
+ =?utf-8?B?OWpVRGtDMzVNSXIwM0g3TlVTOHI2bWdTUmNFME51OGFOQ0VXV1orNnNpSGdm?=
+ =?utf-8?B?RUgrSzh5T1k0ZFduNUFIbU9idlN4cUkxbmFoZ0N5cUdxdzZ2RWFhejRCTFhX?=
+ =?utf-8?B?OHNZbFdhZTQvdXNEc2daUnVZM05aRUpxNUo2LzhCNEhMazlXRWkzOW14ZnQ4?=
+ =?utf-8?B?eDdHdVdSOTRFdzI0ajI4RG1VZ2lVRU50Q1E2bk5peWN1RUlGUXU4bHNvQjVE?=
+ =?utf-8?B?T3R0cEpGMEtTS01MVlUyM1RLcWI1cjhWWU5nTzVXeHFjMFpQdFdycmRhS3cz?=
+ =?utf-8?B?YndqNjQzc09nc1Q0dDk5aUlpKzFnUjFqbm9PeTBpL3dqZWZyWE5xb0pST2t2?=
+ =?utf-8?B?d2M2d2lEODB0YlNVaURQZytheVlXeXdNRkdNZlhXQkNFbDNmZE55cmdyTkRy?=
+ =?utf-8?B?cmRDTWgyL3FCNXRXUzl0Q1ltdWlSSVc1ZE5XM1VWZU5xTXdBT05NNnNjTU01?=
+ =?utf-8?B?ZS8zc3ZMenVpcFgySUEyamRkaXM5TG9lcS8rRWZ0S3daRlM1QWZvUWtjQjVk?=
+ =?utf-8?B?NC9aNWVVZjNTV2QvSXc4KzVFV1lyc2RsaDNjTzlaZDFyd2QvTnVrZHlDSFBZ?=
+ =?utf-8?B?YWJmMkhqSGtXalJlNklQSFdJSDNJQWdmVm05N2ZrNlM3WnV4T3RsQ0UyUmlk?=
+ =?utf-8?B?NHVWWDFSZGdSODR3dnNvTm5zNU1nYS94eDZtWEgwOEg1c3Q4YXJkU1oreFpP?=
+ =?utf-8?B?bForc2tsYWhwVDRxQTR4SnRCbjJqclNZMUxVM0M1L1lucUdkMDNtVE5NMnh3?=
+ =?utf-8?B?dVhkV1A3alVFeXBjdVgvUm8yU2lYam0wTUZzT2dMRXl1cUxvVm9jeU4weTdZ?=
+ =?utf-8?B?T2VtN3gvaW1ObzBVU3cyK2RNUTgvclI5RzBBUEFFL0FuVGlyV041dWZtMFp6?=
+ =?utf-8?B?ZytEZ2hGVkk4RWpPSDhMZ2s2U3FmK3F2UGtsdUl2dHlqNWYxNXdDVzdiRTlw?=
+ =?utf-8?B?RGo1UHZEa0dLYzJrZ1BuaDJVT1hFOEM5MWRJV1p2UjZDVDdnMFJBekIvNEQ1?=
+ =?utf-8?B?anZoVXIxZzJ6bExyTkljaWQ1MXpHUngyV2dRcVZwN3hoQWoxbEQwM2txWHJn?=
+ =?utf-8?B?aHg1WG95eUVNUkErcUpIQ0V5WEp3d1cxWHNjeTUzOExEVzNkZFdZR09pTkFi?=
+ =?utf-8?B?aDgvNi91ODNCQUV6d1p6MXpTTW5LOHlXRlhTdFNGYnBQb1lrZVN3OW1MdFlm?=
+ =?utf-8?B?dlpaQmkrN0RVdW8wTlFVTFQ2bklYS1Axd0I4c0kyY0w2c3lhVDJtV0c2NzJN?=
+ =?utf-8?B?dHZja1MySHhaVnRZZytjNi8xeTR3bjhLZU9LODU5cXNzalV2V2I2UlVzY2ZW?=
+ =?utf-8?B?alNEbGZOa3BFYVBjR2tqZ3ZKWXE4Tk82d05PcVRYVGc2MEZoSllHNitsd0tn?=
+ =?utf-8?B?SVh4QTBzZUhkTHdtdE8ra1FYSGErS3RMNFdqd3MrNXczdHNjdlp3VHpIdVha?=
+ =?utf-8?B?YXVYQVlrbFdRNER5VHFxUWdnd0grak5vZGcwRUVueldlK282RC9zL1c2bGE4?=
+ =?utf-8?B?dm5hRWVUTzRBPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(7416014)(376014)(7053199007); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(376014)(7416014)(366016)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZDFLWjBEdy9iTXlMc2hpWnQvYURWUDg3MXlKVVF2Y2Rqd2M1YjFtc29aMllH?=
- =?utf-8?B?NzJLUGl6ZVFUcnFkZ3FBWDdRSlFnb2wzN2Q1cGVIeXp0OTJtQkVXbXAyZnNR?=
- =?utf-8?B?ZjEzZC9ZdWF0VkNpMFQrSWZUaWxXbVNyd0ZINzd2eGdjUTJBbUFicEVjT1F5?=
- =?utf-8?B?d2RQbWRQWGk5R2R0aUtIUzRjRVcrRnRaZ1ZrK01vc3dJMXQrRDNUdC9Ib1Nr?=
- =?utf-8?B?Qld1QWZQa1VJS0M0eEJPa0l0SmM2QXp2K3N3eFIyR2t4eU1uVnZCZFE2L3ZG?=
- =?utf-8?B?SzlPRGZXNy9nTkpMWWl5MlkwYWdSSC9aNkcwWHNYMmpycWpUdG9hekN6WVNL?=
- =?utf-8?B?NkUwb1psOXAvVWhFN3JycHhQeTQvKzhHUGNKbzE5SE9QSG1ZUDA2UXhxK3hY?=
- =?utf-8?B?OHpUWHR6Q01MZjJOOFUwMG1scWFEVXByMlpYb3BaK3FuUWdRcXlsazhCa2RJ?=
- =?utf-8?B?ZGhaK1ZkZ282c3NRS3g5RjdzS3BUWTRpQWRRdUZ2eUptYk4wcjhTTzEwRHpC?=
- =?utf-8?B?RHoraW9QclhDdHEwR1NIdjF5WXhHZzdLY0JwbUlYMlFOTVJJUVl6a1p5Wm04?=
- =?utf-8?B?ckV2djR3Z04raUZRSmJIVGtuQkg4N0tuTkMzRHYvUDFIa2gyYTBLOGczSjBK?=
- =?utf-8?B?R29xdFFVanNVTXlHQ0s1TGNPUGJBNStiZ2RHRWZEUjNMbmpTYlhubFArWGxS?=
- =?utf-8?B?M1Vyc2cyZWpaUTlpN2dsSVowOEMzZEZUUVhRUEx2KytiV2ZnU0FDdVkxN2NW?=
- =?utf-8?B?dnF2aGlqQXlQYnM5Y01GZVNpUFdCNHdnRVRvbENERCsyWmFFbktFYm56d2lP?=
- =?utf-8?B?YWNxWGhLemJjbU5ZWGVPajJEYnhoNUxjd2JKYzBZSCtsdGJreWJNKzM2NXNE?=
- =?utf-8?B?NU9aK2FzeUhpeWl1OFVVQ1p4VXc3RkVoUlVpTzIrbEV0bVJQK3g0NG5OUGxY?=
- =?utf-8?B?djBFZmZodHdjUVJrMnRCY0ZuMVRQRlhJOU5CVXFpdXRpNHN1SjJDSXpZeFc4?=
- =?utf-8?B?ZXhQL0toZ2NCdXJVeUJnUWxvVzdMTTdScnlRU21jcWNHK2RqVGNPNjB3V2JZ?=
- =?utf-8?B?NW44ZGZmVVYwbHVWdUQxdHg0bjYrbEJpRk5wS0RBcEVJTlZjdTJhTHJhbjJu?=
- =?utf-8?B?bGVRNm1QWlBEaGxDM3ZTZkZaMk9Ndll1WnBCU1ZXTVc0Q2Y0TXN1eTl0TEVn?=
- =?utf-8?B?Z21JbGQ3ei9VM0M1QVNhVWZJbHdZUGpJeVRaMGJCNW0zNXpIT1FURk1sbnlN?=
- =?utf-8?B?WThkWXhNVFBhZ1VRVzhSMGFVNklDOFYyaWpYRUhlVHIyUExkSkVmakcyNm1p?=
- =?utf-8?B?MEJKeW1neTNXdVh3UGNoc1QwWWVSSnV0dlpvSGJNZUN6RVBtU0M0QzFGV2Vx?=
- =?utf-8?B?Vjc2cENucHlLaG1QWXUyU0EzMDFNY2wxV2gvdEYvOHp0bWZXUjVZNDJRMmM4?=
- =?utf-8?B?T1ViSjNGM1RoTFlHdDh0RzRqTGY5VVErUWdTZWVuUnQxbC84dkdqNG9VVC9U?=
- =?utf-8?B?R3BVVktWYUw2Mko4NVE5WjRyc09FWmFYU0RQbjBPZjZWdmszUGQvWnNPT1Fs?=
- =?utf-8?B?QzB4eTVqdFc1TnVBajlEVjFQb1Bvb29FUWEzSDI5cjZyZDBRRC9SRVJhVWZ4?=
- =?utf-8?B?eEhPbUNReXJsWFVHSjJhT1BQRkxUcDUzY0F1Q1lhb2NsdERJaHRFcFJ6M0hS?=
- =?utf-8?B?MytONEZVNy9SSE9UR05CaXpPekdGYS9NZW5HQ20rMWxHVEp6dlhXeEk4L21y?=
- =?utf-8?B?RDhMSEZZaFo0MGlBeW4yMnhJOVJxeFlERHNJY2lpYXdCVGVmb3dwQkNvOW03?=
- =?utf-8?B?MHJIQVNweUpDUHhCSllrV3loWXJXcFBUWFlXa0lXVmFGbzhjY213SDJJeFEz?=
- =?utf-8?B?Um1jeW9Jd1dhMEFvOTVLaWE2WDhUQUdUY0xNckduK1Y1L2Z6SWE5ZjVBdHdh?=
- =?utf-8?B?VCtHaFJEL3d3Yzh5NGlNbnNrR1JSTnA0NHVrZnkvY3JDV2xHamVXVW5CY0ZX?=
- =?utf-8?B?WHF6aXROSGNRYWpXL3NHOVMycTc2NWNNeUNBWlIxRzVSeGJtWFBrWTE5YW0z?=
- =?utf-8?B?dXFxcVA3cUY4MGFNYWpTc09CMXN2dFVwZll3NjNsWTdYczRWSnEvUzZhR0t3?=
- =?utf-8?B?MkgrSDFtMUtLZDZSNlFWVGlxelpHZE9PM1pmVW85QnJlOGpNWkN0clVBcFRt?=
- =?utf-8?B?Y3c9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZEdVQkNiMkhCT3FhWnNWajYxbm5reC9GTlJ5Ymd2QnZoSHM5eDJCbU13Y1hJ?=
+ =?utf-8?B?NHlLK3dqK2Y4U2wyM3llUWJnQjN6dWRxRzNRM1VWc3lWNUVRWlhIRnNOSnNK?=
+ =?utf-8?B?a0NESFhUbHRjc0N5UUhYRHU5M3A4blhsajRQRUIreWZMZFVNWldNaXQ4ekpu?=
+ =?utf-8?B?aEEwbzJhb0srQ0x4cDg1aWd3akVsRERmL3BKdTI4dWxzeEJLR2RVWnJ0NklR?=
+ =?utf-8?B?OHczejRhYTFnSFJ4QTZaUG9ON0xmSDZZUHd2RWk0ZFl0d2pUMFdlMzJXZDV3?=
+ =?utf-8?B?cXRRdlVIUFBsOUYwL0l6YWZOMmJqSlcrMEYrWFhvcVB4SUsxWFptalBzNE40?=
+ =?utf-8?B?bVovcHVjUlAyaU91TGIvQ3lna3V6aXdCdnh2TFg2OUV3TkFyVkZoaTlxVE5i?=
+ =?utf-8?B?cFl0b2pZdlczaVJoZTA4TW9vcUE1UHJteC9iMkZxSEc5bVRZOExXNzZENVJu?=
+ =?utf-8?B?QTNoTFgrcE4wWWtZQUJoaVI5ZzMxZElLb3k5Mm4rTDU3NzA1bkNVM2Racysr?=
+ =?utf-8?B?ZlF5NmR3UVdTOEo3RGErOEJEWkx0aUVTeTQzdzZJSmdxWGoxbWtKK1NYUFhk?=
+ =?utf-8?B?dUlxN0tyNG1lSmI2RGpLMVNKQzB1bEg1WHlSSjZuL2ExZDJjbzFpa0FvS1V3?=
+ =?utf-8?B?N2ZsYkQ5TTZOZk9RT1hMYWE1KzlxZ2EzSWdjLy8xRnhhOEs4SXc3eFFqQ0pi?=
+ =?utf-8?B?NVdEalkrWVpYZFp3bEMraEJOb0c2SjZWWDlpTEYzSXFlN3Q4blRJT3hZMEhr?=
+ =?utf-8?B?ak5HZ0I1OHdQN2h0SVNkOUlObzRkQkk5WnplM05KZmpkakFRc29HQ2I5Mnhj?=
+ =?utf-8?B?Tlk4VWRHTmZaOUUweEpaSG9uTlM3M200RTRYRXJFbVFIL3RvSklZa3cyRVdX?=
+ =?utf-8?B?a3liWlRIanVMekpYQ1gzSEFlMWZReVlUamhwSEx0MGpCOWZHemJXeVdVUzN6?=
+ =?utf-8?B?NUh0RGRhMG5weFZKb1BnamhFNmZFZkxldWdoaVhDbWozRGJkMlFFUkduYWRt?=
+ =?utf-8?B?aGpCc3Q3cDdYVHc1U0Z5Z0dWQklaK0JCOFNpay9pNFljL2lrZ3pJK2tZaE05?=
+ =?utf-8?B?eEZYbitQcURjbXZhZ1BjVVdmdzgwYVJXd3dUMDEwMmVyNVQ3YnNWUWY3UCtD?=
+ =?utf-8?B?all1WTVHTVZ2cVlwUU5aMzUrOUUyNmgzM3dnK3FsSDRzRFhBT09mSDVPb01J?=
+ =?utf-8?B?WnVVUjZ3WDA1MFBzT3doVERjSnNmMTd0ZzZ6SS9yNlJqazEyZUwrUHhWdm9M?=
+ =?utf-8?B?R0tETW16ZjFLaktsYkkraERGVm9SRjN3L2c4T1d2cUpPV0hhRkQ4ZEpQbkJm?=
+ =?utf-8?B?clVHUm1hK2lPbHMvUHV3RXVxdmt1bW41WlpWVy9HMy8weDlOZUpCUzZWSXgr?=
+ =?utf-8?B?ek5tV0tYTjZvUUNYT1pmQzY3TnVFOGwydGhSOUlxZFlpOU1YaU01TVpLRDRz?=
+ =?utf-8?B?MVJaSkE1TGhqZjhCek11dmNTNUd1QnRTcWUyOEdSWGw0NTVlVDF2R3pOWVBF?=
+ =?utf-8?B?SG1aSDNPejUvTWI3dWdzTUhVSGVDTjV3cjA1TVQzZUVyZkNGUVJVak81UnNy?=
+ =?utf-8?B?WGlhWkEyNnJXL1psTUwyWFcrT0xCTGR1RjJld05jN1dIelFoV2FsY05HVW43?=
+ =?utf-8?B?MEg4S3J0b1oyenVFTWJYcnNyckYvS3VRa0dZM21Yb1hFcEhPMEwzYlZ0Y2R0?=
+ =?utf-8?B?ZmJMQTZseWk0QUNzbWI1d0RPK2I5alNieDd1NTBXZ055cUU4ZHlkdlhPeG4x?=
+ =?utf-8?B?M1RBR3A3MVRpdmlrTytuYUVXeVhqaEpzVXBxRzFMOHRtM0J4dStnMDhpSXNK?=
+ =?utf-8?B?UWtxZ2lDRWdNYTJib2pXRkliN1EyT0RnT1VhTHZubWtFR3djR1VCYVU2cVox?=
+ =?utf-8?B?eWpQckdYN05pOSt0SW9xZSthYTVIeWMwdzg0NlJNRldsRGdEaHFnVTl4SVRv?=
+ =?utf-8?B?TStZTWhCVTBhMlU4Y253S3FSZmtEZXF6V3NBR2pBYnZHVlZZNmlhQ0NSd0Ir?=
+ =?utf-8?B?ckZueDVBMkd6U3VRUUZvR0JOMHdSNWlQVWtZdUNOVFJBRWZHZnhpaXpoMzdL?=
+ =?utf-8?B?VTlMbFRUeThLUDJVd2wyTm95T0loaHZ1NDRRbk41VGFKd09yRjNYTVBGUmtM?=
+ =?utf-8?B?YTQ2d0t4dXdlNTVsaXpWL2REdXZsTEc1ekhpaGZOQ0NzRXY3VVd3TXoxb1VJ?=
+ =?utf-8?B?OHc9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 03cee11a-918c-4d22-648b-08de25f1f1d9
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0c36cdfa-a823-45ab-273e-08de25f3ac68
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2025 15:57:01.1167 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2025 16:09:23.5880 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QmBWtboV7WcqpHQA4psG1uThm1Sv9x70wMSHqckzE0YVrcFW/+kWGj/gjJXG4x9jzmGyrTpjqyMHwwh/sZ0emx+grEmFymd86r2lPROcN40=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR04MB11812
+X-MS-Exchange-CrossTenant-UserPrincipalName: DxP8PdF7qQ6rErdP/UYLukB9wsjJgeTem5rnD144KRBuaJ80uaZuPdvTt8nKISRrE8+4Tv6k4ZIM874pBhwS8rMmNsuPKk73PLtiQJKVVV0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10378
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,141 +190,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Eddie,
+Hi Tom, Peter, Wolfgang,
 
-On 10/27/25 8:58 PM, Eddie Kovsky wrote:
-> [You don't often get email from ekovsky@redhat.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+On 11/17/25 4:38 PM, Tom Rini wrote:
+> On Mon, Nov 17, 2025 at 03:18:08PM +0000, Peter Robinson wrote:
+>> On Tue, 11 Nov 2025 at 10:14, Wolfgang Wallner
+>> <wolfgang.wallner@br-automation.com> wrote:
+>>>
+>>> Hi Peter,
+>>>
+>>>>> This adds support for using an OpenSSL engine for signing a FIT image.
+>>>>> To use it, one should set the fit,sign-engine property at the FIT node
+>>>>> level with the engine to use. This will in turn call mkimage with the -N
+>>>>> option.
+>>>>
+>>>> Just to be aware this should likely be a OpenSSL provider, engines in
+>>>> OpenSSL are deprecated and due to be removed in 4.0. A lot of distros
+>>>> are already dropping support for engines. There's a patch [1] adding
+>>>> support for Providers support to U-Boot, I suspect we shouldn't be
+>>>> adding more deps on the Engine support. OpenSSL 4 is due in March.
+>>>
+>>> I'm aware that the engine API is deprecated in OpenSSL, and that the provider
+>>> API is the way to go forward.
+>>>
+>>> But the PKI provider of my employer currently only provides a PKCS#11 library
+>>> with an engine API, and I'm not aware of any plans yet if/when they will
+>>> be supporting the provider API.
+>>>
+>>> So for the transition period it would be nice to keep the engine API around as
+>>> such use cases still depend on it.
+>>
+>> my comment wasn't so much about removing engine support but rather
+>> having parity with the newer version so that when users upgrade they
+>> don't end up being stuck with broken functionality.
 > 
-> The Engine API has been deprecated since the release of OpenSSL 3.0. End
-> users have been advised to migrate to the new Provider interface.
-> Several distributions have already removed support for engines, which is
-> preventing U-Boot from being compiled in those environments.
-> 
-
-Which ones? How do I reproduce?
-
-> The Kconfig option OPENSSL_NO_DEPRECATED introduces support for the
-
-Please consider renaming this, OpenSSL itself uses OPENSSL_NO_DEPRECATED 
-constants for many things. I would recommend simply renaming to 
-OPENSSL_NO_ENGINE which is also the symbol OpenSSL is using. If there 
-comes a time we have more OPENSSL_NO_ options, we can always have a 
-"virtual" symbol called OPENSSL_NO_DEPRECATED which would select them 
-all if one wanted for example.
-
-> Provider API while continuing to use the existing Engine API on distros
-> shipping older releases of OpenSSL.
-> 
-
-One can use org.openssl.engine: as prefix for provider arguments when 
-one wants to use an engine still.
-
-> This is based on similar work contributed by Jan Stancek updating Linux
-> to use the Provider interface.
-> 
->      commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
->      Author: Jan Stancek <jstancek@redhat.com>
->      Date:   Fri Sep 20 19:52:48 2024 +0300
-> 
->          sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
-> 
-> The changes have been tested with the FIT signature verification vboot
-> tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
-> Engine library installed and with the Provider API.
+> Yes and I think an unfortunate part of the problem here is that it seems
+> like the hardware signing vendors haven't committed to a strategy yet as
+> it's multiple reports of "my vendor has no plans yet". So we'll need to
+> have plans to support both for some time is all.
 > 
 
-Are there actually tests using an OpenSSL engine? Because otherwise it's 
-simply checking that local keys are still working... which isn't that 
-much different from what we currently have with engines when not using 
-engines.
+And considering 3.5 release that still supports engines is LTS until 
+2030, there's sadly still time before the end of the world for those 
+vendors :)
 
-I'm implementing FIT images signing with OpenSSL engines, and it'd be 
-nice if we could have something that doesn't require changes to support 
-providers (or if it does, not in a confusing manner for example).
+I also checked LibreSSL and they got rid of engines and do not support 
+providers as far as I could tell (which is extrapolated from a grep 
+through the code base). I do not know the reason. The API still exists 
+but does nothing (or errors out). c.f. 
+https://github.com/libressl/portable/blob/000396d2014eb8e961b674000365f0d4e1385022/ChangeLog#L527-L529
 
-https://lore.kernel.org/u-boot/20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de/T/#t 
-for the v1, I'll soon (next hours or tomorrow) post a v2 and Cc you if 
-you don't mind.
+Newer OpenSSL (>=3.0.0 as far as I could tell) allow to use engines via 
+the provider API (at least through CLI) by prefixing the engine with 
+org.openssl.engine: when passed as "provider" to OpenSSL.
 
-[...]
+Ideally, what I'm trying to add could be reused verbatim with providers 
+as well. But I'll need help here because I don't have any actual 
+provider I could test my code against (except softhsm2 for pkcs11 I 
+guess, which provides both provider and engines), as opposed to engines 
+which we use in prod.
 
-> diff --git a/lib/rsa/Kconfig b/lib/rsa/Kconfig
-> index 9033384e60a3..1bf0ac96d598 100644
-> --- a/lib/rsa/Kconfig
-> +++ b/lib/rsa/Kconfig
-> @@ -20,6 +20,13 @@ config SPL_RSA
->          bool "Use RSA Library within SPL"
->          depends on SPL
-> 
-> +config OPENSSL_NO_DEPRECATED
-> +       bool "Build U-Boot without support for OpenSSL Engine"
-> +       help
-> +         Add support for the OpenSSL Provider API, which is the officially
-> +         supported mechanism in OpenSSL 3.x and later releases for accessing
-> +         hardware and software cryptography.
-> +
-
-mmmm Cannot we use providers for something else than RSA? In which case 
-it's a bit odd to have it in lib/rsa/Kconfig (but I have no better 
-suggestion).
-
->   config SPL_RSA_VERIFY
->          bool
->          depends on SPL_RSA
-
-[...]
-
-> @@ -207,6 +247,37 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
->                  return -ENOENT;
->          }
-> 
-> +#ifdef CONFIG_OPENSSL_NO_DEPRECATED
-> +       EVP_PKEY *private_key = NULL;
-> +       OSSL_STORE_CTX *store;
-> +
-> +       if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
-> +               ERR(1, "OSSL_PROVIDER_try_load(pkcs11)");
-> +       if (!OSSL_PROVIDER_try_load(NULL, "default", true))
-> +               ERR(1, "OSSL_PROVIDER_try_load(default)");
-> +
-> +       store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
-> +       ERR(!store, "OSSL_STORE_open");
-> +
-> +       while (!OSSL_STORE_eof(store)) {
-> +               OSSL_STORE_INFO *info = OSSL_STORE_load(store);
-> +
-> +               if (!info) {
-> +                       drain_openssl_errors(__LINE__, 0);
-> +                       continue;
-> +               }
-> +               if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
-> +                       private_key = OSSL_STORE_INFO_get1_PKEY(info);
-> +                       ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
-> +               }
-> +               OSSL_STORE_INFO_free(info);
-> +               if (private_key)
-> +                       break;
-> +       }
-> +       OSSL_STORE_close(store);
-> +
-> +       *evpp = private_key;
-> +#else
-
-Wondering if it really makes sense to have the provider API implemented 
-as an #ifdef to save like 10 common lines between key-based and 
-provider-based implems.
-
-On another topic, my first reading of the code makes me a bit worried by 
-the fact that there's seemingly no way to select whether we want to use 
-a local key or a provider key. Also, I see "pkcs11" and "default" here, 
-but how do I select which provider I want to use (e.g. my custom one). 
-If I somehow manage to have a key named the same locally and in one or 
-more providers, how do I make sure the proper one is selected? I'm 
-wondering whether we should be reusing the engine parameter to select a 
-provider?
-
-I have 0 security or crypto background, don't hesitate to be verbose in 
-your answer.
+I've managed to develop what I believe to be a simple RSA engine to test 
+FIT signing with it, as well as PKCS11 with SoftHSMv2. I have no 
+security or crypto background so I have no idea if what I'm doing is 
+proper or not except that it signs properly. I'm finalizing the patches 
+for the v2 and will Cc the person who posted patches for supporting 
+OpenSSL providers.
 
 Cheers,
 Quentin
