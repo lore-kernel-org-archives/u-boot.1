@@ -4,87 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D35ACEACEF
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 18:30:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A6ACEACEF
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 18:40:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 252D083946;
-	Mon, 17 Nov 2025 19:30:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3FBEB839A1;
+	Mon, 17 Nov 2025 19:40:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n0k2oMep";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gGeTwPCY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37FFC839D6; Mon, 17 Nov 2025 19:30:14 +0100 (CET)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id AAB65839D6; Mon, 17 Nov 2025 19:40:33 +0100 (CET)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D86E80433
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 19:30:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 849F983979
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 19:40:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-3ec4d494383so571924fac.3
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:30:11 -0800 (PST)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-657534478a0so626776eaf.1
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:40:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763404210; x=1764009010; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763404830; x=1764009630; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UW1VvZFC8KVRdQDAHgCch0MypXud66extR5EfXtNUK4=;
- b=n0k2oMepT0mVyDz+X47+/ItaU+j36QzcuY55XBUqWzEux89Ttesb8YomiJq6+ovRFI
- Qnq7gUaLX5aTpC8gvZMf5TLDBLjMS6/1B1biTlZ9hJWEzpKmt21nuEHN1MV26TeRhJri
- 2uMlCkEdu0eLLwbLqtWTMb2UOEdgJ7liQkUxQ=
+ bh=W7je+gMSAU4jlPntQgLA3wkPYQU2cs+oSotqPUCbPoY=;
+ b=gGeTwPCYKgmZPWW8okP+ikMHHd4FYnH2a9jzbOMsuz3IX99nuBhWM+/l72PzzK8Sum
+ 9JltBe1ChfET7N657QrqY0YQqJrZ/dwfSVEAi2akb68QRE3sErB/3bggKQP2zAuRRriJ
+ lZ+0PYx1hp2nrt698qW/PYNWMisXknm1D23KU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763404210; x=1764009010;
+ d=1e100.net; s=20230601; t=1763404830; x=1764009630;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UW1VvZFC8KVRdQDAHgCch0MypXud66extR5EfXtNUK4=;
- b=k4nvII6aPb82LFez51RbYYhnEZPlmVhiN3PlFxdOmwZ0GYtBnXEbLoJRhNWwyAU4go
- E01zsRV34lhbT7/RCyZxAzNwadNO5heSKCM6GS8FrYbNDyj9YMK+Y/DLUB1eIoy0AZ8S
- TnJ02XyZPSfXtQ+LMEAWhGg4N2swU5XRQBmUH0NMDVTXtDD0m+qzIYh+c3WP7NaMuixk
- I/N3rjEBqZfUJCeg5ca/CqGb9b5A72Bz1bIzBbFM7i38LyQnArY57maUnnjMU/36HLIf
- ZfS9mjC4fP3vh0lrFW4HmI8iQmgA1Wsb6gwCsOgD5VbCovZVUVq+SHbhcDKL+fVJHICO
- BZQw==
-X-Gm-Message-State: AOJu0Yyhaks1z402/3CjE3bckOu5YyJIw01DHq7Ints1z7wOj4yRmiOW
- p2yDYTEUEhwO3+XcII8mUIJi8tyBDK39eQTSnpmS35YqhZC68nCE1dyOajh//bv6cKiDeP2yYyt
- 1AFHBqgE5uA==
-X-Gm-Gg: ASbGncuAApSR9GjG+pOjLx4jIZ7TlQj2q0DBof2mYfZcGutxuv4TBAXe8JDSDlY1zsq
- IFit2fqFJO6ibqa+pJWYVAjKmu4leLfGlGUkyxk3AUM+rjQ6ZNolaoGCYpoJaRjRM8LeH5PfDiw
- pk5+ej9/vw8z+fvhEuxfqREZx+tKC5lvhaVQ97xZs/clbAmxa17O3MoqpWjRCvVDFZpryb6QObz
- 41FfP7eQX8Cgj/NJiCz16PxaRrMfITc92H9UIG8I1Mxz8pafDlfq292PiTg9CG76NvrLHuFQtrj
- 0umVSJFdaU58IqMgCddyO9eRjAO0aFuRzo1GIyIQHghf8/s7dNbLT62Fj84vAbych8So+l8hj/Z
- eFWxMKlBoqSBwlEE/stVMdtdzxno//GC5UVkx2ds0AdqoB3BIHmSY3Ln2/da7MY5ZwNc4D9D4bw
- euKtoZ9GY72uGiENsvzOObuBNCektL0k02xYypTQA6sIJvxsPBSQ==
-X-Google-Smtp-Source: AGHT+IF3OpNuhAzl4QA504Jl7pJz2LxQk+pl4IMGwVlxELGleKi2Ls1ei9XsFX5ThShEllcgwVQokA==
-X-Received: by 2002:a05:6871:60e:b0:3e8:915b:41fb with SMTP id
- 586e51a60fabf-3e8915b454bmr4128831fac.41.1763404210203; 
- Mon, 17 Nov 2025 10:30:10 -0800 (PST)
+ bh=W7je+gMSAU4jlPntQgLA3wkPYQU2cs+oSotqPUCbPoY=;
+ b=Aef7V3IxpWGVfmDUpI+VHglmEjNf+kHn2XpEN4wF0l8sdlqNotkP0xuyZ9jTECVYI7
+ Oow37tc21GSKWv4JVRrw24PmyySDf53sepE3+yzPVSDJepQ/d3SwiGSZ+xyKg7oEb7ZQ
+ wpHf6jPYcxyFrPALyctQ7t03sRqhbhXlvu8vcNt1OI7p6U7ovheUzYmdwVllHaX5Pvdh
+ NC/elGPoJnRxK4PNYS2xgsnJ+lwn33ER15zvJG0GrOd6XifB2dzFlKeGtCAkqgD8wea5
+ vj/Q169a0aYIuXB221gPNckvJiSIgHE0Fv8Z3xrM4Wk3YwYwuF5hjU1u+zsbxaL/nbG8
+ EFcg==
+X-Gm-Message-State: AOJu0YxY/yyz362TL70rUGCwzzVp13rjHAdX4s32r3AiBW3HDnaMNf8l
+ pIzc+nVEBGQ9DmmgKJv4vvvhjC/+qmUObq9JfPb8t/f5HtF+6lraMKl3WeAGR6Ihszk=
+X-Gm-Gg: ASbGnctoWzeBZOj69KleAU75O8xjF+jID43jXHo3CXb6+Ol8bri5K+JoJVR/zh22XyQ
+ 3u2YSpKXI3wh7XiIigi+kOTw8x6lGH2lVexBSujYK+GoHo5dA5d2pcyz8pETMheMvCSqUhRZyiM
+ 0VhpMzxUA/T6kpOwzgeuj7AGzQzERkPyxczLRASGetbecvxSoBgu5ZzM293eruqkXnPT49UOnrY
+ CQj5yphLeUQZJ1ii+YWRHHTxobDKSzxEJ8j0ouxcyyFwvywaC9YcgpaIFvRlCMXyxYggBfTgm6f
+ Yf8zsUfGbO1xvOwqlISRuqfw8YKV45MsrPkiIXAqW8ryQyeNYjqHazHxdk2WNjyqsuCkU+/chuz
+ L4slxzS0Dyo5qazLIW5rdZYe8WTNtb9cRjir4Ec3QFK/u1nSitLH9FPzXRbflEpYis7TKjRcAv7
+ Y5ZblwZlASm4zTHoNOMi+3oY6vXAxu9V/gCB08DeIkQX+vGt9QOQ==
+X-Google-Smtp-Source: AGHT+IEKefT7sWqtdw1wysD7nojNlSM/UhofwTrbeOiME/cInJ5zYE7NTUWQ/umkfi66clPzn/T4eA==
+X-Received: by 2002:a05:6820:4b15:b0:657:4e02:34a7 with SMTP id
+ 006d021491bc7-6574e023697mr2595316eaf.1.1763404830170; 
+ Mon, 17 Nov 2025 10:40:30 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e89697fedcsm2565041fac.1.2025.11.17.10.30.09
+ 006d021491bc7-6574484261esm2158625eaf.3.2025.11.17.10.40.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 10:30:09 -0800 (PST)
-Date: Mon, 17 Nov 2025 12:30:07 -0600
+ Mon, 17 Nov 2025 10:40:29 -0800 (PST)
+Date: Mon, 17 Nov 2025 12:40:27 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] Gitlab: Add a "sage-lab" stage to access a board farm
-Message-ID: <20251117183007.GM2125796@bill-the-cat>
-References: <20251110154231.2629710-1-trini@konsulko.com>
- <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
- <20251111135638.GT6688@bill-the-cat>
- <CAFLszThrucj38rULiXB3HAsHRq5veZo6zBgHekcjymQecZSP5A@mail.gmail.com>
- <20251114143425.GY6688@bill-the-cat>
- <CAFLszTi+1UbZ-ut1qYs--Mnv9QSA1A6Z=U4f3B+6tQfSFA8FKA@mail.gmail.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sam Edwards <cfsworks@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 0/3] Synchronize DTC to 1.7.2
+Message-ID: <20251117184027.GN2125796@bill-the-cat>
+References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
+ <20251113175700.GM6688@bill-the-cat>
+ <63d6a47c-99cc-48d1-9d71-869c58e2eb69@mailbox.org>
+ <20251113184917.GN6688@bill-the-cat>
+ <71261c83-0a3e-46b6-a0db-d3587a54d71c@mailbox.org>
+ <20251116141151.GC2125796@bill-the-cat>
+ <11a631a3-644a-4c4f-8b09-7202687a4a90@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Hk8n2FuqBh96TR1w"
+ protocol="application/pgp-signature"; boundary="USKbliA5ZVkQJQ5l"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTi+1UbZ-ut1qYs--Mnv9QSA1A6Z=U4f3B+6tQfSFA8FKA@mail.gmail.com>
+In-Reply-To: <11a631a3-644a-4c4f-8b09-7202687a4a90@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,118 +109,82 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Hk8n2FuqBh96TR1w
+--USKbliA5ZVkQJQ5l
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 17, 2025 at 11:16:05AM -0700, Simon Glass wrote:
-> Hi Tom,
+On Sun, Nov 16, 2025 at 10:48:45PM +0100, Marek Vasut wrote:
+> On 11/16/25 3:11 PM, Tom Rini wrote:
+> > On Sun, Nov 16, 2025 at 12:23:30AM +0100, Marek Vasut wrote:
+> > > On 11/13/25 7:49 PM, Tom Rini wrote:
+> > >=20
+> > > Hello Tom,
+> > >=20
+> > > > > CI does show that no boards went oversize . If there is some grow=
+th on
+> > > > > existing devices, maybe we can shrink that, but maintaining obsol=
+ete DTC
+> > > > > code base going forward and picking random updates into it, that =
+will only
+> > > > > lead to increasing maintenance pain, so I don't want to do that.
+> > > >=20
+> > > > Yeah, it's not an easy spot. But I'm really not happy with growing =
+main
+> > > > U-Boot almost everywhere by 2KiB - 4KiB, and SPL by ~512 bytes or m=
+ore
+> > > > just to keep up. I do see that integratorcp_cm1136 barely grows at =
+all,
+> > > > so maybe there's something that can be done more widely and just wa=
+sn't
+> > > > clear at first. m68k only grows an average of 500 bytes and MIPS is
+> > > > ~1KiB. PowerPC grows a lot. RISC-V a little.
+> > > I suspect this might have to do with DTO support. The imx8mp_dhcom do=
+ use
+> > > DTOs and the fdt_overlay.c code grew a lot.
+> > >=20
+> > > I also found out that if I patch out can_assume() and replace it with=
+ plain
+> > > 1 , then the size drops by 1-2 kiB, but that's probably not what we w=
+ant to
+> > > do.
+> >=20
+> > I'm not sure, maybe we do? Or maybe we need to look and have *one* place
+> > that confirms correct alignment and either fixes/complains
 >=20
-> On Fri, 14 Nov 2025 at 07:34, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Nov 14, 2025 at 05:43:57AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, 11 Nov 2025 at 06:56, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Nov 11, 2025 at 05:58:22AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 10 Nov 2025 at 08:42, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > This is the Gitlab side of adding support for the board lab con=
-nected to
-> > > > > > the "konsulko-sage" runner. On the software side, this lab uses=
- only
-> > > > > > upstream labgrid. On the hardware side, each device under test =
-is
-> > > > > > connected to its own exporter (typically a Raspberry Pi 4) that=
- must be
-> > > > > > turned on (and cleanly turned off) as part of a given test cycl=
-e.
-> > > > > >
-> > > > > > Add support for testing on a SolidRun Hummingboard 2 (imx6), Ra=
-spberry
-> > > > > > Pi 3 and Raspberry Pi 4. In all cases, we enable additional opt=
-ions to
-> > > > > > run more tests on the board. As we have some networking tests, =
-we test
-> > > > > > both the legacy network stack and lwIP. In the case of Pi platf=
-orms, we
-> > > > > > test all of 32bit configuration, plain configuration and rpi_ar=
-m64, and
-> > > > > > again with and without lwIP.
-> > > > > >
-> > > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > > > ---
-> > > > > > Note that for the Pi platforms we enable/disable CMD_BOOTEFI_SE=
-LFTEST
-> > > > > > based on overall binary size. I've created
-> > > > > > https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/i=
-ssues/2
-> > > > > > to track addressing that issue.
-> > > > > > ---
-> > > > > >  .gitlab-ci-sage-lab.yml | 182 ++++++++++++++++++++++++++++++++=
-++++++++
-> > > > > >  .gitlab-ci.yml          |   5 ++
-> > > > > >  2 files changed, 187 insertions(+)
-> > > > > >  create mode 100644 .gitlab-ci-sage-lab.yml
-> > > > >
-> > > > > Would it be possible to add some docs about this? Does the export=
-ing
-> > > > > rpi do a full system boot and then run some scripts to load things
-> > > > > onto the board, then shut down?
-> > > >
-> > > > I don't understand your question. Yes, the exporter is powered on/o=
-ff in
-> > > > the test job, as explained in the commit message. When it comes up =
-it
-> > > > registers the device under test with the coordinator (and unregiste=
-rs
-> > > > when powering off).
-> > >
-> > > So does that mean that all the logic for talking to the board is not
-> > > in the hooks or Labgrid, but somewhere else? I'm just trying to
-> > > understand how it is put together and compare it with what I did.
-> >
-> > I still don't understand what you're asking. Maybe you missed the patch
-> > that added sage to u-boot-test-hooks as well? That contains the labgrid
-> > environment yaml file. The boards are just in labgrid, the exporter
-> > registers them with the coordinator when the exporter comes online.
+> That's already part of new libfdt, that is also what triggered the various
+> fixes I posted recently:
 >=20
-> I saw the hooks patch. But I am missing the logic that actually writes
-> U-Boot to the board, powers it on/off, etc. Where is that?
-
-Already in the repository or a different patch I posted for a new SoC.
-It's just calls to the appropriate labgrid-client subcommand.
-
-> > And FWIW, this isn't ideally how I'd do the labgrid integration, but
-> > tees up the next steps nicely. We need to abstract how our pytest
-> > portion grabs console/flashes/etc so that someone could write a python
-> > native set of classes (since labgrid supports pytest directly).
-> > Iterating on that is easier however when starting with something that
-> > works.
+> scripts/dtc/libfdt/fdt.c:       if ((uintptr_t)fdt & 7)
+> scripts/dtc/libfdt/fdt.c:       if ((uintptr_t)fdt & 7)
 >=20
-> Yes, that would be nice. It would also make it easier to know when to
-> expect the board to respond, rather than the long timeouts we have
-> today. I started looking at this in June but didn't finish.
+> > , and then
+> > every follow-up location doesn't need to perform that (or possibly many
+> > other as well) validation checks. My impression from when I looked at
+> > the code last, a few year ago, was that it was designed with "validate
+> > with most? every? function" and we would be happy enough with "validate
+> > once".
+>=20
+> If you can make that assumption -- that whatever we feed into libfdt is
+> valid -- then we can simply patch out can_assume() .
 
-I'm not sure how one is connected to the other there, but yes, doing it
-all within python might make some cleanup / configuration easier too.
+Maybe the question I have then is, why isn't can_assume being optimized
+out at compile time, if we set the mask right. Makes me wonder if
+there's not something to fix upstream too. Or maybe we need to change
+the default to higher than 0?
 
 --=20
 Tom
 
---Hk8n2FuqBh96TR1w
+--USKbliA5ZVkQJQ5l
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRtpqAAKCRAr4qD1Cr/k
-CgcLAQD+mfEwOFVmD/dcRkMcapM8iRJX1HqD00XUL6CCMPAOsgD8DZoj5XG2ZgDt
-dK1j383CXBX9Z+7XXiaN1B5s9XjQ1A0=
-=z+5g
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRtsGAAKCRAr4qD1Cr/k
+ClR/AQDqAHzyvLVr51lnGHd36mx5VsgZ1yhhpnnu4E4H+qlVrwEA/NQ8DGHA9X94
++3cmkhc5zXq3Kbk+dzaJUCTILSZ59Qo=
+=3p98
 -----END PGP SIGNATURE-----
 
---Hk8n2FuqBh96TR1w--
+--USKbliA5ZVkQJQ5l--
