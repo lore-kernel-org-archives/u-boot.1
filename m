@@ -4,94 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46D4DCE8D6B
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 15:18:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34889CE8D6B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 15:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7605A83BB1;
-	Mon, 17 Nov 2025 16:18:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8029F83BA1;
+	Mon, 17 Nov 2025 16:23:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FqeKOSg/";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="sjZimpiQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60E1383BBE; Mon, 17 Nov 2025 16:18:23 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0999483BB1; Mon, 17 Nov 2025 16:23:17 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B07A83BAD
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 16:18:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E6E783959
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 16:23:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-64088c6b309so7151002a12.0
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 07:18:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763392701; x=1763997501; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VG8CVPmV7Iq1DoPUIifJdmBQHAD0JzoQdrkMTtTIcb8=;
- b=FqeKOSg/NFCHSRbceB/wuFPScmLFONfrrVJEytxlYuB3pHH4ObNP9TbRJGmEdLpfwD
- J8yH+d/yPj6MGhnRGMXBBXi5X89zUZ6LshMY0ze4TYOvjmEIKrWqasD+NJoD4maUgVhE
- Pw4eSzXjA8u2mP7JAMXXxMaaqT1PzYDqfG2VjbFj7dynM+C19HQ4ABGt1x+18Hp/ExYX
- MjntUaTJxwZzs8LHHvaM6JnUb3fISwMtX3X1PYDGyT8K125PhdnwPlDvQ/8ILT0Hh+ky
- pOH6iayJC1BWQu27fWKppYVFSWPLjylj0l2wnmghFKdBU5ImCjdKUnDy1aQ0rLBpcjkx
- RAcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763392701; x=1763997501;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VG8CVPmV7Iq1DoPUIifJdmBQHAD0JzoQdrkMTtTIcb8=;
- b=amNmGaARkxTiGVvPLRxVRxm0+I18qnj9hj3bo/QCnZ0I3VErnKCRwNHr9a6sf3mRhL
- I1LXsqq4C8Iph1sf/NuhZCXEd0U3rpjOZshKv6ZYxgmrhTepyoPzrY3H0AGy5RPUdhoo
- rvwrU3o3rw6qKKSeDe2BopqS5priXRIuEnQGDAsLEpQe6iDMCs5DDhRDu/uf+1jty6E4
- 2AG/K5263wkQya5NPMNkYI3mVyxi2lROgRc0MnKv91ksq5s8rN33khlGKPUzH/Ei5lRt
- LwXQOm/YA7uluawYayL8x4u/er5WpPF+FuMZpfaj+JFxqpL6TBSMBMjnuJnFzOdBtHtw
- iszQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUtdtYP+rlLptkVU8+uUD7iwrYEmsQ+zuiwOdyaSMEWHjel3sYs7TiyyTih+7WUl3cGe1qWqj4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz2/gWxhxOjxl+yF/pNwCd6Bj0HhfORH4guIvPlhK10OUAIU6oY
- tgoSy6aBaN+MFtiTstsDDYZPGqpQw3aFkCVeUOXijByh2mHbRurVrDXBQvwwXz80C/QFdlNWHgR
- lflacoY3lKrE2FLTYvflIwSHsgRK/O1c=
-X-Gm-Gg: ASbGncshhkFYWcMeuEHwkfZyq6XpmU+ymZTlP5FqLaQPU+62VX6XE6nxVo7mmt78w86
- F7U74ywV5UsaG7F0nZp+ffr0fVXPRYIf1K1+yxBX22kM5WmJtbV04vKxKGXByzgkKzWA+00lSYW
- mawec+LnDBC0zCcCrMpcucVXDwCGOv+PwlEEbtMC6DeExhKcQIjzaXcf2LwAnIPhh/TMkKS8gpO
- XKV9k3tx+kKMfa4762oMMG33q5Ru7imnvFE3yFpgaT2owj+4A4WRkSMxl3i0EWpvTsGCtpcXfe9
- 1/ACsWDe1aTPUxPUM7LdN6h4DiCkPlNNFdr+pVkNKt3649Mp//nommog6EfbaGMb8kFgDz7jGWD
- eg0pAt8Kjn+AC3ln2rWxh8UYwsnJOV0HSWHzSXdUXztrUWsPAdwvcR9Q5q3csv5pgqV2tb8jbom
- o=
-X-Google-Smtp-Source: AGHT+IFvQehDMj1qipBJX1eK5S5v6JJX7xuISw7fgvoDYZhMdHyN/GsHbgxD6I5p56FwDAgwASY5O4CtQp/eNlYvRvc=
-X-Received: by 2002:a05:6402:1d49:b0:640:a7a9:289f with SMTP id
- 4fb4d7f45d1cf-64350e04fb0mr10747985a12.2.1763392700548; Mon, 17 Nov 2025
- 07:18:20 -0800 (PST)
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id D2C5CC1265C;
+ Mon, 17 Nov 2025 15:22:51 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id E7F6F606B9;
+ Mon, 17 Nov 2025 15:23:13 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 41ECA10371D02; Mon, 17 Nov 2025 16:23:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1763392993; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=byjl5e9wiGbUtuM96TDDrPdr3+/1Gw6t0jxAaV5Vrx0=;
+ b=sjZimpiQwg75Wo/8s/BpffDYoUocAacfVQvN29Yv8bIFbWJpKCa8FwiVBGtTfGZ5DlDKXe
+ ZOjhg1Lw1IobU2NwpgRrKUndXEswdYsHTmDjIx+/k06SwmldKwszYdQXMsupI5tjzupa28
+ VmIyeqnGfWbP+XqYo4M2vQYEeHNzwX0ly6MQeZKh4Fcc60dOksxat6h80727qJJViop/9O
+ XPrRz8uNuzZL1Yl9VyK4cxwqJdXy2Y61ig9JlpnXjdo1wXFw/3vdoUuoYzxgOY2JWHIf+x
+ 63cqX8QqLJVFSP+pXAa4UbhqEwNr8hePY3MQvftinZUW4Yhqum3WQDuwpEbNWg==
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Simon Glass <sjg@chromium.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, u-boot@lists.denx.de
+Cc: Bajjuri Praneeth <praneeth@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, thomas.petazzoni@bootlin.com,
+ Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH v3] boot: pxe_utils: Fix memory allocation issues in
+ overlay_dir handling
+Date: Mon, 17 Nov 2025 16:23:07 +0100
+Message-ID: <20251117152308.900316-1-kory.maincent@bootlin.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20251031-binman-engine-v1-0-c13c1b5dac43@cherry.de>
- <20251031-binman-engine-v1-3-c13c1b5dac43@cherry.de>
- <CALeDE9MYi2+u_ek1Rapmzx2_T9uE_cQcH8paKgxKwZjtGJ2gzg@mail.gmail.com>
- <DB9PR06MB85123A4CF4B3A698386F9EE9CBCFA@DB9PR06MB8512.eurprd06.prod.outlook.com>
-In-Reply-To: <DB9PR06MB85123A4CF4B3A698386F9EE9CBCFA@DB9PR06MB8512.eurprd06.prod.outlook.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 17 Nov 2025 15:18:08 +0000
-X-Gm-Features: AWmQ_bmaLTvSN64ABMJmY5eh36RxYOtccOFvdvIOPhZhkQFnwmOjr_D9VNIE9LA
-Message-ID: <CALeDE9PswgDAG=1Ouy5W02FKZRFskqc3tx967SVms+MTL8Z1Ng@mail.gmail.com>
-Subject: Re: [PATCH 3/3] tools: binman: fit: add support for OpenSSL engines
-To: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-Cc: Quentin Schulz <foss+uboot@0leil.net>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, Aristo Chen <jj251510319013@gmail.com>, 
- Rasmus Villemoes <ravi@prevas.dk>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Simon Glass <sjg@chromium.org>, Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Shiji Yang <yangshiji66@outlook.com>,
- Anton Moryakov <ant.v.moryakov@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Alice Guo <alice.guo@nxp.com>, Bryan Brattlof <bb@ti.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,32 +72,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Nov 2025 at 10:14, Wolfgang Wallner
-<wolfgang.wallner@br-automation.com> wrote:
->
-> Hi Peter,
->
-> > > This adds support for using an OpenSSL engine for signing a FIT image.
-> > > To use it, one should set the fit,sign-engine property at the FIT node
-> > > level with the engine to use. This will in turn call mkimage with the -N
-> > > option.
-> >
-> > Just to be aware this should likely be a OpenSSL provider, engines in
-> > OpenSSL are deprecated and due to be removed in 4.0. A lot of distros
-> > are already dropping support for engines. There's a patch [1] adding
-> > support for Providers support to U-Boot, I suspect we shouldn't be
-> > adding more deps on the Engine support. OpenSSL 4 is due in March.
->
-> I'm aware that the engine API is deprecated in OpenSSL, and that the provider
-> API is the way to go forward.
->
-> But the PKI provider of my employer currently only provides a PKCS#11 library
-> with an engine API, and I'm not aware of any plans yet if/when they will
-> be supporting the provider API.
->
-> So for the transition period it would be nice to keep the engine API around as
-> such use cases still depend on it.
+From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
 
-my comment wasn't so much about removing engine support but rather
-having parity with the newer version so that when users upgrade they
-don't end up being stuck with broken functionality.
+Fix two memory allocation bugs in label_boot_extension():
+
+1. When label->fdtdir is not set, overlay_dir was used without any
+   memory allocation.
+
+2. When label->fdtdir is set, the allocation size was incorrect,
+   using 'len' (just the fdtdir length) instead of 'dir_len' (which
+   includes the trailing slash and null terminator).
+
+Resolve both issues by moving the memory allocation and string
+formatting outside the conditional block, resulting in clearer code
+flow and correct sizing in all cases.
+
+Closes: https://lists.denx.de/pipermail/u-boot/2025-November/602892.html
+Addresses-Coverity-ID: 638558 Memory - illegal accesses (UNINIT)
+Fixes: 935109cd9e97 ("boot: pxe_utils: Add extension board devicetree overlay support")
+Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
+---
+ boot/pxe_utils.c | 20 +++++++++-----------
+ 1 file changed, 9 insertions(+), 11 deletions(-)
+
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index 038416203fc..836e4eb526c 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -444,7 +444,7 @@ static void label_boot_extension(struct pxe_context *ctx,
+ 	const struct extension *extension;
+ 	struct fdt_header *working_fdt;
+ 	struct alist *extension_list;
+-	int ret, dir_len, len;
++	int ret, dir_len, len = 0;
+ 	char *overlay_dir;
+ 	const char *slash;
+ 	ulong fdt_addr;
+@@ -472,18 +472,16 @@ static void label_boot_extension(struct pxe_context *ctx,
+ 			slash = "/";
+ 		else
+ 			slash = "";
+-
+-		dir_len = strlen(label->fdtdir) + strlen(slash) + 1;
+-		overlay_dir = calloc(1, len);
+-		if (!overlay_dir)
+-			return;
+-
+-		snprintf(overlay_dir, dir_len, "%s%s", label->fdtdir,
+-			 slash);
+ 	} else {
+-		dir_len = 2;
+-		snprintf(overlay_dir, dir_len, "/");
++		slash = "/";
+ 	}
++	dir_len = len + strlen(slash) + 1;
++
++	overlay_dir = calloc(1, dir_len);
++	if (!overlay_dir)
++		return;
++
++	snprintf(overlay_dir, dir_len, "%s%s", label->fdtdir ?: "", slash);
+ 
+ 	alist_for_each(extension, extension_list) {
+ 		char *overlay_file;
+-- 
+2.43.0
+
