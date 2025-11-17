@@ -4,89 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 971F1CEACEF
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 18:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE966CE8D6B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 18:16:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDB70838CE;
-	Mon, 17 Nov 2025 19:16:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 392E383C11;
+	Mon, 17 Nov 2025 19:16:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C2A6hKbZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a8qdw7IZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 996E483BE1; Mon, 17 Nov 2025 19:16:10 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 68A0E83C13; Mon, 17 Nov 2025 19:16:32 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B56AF838A0
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 19:16:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E137783C0E
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 19:16:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-29555b384acso47509235ad.1
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:16:06 -0800 (PST)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-298145fe27eso61065325ad.1
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:16:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763403365; x=1764008165; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763403388; x=1764008188; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BemjsRx8ZgMWSLR1GjXbRgxmBYb4Gg34C8znYzBTKU0=;
- b=C2A6hKbZbH92fbk8927LY+ZgZjloERGngSv1H29v7APgx1C3PV7z2neAmlSAr/x/hB
- nlFb8IYLbw6scjdHbg0xUN0w+TfG+JExaxN+CrXXqvqdopyowJFFzEW0oCxNYGK7p2sT
- hVS0RNmilZ+AIJok87OGrdKiotyBsy3zHsY7s=
+ bh=HrRzXF01JchC+xtdU5bIQv0Ga+Ugt9aaHXX9M+lSP8U=;
+ b=a8qdw7IZ+PWiFwrQCsithhmIhUZjPryTvRxcy5yXsUgky050LYsUr8f+rXvCpXlwNr
+ w4hJDPyO2HGU5rcFq8PPR//I60JReVZk6BgZCNtZf/G0uVW4cu0Nn37I9lP7zB1fuFNl
+ vzbSZJhlyizDHM0iUQW+OZtOKd7o2cwNVHcfI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763403365; x=1764008165;
+ d=1e100.net; s=20230601; t=1763403388; x=1764008188;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BemjsRx8ZgMWSLR1GjXbRgxmBYb4Gg34C8znYzBTKU0=;
- b=T0yEfCJ6In/Pi8qBc7VVi96pyuGDFKeTQ7qhhaTwkp+T7qJ4d1/m7pBFI35o2jGUbK
- GQMj1x/7h5KkhCZ0L+pU7/DoxM4BtT/JiVqZbykGB2cvz6TCl8lx/OeWB6hKXRrHYGv4
- EvvgUEtr4rkn8K3Vu50p7cF5any/pBx88dQYrKZmO7cKL5FLqh0TioaPdssEyRZ+IF7k
- Tp5q9irYDJRE+4dB89zoqWYhivxgI1KFQwXhXWZCyN46Igh3Bns34ueiIciYvyhQzbi1
- DdG68jE/SRo1TnPS79MlK9plf/RoG0gnQVMaoNiNu6wTZnlpqDz1+6QuR7aEk+nKTZuL
- Qr3g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4kr7IHy7xDoeRATePhCSTOCEYnHn5LR/K+6uTu3xtjSWgs32/3PCb1NNutO3QBcUr8in3wOY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7h6JLZbafs2pA/4YIYQKMhAJzL0Fs/ANBSexUnQsJ26bfpcTp
- HPk3JFp0elHxdFfZveF23KezdWeexhU1fHQ6defTNgKuzq4zK+WHiuQl8/yqr9iJ5aoXBSiT+tz
- K0viOtbft1yE+tGvOpHBVQqFMspPqQHe6PifsHhDJ
-X-Gm-Gg: ASbGnctlY+w2Wl595FYtWCFgvk+c4KH1NrNIJ7SvC4zdcmPSjbSttM2WcyfP8i4NL5P
- aLRjHV7A26b+ixoEVHfjnuisu+Mk6kWK+lzlw7Z4DNlOzAMMiLKc4jUTBVR3nUNwHPPoMpePk3I
- KFxvcfPsmMVOUxjQTj0bPaPjLb/JG5m2QPaZcpsauewMDZ/VoQjhiJM5ppz/BkAGwP55RmXDhXm
- KQjVc83iC6rQCJFVfQ9I0h9TbSim5P+T1e+NFHqe4NBxulSZXmmjzrGwysra2XZ/SPc2stROHkY
- +77k
-X-Google-Smtp-Source: AGHT+IGYle9XIM3VLCz3IWcqow36DpjI0zICnJX0V7AHxu96O5hag+HKZEQM5npBALOVW0EiHbH6b/Q4W0kTuWFXE7c=
-X-Received: by 2002:a17:903:ac7:b0:295:557e:746a with SMTP id
- d9443c01a7336-2986a6d04femr131946085ad.13.1763403365021; Mon, 17 Nov 2025
- 10:16:05 -0800 (PST)
+ bh=HrRzXF01JchC+xtdU5bIQv0Ga+Ugt9aaHXX9M+lSP8U=;
+ b=cZGeLS1GGSRpp1UuHZtkWnciRwBZznW0enRn6ykdUwTVKSKrOG0LwRZrGZgHP/dFo0
+ /sSMa0LYJKKGLuAUw/du3QK12vXUe6/V8kjvDWIDEpeV3hIle2bUjczVV5QouVCWMbvA
+ dyezQ/pO/cEsgricD/+51OYiVq9NeJNYqe+K1crcqiRDLxjUnAcPMqNMPFUfmN38Oyf6
+ 8n2+4vtEGHSGlN7Jz/txhBQkENq4jAVJGtqsw1VTyK7wr8PWfACseLSJu+cgihyJrrSf
+ UG/gSrocG2nTH+UUfflkCs94Hxn6yaBBZB8J4YgR2kzB0zi7wqvOl5J2Q/gmizjJrjnd
+ ulZA==
+X-Gm-Message-State: AOJu0YyIpQWh54FdPM3vAbAQQKOrI652m7ij9UhcV5Dpf2CFvL0/ZbFU
+ VAs5cs12y0nUXBMUty4QPmXriaee5rCIdZ0UDUe1C4lKlqKS++sSGsn5PEY+lJcD+2c7NeY/9s1
+ /7gNY0FfF+4LXbi4oZxU55Dhs97lI+vB3agygbpbxS8OyxRPewtk=
+X-Gm-Gg: ASbGncsLloVmjRCgG08wAlaVsRo9Qr4dWyAMK+6MvyOV6bXx23bG5K82gmrNPETi2rq
+ IqAYiL1nhvLdnT/yxKDDINLSE7Bvnp4+1XzpT8GhtRggMwj3xi45d8XRpKFALHl8q41T2IOyq+l
+ I/lnVlOZz0XJoy6PAjX8YUKV/J5tbvEiJMgivH85O6RuKcnL21UZlSKL/HfZiT9YMb18UggQZE2
+ zW9WWjBac/bi+zB+XwraciGraz0JarPRTWMW7V2F567hpMPdYX9hKwNLjXzCMdAHGz89g==
+X-Google-Smtp-Source: AGHT+IHWdcj+QbrstrXi0uMa7mDd3WsydVQxEcYDXTPMbIv+phm1Hu4AUJzGVeAB4mtju1hJCsBiBOMFJyzNwKz588s=
+X-Received: by 2002:a17:903:1ae6:b0:295:3d5d:fe37 with SMTP id
+ d9443c01a7336-2986a75258fmr160348175ad.41.1763403388398; Mon, 17 Nov 2025
+ 10:16:28 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFLszTjwpoCwCKKvJX5cZMLK480EK-=BWaFd5A6yLMrfsVWC6g@mail.gmail.com>
- <20251113200527.GQ6688@bill-the-cat>
- <CAFLszTjydNqmo=6qLv--m4fB07QzWd01XHGY3hxgTEbarJF-VA@mail.gmail.com>
- <20251113203654.GR6688@bill-the-cat>
- <385cdc16-cf73-443b-a0a1-440e233d4506@mailbox.org>
- <CAFLszThc4YC6mKp5sNsiuCFfaMNqMWJjVV27d4UkyLU4rPWY6A@mail.gmail.com>
- <bed4a846-6356-463f-a8a9-3d4bf05439a4@mailbox.org>
- <CAFLszTiLZaMkCUxk2_x=gwKBxJeg-02iO-w=JufXEtqhqHZyTA@mail.gmail.com>
- <20251117142105.GG2125796@bill-the-cat>
- <CAFLszThiza12FcSeEVg3xWJcP1zZVrfxDgTDT4mZNfEUKvZpWQ@mail.gmail.com>
- <20251117180215.GL2125796@bill-the-cat>
-In-Reply-To: <20251117180215.GL2125796@bill-the-cat>
+References: <20251110154231.2629710-1-trini@konsulko.com>
+ <CAFLszTjQmOR=5rUara7mAhccL6_epEYa76Ca6Rm-1T2qJSsuxw@mail.gmail.com>
+ <20251111135638.GT6688@bill-the-cat>
+ <CAFLszThrucj38rULiXB3HAsHRq5veZo6zBgHekcjymQecZSP5A@mail.gmail.com>
+ <20251114143425.GY6688@bill-the-cat>
+In-Reply-To: <20251114143425.GY6688@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 17 Nov 2025 11:15:52 -0700
-X-Gm-Features: AWmQ_bk6bKAkXm2iWoUBBtNmYMVYtS-J6L5huY1d-HbG2-HSt9tZf2e_JS8X1Gs
-Message-ID: <CAFLszTgUgmDvX7hijZxQxJ-ArNquxHDrZVb7o7OfLOJA5+yc8g@mail.gmail.com>
-Subject: Re: [PATCH 1/2] boot: android: Always use 8-byte aligned DT with
- libfdt
+Date: Mon, 17 Nov 2025 11:16:05 -0700
+X-Gm-Features: AWmQ_blR_GUbsxJ1_EgOdObuRXfRYDjV612wy4s5SQVKLZ_3T2xJYdYFkHjpON8
+Message-ID: <CAFLszTi+1UbZ-ut1qYs--Mnv9QSA1A6Z=U4f3B+6tQfSFA8FKA@mail.gmail.com>
+Subject: Re: [PATCH] Gitlab: Add a "sage-lab" stage to access a board farm
 To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de, 
- Aaron Kling <webgeek1234@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>, 
- George Chan <gchan9527@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,123 +92,75 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-
-On Mon, 17 Nov 2025 at 11:02, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 14 Nov 2025 at 07:34, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Nov 17, 2025 at 10:04:00AM -0700, Simon Glass wrote:
+> On Fri, Nov 14, 2025 at 05:43:57AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Mon, 17 Nov 2025 at 07:21, Tom Rini <trini@konsulko.com> wrote:
+> > On Tue, 11 Nov 2025 at 06:56, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sun, Nov 16, 2025 at 09:07:19AM -0700, Simon Glass wrote:
-> > > > Hi Marek,
+> > > On Tue, Nov 11, 2025 at 05:58:22AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
 > > > >
-> > > > On Sat, 15 Nov 2025 at 17:20, Marek Vasut <marek.vasut@mailbox.org> wrote:
+> > > > On Mon, 10 Nov 2025 at 08:42, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On 11/14/25 1:45 PM, Simon Glass wrote:
+> > > > > This is the Gitlab side of adding support for the board lab connected to
+> > > > > the "konsulko-sage" runner. On the software side, this lab uses only
+> > > > > upstream labgrid. On the hardware side, each device under test is
+> > > > > connected to its own exporter (typically a Raspberry Pi 4) that must be
+> > > > > turned on (and cleanly turned off) as part of a given test cycle.
 > > > > >
-> > > > > Hello Simon,
+> > > > > Add support for testing on a SolidRun Hummingboard 2 (imx6), Raspberry
+> > > > > Pi 3 and Raspberry Pi 4. In all cases, we enable additional options to
+> > > > > run more tests on the board. As we have some networking tests, we test
+> > > > > both the legacy network stack and lwIP. In the case of Pi platforms, we
+> > > > > test all of 32bit configuration, plain configuration and rpi_arm64, and
+> > > > > again with and without lwIP.
 > > > > >
-> > > > > >>>>> Which is different from disagreeing with your specific feedback about
-> > > > > >>>>> how we get there, to be clear.
-> > > > > >>>
-> > > > > >>> And again, since your feedback to this patch was "Don't?", I'm saying we
-> > > > > >>> need to. But the rest of your feedback was structural on moving towards
-> > > > > >>> resolving it and so I assume Marek will respond.
-> > > > > >>
-> > > > > >> The "blast radius" are these patches, that's all that tripped the tests:
-> > > > > >>
-> > > > > >>    - boot: android: Always use 8-byte aligned DT with libfdt
-> > > > > >>    - test/py: android: Point fdt command to aligned addresses
-> > > > > >>    - test/py: Use aligned address for overlays in 'extension' test
-> > > > > >>    - sandbox: Fix DT compiler address warnings in sandbox DTs
-> > > > > >>    - sandbox: Fix DT compiler pin warnings in sandbox DTs
-> > > > > >>    - boot: Assure FDT is always at 8-byte aligned address
-> > > > > >>    - arm: qemu: Eliminate fdt_high and initrd_high misuse
-> > > > > >>    - efi_loader: Assure fitImage from capsule is used from 8-byte aligned
-> > > > > >> address
-> > > > > >>    - MIPS: Assure end of U-Boot is at 8-byte aligned offset
-> > > > > >>
-> > > > > >> Regarding last minute alignment, the problem with this android image
-> > > > > >> seems to be in the android image itself, which packs in badly aligned
-> > > > > >> FDT. We therefore have to copy it out and realign.
-> > > > > >
-> > > > > > My request is to implement these checks as part of the boot flow
-> > > > > > (bootm, etc.) rather than adding memory allocations in leaf function.
-> > > > > > We already support copying the FDT to a different address so we can
-> > > > > > expand it and add things. Can we make use of that code?
-> > > > > It seems the 'abootomg' command is extracting DTB from a container where
-> > > > > the DTB can be at 4-byte aligned address. Thus far, the command
-> > > > > internally used that possibly 4-byte aligned address, which is wrong. It
-> > > > > also returned that address which was used by further U-Boot commands
-> > > > > as-is, which is also wrong.
-> > > > >
-> > > > > This DTB usage here has nothing to do with any boot flow, this is
-> > > > > incorrect DTB alignment during manipulation, which is not part of boot.
-> > > > >
-> > > > > What exactly do you propose should be changed with this patch ?
+> > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > > > ---
+> > > > > Note that for the Pi platforms we enable/disable CMD_BOOTEFI_SELFTEST
+> > > > > based on overall binary size. I've created
+> > > > > https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/issues/2
+> > > > > to track addressing that issue.
+> > > > > ---
+> > > > >  .gitlab-ci-sage-lab.yml | 182 ++++++++++++++++++++++++++++++++++++++++
+> > > > >  .gitlab-ci.yml          |   5 ++
+> > > > >  2 files changed, 187 insertions(+)
+> > > > >  create mode 100644 .gitlab-ci-sage-lab.yml
 > > > >
-> > > > Actually this patch seems to adjust code which is just handling a
-> > > > command. How about creating a common function which can put an FDT
-> > > > into an abuf, either just using it in place, or allocating memory and
-> > > > copying it? An abuf is ideal for this. E.g. something like (untested):
-> > > >
-> > > > /**
-> > > >  * fdt_ensure_aligned() - Obtain an abuf with a devicetree, aligning if needed
-> > > >  *
-> > > >  * @buf: Returns abuf containing FDT on success; caller must abuf_uninit(buf)
-> > > >  * @addr: Address of FDT
-> > > >  * Return: 0 on success, -EINVAL if not an FDT, -ENOMEM if out of memory
-> > > >  */
-> > > > int fdt_ensure_aligned(struct abuf *buf, void *fdt)
-> > > > {
-> > > >    struct fdt_header fdth __aligned(8);
-> > > >
-> > > >    memcpy(&fdth, fdt, sizeof(struct fdt_header));
-> > > >    if (fdt_check_header(&fdth) != 0)
-> > > >       return -EINVAL;
-> > > >
-> > > >    abuf_init_const(buf, fdt, fdt_totalsize(&fdth));
-> > > >
-> > > >    /* The device tree must be at an 8-byte aligned address */
-> > > >    if ((uintptr_t)fdt & 7) {
-> > > >       void *fulldt;
-> > > >
-> > > >       // a function like abuf_realloc_align(struct abuf *buf, int
-> > > > align) would help
-> > > >       fulldt = memalign(8, buf->size);
-> > > >       if (!fulldt)
-> > > >          return -ENOMEM;
-> > > >
-> > > >       memcpy(fulldt, fdt, buf->size);
-> > > >       buf->data = fulldt;
-> > > >       buf->alloced = true;
-> > > >    }
-> > > >
-> > > >    return 0;
-> > > > }
-> > > >
-> > > > Then you can use this in various places as needed.
+> > > > Would it be possible to add some docs about this? Does the exporting
+> > > > rpi do a full system boot and then run some scripts to load things
+> > > > onto the board, then shut down?
 > > >
-> > > That looks like massively more code than is needed to just ensure that
-> > > the thing we deal with today is also correctly aligned? We don't need to
-> > > pull abuf into everything.
+> > > I don't understand your question. Yes, the exporter is powered on/off in
+> > > the test job, as explained in the commit message. When it comes up it
+> > > registers the device under test with the coordinator (and unregisters
+> > > when powering off).
 > >
-> > It is 27 lines of code, less than Marek's delta. Plus by the sounds of
-> > it, we can call it from more than one place. I think it is better to
-> > have a common function than to open-code this stuff in multiple
-> > places. I also think separating out the map_sysmem() stuff would make
-> > sense, since it is a bit convoluted at present.
-> >
-> > Re abuf I believe it is a useful abstraction and I wish I had thought
-> > of it some years ago. It is particularly good when you may or may not
-> > need to allocate something. Should we discuss abuf in one of the
-> > U-Boot meetings?
+> > So does that mean that all the logic for talking to the board is not
+> > in the hooks or Labgrid, but somewhere else? I'm just trying to
+> > understand how it is put together and compare it with what I did.
 >
-> No, I think you've lost the thread on some of the problems
-> unfortunately.
+> I still don't understand what you're asking. Maybe you missed the patch
+> that added sage to u-boot-test-hooks as well? That contains the labgrid
+> environment yaml file. The boards are just in labgrid, the exporter
+> registers them with the coordinator when the exporter comes online.
 
-That might be a little too cryptic for me to understand. Which problems?
+I saw the hooks patch. But I am missing the logic that actually writes
+U-Boot to the board, powers it on/off, etc. Where is that?
+
+>
+> And FWIW, this isn't ideally how I'd do the labgrid integration, but
+> tees up the next steps nicely. We need to abstract how our pytest
+> portion grabs console/flashes/etc so that someone could write a python
+> native set of classes (since labgrid supports pytest directly).
+> Iterating on that is easier however when starting with something that
+> works.
+
+Yes, that would be nice. It would also make it easier to know when to
+expect the board to respond, rather than the long timeouts we have
+today. I started looking at this in June but didn't finish.
 
 Regards,
 Simon
