@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B43CEBF61
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 14:33:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF453CEBF61
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 14:52:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 160F583A03;
-	Mon, 17 Nov 2025 15:33:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5669C83942;
+	Mon, 17 Nov 2025 15:52:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fYo5fVRd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LUq+F3QB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47CAB83A64; Mon, 17 Nov 2025 15:33:45 +0100 (CET)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 0810083946; Mon, 17 Nov 2025 15:52:25 +0100 (CET)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FD8983946
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 15:33:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5F948393F
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 15:52:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-44ffaeda17fso1234707b6e.1
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 06:33:43 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-63f96d5038dso3545655d50.1
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 06:52:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763390022; x=1763994822; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Xl/A4a5ZAiayH445kd/8to5dKgOHNfARlM8yAOcDJzI=;
- b=fYo5fVRdyWmYoqB1yoHSj/Ik2FVaqu4MhBTD4ktFgAi/YymZkx/la5HE29DJjUgmng
- 01I0hHO4pMNMyJDNXq6VYt+r5NoEv1zNA0GX2lINIMEgZDi8CZI1Qrg6AXVQ9DWAfqr6
- /UDsKoNfVXR3mi885uU+nlUREEIL+Kte+jJ80=
+ d=linaro.org; s=google; t=1763391141; x=1763995941; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=dLz9f8XSJ9KaoI6Yq9/RKMqmNLT7X2+oRffpHN22w34=;
+ b=LUq+F3QBv2Qvp+WikIFU7yuvREUSzXF64t31PsR6tFjPUMTikK7vQRlQ1I2xTAYZGT
+ rIdteT8nnfUQ/qsmmM5YwUB1CmcqUG2NdNe4ckBwtZ+l+J0qHBJAXnL0R7WlZnCvU+qC
+ rCo65VVHNSMnhWpy7ntMSZp/5mUHpBEnbQ5KCX8Ns7rcKxzc+SK51yIEpvA7Lk8YLkds
+ cnOLl+L3t7teTCAQXJGyPpmmra53Hq/eGK3jLV7ibhatbmWmyXCO8QDAVSrZJjTjDDSK
+ syHxHaJg+A7+MGndUOQMFlT1xPa3Ml57i8GoXmCNsgCTFsMcTu2CrnUBbKnFRYdlDFjO
+ kUqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763390022; x=1763994822;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Xl/A4a5ZAiayH445kd/8to5dKgOHNfARlM8yAOcDJzI=;
- b=X5pzliqr2I8/2Tixoe5UDkBTrdDA+rzYAdVKjK5fvmvUPl6P1JX0hiUNKv68UY7/Cp
- lpEbYUE0fVsqgQAMEKoKuDuwgnWdjpo9RkFzAWgN4pJzgcm0Cp0YDor+CkbwGWeVMFFF
- nFOLhAymtEB8QUeansUVGlM3l9RMG+V0S6NEepmdlSgIE4Zo8jptoyZvh6JCqfGRFBnT
- S+cckUGE3F9ZT6k0kB+uTyyOKUkbMhw0Ab17P7v8DWFSGH0zin8EE2R0Rs6P1dpZ38K0
- AvUUA5uCP8TCSob/ZIRYOWPHsRVGk43rtXFvb3yGV3EW+lKGwhVnsRLNDPHeO+WObD2o
- rAHA==
-X-Gm-Message-State: AOJu0YzX+dOsDF1e3zY449pFuiiY4IsHwAZ9b5kOkanHLqBvje7Fv0Fk
- wx4EyU61fxxquMsuOiXTLD7psfmLZJxlLK8JBC8xgj0YwGZsjNK3Om+hiLKalEfTw4u8X9WJUK0
- 0vboC61MfwA==
-X-Gm-Gg: ASbGncsbuk+PwHO3RkPWQwssRo6UiH2LmBqlRaEz24YB5Ex7FWYlkAf9wkEF7FKCKAn
- 5CYRXbdvzfZwMmdzyMvdQzphgWJxJguzrDFtVqeNdOtrZ18hWyayuYr2+hYsvaI4t0q2UuNO195
- Iv6NCqGIyCziv3IzGzNHvnyjnlZ3mZOPHawKuN8i5Nan7bmAcokhgNGMV+kHcvPo9Y8YfG701Ua
- NViEZlyGfx9SeCZnHkQjJECTlPntERQfw+N9eVglJNeMtVLxhho6kVtKGoZy8qv/sQaxwq/tivZ
- Cu0gnQedsrSMyZm9b+5wPTrfC42rKVUnGiE36IIKZqPLIhnFjvduWKNTSPucfuMvYXdJSd6sLAg
- Bidk5f6Y5KXveGZmTPuPgWLoI+e5S/Gr93rWezYuVOJ0erCSNJ3xOZQYEToWBwA/XC/p8yZkT7j
- CmhTNlr+1NYpfeTYw7AwG1xxZ+5Zh9Y9CYdHmLCblyf+KDciorpQ==
-X-Google-Smtp-Source: AGHT+IFJBipduejl9RlX4wn6yNj0TUHR7ofFkJDM9qNXP91xR6L9fUlZmhvrvcbNuwB/4Nfe44FCtw==
-X-Received: by 2002:a05:6808:152c:b0:450:ccc6:4124 with SMTP id
- 5614622812f47-450ccc66d41mr1349159b6e.37.1763390021856; 
- Mon, 17 Nov 2025 06:33:41 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4508a555527sm4304262b6e.7.2025.11.17.06.33.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 06:33:41 -0800 (PST)
-Date: Mon, 17 Nov 2025 08:33:39 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Walle <mwalle@kernel.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/3] drivers: rtc: convert tristate to bool
-Message-ID: <20251117143339.GI2125796@bill-the-cat>
-References: <20251117103315.2212686-1-mwalle@kernel.org>
- <20251117103315.2212686-2-mwalle@kernel.org>
+ d=1e100.net; s=20230601; t=1763391141; x=1763995941;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dLz9f8XSJ9KaoI6Yq9/RKMqmNLT7X2+oRffpHN22w34=;
+ b=B30cA8XH81tLUfatzYtVXajE55ZIchWSG26MjurBSCtMF58X7mtPbXuLzv/Sj3hUBO
+ dswSxUfxWXCAoZIipOumrPARm3rngNPFYHaAaBBTmCCkTet8YRujGnpA2yqjIdgMr2lc
+ wv41BISYM+/WzB+Ww6F02yWIGIy4Yc9g5vJnY3hoXYAG4stER/LMNBcjT2GJcYnOxMrL
+ nRG8vPMe+kZjaoNWyCdQekhJzN47KbHc6fV+q2u+kwBrpyP9jsvp52FsD2fNX0gmhmMk
+ 2DVCOal9Gg8JMYKIM9WeSFG0NgklOflZQpuq0CAZhpzZ1/nyN8XV9oSGOhBH8iXtBj/9
+ amUQ==
+X-Gm-Message-State: AOJu0Yz0xMyio8pVlIB9mhj0ihJ+V1xSFwiRSVdefS2l+WnBCS55Knth
+ pLWCu4BwMaN0xM29jukDWnjFxnrx0o+EGLwmy2eYUcyV6pwz/LEYqd+DRBX9st77GECX0BQK+FG
+ iJrnMshdMVkg1s1fC87TadMUZ0Nv5O68DagbqCuTjNY8raQPunL00pZs=
+X-Gm-Gg: ASbGnctl/10/aEPUeemSBTr8kntHEcvWIENgxPECuXcWnsDhRkiS8ZlLOi8odUOHdOe
+ jhQ3STr5kGJ5UpEN0TWu/TRw+BRgLUvjbH18A5JxB/1jj5+ysKaKbcwGaOWGZnx6xrJtcC7Xo0O
+ mG8XnZ25zOBHlKkOg3W0jJjfYqjPAKsLV+5PKHQycap22kg4ZdQkwnJDj14ZUGaWGiO2I1duBhP
+ +jFIM92LlpZAr0lcpJUjrWd9SR4gTEslUeIPxDN40q3p0oO4U9hcou4MW1xTSfECg8T4Egifas8
+ MpVBKGfw/1ca0/H1nQfFYv3SRWle5jdzPFvRJMrAtdQ/Ni9R0RM=
+X-Google-Smtp-Source: AGHT+IHIB7ZH23OE1hlywSP8yby04IwEt8gktp/D8UVpdJ6l6PmLnUXXqhiL4OzaHRfUxj3w5yDO1ok2TdfLapo1rqM=
+X-Received: by 2002:a05:690e:4312:b0:640:c9c1:a329 with SMTP id
+ 956f58d0204a3-641e76270bcmr8442739d50.32.1763391141475; Mon, 17 Nov 2025
+ 06:52:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p7hi1RpsN1OWxRkK"
-Content-Disposition: inline
-In-Reply-To: <20251117103315.2212686-2-mwalle@kernel.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251114093246.56422-1-heinrich.schuchardt@canonical.com>
+ <20251114093246.56422-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251114093246.56422-2-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 17 Nov 2025 16:51:45 +0200
+X-Gm-Features: AWmQ_blI6PS1uY1WtRPUZgovpXphGokA7Z-Kf46FsGkrq3vfumptiI20ZshmPE4
+Message-ID: <CAC_iWjJDMbLuOQtnrKqh_-o9+UVMEmDz3MbfTY_1ND_CfjEwcQ@mail.gmail.com>
+Subject: Re: [PATCH 1/7] efi_selftest: expose runtime table address
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,33 +92,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 14 Nov 2025 at 11:33, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Save the address of the EFI runtime as a global variable.
+> This allows to simplify the setup of tests.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
---p7hi1RpsN1OWxRkK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-On Mon, Nov 17, 2025 at 11:32:50AM +0100, Michael Walle wrote:
-
-> As u-boot doesn't have any loadable modules, tristate doesn't make
-> sense. Convert it to bool.
->=20
-> Signed-off-by: Michael Walle <mwalle@kernel.org>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---p7hi1RpsN1OWxRkK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRsyQgAKCRAr4qD1Cr/k
-CtKqAP4vZX58sAjMYSe+BkmlxzHyZa7KLflgVFGgb1b8otQgeQEAnnytjD0Ns2iJ
-9wv3xG6tzo4RDqS5AtuAUYbHwOjYagw=
-=rMJ/
------END PGP SIGNATURE-----
-
---p7hi1RpsN1OWxRkK--
+> ---
+>  include/efi_selftest.h          | 1 +
+>  lib/efi_selftest/efi_selftest.c | 8 ++++----
+>  2 files changed, 5 insertions(+), 4 deletions(-)
+>
+> diff --git a/include/efi_selftest.h b/include/efi_selftest.h
+> index 1b708849bcb..4ee46cbbb66 100644
+> --- a/include/efi_selftest.h
+> +++ b/include/efi_selftest.h
+> @@ -19,6 +19,7 @@
+>
+>  extern const struct efi_system_table *st_systable;
+>  extern const struct efi_boot_services *st_boottime;
+> +extern const struct efi_runtime_services *st_runtime;
+>
+>  /**
+>   * efi_st_printf() - print a message
+> diff --git a/lib/efi_selftest/efi_selftest.c b/lib/efi_selftest/efi_selftest.c
+> index 191da7fc451..2b95713afb4 100644
+> --- a/lib/efi_selftest/efi_selftest.c
+> +++ b/lib/efi_selftest/efi_selftest.c
+> @@ -16,7 +16,7 @@
+>
+>  const struct efi_system_table *st_systable;
+>  const struct efi_boot_services *st_boottime;
+> -static const struct efi_runtime_services *runtime;
+> +const struct efi_runtime_services *st_runtime;
+>  static efi_handle_t handle;
+>  static u16 reset_message[] = u"Selftest completed";
+>  static int *setup_status;
+> @@ -259,7 +259,7 @@ efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
+>
+>         st_systable = systab;
+>         st_boottime = st_systable->boottime;
+> -       runtime = st_systable->runtime;
+> +       st_runtime = st_systable->runtime;
+>         handle = image_handle;
+>         con_out = st_systable->con_out;
+>         con_in = st_systable->con_in;
+> @@ -347,8 +347,8 @@ efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
+>         efi_st_get_key();
+>
+>         if (IS_ENABLED(CONFIG_EFI_HAVE_RUNTIME_RESET)) {
+> -               runtime->reset_system(EFI_RESET_WARM, EFI_NOT_READY,
+> -                                     sizeof(reset_message), reset_message);
+> +               st_runtime->reset_system(EFI_RESET_WARM, EFI_NOT_READY,
+> +                                        sizeof(reset_message), reset_message);
+>         } else {
+>                 efi_restore_gd();
+>                 do_reset(NULL, 0, 0, NULL);
+> --
+> 2.51.0
+>
