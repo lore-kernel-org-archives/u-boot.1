@@ -4,106 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86176CE8D6B
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 16:43:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 173C4CEACEF
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 16:47:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E05B83B99;
-	Mon, 17 Nov 2025 17:43:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 84CA783B99;
+	Mon, 17 Nov 2025 17:47:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="NTCtSTRJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fX3Kug32";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A833283BF1; Mon, 17 Nov 2025 17:43:39 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EC82E83BFE; Mon, 17 Nov 2025 17:47:00 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41C8183A8F
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 17:43:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66C9883A8F
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 17:46:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E537E3F7C1
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 16:43:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763397815;
- bh=u/H6W3dzWAKqq5EBgGNoHIHRofM8VSExWL2o4ndUTck=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=NTCtSTRJuvs9hsNY6OoXWQKqVhTVOuUhrJwojJ8jzNAmpq0y4lC+5oy6FFz7RZ1GS
- zh8KNGsa2ixjAPrBXGY2xyXLG/EzbTV9YHcHrtJl9dK4sWXgHTMEAvhjQzw86YJzMY
- RP67EyVJ53dYGLalqHzQzVEvXHzTALUVPEO/JPBuubU0EJyVxGhVITjfiraXqg3DFH
- GAvetoiYuoVOSRTNHHmOw4mZfSQNUigVYCkAQ2CtJz8CMguwqmD+kxCwPSSCaeig2o
- bcrIhwmVH1XW5ewRZS1uM2gkSzrtYG3qUPR7GMmRaylQszjX1DKVbLvW1cx4aypVfh
- Ae+Jb92AhmSdamjDCdvI29XuJHYYSRs+iZrMWzdfo8RpegL1u10AYmS9Uk9D8erbKe
- ass9LudxZgQK86AiK/lIbkHwGKHcYXpBYqsnoNG1foBk0DEnrKfCIQlSd7s4ZCIRQ8
- FwxO1GWOsWaXk07LOEVlJzeVHTgVyBskkNBMDM9prHmjZnpz78YYEx6rXKvSHGAi0Z
- mqXJFbbimdDlrEYs4LAgRYNfZBRGhgu5AccGsYe2DpfV8VvKL4A3RX33CfuK0psLLZ
- NrDD+OjMi0NT9Ii5Ol9EIx74KhDHl9GJITI6jaPArgI9fwNGg3B6wQkx+aHkTNxvpT
- xsG2ofxTOt7Bsnt9/0YB+J8U=
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-42b3339cab7so3566913f8f.0
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 08:43:35 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c28bf230feso5442299a34.0
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 08:46:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763398017; x=1764002817; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=GB/pDp5zjIu1jcWLkAY4Y6SqSr99YIhyOxObu3qP/mo=;
+ b=fX3Kug32IsoMyRZbWlAo7BeUph+UCq6G3/Br52C1gI6U6c0JKJqQToqGRjRfTFel1t
+ 5uLUR1Up0X/4BieNDu0GX+96QCJOjG2tFVCS1fnD5hAY4O7GccmZFxEiBXKUUbK50sUu
+ 8wAHIbyWTIGHw/IZcv+zoQc7Oq70AEmTSyctA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763397813; x=1764002613;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=u/H6W3dzWAKqq5EBgGNoHIHRofM8VSExWL2o4ndUTck=;
- b=BjFpyoIgHVHLvwMFe8osNtY4S9mznbHezOSgRBAuA7EUR0UO4RK4sLuvkcFaPbvgWA
- 0r37+qt1jRZwo9EsfzTE5OpGAu3+Y2iw8xKSGGqaIRS+jaxkILto78K868YyONunFwnk
- EeJf2uJI+lOdfUrsAK6/lQSQ2evinRqfcHBud/ikrcHzPpJy+Q4jgHuGCo/m1GOrotJT
- BFI0ecaBa5Jb5vibKQk0YPze474Uyw2AgwDIYwX4j662c5DMZN7ki34KH6aE9fbo0PRI
- ZTcvwQjz3EoVXh7mv1QbDJuKvaT+ALD7xxVn9wKlOJ7FlhPdetWb3rpklNFe6hfVWo1N
- NpTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU3lkFRAJ9Mc5q0gZ3OOnCaU/f+NKUaPbPDndd6SFMLQJGnjVsOdIPrcpVvQn92w1f3W5CQr1o=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2tFQzpsQkoonOUJB8KyOuOznHy7WCbhBLQRSUubx0LFTISvXk
- kPU7w8ItQd5o2571WJ7HtPXyP4B1HzRUHU6agWgbKjpx9fQiybF/QivryjMnN0/pyiZIdQ+sxIg
- n7J4Q7TdE7sg6gnwtrs5wnKCBQgdGOAFS29VmlfI+g3/e1LlfuNhkVcXE03UDgr4izz5Eooo=
-X-Gm-Gg: ASbGncvrmnGZY7wynRhtQXvZUiwoGb8u1meHPQsrgKOd/tPzGBCFvij+tC+NtRzSomv
- vZVB5TBgB7HfyL/oTUSEdmkM1QZBxjtE8tCZJb/kkwV1X1ol1scDhfpC266eW8QKxj6Tmi0IMS2
- MnvSvNybS/U72j3LLM8x11RCm+37GdjowIpTKsYcoPVHPgiFXXxv33mnIf/miGJrUKHe5D/tk+s
- zaA9LYla9ZU9Iy2rkoNq6VNE+4HxwJQsPUcjLik2empsA8wcLNeNjbipcT+pVrh68S3aKAiTwwA
- vdg6dRXnv51LjE06VizYs4S4kGV0PkYeORL2/DZhRMuGs+95LI4nzTo21HMuwZDrs7nzqZdLrnI
- OrQKh8aC4sLwHkjPT8oOakZ+2TNfnWfl48Q+vIluJnUqWv1hdyyaDV/aAhc9JZvmIE05Yk89v
-X-Received: by 2002:a05:6000:230d:b0:42b:2e94:5a8f with SMTP id
- ffacd0b85a97d-42b5939dc13mr11913332f8f.52.1763397812737; 
- Mon, 17 Nov 2025 08:43:32 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEVZpqhyIapJWWQiVIgUioatARoKl7/jm0CpyJYjpQWg/T2M/wmqkACwY0DpfyQnJyZEBmk/Q==
-X-Received: by 2002:a05:6000:230d:b0:42b:2e94:5a8f with SMTP id
- ffacd0b85a97d-42b5939dc13mr11913309f8f.52.1763397812327; 
- Mon, 17 Nov 2025 08:43:32 -0800 (PST)
-Received: from [192.168.103.118]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42b53f0b894sm27679885f8f.26.2025.11.17.08.43.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Nov 2025 08:43:31 -0800 (PST)
-Message-ID: <15d4a8ae-5fd2-45df-af9d-e879faf6be1f@canonical.com>
-Date: Mon, 17 Nov 2025 17:43:30 +0100
+ d=1e100.net; s=20230601; t=1763398017; x=1764002817;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GB/pDp5zjIu1jcWLkAY4Y6SqSr99YIhyOxObu3qP/mo=;
+ b=i2Li40mJNupyrkDHNqx/K3fdMLdYu5gwft6cDDGe+o2WnhDzIGbnoUf5Re1LgN5Zh6
+ b53iwu/Jc217lAPOWVK62Si38yee5Z3wpQJOm5OV9PKEN1YJIGItHlx9crU8GOSF/+kz
+ 17nOPict4C0WNUASCztN2UmMynkyPLRJ0yZutQ1KMEeWsFBswoJ3Ewobg5XALJUDbm6I
+ pVXDzpx82n+8i/P+hkx/8Q5apPj+fKY0HX0jvn9ijVRhSmcCISASwu13etIL7DdVTZ9u
+ /RKXs7UxReSC4az6ZvoYLFtajPWGhT8tz+YyiAiWmn2IWzFvnzA4FM2PaFm4qfFe/JaT
+ yS/g==
+X-Gm-Message-State: AOJu0Yz75yqyLLByTszLdlu8bL5m88EI8zfaF+hX+vqc1YeE6xAshPJ1
+ bwBPFRqUmOChq8NrK7wfG0uzYdDUxyPE8XDWYF9HUpEONnAAlOWQnOwC1IhzqedDm9w=
+X-Gm-Gg: ASbGnctuL8Wh/5EFL5k2cH39i5xGpxfnm5SANM2P7k65jPR/ZM28JQj6dxWCYx4BQ0d
+ 2zFvQbWTYYxiKkRMQO32ERPfIJUwfLky/XrKslp/9ad48FOAWkaSLnYgnq3UqCmjo7gu4N/6kdz
+ VdJ+5Y4Y/lmDJOsyWNyrpd60NHC4XEvoRU6m/BaZ+S2wk+62/y3DQfkGjZ+yAVG2SkceNnaf7+P
+ 6VWiSw47ZwxcLZwujk3Hqnyil0NWYaeU0l14Chef0gfMp/ph/TExDMshlAQJ0+TkRz6V11pNed4
+ E0IYmGLltxR1cuxPoZQPxJ2aoSosJIzhEXOEjRK1NBqa0lrHhOpG3lwNlPEPTe9VYHwsDjX/WjY
+ v/eGwPVrtcBeN6XjhflErL6ViG2FhVRrqPhyjR4Go2ylvXPopmAqYWF7XSbYwaSEjgCaiZbJ3lu
+ njr2Av4UygPjDo3teiDVfaos1jyUPyOhK4Av4SliLAHBbKed52/g==
+X-Google-Smtp-Source: AGHT+IFtUAGsaFFArysNnqNuRa/ujVeQp377fLe1hQuTG7iPgtWrAHpK8H0+q23yPbsb0QzzI0wevg==
+X-Received: by 2002:a05:6808:4a50:10b0:450:c46b:8149 with SMTP id
+ 5614622812f47-450c46b85a0mr1877653b6e.33.1763398017101; 
+ Mon, 17 Nov 2025 08:46:57 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c73a3bddbasm5598947a34.27.2025.11.17.08.46.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Nov 2025 08:46:56 -0800 (PST)
+Date: Mon, 17 Nov 2025 10:46:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Asadeds <md.asadullah@eds-india.com>,
+ Olivier Moysan <olivier.moysan@foss.st.com>,
+ =?iso-8859-1?Q?Rapha=EBl?= Gallais-Pou <raphael.gallais-pou@foss.st.com>
+Subject: Re: [PULL] Pull request for u-boot master / v2026.01 =
+ u-boot-stm32-20251117
+Message-ID: <20251117164654.GK2125796@bill-the-cat>
+References: <dfa99b38-b75c-42da-b631-a158699b3f0b@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] cmd: smbios: correct output for table type 4
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
- u-boot@lists.denx.de
-References: <20251116103934.63668-1-heinrich.schuchardt@canonical.com>
- <CAMDkj5wQ=pRGFrf_S-HPUs9Zd-uWGFyLFDk3S2TRGCCuvJCMgA@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAMDkj5wQ=pRGFrf_S-HPUs9Zd-uWGFyLFDk3S2TRGCCuvJCMgA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="VJFj8sGrDdrzx97t"
+Content-Disposition: inline
+In-Reply-To: <dfa99b38-b75c-42da-b631-a158699b3f0b@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,138 +102,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/17/25 16:48, Raymond Mao wrote:
-> Hi Heinrich,
-> 
-> On Sun, Nov 16, 2025 at 5:39 AM Heinrich Schuchardt 
-> <heinrich.schuchardt@canonical.com 
-> <mailto:heinrich.schuchardt@canonical.com>> wrote:
-> 
->     In the QFW case the SMBIOS specification version is controlled by QEMU.
->     Field 'Thread Enable' is not available before SMBIOS v3.6.
-> 
->     We should not print the core, core enabled, and thread counts twice.
->     Use the appropriate based on the SMBIOS version.
->     Use decimal output which is easier to read for humans.
-> 
->     Signed-off-by: Heinrich Schuchardt
->     <heinrich.schuchardt@canonical.com
->     <mailto:heinrich.schuchardt@canonical.com>>
->     ---
->       cmd/smbios.c | 21 +++++++++++++++------
->       1 file changed, 15 insertions(+), 6 deletions(-)
-> 
->     diff --git a/cmd/smbios.c b/cmd/smbios.c
->     index 671c14e05b5..f9a352c107d 100644
->     --- a/cmd/smbios.c
->     +++ b/cmd/smbios.c
->     @@ -262,6 +262,8 @@ static const struct str_lookup_table
->     md_tech_strings[] = {
->              { SMBIOS_MD_TECH_OPTANE,        "Intel Optane persistent
->     memory" },
->       };
-> 
->     +static u16 smbios_version;
->     +
->       /**
->        * smbios_get_string() - get SMBIOS string from table
->        *
->     @@ -504,18 +506,23 @@ static void smbios_print_type4(struct
->     smbios_type4 *table)
->              smbios_print_str("Serial Number", table, table->serial_number);
->              smbios_print_str("Asset Tag", table, table->asset_tag);
->              smbios_print_str("Part Number", table, table->part_number);
->     -       printf("\tCore Count: 0x%02x\n", table->core_count);
->     -       printf("\tCore Enabled: 0x%02x\n", table->core_enabled);
->     -       printf("\tThread Count: 0x%02x\n", table->thread_count);
->     +       if (smbios_version < 0x0300) {
->     +               printf("\tCore Count: %d\n", table->core_count);
->     +               printf("\tCore Enabled: %d\n", table->core_enabled);
->     +               printf("\tThread Count: %d\n", table->thread_count);
->     +       } else {
->     +               printf("\tCore Count: %d\n", table->core_count2);
->     +               printf("\tCore Enabled: %d\n", table->core_enabled2);
->     +               printf("\tThread Count: %d\n", table->thread_count2);
->     +       }
-> 
-> 
-> I think for ">= 0x0300", both parts are needed.
-> 
-> Below is the description of " Core Count 2" in spec: https:// 
-> www.dmtf.org/sites/default/files/standards/documents/DSP0134_3.8.0.pdf 
-> <https://www.dmtf.org/sites/default/files/standards/documents/ 
-> DSP0134_3.8.0.pdf>
-> Number of Cores per processor socket. Supports core counts >255. If this 
-> field is present, it holds the core count for the processor socket. Core 
-> Count will also hold the core count, except for core counts that are 256 
-> or greater. In that case, Core Count shall be set to FFh and Core Count 
-> 2 will hold the count. See 7.5.6. Legal values: 0000h = unknown 
-> 0001h-00FFh = core counts 1 to 255. Matches Core Count value. 0100h- 
-> FFFEh = Core counts 256 to 65534, respectively. FFFFh = reserved.
-> 
-> Similar for core_enabled2 and thread_count2, they are all extensions 
-> when values above 255.
 
-The descriptions of fields "Core Count 2", "Core Enabled 2", "Thread 
-Count 2" all say: "If this field is present, it holds the ... for the 
-processor socket."
+--VJFj8sGrDdrzx97t
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-So there is no need to look into the old fields "Core Count", "Core 
-Enabled", "Thread Count" for SMBIOS version >= 3.0 and test for 0xff.
+On Mon, Nov 17, 2025 at 09:33:03AM +0100, Patrice CHOTARD wrote:
 
-We should avoid printing duplicate information.
+> Hi Tom
+>=20
+> Please pull the STM32 related patches for u-boot/master, v2026.01 =3D u-b=
+oot-stm32-20251117
+>=20
+> CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipeline=
+s/28392
+>=20
+> Thanks
+> Patrice
+>=20
+> The following changes since commit 365a7079fb918643da0f0709660a7d8ea76dd6=
+f3:
+>=20
+>   Prepare v2026.01-rc2 (2025-11-10 11:30:56 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
+32-20251117
+>=20
+> for you to fetch changes up to 66e2e941cd44db9c642b64618bd16ef132fca83e:
+>=20
+>   ARM: stm32: Add MAC address readout from fuses on DH STM32MP1 DHSOM (20=
+25-11-17 08:09:23 +0100)
+>=20
+> ----------------------------------------------------------------
+> dhelectronics:
+>   - Move dh_add_item_number_and_serial_to_env() to common code
+>   - Read values from M24256 write-lockable page on STM32MP13xx DHCOR
+>   - Add MAC address readout from fuses on DH STM32MP1 DHSOM
+>   - Keep the reg11 and reg18 regulators always enabled on STM32MP13xx DHC=
+OR.
+>   - Fix boot for stm32mp15xx-dhsom.
+>   - Fix build of ST DFU virt code on DH STM32MP1 DHSOM
+>   - Introduce DH STM32MP13x target.
+>=20
+> STM32MP2:
+>   - Add support for stm32mp257-dk board.
+>   - Fix arm, smc-id value for stm32mp23/25.
+>   - Fix stm32mp235f-dk boot (add syscon compatible, add txbyteclk).
+>   - Add display support:
+>     - Introduce LVDS driver.
+>     - Add LTDC support.
+>   -  Add Ethernet support for stm32mp255.
+>=20
+> STM32MP13:
+>   - Add ADC support.
+>   - Add power check for stm32mp135f-dk board.
+>=20
+> ----------------------------------------------------------------
+> Asadeds (1):
+>       arm: stm32mp25: add ethernet support for stm32mp255 series
+>=20
+> Marek Vasut (7):
+>       ARM: dts: stm32: Fix STM32MP15xx DHSOM boot breakage due to ETZPC
+>       ARM: dts: stm32: Keep the reg11 and reg18 regulators always enabled=
+ on STM32MP13xx DHCOR
+>       ARM: dts: stm32: Introduce DH STM32MP13x target
+>       ARM: stm32: Add missing build of ST DFU virt code on DH STM32MP1 DH=
+SOM
+>       board: dhelectronics: Move dh_add_item_number_and_serial_to_env() t=
+o common code
+>       ARM: stm32: Read values from M24256 write-lockable page on STM32MP1=
+3xx DHCOR
+>       ARM: stm32: Add MAC address readout from fuses on DH STM32MP1 DHSOM
+>=20
+> Olivier Moysan (1):
+>       adc: stm32mp13: add support of adc to stm32mp13
+>=20
+> Patrice Chotard (7):
+>       ARM: dts: Add stm32mp257f-dk-u-boot.dtsi
+>       ARM: dts: Fix "arm, smc-id" value for stm32mp23-u-boot.dtsi
+>       ARM: dts: Fix "arm, smc-id" value for stm32mp25-u-boot.dtsi
+>       ARM: dts: Add txbyteclk clock in stm32mp235f-dk-u-boot.dtsi
+>       stm32mp: Add stm32mp23 support for syscon driver
+>       configs: stm32: Enable ADC support for stm32mp13_defconfig
+>       ARM: dts: Add st, adc_usb_pd property for stm32mp135-dk-u-boot
+>=20
+> Raphael Gallais-Pou (6):
+>       ofnode: support panel-timings in ofnode_decode_display_timing
+>       video: simple_panel: add support for "panel-lvds" display
+>       video: stm32: STM32 driver support for LVDS
+>       video: stm32: ltdc: support new hardware version for STM32MP25 SoC
+>       video: stm32: ltdc: properly search the first available panel
+>       configs: stm32mp25: enable LVDS display support
 
-Best regards
+I'm fixing this up while merging but in the future it can be helpful to
+run scripts/checkpatch.pl --git on a PR as I see a number of duplicate
+signature warnings (which I fixed), and one spelling problem which I
+also fixed.
 
-Heinrich
+--=20
+Tom
 
-> 
-> So, if for the consideration of the old versions of spec, the change 
-> should be:
-> ```
-> -       printf("\tCore Count 2: 0x%04x\n", table->core_count2);
-> -       printf("\tCore Enabled 2: 0x%04x\n", table->core_enabled2);
-> -       printf("\tThread Count 2: 0x%04x\n", table->thread_count2);
-> +      if (smbios_version >= 0x0300) {
-> +               printf("\tCore Count 2: %d\n", table->core_count2);
-> +               printf("\tCore Enabled 2: %d\n", table->core_enabled2);
-> +               printf("\tThread Count 2: %d\n", table->thread_count2);
-> +       }
-> ```
-> Moreover, I think the same logic should be done when the table is being 
-> constructed in lib/smbios.c, where the real content of tables is located.
-> 
-> Regards,
-> Raymond
-> 
->              printf("\tProcessor Characteristics: 0x%04x\n",
->                     table->processor_characteristics);
->              smbios_print_lookup_str(processor_family_strings,
->                                      table->processor_family2,
->                                      ARRAY_SIZE(processor_family_strings),
->                                      "Processor Family 2");
->     -       printf("\tCore Count 2: 0x%04x\n", table->core_count2);
->     -       printf("\tCore Enabled 2: 0x%04x\n", table->core_enabled2);
->     -       printf("\tThread Count 2: 0x%04x\n", table->thread_count2);
->     +       if (smbios_version < 0x0306)
->     +               return;
->              printf("\tThread Enabled: 0x%04x\n", table->thread_enabled);
->       }
-> 
->     @@ -719,6 +726,8 @@ static int do_smbios(struct cmd_tbl *cmdtp, int
->     flag, int argc,
->                      struct smbios3_entry *entry3 = entry;
-> 
->                      table = (void *)(uintptr_t)entry3-
->      >struct_table_address;
->     +               smbios_version = ((u16)entry3->major_ver << 16) +
->     +                                (u16)entry3->minor_ver;
->                      snprintf(version, sizeof(version), "%d.%d.%d",
->                               entry3->major_ver, entry3->minor_ver,
->     entry3->doc_rev);
->                      table = (void *)(uintptr_t)entry3-
->      >struct_table_address;
->     -- 
->     2.51.0
-> 
+--VJFj8sGrDdrzx97t
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRtRdwAKCRAr4qD1Cr/k
+Ch5QAQCxXw5nxyo7bsRxgAxKkeAtLB2mdGgkqVdxJ0wnd6ny7gD8CqnSH7GNy9Bb
+RKQpGfjUCMBxM1CN5erHYiR3xUYReQg=
+=Ihqn
+-----END PGP SIGNATURE-----
+
+--VJFj8sGrDdrzx97t--
