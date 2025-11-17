@@ -4,87 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D93CACE8D6B
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 10:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 733ADCE8D6B
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 10:55:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12D1E83B2C;
-	Mon, 17 Nov 2025 11:49:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CE682839A8;
+	Mon, 17 Nov 2025 11:55:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l029meqj";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="OKEWjQh+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FEF983B8C; Mon, 17 Nov 2025 11:49:48 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7519283A79; Mon, 17 Nov 2025 11:55:37 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44B9E83A8F
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 11:49:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16A81839A1
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 11:55:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-42b39d51dcfso2234467f8f.2
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 02:49:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763376585; x=1763981385; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M/e99HPS1vJtSl/6kE8dVRXJFKHvJt3L9OFtu8w8Hu8=;
- b=l029meqj205XMIE7wNGFHY2umcJsHrTLEUOCO8UXiF0UsMfKgksmCM5WvzEqC1HfvF
- 8LH3wgpb6/7pM1EOMZTsj2ABRU+TfPF4F057uvgXnZaQscgHBr/QBLHU/9BZhhPV74Ev
- 0mpG1b1e8lCsKmfhsZo2rvTJWsxHKYLcbsmLJtbPxwthX4R+p+65K0jSiPABDfvUBZjL
- APPmJohj6Snea17IUOOcF8+9AN0Q7Wu6gxJDGFopBjvtiO+F8W+N4LP0/+DEyennYJiD
- 4t23NzmaiLXfWN3UeFqth7soKmmWR2hIbszxUuTLSGqf+3ZTnS5TUifKVVMH3Eri3/Li
- W+LQ==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id F04123F628
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 10:55:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1763376933;
+ bh=asJZRBw3lJV+AlcomqG6mn8aYteBHBxsdFQmH15RjTs=;
+ h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=OKEWjQh+3F3s2RpxLcRBtvMYdV/9ZDOvmJKZBsD//4o6KI5T5K1DnIgwQckTeTWpE
+ rMPo6cn8Ezzfn1Wvv9q0eoDcbSVF5iI+iUAmK4x2/IwmP8FBvzygVTXekfhPbggEuv
+ XbmN/SzWECuANf2BkymRpjUZdSm3IBur/FlqYXkLKTEmRTi/Y5Ioylhok7uG5jnasi
+ 7LBiZUQzxW8BcS6vn7/30BEGoBtSQA9BL6Eq/QBOQqw7WcBSapbdZpLt5IlswLeagP
+ proYt2/OdNYMowGnHNuwfeaIc0+ghm38aqXefZQE/6MygIneW3X+Xoli3QeXo4MsMp
+ zYJ5ufZzVMUL8ojjfgwzggHsDqu3OjSWZN4hiLa79mzpH4hA0zPSMiE/Vi2wxP/Djn
+ sBPDdp81CLz5e7mdP2KS6joBn4rFCVIPToZcUceaPR4s1zijj4cJfGtdNq4FJL5Tkj
+ 7wrGMKObIFn/LMejYT0iY0/Il4+slnJ2zlSikzA26bMyNPsM0uPG1Bt4jjWjmCknQM
+ FglP0TeXyL67aZgK6W7Lt0zUBOUZQUYAvc8SAogMtWiZCrKaFh+lZj4MkL2Y5jP0BA
+ 63vnJGhbDDyz3DkHidANQtNJy4vx9kb/95PGfvbUInKdVf+LdUd/9P/kV017L2mWJB
+ k8+cwQI8rlbl+G+hK05g+kZQ=
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-42b3086a055so2768981f8f.3
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 02:55:33 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763376585; x=1763981385;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=M/e99HPS1vJtSl/6kE8dVRXJFKHvJt3L9OFtu8w8Hu8=;
- b=KYWpupYlPZrgmRkyVJ66obiHKFK69Viy46WvB6zd95Jvnhpwlkyuw9wBScVwj5KNBd
- 03X2JLK9awSyCJOrCnb45xciBMPGTHsw2x/jEAfc0edgBcEHxqZuLmcVwH5W7U7953jY
- d2hUHqdrR0U3zVFcjrWHAdqs92gJpKAK85fINwsBCC5fqaYtE8Lf4EblpfAqqCWtoHSc
- cYtkFfHTwsnf1+2Bjt40/gYyRg8hE+m4Sh+uJkjj1sOOkPevxdIfsG4ci5UGbT9WJE+b
- tEki+9nmgSi4fsRigXZZ/2TXWTw5WtM+U4sOr10kNWLAxZhe2ObZp+qc4KK56U7lxklb
- K3TA==
-X-Gm-Message-State: AOJu0Yx1tMXlyAwpq+vE9SDrUfRDMWpS5eb06FUgrA++0uK4IU3R3zSU
- p6nreLRC+DUZCXknKq1u32ZJhAKSaMie43R2Vxqf5lG1B+kd0XDDecoJL/IjdPYTYsVQi4aeNiP
- d0nMr
-X-Gm-Gg: ASbGncsRcpAKrWMatsuUsGw8hAGqmv25XZsHi5UPnQgmw3IOHIrFJdOL8sTcqxwJVfC
- sSPruSrfwaVI5AG5+anJ1/27qmEphKr1C5NrJjsCtIfQjYntWJ5FoCsYRqTlVm69WVbG/b2d2Fi
- kNB7IctTE0u44fSbtDFFKbqxJtBBEx7gtk3HVW/d3YcjEreciVMQW9/LhB6LT8yy2a67WxdnJTE
- QGSmFlOP12qPP5cJchNhcz13x3JJkMnVPsqE8GtJerJuZoTRTnyxjZjpQwJUNhzIBOHm2UV5R2Q
- +//9gEMfjwesyiHCXHjW38f3uKRWZSyHlSP/R9a3ahqJ/EYXOWZ2uN5Aa6zcF1JDZ7vkKEI5q5P
- yBdRhK+4sksMA75GnbOHCFvSeTPpcSgrN+NbHSf9hJ3cSnVv1MKFLTNt7UPyUxi2BS8MZ7MX0au
- Qjx+8ReHk5DMCjQ/JkBnSDMYdbQvd9G5B0v/EuYNa2jQ==
-X-Google-Smtp-Source: AGHT+IGCUM2BSn432Sww4Na2tP3esgQL1AsvVb+GmD5G1Wd2Yf13b0ISNBSom8VNkSFERVKLBGU8wQ==
-X-Received: by 2002:a05:6000:310b:b0:42b:41d3:dafa with SMTP id
- ffacd0b85a97d-42b59389c39mr10623417f8f.46.1763376584500; 
- Mon, 17 Nov 2025 02:49:44 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+ d=1e100.net; s=20230601; t=1763376933; x=1763981733;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=asJZRBw3lJV+AlcomqG6mn8aYteBHBxsdFQmH15RjTs=;
+ b=i6hlMKjzUKjXCdkj/amuaZVww4Qb/jaR+SnDaKwsjsapZuqlRfyw/94/v+y4cwoI0U
+ 59PiYUV6/hkwaXCRBBP2i2g318WuGNLcTTzs/e5WUg6aKLKZff4k5ihopLjASE+bwdsW
+ EjJ3M1NF8hmGDIsTjsldUrzA3e+5WfzGeJkzdyjyms1OcRXHjjK0MGXSPkcEAGCxyuQ8
+ oTDd16Owt4A2hqZxjZi0ZlqrSsTk3akSXOVS89sYYujYcYg0qKczOlMHWfv/Ktu82LUD
+ Q46IqEghcd6iSPpjhL3KlhTrruXMi9raGX9OIwYtSRcGIt33zSe7OqV6UaQeVcJzimSU
+ pKYA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU3N7+jLL/J8m5Lma5YBeKPT51h73Cr6y0eTdyWTilm/xTGhWu9uMy3GfIsUpaYY1Cp9jof0BY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw09yejkJqqTN0tPr9PjGmFOjMHwOj2SSQK+xoiQUWUewVpYi0i
+ jMyBcuTH5fcqOyAgN+Wx9Soq08T/SAhyZ4lt1DfSdTa1eQVY+iawGj3Uk+IyrNgXvBmSCNeHa4m
+ urKHeb+Vn2XFWTwbyjYyHVeF5lg9RWsieGOGA57lbro+FXX7VoHCJb8llANpNpgbXG0LWWxs=
+X-Gm-Gg: ASbGnctgd4bXGT2CBeEsvNTqOeJyBsLfxZSJ8rCKQX6yABcXT2582gcYa9GpUdcbYYe
+ b9vtqqCMK5bAl6gqzfs3fKcmMsbRszNpS9Morcfaq5GezcZHYu/WQnq8hfX/Y97q+VQwg1NqjCf
+ kZ+m3o6yMeOh9Q5dOoCQv2mT+5kOyORRpjL9HVOolDIAAoitUj25srn3Oa1tex4RgactuHkB+07
+ hYESZ4nwtsf6vAwounE2V3oKGugM7Tjg8k2Z0gdtMER1oMB6bLZp8O4IssBYKuNQxNYw6sb+/VW
+ HYM1a3C75fBA1BiE8zkybQVi9Fwl1Nrk9MJxOfthSKIdWeKWXf0g9H2MTppCe+mQfZ7qhEnVtfT
+ E+IsDOrX8Cwn31DkfRIyPzPUxkcZ80LOlUaTbIqq9cCYfHni5FXksFAs=
+X-Received: by 2002:a05:6000:4186:b0:429:d19f:d959 with SMTP id
+ ffacd0b85a97d-42b5934d6f1mr10457349f8f.15.1763376933526; 
+ Mon, 17 Nov 2025 02:55:33 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEj3RJypO6RlvOSzOvbYAQDbrraZxZ+1uGhjPxwwYOwI4enEgoGTWe6ShakpW41HCvFFoFanQ==
+X-Received: by 2002:a05:6000:4186:b0:429:d19f:d959 with SMTP id
+ ffacd0b85a97d-42b5934d6f1mr10457317f8f.15.1763376933095; 
+ Mon, 17 Nov 2025 02:55:33 -0800 (PST)
+Received: from [192.168.103.118]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42c97745f79sm11422514f8f.23.2025.11.17.02.49.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 02:49:43 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20251112211841.1428696-1-trini@konsulko.com>
-References: <20251112211841.1428696-1-trini@konsulko.com>
-Subject: Re: [PATCH] ufs: rcar-gen5: Use a unique U_BOOT_DRIVER name
-Message-Id: <176337658354.3830363.10042938881205083768.b4-ty@linaro.org>
-Date: Mon, 17 Nov 2025 11:49:43 +0100
+ ffacd0b85a97d-42b53e7ae5bsm25513651f8f.8.2025.11.17.02.55.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Nov 2025 02:55:32 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
+Message-ID: <86bf47cb-60e2-466a-a471-b08ece0efacd@gmx.de>
+Date: Mon, 17 Nov 2025 11:55:31 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] boot: pxe_utils: Fix memory allocation issues in
+ overlay_dir handling
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: Bajjuri Praneeth <praneeth@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, thomas.petazzoni@bootlin.com,
+ Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <20251113093313.362055-1-kory.maincent@bootlin.com>
+Content-Language: en-US
+In-Reply-To: <20251113093313.362055-1-kory.maincent@bootlin.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,21 +122,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Wed, 12 Nov 2025 15:18:41 -0600, Tom Rini wrote:
-> All instances of U_BOOT_DRIVER must be unique or we will have link time
-> failures. It is possible to enable both ufs-renesas-rcar.c and
-> ufs-renesas-rcar-gen5.c at the same time, so give
-> ufs-renesas-rcar-gen5.c a new unique U_BOOT_DRIVER name.
+On 11/13/25 10:33, Kory Maincent wrote:
+> From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
 > 
+> Fix two memory allocation bugs in label_boot_extension():
 > 
+> 1. When label->fdtdir is not set, overlay_dir was used without any
+>     memory allocation.
+> 
+> 2. When label->fdtdir is set, the allocation size was incorrect,
+>     using 'len' (just the fdtdir length) instead of 'dir_len' (which
+>     includes the trailing slash and null terminator).
+> 
+> Resolve both issues by moving the memory allocation and string
+> formatting outside the conditional block, resulting in clearer code
+> flow and correct sizing in all cases.
+> 
+> Closes: https://lists.denx.de/pipermail/u-boot/2025-November/602892.html
+> Fixes: 935109cd9e97 ("boot: pxe_utils: Add extension board devicetree overlay support")
+> Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (master)
+Please, add
 
-[1/1] ufs: rcar-gen5: Use a unique U_BOOT_DRIVER name
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/d4f80bddc58115744d681a332144e9a9371d1f59
+    Addresses-Coverity-ID: 638558 Memory - illegal accesses (UNINIT)
 
--- 
-Neil
+so that we know that the Coverity issue is resolved.
+
+> ---
+> 
+> Change in v2:
+> - Extract calloc and snprintf of the if condition.
+> ---
+>   boot/pxe_utils.c | 16 ++++++++--------
+>   1 file changed, 8 insertions(+), 8 deletions(-)
+> 
+> diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+> index 038416203fc..7549a93bdad 100644
+> --- a/boot/pxe_utils.c
+> +++ b/boot/pxe_utils.c
+> @@ -473,18 +473,18 @@ static void label_boot_extension(struct pxe_context *ctx,
+>   		else
+>   			slash = "";
+>   
+> -		dir_len = strlen(label->fdtdir) + strlen(slash) + 1;
+> -		overlay_dir = calloc(1, len);
+> -		if (!overlay_dir)
+> -			return;
+> -
+> -		snprintf(overlay_dir, dir_len, "%s%s", label->fdtdir,
+> -			 slash);
+> +		dir_len = len + strlen(slash) + 1;
+
+This line could be moved after the else branch to simplify the code by 
+avoiding separate assignments to dir_len.
+
+Best regards
+
+Heinrich
+
+>   	} else {
+>   		dir_len = 2;
+> -		snprintf(overlay_dir, dir_len, "/");
+> +		slash = "/";
+>   	}
+>   
+> +	overlay_dir = calloc(1, dir_len);
+> +	if (!overlay_dir)
+> +		return;
+> +
+> +	snprintf(overlay_dir, dir_len, "%s%s", label->fdtdir ?: "", slash);
+> +
+>   	alist_for_each(extension, extension_list) {
+>   		char *overlay_file;
+>   		ulong size;
 
