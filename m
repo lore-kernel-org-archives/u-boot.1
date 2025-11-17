@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF453CEBF61
-	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 14:52:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA14CEBF61
+	for <u-boot@archiver.kernel.org>; Mon, 17 Nov 2025 14:52:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5669C83942;
-	Mon, 17 Nov 2025 15:52:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D19483A64;
+	Mon, 17 Nov 2025 15:52:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LUq+F3QB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uVx/WxQp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0810083946; Mon, 17 Nov 2025 15:52:25 +0100 (CET)
-Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
- [IPv6:2607:f8b0:4864:20::b129])
+ id AD91D83BA1; Mon, 17 Nov 2025 15:52:48 +0100 (CET)
+Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
+ [IPv6:2607:f8b0:4864:20::b12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5F948393F
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 15:52:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 848D3839A1
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 15:52:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb129.google.com with SMTP id
- 956f58d0204a3-63f96d5038dso3545655d50.1
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 06:52:22 -0800 (PST)
+Received: by mail-yx1-xb12f.google.com with SMTP id
+ 956f58d0204a3-640daf41b19so5063844d50.0
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 06:52:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763391141; x=1763995941; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1763391165; x=1763995965; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dLz9f8XSJ9KaoI6Yq9/RKMqmNLT7X2+oRffpHN22w34=;
- b=LUq+F3QBv2Qvp+WikIFU7yuvREUSzXF64t31PsR6tFjPUMTikK7vQRlQ1I2xTAYZGT
- rIdteT8nnfUQ/qsmmM5YwUB1CmcqUG2NdNe4ckBwtZ+l+J0qHBJAXnL0R7WlZnCvU+qC
- rCo65VVHNSMnhWpy7ntMSZp/5mUHpBEnbQ5KCX8Ns7rcKxzc+SK51yIEpvA7Lk8YLkds
- cnOLl+L3t7teTCAQXJGyPpmmra53Hq/eGK3jLV7ibhatbmWmyXCO8QDAVSrZJjTjDDSK
- syHxHaJg+A7+MGndUOQMFlT1xPa3Ml57i8GoXmCNsgCTFsMcTu2CrnUBbKnFRYdlDFjO
- kUqA==
+ bh=c7soXyYsCclLcQXAStdOmwNYwiISqPI/JFr9PnQ+I0Y=;
+ b=uVx/WxQp6x4dEajYhWoX25VYEVV43qdWPdmKAz3ubzcIcMgJjrHJjLHFdzfCq+xgBi
+ n+s9d2aKVu5XRvtd0IFifCVbQWU+86XoW0gnx70+JgFCD/TyqF1Q8kYtlW27y4xHKoUk
+ y2vwAdFWuJXWn5RmQu0rfTd5CwuxksWEJIdQOEqobwG2VPl2aTY2iHZT1TlK0wMcNox1
+ hvmtJIQWkpdJtlr+KkqzDDA5Ar7bHzj9ct4F1xDZoDNr36L/KyBveumyL5acxt6WsucT
+ t1hH6HtsJEZRPVVmLDHONW3jIiTWJCLKL5TzaLx+xpSF8X9EY/qd/mg6Z6xJyn01c5sa
+ P+Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763391141; x=1763995941;
+ d=1e100.net; s=20230601; t=1763391165; x=1763995965;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dLz9f8XSJ9KaoI6Yq9/RKMqmNLT7X2+oRffpHN22w34=;
- b=B30cA8XH81tLUfatzYtVXajE55ZIchWSG26MjurBSCtMF58X7mtPbXuLzv/Sj3hUBO
- dswSxUfxWXCAoZIipOumrPARm3rngNPFYHaAaBBTmCCkTet8YRujGnpA2yqjIdgMr2lc
- wv41BISYM+/WzB+Ww6F02yWIGIy4Yc9g5vJnY3hoXYAG4stER/LMNBcjT2GJcYnOxMrL
- nRG8vPMe+kZjaoNWyCdQekhJzN47KbHc6fV+q2u+kwBrpyP9jsvp52FsD2fNX0gmhmMk
- 2DVCOal9Gg8JMYKIM9WeSFG0NgklOflZQpuq0CAZhpzZ1/nyN8XV9oSGOhBH8iXtBj/9
- amUQ==
-X-Gm-Message-State: AOJu0Yz0xMyio8pVlIB9mhj0ihJ+V1xSFwiRSVdefS2l+WnBCS55Knth
- pLWCu4BwMaN0xM29jukDWnjFxnrx0o+EGLwmy2eYUcyV6pwz/LEYqd+DRBX9st77GECX0BQK+FG
- iJrnMshdMVkg1s1fC87TadMUZ0Nv5O68DagbqCuTjNY8raQPunL00pZs=
-X-Gm-Gg: ASbGnctl/10/aEPUeemSBTr8kntHEcvWIENgxPECuXcWnsDhRkiS8ZlLOi8odUOHdOe
- jhQ3STr5kGJ5UpEN0TWu/TRw+BRgLUvjbH18A5JxB/1jj5+ysKaKbcwGaOWGZnx6xrJtcC7Xo0O
- mG8XnZ25zOBHlKkOg3W0jJjfYqjPAKsLV+5PKHQycap22kg4ZdQkwnJDj14ZUGaWGiO2I1duBhP
- +jFIM92LlpZAr0lcpJUjrWd9SR4gTEslUeIPxDN40q3p0oO4U9hcou4MW1xTSfECg8T4Egifas8
- MpVBKGfw/1ca0/H1nQfFYv3SRWle5jdzPFvRJMrAtdQ/Ni9R0RM=
-X-Google-Smtp-Source: AGHT+IHIB7ZH23OE1hlywSP8yby04IwEt8gktp/D8UVpdJ6l6PmLnUXXqhiL4OzaHRfUxj3w5yDO1ok2TdfLapo1rqM=
-X-Received: by 2002:a05:690e:4312:b0:640:c9c1:a329 with SMTP id
- 956f58d0204a3-641e76270bcmr8442739d50.32.1763391141475; Mon, 17 Nov 2025
- 06:52:21 -0800 (PST)
+ bh=c7soXyYsCclLcQXAStdOmwNYwiISqPI/JFr9PnQ+I0Y=;
+ b=HU/cz4QUEyGH9ZgkhVkOg8wYONme9AHfZQhEmim5012G1ku+OhcpeEtpCc/pjvszfn
+ y63QohnRu2BU07WJC+zOamVL8mR9Xj6UXySPUMLSklT+tYz0MG5zOHZSaErVQH5KK9oH
+ l/K7QVIEEQd19e+LTRp5WU1pj0uB9191RatfI3WPOKBP8KJlgoEQBk10zARWxcS7xPhu
+ OUCtsicxYmEXVws8WlN3d4y4vWffALq2XFvbdLFQM0ZNQq4e3Vn58GHdmNGJiPGsl6qk
+ MLbViaZ5GTUQ/5juu+hYb2pK6CxVOzEIWHjhDY6Aj4XMhadgM3v9HnaPV7iKsm4rv2HQ
+ gUNw==
+X-Gm-Message-State: AOJu0YycoSOuSyaP7Lx+d/y7THXiUkq/F5iryQrlVOXJTNlpV8zVeWR3
+ GT0fDbeovaclbXSSSTsX+T0H3L1lX629hTz7yz/aFxpcg2jGCcaMBWt9peWPMAbuyoNi8LekXUf
+ DjA+Dd1ygiWUXisk/BrJx0GYJKdkDOlrxYScrUlCUcQ==
+X-Gm-Gg: ASbGncviy2KyW+0SYEKYLxvN3hl0G2s6Ia+8UX7Py6nWLw1TxtOr0d5iWOJSTGcINaY
+ ot2RCr0ShgAjflgMdm8mK/nztLfm0/CayJ2egV6SSKfF8W430IYYEkVzVg9T+fj76bqHsn6x1Mz
+ 1GaRHBY8fxATGhuMfuIJXtKVt+MWCADNwrKzW3uKS6Xkk/IPs+vZgI6qQIhQaa2GUJhi8mfO8SV
+ 7GItUTkayuf0V9FefYg034fRbYenOVZ6vR16f3suGWEL6AZ2gX+ILyBgPXvzOzYX9KnUSOvGlGK
+ kt0d6fJcMWcv6UI1XuzxLP+RNvCPLT2UQfMqQ20daUxtqIhvQXQ=
+X-Google-Smtp-Source: AGHT+IG6Ol9HMD+1FTBsrw2TOxBwx/5qNTFIlZzZTbp2mEXC2EFZxlYddE2ZqFSxPiBMCEJCkrY7OMvhXPMFD4meQsE=
+X-Received: by 2002:a05:690e:1346:b0:63f:a876:ae58 with SMTP id
+ 956f58d0204a3-6410d093868mr13328499d50.9.1763391165334; Mon, 17 Nov 2025
+ 06:52:45 -0800 (PST)
 MIME-Version: 1.0
 References: <20251114093246.56422-1-heinrich.schuchardt@canonical.com>
- <20251114093246.56422-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251114093246.56422-2-heinrich.schuchardt@canonical.com>
+ <20251114093246.56422-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251114093246.56422-4-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 17 Nov 2025 16:51:45 +0200
-X-Gm-Features: AWmQ_blI6PS1uY1WtRPUZgovpXphGokA7Z-Kf46FsGkrq3vfumptiI20ZshmPE4
-Message-ID: <CAC_iWjJDMbLuOQtnrKqh_-o9+UVMEmDz3MbfTY_1ND_CfjEwcQ@mail.gmail.com>
-Subject: Re: [PATCH 1/7] efi_selftest: expose runtime table address
+Date: Mon, 17 Nov 2025 16:52:09 +0200
+X-Gm-Features: AWmQ_bkwA9F2ApTZM2_wpf9atMPZ_otaKyx8MAD5LMbslRAgfYMuvD4FNePmcCk
+Message-ID: <CAC_iWjLPoTwKLGwxG20Ckk-U=y7b7-01H1aZK=1s428-iaedsw@mail.gmail.com>
+Subject: Re: [PATCH 3/7] efi_selftest: simplify efi_selftest_rtc
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -95,63 +95,83 @@ X-Virus-Status: Clean
 On Fri, 14 Nov 2025 at 11:33, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Save the address of the EFI runtime as a global variable.
-> This allows to simplify the setup of tests.
+> Use global st_runtime.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 > ---
->  include/efi_selftest.h          | 1 +
->  lib/efi_selftest/efi_selftest.c | 8 ++++----
->  2 files changed, 5 insertions(+), 4 deletions(-)
+>  lib/efi_selftest/efi_selftest_rtc.c | 25 ++++---------------------
+>  1 file changed, 4 insertions(+), 21 deletions(-)
 >
-> diff --git a/include/efi_selftest.h b/include/efi_selftest.h
-> index 1b708849bcb..4ee46cbbb66 100644
-> --- a/include/efi_selftest.h
-> +++ b/include/efi_selftest.h
-> @@ -19,6 +19,7 @@
+> diff --git a/lib/efi_selftest/efi_selftest_rtc.c b/lib/efi_selftest/efi_selftest_rtc.c
+> index e9e47e96c4b..54d4e786a8f 100644
+> --- a/lib/efi_selftest/efi_selftest_rtc.c
+> +++ b/lib/efi_selftest/efi_selftest_rtc.c
+> @@ -12,22 +12,6 @@
+>  #define EFI_ST_NO_RTC "Could not read real time clock\n"
+>  #define EFI_ST_NO_RTC_SET "Could not set real time clock\n"
 >
->  extern const struct efi_system_table *st_systable;
->  extern const struct efi_boot_services *st_boottime;
-> +extern const struct efi_runtime_services *st_runtime;
+> -static struct efi_runtime_services *runtime;
+> -
+> -/*
+> - * Setup unit test.
+> - *
+> - * @handle:    handle of the loaded image
+> - * @systable:  system table
+> - * Return:     EFI_ST_SUCCESS for success
+> - */
+> -static int setup(const efi_handle_t handle,
+> -                const struct efi_system_table *systable)
+> -{
+> -       runtime = systable->runtime;
+> -       return EFI_ST_SUCCESS;
+> -}
+> -
+>  /*
+>   * Execute unit test.
+>   *
+> @@ -53,7 +37,7 @@ static int execute(void)
+>  #endif
 >
->  /**
->   * efi_st_printf() - print a message
-> diff --git a/lib/efi_selftest/efi_selftest.c b/lib/efi_selftest/efi_selftest.c
-> index 191da7fc451..2b95713afb4 100644
-> --- a/lib/efi_selftest/efi_selftest.c
-> +++ b/lib/efi_selftest/efi_selftest.c
-> @@ -16,7 +16,7 @@
->
->  const struct efi_system_table *st_systable;
->  const struct efi_boot_services *st_boottime;
-> -static const struct efi_runtime_services *runtime;
-> +const struct efi_runtime_services *st_runtime;
->  static efi_handle_t handle;
->  static u16 reset_message[] = u"Selftest completed";
->  static int *setup_status;
-> @@ -259,7 +259,7 @@ efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
->
->         st_systable = systab;
->         st_boottime = st_systable->boottime;
-> -       runtime = st_systable->runtime;
-> +       st_runtime = st_systable->runtime;
->         handle = image_handle;
->         con_out = st_systable->con_out;
->         con_in = st_systable->con_in;
-> @@ -347,8 +347,8 @@ efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
->         efi_st_get_key();
->
->         if (IS_ENABLED(CONFIG_EFI_HAVE_RUNTIME_RESET)) {
-> -               runtime->reset_system(EFI_RESET_WARM, EFI_NOT_READY,
-> -                                     sizeof(reset_message), reset_message);
-> +               st_runtime->reset_system(EFI_RESET_WARM, EFI_NOT_READY,
-> +                                        sizeof(reset_message), reset_message);
->         } else {
->                 efi_restore_gd();
->                 do_reset(NULL, 0, 0, NULL);
+>         /* Display current time */
+> -       ret = runtime->get_time(&tm_old, NULL);
+> +       ret = st_runtime->get_time(&tm_old, NULL);
+>         if (ret != EFI_SUCCESS) {
+>                 efi_st_error(EFI_ST_NO_RTC);
+>                 return EFI_ST_FAILURE;
+> @@ -63,12 +47,12 @@ static int execute(void)
+>                       tm_old.year, tm_old.month, tm_old.day,
+>                       tm_old.hour, tm_old.minute, tm_old.second);
+>  #ifdef CONFIG_EFI_SET_TIME
+> -       ret = runtime->set_time(&tm_new);
+> +       ret = st_runtime->set_time(&tm_new);
+>         if (ret != EFI_SUCCESS) {
+>                 efi_st_error(EFI_ST_NO_RTC_SET);
+>                 return EFI_ST_FAILURE;
+>         }
+> -       ret = runtime->get_time(&tm, NULL);
+> +       ret = st_runtime->get_time(&tm, NULL);
+>         if (ret != EFI_SUCCESS) {
+>                 efi_st_error(EFI_ST_NO_RTC);
+>                 return EFI_ST_FAILURE;
+> @@ -84,7 +68,7 @@ static int execute(void)
+>                 return EFI_ST_FAILURE;
+>         }
+>         /* Set time back to old value */
+> -       ret = runtime->set_time(&tm_old);
+> +       ret = st_runtime->set_time(&tm_old);
+>         if (ret != EFI_SUCCESS) {
+>                 efi_st_error(EFI_ST_NO_RTC_SET);
+>                 return EFI_ST_FAILURE;
+> @@ -97,6 +81,5 @@ static int execute(void)
+>  EFI_UNIT_TEST(rtc) = {
+>         .name = "real time clock",
+>         .phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
+> -       .setup = setup,
+>         .execute = execute,
+>  };
 > --
 > 2.51.0
 >
