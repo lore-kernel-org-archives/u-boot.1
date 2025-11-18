@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32400CEE35A
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 21:00:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B722BCEE35A
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 21:00:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76FCB83A26;
+	by phobos.denx.de (Postfix) with ESMTP id B89F783A48;
 	Tue, 18 Nov 2025 22:00:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fFlTaG7j";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JoLbh5DS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3757E83A64; Tue, 18 Nov 2025 22:00:23 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 7BD2583A41; Tue, 18 Nov 2025 22:00:23 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F12B83A3B
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 22:00:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D996F83A1E
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 22:00:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7c75dd36b1bso1733478a34.2
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 13:00:20 -0800 (PST)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7c6dbdaced8so3979933a34.1
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 13:00:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763499619; x=1764104419; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763499618; x=1764104418; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ytXvTOZGhy3WxRZw3HyjE9JNt1LZRwRURu9NBbi7QzY=;
- b=fFlTaG7jiHiITUZG/C9U0pZX7cnD1iqpLqbYtpsKyxR/4scAfFnSN9JVuiWZVV2Ruc
- r9z60BLfNoGlp0jAsaQVHHnse/ecw3pGgfjOVGgyh+v3lN5IbW1Rkz9SQfgxhiOmsGnw
- 3OywZU0MC/I7fZffELZAoJ6bv83cFPTmiqA3U=
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=j3NGGc+VknJCzqx/gNTf6W0qj/VytMdPZxE5bmTifVk=;
+ b=JoLbh5DSJ/qluaFr1sbvoG15clIIYE3B7c2fu7ZNgNJXLLuWauvOFvtgV1EUYXsfIX
+ fX43JuZrMW17OYf1vOVMKvVSCUlmnf3rIFWcGDVQlfmFSr2wJYde46lY9s+vJ7QAdqnd
+ DrpUWtWUqyI2OGSgzr4T2ES3My5P1DvOVt0z4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763499619; x=1764104419;
+ d=1e100.net; s=20230601; t=1763499618; x=1764104418;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=ytXvTOZGhy3WxRZw3HyjE9JNt1LZRwRURu9NBbi7QzY=;
- b=rL2iCpTaFuLlAH2WmNWJU5sEChVo36wLPJqc9sRkvIrWeGBJYsmumBDqx4epxDy0AE
- xLdWM2yAj/JRSwqCid+hO/6OIukRbmpVo4l+OiJjhLoeG228MaLRl/Hjh0JlUbIYY1jC
- nq/K6ZdAoMk35nxgpkobbncNgwWw5A23+jRVtIzEwccnyNVxjDzt0jmgm1GMGNhmZIeG
- NvVHzj2fBfWqZg1NRZAaIvPnJiISFzKj7RxdYlidYf9CThf/hSDXA0KDtb/doIWsaTxL
- wrARR9i183b/GGUl8nJTtw1vcF//xvWcVnFscKRcA+8X2zogJkzIE/8PFRRp02oQhYrC
- IcHw==
-X-Gm-Message-State: AOJu0YzB3+ggmvDZRwEHXqKa8TuyPn+jkQH7z6VbFIzjBU/GZTfMznUF
- P6jkIZFzZUxUoxL5Zes5OIiAjSJWUCC1TPjOuKg5IgK7VKMdOhw/pTFttutxDTLIahjB4T6HSvA
- sUj38m6LDGQ==
-X-Gm-Gg: ASbGncuDO6gGE3VdDz+S+EgSG2qHL5nBRIuanMudq7MCUDMWfYDmMzKxxdGy+N62XHS
- Rbyy150dcgKM5AgWe0FUOxnSH5SI7nKTI/l6nqR3C/N8xPYY8f+Gh8qrsxi1JlhT8filAGpnnxs
- 0q72jqcnJJOxkearTfCaLisIw9iDhBoLIkooowCq2dCd9tAGFCYbStVt/NfwnJyjzAppt8c9R2p
- phlzDYg2yZ5/H2ZHdFASY2Tm2UmF+zHF3IXQ9yjqCaJ9dUVa23DalP6JjoF/EC+BwF9ooopEAVn
- wRoi9Qjkeo5mAd0+Qy6SrM1ziKB2qOgMdYkiCJw0kIm46Tx7b7eJ/WT9FD3JOoFotrvnoBqMP8I
- kN2unaEuYMG2UgcXDgCA151CzAByLY0iI2MuQGiUCq4gRSQZawC/wgBQTyNCQXBDQZrYBH1nM50
- xC40h+A8hqqkA+PFPo55zlIRucmxxu2C0mSpOxa2DgjSmPKocmBqUHiCz+6loQ300=
-X-Google-Smtp-Source: AGHT+IFjgN2Y0N4A+H8IJ9+LB45ubd9MGTX4GpUdUYcVK4mtLkcemXrojnGCcz1eS2zhiZkSwlYPLQ==
-X-Received: by 2002:a05:6830:2aab:b0:7c6:e92f:41df with SMTP id
- 46e09a7af769-7c74446b276mr12443458a34.12.1763499618785; 
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=j3NGGc+VknJCzqx/gNTf6W0qj/VytMdPZxE5bmTifVk=;
+ b=aXg/8VY7/96afvwlBXJAdjXxlZI4X3iLHKaIKuTi7qqTijHYpnWe4N5XFGK3NU5Waf
+ DTF5bi9JOdyzG+R1sswjCYMLlzqCuPTWUuD8xGODWSXgU9F3wZEogc9WCjAvLKjmWoa1
+ +LGZ1tZTTeNdcC1tk9+UYtY09m2W4H8P2TtZ2v7NUiNhVcdFmb12eijgv0QzZlqdCBIW
+ HUVpE6zcq7wU8joqNGFjsGUIh2pMIuXhReVvQIl1CtHuHvVZhcgCRqVzEeSNGjJt1xYE
+ T5mEhs4P8nX7pTJFopMBjUdTTR2acl+LWK8/MIXjy1W7hVJFLP9PgKSk26SM+cSvlm3s
+ +A5w==
+X-Gm-Message-State: AOJu0YyvbDb5Lhb5EPoCowI/U0s/Js2QtbFSOijaz1USaC+nf36+L+P5
+ z8PH8b8XRLlHTEwCIEPWPSEvv8dVEx5VhBqXz1F1HT3qrTsEmXyLIRUxJqMBFgoAboSI2NrBcqf
+ loyNdYdsHqQ==
+X-Gm-Gg: ASbGncshNzDnYOnlzhTcZCJWLLByW/sYnl/BXckoHuAoOVFkZnf/D2mlIvMuWHkvG5S
+ Za7dW6DsZPvIERkj7n0Voi6C4k8VDYM/z+X5/sZiZjfIycdvftd6J+B6FuLZJHScG10PR7OLybl
+ Grc0pwaWdST/ZpuX37DYUCun6+zGPWNDqBHs80rdaAf+JosdZkPsyhVJa7/dg+sGCpSTVMyQNHM
+ McWNw8JNMkU3A2ItWfg5IECXX+/UZqP8Ib45OWxbpbssnvem/HTTx5+xGdtfb6z5TnNb22D3DXA
+ sU8v1apnDaUKpVmPn5CIocAJZZ7REe1jjlpNfF27K0LEf+ZQoVthvorBFXrO49Ph+/OhYIVBuAp
+ 7vU9f1xiPLecN6Ux0ANRr3wvtG4QKN10/DKc3W+tjvmpZnM98zsVn4MpKNQyyf1F8Uy2l95igqr
+ 8V7EyFZI56Go7JOJtJ7WU6Be0Bj8ZP0PfNCFGC8M0C89hV/g0PCG00mQF4FSSFoZw=
+X-Google-Smtp-Source: AGHT+IGemn/aFF9R1IsVcC0KpYtgd/HMpgkLJSMqUyXGqOBbQUPrWRFCbmDL8qYpJARWk28RZGZXyg==
+X-Received: by 2002:a05:6830:486f:b0:7bc:6cc3:a624 with SMTP id
+ 46e09a7af769-7c7445b01bfmr7555116a34.32.1763499618130; 
  Tue, 18 Nov 2025 13:00:18 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c75610f638sm3583110a34.21.2025.11.18.13.00.18
- for <u-boot@lists.denx.de>
+ 46e09a7af769-7c75610f638sm3583110a34.21.2025.11.18.13.00.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 13:00:18 -0800 (PST)
+ Tue, 18 Nov 2025 13:00:17 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH v2 4/4] Gitlab sage, Docker: Add snmp and rsync
-Date: Tue, 18 Nov 2025 15:00:15 -0600
-Message-ID: <20251118210015.624758-4-trini@konsulko.com>
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v2 3/4] Gitlab: sage: Add Pine64+ platform
+Date: Tue, 18 Nov 2025 15:00:14 -0600
+Message-ID: <20251118210015.624758-3-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251118210015.624758-1-trini@konsulko.com>
 References: <20251118210015.624758-1-trini@konsulko.com>
@@ -95,46 +97,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add snmp and rsync to the normal docker image. While these tools are
-only required for the lab on sage, I think it's a small enough addition
-to be worth always including at this point. A higher level TODO I think
-may be to see if we can / should split the resulting container up, or
-if there's host tooling we can remove at a later step, after building
-all the software we require.
+This adds the Pine64+ platform to the sage lab, for both legacy and lwIP
+networking stacks. In order to build this platform we need to copy
+certain files that were built in the container to /tmp and then set
+BINMAN_INDIRS to /tmp in order to find them when building.
+
+For now, we disable the test_net_pxe_boot_config test on lwIP as it
+leads to a crash that needs to be investigated.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- .gitlab-ci-sage-lab.yml | 2 --
- tools/docker/Dockerfile | 2 ++
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+
+Andre, Jerome, how would you like to handle looking in to this issue?
+https://source.denx.de/u-boot/u-boot/-/jobs/1303375#L2235 shows the
+crash and I don't have enough sunxi targets to know if this is more
+broadly breakable or not. But it doesn't happen on lwIP + Pi for
+example, nor lwIP + Hummingboard (mx6cuboxi defconfig). I can't at this
+point give remote access to the lab directly, but I can help come up
+with a gitlab job that'll acquire the board, build and try and boot
+whatever you have.
+---
+ .gitlab-ci-sage-lab.yml | 30 ++++++++++++++++++++++++++++--
+ 1 file changed, 28 insertions(+), 2 deletions(-)
 
 diff --git a/.gitlab-ci-sage-lab.yml b/.gitlab-ci-sage-lab.yml
-index 815c93087f4f..6b941b4b2f7e 100644
+index fa7d79668b2c..815c93087f4f 100644
 --- a/.gitlab-ci-sage-lab.yml
 +++ b/.gitlab-ci-sage-lab.yml
-@@ -26,8 +26,6 @@
-       pip install -r test/py/requirements.txt -r tools/binman/requirements.txt
-         -r tools/buildman/requirements.txt -r tools/u_boot_pylib/requirements.txt
-         labgrid setuptools
--    # Add more tools
--    - sudo apt-get update && sudo apt-get -y install snmp rsync
-     # Acquire and turn on the exporter.
-     - labgrid-client reserve --wait board=${LABGRID_EXPORTER} &&
-       labgrid-client -p ${LABGRID_EXPORTER} acquire &&
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index fd8765af4585..bcb95a8cae3f 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -131,7 +131,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
- 	python3-tomli \
- 	python3-venv \
- 	rpm2cpio \
-+	rsync \
- 	sbsigntool \
-+	snmp \
- 	socat \
- 	softhsm2 \
- 	sparse \
+@@ -35,14 +35,21 @@
+     # Prepare ssh
+     - mkdir --mode=0700 ~/.ssh;
+       printf 'Host sage-exporter-*\n\tUser labgrid\n' > ~/.ssh/config
++    # If we have TF-A binaries, we need to use them.
++    - if [[ -d /opt/tf-a/${TEST_PY_BD}${TEST_PY_ID//--id /_} ]]; then
++        cp /opt/tf-a/${TEST_PY_BD}${TEST_PY_ID//--id /_}/* /tmp/;
++      elif [[ -d /opt/tf-a/${TEST_PY_BD} ]]; then
++        cp /opt/tf-a/${TEST_PY_BD}/* /tmp/;
++      fi;
++      export BINMAN_INDIRS=/tmp;
+   script:
+     - export UBOOT_TRAVIS_BUILD_DIR=/tmp/${TEST_PY_BD}
+     # Don't stop on non-zero exit codes now, to provide as much chance as
+     # possible to ensure we don't leave lab resources acquired.
+     - set +e;
+-    # Sage is 16 threads and has 3 devices attached, so 6 builder threads.
++    # Sage is 16 threads and has 4 devices attached, so 4 builder threads.
+     - tools/buildman/buildman -o ${UBOOT_TRAVIS_BUILD_DIR} -w -E -W -e
+-        --board ${TEST_PY_BD} ${OVERRIDE} -T 6;
++        --board ${TEST_PY_BD} ${OVERRIDE} -T 4;
+       RC=`echo $?`;
+     # Wait for the exporter to have the device ready
+     - while test `labgrid-client resources |
+@@ -79,6 +86,25 @@
+       junit: results.xml
+     expire_in: 1 week
+ 
++Pine64+:
++  <<: *sage_lab_dfn
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-pine64-1"
++    LG_PLACE: "pine64-1"
++    TEST_PY_BD: "pine64_plus"
++    OVERRIDE: "-a CMD_BOOTMENU -a CMD_LOG"
++
++Pine64+ (lwIP):
++  <<: *sage_lab_dfn
++  needs: [ "Pine64+" ]
++  variables:
++    LABGRID_EXPORTER: "sage-exporter-pine64-1"
++    LG_PLACE: "pine64-1"
++    TEST_PY_BD: "pine64_plus"
++    # Leads to crash on lwIP, needs investigation.
++    TEST_PY_TEST_SPEC: "not test_net_pxe_boot_config"
++    OVERRIDE: "-a CMD_BOOTMENU -a CMD_LOG -a NET_LWIP"
++
+ SolidRun Hummingboard 2:
+   <<: *sage_lab_dfn
+   variables:
 -- 
 2.43.0
 
