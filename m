@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53B96CEE348
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 18:08:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40766CEE347
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 18:09:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C161083FC0;
-	Tue, 18 Nov 2025 19:04:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0FC6C83F5C;
+	Tue, 18 Nov 2025 19:04:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nnc9JYOf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qbFBgDtA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F4C783FB5; Tue, 18 Nov 2025 19:04:35 +0100 (CET)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 1057F83FC8; Tue, 18 Nov 2025 19:04:37 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C28C83CB9
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 19:04:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA54283B99
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 19:04:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-3ec5df386acso808295fac.1
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 10:04:33 -0800 (PST)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7c76607b968so673012a34.3
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 10:04:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763489072; x=1764093872; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763489074; x=1764093874; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZH8bq6nCOm5AQJzjgbWum/PbNVqxki6R23YylkbjedE=;
- b=Nnc9JYOfKS5wIf3QyUtEMzYaUL04FD4Glikw23J/QNRTVXlYMJug9kfy13wkaqa4/A
- yKcRwN0BycBRFCfhZUXFzNa1P+Ju67mikRfHV3ULPG4TIsDFf9R33BZotocu9uCNQzkV
- fmFXGZ5ZFBDE7FaovWvVq0i9Gx/Uj5u5HvA8o=
+ bh=ahmcISltOIL2OEUOrfoRti67PE/Fyo8zinQoEjISlyk=;
+ b=qbFBgDtAlefxrWALJanCTOU/kFca/be898nL1Z+2MK0Y+g8VBBwTcGTAQeSqZS0hID
+ n88LI/zc9BtaYwAQ4+zBGtBfhwwis58UHP+0FnmtE41ku/HBQyu4gA9yUaVJeGmrZylR
+ U6jC4/NXrNyBYWkn60H92/aDMXKs2/wGyTQDs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763489072; x=1764093872;
+ d=1e100.net; s=20230601; t=1763489074; x=1764093874;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZH8bq6nCOm5AQJzjgbWum/PbNVqxki6R23YylkbjedE=;
- b=t8qBtlTrmVUoXwKSVHKuvNMe8GJUqtxNfw2rVUXNNDWkQU2BdhedP2sbw/6BMVmoo6
- p2P2zzutXCh8Y9ISx8ZK9KaxlmKcalTAPjP8zZfWcA/RkzFEwrEpUvilcUafPuK7y2b0
- mLnKhzX2tjAUacj6W6SLpy8Q7oRKJBvNbPuKXQWoR+/3oL58thxhpKyVICbYLa3yjO4g
- 6x6reSXJLsg1NHOmYv3r8R2fbsJ4dPzwnA+3WWwTuDUME+rmnT3HTs4mm9QQU82boiIX
- JlNAbgaRxsQe48D9pp+xXA95nXSvzxq/CqBRwKIQV7fyrjKyu3IBDi+6pXcyre6t67JH
- S/LA==
-X-Gm-Message-State: AOJu0YxZNTOoenWuBx2lvCzPD2FLRobcpHe8BLyEALVUoCh52/1hilhZ
- vza6lVIwW5fu2QirlmJceDq6WHbp+rDd/WtvZZKf2nFhhmR0t1goVFc+iFzn6NIcCBFHHH7kUua
- 1SAmJoJbfsQ==
-X-Gm-Gg: ASbGncsVEayKgr8fdvHYPhPcMMBglDdklL4PGQK8VjvOo3AlJ4MHBMvCdDXtJJ67Hy5
- BIAYg3wtKmLkB+PstLT2WhHxS/Xhtj/kcCyWyp5iRG9HF/DAvnwGktbQ9Ff6AP6Od8MtQsJq6Zx
- rV2lT56uaZ23phKEI080Hh53utyOeEAHYR3gWWipwrD0CsN1uXInvsi9VEodVf1tb+ReCnKXWjK
- FwuGo0Xiu5Y+tWGC0aHZLBYUfnRfEOYZySDfosSFiIqRj4TYJbb4nuGRa8JHzCr0FViGYRN8W5d
- 7rI2CcYWmHJagI35D80u4romxlu/FXtRJyW0w1UAsAwjCTF8Xc1tMvsSvegAVwgCaDgXSpWCuCx
- 1e1m6r91Mb2vWgn+JBjBazUZcd1QUZxD5UA5lWlmlG5AI0J1u8X2rz+P/BnvCg3+c/YWg89IE+I
- em01ewverOdYaESkj+UeSli3cNl7UvSPcvo8U5Jw07cvAQS1RLoECLY964jRhnF3Y=
-X-Google-Smtp-Source: AGHT+IG+EfFtm2JtIMCSPcVGcz4NeZ+1g2o7neZVB73mux2NoBtyVXyh8p8WORP+ScdLWLUfCZOFCA==
-X-Received: by 2002:a05:6871:5826:b0:3ec:3e53:aa30 with SMTP id
- 586e51a60fabf-3ec3e53ac4cmr4024587fac.24.1763489071968; 
- Tue, 18 Nov 2025 10:04:31 -0800 (PST)
+ bh=ahmcISltOIL2OEUOrfoRti67PE/Fyo8zinQoEjISlyk=;
+ b=efwK29R4/ssY3BvsLSE51oA33C55+XBeiWgFuy+60g2lM9CUUmc7EfAVgHKV7M+0y2
+ A8662iH2k3xvSQ/v2mcJ2JDSBo0rDUVlfxgCdokrYJuoUTRu5eia4+rRZ+hvGjconpxN
+ sydZRNz1ckcHig57g1kiCgRgqEvV17wFuBr975sXUH3+9oQwWsSSPcG1wYn+4utlc37z
+ GINhYyvPAw2bMDnHG99+lJaWWhBfcaUez1IhpmNuuKHvi5nB5xRUioK4E6TDGZOtTZkn
+ mo3kRQHH1hLtIF2OXKKAr369HU2v4QeXRgI8X080sXqaZNSqxTP+9xPLusjqZmE4EGft
+ U56A==
+X-Gm-Message-State: AOJu0YwJd22AL1jDhwivv9+H04Fa+R9Egb7BB6X+8Bcnzd3LwLfjil9Z
+ 20/H5V4/zBOrTLwn/eBeBfb/YTML+JkDk/zlBqlHpMYdixBli4m85DoM+mcgoUUa3sKw56+G94t
+ zWsq/MIvfTw==
+X-Gm-Gg: ASbGncuAlXk38i74TPkuSuT5HKQxkSwBmRva8F601unO3yGDPk4+8oCVVV2lHJ/vphK
+ thVlzpfdjqBz3xcxvZAnWNKKLVtq7GzujbY7uGZSuW/173rJ6hSdOV+vghtwEdZarl/v3mRqwtB
+ w7tZH/pDs5wioWCJjeFam+GWr57eQgCeg/TCKGH4RbZWjCLTILLUIo7vBQ1fM3rYiWHg+KlnQhU
+ Y4BYjTQkBKcSud82Y114OqcELem8clAZcfkdprBJ8aQNd6bWGl479LhKoYExzEMuz0X5uXbUslY
+ IQmk+Ew4Q6WOMshk0SAhuyUFlykCCOWWjZ4tKRDvvkQqLRMkWD4WHy5SlBauuS2rg5QVjRwvNk3
+ O4KfOyLUg4dOcppmhGxazz4NWte89bT0HyGdZa6PuuSdo5Yheah7asNuy0slDTskkMi4tNL2Gg7
+ aq28ARpRoyCQWne9z4M6919eCCNN3rK5i1nWPZxw1tysG9Xv1mV8ACSXzCLHSVRNs=
+X-Google-Smtp-Source: AGHT+IHw5mUeKWWknVcnJ2lN15ZcUZcOD+TssbpwTucDOwLx0KhXjdkJEHNWUnbhvE2VAq2kE7QHcQ==
+X-Received: by 2002:a05:6808:1207:b0:450:1552:371e with SMTP id
+ 5614622812f47-45097427259mr7215717b6e.27.1763489073614; 
+ Tue, 18 Nov 2025 10:04:33 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e8522637e2sm1235298fac.12.2025.11.18.10.04.31
+ 5614622812f47-450d5ffdc84sm1488880b6e.19.2025.11.18.10.04.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 10:04:31 -0800 (PST)
+ Tue, 18 Nov 2025 10:04:33 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Richard Hu <richard.hu@technexion.com>, Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] pico-imx6ul: Stop disabling device tree relocation
-Date: Tue, 18 Nov 2025 12:04:30 -0600
-Message-ID: <20251118180430.591450-1-trini@konsulko.com>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [PATCH] pico-imx7d: Stop disabling device tree relocation
+Date: Tue, 18 Nov 2025 12:04:32 -0600
+Message-ID: <20251118180432.591467-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -105,20 +105,19 @@ tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
 or bootm_mapsize are the correct way do this. Please see
 doc/usage/environment.rst for more details.
 
-Cc: Richard Hu <richard.hu@technexion.com>
-Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
 ---
- include/configs/pico-imx6ul.h | 1 -
+ include/configs/pico-imx7d.h | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/include/configs/pico-imx6ul.h b/include/configs/pico-imx6ul.h
-index 37f4c7d8a098..21a536f9fe90 100644
---- a/include/configs/pico-imx6ul.h
-+++ b/include/configs/pico-imx6ul.h
-@@ -45,7 +45,6 @@
- 	"image=zImage\0" \
+diff --git a/include/configs/pico-imx7d.h b/include/configs/pico-imx7d.h
+index 89850d8e4a7e..cc5c8b011590 100644
+--- a/include/configs/pico-imx7d.h
++++ b/include/configs/pico-imx7d.h
+@@ -56,7 +56,6 @@
  	"splashpos=m,m\0" \
- 	"console=ttymxc5\0" \
+ 	"splashimage=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+ 	"console=ttymxc4\0" \
 -	"fdt_high=0xffffffff\0" \
  	"initrd_high=0xffffffff\0" \
  	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
