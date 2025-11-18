@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB879CEBF93
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 06:41:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83479CEBF93
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 06:41:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C96583CD2;
-	Tue, 18 Nov 2025 07:40:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9F8EE83CD3;
+	Tue, 18 Nov 2025 07:40:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BuLWvKaC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hs2MLrwV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8BEF83C72; Tue, 18 Nov 2025 07:40:45 +0100 (CET)
-Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
- [IPv6:2607:f8b0:4864:20::b129])
+ id 343DF83CD2; Tue, 18 Nov 2025 07:40:47 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 914C683C93
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 07:40:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D65DF83C64
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 07:40:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yx1-xb129.google.com with SMTP id
- 956f58d0204a3-641e9422473so3395472d50.2
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 22:40:43 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-789524e6719so26421727b3.1
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 22:40:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763448042; x=1764052842; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1763448043; x=1764052843; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kOLvYABW607VGNhbGGH6i0LCrzafdHBVhMM2AMxPgak=;
- b=BuLWvKaCS2js61i/zPUOXZZrpn4dCb75r+pks/75Vb1Qe/t9Kxpg7MHacij3dYYEA/
- /5ir+3iRXaEPrsemo/OrBWs/VQPCujdr2QeudSn2zSyui+oZCjfaprP/cH0F+fK4URyy
- cKs/HV0EvsUpElWAtu/PZ1BNBppQEX9Dgsp6xkGHvJE5AcvPOsGNaH9Aa5Zznnu7LeI5
- xkb5VvDSKiKHnkVUZrrxVs1RmJWkJBqvX9KvMetF+P1q0CN2bpSvc7g+3mcj6jUsc2xL
- 1/XVi0pMwUb5AkJXk9Lj+cdq2HXILfRFKsCDrTy/n5YUZfn2oBdT/62KhBGh3K3Ibn1n
- IrLw==
+ bh=8J4v33sIEkXFvH6grYUHdooTjL2BsVjYDReij10pCyk=;
+ b=hs2MLrwVs+43ZDJFwnMQoX21OMp7non3+e8r19Q3P8wdRfB2MWH64pXqjnF7GC/rNp
+ gioUzH8O6VmAP7Xq4NUBOcl73p3mvX2ie4XaMZqkTvdMTRwJ0edXLE3oKc2bfTVXnVry
+ irRI2FLHbpWoBHzvAfzt2bVnvPGyyw4xEbJ/IJ+addr7LcWu2YrK5u60M7bapa3IpC72
+ 1/QiIqrlifkXz0e+UaM9E3d2oE2UWvAaZmlNQg3EEzXOxUN2Wz4WiOPjFvRyjzE7e4vO
+ 1IpmB9mlqJ5FJ694h73Nds15qG5eL6yls94Xr+JnZdp8bRq53bajn+7MKOPFQQMOeuD+
+ LGiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763448042; x=1764052842;
+ d=1e100.net; s=20230601; t=1763448043; x=1764052843;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=kOLvYABW607VGNhbGGH6i0LCrzafdHBVhMM2AMxPgak=;
- b=aWB/6YhDJl5KX/1hHYYgBSG5qeK4FH2/O4/M97aAOjIJXWF+n5j84MniobBfimzrFp
- cmx34a1AZkoEKFLbqAIXqt5Xv2Ow5NnPihD1XVtuajPlnrgDXSHzXKJkMagBOR8GVblM
- pj61knUDOH5o8nZKTXgiYshevunlmsJr3kVs/DDAhs7ujKtWD5TUoEVFquJA8xq+wZEv
- W5i4lu4EDho5qWzf62h3xH2ABgqX/u2xwgL+hdW6Pjm06ItyFP46SF5GVzUmp/PcjlyY
- zbWsyZE2PwH61S2MUQwIlZBxEW7Z0on6Bq4LDGGW9i/izFWGrw+WwJTW+1gAPxpLHA52
- ELhg==
-X-Gm-Message-State: AOJu0Yw7k5NfwiqRQKCzJr7C1vdgSLh2JUY7LeUmX+CXVg0wmsvb2mIq
- F4hV/7T8yTKGs/Y3GuMN6AUm4Sn1SiO0UkXf6OoDuAozXP7UiThiV+q9u389
-X-Gm-Gg: ASbGncvz9UJy0GdzWdXwN84zmARkeykfcraTd0c2H0eT6G5j2b1qbk0n2jEtYdiAcey
- b76f9MU+0ArkI9Fba1pkHPvQRX3CsEbbATOhympPtEgwacnKllyIcyWYiomip/f9NyuQlTtwmHV
- kwABlEHnMEFq5uxI5zH56YJuDw8wHwP8A5JZbwV8pF5pKDe28Mhsg93ePDS/uDJtbbqorQoj/xL
- P6jtjXWcVeGOBNKovqXkBcy0W9JxSyc5xBd+wPgmks+WyCgWcx04vWehoc0heaLSqO+g0AydLJH
- nKSs8AO33W1XvzhQr1muiV2BSqtW9w9jsdx+DIJwxUFEi+FS7qloBZVFY+hr2d2WW/uTtqGai9l
- +NrXddvFp/pV2EgPI5kC/1kozSY/gzv6o0OK2kZx27msuQh1GyGdPtJH4z5V76Ke7sPiZMnJnIy
- lsrgnnHo3Ado4JZJY=
-X-Google-Smtp-Source: AGHT+IGFnyKSFQwhg8KYSdwnEVtcldDsTjLxFP2LoyHPe9LKYPVgrj95DPAbumcaBGGqzytPG70zSw==
-X-Received: by 2002:a05:690c:6a86:b0:787:f043:1f10 with SMTP id
- 00721157ae682-78929f20e83mr247660187b3.66.1763448042000; 
- Mon, 17 Nov 2025 22:40:42 -0800 (PST)
+ bh=8J4v33sIEkXFvH6grYUHdooTjL2BsVjYDReij10pCyk=;
+ b=ZjhonZlXO4r+3elSzdwSGD/WC9TRMDbp2zOU7u7n06wLaHJbqHU1DTvU9PxHqdm55u
+ KrVF2RXTWp+E+ozUOLCFpmhMIhMvVX+tGrAoaecDfn9NYqnGWREbmPJXFGFajTtRz+TS
+ f4ooHbdzVLAu7SbfFq54xOb+Z6HMYzVr+wCeSQC8CTD7NH0D96oceVGzsQCh7YB+P8sl
+ ssmpGyBAZIDU2BrNRS1UQK2GHBnF6k0xQvVnaG5i19g579uWhW20+cN2Ttlr/D8y2YH2
+ rBRT3IS0oWOKF0/jvWrPy6ClECEv8nyCgWc9zRF91NxqkwFQ6qZOswVNUsDxhwyiux4X
+ qdjw==
+X-Gm-Message-State: AOJu0YwoIRJ2hYGzsy/DjZyF4bNNcHAvGdn6frFwmkj+FkUSWnxx4mii
+ 2yXPdHSJmFqTT2xqhbCcGwJR093blXbw13MGFrAwP7jyFX4MHmQOAP3SBCns
+X-Gm-Gg: ASbGncuGHs6tLp0ln6yeqvkwlyVSYG1HwWRaSRDThN6gkewT+pvXxqPfGtHXJQdQQcc
+ LX3zThzJV/GHzQmimHv9pO1Y8giki08k+BI28gHROMqxXJWBbARCSB3WxY9VG1LFICtFOR/5WfX
+ r1vnQcPW9SM3NOLCFG9D8eGAKRjtw0qYBsvn2waaoYnPpgaoIBpxuRgOop0qV3gDCnrBn8BvbyX
+ VMm8Kmic66fO81CEHMkKFA87ZEMT4eWRNo7TzRx0EuudaX61In8Kt6jCoS1uPoOucsWb65TwTmi
+ DezgSrV6G33tkWMAP+uNWNJ3smSqe0pZtnYW7XgaR82LVPbSEoLgzoJz6ku2CSH1twvbD2vQEX6
+ 73sMV3/5QOFzrOpSO5eDzx9JIHpfqDko3a0HLzP4ImAvvP80qz/Z0ufLafWdEKHDpYo+C1AxM6o
+ BLFVYyLX2YbZUJo5+8uU+ksxigeQ==
+X-Google-Smtp-Source: AGHT+IF+H2EC7+VpngExorQi3OcTJngbqv6iln7bzuzP+6B++yGxBaxwsD+f3UrVjTWzoLO4gmayVA==
+X-Received: by 2002:a05:690c:209d:b0:786:a68f:aec7 with SMTP id
+ 00721157ae682-78965006618mr15972807b3.14.1763448043252; 
+ Mon, 17 Nov 2025 22:40:43 -0800 (PST)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-78822128160sm49781967b3.32.2025.11.17.22.40.41
+ 00721157ae682-78822128160sm49781967b3.32.2025.11.17.22.40.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 22:40:41 -0800 (PST)
+ Mon, 17 Nov 2025 22:40:42 -0800 (PST)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
-Cc: adsp-linux@analog.com, Utsav Agarwal <utsav.agarwal@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Caleb Ethridge <caleb.ethridge@analog.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Philip Molloy <philip@philipmolloy.com>, Tom Rini <trini@konsulko.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Subject: [PATCH 04/12] mach-sc5xx: Add preliminary support for binman
-Date: Tue, 18 Nov 2025 01:39:37 -0500
-Message-ID: <20251118064000.14613-5-malysagreg@gmail.com>
+Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 05/12] docker: add Analog Devices tools to docker image
+Date: Tue, 18 Nov 2025 01:39:38 -0500
+Message-ID: <20251118064000.14613-6-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.49.1
 In-Reply-To: <20251118064000.14613-1-malysagreg@gmail.com>
 References: <20251118064000.14613-1-malysagreg@gmail.com>
@@ -105,133 +101,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Utsav Agarwal <utsav.agarwal@analog.com>
-
-Binman is optionally supported for Analog Devices sc5xx SoCs if Yocto is
-not being used to create and assemble system images. The spl LDR is
-generated locally but other artifacts such as kernel FIT image and root
-file system are built externally and must be supplied to binman if used.
-
-Binman is enabled by selecting the SC5XX_USE_BINMAN config symbol and
-the image structure is included in the shared sc5xx device tree.
+The boot ROM on Analog Devices ADSP-SC5xx SoCs requires code packaged
+in the LDR format. Normally this is available as part of
+our yocto-derived toolchain but, it is not a part of any other pre-made
+toolchain anymore, so it is otherwise unavailable in the docker image
+for CI. This patch adds a source build from the ADI maintained github
+repository. In the future, a package available for install via apt will
+be available, but currently there is no arm64 build upstream, so we must
+build from source for the time being to support CI on both amd64 and
+arm64 runners. The same ldr tool is used for arm and arm64 for all of
+our boards with names adjusted to match the expected $(CROSS_COMPILE)
+for these boards.
 
 Signed-off-by: Greg Malysa <malysagreg@gmail.com>
-Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
+
 ---
 
-(no changes since v1)
+Changes in v2:
+ - Clarifications in commit message
+ - Update to use meson rather than autotools due to changes in ldr
 
- arch/arm/dts/sc5xx.dtsi     | 52 +++++++++++++++++++++++++++++++++++++
- arch/arm/mach-sc5xx/Kconfig | 33 +++++++++++++++++++++++
- 2 files changed, 85 insertions(+)
+ tools/docker/Dockerfile | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/arch/arm/dts/sc5xx.dtsi b/arch/arm/dts/sc5xx.dtsi
-index 3f440dac29f..b4de1b51bb9 100644
---- a/arch/arm/dts/sc5xx.dtsi
-+++ b/arch/arm/dts/sc5xx.dtsi
-@@ -10,6 +10,58 @@
- 	#address-cells = <1>;
- 	#size-cells = <1>;
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index d2384219c06..9b266547361 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -339,6 +339,22 @@ RUN wget -O - https://coreboot.org/releases/coreboot-25.03.tar.xz | tar -C /tmp
+     sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/ && \
+     rm -rf /tmp/coreboot-25.03
  
-+	chosen {
-+		stdout-path = "serial0:115200";
-+		bootph-pre-ram;
-+	};
++# Build ldr tool for Analog Devices boards and create prefixed symlinks to match
++# $(CROSS_COMPILE) as used by different supported platforms
++RUN git clone https://github.com/analogdevicesinc/lnxdsp-arm-poky-linux-gnueabi-ldr.git /opt/lnxdsp-arm-poky-linux-gnueabi-ldr && \
++	cd /opt/lnxdsp-arm-poky-linux-gnueabi-ldr && \
++	python3 -m venv venv && \
++	. venv/bin/activate && \
++	pip install meson && \
++	meson setup build && \
++	cd build && \
++	meson compile && \
++	cd .. && \
++	ln -s build/ldr arm-linux-gnueabi-ldr && \
++	ln -s build/ldr aarch64-linux-ldr && \
++	deactivate
++ENV PATH="${PATH}:/opt/lnxdsp-arm-poky-linux-gnueabi-ldr"
 +
-+	aliases {
-+		spi2 = "/spi2";
-+		serial0 = &uart0;
-+		bootph-pre-ram;
-+	};
-+
-+#ifdef CONFIG_SC5XX_USE_BINMAN
-+	binman {
-+		filename = CONFIG_SC5XX_BINMAN_FILENAME;
-+		stage1-boot {
-+			offset = <CONFIG_SC5XX_UBOOT_SPL_OFFSET>;
-+			type = "blob-ext";
-+			filename = "spl/u-boot-spl.ldr";
-+		};
-+
-+		/* since falcon mode can jump from SPL to OS directly
-+		 * full u-boot is optional
-+		 *
-+		 * @todo: review if we can say this given support has
-+		 * not yet been upstreamed. Otherwise we might have to
-+		 * invoke binman only for full u-boot.
-+		 */
-+		stage2-boot {
-+			offset = <CONFIG_SC5XX_UBOOT_OFFSET>;
-+			type = "blob-ext";
-+			filename = "u-boot.ldr";
-+			optional;
-+		};
-+
-+#ifdef CONFIG_SC5XX_FITIMAGE_NAME
-+		fitImage {
-+			offset = <CONFIG_SC5XX_FITIMAGE_OFFSET>;
-+			type = "blob-ext";
-+			filename = CONFIG_SC5XX_FITIMAGE_NAME;
-+		};
-+#endif
-+
-+#ifdef CONFIG_SC5XX_ROOTFS_NAME
-+		rfs {
-+			offset = <CONFIG_SC5XX_ROOTFS_OFFSET>;
-+			type = "blob-ext";
-+			filename = CONFIG_SC5XX_ROOTFS_NAME;
-+		};
-+#endif
-+	};
-+#endif
-+
- 	clocks {
- 		sys_clkin0: sys_clkin0 {
- 			compatible = "fixed-clock";
-diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
-index b7c298fe279..ec1d5539dc9 100644
---- a/arch/arm/mach-sc5xx/Kconfig
-+++ b/arch/arm/mach-sc5xx/Kconfig
-@@ -147,6 +147,39 @@ config SC5XX_LOADADDR
- 	help
- 	  The default load address for u-boot.
- 
-+menu "Binman configuration"
-+config SC5XX_USE_BINMAN
-+	bool "Use binman for final image"
-+	select BINMAN
-+	help
-+	  If you wish to use binman to assemble an image, say 'Y' here.
-+	  This will enable binman-specific sections in the device tree.
-+
-+config SC5XX_BINMAN_FILENAME
-+	string "Image name"
-+	default "sc5xx-image.img"
-+	depends on SC5XX_USE_BINMAN
-+	help
-+	  The name of the image that will be created by binman.
-+	  This is used to create the final image.
-+
-+config SC5XX_FITIMAGE_NAME
-+	string "FitImage name"
-+	default "fitImage"
-+	depends on SC5XX_USE_BINMAN
-+	help
-+	  The name of the fitImage to be packed by binman.
-+	  This is used to create the final image.
-+
-+config SC5XX_ROOTFS_NAME
-+	string "RootFS name"
-+	default "rootfs"
-+	depends on SC5XX_USE_BINMAN
-+	help
-+	  The name of the rootfs to be packed by binman.
-+	  This is used to create the final image.
-+endmenu
-+
- config ADI_IMAGE
- 	string "ADI fitImage type"
- 	help
+ # Create our user/group
+ RUN echo uboot ALL=NOPASSWD: ALL > /etc/sudoers.d/uboot
+ RUN useradd -m -U uboot
 -- 
 2.49.1
 
