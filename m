@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B02CEDD86
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:16:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78EFFCEDD86
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:16:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1FEB83CB9;
-	Tue, 18 Nov 2025 14:14:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2FF2283E16;
+	Tue, 18 Nov 2025 14:15:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jAlAgL+g";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="A6vBysp9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3836383CB9; Tue, 18 Nov 2025 11:42:27 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 9914983CDF; Tue, 18 Nov 2025 11:42:28 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AB6C83C96
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:42:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A57583CE8
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:42:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-64166a57f3bso8327808a12.1
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:42:25 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b735b7326e5so769758666b.0
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:42:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763462545; x=1764067345;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763462546; x=1764067346;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=NQdKySszMWxZzfLpdSZ/3XPypDh6AjD3noEf0JGmBtA=;
- b=jAlAgL+gWqZLSXTb9cUxxCiptiU1MejlfzTfkptQ9IVT+XwoaHqbopQph6+Yajs3nu
- Q5obJgyQgX9S41fdMdjJlGGjYHLk6+LsviEqFq3iW1weqmsiT72Q152ayxZ3hvGLm/SL
- iWxtM1ubtThKtMizrGR6VN/uncIZh0pTslF+O4a/FlRju80S6NZC65yJdo8rN7yJY2/S
- 249nPirM0kHbqO00lnxCo6Q4dbl/eKwHrra3woDyE5/rCWOoUE3265t4/I/NNqpwiaXo
- 8B27qtG+hhGJ1iKS4oMJ3wL3+uNO/IsZ2MgXQCKTffeqp1ICBUMlHQV8hvNLnr7DTig6
- zA5A==
+ :reply-to; bh=qBMevSWWS675F5XB2fBesu/qT7soHlTFKsXd6dyA83w=;
+ b=A6vBysp9dO8VN39jXmHjRg6zfWELeaSOzGq/BOhOtAz9eoeqwc5kCgJeS8aLeWjVye
+ H/NOjmzvzm1gE6y2DDYQv/xcuJrozA1tSxSiPFjLBkZev4Sk7YN1baFDaJrCGCs/21Lp
+ A2cVIKazx2dYp9UTVe+0eCU4xals0Y15i/sYNwGSwpv2OsWQBNP4x+VeeJa1cZBoFUI8
+ xGEFC8Q6zGmyu6ewcclJlYpDl+YIGBM+Y3eOC0vcHIv/g85rbH9RGjADFHlCkqbBLTSe
+ Yvs9ei2k6cMlrTjxndZAa6OEZn7IfcUp2ycQTYCo0RlL9dozbEmU0gdpRzm4tT9txiFn
+ eyxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763462545; x=1764067345;
+ d=1e100.net; s=20230601; t=1763462546; x=1764067346;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=NQdKySszMWxZzfLpdSZ/3XPypDh6AjD3noEf0JGmBtA=;
- b=dTPNqlLKk7a2MSGy65aq1CHICcJ3xb8c1RaI8Zjd0xE79O6OQZ9apzDxBuChCcVnaP
- M+7cAgLsJjEV0KYcGUu3my+ipz5p2OQgk3W+v/+CLxMVtkAFXlcp1H2LHtzA+v7E4lZs
- WYc5/bFBcf7hX1eiZYWA1QP6ozuPu+k0RUXcRo7X0Q1z9NMBO72ymtxJeuvJO7nuhz2E
- tVFjPfMOI3nobgPtVd/uN5X1j0MHRotTNYuJN8a3GiYpUiYYLwfZx+D5PyFuP3FYUap0
- qpyzucCI5IR7fnRkrDnrS8HxBswPnHHAnJVKKICLFai75ZqrBCJkOzgQthC0AfOp7oQN
- MEBA==
+ bh=qBMevSWWS675F5XB2fBesu/qT7soHlTFKsXd6dyA83w=;
+ b=bFKp8RBF0IzTdmEjAi/U2j+6PS8mQL2SSGHyruaPpMvym9R93gOqdn4+qZWuqAl/k6
+ W3OY1v5cR6cnKTSRDM8Cdxqi15B0nbGb1Omww62Dj96yw1zouwnfaxlsA4BxP73Mb/19
+ 2pH/iPTMSEGbFt3qM0Ee7BOhGziM5T6+2F1SNEyGfZ2hVZRHtI5V3iPFUF4VoJPdFpA9
+ 1hPCqW0sRMwkw/mBMnoX4yu2Q3GBIe3votiauygMay0S6XIeYdU6Nav/YpqrSSqPljX/
+ S+ot7RuiQC512L73ADtvV9yxvljnAJXfL98Evui8vkBz2N41LKpQSn1HY1RBejUF9z11
+ 1VYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXHWfwb7aNsJ7RTZNoOEPY/V5CDnVAfrrQ+f7FNDQQCnHdV/7E6vVxKfnFIODFaaZJV8KeJt5s=@lists.denx.de
-X-Gm-Message-State: AOJu0YyXCZNDxL1XcQxSF7Jq8dN9crOK1a2CO40qLilFHXP3sgxHhbZY
- HQsBu+/3hib+x7N58glXA7jbJ6OoSpVnWwoFjYSAmYQZUJGpK7KtdSG8h5E9Kp5yD5M=
-X-Gm-Gg: ASbGncsVzqMEazeYcDnic6O06uJHDWR7SO+xV5oPP8yCLY0GASPgJHTnSmuRhNNa0qB
- cb22eOn/d6yRVAlrDCYqqFnVvmeU26aI5BctecFXyDX8pBURJistQOB/4pGoidxYaZMqKMunu/Y
- l0bI6LJVlvZyqc3qDu3rt1/PncaZ9n4NIl426N3gtOxDQtcnfF4WvbBB9K1+8Al6WbsCsg9sG2u
- Gx30lteZDrVXY7TyXBWpylfRyg4utYPWZZof6qCsrGP1IgtvwHti6Vdii6yX19ARplpq+la2HNS
- PEMACF21ySyrDbLrPU9Q984P3pKANIrRbHIXVPLYXc8QPN5pS6krs3H4bOk48X/eD5o4U7sYsKx
- pPXmSdFXEkRp5wB1ZXtWOR/mf2i51eYTTYLj8gqZX1g1UgysEsEjh4gX4WdK7qEX9HmfR0xjOcM
- A+p3ZaRzk=
-X-Google-Smtp-Source: AGHT+IFqXwQYMx0qtclwDLxMMJPhUS9rwDdFAux74PcmMpjp5oQcQbK61hTF9Y7tU0oF5xLyCFC8/A==
-X-Received: by 2002:a17:907:3c96:b0:b6d:4fe5:ead0 with SMTP id
- a640c23a62f3a-b73677edc91mr1716415766b.10.1763462544649; 
- Tue, 18 Nov 2025 02:42:24 -0800 (PST)
+ AJvYcCXaEn+KdmAlpq6dMHy5S7a0hYLIzd3x4RhtjTeAP/m+INCtxAFI/Ye1i3HmeIndig/6psp7/M0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1x5VtQmM8T6kWXyUT6H26JCPI1L9/bQ1lF+P3xOOk8YSdH8q+
+ H7KoXsCb1XIJb3vWJ3Dl2eQcHEoeThajB1i+PJW4mDlkkabnzkCEjpTpuvX5cNzGH9U=
+X-Gm-Gg: ASbGnct+F0uZkWbQZMumm4tES4pPPR9RteumuYJiiToZr6EtBYKXNOyUl/qeb8+IEkx
+ WcSwDYIGyxw6Fw5Pq5nKsvZoMzmP+LCZ6aUaFviWjnpsbs1MJTLmXCPJ7ciQzs9H55DPIZRK5J1
+ 0sVT+iRlHK4cHPyknFPuc4nPT4Gr9KcLDs/XSZ3Znq5thHV2d/bbzK84brysqvlBc21QG1PilvQ
+ 19bHTt/4ssHGNBByOfoTyrxFJiapA6gaw2ePq8EF3m5s/aStMvjbwSgt0Yocj2POVElMDPG3QYY
+ D8S0a992rZv4kNqnnXuh2s7rQAfyGYAvyuRWK/4XUZ23zKMQuuGXsH8rIsMb83d3zVfiNBm2ZKm
+ IBUwI+L0VNrSKeYJ68dRepitvIzuYKDmKutj6uqLX+uWWHrIqj727B0WXiEVm1cIKmiREEXKa9E
+ VuoTzoMCA=
+X-Google-Smtp-Source: AGHT+IGT7j9QJ2OWy8BGnfRl8kGL1cxc1Ig7bNuaa5mabvDr5jqzeK5tEB4NY88cW9gHcaMhD4FVVg==
+X-Received: by 2002:a17:907:9449:b0:b71:ea7c:e501 with SMTP id
+ a640c23a62f3a-b758bb218cfmr347758866b.4.1763462545967; 
+ Tue, 18 Nov 2025 02:42:25 -0800 (PST)
 Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-b734fad43dfsm1325153266b.20.2025.11.18.02.42.24
+ a640c23a62f3a-b734fad4494sm1308599466b.18.2025.11.18.02.42.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 02:42:24 -0800 (PST)
+ Tue, 18 Nov 2025 02:42:25 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Tue, 18 Nov 2025 11:40:29 +0100
-Subject: [PATCH 09/15] usb: musb-new: Relative ctrl_mod address parsing
+Date: Tue, 18 Nov 2025 11:40:30 +0100
+Subject: [PATCH 10/15] usb: musb-new: Add compatibles for ti,musb-am33xx
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251118-topic-am33-evm-oftree-v2026-01-v1-9-91ce13c661e2@baylibre.com>
+Message-Id: <20251118-topic-am33-evm-oftree-v2026-01-v1-10-91ce13c661e2@baylibre.com>
 References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
 In-Reply-To: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
 To: Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de
@@ -103,12 +103,12 @@ Cc: Tom Rini <trini@konsulko.com>, Kory Maincent <kory.maincent@bootlin.com>,
  Sukrut Bellary <sbellary@baylibre.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1027; i=msp@baylibre.com;
- h=from:subject:message-id; bh=dDvD/x/4LymVEL1XBsIubCAquDLmvaK7eVpCHnTgwZ8=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwZ37ik7AX1r2vEXarT7UX/JCpcFPvhnq6rYN527uP3j
- llrAiQ7SlkYxLgYZMUUWToTQ9P+y+88lrxo2WaYOaxMIEMYuDgFYCKdjxj+Jz1sfv775hqJz/dM
- Ji3bNa/ieNr7LssV3vKtRnUnj95y7GJk2BIx7XmdStXUDfNckjw/SDarbmaY4x8jW3cs/uyuSX+
- ucQEA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3008; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=uGzKJN7DWL3FCQ5D6PF2C0uZHVuSAaEIbFx2MIt0MlM=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwZ35TfplJz42IiKuL8Pd7MvL1nR7JE1UEOJ9m/Tj1n5
+ 6Sc95nfUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABMJ/Mnw3112+f0wr9nP76X3
+ WIrpmUzYzp/0dOKUJUoaubJbOP33tDMyrOr6JNP87FiMbPXjq0lNr1gOhxxS59DJML59val/csY
+ 1ZgA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 18 Nov 2025 14:14:53 +0100
@@ -128,29 +128,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For the upstream DT the ctrl_mod node is using a relative register
-address which is not translated by the current code.
+The upstream devicetree am33xx.dtsi does not have a "ti,am33xx-usb"
+compatible, it uses "ti,sysc-omap4" for the same node. The
+implementation of ti-musb uses a wrapper driver that binds to
+ti,am33xx-usb and creates new devices ti-musb-host and
+ti-musb-peripheral depending on the dr_mode property.
 
-Make address parsing understand relative addresses.
+To avoid this wrapper driver with the upstream devicetree, add
+compatibles for "ti,musb-am33xx" to both ti-musb-host and
+ti-musb-peripheral. Add a bind function that checks for the correct
+dr_mode value and rejects binding if it is not the correct driver.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- drivers/usb/musb-new/ti-musb.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/usb/musb-new/ti-musb.c | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
 
 diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-musb.c
-index bcd31adba522fc55190fc43fd2dbd2dec93a2731..d3c3d3057c1df2a5cc62df3c57d8b071bb0f12b8 100644
+index d3c3d3057c1df2a5cc62df3c57d8b071bb0f12b8..3ed6428d09883cf5af28b212c0d614b3d8ef9227 100644
 --- a/drivers/usb/musb-new/ti-musb.c
 +++ b/drivers/usb/musb-new/ti-musb.c
-@@ -93,7 +93,7 @@ static int ti_musb_of_to_plat(struct udevice *dev)
+@@ -183,6 +183,16 @@ static int ti_musb_host_remove(struct udevice *dev)
+ }
  
- 	phys = fdtdec_lookup_phandle(fdt, node, "phys");
- 	ctrl_mod = fdtdec_lookup_phandle(fdt, phys, "ti,ctrl_mod");
--	plat->ctrl_mod_base = (void *)fdtdec_get_addr(fdt, ctrl_mod, "reg");
-+	plat->ctrl_mod_base = (void *)ofnode_get_addr(offset_to_ofnode(ctrl_mod));
- 	usb_index = ti_musb_get_usb_index(node);
- 	switch (usb_index) {
- 	case 1:
+ #if CONFIG_IS_ENABLED(OF_CONTROL)
++static int ti_musb_host_bind(struct udevice *dev)
++{
++	enum usb_dr_mode dr_mode = usb_get_dr_mode(dev_ofnode(dev));
++
++	if (dr_mode != USB_DR_MODE_HOST && dr_mode != USB_DR_MODE_OTG)
++		return -ENODEV;
++
++	return 0;
++}
++
+ static int ti_musb_host_of_to_plat(struct udevice *dev)
+ {
+ 	struct ti_musb_plat *plat = dev_get_plat(dev);
+@@ -200,12 +210,19 @@ static int ti_musb_host_of_to_plat(struct udevice *dev)
+ 
+ 	return 0;
+ }
++
++static const struct udevice_id ti_musb_host_ids[] = {
++	{ .compatible = "ti,musb-am33xx" },
++	{ }
++};
+ #endif
+ 
+ U_BOOT_DRIVER(ti_musb_host) = {
+ 	.name	= "ti-musb-host",
+ 	.id	= UCLASS_USB,
+ #if CONFIG_IS_ENABLED(OF_CONTROL)
++	.of_match = ti_musb_host_ids,
++	.bind = ti_musb_host_bind,
+ 	.of_to_plat = ti_musb_host_of_to_plat,
+ #endif
+ 	.probe = ti_musb_host_probe,
+@@ -221,6 +238,16 @@ struct ti_musb_peripheral {
+ };
+ 
+ #if CONFIG_IS_ENABLED(OF_CONTROL)
++static int ti_musb_peripheral_bind(struct udevice *dev)
++{
++	enum usb_dr_mode dr_mode = usb_get_dr_mode(dev_ofnode(dev));
++
++	if (dr_mode != USB_DR_MODE_PERIPHERAL)
++		return -ENODEV;
++
++	return 0;
++}
++
+ static int ti_musb_peripheral_of_to_plat(struct udevice *dev)
+ {
+ 	struct ti_musb_plat *plat = dev_get_plat(dev);
+@@ -237,6 +264,11 @@ static int ti_musb_peripheral_of_to_plat(struct udevice *dev)
+ 
+ 	return 0;
+ }
++
++static const struct udevice_id ti_musb_peripheral_ids[] = {
++	{ .compatible = "ti,musb-am33xx" },
++	{ }
++};
+ #endif
+ 
+ static int ti_musb_peripheral_probe(struct udevice *dev)
+@@ -283,6 +315,8 @@ U_BOOT_DRIVER(ti_musb_peripheral) = {
+ 	.name	= "ti-musb-peripheral",
+ 	.id	= UCLASS_USB_GADGET_GENERIC,
+ #if CONFIG_IS_ENABLED(OF_CONTROL)
++	.of_match = ti_musb_peripheral_ids,
++	.bind = ti_musb_peripheral_bind,
+ 	.of_to_plat = ti_musb_peripheral_of_to_plat,
+ #endif
+ 	.ops	= &ti_musb_gadget_ops,
 
 -- 
 2.51.0
