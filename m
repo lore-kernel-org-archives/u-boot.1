@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B6FECF2562
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 23:22:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FDB6CF2562
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 23:33:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E320883E3A;
-	Wed, 19 Nov 2025 00:21:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EA22483A9F;
+	Wed, 19 Nov 2025 00:33:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y9HQkDi2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GBEHuoDg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30BA181D6A; Wed, 19 Nov 2025 00:21:30 +0100 (CET)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id 4822B839AC; Wed, 19 Nov 2025 00:33:16 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B170383C62
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 00:21:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 291A6839AC
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 00:33:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-657044fea68so131061eaf.0
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 15:21:27 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-3d18422565eso4160986fac.1
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 15:33:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763508086; x=1764112886; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1763508793; x=1764113593; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iE1f8rbZXx7qDMxqpujuuj1AZwQ6EVUU0xIOyopiolQ=;
- b=Y9HQkDi2V1PXg6PABXOCcJcgrVhzYSsto4YEujH5aHEwEZ8u7pxft1RwzRv/VDU4V3
- P5qaSVeQGrFTdbvMUGjOxTPNa80Ly4K7wYWzFsMCASsmTf2myfeOlI61iEj5xjsUudqK
- +sBavOm9V3XCuarDq6YXccq+HLNIyU0jI5vsH/R6PV2mp1luywd9cJNMO1ZxpOz5Bgc9
- Ws/SJR6HQC8D5Y5JjSkERc5YDEXjK8So+LY+LqkTYAbleUt2zuH+ff3n723uTCUhRAWw
- Nm8Vgnvg/oqwLaCYuAFOYr8iSWfdY4Xdagc5DSRsB4UmJw+MY1C3jqJ6c51/o89BSYOC
- OCHQ==
+ bh=fVuds5llB9CkDKI6id1rmzcOa1JzR1AqMjyCsRepBUQ=;
+ b=GBEHuoDgFUsIfw/kKNh0Ln8mgk7xggp31GNMIJZMDLEwWghD2oN+WoGwlTY/PMHAG0
+ yvD6tt5z6+S1WCz32mLhae+JHQFKD0feEOfNKsep0yZQANeCIIb6eTwlZJ6M/egvDSYP
+ BYTOFU+OYodrnxuZCqLBok8ab6MGMHkv9Dyd4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763508086; x=1764112886;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20230601; t=1763508793; x=1764113593;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=iE1f8rbZXx7qDMxqpujuuj1AZwQ6EVUU0xIOyopiolQ=;
- b=E6u6M1VxFfBIdYa5ksYIS/JMOjMAZCFeB/iy2xa0rShIxx1NI7L/COBTifwFpViV/u
- mMKl/uJoXZaE7mLlc1JXE2TRMt+FBjPVHV5Apfsw0yO+a6GmxfshnjAj5OiyixZ7JGel
- yB5b6VBa0v020zKUEKBzOsIwcn744Q2QSWRBg6YcXeE+KQGCBNuPDgt0Mk2vdCUfUwk6
- k9ogF8ot9o5lQSZAPBXrN7IY5E4aKZJDxpG4+PqDoUja5Nwj7jGeENZ63W7nutyQr1mQ
- cYbBPCTXXodqaWQonxht1gHPSekFlPHC7AC9YA42/IvPBG8aytqd0wejLjANh5+OiSUQ
- Pujg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUMIioaXhqALntn78bdiFVteXjSJd+j9XKavUjFgxCxMFhuvJO1XLsIq1Zy2aVCSaAPbID6yqc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx7J/kTr3vsMJ6oVWhd+dr77lHwxWaRfWi8v6nEuI50bBidgrVs
- CrsSPnklkiT/4wv37wt90gtodlQewTZiYSH2NDQTiAnJ9qKHNZXXS5TpubPyyyBC9ho=
-X-Gm-Gg: ASbGncvgRjL5nWrA+t17FiIFRF7Krq8d6/9GYcSNyFKgQHAZnCHLXNNohGOfVPkJ0W+
- 606mni4BZLFYARaE/tI5yx5SAmCVaWX11QF0IoMz9HhEO8TkHmK0ee4ce236mTaRckvK2OvhIaL
- N6esXf0qbLOw1h7qoU0zYee+gozgvqZDLHs/EV14shmBQFIZybEtC3PuTsVfCHO21ilnMX3ck5u
- RQ5/vab2onHpafM/ogmlIfr82tR3XD5tz8DJbze8k50f6KyuZBTKcPzBNNEgX8tk8NLPIKbItdP
- 5j3L5xsuqRwM2A7wvOtzOUJQLKTDGUHm5VpWq3Op0qGZe8SX1ELUJLLuVTFP8aciuM6egTVxPGy
- NiqDsRN9RIJFEwgxg16tLDoF+xxap4YTuvjUoyrjjM2Uh0KvmA39Mbaho8FB0wphM0APF1831qM
- /f4Ar5McxnYA+13nejr6Yt
-X-Google-Smtp-Source: AGHT+IHUwuXg2kKa4zuYwUo9/F2q+p3bAuEUBylt+UeL28TOXfE0CXAz3cb24AR0RHYrF7wrx/cONA==
-X-Received: by 2002:a05:6808:6f86:b0:44d:be91:afe9 with SMTP id
- 5614622812f47-450f1148073mr211791b6e.27.1763508086448; 
- Tue, 18 Nov 2025 15:21:26 -0800 (PST)
-Received: from localhost ([2605:a601:81da:7100:264b:feff:fe59:d7f7])
- by smtp.gmail.com with UTF8SMTPSA id
- 006d021491bc7-65748180aedsm3308517eaf.0.2025.11.18.15.21.25
+ bh=fVuds5llB9CkDKI6id1rmzcOa1JzR1AqMjyCsRepBUQ=;
+ b=B0Otc0LNklmF70+WqaFUhgSPmodnHfYq6SGsi9hQwPwSmGoQU/iBrMlWIeEFYP+/4Y
+ iaJj9v+SW2FHvq7v3qxukL6v4zzuZbMa9R0+mNQZnb1w/aZwfvD13wZ0AL9kPCRkYV45
+ L5yaSOmOQ3hLw6bdsAndZTLvmf42x/+7+6zEmC9Y0SIwqTzGO9AwjUAmu59Oxt5hfeNu
+ R/faKSkk5vD81DqA0BJ9vZC+3nzIcDi0nlt5wJfrWAJSMMaxryQUN6yGnxh3NovY0aQN
+ EGYlcmy418vgBvNaIvC9EcYyUotbLfFLS/x/dDy2kotP8kg1FZUEboa6zq3XKfH0fdWO
+ hN4Q==
+X-Gm-Message-State: AOJu0Yydn3/cCVOYRmU593QiIPVN5iDFGgC41z2WaiRGpTg9qTHmhN0u
+ p9F869ulVCWcFjmR6FbriA3k8WKMh53PhsR0Z613wWi4ISqTyfO01NCXBAZjFopqbv0=
+X-Gm-Gg: ASbGncuodq/hnBvd9l3JI7q1ounR3EjYHPstwMGNaXY5XNfjmlDfeGX+L1PVzSWSP+d
+ UqVw9qYIkyByZ7bTnpY47YArPlADy/3adSgSaUcZJYF5UmTvwpWT9kDPP1pCUd/tqqsd23yHjOW
+ STftZxrK6vTRA7e4dylMHLsFaONho0FJI1U9Tyl23zqX8ogQDCZQIrTCpMAn77fg6VDCDYrMLUi
+ 15BwEfixZ0IyLamGj3kF3VHcAhavgZr3zVYNrSb6duWA/WC8O0NfeIdIDCcCMF3kSHgwEUun22H
+ yMd4u5bgq/KqmTqjQaG3ZqPlN+a4RUAL2AZGkMLJ+0UHAZYsMvzRHv0UzCcvdIEoNV6CC0NgpRe
+ sa7CUdnHpzcPq+PIYrbRL1ejMZKXyXhzSXZ7NbNIdQEwMqWJcqtLWBumOAniKBJAZaIPqcaiGF2
+ DiauqwioVQgujBv1CEGCzIkONkHZV48RcT6s5TbVM7uSwDLuW5AlSrqALADHtWmYjHjMp9/g==
+X-Google-Smtp-Source: AGHT+IGpzZuo6JyUrHS9pj7LqMnYLbXS8I5oDAwNUj9qWGup0tg/lN65Mrz+3Bhr7zNPpxBOhT08DQ==
+X-Received: by 2002:a05:6871:4b10:b0:3ec:565a:13a4 with SMTP id
+ 586e51a60fabf-3ec565a14dfmr3467061fac.34.1763508792854; 
+ Tue, 18 Nov 2025 15:33:12 -0800 (PST)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3e89697fedcsm4075794fac.1.2025.11.18.15.33.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 15:21:25 -0800 (PST)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>,
-	Minkyu Kang <mk7.kang@samsung.com>
-Cc: Minkyu Kang <promsoft@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v3 6/6] board: samsung: e850-96: Enter DFU automatically on
- USB boot
-Date: Tue, 18 Nov 2025 17:21:19 -0600
-Message-ID: <20251118232119.17928-7-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20251118232119.17928-1-semen.protsenko@linaro.org>
-References: <20251118232119.17928-1-semen.protsenko@linaro.org>
+ Tue, 18 Nov 2025 15:33:12 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Dmitrii Sharshakov <d3dx12.xx@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251108-clang-cross-fixes-v1-0-ea6c4282844a@gmail.com>
+References: <20251108-clang-cross-fixes-v1-0-ea6c4282844a@gmail.com>
+Subject: Re: [PATCH 0/2] Fixes for Clang builds for AArch64, improve
+ CROSS_COMPILE handling
+Message-Id: <176350879176.654721.1161316747557822939.b4-ty@konsulko.com>
+Date: Tue, 18 Nov 2025 17:33:11 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,59 +99,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Doing USB boot on E850-96 is most useful in two cases:
+On Sat, 08 Nov 2025 21:48:45 +0100, Dmitrii Sharshakov wrote:
 
-  1. For unbricking the board
-  2. During the bootloader development
+> Initially fix the inconsistency reported in reply to the previous
+> series[1] and also make sure AArch64 images can be built with latest
+> Clang versions by guarding AArch32-specific options behind extra
+> config checks.
+> 
+> Tested qemu_arm_defconfig and qemu_arm64_defconfig with Clang 21,
+> mainline (to be 22) ce7f9f9c and also Clang 18 (for AArch64 only, as I
+> have not managed to build an AArch32 image with clang-18).
+> 
+> [...]
 
-In both cases a U-Boot binary is being re-flashed to eMMC. The most
-convenient way to update U-Boot in eMMC is by using DFU. Implement
-entering DFU flashing mode automatically when U-Boot is executed on USB
-boot. That makes it easier for users to re-flash U-Boot without even
-having serial console running, e.g.:
+Applied to u-boot/master, thanks!
 
-    $ ./smdk-usbdl
-    $ dfu-util -D u-boot.bin -a bootloader
-
-See [1,2] for details.
-
-Entering DFU mode is implemented by setting corresponding environment
-variables:
-
-    bootcmd="dfu 0 mmc 0"
-    bootdelay=0
-
-Do not save the U-Boot environment though, to avoid falling through to
-DFU mode on a regular eMMC boot.
-
-[1] doc/board/samsung/e850-96.rst
-[2] https://gitlab.com/LinaroLtd/e850-96/tools/dltool/-/tree/uboot
-
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
-Changes in v3:
-  - This patch is added in v3
-
- board/samsung/e850-96/e850-96.c | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/board/samsung/e850-96/e850-96.c b/board/samsung/e850-96/e850-96.c
-index 3aa4992a36d5..415505f2561c 100644
---- a/board/samsung/e850-96/e850-96.c
-+++ b/board/samsung/e850-96/e850-96.c
-@@ -209,6 +209,12 @@ int board_late_init(void)
- 	else
- 		load_firmware_blk();
- 
-+	if (bootdev_is_usb()) {
-+		env_set("bootcmd", "echo \"Entering DFU mode...\"; "
-+			"dfu 0 mmc 0");
-+		env_set("bootdelay", "0");
-+	}
-+
- 	return 0;
- }
- 
+[1/2] build: fix prefix for Clang when CROSS_COMPILE is an absolute path
+      commit: 91bb236194162472d1e19b0cbc215e25eddc11d0
+[2/2] arch: arm: fix AArch64 builds with Clang 21+
+      commit: 2ed758fa7ef9e434c586ff5e12eeca7dfae7efb2
 -- 
-2.47.3
+Tom
+
 
