@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06817CEE347
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 18:06:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6705CEE348
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 18:06:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43E6683E92;
-	Tue, 18 Nov 2025 19:04:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8945583F50;
+	Tue, 18 Nov 2025 19:04:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bbAJVJet";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fiKGPbB1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97A1583F50; Tue, 18 Nov 2025 19:04:11 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id B623983F5C; Tue, 18 Nov 2025 19:04:13 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D01783EEF
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 19:04:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 994DA83EEF
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 19:04:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-656de56ce7aso1200795eaf.3
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 10:04:09 -0800 (PST)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-45033024e59so2641728b6e.3
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 10:04:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763489048; x=1764093848; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763489050; x=1764093850; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NWdgnpEfNC/isnGfZp4rOA87f7Y94fJ01ayGjLs1ZFs=;
- b=bbAJVJetXYyYVjpL9qIWuca80zRx4JFlFKdCY14VWxm7XYvg41H2O/y3v3r+LFP/v/
- fzeRzuHyOsM7Kz+rkTCspEGkSnFKdL6MCgrAFCBeioSD92lu58qAvQoZo923ylZeyvHS
- oyE4ec7sisknZ4at5lBmjFPx6nWYXFPZx1LXc=
+ bh=4jtudXHUYc7XJBnpI/XWOTOxOr0Q2smHBDUL3bo/iag=;
+ b=fiKGPbB1oDhq/3/AxrtNuTufhY1JXr4E0WfUSk+gte3v/bYx4RPSgnXblqy1dxWfjp
+ 66lp5oostN1EBTWYViDq4KgZoTonoifb166SaqRuYQDb93KRAV7KiY8pERQeSTaHzuDW
+ vZ3ELFsb48UUCBnk8lk5sIve3ODRIAGTGrXwk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763489048; x=1764093848;
+ d=1e100.net; s=20230601; t=1763489050; x=1764093850;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NWdgnpEfNC/isnGfZp4rOA87f7Y94fJ01ayGjLs1ZFs=;
- b=U+WAq6SWJSsO5kbF8tAOndPTA3aknYwjv8mdExGEbeNJWEtoA8e7peV8AeuTeDQmvS
- iS+o+DkQXs1GyrajONyDisLXHVIUdgZzTCFYoPEz+iGaDmky1ReKfjYLaaCAVuvKR5wJ
- pgmfhAKtYFUWx+xbf09jhiHpdHK1C1oEMfmcNAlqgIo15G63kTiSoH+BZC6mOUQv/F3m
- JGAxwqRhMFUVQ7LimQFEcvpFwdubrlELCGigt9A8tfJZGrYMOR8wIlRJ4Y24pZmf8i1S
- p5qXm8x9TJVJYB53MGBTXLjrCuxlS8eu79H4xMTTaNzqPDzfu/G2EKy7/LVvdzLGiNO0
- 3teA==
-X-Gm-Message-State: AOJu0Yyp1MzWoFvguEbJcUwYeNR16wWR74eoWDdWKaFuu1B88CgwF2mR
- VO5rA9XHUO+469a6RdwpzP+r3NcmZRPuol63kSEr5R+r8PVZuNhJvrqOVJ1u2JgnkoUapDtbFVE
- HCXrRfDWfKw==
-X-Gm-Gg: ASbGncs1Kob0gReiLkaqk0SPCWn9r/AupKp9c8JJdNviBJYDs/ip5fefCI6nBz2su5X
- 7dq/C2t/BsmzlliSi0BTDClbre26UkDwTnYk3zCawlcFfafieojpC9ldvbS7G437pOkEpAq37UC
- JJZXhM/HZOdEnOPb3mFL2ovcNmJ+sKLlqPrHRgbYIXoowC4MMUDvqHTM6KvNLkrDfQulZPulvQZ
- r9ZlAM65OsPzxNKLIHOOR5nkF9ttHC4kViK3VuSDP1+str+OchUpKbpV+pswWQjoxtINzZn6klQ
- XeGDkbx1h0LPWD75q4YifSqK42DuPkTqcrlyWb5CRHlnP/2QVDTTAwlOMZT5tvrfVPAz+G8UHRT
- I/coFx9QH9ntfk7ykGTuVyO8Dk20YSgUfcdstwAdpvf3QYo70opmUgutIntXg0/H//X5k6djhz1
- mpWus2nzlBCOAcXkXv1a4ibG7Vq5WtTZ8GV7YYW/vd3fq7x1Gr8HOo5Y8a5lHPdGM=
-X-Google-Smtp-Source: AGHT+IG8G5NJL14G/7pyaJ8FxYgl6HidAdCig2PIMFEEBJyPfhlfHS2PR1Ym0SXEr44KVDA709VEtA==
-X-Received: by 2002:a05:6820:c09c:10b0:657:633d:7361 with SMTP id
- 006d021491bc7-657633d86e0mr1253622eaf.4.1763489048162; 
- Tue, 18 Nov 2025 10:04:08 -0800 (PST)
+ bh=4jtudXHUYc7XJBnpI/XWOTOxOr0Q2smHBDUL3bo/iag=;
+ b=ZxMLOIlEFzmjpTJo+Fm+EOuAVWe0IMlYkeG8DlztO/q203pKeZdtCQUYuU0Gdb7oda
+ 9ceWHAOZpTqze9fL635XEcMiHXPvTlUJvvdPrXVTuWYkZM27Xrtvjz7BQfn772luvVre
+ UBtljkHA+rFf4eammj9GqWCa3CK5psoT75bB75bzvcOo78K2FozOWjn5Qlat4nzdybq6
+ FWW5lBd/NgnvBdpWa9DuvqUJk3NLV2py/cupNQiLIcfiSAyZXlmqIB/+/ppxq7gE61o+
+ 3JhVAEnD4YBUpq0cCsrYQzXAO31/m/FU4yTvyhLdkI+QXp6OQBbKlP8au/N5gBhSvzHb
+ /QeQ==
+X-Gm-Message-State: AOJu0Yx+Fc34+HsJ0NpYNw4HfvncUOH2uaH5Xi6rzkgbaeN/mjvYgH5X
+ zt5wfumA0/2dXqKpCApJA00OSqH0kzOnO0Uw4hEbueD8GbnceLUcq/B/ZMsH0Gx3HWTdN8G5G2h
+ HTReT6DAbqw==
+X-Gm-Gg: ASbGncusA7yr0ipLAeDLY19+7fCmrF35DRyZCeSqV3tRznL9USD3bZr2B0WCQfru2OU
+ qYpecgB1N7DLVgafaOvGcHr08lhAHlmoqBS2cIJO7M7x8g9roBI0ipzSePCJAqW4Sy6HXAt+EdG
+ KLEE1Epj4lKSTZHH1fgzYIinmT74T6syG91uzetyH72hVwANcsrq58ypOzcxr18mvd+SsEd+VXV
+ SRpkDxmXPeu9z5rFoSjNSt5zusfEn3es6ePsmIfYvzQ2zSITH4IWpNXh1jPngBxvyYqu6YD/0n/
+ MUXTgxDZPPmySE0nUq1SrwCmhP/AHpmSfALuwiWtzhvtp1s+h/p+bBzpxvjisaVNYjDTFYYjW96
+ zZ19+Cj8lVgV3BmPWuMc3ggWMTALRUmnQnMlrLyUr07dt9Ba2eVcheTJcVZu4RsZS/PS8rTQdjp
+ lK2zHrpzmDgLNMNQpaG7wRCYB83AFmmxt7kkNKHBBuS9ELVTOrxHoOEnrwNa07sQw=
+X-Google-Smtp-Source: AGHT+IEOrHfzVc13pBKu+lINnTnVzhMzv9tbGBJJlt5j40BfVLR3eH87Wrwl5I/1PLZXj48pMtLOyQ==
+X-Received: by 2002:a05:6808:5288:b0:450:e36:999f with SMTP id
+ 5614622812f47-450974a27d4mr8750805b6e.21.1763489050202; 
+ Tue, 18 Nov 2025 10:04:10 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65724cb873dsm5569130eaf.4.2025.11.18.10.04.07
+ 5614622812f47-450a5f5e1a9sm3327677b6e.12.2025.11.18.10.04.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 10:04:07 -0800 (PST)
+ Tue, 18 Nov 2025 10:04:09 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Patrick Bruenn <p.bruenn@beckhoff.com>
-Subject: [PATCH] mx53cx9020: Stop disabling device tree relocation
-Date: Tue, 18 Nov 2025 12:04:06 -0600
-Message-ID: <20251118180406.591149-1-trini@konsulko.com>
+Cc: Fabio Estevam <festevam@gmail.com>,
+	Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH] mx6sabre: Stop disabling device tree relocation
+Date: Tue, 18 Nov 2025 12:04:08 -0600
+Message-ID: <20251118180408.591167-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -105,23 +106,24 @@ tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
 or bootm_mapsize are the correct way do this. Please see
 doc/usage/environment.rst for more details.
 
-Cc: Patrick Bruenn <p.bruenn@beckhoff.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>
 ---
- include/configs/mx53cx9020.h | 1 -
+ include/configs/mx6sabre_common.h | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/include/configs/mx53cx9020.h b/include/configs/mx53cx9020.h
-index 70aa140036f9..2bd1426c7d9d 100644
---- a/include/configs/mx53cx9020.h
-+++ b/include/configs/mx53cx9020.h
-@@ -40,7 +40,6 @@
- 	"scriptaddr=0x74000000\0" \
- 	"ramdisk_addr_r=0x80000000\0" \
- 	"kernel_addr_r=0x72000000\0"  \
--	"fdt_high=0xffffffff\0" \
- 	"console=ttymxc1,115200\0" \
- 	"stdin=serial\0" \
- 	"stdout=serial,vidconsole\0" \
+diff --git a/include/configs/mx6sabre_common.h b/include/configs/mx6sabre_common.h
+index c8e5757d0bb5..ef2848b71f33 100644
+--- a/include/configs/mx6sabre_common.h
++++ b/include/configs/mx6sabre_common.h
+@@ -47,7 +47,6 @@
+ 	"dfu_alt_info_spl=spl raw 0x400\0" \
+ 	"dfu_alt_info_img=u-boot raw 0x10000\0" \
+ 	"dfu_alt_info=spl raw 0x400\0" \
+-	"fdt_high=0xffffffff\0"	  \
+ 	"initrd_high=0xffffffff\0" \
+ 	"splashimage=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+ 	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0" \
 -- 
 2.43.0
 
