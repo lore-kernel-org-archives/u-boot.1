@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC31ACED63B
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:57:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5F50CEDD8A
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 14:03:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B2D683D52;
-	Tue, 18 Nov 2025 14:57:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 147FD83CB1;
+	Tue, 18 Nov 2025 15:03:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MoLXKsj1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hJk8cfs3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A78283D5D; Tue, 18 Nov 2025 14:57:37 +0100 (CET)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 5526A83D17; Tue, 18 Nov 2025 15:03:07 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2AC283D39
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 14:57:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 141AF83C5E
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 15:03:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4500a6fb71aso2099614b6e.3
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 05:57:34 -0800 (PST)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3e12fd71984so2950957fac.2
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 06:03:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763474254; x=1764079054; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763474583; x=1764079383; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eAA6IiwhqSCICPanKo3REYL3svY/E2/8BhIXV51pOew=;
- b=MoLXKsj1iNrPnlUEGLvxQshWIqc0r6iJsRB756OKpkvr2TcsgBYAnzbcWfdAScH3Kq
- lWierZVVkoW1lJcaif6CDmFPz33Xmmccjgu1+0lQeAvfKljEKBoZ4+9X/1uRk5JuHFKi
- rXimR9yrJyPZzzRdTKYULDNrr6V4+DvM0TFhY=
+ bh=eRTbyEr5gnOvuZ+NRSBWU4/HHFE+VoBT1WKfqJQS/6g=;
+ b=hJk8cfs3mbDn0HCG7AxzAmkkyAkMKyjP0I5GSOQ/Woetdu0zn1WT7tfP/MbzR1s0Wd
+ ZybDEeVfusfSyerceAE6+st7tULwEp6t+/qfLNLD20BqBFGV9qcgkbh443Fu+O9Yi4/3
+ j9fD1sWePYTKBWZV9A+jOVUTl5Nd7xDWuELxo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763474254; x=1764079054;
+ d=1e100.net; s=20230601; t=1763474583; x=1764079383;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eAA6IiwhqSCICPanKo3REYL3svY/E2/8BhIXV51pOew=;
- b=BuEp4MninFU2vclXbnpdNUSNcYCFG2e/dyGobPN663hVC2s/O3f0qWN3HForrLKHO3
- QYRDbNU1LVKiV+jx3QhOo3UD8V4TcbdIR43xWDUhuQFIlPdfZleBMePRjT52MCWSbD12
- OlDNbFi0ObnepxZfeLDkAUUm2TN2WO86UpPBkgYKpcIOMwJfJXfBSuCCs/kCNKtGN1Ad
- lCWv9WRGV8yXbUT4Pfu/Z281jbnKwzm149Cq90GfeUJyNmVhggw5MjkDwj5K60nfJAL9
- z2ouc7LdpAu7zBPITjHny52Yn1/vnLGqkHnsIfYxBshx1wf8kAHAYpsPb2LyTzQ3WeNa
- 426g==
+ bh=eRTbyEr5gnOvuZ+NRSBWU4/HHFE+VoBT1WKfqJQS/6g=;
+ b=UP1dw1852OOMJ+ET+urCNC6UC87a+B819Cu2hgd+fhGnMC0lo9K6YGu3c/QDxHtdxk
+ P/qHyCfr6cnmcvgAaJj4QdaWoy6enoUuP/nd5GTG8oSZOqAnTrnddKnMA5bBgJjB4B9y
+ ITyI8EFJW//q8TnYrHOJSCNGh6n44Mc7zCyflIvD7AUmBovejsyw6ka0u5mgggTzCCAX
+ ZL+oLWVZ675Cin/PqNbBvvrKJlXX4sW/bD7OsKtIsq/satw2vfyTXw+AiegbumAdwjRF
+ PhD1swGA+Mb4723CHiBSTkuls+KeTzokWc/44eSt11nQ8vZvLkvWs+pjzmeNfWsFW4nM
+ auRg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWRn16Ok4nv6tQwaX/Zmew9sq2RcJPYsMJztXlcL080r1TI2PZTlAIGzlY0UEyFitpT7U7K3/U=@lists.denx.de
-X-Gm-Message-State: AOJu0YyEmAFRlwFL+C43ZBmRJwAOms3qjUTaCselpR8U9oVKEOPqcqaa
- bogEsw5CjkGtp9L3RV4DTiVhEW+ZXWA8YVscKEyM3lGC/HOvcHoJC+gtYh2+nq/y5Tw=
-X-Gm-Gg: ASbGnctJ36ncivq48Bh28i7Tbo9pG8njlgIWCVpm8p4F2d3+GP2l9NyRiwkfKbHum4M
- uZ4sH/zsRFA5qaEXze6RkBdH11L6ktOCvPeWimkeroZvwm4DlSE3Bv3SjLYCrVeHGhANv8ognio
- SgHQ17KZmqZN8QhlRGx5tqwUF+tAoREw11gUvJL/woZ+QHvAQn3WfCHLyHP659FK3I5i5kneX8+
- FoqtHGd/uMeF7qC77dU2PqrobtovAdEUZ/iUIKn5MFIrj1qZBbRo5ClXhtoZjH9hWTjJx4S39rk
- faK9G5GVlXfH44Z0FrW42UOP1OPLEWxHx9+XzORB0ixNce60+z3IY6U2V7YpF4LVxwuQlTPiZXz
- PAaD0cp7NfVjivAtrLRurt5hfN7V6Sr5DW5Q73wV1d708Efpcgy7wcTqtGHsE/vQYccgNh7ja34
- BDBtHQfzXDe0QsQkeZbZ5p3MJITPW+JpDp3GIE4kKzHltU3MJ8Y8WqwI2d4rU+
-X-Google-Smtp-Source: AGHT+IF+qEb9WiBczHKfW86PoUtIqvNeL3UGpzFBvPZBDyI2aJgwx2Tnn0pG/FeCgKc767+LeoyqYw==
-X-Received: by 2002:a05:6808:5294:b0:44f:e512:4ca2 with SMTP id
- 5614622812f47-45097587d04mr7347085b6e.40.1763474253667; 
- Tue, 18 Nov 2025 05:57:33 -0800 (PST)
+ AJvYcCX1OHCMvEvNYiebwA7eRfrPq+4lIUQl+DwAmDHwDNMMtW3xRdIU2TAa5v6FfPF1YOo7g69LjFM=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywemjlpe5nBuptd1MvkB3E4EaeSdULqspa2xqvIWS5spZzg6sKZ
+ JQV/OdsDGX2xbm1DaqVbqWeR56R3jlAgbdCVXrrnCmbQMNszPlbm+4o5MO574pSQLOs=
+X-Gm-Gg: ASbGncuuZSD08qHJMR6Xyb/eiSowiuGtD6tCgl+R1xaLIr5s0eW4lmcha48hMMaAICD
+ 886IHnb8jSX/FsFv/gEbyIkXgV0u+pLewTCNDvSEZt8s4ZQblzDBAuq0wxRASunJ1AuSKm6gXe3
+ Hi9VtWtFHqdPR/l/OfkrUggDhWhHmpwNRvDIKt4x97FII58u/vGwsoulCQCX/FwZq/2QhQ5bgGm
+ DOC1ls9HDOFXNlzEJzSu4cNQQCeE0dRuWMYi0B1In8RrmgUtKbGe5WRN9tyV64Fxj2Ybbs/dwlk
+ GdwjZDtm2Eb2ELJMh4bW13RzZaum6o1mP/KbH7bkvOFwi32bFgiGCw+YyNgNOuN/nYJHzH4Sop8
+ Uh+JzsaslC4vbZ7qG7O8xUm32gPq9GIScSxFa/3/foCWWSF2kz7z4iJyaZbS606fhFqHPzqTI39
+ zv0S5Z8/qxB/nZ+/knUejvniCytzKrwQ2WqRKMvB8EtJgOk/iN9A==
+X-Google-Smtp-Source: AGHT+IGKRHYSjl7ebjb7VQLHv1C7tyFbkSls7s6DXQ5odFYDnndrH+lePnp0FV5KNZV81hLci+4a4g==
+X-Received: by 2002:a05:6871:d30a:b0:3cd:a995:6c6 with SMTP id
+ 586e51a60fabf-3e868e9f272mr6762499fac.13.1763474582476; 
+ Tue, 18 Nov 2025 06:03:02 -0800 (PST)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450d5ffdc84sm1278107b6e.19.2025.11.18.05.57.31
+ 586e51a60fabf-3e8522fca39sm7008427fac.22.2025.11.18.06.03.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 05:57:32 -0800 (PST)
-Date: Tue, 18 Nov 2025 07:57:30 -0600
+ Tue, 18 Nov 2025 06:03:01 -0800 (PST)
+Date: Tue, 18 Nov 2025 08:02:58 -0600
 From: Tom Rini <trini@konsulko.com>
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Cc: Maarten Brock <Maarten.Brock@sttls.nl>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+Cc: Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de,
  Kory Maincent <kory.maincent@bootlin.com>,
  Rasmus Villemoes <ravi@prevas.dk>,
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -83,7 +82,8 @@ Cc: Maarten Brock <Maarten.Brock@sttls.nl>,
  Tingting Meng <tingting.meng@altera.com>, Peng Fan <peng.fan@nxp.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Duje Mihanovic <duje@dujemihanovic.xyz>, Liya Huang <1425075683@qq.com>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
+ Liya Huang <1425075683@qq.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Romain Gantois <romain.gantois@bootlin.com>,
  Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -91,17 +91,17 @@ Cc: Maarten Brock <Maarten.Brock@sttls.nl>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
  Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Sukrut Bellary <sbellary@baylibre.com>
-Subject: Re: [PATCH 01/15] board: ti: am335x: Fix DM_TPS65910 condition
-Message-ID: <20251118135730.GO2125796@bill-the-cat>
+ Sukrut Bellary <sbellary@baylibre.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>
+Subject: Re: [PATCH 03/15] arm: omap2plus: Select REGMAP
+Message-ID: <20251118140258.GP2125796@bill-the-cat>
 References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
- <20251118-topic-am33-evm-oftree-v2026-01-v1-1-91ce13c661e2@baylibre.com>
- <GV2PR05MB1194108EEB54378B8A1FDC16783D6A@GV2PR05MB11941.eurprd05.prod.outlook.com>
+ <20251118-topic-am33-evm-oftree-v2026-01-v1-3-91ce13c661e2@baylibre.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0BKAsObl030E1xUr"
+ protocol="application/pgp-signature"; boundary="0JglLO7eIMZuEBAk"
 Content-Disposition: inline
-In-Reply-To: <GV2PR05MB1194108EEB54378B8A1FDC16783D6A@GV2PR05MB11941.eurprd05.prod.outlook.com>
+In-Reply-To: <20251118-topic-am33-evm-oftree-v2026-01-v1-3-91ce13c661e2@baylibre.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -120,60 +120,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0BKAsObl030E1xUr
+--0JglLO7eIMZuEBAk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 18, 2025 at 11:09:36AM +0000, Maarten Brock wrote:
-> > From: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
-> > scale_vcores_generic() calls functions implemented in tps65910.c, not
-> > tps65910_dm.c. Change guard from CONFIG_DM_PMIC_TPS65910 to
-> > CONFIG_SPL_POWER_TPS65910.
-> >=20
-> > Fixes: 0b9ff0851592 ("board: ti: am335x: Do not call disabled PMIC func=
-tions")
-> > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
-> > ---
-> >  board/ti/am335x/board.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/board/ti/am335x/board.c b/board/ti/am335x/board.c
-> > index
-> > 712818ec23562fad85febf6616aea3cea1a3a9ea..90e37a8d91330365bb5f27c37
-> > 1be7b9749de9fde 100644
-> > --- a/board/ti/am335x/board.c
-> > +++ b/board/ti/am335x/board.c
-> > @@ -429,7 +429,7 @@ void scale_vcores_generic(int freq)
-> >  {
-> >  	int sil_rev, mpu_vdd;
-> >=20
-> > -	if (!IS_ENABLED(CONFIG_DM_PMIC_TPS65910))
-> > +	if (!IS_ENABLED(CONFIG_SPL_POWER_TPS65910))
-> >  		return;
-> >=20
-> >  	/*
-> >=20
-> > --
-> > 2.51.0
->=20
-> Acked-by: Maarten Brock <maarten.brock@sttls.nl>
+On Tue, Nov 18, 2025 at 11:40:23AM +0100, Markus Schneider-Pargmann (TI.com=
+) wrote:
 
-Thanks. Can you please split this out on its own (since I see Kory has
-feedback on this series as well) as it's a standalone regression fix.
+> clk/ti/clk.c is compiled when ARCH_OMAP2PLUS is set and uses regmap
+> functions. Add REGMAP dependency to prevent linking errors when CLK_TI_*
+> options are enabled.
+>=20
+> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+> ---
+>  arch/arm/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 3db5474a05b8c08e111e8c8b98c3a6fe68de15f2..c72821ce2131e9d9deebef4fc=
+e3757fc68bd9f3f 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -844,6 +844,7 @@ config ARCH_OMAP2PLUS
+>  	bool "TI OMAP2+"
+>  	select CPU_V7A
+>  	select GPIO_EXTRA_HEADER
+> +	select REGMAP
+>  	select SPL_SOC_INIT if SPL
+>  	select SPL_STACK_R if SPL
+>  	select SUPPORT_SPL
+
+This belongs with the appropriate CLK entry, and Yegor Yefremov has been
+fixing some issues along these lines recently as well.
 
 --=20
 Tom
 
---0BKAsObl030E1xUr
+--0JglLO7eIMZuEBAk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRx7RgAKCRAr4qD1Cr/k
-Cmv8APkB3dqLNFypRfx1mr70S42xbx3LWMrgt0QI8FSearlUmwD+KBoRKygXmR28
-wTNYYQY6lEFeIy9Qeunhi9KVj9EAbQs=
-=+TAZ
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRx8kgAKCRAr4qD1Cr/k
+Cg8YAQD3Xe4zbP3+BmeUMI4N3PxRGWMmbqnUctalEJvVwCbXEAEAt1Gtdc/+t0Dl
+VPvJ6AaX3UvUTxLlXSImJn/Ul1Sl6Qw=
+=ipdz
 -----END PGP SIGNATURE-----
 
---0BKAsObl030E1xUr--
+--0JglLO7eIMZuEBAk--
