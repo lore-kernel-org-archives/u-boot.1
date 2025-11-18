@@ -4,94 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A7ACEDD97
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 14:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCEB9CEDD93
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 14:34:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17AEA83D07;
-	Tue, 18 Nov 2025 15:34:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 69EB583E19;
+	Tue, 18 Nov 2025 15:34:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oRVswR+x";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Z+ZEXwp6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C3BF83D07; Tue, 18 Nov 2025 15:34:12 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A212183E20; Tue, 18 Nov 2025 15:34:55 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75A6183CB1
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 15:34:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFB9D83D07
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 15:34:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-65763315216so406132eaf.0
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 06:34:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763476449; x=1764081249; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QClMh8OvkWppQyETm861H7baP3RL3nW5IaLrwD4kzkA=;
- b=oRVswR+xVN+fZa6jx2aQLNWUGgH3QzwFSJWaZkDjC0LIA00UXrc1Mq/BpnxXp42Zet
- ofVDlNPaijbJVvHkPZ0gLyH4KYxA+S24cfiS2PHCx4Nrh70DE4wNXQCmT3s24YEsWps5
- tyv35F4zkFlvQUqTWHR1MEBb0Ptj16iB3HgHQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763476449; x=1764081249;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QClMh8OvkWppQyETm861H7baP3RL3nW5IaLrwD4kzkA=;
- b=OftgMFOaebQa0Ulvi+a+nGDQtStTryYlI+YeVVY7xfRDrUzz4uGz7IgXMOJHoN/EZh
- REz6FcS9rAeJyTmr1GX08rLlhINemHwF2fxzNpeOl+2rhBo8qjz5fqLVubxjMkA8m7Yk
- u6ER9XPNVteDgcU6ZAVGFmRbBB9+5REbtgviyHhTV+a8rwdf8nicCU9p6hgZsKH0baWn
- doDDQER1fNg1eldF0qYZ+/SEuIj7KczIVYqKxe9TS5jwBajktMZpXDTTCtR09k5uUneB
- 1a48T5IXW07Rl1U5DxBDHlmy3oO6VF4xwXq8OVPQCAfLUZPVfxaPdT9YFWbtB/2CzrYT
- Jb/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWI4cLFotGmJzpDDUyuCzsJbXhhe39gATBeuNeS14vmmtdBgR2QVscjQNovVjU7QsxtBInDomo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzArtH7e4rZ/TaTbjcgxefW/PdAj4wAtG1RXTLUlbUr6xAZXY4Y
- jfKHN7hLAYniG3xmW8LAixdOA30JqGguCpD2Bzk6CTHu5my+AX5Daw+aPzxqgJDxLXpD6NudrgR
- ybNmADYvx6A==
-X-Gm-Gg: ASbGncsexMH99xmXy/d5ngNh/WjqcR2+U+mtUehW2060P1Ilw295JzHBtI/jkLiWTNN
- 8kRSpnt2pxAzezNMqJclPl9KqA+W0SAq5Cr9NVvGINb3imlBmKDOIxXj7+AzkZma1ShM54HGiij
- MZ4Y6osxZ/Fko/MLZVSbCtk3AlArkt8SDrBgFMeTdwGodF1pr+jmixBtGmmiUoTH1LyNiz1rTkB
- DRxgerAsHGwbl8dy1ukBfKprgsCNqvBjWFRv2lvZ6Nbdvk9bRTH6/cQADy04Ou1e8/z6kbMfkNw
- u/D/j5Q/fm46ydOnqv5pE99bJyZ//Nq811OJ/G413YjQuSwI/vQFsb/uFg6ELzfJe/WpKtqKMre
- usje9uD3vX8SSzWc/T942N80wKIDIzBChiNNJX2KJPkjvxGZ4tGdVCSII2IL7iT+SMiXhtvGoG2
- BltQ/MXWeNm7wxh6p6y/6qrFLCDXpIttStuzgS4v+dFZeZfgdbkaFQglETWUMX
-X-Google-Smtp-Source: AGHT+IGqH8jZf1ZWCHhFsc+2yUtqYPGdMzNxxxDiNEpPcZNFIbvGbyKglr7C5WYy9QfxQd+uDLsPbw==
-X-Received: by 2002:a05:6870:d0d4:b0:3ec:4863:e387 with SMTP id
- 586e51a60fabf-3ec4863f081mr3585640fac.35.1763476449102; 
- Tue, 18 Nov 2025 06:34:09 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e852043499sm7125001fac.6.2025.11.18.06.34.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 06:34:07 -0800 (PST)
-Date: Tue, 18 Nov 2025 08:34:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Vignesh R <vigneshr@ti.com>,
- Tudor Ambarus <tudor.ambarus@linaro.org>,
- U-Boot-Denx <u-boot@lists.denx.de>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Steam Lin <stlin2@winbond.com>
-Subject: Re: [PATCH] mtd: spinor: winbond: Describe several chips
-Message-ID: <20251118143405.GA527619@bill-the-cat>
-References: <20250703170253.1231818-1-miquel.raynal@bootlin.com>
- <87frcwexyt.fsf@bootlin.com> <875xbegt1x.fsf@bootlin.com>
- <20251113142745.GI6688@bill-the-cat>
- <CAOf5uwn_ggFp-KW6qDcKYn1kKA6+FabyQLCT1ecVoBdv9s3UqQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 4E8ADC12677;
+ Tue, 18 Nov 2025 14:34:30 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 7013C606FE;
+ Tue, 18 Nov 2025 14:34:52 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id DD964103713A9; Tue, 18 Nov 2025 15:34:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1763476491; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=Qlyw7HV7XtbOlotTy4pcf1SYiFDKxnBZk3dHTInyCQY=;
+ b=Z+ZEXwp6XMYgHN5WcIDonOPHXUYoUelxdHW4odvjqeVXFoamK6GKLTDXeCtAQutU8pFoj+
+ fiLf4/kInAZ5SvixQMIt074Vy3XVyGg/CExWFNJBLj/fxFHU2P4tvZUw3ZdnNDSots7YTt
+ rOe4U8cmJujwmqQmd3mRw7cAmc8nkKJiYnLXAeMItDCytd0dVhMwieJguc0D3uhvDbNdoW
+ 6qf0ED6BuGfdpT/LEH0zS0Ru5z10kUyg8Nvfo/8YCYiIHXbC9n8KGaPnOcjPsL32wwStq6
+ DEXaaWj3vctmRS/ZMqtYYr5YPz9ZSNRg5WO5QMuvChaUxsH0GxXGNDnQS721VQ==
+Date: Tue, 18 Nov 2025 15:34:43 +0100
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Cc: Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de, Tom Rini
+ <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, Rayagonda
+ Kokatanur <rayagonda.kokatanur@broadcom.com>, Tien Fong Chee
+ <tien.fong.chee@altera.com>, Alif Zakuan Yuslaimi
+ <alif.zakuan.yuslaimi@altera.com>, Casey Connolly
+ <casey.connolly@linaro.org>, Tingting Meng <tingting.meng@altera.com>, Peng
+ Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, Duje =?UTF-8?B?TWloYW5vdmnEhw==?=
+ <duje@dujemihanovic.xyz>, Liya Huang <1425075683@qq.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Romain Gantois
+ <romain.gantois@bootlin.com>, Simon Glass <sjg@chromium.org>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Miquel Raynal <miquel.raynal@bootlin.com>, Marek
+ Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Anatolij Gustschin
+ <ag.dev.uboot@gmail.com>, Sukrut Bellary <sbellary@baylibre.com>
+Subject: Re: [PATCH 05/15] simple-pm-bus: Make clocks optional
+Message-ID: <20251118153443.0a7436a5@kmaincent-XPS-13-7390>
+In-Reply-To: <20251118-topic-am33-evm-oftree-v2026-01-v1-5-91ce13c661e2@baylibre.com>
+References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
+ <20251118-topic-am33-evm-oftree-v2026-01-v1-5-91ce13c661e2@baylibre.com>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="MW4iuncdT3aTSlNs"
-Content-Disposition: inline
-In-Reply-To: <CAOf5uwn_ggFp-KW6qDcKYn1kKA6+FabyQLCT1ecVoBdv9s3UqQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,37 +87,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 18 Nov 2025 11:40:25 +0100
+"Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com> wrote:
 
---MW4iuncdT3aTSlNs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Nov 13, 2025 at 03:36:00PM +0100, Michael Nazzareno Trimarchi wrote:
-
-> Hi
+> simple-pm-bus binding requires either power-domains or clocks, not both.
+> Allow clk_get_bulk() to return -ENOENT.
 >=20
-> Conference. I will pick him up this weekend together with others. Sorry f=
-or
-> it
+> When no clocks are present, bulk->count is set to 0, which works
+> correctly with clk_enable_bulk() and other clk functions used in this
+> driver.
 
-Hey, so it's Tuesday now and I haven't seen a PR and it doesn't look
-like you made it to pushing anything to the custodian trees either.
-Again I ask, do you need help here? I can go and pick up things that are
-either clear or reviewed and start pushing it through. Thanks.
+Reviewed-by: Kory Maincent <kory.maincent@bootlin.com>
 
+Thank you!
 --=20
-Tom
-
---MW4iuncdT3aTSlNs
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRyD2QAKCRAr4qD1Cr/k
-CmCCAQC+o5g7ea1BdzuTNtk4ndEbVJrC4ESkgEMxUVVyhuG2ugD7BrYozzBkqQTC
-otjRIcsva1NOts53/sxti7jX9Ow2Mgo=
-=VQuL
------END PGP SIGNATURE-----
-
---MW4iuncdT3aTSlNs--
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
