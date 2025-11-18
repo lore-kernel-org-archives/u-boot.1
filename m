@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 042AFCEE350
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 20:17:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B422CEE350
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 20:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 792F383966;
+	by phobos.denx.de (Postfix) with ESMTP id B5DD3839AC;
 	Tue, 18 Nov 2025 21:17:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fvK+UjRR";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="OQrzf+Cd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD0BE8398D; Tue, 18 Nov 2025 21:17:48 +0100 (CET)
+ id 82405835B3; Tue, 18 Nov 2025 21:17:49 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B24A83956
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 21:17:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 709C183959
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 21:17:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 5809340A19; 
- Tue, 18 Nov 2025 20:17:42 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id EC77C40CF5; 
+ Tue, 18 Nov 2025 20:17:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763497063;
- bh=mzW5Q1I0R8ETeZ2mchhQgysg+3DfpEMXDBW0Q8RgOj8=;
+ s=20251003; t=1763497066;
+ bh=PB/lK4wFE1GlOwWONuA3Dyr9biMI3NNKUl7/RnbRWe0=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=fvK+UjRRz8sZNimCpT4BLvwwCf7QU8VqXXX5OmtkIm84ALRChbOUA3PtNhzVCSZzt
- tm8IqSHqcssy6byDFZo6kTQjmnlCr95EzFfQrdEAc5ebPtjAvnKLceJF2aH7tfbKoe
- CLPKx+RAd9KCazkbAeyaAwt1G8AHkjmnWPK2kyraU4cn4NRe7XGqxSA5v0NZYlPP1w
- NNrpFzVMAvcF403BoKW85xHyQn9wb+PTw+33oIeIE4lae0KnKMJ3KKY7hxQ7Njf0jb
- tB7Df0M/KO4iXIMDgZY3zIpL4wZQ9v/D4NiSYCoJtOb0pUjzuSrC8AX8oIUJnigAZ7
- X7vbCXHNo11JY3W89HTf8LrxCIvNj2vQDnOPzObZ1mC+FFAkb0Mqf11+bz67YZgp9L
- XeY3360LfoRzHzINvy00E4LUTYoKbo0HzIZCKJ/oKZpTk/HLF5GjHJBWxLaO9Y8Pzi
- J3z6wJUUt8KRhAXWxF3RTAHlz+4s6Jb3/SQG+2e98BpBxMp4K3gtPX9PJsA/6D2FN6
- 61kHUjlge6U+OHLSw1h0XO6fN1NDc0A5Xp7XpHayq00/znP8Foie732YfA06ED1Z0a
- FTQIJL49qA/NDub/7xnVVvhDa+E2vfN0e32eoQyyLjamobIqsNl6cd1jTMGH4AyOzO
- 9lpKa/tYLqM2ehG9vYyAxlrs=
+ b=OQrzf+Cd7R6ffUvqictZX0RHtxkdHzenvIEWitK2tw1rFh7VfUKLnCZqC3lbz5iko
+ P0iZ9mO1meN+Qrz2SwHdx7ljhl0yLpaB2TdpthfrHBXyT+RNtqkNW6AP/0Qvf5Twem
+ Gb1ZCFrzGcF3VJP3usSHFKu10cQaElFaWriw7nRwsKEjy0T8s9VXQryzpIyG8gcU4a
+ yo+OjQRkZBqhNGXYtdPTi5PX/P14ShgHf0JW/cWxArGfLki8YF9kxO37xiXU/03xfF
+ halZ256fp4IpGKNzVkJ3XPd58xaEhpIdfWa9D3Aas1C9d8TQ5NzGyhgBd0O206wrRg
+ ZWu1snB0j2Er1WAshfpe+ElhzncCboaU6NmbGNdwy8L2L9mzs6T1AKhJpLWNcAHTLX
+ hUaPWJZgThjKGObZsvNT5acGk/EMSt5kgdTsIJ02gNxgGWamBwkb7uDEmoIq4NoD7m
+ zN74nCGTDfJ0EIkZLhmrpsTtAZ62ZtiXr/7tvPFAxlrnkuvhIHTAoGuu+o168wCV5n
+ AlFrVy3KdX/i1bANJCtHyniReZXMlg1GZxFhU+KpeHiuWHsRZPZwll411/MFK2j4K1
+ 2eKKav6u6y6SqD68I+LnLH4DXxvWCW0hEWQLjqU/eEK3FmWT56CK1Mx/XvwzZCwlbl
+ YDsSx16shp2ny7Rjxo/KXoho=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>,
@@ -58,9 +58,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/4] doc: make writing DM test subsection of writing C test
-Date: Tue, 18 Nov 2025 21:17:30 +0100
-Message-ID: <20251118201733.67297-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/4] test: document ut.h
+Date: Tue, 18 Nov 2025 21:17:31 +0100
+Message-ID: <20251118201733.67297-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251118201733.67297-1-heinrich.schuchardt@canonical.com>
 References: <20251118201733.67297-1-heinrich.schuchardt@canonical.com>
@@ -82,86 +82,331 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A driver model test is just a special case of a C test.
+Add missing Sphinx comments in include/test/ut.h
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- doc/develop/tests_writing.rst | 55 ++++++++++++++++++-----------------
- 1 file changed, 29 insertions(+), 26 deletions(-)
+ include/test/ut.h | 159 ++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 132 insertions(+), 27 deletions(-)
 
-diff --git a/doc/develop/tests_writing.rst b/doc/develop/tests_writing.rst
-index 062194659b5..b6972489d4c 100644
---- a/doc/develop/tests_writing.rst
-+++ b/doc/develop/tests_writing.rst
-@@ -206,8 +206,36 @@ some common test tasks.
+diff --git a/include/test/ut.h b/include/test/ut.h
+index be5502e03a1..79c11367471 100644
+--- a/include/test/ut.h
++++ b/include/test/ut.h
+@@ -130,18 +130,28 @@ int ut_check_console_end(struct unit_test_state *uts);
+  *
+  * This only supports a byte dump.
+  *
+- * @total_bytes: Size of the expected dump in bytes`
+- * Return: 0 if OK (looks like a dump and the length matches), other value on
+- *	error
++ * @uts:		Test state
++ * @total_bytes:	Size of the expected dump in bytes
++ * Return:		0 if OK (looks like a dump and the length matches),
++ *			other value on error
+  */
+ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
  
- (there are also UEFI C tests in lib/efi_selftest/ not considered here.)
+-/* Report a failure, with printf() string */
++/**
++ * ut_report() - Report a failure, with printf() string
++ *
++ * @fmt:	format string
++ * @args:	arguments to be printed
++ */
+ #define ut_reportf(fmt, args...)					\
+ 	ut_failf(uts, __FILE__, __LINE__, __func__, "report",		\
+ 		 fmt, ##args)
  
-+Add a C test to an existing suite
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Use this when you are adding to or modifying an existing feature outside driver
-+model. An example is bloblist.
-+
-+Add a new function in the same file as the rest of the suite and register it
-+with the suite. For example, to add a new mem_search test::
-+
-+   /* Test 'ms' command with 32-bit values */
-+   static int mem_test_ms_new_thing(struct unit_test_state *uts)
-+   {
-+         /* test code here */
-+
-+         return 0;
-+   }
-+   MEM_TEST(mem_test_ms_new_thing, UTF_CONSOLE);
-+
-+Note that the MEM_TEST() macros is defined at the top of the file.
-+
-+Example commit: 9fe064646d2 ("bloblist: Support relocating to a larger space") [1]
-+
-+[1] https://gitlab.denx.de/u-boot/u-boot/-/commit/9fe064646d2
-+
-+
- Add a new driver model test
--~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+'''''''''''''''''''''''''''
-+
-+``dm`` is the test suite that contains C tests for U-boot
-+:doc:`Driver Model <driver-model/index>`.
+-/* Assert that a condition is non-zero */
++/**
++ * ut_assert() - Assert that a condition is true (not 0)
++ *
++ * @cond:	condition
++ */
+ #define ut_assert(cond) ({						\
+ 	int __ret = 0;							\
+ 									\
+@@ -152,7 +162,13 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
  
- Use this when adding a test for a new or existing uclass, adding new operations
- or features to a uclass, adding new ofnode or dev_read_() functions, or anything
-@@ -249,31 +277,6 @@ Example commit: c48cb7ebfb4 ("sandbox: add ADC unit tests") [1]
- [1] https://gitlab.denx.de/u-boot/u-boot/-/commit/c48cb7ebfb4
+-/* Assert that a condition is non-zero, with printf() string */
++/**
++ * ut_assertf() - Assert that a condition is true with printf string
++ *
++ * @cond:	condition
++ * @fmt:	format string
++ * @args:	arguments to be printed
++ */
+ #define ut_assertf(cond, fmt, args...) ({				\
+ 	int __ret = 0;							\
+ 									\
+@@ -164,7 +180,12 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
  
+-/* Assert that two int expressions are equal */
++/**
++ * ut_asserteq() - Assert that two int32 expressions are equal
++ *
++ * @expr1:	expected value
++ * @expr2:	actual value
++ */
+ #define ut_asserteq(expr1, expr2) ({					\
+ 	unsigned int _val1 = (expr1), _val2 = (expr2);			\
+ 	int __ret = 0;							\
+@@ -179,7 +200,12 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
  
--Add a C test to an existing suite
--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--
--Use this when you are adding to or modifying an existing feature outside driver
--model. An example is bloblist.
--
--Add a new function in the same file as the rest of the suite and register it
--with the suite. For example, to add a new mem_search test::
--
--   /* Test 'ms' command with 32-bit values */
--   static int mem_test_ms_new_thing(struct unit_test_state *uts)
--   {
--         /* test code here */
--
--         return 0;
--   }
--   MEM_TEST(mem_test_ms_new_thing, UTF_CONSOLE);
--
--Note that the MEM_TEST() macros is defined at the top of the file.
--
--Example commit: 9fe064646d2 ("bloblist: Support relocating to a larger space") [1]
--
--[1] https://gitlab.denx.de/u-boot/u-boot/-/commit/9fe064646d2
--
--
- Add a new test suite
- ~~~~~~~~~~~~~~~~~~~~
+-/* Assert that two 64 int expressions are equal */
++/**
++ * ut_asserteq_64() - Assert that two int64 expressions are equal
++ *
++ * @expr1:	expected value
++ * @expr2:	actual value
++ */
+ #define ut_asserteq_64(expr1, expr2) ({					\
+ 	u64 _val1 = (expr1), _val2 = (expr2);				\
+ 	int __ret = 0;							\
+@@ -197,7 +223,12 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that two string expressions are equal */
++/**
++ * ut_asserteq_str() - Assert that two string expressions are equal
++ *
++ * @expr1:	expected value
++ * @expr2:	actual value
++ */
+ #define ut_asserteq_str(expr1, expr2) ({				\
+ 	const char *_val1 = (expr1), *_val2 = (expr2);			\
+ 	int __ret = 0;							\
+@@ -211,9 +242,12 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/*
+- * Assert that two string expressions are equal, up to length of the
+- * first
++/**
++ * ut_asserteq_strn() - Assert that two string expressions are equal
++ *                      up to the length of the first expression
++ *
++ * @expr1:	expected value
++ * @expr2:	actual value
+  */
+ #define ut_asserteq_strn(expr1, expr2) ({				\
+ 	const char *_val1 = (expr1), *_val2 = (expr2);			\
+@@ -230,7 +264,13 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that two memory areas are equal */
++/**
++ * ut_asserteq_mem() - Assert that two memory areas are equal
++ *
++ * @expr1:	expected value
++ * @expr2:	actual value
++ * @len:	length of the memory areas
++ */
+ #define ut_asserteq_mem(expr1, expr2, len) ({				\
+ 	const u8 *_val1 = (u8 *)(expr1), *_val2 = (u8 *)(expr2);	\
+ 	const uint __len = len;						\
+@@ -250,7 +290,12 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that two pointers are equal */
++/**
++ * ut_asserteq_ptr() - Assert that two string pointers are equal
++ *
++ * @expr1:	expected value
++ * @expr2:	actual value
++ */
+ #define ut_asserteq_ptr(expr1, expr2) ({				\
+ 	const void *_val1 = (expr1), *_val2 = (expr2);			\
+ 	int __ret = 0;							\
+@@ -264,7 +309,13 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that two addresses (converted from pointers) are equal */
++/**
++ * ut_asserteq_addr() - Assert that two addresses (converted from pointers)
++ *			are equal
++ *
++ * @expr1:	expected value
++ * @expr2:	actual value
++ */
+ #define ut_asserteq_addr(expr1, expr2) ({				\
+ 	ulong _val1 = map_to_sysmem(expr1);				\
+ 	ulong _val2 = map_to_sysmem(expr2);				\
+@@ -279,7 +330,11 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that a pointer is NULL */
++/**
++ * ut_assertnull() - Assert that a pointer is NULL
++ *
++ * @expr:	pointer
++ */
+ #define ut_assertnull(expr) ({						\
+ 	const void *_val = (expr);					\
+ 	int __ret = 0;							\
+@@ -293,7 +348,11 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that a pointer is not NULL */
++/**
++ * ut_assertnonnull() - Assert that a pointer is not NULL
++ *
++ * @expr:	pointer
++ */
+ #define ut_assertnonnull(expr) ({					\
+ 	const void *_val = (expr);					\
+ 	int __ret = 0;							\
+@@ -307,7 +366,11 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that a pointer is not an error pointer */
++/**
++ * ut_assertok_ptr() - Assert that a pointer is not an error pointer
++ *
++ * @expr:	pointer
++ */
+ #define ut_assertok_ptr(expr) ({					\
+ 	const void *_val = (expr);					\
+ 	int __ret = 0;							\
+@@ -322,10 +385,19 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that an operation succeeds (returns 0) */
++/**
++ * ut_assertok() - Assert that an operation succeeds (returns 0)
++ *
++ * @cond:	expression
++ */
+ #define ut_assertok(cond)	ut_asserteq(0, cond)
+ 
+-/* Assert that the next console output line matches */
++/**
++ * ut_assert_nextline() - Assert that the next console output line matches
++ *
++ * @fmt:	format string
++ * @args:	print arguments
++ */
+ #define ut_assert_nextline(fmt, args...) ({				\
+ 	int __ret = 0;							\
+ 									\
+@@ -338,7 +410,13 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that the next console output line matches up to the length */
++/**
++ * ut_assert_nextlinen() - Assert that the next console output line matches
++ *			   up to the length of the expected string.
++ *
++ * @fmt:	format string
++ * @args:	print arguments
++ */
+ #define ut_assert_nextlinen(fmt, args...) ({				\
+ 	int __ret = 0;							\
+ 									\
+@@ -351,7 +429,10 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that there is a 'next' console output line, and skip it */
++/**
++ * ut_assert_skipline() - Assert that there is a 'next' console output line,
++ *			  and skip it
++ */
+ #define ut_assert_skipline() ({						\
+ 	int __ret = 0;							\
+ 									\
+@@ -363,7 +444,13 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that a following console output line matches */
++/**
++ * ut_assert_skip_to_line() - Assert that a following console output line
++ *			      matches
++ *
++ * @fmt:	format string
++ * @args:	print arguments
++ */
+ #define ut_assert_skip_to_line(fmt, args...) ({				\
+ 	int __ret = 0;							\
+ 									\
+@@ -376,7 +463,13 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that a following console output line matches */
++/**
++ * ut_assert_skip_to_linen() - Assert that a following console output line
++ *			       matches up to the length of the expected string
++ *
++ * @fmt:	format string
++ * @args:	print arguments
++ */
+ #define ut_assert_skip_to_linen(fmt, args...) ({				\
+ 	int __ret = 0;							\
+ 									\
+@@ -389,7 +482,9 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that there is no more console output */
++/**
++ * ut_assert_console_end() - Assert that there is no more console output
++ */
+ #define ut_assert_console_end() ({					\
+ 	int __ret = 0;							\
+ 									\
+@@ -402,7 +497,12 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that the next lines are print_buffer() dump at an address */
++/**
++ * ut_assert_nextlines_are_dump - Assert that the next lines are print_buffer()
++ *				  dump at an address
++ *
++ * @total_bytes:	Size of the expected dump in bytes
++ */
+ #define ut_assert_nextlines_are_dump(total_bytes) ({			\
+ 	int __ret = 0;							\
+ 									\
+@@ -416,7 +516,10 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/* Assert that the next console output line is empty */
++/**
++ * ut_assert_nextline_empty() - Assert that the next console output line is
++ *				empty
++ */
+ #define ut_assert_nextline_empty()					\
+ 	ut_assert_nextline("%s", "")
+ 
+@@ -451,6 +554,8 @@ void ut_silence_console(struct unit_test_state *uts);
+  *
+  * This restarts console output again and turns off console recording. This
+  * happens on all boards, including sandbox.
++ *
++ * @uts:	Test state
+  */
+ void ut_unsilence_console(struct unit_test_state *uts);
  
 -- 
 2.51.0
