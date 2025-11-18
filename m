@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 867F3CEDDA1
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 14:43:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35293CEDDA1
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 14:48:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 172B483E19;
-	Tue, 18 Nov 2025 15:43:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id A245083DE0;
+	Tue, 18 Nov 2025 15:48:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="dDmHCvo6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CvL3Ec6/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDD5A83E42; Tue, 18 Nov 2025 15:43:32 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id 73D3483E19; Tue, 18 Nov 2025 15:48:32 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01B9183D07
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 15:43:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 45F4D83C62
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 15:48:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-7ade456b6abso4936414b3a.3
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 06:43:29 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ernestvanhoecke@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b472842981fso699114666b.1
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 06:48:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1763477008; x=1764081808;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d01b1gg11HImXk7iRYfWxiPDnqyAn1IJpcf6bv7Om94=;
- b=dDmHCvo6NTDZ2DmKc5hEQtibjJrRa94xNKNb2y9UUgzl9WcVgFbKbKpw+HrLKucerr
- GoguR5sKVpoYm38LZx4Hn2tEtAAr2kgP9z65yERxEW18LUQwt5gHdQKgjhYrxp0rjPdI
- 0mqv6yEUDonfLLKggAkKk7Gja9No0BZje3Rxk=
+ d=gmail.com; s=20230601; t=1763477310; x=1764082110; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZaGUXxI3DhgITmXFRkCFwLQfqMPd22l6qI7OyW/Y+Ko=;
+ b=CvL3Ec6/iUaGqA41DnCv/IEkY5lKInmFATz2ApnDl/Or6UcLdWgLchSwCocy0RzOgB
+ Yz49aVfHKTMcNeS9rU5ZFlbxqKKVOMwfroqO5iCMp1iBXmDXU7uscK3hg6pX5gwzLvU/
+ qSwg96w5moj4bOkfKkWcChfRu66JVojm1nA9oTvrOgqnrwmV2hIUzchICQQK0354t/7x
+ z2e+b0JCoPk1mi5l3aNplEs7vUNmxr2YwKK4dU2uGmaD/DXIi4d3qXUhrcogFFeAOIq8
+ m20AhTkKqXwLuV7GURJ08XFDRgMEy417wBnba0SG7iblgREua7LiUy7v13J76urNmaHp
+ 4mew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763477008; x=1764081808;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=d01b1gg11HImXk7iRYfWxiPDnqyAn1IJpcf6bv7Om94=;
- b=m+BloBS2uaQNDatm7HHat9uJg/EnQC5UnDxe7X8QvkPAE0heKLa4V0nFjjEiGVOIDr
- SpCcCWfPidcj+Igzvfbn9BogtV9ya7vHMOgcfAXgYOkTGLOuChVogu7Gz7q1mo0c1JxN
- wrrUaIrgBiM0xjlLTOXjIC4eXK1fuVIlHPhOWsiuOLXzJbIb5nouAXSsBiicgWLTPfEm
- XUwlZtmoc2KjErHBApzK1CXr5RDsDDuK2rEZYDhV8fQWu1wM9pPHHCXlcfuJYYGmCEgf
- HBHeigzIi9P6StT8rfgccnaTSPJmzTkBcf/iqCCj5GG9S2qeIwsoFVtmr+rO/S11qTfQ
- BDoQ==
+ d=1e100.net; s=20230601; t=1763477310; x=1764082110;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZaGUXxI3DhgITmXFRkCFwLQfqMPd22l6qI7OyW/Y+Ko=;
+ b=MiskkTHkeCFqjLJdv1sQ8NKDry7IvGDthuFXFwzvOacekLv4dXH6bESFxRch9wtHRE
+ sHFw7SlDuiPmspE/qW/GB68aMkghyrouLjgq1sCVBciT8dll7BiqAMDqwnUshYut+JKa
+ +ix+uf8703mV30Fdp/ufk7a9TcPdPZvDvNI84StWtZT2Mf4SIYHPnOvJVmOISRf6CjwV
+ WQRosRTKJ5KZ3zTrzBW0ohZOJgbQ9dwruOIULWp1BRlchpMYOms9uWE+uE40M64N+h5L
+ ch/XzTh1vSIW+vFvynG1Mh+kLw99Y5WPbtZYFfOi9EQDLuTCG5hGoEosLcxqLTrokg9+
+ fN1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJtkdxzKQg2ZA+hgxke7vKeZvB6+zJcuj3VOb4jjZzC2zbXC64djX6y2U6BOxn/XITDX+mFPk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFhMm8GzgwpkVGWDiwEhLD33hFjYRmhkyvud3QebNsoJrv8qqM
- XrmkPmdEaTMKJbBs0YDgLBfrBbb0A6qOi+PeOMuxAB0vUXN7XeGbWM3VE84K7zS+/GZh6U1jj46
- 8jbRbb/f/gjbXpTqs1ll5jj+NLzU5n5I+65sunSPM7g/7PfHr1J3tr/Y=
-X-Gm-Gg: ASbGnct7a45Rw7sEHX6BhmUKc5MBSZ4O/Ni/zSZIkqM/raCk12Q3e4PwskUI5CVyj0z
- yqIymbXG0jsWr5dkf8nRlN+/1ANFB/qeCo6bp5tw/nEqwIYT/dgvKTUBO72bE3A044ZecwMjH7/
- kl6MkkwFLHVuRboqZ0VZItFX4D+8SutTOPK6lFFeBh3ZjwbZdDtdqlMLIxIzzgRNsLVC5mGcjOR
- VlFAoIp6Q1ECNeFmVAV5K76Dbgr8rWHNCrBZxcCK1weVtRqW9pYDiCTZrxN2dB8tdBdr4R9Cpb5
- PJIzVecdDzyrKP2Q
-X-Google-Smtp-Source: AGHT+IGZiwcRZF5Kq5nH16uWBLC6l35gl/2/efTz+0jbY0429Q9gw+bnj/E9LeVVmCZWoeYV86OfcLvZOYYPpDoY/b4=
-X-Received: by 2002:a05:7022:68a3:b0:11a:2ec8:de1c with SMTP id
- a92af1059eb24-11b4130b653mr8903210c88.36.1763477008274; Tue, 18 Nov 2025
- 06:43:28 -0800 (PST)
+ AJvYcCVm+i8rO7KNlu37otvDqMa3PICsa8lpUWZlkQR6bdw939ghLpUBhH5o6kt0ehu4BuoONmg0Nws=@lists.denx.de
+X-Gm-Message-State: AOJu0YzIWuk7LpReHfV8cMCJqexyJpiXvPHqDb5qdLlZ8ttVEtWQyKy0
+ KgvjreZiKmnpRV/6s9PHaH1Lue6PAFx2nPSjdZvM/LOJzG7PyAFpJ9Bq
+X-Gm-Gg: ASbGncvbgpRG4GBXkBAZ1MdBp28mjt5k7bYNn2Y39aqRf4FuXfHXfHdV98ETLZycsXW
+ ucE9wvFRiyaUzft5fEtS0a+sMhGTHed4bP7JxlL8+x5Ra28GEmFjGCYI9rR8FTHeu2KqbQEPRQY
+ DSaRfqkx+gJnBFEH/TMXlGUNEhzsw6HfHZfTGMQWbD2YbST6o6wb6Pquy1oRMAiXouMJSfMaEi6
+ 8EqZJnFjNqkyLr5rGBsZL+pIlUxUpMk3K/6ekwXPU1WovOC3ViaFOcGrCaDBvkflFA9DYH6ktBq
+ 5pDMjWy96ZLCo1CmG9Z4tbluKrFPsgZh/dnGAfgrAG5oy7ObqHows8g9TrX8oO5qZLlJtiTzZ+n
+ XXDrn4rO07zKCNeSAV7ZPFpXMD+LH7CoGYpt72rnivpUmYKoi9XORku2oveHU0J29MkobaE1lVQ
+ WCh9VLr3gZyrI2G7JgVsk/2FkykiBWMHiYeGbDGi9XSit3e9gGS8KLnk3jBxsaBLWvtX58WpOHs
+ p77L3gHblK3v6Yw3/OiibL8dfsAAUjrrA==
+X-Google-Smtp-Source: AGHT+IGIyT6TPv9NkGJEFawuhLS5uxgnbXfQH4kUh3AQq2VvCMdRQwH41iPhZAG2C39LU5FWSxEg+w==
+X-Received: by 2002:a17:906:c142:b0:b41:4e72:309f with SMTP id
+ a640c23a62f3a-b736793dd79mr1778243366b.50.1763477309540; 
+ Tue, 18 Nov 2025 06:48:29 -0800 (PST)
+Received: from ernest.corp.toradex.com
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b734fad3edasm1370617166b.17.2025.11.18.06.48.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Nov 2025 06:48:29 -0800 (PST)
+From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: [PATCH v2] configs: colibri-imx7*: set 'fdtfile' generically in
+ PREBOOT
+Date: Tue, 18 Nov 2025 15:48:00 +0100
+Message-ID: <20251118144815.1242023-1-ernestvanhoecke@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250703170253.1231818-1-miquel.raynal@bootlin.com>
- <87frcwexyt.fsf@bootlin.com> <875xbegt1x.fsf@bootlin.com>
- <20251113142745.GI6688@bill-the-cat>
- <CAOf5uwn_ggFp-KW6qDcKYn1kKA6+FabyQLCT1ecVoBdv9s3UqQ@mail.gmail.com>
- <20251118143405.GA527619@bill-the-cat>
-In-Reply-To: <20251118143405.GA527619@bill-the-cat>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 18 Nov 2025 15:43:16 +0100
-X-Gm-Features: AWmQ_bkE56jOFCMcy-jLMDO26qiXn2Xj4GlGz1X4ixImY-BM17qjiwZM8U_7spA
-Message-ID: <CAOf5uw=jx7jTgkeZytjU0t7VFHSVrXfntxrpapUSWrYh5z8exg@mail.gmail.com>
-Subject: Re: [PATCH] mtd: spinor: winbond: Describe several chips
-To: Tom Rini <trini@konsulko.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Vignesh R <vigneshr@ti.com>, 
- Tudor Ambarus <tudor.ambarus@linaro.org>, U-Boot-Denx <u-boot@lists.denx.de>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, Steam Lin <stlin2@winbond.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,44 +104,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 
-On Tue, Nov 18, 2025 at 3:34=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Thu, Nov 13, 2025 at 03:36:00PM +0100, Michael Nazzareno Trimarchi wro=
-te:
->
-> > Hi
-> >
-> > Conference. I will pick him up this weekend together with others. Sorry=
- for
-> > it
->
-> Hey, so it's Tuesday now and I haven't seen a PR and it doesn't look
-> like you made it to pushing anything to the custodian trees either.
-> Again I ask, do you need help here? I can go and pick up things that are
-> either clear or reviewed and start pushing it through. Thanks.
->
-> --
-> Tom
+In TEZI (Toradex Easy Installer), we use one U-Boot binary for both our
+NAND and eMMC Colibri iMX7 modules. Currently, CONFIG_PREBOOT sets the
+environment variable 'fdtfile' depending on which defconfig was used,
+adding the '-emmc' variant for the emmc defconfig. Since we always build
+the TEZI recovery U-Boot with the standard (non-emmc) defconfig, fdtfile
+has to be overwritten later or it will be wrong there.
 
-Let me sync with Dario.
+By using '$variant', the fdtfile var is properly constructed at run time
+for both the NAND and eMMC variants, and we do not have to worry about
+setting fdtfile again when building the recovery TEZI U-Boot.
 
-Sorry for the delay
+This also synchronizes these configs with how we handle the iMX6ULL.
 
-Michael
+Fixes: 327381e8b57c ("colibri_imx7: use preboot for fdtfile evaluation")
+Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+---
+v2: Do not erroneously replace the '${soc}' variable with imx7
+v1: https://lore.kernel.org/u-boot/20251118123056.1124089-1-ernestvanhoecke@gmail.com/
+---
+ configs/colibri_imx7_defconfig      | 2 +-
+ configs/colibri_imx7_emmc_defconfig | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/configs/colibri_imx7_defconfig b/configs/colibri_imx7_defconfig
+index 5a415120bead..2a3cb84c3b6f 100644
+--- a/configs/colibri_imx7_defconfig
++++ b/configs/colibri_imx7_defconfig
+@@ -22,7 +22,7 @@ CONFIG_BOOTDELAY=1
+ CONFIG_OF_ENV_SETUP=y
+ CONFIG_BOOTCOMMAND="run ubiboot ; echo ; echo ubiboot failed ; run distro_bootcmd;"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri-${fdt_board}.dtb "
++CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri${variant}-${fdt_board}.dtb "
+ CONFIG_SYS_PBSIZE=544
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+diff --git a/configs/colibri_imx7_emmc_defconfig b/configs/colibri_imx7_emmc_defconfig
+index bae43fe45aa7..a95a3214d0c8 100644
+--- a/configs/colibri_imx7_emmc_defconfig
++++ b/configs/colibri_imx7_emmc_defconfig
+@@ -19,7 +19,7 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri-emmc-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_PBSIZE=544
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+-- 
+2.43.0
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
