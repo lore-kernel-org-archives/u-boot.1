@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3CFFCEE350
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 20:18:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE71CEE350
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 20:18:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F37F583959;
-	Tue, 18 Nov 2025 21:17:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3AFFA83A57;
+	Tue, 18 Nov 2025 21:17:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lrdfLr2Q";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cmlWIhEH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEDA983A48; Tue, 18 Nov 2025 21:17:51 +0100 (CET)
+ id 598DE83A57; Tue, 18 Nov 2025 21:17:53 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5609835B3
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 21:17:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B05383A1E
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 21:17:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id E12EC40FFC; 
- Tue, 18 Nov 2025 20:17:47 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 94EF941019; 
+ Tue, 18 Nov 2025 20:17:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763497069;
- bh=qWNfeiZkFCWfe+8fGS8d0a2XieXkIC4RAwsDq/Zz3BY=;
+ s=20251003; t=1763497070;
+ bh=IoR6B34mWI+BXTzwsrQxehtd+1Xq7cvK06sJq9qlVyc=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=lrdfLr2QvzuFG0NWqOMMraEa9jWj3e9bI+Q2T9H42y7nLe6FMwjg3VsqFht94kzbv
- G6jt0Bi7+Z5j8AW90uUmFkNo1jZbKUQLJiSvRFdmbVjfOOJaM/7lhmACwGSZDcUiLN
- eFwJN5or/bbrwOJ3m37SqEUemTcQugharep4xABJXU3kACNQU443ZAKSZQKqJ+oByL
- AIibkjm9pbIhZ12cd3tg/akdEyM7PqVq1/eVsYUqCyvECptDhkie/lT8XeyXl8nW3V
- uNwE4u45jM21miPTQQUj4hjNGYZ7P1+rn5WcW+bkXA0t9mFTinsGKD/u1gzgz/mdyU
- x91npLu1AvppMT2OWL7W81tzprZk7A/9HWUhrziQCasuoT8w5ugzyagJBb1BSf7N2l
- qt7j3TOrYn1a3MoyS1YAlsm9iNfqcbBM+DcMDiAxrvx0oiFyv/XDwENYkngMmAbCol
- EuBFVxseCLhnix4pivPkX5p8GR7o0XSMaadRmqEDY7sYPwFn0MMISMOYckLu6HsjeJ
- xPhAFFBb/RVOZka6KXWghp3ymRVJHBYfBRl2XmahGK/n+iUYNy+bbVIMNytHvEqkMB
- tTqEKkgSwHiQvvaDVzoAB3WAHOoAQHICTAP5vk82aRTr4ulLip85iZVZhaBLCisCNT
- LogyrkyBPVOncmuScPHCTIv0=
+ b=cmlWIhEHUbEYdHl5jadfbseWF6CrdkhArDggrneNFqyovbpC6LkNAO9vdajXDqE2p
+ OjDUZ5xQ+qa/kwS0wmbHXQVHSvBtbSza9JoBV21aEO6Bc6mG2cvZdvOw4JcwXfityu
+ yOB291hzYBIOYZegBzfBFJKD3cg3jC5AinwWMqnFlPn5C288kR+dhXLq63E9S+Cleb
+ hn5V0fxds7/pYuOQYd6WhSUA5hE3NWZwCS3z9oy1I9+owQmgLHA83x2QhGIYBZVo3G
+ 4yVYSEdThcT73VzTUupFUI4rNZOHdOR+eT1/D9ibbZGl/mzjGAMkyhuyk0C5GHQoV5
+ 5lyYSbVIrNRcpulZDvmSdllnWYMwQfCiMozsPAq7Jp0dkzxPMdT1aoRaobyacgpoLc
+ bqmQzPk+BVtiTPhCrVwh+vlgAfMJmC6l1gWcrBXCnCloKNfeqj+7MiuD+/3VeZGwJH
+ 2OJUGvJRgscliho3MYKC2e9j2nWBIsFZfLQN+ZAxiur2kBG7/lolVoRL/y7axpBfTU
+ ymXxYQ6/Z1FSTrTceIOxCqHmFxieGv4/F99PkJT9xgin18iknKayzt8QkPF1pO0A0H
+ nhmDtLhNNJmqMKxat8sVKiQuG+UZU3uV+gMm5DILT2FCCT3m3OjgrU8mdQ1BtmlcpS
+ 4NB9JsOlum6vqCXmMzD1TTyg=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>,
@@ -58,9 +58,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/4] doc: add include/test/ut.h to HTML documentation
-Date: Tue, 18 Nov 2025 21:17:32 +0100
-Message-ID: <20251118201733.67297-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 4/4] doc: describe return values of C tests
+Date: Tue, 18 Nov 2025 21:17:33 +0100
+Message-ID: <20251118201733.67297-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251118201733.67297-1-heinrich.schuchardt@canonical.com>
 References: <20251118201733.67297-1-heinrich.schuchardt@canonical.com>
@@ -82,44 +82,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The asserts in ut.h are often used. Provide online documentation.
+* Enumerate return values of C tests
+* Reference assertion macros
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- doc/api/index.rst |  1 +
- doc/api/test.rst  | 11 +++++++++++
- 2 files changed, 12 insertions(+)
- create mode 100644 doc/api/test.rst
+ doc/develop/tests_writing.rst | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/doc/api/index.rst b/doc/api/index.rst
-index d97630e7671..44922a742c3 100644
---- a/doc/api/index.rst
-+++ b/doc/api/index.rst
-@@ -27,6 +27,7 @@ U-Boot API documentation
-    serial
-    setjmp
-    sysreset
-+   test
-    timer
-    unicode
-    uthread
-diff --git a/doc/api/test.rst b/doc/api/test.rst
-new file mode 100644
-index 00000000000..359cbd0617d
---- /dev/null
-+++ b/doc/api/test.rst
-@@ -0,0 +1,11 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+.. Copyright (c) 2025 Heinrich Schuchardt
+diff --git a/doc/develop/tests_writing.rst b/doc/develop/tests_writing.rst
+index b6972489d4c..1a020caa411 100644
+--- a/doc/develop/tests_writing.rst
++++ b/doc/develop/tests_writing.rst
+@@ -228,6 +228,14 @@ Note that the MEM_TEST() macros is defined at the top of the file.
+ 
+ Example commit: 9fe064646d2 ("bloblist: Support relocating to a larger space") [1]
+ 
++* A successful test returns 0.
++* A skipped test returns -EAGAIN.
++* Any other value signals a failure.
 +
-+Test Framework
-+==============
++Include ``test/ut.h`` defines a number of macros to check values and to return
++from the test function if the assertion fails. See :doc:`../api/test`
++for details.
 +
-+Assertions and reporting functions
-+----------------------------------
-+
-+.. kernel-doc:: include/test/ut.h
-+   :internal:
+ [1] https://gitlab.denx.de/u-boot/u-boot/-/commit/9fe064646d2
+ 
+ 
 -- 
 2.51.0
 
