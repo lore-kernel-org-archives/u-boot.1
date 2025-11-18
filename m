@@ -4,107 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A1E7CEDD81
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:39:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92123CEDD8A
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:57:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D280C83D07;
-	Tue, 18 Nov 2025 14:39:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id D7E0783CB1;
+	Tue, 18 Nov 2025 14:57:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Bcfi50Le";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PGr+FTdw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7741D83D17; Tue, 18 Nov 2025 14:39:24 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 87F8083D07; Tue, 18 Nov 2025 14:57:05 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 702D883C5E
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 14:39:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66E9B83C5E
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 14:57:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id C3AC53F529
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 13:39:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763473160;
- bh=KL/4Z4f8pof6lbNDWPd5/BrNEBWC678TujdeK2j4aVI=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Bcfi50Le43/a/ONykwEKX2Hv+gS8HOkadcxtn7tGhzTMFxLdOG+Vc2JxRDwYjSLK5
- d5lCodZRWrLf5DHPQh5P9W+NV2vZaJgeOnrfSv+ZSwh0fvxA+jVGg/fB5chqeRXjqr
- fWxIQ1/AMVekOP+U2PJP7N2ImsR8fMg6aQdisvFq7Ru6eB8Ud8hfom6Ya+y1uHd9wJ
- VQMjUfIH3AlR4H2CiGWGaWgM92C5i+r4Gv6R1AR7dWksJQrPNKTFwPOz15MatCb6+M
- kCwHrjQLrKIv1bDfj/91oRAEpahvw5avEyOySwFETp8d5456xHp6cI+Nj8Wmng038e
- bg00Uoluj17AbePCCphA2cf8KjdneoIFT9Jym0Sd/CAYtr9XtDTER62zZ5TDGYr/BB
- CDyAV4vfGsn31BjbAQI9kDBPejV94EbO6THEib/dR+gOb2TVTqctDb1nEsnYiH9vuv
- Ca07vwUCEKrMlVroXjBtk0U+0ePh9aRDMQXeIchwV6PxftesCJWImSTpMD5I5zJY8V
- Ka07hYb/y7cyQt07SKx+S/LWRaVtqmFbVHpNMvZNh1ZB7RlPweqdv06Db7KyLva8hV
- gFZhUoASh47lUpq1EYr1vrBluIoYflhTHQvLOp02KarTiyksrPpI90kqGyRe1CkBUl
- KSN9pKJcaDKrVLfm/KEphO0g=
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-477964c22e0so25307585e9.0
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 05:39:20 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-789505a2fe7so24066047b3.1
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 05:57:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1763474222; x=1764079022; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4yGlgPm1nFGmcU25xGOOVzu+BsHS9ZvfVwNIF1e6QPk=;
+ b=PGr+FTdwvZsgEbNmCR2wqZ7YZNjQykGLB3RP6j2ZlOlJ8Y83ukkGJ3Y6lr2/CFqPan
+ 0zx3/GMvSOoGB7is71KQ9jaWLw4sfDfczb8SIrDie9wdjdqMnVtfk+boBU5P+qUl4Nwz
+ f7p0WvamvJzKGOfEK9SvTzl5lFKbuBLf0ypn0Nk1s/+f5uOZwOngB7Kp0qJQUCnRzLjX
+ fSnWBTvwkPj1NVwtHMjvGFoGJ6g9v2orRiSCJe9PrIqdrnX4z0BBM92n2eg537jz0dZN
+ JfzsLUIj5O9uBEsqIq5BzmaWPFMpYP1UGZOgdph6Fs0+4RIer+gVyLTahL89/vNRtk9b
+ zEgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763473160; x=1764077960;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KL/4Z4f8pof6lbNDWPd5/BrNEBWC678TujdeK2j4aVI=;
- b=ZKuyh2GWGQvbWOyJ4tR7+SVHkxRmxzvIibKymeUBgoa+ZDPzJtHmXks87OXMmaIQqO
- wYeMCxo4sBVyYtMC9FpKlQndFEaeSEJU2VIPOob/T/wZzEbJ6WGu9Xi7Hoo1KVTYpW3d
- mxt08m0ZVwvazK15FOdJbETlS95p0b4hQskm+tB5E7ZhstFJ63HwwAwQtifJ/EGqvsi8
- ZnuMxRRWzIseKZIU9DiYJww8FwBey2FSXP8kjk2aKDQragLXtC/Ufh8bNYWN63w9OaK2
- abA/rAeDVS3q+5t49bjKqaEIU/bD9JC6MZ416iu8A2Wylqpx9vLjHiU0a1tGxtsgpdZb
- D2Eg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV6hVvozppejlvE1tJwj0oMFqCiLxDUzbRL+hK24384dWNZ15efihKq9WtQWn16DMu9Xzc4UV4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyM4CdtfjvVRTtqruDZ2KhjusdQWqWd8g/1IKgPHIzT5bQYmplg
- sAH77wXPeNJMuTJfa5d6b4T8nWXF5BNuHKanLXnM5CiCKqAfm3zz4k0+tWpmRU3B8+Pv3rwLIBe
- xtf+LX79wEW96yEWYW3rIWipgvvyMdn9FXPkvH4/118fz4euyUchTAasqGJt988P7c+ROtlA=
-X-Gm-Gg: ASbGnctiHkNzmxsBYc0RG4ohMmC6T637mOuWGP5FcYJhFfN40BfzJlbAhZewUSJNHTn
- LH2BaIfiy3OZdo48ZJrkbvTrQw9NkViBjmqMSfVirfXWSWev+1zxLZsdQ3EZLK8iB7kV2WaYNYx
- Qu1oIWn8r6yF1dJka76RQQiwkLUAeamq9MkZg/UAhXWELLVU/nQpMcT/9udgK4OY8zau+WKWVcE
- hUXEqiHdGUzcguWEPc+ElQJ75oL8a1GhSCfM3asU2DZjSx/3QQQXbhFDxv6/TURBu5Bii5fu9zJ
- MEpT0dHDEmiKdIaCgcw69whj6E0OWHLbJw6y3jJqycnDvyztoJCR0iKluAQeeXcPTuyqVz2FNLz
- DkhgYBP19fP8aq254y+h3NzkScuiXv4cmZp9zBj0mdzl/ehk9hfL38J5mWNoNOUljdmfc+Eja/I
- eXGHDrikM=
-X-Received: by 2002:a05:600c:c1c8:20b0:477:a2f7:74de with SMTP id
- 5b1f17b1804b1-477a94acee9mr23462735e9.3.1763473160322; 
- Tue, 18 Nov 2025 05:39:20 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHelnlktj5HWYioPGNO90Yeim08XbprJTYP68GxlY5CIDmhoXlsJyAyvVPtIZtZDLZLCYXwkg==
-X-Received: by 2002:a05:600c:c1c8:20b0:477:a2f7:74de with SMTP id
- 5b1f17b1804b1-477a94acee9mr23462475e9.3.1763473159909; 
- Tue, 18 Nov 2025 05:39:19 -0800 (PST)
-Received: from [192.168.103.118]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-477975022ecsm204419055e9.4.2025.11.18.05.39.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Nov 2025 05:39:19 -0800 (PST)
-Message-ID: <9e433559-5ed5-4aa4-b4a6-6c5541953b7a@canonical.com>
-Date: Tue, 18 Nov 2025 14:39:18 +0100
+ d=1e100.net; s=20230601; t=1763474222; x=1764079022;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4yGlgPm1nFGmcU25xGOOVzu+BsHS9ZvfVwNIF1e6QPk=;
+ b=M30oXqYKwi46e24H9Y8JAMevTyY87d9CwGXk6R/HC1t7AxpRfeRKm+ixBz0paDSgmG
+ LoKP9Jq9hA9zt+ZsIsax7p+13Qpuf+99pIwRetZNXaTA/7HcJIo/iadyXo7D9EJEKWwu
+ RXYQMF3WKXgSj2kRdgNiwK/J9xme9VjOuPjOTr1Ewm/0KJLiu2a1gBzWPucnHAASpzGS
+ e7pq4LJBVfD+cxFBl7SjiIzpMmWz/dAsm//HoNwqz5/4bw7r4yXbAenkYf4Jwi+q8o7L
+ dPPCDigQHO+Q0b9sRpAa/pmIlJRhqM1S84ge3nfOJV2amig5WkDw4b67jaPWYTnjA16I
+ uwTw==
+X-Gm-Message-State: AOJu0YyzDHeXYvpv5s56Z9qG+pVP3qwEsL2o2pZAvxp/75eyuPNBjj5q
+ +og90J/Uh+ih5YbE+AC0s0//bpXLFSr6GbromSVla/oQYlJ5dMFsM98A8pEoC6kqJegGd4vYjfA
+ C3M4WGrZB3LjBHMs/b/WZzcXlROJoEqzLcbnDbWGjEw==
+X-Gm-Gg: ASbGncsnpFQDjC9Op10Qs+5pL1sX73vN5iT38UKQejLD44NboZU96QefU9GkQeXQybh
+ B2E2EdhtTO4Uib5Zvk00B1zrdOaGk4ffAGbufqG4g3Sic8KAqqy15qMJK197p7+lsEd0BjXEtJN
+ 4OENrn22TTPv5ZLmPaXg3RBK8NnDDsr/004iesOSkDTzr5Zd3jFEkqjRRZjwZZ6myilP1RxsFDd
+ uM1ADFkze5rTVGO9w6Cs9zpGNSi/jeG3z071croHzgM/oBAodVptUDq8sZ3DVK/IjJ4obliyR9I
+ 1/QtaKHS39fLWehP9IknxJxL+LepgYxfIr+qlYr0dJM3KYG6JkoM4hQQ6MJBjA==
+X-Google-Smtp-Source: AGHT+IE6oN1640ADr563s6LUhlmoaYzSgwO84scQ23kkjB8k4CWVHMPT26CHsYmLhVrO6N7H0EXhdD4qqgORSnl3QHc=
+X-Received: by 2002:a05:690c:a05b:b0:786:379a:51ec with SMTP id
+ 00721157ae682-78929f3d1d5mr112073287b3.46.1763474222078; Tue, 18 Nov 2025
+ 05:57:02 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] Broken USB on StarFive VisionFive 2
-To: E Shattow <e@freeshell.de>, Hal Feng <hal.feng@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>
-Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <9d9357c5-4c09-46a4-bf33-f53399c176f9@canonical.com>
- <d0045b92-e823-4c2f-b7a5-efa7ececce37@freeshell.de>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <d0045b92-e823-4c2f-b7a5-efa7ececce37@freeshell.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20251113115558.947903-1-marek.vasut+renesas@mailbox.org>
+ <CAC_iWjJE1meO7UonS2-hUSkkcnxQWCerqdN4mb_wcR7rpVXy+g@mail.gmail.com>
+ <20a873e8-d17c-43af-88af-ca14219859c3@mailbox.org>
+In-Reply-To: <20a873e8-d17c-43af-88af-ca14219859c3@mailbox.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 18 Nov 2025 15:56:24 +0200
+X-Gm-Features: AWmQ_bnszEkw7q7XA4sVs2rY6nG_ImcZy8ekxEZ587xW4gJ0Dyjjfl4fWdf1Ub4
+Message-ID: <CAC_iWjKWr-J3pxmwT5mCDXaAiRxYFiX=hfHGdp2x81-0WzbEpQ@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: Assure fitImage from capsule is used from
+ 8-byte aligned address
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Tom Rini <trini@konsulko.com>, Wadim Egorov <w.egorov@phytec.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,105 +97,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/17/25 17:29, E Shattow wrote:
-> 
-> On 11/17/25 05:59, Heinrich Schuchardt wrote:
->> Hello Hal, hello Minda,
->>
->> USB on the StarFive VisionFive 2 is somehow broken.
->>
->> The `usb start` via preboot results in an error.
->> When I stop and restart USB it works.
->>
->> I am on origin/master (v2026.01-rc2-41-g69cc92d6869).
->>
->> I have a single USB stick plugged in. I tried with different devices.
->>
->> Best regards
->>
->> Heinrich
->>
->>
->> starting USB...
->> Register 5000420 NbrPorts 5
->> Starting the controller
->> USB XHCI 1.00
->> Adding block device usb_mass_storage.lun0 failed, r = 20
->> Bus xhci_pci: 3 USB Device(s) found
->>         scanning usb for storage devices... 2 Storage Device(s) found
->> Working FDT set to ff718640
->> Hit any key to stop autoboot: 0
->> StarFive # usb tree
->> USB device tree:
->>    1  Hub (5 Gb/s, 0mA)
->>    |  U-Boot XHCI Host Controller
->>    |
->>    +-2  Hub (480 Mb/s, 100mA)
->>      |   USB2.0 Hub
->>      |
->>      +-3  Mass Storage (480 Mb/s, 224mA)
->>           SanDisk Cruzer Fit 4C530102811224103381
->>
->> StarFive # part list usb 0
->>
->> Partition Map for usb device 0  --   Partition Type: DOS
->>
->> Part    Start Sector    Num Sectors     UUID            Type
->>    1     64              4802720         00000000-01     cd
->>    2     4802784         14112           00000000-02     ef Boot
->>    3     4816896         56672256        00000000-03     83
->> StarFive # ls usb 0:2
->> WARN endpoint is halted
->> WARN endpoint is halted
->> Resetting EP 3...
->> WARN endpoint is halted
->> WARN endpoint is halted
->> WARN endpoint is halted
->> Resetting EP 3...
->> WARN endpoint is halted
->> WARN endpoint is halted
->> WARN endpoint is halted
->> Resetting EP 3...
->> WARN endpoint is halted
->> WARN endpoint is halted
->> WARN endpoint is halted
->> Resetting EP 3...
->> WARN endpoint is halted
->> WARN endpoint is halted
->> WARN endpoint is halted
->> Resetting EP 3...
->> WARN endpoint is halted
->> WARN endpoint is halted
->> WARN endpoint is halted
->>
->> 0 file(s), 0 dir(s)
->>
->> StarFive # usb stop
->> stopping USB..
->> StarFive # usb start
->> starting USB...
->> Register 5000420 NbrPorts 5
->> Starting the controller
->> USB XHCI 1.00
->> Bus xhci_pci: 3 USB Device(s) found
->>         scanning usb for storage devices... 1 Storage Device(s) found
->> StarFive # ls usb 0:2
->>              EFI/
->>
->> 0 file(s), 1 dir(s)
->>
->>
-> 
-> Is there a different outcome with v2025.01 ? If yes, are you able to git
-> bisect?
-> 
-> -E
+Hi Marek,
 
-I see the same behavior on U-Boot 2025.01.
 
-The issue only occurs on my VisionFive 2 boards and not on any other 
-JH7110 boards (Star64, Mars, Mars CM, VisionFive 2 Lite).
+On Sun, 16 Nov 2025 at 02:20, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 11/14/25 8:03 AM, Ilias Apalodimas wrote:
+>
+> Hello Ilias,
+>
+> >> +               img = memalign(8, image_size);
+> >> +               if (!img)
+> >> +                       return EFI_EXIT(EFI_BAD_BUFFER_SIZE);
+> >> +               memcpy(img, image, image_size);
+> >> +       } else {
+> >> +               img = (void *)image;
+> >> +       }
+> >> +
+> >> +       ret = fit_update(img);
+> >> +
+> >> +       if ((uintptr_t)image & 7)
+> >> +               free(img);
+> >
+> > Initialize img to NULL and make the check a bit simpler to read (or
+> > get rid of it overall)
+> This part ^ I do not understand. The img variable is used by
+> fit_update(img) , where should it be initialized to NULL ?
 
-Best regards
+The patch might be misleading since it doesn't show the entire
+function. But from what I saw 'img' is only initialized when
+'if ((uintptr_t)image & 7)' is true. you can initialize img to NULL on
+the declaration and just check for that.
 
-Heinrich
+Cheers
+/Ilias
