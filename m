@@ -4,83 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92123CEDD8A
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:57:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC31ACED63B
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:57:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7E0783CB1;
-	Tue, 18 Nov 2025 14:57:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2B2D683D52;
+	Tue, 18 Nov 2025 14:57:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PGr+FTdw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MoLXKsj1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87F8083D07; Tue, 18 Nov 2025 14:57:05 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 2A78283D5D; Tue, 18 Nov 2025 14:57:37 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66E9B83C5E
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 14:57:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F2AC283D39
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 14:57:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-789505a2fe7so24066047b3.1
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 05:57:03 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-4500a6fb71aso2099614b6e.3
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 05:57:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763474222; x=1764079022; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4yGlgPm1nFGmcU25xGOOVzu+BsHS9ZvfVwNIF1e6QPk=;
- b=PGr+FTdwvZsgEbNmCR2wqZ7YZNjQykGLB3RP6j2ZlOlJ8Y83ukkGJ3Y6lr2/CFqPan
- 0zx3/GMvSOoGB7is71KQ9jaWLw4sfDfczb8SIrDie9wdjdqMnVtfk+boBU5P+qUl4Nwz
- f7p0WvamvJzKGOfEK9SvTzl5lFKbuBLf0ypn0Nk1s/+f5uOZwOngB7Kp0qJQUCnRzLjX
- fSnWBTvwkPj1NVwtHMjvGFoGJ6g9v2orRiSCJe9PrIqdrnX4z0BBM92n2eg537jz0dZN
- JfzsLUIj5O9uBEsqIq5BzmaWPFMpYP1UGZOgdph6Fs0+4RIer+gVyLTahL89/vNRtk9b
- zEgA==
+ d=konsulko.com; s=google; t=1763474254; x=1764079054; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=eAA6IiwhqSCICPanKo3REYL3svY/E2/8BhIXV51pOew=;
+ b=MoLXKsj1iNrPnlUEGLvxQshWIqc0r6iJsRB756OKpkvr2TcsgBYAnzbcWfdAScH3Kq
+ lWierZVVkoW1lJcaif6CDmFPz33Xmmccjgu1+0lQeAvfKljEKBoZ4+9X/1uRk5JuHFKi
+ rXimR9yrJyPZzzRdTKYULDNrr6V4+DvM0TFhY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763474222; x=1764079022;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4yGlgPm1nFGmcU25xGOOVzu+BsHS9ZvfVwNIF1e6QPk=;
- b=M30oXqYKwi46e24H9Y8JAMevTyY87d9CwGXk6R/HC1t7AxpRfeRKm+ixBz0paDSgmG
- LoKP9Jq9hA9zt+ZsIsax7p+13Qpuf+99pIwRetZNXaTA/7HcJIo/iadyXo7D9EJEKWwu
- RXYQMF3WKXgSj2kRdgNiwK/J9xme9VjOuPjOTr1Ewm/0KJLiu2a1gBzWPucnHAASpzGS
- e7pq4LJBVfD+cxFBl7SjiIzpMmWz/dAsm//HoNwqz5/4bw7r4yXbAenkYf4Jwi+q8o7L
- dPPCDigQHO+Q0b9sRpAa/pmIlJRhqM1S84ge3nfOJV2amig5WkDw4b67jaPWYTnjA16I
- uwTw==
-X-Gm-Message-State: AOJu0YyzDHeXYvpv5s56Z9qG+pVP3qwEsL2o2pZAvxp/75eyuPNBjj5q
- +og90J/Uh+ih5YbE+AC0s0//bpXLFSr6GbromSVla/oQYlJ5dMFsM98A8pEoC6kqJegGd4vYjfA
- C3M4WGrZB3LjBHMs/b/WZzcXlROJoEqzLcbnDbWGjEw==
-X-Gm-Gg: ASbGncsnpFQDjC9Op10Qs+5pL1sX73vN5iT38UKQejLD44NboZU96QefU9GkQeXQybh
- B2E2EdhtTO4Uib5Zvk00B1zrdOaGk4ffAGbufqG4g3Sic8KAqqy15qMJK197p7+lsEd0BjXEtJN
- 4OENrn22TTPv5ZLmPaXg3RBK8NnDDsr/004iesOSkDTzr5Zd3jFEkqjRRZjwZZ6myilP1RxsFDd
- uM1ADFkze5rTVGO9w6Cs9zpGNSi/jeG3z071croHzgM/oBAodVptUDq8sZ3DVK/IjJ4obliyR9I
- 1/QtaKHS39fLWehP9IknxJxL+LepgYxfIr+qlYr0dJM3KYG6JkoM4hQQ6MJBjA==
-X-Google-Smtp-Source: AGHT+IE6oN1640ADr563s6LUhlmoaYzSgwO84scQ23kkjB8k4CWVHMPT26CHsYmLhVrO6N7H0EXhdD4qqgORSnl3QHc=
-X-Received: by 2002:a05:690c:a05b:b0:786:379a:51ec with SMTP id
- 00721157ae682-78929f3d1d5mr112073287b3.46.1763474222078; Tue, 18 Nov 2025
- 05:57:02 -0800 (PST)
+ d=1e100.net; s=20230601; t=1763474254; x=1764079054;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eAA6IiwhqSCICPanKo3REYL3svY/E2/8BhIXV51pOew=;
+ b=BuEp4MninFU2vclXbnpdNUSNcYCFG2e/dyGobPN663hVC2s/O3f0qWN3HForrLKHO3
+ QYRDbNU1LVKiV+jx3QhOo3UD8V4TcbdIR43xWDUhuQFIlPdfZleBMePRjT52MCWSbD12
+ OlDNbFi0ObnepxZfeLDkAUUm2TN2WO86UpPBkgYKpcIOMwJfJXfBSuCCs/kCNKtGN1Ad
+ lCWv9WRGV8yXbUT4Pfu/Z281jbnKwzm149Cq90GfeUJyNmVhggw5MjkDwj5K60nfJAL9
+ z2ouc7LdpAu7zBPITjHny52Yn1/vnLGqkHnsIfYxBshx1wf8kAHAYpsPb2LyTzQ3WeNa
+ 426g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWRn16Ok4nv6tQwaX/Zmew9sq2RcJPYsMJztXlcL080r1TI2PZTlAIGzlY0UEyFitpT7U7K3/U=@lists.denx.de
+X-Gm-Message-State: AOJu0YyEmAFRlwFL+C43ZBmRJwAOms3qjUTaCselpR8U9oVKEOPqcqaa
+ bogEsw5CjkGtp9L3RV4DTiVhEW+ZXWA8YVscKEyM3lGC/HOvcHoJC+gtYh2+nq/y5Tw=
+X-Gm-Gg: ASbGnctJ36ncivq48Bh28i7Tbo9pG8njlgIWCVpm8p4F2d3+GP2l9NyRiwkfKbHum4M
+ uZ4sH/zsRFA5qaEXze6RkBdH11L6ktOCvPeWimkeroZvwm4DlSE3Bv3SjLYCrVeHGhANv8ognio
+ SgHQ17KZmqZN8QhlRGx5tqwUF+tAoREw11gUvJL/woZ+QHvAQn3WfCHLyHP659FK3I5i5kneX8+
+ FoqtHGd/uMeF7qC77dU2PqrobtovAdEUZ/iUIKn5MFIrj1qZBbRo5ClXhtoZjH9hWTjJx4S39rk
+ faK9G5GVlXfH44Z0FrW42UOP1OPLEWxHx9+XzORB0ixNce60+z3IY6U2V7YpF4LVxwuQlTPiZXz
+ PAaD0cp7NfVjivAtrLRurt5hfN7V6Sr5DW5Q73wV1d708Efpcgy7wcTqtGHsE/vQYccgNh7ja34
+ BDBtHQfzXDe0QsQkeZbZ5p3MJITPW+JpDp3GIE4kKzHltU3MJ8Y8WqwI2d4rU+
+X-Google-Smtp-Source: AGHT+IF+qEb9WiBczHKfW86PoUtIqvNeL3UGpzFBvPZBDyI2aJgwx2Tnn0pG/FeCgKc767+LeoyqYw==
+X-Received: by 2002:a05:6808:5294:b0:44f:e512:4ca2 with SMTP id
+ 5614622812f47-45097587d04mr7347085b6e.40.1763474253667; 
+ Tue, 18 Nov 2025 05:57:33 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-450d5ffdc84sm1278107b6e.19.2025.11.18.05.57.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Nov 2025 05:57:32 -0800 (PST)
+Date: Tue, 18 Nov 2025 07:57:30 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Cc: Maarten Brock <Maarten.Brock@sttls.nl>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Duje Mihanovic <duje@dujemihanovic.xyz>, Liya Huang <1425075683@qq.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Sukrut Bellary <sbellary@baylibre.com>
+Subject: Re: [PATCH 01/15] board: ti: am335x: Fix DM_TPS65910 condition
+Message-ID: <20251118135730.GO2125796@bill-the-cat>
+References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
+ <20251118-topic-am33-evm-oftree-v2026-01-v1-1-91ce13c661e2@baylibre.com>
+ <GV2PR05MB1194108EEB54378B8A1FDC16783D6A@GV2PR05MB11941.eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-References: <20251113115558.947903-1-marek.vasut+renesas@mailbox.org>
- <CAC_iWjJE1meO7UonS2-hUSkkcnxQWCerqdN4mb_wcR7rpVXy+g@mail.gmail.com>
- <20a873e8-d17c-43af-88af-ca14219859c3@mailbox.org>
-In-Reply-To: <20a873e8-d17c-43af-88af-ca14219859c3@mailbox.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 18 Nov 2025 15:56:24 +0200
-X-Gm-Features: AWmQ_bnszEkw7q7XA4sVs2rY6nG_ImcZy8ekxEZ587xW4gJ0Dyjjfl4fWdf1Ub4
-Message-ID: <CAC_iWjKWr-J3pxmwT5mCDXaAiRxYFiX=hfHGdp2x81-0WzbEpQ@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: Assure fitImage from capsule is used from
- 8-byte aligned address
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jonathan Humphreys <j-humphreys@ti.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Wadim Egorov <w.egorov@phytec.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="0BKAsObl030E1xUr"
+Content-Disposition: inline
+In-Reply-To: <GV2PR05MB1194108EEB54378B8A1FDC16783D6A@GV2PR05MB11941.eurprd05.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,37 +119,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
 
+--0BKAsObl030E1xUr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, 16 Nov 2025 at 02:20, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 11/14/25 8:03 AM, Ilias Apalodimas wrote:
->
-> Hello Ilias,
->
-> >> +               img = memalign(8, image_size);
-> >> +               if (!img)
-> >> +                       return EFI_EXIT(EFI_BAD_BUFFER_SIZE);
-> >> +               memcpy(img, image, image_size);
-> >> +       } else {
-> >> +               img = (void *)image;
-> >> +       }
-> >> +
-> >> +       ret = fit_update(img);
-> >> +
-> >> +       if ((uintptr_t)image & 7)
-> >> +               free(img);
-> >
-> > Initialize img to NULL and make the check a bit simpler to read (or
-> > get rid of it overall)
-> This part ^ I do not understand. The img variable is used by
-> fit_update(img) , where should it be initialized to NULL ?
+On Tue, Nov 18, 2025 at 11:09:36AM +0000, Maarten Brock wrote:
+> > From: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+> > scale_vcores_generic() calls functions implemented in tps65910.c, not
+> > tps65910_dm.c. Change guard from CONFIG_DM_PMIC_TPS65910 to
+> > CONFIG_SPL_POWER_TPS65910.
+> >=20
+> > Fixes: 0b9ff0851592 ("board: ti: am335x: Do not call disabled PMIC func=
+tions")
+> > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+> > ---
+> >  board/ti/am335x/board.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/board/ti/am335x/board.c b/board/ti/am335x/board.c
+> > index
+> > 712818ec23562fad85febf6616aea3cea1a3a9ea..90e37a8d91330365bb5f27c37
+> > 1be7b9749de9fde 100644
+> > --- a/board/ti/am335x/board.c
+> > +++ b/board/ti/am335x/board.c
+> > @@ -429,7 +429,7 @@ void scale_vcores_generic(int freq)
+> >  {
+> >  	int sil_rev, mpu_vdd;
+> >=20
+> > -	if (!IS_ENABLED(CONFIG_DM_PMIC_TPS65910))
+> > +	if (!IS_ENABLED(CONFIG_SPL_POWER_TPS65910))
+> >  		return;
+> >=20
+> >  	/*
+> >=20
+> > --
+> > 2.51.0
+>=20
+> Acked-by: Maarten Brock <maarten.brock@sttls.nl>
 
-The patch might be misleading since it doesn't show the entire
-function. But from what I saw 'img' is only initialized when
-'if ((uintptr_t)image & 7)' is true. you can initialize img to NULL on
-the declaration and just check for that.
+Thanks. Can you please split this out on its own (since I see Kory has
+feedback on this series as well) as it's a standalone regression fix.
 
-Cheers
-/Ilias
+--=20
+Tom
+
+--0BKAsObl030E1xUr
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaRx7RgAKCRAr4qD1Cr/k
+Cmv8APkB3dqLNFypRfx1mr70S42xbx3LWMrgt0QI8FSearlUmwD+KBoRKygXmR28
+wTNYYQY6lEFeIy9Qeunhi9KVj9EAbQs=
+=+TAZ
+-----END PGP SIGNATURE-----
+
+--0BKAsObl030E1xUr--
