@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E808ACED63B
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFA8CEDD86
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:15:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22B1A83D5D;
+	by phobos.denx.de (Postfix) with ESMTP id 5F60983D7D;
 	Tue, 18 Nov 2025 14:14:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="VdoNPAcj";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="RJDjqAuF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54DCD83C96; Tue, 18 Nov 2025 11:42:18 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id B28F383D07; Tue, 18 Nov 2025 11:42:19 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65CCD83D0F
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:42:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C360E83C98
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:42:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-b73a9592fb8so303376366b.1
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:42:16 -0800 (PST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-64074f01a6eso8985287a12.2
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:42:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763462536; x=1764067336;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763462537; x=1764067337;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vFYgIn99+P8RmvLjMwZxh1y/IXw7izN5YUZYTkAxMVQ=;
- b=VdoNPAcjZF8XdE2r2XGP+RBHdq8EUC0K4iCmHYpzJuRBD8cHS5A0xV8ufSb1WCz+Cx
- C19ev160UPFjp9JnOX0TBq+gOK8VS41vcutSqSAq8JF9Vntgcbmw+GmkSijWCTcVeY+S
- fM3hp6nuDqHJLI44jXWmS8uVIQURRKV/NFvJTcAQA2mi17sIBAHrsMEPzmxAy0pdmkyg
- 6Dj64NoDLEaegCnUK/yHPjKdII0OAfh0kue/GHLSwxRzW6PF6dJdPH298i3mlIKoFfoJ
- mELNMo3M7i+l54DsrrLl5tJ9EaJo+c4iCn13FxnPlas5NfIES1b6PyT7Eo8Do0UFH4Na
- VThQ==
+ :reply-to; bh=aB65zoW/lHUpl+TLaWPg+0mgfxmZbV9ki51ikNMrIKE=;
+ b=RJDjqAuFhdkjnZ65/3Ro5iaGZOyamkNUv6rhQYD5LyQxXvSao4FwiweSAmk0CEnK8R
+ O8qxAy8Av9L+C8vy9oHvh8I5cyCb5uYYxXNebStBqtpJE3wz2Ok+pyYvoW11vHMtx+mX
+ H+pje2qtRf8pfn7GJqCVAycJa6JK0BqXDJToJyawzKNzFjsDJA/dVgY1Glh6jSmG0V8f
+ E7T18HWiw1x5DqlKftd1/EJtpOYodR0WLlGgJj26LPB91or93KPoSWWsCXWxTK/mvbDp
+ XACQCOeeYLqRQV1AFZbuKEZTCkL3kFok3pKeX5xAUc6gXq6R9pM37m5f6J/ckDycp43f
+ Hnlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763462536; x=1764067336;
+ d=1e100.net; s=20230601; t=1763462537; x=1764067337;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=vFYgIn99+P8RmvLjMwZxh1y/IXw7izN5YUZYTkAxMVQ=;
- b=mBrmkx7YnMl/Rnenc+0NDaYpCzPvn2/x3a8BkINQLYtT6CqS9f8xLny2Y30yn84z4a
- SNj3MdHFbFT/yP7RQ5+GAZy1I/dt+DjmAfcKlQFGYngE7eDAskTSO+R4vfg5bfxHHfxD
- mMa7vdUoFUY/JgsYi6jQcobu0TUu6icA3/LNw36POvM1A+ifyYKO+tCuRtg1jbUCgolp
- wiDV+BarjhDFhYYwPqIRCQP9t1PQtV/S9pGyDOBLXq4SFtZsUDC/KC5yDoEdnZcG7dlU
- GaJ4gItsNgBwxjiNTQKKe3hATnVHxE37Gj6O/lS8/sHWegtiJR0NMIouH5PSbexGyXRI
- QZGA==
+ bh=aB65zoW/lHUpl+TLaWPg+0mgfxmZbV9ki51ikNMrIKE=;
+ b=YiQf0454WM6mWSwCOSd/8Zv7wb1MyxKk9SDzXWAzNrXU8xuhTnfOqn4BaAJd+er+cA
+ 9IFaRfAIAtbpxMRqsYwKJE0+b+vwwxBthmtH+UOeiIpZ61ZwdNHzu0i8ZNjMjKGzHJfb
+ Jqt8utZX0bHUDLC/pcKL1h+oBH++RoiEKJHYgD++ZflpyzHNit/1Q24+lyujD1EDXyfP
+ lXMT7/Glkmddu7m+OBydHsIz1jkDa7AJ2eoy0rEv3crI3hZ4mQ+iFTSQ9ha1gnCv0M5Y
+ vE4jUXM5M/ds13D2zkDQjarr4jfveS1SZorr6pDAd66mh8NJqetqP1mQUh953JKaeJsA
+ FD3g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWECRzxOcNlVlpuYjD+UJjMOuifNObeJlYLEGBS+JHlv+9pE0A4h3C4BqMuKoQmDHM5vHYUP7k=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdjA+8aDkkkqpz4FyrZShAB00CyMcW1hfCsSot9KIAj1mSMrDR
- IWZ702oXTfCetBBQqVdHuQbwX6Am7yOW0uz34CntMYSAFZXFocHd6Jsx8R9sx7pV8+U=
-X-Gm-Gg: ASbGncu12jn6bexqk263f7ClOV/NQQXxwItAF9ivl9bwW7aVWU3qeefg80NVC/AhJMX
- ro6/kF4PXIjA0V+fK1LE9ad7sLnWxNNfGDBTqqxpzFIjD6/0D6faM98v9XRpuNotKODloIZWcE6
- tlMz9xtd/lrK27WsGKvy2ls8qFQASAzwFPTsDGPXFl5RHbDe8YFfS4cvig9eZoODxbxiKQLGKUI
- /NYirmAaMftKN+4tPX+CyFhnq3ernB6tGZHSZxlsy41eht7LzDnCJ2M8YjzRD/6qFQ0e4wikEP3
- QYFZtraGNaFID6Yo31gkwb7q6m55por0SFJutGWTe9mdkRESFf4nZ64V81ATQ/2b+vmtl66xBJu
- suci+GoTojVQh07gGuZF0OCu/xLZByMHucVzIdEhS5BqrSkrWS5EemqyHE+05LKAb9jnsh0HzSL
- yQk9fSuLk=
-X-Google-Smtp-Source: AGHT+IG7ZVoKYdmcT6fjcSZgcMgMQVpDuAIwZLbEgtrVn0AVcoc1e7jvTG85ylvkaBZ3QvEE7Oca3w==
-X-Received: by 2002:a17:906:6a1a:b0:b72:6a39:49e6 with SMTP id
- a640c23a62f3a-b75a09f4c3fmr338658366b.18.1763462535852; 
- Tue, 18 Nov 2025 02:42:15 -0800 (PST)
+ AJvYcCXKvKYhQQFkNYSYysPJaQmwUBU51nXWwnTR/VFvYzBHH6/XuulRis8hWox9HIrSDQwewu9fxfQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxSYtCiZsxsdRh8RjVbncqh23EG8kSXuhhX1La//FIq8vSZW8x4
+ bq9vHacJ9IvR10WuARZ0el/hIBO+iN0vX0BWcm1vOmFz9G+8qWtlTUTBAjzoLnkBEX4=
+X-Gm-Gg: ASbGncuA7MCEem3n84dkPgiakU1KBSIPi7XFR4aO2gm8fnAhbpgEtW81KVj2Ln4/FIi
+ 4XwW4BOlIUiT3bTF54wr5K6Qv0Z6+orQ09XKesSOQXyAdR5a6bv8lEFVzCZoKAu2AyWbofQkDkU
+ OZ2MsSuwLZN7DAlIlGcWyOkB0F96sOZn5vxX15jtfRDR624zl1GNNj1SVFR5SxtsJMlL3DclMVk
+ gi1WTmFlRC2m28pd7+hYTgwlG/TzhNyJ0Jvg300fTURxY+znUvQkeViZ902mCFhxavyiHDuwO4n
+ MI5X7CqBPz2afMYiClrTcSlDWOv4TvQz8w5TBvZmyqhCVl12yMp3K81paurepuryBRVWxdkhvda
+ 7+R4nAbeJz+et+6pYCCFFBPydqT5VYiHd0fY54k0iZujkP4mCENHKPsJfLAmmQ0b4CDVxm1w1
+X-Google-Smtp-Source: AGHT+IHGcgaciwefWi4pC619M4qt20Z1nU4d3JoS4NXy7T9P2nIawNontAEANY0j3RBzWOaNYAuLdw==
+X-Received: by 2002:a05:6402:34d5:b0:643:18db:1d82 with SMTP id
+ 4fb4d7f45d1cf-64350e2159emr15037569a12.11.1763462537168; 
+ Tue, 18 Nov 2025 02:42:17 -0800 (PST)
 Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-b734fb11f80sm1310503466b.32.2025.11.18.02.42.15
+ 4fb4d7f45d1cf-6433a3d7ddcsm12404555a12.1.2025.11.18.02.42.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 02:42:15 -0800 (PST)
+ Tue, 18 Nov 2025 02:42:16 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Tue, 18 Nov 2025 11:40:22 +0100
-Subject: [PATCH 02/15] arm: dts: am335x-evm: Add backlight to the panel
+Date: Tue, 18 Nov 2025 11:40:23 +0100
+Subject: [PATCH 03/15] arm: omap2plus: Select REGMAP
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251118-topic-am33-evm-oftree-v2026-01-v1-2-91ce13c661e2@baylibre.com>
+Message-Id: <20251118-topic-am33-evm-oftree-v2026-01-v1-3-91ce13c661e2@baylibre.com>
 References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
 In-Reply-To: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
 To: Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de
@@ -103,12 +102,12 @@ Cc: Tom Rini <trini@konsulko.com>, Kory Maincent <kory.maincent@bootlin.com>,
  Sukrut Bellary <sbellary@baylibre.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=981; i=msp@baylibre.com;
- h=from:subject:message-id; bh=5hm4VZwDNLwAsQWqgY5VfNyBgT95pC8D5rDwdROe18o=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwZX6uaZvaljQ5nDt6/vijoFWPF6wa5431H1p0JjCq+X
- yd6o9K3o5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACYiZs7wi6lBe9qcZwWMZzJi
- t6hvOXf3bviambdsVq5UCjpwSq04/DMjw+1HcU9Lb8fef7pl9cqExi05H9P+SN9blHrwf1jN0iO
- et5gB
+X-Developer-Signature: v=1; a=openpgp-sha256; l=719; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=DDoSjHI09+zvmrwTB1lrFtgIYoH9ilF/67+7syrAkEE=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwZX/vmvM9sU5TdGRxivryev7/aV3TVo+nm5jwz6014p
+ 5yN+OPaUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABNxk2H47+kzb2oB8yHWD+pu
+ IUKumfpLpIPefj8j80Jgep0kV/SqHwz/lCcdeLx27z33CqFd7tGBByVsz+WcF0xhnSt//+BlnWN
+ yPAA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 18 Nov 2025 14:14:53 +0100
@@ -128,35 +127,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add backlight phandle reference to panel node. Without this reference,
-the display driver cannot control backlight, leaving the panel dark.
+clk/ti/clk.c is compiled when ARCH_OMAP2PLUS is set and uses regmap
+functions. Add REGMAP dependency to prevent linking errors when CLK_TI_*
+options are enabled.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- arch/arm/dts/am335x-evm.dts | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/am335x-evm.dts b/arch/arm/dts/am335x-evm.dts
-index 1b5b627006822a9bb4df1c6433ce7eff114dc029..52ca4ff6809ad24fafbdd515fbcde840715cf20f 100644
---- a/arch/arm/dts/am335x-evm.dts
-+++ b/arch/arm/dts/am335x-evm.dts
-@@ -94,7 +94,7 @@
- 		};
- 	};
- 
--	backlight {
-+	pwm_backlight: backlight {
- 		compatible = "pwm-backlight";
- 		pwms = <&ecap0 0 50000 0>;
- 		brightness-levels = <0 51 53 56 62 75 101 152 255>;
-@@ -106,6 +106,7 @@
- 		status = "okay";
- 		pinctrl-names = "default";
- 		pinctrl-0 = <&lcd_pins_s0>;
-+		backlight = <&pwm_backlight>;
- 		panel-info {
- 			ac-bias           = <255>;
- 			ac-bias-intrpt    = <0>;
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 3db5474a05b8c08e111e8c8b98c3a6fe68de15f2..c72821ce2131e9d9deebef4fce3757fc68bd9f3f 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -844,6 +844,7 @@ config ARCH_OMAP2PLUS
+ 	bool "TI OMAP2+"
+ 	select CPU_V7A
+ 	select GPIO_EXTRA_HEADER
++	select REGMAP
+ 	select SPL_SOC_INIT if SPL
+ 	select SPL_STACK_R if SPL
+ 	select SUPPORT_SPL
 
 -- 
 2.51.0
