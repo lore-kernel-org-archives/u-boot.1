@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DC03CEDD86
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13913CEDD86
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:16:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD29B83DBD;
-	Tue, 18 Nov 2025 14:14:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2552683DE4;
+	Tue, 18 Nov 2025 14:14:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tsB0YMt4";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tyEU0zL9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DEF783C96; Tue, 18 Nov 2025 11:42:22 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 6871883D07; Tue, 18 Nov 2025 11:42:24 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E47D83C96
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:42:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67FA383C96
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:42:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b735e278fa1so791250366b.0
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:42:20 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6418b55f86dso8521573a12.1
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:42:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763462540; x=1764067340;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763462542; x=1764067342;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=b1pkY2sbFxSReEu5uVVcQLsHdxTtdvP5LN/LK7NANdY=;
- b=tsB0YMt4xYaQEHQUxniUCxHEgUsmYbNefRFD/77tM/LsLCVNJzG/63DFHwsIog3n1N
- 4DHnz4uAhGm4/EOenWJs5O0ejlQujlkcWGQ66LioXE1ySBXkjKcvJ+jn77RHc3uQSdbg
- RCkdmQ7SjY5DI8UGMNh6enrhzbxiKKTJa/nhaunYoOipFodH0JwZHpldezqMmGByr41J
- U+1qYQzPontW/c6dQRXChJBzNNSR7tSikIb/y18z+dXPUSEzd4Y4NMuq7CiwZDcnpAmg
- MjczbGbkuIggor+zC5/zni19W37Xxl6E8Ah1LcvoVTgWpj92dlN6Aco61LQ2yKk4PTzF
- 1VmQ==
+ :reply-to; bh=36zKLbsOc8eU8ITSTe67fp+NmdP1dyBkOB+niVXqR0c=;
+ b=tyEU0zL97IrI8cPuEXaOt47q3Mi7JGe8VPaPuWDFlfgjK5vZGnYOZPMUsguwgj6ZQw
+ fG6BrqX87wbvSk0Cwu+/YW3DUbqaaLrfo/4j0iPNAjf0+8Zex6WDVwAOI4ZzPhqAxYch
+ KNUILi7mGzibBRFDgRyGTU1rqGhiTOBJ/X/m4KijwyydhjZdZ+5flOIWBySHCm66qwZN
+ tfkOa0gFJT7W9+Sg3/ILlgNskgfeN579m2sowfJ3elxhdiqefqMlCF2eVkyDAPftuTrL
+ KwIFF99Hjw6Jh8Nv0fBNcLVb0Zz7oC4qxcS0F2Axh+dksayavcpzGEK9b2hhqv8hF5mb
+ w3Og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763462540; x=1764067340;
+ d=1e100.net; s=20230601; t=1763462542; x=1764067342;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=b1pkY2sbFxSReEu5uVVcQLsHdxTtdvP5LN/LK7NANdY=;
- b=Nc3lRVZBkAP0fpXuOak/JVA0KgbUhUvO4Fgq8NeD3r4ZJYxfKWhvmwCHFVXXLTlF/B
- 8qunlW2FT7n/wNtosNJSybuhQ38qgIYMrzz/rChi1bBLXxdcTvfwFktBojESIUYYzyGL
- FaQ+GVbfQsrVu44+4r5M9Te/p964zak05eMP/6g8+/DZI8XIY3H0bSBfY8z+CWh9jQ/D
- yr8hEvzpNMQ6ucLzPwtb7PT6aUfjVj1fCGaHR1KIIcaGDNHZx2zJhG7Ynz2joRIs71MG
- zC6uBAYUPYm2LyHEFxHX2lEl7EztDnFx75h2a99TAITd4fRfK4tXgdSOdO8UwnpFPtmw
- xgjg==
+ bh=36zKLbsOc8eU8ITSTe67fp+NmdP1dyBkOB+niVXqR0c=;
+ b=eFJ36pY1AfBG3GOSu7VAkT2XRI7ALiV9vgv8aU7jwO8nh6/34CRtgvqLpGK/vlh2CR
+ Vxj/PznppkQUDBStKXCyzEOZ5lFSFc7BQzw04JJq6rIZo+glqHfe6M4mubiMmVi5+tKp
+ T19ehbFFT2dQi83LDZGNgBvbl+nGqurvySVEFb5smbYO8UWESwUXKZGyrrAhHrGko7zT
+ VXz1PJ8W1e9qRxRLnRNvlY0lZi827i/jbvvdWZByloKL9SIHHhcgYkzG6xU07bI7BXIP
+ ftfgREmO7g0aa48Z/ogllEbZtp82c014EFKEQUfgJkhHR8nhDtBrhlmAi0c43kFD9/S9
+ DF1g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXMaSl+5fXDoOKNpi1t12pAIikDpA1HdX80Jj+yeaLxmDjP+4Er8Ki2XPomI5mZVb4IDungw50=@lists.denx.de
-X-Gm-Message-State: AOJu0YwGX9BvzFCVyWnE7WmE4oRRz37oKA3qWEaAVwp4Bf6dg2hYk7lW
- BfG3VOq/i+tyTydCFAy20CRR5dtxND7d5K8uTQRJd5sBy7AjNZekLmmxlHn/5+gIINk=
-X-Gm-Gg: ASbGnctKVnDxVjHTeg0zKwLpeBeAiIW2DHoBvkdCZ6mzBX63SP+pVT817ntlY3WJ1gw
- zsnFs1KA0F7Fa9gC3WryukdlbrdUsQZOyfKODEMzR+qFJgn71liRms19KktWMWJOtEMfN3EHhKc
- JtV8C0MM9c2/LgP2mjzYHBe+/NGAeVIPETSINS4ZL329N+rDPwyiTtoksQwwD6uXpnzVOzYycif
- kzUzsz/6MYYJnkaC/pIv1+SbdwIxrmk3qDgaCnbMiSCv7S7yYqVIkav6JgIz7RWSrtCWmUD+N3I
- h4ry6115d2l9xCq79olD5WewbZBXpWj0qI13Tt75dOsKLlQRQ/BRGXhz5+ki6KVnNPXaD6alXTR
- gob48SfLPZVp65cpPgy+zgHzIP3rb3iH/Q/F7tTC/ceJXnCCHhAgghHcNMq+3Dn8liY7e2ULRZv
- lClYZpn2k=
-X-Google-Smtp-Source: AGHT+IGZk8m4ygdVu9+e8vZu/5DgXctfV/1Qkr0pG8aLcy7RNZTvsL1npwEIakf9VeUYqf///0WsbA==
-X-Received: by 2002:a17:907:d09:b0:b3f:cc6d:e0a8 with SMTP id
- a640c23a62f3a-b736786e693mr1451463366b.17.1763462539716; 
- Tue, 18 Nov 2025 02:42:19 -0800 (PST)
+ AJvYcCVnacEr1+Yl/oyqnBlmgqlIyq+DuBkFJMQ+qbD3QrWhd0OfW00l+Rnt2vy4+G7mMMwXdhDRkYo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzIiAsScI7y8zUgyPvkylBUwaUDAZXlQHfHrfHltgWo/jRkAoEx
+ wGxZ0Ej5cFYtKTi5spJxzZNORfuSD/QAlNKvNg5LtDMYrwNF4NHTwzxHvE30OfdF81Q=
+X-Gm-Gg: ASbGncuodYjXmHJq7KTQVAdhZHzCoKgJ9F9xASSJ711Sk5obDoQMb2g4Z9TdYAhfzjn
+ kwkPz+fPDmtMbt8aO2J6SiyOYfsBd+0cpQuWoLGLzfVIZgnNMKmupKcpkBF8yiEKmMM35+YcVkm
+ Zsb2J2yoQ6CxANPKZXat9ldXLw//H2o6uDqCSEsfUOESWCD1peUD2R2dZZdAbKrn9Lcgqo5RmZn
+ R6OafHzfQGRP7RCl0Uk5kI9wzrrvqXMnEzTgQrewK7XPhvo68JUIvOJC8vLyfSLnLZYLNK9TOZX
+ t/gQb8DNFXFj8WIzoCRhno2HV8jMmwN7q4fTFz4jIBoCivHvR+9uWmlklUT0Gv4H4oIhbDIK343
+ EuCOAnzAZjmDq8vINXTlmVfVZE3GeNSUUFE0KGlfwxABnRcYmman+Xw7tInERFGIhjdM1d761ZD
+ TvwYHqy5w=
+X-Google-Smtp-Source: AGHT+IGi5Y6RUHdOSmdFIOSl+mlguaJq8A+ZAPLTW2eJVSjtGGO//w8/mZIxSXBbQiVp5HQeD0zRdQ==
+X-Received: by 2002:a05:6402:270e:b0:640:b978:efdb with SMTP id
+ 4fb4d7f45d1cf-64350eab173mr14902050a12.25.1763462541042; 
+ Tue, 18 Nov 2025 02:42:21 -0800 (PST)
 Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-b734fedb2cfsm1316394966b.71.2025.11.18.02.42.18
+ 4fb4d7f45d1cf-6433a497f27sm12407034a12.17.2025.11.18.02.42.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 02:42:19 -0800 (PST)
+ Tue, 18 Nov 2025 02:42:20 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Tue, 18 Nov 2025 11:40:25 +0100
-Subject: [PATCH 05/15] simple-pm-bus: Make clocks optional
+Date: Tue, 18 Nov 2025 11:40:26 +0100
+Subject: [PATCH 06/15] power: domain: Add ti-omap-prm stub
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251118-topic-am33-evm-oftree-v2026-01-v1-5-91ce13c661e2@baylibre.com>
+Message-Id: <20251118-topic-am33-evm-oftree-v2026-01-v1-6-91ce13c661e2@baylibre.com>
 References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
 In-Reply-To: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
 To: Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de
@@ -103,12 +103,12 @@ Cc: Tom Rini <trini@konsulko.com>, Kory Maincent <kory.maincent@bootlin.com>,
  Sukrut Bellary <sbellary@baylibre.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=933; i=msp@baylibre.com;
- h=from:subject:message-id; bh=NVhFPRNEqJbSa3bFuzlHz+KzmkWLmAkYmcQKSeYH8Ek=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwZXy+DXD8/6xnKLG3+p/59CPBmczsseG39X/PQVzPOt
- X+2+WHUUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABMJNGf4n1dY8PH/QfOAulfy
- Ae06R1bbN33c9yZtNs+d6TJqakv6khj+xyT6+nT956puXLTnnsWh5T+Wihad0lqw/vw9syc+a9T
- 2cgMA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3171; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=EwyJXELEA9aPG/2BRcdMI9FEJrylYgULILbAMzXXUSo=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwZX/+TT39P+r/lOOO//fofj+aL/DHhz7lv4CJmcnihc
+ /ms4pmlHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCRAzGMDAun6H1zFe82eTdp
+ Yed+w1XGf6YViAuu6K2vOxsiePskayTD//ilEexhmzgNK0w4dkRPfGAnpXBJySLJyVF6gm91dpw
+ 8EwA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 18 Nov 2025 14:14:53 +0100
@@ -128,31 +128,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-simple-pm-bus binding requires either power-domains or clocks, not both.
-Allow clk_get_bulk() to return -ENOENT.
-
-When no clocks are present, bulk->count is set to 0, which works
-correctly with clk_enable_bulk() and other clk functions used in this
-driver.
+Upstream DT uses simple-pm-bus instead of simple-bus. simple-pm-bus
+requires power domain support. On am33xx, PRM manages power domains but
+all domains are enabled at boot. Add stub driver with custom of_xlate
+that expects no argumetns to allow simple-pm-bus and dependent devices
+to probe.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- drivers/core/simple-pm-bus.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/power/domain/Kconfig       |  8 ++++++++
+ drivers/power/domain/Makefile      |  1 +
+ drivers/power/domain/ti-omap-prm.c | 36 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 45 insertions(+)
 
-diff --git a/drivers/core/simple-pm-bus.c b/drivers/core/simple-pm-bus.c
-index f38372ec60bcad4d8c630001d164630f2f99dc32..5df11728e82848b83eae6ab7dad857a8762c2aab 100644
---- a/drivers/core/simple-pm-bus.c
-+++ b/drivers/core/simple-pm-bus.c
-@@ -16,7 +16,7 @@ static int simple_pm_bus_probe(struct udevice *dev)
- 	struct clk_bulk *bulk = dev_get_priv(dev);
+diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+index 0ad885c9e8ba7fe7f687b5d9bad4ef6384d55276..935f282d6c53acd3f02b8894764cc317c109c41f 100644
+--- a/drivers/power/domain/Kconfig
++++ b/drivers/power/domain/Kconfig
+@@ -125,6 +125,14 @@ config TI_POWER_DOMAIN
+ 	help
+ 	  Generic power domain implementation for TI K3 devices.
  
- 	ret = clk_get_bulk(dev, bulk);
--	if (ret)
-+	if (ret && ret != -ENOENT)
- 		return ret;
- 
- 	ret = clk_enable_bulk(bulk);
++config TI_OMAP_PRM_POWER_DOMAIN
++	bool "Enable the TI OMAP PRM power domain driver"
++	depends on POWER_DOMAIN && ARCH_OMAP2PLUS
++	help
++	  Enable support for TI OMAP Power and Reset Manager (PRM) power domains.
++	  The driver is currently a stub to be able to probe devices that
++	  require this type of power domain device.
++
+ config ZYNQMP_POWER_DOMAIN
+ 	bool "Enable the Xilinx ZynqMP Power domain driver"
+ 	depends on POWER_DOMAIN && ZYNQMP_FIRMWARE
+diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
+index 8e03f620437edc6f3d39922b0d5c972fdcd57801..b2c0bd8a61a1f289cbc4d14fa3da13b9781d70e5 100644
+--- a/drivers/power/domain/Makefile
++++ b/drivers/power/domain/Makefile
+@@ -21,4 +21,5 @@ obj-$(CONFIG_SCMI_POWER_DOMAIN) += scmi-power-domain.o
+ obj-$(CONFIG_TEGRA186_POWER_DOMAIN) += tegra186-power-domain.o
+ obj-$(CONFIG_TI_SCI_POWER_DOMAIN) += ti-sci-power-domain.o
+ obj-$(CONFIG_TI_POWER_DOMAIN) += ti-power-domain.o
++obj-$(CONFIG_TI_OMAP_PRM_POWER_DOMAIN) += ti-omap-prm.o
+ obj-$(CONFIG_ZYNQMP_POWER_DOMAIN) += zynqmp-power-domain.o
+diff --git a/drivers/power/domain/ti-omap-prm.c b/drivers/power/domain/ti-omap-prm.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..c240e2682ea93c9e9addcbac9c3a3ea66a0196b7
+--- /dev/null
++++ b/drivers/power/domain/ti-omap-prm.c
+@@ -0,0 +1,36 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * TI OMAP PRM (Power and Reset Manager) power domain driver
++ *
++ * Stub driver to provide power domain support.
++ */
++
++#include <dm.h>
++#include <power-domain-uclass.h>
++
++static int ti_omap_prm_xlate(struct power_domain *power_domain,
++			     struct ofnode_phandle_args *args)
++{
++	if (args->args_count != 0)
++		return -EINVAL;
++
++	return 0;
++}
++
++static const struct udevice_id ti_omap_prm_ids[] = {
++	{ .compatible = "ti,am3-prm-inst" },
++	{ .compatible = "ti,am4-prm-inst" },
++	{ .compatible = "ti,omap-prm-inst" },
++	{ }
++};
++
++static struct power_domain_ops ti_omap_prm_ops = {
++	.of_xlate = ti_omap_prm_xlate,
++};
++
++U_BOOT_DRIVER(ti_omap_prm) = {
++	.name = "ti-omap-prm",
++	.id = UCLASS_POWER_DOMAIN,
++	.of_match = ti_omap_prm_ids,
++	.ops = &ti_omap_prm_ops,
++};
 
 -- 
 2.51.0
