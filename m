@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C44D0CED63B
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:15:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DC03CEDD86
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:15:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ECD683D9F;
+	by phobos.denx.de (Postfix) with ESMTP id DD29B83DBD;
 	Tue, 18 Nov 2025 14:14:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="2UZQLM6T";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tsB0YMt4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA92483CF3; Tue, 18 Nov 2025 11:42:20 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 4DEF783C96; Tue, 18 Nov 2025 11:42:22 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04CFE83CDF
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:42:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E47D83C96
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:42:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b739b3fc2a0so299135466b.3
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:42:19 -0800 (PST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b735e278fa1so791250366b.0
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:42:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763462538; x=1764067338;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763462540; x=1764067340;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Iom/guv4dIhTbUav8mlCa12BEDkzcHh53HWYurG3w6o=;
- b=2UZQLM6TjIea20x2PlmuZUyjh6GEXnDhTX1gSglksf7lCF0FpmQO7SajFGTvia/fSm
- uDZC0LEQ79zlWr+RBx+f/9RwHEPSG1GmmJT6juABJmsV41BJMItWhou/7/w5ZZB/XRB0
- KhpX6OeJsPyd3vwEeGS9exhKa0V4UX3cfFg6zLgxHV4WRriaz6WSLoqaENbF3ZwzMWCm
- W/FYFBoP9dV8UJaF+SCifDHNPJv9BzEpfmU7jZKeY0wf3XA2u/3yA9UE970rRUeUg+tb
- S07iLvc9ttH3mf/CYWgRP0RpuN+5dKISUPplcZEm9gu/PpKtRNpLvf58HEalIrG5CajB
- yv2w==
+ :reply-to; bh=b1pkY2sbFxSReEu5uVVcQLsHdxTtdvP5LN/LK7NANdY=;
+ b=tsB0YMt4xYaQEHQUxniUCxHEgUsmYbNefRFD/77tM/LsLCVNJzG/63DFHwsIog3n1N
+ 4DHnz4uAhGm4/EOenWJs5O0ejlQujlkcWGQ66LioXE1ySBXkjKcvJ+jn77RHc3uQSdbg
+ RCkdmQ7SjY5DI8UGMNh6enrhzbxiKKTJa/nhaunYoOipFodH0JwZHpldezqMmGByr41J
+ U+1qYQzPontW/c6dQRXChJBzNNSR7tSikIb/y18z+dXPUSEzd4Y4NMuq7CiwZDcnpAmg
+ MjczbGbkuIggor+zC5/zni19W37Xxl6E8Ah1LcvoVTgWpj92dlN6Aco61LQ2yKk4PTzF
+ 1VmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763462538; x=1764067338;
+ d=1e100.net; s=20230601; t=1763462540; x=1764067340;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=Iom/guv4dIhTbUav8mlCa12BEDkzcHh53HWYurG3w6o=;
- b=wnlG3HQ92LVEd9zc3hBGkx0Kob0ibvb2CorT8xhykKJiry/mpHJrmBlsN0DmFWydKZ
- +ERjG8hSWXwM1jmrNhq55ngwfKBqVUhzNleWWsNkyGevWNMOQZhj144n0RW/yuu+8AdT
- 2bu66hDdP3kS+6PTPu7nP8mFG3O8UJkZrXkuJHJyjTHNJQb6B7P+GPtDlkPQ46NBalMg
- g9rKfhUW0Tt0tnPcfxQ9ip6urQo+k+xhkLieb59RzqtnxhaH5gru1RXKbXvbZL9K59mD
- 0PtzS/EYGHMZLeqJsESTxLl/oXdOxc4gh1tI24WRkYoU9hdpxSGnyQ0zv1vMmAoIypAD
- gtxA==
+ bh=b1pkY2sbFxSReEu5uVVcQLsHdxTtdvP5LN/LK7NANdY=;
+ b=Nc3lRVZBkAP0fpXuOak/JVA0KgbUhUvO4Fgq8NeD3r4ZJYxfKWhvmwCHFVXXLTlF/B
+ 8qunlW2FT7n/wNtosNJSybuhQ38qgIYMrzz/rChi1bBLXxdcTvfwFktBojESIUYYzyGL
+ FaQ+GVbfQsrVu44+4r5M9Te/p964zak05eMP/6g8+/DZI8XIY3H0bSBfY8z+CWh9jQ/D
+ yr8hEvzpNMQ6ucLzPwtb7PT6aUfjVj1fCGaHR1KIIcaGDNHZx2zJhG7Ynz2joRIs71MG
+ zC6uBAYUPYm2LyHEFxHX2lEl7EztDnFx75h2a99TAITd4fRfK4tXgdSOdO8UwnpFPtmw
+ xgjg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDs+z1Fz5gfcfgrmTJBm2baEydmHTm00fE599kUmjzn1o5hTPw3UO4K/KndW2MMIZHDxvHYhY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMJN04Ex1PXosa49b7LCzRA+JqseMdWRrd4qJ+EIpZkrWujZh0
- kEeDgCgpmDh8BgiAue9R7wjBJihibsq2g+iiR5Zn98I9zqnFX7MOvWGBin4tWy1NyUY=
-X-Gm-Gg: ASbGncvfF+nQHYQovVFCxheuD2qXxr2s4NKOE9OjPFG6cEccnE3VpM3lRmycsSOaSH0
- ZqM/LjkN9ECjFm6Vs0z1CfC33Yhx4CW46de/0CjJsgJxdLKDELvDO2fOcRoZj+GFwdCKGBjQIIp
- 7nK4vrsR71Qrsqdy3gdL0q20EPXb8uLiqgxIWIpk5UHsDIrdtWFWlArekbtXgXVK58xtk04cNIx
- fP+DMxxUEtp19gqoeFgrHO+xaAxW1CQvkBzedht1JQS0yU5zRwJhDNcCNGfo1Nk5OV5HgEy0WiC
- K563Ko1kmHwGj/EOVEbIgycfl1Pg3MKAffK0MkPP+Efm7G92Ir9mcttOcDN4wbc40N4zXPhGusi
- fTmeyTtiXMZKyOkMQJ+RGmTqDAzN90w5R7ibklZZFngk23TxyeWIiqMLbr7GxBDiT6FxkzQ/Z
-X-Google-Smtp-Source: AGHT+IF29KqnmhNuF1YyrwlcZuxfkvydZsH/SUWO7bBEFfA7NZXtV5giDqd8QbHrhlJQAMaToizLvQ==
-X-Received: by 2002:a17:907:1b20:b0:b6d:3fc9:e60c with SMTP id
- a640c23a62f3a-b736780c131mr1679615366b.20.1763462538420; 
- Tue, 18 Nov 2025 02:42:18 -0800 (PST)
+ AJvYcCXMaSl+5fXDoOKNpi1t12pAIikDpA1HdX80Jj+yeaLxmDjP+4Er8Ki2XPomI5mZVb4IDungw50=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGX9BvzFCVyWnE7WmE4oRRz37oKA3qWEaAVwp4Bf6dg2hYk7lW
+ BfG3VOq/i+tyTydCFAy20CRR5dtxND7d5K8uTQRJd5sBy7AjNZekLmmxlHn/5+gIINk=
+X-Gm-Gg: ASbGnctKVnDxVjHTeg0zKwLpeBeAiIW2DHoBvkdCZ6mzBX63SP+pVT817ntlY3WJ1gw
+ zsnFs1KA0F7Fa9gC3WryukdlbrdUsQZOyfKODEMzR+qFJgn71liRms19KktWMWJOtEMfN3EHhKc
+ JtV8C0MM9c2/LgP2mjzYHBe+/NGAeVIPETSINS4ZL329N+rDPwyiTtoksQwwD6uXpnzVOzYycif
+ kzUzsz/6MYYJnkaC/pIv1+SbdwIxrmk3qDgaCnbMiSCv7S7yYqVIkav6JgIz7RWSrtCWmUD+N3I
+ h4ry6115d2l9xCq79olD5WewbZBXpWj0qI13Tt75dOsKLlQRQ/BRGXhz5+ki6KVnNPXaD6alXTR
+ gob48SfLPZVp65cpPgy+zgHzIP3rb3iH/Q/F7tTC/ceJXnCCHhAgghHcNMq+3Dn8liY7e2ULRZv
+ lClYZpn2k=
+X-Google-Smtp-Source: AGHT+IGZk8m4ygdVu9+e8vZu/5DgXctfV/1Qkr0pG8aLcy7RNZTvsL1npwEIakf9VeUYqf///0WsbA==
+X-Received: by 2002:a17:907:d09:b0:b3f:cc6d:e0a8 with SMTP id
+ a640c23a62f3a-b736786e693mr1451463366b.17.1763462539716; 
+ Tue, 18 Nov 2025 02:42:19 -0800 (PST)
 Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-b734fad4494sm1308563966b.18.2025.11.18.02.42.17
+ a640c23a62f3a-b734fedb2cfsm1316394966b.71.2025.11.18.02.42.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 02:42:17 -0800 (PST)
+ Tue, 18 Nov 2025 02:42:19 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Tue, 18 Nov 2025 11:40:24 +0100
-Subject: [PATCH 04/15] configs: am335x_evm_defconfig: Enable panel
+Date: Tue, 18 Nov 2025 11:40:25 +0100
+Subject: [PATCH 05/15] simple-pm-bus: Make clocks optional
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251118-topic-am33-evm-oftree-v2026-01-v1-4-91ce13c661e2@baylibre.com>
+Message-Id: <20251118-topic-am33-evm-oftree-v2026-01-v1-5-91ce13c661e2@baylibre.com>
 References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
 In-Reply-To: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
 To: Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de
@@ -102,12 +103,12 @@ Cc: Tom Rini <trini@konsulko.com>, Kory Maincent <kory.maincent@bootlin.com>,
  Sukrut Bellary <sbellary@baylibre.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1696; i=msp@baylibre.com;
- h=from:subject:message-id; bh=/cVXpbo9y1WYsRjaoC53RzA1V/D67hjkcX/2Iz6Vdi4=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwZX1f7w8cTvHU+f1uW3M+cfaR/6otpbSzNVc5+kefeW
- GwXZHjYUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABN5V8rwP8plRkDske1TeiP2
- 7L62v1fDOI8tpZ6RY+2Xlcp3vkyd28Dwv871odu+tK92FXV7FpfO1vBc0jtX5vHciczO2hZ3P13
- RZwQA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=933; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=NVhFPRNEqJbSa3bFuzlHz+KzmkWLmAkYmcQKSeYH8Ek=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwZXy+DXD8/6xnKLG3+p/59CPBmczsseG39X/PQVzPOt
+ X+2+WHUUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABMJNGf4n1dY8PH/QfOAulfy
+ Ae06R1bbN33c9yZtNs+d6TJqakv6khj+xyT6+nT956puXLTnnsWh5T+Wihad0lqw/vw9syc+a9T
+ 2cgMA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 18 Nov 2025 14:14:53 +0100
@@ -127,61 +128,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable LCD panel support on am335x-evm:
- - CLK_CCF and CLK_TI_* for display clock tree
- - DM_PWM and PWM_TI_ECAP for backlight control
- - VIDEO and AM335X_LCD for display controller
+simple-pm-bus binding requires either power-domains or clocks, not both.
+Allow clk_get_bulk() to return -ENOENT.
+
+When no clocks are present, bulk->count is set to 0, which works
+correctly with clk_enable_bulk() and other clk functions used in this
+driver.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- configs/am335x_evm_defconfig | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ drivers/core/simple-pm-bus.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
-index 5a3e0530a31663faf565e0afeede5765be16985b..bd188c252780fb541afbbe61a243bddaab79be93 100644
---- a/configs/am335x_evm_defconfig
-+++ b/configs/am335x_evm_defconfig
-@@ -60,8 +60,14 @@ CONFIG_NET_RETRY_COUNT=10
- CONFIG_BOOTP_SEND_HOSTNAME=y
- CONFIG_BOOTCOUNT_LIMIT=y
- CONFIG_SYS_BOOTCOUNT_BE=y
-+CONFIG_CLK=y
-+CONFIG_CLK_CCF=y
- CONFIG_CLK_CDCE9XX=y
-+CONFIG_CLK_TI_AM3_DPLL=y
- CONFIG_CLK_TI_CTRL=y
-+CONFIG_CLK_TI_DIVIDER=y
-+CONFIG_CLK_TI_GATE=y
-+CONFIG_CLK_TI_MUX=y
- CONFIG_DFU_TFTP=y
- CONFIG_DFU_MMC=y
- CONFIG_DFU_NAND=y
-@@ -71,6 +77,7 @@ CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=1
- CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_DM_I2C=y
-+CONFIG_MISC=y
- CONFIG_SYS_I2C_EEPROM_ADDR=0x50
- # CONFIG_MMC_HW_PARTITIONING is not set
- CONFIG_MMC_OMAP_HS=y
-@@ -95,6 +102,8 @@ CONFIG_DM_PMIC=y
- # CONFIG_SPL_DM_PMIC is not set
- CONFIG_PMIC_TPS65217=y
- CONFIG_SPL_POWER_TPS65910=y
-+CONFIG_DM_PWM=y
-+CONFIG_PWM_TI_ECAP=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_OMAP3_SPI=y
-@@ -113,6 +122,8 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
- CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
- CONFIG_USB_ETHER=y
- CONFIG_SPL_USB_ETHER=y
-+CONFIG_VIDEO=y
-+CONFIG_AM335X_LCD=y
- CONFIG_WDT=y
- # CONFIG_SPL_WDT is not set
- CONFIG_DYNAMIC_CRC_TABLE=y
+diff --git a/drivers/core/simple-pm-bus.c b/drivers/core/simple-pm-bus.c
+index f38372ec60bcad4d8c630001d164630f2f99dc32..5df11728e82848b83eae6ab7dad857a8762c2aab 100644
+--- a/drivers/core/simple-pm-bus.c
++++ b/drivers/core/simple-pm-bus.c
+@@ -16,7 +16,7 @@ static int simple_pm_bus_probe(struct udevice *dev)
+ 	struct clk_bulk *bulk = dev_get_priv(dev);
+ 
+ 	ret = clk_get_bulk(dev, bulk);
+-	if (ret)
++	if (ret && ret != -ENOENT)
+ 		return ret;
+ 
+ 	ret = clk_enable_bulk(bulk);
 
 -- 
 2.51.0
