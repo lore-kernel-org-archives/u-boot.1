@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DBE3CEBF93
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 06:40:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A10CCD19A
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 06:40:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EAC083C8C;
-	Tue, 18 Nov 2025 07:40:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DB44483C96;
+	Tue, 18 Nov 2025 07:40:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E1K0S6QF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B8rncRQp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6035083C72; Tue, 18 Nov 2025 07:40:42 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id ACA4C83C65; Tue, 18 Nov 2025 07:40:43 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B04383C6D
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 07:40:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CDF483C65
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 07:40:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-786943affbaso41875427b3.0
- for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 22:40:40 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-78802ac22abso50044487b3.3
+ for <u-boot@lists.denx.de>; Mon, 17 Nov 2025 22:40:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763448039; x=1764052839; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1763448040; x=1764052840; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xT1PkRZkPoSY/05kWilZPcaAy03rBdQEs8MCVxtguD4=;
- b=E1K0S6QFffIw/g1O4N5jpt85s3mhNcaaxLY7RtDpaChMqVbGqgKCBtGrLjMvILnjoQ
- GmJ9ICtnThdisVL4+tPKZUFgrQsAfFMzJSzQHJfH5CeqcxTC7QTHMT4OBR0u/VTgrER0
- wfJZjrDfcFWfJA+Rmo7yb4LLO0PM1NxcvURaulC3C67A2PjdtErEcqv15YM1J359Bp8B
- LyeBuhHVDTPT/t6tPInn9pHq55NJ3MkFu4mbRKFiq9P3EEYqblny4zqWrC1OUpx6U8vX
- t1dz9K8rgrAnltn9SdNzYVzVzxvkz8nuzsKyre2fMT/DCAHhQLi/e9XxZGPudcku8GX0
- UHMQ==
+ bh=+95E36MhdVPRUqMxz3267fMa8ZrtEFnTD7qHSXOqqD8=;
+ b=B8rncRQp4NiXNv6ZhgybyrtBiljLvycT0os2mUQXAvcdlBFuuGOg8qEm/sd09r3Lm/
+ Te7eWReoIF+dDgbHVTdkYfduxEVl3WHC26ztcVtpBVS6pXmDyFInuuuNxbsb9iilqex0
+ HvRqC85/ah3nxYDy0vf2DfplLq8arqJfnMtE8O/GyK+OLzTEtJ7N4XbXKogo2HktzNXI
+ TD5P2Uu1c5M3pSPQlsPWCbVjf2PolO6R0ygSoYcDgGgh91JUV6jcXcQzwHmMdzyM0XVB
+ if7DURC85tZMnIYccyyzBgrG/IG+sQUNVqlC2cJAGwhAFJuVrKq0vzQUuqhej3a/uqjv
+ tYyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763448039; x=1764052839;
+ d=1e100.net; s=20230601; t=1763448040; x=1764052840;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=xT1PkRZkPoSY/05kWilZPcaAy03rBdQEs8MCVxtguD4=;
- b=hIIArwR8HHgP9epZ1jBuyPOHkwKjfBLdQJoPRUEzU+YCLQSZlbl5vcqhvasS2Qbz1R
- jMRAWZI6CWZr2eksDRRalKZQhtRdXrLN5OVkR4zS/Ap7jVmkwRVLzj3T6ieldhvuDpmc
- Y17sGD9w9Ccb3i6F1Qdrx6c6gTVec69TvaL4u6xcCnnpZM0gFvhfXmlk3Q1SFVPIFDfj
- 4of+gvqq9bFdrhZ4YrTpEB9eSav4P1ineYorSLHqj8SbClJAXLsetRqEv4qrQVgVNndN
- DXrUxudWQmh+5tlL0S82Uhwx1vcMIc7L0vwJ6+7doHGY7AzgNG3p1tlK3gB+QNoUayeN
- +Q1w==
-X-Gm-Message-State: AOJu0YzMTFKj33p8YOEuz4FYDbLPI4RigIr34tDBVzE1TA1Bt81VmeHB
- RPk47pvD2spHxq72eiEfyct/Copyc8CwnPACX4eMhFBH2XeDwWsQjChvQ0uY
-X-Gm-Gg: ASbGnctJQ3JozIyDPBfiMPAPvHP/r6Kbz6zg+uvNPRclcMK071iy4zRZQM/h0EmJ/wa
- YadSUUikaFjGcNPMQ8aghMEMSkDRseVIVpah12jF6+xWriynQEqs+WGfgQnj5OsUWLeT/1Rt01q
- gAmd5uroLiyxoH4M7ZH9ObKTvXMWfIS2UlUi0LmRyJsr935RhDRP5Y82yev2vBwblCb9HOnvNvv
- 2B4o9ipaa1rfF5/UL/JlUPnDWrUqrtJ8CaDNmFd6XueglQJx9b/3DS6QO3ACO3az9Mkqh6mg/TE
- 9SduHA1C1Y+y/sAq3PspAhlMGjckjAzB5lH+e+m36k/QS/jJoFy8BiRWPorQirzpwbWskg2Cif/
- 7CQFm7T2VGCmaxmsZMU4JTEXOEcW2uePwfJCYQzTA7x2tC3FFJUP4+SHZEpAraadhTNANgdeToN
- n30XVP/tqgRAg/jvY=
-X-Google-Smtp-Source: AGHT+IE7PaaWXJXqzT3YXxcDqruv813vQ+9KT6HPDlnb5k37mUQzAqOkpPiX5otKJ8/Y3WSrky4puA==
-X-Received: by 2002:a05:690c:630f:b0:788:1cde:cad6 with SMTP id
- 00721157ae682-78929e32b10mr125995217b3.15.1763448038710; 
- Mon, 17 Nov 2025 22:40:38 -0800 (PST)
+ bh=+95E36MhdVPRUqMxz3267fMa8ZrtEFnTD7qHSXOqqD8=;
+ b=N3nkY9XH7EkuIsogYqc/e+MyPU6Uew9t2b/Urm7DNQw8b7RJkitnFx9G8g9bTu2cG5
+ thx9LapkLjQCBeYtCXH/d4LVxYjsnkt6oGGlPuo09tFPdPfWw54TTgI9AbXLYmlifENm
+ aEnqZ+tTIif2BUqH02Qw1jYeIXvvuehkqxl2HuuGFbTHxv9WRx6MwHHTVnr7qPssfdMD
+ y/h0koHICTCoWs8CGvBoaZmgLcXp6pLe/zWC/wpKO+iH0t/MKdud3KqAPokfzHUrSQug
+ TDce3fFBILOv5sIxnE6j3tohW2Brb8mnEfsGRhVBG6qyNuHUSYCgRYfrCwHzPIG2iijy
+ rX3A==
+X-Gm-Message-State: AOJu0YwhOq5Fq1DCAGhJGkEbv2qniij0gCKjqbJJdb+TtPQuSqnjV3ap
+ ESbCf0f+Oju3zjVRoHvxLyqgX2eGMoFZ6OXnp5apEr3PVlufTgruG5i8Te8K
+X-Gm-Gg: ASbGncs6yCGyYqIbsLu02C9YVRSS46DLl7Eg7P21S/rgP40WpuVAD/x0DdadnyfJWsX
+ p2kYiIsj4aALZbf+AHqGqO2IqqOWNkw9WLVe9ZAySSABZbGKxRDyYwEwNTtr4MzXpR379o7Gdn7
+ pk7ZBgL2SuBRYHAn69GYo9by0ynbGEgh05N8stIQPNazxMQFQjknp1tUGToCKCdFRXkAHt4HedK
+ uwQfpUYUd3xRBwdXC2nsh7As0cFIhppoxYauTxy+lepBjnfeUTPF3gzUP2vaAqv5UrKy2lLtUjc
+ ktdsv0EjwFfdwkXPnrtw3zcy+Zf0tsW4S66vEfXp4hVJAv/CBudl1kundcAJMxORhUNLhCCiKur
+ 39blh6+swwAjaOZy4mCerxsPoqfh79soGMrXVwdKQjD0doVnC4pnQbVqMSagoaNBmCeKq2+Cnzt
+ wnceSvtXsMA4uE+xA=
+X-Google-Smtp-Source: AGHT+IHGJV3KTDb31G0r8A6CxeFExGFxU6D+e6aV23DAcY1nDWwu8SGggWbBSVJPjc/SGTkJ+tb+tQ==
+X-Received: by 2002:a05:690c:4b13:b0:786:506c:3cc0 with SMTP id
+ 00721157ae682-78929e5966fmr126713107b3.29.1763448039985; 
+ Mon, 17 Nov 2025 22:40:39 -0800 (PST)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-78822128160sm49781967b3.32.2025.11.17.22.40.38
+ 00721157ae682-78822128160sm49781967b3.32.2025.11.17.22.40.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Nov 2025 22:40:38 -0800 (PST)
+ Mon, 17 Nov 2025 22:40:39 -0800 (PST)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
-Cc: adsp-linux@analog.com, Utsav Agarwal <utsav.agarwal@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
+Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
+ Philip Molloy <Philip.Molloy@analog.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
  Ian Roberts <ian.roberts@timesys.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Tom Rini <trini@konsulko.com>,
+ Philip Molloy <philip.molloy@analog.com>, Tom Rini <trini@konsulko.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Subject: [PATCH 01/12] mach-sc5xx: Introduce Kconfig symbols for image
- addresses
-Date: Tue, 18 Nov 2025 01:39:34 -0500
-Message-ID: <20251118064000.14613-2-malysagreg@gmail.com>
+Subject: [PATCH 02/12] mach-sc5xx: Rename SC_BOOT_MODE
+Date: Tue, 18 Nov 2025 01:39:35 -0500
+Message-ID: <20251118064000.14613-3-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.49.1
 In-Reply-To: <20251118064000.14613-1-malysagreg@gmail.com>
 References: <20251118064000.14613-1-malysagreg@gmail.com>
@@ -105,69 +105,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Utsav Agarwal <utsav.agarwal@analog.com>
+The symbol SC_BOOT_MODE was named incorrectly and inconsistently with
+its usage. The selected boot mode is set only by hardware and cannot be
+adjusted through software (apart from the use of FORCE_BMODE to instruct
+the boot rom to ignore the hardware setting when loading uboot proper,
+but this cannot change how SPL is loaded).
 
-Add Kconfig symbols to parameterize the SPI flash layout used in a
-default-ish configuration. This adds more flexibility to the default ADI
-environment, enabling customers with boards based on but not identical
-to an ezkit to reuse more of the infrastructure. Furthermore it allows
-for yocto (the expected default) or binman (to be introduced in this
-series) to configure or use the flash layout based on a single
-definition of all of the parameters when creating an image.
+This symbol actually controlled the BCODE (easily confused with BMODE,
+shorthand for boot mode), so this renames it to SC_BCODE and updates the
+help text to reflect its actual usage: the BCODE is an SoC- and boot
+mode-specific setting that affects how the boot rom configures QSPI or
+OSPI in order to read an LDR file from the associated peripheral.
 
+Reported-by: Philip Molloy <Philip.Molloy@analog.com>
 Signed-off-by: Greg Malysa <malysagreg@gmail.com>
-Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 
 ---
 
-(no changes since v1)
+Changes in v2:
+- New
 
-
----
- arch/arm/mach-sc5xx/Kconfig | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ arch/arm/mach-sc5xx/Kconfig   | 14 ++++++++------
+ arch/arm/mach-sc5xx/config.mk |  2 +-
+ 2 files changed, 9 insertions(+), 7 deletions(-)
 
 diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
-index 30444f04fc4..70c7e5e0631 100644
+index 70c7e5e0631..170177f4e10 100644
 --- a/arch/arm/mach-sc5xx/Kconfig
 +++ b/arch/arm/mach-sc5xx/Kconfig
-@@ -117,6 +117,36 @@ endchoice
+@@ -153,14 +153,16 @@ config ADI_IMAGE
+ 	  The image built by the ADI ADSP Linux build system.
+ 	  Is one of tiny, minimal, full.
  
- endif
- 
-+config SC5XX_UBOOT_SPL_OFFSET
-+	hex "SPL offset"
-+	default 0x0
-+	help
-+	  The default offset where the SPL is located.
-+
-+config SC5XX_UBOOT_OFFSET
-+	hex "U-Boot offset"
-+	default 0x40000
-+	help
-+	  The default offset where u-boot is located.
-+
-+config SC5XX_FITIMAGE_OFFSET
-+	hex "FitImage offset"
-+	default 0x1a0000
-+	help
-+	  The default offset where the fitImage is located.
-+
-+config SC5XX_ROOTFS_OFFSET
-+	hex "RootFS offset"
-+	default 0x102000
-+	help
-+	  The default offset where the rootfs is located.
-+
-+config SC5XX_LOADADDR
-+	hex "Load address"
-+	default 0x90000000
-+	help
-+	  The default load address for u-boot.
-+
- config ADI_IMAGE
- 	string "ADI fitImage type"
+-config SC_BOOT_MODE
+-	int "SC5XX boot mode select"
++config SC_BCODE
++	int "SC5XX SPI BCODE select"
+ 	default 1
+-	range 0 7
++	range 0 15
  	help
+-	  Mode 0: do nothing, just idle
+-	  Mode 1: boot ldr out of serial flash
+-	  Mode 7: boot ldr over uart
++	  This sets the BCODE option for the generated LDR file. The BCODE
++	  is only used in SPI boots (QSPI/OSPI) but is set with no impact
++	  in other boot modes so that one LDR file may be reused from any
++	  boot media. The interpretation of this value is SoC and boot mode
++	  specific, so you must refer to the HRM to interpret it.
+ 
+ config SC_BOOT_SPI_BUS
+ 	int "sc5xx spi boot bus"
+diff --git a/arch/arm/mach-sc5xx/config.mk b/arch/arm/mach-sc5xx/config.mk
+index 266d2e3a777..b4eb1c42810 100644
+--- a/arch/arm/mach-sc5xx/config.mk
++++ b/arch/arm/mach-sc5xx/config.mk
+@@ -14,5 +14,5 @@ endif
+ 
+ INPUTS-y += u-boot.ldr
+ 
+-LDR_FLAGS += --bcode=$(CONFIG_SC_BOOT_MODE)
++LDR_FLAGS += --bcode=$(CONFIG_SC_BCODE)
+ LDR_FLAGS += --use-vmas
 -- 
 2.49.1
 
