@@ -4,78 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48CE6CCD19A
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 08:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B963CCD19A
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 08:31:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A75083D39;
+	by phobos.denx.de (Postfix) with ESMTP id AD2C083D5D;
 	Tue, 18 Nov 2025 09:30:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="L6+j/fi7";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="HBZkueaP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E526283C96; Tue, 18 Nov 2025 05:31:26 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id 7F73A83B99; Tue, 18 Nov 2025 06:00:59 +0100 (CET)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDE2F8398D
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 05:31:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 442AE10AECC; Tue, 18 Nov 2025 05:31:22 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1763440284; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=R2EHAmTI+4AMTFBCS1+oMIiahruE3kIhvizH/EYugJo=;
- b=L6+j/fi72bYzooG9MR4m6QOaKbLrA2aVoGuU4afHaUdu/ufz+ZbwkxJAKEzZ869vjukT9a
- D4aw9VtZUxYyCRTh4nuiY+/oj0cc3uDv5rGWURX03KIVPf7SkR2qWtIRAe2MSKIn4PveAI
- +1rX/lb7Q0UDeNVJIb612SBzFhPzE9FN97Kgmu291NU88HdIHEjKit1Jzo3yyRrAxHCaol
- tEEh8pYC5e2lIZrRA8h4cz029zIxKvbbftqVkY+yXd5IMLJiL0dHEHJ2oNjvQNs50HdgeR
- i02HKmLqMuZrJ0VAhh5PLn2PWr2F54RzlX3body3vISnld15OAjtL+egAyRlQw==
-From: Heiko Schocher <hs@nabladev.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Anshul Dalal <anshuld@ti.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- briansune <briansune@gmail.com>
-Subject: [PATCH v3 3/6] lib: sm3: implement U-Boot parts
-Date: Tue, 18 Nov 2025 05:30:39 +0100
-Message-Id: <20251118043042.27726-4-hs@nabladev.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20251118043042.27726-1-hs@nabladev.com>
-References: <20251118043042.27726-1-hs@nabladev.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 82FCC83B8B
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 06:00:57 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tH8JZIjr9lXeAh6JIjVeZ56O6gLHxwT/unuiGR/7IfefcWUcnDAE0cwWktlRomNVQT/0L3Pd3VmGnN0Z9sfXA4NiqiHf5M1krurDBLnMirFn8ukflmlRnU5WaDSpN9EfS5YMpmt2Y/zLjdoBtZ3jHMHOsxzk6q5ISv6E9dCbG0WaCyZTaijlzctlXfUnumWAvz4q8j2tCB6hiyxrqz/OoPHXLLqisrZ5aIFaPdc2bWTL71EZHGfEYeqAbo21K2vGwO4nDphHQbumZjM3FrtBkrGoBVOZnFyjKJPwxHpHEPswP36fhU6AYwUUn2o1BBc9OxDJQGPDNOAzIhXPsaH0OQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CI9WQfYJ3K/5521rV9JxGyRvCpZAGi1EAAva6gh+1w8=;
+ b=BxCbeTUMf/NDoN6JidwoEXmRIGVxyO7+2UiU2UtEjeU/XXLmhK+B6z2SWynFo7jNzDAuV8kEANI8g7sC0DS/PlNQSvUjLaej+r+15e2qBSlUwwWUbaAVBqE6ZJtAfhWw5erKzZebkvFTzwDk6xiAvWI4Ofh/MmRHWnmgSnpqgN6sTkEcl7VsYBpbsZd7RwG0NkbPeLns5WR9ZYjjYlHxNVon9qox7YkGPGudV5hHe2q/7cuIueAk3IzGbx9tppf7Kxf4JRkfDzB6SbGIWCV/15EfHDL8dF8DpGaemsmZpeXhI8Of/7tkHfWRrgF1daz4+XDIuBmgdUapsSVjaBFS4A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CI9WQfYJ3K/5521rV9JxGyRvCpZAGi1EAAva6gh+1w8=;
+ b=HBZkueaPUdGlOzi0Fp2LMwBU+YTj7/6VsrPQVQWDRHa6VDMoj/vk48sQD3UaukMD8Sd0ShwIptEqPjreMSzN0bknbyDm6oOvunvU4M2z2xNjYUYrCARB4H0d+8qvpVggsefSqIFOhvcut25O0qRIXOh9KGfqyuH8qGYf0d/h8RyxIXTLcy7fleLkyUcws7por5D9AfZsMy03Sk4VRhyjMebFnOjGf6zC1xi5sAIJtuFKumWq0jdidHznuN0t67cj49EPlyMjASi7qHR65R0zgqN///fIDTbb0t0oWj8ddhAWfmt+/082nVG9W34aRa4uvGTurZpStRq5aCGnXlIesQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by DB9PR04MB9704.eurprd04.prod.outlook.com (2603:10a6:10:303::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.21; Tue, 18 Nov
+ 2025 05:00:54 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9320.013; Tue, 18 Nov 2025
+ 05:00:54 +0000
+Date: Tue, 18 Nov 2025 14:13:46 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Cc: u-boot@lists.denx.de, peng.fan@nxp.com, jh80.chung@samsung.com,
+ trini@konsulko.com, marex@denx.de, tien.fong.chee@altera.com,
+ balsundar.ponnusamy@altera.com
+Subject: Re: [PATCH 2/8] mmc: sdhci-cadence: Use max-frequency property from
+ device tree
+Message-ID: <aRwOmpXU5__RLICN@nxa18884-linux>
+References: <20251110173737.24545-1-tanmay.kathpalia@altera.com>
+ <20251110173737.24545-3-tanmay.kathpalia@altera.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251110173737.24545-3-tanmay.kathpalia@altera.com>
+X-ClientProxiedBy: SI2PR06CA0014.apcprd06.prod.outlook.com
+ (2603:1096:4:186::11) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DB9PR04MB9704:EE_
+X-MS-Office365-Filtering-Correlation-Id: e1d98afa-f5bb-43d2-99e6-08de265f7409
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|19092799006|52116014|1800799024|7053199007|38350700014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Zvlp5auVFzp/MAQDBV1ppPn/RKZPfakgEeKjmw19adikNFARFG3hl/P+hiHt?=
+ =?us-ascii?Q?kvp6p20qrcdt1dzcSmVnKF5gIwenLIPN1EnPrD3P88Matf1GRRSyukqfKgQn?=
+ =?us-ascii?Q?dsVGgCeWUWTcdPztw9PodmEiViPpXgCkkdow0UlLKEaHBIJc8wrAyg/6Ecdx?=
+ =?us-ascii?Q?07UtO7SREHyzLCl69kvjtfytqddgzd0T1bTAGZGwlv4vAKBfen8MXRl5X3ys?=
+ =?us-ascii?Q?2xEdB/UiuFOj1J67u3ko+NURQALBIuh8xVpNflZADeC67fMuCmxcIsFsqBq0?=
+ =?us-ascii?Q?MyjuYjmZwieZugvYsBkrT25fmifzfFV+hMWqkcfSw7S50m79ZGt5o6Pc6HB8?=
+ =?us-ascii?Q?Gqnc4621VBHfoAmZT4eiZgbCufyjiU9ItBLfmT13+D4A8EDWWLA2qXmqKOl4?=
+ =?us-ascii?Q?78xeKn+CkPVBnEJyzTdiELoIrxC8RVJDDPVkMEapbZuxlnJwCZBPD1ApNiAp?=
+ =?us-ascii?Q?1VQJloYQx/SybN7quJ31ez38aNnWdZJgzlUl2uNLzGOX0lGc4V0N81eh2xul?=
+ =?us-ascii?Q?vCsRj4m+eQvSp/pg9MqIc5bNysMRrLK/GGEh+qPxmzdnmPR3NnCjN/zszr+8?=
+ =?us-ascii?Q?nGCCpu9Xwb276x5y7XHEVPjae0H0B5v1StLocZNUh//qtXqDQQULeKOddMfe?=
+ =?us-ascii?Q?EKsIkRs54y+8FMke2m+bqXYdake7HBw3RlRRMTgr5877TAYadvCNcng0et/V?=
+ =?us-ascii?Q?2YLqAZxEyuF7jg8RfcHgZHoYu9nlpk1l0leXVjOLH/avvVqzmTHqTFdbD1K/?=
+ =?us-ascii?Q?Q8zZob2ax8KLDHBq5Ui8QGPb/Ls0EQ/yZUcTi/MA9A6mEidwXpQGTbZzM8cR?=
+ =?us-ascii?Q?xlmfR8sirn2E6wCDY9qz5e9FhEYWRQDLEBIE7yf6Kt6kycDw+FbNbBGqRKCN?=
+ =?us-ascii?Q?Q3qnMtnTfKYeMQRlB6hm05HX7gB330yL9Fk7jpe1WqrVq56I4G5pe6IDJhwa?=
+ =?us-ascii?Q?Wd7rTJTB5HN0N/Wh85uYkP2alIIjtg+kUS9T2NoLY8ZOu3VVgh+78GYM7CWe?=
+ =?us-ascii?Q?zCDUBwZPGVjzNqBa9+DE3fPDrQ1LXxIgE4uYX/R1HmvyJ1pb1sjlA10E1NcO?=
+ =?us-ascii?Q?uOBQKFpeVwjs3Jz/oYWO2VyDekJGEcVQzUJ4k1E9AYEZyfAqNk0uMjUT6HaL?=
+ =?us-ascii?Q?9JPA6vcLMN/9OT1T4y5qZpLImejGlIOiOCwgZK9ccvT3FPuxeJHRc2hFl00V?=
+ =?us-ascii?Q?8W6zrd3dcQIkZAZ7Z6pM4FwiNIS3APYT7u09tpLkeLJwfEx3GLFRqI4Qhs85?=
+ =?us-ascii?Q?unfV9eGFsfBqOEhAv6klm5EPTfpNxOSpLG0o0W6YQzLMNMNkUiUjIHjEMpdZ?=
+ =?us-ascii?Q?jzrjQPcMK0CsWBZh9n5O8cpCSivq+1HSL2vUtrPsXO/ehxC8X3AvjFbRi9zu?=
+ =?us-ascii?Q?CAr5Aqu/eLnj7X+wdXDz9VGcuHILiKuDuf0Q/ZF92w4tc3TqcAwvRIXEOMhv?=
+ =?us-ascii?Q?GiV5Ebw6UND4ALLr0pnNw+lIpFuwGQnFZ59gbOCa0mg4lEmv66I4lg3Oc+Qh?=
+ =?us-ascii?Q?vyEfUOnNkCtJ8GJkSPvO24M6sm/49CD4bs69?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(19092799006)(52116014)(1800799024)(7053199007)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?C40maE4mBKhcHHev4j7hsTjc/qbTl9PlzADtrEADKFYromIk0R40KMkKY5J1?=
+ =?us-ascii?Q?VM4u+hVKIvUVFCu/JOM6FfRZKvVB7zGgeJgrVgM76pzu2VfDigrAu1iASGMW?=
+ =?us-ascii?Q?3bWNeX71IHIA42bnM+aaOV52jc4OPdjQc6j3aERNTSMbVNdYratrFOetJ1HE?=
+ =?us-ascii?Q?nBVMFKYxQyUbDOK7zXwRYYynei8O2PtDMvGoierqVOOaSWcKOkiFwpnb5vsP?=
+ =?us-ascii?Q?vM+Nm6gAHGAsm57cCxELZ203zBmemZvPJDmpQmrvi63yDv244Ze5GwktQgTL?=
+ =?us-ascii?Q?UYCejfEBzvBUtXxpqYm6TXWqR/jOHrOuU8epF+P40gLVpxgyRgwMMXJ34WJl?=
+ =?us-ascii?Q?J8eyi88J9/Rqh6+HO8xThwcMugzID6jmXacDW+Q8vyE/RgYyjzo8Zm0hVsV+?=
+ =?us-ascii?Q?dH6haiuyvzuD85g2JWj4fqrvXei93YzHbim2pQW1DVRd+TCthYferAWC2MSa?=
+ =?us-ascii?Q?4vLwpLCZJGtv9+F21wziQ9BOnSSRCCyNnHLGp2JQPdTnGI5Kg5CzJRqWDe51?=
+ =?us-ascii?Q?RTTy0h71pGeVR//zplzbZ9MrmbNW0wd4L0Z3yHMQrWb/7ljAVcJ9oVm2w9IB?=
+ =?us-ascii?Q?iVzw/sHw8evJN6z2cgbYPI/+87z+9d4/EbDAh0cgEx2+WJH2LG8AlwFeNMiC?=
+ =?us-ascii?Q?Y36z5nnz9uODs1w2+W9BYR/TQfuzFZgbkst7ruxF4BhU3dI0Hbwvav6cq+lf?=
+ =?us-ascii?Q?2YStfoa8dtxOWkFxACJg+gz3vd+GLYUKuWeQNV5sP4R5gXA5JUw1/4Os9iiW?=
+ =?us-ascii?Q?Um6iB1TdTgCmuk9CHlRU6xWrMGwf+dcJ+F6uZ9uW9iq7LbwRPyEDlpj8fZMN?=
+ =?us-ascii?Q?QQlQqDzvdNRaNFDlboyptB4/Pa8h+zNb/jJy3gMiysBvMZEupGhArObwGjP3?=
+ =?us-ascii?Q?6Hhv6iYikPO3icr4/SHy3Qn5+i6h/jmLeVyA2Qo5ByebJsgf1gkfBBFCA5oc?=
+ =?us-ascii?Q?qkbg1N+6w9J5ls2BNIyyGJVIzi1Z3sGYcf1CG4Sa6q58Olbkk9jKDwwhTnhc?=
+ =?us-ascii?Q?mwefWk/1rqtZyG4y2wUpXDrLYHMj3UPi5tWoPxRoHVRbFlnLuqY634udAaOz?=
+ =?us-ascii?Q?BHI9NhCVpAz+owyv+g0Cf2pP1fuqGDD2EErLb7pwtZpdrYMr1XV3vqaequvs?=
+ =?us-ascii?Q?Kgr/pu4Hj4Ne0zC7NPo/WFZKOcArJTFSA1p7S1ot/2ZBIvCPYnGRG47Z8EGE?=
+ =?us-ascii?Q?Lln3KewTCvQxhR35WQkOJ0PWT8xv7Wocysgvtu5dqa5mTbvAezjZ/BzbJANo?=
+ =?us-ascii?Q?1B7DwVzfpR6rgquKlAmlX9J1OBSC0MextwPIu8bwwnXPcsCBfkZmiJluiZjH?=
+ =?us-ascii?Q?gHosrCIU1LPXQrhsfU0aCUnElAI4g937GJjGjdzu0MElBtXw3GhIYQcq7YyG?=
+ =?us-ascii?Q?83Uv9uH9JcaITF/TbdD2iZsZGHj2BoBw2JTHsxLeUe8jmxtM7AKKzevN5jWu?=
+ =?us-ascii?Q?UdNwLub3abJvMq2HzlkN5QbHW02Ijc8+SEt4lUTqKSCI17G6hZ7msQ7n3txp?=
+ =?us-ascii?Q?HlzLbI3KCHZmT3SpQ1EhwNP1wNadomnSS9Gka7re4VYdZ9ywORaHRU6uWUb/?=
+ =?us-ascii?Q?zUaZ1bmxdh3BuBH0VxJZYTN6XH6QfvBIzEmX0/Ig?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e1d98afa-f5bb-43d2-99e6-08de265f7409
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2025 05:00:54.6844 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qKrpvk0DX8LiYPSp6sohCl+b4Jripfr06C3+TqnBXHiI0f/5uST+anzk7c4AvIs45zmNBzIGw/muKxkNOcZwgg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9704
 X-Mailman-Approved-At: Tue, 18 Nov 2025 09:30:32 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,367 +165,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-add the U-Boot specific parts for the SM3 hash
-implementation:
+On Mon, Nov 10, 2025 at 09:37:31AM -0800, Tanmay Kathpalia wrote:
+>When f_max parameter is 0 in sdhci_setup_cfg(), the function defaults
+>to using the maximum frequency from host controller capabilities register
+>instead of the max-frequency property parsed from device tree.
+>
+>The max-frequency property from device tree is parsed by mmc_of_parse()
+>and stored in plat->cfg.f_max, but sdhci_setup_cfg() was being called
+>with f_max=0, causing it to ignore the device tree value and use the
+>host capabilities register value instead.
+>
+>Fix this by passing plat->cfg.f_max to sdhci_setup_cfg() to ensure
+>the device tree specified maximum frequency is respected over the
+>hardware default.
+>
+>Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+>Reviewed-by: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
+>---
+> drivers/mmc/sdhci-cadence.c | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
+>index d9fda902076..f31437e5eeb 100644
+>--- a/drivers/mmc/sdhci-cadence.c
+>+++ b/drivers/mmc/sdhci-cadence.c
+>@@ -255,7 +255,7 @@ static int sdhci_cdns_probe(struct udevice *dev)
+> 
+> 	host->mmc = &plat->mmc;
+> 	host->mmc->dev = dev;
+>-	ret = sdhci_setup_cfg(&plat->cfg, host, 0, 0);
+>+	ret = sdhci_setup_cfg(&plat->cfg, host, plat->cfg.f_max, 0);
 
-Signed-off-by: Heiko Schocher <hs@nabladev.com>
----
+plat is allocated by setting plat_auto in U_BOOT_DRIVER, but it is not
+zeroed. So f_max maybe a random value if max frequency is not set in
+device tree. You need clear it before mmc_of_parse or
+change to use dev_read_u32_default for parsing max frequency in mmc_of_parse.
 
-Changes in v3:
-New in version 3 as Ilias recommended to split linux
-and U-boot changes.
+Regards
+Peng
 
- MAINTAINERS          |   1 +
- boot/Kconfig         |   1 +
- cmd/Kconfig          |  15 ++++++
- cmd/Makefile         |   1 +
- cmd/sm3sum.c         |  48 +++++++++++++++++
- common/hash.c        |  42 ++++++++++++++-
- include/u-boot/sm3.h |   8 +++
- lib/sm3.c            | 125 +++++++++++++++++++++++++++++++++++++++++++
- 8 files changed, 240 insertions(+), 1 deletion(-)
- create mode 100644 cmd/sm3sum.c
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index e1d79206e50..dc62990a090 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1689,6 +1689,7 @@ F:	test/lib/slre.c
- SM3
- M:	Heiko Schocher <hs@nabladev.com>
- S:	Maintained
-+F:	cmd/sm3sum.c
- F:	include/u-boot/sm3.h
- F:	lib/sm3.c
- 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 85f4d468069..76cc628c9bd 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1042,6 +1042,7 @@ config MEASURED_BOOT
- 	select SHA256
- 	select SHA384
- 	select SHA512
-+	select SM3
- 	help
- 	  This option enables measurement of the boot process when booting
- 	  without UEFI . Measurement involves creating cryptographic hashes
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 5b9c13d85e7..8e3efff2bee 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -264,6 +264,21 @@ config CMD_SBI
- 	help
- 	  Display information about the SBI implementation.
- 
-+config CMD_SM3SUM
-+	bool "sm3sum"
-+	select SM3
-+	select HASH
-+	help
-+	  Compute SM3 checksum.
-+	  add SM3 hash functionality
-+
-+config SM3SUM_VERIFY
-+	bool "sm3sum -v"
-+	depends on CMD_SM3SUM
-+	help
-+	  Add for the sm3sum command the -v option
-+	  to verify data against an SM3 checksum.
-+
- config CMD_SMBIOS
- 	bool "smbios"
- 	depends on SMBIOS
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 25479907797..642042cfe00 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -177,6 +177,7 @@ obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
- obj-$(CONFIG_CMD_SETEXPR_FMT) += printf.o
- obj-$(CONFIG_CMD_SPI) += spi.o
- obj-$(CONFIG_CMD_STRINGS) += strings.o
-+obj-$(CONFIG_CMD_SM3SUM) += sm3sum.o
- obj-$(CONFIG_CMD_SMBIOS) += smbios.o
- obj-$(CONFIG_CMD_SMC) += smccc.o
- obj-$(CONFIG_CMD_SYSBOOT) += sysboot.o
-diff --git a/cmd/sm3sum.c b/cmd/sm3sum.c
-new file mode 100644
-index 00000000000..9044a322e22
---- /dev/null
-+++ b/cmd/sm3sum.c
-@@ -0,0 +1,48 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2025
-+ * Heiko Schocher, Nabladev Software Engineering, hs@nabladev.com
-+ *
-+ * based on code from cmd/md5sum.c
-+ */
-+
-+#include <command.h>
-+#include <env.h>
-+#include <hash.h>
-+
-+static int do_sm3sum(struct cmd_tbl *cmdtp, int flag, int argc,
-+		     char *const argv[])
-+{
-+	int flags = HASH_FLAG_ENV;
-+	int ac;
-+	char *const *av;
-+
-+	if (argc < 3)
-+		return CMD_RET_USAGE;
-+
-+	av = argv + 1;
-+	ac = argc - 1;
-+	if (IS_ENABLED(CONFIG_SM3SUM_VERIFY) && strcmp(*av, "-v") == 0) {
-+		flags |= HASH_FLAG_VERIFY;
-+		av++;
-+		ac--;
-+	}
-+
-+	return hash_command("sm3_256", flags, cmdtp, flag, ac, av);
-+}
-+
-+#if IS_ENABLED(CONFIG_SM3SUM_VERIFY)
-+U_BOOT_CMD(sm3sum, 5, 1, do_sm3sum,
-+	   "compute SM3 message digest",
-+	   "address count [[*]sum]\n"
-+	   "  - compute SM3 message digest [save to sum]\n"
-+	   "sm3sum -v address count [*]sum\n"
-+	   "  - verify sm3sum of memory area"
-+);
-+#else
-+U_BOOT_CMD(sm3sum, 4, 1, do_sm3sum,
-+	   "compute SM3 message digest",
-+	   "address count [[*]sum]\n"
-+	   "  - compute SM3 message digest [save to sum]"
-+);
-+#endif /* IS_ENABLED(CONFIG_SM3SUM_VERIFY) */
-diff --git a/common/hash.c b/common/hash.c
-index 0c45992d5c7..71c4bef5826 100644
---- a/common/hash.c
-+++ b/common/hash.c
-@@ -34,6 +34,7 @@
- #include <u-boot/sha256.h>
- #include <u-boot/sha512.h>
- #include <u-boot/md5.h>
-+#include <u-boot/sm3.h>
- 
- static int __maybe_unused hash_init_sha1(struct hash_algo *algo, void **ctxp)
- {
-@@ -143,6 +144,34 @@ static int __maybe_unused hash_finish_sha512(struct hash_algo *algo, void *ctx,
- 	return 0;
- }
- 
-+static int __maybe_unused hash_init_sm3(struct hash_algo *algo, void **ctxp)
-+{
-+	struct sm3_context *ctx = malloc(sizeof(struct sm3_context));
-+
-+	sm3_init(ctx);
-+	*ctxp = ctx;
-+	return 0;
-+}
-+
-+static int __maybe_unused hash_update_sm3(struct hash_algo *algo, void *ctx,
-+					  const void *buf, uint size,
-+					  int is_last)
-+{
-+	sm3_update((struct sm3_context *)ctx, buf, size);
-+	return 0;
-+}
-+
-+static int __maybe_unused hash_finish_sm3(struct hash_algo *algo, void *ctx,
-+					  void *dest_buf, int size)
-+{
-+	if (size < algo->digest_size)
-+		return -1;
-+
-+	sm3_final((struct sm3_context *)ctx, dest_buf);
-+	free(ctx);
-+	return 0;
-+}
-+
- static int __maybe_unused hash_init_crc16_ccitt(struct hash_algo *algo,
- 						void **ctxp)
- {
-@@ -298,6 +327,17 @@ static struct hash_algo hash_algo[] = {
- #endif
- 	},
- #endif
-+#if CONFIG_IS_ENABLED(SM3)
-+	{
-+		.name		= "sm3_256",
-+		.digest_size	= SM3_DIGEST_SIZE,
-+		.chunk_size	= SM3_BLOCK_SIZE,
-+		.hash_func_ws	= sm3_csum_wd,
-+		.hash_init	= hash_init_sm3,
-+		.hash_update	= hash_update_sm3,
-+		.hash_finish	= hash_finish_sm3,
-+	},
-+#endif
- #if CONFIG_IS_ENABLED(CRC16)
- 	{
- 		.name		= "crc16-ccitt",
-@@ -334,7 +374,7 @@ static struct hash_algo hash_algo[] = {
- #if CONFIG_IS_ENABLED(SHA256) || IS_ENABLED(CONFIG_CMD_SHA1SUM) || \
- 	CONFIG_IS_ENABLED(CRC32_VERIFY) || IS_ENABLED(CONFIG_CMD_HASH) || \
- 	CONFIG_IS_ENABLED(SHA384) || CONFIG_IS_ENABLED(SHA512) || \
--	IS_ENABLED(CONFIG_CMD_MD5SUM)
-+	IS_ENABLED(CONFIG_CMD_MD5SUM) || CONFIG_IS_ENABLED(SM3)
- #define multi_hash()	1
- #else
- #define multi_hash()	0
-diff --git a/include/u-boot/sm3.h b/include/u-boot/sm3.h
-index de16684ca0a..b4ead96c776 100644
---- a/include/u-boot/sm3.h
-+++ b/include/u-boot/sm3.h
-@@ -24,4 +24,12 @@ struct sm3_context {
- 	uint8_t buffer[SM3_BLOCK_SIZE];
- 	int buflen;
- };
-+
-+void sm3_init(struct sm3_context *sctx);
-+void sm3_update(struct sm3_context *sctx, const uint8_t *input, size_t ilen);
-+void sm3_final(struct sm3_context *sctx, uint8_t output[SM3_DIGEST_SIZE]);
-+void sm3_hash(const uint8_t *input, size_t ilen, uint8_t output[SM3_DIGEST_SIZE]);
-+
-+void sm3_csum_wd(const unsigned char *input, uint32_t len,
-+		 unsigned char *output, unsigned int chunk_sz);
- #endif
-diff --git a/lib/sm3.c b/lib/sm3.c
-index bb994d187ef..2a4e825481d 100644
---- a/lib/sm3.c
-+++ b/lib/sm3.c
-@@ -185,3 +185,128 @@ static inline void sm3_block(struct sm3_context *sctx,
- 		data += SM3_BLOCK_SIZE;
- 	}
- }
-+
-+void sm3_init(struct sm3_context *sctx)
-+{
-+	memset(sctx, 0, sizeof(*sctx));
-+
-+	/* Load initial values */
-+	sctx->state[0] = SM3_IVA;
-+	sctx->state[1] = SM3_IVB;
-+	sctx->state[2] = SM3_IVC;
-+	sctx->state[3] = SM3_IVD;
-+	sctx->state[4] = SM3_IVE;
-+	sctx->state[5] = SM3_IVF;
-+	sctx->state[6] = SM3_IVG;
-+	sctx->state[7] = SM3_IVH;
-+	sctx->count = 0;
-+}
-+
-+void sm3_update(struct sm3_context *sctx, const uint8_t *input, size_t ilen)
-+{
-+	unsigned int partial = sctx->count % SM3_BLOCK_SIZE;
-+	u32 W[16];
-+
-+	sctx->count += ilen;
-+
-+	if ((partial + ilen) >= SM3_BLOCK_SIZE) {
-+		int blocks;
-+
-+		if (partial) {
-+			int p = SM3_BLOCK_SIZE - partial;
-+
-+			memcpy(sctx->buffer + partial, input, p);
-+			input += p;
-+			ilen -= p;
-+
-+			sm3_block(sctx, sctx->buffer, 1, W);
-+		}
-+
-+		blocks = ilen / SM3_BLOCK_SIZE;
-+		ilen %= SM3_BLOCK_SIZE;
-+
-+		if (blocks) {
-+			sm3_block(sctx, input, blocks, W);
-+			input += blocks * SM3_BLOCK_SIZE;
-+		}
-+
-+		memset(W, 0, sizeof(W));
-+
-+		partial = 0;
-+	}
-+	if (ilen)
-+		memcpy(sctx->buffer + partial, input, ilen);
-+}
-+
-+void sm3_final(struct sm3_context *sctx, uint8_t output[SM3_DIGEST_SIZE])
-+{
-+	const int bit_offset = SM3_BLOCK_SIZE - sizeof(u64);
-+	__be64 *bits = (__be64 *)(sctx->buffer + bit_offset);
-+	__be32 *digest = (__be32 *)&output[0];
-+	unsigned int partial = sctx->count % SM3_BLOCK_SIZE;
-+	u32 W[16];
-+	int i;
-+
-+	sctx->buffer[partial++] = 0x80;
-+	if (partial > bit_offset) {
-+		memset(sctx->buffer + partial, 0, SM3_BLOCK_SIZE - partial);
-+		partial = 0;
-+
-+		sm3_block(sctx, sctx->buffer, 1, W);
-+	}
-+
-+	memset(sctx->buffer + partial, 0, bit_offset - partial);
-+	*bits = cpu_to_be64(sctx->count << 3);
-+	sm3_block(sctx, sctx->buffer, 1, W);
-+
-+	for (i = 0; i < 8; i++)
-+		put_unaligned_be32(sctx->state[i], digest++);
-+
-+	/* Zeroize sensitive information. */
-+	memset(W, 0, sizeof(W));
-+	memset(sctx, 0, sizeof(*sctx));
-+}
-+
-+/**
-+ * sm3_hash - Calculate SM3 hash of input data
-+ * @input: Input data
-+ * @ilen: Input data length in bytes
-+ * @output: Output buffer for hash (32 bytes)
-+ */
-+void sm3_hash(const uint8_t *input, size_t ilen, uint8_t output[SM3_DIGEST_SIZE])
-+{
-+	struct sm3_context sctx;
-+
-+	sm3_init(&sctx);
-+	sm3_update(&sctx, input, ilen);
-+	sm3_final(&sctx, output);
-+}
-+
-+/**
-+ * sm3_csum_wd - Calculate SM3 checksum on memory region using watchdog
-+ * @addr: Starting address
-+ * @len: Length in bytes
-+ * @output: Output buffer for checksum (32 bytes)
-+ * @flags: Flags for watchdog behavior
-+ *
-+ * This is the U-Boot API entry function for SM3 hash calculation
-+ */
-+void sm3_csum_wd(const unsigned char *input, uint32_t len,
-+		 unsigned char *output, unsigned int chunk_sz)
-+{
-+	struct sm3_context ctx;
-+	uint32_t chunk;
-+
-+	sm3_init(&ctx);
-+
-+	/* Process data in chunks, kicking watchdog between chunks */
-+	while (len > 0) {
-+		chunk = (len > chunk_sz) ? chunk_sz : len;
-+		sm3_update(&ctx, input, chunk);
-+		input += chunk;
-+		len -= chunk;
-+
-+		schedule();
-+	}
-+	sm3_final(&ctx, output);
-+}
--- 
-2.20.1
-
+> 	if (ret)
+> 		return ret;
+> 
+>-- 
+>2.43.7
+>
+>
