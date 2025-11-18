@@ -4,59 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 115E1CED63B
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 12:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19070CEDD81
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 13:14:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 928D583B99;
-	Tue, 18 Nov 2025 13:42:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 491E383BD2;
+	Tue, 18 Nov 2025 14:14:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="dF1xzyrH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E0jWwMmc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBD7A83C5E; Tue, 18 Nov 2025 13:42:17 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A1F1B83CC7; Tue, 18 Nov 2025 11:06:49 +0100 (CET)
+Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
+ [IPv6:2607:f8b0:4864:20::b12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DE8883A8F
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 13:42:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0ABDD83C65
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:06:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb
- (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch [83.173.201.248])
- by mail11.truemail.it (Postfix) with ESMTPA id 4AD921FA5F;
- Tue, 18 Nov 2025 13:42:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1763469734;
- bh=AKW5apfEjfzT1chaGlcQoON2Stcf+jN+cygzcWgXeJo=; h=From:To:Subject;
- b=dF1xzyrH4Idu96KYFz29Fq544RQjx5N9QEIrXjP395IPFY4PQe8rgFGuxir14WQu0
- nAI8B8jb13OG7FTDC7G56umy999v6cmEwziamgeztjEQBWCAnd79YCdF01lv3eChRV
- vOsCB4EX75s5/J6vi4nIZ3wsDrNwcp4FQa8tgHb9VbkXo+uQtL9gjJhO9Zm35W1TyB
- bGRcGAxaco3qEfvAxT/suzYGNkhuYTXJ4P0WSRzLVqIG7xb2h1fBve//z2T/bDCKpx
- QLiva7btNjNCQ/CnTubnCjRhd9dCZLTFXldpyXZZn1i30ioAlHvUgEShsQnwJcPGH1
- Hw/JN01T39Vug==
-Date: Tue, 18 Nov 2025 13:42:09 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Ernest Van Hoecke <ernestvanhoecke@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] configs: colibri-imx7*: set 'fdtfile' generically in
- PREBOOT
-Message-ID: <20251118124209.GA40603@francesco-nb>
-References: <20251118123056.1124089-1-ernestvanhoecke@gmail.com>
- <20251118123640.GA39789@francesco-nb>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-640c9c85255so5549280d50.3
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:06:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1763460406; x=1764065206; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GJ11XSMyBbz9nf1VFGnmkyVBkkwh00ye8WEQyp8dGzE=;
+ b=E0jWwMmchhraSjVnQcM00RcguPYbXKsz5QgXFefhyf/sPLtGqkVA+q3LcAw9YaqhJK
+ rfpniIcMSN1sfv1nQq0O5bxh6I3nAJZSvm+3rt2P9XiGTT2uTxGTqN4+4x6CXt1/E2k+
+ VH7WDt3fLe9Toua0jTPPmfkESY2b+22v2/XAYxclHtBzi5XbfJGF4ABbdeguiiZoVLAh
+ HuB/SdqWHXTdpG+bJKhEh3tXSf3BZYVjifxlgafSihEYBdypOYYzMXvXeDDnqRGKJLOu
+ kiD5pndEn8WpNqh0VL+yMJyMRMS6gtHuF0Ty7u4XXYc/1mp1KNdtTa/95t++hEhhlnhn
+ 8pxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763460406; x=1764065206;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=GJ11XSMyBbz9nf1VFGnmkyVBkkwh00ye8WEQyp8dGzE=;
+ b=Cq8GcH6i62DbbqJIaNtiljo9TYl96D/FzJMtu8saO6quxZTNghRoQgLiHtP9u/m/5F
+ eoaZwRHbpHEInyqGoMvYRs+Q1BW4Y3UzSalhFv12VyTMIJE0BCqW5KKqlY1Zd13h+vwg
+ wza1Q0RA41l3toCrlml69PfWNS4ycyX2RvbyvnS2F83bo7BafPhLos/CW4bErTQaPP2c
+ /vQ6eJxu98t518TgYsZYQKlJLR6JqaP6OxFiyMN6rOcPPweGscjTHmVjS9DQb2ZUnQxJ
+ wAzeHwqoOgdtvXuzNr7AycyqAeBl/FZLdgmhkh52P76+v8uPFNdZK/BXCAs9com/Mxyx
+ 1lTg==
+X-Gm-Message-State: AOJu0Yy+6qh+dNt9VKkzJrAuVKcyQRvELmO44gL2kR7W6nhyPakpyrUi
+ ss4RXaZUlMNUrmQBRe1/iCiJSe79FxMrXibcMwy45ej6aHOzcBMHqJcB/w4gva5bqUrx5LfWa0p
+ 6+GPOGapLdPFKkNOoq5L+65C7y8btNK4mUCtI65FOFw==
+X-Gm-Gg: ASbGncs3bzq9CN5UwnlE2K0xaLqWQwkKKYR5j4WCBKHwi6465MLTkTRuCAQ/LAyn9xd
+ DK3YdMjvVsKJWYWAZ6xtjMSNXtA29ULefwWw/7CTQ771xyWVJ9jx8EYkuCDKLphhcY8t8pX+M//
+ o/beQVnYziTxtAt91u6vAxc0CPCu1TlmA/CF9jgRF2uyfEoKxsQTX5x3KbbooCbMlCWc3ndfRL0
+ GutEhufBHLDh3Y3KPsVDzWgDhXf8urhaI0AJlT7Ez+7F/nJE+A6txtrMKau4td+0DGuS5c0uYiC
+ ktxP5/s/894jdFiI1Kv7qRRl7Hc/RPYMwiJBX+k1nbZ6doXBZ8SM/9IEq8Hbzg==
+X-Google-Smtp-Source: AGHT+IHuyjdqG4iibfG/dapJtG9q6p3KHEv3y0NCcPCiCEyz6vuJhEzZv5GdAgpli5JrtvU9FmwPrDk5r7/rU3kLGF4=
+X-Received: by 2002:a05:690e:248a:b0:63f:9f7d:904a with SMTP id
+ 956f58d0204a3-641e76b89d7mr11456557d50.61.1763460405764; Tue, 18 Nov 2025
+ 02:06:45 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251118123640.GA39789@francesco-nb>
+References: <20251118043042.27726-1-hs@nabladev.com>
+In-Reply-To: <20251118043042.27726-1-hs@nabladev.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 18 Nov 2025 12:06:10 +0200
+X-Gm-Features: AWmQ_bl8nxUgXJD0lSX83qHOD40I3jfRq9tRzIweC3gSzOvj0faPob85tgladu8
+Message-ID: <CAC_iWjL8zw-tfq_a4rLjC1-jigHd6g4FqOkgZJG-yD2UfCenVQ@mail.gmail.com>
+Subject: Re: [PATCH v3 0/6] Add support for SM3 secure hash
+To: Heiko Schocher <hs@nabladev.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Raymond Mao <raymondmaoca@gmail.com>, Sean Edmond <seanedmond@microsoft.com>, 
+ Simon Glass <sjg@chromium.org>, Stefan Roese <stefan.roese@mailbox.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ briansune <briansune@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 18 Nov 2025 14:14:53 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,32 +123,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Nov 18, 2025 at 01:36:48PM +0100, Francesco Dolcini wrote:
-> On Tue, Nov 18, 2025 at 01:30:52PM +0100, Ernest Van Hoecke wrote:
-> > From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
-> > 
-> > In TEZI (Toradex Easy Installer), we use one U-Boot binary for both our
-> > NAND and eMMC Colibri iMX7 modules. Currently, CONFIG_PREBOOT sets the
-> > environment variable 'fdtfile' depending on which defconfig was used,
-> > adding the '-emmc' variant for the emmc defconfig. Since we always build
-> > the TEZI recovery U-Boot with the standard (non-emmc) defconfig, fdtfile
-> > has to be overwritten later or it will be wrong there.
-> > 
-> > By using '$variant', the fdtfile var is properly constructed at run time
-> > for both the NAND and eMMC variants, and we do not have to worry about
-> > setting fdtfile again when building the recovery TEZI U-Boot.
-> > 
-> > This also synchronizes these configs with how we handle the iMX6ULL.
-> > 
-> > Fixes: 327381e8b57c ("colibri_imx7: use preboot for fdtfile evaluation")
-> > Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
-> 
-> Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+Hi Heiko,
 
-nack, I did a mistake.
+Thanks for the patience on this.
 
-There is an error in the patch, we need to keep the ${soc} variable to
-differentiate between imx7d and imx7s
+On Tue, 18 Nov 2025 at 06:31, Heiko Schocher <hs@nabladev.com> wrote:
+>
+>
+> Add SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and describ=
+ed
+> at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
+>
+> TPMv2 defines hash algo sm3_256, which is currently
+> not supported and prevented TPMv2 chip with newer
+> firmware to work with U-Boot. Seen this on a ST33TPHF2XI2C
+>
+>     u-boot=3D> tpm2 init
+>     u-boot=3D> tpm2 autostart
+>     tpm2_get_pcr_info: too many pcrs: 5
+>     Error: -90
+>     u-boot=3D>
+>
+> Implement sm3 hash, so we can fix this problem.
 
-Francesco
+Did you manage to boot linux as well with it? Are the SM3 measurements pres=
+ent?
 
+Thanks
+/Ilias
+>
+> Azure build:
+> https://dev.azure.com/hs0298/hs/_build/results?buildId=3D194&view=3Dresul=
+ts
+>
+> Changes in v3:
+> Added Reviewed-by from Ilias
+> rebased series to
+> commit: 69cc92d6869 ("Merge tag 'efi-2026-01-rc3' of https://source.denx.=
+de/u-boot/custodians/u-boot-efi")
+> add comments from Ilias
+> - use sizeof(*sctx) instead of sizeof(struct sm3_context)
+> - use output[] instead of output[SM3_DIGEST_SIZE] comment from Ilias
+>   This leaded to CI error:
+>   +lib/sm3.c:241:50: error: argument 2 of type =E2=80=98uint8_t[]=E2=80=
+=99 {aka =E2=80=98unsigned char[]=E2=80=99} with mismatched bound [-Werror=
+=3Darray-parameter=3D]
+>   +  241 | void sm3_final(struct sm3_context *sctx, uint8_t output[])
+>   +      |                                          ~~~~~~~~^~~~~~~~
+>   see:
+>   https://dev.azure.com/hs0298/hs/_build/results?buildId=3D192&view=3Dlog=
+s&j=3D182673a4-17b9-5c0c-69ad-98f742450579&t=3D34b689f8-3e29-5ffe-50ea-32bf=
+e99f47c7&l=3D334
+>   so made this change back to v2 state of the series, to have the same
+>   arguments as the other hashes in lib/
+> - seperate linux and U-Boot parts into 2 commits
+> New in version 3 as Ilias recommended to split linux
+> and U-boot changes.
+> use CMD_TEST instead of DM_TEST, as Heinrich confirmed
+> add comment from Ilias
+> - add SM3 support in tcg2_hash_pe_image()
+> Added Reviewed-by from Ilias
+>
+> Changes in v2:
+> rebase to
+> 6b27b688694: ("Merge branch 'master' of https://source.denx.de/u-boot/cus=
+todians/u-boot-sh")
+> add Ilias to Series-cc
+> add sm3_hash to header file, so we can use it.
+> add comments from Ilias
+> - use ARRAY_SIZE(hash_algo_list) instead of a fix number
+>   in tpm2_get_pcr_info() for the count of supported hashes
+>   in U-Boot.
+> - add SM3 hash in tpm_tcg2
+> Added Reviewed-by tag from Heinrich
+>
+> Heiko Schocher (6):
+>   lib: Import rol32 function from Linux
+>   lib: import sm3 256 hash parts from linux
+>   lib: sm3: implement U-Boot parts
+>   test: cmd: hash: add unit test for sm3_256
+>   tpm2: add sm3 256 hash support
+>   test: cmd: fix a typo in md5 test
+>
+>  MAINTAINERS               |   7 +
+>  boot/Kconfig              |   1 +
+>  cmd/Kconfig               |  15 ++
+>  cmd/Makefile              |   1 +
+>  cmd/sm3sum.c              |  48 ++++++
+>  cmd/tpm-v2.c              |   1 +
+>  common/hash.c             |  42 ++++-
+>  include/linux/bitops.h    |  11 ++
+>  include/tpm-v2.h          |  12 ++
+>  include/u-boot/sm3.h      |  35 +++++
+>  lib/Kconfig               |   7 +
+>  lib/Makefile              |   1 +
+>  lib/efi_loader/efi_tcg2.c |   3 +
+>  lib/sm3.c                 | 312 ++++++++++++++++++++++++++++++++++++++
+>  lib/tpm-v2.c              |   4 +-
+>  lib/tpm_tcg2.c            |   9 ++
+>  test/cmd/hash.c           |  49 +++++-
+>  17 files changed, 554 insertions(+), 4 deletions(-)
+>  create mode 100644 cmd/sm3sum.c
+>  create mode 100644 include/u-boot/sm3.h
+>  create mode 100644 lib/sm3.c
+>
+> --
+> 2.20.1
+>
+> base-commit: 69cc92d6869b8ff4591e5b8850872da34934bab9
