@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB32CE8D6B
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 00:57:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA0A9CE8D6B
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 01:05:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4686383C53;
-	Tue, 18 Nov 2025 01:57:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1D7AB83B99;
+	Tue, 18 Nov 2025 02:05:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C43AE83C5A; Tue, 18 Nov 2025 01:57:33 +0100 (CET)
+ id 8FFE283C16; Tue, 18 Nov 2025 02:05:38 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 949AF83AEF
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 01:57:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 3062C83B91
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 02:05:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 654BAFEC;
- Mon, 17 Nov 2025 16:57:22 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E4175FEC;
+ Mon, 17 Nov 2025 17:05:27 -0800 (PST)
 Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CB5CA3F66E;
- Mon, 17 Nov 2025 16:57:28 -0800 (PST)
-Date: Tue, 18 Nov 2025 00:57:21 +0000
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7E2633F66E;
+ Mon, 17 Nov 2025 17:05:34 -0800 (PST)
+Date: Tue, 18 Nov 2025 01:05:27 +0000
 From: Andre Przywara <andre.przywara@arm.com>
 To: Yixun Lan <dlan@gentoo.org>
 Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Tom Rini
  <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, Paul
  Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>
-Subject: Re: [PATCH 10/11] pmu: axp318w: implement pmic/regulator support
-Message-ID: <20251118005721.3fb65479@minigeek.lan>
-In-Reply-To: <20251116-01-a733-soc-support-v1-10-fb4c8db78e75@gentoo.org>
+Subject: Re: [PATCH 05/11] clock: a733: implement support for mmc/uart
+Message-ID: <20251118010527.5eaa302d@minigeek.lan>
+In-Reply-To: <20251116-01-a733-soc-support-v1-5-fb4c8db78e75@gentoo.org>
 References: <20251116-01-a733-soc-support-v1-0-fb4c8db78e75@gentoo.org>
- <20251116-01-a733-soc-support-v1-10-fb4c8db78e75@gentoo.org>
+ <20251116-01-a733-soc-support-v1-5-fb4c8db78e75@gentoo.org>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -58,177 +58,344 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 16 Nov 2025 14:44:01 +0000
+On Sun, 16 Nov 2025 14:43:56 +0000
 Yixun Lan <dlan@gentoo.org> wrote:
 
-> The PMIC is also known as AXP819 in vendor pmu code
-> 
-> For DCDC6, 8, 9, the underlying hardware support more than two levels
-> voltage step tuning, but for now only first two levels are implemented
-> in this driver, hence highest voltage will be limited at seccond level.
-> It actual meets board requirement in current design, and we've verified
-> it in Radxa Cubie A7A board.
-> 
-> Following are detail explanation of voltage tuning stpes for those DCDCs:
-> 
-> DCDC | voltage range  | units | steps | implemented
->  6   | 0.5   -  1.2   | 10 mV | 71    | Y
->  .   | 1.22  -  1.54  | 20 mV | 17    | Y
->  .   | 1.8   -  2.4   | 20 mV | 31    | N
->  .   | 2.44  -  2.76  | 40 mV | 9     | N
->  --------------------------------------------------
->  8/9 | 0.5   -  1.2   | 10 mV | 71    | Y
->  .   | 1.22  -  1.84  | 20 mV | 32    | Y
->  .   | 1.9   -  3.4   | 100mV | 16    | N
+Hi,
+
+> Add clock initialization support to set UART/I2C/MMC clock frequency.
 > 
 > Signed-off-by: Yixun Lan <dlan@gentoo.org>
-> ---
->  drivers/power/Kconfig                   | 10 +++++++
->  drivers/power/pmic/axp.c                |  1 +
->  drivers/power/regulator/axp_regulator.c | 50 +++++++++++++++++++++++++++++++++
->  include/axp_pmic.h                      |  1 +
->  4 files changed, 62 insertions(+)
 > 
-> diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
-> index d17337c0c3f..1b06d8a66c7 100644
-> --- a/drivers/power/Kconfig
-> +++ b/drivers/power/Kconfig
-> @@ -58,6 +58,7 @@ choice
->  	default AXP209_POWER if MACH_SUN4I || MACH_SUN5I || MACH_SUN7I
->  	default AXP221_POWER if MACH_SUN6I || MACH_SUN8I_A23 || MACH_SUN8I_A33 || MACH_SUN8I_R40
->  	default AXP818_POWER if MACH_SUN8I_A83T
-> +	default AXP318W_POWER if MACH_SUN60I_A733
->  	default SUNXI_NO_PMIC if MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_V3S
->  
->  config SUNXI_NO_PMIC
-> @@ -140,6 +141,14 @@ config AXP818_POWER
->  	Say y here to enable support for the axp818 pmic found on
->  	A83T dev board.
->  
-> +config AXP318W_POWER
-> +	bool "axp318w pmic support"
-> +	select AXP_PMIC_BUS
-> +	select CMD_POWEROFF
-> +	---help---
-> +	Select this to enable support for the AXP318W PMIC found on some
-> +	A733 boards.
-> +
->  config SY8106A_POWER
->  	bool "SY8106A pmic support"
->  	depends on MACH_SUNXI_H3_H5
-> @@ -154,6 +163,7 @@ config AXP_I2C_ADDRESS
->  	depends on ARCH_SUNXI && !SUNXI_NO_PMIC
->  	default 0x36 if AXP305_POWER
->  	default 0x36 if AXP313_POWER
-> +	default 0x36 if AXP318W_POWER
->  	default 0x30 if AXP152_POWER
->  	default 0x34
->  	---help---
+> ---
+> In this version, we create a dedicated clock_sun60i_a733.h file, maybe
+> we should further refactor the code to make it merged into exist
+> clock_sun50i_h6.h file.
+> ---
+>  arch/arm/include/asm/arch-sunxi/clock.h            |   2 +
+>  .../arm/include/asm/arch-sunxi/clock_sun60i_a733.h | 179 +++++++++++++++++++++
+>  arch/arm/include/asm/arch-sunxi/cpu.h              |   2 +
+>  arch/arm/mach-sunxi/Makefile                       |   1 +
+>  arch/arm/mach-sunxi/clock_sun60i_a733.c            |  80 +++++++++
+>  5 files changed, 264 insertions(+)
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/clock.h b/arch/arm/include/asm/arch-sunxi/clock.h
+> index fcc8966cb0b..105c3804102 100644
+> --- a/arch/arm/include/asm/arch-sunxi/clock.h
+> +++ b/arch/arm/include/asm/arch-sunxi/clock.h
+> @@ -19,6 +19,8 @@
+>  #include <asm/arch/clock_sun8i_a83t.h>
+>  #elif defined(CONFIG_SUN50I_GEN_H6) || defined(CONFIG_SUNXI_GEN_NCAT2)
+>  #include <asm/arch/clock_sun50i_h6.h>
+> +#elif defined(CONFIG_MACH_SUN60I_A733)
+> +#include <asm/arch/clock_sun60i_a733.h>
+>  #elif defined(CONFIG_MACH_SUN6I) || defined(CONFIG_MACH_SUN8I) || \
+>        defined(CONFIG_MACH_SUN50I) || defined(CONFIG_MACH_SUNIV)
+>  #include <asm/arch/clock_sun6i.h>
+> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun60i_a733.h b/arch/arm/include/asm/arch-sunxi/clock_sun60i_a733.h
+> new file mode 100644
+> index 00000000000..819a5c6cf8d
+> --- /dev/null
+> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun60i_a733.h
 
-So up until here the changes are for the SPL version of the AXP driver,
-though actually it wouldn't work, since there is no code built for the
-new symbol. You would need to add just the required DCDC regulators
-into axp_spl.c, and then add the new symbol to drivers/power/Makefile.
-Please do this (together with the changes above) in one patch.
+This new file looks like mostly a copy of clock_sun50i_h6.h. Can you
+please merge both, and define differently just the very few register
+offsets that actually differ? This includes clock_sun50i_h6.c and
+clock_sun60i_a733.c.
 
-
-The part below if for U-Boot proper, and looks superficially alright,
-but should be in a patch of its own.
-
-Thanks,
+Cheers,
 Andre
 
-> diff --git a/drivers/power/pmic/axp.c b/drivers/power/pmic/axp.c
-> index 1204ec00f8d..7d8348b0769 100644
-> --- a/drivers/power/pmic/axp.c
-> +++ b/drivers/power/pmic/axp.c
-> @@ -95,6 +95,7 @@ static const struct udevice_id axp_pmic_ids[] = {
->  	{ .compatible = "x-powers,axp806", .data = AXP806_ID },
->  	{ .compatible = "x-powers,axp809", .data = AXP809_ID },
->  	{ .compatible = "x-powers,axp813", .data = AXP813_ID },
-> +	{ .compatible = "x-powers,axp318w", .data = AXP318_ID },
->  	{ }
->  };
->  
-> diff --git a/drivers/power/regulator/axp_regulator.c b/drivers/power/regulator/axp_regulator.c
-> index 7794a4f5d92..34c575e16eb 100644
-> --- a/drivers/power/regulator/axp_regulator.c
-> +++ b/drivers/power/regulator/axp_regulator.c
-> @@ -189,6 +189,55 @@ static const struct axp_regulator_plat axp313_regulators[] = {
->  	{ }
->  };
->  
-> + /*
-> +  * Only two level step tuning is implemented for DCDC6, 8, 9
-> +  * so the voltage below is not support in this driver
-> +  * DCDC6:   20  (v1.8 - 2.4v), 40 (2.44v - 2.76v)
-> +  * DCDC8,9: 100 (1.9v - 3.4v)
-> +  */
-> +static const struct axp_regulator_plat axp318_regulators[] = {
-> +	{ "dcdc1", 0x10, BIT(0), 0x12, 0x1f,  1000, 3400,  100, 0 },
-> +	{ "dcdc2", 0x10, BIT(1), 0x13, 0x7f,  500, 1540,  10, 70 },
-> +	{ "dcdc3", 0x10, BIT(2), 0x14, 0x7f,  500, 1540,  10, 70 },
-> +	{ "dcdc4", 0x10, BIT(3), 0x15, 0x7f,  500, 1540,  10, 70 },
-> +	{ "dcdc5", 0x10, BIT(4), 0x16, 0x7f,  500, 1540,  10, 70 },
-> +	{ "dcdc6", 0x10, BIT(5), 0x17, 0x7f,  500, 1540,  10, 70 },
-> +	{ "dcdc7", 0x10, BIT(6), 0x18, 0x7f,  500, 1840,  10, 70 },
-> +	{ "dcdc8", 0x10, BIT(7), 0x19, 0x7f,  500, 1840,  10, 70 },
-> +	{ "dcdc9", 0x11, BIT(0), 0x1a, 0x7f,  500, 1840,  10, 70 },
-> +	{ "aldo1", 0x20, BIT(0), 0x24, 0x1f,  500, 3400, 100, NA },
-> +	{ "aldo2", 0x20, BIT(1), 0x25, 0x1f,  500, 3400, 100, NA },
-> +	{ "aldo3", 0x20, BIT(2), 0x26, 0x1f,  500, 3400, 100, NA },
-> +	{ "aldo4", 0x20, BIT(3), 0x27, 0x1f,  500, 3400, 100, NA },
-> +	{ "aldo5", 0x20, BIT(4), 0x28, 0x1f,  500, 3400, 100, NA },
-> +	{ "aldo6", 0x20, BIT(5), 0x29, 0x1f,  500, 3400, 100, NA },
-> +	{ "bldo1", 0x20, BIT(6), 0x2a, 0x1f,  500, 3400, 100, NA },
-> +	{ "bldo2", 0x20, BIT(7), 0x2b, 0x1f,  500, 3400, 100, NA },
-> +	{ "bldo3", 0x21, BIT(0), 0x2c, 0x1f,  500, 3400, 100, NA },
-> +	{ "bldo4", 0x21, BIT(1), 0x2d, 0x1f,  500, 3400, 100, NA },
-> +	{ "bldo5", 0x21, BIT(2), 0x2e, 0x1f,  500, 3400, 100, NA },
-> +	{ "cldo1", 0x21, BIT(3), 0x2f, 0x1f,  500, 3400, 100, NA },
-> +	{ "cldo2", 0x21, BIT(4), 0x30, 0x1f,  500, 3400, 100, NA },
-> +	{ "cldo3", 0x21, BIT(5), 0x31, 0x1f,  500, 3400, 100, NA },
-> +	{ "cldo4", 0x21, BIT(6), 0x32, 0x1f,  500, 3400, 100, NA },
-> +	{ "cldo5", 0x21, BIT(7), 0x33, 0x1f,  500, 3400, 100, NA },
-> +	{ "dldo1", 0x22, BIT(0), 0x34, 0x1f,  500, 3400, 100, NA },
-> +	{ "dldo2", 0x22, BIT(1), 0x35, 0x1f,  500, 3400, 100, NA },
-> +	{ "dldo3", 0x22, BIT(2), 0x36, 0x1f,  500, 3400, 100, NA },
-> +	{ "dldo4", 0x22, BIT(3), 0x37, 0x1f,  500, 3400, 100, NA },
-> +	{ "dldo5", 0x22, BIT(4), 0x38, 0x1f,  500, 3400, 100, NA },
-> +	{ "dldo6", 0x22, BIT(5), 0x39, 0x1f,  500, 3400, 100, NA },
-> +	{ "eldo1", 0x22, BIT(6), 0x3a, 0x1f,  500, 1500, 25, NA },
-> +	{ "eldo2", 0x22, BIT(7), 0x3b, 0x1f,  500, 1500, 25, NA },
-> +	{ "eldo3", 0x23, BIT(0), 0x3c, 0x1f,  500, 1500, 25, NA },
-> +	{ "eldo4", 0x23, BIT(1), 0x3d, 0x1f,  500, 1500, 25, NA },
-> +	{ "eldo5", 0x23, BIT(2), 0x3e, 0x1f,  500, 1500, 25, NA },
-> +	{ "eldo6", 0x23, BIT(3), 0x3f, 0x1f,  500, 1500, 25, NA },
-> +	{ "dc1sw1", 0x11, BIT(3),  NA,   NA,   NA,   NA, NA, NA },
-> +	{ "dc1sw2", 0x11, BIT(4),  NA,   NA,   NA,   NA, NA, NA },
-> +	{ }
-> +};
+> @@ -0,0 +1,179 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Allwinner A733 clock register definitions
+> + */
 > +
->  /*
->   * The "dcdc2" regulator has another range, beyond 1.54V up to 3.4V, in
->   * steps of 100mV. We cannot model this easily, but also don't need that,
-> @@ -318,6 +367,7 @@ static const struct axp_regulator_plat *const axp_regulators[] = {
->  	[AXP221_ID]	= axp22x_regulators,
->  	[AXP223_ID]	= axp22x_regulators,
->  	[AXP313_ID]	= axp313_regulators,
-> +	[AXP318_ID]	= axp318_regulators,
->  	[AXP323_ID]	= axp313_regulators,
->  	[AXP717_ID]	= axp717_regulators,
->  	[AXP803_ID]	= axp803_regulators,
-> diff --git a/include/axp_pmic.h b/include/axp_pmic.h
-> index 1806a7270a0..2f547da74c2 100644
-> --- a/include/axp_pmic.h
-> +++ b/include/axp_pmic.h
-> @@ -39,6 +39,7 @@ enum {
->  	AXP806_ID,
->  	AXP809_ID,
->  	AXP813_ID,
-> +	AXP318_ID,
->  };
->  
->  int axp_set_dcdc1(unsigned int mvolt);
+> +#ifndef _SUNXI_CLOCK_SUN60I_A733_H
+> +#define _SUNXI_CLOCK_SUN60I_A733_H
+> +
+> +#ifndef __ASSEMBLY__
+> +#include <linux/bitops.h>
+> +#endif
+> +
+> +/* Main CCU register offsets */
+> +#define CCU_H6_PLL1_CFG			0x000
+> +#define CCU_H6_PLL5_CFG			0x010
+> +#define CCU_H6_PLL6_CFG			0x0a0 /* PLL_PERI0_CTRL_REG */
+> +
+> +#define CCU_H6_CPU_AXI_CFG		0x500
+> +#define CCU_H6_PSI_AHB1_AHB2_CFG	0x510
+> +#define CCU_H6_AHB3_CFG			0x51c
+> +#define CCU_H6_APB1_CFG			0x520
+> +#define CCU_H6_APB2_CFG			0x524
+> +#define CCU_H6_MBUS_CFG			0x540
+> +#define CCU_H6_DRAM_CLK_CFG		0x800
+> +#define CCU_H6_DRAM_GATE_RESET		0x80c
+> +#define CCU_MMC0_CLK_CFG		0x830
+> +#define CCU_MMC1_CLK_CFG		0x834
+> +#define CCU_MMC2_CLK_CFG		0x838
+> +#define CCU_H6_MMC_GATE_RESET		0x84c
+> +#define CCU_H6_UART_GATE_RESET		0x90c
+> +#define CCU_H6_I2C_GATE_RESET		0x91c
+> +
+> +/* A523 CPU PLL offsets */
+> +#define CPC_CPUA_PLL_CTRL		0x04
+> +#define CPC_DSU_PLL_CTRL		0x08
+> +#define CPC_CPUB_PLL_CTRL		0x0c
+> +#define CPC_CPUA_CLK_REG		0x60
+> +#define CPC_CPUB_CLK_REG		0x64
+> +#define CPC_DSU_CLK_REG			0x6c
+> +
+> +/* A733 MISC offsets */
+> +#define CCU_A733_APB0_CFG			0x510
+> +#define CCU_A733_APB1_CFG			0x518
+> +#define CCU_A733_APB_UART_CLK_CFG	0x538
+> +#define CCU_A733_UART_GATE_RESET	0xe00
+> +
+> +/* PLL bit fields */
+> +#define CCM_PLL_CTRL_EN			BIT(31)
+> +#define CCM_PLL_LDO_EN			BIT(30)
+> +#define CCM_PLL_LOCK_EN			BIT(29)
+> +#define CCM_PLL_LOCK			BIT(28)
+> +#define CCM_PLL_OUT_EN			BIT(27)
+> +#define CCM_PLL1_UPDATE			BIT(26)
+> +#define CCM_PLL1_CTRL_P(p)		((p) << 16)
+> +#define CCM_PLL1_CTRL_N_MASK		GENMASK(15, 8)
+> +#define CCM_PLL1_CTRL_N(n)		(((n) - 1) << 8)
+> +
+> +/* A523 CPU clock fields */
+> +#define CPU_CLK_SRC_HOSC		(0 << 24)
+> +#define CPU_CLK_SRC_CPUPLL		(3 << 24)
+> +#define CPU_CLK_CTRL_P(p)		((p) << 16)
+> +#define CPU_CLK_APB_DIV(n)		(((n) - 1) << 8)
+> +#define CPU_CLK_PERI_DIV(m1)		(((m1) - 1) << 2)
+> +#define CPU_CLK_AXI_DIV(m)		(((m) - 1) << 0)
+> +
+> +/* pll5 bit field */
+> +#define CCM_PLL5_CTRL_N(n)		(((n) - 1) << 8)
+> +#define CCM_PLL5_CTRL_DIV1(div1)	((div1) << 0)
+> +#define CCM_PLL5_CTRL_DIV2(div0)	((div0) << 1)
+> +
+> +/* pll6 bit field */
+> +#define CCM_PLL6_CTRL_P0_SHIFT		20
+> +#define CCM_PLL6_CTRL_P0_MASK		(0x7 << CCM_PLL6_CTRL_P0_SHIFT)
+> +#define CCM_PLL6_CTRL_N_SHIFT		8
+> +#define CCM_PLL6_CTRL_N_MASK		(0xff << CCM_PLL6_CTRL_N_SHIFT)
+> +#define CCM_PLL6_CTRL_DIV1_SHIFT	0
+> +#define CCM_PLL6_CTRL_DIV1_MASK		(0x1 << CCM_PLL6_CTRL_DIV1_SHIFT)
+> +#define CCM_PLL6_CTRL_DIV2_SHIFT	1
+> +#define CCM_PLL6_CTRL_DIV2_MASK		(0x1 << CCM_PLL6_CTRL_DIV2_SHIFT)
+> +
+> +/* cpu_axi bit field*/
+> +#define CCM_CPU_AXI_MUX_MASK		(0x3 << 24)
+> +#define CCM_CPU_AXI_MUX_OSC24M		(0x0 << 24)
+> +#define CCM_CPU_AXI_MUX_PLL_CPUX	(0x3 << 24)
+> +#define CCM_CPU_AXI_APB_MASK		0x300
+> +#define CCM_CPU_AXI_AXI_MASK		0x3
+> +#define CCM_CPU_AXI_DEFAULT_FACTORS	0x301
+> +
+> +#ifdef CONFIG_MACH_SUN50I_H6				/* H6 */
+> +
+> +#define CCM_PLL6_DEFAULT		0xa0006300
+> +#define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000102
+> +#define CCM_AHB3_DEFAULT		0x03000002
+> +#define CCM_APB1_DEFAULT		0x03000102
+> +
+> +#elif CONFIG_MACH_SUN50I_H616				/* H616 */
+> +
+> +#define CCM_PLL6_DEFAULT		0xa8003100
+> +#define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000002
+> +#define CCM_AHB3_DEFAULT		0x03000002
+> +#define CCM_APB1_DEFAULT		0x03000102
+> +
+> +#elif CONFIG_MACH_SUN8I_R528				/* R528 */
+> +
+> +#define CCM_PLL6_DEFAULT		0xe8216300
+> +#define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000002
+> +#define CCM_APB1_DEFAULT		0x03000102
+> +
+> +#elif CONFIG_MACH_SUN55I_A523				/* A523 */
+> +
+> +#define CCM_PLL6_DEFAULT		0xe8116310	    /* 1200 MHz */
+> +#define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000002	    /* 200 MHz */
+> +#define CCM_APB1_DEFAULT		0x03000005	    /* APB0 really */
+> +#define CCM_APB2_DEFAULT		0x03000005	    /* APB1 really */
+> +
+> +#elif CONFIG_MACH_SUN60I_A733				/* A733 */
+> +
+> +#define CCM_PLL6_DEFAULT		0xe8116310	    /* 1200 MHz */
+> +#define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000002	    /* 200 MHz */
+> +#define CCM_APB1_DEFAULT		0x03000005	    /* APB0 really */
+> +#define CCM_APB2_DEFAULT		0x03000005	    /* APB1 really */
+> +
+> +#endif
+> +
+> +/* apb2 bit field */
+> +#define APB2_CLK_SRC_OSC24M		(0x0 << 24)
+> +#define APB2_CLK_SRC_OSC32K		(0x1 << 24)
+> +#define APB2_CLK_SRC_PSI		(0x2 << 24)
+> +#define APB2_CLK_SRC_PLL6		(0x3 << 24)
+> +#define APB2_CLK_SRC_MASK		(0x3 << 24)
+> +#define APB2_CLK_RATE_N_1		(0x0 << 8)
+> +#define APB2_CLK_RATE_N_2		(0x1 << 8)
+> +#define APB2_CLK_RATE_N_4		(0x2 << 8)
+> +#define APB2_CLK_RATE_N_8		(0x3 << 8)
+> +#define APB2_CLK_RATE_N_MASK		(3 << 8)
+> +#define APB2_CLK_RATE_M(m)		(((m) - 1) << 0)
+> +#define APB2_CLK_RATE_M_MASK            (3 << 0)
+> +
+> +/* MBUS clock bit field */
+> +#define MBUS_ENABLE			BIT(31)
+> +#define MBUS_RESET			BIT(30)
+> +#define MBUS_UPDATE			BIT(27)
+> +#define MBUS_CLK_SRC_MASK		GENMASK(25, 24)
+> +#define MBUS_CLK_SRC_OSCM24		(0 << 24)
+> +#define MBUS_CLK_SRC_PLL6X2		(1 << 24)
+> +#define MBUS_CLK_SRC_PLL5		(2 << 24)
+> +#define MBUS_CLK_SRC_PLL6X4		(3 << 24)
+> +#define MBUS_CLK_M(m)			(((m) - 1) << 0)
+> +
+> +/* Module gate/reset shift*/
+> +#define RESET_SHIFT			(16)
+> +#define GATE_SHIFT			(0)
+> +
+> +/* DRAM clock bit field */
+> +#define DRAM_CLK_ENABLE			BIT(31)
+> +#define DRAM_MOD_RESET			BIT(30)
+> +#define DRAM_CLK_UPDATE			BIT(27)
+> +#define DRAM_CLK_SRC_MASK		GENMASK(25, 24)
+> +#define DRAM_CLK_SRC_PLL5		(0 << 24)
+> +#define DRAM_CLK_M_MASK			(0x1f)
+> +#define DRAM_CLK_M(m)			(((m) - 1) << 0)
+> +
+> +/* MMC clock bit field */
+> +#define CCM_MMC_CTRL_M(x)		((x) - 1)
+> +#define CCM_MMC_CTRL_N(x)		((x) << 8)
+> +#define CCM_MMC_CTRL_OSCM24		(0x0 << 24)
+> +#define CCM_MMC_CTRL_PLL6		(0x1 << 24)
+> +#define CCM_MMC_CTRL_PLL_PERIPH2X2	(0x2 << 24)
+> +#define CCM_MMC_CTRL_ENABLE		(0x1 << 31)
+> +/* H6 doesn't have these delays */
+> +#define CCM_MMC_CTRL_OCLK_DLY(a)	((void)(a), 0)
+> +#define CCM_MMC_CTRL_SCLK_DLY(a)	((void)(a), 0)
+> +
+> +#ifndef __ASSEMBLY__
+> +void clock_set_pll1(unsigned int hz);
+> +unsigned int clock_get_pll6(void);
+> +#endif
+> +
+> +#endif /* _SUNXI_CLOCK_SUN60I_A733_H */
+> diff --git a/arch/arm/include/asm/arch-sunxi/cpu.h b/arch/arm/include/asm/arch-sunxi/cpu.h
+> index 768c6572d6b..3fd247e75a7 100644
+> --- a/arch/arm/include/asm/arch-sunxi/cpu.h
+> +++ b/arch/arm/include/asm/arch-sunxi/cpu.h
+> @@ -12,6 +12,8 @@
+>  #include <asm/arch/cpu_sun50i_h6.h>
+>  #elif defined(CONFIG_SUNXI_GEN_NCAT2)
+>  #include <asm/arch/cpu_sunxi_ncat2.h>
+> +#elif defined(CONFIG_MACH_SUN60I_A733)
+> +#include <asm/arch/cpu_sunxi_a733.h>
+>  #else
+>  #include <asm/arch/cpu_sun4i.h>
+>  #endif
+> diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
+> index 9c79b55abf3..8e37e3315ca 100644
+> --- a/arch/arm/mach-sunxi/Makefile
+> +++ b/arch/arm/mach-sunxi/Makefile
+> @@ -25,6 +25,7 @@ endif
+>  obj-$(CONFIG_MACH_SUN9I)	+= clock_sun9i.o gtbus_sun9i.o
+>  obj-$(CONFIG_SUN50I_GEN_H6)	+= clock_sun50i_h6.o
+>  obj-$(CONFIG_SUNXI_GEN_NCAT2)	+= clock_sun50i_h6.o
+> +obj-$(CONFIG_MACH_SUN60I_A733)	+= clock_sun60i_a733.o
+>  ifndef CONFIG_ARM64
+>  obj-y	+= timer.o
+>  endif
+> diff --git a/arch/arm/mach-sunxi/clock_sun60i_a733.c b/arch/arm/mach-sunxi/clock_sun60i_a733.c
+> new file mode 100644
+> index 00000000000..9e07ccefc32
+> --- /dev/null
+> +++ b/arch/arm/mach-sunxi/clock_sun60i_a733.c
+> @@ -0,0 +1,80 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +#include <asm/io.h>
+> +#include <asm/arch/cpu.h>
+> +#include <asm/arch/clock.h>
+> +#include <asm/arch/prcm.h>
+> +#include <linux/delay.h>
+> +
+> +#ifndef SUNXI_CPU_PLL_CFG_BASE
+> +#define SUNXI_CPU_PLL_CFG_BASE 0
+> +#endif
+> +
+> +#ifdef CONFIG_XPL_BUILD
+> +void clock_init_safe(void)
+> +{
+> +}
+> +
+> +void clock_init_uart(void)
+> +{
+> +	void *const ccm = (void *)SUNXI_CCM_BASE;
+> +
+> +	/* uart clock source is apb2 */
+> +	writel(APB2_CLK_SRC_OSC24M |
+> +	       APB2_CLK_RATE_N_1 |
+> +	       APB2_CLK_RATE_M(1),
+> +	       ccm + CCU_A733_APB1_CFG);
+> +
+> +	/* uart clock source */
+> +	writel(APB2_CLK_SRC_OSC24M |
+> +	       APB2_CLK_RATE_N_1 |
+> +	       APB2_CLK_RATE_M(1),
+> +	       ccm + CCU_A733_APB_UART_CLK_CFG);
+> +
+> +	/* open the clock for uart */
+> +	setbits_le32(ccm + CCU_A733_UART_GATE_RESET,
+> +		     1 << (CONFIG_CONS_INDEX - 1));
+> +
+> +	/* deassert uart reset */
+> +	setbits_le32(ccm + CCU_A733_UART_GATE_RESET,
+> +		     1 << (RESET_SHIFT + CONFIG_CONS_INDEX - 1));
+> +}
+> +
+> +void clock_set_pll1(unsigned int clk)
+> +{
+> +	/* Do not support clocks < 288MHz as they need factor P */
+> +	if (clk < 288000000)
+> +		clk = 288000000;
+> +
+> +	clk /= 24000000;
+> +}
+> +
+> +int clock_twi_onoff(int port, int state)
+> +{
+> +	return 0;
+> +}
+> +#endif /* CONFIG_XPL_BUILD */
+> +
+> +/* PLL_PERIPH0 clock, used by the MMC driver */
+> +unsigned int clock_get_pll6(void)
+> +{
+> +	void *const ccm = (void *)SUNXI_CCM_BASE;
+> +	u32 rval = readl(ccm + CCU_H6_PLL6_CFG);
+> +	int n = ((rval & CCM_PLL6_CTRL_N_MASK) >> CCM_PLL6_CTRL_N_SHIFT) + 1;
+> +	int div1, m;
+> +
+> +	if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2) || IS_ENABLED(CONFIG_MACH_SUN60I_A733)) {
+> +		div1 = ((rval & CCM_PLL6_CTRL_P0_MASK) >>
+> +			CCM_PLL6_CTRL_P0_SHIFT) + 1;
+> +		m = ((rval >> 1) & 1) + 1;
+> +	} else {
+> +		div1 = ((rval & CCM_PLL6_CTRL_DIV1_MASK) >>
+> +			CCM_PLL6_CTRL_DIV1_SHIFT) + 1;
+> +		if (IS_ENABLED(CONFIG_MACH_SUN50I_H6))
+> +			m = 4;
+> +		else
+> +			m = 2;
+> +	}
+> +
+> +	return 24000000U * n / m / div1;
+> +}
 > 
 
