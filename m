@@ -4,130 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8124CCD19A
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 08:32:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8653CED26E
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 10:29:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75A2B83EDC;
-	Tue, 18 Nov 2025 09:30:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0AE2783C96;
+	Tue, 18 Nov 2025 11:29:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TVS8qZIj";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="Og1X1gbz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4053B83CB9; Tue, 18 Nov 2025 09:28:32 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7D29683C98; Tue, 18 Nov 2025 11:29:23 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5127D83C65
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 09:28:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D84BD83C65
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 11:29:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-477563e28a3so35249295e9.1
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 00:28:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763454510; x=1764059310; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DQYMpLJKpBAe6nQG3hwPJMRE58tBlJCweot7OWVwp1w=;
- b=TVS8qZIjiLxV7+h2EF0cUdCYURj0B7xx+pTTFO9mOOeLWDj6KO8feSEiFbsFHLXSRC
- zYXZqJS1VFvdXMxURLtDPG50MmNM2nLNmt1X1egGuifLDULcT32auDlazzqaaphF7Clr
- ZrgD1iFi1GjRspRrjyqoyQp3Go2pDPojMjbM4mo8c3Af/toMWIQEaXsG/1oLEQl24KhA
- 3WjuaPGWu+8S62D8HZkXdl8on4P9aP6PontZ8aGbyOVtws6iUtbrQXu/ZyVhKXtdp1Oz
- MPqPHdlLVYwiG4jrMPFouEWxcFgD9X4ip5Bigv5Rbx/pQqDLcOVVBhFurzjDxv96plZT
- gOFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763454510; x=1764059310;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=DQYMpLJKpBAe6nQG3hwPJMRE58tBlJCweot7OWVwp1w=;
- b=Fq6TBI4soHMa00O/I2jP9z6g8yWg/aLbgyL2hcJyvuT6DMN1QWhxqg5Ae+EGPB22gI
- OPiX0xK3eN9m1QDUq5DsycJCSvMNfAqjOPH/SVFjI4kWgACLopDEpS90DcuE8Kb9FSJJ
- s+xga4EGR4yE63ZjDatGE/phiYIJ6+OJtSeCAldeXJbXXlEunBRbHSrQvoNht931OkUK
- p9/ePwMM9iwTBOVFaF51D6sQl6Bqs2QhcdxNLua1bZdrPdO2ykLUUJ+5QBtacV4t+Hhf
- IagSkI4fvebNpOXMAgHr4T1Yvbc75xgyFAWwosF0VcQyvOAwqJnCt8ZsTrdfNkVzGWn3
- OpQg==
-X-Gm-Message-State: AOJu0Yz7buaiKQlM6YPe1OrANdcYJW0kDqXGET+OWqp3NZIUDEFoZPrI
- BBZtA9wGWXTL/EcTQUaWNwsj8WdMV0aerHRyLyd2bJ7W78P/JLDse5imoblGT8NRMrE=
-X-Gm-Gg: ASbGnct7XrdG0cBgtpbEvrt3iSqi4nn8YCRy7LymWbtJoupBFdDkMZua/vLjKeG9fRr
- /c+dEgpN+0bqQT4+1q1ZuQ5XJnUBoyMIHv7SS+6qKXxjEKA0o+W8XQZ5Oua1MIEkSCcVhVFXGOH
- bFoUeFevp+MRTUelqqLslMKI9bxwxCqhvGBLN9MQF9lNpNxZbqqBR32OB2ynfi5M6r5GnzrG+gU
- C6HFANovIKnS8Cixd1AuNO/RugUaIVLWUXEF150USJEn1t1iT2KUvOyp9NpLxaf5AQiKS28Ki55
- lQ7IkWwcs1zefiIVJtNu07UuQe7ykB/XLzM3IvILWdwpJxbk525bk6wR/MO4afiH+gZpAlrGwHc
- RvRoPBpvl4MXCS8RmvQ/lprua8sEFJsFRMriLAXOSqYtZ1WkVdJen9L2UX93FZreFc6LuxYXPDk
- 0WcnBHL0Ydd0Y0Vr3pBrz5Qv41gUUivurLDja1Q0mDTw==
-X-Google-Smtp-Source: AGHT+IH+VgBUpFj4KhrW2jb2F4ABSIPuE2R/enYuq+0GRtUU7vN3CTmI2WBbU3U8EhNmvXNAoex1NQ==
-X-Received: by 2002:a05:600c:3587:b0:45d:5c71:769d with SMTP id
- 5b1f17b1804b1-477a94b3961mr22438715e9.8.1763454509364; 
- Tue, 18 Nov 2025 00:28:29 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-477a7cb24dfsm72698875e9.14.2025.11.18.00.28.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 00:28:28 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 18 Nov 2025 09:28:17 +0100
-Subject: [PATCH v4 7/7] qcom_defconfig: enable interconnect for SM8650
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 8237825F3A;
+ Tue, 18 Nov 2025 11:29:20 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ioxSg3n7kF3b; Tue, 18 Nov 2025 11:29:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1763461759; bh=pGwqmuBn+yJW0c8P1bkgtP9sXXFCr6YDRxs5xCciZpQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=Og1X1gbzStMGYx0gDOiKOTIop1QxBe9HAXZyH4ClkI0LTCaerhPDcQfI7UAVgRHqC
+ KNVxBxeRnPjDFsmRp+BcT1/Fe1MuJE+Up30iLbY1Wx6OrqXHRm48xu5OA7x+eJS78O
+ MlUssQ773Gqts0AJBxj684wbtffzBt7i7tMmFIIEeHbtSvHJEc0aBJliGTLG8v4Rm1
+ UKShmCIOwCRT9l7/Rc82+oqIJAFnO7obWF3Rwu+i1UXOAARQGm8bHVvU8VhXNiOuAy
+ Kq3wf1zNgQlfvR32Wv7VVTykBWf9MssqNt1LRww3WWBEmLS9Eqw9DAALXyOA4TwDCw
+ LM5PXxhb7Azkw==
+Date: Tue, 18 Nov 2025 10:29:06 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, E Shattow <e@freeshell.de>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>,
+ Leo Liang <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v2] doc: board: starfive: update jh7110 common description
+Message-ID: <aRxKcvcc2IP-2dfw@pie>
+References: <20251117233603.15409-1-e@freeshell.de>
+ <24B5D5B7-0D3F-4091-82B8-A5E2328DE59F@gmx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251118-topic-interconnect-next-v4-7-9c00d6b19add@linaro.org>
-References: <20251118-topic-interconnect-next-v4-0-9c00d6b19add@linaro.org>
-In-Reply-To: <20251118-topic-interconnect-next-v4-0-9c00d6b19add@linaro.org>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Hrushikesh Salunke <h-salunke@ti.com>, Anurag Dutta <a-dutta@ti.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Mario Six <mario.six@gdsys.cc>, Christian Marangi <ansuelsmth@gmail.com>, 
- Heiko Schocher <hs@nabladev.com>, 
- Guillaume La Roque <glaroque@baylibre.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Peng Fan <peng.fan@nxp.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Pieter Van Trappen <pieter.van.trappen@cern.ch>, 
- Alexander Graf <agraf@csgraf.de>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <ravi@prevas.dk>, Greg Malysa <malysagreg@gmail.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, Sam Day <me@samcday.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=617;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=l1OaNqfAmhRIe48N3BIxIps8arKvVqV7RbWbaTnuCcw=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBpHC4gQU3v4aMAkl6n74OY6+yL3KGPzr5jjBI1mSZC
- jE1FI3qJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaRwuIAAKCRB33NvayMhJ0U1eEA
- CRJ0TqTNMIhYp5HLmCz4ltyFb0RFad4y2BsMSk+GtuN08ciB7l2eyftN4+hajJVkDGRQu1cAAZsmc+
- t0cTaUa66/0/t1OFKhG8fufv/Vj6ymMey0opX03xYBcdH68LTynZktd7KUheTirLNMrm2GMdt/IXhO
- 5qxFnVGfhtlMe2xKorwkBRuO9iO6jNydIyguvL/DCY0LBdK2sFrbDzGZddufA4BeWdcyLlxAjeU5Ab
- +Zcn0pMsTuduei4wFysfvdLsuWdVgJMJwUVOvqXBwsQZvBiSiXEszI8uusO3gurv/8yaQSn4aoS0C8
- /xiH+9ggFnQfAPzS6A0AwK4TuOU7n5yX90T8kL+sLEL7W8B5aqbj3Diyt9KtUsSxRgeZkz1WA23Vhw
- CMyWPtDq1z0NpVrcQFuXx44db1dC2zZbaL9hOvwBDBQMG7Zq6bFdYa4ZKtaQgFleSiE+FOVcQfNO44
- q3dj9vL6zZt1lOrTY0MHEuC1vcNeOgefkbDqcq46MNUsHwmWRd2/2CiWxNZHSZurdKSCghTVIs8HUM
- iq4Rv5kRBaQUZ9yrocLn+pvE8kncGtzPzSBc5p6px4pcZQvyf7hOHrT7LVns0O5zFxJQPC9bhS0Asw
- 9MY0FRBxnQfuuBX5iDjgRvA8BWftV/ggWwyIv+/fvIp3H0BpCLyLU54KKFGw==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
-X-Mailman-Approved-At: Tue, 18 Nov 2025 09:30:32 +0100
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <24B5D5B7-0D3F-4091-82B8-A5E2328DE59F@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,28 +71,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the Interconnect drivers for SM8650
+On Tue, Nov 18, 2025 at 08:08:12AM +0100, Heinrich Schuchardt wrote:
+> Am 18. November 2025 00:35:51 MEZ schrieb E Shattow <e@freeshell.de>:
+> >Updates to the JH7110 common description:
+> >- add detailed overview of JH-7110 SoC and boot process
+> >- revise descriptions of deprecated StarFive loader modes
+> >- refresh build directions grouped with SPL debug advice
+> >- reduce usage instructions into common methods shared by supported boards
+> >- cite starfive_visionfive2 board maintainer description of StarFive loader
+> >- cite published datasheets for ambient operating temperature data
+> >
+> >Redundant/deprecated sections of each board doc are dropped accordingly:
+> >- deepcomputing fml13v01
+> >- milk-v mars
+> >- pine64 star64 (also add inclusion of JH7110 common description)
+> >- visionfive2
+> >
+> >Signed-off-by: E Shattow <e@freeshell.de>
+> >---
+> >Changes since v1:
+> >
+> >By popular request I have expanded on the topic of deprecated boot modes.
+> >For those users that rely on this it is now more descriptive about
+> >factors contributing to the feature deprecation and naming the U-Boot
+> >release version when this change is in effect. Re-introducing these modes
+> >is out of scope for this documentation series, however.
+> >
+> >- reST needs a space between numeric and the substitution
+> >- add comment identifying where U-Boot SPL again reads state of [RGPIO1:RGPIO0]
+> >  useful to refer to for boards with button+transistors instead of MSEL DIP
+> >- cite reference to JH-7110 Boot User Guide BootROM description of StarFive loader
+> >- expand on topic of supported and deprecated U-Boot SPL boot modes
+> >- cite from published datasheets for ambient operating temperature data
+> >- drop not-yet-published OpenSBI version recommendation
+> >---
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- configs/qcom_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+...
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index e686ea857b9..a56e1282821 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -87,6 +87,9 @@ CONFIG_SYS_I2C_GENI=y
- CONFIG_I2C_MUX=y
- CONFIG_DM_KEYBOARD=y
- CONFIG_BUTTON_KEYBOARD=y
-+CONFIG_INTERCONNECT=y
-+CONFIG_INTERCONNECT_QCOM_RPMH=y
-+CONFIG_INTERCONNECT_QCOM_SM8650=y
- CONFIG_IOMMU=y
- CONFIG_QCOM_HYP_SMMU=y
- CONFIG_MISC=y
+> >diff --git a/doc/board/starfive/jh7110_common.rst b/doc/board/starfive/jh7110_common.rst
+> >index 4a8058ee5da..2f049b4c327 100644
+> >--- a/doc/board/starfive/jh7110_common.rst
+> >+++ b/doc/board/starfive/jh7110_common.rst
+> >@@ -1,103 +1,560 @@
 
--- 
-2.34.1
+...
 
+> >+There are additional unexplained GUID references in the JH-7110 MaskROM so the
+> >+description given is not complete. Attribution and modifications to the GPL2.0+
+> >+source code used in StarFive loader have not been published as of this writing.
+> >+Due to the lack of verifiable documentation the upstream Linux devicetree does
+> >+not contain hints for mmc0 and mmc1 interfaces to be included in U-Boot SPL. As
+> >+of U-Boot release v2025.10 and newer the U-Boot specific devicetree override of
+> >+hints for mmc0 and mmc1 interfaces that are required for the deprecated modes
+> >+have been dropped marking the deprecation of these boot modes in U-Boot.
+> 
+> Do you mean upstream  U-Boot will fail to boot from SD-card, which is the Ubuntu default?
+> 
+> This would need to be fixed urgently. 
+
+U-Boot master has failed to boot from SD-Card on VisionFive 2 for some
+time, see my previous report[1] in Octorber.
+
+Best regards,
+Yao Zi
+
+[1]: https://lore.kernel.org/u-boot/aPYUlyni65Ux8xpq@pie/
