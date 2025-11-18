@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7402CEE347
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 18:05:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65EBACEE348
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 18:05:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 803D983F24;
-	Tue, 18 Nov 2025 19:04:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BAAA683F37;
+	Tue, 18 Nov 2025 19:04:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JZeGbIPb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gapy0wc1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15C4D83EDF; Tue, 18 Nov 2025 19:04:06 +0100 (CET)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id E3E7983F37; Tue, 18 Nov 2025 19:04:07 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1DFE83E92
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 19:04:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9B1E83E96
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 19:04:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-3e80c483a13so3176571fac.2
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 10:04:03 -0800 (PST)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c730af8d69so3396474a34.1
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 10:04:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763489043; x=1764093843; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763489044; x=1764093844; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=P7s44kHKmIlntivDxvhz7vcrlh0gPmnTA2/PydaDti4=;
- b=JZeGbIPbONEw+5RT2qaF8di3Qpr/lT2uO9rtrj4TeC9MyQ8DW4ZqoUEXOrzcpO/x+e
- bgDDehET+Hs/a5HOdA7JZRkvHFUX5tdYd8mINN4LhZbLi6d95ewgTmt/Db+WFp3/prKE
- 7iz1kWSzVkK8UhJLmloYC9H7dNzsoEHgLRSfY=
+ bh=ITfEYwrNmnLLAAvzyVK2uxCDgfLmjR4KyuvOd3b+VxU=;
+ b=Gapy0wc14Ltvq4Gw7k+sqyTmfzhmUvPm5r4p/l7M+g+HC3sPIV+uGNqEDBfXWBNyYS
+ 8NvetNMzYIQxWmeoJEHQuG2lmPdgc1dHKPzM1U3tU20dapeVoJthv2USuDcPcE+TP4zm
+ oxTQJXp6OjCzWZFXryUvEhRMjfgwSpPob1/gg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763489043; x=1764093843;
+ d=1e100.net; s=20230601; t=1763489044; x=1764093844;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P7s44kHKmIlntivDxvhz7vcrlh0gPmnTA2/PydaDti4=;
- b=p/JMvHK+bUDcHzCSfix8ah7qwrIRLVGXyojH9O2U6WFa6f1SN9a7KmH/SPArCK/d4r
- En0PDGOsb4+7h1BzoIvm39x5xzqLaT1uWK6lT3Bnn+XuXS3ZmWMiXeIlO3/1jBUnCDyS
- zIA8BpQZ8inZ/liwxvIXrBF6MwqNgw2GIQ6KT3QO8X9xoCAc1DEFYoBg67hkz/thuFNA
- 5GCKhJ1DF+Fxh0bEJ06mFWZGdwu7Nx+qmt5sq/zlKLk9Pfjo9EkDCNijW0RKbBXddKar
- YCeYSXeY07YZjoH7Khu6QXXmbk5a/DR6DPwlaWkPeH6BKPEuUuMkyexZntr2LIdvaY95
- k4TQ==
-X-Gm-Message-State: AOJu0YzZ9UXSron4mr9oL19JXZlpRaTzDgNZMZbDxdipGw65ntMms3zb
- 4GdbEylY20sW05a2y8YvbGiYANxMDafMcP/5fJi+mlu43XYKON+steZHI4FypJv7Sv1vJwYXwaL
- cs56uB6bS7A==
-X-Gm-Gg: ASbGncvHqoXokgRT3ntaqGOsbKxCUiUvKEWOEWYumLDwQ0zE+IL9OwQ1ljvV26hOsq2
- +AgTnv07UmlUMoTfNYB4EvAHd9jsft687LDa52XfSS0Gt7I/eusNY5rnWeiLpTVnmtb9iu2+JTm
- uuVZ0jrCbgW37QlfF2OliBwcp1e1TeprU65JuD5uQPB581T36FF2zSrzbUjbwGTPVx2gfXBEIY/
- XXMPIqOQFfo2sQ/UjnFfpa8eA1J2w0uM2LPN18rlWShoqfrf9EUNzV/ISFq1L8FSA/qCspfReEp
- UvZF2XzDLEN0S1HxVvl+jH/b1nl9pj6o2YZAiPrzYk24awkzjKRfEYt9UyO5mvLWVwu0N6rCljm
- 5saHgnlUitlEej3dOS0WVD9DAp8gOxZQchhX/MimyBKzwZeKfUZzl2YXh1PLYCiMdicKdS21jI5
- 3BmBFoKtQPkwXaS/mHb9yrsz+X5APQqWHWBeDSM6vAhYRqCxyU9WxP
-X-Google-Smtp-Source: AGHT+IFb6qbrJ0CSFer4meZfIWfe+IU8lFfwSq64H+kXqNBDLM9XCpKSBoncLvOIiqX2lhHe/63lsA==
-X-Received: by 2002:a05:6871:e485:b0:3e8:9447:3000 with SMTP id
- 586e51a60fabf-3e894473349mr4898188fac.52.1763489042543; 
- Tue, 18 Nov 2025 10:04:02 -0800 (PST)
+ bh=ITfEYwrNmnLLAAvzyVK2uxCDgfLmjR4KyuvOd3b+VxU=;
+ b=FQM2TkvnI6exVnHiXDAJzHfwENJsYy7gMox6bZDJnplhzt/GuIaiEh0wEz+0I0grNH
+ 9iV223oLJeAXce8CEJ72cjxgDH1D/X8UoHY+jjvDG6PAR3uBVJU1C6tX7MwNCsvk+5XQ
+ 4PIHjpwc/wSylQ65c742wYyi5DmjC7O4FImJ57zLrolJOx4IRo/DHbXpdyQF2/U9ggGF
+ Rep+6rm4W42zSt9zald7Yjc5axY4aRlkctRY/KcaP1dl2WdbCy72DqdxLWiLtu6qA7dY
+ m8Wzwlwm/y5g8QxoKHADTCO+AnYEhojrtA/nWKAxtP9dtKE9uhbfeIppn6XCQuTWBS4G
+ tlhQ==
+X-Gm-Message-State: AOJu0YxM7A7903WKW/6/IOOCeyiDLyj53cCHare7QZcvjeqnvsHMHsNy
+ 7m4+79R5VPpkYwG6LyYOEf8EbcL2+oWtNxPDTVxqkM76nnSQ3yahgsd+SouS8lcmA3UDKTBkx+m
+ tCkO/rF6+1A==
+X-Gm-Gg: ASbGncvWDV68jYH/qfaL6PDg3o0nrdt0ZbRsE2VQ9C5CZS0skUP1DGHZ9KypNCY5F5Y
+ TKEQhP+wlxSrqQV6ZNSBbwiizDLpCewCdYLF/8IIjw9CSRo1MlTD7ZOkfptKNAIOUFiZ6hj9gzP
+ Xwxo6PZV9AryU847lexMlIXRLg/qor8IwgqAvTVS1wU8ppMfmiHPrs4gtLQ2wVxM/6d5NZzDpoa
+ qkMB6hxj2ZH3Pgb8Yg0YX71DuwVRsQw0ITPnVJAW5usMPGsVuQXP9UmBk8JwsiryoKl1Pp1IDVr
+ dqqluyWhQBQdy3UyjJkkenu+z6eSyUxNARy+1vFrv8bNvHhCf4r4j70siBQpOBdV9wDreATRxe7
+ rKm8QFjaFCvPsoM4gNKfdbHzl4m955nfNEPKckSuxShWZukNHZzg4eia0fs0Z6tMMlHfmM2fZzB
+ NX0B71Hp/iJ7bcN+Shv9OLhaYybYBePXTlQ0i6WYxT3Q242FZN4qoi
+X-Google-Smtp-Source: AGHT+IHzC1tRqpJrBmFnJgguOYQ9vEMMiVOF3vEcBt211FaGOa2iXsMfMnTYnKLK2uBP/tMy0DKCfA==
+X-Received: by 2002:a05:6830:d88:b0:7c6:ca1f:1779 with SMTP id
+ 46e09a7af769-7c7445b7ffbmr10234217a34.30.1763489044559; 
+ Tue, 18 Nov 2025 10:04:04 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c73a28428bsm6907573a34.1.2025.11.18.10.04.01
+ 46e09a7af769-7c75974466fsm3241760a34.26.2025.11.18.10.04.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 10:04:01 -0800 (PST)
+ Tue, 18 Nov 2025 10:04:04 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Lukasz Majewski <lukma@nabladev.com>
-Subject: [PATCH] kp_imx53: Stop disabling device tree relocation
-Date: Tue, 18 Nov 2025 12:04:00 -0600
-Message-ID: <20251118180400.591100-1-trini@konsulko.com>
+Subject: [PATCH] kp_imx6q_tpc: Stop disabling device tree relocation
+Date: Tue, 18 Nov 2025 12:04:02 -0600
+Message-ID: <20251118180402.591115-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -107,21 +107,21 @@ doc/usage/environment.rst for more details.
 
 Cc: Lukasz Majewski <lukma@nabladev.com>
 ---
- include/configs/kp_imx53.h | 1 -
+ include/configs/kp_imx6q_tpc.h | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/include/configs/kp_imx53.h b/include/configs/kp_imx53.h
-index 78c6c67ab99f..bb136b7e1290 100644
---- a/include/configs/kp_imx53.h
-+++ b/include/configs/kp_imx53.h
-@@ -18,7 +18,6 @@
- #define CFG_EXTRA_ENV_SETTINGS \
- 	"console=ttymxc1,115200\0"	\
- 	"fdt_addr=0x75000000\0"		\
+diff --git a/include/configs/kp_imx6q_tpc.h b/include/configs/kp_imx6q_tpc.h
+index c0cb3db23e7a..e89e9601ae82 100644
+--- a/include/configs/kp_imx6q_tpc.h
++++ b/include/configs/kp_imx6q_tpc.h
+@@ -19,7 +19,6 @@
+ #define CFG_EXTRA_ENV_SETTINGS	\
+ 	"console=ttymxc0,115200\0"	\
+ 	"fdt_addr=0x18000000\0"		\
 -	"fdt_high=0xffffffff\0"		\
- 	"scriptaddr=0x74000000\0"	\
- 	"kernel_file=fitImage\0"\
- 	"silent=1\0"\
+ 	"initrd_high=0xffffffff\0"	\
+ 	"kernel_addr_r=0x10008000\0"	\
+ 	"fdt_addr_r=0x13000000\0"	\
 -- 
 2.43.0
 
