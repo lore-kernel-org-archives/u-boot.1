@@ -4,90 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35293CEDDA1
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 14:48:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27967CEDDB0
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 15:24:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A245083DE0;
-	Tue, 18 Nov 2025 15:48:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B52F83B95;
+	Tue, 18 Nov 2025 16:24:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CvL3Ec6/";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="0UM6C0+z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73D3483E19; Tue, 18 Nov 2025 15:48:32 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 1909983C62; Tue, 18 Nov 2025 16:01:13 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45F4D83C62
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 15:48:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1846B83BD2
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 16:01:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ernestvanhoecke@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b472842981fso699114666b.1
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 06:48:30 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-47789cd2083so38869465e9.2
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 07:01:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763477310; x=1764082110; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZaGUXxI3DhgITmXFRkCFwLQfqMPd22l6qI7OyW/Y+Ko=;
- b=CvL3Ec6/iUaGqA41DnCv/IEkY5lKInmFATz2ApnDl/Or6UcLdWgLchSwCocy0RzOgB
- Yz49aVfHKTMcNeS9rU5ZFlbxqKKVOMwfroqO5iCMp1iBXmDXU7uscK3hg6pX5gwzLvU/
- qSwg96w5moj4bOkfKkWcChfRu66JVojm1nA9oTvrOgqnrwmV2hIUzchICQQK0354t/7x
- z2e+b0JCoPk1mi5l3aNplEs7vUNmxr2YwKK4dU2uGmaD/DXIi4d3qXUhrcogFFeAOIq8
- m20AhTkKqXwLuV7GURJ08XFDRgMEy417wBnba0SG7iblgREua7LiUy7v13J76urNmaHp
- 4mew==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763478070; x=1764082870;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aH8nu66dJbAH90bvSUg1tc4LWaDii36f10BYYBW27Uo=;
+ b=0UM6C0+z+KyY/4PDeWdGZkkr4X3lmKvu9X8B9lRxzwbiEoiE3BuGEWAhS6d1n8iRb5
+ L9Flrxk7MbZXNmMnpGNZTSSPxFr7BF5fDf1FKHV/ld5AIItexjYPDFtbRyT6JdFIQ41g
+ aM3az61JT1YQwjbaLyOsNnGVHV9Q90MuMcVRG4UvSzQSek/5/pTc7yQaUvDK7g//ZvDb
+ H7477+6TVoaKsUpV7dde76jG34bS5yxBzXi4Q6VFZrhEu0IQ06jcvOx2XuJc5vDlSIMP
+ fWOvxHU6xFbI7sZNQQZatmYTZIVDdb+nIryQCq52TNS430j0PKK+WMioXoWSBNOo29Mo
+ ongg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763477310; x=1764082110;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1763478070; x=1764082870;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZaGUXxI3DhgITmXFRkCFwLQfqMPd22l6qI7OyW/Y+Ko=;
- b=MiskkTHkeCFqjLJdv1sQ8NKDry7IvGDthuFXFwzvOacekLv4dXH6bESFxRch9wtHRE
- sHFw7SlDuiPmspE/qW/GB68aMkghyrouLjgq1sCVBciT8dll7BiqAMDqwnUshYut+JKa
- +ix+uf8703mV30Fdp/ufk7a9TcPdPZvDvNI84StWtZT2Mf4SIYHPnOvJVmOISRf6CjwV
- WQRosRTKJ5KZ3zTrzBW0ohZOJgbQ9dwruOIULWp1BRlchpMYOms9uWE+uE40M64N+h5L
- ch/XzTh1vSIW+vFvynG1Mh+kLw99Y5WPbtZYFfOi9EQDLuTCG5hGoEosLcxqLTrokg9+
- fN1Q==
+ bh=aH8nu66dJbAH90bvSUg1tc4LWaDii36f10BYYBW27Uo=;
+ b=Cv+VlJ8vxC1r1HDH2YlCxZ5iBwWwL4eacqREiSjLoE8KBKC7n1ZxTNb0W6bB2nlV54
+ vF1C5gOvTFb+NZX3OeI8du3hZ6bsfkGnh6hkRamFrGoj9JASLpa727D+8WJG+OhEvCFH
+ RH4T1e4ewtcxyH0IygE8MRPLQw+mNtZ/+08zkf2WR69nTwPlpX/LJ6IsUuDie7Pf9Xps
+ kq1mecJlUOeezm07+kIldzB8r7/bOyz9Ygg6zDtotgxMTp6dwEHgEhYjU9VsKW8U2dqZ
+ unqkVDPh+VprfxA8/TdYHUGaapxGcyi/EpSpNPu7TF9516wiFMu4MFDtTM7q5Edg3Cn7
+ gUOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVm+i8rO7KNlu37otvDqMa3PICsa8lpUWZlkQR6bdw939ghLpUBhH5o6kt0ehu4BuoONmg0Nws=@lists.denx.de
-X-Gm-Message-State: AOJu0YzIWuk7LpReHfV8cMCJqexyJpiXvPHqDb5qdLlZ8ttVEtWQyKy0
- KgvjreZiKmnpRV/6s9PHaH1Lue6PAFx2nPSjdZvM/LOJzG7PyAFpJ9Bq
-X-Gm-Gg: ASbGncvbgpRG4GBXkBAZ1MdBp28mjt5k7bYNn2Y39aqRf4FuXfHXfHdV98ETLZycsXW
- ucE9wvFRiyaUzft5fEtS0a+sMhGTHed4bP7JxlL8+x5Ra28GEmFjGCYI9rR8FTHeu2KqbQEPRQY
- DSaRfqkx+gJnBFEH/TMXlGUNEhzsw6HfHZfTGMQWbD2YbST6o6wb6Pquy1oRMAiXouMJSfMaEi6
- 8EqZJnFjNqkyLr5rGBsZL+pIlUxUpMk3K/6ekwXPU1WovOC3ViaFOcGrCaDBvkflFA9DYH6ktBq
- 5pDMjWy96ZLCo1CmG9Z4tbluKrFPsgZh/dnGAfgrAG5oy7ObqHows8g9TrX8oO5qZLlJtiTzZ+n
- XXDrn4rO07zKCNeSAV7ZPFpXMD+LH7CoGYpt72rnivpUmYKoi9XORku2oveHU0J29MkobaE1lVQ
- WCh9VLr3gZyrI2G7JgVsk/2FkykiBWMHiYeGbDGi9XSit3e9gGS8KLnk3jBxsaBLWvtX58WpOHs
- p77L3gHblK3v6Yw3/OiibL8dfsAAUjrrA==
-X-Google-Smtp-Source: AGHT+IGIyT6TPv9NkGJEFawuhLS5uxgnbXfQH4kUh3AQq2VvCMdRQwH41iPhZAG2C39LU5FWSxEg+w==
-X-Received: by 2002:a17:906:c142:b0:b41:4e72:309f with SMTP id
- a640c23a62f3a-b736793dd79mr1778243366b.50.1763477309540; 
- Tue, 18 Nov 2025 06:48:29 -0800 (PST)
-Received: from ernest.corp.toradex.com
- (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b734fad3edasm1370617166b.17.2025.11.18.06.48.28
+ AJvYcCUhWtfm/BEI4Tfcs3RttUKny8PKRoV9pt9q1D/F1oYrC916Nuph/Ti4b9dNEfoAK9Mu65j8zWY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8QxbmY8ADa4Tw3GZanKxWT1LIT9qe82+JwvA6rosovmZOKEzn
+ GFKcwihR+XalDzUl5lYPgj6NWSuQZ+Ftuf0fw4ops6G8QgK59r5xZ495Meafj2HPdYM=
+X-Gm-Gg: ASbGncv+f+YJDq6xPJvzceLPmDfSxDdD8lnGjC9xXPSX5d8Do5oAyBgi2xNnXaUCdDK
+ SgdSJuygQ8CGSS4apdmeJtutZJCuGlcUEjkqwv44JtSCDuvEDTUc/ex8TosWIZ+O70FXxpP8ii4
+ 1GC4T+ONGUQ/Ke0PiuzUVR7fDeZMLtNKbocq+6EYCGOWewaB0dTLdVuzD31GP4p7ZqL6kBsNfJS
+ E713NRdyHlJ1ZijGMqYYBJbCc616e48nGPAoUr/W4OqMzyg0n5rOvci2yJWogNUv+z7Y1ZOwI87
+ nkb+FfU1Td6s3y+5teeK3tlPba9Lu9x/sogFSgPMe/OG0l9WX9Xraraa7DHc8JMjX/NJjwWZUoT
+ opy6mong0IdwxOyB0HOk++tJ3PjN94idRfk8L4C/aLBT+kCyfJjnTGgHvfTUSLg5YYXrVjQ==
+X-Google-Smtp-Source: AGHT+IEopo46wKK/hDbpdFnlqI24OGSjhftRyrYVpaLDUEHXnEhMesP6lnWWabWHbzWYZLwXgLgimg==
+X-Received: by 2002:a05:600c:4513:b0:477:2f7c:314f with SMTP id
+ 5b1f17b1804b1-4778fe5c820mr182204795e9.10.1763478068810; 
+ Tue, 18 Nov 2025 07:01:08 -0800 (PST)
+Received: from localhost ([62.246.248.122]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4779b509a5esm192937475e9.2.2025.11.18.07.01.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 06:48:29 -0800 (PST)
-From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Subject: [PATCH v2] configs: colibri-imx7*: set 'fdtfile' generically in
- PREBOOT
-Date: Tue, 18 Nov 2025 15:48:00 +0100
-Message-ID: <20251118144815.1242023-1-ernestvanhoecke@gmail.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ Tue, 18 Nov 2025 07:01:06 -0800 (PST)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=e5afe2ed95da5cae6bd900b20fbb284448fceea12c0e2f15bf672270b6b3;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Tue, 18 Nov 2025 16:01:00 +0100
+Message-Id: <DEBWSSW3JNPJ.1YYA39OACM9HN@baylibre.com>
+Cc: "Maarten Brock" <Maarten.Brock@sttls.nl>, <u-boot@lists.denx.de>, "Tom
+ Rini" <trini@konsulko.com>, "Rasmus Villemoes" <ravi@prevas.dk>, "Rayagonda
+ Kokatanur" <rayagonda.kokatanur@broadcom.com>, "Tien Fong Chee"
+ <tien.fong.chee@altera.com>, "Alif Zakuan Yuslaimi"
+ <alif.zakuan.yuslaimi@altera.com>, "Casey Connolly"
+ <casey.connolly@linaro.org>, "Tingting Meng" <tingting.meng@altera.com>,
+ "Peng Fan" <peng.fan@nxp.com>, "Quentin Schulz" <quentin.schulz@cherry.de>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>,
+ =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, "Liya Huang"
+ <1425075683@qq.com>, "Marek Vasut" <marek.vasut+renesas@mailbox.org>,
+ "Romain Gantois" <romain.gantois@bootlin.com>, "Simon Glass"
+ <sjg@chromium.org>, "Jaehoon Chung" <jh80.chung@samsung.com>, "Miquel
+ Raynal" <miquel.raynal@bootlin.com>, "Marek Vasut" <marex@denx.de>,
+ "Mattijs Korpershoek" <mkorpershoek@kernel.org>, "Andrew Goodbody"
+ <andrew.goodbody@linaro.org>, "Anatolij Gustschin"
+ <ag.dev.uboot@gmail.com>, "Sukrut Bellary" <sbellary@baylibre.com>
+Subject: Re: [PATCH 02/15] arm: dts: am335x-evm: Add backlight to the panel
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Kory Maincent" <kory.maincent@bootlin.com>, "Markus Schneider-Pargmann
+ (TI.com)" <msp@baylibre.com>
+X-Mailer: aerc 0.21.0
+References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
+ <20251118-topic-am33-evm-oftree-v2026-01-v1-2-91ce13c661e2@baylibre.com>
+ <20251118151444.0634411b@kmaincent-XPS-13-7390>
+In-Reply-To: <20251118151444.0634411b@kmaincent-XPS-13-7390>
+X-Mailman-Approved-At: Tue, 18 Nov 2025 16:24:05 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,57 +118,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+--e5afe2ed95da5cae6bd900b20fbb284448fceea12c0e2f15bf672270b6b3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-In TEZI (Toradex Easy Installer), we use one U-Boot binary for both our
-NAND and eMMC Colibri iMX7 modules. Currently, CONFIG_PREBOOT sets the
-environment variable 'fdtfile' depending on which defconfig was used,
-adding the '-emmc' variant for the emmc defconfig. Since we always build
-the TEZI recovery U-Boot with the standard (non-emmc) defconfig, fdtfile
-has to be overwritten later or it will be wrong there.
+Hi Kory,
 
-By using '$variant', the fdtfile var is properly constructed at run time
-for both the NAND and eMMC variants, and we do not have to worry about
-setting fdtfile again when building the recovery TEZI U-Boot.
+On Tue Nov 18, 2025 at 3:14 PM CET, Kory Maincent wrote:
+> On Tue, 18 Nov 2025 11:40:22 +0100
+> "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com> wrote:
+>
+>> Add backlight phandle reference to panel node. Without this reference,
+>> the display driver cannot control backlight, leaving the panel dark.
+>
+> What is the point of modifying this devicetree as it will be replaced by =
+the
+> Linux upstream devicetree at the last patch of your series?
 
-This also synchronizes these configs with how we handle the iMX6ULL.
+My idea was to first fix the current setup to have something to compare
+with before changing the full devicetree. I think it is useful to have
+this for reference in the history. This also makes bisecting work
+across the upstream devicetree changes without loss of functionality.
 
-Fixes: 327381e8b57c ("colibri_imx7: use preboot for fdtfile evaluation")
-Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
----
-v2: Do not erroneously replace the '${soc}' variable with imx7
-v1: https://lore.kernel.org/u-boot/20251118123056.1124089-1-ernestvanhoecke@gmail.com/
----
- configs/colibri_imx7_defconfig      | 2 +-
- configs/colibri_imx7_emmc_defconfig | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Best
+Markus
 
-diff --git a/configs/colibri_imx7_defconfig b/configs/colibri_imx7_defconfig
-index 5a415120bead..2a3cb84c3b6f 100644
---- a/configs/colibri_imx7_defconfig
-+++ b/configs/colibri_imx7_defconfig
-@@ -22,7 +22,7 @@ CONFIG_BOOTDELAY=1
- CONFIG_OF_ENV_SETUP=y
- CONFIG_BOOTCOMMAND="run ubiboot ; echo ; echo ubiboot failed ; run distro_bootcmd;"
- CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri-${fdt_board}.dtb "
-+CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri${variant}-${fdt_board}.dtb "
- CONFIG_SYS_PBSIZE=544
- CONFIG_SYS_CONSOLE_IS_IN_ENV=y
- # CONFIG_DISPLAY_BOARDINFO is not set
-diff --git a/configs/colibri_imx7_emmc_defconfig b/configs/colibri_imx7_emmc_defconfig
-index bae43fe45aa7..a95a3214d0c8 100644
---- a/configs/colibri_imx7_emmc_defconfig
-+++ b/configs/colibri_imx7_emmc_defconfig
-@@ -19,7 +19,7 @@ CONFIG_FIT_VERBOSE=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=1
- CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri-emmc-${fdt_board}.dtb"
-+CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri${variant}-${fdt_board}.dtb"
- CONFIG_SYS_PBSIZE=544
- CONFIG_SYS_CONSOLE_IS_IN_ENV=y
- # CONFIG_DISPLAY_BOARDINFO is not set
--- 
-2.43.0
+--e5afe2ed95da5cae6bd900b20fbb284448fceea12c0e2f15bf672270b6b3
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaRyKLBsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlOL
+wAD+PA4Ab+y9CroMRRtAQ0f86OtRBSUdJaz2mp6AcJB7zAkBAJumVqd9SBLR9QBe
+ezJ8pMqOm/u5xqsgr+70fo73ENcK
+=xjMP
+-----END PGP SIGNATURE-----
+
+--e5afe2ed95da5cae6bd900b20fbb284448fceea12c0e2f15bf672270b6b3--
