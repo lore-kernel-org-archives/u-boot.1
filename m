@@ -4,59 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACB64CEE350
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 20:07:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F4A8CEE351
+	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 20:17:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6F92835B3;
-	Tue, 18 Nov 2025 21:07:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A792883623;
+	Tue, 18 Nov 2025 21:17:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KybXpP6V";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Xqd4TDnu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46BE683693; Tue, 18 Nov 2025 21:07:22 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 98EBC838A0; Tue, 18 Nov 2025 21:17:44 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A79C832AD
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 21:07:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DB77835B3
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 21:17:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4d9wcz2Zq1z9sxb;
- Tue, 18 Nov 2025 21:07:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763496435;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dpTs8KLCx+8Q9L2rLXZB/975TagWd4oYEtggxdbzZCM=;
- b=KybXpP6V4tHqOU1vyI9XMdw44qLbm78vgRriTURvsFEAqONsGf9Mg5a+oKfJwHf7jF+VGL
- JH4kiqy0PafZEpIGNfmNTmirUhw9LVVoevo4NW8tI64WWz2Q2F53sTzmlOTK1Wyoe+/z+a
- ouymuKClVcxTm3ImlGIHXTEFOLD/GHSSw0h0Eupkg03Vrqh8s1VwiCJuC3ZMFZNY13DmdJ
- 5ScFh6wPNJU/u/AJz20XAj1rGW/wH0f2j1QqtmRJbtw7N/UoN4fTtEoSFmMdYABqzW6Opb
- L2P9kFtSiAQJ83zrIahCR7T+JgoLSDGksYyJ6dVaIg944WxTyajguEepYKuSTQ==
-Message-ID: <a39d032a-d9c0-42e6-8481-20278d6eb389@mailbox.org>
-Date: Tue, 18 Nov 2025 21:07:14 +0100
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 473A03FF0B; 
+ Tue, 18 Nov 2025 20:17:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1763497062;
+ bh=DiXCV+PF8T5K5BWEzFZqF2YPOpr0fIYa7FQ/E0YgpmY=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Xqd4TDnuBliyYJM5eI+Y4B/X3EVWkmFS8QHFV8bxxITfSmBnpdBrBTAhNWOsIPJAk
+ 0JEFzhmnMMU3lZ1qBVx/lN8BhPX6IONZAQzT1YMul5w3zemt//L7p+P5mQOnZUDQ6B
+ es6/DCmWUcMLN3zhLolJsMvil6M+XMR10R7Xpj3K+CV4a5Wt+w3vjwoGE9GNPjD2iy
+ 8y8WTRGxSKvYrhCPxCk07cYD9wxsLsbk/i9NOiCBeQqkgEfPFjU12FOUmCH8ZU6uGz
+ nSFdwl7rGkW/u0U+q5JiyyE+wHptWhhtYPa/uvDmbO4CnrdjRMFKhWm0gkPWamUSGA
+ 2Vj4TCISrfwHUEzpm9Bvehtn2O/bIZj1tH40otlqyPla03fuZfAdDPl0zqvHqYbBbq
+ uLhptpSyovXhvFXGKZf/R50BxHUFfQ7RYTon0NFxFFXKBHg4DZBYJvE0LU52tRdDxx
+ 6KL+1Uww+xJh2LN832GSasHxDNKvnxAl4/YQq7wpujx4yaaoOgA7aKqt3Ks5hxRZGb
+ qAjKmqzjznburB9NNheJ1Jg0rTZ3nicx/uck1Ow4BrWONaZKmrb+5Hp5Hm2bjiNyZp
+ aewNOqCt2UhVlv0pRBXT0SuPwXE1i3Zdx5UVur5Zd07lcrQzdBPvDxvib9oQBIf6qN
+ R8tZbqK4ZSrWAtxkuhD6UXzI=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/4] doc: improve C test documentation
+Date: Tue, 18 Nov 2025 21:17:29 +0100
+Message-ID: <20251118201733.67297-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Subject: Re: [PATCH] novena: Stop disabling device tree relocation
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20251118180427.591409-1-trini@konsulko.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251118180427.591409-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: iqd9hufqymar8z98w1t6oeuw6zs9af6y
-X-MBO-RS-ID: ce9056898cac5a4184c
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,18 +79,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/18/25 7:04 PM, Tom Rini wrote:
-> Remove setting of fdt_high to ~0, which disables device tree relocation,
-> from the default environment. Doing so prevents U-Boot from correcting
-> problems such as having an unaligned device tree and leads to various
-> failure modes in the OS.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> If there is some window of memory that must be used for where the device
-> tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
-> or bootm_mapsize are the correct way do this. Please see
-> doc/usage/environment.rst for more details.
-> 
-> Cc: Marek Vasut <marek.vasut@mailbox.org>
-Acked-by: Marek Vasut <marek.vasut@mailbox.org>
+* Add missing Sphinx comments in include/test.ut.h.
+* Add include/test.ut.h to the HTML documentation.
+* Describe C test return values
+
+Heinrich Schuchardt (4):
+  doc: make writing DM test subsection of writing C test
+  test: document ut.h
+  doc: add include/test/ut.h to HTML documentation
+  doc: describe return values of C tests
+
+ doc/api/index.rst             |   1 +
+ doc/api/test.rst              |  11 +++
+ doc/develop/tests_writing.rst |  63 ++++++++------
+ include/test/ut.h             | 159 ++++++++++++++++++++++++++++------
+ 4 files changed, 181 insertions(+), 53 deletions(-)
+ create mode 100644 doc/api/test.rst
+
+-- 
+2.51.0
+
