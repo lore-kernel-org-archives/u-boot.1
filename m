@@ -4,159 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D620ECF3187
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 10:15:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 043A2CF3185
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 10:33:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2532283BD2;
-	Wed, 19 Nov 2025 11:15:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5006583DBF;
+	Wed, 19 Nov 2025 11:33:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BhgOQwmJ";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="XpLK2YT7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C3A683DBF; Wed, 19 Nov 2025 11:15:37 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1BCBE83E3A; Wed, 19 Nov 2025 11:33:06 +0100 (CET)
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6E08832AD
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 11:15:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CF458392C
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 11:33:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rLONQ47uElA/OK5fXhVWv22LTt22nY2O1+1qgQSP0uzwJUo58wS+zURyoKt4CdZaKCu7tPgjD9vZCt3i86SRnqVVF4fqrxY0TFsS+SBFZzJ4HCtrUFs1ZSZOa8jR8T2i83qinzmZPes/A/vtPEY6cpDMQSNy28LMfaUiJ4Xv52Z00v99xePROy8LdUtSFGxG/PiSX0+AcJqGAShLBJu77HDVE+gh6e2elHIVghGcCmt+IgaZDAKnNk116ZK+JTIMLWF8Ekq44z5392+xF25CGsU/u84NtsQ4Irea+bUhSiofmZVQJbaMBG8/fH6dvJIWWbSTRmTlGk/gFJfNGS31aA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ltvkBVf/7CT9AV6hvvlTBh6UTq9SgeVegn8eTJ1A02c=;
- b=vyhiCCrlGR1rPgYXKF0ZbkNHy5fyxiK32mol562QZ1mtISMkjI5QONpXPFPG8nUDoBvV57XM45IEjLLYCrxLgZc9Cjexu49WD5dSLf9yAb86eeUfDa7zjOUvLn8d/IbYslZydkLYVh7VE2DtXka+jStjyGI0w8iHNLCvxDEeTHn4nyDUCqLU4ChsVrpN9Mn+GWtk37eKuUT4nwdUjH018msO1AG3yF+3R4ub7JF65ugKDJIY9j8FkkQ0A8bTmOWUhp2p5p1TuZb+4Q5ErzKyeUR0fApMIBXLIUQc5IavDxb8TGDUTOiENi03aDRI/kJCIEAKqBv+tLow1IPaTXbSiQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ltvkBVf/7CT9AV6hvvlTBh6UTq9SgeVegn8eTJ1A02c=;
- b=BhgOQwmJ5rOdCpxrl9Jj/761TOzgqOfewcwMaYohcmOsu1qB9i4L2rD02yF6HM69FFf7NzVWhAWAhPOBSTVIiEPcxsfg+gDPQAa7Ln5e5Ns7DR1AeZqx88QKhXweKUfD+8IfCK3QyBWbn8pxLqVGNXNT01JvnfgIAoKFnjj2kvQ=
-Received: from BN9PR03CA0929.namprd03.prod.outlook.com (2603:10b6:408:107::34)
- by CH2PR10MB4294.namprd10.prod.outlook.com (2603:10b6:610:a7::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Wed, 19 Nov
- 2025 10:15:31 +0000
-Received: from BN3PEPF0000B373.namprd21.prod.outlook.com
- (2603:10b6:408:107:cafe::7b) by BN9PR03CA0929.outlook.office365.com
- (2603:10b6:408:107::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.10 via Frontend Transport; Wed,
- 19 Nov 2025 10:15:31 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BN3PEPF0000B373.mail.protection.outlook.com (10.167.243.170) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9366.1 via Frontend Transport; Wed, 19 Nov 2025 10:15:30 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 19 Nov
- 2025 04:15:22 -0600
-Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 19 Nov
- 2025 04:15:21 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 19 Nov 2025 04:15:21 -0600
-Received: from [172.24.234.212] (uda0510294.dhcp.ti.com [172.24.234.212])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AJAFH3c1716339;
- Wed, 19 Nov 2025 04:15:18 -0600
-Message-ID: <d0c47377-57f6-44f4-93e8-119366f09ecc@ti.com>
-Date: Wed, 19 Nov 2025 15:45:17 +0530
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-640daf41b19so958314d50.0
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 02:33:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1763548381; x=1764153181;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=idMO4m5wsaN6Ycs3JP/U7bp6dJEDaV87vSOSHg/6t1g=;
+ b=XpLK2YT7f8JYZ6rSMGmN6SWFKPuu332a/mox+Mk/PKTvryd9uvNXJLQdAgq2faAYDA
+ y08aaX4EsMn18fiSBPFWh0pLCUFadkBlhGFTl/NegBtbXUSvtQu3iVPpS91qXist5Cmd
+ JhPPTzqKj7WUqOIZM4/e6Xk7FNIk596X20IpQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763548381; x=1764153181;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=idMO4m5wsaN6Ycs3JP/U7bp6dJEDaV87vSOSHg/6t1g=;
+ b=tfkwZlIhNf/bDUaAFS2k0KSWdw4y16IrJxHJop2Y5M5gdnoQ/c0tegPnonltJ5MO7e
+ 6ClBY+DPB8Db1AUAGtLJtCZRRGBswPwR4J7nEFxYqn3GXvwHNaYkJz2aD8BSPC1jJS7y
+ DEmg7fhtIw/OF2BW/3U7/x3cR9w8N1sck1qi8Af8Wbioa32fhRlR8fSLhmys/TDKmjz9
+ t5xXsdxywTL4ZnwNm3eEUGu1UYWZ3oplUvegZ3FXYa4MxsuPmQ1CJJhwJCGxW1GDnt2y
+ xXiatKxONMa7M9pGh6oXkvCn7Y/VpPIlktN0XecbBOOcP7lI3XDOfvFjsBGhSHVOw2MV
+ co6Q==
+X-Gm-Message-State: AOJu0Yw8Q582PrPyduxoGTEvgXCn8k3ZLzOiqMw+yHRw9NZnLlY5b9x3
+ PAO/vSZnCXDRklW14m9OgDen55jVMglmE7bkg1+fKS3BIbKVGUs137Qk7VnFebgLXlPPdg1/Ky9
+ bKrzT2zSEDg3xu73xZJEUVqH3aN6Uktp6kRkgOr69dHEZOHQpU2kQe8ir2g==
+X-Gm-Gg: ASbGncsnr9rmkWvOLVj8LnE1lYAI3IKP2jU1PiiUCAmK9klGTdsK5pYRf+1lMLAxUmd
+ 0jTZRpLvku668xxcfLY7fVF26qyW1gWQRKRU7tDwFvq/hfPCfZLo5Sbc75seAeRUjleMg3ShJ4n
+ 6vXtU7ZqG1OZLPwsTG542+2QvoIpBvt5+Qg4HdZHXH1jfoUxseuCQVjO1sE0D7lhCQ/F17I7Ck1
+ cLrvIJwWWYJh0uRauN30VKhxYYEdyUOVBzdkngtAd51Sj+anjGTfsCU/fvFUhGgN3UK8EUsCAsY
+ 0kGco474ywqxnteOWB3IICgHIvh+45C6+uiBfs9Q2isLFBg=
+X-Google-Smtp-Source: AGHT+IF7/64HTNr/VR50/Ch7/Vmf+ZSfpIq2KJwpkID/+X8BODI7gYhAnMe7thR/oww6w5pZ1jwldHELnxn3MB+/GiU=
+X-Received: by 2002:a05:690e:1403:b0:640:d864:6e64 with SMTP id
+ 956f58d0204a3-642ed422672mr1651378d50.14.1763548380926; Wed, 19 Nov 2025
+ 02:33:00 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/7] arm: dts: k3-{j721s2/j784s4}-binman: Pack HSM
- firmware inside tispl.bin
-To: Anshul Dalal <anshuld@ti.com>, Andrew Davis <afd@ti.com>,
- <trini@konsulko.com>, "Dixit, Tanu Hari" <thdixit@ti.com>, "Hegde, Saurabh"
- <s-hegde1@ti.com>
-CC: <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>, <jm@ti.com>,
- <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <kamlesh@ti.com>, <bb@ti.com>,
- <d-gole@ti.com>, <u-boot@lists.denx.de>
-References: <20250506104202.16741-1-b-padhi@ti.com>
- <20250506104202.16741-5-b-padhi@ti.com> <D9PTUSDYSWS0.J9VVKD57OPPM@ti.com>
- <218f2201-6094-4a93-aae6-e919cbeeda56@ti.com>
- <2fb353e4-b119-40d8-9eb2-717ec2422eaa@ti.com>
- <D9QRG0VOG7FQ.3G9WFJ8ZYUBDZ@ti.com>
-Content-Language: en-US
-From: Beleswar Prasad Padhi <b-padhi@ti.com>
-In-Reply-To: <D9QRG0VOG7FQ.3G9WFJ8ZYUBDZ@ti.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Wed, 19 Nov 2025 11:32:49 +0100
+X-Gm-Features: AWmQ_bnhPmklYMzZxAvOrxnbt1yH3ywimla_Sa0J5avaRA6P1bGwM-6p3OHx95I
+Message-ID: <CAOf5uwmFp_o1QFJ4A7MoBxNSF7Pwr1G8PLR+Lyx6PSrZ3ustpQ@mail.gmail.com>
+Subject: Pull request for uboot-nand-20250918
+To: U-Boot-Denx <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B373:EE_|CH2PR10MB4294:EE_
-X-MS-Office365-Filtering-Correlation-Id: a9d23d07-e07f-4701-3157-08de27549148
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZFl1Wk0wY3dXQ1IxWStqK0N0L3RTRURzdUVTeFNnM2RNb0lYZHpJaWkzeHQx?=
- =?utf-8?B?ZTBXZzZKWG80MTJxVlVMT0gzRlAyY1BYSVVIUFRBMS9HZkZRakM4dnR3b2tY?=
- =?utf-8?B?c2U4TE1aSVNtRU5WSGk3MFhBQTRyaHV3MlBFeTRxWDEzck81SUpLUy9TU09P?=
- =?utf-8?B?ekdlU3RTcVk1M0pXTm9TTGhmeUIxU045MHpncFhHU05GelVZMW1DMDFBMlZB?=
- =?utf-8?B?K1FTdDZDZ0pzM1IvdTdVSlVOdXM2M0tCUFhwQVJ3ZFVzdWJnMTVwdUJyVGVM?=
- =?utf-8?B?T1pkRjhkTkRUWVlsSUhCSU9jeGZLU2d2aWUzdXJOVzZJRXQ0R2xBODQxaWt4?=
- =?utf-8?B?N0llMXNYZUg2OFVsQ21ZZ3FVakd0QVhXZ2x2U2FvSzEzUURJeTZKSEg5WG5n?=
- =?utf-8?B?V0I5WVdLVFF6T3U1STYzUndkY3hQUHpMdE1NeUU0dm8vWjc0TE5xTFp2TUxK?=
- =?utf-8?B?K043eUplc2w0UEhTT1VoVGh0c29yTjE3ZnpsTzdTSHp0NG50elpYVWJpeEQ4?=
- =?utf-8?B?YnJuVElzVTF2VGF4VWlQSWZQNXU3Q0Y1K25VbFVKdXV2d1lvR0VxNzJKcEFn?=
- =?utf-8?B?dWtWOFRQbnVrc3pML1ZtMUUySXJmZE9UaXVJQmFDSmd4ZVUxV21yLytEbUlL?=
- =?utf-8?B?cHdlclovU0VZeFhDSDFIYS9uUkYrZDMramN5TXJRK0lCNDVTTlJoVTRqZHFZ?=
- =?utf-8?B?NW1uZUM0bStnSG9OTzdPN1ZDMXg2cEFTNThDNmxuUU1YdUZZU1FDdHY1bDVI?=
- =?utf-8?B?aXRMWUZOMndQM1JhaFlHaHdpdStGY05OMGcxcjZVcWhFTjFzN25YL250dXVo?=
- =?utf-8?B?Q1gzd29Jb09HYnM3Y0E4RlIwdkVkMHArMmxYOGJzQnVFR3E4WUJhcEQ3bDRC?=
- =?utf-8?B?a2xkS0Qyelg4Z2hTL0lnN2lvYk1DWDRFMVBMTDc3am9GSStJNitMcEd5RGFm?=
- =?utf-8?B?V04zYlJINzlIMDl6Y2dlUDl4aFZwbllwWWN3b29ZOFd3QjkyRjhVUDl5V01o?=
- =?utf-8?B?ZU02THdzVzZ1dGJlOTRUMFZSeVcrMmRiNHVKMW9QZytQYWczR0VQTFZ2alpC?=
- =?utf-8?B?c1ptQXVrTVJaZjJRQzJ5V2QrbGdXcWhvN1B2Q3kxVkhRUVJESFNpSFd4cHNL?=
- =?utf-8?B?SDVWNlhWUm9BY3lmaDJvZ1Zyc2VwQTZsb0JsQ3ZyTld3bWZMWUYyVjg0RDNq?=
- =?utf-8?B?K1A3U1o2WEJKSE9KNHRtTzRsUStRaDVoZUQxMEF3eFVYZS9tbU9qMGlRSXor?=
- =?utf-8?B?eTVJWjJONXVXTy9WcDV6ZjJHVXZUZUtnbGpzQ2ZJQ0lTUUZkS0hWRkkvdVE1?=
- =?utf-8?B?Q0szZmFSUUVKb05vMTh2OEtqN0IrRGZqNXpic1VlNGZDZHBGZlJIMzAzcU03?=
- =?utf-8?B?T2gxcDN5N01xTVNkSkF6RUQ5UGtQNWdicU40Yko5SzZYQjRGQ3dVM2VnV0ZM?=
- =?utf-8?B?dnVNWFVlcXNrdTdEM2IwTGN1L3hLaG53OEQySmxOQnhxUWRiNGdMNlY3a21N?=
- =?utf-8?B?Q2FUY2VrM2N5OTZvL1hmeEF6Rmt3TVhZdGtZTG5KVkdBRUo1UXlSVytUdWhL?=
- =?utf-8?B?anQ2akVNbUxQbVBhby9jSWhzSENRUUJRODBaQWx2RjVyNGZIYVkrZzB4ZTdC?=
- =?utf-8?B?RzJRUS9WQWZUZitpMHBjNnRLcmVKTFFDVmpNQmE1bWdaWjd6WVIxSGdoQmJm?=
- =?utf-8?B?WGUzUU5KamF5SmxidlZ3RExYVUFmc1QrLzVOSkJxZUtTSWhpcWQ0b0s1YUJC?=
- =?utf-8?B?WnpBRG9wcm4rV1NFNXloY08wYmpUMzF4OEc0QUJQcUd1Z0hkM00wYlhFZmNQ?=
- =?utf-8?B?VW9Fd2pqSnB6WEp1YS9EV01ZY0R5TXk3MFQrWk8xL2Z0UkV3NHRQTnVnTzZP?=
- =?utf-8?B?dzk1b0xFMmZMRVlpTXFaRVZOMmlHcG4yVUVVRHA1Q2FFSUg0blp0K2MyN205?=
- =?utf-8?B?Y3lYQXYvMy9nOXhsdUNNRlM0S3dGYXFnWW9SWTdoZmUvS05PbnpSSzhvM3Ux?=
- =?utf-8?B?dkhIYXowNkd0MVl6UjNyV3U1UnBwU2NUQUZOUTVHelVSOWZhYUdCc3lDbmNS?=
- =?utf-8?B?T21uaXBNUWVVLzBJMFA2NHQreng0QXRZT0VLRVFhbm9yNUlWODRkNWEwTEJy?=
- =?utf-8?Q?5Kf4=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2025 10:15:30.0128 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a9d23d07-e07f-4701-3157-08de27549148
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B373.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR10MB4294
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,101 +86,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew, Anshul, all
+The following changes since commit 91861e5a30d217d8e70130c9124c1646f4afef29:
 
-Reviving this old thread, this is ready for a re-spin
-now as unsigned HSM firmware is available.
-Please see below.
+  Merge tag 'u-boot-stm32-20251117' of
+https://source.denx.de/u-boot/custodians/u-boot-stm (2025-11-17
+10:45:11 -0600)
 
-On 08/05/25 17:29, Anshul Dalal wrote:
-> On Wed May 7, 2025 at 8:53 PM IST, Andrew Davis wrote:
->> On 5/7/25 9:56 AM, Beleswar Prasad Padhi wrote:
->>> On 5/7/2025 3:09 PM, Anshul Dalal wrote:
->>>> On Tue May 6, 2025 at 4:11 PM IST, Beleswar Padhi wrote:
->>>>> Pack the HSM firmware in tispl.bin fit image so that it can be unloaded
->>>>> and used by R5 SPL to boot the HSM core. By default, point to the
->>>>> firmware for HS-SE device type. This needs to be changed to point to
->>>>> appropriate firmware when using a different device type.
->>>>>
->>>>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
->>>>> ---
->>>>> v2: Changelog:
->>>>> None to this patch.
->>>>>
->>>>> Link to v1:
->>>>> https://lore.kernel.org/all/20250422095430.363792-4-b-padhi@ti.com/
->>>>>
->>>>>   arch/arm/dts/k3-j721s2-binman.dtsi | 12 ++++++++++++
->>>>>   arch/arm/dts/k3-j784s4-binman.dtsi | 14 ++++++++++++++
->>>>>   2 files changed, 26 insertions(+)
->>>>>
->>>>> diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
->>>>> index 73af184d27e..9c8b29f53bb 100644
->>>>> --- a/arch/arm/dts/k3-j721s2-binman.dtsi
->>>>> +++ b/arch/arm/dts/k3-j721s2-binman.dtsi
->>>>> @@ -273,6 +273,14 @@
->>>>>                       };
->>>>>                   };
->>>>> +#ifdef CONFIG_K3_HSM_FW
->>>>> +                hsm {
->>>>> +                    hsm: blob-ext {
->>>>> +                        filename = "ti-hsm/hsm-demo-firmware-j721s2-hs.bin";
->>>>> +                    };
->>>>> +                };
->>>>> +#endif
->>>>> +
->>>> Why do we have the hsm binaries pre-signed? Having a common binary like
->>>> the DM with signing using ti-secure might be a better option.
->>>
->>> Andrew can correct me if I am wrong,
->>> HSM is meant to run secure software stack and services like Authentication etc. It is a +1 to TIFS. To establish ROT, we need the HSM binary to be encrypted, and authenticated by TIFS first before it can do stuff by itself. DM is not a secure entity, so signing the image doesn't make sense for me.
->>>
->> I think Anshul is not suggesting that the HSM binary be unencrypted/unauthenticated.
->> Rather that the encrypting/signing be done here in binman like we do with TF-A/OP-TEE.
->> (which both are part trusted images to be loaded by TIFS).
->>
->> To that suggestion I agree, the customer will be doing the signing of this binary, right?
->> If so then since all other customer signing is done as part of binman, it makes sense
->> to also sign HSM firmware here too.
->>
->> Andrew
-> Yeah, that is what I was going for. With that change it could be
-> possible to also have a single binary for all platforms (gp, hs, hs-fs)
-> in ti-linux-firmware?
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
+u-boot-nand-20250918
 
-I don't think its possible to have a single HSM firmware
-for all device types currently. GP devices might not use
-all security IPs which the hs-se device uses. So having
-a common firmware would mean we sacrifice using
-those secure services on a HS-SE capable device
-as well. Of course, whenever we can support a single
-TIFS binary for all device types, we can support a single
-HSM too. I have copied firmware folks here (@Tanu,
-@Saurabh) who can help in answering this query better,
-if any follow up.
+for you to fetch changes up to 19548adfe9ea1d12963b3959b8ad2c94a4647878:
 
-But yes, we do have the unsigned HSM firmware for each
-device type now[0]: GP, HS, HS-FS. Which means we can
-add the signing support here in U-Boot to match the flow
-with other components like ATF/OPTEE/DM etc.
+  spi: airoha: en7523: workaround flash damaging if UART_TXD was short
+to GND (2025-11-18 20:07:41 +0100)
 
-So, I will re-spin the v3 for this patch series with following
-changes:
-1. Dedicated remoteproc driver for booting HSM M4 core.
-2. Signing HSM binary in binman/U-Boot.
-3. Other minor code comments from Anshul/Andrew.
+This pull request enhances NAND and SPI flash support, primarily
+focusing on the Airoha EN7523 platform.
+The Airoha SPI driver receives a major update, adding DMA,
+dual/quad-wire modes, and a critical workaround to prevent
+flash damage if the UART_TXD pin shorts to Ground.
 
-Note: We will continue to pack the HS-SE variant of HSM
-firmware in tispl.bin fit image by default. Any other
-variant can be packaged by changing the path in binman
-node to corresponding firmware blob.
+New chips supported include FudanMicro FM25S01A SPI-NAND and several
+Winbond SPI NOR devices. Fixes
+include correcting Kconfig dependencies, updating the mtd benchmark
+command to use lldiv(), and
+addressing minor bugs in the generic spi-mem and SPL NAND code.
 
-Let me know, if you have any comments over the above,
-otherwise I will send out an v3 soon. Thanks!
+The patches pass the pipeline CI:
+https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/28408
 
-[0]: https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/commit/ti-hsm?h=ti-linux-firmware&id=560c226d763018de7adb892fc215b31286cc2831
+----------------------------------------------------------------
+Heinrich Schuchardt (1):
+      spl: nand: typo 'destintion'
 
-Thanks,
-Beleswar
+Mikhail Kshevetskiy (14):
+      cmd: mtd: benchmark: use lldiv() instead of 64-bit division
+      spi: spi-mem: fix coverity report CID 537478
+      spi: airoha: remove unnecessary operation adjust_op_size
+      spi: airoha: add support of dual/quad wires spi modes to exec_op() handler
+      spi: airoha: add dma support
+      spi: airoha: return an error for continuous mode dirmap creation cases
+      spi: airoha: support of dualio/quadio flash reading commands
+      spi: airoha: buffer must be 0xff-ed before writing
+      dts: airoha: en7523: enable double speed flash reading
+      spi: airoha: avoid setting of page/oob sizes in REG_SPI_NFI_PAGEFMT
+      spi: airoha: reduce the number of modification of
+REG_SPI_NFI_CNFG and REG_SPI_NFI_SECCUS_SIZE registers
+      spi: airoha: set custom sector size equal to flash page size
+      spi: airoha: avoid usage of flash specific parameters
+      spi: airoha: en7523: workaround flash damaging if UART_TXD was
+short to GND
 
+Miquel Raynal (1):
+      mtd: spinor: winbond: Describe several chips
+
+Tianling Shen (1):
+      mtd: spinand: add support for FudanMicro FM25S01A
+
+Tom Rini (2):
+      nand: raw: Kconfig: Correct some dependency issues
+      mtd: nand: raw: Drop SYS_NAND_SOFT_ECC from NAND_SANDBOX
+
+ arch/arm/dts/en7523-u-boot.dtsi |   2 +-
+ cmd/mtd.c                       |   5 +-
+ common/spl/spl_nand.c           |   2 +-
+ drivers/mtd/nand/raw/Kconfig    |   4 -
+ drivers/mtd/nand/spi/Makefile   |   2 +-
+ drivers/mtd/nand/spi/core.c     |   1 +
+ drivers/mtd/nand/spi/fmsh.c     |  76 +++++
+ drivers/mtd/spi/spi-nor-ids.c   |   6 +
+ drivers/spi/airoha_snfi_spi.c   | 688 +++++++++++++++++++++++++++++++---------
+ drivers/spi/spi-mem.c           |  41 ++-
+ include/linux/mtd/spinand.h     |   1 +
+ 11 files changed, 673 insertions(+), 155 deletions(-)
+ create mode 100644 drivers/mtd/nand/spi/fmsh.c
