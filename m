@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0D23CF34A1
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 13:08:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F1F9CF2591
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 13:16:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FD1983D3C;
-	Wed, 19 Nov 2025 14:08:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 104D883956;
+	Wed, 19 Nov 2025 14:16:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mM1usz0b";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lpUa8/oN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86ED583DA6; Wed, 19 Nov 2025 14:08:21 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 0112B837F2; Wed, 19 Nov 2025 14:16:24 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FFBA83700
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 14:08:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04B2983DBF
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 14:16:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7c52fa75cd3so5081307a34.3
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 05:08:19 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b7380f66a8bso604875366b.2
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 05:16:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763557698; x=1764162498; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763558181; x=1764162981; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=egoLxraSU++X5+XHPmc7/EQn0Eq4MRtQVgU+hNhtO1M=;
- b=mM1usz0bZH225OWv8htYQR5bh+GJbxwwkrlXaw5dDxb8UNAlYO/p2oeL73mYNjDK/m
- 0F+S3JKAM1QZminwL4ohpg3tc3i1l0ueu6b6CNoE3X/IxD/4ELa3a7K8SAAiQaq4wSnm
- WMF8aIHPrXmMHBgkWwuZe7KM5iz54WP9K0V0RjqeQBAyVeMVtrzxZ5J76Dg8000YH3Dm
- XptVae9lCDxiOTKiKLwhrXNazO+ffA/AOdLvgXaukdU6OCotjUTihjIDOfRviF3jNOEz
- lNLyK9ICG/RSAksHPbixUssndI6qMKCBL5b3lFYuwErulazXkd5NI0xQvYH1fdmFbnHB
- PPrA==
+ bh=sjXeOeMLIl5XtTbxP7JmDA+nndGr6dBhMRoDafqHAB8=;
+ b=lpUa8/oNjgVrRzdtRzGgTfrs6Hk6jSiiw7b59nB2rpkrejwyrddTpqEW/ugRBEJQnW
+ lulAxOSC9nHcYZLbVZl2/AmcbC273HQCraTzF4Sk/CEBqCh8qPfM4lMPhB6q+/5H/LDr
+ hTaa9H3odxQuQWo6oh+PbvKDDCoxV7lNoIdBI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763557698; x=1764162498;
+ d=1e100.net; s=20230601; t=1763558181; x=1764162981;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=egoLxraSU++X5+XHPmc7/EQn0Eq4MRtQVgU+hNhtO1M=;
- b=dwWnY5cF4Y2q4wfrJtQxB4Ul1fYRtPcpKylXzzf8zkzuH+rK8Ds04ijaK5uVU1PUzl
- U0XbavdgoxY1jsY6qlc/isqYG3T2m4PbIFYOpLji7tBqbetd9M/iiFZSDEF6S7aeweXQ
- SOD66HoQqyBxwDcHTYwCvasi48knQ/5Xrmxdbp91OAWNYVCqGkab6QDFX3Bl1xS+6iZ8
- WZ8aByJaWKCkBc4BU49Di3Y3DZgqQ80ZMSL/2tD24G45Q3KvtuGTpCStmLqST85s4nHR
- DaYEF/qTX3KQVYKZFmIX5tc23ftXJiZ0XQ4sXyMk3Fv1kQM4oUmppSfQB/mIMhkii23+
- PusA==
+ bh=sjXeOeMLIl5XtTbxP7JmDA+nndGr6dBhMRoDafqHAB8=;
+ b=ucrafCDWEVoka7sPmj8MLVVfPkTk1UruNziv20zd8ged1zWeOFZkXuV65KNz1YK0Ti
+ wjJTec7uP9L0heSMK7gEWUYO5naE2fb7tfDlSXHm+MYTw9HBV/ETRiga9Ce4SdOFN6Mk
+ zy2VS79B/nuKAMUp8bZ2yKlCe7j65G02dyPezW05VkatM+tFMbb7sQmiKU/H8T2myE0n
+ ZyzUNxwlD+EBi9o1PaMZZGNVWYDgVb7gzI1EPZZLFljhuHbz6nCQYHjm/y1jWYjlCx6x
+ PD1/hZcVYZZ35saO/vya4Zb2/Ukf7rqG7W/gmYi31sAtwgkm+bE5jPrV5sm+ZjAzRjXj
+ KxgA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGEJ5mu151fSF4SOwAIk+YY2TiY/6+NPUKu3zl+1rCC0M0U9dxaxGHvzKzV8Mrw5+AFZ/bEPk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwNZKCv+QlwCFp+lWUPX//PUYkccpF3aAkKSlNHP4QVMszHTtR0
- COUIVnDlXYmM/NYf9dPO7nM3uPYC2j738KHHv+L+qzRwAqmPGL/DiTsIyLB7EeiFW/f52Q54doP
- urPsYOOL4E14EWqmc+eYLoHhHXmjYnBF+ZP1OJIE=
-X-Gm-Gg: ASbGncsYgvjzwMS7pNurWnKAxCQS9x5JzHQBFRRFMBAR61UL6jDZYfezNiVwGXWojoU
- 2qWtuhLBjsbK1nDk/9qpbyTgKpo2ArlGWMDi5zzWHYjlpuQbMrdjkbtXD9+mOnz1a4evxCTDPvv
- Smzudswtc8HAOfofUVR/FdGNijkwb7zQlswF0vIOlmw1UvsTFzV9M2zZQDWQubx28EWqHZaG/B3
- oT2eox/0JtnWrTVFA4WZ5oGXrGbaf9YXjSnHKAQjM9km4A7cAbFp9G2lzxX5l3MdForoFgcOEK8
- zS2qeQ==
-X-Google-Smtp-Source: AGHT+IH5vW0b/Wew0M3FvSpRhGsjMuid2ZVBE7NndnX3ELndZzBbuwgZTKuCfgpSMcMBMk28NCZ59AjoUVH9/pI2ktg=
-X-Received: by 2002:a05:6830:349c:b0:7c7:61f1:6fd3 with SMTP id
- 46e09a7af769-7c761f172cbmr6937944a34.9.1763557698028; Wed, 19 Nov 2025
- 05:08:18 -0800 (PST)
+ AJvYcCWeJf6doPDW/htl5UPl7uQASMPil6QIQDOmYlDC4o7UzqtAt6sA3DD0WevuRElFKmaYjhT33xo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQ4LNJktXlMPjLu/PkVSTWSAvCO+SnUnymqLVQ9xir6vNnDnKi
+ GRRD8LNnj+lTeXWAYGxiihpcw5M30kVc3vr4veJy92clHiT1RNtxufLPAUVMntWO861LJZwdLqq
+ T/nVVbZUdlq1LclaMnq8v/wd6/vzSKzCTfGO6FF6o
+X-Gm-Gg: ASbGnctKR/TVj2mz3exdl5WoIEDz1YrzREC3aHxGbybSjZsRUtilvbjfXOiPMl31F0r
+ GYSwKQJUWPnaL8UqPKmF3afj4RWttQgtfcIkSvhgYQe0frdk/m9Ffaw2omQFV7yxttuGCgY0y9J
+ fY3w11G1ylbXNAOOT+O0DNVxHKBFPs9ROFBmR191e3QAIAYQxQ8kpGnzENvUdm/lEBmWRozAAH7
+ I+YuHtjpn7QTUYFd/YvRxJaHaHFIJ75G15JyYBkt/zDAtcvFt3psXVf5XTRw7FRK/DETXG/Tez9
+ I062
+X-Google-Smtp-Source: AGHT+IGSP7yRJwnr3CgOGwu5Zh3oNr/p/F+FbO22mYYZvbzjIHd6IvhoOEljZStWhkD8ufjhvCYrNwZPMv18fi2WChA=
+X-Received: by 2002:a17:907:98a:b0:b46:6718:3f20 with SMTP id
+ a640c23a62f3a-b736793db07mr2129554066b.48.1763558181060; Wed, 19 Nov 2025
+ 05:16:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20251104223023.1613-1-briansune@gmail.com>
- <7e31b494-1ce1-4fb5-af49-d203830add7e@altera.com>
-In-Reply-To: <7e31b494-1ce1-4fb5-af49-d203830add7e@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Wed, 19 Nov 2025 21:08:06 +0800
-X-Gm-Features: AWmQ_bnsn7pPwSm9wBNTYrSsyS0oiDEiDl_vdS-3j6-_lWt_Jewph4sjvt1L_1Q
-Message-ID: <CAN7C2SCBqEajYv8v+meudRN439MeiEGnW5c+eUbMWFL0rcVoWg@mail.gmail.com>
-Subject: Re: [PATCH v7] Add optimized Makefile support for SoCFPGA handoff
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20251118201733.67297-1-heinrich.schuchardt@canonical.com>
+ <20251118201733.67297-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251118201733.67297-2-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 19 Nov 2025 06:16:07 -0700
+X-Gm-Features: AWmQ_bml7iK4D7mfojAzuKho0ljXQhQNZhU_v9F9nwi7ujevL9HC1kT4NTcGakg
+Message-ID: <CAFLszTg5eg4cbWGNtrqjCFo0YrZbaN0nssR2TkUOMX==wZXwpw@mail.gmail.com>
+Subject: Re: [PATCH 1/4] doc: make writing DM test subsection of writing C test
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,34 +95,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Arria 10 boards require the A10-specific filter script under:  arch/arm/mach-socfpga/qts-filter-a10.sh
+On Tue, 18 Nov 2025 at 13:17, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Invocation pattern: qts-filter-a10.sh <handoff-input-directory> <output-qts-dir>
+> A driver model test is just a special case of a C test.
 >
-> It processes a set of A10-specific XML and RBF inputs such as:
->
-> pinmux.xml
-> arria10_hps.xml
-> pll.xml
-> emif.xml
-> core.rbf
-> other Qsys-exported XML files
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  doc/develop/tests_writing.rst | 55 ++++++++++++++++++-----------------
+>  1 file changed, 29 insertions(+), 26 deletions(-)
 
-I had provided new patch and removed the A10.
-
-Second because this is bash script and according to
-what the new tools are supposed to look like.
-Python script is new tools language and should be
-followed accordingly.
-
-As such I will not going to merge A10 to this build flow.
-And any new family handoff should also put to
-the same location as Tom suggestion and also
-make things more clean and better on manage.
-u-boot/tools/a10_bsp_generator.
-
-Meantime, I think it is even better on generalizing
-one folder for all Altera socfpga tools, with
-requirements.txt as well.
-
-Brian
+Reviewed-by: Simon Glass <sjg@chromium.org>
