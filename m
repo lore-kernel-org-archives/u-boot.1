@@ -4,65 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53339CF3958
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 16:45:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64B63CF397E
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 16:48:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E7E383FF4;
-	Wed, 19 Nov 2025 17:44:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id DF99583015;
+	Wed, 19 Nov 2025 17:48:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE95C807C0; Wed, 19 Nov 2025 17:44:23 +0100 (CET)
-Received: from smtp-190c.mail.infomaniak.ch (smtp-190c.mail.infomaniak.ch
- [185.125.25.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5AF8F835C6; Wed, 19 Nov 2025 17:48:37 +0100 (CET)
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1095B835C6
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 17:44:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5866F807C0
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 17:48:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dBS4P6Cvrzjfv;
- Wed, 19 Nov 2025 17:44:21 +0100 (CET)
-Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dBS4N4p0zz8RZ; Wed, 19 Nov 2025 17:44:20 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 19 Nov 2025 17:43:49 +0100
-Subject: [PATCH 5/5] powerpc: remove unused legacy LED API
+ dmarc=fail (p=none dis=none) header.from=lst.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
+Received: by verein.lst.de (Postfix, from userid 107)
+ id 038BA68BFE; Wed, 19 Nov 2025 17:48:32 +0100 (CET)
+Received: from rocky.lan (p5b2ecc04.dip0.t-ipconnect.de [91.46.204.4])
+ by verein.lst.de (Postfix) with ESMTPSA id C254568BEB;
+ Wed, 19 Nov 2025 17:47:47 +0100 (CET)
+Date: Wed, 19 Nov 2025 17:47:40 +0100
+From: Torsten Duwe <duwe@lst.de>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Matthias Brugger <mbrugger@suse.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Christian Marangi
+ <ansuelsmth@gmail.com>, Elaine Zhang <zhangqing@rock-chips.com>, Gabriel
+ Fernandez <gabriel.fernandez@foss.st.com>, Heiko Stuebner
+ <heiko@sntech.de>, Huan Zhou <me@per1cycle.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, "Jan XXermXXk" <sairon@sairon.cz>, Jerome
+ Forissier <jerome.forissier@linaro.org>, Joe Hershberger
+ <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>, Joseph Chen
+ <chenjh@rock-chips.com>, Kever Yang <kever.yang@rock-chips.com>, Leo Yu-Chi
+ Liang <ycliang@andestech.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Paul Barker
+ <paul.barker.ct@bp.renesas.com>, Ramon Fried <rfried.dev@gmail.com>, Tom
+ Rini <trini@konsulko.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Subject: Re: [RESEND PATCH 2/4] pci-uclass: respect ofnode_read_pci_vendev
+ retval
+Message-ID: <20251119174740.00be0a78@rocky.lan>
+In-Reply-To: <20251105164432.C8AA4227AAD@verein.lst.de>
+References: <20251105163553.15F2A227AAC@verein.lst.de>
+ <20251105164432.C8AA4227AAD@verein.lst.de>
+Organization: LST e.V.
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.50; aarch64-suse-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251119-legacy-led-unused-code-v1-5-bc0ae1235baa@cherry.de>
-References: <20251119-legacy-led-unused-code-v1-0-bc0ae1235baa@cherry.de>
-In-Reply-To: <20251119-legacy-led-unused-code-v1-0-bc0ae1235baa@cherry.de>
-To: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Raymond Mao <raymondmaoca@gmail.com>, 
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Alexander Graf <agraf@csgraf.de>, Peter Robinson <pbrobinson@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Weijie Gao <hackpascal@gmail.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
- =?utf-8?q?Alvin_=C5=A0ipraga?= <alvin@pqrs.dk>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Max Merchel <Max.Merchel@ew.tq-group.com>, Mario Six <mario.six@gdsys.cc>, 
- =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>, 
- Sinan Akman <sinan@writeme.com>, Jesse Taube <mr.bossman075@gmail.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.3
-X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,67 +73,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hi Peter,
 
-No PPC upstream defconfig actually enables CONFIG_LED_STATUS and we're
-trying to get rid of the legacy LED API, so let's remove one of its last
-users.
+please don't apply this one yet.
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- arch/powerpc/lib/interrupts.c | 7 -------
- drivers/timer/mpc83xx_timer.c | 5 -----
- 2 files changed, 12 deletions(-)
+On Wed,  5 Nov 2025 17:44:32 +0100 (CET)
+Torsten Duwe <duwe@lst.de> wrote:
 
-diff --git a/arch/powerpc/lib/interrupts.c b/arch/powerpc/lib/interrupts.c
-index 46208ae4c71..f7d938ba5e0 100644
---- a/arch/powerpc/lib/interrupts.c
-+++ b/arch/powerpc/lib/interrupts.c
-@@ -11,9 +11,6 @@
- #include <irq_func.h>
- #include <asm/processor.h>
- #include <watchdog.h>
--#ifdef CONFIG_LED_STATUS
--#include <status_led.h>
--#endif
- #include <asm/ptrace.h>
+> The vendor:device read in pci_uclass_child_post_bind() might fail,
+> which is currently ignored. In that case e.g. the RP1 on the RasPi5
+> is erroneously being treated as a host bridge.
+> 
+> Mark the device's PCI info as invalid in case of failure.
+> 
+> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+> Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+> Signed-off-by: Torsten Duwe <duwe@suse.de>
+> Reviewed-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+> ---
+>  drivers/pci/pci-uclass.c | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+> index c370f8c6400..4092e8ff5a9 100644
+> --- a/drivers/pci/pci-uclass.c
+> +++ b/drivers/pci/pci-uclass.c
+> @@ -1200,6 +1200,7 @@ static int pci_uclass_post_probe(struct udevice *bus)
+>  static int pci_uclass_child_post_bind(struct udevice *dev)
+>  {
+>  	struct pci_child_plat *pplat;
+> +	int err;
+>  
+>  	if (!dev_has_ofnode(dev))
+>  		return 0;
+> @@ -1207,7 +1208,13 @@ static int pci_uclass_child_post_bind(struct udevice *dev)
+>  	pplat = dev_get_parent_plat(dev);
+>  
+>  	/* Extract vendor id and device id if available */
+> -	ofnode_read_pci_vendev(dev_ofnode(dev), &pplat->vendor, &pplat->device);
+> +	err = ofnode_read_pci_vendev(dev_ofnode(dev), &pplat->vendor,
+> +				     &pplat->device);
+> +	if (err) {
+> +		/* Mark PCI device structure as invalid */
+> +		pplat->devfn = -1;
+
+While I guess we all agree that an error return should not be ignored,
+there might still be a better solution in this case. pplat->devfn = -1
+might prevent the worst, but I assume the PCI dev 
+
+| 02.1f.07   0xffff     0xffff     Does not fit any class  0xff
+
+is a result of that.
  
- #ifndef CONFIG_MPC83XX_TIMER
-@@ -82,10 +79,6 @@ void timer_interrupt(struct pt_regs *regs)
- 	if (CFG_SYS_WATCHDOG_FREQ && (timestamp % (CFG_SYS_WATCHDOG_FREQ)) == 0)
- 		schedule();
- #endif    /* CONFIG_WATCHDOG || CONFIG_HW_WATCHDOG */
--
--#ifdef CONFIG_LED_STATUS
--	status_led_tick(timestamp);
--#endif /* CONFIG_LED_STATUS */
- }
- 
- ulong get_timer (ulong base)
-diff --git a/drivers/timer/mpc83xx_timer.c b/drivers/timer/mpc83xx_timer.c
-index f92009e4ccc..07fb66065b7 100644
---- a/drivers/timer/mpc83xx_timer.c
-+++ b/drivers/timer/mpc83xx_timer.c
-@@ -9,7 +9,6 @@
- #include <dm.h>
- #include <irq_func.h>
- #include <log.h>
--#include <status_led.h>
- #include <sysinfo.h>
- #include <time.h>
- #include <timer.h>
-@@ -178,10 +177,6 @@ void timer_interrupt(struct pt_regs *regs)
- 	if (CFG_SYS_WATCHDOG_FREQ && (priv->timestamp % (CFG_SYS_WATCHDOG_FREQ)) == 0)
- 		schedule();
- #endif    /* CONFIG_WATCHDOG || CONFIG_HW_WATCHDOG */
--
--#ifdef CONFIG_LED_STATUS
--	status_led_tick(priv->timestamp);
--#endif /* CONFIG_LED_STATUS */
- }
- 
- void wait_ticks(ulong ticks)
+> +		return 0;
+> +	}
+>  
+>  	/* Extract the devfn from fdt_pci_addr */
+>  	pplat->devfn = pci_get_devfn(dev);
 
--- 
-2.51.1
-
+thanks,
+	Torsten
