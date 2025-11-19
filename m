@@ -4,98 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C80CF58E5
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 20:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F390CF6484
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 22:13:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29CE483F1F;
-	Wed, 19 Nov 2025 21:55:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C31BD83EF9;
+	Wed, 19 Nov 2025 23:13:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JzHYikQ8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J5aZby7M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26F4983F26; Wed, 19 Nov 2025 21:55:25 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 0CFDA83F26; Wed, 19 Nov 2025 23:13:12 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD3FF83EF9
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 21:55:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B114883E40
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 23:13:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7c765f41346so70599a34.3
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 12:55:22 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b735ce67d1dso37488566b.3
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 14:13:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763585721; x=1764190521; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vfnhxCZ9UJJ4EwwiYVL+wenGiYbA7DpkXXHFc/TSYF8=;
- b=JzHYikQ8XrAjWVY1PgFzGnU0g68AzASZX13F3lqNEfU57M9qKT1bgsJIZyHQGM5AaC
- NIhMRwiRQfiWGs21JMon6sRSMpe+ADesYbB2xQ4bopaYKWBX916aspzTlcG6qS3cmth7
- us8bj8TqFbzeJJpvmZ/Sq/ewkFIaacZicgUZ4=
+ d=chromium.org; s=google; t=1763590389; x=1764195189; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mCLNgYR8EkmUKKIz7QbsuxDCM9vgg6yBRHHSwUEyxZQ=;
+ b=J5aZby7MmLkDWuCWEwel1jD4Mk6wE/NrKOFzIk99qgoFiE0SLaXN1RWEjvqfP+G058
+ dMNDlt09+8Kvn4Ru/7vIrFUQg3wHVVbXoA+j1TYo6B2sLpg2kcCYuncvdqyYndY6uUs9
+ 6LqE+6GZelWGshqP5gTq5T+aBUJd/t1m+6dd0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763585721; x=1764190521;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vfnhxCZ9UJJ4EwwiYVL+wenGiYbA7DpkXXHFc/TSYF8=;
- b=ZCszYlWj8hPCKJSK8cSJGqTtu6niql8DxtlHD0V5pj01019rp6kKuV43ubwX2fovL8
- cjIJU6q4LtznFkmRfGJvi0tR5AePTr0wydfEkKJHyA+RsHTho7u7UN0IqcePpMivfgfL
- EuUFLuS4iK0Wi4MS0MXYxymb6oU8ytT034y8/ElWoEYb60mWR1+OnDLCwOV2FD3efOuX
- D3Sg+cjA9VLT0zC6RUahNtEZ7OnhAvbN6siB/BRUQngY5uFAOZ4J1KYjwdIrCBlaXqDe
- NKXaM133nQ7bUutYKY2zs1ez33T2e+KZFaoVDbmlxIgg4oF5WIogg5PcHS4mMhaTA1tY
- QGaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUnK/t4GPXQHTPG3nrQEl3VXqfWm8iCT0PeYl05pBBWvb5lqpTVaQ1Wn3OTXJudUEwgd/2lfxg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxvyiMQtrbTa+tQyvM0rHJ2AJ74jeZHA5K6QYJO+AiTM2ZQgjyH
- Qpvp6mWfT2M2mWuwVVdUUdhIRzqY9ah3O+DT7VgM3KFHt1nXA2xj32iiLKMVq7ySQCQ=
-X-Gm-Gg: ASbGnctzBkhebP/z/NKh2o1vOAEEZPHwbCk5jac4kZyoYRnQlAk2lCtSfOSOPe2ePSy
- RmKxsrvnRk2rspZED7dS2wkdYAsXiNw0/PgWO2zbuG1cfHz0hb9/5aQgYotUxH8CTrIrcTyeqI0
- 7RPz2WEWSL4QfDfdiubiLZo6kLd/ZzwZ6PVhmqoIQpLwwzg2zC7MUoYdIACQYF39eGUh75OI2JH
- vKl3bCxUFNl2n1eCbWNwox2nKeM9f2QArC5rq0WW8EbNhscWguLnr5iIX7+UA+eoh5ZYr5di6U7
- fkqOuuVWW//fckv4LlF4lDBEZfPBBkHn0Xm7kzvQY72y2x/7aa9/uGtrbRqHFU4GitP6dlAM+70
- eaSv/gtuXJhSwlzc+vL8Ait6SR8LCBK2QusDrxMoA1u15F+sncUQvn9dpUZz6h9sUDyuir1hhUS
- Oqt6OPvZcFTumfLgfhc0DwkSveioReBTYoH77w5JXlM7IHxzz9x3zLFSGWq+Wq
-X-Google-Smtp-Source: AGHT+IH3y4op3sw5FValN97j7T1NMktDZ55OeEKu8YRQwd+ietQdK6pMW7GQU06W//BC1GjAXQsvUw==
-X-Received: by 2002:a05:6830:277:b0:7c7:58e9:8e16 with SMTP id
- 46e09a7af769-7c78e49afdbmr97259a34.14.1763585721555; 
- Wed, 19 Nov 2025 12:55:21 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c78d3e3bc6sm208881a34.16.2025.11.19.12.55.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Nov 2025 12:55:20 -0800 (PST)
-Date: Wed, 19 Nov 2025 14:55:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Vignesh R <vigneshr@ti.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- U-Boot-Denx <u-boot@lists.denx.de>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Steam Lin <stlin2@winbond.com>
-Subject: Re: [PATCH] mtd: spinor: winbond: Describe several chips
-Message-ID: <20251119205518.GG2125796@bill-the-cat>
-References: <20250703170253.1231818-1-miquel.raynal@bootlin.com>
- <87frcwexyt.fsf@bootlin.com> <875xbegt1x.fsf@bootlin.com>
- <20251113142745.GI6688@bill-the-cat>
- <CAOf5uwn_ggFp-KW6qDcKYn1kKA6+FabyQLCT1ecVoBdv9s3UqQ@mail.gmail.com>
- <20251118143405.GA527619@bill-the-cat>
- <CAOf5uw=jx7jTgkeZytjU0t7VFHSVrXfntxrpapUSWrYh5z8exg@mail.gmail.com>
- <CAOf5uwmygi5z3ae_wgJxu4LSKWfEHfAzPTWzN3TUCk22pHqikQ@mail.gmail.com>
- <87cy5ecpd8.fsf@bootlin.com>
- <CAOf5uw=oRJEKu3FQZ253OrHDczmJrunXTjchzDfXvKQ6vr=xhg@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1763590389; x=1764195189;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mCLNgYR8EkmUKKIz7QbsuxDCM9vgg6yBRHHSwUEyxZQ=;
+ b=lswePWifmKjv/jz0l7oWZ6tATFfa5GFuy8uM/cTbBAN0nz0FXGMWZnjDWgiGOrDuvP
+ 4YrNzrMXmpe/yOwy51w1yitHRHwEWDUsIBSXTGvyrqCQ6TdAUJ8ARYNBbaJolxrYp+Ls
+ Zgq+D9ZneORjh41yTXDUrVQhi922Y1zAnP47/V5bJEK5MAlMqENOd0ajCWom9iy+XsFC
+ x4YHd2vMzAZXRBKxZklhAshRtrwJlMai1NokljLbNV441KdRtQgo4QBk76EzmRmBQL3H
+ iEzrAIG6s3vBcLz9QXl5Y4hriXOmDRy7sqf2RaQ3AYogOgsblYC8XEdlEozNKqXbQpaW
+ z2nA==
+X-Gm-Message-State: AOJu0Yy47eWozbfP+PFtwEyRuc9X2MApI9lWdi3leiF6YdJtfTfZV+69
+ mSLkh0yyD9Jm2a5x4HdOVtr9gcFg0x0xmP9Mwdo06QxKygVYWxE3XTZmXzFdXsTG9X4w/rfk251
+ fRuv7qaY38VHA/4hXZioenFSieW48eQCIKE9pV2UT
+X-Gm-Gg: ASbGncv367xCliQlgV102SD4v+cHj/p4R+uij59vGhar3WtKxMspvJrWSUHUROTlphu
+ u4k+jrkw3yQllwAsuyQUCmxeJrPZQGzhN01FLWrJmNoi4GanWJikUHWFNbxsUudJJsSSw8sJr0k
+ IqAkAHd16Y8Sii7h7hawAv1qx6MycHuYjGq5RvRVMuylGWI7QcBeltqITvaU+xQCTQZ1/jryXw/
+ n2pH6wgz9nE7pxgOk192hzu3zBZ+HLoOlm13R5+kFSxTx5RHsMioHKEUlxrtZd85o06Sg==
+X-Google-Smtp-Source: AGHT+IHecxNLLoA7/7W5yyrjx9pxVPGTgBU8nJ/whJ2aE5YVKHtkaY6Yd0AgqtKJPC6ET8m0rotN6lzD5vcaxMP8iCk=
+X-Received: by 2002:a17:907:9620:b0:b73:594e:1c47 with SMTP id
+ a640c23a62f3a-b7654d61053mr79822266b.26.1763590388863; Wed, 19 Nov 2025
+ 14:13:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gPBNLRRLpGDZZbmA"
-Content-Disposition: inline
-In-Reply-To: <CAOf5uw=oRJEKu3FQZ253OrHDczmJrunXTjchzDfXvKQ6vr=xhg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251119184640.543904-1-adriana@arista.com>
+In-Reply-To: <20251119184640.543904-1-adriana@arista.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 19 Nov 2025 15:12:55 -0700
+X-Gm-Features: AWmQ_bmaRRzoZ8iPjI6VDojUdMR-YhxpnwppV-N-1DNCS_Eo6jxlecYX-j4FnpU
+Message-ID: <CAFLszThwH8PHwDXRiTH=Z6w66to6Swu+DiBGPd6btsadB4L5cQ@mail.gmail.com>
+Subject: Re: [PATCH v4] boot/bootfdt: Add smbios3-entrypoint to FDT for
+ non-EFI boots
+To: Adriana Nicolae <adriana@arista.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, ddrokosov@salutedevices.com, 
+ ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, xypron.glpk@gmx.de, 
+ kojima.masahisa@socionext.com, richard@nod.at, semen.protsenko@linaro.org, 
+ joao.goncalves@toradex.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,94 +90,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 19 Nov 2025 at 11:46, Adriana Nicolae <adriana@arista.com> wrote:
+>
+> From: adriana <adriana@arista.com>
+>
+> The Linux kernel can discover SMBIOS tables through two primary methods:
+> 1. Via EFI tables, when using EFI boot;
+> 2. Via the 'smbios3-entrypoint' property in the /chosen node of the
+> device tree.
+>
+> When U-Boot boots a Linux kernel using a non-EFI command ("bootm",
+> "bootz", or "booti"), the kernel relies on the device tree to detect
+> the hardware. If SMBIOS tables are available in U-Boot, they should
+> be passed to the kernel via this device tree property.
+>
+> This patch modifies boot_fdt_prepare(), to inject the SMBIOSv3 table
+> address into the device tree if there is a table generated by U-boot.
+> The "board_fdt_chosen_smbios" is weak in order to leave the possibilty
+> for specific boards to select custom SMBIOS addresses.
+>
+> The changes in this patch are added in the context of supporting this
+> device tree property in linux kernel:
+> https://lkml.org/lkml/2025/10/24/1393
+>
+> Device tree schema was updated to include the "smbios3-entrypoint" node
+> in pull request: https://github.com/devicetree-org/dt-schema/pull/177
+>
+> Signed-off-by: Adriana Nicolae <adriana@arista.com>
+> ---
+> Changes in v4:
+>   - Remove weak function board_fdt_chosen_smbios(), replace with
+>     gd_smbios_start();
+>   - Return -EAGAIN in test if GENERATE_SMBIOS_TABLE is not enabled;
+>   - Remove unnecessary fdt cleanup at the end of the test;
+>   - Added missing newlines at the end of the modified files.
+>
+> Changes in v3:
+>   - Moved "board_fdt_chosen_smbios" function to lib/smbios.c
+>   - Return physical address of smbios entry and use map_sysmem to
+>     access the entry point;
+>   - Removed check for config enabled and added check for
+>     GENERATE_SMBIOS_TABLE;
+>   - Add test to check that smbios entry address is added into fdt;
+>
+> Changes in v2:
+>   - Renamed device tree property to "smbios3-entrypoint".
+>   - Removed redundant check for CONFIG_SMBIOS.
+> ---
+>  boot/fdt_support.c | 19 ++++++++++++++++++
+>  test/dm/fdtdec.c   | 48 ++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 67 insertions(+)
+>
 
---gPBNLRRLpGDZZbmA
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Nov 19, 2025 at 11:08:29AM +0100, Michael Nazzareno Trimarchi wrote:
-> Hi Miquel
->=20
-> On Wed, Nov 19, 2025 at 11:01=E2=80=AFAM Miquel Raynal
-> <miquel.raynal@bootlin.com> wrote:
-> >
-> > Hi Michael,
-> >
-> > On 19/11/2025 at 10:06:42 +01, Michael Nazzareno Trimarchi <michael@ama=
-rulasolutions.com> wrote:
-> >
-> > > Hi Tom, and Miguel
-> > >
-> > > I pick a large part of the patches now, and check them and rebase all
-> > > of them. I will prepare one pull request today and another later this
-> > > week
-> >
->=20
-> First of all I make a mistake with your name
->=20
-> > What do you mean by "a large part"? Can you be more specific about
-> > which patches you would not be picking and why?
-> >
->=20
-> Yes some of the patches are connected to Altera one and I need to look be=
-tter
-> on them and I will look the next two days. Some of the patches are trivia=
-l:
->=20
-> - mtd: spinor: winbond: Describe several chips
-> - nand: raw: Kconfig: Correct some dependency issues
-> - cmd: mtd: benchmark: use lldiv() instead of 64-bit division
-> - spl: nand: typo 'destintion'
-> - mtd: spinand: add support for FudanMicro FM25S01A
-> - mtd: nand: raw: Drop SYS_NAND_SOFT_ECC from NAND_SANDBOX
-> - spi: spi-mem: fix coverity report CID 537478
->=20
-> Then I have applied the airoha spi patches on top of my queue.
->=20
->=20
-> > I am not comfortable with this sentence given for how long these have
-> > been reviewed and applied in Linux and also submitted to
-> > U-Boot. Custodians are supposed to work in best effort mode, but
-> > delaying, delaying and further delaying is not what I would qualify as
-> > an adapted behaviour. I understand you have other work to do. I also
-> > take my responsibility in reviewing and collecting and merging patches,
->=20
-> I will not delay anymore I will be more active regarding my duties
->=20
-> This is the branch u-boot-nand-20250918 . If you still want to go further
-> in the discussion and make the process better, I'm more then happy to
-> follow your suggestions.
->=20
-> > I may do errors and I correct them when that happens, but try not to put
-> > all the pressure on my very own shoulders, down to the situation where
-> > nothing moves anymore. Tom has been regularly trying to provide support
-> > and help. I would friendly suggest Amarula folks to adopts a softer/more
-> > progressive approach regarding maintainance roles.
->=20
-> We will try to work better.
-
-Please, yes. And while a lot of the patches have been around for a while
-I think at this point things that are left need to go in to the -next
-branch as well. Which is unfortunate as they have been out for some
-time, but given the point in the release cycle this is at, is the best
-choice I think. And this also goes for "spi" patches as well, as the
-split between "nand", "mtd' and "spi" is not always logically easy and
-compounded by our custodians being at the same company with presumably
-similar things vying for time. Thanks!
-
---=20
-Tom
-
---gPBNLRRLpGDZZbmA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaR4uswAKCRAr4qD1Cr/k
-CmUxAQC5Q21sD5v/AwkS9YUJyotYDb3Dgb/SfkI6kA5LEHbF4QEAuWOt0VFJ2jsq
-c2uNXq15Jnfyz+EjMZJgrOMJ4zHzUgQ=
-=GFHh
------END PGP SIGNATURE-----
-
---gPBNLRRLpGDZZbmA--
+Reviewed-by: Simon Glass <sjg@chromium.org>
