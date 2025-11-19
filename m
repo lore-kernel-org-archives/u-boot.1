@@ -4,54 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D407CF3959
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 17:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 075A3CF3959
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 17:05:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CFC48401A;
-	Wed, 19 Nov 2025 18:01:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 4CC2D84022;
+	Wed, 19 Nov 2025 18:05:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FDZP2VQO";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9C7883FF4; Wed, 19 Nov 2025 18:01:29 +0100 (CET)
-Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
- [83.166.143.170])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1335A83FF9; Wed, 19 Nov 2025 18:05:28 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ECAB835C6
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 18:01:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9BAE8404A
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 18:05:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
- [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dBSS22nBqzsym;
- Wed, 19 Nov 2025 18:01:22 +0100 (CET)
-Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dBSS14qq4zH8c; Wed, 19 Nov 2025 18:01:21 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 19 Nov 2025 18:01:15 +0100
-Subject: [PATCH 4/4] led: remove support for red LED in legacy API
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251119-corvus-led-red-green-v1-4-ce86b8d59dfc@cherry.de>
-References: <20251119-corvus-led-red-green-v1-0-ce86b8d59dfc@cherry.de>
-In-Reply-To: <20251119-corvus-led-red-green-v1-0-ce86b8d59dfc@cherry.de>
-To: u-boot@lists.denx.de
-Cc: Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Jesse Taube <mr.bossman075@gmail.com>, Raymond Mao <raymondmaoca@gmail.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Eugen Hristev <eugen.hristev@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Neha Malcom Francis <n-francis@ti.com>, Fabio Estevam <festevam@gmail.com>, 
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-657490df6f3so1677444eaf.2
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 09:05:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763571922; x=1764176722; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vrQwvbR+xwO8BxrjGcwPgHtc/Q1/ReXKUcXDM6KYEVo=;
+ b=FDZP2VQOhl4PHkfpQ8Hw9XpBRdHNtJ6ozV1ahT8RP9c7qJW5JR76hVWtcXtXd3w5UQ
+ ymmzdqqDB2GApxwmHzLzi6WnyTDUTHwWU/FH8EANo21Q6KM1zvvuZR7/i8dm2y/iRnFu
+ P57MbEIGz/oddfc7bbe98J6r+S0SLMehvdXKg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763571922; x=1764176722;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vrQwvbR+xwO8BxrjGcwPgHtc/Q1/ReXKUcXDM6KYEVo=;
+ b=r/k41utW+nwXqQoy/r7amfe8qPbq25nIVgU2+9YEuZiidVHwTBanRLRThUXUb+4pEN
+ dS2orkVC4GbDTeF/1NzdeQu73QRWqtkJfYXaIEcp2UfC3eZ/PeVkebFboPMPPLJEwBOs
+ ylr0++VfJWCgGhFTZxxMgWSvYdPwhBAoyk0BWk18IwHx0T6v3ASUsZF3EquWILBrqRJI
+ 2BR7WRURVfZj++Ywq4lN2QeAn7AkN8Zixi5DsZ3w/X+QXd2JKx/LInSpb8SlIFThdUow
+ FKtBOjkg2H5OrKoRrVENvLRBtPhr6AIzd8dYmAqzqmAboMoV4+8W/JRBPP69uiQrBSW0
+ mTvg==
+X-Gm-Message-State: AOJu0YxrBosrcpXfl/vXZag1kmFSwH8/vCWRPopuOL8pdjY5nN8qVvW2
+ 8VS5oUI0FodgLp4q31+2ctEQTsx8k82k85FF4jhDkWBQPZW2KEDwmkZasjM5XFOlr+0=
+X-Gm-Gg: ASbGncvCYbifraYmo5o/V9k2yL/1l/yPRMwsjO0SYTxevaK0iI/nVOpTJmjQX6tM155
+ DJAAlMBAIZORkV5cJ0N855ksMUdOBIVlt9cxNO80nFkpjbww8k2C20g9gCJVYS8dCNZZloLu3JC
+ +MFxt375vfWYaM6KdUYO0Ei0btUhffzOKJEvT8NjPs2TCrwx9n6iI2XnvQXGia8kX9q/MEB8+vH
+ EC/LjCMlcID2b/HrI5xjwUUU4q/H2KAbN7A5Z2padqnRKz2fzAORai/1P5MPFo0RQhHD3uRXJj9
+ SmTCgRhgTp2pMLEf8abwFQ6vlrhm594Xc7WdL5INLpJtaxctK+hO4KD27j7QwY3EuIGDpEVJHt8
+ qAJ6udnaD9KYDfV1vHZEShqyvnu4qYOHIO+I5zosTBCG81RrE+euUuLdnLFpYngUIR1+oic/8Ov
+ XzWeW4uf7RM74LLmXCfm/1LSoAACt0mLsDugl0WonAl2w+kMODQzBuqJoeM+JwEVZkpPjmHEQ=
+X-Google-Smtp-Source: AGHT+IFTsaLmJsY3wvJaHvoh4pekXyguVQCZArnjBbQQcclU5qAeI33VlMp6AnJMa2iKfH4/2RSQ7g==
+X-Received: by 2002:a05:6870:4413:b0:3e8:5248:2f5b with SMTP id
+ 586e51a60fabf-3ec9a36c8d0mr28238fac.18.1763571922062; 
+ Wed, 19 Nov 2025 09:05:22 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3e8522637e2sm2310492fac.12.2025.11.19.09.05.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Nov 2025 09:05:21 -0800 (PST)
+Date: Wed, 19 Nov 2025 11:05:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Alexander Graf <agraf@csgraf.de>, Peter Robinson <pbrobinson@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Weijie Gao <hackpascal@gmail.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Alvin =?utf-8?Q?=C5=A0ipraga?= <alvin@pqrs.dk>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Max Merchel <Max.Merchel@ew.tq-group.com>, Mario Six <mario.six@gdsys.cc>,
+ =?iso-8859-1?Q?J=2E_Neusch=E4fer?= <j.ne@posteo.net>,
+ Sinan Akman <sinan@writeme.com>, Jesse Taube <mr.bossman075@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>,
  Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.3
-X-Infomaniak-Routing: alpha
+Subject: Re: [PATCH 1/5] led: remove code guarded by always false conditions
+Message-ID: <20251119170518.GB2125796@bill-the-cat>
+References: <20251119-legacy-led-unused-code-v1-0-bc0ae1235baa@cherry.de>
+ <20251119-legacy-led-unused-code-v1-1-bc0ae1235baa@cherry.de>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6qxuaCXOkILOoQof"
+Content-Disposition: inline
+In-Reply-To: <20251119-legacy-led-unused-code-v1-1-bc0ae1235baa@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,199 +119,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
 
-To the exception of red_led_on in the arm-specific assembly code, all
-code interacting with the red status LED was guarded by the
-CONFIG_LED_STATUS_RED symbol, which is enabled in none of the upstream
-defconfigs.
+--6qxuaCXOkILOoQof
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Since the last board which overrode the weak red_led_on function got
-migrated to the new LED mechanism, there's also no user of the
-arm-specific assembly code anymore, therefore it can be removed along
-the other unreachable code sections.
+On Wed, Nov 19, 2025 at 05:43:45PM +0100, Quentin Schulz wrote:
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- arch/arm/lib/crt0.S     |  3 ---
- cmd/legacy_led.c        |  6 ------
- common/board_f.c        | 14 --------------
- doc/api/led.rst         | 16 ----------------
- drivers/led/Kconfig     | 14 --------------
- drivers/misc/gpio_led.c | 18 ------------------
- include/status_led.h    | 12 ------------
- 7 files changed, 83 deletions(-)
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+>=20
+> The last CONFIG_MVS in code was removed almost 12 years ago in commit
+> 3b98b57fa796 ("include: delete unused header files").
+>=20
+> STATUS_LED_PAR was last seen 8 years ago when removed in commit
+> 5b8e76c35ec3 ("powerpc, 8xx: remove support for 8xx").
+>=20
+> If CONFIG_LED_STATUS_BOARD_SPECIFIC is not defined, the build will fail
+> so we won't even reach this part of the code.
+>=20
+> Let's simplify the if block to actually possible configurations.
+>=20
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-diff --git a/arch/arm/lib/crt0.S b/arch/arm/lib/crt0.S
-index 9acaf2cddef..d10c129705d 100644
---- a/arch/arm/lib/crt0.S
-+++ b/arch/arm/lib/crt0.S
-@@ -183,9 +183,6 @@ here:
- 	movne	r9, r0
- # endif
- 
--#if ! defined(CONFIG_XPL_BUILD)
--	bl red_led_on
--#endif
- 	/* call board_init_r(gd_t *id, ulong dest_addr) */
- 	mov     r0, r9                  /* gd_t */
- 	ldr	r1, [r9, #GD_RELOCADDR]	/* dest_addr */
-diff --git a/cmd/legacy_led.c b/cmd/legacy_led.c
-index 2c6d606f48b..4e0d09522ad 100644
---- a/cmd/legacy_led.c
-+++ b/cmd/legacy_led.c
-@@ -44,9 +44,6 @@ static const led_tbl_t led_commands[] = {
- #ifdef CONFIG_LED_STATUS5
- 	{ "5", CONFIG_LED_STATUS_BIT5, NULL, NULL, NULL },
- #endif
--#endif
--#ifdef CONFIG_LED_STATUS_RED
--	{ "red", CONFIG_LED_STATUS_RED, red_led_off, red_led_on, NULL },
- #endif
- 	{ NULL, 0, NULL, NULL, NULL }
- };
-@@ -158,9 +155,6 @@ U_BOOT_CMD(
- #ifdef CONFIG_LED_STATUS5
- 	"5|"
- #endif
--#endif
--#ifdef CONFIG_LED_STATUS_RED
--	"red|"
- #endif
- 	"all] [on|off|toggle|blink] [blink-freq in ms]",
- 	"[led_name] [on|off|toggle|blink] sets or clears led(s)"
-diff --git a/common/board_f.c b/common/board_f.c
-index 74571cb6d91..df2b0dc899b 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -54,20 +54,6 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--/*
-- * TODO(sjg@chromium.org): IMO this code should be
-- * refactored to a single function, something like:
-- *
-- * void led_set_state(enum led_colour_t colour, int on);
-- */
--/************************************************************************
-- * Coloured LED functionality
-- ************************************************************************
-- * May be supplied by boards if desired
-- */
--__weak void red_led_on(void) {}
--__weak void red_led_off(void) {}
--
- /*
-  * Why is gd allocated a register? Prior to reloc it might be better to
-  * just pass it around to each function in this file?
-diff --git a/doc/api/led.rst b/doc/api/led.rst
-index e9705eb69a5..1a61f2ad916 100644
---- a/doc/api/led.rst
-+++ b/doc/api/led.rst
-@@ -57,9 +57,6 @@ Some other LED macros
- CONFIG_STATUS_LED_BOOT is the LED to light when the board is booting.
- This must be a valid LED number (0-5).
- 
--CONFIG_STATUS_LED_RED is the red LED. It is used to signal errors. This must be
--a valid LED number (0-5).
--
- General LED functions
- ~~~~~~~~~~~~~~~~~~~~~
- The following functions should be defined:
-@@ -71,19 +68,6 @@ __led_set is called to change the state of the LED.
- 
- __led_toggle is called to toggle the current state of the LED.
- 
--Colour LED
------------
--
--Colour LED's are at present only used by ARM.
--
--The functions names explain their purpose.
--
--- red_LED_on
--- red_LED_off
--
--These are weakly defined in arch/arm/lib/board.c to noops. Where applicable, define
--these functions in the board specific source.
--
- TBD : Describe older board dependent macros similar to what is done for
- 
- TBD : Describe general support via asm/status_led.h
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index 6b043f9a522..cc715ceb286 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -400,20 +400,6 @@ config LED_STATUS_BOOT
- 
- endif # LED_STATUS_BOOT_ENABLE
- 
--config LED_STATUS_RED_ENABLE
--	bool "Enable red LED"
--	help
--	  Enable red status LED.
--
--if LED_STATUS_RED_ENABLE
--
--config LED_STATUS_RED
--	int "Red LED identification"
--	help
--	  Valid enabled LED device number.
--
--endif # LED_STATUS_RED_ENABLE
--
- config LED_STATUS_CMD
- 	bool "Enable status LED commands"
- 
-diff --git a/drivers/misc/gpio_led.c b/drivers/misc/gpio_led.c
-index a1432a53440..1e2f83cca93 100644
---- a/drivers/misc/gpio_led.c
-+++ b/drivers/misc/gpio_led.c
-@@ -50,21 +50,3 @@ void __led_toggle(led_id_t mask)
- {
- 	gpio_set_value(mask, !gpio_get_value(mask));
- }
--
--#ifdef CONFIG_GPIO_LED_STUBS
--
--/* 'generic' override of colored LED stubs, to use GPIO functions instead */
--
--#ifdef CONFIG_LED_STATUS_RED
--void red_led_on(void)
--{
--	__led_set(CONFIG_LED_STATUS_RED, CONFIG_LED_STATUS_ON);
--}
--
--void red_led_off(void)
--{
--	__led_set(CONFIG_LED_STATUS_RED, CONFIG_LED_STATUS_OFF);
--}
--#endif
--
--#endif /* CONFIG_GPIO_LED_STUBS */
-diff --git a/include/status_led.h b/include/status_led.h
-index 8e8b19f8c19..c3ff399b1ae 100644
---- a/include/status_led.h
-+++ b/include/status_led.h
-@@ -65,16 +65,4 @@ static inline void status_led_set(int led, int state) { }
- static inline void status_led_boot_blink(void) { }
- 
- #endif	/* CONFIG_LED_STATUS	*/
--
--/*
-- * Coloured LEDs API
-- */
--#ifndef	__ASSEMBLY__
--void red_led_on(void);
--void red_led_off(void);
--#else
--	.extern red_led_on
--	.extern red_led_off
--#endif
--
- #endif	/* _STATUS_LED_H_	*/
+Fixes: 3b98b57fa796 ("include: delete unused header files")
+Fixes: 5b8e76c35ec3 ("powerpc, 8xx: remove support for 8xx")
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
--- 
-2.51.1
+--=20
+Tom
 
+--6qxuaCXOkILOoQof
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaR34ygAKCRAr4qD1Cr/k
+CguuAP4zytkSrhwgL+LYC12AXXAnlO95DPh5l7/LQzdBg77vyAD/SDGKYlq2m/Ms
+nfbe93iK3mSINBObM9TGj3127umaswE=
+=mTiN
+-----END PGP SIGNATURE-----
+
+--6qxuaCXOkILOoQof--
