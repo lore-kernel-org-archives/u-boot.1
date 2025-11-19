@@ -4,113 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DAEBCF258C
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 09:53:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91135CF3186
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 09:53:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97E0683F53;
-	Wed, 19 Nov 2025 10:51:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3798583EA9;
+	Wed, 19 Nov 2025 10:53:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nzOKO0XT";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="S0yHmV57";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE6258397D; Wed, 19 Nov 2025 08:19:15 +0100 (CET)
-Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
- [IPv6:2607:f8b0:4864:20::b129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 98FE283EA9; Wed, 19 Nov 2025 10:53:04 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8691583979
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 08:19:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F55483EAB
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 10:52:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb129.google.com with SMTP id
- 956f58d0204a3-63e19642764so5407759d50.1
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 23:19:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763536751; x=1764141551; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UmPVobL37mZt+21+TcDyxvrLgF8h9IXXdEA0llSD/6I=;
- b=nzOKO0XTIcKFSMRBtdWf/EAGDz7QOfVXcy84hObcni4UJyr9U3YY00OkaorRYhwmUo
- bi337E066rmCNDV4u5UvITzcVSm1LAEzb0pH+LyAwLtx2nZJDtS7hTq2pYnzSS85JF0a
- LW7AGB1N5uHEDdXXU1ICypmG/y1d8Qk9DBw96/U41TYqgJsMMVRX/ASqgxUwy5WMnZwB
- vmbVzNj+AND2x4zVCkNJaChmspj/GS8XwuWINY3iwZPTa4wE+IVE+lYKtqGmltKsbckB
- QHTqYfmcIKghd6AI1dPmqYhly/y7gR5zJjf4dhjDg68bnLyMTBZ1S8ZEp0nSQCRoLZLZ
- l16Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763536751; x=1764141551;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=UmPVobL37mZt+21+TcDyxvrLgF8h9IXXdEA0llSD/6I=;
- b=QIKmekQ27irilHfxHuPWCM9g9RO/47h303A21tth30w3i8aZ5y6bblSguyioW2xfxH
- fcTu/ymWMGhfEsLJnFs7qdWrwkgpIpkniEC6ignBxh8VgDL6ac5sOvryvrpHunBzEjYj
- 0dMxjV0JfdWSraSJBJVb1MmmTGUDpF1NKWyOvRRrG/p8RV8YkB4g+qsBbc2xDOi4xgg6
- BisiF7zXrQck5laGRdtc8a7gcw2t2nyVsrNpwOL9eHLgLoU7PQgLhDBO1KUcnT1AFhxQ
- yPzIKtw9sggWIMi4i8QVDp20Po5lWnDpePP0JN9KLk6/kIq3AQUSk10wquMNc7Y2bZ6B
- QYVA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVX1bYaDHOUymNfFnQOptT1WzEsoyK5UhSWqau9rzvo4m4N7uGpm4ljSDPgofxDVkb9+1pbcFs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKJDwtVrAI5hY5FEnJWzk35LCbLq+6FkGC4zsgtEVT22gTsIkL
- kAXNKk2jzjJA4fQ4sVh7J13/I4TJdpSYmSM7jz9lA48qcYW7UJtJ9RekRfJKCGP2T5x6phbAzIv
- j8/3CU/kpsgFiUjBz88DcJ7pUvLTXxl1o3zeqZn+ieQ==
-X-Gm-Gg: ASbGncsOCO62pPEQGC4XclvgN0R8jROl1EqmI84SpBad1Kk0pkeTlB5GSxfvzCemvlc
- krXdJEtgSs3zp/j9vKsfmpm/8DaUH7WLDqfdSrgLf8gOQZRsuelO5NlzFBz1DTpVQMABtcMzFH9
- H1LrkrhXxCOVzQSyDT4H6i5pzs5mz/cwjDP87NJpRo7CMyOLHFaqcaM+mH1iEahq+uVjyJ+Ggkl
- HdUa3Myjl6ysqc3Y2Ha4/10cgVSVZYnAUfiJx7xKcqsR1w4CRoYqahEpdNRelrufimmUaMnqfgD
- bbsnwYcK/nHWU8bO2OtNZUaVdn+Zhz6yXOf5URIxyrhGcsmDBmqtpn/2zKNy
-X-Google-Smtp-Source: AGHT+IEXQ+2qRXzEGTMIJBkfOmN4Yb3mL2yhCdQ0rPKPptKAKqHCYVJ1b0/6ptn1PfyfqNG4BD6jVebiIsPlfb2OEnw=
-X-Received: by 2002:a05:690e:c4c:b0:63f:9d50:fdfe with SMTP id
- 956f58d0204a3-641e76ec3acmr14882962d50.56.1763536751050; Tue, 18 Nov 2025
- 23:19:11 -0800 (PST)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ooclINzTTHM7qOADwYxyELRHHmPLi0J14MXVZWniQZMRG8GzlcyPBD8LU+zsuCwe0UCMgQGoCtHjF4zrg2Pk/zYJadmvFObMuASr5Zkc7/JW6EC1hkVX2vwMvqRphHUJx5THxMVcBGtd4gEgS1RgfJTvYZ8+G4kPpk9M2QNCu2zIH2Dq9iylW+qCSOc4iglDN7+6hueUWYcCOPjGxVcfMeuhh5pVQfqoin/s+xwDm6s2/PMVqsvdYtJPkFKVNaSN4KJr5fFHOdl3okWcqdapcY33Y9Hm/tkqAglorJCaGdH9AFsOMgKuq9FvRTsfHOWfDCGxrSI53hVHzOGdOTjn6g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lOImXqgXjHVPDRvC2NNt0elrapVqq9SD+P/hk0HbzFA=;
+ b=XwoTUuBPV6KY2ZGOPoKff8zY/c8lk7FsCeZ5GVtR7E2zfuOjABBd12tyfzeNp/TRUJ6k/6YbVFm7WT6B+z0rZZ/uX4TRW8LQRCg/NWT9AdyEADP3/9uax/cH64PMPDqN30sNvVpmLCGfM7KwkmO+pEJQTow+xeeKgFowPSzrIaJ7MVn6BkSMZP76L67tIXIVYEjHchgAMUxRGH55blRCLodxPWAimnyU1+WIbh3NUhd2DyTsA4cPLWTMazVfV+gJBW+iKHs6GS6KadpDYys2SzbQazxS4JeZabASEwKqpFO7+dcWj7hDKZcKlBYsQASCZyNX9f9KfhcDbAHmBM/pdQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lOImXqgXjHVPDRvC2NNt0elrapVqq9SD+P/hk0HbzFA=;
+ b=S0yHmV575h7WyjSKNhSZiWbDplmC6o8U1CWmK+xXq1JcJWysczgh0hYEhIFFZkh1Z0C44AwxKaXX2zBe+4TkR5KR++DMjO0SOUVzcjiRzymbdT14vytn0KI5cACUfWsOB48VlFL36z08N/M8PeHvNp9312Qq3Ry3iSQp/OUkYpY=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by GV4PR04MB11290.eurprd04.prod.outlook.com (2603:10a6:150:28f::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Wed, 19 Nov
+ 2025 09:52:52 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9343.009; Wed, 19 Nov 2025
+ 09:52:51 +0000
+Message-ID: <bae11d52-65cf-4d8f-a51e-115a90a7444c@cherry.de>
+Date: Wed, 19 Nov 2025 10:52:50 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: rockchip: Enable RK806 PMIC on rk3588-evb
+To: Chaoyi Chen <kernel@airkyi.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, Chaoyi Chen <chaoyi.chen@rock-chips.com>
+References: <20251119015554.153-1-kernel@airkyi.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251119015554.153-1-kernel@airkyi.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BE1P281CA0111.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:7b::8) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-References: <20251118043042.27726-1-hs@nabladev.com>
- <CAMDkj5x_9Vo5S4cA1OGbzhzwNsgs+fKryuLve1mm3H9eK9tLzw@mail.gmail.com>
- <2d9173e4-6b86-79d6-8d7d-f6d953efe61d@nabladev.com>
-In-Reply-To: <2d9173e4-6b86-79d6-8d7d-f6d953efe61d@nabladev.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 19 Nov 2025 09:18:34 +0200
-X-Gm-Features: AWmQ_bl6ItJ4WXPKfSoEf9CUhutNGA3ECGSbodVdzavYbOYRRoAww1Oyj0YIMY0
-Message-ID: <CAC_iWjL9cCDCjnSvFBsiM9VHHDKO9e_ber8eceG5iYqE_n+xRw@mail.gmail.com>
-Subject: Re: [PATCH v3 0/6] Add support for SM3 secure hash
-To: Heiko Schocher <hs@nabladev.com>
-Cc: Raymond Mao <raymondmaoca@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Casey Connolly <casey.connolly@linaro.org>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
- Sean Edmond <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>, 
- Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- briansune <briansune@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 19 Nov 2025 10:51:00 +0100
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GV4PR04MB11290:EE_
+X-MS-Office365-Filtering-Correlation-Id: 73b855e0-9cfc-41e0-2bab-08de27516737
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ejlNRk1lSklTSy9FUmk3T3hVemkyRjBMMTViWGxhRjRkMFo2RXAzSGl0eVZM?=
+ =?utf-8?B?SFo5d0lpWU01KzBoUmJiOWVuTDZNWHFUQW9jbnY4TFpmQXFZRFRBZ0Q2b0dJ?=
+ =?utf-8?B?Vm5VUTZqanBkMWMrSm85NnhGdXVvQXdSbWswcU9wQ3pFZU56VTJYZHNlNFlO?=
+ =?utf-8?B?bldsWDFoUVJ3REVWelZFaW15YXJDT0tIVkQyNEJLNGZtTUpUT3dSR0JQVVJK?=
+ =?utf-8?B?WkdOOEtac3JuZGprdWJrR3BhSTR6Vi8wNFErdFZGOXN6MDJMOGxIVnRZTVl5?=
+ =?utf-8?B?ZlBnSzVibDhxbHd5TkhBU09seThsaWxqa1JlQ1dXQjMvVndUZURzZEI0UE8r?=
+ =?utf-8?B?dXV4Q1l4aDJveTJabWhFaVQvdXN4bFNIckVpOTJhdDIxaTErRFFhR0VJcmFK?=
+ =?utf-8?B?MENlRkw0UGRZZjhZYnk3YmM5Q090c0NZdUpVbWx4Nlpsb0FFdTNFbmxwUjV1?=
+ =?utf-8?B?Qm1DMFRzMGJESmxXcHZkRWFMbm14R29NNU5MTnhRVUZ2dkIwdWd0VWVleEg2?=
+ =?utf-8?B?K2NLYkU0NGYySjZ6dFA4QW5NTDJZREZ1c3BadnAzVTdEWVROdXZsNWgvVkJF?=
+ =?utf-8?B?WHNyc1didTcyRXIzUS94ZEpvempwZkh1Wm5WaGNVRGw0V1ZYVWFlN3VVM1FD?=
+ =?utf-8?B?VjlTdGt1RUU0UFNQSjRYdWs5dUJJSTRlSnB0M0VETGdQZHVud2VZS0JCOTBo?=
+ =?utf-8?B?VHBac2R2UkdheWdrVnNucERWVVFBTWtKdEJLT1VtQUcrMnRpM0RML0dVZDEw?=
+ =?utf-8?B?dmxRcmcvMFE1Rm4vUmVVdytQRyttNlhZeDQzU1ZITkdJWVVRek5adm9mbkdO?=
+ =?utf-8?B?UUYrQ2JqRUVtMXUxTXVxOHRYTGsxc3c1bEN5bGpyeXFnNXhHUldTK0tnUVp5?=
+ =?utf-8?B?dlo4RUpjNHZlbVRLYzVNamY3akxkZ3pmRm81MjF5SC9BVmNsa2NNSUxWVmFV?=
+ =?utf-8?B?andtdXk2cVZOTURNNVU1UGNRYzArOTB1Z2ZaNURPcEh4YUt1VkxoRlN5eXJZ?=
+ =?utf-8?B?bHRGUXY0bHdCNUxsQnRFcUk5SHZub3poYlVOa29hMGdjUnFBNWduV3V6Q0dq?=
+ =?utf-8?B?VEtWVWRSeC9IK3dyOXp6L2RZOXNCZ013RkRoTjkyaHMxLzI1SDFMMjEzalMy?=
+ =?utf-8?B?MlRqSzVEYzROeG1qUk5PY3ZHVkpkdmlRWnVjZVphWTRXa3FZVDg3MTB6aTZu?=
+ =?utf-8?B?aXFncDdFK2I5WnV0Z2RJalBIZkVCd1FSUTFEZ1NPVHhkcDJwRy9uSWo2UzFE?=
+ =?utf-8?B?QUQ4bUpaWWtLTi9XNytyNDFZYWErdVhZVWYxSlRRZ0cwY1p1eC9CVG1QcnB6?=
+ =?utf-8?B?WHhlekx3NWRmVEV4eXZkakZ3WmZPeGdTQXBVRTJKbUlXS3pBUk5HRXdHWVhs?=
+ =?utf-8?B?bzNvbHpQZkxnMHowMjZ6eDJKNkswb2NwcnMxSlBxdzZGd0YvRVQ2czdZaVJo?=
+ =?utf-8?B?UTlzOVBYVFBjUkZiald5azhBT0xCUE45TXhNcVBxZDhHR2c2MEpZUUtiZDE2?=
+ =?utf-8?B?aW45ZnQrS3BmTlZGd3ZMOEQwcE01ZVVKczJ0Nm9JRmtteWlLaVJWNU9tNWhW?=
+ =?utf-8?B?RnRQZDlQVVBNVnUxdEN3TlBJa2VEVDBTWCtTNnI4VEVUd3EwMEdIOW9wS3RC?=
+ =?utf-8?B?RWE4emNhZ21JSWRXbWtySjZhbnplMUlBRnNlNlVTNUtkSmRaeFVVaWJwc3N6?=
+ =?utf-8?B?YzRVblZlZ2N0ZWkvcFA2QWpTOWkramR6Q1Q0LzlmMmM2L2xGK2Y4M0lKYUdR?=
+ =?utf-8?B?Zk9yalZDaUhlNEg4OVZ4U1liM0tveGJmbG0wVGhOSmE2cmZwMysza0hOVjls?=
+ =?utf-8?B?U2JqcHc1MVVJanZPalRwR1VPL29sUlBPR3BLYlpGS09udURZMzhpL0pOL3hu?=
+ =?utf-8?B?Qm1nWU1oNGR1Q0NjVkxUQUlHdGRXR254TlRmbUZXVzVSRU9hM094TENGSXVs?=
+ =?utf-8?Q?qT6G+LTZSXZ4kQ7ocp98QAl3TWR5RK7j?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dmtDNHRHV0gwaFduWVJSRlp0d2pqdUJ2ZW9uSCtNNmMzMTNwRGQ3endta3dI?=
+ =?utf-8?B?cVh1RStHRFl1SkNTTEVjTnQzc3RRWjlJbzYzOE5GeW5rQmI3QUFDd3pHZTBv?=
+ =?utf-8?B?Q1NGa2kyYndLdTlDazhCQUxnbi9HQXdPZWFLRFpLYmcwTWd5ZDBmSWRieGJ0?=
+ =?utf-8?B?eGNCZGM4TnQ5NG1qa216K1BGak5yVXNTTEo5ZEU5cmNvK014WWJrdlNqZlVk?=
+ =?utf-8?B?bHBmeUpmTDNGb2NNUGo4cGN6S04zU3k5OUg4L1d2dXdDblZ3cHJ0bDFMeVdU?=
+ =?utf-8?B?YWpnT3JEbFRhUXRnaVNWbWhFdXB5b3ljUjcwQ0txRDZuRnNiRGtURHNmOGxC?=
+ =?utf-8?B?NDV2R2FLanJQbm5lSU5vb001ZzJ3WkxObHNCNzJibkFSaUZ5bEdCVkZBRGNj?=
+ =?utf-8?B?OFNqeURjbTRWSVh6TC9XVkthaGlRaXA5dWl2VEhIeUI3SUFJZ2c4SnVvRGpv?=
+ =?utf-8?B?dk55ejA3eitoOHAvMThNbXZVTFRWU2ZTN0pBcjJZanZFbkh1OTAwS2lHTmJl?=
+ =?utf-8?B?TFhtcmNHSVVvU282SjRybUJtQUZuRE01UEN0V1dXZ2xjY1RxWGFKbHVHbmQ2?=
+ =?utf-8?B?MTJXc0I4ekpQajVYRklBNEVCOVh4ZUJOQitDYmpqa1JMaXRGSlNaNkc2bXBR?=
+ =?utf-8?B?QWIraVkvNFhKWUUvUkZaU2txek9aWXNPSlpoeCs0OEExckRkUHdTVVdxT3NW?=
+ =?utf-8?B?YTRlZmZQcGpxd0VTRXhsOXZhb2NuMWNUVU5JWFpIeG1vOUt0VjlKWUY0UU9x?=
+ =?utf-8?B?ZmxWYXlkQmRxV1ZKL2VmMUEwVFRMOThpNHFXRU1ZQS9WWUNCMHNCMjlXLzJB?=
+ =?utf-8?B?L05iSkJwajA3ODNLdjRsRGpCREdxMGozbTVRMk0rOEN3emV3SmR1ZnJ1TGpu?=
+ =?utf-8?B?Wk9Bb3ZBUE45S2ZvUHZBRnRaTE1aZk51bzNmMzBEOEhyMWlQK3lQTnFsaEZ2?=
+ =?utf-8?B?UkkvSkwvUDZzeFJnTm9XWHpieEJBdTdRdlZRK2pjdHZQZE9ObWZzY3JneVZa?=
+ =?utf-8?B?N2cwYUx3MGR4U1MwT1d2ckMzNjhQNVRtc3EveXUxYjFESERad1dpNnplaER4?=
+ =?utf-8?B?bXpEK1ZtS1VrS1pacGFiMUhrQUhoelE4TEhndGNZQkpXcVprbXhaSVRCWnJl?=
+ =?utf-8?B?bVRmN3FtcDVTOGFsYmVPQjZTdXFzTFg4WDRJN2xDYmpxcDNHV0xrSkxPNXFI?=
+ =?utf-8?B?YnE1TUUzaDYxM0p4MC81MzJSQjFHM3d6UEZ6enVBQ2xmL3I2bWxlVG1jVXhq?=
+ =?utf-8?B?TDZkVGxDazErdWhRZldiVVJwcXhFZFFCdGs5TnRjZEZDSzB4cHN0ZDMwTlJm?=
+ =?utf-8?B?Ukx5enZEVTBWNjh3OG9rMU9hVDh1aVV4MGQxVUNrUk9kd3J3Z3ZvTXZSVXZ0?=
+ =?utf-8?B?WWczcVBzMmQvNytRL1hvZWZEd2FtUTh3eEZxbjlQTzNDZVE4VmVrNkU5SjRi?=
+ =?utf-8?B?OUlYYXZVcnlTdzJBUURXclAydXR5d2dsZndtems1ektnK0Zlc0kvOHBQT0xr?=
+ =?utf-8?B?Wk1rZmdvRUNuMXZSS05sOHc0VFF4S0cwUTJCTFIxZWdBT0w5RjNGMzlESzE4?=
+ =?utf-8?B?M0dPRTBQcERuRGU2eFljSnk5bW1uOWdDZi8rOENud0I5Y3BtMy9mZHZNbll4?=
+ =?utf-8?B?Nnh5VHdTMDJTV1ErVjFCQjJTeWhxempoUUU5SzNqemhmdDBDa3NqOWhRZm51?=
+ =?utf-8?B?L0FlV2JWYmlrTFNwS0NmS2I1NTQwVENGSkRlaXpUWjdZY2RRYUpma1hINUFq?=
+ =?utf-8?B?LzdzL2hKQkRtT2FXRDJvSHZhZVJwaVFqN1ZzbVNGM1ZBUTNvYXZlN1RRL0FG?=
+ =?utf-8?B?dlFLNVk3S0R5YVR4M2lYRnl5SHd2dDhNb2s4YnM1RkFLMVI4aEJ4QXZrVUZ1?=
+ =?utf-8?B?dDlUNEh2dlZUR3ZZRC9IcjdmZStocG5PRU1DSGd2ZHNhaWphcU15YXB3MXl3?=
+ =?utf-8?B?U3p6K2N3VTBpSi9ndm1aMlhXR2kyU1dHN1ZIOTVUaE55RUVhUVg3Wmc0OHBU?=
+ =?utf-8?B?SG5lT3pNbWdzT2hxdFZqZWhrQzlhY2FXbFEyRzM1dEV2eHIyd1hUdFFrKzJK?=
+ =?utf-8?B?Wm9LMlRNWjI0Q1d5Q2hCN1VtTXR3UmRydFQ4Z2ZINmxLYkJSdlhQZTF2NHhB?=
+ =?utf-8?B?N1NCRk1wYnl0ZmprUnFQWjd4TlVDdmpBUGlEaGR6ZFBHSUd5bXpOQklxYi9w?=
+ =?utf-8?B?VlE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73b855e0-9cfc-41e0-2bab-08de27516737
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2025 09:52:51.2463 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /eFPbTBUZIqNscqGDd9g8uVDXkgaPG0DM5A97ryLWuFYnK6hO/Mzd//9ik+skUT2QNkw7pGY9Q9jGCfOlrolbpi5SCnLOXe/uL4HH+mx+Oo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV4PR04MB11290
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,154 +175,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+Hi Chaoyi Chen,
 
-On Wed, 19 Nov 2025 at 07:40, Heiko Schocher <hs@nabladev.com> wrote:
->
-> Hi Raymond, Ilias,
->
-> On 18.11.25 16:11, Raymond Mao wrote:
-> > Hi Heiko,
-> >
-> > On Mon, Nov 17, 2025 at 11:30=E2=80=AFPM Heiko Schocher <hs@nabladev.co=
-m <mailto:hs@nabladev.com>> wrote:
-> >
-> >
-> >     Add SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and d=
-escribed
-> >     at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
-> >     <https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02>
-> >
-> >     TPMv2 defines hash algo sm3_256, which is currently
-> >     not supported and prevented TPMv2 chip with newer
-> >     firmware to work with U-Boot. Seen this on a ST33TPHF2XI2C
-> >
-> >          u-boot=3D> tpm2 init
-> >          u-boot=3D> tpm2 autostart
-> >          tpm2_get_pcr_info: too many pcrs: 5
-> >          Error: -90
-> >          u-boot=3D>
-> >
-> >     Implement sm3 hash, so we can fix this problem.
-> >
-> >
-> > Did you add a Measured Boot CI test for SM3 on any boards? The QEMU tes=
-t with swtpm I added might
-> > not work since it does not support SM3 (Currently it is configured to S=
-HA256 only) .
->
-> Not yet, I have to look how I can setup this, as Ilias also mentioned
-> that. Any chance to setup this with QEMU and swptm ? Ah, if I see it
-> correct no SM3 support yet in swtpm ?
+On 11/19/25 2:55 AM, Chaoyi Chen wrote:
+> From: Chaoyi Chen <chaoyi.chen@rock-chips.com>
+> 
+> Some pmdomains rely on RK806 PMIC for power supply. If we don't
+> enable them in U-Boot, random panic may occur during the Kernel
+> boot process.
+> 
 
-Yes that's the problem. swtpm does not support SM3 and I can't test
-locally. If you just boot any OS, the measurements should appear since
-the functionality is supported by all the major distros and OE.
+The kernel shouldn't rely on U-Boot doing something to work, so please 
+fix this with upstream Linux kernel.
 
-Regards
-/Ilias
->
-> bye,
-> Heiko
-> >
-> > Raymond
-> >
-> >     Azure build:
-> >     https://dev.azure.com/hs0298/hs/_build/results?buildId=3D194&view=
-=3Dresults
-> >     <https://dev.azure.com/hs0298/hs/_build/results?buildId=3D194&view=
-=3Dresults>
-> >
-> >     Changes in v3:
-> >     Added Reviewed-by from Ilias
-> >     rebased series to
-> >     commit: 69cc92d6869 ("Merge tag 'efi-2026-01-rc3' of
-> >     https://source.denx.de/u-boot/custodians/u-boot-efi
-> >     <https://source.denx.de/u-boot/custodians/u-boot-efi>")
-> >     add comments from Ilias
-> >     - use sizeof(*sctx) instead of sizeof(struct sm3_context)
-> >     - use output[] instead of output[SM3_DIGEST_SIZE] comment from Ilia=
-s
-> >        This leaded to CI error:
-> >        +lib/sm3.c:241:50: error: argument 2 of type =E2=80=98uint8_t[]=
-=E2=80=99 {aka =E2=80=98unsigned char[]=E2=80=99} with
-> >     mismatched bound [-Werror=3Darray-parameter=3D]
-> >        +  241 | void sm3_final(struct sm3_context *sctx, uint8_t output=
-[])
-> >        +      |                                          ~~~~~~~~^~~~~~=
-~~
-> >        see:
-> >     https://dev.azure.com/hs0298/hs/_build/results?buildId=3D192&view=
-=3Dlogs&j=3D182673a4-17b9-5c0c-69ad-98f742450579&t=3D34b689f8-3e29-5ffe-50e=
-a-32bfe99f47c7&l=3D334
-> >     <https://dev.azure.com/hs0298/hs/_build/results?buildId=3D192&view=
-=3Dlogs&j=3D182673a4-17b9-5c0c-69ad-98f742450579&t=3D34b689f8-3e29-5ffe-50e=
-a-32bfe99f47c7&l=3D334>
-> >        so made this change back to v2 state of the series, to have the =
-same
-> >        arguments as the other hashes in lib/
-> >     - seperate linux and U-Boot parts into 2 commits
-> >     New in version 3 as Ilias recommended to split linux
-> >     and U-boot changes.
-> >     use CMD_TEST instead of DM_TEST, as Heinrich confirmed
-> >     add comment from Ilias
-> >     - add SM3 support in tcg2_hash_pe_image()
-> >     Added Reviewed-by from Ilias
-> >
-> >     Changes in v2:
-> >     rebase to
-> >     6b27b688694: ("Merge branch 'master' of https://source.denx.de/u-bo=
-ot/custodians/u-boot-sh
-> >     <https://source.denx.de/u-boot/custodians/u-boot-sh>")
-> >     add Ilias to Series-cc
-> >     add sm3_hash to header file, so we can use it.
-> >     add comments from Ilias
-> >     - use ARRAY_SIZE(hash_algo_list) instead of a fix number
-> >        in tpm2_get_pcr_info() for the count of supported hashes
-> >        in U-Boot.
-> >     - add SM3 hash in tpm_tcg2
-> >     Added Reviewed-by tag from Heinrich
-> >
-> >     Heiko Schocher (6):
-> >        lib: Import rol32 function from Linux
-> >        lib: import sm3 256 hash parts from linux
-> >        lib: sm3: implement U-Boot parts
-> >        test: cmd: hash: add unit test for sm3_256
-> >        tpm2: add sm3 256 hash support
-> >        test: cmd: fix a typo in md5 test
-> >
-> >       MAINTAINERS               |   7 +
-> >       boot/Kconfig              |   1 +
-> >       cmd/Kconfig               |  15 ++
-> >       cmd/Makefile              |   1 +
-> >       cmd/sm3sum.c              |  48 ++++++
-> >       cmd/tpm-v2.c              |   1 +
-> >       common/hash.c             |  42 ++++-
-> >       include/linux/bitops.h    |  11 ++
-> >       include/tpm-v2.h          |  12 ++
-> >       include/u-boot/sm3.h      |  35 +++++
-> >       lib/Kconfig               |   7 +
-> >       lib/Makefile              |   1 +
-> >       lib/efi_loader/efi_tcg2.c |   3 +
-> >       lib/sm3.c                 | 312 +++++++++++++++++++++++++++++++++=
-+++++
-> >       lib/tpm-v2.c              |   4 +-
-> >       lib/tpm_tcg2.c            |   9 ++
-> >       test/cmd/hash.c           |  49 +++++-
-> >       17 files changed, 554 insertions(+), 4 deletions(-)
-> >       create mode 100644 cmd/sm3sum.c
-> >       create mode 100644 include/u-boot/sm3.h
-> >       create mode 100644 lib/sm3.c
-> >
-> >     --
-> >     2.20.1
-> >
-> >     base-commit: 69cc92d6869b8ff4591e5b8850872da34934bab9
-> >
->
-> --
-> Nabla Software Engineering
-> HRB 40522 Augsburg
-> Phone: +49 821 45592596
-> E-Mail: office@nabladev.com
-> Gesch=C3=A4ftsf=C3=BChrer : Stefano Babic
+Can you tell us what's the issue?
+
+The issue with this patch here is that we probably would need **all** 
+RK3588 boards to have the PMIC enabled, and all the appropriate 
+regulators brought up before booting into the kernel. It'd be *much* 
+better this is fixed in Linux (and depending on what we're talking 
+about, it may need another fix in U-Boot so that whatever depends on the 
+PM domain works as well).
+
+Also, why the PMIC in SPL but not the regulators?
+
+Cheers,
+Quentin
