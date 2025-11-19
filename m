@@ -4,23 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D923CF58C1
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 17:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4708CF397E
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 17:35:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16C6A80433;
+	by phobos.denx.de (Postfix) with ESMTP id 5550D83FC5;
 	Wed, 19 Nov 2025 18:34:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wwOb0ITw";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bPu86hae";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B0DC83F66; Wed, 19 Nov 2025 18:34:49 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id B542F80077; Wed, 19 Nov 2025 18:34:49 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81FCD80077
+ by phobos.denx.de (Postfix) with ESMTPS id DCF2D8391B
  for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 18:34:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
@@ -31,33 +30,33 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dBTBY3P3Kz9s2t;
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dBTBY6mMPz9sc0;
  Wed, 19 Nov 2025 18:34:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763573685;
+ s=mail20150812; t=1763573686;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6iz8vVHNtEYmtB9R1/oWZHtR5GoPz1BXlo1rHRtbdgU=;
- b=wwOb0ITwwtStLW7Q7ZjGYgKuYtMulvDbxf69ay4LDiN6gReu6ujyWJUGKoKrQjTIYdVTvg
- HaH0Oca8oRDPAX+803O7fPYte5kuucAZebP1CCtM23sQGFZ9rF3kEs0+X/b+ZysCtDQSAf
- +GgK1b8lFCogfnkZ4HWLRC+aIds5zajt/z20D+InN4HjhFDTbIGMM5St/8a+IN2W9HO97v
- 5NEAoB04ktTcW6lPPTkYr1+sKHJlXHnYfgIdq0m5J+5mcqtLKkYPbvQATt+NsU2W2vNLDF
- uM/dYq74EL8WeIuf7fAoRKHnr/uJrgxT1xBBOVIHHXlFHWv1G40iqDWI70HXbw==
-Message-ID: <50b55e8d-a9c3-4671-89ad-30cb951bdea9@mailbox.org>
-Date: Wed, 19 Nov 2025 17:33:17 +0100
+ bh=GvLJG9bHXDO7n/KSr194viW9j2HWS/Ubjn6vEBbegc0=;
+ b=bPu86haeMIIXzli0ego4HxW/JUX37Yx/lpMHJ5cOFRx1eKvB0iPjakQ78HwFeakt838kbi
+ XAxzAikKc9V15OZ1J56cSmSazEjudyzpS7sk5Qia4pFoKDT0f0cKrxXl/vW+a2EhNbWTDu
+ wer0OUHavISERhY9VP47wrFXXSipWqw6aMSXjFtotCS37S6tufz50MGEbUzwuI565Fw+65
+ Q0Oe73LAcvegDbShoeuXn1c2UoYxNOOjJv4wSGpOzafiQ6PkLUS2n0a5xrOVCGfeb3RNRx
+ evBIY1nn652qt4vYAt3kGPzxXyaCjpby2ociPpObHWPdqycgrF5hYtbEDFQTaw==
+Message-ID: <b1ba3fcb-bb51-4da8-bef4-b228ebea140c@mailbox.org>
+Date: Wed, 19 Nov 2025 17:33:48 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] socfpga_vining_fpga: Stop disabling device tree relocation
+Subject: Re: [PATCH] pico-imx8mq: Stop disabling device tree relocation
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20251119145538.843430-1-trini@konsulko.com>
+References: <20251119145037.842213-1-trini@konsulko.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251119145538.843430-1-trini@konsulko.com>
+In-Reply-To: <20251119145037.842213-1-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: gysmaqmud6s9b1finmkcjetgoshhr6kr
-X-MBO-RS-ID: 6967f06291c5ec524b9
+X-MBO-RS-ID: 31d16ddbe3ef282dcf2
+X-MBO-RS-META: pe8m448qi3p4i31c51zqhufj1oexcupq
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,7 +73,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/19/25 3:55 PM, Tom Rini wrote:
+On 11/19/25 3:50 PM, Tom Rini wrote:
 > Remove setting of fdt_high to ~0, which disables device tree relocation,
 > from the default environment. Doing so prevents U-Boot from correcting
 > problems such as having an unaligned device tree and leads to various
@@ -91,5 +90,4 @@ On 11/19/25 3:55 PM, Tom Rini wrote:
 
 Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
 
-This board should be just fine without fdt_high, DTTO for other CV/AV 
-SoCFPGA . Thanks !
+This fdt_high won't be missed, thank you very much.
