@@ -4,90 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B6DCF58C1
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 17:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B031CF58C1
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 17:44:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0E3E8403F;
-	Wed, 19 Nov 2025 18:35:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id EAE548397A;
+	Wed, 19 Nov 2025 18:44:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JpLSg+GE";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FH9WdrO+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xi8weEB4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9406A8006D; Wed, 19 Nov 2025 18:35:12 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9792B83DBF; Wed, 19 Nov 2025 18:44:32 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E7048403F
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 18:35:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B067F8391B
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 18:44:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-64165cd689eso1741612a12.0
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 09:35:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763573710; x=1764178510; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dGkioxFHRPKCwT64Hx8u0yZA0ltayog6qdb9aVGfuGo=;
- b=JpLSg+GE5DNlt8gesbHByNP2OXUIcnMRahlyu4ZFLl179bglW7Hf0fCksnPrvmkCdh
- QNvqOJZK/niPRlN+cL79YfmKv3D11plXhGYHEg7XHxUw3oMxuEgLJuSN48Wl7B7DyWII
- xTppw5iBVF9w2jZyTGOR4rAGZvclvdxsHzk7k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763573710; x=1764178510;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dGkioxFHRPKCwT64Hx8u0yZA0ltayog6qdb9aVGfuGo=;
- b=Scc1dwdFPKXGJHr/obTd2YmOEvkYhYxePW38MrF2aPr3vOREIqGX0wfWHh3blzD1FI
- fYfVviR6SPGSbIIkXtcdbMKmWn8z5ELqYdwAir9nuTNbHYkhDSN/QMAbrFyy5qIZAbI7
- gS+BDsfsttFBbNDWdIPTqOVRC3pe9uwi1QXfr8lcxyNTvvsUQ2g1fDiRK+5+EgYdey+K
- fKRYtIYaBofYkaMAaReN5UcI8uNFJNTTri6NtpewCj5smBJNz9qihIo4Z5IIZKd1YLlg
- VMg57yw/vN1Mtsmu7Sd+0UxzO59NDGXpc8maLTrSopp+8QJov0Stpl+D98Otnjtd5U9z
- 4iZg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXFlXvfqclBwgdmk4bX+xexK6kWbDI+2jl+MCQt0jmb7rLPaJ1J1+Z1K8Trg3iBJKgeQE9bAmk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzxc1A7NlkWzITrFjbAXLLOGJAuxEWvU8YebT41rN3i3sxpElXo
- widcUmoxOfnBuKZBLHSWYEYZ0CWIiae+BCCarZrdGxXdTIFHHIYXlMnRiyukdO8RkSfBRj5ir8p
- 1CQBCxh3AE0Gkz0US2S8bLJIPzyVY1+JU5hnBHNb7
-X-Gm-Gg: ASbGncu+o13iYI7GK381O/zlp7/sky22DVSg5xZzIRoBYik0P2+0g6kYdZ8kz0H389T
- jK9las+S60d01ng1CsQdLA48dVTHC8pgEC6RN61+ymsAvdEXwewle6Q0U+ysY3h4DryObJxGUnn
- GoVcy7v5J/vpPRDqVrDBJtfiOzkM+Vu3jkBOAeSjEn4TxgIRVt2ilE3tnAlNxc2gK765+v4jXr+
- tdD1TOSjqgY8wXQawIL0nR92EzEWnmniVOrVQoJm9rxDHzuRSwcPBkG8DBU1Q4Q5VMbGA==
-X-Google-Smtp-Source: AGHT+IHXHu314/E8VzOnDuWXSQu3diP+rqgg50uwVEk+g+aIWNQvFlHxMUPVpjZ6M9aT0rEbl9WWMl7P6iBD3+ZNXu8=
-X-Received: by 2002:a17:906:fd8c:b0:b72:671:b2a5 with SMTP id
- a640c23a62f3a-b763810bf7dmr391494166b.3.1763573709835; Wed, 19 Nov 2025
- 09:35:09 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dBTPp3S5nz9tKq;
+ Wed, 19 Nov 2025 18:44:30 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1763574270;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=SKisheS2O7KyB90cfwcskQjL8pPmHy6U4XuykFMTp5g=;
+ b=FH9WdrO+/jcdalVswW5FXtibO/xhcX8NOC/4oVuVroxTFMzqyHzMhfIyTcWYOMDoqh6333
+ qlsEakSuHXq0jD5xiBAvTRa27IvOuSqF80LAYrLrxG7ZLxTlNO/Yt4psWm7sWNLHaRhbZ3
+ EdkVURsIWMYNFN2fIKdkdRWiIYfTTX898t6UPt+bsZgZhNyfBsUHKkDHKgLwb6qc3qDBxe
+ IDjfr+9CXJWfZAlxodkDivyA5i2ks0scaZ0AizKI8GxYFy75zhezrpL0ZtLy8LxiyZrBlO
+ 0l6syISC8aii7BFdeeKbUY7DnELdbINCPUhE218Cbeq/G4IX67zuUC7he15nog==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=xi8weEB4;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1763574268;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=SKisheS2O7KyB90cfwcskQjL8pPmHy6U4XuykFMTp5g=;
+ b=xi8weEB4YZsBqa7SJpPThMtHfVJPUeQ6PBd464X88RMWulY7MSKeKb2pwu+Owg/wE2xMMX
+ tyLVAEVf8Uhx4EjI6UMpgtbGVvvRt7rkRdtvwLBeA9Minht3BMxnh91O3n1gEp1aOMHIU+
+ Xi23H+HIXlDnI3CtCdKIwzYIF+4Rr11ms6+IzPNPPHY06sONLEz5i0sFUcyDonl7+AfCvF
+ b4bgfvRR+8cDYfPpK5qJOoqGG8H3mKluuGzrj8ySw+imlBnt3TQAHthOfM+wXS/cg+48Fi
+ Pv51pZk/OjYzUNSn/dCPKi4+cPJDtTvYQ23Dfv6PIanTmXZ2MkZaCInQHR9zXw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?q?Jo=C3=A3o=20Paulo=20Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] boot: Warn users about fdt_high=~0 usage
+Date: Wed, 19 Nov 2025 18:43:53 +0100
+Message-ID: <20251119174425.58535-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20251117-binman-engine-v2-0-e053f683c0b8@cherry.de>
- <20251117-binman-engine-v2-2-e053f683c0b8@cherry.de>
- <CAFLszThkqMi5jxWArGrqSfnMnX5P-RbHW5Xc8_GEMGjmPhyiVw@mail.gmail.com>
- <0b433974-8557-499c-9d48-c4ad2df9c9d5@cherry.de>
-In-Reply-To: <0b433974-8557-499c-9d48-c4ad2df9c9d5@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 19 Nov 2025 10:34:52 -0700
-X-Gm-Features: AWmQ_blVRF2kTIqzQtiLiTrhfSXvpoDWmVi9MpRwtG9Phr3YAm-X3BWRHpaCiYo
-Message-ID: <CAFLszTgsCaC1VTK8bA9o-VJ0Hz-wKfhZ-bZkcgpiH2OAGj1SqQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] tools: binman: mkimage: add support for passing
- the engine
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>, Aristo Chen <jj251510319013@gmail.com>, 
- Rasmus Villemoes <ravi@prevas.dk>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Shiji Yang <yangshiji66@outlook.com>, Anton Moryakov <ant.v.moryakov@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
- Bryan Brattlof <bb@ti.com>, 
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Eddie Kovsky <ekovsky@redhat.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Yannic Moog <y.moog@phytec.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: a570cf6aefb484495a2
+X-MBO-RS-META: uoazbojpoqifbnx68zirzyafms5394zj
+X-Rspamd-Queue-Id: 4dBTPp3S5nz9tKq
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,53 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+In case the 'fdt_high' environment variable is set to ~0, warn users
+about the dangers of the fdt_high usage. This will hopefully lead to
+removal of most of the fdt_high ~0 usage over time.
 
-On Wed, 19 Nov 2025 at 06:46, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Simon,
->
-> On 11/19/25 2:16 PM, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Mon, 17 Nov 2025 at 12:43, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> >>
-> >> From: Quentin Schulz <quentin.schulz@cherry.de>
-> >>
-> >> mkimage has support for OpenSSL engines but binman currently doesn't for
-> >> direct callers of mkimage (e.g. the fit etype). This prepares for adding
-> >> support for OpenSSL engines for signing elements of a FIT image, which
-> >> will done in the next commit.
-> >>
-> >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> >> ---
-> >>   tools/binman/btool/mkimage.py | 5 ++++-
-> >>   1 file changed, 4 insertions(+), 1 deletion(-)
-> >
-> > patchwork seems to be done, so I cannot try the test coverage
-> >
->
-> b4 shazam
-> https://lore.kernel.org/u-boot/20251117-binman-engine-v2-0-e053f683c0b8@cherry.de/
->
-> should do the trick to fetch the code easily and run whatever you want
-> to run locally.
->
-> I only tested 4/4 tests individually (you cannot actually pass multiple
-> even if the help text claims the opposite). The pip dependencies aren't
-> installable on Fedora 43 (or Debian Trixie AFAICT) because the libgit2
-> dependency for building the wheels is too recent compared to what's
-> expected. Anyway, building in the same container as the CI and repeating
-> the same steps, it seems that my tests are actually breaking other tests
-> now when running them all at once, I'll check. I suspect something
-> related to the environment variables persisting across tests.
->
-> I'll run the coverage test as well, thanks for the reminder, to see what
-> I can do, we're most likely missing the check for fit,engine +
-> fit,encrypt raised Error.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: "João Paulo Gonçalves" <joao.goncalves@toradex.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: Warn unconditionally
+---
+ boot/image-fdt.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-OK thanks, that worked. It looks quite good, but you have 4 lines
-missing coverage in fit.py, from what I can see.
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 3f0ac54f76f..a3a4fb8b558 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -189,6 +189,12 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
+ 			/* All ones means use fdt in place */
+ 			of_start = fdt_blob;
+ 			addr = map_to_sysmem(fdt_blob);
++			printf("WARNING:\n"
++			       "The 'fdt_high' environment variable is set to ~0. This is known to cause\n"
++			       "boot failures due to placement of DT at non-8-byte-aligned addresses.\n"
++			       "This system will likely fail to boot. Unset the 'fdt_high' environment\n"
++			       "variable and submit a fix upstream.\n");
++
+ 			err = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &addr,
+ 					    of_len, LMB_NONE);
+ 			if (err) {
+-- 
+2.51.0
 
-Regards,
-Simon
