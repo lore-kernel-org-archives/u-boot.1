@@ -4,87 +4,171 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5969CF2562
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 00:09:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E4F9CF256F
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 03:31:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 115F583984;
-	Wed, 19 Nov 2025 01:09:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7751083984;
+	Wed, 19 Nov 2025 04:31:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WFjst2T7";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Yaji30LB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9FCA839A1; Wed, 19 Nov 2025 01:09:55 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 806AE8398D; Wed, 19 Nov 2025 04:31:02 +0100 (CET)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c101::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA28A8397D
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 01:09:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA70F8397A
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 04:30:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-656b4881f55so3017074eaf.2
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 16:09:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763510992; x=1764115792; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0HBBjk4Dj7shOveulG1Gq22RUBGdGMbA/CYa78qmNBE=;
- b=WFjst2T7WSuE9kJyViflctyp7aY8Ju2nFmBZ1L0TBNP1+XwNgiEcx/7eYAixAP1pEk
- KWtu3HpuEh6lhDk7tvfDxRuZ9/RlAKugyyEnKGfKovfD9m2MbCraYEqwxDHr27bUU+ft
- cYE2ikkKr/eAVPNZU04cix/sH1FT2n5Vg6FbE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763510992; x=1764115792;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0HBBjk4Dj7shOveulG1Gq22RUBGdGMbA/CYa78qmNBE=;
- b=xEEVCninMqneqxeQsb7mA4VFc5VEq0BLPTXkJDk3lnsMS5JJ4MdWzRw9Iqz18tCazR
- kJCOpTAjm4audWE0guH+pqyteRX5/K14HYnwkf7MX2/UGJsHq5mbxE7sTbTrVRDNRfu3
- BXTtA7NyZLokTb0Nsu1oC2JkAUCxUea7zO7r9bcweq8env8JEYBJJ9VuffuF0W5w+6T0
- I3Huqq76I2mYDHYp1qlnKkaxj31uQ1YCQCibp7DQuIsgkl1pe/BHnZMDDcp0asbhwnI2
- ufbFZHOXCVrHtovDIxHKFJYoufoWr+1JK3RSp/aWD108gRMK+UihCmsljeoQ15d3VyAd
- KBaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUnow0otz7GnFk8eM2Xh9kG/WARi5hVd8JMHJCVJbCjTB6k6D8b9bSCag7nc4/QEBv6WZltgis=@lists.denx.de
-X-Gm-Message-State: AOJu0YwcuojD9vjYcSnmsvTu+AXroh7ePCFYtJYcEjyXIUfGhN2tAo8B
- EYUiex4LWxXMofKpFUSRkh8Mr4P5ntSRmLVuy2VbAFFC0B2GKifiRfxXnxx7jxODd28=
-X-Gm-Gg: ASbGncvlhZQr5d06K/5N7thbLKBnEJIvQqa4GKuUE1yyUgistxXr4MO9d6tBkrpC7jf
- oed+JHVR9Du9QJi9kyqPN9d/Qw1qXYme8pcdXgRZD3zCusmv0CqIarEZuLYxdb3bKMJfwzys2Cb
- HPR+U/F1N6p3eju6yuPXxX3RXxD9JF1QKFNUCiTn+TKdtqYknQbGVWwITpaAZBGQfDyio61/kJB
- tkM+EdhASK47+27R5UgGOzV6C06b+9H2YTtbsgZ/KdQ944Gsz/xTPCrYV9x76Bwt0ZGjonvm+co
- AVq0Q3iCvM6qABAhBvlKS6c+8jIjlYkJrVkyvtHtr5zaCTzijuyAqxoY/2iSkm22D8oeigJxBrw
- M2XIkqReR+EOAFN+6zsKLm5rt0goQw2JGcv1WnZVXviLAL2id7KsPYLcZphTT0nZfETnlQuBYM4
- OcslEovkFHeFfJoOM9PQ3VY3IpPYZSPPkvm6QIMPLOuEijY2ajvtv2Q6dNy7w4
-X-Google-Smtp-Source: AGHT+IEG3WHOrFUSeRsUZsyxgc2b5g5meQcsUELKESR3w8pYTupHXGo9EXuldZ3+5O9BYDI0/GuiRw==
-X-Received: by 2002:a05:6870:4f88:b0:3ec:50cd:2415 with SMTP id
- 586e51a60fabf-3ec50cd3754mr3912023fac.29.1763510992311; 
- Tue, 18 Nov 2025 16:09:52 -0800 (PST)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e851ff9dfesm7566406fac.2.2025.11.18.16.09.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 16:09:51 -0800 (PST)
-Date: Tue, 18 Nov 2025 18:09:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] ARM: stm32: Add missing build of debug UART init code on
- DH STM32MP1 DHSOM
-Message-ID: <20251119000949.GW2125796@bill-the-cat>
-References: <20251118231732.577952-1-marek.vasut@mailbox.org>
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lZi8weO4SU3/giKT0AvBk7vqKpDp8FOdty2pHj3X4cRnd7RBnKg4TeQZsljE0OPGYibudTWPM38E9G2CqUkcFGm2f29bSwQK2JXMBQlanXdDAS1nJ+iZU36BhQ2kgjTXYsm2W6w+GNimmihFx4CdLhTzeunqvjAlbYnSiL0mnvnY1+ymIgm/OCtehbwr1ReL1E3wCuAM7sRgBQGyTL60/WVj+jFbMIZjOg1CxH7sQ2PnTHw7XLN2h4/zl/TLqqplgbW+dKAP6Sn3KSh1+njON+9hnB0VfWXOFxDS8y2ifvhIeCGL8EJICr5c2ZAcxGaSUtMbf4ZWC4uGdQ7tyNSYFg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QCtXFe/JvujnMH80MJd8GtyfBMmbCLBb2mIlvqY1CwI=;
+ b=eeJzz6aion6p8eB4odeudxw9HCnBNHapik3aMUVGu9HkpGzjXclO54OrpitjrwH9tOtQhwgOAbTYTxlX7l2qNsCE1ao4h0XcoEPwi9rUFAYgRZeaT9fCi9zxrMJjQZ1BtxOqQFnJZvhHVgt8ywUGreqUGYw6M0tHhao/L+C4lrEtEEYaGk1qp4rTAn0Nv5Lf1fkO/f2qQtxJ327vDQ3lautuJ1wouTywQ6psfiiADWy+CC2qD99kLZ9KsUDbmuLH+DAVn7iB74MEzU9rQ8oiHPcWtuA9tzp979GYPNph5T+vZav3FGSYM6NCFHRuEEyowWVoNxAuJktTdDKCCgarfw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QCtXFe/JvujnMH80MJd8GtyfBMmbCLBb2mIlvqY1CwI=;
+ b=Yaji30LBfxXsVolG/9BmYY8FOsVdUnmqB3Wmd8K8plrmdDUrs3FstAdMftXxwUKcDO+OKKJ6vw3FNMYtQSral1JNoplxy5ZwFKmx9bL1yJcrkpJDdtxZAGzlSLMLSQrb2Dd+WdPWfo8vgeVLqGd6YHYNLTEtWAjGk/+hjZ39MiqIcsccn8ATaS4jSfFN12sa7rBqm7RDl4s7dVklzsdJZwjNbYoq6UKEIKvajUDmMDHbhn2b2jy5K1jZ/xm5NGZjOrG+Q2tSoFOZtaJk/cWKv+Y2fE8SkAAkhaVjEm8+48LXEQPB+PjoRf23dFqCM4hOsvbQPJzZ8eQIU8nlnQOJVQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by PH0PR03MB7157.namprd03.prod.outlook.com (2603:10b6:510:295::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Wed, 19 Nov
+ 2025 03:30:56 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9320.013; Wed, 19 Nov 2025
+ 03:30:56 +0000
+Message-ID: <610e4623-90e3-40c4-be65-66c19bf6d7d5@altera.com>
+Date: Wed, 19 Nov 2025 11:30:46 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] nand: denali: enable SoC64 SPL NAND boot with proper
+ Kconfig selection
+To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, david regan <dregan@broadcom.com>,
+ Anand Gore <anand.gore@broadcom.com>,
+ William Zhang <william.zhang@broadcom.com>,
+ Tien Fong <tien.fong.chee@altera.com>, Kok Kiang <kok.kiang.hea@altera.com>,
+ Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
+References: <20251104171902.15039-1-dinesh.maniyam@altera.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tienfong.chee@altera.com>
+In-Reply-To: <20251104171902.15039-1-dinesh.maniyam@altera.com>
+X-ClientProxiedBy: SG2PR04CA0154.apcprd04.prod.outlook.com (2603:1096:4::16)
+ To LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5NSMHfX4GuePnLiQ"
-Content-Disposition: inline
-In-Reply-To: <20251118231732.577952-1-marek.vasut@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|PH0PR03MB7157:EE_
+X-MS-Office365-Filtering-Correlation-Id: d4ab6661-41b4-4511-015e-08de271c0c19
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|8096899003;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cUNmL3dUQUhRK2d1V244eG5XcmZ6cFZZMjlmNlNlOWs1ZUxwdmM2d1NtYzRX?=
+ =?utf-8?B?ZnlKUFhJaWljdWxkeHVGVjB4bzZ2YkdncEhjQWpMbnh0UEhkL0tvMkR5UmRU?=
+ =?utf-8?B?cTFjUWVPd3J5RFA2dEx3eGxlSHNzVjd4TEMycWJ0UG9NRGpPY09BTldvRDNz?=
+ =?utf-8?B?cWpYVm1vUFI2NnE5ckF1UkZZbm1mYnBUUkp1ZmxtaU8zNi9EK0pZK0cwKzZP?=
+ =?utf-8?B?VHpFQTdDSjhLeWZvMmFOenZCRlJVdXFndklORm1XWmNNWUxJNGdHZ1IraFJ0?=
+ =?utf-8?B?Qi8vOVJYbnlBajBmT2RyUzRnS3pnRlJKd2VlTkNSR1hENDlEKzdsRFhTMzBM?=
+ =?utf-8?B?OEFGZDhCd1Fhc2RsSzdZZ3d0aktvVHg4S0pHS0xNa20xZmgzdHJKQVgxMU9Q?=
+ =?utf-8?B?V0xpZmtSUlRmU2xWUzRXQTA2NGQxdVdEMHZVb2dQZW1WZGxGdWlaVDZnOURl?=
+ =?utf-8?B?L0FLRHpzcUtwVjBHaWlGVU9DSkd3ditOK29YM0ZJTEpYUHFRaVhuc3R4bUxz?=
+ =?utf-8?B?UW9teEM2bGFZbXlCNHNYa1psZGNwQXpLeVZ3azhBM2tJZXBzKzhsMWpKU0Nx?=
+ =?utf-8?B?bDBYZ083ZWFQMXptWHFZNE1YOFNHaUx6c25HaFNaYkYrOW9sdFRpb3JOa2E1?=
+ =?utf-8?B?N2pnMzdIY1RZdEF1UytBanN0OFFxTjRQbHltdUQ0dXNtell1UWJoWDAxR3F3?=
+ =?utf-8?B?Mnp2bW9MbFVsdXJCYzZJUEp5eWhRNWlpeUw2MndaNHhmZVMwcDdKL0trYWg0?=
+ =?utf-8?B?azF5SlpZdklDM1BmNERlWXdRVWNzS3Y2dDJGR3dRQUtoRG91bmpxSFk5TzND?=
+ =?utf-8?B?RmNGRDFZUEMzNURub1BKRUpFSmp3aDl0TXdabHdhNDVCem5aaUlHUHA4OGRp?=
+ =?utf-8?B?NXdoY0EwU003Y3dMamIwUzZwc3dKWkFlOGovZ3dseTBKcU40N1VnZnE1ZGhR?=
+ =?utf-8?B?Q2w4dE1YbXhtSEdFWUZSY0dheC8rTVBKR09aeHRTUk5lRWFKMWthWnJmUEtM?=
+ =?utf-8?B?MldsUmVBbTMwQTMrWnVZSFhYM3FzQ3k1d3JPZkVRbG5hVWtld3ZocDYxK2FS?=
+ =?utf-8?B?dWh5N3N1OFpaalV1WE5JekNPQU5lWlFmeDIySUo2VXU1ZThXenBFQ0ZSOGxy?=
+ =?utf-8?B?YzNEL1JDYkUwTlRpK1IrRTNOdi9TSWd1bEhCMUxVdUNwMjlnRXcxR2ZsWEs4?=
+ =?utf-8?B?VkpoU3AzejVEdUlzZitTbW51cmc3bng1UmhmbmFIR1RnWmtZNkVQRFc2NXRw?=
+ =?utf-8?B?ZWhJZVlWQ24xRXhDK0I4d1lwZDh1ZkZucHlIMmhDK0E5TmwrYjd1dllrK1Vq?=
+ =?utf-8?B?RFhSRFFuQmJ6NitISWhEeERHZDBTaVlnY3ArYzk1MTJsTkJ1eTFINlpvLzFy?=
+ =?utf-8?B?U2ppOVY3YzRYNFlCQjZvUWJnamhuZkM1a2hFaE5RWkJKcm84VjBva2t1T21J?=
+ =?utf-8?B?Y1lLd2xkL3ROdjUrWmZhVWhKdFVuOC9Xd1pwK29hMmRYcjNYekxGZnYzeTFh?=
+ =?utf-8?B?NyszTzAzeldTVzV1cCsxKzZ0V1BhejVIQXQ2a3BnMjJzVDZ2OWFML3A0cnpo?=
+ =?utf-8?B?MGpzVHBZbFdOQmw4b2JvRWlVMVZub1I1ZGU2bmtCQi8wcEdTTXBLZld4d1NS?=
+ =?utf-8?B?Q2xDanNxODErMTg1SFcwZnZkaHh4bkpHQURRL3N5SkNOcVhRTFNtSnlSL2da?=
+ =?utf-8?B?ZjhHSzZ2a0Z0RDhXZGhxR1QwaTRDUkIydGJEM1ZuRFE3d1BmWkF3RHk4ZDN0?=
+ =?utf-8?B?R1BZS3dlZ2ZMb0dOVnkzbE1PSnZzSVhjUWVrT0lzU1BSTnllUXo1SC9aMW5D?=
+ =?utf-8?B?VTdidno2OFByVFZua2o3OVF0KzNoNjBIeUx1eFdvMzF5bFYrbk1zbGRyVkd2?=
+ =?utf-8?B?LzVGeTVmWkdhaURvbDVOWVlaQWg2RVpLeTFzQnppczJmYlRiNzVxY0h3RmVk?=
+ =?utf-8?Q?qjMNOz7zly44xLgBcFCh2omaGJyZefDq?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(8096899003); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cHNoVGxHb2dNL1Uyc3cwSmF3Z3dOVThDQThrZ2NiRVhNUFNsQmFJRjRMN0hU?=
+ =?utf-8?B?OEZTZ25RUjVXQU1ZMmN0b0NIWjJtRkdJY0t1UmF6ZEJ5OW1uMnlYNjhFQzhB?=
+ =?utf-8?B?VzcrL1h6OGNnMG5LVC84ekVZenBKaUpGRCtZQzZRQXhDTXAwWUp4WkhEZzJm?=
+ =?utf-8?B?UElKTGl6WUg4TnM5Z0VzckVrVjYwVTI4V0lKM3RmY1hhMWNCU3h2T3JhZXBQ?=
+ =?utf-8?B?VG90RGdwcGdSZ3RBcE9KeitzaktsNXVLU1NZbmlMZ3pDZW1aTUxEK01LVU10?=
+ =?utf-8?B?b2tyYzNOanFQUFdNTHg2dUMyWlM4QTU1a01WY3doZUxPcUtFaHdPdFl1dFQ0?=
+ =?utf-8?B?ODRrYVdIUjhGYU1mMnI4VXNydDFuK0JKNmUzVVhBUDJIUVhTNWE2aXpHYUEr?=
+ =?utf-8?B?R2F5MmF2Vk5VRmdrR3FGVVpJTEJIMlk2RzMyaC9Ua01mdCtBRlJCZGh6MC9J?=
+ =?utf-8?B?eWtYM2NRRk5qZHJIRHlLUndFYjBVeHY0MDVzbWU5dHJOaWlXRGVMOTFIMTlQ?=
+ =?utf-8?B?VVZXcEdLSWRCbEdBVDlXT0d3T2xSZlUrVm81MDRTcW92bExxTHA1THI2ZHJs?=
+ =?utf-8?B?ZmFCcGpYMm5CQTA2NER6TXVab1QyOFlMRWJMWnVOVURCWjZnbkVrS2puUU5r?=
+ =?utf-8?B?RjRkclJ4S1V3cVNXL2U5SU5SVHJ5cEdJcTloc1dxQ3gzU3FPRW9ieEltM3pa?=
+ =?utf-8?B?dDlxdStzTXMwTzNqMWZPMi9VOTV1WXYrQUtQaVJWRC9yR0VjU3pPNlFNSnk3?=
+ =?utf-8?B?QXNQcjNMNXdhTGt5T0ZMVlp2aG1HTzFyUG5UNzlnK05SczNFMmdXc0poTzlP?=
+ =?utf-8?B?UW5JOWJjYzNyWWxLQnZRbzV4anh1VHJaWWs2MktKOEh2aEJlZUpwdnV6clRS?=
+ =?utf-8?B?Wlk2cGExN0hRbTdFNmtZckIwcmpuMDVHdjMyYnZkTWJxeGptWGRWbEI4Zk5o?=
+ =?utf-8?B?MC9JZG1icWF4Rk12NVN0b1dnL0lvUzVpMU1BRFBMT01EbVdyTW9kYkNUUTdF?=
+ =?utf-8?B?ZWxUODcxV2YvTUhtSGhIdS9CdUs0a1ZRU2YrbWZoL3RENEQwVGw4NlpIQUFv?=
+ =?utf-8?B?WC9qTnQ3MmlCc0tZYzNKVnVROVJRMTR4czNtYlI1NTNIVkplRXREdGEwckFF?=
+ =?utf-8?B?K2p4eGhaVTRmcVdLalFMZkVrdFlQKzNtbkkwZmJiZHhYcnFkR24yS3Q2cjdz?=
+ =?utf-8?B?MDdMKzRKM0F2TTl2VythUlVhRlRYUkFGQ3RWNXNXb2hGNmZnNlVqTkZVUmVx?=
+ =?utf-8?B?VzBucXAvZ01QWExaQkF0TW1RRjNqYUJHa0VhUDhwNmpIMmRnRW1LcGpCLzFw?=
+ =?utf-8?B?cWtadTZDalhWc0t6czdZaWovMXUyeDJMbW0wUDVsaENVbjdRaFBqQlF1UHgz?=
+ =?utf-8?B?enJNTmQ0V1NGSC9ObFgxczhaSmRHcWV5U3NLZkZ6cnRmdEtrWkJvNVlMckp4?=
+ =?utf-8?B?VCtTRkVyWVJVcXhXMVpHczgyc2pRYWwxSDRvdm00NTBUbG5GaEJncTQ5UXFJ?=
+ =?utf-8?B?WWVLNXBOLzAwUjNCQ3UrRU1OUTBXY1p2dWNOT1Y3ZlBSc2hFa2JjOEhQbUVq?=
+ =?utf-8?B?MTlvaUgwMFNxOStJKzJsaDBXeElXNi9zUzdvaXZlYmRhTkEwU010dW54ZVJI?=
+ =?utf-8?B?MU0xamFwT1dTVDdkemNNcktodGNWd2s5WVIwNkN3VEVtOHdWbkd3RUg4NW1X?=
+ =?utf-8?B?bDFreW5zYncrVm9qVUl4VnFKVVdodFlDQlhqMG00TGQyNUkrbEIrcTNkTC82?=
+ =?utf-8?B?VkpjYitGc0ViTXppU1lzenJkdzVPVStRSmRzUk9qZC94TzNhRXFuV0phaC82?=
+ =?utf-8?B?NmgvRERac21tNm16ajduUHUvS0NQVlFxTEVYYUhPbmV6T29SdWxvdmE1MGtr?=
+ =?utf-8?B?NzUxN1lJVG9xMGF1MkVwenlnS284Y09QbXlFQWYxMzNQSGxxbXZ2eWQ1YTM0?=
+ =?utf-8?B?akhpWGpEVFFIZHVEN1FwUnovUys2alV6cmFNQUtpMHJVcGcrVXBYM1M0blZT?=
+ =?utf-8?B?em9uMHdERk1TSHF4RExNZHhCdDFoNnlmQ0kwaXJxSzRkVDY3ZU5vUW92OEFY?=
+ =?utf-8?B?Nm1BQ29rNnFYR3h5eWJSSWFsZmRvYzVxK0tvVGkxNTltQVEyV1RIcytIVWZo?=
+ =?utf-8?B?Y0orTE9od1ZJb1FBY0Q2TUpnaitkeFRIVnBhZG0vVHRXcWRjY1YwSHJmZUIr?=
+ =?utf-8?B?R3c9PQ==?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d4ab6661-41b4-4511-015e-08de271c0c19
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2025 03:30:55.9250 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: N3wfsKVC1lAMGCxyGFQPmhJooVo/fI4RQVIVYYjQZaaVeYcmtBHa4dhBuyw214L4+LXobj6uOy4rElRf6Bfqe9qROI+kuvHgjHiFHeMCMbk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB7157
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,62 +185,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Dinesh,
 
---5NSMHfX4GuePnLiQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 5/11/2025 1:19 am, dinesh.maniyam@altera.com wrote:
+> From: Dinesh Maniyam<dinesh.maniyam@altera.com>
+>
+> Add SoC64-specific NAND SPL load support in denali_spl.c and update the
+> related Kconfig dependencies.
+>
+> This patch introduces new helper functions to enable NAND boot support
+> for SoCFPGA SoC64 devices using the Denali NAND controller during the
+> SPL stage:
+>
+> - nand_get_mtd(): safely retrieves the active NAND device instance.
+> - nand_spl_load_image(): supports image loading with page alignment and
+>    bad block skipping using nand_read_skip_bad().
+> - Includes nand_util.c for required NAND utility helpers.
+> - Wrapped under IS_ENABLED(CONFIG_TARGET_SOCFPGA_SOC64) to limit
+>    inclusion to SoC64 targets.
+>
+> In addition, the SPL_NAND_DENALI Kconfig entry has been updated to:
+> - Select required NAND SPL components (BASE, DRIVERS, IDENT, INIT, ECC).
+> - Exclude NAND_DENALI_SPARE_AREA_SKIP_BYTES from SoC64 builds, as SoC64
+>    NAND handling no longer uses this configuration.
+>
+> These changes collectively enable functional NAND SPL image loading
+> support for SoCFPGA SoC64 devices with Denali NAND.
+>
+> Signed-off-by: Dinesh Maniyam<dinesh.maniyam@altera.com>
+> ---
+>   drivers/mtd/nand/raw/Kconfig      |  7 ++-
+>   drivers/mtd/nand/raw/denali_spl.c | 73 +++++++++++++++++++++++++++++++
+>   2 files changed, 79 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+> index 754b99bf3eb..5e567ca4993 100644
+> --- a/drivers/mtd/nand/raw/Kconfig
+> +++ b/drivers/mtd/nand/raw/Kconfig
+> @@ -781,6 +781,11 @@ config SPL_NAND_CADENCE
+>   
+>   config SPL_NAND_DENALI
+>   	bool "Support Denali NAND controller for SPL"
+> +	select SPL_NAND_BASE
+> +	select SPL_NAND_DRIVERS
+> +	select SPL_NAND_IDENT
+> +	select SPL_NAND_INIT
+> +	select SPL_NAND_ECC
 
-On Wed, Nov 19, 2025 at 12:17:23AM +0100, Marek Vasut wrote:
-> Commit c37a6684818d ("stm32mp: fix compilation issue with DEBUG_UART")
-> split the debug UART initialization code into two files, but failed to
-> update other non-ST boards. This did not lead to noticeable breakage
-> until debug UART is enabled, which is not the default. Update the
-> Makefile accordingly to allow debug UART to work.
->=20
-> Fixes: c37a6684818d ("stm32mp: fix compilation issue with DEBUG_UART")
-> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  board/dhelectronics/dh_stm32mp1/Makefile | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/board/dhelectronics/dh_stm32mp1/Makefile b/board/dhelectroni=
-cs/dh_stm32mp1/Makefile
-> index 2f4a301d1a0..429e01453bb 100644
-> --- a/board/dhelectronics/dh_stm32mp1/Makefile
-> +++ b/board/dhelectronics/dh_stm32mp1/Makefile
-> @@ -3,6 +3,8 @@
->  # Copyright (C) 2018, STMicroelectronics - All Rights Reserved
->  #
-> =20
-> +obj-$(CONFIG_DEBUG_UART_BOARD_INIT) +=3D ../../st/stm32mp1/debug_uart.o
+
+Are these strictly required for all Denali users?
+If these are only needed for SoC64, it would be better to move them into:
+
+arch/arm/Kconfig under SOCFPGA / SOC64, or the SoC64 defconfig
+
+
+>   	depends on SPL_NAND_SUPPORT
+>   	help
+>   	  This is a small implementation of the Denali NAND controller
+> @@ -788,7 +793,7 @@ config SPL_NAND_DENALI
+>   
+>   config NAND_DENALI_SPARE_AREA_SKIP_BYTES
+>   	int "Number of bytes skipped in OOB area"
+> -	depends on SPL_NAND_DENALI
+> +	depends on SPL_NAND_DENALI && !TARGET_SOCFPGA_SOC64
+
+
+This should not be added here in the common Kconfig.
+If SoC64 does not require this option, simply disable it in:
+
+SoC64 defconfig, or arch/arm/Kconfig under SOCFPGA
+
+The common Denali code should not embed SoCFPGA-specific constraints.
+
+>   	range 0 63
+>   	help
+>   	  This option specifies the number of bytes to skip from the beginning
+> diff --git a/drivers/mtd/nand/raw/denali_spl.c b/drivers/mtd/nand/raw/denali_spl.c
+> index b1e2c9d8161..78cdab51a5a 100644
+> --- a/drivers/mtd/nand/raw/denali_spl.c
+> +++ b/drivers/mtd/nand/raw/denali_spl.c
+> @@ -5,13 +5,84 @@
+>    */
+>   
+>   #include <config.h>
+> +#include <hang.h>
+>   #include <log.h>
+> +#include <malloc.h>
+> +#include <memalign.h>
+> +#include <nand.h>
+> +#include <system-constants.h>
+>   #include <asm/io.h>
+>   #include <asm/unaligned.h>
+>   #include <linux/delay.h>
+>   #include <linux/mtd/rawnand.h>
+>   #include "denali.h"
+>   
+> +/* Only compile this code for SoCFPGA SoC64 targets */
+> +#if IS_ENABLED(CONFIG_TARGET_SOCFPGA_SOC64)
+
+
+Cannot add the platform specific change here in the common driver.
+
+The Denali SPL driver is shared across platforms, so we should not add 
+SoCFPGA-specific logic here.
+
+The function:
+
+int nand_spl_load_image(...)
+
+
+should be moved to platform-specific code, e.g.:
+
+arch/arm/mach-socfpga/misc_soc64.c
+
+
+Similarly, helper functions such as:
+
+nand_get_mtd()
+nand_spl_load_image()
+#include "nand_util.c"
+
+
 > +
->  obj-$(CONFIG_PMIC_STPMIC1) +=3D ../../st/common/stpmic1.o
->  obj-y +=3D board.o
+> +struct mtd_info *nand_get_mtd(void)
+> +{
+> +	struct mtd_info *mtd;
+> +
+> +	mtd = get_nand_dev_by_index(nand_curr_device);
+> +	if (!mtd)
+> +		hang();
+> +
+> +	return mtd;
+> +}
+> +
+> +int nand_spl_load_image(u32 offset, u32 len, void *dst)
+> +{
+> +	size_t count = len, actual = 0, page_align_overhead = 0;
+> +	u32 page_align_offset = 0;
+> +	u8 *page_buffer;
+> +	int err = 0;
+> +	struct mtd_info *mtd;
+> +
+> +	if (!len || !dst)
+> +		return -EINVAL;
+> +
+> +	mtd = nand_get_mtd();
+> +
+> +	if ((offset & (mtd->writesize - 1)) != 0) {
+> +		page_buffer = malloc_cache_aligned(mtd->writesize);
+> +		if (!page_buffer) {
+> +			debug("Error: allocating buffer\n");
+> +			return -ENOMEM;
+> +		}
+> +
+> +		page_align_overhead = offset % mtd->writesize;
+> +		page_align_offset = (offset / mtd->writesize) * mtd->writesize;
+> +		count = mtd->writesize;
+> +
+> +		err = nand_read_skip_bad(mtd, page_align_offset, &count,
+> +					 &actual, mtd->size, page_buffer);
+> +
+> +		if (err)
+> +			return err;
+> +
+> +		count -= page_align_overhead;
+> +		count = min((size_t)len, count);
+> +		memcpy(dst, page_buffer + page_align_overhead, count);
+> +		free(page_buffer);
+> +
+> +		len -= count;
+> +		if (!len)
+> +			return err;
+> +
+> +		offset += count;
+> +		dst += count;
+> +		count = len;
+> +	}
+> +
+> +	return nand_read_skip_bad(mtd, offset, &count, &actual, mtd->size, dst);
+> +}
+> +
+> +void nand_deselect(void) {}
+> +#include "nand_util.c"
+> +
+> +#else
+> +
+>   #define DENALI_MAP01		(1 << 26)	/* read/write pages in PIO */
+>   #define DENALI_MAP10		(2 << 26)	/* high-level control plane */
+>   
+> @@ -240,3 +311,5 @@ unsigned int nand_page_size(void)
+>   }
+>   
+>   void nand_deselect(void) {}
+> +#endif
+> +
 
-As a future cleanup perhaps for ST folks, this feels to me like there
-should be more code under arch/arm/mach-stm32mp1/ somewhere and not
-board/st/.../
+Thanks.
 
---=20
-Tom
-
---5NSMHfX4GuePnLiQ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaR0KygAKCRAr4qD1Cr/k
-CiUgAQC/cwyzIjDTjlDqBkrCtI8VhOjVOCPVspMPx7Rmn8KFrQEA4wj3I6tF/ulZ
-l6M4ZqiyNRDofj6oF2xINVD2ntdCkQo=
-=hJHD
------END PGP SIGNATURE-----
-
---5NSMHfX4GuePnLiQ--
+Tien Fong
