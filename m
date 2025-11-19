@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBBA1CF2562
-	for <u-boot@archiver.kernel.org>; Tue, 18 Nov 2025 23:33:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5969CF2562
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 00:09:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CD3483B95;
-	Wed, 19 Nov 2025 00:33:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 115F583984;
+	Wed, 19 Nov 2025 01:09:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fsSXiNlB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WFjst2T7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6708839AC; Wed, 19 Nov 2025 00:33:19 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id E9FCA839A1; Wed, 19 Nov 2025 01:09:55 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB2E283A57
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 00:33:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA28A8397D
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 01:09:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-3d2ea93836bso2777692fac.3
- for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 15:33:17 -0800 (PST)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-656b4881f55so3017074eaf.2
+ for <u-boot@lists.denx.de>; Tue, 18 Nov 2025 16:09:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763508796; x=1764113596; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ini1gMa5TOVqFYS+NJinUCTH/5Nc8caFhuu62UG418k=;
- b=fsSXiNlBx86URlO6vWGQnPLZHmFAYl65eL7xn81LE8voicoLYtnJBPg6N0rkHJDEiI
- GGZ+axmsQBEp9i3F4OsCNsxWJlEYemPezPw90uyE40TLln/hQIcBZ9fEcTPNWIrsympK
- B0pn3mZDgFiskpBRQmwbVf6rFY9ZJ5NNCBeEs=
+ d=konsulko.com; s=google; t=1763510992; x=1764115792; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0HBBjk4Dj7shOveulG1Gq22RUBGdGMbA/CYa78qmNBE=;
+ b=WFjst2T7WSuE9kJyViflctyp7aY8Ju2nFmBZ1L0TBNP1+XwNgiEcx/7eYAixAP1pEk
+ KWtu3HpuEh6lhDk7tvfDxRuZ9/RlAKugyyEnKGfKovfD9m2MbCraYEqwxDHr27bUU+ft
+ cYE2ikkKr/eAVPNZU04cix/sH1FT2n5Vg6FbE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763508796; x=1764113596;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Ini1gMa5TOVqFYS+NJinUCTH/5Nc8caFhuu62UG418k=;
- b=Qg44ldFJkNMeIL+ujWzbsYwEXK29b8hKRGQTydJ8t6TozCzin3gq7Z+clsug4A08No
- aWCYQRZK0AMpexHaimew+b24i+agITsumz19m8Z/fA8K8753FXk9GH4L84VpYStrooC8
- VOFIZqKMK/2BRgd0b1ieoAGQutEIfLKJFiRNfUn2rvPrhp1FNW0n0L+khJHFZLC3LUNz
- E2GSJL/xH9XjUZ60T34Nr0VICK4Je0uczvsf7+KWx8LKbpZPykeZ1Y0SB5X+m3FVciIu
- s4uEMLrHwk/V2t/7MJGgZtqOxvV6zCDKICe9SHLxK6MudCPnnWoFJjpjQkfmmaMJAuh5
- r3+A==
-X-Gm-Message-State: AOJu0YzutQT5q59B3G///pB/MTgWVXd+FtTrw+DyR/NfKOD/cURM3qY6
- tehhoWL4zZX5Gh7lQGu8JYhTVHL07lVOloTyye58elUcNCY8AVYqQuB0S6MXb8GkBEudngxAdEa
- aJMBEx0bkgQ==
-X-Gm-Gg: ASbGncsjwBkxGiIkqvO06FZWsF/X34rZVFWpJDl5gJIIuci9ZP6C1+ZVKkAPA5ILIld
- sEbMOLFB0WDBbKpE7W1UmBJ1H9h5DyVNZ41bs6R/s1/qS5cnDMwpI5L6Z1W8PBByqM3P6HjFt1I
- v5oRLdIxYrFO7EDI4Q1PT+B+ssVO7aW/9Df6pQP8ctsqw8h4LwdboSyNr81g7tcKwQFmoqqATlp
- zWGDy9MoDU59tUJG+R30veCAFmXjHKyDpOdxSaou6NelqxLJGYr3E3GwhVQ8WHo+PGgmY5Mbc3l
- ToNlR/GRUycYpF1dbBVj6nC0i/HSn9hmAwYIO9jRlY0L/dyiHyiXr8S8rtB9bXSvfHkbBRQoQMg
- pf3mBgiHDdrfiAiFM9emW4tv0sluCdzvyk/csxOmZU9CKX4OhyYK0wy9tQXMCkGbvBKigUUQYTE
- k320XdJCU+DmkrEL5nQ2h0fu1Gs17Q7GO7Wp4Hl9/XUu9IVeRK
-X-Google-Smtp-Source: AGHT+IHpyqTd0h7jHd3yQmLnkdY12hihUe3HgxjsDqWE0NyhLOBG4byV4KJoR3wBjx2OFX3XtUhGiA==
-X-Received: by 2002:a05:6870:41d5:b0:3d3:b73d:38b7 with SMTP id
- 586e51a60fabf-3e868f1a992mr7922984fac.17.1763508796461; 
- Tue, 18 Nov 2025 15:33:16 -0800 (PST)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1763510992; x=1764115792;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0HBBjk4Dj7shOveulG1Gq22RUBGdGMbA/CYa78qmNBE=;
+ b=xEEVCninMqneqxeQsb7mA4VFc5VEq0BLPTXkJDk3lnsMS5JJ4MdWzRw9Iqz18tCazR
+ kJCOpTAjm4audWE0guH+pqyteRX5/K14HYnwkf7MX2/UGJsHq5mbxE7sTbTrVRDNRfu3
+ BXTtA7NyZLokTb0Nsu1oC2JkAUCxUea7zO7r9bcweq8env8JEYBJJ9VuffuF0W5w+6T0
+ I3Huqq76I2mYDHYp1qlnKkaxj31uQ1YCQCibp7DQuIsgkl1pe/BHnZMDDcp0asbhwnI2
+ ufbFZHOXCVrHtovDIxHKFJYoufoWr+1JK3RSp/aWD108gRMK+UihCmsljeoQ15d3VyAd
+ KBaA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUnow0otz7GnFk8eM2Xh9kG/WARi5hVd8JMHJCVJbCjTB6k6D8b9bSCag7nc4/QEBv6WZltgis=@lists.denx.de
+X-Gm-Message-State: AOJu0YwcuojD9vjYcSnmsvTu+AXroh7ePCFYtJYcEjyXIUfGhN2tAo8B
+ EYUiex4LWxXMofKpFUSRkh8Mr4P5ntSRmLVuy2VbAFFC0B2GKifiRfxXnxx7jxODd28=
+X-Gm-Gg: ASbGncvlhZQr5d06K/5N7thbLKBnEJIvQqa4GKuUE1yyUgistxXr4MO9d6tBkrpC7jf
+ oed+JHVR9Du9QJi9kyqPN9d/Qw1qXYme8pcdXgRZD3zCusmv0CqIarEZuLYxdb3bKMJfwzys2Cb
+ HPR+U/F1N6p3eju6yuPXxX3RXxD9JF1QKFNUCiTn+TKdtqYknQbGVWwITpaAZBGQfDyio61/kJB
+ tkM+EdhASK47+27R5UgGOzV6C06b+9H2YTtbsgZ/KdQ944Gsz/xTPCrYV9x76Bwt0ZGjonvm+co
+ AVq0Q3iCvM6qABAhBvlKS6c+8jIjlYkJrVkyvtHtr5zaCTzijuyAqxoY/2iSkm22D8oeigJxBrw
+ M2XIkqReR+EOAFN+6zsKLm5rt0goQw2JGcv1WnZVXviLAL2id7KsPYLcZphTT0nZfETnlQuBYM4
+ OcslEovkFHeFfJoOM9PQ3VY3IpPYZSPPkvm6QIMPLOuEijY2ajvtv2Q6dNy7w4
+X-Google-Smtp-Source: AGHT+IEG3WHOrFUSeRsUZsyxgc2b5g5meQcsUELKESR3w8pYTupHXGo9EXuldZ3+5O9BYDI0/GuiRw==
+X-Received: by 2002:a05:6870:4f88:b0:3ec:50cd:2415 with SMTP id
+ 586e51a60fabf-3ec50cd3754mr3912023fac.29.1763510992311; 
+ Tue, 18 Nov 2025 16:09:52 -0800 (PST)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e89697fedcsm4075794fac.1.2025.11.18.15.33.15
+ 586e51a60fabf-3e851ff9dfesm7566406fac.2.2025.11.18.16.09.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Nov 2025 15:33:16 -0800 (PST)
+ Tue, 18 Nov 2025 16:09:51 -0800 (PST)
+Date: Tue, 18 Nov 2025 18:09:49 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20251118042325.16659-1-semen.protsenko@linaro.org>
-References: <20251118042325.16659-1-semen.protsenko@linaro.org>
-Subject: Re: [PATCH] mailmap: Add entry for Sam Protsenko
-Message-Id: <176350879589.654721.5408244642164322329.b4-ty@konsulko.com>
-Date: Tue, 18 Nov 2025 17:33:15 -0600
+To: Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] ARM: stm32: Add missing build of debug UART init code on
+ DH STM32MP1 DHSOM
+Message-ID: <20251119000949.GW2125796@bill-the-cat>
+References: <20251118231732.577952-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5NSMHfX4GuePnLiQ"
+Content-Disposition: inline
+In-Reply-To: <20251118231732.577952-1-marek.vasut@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,19 +101,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 17 Nov 2025 22:23:25 -0600, Sam Protsenko wrote:
 
-> Use 'Sam Protsenko' as my name consistently in git-shortlog. Also map my
-> home email address (which I used at some point) to my current work
-> email.
-> 
-> 
+--5NSMHfX4GuePnLiQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Wed, Nov 19, 2025 at 12:17:23AM +0100, Marek Vasut wrote:
+> Commit c37a6684818d ("stm32mp: fix compilation issue with DEBUG_UART")
+> split the debug UART initialization code into two files, but failed to
+> update other non-ST boards. This did not lead to noticeable breakage
+> until debug UART is enabled, which is not the default. Update the
+> Makefile accordingly to allow debug UART to work.
+>=20
+> Fixes: c37a6684818d ("stm32mp: fix compilation issue with DEBUG_UART")
+> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  board/dhelectronics/dh_stm32mp1/Makefile | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/board/dhelectronics/dh_stm32mp1/Makefile b/board/dhelectroni=
+cs/dh_stm32mp1/Makefile
+> index 2f4a301d1a0..429e01453bb 100644
+> --- a/board/dhelectronics/dh_stm32mp1/Makefile
+> +++ b/board/dhelectronics/dh_stm32mp1/Makefile
+> @@ -3,6 +3,8 @@
+>  # Copyright (C) 2018, STMicroelectronics - All Rights Reserved
+>  #
+> =20
+> +obj-$(CONFIG_DEBUG_UART_BOARD_INIT) +=3D ../../st/stm32mp1/debug_uart.o
+> +
+>  obj-$(CONFIG_PMIC_STPMIC1) +=3D ../../st/common/stpmic1.o
+>  obj-y +=3D board.o
 
-[1/1] mailmap: Add entry for Sam Protsenko
-      commit: c2b25f8f66a31e3fe435c93c4339f95ab4c24b9b
--- 
+As a future cleanup perhaps for ST folks, this feels to me like there
+should be more code under arch/arm/mach-stm32mp1/ somewhere and not
+board/st/.../
+
+--=20
 Tom
 
+--5NSMHfX4GuePnLiQ
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaR0KygAKCRAr4qD1Cr/k
+CiUgAQC/cwyzIjDTjlDqBkrCtI8VhOjVOCPVspMPx7Rmn8KFrQEA4wj3I6tF/ulZ
+l6M4ZqiyNRDofj6oF2xINVD2ntdCkQo=
+=hJHD
+-----END PGP SIGNATURE-----
+
+--5NSMHfX4GuePnLiQ--
