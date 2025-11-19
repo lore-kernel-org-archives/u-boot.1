@@ -4,146 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 947A9CF34D5
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 15:23:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C8D6CF34C3
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 15:25:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37BD483FCE;
-	Wed, 19 Nov 2025 16:23:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id C73BA83F69;
+	Wed, 19 Nov 2025 16:25:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="d3ASo3iU";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="EMFOzyTg";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OQptOqK4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B378A84010; Wed, 19 Nov 2025 16:23:33 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id AF85883F7D; Wed, 19 Nov 2025 16:25:44 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33D3C83F7D
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 16:23:31 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T5Plsi7bmRnBcnnoPrDfeliZX7gTf9CqcztBlrirBwrD5+7a6SZF6aaH0gPjJqcExvSdcMlmbbnf+Wb8gM1sP8RmVrTlBEwGdiiry8H64r7BBXH7Wf0dteUDEzz6neASzQKBBkQ7fn4pTEWuP2LkhssPFoDYBTVUhOl4ACNntQEVdttMkz7He7QhdtqYAsGjN5jJtSMrRV/Z+RTvn32CMzogZSmZyFKFiLPaKpOAQauzT7BCr+5Wf1ciXOZfugB9PreVRdAbj1KgMftqed1kQPD4E0zaoO5XCs+Mr0iKffyoGc1/mj4KBYq9zQn/j9gCSzhFR2ju7nia19sC+SCTPA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Mv8sgSBHofStT9vL3fbldpBhSDpkg0VP9S8mkoRyBio=;
- b=ZEGL0DBMKdJ6qSgXTwCt4JnmETANWuxfRS4XTJOOIISIfiwNrFHn1N6NM+ary50XjeTCzhA22DmrtRU1Ox/G2Mx/OK9aFeA3Ve2oBx6wOeBvw4s05+38JzucePwB+ZbUHIuMLoZBsCQWHBi8IiTSQ83eOghiS3sUPftdUzFgrs+lGJfnhpdr0IzxJLllnPTVwo4TT8vciUI2FcQmH12Us8f/h9LsfQDVK0D0idyDDqpDSQgDlIQYdY1He+2DDBCiaOl3LtiKozuGVF3JqUIq2m/y2zKRrZiVjiaw8MrgJeXvx/NrUGnEMw+QW9mEUrrPGRfytFVkbbYHcdh2su9csA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Mv8sgSBHofStT9vL3fbldpBhSDpkg0VP9S8mkoRyBio=;
- b=d3ASo3iUW85YkKqWj5NyvZVH6e8p5PYLbYMrdcMCW+ImTqcDC6OuwiIDq7KthCowT61jEIM+3wP/Psd5HrmGPl5p9/ETDaAJPU6bkUJSZalhKCNHeDUqei+N8tqQJ6G3xs0z72jptRrDF4iV6TE9sOgMk23wUeRemPDaTEGGYfqP6LUwe8BJ10k4SLRV3x9yI4NBWOwDNdV8+JWnMrwyThlU6Z2jh0pvkJDJdY83RsBf2tyH9cfzyVvvB2SErnuSEhrPbf+L95+09XiPmgyWFYhL9Pz1Pq2glbS3QNTdPDUIrU36Rlh9wqQdToOfwkL6D9NVBL704V+RNSQzGhKvUQ==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by FRWPR04MB11270.eurprd04.prod.outlook.com (2603:10a6:d10:19c::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Wed, 19 Nov
- 2025 15:23:29 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9320.013; Wed, 19 Nov 2025
- 15:23:28 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Fabio Estevam <festevam@gmail.com>
-Subject: RE: [PATCH] mx6sabre: Stop disabling device tree relocation
-Thread-Topic: [PATCH] mx6sabre: Stop disabling device tree relocation
-Thread-Index: AQHcWLXAA3V77EThdUOrlUoh2R2qJrT6H3Gw
-Date: Wed, 19 Nov 2025 15:23:28 +0000
-Message-ID: <PAXPR04MB84599E3281038E6E6A750CC688D7A@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20251118180408.591167-1-trini@konsulko.com>
-In-Reply-To: <20251118180408.591167-1-trini@konsulko.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|FRWPR04MB11270:EE_
-x-ms-office365-filtering-correlation-id: a37d1dab-e808-4680-f744-08de277f977f
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|19092799006|376014|1800799024|38070700021; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?5TE7S/vVciyYykAYZJj9y0p6W2GAD6xehM+dYjLAjRt8KrDSEt8iggl8QUOK?=
- =?us-ascii?Q?2MP7IIyb78k16AyK54TD/VHV8KPCJvGPHAD4OSI9AtKq2OWFM2kycV1vSywZ?=
- =?us-ascii?Q?7Jgeavg971V0CeV9pjxjhHcnA1zkAjEz8Ap8EwVqS4wv4hGLYhcHieYpTRV5?=
- =?us-ascii?Q?jhvPcdTaweG8xxv0TRfLS9IA3ab+6phIkdlcXvU/zanaMqIDpkXeTPTvu9BU?=
- =?us-ascii?Q?LfkXdeVhohcK45RvwkxN9YFK5qqCrgQnq4rE/4TRXL1PYxePkLM8ojS+gkBp?=
- =?us-ascii?Q?ftXN8qEHYltfsLG0Tj6QR2WH44qUGhX/6Y4zviHmTI/xs1m6Jv7mNA/tM1I/?=
- =?us-ascii?Q?XaxnCwePdY68soGnK29XFItVtMxQbr+isaA8ekTUcrbvX80CiXwRQHZ/NPE5?=
- =?us-ascii?Q?SgoJFHzdmreTZeKOYID0+il9Ml9XVyIDHYzqnSifZCEv/os6zIs+cM3b8pai?=
- =?us-ascii?Q?fnfYV9StBAsVJ0Iwkl6h8eBSk4g9s/ThgvQ+fcU3fwQ9E90yFb9EnNt2W20L?=
- =?us-ascii?Q?vFr0yTTBfP7WobdC3Yy/coU5b293xVq21Oy2uNoMQkfVbhvVp3ySU6DPfGow?=
- =?us-ascii?Q?p6XL4VVqCDYZ8EZZMLxqo5zvsIiliJDlj6S1gdywjpkk1uHecfFbXPyBpkn/?=
- =?us-ascii?Q?osZcWeYNCiQGbdtWMyewxLvGj1G3tbTxPP/YuiUEvyFylyTPxqcqz4wWo7mz?=
- =?us-ascii?Q?lBd22a2N19NnejKEoiwDZR2/wIJarsO5uzdbblHReL8GoATdYpj3PCkYh6oU?=
- =?us-ascii?Q?mQjIpWi8ZkVmIYOorpDpG0Rz0Gkl5dmtVnu2k3BSQIYwXc9WTpWzhpjOskFL?=
- =?us-ascii?Q?hArrwhLa6VE/JKz6RGZzBhm4D46nIV3kBSCGOTR/+2E3AGGKOG+hWjlJ1hc9?=
- =?us-ascii?Q?uVtOCuFhfm8sRmaoP+8Xv6iiL1U0q6d81q+ve0WcQ+wvuHHqWcvvl3EHX1sk?=
- =?us-ascii?Q?nIibEfZbmmw9PUC858YtVkmXrepYKQQAKo5aYOjXRSrbI98JANXQJaDqEEjK?=
- =?us-ascii?Q?G5r6vGOdCi3jD/AQC13ugv9ls4GvkoVwHBAZ39Tq9fWReaz/xpobUm7GEJ2R?=
- =?us-ascii?Q?PUFDpfNcmfWwyyn1NwVsEsJz2csZ7cG8C6ujJcuNyGsObQ7CfCXnXEyzB2nC?=
- =?us-ascii?Q?t9rCT0YKHULBCKG0414+usvh7Ufx8/8/AU7bFKFuJuP56eEPZUoHVO+192j/?=
- =?us-ascii?Q?Wi2LgYPU/6PW/m4pqmkyPe1Ne4s3xPbO0klbG2R7Pee+k+BGQ9nY3rKFf855?=
- =?us-ascii?Q?VPo8troG6dJJlRnUBRzUtO3Uhtq6rGZCgN2cxIivqB1sY3/Jke/FGe3qOm8B?=
- =?us-ascii?Q?Fci+ZBeuvmP1CILHnIJnxbAmfEsycY+VXdLPcJXrsgpIG+E0GKfeIdos9j35?=
- =?us-ascii?Q?0JlOqSDwLMprJrxHZ+dXD30kBY7hv7CrkQE0SyWUkDvL5WRxYm7o2it7hmXh?=
- =?us-ascii?Q?se3sWrU6yjG5qV0vC6uq2n5XhVJ4fi3JVfAQbbcvtKE3ZSgKlFKi61SGwupM?=
- =?us-ascii?Q?DatBfWmv69iEFaCqHa06Gv0B+saVo8C1kMNZ?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(376014)(1800799024)(38070700021); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?kNqiBOIS9OXcUoVxC7OsY8gl9Kdjhu2VUgCWbJmY89l+L+ifTRmP4BciXHOj?=
- =?us-ascii?Q?AQAnPf5DPdH/2edwrTXjFPy0GpjylirM/ZFb8p9f21wWJgBj64eSIvefQld7?=
- =?us-ascii?Q?5AMYua75Yf7a1npCxyjC6rncq5Q7gjLKdP4o2f9mtZZNfYn5wnldXyZ/Ux61?=
- =?us-ascii?Q?kGK38GAI1lot2y+R+Frx1uGibZ5lB2+QKNTYOzL7QN+ae/Whb0+Hq1dKcPC/?=
- =?us-ascii?Q?l39fUJ3GBIyY205mZQgx0yNVY7bdELJqEh69ws53KGmlFC3lZ/7jc5uGJe3U?=
- =?us-ascii?Q?EV6XIE2cx2pUzF+Kb+OPDUPYQlo8vHVyPGbgPoZE7sjYZqKY0M08yaqi8SQ1?=
- =?us-ascii?Q?8M1oMBDQXf292pPne4XLoSY4ANpUOIC2byBn9TQtFInTEh1ulD5krU5KsqYu?=
- =?us-ascii?Q?L805i13WSq6zobzGpS/FCeSv1xGJv8cklU1YlAgZO6XiIIlM58MqcHU24Xlp?=
- =?us-ascii?Q?uM3yAGIKSNCMv9bS2IJBBvcj1eNGOTN4H9B7K3bM0Lp5HKDBlmw3Y45G3y7I?=
- =?us-ascii?Q?x6dAoF3vz5qvmI9YMhZg4rHkqOJ+oiqCOmtjHrymbJJo9ylo+7+PQjuxTR4m?=
- =?us-ascii?Q?AxqTGBdHuklX1t/28TQELCLvmMyakbKWGp9rC+sWdSVYD9kJzsNcJ35Z5WoJ?=
- =?us-ascii?Q?DmP37KtHGteCUGNUCrCRH8r3JbkCdlhd8wS70aYQiYXRX8j729r/CK2r7FJz?=
- =?us-ascii?Q?IHuIqwi0M2eZxAFyWvdWTd7XpqbUZhzW8jNNp52pA1PcdGaftEcz7eOv89bX?=
- =?us-ascii?Q?AA/JuTc7gILo9fqq/sHZ82N9oSfxf6c4eclxGXoFK7TUlBORaqrnpDIqPSFF?=
- =?us-ascii?Q?XNkLef1z+KWoNkvQYDCaoKlMgsQLjXoOQf23Uit+LKBfszsTFDLdXfchUkKz?=
- =?us-ascii?Q?EMeYIzCRbZBmRu3SigsGJvUXRl1a4l8Zk+KETgqXKuC1Rx8PPiY4Lya3TFPx?=
- =?us-ascii?Q?UCBFnnrOfvbUFjmZTenAr0Rji4CpqakDVWeN/s5yO5VfebONoyNxCzVQBhdz?=
- =?us-ascii?Q?8Vyk+hBQ5bvGPgn+qpR3xcJu4maKOK6iyDib8apa5jjnUvqYXu11Trxb8fjE?=
- =?us-ascii?Q?Y+FyrGThDbBCpK74sAW80D3kWzuIH3n6je497czBf560NW3+CdDinQh0FUEF?=
- =?us-ascii?Q?VsmORxDDC2e7q2UBRTZiTu72zwLne11ljt5HGhkWnVOdPmY8MI9wHfrY44yf?=
- =?us-ascii?Q?JZN1To7vtW4sVc4du+lBItllzR+qCSNdzFBn13CE2+rJZ/x+qYWXnteGcZkh?=
- =?us-ascii?Q?NwBncCEA+2JkfO73m5ungmy6iDK2JbUQDJYdrCNC0Eg4TsPcrG+DT5J03e4M?=
- =?us-ascii?Q?JVcR61U2Pj8sKbn9pEn+GAZcndvKK31ApGVnLeao+P9ePWmLuRyDrkBbVOYu?=
- =?us-ascii?Q?w3cPe3iXbyw39bbK2xx0tJQqpMq94lEXWqFAiLjtToalB2SCdpIkFw6aKApI?=
- =?us-ascii?Q?9O6tCcsOM0id0MdgM5oNuJVJrt2y6QqI14XHxB6C5UhFkL5jIaD9Cegh/f1R?=
- =?us-ascii?Q?gtqQEWe6utnyL3F+m3e+gYiY/vVEb/CMf9svp7Q2cL8R78Ec/MJTqAGtrrOB?=
- =?us-ascii?Q?VpatlcsHlP0mAL+7uMQ=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ by phobos.denx.de (Postfix) with ESMTPS id 7EFD383EF9
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 16:25:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5AJFKkQA971176
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:25:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=6eA+ZPQQn/2C4bQ6dy79shznqE5+fqZfVh1
+ jN3kA2QQ=; b=EMFOzyTgIqrq+WhI4OxZvwEQFNdgBPDrbyeTi1JmwkUp4hmeJCc
+ jHpGLkZZdIGVJsy7u0u4pr/9rMzN0Gz77KjW1yMLFyQYwV9yNN8P3WM+ux2tITFl
+ g3GINmw1DV7L75ialSVX3HmlnPyH7IbvFAR+4vteW32CpVz5LHnyjAv/Awy6q+K2
+ 03kNhBQ65GUS7B/zxzNrN7nJ+5RBtqRyPT+04ZLagsdv1NelT1laXsYI+Q6ajwaW
+ ZDk1ThbyQb04z/Ly+pBppdgnWqBj4E8gLF263MtxS2ra+/AwVZAlkHCWak7mWZfR
+ /EZ3Rm/rGq89HL21EcI5jtaHvSmBiga8/vA==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ah9fu9dx2-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:25:40 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-34374bfbcccso6788478a91.0
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 07:25:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1763565940; x=1764170740; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6eA+ZPQQn/2C4bQ6dy79shznqE5+fqZfVh1jN3kA2QQ=;
+ b=OQptOqK4xITfaMckT/WCIbNhAVhQRZF10jKvLE4p2uBioBVmVKmCw+VOudbRgXPxjK
+ Kdxynq4Z/326suYmpA2Pdzyx/EBjne+wTLBi9tHroEZLFpIC5qTVApovlyGIFClG2fW/
+ rm7muYdiliuJGFa/UzHCNfnm6Xa83qSFendwUAV891xk9cLnttrMNWh219okK39QxnHM
+ SD+/AyIpPSCheFUIg+1jd9XhVmdFdZJiEvGEVIt5gTsFcOmv+Ei/O2tYr6BeQPcoNT6u
+ rZzjWHJwdC943yCsORfHVVl/OstaeaYT783qRNZHF70XtKirWRi/r6zyqh3C42fiqE2X
+ sjXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763565940; x=1764170740;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6eA+ZPQQn/2C4bQ6dy79shznqE5+fqZfVh1jN3kA2QQ=;
+ b=chxWS6YbzqjK0Y/pRDQFaVZyznY4im5We3YfS9cqEmRY8XjJ2aQrlNwsNLtWA5uGl7
+ 6hfkdjA2wg17aKnOdovqhRbAz44O0TXzLHLpQL8N8wmj6Luphm9b6T3dE3Qn5VX5rFRq
+ o95l6n1f/38JFdVGBgomLxBPBEAPKdKLnZVugbm8l2AmpNn1kQ+3neGVkL2ptkbhvqDE
+ jCPbRrBTMfvUL6iJjMaSA42JHSK6heYTT1JLHG3hIAj6ulE08+CWWC1jB3aowNK5N/XN
+ aWypScznymS2j0wWE8s+vHpj0Ddj/DI0ekKuvseNzWn+nzB9yyHEbROqGX8FxYiuJk+F
+ s6Lg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWkJfpYe82FaQODiIGz+sH7oCBdCtDF2eQHykIeXKH35ZftlgA/WEQaRGdcBKraCRWk8ERUtUE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxgoHxIb9P80wDUWRkwaUFnDjyp+XlOuBY6Xe7cPEZrTbOnAgAB
+ 8M2kPCClz4/bGPUaeIftpV9fYkxZi+TufGlzhHK5IH6qV2MBdKerv1dK2SaL2wrsjC8niwFBP/s
+ bnu94m7teF0uiPFqkXWsxDSfoXIZ+olO1gcw4okEDWTpLMa5Sn7yLXhR3
+X-Gm-Gg: ASbGncsMzjVsLo/AxXbGV9hkCnpYD7+o4Ib2nDSfviXo+vAg84QbCkRXf7QjtW+wcye
+ 1X+tljCin1SXQ6hDoEXap1NCvvwiuQF/GZCoIOuXgQYUaYIghtSVVMLx0hcgDB9k89VpaFn4wYt
+ Kr+D0ziqBlVc29wc5hTTj0Bd4RiPL+sL3gSFHf8lU/6A0GXqljbcDJ6J9NYPUCjfmvCpKWqq6fT
+ UfIWMl4H/M6wz75nqwEVYl9/6BgZZNthxXGS21C+v/qt+lMNh8Y1D9LpqfSEp44PhMcdRV8EGDb
+ xlBBZLk5Ggfu5lvwyjccOfP1jwiyaUUmZKbrZfc220XAcrREwhQgGS9CcpfJTrAyBLLDE/WQ4PR
+ hOdYv0w0GUW6ftaepCttwuBgGY8lF1enK+bG9cpdBHht/9T7fk/gsLtsMnTNegUGq5Uure07+AQ
+ 1eCQ/t1D+0zrvBo84Ai6Clow0AxxktSp7pssf9/Q==
+X-Received: by 2002:a17:90b:258f:b0:341:124f:4746 with SMTP id
+ 98e67ed59e1d1-343fa638f09mr21283102a91.31.1763565939948; 
+ Wed, 19 Nov 2025 07:25:39 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHceFFzif3/jocNzztH7thzHI4rOkA2VkpIlfpmAzb9MerauwfBImG219gwrD8RpOLj8K/+mA==
+X-Received: by 2002:a17:90b:258f:b0:341:124f:4746 with SMTP id
+ 98e67ed59e1d1-343fa638f09mr21283081a91.31.1763565939365; 
+ Wed, 19 Nov 2025 07:25:39 -0800 (PST)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-345bbfc8eefsm3083157a91.4.2025.11.19.07.25.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Nov 2025 07:25:39 -0800 (PST)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com, marex@denx.de,
+ balaji.selvanathan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
+ rui.silva@linaro.org, luca.weiss@fairphone.com,
+ quic_varada@quicinc.com, mkorpershoek@kernel.org, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Subject: [PATCH v1 0/6] Enable USB3 Super-Speed support for QCM6490/SC7280
+Date: Wed, 19 Nov 2025 20:55:24 +0530
+Message-Id: <20251119152530.4175628-1-balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a37d1dab-e808-4680-f744-08de277f977f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Nov 2025 15:23:28.9216 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: QGUs3kTwLMF8AqYqNElD3UC142SC2r+OXIt9BDMsJ3OEaATShPlPip7iGqoducjPRuWZrNDoy2QluFnEDRR8Ag==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR04MB11270
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE5MDEyMyBTYWx0ZWRfX3RWQNJjnocvl
+ uV4DV89aOnpZnQiZNRgDxmO5jhrTabLx/5VskOScnGFxlWXKX/DoaFmfZl1MZSMOtIC61JcwKFV
+ Sp0YuAimyCfMDBdAaMS8a2UXg1K0KE7G5gmsctoqRmk0z/jSz7ZwuAhlZIk9OXdV3b1cmlb3qHw
+ QOJAPXUh0Rzos/Bb6NGmhWfY6r3UAZVi/bnNzNF2H5uegrH2+VEwLSLJys7pHnCzu5R94ta/BrW
+ 16W6WGaEdtNGUDC3/Xmr1r9b9vlGAcT2tUrp7q24/jt0ZPkJJq4iUmC5KQmFwpyiLk0eE6dwU3z
+ pBXVGcR2EO01JFOc9c5mo0JNvmBQGajBIDUHO/MFw==
+X-Authority-Analysis: v=2.4 cv=KZTfcAYD c=1 sm=1 tr=0 ts=691de174 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=cbjzZ4ewA4X5m2kAHjcA:9 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-ORIG-GUID: FYhbB9kn2ETVWb-qHqsT5TqcWFKDy0OH
+X-Proofpoint-GUID: FYhbB9kn2ETVWb-qHqsT5TqcWFKDy0OH
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-19_04,2025-11-18_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 adultscore=0 lowpriorityscore=0 spamscore=0 phishscore=0
+ malwarescore=0 bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ definitions=main-2511190123
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,13 +145,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH] mx6sabre: Stop disabling device tree relocation
->=20
-> Remove setting of fdt_high to ~0, which disables device tree relocation,
-> from the default environment. Doing so prevents U-Boot from
-> correcting problems such as having an unaligned device tree and leads
-> to various failure modes in the OS.
->=20
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+This series enables USB3 Super-Speed functionality on QCM6490 and SC7280
+platforms by adding support for the QMP USB3-DP Combo PHY. The combo PHY
+is a dual-mode PHY that can operate in either USB3 or DisplayPort mode,
+and this implementation focuses on USB3 mode to enable Super-Speed USB
+support.
 
-Acked-by: Peng Fan <peng.fan@nxp.com>
+The series adds the necessary clock support, implements the
+QMP Combo PHY driver ported from upstream Linux, and makes USB speed
+fixup configurable.
+
+Balaji Selvanathan (6):
+  drivers: clk: qcom: sc7280: Add USB3 PHY pipe clock
+  drivers: usb: dwc3: Add delay after core soft reset
+  drivers: phy: qcom: Add QMP USB3-DP Combo PHY driver
+  arch: arm: mach-snapdragon: Make USB speed fixup configurable
+  arch: arm: dts: qcs6490-rb3gen2: Override USB3 PHY clocks
+  configs: qcm6490: Enable super-speed USB support
+
+ arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi   |   8 +
+ arch/arm/mach-snapdragon/Kconfig           |  10 +
+ arch/arm/mach-snapdragon/of_fixup.c        |   4 +
+ configs/qcm6490_defconfig                  |   5 +
+ drivers/clk/qcom/clock-sc7280.c            |   1 +
+ drivers/phy/qcom/Kconfig                   |   8 +
+ drivers/phy/qcom/Makefile                  |   1 +
+ drivers/phy/qcom/phy-qcom-qmp-combo.c      | 503 +++++++++++++++++++++
+ drivers/phy/qcom/phy-qcom-qmp-common.h     |  62 +++
+ drivers/phy/qcom/phy-qcom-qmp-dp-com-v3.h  |  18 +
+ drivers/phy/qcom/phy-qcom-qmp-pcs-usb-v4.h |  34 ++
+ drivers/phy/qcom/phy-qcom-qmp.h            |  17 +
+ drivers/usb/dwc3/core.c                    |   2 +
+ 13 files changed, 673 insertions(+)
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-combo.c
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-common.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-dp-com-v3.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-usb-v4.h
+
+-- 
+2.34.1
+
