@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F390CF6484
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 22:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35DD9CF6488
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 22:44:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C31BD83EF9;
-	Wed, 19 Nov 2025 23:13:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 611EE83EF9;
+	Wed, 19 Nov 2025 23:44:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J5aZby7M";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oO5T/fKb";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pdsLfL7/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CFDA83F26; Wed, 19 Nov 2025 23:13:12 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 845E283FDB; Wed, 19 Nov 2025 23:44:50 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B114883E40
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 23:13:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E83D83EDE
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 23:44:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b735ce67d1dso37488566b.3
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 14:13:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763590389; x=1764195189; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mCLNgYR8EkmUKKIz7QbsuxDCM9vgg6yBRHHSwUEyxZQ=;
- b=J5aZby7MmLkDWuCWEwel1jD4Mk6wE/NrKOFzIk99qgoFiE0SLaXN1RWEjvqfP+G058
- dMNDlt09+8Kvn4Ru/7vIrFUQg3wHVVbXoA+j1TYo6B2sLpg2kcCYuncvdqyYndY6uUs9
- 6LqE+6GZelWGshqP5gTq5T+aBUJd/t1m+6dd0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763590389; x=1764195189;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mCLNgYR8EkmUKKIz7QbsuxDCM9vgg6yBRHHSwUEyxZQ=;
- b=lswePWifmKjv/jz0l7oWZ6tATFfa5GFuy8uM/cTbBAN0nz0FXGMWZnjDWgiGOrDuvP
- 4YrNzrMXmpe/yOwy51w1yitHRHwEWDUsIBSXTGvyrqCQ6TdAUJ8ARYNBbaJolxrYp+Ls
- Zgq+D9ZneORjh41yTXDUrVQhi922Y1zAnP47/V5bJEK5MAlMqENOd0ajCWom9iy+XsFC
- x4YHd2vMzAZXRBKxZklhAshRtrwJlMai1NokljLbNV441KdRtQgo4QBk76EzmRmBQL3H
- iEzrAIG6s3vBcLz9QXl5Y4hriXOmDRy7sqf2RaQ3AYogOgsblYC8XEdlEozNKqXbQpaW
- z2nA==
-X-Gm-Message-State: AOJu0Yy47eWozbfP+PFtwEyRuc9X2MApI9lWdi3leiF6YdJtfTfZV+69
- mSLkh0yyD9Jm2a5x4HdOVtr9gcFg0x0xmP9Mwdo06QxKygVYWxE3XTZmXzFdXsTG9X4w/rfk251
- fRuv7qaY38VHA/4hXZioenFSieW48eQCIKE9pV2UT
-X-Gm-Gg: ASbGncv367xCliQlgV102SD4v+cHj/p4R+uij59vGhar3WtKxMspvJrWSUHUROTlphu
- u4k+jrkw3yQllwAsuyQUCmxeJrPZQGzhN01FLWrJmNoi4GanWJikUHWFNbxsUudJJsSSw8sJr0k
- IqAkAHd16Y8Sii7h7hawAv1qx6MycHuYjGq5RvRVMuylGWI7QcBeltqITvaU+xQCTQZ1/jryXw/
- n2pH6wgz9nE7pxgOk192hzu3zBZ+HLoOlm13R5+kFSxTx5RHsMioHKEUlxrtZd85o06Sg==
-X-Google-Smtp-Source: AGHT+IHecxNLLoA7/7W5yyrjx9pxVPGTgBU8nJ/whJ2aE5YVKHtkaY6Yd0AgqtKJPC6ET8m0rotN6lzD5vcaxMP8iCk=
-X-Received: by 2002:a17:907:9620:b0:b73:594e:1c47 with SMTP id
- a640c23a62f3a-b7654d61053mr79822266b.26.1763590388863; Wed, 19 Nov 2025
- 14:13:08 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dBc4H2lKmz9tXX;
+ Wed, 19 Nov 2025 23:44:47 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1763592287;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Dvsw9xMCKf3nCvlkPwTFTzyeglywk76e+RiYaQvo8mg=;
+ b=oO5T/fKbTDHQw/eWqBm7gG1FjK1b1k1b9lxxtIvTNA6LO3KmS+KWfyvUIP6VG9tD8ekBmm
+ NvvRbAbA1UwZQ6/MGqUiFkRdtGDqf71AOGFcX6ZbxTfW2kInV18J9vEsSErHwcoi0/Ic9U
+ dBVEnHYiLDNrkwzGWVOf9QcZkV9KE9+ilc8FvMshh7NnDGQoxHn1J+X2uaUkZUOt1wDK3X
+ 5fz0D9QLCu/x1dAfWjD/lSz4mNwg7ynaRXqMFDaeeVBnw2Ow1tV6ML5evIZbPphE6JQ/uf
+ /LkWika4126D3NM/qcNTRcgzTgiiohKgQ3dnvGZN0iZ34nq8E85Jm5BDRoH+1A==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1763592285;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Dvsw9xMCKf3nCvlkPwTFTzyeglywk76e+RiYaQvo8mg=;
+ b=pdsLfL7/5JadWLJ0GUAEXmqkUA//iA7dW4LgyJ4yQOzG8lEyKsVyWAvoiE16oWFLjqdFz1
+ H14q+Q8ytUK3p764euU1O/OYPB1Uu2keh7SQ7rV7aEIge8p0WJwgBJnFLWaaVuepyv5Ykq
+ Znl8n31F6O6JC8NaMgP9oQnm4AYX7Xzn0pZ0rMPZp00eFjpSxKq8UCUWngvtwRsuPSvFH9
+ s+5DlxhmvgCkbbY/o/uxdRiY36OIzYykYpjDPA6jwlcGevNBO/h1BzgDnP6QCzGpw8RIih
+ /cNiQ5L/0GhwMeviQrjaP0hT7K/2cvWpisOFSJU5JJEeceLVdgmxEWongBIniA==
+To: u-boot@lists.denx.de
+Cc: Hai Pham <hai.pham.ud@renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Khanh Le <khanh.le.xr@renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/3] arm64: renesas: Add Renesas R-Car Gen5 infrastructure
+Date: Wed, 19 Nov 2025 23:44:16 +0100
+Message-ID: <20251119224439.198910-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20251119184640.543904-1-adriana@arista.com>
-In-Reply-To: <20251119184640.543904-1-adriana@arista.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 19 Nov 2025 15:12:55 -0700
-X-Gm-Features: AWmQ_bmaRRzoZ8iPjI6VDojUdMR-YhxpnwppV-N-1DNCS_Eo6jxlecYX-j4FnpU
-Message-ID: <CAFLszThwH8PHwDXRiTH=Z6w66to6Swu+DiBGPd6btsadB4L5cQ@mail.gmail.com>
-Subject: Re: [PATCH v4] boot/bootfdt: Add smbios3-entrypoint to FDT for
- non-EFI boots
-To: Adriana Nicolae <adriana@arista.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, ddrokosov@salutedevices.com, 
- ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, xypron.glpk@gmx.de, 
- kojima.masahisa@socionext.com, richard@nod.at, semen.protsenko@linaro.org, 
- joao.goncalves@toradex.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: jcqoipjwiz15ktw5ko53bugw4d5fms7f
+X-MBO-RS-ID: e850b2d1913ef9459f9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,56 +86,237 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Nov 2025 at 11:46, Adriana Nicolae <adriana@arista.com> wrote:
->
-> From: adriana <adriana@arista.com>
->
-> The Linux kernel can discover SMBIOS tables through two primary methods:
-> 1. Via EFI tables, when using EFI boot;
-> 2. Via the 'smbios3-entrypoint' property in the /chosen node of the
-> device tree.
->
-> When U-Boot boots a Linux kernel using a non-EFI command ("bootm",
-> "bootz", or "booti"), the kernel relies on the device tree to detect
-> the hardware. If SMBIOS tables are available in U-Boot, they should
-> be passed to the kernel via this device tree property.
->
-> This patch modifies boot_fdt_prepare(), to inject the SMBIOSv3 table
-> address into the device tree if there is a table generated by U-boot.
-> The "board_fdt_chosen_smbios" is weak in order to leave the possibilty
-> for specific boards to select custom SMBIOS addresses.
->
-> The changes in this patch are added in the context of supporting this
-> device tree property in linux kernel:
-> https://lkml.org/lkml/2025/10/24/1393
->
-> Device tree schema was updated to include the "smbios3-entrypoint" node
-> in pull request: https://github.com/devicetree-org/dt-schema/pull/177
->
-> Signed-off-by: Adriana Nicolae <adriana@arista.com>
-> ---
-> Changes in v4:
->   - Remove weak function board_fdt_chosen_smbios(), replace with
->     gd_smbios_start();
->   - Return -EAGAIN in test if GENERATE_SMBIOS_TABLE is not enabled;
->   - Remove unnecessary fdt cleanup at the end of the test;
->   - Added missing newlines at the end of the modified files.
->
-> Changes in v3:
->   - Moved "board_fdt_chosen_smbios" function to lib/smbios.c
->   - Return physical address of smbios entry and use map_sysmem to
->     access the entry point;
->   - Removed check for config enabled and added check for
->     GENERATE_SMBIOS_TABLE;
->   - Add test to check that smbios entry address is added into fdt;
->
-> Changes in v2:
->   - Renamed device tree property to "smbios3-entrypoint".
->   - Removed redundant check for CONFIG_SMBIOS.
-> ---
->  boot/fdt_support.c | 19 ++++++++++++++++++
->  test/dm/fdtdec.c   | 48 ++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 67 insertions(+)
->
+From: Hai Pham <hai.pham.ud@renesas.com>
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Add initial changes to support Renesas R-Car Gen5 SoC.
+
+Introduce Kconfig entries, architecture headers and PRR IDs for Renesas
+R-Car Gen5 and R-Car X5H R8A78000 SoC. Add Makefile change to produce
+u-boot-elf.srec with correct offset for installation tooling. Update
+MAINTAINERS entry to cover both r8a77nnn and r8a78nnn .
+
+Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+[ Marek: - Drop "config TEXT_BASE" , use PIE instead , update Makefile accordingly
+         - Adjust commit message, clean up header slightly. ]
+---
+Cc: Hai Pham <hai.pham.ud@renesas.com>
+Cc: Khanh Le <khanh.le.xr@renesas.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: No change
+---
+ Makefile                                      |  9 ++++
+ arch/arm/mach-renesas/Kconfig                 |  5 +++
+ arch/arm/mach-renesas/Kconfig.64              |  1 +
+ arch/arm/mach-renesas/Kconfig.rcar5           | 12 +++++
+ arch/arm/mach-renesas/Makefile                |  1 +
+ arch/arm/mach-renesas/cpu_info-rcar.c         |  8 +++-
+ arch/arm/mach-renesas/cpu_info.c              |  1 +
+ .../include/mach/rcar-gen5-base.h             | 44 +++++++++++++++++++
+ arch/arm/mach-renesas/include/mach/renesas.h  |  3 ++
+ board/renesas/MAINTAINERS                     |  2 +-
+ 10 files changed, 83 insertions(+), 3 deletions(-)
+ create mode 100644 arch/arm/mach-renesas/Kconfig.rcar5
+ create mode 100644 arch/arm/mach-renesas/include/mach/rcar-gen5-base.h
+
+diff --git a/Makefile b/Makefile
+index 9e79f7edab6..7a95e37cd8b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1499,6 +1499,15 @@ ifeq ($(CONFIG_POSITION_INDEPENDENT)$(CONFIG_RCAR_GEN3),yy)
+ OBJCOPYFLAGS_u-boot-elf.srec += --change-addresses=0x50000000
+ endif
+ 
++ifeq ($(CONFIG_POSITION_INDEPENDENT)$(CONFIG_RCAR_GEN5),yy)
++# The flash_writer tool and previous recovery tools
++# require the SREC load address to be 0x8e30_0000 .
++# The PIE U-Boot build sets the address to 0x0, so
++# override the address back to make u-boot-elf.srec
++# compatible with the recovery tools.
++OBJCOPYFLAGS_u-boot-elf.srec += --change-addresses=0x8e300000
++endif
++
+ u-boot-elf.srec: u-boot.elf FORCE
+ 	$(call if_changed,zobjcopy)
+ 
+diff --git a/arch/arm/mach-renesas/Kconfig b/arch/arm/mach-renesas/Kconfig
+index 8f4fba4615c..fa4e312a4dd 100644
+--- a/arch/arm/mach-renesas/Kconfig
++++ b/arch/arm/mach-renesas/Kconfig
+@@ -46,6 +46,11 @@ config RCAR_GEN4
+ 	select RCAR_64
+ 	select PINCTRL_PFC
+ 
++config RCAR_GEN5
++	bool "Renesas ARM SoCs R-Car Gen5 (64bit)"
++	select RCAR_64
++	select PINCTRL_PFC
++
+ config RZA1
+ 	prompt "Renesas ARM SoCs RZ/A1 (32bit)"
+ 	select CPU_V7A
+diff --git a/arch/arm/mach-renesas/Kconfig.64 b/arch/arm/mach-renesas/Kconfig.64
+index b5067d0a8f0..1b1ed88339b 100644
+--- a/arch/arm/mach-renesas/Kconfig.64
++++ b/arch/arm/mach-renesas/Kconfig.64
+@@ -8,5 +8,6 @@ config OF_LIBFDT_OVERLAY
+ 
+ source "arch/arm/mach-renesas/Kconfig.rcar3"
+ source "arch/arm/mach-renesas/Kconfig.rcar4"
++source "arch/arm/mach-renesas/Kconfig.rcar5"
+ 
+ endif
+diff --git a/arch/arm/mach-renesas/Kconfig.rcar5 b/arch/arm/mach-renesas/Kconfig.rcar5
+new file mode 100644
+index 00000000000..34c0ae8772b
+--- /dev/null
++++ b/arch/arm/mach-renesas/Kconfig.rcar5
+@@ -0,0 +1,12 @@
++if RCAR_GEN5
++
++menu "Select Target SoC"
++
++config R8A78000
++	bool "Renesas SoC R8A78000"
++	select GICV3
++	imply PINCTRL_PFC_R8A78000
++
++endmenu
++
++endif
+diff --git a/arch/arm/mach-renesas/Makefile b/arch/arm/mach-renesas/Makefile
+index 9165ceab4a3..c0454fffa48 100644
+--- a/arch/arm/mach-renesas/Makefile
++++ b/arch/arm/mach-renesas/Makefile
+@@ -12,6 +12,7 @@ obj-$(CONFIG_RCAR_GEN2) += lowlevel_init_ca15.o cpu_info-rcar.o
+ obj-$(CONFIG_RCAR_64) += lowlevel_init_gen3.o
+ obj-$(CONFIG_RCAR_GEN3) += cpu_info-rcar.o memmap-gen3.o
+ obj-$(CONFIG_RCAR_GEN4) += cpu_info-rcar.o memmap-gen3.o
++obj-$(CONFIG_RCAR_GEN5) += cpu_info-rcar.o memmap-gen3.o
+ obj-$(CONFIG_RZ_G2) += cpu_info-rzg.o
+ obj-$(CONFIG_RZG2L) += cpu_info-rzg2l.o memmap-rzg2l.o
+ 
+diff --git a/arch/arm/mach-renesas/cpu_info-rcar.c b/arch/arm/mach-renesas/cpu_info-rcar.c
+index 74140fd38ab..a6e0b739e55 100644
+--- a/arch/arm/mach-renesas/cpu_info-rcar.c
++++ b/arch/arm/mach-renesas/cpu_info-rcar.c
+@@ -15,8 +15,12 @@
+ 
+ static u32 renesas_get_prr(void)
+ {
+-	if (IS_ENABLED(CONFIG_RCAR_64))
+-		return readl(0xFFF00044);
++	if (IS_ENABLED(CONFIG_RCAR_64)) {
++		if (IS_ENABLED(CONFIG_RCAR_GEN5))
++			return readl(0x189E0044);
++		else
++			return readl(0xFFF00044);
++	}
+ 
+ 	return readl(0xFF000044);
+ }
+diff --git a/arch/arm/mach-renesas/cpu_info.c b/arch/arm/mach-renesas/cpu_info.c
+index 2f9a4374a96..f040d732a51 100644
+--- a/arch/arm/mach-renesas/cpu_info.c
++++ b/arch/arm/mach-renesas/cpu_info.c
+@@ -72,6 +72,7 @@ static const struct {
+ 	{ RENESAS_CPU_TYPE_R8A779F0, "R8A779F0" },
+ 	{ RENESAS_CPU_TYPE_R8A779G0, "R8A779G0" },
+ 	{ RENESAS_CPU_TYPE_R8A779H0, "R8A779H0" },
++	{ RMOBILE_CPU_TYPE_R8A78000, "R8A78000" },
+ 	{ 0x0, "CPU" },
+ };
+ 
+diff --git a/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h b/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h
+new file mode 100644
+index 00000000000..f9af3ef885a
+--- /dev/null
++++ b/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h
+@@ -0,0 +1,44 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (C) 2025 Renesas Electronics Corp.
++ */
++
++#ifndef __ASM_ARCH_RCAR_GEN5_BASE_H
++#define __ASM_ARCH_RCAR_GEN5_BASE_H
++
++/*
++ * R-Car (R8A78000) I/O Addresses
++ */
++#define TMU_BASE		0x1C030000
++
++/* Arm Generic Timer */
++#define CNTCR_BASE		0x1C000FFF /* Region 0 */
++#define CNTFID0			(CNTCR_BASE + 0x020)
++#define CNTCR_EN		BIT(0)
++
++/* Reset */
++#define RST_BASE		0xC1320000 /* Domain0 */
++#define RST_SWSRES1A		(RST_BASE + 0x410)
++#define RST_WDTRSTCR		(RST_BASE + 0x420)
++#define RST_RWDT_RSTMSK		BIT(0)
++#define RST_WWDT_RSTMSK		BIT(2)
++#define RST_RESKCPROT0		(RST_BASE + 0x4F0)
++#define RST_KCPROT_DIS		0xA5A5A501
++
++/* GICv4 */
++/* Distributor Registers */
++#define GICD_BASE		0x38000000
++#define GICR_BASE		(GICR_LPI_BASE)
++
++/* ReDistributor Registers for Control and Physical LPIs */
++#define GICR_LPI_BASE		0x38080000
++#define GICR_WAKER		0x0014
++#define GICR_PWRR		0x0024
++#define GICR_LPI_WAKER		(GICR_LPI_BASE + GICR_WAKER)
++#define GICR_LPI_PWRR		(GICR_LPI_BASE + GICR_PWRR)
++
++/* ReDistributor Registers for SGIs and PPIs */
++#define GICR_SGI_BASE		0x38090000
++#define GICR_IGROUPR0		0x0080
++
++#endif /* __ASM_ARCH_RCAR_GEN5_BASE_H */
+diff --git a/arch/arm/mach-renesas/include/mach/renesas.h b/arch/arm/mach-renesas/include/mach/renesas.h
+index c69c764adb8..deaeffedef9 100644
+--- a/arch/arm/mach-renesas/include/mach/renesas.h
++++ b/arch/arm/mach-renesas/include/mach/renesas.h
+@@ -16,6 +16,8 @@
+ #include <asm/arch/rcar-gen3-base.h>
+ #elif defined(CONFIG_RCAR_GEN4)
+ #include <asm/arch/rcar-gen4-base.h>
++#elif defined(CONFIG_RCAR_GEN5)
++#include <asm/arch/rcar-gen5-base.h>
+ #elif defined(CONFIG_R7S72100)
+ #elif defined(CONFIG_RZG2L)
+ #include <asm/arch/rzg2l.h>
+@@ -42,6 +44,7 @@
+ #define RENESAS_CPU_TYPE_R8A779F0	0x5A
+ #define RENESAS_CPU_TYPE_R8A779G0	0x5C
+ #define RENESAS_CPU_TYPE_R8A779H0	0x5D
++#define RMOBILE_CPU_TYPE_R8A78000	0x60
+ #define RENESAS_CPU_TYPE_R9A07G044L	0x9A070440
+ 
+ #ifndef __ASSEMBLY__
+diff --git a/board/renesas/MAINTAINERS b/board/renesas/MAINTAINERS
+index 13551cdd2b4..8571bb02576 100644
+--- a/board/renesas/MAINTAINERS
++++ b/board/renesas/MAINTAINERS
+@@ -6,7 +6,7 @@ N:	grpeach
+ N:	r2dplus
+ N:	r7s72100
+ N:	r8a66597
+-N:	r8a77
++N:	r8a7[78]
+ N:	r9a0[0-9]g
+ N:	rcar
+ N:	renesas
+-- 
+2.51.0
+
