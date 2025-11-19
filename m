@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84CC6CF34C4
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:55:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A76C3CF34C1
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:56:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B34883F7D;
-	Wed, 19 Nov 2025 15:55:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6578983F8E;
+	Wed, 19 Nov 2025 15:55:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K9Q2prXM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hDtYD1qs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 835E783F8E; Wed, 19 Nov 2025 15:55:26 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 822E983FB2; Wed, 19 Nov 2025 15:55:27 +0100 (CET)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F40A983F72
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:55:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27D3183FA3
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:55:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3e3dac349easo4055652fac.2
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:55:21 -0800 (PST)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-3ec4d494383so1801339fac.3
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:55:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763564121; x=1764168921; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763564124; x=1764168924; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=86e6S9XiNrKtWPHyZSxJ1eeNOlbqONZDJwFlTUBmUpc=;
- b=K9Q2prXMApryShcZeHXc/sgZSHyV6o4S7DovB/5P/gKoUhYsuJuAfoUP+L0sfVBqr4
- /gl0TfgPgYagcKYfTfyfxsyftxJVIPIRQgA4bzB5raKNCaxIRDJ0UHOIKmltCwB0MQ02
- 4yo3xZuvhPCbn4h6BJOnl9q0qYVj93fHjbac0=
+ bh=zFeJKrHaehjcw+V+NNKUcqeddvP4HoW1NvgDo3TanpM=;
+ b=hDtYD1qsPdJA5/5AMG375keyx+Tl9tEnu3zoPq3oDm1OLoj/hXKlch9ZMresQpHXsP
+ pOAnEG0CSi6Gyq1Nk6enDXHywK8KhUOsbLyDmS+fVBUdqDf0U+3udM7UuFxZ0Ww1xa/b
+ y615AV1yacpAAD/ZonYeB7k+CZXXlW9ENkfE4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763564121; x=1764168921;
+ d=1e100.net; s=20230601; t=1763564124; x=1764168924;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=86e6S9XiNrKtWPHyZSxJ1eeNOlbqONZDJwFlTUBmUpc=;
- b=U6TgvE32bg7XjVm56IJq+EXIam8NTPuz6jgk2Ev9EtYVoZ7OzxKiN5QMAF9rw0TjZU
- 2AVqu9vMT3SwTRiJPIKYrDJtTf7GMsWzFdY3AdiCjy4JSTnrgjNSOySoEVoeQM03xqmh
- QJ3QwCWRt/PTkscJGa5X88LcBTbs2TbrO/MxfLrqaqtwltzg34Be8xFUWnBr2VwNCOLv
- 7xRWnyyi/3Dg8xGVruaEc1wvU+y8nGCHdJ2kqRLq5cGveevcowhtxwvMBruTACGzKEu0
- dfXjSiJHfLs069Pm7I13jwNTerVL75BWxAQn043gUrcfHyv2kKmgqtKAuRmrX0/5oclc
- 7uNQ==
-X-Gm-Message-State: AOJu0YzOl9rsGx2PllDX141iZL5kLDHkLmNlCXk+tgUnhxOMhDhUyDwP
- Vv3oJAkIF+8OVjb/I2VbYGL7+6J9IFO0YNF3har/UQT7jv0GrChPGX25gphkiujitGeRxctRq49
- ZWC7zOApWBQ==
-X-Gm-Gg: ASbGnctZwVp57v2lLhphxdgteL6nn16Alb/sQjYRZxrEMqjnNmbGxGxPeKdVZRpdOns
- Vs//iJ2N3DU706KyCeX6iz1WJGD7UXgyhLbsa+jtyNsP/5NDddC3DZWdh8vyPOYFH3nPqWkx2O0
- Tg7XDwmQ9rRRSjeTDBsV24VcyH5LKLGlv7ipoyUfEH83D8dJBrLaqB/x2uKWWOmWxJAukZNpqEa
- VjUgruK9vWwfq1NPlG0hKw/fFDAoLI7sHDCVNBr2ntlXjPsJTmL0bejFCDN37XEE8GaldnQ3Q0L
- Wu83IgF6HdSFnvtIxJcS5R57Jv5jdi3M1RoqAVinAxhmxAIwFoSQTQomlOD5ZUZDVZNCmYBS1NR
- P3q+OLslT/ygnH4qQZYbn0/uIHESvCX9xSJxhV9ZZdXyiSLYGdDVEibmsjn/c1djeYMDSxSFo7P
- nIaJkSsDkuaCrJRi06zt4V9oP3MotWB5b02uXc7DxpULpxbEIZc//4
-X-Google-Smtp-Source: AGHT+IF4NiOM5GTq2QN66XuBCqHTWHVLl7ggHldKOgS3mShb5M4YG6bzb4TjuEI678EuWLbmgJlZPQ==
-X-Received: by 2002:a05:6870:3313:b0:3dc:b701:c9b3 with SMTP id
- 586e51a60fabf-3e8691844bcmr11613021fac.45.1763564120586; 
- Wed, 19 Nov 2025 06:55:20 -0800 (PST)
+ bh=zFeJKrHaehjcw+V+NNKUcqeddvP4HoW1NvgDo3TanpM=;
+ b=KVyK3a8Gv5Ty5ieY0k+ktiDjPNM3tKOk9l0WBDpwNpKzvmQen7LkVyw6MDvqImBZRM
+ jLlWn4AitgoF5SyyL1s/oW1VDQyqcqWt3c5AKzIBSyY7VTx+TXv9DuQ+5IoLcf8F6tSt
+ 2ApV9jus6rfA4WTvll5sqgygsonLF4dmp9jBNrwgCSp9HFWIE/6Uw9theXtQdMEGyJVy
+ tZPpbmGTWpSwYW+4oJUfvmgguXx1GlQlf3ee8IUEKeA4mZXkh7gRcOwKzg1k4+6/P8D+
+ CG99q7X+2Ihu7hyXgAQ7L4XRzVoDf5LO0jebr4pFPwO1HEaFLzI3p3jwJKroHdKRh9jY
+ ZIng==
+X-Gm-Message-State: AOJu0YywmzrG3FlVg/LSlKYmmSN2f9THowAwY6xiuD55228C17jxgcQc
+ KlB7ABjELZ9QwIXJ8/jx08ar61aOwrFFXVuA0Gg7o1ULNl7D12MuUeO6dlIt5RveEtgzM3Ex6X6
+ /GS06Qx9seA==
+X-Gm-Gg: ASbGncs5N3dxtviYM9QEnAEZexFxzY1TIY2l5w12zyoKA4Or91Sez5xE5adr2KL4lAy
+ STNsGs+9/SKEvCmZPXC/B2jpDjdmXv8djuHukFqzBfNcRRpjGl/gFQnWL2GHzlEuOf+jZWCf/Yi
+ w4ewdbZ2xXPZOjjED2g97uhw+c9FYNTILAK+kj548B49qz2ckKIOljFWv+Jf0ezBPsaUn/ZJyVU
+ VOt4p3CoeHzuYSL8PcB2HCCirvjqGFVxq8wCNN4TNdEZ0dgCsQjet20tvN9XZjPYmGVmK8jBzvk
+ k50NRGND9xSuGjo2VNU1oYLYLNvozl5GKBl2diKAOcykCH5GlO4fUjf3rE9P9ZuEfsmw8SI844a
+ Ait+kuw959WOmTOBClou6YlzvVzCODmqhYvW4i8Xw5lyXJ8VIiq05YXfhM0NehW02vgGgd8Wc6f
+ QMh8rK4Bv6d3aCsV4fPX/nUHHfObrVIT/JJpBADTkUR+qDnZqHD/hX
+X-Google-Smtp-Source: AGHT+IGUAQagCArsCqvFTolnhp6MJcfnzIkq3Q5z4bC8cLHgZqXlpcSUStZYlHm2gUVfuZ5NFaU4Tg==
+X-Received: by 2002:a05:6870:a706:b0:3e8:9096:a0fc with SMTP id
+ 586e51a60fabf-3e89096e8b5mr7806248fac.34.1763564123737; 
+ Wed, 19 Nov 2025 06:55:23 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e851ffcdd8sm8344360fac.3.2025.11.19.06.55.20
+ 586e51a60fabf-3e851ffcdd8sm8344406fac.3.2025.11.19.06.55.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Nov 2025 06:55:20 -0800 (PST)
+ Wed, 19 Nov 2025 06:55:23 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Rick Chen <rick@andestech.com>
-Subject: [PATCH] ae350: Stop disabling device tree relocation
-Date: Wed, 19 Nov 2025 08:55:19 -0600
-Message-ID: <20251119145519.843178-1-trini@konsulko.com>
+Cc: Thomas Fitzsimmons <fitzsim@fitzsim.org>
+Subject: [PATCH] bcmstb: Make use of bootm_size rather than fdt_high
+Date: Wed, 19 Nov 2025 08:55:22 -0600
+Message-ID: <20251119145522.843213-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -96,32 +96,49 @@ X-Virus-Status: Clean
 Remove setting of fdt_high to ~0, which disables device tree relocation,
 from the default environment. Doing so prevents U-Boot from correcting
 problems such as having an unaligned device tree and leads to various
-failure modes in the OS.
+failure modes in the OS. However, this platform also has a large comment
+block that explains that given previous stage loaders and other parts of
+the memory map (that may not be in the device tree we see?), adjust this
+to use bootm_size to restrict relocation to be below the CMA area and
+update the comment to match.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-If there is some window of memory that must be used for where the device
-tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
-or bootm_mapsize are the correct way do this. Please see
-doc/usage/environment.rst for more details.
+I've thought about this a bit, and if you really want to keep
+fdt_high=0xffffffff here instead, the address passed along is 8-byte
+aligned and I could see this being a legitimate user of the
+functionality (we're in a restricted functionality area with a complex
+map and incomplete information in our provided device trees). Thanks!
 
-Cc: Rick Chen <rick@andestech.com>
+Cc: Thomas Fitzsimmons <fitzsim@fitzsim.org>
 ---
- include/configs/ae350.h | 1 -
- 1 file changed, 1 deletion(-)
+ include/configs/bcmstb.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/include/configs/ae350.h b/include/configs/ae350.h
-index 23e4801379de..43b1878b520d 100644
---- a/include/configs/ae350.h
-+++ b/include/configs/ae350.h
-@@ -83,7 +83,6 @@
- #include <config_distro_bootcmd.h>
+diff --git a/include/configs/bcmstb.h b/include/configs/bcmstb.h
+index c9280927b3cd..ca59c364cd74 100644
+--- a/include/configs/bcmstb.h
++++ b/include/configs/bcmstb.h
+@@ -71,8 +71,8 @@ extern phys_addr_t prior_stage_fdt_address;
+  *
+  * We want to keep the ramdisk and FDT in the FIT image in-place, to
+  * accommodate stblinux's bmem and CMA regions.  To accomplish this,
+- * we set initrd_high and fdt_high to 0xffffffff, and the load and
+- * entry addresses of the FIT ramdisk entry to 0x0.
++ * we set initrd_high to 0xffffffff, bootm_size to 0x7000000 and the
++ * load and entry addresses of the FIT ramdisk entry to 0x0.
+  *
+  * Overwriting the prior stage bootloader causes memory instability,
+  * so the compressed initramfs needs to fit between the load address
+@@ -121,7 +121,7 @@ extern phys_addr_t prior_stage_fdt_address;
+ #define CFG_EXTRA_ENV_SETTINGS					\
+ 	"fdtsaveaddr=" __stringify(CONFIG_SYS_FDT_SAVE_ADDRESS) "\0"	\
+ 	"initrd_high=0xffffffff\0"					\
+-	"fdt_high=0xffffffff\0"
++	"bootm_size=0x7000000\0"
  
- #define CFG_EXTRA_ENV_SETTINGS	\
--				"fdt_high=0xffffffffffffffff\0" \
- 				"initrd_high=0xffffffffffffffff\0" \
- 				"kernel_addr_r=0x00600000\0" \
- 				"kernel_comp_addr_r=0x04600000\0" \
+ /*
+  * Set fdtaddr to prior stage-provided DTB in board_late_init, when
 -- 
 2.43.0
 
