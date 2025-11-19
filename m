@@ -4,25 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35DD9CF6488
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 22:44:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B994BCF6488
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 22:45:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 611EE83EF9;
-	Wed, 19 Nov 2025 23:44:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9BFBD83FD3;
+	Wed, 19 Nov 2025 23:44:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oO5T/fKb";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pdsLfL7/";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fxp0LYNM";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="GP/UunTf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 845E283FDB; Wed, 19 Nov 2025 23:44:50 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id BC51784015; Wed, 19 Nov 2025 23:44:52 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E83D83EDE
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 23:44:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F23B183F26
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 23:44:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,45 +30,49 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dBc4H2lKmz9tXX;
- Wed, 19 Nov 2025 23:44:47 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dBc4K5JNVz9sbl;
+ Wed, 19 Nov 2025 23:44:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1763592289;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=EQFgBfMR7DhlwYnWg4B4RyaadbI5AVpAN4hOZ7GtUGY=;
+ b=fxp0LYNM40Xrg/msp6yINZPVwGmG9h7VeceoziGgjIplcrxbxzbxhcgaDqUcZNeKEdRLi4
+ 08ZWSSUJj1GLZlDVr/IO7iHmMKKWYcHzw4VOqCMSoI0rc2GaLJqT+SJN6NMY0sEKAouRld
+ ukV8qipfGfVEBXHz0Y2AgRopNaK0SaUYcesF53X2BOninCY9vHfXy4rpTn8Ch5drb/LGJG
+ GyjeR1yc/GI/Ceub0RaJJZIZf5mQHIZsQw/0/gJ2mb7hLa52xBplmYZOgFrjDMvucmMCQZ
+ j/RTUSYjVO5Nqdlo9J771ORADYgThAhDwlqBGUQBOexTQDcxlbF9vVmDLJmfag==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1763592287;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Dvsw9xMCKf3nCvlkPwTFTzyeglywk76e+RiYaQvo8mg=;
- b=oO5T/fKbTDHQw/eWqBm7gG1FjK1b1k1b9lxxtIvTNA6LO3KmS+KWfyvUIP6VG9tD8ekBmm
- NvvRbAbA1UwZQ6/MGqUiFkRdtGDqf71AOGFcX6ZbxTfW2kInV18J9vEsSErHwcoi0/Ic9U
- dBVEnHYiLDNrkwzGWVOf9QcZkV9KE9+ilc8FvMshh7NnDGQoxHn1J+X2uaUkZUOt1wDK3X
- 5fz0D9QLCu/x1dAfWjD/lSz4mNwg7ynaRXqMFDaeeVBnw2Ow1tV6ML5evIZbPphE6JQ/uf
- /LkWika4126D3NM/qcNTRcgzTgiiohKgQ3dnvGZN0iZ34nq8E85Jm5BDRoH+1A==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763592285;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Dvsw9xMCKf3nCvlkPwTFTzyeglywk76e+RiYaQvo8mg=;
- b=pdsLfL7/5JadWLJ0GUAEXmqkUA//iA7dW4LgyJ4yQOzG8lEyKsVyWAvoiE16oWFLjqdFz1
- H14q+Q8ytUK3p764euU1O/OYPB1Uu2keh7SQ7rV7aEIge8p0WJwgBJnFLWaaVuepyv5Ykq
- Znl8n31F6O6JC8NaMgP9oQnm4AYX7Xzn0pZ0rMPZp00eFjpSxKq8UCUWngvtwRsuPSvFH9
- s+5DlxhmvgCkbbY/o/uxdRiY36OIzYykYpjDPA6jwlcGevNBO/h1BzgDnP6QCzGpw8RIih
- /cNiQ5L/0GhwMeviQrjaP0hT7K/2cvWpisOFSJU5JJEeceLVdgmxEWongBIniA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=EQFgBfMR7DhlwYnWg4B4RyaadbI5AVpAN4hOZ7GtUGY=;
+ b=GP/UunTfNWiWNpYD8sKTQPflQFjkAHTfYgr86AxK4VTnMmeemXDLa0rj3ZL3eC7IGJNGMA
+ 6+AskwtzrWJd6ululGS6gfd1rY1+/DLedLufPBqwY7ZGeRln0kJmqpscfVNLjnq5ftKxBH
+ BC2SsUvAHXp0y96L3fG3I8jbh5yZXWjxjLTh3ZIjMzzRPNnx3t9cQldDXfQ+rPwAJwl/ZN
+ OJ6NitStgmw+d2ysdjf2d+xf8xmb9hqSeWDmxQCBJsYqWCBUloDCE/YitfzINt/MEiaP4A
+ w7ZVkEz/70n89yKLOhRAdSEo4ft7l36ic4DyriDasyPZnHPyETKnZm4W+9c/aQ==
 To: u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>,
+Cc: Hai Pham <hai.pham.ud@renesas.com>, Khanh Le <khanh.le.xr@renesas.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Khanh Le <khanh.le.xr@renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/3] arm64: renesas: Add Renesas R-Car Gen5 infrastructure
-Date: Wed, 19 Nov 2025 23:44:16 +0100
-Message-ID: <20251119224439.198910-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 2/3] arm64: dts: renesas: Add Renesas R-Car X5H R8A78000
+ SoC DTs
+Date: Wed, 19 Nov 2025 23:44:17 +0100
+Message-ID: <20251119224439.198910-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251119224439.198910-1-marek.vasut+renesas@mailbox.org>
+References: <20251119224439.198910-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: jcqoipjwiz15ktw5ko53bugw4d5fms7f
-X-MBO-RS-ID: e850b2d1913ef9459f9
+X-MBO-RS-ID: f21d5f7ee521ada089b
+X-MBO-RS-META: tbzwicouhcnks5yqewr35c7yeygozu9s
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,18 +91,28 @@ X-Virus-Status: Clean
 
 From: Hai Pham <hai.pham.ud@renesas.com>
 
-Add initial changes to support Renesas R-Car Gen5 SoC.
-
-Introduce Kconfig entries, architecture headers and PRR IDs for Renesas
-R-Car Gen5 and R-Car X5H R8A78000 SoC. Add Makefile change to produce
-u-boot-elf.srec with correct offset for installation tooling. Update
-MAINTAINERS entry to cover both r8a77nnn and r8a78nnn .
+Add initial device trees for Renesas R-Car X5H R8A78000 SoC.
+Include very basic clock, reset, power domain headers which
+are used to control supported peripherals via SCMI / SCP. The
+headers are currently kept limited to avoid possible ABI break.
+A lot of clock are still stubbed via fixed-clock, this is going
+to be gradually removed over time, as more of the platform is
+upstreamed.
 
 Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+Signed-off-by: Khanh Le <khanh.le.xr@renesas.com>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-[ Marek: - Drop "config TEXT_BASE" , use PIE instead , update Makefile accordingly
-         - Adjust commit message, clean up header slightly. ]
+[ Marek: - Fill bootph, tags directly into arch/arm/dts/r8a78000-u-boot.dtsi
+           as a replacement for removed r8a779x-rcar64-u-boot.dtsi
+	 - Squash multiple r8a78000.dtsi commits until downstream
+	   v2025.01/rcar-7.0.0.rc6 arm64: dts: renesas: r8a78000: enable module reset
+	 - Introduce clk_stub_* to stub clock which are still missing,
+	   but required by GPIO, I2C and other drivers
+	 - Combined with reduced versions of ID headers from commits
+	   dt-bindings: power: Add R8A78000 power domain definitions
+	   dt-bindings: clock: Add R8A78000 clock definitions
+	   dt-bindings: clock: Add R8A78000 reset definitions]
 ---
 Cc: Hai Pham <hai.pham.ud@renesas.com>
 Cc: Khanh Le <khanh.le.xr@renesas.com>
@@ -109,214 +122,1462 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: No change
+V2: - Align DTs with for-upstreaming Linux DTs
+    - Note the SCP version that was used to test this in headers
 ---
- Makefile                                      |  9 ++++
- arch/arm/mach-renesas/Kconfig                 |  5 +++
- arch/arm/mach-renesas/Kconfig.64              |  1 +
- arch/arm/mach-renesas/Kconfig.rcar5           | 12 +++++
- arch/arm/mach-renesas/Makefile                |  1 +
- arch/arm/mach-renesas/cpu_info-rcar.c         |  8 +++-
- arch/arm/mach-renesas/cpu_info.c              |  1 +
- .../include/mach/rcar-gen5-base.h             | 44 +++++++++++++++++++
- arch/arm/mach-renesas/include/mach/renesas.h  |  3 ++
- board/renesas/MAINTAINERS                     |  2 +-
- 10 files changed, 83 insertions(+), 3 deletions(-)
- create mode 100644 arch/arm/mach-renesas/Kconfig.rcar5
- create mode 100644 arch/arm/mach-renesas/include/mach/rcar-gen5-base.h
+ arch/arm/dts/r8a78000-u-boot.dtsi             |  139 ++
+ arch/arm/dts/r8a78000.dtsi                    | 1164 +++++++++++++++++
+ .../dt-bindings/clock/r8a78000-clock-scmi.h   |   46 +
+ .../dt-bindings/power/r8a78000-power-scmi.h   |   29 +
+ .../dt-bindings/reset/r8a78000-reset-scmi.h   |   33 +
+ 5 files changed, 1411 insertions(+)
+ create mode 100644 arch/arm/dts/r8a78000-u-boot.dtsi
+ create mode 100644 arch/arm/dts/r8a78000.dtsi
+ create mode 100644 include/dt-bindings/clock/r8a78000-clock-scmi.h
+ create mode 100644 include/dt-bindings/power/r8a78000-power-scmi.h
+ create mode 100644 include/dt-bindings/reset/r8a78000-reset-scmi.h
 
-diff --git a/Makefile b/Makefile
-index 9e79f7edab6..7a95e37cd8b 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1499,6 +1499,15 @@ ifeq ($(CONFIG_POSITION_INDEPENDENT)$(CONFIG_RCAR_GEN3),yy)
- OBJCOPYFLAGS_u-boot-elf.srec += --change-addresses=0x50000000
- endif
- 
-+ifeq ($(CONFIG_POSITION_INDEPENDENT)$(CONFIG_RCAR_GEN5),yy)
-+# The flash_writer tool and previous recovery tools
-+# require the SREC load address to be 0x8e30_0000 .
-+# The PIE U-Boot build sets the address to 0x0, so
-+# override the address back to make u-boot-elf.srec
-+# compatible with the recovery tools.
-+OBJCOPYFLAGS_u-boot-elf.srec += --change-addresses=0x8e300000
-+endif
-+
- u-boot-elf.srec: u-boot.elf FORCE
- 	$(call if_changed,zobjcopy)
- 
-diff --git a/arch/arm/mach-renesas/Kconfig b/arch/arm/mach-renesas/Kconfig
-index 8f4fba4615c..fa4e312a4dd 100644
---- a/arch/arm/mach-renesas/Kconfig
-+++ b/arch/arm/mach-renesas/Kconfig
-@@ -46,6 +46,11 @@ config RCAR_GEN4
- 	select RCAR_64
- 	select PINCTRL_PFC
- 
-+config RCAR_GEN5
-+	bool "Renesas ARM SoCs R-Car Gen5 (64bit)"
-+	select RCAR_64
-+	select PINCTRL_PFC
-+
- config RZA1
- 	prompt "Renesas ARM SoCs RZ/A1 (32bit)"
- 	select CPU_V7A
-diff --git a/arch/arm/mach-renesas/Kconfig.64 b/arch/arm/mach-renesas/Kconfig.64
-index b5067d0a8f0..1b1ed88339b 100644
---- a/arch/arm/mach-renesas/Kconfig.64
-+++ b/arch/arm/mach-renesas/Kconfig.64
-@@ -8,5 +8,6 @@ config OF_LIBFDT_OVERLAY
- 
- source "arch/arm/mach-renesas/Kconfig.rcar3"
- source "arch/arm/mach-renesas/Kconfig.rcar4"
-+source "arch/arm/mach-renesas/Kconfig.rcar5"
- 
- endif
-diff --git a/arch/arm/mach-renesas/Kconfig.rcar5 b/arch/arm/mach-renesas/Kconfig.rcar5
+diff --git a/arch/arm/dts/r8a78000-u-boot.dtsi b/arch/arm/dts/r8a78000-u-boot.dtsi
 new file mode 100644
-index 00000000000..34c0ae8772b
+index 00000000000..1bc73252430
 --- /dev/null
-+++ b/arch/arm/mach-renesas/Kconfig.rcar5
-@@ -0,0 +1,12 @@
-+if RCAR_GEN5
-+
-+menu "Select Target SoC"
-+
-+config R8A78000
-+	bool "Renesas SoC R8A78000"
-+	select GICV3
-+	imply PINCTRL_PFC_R8A78000
-+
-+endmenu
-+
-+endif
-diff --git a/arch/arm/mach-renesas/Makefile b/arch/arm/mach-renesas/Makefile
-index 9165ceab4a3..c0454fffa48 100644
---- a/arch/arm/mach-renesas/Makefile
-+++ b/arch/arm/mach-renesas/Makefile
-@@ -12,6 +12,7 @@ obj-$(CONFIG_RCAR_GEN2) += lowlevel_init_ca15.o cpu_info-rcar.o
- obj-$(CONFIG_RCAR_64) += lowlevel_init_gen3.o
- obj-$(CONFIG_RCAR_GEN3) += cpu_info-rcar.o memmap-gen3.o
- obj-$(CONFIG_RCAR_GEN4) += cpu_info-rcar.o memmap-gen3.o
-+obj-$(CONFIG_RCAR_GEN5) += cpu_info-rcar.o memmap-gen3.o
- obj-$(CONFIG_RZ_G2) += cpu_info-rzg.o
- obj-$(CONFIG_RZG2L) += cpu_info-rzg2l.o memmap-rzg2l.o
- 
-diff --git a/arch/arm/mach-renesas/cpu_info-rcar.c b/arch/arm/mach-renesas/cpu_info-rcar.c
-index 74140fd38ab..a6e0b739e55 100644
---- a/arch/arm/mach-renesas/cpu_info-rcar.c
-+++ b/arch/arm/mach-renesas/cpu_info-rcar.c
-@@ -15,8 +15,12 @@
- 
- static u32 renesas_get_prr(void)
- {
--	if (IS_ENABLED(CONFIG_RCAR_64))
--		return readl(0xFFF00044);
-+	if (IS_ENABLED(CONFIG_RCAR_64)) {
-+		if (IS_ENABLED(CONFIG_RCAR_GEN5))
-+			return readl(0x189E0044);
-+		else
-+			return readl(0xFFF00044);
-+	}
- 
- 	return readl(0xFF000044);
- }
-diff --git a/arch/arm/mach-renesas/cpu_info.c b/arch/arm/mach-renesas/cpu_info.c
-index 2f9a4374a96..f040d732a51 100644
---- a/arch/arm/mach-renesas/cpu_info.c
-+++ b/arch/arm/mach-renesas/cpu_info.c
-@@ -72,6 +72,7 @@ static const struct {
- 	{ RENESAS_CPU_TYPE_R8A779F0, "R8A779F0" },
- 	{ RENESAS_CPU_TYPE_R8A779G0, "R8A779G0" },
- 	{ RENESAS_CPU_TYPE_R8A779H0, "R8A779H0" },
-+	{ RMOBILE_CPU_TYPE_R8A78000, "R8A78000" },
- 	{ 0x0, "CPU" },
- };
- 
-diff --git a/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h b/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h
-new file mode 100644
-index 00000000000..f9af3ef885a
---- /dev/null
-+++ b/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h
-@@ -0,0 +1,44 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++++ b/arch/arm/dts/r8a78000-u-boot.dtsi
+@@ -0,0 +1,139 @@
++// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 +/*
++ * Device Tree Source extras for U-Boot on R-Car R8A78000 SoC
++ *
 + * Copyright (C) 2025 Renesas Electronics Corp.
 + */
 +
-+#ifndef __ASM_ARCH_RCAR_GEN5_BASE_H
-+#define __ASM_ARCH_RCAR_GEN5_BASE_H
++/ {
++	soc {
++		bootph-all;
++	};
++
++	/* Placeholder clock until the clock provider is in place */
++	clk_stub_gpio: clk-stub-gpio {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <1000000>;
++	};
++
++	clk_stub_i2c0: clk-stub-i2c0 {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <150000000>;
++	};
++
++	clk_stub_i2c1: clk-stub-i2c1 {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <133333333>;
++	};
++
++	clk_stub_mmc: clk-stub-mmc {
++		compatible = "renesas,compound-clock";
++		#clock-cells = <0>;
++		clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_SDHI0>,
++			 <&scmi_clk 1691>;
++		clock-names = "mdlc", "per";
++	};
++};
++
++&cpg {
++	bootph-all;
++};
++
++&extal_clk {
++	bootph-all;
++};
++
++&extalr_clk {
++	bootph-all;
++};
++
++&gpio0 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio1 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio2 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio3 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio4 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio5 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio6 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio7 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio8 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio9 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&gpio10 {
++	clocks = <&clk_stub_gpio>;
++};
++
++&i2c0 {
++	clocks = <&clk_stub_i2c0>;
++};
++
++&i2c1 {
++	clocks = <&clk_stub_i2c1>;
++};
++
++&i2c2 {
++	clocks = <&clk_stub_i2c1>;
++};
++
++&i2c3 {
++	clocks = <&clk_stub_i2c1>;
++};
++
++&i2c4 {
++	clocks = <&clk_stub_i2c1>;
++};
++
++&i2c5 {
++	clocks = <&clk_stub_i2c1>;
++};
++
++&i2c6 {
++	clocks = <&clk_stub_i2c1>;
++};
++
++&i2c7 {
++	clocks = <&clk_stub_i2c1>;
++};
++
++&i2c8 {
++	clocks = <&clk_stub_i2c1>;
++};
++
++&mmc0 {
++	clocks = <&clk_stub_mmc>;
++};
++
++&prr {
++	bootph-all;
++};
+diff --git a/arch/arm/dts/r8a78000.dtsi b/arch/arm/dts/r8a78000.dtsi
+new file mode 100644
+index 00000000000..0d0c24503e2
+--- /dev/null
++++ b/arch/arm/dts/r8a78000.dtsi
+@@ -0,0 +1,1164 @@
++// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++/*
++ * Device Tree Source for the R-Car X5H (R8A78000) SoC
++ *
++ * Copyright (C) 2025 Renesas Electronics Corp.
++ */
++
++#include <dt-bindings/clock/r8a78000-clock-scmi.h>
++#include <dt-bindings/interrupt-controller/arm-gic.h>
++#include <dt-bindings/power/r8a78000-power-scmi.h>
++#include <dt-bindings/reset/r8a78000-reset-scmi.h>
++
++/ {
++	compatible = "renesas,r8a78000";
++	#address-cells = <2>;
++	#size-cells = <2>;
++	interrupt-parent = <&gic>;
++
++	cpus {
++		#address-cells = <2>;
++		#size-cells = <0>;
++
++		cpu-map {
++			cluster0 {
++				core0 {
++					cpu = <&a720_0>;
++				};
++				core1 {
++					cpu = <&a720_1>;
++				};
++				core2 {
++					cpu = <&a720_2>;
++				};
++				core3 {
++					cpu = <&a720_3>;
++				};
++			};
++
++			cluster1 {
++				core0 {
++					cpu = <&a720_4>;
++				};
++				core1 {
++					cpu = <&a720_5>;
++				};
++				core2 {
++					cpu = <&a720_6>;
++				};
++				core3 {
++					cpu = <&a720_7>;
++				};
++			};
++
++			cluster2 {
++				core0 {
++					cpu = <&a720_8>;
++				};
++				core1 {
++					cpu = <&a720_9>;
++				};
++				core2 {
++					cpu = <&a720_10>;
++				};
++				core3 {
++					cpu = <&a720_11>;
++				};
++			};
++
++			cluster3 {
++				core0 {
++					cpu = <&a720_12>;
++				};
++				core1 {
++					cpu = <&a720_13>;
++				};
++				core2 {
++					cpu = <&a720_14>;
++				};
++				core3 {
++					cpu = <&a720_15>;
++				};
++			};
++
++			cluster4 {
++				core0 {
++					cpu = <&a720_16>;
++				};
++				core1 {
++					cpu = <&a720_17>;
++				};
++				core2 {
++					cpu = <&a720_18>;
++				};
++				core3 {
++					cpu = <&a720_19>;
++				};
++			};
++
++			cluster5 {
++				core0 {
++					cpu = <&a720_20>;
++				};
++				core1 {
++					cpu = <&a720_21>;
++				};
++				core2 {
++					cpu = <&a720_22>;
++				};
++				core3 {
++					cpu = <&a720_23>;
++				};
++			};
++
++			cluster6 {
++				core0 {
++					cpu = <&a720_24>;
++				};
++				core1 {
++					cpu = <&a720_25>;
++				};
++				core2 {
++					cpu = <&a720_26>;
++				};
++				core3 {
++					cpu = <&a720_27>;
++				};
++			};
++
++			cluster7 {
++				core0 {
++					cpu = <&a720_28>;
++				};
++				core1 {
++					cpu = <&a720_29>;
++				};
++				core2 {
++					cpu = <&a720_30>;
++				};
++				core3 {
++					cpu = <&a720_31>;
++				};
++			};
++		};
++
++		a720_0: cpu@0 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x0>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_0>;
++		};
++
++		a720_1: cpu@100 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x100>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_1>;
++		};
++
++		a720_2: cpu@200 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x200>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_2>;
++		};
++
++		a720_3: cpu@300 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x300>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_3>;
++		};
++
++		a720_4: cpu@10000 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x10000>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_4>;
++		};
++
++		a720_5: cpu@10100 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x10100>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_5>;
++		};
++
++		a720_6: cpu@10200 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x10200>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_6>;
++		};
++
++		a720_7: cpu@10300 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x10300>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_7>;
++		};
++
++		a720_8: cpu@20000 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x20000>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_8>;
++		};
++
++		a720_9: cpu@20100 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x20100>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_9>;
++		};
++
++		a720_10: cpu@20200 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x20200>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_10>;
++		};
++
++		a720_11: cpu@20300 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x20300>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_11>;
++		};
++
++		a720_12: cpu@30000 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x30000>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_12>;
++		};
++
++		a720_13: cpu@30100 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x30100>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_13>;
++		};
++
++		a720_14: cpu@30200 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x30200>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_14>;
++		};
++
++		a720_15: cpu@30300 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x30300>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_15>;
++		};
++
++		a720_16: cpu@40000 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x40000>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_16>;
++		};
++
++		a720_17: cpu@40100 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x40100>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_17>;
++		};
++
++		a720_18: cpu@40200 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x40200>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_18>;
++		};
++
++		a720_19: cpu@40300 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x40300>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_19>;
++		};
++
++		a720_20: cpu@50000 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x50000>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_20>;
++		};
++
++		a720_21: cpu@50100 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x50100>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_21>;
++		};
++
++		a720_22: cpu@50200 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x50200>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_22>;
++		};
++
++		a720_23: cpu@50300 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x50300>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_23>;
++		};
++
++		a720_24: cpu@60000 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x60000>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_24>;
++		};
++
++		a720_25: cpu@60100 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x60100>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_25>;
++		};
++
++		a720_26: cpu@60200 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x60200>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_26>;
++		};
++
++		a720_27: cpu@60300 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x60300>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_27>;
++		};
++
++		a720_28: cpu@70000 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x70000>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_28>;
++		};
++
++		a720_29: cpu@70100 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x70100>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_29>;
++		};
++
++		a720_30: cpu@70200 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x70200>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_30>;
++		};
++
++		a720_31: cpu@70300 {
++			compatible = "arm,cortex-a720ae";
++			reg = <0x0 0x70300>;
++			device_type = "cpu";
++			next-level-cache = <&L2_CA720_31>;
++		};
++
++		L2_CA720_0: cache-controller-200 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_0>;
++		};
++
++		L2_CA720_1: cache-controller-201 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_0>;
++		};
++
++		L2_CA720_2: cache-controller-202 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_0>;
++		};
++
++		L2_CA720_3: cache-controller-203 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_0>;
++		};
++
++		L2_CA720_4: cache-controller-204 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_1>;
++		};
++
++		L2_CA720_5: cache-controller-205 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_1>;
++		};
++
++		L2_CA720_6: cache-controller-206 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_1>;
++		};
++
++		L2_CA720_7: cache-controller-207 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_1>;
++		};
++
++		L2_CA720_8: cache-controller-208 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_2>;
++		};
++
++		L2_CA720_9: cache-controller-209 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_2>;
++		};
++
++		L2_CA720_10: cache-controller-210 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_2>;
++		};
++
++		L2_CA720_11: cache-controller-211 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_2>;
++		};
++
++		L2_CA720_12: cache-controller-212 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_3>;
++		};
++
++		L2_CA720_13: cache-controller-213 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_3>;
++		};
++
++		L2_CA720_14: cache-controller-214 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_3>;
++		};
++
++		L2_CA720_15: cache-controller-215 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_3>;
++		};
++
++		L2_CA720_16: cache-controller-216 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_4>;
++		};
++
++		L2_CA720_17: cache-controller-217 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_4>;
++		};
++
++		L2_CA720_18: cache-controller-218 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_4>;
++		};
++
++		L2_CA720_19: cache-controller-219 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_4>;
++		};
++
++		L2_CA720_20: cache-controller-220 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_5>;
++		};
++
++		L2_CA720_21: cache-controller-221 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_5>;
++		};
++
++		L2_CA720_22: cache-controller-222 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_5>;
++		};
++
++		L2_CA720_23: cache-controller-223 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_5>;
++		};
++
++		L2_CA720_24: cache-controller-224 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_6>;
++		};
++
++		L2_CA720_25: cache-controller-225 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_6>;
++		};
++
++		L2_CA720_26: cache-controller-226 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_6>;
++		};
++
++		L2_CA720_27: cache-controller-227 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_6>;
++		};
++
++		L2_CA720_28: cache-controller-228 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_7>;
++		};
++
++		L2_CA720_29: cache-controller-229 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_7>;
++		};
++
++		L2_CA720_30: cache-controller-230 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_7>;
++		};
++
++		L2_CA720_31: cache-controller-231 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <2>;
++			next-level-cache = <&L3_CA720_7>;
++		};
++
++		L3_CA720_0: cache-controller-30 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <3>;
++		};
++
++		L3_CA720_1: cache-controller-31 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <3>;
++		};
++
++		L3_CA720_2: cache-controller-32 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <3>;
++		};
++
++		L3_CA720_3: cache-controller-33 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <3>;
++		};
++
++		L3_CA720_4: cache-controller-34 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <3>;
++		};
++
++		L3_CA720_5: cache-controller-35 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <3>;
++		};
++
++		L3_CA720_6: cache-controller-36 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <3>;
++		};
++
++		L3_CA720_7: cache-controller-37 {
++			compatible = "cache";
++			cache-unified;
++			cache-level = <3>;
++		};
++	};
++
++	/*
++	 * In the early phase, there is no clock control support,
++	 * so assume that the clocks are enabled by default.
++	 * Therefore, dummy clocks are used.
++	 */
++	dummy_clk_sgasyncd16: dummy-clk-sgasyncd16 {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <66666000>;
++	};
++
++	dummy_clk_sgasyncd4: dummy-clk-sgasyncd4 {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <266660000>;
++	};
++
++	extal_clk: extal-clk {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		/* clock-frequency must be set on board */
++	};
++
++	extalr_clk: extalr-clk {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		/* clock-frequency must be set on board */
++	};
++
++	firmware {
++		scmi {
++			compatible = "arm,scmi";
++			arm,poll-transport;
++			mbox-names = "tx", "rx";
++			mboxes = <&mailbox 0>, <&mailbox 1>;
++			shmem = <&cpu_scp_lpri0>, <&cpu_scp_hpri0>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			scmi_devpd: protocol@11 {
++				reg = <0x11>;
++				#power-domain-cells = <1>;
++			};
++
++			scmi_clk: protocol@14 {
++				reg = <0x14>;
++				#clock-cells = <1>;
++			};
++
++			scmi_reset: protocol@16 {
++				reg = <0x16>;
++				#reset-cells = <1>;
++			};
++		};
++	};
++
++	psci {
++		compatible = "arm,psci-1.0", "arm,psci-0.2";
++		method = "smc";
++	};
++
++	/* External SCIF clock - to be overridden by boards that provide it */
++	scif_clk: scif-clk {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <0>; /* optional */
++	};
++
++	soc: soc {
++		compatible = "simple-bus";
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		mailbox: mfis_mbox@18842000 {
++			compatible = "renesas,mfis-mbox";
++			#mbox-cells = <1>;
++			reg = <0 0x18842004 0 0x8>;
++			interrupts = <GIC_SPI 4362 IRQ_TYPE_LEVEL_HIGH>;
++		};
++
++		prr: chipid@189e0044 {
++			compatible = "renesas,prr";
++			reg = <0 0x189e0044 0 4>;
++		};
++
++		/* Application Processors manage View-1 of a GIC-720AE */
++		gic: interrupt-controller@39000000 {
++			compatible = "arm,gic-v3";
++			#interrupt-cells = <3>;
++			#address-cells = <0>;
++			interrupt-controller;
++			reg = <0 0x39000000 0 0x10000>,
++			      <0 0x39080000 0 0x800000>;
++			interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH>;
++		};
++
++		pfc: pinctrl@c0400000 {
++			compatible = "renesas,pfc-r8a78000";
++			reg = <0 0xc1080000 0 0x104>, <0 0xc1080800 0 0x104>,
++			      <0 0xc1081000 0 0x104>, <0 0xc0800000 0 0x104>,
++			      <0 0xc0800800 0 0x104>, <0 0xc0400000 0 0x104>,
++			      <0 0xc0400800 0 0x104>, <0 0xc0401000 0 0x104>,
++			      <0 0xc0401800 0 0x104>, <0 0xc9b00000 0 0x104>,
++			      <0 0xc9b00800 0 0x104>;
++		};
++
++		scif0: serial@c0700000 {
++			compatible = "renesas,scif-r8a78000",
++				     "renesas,rcar-gen5-scif", "renesas,scif";
++			reg = <0 0xc0700000 0 0x40>;
++			interrupts = <GIC_SPI 4074 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&dummy_clk_sgasyncd16>, <&dummy_clk_sgasyncd16>, <&scif_clk>;
++			clock-names = "fck", "brg_int", "scif_clk";
++			status = "disabled";
++		};
++
++		scif1: serial@c0704000 {
++			compatible = "renesas,scif-r8a78000",
++				     "renesas,rcar-gen5-scif", "renesas,scif";
++			reg = <0 0xc0704000 0 0x40>;
++			interrupts = <GIC_SPI 4075 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&dummy_clk_sgasyncd16>, <&dummy_clk_sgasyncd16>, <&scif_clk>;
++			clock-names = "fck", "brg_int", "scif_clk";
++			status = "okay";
++		};
++
++		scif3: serial@c0708000 {
++			compatible = "renesas,scif-r8a78000",
++				     "renesas,rcar-gen5-scif", "renesas,scif";
++			reg = <0 0xc0708000 0 0x40>;
++			interrupts = <GIC_SPI 4076 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&dummy_clk_sgasyncd16>, <&dummy_clk_sgasyncd16>, <&scif_clk>;
++			clock-names = "fck", "brg_int", "scif_clk";
++			status = "disabled";
++		};
++
++		scif4: serial@c070c000 {
++			compatible = "renesas,scif-r8a78000",
++				     "renesas,rcar-gen5-scif", "renesas,scif";
++			reg = <0 0xc070c000 0 0x40>;
++			interrupts = <GIC_SPI 4077 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&dummy_clk_sgasyncd16>, <&dummy_clk_sgasyncd16>, <&scif_clk>;
++			clock-names = "fck", "brg_int", "scif_clk";
++			status = "disabled";
++		};
++
++		mmc0: mmc@c0880000 {
++			compatible = "renesas,rcar-gen5-sdhi";
++			reg = <0 0xc0880000 0 0x2000>;
++			clock-names = "core";
++			max-frequency = <200000000>;
++			status = "disabled";
++		};
++
++		ufs0: ufs@c0a80000 {
++			compatible = "renesas,r8a78000-ufs";
++			reg = <0 0xc0a80000 0 0x1100>, <0 0xc0a00000 0 0x40000>;
++			reg-names = "hcr", "phy";
++			interrupts = <GIC_SPI 4284 IRQ_TYPE_LEVEL_HIGH>;
++			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_UFS0>;
++			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_UFS0>;
++			resets = <&scmi_reset SCP_RESET_DOMAIN_ID_UFS0>;
++			freq-table-hz = <38400000 38400000>;
++			status = "disabled";
++		};
++
++		ufs1: ufs@c0a90000 {
++			compatible = "renesas,r8a78000-ufs";
++			reg = <0 0xc0a90000 0 0x1100>, <0 0xc0a40000 0 0x40000>;
++			reg-names = "hcr", "phy";
++			interrupts = <GIC_SPI 4285 IRQ_TYPE_LEVEL_HIGH>;
++			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_UFS1>;
++			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_UFS1>;
++			resets = <&scmi_reset SCP_RESET_DOMAIN_ID_UFS1>;
++			freq-table-hz = <38400000 38400000>;
++			status = "disabled";
++		};
++
++		scp: sram@c1000000 {
++			compatible = "arm,rcar-sram-ns", "mmio-sram";
++			reg = <0x0 0xc1000000 0x0 0x80000>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++			ranges = <0 0x0 0xc1000000 0x80000>;
++
++			cpu_scp_lpri0: scp-shmem@60000 {
++				compatible = "arm,rcar-scp-shmem", "arm,scmi-shmem";
++				reg = <0x61200 0x0100>;
++			};
++
++			cpu_scp_hpri0: scp-shmem@60300 {
++				compatible = "arm,rcar-scp-shmem", "arm,scmi-shmem";
++				reg = <0x61300 0x100>;
++			};
++		};
++
++		cpg: clock-controller@c64f0000 {
++			compatible = "renesas,r8a78000-cpg-mssr";
++			reg = <0 0xc64f0000 0 0x4000>;
++			clocks = <&extal_clk>, <&extalr_clk>;
++			clock-names = "extal", "extalr";
++			#clock-cells = <2>;
++			#power-domain-cells = <0>;
++			#reset-cells = <1>;
++		};
++
++		hscif0: serial@c0710000 {
++			compatible = "renesas,hscif-r8a78000",
++				     "renesas,rcar-gen5-hscif", "renesas,hscif";
++			reg = <0 0xc0710000 0 0x60>;
++			interrupts = <GIC_SPI 4078 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&dummy_clk_sgasyncd4>, <&dummy_clk_sgasyncd4>, <&scif_clk>;
++			clock-names = "fck", "brg_int", "scif_clk";
++			status = "disabled";
++		};
++
++		hscif1: serial@c0714000 {
++			compatible = "renesas,hscif-r8a78000",
++				     "renesas,rcar-gen5-hscif", "renesas,hscif";
++			reg = <0 0xc0714000 0 0x60>;
++			interrupts = <GIC_SPI 4079 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&dummy_clk_sgasyncd4>, <&dummy_clk_sgasyncd4>, <&scif_clk>;
++			clock-names = "fck", "brg_int", "scif_clk";
++			status = "disabled";
++		};
++
++		hscif2: serial@c0718000 {
++			compatible = "renesas,hscif-r8a78000",
++				     "renesas,rcar-gen5-hscif", "renesas,hscif";
++			reg = <0 0xc0718000 0 0x60>;
++			interrupts = <GIC_SPI 4080 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&dummy_clk_sgasyncd4>, <&dummy_clk_sgasyncd4>, <&scif_clk>;
++			clock-names = "fck", "brg_int", "scif_clk";
++			status = "disabled";
++		};
++
++		hscif3: serial@c071c000 {
++			compatible = "renesas,hscif-r8a78000",
++				     "renesas,rcar-gen5-hscif", "renesas,hscif";
++			reg = <0 0xc071c000 0 0x60>;
++			interrupts = <GIC_SPI 4081 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&dummy_clk_sgasyncd4>, <&dummy_clk_sgasyncd4>, <&scif_clk>;
++			clock-names = "fck", "brg_int", "scif_clk";
++			status = "disabled";
++		};
++
++		i2c0: i2c@c11d0000 {
++			compatible = "renesas,i2c-r8a78000",
++				     "renesas,rcar-gen5-i2c";
++			reg = <0 0xc11d0000 0 0x40>;
++			i2c-scl-internal-delay-ns = <110>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		i2c1: i2c@c06c0000 {
++			compatible = "renesas,i2c-r8a78000",
++				     "renesas,rcar-gen5-i2c";
++			reg = <0 0xc06c0000 0 0x40>;
++			i2c-scl-internal-delay-ns = <110>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		i2c2: i2c@c06c8000 {
++			compatible = "renesas,i2c-r8a78000",
++				     "renesas,rcar-gen5-i2c";
++			reg = <0 0xc06c8000 0 0x40>;
++			i2c-scl-internal-delay-ns = <110>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		i2c3: i2c@c06d0000 {
++			compatible = "renesas,i2c-r8a78000",
++				     "renesas,rcar-gen5-i2c";
++			reg = <0 0xc06d0000 0 0x40>;
++			i2c-scl-internal-delay-ns = <110>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		i2c4: i2c@c06d8000 {
++			compatible = "renesas,i2c-r8a78000",
++				     "renesas,rcar-gen5-i2c";
++			reg = <0 0xc06d8000 0 0x40>;
++			i2c-scl-internal-delay-ns = <110>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		i2c5: i2c@c06e0000 {
++			compatible = "renesas,i2c-r8a78000",
++				     "renesas,rcar-gen5-i2c";
++			reg = <0 0xc06e0000 0 0x40>;
++			i2c-scl-internal-delay-ns = <110>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		i2c6: i2c@c06e8000 {
++			compatible = "renesas,i2c-r8a78000",
++				     "renesas,rcar-gen5-i2c";
++			reg = <0 0xc06e8000 0 0x40>;
++			i2c-scl-internal-delay-ns = <110>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		i2c7: i2c@c06f0000 {
++			compatible = "renesas,i2c-r8a78000",
++				     "renesas,rcar-gen5-i2c";
++			reg = <0 0xc06f0000 0 0x40>;
++			i2c-scl-internal-delay-ns = <110>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		i2c8: i2c@c06f8000 {
++			compatible = "renesas,i2c-r8a78000",
++				     "renesas,rcar-gen5-i2c";
++			reg = <0 0xc06f8000 0 0x40>;
++			i2c-scl-internal-delay-ns = <110>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		gpio0: gpio@c1080110 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc1080110 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 0 28>;
++		};
++
++		gpio1: gpio@c1080910 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc1080910 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 32 22>;
++		};
++
++		gpio2: gpio@c1081110 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc1081110 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 64 29>;
++		};
++
++		gpio3: gpio@c0800110 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc0800110 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 96 17>;
++		};
++
++		gpio4: gpio@c0800910 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc0800910 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 128 16>;
++		};
++
++		gpio5: gpio@c0400110 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc0400110 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 160 23>;
++		};
++
++		gpio6: gpio@c0400910 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc0400910 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 192 31>;
++		};
++
++		gpio7: gpio@c0401110 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc0401110 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 224 31>;
++		};
++
++		gpio8: gpio@c0401910 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc0401910 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 256 32>;
++			gpio-reserved-ranges = <16 10>;
++		};
++
++		gpio9: gpio@c9b00110 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc9b00110 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 288 17>;
++		};
++
++		gpio10: gpio@c9b00910 {
++			compatible = "renesas,gpio-r8a78000",
++				     "renesas,rcar-gen5-gpio";
++			reg = <0 0xc9b00910 0 0xc0>;
++			#gpio-cells = <2>;
++			gpio-controller;
++			gpio-ranges = <&pfc 0 320 14>;
++		};
++
++		mp_phy: mp_phy@c9a00000 {
++			compatible = "renesas,r8a78000-multi-protocol-phy";
++			reg = <0 0xc9a00000 0 0x100000>;
++			#phy-cells = <2>;
++			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY01>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY11>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY21>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY31>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY02>;
++			clock-names = "mpphy01", "mpphy11", "mpphy21",
++				      "mpphy31", "mpphy02";
++			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_MPP0>,
++					<&scmi_devpd X5H_POWER_DOMAIN_ID_MPP1>,
++					<&scmi_devpd X5H_POWER_DOMAIN_ID_MPP2>,
++					<&scmi_devpd X5H_POWER_DOMAIN_ID_MPP3>;
++			resets = <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY01>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY11>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY21>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY31>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY02>;
++			status = "disabled";
++		};
++
++		rswitch3: ethernet@c9bc0000 {
++			compatible = "renesas,r8a78000-ether-switch3",
++					"renesas,etherswitch";
++			reg = <0 0xc9bc0000 0 0x40000>, <0 0xc9b80000 0 0x240000>;
++			reg-names = "base", "secure_base";
++			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_RSW>;
++			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSN>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3AES>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES0>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES1>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES2>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES3>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES4>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES5>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES6>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES7>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3MFWD>;
++			clock-names = "rsw3", "rsw3tsn", "rsw3aes",
++				      "rsw3tsntes0", "rsw3tsntes1", "rsw3tsntes2",
++				      "rsw3tsntes3", "rsw3tsntes4", "rsw3tsntes5",
++				      "rsw3tsntes6", "rsw3tsntes7", "rsw3mfwd";
++			status = "disabled";
++		};
++
++		eth_pcs: phy@c9c50000 {
++			compatible = "renesas,r8a78000-ether-pcs";
++			reg = <0 0xc9c50000 0 0x4000>;
++			#phy-cells = <1>;
++			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS0>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS1>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS2>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS3>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS4>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS5>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS6>,
++				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS7>;
++			clock-names = "xpcs0", "xpcs1", "xpcs2", "xpcs3",
++				      "xpcs4", "xpcs5", "xpcs6", "xpcs7";
++			resets = <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS0>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS1>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS2>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS3>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS4>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS5>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS6>,
++				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS7>;
++			reset-names = "xpcs0", "xpcs1", "xpcs2", "xpcs3",
++				      "xpcs4", "xpcs5", "xpcs6", "xpcs7";
++			status = "disabled";
++		};
++	};
++
++	timer {
++		compatible = "arm,armv8-timer";
++		interrupts = <GIC_PPI 13 IRQ_TYPE_LEVEL_LOW>,
++			     <GIC_PPI 14 IRQ_TYPE_LEVEL_LOW>,
++			     <GIC_PPI 11 IRQ_TYPE_LEVEL_LOW>,
++			     <GIC_PPI 10 IRQ_TYPE_LEVEL_LOW>,
++			     <GIC_PPI 12 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-names = "sec-phys", "phys", "virt", "hyp-phys", "hyp-virt";
++	};
++};
+diff --git a/include/dt-bindings/clock/r8a78000-clock-scmi.h b/include/dt-bindings/clock/r8a78000-clock-scmi.h
+new file mode 100644
+index 00000000000..455402ee8cc
+--- /dev/null
++++ b/include/dt-bindings/clock/r8a78000-clock-scmi.h
+@@ -0,0 +1,46 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (C) 2025 Renesas Electronics Corp.
++ *
++ * IDs match SCP 4.27
++ */
++
++#ifndef __DT_BINDINGS_R8A78000_SCMI_CLOCK_H__
++#define __DT_BINDINGS_R8A78000_SCMI_CLOCK_H__
 +
 +/*
-+ * R-Car (R8A78000) I/O Addresses
++ * These definition indices match the Clock ID defined by SCP FW 4.27.
 + */
-+#define TMU_BASE		0x1C030000
 +
-+/* Arm Generic Timer */
-+#define CNTCR_BASE		0x1C000FFF /* Region 0 */
-+#define CNTFID0			(CNTCR_BASE + 0x020)
-+#define CNTCR_EN		BIT(0)
++#define SCP_CLOCK_ID_MDLC_UFS0		202
++#define SCP_CLOCK_ID_MDLC_UFS1		203
++#define SCP_CLOCK_ID_MDLC_SDHI0		204
 +
-+/* Reset */
-+#define RST_BASE		0xC1320000 /* Domain0 */
-+#define RST_SWSRES1A		(RST_BASE + 0x410)
-+#define RST_WDTRSTCR		(RST_BASE + 0x420)
-+#define RST_RWDT_RSTMSK		BIT(0)
-+#define RST_WWDT_RSTMSK		BIT(2)
-+#define RST_RESKCPROT0		(RST_BASE + 0x4F0)
-+#define RST_KCPROT_DIS		0xA5A5A501
++#define SCP_CLOCK_ID_MDLC_XPCS0		316
++#define SCP_CLOCK_ID_MDLC_XPCS1		317
++#define SCP_CLOCK_ID_MDLC_XPCS2		318
++#define SCP_CLOCK_ID_MDLC_XPCS3		319
++#define SCP_CLOCK_ID_MDLC_XPCS4		320
++#define SCP_CLOCK_ID_MDLC_XPCS5		321
++#define SCP_CLOCK_ID_MDLC_XPCS6		322
++#define SCP_CLOCK_ID_MDLC_XPCS7		323
++#define SCP_CLOCK_ID_MDLC_RSW3		324
++#define SCP_CLOCK_ID_MDLC_RSW3TSN	325
++#define SCP_CLOCK_ID_MDLC_RSW3AES	326
++#define SCP_CLOCK_ID_MDLC_RSW3TSNTES0	327
++#define SCP_CLOCK_ID_MDLC_RSW3TSNTES1	328
++#define SCP_CLOCK_ID_MDLC_RSW3TSNTES2	329
++#define SCP_CLOCK_ID_MDLC_RSW3TSNTES3	330
++#define SCP_CLOCK_ID_MDLC_RSW3TSNTES4	331
++#define SCP_CLOCK_ID_MDLC_RSW3TSNTES5	332
++#define SCP_CLOCK_ID_MDLC_RSW3TSNTES6	333
++#define SCP_CLOCK_ID_MDLC_RSW3TSNTES7	334
++#define SCP_CLOCK_ID_MDLC_RSW3MFWD	335
 +
-+/* GICv4 */
-+/* Distributor Registers */
-+#define GICD_BASE		0x38000000
-+#define GICR_BASE		(GICR_LPI_BASE)
++#define SCP_CLOCK_ID_MDLC_MPPHY01	344
++#define SCP_CLOCK_ID_MDLC_MPPHY11	345
++#define SCP_CLOCK_ID_MDLC_MPPHY21	346
++#define SCP_CLOCK_ID_MDLC_MPPHY31	347
++#define SCP_CLOCK_ID_MDLC_MPPHY02	348
 +
-+/* ReDistributor Registers for Control and Physical LPIs */
-+#define GICR_LPI_BASE		0x38080000
-+#define GICR_WAKER		0x0014
-+#define GICR_PWRR		0x0024
-+#define GICR_LPI_WAKER		(GICR_LPI_BASE + GICR_WAKER)
-+#define GICR_LPI_PWRR		(GICR_LPI_BASE + GICR_PWRR)
++#endif /* __DT_BINDINGS_R8A78000_SCMI_CLOCK_H__ */
+diff --git a/include/dt-bindings/power/r8a78000-power-scmi.h b/include/dt-bindings/power/r8a78000-power-scmi.h
+new file mode 100644
+index 00000000000..126da87454e
+--- /dev/null
++++ b/include/dt-bindings/power/r8a78000-power-scmi.h
+@@ -0,0 +1,29 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (C) 2025 Renesas Electronics Corp.
++ *
++ * IDs match SCP 4.27
++ */
 +
-+/* ReDistributor Registers for SGIs and PPIs */
-+#define GICR_SGI_BASE		0x38090000
-+#define GICR_IGROUPR0		0x0080
++#ifndef __DT_BINDINGS_R8A78000_SCMI_POWER_H__
++#define __DT_BINDINGS_R8A78000_SCMI_POWER_H__
 +
-+#endif /* __ASM_ARCH_RCAR_GEN5_BASE_H */
-diff --git a/arch/arm/mach-renesas/include/mach/renesas.h b/arch/arm/mach-renesas/include/mach/renesas.h
-index c69c764adb8..deaeffedef9 100644
---- a/arch/arm/mach-renesas/include/mach/renesas.h
-+++ b/arch/arm/mach-renesas/include/mach/renesas.h
-@@ -16,6 +16,8 @@
- #include <asm/arch/rcar-gen3-base.h>
- #elif defined(CONFIG_RCAR_GEN4)
- #include <asm/arch/rcar-gen4-base.h>
-+#elif defined(CONFIG_RCAR_GEN5)
-+#include <asm/arch/rcar-gen5-base.h>
- #elif defined(CONFIG_R7S72100)
- #elif defined(CONFIG_RZG2L)
- #include <asm/arch/rzg2l.h>
-@@ -42,6 +44,7 @@
- #define RENESAS_CPU_TYPE_R8A779F0	0x5A
- #define RENESAS_CPU_TYPE_R8A779G0	0x5C
- #define RENESAS_CPU_TYPE_R8A779H0	0x5D
-+#define RMOBILE_CPU_TYPE_R8A78000	0x60
- #define RENESAS_CPU_TYPE_R9A07G044L	0x9A070440
- 
- #ifndef __ASSEMBLY__
-diff --git a/board/renesas/MAINTAINERS b/board/renesas/MAINTAINERS
-index 13551cdd2b4..8571bb02576 100644
---- a/board/renesas/MAINTAINERS
-+++ b/board/renesas/MAINTAINERS
-@@ -6,7 +6,7 @@ N:	grpeach
- N:	r2dplus
- N:	r7s72100
- N:	r8a66597
--N:	r8a77
-+N:	r8a7[78]
- N:	r9a0[0-9]g
- N:	rcar
- N:	renesas
++/*
++ * These power domain indices match the Power Domain ID defined by SCP FW 4.27.
++ */
++
++#define X5H_POWER_DOMAIN_ID_UFS0	12
++#define X5H_POWER_DOMAIN_ID_UFS1	13
++
++#define X5H_POWER_DOMAIN_ID_RSW		15
++
++#define X5H_POWER_DOMAIN_ID_MPP0	17
++#define X5H_POWER_DOMAIN_ID_MPP1	18
++#define X5H_POWER_DOMAIN_ID_MPP2	19
++#define X5H_POWER_DOMAIN_ID_MPP3	20
++
++#define X5H_POWER_DOMAIN_ID_AC00	76
++
++#define X5H_POWER_DOMAIN_ID_ACL0	92
++
++#endif /* __DT_BINDINGS_R8A78000_SCMI_POWER_H__ */
+diff --git a/include/dt-bindings/reset/r8a78000-reset-scmi.h b/include/dt-bindings/reset/r8a78000-reset-scmi.h
+new file mode 100644
+index 00000000000..e0d10caa589
+--- /dev/null
++++ b/include/dt-bindings/reset/r8a78000-reset-scmi.h
+@@ -0,0 +1,33 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (C) 2025 Renesas Electronics Corp.
++ *
++ * IDs match SCP 4.27
++ */
++
++#ifndef __DT_BINDINGS_R8A78000_SCMI_RESET_H__
++#define __DT_BINDINGS_R8A78000_SCMI_RESET_H__
++
++/*
++ * These definition indices match the Reset ID defined by SCP FW 4.27.
++ */
++
++#define SCP_RESET_DOMAIN_ID_UFS0	202
++#define SCP_RESET_DOMAIN_ID_UFS1	203
++
++#define SCP_RESET_DOMAIN_ID_XPCS0	316
++#define SCP_RESET_DOMAIN_ID_XPCS1	317
++#define SCP_RESET_DOMAIN_ID_XPCS2	318
++#define SCP_RESET_DOMAIN_ID_XPCS3	319
++#define SCP_RESET_DOMAIN_ID_XPCS4	320
++#define SCP_RESET_DOMAIN_ID_XPCS5	321
++#define SCP_RESET_DOMAIN_ID_XPCS6	322
++#define SCP_RESET_DOMAIN_ID_XPCS7	323
++
++#define SCP_RESET_DOMAIN_ID_MPPHY01	344
++#define SCP_RESET_DOMAIN_ID_MPPHY11	345
++#define SCP_RESET_DOMAIN_ID_MPPHY21	346
++#define SCP_RESET_DOMAIN_ID_MPPHY31	347
++#define SCP_RESET_DOMAIN_ID_MPPHY02	348
++
++#endif /* __DT_BINDINGS_R8A78000_SCMI_RESET_H__ */
 -- 
 2.51.0
 
