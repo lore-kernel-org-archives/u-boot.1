@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36E11CF34C1
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:55:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B5DCCF34C3
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:55:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 698E883F93;
+	by phobos.denx.de (Postfix) with ESMTP id A53AB83F9C;
 	Wed, 19 Nov 2025 15:55:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oOKMEDKf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SGSdsj0+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9F4683F69; Wed, 19 Nov 2025 15:55:20 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 5EB7D83F8E; Wed, 19 Nov 2025 15:55:22 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3F1783F42
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:55:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 499AF8004F
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:55:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-65763315216so926091eaf.0
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:55:18 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c7827fd898so665012a34.2
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:55:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763564117; x=1764168917; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=kl517FnGId5SZ+4j1QsvMRngeubHv7e7VqtM3+hRGp4=;
- b=oOKMEDKfjVkZ21w4JygpCig0ob52UAlARp6ZzCWSM1bEVYSXqNdC8B+iHXxGAr7LC8
- vyAeCRV3xdCsSAdeYS52fK5do/2XRCi7bT3Rq6NqgrDOvAaENaeGKYgWzm5sRuJ4Twhq
- FJ+7etmHJ3f1GL8TqpBcHELApNXNTJyYaYmDs=
+ d=konsulko.com; s=google; t=1763564119; x=1764168919; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kO1gMC1IOVaGgKnaI4yFPBgMRzvI1+Ra1iZ2obdg068=;
+ b=SGSdsj0+CoQ5nurpXz9iTDj/E+4x+143UbqoY/lTYGj+Ef7QuQXGl6zbwl+itHPF0S
+ cbLr/OEoOn4byT03Ono0vyQ/DPQMXtLluzhTJtxuZP5+J65xy69MymxapEOgxTC/ODAo
+ JkNnSRfbQ6Yyw/voYEkP6gkw8FF3QOpJjcOBc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763564117; x=1764168917;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kl517FnGId5SZ+4j1QsvMRngeubHv7e7VqtM3+hRGp4=;
- b=F4oRgg/yBKKRz0tubhVP9ppof0VEtZgs6dN84U/s/zFOtwN+kSj51wDMP8gCW5sAz0
- +QsjFVJBp7fvG3HEFF1Z4VwjsU1tROxzvbpyvcnyr1M8uTRpUreWNjJazhRh8TtV4O8E
- 0VHI3AM7uGmFGPinGaBfrkG9yQHHOZBKSaIgn6X5IYk4NRSRtg5IbFh2sO2+xeMCTrDP
- JLDj34M9a7BOB2U22jN2g4dzW/muXt5fLqtdg40IVsziaflpZOhBNwo9zk4VkSxfX6w4
- QKeh8gJBnSgru8lZrlDeqVihO9E9OJjXef+NWoluRcPlwldQCtosAyBwP/OpDHcaTRhd
- D5GA==
-X-Gm-Message-State: AOJu0YyM6bYd2BTUIrZaPUw9QxDJH9rEwY8olr4MIxWvikxkElJuh3Et
- Krcmra8bVFaGglnoSrd5kJ5uN4TQCWxttC7yyhRbywaf63g0CVzFzvjnuJys4u2pXcH2ltAepTl
- Jr3fgMibEIA==
-X-Gm-Gg: ASbGncsp8nO6RsgxlYXRA1ZuOcb5pxWqiSVWjUnwW3QGxj3a4LNd+NKEpqIxMJmmPNP
- BvVaBnSuKAP+ySuKaE0V/VR3KJzPnVGGlZ4RvqUtp53voxjJcSaRHtKCMVlt3rKHD+/SBoLRfFU
- oAjEGcQItN8ZyEtmsRTjgaZOj9XW9MerufZFdsZhLd6kfmzCnEtQRdpf//uUceHXBsGWAjzsqNw
- nMDHPPUamkTifyw6Oy1+oPaBM5sasmPgbPX6Uy7QgXQPohTN5hvC93t4P2Tcjqg7n2T7Kr/LUAY
- CfJcP/9wNAfvWv3rTRWp3xFFkjzwxrYb/2UQpcddHROnCudoeSznXCgfLnOLrDp42vCiLTW1l5P
- 61okXsKoGp3zoqxsS78cSBMQYtQtT2/bjoxqk5LBgYKhMxT0NQeg+GNpZLreOLmpUAhCbS+1kqL
- 5LABRjlzKGWtFm2YSuMI0zXfBO+V+Og8K5BANWqp6AHJlCXc2wD7y5
-X-Google-Smtp-Source: AGHT+IGKxy3eRI3ao/Cm3AfaMFjogoYuVFZ/o++WtfCyWlNUPHUV2zUJihwQW2kU5DNGfsjk6csFlg==
-X-Received: by 2002:a05:6870:64a2:b0:3ec:2fa7:8180 with SMTP id
- 586e51a60fabf-3ec2fa789d9mr6279661fac.0.1763564117231; 
- Wed, 19 Nov 2025 06:55:17 -0800 (PST)
+ d=1e100.net; s=20230601; t=1763564119; x=1764168919;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kO1gMC1IOVaGgKnaI4yFPBgMRzvI1+Ra1iZ2obdg068=;
+ b=LVyV1pMXCaOoij6k78gE0+B0deG27KG1cEHTXoTrR75AlsagxRUAgxBshIqURaARzl
+ FpEYUCtrVXQQwL4X/ahSiDB7rshAv8mS6JwUAKvJmzt5eP6YNIx5gJ7WAhzSWhMgLhrN
+ /hYOxP66jlm4Hs7qR6VBAbzlGezLN/2F1ZDoJMnXobA7xsM0mAT2dAiy78Gm0YsDyKNM
+ ApxLeXzjoBDKfg0ict+xM/7nLlOZkvx4Te+V4dFAZ7lmF36arinZVJgJaZvaDq4c8IE0
+ gUdySDUUDSRICZf+jXzcsPxIHw8Zlyh5qgWXNu25kf2PNwSRylLIFYIBf7JBSvb3iiRY
+ KV2g==
+X-Gm-Message-State: AOJu0YzfrB4ukgTe6FbeV6+edz6iFEsLafd+3eF/15Q0l7J3O/UjY9dR
+ YRLf5RtXx1tYdp6xvF5geSX25QAowUXxoJA2r/leMOxXL9xBAZDgsskM3Mbt7ND8ns7gjl/sbDP
+ cFEnbLH1aCA==
+X-Gm-Gg: ASbGncvIzx/3un7d71OcQkd0JM1AXlsN6NeKOXQPYppiQitomHW9sKMMgvGoXlzbz2k
+ x7514tBtb1Db42TtWS8b8/2A6FVPGm+PR+wuA4qSsVg11+4OxxlQFtej2Sym8vGBF0Ja+r/Diw3
+ Gr2HD/FSYSj+AFmPtHkvPBJ0ibe7KJwafTN7rruP4WKzNp6wVadGcC0rXlS2zhF/RVFO+hUViD/
+ HrtzgmRk2WjPClxgdH5uAwDIQZPYs+ieAg6k4Z/2XH4pcqqtLwbjSM2BQkxVP7LxMBQY+WqhnCM
+ QOCdLvdv71nO8ZM2QGb4SH+M47qgNbCbeuUwXFThux9bCbCRAqNY2vSiLzT82ZF93joB4r+/YGw
+ ot0TKTSYRfoQfUXjPtMzDuvGrGEjMg7NCSN6nOAZm1gJlLNdorah9Yr7r7F0IxkGiWbGBsGRWpo
+ b9vUZ7qaK0OUKJ38fiuu5UG3pRWMvWoTUSrQ7shKmBow0QepnpUSGl
+X-Google-Smtp-Source: AGHT+IHVKBj5E/hwWPPVx44C9DdjELxRLFrt+6TL6gjW+zD7R9vkUizCPxi6k3DwFbBAJgFcwushnA==
+X-Received: by 2002:a05:6830:4409:b0:7c7:dc9:40a1 with SMTP id
+ 46e09a7af769-7c744482811mr13414332a34.4.1763564119029; 
+ Wed, 19 Nov 2025 06:55:19 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e8834111c5sm5431170fac.13.2025.11.19.06.55.16
- for <u-boot@lists.denx.de>
+ 46e09a7af769-7c73a392fa5sm7833333a34.19.2025.11.19.06.55.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Nov 2025 06:55:16 -0800 (PST)
+ Wed, 19 Nov 2025 06:55:18 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] arm: Remove remainder of xpress board code
-Date: Wed, 19 Nov 2025 08:55:15 -0600
-Message-ID: <20251119145516.843145-1-trini@konsulko.com>
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: [PATCH] qemu-arm-sba: Stop disabling device tree relocation
+Date: Wed, 19 Nov 2025 08:55:17 -0600
+Message-ID: <20251119145517.843161-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,108 +93,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When this platform was removed the config header file was missed. Remove
-that now.
+Remove setting of fdt_high to ~0, which disables device tree relocation,
+from the default environment. Doing so prevents U-Boot from correcting
+problems such as having an unaligned device tree and leads to various
+failure modes in the OS.
 
-Fixes: ddfc00400965 ("arm: Remove xpress board")
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- include/configs/xpress.h | 86 ----------------------------------------
- 1 file changed, 86 deletions(-)
- delete mode 100644 include/configs/xpress.h
+If there is some window of memory that must be used for where the device
+tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
+or bootm_mapsize are the correct way do this. Please see
+doc/usage/environment.rst for more details.
 
-diff --git a/include/configs/xpress.h b/include/configs/xpress.h
-deleted file mode 100644
-index aa4dd3e9b8d9..000000000000
---- a/include/configs/xpress.h
-+++ /dev/null
-@@ -1,86 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (C) 2015-2016 Stefan Roese <sr@denx.de>
-- *
-- * Configuration settings for the CCV xPress board
-- */
--#ifndef __XPRESS_CONFIG_H
--#define __XPRESS_CONFIG_H
--
--#include "mx6_common.h"
--#include <asm/mach-imx/gpio.h>
--
--#define CFG_MXC_UART_BASE		MX6UL_UART7_BASE_ADDR
--
--/* MMC Configs */
--#define CFG_SYS_FSL_ESDHC_ADDR	USDHC2_BASE_ADDR
--
--/* Miscellaneous configurable options */
--
--/* Physical Memory Map */
--#define PHYS_SDRAM			MMDC0_ARB_BASE_ADDR
--#define PHYS_SDRAM_SIZE			(128 << 20)
--
--#define CFG_SYS_SDRAM_BASE		PHYS_SDRAM
--#define CFG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
--#define CFG_SYS_INIT_RAM_SIZE	IRAM_SIZE
--
--/* Environment is in stored in the eMMC boot partition */
--
--#define CFG_FEC_ENET_DEV		0
--#define CFG_FEC_MXC_PHYADDR          0x0
--
--#define CFG_EXTRA_ENV_SETTINGS \
--	"script=boot.scr\0" \
--	"image=zImage\0" \
--	"console=ttymxc6\0" \
--	"fdt_high=0xffffffff\0" \
--	"initrd_high=0xffffffff\0" \
--	"fdt_file=undefined\0" \
--	"fdt_addr=0x83000000\0" \
--	"boot_fdt=try\0" \
--	"ip_dyn=yes\0" \
--	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
--	"mmcpart=1\0" \
--	"mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
--	"mmcautodetect=yes\0" \
--	"mmcargs=setenv bootargs console=${console},${baudrate} " \
--		"root=${mmcroot}\0" \
--	"loadbootscript=" \
--		"fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
--	"bootscript=echo Running bootscript from mmc ...; " \
--		"source\0" \
--	"loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}\0" \
--	"loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
--	"mmcboot=echo Booting from mmc ...; " \
--		"run mmcargs; " \
--		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
--			"if run loadfdt; then " \
--				"bootz ${loadaddr} - ${fdt_addr}; " \
--			"else " \
--				"if test ${boot_fdt} = try; then " \
--					"bootz; " \
--				"else " \
--					"echo WARN: Cannot load the DT; " \
--				"fi; " \
--			"fi; " \
--		"else " \
--			"bootz; " \
--		"fi;\0" \
--	"uboot=ccv/u-boot.imx\0"					\
--	"uboot_start=0x2\0"						\
--	"uboot_size=0x3fe\0"						\
--	"update_uboot=if tftp ${uboot}; then "				\
--		"if itest ${filesize} > 0; then "			\
--			"mmc dev 0 1;"					\
--			"setexpr blkc ${filesize} / 0x200;"		\
--			"setexpr blkc ${blkc} + 1;"			\
--			"if itest ${blkc} <= ${uboot_size}; then "	\
--				"mmc write ${loadaddr} ${uboot_start} "	\
--					"${blkc};"			\
--			"fi;"						\
--		"fi; fi;"						\
--		"setenv filesize; setenv blkc\0"			\
--	"update_bootpart=mmc bootbus 0 2 1 2;mmc partconf 0 1 1 0\0"
--
--#endif /* __XPRESS_CONFIG_H */
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+---
+ board/emulation/qemu-sbsa/qemu-sbsa.env | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/board/emulation/qemu-sbsa/qemu-sbsa.env b/board/emulation/qemu-sbsa/qemu-sbsa.env
+index 88fdb0ec1c59..85e457cd47f3 100644
+--- a/board/emulation/qemu-sbsa/qemu-sbsa.env
++++ b/board/emulation/qemu-sbsa/qemu-sbsa.env
+@@ -5,7 +5,6 @@
+ stdin=serial,usbkbd
+ stdout=serial,vidconsole
+ stderr=serial,vidconsole
+-fdt_high=0xffffffffffffffff
+ initrd_high=0xffffffffffffffff
+ scriptaddr=0x100000300000
+ pxefile_addr_r=0x10000400000
 -- 
 2.43.0
 
