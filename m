@@ -4,152 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F277CF2582
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 05:01:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 583D7CF258E
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 06:11:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8717483A8C;
-	Wed, 19 Nov 2025 06:01:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7BA1A8397A;
+	Wed, 19 Nov 2025 07:11:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rhDUi9M/";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GlpWKR8z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F09783A9F; Wed, 19 Nov 2025 06:01:00 +0100 (CET)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
+ id 9C98283A57; Wed, 19 Nov 2025 07:11:45 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75AE48397A
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:00:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D28383979
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 07:11:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=p1ftRXQHFS6D2yfbpQFhyq6EYST3PswARHWyNfdaB1bpTNwzp+eYSMFT39io8i1rVo8aXv6MS8uO+9JxpN59a0zCBAbX7ARm8Ufo+6suHolMspGd6cjmED7+NET9Qu2lW9KGQPcLSUsvbv2dZdIcUTAomJG/z+kAa7rAiVZqMgZ6bHA/dpB0vpjygpDeiOKJPjw3UiHpTFP+MkTv7g8iYK0YsKGomwtU3y0csSsOa3f9PuHlwWdLVAALLSIilJMf9tq21rKlG/TJchT8fjdS5lsXqNPpemdG6DzRAkNegX37lYpBxC71wT9Kkky+6sFhKDloWn6LXAzGs1YB3NM8bQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Dnno5f5rVeFXY8byA1WAfYhrNQZaPQMp4VOYxlZ4nMw=;
- b=f/I5S/PL13zfyKAVJk5pF5IYVn5dc7PNkwV4emLUtMWcAKYlsmSEcjA1098Ssud+lqr9OV/9tm9gYFHjONGQT33BKEviJNGUJvaG9gEpBAo3KQgKCu6mz2YIiy8CP82N0kuB0lYkoPe/WKlqTqiZZl5sxyJLeyiwtb85MrYJi2CNzSADdxMWboJP6T6yYI5bCLrUvzhwqHiOhnc329eMEjRP9n6Gw2ViCnULaGcHSWimaD+SOGkYCLvmFWXy7/j2ZzQJ08yPDpKNK4T4KKAqd4NcR3JIXZF19g0etJnfciMGBrPQWK4Nev7l7WPgTr1soqTzyw/VfvNIZkeDkVctrg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dnno5f5rVeFXY8byA1WAfYhrNQZaPQMp4VOYxlZ4nMw=;
- b=rhDUi9M/JeUYDBnMoNc0XoCHUU/ePF4MB9tIUvhmi9vr29nD2PhEmyWKQFZCBf132OA8DcAnbRNM2h20KqktAa6w4NuHLmVlkOf++1S5uY/Em3073sbkrcv97SzcFI5+D4NAAau5JOtsrIlVZ2o9g5tJURhoYj3oKO9dja3DfSQ=
-Received: from SJ0PR13CA0205.namprd13.prod.outlook.com (2603:10b6:a03:2c3::30)
- by SN4PR10MB5639.namprd10.prod.outlook.com (2603:10b6:806:20a::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.22; Wed, 19 Nov
- 2025 05:00:54 +0000
-Received: from MWH0EPF000A672E.namprd04.prod.outlook.com
- (2603:10b6:a03:2c3:cafe::40) by SJ0PR13CA0205.outlook.office365.com
- (2603:10b6:a03:2c3::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.10 via Frontend Transport; Wed,
- 19 Nov 2025 05:00:54 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- MWH0EPF000A672E.mail.protection.outlook.com (10.167.249.20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.9 via Frontend Transport; Wed, 19 Nov 2025 05:00:54 +0000
-Received: from DLEE201.ent.ti.com (157.170.170.76) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 18 Nov
- 2025 23:00:50 -0600
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 18 Nov
- 2025 23:00:49 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 18 Nov 2025 23:00:49 -0600
-Received: from [172.24.231.157] (hp-z2-tower.dhcp.ti.com [172.24.231.157])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AJ50j8Z1252731;
- Tue, 18 Nov 2025 23:00:46 -0600
-Message-ID: <28d2895c-e6fd-4ca9-a5b9-bd14b9058720@ti.com>
-Date: Wed, 19 Nov 2025 10:30:45 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1763532697; x=1764137497; i=xypron.glpk@gmx.de;
+ bh=nKlIoIwLQ+YpNlc0G26r+W0eAj/+SA7l5OmaPDYqsiU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=GlpWKR8zEpYhGoWhdLaLS1Q8qP3ZRHPAvpIwCiMYdXW/FiV+8eTvWWixIjzlwwMr
+ jZVTk5ImpKC+Q7hLNKLh07XKvRMO62fWgdgXfnq1sMzbhgceSN00gVlbwspEHki/N
+ WTwrMMJwWKAB36fjU06HfoKZK/2EWtkjxAvC5jpTwk0EEcaWOXz6YNvyD37+Qc9AL
+ DZBCQUkAFxZDKK+FD037WTepnatmF8QCxH6KIp9GoXkVvpYLExEOGCq706K8YMlYu
+ NKJIltbkT2AIyPVXOn6j/oGXVeLrID7a2bKCBgyxQyHojE+6PoZiiZel23oyaOBDa
+ eFXLzq6C6i02lr9cWg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mxm3K-1w5HmA3n0o-017hwM; Wed, 19
+ Nov 2025 07:11:36 +0100
+Message-ID: <eb23054b-a9a4-4c62-a956-97b9ffef3f07@gmx.de>
+Date: Wed, 19 Nov 2025 07:11:36 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] power: domain: ti: fix ti_pd_get() to return after
- verifying transition
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, <jh80.chung@samsung.com>,
- <peng.fan@nxp.com>, <trini@konsulko.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
- <u-kumar1@ti.com>, <t-kristo@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>
-References: <20251118122055.1972591-1-s-vadapalli@ti.com>
+Subject: Re: [PATCH v2] doc: board: starfive: update jh7110 common description
+To: Yao Zi <ziyao@disroot.org>
+Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ Minda Chen <minda.chen@starfivetech.com>
+References: <20251117233603.15409-1-e@freeshell.de>
+ <24B5D5B7-0D3F-4091-82B8-A5E2328DE59F@gmx.de> <aRxKcvcc2IP-2dfw@pie>
 Content-Language: en-US
-From: Hrushikesh Salunke <h-salunke@ti.com>
-In-Reply-To: <20251118122055.1972591-1-s-vadapalli@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000A672E:EE_|SN4PR10MB5639:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3e7c4146-dd09-4190-b0d7-08de27289e5f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YUY1cFBDNFhheXhTeFNoWnMyWkR4RmNNaFhZUjhhNXJwS3k0T2R5cndCRnBo?=
- =?utf-8?B?V3RLUDhySWkyUlJZenhGVzJwYVRkRGJGRG9lMVhTRVdIZWtyTm53Z2YrdXVj?=
- =?utf-8?B?VWdTRnY3WmloOE1zeGZtTFBmeWlzR0hKWG5vdk1nV0VDaStxb1JESGMvandP?=
- =?utf-8?B?WVB3SU1uU1M0ZGRKdlg2UVRhVTVyVCtLMllQdmh3WlJqRzFZRzF1R0htSE9N?=
- =?utf-8?B?b25VMFVsZFNTMG1yOWJIeUxkRUd3VzduN2VVcnVPWG5FanllTEx2WEZIQUpC?=
- =?utf-8?B?L083MHA3a3FjUy9JaEMzMitkM2RJMFNMZlphN1M3NmpJcWFmclZIZWtZMnFh?=
- =?utf-8?B?QTk4alVScUVyR2Q0VEovajFBSUJpMm0raTZkRVNQYW9RaC9mYlJKN21wUDhB?=
- =?utf-8?B?bTZVTDhNYTA4MmFTazNVaUhacWY4MEZpYnB0d3k1LzRmNlZwS1B3SG84ckFP?=
- =?utf-8?B?a0xldm1TNWtXN0xCOFlHandqMlF2MjcrMjNCUHYvM1FPUlp6em9pVHFvek1s?=
- =?utf-8?B?U2hYZ2ExVm5rS2EvZ0Y4VnhKZExzVXhrSkFsd2t0NmFQZzlIcnlXc0pKRjc0?=
- =?utf-8?B?aDB3L1F5ZDhTbi82MVRpTkgwZDJydWpOWk1LeW5GUHpObDNPS2dRV3IxbUlK?=
- =?utf-8?B?TWFEVHdiWXQ1emFubEFQdTFvSWNQQm1NWHd0YUN0ZEFrN2RzMmNqZk4yNmk2?=
- =?utf-8?B?VzROQkpZbkVDbHBvUmhMSWNyUzJLUTVLWUhhSHBCUGZVZ3pqT1ZvekFUOXhV?=
- =?utf-8?B?QlBGMXdxMGRHaXFubE5RTmpDUStSYW5rYnU3cklsVmZMeWUvSWhWU1NQL1J2?=
- =?utf-8?B?UFpaZk1oWWxIWGtVdFVGOVBra1VEbDBiTVREUzhubnBSVXZhaDl6QWZyaTl1?=
- =?utf-8?B?VTRQQnlBU0dYTUtWVTAvWW5uQ2tjTVNiUURqR1gzOEM2RmRML3ZIaXkxR1Jp?=
- =?utf-8?B?NnY3RHhTc0twUi9pUDZWMGJFaXVzcUptL0IwVFJuZ3duZmE2UHBTK3pINFpG?=
- =?utf-8?B?UUxvcHFETGJKSm05VmFxZUlxZ29kQmp5dTlHdzNVeVJVWkJ4NkMyeGt0dStY?=
- =?utf-8?B?ZEFlRmViQkQ5Y1RKNzZQWUJKbExHUFVQUXVSc2Rta2dpcllCazhRcXhneE8v?=
- =?utf-8?B?RUZvQWdWa203SklEMmExY2FFUXpaalVEUkthUi9kVDJTa0E5aStzZEoyYU53?=
- =?utf-8?B?NlBwcGJ2S2Q3SHFZVVBla2FZMzhjWG9wMVpYRS9OeXVSQ3NSdGl6UGVYQmlB?=
- =?utf-8?B?dEppTGNCcEs4NHBTK3pjQkVHZXJoTExzYzZZTjZKS3R5RzVYL3p2bHJ3OHM0?=
- =?utf-8?B?eEtIR01QUm9vcHltVUtzTnZUcnFwSENiYjUyakZtQ2UzKzc1TlRaaXVDY1VK?=
- =?utf-8?B?aXJDM2pvREtaTlNmN0E3c2pKQXIrcStGaTJmZkZoMlNqYUMwOHhwV3R1ZHVs?=
- =?utf-8?B?bnV2MUlycjNKaW9LSjdrbS9wU2RDYnpyWERiVW9XdUlmZG1yL1NqQmZrOU5j?=
- =?utf-8?B?M21aczZyQnlXL2pWd3NHVFlVYk5LSUF0M2pGRHFpMDk5WU13aGd5UjZ0Mjdx?=
- =?utf-8?B?eXRqSnVqbjFVRmZzSWtyYnhGVjlQS2UzVXJaMGNsV0FsWG41MFYybjJmd1dq?=
- =?utf-8?B?N3RGR2x6WHlZZ2JVU1p3Q0UxMVBPTTdTclFGWjhNY00rNmRDMVRYeDRvYSt3?=
- =?utf-8?B?Y0t1NDFUSlJXbGxJV3BydmUyaDJxSWVkSzlHV0J3Uk56YTRHeVdPOHZNdFpz?=
- =?utf-8?B?U1dCVmd6TmdyMklzL09PNFR3VnZCeFl3MkRJUDZnTFNHK0xVWlphaU9LNTlR?=
- =?utf-8?B?VTFZRGdndnI0dmF5RFZLeHJIM1A2T2srTUllUE5jcGxDVmxmb0p5bjlUY09i?=
- =?utf-8?B?cEhiZnV6OVlNOVhYTUdySytrSFJnOUZxdHJucTVmYnlvZGhqL1BYUFJxWVFC?=
- =?utf-8?B?N3R2RkxhKzE1dzM3QW9yU1Y0dS8vSGVDd1o0UEFaOXBqT2YzbjdYY0I5Tity?=
- =?utf-8?B?YXJWb3l2R01hY3JiQ1VCV1Y0bFBuc1lCeXEzY1kzcVR6TGdOdlNJN0IyYm5v?=
- =?utf-8?Q?ZnmgOz?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2025 05:00:54.1828 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e7c4146-dd09-4190-b0d7-08de27289e5f
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000A672E.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR10MB5639
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <aRxKcvcc2IP-2dfw@pie>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:AWOeF95LYlUyf2vNkD5eY6Q7dIagGPGjPW5PTc88onhbMZkCnLj
+ UyhBXuU5mCNAWFlVXGLKHj/Izixp9bLxk3sFzxxs0AS4cI0thNoL+MuJGmvRDi9l68SaVsr
+ qgaszA56v3C5eep/PbbxT6IWBsgkGs6WdublTPL8yFwmJ7hVLUXbjBMhj9TAPPncLt2pKVS
+ tQp3YvjGve9z0UVS2h3Ew==
+UI-OutboundReport: notjunk:1;M01:P0:M/Yo5wCUTM4=;Wg9l5QCTWrOPuXj91Qu0mYZ0C/A
+ VR+ZLR82pJgkYP9ffkgXe5CDhEq/ROHpjKCOtiWmQZSKBFgSGyALHU4++yrOQla0M/DRnaXUi
+ 3BIJEnUkt3q/lEx1FUu4deOEhWnHMT0tM5nOq1KN/FTaLMfFpKtL+7U9fn9U5Vpk1yP3VJwVu
+ k8HBvsB7xIq4DIdLgL3pdbbyhukh7eTUO3mPOladEkK2Oski2VdKxZdx+esntyAo5U0E4Pdru
+ GVMkhERicdfCeVei9t4Zwp4u3r6rfpRyCRcvSMfcZwxAJGtO4URz550BTJYzcmj3Re4lKQjUa
+ YF2JcN7Mu2cGoU+9EfXKzbeP5tOR7OKv0BFbku9117WrujazFILLp0LJwzdTsbv1jIVdMGhn3
+ /red/yRUvZ3dqeIESWohU8WNXnY9Q1q+6jVFORvxhKRilEq1YOOFZio1AxRLtVtYbWuxjHeZV
+ 1UXtI5WsMUaOcoVm6zcnfasi4XDQnIvVwXTaZUG1JU+G3iAcwgl+DNPQ/0jC99REGK7Vk7Jl+
+ PAPDhP+ysMIZOke4i4v4f/sTIKP8HDlc74rdBmBK/SaNNIP1XgHsF4BRYLtiQly0ReaxVB0T6
+ fPHsrP99nV0zfVZq6g9Qkgpvkwab2V1KOUqM7/tqu5Ef5AiHJntcmcPYRNx9BXjXDK1cLE4Xg
+ tLSG/80QqtD4pw2V1lvUKw8TSqhRQSY/bA+iTNXOHj6DWAW1BsyouQFFbOdNzZC9RKq9LSyXy
+ EKkEqp7BZvC+erjZ1LsEoj9y0qa106qUjg64zQOadj0s3ysJJx6mS8Aan6FJ2lxLa5XLmgCoZ
+ 6NP45Hpme2mKXGQDv8ZwXFqp9ymNJo1bJR8lIGsvTGhjA1ySjLpGxwd8cIJcT5dnj/i6ql193
+ 0GVXmrytKny0gdIyCCugvMcRRxhpDrCafrwXBBfitVs6FXq7U/QT6cOZOk2WanPl4oTK4MAUS
+ KTC/I9zBamvltqIdj68wrbAUeQk+DXp0WYXkMyhoM1dWkdQSUxiZl2llZtVJBCp0ru1NsYkPZ
+ ANdjha1xnBzb23gfqW081uwjQl6pftjW+QCjLD+P3ODnvZMyAx3RTf4K7XUNRuyH7jqn4cAIv
+ X2PBy4ZYX3HW/bY7dxyMRAmOvDaQc6H7tDX/LfmdBFGUwnyr/D8kei2pWCAUC1mG/+OFVjP6A
+ QGaEej5HXCNl7TGgHxDGpWNAI59jUp7s9Ll4b44q16OXzx9vgcQmcOvClYZXR33iYrf/Jzbm0
+ RzTE7Z9GTLYoQ5McNldDi8+0brVkmhIj+8qSafbkNTA1ek8zTI1rY+HruxcBKZA9WfHsIdSca
+ FBF+xMHj9Ye6xOrYmO8BkA+STGn/ifGD0pALaAz1wDHrOnLjBXZ1KnqFyzQ0oKWeV02sM2Vd0
+ TlgJN648ALQpb8aFiJ8xYawhVUf+OQkb+isYMR7u2bWTXIGgS4/x5dkbUbHAsvrg4n9eN5y6A
+ G84S6ZrhIx7E7FP+u19CAlpGVL/vmw9jqAyKMMt3iKulskDGB4Ka9jzme7K3qlVcSQWe0/o2W
+ rqz3q2QO2GAetP+mEaDrb8ym8ySqrvgItKneDRL1w3Zb69UAqiM2pfNvgUTi9T0Lj7QGNJ68k
+ 8hijWzZvTQMpHigwYK28EADp9Ra9VFInG57IO+tUzXXZH6cufRp7Ya55DGlWapVKwnmIDb3y0
+ 5F1R93EJ8FVFkJl+sjLo1H6Lx/te9Z3Fv0oq+4/gRIR5A4mbhl1Xs8eTuJ0Av2St3BD5EIZXo
+ SDojDmZqI7Nk4nNCXOussjYFvntUdTpo72Lhx+beYM3uPpA5yOQfDZrGUyim9TumucQyLPLuK
+ YjKL+xtbWvscDugr2lFGPTRS/ET75jCij3wVMHUVaZ1wqrvqvucxy9pvwIN3S0PcgnkrciKuf
+ +HGchT4PUmykdnrD+rDSFMsIWOcEaVZVReEnPr0WFlxZMvVi4VYwEufZXtYxAA/WN+oouSaWT
+ iDh/3PTAV9QlbI+d24lCqz/Ji4R72ysRXLxE23USbQgRe0WOmAVsuzvE8MZ3R6JFCgqb9eNCw
+ u6ghsGJckWVE7XGK8/Cma3vnzHAzT5yw0pT7xau+fpZ7DfpyZ3DVrhaswcvqwzapMmmcw+I+L
+ CNk5y+c/NYBazLP4CAzjGANJgdcxmzPHazD0qyIUVFz7tX6vZlaMfFRudkMYLHbYpW3ltMYLh
+ S0s0HL5a6EotAaW8XJ8EnAA8BBPQImsT++42q1aMN3Iyf+l7DXw9n4ppab7VWXNC8V3jBGiTy
+ B20eg6WR9vmsfHsQKqeLTJiakT5/zoTXt63OeHAspT7oF3Kfmu5U3O/w6r9kMTDr4DDg0OD1X
+ K+TWvR2cykRG8LCZoeKgikLKBSHbDFFl+RVJsGCQOjZZxEOo14vLNkeXJI+IKzXgBiB5Kv2We
+ w0y0e1FZTp1sSLr63RGENVE/gZonqNdzbZit8z6ymmRRkTXMItGAV58tcZpeSuppY1oYRg9T+
+ o9Yn/sqEMv29ZFuy/HSCFLa+15QcBZHNSIkdxoq2BrytnVthhqYi/1PNOmqyJ5ax4XoUfQ63Z
+ 7KMkwVd0FksPx4jPDC2fpk5ExXBh5GbesdMqOJmI4QjgHQ6NkYZubOcml4d3vMfu4BLZ0nz1X
+ cHtwgfJvYSiWzWXPbTMgpHN/o1tDyUyAYKECfbtu5L488RopbTmCqAHHogcR+jKFbsO5B6wZc
+ PEYKoKPI9UDV0oZFby1nX9rcEWU2K2DIUOqy8lFn6t9UBecSfEydjtQzneQeDYZZud4EXIRk2
+ B/New7mQtcfElk5RSGqo1WLKvgtqlltmqGN5UneimyxRRyk+qd9ODhTiF2HxzH1AVSknOie4F
+ b3TDHKiYiEYn5n4KrULd6b+q+m7knO4JrJMbOt5ll98AGYr29iwAr5vzPVmi7LnbT2Dc2SBrc
+ 71tV86GiRZl+v+/wenWz2r5dYFCvyG9EeEBvglpOiNSBftQCD05mDif6BOYfAG1tqiOX3pMxU
+ s8BjfteuFvSlQAEPlp6z3tQ8zrkBFncHThQrvyV6V9S7QJvEMTIUywoRXaVwWbWp5/wsSewNj
+ CsDLlUv+GXH+xKosGAOCGp3GcPEK6m4Knq/EkRZv6Wb3NKycFHkgCHVDlYEdR/m1i6LkPZuLy
+ +z4GbcTdmqXvOZNb3mwxalNE4Yp9lWnVs5On4p4Pq00v9ePsczmZ0ps5juRRdQOrF6Ijn3BG8
+ 6VbPw/8OVXMnbd9NbqgW+haLkRIn+X4ezn6wWn9O8N6YnFjUGkaHnbJ7Q6016X7DQSRr8RI2C
+ 2lJ8KMnFUyx0uNKjKmf0h7J5u9nW+wxjwP4P4djIWL+4oRqT6PLEb3UJ9TZfI/ZyhnPzsnBik
+ SQ/nLoQu/FE7vczRFAYWc4fxxVOVW5oB98YRwFR/bqxVy9iHSihaqJDKH8xEOV/QAxNqqopZX
+ TaQsFRUdALpuYLkwszvqCCbwZn72OB+LZB9dysYxOM+PtLLojdPdzjGcjojWv1unrauDCUAl4
+ vZ6ajo59K6N6USTLAhqHLBokObI6728tOZHhgPiUSFqa+3JjyOVzgSmy1aMVyQOdu/xS0/kHv
+ VUDMyRb9b5uLdKlGh+43z0Wz5rb8N7vbGjsufPZ7GUOPmtjwrXBOJE2MgnmlWITDcH5TU0FSD
+ zf9P7BWvzAEKkpaVcCVtF/Z168+U4ZJp9zoowgvnCGBIe3iBVrfUDmoU6RwJ1qvDl3LWIylq4
+ v94JDvYrbhfuEx7kL/Bokra0rFUuYobUFmy4vo4cxuh/DQFlSfU6fsTJMCorKGSP5xkBsL1rK
+ BEaE2zqG5H7tCQM+bPx4WrqSDl5Tox0IbHrrlTooV7w0MiF9PPoAlBS6WD8eMNQt2vhr0AD2j
+ AF+CfGKf2ZYvg9xUnD9l1mc4C2RvG+FoVGcXjGZcCjqhJ0RJclgC/U6d495wXhoOY2rW7rWhZ
+ BIKUdqRNsM4bgM4NM5wpUXLfDadxdBOXp21ePBMMtQkgKOwqYaChrWyk6BIeEic1cK/EXAZOM
+ i/6/Po8VJrq6l3+tVIWiYMP0rgK9BkTy9vRXtskq3pPgtoVcEu9Ll1OcUfvtXI9ALs8OvOVhO
+ /vMetT8OUSeeS2AdOxe+PntCVXPyuLzWxTg/gEXXCmUnodutR/Q35dffDydLsBu5BQWQvmLTu
+ sD3wAWUBYZNKe69t6UrTE5SUCUmTww015qZ6M8ttUABd5EaSDkP0XI6YYvmQyzzA//oNLWvEE
+ UfTPgV5dilHL1HQ2cePRhYd9GdffC0pz+dlrb+OS7vHnNhKIVMtvTqQEB16tJf4YV8f3ZRlPJ
+ ezZ/LH/6jFfc7S0mY/FU2nxWFPOkITjADA9i1i6HEousrLkTPIyJztNrIATZ2UOkVW1uSgZIm
+ +wVWJenrqLBk/MT+JxJQ/3a3gfE2U6NHXzBLEGAAHfAkDf2oFy29MSbpIlKxVn/5h+XW2dk+4
+ VIgy5uwDZKbGTtfhtRRjbIrQy6IF4TO2GqVEdSCB4yotbXjFESdjL8T0NyaSZ8/2fOoagelac
+ 3PxceIb804HYhB63pahvaCDTZEI/DpLKYRyHcJWKYhZ05oawBrfwwivqJpa4LPXbOKVJDPX2C
+ FdZs3fFsI0N0jgm4QaOPH1r6Tvc95gaZ17zTOzpu/v2qbKzsCywvkUEBkOEblIOBeYVNDdaFI
+ GzuNZ/eX9EVhVs4Y5PXuXov/s5akAWCOPIth8IIyvDsZSWtzLzw5kedI771JSs9wuF1ITTdSB
+ aPp5ifOuX24YookEIqpYm3xbtAGEieNa8LQ9rsOYprFcj0Yhkc2qaKV1QCANF0P3NKRvFEERU
+ 7ECddwoXF42n6J6bRzfTiYCGZLAsksjwUlcvWyuZoeUin6YqyehV8KjBlvKHDQA9ccenO3HWZ
+ SyBWukj6DVZmzrdkV/bEkrpo6b74fH8qUFYj9FQCMmQiU+H7NBGkLTZwCkCBt+T63QJtxbpi1
+ Xms6YCZoo96gXEwSeQGeUecNC5FzEmc3QNC2mBQZe4mWY7qUQ62kJqCaAX4yyXpG9Rq3SWB1v
+ AXQzfh6SF3tCNhWcvwjL8dT7aEn7ekzPtK81oKJ0D+LDvFyqS4nt5Nh7ZsXer218QHhcyg8Er
+ X22WWcr8A1OhJ9C8TK1FPeWWwlQTuwkZ2kyomb9v2EHqV0R+BpKF6m89sb0WLOE5hXxdUcOVe
+ Za6/deZrVC56bEnL+WH3SRl4GZ/wK1h8ihncm8GWzgOMynR9H+hQDZGCpB54PrA8GzFmcEVaA
+ H5ku5Ye/Y22ZhlHGejPwtbUPkAZvj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,71 +154,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/18/25 11:29, Yao Zi wrote:
+> On Tue, Nov 18, 2025 at 08:08:12AM +0100, Heinrich Schuchardt wrote:
+>> Am 18. November 2025 00:35:51 MEZ schrieb E Shattow <e@freeshell.de>:
+>>> Updates to the JH7110 common description:
+>>> - add detailed overview of JH-7110 SoC and boot process
+>>> - revise descriptions of deprecated StarFive loader modes
+>>> - refresh build directions grouped with SPL debug advice
+>>> - reduce usage instructions into common methods shared by supported bo=
+ards
+>>> - cite starfive_visionfive2 board maintainer description of StarFive l=
+oader
+>>> - cite published datasheets for ambient operating temperature data
+>>>
+>>> Redundant/deprecated sections of each board doc are dropped accordingl=
+y:
+>>> - deepcomputing fml13v01
+>>> - milk-v mars
+>>> - pine64 star64 (also add inclusion of JH7110 common description)
+>>> - visionfive2
+>>>
+>>> Signed-off-by: E Shattow <e@freeshell.de>
+>>> ---
+>>> Changes since v1:
+>>>
+>>> By popular request I have expanded on the topic of deprecated boot mod=
+es.
+>>> For those users that rely on this it is now more descriptive about
+>>> factors contributing to the feature deprecation and naming the U-Boot
+>>> release version when this change is in effect. Re-introducing these mo=
+des
+>>> is out of scope for this documentation series, however.
+>>>
+>>> - reST needs a space between numeric and the substitution
+>>> - add comment identifying where U-Boot SPL again reads state of [RGPIO=
+1:RGPIO0]
+>>>   useful to refer to for boards with button+transistors instead of MSE=
+L DIP
+>>> - cite reference to JH-7110 Boot User Guide BootROM description of Sta=
+rFive loader
+>>> - expand on topic of supported and deprecated U-Boot SPL boot modes
+>>> - cite from published datasheets for ambient operating temperature dat=
+a
+>>> - drop not-yet-published OpenSBI version recommendation
+>>> ---
+>=20
+> ...
+>=20
+>>> diff --git a/doc/board/starfive/jh7110_common.rst b/doc/board/starfive=
+/jh7110_common.rst
+>>> index 4a8058ee5da..2f049b4c327 100644
+>>> --- a/doc/board/starfive/jh7110_common.rst
+>>> +++ b/doc/board/starfive/jh7110_common.rst
+>>> @@ -1,103 +1,560 @@
+>=20
+> ...
+>=20
+>>> +There are additional unexplained GUID references in the JH-7110 MaskR=
+OM so the
+>>> +description given is not complete. Attribution and modifications to t=
+he GPL2.0+
+>>> +source code used in StarFive loader have not been published as of thi=
+s writing.
+>>> +Due to the lack of verifiable documentation the upstream Linux device=
+tree does
+>>> +not contain hints for mmc0 and mmc1 interfaces to be included in U-Bo=
+ot SPL. As
+>>> +of U-Boot release v2025.10 and newer the U-Boot specific devicetree o=
+verride of
+>>> +hints for mmc0 and mmc1 interfaces that are required for the deprecat=
+ed modes
+>>> +have been dropped marking the deprecation of these boot modes in U-Bo=
+ot.
+>>
+>> Do you mean upstream  U-Boot will fail to boot from SD-card, which is t=
+he Ubuntu default?
+>>
+>> This would need to be fixed urgently.
+>=20
+> U-Boot master has failed to boot from SD-Card on VisionFive 2 for some
+> time, see my previous report[1] in Octorber.
+>=20
+> Best regards,
+> Yao Zi
+>=20
+> [1]: https://lore.kernel.org/u-boot/aPYUlyni65Ux8xpq@pie/
 
+Hello Yao,
 
-On 18/11/25 17:50, Siddharth Vadapalli wrote:
-> The helper function "ti_pd_get()" is responsible for powering on a
-> domain if it is powered off. In the current implementation, if a power
-> domain is determined to be powered off - no prior users and the PDCTL
-> register indicates that the user desired state is OFF, then powering on
-> the domain constitutes setting 'PDCTL_STATE_ON' field of the PDCTL
-> register.
-> 
-> While the current implementation indeed requests the power domain to be
-> transition to the ON state, the helper function "ti_pd_get()" doesn't
-> verify that the power domain has 'transitioned' to the ON state before
-> returning to its caller. As a result, it is possible that the device(s)
-> belonging to the power domain may be accessed before it is truly powered
-> on, leading to a bus abort.
-> 
-> Fix this by waiting for the power domain to transition to the ON state
-> by using "ti_pd_wait()" before returning from "ti_pd_get()".
-> 
-> Fixes: 144464bd2c67 ("power: domain: Introduce driver for raw TI K3 PDs")
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> ---
-> 
-> Hello,
-> 
-> This patch is based on commit
-> 91861e5a30d Merge tag 'u-boot-stm32-20251117' of https://source.denx.de/u-boot/custodians/u-boot-stm
-> of the master branch of U-Boot.
-> 
-> v2 of this patch is at:
-> https://lore.kernel.org/r/20251114150243.96429-1-s-vadapalli@ti.com/
-> Changes since v2:
-> - Rebased patch on latest master.
-> - Fixed the parameter passed to ti_pd_wait().
-> 
-> Patch has been tested for PCIe Boot on J784S4 SoC and the 1 millisecond
-> delay is no longer required in the pcie_cdns_ti_ep.c driver with this
-> patch.
+Thank you for pointing to your former communication.
 
-Tested the patch on J784s4. Following are the test logs.
+E's commit 27f617019dd0 ("riscv: dts: starfive: prune redundant=20
+jh7110-common overrides") removed bootph-pre-ram properties - in=20
+contradiction to the commit message - removed bootph-pre-ram properties=20
+which were not provided by upstream device-trees.
 
-Logs : 
-https://gist.github.com/hrushikesh221/d21c33bcb88f7a271ae5aba66954cdb2
+I sent a mail to point to the issue on the kernel mailing list:
 
-Tested-by: Hrushikesh Salunke <h-salunke@ti.com>
+Re: [PATCH v2 4/8] riscv: dts: starfive: Split jh7110-common.dtsi and=20
+move opp table to it
+https://lore.kernel.org/all/ffdfc550-559b-4c59-9873-3f040fc3bb0e@canonical=
+.com/
 
-> 
-> Regards,
-> Siddharth.
-> 
->   drivers/power/domain/ti-power-domain.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
-> index c3519307340..a554e659392 100644
-> --- a/drivers/power/domain/ti-power-domain.c
-> +++ b/drivers/power/domain/ti-power-domain.c
-> @@ -227,7 +227,7 @@ static int ti_pd_get(struct ti_pd *pd)
->   
->   	pd_write(pdctl, pd, PSC_PDCTL);
->   
-> -	return 0;
-> +	return ti_pd_wait(pd);
->   }
->   
->   static int ti_pd_put(struct ti_pd *pd)
+With that additional bootph-pre-ram I am able to boot from SD-card again.
 
+I have not yet checked if something is missing to boot from eMMC.
+
+Best regards
+
+Heinrich
