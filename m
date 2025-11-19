@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B638CF34C1
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:56:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BA77CF34C1
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:57:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A680983F72;
-	Wed, 19 Nov 2025 15:55:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E0AA083FDC;
+	Wed, 19 Nov 2025 15:55:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ag2h9xNr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vk6s/lLI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2839483FBF; Wed, 19 Nov 2025 15:55:35 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id A064D83FDA; Wed, 19 Nov 2025 15:55:36 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1587983FC8
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:55:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90C878004F
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:55:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-657534478a0so1503854eaf.1
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:55:33 -0800 (PST)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-4503ee5c160so3140559b6e.1
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:55:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763564132; x=1764168932; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763564133; x=1764168933; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NsuhDE2lCBX0C+v7XFYeUSjsuQe+gfuikfjn1Rn3dZw=;
- b=ag2h9xNrYRui0Q7G6HFCXRlBdrszg6yZw+d6q/qSJ5ts5lm9ZbFY9BGA5A29cFnVj1
- xlFPTIE5UNcTVlrtuK4xU69k95AgQ3fvsYvg7F/aoSiAHiY26c3C8UEwRwuqRE5rlvjd
- 6j5wG7XrVhILm70qWB/bp7Wfk/chkPsxpzM8M=
+ bh=ohR3fm+x8RRfXsNaA2Pkd6uZUJiWgOAZe6PqbZ0DwnE=;
+ b=Vk6s/lLI0PVbKx/SW/xkQLOT6FvO2VWEQRUDgalv1SuBuTmuYz5j2wBJnayYjR3Tr1
+ r9+cwsBcRQnzIQ6PmRr0Y8iyyCKKxy6ulnqyR0ZJzKEnx5cPn42sUPq6NwzmJGxR7k/P
+ J0xHRuP4Llrqi8AVEeYUoh2zOw6jqdlIwc+EE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763564132; x=1764168932;
+ d=1e100.net; s=20230601; t=1763564133; x=1764168933;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NsuhDE2lCBX0C+v7XFYeUSjsuQe+gfuikfjn1Rn3dZw=;
- b=UYL1Gw2yEec8JjNUaF1Ghzh9V9rtX0hqZ9n2oTuU5rXqUHxIDeROvwkNaSOzc+vX+o
- YIOB31Epbh5qS7Z6Xud8/VsF7CrCU/rl+myw27xNKFI597ujeRpZEkgddIoyb9bbtNDl
- gDgAbz7NMn9Bk6z8UepzPsaPQzApiJv+W25PejgbaZv3VkUk6kAVOmKNJY38hYZkniTw
- TUEW+VrkMqN5W5nFdoT7A9gkgI7S3kq2fU+kSub8KIcF+hD1aHSRcU6zZ7k1BxdoVF+7
- ET13k3GRrkNOnLeFwWVAVytTQXoFAtVjBX9rvmER6K85PIme0s+WsR7JyhFinwQy5j0L
- C9RQ==
-X-Gm-Message-State: AOJu0YyqJ1rS8sqiFEm4Ne/zD/r23TiQKrQEFqat5WZPu0LGbjbRJEui
- K4ERbOypaZD/pp5PMBSBK53dhguVo6TLQv06EBsXecQmbkGbQnEu+WXTCdYPY0QdEl41vp8Y9B0
- N2JuA/YTJyA==
-X-Gm-Gg: ASbGncvLYG7pV1DrL/n2qMFNKrUjTMIS5yDla6NG6XzuBvWklfXX2IklIlKE+TwwUmT
- u72KCKIu18EYeloW5Db7+5/XjzEIozxx4aJGgngprYnXWDVoCgB2fDG9aDARGcq83kxAO5Tvb+p
- 013KgNPxJBmZOEowbk9xn7U0X12OzFNe8VxrVNzpJ5EEWR0R1x3vYKYWIpxKodtWPCS45eQE1r5
- a75pkbukt60ElNgqEfzl9Roe87Y8tqzPYK/sO4GIHoyOS/w9Jf2ggHyKb7xOfijGVmvBf/jRSns
- hPfan8/JpaI1vGDjPPTbPLmdVyHA8fx4A/Syd/nSmKZ94mksT28bgS8DYijIVAvzk0PJCM5ZA48
- QX/kI6dzSX2ZC+dh9lp7sfCDnfXEEKXewBqpb/SSWzTyCYzGoxYUYwny1TGR5MKTCJxsy4HwT1v
- vALzzg5CZedeNgsDkovQCXVrT2kGkqPtJ8C6p0WFub06H52XnRU8cOLGBZEXLoy4k=
-X-Google-Smtp-Source: AGHT+IGbjqfJpo6kaaL6JwrI+f5rz4xehtditoRoEmG9EZxI/P8AMokzTHM4VCZkId+zhnXZhbg+Ug==
-X-Received: by 2002:a05:6820:60d:b0:657:5202:4655 with SMTP id
- 006d021491bc7-65752024cb0mr5033582eaf.8.1763564131809; 
- Wed, 19 Nov 2025 06:55:31 -0800 (PST)
+ bh=ohR3fm+x8RRfXsNaA2Pkd6uZUJiWgOAZe6PqbZ0DwnE=;
+ b=kK/hmd6NSh7JRelYT/VaG0zZgXNq4ApWHqy2sktwtJ9yaMYXbrNh2Io53VCZ4IVQCc
+ qu8VS+sbdiio2RrEGqQjk5+C/XmcFOfi3kZiwWPPIb+G7clT8rmSIMsZe6fUsMKdYvcn
+ S93+V/TwVCLG0G6VnTUCAHuFJkNrC+gFYetQ2roJpSGg1yRI6Y1RMNqBKy18sLs4h3T6
+ rFxgDpZtbRBBaP3DR6r/AqJVCnrUHjvJiypRq6sw5InouoRY4qP2XMUzzSPB3NnBNDCn
+ 6u+l+onRuACxCqQNORJ22E3NQHXsmo8HHi0Y81+atvJS1tqPe0t1MJQFcL2aSeNRA7OQ
+ fx6Q==
+X-Gm-Message-State: AOJu0Yx3wM19Hq2lzwXWgJ8Wx1RHOhqZyh568wkEkO+4h3iOob8XzEU9
+ xTL+zSosJBEm2XesIsKdBkTkk4P2Eh5vHiOd4FAZMUwP4BBeGdVoJJZ9xAJyL9cut4xBcC3EDSL
+ o3zICG4+R3Q==
+X-Gm-Gg: ASbGncuPNWE0ScpZXGnDyamyL5O/cfDbYr9aYhheuOfmA0c5g6r27ecdjoWoG0ItNB9
+ BhYk7oYG9NUdQpZNkSDIFrkoS5HoEcBsKIbhfemBejI2w66JLPfGe8+EcT6T0Cj1f52Z2bP49b6
+ JL/0zuWLw8cpurqU5llU/hP0foGCKbPBe3VDY5liphLVEN5rJTMyFqpstvJJHlfn17qMZ07qI/i
+ z0U7+SHMPqqowt9EEQj0hLwVJnV9z3BaSNetGDKuEfE6WHKGDp3AhnXfmMhgsyxtBgl1+hol1J6
+ QluC4X189b0nmySJ9vxKL4f0/oyodgE4cBq74ptZ8Wh36TpFlFmgRVYOkmf0q8MzicXgrrc5sxy
+ 4vCbsUBafVImWHRSiZZdQdlrOxJhAbBoPnjemM95xU39ECs+Q+vc1LfJUPAMml8YTLQ6OhBIZD3
+ ryTT8cvTze7v3JzFN+1rptr9pagYHq/IZDbaBhIkEPIkZ1i0GLtXkVMlmf71GDYkt3op2FN0XBX
+ A==
+X-Google-Smtp-Source: AGHT+IFngq2jkml2QmalVD4PZL8KRaIVHHLgommzh5O4rjP2Z4cbvA3sHKT2fPIjVt7G+Zg6E0Bkuw==
+X-Received: by 2002:a05:6808:2e48:b0:450:d3af:ba4c with SMTP id
+ 5614622812f47-450d3afbdf2mr4214930b6e.52.1763564133351; 
+ Wed, 19 Nov 2025 06:55:33 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65724cb873dsm6366340eaf.4.2025.11.19.06.55.31
+ 5614622812f47-4508a6df248sm6060673b6e.22.2025.11.19.06.55.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Nov 2025 06:55:31 -0800 (PST)
+ Wed, 19 Nov 2025 06:55:33 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Mingkai Hu <mingkai.hu@nxp.com>
-Subject: [PATCH] ls1043a: Stop disabling device tree relocation
-Date: Wed, 19 Nov 2025 08:55:30 -0600
-Message-ID: <20251119145530.843331-1-trini@konsulko.com>
+Cc: "Derald D. Woods" <woods.technical@gmail.com>
+Subject: [PATCH] omap3_evm: Stop disabling device tree relocation
+Date: Wed, 19 Nov 2025 08:55:32 -0600
+Message-ID: <20251119145532.843346-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -105,23 +106,24 @@ tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
 or bootm_mapsize are the correct way do this. Please see
 doc/usage/environment.rst for more details.
 
-Cc: Mingkai Hu <mingkai.hu@nxp.com>
+Cc: "Derald D. Woods" <woods.technical@gmail.com>
+
 ---
- include/configs/ls1043a_common.h | 1 -
+ include/configs/omap3_evm.h | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/include/configs/ls1043a_common.h b/include/configs/ls1043a_common.h
-index a02c752bbcf9..4c695388d2f7 100644
---- a/include/configs/ls1043a_common.h
-+++ b/include/configs/ls1043a_common.h
-@@ -90,7 +90,6 @@
- /* Initial environment variables */
- #define CFG_EXTRA_ENV_SETTINGS		\
- 	"hwconfig=fsl_ddr:bank_intlv=auto\0"	\
--	"fdt_high=0xffffffffffffffff\0"		\
- 	"initrd_high=0xffffffffffffffff\0"	\
- 	"kernel_addr=0x61000000\0"		\
- 	"scriptaddr=0x80000000\0"		\
+diff --git a/include/configs/omap3_evm.h b/include/configs/omap3_evm.h
+index 2cb2e52ad251..788e1d1d5e72 100644
+--- a/include/configs/omap3_evm.h
++++ b/include/configs/omap3_evm.h
+@@ -74,7 +74,6 @@
+ 	DEFAULT_MMC_TI_ARGS \
+ 	DEFAULT_FIT_TI_ARGS \
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+-	"fdt_high=0xffffffff\0" \
+ 	"console=ttyO0,115200n8\0" \
+ 	"bootdir=/boot\0" \
+ 	"bootenv=uEnv.txt\0" \
 -- 
 2.43.0
 
