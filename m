@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6332CF396B
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 17:02:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D407CF3959
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 17:02:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C38E983FF4;
-	Wed, 19 Nov 2025 18:01:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2CFC48401A;
+	Wed, 19 Nov 2025 18:01:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C7A684013; Wed, 19 Nov 2025 18:01:29 +0100 (CET)
-Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::190e])
+ id B9C7883FF4; Wed, 19 Nov 2025 18:01:29 +0100 (CET)
+Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
+ [83.166.143.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3164C83FF4
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 18:01:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ECAB835C6
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 18:01:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dBSS05tFFzsyl;
- Wed, 19 Nov 2025 18:01:20 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dBSS22nBqzsym;
+ Wed, 19 Nov 2025 18:01:22 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dBSS00rHYzFt3; Wed, 19 Nov 2025 18:01:20 +0100 (CET)
+ id 4dBSS14qq4zH8c; Wed, 19 Nov 2025 18:01:21 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 19 Nov 2025 18:01:13 +0100
-Subject: [PATCH 2/4] led: remove support for green status led in legacy API
+Date: Wed, 19 Nov 2025 18:01:15 +0100
+Subject: [PATCH 4/4] led: remove support for red LED in legacy API
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251119-corvus-led-red-green-v1-2-ce86b8d59dfc@cherry.de>
+Message-Id: <20251119-corvus-led-red-green-v1-4-ce86b8d59dfc@cherry.de>
 References: <20251119-corvus-led-red-green-v1-0-ce86b8d59dfc@cherry.de>
 In-Reply-To: <20251119-corvus-led-red-green-v1-0-ce86b8d59dfc@cherry.de>
 To: u-boot@lists.denx.de
@@ -70,142 +70,195 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-The last user of it was removed in a previous commit so let's remove its
-support entirely.
+To the exception of red_led_on in the arm-specific assembly code, all
+code interacting with the red status LED was guarded by the
+CONFIG_LED_STATUS_RED symbol, which is enabled in none of the upstream
+defconfigs.
+
+Since the last board which overrode the weak red_led_on function got
+migrated to the new LED mechanism, there's also no user of the
+arm-specific assembly code anymore, therefore it can be removed along
+the other unreachable code sections.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
+ arch/arm/lib/crt0.S     |  3 ---
  cmd/legacy_led.c        |  6 ------
- common/board_f.c        |  2 --
- doc/api/led.rst         |  5 +----
+ common/board_f.c        | 14 --------------
+ doc/api/led.rst         | 16 ----------------
  drivers/led/Kconfig     | 14 --------------
- drivers/misc/gpio_led.c | 12 ------------
- include/status_led.h    |  4 ----
- 6 files changed, 1 insertion(+), 42 deletions(-)
+ drivers/misc/gpio_led.c | 18 ------------------
+ include/status_led.h    | 12 ------------
+ 7 files changed, 83 deletions(-)
 
+diff --git a/arch/arm/lib/crt0.S b/arch/arm/lib/crt0.S
+index 9acaf2cddef..d10c129705d 100644
+--- a/arch/arm/lib/crt0.S
++++ b/arch/arm/lib/crt0.S
+@@ -183,9 +183,6 @@ here:
+ 	movne	r9, r0
+ # endif
+ 
+-#if ! defined(CONFIG_XPL_BUILD)
+-	bl red_led_on
+-#endif
+ 	/* call board_init_r(gd_t *id, ulong dest_addr) */
+ 	mov     r0, r9                  /* gd_t */
+ 	ldr	r1, [r9, #GD_RELOCADDR]	/* dest_addr */
 diff --git a/cmd/legacy_led.c b/cmd/legacy_led.c
-index 609a4b08e0a..2c6d606f48b 100644
+index 2c6d606f48b..4e0d09522ad 100644
 --- a/cmd/legacy_led.c
 +++ b/cmd/legacy_led.c
-@@ -45,9 +45,6 @@ static const led_tbl_t led_commands[] = {
+@@ -44,9 +44,6 @@ static const led_tbl_t led_commands[] = {
+ #ifdef CONFIG_LED_STATUS5
  	{ "5", CONFIG_LED_STATUS_BIT5, NULL, NULL, NULL },
  #endif
- #endif
--#ifdef CONFIG_LED_STATUS_GREEN
--	{ "green", CONFIG_LED_STATUS_GREEN, green_led_off, green_led_on, NULL },
 -#endif
- #ifdef CONFIG_LED_STATUS_RED
- 	{ "red", CONFIG_LED_STATUS_RED, red_led_off, red_led_on, NULL },
+-#ifdef CONFIG_LED_STATUS_RED
+-	{ "red", CONFIG_LED_STATUS_RED, red_led_off, red_led_on, NULL },
  #endif
-@@ -162,9 +159,6 @@ U_BOOT_CMD(
+ 	{ NULL, 0, NULL, NULL, NULL }
+ };
+@@ -158,9 +155,6 @@ U_BOOT_CMD(
+ #ifdef CONFIG_LED_STATUS5
  	"5|"
  #endif
- #endif
--#ifdef CONFIG_LED_STATUS_GREEN
--	"green|"
 -#endif
- #ifdef CONFIG_LED_STATUS_RED
- 	"red|"
+-#ifdef CONFIG_LED_STATUS_RED
+-	"red|"
  #endif
+ 	"all] [on|off|toggle|blink] [blink-freq in ms]",
+ 	"[led_name] [on|off|toggle|blink] sets or clears led(s)"
 diff --git a/common/board_f.c b/common/board_f.c
-index 224cc0ac561..74571cb6d91 100644
+index 74571cb6d91..df2b0dc899b 100644
 --- a/common/board_f.c
 +++ b/common/board_f.c
-@@ -67,8 +67,6 @@ DECLARE_GLOBAL_DATA_PTR;
-  */
- __weak void red_led_on(void) {}
- __weak void red_led_off(void) {}
--__weak void green_led_on(void) {}
--__weak void green_led_off(void) {}
+@@ -54,20 +54,6 @@
  
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-/*
+- * TODO(sjg@chromium.org): IMO this code should be
+- * refactored to a single function, something like:
+- *
+- * void led_set_state(enum led_colour_t colour, int on);
+- */
+-/************************************************************************
+- * Coloured LED functionality
+- ************************************************************************
+- * May be supplied by boards if desired
+- */
+-__weak void red_led_on(void) {}
+-__weak void red_led_off(void) {}
+-
  /*
   * Why is gd allocated a register? Prior to reloc it might be better to
+  * just pass it around to each function in this file?
 diff --git a/doc/api/led.rst b/doc/api/led.rst
-index c7fe56f3d89..e9705eb69a5 100644
+index e9705eb69a5..1a61f2ad916 100644
 --- a/doc/api/led.rst
 +++ b/doc/api/led.rst
-@@ -58,8 +58,7 @@ CONFIG_STATUS_LED_BOOT is the LED to light when the board is booting.
+@@ -57,9 +57,6 @@ Some other LED macros
+ CONFIG_STATUS_LED_BOOT is the LED to light when the board is booting.
  This must be a valid LED number (0-5).
  
- CONFIG_STATUS_LED_RED is the red LED. It is used to signal errors. This must be
--a valid LED number (0-5). Other similar color LED's macros are
--CONFIG_STATUS_LED_GREEN.
-+a valid LED number (0-5).
- 
+-CONFIG_STATUS_LED_RED is the red LED. It is used to signal errors. This must be
+-a valid LED number (0-5).
+-
  General LED functions
  ~~~~~~~~~~~~~~~~~~~~~
-@@ -81,8 +80,6 @@ The functions names explain their purpose.
+ The following functions should be defined:
+@@ -71,19 +68,6 @@ __led_set is called to change the state of the LED.
  
- - red_LED_on
- - red_LED_off
--- green_LED_on
--- green_LED_off
+ __led_toggle is called to toggle the current state of the LED.
  
- These are weakly defined in arch/arm/lib/board.c to noops. Where applicable, define
- these functions in the board specific source.
+-Colour LED
+-----------
+-
+-Colour LED's are at present only used by ARM.
+-
+-The functions names explain their purpose.
+-
+-- red_LED_on
+-- red_LED_off
+-
+-These are weakly defined in arch/arm/lib/board.c to noops. Where applicable, define
+-these functions in the board specific source.
+-
+ TBD : Describe older board dependent macros similar to what is done for
+ 
+ TBD : Describe general support via asm/status_led.h
 diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index 1077792efb0..6b043f9a522 100644
+index 6b043f9a522..cc715ceb286 100644
 --- a/drivers/led/Kconfig
 +++ b/drivers/led/Kconfig
-@@ -414,20 +414,6 @@ config LED_STATUS_RED
+@@ -400,20 +400,6 @@ config LED_STATUS_BOOT
  
- endif # LED_STATUS_RED_ENABLE
+ endif # LED_STATUS_BOOT_ENABLE
  
--config LED_STATUS_GREEN_ENABLE
--	bool "Enable green LED"
+-config LED_STATUS_RED_ENABLE
+-	bool "Enable red LED"
 -	help
--	  Enable green status LED.
+-	  Enable red status LED.
 -
--if LED_STATUS_GREEN_ENABLE
+-if LED_STATUS_RED_ENABLE
 -
--config LED_STATUS_GREEN
--	int "Green LED identification"
+-config LED_STATUS_RED
+-	int "Red LED identification"
 -	help
--	  Valid enabled LED device number (0-5).
+-	  Valid enabled LED device number.
 -
--endif # LED_STATUS_GREEN_ENABLE
+-endif # LED_STATUS_RED_ENABLE
 -
  config LED_STATUS_CMD
  	bool "Enable status LED commands"
  
 diff --git a/drivers/misc/gpio_led.c b/drivers/misc/gpio_led.c
-index e806b1f241f..a1432a53440 100644
+index a1432a53440..1e2f83cca93 100644
 --- a/drivers/misc/gpio_led.c
 +++ b/drivers/misc/gpio_led.c
-@@ -67,16 +67,4 @@ void red_led_off(void)
+@@ -50,21 +50,3 @@ void __led_toggle(led_id_t mask)
+ {
+ 	gpio_set_value(mask, !gpio_get_value(mask));
  }
- #endif
- 
--#ifdef CONFIG_LED_STATUS_GREEN
--void green_led_on(void)
+-
+-#ifdef CONFIG_GPIO_LED_STUBS
+-
+-/* 'generic' override of colored LED stubs, to use GPIO functions instead */
+-
+-#ifdef CONFIG_LED_STATUS_RED
+-void red_led_on(void)
 -{
--	__led_set(CONFIG_LED_STATUS_GREEN, CONFIG_LED_STATUS_ON);
+-	__led_set(CONFIG_LED_STATUS_RED, CONFIG_LED_STATUS_ON);
 -}
 -
--void green_led_off(void)
+-void red_led_off(void)
 -{
--	__led_set(CONFIG_LED_STATUS_GREEN, CONFIG_LED_STATUS_OFF);
+-	__led_set(CONFIG_LED_STATUS_RED, CONFIG_LED_STATUS_OFF);
 -}
 -#endif
 -
- #endif /* CONFIG_GPIO_LED_STUBS */
+-#endif /* CONFIG_GPIO_LED_STUBS */
 diff --git a/include/status_led.h b/include/status_led.h
-index 85e583f18c8..8e8b19f8c19 100644
+index 8e8b19f8c19..c3ff399b1ae 100644
 --- a/include/status_led.h
 +++ b/include/status_led.h
-@@ -72,13 +72,9 @@ static inline void status_led_boot_blink(void) { }
- #ifndef	__ASSEMBLY__
- void red_led_on(void);
- void red_led_off(void);
--void green_led_on(void);
--void green_led_off(void);
- #else
- 	.extern red_led_on
- 	.extern red_led_off
--	.extern green_led_on
--	.extern green_led_off
- #endif
+@@ -65,16 +65,4 @@ static inline void status_led_set(int led, int state) { }
+ static inline void status_led_boot_blink(void) { }
  
+ #endif	/* CONFIG_LED_STATUS	*/
+-
+-/*
+- * Coloured LEDs API
+- */
+-#ifndef	__ASSEMBLY__
+-void red_led_on(void);
+-void red_led_off(void);
+-#else
+-	.extern red_led_on
+-	.extern red_led_off
+-#endif
+-
  #endif	/* _STATUS_LED_H_	*/
 
 -- 
