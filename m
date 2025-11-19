@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68DA4CF3185
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 09:41:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D602FCF3185
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 09:41:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EDF683966;
-	Wed, 19 Nov 2025 10:41:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E020083BD2;
+	Wed, 19 Nov 2025 10:41:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="R7brMSK7";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="MQsn+jDF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BC218397A; Wed, 19 Nov 2025 10:41:28 +0100 (CET)
+ id D75D483DE9; Wed, 19 Nov 2025 10:41:36 +0100 (CET)
 Received: from mx.nabladev.com (mx.nabladev.com
  [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B42B5800B6
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 10:41:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 028C783DBF
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 10:41:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lukma@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id DF01B10848B; Wed, 19 Nov 2025 10:41:24 +0100 (CET)
+ with ESMTPSA id 3F73F10848B; Wed, 19 Nov 2025 10:41:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1763545285;
+ s=dkim; t=1763545294;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=LmJcqcxBuDhkLFryHxK0KFloI4Bc6C9UrGFMK3obfQc=;
- b=R7brMSK73z8z7bOHo7fWwhkJBTIryCl7pkWoDzlxTVtwCSMX3AnjY2DrcicDqt3aBr50Ym
- QdzoynTiqUrqXgL8ZbNjsN94a+hI2PSwSSQ3zsyGtreCYNuadKEKkPaSERwQ3Y/G2UsyNc
- 2ZWXkG987gpICJHx1FvnAHetzT9nHZ/6SEAVLNqCHNgl+/4touWzY96QpTKAg3CR/52b4z
- 4zy1M9mVpAJ7j+RHLNe40kBp3YbhcZ+KofbRppZFXg1dDGs+QRCClEmuLYEx/OgFLPJ0Uq
- cO0Fx7t7WrGmqvZe/U4+ACmxUCyga4kn7kLpBU7CsLiOREUb/K7csSY9pGG4CA==
-Date: Wed, 19 Nov 2025 10:41:23 +0100
+ bh=G6ZfxH+fq4oOPhJGEiYH3vqNmIDaglWXtPWW6Y9rWdI=;
+ b=MQsn+jDFXHrTe+vr5IZWhsAjahs+6KyppFgY4ngHql0KF23MzXjhs/Bvlrj8Aax+KvI7tz
+ vzHxekr1cDIw68ifMGwIbid5Yk8slQYsF/GnrjvN8xuvmCVeXn8kEuftQxqEzRDlsacoxn
+ LFhIfyYhCoi1qt+83AX4kG/iDBH3fBaP2jfBzvis++Y4K9umG4qqKDO3tW9bz/rAXWvi6x
+ GoRSmKt3Mfdv5Qcv0satw1u+ohVkywQmTObeYhN13zugMwlTdycQk7mPd2n8RjfzOqkKAs
+ 0LDEu2TIxYFwAF4TggbVRYyebE7VWO7jaMzuPJxj6x2umfHPjU3GyAx5QwJstQ==
+Date: Wed, 19 Nov 2025 10:41:32 +0100
 From: =?UTF-8?B?xYF1a2Fzeg==?= Majewski <lukma@nabladev.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] display5: Stop disabling device tree relocation
-Message-ID: <20251119104123.1d68e5cf@wsk>
-In-Reply-To: <20251118180356.591016-1-trini@konsulko.com>
-References: <20251118180356.591016-1-trini@konsulko.com>
+Subject: Re: [PATCH] kp_imx53: Stop disabling device tree relocation
+Message-ID: <20251119104132.7993c58c@wsk>
+In-Reply-To: <20251118180400.591100-1-trini@konsulko.com>
+References: <20251118180400.591100-1-trini@konsulko.com>
 Organization: Nabla
 X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
@@ -68,7 +68,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 18 Nov 2025 12:03:56 -0600
+On Tue, 18 Nov 2025 12:04:00 -0600
 Tom Rini <trini@konsulko.com> wrote:
 
 > Remove setting of fdt_high to ~0, which disables device tree
@@ -85,21 +85,21 @@ Tom Rini <trini@konsulko.com> wrote:
 >=20
 > Cc: Lukasz Majewski <lukma@nabladev.com>
 > ---
->  include/configs/display5.h | 1 -
+>  include/configs/kp_imx53.h | 1 -
 >  1 file changed, 1 deletion(-)
 >=20
-> diff --git a/include/configs/display5.h b/include/configs/display5.h
-> index 19d71d6066f8..c311b35bb978 100644
-> --- a/include/configs/display5.h
-> +++ b/include/configs/display5.h
-> @@ -175,7 +175,6 @@
->  	"fdtaddr=3D0x12800000\0" \
->  	"console=3Dttymxc4,115200 quiet cma=3D256M\0" \
->  	"fdtfile=3Dimx6q-display5.dtb\0" \
-> -	"fdt_high=3D0xffffffff\0" \
->  	"initrd_high=3D0xffffffff\0" \
->  	"kernel_file=3DfitImage\0" \
->  	"fitImg_fw_sz=3D0x2200\0" \
+> diff --git a/include/configs/kp_imx53.h b/include/configs/kp_imx53.h
+> index 78c6c67ab99f..bb136b7e1290 100644
+> --- a/include/configs/kp_imx53.h
+> +++ b/include/configs/kp_imx53.h
+> @@ -18,7 +18,6 @@
+>  #define CFG_EXTRA_ENV_SETTINGS \
+>  	"console=3Dttymxc1,115200\0"	\
+>  	"fdt_addr=3D0x75000000\0"		\
+> -	"fdt_high=3D0xffffffff\0"		\
+>  	"scriptaddr=3D0x74000000\0"	\
+>  	"kernel_file=3DfitImage\0"\
+>  	"silent=3D1\0"\
 
 Reviewed-by: =C5=81ukasz Majewski <lukma@nabladev.com>
 
