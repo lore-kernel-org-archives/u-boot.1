@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC01CF2591
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 13:17:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F048CF2591
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 13:18:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E63E83F6E;
-	Wed, 19 Nov 2025 14:17:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BD36383EFC;
+	Wed, 19 Nov 2025 14:17:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dWExExR5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CUh7Rb1w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07F2983F72; Wed, 19 Nov 2025 14:17:53 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 1AB4B837F2; Wed, 19 Nov 2025 14:17:59 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CE2083EFC
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 14:17:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A52883F6C
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 14:17:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5958187fa55so5034105e87.3
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 05:17:50 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-64149f78c0dso9969275a12.3
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 05:17:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763558270; x=1764163070; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=trR4yL6a7p3EIHIw4UhVL8M8R4d9FQwggmWMi6g934A=;
- b=dWExExR5XOqi6jYPckqZTmRASgoM/7T/s4iVn2X9rdNXYF9qq0HkiCJgME80NxyJtq
- EiDRGxy10EAuZsd3B+2NXDGnh1kchZSnB1IOBPjDDz4/HabZ3EkZK6PFXJMXWazRTAz/
- NJ1lErkPIBc/T3l+6ISeYjFkmsZLfWtmEYO2l8i3/zTVRuDi3mWwDh/O35/6LzT8qyeT
- TMubAr2uiyyiMrUlhlnwIRleEXu6NJOD6/GveO+JBIWZ74I7YuSPlHdvBD5/nbujE49N
- brTl913drzdPCGnmqsqtgjVoGNi27wxDNKDd2Do/Tbt/49l8dDPxie2Acxbcb5C6Zx3L
- X7cA==
+ d=chromium.org; s=google; t=1763558276; x=1764163076; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Pw5aKhMytdnB5bymrWCgYx8AlWdR0uUyCyLPUkFWAiM=;
+ b=CUh7Rb1wm/7GfEmTgdTxOvTC9oZ09OwWDu2JiJUDyxCunueLbof9c9TG68/P2YWfDg
+ aMfrwLITU3xXDsZ6XTcuTbOfVlOHUc0uOXBfuMTZxVU56CTTV/VStnzH+qFdeEIIa0jX
+ cKmGIOxOWDBmPSf63pbfdFCwImQPzpjqMtbvo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763558270; x=1764163070;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=trR4yL6a7p3EIHIw4UhVL8M8R4d9FQwggmWMi6g934A=;
- b=bIhaJfz/bixcDhZ2opQ9F3q/zYd39RCy5Na6qS3bzfMbWdisv+lBQt1w1sgCr3Ioix
- lY0a18LY1MWebLUbhaYKGZJ9klE9+3Hf0/L4fChT5B8v5wkDrR9vBKrgrIG+HyuBrRN+
- APrsh7TYqLIQp7eZJfqc9uN93FaWdT+xuuq9v3Ji4+E1E0qT+52852L6ph4cHxIeP5Wg
- 8uI4wRWyUmGq+GM1NeAS1KzQN+vGgyW11SFOlNBRQXGsqFZhZhC6N2vi49OgZqFT+vVB
- SQS3y+JI7Mqsf7XknW0fvPx2d8VRXvheB2lHZtBuvWHcLcDTZVcokhApmiOJcCQlT0m8
- UV7g==
-X-Gm-Message-State: AOJu0Yyd0h8otJKvfK2N3yWkyfbCWKz6wK/NrEjRyBZQ50cUnafwKmfB
- mEXdaikWgeQHFeFZ8ZKDhs/DMavFuF5C4R8+9NbUaXQXhzGOyo7KuEe9qevd9T75fkXaPay3QEI
- K4u1N7u3NqmymABEMfz5Mpnd32S7j1Sc=
-X-Gm-Gg: ASbGncugYtoa78V8NW+3UdE/Q3/tpLAbfqxVnPF/SGx3isQr9ouT/2iErVAGPSK3kjk
- /txpLWXejrJLAU/V3L/PKpzqGlWPqAZuYH8RqOMEc2RpBMruTi1VA/wMcc6M/7qrD0DXQ69RHo+
- lNVBRjB1q5PyOEw9+vmZ5qM6l3veAByFMBylc+/9YtIJlEUuElUbth8m00Zq/3UyLcdo3Jeh1UK
- goXQGb8/3TujLtf4NuPB871jvfTh0go0z9xFQ7dm+mh/tkCEWhBNpYkn05jw/eXJ0tK5lboZAan
- zSioKv22Wj6aucJDKNwMAYihJYY=
-X-Google-Smtp-Source: AGHT+IHPjuT77a6dZau8XTlNT8Yp8OGOlkNc0ov3Fa1+MQgnqlMHG9to2M94MqGe+m4T9Co5/aHtQjn9r+DX3yY5lTk=
-X-Received: by 2002:a05:6512:10cc:b0:55f:4f1f:93fa with SMTP id
- 2adb3069b0e04-5958420fcaemr7016867e87.42.1763558269894; Wed, 19 Nov 2025
- 05:17:49 -0800 (PST)
+ d=1e100.net; s=20230601; t=1763558276; x=1764163076;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Pw5aKhMytdnB5bymrWCgYx8AlWdR0uUyCyLPUkFWAiM=;
+ b=QqVAH5L0cIlLT2HbaStnF0Tq3wwdMIYhrAGNlyxKVZHuK6MFDGDd1CDIFhmZCNUenY
+ Kuv5OckFi05mLlOo7+Cd6aVp7Y1YqBrgy1vSUuumEhXZqdkBng4cha0KOunpnZINYgdd
+ j/8siJbxEJY8YBqjMB47SVUZYLR/a3Bl7UqZ2mTdl+NZBjHePrWPNf20EYxBAoj8fUCZ
+ vLUjZ9yml9kuFo0+wgo1ayaqOQaIIIJaGEfqP6JpLQhhV69bM06FNbt+jlAht6laXuGY
+ RNgS7N/FDNlUhAnZuV4WGIZVgLaHqYysQUakW1oX1woBaDZsJ0co7fVrgs3Am5bJkhkJ
+ iAww==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWgki6ZL0WIlp24On5CMzCmRDt0fXK1n6UJqExlX3wZzsOq4tmA5jzw4G9UA3MeeshI+Li1YGQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+305h7YGrVzsoI1Gk+ZTr8Kq8pp/cIASBWv43PnF7umZtWxOM
+ DApjp7RxikynkZrQeId9nqvIBOXZfUUpBEp3pYfLhPeJlEoyND2a2h+1qJjQhbNhhqmhR9lhkUR
+ 6vFv2M+2xkVEj4dgJXVBaTv7+ffpJ8r2GZojVm8tq
+X-Gm-Gg: ASbGncvAGBfbdxltg+AbvA84luLxKquYmO4dwONc2b1DqXkM8iSUrniZsNbRFUNfd5v
+ 3gon1Wx2TOh1K5CmrrLrvPGrFMgGjAEBIqaW1fdVbhUoWPPDeBbJLKLxUbZKrwJCGZFvAaA8Gjb
+ nK9hX1pj8Kq9u/wEABgMZpAs/+8IeWY/kSxHznjoBzvcxTHs2QZBKuZWbR4jYlrk/uzeacPENdK
+ jWrt0KwK0EmjHY6gDBp4ZkAxCSXrve9/JU3cNSmLI5j0n+DnzszRN8dQqLxTWFj23QcbQ==
+X-Google-Smtp-Source: AGHT+IGFkWfav/IcsJtpjMQckwEXDPYfVnPFrn1iBsrsbLZabI7EKHLS/+hFqe7hIJooORJ0k/2sR8DAPmvyBSQ9DeA=
+X-Received: by 2002:a17:906:d25d:b0:b73:6bad:4afd with SMTP id
+ a640c23a62f3a-b736bad505bmr1760244566b.46.1763558276509; Wed, 19 Nov 2025
+ 05:17:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20251119035914.1165505-1-alice.guo@oss.nxp.com>
-In-Reply-To: <20251119035914.1165505-1-alice.guo@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 19 Nov 2025 10:17:37 -0300
-X-Gm-Features: AWmQ_bkdoLNaOYQHuTtfjYabMbCyqRgX0CJsbBOaFiPvukfGvEFGhBrmHrqAg9E
-Message-ID: <CAOMZO5A0ssJg4XXKwJKN4sHLUnHGykqcnEVp3E-UF9_7mrqNkQ@mail.gmail.com>
-Subject: Re: [PATCH v2] arm: dts: imx8ulp: Update device tree to fix boot
- issue on i.MX8ULP EVK
-To: alice.guo@oss.nxp.com
-Cc: u-boot@lists.denx.de, uboot-imx@nxp.com, sbabic@nabladev.com, 
- trini@konsulko.com, alice.guo@nxp.com, peng.fan@nxp.com, lukma@denx.de
+References: <20251114-bootconfig-v3-0-a28b813dba90@baylibre.com>
+ <20251114-bootconfig-v3-2-a28b813dba90@baylibre.com>
+In-Reply-To: <20251114-bootconfig-v3-2-a28b813dba90@baylibre.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 19 Nov 2025 06:17:44 -0700
+X-Gm-Features: AWmQ_bnJACQ83R-3Tf6-mbAdk-ya05dwQbEFre9vXdhMullwJ0cjgh3x19eBrbg
+Message-ID: <CAFLszTijms9CB_C1sb+A1LZqKigsQChiBu=vnkDTKtiwbOotmg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/5] boot: android: Add sandbox memory mapping support
+To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de, 
+ Nicolas Belin <nbelin@baylibre.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aaron Kling <webgeek1234@gmail.com>, 
+ George Chan <gchan9527@gmail.com>, Sam Day <me@samcday.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Maxime Fournier <mfournier@baylibre.com>, 
+ Eddie Kovsky <ekovsky@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,20 +98,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
-
-On Wed, Nov 19, 2025 at 1:00=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
+On Fri, 14 Nov 2025 at 08:28, Guillaume La Roque (TI.com)
+<glaroque@baylibre.com> wrote:
 >
-> From: Alice Guo <alice.guo@nxp.com>
+> Use map_to_sysmem() to convert header pointers to physical addresses
+> in parse_hdr functions, and add proper map_sysmem()/unmap_sysmem()
+> calls in android_image_get_data() for sandbox compatibility.
 >
-> mu@27020000 is required for communication with ELE firmware, and
-> lpuart5 is the standard output device. Both peripherals must be
-> available before U-Boot relocation. Use bootph-all instead of
-> bootph-pre-ram so these nodes are retained across all boot phases.
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+> ---
+>  boot/image-android.c | 41 ++++++++++++++++++++++++++++-------------
+>  1 file changed, 28 insertions(+), 13 deletions(-)
 
-This is much better, thanks.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> The driver model for watchdog timer is not enabled yet, so disable wdog3
-> temporarily.
-
-This change should be in a separate patch.
+It is sometimes easier to do this in the caller and have the function
+just take a pointer.
