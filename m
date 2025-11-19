@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D9BCF34B7
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD619CF34C0
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:51:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66C4783F69;
-	Wed, 19 Nov 2025 15:50:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1E0B983F7D;
+	Wed, 19 Nov 2025 15:50:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mGKUjDm4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j4Zu2lMY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2882283F56; Wed, 19 Nov 2025 15:50:35 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 1C2E883F72; Wed, 19 Nov 2025 15:50:37 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0959383EDE
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:50:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA5DC83F42
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:50:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-3e3dac349easo4051211fac.2
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:50:32 -0800 (PST)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-450b8afe3e0so1941668b6e.0
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:50:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763563832; x=1764168632; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763563833; x=1764168633; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gR3ddU4g+uN4KX4qcSUMkXUYgmm6Rz3PjskNnLDQqFM=;
- b=mGKUjDm42HI86s6ZsNT4ZbuvbUiP3FnowOGkt3nDWJ0fXBkI/lnU05odhSbfTte+Pb
- HooJHUaVBD2tkSGfV9mR4bWbVfSXQOM1R+iU8uP9ue7m1AETqU1k+mIGgzLMj180mJXd
- bNY2NZExMxXueDexFQ6uY+PidsK2K3emU799Q=
+ bh=f/y3WtXwPb5Zhzce6Y1wbVki1xEttmmwD38GmS5+mJ4=;
+ b=j4Zu2lMY6PD0X6nb9j9GAEy1cVvveqJMcG9hGkR5pe/LRzav4jA+s9IGQ8rDOKqKJj
+ 2DpEr/hnn/IJYTcgBCtQBsI+mp5DYnHHVgC3+I6m0pKD15279bYnSbpayCHcEgjwv5zH
+ FCy8+wkuHJl43X4UeH/16qhmOCh7b7JpCj5IU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763563832; x=1764168632;
+ d=1e100.net; s=20230601; t=1763563833; x=1764168633;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gR3ddU4g+uN4KX4qcSUMkXUYgmm6Rz3PjskNnLDQqFM=;
- b=XZZVb6whEFUY453eNjtWQPiZFw9dwbYlUGIg2+HO6IuzPGm7yEASSVL3A1c197uwtM
- p1DQM08uvWCxypnWdhW32gQzijnJk4y83KH2P+6UUe5qpLxkAsXYuu6qG+2ePd/jyE6l
- cj88hQT4FAwiurgMf99h6JLZ6X3766O1AljO48ctyPi+PXvd0Ph6ZcdmZ41pF2D9GbpJ
- YoDuBkg1jlRcbeT7/jhd/SUi8jWuDDseeCR+0c7DNA44DFOjCfiUp+RZK9UEESSXkXC9
- ZqfxbS0njjqM5IQvZh1fUOVlxAL5sMOsrf1tIi/6Jmd4L+27fNlcrLox/qiO9X4YmjFk
- 9VwA==
-X-Gm-Message-State: AOJu0YwoJiwy3qTA/yJDe/5R/u+k/AXszT5wFgoOXYknKHUeVE6vYqEd
- SRDjA/GVxMaODBiAQn1RQScakfOamsubU4z7ZxEPpHAA6tYXpboc5mlwm+0OoUdSPcogt/04vvv
- PwVY+xRSOYA==
-X-Gm-Gg: ASbGncvIOBUi109aNc7ssgG5cIHPZuZg3CmAVs+73SXKcfM9NY8ZyhEeaw504uXaz9i
- 0AqxyX2EvzSCJIs//wUayjoXLtUjejenRG5NPocyenjrkC7eXds/zOjhoM0AvJL2aSAylaYHcIR
- 3OKh8BjCXll7ZmGkMWvGi/GooQqCDaR0yW4jS4b/NhuShCnS3n1tDenvKAguOQnV+rtF4fPZ4ad
- wOv/UBFg6HHS92hqLE/A4gUwio0PKNlPv3CK3Kjn9qou6/STGcM8bc5OFjSgEApuxAUo5z1sZZr
- s8krsDl9gcSbdyMOQhdNqk+TFObPdF7Nf2lq59lq+UCQcWZrRRZwcFaie3KBUmrvW3JBWihGeL/
- PxWGlGBY+VWPR3hEupT8A8zKNrwz6KRrJkwheSnSroKKN9ypQQ7sGPobJNDkU9zKbrRwN0EoAzm
- QiBoNCCoGXQ2co9pRXW9phsy6S9Lukp4bzsz/uBJ7trPmOfHl3C6WPpvcGra2+BLM=
-X-Google-Smtp-Source: AGHT+IGPw28hKwuFzTNee1iVCVjLgBrZcwgxtfXKMtq5Vq7JlG+JE15wyZ5PlHjbdO7L0cFUKy0Xxg==
-X-Received: by 2002:a05:6870:e996:b0:399:58c2:2e5b with SMTP id
- 586e51a60fabf-3e86918a45fmr10850126fac.51.1763563831789; 
- Wed, 19 Nov 2025 06:50:31 -0800 (PST)
+ bh=f/y3WtXwPb5Zhzce6Y1wbVki1xEttmmwD38GmS5+mJ4=;
+ b=DfswtnpW/SWPt/IUDifhkGMqZ3rYvflA3a0k1lHsjcvcPQ0L3hUWvzC9kw4shbUjug
+ cJaH578dGQUUz28AyLAKsq5r11M0epcb4zVDcNFvFnDOxn2yMmnC458agPKlKX5fkaTa
+ SpomhbmLoZSB1eIxdY26DgpB+GEswD9Xa9TrY/Ez2oCueEH0RCuuAp5CNObgGOUKWVCa
+ zx19CxudEU01NvZFGnXny4RiE07UfB8p0m9LGpi1kkPAfpcdel0xWlaacHUEp5p9uJ58
+ wIKQCQ03Nth88Z4St5cAPQykPRXtxEBQjYULf3Fc8KneQDKJwYaauCmMd5zhiA0xmhKq
+ zPgA==
+X-Gm-Message-State: AOJu0YxnuUg/pJwtNL9JwKID+CAkxEJLrXV1IwYi64Cb+zyCK3FngtwG
+ /TQYQRT0dTfkxta0D085nd5WUNQRpyb+n2pXpp9AweMZaPUkM8hTuWH+MtyWLXe9qTGX+mOaDDq
+ W1xik/kRhqA==
+X-Gm-Gg: ASbGncuuozFSj0lpo5Sl1wA5fYvclL3Y8HHHra8Gq3TWOyrCihIFklves7R5/htTGOD
+ Ihsm4Hbl7+dDRu7cqKv0zFX5BN9d7euCrm3k46C06H1XMpiJovoy/jUqkXlg3kPmpYTKjiT99mq
+ QORpYmFSEllNYAiD41D75UaMLvmPsiHtKdwYKnN7tW+wSRIrYOSMLbMjDtm3ePastN4ZL0SIAR6
+ xRRMDJnuclkxUtVgV92FeuKiNUx3dClz5BcE8ngsxZqxwP7XjT7GKUNSkauvfYf9Z6qtai5xsaf
+ d4UQOyVOGvjDYEyWFjKARYOKSwwphH7msomdy2FPDb1o/YkwDeGIGolMhdjtNDejS61ITeUH95G
+ Pa54GuQOTvdWVcSR10lBGl0NKQqiy1Xn15jkYb9qGCv+XHC8QSDvfC487EHme54bBSBgQ0LaGe+
+ cvn6vpmje/APTTnrcXBPp1mpb8HCy5bTGcBjwDfJ9HPxpu/09LoAI0
+X-Google-Smtp-Source: AGHT+IFlEqggeK7sfpVbgEl1YGb1aR86I97tjnVwtZwhk+yGfm294RkK+LYDzBaWvk5aQG9YxzwPXg==
+X-Received: by 2002:a05:6808:1506:b0:450:cf73:7703 with SMTP id
+ 5614622812f47-450cf73938emr4831790b6e.12.1763563833613; 
+ Wed, 19 Nov 2025 06:50:33 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3e851d64d3dsm8264479fac.0.2025.11.19.06.50.31
+ 46e09a7af769-7c73a29cc3dsm7840151a34.9.2025.11.19.06.50.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Nov 2025 06:50:31 -0800 (PST)
+ Wed, 19 Nov 2025 06:50:33 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Peng Fan <peng.fan@nxp.com>,
-	Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] imx8qxp_mek: Stop disabling device tree relocation
-Date: Wed, 19 Nov 2025 08:50:30 -0600
-Message-ID: <20251119145030.842143-1-trini@konsulko.com>
+Cc: Marcin Niestroj <m.niestroj@grinn-global.com>
+Subject: [PATCH] liteboard: Stop disabling device tree relocation
+Date: Wed, 19 Nov 2025 08:50:32 -0600
+Message-ID: <20251119145032.842160-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -106,24 +105,24 @@ tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
 or bootm_mapsize are the correct way do this. Please see
 doc/usage/environment.rst for more details.
 
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Marcin Niestroj <m.niestroj@grinn-global.com>
+
 ---
- include/configs/imx8qxp_mek.h | 1 -
+ include/configs/liteboard.h | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/include/configs/imx8qxp_mek.h b/include/configs/imx8qxp_mek.h
-index abc3603bacf5..846b422b0f26 100644
---- a/include/configs/imx8qxp_mek.h
-+++ b/include/configs/imx8qxp_mek.h
-@@ -29,7 +29,6 @@
- 	"panel=NULL\0" \
- 	"console=ttyLP0\0" \
- 	"fdt_addr=0x83000000\0"			\
--	"fdt_high=0xffffffffffffffff\0"		\
- 	"boot_fdt=try\0" \
- 	"fdt_file=undefined\0" \
- 	"initrd_addr=0x83800000\0"		\
+diff --git a/include/configs/liteboard.h b/include/configs/liteboard.h
+index 2934c76a662a..a90d02c049f6 100644
+--- a/include/configs/liteboard.h
++++ b/include/configs/liteboard.h
+@@ -24,7 +24,6 @@
+ 	"script=boot.scr\0" \
+ 	"image=zImage\0" \
+ 	"console=ttymxc0\0" \
+-	"fdt_high=0xffffffff\0" \
+ 	"initrd_high=0xffffffff\0" \
+ 	"fdt_file=" CONFIG_DEFAULT_FDT_FILE "\0" \
+ 	"fdt_addr=0x83000000\0" \
 -- 
 2.43.0
 
