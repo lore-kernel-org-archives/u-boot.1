@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAB21CF319D
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 11:14:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C0BCF3196
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 11:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43D8C8391B;
-	Wed, 19 Nov 2025 12:14:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3259C8391B;
+	Wed, 19 Nov 2025 12:17:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="csXuQ/7W";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GRQBv7Z/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80CB483923; Wed, 19 Nov 2025 12:14:00 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 3920083DEB; Wed, 19 Nov 2025 12:17:12 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A865280FA1
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 12:13:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E7EE580FA1
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 12:17:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7c6dbdaced8so4337265a34.1
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 03:13:57 -0800 (PST)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-297ef378069so61900775ad.3
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 03:17:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763550836; x=1764155636; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UKhLZ2h2a6+ai/MepQyz561fmFT0OtR3vXMKArpqWs0=;
- b=csXuQ/7WxozKzYutieSOP6+Hj3rbDMqAHNYqJ10l0lASrk5vxfmPhlyNuF4CSovkgS
- tUSn8EvdDPSxizku+wJnYRDjvScUw+zvrGD1fL4sLWsMK8WXB9UFiypymuOzBuZbz5SP
- B06hbFEoPkPCGNrWoTAaLpmL0kBz5rxGD9u9OcAQKcGaEgabBPiZmGtaZIC+RUpDoSNs
- RcwudaNjho8GqPs4Fr1KpW8MFSj1VQguIbkL4lvc6vaEkF/o4MdenbJ/Zv2Ct3nWE5Cs
- tHp4Ne+qbNkWdJ1wnohRlVvL603XMtFxqoxKAeaxbyxFVRJR2LanPFc4mh0bmcjpBMeF
- 8a2A==
+ d=gmail.com; s=20230601; t=1763551028; x=1764155828; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=x8GwWWtvaj+KeWa+KTzLVMHX2JwWEGUfaVKflms3o4k=;
+ b=GRQBv7Z/ypF5gRztP9H6g5pxCStHaVNZ56X3IFyKt10nFosRCeAUAf/t0umdUQd4yv
+ 6dAvgSbf7Vx5xruPWmNXPZpgP3l0OHrmCxjmmR8hqyaJa7KZLHwGz0EKpmjQWpiUbPZX
+ qbbVAlF5SqgvZOXtx+CfzvmSLGCT+qgJXlksJ4QigS8cdf3HkJt5CnIkbRXOeGeWQ8K3
+ 6qHO1/dGwk+JliBM+PvglCYYyJpf1sx2EE/4pnz2OmVBEQpwH7Qjpg/YpD0gLo3C8TYZ
+ /1yACGEAhPXn8mVYUUUYwTV6mq61HQo6qQbLj28NHEsqxcqvbaaj2+hDrOJCjcC8i7+6
+ UvmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763550836; x=1764155636;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UKhLZ2h2a6+ai/MepQyz561fmFT0OtR3vXMKArpqWs0=;
- b=a3ftrRoa107k8I4kO3jymAvznzhdwDN7L30LsqDf+BGp+kp9gCxwohmHmyCXh1wY3X
- abDQOh2aPwq2/onMzvGLewCaBcI/cXPHJ07dCrRc95ZXHosXc1NAhGoJtFJvd66ha8ni
- KaFU58gN4sbm0rMPjy5+zTsJLEpiTxeUfzeNnKwxim2c2tbbAHVOPfsdBJ1hn1dhB5vI
- P8nqi2js2jYSr2DUt3HMcnKIL9SHeYKz5qkJmYlU03sHY8g+29nWqGYYsNZtM2rEhGbW
- UeePyjpZ4PmhuRi5JrbcTm+s9SsDIAASGh/hurkDRw593PzgVlztfE2y96vj310N+DUX
- iGdg==
+ d=1e100.net; s=20230601; t=1763551028; x=1764155828;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=x8GwWWtvaj+KeWa+KTzLVMHX2JwWEGUfaVKflms3o4k=;
+ b=wNbsvGlm+HgduEucoOzJP/SzNULTLG9JaSOBqX9EQPPs0wwBRWnTa/dwZq2J5WJlKq
+ fhb0M2a+9I2DPOzh5eGzIGKsDaVwmx0rePbm6elTiri0LCR/7YbLPXjupJ46CQqYEam6
+ aBmif/uhTCd9QUwxWWNQIusZf8guIKMZy8JaU73FbagwzPchehW5HOAnUgJHVr6r/+3e
+ 8Tx9MX1QnVqrGOyYMddUQ8AYxS51eyLcS7r+ovURFIeW0od0rqz+Hpc66lxltRzo8OAP
+ qFYB/+y/RJdgpuc1GJyC+SaykyGanNfFhKaoQrbceBTknI+oZYM5XzguH4+zlGl3/bPl
+ Gzmg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYIQc1VdBnq60LPKvZBUkXgnVKavkowy6RG++OrA+mFavpv9WwtsaSwar/fR0dTKbwRly6GAw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy5P5nRnii9LMra0kgzBXW628wsENRJTWm+6DTl4bSpYG+6tndM
- KNNirh3WWwun5jm19fYjziAyOFil21sKKdYgsYTO9pe1v4KPwyr/GKZZ/+wXZioPQD6HhSqrKx1
- ozPWtiqNClQF7dq0VUDY6JgckVRv6A/Kc+kEVi/I=
-X-Gm-Gg: ASbGncsDmjOM7xc0Gcw/BHnEmf7YYpN8m0pIdzL69pKac731szGk58gWSrVuxdYmsV0
- C8QgkE5K0VtoEm1md4aPmYD29SrO0wO470PFbOEUtDzrEGultF0EXgXAKSoLc9enxZGxXqMGLpN
- NcRSw2OJVsLPaMe/ZlSlAfI1DllkZiu3CGaExO+JdsnuXN/+gkDyEbTOoNA8lw3qj+kvXUcVSll
- DFJn0rnvq9ox+EQi/fkOYm6TpIBwwD3WAovn4Euh6fuCJPt5+3f5ZI3d7an/hq1vMYnpkQ=
-X-Google-Smtp-Source: AGHT+IEKj9ooLfmSxIR0CDkYYAtkLRwU46PeLF7QI/SFhUIieV8K03BNbsg75mvGFNTURK5Uja5A5Da9wNuuQ6In4G0=
-X-Received: by 2002:a05:6830:6d06:b0:7c7:69d9:d8d3 with SMTP id
- 46e09a7af769-7c769d9e1b4mr6166655a34.12.1763550836271; Wed, 19 Nov 2025
- 03:13:56 -0800 (PST)
+ AJvYcCW5Ww9ip1YIyqsHmjC6Bf5VFmzOwsJs785akIPCYvQD46VoeAW/+2TgPEEsY4UsxoR1U2+iaXE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzE7wFMwjEzWdtgJzGlmX197kf5av8I54bTL0FOH2Rl3ZoolY6V
+ HJtkSykkE5jGhM4kGAfSsgu/SUCKWp+SdHCTPEUMWj864OH/aI3l7Cz1Iy7dz/lB
+X-Gm-Gg: ASbGncsAYs8I54kXm9MY9OE+zs7fPkP9R7wty9CasKCIfl6xNym1pAiY0Y8dA+0od2f
+ oZaGvotErswZV6NXqcvkFSPJZ0iE8t9DPqr4r4uumS8+Me7M37mJXrZgs54/rjJTiJUB5cOf6DU
+ hMvrn//qDloejZdkCFuGKq83frPvd8KhJ5XN0ie7C+PsnQKVTlyqL2SeM4eD7jF2tBY1HkjLVtV
+ lmQL8Pe8RAFcKhTW/2s+7xWDIhFqFwiBQvxmpIsDaf2CGjnCdd7Ez95tiBR8Vp/WzH6Qo+mumDf
+ cGIaJzPCG+AzXfCjYaundHN2eLT/TkbN6rlCkZy4Cd+1vZ+n0W3mJK8IjT4izib/+xwF2QGxOFe
+ EeiEFq7iu83ppazovyLrUi0d1bUnYQBOuP+LDVQGWkkHSvQ5ib49aduffQwKURfP4ZULcnGufeD
+ 0JngNPK7ZazunlwFKkGC0dIPfoOUl5cljc02ieciZF+IzPwW8=
+X-Google-Smtp-Source: AGHT+IF0owYUwMNEWdu000b2sPacqZEwqAw9Oq5dsp5XYmVNmUgf844Jvt90C8hv8lg/JlPLYRqAjw==
+X-Received: by 2002:a17:903:19cf:b0:295:24d7:3792 with SMTP id
+ d9443c01a7336-2986a6b81aamr242758975ad.1.1763551028172; 
+ Wed, 19 Nov 2025 03:17:08 -0800 (PST)
+Received: from localhost.localdomain ([185.213.82.50])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2985c2b0c92sm205143635ad.69.2025.11.19.03.17.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Nov 2025 03:17:07 -0800 (PST)
+From: Brian Sune <briansune@gmail.com>
+To: Chee Tien Fong <tienfong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH v8] Add optimized Makefile support for SoCFPGA handoff
+Date: Wed, 19 Nov 2025 19:16:53 +0800
+Message-ID: <20251119111653.456-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.47.1.windows.1
 MIME-Version: 1.0
-References: <20251104223023.1613-1-briansune@gmail.com>
- <7e31b494-1ce1-4fb5-af49-d203830add7e@altera.com>
-In-Reply-To: <7e31b494-1ce1-4fb5-af49-d203830add7e@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Wed, 19 Nov 2025 19:13:44 +0800
-X-Gm-Features: AWmQ_bn0yBvH0C_DiUIMpBIdkwxaQEunGWaRAx8fW7zhWGczM8eHhVKdKxwyTpA
-Message-ID: <CAN7C2SAMWJUqK_pCvz4YDxnD_rHL8zh5VVJkYEC0DEOMV_2wog@mail.gmail.com>
-Subject: Re: [PATCH v7] Add optimized Makefile support for SoCFPGA handoff
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,99 +97,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-typo aligned on both so it wont be an issue from first place.
-However indeed should be fixed to let user readable.
+Add optimized Makefile support for SoCFPGA handoff
 
-Remove: else ifeq ($(CONFIG_TARGET_SOCFPGA_ARRIA10),y)
-is enough meanwhile when users don't place any folder or path
-parameter it will simply bypassed.
+- Introduce socfpga_g5_handoff_prepare target in U-Boot
+  arch/arm/mach-socfpga/config.mk
+- Users can convert the handoff via make prepare.
+- Detects Altera/Intel SoCFPGA boards from .config
+- Combines vendor/board extraction into a single shell call
+- Checks for hps_isw_handoff folder and .hiof files
+- Uses ls -d instead of find for faster folder detection
+- Runs BSP generator script only if files exist
+- Non-blocking: continues if handoff folder or files are missing
+- HANDOFF_PATH user define allows overriding auto-detected folder
+- Minimizes subshells and other slow constructs for faster CI
 
-Brian
+Signed-off-by: Brian Sune <briansune@gmail.com>
+---
+ arch/arm/mach-socfpga/config.mk | 50 +++++++++++++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
+ create mode 100644 arch/arm/mach-socfpga/config.mk
 
-> +ifeq ($(CONFIG_TARGET_SOCFPGA_CYCLONE5),y)
-> +archprepare: socfpga_g5_hanoff_prepare
->
->
-> Typo: socfpga_g5_hanoff_prepar, it should be socfpga_g5_handoff_prepare
->
->
-> +else ifeq ($(CONFIG_TARGET_SOCFPGA_ARRIA5),y)
-> +archprepare: socfpga_g5_hanoff_prepare
-> +else ifeq ($(CONFIG_TARGET_SOCFPGA_ARRIA10),y)
->
->
-> You are binding the rule to:
-> Cyclone V
-> Arria V
-> Arria 10
->
-> However, cv_bsp_generator.py applies only to Cyclone V and Arria V.
-> Arria 10 does not use .hiof and does not use the CV BSP generator.
->
-> So this part should not include Arria 10
->
->
-> +archprepare: socfpga_g5_hanoff_prepare
-> +endif
-> +
-> +socfpga_g5_hanoff_prepare:
-> + @SOCFAMILY="$(SOCFAMILY)"; \
-> + if [ -z "$$SOCFAMILY" ]; then \
-> + exit 0; \
-> + fi; \
-> + echo "[INFO] SOC family detected: $$SOCFAMILY";
-> + @set -- $$(awk -F'"' ' \
-> +    /^CONFIG_SYS_VENDOR=/ {v=$$2} \
-> +    /^CONFIG_SYS_BOARD=/ {b=$$2} \
-> +    END {print v, b}' .config); \
-> + VENDOR=$$1; \
-> + BOARD=$$2; \
-> + if [ -z "$$VENDOR" ] || [ -z "$$BOARD" ]; then \
-> + exit 0; \
-> + fi; \
-> + BOARD_DIR=$(src)/board/$$VENDOR/$$BOARD; \
-> + if [ "$$HANDOFF_PATH" ]; then \
-> + echo "[INFO] Using manually specified handoff folder: $$HANDOFF_PATH"; \
-> + else \
-> + HANDOFF_BASE=$$BOARD_DIR/hps_isw_handoff; \
-> + if [ ! -d "$$HANDOFF_BASE" ]; then \
-> + exit 0; \
-> + fi; \
-> + HANDOFF_PATH=$$(ls -d "$$HANDOFF_BASE"/*/ 2>/dev/null | head -n1); \
-> + if [ -z "$$HANDOFF_PATH" ]; then \
-> + exit 0; \
-> + fi; \
-> + echo "[INFO] Auto-detected handoff folder: $$HANDOFF_PATH"; \
-> + fi; \
-> + HIOF_FILE=$$HANDOFF_PATH/$$(basename $$HANDOFF_PATH).hiof; \
-> + if [ ! -f "$$HIOF_FILE" ]; then \
-> + echo "[WARN] No .hiof file found in $$HANDOFF_PATH, skipping BSP generation."; \
-> + exit 0; \
-> + fi; \
-> + echo "[INFO] Found hiof file: $$HIOF_FILE"; \
-> + echo "[INFO] Running BSP generator..."; \
-> + python3 $(src)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" -o "$$BOARD_DIR/qts" || echo "[WARN] BSP generator failed, continuing..."; \
->
->
-> Arria 10 boards require the A10-specific filter script under:  arch/arm/mach-socfpga/qts-filter-a10.sh
->
-> Invocation pattern: qts-filter-a10.sh <handoff-input-directory> <output-qts-dir>
->
-> It processes a set of A10-specific XML and RBF inputs such as:
->
-> pinmux.xml
-> arria10_hps.xml
-> pll.xml
-> emif.xml
-> core.rbf
-> other Qsys-exported XML files
->
-> Because of this, the .hiof detection logic you added will always fail on Arria 10, and the QTS conversion will silently be skipped.
->
->
-> + echo "[DONE] SoCFPGA QTS handoff conversion complete."
->
->
-> Thanks.
->
-> Tien Fong
+diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/config.mk
+new file mode 100644
+index 00000000000..df1eb909129
+--- /dev/null
++++ b/arch/arm/mach-socfpga/config.mk
+@@ -0,0 +1,50 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Brian Sune <briansune@gmail.com>
++
++ifeq ($(CONFIG_TARGET_SOCFPGA_CYCLONE5),y)
++archprepare: socfpga_g5_handoff_prepare
++else ifeq ($(CONFIG_TARGET_SOCFPGA_ARRIA5),y)
++archprepare: socfpga_g5_handoff_prepare
++endif
++
++socfpga_g5_handoff_prepare:
++	@SOCFAMILY="$(SOCFAMILY)"; \
++		if [ -z "$$SOCFAMILY" ]; then \
++			exit 0; \
++		fi; \
++		echo "[INFO] SOC family detected: $$SOCFAMILY";
++		@set -- $$(awk -F'"' ' \
++		    /^CONFIG_SYS_VENDOR=/ {v=$$2} \
++		    /^CONFIG_SYS_BOARD=/ {b=$$2} \
++		    END {print v, b}' .config); \
++		VENDOR=$$1; \
++		BOARD=$$2; \
++		if [ -z "$$VENDOR" ] || [ -z "$$BOARD" ]; then \
++			exit 0; \
++		fi; \
++		BOARD_DIR=$(src)/board/$$VENDOR/$$BOARD; \
++		if [ "$$HANDOFF_PATH" ]; then \
++			echo "[INFO] Using manually specified handoff folder: $$HANDOFF_PATH"; \
++		else \
++			HANDOFF_BASE=$$BOARD_DIR/hps_isw_handoff; \
++			if [ ! -d "$$HANDOFF_BASE" ]; then \
++				exit 0; \
++			fi; \
++			HANDOFF_PATH=$$(ls -d "$$HANDOFF_BASE"/*/ 2>/dev/null | head -n1); \
++			if [ -z "$$HANDOFF_PATH" ]; then \
++				exit 0; \
++			fi; \
++			echo "[INFO] Auto-detected handoff folder: $$HANDOFF_PATH"; \
++		fi; \
++		HIOF_FILE=$$HANDOFF_PATH/$$(basename $$HANDOFF_PATH).hiof; \
++		if [ ! -f "$$HIOF_FILE" ]; then \
++			echo "[WARN] No .hiof file found in $$HANDOFF_PATH, skipping BSP generation."; \
++			exit 0; \
++		fi; \
++		echo "[INFO] Found hiof file: $$HIOF_FILE"; \
++		echo "[INFO] Running BSP generator..."; \
++		python3 $(src)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" -o "$$BOARD_DIR/qts" || echo "[WARN] BSP generator failed, continuing..."; \
++		echo "[DONE] SoCFPGA QTS handoff conversion complete."
+-- 
+2.25.1
+
