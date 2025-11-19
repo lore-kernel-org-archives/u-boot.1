@@ -4,140 +4,177 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 583D7CF258E
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 06:11:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F6BCF258E
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 07:49:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BA1A8397A;
-	Wed, 19 Nov 2025 07:11:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id B476F83968;
+	Wed, 19 Nov 2025 08:49:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GlpWKR8z";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="KrbauvHH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C98283A57; Wed, 19 Nov 2025 07:11:45 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id CCF578397A; Wed, 19 Nov 2025 08:49:43 +0100 (CET)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D28383979
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 07:11:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B810983936
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 08:49:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1763532697; x=1764137497; i=xypron.glpk@gmx.de;
- bh=nKlIoIwLQ+YpNlc0G26r+W0eAj/+SA7l5OmaPDYqsiU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=GlpWKR8zEpYhGoWhdLaLS1Q8qP3ZRHPAvpIwCiMYdXW/FiV+8eTvWWixIjzlwwMr
- jZVTk5ImpKC+Q7hLNKLh07XKvRMO62fWgdgXfnq1sMzbhgceSN00gVlbwspEHki/N
- WTwrMMJwWKAB36fjU06HfoKZK/2EWtkjxAvC5jpTwk0EEcaWOXz6YNvyD37+Qc9AL
- DZBCQUkAFxZDKK+FD037WTepnatmF8QCxH6KIp9GoXkVvpYLExEOGCq706K8YMlYu
- NKJIltbkT2AIyPVXOn6j/oGXVeLrID7a2bKCBgyxQyHojE+6PoZiiZel23oyaOBDa
- eFXLzq6C6i02lr9cWg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mxm3K-1w5HmA3n0o-017hwM; Wed, 19
- Nov 2025 07:11:36 +0100
-Message-ID: <eb23054b-a9a4-4c62-a956-97b9ffef3f07@gmx.de>
-Date: Wed, 19 Nov 2025 07:11:36 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=ye.li@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=u+CPe0hUE0oNW3ySp8f8oFpfHNd1VcSrhyWHPuEa/P3Qj9rv4EmBez5Dbh0Pno2PR44YQ7JchbjiR7614eiOHvWBXa6h/bGmTDa8VrbWaPthvNMiFVciGxgtLUgtNT306G02JmdNTBhpulPVABo3/srJqPXAYpH0q37/YE4y6ehdwV0UPGuKYCC6Z1RzJPxgqEFtfphNtwNV21o5GV0GdUes9dmodBm3O+6U19McdqwB9rYUgl4724K6PquYFsXN7Y4KMTV2ATh9OXZtiopO6f6hyvhr6bg7farT6MdOO3mhT9RxVgUwAJwR8gRfxivDUOZKhcU1IxRY6NmL/bbrqQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NFUDyzcn/ofRBychcn1g54djqKlwsde9+YGZySgGxPk=;
+ b=g9dAJYZATc0lG+KI58dEEeZzQTfBeniZPJCp1lNytKRVcSZ3hWJrb95qv0FJlVcMlBMoAdp0nb3nQ0oDAGBvdlRkKwg6xVWQHZ9n4SLbMHpkj4+6YXaLz1MaBTcRIei3NOPMGF+EpEZsDMb+S5oeRgxW/ZFFq3zBowmzugbzLT77BsPkzT6ptLDvvSPv+bUS7vcc5fKfB0DYEWhX4/JoBVdkOm13os3iQAWlSyZPwpfB0idO/vAMKTRCt6Vttvjs3Q7risdSjmRfIzIZNN7TfUI8c0UwgHHi24CAkw76GYykd10BjnGxstFuR1tL+Ic5EkhNwlSY7rpCBjhqqsE74A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NFUDyzcn/ofRBychcn1g54djqKlwsde9+YGZySgGxPk=;
+ b=KrbauvHHB0gQBkHO8ldV9XzDZHF4JzYH5Kn1grx6K21U0e9JQoADsxK4knSyj0fNAB/dFxN2erYcV2dPMECJCJiDZDPjhcQlFiTfPgJFO0ebiB4QCuOFL1wrnmrDGQOeMmKo/5ZLPPxBHAxp5hTmHfJ9F2bYigqWr0s7FkGa9xg/L04m4O/rFSLdDCpaa1ut35bJCwaLQWohge5kWDxeGjNRoLK1474aEjcl8rzu7OKRb8Q5WOTPFOHoMGierMgP8WfmmzgZUdZ+0OAutWY9gD//mEOTh/y1HjxJCmFM3VV76WbihswLtJAE/x9oB+Pouh+9C5SzUXJTJlc+WnHyGw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from AS4PR04MB9436.eurprd04.prod.outlook.com (2603:10a6:20b:4ec::5)
+ by AS8PR04MB7621.eurprd04.prod.outlook.com (2603:10a6:20b:299::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Wed, 19 Nov
+ 2025 07:49:38 +0000
+Received: from AS4PR04MB9436.eurprd04.prod.outlook.com
+ ([fe80::afae:fb35:fc8:5c90]) by AS4PR04MB9436.eurprd04.prod.outlook.com
+ ([fe80::afae:fb35:fc8:5c90%6]) with mapi id 15.20.9343.009; Wed, 19 Nov 2025
+ 07:49:38 +0000
+Message-ID: <92d98692-5fd7-456f-b831-0986e6d499a9@oss.nxp.com>
+Date: Wed, 19 Nov 2025 15:49:38 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] doc: board: starfive: update jh7110 common description
-To: Yao Zi <ziyao@disroot.org>
-Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Minda Chen <minda.chen@starfivetech.com>
-References: <20251117233603.15409-1-e@freeshell.de>
- <24B5D5B7-0D3F-4091-82B8-A5E2328DE59F@gmx.de> <aRxKcvcc2IP-2dfw@pie>
+Subject: Re: [PATCH] imx: Revert "imx: mx6ull: fix REFTOP_VBGADJ setting" and
+ fix comments
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, uboot-imx@nxp.com, trini@konsulko.com,
+ dario.binacchi@amarulasolutions.com, u-boot@lists.denx.de,
+ u-boot@schwermer.no, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, Jacky Bai <ping.bai@nxp.com>
+References: <20251027115638.1186252-1-festevam@gmail.com>
+ <CAOMZO5B1sxS8Vh1awupGZd8oqqLhZ55abME07Kf5AZ-w9jUKhQ@mail.gmail.com>
+ <3ab1b3a6-b9ab-4571-a7c8-8288d4a8d290@gmail.com>
+ <CAOMZO5BcMu_94qn4vhDgxmdWVx0N-mCD9wYTvAPbXaK45EUFBA@mail.gmail.com>
+ <b6b82482-ec7d-4703-ad93-ccdd7a651b57@oss.nxp.com>
+ <e9c56d66-b2b9-456c-856e-2ef01a009e16@gmail.com>
+ <CAOf5uwktScqh0LrWTaz-MRA-tDoAVb9Mo8UhxDKz0dauO21QQg@mail.gmail.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <aRxKcvcc2IP-2dfw@pie>
+From: Ye Li <ye.li@oss.nxp.com>
+In-Reply-To: <CAOf5uwktScqh0LrWTaz-MRA-tDoAVb9Mo8UhxDKz0dauO21QQg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:AWOeF95LYlUyf2vNkD5eY6Q7dIagGPGjPW5PTc88onhbMZkCnLj
- UyhBXuU5mCNAWFlVXGLKHj/Izixp9bLxk3sFzxxs0AS4cI0thNoL+MuJGmvRDi9l68SaVsr
- qgaszA56v3C5eep/PbbxT6IWBsgkGs6WdublTPL8yFwmJ7hVLUXbjBMhj9TAPPncLt2pKVS
- tQp3YvjGve9z0UVS2h3Ew==
-UI-OutboundReport: notjunk:1;M01:P0:M/Yo5wCUTM4=;Wg9l5QCTWrOPuXj91Qu0mYZ0C/A
- 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
- H5ku5Ye/Y22ZhlHGejPwtbUPkAZvj
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: TP0P295CA0052.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:3::14) To AS4PR04MB9436.eurprd04.prod.outlook.com
+ (2603:10a6:20b:4ec::5)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4PR04MB9436:EE_|AS8PR04MB7621:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8034a64f-4dac-450f-b8a8-08de274030c3
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|42112799006|19092799006|1800799024|366016|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?clhPVFdRZWxEZzJNN2poQ3V6eTV5Z0x4ZTA3MG9WbEVMdCtiOXNidmVnODJC?=
+ =?utf-8?B?TllWSURkTUFROGs0eHlkdHNzMEt3QlV1UndXSFJ2bU5XUHppSnRaWWVUVE9R?=
+ =?utf-8?B?QXo5RHpNRHVCTXhwWU92dWpwaWljNlEzdmU0TVUxVWhLT1ZmS2RjT2ViTWlu?=
+ =?utf-8?B?aUhacmlxeG5aeVZCQjZOdmRxKytyOTZqSitRRG9veERxYlNabG1QcmVaK3A5?=
+ =?utf-8?B?UU5qRlRvYk5IWkVPUkZBOXdqSjJ4Q1VOZk9DV1U2cnUyTkE2WTBKN040ODl0?=
+ =?utf-8?B?TlBZMzJ0YzBWeXBwSlBXRXZZTGpUdlo5TnBNNUVQUmJXSkxaYjJEQ09FSHFi?=
+ =?utf-8?B?U1JUdVhycGVKWXJPMUNDd2hZOGxISW83Ri84NmN2VWJ2QVl5RFVOZ3ZNeWhu?=
+ =?utf-8?B?UXE5NUl2bng5dDBKV3JHcG56dW9aOW1yYzEzbDA4cmN2UDUzam5zTDRybVRk?=
+ =?utf-8?B?WE9qVlQ4V3UzcmJST240ZHFmVDBRdFUyWUxncnJjaUhuWmF2aTF3d2ZvMG5Q?=
+ =?utf-8?B?KzVRcHZpMWZXSjU3Q0ZxNzIwQkhrS0JpcWN6WFhXbWpPdUl0S0g5R0dOdFZD?=
+ =?utf-8?B?SmtLeFNxaGdjVWVYTlNMa1FRTCtJeVJBcTNKU0lWYkcyOUJ6VHN4TWF5UDBB?=
+ =?utf-8?B?cUF2T2dnQzI1eW9QZll3eWtISFZtZGR5YmJCb0d4VzJQKzY1OGI2V0pCVGI2?=
+ =?utf-8?B?WmhnQkltaDZGeXYySVZRYVc2Nzg2d2xlMWxTMHFETmk4OUttODZXS0tpWXpt?=
+ =?utf-8?B?SzVRcWp5QThMQmp3M3VwV0lUcTllWkQ2ZVU4NUl5ajRuaVpnNm0xc1d4NDNE?=
+ =?utf-8?B?Zit6K3dQdm5vT0JodFlNK2NEV1RId3F2cFVyWFBkMFM3eVgrTlVmaUdydUor?=
+ =?utf-8?B?RktFUGlNNmU4di9xc3VqSVc1R0IvcDhOQ2xjSzNKZUJYM1o0UW5QN2QrNHl4?=
+ =?utf-8?B?cVQ2WUpyaVpOWDVTMTlkVkRmTnBvLzNMMGk5V0owb0NFcFd1R3EzL0MwNjlw?=
+ =?utf-8?B?NmtBSVZGV09DRE1NVGNFbjJoMjRXVEVrNEtaUnk3aDlibldCQkVDb3FQcDZG?=
+ =?utf-8?B?N2NMYVlDZGxWQzZvMEhjNlY4ZjZTMEl3ZUVkQy9YK2ZNYlppSGtuSktxSzl2?=
+ =?utf-8?B?U3l3TXZzU1NLcFRsNW1mSllJY2FIMktTSitwTjdpRGpDQWV5R0E0SWdHNHMz?=
+ =?utf-8?B?RzVQZGEyeFlzN1hocEJYWVVGUm9NYmN6VUZFY3B2cDR6ZytkOGg4ejFkbW9w?=
+ =?utf-8?B?RGFNbVcrc2hCS3IvR2pwTTFLbU5qQTBSRGJYcnBRWlZubm1JWFBsdmNSbUtr?=
+ =?utf-8?B?bGJQUDJXZ2NSRkQxU2FWaUJzRE10NERtc1JrZHpjeXF3a1lvY053cWsxbEpY?=
+ =?utf-8?B?UVV6OWxRNkpSa2NLSy83dnVwTWkvb01JOUdwVUZwMVd1WUlWaHErRW1iVFJ1?=
+ =?utf-8?B?TnJUWWRmQS9GOVVtckRLUnVrYnBsOHpsWHRXZFNEWHRYVjdwbktzaGZoVEkr?=
+ =?utf-8?B?QlBCenNzSDl1MjVmWFI1VkU0eFZySXk0MEdNT3VjNFhzeDlqYzgyemhaakhL?=
+ =?utf-8?B?cFJFajkxSE14OFBTVGxQSzZYK21vQWlwTGk0bzA2UnYrSkp5NjF0d0VZWkVo?=
+ =?utf-8?B?U0JuaDlhSXdvZlBjVVhxNmJ4akVsSDJQM0ZPRDQrWUgzYkJLZTBIdHhmTlR2?=
+ =?utf-8?B?YzAxNjJnOG8zYmNkUWdBUGtZUjF2RHdZR3RuTTh5Nzc3QytLRUZlK3AzeW5M?=
+ =?utf-8?B?WlNlK1g4Z2MxOGlZb1NZb2loSi9lRllKMDFDN2JLYkhHYmpXWVJMa1lsSDF0?=
+ =?utf-8?B?bnE1UjdCeUl0SW8zQzVKekVqcjVITENRSkRXYXhyYWQ0cFhoUnRlS0Vtazc0?=
+ =?utf-8?B?WlIxTGVpQmNDbmErYTQzS2Fhb0plbHA2bjg3dEltUHBHZ0Q0UnA2MkFGOGhN?=
+ =?utf-8?Q?7R0fWkbb7KMfV+lX3ly1ox1enzTnCk3Q?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR04MB9436.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(42112799006)(19092799006)(1800799024)(366016)(376014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OGVVUGVucGZGZnZUb042OG9KME9hMitOK3ZCUVlhUFc3RjhiaVlkcEhTQ0VE?=
+ =?utf-8?B?aGFYK3J0WWgwTWJUSVZaWHF4a01sQ3FOeGF3OXk4TDZydzh6Y2lRVVZzUGFI?=
+ =?utf-8?B?eGRTYnNRSVNqaVJ6Vnh1U1JJMVFlT2RkOWJ6bzk4SW43U2VqNkQ4MlFZdmI3?=
+ =?utf-8?B?b3dIVHppek1uTUtxUGJCQTM3U2llaGcvY2tyMnpDTTRpZnJOOGFFcHFWUTRK?=
+ =?utf-8?B?THFOdkhkQUdpMFA2UlYrQ0xzcGRWOUFuRzFFcjc3VU05bWlnN3pGaW9IdEs0?=
+ =?utf-8?B?R2w4bHNRaUM0VjkwZUdSK3B6cys3TVVvb0hsS3VuU0VWbHVINDFPU0tsTVhh?=
+ =?utf-8?B?S3BsMzBjMzdGNVBibkg0TWViWFBqUGcyblQyRXhUNVJaZjVHcVBuVU94Um1u?=
+ =?utf-8?B?TGh4SXpDSEtsVVRrU3E5TXliaEJXTitnY2xvUEp2NFl1QzRmTERxOHJjODhi?=
+ =?utf-8?B?OVRsMTRRaWZDVmdyNGZ4NWxUeG94bGpoNkdsMzlEZjJjeW96U1JCWWkrNys2?=
+ =?utf-8?B?c2VKdFJFU1pndGlXT3VIdzBYVE4vTjh4TUN5eVJGZUVQazRXR21xSkZ5cWcy?=
+ =?utf-8?B?Q0plVjQ2Q0JRK2RMSXhSdDZSYjNtYlZ1K1JUcnJYTmpVTlY1MjhIcVRzeExH?=
+ =?utf-8?B?UFpKb3Y2MTh3Y2c0c0NqcDBlbnNsREowOTNveEJlWDdBS0NtNUJzRjF2ejc5?=
+ =?utf-8?B?dFczK1E1cDZIcnJzL2RiQzVGcVQzTHRKbGFNSCtCd2FNV2VFclI2clFXNDB2?=
+ =?utf-8?B?di84cjhjQXlINmV5OUNrK2d2ek5temJQOWNRcVZYRTJkRHV2Wmx6ejZMQ3Fz?=
+ =?utf-8?B?S056MEovbk5wOVRZQkx5ZXpxcjdqVmFLRWlKdk9DWkFvSFcyR2tHb1RSb2dT?=
+ =?utf-8?B?amlLa3NlWkdXNFd2VlZ3cWprVy9qNjRaVUhiazRFbXBuVGtBSFAwYkoxYkRG?=
+ =?utf-8?B?dlROWWx2UHhzbFJINkUra3hzUHMvT3phR1BXUDFTMVpBTkZ6MWFEcDVrR0NW?=
+ =?utf-8?B?SU5TbjhNTVM5LzdEM2lFQWdOR05YVDI1QWpXWWt2eWJ0Qnl2M1B6U2hjdUor?=
+ =?utf-8?B?NlA5U2ZrMGZXc2RMcmt4a0kzVEtkSXFlNlJ1M01HNzExS1JPbFZUR25XTGUy?=
+ =?utf-8?B?Nk5jMUZiaGo0aVNEMVB4eHBHTS9oVDVQNFBtZFRqbUV6OE9aLzZCQnNGUEZw?=
+ =?utf-8?B?ajJZY1FYbzhZUmJwcVRuZGczTmp2U2JVR0ZxY2dnODliSlZ6Rkh1RUZNVThR?=
+ =?utf-8?B?VVMzVGlPVEFEZnovTmhHWEl3NkJIUUdzNE40S3lxSVR3amhodHRpTDJyU3c1?=
+ =?utf-8?B?MzRwNmpxVk9wZmlzL3JYRHhLZEZKV3BHWUlqdzhLK3cwMmEwZWJmeWhGeHhB?=
+ =?utf-8?B?SXpZeTJGTHhSeTRwd0xKVFExb2VsN25xOVRCRU1ZZ1oyUVFIeGlMRFBtclhH?=
+ =?utf-8?B?L0syRDlmNzQ0WXRZclVnai9CYTlHYzltSGNpN3NYdTE0Zk16MFVkK2JwMEJ5?=
+ =?utf-8?B?cm9DRjFyMG9pbjBNcFVvNncyV1o4NjhxVWtJYTI3cmVQSmpURkxjMFNIdFJ6?=
+ =?utf-8?B?ZEw0alh4eGtaZTBCK3dHckdCWlBpMVNwOUQvR3BSZlR5K1dPZ2N5WlFIVWVa?=
+ =?utf-8?B?cUlhQmN6YUJvMnlEYy9zOHhlT1FnVHFtUGhscnBKUGVFazlxTzE5WkJhbjBV?=
+ =?utf-8?B?akorZndoOEVQenhnSFB0TE5scU5DNkUvMUVmN2ozNEloTEFreEpOY2Q0L2g2?=
+ =?utf-8?B?UDR3QlcrdmRISEw3a0trTkd3c093Uk1VVzlOMjRHUnBJT2NjZXViVThiRytC?=
+ =?utf-8?B?eE5KZTVZK3FGSDJ2dGNOZE5ocEpMRkhOK3dqL0NmRThXQkE1QlVQTUF5bzZJ?=
+ =?utf-8?B?ZWJnWGJUbGdWaEJOK0pEZ0l1bUtiMmRVZlJCYmhKNjJROTdSV1hUSEFwMk5E?=
+ =?utf-8?B?OVBCczhyRTRnaGVxR3RWczJ6RzhCNEhGRHJhVXVGTmg2RklTb3duUkFZTytw?=
+ =?utf-8?B?Uyt2T1lPYlZVODVDcFljUTI0d0ljU2ZweUczOXFFaVp5UWN4Y1hWVjZuR1pE?=
+ =?utf-8?B?RjJMN21Vd2ZFNU1vSW03a09OS3hYekMwbktSZGRsZUI5cVZxZkM2QU5oV3FF?=
+ =?utf-8?Q?7n9h7I26p69o3RJzh/0sFA/VI?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8034a64f-4dac-450f-b8a8-08de274030c3
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR04MB9436.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2025 07:49:38.6990 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: pI5Gh44mwokLRn3ReF3IfpDVPJPztL+rKAzep1dN0oQTXN9DyT0RouY7bAZvePX9
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7621
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,112 +191,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/18/25 11:29, Yao Zi wrote:
-> On Tue, Nov 18, 2025 at 08:08:12AM +0100, Heinrich Schuchardt wrote:
->> Am 18. November 2025 00:35:51 MEZ schrieb E Shattow <e@freeshell.de>:
->>> Updates to the JH7110 common description:
->>> - add detailed overview of JH-7110 SoC and boot process
->>> - revise descriptions of deprecated StarFive loader modes
->>> - refresh build directions grouped with SPL debug advice
->>> - reduce usage instructions into common methods shared by supported bo=
-ards
->>> - cite starfive_visionfive2 board maintainer description of StarFive l=
-oader
->>> - cite published datasheets for ambient operating temperature data
->>>
->>> Redundant/deprecated sections of each board doc are dropped accordingl=
-y:
->>> - deepcomputing fml13v01
->>> - milk-v mars
->>> - pine64 star64 (also add inclusion of JH7110 common description)
->>> - visionfive2
->>>
->>> Signed-off-by: E Shattow <e@freeshell.de>
->>> ---
->>> Changes since v1:
->>>
->>> By popular request I have expanded on the topic of deprecated boot mod=
-es.
->>> For those users that rely on this it is now more descriptive about
->>> factors contributing to the feature deprecation and naming the U-Boot
->>> release version when this change is in effect. Re-introducing these mo=
-des
->>> is out of scope for this documentation series, however.
->>>
->>> - reST needs a space between numeric and the substitution
->>> - add comment identifying where U-Boot SPL again reads state of [RGPIO=
-1:RGPIO0]
->>>   useful to refer to for boards with button+transistors instead of MSE=
-L DIP
->>> - cite reference to JH-7110 Boot User Guide BootROM description of Sta=
-rFive loader
->>> - expand on topic of supported and deprecated U-Boot SPL boot modes
->>> - cite from published datasheets for ambient operating temperature dat=
-a
->>> - drop not-yet-published OpenSBI version recommendation
->>> ---
->=20
-> ...
->=20
->>> diff --git a/doc/board/starfive/jh7110_common.rst b/doc/board/starfive=
-/jh7110_common.rst
->>> index 4a8058ee5da..2f049b4c327 100644
->>> --- a/doc/board/starfive/jh7110_common.rst
->>> +++ b/doc/board/starfive/jh7110_common.rst
->>> @@ -1,103 +1,560 @@
->=20
-> ...
->=20
->>> +There are additional unexplained GUID references in the JH-7110 MaskR=
-OM so the
->>> +description given is not complete. Attribution and modifications to t=
-he GPL2.0+
->>> +source code used in StarFive loader have not been published as of thi=
-s writing.
->>> +Due to the lack of verifiable documentation the upstream Linux device=
-tree does
->>> +not contain hints for mmc0 and mmc1 interfaces to be included in U-Bo=
-ot SPL. As
->>> +of U-Boot release v2025.10 and newer the U-Boot specific devicetree o=
-verride of
->>> +hints for mmc0 and mmc1 interfaces that are required for the deprecat=
-ed modes
->>> +have been dropped marking the deprecation of these boot modes in U-Bo=
-ot.
+Hi Michael, Emanuele,
+
+On 11/12/2025 6:07 PM, Michael Nazzareno Trimarchi wrote:
+> Hi all
+> 
+> On Wed, Nov 12, 2025 at 10:57 AM Emanuele Ghidoli
+> <ghidoliemanuele@gmail.com> wrote:
 >>
->> Do you mean upstream  U-Boot will fail to boot from SD-card, which is t=
-he Ubuntu default?
 >>
->> This would need to be fixed urgently.
->=20
-> U-Boot master has failed to boot from SD-Card on VisionFive 2 for some
-> time, see my previous report[1] in Octorber.
->=20
-> Best regards,
-> Yao Zi
->=20
-> [1]: https://lore.kernel.org/u-boot/aPYUlyni65Ux8xpq@pie/
+>>
+>> On 12/11/2025 09:16, Ye Li wrote:
+>>>
+>>>
+>>> On 11/11/2025 9:47 PM, Fabio Estevam wrote:
+>>>> Hi Emanuele,
+>>>>
+>>>> On Thu, Nov 6, 2025 at 7:22 AM Emanuele Ghidoli
+>>>> <ghidoliemanuele@gmail.com> wrote:
+>>>>
+>>>>> Hi Fabio, Ye,
+>>>>>
+>>>>> At Toradex we have been struggling since quite some time (back to 2018) with
+>>>>
+>>>> Does this problem only affect early i.MX6ULL silicon samples?
+>>> Hi Emanuele,
+>>>
+>>>      I have same question as Fabio. Are these samples are early? Do you know
+>>> the time of receiving these sample? And could you show the part number printed
+>>> on the chip.
+>> It could take a little to answer to the first two question. I can say that the
+>> SoM I'm using to validate the patch was assembled in September 2021. Let me
+>> know if this information are needed giving that I can report the marking on
+>> the chip:
+>> MCIMX6Y2CVM08AB CTDQ2107 1N70S CHINA QGDQCTA
+>>
+>>
+>>>
+>>>>
+>>>>> the temperature readings and the thermal shutdown behavior on i.MX6ULL. The
+>>>>> issue we observed is that the thermal shutdown seems to trigger too early.
+>>>>>
+>>>>> I have investigated the history around this topic and verified some internal
+>>>>> notes in our bug tracker. With this revert applied, and on the devices we have
+>>>>> (all trimmed with value 0), the reported temperature increases by about 10 °C
+>>>>> compared to before the revert. The absolute accuracy of the readout is
+>>>>> questionable: for example, on a device kept at around 20 °C, the temperature
+>>>>> readout was ~19 °C before the revert, and ~31 °C after the revert.
+>>>>>
+>>>>> Consider that for devices with fuse value of 6, there is a -10 degrees offset
+>>>>> after this revert (so, the other way around).
+>>>>>
+>>>>> I understand that for Sven this revert improves stability during large XZ
+>>>>> decompression in userspace for few devices, but for us it means that the
+>>>>> thermal shutdown happens roughly 10 °C earlier, which is a serious issue in
+>>>>> our case.
+>>>>>
+>>>>> I would kindly ask NXP to double-check how these devices were trimmed. My gut
+>>>>> feeling is that there might be an inconsistency, either the trimming scheme is
+>>>>> not backward-compatible (e.g. old and new devices behave differently, and the
+>>>>> code should cope, I don't know how, with this), or this patch must be reverted
+>>>>> (because introduces a regression).
+>>>>
+>>>> Peng/Ye Li,
+>>>>
+>>>> How does NXP suggest we handle this? Were the early i.MX6ULL parts
+>>>> incorrectly fused?
+>>> I need to discuss it internally, will feedback you later.
+>>>
+>>>>
+>>>> Can the fuse be read and dynamically adjusted?
+>>>>
+>>> The fuse is locked by MEM_TRIM_LOCK. Emanuele, can you help to read it by
+>>> "fuse read 0 0 1".
+>> Colibri iMX6ULL # fuse read 0 0 1
+>> Reading bank 0:
+>>
+>> Word 0x00000000: 00320003
+>> Colibri iMX6ULL # fuse read 1 0 1
+>> Reading bank 1:
+>>
+>> Word 0x00000000: 00000080
+>>
+> 
+> As is clear this problem was the same we had some months ago, so we
+> are on the same page
+> with Emanuele
+> 
+> Michael
+> 
 
-Hello Yao,
 
-Thank you for pointing to your former communication.
+Can you help to measure the VDD_ARM_CAP and VDD_SOC_CAP on your devices 
+with high temperature read issue, when REFTOP_VBGADJ is set to 3'b000 
+and 3'b110 respectively. Provide the measured voltage and target voltage.
+And please read the Unique ID fuse of this device by "fuse read 0 1 2".
 
-E's commit 27f617019dd0 ("riscv: dts: starfive: prune redundant=20
-jh7110-common overrides") removed bootph-pre-ram properties - in=20
-contradiction to the commit message - removed bootph-pre-ram properties=20
-which were not provided by upstream device-trees.
 
-I sent a mail to point to the issue on the kernel mailing list:
+Best regards,
+Ye Li
 
-Re: [PATCH v2 4/8] riscv: dts: starfive: Split jh7110-common.dtsi and=20
-move opp table to it
-https://lore.kernel.org/all/ffdfc550-559b-4c59-9873-3f040fc3bb0e@canonical=
-.com/
+>> Kind regards,
+>> Emanuele
+>>
+>>>
+>>> Best regards,
+>>> Ye Li
+>>>> Please advise, thanks.
+>>>
+>>
+> 
+> 
 
-With that additional bootph-pre-ram I am able to boot from SD-card again.
-
-I have not yet checked if something is missing to boot from eMMC.
-
-Best regards
-
-Heinrich
