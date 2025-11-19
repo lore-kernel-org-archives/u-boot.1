@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5FD6CF34C3
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D627CF34C3
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 14:57:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFFCE83FF5;
-	Wed, 19 Nov 2025 15:55:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1926E83FF4;
+	Wed, 19 Nov 2025 15:55:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jyQwnkk1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Dq1nyZNH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 742B683FEC; Wed, 19 Nov 2025 15:55:41 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 50AB183FFE; Wed, 19 Nov 2025 15:55:43 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C9618004F
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:55:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E78883FBC
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 15:55:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-450ac3ed719so2119863b6e.0
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:55:39 -0800 (PST)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-65763315216so926264eaf.0
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:55:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763564138; x=1764168938; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763564140; x=1764168940; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BTv1dOqE4FH2zUF+yx7TBXQs8c7xNl0OHNhUnGB5LU0=;
- b=jyQwnkk1hGmNCGFZSLHaRnlan6vCIMCZvQCYMZexGUA8WWKGRnC8AfbGPmyv6dMAUg
- HUnkXFsi85m9JuzTWo52bJdgChWacODv3vN2BM0kJ172oEDLZfq7BJYc40ZsY/zZ8me5
- AK7lvgG3NSRgeg3hlCD89eJ52D4Bw/H7npLqw=
+ bh=mdIpwuoIxGP67OCcWXqcks7HG4+ExKoT5IzEceg+AvU=;
+ b=Dq1nyZNHEm2/KiIZCkT5PQk4oSIOhpQeNU/0jRDsc2J7BnSFsD2b+N/UnmejISOBfE
+ k6rACYD6wGRYI+7ddsBVrKiDCHs6n+3pGwLOkRRB5Povo7UVIIjRYz1wN7qIvHDttiQu
+ qWFnvGIGwsuyRG/pHpDUj+SrUrQhm6z+nZemk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763564138; x=1764168938;
+ d=1e100.net; s=20230601; t=1763564140; x=1764168940;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BTv1dOqE4FH2zUF+yx7TBXQs8c7xNl0OHNhUnGB5LU0=;
- b=lVvdhDUh+sw3jqG/WQEYg9xJKXrHIq+VbzAs29DyMMhhcn2g3lCXLtlaOGtU59PAay
- Gfv0OnFS4wbBwzY36KFrUCE+3l1iQ7oBsxSUouM8zTkRxdnJwy82cOTWvcRuIn4qvNAR
- Z/rnAqBf1NPVEQ8p1wfUO9qxIUI0JGobZ7iYNq82nIl3R+5OpCJVeHavSuYbm242S03N
- 6xDzqFCfXdRn36uYCYQiyKa1ONhiDPiak4CcMSeipB1pPYaQ50PJHoSgpnd7x33ZQJNB
- ukc2rMlr7V/gJCfaU2MXNgurhcS++MbS/qXjs/Ui9Iv/6/Yo+/XR/EBaP1mWu7wxwAbn
- 1MhA==
-X-Gm-Message-State: AOJu0YxJWLbK13ZGl3b+RJHXsEN612SSzVREID7o4u6lVrs7O0WxwRHY
- n5TyX9atIJMVxqfdx5uLabsBSeWXpHHLNNklv9CtnqshHg/L6f4+mBP7y39oEG/FaoMcAFdh3Nc
- EN/oouZI2Aw==
-X-Gm-Gg: ASbGnctZcI2ofTe3DKczJlQOJ+InqW8bcMq9HgMfSYhYbZrBHW2TDvxkFHTlSeiZlL7
- IWZoMd/reyBeeO2m87II2qPzD6ZXKcckwB6kLXO29p4HKQCeTo21mrDHrfPgooS/KDz++JP8sHx
- TxAGAgwRrOP9U5qr6ikbEl0Lv1wL/RLOGKIaqM3gfrZSlcplRJ8HyUCPoftlLbYi8FkIgimEaKG
- SXUT6egw7hBoGlctRGlg+I5EgSbyxQEHrFIfocQEMhvn3h8LlY1Ja5lDO8VnyVz1xfMojayqiic
- WQ/eRRhifUdg4+zhyWIboep8a5jokzB2vRG13+AJkAPFqGY1F50Iyee6Eil8yOngaSmlrX/86U8
- SN4/hBWwR1lhaSQ+CfXxpAZf2DAQUclJuT1buPcJMuqh+c3Rj+9Vfyp7v5yN1t2H6pPc9j5Giom
- 2S8+BU2cpmV0vA6CSwAjDWiwd2H6u3w6Xt/B4/z1cT9/e5t0Kg/oNS2PCnz+GEriU=
-X-Google-Smtp-Source: AGHT+IHbuOWGFtalc1dpfeszMNswcWe5rzv71YkOGuHGkiglSNL4vghR7hPJwPgS0yZB7DosBOUcdA==
-X-Received: by 2002:a05:6808:3a16:b0:450:d1ba:151b with SMTP id
- 5614622812f47-450d1ba30c6mr3913320b6e.29.1763564138136; 
- Wed, 19 Nov 2025 06:55:38 -0800 (PST)
+ bh=mdIpwuoIxGP67OCcWXqcks7HG4+ExKoT5IzEceg+AvU=;
+ b=mphO5j51YF2x3uthzH6eSnHscECokkOPPV+eqn9WlCVXXuniEyQ5BWCFUPg02VaOHM
+ ZGvU8ImphkyqYt1KatDJabil9P7H/zZPEcP0SPhYnRnwhERt8wXwuH5SZGNEQ5AB6ZWV
+ jR7KsWetuk22LV83vH2WW1Rl7BELQe1nuwarchaz+NXVv50tNTVkJEMFHAP0YhTHMENJ
+ VKXUvk8uvpSDxXKSnsCYQqC1gATeMJWK/jJk3NS8tO0c3lXVm8cTvR1Jvnd2aEdV+kMC
+ iaXtkP6JL27Ao9SEY65bZ9EtqFuMED+asBmVHyx9PJBTVKojS0m4k0HDwU5qw4jXxvV7
+ DWvQ==
+X-Gm-Message-State: AOJu0YySfsXJyqBOPTJGNFyCWPf7+5wu4C0C1Dzo/HCN1uihpw3fL6s+
+ LpKbmCtvjEmO3E6G7nGRSNkObEFczhP71OdAQfImER/RiW7DrHqgWFPfMlc3MfGkRQjMZYcX1MG
+ 4yMlHTMDQCw==
+X-Gm-Gg: ASbGnctLT2dWBh8d4OqKjuZQJHL0awNo/09M61ScOnwMmt/DfoQeYxZdkJlY697tOaI
+ m5hsFQ9tP23ttU0wsZ6zeC7kmJgEws+xnQVTRQ7aT6dlXEBHIHMM86tQmoL5gaK3mCPbWxRIPl5
+ doaXy5pOuY4Y3wBG0g4HJDHmbVukICtxiiezkiqBykhNWpZQdyktpRJMDCunTejuGx+0yfYmfMh
+ QBrJf4ft4e9Ul1TtFmbp1+kIXYek1YCOYn13IB4H9W5l6aGdnxvNSznWL43P6RMcIwyb2M9PnDT
+ KgRwtK8kp48G7sKO0B10EgPHelV6utXIZeuhmUbp5HJrTvrFppefmxn2Y0WYq7kmtLi2oY+/V6o
+ hPtCoJ25eft8paE8+T7VdbodjF3M/kgCrlEpazXm1cIXVWIgOMG4bCNIraoxBaf4Ecw6KvjxEiX
+ DNKpDWM0iEvyHBexmwfy3/WTaVkws+R1TNs0R0HHGGCZdbdbvo/57OZ024H23fHy4=
+X-Google-Smtp-Source: AGHT+IEzPIdyCI/q/AR8Nav2rXte/o7bZpWDUVIvcpDPrgAHEGXFSR6Vtqyy8o4q/oWqHaLesLZrOg==
+X-Received: by 2002:a4a:edcd:0:b0:657:5cc3:f38 with SMTP id
+ 006d021491bc7-6575cc313acmr3296152eaf.0.1763564139903; 
+ Wed, 19 Nov 2025 06:55:39 -0800 (PST)
 Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6575441939bsm2918170eaf.16.2025.11.19.06.55.37
+ 006d021491bc7-65748180aedsm3854697eaf.0.2025.11.19.06.55.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Nov 2025 06:55:37 -0800 (PST)
+ Wed, 19 Nov 2025 06:55:39 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Paul Walmsley <paul.walmsley@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Anup Patel <anup@brainfault.org>,
- Atish Patra <atishp@atishpatra.org>
-Subject: [PATCH] sifive-unleashed: Stop disabling device tree relocation
-Date: Wed, 19 Nov 2025 08:55:36 -0600
-Message-ID: <20251119145536.843408-1-trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+Subject: [PATCH] socfpga_vining_fpga: Stop disabling device tree relocation
+Date: Wed, 19 Nov 2025 08:55:38 -0600
+Message-ID: <20251119145538.843430-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -107,26 +105,23 @@ tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
 or bootm_mapsize are the correct way do this. Please see
 doc/usage/environment.rst for more details.
 
-Cc: Paul Walmsley <paul.walmsley@sifive.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Anup Patel <anup@brainfault.org>
-Cc: Atish Patra <atishp@atishpatra.org>
-
- include/configs/sifive-unleashed.h | 1 -
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+---
+ include/configs/socfpga_vining_fpga.h | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/include/configs/sifive-unleashed.h b/include/configs/sifive-unleashed.h
-index cd8d0438ba67..862c24570245 100644
---- a/include/configs/sifive-unleashed.h
-+++ b/include/configs/sifive-unleashed.h
-@@ -37,7 +37,6 @@
- 	"name=system,size=-,bootable,type=${type_guid_gpt_system};"
- 
- #define CFG_EXTRA_ENV_SETTINGS \
--	"fdt_high=0xffffffffffffffff\0" \
- 	"initrd_high=0xffffffffffffffff\0" \
- 	"kernel_addr_r=0x84000000\0" \
- 	"kernel_comp_addr_r=0x88000000\0" \
+diff --git a/include/configs/socfpga_vining_fpga.h b/include/configs/socfpga_vining_fpga.h
+index 4bb15cf46293..ad13f1345b01 100644
+--- a/include/configs/socfpga_vining_fpga.h
++++ b/include/configs/socfpga_vining_fpga.h
+@@ -40,7 +40,6 @@
+ 	"hostname=vining_fpga\0"					\
+ 	"kernel_addr_r=0x10000000\0"					\
+ 	"fdt_addr_r=0x20000000\0"					\
+-	"fdt_high=0xffffffff\0"						\
+ 	"initrd_high=0xffffffff\0"					\
+ 	"dfu_alt_info=qspi0 sf 0:0;qspi1 sf 0:1\0"			\
+ 	"mtdparts_0_16m=ff705000.spi.0:" /* 16MiB+128MiB SF config */	\
 -- 
 2.43.0
 
