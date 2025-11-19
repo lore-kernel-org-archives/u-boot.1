@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 905D6CF258C
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 09:51:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38208CF258C
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 09:52:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C349983EAB;
-	Wed, 19 Nov 2025 10:51:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E66283EBA;
+	Wed, 19 Nov 2025 10:51:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WF2XxwwF";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="opbB0s5Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED8BB83A8C; Wed, 19 Nov 2025 06:14:23 +0100 (CET)
+ id 544B983A8C; Wed, 19 Nov 2025 06:14:24 +0100 (CET)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E473083B95
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:14:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 356FE83DBF
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:14:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Takahiro.Kuwano.infineon.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 0BEEB4410F;
+ by sea.source.kernel.org (Postfix) with ESMTP id BC177441E5;
  Wed, 19 Nov 2025 05:14:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A3DEDC19424;
- Wed, 19 Nov 2025 05:14:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 71559C2BCAF;
+ Wed, 19 Nov 2025 05:14:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1763529255;
- bh=xWFEYAd+CuR1AG/L5cVxzXgBRAfbS6kHRbxSq08BD9o=;
+ s=k20201202; t=1763529256;
+ bh=ynSMZiKAAkmhnrFV1glwsJgNC4IyEMOlW/JsWqyPOlw=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=WF2XxwwFvjgVkFwKlD69QUwvFv5r7N5Uiw68GMM16sdES9sTdOZ5fZ0Ujy65DG4pJ
- xxuiBwvs6+TDPOLV4akT6AyEhfDccVrEatTjjGdhj1oD9RHwwyfA7Djq9BYBO+XY8l
- VRl9Sdf5yrHEAAYI//FAv/zXDS/GCmYo3w4bCCIjimPo1XEbiEPD7h04KyYZEX2PBS
- Qrpj77MfVxHJAVypGWE8luXfSAUqmCMna05Tjk+ehZ5K+8VtgX7HB0DSGE/B3yOoUj
- FcnHOLCtzK7P1CPVWIATqO5R9eF6zEBS7P0uiG2zUNTEQkmK//EFosfEgZQYtrnTHg
- tNEzdnNeSUAvg==
+ b=opbB0s5QWTgrUWmC9QYbuHT/N+D1GYqJyqqzrOUuQOG1cV+VdjtXrlwW59L5cxqPg
+ 0jbVgzrUysyeiwCApv4NRAvNcMR9XBe4sgwGQAbai5SWwqED0LaK9UyK9AQhAED5uS
+ uhRifS2Q6WMBj5+d06ovmR/3FV5sFHJec3Jc2uLIkUwbU86f400Xt+0pEcDqw3KXNF
+ AZ6cij1junc9h6CdfQMTYDfqP1kcY/2ZP0S+0/TraBAtmtJvlmMCI3pVLghXq1dh8T
+ 3Deq0KQkvSasGoK0cbKulAPGswIVb8YWNSGHe6NU4thHQr9XYfVuvITFTlp7Q8NBJL
+ zSUj9ior/09Dw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 7C1AACF2582;
- Wed, 19 Nov 2025 05:14:15 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 03907CF2570;
+ Wed, 19 Nov 2025 05:14:16 +0000 (UTC)
 From: Takahiro Kuwano via B4 Relay
  <devnull+Takahiro.Kuwano.infineon.com@kernel.org>
-Date: Wed, 19 Nov 2025 14:13:00 +0900
-Subject: [PATCH 01/11] spi: zynqmp-gqspi: Set priv->is_parallel in
- child_pre_probe()
+Date: Wed, 19 Nov 2025 14:13:07 +0900
+Subject: [PATCH 08/11] mtd: spi-nor: stacked: Cleanup stacked/parallel
+ flags
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251119-amd-cleanup-v1-1-c555bd85e6e4@infineon.com>
+Message-Id: <20251119-amd-cleanup-v1-8-c555bd85e6e4@infineon.com>
 References: <20251119-amd-cleanup-v1-0-c555bd85e6e4@infineon.com>
 In-Reply-To: <20251119-amd-cleanup-v1-0-c555bd85e6e4@infineon.com>
 To: u-boot@lists.denx.de, Tudor Ambarus <tudor.ambarus@linaro.org>
@@ -70,11 +70,11 @@ Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Takahiro Kuwano <tkuw584924@gmail.com>, 
  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1763529253; l=1838;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1763529253; l=6367;
  i=Takahiro.Kuwano@infineon.com; s=20250227; h=from:subject:message-id;
- bh=AqEOg4BZ9g/wU8lhyQ1H3eCgVdFedrYMVSatqvFmKYE=;
- b=3+dOvAz4haA1MrUtN8408QBjL1cQXC6KbuSThy5oWdIgUIcQexZIq95tGrWluM0gKQ192R8yE
- VF3xfGP83pmAi3MpE0gp4WcwXmhaVMhM8NgCFmkWfs7DJbvfED0Rs4r
+ bh=UIFLPVZke385l9hXNO40mhicBQVaOLXNsXJaBfM4/sA=;
+ b=3VEsn3ZZExlnzsHcxHSM0AiuJ62HGp/bzEK1x9xlndr3CZnyMwU8XquM/IqeI+b1ibAT2aqs5
+ 7dpdEYZSwv8ByqlNXejUQ68KQ1/Z3fXvs5upMroTEHE+apyTwQwz8Xw
 X-Developer-Key: i=Takahiro.Kuwano@infineon.com; a=ed25519;
  pk=aS8V9WLuMUkl0vmgD0xJU19ZajdJmuyFBnBfVj0dfDs=
 X-Endpoint-Received: by B4 Relay for Takahiro.Kuwano@infineon.com/20250227
@@ -100,65 +100,223 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-priv->is_parallel should be set at probe instead of at every exec_op().
-It can be set in child_pre_probe() by checking the existence of
-parallel-memories property.
+Remove check of CONFIG_SPI_STACKED_PARALLEL, SNOR_F_HAS_PARALLEL, and
+SNOR_F_HAS_STACKED as stacked module is only available when the config
+is enabled and dedicated for stacked mode.
 
-Also remove GQSPI_SELECT_LOWER/UPPER_CS flags. They are problematic as
-they overwrite SPI_XFER_BEGIN/END defined in spi.h.
+Keep SPI_XFER_U_PAGE as it tells controllers whether upper or lower chip
+to be accessed. Also keep nor->upage_prev as it tracks previous chip
+that write_bar is issued.
 
 Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 ---
- drivers/spi/zynqmp_gqspi.c | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
+ drivers/mtd/spi/stacked.c | 124 +++++++++++-----------------------------------
+ 1 file changed, 30 insertions(+), 94 deletions(-)
 
-diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
-index 2a095d0c58e..4a25ee0c459 100644
---- a/drivers/spi/zynqmp_gqspi.c
-+++ b/drivers/spi/zynqmp_gqspi.c
-@@ -89,9 +89,6 @@
- #define SPI_XFER_ON_LOWER		1
- #define SPI_XFER_ON_UPPER		2
+diff --git a/drivers/mtd/spi/stacked.c b/drivers/mtd/spi/stacked.c
+index e005aea1053..49f664bc313 100644
+--- a/drivers/mtd/spi/stacked.c
++++ b/drivers/mtd/spi/stacked.c
+@@ -25,11 +25,7 @@ static int write_bar(struct spi_nor *nor, u32 offset)
+ 	if (spi_nor_wait_till_ready(nor))
+ 		return 1;
  
--#define GQSPI_SELECT_LOWER_CS          BIT(0)
--#define GQSPI_SELECT_UPPER_CS          BIT(1)
+-	if (nor->flags & (SNOR_F_HAS_PARALLEL | SNOR_F_HAS_STACKED) &&
+-	    mtd->size <= SZ_32M)
+-		return 0;
 -
- #define GQSPI_DMA_ALIGN			0x4
- #define GQSPI_MAX_BAUD_RATE_VAL		7
- #define GQSPI_DFLT_BAUD_RATE_VAL	2
-@@ -439,6 +436,13 @@ static int zynqmp_qspi_child_pre_probe(struct udevice *bus)
- 	slave->bytemode = SPI_4BYTE_MODE;
- 	priv->max_hz = slave->max_hz;
+-	if (mtd->size <= SZ_16M)
++	if (mtd->size <= SZ_32M)
+ 		return 0;
  
-+	/*
-+	 * The property has values that represent flash sizes but we just need
-+	 * to know the existence of the property here.
-+	 */
-+	priv->is_parallel = ofnode_read_bool(dev_ofnode(bus),
-+					     "parallel-memories");
-+
+ 	offset = offset % (u32)mtd->size;
+@@ -37,9 +33,7 @@ static int write_bar(struct spi_nor *nor, u32 offset)
+ 
+ 	upage_curr = nor->spi->flags & SPI_XFER_U_PAGE;
+ 
+-	if (!(nor->flags & SNOR_F_HAS_STACKED) && bank_sel == nor->bank_curr)
+-		return 0;
+-	else if (upage_curr == nor->upage_prev && bank_sel == nor->bank_curr)
++	if (upage_curr == nor->upage_prev && bank_sel == nor->bank_curr)
+ 		return 0;
+ 
+ 	nor->upage_prev = upage_curr;
+@@ -89,17 +83,10 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+ 			goto erase_err;
+ 		}
+ 		offset = addr;
+-		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+-			if (nor->flags & SNOR_F_HAS_PARALLEL)
+-				offset /= 2;
+-
+-			if (nor->flags & SNOR_F_HAS_STACKED) {
+-				if (offset >= (mtd->size / 2))
+-					nor->spi->flags |= SPI_XFER_U_PAGE;
+-				else
+-					nor->spi->flags &= ~SPI_XFER_U_PAGE;
+-			}
+-		}
++		if (offset >= (mtd->size / 2))
++			nor->spi->flags |= SPI_XFER_U_PAGE;
++		else
++			nor->spi->flags &= ~SPI_XFER_U_PAGE;
+ #if CONFIG_IS_ENABLED(SPI_FLASH_BAR)
+ 		ret = write_bar(nor, offset);
+ 		if (ret < 0)
+@@ -168,46 +155,22 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 
+ 	dev_dbg(nor->dev, "from 0x%08x, len %zd\n", (u32)from, len);
+ 
+-	if ((nor->flags & SNOR_F_HAS_PARALLEL) && (offset & 1)) {
+-		/* We can hit this case when we use file system like ubifs */
+-		from--;
+-		len++;
+-		is_ofst_odd = true;
+-	}
+-
+ 	while (len) {
+ 		read_len = len;
+ 		offset = from;
+ 
+ 		if (CONFIG_IS_ENABLED(SPI_FLASH_BAR)) {
+ 			bank = (u32)from / SZ_16M;
+-			if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+-				if (nor->flags & SNOR_F_HAS_PARALLEL)
+-					bank /= 2;
+-			}
+ 			rem_bank_len = SZ_16M * (bank + 1);
+-			if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+-				if (nor->flags & SNOR_F_HAS_PARALLEL)
+-					rem_bank_len *= 2;
+-			}
+ 			rem_bank_len -= from;
+ 		}
+ 
+-		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+-			if (nor->flags & SNOR_F_HAS_STACKED) {
+-				stack_shift = 1;
+-				if (offset >= (mtd->size / 2)) {
+-					offset = offset - (mtd->size / 2);
+-					nor->spi->flags |= SPI_XFER_U_PAGE;
+-				} else {
+-					nor->spi->flags &= ~SPI_XFER_U_PAGE;
+-				}
+-			}
+-		}
+-
+-		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+-			if (nor->flags & SNOR_F_HAS_PARALLEL)
+-				offset /= 2;
++		stack_shift = 1;
++		if (offset >= (mtd->size / 2)) {
++			offset = offset - (mtd->size / 2);
++			nor->spi->flags |= SPI_XFER_U_PAGE;
++		} else {
++			nor->spi->flags &= ~SPI_XFER_U_PAGE;
+ 		}
+ 
+ #if CONFIG_IS_ENABLED(SPI_FLASH_BAR)
+@@ -272,24 +235,6 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
+ 	if (!len)
+ 		return 0;
+ 
+-	/*
+-	 * Cannot write to odd offset in parallel mode,
+-	 * so write 2 bytes first
+-	 */
+-	if ((nor->flags & SNOR_F_HAS_PARALLEL) && (to & 1)) {
+-		u8 two[2] = {0xff, buf[0]};
+-		size_t local_retlen;
+-
+-		ret = spi_nor_write(mtd, to & ~1, 2, &local_retlen, two);
+-		if (ret < 0)
+-			return ret;
+-
+-		*retlen += 1; /* We've written only one actual byte */
+-		buf++;
+-		len--;
+-		to++;
+-	}
+-
+ 	for (i = 0; i < len; ) {
+ 		ssize_t written;
+ 		loff_t addr = to + i;
+@@ -308,16 +253,11 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
+ 			page_offset = do_div(aux, nor->page_size);
+ 		}
+ 		offset = to + i;
+-		if (nor->flags & SNOR_F_HAS_PARALLEL)
+-			offset /= 2;
+-
+-		if (nor->flags & SNOR_F_HAS_STACKED) {
+-			if (offset >= (mtd->size / 2)) {
+-				offset = offset - (mtd->size / 2);
+-				nor->spi->flags |= SPI_XFER_U_PAGE;
+-			} else {
+-				nor->spi->flags &= ~SPI_XFER_U_PAGE;
+-			}
++		if (offset >= (mtd->size / 2)) {
++			offset = offset - (mtd->size / 2);
++			nor->spi->flags |= SPI_XFER_U_PAGE;
++		} else {
++			nor->spi->flags &= ~SPI_XFER_U_PAGE;
+ 		}
+ 
+ #if CONFIG_IS_ENABLED(SPI_FLASH_BAR)
+@@ -408,6 +348,7 @@ int spi_nor_stacked_post_init_fixups(struct spi_nor *nor)
+ #if CONFIG_IS_ENABLED(DM_SPI)
+ 	u64 flash_size[SNOR_FLASH_CNT_MAX] = { 0 };
+ 	struct udevice *dev = nor->spi->dev;
++	bool is_stacked = false;
+ 	u32 idx = 0, i = 0;
+ 	int rc;
+ 
+@@ -421,33 +362,28 @@ int spi_nor_stacked_post_init_fixups(struct spi_nor *nor)
+ 		} else {
+ 			idx++;
+ 			i++;
+-			if (!(nor->flags & SNOR_F_HAS_STACKED))
+-				nor->flags |= SNOR_F_HAS_STACKED;
+-			if (!(nor->spi->flags & SPI_XFER_STACKED))
+-				nor->spi->flags |= SPI_XFER_STACKED;
++			is_stacked = true;
+ 		}
+ 	}
+ 
+-	if (nor->flags & (SNOR_F_HAS_STACKED | SNOR_F_HAS_PARALLEL)) {
++	if (is_stacked) {
+ 		mtd->size = 0;
+ 		for (idx = 0; idx < SNOR_FLASH_CNT_MAX; idx++)
+ 			mtd->size += flash_size[idx];
+ 	}
+ #endif
++	if (!is_stacked)
++		return 0;
+ 
+-	if (nor->flags & SNOR_F_HAS_STACKED) {
+-		nor->spi->flags |= SPI_XFER_U_PAGE;
+-		ret = spi_nor_init(nor);
+-		if (ret)
+-			return ret;
+-		nor->spi->flags &= ~SPI_XFER_U_PAGE;
+-	}
++	nor->spi->flags |= SPI_XFER_U_PAGE;
++	ret = spi_nor_init(nor);
++	if (ret)
++		return ret;
++	nor->spi->flags &= ~SPI_XFER_U_PAGE;
+ 
+-	if (nor->flags & SNOR_F_HAS_STACKED) {
+-		mtd->_erase = spi_nor_erase;
+-		mtd->_read = spi_nor_read;
+-		mtd->_write = spi_nor_write;
+-	}
++	mtd->_erase = spi_nor_erase;
++	mtd->_read = spi_nor_read;
++	mtd->_write = spi_nor_write;
+ 
  	return 0;
  }
- 
-@@ -862,10 +866,6 @@ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
- 	else
- 		priv->u_page = 0;
- 
--	if ((slave->flags & GQSPI_SELECT_LOWER_CS) &&
--	    (slave->flags & GQSPI_SELECT_UPPER_CS))
--		priv->is_parallel = true;
--
- 	priv->stripe = 0;
- 	priv->bus = 0;
- 
-@@ -889,7 +889,6 @@ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
- 
- 	zynqmp_qspi_chipselect(priv, 0);
- 
--	priv->is_parallel = false;
- 	slave->flags &= ~SPI_XFER_LOWER;
- 
- 	return ret;
 
 -- 
 2.34.1
