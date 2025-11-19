@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9FADCF3186
-	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 09:51:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 644B6CF258C
+	for <u-boot@archiver.kernel.org>; Wed, 19 Nov 2025 09:51:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E0E783E28;
+	by phobos.denx.de (Postfix) with ESMTP id 5B65983E57;
 	Wed, 19 Nov 2025 10:51:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rdH8cLh3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CODc1eyJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47D9783E1B; Wed, 19 Nov 2025 06:14:22 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 9049683E1B; Wed, 19 Nov 2025 06:14:22 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7CDA83D07
+ by phobos.denx.de (Postfix) with ESMTPS id 0036983E0E
  for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 06:14:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Takahiro.Kuwano.infineon.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 76EBC600CB;
+ by sea.source.kernel.org (Postfix) with ESMTP id 5BFAC44195;
  Wed, 19 Nov 2025 05:14:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id EB440C2BCB6;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id DA6EEC113D0;
  Wed, 19 Nov 2025 05:14:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1763529256;
- bh=TwoUXyv5sTKtC+tvi+SSSapmpePMlvda/86Ku7+66xc=;
+ bh=/kZVXWJpt8D9N3+8vmeX4fvDIrO0+K7OK+MsmAV5fMc=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=rdH8cLh3GpBB+s27AKbVxMBTa0s6UjT0r+6uf0tnq3GxXn26MUPhH7SZ980miaIYZ
- iENYm8s+Jz/xbBZ+SfoPYXv1ZqphBC1Ok2tnQYFE0RK3Gppkr1L7uqXGMMCEDi+KXJ
- 27QqCjxkUPLeb/EaIOiICvdZgLxiaeg0D9+W5BaTsS2N9P3C2LTYrmwC1Z5EAOj2Ig
- 7bBf7IfdBK8uTDLEAT29giFppUpHP13MjMENMHaqK73ohkm0cBgwVCX6s6E2lNGiHM
- hk9y9ilx8mE/pqNBIp156PFIaok8OJm00vM/MAqws3VeCN+0RjQ2CZZx7tYFcBUVZf
- vgDwgo50DkG+g==
+ b=CODc1eyJix0Ee/U7S2/B7UkNKCKx9958P81PKuxKPe+Dbfuh0/V9ET/AIxGkE9V7F
+ DnIvD6ejkNyHc8Da3d+VmGxgXCzfEw1oouv6JGwDUUC+i4Lfqu3mXSOg1gGI6QUy7T
+ R95PQdOXYjOFW7AcG/GijOlLX6ZuZKtZPNsQWoT4L/tDMUIR+lRBn370tUi+nF8ok4
+ 9PvcGOBDg8Sh7d1hBbWMOjDBCi5ksY/RrUunioQTywbLUxs1ayAP0o605MjgxGJHWZ
+ kaJ0jvTi3PCvGkL4uqF3hXTkYnGQxFiXZ9lq44KIZcJs+gifDRy3YftVpSJGY9TKVx
+ daZxkfwxzGnog==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id B117ECF2585;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 8D92ECF2583;
  Wed, 19 Nov 2025 05:14:15 +0000 (UTC)
 From: Takahiro Kuwano via B4 Relay
  <devnull+Takahiro.Kuwano.infineon.com@kernel.org>
-Date: Wed, 19 Nov 2025 14:13:03 +0900
-Subject: [PATCH 04/11] spi: zynq-qspi: Set priv->is_parallel/stacked in
- child_pre_probe()
+Date: Wed, 19 Nov 2025 14:13:01 +0900
+Subject: [PATCH 02/11] spi: zynqmp_gqspi: Remove reference to
+ SPI_XFER_LOWER flag.
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251119-amd-cleanup-v1-4-c555bd85e6e4@infineon.com>
+Message-Id: <20251119-amd-cleanup-v1-2-c555bd85e6e4@infineon.com>
 References: <20251119-amd-cleanup-v1-0-c555bd85e6e4@infineon.com>
 In-Reply-To: <20251119-amd-cleanup-v1-0-c555bd85e6e4@infineon.com>
 To: u-boot@lists.denx.de, Tudor Ambarus <tudor.ambarus@linaro.org>
@@ -70,11 +71,11 @@ Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Takahiro Kuwano <tkuw584924@gmail.com>, 
  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1763529253; l=2137;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1763529253; l=1582;
  i=Takahiro.Kuwano@infineon.com; s=20250227; h=from:subject:message-id;
- bh=AcN4YC1gFntwwrYIL2/OY5TYR2qJN2dBFjKE+vFyyx0=;
- b=nSdcPv6/MpckFvlZTkjPkJBwlkyU7yYrRYW1ZnCZhRlSqXRJadKKQZjPKonn3TYI9Ee6Bovf+
- o9AbmzDl+XEAmz1vmT+AnyJOLJnRchHj0Qz5upv6n4wFwqgoI8jLSi5
+ bh=VNUuewgVolvHFP3F2HRpZhcnlgOZR8fV/mUTRvu645U=;
+ b=FFfXTMgppHDZdzBcotbasNSqvAK4XA9HP2omVqXVYpnO47BqHiTdHGnXvclMHyxosFOzEKxQY
+ aBJaTFPvHztDHhzPQACP2yGUSBMnfe2iEANhEe21J4PEC1rpYv+F06F
 X-Developer-Key: i=Takahiro.Kuwano@infineon.com; a=ed25519;
  pk=aS8V9WLuMUkl0vmgD0xJU19ZajdJmuyFBnBfVj0dfDs=
 X-Endpoint-Received: by B4 Relay for Takahiro.Kuwano@infineon.com/20250227
@@ -100,69 +101,60 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-priv->is_paralle/stacked should be set at probe instead of at every
-exec_op(). It can be set in child_pre_probe() by checking the existence
-of parallel/stacked-memories property.
-
-Also remove QSPI_SELECT_LOWER/UPPER_CS flags. They are problematic as
-they overwrite SPI_XFER_BEGIN/END defined in spi.h.
+SPI_XFER_LOWER is set in spi-nor-core for reading ID, SFDP and BAR.
+The flag is referenced by AMD controllers only. Controller drivers can
+intercept the opcode and change its settings accordingly.
 
 Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 ---
- drivers/spi/zynq_qspi.c | 20 +++++++++-----------
- 1 file changed, 9 insertions(+), 11 deletions(-)
+ drivers/spi/zynqmp_gqspi.c | 21 ++++++++++++++++++---
+ 1 file changed, 18 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/spi/zynq_qspi.c b/drivers/spi/zynq_qspi.c
-index e43dbb40c4a..a2d6d80d04e 100644
---- a/drivers/spi/zynq_qspi.c
-+++ b/drivers/spi/zynq_qspi.c
-@@ -46,9 +46,6 @@ DECLARE_GLOBAL_DATA_PTR;
- #define ZYNQ_QSPI_TXD_00_11_OFFSET	0x88	/* Transmit 3-byte inst */
- #define ZYNQ_QSPI_FR_QOUT_CODE		0x6B    /* read instruction code */
- 
--#define QSPI_SELECT_LOWER_CS            BIT(0)
--#define QSPI_SELECT_UPPER_CS            BIT(1)
--
- /*
-  * QSPI Linear Configuration Register
-  *
-@@ -205,6 +202,15 @@ static int zynq_qspi_child_pre_probe(struct udevice *bus)
- 	priv->max_hz = slave->max_hz;
- 	slave->multi_cs_cap = true;
- 
-+	/*
-+	 * The properties have values that represent flash sizes but we just
-+	 * need to know the existence of the property here.
-+	 */
-+	priv->is_parallel = ofnode_read_bool(dev_ofnode(bus),
-+					     "parallel-memories");
-+	priv->is_stacked = ofnode_read_bool(dev_ofnode(bus),
-+					    "stacked-memories");
-+
+diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
+index 4a25ee0c459..143b957516b 100644
+--- a/drivers/spi/zynqmp_gqspi.c
++++ b/drivers/spi/zynqmp_gqspi.c
+@@ -823,6 +823,23 @@ static int zynqmp_qspi_release_bus(struct udevice *dev)
  	return 0;
  }
  
-@@ -757,12 +763,6 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 	const u8 *tx_buf = NULL;
- 	u8 *rx_buf = NULL;
++static bool zynqmp_qspi_is_lower_only(const struct spi_mem_op *op)
++{
++	/*
++	 * This is a list of opcodes for which we must read only from lower chip
++	 * in dual parallel mode.
++	 */
++	switch (op->cmd.opcode) {
++	case SPINOR_OP_RDID:
++	case SPINOR_OP_RDSFDP:
++	case SPINOR_OP_BRRD:
++	case SPINOR_OP_RDEAR:
++		return true;
++	}
++
++	return false;
++}
++
+ static bool zynqmp_qspi_update_stripe(const struct spi_mem_op *op)
+ {
+ 	/*
+@@ -870,7 +887,7 @@ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
+ 	priv->bus = 0;
  
--	if ((slave->flags & QSPI_SELECT_LOWER_CS) &&
--	    (slave->flags & QSPI_SELECT_UPPER_CS))
--		priv->is_parallel = true;
--	if (slave->flags & SPI_XFER_STACKED)
--		priv->is_stacked = true;
+ 	if (priv->is_parallel) {
+-		if (slave->flags & SPI_XFER_LOWER)
++		if (zynqmp_qspi_is_lower_only(op))
+ 			priv->bus = 1;
+ 		if (zynqmp_qspi_update_stripe(op))
+ 			priv->stripe = 1;
+@@ -889,8 +906,6 @@ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
+ 
+ 	zynqmp_qspi_chipselect(priv, 0);
+ 
+-	slave->flags &= ~SPI_XFER_LOWER;
 -
- 	if (op->data.nbytes) {
- 		if (op->data.dir == SPI_MEM_DATA_IN)
- 			rx_buf = op->data.buf.in;
-@@ -811,8 +811,6 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 			return ret;
- 	}
- 
--	priv->is_parallel = false;
--	priv->is_stacked = false;
- 	slave->flags &= ~SPI_XFER_LOWER;
- 	spi_release_bus(slave);
+ 	return ret;
+ }
  
 
 -- 
