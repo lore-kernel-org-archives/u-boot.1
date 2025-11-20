@@ -4,45 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8724BCF885C
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 13:58:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 741FECF885A
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 13:58:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D48C683EF5;
-	Thu, 20 Nov 2025 14:58:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1B4CC83FD3;
+	Thu, 20 Nov 2025 14:58:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55DBD840A9; Thu, 20 Nov 2025 13:48:28 +0100 (CET)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
+ id BBCE983D3C; Thu, 20 Nov 2025 13:48:28 +0100 (CET)
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc09])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3465983D3C
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 13:48:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A53584068
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 13:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6c])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dBynh5LTWzYRn;
- Thu, 20 Nov 2025 13:48:24 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dBynk0tFZzc23;
+ Thu, 20 Nov 2025 13:48:26 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dBynd4tcSzH9; Thu, 20 Nov 2025 13:48:21 +0100 (CET)
+ id 4dBynh5DDQzwJF; Thu, 20 Nov 2025 13:48:24 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH 0/2] led: remove legacy API
-Date: Thu, 20 Nov 2025 13:48:04 +0100
-Message-Id: <20251120-legacy-led-removal-v1-0-369d44338358@cherry.de>
+Date: Thu, 20 Nov 2025 13:48:05 +0100
+Subject: [PATCH 1/2] led: migrate last legacy LED user (olinuxino+net) to
+ modern LED framework
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32R22rDMBBEf8XouTK6xzal9D9KHnRZJYLYSiXbp
- IT8e5XYTVNo+7SM4IxmZ88oQwqQUVedUYI55BCHIuhThexeDzvAwRWNGGGSUkbwAXbafpThcII
- +zvqADQMqRUNaqwQq4DGBD6eb6dt20Qnep+I9Lo/f1l21GFN2c4wHh92InWVCEemcbZpuplfPH
- nLWK/K8MoIqJuimFkQKQhSm+KjHFCzUdh9HndyrjznXeaxt7F/Q40r3f9vHhaZhymXY6AA7xaV
- tpfUayJrhN9rGNE95rcPhXQIYsKbSA1Oet8b8w5o7uPTIDLVguNowpf/Cfl4gT8MpYCm0YKZVV
- tCvqEZnKNn6PoxdZZlh0jdeKc0pcA/iuhq3gvPWt1IbUfo2rUHby+UTZqzrdhECAAA=
-X-Change-ID: 20251120-legacy-led-removal-b2e154809c64
+Message-Id: <20251120-legacy-led-removal-v1-1-369d44338358@cherry.de>
+References: <20251120-legacy-led-removal-v1-0-369d44338358@cherry.de>
+In-Reply-To: <20251120-legacy-led-removal-v1-0-369d44338358@cherry.de>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
 Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
  Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
@@ -93,275 +89,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This migrates the last user of the legacy LED API, IMX233-OLinuXino and
-net/bootp.c, to the modern LED framework.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-I do have concern about being able to use BOOTP in SPL? In which case, I
-should probably add an additional check on CONFIG_IS_ENABLED(LED) in
-addition to IS_ENABLED(CONFIG_LED_BOOT)?
+This migrates the last user of the legacy LED API, IMX233-OLinuXino, to
+the modern LED framework.
 
-I haven't tested this as I do not own an IMX233-OLinuXino, so please
-give this a try if you own this device.
+The current implementation does the following:
+ - lit the LED when booting,
+ - turn off the LED the moment a BOOTP packet is received,
 
-Then, since there's no user left of this legacy API, it is entirely
-removed.
+The first step is easily reproduced by using the
+/options/u-boot/boot-led property to point at the LED. Unfortunately,
+the boot-led is only lit by U-Boot proper at the very end of the boot
+process, much later than currently. We can however force the LED on
+whenever the GPIO LED driver is bound by marking the LED as
+default-state = "on", and this happens slightly before board_init() is
+called. We then do not need /options/u-boot/boot-led property for that
+anymore.
 
-This is a follow-up to:
-- https://lore.kernel.org/u-boot/20251112-led-old-dt-v1-0-2892d49517db@cherry.de/
-- https://lore.kernel.org/u-boot/20251114162417.4054006-1-patrice.chotard@foss.st.com/
-- https://lore.kernel.org/u-boot/20251119-legacy-led-unused-code-v1-0-bc0ae1235baa@cherry.de/
-- https://lore.kernel.org/all/20251119-corvus-led-red-green-v1-0-ce86b8d59dfc@cherry.de/
-- https://lore.kernel.org/all/20251119-led-legacy-vining-v1-1-6107439085a0@cherry.de/
-- https://lore.kernel.org/all/20251119-bus-led-removal-v1-1-340218264e59@cherry.de/
-- https://lore.kernel.org/u-boot/20251120-legacy-led-sunxi-v1-1-c4c1422fd242@cherry.de/
+However, the second step relies on /options/u-boot/boot-led and
+CONFIG_LED_BOOT being set to reproduce the same behavior and requires us
+to migrate net/bootp.c to the modern LED framework at the same time to
+keep bisectability.
 
-to continue the effort of getting rid of the legacy LED API. This series
-depends on the series listed above.
+I couldn't figure out how to map CONFIG_LED_STATUS_BIT=778 to an actual
+GPIO on the SoC but according to the schematics[1] only one LED is
+present. I couldn't also map the SoC pin number to an actual GPIO from
+the IMX23 manual, but there's already one GPIO LED specified in the
+Device Tree so my guess is all of those are one and the same.
+
+This was only build tested as I do not own this device.
+
+[1] https://github.com/OLIMEX/OLINUXINO/blob/master/HARDWARE/iMX233-OLinuXino-Mini/1.%20Latest%20hardware%20revision/iMX233-OLINUXINO-MINI%20hardware%20revision%20E/iMX233-OLINUXINO-MINI_Rev_E.pdf
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (2):
-      led: migrate last legacy LED user (olinuxino+net) to modern LED framework
-      led: remove legacy API
+ arch/arm/dts/imx23-olinuxino-u-boot.dtsi     | 15 +++++++++++++++
+ board/olimex/mx23_olinuxino/mx23_olinuxino.c |  7 -------
+ configs/mx23_olinuxino_defconfig             | 12 ++++--------
+ net/bootp.c                                  |  8 ++++----
+ 4 files changed, 23 insertions(+), 19 deletions(-)
 
- README                                       |  26 ---
- arch/arm/dts/imx23-olinuxino-u-boot.dtsi     |  15 ++
- arch/m68k/lib/bootm.c                        |   3 -
- board/isee/igep00x0/igep00x0.c               |   1 -
- board/olimex/mx23_olinuxino/mx23_olinuxino.c |   7 -
- boot/image.c                                 |   4 -
- cmd/Makefile                                 |   1 -
- cmd/ide.c                                    |   4 -
- cmd/legacy_led.c                             | 161 ----------------
- common/board_f.c                             |   1 -
- common/board_r.c                             |  11 --
- configs/mx23_olinuxino_defconfig             |  12 +-
- doc/api/led.rst                              |  63 -------
- drivers/led/Kconfig                          | 267 ---------------------------
- drivers/misc/Makefile                        |   2 -
- drivers/misc/gpio_led.c                      |  52 ------
- drivers/misc/status_led.c                    | 124 -------------
- include/status_led.h                         |  68 -------
- net/bootp.c                                  |   8 +-
- 19 files changed, 23 insertions(+), 807 deletions(-)
----
-base-commit: c2b25f8f66a31e3fe435c93c4339f95ab4c24b9b
-change-id: 20251120-legacy-led-removal-b2e154809c64
-prerequisite-change-id: 20251112-led-old-dt-dc24605ddc88:v1
-prerequisite-patch-id: e06b5d332948608f593edc40330a7a7abe80076c
-prerequisite-patch-id: 903cc5aabeec81459e5f9ed4e303e9cc7ef56459
-prerequisite-patch-id: b1be6517f7300b65087c91a85478077bb01e90c3
-prerequisite-patch-id: bbcdd7a84ba84f5d68d5e12318531f3f2f8c04b5
-prerequisite-patch-id: 7e2738d9c029f8fcbd894e960fec146a677ed988
-prerequisite-patch-id: d906328e945f5afaae2ef61040913ecfd428dc27
-prerequisite-patch-id: 6b535c241c640032380078696b49915db58036a2
-prerequisite-patch-id: dc105b3550fc6cba4a208dd1e7d98f0e22106d65
-prerequisite-patch-id: a7051c86a817569b412d46eb4af4b22c93cd0e06
-prerequisite-patch-id: 8f0c16b6fb70bf526c239324fd5742f0ee92d20b
-prerequisite-patch-id: d84c4ff840c5d4fdffa8be69eb5ef74cd582861c
-prerequisite-message-id: <20251114162417.4054006-1-patrice.chotard@foss.st.com>
-prerequisite-patch-id: 4ba6c3692d92c5d1e7f0fff8020dc917229c10a3
-prerequisite-patch-id: 85ddefe74b3c49d40facb737c5a6bc5ace49387d
-prerequisite-patch-id: e29be2cc5ae57a81d6e9060b68d7678bd15ea3ca
-prerequisite-patch-id: 674cc3bb2f266874a1f39b7ccd86266fc3085e05
-prerequisite-patch-id: d7d3138636356a4e598ce63f9644481872c5da71
-prerequisite-patch-id: 45d6c3582f5716d86e2efb81b606d09974c57dd3
-prerequisite-patch-id: b17c48a1a8ab6aada27c767d15a191d36606609b
-prerequisite-patch-id: 19496299d7c21a1a709c499c06990878d268573b
-prerequisite-patch-id: 3d4e605b49cee688c1c98840268da8690bd6c5a9
-prerequisite-patch-id: bbf09a918a20ca40cb0ad1694e79e1cd0864309a
-prerequisite-patch-id: 3dbebc3c6a91bd766f95392625d8fed140d8bfdb
-prerequisite-patch-id: 7f0d951def11fe1f97224662644a1663c834638a
-prerequisite-patch-id: 55df05baa63656dbc074855ea2f391de14d6530c
-prerequisite-patch-id: 24e03e393be8f5737f0e8f444d3340826552e810
-prerequisite-patch-id: ca97c22ea834c0afb5586e721aff7cb39efd539d
-prerequisite-patch-id: 8e8a80297e82e0a72a8d3dac9134cb5c62e58b7a
-prerequisite-patch-id: b92d833519a5a605c2129ea08a4dc32cbdbab36f
-prerequisite-patch-id: c141f398e49903567732b6cab730de1112f61207
-prerequisite-patch-id: 6900302b3d1364dc1e5a82643ef0f0cd20f4006e
-prerequisite-patch-id: 3600c976c13534519ca5d0891a9c4f665dd761ed
-prerequisite-patch-id: 0b158776d189ce8bf47644b490aa9feaf1229e53
-prerequisite-patch-id: aa471cc044809dab0ca6068615cfeba8f3bce121
-prerequisite-patch-id: 4f7546b5da396a4913f3c97b0288c3a57c2d8043
-prerequisite-change-id: 20251119-legacy-led-unused-code-d635c95cfae0:v1
-prerequisite-patch-id: 4ba6c3692d92c5d1e7f0fff8020dc917229c10a3
-prerequisite-patch-id: 85ddefe74b3c49d40facb737c5a6bc5ace49387d
-prerequisite-patch-id: e29be2cc5ae57a81d6e9060b68d7678bd15ea3ca
-prerequisite-patch-id: 674cc3bb2f266874a1f39b7ccd86266fc3085e05
-prerequisite-patch-id: d7d3138636356a4e598ce63f9644481872c5da71
-prerequisite-patch-id: 45d6c3582f5716d86e2efb81b606d09974c57dd3
-prerequisite-patch-id: b17c48a1a8ab6aada27c767d15a191d36606609b
-prerequisite-patch-id: 19496299d7c21a1a709c499c06990878d268573b
-prerequisite-patch-id: 3d4e605b49cee688c1c98840268da8690bd6c5a9
-prerequisite-patch-id: bbf09a918a20ca40cb0ad1694e79e1cd0864309a
-prerequisite-patch-id: 3dbebc3c6a91bd766f95392625d8fed140d8bfdb
-prerequisite-patch-id: 7f0d951def11fe1f97224662644a1663c834638a
-prerequisite-patch-id: 55df05baa63656dbc074855ea2f391de14d6530c
-prerequisite-patch-id: 24e03e393be8f5737f0e8f444d3340826552e810
-prerequisite-patch-id: ca97c22ea834c0afb5586e721aff7cb39efd539d
-prerequisite-patch-id: 8e8a80297e82e0a72a8d3dac9134cb5c62e58b7a
-prerequisite-patch-id: 3a1b906e26d94930b7634ae0ca35c5043b37f617
-prerequisite-patch-id: c141f398e49903567732b6cab730de1112f61207
-prerequisite-patch-id: 6900302b3d1364dc1e5a82643ef0f0cd20f4006e
-prerequisite-patch-id: a0b2962b16facff0acc9b63ab9884400c1df8fd3
-prerequisite-patch-id: 0b158776d189ce8bf47644b490aa9feaf1229e53
-prerequisite-patch-id: 2793fca5e19cd95cb92e477b2fe1e0179ce0e9e4
-prerequisite-patch-id: 4f7546b5da396a4913f3c97b0288c3a57c2d8043
-prerequisite-patch-id: e06b5d332948608f593edc40330a7a7abe80076c
-prerequisite-patch-id: 903cc5aabeec81459e5f9ed4e303e9cc7ef56459
-prerequisite-patch-id: b1be6517f7300b65087c91a85478077bb01e90c3
-prerequisite-patch-id: bbcdd7a84ba84f5d68d5e12318531f3f2f8c04b5
-prerequisite-patch-id: 7e2738d9c029f8fcbd894e960fec146a677ed988
-prerequisite-patch-id: d906328e945f5afaae2ef61040913ecfd428dc27
-prerequisite-patch-id: 6b535c241c640032380078696b49915db58036a2
-prerequisite-patch-id: dc105b3550fc6cba4a208dd1e7d98f0e22106d65
-prerequisite-patch-id: a7051c86a817569b412d46eb4af4b22c93cd0e06
-prerequisite-patch-id: 8f0c16b6fb70bf526c239324fd5742f0ee92d20b
-prerequisite-patch-id: d84c4ff840c5d4fdffa8be69eb5ef74cd582861c
-prerequisite-patch-id: bc18b41151c9198e1dcaedf483b5d31aae40f0ca
-prerequisite-patch-id: 18f4952525fe4c8c3ab1ae1685e84b65d71c8634
-prerequisite-patch-id: 1d432ed6b7fb6482f98a336cdebae29cec8e7a30
-prerequisite-patch-id: a096ab165f9fcce2e5806012d385f6fd6cf0f6b5
-prerequisite-patch-id: 9677d1503c67524e554b4f7fd8ab5f0cc940e715
-prerequisite-change-id: 20251119-corvus-led-red-green-a15fe26f39bb:v1
-prerequisite-patch-id: 4ba6c3692d92c5d1e7f0fff8020dc917229c10a3
-prerequisite-patch-id: 85ddefe74b3c49d40facb737c5a6bc5ace49387d
-prerequisite-patch-id: e29be2cc5ae57a81d6e9060b68d7678bd15ea3ca
-prerequisite-patch-id: 674cc3bb2f266874a1f39b7ccd86266fc3085e05
-prerequisite-patch-id: d7d3138636356a4e598ce63f9644481872c5da71
-prerequisite-patch-id: 45d6c3582f5716d86e2efb81b606d09974c57dd3
-prerequisite-patch-id: b17c48a1a8ab6aada27c767d15a191d36606609b
-prerequisite-patch-id: 19496299d7c21a1a709c499c06990878d268573b
-prerequisite-patch-id: 3d4e605b49cee688c1c98840268da8690bd6c5a9
-prerequisite-patch-id: bbf09a918a20ca40cb0ad1694e79e1cd0864309a
-prerequisite-patch-id: 3dbebc3c6a91bd766f95392625d8fed140d8bfdb
-prerequisite-patch-id: 7f0d951def11fe1f97224662644a1663c834638a
-prerequisite-patch-id: 55df05baa63656dbc074855ea2f391de14d6530c
-prerequisite-patch-id: 24e03e393be8f5737f0e8f444d3340826552e810
-prerequisite-patch-id: ca97c22ea834c0afb5586e721aff7cb39efd539d
-prerequisite-patch-id: 8e8a80297e82e0a72a8d3dac9134cb5c62e58b7a
-prerequisite-patch-id: 3a1b906e26d94930b7634ae0ca35c5043b37f617
-prerequisite-patch-id: c141f398e49903567732b6cab730de1112f61207
-prerequisite-patch-id: 6900302b3d1364dc1e5a82643ef0f0cd20f4006e
-prerequisite-patch-id: a0b2962b16facff0acc9b63ab9884400c1df8fd3
-prerequisite-patch-id: 0b158776d189ce8bf47644b490aa9feaf1229e53
-prerequisite-patch-id: 2793fca5e19cd95cb92e477b2fe1e0179ce0e9e4
-prerequisite-patch-id: 4f7546b5da396a4913f3c97b0288c3a57c2d8043
-prerequisite-patch-id: e06b5d332948608f593edc40330a7a7abe80076c
-prerequisite-patch-id: 903cc5aabeec81459e5f9ed4e303e9cc7ef56459
-prerequisite-patch-id: b1be6517f7300b65087c91a85478077bb01e90c3
-prerequisite-patch-id: bbcdd7a84ba84f5d68d5e12318531f3f2f8c04b5
-prerequisite-patch-id: 7e2738d9c029f8fcbd894e960fec146a677ed988
-prerequisite-patch-id: d906328e945f5afaae2ef61040913ecfd428dc27
-prerequisite-patch-id: 6b535c241c640032380078696b49915db58036a2
-prerequisite-patch-id: dc105b3550fc6cba4a208dd1e7d98f0e22106d65
-prerequisite-patch-id: a7051c86a817569b412d46eb4af4b22c93cd0e06
-prerequisite-patch-id: 8f0c16b6fb70bf526c239324fd5742f0ee92d20b
-prerequisite-patch-id: d84c4ff840c5d4fdffa8be69eb5ef74cd582861c
-prerequisite-patch-id: bc18b41151c9198e1dcaedf483b5d31aae40f0ca
-prerequisite-patch-id: 18f4952525fe4c8c3ab1ae1685e84b65d71c8634
-prerequisite-patch-id: 1d432ed6b7fb6482f98a336cdebae29cec8e7a30
-prerequisite-patch-id: a096ab165f9fcce2e5806012d385f6fd6cf0f6b5
-prerequisite-patch-id: 9677d1503c67524e554b4f7fd8ab5f0cc940e715
-prerequisite-patch-id: 2af5430af07b98b9f24ff2d81edf8fffb18ba933
-prerequisite-patch-id: 6f09f7860e01374b293497011a10ebdef73312aa
-prerequisite-patch-id: f84fc6791df9d833579fedc039cabae4b51f6f0d
-prerequisite-patch-id: 24a6a996108075f180a934108dfe0145d265ebcd
-prerequisite-change-id: 20251119-bus-led-removal-2b1ceb36726a:v1
-prerequisite-patch-id: 4ba6c3692d92c5d1e7f0fff8020dc917229c10a3
-prerequisite-patch-id: 85ddefe74b3c49d40facb737c5a6bc5ace49387d
-prerequisite-patch-id: e29be2cc5ae57a81d6e9060b68d7678bd15ea3ca
-prerequisite-patch-id: 674cc3bb2f266874a1f39b7ccd86266fc3085e05
-prerequisite-patch-id: d7d3138636356a4e598ce63f9644481872c5da71
-prerequisite-patch-id: 45d6c3582f5716d86e2efb81b606d09974c57dd3
-prerequisite-patch-id: b17c48a1a8ab6aada27c767d15a191d36606609b
-prerequisite-patch-id: 19496299d7c21a1a709c499c06990878d268573b
-prerequisite-patch-id: 3d4e605b49cee688c1c98840268da8690bd6c5a9
-prerequisite-patch-id: bbf09a918a20ca40cb0ad1694e79e1cd0864309a
-prerequisite-patch-id: 3dbebc3c6a91bd766f95392625d8fed140d8bfdb
-prerequisite-patch-id: 7f0d951def11fe1f97224662644a1663c834638a
-prerequisite-patch-id: 55df05baa63656dbc074855ea2f391de14d6530c
-prerequisite-patch-id: 24e03e393be8f5737f0e8f444d3340826552e810
-prerequisite-patch-id: ca97c22ea834c0afb5586e721aff7cb39efd539d
-prerequisite-patch-id: 8e8a80297e82e0a72a8d3dac9134cb5c62e58b7a
-prerequisite-patch-id: 3a1b906e26d94930b7634ae0ca35c5043b37f617
-prerequisite-patch-id: c141f398e49903567732b6cab730de1112f61207
-prerequisite-patch-id: 6900302b3d1364dc1e5a82643ef0f0cd20f4006e
-prerequisite-patch-id: a0b2962b16facff0acc9b63ab9884400c1df8fd3
-prerequisite-patch-id: 0b158776d189ce8bf47644b490aa9feaf1229e53
-prerequisite-patch-id: 2793fca5e19cd95cb92e477b2fe1e0179ce0e9e4
-prerequisite-patch-id: 4f7546b5da396a4913f3c97b0288c3a57c2d8043
-prerequisite-patch-id: e06b5d332948608f593edc40330a7a7abe80076c
-prerequisite-patch-id: 903cc5aabeec81459e5f9ed4e303e9cc7ef56459
-prerequisite-patch-id: b1be6517f7300b65087c91a85478077bb01e90c3
-prerequisite-patch-id: bbcdd7a84ba84f5d68d5e12318531f3f2f8c04b5
-prerequisite-patch-id: 7e2738d9c029f8fcbd894e960fec146a677ed988
-prerequisite-patch-id: d906328e945f5afaae2ef61040913ecfd428dc27
-prerequisite-patch-id: 6b535c241c640032380078696b49915db58036a2
-prerequisite-patch-id: dc105b3550fc6cba4a208dd1e7d98f0e22106d65
-prerequisite-patch-id: a7051c86a817569b412d46eb4af4b22c93cd0e06
-prerequisite-patch-id: 8f0c16b6fb70bf526c239324fd5742f0ee92d20b
-prerequisite-patch-id: d84c4ff840c5d4fdffa8be69eb5ef74cd582861c
-prerequisite-patch-id: bc18b41151c9198e1dcaedf483b5d31aae40f0ca
-prerequisite-patch-id: 18f4952525fe4c8c3ab1ae1685e84b65d71c8634
-prerequisite-patch-id: 1d432ed6b7fb6482f98a336cdebae29cec8e7a30
-prerequisite-patch-id: a096ab165f9fcce2e5806012d385f6fd6cf0f6b5
-prerequisite-patch-id: 9677d1503c67524e554b4f7fd8ab5f0cc940e715
-prerequisite-patch-id: 2af5430af07b98b9f24ff2d81edf8fffb18ba933
-prerequisite-patch-id: 6f09f7860e01374b293497011a10ebdef73312aa
-prerequisite-patch-id: f84fc6791df9d833579fedc039cabae4b51f6f0d
-prerequisite-patch-id: 24a6a996108075f180a934108dfe0145d265ebcd
-prerequisite-patch-id: 6ea898c69b7849f31860f42fec9ac11c87d41c7e
-prerequisite-patch-id: ee3e130e974ac218ff6785c6a993a1ed113c95a8
-prerequisite-change-id: 20251120-legacy-led-sunxi-54a42b96c410:v1
-prerequisite-patch-id: 4ba6c3692d92c5d1e7f0fff8020dc917229c10a3
-prerequisite-patch-id: 85ddefe74b3c49d40facb737c5a6bc5ace49387d
-prerequisite-patch-id: e29be2cc5ae57a81d6e9060b68d7678bd15ea3ca
-prerequisite-patch-id: 674cc3bb2f266874a1f39b7ccd86266fc3085e05
-prerequisite-patch-id: d7d3138636356a4e598ce63f9644481872c5da71
-prerequisite-patch-id: 45d6c3582f5716d86e2efb81b606d09974c57dd3
-prerequisite-patch-id: b17c48a1a8ab6aada27c767d15a191d36606609b
-prerequisite-patch-id: 19496299d7c21a1a709c499c06990878d268573b
-prerequisite-patch-id: 3d4e605b49cee688c1c98840268da8690bd6c5a9
-prerequisite-patch-id: bbf09a918a20ca40cb0ad1694e79e1cd0864309a
-prerequisite-patch-id: 3dbebc3c6a91bd766f95392625d8fed140d8bfdb
-prerequisite-patch-id: 7f0d951def11fe1f97224662644a1663c834638a
-prerequisite-patch-id: 55df05baa63656dbc074855ea2f391de14d6530c
-prerequisite-patch-id: 24e03e393be8f5737f0e8f444d3340826552e810
-prerequisite-patch-id: ca97c22ea834c0afb5586e721aff7cb39efd539d
-prerequisite-patch-id: 8e8a80297e82e0a72a8d3dac9134cb5c62e58b7a
-prerequisite-patch-id: 3a1b906e26d94930b7634ae0ca35c5043b37f617
-prerequisite-patch-id: c141f398e49903567732b6cab730de1112f61207
-prerequisite-patch-id: 6900302b3d1364dc1e5a82643ef0f0cd20f4006e
-prerequisite-patch-id: a0b2962b16facff0acc9b63ab9884400c1df8fd3
-prerequisite-patch-id: 0b158776d189ce8bf47644b490aa9feaf1229e53
-prerequisite-patch-id: 2793fca5e19cd95cb92e477b2fe1e0179ce0e9e4
-prerequisite-patch-id: 4f7546b5da396a4913f3c97b0288c3a57c2d8043
-prerequisite-patch-id: e06b5d332948608f593edc40330a7a7abe80076c
-prerequisite-patch-id: 903cc5aabeec81459e5f9ed4e303e9cc7ef56459
-prerequisite-patch-id: b1be6517f7300b65087c91a85478077bb01e90c3
-prerequisite-patch-id: bbcdd7a84ba84f5d68d5e12318531f3f2f8c04b5
-prerequisite-patch-id: 7e2738d9c029f8fcbd894e960fec146a677ed988
-prerequisite-patch-id: d906328e945f5afaae2ef61040913ecfd428dc27
-prerequisite-patch-id: 6b535c241c640032380078696b49915db58036a2
-prerequisite-patch-id: dc105b3550fc6cba4a208dd1e7d98f0e22106d65
-prerequisite-patch-id: a7051c86a817569b412d46eb4af4b22c93cd0e06
-prerequisite-patch-id: 8f0c16b6fb70bf526c239324fd5742f0ee92d20b
-prerequisite-patch-id: d84c4ff840c5d4fdffa8be69eb5ef74cd582861c
-prerequisite-patch-id: bc18b41151c9198e1dcaedf483b5d31aae40f0ca
-prerequisite-patch-id: 18f4952525fe4c8c3ab1ae1685e84b65d71c8634
-prerequisite-patch-id: 1d432ed6b7fb6482f98a336cdebae29cec8e7a30
-prerequisite-patch-id: a096ab165f9fcce2e5806012d385f6fd6cf0f6b5
-prerequisite-patch-id: 9677d1503c67524e554b4f7fd8ab5f0cc940e715
-prerequisite-patch-id: 2af5430af07b98b9f24ff2d81edf8fffb18ba933
-prerequisite-patch-id: 6f09f7860e01374b293497011a10ebdef73312aa
-prerequisite-patch-id: f84fc6791df9d833579fedc039cabae4b51f6f0d
-prerequisite-patch-id: 24a6a996108075f180a934108dfe0145d265ebcd
-prerequisite-patch-id: 6ea898c69b7849f31860f42fec9ac11c87d41c7e
-prerequisite-patch-id: ee3e130e974ac218ff6785c6a993a1ed113c95a8
-prerequisite-patch-id: eeac7f5e34057ffde0a1f5b0e24596511d4f66c2
+diff --git a/arch/arm/dts/imx23-olinuxino-u-boot.dtsi b/arch/arm/dts/imx23-olinuxino-u-boot.dtsi
+index dee8433696f..3f2f117b953 100644
+--- a/arch/arm/dts/imx23-olinuxino-u-boot.dtsi
++++ b/arch/arm/dts/imx23-olinuxino-u-boot.dtsi
+@@ -1,5 +1,20 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
++/ {
++	leds {
++		user_led: user {
++			default-state = "on";
++		};
++	};
++
++	options {
++		u-boot {
++			compatible = "u-boot,config";
++			boot-led = <&user_led>;
++		};
++	};
++};
++
+ &ssp0 {
+ 	non-removable;
+ };
+diff --git a/board/olimex/mx23_olinuxino/mx23_olinuxino.c b/board/olimex/mx23_olinuxino/mx23_olinuxino.c
+index b2bb6678c23..78136c1620a 100644
+--- a/board/olimex/mx23_olinuxino/mx23_olinuxino.c
++++ b/board/olimex/mx23_olinuxino/mx23_olinuxino.c
+@@ -13,9 +13,6 @@
+ #include <asm/arch/imx-regs.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/sys_proto.h>
+-#ifdef CONFIG_LED_STATUS
+-#include <status_led.h>
+-#endif
+ #include <linux/delay.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -61,9 +58,5 @@ int board_init(void)
+ 	/* Adress of boot parameters */
+ 	gd->bd->bi_boot_params = PHYS_SDRAM_1 + 0x100;
+ 
+-#if defined(CONFIG_LED_STATUS) && defined(CONFIG_LED_STATUS_BOOT_ENABLE)
+-	status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_STATE);
+-#endif
+-
+ 	return 0;
+ }
+diff --git a/configs/mx23_olinuxino_defconfig b/configs/mx23_olinuxino_defconfig
+index 1da18f31344..3df1c8d007d 100644
+--- a/configs/mx23_olinuxino_defconfig
++++ b/configs/mx23_olinuxino_defconfig
+@@ -8,6 +8,7 @@ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_ENV_SIZE=0x4000
+ CONFIG_ENV_OFFSET=0x40000
+ CONFIG_IMX_CONFIG=""
++CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx23-olinuxino"
+ CONFIG_TARGET_MX23_OLINUXINO=y
+ CONFIG_SPL_SERIAL=y
+@@ -38,14 +39,9 @@ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+ CONFIG_VERSION_VARIABLE=y
+ CONFIG_MXS_GPIO=y
+-CONFIG_LED_STATUS=y
+-CONFIG_LED_STATUS_GPIO=y
+-CONFIG_LED_STATUS0=y
+-CONFIG_LED_STATUS_BIT=778
+-CONFIG_LED_STATUS_STATE=2
+-CONFIG_LED_STATUS_BOOT_ENABLE=y
+-CONFIG_LED_STATUS_BOOT=0
+-CONFIG_LED_STATUS_CMD=y
++CONFIG_LED=y
++CONFIG_LED_BOOT=y
++CONFIG_LED_GPIO=y
+ CONFIG_MMC_MXS=y
+ CONFIG_CONS_INDEX=0
+ CONFIG_DM_SERIAL=y
+diff --git a/net/bootp.c b/net/bootp.c
+index 64fca9a42d9..1d905a01a47 100644
+--- a/net/bootp.c
++++ b/net/bootp.c
+@@ -19,8 +19,8 @@
+ #include <linux/delay.h>
+ #include <net/tftp.h>
+ #include "bootp.h"
+-#ifdef CONFIG_LED_STATUS
+-#include <status_led.h>
++#if IS_ENABLED(CONFIG_LED_BOOT)
++#include <led.h>
+ #endif
+ #ifdef CONFIG_BOOTP_RANDOM_DELAY
+ #include "net_rand.h"
+@@ -396,8 +396,8 @@ static void bootp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 	/*
+ 	 *	Got a good BOOTP reply.	 Copy the data into our variables.
+ 	 */
+-#if defined(CONFIG_LED_STATUS) && defined(CONFIG_LED_STATUS_BOOT_ENABLE)
+-	status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_OFF);
++#if IS_ENABLED(CONFIG_LED_BOOT)
++	led_boot_off();
+ #endif
+ 
+ 	store_net_params(bp);		/* Store net parameters from reply */
 
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.51.1
 
