@@ -4,95 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16681CF856E
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 15:54:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F019DCF8864
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 16:06:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67F0B83A6A;
-	Thu, 20 Nov 2025 16:54:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 79C1483A6A;
+	Thu, 20 Nov 2025 17:06:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jiIdTpAl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hH2n+h9S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADFD383B8A; Thu, 20 Nov 2025 16:54:07 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id E6AE283A6A; Thu, 20 Nov 2025 17:06:25 +0100 (CET)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82D7783935
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 16:54:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63AFF83935
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 17:06:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-656b4881f55so426751eaf.2
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 07:54:05 -0800 (PST)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-656b8ca52e8so424489eaf.3
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 08:06:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763654044; x=1764258844; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763654782; x=1764259582; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JaLw8WKKk6exi8GVrqaFTP4j4F7qtB01NI+04T1lgfM=;
- b=jiIdTpAl3LSc4A6cDHqAsCYm4o71yAWpEqIhVQ6TEUpLH6kgoftCTwEacBqvXb0Mt9
- OMUGhiYv/LH7JOlnDrw/fN3Ep6/EvIIz0DE5VLSbgr9nXmz13Ud7ZTwnZCROtUQw91X7
- ooIbgAXWo+QWYwPFud52nh6o+7qpAy/hh74ME=
+ bh=BPQHyOZll0Z0BeZt2j0P5Oy51JJGXlG4WWshMjIdo7o=;
+ b=hH2n+h9SMcohUzyttg6ZiUICk5dgrI6Wc/Hha6WzhQACWOMmhAdK+oyea4eyOmWsI7
+ 9J3l9rjVexxVvG0LrLXKh9w/p2+cN6EywkuLNbtGC6wdC9vt9qyXKhDkpJYK5oPt85rR
+ 2b+rwu+9kNIQ+fWdwSXyJFU9O8u4nckJUtoEw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763654044; x=1764258844;
+ d=1e100.net; s=20230601; t=1763654782; x=1764259582;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JaLw8WKKk6exi8GVrqaFTP4j4F7qtB01NI+04T1lgfM=;
- b=WoJoMEDHrIhuJdvhgu7CgMgIP9HlAaOvh6su1vEyZ1buhm/Bfhjv9CDT+l9i8ZrwVP
- XqtvxotT9fhOghfqb5SEIEbGqAkugJ7nY7epQWqQrNDN7xFpKcnatHVDjGAjyeaSCRee
- a0av/D6WmJqYt2tuSx1FvNIJh65a9ZlFjqCzfw6Niv3bhUCJN1ojD2lUTETfmMydU5fD
- ZgBOYv0wm/1k5V1eawca0fYH63Mzduw/a6bUhrYPYpCX4+lb75bjbyySCVJnI4GS8mwp
- QY6I/sV1gE7pWy49LgMfffZtUigd7zmwJHtVKvqOaP+L+G3hd+iN8Ce7mQG8RnQ6TO71
- RA8Q==
-X-Gm-Message-State: AOJu0YxKF1cW8Khse2ddKPSHrfW9nz6VDbJ6N3JFN2LFXcbaDsxp0idw
- XLtvh2hxdGqxMZKo8PROY6zdEfQpwX1D1vXkbg7EhWx1oJow4MoNiRubv3mGyvxdGqE=
-X-Gm-Gg: ASbGnctC+qh2PPnKbPnaMsgRA1Ce1idvThjIqruB932qLh5c/jMFgUB7OboVtmRQ/wE
- 8v8r1mqYWWtNmBC65+8tHLf9VEyCzEgEF0Qxx5i6cvK1ggzTz0bXwqCtsudzUEJwUaVSpuCS1du
- LLkNreIychdFKrsoe+gKE/mrxJNG577SBL4LpjWZhUweJutDkM24EQYOpAv4+/r5cqjfe9cu07+
- yqJiDlloqV68s9GQH6UAfe33t5MHActlaxyD/2oD8QohPzTxzTu/p1wOkBpUgCSvoMiXFddQ5iH
- bpcqgsCfFoCYgF39mFMR0efS6EkJny06MLN2vTh0ar+61/5T0JUm2MLrJfKI2R8aCUwREL+SLOz
- CfpfCxPCXxq0C1nOd/cLajM85vXGKA/EqcxwyvdZTktivzSy4a52RtXVl7ueMS54ppzSvHCHyyV
- Xr4TJp1V1uh6BEUWahnfdmzl/AziI4w3Q5CNh6fcUI6DgUDuhBiw==
-X-Google-Smtp-Source: AGHT+IE72YljK9jshopXal2bRuvr8QrBykp6jXBOfOwKuK9FuKQ3eLiD6g2bCPM4r/SrGqukiPS1Vg==
-X-Received: by 2002:a05:6830:3808:b0:7c6:e92f:41e1 with SMTP id
- 46e09a7af769-7c78d263c05mr2592179a34.14.1763654044111; 
- Thu, 20 Nov 2025 07:54:04 -0800 (PST)
+ bh=BPQHyOZll0Z0BeZt2j0P5Oy51JJGXlG4WWshMjIdo7o=;
+ b=UsP85N92ekHVb6Ojn4C0IemEWv0QrMtffyliFG9TsMxKPewXwox69nKNXKhEYHjFh3
+ bY5urY1MhqKKQ+IigRzT1w7WpQZgL5WycC50ASYmnslxWgmR6/5Bz4GrfBzCiIwEq7dC
+ nnxpFTRx6o1UR+Stwqlk8rgNFNWShBCXWLcimeeoA5aYKjDNhTFqL5B0C2p4oPLzKDGo
+ wwDPUoLWJpKmgpPlJkRYCR1qFv6jYxSS/+iLMxNNPDSt+9piUV2uHOva0hhlOzUbEeGA
+ 66hvDd9tuev6wRbMW580Qd8VqM2l9dbwrYtoiWzO2IdlVzQNuXHCJEzLIVguhqzasvvG
+ mmEA==
+X-Gm-Message-State: AOJu0YxeHtUJcdlFOYK8YC2P2vqZZIdJLsy2FqNIkShKJm9hQEy0P5tG
+ Qnc5uXmo8YlIOOFk1FRVnAAkjT1v8eaKkp2NvgNnT2NdEV7rlHMeV+K1ETN3wEPwxCJ2vScgw4t
+ aj1ndlps=
+X-Gm-Gg: ASbGncv8x0F4sA/aaMog/H5cZDDqZhDlbMmLYKDu5pMSCWj6yHnbngF+HAE6wbYDvQ2
+ hXCXpZaURqYdyAEXSPuTI9kzftT7C7AwOs0bufxIIqzF6YUI6ZJTJ1tb9lrPHEo494PW7hvFHNM
+ nLcuR1Akq1SGr3KhYqk33nM4o29AdbCyjhuBuf/D3jMwYlPxJyHB9dUgDQZ8kU6VV562IFQLcqW
+ 54BfqiC0jPHAhLIV4yg4IuBQR7O2vJffwTYlPfr0dPkO3TPDx1jJX7viSp7kwjJSkBaGnfJECKy
+ RIIRQZXMr+ZEenpT/+DTduOZeYo7D+ixSRrQ5ylU1mwz77jwBfN8HMf16CfVp397K1dB1bhrIgV
+ ZkuJf5R+I1SlEMwivYe9fdMQGPgd1ZnzZhzt5WsXe71VWabjW1FAWfWFNJOuPfnPyTk3J43zXXZ
+ xPcJ17pXWhysNiP7y0yEprMGAhqdSbFM1YXNbBc3lNBS+DTtmwqA==
+X-Google-Smtp-Source: AGHT+IFflTXXPOj70p3XjpWP41gTUZ34qadalYHX/HgOqFuxJYSoQzV/bZAqcpiKbECOcaiFsYaquA==
+X-Received: by 2002:a05:6808:190c:b0:44d:a3d4:902f with SMTP id
+ 5614622812f47-450ff3aa088mr1654051b6e.52.1763654781988; 
+ Thu, 20 Nov 2025 08:06:21 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c78d306196sm1123975a34.2.2025.11.20.07.54.02
+ 5614622812f47-450ffbe9a88sm759256b6e.0.2025.11.20.08.06.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Nov 2025 07:54:03 -0800 (PST)
-Date: Thu, 20 Nov 2025 09:54:01 -0600
+ Thu, 20 Nov 2025 08:06:21 -0800 (PST)
+Date: Thu, 20 Nov 2025 10:06:19 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sam Edwards <cfsworks@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 0/3] Synchronize DTC to 1.7.2
-Message-ID: <20251120155401.GI2125796@bill-the-cat>
-References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
- <20251113175700.GM6688@bill-the-cat>
- <63d6a47c-99cc-48d1-9d71-869c58e2eb69@mailbox.org>
- <20251113184917.GN6688@bill-the-cat>
- <71261c83-0a3e-46b6-a0db-d3587a54d71c@mailbox.org>
- <20251116141151.GC2125796@bill-the-cat>
- <11a631a3-644a-4c4f-8b09-7202687a4a90@mailbox.org>
- <20251117184027.GN2125796@bill-the-cat>
- <5dd7d2e7-7e1d-432a-b737-ae4dfa2689b2@mailbox.org>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>
+Subject: Re: [PATCH v2 3/4] Gitlab: sage: Add Pine64+ platform
+Message-ID: <20251120160619.GJ2125796@bill-the-cat>
+References: <20251118210015.624758-1-trini@konsulko.com>
+ <20251118210015.624758-3-trini@konsulko.com>
+ <2b123aec-d0bf-4cf8-9f4d-32ca2865d6ab@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5ivmxnpICeGEwH+Y"
+ protocol="application/pgp-signature"; boundary="ZQn8jOaaTGYtwJTL"
 Content-Disposition: inline
-In-Reply-To: <5dd7d2e7-7e1d-432a-b737-ae4dfa2689b2@mailbox.org>
+In-Reply-To: <2b123aec-d0bf-4cf8-9f4d-32ca2865d6ab@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,60 +100,61 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---5ivmxnpICeGEwH+Y
+--ZQn8jOaaTGYtwJTL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 19, 2025 at 10:31:24PM +0100, Marek Vasut wrote:
-> On 11/17/25 7:40 PM, Tom Rini wrote:
+On Thu, Nov 20, 2025 at 04:51:46PM +0100, Jerome Forissier wrote:
+> Hi Tom,
 >=20
-> Hello Tom,
->=20
-> > > > , and then
-> > > > every follow-up location doesn't need to perform that (or possibly =
-many
-> > > > other as well) validation checks. My impression from when I looked =
-at
-> > > > the code last, a few year ago, was that it was designed with "valid=
-ate
-> > > > with most? every? function" and we would be happy enough with "vali=
-date
-> > > > once".
-> > >=20
-> > > If you can make that assumption -- that whatever we feed into libfdt =
-is
-> > > valid -- then we can simply patch out can_assume() .
+> On 11/18/25 22:00, Tom Rini wrote:
+> > This adds the Pine64+ platform to the sage lab, for both legacy and lwIP
+> > networking stacks. In order to build this platform we need to copy
+> > certain files that were built in the container to /tmp and then set
+> > BINMAN_INDIRS to /tmp in order to find them when building.
 > >=20
-> > Maybe the question I have then is, why isn't can_assume being optimized
-> > out at compile time, if we set the mask right. Makes me wonder if
-> > there's not something to fix upstream too. Or maybe we need to change
-> > the default to higher than 0?
+> > For now, we disable the test_net_pxe_boot_config test on lwIP as it
+> > leads to a crash that needs to be investigated.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Andre Przywara <andre.przywara@arm.com>
+> > Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> >=20
+> > Andre, Jerome, how would you like to handle looking in to this issue?
+> > https://source.denx.de/u-boot/u-boot/-/jobs/1303375#L2235 shows the
+> > crash and I don't have enough sunxi targets to know if this is more
+> > broadly breakable or not. But it doesn't happen on lwIP + Pi for
+> > example, nor lwIP + Hummingboard (mx6cuboxi defconfig). I can't at this
+> > point give remote access to the lab directly, but I can help come up
+> > with a gitlab job that'll acquire the board, build and try and boot
+> > whatever you have.
 >=20
-> Maybe because the mask is set differently for U-Boot and SPL , see:
->=20
-> CONFIG_SPL_OF_LIBFDT_ASSUME_MASK=3D0xff
-> CONFIG_OF_LIBFDT_ASSUME_MASK=3D0x0
+> Well the crash dump doesn't tell much on its own, except that we have
+> an invalid read at address 0x17. But we do have the ELR so it would be
+> helpful to have the u-boot.elf file. Could it be made available as a job
+> artifact, especially in case of failure (or always)?
 
-Right. We might want a different default for full U-Boot at this point
-(not assume perfect, but also not assume nothing). But still, I would
-have hoped SPL growth was smaller, but perhaps I just need to
-re-evaluate things. Let me know when you have a next iteration of
-everything branch somewhere and I'll run the size growth build before
-you post if you like and we can iterate on it.
+We do not have a literal 'u-boot.elf' in this case, but we do have the
+full u-boot file gdb can read for example, would that help? Given that
+we expire artifacts after a week, this is probably OK, or maybe a
+commented out section for "To debug things, add ..." if I don't see how
+to only save it on failures (there are options to do specific actions on
+failures, but, need to look in to it).
 
 --=20
 Tom
 
---5ivmxnpICeGEwH+Y
+--ZQn8jOaaTGYtwJTL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaR85lQAKCRAr4qD1Cr/k
-CjZgAP0RhQBhPRWQCh9O8QYGnPLZr+UQICAOAVb7ZJLBdny8ZgD9GZsvPFMtBV1A
-tt7QStP0RkBXLVIpvS7Ny2LCov5qBwc=
-=7geI
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaR88dwAKCRAr4qD1Cr/k
+CqfcAQDGbGYtkNj+Q1kekS+DdV4o2umcguO+Z1wE8mjPQBwnjAD8CXYnhg0G+q1K
+YVOe0OV+lPEaYcDIdoeUAmQiDnihEgg=
+=HV1u
 -----END PGP SIGNATURE-----
 
---5ivmxnpICeGEwH+Y--
+--ZQn8jOaaTGYtwJTL--
