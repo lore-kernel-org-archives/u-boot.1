@@ -4,134 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB73CF8553
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 08:15:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27B04CF8553
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 08:17:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B257840C3;
-	Thu, 20 Nov 2025 09:14:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A71CE8405F;
+	Thu, 20 Nov 2025 09:17:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tK8goFZn";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="VYRBU8lK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CC9B8405A; Thu, 20 Nov 2025 09:13:15 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4F1BC84067; Thu, 20 Nov 2025 09:17:06 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D5DD84057
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 09:13:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25086836D1
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 09:17:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-42b3669ca3dso218766f8f.0
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 00:13:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763626392; x=1764231192; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DQYMpLJKpBAe6nQG3hwPJMRE58tBlJCweot7OWVwp1w=;
- b=tK8goFZnr0hD7XAt0tlsbAV1yfsMabfsqg6uV0pCRlpUgI/XuLBtOTCM4404QGAmRZ
- 1tr6IOQukqHE7SsBhBgt+9AkU48H24UkkNBwNMZVOrBWFg1r7FOC8K/dPv0ixsouupV9
- d2UaY+Ds3fkpXtGqcn2KKlIHX0FCfrM5UrNNl0ZC214SBzp+EsKj6SSsk38uQuOzQKSA
- mDJZTrMWp7q5EImgdC0LvFNMqXWZ7jxA5unT+51dAnma/cxWi972x7gT9ANxTdBrQ1Fd
- /j7l/3nmv8f3xAA8Qme4T79+Rl4hcpZ6FLDSiNhow8HsejD8VS4ydNQd21bKVdTVV8v8
- emqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763626392; x=1764231192;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=DQYMpLJKpBAe6nQG3hwPJMRE58tBlJCweot7OWVwp1w=;
- b=P1EOdCQBtFKYa3w1DFglb6Ye/OkpnaT/LvDRQbQ6Qr0ezDx0kGQg4krcLTMZqDDCH7
- v4jgmGvnW54oqsgsirtPybzcXt0GBLq/U67iwNrPqnIxF1LCJdiDOTiJG8T920v+zXMk
- JsH0fsU9Vi87GY1RVcUoRiCE/3GrdGHAe0FBQ34jLZP9Ei72QhrwKCJPnpBVvxLcMm1x
- X0tkKjn1cja6UuGAtg168eFefr8LL2UsVGm1IMKWGHIHkc268aG9sxFWhnoQAiAqKUiA
- 0Nk+2Ww2x/pKwcJmRy0UgesYMx4z7mNih9W5cQL8tYyUaVGH5x0o/aRdEfVxtAtykgwd
- /K+Q==
-X-Gm-Message-State: AOJu0YwScWTRuQLi+drwFg9jM3J6nXJkEjXbHPowMbx+nK/QfGd0YLFa
- /4h/9dn34oxaZfxP0CdMk5dXI5/W6I5Wl/kBg3f3h2INL7qvgEQmIWRa0Cc0Ky2p41k=
-X-Gm-Gg: ASbGncuNJLuln+AsG++8YvUCQFFCMMMItCSTAr98hLebeIiB3LFR3HVu+SEU8viAf3S
- Kv1mYeW+V15d3TpkzD4K+Sulf7+sWZ1JQ010013QrTxHq5TbsLsSno5vgTUxbuZyoL5nouDMeEx
- 9hBon3XVMcDMshrN20GsC3eyRKvW2ZRC60Rfqi7G/SRKvQWRCmWQHDCsBKUx75OK5bCq1FvykGT
- 2XxpgZx31kiS8d/lD3iHTM5UE+AkQzzTHr7E53YghFH8sZT2pJ6ueMUbEW/ScMLZGkxua/EtiPG
- PtZV+hE9Fc1VOmEcrZesfoGLmGgnaRx6y5XJWcx0YVx9OyV3xLyKMm4A5RbHr9nLJuCoHWM6hzw
- nG/L+zHdOMY5hrlXOziixBDymCb3PfoPnfnJ9lH2eyhyRNYJ1Cd7Q/ttHFI6sdyamFsp+iaVjrz
- 7QY4igCYBHRbdwnOelba5oxX8Qyw7UH38=
-X-Google-Smtp-Source: AGHT+IFprHOug80vAFv7VIqqo7GshpvFmR04nuJYfLmCN7WRVE0+XgOSh9Cwa1tuE9NRYv+Z//hSWg==
-X-Received: by 2002:a05:6000:2387:b0:3eb:d906:e553 with SMTP id
- ffacd0b85a97d-42cb9a691c9mr1608767f8f.55.1763626392204; 
- Thu, 20 Nov 2025 00:13:12 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7f363c0sm3844398f8f.18.2025.11.20.00.13.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Nov 2025 00:13:11 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Thu, 20 Nov 2025 09:12:58 +0100
-Subject: [PATCH v5 7/7] qcom_defconfig: enable interconnect for SM8650
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 0CB5D21548;
+ Thu, 20 Nov 2025 09:17:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1763626623;
+ bh=7FjA/nmFZ23xj0kqG82GZrwEYqmX83/0Uphn0QYZi08=; h=From:To:Subject;
+ b=VYRBU8lKXUkT9Q5Qy2iGAHON0ToES1mh4SaIPcRvJSvGykPOG6uf5lW/l4ZMHeJ3R
+ yXjYQUvRrIGSn5KVP4bzxVcUZ3YZlGzNg8lasuYtBSRaa1X7htsxTObreKyPhhUdJ4
+ OgEwEBJVFevGJHxS/dDI3Utj9yH9ZdMB2XCdzF4NAEhetaeo3X+5PUuZDbJ6AIWO1S
+ VnvO48I2hZqEpROFUnyxFgiDVJqhi2ScumeBhqU8jFJFBddmUzQ9q7CF9D4EYLZvPp
+ srdn00m8aSSQfbfGBHEwo+TQZTlIOFLkL576Me2NPN9A0BNHkSRg7b2egeAwsFwso6
+ 5S7KESUg6yu3g==
+Date: Thu, 20 Nov 2025 09:16:59 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Neha Malcom Francis <n-francis@ti.com>, "Scholz, Kevin" <k-scholz@ti.com>
+Cc: Franz Schnyder <fra.schnyder@gmail.com>, trini@konsulko.com,
+ s-k6@ti.com, bb@ti.com, m-chawdhry@ti.com, u-boot@lists.denx.de,
+ u-kumar1@ti.com, gehariprasath@ti.com
+Subject: Re: [PATCH v2 5/7] arm: dts: k3-am69: ddr: Update to v0.12.0 of DDR
+ config tool
+Message-ID: <20251120081659.GA12514@francesco-nb>
+References: <20251103071035.674604-1-n-francis@ti.com>
+ <20251103071035.674604-6-n-francis@ti.com>
+ <btgc6fvqwkqlnnmqicvobikkyjpib5lgvda7tfyguwn25bmd2s@hdhibzylbig7>
+ <2b1b5496-cbd2-4ac4-85cc-2b8da653bbdd@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251120-topic-interconnect-next-v5-7-e8a82720da5d@linaro.org>
-References: <20251120-topic-interconnect-next-v5-0-e8a82720da5d@linaro.org>
-In-Reply-To: <20251120-topic-interconnect-next-v5-0-e8a82720da5d@linaro.org>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Hrushikesh Salunke <h-salunke@ti.com>, Anurag Dutta <a-dutta@ti.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Mario Six <mario.six@gdsys.cc>, Christian Marangi <ansuelsmth@gmail.com>, 
- Heiko Schocher <hs@nabladev.com>, 
- Guillaume La Roque <glaroque@baylibre.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Peng Fan <peng.fan@nxp.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Pieter Van Trappen <pieter.van.trappen@cern.ch>, 
- Alexander Graf <agraf@csgraf.de>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <ravi@prevas.dk>, Greg Malysa <malysagreg@gmail.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, Sam Day <me@samcday.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Marek Vasut <marex@denx.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Paul Sajna <sajattack@postmarketos.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=617;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=l1OaNqfAmhRIe48N3BIxIps8arKvVqV7RbWbaTnuCcw=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBpHs2KHilMIN5Kv6dyZfM5ukTYNrT42zy2Eys7QCMl
- z3mp/GiJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaR7NigAKCRB33NvayMhJ0aTYEA
- CVHqdE00GUdPVCgnWcGKKIUAcNHpNdZu/S/iIYcSCDF5WN6IKSGtRp3whTmDW76XDRB1ha10RyNJU3
- Ja5sdMIDOjMzefMSkJah2+TjQAYN19tC7jy6xf7bpjd2xKGgx8I4SduNq7p1uEEhUaGH2nMucGvTm9
- 8uUxd1stwKiOeVmCivZQw5VKm5BpfXeywJFD+HRHawQFV7d4cUm13cLwHJd8RQIS0eU4JrBhpgK6bQ
- 13LMYny+wfRcM8p4nAsZLnReRf4E4M8ZrbwyCA4H7PbRJYpajZmE9BXOTRpRvYwiUb+1hHbk2EkyVF
- 3+vkKx/CYNaLyC81FGMEm7ATd439wOH2nSA8CDOJsDq2aqo5/LtR6JIkUsTv8rr/xVGXV5x0Vv4GDu
- d9IGu46UQW16XNNZYZlQJMuSjrvO1P0kCGCAEXXiPDtR5PXjus+Bx1vP2k2NLD+Mvzf/b44Kapsd6z
- bjisubX/Qj/t4kkH1Tc8mdZcR4h26QT8UN1TYbLJSv56+Fkxl5k04USETZKWtDNPYocuQoOOrC3Zd1
- GtlN9xi8MBdyqlbs5g60BLHPYWIsLb9+o4rBUjCkADHONuITwKOFgD8F1yIYzikzJtu13LUhKumJWt
- AYjF/PQUF4J2FktEnS2sMjn1I82L1fZ8syTy8CiM9DjBwn5GOtRF6cIpoWpA==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
-X-Mailman-Approved-At: Thu, 20 Nov 2025 09:14:18 +0100
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2b1b5496-cbd2-4ac4-85cc-2b8da653bbdd@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,28 +70,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the Interconnect drivers for SM8650
+Hello Neha, Kevin
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- configs/qcom_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+On Mon, Nov 10, 2025 at 09:55:08AM +0530, Neha Malcom Francis wrote:
+> On 07/11/25 21:14, Franz Schnyder wrote:
+> > On Mon, Nov 03, 2025 at 12:40:33PM +0530, Neha Malcom Francis wrote:
+> >> +#define DDRSS0_CTL_178_DATA 0x35000000
+> >> +#define DDRSS0_CTL_186_DATA 0x00353500
+> >> +#define DDRSS0_PI_275_DATA 0x00F30084
+> >> +#define DDRSS0_PI_281_DATA 0x00F30084
+> >> +#define DDRSS0_PI_287_DATA 0x00F30084
+> >> +#define DDRSS0_PI_293_DATA 0x00F30084
+> >> ....
+> >> +#define DDRSS1_CTL_178_DATA 0x35000000
+> >> +#define DDRSS1_CTL_186_DATA 0x00353500
+> >> +#define DDRSS1_PI_275_DATA 0x00F30084
+> >> +#define DDRSS1_PI_281_DATA 0x00F30084
+> >> +#define DDRSS1_PI_287_DATA 0x00F30084
+> >> +#define DDRSS1_PI_293_DATA 0x00F30084
+> >> ....
+> >> +#define DDRSS2_CTL_178_DATA 0x35000000
+> >> +#define DDRSS2_CTL_186_DATA 0x00353500
+> >> +#define DDRSS2_PI_275_DATA 0x00F30084
+> >> +#define DDRSS2_PI_281_DATA 0x00F30084
+> >> +#define DDRSS2_PI_287_DATA 0x00F30084
+> >> +#define DDRSS2_PI_293_DATA 0x00F30084
+> >> ....
+> >> +#define DDRSS3_CTL_178_DATA 0x35350000
+> >> +#define DDRSS3_CTL_186_DATA 0x00353535
+> >> +#define DDRSS3_PI_275_DATA 0x35F30084
+> >> +#define DDRSS3_PI_281_DATA 0x35F30084
+> >> +#define DDRSS3_PI_287_DATA 0x35F30084
+> >> +#define DDRSS3_PI_293_DATA 0x35F30084
+> > 
+> > When I compare the updated configuration to the one for our Aquila AM69
+> > board, I can observe that you have set an on-die termination at boot
+> > frequency only for DRAM3. DRAM, DRAM1 and DRAM2 do not seem to have any
+> > termination enabled. Is this a mistake or is it intentional?
+> 
+> Kevin, could you explain the reasoning for this?
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index e686ea857b9..a56e1282821 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -87,6 +87,9 @@ CONFIG_SYS_I2C_GENI=y
- CONFIG_I2C_MUX=y
- CONFIG_DM_KEYBOARD=y
- CONFIG_BUTTON_KEYBOARD=y
-+CONFIG_INTERCONNECT=y
-+CONFIG_INTERCONNECT_QCOM_RPMH=y
-+CONFIG_INTERCONNECT_QCOM_SM8650=y
- CONFIG_IOMMU=y
- CONFIG_QCOM_HYP_SMMU=y
- CONFIG_MISC=y
+Any update on this?
 
--- 
-2.34.1
+Thanks
+Francesco
 
