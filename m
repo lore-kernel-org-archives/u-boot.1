@@ -4,71 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB5A1CF256D
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 04:16:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C28A9CF64B0
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 04:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7126883E0E;
-	Thu, 20 Nov 2025 05:16:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2363B83E0E;
+	Thu, 20 Nov 2025 05:20:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NkYqC1Y1";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="J76K/jJD";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="muv8EXLQ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="tmanUBQM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0216C83FD9; Thu, 20 Nov 2025 05:16:24 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 9A61B84042; Thu, 20 Nov 2025 05:20:23 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C9F383952
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 05:16:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6637A83952
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 05:20:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dBlQs4WF3z9tN2;
- Thu, 20 Nov 2025 05:16:21 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dBlWT13w6z9t8R;
+ Thu, 20 Nov 2025 05:20:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763612181;
+ s=mail20150812; t=1763612421;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=yk4VFVeI0Oni/iNMuvSf7YdzShx4a2lNpiW2PuU8KBM=;
- b=NkYqC1Y1Wu8ba9PtIJeDD8XNMMh+DZA4vHntj1XRojtiwkgabenamFxTv9L3vvLPLpl8hD
- MTJDxyxkGNxTMF/1eqnVixmn0K3GX2rymbEi4fYtx5IkakBiszfYMvzyz9gY/xPYZGvai2
- Uf+EbkxIH3izYf/eZkjZBJ0Zlh2oouFuJxNAhoCAsK/ISHKujGtSe4VAQ+EQuDQ9tVHyP5
- Fc0idwwMRvj9CmpREpYejPrnL0ceWgMLD3GMUPQpqaBVg3wb8lOPH77aRJDvGPoNMgUueF
- QzesxdS/ATRBE1gODPOz3nFDT4uqEG0r5f9pUhtPd54WhcW/ubj7HXaDe5R0OA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TvXAdrluQiQ0i9LyzWrGguhHfsjOCvHOTnsOMxKR+Eg=;
+ b=muv8EXLQWO4cDzK6fYU551rmQ5d0QdyJ9pF6J7bDp+9hOyDqTGSRgOpXS7RYLbSQSgfiFc
+ hRNpXa+j/1UN2WIFqizQqDMiUu90kWscBj1ahOmeuPzXaSWNIhwmHM8MCIu6KY/1wQFEdw
+ IgUhEf3TAy/b/3aRkv+znYLYiDqTLDi6KtIk7m4uj8w0rGSw31sQQIW3dib28LkNyCjaO6
+ d+JbaRUAAsZs6g/hTiesXSiBIYYsWmHzXDX6cjWPUEEIuPGRGv7K9caADcri+I8o020a6Z
+ zs56BjnEY8CZyjZEQBILdtdOd2LOAKzRDGdsgx06CaaB5mMxa4vXbXiwQSiwhA==
+Message-ID: <4460651f-7151-4743-a1e6-82928cb78b3c@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763612179;
+ s=mail20150812; t=1763612419;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=yk4VFVeI0Oni/iNMuvSf7YdzShx4a2lNpiW2PuU8KBM=;
- b=J76K/jJDhUkYG/bPmlwHyVEro738vAJhnMeCCDaQuEEmclTZFlKk4LBKJoh0/AO1LOSHy2
- FMIGSBBvyZUdRYIsW2Rl3uDjWJjjTI06989OBUGh1eKw52Soig8QLK7QpeOXEGoGvTIk46
- j7LDj/vqlo/dIC0C3svQZLLt/gkrR04VZW0XY1g5KidrWdaI1hA/peZ06ev4ZLph1mqfbJ
- vCFYB62DO59OxasB8/x2qLhI738ZhQ1VVgddC7owHL7crJdr8BffwCZ+OCCxBnwFvoqmFh
- 9saZGLMcTgPWOM/6lCYeLHfL7m6Lp5sIO+RwWyaHVXmLECd0XSHG6fVsz0dEeg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-Subject: [PATCH] boot: Check noffset before use
-Date: Thu, 20 Nov 2025 05:15:30 +0100
-Message-ID: <20251120041613.817311-1-marek.vasut+renesas@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TvXAdrluQiQ0i9LyzWrGguhHfsjOCvHOTnsOMxKR+Eg=;
+ b=tmanUBQMvXe9E1C29y1vh/rF00LwVSWWaL+5LzYjnZGHUotaYqB5Eb2a2lgzG8H/hQ/jKY
+ jkGY6pyzw28UxNk1KLL8l9AEI0iu4AoRhj8c82aHl15q6jFIzXjCMLiEm2Se/7QmP4Rl5s
+ OWvv3fHemYW1av/tBgZjoMIxIByhl+Yjxj5UoSedZQlv6ziwIfv00Cd1ZoSnfgN1Ob4Tzo
+ 2zpEdM+7L2fDrhbG2gOY4ZYn4R/tk0wGeeFBktceaEJ1y1HXMn5Aoq6liYHMDexL3f0gFC
+ 5Ix7Avh4s4Ff4pfCAUYm7JrResi+gZqofQCzSYunanS52CEDUT1jWw/xntgQOg==
+Date: Thu, 20 Nov 2025 05:20:16 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: w8g7fghz3h6dwh3tokcd6fjxy86jo73s
-X-MBO-RS-ID: 5b2f3244f36097c8326
+Subject: Re: [PATCH 3/3] libfdt: Check fdt_offset_ptr() return value
+ unconditionally
+To: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Adriano Cordova <adrianox@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sam Edwards <cfsworks@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20251113122145.949112-1-marek.vasut+renesas@mailbox.org>
+ <20251113122145.949112-4-marek.vasut+renesas@mailbox.org>
+ <CAFLszTgRxLTWjCCbxxme9XtG2E80CrYOesry_86YuagL8uPJ-w@mail.gmail.com>
+ <8a4ba995-840a-41ed-b496-6c32965d4ce5@mailbox.org>
+ <CAFLszTg6dF1dmJJDh8-2ZjUf6i9+ZOFvWNSxNRS_PBQ3CDNtHw@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <CAFLszTg6dF1dmJJDh8-2ZjUf6i9+ZOFvWNSxNRS_PBQ3CDNtHw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: qfc9kp8omm31ufzuywozw13d5uejs9xf
+X-MBO-RS-ID: 6ff931f48f421b627b3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,48 +99,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If noffset is negative, do not pass it to fit_get_name() and then further to
-libfdt, this will crash sandbox with SIGSEGV because libfdt can not handle
-negative node offsets without full tree check, which U-Boot inhibits to keep
-size lower.
+On 11/14/25 12:34 AM, Simon Glass wrote:
 
-Instead, always check noffset before use, and if the return value indicates
-failure, exit right away.
+Hello Simon,
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-Cc: u-boot@lists.denx.de
----
- boot/image-fit.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+>>>> diff --git a/scripts/dtc/libfdt/fdt.c b/scripts/dtc/libfdt/fdt.c
+>>>> index 95f644c31f9..d16cc3d4730 100644
+>>>> --- a/scripts/dtc/libfdt/fdt.c
+>>>> +++ b/scripts/dtc/libfdt/fdt.c
+>>>> @@ -168,7 +168,7 @@ uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
+>>>>
+>>>>           *nextoffset = -FDT_ERR_TRUNCATED;
+>>>>           tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
+>>>> -       if (!can_assume(VALID_DTB) && !tagp)
+>>>> +       if (!tagp)
+>>>>                   return FDT_END; /* premature end */
+>>>>           tag = fdt32_to_cpu(*tagp);
+>>>>           offset += FDT_TAGSIZE;
+>>>> @@ -186,7 +186,7 @@ uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
+>>>>
+>>>>           case FDT_PROP:
+>>>>                   lenp = fdt_offset_ptr(fdt, offset, sizeof(*lenp));
+>>>> -               if (!can_assume(VALID_DTB) && !lenp)
+>>>> +               if (!lenp)
+>>>>                           return FDT_END; /* premature end */
+>>>>
+>>>>                   len = fdt32_to_cpu(*lenp);
+>>>> --
+>>>> 2.51.0
+>>>>
+>>>
+>>> The can_assume() is there to be respected and helps to reduce code
+>>> size. What problem are you actually seeing?
+>> fdt_offset_ptr() can return NULL, and it does in test_spl on sandbox if
+>> I recall it right, because the U-Boot code passes in offsets which can
+>> not be resolved properly and that makes fdt_offset_ptr() return NULL and
+>> trigger SIGSEGV when it is dereferenced here.
+> 
+> That sounds like the FDT is corrupt? Here we are parsing through tags,
+> so we should really figure out why it is corrupt.
+> 
+> But if note, then we should not be passing bad offsets...so what is
+> the root cause of that?
+These four [1] [2] [3] [4] supersede this patch.
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index cccaa48f683..35595f15ac3 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2137,7 +2137,6 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 
- 		noffset = fit_conf_get_prop_node(fit, cfg_noffset, prop_name,
- 						 image_ph_phase(ph_type));
--		fit_uname = fit_get_name(fit, noffset, NULL);
- 	}
- 	if (noffset < 0) {
- 		printf("Could not find subimage node type '%s'\n", prop_name);
-@@ -2145,6 +2144,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 		return -ENOENT;
- 	}
- 
-+	if (!fit_uname)
-+		fit_uname = fit_get_name(fit, noffset, NULL);
-+
- 	printf("   Trying '%s' %s subimage\n", fit_uname, prop_name);
- 
- 	ret = fit_image_select(fit, noffset, images->verify);
--- 
-2.51.0
-
+[1] 
+https://lore.kernel.org/u-boot/20251120041439.817233-1-marek.vasut+renesas@mailbox.org/
+[2] 
+https://lore.kernel.org/u-boot/20251120041504.817264-1-marek.vasut+renesas@mailbox.org/
+[3] 
+https://lore.kernel.org/u-boot/20251120041526.817288-1-marek.vasut+renesas@mailbox.org/
+[4] 
+https://lore.kernel.org/u-boot/20251120041613.817311-1-marek.vasut+renesas@mailbox.org/
