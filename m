@@ -4,86 +4,157 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A36FCF64A4
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 02:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B87CF256D
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 03:33:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF68883E40;
-	Thu, 20 Nov 2025 03:07:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CF41583E40;
+	Thu, 20 Nov 2025 04:33:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oSAOvpfe";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="P5zuoLgE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C00D83FD9; Thu, 20 Nov 2025 03:07:20 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B38C983EA6; Thu, 20 Nov 2025 04:33:43 +0100 (CET)
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88C2C83E0E
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 03:07:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA13983E0E
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 04:33:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-640ca678745so553901a12.2
- for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 18:07:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763604437; x=1764209237; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HIL9K0xC9qkgEifSt6kMyR0AnTZGcob7H8b6mDOCYMY=;
- b=oSAOvpfe0bJc+zhnp8w5nOG5qakVduajveaej4h5QxxF2CNmxENgTZSlmjy/kVoqKV
- 19Px3ZKvmvgnPc4FOo4yRK8Glgj5wcZQ2dJ63EJqYJ4pyniZOm4mgql7URfZg4EKy4Yk
- IOFyS31avGsFL+2VV+FAb5x48C+Nv85fVFAMk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763604437; x=1764209237;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HIL9K0xC9qkgEifSt6kMyR0AnTZGcob7H8b6mDOCYMY=;
- b=QINZrDVfNwgfq6vd+nfO0deboW/aveYSL4uyO4+Lh9LrFmp+by4YxMDFuDBGvZXhEM
- avcyUL42lnx7o8wVYRA5eRNPrziiUD3B8Rz2lq9z5sO9fU2xxJ6IK28GPJVduS/u8fY4
- WE2VX8t7WR9vSvlj8bbsoWaSG8ReJdv5Sxdkt67GCjpC9esS69AMosHU07wqZMmrLf6I
- NlMPE1qrvhI3tdM4bpgSwVr4yu3wGKw+tfambaKswsE6oO1dFWs9imDn/D99qRMxl/AV
- HYw4tbbT6F1aslXFr5GoOHW6jtlriPJVFkYjo8L5TuhienRll1hmuqdWHAJlNtvfbKr0
- /PgA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXIkicOs4k2I+8CKnklQYquWi27g0v+HDXIpJfqPBnu7HjulIhje1wCLQGjOeo9aC7LzyDAld4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzgZCCu7xz1v4gs2HTp65Puvhd7/xF+/6lU1MTfnS6uqw5G7jwk
- kqTS0iGGpgzwmZSfSt+OwpI+r7SvNbFDjCvNd9Ks9rGFN3JdamlZYqaBqdwY8ZTlqub8cMcwLOn
- rzUtwq8j0+JL7kdG6ublzOh7CcM7BjiC2wzD5TnQI0BSE/jGYFSeJug==
-X-Gm-Gg: ASbGnctN4FWb/0ZM+nGe720vTjExcTsdqaUdeTGDy5hWFyffDj/ssEv7Rys4dSdtfd6
- mZ1Rbf7mj5IKsG8Wl1GbjvgOFS6BPfpr9v/1RWG98y3tVym/wcKfourUXwMnCilYRGvsLqeK96N
- P+YGT28fqi3QC/oZT+/DegqFtQkjA5igeoR1hPiXVpjk89kHuOwSdurN/mtNk5mfYwqT2tajkjm
- N6tz5EsI5/r7U+4q/haWDEEMgkUkFrRrnB+6GVnsRLsJdSWE/5OeAx3+LETS3UwdKh+emCRurd5
- 0Ot/
-X-Google-Smtp-Source: AGHT+IHHw+XC+lu/o4LBo5FwwwwrPEXtGyiZI4lrNz7OpqZK1lYWUf25RLcWwrex46v2aIO/Bbs+2dRLQDil2Jr6zs8=
-X-Received: by 2002:a05:6402:280d:b0:641:66cc:9d91 with SMTP id
- 4fb4d7f45d1cf-6453647b7d3mr1306244a12.27.1763604437046; Wed, 19 Nov 2025
- 18:07:17 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-jain1@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=n4mveiOGZ43IlueJfpyhgKpSzdBRbeuF6oKIQnlSdTq/xusznsNwrj5P1xSPuZSgNgLXRZ8Mmh8mcyi/by/+RBQPiIr4U8/PgWfdY9igzZWRqG6JnsdOumftj9zQJKmZr7SRy/VofFbb8jCAJzqIik3eIqgdXYQBUfeKbGk3sxqLMe2g/9fb4ZaG1ldkBOR2+9F14dkcV2rh34CBx4ptDDvjOMCIN9uNpjPGCa4YrBt+mxHeiu/zM1x4EZxMSMwY1C5UmXV3sNgKmeRezrMgOuGKddLSz7L9ihNb5KVrrWsxlJdE6XAo3gOnXCgawYFP/aCJuc5exe1BH9J//7ZB8w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pgXr3Bq5v7ug6Rhzm1XhBME6vqGbADn6R2CyZU/pNyI=;
+ b=d1ntFVXJJ7ARBihzRnfShZyiZMsZ8j1I8RU7tQSNuABv1rvFAp8hPZIukEL8rpsMfOLvEi/2egkXSc7FHED6+iMGhn0ndWcXZkJ6Xq09nXwQvhx8Gk7l8+9WY+zNsYj8Vn4mbwzzd09IReH6Y5maLZZUsvGBOXYo9qQz7g3AToJYs6Yxg2D6G33185aVoZe4ZfuCgcjAul+Md4aT2XwMydHsEweE/HR7GLsUfKGnnuDQggBSTaZx+K+fhlbs/iGfZJGiHCBb2I+cKX0yJ1BpBntUQhirzYFaRS7tTJ81q+p7wSpWXau1vlcxC6/2VcDa89KB1gIuLTD1MNLSysSVXQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pgXr3Bq5v7ug6Rhzm1XhBME6vqGbADn6R2CyZU/pNyI=;
+ b=P5zuoLgEunEt32dx2M8OqaC4CTuwIjs5PC0iyP/HYiMPQNK+WFQRsFzQPH8hsmN57N1LjfyBkQB0goiZ2n+1IhVdwtmlbr1qJqgXAmxpCVHulpGTwHqsJmbZu0Tm5rjoXjJaqMJebordJovThA+IwnxEMV0c8Y75QMihn05H2K8=
+Received: from CH0PR03CA0417.namprd03.prod.outlook.com (2603:10b6:610:11b::6)
+ by IA3PR10MB8708.namprd10.prod.outlook.com (2603:10b6:208:572::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Thu, 20 Nov
+ 2025 03:33:37 +0000
+Received: from CH1PEPF0000A348.namprd04.prod.outlook.com
+ (2603:10b6:610:11b:cafe::d1) by CH0PR03CA0417.outlook.office365.com
+ (2603:10b6:610:11b::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.10 via Frontend Transport; Thu,
+ 20 Nov 2025 03:33:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CH1PEPF0000A348.mail.protection.outlook.com (10.167.244.4) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9343.9 via Frontend Transport; Thu, 20 Nov 2025 03:33:36 +0000
+Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 19 Nov
+ 2025 21:33:32 -0600
+Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 19 Nov
+ 2025 21:33:31 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 19 Nov 2025 21:33:31 -0600
+Received: from [172.24.233.20] (a0512632.dhcp.ti.com [172.24.233.20])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AK3XSQo2983151;
+ Wed, 19 Nov 2025 21:33:29 -0600
+Message-ID: <b5391d0b-d1d6-45da-acb9-064a8ce2de7f@ti.com>
+Date: Thu, 20 Nov 2025 09:03:27 +0530
 MIME-Version: 1.0
-References: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTg0ByjUGgX4MSbU=i0oG7fuidM4J0J128ER6Aq+r6HW9A@mail.gmail.com>
- <81115588-50c7-4ecc-975e-13994101955f@mailbox.org>
- <CAFLszThNLoS7j0pe_8G93dHtX91j331DCBiUgWpUPXi4Oi2-9w@mail.gmail.com>
- <c5300029-9bab-4a06-b426-ccc443d0928c@mailbox.org>
- <CAFLszTiV2jTWcWU+27QxX82Ap9YnhZNTK1sXrFvF_e53ydc5_g@mail.gmail.com>
- <706283a7-2ba9-4b8c-8cb4-3db42759acc9@mailbox.org>
- <CAFLszTh5MaFqC-pP5z4j8jLs4qmUR-jhS5wYob2kkVTFDQB0Vg@mail.gmail.com>
- <b3c9a624-6574-4be9-a88c-be7acc863d3c@mailbox.org>
-In-Reply-To: <b3c9a624-6574-4be9-a88c-be7acc863d3c@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 19 Nov 2025 19:07:05 -0700
-X-Gm-Features: AWmQ_bmjdXqJpef4cMT_AirL8tu2x_GLOr0HEPTVqPIiy1eETnL007xWaww0wYo
-Message-ID: <CAFLszTgZyzudtPosTZ=fOonTQA8LYCi3rpMAz-5spwqi7efO6w@mail.gmail.com>
-Subject: Re: [PATCH] boot: Assure FDT is always at 8-byte aligned address
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/2] Refactor tidss_drv and enable early splash on AM625
+To: Tom Rini <trini@konsulko.com>
+CC: Anshul Dalal <anshuld@ti.com>, <devarsht@ti.com>,
+ <aradhya.bhatia@linux.dev>, <n-jain1@ti.com>,
+ <tomi.valkeinen@ideasonboard.com>, <vigneshr@ti.com>, <praneeth@ti.com>,
+ <h-shenoy@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20251106085842.629521-1-s-jain1@ti.com>
+ <DE1M02OMYGCG.UGUVC26WQW5I@ti.com> <20251106133745.GX6688@bill-the-cat>
+ <15de746b-85f1-4cbf-a803-a225d7cc2d44@ti.com>
+ <20251111133504.GS6688@bill-the-cat>
+Content-Language: en-US
+From: Swamil Jain <s-jain1@ti.com>
+In-Reply-To: <20251111133504.GS6688@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A348:EE_|IA3PR10MB8708:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5d65a14d-7ab5-47e7-188c-08de27e59698
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WDQwaFdlVEdHMHdUMmJXUGxmM2U0djVXdE4way9BcGh6Y3FYVitHM3ZYOWdM?=
+ =?utf-8?B?WjkxRGdoSVlzYmgvME5udjNYKzIzd2t3YW9jOXJ6QXF4elE5SVJLK3l3RzBo?=
+ =?utf-8?B?cVR6K3oybTBtMG5hVStkOURLMVkwV3ZFVER2RUQxNWg2clBVUm1IZCtOUUk5?=
+ =?utf-8?B?RXB6Yll6S3ZaaWhUZGFLQmNtcVB1VmFId0J6QVVyQmtRME11cmxiMUVqUHpz?=
+ =?utf-8?B?akQ1TkhkUS9lelFGTklPcUM5TThmOGRCNDkvU0RaTjAvRFZNelBBQTRrYWMv?=
+ =?utf-8?B?ZXJLOU80TlNjcEw2RTZ4c2xhTE5Lc3U3cXpyWEJTNEZ5eU90OUhBeFRmd0J6?=
+ =?utf-8?B?ODF4aVZoaGd3Z0FRcjBkNUcxMjJTM3NVakNvZVNEWGJHbU9kYnJidy9JcjEr?=
+ =?utf-8?B?ZGdraWVrTXFLNnJVSzlqVE55UmpGN2xrT0t1T0d3V0NwT2JUWHZXVWtZVDg5?=
+ =?utf-8?B?M1pCV0J5TlZxMWZrUFI5RGJnS0FUREc3S3dHa1hYaU40MXlLTysrMTlWZXJv?=
+ =?utf-8?B?S0dJWkdIZ0luTDZpZTNyZHdFVGZyWUxwZExjNTNRTDJKaERhL2IyZEVlc081?=
+ =?utf-8?B?N2RLdi9lOW1Oclc5eHd3NWp1Zzk3UzZaM1poQmRYNXNIa0x2N3FLSkFiUTg1?=
+ =?utf-8?B?TFlxZGtzWFI3WCtGR2UzTFZFV2NXalFrTTVqZEVkazJ4aGdYelREeDBHWUEw?=
+ =?utf-8?B?UGpTaXVoUjlkSVBVMWZ3Mm5CSzdJUFdxVjdXM3NhNVk3Tnd5R255ampYOTg1?=
+ =?utf-8?B?eGRXRCtZckpoRHJuMEM5cjh6aC9pUDg1aXVpdjZxV21ZTnBTMmhxV0toSndZ?=
+ =?utf-8?B?ZzJPUlFzOHNOeTJobVYzQWFDYjFDeks3N0dzQTZTME9iQzRlVUJyYlRQTmZz?=
+ =?utf-8?B?eW9hZHI1aEMxSk1WeThhbmlHVUo3RTV1RVd5cWRQZDhhdzVvY2ZrU3NlWnJN?=
+ =?utf-8?B?ZjIzQXpJeVJGdWlKbjJnQzdVQXFhSjkvaTNoUXpPdVU5OXJGZFM2R0Z2V2Z1?=
+ =?utf-8?B?S05wYkY1aWx4VDdWMlNFb1NoQXZiQkMzZllrZGZCd3RSb2RjeS9nVGxpZDBl?=
+ =?utf-8?B?QWpzT29NUXR5K2xQMjNGMFd6RWtUVURDeTJleVpyYWhnWjFVZ0ZWRDBzQTBU?=
+ =?utf-8?B?eGF3NWZnQjRoRjArSE54TDEwMU53cGNtTTFacVZTaVE2Mkc3QU8xQVNyb2dW?=
+ =?utf-8?B?ek15LzBndCtHcTBjU3AyeUMxZStibzB0MWE5czUrc1g5U2V4RDEzS1YvK3NC?=
+ =?utf-8?B?VFdpbkhQRjVCUE9Ja21ON3FZb1I1Y240eFNaUmpnaFJYNHhtK055WWNTVU5O?=
+ =?utf-8?B?bXRjZ2dxZXRJWkFGMEpqdXlvZEZkd2xkQjRxTW1qK0x0TVZONTU0MW9TM0VH?=
+ =?utf-8?B?d1lZRkFVZ2x0YmI1c21OKzhvQ2dKL2U3Q3dOT1ZIL0RNV3paM0Z2NlBsR1pV?=
+ =?utf-8?B?TnRyVHF4Y2JhOEVHVUNrd0U4cXdNeGdnTld3dDNNYUg2Wlg1d2FmdU1scEht?=
+ =?utf-8?B?N1FocTVaVm16amRmL2U2L3NiVGorRnZsQ250ZjhGSlByZnl3eWhobEtOK0xF?=
+ =?utf-8?B?QVJnUmRvS1diRXRycUllTjJiMWFvelhERnp2K0c5eVVMV1VRZnUxbWplUTVo?=
+ =?utf-8?B?b1lRQnRyYXd0ZzRQV0wwSWVPaytKSnMzcDMxendOc1VLYldXVUhIdnRkN0ZL?=
+ =?utf-8?B?MjRqUEdkKzVWK1JITDZGRE1xanlpMDd6b0VTNmw5MEN2V2Zsa21zeThneFNx?=
+ =?utf-8?B?SXhJMGt6UUxRVlBWVkNwNGVnakkzQ1c5NmpvU0kzK2RtTitaKzNRU2IrMGUy?=
+ =?utf-8?B?TTBDeGJ0OXJrb0dxRWtCak9kdWFjbGtmNUtxUGUzN00vc09DdW11T3IxQjdK?=
+ =?utf-8?B?Vm9QaXFsZ1F0MURYNE40U1JBTzFZQ3RXbHpieXVoZEROZmg0VjdYWUh5Z21t?=
+ =?utf-8?B?aDR1bkMzTzVPalE2c0w4Vm9xdGVxam5EYUxWZVY4eHQ0M0RKYmhlakcwbHBQ?=
+ =?utf-8?B?TDNrOEJWT0dONjBQUEc0Sy9oTisrd0NIUVRhM2s2czhIZExnOG05SXphcjFZ?=
+ =?utf-8?B?bFBIVEk0TEp3TkVTUk9ESzNQY3RPSkpYWWJQOXNRd2RJQVA2UlAydnNZNUk5?=
+ =?utf-8?Q?zSPs=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2025 03:33:36.0204 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5d65a14d-7ab5-47e7-188c-08de27e59698
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000A348.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8708
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,71 +171,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Tom,
 
-On Wed, 19 Nov 2025 at 17:20, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 11/18/25 4:47 AM, Simon Glass wrote:
->
-> Hello Simon,
->
-> >>>> 2294         } else if (load_op != FIT_LOAD_IGNORED && image_type ==
-> >>>> IH_TYPE_FLATDT &&
-> >>>> 2295                    ((uintptr_t)buf & 7)) {
-> >>>> 2296                 loadbuf = memalign(8, len);
-> >>>> 2297                 load = map_to_sysmem(loadbuf);
-> >>>> 2298                 memcpy(loadbuf, buf, len);
-> >>>>
-> >>>> ...
-> >>>>
-> >>>> 2309         /* verify that image data is a proper FDT blob */
-> >>>> 2310         if (load_op != FIT_LOAD_IGNORED && image_type ==
-> >>>> IH_TYPE_FLATDT &&
-> >>>> 2311             fdt_check_header(loadbuf)) { <----------------- this
-> >>>> 2312                 puts("Subimage data is not a FDT\n");
-> >>>> 2313                 return -ENOEXEC;
-> >>>> 2314         }
-> >>>>
-> >>>>> Perhaps we should deprecate FITs with internal data, too?
-> >>>> We cannot break compatibility and stop supporting old fitImage, so this
-> >>>> is irrelevant here.
-> >>>
-> >>> OK, so please create a function which can detect an FDT header without
-> >>> it being aligned, like the other code you wrote. Then it will be safe
-> >>> to call that here, even if unaligned.
-> >> But we actually do want to detect unaligned broken FDT header and either
-> >> fix it up or stop processing, we don't want to perpetuate handling of
-> >> broken FDTs and pretend that is OK, it shouldn't be I think. Hence this
-> >> fixup.
-> >
-> > The decision as to whether something is an FDT is made a lot earlier
-> > than the actual processing of it. For the former there is no need to
-> > allocate and copy. For the latter we need to.
->
-> The test whether the FDT is valid cannot be done earlier, this place is
-> literally the first place when the FDT is decompressed/loaded to the
-> target location.
+On 11/11/25 19:05, Tom Rini wrote:
+> On Tue, Nov 11, 2025 at 02:38:10PM +0530, Swamil Jain wrote:
+>>
+>> On 06-11-2025 19:07, Tom Rini wrote:
+>>> On Thu, Nov 06, 2025 at 05:56:38PM +0530, Anshul Dalal wrote:
+>>>> On Thu Nov 6, 2025 at 2:28 PM IST, Swamil Jain wrote:
+>>>>> This series:
+>>>>> - Refactors tidss_drv
+>>>>> - Adds am62x_a53_splashscreen.config to enable splashscreen at u-boot
+>>>>>     SPL
+>>>>>
+>>>>> Signed-off-by: Swamil Jain <s-jain1@ti.com>
+>>>>> ---
+>>>>
+>>>> Tested-by: Anshul Dalal <anshuld@ti.com>
+>>>>
+>>>> I also went ahead and did a sandbox build and the driver seems to build
+>>>> fine contrary to what Tom saw[1].
+>>>>
+>>>> Below are the steps I followed, am I missing something here?
+>>>>    1. make sandbox_defconfig
+>>>>    2. Select CONFIG_VIDEO_TIDSS via menuconfig
+>>>>    3. make -j`nproc`
+>>>>
+>>>> [1]: https://lore.kernel.org/u-boot/20251105164114.GQ6688@bill-the-cat/
+>>>
+>>> v4 drops the header in question :)
+>>>
+>>
+>> Hi Tom, as we have the patches tested and sandbox builds also fine, does the
+>> series look good, could it be possible to pick it?
+> 
+> I've assigned it to the video custodian as yes it looks generally fine,
+> thanks.
+> 
 
-Yes, this is the place where you are testing whether it is valid.
-
-Later, the FDT is actually used.
-
-It just isn't right to allocate memory in fit_image_load() - it is for
-loading an image.
-
->
-> > Anyway, you are doing the patches, so do what you think is best. But
-> > please create a function for this, rather than lots of little
-> > hand-crafted checks around the place.
-> I am confused, function for what exactly ?
-
-I believe the code you should patch is in boot_get_fdt_fit(), after
-fit_image_load() returns. That is where the processing happens.
-
-That is where the function I suggested (and tried to write) could be
-called, to get an FDT that can be used. It also happens to be one of
-the places where boot_relocate_fdt() is called, which could mean you
-don't need to allocate memory.
+Gentle ping.
 
 Regards,
-Simon
+Swamil.
