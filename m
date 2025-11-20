@@ -4,97 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74183CFA459
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 23:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0873CFA459
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 23:40:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DECDC840F8;
-	Fri, 21 Nov 2025 00:40:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 515248412A;
+	Fri, 21 Nov 2025 00:40:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nDK1RqhB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cL/bnmKL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D595D84106; Fri, 21 Nov 2025 00:40:39 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 9F14B84132; Fri, 21 Nov 2025 00:40:48 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5E3B8405F
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 00:40:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F32D8405F
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 00:40:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b7370698a8eso183894766b.0
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 15:40:37 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b735b89501fso162895366b.0
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 15:40:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763682037; x=1764286837; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763682045; x=1764286845; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MLVbixVEleg+9DRhD21hWmlZYkZ457DTndXxj1OVCHI=;
- b=nDK1RqhBxfqC8bz6JPfWPuhOlVzi5Uhffsljn5YnbqjoCut7IZ+T0jMjcGcdPTCSp3
- Sx6ti5D99GoQzPd1n/+BeiicZaoYWAh4xGoyyy0CVmLI3erRANjJ7XNyGji34/MFRl2J
- 1MsbCUBSUPwemt8wQaUtlz2320IU23G1M1q6k=
+ bh=lOGcB2qioTLkOFpemH1havyRj7QXUzSBGNbxOIlufFQ=;
+ b=cL/bnmKLHt88E5fy0ucglrSEM7arePHomlFqwBqClakQFSSgYhTEKAgWZrAa0S/VCn
+ jyfW5E1Pc2l3L7SJpXA0T4O9hsmkEPG2PmDMhkrQtB/xwyCulAh31WrLjrWuOkCdW5o+
+ UWMuLE82KpoOgDlKIY/vk3eMBxu8Qa0j1wICw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763682037; x=1764286837;
+ d=1e100.net; s=20230601; t=1763682045; x=1764286845;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MLVbixVEleg+9DRhD21hWmlZYkZ457DTndXxj1OVCHI=;
- b=mLsiOwFZb6IiraVh4z7WqRcujHgKpHdDAPbgLLY4tlYmUY77iva1nS5IYVsyA4bTLr
- Zg5BBGFjeSfiOLeimH0DML4bT7wKpfW9VaUB1fa3OGiGwTLJXdUPerVn3qRlQkfG1CRZ
- n+JD2+kwwUnlzsJ+tgXQ+ZLtJH71GH7cJLeb7aTZ8RZ2W/Om9kqEoRczW0IWDbIxzRuG
- SmFyVtsgPklrQN/dxkI4rLZChYgXn+EQ7rBT/zWUOVK4XAaAk+nd5hUWe8T+U7Hpx3LN
- xN36mkb49RThW1LU5FYV+bF8TPS2oqU5wuL8XeoA2NA9csF5DXs/WcEB7eK1wnrPQQTn
- xREQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWxYYuzxsVlkvG/vgi8WI5i5aYS1KDcGdtzt2kJIJD205vSygQ8FSGthQOaKo9oO/qU3cPdpDs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRGtoDVPNohD5aNJzAmoHY+i6nI4+TOPD38Js9DtDt0DoOTMda
- 17NyMmTyVKURkfyFD2p6n1EvUPai33JAmQHLw+zcvhpXb6bl8A/atYGor3cdcXGeD2qZXJDQ1ZU
- 9w0WpvfDQT+yJ9C9P/TVywTFlKPfjIvV16z/oj1kG
-X-Gm-Gg: ASbGnctOjpPG8AUKoIg20N3pwcENIJe8CY8+ucIKSO/0fMFMxk7j3ywh1mGYFLQDwdO
- sTeWpsUbpzl/squyIbIKZf496QJ1uqJ0VmGO9WcFPTF4o+yg1VhVTHHTDbdauYPe9QlrPpPCuOt
- Ozlk+WfpPzc5fcC4MB6hjdJn4bZ3I566Gdf1LflWZ5Wf77bqQRs9MxOrRdUQohWcQUpn9kraxof
- smQfTGUnwGNv1usN099UzWbaWWGnRH+S113TEV/miXwXhpj0Hk3uyREf+DVJWOS6J+CCt3wFr3B
- KhpL
-X-Google-Smtp-Source: AGHT+IGIoUz7NUOJzT95y2RoyeYhFtw9pDQgHjUzTjYyeNUjOEa5Om5XqZ8gBF1H7O3hV8P55Lq49zjkPGX//a91On4=
-X-Received: by 2002:a17:907:3f1e:b0:b73:5acd:465e with SMTP id
- a640c23a62f3a-b767153ee39mr13658566b.11.1763682037129; Thu, 20 Nov 2025
- 15:40:37 -0800 (PST)
+ bh=lOGcB2qioTLkOFpemH1havyRj7QXUzSBGNbxOIlufFQ=;
+ b=vySyUz6TUQqD6Z7mCuLluNW8jHKmc/YtboLtvBMItqVIPWs6h4iHTtOPgfMJPZydHk
+ ylUGRhROCnWvUYYXu34eMj+Yul83k8mJdiIkbzMt+5ZAMa+Yzm0yJL5dppPxQeQtJrUm
+ kY6Oajxtayr6zhDT+CzKqyR6HQIGh6ixV7SrJ43uOTkNHGQY4pMTherMvih3Q5fEKoqK
+ DGoPcepjXCNeQIfsHY4rqj4qWBGKW0nIsnpm8mQ9UgmsTdmPftPXEQuvULIR1+bRBnDH
+ qXVK8VReLCEepaHV6CHSBZmgnrLPCI8iiTbuF7rGS93p1fQqgTMp4Nt/8sfeO4oc9SB0
+ vjhQ==
+X-Gm-Message-State: AOJu0Yx6jigIuaAeOIW/CPv2PAo1fH2UQOknpRq6BlL1Rv0gM8nroqM6
+ IWvQ6huqL1udaU6HDR4aC+XUjx+BmHQVrfac2oeMHyjFbJy2Wf0dZuLZzZdnVRaZMrrVjhoUIJw
+ m48gwZa1bugaOI0uprJ2awd30eMmZcEgvnShRGoBf
+X-Gm-Gg: ASbGncskaJGwO/PbOLqUMveIgUv5Yjmzin365S+xTT7HRhw2zhvjZuIjIx7NNoBfknP
+ bYvvu7q1Ror1rztGdZtv3ePs7v+IdIVURAlroI6V1qWHzVXE7r7SHnpWM7nsyEn50IEHND4okPz
+ uoAhd+36wHd/Li9/NDeS9diE0+tLuRKt/mAmcMOq+8avok3R4WMnf/3j/vB/nVmyp6hPb4TBj8L
+ D6NC31Zu8G2x6fGdDyN3PUAVfVBx/78fSqTni7cOX9O3D1uDiSI31Im4Ks9OrV97HOu2w==
+X-Google-Smtp-Source: AGHT+IFFUuFMt9ud/zWaWpKdvAB5XCjzm/n1fVzxFsztK3uMZ2qtSXdaPfVCDbmTQysZmvopaUPSuxRaL47sKBv+8bc=
+X-Received: by 2002:a17:907:971e:b0:b73:9fea:330a with SMTP id
+ a640c23a62f3a-b767158cd9emr14769266b.17.1763682045467; Thu, 20 Nov 2025
+ 15:40:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
- <20251118-topic-am33-evm-oftree-v2026-01-v1-8-91ce13c661e2@baylibre.com>
- <20251118140804.GR2125796@bill-the-cat>
- <DEDGK9KKB61P.1QY81TPR5JLNY@baylibre.com>
- <20251120212909.GQ2125796@bill-the-cat>
-In-Reply-To: <20251120212909.GQ2125796@bill-the-cat>
+References: <20251120085057.549221-1-adriana@arista.com>
+In-Reply-To: <20251120085057.549221-1-adriana@arista.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Nov 2025 16:40:22 -0700
-X-Gm-Features: AWmQ_bmCMHsh1ow-89rrQSyDC_3JoXaG4xv9v2CBOFjTnugld5H0dN2bQNwX7I0
-Message-ID: <CAFLszThb85y4zaWfcwKcxNW2wOoYB1O_aYe-7h_UPQk2-60-ZA@mail.gmail.com>
-Subject: Re: [PATCH 08/15] dm: core: Support multiple drivers with same
- compatibles
-To: Tom Rini <trini@konsulko.com>
-Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
- Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de, 
- Kory Maincent <kory.maincent@bootlin.com>, Rasmus Villemoes <ravi@prevas.dk>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Liya Huang <1425075683@qq.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Romain Gantois <romain.gantois@bootlin.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Sukrut Bellary <sbellary@baylibre.com>
+Date: Thu, 20 Nov 2025 16:40:32 -0700
+X-Gm-Features: AWmQ_bmw3dF_5MMD1dDBixQaQdCA91WssReHi_myxXMyRn--6HbdKpcNlqbSgI8
+Message-ID: <CAFLszThQ1YJ1pCnjtD7Hgcdm6BVe_r5zwm8kR5qvL=fuu_29TQ@mail.gmail.com>
+Subject: Re: [PATCH v5] boot/bootfdt: Add smbios3-entrypoint to FDT for
+ non-EFI boots
+To: Adriana Nicolae <adriana@arista.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, ddrokosov@salutedevices.com, 
+ ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, xypron.glpk@gmx.de, 
+ kojima.masahisa@socionext.com, richard@nod.at, semen.protsenko@linaro.org, 
+ joao.goncalves@toradex.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,58 +90,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Thu, 20 Nov 2025 at 14:29, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 20 Nov 2025 at 01:51, Adriana Nicolae <adriana@arista.com> wrote:
 >
-> On Thu, Nov 20, 2025 at 11:42:53AM +0100, Markus Schneider-Pargmann wrote:
-> > Hi Tom,
-> >
-> > On Tue Nov 18, 2025 at 3:08 PM CET, Tom Rini wrote:
-> > > On Tue, Nov 18, 2025 at 11:40:28AM +0100, Markus Schneider-Pargmann (TI.com) wrote:
-> > >
-> > >> Currently once a driver matched the compatible string of a device, other
-> > >> drivers are ignored. If the first matching driver returns -ENODEV, no
-> > >> other possibly matching drivers are iterated with that compatible of the
-> > >> device. Instead the next compatible in the list of compatibles is
-> > >> selected, assuming only one driver matches one compatible at a time.
-> > >>
-> > >> To be able to use the bind function to return -ENODEV and continue
-> > >> matching other drivers with the same compatible, move the for loop a bit
-> > >> to continue the for loop after -ENODEV was returned.
-> > >>
-> > >> This is required for ti-musb-host and ti-musb-peripheral which both
-> > >> match on the same device but differ based on the dr_mode DT property.
-> > >> Depending on this property, the driver is either UCLASS_USB or
-> > >> UCLASS_USB_GADGET_GENERIc. By checking the DT property in the bind
-> > >> function and returning -ENODEV the other driver can probe instead.
-> > >>
-> > >> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
-> > >> ---
-> > >>  drivers/core/lists.c | 62 +++++++++++++++++++++++++++-------------------------
-> > >>  1 file changed, 32 insertions(+), 30 deletions(-)
-> > >
-> > > This seems like a big generic change (with potential performance
-> > > impact?) for a rather specific case. I assume the linux kernel simply
-> > > doesn't have this issue by handling OTG differently. So is there some
-> > > other way we can handle this here?
-> >
-> > I didn't find a nice way to do this differently. I did have a different
-> > idea to do this by overriding the compatible of the parent node of the
-> > usb devices. But I didn't like that idea so I proposed this solution.
-> > But I would be happy to hear about other ideas.
-> >
-> > For the performance part: I don't think this reduces performance in most
-> > cases. This will only add overhead through additional iterations if a
-> > driver with a matching compatible has a bind function that returns
-> > -ENODEV. In all other cases this should not add any iterations to the
-> > loops. Grepping through the code a bit, I don't think returning -ENODEV
-> > in bind() is widely used at the moment.
+> From: adriana <adriana@arista.com>
 >
-> OK, thanks. I guess barring someone else having a better idea, we can
-> try this direction.
+> The Linux kernel can discover SMBIOS tables through two primary methods:
+> 1. Via EFI tables, when using EFI boot;
+> 2. Via the 'smbios3-entrypoint' property in the /chosen node of the
+> device tree.
+>
+> When U-Boot boots a Linux kernel using a non-EFI command ("bootm",
+> "bootz", or "booti"), the kernel relies on the device tree to detect
+> the hardware. If SMBIOS tables are available in U-Boot, they should
+> be passed to the kernel via this device tree property.
+>
+> This patch modifies boot_fdt_prepare(), to inject the SMBIOSv3 table
+> address into the device tree if there is a table generated by U-boot.
+> The "board_fdt_chosen_smbios" is weak in order to leave the possibilty
+> for specific boards to select custom SMBIOS addresses.
+>
+> The changes in this patch are added in the context of supporting this
+> device tree property in linux kernel:
+> https://lkml.org/lkml/2025/10/24/1393
+>
+> Device tree schema was updated to include the "smbios3-entrypoint" node
+> in pull request: https://github.com/devicetree-org/dt-schema/pull/177
+>
+> Signed-off-by: Adriana Nicolae <adriana@arista.com>
+> ---
+> Changes in v5:
+>   - Allocate 4KiB extra space for fdt blob and align it to 8 bytes.
+>
+> Changes in v4:
+>   - Remove weak function board_fdt_chosen_smbios(), replace with
+>     gd_smbios_start();
+>   - Return -EAGAIN in test if GENERATE_SMBIOS_TABLE is not enabled;
+>   - Remove unnecessary fdt cleanup at the end of the test;
+>   - Added missing newlines at the end of the modified files.
+>
+> Changes in v3:
+>   - Moved "board_fdt_chosen_smbios" function to lib/smbios.c
+>   - Return physical address of smbios entry and use map_sysmem to
+>     access the entry point;
+>   - Removed check for config enabled and added check for
+>     GENERATE_SMBIOS_TABLE;
+>   - Add test to check that smbios entry address is added into fdt;
+>
+> Changes in v2:
+>   - Renamed device tree property to "smbios3-entrypoint".
+>   - Removed redundant check for CONFIG_SMBIOS.
+> ---
+>  boot/fdt_support.c | 19 ++++++++++++++++++
+>  test/dm/fdtdec.c   | 48 ++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 67 insertions(+)
 
-This seems fine to me. But please add a test, e.g. in test/dm/core.c
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
