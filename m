@@ -4,53 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD28CF884C
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 12:36:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AB53CF8856
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 13:32:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DB5C83D3C;
-	Thu, 20 Nov 2025 13:36:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 8767383935;
+	Thu, 20 Nov 2025 14:32:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=egym.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="U/r9Xv9/";
+	dkim=pass (1024-bit key; secure) header.d=egym.com header.i=@egym.com header.b="UhXS2Y/T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E54DD84068; Thu, 20 Nov 2025 13:36:33 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 53AC383935; Thu, 20 Nov 2025 14:32:10 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0826583952
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 13:36:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 00F3010A848; Thu, 20 Nov 2025 13:36:30 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1763642191;
- h=from:subject:date:message-id:to:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=Kxh63XR5sKurjVIzcXw2W2D+YdAbaSQ/agkBV7QUuSc=;
- b=U/r9Xv9/le1sk94aLNxs4D6YupBfJGfT+DhLhLsBLhj0G0HRQq0XcVGtRkKScSM1RO3Rtc
- rAGgcNbc1tHv2kiAI+Tr9KPvDFypc1HsVjA/XP2rGw4YhOtFAAFvBQQJVdxQDkT6e3vNQ4
- bgWaPXNUF28Rr/IWCv3lufTcFxYsY3CiLDoXfW8iarCzTWLHYcltxwFkN3Zs1OjESPO9CP
- Rci0cZWpsjfeFguXo8tA6391d/WGe0Svd/NMr/wCutRj8BrGEMcbulGZwurUSALl9Ge5B2
- EzYcl8d0OQnH/yEbTPsfsgxar6l6won5u67yd7Q40iLztRO7uy/R6N+HSzQ4wA==
-Message-ID: <1e8ff0ba-172d-993a-fc7f-362171ebb35a@nabladev.com>
-Date: Thu, 20 Nov 2025 13:36:48 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 3F44D83923
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 14:32:08 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=egym.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=cibil.pankiras@egym.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6417313bddaso1277084a12.3
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 05:32:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=egym.com; s=egymcom; t=1763645527; x=1764250327; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=P+hgn7vVQdTrmkbvyHVNn4BNq0QLk28M2hFESyXJaAk=;
+ b=UhXS2Y/T0FJZt94rJMHld+sBgIMPCKKs4BANjAkqHAFDFy94dbBM0UXHFRb53dsz/h
+ agLXbYqBEdP6d023wZO/fPCPbUjTyeukaegexXVmHt2tWsunzujGThu9EMLIq4izyyXg
+ 7C+hpB4suMyr0G+fS2FRfrV9v5jv+cLUKNxQI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763645527; x=1764250327;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P+hgn7vVQdTrmkbvyHVNn4BNq0QLk28M2hFESyXJaAk=;
+ b=F7JMyZmw7lSBXYpYFWiWGX5Gz7z4mQYyOfIeInWHgFgRAjvPDaeayOnrXsEe+eMoZs
+ IK/Aq1eItU1bLMmdCl0P9sORUMO+mUUWPLkrG07Brx6CCOfclXlH/+15dMKanPV1Ar5H
+ o+YPTJKHLfHtgvkSieM/OnA6LMgkcEqu0GRJrRy5S3EA50QnisEjYC2nG8V0HoQQORFQ
+ NddA7LC3LDDdNd++JIUmgtugHTigixhR8MFvPXyjSOZxSYAhPLWkQowXSxTW+Wlq3tE7
+ 7v7frbWCfVM3k5FTdbhRkDNUh3d/8gmyHrEgjYhN/T9zxHnp57whQxtimgrLNRDY++72
+ 4uTw==
+X-Gm-Message-State: AOJu0YxU3907pkevdebZ6ypQNrcrXXRQ3yEJzArv7R1IM/D9Xff2yqBB
+ IN35fZxjMWZauC4FHod+CUStnHWHvXMikEi8vs1rO0ZMVnIkj3iEozcF+JX0Ad+wkibZy37+9Kp
+ D9jREA7GusSP9KQ4ojgik3tRyhgDVBkZHaqpWFXxuc6auUyDINAM+b5bu/QoZMAc=
+X-Gm-Gg: ASbGncsPoK1nQu0rEwUTTj7P3pHEFWpnYGgZM0BlJhNor6iJlHhtwQuccg02AQBorOx
+ 2LO/Tqz7ShuxyRCMY2NaD4iwQLPDOh2T9PwL1zSoDsVyLhqFW5etiIbv2hS58ZHHJjGLkNzCqqf
+ XH1Qx0MfT7OgMP2Gf/OfPyseeO4FnLdUkEJQPwQBCa9hPOr19pmrmPRwG88zPi+wE1Ly3RP+47o
+ zUjs6Yx3ZxJb12HMxO1p+Wvv1yWVWHlKI+p8lwP+9XspbsQmtIZv/o7cNkUg2p/eSW8L2kYtoPd
+ 6YowSTC8Nn9/+vyQsrKMjdvIPorIY0bhjjwA1rEcbXXWVZdzVML6Tn61nlXwqpOKynhQaAN1nHA
+ kXKhEmAMls1PWmow3I7kvrgbWRh16fK13cyE1Xm5N3kcNCUc6TgxTuWEzhZOfIe3MP7bP5sfkQN
+ 3Oo9H3snlrLCBIgsK5Nvfg51TPpfxT
+X-Google-Smtp-Source: AGHT+IGwNJU+KQXLlYR5CNtxI7ztKExwwyYbs5NWytBVx9Ijs2YO7gBABq1R8jxzMpw+m4vD9NQ8FQ==
+X-Received: by 2002:a17:907:d92:b0:b72:8e31:4354 with SMTP id
+ a640c23a62f3a-b7654d610f6mr322592666b.25.1763645527311; 
+ Thu, 20 Nov 2025 05:32:07 -0800 (PST)
+Received: from cibil-Precision-5570.. ([217.111.51.126])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b7655051625sm209834366b.65.2025.11.20.05.32.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Nov 2025 05:32:07 -0800 (PST)
+From: Cibil Pankiras <cibil.pankiras@egym.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+Subject: [PATCH] reboot-mode: Correct macro name from U_BOOT_DEVICE to
+ U_BOOT_DRVINFO
+Date: Thu, 20 Nov 2025 14:32:00 +0100
+Message-ID: <20251120133201.263725-1-cibil.pankiras@egym.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] am335x_shc: Stop disabling device tree relocation
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20251119145520.843195-1-trini@konsulko.com>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20251119145520.843195-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="ISO-8859-1"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,35 +95,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+The macro U_BOOT_DEVICE has been renamed to U_BOOT_DRVINFO.
+This patch updates the reference in reboot-mode-gpio.h.
 
-On 19.11.25 15:55, Tom Rini wrote:
-> Remove setting of fdt_high to ~0, which disables device tree relocation,
-> from the default environment. Doing so prevents U-Boot from correcting
-> problems such as having an unaligned device tree and leads to various
-> failure modes in the OS.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> If there is some window of memory that must be used for where the device
-> tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
-> or bootm_mapsize are the correct way do this. Please see
-> doc/usage/environment.rst for more details.
-> 
-> Cc: Heiko Schocher <hs@nabladev.com>
-> ---
->   include/configs/am335x_shc.h | 1 -
->   1 file changed, 1 deletion(-)
+Signed-off-by: Cibil Pankiras <cibil.pankiras@egym.com>
+---
+ include/reboot-mode/reboot-mode-gpio.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks!
+diff --git a/include/reboot-mode/reboot-mode-gpio.h b/include/reboot-mode/r=
+eboot-mode-gpio.h
+index 16b1185c698..e862d94fadf 100644
+--- a/include/reboot-mode/reboot-mode-gpio.h
++++ b/include/reboot-mode/reboot-mode-gpio.h
+@@ -9,7 +9,7 @@
+ #include <asm/gpio.h>
+=20
+ /*
+- * In case of initializing the driver statically (using U_BOOT_DEVICE macr=
+o),
++ * In case of initializing the driver statically (using U_BOOT_DRVINFO mac=
+ro),
+  * we can use this struct to declare the pins used.
+  */
+=20
+--=20
+2.43.0
 
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
 
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+--=20
+EGYM SE, Einsteinstra=DFe 172, 81677 M=FCnchen
+Gesch=E4ftsf=FChrende Direktoren:=20
+Patrick Meininger, Philipp Roesch-Schlanderer, Florian Sauter
+Gerichtsstand=20
+M=FCnchen | Amtsgericht M=FCnchen HRB 303509=A0|=A0USt.-Id. DE275313632
