@@ -4,131 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14BCCF855D
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 08:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52772CF855D
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 08:51:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E371E84067;
-	Thu, 20 Nov 2025 09:39:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 798108406D;
+	Thu, 20 Nov 2025 09:51:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=arista.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="QVUS3jD5";
+	dkim=pass (2048-bit key; unprotected) header.d=arista.com header.i=@arista.com header.b="byYrl8qY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C5EF8406D; Thu, 20 Nov 2025 09:39:16 +0100 (CET)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9A16884073; Thu, 20 Nov 2025 09:51:07 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4ED3384062
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 09:39:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 1DB3184062
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 09:51:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=L.Anderweit@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mlG/Rq+jL/lnwjzpR9p7HbGQGTkeZnY7rBgrKrwusjpgvxj4kVEtU7BHeahTGj3JnK82t8d9ty0Iuq0Dx4yZUzB6W+Ve6HYw/V8ASGNfotqzdTLjJVrC9TavxbZQybRdCHLz6JnNQeHetEd22U1kN6brSzlO3XN9GZq1/Y3WbA9meqadbxF4CWfPXyBApjnmAdCTFJ3KsFetq1H4xWlQY3wt5n4q+oYtdpfCqqzaE9oDf99SChQz7vppXT2SeWv+uLgKNDsspp2hwVxJLeROXVcs0rtwXinWpiPytPmzf6Kef0Xq80BxVdYKnnpZDC/UhT4h1OF3MDzqnAc/rcQ0Rw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=J6nTtEVvPdM/vqRu/yOzCcHaVA2xo1+OVZO652EoXDQ=;
- b=OmkjgSSP5kHr6UdFk6qZB13CZyNjFLn5x8MAnblxY2ENg/cFJ7aHHXlYXPkqPuDF+NZq6dKoiOSP1JYhZaT4BZ+N8/pLc/2ElC8Cn6nAE3oY3T5bLbOfpiIw+7/G88avXwRK7hJNPG7jclpRxndo5a2BMQ/c9zafIzKJDaWQUAm63IjI4TPq3H0oxIti5VQn2kY8UASiTgCOrMvEcXwv5i47a7Ar1ccfRCprdJbm0F79Yynx7rRm9CCbNTjQ+XrIp2oAAyfxUHFjupYnLUIi/c3oWgxGFqPnaf188xBfsSrJl6iQb0Z4IZ6NADfOCuNd3BqnUC85u5+rv6TTpSRBAQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=J6nTtEVvPdM/vqRu/yOzCcHaVA2xo1+OVZO652EoXDQ=;
- b=QVUS3jD5myWCjKWrpvbSHaxf5eYF6bmyV0LtKpuvPhK3qQ/XSOLgK5jE0OI081B+kIfLi3VcmRmjsHT3s3zgwWTm5xC3WVb5mXe4NOpOBzDN8Hm1GQ/QpIymZmu0ShMa9azJ3o+VoIqSE+Zg8HEWk+QW7YXA/Sc9I0OTwJTmoCaXheRJDut8wYuD1bWaykMjiMB+YAd16zvPap4xXhnhVxmIdXOzQBcvt4WVBnaitUgZnxY81rr/dbXsUt24/M5zIqVWKyo/qz+LaMl/sl12tngflxMZI6g3O54X3AtCzWeCUuGTJYjan9U774cepLpyQpS6Oeztyppms4GaotBYyg==
-Received: from DU2P251CA0021.EURP251.PROD.OUTLOOK.COM (2603:10a6:10:230::24)
- by VI0P195MB3250.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:31e::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Thu, 20 Nov
- 2025 08:39:07 +0000
-Received: from DB1PEPF000509E5.eurprd03.prod.outlook.com
- (2603:10a6:10:230:cafe::de) by DU2P251CA0021.outlook.office365.com
- (2603:10a6:10:230::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.10 via Frontend Transport; Thu,
- 20 Nov 2025 08:39:03 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Postix.phytec.de (91.26.50.189) by
- DB1PEPF000509E5.mail.protection.outlook.com (10.167.242.55) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.9 via Frontend Transport; Thu, 20 Nov 2025 08:39:06 +0000
-Received: from llp-anderweit.phytec.de (172.25.32.82) by Postix.phytec.de
- (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 20 Nov
- 2025 09:39:06 +0100
-From: Leonard Anderweit <l.anderweit@phytec.de>
-To: <u-boot@lists.denx.de>
-CC: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>,
- <jerome.forissier@linaro.org>, <y.moog@phytec.de>
-Subject: [PATCH v2] net: tftp: Remove tftp_init_load_addr error path
-Date: Thu, 20 Nov 2025 09:38:55 +0100
-Message-ID: <20251120083855.2350372-1-l.anderweit@phytec.de>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=reject dis=none) header.from=arista.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=adriana@arista.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-295351ad2f5so1166425ad.3
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 00:51:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=arista.com; s=google; t=1763628661; x=1764233461; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CJOE/NYRh/O3bhgm9GOkqDWamgpIUUrl9NxhRVzWOKk=;
+ b=byYrl8qY/KIX12Ro6CDjQquAeR5ir7sai1CdRxIPunjOjoE9wBEmVCzRuOFEk95wu+
+ mA/nZxZgosZY2GOdnk5YIk5wmT9SIH5wUDMcRjkucor0DaJWvmggpcE6K6Wa9ls8b9cY
+ BIvTh+Tv51ZvhoMzlPBMNy3mq1j+z63X86V2TPKIctpB/ZN80CFsRvvRtOKGhZ2PnWNj
+ Lydqga1WdVgUmX8aHosL6WwSGt3A3/H360Nweig9kM9Ncde5vKXkwscazuyCJSlgpeZn
+ CInAoNrb3yT7fuHlwRuRacA0MWUpT3WABqOaQyiQ5/PhiZHdmHYDiCSduPhpnYvENyYq
+ IQAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763628661; x=1764233461;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CJOE/NYRh/O3bhgm9GOkqDWamgpIUUrl9NxhRVzWOKk=;
+ b=R/q+uT0IdJV50YKG3YnTk6/yiyLM/Rnn3kdt5Gl3dg+vY+OOF6+uT8Pfj6yNRaQ3+v
+ 3Marfb1PQeJDfuVi72Fs4zTJt3v/0EZn3txC4QU8NbOJyEVmLzTsY/AqDtg1P9eBK7x9
+ GsWCSnHPPHLFFS7gkI0K5ZF2JlKxyNsduR9matqJXEAHeek3KhK+O8xJC6D4Ty0D6Tj8
+ rZM9eSG9OgUz5mWTPiKIKRTSsRyYcuIK6qx2zCdez/0ypPbA5FjXR7QxVMkzNhICGx0u
+ scMeyEyzRs9A565XkXIp02XIJ/8wYr6riYQtSGvOVwRi4iSQ/eBf6pFiT6VGiXOI6lUj
+ y8Jw==
+X-Gm-Message-State: AOJu0Yw2RYFGjkx9oqMhKYwZcfwrhVAjlSwPUEHsg9hGOPaB4TF0rzz1
+ l5Mh6Q8AsAmtVwiHVAxpH7nZE+lSvY2uJLEc6gB80disgmRnTOIXmja/HkRH8zPicwhVoOeIZx+
+ QkMd4PQ==
+X-Gm-Gg: ASbGncvUn04lvIPBkm5jiLFr/ww9o6c8FgisqQ5cb6EDmbGgeQgkkcOJuC1pQkJ3xSa
+ F0FMU5AST8WYckfTxEVe6gIJKv3hTXDF1SRqB/CjXnuFqPtdYscMoppjKvihrSpSWAKmYWx2Joi
+ 1LPEqu2OS/Bj2S8ec8pHwRL/Hla2PIV9+XOC6quXnxMCx5risinLT2w18we5bed3NJMNnclfxGz
+ pFVhx0zNaKGzvRGfv5RhCO95oeX3Xnn41mA03fttHuyROK97NjFRnbT/rxCB5faJF6t1bNdtAS1
+ HJNt4vFnzld/CYIEmVtoOrwwLlKz7gwigTpmKgDkhcyjiKVWzn2DK7dHi9bAGUIVmjSbifTUtI2
+ s788w2Sko4kLo9IsMIEFUgQCwGC0xpWplMtv/WHcaZjhDmNzevds1wuMkJtn7K/51CUBJ8xaw6B
+ TkWQtKXgq/OH7ygeKp3n09LXka3yM7M815rfz9RGQfx21W0MBPyG/D5sP6cQ==
+X-Google-Smtp-Source: AGHT+IGnATTJT+qV59+HUqqoITvD8aQTMx6cGtMyArhbDVZEpygztHHgoFE4Gdjpsu13sTpyghskKQ==
+X-Received: by 2002:a05:7022:ea46:10b0:11b:acd7:4e48 with SMTP id
+ a92af1059eb24-11c9382df20mr726159c88.2.1763628661190; 
+ Thu, 20 Nov 2025 00:51:01 -0800 (PST)
+Received: from adriana-dmi-upstream.sjc.aristanetworks.com ([74.123.28.19])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-11c93e5674csm9062261c88.8.2025.11.20.00.51.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Nov 2025 00:51:00 -0800 (PST)
+From: Adriana Nicolae <adriana@arista.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, ddrokosov@salutedevices.com,
+ ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, xypron.glpk@gmx.de,
+ kojima.masahisa@socionext.com, richard@nod.at, semen.protsenko@linaro.org,
+ joao.goncalves@toradex.com, adriana@arista.com
+Subject: [PATCH v5] boot/bootfdt: Add smbios3-entrypoint to FDT for non-EFI
+ boots
+Date: Thu, 20 Nov 2025 00:50:57 -0800
+Message-ID: <20251120085057.549221-1-adriana@arista.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.32.82]
-X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
- (172.25.0.11)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509E5:EE_|VI0P195MB3250:EE_
-X-MS-Office365-Filtering-Correlation-Id: fc20b8ff-414b-4c02-5ac2-08de28104475
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?YOZvfaSCC8fxljEbQAwD4KO3FmUfMLzaeoKQosP1fPmN1yADDiDLHC8Zp5LV?=
- =?us-ascii?Q?PSBGAg5WZnUJIWgjS+1m+V+ZnBddJ0ZCh2gVqBKXqtP7P2fwmB2myu4WZB15?=
- =?us-ascii?Q?vclyt6C1P6CjA/bpHFu7/M+KiT7Rh4HzbKcuS2BkeJHnSATqqOPT1rSgxId6?=
- =?us-ascii?Q?hpLNC5sUVCve7x4259TdsxP0qlf8yOBk6s5LCm/s2LSEZfiwzHnDOId2Yx5N?=
- =?us-ascii?Q?NpDI3HOlbe/1ilHxk7yocG/F4EagYbS6c+dXQNxn7bmzTVmy3FphQL90bqX1?=
- =?us-ascii?Q?tm8XNIbSa2/n9RG/YzPVC4BllzQMzRHKozmz4V8zBUnIDZlrWqWvD8OSfiYi?=
- =?us-ascii?Q?QWGNQhMwqfUYS0dQxYZd88aSfxQCCd+kUeEq7gofIPbSC9XfK2rd3EqF7PGk?=
- =?us-ascii?Q?4z0ANM/88RFFZgPOmCn+budXnEOm9SOeiMOgb+nda9pUiWf6nmdbYi7WNrhg?=
- =?us-ascii?Q?xw4eZsOotbtBOLS7Rc8Vwy73ZDPmb740McFGj6f35EUldJ5emSIfAGfydOYT?=
- =?us-ascii?Q?6N90+EE4u9+eEFGB6/Vodk/0syqIK7Jmt1waJsJX7PvFMhP/TSHka021OSyx?=
- =?us-ascii?Q?Y496X7I19XG67YZNn6a1t1OjXiTEg9t3TPvNtGT/brHO9wBcyNSq8Ucq2tt+?=
- =?us-ascii?Q?089mwTr/Oq1CL+d/1TNnOg6mGSOI7v16nZl0kIDlGzJ08LXQWiZoJdqWeJTl?=
- =?us-ascii?Q?/HP+s40eB+OR+pnyWC6H79YYLOxNQQ+8RTWNYOJYeQEkJSmWZnkj7U6nZn2x?=
- =?us-ascii?Q?J1kPfXupbNWyDYN/37f8NOiNNo2GTcAnn1XYgdEKToY9JrQycTqqT6/IASEo?=
- =?us-ascii?Q?kXa1/7df0MUlCS+1Op0agRtEgctCr51NLlfpM3XiYc35DiZQ+e513TWrdaNf?=
- =?us-ascii?Q?nOWHrwRxha6FUW1KQxrC/y5dA93jNHLREM3bJItuoDy84gSvcZ+BpcxcIska?=
- =?us-ascii?Q?BWQo56b9gucc2WsHGtcWjP+hA5lGh7apwmjWZZ4NrhII8uCjicmOZfoCphD4?=
- =?us-ascii?Q?y7pScenFkS02xK0VQJ9+wcRnGSjBrWJ0lsuYcArOfhWwmOklD0O/vAK45wyr?=
- =?us-ascii?Q?kLhvaFcB3DmB0xBBvFkjPGXMkqk2zL6b3bdnXT3eLAn59X7pt2RYByZU+trB?=
- =?us-ascii?Q?mmgHPI2PfV7RxDA9wPgkVr38NblvF6YYuRU9bOqpfLLHwYFO5KoOnPM9eiAb?=
- =?us-ascii?Q?VNLicx9L2kkqB5cSTtQ+22OB0TkzRpoY/96LBMw6UPAjhTQRgawm5Bmj6BD2?=
- =?us-ascii?Q?JgsDJ03n78gUfh2aLzufbi34G4YQMxqPE1MmoqCgtpmv2aAOs3201TPNDCKN?=
- =?us-ascii?Q?aCWr/6OV828/iARp5t9AcdF6gCiLkb6jh/8M1aLPw845cGBq/RkTbwzPTvcB?=
- =?us-ascii?Q?HRbK1UAoDS18hojaLV8Kb8pTxpKpRwVJF38yCDvAJ93Fa9/nGNbECXoEIUHj?=
- =?us-ascii?Q?mUuD08qEdVSS5MKTLSJIKu7UMWAv3C0nLj1gBrxdZsT/Pvj+AclP5gdfnCjM?=
- =?us-ascii?Q?v1inkzAO2wb4dt6pJ9z5uxi+AoWLh+PYF9KOT2C6zAiwvHJvU8cRNsOU4mIy?=
- =?us-ascii?Q?Cg2L5lMvdjt9p0i/pnM=3D?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2025 08:39:06.5624 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fc20b8ff-414b-4c02-5ac2-08de28104475
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Postix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509E5.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0P195MB3250
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,64 +100,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-tftp_init_load_addr() always returns 0 since commit af45c84871e4 ("tftp:
-rework the logic to validate the load address"), so we don't need to
-check if it failed and can remove the error handling.
-Also change tftp_init_load_addr() to static void since the return value
-is now unused.
+From: adriana <adriana@arista.com>
 
-Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
----
-v2: change tftp_init_load_addr() to static void as suggested by Yannic
----
- net/tftp.c | 18 +++---------------
- 1 file changed, 3 insertions(+), 15 deletions(-)
+The Linux kernel can discover SMBIOS tables through two primary methods:
+1. Via EFI tables, when using EFI boot;
+2. Via the 'smbios3-entrypoint' property in the /chosen node of the
+device tree.
 
-diff --git a/net/tftp.c b/net/tftp.c
-index 1760877107fa..3b0f4cd2006e 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -714,10 +714,9 @@ static void tftp_timeout_handler(void)
+When U-Boot boots a Linux kernel using a non-EFI command ("bootm",
+"bootz", or "booti"), the kernel relies on the device tree to detect
+the hardware. If SMBIOS tables are available in U-Boot, they should
+be passed to the kernel via this device tree property.
+
+This patch modifies boot_fdt_prepare(), to inject the SMBIOSv3 table
+address into the device tree if there is a table generated by U-boot.
+The "board_fdt_chosen_smbios" is weak in order to leave the possibilty
+for specific boards to select custom SMBIOS addresses.
+
+The changes in this patch are added in the context of supporting this
+device tree property in linux kernel:
+https://lkml.org/lkml/2025/10/24/1393
+
+Device tree schema was updated to include the "smbios3-entrypoint" node
+in pull request: https://github.com/devicetree-org/dt-schema/pull/177
+
+Signed-off-by: Adriana Nicolae <adriana@arista.com>
+---
+Changes in v5:
+  - Allocate 4KiB extra space for fdt blob and align it to 8 bytes.
+
+Changes in v4:
+  - Remove weak function board_fdt_chosen_smbios(), replace with
+    gd_smbios_start();
+  - Return -EAGAIN in test if GENERATE_SMBIOS_TABLE is not enabled;
+  - Remove unnecessary fdt cleanup at the end of the test;
+  - Added missing newlines at the end of the modified files.
+
+Changes in v3:
+  - Moved "board_fdt_chosen_smbios" function to lib/smbios.c
+  - Return physical address of smbios entry and use map_sysmem to
+    access the entry point;
+  - Removed check for config enabled and added check for
+    GENERATE_SMBIOS_TABLE;
+  - Add test to check that smbios entry address is added into fdt;
+
+Changes in v2:
+  - Renamed device tree property to "smbios3-entrypoint".
+  - Removed redundant check for CONFIG_SMBIOS.
+---
+ boot/fdt_support.c | 19 ++++++++++++++++++
+ test/dm/fdtdec.c   | 48 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 67 insertions(+)
+
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 92f2f534ee0..1c215e548db 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -27,6 +27,7 @@
+ #include <fdtdec.h>
+ #include <version.h>
+ #include <video.h>
++#include <smbios.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -333,6 +334,7 @@ int fdt_chosen(void *fdt)
+ 	int   nodeoffset;
+ 	int   err;
+ 	const char *str;		/* used to set string properties */
++	ulong smbiosaddr;		/* SMBIOS table address */
+ 
+ 	err = fdt_check_header(fdt);
+ 	if (err < 0) {
+@@ -387,6 +389,23 @@ int fdt_chosen(void *fdt)
+ 		return err;
  	}
+ 
++	if (CONFIG_IS_ENABLED(GENERATE_SMBIOS_TABLE)) {
++		/* Inject SMBIOS address when we have a valid address.
++		* This is useful for systems using booti/bootm instead of bootefi.
++		* Failure to set this property is non-fatal, we only generate a
++		* warning.
++		*/
++		smbiosaddr = gd_smbios_start();
++		if (smbiosaddr) {
++			err = fdt_setprop_u64(fdt, nodeoffset, "smbios3-entrypoint",
++					smbiosaddr);
++			if (err < 0) {
++				printf("WARNING: could not set smbios3-entrypoint %s.\n",
++				fdt_strerror(err));
++			}
++		}
++	}
++
+ 	return fdt_fixup_stdout(fdt, nodeoffset);
  }
  
--static int tftp_init_load_addr(void)
-+static void tftp_init_load_addr(void)
- {
- 	tftp_load_addr = image_load_addr;
--	return 0;
+diff --git a/test/dm/fdtdec.c b/test/dm/fdtdec.c
+index 1f24f1d5dff..ea5a494612c 100644
+--- a/test/dm/fdtdec.c
++++ b/test/dm/fdtdec.c
+@@ -7,6 +7,9 @@
+ #include <asm/global_data.h>
+ #include <dm/of_extra.h>
+ #include <dm/test.h>
++#include <fdt_support.h>
++#include <mapmem.h>
++#include <smbios.h>
+ #include <test/ut.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -129,3 +132,48 @@ static int dm_test_fdtdec_add_reserved_memory(struct unit_test_state *uts)
  }
- 
- static int saved_tftp_block_size_option;
-@@ -901,13 +900,7 @@ void tftp_start(enum proto_t protocol)
- 	} else
- #endif
- 	{
--		if (tftp_init_load_addr()) {
--			eth_halt();
--			net_set_state(NETLOOP_FAIL);
--			puts("\nTFTP error: ");
--			puts("trying to overwrite reserved memory...\n");
--			return;
--		}
-+		tftp_init_load_addr();
- 		printf("Load address: 0x%lx\n", tftp_load_addr);
- 		puts("Loading: *\b");
- 		tftp_state = STATE_SEND_RRQ;
-@@ -953,12 +946,7 @@ void tftp_start_server(void)
- {
- 	tftp_filename[0] = 0;
- 
--	if (tftp_init_load_addr()) {
--		eth_halt();
--		net_set_state(NETLOOP_FAIL);
--		puts("\nTFTP error: trying to overwrite reserved memory...\n");
--		return;
--	}
-+	tftp_init_load_addr();
- 	printf("Using %s device\n", eth_get_name());
- 	printf("Listening for TFTP transfer on %pI4\n", &net_ip);
- 	printf("Load address: 0x%lx\n", tftp_load_addr);
+ DM_TEST(dm_test_fdtdec_add_reserved_memory,
+ 	UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_FLAT_TREE);
++
++static int dm_test_fdt_chosen_smbios(struct unit_test_state *uts)
++{
++	void *blob;
++	ulong val;
++	struct smbios3_entry *entry;
++	int chosen, blob_sz;
++	const fdt64_t *prop;
++
++	if (!CONFIG_IS_ENABLED(GENERATE_SMBIOS_TABLE)) {
++		return -EAGAIN;
++	}
++
++	blob_sz = fdt_totalsize(gd->fdt_blob) + 4096;
++	blob = memalign(8, blob_sz);
++	ut_assertnonnull(blob);
++
++	/* Make a writable copy of the fdt blob */
++	ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
++
++	/* Mock SMBIOS table */
++	entry = map_sysmem(gd->arch.smbios_start, sizeof(struct smbios3_entry));
++	memcpy(entry->anchor, "_SM3_", 5);
++	entry->length = sizeof(struct smbios3_entry);
++	unmap_sysmem(entry);
++
++	/* Force fdt_chosen to run */
++	ut_assertok(fdt_chosen(blob));
++
++	chosen = fdt_path_offset(blob, "/chosen");
++	ut_assert(chosen >= 0);
++
++	/* Verify the property exists */
++	prop = fdt_getprop(blob, chosen, "smbios3-entrypoint", NULL);
++	ut_assertnonnull(prop);
++
++	/* Verify the property matches smbios_start */
++	val = fdt64_to_cpu(*prop);
++	ut_asserteq_64(gd->arch.smbios_start, val);
++
++	free(blob);
++
++	return 0;
++}
++DM_TEST(dm_test_fdt_chosen_smbios, UTF_SCAN_PDATA | UTF_SCAN_FDT);
 -- 
-2.43.0
+2.51.0
 
