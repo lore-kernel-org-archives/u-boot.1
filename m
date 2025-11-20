@@ -4,45 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F781CFA459
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 23:39:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74183CFA459
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 23:40:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 715ED8405F;
-	Fri, 21 Nov 2025 00:39:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=socionext.com
+	by phobos.denx.de (Postfix) with ESMTP id DECDC840F8;
+	Fri, 21 Nov 2025 00:40:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nDK1RqhB";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22CAE840AE; Fri, 21 Nov 2025 00:38:59 +0100 (CET)
-Received: from mx.socionext.com (mx.socionext.com [202.248.49.38])
- by phobos.denx.de (Postfix) with ESMTP id AFC3F83F80
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 00:38:55 +0100 (CET)
+ id D595D84106; Fri, 21 Nov 2025 00:40:39 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A5E3B8405F
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 00:40:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=socionext.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kojima.masahisa@socionext.com
-Received: from unknown (HELO iyokan3-ex.css.socionext.com) ([172.31.9.54])
- by mx.socionext.com with ESMTP; 21 Nov 2025 08:38:51 +0900
-Received: from mail.mfilter.local (mail-arc02.css.socionext.com [10.213.46.40])
- by iyokan3-ex.css.socionext.com (Postfix) with ESMTP id EF5292091499;
- Fri, 21 Nov 2025 08:38:50 +0900 (JST)
-Received: from iyokan3.css.socionext.com ([172.31.9.53]) by m-FILTER with
- ESMTP; Fri, 21 Nov 2025 08:38:50 +0900
-Received: from ubuntu-MonarchGE.e01.socionext.com (unknown [10.213.104.37])
- by iyokan3.css.socionext.com (Postfix) with ESMTP id 65FCA10D9A3;
- Fri, 21 Nov 2025 08:38:50 +0900 (JST)
-From: Masahisa Kojima <kojima.masahisa@socionext.com>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Masashi Morimoto <morimoto.masashi@socionext.com>
-Subject: [PATCH] bootm: fix boot failure from compressed image for IH_OS_EFI
-Date: Fri, 21 Nov 2025 08:38:50 +0900
-Message-ID: <20251120233851.2726487-1-kojima.masahisa@socionext.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b7370698a8eso183894766b.0
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 15:40:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1763682037; x=1764286837; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MLVbixVEleg+9DRhD21hWmlZYkZ457DTndXxj1OVCHI=;
+ b=nDK1RqhBxfqC8bz6JPfWPuhOlVzi5Uhffsljn5YnbqjoCut7IZ+T0jMjcGcdPTCSp3
+ Sx6ti5D99GoQzPd1n/+BeiicZaoYWAh4xGoyyy0CVmLI3erRANjJ7XNyGji34/MFRl2J
+ 1MsbCUBSUPwemt8wQaUtlz2320IU23G1M1q6k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763682037; x=1764286837;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MLVbixVEleg+9DRhD21hWmlZYkZ457DTndXxj1OVCHI=;
+ b=mLsiOwFZb6IiraVh4z7WqRcujHgKpHdDAPbgLLY4tlYmUY77iva1nS5IYVsyA4bTLr
+ Zg5BBGFjeSfiOLeimH0DML4bT7wKpfW9VaUB1fa3OGiGwTLJXdUPerVn3qRlQkfG1CRZ
+ n+JD2+kwwUnlzsJ+tgXQ+ZLtJH71GH7cJLeb7aTZ8RZ2W/Om9kqEoRczW0IWDbIxzRuG
+ SmFyVtsgPklrQN/dxkI4rLZChYgXn+EQ7rBT/zWUOVK4XAaAk+nd5hUWe8T+U7Hpx3LN
+ xN36mkb49RThW1LU5FYV+bF8TPS2oqU5wuL8XeoA2NA9csF5DXs/WcEB7eK1wnrPQQTn
+ xREQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWxYYuzxsVlkvG/vgi8WI5i5aYS1KDcGdtzt2kJIJD205vSygQ8FSGthQOaKo9oO/qU3cPdpDs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRGtoDVPNohD5aNJzAmoHY+i6nI4+TOPD38Js9DtDt0DoOTMda
+ 17NyMmTyVKURkfyFD2p6n1EvUPai33JAmQHLw+zcvhpXb6bl8A/atYGor3cdcXGeD2qZXJDQ1ZU
+ 9w0WpvfDQT+yJ9C9P/TVywTFlKPfjIvV16z/oj1kG
+X-Gm-Gg: ASbGnctOjpPG8AUKoIg20N3pwcENIJe8CY8+ucIKSO/0fMFMxk7j3ywh1mGYFLQDwdO
+ sTeWpsUbpzl/squyIbIKZf496QJ1uqJ0VmGO9WcFPTF4o+yg1VhVTHHTDbdauYPe9QlrPpPCuOt
+ Ozlk+WfpPzc5fcC4MB6hjdJn4bZ3I566Gdf1LflWZ5Wf77bqQRs9MxOrRdUQohWcQUpn9kraxof
+ smQfTGUnwGNv1usN099UzWbaWWGnRH+S113TEV/miXwXhpj0Hk3uyREf+DVJWOS6J+CCt3wFr3B
+ KhpL
+X-Google-Smtp-Source: AGHT+IGIoUz7NUOJzT95y2RoyeYhFtw9pDQgHjUzTjYyeNUjOEa5Om5XqZ8gBF1H7O3hV8P55Lq49zjkPGX//a91On4=
+X-Received: by 2002:a17:907:3f1e:b0:b73:5acd:465e with SMTP id
+ a640c23a62f3a-b767153ee39mr13658566b.11.1763682037129; Thu, 20 Nov 2025
+ 15:40:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
+ <20251118-topic-am33-evm-oftree-v2026-01-v1-8-91ce13c661e2@baylibre.com>
+ <20251118140804.GR2125796@bill-the-cat>
+ <DEDGK9KKB61P.1QY81TPR5JLNY@baylibre.com>
+ <20251120212909.GQ2125796@bill-the-cat>
+In-Reply-To: <20251120212909.GQ2125796@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 20 Nov 2025 16:40:22 -0700
+X-Gm-Features: AWmQ_bmCMHsh1ow-89rrQSyDC_3JoXaG4xv9v2CBOFjTnugld5H0dN2bQNwX7I0
+Message-ID: <CAFLszThb85y4zaWfcwKcxNW2wOoYB1O_aYe-7h_UPQk2-60-ZA@mail.gmail.com>
+Subject: Re: [PATCH 08/15] dm: core: Support multiple drivers with same
+ compatibles
+To: Tom Rini <trini@konsulko.com>
+Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
+ Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de, 
+ Kory Maincent <kory.maincent@bootlin.com>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>, 
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
+ Liya Huang <1425075683@qq.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Sukrut Bellary <sbellary@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,51 +112,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootm command can handle the compressed image, but current
-code fails to boot from it.
+Hi,
 
-    ## Loading kernel (any) from FIT Image at a8000000 ...
-    <snip>
-         Compression:  gzip compressed
-         Data Start:   0xa80000d4
-         Data Size:    10114520 Bytes = 9.6 MiB
-         Architecture: AArch64
-         OS:           EFI Firmware
-         Load Address: 0x90000000
+On Thu, 20 Nov 2025 at 14:29, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Nov 20, 2025 at 11:42:53AM +0100, Markus Schneider-Pargmann wrote:
+> > Hi Tom,
+> >
+> > On Tue Nov 18, 2025 at 3:08 PM CET, Tom Rini wrote:
+> > > On Tue, Nov 18, 2025 at 11:40:28AM +0100, Markus Schneider-Pargmann (TI.com) wrote:
+> > >
+> > >> Currently once a driver matched the compatible string of a device, other
+> > >> drivers are ignored. If the first matching driver returns -ENODEV, no
+> > >> other possibly matching drivers are iterated with that compatible of the
+> > >> device. Instead the next compatible in the list of compatibles is
+> > >> selected, assuming only one driver matches one compatible at a time.
+> > >>
+> > >> To be able to use the bind function to return -ENODEV and continue
+> > >> matching other drivers with the same compatible, move the for loop a bit
+> > >> to continue the for loop after -ENODEV was returned.
+> > >>
+> > >> This is required for ti-musb-host and ti-musb-peripheral which both
+> > >> match on the same device but differ based on the dr_mode DT property.
+> > >> Depending on this property, the driver is either UCLASS_USB or
+> > >> UCLASS_USB_GADGET_GENERIc. By checking the DT property in the bind
+> > >> function and returning -ENODEV the other driver can probe instead.
+> > >>
+> > >> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+> > >> ---
+> > >>  drivers/core/lists.c | 62 +++++++++++++++++++++++++++-------------------------
+> > >>  1 file changed, 32 insertions(+), 30 deletions(-)
+> > >
+> > > This seems like a big generic change (with potential performance
+> > > impact?) for a rather specific case. I assume the linux kernel simply
+> > > doesn't have this issue by handling OTG differently. So is there some
+> > > other way we can handle this here?
+> >
+> > I didn't find a nice way to do this differently. I did have a different
+> > idea to do this by overriding the compatible of the parent node of the
+> > usb devices. But I didn't like that idea so I proposed this solution.
+> > But I would be happy to hear about other ideas.
+> >
+> > For the performance part: I don't think this reduces performance in most
+> > cases. This will only add overhead through additional iterations if a
+> > driver with a matching compatible has a bind function that returns
+> > -ENODEV. In all other cases this should not add any iterations to the
+> > loops. Grepping through the code a bit, I don't think returning -ENODEV
+> > in bind() is widely used at the moment.
+>
+> OK, thanks. I guess barring someone else having a better idea, we can
+> try this direction.
 
-    <snip>
-       Uncompressing Kernel Image to 90000000
-    ## Transferring control to EFI (at address a80000d4) ...
-    Booting <NULL>
-    Not a PE-COFF file
-    Loading image failed
+This seems fine to me. But please add a test, e.g. in test/dm/core.c
 
-To take care of the compressed image, the load address needs
-to be passed instead of the original compressed image address.
-
-Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
----
- boot/bootm_os.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-index 88f7c183867..ae20b555f5c 100644
---- a/boot/bootm_os.c
-+++ b/boot/bootm_os.c
-@@ -509,11 +509,11 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
- 	/* We expect to return */
- 	images->os.type = IH_TYPE_STANDALONE;
- 
--	image_buf = map_sysmem(images->os.image_start, images->os.image_len);
-+	image_buf = map_sysmem(images->os.load, images->os.image_len);
- 
- 	/* Run EFI image */
- 	printf("## Transferring control to EFI (at address %08lx) ...\n",
--	       images->os.image_start);
-+	       images->os.load);
- 	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
- 
- 	ret = efi_binary_run(image_buf, images->os.image_len,
--- 
-2.43.0
-
+Regards,
+Simon
