@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 436E5CFA459
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 23:41:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DB5CCFA459
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 23:41:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7DF18415E;
-	Fri, 21 Nov 2025 00:41:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2FAB684135;
+	Fri, 21 Nov 2025 00:41:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XTPRoFjn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dk48BDZo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F069E84148; Fri, 21 Nov 2025 00:41:09 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id B2EF584135; Fri, 21 Nov 2025 00:41:19 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0DF38405F
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 00:41:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40CFC84150
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 00:41:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-341988c720aso1150321a91.3
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 15:41:07 -0800 (PST)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-343d73d08faso763891a91.0
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 15:41:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763682066; x=1764286866; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763682072; x=1764286872; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f40Xt6Fk0qTOsNYXYMzTZA/6HMFNLbPS6wwHLnpaqCY=;
- b=XTPRoFjn7BguTnE3EovhRQu8A+RXbnK1AtP1+e0yom7r2Z0EHIVDDsoONMk13HPoXu
- Nk6CSq5XbyKuWMn9K1LANWYIStH1/ed90xpT96EiTH+P5AGtdBOguybmwO65c1bfhKx+
- qCduBvDhXr/mbx4LvE6rkVTwRK47nn27bgJLE=
+ bh=BlLGUODHtdRyXFfSJNFz+PZUICCbjJxbx/NZtbWM4SI=;
+ b=Dk48BDZoTYzAg8YyZJSGSH/f9Hty7pyc5SD/M6jcoHzA182FuWYKo7nqu3gj9dAfZQ
+ TQFcbgSO0FUo1l5mzzz45t5p6ssEMU8XZ8/Sieoot/shOjQeGT0k3z7Cx5vOReZRwZcc
+ C/MrFnULs7J7CrPYSacZTNb9oXqJKjpwN8X4g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763682066; x=1764286866;
+ d=1e100.net; s=20230601; t=1763682072; x=1764286872;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f40Xt6Fk0qTOsNYXYMzTZA/6HMFNLbPS6wwHLnpaqCY=;
- b=c99eRIH5qqHRxoxCSAZQOJ14QQFj7n5XSm0vGDPQAMR/p01rmlvm3puasU/VvQAq9/
- G1672+PBIzjwEXxFsNCwG+3EI8mkloHPgHTEKLZlW7lArNV9wmpBwsHa+0ZQtwrbXpR9
- sXH/VroRtwXxan15TCxU2OcD6L1xO1RDSPnwcM9wpo2fKAkf/2TRhegSu3G4Rb34lukN
- +X/A0FGJQq76VD47I05LkHDA2aR6sugjEc3rzYm/CzE+DW8Cx6kBqpUmrbJ453vwOfVQ
- 3al6X1hZ00+rtX7/w8NyM4J6fVBwXQRQari1YRs94ZsUAKMK1qrXGnpNxdrMvSRh10Rz
- n2rg==
+ bh=BlLGUODHtdRyXFfSJNFz+PZUICCbjJxbx/NZtbWM4SI=;
+ b=WXxUmM0RcWHAq8wSzo5SoKE+fAi5ZlrdLYeK5PKGYXWwnWbNU2yaKAbkgazbyklBfH
+ IIvWb5MTztUVeeh7d0+t5omPNj6yj/c8OxxVSl06ioSPrCXeSDcrsFyJd1G4h558Ib9b
+ 3bo1Yx5TXwbcLxwGNehPv5mGcQE/7QCRdPhSCLNqmwcsamTfCpKeT+Yv0D6zNZeai4hf
+ VcHeO+0jlRCRlmFCmR8fUEaMVJct6Cnav9whKphWb0fC9HkByeogWfLr3kyO2G49lQYl
+ Df87al5BW6VjoeVm5sJfcL8mQuanfUuy22wgZVoqk300kxHjtweAAWyJa6dWPhOrX36V
+ pg6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX63PU60YLYFx6kEV82cyNrNHZkeelDE5dpFVRP4fmjCMLEHg6hjubP5IxE5tX8GbLiv7orhfc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzgBgB7G5s7w4ymd5+tYm3pArmK8h4sb6QU9mCGxCmqcZD4FNTy
- 4WKWrQBQDYNOmzxOqHWMQMAo9ACWaXL1BvhYCqs0L028QJlJpdEjnOQ2L3XckMuzbxAGK0gWj25
- jcikd22bda6ApW7Z/FnlpgIQgkxphuj5u9Qi0ria+
-X-Gm-Gg: ASbGncvIzNxdiW7dyNhrC1+3SU/KhFBX3ROhzUkB4onIuKd8R9mka/pcD+ZBx9Z6HeS
- UJavMJSkTelU/F34rIroiY28ikMWLTntpWriged8LPeh21+zowlxbQMVVxDzRFMVNAibW/YpqyE
- rtrPbzgBTwCKOT10YDyY75c7COEd/Yl/PrQ7BVc3/o0B+je26dG0jFXmdVrmdDmBUUI1gwl1uck
- cHxesm2GQtrYNYEMhsKhazOal0OBWWMM3YoCpSYHRiarSR/EsNwv5fW5lTL/M2ZyzVqJg==
-X-Google-Smtp-Source: AGHT+IGU7mk5UgKRVx0BY6WtaIuzejxEVGce5fx5KZioRBiEtBuBoCrYYOPmskLx4Rl9K9CzcpEwFrG6AAcpgq0wl+U=
-X-Received: by 2002:a17:90b:50ce:b0:340:f7c4:7c78 with SMTP id
- 98e67ed59e1d1-34733e6b390mr237218a91.3.1763682065839; Thu, 20 Nov 2025
- 15:41:05 -0800 (PST)
+ AJvYcCW9E6MXhxmZf/bZavjdNC0mLRDun9IQiCsR6H+0P6e2+njKHO5rF7+gfg0BD6JHj8HdJLvqc1A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxUsateuXSao+eNKYw6P2mT+clDLlQiHHzLVZaKWfJRAhEmCA9Y
+ JVB7nKda3WwF+HmBOAZQBCqXPz1BjOGXS5Ow2bxwcAzlHqUIjqB8XCJW1NWxomkcssvgvqckGSv
+ n68Ni8zocVAHgQYMbEWw8EF7cF3HZxZcTNvK/cORMYJUJ97hn0js=
+X-Gm-Gg: ASbGnctWFIynBPmWrF9eycn14kjYl7aP0fdr5vQEinIJYrQg1/oZgl6m3MUwTJmigsf
+ jLveSBxuCH7G26HC3ntrPq9gFAYyn1GI5s50lUuOcJ8mduEcCoVDNbVZn6rNykpAcUbF03/ZKMp
+ fe6cqKLVqH8HLa1gLAk95WKGEGMhKd3ucuUjNpb3ifc54Q6utZhTpK1gr31HF1lEixqQdOZ1ZTa
+ VLWCO0Zn/zKLOg8hMi2mkdxmhJDX3/Rz+BtaJ3ACN/xnC9K4WAfLf8vzou6mo9l11XxTg==
+X-Google-Smtp-Source: AGHT+IHP+aQqJ8CbORoId6IruYsMmUHfzoBpX817dBqzTHo+3yUalmG7cYQUIb1MpaGVP/mMYIWJUy4nfDSMdnp0XqA=
+X-Received: by 2002:a17:90b:3904:b0:340:e103:bfd4 with SMTP id
+ 98e67ed59e1d1-347331a77c2mr429075a91.2.1763682072547; Thu, 20 Nov 2025
+ 15:41:12 -0800 (PST)
 MIME-Version: 1.0
-References: <20251120193448.310274-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251120193448.310274-1-heinrich.schuchardt@canonical.com>
+References: <20251120041526.817288-1-marek.vasut+renesas@mailbox.org>
+ <6a902e2d-b1be-1ba1-5d8b-e0a07ea2aebe@nabladev.com>
+ <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
+In-Reply-To: <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Nov 2025 16:40:34 -0700
-X-Gm-Features: AWmQ_bmfPS9nX20Oc0-WvmQ5i1MCHopYjZGkYe-alAxcYK0EWWLdoAJkgUWcPO4
-Message-ID: <CAFLszTipwat6M1t0qgmmtWGRq-LO5tJ0RZjRT2oiSyVG_oGMnA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] video: add DejaVu Mono font
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
+Date: Thu, 20 Nov 2025 16:40:50 -0700
+X-Gm-Features: AWmQ_bknS99VDCsROQrqUNcF1atxV7WprMfkoyHkx4i_3LBlBt0QaKjkIv1yI_0
+Message-ID: <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
+Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
+ CONFIG_OF_PLATDATA=y
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,38 +92,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Nov 2025 at 12:34, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> A TrueType font for U-Boot should fulfill the following requirements:
->
-> * mono spaced
-> * support full code page 437
-> * easily readable
->
-> Unfortunately none of the fonts provided with U-Boot fulfills all of these
-> requirements.
->
-> Let's add the DejaVu Mono font. To reduce the code size the characters are
-> limited to code page 437.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v3:
->         Don't change the default TrueType font
->         Add all special code page 437 characters in the range 0x01-0x1F
-> v2:
->         add two symbols used by GRUB
->         add the FontForge script used to generate the reduce font
-> ---
->  drivers/video/console_truetype.c    |   4 +
->  drivers/video/fonts/437.ff          | 291 ++++++++++++++++++++++++++++
->  drivers/video/fonts/Kconfig         |   8 +
->  drivers/video/fonts/Makefile        |   1 +
->  drivers/video/fonts/dejavu_mono.ttf | Bin 0 -> 44508 bytes
->  5 files changed, 304 insertions(+)
->  create mode 100755 drivers/video/fonts/437.ff
->  create mode 100644 drivers/video/fonts/dejavu_mono.ttf
->
+Hi Marek,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, 20 Nov 2025 at 04:56, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 11/20/25 10:08 AM, Heiko Schocher wrote:
+>
+> Hello Heiko,
+>
+> >> diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
+> >> index 380a9f8f3ad..d0e9dad7202 100644
+> >> --- a/drivers/i2c/i2c-uclass.c
+> >> +++ b/drivers/i2c/i2c-uclass.c
+> >> @@ -749,8 +749,11 @@ static int i2c_post_probe(struct udevice *dev)
+> >>   #if CONFIG_IS_ENABLED(OF_REAL)
+> >>       struct dm_i2c_bus *i2c = dev_get_uclass_priv(dev);
+> >> -    i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
+> >> -                         I2C_SPEED_STANDARD_RATE);
+> >> +    if (!dev_has_ofnode(dev))
+> >> +        i2c->speed_hz = I2C_SPEED_STANDARD_RATE;
+> >> +    else
+> >> +        i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
+> >> +                             I2C_SPEED_STANDARD_RATE);
+> >>       return dm_i2c_set_bus_speed(dev, i2c->speed_hz);
+> >>   #else
+> >>
+> >
+> > This sounds more as a bug of dev_read_u32_default() to me and should
+> > be fixed there, else we need to make this check around each call of
+> > dev_read_u32_default() ...
+> >
+> > And looking into u-boot:/drivers/core/read.c there are more
+> > candidates for such a fix (all with "default" in function name?)
+> >
+> > and such a fix would also make the dev_has_ofnode(dev) check in
+> > i2c_child_post_bind() obsolete.
+> >
+> > Or may we fix the default functions in drivers/core/ofnode.c ?
+> No, this was the previous implementation which is now superseded by this
+> one, see [1] [2]. The goal is to fix the entry points which pass invalid
+> content further into U-Boot DT handling code, so the DT validation
+> happens only one, on DT input, and not again later.
+
+Do the libfdt functions work correctly with *any* negative numbers? Do
+you have a pointer to the libfdt commit which changed this? All of
+driver model relies on that behaviour in libfdt:
+
+int fdt_check_node_offset_(const void *fdt, int offset)
+{
+if ((offset < 0) || (offset % FDT_TAGSIZE)
+    || (fdt_next_tag(fdt, offset, &offset) != FDT_BEGIN_NODE))
+return -FDT_ERR_BADOFFSET;
+
+return offset;
+}
+
+(Note the check for offset < 0)
+
+>
+> Also, please wait for feedback on [3] [4] [5] [6] before possibly
+> applying this one.
+
+Regards,
+Simon
+
+
+>
+> [1]
+> https://lore.kernel.org/u-boot/20251113122145.949112-2-marek.vasut+renesas@mailbox.org/
+> [2]
+> https://lore.kernel.org/u-boot/20251113122145.949112-4-marek.vasut+renesas@mailbox.org/
+>
+> [3]
+> https://lore.kernel.org/u-boot/20251120041439.817233-1-marek.vasut+renesas@mailbox.org/
+> [4]
+> https://lore.kernel.org/u-boot/20251120041504.817264-1-marek.vasut+renesas@mailbox.org/
+> [5]
+> https://lore.kernel.org/u-boot/20251120041526.817288-1-marek.vasut+renesas@mailbox.org/
+> [6]
+> https://lore.kernel.org/u-boot/20251120041613.817311-1-marek.vasut+renesas@mailbox.org/
