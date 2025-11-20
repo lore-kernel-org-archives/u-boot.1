@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5854CF8864
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 16:11:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F075BCF9C46
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 16:13:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A643840AB;
-	Thu, 20 Nov 2025 17:09:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6DCC7840AB;
+	Thu, 20 Nov 2025 17:13:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="siYNW7CX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W8bMPUmM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB3C5840CB; Thu, 20 Nov 2025 17:09:58 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 19DE6840E6; Thu, 20 Nov 2025 17:13:57 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B038783979
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 17:09:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2817E83A6A
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 17:13:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-657509d761dso527750eaf.0
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 08:09:56 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-477a219db05so7376505e9.2
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 08:13:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763654995; x=1764259795; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UgWeqUVudpHVRA50yRKWdS+aIxnKwxGGHGpFxoxO0gM=;
- b=siYNW7CXfNwsEzRR5V4BfC9uje7k/QgR4/Z81wNc0qFR7XTaQJSaoWtET6CVrM7KbX
- VLTqztCELt8XcOPotC+cbP0urBfA2d+SpYwC1eCmDYny+eOpdj/APoIiIY4Vshp/MT5T
- Qq0BEfjMi+ekzpYo4WECiA34qs/uf8izbt2L0=
+ d=gmail.com; s=20230601; t=1763655234; x=1764260034; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qkDbSFzG2WPj1Dg3HATukJ6ojLumhKws+3o3xkH8dYY=;
+ b=W8bMPUmMrdX/cYc35YYFYUaVikWV54soCSFBOwR7ox8Oi2rCtBG37s/2mGrH1fXKR5
+ SCs0RdyrYrunp/MO54QJS4VewEUCQSDk8yAFAku8UaETnT6RMO0kl6wWDSjAtFNBI5ZL
+ EJZ0pyRkfEAoOH/zv7tAdNfqU1VzATe56rwPxSqIYdr3/CV+vVtvo8ZGA0csz6NhH3Gi
+ RbWnamvef+8k+nUJv7b6sNnsHRSfMNlPd3gq0XUyRiG/0eFKlDoW9tENkGTxJeAQHA4A
+ QVZoIbFDicX78XKk6NLWLtnPXXM41jiMZ4k/tj4Z7mKu/EdvD7gZGULRaZzBT2YYY9EN
+ NXnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763654995; x=1764259795;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UgWeqUVudpHVRA50yRKWdS+aIxnKwxGGHGpFxoxO0gM=;
- b=T0vhafTSX3sEU4CyyCWZUC9T/OUR1gmknRYxVfN7I3krqo/XOuIKyIz/QK0/KmbYd0
- p9Ko6Nhj2jzjanAhzLVmt3d4hSnnWzdi1Rp84xkT2it2bs9oP8XgdjS6Vj38Y84/eteb
- AU/gvRC+gCnZibBQ6PTGqufN3iCCmAvBWpyFNtCnngOlGbsEDEdInRp/a1+vMXyCMVzH
- ueiMET+Shm9OvoqX8GsH6CCCkcSriRwHY4Br2thDUHX+ysrncJo0tx5dIjcSN0UHa547
- bnz/BJfTtH91Xyt8iiPeTeNpIx3Blp+YzEe7qJgMk5Se8YNaPRkYbHEmb31Lm03HCFWZ
- Umgg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVY6xFSiVwZcmtXBNp18aTfYwCn+d3bfY9zjWlRQK70Jb/E9Y8RJH4CXOulu4BaUra/PUh/9Ms=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxf57s3ZjRf1V83sChn+PIpEEr3WQ0MHIll6xIp1SXnowWwYYap
- EbAwUZWtd5ImQc/L9wCD2xpBwfmJ1CeJUeR5kvCIim1VKX4VQUxG3mpkN1RqNDKGNlw=
-X-Gm-Gg: ASbGncsuknw9U92t/wRNu7LGXaUMrwxw60QnoOxTv8KT9+0wtUQ7DgNePkdFaYw98ds
- zxp90Rg4PaOwADg0wsbLeznGnCyPgrAP2bsL1uV4EDCThR3nWQ+ukZzKs14ekK/DtPSrOfH8itO
- sNPfHOTwJ9DSs5CEvFNdDlLQ2PBcUayv5FEnB/ohS5v752RQ3Q1QN35JD5oOhJuU0Ju9NtaAIXq
- Bgh1UN5qmMMUSw1nvARkTQk15HNUt0ul9byDlzYKyR6TuJIu3UqdfZYovdoQyAscvL0NB2ODaQa
- r6Me0HWxkJbEuRDkctA2+xBRprjex4A07GK2NxV4b2A2o+R8N3H5i1/ztalG0TDRYKoc2ilUhML
- Zp7DDgxfaAT8cSvY7rjHPU/y7ja24jQxXGtzreh0qht+VYFaqDS+JfnE6pi6wESr8gV1IGuqY0p
- oeiNVBWoOq6qdZmKiQXtOYmPG3fJppuUa/OgGs3zX8gJLoTOTX/Q==
-X-Google-Smtp-Source: AGHT+IFgNfPVdYWl9+WtYb3AXfKOQz7B16raRHE907wTHBuy+kSWspTzIyQEio3YVoctYl6tvQo8dw==
-X-Received: by 2002:a05:6820:4c8c:b0:654:f20e:2d02 with SMTP id
- 006d021491bc7-65782769f49mr1661090eaf.0.1763654995503; 
- Thu, 20 Nov 2025 08:09:55 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65782bacf02sm815784eaf.15.2025.11.20.08.09.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Nov 2025 08:09:55 -0800 (PST)
-Date: Thu, 20 Nov 2025 10:09:53 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-qcom@groups.io, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PULL] Please pull interconnect-next-20251120
-Message-ID: <20251120160953.GK2125796@bill-the-cat>
-References: <6bc0403d-cf6e-4955-839d-7a9751c03ff3@linaro.org>
+ d=1e100.net; s=20230601; t=1763655234; x=1764260034;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=qkDbSFzG2WPj1Dg3HATukJ6ojLumhKws+3o3xkH8dYY=;
+ b=evXtCJNYx9L6UMTL8cFwenQ28BsNOxm4DqMfOH+nkYVVnSv7ZzC02giZyikwPXOYO+
+ txM0cXLZtHkW6ZY9GiFnYvEa692rz/STe4F14zxJG5fb+A6ewOZiAfJUbFU80hEPOm2g
+ 2UonWWwFhMcr7gYDGLs5p8gjkjNaBb0xcA5q9qxWSUNYJV7ZtocxkK1Snsg7CPXE6R1+
+ Rs9U/hhub+9CIX9fAnYKjen7Su4WIOGqX7vcU87lxJeYhaf8/jDDEAPFvviF4uYuR/1m
+ 5nW5cDeGS/qaeKfvnyGM6LjXkdAhNIaqeKsZLDGlCq0A9ijjynGiI94jHzIrF08cfAKK
+ /o2w==
+X-Gm-Message-State: AOJu0YwGCtfe/4TVr9vRf2GKPMQGPfEag6GKjfTZTSW0LdmVow66J99n
+ RQpz7oEqoIXX/Cs8SKkjQOzc/f8jRgbke4I24iT1aXMf9biCGRQ81XhpnXAhkeSUdoFfjkiwbtn
+ E1AOlT7Kd4g/BBe98sDldNIqfwCMV5ds=
+X-Gm-Gg: ASbGnct0cTw2ZL85CKrdd8TQCj/VLIec3GkboawaUpC0VMILVZsdGEJs07gQ5d2PXam
+ oCJ+wOZW73oWq3I7gWADNhKDVzYXSgJN0dov9/3U7vNDU5IKfaPQZt3VfYJQVOai4j2ZHGOfO+Z
+ m5Zbwlq7h4mMS+BCHDTATu+nyuDGM7xMBFbRZYcGAAVVEBPOXgG+4yWheNkvsX09WmxV3tLM1Yd
+ I0E66133lbGxVzr7YU4CyFJ1i73Umm/dGy/eXdA4cQayLXL2prFUS38cuOzsg+gW+RjjUEH
+X-Google-Smtp-Source: AGHT+IFaWorprZZAAB6ibUAidpF6Zxir/NqXLZ3BVUPJ9ra9Ufl88jLE0wKninN67QKf59UvafPYemP9UxjcSbC2nqg=
+X-Received: by 2002:a05:600c:4694:b0:477:952d:fc11 with SMTP id
+ 5b1f17b1804b1-477b8a8eb4bmr46648985e9.16.1763655234275; Thu, 20 Nov 2025
+ 08:13:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LMrnmglHhMei1lzM"
-Content-Disposition: inline
-In-Reply-To: <6bc0403d-cf6e-4955-839d-7a9751c03ff3@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251119145540.843448-1-trini@konsulko.com>
+In-Reply-To: <20251119145540.843448-1-trini@konsulko.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Thu, 20 Nov 2025 18:13:43 +0200
+X-Gm-Features: AWmQ_bkUiswYkXReM5FrWkKBU-QNCgqP8DHOvGCwoUO0MjYpcttlIxF6ZgRXnmw
+Message-ID: <CAPVz0n1wXCZpy0Ngvr60EdiNLeBP42s8Coyo5ujFO+cwV+ZwUA@mail.gmail.com>
+Subject: Re: [PATCH] tegra: Stop disabling device tree relocation
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Thierry Reding <treding@nvidia.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,64 +92,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+=D1=81=D1=80, 19 =D0=BB=D0=B8=D1=81=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 16:5=
+5 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Remove setting of fdt_high to ~0, which disables device tree relocation,
+> from the default environment. Doing so prevents U-Boot from correcting
+> problems such as having an unaligned device tree and leads to various
+> failure modes in the OS.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> If there is some window of memory that must be used for where the device
+> tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
+> or bootm_mapsize are the correct way do this. Please see
+> doc/usage/environment.rst for more details.
+>
+> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+> Cc: Thierry Reding <treding@nvidia.com>
+> ---
+>  include/configs/tegra-common-post.h | 3 ---
+>  1 file changed, 3 deletions(-)
+>
+> diff --git a/include/configs/tegra-common-post.h b/include/configs/tegra-=
+common-post.h
+> index 2f08dfed020f..a9c0cea4e149 100644
+> --- a/include/configs/tegra-common-post.h
+> +++ b/include/configs/tegra-common-post.h
+> @@ -50,17 +50,14 @@
+>  #endif
+>
+>  #ifdef CONFIG_ARM64
+> -#define FDT_HIGH "ffffffffffffffff"
+>  #define INITRD_HIGH "ffffffffffffffff"
+>  #else
+> -#define FDT_HIGH "ffffffff"
+>  #define INITRD_HIGH "ffffffff"
+>  #endif
+>
+>  #define CFG_EXTRA_ENV_SETTINGS \
+>         TEGRA_DEVICE_SETTINGS \
+>         MEM_LAYOUT_ENV_SETTINGS \
+> -       "fdt_high=3D" FDT_HIGH "\0" \
+>         "initrd_high=3D" INITRD_HIGH "\0" \
+>         "boot_targets=3D" BOOT_TARGETS "\0" \
+>         BOARD_EXTRA_ENV_SETTINGS
+> --
+> 2.43.0
+>
 
---LMrnmglHhMei1lzM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thank you! Overall change seems to be valid and should not break
+anything. Unfortunately, ATM I have some major technical difficulties
+with testing and PC access overall. I try to find an opportunity to
+test and verify it ASAP. Would you mind if I include note after ---
+into commit message? (no additional actions needed from you).
 
-On Thu, Nov 20, 2025 at 10:52:33AM +0100, Neil Armstrong wrote:
-
-> + U-Boot ML
->=20
-> Hi Tom,
->=20
-> Please pull this into next to support the Generic System Interconnect Sub=
-system
-> for Qualcomm SoCs as first users. The remaining CI failures were fixed in=
- the v5
-> version. Also pulled the dependency patch with Casey's agreement.
->=20
-> Thanks,
-> Neil
->=20
-> The following changes since commit 96edadab5476c37f3c0b0b99877db16e3e58d5=
-e1:
->=20
->   Merge patch series "ti: add speed grades support for AM62a" (2025-11-12=
- 09:42:50 -0600)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-snapdragon.git tags/interco=
-nnect-next-20251120
-
-Need to update the .git/config for this tree, b4 pr doesn't handle that
-as the protocol.
-
-> for you to fetch changes up to fb3db4aa8df2ae5093a5c1580b9cd5789c248de4:
->=20
->   qcom_defconfig: enable interconnect for SM8650 (2025-11-20 09:17:58 +01=
-00)
->=20
-> ----------------------------------------------------------------
-> - Qualcomm RPMh cmd_db_read_slave_id() & cmd_db_read_aux_data()
-> - Initial Interconnect implementation + Qualcomm RPMh support
-
-Applied to u-boot/next, thanks!
-
---=20
-Tom
-
---LMrnmglHhMei1lzM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaR89UAAKCRAr4qD1Cr/k
-Ckw6AQCfLJwAOdB+dvQ3D2+hRccNEidWjGsOxRDl41xgmzmaAQD/QF7A5Lp1SslY
-Dd7WK6NG/KNujBcyqDZPnIeyacI4cQI=
-=xy7s
------END PGP SIGNATURE-----
-
---LMrnmglHhMei1lzM--
+Best regards,
+Svyatoslav R.
