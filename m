@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0873CFA459
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 23:40:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 436E5CFA459
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 23:41:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 515248412A;
-	Fri, 21 Nov 2025 00:40:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7DF18415E;
+	Fri, 21 Nov 2025 00:41:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cL/bnmKL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XTPRoFjn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F14B84132; Fri, 21 Nov 2025 00:40:48 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id F069E84148; Fri, 21 Nov 2025 00:41:09 +0100 (CET)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F32D8405F
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 00:40:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C0DF38405F
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 00:41:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b735b89501fso162895366b.0
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 15:40:46 -0800 (PST)
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-341988c720aso1150321a91.3
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 15:41:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763682045; x=1764286845; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763682066; x=1764286866; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lOGcB2qioTLkOFpemH1havyRj7QXUzSBGNbxOIlufFQ=;
- b=cL/bnmKLHt88E5fy0ucglrSEM7arePHomlFqwBqClakQFSSgYhTEKAgWZrAa0S/VCn
- jyfW5E1Pc2l3L7SJpXA0T4O9hsmkEPG2PmDMhkrQtB/xwyCulAh31WrLjrWuOkCdW5o+
- UWMuLE82KpoOgDlKIY/vk3eMBxu8Qa0j1wICw=
+ bh=f40Xt6Fk0qTOsNYXYMzTZA/6HMFNLbPS6wwHLnpaqCY=;
+ b=XTPRoFjn7BguTnE3EovhRQu8A+RXbnK1AtP1+e0yom7r2Z0EHIVDDsoONMk13HPoXu
+ Nk6CSq5XbyKuWMn9K1LANWYIStH1/ed90xpT96EiTH+P5AGtdBOguybmwO65c1bfhKx+
+ qCduBvDhXr/mbx4LvE6rkVTwRK47nn27bgJLE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763682045; x=1764286845;
+ d=1e100.net; s=20230601; t=1763682066; x=1764286866;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lOGcB2qioTLkOFpemH1havyRj7QXUzSBGNbxOIlufFQ=;
- b=vySyUz6TUQqD6Z7mCuLluNW8jHKmc/YtboLtvBMItqVIPWs6h4iHTtOPgfMJPZydHk
- ylUGRhROCnWvUYYXu34eMj+Yul83k8mJdiIkbzMt+5ZAMa+Yzm0yJL5dppPxQeQtJrUm
- kY6Oajxtayr6zhDT+CzKqyR6HQIGh6ixV7SrJ43uOTkNHGQY4pMTherMvih3Q5fEKoqK
- DGoPcepjXCNeQIfsHY4rqj4qWBGKW0nIsnpm8mQ9UgmsTdmPftPXEQuvULIR1+bRBnDH
- qXVK8VReLCEepaHV6CHSBZmgnrLPCI8iiTbuF7rGS93p1fQqgTMp4Nt/8sfeO4oc9SB0
- vjhQ==
-X-Gm-Message-State: AOJu0Yx6jigIuaAeOIW/CPv2PAo1fH2UQOknpRq6BlL1Rv0gM8nroqM6
- IWvQ6huqL1udaU6HDR4aC+XUjx+BmHQVrfac2oeMHyjFbJy2Wf0dZuLZzZdnVRaZMrrVjhoUIJw
- m48gwZa1bugaOI0uprJ2awd30eMmZcEgvnShRGoBf
-X-Gm-Gg: ASbGncskaJGwO/PbOLqUMveIgUv5Yjmzin365S+xTT7HRhw2zhvjZuIjIx7NNoBfknP
- bYvvu7q1Ror1rztGdZtv3ePs7v+IdIVURAlroI6V1qWHzVXE7r7SHnpWM7nsyEn50IEHND4okPz
- uoAhd+36wHd/Li9/NDeS9diE0+tLuRKt/mAmcMOq+8avok3R4WMnf/3j/vB/nVmyp6hPb4TBj8L
- D6NC31Zu8G2x6fGdDyN3PUAVfVBx/78fSqTni7cOX9O3D1uDiSI31Im4Ks9OrV97HOu2w==
-X-Google-Smtp-Source: AGHT+IFFUuFMt9ud/zWaWpKdvAB5XCjzm/n1fVzxFsztK3uMZ2qtSXdaPfVCDbmTQysZmvopaUPSuxRaL47sKBv+8bc=
-X-Received: by 2002:a17:907:971e:b0:b73:9fea:330a with SMTP id
- a640c23a62f3a-b767158cd9emr14769266b.17.1763682045467; Thu, 20 Nov 2025
- 15:40:45 -0800 (PST)
+ bh=f40Xt6Fk0qTOsNYXYMzTZA/6HMFNLbPS6wwHLnpaqCY=;
+ b=c99eRIH5qqHRxoxCSAZQOJ14QQFj7n5XSm0vGDPQAMR/p01rmlvm3puasU/VvQAq9/
+ G1672+PBIzjwEXxFsNCwG+3EI8mkloHPgHTEKLZlW7lArNV9wmpBwsHa+0ZQtwrbXpR9
+ sXH/VroRtwXxan15TCxU2OcD6L1xO1RDSPnwcM9wpo2fKAkf/2TRhegSu3G4Rb34lukN
+ +X/A0FGJQq76VD47I05LkHDA2aR6sugjEc3rzYm/CzE+DW8Cx6kBqpUmrbJ453vwOfVQ
+ 3al6X1hZ00+rtX7/w8NyM4J6fVBwXQRQari1YRs94ZsUAKMK1qrXGnpNxdrMvSRh10Rz
+ n2rg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX63PU60YLYFx6kEV82cyNrNHZkeelDE5dpFVRP4fmjCMLEHg6hjubP5IxE5tX8GbLiv7orhfc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzgBgB7G5s7w4ymd5+tYm3pArmK8h4sb6QU9mCGxCmqcZD4FNTy
+ 4WKWrQBQDYNOmzxOqHWMQMAo9ACWaXL1BvhYCqs0L028QJlJpdEjnOQ2L3XckMuzbxAGK0gWj25
+ jcikd22bda6ApW7Z/FnlpgIQgkxphuj5u9Qi0ria+
+X-Gm-Gg: ASbGncvIzNxdiW7dyNhrC1+3SU/KhFBX3ROhzUkB4onIuKd8R9mka/pcD+ZBx9Z6HeS
+ UJavMJSkTelU/F34rIroiY28ikMWLTntpWriged8LPeh21+zowlxbQMVVxDzRFMVNAibW/YpqyE
+ rtrPbzgBTwCKOT10YDyY75c7COEd/Yl/PrQ7BVc3/o0B+je26dG0jFXmdVrmdDmBUUI1gwl1uck
+ cHxesm2GQtrYNYEMhsKhazOal0OBWWMM3YoCpSYHRiarSR/EsNwv5fW5lTL/M2ZyzVqJg==
+X-Google-Smtp-Source: AGHT+IGU7mk5UgKRVx0BY6WtaIuzejxEVGce5fx5KZioRBiEtBuBoCrYYOPmskLx4Rl9K9CzcpEwFrG6AAcpgq0wl+U=
+X-Received: by 2002:a17:90b:50ce:b0:340:f7c4:7c78 with SMTP id
+ 98e67ed59e1d1-34733e6b390mr237218a91.3.1763682065839; Thu, 20 Nov 2025
+ 15:41:05 -0800 (PST)
 MIME-Version: 1.0
-References: <20251120085057.549221-1-adriana@arista.com>
-In-Reply-To: <20251120085057.549221-1-adriana@arista.com>
+References: <20251120193448.310274-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251120193448.310274-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Nov 2025 16:40:32 -0700
-X-Gm-Features: AWmQ_bmw3dF_5MMD1dDBixQaQdCA91WssReHi_myxXMyRn--6HbdKpcNlqbSgI8
-Message-ID: <CAFLszThQ1YJ1pCnjtD7Hgcdm6BVe_r5zwm8kR5qvL=fuu_29TQ@mail.gmail.com>
-Subject: Re: [PATCH v5] boot/bootfdt: Add smbios3-entrypoint to FDT for
- non-EFI boots
-To: Adriana Nicolae <adriana@arista.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, ddrokosov@salutedevices.com, 
- ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, xypron.glpk@gmx.de, 
- kojima.masahisa@socionext.com, richard@nod.at, semen.protsenko@linaro.org, 
- joao.goncalves@toradex.com
+Date: Thu, 20 Nov 2025 16:40:34 -0700
+X-Gm-Features: AWmQ_bmfPS9nX20Oc0-WvmQ5i1MCHopYjZGkYe-alAxcYK0EWWLdoAJkgUWcPO4
+Message-ID: <CAFLszTipwat6M1t0qgmmtWGRq-LO5tJ0RZjRT2oiSyVG_oGMnA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/1] video: add DejaVu Mono font
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,58 +89,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Nov 2025 at 01:51, Adriana Nicolae <adriana@arista.com> wrote:
+On Thu, 20 Nov 2025 at 12:34, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> From: adriana <adriana@arista.com>
+> A TrueType font for U-Boot should fulfill the following requirements:
 >
-> The Linux kernel can discover SMBIOS tables through two primary methods:
-> 1. Via EFI tables, when using EFI boot;
-> 2. Via the 'smbios3-entrypoint' property in the /chosen node of the
-> device tree.
+> * mono spaced
+> * support full code page 437
+> * easily readable
 >
-> When U-Boot boots a Linux kernel using a non-EFI command ("bootm",
-> "bootz", or "booti"), the kernel relies on the device tree to detect
-> the hardware. If SMBIOS tables are available in U-Boot, they should
-> be passed to the kernel via this device tree property.
+> Unfortunately none of the fonts provided with U-Boot fulfills all of these
+> requirements.
 >
-> This patch modifies boot_fdt_prepare(), to inject the SMBIOSv3 table
-> address into the device tree if there is a table generated by U-boot.
-> The "board_fdt_chosen_smbios" is weak in order to leave the possibilty
-> for specific boards to select custom SMBIOS addresses.
+> Let's add the DejaVu Mono font. To reduce the code size the characters are
+> limited to code page 437.
 >
-> The changes in this patch are added in the context of supporting this
-> device tree property in linux kernel:
-> https://lkml.org/lkml/2025/10/24/1393
->
-> Device tree schema was updated to include the "smbios3-entrypoint" node
-> in pull request: https://github.com/devicetree-org/dt-schema/pull/177
->
-> Signed-off-by: Adriana Nicolae <adriana@arista.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> Changes in v5:
->   - Allocate 4KiB extra space for fdt blob and align it to 8 bytes.
->
-> Changes in v4:
->   - Remove weak function board_fdt_chosen_smbios(), replace with
->     gd_smbios_start();
->   - Return -EAGAIN in test if GENERATE_SMBIOS_TABLE is not enabled;
->   - Remove unnecessary fdt cleanup at the end of the test;
->   - Added missing newlines at the end of the modified files.
->
-> Changes in v3:
->   - Moved "board_fdt_chosen_smbios" function to lib/smbios.c
->   - Return physical address of smbios entry and use map_sysmem to
->     access the entry point;
->   - Removed check for config enabled and added check for
->     GENERATE_SMBIOS_TABLE;
->   - Add test to check that smbios entry address is added into fdt;
->
-> Changes in v2:
->   - Renamed device tree property to "smbios3-entrypoint".
->   - Removed redundant check for CONFIG_SMBIOS.
+> v3:
+>         Don't change the default TrueType font
+>         Add all special code page 437 characters in the range 0x01-0x1F
+> v2:
+>         add two symbols used by GRUB
+>         add the FontForge script used to generate the reduce font
 > ---
->  boot/fdt_support.c | 19 ++++++++++++++++++
->  test/dm/fdtdec.c   | 48 ++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 67 insertions(+)
+>  drivers/video/console_truetype.c    |   4 +
+>  drivers/video/fonts/437.ff          | 291 ++++++++++++++++++++++++++++
+>  drivers/video/fonts/Kconfig         |   8 +
+>  drivers/video/fonts/Makefile        |   1 +
+>  drivers/video/fonts/dejavu_mono.ttf | Bin 0 -> 44508 bytes
+>  5 files changed, 304 insertions(+)
+>  create mode 100755 drivers/video/fonts/437.ff
+>  create mode 100644 drivers/video/fonts/dejavu_mono.ttf
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
