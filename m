@@ -4,169 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD1BCFA447
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 21:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B13FCFA446
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 21:14:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C5BC84118;
-	Thu, 20 Nov 2025 22:04:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id AEC6E8409E;
+	Thu, 20 Nov 2025 22:14:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="vZWVcHip";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NSGkbltQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1C618410B; Thu, 20 Nov 2025 21:36:47 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6E6B98409E; Thu, 20 Nov 2025 22:13:59 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2520984127
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 21:36:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFC2883F14
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 22:13:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrian.freihofer@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DaylCZiiR+rqUaUI0nMN97rOX5QNqkjsjBWM8GO8a6f/nrZqNTme0Kd6yyf2mn5hahpFlgMTRcAF5AUxlFjuIVAKmTBvAxyN/znGhe9/VPS5DtEG7qLy2fHZg5uLwIM4PzCRnoD+jZfGnFu4QvewmkJFPM4nyd2/ENBCcBqwZyzrV5/vyrMBft8VMfZfGu5kSG7MdNTTbujRocBDtQd6zN9eZTeKGdzSblc4jBz4/q542v59jKnseqxqAqlbnqxvEABmNsrhEPb1YnPUqd2AAz3uw/FXQYVfTm0d623uqRnvArlmjqgbBFlNKR8yLTANUvF0QMmH1SSKNUCueSyswg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=k2cm8jE6eOXxjYFUZ7hc7JKgz2yTRhVU4oJfXUT8m8s=;
- b=Wuw5IQx6EzGlVLulcN0QssvOjhvr8FjtBwMi05VMw7BGIN5q8MM2qwVtxSh18BOBgep2N4FgDpZQoClylV2/UPj7K38tPH9BHJ1AL1/656ilffe5ZnTEMvvKjgj8aTQOieA9jdiF9BJLGprsWz5ejGcrOILk6XNaXCkXt1uZUTfxOpfsk0xAAfX0B5KZEfmqcaxfZIQEjYr9u8sLrVJqCXV7tm6uXuJVwtb9Frc1Ddh3RbOucgKdd47wii8XJviuTbwVMb3tnHqRVOhaUbA4agudEeY9VSU0nb85Yf5TDNFTjpyk3qpu2rvn/0JVVYJeOlIEO2PgDliOLKSIHXBhKQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k2cm8jE6eOXxjYFUZ7hc7JKgz2yTRhVU4oJfXUT8m8s=;
- b=vZWVcHip7+cnDNqMpvfq/bqqMEJiceIwCDmO3MMbabDQZhppHHMf9l+AzvgfxMmxvKL9Cc/gGLqI3ebjVfoCMmp9LcTVQi5iIPSJEmCS3LGzyjKkQ5T8YaH73NHC0E+bpA1LPA/O8W24u+qK/U8n4Jofy3iQrXo8t1JzAW8W5eX0FswfzaTqic4nl+w5fQWJMdUu7BlN/iXGEAmsva652GloPXRkt6/pHSea86stbWX6lQDeyBmMDuIh6OwNgYXnr8WoHgpFNorp2jucJEW7Spa78LIgX2ZA2HmLSouExDnxscW2ZsLdqu8TNIxeArSU17BqCvxmLplaDw+9G64iTg==
-Received: from AS1PR10MB5724.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:47f::8)
- by PAVPR10MB7538.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:2f5::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Thu, 20 Nov
- 2025 20:36:40 +0000
-Received: from AS1PR10MB5724.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::50:b275:11f4:adef]) by AS1PR10MB5724.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::50:b275:11f4:adef%4]) with mapi id 15.20.9343.009; Thu, 20 Nov 2025
- 20:36:40 +0000
-From: "Freihofer, Adrian" <adrian.freihofer@siemens.com>
-To: Heiko Schocher <hs@nabladev.com>, Quentin Schulz <foss+uboot@0leil.net>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Jerome
- Forissier <jerome.forissier@linaro.org>, Jesse Taube
- <mr.bossman075@gmail.com>, Raymond Mao <raymondmaoca@gmail.com>, Patrice
- Chotard <patrice.chotard@foss.st.com>, Yegor Yefremov
- <yegorslists@googlemail.com>, Eugen Hristev <eugen.hristev@linaro.org>, Marek
- Vasut <marek.vasut+renesas@mailbox.org>, Casey Connolly
- <casey.connolly@linaro.org>, Neha Malcom Francis <n-francis@ti.com>, Fabio
- Estevam <festevam@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH 3/4] corvus: migrate red LED to the modern API
-Thread-Topic: [PATCH 3/4] corvus: migrate red LED to the modern API
-Thread-Index: AQHcWf8Hlc6NRhBOFUWQB5QE+hzAsLT8BiKd
-Date: Thu, 20 Nov 2025 20:36:40 +0000
-Message-ID: <AS1PR10MB5724D74719D27B60647552D28ED4A@AS1PR10MB5724.EURPRD10.PROD.OUTLOOK.COM>
-References: <20251119-corvus-led-red-green-v1-0-ce86b8d59dfc@cherry.de>
- <20251119-corvus-led-red-green-v1-3-ce86b8d59dfc@cherry.de>
- <fe01abb5-5a9e-1e3f-411a-824d223f074f@nabladev.com>
-In-Reply-To: <fe01abb5-5a9e-1e3f-411a-824d223f074f@nabladev.com>
-Accept-Language: en-US, de-CH
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=True;
- MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;
- MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2025-11-20T20:36:40.270Z;
- MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Name=C1 -
- Restricted; MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=1;
- MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard; 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS1PR10MB5724:EE_|PAVPR10MB7538:EE_
-x-ms-office365-filtering-correlation-id: 4dbc33e0-1ed8-4cd5-404d-08de287482be
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|10070799003|376014|31052699007|39142699007|366016|1800799024|8096899003|38070700021;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?kCQEpg40z01lCxwxQd0PBKniK1vf4JROuViHR9gVIlrzB3QJG3yu7L2eQD?=
- =?iso-8859-1?Q?Ihh6WSmvgsYK5RuxLDYfIn2rD1xnAs/pnjpQMc7jhdvumf0Zg5ViDeUR91?=
- =?iso-8859-1?Q?hAGbNgEEvw0et52/QZWIxGtMUuMmbcnFJ03iYNu2ZegpZaHx1bvw3Hpr83?=
- =?iso-8859-1?Q?jeKQEA0UfMxhF0tOt7lihZ0fMNywgGQX9h9qiTM6ZPEdvuNmrk5st0OP0y?=
- =?iso-8859-1?Q?2eVDfKGrFHBJLv8FpDyuuKGQTCEL6OYpds7MJTuUm6jA/+Gjy3B1iOuJQo?=
- =?iso-8859-1?Q?xvQwrTvmdN7lg5787JLI0ZZC2bJu6U4naquwnaQs/NFHAjuADe8T9PoyOA?=
- =?iso-8859-1?Q?VRT89tLyorRAMVK7xZ+bEEramNBss0DNmrvphQvQjIDDz5MUeS/j4jT12c?=
- =?iso-8859-1?Q?wdrOsY68a27tGgmUMzonuB9dFjpzoMWKvPdRVTvzoIR8NYnajzKcaD1U/8?=
- =?iso-8859-1?Q?VJdvkWTSoz93OgQCC/xf20vLTXCPue5G9STnCiJLjgUWuXWFfz6BERASZp?=
- =?iso-8859-1?Q?sY/b4KTHfFlrz/9ZO4SO8RQH9MQ/uo+3Pwu9O67NiGvevHpmutjhA8+Jaw?=
- =?iso-8859-1?Q?TOSLhO5v3recKPcWW3Hk06EOBFMcpHzmvpt3QTVG5jCEwxmnzc8hhfdTjg?=
- =?iso-8859-1?Q?jTnW4Pig7pc8N+1/P61ILQKG8Qoi96+WwCXBGEmGxaYeZyRYiEVhiLHXf7?=
- =?iso-8859-1?Q?HYdUNGqBUhHxquCMvnRrsBXCjzkIJA0Numi66GkWqpED8zW4fHW19GwJ6J?=
- =?iso-8859-1?Q?MIz51jcSH11CGdmu49rCtbgDw+BLRmiBTOghhFKwUpH8SIdN7XoNzWM6tE?=
- =?iso-8859-1?Q?hniR3DVIeoaX8g9CcK7WZF+eBGsmkuslQVoHoCA6IsRVALhQA9iRYa56pF?=
- =?iso-8859-1?Q?vkY/2FYIQyqwubHqBT86yho3bUJfBUfE3D4X1ytzTQs6QY0/EKXWSflMtY?=
- =?iso-8859-1?Q?BvkgdX+/CyDQDZtf4LCcmm46+ZBLIPl+ztXY3OxHRw+Dcr3G8UNgDEjT5b?=
- =?iso-8859-1?Q?uQN2bYif9eZgbPMeyYvwejoFuap/I+W/mp1U/4oFMzfgk2hNuocGQ46ILW?=
- =?iso-8859-1?Q?zSbzdTlMcY5rdzE5qyyRk2iLj3S4/YKlj31Sfofj7yUdvPldJQykWPZxyQ?=
- =?iso-8859-1?Q?tL5jFpccF1hsqBNUZy1yPWb8TKQCMimOBMUYaNo6L8A+QVxtkcw4RGEyOv?=
- =?iso-8859-1?Q?C31Rp2SVAEFfou4d9/lPJ0869rw73PcNTOLgB3hFfl/fLtilheCJV93++U?=
- =?iso-8859-1?Q?jWcj3lm6/7TWjUHCa5AV594rl5YFaI7x7OjINIOETM/DKFD3PQzNYD8cNl?=
- =?iso-8859-1?Q?aeah5Z/JbOO//KDlDhkM6WfPI2M6zIO+N3qgLt0Nw55GvzlcDEZUoNDI1V?=
- =?iso-8859-1?Q?QqytFZSrg4bq+Y8kkJNT22jAdrwtFmuS2dBKMUtayeWiEfPADzEZtumMW1?=
- =?iso-8859-1?Q?93/ZTw1cdl7Uw2P5GcaCFl81ZcvlTvQ8uSTwYfC+ZQPmPkEkEJ5nGoNrpE?=
- =?iso-8859-1?Q?0oOv0koIhs5L/kPNYmGI1mNOMeE7B2fl2a67TQvP8CwSNata87Jw6qi0cd?=
- =?iso-8859-1?Q?rmEmQS7VDILTxoXfZvtUWV7ZEVSB?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS1PR10MB5724.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(10070799003)(376014)(31052699007)(39142699007)(366016)(1800799024)(8096899003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?PAVeH4wpc9sgskAz5ps6zfj0akW04AGlTANQmgRTrbeWlcwBtFyWJhctB6?=
- =?iso-8859-1?Q?svIBbHWNwdGGQgULtxR1vliNvJIEHXyMubn2uBlMGZgnvrWl2S6awRhOWg?=
- =?iso-8859-1?Q?0fV2u+A6AQRHN6SzgJD66dTKmdxLiWctsL/SKtjb0sSdhcZQYUokkQckl1?=
- =?iso-8859-1?Q?iMX2ox0lMWFFn+nvRyrfINnOB54WZkaOtITy/4fNIIB6MN9LHxQFTaHgAZ?=
- =?iso-8859-1?Q?omEZzyyduyPm5IVRMpo6FDZVCEch+Tv10RdUoHH2O92cuwfR8Mdul9nEh1?=
- =?iso-8859-1?Q?KO04XU6jpqpxV04mEC8a3cS0RuxfQT5plNKVA98fTxr2pg+yu8nq5DL9nt?=
- =?iso-8859-1?Q?t3xhWSSRZeLJ/dpVXV5RXYb+XX56DahfWF3nLKnW7Vw3T4WgHr+CdOANhk?=
- =?iso-8859-1?Q?ElIUhd0MvmBRuCJE8EIMcXEr6rDbBQ8JKXVZVcvMk1J8NQioiRM6pAcEo0?=
- =?iso-8859-1?Q?BO146BJI3R/YXNx2k4ff47BB0izJxIVxziKm3DeHw7XRR3IDIyGEtUmW4R?=
- =?iso-8859-1?Q?rJs+Fiqfa5eaiv9opR5WUZ6sb1v6rPKdvO1rYR4rM3PW0h3oO8azXFNFmH?=
- =?iso-8859-1?Q?wkFvXFlt5LMrYdnxYo3phJM4baAvrW1XSmgZ05lZV0hms0EhFOLxNVnPMg?=
- =?iso-8859-1?Q?POuzl3vVtzj5tcpzGvqF9po+ZQ4EuaW4UjcaahnlrPjnLxyPKZamIqgbQV?=
- =?iso-8859-1?Q?BuGLHZQY0D/dWxDcpcixzNSrlffh4WAb9gCHixhCF4eUBe3JB0CiY50Cbh?=
- =?iso-8859-1?Q?sSk9TGkaZTxv7/ssx39NFHm1TLPcXBD9dMegwAagjYkQJJs0jMwjidMZm4?=
- =?iso-8859-1?Q?FG3IYL3LdMxjwgcYVJemL941KugnQdBEWA2+xve3HZa/5Ui78+Aqoz+4Fw?=
- =?iso-8859-1?Q?vCC2U6oO2Aqz4Q2tQvU9dCRBORu4WjFGGZa4tyddFDqNeuXEPJBRWW2Mvi?=
- =?iso-8859-1?Q?TZGrUiTzSN3gExkrlSo84GFj8vU6MSDjbhgDyyBOwaH/jd7Y9I8DQATwbq?=
- =?iso-8859-1?Q?z871LUQOJhG2i04+4j9r+48vGl7CuqijXeEGY+b1i9hnUvGhduvQ9oXda7?=
- =?iso-8859-1?Q?giUkgq6FEggeQRKZtNAyugZF569eflMZ/XpdYfKb2guS+zLbRjSAzM2a3+?=
- =?iso-8859-1?Q?IIz6MCnsaR0TY33XuzTCpbV7U1qHDlDEVoY6KAhp0wVQ9HDQokBt/i7DUl?=
- =?iso-8859-1?Q?0JYTeAM7ZgNSLakOvRoL/CUdDEolK4BT65nfKyYkVKcpmIJLfjdmTVf191?=
- =?iso-8859-1?Q?aVh6KM91EljBqCH4V2JX9CSJzXrEVwIuzabXNxedaPfNFuvGNSZmbPcVkr?=
- =?iso-8859-1?Q?yDUHt1GmfV/h/J0SU8POUUeiXgJTRN+XL5wmFS5zVSwoCOUd267RpQPbBu?=
- =?iso-8859-1?Q?QAGNbA4Yb97tuywWv1TJS/kWDLlyYhxa5Ll09IciOTrfVLqUQ3azzSIE4x?=
- =?iso-8859-1?Q?4hJJk0Ld75z7C/CtEtSLqsLFH1i5zCFP+D4rJvyxHDJX8NmKcE/andCxXh?=
- =?iso-8859-1?Q?eXXVPZEDtMVZpMoen/4pnCfygm5hQLhiXZ1onx3xKUeGuqUKUC5fGPG7sN?=
- =?iso-8859-1?Q?cLeK4JW+ix3X3bIqtPpJYuJqmh9kS5DK7WBFixlpZBnfS4qZXsmWOm44+f?=
- =?iso-8859-1?Q?Ou9e+UpmtJOW/X525CBNsBhe9wxJhDHm2JW7Z9abSthPD+L/yG4Ei5xfn8?=
- =?iso-8859-1?Q?/+uGsOsuL0E5aBYcIgsRBXsHG7KtPy9aQRE7tA8l?=
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-44fff8c46bbso341104b6e.1
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 13:13:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763673235; x=1764278035; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Sn4J0NkbbU7vUQDHoun6/wCJbikZV1Wm5Wbn1tSYYKk=;
+ b=NSGkbltQOPasSzRgscjBgjCsyY7gbpnZpy/uwVPsvwfLr8e1DOBFXA4+tY4cg45RWt
+ xDBJtgKAfNJ4ZXsnPpj6lTpIMJBMryc2FIOrsDU7WpBKjArjnJ4j+1jmpCk4l5P8yhhF
+ FRwNgiYDFPpgvdlhgT47BLEfnLtzK8Rb6IYjc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763673235; x=1764278035;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Sn4J0NkbbU7vUQDHoun6/wCJbikZV1Wm5Wbn1tSYYKk=;
+ b=saqFV4I3V4pNUpH9nKaPhWbG9f/mJ+gr4SikL3Sglkkyj3vk81Zxu+wQV174BgLm5G
+ 0QWt/iDH8L1vm1KOKBivrxmavNktPpXkFkK9NdgTqsOFWY0vwkrECSNMg5qeonxbr/GE
+ UCdfEE9mLsdfU7Jlg5nsOzXeWd+WvPuH1juhacgUxo6qtsd60iKwtfDWhKQu3V2dCoGO
+ aHBBhklUnT3QjaEzzLZldFqNwyd4MzsPXB8HT6/FxkEWiueM76jnX8Fh9mZAIQHpqIES
+ zwFCHovmU2IprsapPevpqaiUsoQwSzGMFJtj5tZTWa+LVZje9VshRB4dAu43kzLk8ZzQ
+ DUbQ==
+X-Gm-Message-State: AOJu0Yxt/ks2f3JptPUd5RaZKslTB5KGrrZVMUoqweqdqdRQmZGP+EHX
+ 1hRpZ9AWv7VRsNSHZMKo9suOHsYYeE/V0FTRsWUn3kpxOFUCvnw+B5Y4laX9UEf8sxQ=
+X-Gm-Gg: ASbGncu4ho/OilulXkRZ33zmL2VOV1dHJXZh49s2RelyXq1zge0CbNYjEFcvcpP2bQX
+ 4yEYNzXrvm7L1HDzMOhLTibY60uhcYOz2sjkQd+sXLfDkvp2oblDTTOYf8MFYjTK6zVpGVsELR7
+ uhGAvna4w6GYk+1I3s0Euk41gwwyxNTLLhgtXmmPEW7YGI8KuB4aWuPZCHScoV0+cIzVAuXDVkk
+ JXOmT1obsz10nb138/rrelByycachNAvfVa+Gq+bV1EXMaz2N9lq7Ss3PEQtrjvgsHoPOPDnjMd
+ vdW3+E2qH845dCNqD7J+7BbvqFh3pxad5gEry0es7z1dWgN5Pb9UMq7Pqa7XudFpcDV7Pvl7qU3
+ evgtnlunZPBJyV8Jyeb7iASOzLPiq9RC/jwaZe1tXuM7w4NI2GkYDbcA4tNkjP2MNouUkcPOQ05
+ wBxH+C9st24XI8pyz2tU/ZGTEBEiym5VfHX0vTlfM5HE7u0JPg2Q==
+X-Google-Smtp-Source: AGHT+IG3B7BfM3F7ziFO8p94zEyKcMwsEUqPxtLO/gg8JS/6g1NaK9NF5LGxDvk+WNXJ5z/sUKsFJA==
+X-Received: by 2002:a05:6808:6f85:b0:444:1450:c1 with SMTP id
+ 5614622812f47-45112d7a2b6mr12587b6e.64.1763673235521; 
+ Thu, 20 Nov 2025 13:13:55 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-450fffbd091sm1035090b6e.16.2025.11.20.13.13.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Nov 2025 13:13:54 -0800 (PST)
+Date: Thu, 20 Nov 2025 15:13:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Greg Malysa <malysagreg@gmail.com>
+Cc: u-boot@lists.denx.de, adsp-linux@analog.com,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 05/12] docker: add Analog Devices tools to docker image
+Message-ID: <20251120211352.GP2125796@bill-the-cat>
+References: <20251118064000.14613-1-malysagreg@gmail.com>
+ <20251118064000.14613-6-malysagreg@gmail.com>
+ <20251118143918.GS2125796@bill-the-cat>
+ <CABdDSeVDLPM7ahFS_rn9N7GhdpOssoFRp3M7xWnr9PK=G6F9RA@mail.gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS1PR10MB5724.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4dbc33e0-1ed8-4cd5-404d-08de287482be
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Nov 2025 20:36:40.7030 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: aTbPlu7OhpkmWuO2MeZcyBNOjQWJDP43W1ZnYwmt8JDjwR59GsVe+79wlvzMZHSxjNNFc9nwRsMu5uRuDaru7l51pyV7MvuvT7nF0KD5rAw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB7538
-X-Mailman-Approved-At: Thu, 20 Nov 2025 22:04:13 +0100
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="YHlSb0tbncBH/9Rn"
+Content-Disposition: inline
+In-Reply-To: <CABdDSeVDLPM7ahFS_rn9N7GhdpOssoFRp3M7xWnr9PK=G6F9RA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -183,9 +101,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin
 
-Thanks for the cleanup. Just go for it.
+--YHlSb0tbncBH/9Rn
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
-Adrian
+On Thu, Nov 20, 2025 at 01:20:21PM -0500, Greg Malysa wrote:
+> Hi Tom,
+>=20
+> On Tue, Nov 18, 2025 at 9:39=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > [snip]
+> > > +# Build ldr tool for Analog Devices boards and create prefixed symli=
+nks to match
+> > > +# $(CROSS_COMPILE) as used by different supported platforms
+> > > +RUN git clone https://github.com/analogdevicesinc/lnxdsp-arm-poky-li=
+nux-gnueabi-ldr.git /opt/lnxdsp-arm-poky-linux-gnueabi-ldr && \
+> >
+> > We need to be getting a specific branch/tag (or worst case, commit) and
+> > using --depth=3D1.
+>=20
+> I'll address this in v3, thanks. There's a release tag I can use.
+>=20
+> >
+> > [snip]
+> > > +ENV PATH=3D"${PATH}:/opt/lnxdsp-arm-poky-linux-gnueabi-ldr"
+> >
+> > Does this actually do what you want, update the PATH for the shell that
+> > we spawn and run CI in?
+>=20
+> It does appear to do what I want, which is allow buildman to find and
+> invoke the ldr tool, but as for whether it is the right way to do it,
+> I am unsure. If I run and attach to a container to manually go through
+> the steps, without the ENV line I get:
+>=20
+> ~/adi-u-boot$ tools/buildman/buildman sc598-som-ezkit-spl
+> Building current source for 1 boards (1 thread, 32 jobs per thread)
+>    aarch64:  +   sc598-som-ezkit-spl
+> +/bin/sh: 1: aarch64-linux-ldr: not found
+>=20
+> and with it, I get
+>=20
+> $ ./tools/buildman/buildman sc598-som-ezkit-spl
+> Building current source for 1 boards (1 thread, 32 jobs per thread)
+>    aarch64:  w+   sc598-som-ezkit-spl
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D WARNING =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +CONFIG_OF_EMBED is enabled. This option should only
+> +be used for debugging purposes. Please use
+> +CONFIG_OF_SEPARATE for boards in mainline.
+> +See doc/develop/devicetree/control.rst for more info.
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>     0    1    0 /1              sc598-som-ezkit-spl
+>=20
+> so it is sufficient for finding aarch64-linux-ldr. The CI build also
+> passes, which has previously failed on the world build stage for me,
+> when it was unable to locate the ldr executable.
+
+Ah, good, OK.
+
+> Bigger picture though, is hacking up $PATH the right way to do this?
+> Buildman inherits the env it runs in, so it picks up the modified PATH
+> and then adds the toolchain directory to PATH itself, so I could drop
+> symlinks into the aarch64 and armv7 folders as well and have it work,
+> but I thought that might be even less appropriate. ADI's packaging
+> (for amd64 only) currently installs it as "ldr" (no CROSS_COMPILE
+> prefix) into /usr/bin, which won't work for us either, because the
+> yocto SDK build does add CROSS_COMPILE prefixes if one were to use
+> that to build uboot outside of CI, and we need to somehow be
+> compatible with all three options, which PATH+CROSS_COMPILE achieves
+> for now.
+>=20
+> So the options are probably:
+> 1) Create local symlinks to rename the binary and hack up env/$PATH to
+> attach this
+> 2) Drop symlinks into
+> /opt/gcc-${TCVER}-nolibc/(aarch64-linux,arm-linux-gnueabi)/bin
+> 3) Modify buildman to be aware of ldr and have a separate
+> configuration section where we can round up settings
+> 4) (Cannot be done for now) ldr tool rewrite as python
+> package+executable wrapper, update binman to use the library and
+> package in LDR format
+>=20
+> Option 4 actually makes a lot of sense, but it is not something I can
+> get support for from ADI for the time being, but it would solve the
+> other big problem: u-boot can produce a stage 1 and stage 2 boot ldr
+> file for us by calling ldr with uboot artifacts only, but the stage 2
+> ldr is rarely useful in production and is only used for standalone
+> testing. It is typically repackaged in a separate yocto recipe to add
+> optee and tfa, or to replace u-boot proper with a kernel for falcon
+> boot, and being able to generate ldrs from binman would allow us to
+> combine the other files as well.
+
+Thanks for the details, I think for now, option 1 is OK enough, and a
+future option 4 does sound like a good idea.
+
+--=20
+Tom
+
+--YHlSb0tbncBH/9Rn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaR+EjQAKCRAr4qD1Cr/k
+CnCiAP41SDeM5s0fEPo/z7HhbyX37c3z6vKkkCD7hE8UtqTaNQEA9P8ov/2lAFHp
+lu97E2O7JPVIt88wrAS7RPOAqpMcDQw=
+=mf5M
+-----END PGP SIGNATURE-----
+
+--YHlSb0tbncBH/9Rn--
