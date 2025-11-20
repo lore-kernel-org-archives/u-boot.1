@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 008A7CF8552
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 08:15:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB73CF8553
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 08:15:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF2E1840B5;
-	Thu, 20 Nov 2025 09:14:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B257840C3;
+	Thu, 20 Nov 2025 09:14:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rEbuE4Zg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tK8goFZn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 646E483D3C; Thu, 20 Nov 2025 09:13:13 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 0CC9B8405A; Thu, 20 Nov 2025 09:13:15 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 785908405B
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 09:13:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D5DD84057
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 09:13:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-42b427cda88so378768f8f.0
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 00:13:11 -0800 (PST)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-42b3669ca3dso218766f8f.0
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 00:13:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763626391; x=1764231191; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1763626392; x=1764231192; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=oJmISXKsl7w1HYA3F2D3dkwyBHvNv/12pnGKsi/68EY=;
- b=rEbuE4ZgglufABWEzlpgoSoD/jj+9COXgjuxebmY5B/IaKhCVqYHVErPAbZTFWuPJc
- IMjFeGuuygWe66bkjH3J/nF+f2jNQEnIH6jiUtvt2CI9FeobV7vJnrt048J5aQh+yzva
- GgOhjLDaQl9fpmiEctIfyngkfJ5e6pj2Zz1V+bk2rl9WOUFUs//hz9cdjc1bAXDoK1ic
- kw7NtLmx4du+81AGqmA74fwG0B6AJzM7Yh7j8TM3oQg7U1Bf8ilDnctjgt6V5sSK31IG
- lTm98vIWRYixS5qcbbnJP9ZVARZr5vkOsrUggt7lBywd6SNNnZzm0javTQpJOzhgc98W
- /pZg==
+ :reply-to; bh=DQYMpLJKpBAe6nQG3hwPJMRE58tBlJCweot7OWVwp1w=;
+ b=tK8goFZnr0hD7XAt0tlsbAV1yfsMabfsqg6uV0pCRlpUgI/XuLBtOTCM4404QGAmRZ
+ 1tr6IOQukqHE7SsBhBgt+9AkU48H24UkkNBwNMZVOrBWFg1r7FOC8K/dPv0ixsouupV9
+ d2UaY+Ds3fkpXtGqcn2KKlIHX0FCfrM5UrNNl0ZC214SBzp+EsKj6SSsk38uQuOzQKSA
+ mDJZTrMWp7q5EImgdC0LvFNMqXWZ7jxA5unT+51dAnma/cxWi972x7gT9ANxTdBrQ1Fd
+ /j7l/3nmv8f3xAA8Qme4T79+Rl4hcpZ6FLDSiNhow8HsejD8VS4ydNQd21bKVdTVV8v8
+ emqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763626391; x=1764231191;
+ d=1e100.net; s=20230601; t=1763626392; x=1764231192;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=oJmISXKsl7w1HYA3F2D3dkwyBHvNv/12pnGKsi/68EY=;
- b=Y/b2O3cJoSl6Fk/1gdCNAqk7wZoRDbmMnCJxGS8TsEYBKdFb5gNDueQ6+wN7aXka11
- 4KpuifQWk5yLRLo444Lr7XcQHHfJ5Og/qJGshnMth1W5EcBUujSnOESoHWspGA2GRNrn
- amg2K7mKucP/Wlzjce90xnJMBV++r6Q7s4l4+odM6IwCRQN/1unnGArl8FwJe/vAyBq3
- u9An9ccu5l/d39iN0WS1/CCKwDp8/6PlcnB90/xr5TQOZw25dSTFTgFnuS8I8US7NrQ6
- PXqoHe5FQZBmXRrCxYbj/xeRgtoklKS8/1jKkQ0YK8llNGbM8OlT5rZuyGfqzilrW7DY
- B3NA==
-X-Gm-Message-State: AOJu0YyW0LoJCECudhDdj0V6KlHXgJ+COvp4izauesFupnXcqoDbSV3j
- 7go7rbdl+FE0WFxYMHQnFXTFG2SqYkg2ocOZq/Y9G0+E5XMtCla1FW+/zgy+DMBx+8M=
-X-Gm-Gg: ASbGncvD1gvCe1z94fdrf1J1Rb2BwbgfOQyAB5ps9EsiIMkxZduoBtRLF3HYmVJTnQI
- Sw6wtoLSaMCMnHJEkopT+4GwX/D+4ZdJJTMJ2kSxbCkXSNXC/0CHMNjCJxRMp/pJUs2x27Qn5kn
- z5h5n4N3AWIXmn7sdhg+9HB7xJhEWTYWDAUPvQQR2XbTwVrAlkX+7Mz528C+vdybaa63/VmFYMb
- MC+dsOAvzg5qHgOyK0s5NmhZOyY1M5Ik1Nj82b6oBWEdBMTJwtB7XpFJceWZDZxAF+kINsxQ/qP
- JuLrle6cE4KWHFDK63vMJURrDIZMZ8y1uhVSVAMxgT5rv6F+cyTRyI6H/KA3qzA6SQ0VZCEiJTO
- bJxcG46toLjzabPmLZKgZ5gTAHWmTzISIqsw/UPlvA6srMDauldfoAeCdnfPYNY8h3cab3JxAGa
- +m8IEUjTq4xE8t/0pVh9FqmumI5IuOhLo=
-X-Google-Smtp-Source: AGHT+IFnYoRg38KmEtoCwOCObIvfyNs65UXAzqM7TLcK1NPP0mWg5BFhzpTa1JvARgkJ+3LVnDaH0A==
-X-Received: by 2002:a05:6000:268a:b0:42b:3e19:b650 with SMTP id
- ffacd0b85a97d-42cb9a2462dmr1769870f8f.17.1763626390688; 
- Thu, 20 Nov 2025 00:13:10 -0800 (PST)
+ bh=DQYMpLJKpBAe6nQG3hwPJMRE58tBlJCweot7OWVwp1w=;
+ b=P1EOdCQBtFKYa3w1DFglb6Ye/OkpnaT/LvDRQbQ6Qr0ezDx0kGQg4krcLTMZqDDCH7
+ v4jgmGvnW54oqsgsirtPybzcXt0GBLq/U67iwNrPqnIxF1LCJdiDOTiJG8T920v+zXMk
+ JsH0fsU9Vi87GY1RVcUoRiCE/3GrdGHAe0FBQ34jLZP9Ei72QhrwKCJPnpBVvxLcMm1x
+ X0tkKjn1cja6UuGAtg168eFefr8LL2UsVGm1IMKWGHIHkc268aG9sxFWhnoQAiAqKUiA
+ 0Nk+2Ww2x/pKwcJmRy0UgesYMx4z7mNih9W5cQL8tYyUaVGH5x0o/aRdEfVxtAtykgwd
+ /K+Q==
+X-Gm-Message-State: AOJu0YwScWTRuQLi+drwFg9jM3J6nXJkEjXbHPowMbx+nK/QfGd0YLFa
+ /4h/9dn34oxaZfxP0CdMk5dXI5/W6I5Wl/kBg3f3h2INL7qvgEQmIWRa0Cc0Ky2p41k=
+X-Gm-Gg: ASbGncuNJLuln+AsG++8YvUCQFFCMMMItCSTAr98hLebeIiB3LFR3HVu+SEU8viAf3S
+ Kv1mYeW+V15d3TpkzD4K+Sulf7+sWZ1JQ010013QrTxHq5TbsLsSno5vgTUxbuZyoL5nouDMeEx
+ 9hBon3XVMcDMshrN20GsC3eyRKvW2ZRC60Rfqi7G/SRKvQWRCmWQHDCsBKUx75OK5bCq1FvykGT
+ 2XxpgZx31kiS8d/lD3iHTM5UE+AkQzzTHr7E53YghFH8sZT2pJ6ueMUbEW/ScMLZGkxua/EtiPG
+ PtZV+hE9Fc1VOmEcrZesfoGLmGgnaRx6y5XJWcx0YVx9OyV3xLyKMm4A5RbHr9nLJuCoHWM6hzw
+ nG/L+zHdOMY5hrlXOziixBDymCb3PfoPnfnJ9lH2eyhyRNYJ1Cd7Q/ttHFI6sdyamFsp+iaVjrz
+ 7QY4igCYBHRbdwnOelba5oxX8Qyw7UH38=
+X-Google-Smtp-Source: AGHT+IFprHOug80vAFv7VIqqo7GshpvFmR04nuJYfLmCN7WRVE0+XgOSh9Cwa1tuE9NRYv+Z//hSWg==
+X-Received: by 2002:a05:6000:2387:b0:3eb:d906:e553 with SMTP id
+ ffacd0b85a97d-42cb9a691c9mr1608767f8f.55.1763626392204; 
+ Thu, 20 Nov 2025 00:13:12 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7f363c0sm3844398f8f.18.2025.11.20.00.13.09
+ ffacd0b85a97d-42cb7f363c0sm3844398f8f.18.2025.11.20.00.13.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Nov 2025 00:13:10 -0800 (PST)
+ Thu, 20 Nov 2025 00:13:11 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Thu, 20 Nov 2025 09:12:57 +0100
-Subject: [PATCH v5 6/7] ufs: qcom: vote for interconnect bandwidth on probe
+Date: Thu, 20 Nov 2025 09:12:58 +0100
+Subject: [PATCH v5 7/7] qcom_defconfig: enable interconnect for SM8650
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251120-topic-interconnect-next-v5-6-e8a82720da5d@linaro.org>
+Message-Id: <20251120-topic-interconnect-next-v5-7-e8a82720da5d@linaro.org>
 References: <20251120-topic-interconnect-next-v5-0-e8a82720da5d@linaro.org>
 In-Reply-To: <20251120-topic-interconnect-next-v5-0-e8a82720da5d@linaro.org>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
@@ -115,20 +115,20 @@ Cc: u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Paul Sajna <sajattack@postmarketos.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1450;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=617;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=CvpCEKFxB+isktJw+V5Y+wRub94e+OdAuWFNJVHgqno=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBpHs2KQ4vfkxTargZiUFb1RfEtzsSyxUnxz0wSfaVV
- 36QFl9WJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaR7NigAKCRB33NvayMhJ0bInD/
- 428MuaosxelTpzygL4lyqydo38v2fiidOCpCj9B+vjtDImce/TJc7E5yCUgs3Y9ZyVLk6ZJIA4mywP
- SjF1W+nZy/5bb2OW/cMGvBqSUtl6tO9DyeTaXhhp7nC/PdgwaDcztSLmu8BMsOn/4mEvTnjraO/PP2
- byvyYFE63LedF9Nt9CM4b9+1Rmy8Gew8yIQMPhCrDhwdvsXNfqc+2IqhQBtxEIyj7Z3bQvPVBRfD8v
- b1rGlPvIjpAv8N3cGg2CkHVUZeik61XzPg71uIdixsnzuUD6nYuRyAUeguNExOnuAw6hX7i9VA7uVd
- abQu2G7J3btINWsifi4+WsShevcLhXbkIxJFflQCUZw3cK+mgmvWRqvOBE6tP6NDPCOqR1pG2UcnC1
- KK9UCuBT5enBCS8HpI1I6w+dVpjJwlwnxerq6H//A9ssW1RPtIHySLuWNBiAygCa/5uV4shpkwh2PQ
- fybiMVrxsuyiZFEKUSQBBpJ+yYnIhCGh0yZDbW7Ele8/hP0f4jNbGYm+axRl6PBGYP32sdrRSjfkqk
- 67+JL3DZT539qp/hbr6p549uwRcOg2U48JsDF5AkkP31Y9xeGFJVjmfiQIkR10ZjqVH4rYYde1anP4
- UYRDkz2mmm8l7tzmlQGUR5E6z1fI98m39q+lcYNAYofbyPlexo3O/HKx7J7g==
+ bh=l1OaNqfAmhRIe48N3BIxIps8arKvVqV7RbWbaTnuCcw=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBpHs2KHilMIN5Kv6dyZfM5ukTYNrT42zy2Eys7QCMl
+ z3mp/GiJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaR7NigAKCRB33NvayMhJ0aTYEA
+ CVHqdE00GUdPVCgnWcGKKIUAcNHpNdZu/S/iIYcSCDF5WN6IKSGtRp3whTmDW76XDRB1ha10RyNJU3
+ Ja5sdMIDOjMzefMSkJah2+TjQAYN19tC7jy6xf7bpjd2xKGgx8I4SduNq7p1uEEhUaGH2nMucGvTm9
+ 8uUxd1stwKiOeVmCivZQw5VKm5BpfXeywJFD+HRHawQFV7d4cUm13cLwHJd8RQIS0eU4JrBhpgK6bQ
+ 13LMYny+wfRcM8p4nAsZLnReRf4E4M8ZrbwyCA4H7PbRJYpajZmE9BXOTRpRvYwiUb+1hHbk2EkyVF
+ 3+vkKx/CYNaLyC81FGMEm7ATd439wOH2nSA8CDOJsDq2aqo5/LtR6JIkUsTv8rr/xVGXV5x0Vv4GDu
+ d9IGu46UQW16XNNZYZlQJMuSjrvO1P0kCGCAEXXiPDtR5PXjus+Bx1vP2k2NLD+Mvzf/b44Kapsd6z
+ bjisubX/Qj/t4kkH1Tc8mdZcR4h26QT8UN1TYbLJSv56+Fkxl5k04USETZKWtDNPYocuQoOOrC3Zd1
+ GtlN9xi8MBdyqlbs5g60BLHPYWIsLb9+o4rBUjCkADHONuITwKOFgD8F1yIYzikzJtu13LUhKumJWt
+ AYjF/PQUF4J2FktEnS2sMjn1I82L1fZ8syTy8CiM9DjBwn5GOtRF6cIpoWpA==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-Mailman-Approved-At: Thu, 20 Nov 2025 09:14:18 +0100
@@ -148,54 +148,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Interconnect voting on the UFS probe to ask for the largest
-bandwidth possible.
+Enable the Interconnect drivers for SM8650
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/ufs/ufs-qcom.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ configs/qcom_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
-index 9f0a6940d98..ee43958d5d8 100644
---- a/drivers/ufs/ufs-qcom.c
-+++ b/drivers/ufs/ufs-qcom.c
-@@ -16,6 +16,7 @@
- #include <generic-phy.h>
- #include <ufs.h>
- #include <asm/gpio.h>
-+#include <interconnect.h>
- 
- #include <linux/bitops.h>
- #include <linux/delay.h>
-@@ -26,6 +27,9 @@
- 
- #define ceil(freq, div) ((freq) % (div) == 0 ? ((freq) / (div)) : ((freq) / (div) + 1))
- 
-+#define UFS_DDR_MAX_BANDWIDTH	7643136
-+#define UFS_CPU_MAX_BANDWIDTH	819200
-+
- static void ufs_qcom_dev_ref_clk_ctrl(struct ufs_hba *hba, bool enable);
- 
- static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
-@@ -625,8 +629,17 @@ static struct ufs_hba_ops ufs_qcom_hba_ops = {
- static int ufs_qcom_probe(struct udevice *dev)
- {
- 	struct ufs_qcom_priv *priv = dev_get_priv(dev);
-+	struct icc_path *path;
- 	int ret;
- 
-+	path = of_icc_get(dev, "ufs-ddr");
-+	if (!IS_ERR(path))
-+		icc_set_bw(path, 0, UFS_DDR_MAX_BANDWIDTH);
-+
-+	path = of_icc_get(dev, "cpu-ufs");
-+	if (!IS_ERR(path))
-+		icc_set_bw(path, 0, UFS_CPU_MAX_BANDWIDTH);
-+
- 	/* get resets */
- 	ret = reset_get_by_name(dev, "rst", &priv->core_reset);
- 	if (ret) {
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index e686ea857b9..a56e1282821 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -87,6 +87,9 @@ CONFIG_SYS_I2C_GENI=y
+ CONFIG_I2C_MUX=y
+ CONFIG_DM_KEYBOARD=y
+ CONFIG_BUTTON_KEYBOARD=y
++CONFIG_INTERCONNECT=y
++CONFIG_INTERCONNECT_QCOM_RPMH=y
++CONFIG_INTERCONNECT_QCOM_SM8650=y
+ CONFIG_IOMMU=y
+ CONFIG_QCOM_HYP_SMMU=y
+ CONFIG_MISC=y
 
 -- 
 2.34.1
