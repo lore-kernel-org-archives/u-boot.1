@@ -4,162 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C20ECF8552
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 08:14:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B6B9CF8552
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 08:14:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE61583E0E;
-	Thu, 20 Nov 2025 09:14:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 3060D8405E;
+	Thu, 20 Nov 2025 09:14:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="sV8hjNAS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="juhPVbr9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5C3383FD3; Thu, 20 Nov 2025 06:06:56 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C44358405C; Thu, 20 Nov 2025 09:13:04 +0100 (CET)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FA1883E0E
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 06:06:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 852BD83D3C
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 09:13:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hRbPbK+jszYq/UkFibFedav5jutMru3orgFhm6RLVXrmuOWsV7sQ2WZk1QjOMLfCyISK+GeEBsbEsh8B24nGGlq1/NQONJ7Qt3OPTi62Qm+Xbxw0xVWcAMLAWuQ+V6G7YB4Le79Kk0+T0DZ4UoFX+qCu0H7Qe7XtUDDSsi/JfmtLp/3h/rX2oXxPhIRICYCo7scPgHnipp8sYkJAeykn06XZyWo91d7viiYkXlQQ43+8aITGt3aElPYMu8fb+Ngkz8vU3Mj+ennkO1G+OocVhupr7QHv3mKtgWtft37A+c4E/CgDGnxuaWfCDDxj5DUxtze/eI3LRfTC6zTpmUcYig==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7+qUnzm9mG1li/T9ZUqlVJ+r/BxJtBUCH2y+0/JDNoo=;
- b=DsmuA34Uzg7SZSU60bbsNmokVTP+HIa608uNh8jbFPfMTYRUpfLlu8EsnfK2HTvLBZjJ/LSrKMBILB+C1+N1colez6D3Uswg+RDFpkiESCi5Pp0zbJJUIz2pBDfPKJ6674tEtH22E+1LDZqf/GY5vIIhjY0/WZMwsykEZdyAKNfFLmtDcZSgks1KV8g1S7xq8FpBiEVOgBYue0ASffrfkA0WR6/WO0PjMrvAIHehmBypQzPwrMxlpYPKaMfIITK1QxbqGK/ElC4+rmAHmT+ge9LCoqx0X9H18kNM/4AuHodhVLraZaKxl4IdiyJLn/D3CLATPk3sV/oXCMNpGFjrNg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7+qUnzm9mG1li/T9ZUqlVJ+r/BxJtBUCH2y+0/JDNoo=;
- b=sV8hjNASG7TadFWb+/GAT6UgQ+jfY1PzDeSYed88PoOWi8Bhx1v0tnKQQXehsrgZ6uMWml3yHMN1QsXDMhYyT5OwIdsiNhKXDNJivsayWgFB7kPe8wFYLCnvBccMBWKDJg8OiJ0kzv7LPk6B1mNjvL/2Qa+OQy8kDZ754lCH/XnKtAyHHCNr8acfGl5FLPvHGCzKt430GgoBAzUoUIuCwYDxZTGlgD1G3H5Cz/oLcOxqyQQYk1OngA4wi3wnfMdMNUgZJjHKsn+1U3OpC8vwS/95XMuBKDPg1oXDbJmR4r/so+Re/wt1JWZd+SmDblxkgVCq3K4xFIFm12AuVFdDhg==
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
- by BY1PR03MB7804.namprd03.prod.outlook.com (2603:10b6:a03:5b3::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Thu, 20 Nov
- 2025 05:06:50 +0000
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::c861:d54b:e055:49dd]) by PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::c861:d54b:e055:49dd%7]) with mapi id 15.20.9343.009; Thu, 20 Nov 2025
- 05:06:49 +0000
-From: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, david regan
- <dregan@broadcom.com>, Anand Gore <anand.gore@broadcom.com>, William Zhang
- <william.zhang@broadcom.com>, "Hea, Kok Kiang" <kok.kiang.hea@altera.com>,
- "Ng, Boon Khai" <boon.khai.ng@altera.com>, "Yuslaimi, Alif Zakuan"
- <alif.zakuan.yuslaimi@altera.com>
-Subject: Re: [PATCH] nand: denali: enable SoC64 SPL NAND boot with proper
- Kconfig selection
-Thread-Topic: [PATCH] nand: denali: enable SoC64 SPL NAND boot with proper
- Kconfig selection
-Thread-Index: AQHcTa89PMBX4mf9jESLHao9nlTmGLT5bmoAgAGrGw0=
-Date: Thu, 20 Nov 2025 05:06:49 +0000
-Message-ID: <PH7PR03MB69422AD39045D28F827ABB8DF7D4A@PH7PR03MB6942.namprd03.prod.outlook.com>
-References: <20251104171902.15039-1-dinesh.maniyam@altera.com>
- <610e4623-90e3-40c4-be65-66c19bf6d7d5@altera.com>
-In-Reply-To: <610e4623-90e3-40c4-be65-66c19bf6d7d5@altera.com>
-Accept-Language: en-MW, en-US
-Content-Language: aa
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH7PR03MB6942:EE_|BY1PR03MB7804:EE_
-x-ms-office365-filtering-correlation-id: 7e3cd8a9-b697-435f-c392-08de27f29cc5
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|31052699007|1800799024|39142699007|366016|376014|8096899003|7053199007|38070700021;
-x-microsoft-antispam-message-info: =?us-ascii?Q?JgHdsQdpnKGW/UlVtXBS/AmR+4CPLN8fFl6QWXlsUvIe8X/EKTDByW1KX+Fh?=
- =?us-ascii?Q?uxF/2hvEk0D4v+WZiNjYnKBtFDQscw96XMXgwfD7ACuKSH8MLZHnve7JOlM/?=
- =?us-ascii?Q?fea8UE48j1FqJCVHPz3Wd0e7dqpchAy2dCNmL0aR+vnEdtOr3uYzDWZVfqnT?=
- =?us-ascii?Q?0P4YgiWM5zYCpvWkUzXBa0/OflgqjiA+veac5dyeZMNICQfzwn3rOEPswHfc?=
- =?us-ascii?Q?EiQtlZTAio/3GsPDV49sGdUOAYG6zLN4d2u2QKrD9bCeZbvn0M0r645BQ/pf?=
- =?us-ascii?Q?jVgrg6vLq+aMKSrNN2vU8HAReoyL7MlG4LjEALM6qqOIwEfN4oQk/1P9242t?=
- =?us-ascii?Q?RGSxaO5x5kHIs+OXZ6j49W3WABar8p5aFD1xKhR8K0ukFcoDI6RvJbIk01zD?=
- =?us-ascii?Q?osjhzFE3wJz9OPfukcCLNneYCK+EwIlRHhZE5tUb9PdPYgMXCRHP8J4mswys?=
- =?us-ascii?Q?fjuwsnr2byuw4mtetv/HYO4E1mkH3iGDsiWfv045vqJtT7Ih79L0iMtuPtsF?=
- =?us-ascii?Q?RC+RvyEVxoNB3VxhOJRayu91M8/5vwWZJL1hhYdaVD/4UeEfw6h4vD5YkJUO?=
- =?us-ascii?Q?LnNj7VDfJkVUYdBZaKmpHLB4QckqICmLxGBEGOalspND/2m1iio0vZboIxp2?=
- =?us-ascii?Q?R5JuQma1Gp9JZwucgidRYhtQ97xKjezaMNgl5SMZQGQ8pIew4lG9lpJLQS6C?=
- =?us-ascii?Q?soNia2KF3mhT0qLvDx3p0RnGsPHB0z4q8QTaipKMZdlqqwF0TbJZ8z9+XeLP?=
- =?us-ascii?Q?RzTqmcdVr+3qA5NfOc+VLO2g3rFBv9atBCq5vHCfkRi+kuFi3kpMTHnCJNZ8?=
- =?us-ascii?Q?57lTRahEa7Y1Oi4jYmQKTSjKzlRo1k04VoFagpo3W0WReSDVkyZUb2KD259v?=
- =?us-ascii?Q?rhGXRU8fNzr79ERpIWU/Sj7BUdTqL1OKZ0GeJhppfKy9/WTAHza1XktJ7Hme?=
- =?us-ascii?Q?ZJqb7Efx2LIivxpn+EDWwnSerbCj8VO5zomednyTdw6fGgPMhqnI3dgmeMxm?=
- =?us-ascii?Q?eqECzO9nnZXr9mwYDN8g106JbQQ4IFfjEd/TYeZ+EShovhODglXA7WmX5f8V?=
- =?us-ascii?Q?eyxldUvJq0jxt9N8S09Xfue+HXIVj7Cz9NBDhVdbRa7aVAxbpymE/sLH41s/?=
- =?us-ascii?Q?LQ0vJlO4m+9AvScYCj3IBGM1eF0WyKOEkHTl5kE8PL6GC9JLj69HVxCdzIZV?=
- =?us-ascii?Q?Imd45AIsJ6BZgqnfc796NRMvnCIbG9whomnHoUJdiu/9vN5wCDATo7Xr07T4?=
- =?us-ascii?Q?bQJWA/hqSmgi/V/L5e3Kd9rtmyuR+0y4swDyeE/5krCKmmUqN8HVARmQkEro?=
- =?us-ascii?Q?PbM7LSYWiZPXdCSKVxYhwvhfquMjpGdJBSxrU/xE4k9c3TXIv33jK0uaqAxB?=
- =?us-ascii?Q?Ro3A6UdaUUYx9bl8dhYxNT+UoRyM/DqCI+ivKtyMG0onxbkPWlaKFQVpJd5U?=
- =?us-ascii?Q?PMvFzD7yIJ5ASvrUFyxGDPemtByyPMAFh9CcFcBW73YjaXa/9B8EsX+5VzYo?=
- =?us-ascii?Q?iHEeih6+pQYAjaf3DsgnPcPBVj9W8EUsfAnE?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(31052699007)(1800799024)(39142699007)(366016)(376014)(8096899003)(7053199007)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?cxcoY0GIJtYwnsJ34YWdckA+NvrmVE3Ea74x8/6+fBpimkfz0EigZjXsISXk?=
- =?us-ascii?Q?/BwB0ptcFvPHRjqVpX8ksxokVeO8z1GrX6e4nGNrN3ZJqhzbB2pR2qSOy/gV?=
- =?us-ascii?Q?t2QksfSlu15AhHO8VEi2suidkZOkY3td0hlvcYkcgxQ2vW2sxziZGd8gXI/l?=
- =?us-ascii?Q?OYoR68/z33hE4yvFk/h75kpMVb6yihaDNi5EKqFCcT776ZdeTEHZNvPMRVbH?=
- =?us-ascii?Q?wF/+Ep0P2yWWSoudnMULPxhA4y8hI8OnQKWcJbU2vIrvdqx93alyCdNTgvM6?=
- =?us-ascii?Q?Edfdi4/muonmOn/WXulb5mYzC7FDmBobXbdMgVEapXi4WGZ4Xo0ebUJF6mTQ?=
- =?us-ascii?Q?rOjsaQN6Jzm7MWXRgG7c5Pd+TQk2Wr2yHQWEtZSbmpTverfB/HlbeomYG0nM?=
- =?us-ascii?Q?8n87BEf6U8EiwEqfULO6KZGx3COp9cA+FOlPjnq6JtkBlfm4daRbdHvM2w/r?=
- =?us-ascii?Q?h0qscz5ImP+d4J5YmZzDzdklbSC79Q89BlwA7hRm6lRGMDZDRckke0ELyZGK?=
- =?us-ascii?Q?mIfA9W5k6XksPEGe2sVx4szcZ2cFkZ4KH3Bm/0v5M1U5rkCxm6efCbv9gpyB?=
- =?us-ascii?Q?z0g7ccVOdruSire2fJ3AaYeH//vjCTHhy/3BrzBE3NsAfRQ895YxTY52xd0l?=
- =?us-ascii?Q?c8tbjl90QctHDJDvqlpwWMHKL3IYn1i4WyUNXJUcpbnw4qWw0lXCid7enA+/?=
- =?us-ascii?Q?OLUm8ayZC7g7XA+RXfey7f3cONE9wT0BWQQ8tfTtELF48cWdNN0JIXgqHctH?=
- =?us-ascii?Q?w8GmfranCTQ6FQmh0MJ4nV7ciHNTN8ZC76s91+9FXn4CecEJnuyDgJWsYEft?=
- =?us-ascii?Q?p+Tfln4ytvpNrSzCHtgF9OHkUWrZe4C6REjKb+uwUs5N3YV4eib24mMvc6Z4?=
- =?us-ascii?Q?bJ/LIdCvLHqY1EE+ubAt26HB0hyhfX7qAWzaCDls1+YR8BtqktFh9kevjO8G?=
- =?us-ascii?Q?zUrTG7rcgBYblmPmlqDEJ7X3ZiCoANB0aEF8D3G4qdKclAYAI/0rRlvm+/2r?=
- =?us-ascii?Q?nL9sT5GkrMuOACFn4cNuPkFWisk/PKIr8CXCjBDLwiP9lF3Y+rqOpisotiuw?=
- =?us-ascii?Q?SQSZ2R49ty/sdt8ayxjMWYWR34uRz2Il8ccQUWgAaAO8+hAxHEKXtqmw76jF?=
- =?us-ascii?Q?1X5kK2K2n4AYiLCBBFcFtOZ92XPtylwyArAFRf/N7AMpb5NgYRyxlwEFZHmJ?=
- =?us-ascii?Q?ZxK0ERrx4JXUIS8Rk0IDGed+lMAe04SnpAGYGY+6ZCe7hMGveK3vRYgBOsVH?=
- =?us-ascii?Q?zs81+I85wV6cR6ubv9obB42uI4ZPp5uee+/N6guLkvGQYxlY3tPxEicIXCzZ?=
- =?us-ascii?Q?q4WHs8eObqCw6gMeEZkB0xvfgnxzKAaAb8Xz8pY4j6D1L041Yr2eaVeq4oHN?=
- =?us-ascii?Q?Pstr+vkAeYxijI8864vgrke93oeHRV97SHk8a6lXnIsYxGj2AtPQ8UkB7Nfy?=
- =?us-ascii?Q?vFlgX7+jRc+wFqT7W1MJAQpjz906WGnRbruWd4Uwbdqytj+WHzhMq3Pd6zPz?=
- =?us-ascii?Q?sounnttomNIIPcbCHo50qlOCNXDzjS+oa2siqIQK+w8Ktx31BITnIDRyIL8J?=
- =?us-ascii?Q?NIZaN2Gf2PyZMkfQiCfmjwgNf0psj8l9LEDhzy24?=
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-37ba5af5951so5907621fa.1
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 00:13:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1763626380; x=1764231180; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Tl3Bdm/WYg1pDMU3O52rYtoa5slciCVqb+5+I8/dguY=;
+ b=juhPVbr9EgiTzQWv8d0irojp5/Q/MVj/wCuuojMIYrSSgris7azKWf6S0A0oNXzJWZ
+ 9XfgXO3BLLAiqToCj+J6ezV2BEyMY1fYbny1ErKdW8wCU8GDwV0yDEjOQ5eMe0lrhcG0
+ A9mtSXzgTHgIwsN1ycpb2YarQSlRoCgYKF2XmKDicigeVY6gxBU+twM1ia141LSE9VlF
+ JmQVOGSyeJvmPbquqq4TJrPMlYVkzRjV7F44ga52zdXsDY2onk14BttZnNIQ4vk/g40m
+ Krw4yRE9wAJKx4ESJjjeXGlNySUjkYiqEiP8SeRIgsvgfoljVDKudGUGM1ptIHvlgIr0
+ 1p/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763626380; x=1764231180;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Tl3Bdm/WYg1pDMU3O52rYtoa5slciCVqb+5+I8/dguY=;
+ b=eab9/U7weUzI3wkmquBCKMYf0HReDTinTy5UGLiGFFHnSmhR92s3YBozOxl6okPGyY
+ UmX6cEoxVV5GyCP4OJPaRON2SLUSDJgDKZQvZGxCIZ2KKm8qE4iYIvh/F+qmO5be9Khp
+ izbGKqLrMsa1BWGGkL9Ejk/KmcfGG361rA+IejC0NEEStcbVfnlDMt3N2PuXtRrmNWO2
+ M/qMeqj3yaEp1wi1vqK5ktiNR/9IVlvoQBCRLMEwye5yN0c2fh7dBbSdF/4p02OoJPtd
+ w2+iDOV+rdoRHta4/DAmUDz+GV7rOHhMheYmeZUvdT8jr1dBt6Qlkp2lMhJnrICJtPxv
+ LaZQ==
+X-Gm-Message-State: AOJu0Yw1wPH4T67TvqglMFrItURSJDU+4qjoKCYbbteDFgcZajBQQ0we
+ kE8A2YaIbgeV02BxaGR/mV0Mp7BY2uouMUOLCayTqjCh810YhCI1erYRZ81sHDhuTSw=
+X-Gm-Gg: ASbGnctXGyxA2sLGmTfq2WU3wJ48AgS+eUQDuX9tVbzCe8FqlXhIpAJHQs3AMrjXPZu
+ imNDkIHoR17BK5fMcrVCu0jiX7vv8Nxcn4fX+2yp7JAvnJYkAv3fFRPO6yb/GW5T0duvAz8ZN8l
+ 0NKevCAYimjgNyfkOarL3KBeTb/TEVjyDeoyndPRKmA9f3o7ADmNvh/yzsom80ZOJest6bUDbMg
+ sKlDcBguhuTH41T8N0WC9vlxUeQiAB24bqUDNiYmbBxhBt9ywR1aFDMkptU5uOGPMBDLIqw3SIM
+ upFHRujCa/elWT7DrUfk3cxLD2WXpcF7NIKd0+UoZmAi2hfr3kirB5CpAPP9F3RJZAXh1hPwYp2
+ IukI99Zck6UjFwuiU327eylFRtGQMckBb7U+AG1xWSFd135fLx5u0ydUuFHoNB6E/Q8r7FoB77w
+ PhvLRMrX2qLCMMSu979ejTGvlfv0lpDmc=
+X-Google-Smtp-Source: AGHT+IEs+e7Ti+vjrCxJbky9Uz66K/hremp/3RrXxMS5wPxXGyXqeYzelv8cg5q6v2WiyqrRWwBRbQ==
+X-Received: by 2002:a05:6512:3a86:b0:595:7cf5:f7cf with SMTP id
+ 2adb3069b0e04-5969e3169e7mr650894e87.38.1763626380379; 
+ Thu, 20 Nov 2025 00:13:00 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-42cb7f363c0sm3844398f8f.18.2025.11.20.00.12.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Nov 2025 00:12:59 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v5 0/7] Implement the Generic System Interconnect Subsystem
+ for U-Boot
+Date: Thu, 20 Nov 2025 09:12:51 +0100
+Message-Id: <20251120-topic-interconnect-next-v5-0-e8a82720da5d@linaro.org>
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7e3cd8a9-b697-435f-c392-08de27f29cc5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Nov 2025 05:06:49.8623 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: lma8SEq74xXY+JfMTxxATWBw9ENBqTePBjAINFitpykvSLi5JRggjRUvdZMhKCZpMw3IeyCzAsqAPFErT2msfcrF/P+RXHIse/paK1RsGBk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR03MB7804
-X-Mailman-Approved-At: Thu, 20 Nov 2025 09:14:12 +0100
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIPNHmkC/4XPz4oCMQwG8FeRnrdL0j9jx5PvIR46bdTA0kqnD
+ IrMu2/Hy7qIevwC+X3JTYxUmEaxWd1EoYlHzqkF+7US4eTTkSTHloUCZRFAy5rPHCSnSiXklCh
+ UmehSpaG4tp5CAAyibZ8LHfhyl3f7lk881lyu96IJl+lnc0IJsreW6ACdGzra/nDyJX/nchQLO
+ qlHyL2GVIOC6ag3MWrlniH9ACG8hnSDBu3MGhujvXuCzB+E+OYis7wWAGI3YO9j/AfN8/wLGJt
+ D2poBAAA=
+X-Change-ID: 20251003-topic-interconnect-next-4ed75aecc01c
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, Anurag Dutta <a-dutta@ti.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Mario Six <mario.six@gdsys.cc>, Christian Marangi <ansuelsmth@gmail.com>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, Peng Fan <peng.fan@nxp.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>, 
+ Alexander Graf <agraf@csgraf.de>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Greg Malysa <malysagreg@gmail.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, Sam Day <me@samcday.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Paul Sajna <sajattack@postmarketos.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6477;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=PYHvonWtSNqIaiU2cPDsNOqTJoz+GMUbxnvsluEr4Lk=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBpHs2H2RVI6t3Q1LYQRTy+ccQBGCvMs9LkTg8V3Nhr
+ 3rw085aJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaR7NhwAKCRB33NvayMhJ0RbaEA
+ CvUal+4o8I0fjr9EjCt4kkeiWP/+5NGX+kGPRnAOFTJs+R0J7otYDScnCyIbpJM9pA+s+Ju6eeMdIK
+ r9ZptjT0rjuNavpI4Q6w8ABPGbiwL7P/r8ev6JtezifWohU1QXJmIxCowvOSkFO3SR3ggENoQfv5+J
+ eh0rvofmAil4RRRf7VPe4WjgM88Kb1XLZsa064nTMp8iwfJbWEzjexaFMFduJ3AAFhTOFy8cIn2VkO
+ ENM2Mi68uBxVsP+jHNkrOa6Qi2q7A9EF0O/3JoGNZ2oW8nt11aezxt9zJn2JfN6aGh/MEGA3DoKqHx
+ kPg1PLFMh2JehGg+lILCi4T4fV3fAzBVeWbGRYVw/k02wsIx5Jw4UNoBWT1iUCbC7bIP5bqjEJnxaJ
+ 1RTlvAtio+VNpvFu68WWH91b2btpF6KMRM+BUgkBQKnnm8JwePXUdHFhUcRVUIx9zZcLhXcJESrDsj
+ RpvF7FYIWEuVteVKHNsLJoeFncwPfI3RmxMuz/VUYO0qf0UJfSWXwbMawlesQ+4PzWf++HqpanMXTa
+ 1+qBFK9bZgaQ53+0tIWjaLZvtxOxaWayOLxT6FxhVDOYe/ipylIDr+E7Eunb1RJ3hCLXANHrPgGUe7
+ 8fpG1mmMBPENJiPBoQ6JM82HjVtUzDUg/BWpNEPltecaTizNjwhARESUnkUw==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+X-Mailman-Approved-At: Thu, 20 Nov 2025 09:14:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,242 +153,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Let's introduce the Generic System Interconnect subsystem based on
+the counterpart Linux framework which is used to vote for bandwidth
+across multiple SoC busses.
 
-Hi Tien Fong,
-________________________________
-From: Chee, Tien Fong <tien.fong.chee@altera.com>
-Sent: Wednesday, 19 November 2025 11:30 am
-To: Maniyam, Dinesh <dinesh.maniyam@altera.com>; u-boot@lists.denx.de <u-bo=
-ot@lists.denx.de>
-Cc: Marek Vasut <marex@denx.de>; Simon Goldschmidt <simon.k.r.goldschmidt@g=
-mail.com>; Dario Binacchi <dario.binacchi@amarulasolutions.com>; Michael Tr=
-imarchi <michael@amarulasolutions.com>; Tom Rini <trini@konsulko.com>; davi=
-d regan <dregan@broadcom.com>; Anand Gore <anand.gore@broadcom.com>; Willia=
-m Zhang <william.zhang@broadcom.com>; Chee, Tien Fong <tien.fong.chee@alter=
-a.com>; Hea, Kok Kiang <kok.kiang.hea@altera.com>; Ng, Boon Khai <boon.khai=
-.ng@altera.com>; Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>
-Subject: Re: [PATCH] nand: denali: enable SoC64 SPL NAND boot with proper K=
-config selection
+Documentation for the Linux Generic System Interconnect Subsystem can
+be found at [1].
 
+Each bus endpoints are materialised as "nodes" which are linked together,
+and the DT will specify a pair of nodes to enable and set a bandwidth
+on the route between those endpoints.
 
-Hi Dinesh,
+The hardware resources that provide those nodes and provides the way
+to vote for the bandwidth are called "providers".
 
-On 5/11/2025 1:19 am, dinesh.maniyam@altera.com<mailto:dinesh.maniyam@alter=
-a.com> wrote:
+The Interconnect uclass code is heavily based on the Linux one, with
+some small differences:
+- nodes are allocated as udevices instead of Linux idr_alloc()
+- tag management is minimal, only normal xlate is supported
+- getting nodes states at probe is not implemented
+- providers are probed on demand while the nodes links are traversed
+- nodes are populated on bind
+- id management is simplified, static IDs and dynamics IDs can be used
+- identical consume API as Linux, only implementation differs
 
-From: Dinesh Maniyam <dinesh.maniyam@altera.com><mailto:dinesh.maniyam@alte=
-ra.com>
+DM Testsuite is provided, testing all the API and nodes lifetime.
 
-Add SoC64-specific NAND SPL load support in denali_spl.c and update the
-related Kconfig dependencies.
+A first implementation for Qualcomm SoCs using the RPMh subsystem
+is added, bandwidth vote is required to have full bandwidth for
+storage devices and enabling some subsystem like Display to access
+the DDR memory.
 
-This patch introduces new helper functions to enable NAND boot support
-for SoCFPGA SoC64 devices using the Denali NAND controller during the
-SPL stage:
+[1] https://docs.kernel.org/driver-api/interconnect.html
 
-- nand_get_mtd(): safely retrieves the active NAND device instance.
-- nand_spl_load_image(): supports image loading with page alignment and
-  bad block skipping using nand_read_skip_bad().
-- Includes nand_util.c for required NAND utility helpers.
-- Wrapped under IS_ENABLED(CONFIG_TARGET_SOCFPGA_SOC64) to limit
-  inclusion to SoC64 targets.
+Qcom implementation depends on:
+- https://lore.kernel.org/all/20250711143851.1490617-2-aswin.murugan@oss.qualcomm.com/
 
-In addition, the SPL_NAND_DENALI Kconfig entry has been updated to:
-- Select required NAND SPL components (BASE, DRIVERS, IDENT, INIT, ECC).
-- Exclude NAND_DENALI_SPARE_AREA_SKIP_BYTES from SoC64 builds, as SoC64
-  NAND handling no longer uses this configuration.
-
-These changes collectively enable functional NAND SPL image loading
-support for SoCFPGA SoC64 devices with Denali NAND.
-
-Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com><mailto:dinesh.man=
-iyam@altera.com>
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/mtd/nand/raw/Kconfig      |  7 ++-
- drivers/mtd/nand/raw/denali_spl.c | 73 +++++++++++++++++++++++++++++++
- 2 files changed, 79 insertions(+), 1 deletion(-)
+Changes in v5:
+- Fixed memory allocation issues fixing sandbox tests on CI
+  - req allocations were not zero-ed, leading to funky avg values
+  - xlate nodes mapping tables were not freed on drivers unbind, leading to memory leak
+- Link to v4: https://patch.msgid.link/20251118-topic-interconnect-next-v4-0-9c00d6b19add@linaro.org
 
-diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index 754b99bf3eb..5e567ca4993 100644
---- a/drivers/mtd/nand/raw/Kconfig
-+++ b/drivers/mtd/nand/raw/Kconfig
-@@ -781,6 +781,11 @@ config SPL_NAND_CADENCE
+Changes in v4:
+- Rebased on upstream next to prepare for a PR
+- Link to v3: https://lore.kernel.org/r/20251010-topic-interconnect-next-v3-0-b384713283a8@linaro.org
 
- config SPL_NAND_DENALI
-        bool "Support Denali NAND controller for SPL"
-+       select SPL_NAND_BASE
-+       select SPL_NAND_DRIVERS
-+       select SPL_NAND_IDENT
-+       select SPL_NAND_INIT
-+       select SPL_NAND_ECC
+Changes in v3:
+- Add doc page, hevily based on the linux one
+- Documented all the structs and functions
+- Removed id field from icc_node, now using the device driver_data
+- icc_node id is not an ulong, can accept a pointer for dynamic id
+- Removed all functions call with icc_provider, now using the struct device only
+- Removed the icc_node provider entry, now only using dev->parent
+- Removed the interconnect pre_remove and pre_unbind, they are not needed
+- Removed more unused struct entries
+- Fixed the icc_path alloc, added the called dev to print errors with dev_err()
+- Removed IDs in sandbox interconnect, uses the "dynamic id" using the node pointers as ID
+- Now of_icc_get/_index will return NULL is prop is missing, like for Linux
+- Cleaned all the debug() calls, added new ones to track the bw agregations
+- Renamed node_find() to icc_node_find() to avoid name collision
+- Moved icc_node busy check to icc_node_busy()
+- Now icc_node_create passes the ID via driver_data
+- Added more bw test after put() calls, moved enable() after disable()
+- Used "Generic System Interconnect Subsystem" when possible
+- Dropped the icc_node init_avg/init_peak which is a Linux thing for sync_state
+- Dropped icc_node_add
+- Link to v2: https://lore.kernel.org/r/20251008-topic-interconnect-next-v2-0-c46e94dd328e@linaro.org
 
+Changes in v2:
+- Simplified nodes linking, looking for nodes at traversal instead of complexe debice reparent
+- Populates nodes at bind time, only probinf nodes and providers when a path if found
+- With proper refcounting the node lifetime is safe
+- DM test is added, testing with a small graph that calculations are good
+- Fixed plenty of typo and errors, and dropped useless code
+- Dropped RFC since DM test is available, and code works as expected
+- Link to v1: https://lore.kernel.org/r/20251003-topic-interconnect-next-v1-0-955eef068b6e@linaro.org
 
-Are these strictly required for all Denali users?
-If these are only needed for SoC64, it would be better to move them into:
+---
+Neil Armstrong (7):
+      Introduce the Generic System Interconnect Subsystem
+      interconnect: add DM test suite
+      MAINTAINERS: add myself as Maintainer of the Generic System Interconnect Subsystem
+      interconnect: add support for the Qualcomm RPMh helpers
+      interconnect: add support for the SM8650 SoC
+      ufs: qcom: vote for interconnect bandwidth on probe
+      qcom_defconfig: enable interconnect for SM8650
 
-arch/arm/Kconfig under SOCFPGA / SOC64, or the SoC64 defconfig
+ MAINTAINERS                                      |   11 +
+ arch/sandbox/dts/test.dts                        |   36 +
+ arch/sandbox/include/asm/interconnect.h          |   19 +
+ configs/qcom_defconfig                           |    3 +
+ configs/sandbox64_defconfig                      |    2 +
+ configs/sandbox_defconfig                        |    2 +
+ doc/api/index.rst                                |    1 +
+ doc/api/interconnect.rst                         |  117 ++
+ drivers/Kconfig                                  |    2 +
+ drivers/Makefile                                 |    1 +
+ drivers/interconnect/Kconfig                     |   22 +
+ drivers/interconnect/Makefile                    |    8 +
+ drivers/interconnect/interconnect-uclass.c       |  545 +++++++
+ drivers/interconnect/qcom/Kconfig                |   12 +
+ drivers/interconnect/qcom/Makefile               |    7 +
+ drivers/interconnect/qcom/bcm-voter.c            |  340 +++++
+ drivers/interconnect/qcom/bcm-voter.h            |   19 +
+ drivers/interconnect/qcom/icc-rpmh.c             |  224 +++
+ drivers/interconnect/qcom/icc-rpmh.h             |  130 ++
+ drivers/interconnect/qcom/sm8650.c               | 1665 ++++++++++++++++++++++
+ drivers/interconnect/qcom/sm8650.h               |  144 ++
+ drivers/interconnect/sandbox-interconnect-test.c |   89 ++
+ drivers/interconnect/sandbox-interconnect.c      |  303 ++++
+ drivers/ufs/ufs-qcom.c                           |   13 +
+ include/dm/uclass-id.h                           |    2 +
+ include/interconnect-uclass.h                    |  136 ++
+ include/interconnect.h                           |  155 ++
+ test/dm/Makefile                                 |    1 +
+ test/dm/interconnect.c                           |  195 +++
+ 29 files changed, 4204 insertions(+)
+---
+base-commit: eb7a61d2cd7b24265c884dadf05ba20778ba99cd
+change-id: 20251003-topic-interconnect-next-4ed75aecc01c
 
-Will move into SoC64 defconfig.
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
 
-
-
-        depends on SPL_NAND_SUPPORT
-        help
-          This is a small implementation of the Denali NAND controller
-@@ -788,7 +793,7 @@ config SPL_NAND_DENALI
-
- config NAND_DENALI_SPARE_AREA_SKIP_BYTES
-        int "Number of bytes skipped in OOB area"
--       depends on SPL_NAND_DENALI
-+       depends on SPL_NAND_DENALI && !TARGET_SOCFPGA_SOC64
-
-
-This should not be added here in the common Kconfig.
-If SoC64 does not require this option, simply disable it in:
-
-SoC64 defconfig, or arch/arm/Kconfig under SOCFPGA
-
-
-The common Denali code should not embed SoCFPGA-specific constraints.
-
-Noted. Will handle it in SoC64 defconfig.
-
-
-        range 0 63
-        help
-          This option specifies the number of bytes to skip from the beginn=
-ing
-diff --git a/drivers/mtd/nand/raw/denali_spl.c b/drivers/mtd/nand/raw/denal=
-i_spl.c
-index b1e2c9d8161..78cdab51a5a 100644
---- a/drivers/mtd/nand/raw/denali_spl.c
-+++ b/drivers/mtd/nand/raw/denali_spl.c
-@@ -5,13 +5,84 @@
-  */
-
- #include <config.h>
-+#include <hang.h>
- #include <log.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <nand.h>
-+#include <system-constants.h>
- #include <asm/io.h>
- #include <asm/unaligned.h>
- #include <linux/delay.h>
- #include <linux/mtd/rawnand.h>
- #include "denali.h"
-
-+/* Only compile this code for SoCFPGA SoC64 targets */
-+#if IS_ENABLED(CONFIG_TARGET_SOCFPGA_SOC64)
-
-
-Cannot add the platform specific change here in the common driver.
-
-The Denali SPL driver is shared across platforms, so we should not add SoCF=
-PGA-specific logic here.
-
-The function:
-
-int nand_spl_load_image(...)
-
-
-should be moved to platform-specific code, e.g.:
-
-arch/arm/mach-socfpga/misc_soc64.c
-
-
-Similarly, helper functions such as:
-
-nand_get_mtd()
-nand_spl_load_image()
-#include "nand_util.c"
-
-Will move to platform specific code misc_soc64.c
-
-
-+
-+struct mtd_info *nand_get_mtd(void)
-+{
-+       struct mtd_info *mtd;
-+
-+       mtd =3D get_nand_dev_by_index(nand_curr_device);
-+       if (!mtd)
-+               hang();
-+
-+       return mtd;
-+}
-+
-+int nand_spl_load_image(u32 offset, u32 len, void *dst)
-+{
-+       size_t count =3D len, actual =3D 0, page_align_overhead =3D 0;
-+       u32 page_align_offset =3D 0;
-+       u8 *page_buffer;
-+       int err =3D 0;
-+       struct mtd_info *mtd;
-+
-+       if (!len || !dst)
-+               return -EINVAL;
-+
-+       mtd =3D nand_get_mtd();
-+
-+       if ((offset & (mtd->writesize - 1)) !=3D 0) {
-+               page_buffer =3D malloc_cache_aligned(mtd->writesize);
-+               if (!page_buffer) {
-+                       debug("Error: allocating buffer\n");
-+                       return -ENOMEM;
-+               }
-+
-+               page_align_overhead =3D offset % mtd->writesize;
-+               page_align_offset =3D (offset / mtd->writesize) * mtd->writ=
-esize;
-+               count =3D mtd->writesize;
-+
-+               err =3D nand_read_skip_bad(mtd, page_align_offset, &count,
-+                                        &actual, mtd->size, page_buffer);
-+
-+               if (err)
-+                       return err;
-+
-+               count -=3D page_align_overhead;
-+               count =3D min((size_t)len, count);
-+               memcpy(dst, page_buffer + page_align_overhead, count);
-+               free(page_buffer);
-+
-+               len -=3D count;
-+               if (!len)
-+                       return err;
-+
-+               offset +=3D count;
-+               dst +=3D count;
-+               count =3D len;
-+       }
-+
-+       return nand_read_skip_bad(mtd, offset, &count, &actual, mtd->size, =
-dst);
-+}
-+
-+void nand_deselect(void) {}
-+#include "nand_util.c"
-+
-+#else
-+
- #define DENALI_MAP01           (1 << 26)       /* read/write pages in PIO =
-*/
- #define DENALI_MAP10           (2 << 26)       /* high-level control plane=
- */
-
-@@ -240,3 +311,5 @@ unsigned int nand_page_size(void)
- }
-
- void nand_deselect(void) {}
-+#endif
-+
-
-Thanks.
-
-Tien Fong
-
-Thanks.
-
-Dinesh
