@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C954CF256D
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 04:15:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB5A1CF256D
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 04:16:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A748F84021;
-	Thu, 20 Nov 2025 05:15:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7126883E0E;
+	Thu, 20 Nov 2025 05:16:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ZhVb13Ce";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="brNmjB9J";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NkYqC1Y1";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="J76K/jJD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4346584034; Thu, 20 Nov 2025 05:15:33 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 0216C83FD9; Thu, 20 Nov 2025 05:16:24 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7249083952
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 05:15:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C9F383952
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 05:16:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dBlPv13k1z9tKJ;
- Thu, 20 Nov 2025 05:15:31 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dBlQs4WF3z9tN2;
+ Thu, 20 Nov 2025 05:16:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763612131;
+ s=mail20150812; t=1763612181;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=ygIhrMFqk28090N2ak2JrvSJjWxjxZpZ5DGWc5ibbdA=;
- b=ZhVb13CecQMiP6W4zDL7gBo7WCc4EYCyiHsB5QJC46M4QfjGXJqv/JRvotBDGW6N0Qrjfd
- Olcei8VS5ziWB52oUW/LGtiUMGXxpKaWw8lah9ijMXHGp1u+ZyWK5yA0jcIZcNGxhqmSQl
- uQb62tdIBkXJKHl132cp2hFCaFqaHv9dTXjBZKLbcD/rv+7Ze9afWVzgbREpLkK5DMyP2J
- 35WuWTc2NSYhBPMho08HqPcEm5giGtoV+lnbdwZ7TRRXB66vUkwujA0lkGg+zw1Yx2gebM
- KvKc5m/d7+YrqRwXIIPFyJb4mvxsZGDzjful0gIDJWZjJZb5CrauBYcmDEcAyQ==
+ bh=yk4VFVeI0Oni/iNMuvSf7YdzShx4a2lNpiW2PuU8KBM=;
+ b=NkYqC1Y1Wu8ba9PtIJeDD8XNMMh+DZA4vHntj1XRojtiwkgabenamFxTv9L3vvLPLpl8hD
+ MTJDxyxkGNxTMF/1eqnVixmn0K3GX2rymbEi4fYtx5IkakBiszfYMvzyz9gY/xPYZGvai2
+ Uf+EbkxIH3izYf/eZkjZBJ0Zlh2oouFuJxNAhoCAsK/ISHKujGtSe4VAQ+EQuDQ9tVHyP5
+ Fc0idwwMRvj9CmpREpYejPrnL0ceWgMLD3GMUPQpqaBVg3wb8lOPH77aRJDvGPoNMgUueF
+ QzesxdS/ATRBE1gODPOz3nFDT4uqEG0r5f9pUhtPd54WhcW/ubj7HXaDe5R0OA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763612129;
+ s=mail20150812; t=1763612179;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=ygIhrMFqk28090N2ak2JrvSJjWxjxZpZ5DGWc5ibbdA=;
- b=brNmjB9JAdA1dXnsnqjVfGJde5BDY2dX969Ct5/DxXa6F/qFIcKQsK/AsidvxPuVre5Hsd
- dRG+scZCS0f2c9wpE2SXwujNeFosizbAwr9U1ZXgdiBKoARtLtttRR1Hm3o41mDIjhCKAx
- IoyeHDZjQmFPm3SfzDPOOcKIjnYyHzeMUvQj5agc1aitoRscig10YJAeyElrUvrrRgCwxv
- QczcffgsT9PzVcae2KwtlOtFXyGaNNgX9OfqccG4RFDq3RnowZT6nxV3qJc32bR8RHZNXa
- +ZhXfaCcWMD9CMlfOo53/BCkA6wzc/xcI0uY7tM+4lpLFfExK7mO2H7RrJ5LIw==
+ bh=yk4VFVeI0Oni/iNMuvSf7YdzShx4a2lNpiW2PuU8KBM=;
+ b=J76K/jJDhUkYG/bPmlwHyVEro738vAJhnMeCCDaQuEEmclTZFlKk4LBKJoh0/AO1LOSHy2
+ FMIGSBBvyZUdRYIsW2Rl3uDjWJjjTI06989OBUGh1eKw52Soig8QLK7QpeOXEGoGvTIk46
+ j7LDj/vqlo/dIC0C3svQZLLt/gkrR04VZW0XY1g5KidrWdaI1hA/peZ06ev4ZLph1mqfbJ
+ vCFYB62DO59OxasB8/x2qLhI738ZhQ1VVgddC7owHL7crJdr8BffwCZ+OCCxBnwFvoqmFh
+ 9saZGLMcTgPWOM/6lCYeLHfL7m6Lp5sIO+RwWyaHVXmLECd0XSHG6fVsz0dEeg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
- CONFIG_OF_PLATDATA=y
-Date: Thu, 20 Nov 2025 05:15:08 +0100
-Message-ID: <20251120041526.817288-1-marek.vasut+renesas@mailbox.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+Subject: [PATCH] boot: Check noffset before use
+Date: Thu, 20 Nov 2025 05:15:30 +0100
+Message-ID: <20251120041613.817311-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: bc7cwyui9ezeq1thqfbct376qedctqsh
-X-MBO-RS-ID: cb7c320599fcfd43825
+X-MBO-RS-META: w8g7fghz3h6dwh3tokcd6fjxy86jo73s
+X-MBO-RS-ID: 5b2f3244f36097c8326
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,48 +85,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If CONFIG_OF_PLATDATA=y , then the udevice has no valid OF node associated
-with it and ofnode_valid(node) evaluates to 0. The dev_read_u32_default()
-call ultimately reaches ofnode_read_u32_index() which invokes fdt_getprop()
-and passes result of ofnode_to_offset(node) as an offset parameter into it.
+If noffset is negative, do not pass it to fit_get_name() and then further to
+libfdt, this will crash sandbox with SIGSEGV because libfdt can not handle
+negative node offsets without full tree check, which U-Boot inhibits to keep
+size lower.
 
-The ofnode_to_offset(node) returns -1 for invalid node, which leads to an
-fdt_getprop(..., -1, ...) invocation, which will crash sandbox with SIGSEGV
-because libfdt can not handle negative node offsets without full tree check,
-which U-Boot inhibits to keep size lower.
-
-Since i2c_child_post_bind() already calls dev_has_ofnode(dev), reuse the
-same call and assign i2c->speed_hz = I2C_SPEED_STANDARD_RATE in case the
-device has no valid node associated with it, and do not call any of the
-dev_read_*() functions for devices without valid nodes.
+Instead, always check noffset before use, and if the return value indicates
+failure, exit right away.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Heiko Schocher <hs@nabladev.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/i2c/i2c-uclass.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ boot/image-fit.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
-index 380a9f8f3ad..d0e9dad7202 100644
---- a/drivers/i2c/i2c-uclass.c
-+++ b/drivers/i2c/i2c-uclass.c
-@@ -749,8 +749,11 @@ static int i2c_post_probe(struct udevice *dev)
- #if CONFIG_IS_ENABLED(OF_REAL)
- 	struct dm_i2c_bus *i2c = dev_get_uclass_priv(dev);
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index cccaa48f683..35595f15ac3 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2137,7 +2137,6 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
  
--	i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
--					     I2C_SPEED_STANDARD_RATE);
-+	if (!dev_has_ofnode(dev))
-+		i2c->speed_hz = I2C_SPEED_STANDARD_RATE;
-+	else
-+		i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
-+						     I2C_SPEED_STANDARD_RATE);
+ 		noffset = fit_conf_get_prop_node(fit, cfg_noffset, prop_name,
+ 						 image_ph_phase(ph_type));
+-		fit_uname = fit_get_name(fit, noffset, NULL);
+ 	}
+ 	if (noffset < 0) {
+ 		printf("Could not find subimage node type '%s'\n", prop_name);
+@@ -2145,6 +2144,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 		return -ENOENT;
+ 	}
  
- 	return dm_i2c_set_bus_speed(dev, i2c->speed_hz);
- #else
++	if (!fit_uname)
++		fit_uname = fit_get_name(fit, noffset, NULL);
++
+ 	printf("   Trying '%s' %s subimage\n", fit_uname, prop_name);
+ 
+ 	ret = fit_image_select(fit, noffset, images->verify);
 -- 
 2.51.0
 
