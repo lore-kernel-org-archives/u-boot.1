@@ -4,53 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D7DDCF64BC
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 05:55:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79A5CCF64BB
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 06:09:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 614C183E40;
-	Thu, 20 Nov 2025 06:55:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nathaniel.land
+	by phobos.denx.de (Postfix) with ESMTP id BF4C583FD3;
+	Thu, 20 Nov 2025 07:09:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nathaniel.land header.i=@nathaniel.land header.b="MUyR56TO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P5g1vAKy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 336C383FD3; Thu, 20 Nov 2025 06:55:02 +0100 (CET)
-Received: from goldencat.email (goldencat.email [45.45.221.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8B4B583FF8; Thu, 20 Nov 2025 07:09:11 +0100 (CET)
+Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
+ [IPv6:2607:f8b0:4864:20::b12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5B5583E0E
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 06:54:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nathaniel.land
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=i@nathaniel.land
+ by phobos.denx.de (Postfix) with ESMTPS id 452B883E0E
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 07:09:09 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-63fc6115d65so400528d50.0
+ for <u-boot@lists.denx.de>; Wed, 19 Nov 2025 22:09:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1763618948; x=1764223748; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=okps1//HAGZ03XUx/6vOCzkUfGBjwbVRgb0RF3eKwHY=;
+ b=P5g1vAKyQ9/CfhpPdt2Fl94UdjD2LFqEfcarkyua8Bl8ZY4KB2UUW+4vnF6FRlzktC
+ TUdEH5YiSuFYpWmtqNIOP0e7cVjj18pbWqVJepT20vzBtzvZMAMfjG11BU2NrpQU93OR
+ 4hEaOKGvqjD1+efI+ls16pcu0ilC1EDsWL+dNefXdC7HvoqCDgnssdopw+Mq3yNdHi3a
+ aRYv80KXALr7wmk/jQoQtEtdTUomF5xI2czpFKqdX3aE0K4bkPoX2DIC+6BHGZ1SsyWK
+ ODICsNEAjS8d2uPIKq891SjR4RnrmEv+DKAUlf/mS/hsK45RCUwbh5YakhmUIVZhzCnM
+ rdvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763618948; x=1764223748;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=okps1//HAGZ03XUx/6vOCzkUfGBjwbVRgb0RF3eKwHY=;
+ b=P6TqGTbkiP4KSgUZm8OGOhXG2h+IDc1PUicpOYqJME1P+JdiZkf29pduOvnPL5VXQ7
+ MqEtADqaX7je/RoLY+ydQluYU4LJ8+Qr3gn7gGVQ5Uk6aNUIPKjItowAGuu6ALmrbLET
+ iq5LS+I/wArcEy+q/FH3bZas1RTciuWyJB5VIUA4wcRJamv7u+quIrLwVV82sRWra733
+ G9xwf4nH/qCYBDSSItZ+KLpvXieooUrr2c486s9KpTIFLEOQSXkHW1LuG8jnMNiGrZUI
+ KyOp7d6nX3V4CKuzXI921ArxLYRido7Rr/3UqqVYW/FagQjHF/hBJeH7vX4gTF6B6kmz
+ kAKg==
+X-Gm-Message-State: AOJu0YySQP1Cucnlqy09bmIpTx0Kax99PR5Ru4mHST9TWCh8uTNHv/gH
+ r354FS10+5dkTWnnOkijIgHVviD2AyW8FWzTDvsSY+2YZhgCIfNELDl6u+d8a+G3tl+M2QIEZNA
+ bRK4B2xvlx2AQQRFoSrAA7k/Y8QvxeDU++ZUiUq/BLnUNu0t7V2ymnI/2rA==
+X-Gm-Gg: ASbGncuQzgKojqzt/uHr3XEHccIg4eRqEBKJwWI+HW/U+JpaMdOVOjLaHagAA1qFTfs
+ iBmW9Do7GepXRtuH8zK8rx7Mm5Xw4JfCaW7XRajCDXJC+iCMv97VXBgVIl7iMzDSjQXXp0v8Htc
+ a4FTOkWsOuXwQBJYUwUV1BDKc1dU45hmv1UXQXePi8QXtZXcdPw4FiJzo32C5r2AVkt1U+ruqE0
+ AnsHHKWef/DPDSRmgiF6nOe1cDZ9b7loXqb2KU3TBqTyKPaguHdWLegzc5jq3pMrLLdm6bMNzN3
+ xQJMgv2APMYAIs5CKRqbPGQdK1Xy297B/Q99RX3BKuEKx9gUww==
+X-Google-Smtp-Source: AGHT+IHvtvSFZSzsj0QmI08Za1y8HZTPWLGrsCe3/QuJhn8OMVn8XPzoBDOg2JtX9d+waGr65lYLPXQOARaBnzwLLI8=
+X-Received: by 2002:a53:acdc:0:10b0:640:caa5:57bd with SMTP id
+ 956f58d0204a3-642f786a437mr1207333d50.37.1763618948041; Wed, 19 Nov 2025
+ 22:09:08 -0800 (PST)
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nathaniel.land;
- s=dkim; t=1763618096;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TiYISpTShPqtVN087uaiHJPq/qVeyIXv0rBCuQUFJBM=;
- b=MUyR56TOOLcSx2BgCmqXg6TqsbMu83YjcMGMmjIb0b9dDpqXSkI38svkGPFZAmp2QPmupy
- kYCqZOpm07636nQ5og0s35ckntAC/qN9HwniyYIje3zRu9jLPNJU98MtjugPuVPQDpx6iA
- CLoeen6JN3882auAmn2gHWzgDgiNiu6OJZ8nk2F/4XPHD6h7YfKVXrxoh50CxfVnoubWU0
- 8+8sTy3bljqClNLjpw90SS1j86MPc45VqsQ8R+8ZDzZ2ZB83IO0m6Tv6ydTA9CeUTayBoh
- g6owZ8B2ufI6pYY8rcX0siCiFniLKgafnZdSLYkKypJgOh0USY3C1L3rwf8KMw==
-Authentication-Results: goldencat.email;
- auth=pass smtp.mailfrom=i@nathaniel.land
-Date: Wed, 19 Nov 2025 23:54:56 -0600
-From: Nathaniel Hourt <i@nathaniel.land>
-To: u-boot@lists.denx.de
-Subject: Re: tcp server with tftp
-In-Reply-To: <BY5PR09MB49772032490F7E91C03B9760D2D7A@BY5PR09MB4977.namprd09.prod.outlook.com>
-References: <BY5PR09MB49772032490F7E91C03B9760D2D7A@BY5PR09MB4977.namprd09.prod.outlook.com>
-Message-ID: <faaa20665a2fa04ee12ec08b2c3d1250@nathaniel.land>
-X-Sender: i@nathaniel.land
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Bar: /
+References: <20251119174425.58535-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251119174425.58535-1-marek.vasut+renesas@mailbox.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 20 Nov 2025 08:08:32 +0200
+X-Gm-Features: AWmQ_bkR-aCZ5hABvyQol8e8RiMIG4Lgbyabq9yDgzg7G0jVh827YTD-wBWAtAE
+Message-ID: <CAC_iWjKCmuTLG2RYzqexTFdrcxcvnGu1Jrw8RAx=bM0Jxry7Ag@mail.gmail.com>
+Subject: Re: [PATCH v2] boot: Warn users about fdt_high=~0 usage
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, 
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,20 +96,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-11-19 17:16, Yonkee, Nathan Paul wrote:
-> Hello all, I am writing some custom uboot to run a tcp server to 
-> communicate with our lab computer. I would like to be able to do a tftp 
-> file transfer while the server is connected, but when I try I get error 
-> -13. I wrote a custom tcp server with lwip and I am using tftp_loop() 
-> to do the tftp transfer.
+On Wed, 19 Nov 2025 at 19:44, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
+>
+> In case the 'fdt_high' environment variable is set to ~0, warn users
+> about the dangers of the fdt_high usage. This will hopefully lead to
+> removal of most of the fdt_high ~0 usage over time.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-TFTP is usually a UDP-based protocol... Are you sure you mean to be 
-using TCP with it?
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-If you're just looking to send a file to your device with u-boot, have 
-you looked at the wget command? 
-https://docs.u-boot.org/en/latest/usage/cmd/wget.html Or are you trying 
-to send a file from u-boot to your lab computer?
-
-—
-Nathaniel
+> ---
+> Cc: "Jo=C3=A3o Paulo Gon=C3=A7alves" <joao.goncalves@toradex.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Sam Protsenko <semen.protsenko@linaro.org>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> V2: Warn unconditionally
+> ---
+>  boot/image-fdt.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index 3f0ac54f76f..a3a4fb8b558 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -189,6 +189,12 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of=
+_size)
+>                         /* All ones means use fdt in place */
+>                         of_start =3D fdt_blob;
+>                         addr =3D map_to_sysmem(fdt_blob);
+> +                       printf("WARNING:\n"
+> +                              "The 'fdt_high' environment variable is se=
+t to ~0. This is known to cause\n"
+> +                              "boot failures due to placement of DT at n=
+on-8-byte-aligned addresses.\n"
+> +                              "This system will likely fail to boot. Uns=
+et the 'fdt_high' environment\n"
+> +                              "variable and submit a fix upstream.\n");
+> +
+>                         err =3D lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &add=
+r,
+>                                             of_len, LMB_NONE);
+>                         if (err) {
+> --
+> 2.51.0
+>
