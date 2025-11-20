@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 691E5CF64AB
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 09:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7FACF857C
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 09:40:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF45683D3C;
-	Thu, 20 Nov 2025 10:39:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1CDB884090;
+	Thu, 20 Nov 2025 10:39:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QEvUgKFy";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UCzMpgZ9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64FE483D3C; Thu, 20 Nov 2025 10:39:04 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 8061C84099; Thu, 20 Nov 2025 10:39:58 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3F8F8405B
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 10:39:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 810B3838FA
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 10:39:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 41BBB4033F;
- Thu, 20 Nov 2025 09:38:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD095C4CEF1;
- Thu, 20 Nov 2025 09:38:58 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 3564C4033F;
+ Thu, 20 Nov 2025 09:39:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 978D8C4CEF1;
+ Thu, 20 Nov 2025 09:39:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1763631539;
- bh=QHnPu9MMjHlRNNq1+AllXxs9UcaSqWLHBLM5Z0sREsQ=;
+ s=k20201202; t=1763631595;
+ bh=z1GkhXBj6WLcWULMDjnKUGvxQW8JSMv42ab6iQcDhrI=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=QEvUgKFyWDaLzD6kf/x1cnxQQFgOliCGVsL3H9wkJ7qbiD2v0lIupp6TTq6lDHGug
- RCMfTfheCdno0d2WhMH+j34gcw7gmWsn0nRTYSHFfrE2+n+0xoRiHJ0h8ly/wuDfl4
- yabKhXwtZUWG4O+2rNHGhGpAqV2QL6cxyIrdfWQmLfJmi+IdNA1Lkfep58HFvWbr/L
- mrxVozysuFmhDKsVJUTnyaMDcOi5eqehZPjYNmJqJJHCiTmNgAQTUS7+HNVYy9ckt2
- A5frCOYN/XLZxqA2tFgD7bVnbkakthZf21rRn+tqDu4Nro8cpGPx+H5qFvSDAJ7l3V
- GEFO1KEQ9CWGg==
+ b=UCzMpgZ9FUBYSE2HbtDs1JImGAF8FmVwac9DOrq9L3nKhATuSVbMZ57/z3QcK3y1K
+ 6DjvRvBsfrgLeuEHTc8/bBBWjjVo3sQG/ozOVEw77lNp9QPvPgN/+FTmUrbvx195NY
+ kVULHgEphMdCVAifJbwJnuwHOcNiDQWvuD0JrV8oJfA46WDf5Dmomn+mTJOPzB9z5Y
+ 3Fi/yRYraadRLiszpDxjaGxrXPwegBzoCSKyhtq+AG19t0zhzs2pRzPWUMJdnakFHr
+ AeUl8c8WhsoryoZlG4qxRcqCsbQ4attopG2K8y/jMbUQJlRYUurm4zdNlWbEXnySdw
+ Ngs/7wi9IT4Qw==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Aaron Kling
@@ -48,12 +49,13 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Aaron Kling
  Korpershoek <mkorpershoek@kernel.org>, Nicolas Belin
  <nbelin@baylibre.com>, Sam Day <me@samcday.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 1/2] boot: android: Always use 8-byte aligned DT with
- libfdt
-In-Reply-To: <20251119193311.127633-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH v3 2/2] test/py: android: Point fdt command to aligned
+ addresses
+In-Reply-To: <20251119193311.127633-2-marek.vasut+renesas@mailbox.org>
 References: <20251119193311.127633-1-marek.vasut+renesas@mailbox.org>
-Date: Thu, 20 Nov 2025 10:38:56 +0100
-Message-ID: <87fra9avrj.fsf@kernel.org>
+ <20251119193311.127633-2-marek.vasut+renesas@mailbox.org>
+Date: Thu, 20 Nov 2025 10:39:52 +0100
+Message-ID: <87cy5davpz.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -81,20 +83,10 @@ On Wed, Nov 19, 2025 at 20:32, Marek Vasut <marek.vasut+renesas@mailbox.org> wro
 > Newer versions of libfdt strictly check whether the FDT blob
 > passed to them is at 8-byte aligned offset, if it is not, then
 > the library fails checks with -FDT_ERR_ALIGNMENT . Currently,
-> android_image_print_dtb_contents() passed FDT directly mapped
-> from abootimg to libfdt, and this FDT is not always aligned to
-> 8-byte offset. Specifically, the FDTs are somewhat packed in
-> the abootimg, therefore if the first FDT blob is e.g. 0xfd bytes
-> long, then the next FDT blob ends up at 0xfd offset, which is
-> not 8-byte aligned.
->
-> Fix this by first extracting the header into 8-byte aligned buffer,
-> checking only the header for validity, and then by copying the
-> entire FDT into newly allocated 8-byte aligned buffer. While this
-> is not efficient, it is the correct way to handle DTs, which must
-> be at 8-byte aligned offsets. Mitigate the inefficiency for the
-> common case by checking whether the DT might be 8-byte aligned and
-> if it is, map it directly.
+> 'abootimg get dtb --index=1 addr size' may return non 8-byte
+> aligned FDT address which points directly into the abootimg.
+> Copy the result into temporary location before validation to
+> avoid FDT alignment check failure.
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
