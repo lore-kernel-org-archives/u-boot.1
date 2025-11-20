@@ -4,60 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7FACF857C
-	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 09:40:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F92ACF64AB
+	for <u-boot@archiver.kernel.org>; Thu, 20 Nov 2025 09:44:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CDB884090;
-	Thu, 20 Nov 2025 10:39:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id C0DD3840AB;
+	Thu, 20 Nov 2025 10:44:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UCzMpgZ9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cK7Ob33/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8061C84099; Thu, 20 Nov 2025 10:39:58 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6FC5D840AE; Thu, 20 Nov 2025 10:44:19 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 810B3838FA
- for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 10:39:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 7331C84057
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 10:44:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3564C4033F;
- Thu, 20 Nov 2025 09:39:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 978D8C4CEF1;
- Thu, 20 Nov 2025 09:39:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1763631595;
- bh=z1GkhXBj6WLcWULMDjnKUGvxQW8JSMv42ab6iQcDhrI=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=UCzMpgZ9FUBYSE2HbtDs1JImGAF8FmVwac9DOrq9L3nKhATuSVbMZ57/z3QcK3y1K
- 6DjvRvBsfrgLeuEHTc8/bBBWjjVo3sQG/ozOVEw77lNp9QPvPgN/+FTmUrbvx195NY
- kVULHgEphMdCVAifJbwJnuwHOcNiDQWvuD0JrV8oJfA46WDf5Dmomn+mTJOPzB9z5Y
- 3Fi/yRYraadRLiszpDxjaGxrXPwegBzoCSKyhtq+AG19t0zhzs2pRzPWUMJdnakFHr
- AeUl8c8WhsoryoZlG4qxRcqCsbQ4attopG2K8y/jMbUQJlRYUurm4zdNlWbEXnySdw
- Ngs/7wi9IT4Qw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Aaron Kling
- <webgeek1234@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>, George Chan
- <gchan9527@gmail.com>, Julien Masson <jmasson@baylibre.com>, Mattijs
- Korpershoek <mkorpershoek@kernel.org>, Nicolas Belin
- <nbelin@baylibre.com>, Sam Day <me@samcday.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 2/2] test/py: android: Point fdt command to aligned
- addresses
-In-Reply-To: <20251119193311.127633-2-marek.vasut+renesas@mailbox.org>
-References: <20251119193311.127633-1-marek.vasut+renesas@mailbox.org>
- <20251119193311.127633-2-marek.vasut+renesas@mailbox.org>
-Date: Thu, 20 Nov 2025 10:39:52 +0100
-Message-ID: <87cy5davpz.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-42b32a3e78bso551568f8f.0
+ for <u-boot@lists.denx.de>; Thu, 20 Nov 2025 01:44:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1763631857; x=1764236657; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+qMFBI1M+/T19HGSXkF9r+7j9eIgGZ1QzzvHKZxA2hE=;
+ b=cK7Ob33/evuGGwbEKVYIoOvu4VkAlkWAUOKXAmk2WdTwjwIO7r9DJYaY32N/8gJ8/w
+ t05hF0EBLCb3LVAgki0x0ORltmxjh3xIYNSfw9VtGyze6dQAlPAtej6btiCPMuyEcXHP
+ QGTinIrOwFEu+8mqMGo88et3gGN0KIfCR6ijp/Ls9kW+pzXFKcd7eOfl/WVr4eJsaZYQ
+ ejrxOVNrAUjr3wJGTwrq4GPK2yL2xTa/R5s1zrCKiQqmpGdA1GASOnnjLR+K5fuRsczl
+ Ot22gITz3NkGv98L99B+k6Pwig2VGcKdKrweMGne5x55EyUKe5AqjHTVERlZ//IsNPhz
+ Cocw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763631857; x=1764236657;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+qMFBI1M+/T19HGSXkF9r+7j9eIgGZ1QzzvHKZxA2hE=;
+ b=l3q2Tribq4FK76Z3WFY0wZnHhSmA4AQA3hsayFPlDsE2F00h2f4hyLJ3SakMx/vhyb
+ wxwbTlfWAhGv/J+CBXDjHoEwtD22Ee/3qNc7KtP1Y8TBdTwaQ51CGlrgbAImzwDqDvAf
+ BJspUSqG8pdkru/Iyv6aam8NI/GDKIhYZGWh4dX1Rfa8XpFRyd7SL92IfrclRJ9ETTOK
+ HR2AzddSmFDy1Arvnd9SKYjulFw1BH1+dlXcgyxRNIciqER0XeSb65MRZZ9XQ9RYsZrv
+ VZZdOroN0wX/NaAv4cHdmFzzsHYoPSl3YDhu/fb5vLdzMVbYyz0OPROhCBltL4eIdqhZ
+ OUkw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX9L4DM6wOfloi7xMv9nZydvPLXRVD5BXIMORV8+O1Yjaa/Q75/LZ0I23nepxem8EsuKCLZWU8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+YzT12HbPdlbE/JzVeWaEh1LuNKtYKbq5HTjpfb33qpOZXvr7
+ XYiVrpYesGOReN1XbJ3LmpgRLpxbrlWkl9wdLmK48DEjJBM+cE6JIBN0+d4HJ+DZ88Q=
+X-Gm-Gg: ASbGncs9i5cxX3G/NQ0Z6M/XZcz64wSiFne1fLkjIQkf/e8zwAJUiOQ/Saq/E7aGjDY
+ 6rt4gZWtmyYjJA72WRfnpz/SZE9Q7FJHAqDy4+tP/zFhZYzmxkkdlQQsWjyLqpPPAjI2k+9zEdQ
+ sCiB9x1RBN+G6afvrzcZPehjh6A6Oyrl2P3TmPi5jXENk0GXB/s38Bc1+Ifzm2xQYUQpOmk5P4W
+ j+duEnABypKXe8Y87+Fuvs0ncsfdMKWiUJouqntSM7jcNZZwOXOLkE5ILnglWt+CMOgc2vq6GTo
+ DbGPVi+w/Uij8KiRuvRIQPvh4ExQv07BOrUsmLgw3Z9IwScaswhGWDHVzSdDawzrgQDpZ4QN0Am
+ i6s2++yyIPzLCtkdX0PgiBlRSD9bh8TmiGo1eil///0keNPQ4jLDu9Bu+eOvmPvTGlaC5ek3OZO
+ u8jLejJo1x7Ge+QNShPjOusIpAvprlL6c=
+X-Google-Smtp-Source: AGHT+IF0V9S41E4T/z0PwplquZRGAgE7iqpbMcZQcAVaqq3yiy0domKNQX6gm9aHoNhFlYkrbI2hgw==
+X-Received: by 2002:a05:6000:2210:b0:42b:3dbe:3a43 with SMTP id
+ ffacd0b85a97d-42cb9a65043mr2060164f8f.50.1763631856575; 
+ Thu, 20 Nov 2025 01:44:16 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-42cb7fb9022sm4386078f8f.36.2025.11.20.01.44.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Nov 2025 01:44:16 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+To: trini@konsulko.com, casey.connolly@linaro.org, sumit.garg@kernel.org,
+ jh80.chung@samsung.com, peng.fan@nxp.com, rui.silva@linaro.org,
+ ilias.apalodimas@linaro.org, me@samcday.com, sajattack@postmarketos.org,
+ marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
+ alif.zakuan.yuslaimi@altera.com, tien.fong.chee@altera.com,
+ miquel.raynal@bootlin.com, balaji.selvanathan@oss.qualcomm.com,
+ w.egorov@phytec.de, u-boot-qcom@groups.io, u-boot@lists.denx.de,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: (subset) [PATCH v6 0/5] Added QCOM RPMH Power Domain Driver
+Date: Thu, 20 Nov 2025 10:44:14 +0100
+Message-Id: <176363183220.2293399.7296647117885059868.b4-ty@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20251113113427.2218045-1-aswin.murugan@oss.qualcomm.com>
+References: <20251113113427.2218045-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,22 +108,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
 
-Thank you for the patch.
+On Thu, 13 Nov 2025 17:04:22 +0530, Aswin Murugan wrote:
+> This patch series adds support for the Qualcomm RPMH power domain
+> driver, responsible for managing power domains on Qualcomm SoCs.
+> The driver is ported from the Linux kernel and adapted for
+> U-Boot to enable proper power domain control on SA8775P platform.
+> 
+> 
 
-On Wed, Nov 19, 2025 at 20:32, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+Applied, thanks!
 
-> Newer versions of libfdt strictly check whether the FDT blob
-> passed to them is at 8-byte aligned offset, if it is not, then
-> the library fails checks with -FDT_ERR_ALIGNMENT . Currently,
-> 'abootimg get dtb --index=1 addr size' may return non 8-byte
-> aligned FDT address which points directly into the abootimg.
-> Copy the result into temporary location before validation to
-> avoid FDT alignment check failure.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+[1/5] soc: qcom: cmd-db: Add cmd_db_read_slave_id() & cmd_db_read_aux_data() functions
+      commit: a264c0454b8ddd8c5ac0ed29623c72f65ec4d53f
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-> ---
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
