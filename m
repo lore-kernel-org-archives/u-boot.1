@@ -4,104 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99F7DCFC296
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:50:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F16ECFC296
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:53:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95E8D83A41;
-	Fri, 21 Nov 2025 18:49:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BA9983A41;
+	Fri, 21 Nov 2025 18:53:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="1pvgtdEl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o6wMlqcd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73BE983A5A; Fri, 21 Nov 2025 18:37:01 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 16F0283A41; Fri, 21 Nov 2025 18:53:07 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3891E839E8
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:36:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E6F4683A84
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:53:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-4503ee5c160so926275b6e.1
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:36:59 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c6cc44ff62so1514866a34.3
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:53:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763746618; x=1764351418;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=b7+byumtapao8HYxRkDCxJU7UXbQ9UBBbMszCwTzf6o=;
- b=1pvgtdElS7NCvVU4Rgzu4YwRR2ocV3vNSjUVltKxaLZFFaCmiPbdULNL/SYnSdfuBe
- WT/yNVEV/t9jbvohPLk/XgyD8qp1aJDHxzuojbNhhQf2XbAk66+rBQkL78z/Dpr287cx
- DtEjYEM0VEwUcuXOEvga6pN13ggevsmqyczJ9IW1wBQA2mH3uZNBOWSn5AU+68FieZ/b
- 9OCsfJhKDOS3R4nrvMmJeLNb5DKEw8v793Q2jlbnIF95XO9+eOfqYIV1Tux5kPd6Tphl
- 7k8bMU87RxAZffccsRWW7haty9FJIuO8oHe9dUmEOEOy27u3bu35y+GM6nkOT/KBNwbD
- 5j6w==
+ d=konsulko.com; s=google; t=1763747581; x=1764352381; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nUwi5sJmlI6HbBFy/rTRBwl+GyUq8GNnFYxvwcexioE=;
+ b=o6wMlqcdpyKs41lzlA/NaIJNmLy6suDNl6AdsLwERoA1dEG8ELyfUXAHpyTTsQTF06
+ DgB9K8Ys+hOgCLpc6GmWlfpjniFuM/Y/sJMwOYqM+C9PwKH72smPpuINGOi2AEz2hKmT
+ MXQADsHdHX9dYLENAoIrPelU9FJiqHdBsEefU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763746618; x=1764351418;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b7+byumtapao8HYxRkDCxJU7UXbQ9UBBbMszCwTzf6o=;
- b=AL12zlh8MWwdoMdaD9U6WFcXOeUFcrDsne0EMFaEl3hPRSAhS00UPqEQpe5qGv8cDr
- CTDmcivjbPVNuxpb4XcK76gxvViE8zvRqLE9rydCIgWhjHlakXgj/HVWsT+m4OWBnF6A
- 92J+vbmIdZRBGxkoMSOiMlVncxAqWc93MTQ50ufPztAPSG3aZBeIionrQ8K6HLgyWJgT
- SMcHN2w9+K/PQw/rLlSWu/yNn+KKNYdge4PVHSp30KjUt8QtGw6ANsPnXhxqxAxfogud
- uRS6yX3VYA/Ja6AA25PJBWVUekIWqx/rWfbvvZfruv4DFYGBNXLA3zTq98KZqQUcVJMJ
- ZqnQ==
-X-Gm-Message-State: AOJu0Yx9Jolv34TpIThAQmWuf/nKSFI9GOXtazKPttHQ29zLPPQgfQwq
- udHmkI1AfXerjhgDgbAmZ/sClfAx/2nkWBc0a8p9gcACTQdqhaJZ+c70CJqkrpTLC14=
-X-Gm-Gg: ASbGncvghQx2gn911E7F//92uADSo5tmiHwhR9cIeLw1jyAg4jV4P5TsEXxHHPQqSVq
- NYu6OzE8tTAdEpd57g4VM5LRIzz18pohbIHbrIxlBjyueiYT5T3kkxZS/mQehK6AKrIyP5/06JS
- 7yXSnJVKJcRzar0r6O6WtFBO3nM8fgnE5fqbSIQJ3mHjJyb59FxFZHR+MdimoNDg4Vke+xaAIYE
- Z8xa01Yd8sj+DQH65sM1OSjkZhsMLL/iqyMBXez75ZgUEwnYuwC7XqBbXZ73AeVM0xkFoiYWRk8
- mugeEYupFkkP47+5gDyWDJz5vUeKBYoyTpct4QgNZs09CY/T7N8i2ZEzMDwqPonsogFurLRgTV3
- fPRXE6J1hY1rD0YW4LIaXfOBs390EWrKqJVUtJD9CUO30fHWtyv/FtXQiWfyIdgDV9Wdna/WDTV
- UypCPe40vChwgHfg==
-X-Google-Smtp-Source: AGHT+IGMSv9345ITg628fwNX+75C/MnhHtDokqUHfbdvdO5YzwiT+uvvEIN1O32/7dROpKKiHSNVbw==
-X-Received: by 2002:a05:6808:c1fb:b0:44f:7289:f4d0 with SMTP id
- 5614622812f47-45112d1afdamr1581072b6e.67.1763746617973; 
- Fri, 21 Nov 2025 09:36:57 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:d761:af7:26f5:f16e])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450ffe2d425sm1843154b6e.4.2025.11.21.09.36.57
+ d=1e100.net; s=20230601; t=1763747581; x=1764352381;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nUwi5sJmlI6HbBFy/rTRBwl+GyUq8GNnFYxvwcexioE=;
+ b=mQhbaXnrDnM6V1HVURrNrblhuhegveNforrhbJWkXzfOHpqS2p+mwgrW0UnpWp1e7F
+ HU5YjOaXElQ8jfmJcFzEGeS10xx+YLv74OQBOKqut1rUCLXtMAiDt1tu0JcRESZfUUez
+ R8c1gXVHLSb/0bnuX9rj+vkZ5y2x0plO5tR/NAe8I+7o7Va6dUWKR7tZr6XD4ILmh8PV
+ D1aUtStvVo+dy8fYWJQCUndTkvsiquIeqfN8DOYohf0RVg21NDR7utwfbFJeDpSbrLAo
+ F6eHB/QOWXAFD4ZM1XTWDzOyRTP8g/ilZlLAm/GXIq2L6Mulkhg8hgPuUahK1so/FfiD
+ Zwjw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUgypoHIiOSBxm1i+ilXB8+/s7TVWjHSwUGnCMGB69oGymsE71fOb1mWkR/WEFt/GpCEGmo0Ck=@lists.denx.de
+X-Gm-Message-State: AOJu0YxPnI+IVqqejmg26fJmlKAS5m6fcCEdWGMHXvVX7zcVvToC6Zys
+ U5L93XtiNlg796fzwHQ93MoEeR/Juk5DSvK7wHctmWWdXuE4RIupeZoXAYxMKMvd+w1FATvPLtU
+ 22+r6RiI=
+X-Gm-Gg: ASbGncvkdcsPaYKP271cWwh6Z+q6XBunw8eDduUnGsuKh8kmy74w90N9jPMuhIdcMAY
+ D7iwo8Zc6Vj2ZgupJ65TGWvmdBoPJNixNQNJBauie9/i54TS1FFPHyHWLOJ09eMUVhr9WOQWfsP
+ SAAI/BDOAabxqDDGKgH3ozqNaYWxJ0CZ6KBVFL/AyxHmn3UyYKBI/zbTBRRgqSCPLV1gwv1WA0+
+ FAVkLcpHqZWVqs9pzNG3UsZyIfaA90awi9n2hBmN37lERybTadO+6Fopl3f1Hscy9AO/GOuKCkI
+ xy89ZzQCcVpaPIr0xWFIZ4xJmLYDI/J0fWCG2eJdCGj9c8DzTdrXnn5KIm845/pBni0NMZndYGY
+ 9Zr8kUv7zvVnYVIcC8AB1lrcnQMtFuR5uVUF61Otetnag6pzXs5RgsQjJuOM2DPlpLM/nsyPe3O
+ i5c1UVe35uwLUVoYyRd5HNb+e27huBYrpPeSC6ZHKwp1KtI9ZBKA==
+X-Google-Smtp-Source: AGHT+IFEIbiRka/EhcHyjIaReTIcUPtqfCApnQa7aAr3yaIbpwLlDFPbvWtJuPmQYogWZ81dJ3wzSw==
+X-Received: by 2002:a05:6830:71a9:b0:7c5:3da7:e03d with SMTP id
+ 46e09a7af769-7c798b58be9mr1700755a34.7.1763747581586; 
+ Fri, 21 Nov 2025 09:53:01 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c78d32cbd9sm2494878a34.11.2025.11.21.09.53.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Nov 2025 09:36:57 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 21 Nov 2025 11:36:49 -0600
-Subject: [PATCH] doc: pytest: fix u-boot-test-flash typo
+ Fri, 21 Nov 2025 09:53:01 -0800 (PST)
+Date: Fri, 21 Nov 2025 11:52:59 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, Heiko Schocher <hs@nabladev.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
+ CONFIG_OF_PLATDATA=y
+Message-ID: <20251121175259.GB2125796@bill-the-cat>
+References: <20251120041526.817288-1-marek.vasut+renesas@mailbox.org>
+ <6a902e2d-b1be-1ba1-5d8b-e0a07ea2aebe@nabladev.com>
+ <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
+ <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
+ <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
+ <CAFLszTjyXo9yh6Jzdaev9GhN8OZ4Z5xz9phgNHnKCvA0ASzbaA@mail.gmail.com>
+ <60b12c96-4e63-4cf1-8c27-25eabead529c@mailbox.org>
+ <CAFLszThg+6LdxHXOYy9x8-nat+bsspbUT8Dg_vqnmx62aO0a2g@mail.gmail.com>
+ <a8fa7ff0-1324-4213-b45b-b4df637e6bee@mailbox.org>
+ <CAFLszTgLjRT_x1+tX0xpBzTy9bDJSYXw=5gOBvvNSqdOZDiZoQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251121-doc-pytest-fix-u-boot-test-flash-typo-v1-1-41faecbf72e9@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIADCjIGkC/yXN2wqDMBCE4VeRve6AST1AX6X0wuqmLogbsmmpi
- O/eYC8/+JnZyTgJG92qnRJ/xETXAnepaJyH9cWQqZh87VvnvMOkI+KW2TKCfPHGUzXj72WwGXm
- LitCEwDV3bd9fqWzFxKU+f+6P4/gBkvLKf3cAAAA=
-X-Change-ID: 20251121-doc-pytest-fix-u-boot-test-flash-typo-f4ffe0e65773
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Martin Schwan <m.schwan@phytec.de>, David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1257; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=jX2znf2tc7XIe9PI8l5qehYlkpGjtLVt1sZPQToI25k=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpIKMyhjlybIjjyIF/HtJD5f+WyKNDtKQ/V7Tym
- jcG174rJ3aJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaSCjMhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Al0MH/j9xtvbkDqc9tCmGtOvzG50Z2PVP4FLdPGUwCiM
- 0Qa497k0AyEQQATqREtBTb27ejHjdhNTSzLJdAbtp01dYkVZ7W3vNB4E2O2LwfOwfSpar0EseKZ
- UMMYa3k1E7PudzJoj7HxB+W5Q1xtR7bygrNR4KjUZZw2um2+er+jVOk1QtrrPo4PdtdppQcPcqK
- NracRLfece2pe4aymXVdvhsw5k3DKQcqqTTjKWJKV//74ag+bJflTk7DSWx5osGIzRo5ovJfxDC
- yhrtsb0kXW5qbyhFQD9ytEhWq14lJWhoGPICArlo3EtVaVsXhg34fXZZWPOQensVz6ms/jGUeI9
- BD9c=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Approved-At: Fri, 21 Nov 2025 18:48:59 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GBRCQXRc7gMC9JF1"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgLjRT_x1+tX0xpBzTy9bDJSYXw=5gOBvvNSqdOZDiZoQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,33 +110,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix typo: `s/u-boot-test-flash1/u-boot-test-flash/`. The correct name of
-the script doesn't have a "1" in it.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- doc/develop/pytest/usage.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--GBRCQXRc7gMC9JF1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.rst
-index 800a0323d0ae34d739490b80124949517d2fc5fe..7335a39b9633bb16869dfc976adab32d78dc984f 100644
---- a/doc/develop/pytest/usage.rst
-+++ b/doc/develop/pytest/usage.rst
-@@ -392,7 +392,7 @@ to flash, pulsing the board's reset signal is likely all this script needs to
- do. However, in some scenarios, this script may perform other actions. For
- example, it may call out to some SoC- or board-specific vendor utility in order
- to download the U-Boot binary directly into RAM and execute it. This would
--avoid the need for ``u-boot-test-flash1`` to actually write U-Boot to flash,
-+avoid the need for ``u-boot-test-flash`` to actually write U-Boot to flash,
- thus saving wear on the flash chip(s).
- 
- u-boot-test-release
+On Fri, Nov 21, 2025 at 10:40:13AM -0700, Simon Glass wrote:
+> Hi Marek,
+>=20
+> On Fri, 21 Nov 2025 at 10:34, Marek Vasut <marek.vasut@mailbox.org> wrote:
+> >
+> > On 11/21/25 5:20 PM, Simon Glass wrote:
+> >
+> > Hello Simon,
+> >
+> > >>> - create a new VALID_OFFSET assumption (split out from VALID_DTB)
+> > >>> which checks offsets in fdt_next_tag()
+> > >>>
+> > >>> The latter might be best. It would likely be very cheap in terms of
+> > >>> code size. In fact, I should have thought of this at the time.
+> > >> Wouldn't it be better to not misuse libfdt ?
+> > >
+> > > It actually isn't a misuse. It is perfectly OK to pass an invalid
+> > > offset and libfdt has defined behaviour in that case, absent any
+> > > 'assumptions' we force.
+> >
+> > It actually isn't OK to pass in invalid offset if we compile FDT with
+> > disabled tree validity checks.
+>=20
+> We are saying exactly the same thing, if you read both of the above :-)
+>=20
+> >
+> > > Remember, in Linux these checks are enabled. We added the 'assume'
+> > > thing to reduce code size. Here you have found a situation where it
+> > > breaks stuff, so we should back off the assumption a bit.
+> > U-Boot also has those checks enabled, SPL does not, and things break
+> > when OF_PLATDATA is enabled and there is no valid node associated with
+> > the udevice.
+>=20
+> Right, so add SPL_OF_LIBFDT_ASSUME_MASK for SPL and check the code
+> size. If it is too much, add a new level FDT_ASSUME_EXISTS before
+> FDT_ASSUME_SANE and use that for the necessary checks (there will only
+> be a few, from my reading of the code).
 
----
-base-commit: 2bc0715b558fa1ac5c88b11e250740b16a905837
-change-id: 20251121-doc-pytest-fix-u-boot-test-flash-typo-f4ffe0e65773
+We already have different mask values for each xPL and then full U-Boot.
+It doesn't seem like there is a good reason to allow this behavior in
+xPL is the problem.
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+--=20
+Tom
 
+--GBRCQXRc7gMC9JF1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSCm9wAKCRAr4qD1Cr/k
+CgxRAQCpCOXSkyR3OqR74PjDQ14Hjbrl+hupaJX5BE5kB86PzgD/QVIlr9COFW3g
+4y0JLiTZqpIxDWAnuH/uwTfbDxvllwA=
+=9NOe
+-----END PGP SIGNATURE-----
+
+--GBRCQXRc7gMC9JF1--
