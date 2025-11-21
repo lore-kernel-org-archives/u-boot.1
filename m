@@ -4,24 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFB65CFC28B
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 14:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A445CCFC28B
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 14:52:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21F1883966;
-	Fri, 21 Nov 2025 15:52:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 64DD683990;
+	Fri, 21 Nov 2025 15:52:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Bcuv5Imj";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SfWrXuz2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E38F483981; Fri, 21 Nov 2025 15:52:44 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id CB45C83990; Fri, 21 Nov 2025 15:52:46 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09CC383959
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 15:52:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D49F58391B
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 15:52:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,57 +30,41 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dCdVd0Trlz9ss7;
- Fri, 21 Nov 2025 15:52:41 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dCdVf6Gh8z9t1S;
+ Fri, 21 Nov 2025 15:52:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763736761;
+ s=mail20150812; t=1763736762;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=gyih/8+tZgd4m+vP+RmmWHP2jHMR0Lt8u+Pcbd0B56g=;
- b=Bcuv5ImjAxdJSW3DPJcY2ztlYdt17PHotqeHkfxVyPX/Pe+q+ad/IRUytb7CgiBCRBkaXd
- Hr7d+sYc/6hzVhNBAO29SfUbIZ36jjtOhUkJfpxLjSMfCqcdok3+I4R5MN3kL5TO8E9iwU
- gjx/0m0wxeDS+Wf6VB/BuDX8lRtW7PIpWcNBBtDifXdZSeQy84OfJELUAmvCBPgvcA/Y4r
- qSu5PsZFOHHMrnnwLugZ5pI0PPlLT8hqwJk2kkDcBYlz7aHqZTSxL8c4dgvfmKmBouYQ4Z
- aqu1gE5S9qhdktkDvofP6VzVutzKXuFoOoKRyMHGvdK8VpwsY1UGmsPSiK+MJQ==
-Message-ID: <423d52bd-2446-47de-b6bc-4ee61fd0c23e@mailbox.org>
-Date: Fri, 21 Nov 2025 15:43:06 +0100
+ bh=IBJc2lit2t7pmbfnxOZI/c7gtO9osM06NFJ6CsfHkR4=;
+ b=SfWrXuz2pj1nTjfOKm17IXdGnkjPluZp6qhGEZtsCDFIKXhepS0tYgawDarudZ/FfllDY2
+ +H+1HbCiK+o3NKFY9ja5O8oCwdJqrY9oFuuGi9fYknbC5sgoilIY9rV0ogCk028NaahQk7
+ dvSYJRFJjnWg/nH+iP1NZpvk3HizVSxQDuTneiO7OdzUC0xacytzAKnKyuNJrkRlnYr7gW
+ DgeUFmuxknRi6+VX1jExiVLJeaiDEi+cXqkmXnufbpX8xEvxuS+N5vC5To8VRzWvJgOAY9
+ ll+RVm5117O/6MNWrmlBkO9wCmksjuApaMG68Dhkcm+XhhWqcY/O/dFCiX00TA==
+Message-ID: <60b12c96-4e63-4cf1-8c27-25eabead529c@mailbox.org>
+Date: Fri, 21 Nov 2025 15:51:28 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 08/15] dm: core: Support multiple drivers with same
- compatibles
-To: Markus Schneider-Pargmann <msp@baylibre.com>, Tom Rini <trini@konsulko.com>
-Cc: Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de,
- Kory Maincent <kory.maincent@bootlin.com>, Rasmus Villemoes
- <ravi@prevas.dk>, Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
- Liya Huang <1425075683@qq.com>, Romain Gantois <romain.gantois@bootlin.com>,
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Sukrut Bellary <sbellary@baylibre.com>
-References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
- <20251118-topic-am33-evm-oftree-v2026-01-v1-8-91ce13c661e2@baylibre.com>
- <20251118140804.GR2125796@bill-the-cat>
- <DEDGK9KKB61P.1QY81TPR5JLNY@baylibre.com>
- <20251120212909.GQ2125796@bill-the-cat>
- <0b9e2a8e-1ab8-4a6e-899f-4ae9fd43b68c@mailbox.org>
- <DEE8BZBDYO08.1SX1UEB750S25@baylibre.com>
+Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
+ CONFIG_OF_PLATDATA=y
+To: Simon Glass <sjg@chromium.org>
+Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+References: <20251120041526.817288-1-marek.vasut+renesas@mailbox.org>
+ <6a902e2d-b1be-1ba1-5d8b-e0a07ea2aebe@nabladev.com>
+ <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
+ <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
+ <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
+ <CAFLszTjyXo9yh6Jzdaev9GhN8OZ4Z5xz9phgNHnKCvA0ASzbaA@mail.gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <DEE8BZBDYO08.1SX1UEB750S25@baylibre.com>
+In-Reply-To: <CAFLszTjyXo9yh6Jzdaev9GhN8OZ4Z5xz9phgNHnKCvA0ASzbaA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 33a3ad6d2897b93521f
-X-MBO-RS-META: c5aot75yijuy6td8g51bnp3n1x34dscs
+X-MBO-RS-META: m45xu6mn8y5orya1htuiijns3k4cjkw9
+X-MBO-RS-ID: 7a85e2efdba1074df9a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,56 +81,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/21/25 9:28 AM, Markus Schneider-Pargmann wrote:
-
-Hello Markus,
-
-[...]
-
-> Thanks for the pointer, this is using the exact same mechanism as I want
-> to use. Is this tested and works? Because if I look into the current
-> code for probing and binding:
+On 11/21/25 3:26 PM, Simon Glass wrote:
+> Hi Marek,
 > 
-> 	/*
-> 	 * Walk through the compatible string list, attempting to match each
-> 	 * compatible string in order such that we match in order of priority
-> 	 * from the first string to the last.
-> 	 */
-> 	for (i = 0; i < compat_length; i += strlen(compat) + 1) {
-> 		compat = compat_list + i;
->      ...
-> 		for (entry = driver; entry != driver + n_ents; entry++) {
->        ...
-> 			ret = driver_check_compatible(entry->of_match, &id,
-> 						      compat);
-> 			if (!ret)
-> 				break;
-> 		}
-> 		if (entry == driver + n_ents)
-> 			continue;
+> On Thu, 20 Nov 2025 at 21:39, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>
+>> On 11/21/25 12:40 AM, Simon Glass wrote:
+>>> Hi Marek,
+>>>
+>>> On Thu, 20 Nov 2025 at 04:56, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>>>
+>>>> On 11/20/25 10:08 AM, Heiko Schocher wrote:
+>>>>
+>>>> Hello Heiko,
+>>>>
+>>>>>> diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
+>>>>>> index 380a9f8f3ad..d0e9dad7202 100644
+>>>>>> --- a/drivers/i2c/i2c-uclass.c
+>>>>>> +++ b/drivers/i2c/i2c-uclass.c
+>>>>>> @@ -749,8 +749,11 @@ static int i2c_post_probe(struct udevice *dev)
+>>>>>>     #if CONFIG_IS_ENABLED(OF_REAL)
+>>>>>>         struct dm_i2c_bus *i2c = dev_get_uclass_priv(dev);
+>>>>>> -    i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
+>>>>>> -                         I2C_SPEED_STANDARD_RATE);
+>>>>>> +    if (!dev_has_ofnode(dev))
+>>>>>> +        i2c->speed_hz = I2C_SPEED_STANDARD_RATE;
+>>>>>> +    else
+>>>>>> +        i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
+>>>>>> +                             I2C_SPEED_STANDARD_RATE);
+>>>>>>         return dm_i2c_set_bus_speed(dev, i2c->speed_hz);
+>>>>>>     #else
+>>>>>>
+>>>>>
+>>>>> This sounds more as a bug of dev_read_u32_default() to me and should
+>>>>> be fixed there, else we need to make this check around each call of
+>>>>> dev_read_u32_default() ...
+>>>>>
+>>>>> And looking into u-boot:/drivers/core/read.c there are more
+>>>>> candidates for such a fix (all with "default" in function name?)
+>>>>>
+>>>>> and such a fix would also make the dev_has_ofnode(dev) check in
+>>>>> i2c_child_post_bind() obsolete.
+>>>>>
+>>>>> Or may we fix the default functions in drivers/core/ofnode.c ?
+>>>> No, this was the previous implementation which is now superseded by this
+>>>> one, see [1] [2]. The goal is to fix the entry points which pass invalid
+>>>> content further into U-Boot DT handling code, so the DT validation
+>>>> happens only one, on DT input, and not again later.
+>>>
+>>> Do the libfdt functions work correctly with *any* negative numbers?
+>>
+>> Not without a full tree check (LIBFDT_ASSUME_MASK=0x00). With
+>> LIBFDT_ASSUME_MASK=0xff (what SPL uses, tree checks disabled), passing
+>> negative offset to libfdt functions would simply trigger a segfault for
+>> sandbox SPL tests.
+>>
+>>> Do
+>>> you have a pointer to the libfdt commit which changed this? All of
+>>> driver model relies on that behaviour in libfdt:
+>> With libfdt 1.7.2 , this code triggers segfault in sandbox SPL tests:
+>>
+>> 162 uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
+>> 163 {
+>> 164         const fdt32_t *tagp, *lenp;
+>> 165         uint32_t tag, len, sum;
+>> 166         int offset = startoffset;
+>> 167         const char *p;
+>> 168
+>> 169         *nextoffset = -FDT_ERR_TRUNCATED;
+>> 170         tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
+>> 171         if (!can_assume(VALID_DTB) && !tagp)
+>> 172                 return FDT_END; /* premature end */
+>> 173         tag = fdt32_to_cpu(*tagp);
+>>
+>> The fdt_offset_ptr() returns NULL and fdt32_to_cpu(*tagp) would
+>> dereference that NULL pointer.
 > 
-> 		...
-> 		ret = device_bind_with_driver_data(parent, entry, name,
-> 						   id ? id->data : 0, node,
-> 						   &dev);
-> 		if (ret == -ENODEV) {
-> 			log_debug("Driver '%s' refuses to bind\n", entry->name);
-> 			continue;
-> 		}
-> 		...
-> 		break;
-> 	}
+> Ah, I see. So the library hasn't changed, it's just the 'assume'
+> logic. That makes sense.
 > 
-> So if I understand this correctly, the returned -ENODEV will cause a
-> continue in the outer loop which iterates through the device compatible
-> string list, jumping to the next compatible of the device if any is
-> given. It does not continue in the inner for loop that iterates the
-> drivers.
+> I see a few options:
+> - enable the checks for the affected board (code-size impact)
 
-I check the HF one regularly, the SPI is a bit less accessible, but the 
-binding code didn't change for a while so I don't think it should be broken.
+Every system that enables OF_PLATDATA is affected ?
 
-I wonder if the RPC works by accident, and one driver matches on SoC 
-compatible and the other on fallback compatible. In that case, I think 
-the bind code should be patched to try other drivers and check whether 
-they might also be compatible in case the bind returns -ENODEV, indeed.
+> - create a new VALID_OFFSET assumption (split out from VALID_DTB)
+> which checks offsets in fdt_next_tag()
+> 
+> The latter might be best. It would likely be very cheap in terms of
+> code size. In fact, I should have thought of this at the time.
+Wouldn't it be better to not misuse libfdt ?
