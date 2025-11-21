@@ -4,63 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 084E5CFA471
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 04:39:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E9A5CFA471
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 04:40:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7498880433;
+	by phobos.denx.de (Postfix) with ESMTP id B0D3A809A5;
 	Fri, 21 Nov 2025 05:39:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="d4GUi1F6";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dqas/RAi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ED24808AF; Fri, 21 Nov 2025 05:39:54 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id BF6098042F; Fri, 21 Nov 2025 05:39:54 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 297B48042F
+ by phobos.denx.de (Postfix) with ESMTPS id CDEC5807B1
  for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 05:39:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dCMvT6dmXz9spH;
- Fri, 21 Nov 2025 05:39:49 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dCMvV6DVnz9shl;
+ Fri, 21 Nov 2025 05:39:50 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1763699990;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3r6jZqRRHMco7MKygQIrmreXglIoUmlijwdXcF4Tr2c=;
- b=d4GUi1F6Y/SEpIhuSwnoHjxWGVa9jYRzp7ND6HV/mJD3cCl1BqroXL5zOjoknmmxMfy3pB
- yesKifnPhd2gn7iwlPSooktMMaZ/hH/hDeiWrcspvoEvXmLb/E5EiVCa9LUv/PCX6lnK+H
- OqOnSUZF1bfVBxsDztFtP8lOtnYZ+4jS4pUdySPEFtr4fndhAN+P07oAKQ4cDSdukLPnhQ
- 3cs8PqTEo90syMQyCsbJnSMGRcWj2LB4c+FdSjkCRUDSD2uMlrxg0WodHsQ2GGWcltWRgB
- +qSe6WlYyED/dveMG2v7yH9T9dXSEQqm1OH2WkUwxNjFd24zq75203Pbz7l0QQ==
-Message-ID: <c8752825-92d5-43bd-aa28-e229d4cc3fda@mailbox.org>
-Date: Fri, 21 Nov 2025 05:27:46 +0100
+ bh=8Ph4L7dNBU/pJ9CDT92frelREm7yGf1Ieh9mSVBjnb0=;
+ b=dqas/RAihXQ46tw6GIdjpp/FAYr4rVQboS217jYE/MpYqnZw1pm7KklTmVtp5dPESsABT3
+ UH81aj+S+n7cfPHnMLwZ8IyVyWXo2jz6wstQp2LgcsPV74LmKljEdiCMCMAv9HkBYu6fR/
+ T1ligYn7aPrMJSE0bsa6KALRsS7PPsSfxG5LUCmSfRK9S2Vd8BREpB6ioHEipuRr+aMC6R
+ b4lJnsProucE7a2/KRzpP1m5SaFm4Z1cPsMV2WvPLFR4tTZdylL4D9uzPL3mqQQ+jOAjzZ
+ Cz6yraZ3wItERuglTUClIwHILHl0c25UZinIEv488Y5y5zrJMKpz8Oers4OZWw==
+Message-ID: <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
+Date: Fri, 21 Nov 2025 05:32:49 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] clk: fixed_rate: Avoid calling dev_read_*() if
+Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
  CONFIG_OF_PLATDATA=y
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20251120041439.817233-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTjnGtSPvki-i1fHQEU+bn=6cTqjRFyid3D5zQepNEhzog@mail.gmail.com>
+Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+References: <20251120041526.817288-1-marek.vasut+renesas@mailbox.org>
+ <6a902e2d-b1be-1ba1-5d8b-e0a07ea2aebe@nabladev.com>
+ <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
+ <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAFLszTjnGtSPvki-i1fHQEU+bn=6cTqjRFyid3D5zQepNEhzog@mail.gmail.com>
+In-Reply-To: <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 623f6fc630d6619d784
-X-MBO-RS-META: jqky4whfqtjo6etwp431cg9jbt9qidtt
+X-MBO-RS-META: pqun66kt37zhqiz8dofsimbm5cz7a6ic
+X-MBO-RS-ID: 4dcf09e174d34768b26
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,57 +82,70 @@ X-Virus-Status: Clean
 On 11/21/25 12:40 AM, Simon Glass wrote:
 > Hi Marek,
 > 
-> On Wed, 19 Nov 2025 at 21:14, Marek Vasut
-> <marek.vasut+renesas@mailbox.org> wrote:
+> On Thu, 20 Nov 2025 at 04:56, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >>
->> If CONFIG_OF_PLATDATA=y , then the udevice has no valid OF node associated
->> with it and ofnode_valid(node) evaluates to 0. The dev_read_u32_default()
->> call ultimately reaches ofnode_read_u32_index() which invokes fdt_getprop()
->> and passes result of ofnode_to_offset(node) as an offset parameter into it.
+>> On 11/20/25 10:08 AM, Heiko Schocher wrote:
 >>
->> The ofnode_to_offset(node) returns -1 for invalid node, which leads to an
->> fdt_getprop(..., -1, ...) invocation, which will crash sandbox with SIGSEGV
->> because libfdt can not handle negative node offsets without full tree check,
->> which U-Boot inhibits to keep size lower.
+>> Hello Heiko,
 >>
->> Add dev_has_ofnode(dev) check and do not assign clock rate in case the
->> device has no valid node associated with it, and do not call any of the
->> dev_read_*() functions for devices without valid nodes.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Sean Anderson <seanga2@gmail.com>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->>   drivers/clk/clk_fixed_rate.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
->> index 95a77d2e041..5c32ae207fe 100644
->> --- a/drivers/clk/clk_fixed_rate.c
->> +++ b/drivers/clk/clk_fixed_rate.c
->> @@ -35,7 +35,7 @@ void clk_fixed_rate_ofdata_to_plat_(struct udevice *dev,
->>                                      struct clk_fixed_rate *plat)
->>   {
->>          struct clk *clk = &plat->clk;
->> -       if (CONFIG_IS_ENABLED(OF_REAL))
->> +       if (CONFIG_IS_ENABLED(OF_REAL) && dev_has_ofnode(dev))
->>                  plat->fixed_rate = dev_read_u32_default(dev, "clock-frequency",
->>                                                          0);
+>>>> diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
+>>>> index 380a9f8f3ad..d0e9dad7202 100644
+>>>> --- a/drivers/i2c/i2c-uclass.c
+>>>> +++ b/drivers/i2c/i2c-uclass.c
+>>>> @@ -749,8 +749,11 @@ static int i2c_post_probe(struct udevice *dev)
+>>>>    #if CONFIG_IS_ENABLED(OF_REAL)
+>>>>        struct dm_i2c_bus *i2c = dev_get_uclass_priv(dev);
+>>>> -    i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
+>>>> -                         I2C_SPEED_STANDARD_RATE);
+>>>> +    if (!dev_has_ofnode(dev))
+>>>> +        i2c->speed_hz = I2C_SPEED_STANDARD_RATE;
+>>>> +    else
+>>>> +        i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
+>>>> +                             I2C_SPEED_STANDARD_RATE);
+>>>>        return dm_i2c_set_bus_speed(dev, i2c->speed_hz);
+>>>>    #else
+>>>>
+>>>
+>>> This sounds more as a bug of dev_read_u32_default() to me and should
+>>> be fixed there, else we need to make this check around each call of
+>>> dev_read_u32_default() ...
+>>>
+>>> And looking into u-boot:/drivers/core/read.c there are more
+>>> candidates for such a fix (all with "default" in function name?)
+>>>
+>>> and such a fix would also make the dev_has_ofnode(dev) check in
+>>> i2c_child_post_bind() obsolete.
+>>>
+>>> Or may we fix the default functions in drivers/core/ofnode.c ?
+>> No, this was the previous implementation which is now superseded by this
+>> one, see [1] [2]. The goal is to fix the entry points which pass invalid
+>> content further into U-Boot DT handling code, so the DT validation
+>> happens only one, on DT input, and not again later.
 > 
-> What is happening here? It should already be checking this:
-> 
-> static inline __attribute_const__ bool dev_has_ofnode(const struct udevice *dev)
-> {
-> #if CONFIG_IS_ENABLED(OF_REAL)
-> return ofnode_valid(dev_ofnode(dev));
-> #else
-> return false;
-> #endif
-> }
-I do not understand the question -- this patch _adds_ the 
-dev_has_ofnode() test into clk_fixed_rate_ofdata_to_plat_() , it wasn't 
-present before. Can you please rephrase your question / concern ?
+> Do the libfdt functions work correctly with *any* negative numbers?
+
+Not without a full tree check (LIBFDT_ASSUME_MASK=0x00). With 
+LIBFDT_ASSUME_MASK=0xff (what SPL uses, tree checks disabled), passing 
+negative offset to libfdt functions would simply trigger a segfault for 
+sandbox SPL tests.
+
+> Do
+> you have a pointer to the libfdt commit which changed this? All of
+> driver model relies on that behaviour in libfdt:
+With libfdt 1.7.2 , this code triggers segfault in sandbox SPL tests:
+
+162 uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
+163 {
+164         const fdt32_t *tagp, *lenp;
+165         uint32_t tag, len, sum;
+166         int offset = startoffset;
+167         const char *p;
+168
+169         *nextoffset = -FDT_ERR_TRUNCATED;
+170         tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
+171         if (!can_assume(VALID_DTB) && !tagp)
+172                 return FDT_END; /* premature end */
+173         tag = fdt32_to_cpu(*tagp);
+
+The fdt_offset_ptr() returns NULL and fdt32_to_cpu(*tagp) would 
+dereference that NULL pointer.
