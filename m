@@ -4,65 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E9A5CFA471
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 04:40:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ACF7CFA747
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 08:14:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0D3A809A5;
-	Fri, 21 Nov 2025 05:39:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8868A8042F;
+	Fri, 21 Nov 2025 09:14:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dqas/RAi";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="io08b5ch";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF6098042F; Fri, 21 Nov 2025 05:39:54 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 521E282C7F; Fri, 21 Nov 2025 09:14:35 +0100 (CET)
+Received: from mx-relay15-hz2.antispameurope.com
+ (mx-relay15-hz2.antispameurope.com [83.246.65.157])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDEC5807B1
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 05:39:52 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dCMvV6DVnz9shl;
- Fri, 21 Nov 2025 05:39:50 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763699990;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8Ph4L7dNBU/pJ9CDT92frelREm7yGf1Ieh9mSVBjnb0=;
- b=dqas/RAihXQ46tw6GIdjpp/FAYr4rVQboS217jYE/MpYqnZw1pm7KklTmVtp5dPESsABT3
- UH81aj+S+n7cfPHnMLwZ8IyVyWXo2jz6wstQp2LgcsPV74LmKljEdiCMCMAv9HkBYu6fR/
- T1ligYn7aPrMJSE0bsa6KALRsS7PPsSfxG5LUCmSfRK9S2Vd8BREpB6ioHEipuRr+aMC6R
- b4lJnsProucE7a2/KRzpP1m5SaFm4Z1cPsMV2WvPLFR4tTZdylL4D9uzPL3mqQQ+jOAjzZ
- Cz6yraZ3wItERuglTUClIwHILHl0c25UZinIEv488Y5y5zrJMKpz8Oers4OZWw==
-Message-ID: <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
-Date: Fri, 21 Nov 2025 05:32:49 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 46159801CF
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:14:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0413995d28=max.merchel@ew.tq-group.com
+ARC-Authentication-Results: i=1; mx-gate15-hz2.hornetsecurity.com 1; spf=pass
+ reason=mailfrom (ip=94.100.132.6,
+ headerfrom=ew.tq-group.com)
+ smtp.mailfrom=ew.tq-group.com
+ smtp.helo=hmail-p-smtp01-out04-hz1.hornetsecurity.com; dmarc=pass
+ header.from=ew.tq-group.com orig.disposition=pass
+ARC-Message-Signature: a=rsa-sha256;
+ bh=8bEpURpZfnTGqZKYn0ALHChvTd4ISrvWa7XD5FM/wZQ=; c=relaxed/relaxed;
+ d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
+ t=1763712872;
+ b=H03ElSam976/m8rppO+vMsicoTP2d8s1jrFEhkTRPzJo+jfmDhBIqZ8CeFFurgyqZ9/YeBIF
+ 5IzFgTWOPlq/2zKcajQV1gwa1+2oRNgZuG6hLc4hf/Lcd3jx+n94pvExPcYbz49FkqInor2xzMB
+ oTrL5W3/Z9oF4j/aP9+mQbzh2VzxoxHE0Jqdny0GUSZid9mje7F/3OM69eH9rLx2hPjRokfR92o
+ ufrmVAyzE0CurzoZJ5gLaW5E6CALUuODORHvPXVIfFnIyuvFM5MsQmDjdFKcmIzRHyTN/dA4BnX
+ 5p8RTiuH+LyIBU85tsk90qPuy0vWe+cEWdkkI7g6hR4Fw==
+ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
+ t=1763712872;
+ b=TZXIgzQRmdBwp0L8HHyHCYfH7zBDsfGBuC0WZXsIaU+EWtPH5W8OVV+9wp1MBfnbwNYs1mb/
+ cRqGT8pT13swIjCpEf+BXWBr72IczCGGtTanZL2fK17Ws9hKG4ZWvjJ/IMzT6m1w5ripC+xkBb7
+ +xFBiZh7tQfqV4tSCYukCI+DMVCaagm3q1c9bVIS0z8U/9YP/txQ1aACQym3q+kyiiHWuCZ1fff
+ nqIm5deQBKlww4VMCFj1Km0N1H13Y42xpLcJizWBKBN75R8TUzyNRQ+iar4hd9+PcZaCXmPHGNM
+ TjL46NhgzTu1lr+GrRUAsb45Wu/XaqAj3A3bEDtHwPwyw==
+Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
+ mx-relay15-hz2.antispameurope.com; Fri, 21 Nov 2025 09:14:32 +0100
+Received: from merchelm-W2.tq-net.de
+ (host-82-135-125-110.customer.m-online.net [82.135.125.110])
+ (Authenticated sender: max.merchel@ew.tq-group.com)
+ by hmail-p-smtp01-out04-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
+ 1F0D1220D76; Fri, 21 Nov 2025 09:14:20 +0100 (CET)
+From: Max Merchel <Max.Merchel@ew.tq-group.com>
+To: Markus Niebel <Markus.Niebel@ew.tq-group.com>,
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@denx.de>
+Cc: Max Merchel <Max.Merchel@ew.tq-group.com>, Stefan Roese <sr@denx.de>,
+ u-boot@lists.denx.de, u-boot@ew.tq-group.com
+Subject: [PATCH 0/4] board: tqma6: non-functional changes
+Date: Fri, 21 Nov 2025 09:11:26 +0100
+Message-ID: <20251121081138.73285-1-Max.Merchel@ew.tq-group.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
- CONFIG_OF_PLATDATA=y
-To: Simon Glass <sjg@chromium.org>
-Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-References: <20251120041526.817288-1-marek.vasut+renesas@mailbox.org>
- <6a902e2d-b1be-1ba1-5d8b-e0a07ea2aebe@nabladev.com>
- <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
- <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: pqun66kt37zhqiz8dofsimbm5cz7a6ic
-X-MBO-RS-ID: 4dcf09e174d34768b26
+Content-Transfer-Encoding: 8bit
+X-cloud-security-sender: max.merchel@ew.tq-group.com
+X-cloud-security-recipient: u-boot@lists.denx.de
+X-cloud-security-crypt: load encryption module
+X-cloud-security-Mailarchiv: E-Mail archived for: max.merchel@ew.tq-group.com
+X-cloud-security-Mailarchivtype: outbound
+X-cloud-security-Virusscan: CLEAN
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
+ mx-relay15-hz2.antispameurope.com with 4dCSg049zTz2FbCY
+X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
+ IP=94.100.132.6
+X-cloud-security-Digest: 956f088924c0b42f006298e7179a2fd5
+X-cloud-security: scantime:1.780
+DKIM-Signature: a=rsa-sha256;
+ bh=8bEpURpZfnTGqZKYn0ALHChvTd4ISrvWa7XD5FM/wZQ=; c=relaxed/relaxed;
+ d=ew.tq-group.com;
+ h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
+ t=1763712871; v=1;
+ b=io08b5chlfbNONZH1thDisH88HrL7S3qvko0YgUba20AVdYcKWrERx4w92+kB9+JkcOwhlAo
+ LgcBUcxEduoaNqHBuiNwbh26msT+cCuGe6BjfQkz/yC6/+Ld3CgLHkD6NJrJ+JAuuEuzCKJHyKS
+ cB3A2/oanzy1EqE6CtwsJXVXFIMt2rokMwnd8m+/f4pkrUCzS6yP5R2RMz6CK4AHfFyAJ2xH9Wj
+ loBSH626YBYw9NIfriA5qzBhS1b/DORLssGvKAwjPmows3LARIQNchzBitHgWly/RBrDEI2qXYl
+ 0Dqq3u3fBJY9cxeUZSJmexJKle4P2XZo7XDOpcPGNftMg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,73 +104,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/21/25 12:40 AM, Simon Glass wrote:
-> Hi Marek,
-> 
-> On Thu, 20 Nov 2025 at 04:56, Marek Vasut <marek.vasut@mailbox.org> wrote:
->>
->> On 11/20/25 10:08 AM, Heiko Schocher wrote:
->>
->> Hello Heiko,
->>
->>>> diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
->>>> index 380a9f8f3ad..d0e9dad7202 100644
->>>> --- a/drivers/i2c/i2c-uclass.c
->>>> +++ b/drivers/i2c/i2c-uclass.c
->>>> @@ -749,8 +749,11 @@ static int i2c_post_probe(struct udevice *dev)
->>>>    #if CONFIG_IS_ENABLED(OF_REAL)
->>>>        struct dm_i2c_bus *i2c = dev_get_uclass_priv(dev);
->>>> -    i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
->>>> -                         I2C_SPEED_STANDARD_RATE);
->>>> +    if (!dev_has_ofnode(dev))
->>>> +        i2c->speed_hz = I2C_SPEED_STANDARD_RATE;
->>>> +    else
->>>> +        i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
->>>> +                             I2C_SPEED_STANDARD_RATE);
->>>>        return dm_i2c_set_bus_speed(dev, i2c->speed_hz);
->>>>    #else
->>>>
->>>
->>> This sounds more as a bug of dev_read_u32_default() to me and should
->>> be fixed there, else we need to make this check around each call of
->>> dev_read_u32_default() ...
->>>
->>> And looking into u-boot:/drivers/core/read.c there are more
->>> candidates for such a fix (all with "default" in function name?)
->>>
->>> and such a fix would also make the dev_has_ofnode(dev) check in
->>> i2c_child_post_bind() obsolete.
->>>
->>> Or may we fix the default functions in drivers/core/ofnode.c ?
->> No, this was the previous implementation which is now superseded by this
->> one, see [1] [2]. The goal is to fix the entry points which pass invalid
->> content further into U-Boot DT handling code, so the DT validation
->> happens only one, on DT input, and not again later.
-> 
-> Do the libfdt functions work correctly with *any* negative numbers?
+Hi all,
 
-Not without a full tree check (LIBFDT_ASSUME_MASK=0x00). With 
-LIBFDT_ASSUME_MASK=0xff (what SPL uses, tree checks disabled), passing 
-negative offset to libfdt functions would simply trigger a segfault for 
-sandbox SPL tests.
+this series brings non-functional changes to the TQMa6.
 
-> Do
-> you have a pointer to the libfdt commit which changed this? All of
-> driver model relies on that behaviour in libfdt:
-With libfdt 1.7.2 , this code triggers segfault in sandbox SPL tests:
+Best regards,
+Max
 
-162 uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
-163 {
-164         const fdt32_t *tagp, *lenp;
-165         uint32_t tag, len, sum;
-166         int offset = startoffset;
-167         const char *p;
-168
-169         *nextoffset = -FDT_ERR_TRUNCATED;
-170         tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
-171         if (!can_assume(VALID_DTB) && !tagp)
-172                 return FDT_END; /* premature end */
-173         tag = fdt32_to_cpu(*tagp);
+Max Merchel (3):
+  tqma6: Remove empty function tqma6_iomuxc_spi()
+  board: [cosmetic] tqma6: adjust SPDX tag
+  board: tqma6: update MAINTAINERS
 
-The fdt_offset_ptr() returns NULL and fdt32_to_cpu(*tagp) would 
-dereference that NULL pointer.
+Paul Gerber (1):
+  board: tqma6: style fixes
+
+ board/tq/tqma6/Kconfig       | 23 +++++++++++++++--------
+ board/tq/tqma6/MAINTAINERS   |  3 ++-
+ board/tq/tqma6/Makefile      |  7 +++++--
+ board/tq/tqma6/clocks.cfg    |  7 +++++--
+ board/tq/tqma6/tqma6.c       | 16 +++++-----------
+ board/tq/tqma6/tqma6_mba6.c  | 10 ++++++----
+ board/tq/tqma6/tqma6_wru4.c  | 13 +++++--------
+ board/tq/tqma6/tqma6dl.cfg   |  6 ++++--
+ board/tq/tqma6/tqma6q.cfg    |  6 ++++--
+ board/tq/tqma6/tqma6s.cfg    |  6 ++++--
+ include/configs/tqma6.h      |  6 ++++--
+ include/configs/tqma6_mba6.h |  6 ++++--
+ include/configs/tqma6_wru4.h |  2 +-
+ 13 files changed, 64 insertions(+), 47 deletions(-)
+
+-- 
+2.43.0
+
