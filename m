@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 902DACFC273
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 13:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CDC3CFC273
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 13:22:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD398838A5;
-	Fri, 21 Nov 2025 14:22:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 177FB8382A;
+	Fri, 21 Nov 2025 14:22:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27B6F83935; Fri, 21 Nov 2025 14:22:37 +0100 (CET)
-Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::42aa])
+ id 608DE802C1; Fri, 21 Nov 2025 14:22:38 +0100 (CET)
+Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::42ae])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B38638388D
+ by phobos.denx.de (Postfix) with ESMTPS id 010A6837F2
  for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 14:22:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dCbVf386Jz5cQ;
- Fri, 21 Nov 2025 14:22:34 +0100 (CET)
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dCbVd56CKz5HN;
+ Fri, 21 Nov 2025 14:22:33 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dCbVd5KzfzZLq; Fri, 21 Nov 2025 14:22:33 +0100 (CET)
+ id 4dCbVd0NVkzdq7; Fri, 21 Nov 2025 14:22:33 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 21 Nov 2025 14:22:16 +0100
-Subject: [PATCH next 3/3] CI: use coreboot mirror for GNU dependencies of
- coreboot
+Date: Fri, 21 Nov 2025 14:22:15 +0100
+Subject: [PATCH next 2/3] CI: use mirror for gnulib dependency of grub
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251121-gnu-mirror-v1-3-548e6cd2665e@cherry.de>
+Message-Id: <20251121-gnu-mirror-v1-2-548e6cd2665e@cherry.de>
 References: <20251121-gnu-mirror-v1-0-548e6cd2665e@cherry.de>
 In-Reply-To: <20251121-gnu-mirror-v1-0-548e6cd2665e@cherry.de>
 To: u-boot@lists.denx.de
@@ -64,31 +63,46 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-coreboot buildgcc script downloads GNU dependencies from GNU FTP server.
-For some reason, this is also as unreliable as their git main server.
-There's no option to use a GNU mirror (and I'm not even sure if there's
-one for FTP), so we simply pass --mirror to the buildgcc script via the
-BUILDGCC_OPTIONS variable so that it makes use of coreboot's mirror.
-Hopefully, this proves more reliable than GNU original FTP server.
+grub bootstrap script downloads gnulib from a non-mirror URL and thus is
+unreliable.
+
+Instead, manually clone the gnulib repo from a mirror URL and pass that
+repo to the bootstrap script via --gnulib-srcdir.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- tools/docker/Dockerfile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/docker/Dockerfile | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 85274c303c8..b89e3025a3e 100644
+index 34713c5e8b2..85274c303c8 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -330,7 +330,7 @@ RUN mkdir /tmp/trace && \
- # Build coreboot
- RUN wget -O - https://coreboot.org/releases/coreboot-25.03.tar.xz | tar -C /tmp -xJ && \
-     cd /tmp/coreboot-25.03 && \
--    make crossgcc-i386 CPUS=$(nproc) && \
-+    make BUILDGCC_OPTIONS="--mirror" crossgcc-i386 CPUS=$(nproc) && \
-     make -C payloads/coreinfo olddefconfig && \
-     make -C payloads/coreinfo && \
-     make olddefconfig && \
+@@ -148,12 +148,13 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+ 	zip
+ 
+ # Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit
+-RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
++RUN git clone https://https.git.savannah.gnu.org/git/gnulib.git /tmp/gnulib && \
++	git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
+ 	cd /tmp/grub && \
+ 	git checkout grub-2.12 && \
+ 	git config --global user.name "GitLab CI Runner" && \
+ 	git config --global user.email trini@konsulko.com && \
+-	./bootstrap && \
++	./bootstrap --gnulib-srcdir=/tmp/gnulib && \
+ 	mkdir -p /opt/grub && \
+ 	./configure --target=aarch64 --with-platform=efi \
+ 	CC=gcc \
+@@ -218,7 +219,7 @@ RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
+ 	make -j$(nproc) && \
+ 	./grub-mkimage -O x86_64-efi -o /opt/grub/grub_x64.efi --prefix= -d \
+ 	grub-core normal echo lsefimmap lsefi lsefisystab efinet tftp minicmd && \
+-	rm -rf /tmp/grub
++	rm -rf /tmp/grub /tmp/gnulib
+ 
+ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
+ 	cd /tmp/qemu && \
 
 -- 
 2.51.1
