@@ -4,143 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BCE7CFA762
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 09:24:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9252ECFA765
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 10:04:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B67BB80433;
-	Fri, 21 Nov 2025 10:24:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id D786380433;
+	Fri, 21 Nov 2025 11:03:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="HedQMQ7E";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bXaULSjF";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="l3s97l9t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BC768051F; Fri, 21 Nov 2025 10:24:39 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 8120F8051F; Fri, 21 Nov 2025 11:03:58 +0100 (CET)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E21ED801CF
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 10:24:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5AL88ggW1390845
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:24:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ZtCdjjB67N6OXh1kqG5W3FD7UbEuF62ezuuiUaoOJtk=; b=HedQMQ7EE3kEnsBd
- /goJGibrrJtalpuxm2UYxQFiEiUnkeHXLM/QF6lW3bePzBmsnoUeUwgnpUSFFaq4
- 6spZxQlxuVR3v5D6BNpwAKJ3uwZ0LhdwsltqkwrQty/WBKydqQaqKrq1juoAEnPJ
- X6cGonOxRiwsdkH0chpbVnmBmSOoEwyqdKhCwJKhan1BpVDSeBWvhojXupvauac8
- KP0JnI6WLbw/SysXF4K7qPhPU1Cio7F8bkVct5JWLpo6juwk8eJxz/Y5+eCk/Ohs
- MDMelSkGI95xLEz4KtVMJ+o1y6iKbad2bNn3aLCZzihp8uvr2b3+6UGJdKr3KYyX
- QKjmrQ==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ajb531w2s-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:24:34 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id
- d2e1a72fcca58-7be94e1a073so4067955b3a.2
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 01:24:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1763717074; x=1764321874; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ZtCdjjB67N6OXh1kqG5W3FD7UbEuF62ezuuiUaoOJtk=;
- b=bXaULSjF5nlYQRAiyY52COXNYDZLkOGtiAjf0Hzw/2Dy3u2EnP9NeSUTJqz+sOKjgh
- EOPoP2SQnaD7jycmsFAZzpRZHXnuPV82yAjIlpEeiimAu8ayuTwzMtvCaneIKW50UtYg
- pWlGwhT3BJrBs0ruMPDMZdLPuNc+Ep2CzYfVdOs8Ltfw0VQtPW9p9y2FxVlsQxXf4U8L
- wvaRTcxcBA9DzSns3GOPgxtXW/jJBye6ijXbh5rHxYalxOSqcPlUn+7ReCOfQ278+Gip
- upOQwwPrY/SuiSnJ9xVwuv6O61oAWLH1Hq5ig0lrn7EKESjmcMEQVL+a6uMFEWv6EUjK
- kbnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763717074; x=1764321874;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZtCdjjB67N6OXh1kqG5W3FD7UbEuF62ezuuiUaoOJtk=;
- b=OdlwNDQJCGOe9kOsS9jWapBOC5isrg5Q/ZDmU0yXNB6EL6iNiIkrvsV1cI2cstiZao
- kDU4EFwWvdwXXahOU1uTTF8PYYNkfIv5Zj4fZHKxucMWqMV0p0TJJBa/0+0lGIcMKuWh
- SRTS/uaZPdk9pOtXKvXCoSWxcc8zso3wWrP5LeIj1xesN5WUVLViJqpteZeOPf7oesrL
- zOBt/imSeun6zc1mkqGLBaKZpkzVIQGe6zBlMM3df7obqmCB/XUOuzAo2A2IrZTmswXY
- dHxVVlEXN6meNNKbh9JTAuKWA8Pmi4KjlHOLkyxErwWOLoX9KhLaJQgf2x1/VWN6GZ3M
- X+Eg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCURELX16t4eSY7BqCou3Jzl9f/biRjOG7tzHkpkIeLG4u8+gqa1iGt60liSqKsEGZS5abmjIf0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxAn8h5WADJN9HEMOeFKcrcCePg6pVtFIj2m878npim1CDkQy8K
- NH0H6UloBAr0MUoDXK+b4tSpfrfanFDWc2KNBNhGoHdUxL9e/GUCM7COIhqFyXcNeOQZ7siuD1H
- fgUsX7KlnDSgCmh36dzwn9cy6+g+DeFXmNngGKp7oMqxg23/G6358vsMs
-X-Gm-Gg: ASbGncvRf6i207tLC/oA06um0ogZhPD4ecwKYBfrYkWYkgXZg3lteqBJQSfQPrXIDeF
- /4j1UtUYxIU8/7cEhJk7uD4NNhYvIOnv4+VxSPQDBEtybLiBFQDa1a3jp2io/u9MSyQ+CNPA43q
- Z0CrKhvsPL0oTU02ZH6cG26SclzOO/aSGFkR8qizlLQCkyebxC1V//PNjeDsIh186TIc4D4NGSZ
- ETGB6plcu9Tbzw+hKdFFy6Fk02n5PhmvKxhtYXS6hoTrp0v27RVCfnCw2vpWLCG0UNFOc4kESeG
- XVrFxzkcQGGxpAt4kYkIrVGTAkJgxVZ2ElFxx4u4zhk/IsqB4RsyEV/YcdDgnZIdQgp2oB1k1Lh
- QwL0LCDm2YdeMNCQHv75auq8KmkCowwXpQaRxYGJV+OgZvA==
-X-Received: by 2002:a05:6a20:9389:b0:35d:8881:e6c6 with SMTP id
- adf61e73a8af0-3614eb0ff86mr2271010637.19.1763717074268; 
- Fri, 21 Nov 2025 01:24:34 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGdF5Mo83deLTG1HCM92A/DGYOKDwkehwPKK73P4WeAMdE3mKjO23RsrtIvxeFvknIQnAwQTw==
-X-Received: by 2002:a05:6a20:9389:b0:35d:8881:e6c6 with SMTP id
- adf61e73a8af0-3614eb0ff86mr2270973637.19.1763717073622; 
- Fri, 21 Nov 2025 01:24:33 -0800 (PST)
-Received: from [10.151.41.95] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7c3ecf7e08fsm5407632b3a.10.2025.11.21.01.24.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Nov 2025 01:24:33 -0800 (PST)
-Message-ID: <21d94821-a339-49a6-af50-6a93788a4f2d@oss.qualcomm.com>
-Date: Fri, 21 Nov 2025 14:54:27 +0530
-MIME-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id B86A0802C1
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 11:03:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DqZyTVJkPf5o69SfgWTyVpXAjgQN6g/dC85BybHu0W24S7YlpzpO6bE1Vqnr0uy83G7RapnIeOhMy7hkqstsx4jLV9L54aOu5dWNtzzT0Au40M1T3SpsgfMHtDrTDHgizoLaXmvTROK7kMRiVlLBCUekT+JyGnltulYoqW/ONi7Gf1QNWT0YYbsq1XNY6EvmX7f7vF9WNo/+DjJzvAnddWFVPmZgmdlHec8fXBC2Gx07L87LjNwJzX8bqaYCZIMuJP2mytsgAmeIwClN4+MmLlUUq8b1SanZSR5JXJxlumpVDJLNGHkM9VtzuwRszuor3qQzNKlZVn1yuMSGM6jKRA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bQ2dy61Zg1lSgxQfgnpfg68uHdsFnIXoqMT+RLL57n4=;
+ b=sb3AZI7FwbbDpo6VPvcskxQQhnY7VxAMYT65jK+Yb6TMsZWSlhVZC33t4dgBCUbn1GCsOpotMV4XnKIZ4gbh9qxXZNOXF37LSK96f0oxfgAlVchvwP2n6cGKaIbW58cFii6NsfrzMMoIIabQrhT2oCb2xGconF8dUO1UJMzFQmkDvQBw1aS4vwvAH5E9SL0RBcNsTzPSSr6y+7B+NPByF/btXaBK1qaL92yuBl07Z4u9rNMJq/t37Vxu5M+r2iAbMSo+lmlsLl9vu1C8zPgcOZYEAjRhtbDkFfT1Mt4tWS5f2l3OMNM/bqU8rt4U8gZHi/D57u7QNeYuNp3Jv5qLSw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bQ2dy61Zg1lSgxQfgnpfg68uHdsFnIXoqMT+RLL57n4=;
+ b=l3s97l9tVaCFldqBau1PguNfjkUXHCnp2uLR3EcJH6c6c4Buh6KddJW3R51kw8hJJrlgw+Cb8LOZqLqezYdq4/1tpGcOzi4cT8LiHSWLsErPDP3w8lta/XsiR/v88td+5pf+9hG8rTWXQ86YvTTwqThpa+xluK4j/eWYRPjKScE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by AS8PR04MB7656.eurprd04.prod.outlook.com (2603:10a6:20b:29b::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.11; Fri, 21 Nov
+ 2025 10:03:50 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9343.011; Fri, 21 Nov 2025
+ 10:03:50 +0000
+Message-ID: <74d5be7a-40b2-4ba4-839d-d0ab4bee447f@cherry.de>
+Date: Fri, 21 Nov 2025 11:03:48 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] efi_loader: improve device path matching for
- partition lookup
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, xypron.glpk@gmx.de, adrianox@gmail.com,
- moritzf@google.com, sjg@chromium.org, maks.mishinfz@gmail.com,
- javierm@redhat.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250724090009.569341-1-balaji.selvanathan@oss.qualcomm.com>
- <20250724090009.569341-2-balaji.selvanathan@oss.qualcomm.com>
- <CAC_iWjK5d7z-J=rbXa-_+2zjejWOuTJco87-yqJVXtuXmVjdNw@mail.gmail.com>
- <8730e084-5541-4df5-b067-c97e540b5f37@oss.qualcomm.com>
- <CAC_iWjKTeNTwyQE0KoAApF_qbd1c6ftTnU8jx85sVNBTnYJoRg@mail.gmail.com>
+Subject: Re: [PATCH] boot: pxe_utils: Allocate space for overlay_dir before
+ writing into it
+To: Surkov Kirill <fanra3.tk@gmail.com>, u-boot@lists.denx.de
+References: <20251120185143.109371-1-fanra3.tk@gmail.com>
 Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <CAC_iWjKTeNTwyQE0KoAApF_qbd1c6ftTnU8jx85sVNBTnYJoRg@mail.gmail.com>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251120185143.109371-1-fanra3.tk@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: pAOTJn1Nmqiroo3WY0XeNVU_AVMssWP0
-X-Proofpoint-ORIG-GUID: pAOTJn1Nmqiroo3WY0XeNVU_AVMssWP0
-X-Authority-Analysis: v=2.4 cv=Wugm8Nfv c=1 sm=1 tr=0 ts=69202fd2 cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=jtQ-uLUPr5uBQXK0gecA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=OpyuDcXvxspvyRM73sMx:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTIxMDA3MCBTYWx0ZWRfX23HXWIwZk+pQ
- US9dz22XsoFeQIkIX0o27TkO+0E5kC3mpk5pT0h2zwdPNJQmpZbMYOZJyILXLEOzg5aj6xvOUl3
- un7bo2721o+znUth2kAKrW42V4Q5syOZczmzF/jvHUPPCUKuOUQ3iH2zMRm7xpKqSdAVbPKvbW8
- sovM/lwQLoTqOKFzCFe7+28pWeRgz19WlGbuy7+gJrfzYdfUIsNf1Uy5CzOyP17xPm5oD82ab3h
- FSZRjNtTaGfphyrbeRBuQFmfF7GYFmEusomjATpYf3NbgVOA9h1Jx84htiVN5kQsw6cGv7kZ+mx
- GK3lsQklpIgbCjF7csRCzK6U0WTG7aXQb6tCMI8wwjJXQJUqb4T6+ypgA/E3Clrh8QZoBvTRMJF
- 0E73qAglzlI3yQI7l/nj/ZY/L6SnKQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-21_02,2025-11-20_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1015 phishscore=0 bulkscore=0 adultscore=0
- suspectscore=0 impostorscore=0 priorityscore=1501 malwarescore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
- definitions=main-2511210070
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR06CA0148.eurprd06.prod.outlook.com
+ (2603:10a6:803:a0::41) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS8PR04MB7656:EE_
+X-MS-Office365-Filtering-Correlation-Id: 94c9a627-3280-4539-ab1b-08de28e5447a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?a0V3YmpPVkFSWFZ4OW1qakZ0c2VhMjVZVlBtOHVId3I0OWN0MERtZHF4aWh3?=
+ =?utf-8?B?U292dTBRdjdXZE5NNzR4S1ppWVJWSVpvSHpYTDE1TUNoNmRsa1NTbTJYdXBU?=
+ =?utf-8?B?ZnpHLzVxRlpuek9QZ2pydHpWcWF6bnc1VWhJeXB4QkxkUjZrQm5zM1BKNmhM?=
+ =?utf-8?B?Rzh6ckJ3aVpCc1RLWlNXWnFiT0RkSGZTaGM4bU8rZW4wTTJYeXMyYW9WSVVM?=
+ =?utf-8?B?bWlzZ1FxRk9pY2lHc3JzaXM0VnZoK0pqbXdkVTZ3dmFSUldRcVRrOW1JendO?=
+ =?utf-8?B?ejRNZ0VURURNOE9BTUlLdkJueXhpaEFKeTBsejhDOE4xSXI5NjFTeGhnd0cw?=
+ =?utf-8?B?Vkp4ZVZJK0pRNFhPZ3RXeEdBQjFQbnJnMEZIWTBhZUN1QkFwc1Q5MGttUGMr?=
+ =?utf-8?B?OE03WTBlOTI2VWc2cndUU09OZlNxSzJzZW1CVXhFSDI4QWl5Q2s5RTRUaXF1?=
+ =?utf-8?B?eFFpa1FTVGRsRnVpczR4RnBMSnJteHp6eTUwWkV1cGJFR0JVSExheGRqZHBO?=
+ =?utf-8?B?elI5bXYxMkV6ZmxvN3JKTmlDMnpoK0p5OCtMdHhBQkdYUFdEemora2hUNlVM?=
+ =?utf-8?B?UUMyZzlIdFczUkZlNHQ5MWFoR1lnOUtOQ0NNSlpYS0JDTlY0N2tiSDBxODlF?=
+ =?utf-8?B?SmlVcE9abnNYSGtXclFPeHM4d0h2KytSN2ZDWXdBWTlUUWRRT3ozN1h3U1BM?=
+ =?utf-8?B?WCt3aUlUNW1jSFNaY3B4dmkxWWlBMC9SbnRYbjJxZ2tSbW9BVHU1d3YwTzVn?=
+ =?utf-8?B?bFFzMzVyQ01aYzkvVW85KzNLRkYvM1M2c3RUK0xMaXZzQm9TR200TFo3V3ho?=
+ =?utf-8?B?bVdpQUw4bnNNMlR3QjBUSU5UY2JUdng1U2tUa1RDUEpiY1IxTWE2Uy9NZnI0?=
+ =?utf-8?B?NVUvTitEQm1oR1hCNldHdVlLSG9INnFUUm94WVdLR2dwK3lnZGUxVGFrUmRp?=
+ =?utf-8?B?NVhyTlZNRE5EVFJoeTFnVnB4YVl1aFhPRWYvTXZ4bFBWSEUzZTA4aHo1cVA2?=
+ =?utf-8?B?MlZHU2FpenNoRmdGMVBaN1EyWGtqK3pQaEpmYWZuUTZmUWJTU1BsZFJGNE13?=
+ =?utf-8?B?bG44UW5MaXMwKytIRnhrZE84dWJtMU5vSkxKWmdWYlFIT3F5MG5jUUs2L2Rw?=
+ =?utf-8?B?YytBRC9sUkxHS0p1RzBVc1VkSnpVWk9zL1FWVHpVUkY2OTREMzR6SENKMWN3?=
+ =?utf-8?B?d2hrNHI3OHhQSS8xMlVMVVRNc3RWQ2VmTHRRUFVVZEREb0RXZDh4SHF1aW1u?=
+ =?utf-8?B?LzBhSDd1VjBCWUZOM0VreVcrN0pLRHdlWlFkZGhINlZGdjI0Sko5eW8xRGow?=
+ =?utf-8?B?a2YxQmtpTUlDaUJZajJWZ2NhZ3M2Q2t1ZDdNa21tbU91ZDdwbmhmbDU4aWhs?=
+ =?utf-8?B?VHFmRWY1N0xoTXEvZ1VKeDFHODB1N0RhS085UE16YVdJcFJRYk1DQ05EdHA1?=
+ =?utf-8?B?dUswSWx5cUdQUXYwd2lZSmdQNnZvcm03Z1pFZVZwZ0ZRNEFpS29lMm01NzdC?=
+ =?utf-8?B?c2o4bGNxK3RqN2RuK243S3JYVG4rcmhZb3g2VUpxNC9GU1JTMFphLzlFWllR?=
+ =?utf-8?B?b2dOSnA1VkJoNHlXZ253YkxQdzVZVmVYZnpBbkNWN2FrSzZpcWE0WG5PQTR5?=
+ =?utf-8?B?WGp1M3A3ZlU3RlUwcEl3MzJGd0dVWWFyRE1LZGtUU1EyRzlsL3JPOVlwWTNP?=
+ =?utf-8?B?SXI4eVNoeE1qeFBCdTlFRThhb1JDV1AxZFBjZ1lCOThQbUxuNy81T1ByZk8y?=
+ =?utf-8?B?UU9xcFl0SFpDb0JiQ3YrcGZoWGE0ME9NYlFUWGdaNzhGcldvWndCaXZBbk9y?=
+ =?utf-8?B?MEZ4WnpqZlQ0NVoyR2x4MktBdDNXSGpGaHQxanZQWmZhbkFRVmZPMElVcyty?=
+ =?utf-8?B?MHhxcUd5QWFQcVlRNGNIRmJkVlRYcmNrVncrMGYxMFVmUXc9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K1lkVUJRSmpuK29TSFFzSktZRUJXdklaYjB6ZXlmMVNJa0UvZXpnaXdFckpT?=
+ =?utf-8?B?SkpsOUNsTUYwTjlXS05OcVp4ZWRnaVBNUzdkbXhYbEZhVy9sY2FLTVdIWWcv?=
+ =?utf-8?B?WFhaZTlWNkZOSmlaR1g2dUZJc1pHS1RmNG1HZmdYanFTUkh1VUFMcFE3dmxK?=
+ =?utf-8?B?ZU4xS0tEQmVOZ0libElpMjFxT3BUNUtDazRyVC9xdkJ0eTg4d01JYk1PSlhi?=
+ =?utf-8?B?L3JTOGl1TTJZL1F5MDE1Q2ZSaW9GbE1DcVJHQ1NFUHVrbVRDY2JPYWJGZFM1?=
+ =?utf-8?B?bEpyZlBPdTRCOE9TcVNLMlRTVWkva1pONkQvMS9VRUU5SGZzM3RkOEw2cTJk?=
+ =?utf-8?B?OVVUTGpERnFUdjZ4bU11cWRPalcyKzRyLzVDNDl5aitMVm9FV0ExM2tLUjZN?=
+ =?utf-8?B?TCttTGFFclM1b1FOSWJ0STRMY2hWbGdMRS9kY3oyRDVYZkwyS1ArUG5rVWlE?=
+ =?utf-8?B?U00wbG5mUWROK2xEWlNFSGpUYnZzTFprMVdDd01yNjVKcHNOUVNJM0N4TGkx?=
+ =?utf-8?B?QS9EN0Jkd3NFbG5iWVBROFM1MGV2TkNyN3drN2tNb3N5bW5TbGhPK2tCa3p1?=
+ =?utf-8?B?YzFuNldYVjBtOUdLQ2J2bXBTVWMwUmNwUndCVUlLK0V5aDQvYTJUVG94bmp1?=
+ =?utf-8?B?amdrM2lHSkllMmxweHQ2UVVjK1ROczRib3piWDhHeGlHaVBmTUg0WlB4Wm1Y?=
+ =?utf-8?B?ZldkMEpnanI0UDN5dThILzZwOHZ4Qyt4eVpGYXN3eE0xYVZnSWFKTzFsNzRL?=
+ =?utf-8?B?ZE1GWmVHcEMvTWtWSmsxUWQ0cnBOWkdqYnhsc0E2NnBLSi9HSmVjRjNNSzdo?=
+ =?utf-8?B?TGFhY3lFckhhNEFUZ2FuTzJ1RG5YcTBRVTlUNDNCeUIzanZGdVNSc1NvckEv?=
+ =?utf-8?B?dW84MWx0SUI3TXZsM2ltUHJaODhsV2xZMFI5RjNVYVRMQlZBMEFHVzNyVnFn?=
+ =?utf-8?B?NFRjWWtTOG0vK2tLa3FKVmhJMXFPRVpLR0ZxY1ZLOG02VWJaUDdGWURXelJ3?=
+ =?utf-8?B?dXJXMk5tSXBCZllHbG9HZDdRWG43L2pSeFE0UHZPeEp1MVJVbjRhQXlkVTlm?=
+ =?utf-8?B?M1dhV2J2VklRNTlqNVZyZ25vZGlVTGI1SHJZbWgrcVlESDFLVHMrYnFDbURZ?=
+ =?utf-8?B?eHZQczVTaHVtZy96eFU3QnQyTVNjUk1RS0tTc0tiSktFeE53cmhBcTVVem16?=
+ =?utf-8?B?UVYvSGNzaGgyVVkrNUloNGxUMlN0UU5jUnJ4NXBUVlkxUW8vRENqd0xQNGVS?=
+ =?utf-8?B?aWdmcUZTYzJxYXF0SzdwY2Q3RFZLZWR0UVRBc2VDZ09lVVpVWjliR1ZqN3VT?=
+ =?utf-8?B?cGlKMy9IWXlkYWRKTDRWNFhjUGQrdnUwZ0tqTkFTSWpxWW5NNzV4aVlJMWxS?=
+ =?utf-8?B?VGZVRVdRYXBNRVlScG1ZZjEvamxKM0JMdVFPRlF0U2Izc2VhZWdkUGkzVm5H?=
+ =?utf-8?B?MmUzTXVQalNySjcxNkN0S2hxT0k0TnNpSkNLR2RKU3VwWTJHU3NJczQvVWdH?=
+ =?utf-8?B?Q1R0TVUvUGN1TnlUUU5mSExWRzlDbkVnN254NDNCTzRNN25iaC9mT2xYNG5E?=
+ =?utf-8?B?NzVwamxGZlVBQWdnSFExaFJYMnJXMTZ2aHJqeFVRVzhnc2hJMVNjMTdFcGhH?=
+ =?utf-8?B?WmF5emZLRmV6OFdXb1JzVXZSYzJnTlNlY0wyZC82RHFDRzlZcnlPU3J4MFJJ?=
+ =?utf-8?B?ZzdzK1ZkWHQvTTZrZjEvRzU2MlIzeVVlYTNpR0FhQS9yTFNCbCtOWGlHR2lN?=
+ =?utf-8?B?MEJMOVV4U1FDMlZUb1NZM1g1N2JncVhSZWprZ3ZtNGZlcnk1NVN6c2FVTVp2?=
+ =?utf-8?B?cDlqYS9FbGNPU0FVQTVHdE1sYXNDemRDSkJsK29NbUlQWUEzQVN1S2hCaDJE?=
+ =?utf-8?B?dThoOWtXcHdXTktnQ2JrT0F3QStLZFo5Vll2Z0VBNkovbFVydDhiZzJxcWpn?=
+ =?utf-8?B?TGhtMDlrb2pnaklZSG5rL2pCZWV4WTFJUXIvNXpudG81Q0o5d3VDRk9acG53?=
+ =?utf-8?B?czhFU0h2d2ZHOUxrcWE4SEN4Q2hJcmtpT1Y0Mi9RV3dYQ0Zwd1RUNkRJekRh?=
+ =?utf-8?B?L3dPMDNqQ09TTzJnNWJBOEE5aGxEVlUyM0g0bTl3bkZXdTZYR3pPUVNQVm45?=
+ =?utf-8?B?VDFhRGcxY1ZYbDhxckhwWlJRZXNzRXpnK1NNYjRYMTRGYk1CbzU3cnRZekVK?=
+ =?utf-8?B?U2c9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 94c9a627-3280-4539-ab1b-08de28e5447a
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2025 10:03:50.3810 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: uVoR4P4X0cFnQsJiqTvFoobeodYnF5uhgaA/SCNgJ2GrArbtHskPNb4QHmuCHVBhtr3J1t/drzTeOn0qOYptg5SqsfxbwGMVOpYfM0seYdk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7656
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,28 +173,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
-Sorry for the late reply.
+Hi Surkov,
 
-If the boot option generation logic skips partitions, then the boot 
-option points to whole disk.
+On 11/20/25 7:51 PM, Surkov Kirill wrote:
+> [You don't often get email from fanra3.tk@gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> The pxe_utils/label_boot_extension calls snprintf on an uninitialized memory overlay_dir.
+> This results in a crash when calling sysboot.
+> 
+> This commit fixes this issue.
+> 
 
-But when capsule update calls device_is_present_and_system_part() → 
-efi_dp_find_obj() → find_handle(), it tries to match this boot device 
-path against the ESP partition handle which has path longer than boot 
-device path.
+I believe we already have a patch submitted for this issue:
 
-The find_handle() logic at line 142 rejects the ESP handle because:
-if (len_current > len)  // ESP path is longer than boot device path
-     continue;           // Skip it!
+https://lore.kernel.org/u-boot/20251117152308.900316-1-kory.maincent@bootlin.com/T/#u
 
-So capsule update fails to find the ESP partition.
-Based on this analysis, I believe the fix I proposed would help address 
-this issue, but I'd appreciate your thoughts on whether this approach 
-makes sense or if there's a better way to handle it.
-Thanks for your guidance!
+so please give that a try and a tested-by/reviewed-by there.
 
-On 8/28/2025 5:53 PM, Ilias Apalodimas wrote:
-> Yes it was. In fact the original patches were adding the file instead
-> of the disk [1], but we had concerns on scanning all partitions wrt to
-> boot time. I don't remember if anyone tested the boot time though.
+Cheers,
+Quentin
