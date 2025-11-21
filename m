@@ -4,94 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18EB0CFC299
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:35:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26EDFCFC299
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F66A83A8A;
-	Fri, 21 Nov 2025 18:34:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B160383A1B;
+	Fri, 21 Nov 2025 18:35:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fNLIQRUs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T1oNlDdk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF18683A57; Fri, 21 Nov 2025 18:34:38 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 3BD7083A3A; Fri, 21 Nov 2025 18:35:33 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAAB1839E8
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:34:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2051D839E8
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:35:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-477b198f4bcso16423365e9.3
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:34:36 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b735ce67d1dso367729066b.3
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:35:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763746476; x=1764351276; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=2dHk+aO2AP1znErKPC/EOM2GZQ4+P/mUkLKJLPvyQoE=;
- b=fNLIQRUsJwZuYAeJT8JvE4Z2RKB5TS61iOiuQxbeMYUjpitRhtv0hkxvofErq8lRxK
- ND9g61xJBMtmV4as0JgwOtHyezO0qAja8i3kCrZ/InPyGk2ob1N5AlTPwx8ySx5VPSo8
- i9a627tkqBjR4/azhVFdsph3N4SfJBAnlmoC9ZEfi7oSNfUEtvjikJS0c5GGrA6fRzg8
- zOmyJHui1mHcdcW5WlGsjl36wI3bkzVHGeLYkwgMc8oIjs+rnTluJPMkJo3iKqsN71Qt
- xLrKOkVj5AEO6YJwTAdWHIDbPiE0OcSJ2qxtq9xb/taYxyGZV2igSCOfLKhh5nLFluKL
- fL9g==
+ d=chromium.org; s=google; t=1763746530; x=1764351330; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EEIcBaGX1GxnfgemwyN1rDKF9lcq19JrS5VhBrDK3qE=;
+ b=T1oNlDdkRY6YBJnUmsG5zwSABX4+iS6ayhu72coWf6b6p6z5p480plVP00JSUlc4rp
+ hg6zyV72Ihce7n5zvCzED/9eB0UCS5NHN9m31ZnnRMSz5ptfelOGXLQjbr5oiHzGLuqo
+ z3WGW7tVom2F2oz82BlOqWuk5QuOgxl1101MA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763746476; x=1764351276;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=2dHk+aO2AP1znErKPC/EOM2GZQ4+P/mUkLKJLPvyQoE=;
- b=IsFZ+K3V00fKUlUV35g6dDiHKRRVOD9hJOnV1Nx9zv3E9Is+1RLwpcw/WPhhEl31fs
- N1KDtdR6K+x95AcXPaOPErb+hb8D1P6m1b0XPwJCN1FCQgM/+iiDQKOeSnlFVaVeFjV6
- DZnX9ixrW+2vYxnqgQ0BRfAAzk57Q1s/4iC/Y2WFB65OH1uNwBMzfvIurrm9Be/49JyR
- Og+MgQwz4v1k0+icgtAr/K98Zn4Q93Q1vysguAWaCBJzRR6yikSEAtCKpqFLa1s89DrM
- 3ffiAqHHgWdcfe4LTbMvGtk2neufNnRYL4W3FBwOiDik/hn4ajVI7NbZiTcvpMxBj4ye
- YrgA==
-X-Gm-Message-State: AOJu0YywxqAkierRqwdU8Ai0r1rbd/8FtZ3TAzjVVNCUKk8mSin87KDS
- gBnQo5gl+mUoQvPMO9ivSPk3OpBaKHqE1MKVtOx3p1+mKpa4mhxWoaZNqflDaz1hOUg=
-X-Gm-Gg: ASbGnctsKSUfIAE+jYDQyyBRsZbmfRg5GUtHMjVFG54my1v1SJh2UdYZLpcMxxaIt6M
- 4Q1/55+lVvaYzBCPYN8qcezHXXdMQQcvJeVJlJo8R2ADouMLWxjI+DKwsVC6EyjKXQHwB2ACI6D
- 1zvYGXni1PUgdlxjHVB3WEGs1M15lG3bLlub/zjKQfpwv7jAj7WrU4B+GHkva1Gci1/EYeZweN5
- VZspUSy/peC9xjh3rMiTayUusaBMawgcMPwJyMRDCMkzcgq5fvG3DejlOd2d5GESjPH+men7o6B
- 8RgWw6pNwN+LHWUHI6kh1n356sMRrttscncgPGUJnvcAv9UxVML9Nz5VhHyl++8gpoLzmS7KGDd
- ITP1dbitKboM+SoGyu/soUvD7/okT6rHc9kpqNKgFSeOqRjMojJvZm2S5BOeSopcvplxs8Xvxw8
- xvuOeE1GBvBJSkd1PjqWwH9FuRVezSc3n+g7a7Gd0=
-X-Google-Smtp-Source: AGHT+IEv+R3J+yM1E6F7tSqwy2w4OWxIXNDCRH0/iHQ23B550psgFKRFVLGjBkORCX4Q8bnG6W13RA==
-X-Received: by 2002:a05:600c:1f94:b0:477:7725:c16a with SMTP id
- 5b1f17b1804b1-477c0170de8mr33366195e9.10.1763746476289; 
- Fri, 21 Nov 2025 09:34:36 -0800 (PST)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:fed:2c01:4a49:22af:8b98:6c9c])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-477a9e1b657sm87078365e9.17.2025.11.21.09.34.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Nov 2025 09:34:35 -0800 (PST)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 21 Nov 2025 17:34:33 +0000
-Subject: [PATCH v2 3/3] clk: Prevent memory leak on error
+ d=1e100.net; s=20230601; t=1763746530; x=1764351330;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EEIcBaGX1GxnfgemwyN1rDKF9lcq19JrS5VhBrDK3qE=;
+ b=DiWRBqhkQuhrSl0apDEfepvoIAih6A6XaTtslpLV57NVZyzKOE7kZ+f6Fv8APuShF+
+ 5E2EvwDJxNNsMnhRL/V0WPF28OU2o1lvvULqa05zr5SwN/dZgvmpxl0sOIwxLkwIhsIt
+ 4R9kTERsXN4hfqjjf1yxwRTJbxDvlnY2yaD6DgyfDhnEqjbFSV3RUCmEkmRLiYeB7FRg
+ ACWQ5/1MvvlzIMs80JTdu47aP39SNjaDfD8qJiHnrue+mc3RJQ/Q+MaFFoCOcKRAbONA
+ 1rduTLsjHxsgAPMysaR7dOYfkuCdLaifir6Jhnm5IB0VdsWkSMPJbvr7Q/v0x5CMc+Gz
+ 1TTg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWK3kzd9um9BCNJlEY/Ur6h1D30WZmPsucvhBTmgIRKAGpFWOdk3Bsn2x5EdRQRf0Oa4JD+gOk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9zSPSxYQLI96+Wza0vJ4+trj96Y54ofSMUUY/8ViMo6wfSdm6
+ O9x8CGLbBwJFC3pdNwEjAKOHy6o7AC6zhVZVoDcdtjjeTq5uAzLnwHmKfRusW1eRi1j2ZB2c2rq
+ +QDnW0GsMgxziOfQdAQmY/SGTXAMS2oKs8wbZdI5O
+X-Gm-Gg: ASbGnctje2+8TmxNTUl5bS6ZzVOKXo3LanF7IQXzkS0ifTYeGlA87+vNnY/mfLlLly9
+ Vy63cU4oKyElcORNeeMf8e0Y9PaHehceC5ae7N9HUnF31q4g426UuC9C/tDTMNELnmC24bYkQb6
+ Rxyhy190hJHOez1nU/9D5Lcm8lTIyPekxXuDQS6K413oubO3t0mOkskUqjob5SU57t/hU0Muc4o
+ D6pBNUxzdapr63lc9ZcXTnm28O83fV03Pg5ft7Ybwdc2t+0wNQo0HH60T+9COc67sDSfw==
+X-Google-Smtp-Source: AGHT+IGLIYAR1qBt5X37c4PRoLzdtzrVOMp3a3dXdGr4688SpuUHjaKfK2ib1oB6ArUQnbvKWuGTIb2cc3TJQKr9uY4=
+X-Received: by 2002:a17:907:72cd:b0:b73:5e4d:fae0 with SMTP id
+ a640c23a62f3a-b7671567b72mr341349366b.23.1763746530580; Fri, 21 Nov 2025
+ 09:35:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251121-clk_uclass_fix-v2-3-74f4ea10e194@linaro.org>
-References: <20251121-clk_uclass_fix-v2-0-74f4ea10e194@linaro.org>
-In-Reply-To: <20251121-clk_uclass_fix-v2-0-74f4ea10e194@linaro.org>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Christian Marangi <ansuelsmth@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Marek Vasut <marex@denx.de>, 
- Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>, 
- Ye Li <ye.li@nxp.com>, Michael Trimarchi <michael@amarulasolutions.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+References: <20251120041439.817233-1-marek.vasut+renesas@mailbox.org>
+ <CAFLszTjnGtSPvki-i1fHQEU+bn=6cTqjRFyid3D5zQepNEhzog@mail.gmail.com>
+ <c8752825-92d5-43bd-aa28-e229d4cc3fda@mailbox.org>
+ <CAFLszThiZ9iWZG8vNSaosNjMMTQZeG2=yO8kGoPDBL0SSp_4Cw@mail.gmail.com>
+ <20251121143510.GX2125796@bill-the-cat>
+In-Reply-To: <20251121143510.GX2125796@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 21 Nov 2025 10:35:18 -0700
+X-Gm-Features: AWmQ_bkdh6TgG7NWClQ8_elm0RQyd06FZB6k5UxVBphnndWbRWl7_BdTipmpcu8
+Message-ID: <CAFLszTiBezzWuBE2qo8iEU8dyyD6ro4x2UrXGnQnfKSYSmTGgg@mail.gmail.com>
+Subject: Re: [PATCH] clk: fixed_rate: Avoid calling dev_read_*() if
+ CONFIG_OF_PLATDATA=y
+To: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,30 +96,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In clk_set_default_rates() memory is allocated to store the clock rates
-that are read. Direct returns fail to free this memory leading to a
-memory leak so instead use 'goto fail;' which will then perform the free
-before exiting the function.
+Hi Tom,
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/clk/clk-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, 21 Nov 2025 at 07:35, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Nov 21, 2025 at 07:25:46AM -0700, Simon Glass wrote:
+> > Hi Marek,
+> >
+> > On Thu, 20 Nov 2025 at 21:39, Marek Vasut <marek.vasut@mailbox.org> wrote:
+> > >
+> > > On 11/21/25 12:40 AM, Simon Glass wrote:
+> > > > Hi Marek,
+> > > >
+> > > > On Wed, 19 Nov 2025 at 21:14, Marek Vasut
+> > > > <marek.vasut+renesas@mailbox.org> wrote:
+> > > >>
+> > > >> If CONFIG_OF_PLATDATA=y , then the udevice has no valid OF node associated
+> > > >> with it and ofnode_valid(node) evaluates to 0. The dev_read_u32_default()
+> > > >> call ultimately reaches ofnode_read_u32_index() which invokes fdt_getprop()
+> > > >> and passes result of ofnode_to_offset(node) as an offset parameter into it.
+> > > >>
+> > > >> The ofnode_to_offset(node) returns -1 for invalid node, which leads to an
+> > > >> fdt_getprop(..., -1, ...) invocation, which will crash sandbox with SIGSEGV
+> > > >> because libfdt can not handle negative node offsets without full tree check,
+> > > >> which U-Boot inhibits to keep size lower.
+> > > >>
+> > > >> Add dev_has_ofnode(dev) check and do not assign clock rate in case the
+> > > >> device has no valid node associated with it, and do not call any of the
+> > > >> dev_read_*() functions for devices without valid nodes.
+> > > >>
+> > > >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > > >> ---
+> > > >> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> > > >> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> > > >> Cc: Sean Anderson <seanga2@gmail.com>
+> > > >> Cc: Tom Rini <trini@konsulko.com>
+> > > >> Cc: u-boot@lists.denx.de
+> > > >> ---
+> > > >>   drivers/clk/clk_fixed_rate.c | 2 +-
+> > > >>   1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >>
+> > > >> diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
+> > > >> index 95a77d2e041..5c32ae207fe 100644
+> > > >> --- a/drivers/clk/clk_fixed_rate.c
+> > > >> +++ b/drivers/clk/clk_fixed_rate.c
+> > > >> @@ -35,7 +35,7 @@ void clk_fixed_rate_ofdata_to_plat_(struct udevice *dev,
+> > > >>                                      struct clk_fixed_rate *plat)
+> > > >>   {
+> > > >>          struct clk *clk = &plat->clk;
+> > > >> -       if (CONFIG_IS_ENABLED(OF_REAL))
+> > > >> +       if (CONFIG_IS_ENABLED(OF_REAL) && dev_has_ofnode(dev))
+> > > >>                  plat->fixed_rate = dev_read_u32_default(dev, "clock-frequency",
+> > > >>                                                          0);
+> > > >
+> > > > What is happening here? It should already be checking this:
+> > > >
+> > > > static inline __attribute_const__ bool dev_has_ofnode(const struct udevice *dev)
+> > > > {
+> > > > #if CONFIG_IS_ENABLED(OF_REAL)
+> > > > return ofnode_valid(dev_ofnode(dev));
+> > > > #else
+> > > > return false;
+> > > > #endif
+> > > > }
+> > > I do not understand the question -- this patch _adds_ the
+> > > dev_has_ofnode() test into clk_fixed_rate_ofdata_to_plat_() , it wasn't
+> > > present before. Can you please rephrase your question / concern ?
+> >
+> > The dev_has_ofnode() function already checks OF_REAL, as shown above. To repeat:
+> >
+> > > > static inline __attribute_const__ bool dev_has_ofnode(const struct udevice *dev)
+> > > > {
+> > > > #if CONFIG_IS_ENABLED(OF_REAL)
+> > > > return ofnode_valid(dev_ofnode(dev));
+> > > > #else
+> > > > return false;
+> >
+> >    ^^ returns false here
+> >
+> > > > #endif
+> >
+> > You are adding another check in the caller:
+> >
+> > > >> -       if (CONFIG_IS_ENABLED(OF_REAL))
+> > > >> +       if (CONFIG_IS_ENABLED(OF_REAL) && dev_has_ofnode(dev))
+> >
+> > dev_has_ofnode() will already return false if OF_REAL is not enabled.
+> > So what is the point of checking OF_REAL before calling
+> > dev_has_ofnode() ?
+> >
+> > I don't understand what benefit this patch brings.
+>
+> I think the misunderstanding is that you're asking for this:
+> -       if (CONFIG_IS_ENABLED(OF_REAL))
+> +       if (dev_has_ofnode(dev))
+>
+> To be made to clk_fixed_rate_ofdata_to_plat_(...) in
+> drivers/clk/clk_fixed_rate.c as it does not currently call
+> dev_has_ofnode(dev).
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index a72a67d75a165c2d98bb702888e848f6b075fc7d..bf9f104193573918ad2efbce2bd2578948e44811 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -338,7 +338,7 @@ static int clk_set_default_rates(struct udevice *dev,
- 				continue;
- 			}
- 
--			return ret;
-+			goto fail;
- 		}
- 
- 		/* This is clk provider device trying to program itself
+Ah OK. So the call stack is something like:
 
--- 
-2.47.3
+dev_read_u32_default()
+dev_ofnode() - returns ofnode_null
+ofnode_read_u32_default()
+ofnode_read_u32_index
+fdt_getprop(NULL, -1, ...)   // guess
 
+And I see that I put assert() in some of the ofnode_read..() functions
+because I don't have tests for passing an invalid ofnode.
+
+So perhaps fdt_offset_ptr_() should check for NULL and return? I
+haven't traced it though.
+
+Regards,
+Simon
