@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B67B4CFC279
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 14:26:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2536CFC282
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 14:26:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10B458388D;
-	Fri, 21 Nov 2025 15:26:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6EEA68394E;
+	Fri, 21 Nov 2025 15:26:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YVWEVtsK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m6V22rAb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 624A08393F; Fri, 21 Nov 2025 15:26:01 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 1C19283952; Fri, 21 Nov 2025 15:26:17 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 286F38382A
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 15:25:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20A688382A
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 15:26:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b72bf7e703fso343441466b.2
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 06:25:59 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b737c6c13e1so385399766b.3
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 06:26:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763735158; x=1764339958; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1763735174; x=1764339974; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=s4ikzpLb0YYGz4RkQm6vDdMMqIPw4npsxtnO82K419o=;
- b=YVWEVtsK3SPPlp4QvYeVlPWeTFuKlBx7EBmNGvylCywIeh/AtE3s6I8mtmVH9Eg+ER
- Famu8QUVr9UELjTFeruofyZUAvoDtJ1M4KPRwgIfJPSZUgZ2Eba1qK1JhdBiih0bhvT+
- Xq3ehWdwqyXQ2Fvf6uxfXpadvswKhX03BnsJA=
+ bh=XbnG+rodyHHnerGIImKkZtfq+bMhJaXHasvBhghtnOc=;
+ b=m6V22rAb+T0jG90m9zfPIRZrjpOF6Me8/Wph6+gAQZNGR/bB5y8bKRUL3WWUegQ2Yf
+ XHhGq7ZsSkLGOM6/08Rls1jBtYRUWDhd1AIRJP6+2XAqKkHOUIXA/+5NMvCEQKHum+0a
+ AlxAeKLY5B3u8YNMPrmZhg2dLIYj9UFcfSkWg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763735158; x=1764339958;
+ d=1e100.net; s=20230601; t=1763735174; x=1764339974;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s4ikzpLb0YYGz4RkQm6vDdMMqIPw4npsxtnO82K419o=;
- b=ApIsSOcCtDhiSQMWZynooOA6kDaQ9lV9vVSHpe2bYU3yqy7gxWLQrdWWso0NHw0ZC9
- RBQtdOn9i8dT1faKKNrK3gnkK7V5GoaiU+HM7l3pn23TuZplKu8yE9SiD9R6W5uxz0yj
- ZF9D1MZ7jGxRKCaGhTEDyZUxkbTyUsE3tURFaBBwzoz8X8un14rNYWWsHfwm3LR3WqZQ
- +hxAsHrXgZj440r6JdYhQesAmI6L2Da3ocxTaMsMiHWCwO0gdGIhnWCOs3Oj/MabPmAb
- zVkQWMbD67esXgFVNngufb+QMEGww6PCT8rpoRJjc56d67WBXAD5B6TL3fsrw5APuRC4
- c+4Q==
-X-Gm-Message-State: AOJu0Yzrj5eoGIGlnqp5wNXyuMIDRBgVTZRvGJHALic4wSv4ToeCeKWK
- oqzLB1+0d7WTi6JEKJy1UtHLTL7EbZyeVxg3Rm+n86L4s/wr9p2cjMsywRAgEXhJHzqgnM5172q
- CM0v5A+GNogef/MhzEqT+FvA08Bar5DhpV9oAFv8a
-X-Gm-Gg: ASbGncuttkiLIJjcqqXqB2IEnOfdmdXYhTAMErMieMYVHuu/+6bijU5oBjjFIXjv+CF
- ZbSedciDBtmINXu5OtxBQmTTxNV3KcA34yxixF6QGE31CDo+OPNUd7Vp7WIq07vc1JQBS9bsyQK
- Umi69niYxKFCKknLIubU3GjSZnUy9rabSPf53LOwTinO1EDMmVAHEY/PmuqJSw9xJHBhYDnDBeL
- mZp+//XhSZ7NX2yxOxnnDzo6oOQprnTlzwTsTZxMarMy1u3ecy++7OMvIkZC+jOryh5oQ==
-X-Google-Smtp-Source: AGHT+IH/v+EB3CTpA1R8OzDDRfr38/cd29z6WMh78MNMKmkOil4MTxGrzeMU4xvILUYAKo4lC3/W/gBuzxIQC3jJV3c=
-X-Received: by 2002:a17:907:d05:b0:b73:6b24:14b5 with SMTP id
- a640c23a62f3a-b7671a47bafmr281932566b.31.1763735158514; Fri, 21 Nov 2025
- 06:25:58 -0800 (PST)
+ bh=XbnG+rodyHHnerGIImKkZtfq+bMhJaXHasvBhghtnOc=;
+ b=HKI1HCXMxjt8SUYHHE1OYc5S4Kdzbg+CeoxMOziRSPaDZAHhuBXtbT26+IML1XVvrC
+ BeBrc3pPrC0JFAIvtQIRw4CUWyk7z4zRon56FG6TKA0hr6p0R/w3rrzUupWpefke78vR
+ KekZr2Jse1eP8eMA3emyqTjUFtP+29BPsrz/jaNvPif2BtPWUH6S9XL3698eFJF2pX9m
+ 4tAlPX30XtsEbT0s6WB+x5f+1SK433G9My3Dw7dsWm+Lf451/WdZN1wrSp2hi0jkqK3I
+ 7u5KEGqlnGIQsbAxMJaCaZRURAMJXEqcyC7wY1/LXKyxxR8dGQWblLNoPl03ITU+VoB4
+ sicw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUD1cdKCupHUyOdQWJ+79cMbTS7jTP5CA3vOsN3ZmhJuvQ8qoJb55od15S82XRu4JaT9z+pIPY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzvLR6SQg1b0vsJPQdXpLH3HhxTYedYH+E2QQd+p+F1f9EJC1P3
+ o9HW9xhwzUift8/amJ2N5fdT8UQfixz8go55cqvqi7md4t6i6mJuC3eqrV5ovQu3zLqfDtZsxug
+ BDSHcy/Y4Ub3AWhr5xVqBvrg69voGkEpBs++Ytr/+RP8Gk40LlyY=
+X-Gm-Gg: ASbGncv0AOzlvK9wRgvxdTxdFxizq45J+GHOsTGTMDYRHqPqhuxUBYGUJyhdKIh8Zv4
+ K6z0Oy4iO/8MOdV+lbIoGk4mab9iUtltAqFSvrCtFeKeOXKO2ITM1ttvHaNdCBQVptYkFgOA1ly
+ Rd0smkStwBNWQciowBr7U6JXObGpJlZLGGNGy3sAkaipOcgi/jx1tlaje0l+QkaIK1aP0AhuzVI
+ 46ZbgmbDHdqgQ7FOUtNTJQAKUXDhmilVBN3dOk5/SYOHIyoys2taC2MqmjLPacok4j8ZQ==
+X-Google-Smtp-Source: AGHT+IHffQ8zVmWqojr4RSTWxd+mzs7CaVAYIyQfXXiimd5ZNt8dy8t29kOSsR8bSsIAN1XZuw7FQMDMQMqS2l19xJc=
+X-Received: by 2002:a17:907:3f14:b0:b76:5ef6:3b73 with SMTP id
+ a640c23a62f3a-b76715723cemr228004266b.23.1763735174539; Fri, 21 Nov 2025
+ 06:26:14 -0800 (PST)
 MIME-Version: 1.0
-References: <20251120041439.817233-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTjnGtSPvki-i1fHQEU+bn=6cTqjRFyid3D5zQepNEhzog@mail.gmail.com>
- <c8752825-92d5-43bd-aa28-e229d4cc3fda@mailbox.org>
-In-Reply-To: <c8752825-92d5-43bd-aa28-e229d4cc3fda@mailbox.org>
+References: <20251120041526.817288-1-marek.vasut+renesas@mailbox.org>
+ <6a902e2d-b1be-1ba1-5d8b-e0a07ea2aebe@nabladev.com>
+ <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
+ <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
+ <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
+In-Reply-To: <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 21 Nov 2025 07:25:46 -0700
-X-Gm-Features: AWmQ_blXdqhylhIl_f9C-4y4j-qDCLd54-cRAwgFbvitQ5I3VBGLd0Ln7stVcoc
-Message-ID: <CAFLszThiZ9iWZG8vNSaosNjMMTQZeG2=yO8kGoPDBL0SSp_4Cw@mail.gmail.com>
-Subject: Re: [PATCH] clk: fixed_rate: Avoid calling dev_read_*() if
+Date: Fri, 21 Nov 2025 07:26:01 -0700
+X-Gm-Features: AWmQ_bl1OwNJ9vpsJvRNQl49Ck5L8GT9PgjFVYsUgUXzEWvR13EBuzyKLEe1Lrk
+Message-ID: <CAFLszTjyXo9yh6Jzdaev9GhN8OZ4Z5xz9phgNHnKCvA0ASzbaA@mail.gmail.com>
+Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
  CONFIG_OF_PLATDATA=y
 To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,84 +101,84 @@ On Thu, 20 Nov 2025 at 21:39, Marek Vasut <marek.vasut@mailbox.org> wrote:
 > On 11/21/25 12:40 AM, Simon Glass wrote:
 > > Hi Marek,
 > >
-> > On Wed, 19 Nov 2025 at 21:14, Marek Vasut
-> > <marek.vasut+renesas@mailbox.org> wrote:
+> > On Thu, 20 Nov 2025 at 04:56, Marek Vasut <marek.vasut@mailbox.org> wrote:
 > >>
-> >> If CONFIG_OF_PLATDATA=y , then the udevice has no valid OF node associated
-> >> with it and ofnode_valid(node) evaluates to 0. The dev_read_u32_default()
-> >> call ultimately reaches ofnode_read_u32_index() which invokes fdt_getprop()
-> >> and passes result of ofnode_to_offset(node) as an offset parameter into it.
+> >> On 11/20/25 10:08 AM, Heiko Schocher wrote:
 > >>
-> >> The ofnode_to_offset(node) returns -1 for invalid node, which leads to an
-> >> fdt_getprop(..., -1, ...) invocation, which will crash sandbox with SIGSEGV
-> >> because libfdt can not handle negative node offsets without full tree check,
-> >> which U-Boot inhibits to keep size lower.
+> >> Hello Heiko,
 > >>
-> >> Add dev_has_ofnode(dev) check and do not assign clock rate in case the
-> >> device has no valid node associated with it, and do not call any of the
-> >> dev_read_*() functions for devices without valid nodes.
-> >>
-> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >> ---
-> >> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> >> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> >> Cc: Sean Anderson <seanga2@gmail.com>
-> >> Cc: Tom Rini <trini@konsulko.com>
-> >> Cc: u-boot@lists.denx.de
-> >> ---
-> >>   drivers/clk/clk_fixed_rate.c | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
-> >> index 95a77d2e041..5c32ae207fe 100644
-> >> --- a/drivers/clk/clk_fixed_rate.c
-> >> +++ b/drivers/clk/clk_fixed_rate.c
-> >> @@ -35,7 +35,7 @@ void clk_fixed_rate_ofdata_to_plat_(struct udevice *dev,
-> >>                                      struct clk_fixed_rate *plat)
-> >>   {
-> >>          struct clk *clk = &plat->clk;
-> >> -       if (CONFIG_IS_ENABLED(OF_REAL))
-> >> +       if (CONFIG_IS_ENABLED(OF_REAL) && dev_has_ofnode(dev))
-> >>                  plat->fixed_rate = dev_read_u32_default(dev, "clock-frequency",
-> >>                                                          0);
+> >>>> diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
+> >>>> index 380a9f8f3ad..d0e9dad7202 100644
+> >>>> --- a/drivers/i2c/i2c-uclass.c
+> >>>> +++ b/drivers/i2c/i2c-uclass.c
+> >>>> @@ -749,8 +749,11 @@ static int i2c_post_probe(struct udevice *dev)
+> >>>>    #if CONFIG_IS_ENABLED(OF_REAL)
+> >>>>        struct dm_i2c_bus *i2c = dev_get_uclass_priv(dev);
+> >>>> -    i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
+> >>>> -                         I2C_SPEED_STANDARD_RATE);
+> >>>> +    if (!dev_has_ofnode(dev))
+> >>>> +        i2c->speed_hz = I2C_SPEED_STANDARD_RATE;
+> >>>> +    else
+> >>>> +        i2c->speed_hz = dev_read_u32_default(dev, "clock-frequency",
+> >>>> +                             I2C_SPEED_STANDARD_RATE);
+> >>>>        return dm_i2c_set_bus_speed(dev, i2c->speed_hz);
+> >>>>    #else
+> >>>>
+> >>>
+> >>> This sounds more as a bug of dev_read_u32_default() to me and should
+> >>> be fixed there, else we need to make this check around each call of
+> >>> dev_read_u32_default() ...
+> >>>
+> >>> And looking into u-boot:/drivers/core/read.c there are more
+> >>> candidates for such a fix (all with "default" in function name?)
+> >>>
+> >>> and such a fix would also make the dev_has_ofnode(dev) check in
+> >>> i2c_child_post_bind() obsolete.
+> >>>
+> >>> Or may we fix the default functions in drivers/core/ofnode.c ?
+> >> No, this was the previous implementation which is now superseded by this
+> >> one, see [1] [2]. The goal is to fix the entry points which pass invalid
+> >> content further into U-Boot DT handling code, so the DT validation
+> >> happens only one, on DT input, and not again later.
 > >
-> > What is happening here? It should already be checking this:
-> >
-> > static inline __attribute_const__ bool dev_has_ofnode(const struct udevice *dev)
-> > {
-> > #if CONFIG_IS_ENABLED(OF_REAL)
-> > return ofnode_valid(dev_ofnode(dev));
-> > #else
-> > return false;
-> > #endif
-> > }
-> I do not understand the question -- this patch _adds_ the
-> dev_has_ofnode() test into clk_fixed_rate_ofdata_to_plat_() , it wasn't
-> present before. Can you please rephrase your question / concern ?
+> > Do the libfdt functions work correctly with *any* negative numbers?
+>
+> Not without a full tree check (LIBFDT_ASSUME_MASK=0x00). With
+> LIBFDT_ASSUME_MASK=0xff (what SPL uses, tree checks disabled), passing
+> negative offset to libfdt functions would simply trigger a segfault for
+> sandbox SPL tests.
+>
+> > Do
+> > you have a pointer to the libfdt commit which changed this? All of
+> > driver model relies on that behaviour in libfdt:
+> With libfdt 1.7.2 , this code triggers segfault in sandbox SPL tests:
+>
+> 162 uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
+> 163 {
+> 164         const fdt32_t *tagp, *lenp;
+> 165         uint32_t tag, len, sum;
+> 166         int offset = startoffset;
+> 167         const char *p;
+> 168
+> 169         *nextoffset = -FDT_ERR_TRUNCATED;
+> 170         tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
+> 171         if (!can_assume(VALID_DTB) && !tagp)
+> 172                 return FDT_END; /* premature end */
+> 173         tag = fdt32_to_cpu(*tagp);
+>
+> The fdt_offset_ptr() returns NULL and fdt32_to_cpu(*tagp) would
+> dereference that NULL pointer.
 
-The dev_has_ofnode() function already checks OF_REAL, as shown above. To repeat:
+Ah, I see. So the library hasn't changed, it's just the 'assume'
+logic. That makes sense.
 
-> > static inline __attribute_const__ bool dev_has_ofnode(const struct udevice *dev)
-> > {
-> > #if CONFIG_IS_ENABLED(OF_REAL)
-> > return ofnode_valid(dev_ofnode(dev));
-> > #else
-> > return false;
+I see a few options:
+- enable the checks for the affected board (code-size impact)
+- create a new VALID_OFFSET assumption (split out from VALID_DTB)
+which checks offsets in fdt_next_tag()
 
-   ^^ returns false here
-
-> > #endif
-
-You are adding another check in the caller:
-
-> >> -       if (CONFIG_IS_ENABLED(OF_REAL))
-> >> +       if (CONFIG_IS_ENABLED(OF_REAL) && dev_has_ofnode(dev))
-
-dev_has_ofnode() will already return false if OF_REAL is not enabled.
-So what is the point of checking OF_REAL before calling
-dev_has_ofnode() ?
-
-I don't understand what benefit this patch brings.
+The latter might be best. It would likely be very cheap in terms of
+code size. In fact, I should have thought of this at the time.
 
 Regards,
 Simon
