@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDE71CFA76D
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 10:56:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAD10CFA76D
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 10:57:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22D96835FD;
-	Fri, 21 Nov 2025 11:56:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6ECB2835FD;
+	Fri, 21 Nov 2025 11:57:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZZSjtqvz";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bsNQITyw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E63B8367F; Fri, 21 Nov 2025 11:56:55 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 32ED7836D1; Fri, 21 Nov 2025 11:57:38 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2B6D802C1
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 11:56:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F0F8802C1
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 11:57:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id A972060097;
- Fri, 21 Nov 2025 10:56:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFDB6C4CEF1;
- Fri, 21 Nov 2025 10:56:50 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id B19AE40A95;
+ Fri, 21 Nov 2025 10:57:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7877C4CEF1;
+ Fri, 21 Nov 2025 10:57:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1763722611;
- bh=4Pdf8Ph5dl9xiHPE2vNhVo5YO3qCPUkROepHfqFFeC8=;
+ s=k20201202; t=1763722654;
+ bh=wlk2PuhxjLuu0vghVKwCHbuWL1qTURkYvOsmM3af3MA=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=ZZSjtqvzO8SsLCEf/VUBDiRPolOQRlbLougtzkf+idKdiNAmY4SYCoZvL1RFG19u8
- r++tkdtWxR4+i5Izk1WMyoVixbt1kTKxu8gOvDMqxGb3QIQ4q2s/RcU8FKclzDf5/3
- Na0xPws7hCs02/JxSW4LVK3XwT9JcHeh/NO0mVcIwdmrm+wCusVbu3ftO/cS34lq/e
- vO+ZoXiXTHpH77P9PyaNNvIz+jgl5bOs0R1ITBdGYm6BKwrzn4ZID2wArUGI/3hGt6
- PEmiNJ3f3WMX5wc9JOpWrp1MUfnAGyvAeJHXdiIlVCBoso/H8dCNRQZHqedE52hP2k
- ByAb20TFerqoQ==
+ b=bsNQITywK/RmM+6eYZsZ1gDCXSElelRz+qjfvmw95h0EjCB16eirzWv+LA1174x+U
+ g5ww/8zfGS7C9E4BKTYHNl/v9HmPBlNlC0igy7scLodDM06+IbRXViJzVazmZDLYWh
+ xyiNTQNDzxQH4EATeJM5ZkD4oh8mr83wXoMU4vxW+JhaeSNtUhOko1bhgs1LLCWfT2
+ CGwj/+J+kqOfsl/uD+oR5XSddiiaxKbo36487Agl1sXj/QpPvAYwIQu4YaM8qnbmeQ
+ WfOPVw7bYdzuoxoLSNouqDorzffjYtNGqcPGppDfuTh32G5KqmPnKCpkJjF7ZhydJK
+ Lb8gbWevFXWug==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Christian Marangi
@@ -49,12 +49,12 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Christian Marangi
  <hs@nabladev.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon
  Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini
  <trini@konsulko.com>
-Subject: Re: [PATCH 1/2] sandbox: Fix DT compiler address warnings in
- sandbox DTs
-In-Reply-To: <20251113115658.947953-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 2/2] sandbox: Fix DT compiler pin warnings in sandbox DTs
+In-Reply-To: <20251113115658.947953-2-marek.vasut+renesas@mailbox.org>
 References: <20251113115658.947953-1-marek.vasut+renesas@mailbox.org>
-Date: Fri, 21 Nov 2025 11:56:48 +0100
-Message-ID: <871plr4psf.fsf@kernel.org>
+ <20251113115658.947953-2-marek.vasut+renesas@mailbox.org>
+Date: Fri, 21 Nov 2025 11:57:31 +0100
+Message-ID: <87y0nz3b6s.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -80,35 +80,20 @@ Thank you for the patch.
 On Thu, Nov 13, 2025 at 12:56, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 
 > Trivially fix the following warnings in sandbox DTs, which show up with
-> DTC 1.7.2. Fill in the missing address and adjust emulated I2C address
-> to fit the 7bit address limit:
+> DTC 1.7.2. Assign pin groups less confusing node names with pins- prefix
+> to avoid confusing DT compiler into thinking the node is really a bus node:
 >
 > "
-> arch/sandbox/dts/sandbox.dtsi:138.30-140.5: Warning (i2c_bus_reg): /i2c@0/sandbox_pmic: I2C bus unit address format error, expected "40"
-> arch/sandbox/dts/sandbox.dtsi:146.18-161.5: Warning (i2c_bus_reg): /i2c@0/emul: I2C bus unit address format error, expected "ff"
-> arch/sandbox/dts/sandbox.dtsi:148.4-17: Warning (i2c_bus_reg): /i2c@0/emul:reg: I2C address must be less than 7-bits, got "0xff". Set I2C_TEN_BIT_ADDRESS for 10 bit addresses or fix the property
+> arch/sandbox/dts/.test.dtb.pre.tmp:1831.20-1841.5: Warning (i2c_bus_bridge): /pinctrl/i2c: incorrect #address-cells for I2C bus
+> arch/sandbox/dts/.test.dtb.pre.tmp:1831.20-1841.5: Warning (i2c_bus_bridge): /pinctrl/i2c: incorrect #size-cells for I2C bus
+> arch/sandbox/dts/test.dtb: Warning (i2c_bus_reg): Failed prerequisite 'i2c_bus_bridge'
+> arch/sandbox/dts/.test.dtb.pre.tmp:1848.20-1856.5: Warning (spi_bus_bridge): /pinctrl/spi: incorrect #address-cells for SPI bus
+> arch/sandbox/dts/.test.dtb.pre.tmp:1848.20-1856.5: Warning (spi_bus_bridge): /pinctrl/spi: incorrect #size-cells for SPI bus
+> arch/sandbox/dts/test.dtb: Warning (spi_bus_reg): Failed prerequisite 'spi_bus_bridge'
 > "
->
-> "
-> arch/sandbox/dts/.test.dtb.pre.tmp:912.18-926.5: Warning (i2c_bus_reg): /i2c@0/emul: I2C bus unit address format error, expected "ff"
-> arch/sandbox/dts/.test.dtb.pre.tmp:913.4-17: Warning (i2c_bus_reg): /i2c@0/emul:reg: I2C address must be less than 7-bits, got "0xff". Set I2C_TEN_BIT_ADDRESS for 10 bit addresses or fix the property
-> arch/sandbox/dts/.test.dtb.pre.tmp:928.30-931.5: Warning (i2c_bus_reg): /i2c@0/sandbox_pmic: I2C bus unit address format error, expected "40"
-> "
->
-> Fix up pmic test to match.
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-> ---
-> Cc: Christian Marangi <ansuelsmth@gmail.com>
-> Cc: Dinesh Maniyam <dinesh.maniyam@altera.com>
-> Cc: Guillaume La Roque <glaroque@baylibre.com>
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
 > ---
