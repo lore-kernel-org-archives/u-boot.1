@@ -4,84 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97571CFC299
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:40:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5A8ECFC29B
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:48:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1651A83A1B;
-	Fri, 21 Nov 2025 18:40:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3810C83A1B;
+	Fri, 21 Nov 2025 18:48:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EDk5Ux1I";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="AwmOYzJX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A90883A5A; Fri, 21 Nov 2025 18:40:27 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 414D283A1E; Fri, 21 Nov 2025 18:30:46 +0100 (CET)
+Received: from mx-relay99-hz2.antispameurope.com
+ (mx-relay99-hz2.antispameurope.com [94.100.136.199])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30EF1839E8
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:40:25 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b73a9592fb8so481360666b.1
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:40:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763746824; x=1764351624; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mY1UbKqJvVYjBKaz+O8riS0Vn9nwWLkm3d/FGpRVktA=;
- b=EDk5Ux1IuBZ66D0n85/HUzcmDJ7U1aDaHg+ttXTCcwNbCIZ9hwk04qK7xbuHWxmql4
- b1EwClaQKH/IALtIamIJxXzE4qvd8q5i+QcOrN/JHwM2NmhwuBvJcx/NSsIbO5nOOXBc
- hUQGbpl1fa98KxkXT0Do6z9U9swMDDWiHfS0w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763746824; x=1764351624;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mY1UbKqJvVYjBKaz+O8riS0Vn9nwWLkm3d/FGpRVktA=;
- b=PyfSZoZNjcj9tB7QRzfg6Jfar6mjuG2Qerxfn/uPszb/QlLbjGvvVbEz1AOzdbWawG
- CVeAJoGMGPZBDRD0yFJ996U9JGaK3eVc8kUGgGcMPwomL8IIbAJxhfIByUi8gkxrADNl
- uLLaD1AlLIxBjSJOn+RtFUIai/iGyQ3Y8KqkGUPaObcq0RUpWfyI9kM5Qu56HEJqhwiw
- lQenVwn6i1av8ROsSmkvYCK03bjB8wqaAOB1pFaPXAbX+LpAZ/I+hGkBqe9oZg+IJXjG
- N9N5jdLeZrFUxsqcIFuh0puq4E5XeUHcwva4lSe7svWhGGgmgBqun4IRe+sj+oLbyO6/
- Cclw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUNQpz1hNEVE6wDU5SYeJtSeW17bgDY4MdKDdQV5xiDYrO8SNYIGLUpJn8VQltqXeDlTEYhTRU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzK3oeRru9+T2DG5xSSuc/IMPrmMCH0bv9ilFDK3MZqQO/j588J
- iFVkLO+VL+B7RKTJy/DeR23efMrMbveT3rabsNEBFjj9uQ3dQNhtlp/G8ca05wlo2qzuUmJC4tx
- PjBEI+cxvgp+mq9s2yYAL9m3rh2Q54zhKQ8cmdVsg
-X-Gm-Gg: ASbGncuj+ElVXUwNtHWyPR/bKBBGSDVbtTF8VEr9Ozbjh7IfvxCO/XsvdO788NPU6ot
- WW4iM+LKDPfi33Ylo1w8W9dUOBaokZTYz467p/0LwGF0SdeyVxPHHiUGwfEpa28b6S1up15vFa8
- t9XgYTJHk/M3v6jnulo/9RMKQpR/XcztB0K3FVJ755vzdzHVxBBriOKMJ0IQ93zk62GsFsicFvU
- wCDc7+/+3INp/LEbTPu9XT4zOTi3BWDWhdDwTDKdqY8sg2lfKvAO60tLSk9G9DVHOE6ng==
-X-Google-Smtp-Source: AGHT+IHqFgR7FU/lvpl5Ugq9kwQfUUeJNCVqJzBXDYqjyOtT7hxOux1GgbDRzX0OFl0jUyncwbBVFm6wLJS0oMPZ/0E=
-X-Received: by 2002:a17:907:1ca4:b0:b6d:5dbb:a1e1 with SMTP id
- a640c23a62f3a-b766ed8362dmr423260066b.5.1763746824661; Fri, 21 Nov 2025
- 09:40:24 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCCD8839E8
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:30:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0413a1ceba=alexander.feilke@ew.tq-group.com
+ARC-Authentication-Results: i=1; mx-gate99-hz2.hornetsecurity.com 1; spf=pass
+ reason=mailfrom (ip=94.100.132.6,
+ headerfrom=ew.tq-group.com)
+ smtp.mailfrom=ew.tq-group.com
+ smtp.helo=hmail-p-smtp01-out04-hz1.hornetsecurity.com; dmarc=pass
+ header.from=ew.tq-group.com orig.disposition=pass
+ARC-Message-Signature: a=rsa-sha256;
+ bh=CwXa9GhURE4BFVVkYiKI78dZ5xhKQ/LJToDKl6YeCnw=; c=relaxed/relaxed;
+ d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
+ t=1763746242;
+ b=ZlOdHyCrkHjYeriHly4pIBtw+KQLQrXNRLnimnb9Mz/s8tPZsYXSuIqKYsvtwHtsqeKr5XZr
+ /tvJQCJ3syId7imqMADv8FbesExY3tY8Xhtn/ed0Bf70RhWGjzAzTVOlk5ITXf+n5/c0SqZg0zR
+ N4KGsriiYxmby4SEByzctxKNfapkZs+L1SLDEwAvrzV4AoXuxTp6E6i1qOwbP21kgun/44kNO7U
+ mkh8xmlLFz3AZ77nKdhbo+zLFRMzDgqLl1UTVObg95J6XRznltpil8EoSvDIlEGgQ9HwzPNmIN0
+ xZDJNOP1LRZJg7rJowQh0O8vMK7LN7K9mV86DFoFzmUyQ==
+ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
+ t=1763746242;
+ b=of8h9BY/eTPaxxl/K1Y0zoDopngm4D8qsQCizkkCU1JON3MPZY4a9kKmmVxi1UJwjb5b3oUw
+ O6YHJ+rdyTvP+XC0In6BcW1pCdZcWjZyrFrh7jWvfGlquaUCE9bfnr5/GhBH9eaG6lAlCxoXVsn
+ 31FJxgfGAyjF/jEsrrC2AYFhqyoJCRHU5DwSvpcq9O2f4+VRQBkUM+1ZtG8PlNS9g5pG/TS5AsO
+ 8rIg/dgpmFiwIB5Rct8T+zE6L4j66lDj9Xg5ANZQIuQt3o3/gY1GKDf87uX1h5+2ImuM4WpvP6Q
+ CucPAcxQHclkpdODQjYVrtpl5/n1KGV/w27A5q2gf4y2w==
+Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
+ mx-relay99-hz2.antispameurope.com; Fri, 21 Nov 2025 18:30:42 +0100
+Received: from FEILKEA-M.tq-net.de (host-82-135-125-110.customer.m-online.net
+ [82.135.125.110])
+ (Authenticated sender: alexander.feilke@ew.tq-group.com)
+ by hmail-p-smtp01-out04-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
+ C6191220CAB; Fri, 21 Nov 2025 18:30:23 +0100 (CET)
+From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>,
+ Fabio Estevam <festevam@denx.de>,
+ Markus Niebel <Markus.Niebel@tq-group.com>
+Cc: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+Subject: [PATCH 0/8] net: fec_mxc: fix bugs when using DM_MDIO and DM_ETH_PHY.
+Date: Fri, 21 Nov 2025 18:29:29 +0100
+Message-Id: <20251121172938.26890-1-Alexander.Feilke@ew.tq-group.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20251120041526.817288-1-marek.vasut+renesas@mailbox.org>
- <6a902e2d-b1be-1ba1-5d8b-e0a07ea2aebe@nabladev.com>
- <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
- <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
- <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
- <CAFLszTjyXo9yh6Jzdaev9GhN8OZ4Z5xz9phgNHnKCvA0ASzbaA@mail.gmail.com>
- <60b12c96-4e63-4cf1-8c27-25eabead529c@mailbox.org>
- <CAFLszThg+6LdxHXOYy9x8-nat+bsspbUT8Dg_vqnmx62aO0a2g@mail.gmail.com>
- <a8fa7ff0-1324-4213-b45b-b4df637e6bee@mailbox.org>
-In-Reply-To: <a8fa7ff0-1324-4213-b45b-b4df637e6bee@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 21 Nov 2025 10:40:13 -0700
-X-Gm-Features: AWmQ_bk_fsupGdD8B8qnbkWZ5ni92aCTCJSfzbHuRS_kFWIGEkyNKZyP3VGyZgM
-Message-ID: <CAFLszTgLjRT_x1+tX0xpBzTy9bDJSYXw=5gOBvvNSqdOZDiZoQ@mail.gmail.com>
-Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
- CONFIG_OF_PLATDATA=y
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-cloud-security-sender: alexander.feilke@ew.tq-group.com
+X-cloud-security-recipient: u-boot@lists.denx.de
+X-cloud-security-crypt: load encryption module
+X-cloud-security-Mailarchiv: E-Mail archived for:
+ alexander.feilke@ew.tq-group.com
+X-cloud-security-Mailarchivtype: outbound
+X-cloud-security-Virusscan: CLEAN
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
+ mx-relay99-hz2.antispameurope.com with 4dCj0c2Yjcz28lXQ
+X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
+ IP=94.100.132.6
+X-cloud-security-Digest: 8f058dc2ed245bb48f0a071870dc4831
+X-cloud-security: scantime:2.164
+DKIM-Signature: a=rsa-sha256;
+ bh=CwXa9GhURE4BFVVkYiKI78dZ5xhKQ/LJToDKl6YeCnw=; c=relaxed/relaxed;
+ d=ew.tq-group.com;
+ h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
+ t=1763746242; v=1;
+ b=AwmOYzJX37nYinzQtB2uX6HSni7u3yGFebaIrQcP6//nSd+l8ixWA8fOeOCWdjvEJ/bINLby
+ 7TlWRBeN3w/NNLavPGNAiumNIYtPG5Mclk7AKha9TYLbge6GKKOAG+EWYS9X4jxbZuCPWfrHJe8
+ hgA0AsT/yKUdzq6VEf2dcrQQUOcZiIy6WPx5DEeXUh/kXNCKEEHu+xROIyl3KZvdkk7eXFtb602
+ ag+a+K6FqopwdbQOuzaw7FQZWn2qlqP0meMCnXYAgqVdisA5X9dEnuA0L7K42Vu6xFZO0xPTSVy
+ 0GV1xdLkrjVxapjxqtJyw+u/ARF0qYq6MSEL9azTRmG4Q==
+X-Mailman-Approved-At: Fri, 21 Nov 2025 18:48:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,42 +110,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+This fixes various oversights in the fec_mxc driver and ultimately adds support
+for devices with multiple FECs each using its own bus. The patches were tested
+internally on an i.MX7D-based module with separate MDIO buses and on an iMX6UL
+with shared MDIO buses.
 
-On Fri, 21 Nov 2025 at 10:34, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 11/21/25 5:20 PM, Simon Glass wrote:
->
-> Hello Simon,
->
-> >>> - create a new VALID_OFFSET assumption (split out from VALID_DTB)
-> >>> which checks offsets in fdt_next_tag()
-> >>>
-> >>> The latter might be best. It would likely be very cheap in terms of
-> >>> code size. In fact, I should have thought of this at the time.
-> >> Wouldn't it be better to not misuse libfdt ?
-> >
-> > It actually isn't a misuse. It is perfectly OK to pass an invalid
-> > offset and libfdt has defined behaviour in that case, absent any
-> > 'assumptions' we force.
->
-> It actually isn't OK to pass in invalid offset if we compile FDT with
-> disabled tree validity checks.
+Checkpatch also yielded some warnings regarding CONFIG #ifdef's, which weren't
+included in this series yet.
 
-We are saying exactly the same thing, if you read both of the above :-)
+Markus Niebel (8):
+  net: fec_mxc: respect return value of phy_config
+  net: fec-mxc: prevent crash if no MAC address is set
+  net: fec_mxc: fix probe of MDIO bus for DM_MDIO
+  net: fec_mxc: fix remove with DM_MDIO
+  net: fec_mxc: rewrite fallback MDIO Bus allocation
+  net: fec_mxc: fix usage of DM_MDIO and DM_ETH_PHY
+  net: fec_mxc: add unique bus and device names for DM_MDIO
+  net: fec_mxc.c: improve readability of dm_fec_bind_mdio
 
->
-> > Remember, in Linux these checks are enabled. We added the 'assume'
-> > thing to reduce code size. Here you have found a situation where it
-> > breaks stuff, so we should back off the assumption a bit.
-> U-Boot also has those checks enabled, SPL does not, and things break
-> when OF_PLATDATA is enabled and there is no valid node associated with
-> the udevice.
+ drivers/net/fec_mxc.c | 56 +++++++++++++++++++++++++++++++++----------
+ drivers/net/fec_mxc.h |  4 ++++
+ 2 files changed, 48 insertions(+), 12 deletions(-)
 
-Right, so add SPL_OF_LIBFDT_ASSUME_MASK for SPL and check the code
-size. If it is too much, add a new level FDT_ASSUME_EXISTS before
-FDT_ASSUME_SANE and use that for the necessary checks (there will only
-be a few, from my reading of the code).
+-- 
+2.34.1
 
-REgards,
-Simon
