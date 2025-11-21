@@ -4,140 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9491BCFA74F
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 08:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55CF7CFA756
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 08:52:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16CB380433;
-	Fri, 21 Nov 2025 09:41:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id B166180433;
+	Fri, 21 Nov 2025 09:52:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hEDYiKdM";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="pNBFBXAg";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Lyn8OSHk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD4B98051F; Fri, 21 Nov 2025 09:41:31 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 67CBE8051F; Fri, 21 Nov 2025 09:52:54 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C34C9801CF
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:41:29 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1763714484; x=1764319284; i=xypron.glpk@gmx.de;
- bh=174zxRM6AudNPYQZd10gWvaxxmPU+r3PVu346uBi348=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=hEDYiKdMniHIXurCCUV7JR/D4jLzMYxoRiiYQarp1vE22JuKKk9YvFv5qtCDo0Iw
- pERTiAk9UPK4SZ9ed/4D6c1UgZojs5vObPoEh86fhEdmRvYd2UA6PvBZ9ikUCn6qP
- uENPXQRe9g5QjyxLfOk0nUxP8K9AHsjcqJArxyIwDaDuMlDs+AeGr+xMtfpGQLc4r
- li1yGKHQpCS+ay5wVNFRIrxrNXxZ4/XeSLeiY3ujja4NwVdVKFdy5PBHkvgfeMFUd
- 64/5whopv90WdV+NXr1SrtR7hMEOKzERx5f6wYwMjoBGR2I9iHaTlPzHfJnnLoxaf
- Uw5N98c7hKUDguRICg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.119] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M6UZl-1vTGST2edN-002wUe; Fri, 21
- Nov 2025 09:41:24 +0100
-Message-ID: <b60d74a5-8085-4c6a-ad90-bf59dc41e37f@gmx.de>
-Date: Fri, 21 Nov 2025 09:41:23 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 15D8A801CF
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:52:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5AL5TPIO2832145
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 08:52:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Ij19rnTGlSVUpaAqWeFLcG0Y5ieXJ0SpKA1jrkQz6E4=; b=pNBFBXAg63oiLt2c
+ cqSO8BH+XlSnospiTLRKHN1AcHwo98XQTuLly9yJ3GsZhPF9i+3WLBfKVuS2sou8
+ JHuXadWU0xsGO1+ves2dQmOs4qC1nWZfWZZ2Q19XEPoGA90OwXM3s4kka8hbMQqU
+ KGOps2kEqI6wxO7a0LSbc9yfa0/jWBPfdzxLvDIWQeZBBT1AeuHwERHhxsxyR0D/
+ VNaDyA6dVdW13aG3VDlKOeGomTroYN7za5tRzf0BzMcDPlntWqlIOPfIqC8oMJTM
+ KXqZ4Ajlzyho7taTxAnQN/T+BpBzGSJ/5mNuXRPrnROWxE0743Av4bw6dpv43L92
+ ZrRyrQ==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ajhyq0kue-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 08:52:49 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-7aa9f595688so3646610b3a.2
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 00:52:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1763715169; x=1764319969; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Ij19rnTGlSVUpaAqWeFLcG0Y5ieXJ0SpKA1jrkQz6E4=;
+ b=Lyn8OSHk9S3g2ch+pQn3bRR6IplQ5X3onxDfegx1KrooFxLxuk6Rws37AdUEdqVUax
+ qu0VtwrqZeswdxOX5OaL3C6IM3So48iTFegu1Py43RWW1THMz+BGvDvoQ3ZJUyccEHfs
+ i42Va9T+e/gfIruxvigtcGo7UlhVt9Ens0qqcmPeBBZqYIER3CnLYYZEu8LWoCR8ATNe
+ chZWSfZ+mDnz8htY/riCOdWUj0byqU6ncS5XsL9BLQHmTC/VdG2Z4rW9jGMYpruGkWG/
+ 8B5HgZoQvRg1mSnsOZF0Npg+6eMqU8GBmXZ5DwRcwULnjRODtE1A45+EcFkhk1dE9JHz
+ mxmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763715169; x=1764319969;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ij19rnTGlSVUpaAqWeFLcG0Y5ieXJ0SpKA1jrkQz6E4=;
+ b=QI31dC2ZTo5aTZ23wQ17TXyAP0MDuGhH9aAAYQzTJ+ucc7bDJBx8HIW1kpak1mUcOA
+ vWbiw//AvF4n6cp3Zs+x4q9B1J6XRQUK5TMfKQCkm+Zvyt2yRwA93GHQ0lay4EEk3KPd
+ IE+gfFcbsijC5Jo4vxuyzfdoM4bLjlTPDXKZdThqNvAP5Xh9QpP3gBYR5dAyhUshh5Ph
+ 8WsiOj8YBiQZAqa6iZtOfnRHxkbW0UmQvUkRMXsRQteCovcO6OcTRaoLutREp5iVkr1+
+ kYkW0jq6FGgrxzekuwcUo4HUgrPGzfPI3/RJBPNEIw8u7HbIazFtYyZ63nvv1AtuJnLi
+ enyA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXVxP6L2VttKKw8xptzi5Ir0jrOtamYGCa4FdHjpXm0XW7pV18FPvCvSZU1IAGIhY9o+18Md/o=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBlrYCaEI5TNOtwvVHctJrYPPLvE5QPtWz7J6aZcqfPASjAGcT
+ PXehwFxcWdhowuRPJA5Sg+U0vBRxh4hh6MLkYUs7wrNVPHdA27GAkCR6n6hdrYwBopoxAbMRaJ8
+ 14rMm1qe3RG0/bJxNL7tFdRB0RxbHzAQuCtNNtk4xR9tdUDWKMtQGU7nq
+X-Gm-Gg: ASbGncucEPm1xki5YhdLcUfUY5KZbNDQ8O6ENODfeQf/fb7oE6L4osFufuHWcAuA3dZ
+ 8XIWDG2J7ebJeY6cjP0opjcG2Mt4CYSw/A7ptTv/q8EI7rfiDgfyjdqd5/ES+3Dcq1fjjqmRUZk
+ u7juWQCM1OX0RwbwLg3LEOioJ9A8MhEzKm0ylzdDHLOWnnpd9+F7cfU5Jel0gRmDfXOYs/mxa6q
+ eYRXHFKiTI9tsA6gaYEVZo6TxlOMHQVwuecFCZvewCZzbali13PsFE91tEpv/23lKnhb9BxEeNj
+ 2zf/9g80yn/0BWa+AdM/1TnBZ9lN+xMFCiG7fe0JRtBhK9inJ2+JuzqpUmyVJkgpKIEMUEfYNS4
+ uuhwxwTnXB0JftGKJ/CE45al3nw50boO9W1+13uHdnfIiCQ==
+X-Received: by 2002:a05:6a20:7f86:b0:357:78fa:b338 with SMTP id
+ adf61e73a8af0-3614eda8501mr2345527637.35.1763715169126; 
+ Fri, 21 Nov 2025 00:52:49 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGNiks0Hkgfy5OWGgCdBLuRH/2mQ9OucA/yiE+wctHIk3suf4xPnF0N4QzZZGnXiN1palSvZQ==
+X-Received: by 2002:a05:6a20:7f86:b0:357:78fa:b338 with SMTP id
+ adf61e73a8af0-3614eda8501mr2345496637.35.1763715168690; 
+ Fri, 21 Nov 2025 00:52:48 -0800 (PST)
+Received: from [10.151.41.95] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7c3f0b63dbcsm5276311b3a.50.2025.11.21.00.52.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 21 Nov 2025 00:52:48 -0800 (PST)
+Message-ID: <924893a7-5cd7-4328-832c-aaa01b9e04be@oss.qualcomm.com>
+Date: Fri, 21 Nov 2025 14:22:42 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] bootm: fix boot failure from compressed image for
- IH_OS_EFI
-To: Masahisa Kojima <kojima.masahisa@socionext.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Masashi Morimoto <morimoto.masashi@socionext.com>, u-boot@lists.denx.de
-References: <20251120233851.2726487-1-kojima.masahisa@socionext.com>
+Subject: Re: [PATCH v1 3/6] drivers: phy: qcom: Add QMP USB3-DP Combo PHY
+ driver
+To: Tom Rini <trini@konsulko.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com, marex@denx.de,
+ ilias.apalodimas@linaro.org, rui.silva@linaro.org,
+ luca.weiss@fairphone.com, quic_varada@quicinc.com,
+ mkorpershoek@kernel.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20251119152530.4175628-1-balaji.selvanathan@oss.qualcomm.com>
+ <20251119152530.4175628-4-balaji.selvanathan@oss.qualcomm.com>
+ <20251119155203.GA2125796@bill-the-cat>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251120233851.2726487-1-kojima.masahisa@socionext.com>
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20251119155203.GA2125796@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:LigrHntcxHdV8ac5RjNZIRyU7i8UxSiMqbcizX3eWq7vZkZSj85
- S4waZW65E9mfKpHpj3JPdaj7E9KSFRRv/wg6onZK7z2QpFCgdZyqO+PZoX0X5dA4T/FuZWa
- kYz/KoKpHiHgK1gnU/z0/cadEs+5YZxwQeKKgK5SNxqbD0x9KJkZ+T5ULUOltw5f1oTEKHD
- wfboiFxMPFA26V1UUMUiw==
-UI-OutboundReport: notjunk:1;M01:P0:xxQ6FitGEGg=;3Wy3hmiaxHinWCR39CkpU/nD39t
- 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
- XrkOQDMivF2rZ26kq3oWwqtsbDDaz
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: RkQsE-YffYon8DVzeuEZ1MNWxeDRIGIC
+X-Proofpoint-ORIG-GUID: RkQsE-YffYon8DVzeuEZ1MNWxeDRIGIC
+X-Authority-Analysis: v=2.4 cv=N94k1m9B c=1 sm=1 tr=0 ts=69202861 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=irR6kIv_Zxa5RKBfa20A:9 a=QEXdDO2ut3YA:10
+ a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTIxMDA2NiBTYWx0ZWRfX5f5E0/s3A9R2
+ xpOZECA2D5oEm39GzhwfDuGWpT19ZKGXsUEUUxOPhs64MGg3vDZutzLGJtuKKzlB1u68A5KY4b4
+ Bjwj5Fim3zgebaVS3oATjq6yiYAXv65oxvxyCvluAVtxHXxurJZQblfoSeCjjlhmBZHYS3EtnO3
+ KPd/xzRzmOy60dT8sDy/j7S9jWM9u6TgDwrkIodqkJbSF6QBqNRAAKOiWu1HXoNga/JWg6aQUzn
+ BVrSMAm9WFhV0X7aF9yyRf6wt1IIq1vWTHqfmqMTTrkVQtrpSVqBbflzBMq6Oce3SIXWANt9nvy
+ 2o124o29FGjjysZ/WuAGvbi4AZNbUTFutDBTju/Brq1GwXjF/GSiDQz0Yh1pTPcFgTsusqXrE0T
+ uIFUIndyzfw83ADPrMjZTxPtUWBpNw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-21_02,2025-11-20_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 suspectscore=0 spamscore=0 adultscore=0 clxscore=1015
+ priorityscore=1501 impostorscore=0 malwarescore=0 phishscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ definitions=main-2511210066
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,82 +156,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/21/25 00:38, Masahisa Kojima wrote:
-> The bootm command can handle the compressed image, but current
-> code fails to boot from it.
->=20
->      ## Loading kernel (any) from FIT Image at a8000000 ...
->      <snip>
->           Compression:  gzip compressed
->           Data Start:   0xa80000d4
->           Data Size:    10114520 Bytes =3D 9.6 MiB
->           Architecture: AArch64
->           OS:           EFI Firmware
->           Load Address: 0x90000000
->=20
->      <snip>
->         Uncompressing Kernel Image to 90000000
->      ## Transferring control to EFI (at address a80000d4) ...
->      Booting <NULL>
->      Not a PE-COFF file
->      Loading image failed
->=20
-> To take care of the compressed image, the load address needs
-> to be passed instead of the original compressed image address.
->=20
-> Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+Hi Tom,
 
-Hello Masahisa,
+Thanks for the feedback.
 
-Thank you for diving into this problem.
+Sure, will change to bool.
 
-In test/py/tests/test_efi_fit.py we are testing on the sandbox with and=20
-without compression. Why would the problem not show up in the test?
+Should we add "drivers/phy/qualcomm/" to the ARM SNAPDRAGON section
+in MAINTAINERS file?
 
-539         # Run tests
-540         # - fdt OFF, initrd OFF, gzip OFF
-541         launch_efi(False, False, False)
-542         # - fdt ON, initrd OFF, gzip OFF
-543         launch_efi(True, False, False)
-544         # - fdt OFF, initrd ON, gzip OFF
-545         launch_efi(False, True, False)
-546
-547         if is_sandbox:
-548             # - fdt OFF, initrd OFF, gzip ON
-549             launch_efi(False, False, True)
-550             # - fdt ON, initrd OFF, gzip ON
-551             launch_efi(True, False, True)
-552             # - fdt OFF, initrd ON, gzip ON
-553             launch_efi(False, True, True)
+Thanks.
 
-The test should be corrected to show you issue.
-
-Best regards
-
-Heinrich
-
-> ---
->   boot/bootm_os.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-> index 88f7c183867..ae20b555f5c 100644
-> --- a/boot/bootm_os.c
-> +++ b/boot/bootm_os.c
-> @@ -509,11 +509,11 @@ static int do_bootm_efi(int flag, struct bootm_inf=
-o *bmi)
->   	/* We expect to return */
->   	images->os.type =3D IH_TYPE_STANDALONE;
->  =20
-> -	image_buf =3D map_sysmem(images->os.image_start, images->os.image_len)=
-;
-> +	image_buf =3D map_sysmem(images->os.load, images->os.image_len);
->  =20
->   	/* Run EFI image */
->   	printf("## Transferring control to EFI (at address %08lx) ...\n",
-> -	       images->os.image_start);
-> +	       images->os.load);
->   	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
->  =20
->   	ret =3D efi_binary_run(image_buf, images->os.image_len,
-
+On 11/19/2025 9:22 PM, Tom Rini wrote:
+> Tristate is wrong in the U-Boot context, we can only use bool.
+>
+> Checkpatch also asks if MAINTAINERS needs updating, does it?  And please
+> wait for any substantial feedback before doing the next iteration,
+> thanks!
