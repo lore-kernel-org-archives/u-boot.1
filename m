@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B114CFC29A
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 19:24:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 666E8CFC500
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 19:28:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFB2283A8C;
-	Fri, 21 Nov 2025 20:24:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BAD6D83A8C;
+	Fri, 21 Nov 2025 20:28:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="H2irQemc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aJ0/7NnF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD5DD83A9F; Fri, 21 Nov 2025 20:24:05 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 31A4983AA9; Fri, 21 Nov 2025 20:28:00 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7773783A8A
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 20:24:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0F0783A8A
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 20:27:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c71cca8fc2so1374658a34.1
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 11:24:03 -0800 (PST)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c6ce4f65f7so1745286a34.0
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 11:27:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763753042; x=1764357842; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763753276; x=1764358076; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U/aIpVd/xznu+0FDgqVwWaqqBkNbCiMm2W5tkHZEHFk=;
- b=H2irQemcXPkFZszFWiWhkLRSYnnZSke/ITBc48OD/8SpIi0JXdY33QJ5i61YTa0L7C
- LRrwwpGssm9TkLKzQMO5vlVt9/EsrRR0e41+1L8jk3F/IUZYP/RAqQPvoXOMCwrncYx+
- bh9RgFLzjhHIEhkxYPMRgl/zhVCd1WEDWRxXg=
+ bh=FsafPr9/WGtR2qI7x1XmaQbfuB11YVJKhkO2pp/JOUI=;
+ b=aJ0/7NnFa2nUudyDYRm7h1dIMFYF3Y5oevqEciTOUpZK5BIJgdew0g7XkCCFJjqW70
+ 30r0XMiS87FtY7qY18x7xBJg08ZVobfgVCRKWrZ0xtJaDoXNulOnZQoYZ3U6r3inVbJt
+ HxjwfE7JvnES1e8D7CJ2REog7z4pt3XYRVONE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763753042; x=1764357842;
+ d=1e100.net; s=20230601; t=1763753276; x=1764358076;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U/aIpVd/xznu+0FDgqVwWaqqBkNbCiMm2W5tkHZEHFk=;
- b=mc0c1nrrOFuWp30fq+u3fF/rKAcKaVFyGoeWCF6ZQIloZyV5PL4E0fgxKgf8R2b+e2
- ZcEvzK5MEFw8xNZc6zMGypoBf0w6lDsbV3zz+c4otIjN1yQsltemrWrEHaWSFz7dUpe0
- WpURX8LrDxYj8MFf1tU3DVMFlfK0BejtrjWWa46imdOpv3UxUfDNmVjrTlOQi1oa6Y7N
- LbRsicZmjC3eWAwdRkQnnqg5Ps9L0nagVASbMeQV4pzYfWSptL6u27aU61pJh3YhV08D
- hpo1O+mxHicxjktsph4NE0Ao+SHm61NKoSJ7jvJhYLHmRIUEy8Du+RfLRgJ8vBdFEuJQ
- hFsg==
+ bh=FsafPr9/WGtR2qI7x1XmaQbfuB11YVJKhkO2pp/JOUI=;
+ b=kXUBRvjF14MjiaqNwLeBoqT/QrKRhXXK1NBcMjFTeySfgk/GVHOL7yyNkaVqNKUd8b
+ B1JrGavrCUlbaZQOjHg7oujejGklK5IWzhNjmE6kXYtlBkHy8j/cF6via3t2aknBRPn2
+ 10X/5icxDXxfpOhdOpQCKz7XkJl0p3QKLtqC3u5uTUpL6llILN7KZfbcMNreq231sHD4
+ 5zM/2/BaqiXe1RDZTQP+Uk1tLX5rrQXvW0laH0OYH5cCP96x39AIhrk7jcCHU/wriu3X
+ C7wFPvCdtZUmlatGiCGKmc1cQ6dT0u5ygL+mtwvF8jmKyUdoEv797Ly0jBLTfFujObPp
+ yQmA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXWZJ4EHsGl2QHn/NxePhOLSoQGTwM4sKtmaCbMqEtSSrFVH1Z6dUgY8ztrgKYBEnLV3HH7wec=@lists.denx.de
-X-Gm-Message-State: AOJu0YwR0FOwrB16JSTU5+wUo1u2r9e8zlUbt3pw7vMYBeOtG/usIexl
- Hc88dwiCHUteEV9lZgftM44+6femlAn8k+UEECERZ6etHimOsg5MogkvvI4sp0j+0d4=
-X-Gm-Gg: ASbGncsGOY3rTM22ig8RJFAeL4I4XLA2XBt1JV5O8A59C3VOA65NUbOuZTXqznjiwxe
- f47BELUnD9OPlO1NxeqwPExGLnkOUs+ywdB2643fuyEP0dpIKLMHzR4KmIXCvgeehZWpPfzeZxi
- 2/Cw221t7aD78mDqO996Ihm5EXL4z1ICm0vs4foBeMAYtZzA/HquGRM5qvWQVWkwfE5qYqLIK+H
- RefdBVI4i21vvEZI1kMb3vOS4jtdp/0HxjjXIZayORFNX/7mZ1H/z2K4SpoILL8aN0DPB3BJRzS
- UUmAxaJuigajudTxuT451NtbV0yYhPvtaqgJvjE73/KlQ9DUGffZq/f3DVbE+tL9gIfrDUVtuU9
- 0AI0trqmyCMkdWaAgVAqOQVxdLaILnw03ZYQpysMMQsDhRnzvfvsCDxbbkqLFStJTdC4x1QIEfq
- wMOvLKZPT03cxNsjCSW55foFFweS14K1d0myoMwmCUoa9/HXqyqA==
-X-Google-Smtp-Source: AGHT+IHhuzDX7kD5piPZRMmJKdW4Cz7NWP8fe9YwTWSjvk47Jc7y3/nQZ8fH058Wj8FUMn2fZI0Maw==
-X-Received: by 2002:a05:6830:4494:b0:7c7:5f6e:f26e with SMTP id
- 46e09a7af769-7c798db1c7fmr1673859a34.24.1763753042019; 
- Fri, 21 Nov 2025 11:24:02 -0800 (PST)
+ AJvYcCVshy3Wbce9kSGlb/YNhdxA6zCLg6ExzYYOshoWVK+6qcMqEnMkk0mvVk5/HAs2yr4vNfi1iCU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZ+bKmcMb1pnDK/LRT+hufFmg4leLU3dIsu99NOUk1MwhXuSZE
+ apuzPAg0QGXHZJ0FIrNAVRH7leTgV17caqJ5g2mpokFqd2QPBeeXE5WTh/zuCIBM3fk=
+X-Gm-Gg: ASbGncvx+k9qBpky0R7SqZ8cYCR7El57AagTmiYUyArg1bmlNn+K4Xr47e7smzFFS2r
+ X2d36Rwq0iWmnaZanQHvvXhAVKxdPpg15+YLCyrRm4RKh/+QyxNzJMmjBwVbSEnupy9Y7djtIrX
+ qDdjoiYTJ9QUNrAdsqjeThNhFOUv0XNX/+q+N7/+3MFm08rGQRZLG6whZ5PoJFb9nQ9ZkNTkrNI
+ sUisx6asrtf/Trpb1wyBb1sZ88S+if5hJmaaZlpnCozhT1Be8LA0zbop13ujhrKeK1p9DTO9QJN
+ PusOe6kUbJq08SWSxQoxltl0wlte2icVAXG58qRAuZhp4aIQvvS3AtiaIh7qhY2Oa6IC6tox1Nk
+ oU0FTngyOvsIjPQ4NvKZ3dIoYK2pkc2HELGvSq4NecILxi1lWuSM3twX4aeaH1Zwikye/TRNZ6O
+ sp3si81khqJ2FnjeMjaxIgY/mhxOuE2ppWDY7Pj3lE0X1TV/MZIA==
+X-Google-Smtp-Source: AGHT+IFsr39Y42LwUhbAbTxv/HUQt8cRasAN7HtCwLJCejOWw79QhgfGFwuxJ9eJAR38bH7hiaFOIQ==
+X-Received: by 2002:a05:6830:6d15:b0:7c7:6043:dd8f with SMTP id
+ 46e09a7af769-7c798bd022dmr1802235a34.15.1763753276422; 
+ Fri, 21 Nov 2025 11:27:56 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c78d3e2c1asm2595395a34.14.2025.11.21.11.24.01
+ 46e09a7af769-7c78d302329sm2625308a34.6.2025.11.21.11.27.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Nov 2025 11:24:01 -0800 (PST)
-Date: Fri, 21 Nov 2025 13:23:59 -0600
+ Fri, 21 Nov 2025 11:27:55 -0800 (PST)
+Date: Fri, 21 Nov 2025 13:27:53 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, Heiko Schocher <hs@nabladev.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
+Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH] clk: fixed_rate: Avoid calling dev_read_*() if
  CONFIG_OF_PLATDATA=y
-Message-ID: <20251121192359.GC2125796@bill-the-cat>
-References: <12ddeda7-f0a6-4cc8-8728-ba979cf6cc49@mailbox.org>
- <CAFLszTghtOKZWaVZH+hYdWvwUWZUTVPZ_mqkW3MCHRH6wRN0iw@mail.gmail.com>
- <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
- <CAFLszTjyXo9yh6Jzdaev9GhN8OZ4Z5xz9phgNHnKCvA0ASzbaA@mail.gmail.com>
- <60b12c96-4e63-4cf1-8c27-25eabead529c@mailbox.org>
- <CAFLszThg+6LdxHXOYy9x8-nat+bsspbUT8Dg_vqnmx62aO0a2g@mail.gmail.com>
- <a8fa7ff0-1324-4213-b45b-b4df637e6bee@mailbox.org>
- <CAFLszTgLjRT_x1+tX0xpBzTy9bDJSYXw=5gOBvvNSqdOZDiZoQ@mail.gmail.com>
- <c75bacd5-532a-4783-9f1f-02884eee7918@mailbox.org>
- <CAFLszThKSE7v6TJhfeP2jGTS=GkpVuDpYHNHh_fMFL9TSjrnqA@mail.gmail.com>
+Message-ID: <20251121192753.GD2125796@bill-the-cat>
+References: <20251120041439.817233-1-marek.vasut+renesas@mailbox.org>
+ <CAFLszTjnGtSPvki-i1fHQEU+bn=6cTqjRFyid3D5zQepNEhzog@mail.gmail.com>
+ <c8752825-92d5-43bd-aa28-e229d4cc3fda@mailbox.org>
+ <CAFLszThiZ9iWZG8vNSaosNjMMTQZeG2=yO8kGoPDBL0SSp_4Cw@mail.gmail.com>
+ <20251121143510.GX2125796@bill-the-cat>
+ <CAFLszTiBezzWuBE2qo8iEU8dyyD6ro4x2UrXGnQnfKSYSmTGgg@mail.gmail.com>
+ <36b44a71-e98d-4b89-b639-cb1e31f41865@mailbox.org>
+ <CAFLszTj_RJuGXriRMpEnf3ZM8Jd4zmSB87KiTdk7umjzfcw4Og@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gBIc08RU10BdezKY"
+ protocol="application/pgp-signature"; boundary="lz1mJRcA0TtR4G3O"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThKSE7v6TJhfeP2jGTS=GkpVuDpYHNHh_fMFL9TSjrnqA@mail.gmail.com>
+In-Reply-To: <CAFLszTj_RJuGXriRMpEnf3ZM8Jd4zmSB87KiTdk7umjzfcw4Og@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,92 +110,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---gBIc08RU10BdezKY
+--lz1mJRcA0TtR4G3O
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 21, 2025 at 12:09:21PM -0700, Simon Glass wrote:
+On Fri, Nov 21, 2025 at 12:09:31PM -0700, Simon Glass wrote:
 > Hi Marek,
 >=20
-> On Fri, 21 Nov 2025 at 11:01, Marek Vasut <marek.vasut@mailbox.org> wrote:
+> On Fri, 21 Nov 2025 at 10:53, Marek Vasut <marek.vasut@mailbox.org> wrote:
 > >
-> > On 11/21/25 6:40 PM, Simon Glass wrote:
+> > On 11/21/25 6:35 PM, Simon Glass wrote:
 > >
 > > Hello Simon,
 > >
-> > >>>>> - create a new VALID_OFFSET assumption (split out from VALID_DTB)
-> > >>>>> which checks offsets in fdt_next_tag()
-> > >>>>>
-> > >>>>> The latter might be best. It would likely be very cheap in terms =
-of
-> > >>>>> code size. In fact, I should have thought of this at the time.
-> > >>>> Wouldn't it be better to not misuse libfdt ?
-> > >>>
-> > >>> It actually isn't a misuse. It is perfectly OK to pass an invalid
-> > >>> offset and libfdt has defined behaviour in that case, absent any
-> > >>> 'assumptions' we force.
-> > >>
-> > >> It actually isn't OK to pass in invalid offset if we compile FDT with
-> > >> disabled tree validity checks.
+> > >> To be made to clk_fixed_rate_ofdata_to_plat_(...) in
+> > >> drivers/clk/clk_fixed_rate.c as it does not currently call
+> > >> dev_has_ofnode(dev).
 > > >
-> > > We are saying exactly the same thing, if you read both of the above :=
--)
-> >
-> > What I wrote is, that it is NOT OK to pass invalid offset to libfdt IFF
-> > the DT validity checks are disabled. This is yes a misuse.
->=20
-> Yes, of course. It IS OK if you enable the validity checks.
->=20
-> >
-> > >>> Remember, in Linux these checks are enabled. We added the 'assume'
-> > >>> thing to reduce code size. Here you have found a situation where it
-> > >>> breaks stuff, so we should back off the assumption a bit.
-> > >> U-Boot also has those checks enabled, SPL does not, and things break
-> > >> when OF_PLATDATA is enabled and there is no valid node associated wi=
-th
-> > >> the udevice.
+> > > Ah OK. So the call stack is something like:
 > > >
-> > > Right, so add SPL_OF_LIBFDT_ASSUME_MASK for SPL and check the code
-> > > size. If it is too much, add a new level FDT_ASSUME_EXISTS before
-> > > FDT_ASSUME_SANE and use that for the necessary checks (there will only
-> > > be a few, from my reading of the code).
-> > The SPL assumes the FDT is valid, and disables FDT validation in libfdt,
-> > to keep the code size low.
+> > > dev_read_u32_default()
+> > > dev_ofnode() - returns ofnode_null
+> > > ofnode_read_u32_default()
+> > > ofnode_read_u32_index
+> > > fdt_getprop(NULL, -1, ...)   // guess
+> > >
+> > > And I see that I put assert() in some of the ofnode_read..() functions
+> > > because I don't have tests for passing an invalid ofnode.
+> > >
+> > > So perhaps fdt_offset_ptr_() should check for NULL and return? I
+> > > haven't traced it though.
 > >
-> > U-Boot does enable that validation in libfdt, and grows its size a bit
-> > because of that (and also because the DT might come from outside), but
-> > SPL can not do that (and control DT does not generally come from outside
-> > in SPL).
+> > In previous patch
 > >
-> > That is why these few fixes actually repair the misuse, instead of
-> > re-enabling the validation in libfdt.
+> > [PATCH 3/3] libfdt: Check fdt_offset_ptr() return value unconditionally
+> >
+> > that approach seems to have been rejected, and these dev_read_*() fixes
+> > were implemented as a replacement.
 >=20
-> Enable basic validation if !OF_REAL ? Create a new level of 'assume'
-> for just what you need?
+> I don't think it was rejected...but I think the commit message should
+> better explain the problem, e.g. using some of the info above.
 >=20
-> It just seems really odd to disable validation and then try to not
-> call the functions in case they will crash. The next person who comes
-> along will have an unexplained crash. It's just too brittle.
+> The only choice is whether to add the check unconditionally (which I
+> think is fine for now) or to add a new type of assumption.
 
-You seem to have missed the entire context of the problem here. Today,
-in upstream exactly one platform disables validation in full U-Boot.
-Exactly zero platforms enable any form of validation in xPL. Upstream
-dtc has made a large number of changes since v1.4.6. Whatever we have
-been assuming could be done cannot be done anymore.
+Your feedback here does not seem to match up with your feedback in the
+patch in question:
+https://lore.kernel.org/all/CAFLszTg6dF1dmJJDh8-2ZjUf6i9+ZOFvWNSxNRS_PBQ3CD=
+NtHw@mail.gmail.com/#t
 
 --=20
 Tom
 
---gBIc08RU10BdezKY
+--lz1mJRcA0TtR4G3O
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSC8SwAKCRAr4qD1Cr/k
-CgcAAQDY45Q4azVhyhTmCti4oVqZV2aN02FQjRquJXiOdkXYqwD/caNWjI0YHmCh
-Me8Ok+4VOUQWkGfci/Kpc2Ph/zj5wgw=
-=Zb9m
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSC9OQAKCRAr4qD1Cr/k
+CpszAQDiaxsTu+mJc+YDaAY1EXPdhw6HMNXR+dYvA/ObAV8MlgD6AqDBPj8eSqkg
+gnCk1nbLd+sb6CDZT2u0rPDv8HBCugk=
+=OhN1
 -----END PGP SIGNATURE-----
 
---gBIc08RU10BdezKY--
+--lz1mJRcA0TtR4G3O--
