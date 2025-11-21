@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB79BCFC281
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 20:51:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57E97CFC281
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 20:58:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19FC3839A8;
-	Fri, 21 Nov 2025 21:51:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B9072839D7;
+	Fri, 21 Nov 2025 21:58:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CNHzKVic";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="cZhOTYaF";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Gpm0lnkT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2524483A5A; Fri, 21 Nov 2025 21:51:15 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 39C0483AAD; Fri, 21 Nov 2025 21:58:06 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A26B8394E
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 21:51:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 454F0839A8
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 21:58:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dCnSH0VXxz9tgp;
- Fri, 21 Nov 2025 21:51:11 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dCncC6mfBz9t8m;
+ Fri, 21 Nov 2025 21:58:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763758271;
+ s=mail20150812; t=1763758684;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9NbfbZoGFaC5KEWbMtttxrF9ZipfL+NfjBY/0Q7HPSc=;
- b=CNHzKVic0/hkW3qqwh38q3fp7oU4BVAQU0YZIdh3MEv5wL1AAB8B9rnoycyQlA8oA1LUBh
- ioCa6G4n5UtafDQvsoMTzKDMSnPEu6gnEz+NeLUYjphwVQZTrIlXPHCu+p8r6yZPNs//wI
- avbr2GV8U6GkIEkZnH5Sbs8ORD/fHwVCicsGWLGMUN/oa6pHCtahO9MFz4mMH1vefL7mdX
- mWx2NW/IWh/XbCXKrNMbyuHqxJcXEPktvy2YTbeJBPmrVmLvoK3exaMs7vUajcUs5E+9/W
- AWXONqxNathQecBiAfTJ/QZIjC8nWUfeDn+da2gPFMzLh9VEbwlrfj7v6A/UEg==
-Message-ID: <18e034ad-8904-499b-a07f-034a5c01bc0b@mailbox.org>
-Date: Fri, 21 Nov 2025 21:51:03 +0100
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=g09ZbqkJ/3S5cqygDt2KrGAkpCi4UymB8MqT/UBUPhg=;
+ b=cZhOTYaF7YV+sG0F+7YI2zbxKARvc8M0Obub1Fn+J9d4o4QOvTAs18CdoNASPNm5JgDE4v
+ c0kftlbdctsINuweZWlXYqjZ+h1j8x4sqQBadB/vF/mE/RwPo+KRy/TN48+MgmYEwajloC
+ ruuti5FPaXcPoWFKf1ahZDpC69Ca5LD008vtKyBNzaHRp16Ibt3EzwzkIdgMPSOkrScTDY
+ vc3YA/1TObkcrrXdbT2ZdcTMOFwhpmHYvZBUXDYbnSrS/tL9qNx76oL7ae27lGpYZl4SYu
+ ddwFZaxOtCcw8HenvBCyy0DY0wkVIPeggJmxCFVPQbfz16ZuMrQFjrUJ79D1/g==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=Gpm0lnkT;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1763758682;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=g09ZbqkJ/3S5cqygDt2KrGAkpCi4UymB8MqT/UBUPhg=;
+ b=Gpm0lnkTCEq2B+xLlurgHfXDq5VMHgoMeRFezOZJ9NbxqUsZqPZL20aQUSkR7bLcMKEgMV
+ 8iSyS0hSwwRGXxh1ijGDgeg9Bw/hUBXXXDrrkmFaB84P566jFkixOwt5vRSYH6Gt/eintr
+ u8VG2GbZILxYOFPpc6wyvFEBo7pOoewhcdeQWRwfEYb4lXPLRjiZa3dJnVW6nlOV9BHDb7
+ 19VwzRl7TONZm5SqcFPgDDo3yOSIqKoFVzgGDW2MfNuPIW/gKn8XCecPtW0JpyiWsdoJbv
+ ji1cFSqWrveqJa5tOM9JqCCCmIS1A2ND8pMtlK4l8yv6sLR66aadqBBpZOQ6ww==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/2] i2c: sandbox: Inline i2c_chip_of_to_plat() into
+ i2c_child_post_bind()
+Date: Fri, 21 Nov 2025 21:55:45 +0100
+Message-ID: <20251121205758.66888-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH 08/15] dm: core: Support multiple drivers with same
- compatibles
-To: Markus Schneider-Pargmann <msp@baylibre.com>, Tom Rini <trini@konsulko.com>
-Cc: Maarten Brock <Maarten.Brock@sttls.nl>, u-boot@lists.denx.de,
- Kory Maincent <kory.maincent@bootlin.com>, Rasmus Villemoes
- <ravi@prevas.dk>, Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
- Liya Huang <1425075683@qq.com>, Romain Gantois <romain.gantois@bootlin.com>,
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Sukrut Bellary <sbellary@baylibre.com>
-References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
- <20251118-topic-am33-evm-oftree-v2026-01-v1-8-91ce13c661e2@baylibre.com>
- <20251118140804.GR2125796@bill-the-cat>
- <DEDGK9KKB61P.1QY81TPR5JLNY@baylibre.com>
- <20251120212909.GQ2125796@bill-the-cat>
- <0b9e2a8e-1ab8-4a6e-899f-4ae9fd43b68c@mailbox.org>
- <DEE8BZBDYO08.1SX1UEB750S25@baylibre.com>
- <423d52bd-2446-47de-b6bc-4ee61fd0c23e@mailbox.org>
- <DEEMMP7ISZ9P.BP6XAE07Y26S@baylibre.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <DEEMMP7ISZ9P.BP6XAE07Y26S@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ocqdw3u5az1jjwweijj5x6grdu5tqwzu
-X-MBO-RS-ID: 7bb4ed908ef7704cd18
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 7a6752b206314c6dc24
+X-MBO-RS-META: hgx9k3e4pn89et7yqytraadmbho3hcx9
+X-Rspamd-Queue-Id: 4dCncC6mfBz9t8m
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,28 +89,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/21/25 8:40 PM, Markus Schneider-Pargmann wrote:
+The i2c_chip_of_to_plat() is called only from i2c_child_post_bind(),
+inline i2c_chip_of_to_plat() into i2c_child_post_bind(). Drop the
+if CONFIG_IS_ENABLED(OF_REAL) and depend on if (!dev_has_ofnode(dev))
+which does check CONFIG_IS_ENABLED(OF_REAL) internally too.
 
-Hello Markus,
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Heiko Schocher <hs@nabladev.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: New patch
+---
+ drivers/i2c/i2c-uclass.c | 39 ++++++++++++++-------------------------
+ include/i2c.h            | 13 -------------
+ 2 files changed, 14 insertions(+), 38 deletions(-)
 
-> I rechecked the compatible lists, but they do not have two different
-> matching compatibles, mostly just one matches to a driver.
-> 
-> But I think I may know why there was no issue with this. Grepping the
-> config symbols it seems there is no config in which both drivers are
-> actually enabled at the same time:
-> 
->    configs/renesas_rcar64.config:CONFIG_RENESAS_RPC_SPI=y
->    configs/renesas_rza1.config:CONFIG_RENESAS_RPC_SPI=y
-> 
->    configs/r8a77990_ebisu_defconfig:CONFIG_RENESAS_RPC_HF=y
->    configs/r8a77995_draak_defconfig:CONFIG_RENESAS_RPC_HF=y
->    configs/rcar3_salvator-x_defconfig:CONFIG_RENESAS_RPC_HF=y
->    configs/rcar3_ulcb_defconfig:CONFIG_RENESAS_RPC_HF=y
-These ^ configs include renesas_rcar64.config , see this:
-
-$  make rcar3_ulcb_defconfig ; grep RENESAS_RPC .config
-...
-CONFIG_RENESAS_RPC_HF=y
-CONFIG_RENESAS_RPC_SPI=y
+diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
+index 380a9f8f3ad..97466597d77 100644
+--- a/drivers/i2c/i2c-uclass.c
++++ b/drivers/i2c/i2c-uclass.c
+@@ -701,26 +701,6 @@ int i2c_deblock(struct udevice *bus)
+ 	return ops->deblock(bus);
+ }
+ 
+-#if CONFIG_IS_ENABLED(OF_REAL)
+-int i2c_chip_of_to_plat(struct udevice *dev, struct dm_i2c_chip *chip)
+-{
+-	int addr;
+-
+-	chip->offset_len = dev_read_u32_default(dev, "u-boot,i2c-offset-len",
+-						1);
+-	chip->flags = 0;
+-	addr = dev_read_u32_default(dev, "reg", -1);
+-	if (addr == -1) {
+-		debug("%s: I2C Node '%s' has no 'reg' property %s\n", __func__,
+-		      dev_read_name(dev), dev->name);
+-		return log_ret(-EINVAL);
+-	}
+-	chip->chip_addr = addr;
+-
+-	return 0;
+-}
+-#endif
+-
+ static int i2c_pre_probe(struct udevice *dev)
+ {
+ #if CONFIG_IS_ENABLED(OF_REAL)
+@@ -760,15 +740,24 @@ static int i2c_post_probe(struct udevice *dev)
+ 
+ static int i2c_child_post_bind(struct udevice *dev)
+ {
+-#if CONFIG_IS_ENABLED(OF_REAL)
+-	struct dm_i2c_chip *plat = dev_get_parent_plat(dev);
++	struct dm_i2c_chip *chip = dev_get_parent_plat(dev);
++	int addr;
+ 
+ 	if (!dev_has_ofnode(dev))
+ 		return 0;
+-	return i2c_chip_of_to_plat(dev, plat);
+-#else
++
++	chip->offset_len = dev_read_u32_default(dev, "u-boot,i2c-offset-len",
++						1);
++	chip->flags = 0;
++	addr = dev_read_u32_default(dev, "reg", -1);
++	if (addr == -1) {
++		debug("%s: I2C Node '%s' has no 'reg' property %s\n", __func__,
++		      dev_read_name(dev), dev->name);
++		return log_ret(-EINVAL);
++	}
++	chip->chip_addr = addr;
++
+ 	return 0;
+-#endif
+ }
+ 
+ static int i2c_post_bind(struct udevice *dev)
+diff --git a/include/i2c.h b/include/i2c.h
+index 91917f54be9..b2572076236 100644
+--- a/include/i2c.h
++++ b/include/i2c.h
+@@ -549,19 +549,6 @@ int i2c_get_chip_for_busnum(int busnum, int chip_addr, uint offset_len,
+ int i2c_get_chip_by_phandle(const struct udevice *parent, const char *prop_name,
+ 			    struct udevice **devp);
+ 
+-/**
+- * i2c_chip_of_to_plat() - Decode standard I2C platform data
+- *
+- * This decodes the chip address from a device tree node and puts it into
+- * its dm_i2c_chip structure. This should be called in your driver's
+- * of_to_plat() method.
+- *
+- * @blob:	Device tree blob
+- * @node:	Node offset to read from
+- * @spi:	Place to put the decoded information
+- */
+-int i2c_chip_of_to_plat(struct udevice *dev, struct dm_i2c_chip *chip);
+-
+ /**
+  * i2c_dump_msgs() - Dump a list of I2C messages
+  *
+-- 
+2.51.0
 
