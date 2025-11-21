@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 144A0CFC28C
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:15:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73ACFCFC294
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:15:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AF2A83A57;
-	Fri, 21 Nov 2025 18:15:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C58C983A1B;
+	Fri, 21 Nov 2025 18:15:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D91A180433; Fri, 21 Nov 2025 18:15:12 +0100 (CET)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
+ id 3372F83A64; Fri, 21 Nov 2025 18:15:14 +0100 (CET)
+Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::8fab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E892783A1B
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:15:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15B2483A2D
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:15:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dChg24xnNzqgW;
- Fri, 21 Nov 2025 18:15:10 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6c])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dChg35bqvzspP;
+ Fri, 21 Nov 2025 18:15:11 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dChg14m3jzC2R; Fri, 21 Nov 2025 18:15:09 +0100 (CET)
+ id 4dChg251H9zB1d; Fri, 21 Nov 2025 18:15:10 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 21 Nov 2025 18:14:57 +0100
-Subject: [PATCH v3 1/4] fit: support signing with only an engine_id
+Date: Fri, 21 Nov 2025 18:14:58 +0100
+Subject: [PATCH v3 2/4] tools: binman: mkimage: add support for passing the
+ engine
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251121-binman-engine-v3-1-b80180aaa783@cherry.de>
+Message-Id: <20251121-binman-engine-v3-2-b80180aaa783@cherry.de>
 References: <20251121-binman-engine-v3-0-b80180aaa783@cherry.de>
 In-Reply-To: <20251121-binman-engine-v3-0-b80180aaa783@cherry.de>
 To: u-boot@lists.denx.de
@@ -73,70 +74,48 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Currently, when one wants to use an OpenSSL engine to sign a FIT image,
-one needs to pass a keydir (via -k) to mkimage which will then be
-prepended to the value of the key-name-hint before being passed as
-key_id argument to the OpenSSL Engine API, or pass a keyfile (via -G) to
-mkimage.
-
-My OpenSSL engine only has "slots" which are not mapped like
-directories, so using keydir is not proper, though I could simply have
--k '' I guess but this won't work currently with binman anyway.
-
-Additionally, passing a keyfile (-G) when using an engine doesn't make
-sense as the key is stored in the engine.
-
-Let simply allow FIT images be signed if both keydir and keyfile are
-missing but an engine is to be used.
-
-The keyname member is already filled by looking at key-name-hint
-property in the FIT and passed to the engine, which is exactly what is
-needed here.
+mkimage has support for OpenSSL engines but binman currently doesn't for
+direct callers of mkimage (e.g. the fit etype). This prepares for adding
+support for OpenSSL engines for signing elements of a FIT image, which
+will done in the next commit.
 
 Reviewed-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- tools/fit_image.c  | 3 ++-
- tools/image-host.c | 4 ++--
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ tools/binman/btool/mkimage.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/tools/fit_image.c b/tools/fit_image.c
-index 0306333141e..694bb927c7d 100644
---- a/tools/fit_image.c
-+++ b/tools/fit_image.c
-@@ -26,7 +26,8 @@ static struct legacy_img_hdr header;
+diff --git a/tools/binman/btool/mkimage.py b/tools/binman/btool/mkimage.py
+index 23c0a8e490d..1dbd466f438 100644
+--- a/tools/binman/btool/mkimage.py
++++ b/tools/binman/btool/mkimage.py
+@@ -22,7 +22,7 @@ class Bintoolmkimage(bintool.Bintool):
  
- static int fit_estimate_hash_sig_size(struct image_tool_params *params, const char *fname)
- {
--	bool signing = IMAGE_ENABLE_SIGN && (params->keydir || params->keyfile);
-+	bool signing = IMAGE_ENABLE_SIGN &&
-+		(params->keydir || params->keyfile || params->engine_id);
- 	struct stat sbuf;
- 	void *fdt;
- 	int fd;
-diff --git a/tools/image-host.c b/tools/image-host.c
-index 21dd7f2d922..54df86316ae 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -696,7 +696,7 @@ int fit_image_add_verification_data(const char *keydir, const char *keyfile,
- 			     strlen(FIT_HASH_NODENAME))) {
- 			ret = fit_image_process_hash(fit, image_name, noffset,
- 						data, size);
--		} else if (IMAGE_ENABLE_SIGN && (keydir || keyfile) &&
-+		} else if (IMAGE_ENABLE_SIGN && (keydir || keyfile || engine_id) &&
- 			   !strncmp(node_name, FIT_SIG_NODENAME,
- 				strlen(FIT_SIG_NODENAME))) {
- 			ret = fit_image_process_sig(keydir, keyfile, keydest,
-@@ -1366,7 +1366,7 @@ int fit_add_verification_data(const char *keydir, const char *keyfile,
- 	}
+     # pylint: disable=R0913
+     def run(self, reset_timestamp=False, output_fname=None, external=False,
+-            pad=None, align=None, keys_dir=None):
++            pad=None, align=None, keys_dir=None, engine=None):
+         """Run mkimage
  
- 	/* If there are no keys, we can't sign configurations */
--	if (!IMAGE_ENABLE_SIGN || !(keydir || keyfile))
-+	if (!IMAGE_ENABLE_SIGN || !(keydir || keyfile || engine_id))
- 		return 0;
+         Args:
+@@ -35,6 +35,7 @@ class Bintoolmkimage(bintool.Bintool):
+                 signatures
+             align: Bytes to use for alignment of the FIT and its external data
+             keys_dir: Path to directory containing private and encryption keys
++            engine: Name of the OpenSSL engine to use
+         """
+         args = []
+         if external:
+@@ -49,6 +50,8 @@ class Bintoolmkimage(bintool.Bintool):
+             args += ['-k', f'{keys_dir}']
+         if output_fname:
+             args += ['-F', output_fname]
++        if engine:
++            args += ['-N', engine]
+         return self.run_cmd(*args)
  
- 	/* Find configurations parent node offset */
+     def fetch(self, method):
 
 -- 
 2.51.1
