@@ -4,140 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5485CFA749
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 08:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9491BCFA74F
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 08:41:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17CBB8051F;
-	Fri, 21 Nov 2025 09:27:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 16CB380433;
+	Fri, 21 Nov 2025 09:41:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="oxRD7w6O";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hEDYiKdM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F148F807B1; Fri, 21 Nov 2025 09:27:25 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id BD4B98051F; Fri, 21 Nov 2025 09:41:31 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BC9980433
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:27:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C34C9801CF
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:41:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1763713636; x=1764318436; i=xypron.glpk@gmx.de;
- bh=xoBv1K/LAxb/9WSBIzrpRjy+JnD29osoJKS3Pag4yic=;
+ s=s31663417; t=1763714484; x=1764319284; i=xypron.glpk@gmx.de;
+ bh=174zxRM6AudNPYQZd10gWvaxxmPU+r3PVu346uBi348=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=oxRD7w6OwPmZ+Ly68DB53l1vJ5Kr3cs4FPlWoRjPJoZ4pQUs6zpXl+orUO/+yQgc
- XjDkjwqHJMojGEOCEb05Lij4P+86tn09nrhyUHpKdIfRx7o1TlLl1acI8X/qhCT0v
- mAVdx5tQG+mfVli9utbxnzhvza6eQJvkE2hoD8BTjbFG0M41ARCmimKtDvqKbFf7w
- msb3IYf1DVKUGGwUUmoEXQmWVJw3X3M8yhCHrq3ZvugJfuk7U/47T2LxL9gyaUzSq
- dh5M7TJhSD9xriHQEIpa8XLwn8yKXn/GW7wWO3He797BM3DCAflTuy9yaaVTlRfOz
- O+xfVe8w0JfYO+udIg==
+ b=hEDYiKdMniHIXurCCUV7JR/D4jLzMYxoRiiYQarp1vE22JuKKk9YvFv5qtCDo0Iw
+ pERTiAk9UPK4SZ9ed/4D6c1UgZojs5vObPoEh86fhEdmRvYd2UA6PvBZ9ikUCn6qP
+ uENPXQRe9g5QjyxLfOk0nUxP8K9AHsjcqJArxyIwDaDuMlDs+AeGr+xMtfpGQLc4r
+ li1yGKHQpCS+ay5wVNFRIrxrNXxZ4/XeSLeiY3ujja4NwVdVKFdy5PBHkvgfeMFUd
+ 64/5whopv90WdV+NXr1SrtR7hMEOKzERx5f6wYwMjoBGR2I9iHaTlPzHfJnnLoxaf
+ Uw5N98c7hKUDguRICg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.119] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MUGiJ-1vW1El2UKZ-00TDco; Fri, 21
- Nov 2025 09:27:16 +0100
-Message-ID: <a975f396-ca65-4b9a-8f8c-d79dfcd80136@gmx.de>
-Date: Fri, 21 Nov 2025 09:27:10 +0100
+Received: from [192.168.103.119] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M6UZl-1vTGST2edN-002wUe; Fri, 21
+ Nov 2025 09:41:24 +0100
+Message-ID: <b60d74a5-8085-4c6a-ad90-bf59dc41e37f@gmx.de>
+Date: Fri, 21 Nov 2025 09:41:23 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5] boot/bootfdt: Add smbios3-entrypoint to FDT for
- non-EFI boots
-To: Adriana Nicolae <adriana@arista.com>
-Cc: trini@konsulko.com, sjg@chromium.org, ddrokosov@salutedevices.com,
- ilias.apalodimas@linaro.org, quentin.schulz@cherry.de,
- kojima.masahisa@socionext.com, richard@nod.at, semen.protsenko@linaro.org,
- joao.goncalves@toradex.com, u-boot@lists.denx.de
-References: <20251120085057.549221-1-adriana@arista.com>
+Subject: Re: [PATCH] bootm: fix boot failure from compressed image for
+ IH_OS_EFI
+To: Masahisa Kojima <kojima.masahisa@socionext.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Masashi Morimoto <morimoto.masashi@socionext.com>, u-boot@lists.denx.de
+References: <20251120233851.2726487-1-kojima.masahisa@socionext.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251120085057.549221-1-adriana@arista.com>
+In-Reply-To: <20251120233851.2726487-1-kojima.masahisa@socionext.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:PA7qMRqi0IMNi3Vmd12akKmZ5tsWlcJfcyEJL6Vhgf5Sbqbx+sG
- 1OAJpPewxdqTjKwLpniuWm4voaHFXn5Y3xTuvn9jTDaXv/NhX+L7v6Q4E/ydTVCxTTNOpTO
- /ZfAQA+q148tJAsQBBEpZ6TnHctWZagPKAT+u85SAwNUgy8rT3xH2qZiw63MaDt+3tyluaB
- /cL37Ap+TCQCSmavPjxNw==
-UI-OutboundReport: notjunk:1;M01:P0:H+z9UKGIHjs=;kmY0fuCFPM+JVYoLZTFuAinyUVg
- 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
- prspZs7E=
+X-Provags-ID: V03:K1:LigrHntcxHdV8ac5RjNZIRyU7i8UxSiMqbcizX3eWq7vZkZSj85
+ S4waZW65E9mfKpHpj3JPdaj7E9KSFRRv/wg6onZK7z2QpFCgdZyqO+PZoX0X5dA4T/FuZWa
+ kYz/KoKpHiHgK1gnU/z0/cadEs+5YZxwQeKKgK5SNxqbD0x9KJkZ+T5ULUOltw5f1oTEKHD
+ wfboiFxMPFA26V1UUMUiw==
+UI-OutboundReport: notjunk:1;M01:P0:xxQ6FitGEGg=;3Wy3hmiaxHinWCR39CkpU/nD39t
+ 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
+ XrkOQDMivF2rZ26kq3oWwqtsbDDaz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,169 +154,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/20/25 09:50, Adriana Nicolae wrote:
-> From: adriana <adriana@arista.com>
+On 11/21/25 00:38, Masahisa Kojima wrote:
+> The bootm command can handle the compressed image, but current
+> code fails to boot from it.
 >=20
-> The Linux kernel can discover SMBIOS tables through two primary methods:
-> 1. Via EFI tables, when using EFI boot;
-> 2. Via the 'smbios3-entrypoint' property in the /chosen node of the
-> device tree.
+>      ## Loading kernel (any) from FIT Image at a8000000 ...
+>      <snip>
+>           Compression:  gzip compressed
+>           Data Start:   0xa80000d4
+>           Data Size:    10114520 Bytes =3D 9.6 MiB
+>           Architecture: AArch64
+>           OS:           EFI Firmware
+>           Load Address: 0x90000000
 >=20
-> When U-Boot boots a Linux kernel using a non-EFI command ("bootm",
-> "bootz", or "booti"), the kernel relies on the device tree to detect
-> the hardware. If SMBIOS tables are available in U-Boot, they should
-> be passed to the kernel via this device tree property.
+>      <snip>
+>         Uncompressing Kernel Image to 90000000
+>      ## Transferring control to EFI (at address a80000d4) ...
+>      Booting <NULL>
+>      Not a PE-COFF file
+>      Loading image failed
 >=20
-> This patch modifies boot_fdt_prepare(), to inject the SMBIOSv3 table
-> address into the device tree if there is a table generated by U-boot.
-> The "board_fdt_chosen_smbios" is weak in order to leave the possibilty
-> for specific boards to select custom SMBIOS addresses.
+> To take care of the compressed image, the load address needs
+> to be passed instead of the original compressed image address.
 >=20
-> The changes in this patch are added in the context of supporting this
-> device tree property in linux kernel:
-> https://lkml.org/lkml/2025/10/24/1393
->=20
-> Device tree schema was updated to include the "smbios3-entrypoint" node
-> in pull request: https://github.com/devicetree-org/dt-schema/pull/177
->=20
-> Signed-off-by: Adriana Nicolae <adriana@arista.com>
+> Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Hello Masahisa,
+
+Thank you for diving into this problem.
+
+In test/py/tests/test_efi_fit.py we are testing on the sandbox with and=20
+without compression. Why would the problem not show up in the test?
+
+539         # Run tests
+540         # - fdt OFF, initrd OFF, gzip OFF
+541         launch_efi(False, False, False)
+542         # - fdt ON, initrd OFF, gzip OFF
+543         launch_efi(True, False, False)
+544         # - fdt OFF, initrd ON, gzip OFF
+545         launch_efi(False, True, False)
+546
+547         if is_sandbox:
+548             # - fdt OFF, initrd OFF, gzip ON
+549             launch_efi(False, False, True)
+550             # - fdt ON, initrd OFF, gzip ON
+551             launch_efi(True, False, True)
+552             # - fdt OFF, initrd ON, gzip ON
+553             launch_efi(False, True, True)
+
+The test should be corrected to show you issue.
+
+Best regards
+
+Heinrich
 
 > ---
-> Changes in v5:
->    - Allocate 4KiB extra space for fdt blob and align it to 8 bytes.
+>   boot/bootm_os.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 >=20
-> Changes in v4:
->    - Remove weak function board_fdt_chosen_smbios(), replace with
->      gd_smbios_start();
->    - Return -EAGAIN in test if GENERATE_SMBIOS_TABLE is not enabled;
->    - Remove unnecessary fdt cleanup at the end of the test;
->    - Added missing newlines at the end of the modified files.
->=20
-> Changes in v3:
->    - Moved "board_fdt_chosen_smbios" function to lib/smbios.c
->    - Return physical address of smbios entry and use map_sysmem to
->      access the entry point;
->    - Removed check for config enabled and added check for
->      GENERATE_SMBIOS_TABLE;
->    - Add test to check that smbios entry address is added into fdt;
->=20
-> Changes in v2:
->    - Renamed device tree property to "smbios3-entrypoint".
->    - Removed redundant check for CONFIG_SMBIOS.
-> ---
->   boot/fdt_support.c | 19 ++++++++++++++++++
->   test/dm/fdtdec.c   | 48 ++++++++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 67 insertions(+)
->=20
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index 92f2f534ee0..1c215e548db 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -27,6 +27,7 @@
->   #include <fdtdec.h>
->   #include <version.h>
->   #include <video.h>
-> +#include <smbios.h>
+> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> index 88f7c183867..ae20b555f5c 100644
+> --- a/boot/bootm_os.c
+> +++ b/boot/bootm_os.c
+> @@ -509,11 +509,11 @@ static int do_bootm_efi(int flag, struct bootm_inf=
+o *bmi)
+>   	/* We expect to return */
+>   	images->os.type =3D IH_TYPE_STANDALONE;
 >  =20
->   DECLARE_GLOBAL_DATA_PTR;
+> -	image_buf =3D map_sysmem(images->os.image_start, images->os.image_len)=
+;
+> +	image_buf =3D map_sysmem(images->os.load, images->os.image_len);
 >  =20
-> @@ -333,6 +334,7 @@ int fdt_chosen(void *fdt)
->   	int   nodeoffset;
->   	int   err;
->   	const char *str;		/* used to set string properties */
-> +	ulong smbiosaddr;		/* SMBIOS table address */
+>   	/* Run EFI image */
+>   	printf("## Transferring control to EFI (at address %08lx) ...\n",
+> -	       images->os.image_start);
+> +	       images->os.load);
+>   	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
 >  =20
->   	err =3D fdt_check_header(fdt);
->   	if (err < 0) {
-> @@ -387,6 +389,23 @@ int fdt_chosen(void *fdt)
->   		return err;
->   	}
->  =20
-> +	if (CONFIG_IS_ENABLED(GENERATE_SMBIOS_TABLE)) {
-> +		/* Inject SMBIOS address when we have a valid address.
-> +		* This is useful for systems using booti/bootm instead of bootefi.
-> +		* Failure to set this property is non-fatal, we only generate a
-> +		* warning.
-> +		*/
-> +		smbiosaddr =3D gd_smbios_start();
-> +		if (smbiosaddr) {
-> +			err =3D fdt_setprop_u64(fdt, nodeoffset, "smbios3-entrypoint",
-> +					smbiosaddr);
-> +			if (err < 0) {
-> +				printf("WARNING: could not set smbios3-entrypoint %s.\n",
-> +				fdt_strerror(err));
-> +			}
-> +		}
-> +	}
-> +
->   	return fdt_fixup_stdout(fdt, nodeoffset);
->   }
->  =20
-> diff --git a/test/dm/fdtdec.c b/test/dm/fdtdec.c
-> index 1f24f1d5dff..ea5a494612c 100644
-> --- a/test/dm/fdtdec.c
-> +++ b/test/dm/fdtdec.c
-> @@ -7,6 +7,9 @@
->   #include <asm/global_data.h>
->   #include <dm/of_extra.h>
->   #include <dm/test.h>
-> +#include <fdt_support.h>
-> +#include <mapmem.h>
-> +#include <smbios.h>
->   #include <test/ut.h>
->  =20
->   DECLARE_GLOBAL_DATA_PTR;
-> @@ -129,3 +132,48 @@ static int dm_test_fdtdec_add_reserved_memory(struc=
-t unit_test_state *uts)
->   }
->   DM_TEST(dm_test_fdtdec_add_reserved_memory,
->   	UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_FLAT_TREE);
-> +
-> +static int dm_test_fdt_chosen_smbios(struct unit_test_state *uts)
-> +{
-> +	void *blob;
-> +	ulong val;
-> +	struct smbios3_entry *entry;
-> +	int chosen, blob_sz;
-> +	const fdt64_t *prop;
-> +
-> +	if (!CONFIG_IS_ENABLED(GENERATE_SMBIOS_TABLE)) {
-> +		return -EAGAIN;
-> +	}
-> +
-> +	blob_sz =3D fdt_totalsize(gd->fdt_blob) + 4096;
-> +	blob =3D memalign(8, blob_sz);
-> +	ut_assertnonnull(blob);
-> +
-> +	/* Make a writable copy of the fdt blob */
-> +	ut_assertok(fdt_open_into(gd->fdt_blob, blob, blob_sz));
-> +
-> +	/* Mock SMBIOS table */
-> +	entry =3D map_sysmem(gd->arch.smbios_start, sizeof(struct smbios3_entr=
-y));
-> +	memcpy(entry->anchor, "_SM3_", 5);
-> +	entry->length =3D sizeof(struct smbios3_entry);
-> +	unmap_sysmem(entry);
-> +
-> +	/* Force fdt_chosen to run */
-> +	ut_assertok(fdt_chosen(blob));
-> +
-> +	chosen =3D fdt_path_offset(blob, "/chosen");
-> +	ut_assert(chosen >=3D 0);
-> +
-> +	/* Verify the property exists */
-> +	prop =3D fdt_getprop(blob, chosen, "smbios3-entrypoint", NULL);
-> +	ut_assertnonnull(prop);
-> +
-> +	/* Verify the property matches smbios_start */
-> +	val =3D fdt64_to_cpu(*prop);
-> +	ut_asserteq_64(gd->arch.smbios_start, val);
-> +
-> +	free(blob);
-> +
-> +	return 0;
-> +}
-> +DM_TEST(dm_test_fdt_chosen_smbios, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+>   	ret =3D efi_binary_run(image_buf, images->os.image_len,
 
