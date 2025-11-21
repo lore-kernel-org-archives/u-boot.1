@@ -4,42 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EECFFCFC274
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 13:22:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68032CFC274
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 13:22:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D80980433;
+	by phobos.denx.de (Postfix) with ESMTP id 906508390D;
 	Fri, 21 Nov 2025 14:22:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E41A0838CE; Fri, 21 Nov 2025 14:22:34 +0100 (CET)
-Received: from smtp-190a.mail.infomaniak.ch (smtp-190a.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::190a])
+ id 77E91802C1; Fri, 21 Nov 2025 14:22:35 +0100 (CET)
+Received: from smtp-bc0a.mail.infomaniak.ch (smtp-bc0a.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::bc0a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0A20802C1
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 14:22:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40824836F0
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 14:22:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:4:17::246b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dCbVc1RX6z5ZG;
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4dCbVc6vVgzjcK;
  Fri, 21 Nov 2025 14:22:32 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4dCbVb2QZrzd8D; Fri, 21 Nov 2025 14:22:31 +0100 (CET)
+ id 4dCbVc2MFjzhCL; Fri, 21 Nov 2025 14:22:32 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH next 0/3] CI: use mirrors for GNU tools
-Date: Fri, 21 Nov 2025 14:22:13 +0100
-Message-Id: <20251121-gnu-mirror-v1-0-548e6cd2665e@cherry.de>
+Date: Fri, 21 Nov 2025 14:22:14 +0100
+Subject: [PATCH next 1/3] CI: use GNU mirror for grub (and switch to HTTPS)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avIrBPSEKqrRAu1sWaRxVghhHdPW
- r7F/y8kZMIEo3iB8aFER6xQjQC/2biipKUadKuNUlrJNd5yJ+aD5dA7F2zXGm8t1OBkDJT/2QQ
- R8wVzKR+SmFexYgAAAA==
-X-Change-ID: 20251121-gnu-mirror-98bbfa305caa
+Message-Id: <20251121-gnu-mirror-v1-1-548e6cd2665e@cherry.de>
+References: <20251121-gnu-mirror-v1-0-548e6cd2665e@cherry.de>
+In-Reply-To: <20251121-gnu-mirror-v1-0-548e6cd2665e@cherry.de>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -63,31 +61,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I have to add one (1) package to the Dockerfile as a new dependency and
-wanted to build the image to verify it works. I wasn't able to because
-GNU servers are just not reliable at all.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-The git server URL we're using doesn't seem to be a mirrored one, and
-switching to mirror URLs seem to make fetching possible again.
+GNU announced they activated mirrors for git servers[1] in May this
+year.
 
-Unfortunately, we don't have the option to do that for coreboot's
-dependencies, though we can ask coreboot to download the dependencies
-through its own mirror, which we do in this series.
+The main git server keeps being very unreliable and switching to those
+mirrors seems to improve reliability (albeit somewhat slow).
 
+Yes, the URL in this patch has nothing in common with the URL in the
+linked mail, it was extracted from the Clone section in the mirrored
+cgit page[2].
+
+While at it, switch to the HTTPS clone which is "more secure" than git
+protocol.
+
+[1] https://lists.gnu.org/archive/html/savannah-users/2025-05/msg00002.html
+[2] https://cgit.git.savannah.gnu.org/cgit/grub.git/
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (3):
-      CI: use GNU mirror for grub (and switch to HTTPS)
-      CI: use mirror for gnulib dependency of grub
-      CI: use coreboot mirror for GNU dependencies of coreboot
+ tools/docker/Dockerfile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- tools/docker/Dockerfile | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
----
-base-commit: 8ff90aa64b730c3f511921d4ff79e9f64e625867
-change-id: 20251121-gnu-mirror-98bbfa305caa
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 2dc4bec33bb..34713c5e8b2 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -148,7 +148,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+ 	zip
+ 
+ # Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit
+-RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
++RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
+ 	cd /tmp/grub && \
+ 	git checkout grub-2.12 && \
+ 	git config --global user.name "GitLab CI Runner" && \
 
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.51.1
 
