@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06815CFC29B
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:49:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E8EBCFC29B
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:49:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49B3B83AA9;
+	by phobos.denx.de (Postfix) with ESMTP id 8725E83AAE;
 	Fri, 21 Nov 2025 18:48:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="szCM/THB";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="SDkIV+bG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0761B83A5A; Fri, 21 Nov 2025 18:37:27 +0100 (CET)
-Received: from mx-relay176-hz1.antispameurope.com
- (mx-relay176-hz1.antispameurope.com [94.100.133.58])
+ id 31DBF83A5A; Fri, 21 Nov 2025 18:37:42 +0100 (CET)
+Received: from mx-relay149-hz1.antispameurope.com
+ (mx-relay149-hz1.antispameurope.com [94.100.133.52])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20140839E8
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:37:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E82D839E8
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:37:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0413a1ceba=alexander.feilke@ew.tq-group.com
-ARC-Authentication-Results: i=1; mx-gate176-hz1.hornetsecurity.com 1;
+ARC-Authentication-Results: i=1; mx-gate149-hz1.hornetsecurity.com 1;
  spf=pass reason=mailfrom (ip=94.100.132.6, headerfrom=ew.tq-group.com)
  smtp.mailfrom=ew.tq-group.com smtp.helo=smtp-out01-hz1.hornetsecurity.com;
  dmarc=pass header.from=ew.tq-group.com orig.disposition=pass
 ARC-Message-Signature: a=rsa-sha256;
- bh=aSlhC/QRrWJ95OWNboW3voiNINL+mtp+2bt+pio8woc=; c=relaxed/relaxed;
+ bh=BTm7wVu989MVwPx+uLZGTNIafBEVOIMtkTZzNk39bCw=; c=relaxed/relaxed;
  d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
- t=1763746644;
- b=rVXqsQIn74nGzY6wu/JgQsYZX9NR97zFrlNoH9NimVHKTdmG+uOVufPooCuFdz0bYs267GEM
- ouIHHhViVE1JMyFU7yA0Z+jvDTAqSKJoQ2jJgHzXJCn0r8zzPwgLnFm7QKbl7wrwVXNahRAzpWO
- qrSRdb/gQcIG9F0PxTj7yj73jvYBNK0Vg3qDyuuaLK3LPxhjfykI8ragEdqSDOk1wWu3aGirhha
- HojWwGex8VDonI/vcIhJOh6A31d+0VoJ0rlAuVNcedlb2KLBo1n0EaVIkfguWSOtTy8v7CMaScl
- SEQCC/aI/cQM/DldAc9HUUFudlEWwe7ZnZDFsOrNp0IOQ==
+ t=1763746659;
+ b=ASNzfCUa2kkqjc7nDyM3E9XqgL+6Q0KBR8lhv6jysXETg5/OqBUd87xdxedGgMrfv0UtWB9/
+ nnnfbcfFTim7candE0nWU8P1e+91hScjE0fllLhxIUahNJ5csnAGWqiOltFv6EUk5VTH+l6UgOM
+ LBSrOqtCi4w+ebA7nF5exl6thorWbpUEA2yIGwmFZY9o4C87qHo7N1vnJkTKzt94JVisFXrRV6i
+ FeePOXuLGwrsorBYHes61jAxtkIhGxvar+CuxZRV/fmcBbtAolV+rZlF7ErlC7gf3H1ZTdQxAk3
+ Q7f3kuRDEZHsxfCOjvTGGbOyrIPu5lAposFPpH/iYA7eg==
 ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
- t=1763746644;
- b=B+QZTeHW9O+nlwkxMEIhUyD6jggKQ/v/qF+g21s8pSAv7MSgmzJoD3a3zUETatuHFbpEj5FO
- 7FI4TuVWLgHpXmP6LqNL4mDCc6WSgUNINIW3mLFqam9hq4RxfXYeNsUnprG9oM+8Ihw1qsq24va
- Si0ctrNOmWfzZSIndegy8jBZVoJB/jdR9C3QibpCzhERSukvuFiP9l86brj7syxsppV+hKLa+1T
- /iwBMl5x3HfYJpefvmswhb2VQteqeCbL85FDkPD9xR5VmpS+EEon8fmPBeVqTNeYxc+32EBm4Wb
- gf7qgQWk2c1k6XnYFlrZUD3Ul2uB7N5wVFUGoRYoxWNxQ==
+ t=1763746659;
+ b=CgtosVD2Mu/9VG/xEXERZxurEbWkajLQywUu9bh6Uclu0TaLR3p0XrwrioYjXxNQBWFtP6PA
+ K20toabhDrogXQbg+TVuoAUZW9iFD0LQPe5jx1EGSlw/IdJhoPJLhiusC9Gz+G4EbRasJVuPYqz
+ iAlEJ2L+qhIIi1RvxGknhHi6tPpKC4I/6XbEfFewgb1vyoCnA6nA6/7frXlVOUl5HAI/PgSEstw
+ 8V215h+RDyCsA79MuS4o3oPGf4xJOxeJDvB4XcXu0cJNB8/tN1xWKuS6aZFDYXYkoBNhj0kmVRw
+ H4xR4/4FEjeI8h3isiLp8WmxHt5vWV2su8Hzw+T9eejAA==
 Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
- mx-relay176-hz1.antispameurope.com; Fri, 21 Nov 2025 18:37:24 +0100
+ mx-relay149-hz1.antispameurope.com; Fri, 21 Nov 2025 18:37:39 +0100
 Received: from FEILKEA-M.tq-net.de (host-82-135-125-110.customer.m-online.net
  [82.135.125.110])
  (Authenticated sender: alexander.feilke@ew.tq-group.com)
- by smtp-out01-hz1.hornetsecurity.com (Postfix) with ESMTPSA id AEEDFA404E1;
- Fri, 21 Nov 2025 18:37:05 +0100 (CET)
+ by smtp-out01-hz1.hornetsecurity.com (Postfix) with ESMTPSA id D9915A4075A;
+ Fri, 21 Nov 2025 18:37:20 +0100 (CET)
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>,
- Fabio Estevam <festevam@denx.de>,
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@denx.de>,
+ Tim Harvey <tharvey@gateworks.com>,
  Markus Niebel <Markus.Niebel@tq-group.com>
 Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com,
  Markus Niebel <Markus.Niebel@ew.tq-group.com>,
  Alexander Stein <alexander.stein@ew.tq-group.com>,
  Alexander Feilke <alexander.feilke@ew.tq-group.com>
-Subject: [PATCH 4/8] net: fec_mxc: fix remove with DM_MDIO
-Date: Fri, 21 Nov 2025 18:34:44 +0100
-Message-Id: <20251121173505.6235-5-Alexander.Feilke@ew.tq-group.com>
+Subject: [PATCH 5/8] net: fec_mxc: rewrite fallback MDIO Bus allocation
+Date: Fri, 21 Nov 2025 18:34:45 +0100
+Message-Id: <20251121173505.6235-6-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251121173505.6235-2-Alexander.Feilke@ew.tq-group.com>
 References: <20251121173505.6235-2-Alexander.Feilke@ew.tq-group.com>
@@ -80,21 +80,21 @@ X-cloud-security-Mailarchiv: E-Mail archived for:
 X-cloud-security-Mailarchivtype: outbound
 X-cloud-security-Virusscan: CLEAN
 X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
- mx-relay176-hz1.antispameurope.com with 4dCj8L2MQVz1lt7y
+ mx-relay149-hz1.antispameurope.com with 4dCj8d3j78z18PWj
 X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
  IP=94.100.132.6
-X-cloud-security-Digest: 8b82c2611c1051663c9eb5661a330727
-X-cloud-security: scantime:2.078
+X-cloud-security-Digest: 05bbf495a03f5542f1634dcdfb3e2b09
+X-cloud-security: scantime:2.093
 DKIM-Signature: a=rsa-sha256;
- bh=aSlhC/QRrWJ95OWNboW3voiNINL+mtp+2bt+pio8woc=; c=relaxed/relaxed;
+ bh=BTm7wVu989MVwPx+uLZGTNIafBEVOIMtkTZzNk39bCw=; c=relaxed/relaxed;
  d=ew.tq-group.com;
  h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
- t=1763746643; v=1;
- b=szCM/THB7Sd6qTTf0Mg5kaPJ1sQBa8vRTb9eshPzTi5KbkreeOazXOVSPiDeXaI7KouGvAIZ
- /L27M0l6ixEes0KI1dP8UnvjD+Q9gevj4LdRVjcZScAYC23dFlWbvRWVL7Pq4p+0pSYVKhGwnbI
- F5bVNBzZWFke5qT+0Y9U+S1D3Zs+wACjmhLaioDpsDMZaClou5WH8zV1UUOau/q0YLJM+TTfwV5
- FDJhUgQmxqYRiaC9welBFthXc7LrID5ntUZNrnYJR6Br9sqLox7+kUiNnm0OdQ/oYKv5TbVB4HS
- wNg/ZtqlMhgwSaUJs4fFmelxuEE7Z4l+IYlU1ifC2+S/A==
+ t=1763746659; v=1;
+ b=SDkIV+bGJViRnUDMwE9pKa33idsR1M22l6V5dOoX+rgIhCYcyjlmzE0zo9/oRu4WFTgavAQ+
+ isCgPmE91dGUVIotZU1/FTLaoVQ9TgP1QnT7maeZz0JnXUVl7uMt0rqJ838AWNLem3uS4v51TOb
+ 9uB/+PEdVUSh376IurVqCbFZopYatH1zw8FTn7oOn/TjMpAAu78XrPalPZ6gHcqByxvrkeCn0cf
+ LqaM5tN8SE0JyEjdY6RrGfXG82VfRH0HycJKM51h6Co3/5bZuwYBY8gX4JlUhwtvsgopr5T7itN
+ MaIC0aKTqa+j5xPvIj5U+jjX1/ZS9yw91Nl3juivPSwLQ==
 X-Mailman-Approved-At: Fri, 21 Nov 2025 18:48:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,77 +114,45 @@ X-Virus-Status: Clean
 
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 
-If DM_MDIO is used and the FEC device is removed the mdio API
-must not be used to remove the bus structure. Store pointer the
-the udevice for MDIO bus created by dm_fec_bind_mdio and use DM
-functions to cleanup the device in fecmxc_remove.
-
-Fixes: 3b8f99a3e762 ("net: fec: add support for DM_MDIO")
+The code should only be executed if MDIO bus is not assigned.
+Otherwise the already assigned / allocated bus will be overwritten.
+Add condition check and simplify the code to make it more readable.
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- drivers/net/fec_mxc.c | 14 +++++++++++++-
- drivers/net/fec_mxc.h |  3 +++
- 2 files changed, 16 insertions(+), 1 deletion(-)
+ drivers/net/fec_mxc.c | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
-index 18c717855b4..69a76e879b1 100644
+index 69a76e879b1..7d1567fd88d 100644
 --- a/drivers/net/fec_mxc.c
 +++ b/drivers/net/fec_mxc.c
-@@ -9,6 +9,7 @@
+@@ -1373,14 +1373,18 @@ static int fecmxc_probe(struct udevice *dev)
+ 	if (!bus)
+ 		bus = fec_get_miibus(dev, (ulong)priv->eth, dev_seq(dev));
+ #else
++	if (!bus) {
++		ulong regs = (ulong)priv->eth;
  
- #include <cpu_func.h>
- #include <dm.h>
-+#include <dm/device-internal.h>
- #include <env.h>
- #include <log.h>
- #include <malloc.h>
-@@ -1089,8 +1090,12 @@ static int dm_fec_bind_mdio(struct udevice *dev)
- 
- 		/* need to probe it as there is no compatible to do so */
- 		ret = uclass_get_device_by_ofnode(UCLASS_MDIO, mdio, &mdiodev);
--		if (!ret)
-+		if (!ret) {
-+			struct fec_priv *priv = dev_get_priv(dev);
+-	dm_mii_bus = false;
+-#ifdef CONFIG_FEC_MXC_MDIO_BASE
+-	bus = fec_get_miibus(dev, (ulong)CONFIG_FEC_MXC_MDIO_BASE, dev_seq(dev));
+-#else
+-	bus = fec_get_miibus(dev, (ulong)priv->eth, dev_seq(dev));
++		dm_mii_bus = false;
 +
-+			priv->mdio_bus = mdiodev;
- 			return 0;
-+		}
- 		printf("%s probe %s failed: %d\n", __func__, name, ret);
- 	}
++#if defined(CONFIG_FEC_MXC_MDIO_BASE)
++		regs = CONFIG_FEC_MXC_MDIO_BASE
+ #endif
  
-@@ -1431,8 +1436,15 @@ static int fecmxc_remove(struct udevice *dev)
- 
- 	free(priv->phydev);
- 	fec_free_descs(priv);
-+#ifdef CONFIG_DM_MDIO
-+	if (priv->mdio_bus) {
-+		device_remove(priv->mdio_bus, DM_REMOVE_NORMAL);
-+		device_unbind(priv->mdio_bus);
++		bus = fec_get_miibus(dev, regs, dev_seq(dev));
 +	}
-+#else
- 	mdio_unregister(priv->bus);
- 	mdio_free(priv->bus);
-+#endif
- 
- #ifdef CONFIG_DM_REGULATOR
- 	if (priv->phy_supply)
-diff --git a/drivers/net/fec_mxc.h b/drivers/net/fec_mxc.h
-index 77bfc1cbf45..12cc00423fa 100644
---- a/drivers/net/fec_mxc.h
-+++ b/drivers/net/fec_mxc.h
-@@ -255,6 +255,9 @@ struct fec_priv {
- 	int phy_id;
- 	int (*mii_postcall)(int);
- #endif
-+#ifdef CONFIG_DM_MDIO
-+	struct udevice *mdio_bus;
-+#endif
- #ifdef CONFIG_DM_REGULATOR
- 	struct udevice *phy_supply;
- #endif
++
+ #endif /* CONFIG_DM_ETH_PHY */
+ 	if (!bus) {
+ 		ret = -ENOMEM;
 -- 
 2.34.1
 
