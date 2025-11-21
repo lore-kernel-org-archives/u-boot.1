@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FD29CFC28A
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 15:38:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25E1CFC28A
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 15:38:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42E41839B9;
-	Fri, 21 Nov 2025 16:38:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8588B839DD;
+	Fri, 21 Nov 2025 16:38:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZYjvfMBB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xPXScU5P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D22E0839B7; Fri, 21 Nov 2025 16:38:33 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 146A7839D9; Fri, 21 Nov 2025 16:38:36 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C039A83966
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 16:38:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0DFC8394E
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 16:38:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4779aa4f928so20012345e9.1
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 07:38:31 -0800 (PST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-42bb288c17bso1431858f8f.2
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 07:38:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1763739511; x=1764344311; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1763739512; x=1764344312; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CIkMLZ0EwxlGSOUY6tEiPZKOCDbd8wcKsvH6IQQ77UE=;
- b=ZYjvfMBBrOIsJMBrGTAZznhU9qJ6ssNA7IImwLsrLZGxZ4vFeD7W/snM6JGdFHgvy/
- ElYfIx28c28TPqE3h7EYNVTCcYLg5ex/WMeAxvaqo4SlXXDMaUIQraGFfak87ftJyAr6
- zf8umYCUKysR/yp3KW86ncbxSetV2br/YbBZEH3PWNgWR9ddzbnZ2+i+0mRuqVUezPMi
- oN1V4Xu+zkJq8Px1GUgXYL/11jIxTPrIyAgPgG68ldkWbovmUiJH925fQrZ/Y6v1+mxF
- wq8XuGu4brMo/NcyhUvzDNkH5LJJMn2PeuglyhoG8Kq0WaoA/gEtpyeOOnabs7Ugu/qu
- niQg==
+ bh=dYtZdVqz3hw7SyvOOITt9XlgL/uk+NHqoAER8XV++GE=;
+ b=xPXScU5P+ovmJ3+TAYoP3htloaMRS3oiqTBZ7SI5Q3CeTQBl9t5BcrIIIgGeqDWTmw
+ b4yvHq/C7Raor5axizg4022y2TIdR1CH0dG1YPRAiy2xg5pa+oJPmcckGNjGjAFiRyW8
+ fY8Mfezx/dPEI6fHUf7wLRBm0kLjAJ+JLjdJ7wnfSiNJqOJDW3uGmbdofgw5d+Pkzupw
+ WKp4PdOXp3v8LjgcFOWsvsNnjPhzJPoHEVj9L+8icmIK4sYXYEG5IkER6wNiE/BJMEQ2
+ bnxOTg5/5sNCW4FQ9Spc4oMdYrJqu62Ob7/664iYrmhJPA/DzXYd9XvcnN9KcJrtbcO1
+ cQzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763739511; x=1764344311;
+ d=1e100.net; s=20230601; t=1763739512; x=1764344312;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=CIkMLZ0EwxlGSOUY6tEiPZKOCDbd8wcKsvH6IQQ77UE=;
- b=Icfeevr3qAtRC0RsPE6t47buweuHrojR/emEm5LdgHUHAgOIjzl9GOC4qyix1FFGQk
- Gk3G+l9hTKulKAVr56k+0JIw4q3pDjg/AmbXpQ6UshuQErVW0dlsB2AqTXqWWL+Pueqs
- PVcJGX3KAv5tkkSkunaMH1Eqr9X85SNz5z9fC2wyoBrkMFpNS4CeD1brh6k01A6i5JqV
- nbsnNDrhzk5gDw0IeJ/G2GpOQ+DCpxilxO+ff40r72o4nVf/NWVBpTS1kBka7pOpnI5T
- A5FhGCsDaxR6dTfTAp7rFZ4zUnDB4s4wyWtDAxWSRO4F4pn2IPtIlVlfJ7qQKDcK5klJ
- GUgg==
-X-Gm-Message-State: AOJu0YwirWzBr1MCgl+94GL+4TCybCxlfSJKWJV3KqkQiG9QQwCttJJb
- 9zUGDLJUwIZlwsiCNt4V0aBQK5LJ7h7cvSyqZEHmEg1Z6raM6KvqfyRWkzVoZLAqwTpB4VPgyFQ
- ANUbi
-X-Gm-Gg: ASbGncu7FZvEDTNcppV1d0DVlE7JUq+Egnnu9CP5DV0FbgkGRWFOHMeif5ORSGV0cUN
- PNjBpxX5OCUQSYq9OJl7RjIlIgRq+uxZ/BZaki9mgS1rlsL+GzXgmEfv9OphvQcGB8FhOVRRecQ
- YuOSCH4XU7Y3BOMqfBHsD3Z4o/DlzEhhf2r89AbIiEbLgUTQ06CUsV2eJo4m802n452FAWHCs8Y
- HRL8NtgcQsEDWHoEevTVke2nkk7+eoVBbS6po3MsSUnA9l9uUoas6JSm0KZD2GgO/OwejKpAt1a
- SfPgYLOsQ+dVERheVBjia0PjCl+cLeBoSmEikORLlgzr9WreOCRbGdw1MrwX31ROf9IlG3ysxOI
- ugcHphPQ52pj6odF1FvHTjVQWUbXJOfmx1b8r7CNw3K9b9RJWc3BAWdCJOum4wVtNjAX0oR8Czc
- YefoX76zvGMzl3JTyFiJk=
-X-Google-Smtp-Source: AGHT+IGbq4RZXDkIZfstAl0yG4TtKDvugetMwdNELxwEht/pThtPDhIZ7Phnw4GV1fCBN4p94J4lzg==
-X-Received: by 2002:a05:600c:1f94:b0:477:28c1:26ce with SMTP id
- 5b1f17b1804b1-477c016bbd5mr30567875e9.7.1763739510922; 
- Fri, 21 Nov 2025 07:38:30 -0800 (PST)
+ bh=dYtZdVqz3hw7SyvOOITt9XlgL/uk+NHqoAER8XV++GE=;
+ b=N1Yn5rL8l2ApE37kfQ+PKGwX4U+cTP9ZiyBfZa4GYakp2LLsyBv2cwXS6M0fvFa1PA
+ cZ9eBgACJsMOfDfuI7fAs9S7QSh5/EQaJ3Nr4QT2la7VD4D4RvYAjmSyo/xJhN1PvlI1
+ wUM2EAt0MWFm3Rr2M/ITbFAC3q9/hX2YsJAssIeOGBplXrL+Wj/AprIOCelpOWZYXszc
+ WQ11E6lTj7NDHtVFTCVpxMnJWvVLmnjzkRedmBFZEuiLh3LpuB1/AuldGeQWeBK3ZQNu
+ dqaLpclSvqAQOvLp3oa1NwZj+VCPlqluTlrZQcEFOW7ap+T3dVj+1kXypIhAx9l/e6Xk
+ Ek4A==
+X-Gm-Message-State: AOJu0YyVvTWtBhrErenNoG+1T1fLmzuZCJTDcHB4eTjQ1mK8uMZkqYTf
+ ovTMBRqGiClCSzkNNrYLh3sxVvT1cLKKJbw/IWq+W5wwjI8JZ3NuQUIMJGDZdi1BoJLJWY2Nv+l
+ ThdRX
+X-Gm-Gg: ASbGncuL2aJ9nS95IVwkZz+rrrpwmhKxVxSw1XDmEn0CELuOLzqIBWHK4uT+N8Lmw4X
+ wEjDGRM/x5vCLtAEXqToFZk47tVSl97IBgg7ZnSuvG4TmnvmKk9c9N0pA4lp9phOXdjPIsAXtDn
+ sne2BOjsKlM7KZtkGpFp350i4zpIxZn5Pb04mXaoV9XdJxJhMQ4d6FMi6Dpg/A4/+o8l7BNZntM
+ kDXe2+oAXt8ESLFy5gmD+kvRiDqSpN5NnybvhWMR2j2ZQw9vPdA36mdZ16OWa9upc+cbZdWW1z/
+ Rn9UviQLTmqo4iSMNdqVe7CXv2N7KSmXPRH/mlzQdUGGv4XMd+vEgjehvRoSaUxKyvJjfqKPAsA
+ bYr3/fjHZcUq9jhjm2VY9KzhV+mI9TRORZ/QgDo2bHrpYcUUNa9P5vn5piOKjHpfrVaPx93fXA7
+ vK+OGXiuld91ATexpjhh0=
+X-Google-Smtp-Source: AGHT+IFHCkRUEeQGmydIdFJMLPJDJkrqujLAlYu6mgV39VKdvajqE31JVoSg9fvhv4JVAa/oiRwnDw==
+X-Received: by 2002:a05:6000:24c5:b0:42b:2dd5:42be with SMTP id
+ ffacd0b85a97d-42cc1ab76ffmr2529792f8f.8.1763739511929; 
+ Fri, 21 Nov 2025 07:38:31 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:2035:a57d:e702:e09e])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7fd9b45sm11487964f8f.43.2025.11.21.07.38.30
+ ffacd0b85a97d-42cb7fd9b45sm11487964f8f.43.2025.11.21.07.38.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Nov 2025 07:38:30 -0800 (PST)
+ Fri, 21 Nov 2025 07:38:31 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH 2/5] usb: host: re-import xhci-ext-caps.h from kernel
+Subject: [RFC PATCH 3/5] usb: gadget: re-import epautoconf.c from kernel
  v6.16-rc7
-Date: Fri, 21 Nov 2025 16:37:51 +0100
-Message-ID: <20251121153812.2076440-3-jerome.forissier@linaro.org>
+Date: Fri, 21 Nov 2025 16:37:52 +0100
+Message-ID: <20251121153812.2076440-4-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20251121153812.2076440-1-jerome.forissier@linaro.org>
 References: <20251121153812.2076440-1-jerome.forissier@linaro.org>
@@ -103,180 +104,377 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Import drivers/usb/host/xhci-ext-caps.h from Linux v6.16-rc7. The file
-is needed by the updated DWC3 code.
+Replace drivers/usb/gadget/epautoconf.c with the one from the Linux
+kernel. Fixes will come later.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
 
- drivers/usb/host/xhci-ext-caps.h | 158 +++++++++++++++++++++++++++++++
- 1 file changed, 158 insertions(+)
- create mode 100644 drivers/usb/host/xhci-ext-caps.h
+ drivers/usb/gadget/epautoconf.c | 291 +++++++++++++++-----------------
+ 1 file changed, 132 insertions(+), 159 deletions(-)
 
-diff --git a/drivers/usb/host/xhci-ext-caps.h b/drivers/usb/host/xhci-ext-caps.h
-new file mode 100644
-index 000000000000..fd23eda6f616
---- /dev/null
-+++ b/drivers/usb/host/xhci-ext-caps.h
-@@ -0,0 +1,158 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* Imported from Linux v6.16-rc7 */
-+/*
-+ * xHCI host controller driver
-+ *
-+ * Copyright (C) 2008 Intel Corp.
-+ *
-+ * Author: Sarah Sharp
-+ * Some code borrowed from the Linux EHCI driver.
-+ */
+diff --git a/drivers/usb/gadget/epautoconf.c b/drivers/usb/gadget/epautoconf.c
+index 495460473e9a..30016b805bfd 100644
+--- a/drivers/usb/gadget/epautoconf.c
++++ b/drivers/usb/gadget/epautoconf.c
+@@ -3,170 +3,120 @@
+  * epautoconf.c -- endpoint autoconfiguration for usb gadget drivers
+  *
+  * Copyright (C) 2004 David Brownell
+- *
+- * Ported to U-Boot by: Thomas Smits <ts.smits@gmail.com> and
+- *                      Remy Bohmer <linux@bohmer.net>
+  */
+ 
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/types.h>
++#include <linux/device.h>
 +
-+/* HC should halt within 16 ms, but use 32 ms as some hosts take longer */
-+#define XHCI_MAX_HALT_USEC	(32 * 1000)
-+/* HC not running - set to 1 when run/stop bit is cleared. */
-+#define XHCI_STS_HALT		(1<<0)
++#include <linux/ctype.h>
++#include <linux/string.h>
 +
-+/* HCCPARAMS offset from PCI base address */
-+#define XHCI_HCC_PARAMS_OFFSET	0x10
-+/* HCCPARAMS contains the first extended capability pointer */
-+#define XHCI_HCC_EXT_CAPS(p)	(((p)>>16)&0xffff)
-+
-+/* Command and Status registers offset from the Operational Registers address */
-+#define XHCI_CMD_OFFSET		0x00
-+#define XHCI_STS_OFFSET		0x04
-+
-+#define XHCI_MAX_EXT_CAPS		50
-+
-+/* Capability Register */
-+/* bits 7:0 - how long is the Capabilities register */
-+#define XHCI_HC_LENGTH(p)	(((p)>>00)&0x00ff)
-+
-+/* Extended capability register fields */
-+#define XHCI_EXT_CAPS_ID(p)	(((p)>>0)&0xff)
-+#define XHCI_EXT_CAPS_NEXT(p)	(((p)>>8)&0xff)
-+#define	XHCI_EXT_CAPS_VAL(p)	((p)>>16)
-+/* Extended capability IDs - ID 0 reserved */
-+#define XHCI_EXT_CAPS_LEGACY	1
-+#define XHCI_EXT_CAPS_PROTOCOL	2
-+#define XHCI_EXT_CAPS_PM	3
-+#define XHCI_EXT_CAPS_VIRT	4
-+#define XHCI_EXT_CAPS_ROUTE	5
-+/* IDs 6-9 reserved */
-+#define XHCI_EXT_CAPS_DEBUG	10
-+/* Vendor caps */
-+#define XHCI_EXT_CAPS_VENDOR_INTEL	192
-+#define XHCI_EXT_CAPS_INTEL_SPR_SHADOW	206
-+/* USB Legacy Support Capability - section 7.1.1 */
-+#define XHCI_HC_BIOS_OWNED	(1 << 16)
-+#define XHCI_HC_OS_OWNED	(1 << 24)
-+
-+/* USB Legacy Support Capability - section 7.1.1 */
-+/* Add this offset, plus the value of xECP in HCCPARAMS to the base address */
-+#define XHCI_LEGACY_SUPPORT_OFFSET	(0x00)
-+
-+/* USB Legacy Support Control and Status Register  - section 7.1.2 */
-+/* Add this offset, plus the value of xECP in HCCPARAMS to the base address */
-+#define XHCI_LEGACY_CONTROL_OFFSET	(0x04)
-+/* bits 1:3, 5:12, and 17:19 need to be preserved; bits 21:28 should be zero */
-+#define	XHCI_LEGACY_DISABLE_SMI		((0x7 << 1) + (0xff << 5) + (0x7 << 17))
-+#define XHCI_LEGACY_SMI_EVENTS		(0x7 << 29)
-+
-+/* USB 2.0 xHCI 0.96 L1C capability - section 7.2.2.1.3.2 */
-+#define XHCI_L1C               (1 << 16)
-+
-+/* USB 2.0 xHCI 1.0 hardware LMP capability - section 7.2.2.1.3.2 */
-+#define XHCI_HLC               (1 << 19)
-+#define XHCI_BLC               (1 << 20)
-+
-+/* Intel SPR shadow capability */
-+#define XHCI_INTEL_SPR_ESS_PORT_OFFSET  0x8ac4	/* SuperSpeed port control */
-+#define XHCI_INTEL_SPR_TUNEN	BIT(4)		/* Tunnel mode enabled */
-+
-+/* command register values to disable interrupts and halt the HC */
-+/* start/stop HC execution - do not write unless HC is halted*/
-+#define XHCI_CMD_RUN		(1 << 0)
-+/* Event Interrupt Enable - get irq when EINT bit is set in USBSTS register */
-+#define XHCI_CMD_EIE		(1 << 2)
-+/* Host System Error Interrupt Enable - get irq when HSEIE bit set in USBSTS */
-+#define XHCI_CMD_HSEIE		(1 << 3)
-+/* Enable Wrap Event - '1' means xHC generates an event when MFINDEX wraps. */
-+#define XHCI_CMD_EWE		(1 << 10)
-+
-+#define XHCI_IRQS		(XHCI_CMD_EIE | XHCI_CMD_HSEIE | XHCI_CMD_EWE)
-+
-+/* true: Controller Not Ready to accept doorbell or op reg writes after reset */
-+#define XHCI_STS_CNR		(1 << 11)
-+
+ #include <linux/usb/ch9.h>
+-#include <linux/errno.h>
+ #include <linux/usb/gadget.h>
+-#include <asm/unaligned.h>
+ 
+-#define isdigit(c)      ('0' <= (c) && (c) <= '9')
+-
+-/* we must assign addresses for configurable endpoints (like net2280) */
+-static unsigned epnum;
+-
+-/* #define MANY_ENDPOINTS */
+-#ifdef MANY_ENDPOINTS
+-/* more than 15 configurable endpoints */
+-static unsigned in_epnum;
+-#endif
+-
+-/*
+- * This should work with endpoints from controller drivers sharing the
+- * same endpoint naming convention.  By example:
 +/**
-+ * struct xhci_protocol_caps
-+ * @revision:		major revision, minor revision, capability ID,
-+ *			and next capability pointer.
-+ * @name_string:	Four ASCII characters to say which spec this xHC
-+ *			follows, typically "USB ".
-+ * @port_info:		Port offset, count, and protocol-defined information.
-+ */
-+struct xhci_protocol_caps {
-+	u32	revision;
-+	u32	name_string;
-+	u32	port_info;
-+};
-+
-+#define	XHCI_EXT_PORT_MAJOR(x)	(((x) >> 24) & 0xff)
-+#define	XHCI_EXT_PORT_MINOR(x)	(((x) >> 16) & 0xff)
-+#define	XHCI_EXT_PORT_PSIC(x)	(((x) >> 28) & 0x0f)
-+#define	XHCI_EXT_PORT_OFF(x)	((x) & 0xff)
-+#define	XHCI_EXT_PORT_COUNT(x)	(((x) >> 8) & 0xff)
-+
-+#define	XHCI_EXT_PORT_PSIV(x)	(((x) >> 0) & 0x0f)
-+#define	XHCI_EXT_PORT_PSIE(x)	(((x) >> 4) & 0x03)
-+#define	XHCI_EXT_PORT_PLT(x)	(((x) >> 6) & 0x03)
-+#define	XHCI_EXT_PORT_PFD(x)	(((x) >> 8) & 0x01)
-+#define	XHCI_EXT_PORT_LP(x)	(((x) >> 14) & 0x03)
-+#define	XHCI_EXT_PORT_PSIM(x)	(((x) >> 16) & 0xffff)
-+
-+#include <linux/io.h>
-+
-+/**
-+ * Find the offset of the extended capabilities with capability ID id.
++ * usb_ep_autoconfig_ss() - choose an endpoint matching the ep
++ * descriptor and ep companion descriptor
++ * @gadget: The device to which the endpoint must belong.
++ * @desc: Endpoint descriptor, with endpoint direction and transfer mode
++ *    initialized.  For periodic transfers, the maximum packet
++ *    size must also be initialized.  This is modified on
++ *    success.
++ * @ep_comp: Endpoint companion descriptor, with the required
++ *    number of streams. Will be modified when the chosen EP
++ *    supports a different number of streams.
 + *
-+ * @base	PCI MMIO registers base address.
-+ * @start	address at which to start looking, (0 or HCC_PARAMS to start at
-+ *		beginning of list)
-+ * @id		Extended capability ID to search for, or 0 for the next
-+ *		capability
++ * This routine replaces the usb_ep_autoconfig when needed
++ * superspeed enhancments. If such enhancemnets are required,
++ * the FD should call usb_ep_autoconfig_ss directly and provide
++ * the additional ep_comp parameter.
 + *
-+ * Returns the offset of the next matching extended capability structure.
-+ * Some capabilities can occur several times, e.g., the XHCI_EXT_CAPS_PROTOCOL,
-+ * and this provides a way to find them all.
-+ */
++ * By choosing an endpoint to use with the specified descriptor,
++ * this routine simplifies writing gadget drivers that work with
++ * multiple USB device controllers.  The endpoint would be
++ * passed later to usb_ep_enable(), along with some descriptor.
++ *
++ * That second descriptor won't always be the same as the first one.
++ * For example, isochronous endpoints can be autoconfigured for high
++ * bandwidth, and then used in several lower bandwidth altsettings.
++ * Also, high and full speed descriptors will be different.
+  *
+- *	- ep1, ep2, ... address is fixed, not direction or type
+- *	- ep1in, ep2out, ... address and direction are fixed, not type
+- *	- ep1-bulk, ep2-bulk, ... address and type are fixed, not direction
+- *	- ep1in-bulk, ep2out-iso, ... all three are fixed
+- *	- ep-* ... no functionality restrictions
++ * Be sure to examine and test the results of autoconfiguration
++ * on your hardware.  This code may not make the best choices
++ * about how to use the USB controller, and it can't know all
++ * the restrictions that may apply. Some combinations of driver
++ * and hardware won't be able to autoconfigure.
+  *
+- * Type suffixes are "-bulk", "-iso", or "-int".  Numbers are decimal.
+- * Less common restrictions are implied by gadget_is_*().
++ * On success, this returns an claimed usb_ep, and modifies the endpoint
++ * descriptor bEndpointAddress.  For bulk endpoints, the wMaxPacket value
++ * is initialized as if the endpoint were used at full speed and
++ * the bmAttribute field in the ep companion descriptor is
++ * updated with the assigned number of streams if it is
++ * different from the original value. To prevent the endpoint
++ * from being returned by a later autoconfig call, claims it by
++ * assigning ep->claimed to true.
+  *
+- * NOTE:  each endpoint is unidirectional, as specified by its USB
+- * descriptor; and isn't specific to a configuration or altsetting.
++ * On failure, this returns a null endpoint descriptor.
+  */
+-static int ep_matches(
++struct usb_ep *usb_ep_autoconfig_ss(
+ 	struct usb_gadget		*gadget,
+-	struct usb_ep			*ep,
+-	struct usb_endpoint_descriptor	*desc
++	struct usb_endpoint_descriptor	*desc,
++	struct usb_ss_ep_comp_descriptor *ep_comp
+ )
+ {
+-	u8		type;
+-	const char	*tmp;
+-	u16		max;
++	struct usb_ep	*ep;
+ 
+-	/* endpoint already claimed? */
+-	if (NULL != ep->driver_data)
+-		return 0;
+-
+-	/* only support ep0 for portable CONTROL traffic */
+-	type = desc->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK;
+-	if (USB_ENDPOINT_XFER_CONTROL == type)
+-		return 0;
+-
+-	/* some other naming convention */
+-	if ('e' != ep->name[0])
+-		return 0;
+-
+-	/* type-restriction:  "-iso", "-bulk", or "-int".
+-	 * direction-restriction:  "in", "out".
+-	 */
+-	if ('-' != ep->name[2]) {
+-		tmp = strrchr(ep->name, '-');
+-		if (tmp) {
+-			switch (type) {
+-			case USB_ENDPOINT_XFER_INT:
+-				/* bulk endpoints handle interrupt transfers,
+-				 * except the toggle-quirky iso-synch kind
+-				 */
+-				if ('s' == tmp[2])	/* == "-iso" */
+-					return 0;
+-				break;
+-			case USB_ENDPOINT_XFER_BULK:
+-				if ('b' != tmp[1])	/* != "-bulk" */
+-					return 0;
+-				break;
+-			case USB_ENDPOINT_XFER_ISOC:
+-				if ('s' != tmp[2])	/* != "-iso" */
+-					return 0;
+-			}
+-		} else {
+-			tmp = ep->name + strlen(ep->name);
+-		}
+-
+-		/* direction-restriction:  "..in-..", "out-.." */
+-		tmp--;
+-		if (!isdigit(*tmp)) {
+-			if (desc->bEndpointAddress & USB_DIR_IN) {
+-				if ('n' != *tmp)
+-					return 0;
+-			} else {
+-				if ('t' != *tmp)
+-					return 0;
+-			}
+-		}
++	if (gadget->ops->match_ep) {
++		ep = gadget->ops->match_ep(gadget, desc, ep_comp);
++		if (ep)
++			goto found_ep;
+ 	}
+ 
+-	/* endpoint maxpacket size is an input parameter, except for bulk
+-	 * where it's an output parameter representing the full speed limit.
+-	 * the usb spec fixes high speed bulk maxpacket at 512 bytes.
+-	 */
+-	max = 0x7ff & le16_to_cpu(get_unaligned(&desc->wMaxPacketSize));
+-	switch (type) {
+-	case USB_ENDPOINT_XFER_INT:
+-		/* INT:  limit 64 bytes full speed, 1024 high speed */
+-		if (!gadget->is_dualspeed && max > 64)
+-			return 0;
+-		/* FALLTHROUGH */
+-
+-	case USB_ENDPOINT_XFER_ISOC:
+-		/* ISO:  limit 1023 bytes full speed, 1024 high speed */
+-		if (ep->maxpacket < max)
+-			return 0;
+-		if (!gadget->is_dualspeed && max > 1023)
+-			return 0;
+-
+-		/* BOTH:  "high bandwidth" works only at high speed */
+-		if ((get_unaligned(&desc->wMaxPacketSize) &
+-					__constant_cpu_to_le16(3<<11))) {
+-			if (!gadget->is_dualspeed)
+-				return 0;
+-			/* configure your hardware with enough buffering!! */
+-		}
+-		break;
++	/* Second, look at endpoints until an unclaimed one looks usable */
++	list_for_each_entry (ep, &gadget->ep_list, ep_list) {
++		if (usb_gadget_ep_match_desc(gadget, ep, desc, ep_comp))
++			goto found_ep;
+ 	}
+ 
+-	/* MATCH!! */
++	/* Fail */
++	return NULL;
++found_ep:
 +
-+static inline int xhci_find_next_ext_cap(void __iomem *base, u32 start, int id)
-+{
-+	u32 val;
-+	u32 next;
-+	u32 offset;
++	/*
++	 * If the protocol driver hasn't yet decided on wMaxPacketSize
++	 * and wants to know the maximum possible, provide the info.
++	 */
++	if (desc->wMaxPacketSize == 0)
++		desc->wMaxPacketSize = cpu_to_le16(ep->maxpacket_limit);
+ 
+ 	/* report address */
++	desc->bEndpointAddress &= USB_DIR_IN;
+ 	if (isdigit(ep->name[2])) {
+-		u8	num = dectoul(&ep->name[2], NULL);
++		u8 num = simple_strtoul(&ep->name[2], NULL, 10);
+ 		desc->bEndpointAddress |= num;
+-#ifdef	MANY_ENDPOINTS
+ 	} else if (desc->bEndpointAddress & USB_DIR_IN) {
+-		if (++in_epnum > 15)
+-			return 0;
+-		desc->bEndpointAddress = USB_DIR_IN | in_epnum;
+-#endif
++		if (++gadget->in_epnum > 15)
++			return NULL;
++		desc->bEndpointAddress = USB_DIR_IN | gadget->in_epnum;
+ 	} else {
+-		if (++epnum > 15)
+-			return 0;
+-		desc->bEndpointAddress |= epnum;
++		if (++gadget->out_epnum > 15)
++			return NULL;
++		desc->bEndpointAddress |= gadget->out_epnum;
+ 	}
+ 
+-	/* report (variable) full speed bulk maxpacket */
+-	if (USB_ENDPOINT_XFER_BULK == type) {
+-		int size = ep->maxpacket;
+-
+-		/* min() doesn't work on bitfields with gcc-3.5 */
+-		if (size > 64)
+-			size = 64;
+-		put_unaligned(cpu_to_le16(size), &desc->wMaxPacketSize);
+-	}
+-
+-	if (gadget->ops->ep_conf)
+-		return gadget->ops->ep_conf(gadget, ep, desc);
+-
+-	return 1;
++	ep->address = desc->bEndpointAddress;
++	ep->desc = NULL;
++	ep->comp_desc = NULL;
++	ep->claimed = true;
++	return ep;
+ }
++EXPORT_SYMBOL_GPL(usb_ep_autoconfig_ss);
+ 
+ /**
+- * usb_ep_autoconfig - choose an endpoint matching the descriptor
++ * usb_ep_autoconfig() - choose an endpoint matching the
++ * descriptor
+  * @gadget: The device to which the endpoint must belong.
+  * @desc: Endpoint descriptor, with endpoint direction and transfer mode
+  *	initialized.  For periodic transfers, the maximum packet
+@@ -187,11 +137,12 @@ static int ep_matches(
+  * USB controller, and it can't know all the restrictions that may apply.
+  * Some combinations of driver and hardware won't be able to autoconfigure.
+  *
+- * On success, this returns an un-claimed usb_ep, and modifies the endpoint
++ * On success, this returns an claimed usb_ep, and modifies the endpoint
+  * descriptor bEndpointAddress.  For bulk endpoints, the wMaxPacket value
+- * is initialized as if the endpoint were used at full speed.  To prevent
+- * the endpoint from being returned by a later autoconfig call, claim it
+- * by assigning ep->driver_data to some non-null value.
++ * is initialized as if the endpoint were used at full speed. Because of
++ * that the users must consider adjusting the autoconfigured descriptor.
++ * To prevent the endpoint from being returned by a later autoconfig call,
++ * claims it by assigning ep->claimed to true.
+  *
+  * On failure, this returns a null endpoint descriptor.
+  */
+@@ -200,23 +151,45 @@ struct usb_ep *usb_ep_autoconfig(
+ 	struct usb_endpoint_descriptor	*desc
+ )
+ {
+-	struct usb_ep *ep;
++	struct usb_ep	*ep;
++	u8		type;
+ 
+-	if (gadget->ops->match_ep) {
+-		ep = gadget->ops->match_ep(gadget, desc, NULL);
+-		if (ep && ep_matches(gadget, ep, desc))
+-			return ep;
+-	}
++	ep = usb_ep_autoconfig_ss(gadget, desc, NULL);
++	if (!ep)
++		return NULL;
 +
-+	offset = start;
-+	if (!start || start == XHCI_HCC_PARAMS_OFFSET) {
-+		val = readl(base + XHCI_HCC_PARAMS_OFFSET);
-+		if (val == ~0)
-+			return 0;
-+		offset = XHCI_HCC_EXT_CAPS(val) << 2;
-+		if (!offset)
-+			return 0;
-+	}
-+	do {
-+		val = readl(base + offset);
-+		if (val == ~0)
-+			return 0;
-+		if (offset != start && (id == 0 || XHCI_EXT_CAPS_ID(val) == id))
-+			return offset;
++	type = usb_endpoint_type(desc);
 +
-+		next = XHCI_EXT_CAPS_NEXT(val);
-+		offset += next << 2;
-+	} while (next);
-+
-+	return 0;
++	/* report (variable) full speed bulk maxpacket */
++	if (type == USB_ENDPOINT_XFER_BULK) {
++		int size = ep->maxpacket_limit;
+ 
+-	/* Second, look at endpoints until an unclaimed one looks usable */
+-	list_for_each_entry(ep, &gadget->ep_list, ep_list) {
+-		if (ep_matches(gadget, ep, desc))
+-			return ep;
++		/* min() doesn't work on bitfields with gcc-3.5 */
++		if (size > 64)
++			size = 64;
++		desc->wMaxPacketSize = cpu_to_le16(size);
+ 	}
+ 
+-	/* Fail */
+-	return NULL;
++	return ep;
 +}
++EXPORT_SYMBOL_GPL(usb_ep_autoconfig);
++
++/**
++ * usb_ep_autoconfig_release - releases endpoint and set it to initial state
++ * @ep: endpoint which should be released
++ *
++ * This function can be used during function bind for endpoints obtained
++ * from usb_ep_autoconfig(). It unclaims endpoint claimed by
++ * usb_ep_autoconfig() to make it available for other functions. Endpoint
++ * which was released is no longer valid and shouldn't be used in
++ * context of function which released it.
++ */
++void usb_ep_autoconfig_release(struct usb_ep *ep)
++{
++	ep->claimed = false;
++	ep->driver_data = NULL;
+ }
++EXPORT_SYMBOL_GPL(usb_ep_autoconfig_release);
+ 
+ /**
+  * usb_ep_autoconfig_reset - reset endpoint autoconfig state
+@@ -224,18 +197,18 @@ struct usb_ep *usb_ep_autoconfig(
+  *
+  * Use this for devices where one configuration may need to assign
+  * endpoint resources very differently from the next one.  It clears
+- * state such as ep->driver_data and the record of assigned endpoints
++ * state such as ep->claimed and the record of assigned endpoints
+  * used by usb_ep_autoconfig().
+  */
+-void usb_ep_autoconfig_reset(struct usb_gadget *gadget)
++void usb_ep_autoconfig_reset (struct usb_gadget *gadget)
+ {
+ 	struct usb_ep	*ep;
+ 
+-	list_for_each_entry(ep, &gadget->ep_list, ep_list) {
++	list_for_each_entry (ep, &gadget->ep_list, ep_list) {
++		ep->claimed = false;
+ 		ep->driver_data = NULL;
+ 	}
+-#ifdef	MANY_ENDPOINTS
+-	in_epnum = 0;
+-#endif
+-	epnum = 0;
++	gadget->in_epnum = 0;
++	gadget->out_epnum = 0;
+ }
++EXPORT_SYMBOL_GPL(usb_ep_autoconfig_reset);
 -- 
 2.48.1
 
