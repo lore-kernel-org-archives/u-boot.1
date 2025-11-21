@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD8B0CFC29B
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E6BCFC29B
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 17:49:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F48383ACA;
+	by phobos.denx.de (Postfix) with ESMTP id 4C21983AE6;
 	Fri, 21 Nov 2025 18:48:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="VMY54A/y";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="LndQ3HdQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E15F683A5A; Fri, 21 Nov 2025 18:38:18 +0100 (CET)
-Received: from mx-relay08-hz2.antispameurope.com
- (mx-relay08-hz2.antispameurope.com [83.246.65.94])
+ id 6294483A5A; Fri, 21 Nov 2025 18:38:33 +0100 (CET)
+Received: from mx-relay05-hz2.antispameurope.com
+ (mx-relay05-hz2.antispameurope.com [83.246.65.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 007F7839E8
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:38:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 827C7839E8
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 18:38:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0413a1ceba=alexander.feilke@ew.tq-group.com
-ARC-Authentication-Results: i=1; mx-gate08-hz2.hornetsecurity.com 1; spf=pass
+ARC-Authentication-Results: i=1; mx-gate05-hz2.hornetsecurity.com 1; spf=pass
  reason=mailfrom (ip=94.100.132.6,
  headerfrom=ew.tq-group.com)
  smtp.mailfrom=ew.tq-group.com smtp.helo=smtp-out01-hz1.hornetsecurity.com;
  dmarc=pass header.from=ew.tq-group.com orig.disposition=pass
 ARC-Message-Signature: a=rsa-sha256;
- bh=WPamtqOd/pIZZl69Twj8e5SGBMe0iJOleyh4r4y7HTI=; c=relaxed/relaxed;
+ bh=CVTbikrdv/+h0n9us7amrJA2PKj20HyeKu001JBbd+U=; c=relaxed/relaxed;
  d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
- t=1763746696;
- b=VUVm1uSD6K6lcKJ4FvK1TCCXopFu/igZVs2v7dKfEAvlILgWCwmlk7laWK02r6oMRaoGvCoG
- tHavfBucLLUi4by17UECxzD0cMv5Dk9bxZ4Tpu2/1tZcfo7Of2D+RJP0CqOBY4ySLnFMcPZIiHu
- DTiyJgX70oCEqM/E4/CrlYcHEQMvPBHA5c8d4VqwAnjb0MLKI8se5Yh94gmEAfK4Jfafvcpd6Sc
- us4D5kuxsRXUc+pbWFpbrsQGiIw7jP5nBy6nwafJZMfwNasg6J4bmBqyCJgvfdLp65nwfcU7tW1
- DvsHHCIMCaWUyeLabGTwKVBMPLbR0peCiSOBFdVig9Smg==
+ t=1763746710;
+ b=sVXCr65hkoHwEDb5s34raIL9VdZ55Zq+HlJnGNOXhhVDLfpBSXkoj9WbyjWxXpZSkbQhSnnW
+ YsoXSL53YgGPBP6yop3RNzwJjN+lIWoMGscP7hlSBZG5NaCk+7bWHoKUmZsn3oH3PuxV3LrIcfG
+ ue7By23bx/KQTh6afjrQkcB6FhuJCBqXkEmpW7IvnaTtENySGO3lhp6LWdGinQ8M7eQnf267xV4
+ QMHTRlDLaIP0O/LC4NRSLH5egbAbU2Hu1jB7kUrqcTxvUniORsHJC7DjmdcBPU3zP5CONbgYzde
+ UVh9znjEj8a17R1Txk8gIaOPZnvFfMVCSHwVGBy7Q4MJg==
 ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
- t=1763746696;
- b=QW5PFLDDQUg9UaAOIBVJvlFoRUAlu+FJm/UIMNoLz5VkYwZcFP52B0FIDbOqErUdFzT3m/U7
- Dg+HRYYfZzQl1wLp/EupqLQUE5T0MqriK0WHmn5Iehy1dYFovgpic6ign8o5cF9bkf/2SljeV8d
- 4szDjXM+j8MrbOYA2/NIdOKLsxIBdxQhKInlMrWOn/H8Z/0Yt4IwXACmDPreR3tL/gTCZE0JWY5
- pPvNKJR75kpXEAfBTmI/ujsyAI36htZCQI/93fU1iW6/2ES5tEMCKaZ5a30NYCRF1g+BLlUpjIO
- TPFbAD/F/g1UBuBFJJggn173QurM2netX7sdXre3zoNag==
+ t=1763746710;
+ b=W7U/PaWUO0/mCCR3iHByveXDHOrJERWbfvKKJxbpPYqSGM65kiZjEhTyQC6dgUtauMAblspP
+ D59Mq1aFJ4GYZiRZJgsNNXa6D+2nF6PNkBfajacrsFhSU58jYhPchhDC+D+mH6+2zeBlxMx+6t/
+ vYiVYAWcFfmoyznDr3IOFXbai9VcmZqz3KMPW6oUAJTnPlteyS07XuTZEAJxd2RufXmvN+iFcgp
+ C/O3Km/e2UlmquaeBcubdXX24aB0ww37sjqrSo4HbmlniM8gUA3oJlKuLhS7KcO8kRUnFqKUWDf
+ KmAcdBE/Yx8ew4sI/XnWRvypqwo+pSzxJAK1S+FiZCelQ==
 Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
- mx-relay08-hz2.antispameurope.com; Fri, 21 Nov 2025 18:38:15 +0100
+ mx-relay05-hz2.antispameurope.com; Fri, 21 Nov 2025 18:38:30 +0100
 Received: from FEILKEA-M.tq-net.de (host-82-135-125-110.customer.m-online.net
  [82.135.125.110])
  (Authenticated sender: alexander.feilke@ew.tq-group.com)
- by smtp-out01-hz1.hornetsecurity.com (Postfix) with ESMTPSA id 0458AA40A3C;
- Fri, 21 Nov 2025 18:37:52 +0100 (CET)
+ by smtp-out01-hz1.hornetsecurity.com (Postfix) with ESMTPSA id A1F35A41128;
+ Fri, 21 Nov 2025 18:38:08 +0100 (CET)
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -65,9 +65,9 @@ Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com,
  Markus Niebel <Markus.Niebel@ew.tq-group.com>,
  Alexander Stein <alexander.stein@ew.tq-group.com>,
  Alexander Feilke <alexander.feilke@ew.tq-group.com>
-Subject: [PATCH 7/8] net: fec_mxc: add unique bus and device names for DM_MDIO
-Date: Fri, 21 Nov 2025 18:34:47 +0100
-Message-Id: <20251121173505.6235-8-Alexander.Feilke@ew.tq-group.com>
+Subject: [PATCH 8/8] net: fec_mxc.c: improve readability of dm_fec_bind_mdio
+Date: Fri, 21 Nov 2025 18:34:48 +0100
+Message-Id: <20251121173505.6235-9-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251121173505.6235-2-Alexander.Feilke@ew.tq-group.com>
 References: <20251121173505.6235-2-Alexander.Feilke@ew.tq-group.com>
@@ -81,21 +81,21 @@ X-cloud-security-Mailarchiv: E-Mail archived for:
 X-cloud-security-Mailarchivtype: outbound
 X-cloud-security-Virusscan: CLEAN
 X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
- mx-relay08-hz2.antispameurope.com with 4dCj9F4j8tz14djy
+ mx-relay05-hz2.antispameurope.com with 4dCj9Y2cJqz1L9vL
 X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
  IP=94.100.132.6
-X-cloud-security-Digest: fd9463f61e0913f8387b1e222493ac88
-X-cloud-security: scantime:2.293
+X-cloud-security-Digest: 4cf0f6144a853857ec3d8ef868b76cd3
+X-cloud-security: scantime:2.032
 DKIM-Signature: a=rsa-sha256;
- bh=WPamtqOd/pIZZl69Twj8e5SGBMe0iJOleyh4r4y7HTI=; c=relaxed/relaxed;
+ bh=CVTbikrdv/+h0n9us7amrJA2PKj20HyeKu001JBbd+U=; c=relaxed/relaxed;
  d=ew.tq-group.com;
  h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
- t=1763746695; v=1;
- b=VMY54A/ywJz9uBjHaIqnBLF4fZ09vnt16v8W1dokeoqBEusjKEnVxq/TaFvDyrOwl3h4wEN5
- nA6+rweJpf1o/+ntO5ReB+z4WTjucg9GMNCVvzbIQMcaW6r21/BZRG3iYG8fupW6PaaKTXSb2IL
- svCdw9//LV7kgB/XlqYRL9mOMEInC5NgmNMGY1y9QRTm0p+dGAqW9o+z5v3pEuFiYhelBmBqrEp
- wm4+k3p8YWiiCNTO77brMGKUFj2jnnpbEoaNFQaJXHEaDcF5Ef5j4lHl8jmftuBwJ7kMb3oyiSK
- zACHIi9kqRpfUdGC6YMszFK7yD4GzSeBY0bENDCzyW5QQ==
+ t=1763746710; v=1;
+ b=LndQ3HdQYH3oMDHT6Ra7n195ENqGMMnQIeeM9v3QxUPRS70dYttDqCnvA1olebOTLAv4mx8G
+ TH6iQB8Es38sv4HgtSUURVo76HEZcWgGJdD5soWyrEk86JmL6+BETnjcZgMgQ6WbbEXhqM2UoWx
+ 5QaYligKeGrTmIfeHNba2xuXIedANMT8Ky2A7q6A2zckCTv9UQ6deTALWZLE2iN7zyeeX1bS4mZ
+ 7pGm1p5Sn1RQg1P5q1uAMxRRnyofO/Hg6bA9G4On4XIYz0pixX4TNnU1E9PC6XjwPNoWetq7ZQU
+ Xg7rtllyNG4ULJObOr3jO/GPjii/jCNQCGCxronueO2cA==
 X-Mailman-Approved-At: Fri, 21 Nov 2025 18:48:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,66 +115,30 @@ X-Virus-Status: Clean
 
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 
-When using DM_MDIO on SOC with more than one FEC and not sharing the MDIO
-bus the name of the driver and the bus needs to be unique. Since name
-used in device_bind_driver_to_node needs to be a static string, add the
-string to the fec_priv struct and reuse fec_set_dev_name to generate the
-name with the device sequence number.
-
-Fixes: 3b8f99a3e762 ("net: fec: add support for DM_MDIO")
+The last parameter to device_bind_driver_to_node is optional.
+Since the returned information is not used and overwritten by
+uclass_get_device_by_ofnode just provide NULL as parameter.
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- drivers/net/fec_mxc.c | 6 ++++--
- drivers/net/fec_mxc.h | 1 +
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ drivers/net/fec_mxc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
-index 6789bfe2500..f6ca87cee3a 100644
+index f6ca87cee3a..6f7ca0f8b8b 100644
 --- a/drivers/net/fec_mxc.c
 +++ b/drivers/net/fec_mxc.c
-@@ -1067,6 +1067,7 @@ U_BOOT_DRIVER(fec_mdio) = {
+@@ -1084,7 +1084,7 @@ static int dm_fec_bind_mdio(struct udevice *dev)
  
- static int dm_fec_bind_mdio(struct udevice *dev)
- {
-+	struct fec_priv *fec = dev_get_priv(dev);
- 	struct udevice *mdiodev;
- 	const char *name;
- 	ofnode mdio;
-@@ -1081,8 +1082,9 @@ static int dm_fec_bind_mdio(struct udevice *dev)
- 		if (strcmp(name, "mdio"))
- 			continue;
- 
-+		fec_set_dev_name(fec->mdio_name, dev_seq(dev));
+ 		fec_set_dev_name(fec->mdio_name, dev_seq(dev));
  		ret = device_bind_driver_to_node(dev, "fec_mdio",
--						 name, mdio, &mdiodev);
-+						 fec->mdio_name, mdio, &mdiodev);
+-						 fec->mdio_name, mdio, &mdiodev);
++						 fec->mdio_name, mdio, NULL);
  		if (ret) {
  			printf("%s bind %s failed: %d\n", __func__, name, ret);
  			break;
-@@ -1369,7 +1371,7 @@ static int fecmxc_probe(struct udevice *dev)
- 	 */
- 	ret = dm_fec_bind_mdio(dev);
- 	if (!ret)
--		bus = miiphy_get_dev_by_name("mdio");
-+		bus = miiphy_get_dev_by_name(priv->mdio_name);
- 	else if (ret != -ENODEV)
- 		return ret;
- #endif
-diff --git a/drivers/net/fec_mxc.h b/drivers/net/fec_mxc.h
-index 12cc00423fa..8e95b539cd6 100644
---- a/drivers/net/fec_mxc.h
-+++ b/drivers/net/fec_mxc.h
-@@ -256,6 +256,7 @@ struct fec_priv {
- 	int (*mii_postcall)(int);
- #endif
- #ifdef CONFIG_DM_MDIO
-+	char mdio_name[MDIO_NAME_LEN];
- 	struct udevice *mdio_bus;
- #endif
- #ifdef CONFIG_DM_REGULATOR
 -- 
 2.34.1
 
