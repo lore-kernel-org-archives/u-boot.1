@@ -4,79 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 439BBCFC509
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 21:40:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38624CFC50C
+	for <u-boot@archiver.kernel.org>; Sat, 22 Nov 2025 07:23:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E83F83A41;
-	Fri, 21 Nov 2025 22:40:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A5F483A41;
+	Sat, 22 Nov 2025 08:23:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hYjQUgK4";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="AmPVzwve";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32A8E83A5A; Fri, 21 Nov 2025 22:40:22 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id F189C83A9F; Fri, 21 Nov 2025 20:41:05 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 165CB83A2B
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 22:40:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D9AB83A8A
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 20:41:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7c75a5cb752so1452148a34.2
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 13:40:20 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-47755de027eso13640235e9.0
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 11:41:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763761219; x=1764366019; darn=lists.denx.de;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=gyhT1yZaqiepZ8u0mKRvCDEc6gzJSawpUxWnzYrCHBQ=;
- b=hYjQUgK4bUY5MZOzykH7vBCO8gppASVE075ryFfObtM0xYauxeLA+JM+d+IfS86eDx
- zlA+3g17zJrEo2kWscAplliAoEsrqWYDHLs7SCD85o8Pbl9hBYY255CJdbwqWRM6Yx5A
- 0glhAyJf0+2OEyC7plsL+LbDKLXf5TfMKcEsFVouwZmnhZd0TaX3csDoS+fAHDKmJGto
- QUQZ5Au7UHyPU8/2cmaEM6fFwmcR2H29lsdvRW+NLZ9FPw8xrlwqidHQZpHqaF+OEJN4
- ZiTDGHIRET5wUP9RK/QHgfWyPKOXbY+mWzF4srUu4xzUWFF2QHGeRt6CzlhCnZfJCZX7
- VUtg==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763754062; x=1764358862;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=J1juZXC3LOEyc9UhK0KqgErqZEAQMvWDiNtfYTs8TUc=;
+ b=AmPVzwve3KhifWBlnqRSwpfp48nTrhyYy11lqagsanUQQWVxdRTqRQUPnjgHQRSdVi
+ iH9zNFUptuX3d+/0Qgk8n2HlgpnEGOzTBFkmhc0PoxRTbZ+ub51njh8dwHodJ8CNPEPP
+ QgsmRzTUw5UnHIyhofp/WKVP5pf0wnpH3VymqX1Z8XQPzg2KclOlt5MBcj355a67eR57
+ EgLtZs1/pXsDgFyyPdxZeaORXVw6ku4gyrW/02gD2gLaBUYkPr7bgzgrcx6pp9X7WhS0
+ KZKlhr//+QCGj97g8nRmcxdBmd6WQt5mfmZm5NIla2/RfWzdA4bY9qfXdjbU+ewYRYP6
+ CgCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763761219; x=1764366019;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gyhT1yZaqiepZ8u0mKRvCDEc6gzJSawpUxWnzYrCHBQ=;
- b=DoJRtbHt2RFMv8VncfNNNP7VxXRiekbsJAooZS+6XjenRREXTkJM5gO5TpGySFNpuS
- SINWGm2JmcK2PShVVVls7sg4u58hDtO4aqxiZt9DRHMKKN+/JiH3xxwQEGv8FbgzIr6x
- MmQvbdG1QAASWI9RZVhgQznsf5cQannAw/XYZ/wmEigrFCBvAw3vtzHk+TWD7RaWm+7T
- kxnlBH9o9Ux9cvEgRURMR3MreeW/azM2HsQQL9Q7Ua09qYFytx4GHt0kgRGm8hkFQAZb
- D9EztqBtJnO+tANv+BswAFLRGC9pdzDvvxawLU76GT8qGlQw/UNAg62MC0+IK/P6molL
- cg3Q==
+ d=1e100.net; s=20230601; t=1763754062; x=1764358862;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=J1juZXC3LOEyc9UhK0KqgErqZEAQMvWDiNtfYTs8TUc=;
+ b=lfCsINsylSU8l49Pfe6FYZ+duFlOm2mo8YL0UVU7TLB9IeOwM6krqg/43CXMjVaGIt
+ CAnX2YqeJ3criKRrxSkLk1a7pBU6bNhlqMRVuBJ7mw2/zoeEZd6NW7spGjQyN2Ru3rSi
+ LvJUDjHMq4Klfyoyzo1sJBEYXAwcGL9hbdGSbU6PGrJva5SLVIsE6LQ2QwvKj/+AQ20/
+ 9GSAO8wmaYs0u94BFHL4aUVOgC+pD3OaGemlr05vl9TzFfjCXu1xEkcHHGfmofWemKRz
+ 827KbX3XT2OAYsXTBEz1xiEbgIt+VBME/8mzLy0NzrmNZvpW25vJB+/wYE19x+DIUF2Y
+ JRCw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVDcTjS3AniUeMygfxk6ZhUjZjoq95c/2bvot4MI+fG5avIz2XHMVk3WaG4I7UCzsJBTn//4tY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz2UYciS0mDZAuE+gH2daD+re1oGqAbQMHkJRVeTErWQn97/jds
- sAteE4LaVHx1SA7LCyVyrRsmGYmuxmh3kHCJHOkMMfUlPU7PKffBII8lRw5k42eFJiRBr+08ha0
- v8bavbh8sjL+MI0opaQqzUPLZ/DKwT+8=
-X-Gm-Gg: ASbGncvownsmH6Mt+C5g3Y1F3WRQRL6JFMlbXa9YeKwu+SJCoS29sggAVutpxtUA4C/
- vQAuZsQLKIpujgCyAH2SGoJ10xasESdCuZrfEcs3Ki2YOpSa5eEFFd7NqM4aDfvdYSc4XFYxDwA
- rGeVn1t3MKM8VWNDczrlCAWWd8m4A405xUFTzPsUb0w+xnETZ7R4eD03jVuUw6/kXuf2PD02t1P
- s9pSFHcXUg1RAJS1dq1eq/ivtG5YIFtJeigwa3mRlR1QexMx1x/+SH0cA7J2IlRQTRddzIYNndv
- DWMJ/g==
-X-Google-Smtp-Source: AGHT+IGKCrUNc9CbfrEuNjY+vGG+ixIs6n8d3tgZwOUSvfira3+puSSCw1GhGnTVwz9fPyTzKIt+7bxuIbAPzfkVmTA=
-X-Received: by 2002:a05:6830:264a:b0:7c7:e29:70ca with SMTP id
- 46e09a7af769-7c798ccd9a4mr1858354a34.22.1763761218691; Fri, 21 Nov 2025
- 13:40:18 -0800 (PST)
-MIME-Version: 1.0
-References: <20251119111653.456-1-briansune@gmail.com>
-In-Reply-To: <20251119111653.456-1-briansune@gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Sat, 22 Nov 2025 05:40:06 +0800
-X-Gm-Features: AWmQ_bmyILqGycNzN0Eo-kbgoG6aTkouGrJpioxY9h0-Q3oGAB2o2KFuPt580cw
-Message-ID: <CAN7C2SDvkci+ss2v6RjwEnmfWF5Of7wxSSHbsYwnd8Q39jZs-A@mail.gmail.com>
-Subject: Re: [PATCH v8] Add optimized Makefile support for SoCFPGA handoff
-To: Chee Tien Fong <tienfong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ AJvYcCX5zj+8PwLObNV/QsTKFVgenytbt8PMjIUuEG/7K7NKX4Fd71L/xQix4ZDDpJiG5/C8bUjy8eo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWQ4y5Y8S5J5PjWd0hqyMhyVbco7IzebwkzUiarpzKph6cfa7X
+ 7wd9HMNlDWvHl0qExhp4E0Y4QifMMK6FYN2LXpqVntWkkxCjUIE/CgaikOtLghlzWVc=
+X-Gm-Gg: ASbGnctqqFrd4OriwKLYyZy44FilkQNExbwJG1GAb8X2P7W1WzKrseo1jASXHQrDasZ
+ J4TX2GyxCFSJouWIuYnoSGSi2iv0U3IesyBJaWwEOflnluzxi110cezTZfNo6srs7N638v4+8Lo
+ sWS6bqWlX4DGmIKjDsnQCWaQSC2HJwG2g6jkclautqi9cw1vzt+KATsyrPPkRg3S7ffrYjZrtT2
+ kA39nmyh6NkB7ASy7AXetD+0cYoq/oXkl5SwnVHIeoUroAP85gngTRuETjAsttL4MZgiicvM+RM
+ xeWhnEy+cvkoCjN/Q7xBmaK5qhF4jzxtzLja0fZPeWzrRj3yR0TktogyI09O1ukiZzegGiSGVYG
+ fSch3bJgfy0Oja4BtohI1V1IuBnuzmJ5Fw2+sHRzq9+5v5hu8uyxxXOYikrKNgB9xeNpCernMg2
+ Ne2/ux
+X-Google-Smtp-Source: AGHT+IEBOqnkN1Sh3gPAGz6Bs9UAP8f160nDtQEikYMWdZjBX7kDuJNJBkntajP3ZOF4qr2MzROhag==
+X-Received: by 2002:a05:600c:1c24:b0:477:76bf:e1fb with SMTP id
+ 5b1f17b1804b1-477c01be2b2mr51131095e9.16.1763754060635; 
+ Fri, 21 Nov 2025 11:41:00 -0800 (PST)
+Received: from localhost ([62.246.248.122]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-477bf1df3d5sm59150495e9.2.2025.11.21.11.40.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Nov 2025 11:40:59 -0800 (PST)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=bf6fd95ff0ebf9742212239977e26397f15946e00a24de257cb374d9c922;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Fri, 21 Nov 2025 20:40:50 +0100
+Message-Id: <DEEMMP7ISZ9P.BP6XAE07Y26S@baylibre.com>
+Cc: "Maarten Brock" <Maarten.Brock@sttls.nl>, <u-boot@lists.denx.de>, "Kory
+ Maincent" <kory.maincent@bootlin.com>, "Rasmus Villemoes" <ravi@prevas.dk>,
+ "Rayagonda Kokatanur" <rayagonda.kokatanur@broadcom.com>, "Tien Fong Chee"
+ <tien.fong.chee@altera.com>, "Alif Zakuan Yuslaimi"
+ <alif.zakuan.yuslaimi@altera.com>, "Casey Connolly"
+ <casey.connolly@linaro.org>, "Tingting Meng" <tingting.meng@altera.com>,
+ "Peng Fan" <peng.fan@nxp.com>, "Quentin Schulz" <quentin.schulz@cherry.de>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>,
+ =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, "Liya Huang"
+ <1425075683@qq.com>, "Romain Gantois" <romain.gantois@bootlin.com>, "Simon
+ Glass" <sjg@chromium.org>, "Jaehoon Chung" <jh80.chung@samsung.com>,
+ "Miquel Raynal" <miquel.raynal@bootlin.com>, "Mattijs Korpershoek"
+ <mkorpershoek@kernel.org>, "Andrew Goodbody" <andrew.goodbody@linaro.org>,
+ "Anatolij Gustschin" <ag.dev.uboot@gmail.com>, "Sukrut Bellary"
+ <sbellary@baylibre.com>
+Subject: Re: [PATCH 08/15] dm: core: Support multiple drivers with same
+ compatibles
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Marek Vasut" <marek.vasut@mailbox.org>, "Markus Schneider-Pargmann"
+ <msp@baylibre.com>, "Tom Rini" <trini@konsulko.com>
+X-Mailer: aerc 0.21.0
+References: <20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com>
+ <20251118-topic-am33-evm-oftree-v2026-01-v1-8-91ce13c661e2@baylibre.com>
+ <20251118140804.GR2125796@bill-the-cat>
+ <DEDGK9KKB61P.1QY81TPR5JLNY@baylibre.com>
+ <20251120212909.GQ2125796@bill-the-cat>
+ <0b9e2a8e-1ab8-4a6e-899f-4ae9fd43b68c@mailbox.org>
+ <DEE8BZBDYO08.1SX1UEB750S25@baylibre.com>
+ <423d52bd-2446-47de-b6bc-4ee61fd0c23e@mailbox.org>
+In-Reply-To: <423d52bd-2446-47de-b6bc-4ee61fd0c23e@mailbox.org>
+X-Mailman-Approved-At: Sat, 22 Nov 2025 08:23:49 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,21 +124,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> - Introduce socfpga_g5_handoff_prepare target in U-Boot
->   arch/arm/mach-socfpga/config.mk
-> - Users can convert the handoff via make prepare.
-> - Detects Altera/Intel SoCFPGA boards from .config
-> - Combines vendor/board extraction into a single shell call
-> - Checks for hps_isw_handoff folder and .hiof files
-> - Uses ls -d instead of find for faster folder detection
-> - Runs BSP generator script only if files exist
-> - Non-blocking: continues if handoff folder or files are missing
-> - HANDOFF_PATH user define allows overriding auto-detected folder
-> - Minimizes subshells and other slow constructs for faster CI
+--bf6fd95ff0ebf9742212239977e26397f15946e00a24de257cb374d9c922
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-Hi T.F.
+Hi Marek,
 
-Please review the new version.
-Thanks,
+On Fri Nov 21, 2025 at 3:43 PM CET, Marek Vasut wrote:
+> On 11/21/25 9:28 AM, Markus Schneider-Pargmann wrote:
+>
+> Hello Markus,
+>
+> [...]
+>
+>> Thanks for the pointer, this is using the exact same mechanism as I want
+>> to use. Is this tested and works? Because if I look into the current
+>> code for probing and binding:
+>>=20
+>> 	/*
+>> 	 * Walk through the compatible string list, attempting to match each
+>> 	 * compatible string in order such that we match in order of priority
+>> 	 * from the first string to the last.
+>> 	 */
+>> 	for (i =3D 0; i < compat_length; i +=3D strlen(compat) + 1) {
+>> 		compat =3D compat_list + i;
+>>      ...
+>> 		for (entry =3D driver; entry !=3D driver + n_ents; entry++) {
+>>        ...
+>> 			ret =3D driver_check_compatible(entry->of_match, &id,
+>> 						      compat);
+>> 			if (!ret)
+>> 				break;
+>> 		}
+>> 		if (entry =3D=3D driver + n_ents)
+>> 			continue;
+>>=20
+>> 		...
+>> 		ret =3D device_bind_with_driver_data(parent, entry, name,
+>> 						   id ? id->data : 0, node,
+>> 						   &dev);
+>> 		if (ret =3D=3D -ENODEV) {
+>> 			log_debug("Driver '%s' refuses to bind\n", entry->name);
+>> 			continue;
+>> 		}
+>> 		...
+>> 		break;
+>> 	}
+>>=20
+>> So if I understand this correctly, the returned -ENODEV will cause a
+>> continue in the outer loop which iterates through the device compatible
+>> string list, jumping to the next compatible of the device if any is
+>> given. It does not continue in the inner for loop that iterates the
+>> drivers.
+>
+> I check the HF one regularly, the SPI is a bit less accessible, but the=
+=20
+> binding code didn't change for a while so I don't think it should be brok=
+en.
+>
+> I wonder if the RPC works by accident, and one driver matches on SoC=20
+> compatible and the other on fallback compatible. In that case, I think=20
+> the bind code should be patched to try other drivers and check whether=20
+> they might also be compatible in case the bind returns -ENODEV, indeed.
 
-Brian
+I rechecked the compatible lists, but they do not have two different
+matching compatibles, mostly just one matches to a driver.
+
+But I think I may know why there was no issue with this. Grepping the
+config symbols it seems there is no config in which both drivers are
+actually enabled at the same time:
+
+  configs/renesas_rcar64.config:CONFIG_RENESAS_RPC_SPI=3Dy
+  configs/renesas_rza1.config:CONFIG_RENESAS_RPC_SPI=3Dy
+
+  configs/r8a77990_ebisu_defconfig:CONFIG_RENESAS_RPC_HF=3Dy
+  configs/r8a77995_draak_defconfig:CONFIG_RENESAS_RPC_HF=3Dy
+  configs/rcar3_salvator-x_defconfig:CONFIG_RENESAS_RPC_HF=3Dy
+  configs/rcar3_ulcb_defconfig:CONFIG_RENESAS_RPC_HF=3Dy
+
+Best
+Markus
+
+--bf6fd95ff0ebf9742212239977e26397f15946e00a24de257cb374d9c922
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaSDAQxsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlMQ
+0gD+K6dDbAlMZesCJsj2M4qBoHhXg4F84ccNeagnB3ohRKABAPI4K8gWHP+NSHvO
+Bs9BXEkvxwsAL7KDhNA4De/f63UD
+=6drK
+-----END PGP SIGNATURE-----
+
+--bf6fd95ff0ebf9742212239977e26397f15946e00a24de257cb374d9c922--
