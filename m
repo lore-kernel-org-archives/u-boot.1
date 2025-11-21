@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40CA6CFC279
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 14:25:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B67B4CFC279
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 14:26:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46CA08388D;
-	Fri, 21 Nov 2025 15:25:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 10B458388D;
+	Fri, 21 Nov 2025 15:26:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XrtUeRUc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YVWEVtsK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A18BF8390D; Fri, 21 Nov 2025 15:25:05 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 624A08393F; Fri, 21 Nov 2025 15:26:01 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C90048382A
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 15:25:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 286F38382A
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 15:25:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-4511750d119so112823b6e.3
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 06:25:02 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b72bf7e703fso343441466b.2
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 06:25:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763735101; x=1764339901; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Lt0pGlF4vsUtxabQYhoYK6jldJMsy0rnkWy+psFwZcM=;
- b=XrtUeRUcI7fzE3PB46sZR+6R+l32+PJvcsSQsUr/JMDrmsxIMc+dXTXO92Mh2d3Xix
- 3V/hWUUQldLXT1ehHEIkxpEpxvRTkiEIOQpnS87q7wNqiRFv18IPGfNAr6ixJGXGkZVA
- jThLeGJLGDu6T18RaFjyQQ8qKoPllp6o0fsp8=
+ d=chromium.org; s=google; t=1763735158; x=1764339958; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=s4ikzpLb0YYGz4RkQm6vDdMMqIPw4npsxtnO82K419o=;
+ b=YVWEVtsK3SPPlp4QvYeVlPWeTFuKlBx7EBmNGvylCywIeh/AtE3s6I8mtmVH9Eg+ER
+ Famu8QUVr9UELjTFeruofyZUAvoDtJ1M4KPRwgIfJPSZUgZ2Eba1qK1JhdBiih0bhvT+
+ Xq3ehWdwqyXQ2Fvf6uxfXpadvswKhX03BnsJA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763735101; x=1764339901;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Lt0pGlF4vsUtxabQYhoYK6jldJMsy0rnkWy+psFwZcM=;
- b=Vnz2NZK+NzhWneR7fe2Nx7qv2jTbLbmcF3SwkUMF/480oWKl7RI0DqobDuRP9Hdf7j
- zZhK9CvhYuLuYTvt8NXiglaazThr6hkAHrQdxCkQufW4jQYua2uemdoWFexfl4oGt5M1
- /ky/YYEkSJLoAvQmF2beSZa4ij3q4YuOaz6ss816XtbiOLTLpy5U1rzy9FFkjyc9CCfS
- eD7dKAhUFBtAlzBwvxqYZuautz+/suKtglR9/RpjMB2FUAXpNg1fMfLcvTIdPIfan3/x
- h+/CLz4WrBWj8xIT0uQe2/BRw6fa3gfqi+UE2ADS7EzIVR1GCaGXcmN4cWp9PlQKipn4
- gC4A==
-X-Gm-Message-State: AOJu0YzRIfAc3ncwI5rmRFNUzd9mhOJL7WUG64FzqsW4iK2R0Iy8wvfn
- ERquDqJkEmfyoCVPWXr/zkf2Jt9gWzNjbeqzZrI6iEh6rGdJCHQmx/g5QoHXPyWtQ6M=
-X-Gm-Gg: ASbGncseHsQDS2/wwhjLP5o37dsnxkRhyavjJXHqIvoqPOo7jBTk2Gtj+HEOWfggv6+
- CxG8XkR9958T6RG2QW16HoB3tlC4lxVybjG4qbvnUmWY6899k9f140kIJ/Ae2fpBP7K7lh5cN/T
- y6N7pqa96LZkFYyESBFqwjmDQYVw0RYZOoxN/uwu67FunXWNxVNdfb/+eEWao1waAOoz041/Q6H
- seRRJhC7cc5nd5aPAZgp4vMa8u7EBocLUVM71Sj9fYJG/OH8s54ApicfrSbk20gOzDILR14P1Cw
- NP3YSq+mGahezcYeKNfik9uRKMJYH2uiYzcec5qv/wC2EOrVpcTdwpNUC+IHEfMlkW5//roNGMh
- mcJPN9FN3bnh1c91GyO59W5965Ae7Xj3d9fVbJOpcK+e5cvQSe2FsfnT+Ucl/OGJALXCqywhT1v
- E9KBsqxOJvf8FTuUqU2G6X3K/QxcQzTWS6oTyU7BdeknXMbHRIPw==
-X-Google-Smtp-Source: AGHT+IF/HBGPo+jXC3OkdDJOxXW8gjvvFxPxuUD6sfEKHzV5TjbpIiantZ3JL2B0Qrbm1feWV3ypXg==
-X-Received: by 2002:a05:6808:1a19:b0:44d:af21:bf34 with SMTP id
- 5614622812f47-4511294e751mr1079326b6e.2.1763735101154; 
- Fri, 21 Nov 2025 06:25:01 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450ffe2f361sm1658305b6e.1.2025.11.21.06.25.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Nov 2025 06:25:00 -0800 (PST)
-Date: Fri, 21 Nov 2025 08:24:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Raymond Mao <raymond.mao@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH next 2/3] CI: use mirror for gnulib dependency of grub
-Message-ID: <20251121142458.GS2125796@bill-the-cat>
-References: <20251121-gnu-mirror-v1-0-548e6cd2665e@cherry.de>
- <20251121-gnu-mirror-v1-2-548e6cd2665e@cherry.de>
+ d=1e100.net; s=20230601; t=1763735158; x=1764339958;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=s4ikzpLb0YYGz4RkQm6vDdMMqIPw4npsxtnO82K419o=;
+ b=ApIsSOcCtDhiSQMWZynooOA6kDaQ9lV9vVSHpe2bYU3yqy7gxWLQrdWWso0NHw0ZC9
+ RBQtdOn9i8dT1faKKNrK3gnkK7V5GoaiU+HM7l3pn23TuZplKu8yE9SiD9R6W5uxz0yj
+ ZF9D1MZ7jGxRKCaGhTEDyZUxkbTyUsE3tURFaBBwzoz8X8un14rNYWWsHfwm3LR3WqZQ
+ +hxAsHrXgZj440r6JdYhQesAmI6L2Da3ocxTaMsMiHWCwO0gdGIhnWCOs3Oj/MabPmAb
+ zVkQWMbD67esXgFVNngufb+QMEGww6PCT8rpoRJjc56d67WBXAD5B6TL3fsrw5APuRC4
+ c+4Q==
+X-Gm-Message-State: AOJu0Yzrj5eoGIGlnqp5wNXyuMIDRBgVTZRvGJHALic4wSv4ToeCeKWK
+ oqzLB1+0d7WTi6JEKJy1UtHLTL7EbZyeVxg3Rm+n86L4s/wr9p2cjMsywRAgEXhJHzqgnM5172q
+ CM0v5A+GNogef/MhzEqT+FvA08Bar5DhpV9oAFv8a
+X-Gm-Gg: ASbGncuttkiLIJjcqqXqB2IEnOfdmdXYhTAMErMieMYVHuu/+6bijU5oBjjFIXjv+CF
+ ZbSedciDBtmINXu5OtxBQmTTxNV3KcA34yxixF6QGE31CDo+OPNUd7Vp7WIq07vc1JQBS9bsyQK
+ Umi69niYxKFCKknLIubU3GjSZnUy9rabSPf53LOwTinO1EDMmVAHEY/PmuqJSw9xJHBhYDnDBeL
+ mZp+//XhSZ7NX2yxOxnnDzo6oOQprnTlzwTsTZxMarMy1u3ecy++7OMvIkZC+jOryh5oQ==
+X-Google-Smtp-Source: AGHT+IH/v+EB3CTpA1R8OzDDRfr38/cd29z6WMh78MNMKmkOil4MTxGrzeMU4xvILUYAKo4lC3/W/gBuzxIQC3jJV3c=
+X-Received: by 2002:a17:907:d05:b0:b73:6b24:14b5 with SMTP id
+ a640c23a62f3a-b7671a47bafmr281932566b.31.1763735158514; Fri, 21 Nov 2025
+ 06:25:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KEbX5XdyakLh7sS6"
-Content-Disposition: inline
-In-Reply-To: <20251121-gnu-mirror-v1-2-548e6cd2665e@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251120041439.817233-1-marek.vasut+renesas@mailbox.org>
+ <CAFLszTjnGtSPvki-i1fHQEU+bn=6cTqjRFyid3D5zQepNEhzog@mail.gmail.com>
+ <c8752825-92d5-43bd-aa28-e229d4cc3fda@mailbox.org>
+In-Reply-To: <c8752825-92d5-43bd-aa28-e229d4cc3fda@mailbox.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 21 Nov 2025 07:25:46 -0700
+X-Gm-Features: AWmQ_blXdqhylhIl_f9C-4y4j-qDCLd54-cRAwgFbvitQ5I3VBGLd0Ln7stVcoc
+Message-ID: <CAFLszThiZ9iWZG8vNSaosNjMMTQZeG2=yO8kGoPDBL0SSp_4Cw@mail.gmail.com>
+Subject: Re: [PATCH] clk: fixed_rate: Avoid calling dev_read_*() if
+ CONFIG_OF_PLATDATA=y
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,61 +91,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Marek,
 
---KEbX5XdyakLh7sS6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 20 Nov 2025 at 21:39, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 11/21/25 12:40 AM, Simon Glass wrote:
+> > Hi Marek,
+> >
+> > On Wed, 19 Nov 2025 at 21:14, Marek Vasut
+> > <marek.vasut+renesas@mailbox.org> wrote:
+> >>
+> >> If CONFIG_OF_PLATDATA=y , then the udevice has no valid OF node associated
+> >> with it and ofnode_valid(node) evaluates to 0. The dev_read_u32_default()
+> >> call ultimately reaches ofnode_read_u32_index() which invokes fdt_getprop()
+> >> and passes result of ofnode_to_offset(node) as an offset parameter into it.
+> >>
+> >> The ofnode_to_offset(node) returns -1 for invalid node, which leads to an
+> >> fdt_getprop(..., -1, ...) invocation, which will crash sandbox with SIGSEGV
+> >> because libfdt can not handle negative node offsets without full tree check,
+> >> which U-Boot inhibits to keep size lower.
+> >>
+> >> Add dev_has_ofnode(dev) check and do not assign clock rate in case the
+> >> device has no valid node associated with it, and do not call any of the
+> >> dev_read_*() functions for devices without valid nodes.
+> >>
+> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >> ---
+> >> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> >> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> >> Cc: Sean Anderson <seanga2@gmail.com>
+> >> Cc: Tom Rini <trini@konsulko.com>
+> >> Cc: u-boot@lists.denx.de
+> >> ---
+> >>   drivers/clk/clk_fixed_rate.c | 2 +-
+> >>   1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >> diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
+> >> index 95a77d2e041..5c32ae207fe 100644
+> >> --- a/drivers/clk/clk_fixed_rate.c
+> >> +++ b/drivers/clk/clk_fixed_rate.c
+> >> @@ -35,7 +35,7 @@ void clk_fixed_rate_ofdata_to_plat_(struct udevice *dev,
+> >>                                      struct clk_fixed_rate *plat)
+> >>   {
+> >>          struct clk *clk = &plat->clk;
+> >> -       if (CONFIG_IS_ENABLED(OF_REAL))
+> >> +       if (CONFIG_IS_ENABLED(OF_REAL) && dev_has_ofnode(dev))
+> >>                  plat->fixed_rate = dev_read_u32_default(dev, "clock-frequency",
+> >>                                                          0);
+> >
+> > What is happening here? It should already be checking this:
+> >
+> > static inline __attribute_const__ bool dev_has_ofnode(const struct udevice *dev)
+> > {
+> > #if CONFIG_IS_ENABLED(OF_REAL)
+> > return ofnode_valid(dev_ofnode(dev));
+> > #else
+> > return false;
+> > #endif
+> > }
+> I do not understand the question -- this patch _adds_ the
+> dev_has_ofnode() test into clk_fixed_rate_ofdata_to_plat_() , it wasn't
+> present before. Can you please rephrase your question / concern ?
 
-On Fri, Nov 21, 2025 at 02:22:15PM +0100, Quentin Schulz wrote:
+The dev_has_ofnode() function already checks OF_REAL, as shown above. To repeat:
 
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->=20
-> grub bootstrap script downloads gnulib from a non-mirror URL and thus is
-> unreliable.
->=20
-> Instead, manually clone the gnulib repo from a mirror URL and pass that
-> repo to the bootstrap script via --gnulib-srcdir.
->=20
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->  tools/docker/Dockerfile | 7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
->=20
-> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> index 34713c5e8b2..85274c303c8 100644
-> --- a/tools/docker/Dockerfile
-> +++ b/tools/docker/Dockerfile
-> @@ -148,12 +148,13 @@ RUN --mount=3Dtype=3Dcache,target=3D/var/cache/apt,=
-sharing=3Dlocked \
->  	zip
-> =20
->  # Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit
-> -RUN git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub =
-&& \
-> +RUN git clone https://https.git.savannah.gnu.org/git/gnulib.git /tmp/gnu=
-lib && \
-> +	git clone https://https.git.savannah.gnu.org/git/grub.git /tmp/grub && \
+> > static inline __attribute_const__ bool dev_has_ofnode(const struct udevice *dev)
+> > {
+> > #if CONFIG_IS_ENABLED(OF_REAL)
+> > return ofnode_valid(dev_ofnode(dev));
+> > #else
+> > return false;
 
-Right now, the next branch is in a funny spot. Post -rc2 I applied to
-master some changes to make CI more reliable which also meant that right
-here we do git clone --depth=3D1 -b TAG. And doing --depth=3D1 -b TAG is
-something we should be doing here for gnulib as well. Since -rc3 is this
-coming Monday and merge to next shortly after, can you do that and
-rebase on top then please? Thanks!
+   ^^ returns false here
 
---=20
-Tom
+> > #endif
 
---KEbX5XdyakLh7sS6
-Content-Type: application/pgp-signature; name="signature.asc"
+You are adding another check in the caller:
 
------BEGIN PGP SIGNATURE-----
+> >> -       if (CONFIG_IS_ENABLED(OF_REAL))
+> >> +       if (CONFIG_IS_ENABLED(OF_REAL) && dev_has_ofnode(dev))
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSB2NwAKCRAr4qD1Cr/k
-CibqAQCtQ2DzDuQE/mF26U9mT+DOyRBo+UnX+WcoOV9yZZkhPgD/Su4UBeVFquTd
-+DXYoPahlYm85jIfU0u+r/PmPAvy8wc=
-=IbX1
------END PGP SIGNATURE-----
+dev_has_ofnode() will already return false if OF_REAL is not enabled.
+So what is the point of checking OF_REAL before calling
+dev_has_ofnode() ?
 
---KEbX5XdyakLh7sS6--
+I don't understand what benefit this patch brings.
+
+Regards,
+Simon
