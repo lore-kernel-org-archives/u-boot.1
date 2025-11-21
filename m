@@ -4,69 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A6CACCFA04
-	for <u-boot@archiver.kernel.org>; Tue,  4 Nov 2025 22:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E68C5CFC28C
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 16:49:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F41483979;
-	Tue,  4 Nov 2025 23:14:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bryanhinton.com
+	by phobos.denx.de (Postfix) with ESMTP id 4D4D483984;
+	Fri, 21 Nov 2025 17:49:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bryanhinton.com header.i=@bryanhinton.com header.b="IFU1jfnO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MUIZn9BL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 219148397A; Tue,  4 Nov 2025 23:14:51 +0100 (CET)
-Received: from outbound.mr.icloud.com
- (p-west2-cluster3-host9-snip4-8.eps.apple.com [57.103.69.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A23DB839A8; Fri, 21 Nov 2025 17:49:02 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D864683942
- for <u-boot@lists.denx.de>; Tue,  4 Nov 2025 23:14:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bryanhinton.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7268083966
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 17:49:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bryan@bryanhinton.com
-Received: from outbound.mr.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-west-2a-60-percent-3 (Postfix) with ESMTPS id
- 6F79D18003F2; Tue,  4 Nov 2025 22:14:47 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bryanhinton.com; s=sig1;
- bh=+GA64Pl8R8SNnEs0KZowc/nlN7FoXk03KrJz+FSNIcY=;
- h=From:To:Subject:Date:Message-ID:Content-Type:x-icloud-hme;
- b=IFU1jfnOYXsefCdQs0yswyie6u/KjFwInaTQrtMhG3Z1As5/v+u4XUfcdc2FE+JLtX8ECSSK7ueJott9vm9ZCs6Zih3I3Ec3nytEyO70rrWGY0UOY/c3WzJ+MK/EGJ/AUdRHqB9BvNMFcEO9ivSpjm2ie+7b/Z1qx1i+EMd3BrHbkOMsHovjsLiZ+avnEjFoAfSFWojz52HYyInkDXsmn07R3LvXdckh+6Q6/6vQXjv7P3GAHjw07bdaq+HuarQ8FIwrt/f/IxhNICNiRr0h+XOp8FTAJ4Z7pbzH6o/ABzc5UvCoLfsUH/FPs4+rsJj6A3sVsTH7vgkV34T+xgnyRA==
-mail-alias-created-date: 1643268037438
-Received: from localhost (unknown [17.57.152.38])
- by p00-icloudmta-asmtp-us-west-2a-60-percent-3 (Postfix) with ESMTPSA id
- 314A518003C6; Tue,  4 Nov 2025 22:14:47 +0000 (UTC)
-From: bryan@bryanhinton.com
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <tom@trini.net>, u-boot@lists.denx.de
-Subject: Re: [v2,0/2] rockchip: Add support for ROCK 5B+
-In-Reply-To: <20250801170933.2530191-1-jonas@kwiboo.se>
-References: <20250801170933.2530191-1-jonas@kwiboo.se>
-Date: $(date -R)
-Message-ID: <$(uuidgen)@bryanhinton.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA0MDE4NyBTYWx0ZWRfX21qRpC01nHoK
- mkkNYLFJtRLMb9VwBWyR+LGypgy4WTicCo3HwIGVsLrFhhQxouAcnDQ+eiSqKBcswe41sL2qrnf
- cmXS/9RoDXo9qEtWWbQeb5KHBTGCNMCzhRMHBHbThiFqVZ6r+SxWajwm5jW1PrlVfr04VyICQya
- /BApjiAhTWosMSWa2CZ6eI21VopLnItArDsrdnR68jteZWOO2HYBjuyRvBlUxrG/3U5BzhfazE/
- arYkWuSjvQeq9MM8SLlVH9fcppBrBopslObmofiv8RVhypV1UZmmhMoQkfIx6Pqdk3E7+ss6Srd
- HHTjtkfk9PBQjCp8XwU
-X-Proofpoint-GUID: -qYOXgVA8wVCvnp2yhvAreplZQdXIpfB
-X-Authority-Info: v=2.4 cv=G7gR0tk5 c=1 sm=1 tr=0 ts=690a7ad7 cx=c_apl:c_pps
- a=9OgfyREA4BUYbbCgc0Y0oA==:117 a=9OgfyREA4BUYbbCgc0Y0oA==:17
- a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=yyIQ4Ub9AAAA:8 a=GFwiHdNeYq6fmFWKHb4A:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=rzDBUVUxiSc7n6oCI6VQ:22
-X-Proofpoint-ORIG-GUID: -qYOXgVA8wVCvnp2yhvAreplZQdXIpfB
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-04_04,2025-11-03_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- spamscore=0 mlxlogscore=707 malwarescore=0 mlxscore=0 suspectscore=0
- clxscore=1030 phishscore=0 adultscore=0 classifier=spam authscore=0 adjust=0
- reason=mlx scancount=1 engine=8.22.0-2509250000 definitions=main-2511040187
-X-JNJ: AAAAAAABezYhdgoJ2E5fRjnUPK8itpuI112wUTboPTCnI3vmYbCIwQf6swl5PNBz2I5LYOgfU/YBCpcIRDNv350LrDSm9rklE5uD0IL46jS0JDHeIU/HsfF4BuAO5tkSVHsK+Qw1fFpIVEgTTpr+0WJBJr44mPDHPtHBFoJhRnM0beUIrijkumwG1zCVQLg/xAZnxT5DH2MN6BkgXrDS31GzzlsXRYNvxElNZYqFWeRQLDFPlxYsgJZuzPEaz/7TfVfP7Pt2M7hmLTaFQvArgNYjLYxzXIzJCPYcFRR5Gjt0eCjsB3GqVLnHBlzWWxALGATkN5HRx3G3f8MSwflGgkLEZzdT8ssbX3Kon++z4o6gDDeJkbsDsaqC+nugQso9PM9ld+uytHhveYQWBNUoV4HK3aaIzaCYbxCiXMwo1Zy8bGkiUzP6bRDDa+C+X67fEgKqgII3lhqHWa36TzzU08aEeamjSex2LvXIXUkY4FdHNLVtpM4v99Wh9Y92JUfkvqtJwdQgRWac0pfJ8i0bKN3CYs90CUUIwybrOuLTQGA6BLCCpZo8cxoWQW9tPr0Xzwlk/Q5DMrI7q0CUIR1dNhyPJrEUn/N9omgrWt7d8Mvdb2cf/CA=
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-3d56d0cb3dbso1350144fac.3
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 08:49:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763743739; x=1764348539; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Di2vqdfFVKgDWPX1oOptiw/eTJQYRgOvEgKx5hNZ23c=;
+ b=MUIZn9BLDLwt2kEy1nTgrEurH93gWVd1ibYs0gdHQVggQw058qegdnFZIHVPmGb8bK
+ rF9mpwwkCro3C313uESQLkTOCN+tArdck5auNsPMlRHuPemJtSUdnTYNPrekc8IqmBtt
+ HyqsdwDU4tmMgSTC0srBtk7zvjIeGZxkjD7NI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763743739; x=1764348539;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Di2vqdfFVKgDWPX1oOptiw/eTJQYRgOvEgKx5hNZ23c=;
+ b=iXKkLCzY7KVhjT+5OePynEZXiYPh+S4dVsgaIScdVbdMduL0FGXTM9bKX0axsnnYFz
+ 32jCx8yjRbN71PG771gtAM2O0Ldyoz5fjrlKhAUkrWRv8oc1ngnJoaO1897UnypLTXa2
+ AHM9AJvSizDVjWuJtlGGpR7ORgeB6nxp2H/90kVFgP1BkRZHkeicpZrGQshxn/i0SoFj
+ qsLdOQpvTZGBMRZjTcTxn1f/IqFo1/R6+fW2eZft+s+GTE7xGQx9QOC/78LNtYxT7P24
+ +arx6zKElzOZkH49AqoouGzVegTedZVFfXc5IhCnXfygtgbkRy7+DT9No9ZAGjbAHzUN
+ PuwA==
+X-Gm-Message-State: AOJu0YwRfyxQttH6iNj+9oPjRsPzOVsJGuPerF5cofnVRLOukRLDHJiU
+ 2Gg+G1d0jCDcd29JgIvhIBDLeVWcD6YgRAx7wL+7BJh555WHwMlwfUaL7xx27jY78nw=
+X-Gm-Gg: ASbGnct9V4vr3MChbPTC1+bLGkXVB5K3i7y+87Fkhtmp+SmKTMWRmunMqzC1xjqirss
+ 4SNfwXi3j/lrU2ogLaXp8bnSwLG/D5I6arDaO5WoZXAPB7vyDAU+6avr+HPeFSmbbFBZlhay60n
+ e3YndjjWe/r5po8hmOIiwhZ/SAlA/YoQC76qMdMBhnF9d1vZ5b64s2tfMhq2SdoX3hmAzao3gvV
+ DW2GluT5Amnm1NNqsTBCYuMLNpFvaNUpOnxPh+Fsc1bVHqP3finvh7AHDRHNrqjDvgySZpvPiNU
+ tEDQ/9z+NkyHfyBQb2cxlQffSKFEug7qvQ43NE5Kx8NMBt/UVdudZbFR5R8uV2rZKNhWbH0cHS9
+ RULf9B5qo/T/T1vokGOBzPwuZ89vnFY2DqXuROb9NfckmFq69RkhotJRlnD+BSpmKoVJItEEyN6
+ FAkNY2EDuU3cXyh/fqMJatuNCjs1nwf8uxa92xpi7DoA8VZdTN/Q==
+X-Google-Smtp-Source: AGHT+IHhcLLJ28Ig6gUzksJySTq80T9r8LsXAh13eOT36T6aPVvhNZDK7BNiui6ll4U6ZtqTvpVxaQ==
+X-Received: by 2002:a05:6808:190c:b0:450:b560:dcf5 with SMTP id
+ 5614622812f47-4511290cec2mr1091137b6e.12.1763743739072; 
+ Fri, 21 Nov 2025 08:48:59 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-450fffbeb51sm1777706b6e.18.2025.11.21.08.48.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Nov 2025 08:48:58 -0800 (PST)
+Date: Fri, 21 Nov 2025 10:48:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH 1/2] test/py/requirements.txt: add setuptools
+Message-ID: <20251121164856.GZ2125796@bill-the-cat>
+References: <20251121-a-few-test-py-improvements-v1-0-bacb4148fb0d@baylibre.com>
+ <20251121-a-few-test-py-improvements-v1-1-bacb4148fb0d@baylibre.com>
+ <20251121143903.GY2125796@bill-the-cat>
+ <d78a79c3-cd28-4270-941c-a500bdff5432@baylibre.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iQT4FTygJHGJRg12"
+Content-Disposition: inline
+In-Reply-To: <d78a79c3-cd28-4270-941c-a500bdff5432@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,130 +103,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-I tested your ROCK 5B+ patches and the results are below.
+--iQT4FTygJHGJRg12
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hardware / build:
-  - Board: Radxa ROCK 5B+ rev 1.2 (32 GB LPDDR5)
-  - Toolchain: aarch64-linux-gnu-gcc 15.1.0
-  - TPL: rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.19.bin
-  - BL31: rk3588_bl31_v1.51.elf
-  - Boot: microSD
-  - U-Boot build: 2026.01-rc1-00252-g0afc36a2f4dc
+On Fri, Nov 21, 2025 at 09:56:59AM -0600, David Lechner wrote:
+> On 11/21/25 8:39 AM, Tom Rini wrote:
+> > On Fri, Nov 21, 2025 at 08:36:14AM -0600, David Lechner wrote:
+> >> Add setuptools to test/py/requirements.txt. Otherwise, attempting to r=
+un
+> >> tests can fail as follows:
+> >>
+> >>     $ ./test/py/test.py --bd sandbox --build
+> >>     +make O=3Du-boot/build-sandbox -s sandbox_defconfig
+> >>     +make O=3Du-boot/build-sandbox -s -j32
+> >>     Traceback (most recent call last):
+> >>       File "u-boot/build-sandbox/../scripts/dtc/pylibfdt/setup.py", li=
+ne 23, in <module>
+> >>         from setuptools import setup, Extension
+> >>     ModuleNotFoundError: No module named 'setuptools'
+> >>
+> >> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> >> ---
+> >>  test/py/requirements.txt | 1 +
+> >>  1 file changed, 1 insertion(+)
+> >=20
+> > NAK. It's the build of U-Boot that requires setuptools (specifically
+> > scripts/dtc/pylibfdt), not pytest. It was dropped as part of cleaning up
+> > the test/py/requirements.txt file before. A top-level project
+> > requirements.txt file would help avoid these problems, but we don't yet
+> > have agreement on that.
+> >=20
+>=20
+> OK, I think I see how it works now. It looks like most tools have
+> a requirements.txt already, but dtc is missing it. Would it make
+> sense to add a scripts/dtc/pylibfdt/requirements.txt containing
+> setuptools?
+>=20
+> Then `find . -name *requirements*.txt` would make it easy to find
+> everything that might need to be installed for a given target.
 
-Results:
-  - Detected as “Radxa ROCK 5B+” (rk3588-rock-5b-plus.dtb)
-  - SD and USB enumeration work correctly
-  - Ethernet reports “No ethernet found” (GMAC node not yet enabled)
+Yes, I think that's a reasonable step. I think in the near'ish future we
+might be able to instead switch to just installing pylibfdt.
 
-Full boot log attached below.
+--=20
+Tom
 
-Tested-by: Bryan Hinton <bryan@bryanhinton.com>
+--iQT4FTygJHGJRg12
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thanks,
-Bryan
+-----BEGIN PGP SIGNATURE-----
 
----
-Boot log:
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSCX9AAKCRAr4qD1Cr/k
+CgcsAP99TOOV7bZ+6nV115E9FqdxnqiuPxsgpNwYK8uEowcBpQD/XUW4xJp3cxfx
+AVU7J5ywTCHKGVRh5bp/MNbcV8X6oAc=
+=mv7F
+-----END PGP SIGNATURE-----
 
-U-Boot 2026.01-rc1-00252-g0afc36a2f4dc (Nov 04 2025 - 15:52:02 -0600)
-
-Model: Radxa ROCK 5B+
-SoC:   RK3588
-DRAM:  32 GiB (total 31.7 GiB)
-Core:  380 devices, 34 uclasses, devicetree: separate
-MMC:   mmc@fe2c0000: 1, mmc@fe2e0000: 0
-Loading Environment from nowhere... OK
-In:    serial@feb50000
-Out:   serial@feb50000
-Err:   serial@feb50000
-Model: Radxa ROCK 5B+
-SoC:   RK3588
-Net:   No ethernet found.
-Hit any key to stop autoboot: 0
-=> env print fdtfile
-fdtfile=rockchip/rk3588-rock-5b-plus.dtb
-=> fdt print / model
-No FDT memory address configured. Please configure
-the FDT address via "fdt addr <address>" command.
-Aborting!
-=> fdt print / compatible
-No FDT memory address configured. Please configure
-the FDT address via "fdt addr <address>" command.
-Aborting!
-=> usb start
-starting USB...
-USB EHCI 1.00
-USB OHCI 1.0
-USB EHCI 1.00
-USB OHCI 1.0
-Register 2000140 NbrPorts 2
-Starting the controller
-USB XHCI 1.10
-Register 2000140 NbrPorts 2
-Starting the controller
-USB XHCI 1.10
-Bus usb@fc800000: 1 USB Device(s) found
-Bus usb@fc840000: 1 USB Device(s) found
-Bus usb@fc880000: 1 USB Device(s) found
-Bus usb@fc8c0000: 1 USB Device(s) found
-Bus usb@fcd00000: 1 USB Device(s) found
-Bus usb@fc400000: 1 USB Device(s) found
-       scanning usb for storage devices... 0 Storage Device(s) found
-=> mmc list
-mmc@fe2c0000: 1
-mmc@fe2e0000: 0
-=> bdinfo
-boot_params = 0x0000000000000000
-DRAM bank   = 0x0000000000000000
--> start    = 0x0000000000200000
--> size     = 0x00000000efe00000
-DRAM bank   = 0x0000000000000001
--> start    = 0x0000000100000000
--> size     = 0x00000002fc000000
-DRAM bank   = 0x0000000000000002
--> start    = 0x00000003fc500000
--> size     = 0x0000000003a00000
-DRAM bank   = 0x0000000000000003
--> start    = 0x0000000400000000
--> size     = 0x0000000400000000
-flashstart  = 0x0000000000000000
-flashsize   = 0x0000000000000000
-flashoffset = 0x0000000000000000
-baudrate    = 1500000 bps
-relocaddr   = 0x00000000eff07000
-reloc off   = 0x00000000ef507000
-Build       = 64-bit
-current eth = unknown
-eth-1addr   = (not set)
-IP addr     = <NULL>
-fdt_blob    = 0x00000000edbe0a00
-lmb_dump_all:
- memory.count = 0x4
- memory[0]	[0x200000-0xefffffff], 0xefe00000 bytes, flags: none
- memory[1]	[0x100000000-0x3fbffffff], 0x2fc000000 bytes, flags: none
- memory[2]	[0x3fc500000-0x3ffefffff], 0x3a00000 bytes, flags: none
- memory[3]	[0x400000000-0x7ffffffff], 0x400000000 bytes, flags: none
- reserved.count = 0x5
- reserved[0]	[0xecbdd000-0xecbdffff], 0x3000 bytes, flags: no-notify, no-overwrite
- reserved[1]	[0xecbe09f0-0xefffffff], 0x341f610 bytes, flags: no-overwrite
- reserved[2]	[0x100000000-0x3fbffffff], 0x2fc000000 bytes, flags: no-overwrite
- reserved[3]	[0x3fc500000-0x3ffefffff], 0x3a00000 bytes, flags: no-overwrite
- reserved[4]	[0x400000000-0x7ffffffff], 0x400000000 bytes, flags: no-overwrite
-devicetree  = separate
-serial addr = 0x00000000feb50000
- width      = 0x0000000000000004
- shift      = 0x0000000000000002
- offset     = 0x0000000000000000
- clock      = 0x00000000016e3600
-arch_number = 0x0000000000000000
-TLB addr    = 0x00000000efff0000
-irq_sp      = 0x00000000edbe09f0
-sp start    = 0x00000000edbe09f0
-Early malloc usage: 2700 / 10000
-=> fdt addr 0x00000000edbe0a00
-Working FDT set to edbe0a00
-=> fdt print / model
-model = "Radxa ROCK 5B+"
-
+--iQT4FTygJHGJRg12--
