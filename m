@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F85DCFA468
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 08:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66731CFA468
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 08:20:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2332A8051F;
-	Fri, 21 Nov 2025 09:20:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 668DA801CF;
+	Fri, 21 Nov 2025 09:20:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="mMMoZzYK";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="UfAk7Qnm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7F238051F; Fri, 21 Nov 2025 09:20:06 +0100 (CET)
-Received: from mx-relay49-hz3.antispameurope.com
- (mx-relay49-hz3.antispameurope.com [94.100.134.238])
+ id 01E0B835B3; Fri, 21 Nov 2025 09:20:08 +0100 (CET)
+Received: from mx-relay08-hz2.antispameurope.com
+ (mx-relay08-hz2.antispameurope.com [83.246.65.94])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5723802C1
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:20:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F114980077
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:20:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0413995d28=max.merchel@ew.tq-group.com
-ARC-Authentication-Results: i=1; mx-gate49-hz3.hornetsecurity.com 1; spf=pass
+ARC-Authentication-Results: i=1; mx-gate08-hz2.hornetsecurity.com 1; spf=pass
  reason=mailfrom (ip=94.100.132.6,
  headerfrom=ew.tq-group.com)
  smtp.mailfrom=ew.tq-group.com smtp.helo=smtp-out02-hz1.hornetsecurity.com;
  dmarc=pass header.from=ew.tq-group.com orig.disposition=pass
 ARC-Message-Signature: a=rsa-sha256;
- bh=ddYQLhPLKZDQKYsUqB+8f0TM3kl2maKqLs8jyc6PrNU=; c=relaxed/relaxed;
+ bh=5Y8zFNLMDLQHzs4z33U7g7t3XgseTLJAQ+NInfhgq2Y=; c=relaxed/relaxed;
  d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
- t=1763713203;
- b=P/O3EsJnvcyvNNQYMHu4OBBojW2uthpXtrQryjuSXqH+6OG/03Px83A/6Lf6scoXemDZdETA
- r+bI4SXyGr6ipe8sk/rmfnpGqGjK69GKs3Tgsr2RiDjyRtRTwwSbESniB17px8RH0pLHkVYWhgs
- YM3h8zKgINbAkoaOVOQpWAoBfcA192yKvFCgQ2tPPhn/6aJ5c/Pa5bCYyCUQZRjmwK4KOrb8cQ3
- Ceti590JtPHSQiblaW2FR3nR4zfuA2eEieS5EdvYyv+rjOrmls6xyEcufswgOupLV4FNh3BL4KN
- gvIdCUqmyAzycEZkXKKxOAXP6Lo3nk63iH4b3zr5+8SNw==
+ t=1763713205;
+ b=H2UW7Bz/uo/ZnR+X2i2L13Mq1o4Ch01+3c7dO0ehe3azNYZzXHcSwRsj39L13Zsq6Q8TI2k2
+ 5XWSuRYN7fVV4z5MncXFXuPGYz7Pj5a8YMK2enrq7k9vY4ByUnjv1Ce293Hpz+nBQyCMdYJKdmL
+ AxINlObjIuyqPZIxi67vSQK5au7JSy80n7PmLBd+wCtcptdCmjnPiQmXlBdtRYjAFz8vj+oHQe9
+ UY7WisJhQDFInwqs42wyX++3zrD1KSiRUzcCTBptstwUnZt5YGTSoinENOneRnIQs3HnVktD1bg
+ +ldzEbuzu0Rix6rf2b4SiEDNmKlZoAUVZyyQZQZoP6ooA==
 ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
- t=1763713203;
- b=SxCpPCpzY8zESlIOXixpF7OmuX4gm3eC56IUl6aMyDBVFCQ0Ow5wj9VKd/AKns+7EeL4fIuK
- WPO7JZVRZnKn2S+HLhyN+8NAizko5I7I197/nP5J/XokAqzohF/EscLYflr5Wg7XrPQML3LtAYD
- 2gG/QLvTTWCAtFYUAfsj3FicX3x6y130IOyoZbYo3B4AitQVO4WwSO8ta3g2fGcrE19o/3g58Xg
- /WZUzKJynukNqglaBEzTI347DO6ZrBm1ltVoFOPz3NvXrdsGN8nJS9lSwypAZDQLVurVfFal7MJ
- x0Mt60jG/NzteNSsVMgnPODqTDnn5/wZbOiyVs9E22kTg==
+ t=1763713205;
+ b=PyqoRdXRycN3GZ1SVLpNtNgnes6kINCHIaNPm6Xe28HvYCQ84fkOET95NvuvjlCP/w968Y+R
+ FRycb7Mh4JrdptnB18n+mBVghKcivi5Sf9DmvbDOADPrhVGRQSg3gr2DN3Rsz1kqSWCTMsHxp+F
+ PWQ+lkn447sf9Oqt9bOnSfrChFRcbGAdGa/gezZW3g7+y+F4/8ZEdEt8gQc91PeQj2mqq1Y8U66
+ ZndkFSVQ9DWsYYtoJsTJz6qptH9G032FjI7PwjoVNLw8ipilRjl4s2o5aS+/XT29/VAa5c1H/4T
+ fBgCjNztDGzl9t1j2KJxdcW+LNwZNVwi3b5CXASdCrapg==
 Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
- mx-relay49-hz3.antispameurope.com; Fri, 21 Nov 2025 09:20:03 +0100
+ mx-relay08-hz2.antispameurope.com; Fri, 21 Nov 2025 09:20:05 +0100
 Received: from merchelm-W2.tq-net.de
  (host-82-135-125-110.customer.m-online.net [82.135.125.110])
  (Authenticated sender: max.merchel@ew.tq-group.com)
- by smtp-out02-hz1.hornetsecurity.com (Postfix) with ESMTPSA id 82D875A0E0D;
- Fri, 21 Nov 2025 09:19:49 +0100 (CET)
+ by smtp-out02-hz1.hornetsecurity.com (Postfix) with ESMTPSA id 099A45A087B;
+ Fri, 21 Nov 2025 09:19:50 +0100 (CET)
 From: Max Merchel <Max.Merchel@ew.tq-group.com>
 To: Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -61,10 +61,10 @@ To: Joe Hershberger <joe.hershberger@ni.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Markus Niebel <Markus.Niebel@ew.tq-group.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com, Max Merchel <Max.Merchel@ew.tq-group.com>
-Subject: [PATCH 1/2] net: phy: micrel_ksz90x1: disable asymmetric pause for
+Subject: [PATCH 2/2] net: phy: micrel_ksz90x1: support forced GIGE master for
  KSZ9031
-Date: Fri, 21 Nov 2025 09:18:06 +0100
-Message-ID: <20251121081810.73852-2-Max.Merchel@ew.tq-group.com>
+Date: Fri, 21 Nov 2025 09:18:07 +0100
+Message-ID: <20251121081810.73852-3-Max.Merchel@ew.tq-group.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251121081810.73852-1-Max.Merchel@ew.tq-group.com>
 References: <20251121081810.73852-1-Max.Merchel@ew.tq-group.com>
@@ -77,21 +77,21 @@ X-cloud-security-Mailarchiv: E-Mail archived for: max.merchel@ew.tq-group.com
 X-cloud-security-Mailarchivtype: outbound
 X-cloud-security-Virusscan: CLEAN
 X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
- mx-relay49-hz3.antispameurope.com with 4dCSnL0gFLz3ybgM
+ mx-relay08-hz2.antispameurope.com with 4dCSnL3vn6z14dst
 X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
  IP=94.100.132.6
-X-cloud-security-Digest: 0fe361ff3a0e5b9f53b6bdf65a03e119
-X-cloud-security: scantime:1.857
+X-cloud-security-Digest: bf81beed565b16236be96eb5aa91e6ea
+X-cloud-security: scantime:2.066
 DKIM-Signature: a=rsa-sha256;
- bh=ddYQLhPLKZDQKYsUqB+8f0TM3kl2maKqLs8jyc6PrNU=; c=relaxed/relaxed;
+ bh=5Y8zFNLMDLQHzs4z33U7g7t3XgseTLJAQ+NInfhgq2Y=; c=relaxed/relaxed;
  d=ew.tq-group.com;
  h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
- t=1763713203; v=1;
- b=mMMoZzYKm4dWAgBnszpHa3ohuv4VfitaYHFKDYODPUiXameH1DOufWK4jixJh9liebjz16TV
- aJIJFRmNuA11HrCj/nhWOe4/WqsgCGWio+TAax9z+HVtNedBFFLG0dRJxGqonxGmXgf7aYss+lT
- ZQiLo87gkT0VODJCGzH437sLp4OJ3s267CD8d11I8FAWasWId7449FubeV4dQMb/DClSDYLzMTt
- cezhpDlIvcWn2mJkLdW3kFBvyorKdzKW4yYd2kIhuirPqpY/kQnYw6FDBidm2/rBQXero4bZrJg
- b4GBRxGD3+wvXov/EDB3eRmpM0lz7el1bQ++jaeHExr/Q==
+ t=1763713204; v=1;
+ b=UfAk7Qnm2FwL0V42HbfcxzjHUztqWYQ6pbAQzcA1Ffx9Pg2E8IVLHU/PuIOvtVRHulYu3NRU
+ 3ITpsPUcOuJgoFYgQKOQQge6GqYraOk+R16QZhjPtmLmNnfhkeWeg3uWmzuyR0yGjDZF8ZX0LVJ
+ IDC0E/ZnH7lMWmbmAq0twG9GZEWH5b240Gt3U2UrvEDfTWUN1DjbYWwmgYum+HE21rXFTIkwpsA
+ BOvrEO+NdU3plmqYcbA1pE4qm2KEx7oEQCYw0+MUvz1qPm3RTZcsjFqcIXJ/YW0Ord2nIs3fVjL
+ iKPhbiUc5rG9xapvukQk3l9wDUYvwBlIg0QynlLbImFaA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,52 +110,85 @@ X-Virus-Status: Clean
 
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 
-Disable the support due to chip errata and call genphy_config_aneg
-instead of genphy_config. For a complete describtion look at the
-errata sheets: DS80000691D or DS80000692D.
+The micrel KSZ9031 phy has a optional clock pin (CLK125_NDO) which can be
+used as reference clock for the MAC unit. The clock signal must meet the
+RGMII requirements to ensure the correct data transmission between the
+MAC and the PHY. The KSZ9031 phy does not fulfill the duty cycle
+requirement if the phy is configured as slave. For a complete
+describtion look at the errata sheets: DS80000691D or DS80000692D.
+
+The errata sheet recommends to force the phy into master mode whenever
+there is a 1000Base-T link-up as work around. Only set the
+"micrel,force-master" property if you use the phy reference clock provided
+by CLK125_NDO pin as MAC reference clock in your application.
+
+Attention: this workaround is only usable if the link partner can
+be configured to slave mode for 1000Base-T.
+
+This follows linux implementation in commit
+e1b505a60366 ("net: phy: micrel: add 125MHz reference clock workaround")
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 ---
- drivers/net/phy/micrel_ksz90x1.c | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+ drivers/net/phy/micrel_ksz90x1.c | 37 +++++++++++++++++++++++++++++++-
+ 1 file changed, 36 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel_ksz90x1.c
-index a02dbe900b8..bc42506c65e 100644
+index bc42506c65e..1c0a58e25de 100644
 --- a/drivers/net/phy/micrel_ksz90x1.c
 +++ b/drivers/net/phy/micrel_ksz90x1.c
-@@ -336,6 +336,7 @@ static int ksz9031_phy_extwrite(struct phy_device *phydev, int addr,
+@@ -189,6 +189,9 @@ static int ksz9031_of_config(struct phy_device *phydev)
+ 		{ MII_KSZ9031_EXT_RGMII_TX_DATA_SKEW, 2, ksz90x1_txd_grp, 4 },
+ 		{ MII_KSZ9031_EXT_RGMII_CLOCK_SKEW, 2, ksz9031_clk_grp, 2 },
+ 	};
++	const unsigned int master = CTRL1000_CONFIG_MASTER | CTRL1000_MANUAL_CONFIG;
++	struct udevice *dev = phydev->dev;
++	ofnode node;
+ 	int i, ret = 0;
  
- static int ksz9031_config(struct phy_device *phydev)
- {
-+	unsigned int features = phydev->drv->features;
- 	int ret;
- 
- 	ret = ksz9031_of_config(phydev);
-@@ -371,7 +372,22 @@ static int ksz9031_config(struct phy_device *phydev)
- 		return 0;
+ 	for (i = 0; i < ARRAY_SIZE(ofcfg); i++) {
+@@ -198,7 +201,39 @@ static int ksz9031_of_config(struct phy_device *phydev)
+ 			return ret;
  	}
  
--	return genphy_config(phydev);
+-	return 0;
++	node = phydev->node;
++
++	/* Look for a PHY node under the Ethernet node */
++	if (!ofnode_valid(node))
++		node = dev_read_subnode(dev, "ethernet-phy");
++
++	/* No node found, look in the Ethernet node */
++	if (!ofnode_valid(node))
++		node = dev_ofnode(dev);
++
 +	/* Silicon Errata Sheet (DS80000691D or DS80000692D):
-+	 * Whenever the device's Asymmetric Pause capability is set to 1,
-+	 * link-up may fail after a link-up to link-down transition.
++	 * When the device links in the 1000BASE-T slave mode only,
++	 * the optional 125MHz reference output clock (CLK125_NDO)
++	 * has wide duty cycle variation.
++	 *
++	 * The optional CLK125_NDO clock does not meet the RGMII
++	 * 45/55 percent (min/max) duty cycle requirement and therefore
++	 * cannot be used directly by the MAC side for clocking
++	 * applications that have setup/hold time requirements on
++	 * rising and falling clock edges.
 +	 *
 +	 * Workaround:
-+	 * Do not enable the Asymmetric Pause capability bit.
++	 * Force the phy to be the master to receive a stable clock
++	 * which meets the duty cycle requirement.
 +	 */
-+	features &= ~ADVERTISE_PAUSE_ASYM;
-+	/* update feature support and forward to advertised features */
-+	phydev->supported = features;
-+	phydev->advertising = phydev->supported;
++	if (ofnode_read_bool(node, "micrel,force-master")) {
++		ret = phy_modify(phydev, MDIO_DEVAD_NONE, MII_CTRL1000,
++				 master | CTRL1000_PREFER_MASTER, master);
++		if (ret < 0)
++			pr_err("KSZ9031: error applying 'micrel,force-master'\n");
++	}
 +
-+	/* genphy_restart_aneg called from genphy_config_aneg */
-+	return genphy_config_aneg(phydev);
-+
-+	return 0;
++	return ret;
  }
  
- U_BOOT_PHY_DRIVER(ksz9031) = {
+ static int ksz9031_center_flp_timing(struct phy_device *phydev)
 -- 
 2.43.0
 
