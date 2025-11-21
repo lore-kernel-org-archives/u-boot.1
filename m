@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A23CFC28C
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 16:59:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B6D9CFC28C
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 16:59:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2B2883A1E;
+	by phobos.denx.de (Postfix) with ESMTP id EE88583A2B;
 	Fri, 21 Nov 2025 17:59:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="UwZaPK4l";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="QUnHM21D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 245A18398D; Fri, 21 Nov 2025 15:36:48 +0100 (CET)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 3C42783959; Fri, 21 Nov 2025 15:36:50 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2FD483966
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 15:36:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0A298394E
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 15:36:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-3ec314aaae5so1306779fac.0
- for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 06:36:45 -0800 (PST)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-4510974a8cdso604804b6e.0
+ for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 06:36:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763735805; x=1764340605;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763735806; x=1764340606;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JeESE/krr5d7IyQoH3nHAmm5DA6OjuZCZbuc6V+BXNE=;
- b=UwZaPK4l4SNKiwNgonew0DqBtaNeTa0rLpQkgDJE2CQreK0YFNGAFYTIOsbiwrQuut
- OTcn0n7xq9KYnG561sqCJ21u+l2redMvcLMcvFftgKRHlIqDZqwl9SyTvfx/wZW2oN8q
- Icws9oIkGe7WkOCpFHZVQtsl9gYPmtKzyTOo1F1oFljcZ+ZqDgUkASGrgRXINcCbFmpi
- vmlHBH8eQqdKziKx2koAqdtA/7JNeFPfuNtIPhtx6sRwi89kMNSDmxMsAnYJX38xyMDL
- rNh9VrmZI4aX0r9vXl703szw+QpXD6PxV3rAkpHtT4EtWrhrzgYXi+Xe15MrIEzfx/5M
- 7icA==
+ :reply-to; bh=3xQT23tBoEDN9v8uE/iUPmcJ4LFREF20O3F6ymRlBio=;
+ b=QUnHM21DfKGy4LvDNVDVcGlaaHJxXkN+geKB0J3D4bhTqzHVObsq+MAJ05I5MFZR0+
+ FUVCMgip3OImdpKp1Np6jVd8nbC9GgUw2c9srnEZBTssceHoGRsBsu+LUldHkwqr4AT4
+ dGv1mO1alLd3WAlxReEjnl2n86eZzpEU5hyPU97ltXrgQdXaKutF5iRAxOvJDjf5Ynq1
+ zD2aL3HgW+l8WVZbobcv8iyPvATq/ygMObhPi5Gtca2ktiTBhadNe8wMaia1dnhtMmJ+
+ rgfZIPj+Z2adlLRCR6n2zJN0FshJO1SWBddEQ8pgDaVgr/3qlfqBkN0mZXnb8PfeUpip
+ It8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763735805; x=1764340605;
+ d=1e100.net; s=20230601; t=1763735806; x=1764340606;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=JeESE/krr5d7IyQoH3nHAmm5DA6OjuZCZbuc6V+BXNE=;
- b=jhBr9U6evcLKp9GZ6UMlLovUBW99X6ya8oO38TuBNVBFae53nm5ueI1GV5HW77V2xi
- mn4G7kOm10U0Teafj12h77i/fHPe6LYCyzgfl9jqNiZIClmqIgShw2ehdNeL2hDecUwL
- Rr3ZTgL6wFslXwrJp7Q6/wKiixkv8CpyPFx2JE3Qszg6Uig1mkzKS8oWVi3RlOUgFH6k
- 2OWNCp02AoEXTZ2uYo6foda5IfIwNSjYKGDM3YodWLqQTewj5iyyciGihAvRfjzSb0oT
- ICtsaFxYftdJLWlxdmxdtitjdKDN6tAY/ydkz+Xwq8gLttNNo78GELJx6Z1v5aM6miqa
- tMZA==
-X-Gm-Message-State: AOJu0Yy4Gvhn9JOI1+eOLD5tOCbbD8lrlThq9pwuv++P7A6Y6pVSyEKC
- zKcy+8F5IlIvnZAFacISpBm8UYAaYdnQe68LNjOhuU2BzcqEOdHqhQQxqYfCNeZRReoDrqXOjjb
- p6IWI
-X-Gm-Gg: ASbGncttTGNl3/CGoBZxFVkDpALVHUpEkHhXMf7bC/B7LdEHWEC/aQekVo6dEMhlkbr
- wYqIlivRMJGogAp6pdGAeE9x2UA4rWdr/QFEMZ7HpAgNR3c0YOOoI26KEw7mz2FNB+Wl4TUSYkH
- iQv7hVL5UvXT5AEs35gyLXivZiSW0ov/1WFZRX2fRbVuPMq9mGc30X9meFoRg7QolPPzJiE0f3E
- OB5Az7xihZCOast21gduFXIHVh9Ifp3wnNvfBGKcNqUvttC2lcTidRK0b0bsbL+clna2BuhIfcu
- 9CvBYuUuQ1uyJKG83uc1LJRdow4VSGbkR/53pRQXStUdTQLYgU5hatOQc9VpvgMn6xAfYwISU9r
- OrUMYaba1ySMG7zLlEPeOuHun9AJss7zuh5IwReNHnfHEo5GcpWvROALWyrT+NgHOW/Bstt2y1t
- 1cfK/JcsMD4Yzkcw==
-X-Google-Smtp-Source: AGHT+IEz8igz/9xtPSfk0B5n+1Dl4VU7GFGbhulrmFtEtEvj6EEBxtHPdCrdoxcTkD9C267s2EsTLg==
-X-Received: by 2002:a05:6870:504:b0:3ec:3b3e:4f38 with SMTP id
- 586e51a60fabf-3ecbe5cf0a8mr1064631fac.36.1763735804721; 
- Fri, 21 Nov 2025 06:36:44 -0800 (PST)
+ bh=3xQT23tBoEDN9v8uE/iUPmcJ4LFREF20O3F6ymRlBio=;
+ b=wc/LByI9yU95zObz6fWUIZE+Og35V48U0x6rIyDa6nZET0ycjZ7yMhIZXsXGC7sOGz
+ Ozz1f362ZF33ThKq6/YV6To10CFsLoeXByxat6qA/E/ilhnAtZwyusO042u7u1WGnF6A
+ Q/Ik8gCVZmf3yx9viniV7PJd4Fjh8LaQq2vKfLI1lbvk/0bRUil1DNtNeRaq3rpcNJ//
+ mFr9uuoOMZuULC8Jq/P9ZDX4FcILKxj78euBOlmuenlwJoH3tslh8D+l/1TNspAwnsQY
+ Jaj64PdTGV950kX7mDVwdNohrvKVOkPLW2mb0kFucO64EhKIN1ioXTg+L9Eg7jovUwM5
+ 8Fjg==
+X-Gm-Message-State: AOJu0Yxxwif4DyvTlvHNYDh6S7I54rWihhIoZ6AM43Zb2b0fjNz74oll
+ DEa+E1tf3kZ091PhwNj++CZ7bULYO17A+GxkG9RnZsfsZ0DJ333x7AKP3p5szdBhh5oI4NreOsh
+ 4c3IV
+X-Gm-Gg: ASbGncsoLRmZblkuDMDBMOv27xiZrFGEFdDGNmWfPs3phGL+cQZxImE0lkKkXT3ZWvM
+ aQpB5UImh6MftRVOVOSI9Sra+wGfLoIbQRAGcxExJP+C5UrAEPfqc8FEYuZa7QdsGA3wZMU3J/d
+ yQDFC8Ehg+bI/D0vt0LXgNRDw4v2JcIkfS/lrj62/AiO9IVRcDI0Mb5+MAgZtaxJojR8xhRmX4O
+ YX1jJSbziBEe4GUn+SjH8/+of9jTkoEn9U34khzJvPSG9jDPaZynI6pgZe1uWkPGv5Q0BAszPHA
+ tRtZZN3+EN4pNV+HxcE9i9C1ngf7mB8OAS8x0RSA06Unpo54TBdS7JqkZaFgPiNZtAZdxK9t67m
+ ilmvu8IqSj2bxa/76foMgXBqFRrcYFzLYIArXBw+lwFqxEY+sj0w4+EXfI6WUCmWJoieQgaW+9G
+ xdHDC17LeKaaCL/Z+nnobtCdds
+X-Google-Smtp-Source: AGHT+IHUqOYkdhz6IgGlV47a0a4mt2JaP/WXMozFWVhnOuqcMFsP4RR9OZwfJ0JBTvTyxRYjiCRd2w==
+X-Received: by 2002:a05:6808:14d6:b0:441:8f74:fce with SMTP id
+ 5614622812f47-45112d0758emr919538b6e.59.1763735806589; 
+ Fri, 21 Nov 2025 06:36:46 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:d761:af7:26f5:f16e])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ec9dc2171csm2730064fac.10.2025.11.21.06.36.43
+ 586e51a60fabf-3ec9dc2171csm2730064fac.10.2025.11.21.06.36.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Nov 2025 06:36:44 -0800 (PST)
+ Fri, 21 Nov 2025 06:36:46 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 21 Nov 2025 08:36:14 -0600
-Subject: [PATCH 1/2] test/py/requirements.txt: add setuptools
+Date: Fri, 21 Nov 2025 08:36:15 -0600
+Subject: [PATCH 2/2] test.py: check ubconfig exists before using it
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251121-a-few-test-py-improvements-v1-1-bacb4148fb0d@baylibre.com>
+Message-Id: <20251121-a-few-test-py-improvements-v1-2-bacb4148fb0d@baylibre.com>
 References: <20251121-a-few-test-py-improvements-v1-0-bacb4148fb0d@baylibre.com>
 In-Reply-To: <20251121-a-few-test-py-improvements-v1-0-bacb4148fb0d@baylibre.com>
 To: u-boot@lists.denx.de
@@ -89,17 +89,17 @@ Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=969; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1390; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=hDlyMWtFc+JEmeFxrIMeof2lwql1etBkoab0Z2qTNFA=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpIHjqHtDIlNDX0j1/v0cjVthUmYAKBgtnWn59I
- jGHG55LkBKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaSB46hYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AuIkH/3IEeOZTrAmN2VqfnXOEal5Yxhtx+FtfYOuYzwu
- B3fo+eaYFrPqT30qoi60+3uJn7lEa6WlVzBNWsc2d+fJovLRi+4vKO8AYoznKWtBz/dbcPTq8Lk
- EOW9oJrkiC7k3ON5iSFOt46OWcsKeEiVm5cymHj1h0LxYcm0Iykog24JbQa/9uXrWJPAVgl7Fmt
- yFzBwX0EKXew88HyxjFaPNpd4yktMTSQNBmLU8NMIZTHdT9l/PyX1x3ZC1EN4qHCZO1B8v8t7Oq
- TaKwJyKwBjvT3MWvxAhtv6gLeBmk5mPDLznq9HUkOZw4wE1ZBwdDJYjXp5XA/mZE3rlJTg1cx8w
- KXrg=
+ bh=paRKlr1ocfHYx1kege6AcI9uSbCLfO7bNSq7JCETlOE=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpIHjxkkeyFpUr4DNYWl2JSNShqZQxTK8/z0ONC
+ 6BJn1dOiVSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaSB48RYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AwiIH/2t+RlKDTKW1gFGSjZXddyqI2ImQVn6iemP5XMH
+ 5LDMd7LPk1LJ/lRcg9vMX4vjlv07B6grcnoKj4g5RB4OtBNC5bIPU2k7SuAuhIEha6H7vfWnetV
+ FwRmVF1vANv3PkuV/FWaLye1L0u5pUvRb8x6pUdL/BoOY0iwUOOyGpHkRskxymVgEr0dvSSTkeN
+ yWVl6c6h+hYRIP36PdIZ0tvm6UVnA2wBBw+GtHfrzUpFpgZYqBK/x03AuwddbZ6NLYicxhhvYpk
+ W7j14aSFsU6yQ7zGi+DtE1L96xC0LKpbs9sdCiL3j7blQVLnzZzt6qRoDoBHomkfLzSjkLxeHti
+ 2syw=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Fri, 21 Nov 2025 17:59:15 +0100
@@ -119,31 +119,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add setuptools to test/py/requirements.txt. Otherwise, attempting to run
-tests can fail as follows:
+Add a check in the show_timings() function of test/py/test.py to ensure
+that the global `ubconfig` variable was actually created before trying
+use it.
 
-    $ ./test/py/test.py --bd sandbox --build
-    +make O=u-boot/build-sandbox -s sandbox_defconfig
-    +make O=u-boot/build-sandbox -s -j32
+If tests fail early, e.g. because --build failed, ubconfig may not have
+been created yet and results in an exception in an atexit handler.
+Adding this check avoids unnecessary noise in the output.
+
+    Exception ignored in atexit callback: <function cleanup at 0x7de475ea6b60>
     Traceback (most recent call last):
-      File "u-boot/build-sandbox/../scripts/dtc/pylibfdt/setup.py", line 23, in <module>
-        from setuptools import setup, Extension
-    ModuleNotFoundError: No module named 'setuptools'
+    File "u-boot/test/py/conftest.py", line 669, in cleanup
+        show_timings()
+    File "u-boot/test/py/conftest.py", line 616, in show_timings
+        if ubconfig.timing:
+        ^^^^^^^^
+    NameError: name 'ubconfig' is not defined
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- test/py/requirements.txt | 1 +
- 1 file changed, 1 insertion(+)
+ test/py/conftest.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/test/py/requirements.txt b/test/py/requirements.txt
-index f9eac7901fbf6bd61bfa211cf12285ceecca4fc1..3db6aef0e22286ecfa41d6fa4926b6a1baa814b2 100644
---- a/test/py/requirements.txt
-+++ b/test/py/requirements.txt
-@@ -3,3 +3,4 @@ pycryptodomex==3.21.0
- pytest==8.4.2
- pytest-xdist==2.5.0
- FATtools==1.0.42
-+setuptools==80.9.0
+diff --git a/test/py/conftest.py b/test/py/conftest.py
+index 8ce680a92a0c37f36489b0782921d6cf4078850d..f889e3d3ae26db3ae19f79e236a281471d4b6de9 100644
+--- a/test/py/conftest.py
++++ b/test/py/conftest.py
+@@ -613,7 +613,7 @@ def show_timings():
+         if too_long:
+             show_bar(f'>{get_time_delta(max_dur)}', too_long_msecs, too_long)
+         log.info(buf.getvalue())
+-    if ubconfig.timing:
++    if "ubconfig" in globals() and ubconfig.timing:
+         print(buf.getvalue(), end='')
+ 
+ 
 
 -- 
 2.43.0
