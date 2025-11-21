@@ -4,66 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ACF7CFA747
-	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 08:14:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C48CFA748
+	for <u-boot@archiver.kernel.org>; Fri, 21 Nov 2025 08:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8868A8042F;
+	by phobos.denx.de (Postfix) with ESMTP id C476682A9E;
 	Fri, 21 Nov 2025 09:14:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="io08b5ch";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="BHMhLbZo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 521E282C7F; Fri, 21 Nov 2025 09:14:35 +0100 (CET)
-Received: from mx-relay15-hz2.antispameurope.com
- (mx-relay15-hz2.antispameurope.com [83.246.65.157])
+ id 98593802C1; Fri, 21 Nov 2025 09:14:35 +0100 (CET)
+Received: from mx-relay95-hz2.antispameurope.com
+ (mx-relay95-hz2.antispameurope.com [94.100.136.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46159801CF
+ by phobos.denx.de (Postfix) with ESMTPS id B53468042F
  for <u-boot@lists.denx.de>; Fri, 21 Nov 2025 09:14:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0413995d28=max.merchel@ew.tq-group.com
-ARC-Authentication-Results: i=1; mx-gate15-hz2.hornetsecurity.com 1; spf=pass
+ARC-Authentication-Results: i=1; mx-gate95-hz2.hornetsecurity.com 1; spf=pass
  reason=mailfrom (ip=94.100.132.6,
  headerfrom=ew.tq-group.com)
  smtp.mailfrom=ew.tq-group.com
  smtp.helo=hmail-p-smtp01-out04-hz1.hornetsecurity.com; dmarc=pass
  header.from=ew.tq-group.com orig.disposition=pass
 ARC-Message-Signature: a=rsa-sha256;
- bh=8bEpURpZfnTGqZKYn0ALHChvTd4ISrvWa7XD5FM/wZQ=; c=relaxed/relaxed;
+ bh=pJnfnjU8ChlMpYALprMVtsscgEUW/rzP93FIcsQK+m4=; c=relaxed/relaxed;
  d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
- t=1763712872;
- b=H03ElSam976/m8rppO+vMsicoTP2d8s1jrFEhkTRPzJo+jfmDhBIqZ8CeFFurgyqZ9/YeBIF
- 5IzFgTWOPlq/2zKcajQV1gwa1+2oRNgZuG6hLc4hf/Lcd3jx+n94pvExPcYbz49FkqInor2xzMB
- oTrL5W3/Z9oF4j/aP9+mQbzh2VzxoxHE0Jqdny0GUSZid9mje7F/3OM69eH9rLx2hPjRokfR92o
- ufrmVAyzE0CurzoZJ5gLaW5E6CALUuODORHvPXVIfFnIyuvFM5MsQmDjdFKcmIzRHyTN/dA4BnX
- 5p8RTiuH+LyIBU85tsk90qPuy0vWe+cEWdkkI7g6hR4Fw==
+ t=1763712873;
+ b=iQWOfjarW1p7GW5fcCOFm6SaztUOecG93qS3jr9Oogd+KJOuiRbsRPG1XaJGqEtB9UvDJg7u
+ rNFrCUryyClSZ99R7R0WR2/Bs4hXAXjfMwZKQ0tb4C5IWLwBHafWBfNmTVb+dLqES+gOfCQw+X0
+ FEDjsQdNg48CTu0KSN3wP10MegwLQPFLZQjN8+LdJXC1XMgcge2OIuzczxYhAuWajLhaAcqbIKL
+ Hb55RLiju+nr4yajUZNJ0oDXOuIG6+8Skdhymxelz1GsUV4ZOlUhhYUrUXZyvENM/Dqlpp+B9uW
+ vZY2QrCCtExwscsiGLKAd2ldj2hF3eyw5C3w5U/CUQXYg==
 ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
- t=1763712872;
- b=TZXIgzQRmdBwp0L8HHyHCYfH7zBDsfGBuC0WZXsIaU+EWtPH5W8OVV+9wp1MBfnbwNYs1mb/
- cRqGT8pT13swIjCpEf+BXWBr72IczCGGtTanZL2fK17Ws9hKG4ZWvjJ/IMzT6m1w5ripC+xkBb7
- +xFBiZh7tQfqV4tSCYukCI+DMVCaagm3q1c9bVIS0z8U/9YP/txQ1aACQym3q+kyiiHWuCZ1fff
- nqIm5deQBKlww4VMCFj1Km0N1H13Y42xpLcJizWBKBN75R8TUzyNRQ+iar4hd9+PcZaCXmPHGNM
- TjL46NhgzTu1lr+GrRUAsb45Wu/XaqAj3A3bEDtHwPwyw==
+ t=1763712873;
+ b=sbge6+pcPdZhMT962FoQX18O59WQqLMv3DbEMkpKJRgH+BGbPlxR4qtCVUPyPrulo/LXTHKV
+ 0xt4/ELPpvLj9rv/mSL1AOrVI5RHNb9CgOIdK14MraAvAGIX58nrLm08z7PcBe1PjwT7jExnaFU
+ ZRvaOH/pNFWSPC4hvr2xmGxnrdG9gox2jthHOvZh8Z3Dq5qG5RKabVc30LjuOzQaDFYksMVHTRv
+ eQGzq5K99ehuVUsbeDXNA9lfxPUNm0BN3tvQJhy2AemMjMSy9zJg/WZMBHeEgCx+Ari13YN6+2K
+ Jq1BWQAt56Y2KGNQKx15Sf8wmnMBYh+3ejxlIGlD/OXZA==
 Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
- mx-relay15-hz2.antispameurope.com; Fri, 21 Nov 2025 09:14:32 +0100
+ mx-relay95-hz2.antispameurope.com; Fri, 21 Nov 2025 09:14:32 +0100
 Received: from merchelm-W2.tq-net.de
  (host-82-135-125-110.customer.m-online.net [82.135.125.110])
  (Authenticated sender: max.merchel@ew.tq-group.com)
  by hmail-p-smtp01-out04-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
- 1F0D1220D76; Fri, 21 Nov 2025 09:14:20 +0100 (CET)
+ C5E4B220D80; Fri, 21 Nov 2025 09:14:21 +0100 (CET)
 From: Max Merchel <Max.Merchel@ew.tq-group.com>
 To: Markus Niebel <Markus.Niebel@ew.tq-group.com>,
  Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@denx.de>
 Cc: Max Merchel <Max.Merchel@ew.tq-group.com>, Stefan Roese <sr@denx.de>,
  u-boot@lists.denx.de, u-boot@ew.tq-group.com
-Subject: [PATCH 0/4] board: tqma6: non-functional changes
-Date: Fri, 21 Nov 2025 09:11:26 +0100
-Message-ID: <20251121081138.73285-1-Max.Merchel@ew.tq-group.com>
+Subject: [PATCH 4/4] board: tqma6: update MAINTAINERS
+Date: Fri, 21 Nov 2025 09:11:30 +0100
+Message-ID: <20251121081138.73285-5-Max.Merchel@ew.tq-group.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251121081138.73285-1-Max.Merchel@ew.tq-group.com>
+References: <20251121081138.73285-1-Max.Merchel@ew.tq-group.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-cloud-security-sender: max.merchel@ew.tq-group.com
@@ -73,21 +75,21 @@ X-cloud-security-Mailarchiv: E-Mail archived for: max.merchel@ew.tq-group.com
 X-cloud-security-Mailarchivtype: outbound
 X-cloud-security-Virusscan: CLEAN
 X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
- mx-relay15-hz2.antispameurope.com with 4dCSg049zTz2FbCY
+ mx-relay95-hz2.antispameurope.com with 4dCSg21wptz2F8d3
 X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
  IP=94.100.132.6
-X-cloud-security-Digest: 956f088924c0b42f006298e7179a2fd5
-X-cloud-security: scantime:1.780
+X-cloud-security-Digest: df4c7660cc4533e16bec03dcd07d2b64
+X-cloud-security: scantime:1.555
 DKIM-Signature: a=rsa-sha256;
- bh=8bEpURpZfnTGqZKYn0ALHChvTd4ISrvWa7XD5FM/wZQ=; c=relaxed/relaxed;
+ bh=pJnfnjU8ChlMpYALprMVtsscgEUW/rzP93FIcsQK+m4=; c=relaxed/relaxed;
  d=ew.tq-group.com;
  h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
- t=1763712871; v=1;
- b=io08b5chlfbNONZH1thDisH88HrL7S3qvko0YgUba20AVdYcKWrERx4w92+kB9+JkcOwhlAo
- LgcBUcxEduoaNqHBuiNwbh26msT+cCuGe6BjfQkz/yC6/+Ld3CgLHkD6NJrJ+JAuuEuzCKJHyKS
- cB3A2/oanzy1EqE6CtwsJXVXFIMt2rokMwnd8m+/f4pkrUCzS6yP5R2RMz6CK4AHfFyAJ2xH9Wj
- loBSH626YBYw9NIfriA5qzBhS1b/DORLssGvKAwjPmows3LARIQNchzBitHgWly/RBrDEI2qXYl
- 0Dqq3u3fBJY9cxeUZSJmexJKle4P2XZo7XDOpcPGNftMg==
+ t=1763712872; v=1;
+ b=BHMhLbZo3VvSPZgR9xhGvluK3Wxy+kssIztI/cvZ8DOKxxGxM9a0r22qFQYB7B8NDXr+Bqwa
+ cbwzmBbc/5NDPGZpaI2zpcDnwvnugQK8Naccz6+Fijp6QcVzF5uFCCegoVZVM8jkYqb0XW9flRl
+ 4jyeTFGgRktJnauX+7SJ7xk7fJKjxFHzj2sN4w0IVEu/goaRZep7GVIEh84jr7o8ShlPEz16FB0
+ cHSg24HrStsk89wLSMJDdjejs06bymkYnPw7amZEyxZ0BjD14HsJOZ3Co9KNqo50Nin+hRZJZCJ
+ UK4w8+27bNUaH6vvuDFZ+S60fHQjR0O6L71XUvrCI0jNA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,36 +106,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+- change maintainer e-Mail address
+  (old is not suitable for plain text mail)
+- add TQ mailing list
 
-this series brings non-functional changes to the TQMa6.
+Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
+---
+ board/tq/tqma6/MAINTAINERS | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Best regards,
-Max
-
-Max Merchel (3):
-  tqma6: Remove empty function tqma6_iomuxc_spi()
-  board: [cosmetic] tqma6: adjust SPDX tag
-  board: tqma6: update MAINTAINERS
-
-Paul Gerber (1):
-  board: tqma6: style fixes
-
- board/tq/tqma6/Kconfig       | 23 +++++++++++++++--------
- board/tq/tqma6/MAINTAINERS   |  3 ++-
- board/tq/tqma6/Makefile      |  7 +++++--
- board/tq/tqma6/clocks.cfg    |  7 +++++--
- board/tq/tqma6/tqma6.c       | 16 +++++-----------
- board/tq/tqma6/tqma6_mba6.c  | 10 ++++++----
- board/tq/tqma6/tqma6_wru4.c  | 13 +++++--------
- board/tq/tqma6/tqma6dl.cfg   |  6 ++++--
- board/tq/tqma6/tqma6q.cfg    |  6 ++++--
- board/tq/tqma6/tqma6s.cfg    |  6 ++++--
- include/configs/tqma6.h      |  6 ++++--
- include/configs/tqma6_mba6.h |  6 ++++--
- include/configs/tqma6_wru4.h |  2 +-
- 13 files changed, 64 insertions(+), 47 deletions(-)
-
+diff --git a/board/tq/tqma6/MAINTAINERS b/board/tq/tqma6/MAINTAINERS
+index c4fb6ec206d..1d3f7d2cf63 100644
+--- a/board/tq/tqma6/MAINTAINERS
++++ b/board/tq/tqma6/MAINTAINERS
+@@ -1,5 +1,6 @@
+ TQ-SYSTEMS TQMA6 BOARD
+-M:	Markus Niebel <Markus.Niebel@tq-group.com>
++M:	Markus Niebel <Markus.Niebel@ew.tq-group.com>
++L:	TQ-Systems OSS Team <u-boot@ew.tq-group.com>
+ S:	Maintained
+ F:	board/tq/tqma6/
+ F:	include/configs/tqma6.h
 -- 
 2.43.0
 
