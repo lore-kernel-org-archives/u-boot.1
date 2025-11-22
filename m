@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46343CFC539
-	for <u-boot@archiver.kernel.org>; Sat, 22 Nov 2025 16:23:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4779CCFC539
+	for <u-boot@archiver.kernel.org>; Sat, 22 Nov 2025 16:23:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E06A683B27;
-	Sat, 22 Nov 2025 17:23:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2965783B43;
+	Sat, 22 Nov 2025 17:23:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uPxCA4sI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y2wiN3mD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16BA283B24; Sat, 22 Nov 2025 17:23:31 +0100 (CET)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id 46E64839DF; Sat, 22 Nov 2025 17:23:32 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00E6E83B21
- for <u-boot@lists.denx.de>; Sat, 22 Nov 2025 17:23:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 30905839E8
+ for <u-boot@lists.denx.de>; Sat, 22 Nov 2025 17:23:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-65727896f35so1550493eaf.2
- for <u-boot@lists.denx.de>; Sat, 22 Nov 2025 08:23:28 -0800 (PST)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-657244ed2c2so608567eaf.1
+ for <u-boot@lists.denx.de>; Sat, 22 Nov 2025 08:23:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763828607; x=1764433407; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1763828609; x=1764433409; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hMC9UoXzkSRJn2j7dkecUW+jGS1qFVOII63z7F5/wTU=;
- b=uPxCA4sIG1trcQCQ77HB6jE4BHLucz8/6ILGKWQgfboAx0lWNELl7odqSEmz/djsHl
- mTA6l7MWFKQChXinueEzDGkGS1/dWhxlULsMTkLKHn9HTaafL6/Coc61qlqkBSY9kkLo
- KV2hJ2u7dHidfDYQqqEbckbnDzh+1A6sKJ1u4=
+ bh=UQlc7CqqcihgnXQIcaEP7bsxf9hKHsXI1fqWRoz8d4U=;
+ b=Y2wiN3mD72BbmF5RCChc2o9I7q5v/rTMSncTC2eXYxJI5kv50JJxHQGN03X8Q64aNi
+ 5YZZZlLSZPDjwI1lF+WH5Ch2jKxPn8MSz3vwsAZ0oyGn7lnAIG/16KvNstUbBYCe2NZD
+ UPVnDrKW8Rmeo/Km4zHT6RLXIGP9fmrpt6pdY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763828607; x=1764433407;
+ d=1e100.net; s=20230601; t=1763828609; x=1764433409;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=hMC9UoXzkSRJn2j7dkecUW+jGS1qFVOII63z7F5/wTU=;
- b=ICcfLGg7KngB+I+K3yRa17HemYaQNWA+TqzuxyRzdrVE9nZOJw/h8DPMuGlYoEgT2q
- kmkcCkd5BYiTMAoSn+r/e75lewHIIbuIIbjSwfujqnpIrrnzXfdf/CYA0j1EL8g6CBU2
- ZpQUX+BNCZrAq/vPZC5+FOFXpsW4EtKwcUIR1erVtULDM3mJrObhO6RRhsW9zUYsZBRA
- 34aZhYzESgAbUR7/yigQ5h3/OBXzzU8D9h35jkxxM2hhzOUSfklsvX2xyd1Z+4tsXKvJ
- V+u+uLh+ek0Ns4BYtJ8aoQkrakbHGdq/j7Umspb5Q4OZ1tuL/yzxbCRN+wC+ZjMogpvT
- wluQ==
-X-Gm-Message-State: AOJu0Yzg2KpnBNBQJ1KhP67UPQt2t1pJN9xMqckjtTH+KUwZ9Uw/ZpiT
- E3ZOps8QU+hy20zj1XPuVSHlBjIAgiCSk3jI4gShvueE7GhvMwef9Sj0ViM7rRqxfuqnQRbfikB
- W/30IGSU=
-X-Gm-Gg: ASbGncvfkKhwO5AFxHVPFcupLZ+AB7LieOUTQPclVA/3AYz6yZjEOsHEsuB8CsAjSiX
- VqtXlFzEIUZwLjYe+i/DtVxw2d4K9amHYq6s13oTuP4srrmWnPg3ZSF9QgEIobrcqgwgO0+cAgG
- 22/Oy3/2xL7y1Vs+TuFcVnVsJV9zOAmkUygbcRWL2SUYTNbwp9LINb12FCOs5jV3+SlrC/rI0T4
- +WxHNsjTxwkI3bS/3t4CeAtMiWGKyWjJSHnxEqn6+Olq880ewJ6y6xJAeU5l/SeKdez8pLbxuf/
- rUklQrb3UbNX5k6H9DPLQTs6fsdgqw6i/shLQdGHCqPw5u134Qi3MG2cB+pBpOW/BwB6JaQWXG8
- CL/Ac4yuD+FAA2Kpu6GzLxQgJxW7fguc52vkL1X7DDIT9qOgtH5WmH6nXoBzbQeEzVeIZJLOERS
- qqk+SNNdmBwx4TCramoHTrYIBygaeBS5i6M8ZCok9AxSffkrTw
-X-Google-Smtp-Source: AGHT+IEO1oHQg95mUx7cI9vhYxvi7WAiJhCA+Iwjp/n021x9NgibMQOvcwNDVaA5CFii8lU7d6uQbg==
-X-Received: by 2002:a05:6808:3507:b0:44d:ae36:dd7a with SMTP id
- 5614622812f47-45115cb85dcmr2017095b6e.66.1763828607592; 
- Sat, 22 Nov 2025 08:23:27 -0800 (PST)
+ bh=UQlc7CqqcihgnXQIcaEP7bsxf9hKHsXI1fqWRoz8d4U=;
+ b=OUhlJ+LYVsoH40oeswp7oWrIjG6tk73u5SXxU/CzyTraCUCjE+WQXGBepwBTpXcyz2
+ voG52cJIlut8v/sh0Be4gUPuhnAbZg38Ofuiu/KzNbJw1Cz0dENm/sDUjzdrXS2ibk7U
+ WR22ao+fJFeI1uEHqO9LIOePhlVL7R9yo4uCmohJMCzdiNQW3EA/fpW5iqWGKNHYYnln
+ 5R9p5usjtcKcw+SFWoDule3hEKE8UeitRCT1YvDgmDEeiZ1BG2AjPiSmgwKm97EyaKku
+ e2DdsT4Jons35HUTw/ZeVn86jTNh9TgxpxHhdfOIFdc4t2aqcPVWybaJKTuwl7tFcLQR
+ fVvQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWzK7OYTif+x+uTxd03Vf7U1qDGpZBDPd2QTkTSpMd9XYynLeq3QlWJKbW+mV4luiYGpF8WiEU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzn33DwYnnSObNHlsQxUQuwCoag/BFUYYOakEJu/Kk9q0YTElRc
+ Njw2Xf58vhSq1n/OoNlC25njA2hsXIpepcLoynOkPlt16+quY/KOGXEwbgllFCxDwGw=
+X-Gm-Gg: ASbGnctA6l5bZ8QUz16i09AabpH4xnqgBaz2m0o8bXUR+h+8dIANICUGAkjLmd8Zl6v
+ WJO+hA3JmajZle0zhKwvG44bgm+IXFnUca3d1ajL1QLUDKXldWBP9EDdcfUGdKkqmJCPxQ1bjAt
+ AuQ1Ut4YqjjUmRQ/8bgiXRqQR3vL+J4zHxyvnHgXjpYjf1/a+lQXJx0p5Lr0qWWz62lYAruAHQL
+ M0kWKpheqB+qE56GUH4at9CM23VOLcxpr3wPG5BiGTKkoAXD/YbBLkebZd2iYICPH21vW2lqCU/
+ 2wozIUOklCDmxbFqNCqZOpkdyVEoOhCnzCOycgJQq1n5V7KsUlDG3Yxb8Q2C0LXm6ltCDIDyUeh
+ bxDH5npxl8RSbOn8+j1nyG8t90FvAahwNfisu/NE9Mia3MrnrS/Vx5+ktsoQLddpNjnwM1AvXm0
+ yuOHKGC2X+zuZDgaObXRh+tnzWBwun/wlUuAOjPctbH2BbQ5Kb
+X-Google-Smtp-Source: AGHT+IGTbDgX7vRdWghe1RaLJFuuELhX0YxF4HZndSK88jjNYsyBw3d9SkafGgGNyf85X4fqnJFwfA==
+X-Received: by 2002:a05:6820:1c85:b0:657:633d:7361 with SMTP id
+ 006d021491bc7-65792570d26mr2101120eaf.4.1763828608899; 
+ Sat, 22 Nov 2025 08:23:28 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65782a359efsm2488378eaf.4.2025.11.22.08.23.26
+ 006d021491bc7-65782a359efsm2488378eaf.4.2025.11.22.08.23.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 22 Nov 2025 08:23:27 -0800 (PST)
+ Sat, 22 Nov 2025 08:23:28 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
-Cc: Simon Glass <sjg@chromium.org>
-In-Reply-To: <BESP194MB2805EAEA32CBD02FF8F2E7BFDACFA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-References: <BESP194MB2805EAEA32CBD02FF8F2E7BFDACFA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Subject: Re: [PATCH] upl: Fix buf array size
-Message-Id: <176382860647.3054897.11524464026297414305.b4-ty@konsulko.com>
-Date: Sat, 22 Nov 2025 10:23:26 -0600
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Kory Maincent <kory.maincent@bootlin.com>
+Cc: Bajjuri Praneeth <praneeth@ti.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, thomas.petazzoni@bootlin.com, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20251117152308.900316-1-kory.maincent@bootlin.com>
+References: <20251117152308.900316-1-kory.maincent@bootlin.com>
+Subject: Re: [PATCH v3] boot: pxe_utils: Fix memory allocation issues in
+ overlay_dir handling
+Message-Id: <176382860770.3054897.9752991238920009623.b4-ty@konsulko.com>
+Date: Sat, 22 Nov 2025 10:23:27 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,18 +103,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Nov 2025 11:37:35 +0100, Francois Berder wrote:
+On Mon, 17 Nov 2025 16:23:07 +0100, Kory Maincent wrote:
 
-> Size of array buf was incorrect due to sizeof returning the
-> size of an integer (typically 32 bits) instead of a u64 type
-> (64 bits). Hence, buf array was shorter than expected.
+> Fix two memory allocation bugs in label_boot_extension():
 > 
+> 1. When label->fdtdir is not set, overlay_dir was used without any
+>    memory allocation.
 > 
+> 2. When label->fdtdir is set, the allocation size was incorrect,
+>    using 'len' (just the fdtdir length) instead of 'dir_len' (which
+>    includes the trailing slash and null terminator).
+> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] upl: Fix buf array size
-      commit: 8385ecc8eff91c45700040efbb08cba2ce6d3659
+[1/1] boot: pxe_utils: Fix memory allocation issues in overlay_dir handling
+      commit: 2d7eee5a55472f885474168acd3295d47a559755
 -- 
 Tom
 
