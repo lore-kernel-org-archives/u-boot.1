@@ -4,86 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBB80CFC538
-	for <u-boot@archiver.kernel.org>; Sat, 22 Nov 2025 14:32:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0991ACFC539
+	for <u-boot@archiver.kernel.org>; Sat, 22 Nov 2025 16:23:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D345483B03;
-	Sat, 22 Nov 2025 15:31:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 445F383AEF;
+	Sat, 22 Nov 2025 17:23:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BHrHIEtn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aAz40cT3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9F9E83B0A; Sat, 22 Nov 2025 15:31:51 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 1349C839DF; Sat, 22 Nov 2025 17:23:29 +0100 (CET)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A021983AEF
- for <u-boot@lists.denx.de>; Sat, 22 Nov 2025 15:31:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9454839DF
+ for <u-boot@lists.denx.de>; Sat, 22 Nov 2025 17:23:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b7277324204so503547666b.0
- for <u-boot@lists.denx.de>; Sat, 22 Nov 2025 06:31:49 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-3e80c483a13so2005198fac.2
+ for <u-boot@lists.denx.de>; Sat, 22 Nov 2025 08:23:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1763821909; x=1764426709; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FPp1tAPGdmsExdEanTiolvlFLo7+OzYlzoS7FKgoqHA=;
- b=BHrHIEtnGseWSkcoy6OplC9xDoTKImk9fUvcgWN7YJBO4eBPFJJPyNfndS+kChPWCf
- qSsYSuYHFoDvrDCwVeFRcHgc2jFZiV0H8xemVBb/LcO5Olln77Ebp3+W5vljYmM9E9S3
- 5Do7qCzp2xWfON+CPyERehP2CHwf0QobEiTME=
+ d=konsulko.com; s=google; t=1763828605; x=1764433405; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rQgwv2E/7TpeS6vcTgCuJzNFkt2QR+8LddIgvYbypqY=;
+ b=aAz40cT3DzO9B5sAVbRVzTfNmQkc+N2BXJx86WkeepX9aJHGuOXu5reIDDwy+GtCC7
+ 7QMCY4xdJpupM2G1RI97+AsDFCxpQEChnXx2WrKmQC1bneVyTgomMEqo/K66hIMCd8zw
+ W5Lly+3FjLEruY5SXr1BfdCAHDH0IS+u5aEgw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763821909; x=1764426709;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FPp1tAPGdmsExdEanTiolvlFLo7+OzYlzoS7FKgoqHA=;
- b=qd+Q5oqdq2lAJiXgB7tLFF/rNhpm6rh7Rezl01LLOJTNZ2ruK5sXOFqOqNZWQkDoFU
- yObjbd1cU/QNG2RDtHqOqxXZUKCBqLd8jvnKluu0QVMQ48NHJDOjIDf7s0KP/iS6cMbg
- eJFuWoawb7lb524iVLnHtVaAsDvZUEDlxLJVDV2PDpxRHu9BJsS0Ec9TI0ElPf5XYYjU
- dgZdKu5MZbT93VL3E5lTD/Vx3FJtx8UNBju0R9jBtG0MqVQLbrIjqpcMm+hK/gAEHw2g
- d7zW3XAv3tOVpiYd/dxtbKdMVWet4LnQpW/3o2jsJoWtPa0gEPeTimtCs2o70R+Se2Qt
- Hlog==
+ d=1e100.net; s=20230601; t=1763828605; x=1764433405;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rQgwv2E/7TpeS6vcTgCuJzNFkt2QR+8LddIgvYbypqY=;
+ b=OUB0SR8rapHCTceskWg7qZGAi/kMOPVgkRRlxVNm5s0FAjI4ee7g/q/KeNKL87tIq+
+ Q194J0H6/rnsDyD0avvZYbXcGrTUh993DKunzoS+O/ufDfT5IJpbVsJ7EqDnA1HLSYgt
+ UbH2ODoVBon4S0OwzgPrbKmRn2JaM/I7s498JpfWhnqM1j3WzMk2ps2xT+sSb/VhZmUM
+ UGipAGixFMdjdkHAS04XoHaHXMF7zdx9tZFbLHi3CeZguLVYTMlfzupzQpIUMlmTlsHP
+ WyLdDQZcvA/8sfYwph5iNyPAwZXawMqifAlaoXP0MpeBbr5Y9P1blrjF1DEDK/yBrC6S
+ s67w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURPUGqoo8a3iWGKgS3am3UHP52GV7+eipUwRkJfcv1OwBVTKFUXlJKY32NgE3ukGp29kEQILE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8WUylQrkBHaHPses+ZI6oW8XczIyrLAtf/7Zo6pDEJK+w6oiW
- 2qNXQVwAiJ5LptdeC4A6XgTsPl+UALEdoJrZnBPbw0ma9a1xPUnxNUIPh5fYtsZa/zyuvTW98UJ
- +NpMoROkXqN+lxnaZOxmfZIzeJ7oJcopFeGDLuZz5
-X-Gm-Gg: ASbGnctUeKs3nBig7KO8OHbmH75yHp3DlL4LaikxFE7rL6qG80gFYJj6TpSzxZyIbXa
- 4Wd0IbZJTi8tJDQivbWoN0AZ1ygfMHdl86B0CmhvPJ3shVHT+4bc5hB9MQE4S6WzNyRCdo6/oLy
- sXiMbpPQU4hdnFgN+HRw/bU2zug4Y3YnjR5SijIggxARRlNOHOh2ycFBBNZJk6KdTNKapyVA4PW
- ptygjWvqZGXKUlsefH5bcSGjL+xgWbBICnqQ6oU7dm5RPNlmWkCqnnh/veDdOeMufWHkw==
-X-Google-Smtp-Source: AGHT+IG/E5yR1ENZMelqRgqXknA+hX7lsHuM5s0RkSdkdWDH6UhEAiA4S1tquHlgXkRjJKyGo6ks7HoFG7dbg1Qy8FA=
-X-Received: by 2002:a17:906:c10d:b0:b73:78f3:15c1 with SMTP id
- a640c23a62f3a-b767186f2b3mr583984466b.52.1763821908513; Sat, 22 Nov 2025
- 06:31:48 -0800 (PST)
-MIME-Version: 1.0
-References: <20251120041439.817233-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTjnGtSPvki-i1fHQEU+bn=6cTqjRFyid3D5zQepNEhzog@mail.gmail.com>
- <c8752825-92d5-43bd-aa28-e229d4cc3fda@mailbox.org>
- <CAFLszThiZ9iWZG8vNSaosNjMMTQZeG2=yO8kGoPDBL0SSp_4Cw@mail.gmail.com>
- <20251121143510.GX2125796@bill-the-cat>
- <CAFLszTiBezzWuBE2qo8iEU8dyyD6ro4x2UrXGnQnfKSYSmTGgg@mail.gmail.com>
- <36b44a71-e98d-4b89-b639-cb1e31f41865@mailbox.org>
- <CAFLszTj_RJuGXriRMpEnf3ZM8Jd4zmSB87KiTdk7umjzfcw4Og@mail.gmail.com>
- <20251121192753.GD2125796@bill-the-cat>
-In-Reply-To: <20251121192753.GD2125796@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 22 Nov 2025 07:31:36 -0700
-X-Gm-Features: AWmQ_bk8IF-ITVV_86grweXBuDieh5FJsKpWJIDuk6388y7wxYaEdMcmfZmZtV4
-Message-ID: <CAFLszTjxRS_471AkuwdAhf97N4SCosuPnutnGPf=MRvcUMVc-w@mail.gmail.com>
-Subject: Re: [PATCH] clk: fixed_rate: Avoid calling dev_read_*() if
- CONFIG_OF_PLATDATA=y
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
+ AJvYcCW0L6UMw3dgA+DhJpLgedaYK/uf10gmYSZlnPT4viSmxQZipMiEqe2G5HEgKuBi8LE6qyTX9Fk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJxQjHg/ZxtjUu4l1yizVS4sDT1vVD+9f+1JEm21IKsFNtOXxc
+ m4Z6TM2RQ3kJ5RkGwQ3zrS9A/RNGpkmu3Zbwk/89NUccBAlfbTS4D/iFkXkXcYClUpg=
+X-Gm-Gg: ASbGnctMbnJ8jyd3kkaqA0RIv1YBWD8Otkmymo/Q/t1rCLObykal1REKlya5EzHX0+m
+ N5XOPibGnMiPw/ubhq5daJeblZiK2VROd9+P8MUDHl/aiZ++/DLoysXRQEfi14It8Q0+XRSkIbJ
+ SeBVrci2Ora76FWaTYvuJU7d98FXXwh1W9XzoWX9c8ja05jETWbAdjy4ZM5j6QFVBLDlm9aWWEJ
+ tZ53ujMUyGpydSkPDuQ/QpHjpgQ1Pi4fV5gRuiahVenA8AinW/wjeN/DsFsyHDp1h2dtIu2iqlN
+ DC5F3ZcsSi6ozrVzyUxFoXa6Jrsj9u14b83pnpS5iPrHNPlq9+GZfbD8Dm/5ZTbtJcDq+DP0iIi
+ egUyKhV0G/X7ZBtIWQkWyNitG6iH9YBUcYwXZnZwQYHPHVGPAjizjZTHB8PjdvvJ1F4VtUTULLO
+ XE9zEsp9BZXN223NUz1RpomUrgWxHnmBHp87oCRjmL2RfSsoQFAFUe3vjLiSYR
+X-Google-Smtp-Source: AGHT+IFYH9l55v2L9fBLFhH4EiKthbbPtnUWOBGxo6/3Xq9nf+ndJUFUFFGLclfPTs1a5kepfWbgcQ==
+X-Received: by 2002:a05:6808:1786:b0:450:8933:b732 with SMTP id
+ 5614622812f47-4511572ea1fmr2456507b6e.7.1763828605533; 
+ Sat, 22 Nov 2025 08:23:25 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-450ffe2d3d1sm2506041b6e.3.2025.11.22.08.23.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 22 Nov 2025 08:23:24 -0800 (PST)
+Date: Sat, 22 Nov 2025 10:23:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Peng Fan <peng.fan@nxp.com>, Ben Dooks <ben.dooks@codethink.co.uk>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH RESEND 1/9] test: fdt_test_apply requires
+ CONFIG_OF_LIBFDT_OVERLAY
+Message-ID: <20251122162321.GA3053902@bill-the-cat>
+References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-2-heinrich.schuchardt@canonical.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2rzEO1wf7C3mQj0L"
+Content-Disposition: inline
+In-Reply-To: <20251109101010.306268-2-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,58 +112,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Fri, 21 Nov 2025 at 12:27, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Nov 21, 2025 at 12:09:31PM -0700, Simon Glass wrote:
-> > Hi Marek,
-> >
-> > On Fri, 21 Nov 2025 at 10:53, Marek Vasut <marek.vasut@mailbox.org> wrote:
-> > >
-> > > On 11/21/25 6:35 PM, Simon Glass wrote:
-> > >
-> > > Hello Simon,
-> > >
-> > > >> To be made to clk_fixed_rate_ofdata_to_plat_(...) in
-> > > >> drivers/clk/clk_fixed_rate.c as it does not currently call
-> > > >> dev_has_ofnode(dev).
-> > > >
-> > > > Ah OK. So the call stack is something like:
-> > > >
-> > > > dev_read_u32_default()
-> > > > dev_ofnode() - returns ofnode_null
-> > > > ofnode_read_u32_default()
-> > > > ofnode_read_u32_index
-> > > > fdt_getprop(NULL, -1, ...)   // guess
-> > > >
-> > > > And I see that I put assert() in some of the ofnode_read..() functions
-> > > > because I don't have tests for passing an invalid ofnode.
-> > > >
-> > > > So perhaps fdt_offset_ptr_() should check for NULL and return? I
-> > > > haven't traced it though.
-> > >
-> > > In previous patch
-> > >
-> > > [PATCH 3/3] libfdt: Check fdt_offset_ptr() return value unconditionally
-> > >
-> > > that approach seems to have been rejected, and these dev_read_*() fixes
-> > > were implemented as a replacement.
-> >
-> > I don't think it was rejected...but I think the commit message should
-> > better explain the problem, e.g. using some of the info above.
-> >
-> > The only choice is whether to add the check unconditionally (which I
-> > think is fine for now) or to add a new type of assumption.
->
-> Your feedback here does not seem to match up with your feedback in the
-> patch in question:
-> https://lore.kernel.org/all/CAFLszTg6dF1dmJJDh8-2ZjUf6i9+ZOFvWNSxNRS_PBQ3CDNtHw@mail.gmail.com/#t
+--2rzEO1wf7C3mQj0L
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Well in my defence the cover letter and that patch didn't give me much
-of a clue. No mention of OF_PLATDATA or that there is no actual FDT. I
-thought Marek was saying that libfdt no longer accepted negative
-offsets!
+On Sun, Nov 09, 2025 at 11:10:02AM +0100, Heinrich Schuchardt wrote:
 
-Regards,
-Simon
+> The `fdt apply` sub-command is only available if CONFIG_OF_LIBFDT_OVERLAY
+> is enabled.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  test/cmd/fdt.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>=20
+> diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+> index 96a8488e172..a36f2dcdda8 100644
+> --- a/test/cmd/fdt.c
+> +++ b/test/cmd/fdt.c
+> @@ -1319,6 +1319,9 @@ static int fdt_test_apply(struct unit_test_state *u=
+ts)
+>  	char fdt[8192], fdto[8192];
+>  	ulong addr, addro;
+> =20
+> +	if (!IS_ENABLED(CONFIG_OF_LIBFDT_OVERLAY))
+> +		return -EAGAIN;
+> +
+>  	/* Create base DT with __symbols__ node */
+>  	ut_assertok(fdt_create(fdt, sizeof(fdt)));
+>  	ut_assertok(fdt_finish_reservemap(fdt));
+
+So, this is interesting. As part of merging this, I see that on
+qemu_arm64 for example:
+               u-boot: add: 0/0, grow: 4/-4 bytes: 284/-9691 (-9407)
+                 function                                   old     new   d=
+elta
+                 print_hexdump_line                         472     556    =
+ +84
+                 fdt_test_move                              568     652    =
+ +84
+                 print_do_hex_dump                         1704    1764    =
+ +60
+                 print_display_buffer                      1736    1792    =
+ +56
+                 static.__func__                           5670    5655    =
+ -15
+                 bdinfo_test_all                           3064    2884    =
+-180
+                 fdt_test_chosen                           1496     516    =
+-980
+                 fdt_test_apply                            8524       8   -=
+8516
+
+So we're as expected shrinking fdt_test_apply with a build time
+optimization. But we've been building and running this test as can be
+seen in older pipelines and their published artifacts. Should it not
+have been a failing test? Did it fail for you somewhere or was this
+found by inspection?
+
+--=20
+Tom
+
+--2rzEO1wf7C3mQj0L
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSHjdgAKCRAr4qD1Cr/k
+CuRLAP92idBAuk1kUyvBcBfJT0iqxysZhRo+oRfmLPm3TRN9+QEAjn5dp2nGASnu
+oZdKQ1wzY+3odtANjJ2xu0HVHNF35AY=
+=I7rd
+-----END PGP SIGNATURE-----
+
+--2rzEO1wf7C3mQj0L--
