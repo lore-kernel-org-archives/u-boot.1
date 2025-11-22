@@ -4,141 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEDADCFD30D
-	for <u-boot@archiver.kernel.org>; Sat, 22 Nov 2025 23:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 216C2CFD30D
+	for <u-boot@archiver.kernel.org>; Sat, 22 Nov 2025 23:49:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 139BD83ABA;
-	Sun, 23 Nov 2025 00:34:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
+	by phobos.denx.de (Postfix) with ESMTP id 6473083B7E;
+	Sun, 23 Nov 2025 00:49:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="kEJnG5lU";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="aDH35kp/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E657B83B32; Sat, 22 Nov 2025 21:45:08 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazolkn190100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d200::])
+ id 7B1CA83B7F; Sun, 23 Nov 2025 00:49:32 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD97B83AB8
- for <u-boot@lists.denx.de>; Sat, 22 Nov 2025 21:45:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7985F83B72
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 00:49:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.fr
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fberder@outlook.fr
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OUffCrqLdPBAlZLrcQmEefGmuazmyQ4r4cAkRth1S0W38bjXB9Yx+B50+vm9V6Xv5gCczZm5OaCH+Ruvs1MXLEItW4hzNH37xjfn4v0lvbmPhWSDZd+LFi5xKDrju9hQfwi8uq8vXI6Zmb3SIXwol6HMBg+qtjq72xqpkIj5uO/DjTjagK9qaZBC1aJ8lrtJFuAI1MQyApKDuiZQJKYQQ/aPBj70Ts8vsNU+TjKpSykOe2guO/G4BDnSnvCjevBKMaGftuXdIsKshy6eMEe3G4R0WvGlkfaN40aWPV/ev7WZzNNcwvMotLpKPulm+pOx21elwFLYIxkmDORWz+B56w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DlYuhbrBLUFK4F4gNVM7JwLDtI8QnwDmKdkfnnR+yaE=;
- b=RGhM1Vs6pRFp5dOj4ITGDWzr7sggJGJPnsaEvft/bbOOwqCgwJHe6hiNkmeS4KlsDu5vKRcHYvK/KzIXQD/vFqtOOvVLN5/4yXlE0lLXLiZjNTc6VJIgXDZK0wPxDT6A75srsm1Hm0VTA8VsJpRKvyKU4ZgASTobBdO/olsiqPSYK18/V9qAO/Y7hZ0FR+5VNPIM9F/sgLAWrM3XTqRwOJf2k1uHjPQnJA7yOwLXI0/+Cq/4RGFBUo/MEjSEndv2K7A5uIqyS/twCswUneU+lezwE9BrACnCvEtyjxyME2vJ7PNRqiFqaJYR5cUaFFGR98NWVEW81LZ0vNuCtCszRQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DlYuhbrBLUFK4F4gNVM7JwLDtI8QnwDmKdkfnnR+yaE=;
- b=kEJnG5lU9cBBTsfQxlENREdaw+PWmGMxns/M1ULucfuJNxIOiICpLOOh4BY+cXsDfjbfKLojoxeDp1lzF+a1y/c4bL8HHFqPmYR+TNGKGVbGGvdfs0pKKfthZxRIjyuK5FDX8JvefqZz7O0H5WFBVzuANi4q1uWfzF3lv5WDqe4ODvAHhPJ+yrRnF7a7NCIMKwnrnRFoS4BubakZYW5CCJdnq2P5MXa+GXfqiMwxdMpBL3kSFM83ZcwvBU1Bf/PFvD3wWfIruHGVBteJeqZBD/1zQOQS80eejppmYJyfrhq/90rJzOpz3Qt4ZAaI7RO1HeVQJMhsJ8o9RvDqdj/GOA==
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
- GV2P194MB2448.EURP194.PROD.OUTLOOK.COM (2603:10a6:150:26e::11) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.15; Sat, 22 Nov 2025 20:45:05 +0000
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58%6]) with mapi id 15.20.9343.011; Sat, 22 Nov 2025
- 20:45:05 +0000
-Message-ID: <BESP194MB2805F70B5836B5CE97A190F6DAD2A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Date: Sat, 22 Nov 2025 21:45:02 +0100
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Francois Berder <fberder@outlook.fr>
-Subject: [PATCH] examples: Fix checking id parameter in thread_start
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PR3P195CA0025.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:102:b6::30) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:b10:e8::5)
-X-Microsoft-Original-Message-ID: <82c4cca6-09b7-475b-a790-3c46d0a092fc@outlook.fr>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1763855370; x=1764460170; i=xypron.glpk@gmx.de;
+ bh=pt/dQBw0mGHImiufv38EqjtTxwEKO0i70Xi0OZgV2gk=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-ID:
+ MIME-Version:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=aDH35kp/IMXhZ3gDeLpxZs5yx0h8TC4ZBA6/EDxlIRqgmTfuZ2cv7GY4vjByYNbc
+ T/CVil+cBB/mhw1D5sFM0bviAHZtkCejNKfJZcNXX54oZkw8+FUvlchKJJ7Q0XCdj
+ W72Vud/Qg9uDEMWoD4CzhstUviXmQb3HyPZeUpRl0ycKB1/e2mgLqFygc7Tiz184P
+ tnayvBZzW3hsB19nE5+iw5iu8HCyVb7OpMzINQCjeMtchX9St501SBbEwWIYQAbLx
+ zp10SPHw6M2oX2dIrAZquTnhUggD4U10T80v4epV593iKoTowas+iErEto1+kiSZY
+ 5YMhxbtY6/gtBfIK6Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from LT03.fritz.box ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MbzyJ-1vzJ7035hf-00b0fp; Sun, 23
+ Nov 2025 00:49:29 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Richard Weinberger <richard@nod.at>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 1/1] test: Let pytest indicate skipped C unit tests
+Date: Sun, 23 Nov 2025 00:49:20 +0100
+Message-ID: <20251122234920.80114-1-xypron.glpk@gmx.de>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|GV2P194MB2448:EE_
-X-MS-Office365-Filtering-Correlation-Id: 17f1db0f-6c95-452b-d28d-08de2a080441
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|8060799015|23021999003|15080799012|461199028|41001999006|51005399006|19110799012|6090799003|5072599009|5062599005|40105399003|440099028|3412199025;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?K0lzbzZwQll0VVhNeXhCOE5ENms2VnVvOWoyU3pPUG1SZGFROGJmVGVFeU5J?=
- =?utf-8?B?aEVjZ2lzeVl5eFpQMDBBeXZWd2UrT3lOaFJ0ZkhwN0RFZzViWTJsckt4MVQz?=
- =?utf-8?B?bnFuM0lhZTc5SkdscEFMT3pqbXQxbUVmNDFIVGVDbUJUc3ZjWFEwN0JpYktv?=
- =?utf-8?B?T282V1ZhSlJZaTJPdmZUWEhiR2lMWCtZK3ozQjRPTmQyOFA0MTBRWHNNcWVv?=
- =?utf-8?B?Skw3UzBnL0R1MlRaZmlWeHFxN09lNCsyR1VpQndTdzhOQmNqV2lPcVlCQ3ox?=
- =?utf-8?B?NE9idlduYit3eit3OFh5dmoxS3dkWld3dDJ2ZzRsTjMwTHFhMlFxYmV6V0Iy?=
- =?utf-8?B?ZmZDZWZadmJocXpybGFMRTFiZVdjaHk2Q2twSEN4YkJ0M3QzVlBqaGZpK1Zo?=
- =?utf-8?B?akQ4UWY4OStKTkJjTlVvTWN6aWhFNEhOMW1TYmhVTjIreHpnN0NYZHI2M0Z2?=
- =?utf-8?B?NzhWbG8zc1RYckpuWEc3U3VzMnNGY0ZWRG9PZ09aS0dRTElrMXZkQkFVWFZs?=
- =?utf-8?B?aXlWSTh1L0NkSjFJVGwvbU00dHZoNHhQVnZaekZmNllHcmZlclpoWnFkQk40?=
- =?utf-8?B?ZGFXL1NhSUR0clJheFpPb0U5cnVyYmYyOFMrQTlxT3VwMEhvR25uWUsyVDl2?=
- =?utf-8?B?L0JtYUE1NHRYcU1YL3pJbklXRVhRVjdqaFFUZmdIWVlHNmV3L0FHRCtFaUZL?=
- =?utf-8?B?dE5iQzYzTlNWdVVScmVzQzU5QXpZYUJCWncvTXpPSzhFalpLMkZsTFRZc0hs?=
- =?utf-8?B?UVp3NDk5V0dTaXpIUkJacHF3U21ZMmFkSkV1ejdnMHRGbjVmK1hmTnV5azhV?=
- =?utf-8?B?THRCeC9IeGlkSmRjQlNJcE0yZXY3akRrcnByK1RaZUZpRVJVdDAzdU9MVWxw?=
- =?utf-8?B?MzRXbVNLR3hINktMVjR3Tk1pdmg1TmtOQUY1RGgxZEFtMGdSTDVsL0lJaURP?=
- =?utf-8?B?OHRhNTJZNWxxSU1CMkl5Zmx3dU1qbkJZOGhFL1VwTWpibW5HYnBOQ2l4UFFE?=
- =?utf-8?B?L2tuazBtczc2QXlqM05sQ0wrdkdYTnZiNy9nWEVyc0o3NlVBUVVGeTRpb3Ix?=
- =?utf-8?B?TWc0VzZKcDFYWEF2NUNVL1RaQVdCYnlmbllqaUZOMDVnMXhQRmVJdFhHZ0hP?=
- =?utf-8?B?Mnlrd09FeU9NZGZOcE4vcjFnbkl4WFpJdUxjTjVMZUtNOEdsYmJYRWRac1pT?=
- =?utf-8?B?THdTNURUVC9jOGFyU0RZTjJlL2tSandtM3d1bjBUWFFJd2IwU3ByMUgwVVRi?=
- =?utf-8?B?N09XTEwwYkhCUmhMbXo0WUY2YmQzdE1YYXVFZUJ0MHduZThzWjFJNEZwQmkx?=
- =?utf-8?B?OHY4Zm9UUks0SmVTLzBYdnN5NnYxQU5McEYwaDg5Nnd6elh6WGFVNjJ6aWJo?=
- =?utf-8?B?VTFqMmdBcDl4SlYxeE4yWExMTmdPUEpRZ3RITTYvMUZHUTZ0aXBoUUFkdGZu?=
- =?utf-8?B?TzRWV1NYVzJxbEpFaG9yZlhwQUxnd29IYzlvS3p2SFNqS2tUUjNYTm1BMHFN?=
- =?utf-8?B?S29TeTVzeTdYWTEvRHk0cEtycmdERHR0anNmSUduVDROTGsvY2ZKakJSVlFy?=
- =?utf-8?B?SjR0U0V1dEJFQ2VNdWU4Q25xUVRNZmNYTWptOW02Vm9xZzZub0t4cFNZL0FE?=
- =?utf-8?B?SnMzdmJNQTlEWXNhVEgrTURXMlBMc1JOcmpWV1JSeFFWUUFLMWJOM1dxWHo2?=
- =?utf-8?B?TDBGaEM2dUFEc29sbFNRdXl5djlYbENKOTg2bENYNDcwNXVQMkdCTHp3PT0=?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R3NMc3hhUk80NnA0UEpPS3F0SEdpVjhjUjZBSk5CY2pMd1doWDFZSG1OOVM1?=
- =?utf-8?B?ZTZRd0NiM3ZyZE8rZVVZcWFscWN1WEYrUWtmcVdrcFNsQzVrKy9VaGlQV3BG?=
- =?utf-8?B?ZUZNNVJNbmszRk9TSzRMZ3FweGZscTNYRWQvcGxueVF5dEpsMDBYZ3JMRWN0?=
- =?utf-8?B?ODFMZUI0b3U1REppRnFQanMxeEk5UHc5NzlTTkRMYlFabVdDWU9FZDhsVVJK?=
- =?utf-8?B?RHMzL2pMYnBxb3M1SnJhUDhuRGRDckliOWRvekpoaHFkOElrWkJxN25FanNr?=
- =?utf-8?B?NFdBU3JCanZxenJFYVV2VlJ0a0R1YjYxV2hBSGRkZGZXRUhIU1ppMFhtWnM0?=
- =?utf-8?B?dFRLbGxIdU1NME4yamFXaUZrOFRsQmhKVG1aVU52N01xd2M2V2VXWGRXVEJs?=
- =?utf-8?B?QzBpcHROQnlWOWMxaXVpMmFxQ2toUWhLNzJVcGt2OEFBa3hzZFZxNWdUNWll?=
- =?utf-8?B?TmhRV2Y1MGo3L2NtVXJOSWdUclJhKy9QSEMvTEgrTkdJTUZKRk5TSXd4Q0FR?=
- =?utf-8?B?aS9zVGIrUVRNaGcyNEVTcWhTdDVMbS9RWDc1R0d4MGV5SWRpSytjbUE5Mkdm?=
- =?utf-8?B?WkdFMWNFYjZQTVZOYndGaGxrTXo3dURBVFhxaGlNY25SUkZuNUpIazZBS0d4?=
- =?utf-8?B?QWpwME1aTHQvOE9vcEZtdjJtVDR5eTlSTkVHRWpjMUFYdUtHYXdtckhFYVFC?=
- =?utf-8?B?QWRKa2RwMG9aaU9JR2hzTG44ZW5DWFl2ZWgzT3VKdUVJdmZOTFRUYjdRKzZy?=
- =?utf-8?B?WkMxY0NLVjhoaWZSN09SUUhSUGNyVGdpcGFJMXJiSDZzMTdOMTNId3hEMjFC?=
- =?utf-8?B?N1h5U1Bhby96T2F1SnQ0K0VSK2pwT09mVUhLaENJNGkwRXh6dFpRVXlrTi9s?=
- =?utf-8?B?bEk4c0VoM3AxTEdFOHFkTDl0L2tQN0pTZFZNUlFoN1M5ZlhWMFllSnJyVG1F?=
- =?utf-8?B?SjJCaHNmRkxBUU1jam13Qk5PNTZMUDF4SUp6Y2RWSkJOOTdYMTlOTFZJbTFz?=
- =?utf-8?B?NmhLemNYOHBKYlFPWmVaTHhQeXBKdFFkOTBxU2hpRmt6S0g4a0VQRWp6ZXk2?=
- =?utf-8?B?Nnl3eG5hUWgzSGtCN25ONGFYeVFqSmJlQ2QzNml4VDIydU5qVVlGSDArTzE0?=
- =?utf-8?B?OGpXWkFGejBrRzZZN3pSS2pZTlMrdjBGOUdLTUdyRUhNZXJVNVRmRlBESHdk?=
- =?utf-8?B?S2I2M29SY1BPeGhhQ21TTXdCakhsanpnL09mbU1jOXdmK05FS3FFOHRiREJp?=
- =?utf-8?B?Y3VMZE41UHN2OW5VZHVmWCs0Z2dSdXdibEQvK3N4VVpKSjR3WWEzSnk4eHJH?=
- =?utf-8?B?NmtpcXo3dk4wRk1RU2ZGN2JQQUFtVmx0aDdraHpjUy9GVWtSR09YQkhXb0hx?=
- =?utf-8?B?cElocFBLazdhZU9ZZG5LZVhwV2d4VkxaWExqbVZsU2pudDlHcHY2SUtWZVpl?=
- =?utf-8?B?ZXdPQW1EcTQ5cFpvTDZMeUJBNzRCdjVZVDBuWG0zM1U2Nld3eVYzOUFuRjZm?=
- =?utf-8?B?dzZiVXVLR0lBMHBLaTd1VitaYmd5cWUzSUlxRWF1ZUFQemhtaDh4UWhHWFE1?=
- =?utf-8?B?OWo2R3JCMi94L25jbDVSNUdieks0Q3A4WEN5MXEvVEdtblpsWmVlWktYRXlx?=
- =?utf-8?Q?4jq7FBgd8PkBYsbFrbcaIB+K5Gz53UnbkeN6BWSBdg3A=3D?=
-X-OriginatorOrg: sct-15-20-8534-20-msonline-outlook-9bdce.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 17f1db0f-6c95-452b-d28d-08de2a080441
-X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Nov 2025 20:45:05.5154 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2P194MB2448
-X-Mailman-Approved-At: Sun, 23 Nov 2025 00:34:52 +0100
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:owJWCXhIUq2PPnR6EnQQo/lI7rfHqrP3jsdmCmNPRrcj9Bi2i7O
+ TooA9U3+ZYGu7+MC9AFJd3kbKpfLl9Be9o6PCn6CbUb4d9bvkEr0tgCJPuVFccVcY0ylgSC
+ WJ/M/kSf36N6uiYoG5xbTBKjQFIFfjC7KP9mm5E0gvLVYa+3Vq7cAOucUpmIahIq0MWWWpw
+ /9EDeZc3LbehP6YbVk76A==
+UI-OutboundReport: notjunk:1;M01:P0:I9aB7laaqjU=;gE+F3urUSO11XTLpxX6a6k+0gui
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,31 +147,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-lthreads is of size MAX_THREADS, hence id must be lower than
-MAX_THREADS to avoid any potential buffer overflow in
-thread_start function.
+We invoke the ut command in test_ut.py. Currently we only check for
+failures. Instead we should also indicate if sub-tests were skipped.
 
-Signed-off-by: Francois Berder <fberder@outlook.fr>
----
- examples/standalone/sched.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+With this change we will get output like the following for skipped tests:
 
-diff --git a/examples/standalone/sched.c b/examples/standalone/sched.c
-index 57ae67e1a5b..64518c6890f 100644
---- a/examples/standalone/sched.c
-+++ b/examples/standalone/sched.c
-@@ -261,9 +261,8 @@ static void thread_launcher (void)
- static int thread_start (int id)
- {
- 	PDEBUG ("thread_start: id=%d", id);
--	if (id <= MASTER_THREAD || id > MAX_THREADS) {
-+	if (id <= MASTER_THREAD || id >= MAX_THREADS)
- 		return RC_FAILURE;
--	}
- 
- 	if (lthreads[id].state != STATE_STOPPED)
- 		return RC_FAILURE;
--- 
-2.43.0
+test/py/tests/test_ut.py ..sssss......ss..............s.sssss.s.s...
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+SKIPPED [1] test/py/tests/test_ut.py:597: Test addrmap addrmap_test_basic =
+has 1 skipped sub-test(s).
+SKIPPED [1] test/py/tests/test_ut.py:597: Test bdinfo bdinfo_test_eth has =
+4 skipped sub-test(s).
 
+Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+=2D--
+ test/py/tests/test_ut.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index cdf54adc600..0cd4a8b6c7c 100644
+=2D-- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -11,6 +11,7 @@ import collections
+ import gzip
+ import os
+ import os.path
++import re
+ import pytest
+=20
+ import utils
+@@ -589,3 +590,9 @@ def test_ut(ubman, ut_subtest):
+     else:
+         output =3D ubman.run_command('ut ' + ut_subtest)
+     assert output.endswith('failures: 0')
++    lastline =3D output.splitlines()[-1]
++    if "skipped: 0," not in lastline:
++        match =3D re.search(r'skipped:\s*(\d+),', lastline)
++        if match:
++            count =3D match.group(1)
++            pytest.skip(f'Test {ut_subtest} has {count} skipped sub-test(=
+s).')
+=2D-=20
+2.51.0
 
