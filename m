@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECFC4CFD313
-	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 22:59:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E77DBCFD313
+	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 23:00:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF3D583CA4;
-	Sun, 23 Nov 2025 23:58:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 249A083BF1;
+	Sun, 23 Nov 2025 23:58:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XWcO84SL";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VLNGIjcY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A265983C6E; Sun, 23 Nov 2025 23:58:42 +0100 (CET)
+ id 3528E83B7E; Sun, 23 Nov 2025 23:58:46 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2FA783C94
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4669583CB8
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id E2A1844978; 
- Sun, 23 Nov 2025 22:58:08 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id E6E3444979; 
+ Sun, 23 Nov 2025 22:58:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763938689;
- bh=IMZ/smCP6jwpdQtLL/xO3KtzbCojrWMsGB6d5jTpBmY=;
+ s=20251003; t=1763938690;
+ bh=JcboA0CKaBajgrHjSPcoheYjXmk4BaKMDjkqDOJ2NhE=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=XWcO84SLz9apgXegqW8+cADaCCRS4B07sFMOyqoBt56gySfdZoid8us8BoOR3eyIY
- JmGT3LytXFNrH/Zzbcfcl4F480WFbZXoLjsn8M2kJulczI1liNvW26FWJJrPPOctQh
- wQ1q0ESWN1PXmgHv8nCQ4hrXDvl8VW2hKfXFI4O9mvmNEVJ+EmLPXwJnDPUWr9cI3Q
- SwYxA0lsoItB3iTB7J2nr47JyXUZjhu+/vfASGCrRAiWkYZxdixgs0zVnzwCgsY63B
- H2J3mXOySW7AsEsaDD0ECBO96sINOOSigeGBR6lEZlEYIwpi/Fuol+D1riRFsQaMlK
- OsXfqbgZS6+LmhvJQouUfxz4q+ivB7PQZO70h85nqoGeD6ZpZtkuU6BVUWcGlqLJlB
- QXtrs01o7RFmJg7U3qoaf+0vbuWUBTW8p2IIaczQneM+oPz7vt0XOjdfA9cCvKez4+
- TcTnLIdhEcozvMJDhbc8d3Ik3Otn/NTHVXE9wQn1UdWH3kgFshwivL0/NG0SprhYWu
- QMlMzxXLa914BEF9/BaQvjUyqZB2stcJyewkIlD0S2GWc/K+R9fub97EZvOPSGG5P5
- pTVYbWOcLWcT3QTorHeoJ61EfGByNvOFUs2wkYv26CjeOXAHoPE6iKq200sNZGueB1
- 98zT2PokbI4iH9O/97h7XwvU=
+ b=VLNGIjcYwXFTMopjpFHITmPpKBRzCrkS1PWDXZpxHrNe9aDGUGol111ljJYfVBBiO
+ JsRw5tuHZRWMYYojpaztwt0RL7qRzZgFe1w7x3UccEJ5RkGqIE46QFuXgZO3f4+A9u
+ ay0r7g4yheWEroWKeF6vMYBCTQSSbg1M616zm/MBGfCZjskVhbCSgl9aTiW8oTlmU1
+ R8C6lHJCzkaQurvSBwJRShNzT80TykoalKhujfyhhKSiuuW+thKRcVazbtfQrMLjeQ
+ 3HEMr5FMXhVNGhJGhS5Z70XUHZNPF0mv5s43bS+jYJI5qFmJ1ltjPttyWyuJO5TDu7
+ 7ET09L2yS/FD21EiaQ+SG/pKyskqqw132mqDyXsjHL70upN0xya7l7nni0knlRjkOg
+ 3Z4FiO44cxEVYZFXwPMW+qX+0+QueDEV3UMk5MJ6eNEJGM/dhIp97EgEsaKbGRbiFj
+ CvwCViu6Gk9d15cCwLskAN6kGL5GPf3qTH/cmSQpxS664VUCa1qFCBsonaXiepIRjg
+ 82R9E4kJ379EWQorp1bXto17ZKPI7y6+n3+daOOqVp12CEhdIxsJ4BtEDB8CFld7n5
+ An59kKS7nzv3cL7IqI07F2nbi3dLxwpEIQX5n8oLCrBaR2gyQ+30JSbiI4Dp6s47wc
+ dhmsz4PArxZx5+AERSOSVR10=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
@@ -66,9 +66,9 @@ Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
  Richard Weinberger <richard@nod.at>,
  Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 13/19] malta: increase SYS_MALLOC_F_LEN and SYS_MALLOC_LEN
-Date: Sun, 23 Nov 2025 23:57:05 +0100
-Message-ID: <20251123225711.227016-14-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 14/19] test: consider endianness in print_display_buffer
+Date: Sun, 23 Nov 2025 23:57:06 +0100
+Message-ID: <20251123225711.227016-15-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
 References: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
@@ -90,69 +90,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If CONFIG_CONSOLE_RECORD_INIT_F=y we need additional memory according to
-CONFIG_CONSOLE_RECORD_OUT_SIZE_F. Similarly CONFIG_SYS_MALLOC_LEN must be
-increased by CONSOLE_RECORD_OUT_SIZE.
-
-Go with the default values for CONFIG_CONSOLE_RECORD_INIT_F and
-CONFIG_SYS_MALLOC_LEN.
+Hexdumps for types other then byte look different in dependence of the
+endianness.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- configs/malta64_defconfig   | 2 --
- configs/malta64el_defconfig | 2 --
- configs/malta_defconfig     | 2 --
- configs/maltael_defconfig   | 2 --
- 4 files changed, 8 deletions(-)
+ test/common/print.c | 39 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
-diff --git a/configs/malta64_defconfig b/configs/malta64_defconfig
-index d1211b07f8a..e927be3b38e 100644
---- a/configs/malta64_defconfig
-+++ b/configs/malta64_defconfig
-@@ -1,7 +1,5 @@
- CONFIG_MIPS=y
- CONFIG_TEXT_BASE=0xFFFFFFFFBE000000
--CONFIG_SYS_MALLOC_LEN=0x20000
--CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="mti,malta"
-diff --git a/configs/malta64el_defconfig b/configs/malta64el_defconfig
-index b9573dc79f4..ac3039ec744 100644
---- a/configs/malta64el_defconfig
-+++ b/configs/malta64el_defconfig
-@@ -1,7 +1,5 @@
- CONFIG_MIPS=y
- CONFIG_TEXT_BASE=0xFFFFFFFFBE000000
--CONFIG_SYS_MALLOC_LEN=0x20000
--CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="mti,malta"
-diff --git a/configs/malta_defconfig b/configs/malta_defconfig
-index dfa37d1ddd9..da0ac95ae13 100644
---- a/configs/malta_defconfig
-+++ b/configs/malta_defconfig
-@@ -1,7 +1,5 @@
- CONFIG_MIPS=y
- CONFIG_TEXT_BASE=0xBE000000
--CONFIG_SYS_MALLOC_LEN=0x20000
--CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="mti,malta"
-diff --git a/configs/maltael_defconfig b/configs/maltael_defconfig
-index d016115a027..663e9197726 100644
---- a/configs/maltael_defconfig
-+++ b/configs/maltael_defconfig
-@@ -1,7 +1,5 @@
- CONFIG_MIPS=y
- CONFIG_TEXT_BASE=0xBE000000
--CONFIG_SYS_MALLOC_LEN=0x20000
--CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_SECT_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="mti,malta"
+diff --git a/test/common/print.c b/test/common/print.c
+index 23109188317..27fdb444d0d 100644
+--- a/test/common/print.c
++++ b/test/common/print.c
+@@ -202,21 +202,36 @@ static int print_display_buffer(struct unit_test_state *uts)
+ 
+ 	/* 16-bit */
+ 	print_buffer(0, buf, 2, 9, 0);
++#ifdef __BIG_ENDIAN
++	ut_assert_nextline("00000000: 0011 2233 4455 6677 8899 aabb ccdd eeff  ..\"3DUfw........");
++	ut_assert_nextline("00000010: 1000                                     ..");
++#else
+ 	ut_assert_nextline("00000000: 1100 3322 5544 7766 9988 bbaa ddcc ffee  ..\"3DUfw........");
+ 	ut_assert_nextline("00000010: 0010                                     ..");
++#endif
+ 	ut_assert_console_end();
+ 
+ 	/* 32-bit */
+ 	print_buffer(0, buf, 4, 5, 0);
++#ifdef __BIG_ENDIAN
++	ut_assert_nextline("00000000: 00112233 44556677 8899aabb ccddeeff  ..\"3DUfw........");
++	ut_assert_nextline("00000010: 10000000                             ....");
++#else
+ 	ut_assert_nextline("00000000: 33221100 77665544 bbaa9988 ffeeddcc  ..\"3DUfw........");
+ 	ut_assert_nextline("00000010: 00000010                             ....");
++#endif
+ 	ut_assert_console_end();
+ 
+ 	/* 64-bit */
+ 	if (MEM_SUPPORT_64BIT_DATA) {
+ 		print_buffer(0, buf, 8, 3, 0);
++#ifdef __BIG_ENDIAN
++		ut_assert_nextline("00000000: 0011223344556677 8899aabbccddeeff  ..\"3DUfw........");
++		ut_assert_nextline("00000010: 1000000000000000                   ........");
++#else
+ 		ut_assert_nextline("00000000: 7766554433221100 ffeeddccbbaa9988  ..\"3DUfw........");
+ 		ut_assert_nextline("00000010: 0000000000000010                   ........");
++#endif
+ 		ut_assert_console_end();
+ 	}
+ 
+@@ -313,29 +328,53 @@ static int print_do_hex_dump(struct unit_test_state *uts)
+ 
+ 	/* 16-bit */
+ 	print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 2, buf, 0x12, true);
++#ifdef __BIG_ENDIAN
++	ut_assert_nextline("%0*lx: 0011 2233 4455 6677 8899 aabb ccdd eeff  ..\"3DUfw........",
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
++	ut_assert_nextline("%0*lx: 1000                                     ..",
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
++			   addr + 0x10UL);
++#else
+ 	ut_assert_nextline("%0*lx: 1100 3322 5544 7766 9988 bbaa ddcc ffee  ..\"3DUfw........",
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
+ 	ut_assert_nextline("%0*lx: 0010                                     ..",
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+ 			   addr + 0x10UL);
++#endif
+ 	ut_assert_console_end();
+ 
+ 	/* 32-bit */
+ 	print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 4, buf, 0x14, true);
++#ifdef __BIG_ENDIAN
++	ut_assert_nextline("%0*lx: 00112233 44556677 8899aabb ccddeeff  ..\"3DUfw........",
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
++	ut_assert_nextline("%0*lx: 10000000                             ....",
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
++			   addr + 0x10UL);
++#else
+ 	ut_assert_nextline("%0*lx: 33221100 77665544 bbaa9988 ffeeddcc  ..\"3DUfw........",
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
+ 	ut_assert_nextline("%0*lx: 00000010                             ....",
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+ 			   addr + 0x10UL);
++#endif
+ 	ut_assert_console_end();
+ 
+ 	/* 64-bit */
+ 	print_hex_dump("", DUMP_PREFIX_ADDRESS, 16, 8, buf, 0x18, true);
++#ifdef __BIG_ENDIAN
++	ut_assert_nextline("%0*lx: 0011223344556677 8899aabbccddeeff  ..\"3DUfw........",
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
++	ut_assert_nextline("%0*lx: 1000000000000000                   ........",
++			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
++			   addr + 0x10UL);
++#else
+ 	ut_assert_nextline("%0*lx: 7766554433221100 ffeeddccbbaa9988  ..\"3DUfw........",
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
+ 	ut_assert_nextline("%0*lx: 0000000000000010                   ........",
+ 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
+ 			   addr + 0x10UL);
++#endif
+ 	ut_assert_console_end();
+ 
+ 	/* ASCII */
 -- 
 2.51.0
 
