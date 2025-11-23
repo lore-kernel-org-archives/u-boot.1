@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E77DBCFD313
-	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 23:00:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2CD0CFD313
+	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 23:00:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 249A083BF1;
-	Sun, 23 Nov 2025 23:58:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5EAA883CBD;
+	Sun, 23 Nov 2025 23:58:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VLNGIjcY";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="E3mk4dWl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3528E83B7E; Sun, 23 Nov 2025 23:58:46 +0100 (CET)
+ id 3F3BB83B7E; Sun, 23 Nov 2025 23:58:50 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4669583CB8
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66B3A83CB8
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id E6E3444979; 
- Sun, 23 Nov 2025 22:58:09 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 1EFA94497A; 
+ Sun, 23 Nov 2025 22:58:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763938690;
- bh=JcboA0CKaBajgrHjSPcoheYjXmk4BaKMDjkqDOJ2NhE=;
+ s=20251003; t=1763938692;
+ bh=V7Ke1EIgRzV2RtnN8ktp27I63eN26vqO8xzGDo6VFWo=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=VLNGIjcYwXFTMopjpFHITmPpKBRzCrkS1PWDXZpxHrNe9aDGUGol111ljJYfVBBiO
- JsRw5tuHZRWMYYojpaztwt0RL7qRzZgFe1w7x3UccEJ5RkGqIE46QFuXgZO3f4+A9u
- ay0r7g4yheWEroWKeF6vMYBCTQSSbg1M616zm/MBGfCZjskVhbCSgl9aTiW8oTlmU1
- R8C6lHJCzkaQurvSBwJRShNzT80TykoalKhujfyhhKSiuuW+thKRcVazbtfQrMLjeQ
- 3HEMr5FMXhVNGhJGhS5Z70XUHZNPF0mv5s43bS+jYJI5qFmJ1ltjPttyWyuJO5TDu7
- 7ET09L2yS/FD21EiaQ+SG/pKyskqqw132mqDyXsjHL70upN0xya7l7nni0knlRjkOg
- 3Z4FiO44cxEVYZFXwPMW+qX+0+QueDEV3UMk5MJ6eNEJGM/dhIp97EgEsaKbGRbiFj
- CvwCViu6Gk9d15cCwLskAN6kGL5GPf3qTH/cmSQpxS664VUCa1qFCBsonaXiepIRjg
- 82R9E4kJ379EWQorp1bXto17ZKPI7y6+n3+daOOqVp12CEhdIxsJ4BtEDB8CFld7n5
- An59kKS7nzv3cL7IqI07F2nbi3dLxwpEIQX5n8oLCrBaR2gyQ+30JSbiI4Dp6s47wc
- dhmsz4PArxZx5+AERSOSVR10=
+ b=E3mk4dWlDRdVrOCz3x0Hkg5Z9pp0oJ8f8/l1StmRfk5DjpdHvBxQlgK25geKFePOP
+ 4NyTLmamgl9sNtC+MorQ4d4/ExTQn8QtnDs5A50vMgqvHnEP2lyENeaTlXbPs0idt4
+ n7uonAIBOdrB9//lQEKTqR6kDP8OY/+JMgjSiL7/lPuteZU3jmX4iYrqtux2/NZIAy
+ mUBwTsiLEFF0PzzK3ASPYrTCSGaLpQaMvNZ2Q5JK/gIyGBxFL5Z4qlViuFPCDmUjqb
+ se9XUAUJHyAJ6WN3gejCJOC4bJFU9Tt4sanXHf0mDDTyORXUUnp7lV21O0cTDye/Y7
+ 15a4SKWuDIt16waBjRYeM4MLDA5Cz1EMAhGd7GZNs/kD1nJL0cjGxut886leS3ieSH
+ Qv9cNulHZ2WBCHxTPnFz/atRg2DcSkepaXDZCECEZgOATwub/TxWq1ez5AkyMXaul/
+ fAvwaT0BHYeVuOO7fceQ3OG2HjFu3dr39mHptOnzNXh95suTvnemmMmi9gEBT09dRH
+ pLHdfgePI4Sv4ukwDkAEPNMOBoLM041YBZJpg6Dz12ATkCty3jXyifvn9KPHIT6EDq
+ tSYOjYjibskWR63WhiH/jkLbWTIMHTH/EIZrfBdvxHeG3ITzQUXNhsxPXLecIKW+cv
+ /VCRUIG1cIMEIFtx42upMDZM=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
@@ -66,9 +66,9 @@ Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
  Richard Weinberger <richard@nod.at>,
  Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 14/19] test: consider endianness in print_display_buffer
-Date: Sun, 23 Nov 2025 23:57:06 +0100
-Message-ID: <20251123225711.227016-15-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 15/19] test: fix cmt/msr test
+Date: Sun, 23 Nov 2025 23:57:07 +0100
+Message-ID: <20251123225711.227016-16-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
 References: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
@@ -90,109 +90,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hexdumps for types other then byte look different in dependence of the
-endianness.
+The original value of the first variable msr (0x200) is not controlled by
+U-Boot. Don't make any assumption.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/common/print.c | 39 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+ test/cmd/msr.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/test/common/print.c b/test/common/print.c
-index 23109188317..27fdb444d0d 100644
---- a/test/common/print.c
-+++ b/test/common/print.c
-@@ -202,21 +202,36 @@ static int print_display_buffer(struct unit_test_state *uts)
- 
- 	/* 16-bit */
- 	print_buffer(0, buf, 2, 9, 0);
-+#ifdef __BIG_ENDIAN
-+	ut_assert_nextline("00000000: 0011 2233 4455 6677 8899 aabb ccdd eeff  ..\"3DUfw........");
-+	ut_assert_nextline("00000010: 1000                                     ..");
-+#else
- 	ut_assert_nextline("00000000: 1100 3322 5544 7766 9988 bbaa ddcc ffee  ..\"3DUfw........");
- 	ut_assert_nextline("00000010: 0010                                     ..");
-+#endif
+diff --git a/test/cmd/msr.c b/test/cmd/msr.c
+index e9a152ee5bf..7512c83338a 100644
+--- a/test/cmd/msr.c
++++ b/test/cmd/msr.c
+@@ -12,14 +12,14 @@
+ static int cmd_test_msr(struct unit_test_state *uts)
+ {
+ 	ut_assertok(run_commandf("msr read 200"));
+-	ut_assert_nextline("00000000 ffe00006");
++	ut_assert_nextlinen("0000");
  	ut_assert_console_end();
  
- 	/* 32-bit */
- 	print_buffer(0, buf, 4, 5, 0);
-+#ifdef __BIG_ENDIAN
-+	ut_assert_nextline("00000000: 00112233 44556677 8899aabb ccddeeff  ..\"3DUfw........");
-+	ut_assert_nextline("00000010: 10000000                             ....");
-+#else
- 	ut_assert_nextline("00000000: 33221100 77665544 bbaa9988 ffeeddcc  ..\"3DUfw........");
- 	ut_assert_nextline("00000010: 00000010                             ....");
-+#endif
- 	ut_assert_console_end();
+ 	/* change the first variable msr and see it reflected in the mtrr cmd */
+ 	ut_assertok(run_commandf("mtrr"));
+ 	ut_assert_nextline("CPU 65537:");
+ 	ut_assert_nextlinen("Reg");
+-	ut_assert_nextlinen("0   Y     Back         00000000ffe00000");
++	ut_assert_nextlinen("0   Y     Back");
+ 	ut_assertok(console_record_reset_enable());
  
- 	/* 64-bit */
- 	if (MEM_SUPPORT_64BIT_DATA) {
- 		print_buffer(0, buf, 8, 3, 0);
-+#ifdef __BIG_ENDIAN
-+		ut_assert_nextline("00000000: 0011223344556677 8899aabbccddeeff  ..\"3DUfw........");
-+		ut_assert_nextline("00000010: 1000000000000000                   ........");
-+#else
- 		ut_assert_nextline("00000000: 7766554433221100 ffeeddccbbaa9988  ..\"3DUfw........");
- 		ut_assert_nextline("00000010: 0000000000000010                   ........");
-+#endif
- 		ut_assert_console_end();
- 	}
- 
-@@ -313,29 +328,53 @@ static int print_do_hex_dump(struct unit_test_state *uts)
- 
- 	/* 16-bit */
- 	print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 2, buf, 0x12, true);
-+#ifdef __BIG_ENDIAN
-+	ut_assert_nextline("%0*lx: 0011 2233 4455 6677 8899 aabb ccdd eeff  ..\"3DUfw........",
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
-+	ut_assert_nextline("%0*lx: 1000                                     ..",
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   addr + 0x10UL);
-+#else
- 	ut_assert_nextline("%0*lx: 1100 3322 5544 7766 9988 bbaa ddcc ffee  ..\"3DUfw........",
- 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
- 	ut_assert_nextline("%0*lx: 0010                                     ..",
- 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
- 			   addr + 0x10UL);
-+#endif
- 	ut_assert_console_end();
- 
- 	/* 32-bit */
- 	print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 4, buf, 0x14, true);
-+#ifdef __BIG_ENDIAN
-+	ut_assert_nextline("%0*lx: 00112233 44556677 8899aabb ccddeeff  ..\"3DUfw........",
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
-+	ut_assert_nextline("%0*lx: 10000000                             ....",
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   addr + 0x10UL);
-+#else
- 	ut_assert_nextline("%0*lx: 33221100 77665544 bbaa9988 ffeeddcc  ..\"3DUfw........",
- 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
- 	ut_assert_nextline("%0*lx: 00000010                             ....",
- 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
- 			   addr + 0x10UL);
-+#endif
- 	ut_assert_console_end();
- 
- 	/* 64-bit */
- 	print_hex_dump("", DUMP_PREFIX_ADDRESS, 16, 8, buf, 0x18, true);
-+#ifdef __BIG_ENDIAN
-+	ut_assert_nextline("%0*lx: 0011223344556677 8899aabbccddeeff  ..\"3DUfw........",
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
-+	ut_assert_nextline("%0*lx: 1000000000000000                   ........",
-+			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
-+			   addr + 0x10UL);
-+#else
- 	ut_assert_nextline("%0*lx: 7766554433221100 ffeeddccbbaa9988  ..\"3DUfw........",
- 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, addr);
- 	ut_assert_nextline("%0*lx: 0000000000000010                   ........",
- 			   IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8,
- 			   addr + 0x10UL);
-+#endif
- 	ut_assert_console_end();
- 
- 	/* ASCII */
+ 	/* change the type from 6 to 5 */
 -- 
 2.51.0
 
