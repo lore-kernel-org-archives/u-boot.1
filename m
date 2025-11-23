@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A192CFD2F6
-	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 22:59:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE56CFD313
+	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 22:59:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C2F283C5A;
-	Sun, 23 Nov 2025 23:58:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 641A283C72;
+	Sun, 23 Nov 2025 23:58:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Eqqd+1px";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VGtlX5+A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6CEC83B7E; Sun, 23 Nov 2025 23:58:34 +0100 (CET)
+ id 68EE483C8C; Sun, 23 Nov 2025 23:58:39 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAF1483C6C
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80F0383C6E
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6617944975; 
- Sun, 23 Nov 2025 22:58:04 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id CE76744976; 
+ Sun, 23 Nov 2025 22:58:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763938685;
- bh=JnLuJaRuRCY0kVWOlnEMGf3wD7atdkVqTuUsXyoJ5mY=;
+ s=20251003; t=1763938686;
+ bh=88nYkNDoV0od7f/iEJIKBhkgFfydllykeCwDWdiYY0M=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=Eqqd+1pxMz1Q1wtK+Jq0Y79ZV+qa9EBWk22PWfPeRI4ciGjl7FjuIeOMKgp/XtNm+
- 0mdCy6Ay8eBrL6PPxBldC71lP8CjQ8nCu+Hzw+dqXie/vaxFcCGy4sVU/4uKW/rdg/
- f9rml3NbyX9heagAC4ohqgdZmpXGDdnyzOnZpFL63oASzMq+SCuIDSTGvlDrxTOli7
- pSL5X+PTl1iom0YVEofz0xC/gMHZRwUq/yjIl/z41FiqEiKIyvHRWEaMKwivGOGUKs
- uLi+ospaEVOvBHyuKuNb81iRcKHq0s3aP/sSzozJ54Y3Y025530mrueh9PDSFhMSTo
- v+nnJ/ZI6uYCfC/wrX91ECYiSz1JLafaMiydkDWwh91qecHN9VvqjUoqGWkIraLo0Q
- PCU0tXmHAHUHViTv3v6wRyrEmVSiRrwoKu4xSOjKtG/SaomCtYIjWjxMzhGH8R196x
- U5AQCNYq2qw49mz8tFoq7VmU2cj4v7BGjXWw2r4hmiM8k3ZOQUkpp6eWXSVZW3rTZd
- Q8/O4uz2926JEtbpzZNI8/ni+qj65M6GavfVQ31OX0iCMGZRIyEnFLITgOXECZnDI6
- X08ssCsR3xrSd2uGon2OvhNkWCGwLxsTLoIfi16AHRsf/a4edTEyUVkDsoFUV+u29L
- F0EnZMgCAzg+KZ4MtPrTce6E=
+ b=VGtlX5+AkU3mbb/61zTMxpjtIl2F4BdWNB9mtAUoolnghyCzMTD3knXGIPtlcYVIZ
+ L7R+54dXxbuWBklIr6V8ktTOCwjwlmPu73V1Irrh+Y297ZKQLRkVjYQQFzVSpTyXyZ
+ x3AS6oElBeyZ3DTua8NqTLJh9UGKI06zHOx0v0Tab0J3LOleRjLAKZOiQ0xMv4ch2D
+ enToIMZGCtVESVOWzQpVaC5sXDzjGvZiAMK2b4qNuDbVxelZQIbGKt98Yf5XKXXeCX
+ L7b9Cx1iQtfqWoKRGVZHn21U2C4jLAeRC6KOqfXFUqRFUcCSrlX2Lp+WxZeI2z/R+O
+ L81iGDR+xzL6Na4GouqK9v3x0ct+UOFNpRgpVUpEALkSORLsuYTGpVDIJMAU3YPg4d
+ 4xlBhit6zXs/xCtOyqVf21m18PU5floG59KmOgh3Sh/slM3ccRrXc0zGEwu34/QSgz
+ X7Zr6xgXZWBHiFyrkxyGi9IpnU2IyBJFl44j4b1uyZkd8ad4Z5At4a553H2Mgo6iH1
+ ZSkymAErMcY/sJJDKLFX5FJra6S70Dubn4CKhYkgGxHQog6Q1pxHE2IwDY7NtKFKHx
+ Jvhv4ysrzsvhEg+yhdpxd1LSkYlCaiQQvgrgZwMZw2e8wyOQTfWBP+JBhm3Fozj4hO
+ 0sDAUjCM5h574trwc+deGZr8=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
@@ -66,9 +66,9 @@ Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
  Richard Weinberger <richard@nod.at>,
  Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 10/19] test: the cmd/font test requires the sandbox
-Date: Sun, 23 Nov 2025 23:57:02 +0100
-Message-ID: <20251123225711.227016-11-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 11/19] test: correct comments in test/cmd/font.c
+Date: Sun, 23 Nov 2025 23:57:03 +0100
+Message-ID: <20251123225711.227016-12-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
 References: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
@@ -90,34 +90,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The font test makes assumptions about video devices and selected fonts that
-may not hold true on other configurations like qemu-x86_64_defconfig.
+The test relates to the 'font' and not to the 'fdt' command.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/cmd/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ test/cmd/font.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index d7ff11e458a..2476068aee6 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -19,7 +19,6 @@ endif
- obj-$(CONFIG_CMD_BDI) += bdinfo.o
- obj-$(CONFIG_COREBOOT_SYSINFO) += coreboot.o
- obj-$(CONFIG_CMD_FDT) += fdt.o
--obj-$(CONFIG_CONSOLE_TRUETYPE) += font.o
- obj-$(CONFIG_CMD_HASH) += hash.o
- obj-$(CONFIG_CMD_HISTORY) += history.o
- obj-$(CONFIG_CMD_I3C) += i3c.o
-@@ -33,6 +32,7 @@ endif
- obj-$(CONFIG_CMD_QFW) += qfw.o
- obj-$(CONFIG_CMD_SEAMA) += seama.o
- ifdef CONFIG_SANDBOX
-+obj-$(CONFIG_CONSOLE_TRUETYPE) += font.o
- obj-$(CONFIG_CMD_MBR) += mbr.o
- obj-$(CONFIG_CMD_PINMUX) += pinmux.o
- obj-$(CONFIG_CMD_PWM) += pwm.o
+diff --git a/test/cmd/font.c b/test/cmd/font.c
+index 7ae648d7395..5c52f359a57 100644
+--- a/test/cmd/font.c
++++ b/test/cmd/font.c
+@@ -10,10 +10,10 @@
+ #include <video_console.h>
+ #include <test/ut.h>
+ 
+-/* Declare a new fdt test */
++/* Declare a new font test */
+ #define FONT_TEST(_name, _flags)	UNIT_TEST(_name, _flags, font)
+ 
+-/* Test 'fdt addr' resizing an fdt */
++/* Test the 'font' command */
+ static int font_test_base(struct unit_test_state *uts)
+ {
+ 	struct udevice *dev;
 -- 
 2.51.0
 
