@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF671CFD316
-	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 21:34:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48AF8CFD313
+	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 22:58:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D58E783B85;
-	Sun, 23 Nov 2025 22:34:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6D38383B85;
+	Sun, 23 Nov 2025 23:57:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ERgY+1cq";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SzpY+ycu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5210583B91; Sun, 23 Nov 2025 22:34:36 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id F277B83BD2; Sun, 23 Nov 2025 23:57:56 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97D4183A79
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 22:34:33 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+ by phobos.denx.de (Postfix) with ESMTPS id 9D71B83B7E
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:57:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dF2KM1Yqlz9sVN;
- Sun, 23 Nov 2025 22:34:31 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1763933671;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=CVQy1fdfYacQb7wu5iewOANdn6hZwCsaYQm7T10dszs=;
- b=ERgY+1cq8rwuVg2lsYjkHE1YMbp9NZn5XN11FoCA5l0un4lNpNLsNFvoJC/SZzhx7MKQ5t
- H5O5zxgi6K6Yh4TC4I6h1OVlwQsTHoSSZiaRMkB45q8yB8l1laokXuGqhmh4fNmkFSD05o
- IKSPN8CaAVjaflD7WVGpyPCkBZwkNTvbDmymUQ+KW+xeyIlJvuw/wgU8oSgmZeoxnN1pwR
- yYJxYhg6k671vcoAu3VwLRXxCV5HJdQeyUugBPfNbH7wCGWDl0y1nf+BidQI95uz3PcviK
- +dqFSPDk61hE6Cac9MWwTEkXsMo/HxAeIevxU2gpEV/odPhi3jygvZN/C04uEQ==
-Message-ID: <f94e70c5-e211-46ee-9e4e-9a8f44c82cc6@mailbox.org>
-Date: Sun, 23 Nov 2025 21:39:51 +0100
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id AEE933F7C6; 
+ Sun, 23 Nov 2025 22:57:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1763938672;
+ bh=4ZQtk9wnumGiqkvyWPmGjN3CcaXSV67BiIDCQGQl/H0=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=SzpY+ycultC32118MfSDmTQPNDAZxBozY/OZ3iLoGcH5PctiyKnAlf/9xf+Nb0ZO/
+ zmlvMoVXo0cJ/CFSg+LJaQ1EchPD0Ta6K0P6Bys9HTACUnFl3ikpCS5O90ZR0IN/C3
+ wbpDALc5olnBmJKhr4IDIba7Dw0dqJFNtVyD55Ti/Tg+crWVHbBEI/0GKfcSXaXILr
+ hVMeQoPY+U0bv3tKDk3Az3ym1/owTP6jJlYI/8mAIkK1dSnimlcvN8O9jXm3PA3Swo
+ biWWuvs6f9hcwOzfA7nlSOCR3WRrVOOAPpprJFsF81BGcy3nJkR27byIwALUg11wwh
+ WTxUO1Nju9wN4eHHZpCxkvpZFf7qDglgQFSJpoeOibdirQXJ+Ty5FPnvx6F9TxvYIP
+ TBQ7X1oWmLNn21su2hpIqu91ku65svOqTcc0FXWDqV5STEOk0A3NRc47du0YcrnLYr
+ RtqTmKHozKxBjVWuDWN43gXgg/faibYPCKCXcXUtspROYG5bPFbgWQoIO85M5TfdYa
+ xcn5VeyBqAZVmBSSUqq1LRUuJaDIhKeFBwD3nb9DkfZAGdy1pkvEXD8zQCvTx+KthP
+ nBkKvYdOGmafRkBd4vtm369grrXeynfvMdCYNRSN/zF924/aeUBwp1RCpan0BGmOsp
+ F3n86hFUAJqLo1EnN8+aSlNI=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
+ Alexander Graf <agraf@csgraf.de>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?q?Jo=C3=A3o=20Paulo=20Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Heiko Schocher <hs@nabladev.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Richard Weinberger <richard@nod.at>,
+ Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 00/19] test: let UNIT_TEST imply CONSOLE_RECORD
+Date: Sun, 23 Nov 2025 23:56:52 +0100
+Message-ID: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-From: Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [RFC PATCH 0/5] drivers: usb: dwc3: sync code with Linux v6.16-rc1
-To: Jerome Forissier <jerome.forissier@linaro.org>,
- U-Boot mailing list <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>,
- Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Eddie Cai <eddie.cai.linux@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes
- <ravi@prevas.dk>, Ryder Lee <ryder.lee@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Stephan Gerhold
- <stephan.gerhold@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Zixun LI <admin@hifiphile.com>
-References: <20251121153812.2076440-1-jerome.forissier@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20251121153812.2076440-1-jerome.forissier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: e40e672ee6e1919bdc9
-X-MBO-RS-META: yf7hy1h6akwbggg6uspemq1s7exd4muz
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,47 +87,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/21/25 4:37 PM, Jerome Forissier wrote:
-> The DWC3 USB driver was forked from the Linux kernel v3.19-rc1 eleven
-> years ago by commit 85d5e7075f33 ("usb: dwc3: add dwc3 folder from linux
-> kernel to u-boot"). Since then, not many kernel changes have been ported
-> back into to U-Boot. This series is an attempt at synchronizing the code
-> with a somewhat current kernel (namely, v6.16.rc7 which was the latest
-> released when this effort was started).
-> 
-> - The first three commits ("usb: dwc3: re-import from kernel v6.16-rc7",
->    "usb: host: re-import xhci-ext-caps.h from kernel", usb: gadget:
->    re-import epautoconf.c from kernel v6.16-rc7" and "usb: udc: re-import
->    udc-core.c from kernel v6.16-rc7") replace files with their counterpart
->    from the kernel, unmodified.
-> - The last commit ("usb: fix build after resync of DWC3 with kernel
->    v6.16-rc7") makes the necessary changes to adapt to U-Boot and fix the
->    build.
-> 
-> Note that this is mostly compile-tested only. The CI pipeline on
-> source.denx.de was used as a OK/NOK indicator [0]. Only one config was
-> actually tested on real hardware: xilinx_zynqmp_kria_defconfig. With the
-> help of a custom build script [1] and with an additional patch [2], I
-> could boot the Kria KV260 board and make it detect a USB SSD plugged into
-> one of its USB 3.0 ports. It certainly doesn't mean all platforms using
-> the DWC3 driver are still OK, but at least there is some hope. If this
-> breaks your platform I'd like to know, and if you can send a fix it's
-> even better.
-> 
-> I realize this is a big change and I did it this way essentially to get
-> going and be able to post this RFC. But I am not saying this is the way
-> the re-sync has to be done. Feedback is welcome.
+Many C unit tests are not executed if CONFIG_CONSOLE_RECORD is not set.
+Hence Tom suggested to let UNIT_TEST imply CONSOLE_RECORD.
 
-Thank you for doing this.
+The first patch makes the skipped C unit tests visible.
 
-Do you plan to sync this further to 6.18 ?
+The rest of the series deals with hidden bugs in our tests.
 
-I will also ask the usual question -- would it be possible to 
-cherry-pick this from old Linux until current state commit-by-commit ?
+The 'fdt get value' command returned incorrect values on low-endian
+systems. So this needed fixing too.
 
-I can imagine the process would be:
-- Identify which Linux kernel commit was used as a starting point for 
-the U-Boot DWC3 driver
-- Undo all changes from the U-Boot DWC3 driver applied since
-- Cherry-pick new Linux kernel patches
-- Check what might be missing
+Sorry Tom that the seris is so long. Most of the patches can be applied
+independently. But all but the first are prerequisite for letting
+UNIT_TEST imply CONSOLE_RECORD.
+
+Gitlab CI results are here:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/28488
+
+Heinrich Schuchardt (19):
+  test: Let pytest indicate skipped C unit tests
+  test: cmd/bdinfo: consider ARM architecture specific info
+  test: print_display_buffer must consider 64bit support
+  test: don't test for CONFIG_UNIT_TEST twice
+  test: print_do_hex_dump test depends on HEXDUMP
+  test: bdinfo: correct expected X86 arch info
+  test: cmd_exit_test depends on CONFIG_HUSH_PARSER
+  test: do not assume memory size 256 MiB in cmd_test_meminfo
+  ppce500: increase SYS_MALLOC_F_LEN to 0x800
+  test: the cmd/font test requires the sandbox
+  test: correct comments in test/cmd/font.c
+  test: fix bdinfo_test_all boot_params expectation
+  malta: increase SYS_MALLOC_F_LEN and SYS_MALLOC_LEN
+  test: consider endianness in print_display_buffer
+  test: fix cmt/msr test
+  test: relax cread_test time constraint
+  test: cmd/bdinfo: consider PPC architecture specific info
+  cmd: fix 'fdt get value'
+  test: let UNIT_TEST imply CONSOLE_RECORD
+
+ cmd/fdt.c                      | 26 ++++++++------
+ configs/malta64_defconfig      |  2 --
+ configs/malta64el_defconfig    |  2 --
+ configs/malta_defconfig        |  2 --
+ configs/maltael_defconfig      |  2 --
+ configs/qemu-ppce500_defconfig |  1 +
+ test/Kconfig                   |  2 ++
+ test/Makefile                  |  4 +--
+ test/cmd/Makefile              |  4 +--
+ test/cmd/bdinfo.c              | 62 ++++++++++++++++++++++++++++++++--
+ test/cmd/fdt.c                 |  2 +-
+ test/cmd/font.c                |  4 +--
+ test/cmd/meminfo.c             |  2 +-
+ test/cmd/msr.c                 |  4 +--
+ test/common/cread.c            |  9 ++---
+ test/common/print.c            | 53 ++++++++++++++++++++++++++---
+ test/py/tests/test_ut.py       |  7 ++++
+ 17 files changed, 148 insertions(+), 40 deletions(-)
+
+-- 
+2.51.0
+
