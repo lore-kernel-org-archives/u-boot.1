@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F865CFA46B
-	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 14:22:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F18B0CFA46B
+	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 19:03:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75B6683B95;
-	Sun, 23 Nov 2025 15:22:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1ED5083B95;
+	Sun, 23 Nov 2025 20:03:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P74OY9oI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UH9lGQIc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B905E83BB1; Sun, 23 Nov 2025 15:22:36 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id C39A483BC8; Sun, 23 Nov 2025 20:03:12 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EE2783B91
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 15:22:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3490783B91
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 20:03:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7c6da5e3353so2573445a34.3
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 06:22:29 -0800 (PST)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-65727896f35so1861086eaf.2
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 11:03:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763907743; x=1764512543; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8TErBqhVnSoZlyh+ACYwrdAaYq1JW2YTpdC8lL213zQ=;
- b=P74OY9oIAQQst1TKLMlmjce4AJ2enskJm4Cq3juGvXgQx8DBkruhxOfWydoU8s4PB3
- jjqML/1S4MYTY0iN9xuun8ups4niJq23jZVFI6LZyHeGvZk17tics0rNmbg3IaepeHtx
- HmMoQ3ugV7C8KicA8E1NfIeoGsFi08zQpWXq8=
+ d=konsulko.com; s=google; t=1763924588; x=1764529388; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Ou03rvE1/iuWktBXsjjFCBMV98MLY65IHffVVXR+ZuU=;
+ b=UH9lGQIck8yw3dx6KHCf0FMpHTzDCDVymfEZeDMxzpHGtHXZnEKf3EWE7BFuZOc4tb
+ r/7xMGurYza+RQJMptIn8OBMjs3wkv7Vhx5JYKo98qXyfuXx06oknPSuASFEXzRorqhN
+ pKmf6DnZHPC8kRvpOP6PXK7v9hVi+zH+yT5qI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763907743; x=1764512543;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8TErBqhVnSoZlyh+ACYwrdAaYq1JW2YTpdC8lL213zQ=;
- b=k4o4hbxcZ7zaCxfYJOihBfyPg5vPnriM58hbkwS2JWdQ5aLxFSY9ye5y9BHcvp77a+
- cIJjnKW1QVo80va/F8ca6O0UWS7uTyg92Xj3FyoLbe6g2cQYOJr3NMTzuNs3cRfK96d/
- 9XidulIEg0CRfslfy688Ny4nTDrr//ASKgqs+ok8Up+ZmZ4UcFV8tyCc8ADtvYuVls5T
- VlcQlFunWfgWH/a8oM8o+abuxUS9kNmvQFx2hoM4FoZa4IGxNzPg+xGDdDlYj734Ypv5
- VNDqPJgIq7sAj/gT2LzhB+g7G/mREMBOL+j9wv5bZZUmFRh8uqVA5FAXpQpRwcOgS2Rh
- A0AQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVL7zPqoYfM/ccqPOV3egQViYZy2EUo/cE+lLBBazzLlwRTbeD5VZJcCfdN9uAI+vGPPdQ1FMo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2u+Ahjhkc0tefs2i0iYr39b8AgsrcSP05KX/hzjv4jk8kKfa4
- m925L1g0lC3MRvMYPu72agcMcfEGpm6RAKiogcHu3DR5uxgBoigzMcNoZJRKkb0jfMo=
-X-Gm-Gg: ASbGncvwltHgyQDRbUJXYJZ/FrIyA8HcffGfukMO5Iwy6Z/yJrWvytWCXyitv5zOGZY
- qGUhjbOs8oWUu4SSiAwmYOXOzXKYVUdeu8hSibvTTrp4mtyoQcGvzc7zR+bI5eNIMrKa0dA0LjR
- UOh/tjKbWA/RTZRhra+/Zwc/Ybn76sJfMnJ2KvAWyQ7Uh6Ms3DvsK3dY1Vuh7gZ7hwUgTbQUE9K
- shhqcArVyQpW8fycG5O3YucbEebKc48dn+FgoEdVHAgxYLKSfzACeBZvN8nyh4vIh4DiDOnaZIH
- 2SZVhVMKYny/DgqgDfdscVY24UQVqG91D1/niYhpMfTa2ap/iRP6up3anePqVChXWcoS0gWOuw3
- FhqpbuqynQACTRjEW2fNkQDS73CscodT3wfdrxEcJ65sYmMmUSk70KkdKrMg92cInmBbeIRuO1m
- FKHX7tpp0oRjTGNRG5KAae+8jvFA7BId2LUWcmumyX4nxDBUTbgA==
-X-Google-Smtp-Source: AGHT+IGtyc6zcRr5PN/WKPrMUbrOm0ixPyoQlFDUNnIbi5+v3AIbrjwkwvTPt3NafS0AgeW7DDB9EQ==
-X-Received: by 2002:a05:6830:6da2:b0:7c7:69c8:2d2 with SMTP id
- 46e09a7af769-7c798bc4cdcmr3746928a34.13.1763907743208; 
- Sun, 23 Nov 2025 06:22:23 -0800 (PST)
+ d=1e100.net; s=20230601; t=1763924588; x=1764529388;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ou03rvE1/iuWktBXsjjFCBMV98MLY65IHffVVXR+ZuU=;
+ b=UhO+kAxA7oo6IE/IwZG4EkA8h4KgSz7xR26lUTQ9VwWCmfs0WEUpRO34qf1NIhMHJW
+ osPbMw49yFIQ/cl67A7voX0Le8Okok42bnhDVvxMifOguZx68MBs7Vq5EFwfvmQvorRJ
+ esYOQ6zsEeoKE7tnezhX7IFK8a5/TbOv8+h/WNSscOdU5N067DTslpflLiqJS25Dq1dR
+ V7NrX9vFhckTvFtS6tHIpDfAUwR/FOzZzUIQC+09BjJyO7ReK/T2PCw1X56HNsGNXdd+
+ NvUA0Xswn7fbbk9Kk/QDNpcBWPazllZ0AjXKbLrM20uQKQ39Jm2jq/MTEKD3a/u2Ux+/
+ rXyQ==
+X-Gm-Message-State: AOJu0Yx96EBD2Hc8FnLhIJWgcn1+muj4fBS3rSK4wOu8u5ZD+dOgPfdD
+ 4qQdhwlUXfdx9s4YLIZ0N8LLhPPKyZZWsUCQYAsCCTiO2sIi5ONukwzjzoxro9nRksKykJ31cT/
+ 5wNHwvq4=
+X-Gm-Gg: ASbGncszo1+XuXduyW1zPqGIa5vxFUO5uXihpS3PQuJn6tesKBmU9wbnZ9AwDlhmUmH
+ 1zV7DPep/7YNV05YPmSq/BJncGYKUlyvtR+zjJCnMaEbq8QkYHQ+r8qxDrwW869qWViXsFtVckK
+ 1Or37FMir2p6Usj4FU1Pnp2hPnoOr743xhmJFf0kiSUpkgwoPZzu/raP1XQ+5mJUsckELslqPEd
+ s1Uhv/84CqIbEzZWxkdDbGeSuJWe98Q8B96CLQsf3/K9EipF4zRjRarWJyuBXP3FjpvcXkLDPQC
+ 23BYJOYz9VXrfONh8k6kJ5OxNeTAq8d8JZ5ps1/YcmS7VYHF7jsHl8BAJ47qXbw16yim3Y+sPbA
+ 9mSy8kdHddUtrK/f7bSBzjsLS3yck9LAEnVl13wnjS6pK3NgGIhvt2FRQLR4d5wRRWj+rYNiYgA
+ XmmwPIUwsid9plrG5YceC653IZed9Cvr5xaepHd3laZzI9M0FEC7twSzSjc4cw
+X-Google-Smtp-Source: AGHT+IHaSMKuPNXUweqyX35UHqrpyDgQew+8yjCwG7ADudsTJvaWTK0g2DB9BJxMucRwsLvsB9Z2OA==
+X-Received: by 2002:a05:6820:2d85:20b0:657:5839:fce2 with SMTP id
+ 006d021491bc7-6579253fd7bmr3082951eaf.6.1763924587705; 
+ Sun, 23 Nov 2025 11:03:07 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c78d428edfsm4456106a34.31.2025.11.23.06.22.21
+ 006d021491bc7-65782a38448sm3131324eaf.1.2025.11.23.11.03.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Nov 2025 06:22:22 -0800 (PST)
-Date: Sun, 23 Nov 2025 08:22:19 -0600
+ Sun, 23 Nov 2025 11:03:06 -0800 (PST)
+Date: Sun, 23 Nov 2025 13:03:04 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/3] board: qemu-arm: enable CONFIG_CONSOLE_RECORD
-Message-ID: <20251123142219.GH2125796@bill-the-cat>
-References: <20251123011900.91233-1-heinrich.schuchardt@canonical.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20251123190304.GI2125796@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oujjV6Qzl6gA/zW+"
+ protocol="application/pgp-signature"; boundary="9pXu1S5+GL1EnMEf"
 Content-Disposition: inline
-In-Reply-To: <20251123011900.91233-1-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,53 +97,167 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oujjV6Qzl6gA/zW+
-Content-Type: text/plain; charset=us-ascii
+--9pXu1S5+GL1EnMEf
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 23, 2025 at 02:18:57AM +0100, Heinrich Schuchardt wrote:
+Hey all,
 
-> Many C unit tests are skipped without CONFIG_CONSOLE_RECORD=3Dy.
-> Enable it for all QEMU ARM boards.
->=20
-> As a prerequisite existing tests need to be fixed:
->=20
-> Consider the ARM architecture specific fields when testing the bdinfo
-> command.
->=20
-> In the print_display_buffer test consider if the system is 64-bit.
->=20
-> Heinrich Schuchardt (3):
->   test: cmd/bdinfo: consider ARM architecture specific info
->   test: print_display_buffer must consider 64bit support
->   board: qemu-arm: enable CONFIG_CONSOLE_RECORD
->=20
->  board/emulation/qemu-arm/Kconfig |  1 +
->  test/cmd/bdinfo.c                | 28 ++++++++++++++++++++++++++++
->  test/common/print.c              | 11 +++++++----
->  3 files changed, 36 insertions(+), 4 deletions(-)
+Here's the latest report.
 
-Looking over test/ stuff quickly this morning, I think we might want to
-look at having UNIT_TEST imply CONSOLE_RECORD because there's a number
-of tests using console and if you're enabling the tests you probably
-want them to run. We should also maybe cleanup test/Makefile as it's a
-bit confusing as we only descend on $(PHASE_)UNIT_TEST being set. And if
-you just want to file issues for these and I'll take care of them at
-some point that's fine, thanks!
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Sun, Nov 23, 2025 at 12:28=E2=80=AFPM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
+
+
+Hi,
+
+Please find the latest report on new defect(s) introduced to *Das U-Boot*
+found with Coverity Scan.
+
+   - *New Defects Found:* 3
+   - 2 defect(s), reported by Coverity Scan earlier, were marked fixed in
+   the recent build analyzed by Coverity Scan.
+   - *Defects Shown:* Showing 3 of 3 defect(s)
+
+Defect Details
+
+** CID 639130:         (CHECKED_RETURN)
+/test/cmd/bdinfo.c: 166           in bdinfo_test_all()
+/test/cmd/bdinfo.c: 164           in bdinfo_test_all()
+/test/cmd/bdinfo.c: 165           in bdinfo_test_all()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 639130:           (CHECKED_RETURN)
+/test/cmd/bdinfo.c: 166             in bdinfo_test_all()
+160
+161     	ut_assertok(bdinfo_check_mem(uts));
+162
+163     	/* CONFIG_SYS_HAS_SRAM testing not supported */
+164     	ut_check_console_linen(uts, "flashstart");
+165     	ut_check_console_linen(uts, "flashsize");
+>>>     CID 639130:           (CHECKED_RETURN)
+>>>     Calling "ut_check_console_linen" without checking return value (as =
+is done elsewhere 166 out of 169 times).
+166     	ut_check_console_linen(uts, "flashoffset");
+167     	ut_assert_nextline("baudrate    =3D %lu bps",
+168     			   env_get_ulong("baudrate", 10, 1234));
+169     	ut_assertok(test_num_l(uts, "relocaddr", gd->relocaddr));
+170     	ut_assertok(test_num_l(uts, "reloc off", gd->reloc_off));
+171     	ut_assert_nextline("%-12s=3D %u-bit", "Build", (uint)sizeof(void *=
+) * 8);
+/test/cmd/bdinfo.c: 164             in bdinfo_test_all()
+158     {
+159     	ut_assertok(test_num_l(uts, "boot_params", 0));
+160
+161     	ut_assertok(bdinfo_check_mem(uts));
+162
+163     	/* CONFIG_SYS_HAS_SRAM testing not supported */
+>>>     CID 639130:           (CHECKED_RETURN)
+>>>     Calling "ut_check_console_linen" without checking return value (as =
+is done elsewhere 166 out of 169 times).
+164     	ut_check_console_linen(uts, "flashstart");
+165     	ut_check_console_linen(uts, "flashsize");
+166     	ut_check_console_linen(uts, "flashoffset");
+167     	ut_assert_nextline("baudrate    =3D %lu bps",
+168     			   env_get_ulong("baudrate", 10, 1234));
+169     	ut_assertok(test_num_l(uts, "relocaddr", gd->relocaddr));
+/test/cmd/bdinfo.c: 165             in bdinfo_test_all()
+159     	ut_assertok(test_num_l(uts, "boot_params", 0));
+160
+161     	ut_assertok(bdinfo_check_mem(uts));
+162
+163     	/* CONFIG_SYS_HAS_SRAM testing not supported */
+164     	ut_check_console_linen(uts, "flashstart");
+>>>     CID 639130:           (CHECKED_RETURN)
+>>>     Calling "ut_check_console_linen" without checking return value (as =
+is done elsewhere 166 out of 169 times).
+165     	ut_check_console_linen(uts, "flashsize");
+166     	ut_check_console_linen(uts, "flashoffset");
+167     	ut_assert_nextline("baudrate    =3D %lu bps",
+168     			   env_get_ulong("baudrate", 10, 1234));
+169     	ut_assertok(test_num_l(uts, "relocaddr", gd->relocaddr));
+170     	ut_assertok(test_num_l(uts, "reloc off", gd->reloc_off));
+
+** CID 639129:       Memory - illegal accesses  (BUFFER_SIZE)
+/drivers/clk/clk_scmi.c: 191           in scmi_clk_get_ctrl_flags()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 639129:         Memory - illegal accesses  (BUFFER_SIZE)
+/drivers/clk/clk_scmi.c: 191             in scmi_clk_get_ctrl_flags()
+185     		char name[SCMI_CLOCK_NAME_LENGTH_MAX];
+186     		ret =3D scmi_clk_get_attibute(dev, clk->id & CLK_ID_MSK,
+187     					    name, &attributes);
+188     		if (ret)
+189     			return ret;
+190
+>>>     CID 639129:         Memory - illegal accesses  (BUFFER_SIZE)
+>>>     Calling "strncpy" with a maximum size argument of 16 bytes on desti=
+nation array "clkscmi->name" of size 16 bytes might leave the destination s=
+tring unterminated.
+191     		strncpy(clkscmi->name, name, SCMI_CLOCK_NAME_LENGTH_MAX);
+192     		if (CLK_HAS_RESTRICTIONS(attributes)) {
+193     			u32 perm;
+194
+195     			ret =3D scmi_clk_get_permissions(dev, clk->id & CLK_ID_MSK, &per=
+m);
+196     			if (ret < 0)
+
+** CID 639128:       Resource leaks  (RESOURCE_LEAK)
+/drivers/clk/clk_scmi.c: 373           in scmi_clk_probe()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 639128:         Resource leaks  (RESOURCE_LEAK)
+/drivers/clk/clk_scmi.c: 373             in scmi_clk_probe()
+367     			return ret;
+368
+369     		dev_clk_dm(dev, i, &clk_scmi->clk);
+370     		dev_set_parent_priv(clk_scmi->clk.dev, priv);
+371     	}
+372
+>>>     CID 639128:         Resource leaks  (RESOURCE_LEAK)
+>>>     Variable "clk_scmi_bulk" going out of scope leaks the storage it po=
+ints to.
+373     	return 0;
+374     }
+375
+376     static int __scmi_clk_set_parent(struct clk *clk, struct clk *paren=
+t)
+377     {
+378     	struct scmi_clk_parent_set_in in =3D {
+
+
+
+View Defects in Coverity Scan
+<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+
+Best regards,
+
+The Coverity Scan Admin Team
+
+----- End forwarded message -----
 
 --=20
 Tom
 
---oujjV6Qzl6gA/zW+
+--9pXu1S5+GL1EnMEf
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSMYlQAKCRAr4qD1Cr/k
-Cm2GAQDPX0p3GJUkNLlI4CJG65w000J9k885OZJe1W+vQ4RsuAD/ReQpgbig30xn
-b1XIvCjlestEmAzov30+BD8xck1fVAY=
-=qk7W
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSNaZQAKCRAr4qD1Cr/k
+ClKEAQCcB8qa4gF6DD8oiM97iE4aly6xMRuxwEyGW42r02UbZQD/dbPkmZULs2dP
+3Wj5m/A8u9EExerx0C3uV3DHreZWKAs=
+=+Ore
 -----END PGP SIGNATURE-----
 
---oujjV6Qzl6gA/zW+--
+--9pXu1S5+GL1EnMEf--
