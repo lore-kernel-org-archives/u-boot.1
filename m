@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE56CFD313
-	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 22:59:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25DDCFD313
+	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 22:59:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 641A283C72;
-	Sun, 23 Nov 2025 23:58:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A0D3983C7B;
+	Sun, 23 Nov 2025 23:58:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VGtlX5+A";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cGUypDwf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68EE483C8C; Sun, 23 Nov 2025 23:58:39 +0100 (CET)
+ id 0E2F383C98; Sun, 23 Nov 2025 23:58:41 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80F0383C6E
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19CA483B7E
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id CE76744976; 
- Sun, 23 Nov 2025 22:58:05 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 46D4444977; 
+ Sun, 23 Nov 2025 22:58:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763938686;
- bh=88nYkNDoV0od7f/iEJIKBhkgFfydllykeCwDWdiYY0M=;
+ s=20251003; t=1763938687;
+ bh=dv0r7fJiryduOhgOkPZ5qDKwThGSvNEvfyGmr+x59gs=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=VGtlX5+AkU3mbb/61zTMxpjtIl2F4BdWNB9mtAUoolnghyCzMTD3knXGIPtlcYVIZ
- L7R+54dXxbuWBklIr6V8ktTOCwjwlmPu73V1Irrh+Y297ZKQLRkVjYQQFzVSpTyXyZ
- x3AS6oElBeyZ3DTua8NqTLJh9UGKI06zHOx0v0Tab0J3LOleRjLAKZOiQ0xMv4ch2D
- enToIMZGCtVESVOWzQpVaC5sXDzjGvZiAMK2b4qNuDbVxelZQIbGKt98Yf5XKXXeCX
- L7b9Cx1iQtfqWoKRGVZHn21U2C4jLAeRC6KOqfXFUqRFUcCSrlX2Lp+WxZeI2z/R+O
- L81iGDR+xzL6Na4GouqK9v3x0ct+UOFNpRgpVUpEALkSORLsuYTGpVDIJMAU3YPg4d
- 4xlBhit6zXs/xCtOyqVf21m18PU5floG59KmOgh3Sh/slM3ccRrXc0zGEwu34/QSgz
- X7Zr6xgXZWBHiFyrkxyGi9IpnU2IyBJFl44j4b1uyZkd8ad4Z5At4a553H2Mgo6iH1
- ZSkymAErMcY/sJJDKLFX5FJra6S70Dubn4CKhYkgGxHQog6Q1pxHE2IwDY7NtKFKHx
- Jvhv4ysrzsvhEg+yhdpxd1LSkYlCaiQQvgrgZwMZw2e8wyOQTfWBP+JBhm3Fozj4hO
- 0sDAUjCM5h574trwc+deGZr8=
+ b=cGUypDwfE08ECyskrU1vU/c9K9Q70b+BnnMB22h7bloYrQA7dATf27mJZrIuPHcuo
+ YN7B/YiIXY/B7BIHPDvDZ5WpHXhEsDxpDfJq0HaJLLNMQOjvPu6sJsyeVgVv9lUjUV
+ ZuKDqB9eUp02g0KvHGiKhNobmEx+JiY5hWY1XdWDLChNnx7emJ2jIp+3kD/JLUYQc7
+ UQtIrZeDT5f0mYFHtSYSZslSSO/9uIO38HYfJjKlrfScNgTN+T02D2mxiGiNGbb6e6
+ CeF2iR7/iOonQ5f+GggyCUDiTfJ9W+MzhgZPsoP76LrtV5Aqvs6FsMLbr5qgqZKF3A
+ 56OiaBq4cTViNyWOK4iifyASI++zJrYarNUn3DW6RGFodC8T7vwLsZt9i8DsPVZfP6
+ pQbGPCxgRLh0fzjKy3DYFyRVJx/35jpIFtbXybomxtKBkt4afqz4nnJEi+A0dhuiYM
+ RbRxbW32Ht4TpJjU6EyjPUJoV2JTfq06LzmRhrjD9WLJ8eDp71GD05GvjnKCjKlvTk
+ snyByMwK9Fzj1WJVZA5BPLyzY78DKfvzYq+ydaPxJ3rBiHrJmLgmMDpWKGpy6h5C93
+ MAU1HAeDeP8PgdYQHdtSnPpCJTbSS9GzNk0DA8cFht1hKACReef6c/po1qiKY3AMoC
+ bocHk8LAbLh6GiFad7kKMTbg=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
@@ -66,9 +66,9 @@ Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
  Richard Weinberger <richard@nod.at>,
  Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 11/19] test: correct comments in test/cmd/font.c
-Date: Sun, 23 Nov 2025 23:57:03 +0100
-Message-ID: <20251123225711.227016-12-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 12/19] test: fix bdinfo_test_all boot_params expectation
+Date: Sun, 23 Nov 2025 23:57:04 +0100
+Message-ID: <20251123225711.227016-13-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
 References: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
@@ -90,30 +90,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test relates to the 'font' and not to the 'fdt' command.
+The value of boot_params is device specific and non-zero on many boards.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/cmd/font.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ test/cmd/bdinfo.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/test/cmd/font.c b/test/cmd/font.c
-index 7ae648d7395..5c52f359a57 100644
---- a/test/cmd/font.c
-+++ b/test/cmd/font.c
-@@ -10,10 +10,10 @@
- #include <video_console.h>
- #include <test/ut.h>
+diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
+index 2f3a65996e7..ba8a3392237 100644
+--- a/test/cmd/bdinfo.c
++++ b/test/cmd/bdinfo.c
+@@ -156,7 +156,9 @@ static int bdinfo_check_mem(struct unit_test_state *uts)
  
--/* Declare a new fdt test */
-+/* Declare a new font test */
- #define FONT_TEST(_name, _flags)	UNIT_TEST(_name, _flags, font)
- 
--/* Test 'fdt addr' resizing an fdt */
-+/* Test the 'font' command */
- static int font_test_base(struct unit_test_state *uts)
+ static int bdinfo_test_all(struct unit_test_state *uts)
  {
- 	struct udevice *dev;
+-	ut_assertok(test_num_l(uts, "boot_params", 0));
++	struct bd_info *bd = gd->bd;
++
++	ut_assertok(test_num_l(uts, "boot_params", bd->bi_boot_params));
+ 
+ 	ut_assertok(bdinfo_check_mem(uts));
+ 
 -- 
 2.51.0
 
