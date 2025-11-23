@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AC48CFD315
-	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 01:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90B09CFD315
+	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 01:19:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1859A83B8B;
+	by phobos.denx.de (Postfix) with ESMTP id 71D7183B96;
 	Sun, 23 Nov 2025 02:19:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="QA3v/Ft6";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="C7uDAApW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9CEE83B9B; Sun, 23 Nov 2025 02:19:31 +0100 (CET)
+ id 4D69483B7E; Sun, 23 Nov 2025 02:19:33 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76E7C83B7E
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 02:19:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3425883B8C
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 02:19:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 5A4674248F; 
- Sun, 23 Nov 2025 01:19:28 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4637D42491; 
+ Sun, 23 Nov 2025 01:19:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763860768;
- bh=oQ4y6vsljhb52mERZhKSVQ4nFAu5/D8+erwJmz9NFnM=;
+ s=20251003; t=1763860769;
+ bh=0NBEI4AeEYX/wspg29CbeTToyJiWqvESkrDdtZX1Xtk=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=QA3v/Ft600faC5V+5HhPUjdnQso1gMVfWChVUwpj5XojZhkuAuFHPooY3UiXqCnE7
- sG0pjeT2kn3yS+XKocvdrC9/G9QvcuPPp1WjTZwgq+IYC1VA+c7MIRmBrs3wnoG2CD
- AEgV3RNjFsDM6t33b+Z8ISAodkVxcEDQbIt5NsGu563YoXBCc4+EVHHemi0bIDo+jS
- R2dBbS+bdvj6iJM3zLuBJEtSJILDzLc0ko1fXtSdLbpwWUBs1eHbZ62KKjt03dGjWu
- 4QxShLsKagP3BrUWqXMz8v3tO1Km21iHmmBwvYH8JJWwA2/ljNPZyy8PfNXzbZPsEs
- MKOCONj5Qb1JZDGfDlXXg7fWR/yj5GV9s2elDkzKmWWVx24z1hFtLZaH+070FElIwG
- ZLXgpdtbM2SGHMAZnGSfSS2kbMyT5VlTjeIm5rce34BT/W5XYOWNQbAfqut3mvRTw9
- KFEPBwYftHtpQ5DANvvmC+K6hN5C3yTBRmlfUZd7pVSEECloTdCo6VgLLiDrx6FFnp
- LrxLTkO1OWkpCY0oS1K20MdSII0JiB6Rn1HV4wDcmktM/L0RGN/TF1Lt8nnvVHogs6
- HZOa51ae8CQM7nNMa3SlHCfXLhoFWFRFX6fkkzQLtlsHDbo5MnjgWaPl7AAZ6RMDW9
- +YHAvLmLOeeNlW/V0xbLB4Jo=
+ b=C7uDAApWtKnCOMSoJgsJ6BF26oBhDyfd2Rs17MY3Pk2N21u3VjkmLuZsk5KXXFWhb
+ JJep+KhnRPzWQu1DQSvoDkF2XviJO4I0eYFWTxJ1oQpCE3C8n8OjoHMUvWn6dXhq3O
+ OIeXTBlEKYwECAIzU27BGKv+nYPF0w1xPWOBQSobcH3i2bFemxzHMIXf4MPW2rMl9U
+ 1BBPBW2MLTR7ZXbXNYTCLdQbml4PdIXOpHckMkSmJXNBrdrja6JZqOzmT8EQIP83JR
+ Q2Hf5AKniLlCeBr1k1e2Rms60gMpxvY+LCWRFD8yYPzEUHpsONa5eLpOJ0dXsJKFLP
+ +U3Jq9jG6kXVi4V18pXEoedXpb8nSWVvxu+S9nBf2zXsRJY+fqrAzeMB4fCQdCrSdg
+ M4lCvJzfJXav9b8LRs1dGJDfRG4dVA+J5b7M7fpRivVtdi+0Fubh1s0Dpu9+AyZUJW
+ McIy9rVajFgjdiiPJPL6XB4OCCCVCRjqsicQ4Lhz2WwHDj3vSFLjNZvSBpmc5yg0Sk
+ cf5TayaHqZADmRhQ6IMq0gf8YWaorHhwD79QHByekz1RNtNokvoRc+9L/oNlCUEoda
+ /hUu2bsNUCULnOFUGiQ1vOTMtbkTR8AYFI6qDBgm5l9jRISVy50DB9mji8B1CTNszI
+ SQVFFbkZaC9E5t/zAhUM27t8=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
 Cc: Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -57,9 +57,9 @@ Cc: Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/3] test: cmd/bdinfo: consider ARM architecture specific info
-Date: Sun, 23 Nov 2025 02:18:58 +0100
-Message-ID: <20251123011900.91233-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/3] test: print_display_buffer must consider 64bit support
+Date: Sun, 23 Nov 2025 02:18:59 +0100
+Message-ID: <20251123011900.91233-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251123011900.91233-1-heinrich.schuchardt@canonical.com>
 References: <20251123011900.91233-1-heinrich.schuchardt@canonical.com>
@@ -81,53 +81,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On ARM the bdinfo command prints architecture specific information.
-The test needs to accept these output lines.
+Function print_buffer() does not support printing u64 on 32bit systems.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/cmd/bdinfo.c | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+ test/common/print.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 28d448a0866..9ffa0d3cdd5 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -224,6 +224,34 @@ static int bdinfo_test_all(struct unit_test_state *uts)
- 	if (gd->arch.firmware_fdt_addr)
- 		ut_check_console_linen(uts, "firmware fdt");
- #endif
-+#ifdef CONFIG_ARM
-+	ut_check_console_linen(uts, "arch_number");
-+#ifdef CFG_SYS_MEM_RESERVE_SECURE
-+	if (gd->arch.secure_ram & MEM_RESERVE_SECURE_SECURED)
-+		ut_check_console_linen(uts, "Secure ram");
-+#endif
-+#ifdef CONFIG_RESV_RAM
-+	if (gd->arch.resv_ram)
-+		ut_check_console_linen(uts, "Reserved ram");
-+#endif
-+#if !(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+	ut_check_console_linen(uts, "TLB addr");
-+#endif
-+	ut_check_console_linen(uts, "irq_sp");
-+	ut_check_console_linen(uts, "sp start");
-+#ifdef CONFIG_CLOCKS
-+	ut_check_console_linen(uts, "ARM frequency =");
-+	ut_check_console_linen(uts, "DSP frequency =");
-+	ut_check_console_linen(uts, "DDR frequency =");
-+#endif
-+#ifdef CONFIG_BOARD_TYPES
-+	ut_check_console_linen(uts, "Board Type  =");
-+#endif
-+#if CONFIG_IS_ENABLED(SYS_MALLOC_F)
-+	ut_check_console_linen(uts, "Early malloc usage:");
-+#endif
-+
-+#endif /* CONFIG_ARM */
+diff --git a/test/common/print.c b/test/common/print.c
+index f33476a36b4..a8feb07971d 100644
+--- a/test/common/print.c
++++ b/test/common/print.c
+@@ -4,6 +4,7 @@
+  */
  
- 	return 0;
- }
+ #include <command.h>
++#include <compiler.h>
+ #include <efi_api.h>
+ #include <display_options.h>
+ #include <log.h>
+@@ -212,10 +213,12 @@ static int print_display_buffer(struct unit_test_state *uts)
+ 	ut_assert_console_end();
+ 
+ 	/* 64-bit */
+-	print_buffer(0, buf, 8, 3, 0);
+-	ut_assert_nextline("00000000: 7766554433221100 ffeeddccbbaa9988  ..\"3DUfw........");
+-	ut_assert_nextline("00000010: 0000000000000010                   ........");
+-	ut_assert_console_end();
++	if (MEM_SUPPORT_64BIT_DATA) {
++		print_buffer(0, buf, 8, 3, 0);
++		ut_assert_nextline("00000000: 7766554433221100 ffeeddccbbaa9988  ..\"3DUfw........");
++		ut_assert_nextline("00000010: 0000000000000010                   ........");
++		ut_assert_console_end();
++	}
+ 
+ 	/* ASCII */
+ 	buf[1] = 31;
 -- 
 2.51.0
 
