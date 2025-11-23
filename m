@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25DDCFD313
-	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 22:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECFC4CFD313
+	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 22:59:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0D3983C7B;
-	Sun, 23 Nov 2025 23:58:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DF3D583CA4;
+	Sun, 23 Nov 2025 23:58:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cGUypDwf";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XWcO84SL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E2F383C98; Sun, 23 Nov 2025 23:58:41 +0100 (CET)
+ id A265983C6E; Sun, 23 Nov 2025 23:58:42 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19CA483B7E
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2FA783C94
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 23:58:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 46D4444977; 
- Sun, 23 Nov 2025 22:58:07 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id E2A1844978; 
+ Sun, 23 Nov 2025 22:58:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1763938687;
- bh=dv0r7fJiryduOhgOkPZ5qDKwThGSvNEvfyGmr+x59gs=;
+ s=20251003; t=1763938689;
+ bh=IMZ/smCP6jwpdQtLL/xO3KtzbCojrWMsGB6d5jTpBmY=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=cGUypDwfE08ECyskrU1vU/c9K9Q70b+BnnMB22h7bloYrQA7dATf27mJZrIuPHcuo
- YN7B/YiIXY/B7BIHPDvDZ5WpHXhEsDxpDfJq0HaJLLNMQOjvPu6sJsyeVgVv9lUjUV
- ZuKDqB9eUp02g0KvHGiKhNobmEx+JiY5hWY1XdWDLChNnx7emJ2jIp+3kD/JLUYQc7
- UQtIrZeDT5f0mYFHtSYSZslSSO/9uIO38HYfJjKlrfScNgTN+T02D2mxiGiNGbb6e6
- CeF2iR7/iOonQ5f+GggyCUDiTfJ9W+MzhgZPsoP76LrtV5Aqvs6FsMLbr5qgqZKF3A
- 56OiaBq4cTViNyWOK4iifyASI++zJrYarNUn3DW6RGFodC8T7vwLsZt9i8DsPVZfP6
- pQbGPCxgRLh0fzjKy3DYFyRVJx/35jpIFtbXybomxtKBkt4afqz4nnJEi+A0dhuiYM
- RbRxbW32Ht4TpJjU6EyjPUJoV2JTfq06LzmRhrjD9WLJ8eDp71GD05GvjnKCjKlvTk
- snyByMwK9Fzj1WJVZA5BPLyzY78DKfvzYq+ydaPxJ3rBiHrJmLgmMDpWKGpy6h5C93
- MAU1HAeDeP8PgdYQHdtSnPpCJTbSS9GzNk0DA8cFht1hKACReef6c/po1qiKY3AMoC
- bocHk8LAbLh6GiFad7kKMTbg=
+ b=XWcO84SLz9apgXegqW8+cADaCCRS4B07sFMOyqoBt56gySfdZoid8us8BoOR3eyIY
+ JmGT3LytXFNrH/Zzbcfcl4F480WFbZXoLjsn8M2kJulczI1liNvW26FWJJrPPOctQh
+ wQ1q0ESWN1PXmgHv8nCQ4hrXDvl8VW2hKfXFI4O9mvmNEVJ+EmLPXwJnDPUWr9cI3Q
+ SwYxA0lsoItB3iTB7J2nr47JyXUZjhu+/vfASGCrRAiWkYZxdixgs0zVnzwCgsY63B
+ H2J3mXOySW7AsEsaDD0ECBO96sINOOSigeGBR6lEZlEYIwpi/Fuol+D1riRFsQaMlK
+ OsXfqbgZS6+LmhvJQouUfxz4q+ivB7PQZO70h85nqoGeD6ZpZtkuU6BVUWcGlqLJlB
+ QXtrs01o7RFmJg7U3qoaf+0vbuWUBTW8p2IIaczQneM+oPz7vt0XOjdfA9cCvKez4+
+ TcTnLIdhEcozvMJDhbc8d3Ik3Otn/NTHVXE9wQn1UdWH3kgFshwivL0/NG0SprhYWu
+ QMlMzxXLa914BEF9/BaQvjUyqZB2stcJyewkIlD0S2GWc/K+R9fub97EZvOPSGG5P5
+ pTVYbWOcLWcT3QTorHeoJ61EfGByNvOFUs2wkYv26CjeOXAHoPE6iKq200sNZGueB1
+ 98zT2PokbI4iH9O/97h7XwvU=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
@@ -66,9 +66,9 @@ Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
  Richard Weinberger <richard@nod.at>,
  Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 12/19] test: fix bdinfo_test_all boot_params expectation
-Date: Sun, 23 Nov 2025 23:57:04 +0100
-Message-ID: <20251123225711.227016-13-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 13/19] malta: increase SYS_MALLOC_F_LEN and SYS_MALLOC_LEN
+Date: Sun, 23 Nov 2025 23:57:05 +0100
+Message-ID: <20251123225711.227016-14-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
 References: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
@@ -90,28 +90,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The value of boot_params is device specific and non-zero on many boards.
+If CONFIG_CONSOLE_RECORD_INIT_F=y we need additional memory according to
+CONFIG_CONSOLE_RECORD_OUT_SIZE_F. Similarly CONFIG_SYS_MALLOC_LEN must be
+increased by CONSOLE_RECORD_OUT_SIZE.
+
+Go with the default values for CONFIG_CONSOLE_RECORD_INIT_F and
+CONFIG_SYS_MALLOC_LEN.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/cmd/bdinfo.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ configs/malta64_defconfig   | 2 --
+ configs/malta64el_defconfig | 2 --
+ configs/malta_defconfig     | 2 --
+ configs/maltael_defconfig   | 2 --
+ 4 files changed, 8 deletions(-)
 
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 2f3a65996e7..ba8a3392237 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -156,7 +156,9 @@ static int bdinfo_check_mem(struct unit_test_state *uts)
- 
- static int bdinfo_test_all(struct unit_test_state *uts)
- {
--	ut_assertok(test_num_l(uts, "boot_params", 0));
-+	struct bd_info *bd = gd->bd;
-+
-+	ut_assertok(test_num_l(uts, "boot_params", bd->bi_boot_params));
- 
- 	ut_assertok(bdinfo_check_mem(uts));
- 
+diff --git a/configs/malta64_defconfig b/configs/malta64_defconfig
+index d1211b07f8a..e927be3b38e 100644
+--- a/configs/malta64_defconfig
++++ b/configs/malta64_defconfig
+@@ -1,7 +1,5 @@
+ CONFIG_MIPS=y
+ CONFIG_TEXT_BASE=0xFFFFFFFFBE000000
+-CONFIG_SYS_MALLOC_LEN=0x20000
+-CONFIG_SYS_MALLOC_F_LEN=0x400
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DEFAULT_DEVICE_TREE="mti,malta"
+diff --git a/configs/malta64el_defconfig b/configs/malta64el_defconfig
+index b9573dc79f4..ac3039ec744 100644
+--- a/configs/malta64el_defconfig
++++ b/configs/malta64el_defconfig
+@@ -1,7 +1,5 @@
+ CONFIG_MIPS=y
+ CONFIG_TEXT_BASE=0xFFFFFFFFBE000000
+-CONFIG_SYS_MALLOC_LEN=0x20000
+-CONFIG_SYS_MALLOC_F_LEN=0x400
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DEFAULT_DEVICE_TREE="mti,malta"
+diff --git a/configs/malta_defconfig b/configs/malta_defconfig
+index dfa37d1ddd9..da0ac95ae13 100644
+--- a/configs/malta_defconfig
++++ b/configs/malta_defconfig
+@@ -1,7 +1,5 @@
+ CONFIG_MIPS=y
+ CONFIG_TEXT_BASE=0xBE000000
+-CONFIG_SYS_MALLOC_LEN=0x20000
+-CONFIG_SYS_MALLOC_F_LEN=0x400
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DEFAULT_DEVICE_TREE="mti,malta"
+diff --git a/configs/maltael_defconfig b/configs/maltael_defconfig
+index d016115a027..663e9197726 100644
+--- a/configs/maltael_defconfig
++++ b/configs/maltael_defconfig
+@@ -1,7 +1,5 @@
+ CONFIG_MIPS=y
+ CONFIG_TEXT_BASE=0xBE000000
+-CONFIG_SYS_MALLOC_LEN=0x20000
+-CONFIG_SYS_MALLOC_F_LEN=0x400
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DEFAULT_DEVICE_TREE="mti,malta"
 -- 
 2.51.0
 
