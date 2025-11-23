@@ -4,49 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C71CFA46B
-	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 11:58:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8F6ACFC518
+	for <u-boot@archiver.kernel.org>; Sun, 23 Nov 2025 14:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A050F83B85;
-	Sun, 23 Nov 2025 12:58:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id C8E3683B95;
+	Sun, 23 Nov 2025 15:02:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M8CKJDnA";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4388E83B8A; Sun, 23 Nov 2025 12:58:28 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 377A683B7E
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 12:58:25 +0100 (CET)
+ id 91DF283B96; Sun, 23 Nov 2025 15:02:46 +0100 (CET)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 168A483B91
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 15:02:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D5E8C339;
- Sun, 23 Nov 2025 03:58:16 -0800 (PST)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 75CB53F63F;
- Sun, 23 Nov 2025 03:58:22 -0800 (PST)
-Date: Sun, 23 Nov 2025 11:58:10 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Tom Rini
- <trini@konsulko.com>, Hans de Goede <hdegoede@redhat.com>, Samuel Holland
- <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, Sumit
- Garg <sumit.garg@kernel.org>, Paul Kocialkowski <contact@paulk.fr>, "Kory
- Maincent (TI.com)" <kory.maincent@bootlin.com>, Cody Eksal
- <masterr3c0rd@epochal.quest>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Chen-Yu Tsai <wens@kernel.org>, Andrey
- Skvortsov <andrej.skvortzov@gmail.com>, Quentin Schulz
- <quentin.schulz@cherry.de>
-Subject: Re: [PATCH] sunxi: remove usage of legacy LED API
-Message-ID: <20251123115810.45ad2e3f@minigeek.lan>
-In-Reply-To: <20251120-legacy-led-sunxi-v1-1-c4c1422fd242@cherry.de>
-References: <20251120-legacy-led-sunxi-v1-1-c4c1422fd242@cherry.de>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-65745a436e6so1459430eaf.0
+ for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 06:02:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1763906563; x=1764511363; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LG9GzwE4vQSGBb3dRPLQQWoJWv7cBBraqLC7bIv06GA=;
+ b=M8CKJDnAbvswRPctESLM6ABSqxdolFqvsX4FB0iN/yEhgeBukg7LGUcLrWWUxdUQis
+ 6x7RLpfSW6nVvQhShaL1zwVh6ca7FUYdWjSCFB65ZWOz429DGOGYuuCodkVfnZSBhh5p
+ CbkdzUFdRqJD9rByoZZjQmf6Li9CSdiYjB4bo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1763906563; x=1764511363;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LG9GzwE4vQSGBb3dRPLQQWoJWv7cBBraqLC7bIv06GA=;
+ b=My+TlL056Grz4difKqua3sBHv9ep9f+tb0wY4UoMA4p5V8lkExMQCo2nuIWYE/79Yl
+ xJp/WbewA2aTN4gpHLtg6aDIWxXpzZ/0HrRWGRtfRhTCPEvQXNXRx5APeias0sL9Y0bD
+ 97d61EODYDboN8dLhUUaGvwbBaGtou5bHvPTwoqhpNWrZqGhiOwJ1a03ahvQmV4x9JT/
+ 3T7ZsnLJDjgGsbcRfDmU3eIoDRuNIf2c/WeWLu4BUWZiXxFJev10ItY4s6wRoh7o0Q35
+ pl/bZkMTDRixl6U5JD4OE79pa9fYwicXAUx1kh8bxXivc5kHpLoCzBRaicxyMtW3ft4N
+ F7EQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW5tZYA4DOJK8P3oADCj6+5dn89UC+5C3er54s8ySUVvo7oEUndpNLn00VHo9luTz/WApNrfN4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOyRrnJKnf6EDFDi82veWqX3GfhCV9Ymq6OitkC88NxzyoJDur
+ 403qhdGZJV/oM83+eSI1G2gi0YADHHsPW0ZdASC/lpNYhBUrgLG8j21xzG9sD5wXQBA=
+X-Gm-Gg: ASbGncv6BagFFLGYg681yBGYrxzIfpkEFGIbVK0hOuBf7Yy26KKTRZw12U4cC+i8MoX
+ iMoOzs7SjVKgHs1OVfQPpsfVCx5lreuS4QyiGq2J+G6AiRmfs2wOIZq3F5O0MCECQwtkL8lu2X6
+ lRpUlkFxIIxg+yNAJrj2MHDtY1ONseA/kz8wbS41i4RAn8ghdXKikja3+AWBRcNNNxcpZal/3tg
+ QAlUK7Rpt4ImjIMBaUzWL8O9a5LJ4EhhU3lQCGYMJBGeuQV5pu77wz/0CF/nyP9+PmXN1g+eTUv
+ GnFLiRRJAa1OvzI2vwKSX6JZVX+bqNQh8cEb/gq4Yd40MzQRnbreIkBm2Q9ZxzMUk8VDfyopJaH
+ wGYyW/ukPKVMjLr1JUvm7KyxEQBe4OBZQEXblvGK0gTxtqgKc17goAFQLtlVmmcG7Mv+yTYUiFu
+ iCIenKVr/A0Eoq1JWI9nt13CtA22hmDk8Kb+oLEF2m7PZB5qdq3w==
+X-Google-Smtp-Source: AGHT+IGFhYzlyzBaKC12/FAQ7HeCbKiFV7p+aZJzLcrtJxdRZBXRgfRWoA+PdyX2P5IZwMwHCfNO6Q==
+X-Received: by 2002:a4a:ee09:0:b0:657:4d77:55c4 with SMTP id
+ 006d021491bc7-65790a01bd5mr2945060eaf.2.1763906562591; 
+ Sun, 23 Nov 2025 06:02:42 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65782a359efsm2944671eaf.4.2025.11.23.06.02.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 23 Nov 2025 06:02:41 -0800 (PST)
+Date: Sun, 23 Nov 2025 08:02:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Peng Fan <peng.fan@nxp.com>, Ben Dooks <ben.dooks@codethink.co.uk>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH RESEND 1/9] test: fdt_test_apply requires
+ CONFIG_OF_LIBFDT_OVERLAY
+Message-ID: <20251123140237.GG2125796@bill-the-cat>
+References: <20251109101010.306268-1-heinrich.schuchardt@canonical.com>
+ <20251109101010.306268-2-heinrich.schuchardt@canonical.com>
+ <20251122162321.GA3053902@bill-the-cat>
+ <6fa2e054-e122-44c9-99a6-5e3e096c8630@canonical.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GjJ+CBRj6gxnBssu"
+Content-Disposition: inline
+In-Reply-To: <6fa2e054-e122-44c9-99a6-5e3e096c8630@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,397 +114,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Nov 2025 13:02:06 +0100
-Quentin Schulz <foss+uboot@0leil.net> wrote:
 
-Hi Quentin,
+--GjJ+CBRj6gxnBssu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-many thanks for taking care of that!
+On Sun, Nov 23, 2025 at 12:52:55AM +0100, Heinrich Schuchardt wrote:
+> On 11/22/25 17:23, Tom Rini wrote:
+> > On Sun, Nov 09, 2025 at 11:10:02AM +0100, Heinrich Schuchardt wrote:
+> >=20
+> > > The `fdt apply` sub-command is only available if CONFIG_OF_LIBFDT_OVE=
+RLAY
+> > > is enabled.
+> > >=20
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > ---
+> > >   test/cmd/fdt.c | 3 +++
+> > >   1 file changed, 3 insertions(+)
+> > >=20
+> > > diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
+> > > index 96a8488e172..a36f2dcdda8 100644
+> > > --- a/test/cmd/fdt.c
+> > > +++ b/test/cmd/fdt.c
+> > > @@ -1319,6 +1319,9 @@ static int fdt_test_apply(struct unit_test_stat=
+e *uts)
+> > >   	char fdt[8192], fdto[8192];
+> > >   	ulong addr, addro;
+> > > +	if (!IS_ENABLED(CONFIG_OF_LIBFDT_OVERLAY))
+> > > +		return -EAGAIN;
+> > > +
+> > >   	/* Create base DT with __symbols__ node */
+> > >   	ut_assertok(fdt_create(fdt, sizeof(fdt)));
+> > >   	ut_assertok(fdt_finish_reservemap(fdt));
+> >=20
+> > So, this is interesting. As part of merging this, I see that on
+> > qemu_arm64 for example:
+> >                 u-boot: add: 0/0, grow: 4/-4 bytes: 284/-9691 (-9407)
+> >                   function                                   old     ne=
+w   delta
+> >                   print_hexdump_line                         472     55=
+6     +84
+> >                   fdt_test_move                              568     65=
+2     +84
+> >                   print_do_hex_dump                         1704    176=
+4     +60
+> >                   print_display_buffer                      1736    179=
+2     +56
+> >                   static.__func__                           5670    565=
+5     -15
+> >                   bdinfo_test_all                           3064    288=
+4    -180
+> >                   fdt_test_chosen                           1496     51=
+6    -980
+> >                   fdt_test_apply                            8524       =
+8   -8516
+> >=20
+> > So we're as expected shrinking fdt_test_apply with a build time
+> > optimization. But we've been building and running this test as can be
+> > seen in older pipelines and their published artifacts. Should it not
+> > have been a failing test? Did it fail for you somewhere or was this
+> > found by inspection?
+> >=20
+>=20
+> Hello Tom,
+>=20
+> The target of the series was to test QFW and ACPI passthrough in the CI
+> using qemu-riscv64_smode_acpi_defconfig.
+>=20
+> fdt_test_apply and other tests failed on qemu-riscv64_smode_acpi_defconfi=
+g.
+> This is why I touched the tests.
+>=20
+> CONFIG_OF_LIBFDT_OVERLAY is not enabled on qemu_arm64_defconfig in
+> origin/master. Without this setting the `fdt apply` sub-command is not
+> available. So the test would not pass on this board.
+>=20
+> But running `fdt ut` for qemu_arm64_defconfig shows:
+>=20
+> =3D> ut fdt
+> Running 19 fdt tests
+> Test: addr: fdt.c
+> Skipping: Console recording disabled
+> Test: addr_resize: fdt.c
+> Skipping: Console recording disabled
+> Test: apply: fdt.c
+> Skipping: Console recording disabled
+> Test: bootcpu: fdt.c
+>=20
+> The fdt_test_apply_test was compiled but is always skipped.
+>=20
+> We should enable console recording on boards where we want proper testing.
+>=20
+> Furthermore we should change test/py/tests/test_ut.py to show skipped C
+> tests by calling pytest.skip(), see
+>=20
+> [PATCH 1/1] test: Let pytest indicate skipped C unit tests
+> https://lore.kernel.org/u-boot/20251122234920.80114-1-xypron.glpk@gmx.de/=
+T/#u
 
-> From: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> We are trying to get rid of the legacy LED API and PinePhone is one of
-> the last ones requiring it.
-> 
-> Unlike all other users of the legacy LED API, PinePhone is controlling
-> the GPIO LED in SPL. Unfortunately, Sunxi doesn't enable DM support in
-> SPL because of tight space constraints, so we cannot make use of the
-> modern LED framework as that is based on DM_GPIO.
-> 
-> Since PinePhone is the last user of this API, I'm moving the logic to
-> Sunxi SPL code and will let this community decide how to handle this hot
-> potato.
-> 
-> The logic is extremely simplified as only one GPIO LED is currently
-> controlled in SPL by PinePhone. No need for handling multiple LEDs or
-> inverted polarity, let's keep it simple.
+Thanks for looking in to this more, your patches look like the right
+direction to me!
 
-I am totally fine with this approach. Not only for the above mentioned
-size constraint reasons, but also because I'd like to keep the SPL small
-and lean, more as a continuation of the BootROM, and having some kind of
-framework for essentially doing two MMIO accesses does sound a bit over
-the top in this respect.
+--=20
+Tom
 
-So thanks for doing this, I like the idea of wrapping this lightly, so
-that it becomes reusable, I think we should actually enable more boards
-to light some LED early, quite some users seem to expect this.
+--GjJ+CBRj6gxnBssu
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> This however allows us to use the modern LED framework once in U-Boot
-> proper since this logic won't collide with the new framework.
+-----BEGIN PGP SIGNATURE-----
 
-Yes, I think that's cool. There are good reasons to have an LED light
-up as early as possible, without waiting for a more sophisticated
-framework in U-Boot proper. And as mentioned, it's easy to do with the
-already existing SPL GPIO code.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSMT+QAKCRAr4qD1Cr/k
+CvUlAQDRW8DNTfkRF92wH79asLXQhbHIKRdPvTBE/Ln3ZDllnQD9H9OJ+ImKDpM2
+RkoAOMBL+mFbGOoqWQYp9TOccCUXzAo=
+=KK1e
+-----END PGP SIGNATURE-----
 
-> Since the only misc drivers that were compiled in SPL were guarded by
-> CONFIG_LED_STATUS and CONFIG_LED_STATUS_GPIO, we can also disable
-> CONFIG_SPL_DRIVERS_MISC (which does nothing anymore).
-> 
-> This also saves some space for PinePhone in SPL and proper, see the
-> output of buildman --bloat:
-> 
->     pinephone      : all -20 data +32 rodata -52 spl/u-boot-spl:all -104 spl/u-boot-spl:data -24 spl/u-boot-spl:rodata +4 spl/u-boot-spl:text -84
->        u-boot: add: 0/-3, grow: 0/-2 bytes: 0/-179 (-179)
-> 	 function                                   old     new   delta
-> 	 board_init_r                              1020    1016      -4
-> 	 static.__func__                            216     205     -11
-> 	 led_dev                                     24       -     -24
-> 	 status_led_init                             48       -     -48
-> 	 __led_init                                  92       -     -92
->        spl-u-boot-spl: add: 0/-4, grow: 2/0 bytes: 61/-168 (-107)
-> 	 function                                   old     new   delta
-> 	 sunxi_board_init                           140     196     +56
-> 	 static.__func__                             68      73      +5
-> 	 status_led_init_done                         4       -      -4
-> 	 led_dev                                     24       -     -24
-> 	 status_led_init                             48       -     -48
-> 	 __led_init                                  92       -     -92
-
-Yes, confirmed that the SPL binary uses about 100 bytes less, which is
-a welcome development, especially for the A64.
- 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> Note that I do not own this device so I could only build test it.
-
-I do have a Pinephone, and I tested this patch: it indeed works. I also
-changed the GPIO number, which changed the LED (colour), so it's
-positively working.
-
-Tested-by: Andre Przywara <andre.przywara@arm.com>
-
-Just one nit in the code below...
-
-> This is a follow-up to:
-
-Are there actually dependencies on all those series? I naively applied
-this patch on top of master, and it compiled and worked just fine.
-
-> - https://lore.kernel.org/u-boot/20251112-led-old-dt-v1-0-2892d49517db@cherry.de/
-> - https://lore.kernel.org/u-boot/20251114162417.4054006-1-patrice.chotard@foss.st.com/
-> - https://lore.kernel.org/u-boot/20251119-legacy-led-unused-code-v1-0-bc0ae1235baa@cherry.de/
-> - https://lore.kernel.org/all/20251119-corvus-led-red-green-v1-0-ce86b8d59dfc@cherry.de/
-> - https://lore.kernel.org/all/20251119-led-legacy-vining-v1-1-6107439085a0@cherry.de/
-> - https://lore.kernel.org/all/20251119-bus-led-removal-v1-1-340218264e59@cherry.de/
-> 
-> to continue the effort of getting rid of the legacy LED API. This series
-> depends on the series listed above.
-> 
-> Multiple other smaller series are coming. I split the whole thing into
-> different chunks as separate series:
->  - make Sunxi community bear the cost of maintaining the last part of the
->    legacy API by making it Sunxi-specific, (this series)
->  - migrate Olinuxino to new API (which requires net/bootp.c to use the
->    new API at the same time) + remove everything related to legacy LED
->    API,
-> ---
->  arch/arm/mach-sunxi/Kconfig | 18 ++++++++++++++++++
->  board/sunxi/board.c         | 20 ++++++++++++++++----
->  configs/pinephone_defconfig |  9 +++------
->  3 files changed, 37 insertions(+), 10 deletions(-)
-> 
-> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-> index e979ee4a2cc..a60ebe1d964 100644
-> --- a/arch/arm/mach-sunxi/Kconfig
-> +++ b/arch/arm/mach-sunxi/Kconfig
-> @@ -1232,6 +1232,24 @@ config CHIP_DIP_SCAN
->  	select W1_EEPROM_DS24XXX
->  	select CMD_EXTENSION
->  
-> +config SPL_SUNXI_LED_STATUS
-> +	bool "Control GPIO status LED within SPL"
-> +	depends on SPL_GPIO && SUNXI_GPIO
-> +
-> +if SPL_SUNXI_LED_STATUS
-> +
-> +config SPL_SUNXI_LED_STATUS_BIT
-> +	int "GPIO number for GPIO status LED"
-> +	help
-> +	  GPIO number for the GPIO controlling the GPIO status LED in SPL.
-> +
-> +config SPL_SUNXI_LED_STATUS_STATE
-> +	bool "GPIO status LED initial state is on"
-> +	help
-> +	  Whether the initial state of the status LED in SPL must be on or off.
-> +
-> +endif # SPL_SUNXI_LED_STATUS
-> +
->  source "board/sunxi/Kconfig"
->  
->  endif
-> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-> index 2929bc17f08..799d60cf039 100644
-> --- a/board/sunxi/board.c
-> +++ b/board/sunxi/board.c
-> @@ -50,7 +50,6 @@
->  #include <spl.h>
->  #include <sy8106a.h>
->  #include <asm/setup.h>
-> -#include <status_led.h>
->  
->  DECLARE_GLOBAL_DATA_PTR;
->  
-> @@ -552,14 +551,27 @@ static void sunxi_spl_store_dram_size(phys_addr_t dram_size)
->  	spl->dram_size = dram_size >> 20;
->  }
->  
-> +static void status_led_init(void)
-> +{
-> +#if CONFIG_IS_ENABLED(SUNXI_LED_STATUS)
-> +	unsigned int state = CONFIG_SPL_SUNXI_LED_STATUS_STATE;
-> +	unsigned int gpio = CONFIG_SPL_SUNXI_LED_STATUS_BIT;
-> +
-> +	if (gpio_request(gpio, "gpio_led") != 0) {
-> +		printf("%s: failed requesting GPIO%u!\n", __func__, gpio);
-
-Can you please just remove this error message? I see that this whole
-code is written somewhat SPL agnostic (CONFIG_IS_ENABLED), but
-realistically this is SPL-only code (see the two symbols above), and
-there gpio_request() always returns 0, so it's just extra size in the
-SPL that will never be used. Saves another 75 bytes.
-
-Cheers,
-Andre
-
-> +		return;
-> +	}
-> +
-> +	gpio_direction_output(gpio, state);
-> +#endif
-> +}
-> +
->  void sunxi_board_init(void)
->  {
->  	int power_failed = 0;
->  
-> -#ifdef CONFIG_LED_STATUS
-> -	if (IS_ENABLED(CONFIG_SPL_DRIVERS_MISC))
-> +	if (CONFIG_IS_ENABLED(SUNXI_LED_STATUS))
->  		status_led_init();
-> -#endif
->  
->  #ifdef CONFIG_SY8106A_POWER
->  	power_failed = sy8106a_set_vout1(CONFIG_SY8106A_VOUT1_VOLT);
-> diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
-> index 99aa29622ba..f51c7a6f81a 100644
-> --- a/configs/pinephone_defconfig
-> +++ b/configs/pinephone_defconfig
-> @@ -1,7 +1,6 @@
->  CONFIG_ARM=y
->  CONFIG_ARCH_SUNXI=y
->  CONFIG_DEFAULT_DEVICE_TREE="sun50i-a64-pinephone-1.2"
-> -CONFIG_SPL_DRIVERS_MISC=y
->  CONFIG_SPL=y
->  CONFIG_MACH_SUN50I=y
->  CONFIG_SUNXI_DRAM_LPDDR3_STOCK=y
-> @@ -9,13 +8,11 @@ CONFIG_DRAM_CLK=552
->  CONFIG_DRAM_ZQ=3881949
->  CONFIG_MMC_SUNXI_SLOT_EXTRA=2
->  CONFIG_PINEPHONE_DT_SELECTION=y
-> +CONFIG_SPL_SUNXI_LED_STATUS=y
-> +CONFIG_SPL_SUNXI_LED_STATUS_BIT=114
-> +CONFIG_SPL_SUNXI_LED_STATUS_STATE=y
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_CMD_PSTORE=y
->  CONFIG_CMD_PSTORE_MEM_ADDR=0x61000000
->  CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
->  CONFIG_SYS_I2C_MVTWSI=y
-> -CONFIG_LED_STATUS=y
-> -CONFIG_LED_STATUS_GPIO=y
-> -CONFIG_LED_STATUS0=y
-> -CONFIG_LED_STATUS_BIT=114
-> -CONFIG_LED_STATUS_STATE=2
-> 
-> ---
-> base-commit: c2b25f8f66a31e3fe435c93c4339f95ab4c24b9b
-> change-id: 20251120-legacy-led-sunxi-54a42b96c410
-> prerequisite-change-id: 20251112-led-old-dt-dc24605ddc88:v1
-> prerequisite-patch-id: e06b5d332948608f593edc40330a7a7abe80076c
-> prerequisite-patch-id: 903cc5aabeec81459e5f9ed4e303e9cc7ef56459
-> prerequisite-patch-id: b1be6517f7300b65087c91a85478077bb01e90c3
-> prerequisite-patch-id: bbcdd7a84ba84f5d68d5e12318531f3f2f8c04b5
-> prerequisite-patch-id: 7e2738d9c029f8fcbd894e960fec146a677ed988
-> prerequisite-patch-id: d906328e945f5afaae2ef61040913ecfd428dc27
-> prerequisite-patch-id: 6b535c241c640032380078696b49915db58036a2
-> prerequisite-patch-id: dc105b3550fc6cba4a208dd1e7d98f0e22106d65
-> prerequisite-patch-id: a7051c86a817569b412d46eb4af4b22c93cd0e06
-> prerequisite-patch-id: 8f0c16b6fb70bf526c239324fd5742f0ee92d20b
-> prerequisite-patch-id: d84c4ff840c5d4fdffa8be69eb5ef74cd582861c
-> prerequisite-message-id: <20251114162417.4054006-1-patrice.chotard@foss.st.com>
-> prerequisite-patch-id: 4ba6c3692d92c5d1e7f0fff8020dc917229c10a3
-> prerequisite-patch-id: 85ddefe74b3c49d40facb737c5a6bc5ace49387d
-> prerequisite-patch-id: e29be2cc5ae57a81d6e9060b68d7678bd15ea3ca
-> prerequisite-patch-id: 674cc3bb2f266874a1f39b7ccd86266fc3085e05
-> prerequisite-patch-id: d7d3138636356a4e598ce63f9644481872c5da71
-> prerequisite-patch-id: 45d6c3582f5716d86e2efb81b606d09974c57dd3
-> prerequisite-patch-id: b17c48a1a8ab6aada27c767d15a191d36606609b
-> prerequisite-patch-id: 19496299d7c21a1a709c499c06990878d268573b
-> prerequisite-patch-id: 3d4e605b49cee688c1c98840268da8690bd6c5a9
-> prerequisite-patch-id: bbf09a918a20ca40cb0ad1694e79e1cd0864309a
-> prerequisite-patch-id: 3dbebc3c6a91bd766f95392625d8fed140d8bfdb
-> prerequisite-patch-id: 7f0d951def11fe1f97224662644a1663c834638a
-> prerequisite-patch-id: 55df05baa63656dbc074855ea2f391de14d6530c
-> prerequisite-patch-id: 24e03e393be8f5737f0e8f444d3340826552e810
-> prerequisite-patch-id: ca97c22ea834c0afb5586e721aff7cb39efd539d
-> prerequisite-patch-id: 8e8a80297e82e0a72a8d3dac9134cb5c62e58b7a
-> prerequisite-patch-id: b92d833519a5a605c2129ea08a4dc32cbdbab36f
-> prerequisite-patch-id: c141f398e49903567732b6cab730de1112f61207
-> prerequisite-patch-id: 6900302b3d1364dc1e5a82643ef0f0cd20f4006e
-> prerequisite-patch-id: 3600c976c13534519ca5d0891a9c4f665dd761ed
-> prerequisite-patch-id: 0b158776d189ce8bf47644b490aa9feaf1229e53
-> prerequisite-patch-id: aa471cc044809dab0ca6068615cfeba8f3bce121
-> prerequisite-patch-id: 4f7546b5da396a4913f3c97b0288c3a57c2d8043
-> prerequisite-change-id: 20251119-legacy-led-unused-code-d635c95cfae0:v1
-> prerequisite-patch-id: 4ba6c3692d92c5d1e7f0fff8020dc917229c10a3
-> prerequisite-patch-id: 85ddefe74b3c49d40facb737c5a6bc5ace49387d
-> prerequisite-patch-id: e29be2cc5ae57a81d6e9060b68d7678bd15ea3ca
-> prerequisite-patch-id: 674cc3bb2f266874a1f39b7ccd86266fc3085e05
-> prerequisite-patch-id: d7d3138636356a4e598ce63f9644481872c5da71
-> prerequisite-patch-id: 45d6c3582f5716d86e2efb81b606d09974c57dd3
-> prerequisite-patch-id: b17c48a1a8ab6aada27c767d15a191d36606609b
-> prerequisite-patch-id: 19496299d7c21a1a709c499c06990878d268573b
-> prerequisite-patch-id: 3d4e605b49cee688c1c98840268da8690bd6c5a9
-> prerequisite-patch-id: bbf09a918a20ca40cb0ad1694e79e1cd0864309a
-> prerequisite-patch-id: 3dbebc3c6a91bd766f95392625d8fed140d8bfdb
-> prerequisite-patch-id: 7f0d951def11fe1f97224662644a1663c834638a
-> prerequisite-patch-id: 55df05baa63656dbc074855ea2f391de14d6530c
-> prerequisite-patch-id: 24e03e393be8f5737f0e8f444d3340826552e810
-> prerequisite-patch-id: ca97c22ea834c0afb5586e721aff7cb39efd539d
-> prerequisite-patch-id: 8e8a80297e82e0a72a8d3dac9134cb5c62e58b7a
-> prerequisite-patch-id: 3a1b906e26d94930b7634ae0ca35c5043b37f617
-> prerequisite-patch-id: c141f398e49903567732b6cab730de1112f61207
-> prerequisite-patch-id: 6900302b3d1364dc1e5a82643ef0f0cd20f4006e
-> prerequisite-patch-id: a0b2962b16facff0acc9b63ab9884400c1df8fd3
-> prerequisite-patch-id: 0b158776d189ce8bf47644b490aa9feaf1229e53
-> prerequisite-patch-id: 2793fca5e19cd95cb92e477b2fe1e0179ce0e9e4
-> prerequisite-patch-id: 4f7546b5da396a4913f3c97b0288c3a57c2d8043
-> prerequisite-patch-id: e06b5d332948608f593edc40330a7a7abe80076c
-> prerequisite-patch-id: 903cc5aabeec81459e5f9ed4e303e9cc7ef56459
-> prerequisite-patch-id: b1be6517f7300b65087c91a85478077bb01e90c3
-> prerequisite-patch-id: bbcdd7a84ba84f5d68d5e12318531f3f2f8c04b5
-> prerequisite-patch-id: 7e2738d9c029f8fcbd894e960fec146a677ed988
-> prerequisite-patch-id: d906328e945f5afaae2ef61040913ecfd428dc27
-> prerequisite-patch-id: 6b535c241c640032380078696b49915db58036a2
-> prerequisite-patch-id: dc105b3550fc6cba4a208dd1e7d98f0e22106d65
-> prerequisite-patch-id: a7051c86a817569b412d46eb4af4b22c93cd0e06
-> prerequisite-patch-id: 8f0c16b6fb70bf526c239324fd5742f0ee92d20b
-> prerequisite-patch-id: d84c4ff840c5d4fdffa8be69eb5ef74cd582861c
-> prerequisite-patch-id: bc18b41151c9198e1dcaedf483b5d31aae40f0ca
-> prerequisite-patch-id: 18f4952525fe4c8c3ab1ae1685e84b65d71c8634
-> prerequisite-patch-id: 1d432ed6b7fb6482f98a336cdebae29cec8e7a30
-> prerequisite-patch-id: a096ab165f9fcce2e5806012d385f6fd6cf0f6b5
-> prerequisite-patch-id: 9677d1503c67524e554b4f7fd8ab5f0cc940e715
-> prerequisite-change-id: 20251119-corvus-led-red-green-a15fe26f39bb:v1
-> prerequisite-patch-id: 4ba6c3692d92c5d1e7f0fff8020dc917229c10a3
-> prerequisite-patch-id: 85ddefe74b3c49d40facb737c5a6bc5ace49387d
-> prerequisite-patch-id: e29be2cc5ae57a81d6e9060b68d7678bd15ea3ca
-> prerequisite-patch-id: 674cc3bb2f266874a1f39b7ccd86266fc3085e05
-> prerequisite-patch-id: d7d3138636356a4e598ce63f9644481872c5da71
-> prerequisite-patch-id: 45d6c3582f5716d86e2efb81b606d09974c57dd3
-> prerequisite-patch-id: b17c48a1a8ab6aada27c767d15a191d36606609b
-> prerequisite-patch-id: 19496299d7c21a1a709c499c06990878d268573b
-> prerequisite-patch-id: 3d4e605b49cee688c1c98840268da8690bd6c5a9
-> prerequisite-patch-id: bbf09a918a20ca40cb0ad1694e79e1cd0864309a
-> prerequisite-patch-id: 3dbebc3c6a91bd766f95392625d8fed140d8bfdb
-> prerequisite-patch-id: 7f0d951def11fe1f97224662644a1663c834638a
-> prerequisite-patch-id: 55df05baa63656dbc074855ea2f391de14d6530c
-> prerequisite-patch-id: 24e03e393be8f5737f0e8f444d3340826552e810
-> prerequisite-patch-id: ca97c22ea834c0afb5586e721aff7cb39efd539d
-> prerequisite-patch-id: 8e8a80297e82e0a72a8d3dac9134cb5c62e58b7a
-> prerequisite-patch-id: 3a1b906e26d94930b7634ae0ca35c5043b37f617
-> prerequisite-patch-id: c141f398e49903567732b6cab730de1112f61207
-> prerequisite-patch-id: 6900302b3d1364dc1e5a82643ef0f0cd20f4006e
-> prerequisite-patch-id: a0b2962b16facff0acc9b63ab9884400c1df8fd3
-> prerequisite-patch-id: 0b158776d189ce8bf47644b490aa9feaf1229e53
-> prerequisite-patch-id: 2793fca5e19cd95cb92e477b2fe1e0179ce0e9e4
-> prerequisite-patch-id: 4f7546b5da396a4913f3c97b0288c3a57c2d8043
-> prerequisite-patch-id: e06b5d332948608f593edc40330a7a7abe80076c
-> prerequisite-patch-id: 903cc5aabeec81459e5f9ed4e303e9cc7ef56459
-> prerequisite-patch-id: b1be6517f7300b65087c91a85478077bb01e90c3
-> prerequisite-patch-id: bbcdd7a84ba84f5d68d5e12318531f3f2f8c04b5
-> prerequisite-patch-id: 7e2738d9c029f8fcbd894e960fec146a677ed988
-> prerequisite-patch-id: d906328e945f5afaae2ef61040913ecfd428dc27
-> prerequisite-patch-id: 6b535c241c640032380078696b49915db58036a2
-> prerequisite-patch-id: dc105b3550fc6cba4a208dd1e7d98f0e22106d65
-> prerequisite-patch-id: a7051c86a817569b412d46eb4af4b22c93cd0e06
-> prerequisite-patch-id: 8f0c16b6fb70bf526c239324fd5742f0ee92d20b
-> prerequisite-patch-id: d84c4ff840c5d4fdffa8be69eb5ef74cd582861c
-> prerequisite-patch-id: bc18b41151c9198e1dcaedf483b5d31aae40f0ca
-> prerequisite-patch-id: 18f4952525fe4c8c3ab1ae1685e84b65d71c8634
-> prerequisite-patch-id: 1d432ed6b7fb6482f98a336cdebae29cec8e7a30
-> prerequisite-patch-id: a096ab165f9fcce2e5806012d385f6fd6cf0f6b5
-> prerequisite-patch-id: 9677d1503c67524e554b4f7fd8ab5f0cc940e715
-> prerequisite-patch-id: 2af5430af07b98b9f24ff2d81edf8fffb18ba933
-> prerequisite-patch-id: 6f09f7860e01374b293497011a10ebdef73312aa
-> prerequisite-patch-id: f84fc6791df9d833579fedc039cabae4b51f6f0d
-> prerequisite-patch-id: 24a6a996108075f180a934108dfe0145d265ebcd
-> prerequisite-change-id: 20251119-bus-led-removal-2b1ceb36726a:v1
-> prerequisite-patch-id: 4ba6c3692d92c5d1e7f0fff8020dc917229c10a3
-> prerequisite-patch-id: 85ddefe74b3c49d40facb737c5a6bc5ace49387d
-> prerequisite-patch-id: e29be2cc5ae57a81d6e9060b68d7678bd15ea3ca
-> prerequisite-patch-id: 674cc3bb2f266874a1f39b7ccd86266fc3085e05
-> prerequisite-patch-id: d7d3138636356a4e598ce63f9644481872c5da71
-> prerequisite-patch-id: 45d6c3582f5716d86e2efb81b606d09974c57dd3
-> prerequisite-patch-id: b17c48a1a8ab6aada27c767d15a191d36606609b
-> prerequisite-patch-id: 19496299d7c21a1a709c499c06990878d268573b
-> prerequisite-patch-id: 3d4e605b49cee688c1c98840268da8690bd6c5a9
-> prerequisite-patch-id: bbf09a918a20ca40cb0ad1694e79e1cd0864309a
-> prerequisite-patch-id: 3dbebc3c6a91bd766f95392625d8fed140d8bfdb
-> prerequisite-patch-id: 7f0d951def11fe1f97224662644a1663c834638a
-> prerequisite-patch-id: 55df05baa63656dbc074855ea2f391de14d6530c
-> prerequisite-patch-id: 24e03e393be8f5737f0e8f444d3340826552e810
-> prerequisite-patch-id: ca97c22ea834c0afb5586e721aff7cb39efd539d
-> prerequisite-patch-id: 8e8a80297e82e0a72a8d3dac9134cb5c62e58b7a
-> prerequisite-patch-id: 3a1b906e26d94930b7634ae0ca35c5043b37f617
-> prerequisite-patch-id: c141f398e49903567732b6cab730de1112f61207
-> prerequisite-patch-id: 6900302b3d1364dc1e5a82643ef0f0cd20f4006e
-> prerequisite-patch-id: a0b2962b16facff0acc9b63ab9884400c1df8fd3
-> prerequisite-patch-id: 0b158776d189ce8bf47644b490aa9feaf1229e53
-> prerequisite-patch-id: 2793fca5e19cd95cb92e477b2fe1e0179ce0e9e4
-> prerequisite-patch-id: 4f7546b5da396a4913f3c97b0288c3a57c2d8043
-> prerequisite-patch-id: e06b5d332948608f593edc40330a7a7abe80076c
-> prerequisite-patch-id: 903cc5aabeec81459e5f9ed4e303e9cc7ef56459
-> prerequisite-patch-id: b1be6517f7300b65087c91a85478077bb01e90c3
-> prerequisite-patch-id: bbcdd7a84ba84f5d68d5e12318531f3f2f8c04b5
-> prerequisite-patch-id: 7e2738d9c029f8fcbd894e960fec146a677ed988
-> prerequisite-patch-id: d906328e945f5afaae2ef61040913ecfd428dc27
-> prerequisite-patch-id: 6b535c241c640032380078696b49915db58036a2
-> prerequisite-patch-id: dc105b3550fc6cba4a208dd1e7d98f0e22106d65
-> prerequisite-patch-id: a7051c86a817569b412d46eb4af4b22c93cd0e06
-> prerequisite-patch-id: 8f0c16b6fb70bf526c239324fd5742f0ee92d20b
-> prerequisite-patch-id: d84c4ff840c5d4fdffa8be69eb5ef74cd582861c
-> prerequisite-patch-id: bc18b41151c9198e1dcaedf483b5d31aae40f0ca
-> prerequisite-patch-id: 18f4952525fe4c8c3ab1ae1685e84b65d71c8634
-> prerequisite-patch-id: 1d432ed6b7fb6482f98a336cdebae29cec8e7a30
-> prerequisite-patch-id: a096ab165f9fcce2e5806012d385f6fd6cf0f6b5
-> prerequisite-patch-id: 9677d1503c67524e554b4f7fd8ab5f0cc940e715
-> prerequisite-patch-id: 2af5430af07b98b9f24ff2d81edf8fffb18ba933
-> prerequisite-patch-id: 6f09f7860e01374b293497011a10ebdef73312aa
-> prerequisite-patch-id: f84fc6791df9d833579fedc039cabae4b51f6f0d
-> prerequisite-patch-id: 24a6a996108075f180a934108dfe0145d265ebcd
-> prerequisite-patch-id: 6ea898c69b7849f31860f42fec9ac11c87d41c7e
-> prerequisite-patch-id: ee3e130e974ac218ff6785c6a993a1ed113c95a8
-> 
-> Best regards,
-
+--GjJ+CBRj6gxnBssu--
