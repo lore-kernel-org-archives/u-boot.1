@@ -4,80 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1C16CFD313
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 14:17:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B03ECFD313
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 14:42:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32B1D83DDD;
-	Mon, 24 Nov 2025 15:17:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 892D183B85;
+	Mon, 24 Nov 2025 15:42:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TZgwcU0u";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OQ8a5QYw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A057C83DE4; Mon, 24 Nov 2025 15:17:47 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id BD33A83B85; Mon, 24 Nov 2025 15:42:03 +0100 (CET)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8380483DCB
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 15:17:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E69F83ABA
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 15:42:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c6da5e3353so3107989a34.3
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 06:17:45 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-6574ace76dbso1776823eaf.3
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 06:42:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1763993864; x=1764598664; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fgekWoYPsb8J/Ozw9WMhKBBRYjW5fIg/uLGqKIYbpGQ=;
- b=TZgwcU0uyIiD4yNZq75P/JAuo8ptjAoL2YJuC8lX+vtCmxkdugxpXxsCBC1GKV/E6Z
- Sr6G2+/dCqYWKEDoHtqyBvglqMwrSX64H9cxmmzuOOhYst/P+AQSF2uoSLkxRiCE2K85
- y5G466w/42dWEzkGtwe10W4XvhIlwr17NQZD4Zc8ybF+zuR42K6IapSL0cXHVei/Ud6+
- UCE+K571c3+4SNY8fjABkhd9ZkvvnXXRQIX9sdOgxnpM6O8icV/Xf+uX6CbwB+4Rl3fF
- qJXvnnEnq/zaQKH/E/cF/efFVblgmg1A+7ClUn+uSVz2Ny3SmTCqat+Qv0cMRcgYmLw6
- gyiQ==
+ d=konsulko.com; s=google; t=1763995320; x=1764600120; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ToFGfgCndwQKMS2NfG45EJY2VnyBA06Q5d/2jRK45TM=;
+ b=OQ8a5QYwqbTJeaFmeDhF8xfLcd5CebUKchjK7zEnHH8Ps1MUqqjVmEgy1ytQCkrrFY
+ dFjv7WeP2derucUjmU5sQbjCJLRrivTU/w+kTtwC7qzGb1HsXB07c6SvA5jrRAvYz/b+
+ WCuA4CiUoWlk9U44oWHdvuWeXh1Sm4NwwoCQo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763993864; x=1764598664;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fgekWoYPsb8J/Ozw9WMhKBBRYjW5fIg/uLGqKIYbpGQ=;
- b=pnsdDXP/AL2LQTIVX+7/+BIOSwAAuXzNs6B41O0R7aQBIpGJbsVU/Y9w22vwDAwmiJ
- jFHC6Nvsj/kXo8GQ6CTgaBWPVUPUiMyro31X3DpD1Gyi/1wv3XY0qz6kkeMnHqbUawXV
- iOvzBdlO+//uHf0I7PcCfuIKlY4340C0/TJ3B3o295c/MIX641v9l9GPhT2TVzSvoWwN
- GzsKur71q9RoI2wMwuCvxxwVUy717qRkWHaJNYriDf0QWIcg9avdHE613gjMrAyqtnMp
- ytMCutotrNm0E48cjLZrlY4MUovY1N+bkup6X0gIP0yj0KDgBSFyY2TFW2/meJ4kprrZ
- XYgg==
+ d=1e100.net; s=20230601; t=1763995320; x=1764600120;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ToFGfgCndwQKMS2NfG45EJY2VnyBA06Q5d/2jRK45TM=;
+ b=YAvOmOvW6qJkN/KMle/rDGaOH22muLtqMQLY8sEAsZHeXRt8dM7V0AdzrFSpFb7RkV
+ yfC0rdnJTvDLD2C5tRmwW2c5ZZbyKKAj6Z4qfzX/My0XcrAIDEv6+tVrCNR09bd8ss4o
+ eo7CSofoctI0CS8sgBHi4TiS1celWNCQ723+Pgeie6ft4naUpfJvY1903AgeGpsQkL9L
+ BoZDRbiKGEeX2c7W6sdC2OsGTEMXpSH7IcXndvCyBsxp+5WLCbrhw10VXx+2BJSqzD4f
+ 0tFm0ljSMChJ9BynqZXeJPTWZPEeRKMZq4B+JMFvtNQsnxfZx0yp64lwXblL2X77hwWn
+ z86w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXXa+vUyKoYBoKS7ZhsMC21f3IGwigQFBdUjIUFyhcMS8xGxF86HZSMCtIY3FOSI0GFNlZ+kbM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw3/PL3rXFPiG+vt6wsc1TSnEhk4yB2iHhMOH1BVCI0sq3HeYKV
- 8q1s6fchLpy3x4OQ475smHbb+oT7WouSQSb5mKDwP5Fby6zvKMyriJKgkjbGxXxnOpG4M0yASEz
- TW2hVr6tP8HYGbhOZr/TNcxbxilMPqLedoH1P
-X-Gm-Gg: ASbGnctYMhdg7Ymu+oTJE1zw71+lj+/Ne+XmaAhcZmoMi859A845rzvaZd96gDBIUio
- 4hFo6cfUdtrdGaB4Cl9LVDQsHgx6ej1wlV6rAP1EeX5yMPIMc86Ew6Gb9ZJxfnqCvTSAGYgV9Ni
- kaYibkTV9iwZKnmS+rPafNp+7OoKyNfvprHQNSGXwT247snrD3kpXQC8DuSC8duldbi8xj8AYCw
- VNqLfADoeWN9AOAFXS+q2tNU17yVOUCx2jjGIKu8YsfdxWBG2QBXlniKVR9Oyh3j2wdusMD
-X-Google-Smtp-Source: AGHT+IE1dXd3XbP2hWbOr7w9oqLlh7bi6lMLF8fqq2ZkoteKZXAWmkIGYB70E/9d98vMbHizUVz7+fdfvQeXgsUsL5E=
-X-Received: by 2002:a9d:6148:0:b0:7c6:819d:bddd with SMTP id
- 46e09a7af769-7c798d04506mr5525433a34.34.1763993864068; Mon, 24 Nov 2025
- 06:17:44 -0800 (PST)
+ AJvYcCX4uszW1ROkFs/TQtn6Nx8AH8ycrtnbTUHvvf04IxToWiSwD+n+wUJ2CPw01hHBFuW6yU56xN8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+kZMrvcI7sTebN2waNO3EhhbwQHIGIdWaqUMvBtpXVqUru/wD
+ U6Ln0+3za93Ghbg4qT+XEUjFDaaH+WEuClnuSL3L6QP8e6xS1fjWHE3UyLA7WhrOii8=
+X-Gm-Gg: ASbGncsEuvJCI1AlScGoHbawC9+NfYBiD59FFDmosay0pJcqbz+xjDjW6qbgP6xJ8bN
+ rrPmaC3xcHfVRtSBcbK2XqmSY5n/uInV0/X37FUsffbx4Im5HkmodtmdTnxFxpz2+IHqjCnhjCP
+ i0TB0Pwpd44fxaA4XoPtsb5HC6VrS7QLpDL9euCEbY20HnKWyJ0WMBsekPA5K8fPIZowWA3RjZ4
+ quwcmKu3D1xW4pejLvlwV6RCy2auXObIB50kxS7qzpZdaVxBCnm9OJb0G8VQrLX+bo4ogmza7r9
+ dh58y50J3PMNaVblkl20llA26EuXKpOgYkeT11TAQiJR289kfr3i+BDN38eZ4qydUtrmMV0FEf4
+ teI1U/iOwZVHiKS/Rfr+alkb38rdqC8/KvRkkKF0YnyapMTMb3WQnyTa7GsbiiEpUUrIFDtVjfa
+ tCmeTQA8lE7xlI12c2UcDQkya7de8k1vq40GWneBENHXZyYilpBQ==
+X-Google-Smtp-Source: AGHT+IHFrPDXgecya990wYCf6fUBZ2D/jY36B2788CItsEtURIIYlDbpeMDw+UzSijiGJjdwOdLqfQ==
+X-Received: by 2002:a05:6808:6d83:b0:450:ae23:54f8 with SMTP id
+ 5614622812f47-451128ef641mr5069002b6e.19.1763995319797; 
+ Mon, 24 Nov 2025 06:41:59 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ec9dc8e0e1sm6259777fac.18.2025.11.24.06.41.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Nov 2025 06:41:59 -0800 (PST)
+Date: Mon, 24 Nov 2025 08:41:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, Heiko Schocher <hs@nabladev.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] i2c: sandbox: Avoid calling dev_read_*() if
+ CONFIG_OF_PLATDATA=y
+Message-ID: <20251124144157.GK2125796@bill-the-cat>
+References: <b7063159-f5d0-4f8d-be35-2e7fa5f8f750@mailbox.org>
+ <CAFLszTjyXo9yh6Jzdaev9GhN8OZ4Z5xz9phgNHnKCvA0ASzbaA@mail.gmail.com>
+ <60b12c96-4e63-4cf1-8c27-25eabead529c@mailbox.org>
+ <CAFLszThg+6LdxHXOYy9x8-nat+bsspbUT8Dg_vqnmx62aO0a2g@mail.gmail.com>
+ <a8fa7ff0-1324-4213-b45b-b4df637e6bee@mailbox.org>
+ <CAFLszTgLjRT_x1+tX0xpBzTy9bDJSYXw=5gOBvvNSqdOZDiZoQ@mail.gmail.com>
+ <c75bacd5-532a-4783-9f1f-02884eee7918@mailbox.org>
+ <CAFLszThKSE7v6TJhfeP2jGTS=GkpVuDpYHNHh_fMFL9TSjrnqA@mail.gmail.com>
+ <20251121192359.GC2125796@bill-the-cat>
+ <CAFLszTh2o9uMgGcRPfNU4TDRZEqy8rpe75w3q6352PrN9bX=ZQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20251115113118.783-1-briansune@gmail.com>
- <CAN7C2SCQQ62=e6FEVW=jrLSj8hoWjDxUWMjQGohrpaeYjY-W9w@mail.gmail.com>
- <27fc092f-36e5-4f20-b8b6-c25e529fbe2b@cherry.de>
-In-Reply-To: <27fc092f-36e5-4f20-b8b6-c25e529fbe2b@cherry.de>
-From: Sune Brian <briansune@gmail.com>
-Date: Mon, 24 Nov 2025 22:17:33 +0800
-X-Gm-Features: AWmQ_bnQy099N94CPSZvq7134patv1yogF1HJVuKg1lkMsg0RGzlWM5SmYpQrMw
-Message-ID: <CAN7C2SCCA9CV1rSEy1fosaE=EDE70LMOLcfTsVz4nvNMsH0mFg@mail.gmail.com>
-Subject: Re: [PATCH v1] SDRAM Calibration Failed fix for GEN5 SoCFPGA
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1e2ey3LXjRym4yPT"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTh2o9uMgGcRPfNU4TDRZEqy8rpe75w3q6352PrN9bX=ZQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,30 +109,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Device Tree is representation of the hardware. Is the watchdog present
-> in hardware? Yes? Then status = "okay".
->
-> Ideally, the board shouldn't fail if watchdog is enabled in DT but not
-> the driver (and vice-versa).
->
-> Do you know what the actual issue is? Why does it fail when watchdog is
-> enabled in DT but not the driver?
 
-Best guess watchdog timeout.
-I have no clue but this is the case.
-Otherwise it cannot explain why it is always at the point of message
-check and fails.
+--1e2ey3LXjRym4yPT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-If DT is enabled but not the driver then the driver is empty from first place.
-AKA the watchdog never initializes proper cycling? (my assumption)
-If the driver enables but DT does not then it simply disables during
-probe or ops?
-(also my assumption)
+On Sat, Nov 22, 2025 at 07:31:27AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 21 Nov 2025 at 12:24, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Nov 21, 2025 at 12:09:21PM -0700, Simon Glass wrote:
+> > > Hi Marek,
+> > >
+> > > On Fri, 21 Nov 2025 at 11:01, Marek Vasut <marek.vasut@mailbox.org> w=
+rote:
+> > > >
+> > > > On 11/21/25 6:40 PM, Simon Glass wrote:
+> > > >
+> > > > Hello Simon,
+> > > >
+> > > > >>>>> - create a new VALID_OFFSET assumption (split out from VALID_=
+DTB)
+> > > > >>>>> which checks offsets in fdt_next_tag()
+> > > > >>>>>
+> > > > >>>>> The latter might be best. It would likely be very cheap in te=
+rms of
+> > > > >>>>> code size. In fact, I should have thought of this at the time.
+> > > > >>>> Wouldn't it be better to not misuse libfdt ?
+> > > > >>>
+> > > > >>> It actually isn't a misuse. It is perfectly OK to pass an inval=
+id
+> > > > >>> offset and libfdt has defined behaviour in that case, absent any
+> > > > >>> 'assumptions' we force.
+> > > > >>
+> > > > >> It actually isn't OK to pass in invalid offset if we compile FDT=
+ with
+> > > > >> disabled tree validity checks.
+> > > > >
+> > > > > We are saying exactly the same thing, if you read both of the abo=
+ve :-)
+> > > >
+> > > > What I wrote is, that it is NOT OK to pass invalid offset to libfdt=
+ IFF
+> > > > the DT validity checks are disabled. This is yes a misuse.
+> > >
+> > > Yes, of course. It IS OK if you enable the validity checks.
+> > >
+> > > >
+> > > > >>> Remember, in Linux these checks are enabled. We added the 'assu=
+me'
+> > > > >>> thing to reduce code size. Here you have found a situation wher=
+e it
+> > > > >>> breaks stuff, so we should back off the assumption a bit.
+> > > > >> U-Boot also has those checks enabled, SPL does not, and things b=
+reak
+> > > > >> when OF_PLATDATA is enabled and there is no valid node associate=
+d with
+> > > > >> the udevice.
+> > > > >
+> > > > > Right, so add SPL_OF_LIBFDT_ASSUME_MASK for SPL and check the code
+> > > > > size. If it is too much, add a new level FDT_ASSUME_EXISTS before
+> > > > > FDT_ASSUME_SANE and use that for the necessary checks (there will=
+ only
+> > > > > be a few, from my reading of the code).
+> > > > The SPL assumes the FDT is valid, and disables FDT validation in li=
+bfdt,
+> > > > to keep the code size low.
+> > > >
+> > > > U-Boot does enable that validation in libfdt, and grows its size a =
+bit
+> > > > because of that (and also because the DT might come from outside), =
+but
+> > > > SPL can not do that (and control DT does not generally come from ou=
+tside
+> > > > in SPL).
+> > > >
+> > > > That is why these few fixes actually repair the misuse, instead of
+> > > > re-enabling the validation in libfdt.
+> > >
+> > > Enable basic validation if !OF_REAL ? Create a new level of 'assume'
+> > > for just what you need?
+> > >
+> > > It just seems really odd to disable validation and then try to not
+> > > call the functions in case they will crash. The next person who comes
+> > > along will have an unexplained crash. It's just too brittle.
+> >
+> > You seem to have missed the entire context of the problem here. Today,
+> > in upstream exactly one platform disables validation in full U-Boot.
+> > Exactly zero platforms enable any form of validation in xPL. Upstream
+> > dtc has made a large number of changes since v1.4.6. Whatever we have
+> > been assuming could be done cannot be done anymore.
+>=20
+> I took a look at what I landed in upstream dtc, we have
+> ASSUME_VALID_DTB, so we should just use that.
 
-So simply said w/o the socfpga watchdog driver it is problematic I guess.
-So always complying with the driver and leaving DTS to do the job is the
-most stable case.
+Where? Full U-Boot? No, because we're being told to read a random file
+and see if it's a device tree, full checks are fine. xPL? No, we don't
+have room.
 
-The above are not confirmed but actual hardware tests show this behavior.
+> It has very few checks. If we want one more step that really just
+> checks that fdt is not NULL, I could try to do that upstream.
+>=20
+> As to my missing something, I am aware that we don't enable validation
+> in xPL (I still recall writing that code), but also that with
+> OF_PLATDATA enabled, we need some sort of basic validation if people
+> want to call dev_read_...() functions. My attempt to show that was to
+> add assert() statements in some of the ofnode functions. As part of
+> changing this, we should really remove those, or perhaps make them
+> dependent on the 'assume' value.
+>=20
+> The key thing is not to solve the problem at the right level, rather
+> than adding lots of checks to avoid a mine.
 
-Brian
+Then it's a good thing we're not adding lots of checks and instead
+cleaning up the code and removing ifdefs and solving the problem Marek
+ran in to as well.
+
+If there's still some further cleanups that can be done on top of that,
+great. But I'm pretty sure the mask/assume stuff is the wrong place to
+be looking.
+
+--=20
+Tom
+
+--1e2ey3LXjRym4yPT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSRusQAKCRAr4qD1Cr/k
+CmH+AQC9pci2HONmjJAl0oXAheTLVY9Pge90VMM3DKpX59hxrgEAm4IUvDLj1zqM
+u9l3XZd7UUpSp9+vdAOqbC0/xDVZpQ0=
+=ZvwA
+-----END PGP SIGNATURE-----
+
+--1e2ey3LXjRym4yPT--
