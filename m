@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC59CFD313
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 12:50:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BA3DCFA466
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 12:50:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ED2A83DA8;
+	by phobos.denx.de (Postfix) with ESMTP id 8AEDD83DBD;
 	Mon, 24 Nov 2025 13:50:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="R+8DkC7k";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LYNwsw/8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B03883BF4; Mon, 24 Nov 2025 04:56:27 +0100 (CET)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
+ id B3E1883BF4; Mon, 24 Nov 2025 04:59:14 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC5B683ABA
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 04:56:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 603E883ABA
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 04:59:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=h5JW+Ioj0bybSC0E7e0OVQhqMGhnJWKvQ8165in8+6+UsFWgzx3IpOXLmKmz24A7GdREcZaJ6RD6gmkMnVIbVt0+CIZwjLZg9YwHlfvRTcgp4Ork0x3MD3itS5Nu38+bim5CzK0qvRqIZFPUDlKetvd4Z3WE8eRUkkcX7M0qcuR2GM+C9nK4hxMwCuz30BZEw3v/boYobnm7pstOo7hX795/6Me+xyiKYV4iusUJSSCZkHePYdHlOM6DhTLQUHRjgOeItcKkPonsq0R+n1gNY4uq773402gZLJ+Hm49ojYrrwfivwcqiNMJ4Z6qapx3uT9JJ1o2Glmss8JGe/STWbg==
+ b=AJB1RveVWNszSDCTp2eP3QumnHqsSrWkG9jDUGBHl+yU4ahEriceCwbHXSFFWNPh5VSQDJK6YHhHn6x9TiHorE2E2TKKC/MLOKwrt6zdArEtlAziJ4QzR2ti2GOtCkjZsgcqK31NHWHZWVAIzcQN1Eol3NF7EFaeIvkc1BHwHYMyG2VSkZj+p2022ZZU8YNcN/VfG2prlrJ/s+U+FXoQEUCgJmoRDlOgCL2KfjWtPj3SYNrS8NF+zX+GmZPCATe/Oi9dpQiR0WbDosSiKpBYgyUhcO48+8QIPd5RstRVdsMN2y199TbGD5OiOLUeHjzDYqZdDd9e84v+E4CMb8U5pA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Gb41NgOjJ881rS49uZda2BoWKjXYeQZY4mbDhu3AcP4=;
- b=zLeDeDT+ex6QHe11KnkXsZHfF+ufKtj/DFGTIuzXMakv1M15UmlX5v+BXT4SxPoR21BHIrPGVtRvm/gOH2ojKTa70AG/cJ1wOa5ee7x4uykLSBvacK1qzgxDy5uNiKtwOyf/ac8A7xIkYREVDxaNxckSxHfSZi4RLcIuZcWo/OFFKX5ZFG+3gvjQRHiN0vw5cJDjU6VnFKmZFvqMHs+f6Ljq/csThTVQAttbQADifTG8Kxl7LrjsOUEEZUL3g5yYobTwA3gmwI4k6Qiv9Gtg0FIoIxWN2FaWv+Y87V7Bs2yRL3X69vV9dF2zZXBUAIxahJdt7o7i7HEa7m56bxOKrg==
+ bh=wpndIjRuwxGGHV0CWKCODXIpeQN90cQKsRrA/B9hKaI=;
+ b=G9Y3eD4jze5fzNd353SpDYLGWSn/nu7tBu10OuPD0Do2J0xzK3EDdLOI4MdvO2D3RcI2NeQbAiA54lrbUEzS4czJeTt2qfmII/yXokRiQWhqGKODc9aH9H1COmcoK1xuAI6b64J9LZ+DW8IqGCODH8E5z1y0TBG7B+aRzPZGX6jIGwdIKbN1f1JAJQqWjSUHYdsjkgn/9cnnCNjZIY75bnDoQm8y3yAwCutjvzpd/whzlC8JLaV/bvcQxPOWymPVvkgpTVoj4KocJPg3FK/eUaPj645neaOW/HIO0+8Px/d8udpOemfrJrtB1ika3reSViuVNj+CfD989GtjKdtbDg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
+ 198.47.23.194) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
  (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
  (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Gb41NgOjJ881rS49uZda2BoWKjXYeQZY4mbDhu3AcP4=;
- b=R+8DkC7kscAC9yB66iUyPHAHXXLD6zjqinRd2DWzKPh3mafxMivwfb4OpkcL+pQ2r/m1jXlB6jHlLO10sqFh9ej/KhPhLZVX79DOjrCLF7LkYkg797nD5C02c35n42ho1ZqaBFq1xUklMeMmY32RqEPA+B6Uf1za4eenVB1Czxs=
-Received: from PH5P222CA0008.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:34b::10)
- by BY5PR10MB4322.namprd10.prod.outlook.com (2603:10b6:a03:208::13)
+ bh=wpndIjRuwxGGHV0CWKCODXIpeQN90cQKsRrA/B9hKaI=;
+ b=LYNwsw/8VknO6Oq0hy0nFzsnGDzWWtAfi8oOEhl3NSdXzce4Y7sXEn/Fdt1iM1s2iVm1x3Ye7WYWb8Qw7BZ7EIWThACEJRbjPKKt5NmxNmn3JkBbau8JgHL5EPJbBz87cw5JgRPUXHzX7lYQEjapvl3Sk1ZF0nTlEZRSZrkYur4=
+Received: from SN6PR05CA0008.namprd05.prod.outlook.com (2603:10b6:805:de::21)
+ by IA3PR10MB8420.namprd10.prod.outlook.com (2603:10b6:208:579::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Mon, 24 Nov
- 2025 03:56:21 +0000
-Received: from CY4PEPF0000E9D7.namprd05.prod.outlook.com
- (2603:10b6:510:34b:cafe::98) by PH5P222CA0008.outlook.office365.com
- (2603:10b6:510:34b::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.17 via Frontend Transport; Mon,
- 24 Nov 2025 03:56:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ 2025 03:59:08 +0000
+Received: from SA2PEPF0000150A.namprd04.prod.outlook.com
+ (2603:10b6:805:de:cafe::bd) by SN6PR05CA0008.outlook.office365.com
+ (2603:10b6:805:de::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.9 via Frontend Transport; Mon,
+ 24 Nov 2025 03:59:08 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CY4PEPF0000E9D7.mail.protection.outlook.com (10.167.241.70) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SA2PEPF0000150A.mail.protection.outlook.com (10.167.242.42) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9366.7 via Frontend Transport; Mon, 24 Nov 2025 03:56:19 +0000
-Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9366.7 via Frontend Transport; Mon, 24 Nov 2025 03:59:07 +0000
+Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 23 Nov
- 2025 21:56:18 -0600
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 21:59:05 -0600
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 23 Nov
- 2025 21:56:15 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 21:59:03 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sun, 23 Nov 2025 21:56:15 -0600
+ Transport; Sun, 23 Nov 2025 21:59:03 -0600
 Received: from [172.24.235.38] (lt5cd2489kgj.dhcp.ti.com [172.24.235.38])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AO3u5a91247183;
- Sun, 23 Nov 2025 21:56:06 -0600
-Message-ID: <080e5761-a21b-4ff9-b6bc-6c287b048351@ti.com>
-Date: Mon, 24 Nov 2025 09:26:05 +0530
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AO3wrZl1249137;
+ Sun, 23 Nov 2025 21:58:54 -0600
+Message-ID: <094fc5b1-f271-40e6-9dd9-55710370b131@ti.com>
+Date: Mon, 24 Nov 2025 09:28:53 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 03/13] ram: k3-ddrss: Add support for DDR in
- self-refresh
+Subject: Re: [PATCH v6 04/13] firmware: ti_sci: Add
+ TI_SCI_MSG_MIN_CONTEXT_RESTORE
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Tom Rini
  <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, Nishanth Menon
  <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vignesh Raghavendra
@@ -105,72 +105,72 @@ CC: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  <marek.vasut+renesas@mailbox.org>, Andre Przywara <andre.przywara@arm.com>,
  =?UTF-8?Q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>
 References: <20251120-topic-am62-ioddr-v2025-04-rc1-v6-0-6dd99a7271bb@baylibre.com>
- <20251120-topic-am62-ioddr-v2025-04-rc1-v6-3-6dd99a7271bb@baylibre.com>
+ <20251120-topic-am62-ioddr-v2025-04-rc1-v6-4-6dd99a7271bb@baylibre.com>
 Content-Language: en-US
 From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251120-topic-am62-ioddr-v2025-04-rc1-v6-3-6dd99a7271bb@baylibre.com>
+In-Reply-To: <20251120-topic-am62-ioddr-v2025-04-rc1-v6-4-6dd99a7271bb@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D7:EE_|BY5PR10MB4322:EE_
-X-MS-Office365-Filtering-Correlation-Id: d7b6608c-831c-49f7-b249-08de2b0d6cbe
+X-MS-TrafficTypeDiagnostic: SA2PEPF0000150A:EE_|IA3PR10MB8420:EE_
+X-MS-Office365-Filtering-Correlation-Id: 653bd02f-d742-41bc-5c50-08de2b0dd101
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|7416014|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eVNyakFXcnVwK2lIbUF4VGxYVWZLUnNML3RSQkhtc1ZaU1V4dld4akVsUXVD?=
- =?utf-8?B?T0o2cUhKOE9iV1BZTy9oQVVyN0xhdFFKNXV4M2F3Mnd6TG5IOVFTM3ZybHUw?=
- =?utf-8?B?Q1VudS9tMDFHUmtSai9weFNud3hqcDJMSzhzOWhHdDRMQnBHUURiWW9NRGUy?=
- =?utf-8?B?MjlESTlUUEw1ZXBYSlZhZHlsS29KSndBSUcyT09VNzVPMXQ5RTNHNE5rTFdY?=
- =?utf-8?B?Y29vNlZwZUZ4RDFXUEtKZ3BTYVdGWkwyL1JpVVY3TEJJcWU3bTBXSEVKc1d1?=
- =?utf-8?B?UGh2eVFLSlJid2JyTndJVjJ4bEdOWXRWaWhlMHpMSXBxbTVuemVLeFA1Y0Ja?=
- =?utf-8?B?Q2pRMzhWdCs0N0owM0hkUEw1QnpTMG5BUUhTWnNEbnpCYkhZZUVhMCtrV1M4?=
- =?utf-8?B?dW9iRmVHOVlqNHQ4RTljV3BlanhFb0NrbDlBRnZWU0VaK0hyUHpZbTU5bHN4?=
- =?utf-8?B?dEk4djVhdW9yTHRwRzNxM2lSQTdEdkovbWNsNmhNdFNMbUVocy9LTkUyekE1?=
- =?utf-8?B?L2NNSnBGRmYzWFp0VmxCWU1KZEwxd2Z6YUJ3K0tpcFBlMms5bFMrSUJkRlBT?=
- =?utf-8?B?RnU0OS9PZ3doK29FN1pmNW5sNGF6akJWang3amE2ejVGS20vcEZrYmc4SUdv?=
- =?utf-8?B?SHUyQWhDV2kzM2d3UE1EK084cTNueERsT1lRL0Rxb0hRRnN4RDNydERPa0ZY?=
- =?utf-8?B?U3R2K0NoVjFMWUlobm5vMElMOFMwNkcvNWkxQmhVZS9YZG9od0hWalg3T1hr?=
- =?utf-8?B?N2x3cGxIKzJUY0plWjF0aTRkeTZzdUNxV0NGbnJFZmlkREovcmNsbStrVEly?=
- =?utf-8?B?bHhpODR4TWdmc3ZlUmJkVkFrcWhvMGsxSDh5aW0yK0lYS2tSblYwbE1CQzQ1?=
- =?utf-8?B?b2U4SndkK0p1S2Z0OVEzL0oxcW44cFQrSTFJd01uNFQ5cU1oL09Lbjlvc3Mw?=
- =?utf-8?B?NGlkRSs3SnVVa2gzN2FQcEdNZ2l4OUJ1VEdqZ1dMUHVJYkU1VTlSK0hOZUM2?=
- =?utf-8?B?bHBLTGVTOW9UZG5oemIzdEVpZ0cxeDBuOVZ2WndpWXFoYUc2Um5pNGljQ1JQ?=
- =?utf-8?B?NkhCcXdOczFPVVFvUGVYeXJ5MW1DYkl0R2dqZUFsNDkrTGNUUGVJZ1E0N0FP?=
- =?utf-8?B?SExtOXMxaHFBRWNQRmhkQk12a1NwMk4rbFpDamd6b1gvZEhsUG5kTXhTWCtT?=
- =?utf-8?B?aStDY0cveWl6elk0VlBVNzhURlFtOXdXVGdRRVFuTHJ1Z3RwNjdHOWJGRFZ0?=
- =?utf-8?B?ZzcyQ0RQY2ZRL2FmVTNwZ0MvTzNOVkNwRDVuVk1NSFI3QlFnVUUvM0FUaVZk?=
- =?utf-8?B?WXNoRVZTa054Vy9FNXdmNEdyV0ttSVFkQWgzMTBBNVVXbVoyL1hIWms1WVdC?=
- =?utf-8?B?N3pRK1prb0xlODZ0YVFaQ1YySDNGc2dWakttcTJFQU11cmtUcHVkWFN1RUhp?=
- =?utf-8?B?MW8vR0lWelpHVDAyRS9SZ0o3SGlDWHpjUHltdzlsdTRjclA0SWh4WlJwSzVQ?=
- =?utf-8?B?N2QrekJSV3VuUGJmWGRiVGJCTEkxeCtEL3VmTDJodStyaWJGU09DU3VwekNS?=
- =?utf-8?B?MExyUFFDRlpSTWlvK3FydGRhKzZncnRPT2hrdzlQVEROZGR6aFpNdjNBeTJI?=
- =?utf-8?B?UUZMamhpcFNodzNtZExjdkRxaWdJSnBVSE4zRUJrQVMvenIvYXFMTEt4OW9l?=
- =?utf-8?B?VnNJdTU4WDhxTERYTEdmRXR2aUNYZUVCQlBtMjVSTGdORnJOdDVIUzJwQmkz?=
- =?utf-8?B?NTVlUGRGZkNuMW9hWWdWaGVBcGpCVnNSaDRtZ2dyVnVFRUdQZmQ0YXExbXht?=
- =?utf-8?B?WDlHblVRNHBJVmNPbDBqREtyekVUWFdFQm9YVUJOZFJCRWpxZTRRUW5xTjRQ?=
- =?utf-8?B?RWV0Zms0QkRZS1JJbGpZZkUyek9KNHovR0Nvc3hYVnJMVmxqRHc0bXdiVjRW?=
- =?utf-8?B?OUZnaHJUYkNReWNlVHFMcmRCUnpnMjJhOWl5MVNsTGVXdGZqOWRLQXBDck9y?=
- =?utf-8?B?VXpjYjA4QnFkMFNCWkx5Nys0RlNBV0lDK0s4VjdGYldUSnd6OHg2QkFXSkxG?=
- =?utf-8?B?YlhZSTh2MmoreExGRzl0N3dtbFBPVkZKVk5rMk0xV3lmUTNmelU5ZHd6NXB1?=
- =?utf-8?Q?Hsfw=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ ARA:13230040|82310400026|36860700013|7416014|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VFpMK3c4UlhxMlVWWmZDd0N0VzhQbGwyK2lSbVpQVXNZamJJOVpmdjcrdkZC?=
+ =?utf-8?B?RVZheVRzelRaSi80Zm5jc0dQaU54T2JIL0tvUDcraStnMGRUclFXaVQwbUtj?=
+ =?utf-8?B?Q0pLenYrTnBlVTBOWkk0a0x3MHNmQXV3aTQ5SHR0eWVUUFNMbHBvVHhsVDFB?=
+ =?utf-8?B?SnBWSXE3NG1maXA0ZzJKWnFnc0crL0N6NmlWTXFiK0RyOUl0citGMnJCS25j?=
+ =?utf-8?B?SnYxT2laU2pscDVFRkwrNi81Nm1vM0hFd1lTRkExNnZoWk5rWFlKaU5rWmtY?=
+ =?utf-8?B?eU53QjJNTXNGNndITDhDNTVQVS8yMDR6aXJNc0NkL2NXT0t5YVFHQTlhTUpy?=
+ =?utf-8?B?aWZ1dHlJU1gwQmVJTVlsL29NZ1JGeXJBamRIQng2b1czTUpaUndFbGRTbEVi?=
+ =?utf-8?B?SDVueVk4SEp1eFlLbHZSbmdXUjlYb1JkcFNtRlR5SEh1bVh5OUMzR0RkVWkw?=
+ =?utf-8?B?b1FjeWZsR0Y2cWpBR3NxUDBWd0dIMjVDR3hMdklObFZxSStEYit1YWszY1FM?=
+ =?utf-8?B?Rnk5YmRBNlppb0lrZXlBY0xLbTZSWW9ZVld1MkJWWm9HclR5NHNKaW95UzBy?=
+ =?utf-8?B?aUVpY0dkTk51NW5MQnduSmx5bFoyMjhaZE5zVXc2ODhlbzlBUTlWMkRqcitB?=
+ =?utf-8?B?Wm03ak9oUm1MZkpESXFyKzJwaWg3UDRpTjJRTWVSRmxDRTU3QTkvUnlsdC9C?=
+ =?utf-8?B?TUlSUVYxQmFzZXhXSFNrRmprMlF6QVBvS0dhcmJMWUVhdXYyZ3U3d2NaSUZs?=
+ =?utf-8?B?UnNvUHBhcEtOc0s0dGcvb3JZdVEzeGNFd05ibVQrYzlmZHpZSzZPOGs1QWxO?=
+ =?utf-8?B?S2JVMys0OEc3MXRDd2hhb0krMW5rK2w1dUZLOFNPUGJXQWhJaFpVREI1Y25N?=
+ =?utf-8?B?eUdxaW9hbC9xMkdOWDRhRUZOcDdEbE03bE9sNU8yNUVZSGdtUzFYQm9IclJv?=
+ =?utf-8?B?b1kwc0hndHVwK0tXdlU5YVJwNk5sUWNnOHU4QktxVnJid01DYnBYOURBb3Zy?=
+ =?utf-8?B?WUdEdWtORmMxaGJGbWFCWmRzOGtBZnVuM1M4NjJ6Q0pqdUpNOHcyM0kwdDRs?=
+ =?utf-8?B?cjFRZzlIWityU2lleFlTWGpYd1pLcFROMjgrdVJPNE51ZFpIK1NMaDJlWE1j?=
+ =?utf-8?B?a3hCdHgrN3ZteFJMS29mcUVyY0VYR1ExRzg5ejlSalJHNzhydFE0aEVOZW44?=
+ =?utf-8?B?VUlwUCs1cnB1SzVQS1d3MmNrUktwdWViSlhEVDJ2WEsxbHNKY05XcFZ0OXdn?=
+ =?utf-8?B?NXlYOW1ZVDdoc29XVW5ROStmWGR0ci9YT2I2SG92Qk5Dd0IvK0JpOGdkU3VQ?=
+ =?utf-8?B?Z3didU45RzBKN1p6K2lLQ3R0MWVvUG5uYlVyQ0pad2tDWHpMSTMrM0E3cTRn?=
+ =?utf-8?B?OUF3Qy9iUGxNT21LSnNTTm5ycjBaTTlRK2xGWmtkOUV4S2FyMm9ZL3lydmJ5?=
+ =?utf-8?B?TE5aMWIzNXpjTFhXUHFlR3R2SUNwb2RtQzA1UElnSlBFQXFJSGpOQU1nUkZH?=
+ =?utf-8?B?NXo5K0pPWllNSDcxWUJKcXNGdDRGamVMVWVaRE1HaS9tdlF6TXJxWWxaZUZL?=
+ =?utf-8?B?Tmt4OHl0VnU5TTdtRXk3bUZUVCtmR3JzN2h1UWt2N3c5T25WcysremtJZ0px?=
+ =?utf-8?B?Qnc3TzBEekgxNWZWLzVGcnJOVGpySEpRWExBTHowdlh6YVRvMHBoay90VXJw?=
+ =?utf-8?B?cnhFWFM1b2ovUk4rQnFxYU9TbU45SGFyc2swdnFJQjJXcGVxL2g1VktnWWhI?=
+ =?utf-8?B?aDdwOE1UbGNTQU82QzgyU2tjSjNHRzJCT2pseGVRNWx6SUZYcCtQWjl4TEJI?=
+ =?utf-8?B?aXdUOVVhbkZLTzcvKzRPZU9LcVo2UWhtKy9sVEoxYkVYWHFEVkl2d1FPNXhK?=
+ =?utf-8?B?ZGdpOVNwaUZoMUZNZVI4dytQWkFMNnY0QUh1UHhyTU1HSlR2d3YyUmZNdlBE?=
+ =?utf-8?B?bEFJcjhzMnNGV3dvMHBQODlieVhLUWRacVVrNm1tQk1MOXRleDREQzNyUWk1?=
+ =?utf-8?B?bDJoaXJ4bGFRVmkwTHo5eVBiRzlTY1NMQktFTWJRMVNDNnYxTTZGRXlGYUo4?=
+ =?utf-8?B?RlFjZXZCZUs1KysyS2ZXVVZISnhVREd0aXpNUVBBcW8zdU51a1lxbDF0aHg5?=
+ =?utf-8?Q?VyGg=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(7416014)(376014); DIR:OUT;
+ SFS:(13230040)(82310400026)(36860700013)(7416014)(376014)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 03:56:19.1330 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d7b6608c-831c-49f7-b249-08de2b0d6cbe
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 03:59:07.3901 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 653bd02f-d742-41bc-5c50-08de2b0dd101
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D7.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF0000150A.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4322
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8420
 X-Mailman-Approved-At: Mon, 24 Nov 2025 13:50:30 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -190,253 +190,144 @@ X-Virus-Status: Clean
 
 
 On 11/20/2025 9:33 PM, Markus Schneider-Pargmann (TI.com) wrote:
-> In IO+DDR the DDR is kept in self-refresh while the SoC cores are
-> powered off completely. During boot the normal initialization routine of
-> DDR is slightly different to exit self-refresh and keep the DDR contents.
+> This patch adds code to be able to call TI_SCI_MSG_MIN_CONTEXT_RESTORE.
+> The context needs to be restored after booting SPL when resuming from
+> IO+DDR.
 >
 > Tested-by: Anshul Dalal <anshuld@ti.com>
 > Reviewed-by: Dhruva Gole <d-gole@ti.com>
 > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 > ---
->   drivers/ram/k3-ddrss/k3-ddrss.c | 180 ++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 180 insertions(+)
+>   drivers/firmware/ti_sci.c              | 38 ++++++++++++++++++++++++++++++++++
+>   drivers/firmware/ti_sci.h              | 16 ++++++++++++++
+>   include/linux/soc/ti/ti_sci_protocol.h |  9 ++++++++
+>   3 files changed, 63 insertions(+)
 >
-> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-> index 5144470b931384534e78fbfcea5e66b7083c9f07..e049b36519521213260da7aef933236b62a2b33b 100644
-> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
-> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-> @@ -57,6 +57,19 @@
->   #define DDRSS_V2A_INT_SET_REG_ECC2BERR_EN	BIT(4)
->   #define DDRSS_V2A_INT_SET_REG_ECCM1BERR_EN	BIT(5)
->   
-> +#define K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL			0x430080d0
-> +#define K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD		BIT(31)
-> +#define K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK	GENMASK(3, 0)
-> +
-> +#define K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1			0x4301830c
-> +#define K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE	BIT(0)
-> +
-> +#define K3_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT		0x43018318
-> +#define K3_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW		0x555555
-> +
-> +#define K3_DDRSS_LPM_TIMEOUT_MS 5000
-> +#define K3_DDRSS_RETENTION_TIMEOUT_MS 5000
-
-Please move add LPM related code into different file.
-
-Here LPM and DDR code is getting mixed into DDR driver.
-
-
-> +
->   #define SINGLE_DDR_SUBSYSTEM	0x1
->   #define MULTI_DDR_SUBSYSTEM	0x2
->   #define MAX_MULTI_DDR 4
-> @@ -211,6 +224,32 @@ struct reginitdata {
->   #define DENALI_CTL_0_DRAM_CLASS_DDR4		0xA
->   #define DENALI_CTL_0_DRAM_CLASS_LPDDR4		0xB
->   
-> +#define K3_DDRSS_CFG_DENALI_CTL_20				0x0050
-> +#define K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE		BIT(24)
-> +#define K3_DDRSS_CFG_DENALI_CTL_21				0x0054
-> +#define K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE		BIT(8)
-> +#define K3_DDRSS_CFG_DENALI_CTL_106				0x01a8
-> +#define K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT		BIT(16)
-> +#define K3_DDRSS_CFG_DENALI_CTL_160				0x0280
-> +#define K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK			GENMASK(14, 8)
-> +#define K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY		BIT(9)
-> +#define K3_DDRSS_CFG_DENALI_CTL_169				0x02a4
-> +#define K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK	GENMASK(27, 24)
-> +#define K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK	GENMASK(19, 16)
-> +#define K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK		GENMASK(14, 8)
-> +#define K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT		8
-> +#define K3_DDRSS_CFG_DENALI_CTL_345				0x0564
-> +#define K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT	16
-> +#define K3_DDRSS_CFG_DENALI_CTL_353				0x0584
-> +#define K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT	16
-> +#define K3_DDRSS_CFG_DENALI_PI_6				0x2018
-> +#define K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R	BIT(8)
-> +#define K3_DDRSS_CFG_DENALI_PI_146				0x2248
-> +#define K3_DDRSS_CFG_DENALI_PI_150				0x2258
-> +#define K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN		BIT(8)
-> +#define K3_DDRSS_CFG_DENALI_PHY_1820				0x5C70
-> +#define K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT	16
-> +
->   #define TH_OFFSET_FROM_REG(REG, SHIFT, offset) do {\
->   	char *i, *pstr = xstr(REG); offset = 0;\
->   	for (i = &pstr[SHIFT]; *i != '\0'; ++i) {\
-> @@ -864,6 +903,132 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
->   	writel(val, base + DDRSS_ECC_CTRL_REG);
+> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+> index 6f57dcfe8de8f874318cd53372c798d182faae73..f1cb871e8f45013097f6f8188222770ffe3653dc 100644
+> --- a/drivers/firmware/ti_sci.c
+> +++ b/drivers/firmware/ti_sci.c
+> @@ -2710,6 +2710,41 @@ static int ti_sci_cmd_change_fwl_owner(const struct ti_sci_handle *handle,
+>   	return ret;
 >   }
 >   
-> +static void k3_ddrss_reg_update_bits(void __iomem *addr, u32 offset, u32 mask, u32 set)
+> +static int ti_sci_cmd_restore_context(const struct ti_sci_handle *handle, u64 ctx_addr)
 > +{
-> +	u32 val = readl(addr + offset);
+> +	struct ti_sci_msg_min_restore_context_req req;
+> +	struct ti_sci_msg_hdr *resp;
+> +	struct ti_sci_info *info;
+> +	struct ti_sci_xfer *xfer;
+> +	int ret = 0;
 > +
-> +	val &= ~mask;
-> +	val |= set;
-> +	writel(val, addr + offset);
-> +}
+> +	if (IS_ERR(handle))
+> +		return PTR_ERR(handle);
+> +	if (!handle)
+> +		return -EINVAL;
 > +
-> +static void k3_ddrss_self_refresh_exit(struct k3_ddrss_desc *ddrss)
-> +{
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_169,
-> +				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_EXIT_EN_MASK |
-> +				 K3_DDRSS_CFG_DENALI_CTL_169_LP_AUTO_ENTRY_EN_MASK,
-> +				 0x0);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_PHY_1820,
-> +				 0,
-> +				 BIT(2) << K3_DDRSS_CFG_DENALI_PHY_1820_SET_DFI_INPUT_2_SHIFT);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_106,
-> +				 0,
-> +				 K3_DDRSS_CFG_DENALI_CTL_106_PWRUP_SREFRESH_EXIT);
-> +	writel(0, ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_PI_146);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_PI_150,
-> +				 K3_DDRSS_CFG_DENALI_PI_150_PI_DRAM_INIT_EN,
-> +				 0x0);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_PI_6,
-> +				 0,
-> +				 K3_DDRSS_CFG_DENALI_PI_6_PI_DFI_PHYMSTR_STATE_SEL_R);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_21,
-> +				 K3_DDRSS_CFG_DENALI_CTL_21_PHY_INDEP_INIT_MODE,
-> +				 0);
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_20,
-> +				 0,
-> +				 K3_DDRSS_CFG_DENALI_CTL_20_PHY_INDEP_TRAIN_MODE);
-> +}
+> +	info = handle_to_ti_sci_info(handle);
 > +
-> +static void k3_ddrss_lpm_resume(struct k3_ddrss_desc *ddrss)
-> +{
-> +	int ret;
-> +	unsigned long timeout_start;
-> +
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_160,
-> +				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK,
-> +				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY);
-> +	ret = wait_for_bit_32(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_345,
-> +			      (1 << K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT),
-> +			      true, 5000, false);
-> +	if (ret)
-> +		panic("Failed waiting for low power command %d\n", ret);
-> +
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_353,
-> +				 0,
-> +				 1 << K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT);
-> +
-> +	timeout_start = get_timer(0);
-> +	while (1) {
-> +		if (get_timer(timeout_start) > K3_DDRSS_LPM_TIMEOUT_MS)
-> +			panic("Failed waiting for low power state\n");
-> +
-> +		if ((readl(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_169) &
-> +		     K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK) ==
-> +		    0x40 << K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT)
-> +			break;
+> +	xfer = ti_sci_setup_one_xfer(info, TI_SCI_MSG_MIN_CONTEXT_RESTORE,
+
+function name should be ti_sci_cmd_restore_min_context or change 
+TI_SCI_MSG_MIN_CONTEXT_RESTORE
+
+
+> +				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
+> +				     (u32 *)&req, sizeof(req), sizeof(*resp));
+> +	if (IS_ERR(xfer)) {
+> +		ret = PTR_ERR(xfer);
+> +		return ret;
 > +	}
+> +
+> +	req.ctx_lo = (u32)(ctx_addr & 0xffffffff);
+> +	req.ctx_hi = (u32)(ctx_addr >> 32);
+> +
+> +	ret = ti_sci_do_xfer(info, xfer);
+> +	if (ret) {
+> +		dev_err(info->dev, "Failed restoring context %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return ret;
 > +}
 > +
-> +static void k3_ddrss_deassert_retention(struct k3_ddrss_desc *ddrss)
-> +{
-> +	int ret;
-> +
-> +	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-> +				 0x0,
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD |
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RETENTION_MASK,
-> +				 0);
-> +	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-> +				 0x0,
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD);
-> +
-> +	ret = wait_for_bit_32((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-> +			      K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-> +			      true, K3_DDRSS_RETENTION_TIMEOUT_MS, false);
-> +	if (ret)
-> +		panic("Failed waiting for latching of retention %d\n", ret);
-> +
-> +	k3_ddrss_reg_update_bits((void *)K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL,
-> +				 0x0,
-> +				 K3_WKUP_CTRL_MMR0_DDR16SS_PMCTRL_DATA_RET_LD,
-> +				 0);
-> +}
-> +
-> +static bool k3_ddrss_wkup_conf_canuart_wakeup_active(struct k3_ddrss_desc *ddrss)
-> +{
-> +	u32 active;
-> +
-> +	active = readl((void *)K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1);
-> +
-> +	return !!(active & K3_WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE);
-> +}
-> +
-> +static bool k3_ddrss_wkup_conf_canuart_magic_word_set(struct k3_ddrss_desc *ddrss)
-> +{
-> +	u32 magic_word;
-> +
-> +	magic_word = readl((void *)K3_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT);
-> +
-> +	return magic_word == K3_WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW;
-> +}
-> +
-> +static bool k3_ddrss_wkup_conf_boot_is_resume(struct k3_ddrss_desc *ddrss)
-> +{
-> +	return IS_ENABLED(CONFIG_K3_IODDR) &&
-> +		k3_ddrss_wkup_conf_canuart_wakeup_active(ddrss) &&
-> +		k3_ddrss_wkup_conf_canuart_magic_word_set(ddrss);
-> +}
-> +
->   static int k3_ddrss_probe(struct udevice *dev)
->   {
->   	u64 end, bank0, bank1, bank0_size;
-> @@ -873,6 +1038,7 @@ static int k3_ddrss_probe(struct udevice *dev)
->   	__maybe_unused u32 inst;
->   	__maybe_unused struct k3_ddrss_ecc_region *range = ddrss->ecc_ranges;
->   	__maybe_unused struct k3_msmc *msmc_parent = NULL;
-> +	bool is_lpm_resume;
+>   /*
+>    * ti_sci_setup_ops() - Setup the operations structures
+>    * @info:	pointer to TISCI pointer
+> @@ -2728,6 +2763,7 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
+>   	struct ti_sci_rm_psil_ops *psilops = &ops->rm_psil_ops;
+>   	struct ti_sci_rm_udmap_ops *udmap_ops = &ops->rm_udmap_ops;
+>   	struct ti_sci_fwl_ops *fwl_ops = &ops->fwl_ops;
+> +	struct ti_sci_lpm_ops *lpm_ops = &ops->lpm_ops;
 >   
->   	debug("%s(dev=%p)\n", __func__, dev);
+>   	bops->board_config = ti_sci_cmd_set_board_config;
+>   	bops->board_config_rm = ti_sci_cmd_set_board_config_rm;
+> @@ -2795,6 +2831,8 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
 >   
-> @@ -880,6 +1046,11 @@ static int k3_ddrss_probe(struct udevice *dev)
->   	if (ret)
->   		return ret;
+>   	fw_ops->get_dm_version = ti_sci_cmd_get_dm_version;
+>   	fw_ops->query_dm_cap = ti_sci_cmd_query_dm_cap;
+> +
+> +	lpm_ops->restore_context = ti_sci_cmd_restore_context;
+>   }
 >   
-> +	is_lpm_resume = k3_ddrss_wkup_conf_boot_is_resume(ddrss);
-> +
-> +	if (is_lpm_resume)
-> +		dev_info(dev, "Detected IO+DDR resume\n");
-> +
->   	ddrss->dev = dev;
->   	ret = k3_ddrss_power_on(ddrss);
->   	if (ret)
-> @@ -895,12 +1066,21 @@ static int k3_ddrss_probe(struct udevice *dev)
->   	k3_lpddr4_init(ddrss);
->   	k3_lpddr4_hardware_reg_init(ddrss);
+>   /**
+> diff --git a/drivers/firmware/ti_sci.h b/drivers/firmware/ti_sci.h
+> index ce50bf6800eb1fee70a872d8ae648b1a9582b681..3f8c27c7d8c5b35cc55c18ed33225e7b5262b3da 100644
+> --- a/drivers/firmware/ti_sci.h
+> +++ b/drivers/firmware/ti_sci.h
+> @@ -45,6 +45,9 @@
+>   #define TI_SCI_MSG_QUERY_CLOCK_FREQ	0x010d
+>   #define TI_SCI_MSG_GET_CLOCK_FREQ	0x010e
 >   
-> +	if (is_lpm_resume)
-> +		k3_ddrss_self_refresh_exit(ddrss);
+> +/* Low Power Mode Requests */
+> +#define TI_SCI_MSG_MIN_CONTEXT_RESTORE	0x0308
 > +
->   	ret = k3_ddrss_init_freq(ddrss);
->   	if (ret)
->   		return ret;
+>   /* Processor Control Messages */
+>   #define TISCI_MSG_PROC_REQUEST		0xc000
+>   #define TISCI_MSG_PROC_RELEASE		0xc001
+> @@ -1572,4 +1575,17 @@ struct ti_sci_msg_fwl_change_owner_info_resp {
+>   	u16			owner_permission_bits;
+>   } __packed;
 >   
-> +	if (is_lpm_resume)
-> +		k3_ddrss_deassert_retention(ddrss);
+> +/**
+> + * struct ti_sci_msg_min_restore_context_req - Request to restore context from DDR
+> + *
+> + * @hdr:		Generic Header
+> + * @ctx_lo		Low 32-bits of physical pointer to address to use for context save.
+> + * @ctx_hi		High 32-bits of physical pointer to address to use for context save.
+> + */
+> +struct ti_sci_msg_min_restore_context_req {
+> +	struct ti_sci_msg_hdr	hdr;
+> +	u32			ctx_lo;
+> +	u32			ctx_hi;
+> +} __packed;
 > +
->   	k3_lpddr4_start(ddrss);
+>   #endif /* __TI_SCI_H */
+> diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
+> index 52696763ecf6bc2336e796978e1cc02896db13ab..cb9798c8546617bcea9cc0f49f19c70e1e2c16f1 100644
+> --- a/include/linux/soc/ti/ti_sci_protocol.h
+> +++ b/include/linux/soc/ti/ti_sci_protocol.h
+> @@ -632,6 +632,14 @@ struct ti_sci_fwl_ops {
+>   	int (*change_fwl_owner)(const struct ti_sci_handle *handle, struct ti_sci_msg_fwl_owner *owner);
+>   };
 >   
-> +	if (is_lpm_resume)
-> +		k3_ddrss_lpm_resume(ddrss);
+> +/**
+> + * struct ti_sci_lpm_ops - Low Power Mode operations
+> + * @restore_context: Request restoring context from DDR.
+> + */
+> +struct ti_sci_lpm_ops {
+> +	int (*restore_context)(const struct ti_sci_handle *handle, u64 ctx_addr);
+> +};
 > +
->   	if (IS_ENABLED(CONFIG_K3_INLINE_ECC)) {
->   		if (!ddrss->ddrss_ss_cfg) {
->   			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
+>   /**
+>    * struct ti_sci_ops - Function support for TI SCI
+>    * @board_ops:	Miscellaneous operations
+> @@ -654,6 +662,7 @@ struct ti_sci_ops {
+>   	struct ti_sci_rm_psil_ops rm_psil_ops;
+>   	struct ti_sci_rm_udmap_ops rm_udmap_ops;
+>   	struct ti_sci_fwl_ops fwl_ops;
+> +	struct ti_sci_lpm_ops lpm_ops;
+>   };
+>   
+>   /**
 >
