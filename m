@@ -4,98 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9943BCFD313
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 14:17:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1C16CFD313
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 14:17:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB81A83BEF;
-	Mon, 24 Nov 2025 15:17:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 32B1D83DDD;
+	Mon, 24 Nov 2025 15:17:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HOSC74hn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TZgwcU0u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3CF783DB6; Mon, 24 Nov 2025 15:17:42 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id A057C83DE4; Mon, 24 Nov 2025 15:17:47 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BD6B83B85
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 15:17:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8380483DCB
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 15:17:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-3d70c5bb455so1516971fac.1
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 06:17:40 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c6da5e3353so3107989a34.3
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 06:17:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1763993854; x=1764598654; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KiNlO20V4+gME7/XbAIjF14uc4vNplKHiuTe57VT+l4=;
- b=HOSC74hnjnj37cv4/U0p6MeA2rhisFfRsameNYxNumXszPUWspcQ8DFaMHP3sFvr7w
- 2I9p6OrlffpRSuPkE4AK68zOKFK0gbjqSev5z72XYzpYRnVRjvpWyw/cVDOIwW/oCbgR
- uL8EexuemuaYOEXvcnRcvLBq/Ete5jU+ttVAw=
+ d=gmail.com; s=20230601; t=1763993864; x=1764598664; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fgekWoYPsb8J/Ozw9WMhKBBRYjW5fIg/uLGqKIYbpGQ=;
+ b=TZgwcU0uyIiD4yNZq75P/JAuo8ptjAoL2YJuC8lX+vtCmxkdugxpXxsCBC1GKV/E6Z
+ Sr6G2+/dCqYWKEDoHtqyBvglqMwrSX64H9cxmmzuOOhYst/P+AQSF2uoSLkxRiCE2K85
+ y5G466w/42dWEzkGtwe10W4XvhIlwr17NQZD4Zc8ybF+zuR42K6IapSL0cXHVei/Ud6+
+ UCE+K571c3+4SNY8fjABkhd9ZkvvnXXRQIX9sdOgxnpM6O8icV/Xf+uX6CbwB+4Rl3fF
+ qJXvnnEnq/zaQKH/E/cF/efFVblgmg1A+7ClUn+uSVz2Ny3SmTCqat+Qv0cMRcgYmLw6
+ gyiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763993854; x=1764598654;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KiNlO20V4+gME7/XbAIjF14uc4vNplKHiuTe57VT+l4=;
- b=DE9z47fUJ2ZB7lOEiqyBGdjgUMhmeMrf9IoloY8afMxfiOXPia+wDteNLv3yYEjkE9
- 2hpQp/DVdFgbKYgNz96BrE29iGhuKpuY6FlKpzXsU2wSmhALab0Z6lLJA1vkv119LP08
- SvqfZ4N+ofReHNWJCgVNGo2hQ97Z+SC4VAn7oC5FOCscRxJ1n3fRUVoACIesLSmT8Gr+
- k6Y+oNAqyeCAY7zeULYVfqzUjPtp3XHRcYsPYQGAKnvItwiYwl9IpdNl8dFwZ/d4usH9
- P7LvJV4Rtah1jXcCQj9fDzLfVbcn5Ka8mKkxUiv28N8MhvdirqHEWr/3txIflZMRbBEA
- 7NdQ==
+ d=1e100.net; s=20230601; t=1763993864; x=1764598664;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fgekWoYPsb8J/Ozw9WMhKBBRYjW5fIg/uLGqKIYbpGQ=;
+ b=pnsdDXP/AL2LQTIVX+7/+BIOSwAAuXzNs6B41O0R7aQBIpGJbsVU/Y9w22vwDAwmiJ
+ jFHC6Nvsj/kXo8GQ6CTgaBWPVUPUiMyro31X3DpD1Gyi/1wv3XY0qz6kkeMnHqbUawXV
+ iOvzBdlO+//uHf0I7PcCfuIKlY4340C0/TJ3B3o295c/MIX641v9l9GPhT2TVzSvoWwN
+ GzsKur71q9RoI2wMwuCvxxwVUy717qRkWHaJNYriDf0QWIcg9avdHE613gjMrAyqtnMp
+ ytMCutotrNm0E48cjLZrlY4MUovY1N+bkup6X0gIP0yj0KDgBSFyY2TFW2/meJ4kprrZ
+ XYgg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXVDe+yC+H3gQp2zinrOengGHrl2f/TAaHY8nNUkwi5LSNXPlQRgI6E6TVLcSYFXaVcaAn1yOc=@lists.denx.de
-X-Gm-Message-State: AOJu0YymcEnTDypDuEN6nlvQaactMwKj1HkEt+6lMqJEn8EWM3PBUX5s
- yT2XMI5M7fzcbfBwaniAuLObpInlCvfQhH5ov/SGMzK57rPdWgc93jvgVa6P7hHfU2Q=
-X-Gm-Gg: ASbGnctowcOFMm79tzd1FKEO0xcfaSoWZ4uRqUGUk7WVzvNKv2CNwbumBfaFsban3hM
- MBxWBv4Q+krvyDUNlBskoW1p1LQ6ZjX2kFesuAISuWF9oEdVfFq0tOba9TxGYvvUqzsfshu/Bnp
- ebuWIclkFK8n5drUD3rndpxkNShjWavSqOjPn4ZWlk8MDcsS894Gqc/1vu9QeaGNnTddGSPgQUS
- upUuGZa5ZEenYWIyqUr38INkUQqi+uwGFh55gPIgSfWjTWE2Bba6SdesrvrhYP3xwLyqXfO+wok
- iCtYr8w+Z91tlOJsEIm+d8i1HEvgoPuZI6qMF7+GTOWsONs71bQQ/dNGuQ9kF9cepHCSRFVrX4j
- eHl2DxsGV4ibIQPDV0vUZPv8gm0+fBLyKutLKQ/k3iXJOetNFAFFbGYUbbbuqAzrpgUop+Rhw/M
- NUsboz8Nyuee+vZjL6D0vIThvkM74TsoG6FojsgVOZTKSrDDUidA==
-X-Google-Smtp-Source: AGHT+IHHFriKxP9ywhcObowd6oqi5Vc0DtCfKVn0mDK9MtXTQ0PLoyQq9b6yogT42fKa+h1iaKjAqw==
-X-Received: by 2002:a05:6870:648e:b0:3d2:590b:8d12 with SMTP id
- 586e51a60fabf-3ecbe5863e7mr4768845fac.45.1763993854348; 
- Mon, 24 Nov 2025 06:17:34 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ec9c344676sm6199165fac.6.2025.11.24.06.17.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Nov 2025 06:17:33 -0800 (PST)
-Date: Mon, 24 Nov 2025 08:17:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>,
- Alexander Graf <agraf@csgraf.de>, Bin Meng <bmeng.cn@gmail.com>,
- =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Heiko Schocher <hs@nabladev.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Richard Weinberger <richard@nod.at>,
- Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 07/19] test: cmd_exit_test depends on CONFIG_HUSH_PARSER
-Message-ID: <20251124141730.GJ2125796@bill-the-cat>
-References: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
- <20251123225711.227016-8-heinrich.schuchardt@canonical.com>
+ AJvYcCXXa+vUyKoYBoKS7ZhsMC21f3IGwigQFBdUjIUFyhcMS8xGxF86HZSMCtIY3FOSI0GFNlZ+kbM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw3/PL3rXFPiG+vt6wsc1TSnEhk4yB2iHhMOH1BVCI0sq3HeYKV
+ 8q1s6fchLpy3x4OQ475smHbb+oT7WouSQSb5mKDwP5Fby6zvKMyriJKgkjbGxXxnOpG4M0yASEz
+ TW2hVr6tP8HYGbhOZr/TNcxbxilMPqLedoH1P
+X-Gm-Gg: ASbGnctYMhdg7Ymu+oTJE1zw71+lj+/Ne+XmaAhcZmoMi859A845rzvaZd96gDBIUio
+ 4hFo6cfUdtrdGaB4Cl9LVDQsHgx6ej1wlV6rAP1EeX5yMPIMc86Ew6Gb9ZJxfnqCvTSAGYgV9Ni
+ kaYibkTV9iwZKnmS+rPafNp+7OoKyNfvprHQNSGXwT247snrD3kpXQC8DuSC8duldbi8xj8AYCw
+ VNqLfADoeWN9AOAFXS+q2tNU17yVOUCx2jjGIKu8YsfdxWBG2QBXlniKVR9Oyh3j2wdusMD
+X-Google-Smtp-Source: AGHT+IE1dXd3XbP2hWbOr7w9oqLlh7bi6lMLF8fqq2ZkoteKZXAWmkIGYB70E/9d98vMbHizUVz7+fdfvQeXgsUsL5E=
+X-Received: by 2002:a9d:6148:0:b0:7c6:819d:bddd with SMTP id
+ 46e09a7af769-7c798d04506mr5525433a34.34.1763993864068; Mon, 24 Nov 2025
+ 06:17:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="n8Cjlm6yVhnIqmzF"
-Content-Disposition: inline
-In-Reply-To: <20251123225711.227016-8-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251115113118.783-1-briansune@gmail.com>
+ <CAN7C2SCQQ62=e6FEVW=jrLSj8hoWjDxUWMjQGohrpaeYjY-W9w@mail.gmail.com>
+ <27fc092f-36e5-4f20-b8b6-c25e529fbe2b@cherry.de>
+In-Reply-To: <27fc092f-36e5-4f20-b8b6-c25e529fbe2b@cherry.de>
+From: Sune Brian <briansune@gmail.com>
+Date: Mon, 24 Nov 2025 22:17:33 +0800
+X-Gm-Features: AWmQ_bnQy099N94CPSZvq7134patv1yogF1HJVuKg1lkMsg0RGzlWM5SmYpQrMw
+Message-ID: <CAN7C2SCCA9CV1rSEy1fosaE=EDE70LMOLcfTsVz4nvNMsH0mFg@mail.gmail.com>
+Subject: Re: [PATCH v1] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,49 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> Device Tree is representation of the hardware. Is the watchdog present
+> in hardware? Yes? Then status = "okay".
+>
+> Ideally, the board shouldn't fail if watchdog is enabled in DT but not
+> the driver (and vice-versa).
+>
+> Do you know what the actual issue is? Why does it fail when watchdog is
+> enabled in DT but not the driver?
 
---n8Cjlm6yVhnIqmzF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Best guess watchdog timeout.
+I have no clue but this is the case.
+Otherwise it cannot explain why it is always at the point of message
+check and fails.
 
-On Sun, Nov 23, 2025 at 11:56:59PM +0100, Heinrich Schuchardt wrote:
+If DT is enabled but not the driver then the driver is empty from first place.
+AKA the watchdog never initializes proper cycling? (my assumption)
+If the driver enables but DT does not then it simply disables during
+probe or ops?
+(also my assumption)
 
-> The exit command is not available if CONFIG_HUSH_PARSER=3Dn
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  test/Kconfig      | 1 +
->  test/cmd/Makefile | 2 +-
->  2 files changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/test/Kconfig b/test/Kconfig
-> index 77e7cad3984..6a4a5fc6708 100644
-> --- a/test/Kconfig
-> +++ b/test/Kconfig
-> @@ -3,6 +3,7 @@ menu "Testing"
->  config UNIT_TEST
->  	bool "Unit tests"
->  	depends on CMDLINE
-> +	imply HEXDUMP
->  	help
->  	  Select this to compile in unit tests for various parts of
->  	  U-Boot. Test suites will be subcommands of the "ut" command.
+So simply said w/o the socfpga watchdog driver it is problematic I guess.
+So always complying with the driver and leaving DTS to do the job is the
+most stable case.
 
-This should be its own commit, or part of the hexdump patch.
+The above are not confirmed but actual hardware tests show this behavior.
 
---=20
-Tom
-
---n8Cjlm6yVhnIqmzF
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSRo9wAKCRAr4qD1Cr/k
-CsAeAQDsTprBhzn9WRg6NZ3hpk02KXOFll1d0YtMsuWTkP3OCAEA7MBZFHB3fbI8
-1iqNx/JhLoyU4CEfPFNT0El2hqjVNw0=
-=YSLn
------END PGP SIGNATURE-----
-
---n8Cjlm6yVhnIqmzF--
+Brian
