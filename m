@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57331CFD313
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 12:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 692EDCFA466
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 12:51:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14C8C83DE9;
+	by phobos.denx.de (Postfix) with ESMTP id 5495983DEE;
 	Mon, 24 Nov 2025 13:50:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gNwHkbd3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xdFNBPKZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DEE083BF4; Mon, 24 Nov 2025 05:06:47 +0100 (CET)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
+ id 9CE7883BF4; Mon, 24 Nov 2025 05:08:16 +0100 (CET)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E751683B72
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 05:06:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 848A983B72
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 05:08:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sREaaNQXW/fNBk6C1Jpj4WtubOsVfEZiq68w/d1GAgbiW8vlitk/3+3HaIMObaE24IKo7A/ZuA4Mpso22VpU6LoNoIsgnjowsGBzE2P+jlA2/QHr6GoDWxnXuwoXpqB9YwXWum9UiePW3nYZzSyloGqTyQWRYF4PDl6bxQ2DE/xEUxSztnesCegSA4W83TzLiQtWBQqEcM5cYasGAsXQdlBFtxlE9ejp1CkJh3S9TsnHBNYbF0sl5aC5e9ziTGGWdm1ZFrAiPIWiKHqiofnGmcnJ2J/SvWKqqPck7E1p/iipq2I8IWsXmbUj65p6HBORK/EepvVAmxvrfzz6IWzbrg==
+ b=PcAfI52VX13ExMnfde/pXyeZu8FxCqkhtzDcnZGH5YrvbKlgty4SQfGMETBaLUOpljkQNd+ScnBJFqeXkdBXuR/hdbbqc4fk5TUU7ZAvB8uHXt6rnGpvY5D2mQPs6H/+T6n11UX3L/+KcUl+IYfsQcjPp50ZCD4oPrMa+MVkS8d6iZ6xjo2k9EeDWzuaycdroOcwoXUcBxuxpSxdF7nw8jWWn1/2wyXcMbHpJMcJ8aLZs1dmCFMdWhZ0DRnd1a9/uHcUHOPNU6wYejMm1XXw2qcHZ2F9oDUDsQ/B5NHvASS91rlBYqdqfjtXghOYnIvmlzNXUvSiCIAuZwRlwudH4A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rgToIQBjNg3ptheBJDpwB184XwHxoFXtKODIJF8s9Uo=;
- b=FMt8OR6y/LfnaSJq2HZsqptmywiFSNJUf8rRjDkOC1eg5+CiFQvxxiugi/dIHnGzSKTp7Kedn1iVS9h7n03hq6oUIMl4HVtHJbdSeu1y2EHsTkgxPGSFIEEL7ook+SvwHVb9ejjTULGCUI0D7jqm+DP3muxraTSP2hCkvasNyRBlpFc+cILM6PS+AC5CSLTM1xej0/0mYZwx2bGigQbIsmfvH/ftf+5X9bKl0NOYUS3lNF0wCz/aTJey3MAwPHAdFdcvZvW2uJsmozCOjuWJnEF42Yt5KXXQYNKfQUl8z1MVaC7OxCR1w4GNRTvubc/lx4MAfmv1Br0Q2lPDSaZlUg==
+ bh=5Fm4egomxFKFSrFj5IhiZzbZvjR40n05gRlol1oJewU=;
+ b=BGOGXCPOk9fldcdyYQCXj5UxPeWL9dYeDUmC8wxKhOMnMJAuDVFINgJU+qsin8ajraR1H0TD8bbema3T00MhENaqrHXwBiEygedG/S0DFDj6MzH8G50OYo7Fb5jz9VM4AcrHzk/F/oSEgL93cfk+DIVjtPeEd3DHdFma0L6UJqZaaqWTN4YwOYxFnm+sDhXGKc0TEUfNwfdxGuX1lmA4hAqWnTcFCisxDtvznfjsfdMAdEB4zjFFDI6Qae4WQIr57Bk0/YIZtUp/4jBBDU6758UycP1uST9SGoO2hiWOEDGGs1FPXeV1AKSVBUm68LSwV1rl59Hyy8HSc+9WziUkuQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
+ 198.47.23.195) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
  (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
  (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rgToIQBjNg3ptheBJDpwB184XwHxoFXtKODIJF8s9Uo=;
- b=gNwHkbd3kAfk2BJtFmZCBhBROnhsG3bLieH6Ctbb8t45WWHQ6ahv68H/iVJBqunNKU0V8erTBcIVbtUeqtGSVzk/kettpsjtAtc1RYtUuvm7y8f9cvimJXnqsxxMb8Qmjy9cSvybXrCQeYkAdbTgOYX/AgolY7KKgijWq5ulcZA=
-Received: from BY5PR13CA0008.namprd13.prod.outlook.com (2603:10b6:a03:180::21)
- by CYYPR10MB7571.namprd10.prod.outlook.com (2603:10b6:930:cb::8) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=5Fm4egomxFKFSrFj5IhiZzbZvjR40n05gRlol1oJewU=;
+ b=xdFNBPKZYsd+vgTbrrv8Zmbbcv3grE5YflGh9h8tXoIcPPN2tSm+FAxNv/DsbUjWB6AZ8TlJHsVtiQntbRp3lc0o70XDpru9OlqEKIjnz5/0f5E96vb6VAXjkdtx1vdl+CGAilk2sKbK0qTGHXDgoagOUZhkP9xyTDmmoZA0ZO0=
+Received: from SA0PR11CA0110.namprd11.prod.outlook.com (2603:10b6:806:d1::25)
+ by SA0PR10MB6425.namprd10.prod.outlook.com (2603:10b6:806:2c0::8)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Mon, 24 Nov
- 2025 04:06:42 +0000
-Received: from SJ1PEPF000023CB.namprd02.prod.outlook.com
- (2603:10b6:a03:180:cafe::8c) by BY5PR13CA0008.outlook.office365.com
- (2603:10b6:a03:180::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.9 via Frontend Transport; Mon,
- 24 Nov 2025 04:06:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ 2025 04:08:11 +0000
+Received: from SN1PEPF0002636C.namprd02.prod.outlook.com
+ (2603:10b6:806:d1:cafe::73) by SA0PR11CA0110.outlook.office365.com
+ (2603:10b6:806:d1::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.17 via Frontend Transport; Mon,
+ 24 Nov 2025 04:08:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SJ1PEPF000023CB.mail.protection.outlook.com (10.167.244.5) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ SN1PEPF0002636C.mail.protection.outlook.com (10.167.241.137) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9366.7 via Frontend Transport; Mon, 24 Nov 2025 04:06:41 +0000
-Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9366.7 via Frontend Transport; Mon, 24 Nov 2025 04:08:10 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 23 Nov
- 2025 22:06:40 -0600
-Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 22:08:09 -0600
+Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 23 Nov
- 2025 22:06:38 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 22:08:05 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sun, 23 Nov 2025 22:06:38 -0600
+ Transport; Sun, 23 Nov 2025 22:08:05 -0600
 Received: from [172.24.235.38] (lt5cd2489kgj.dhcp.ti.com [172.24.235.38])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AO46Sph1260911;
- Sun, 23 Nov 2025 22:06:29 -0600
-Message-ID: <b3e0d56c-a02f-408c-b6e8-966956b548c1@ti.com>
-Date: Mon, 24 Nov 2025 09:36:28 +0530
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AO47tEB1262151;
+ Sun, 23 Nov 2025 22:07:56 -0600
+Message-ID: <9d1d0c37-67f4-40ee-9f49-23062829aa8d@ti.com>
+Date: Mon, 24 Nov 2025 09:37:55 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 07/13] arm: mach-k3: common: Helper for LPM meta data
- address from DT
+Subject: Re: [PATCH v6 08/13] arm: mach-k3: am62a7_init: Resume on LPM exit
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Tom Rini
  <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, Nishanth Menon
  <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vignesh Raghavendra
@@ -105,72 +104,72 @@ CC: Vishal Mahaveer <vishalm@ti.com>, Kevin Hilman <khilman@baylibre.com>,
  <marek.vasut+renesas@mailbox.org>, Andre Przywara <andre.przywara@arm.com>,
  =?UTF-8?Q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>
 References: <20251120-topic-am62-ioddr-v2025-04-rc1-v6-0-6dd99a7271bb@baylibre.com>
- <20251120-topic-am62-ioddr-v2025-04-rc1-v6-7-6dd99a7271bb@baylibre.com>
+ <20251120-topic-am62-ioddr-v2025-04-rc1-v6-8-6dd99a7271bb@baylibre.com>
 Content-Language: en-US
 From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251120-topic-am62-ioddr-v2025-04-rc1-v6-7-6dd99a7271bb@baylibre.com>
+In-Reply-To: <20251120-topic-am62-ioddr-v2025-04-rc1-v6-8-6dd99a7271bb@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CB:EE_|CYYPR10MB7571:EE_
-X-MS-Office365-Filtering-Correlation-Id: a59b17e2-45e3-4d5e-5fa9-08de2b0edfa2
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002636C:EE_|SA0PR10MB6425:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0ffc0fcd-e95e-4e33-78b3-08de2b0f1490
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|7416014|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?a1NtRGUyTUYwbm5lZVRYcWE5Qkw2dUpLYkRGTmtzTkJjTnI1ZUI3TW5PVXFY?=
- =?utf-8?B?eXJpZUZHS0RqMms5US9rWVA3amltM1FJdWphTUtFaVFPM05oTEYyV3NGWkJj?=
- =?utf-8?B?N3JyenA5aDgyOHpMaUhNcmFSdDNqM2UzOVB2M2YwYWVibjMxdzhRdTZQVlBW?=
- =?utf-8?B?WENibTlDMFVXaDU2bEpWUWx4MGNxYzl3NkZLbjFtMzh5eDVhQy9WK0lVQnRj?=
- =?utf-8?B?S1hySjFTUDlya2NaQ0RzYlg0OWlyWWVDSS9oTk45Nmx6UVBGeW5wZ3BQcVBa?=
- =?utf-8?B?NCtmblFVa09FL3hYWlZVS3l3WnFmTENEN3NTUUZYREVJeVZ3NzhWOC9tdjJi?=
- =?utf-8?B?QjhCSDI4ZkI4UUhZNzM4WCtiZWsxNFpLRnU4MldYL3VqNng5YVVxemNxMUxq?=
- =?utf-8?B?ME1WZm5KbkNzRnA2bSsydkFUTEg2L3VqZjExa2lqeDRZcDVrU2x4WWV0emtR?=
- =?utf-8?B?aEoxRUUwR1hBNXRiV2h2M1NJaThWck52eEt2R0pydktaa0xTdnVRcUZBY2RU?=
- =?utf-8?B?b0NLVnVXQlVHeEwzY1l2em55eHdMVzV5ZzFiYWM4M2NBTDhrQ0JINU9QSzZs?=
- =?utf-8?B?WHNzUU04bzIrejM3Z2ZIdUxCanhGWXdrNGFVanZ4a3QwOWhtNTZnQ2V3aGpa?=
- =?utf-8?B?TnVmS3FXSHFTdXVkSEw3Z3RQYkswcjZMQksvR0dna2I5U1NUYmZud2JNVGpV?=
- =?utf-8?B?ZHBONW01VS8vYk1maENlaWcxUnVwVkRIblhvZkt6VThSVGNTb3lKZ2RXdWk5?=
- =?utf-8?B?OFRhUHRFSkZHeVBrUDl4MkFRRWdiMTZCREZjQ28vY2hzU3duRG9wTFJ0RWMy?=
- =?utf-8?B?QUlSNHFsZ2xLREFaY2thczRYbUNVaFlNVWlxamluT1QrVS9PdE9zWmgvMktU?=
- =?utf-8?B?ZHU4dktTUHNtaDdGRDhqazA5NkNVTXVydDR5Zjdxb29zcFJyMFM5WTNZd2Jz?=
- =?utf-8?B?WjI1V3NNT0hvWWZSNVhDR08yREtFQ3IwZFJOdlNLQm1tWHpXQmJNVnJhQzR1?=
- =?utf-8?B?K2xqMEJ5a2pFd216OHV3SXVPYlVpN0NET1Q0WU82WFNlckc4U3VxL2FFbmNL?=
- =?utf-8?B?Smd3ZnpoSnJSeWp6enhlZUhDTVR6bWdCOXdTbkJ1OE9ENy9vMkFyRUtuTDU0?=
- =?utf-8?B?KzFDZ1l3UFFyMW52Z2VBU1BBWWNzRTNjSnJOY20xNjAxV25vbHNSdkZ2aFZH?=
- =?utf-8?B?QytNaWhYa291U21iZG9XenU5Zk5xNTV6MkpEN1dBZ2FMMnFHcUtOaEp5Zmc1?=
- =?utf-8?B?L3RxT0RYQjBicFRnRnJWZFhoQ2dxTnZsZ0FOQ1RoTkZkajB0YlpUTllMRlVk?=
- =?utf-8?B?NzY5OHJCSVhDMXYrTGxoS1dSbHdoZTdiemZFL1dTMkpNUXpHbWt0SmVBZU90?=
- =?utf-8?B?MnhjRGY2ZGJHRnVlL2J6QVB3TENiRmY4ZmJ0Ym5QWm84ZlBiakJ3L1Awb0NZ?=
- =?utf-8?B?U1YwUlJCK0kwWm5oZU1vZkVES2kzSUF3RTBPYnZXUVM5MEtoeWZRRnNpajI1?=
- =?utf-8?B?Y2tyRWdtbDZ4d01MUitaNGlHWDByZCtWeUlyQ2hLVWI4a1VGYklOdU5YQzJx?=
- =?utf-8?B?UXVvUDdOd2RBSFdXaXB6OFJwdFUvamxPVTRrMzdMaG1ESHVUY0FPL2F1NHpm?=
- =?utf-8?B?NjNLNkRROWdEWFhqNi9ZVEJnRFloTjZIelVhZ0lWZ2g1V0QxTUJoekFGTmYv?=
- =?utf-8?B?MmQ3V1ZJeFM1czV3a1N4U2pwU1p3YXVCVmIrVnJiMUY3OUI4b2lhYkNVZWVp?=
- =?utf-8?B?bldrQlZjYUg4YWNqV25WVDNScE9tVjZMeXdkL0QwVEovWDJ6cnZDVkp4R2xQ?=
- =?utf-8?B?L0ZIaTR3QVhOZXhBNXhEMGtSSXJGUUtOMm1vaEJtOW9GaWYvVHFhNC84aTdi?=
- =?utf-8?B?VTRIN0RGby9PcEtsMDVyMWhrQjJHYUNlOE56TUVIVzYwajhDeUZ1NmlZS2FC?=
- =?utf-8?B?K1AyYk9pbldZQmxkdXlGY2w3dHZVcnlsWWw2L0pKMUJQM3FibkV3WDNpU1ZZ?=
- =?utf-8?B?aTg0T2NpaEJ2RGlNRGlRejBQc3k1OFZVWkplbFIxNFNtQm1SblhWek5ISERK?=
- =?utf-8?B?aGp4dGR5TG4vaEN3ajRaREVydzNaWHRoMXVMeW9vRFBvTm9kaTBpWTk2QmV2?=
- =?utf-8?Q?C48M=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ ARA:13230040|82310400026|376014|7416014|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SDl5SXNYTjYwc2lYSU1vU1l0dURHQ3RiaGNEdTd4VVVhU1gyUkViR0VKUHJl?=
+ =?utf-8?B?MC9ZdEo4aE45ZTJnSTZNMVQrMGM1bnVEOWU5UTQwK1VpaVBHcTRLV1g0QlVS?=
+ =?utf-8?B?cmE3ZTk1M1NuUXhVVnY0TjNPN2cxRGxHcWJNSHdwLzY5M09DNjBmWG1GOXE4?=
+ =?utf-8?B?YjJxWE04NUtyWkNKeFpkejcrVHFEblNsTklQai9Qakg3aXhGL2JoM2pabkpQ?=
+ =?utf-8?B?TW5RaWtNb3NUYXg3bzhMRmw4bjRjaG50RnR3eE9VbEIrMmNQVWxJbytweGtR?=
+ =?utf-8?B?NU55OUFneXJYSlU5N213OFpxL2Q4MzkxVEQ3eUlqNjB4Y2VrMVc0dnA2TDhT?=
+ =?utf-8?B?UnZSVk5vbHA3L25PKzZQaUNVNDRRblFqMnJXSEU1aGc4RzJqV2ZzWkcwWmhZ?=
+ =?utf-8?B?cVdKWHFZa09yTzNGTEJqYXlLaUpPSFgrV01NRXowaWxrZENBZ3R3c0pkYU9J?=
+ =?utf-8?B?Rys0WWRVblEySC9wbnFWTlRvRUtEQWJNenpjVWJYM2RVdWdKRHA4RXJZZUhG?=
+ =?utf-8?B?V3g4Zmk1eXpiRXlmMmE0N2tubVFCSTMxVFpWRFBXNmdOU29oWWQ4anRVOFBQ?=
+ =?utf-8?B?YjRwbDYzRS91UWh6YldqWGZ1WHZ6VWQ5RDFEMDJmaHFYcVBiSGR2dUNkY1Jz?=
+ =?utf-8?B?T0pOcFl4Y2dPaDNLTFlGc1pUenY5U3Q5RjVVK2ZveUc5eWFFR2VIa2pBY3Vp?=
+ =?utf-8?B?eVNoVXVFZ1F5NVpoQTZxTDYvSXEwTjJOM2hidjBoUmQ5MGRjVVdWWTduaFBm?=
+ =?utf-8?B?UUs1M05RY3M5cUdkOWc3SnpWVnhFWU5kdTJpQzkvdytsNVRwYVVUUHpkNlRM?=
+ =?utf-8?B?WDJ2VndFSEFVSkZuZzlBUkhwQm5VVDZFc2pDbFpHZHF2RXQ1dEhiN2FJelZ1?=
+ =?utf-8?B?cGdYUzljRVloZHgvNzZGZk9wQWx1S3RCWjRmV21WOHprQ2QrTEdJc0VqMVBu?=
+ =?utf-8?B?OUtKWDZtOWorS2tndUpmdlhUeE11eW04OGhiUjRhZ1JkSTV0YTdRNFpTM0Nl?=
+ =?utf-8?B?SUpmdWw0MENQYU1RWHRGOXgwam03dU5abmREejh2bUU1V3U4Q2RnN1NuSE5y?=
+ =?utf-8?B?L3R1VEtPelRiM0h0czErSnNRNnVUdEJtdEwwdWhJMTlGeHhMTEJmZGFJK0ZK?=
+ =?utf-8?B?UWFKTXNVZ0RNMUt1OFFaS2ZKT1hZVFBuSkI4cnJ2MnBjRHlGRThrMzBQNjg3?=
+ =?utf-8?B?c3Y4WlhTM25oZmt1dUFyTmJnZVVYcjVCS0NXanphRHJkSGZPMVRxOVNrUC8y?=
+ =?utf-8?B?MHh1bnI1RDBNVUlsTHFMN1kzWm42Nm9IUjRoTS9YeDByRDdhMGFLS2Q2YmZV?=
+ =?utf-8?B?bFB3SGw5TTNxaXdkaUxvd1VNKzJ1ayswYUdQQ0Y2Sks5YjY0WkVlNWZCUFVB?=
+ =?utf-8?B?aWV3NlJabEQ0bTdBQUFRR25TRTRKVmxUTEZrajVuOU85MmYrT2lpb2x0WDZW?=
+ =?utf-8?B?aWxDU1lyVHhRTnFaQWR3eWMxL0w3UC9Pb2lUNVY2eVYvbXB2S21rZlg1UUxv?=
+ =?utf-8?B?WTgwTEl5MlRLTVJGdlhTTkI0VVlOeXVEUDc2QVhPNmZTWVN1VVpkOFRXN0Yz?=
+ =?utf-8?B?OU52cUxwdEhmV2FVK1ZHdjZuVFhSWjVMSDhxb210K3NwS0w4MGFzRWo2Nmtx?=
+ =?utf-8?B?MGdmZ1JJOGxrMjBlZUlCdVhhRTRhV1o4ZWFMSlpTSzZRSGg4SnRxQWxDRExC?=
+ =?utf-8?B?aHZucjZkbGlnakxZdzlSV0lRRWczbnllS1V5cFk5cnM5eWUyS2VYLys1WkVQ?=
+ =?utf-8?B?OHRCYWJkb3dFd1dsQWl4Qmx5TXkrc3hiNkRuR0pic2FuamtzZnNFMXdRN1Jl?=
+ =?utf-8?B?U1JaK3V3a0xHNmYwMkNYU2hrV0tKMWhqeUs1cHZBZnNPNm44cnh0QXlmdllU?=
+ =?utf-8?B?K29XUjR5YjNnbEpUN2dFQWZzTWs0KzlKRXZjQVoyWGt2ejdkMkNEV0ZoTkJz?=
+ =?utf-8?B?L3pDVkdka3FxSnVOY09QRzlLNGJkMXZhaDJxdkJ2akdiT2FtSWFBZ2tYZkpZ?=
+ =?utf-8?B?aFUwemRIQWxweTFOaHJselowNXBGN2M2ZFNtUGdTYldmdzVCeGVZalhsUTV3?=
+ =?utf-8?B?bWhmd0tBL1VLbVlHRDZobGNZRkE4L0dmcWl2MnUwRDlQdjkvcFdWUjJMME5D?=
+ =?utf-8?Q?jVWM=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(7416014)(376014)(1800799024); DIR:OUT;
+ SFS:(13230040)(82310400026)(376014)(7416014)(1800799024)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 04:06:41.3331 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a59b17e2-45e3-4d5e-5fa9-08de2b0edfa2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 04:08:10.1971 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0ffc0fcd-e95e-4e33-78b3-08de2b0f1490
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023CB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636C.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYYPR10MB7571
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR10MB6425
 X-Mailman-Approved-At: Mon, 24 Nov 2025 13:50:30 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -190,106 +189,37 @@ X-Virus-Status: Clean
 
 
 On 11/20/2025 9:33 PM, Markus Schneider-Pargmann (TI.com) wrote:
-> Add a small helper that uses memory regions referenced by the R5
-> devicetree node to calculate the LPM meta data address.
+> When exiting a low power mode with DDR self-refresh, we can directly
+> resume after DDR setup is done. Call the common function to resume.
 >
 > Tested-by: Anshul Dalal <anshuld@ti.com>
 > Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 > ---
->   arch/arm/mach-k3/common.c | 43 +++++++++++++++++++++++++++++++++++++++++++
->   arch/arm/mach-k3/common.h |  1 +
->   2 files changed, 44 insertions(+)
+>   arch/arm/mach-k3/am62ax/am62a7_init.c | 9 +++++++++
+>   1 file changed, 9 insertions(+)
 >
-> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> index b28c2cd5776f29d75d54da9078e5fb17768d69c9..191254b391af68cb6c277f986069ed87211f2fc1 100644
-> --- a/arch/arm/mach-k3/common.c
-> +++ b/arch/arm/mach-k3/common.c
-> @@ -16,6 +16,8 @@
->   #include <linux/printk.h>
->   #include "common.h"
->   #include <dm.h>
-> +#include <dm/of_access.h>
-> +#include <dm/ofnode.h>
->   #include <remoteproc.h>
->   #include <asm/cache.h>
->   #include <linux/soc/ti/ti_sci_protocol.h>
-> @@ -36,6 +38,7 @@
->   #include <wait_bit.h>
->   
->   #define CLKSTOP_TRANSITION_TIMEOUT_MS	10
-> +#define K3_R5_MEMREGION_LPM_METADATA_OFFSET	0x108000
->   
->   #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
->   #define PROC_BOOT_STATUS_FLAG_R5_WFI		0x00000002
-> @@ -191,6 +194,42 @@ bool wkup_ctrl_is_lpm_exit(void)
->   }
->   
->   #if IS_ENABLED(CONFIG_K3_IODDR)
-> +int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr)
+> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
+> index 60645272c816023798cc5d6fa46a2c569143343b..4f0a8ed66179e7f7445f9c250ffb4f53f4977546 100644
+> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
+> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+> @@ -195,6 +195,15 @@ void board_init_f(ulong dummy)
+>   	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+>   	if (ret)
+>   		panic("DRAM init failed: %d\n", ret);
+> +
+> +	if (wkup_ctrl_is_lpm_exit()) {
+> +		u64 meta_data_addr;
+> +
+> +		ret = wkup_r5f_am62_lpm_meta_data_addr(&meta_data_addr);
+> +		if (ret)
+> +			panic("Failed to get LPM meta data address %d\n", ret);
+> +		lpm_resume_from_ddr(meta_data_addr);
 
-device specific function in common file ?
+Do be you want to protect this code with DDR_IO config ?
 
 
-
-> +{
-> +	struct ofnode_phandle_args memregion_phandle;
-> +	ofnode memregion;
-> +	ofnode wkup_bus;
-> +	int ret;
-> +
-> +	wkup_bus = ofnode_path("/bus@f0000/bus@b00000");
-> +	if (!ofnode_valid(wkup_bus)) {
-> +		printf("Failed to find wkup bus\n");
-> +		return -EINVAL;
 > +	}
-> +
-> +	memregion = ofnode_by_compatible(wkup_bus, "ti,am62-r5f");
-> +	if (!ofnode_valid(memregion)) {
-> +		printf("Failed to find r5f devicetree node ti,am62-r5f\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	ret = ofnode_parse_phandle_with_args(memregion, "memory-region", NULL,
-> +					     0, 1, &memregion_phandle);
-> +	if (ret) {
-> +		printf("Failed to parse phandle for second memory region\n");
-> +		return ret;
-> +	}
-> +
-> +	ret = ofnode_read_u64_index(memregion_phandle.node, "reg", 0, meta_data_addr);
-> +	if (ret) {
-> +		printf("Failed to read memory region offset\n");
-> +		return ret;
-> +	}
-> +
-> +	*meta_data_addr += K3_R5_MEMREGION_LPM_METADATA_OFFSET;
-> +
-> +	return 0;
-> +}
->   static int lpm_restore_context(u64 ctx_addr)
->   {
->   	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
-> @@ -232,6 +271,10 @@ void __noreturn lpm_resume_from_ddr(u64 meta_data_addr)
->   	image_entry();
->   }
->   #else
-> +int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr)
-> +{
-> +	return -EINVAL;
-> +}
+>   #endif
+>   	spl_enable_cache();
 >   
->   void __noreturn lpm_resume_from_ddr(u64 meta_data_addr)
->   {
-> diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-> index 3333b30b56e711b082d4da7f6773cf0002bbfe30..c579796a7a3baec12792ad137c5c03e7ea361d55 100644
-> --- a/arch/arm/mach-k3/common.h
-> +++ b/arch/arm/mach-k3/common.h
-> @@ -53,6 +53,7 @@ void ti_secure_image_check_binary(void **p_image, size_t *p_size);
->   int shutdown_mcu_r5_core1(void);
->   void wkup_ctrl_remove_can_io_isolation_if_set(void);
->   bool wkup_ctrl_is_lpm_exit(void);
-> +int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr);
->   void lpm_resume_from_ddr(u64 meta_data_addr);
->   
->   #if (IS_ENABLED(CONFIG_K3_QOS))
 >
