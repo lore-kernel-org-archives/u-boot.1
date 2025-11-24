@@ -4,142 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44AF1CFD35F
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 23:47:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB3BCCFD31F
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 23:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F01B83EAE;
-	Tue, 25 Nov 2025 00:47:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4140583EAE;
+	Tue, 25 Nov 2025 00:53:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="OnqxbOwl";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HTO62YcQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4315483EDE; Tue, 25 Nov 2025 00:47:02 +0100 (CET)
+ id 5803A83EDE; Tue, 25 Nov 2025 00:53:33 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BDD283E8E
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 00:47:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D6D283E8E
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 00:53:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1764028005; x=1764632805; i=xypron.glpk@gmx.de;
- bh=CPbVP2YiLTXPGJi0/NMHXbL+XqfhXRWxOw07OumJxpo=;
+ s=s31663417; t=1764028409; x=1764633209; i=xypron.glpk@gmx.de;
+ bh=a0AlzBneLcC2x3Fuv+u5JewrArtLYoAWNEbDaaMuZ40=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=OnqxbOwlhhY8NF2Sipk5hIz8EvOwZBzE6pLWaPeoGPgTMP9L+z7jDmljPpsVwEge
- H6NKHoeFi7eiSUN27sDbpKDxIwWakGlEPPyYzqwENTZ0Rm3bQDmZrdjTE8o8v5zqi
- CEKqRpvV6rb9J+xzRLpmz+NoSE9rvTQnqyemtoRyXUPHVi9Ur5mLf20qUwIwIJNQW
- +vJchSeMRo8QZ5BBtKvEJdw6iXbSJpFA5F/pfPQlbgzZO1MHF8RXedqQ2k4btiBZ8
- FAysodxP59Pj0uOVQCBPS8mlXoR03WX++0n8zAcXD7ho60EL+lgvVongEV3fsB/Kk
- frYnRdr+qmtXoXnPag==
+ b=HTO62YcQCDKxwOaHRFziYmdOgZ2Eibwqat0mKEFfFCoLr+jCZM3ADW+8FUlCiv0k
+ O5aCP0fJlu+eyVNvMmPUdJWQN/HEQLKbuhmF9OgY6QpoVdpUC4tJwqBl0Kx9VPoxj
+ MuSt9nGfMY7UEJk9jc9kJKfigzlN9AZofeY3VarNmuNwYUgEPdJfKSgOIwlz8A+1c
+ oQQPSxc+1Iox4gNwekASOg/Iqh8vdgt2gDGAJdpJfywlSHRPPO88+LOkDUO5zxEQX
+ rp/Au1h6jSf4dMVl6RvttqCFEman1OICkEkD0iP0g2kpQJyXrfhS0hWJDmHGJnHKb
+ LQaa97DoZbrWDUJIYw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M4s51-1vNOss2mDn-003sWn; Tue, 25
- Nov 2025 00:46:45 +0100
-Message-ID: <d4cad994-e978-4319-958a-95371224ace8@gmx.de>
-Date: Tue, 25 Nov 2025 00:46:40 +0100
+Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MKbkC-1vgIcP28se-00QMpy; Tue, 25
+ Nov 2025 00:53:29 +0100
+Message-ID: <5b53a23e-1679-46e0-92c3-7574a35ae8f3@gmx.de>
+Date: Tue, 25 Nov 2025 00:53:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] doc: pytest: fix hook script environment variable
- names
+Subject: Re: [PATCH 2/2] doc: pytest: add missing hook script env vars
 To: David Lechner <dlechner@baylibre.com>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
  Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
 References: <20251124-doc-pytest-fix-script-env-vars-v1-0-fec5b54007f1@baylibre.com>
- <20251124-doc-pytest-fix-script-env-vars-v1-1-fec5b54007f1@baylibre.com>
+ <20251124-doc-pytest-fix-script-env-vars-v1-2-fec5b54007f1@baylibre.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251124-doc-pytest-fix-script-env-vars-v1-1-fec5b54007f1@baylibre.com>
+In-Reply-To: <20251124-doc-pytest-fix-script-env-vars-v1-2-fec5b54007f1@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:tndhM7SGGO5zGFr8kSd7VTUQJ9in+ABP3lY+Z4ly0nhiglBWXsy
- 2uYSXSV6qrxF+5sI1b7BlkPoD6kyRCN2Ued6D329H8PiID5iAhq9ArsUddxjHNishvWba19
- Wgsywl3MvE+jKBY6dR1laHNnPBgfwaXzacIMsrrCIUgbfc5datwV/fG2xwDScJ5PUXNshFR
- oHTCrRFQplJk7UKeuXesA==
-UI-OutboundReport: notjunk:1;M01:P0:4D84rVCy4BI=;JwainezDHZ5U4pGFumSxBBgbsMQ
- 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
- 0yKgOxMX2yrDphQU9YRg
+X-Provags-ID: V03:K1:BLX4c/FJU2NqL00e0gntBAnYzcLNRDg2QNs9EPKcv1bSE4r4vgv
+ bUly9UdBfoKaFpbisz2HcuHwHSIma/iJeF2EVfhTIgZkgMqmYgM5zd/ItWFYZW/JurtMK+r
+ Or3mKnTmiuMh/MXkU7CfE3jSf5ZhyIM4pQfoGf1WUNzPST29OM/guv2HfXpUm1vwILFMo6k
+ 82Nv2rnMcqrI+0GpDERIw==
+UI-OutboundReport: notjunk:1;M01:P0:lluUg8p62sQ=;fJyAqulUM5sA4alJNFndVgZVR4w
+ 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
+ LAruHPN6DocNzb16KLE0IKjjhh5Li5/91U+oTs
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,72 +154,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/24/25 23:44, David Lechner wrote:
-> Fix the names of environment variables set for hook scripts. These
-> have a U_BOOT_ prefix, not UBOOT_.
+> Add the _EXTRA variants of U_BOOT_BUILD_DIR and U_BOOT_RESULT_DIR to the
+> list of environment variables set for hook scripts.
+>=20
+> These were added in commit 8f2a9fa7d6e7 ("test: Support testing with two
+> board-builds") but were not documented.
 >=20
 > Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
->   doc/develop/pytest/usage.rst | 14 +++++++-------
->   1 file changed, 7 insertions(+), 7 deletions(-)
+>   doc/develop/pytest/usage.rst | 2 ++
+>   1 file changed, 2 insertions(+)
 >=20
 > diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.rst
-> index 7335a39b9633bb16869dfc976adab32d78dc984f..7c42a31528fd0ef78d3e24f6=
-5ee86ce2d61d6e87 100644
+> index 7c42a31528fd0ef78d3e24f65ee86ce2d61d6e87..df3821da20dd6e4199947a59=
+4e5e2eb2198e6e6d 100644
 > --- a/doc/develop/pytest/usage.rst
 > +++ b/doc/develop/pytest/usage.rst
-> @@ -315,14 +315,14 @@ Environment variables
->  =20
+> @@ -316,11 +316,13 @@ Environment variables
 >   The following environment variables are set when running hook scripts:
 >  =20
-> -- ``UBOOT_BOARD_TYPE`` the board type being tested.
-> -- ``UBOOT_BOARD_IDENTITY`` the board identity being tested, or ``na`` i=
-f none
-> +- ``U_BOOT_BOARD_TYPE`` the board type being tested.
+>   - ``U_BOOT_BOARD_TYPE`` the board type being tested.
+> +- ``U_BOOT_BOARD_TYPE_EXTRA`` the 2nd board type being tested, if appli=
+cable.
 
-I checked for the variable names in U-Boot origin/next and=20
-u-boot-test-hooks.
-
-I could not find U_BOOT_BOARD_TYPE via grep.
-
-> +- ``U_BOOT_BOARD_IDENTITY`` the board identity being tested, or ``na`` =
-if none
->     was specified.
-> -- ``UBOOT_SOURCE_DIR`` the U-Boot source directory.
-> -- ``UBOOT_TEST_PY_DIR`` the full path to ``test/py/`` in the source dir=
-ectory.
-> -- ``UBOOT_BUILD_DIR`` the U-Boot build directory.
-> -- ``UBOOT_RESULT_DIR`` the test result directory.
-> -- ``UBOOT_PERSISTENT_DATA_DIR`` the test persistent data directory.
-> +- ``U_BOOT_SOURCE_DIR`` the U-Boot source directory.
-
-ok
-
-> +- ``U_BOOT_TEST_PY_DIR`` the full path to ``test/py/`` in the source di=
-rectory.
-
-U_BOOT_TEST_PY_DIR does not exist.
-
-There is a variable TEST_PY_DIR used in test/py/conftest.py.
-
-> +- ``U_BOOT_BUILD_DIR`` the U-Boot build directory.
-
-ok
-
-> +- ``U_BOOT_RESULT_DIR`` the test result directory.
-
-U_BOOT_RESULT_DIR does not exist.
-
-> +- ``U_BOOT_PERSISTENT_DATA_DIR`` the test persistent data directory.
-
-U_BOOT_BUILD_DIR_EXTRA (used in test/py/conftest.py:167) is missing in=20
-the list.
+I cannot find the two strings above in U-Boot. The mentioned patch adds=20
+'board_type_extra'. Where is U_BOOT_ prepended to the capitalized string?
 
 Best regards
 
 Heinrich
 
+>   - ``U_BOOT_BOARD_IDENTITY`` the board identity being tested, or ``na``=
+ if none
+>     was specified.
+>   - ``U_BOOT_SOURCE_DIR`` the U-Boot source directory.
+>   - ``U_BOOT_TEST_PY_DIR`` the full path to ``test/py/`` in the source d=
+irectory.
+>   - ``U_BOOT_BUILD_DIR`` the U-Boot build directory.
+> +- ``U_BOOT_BUILD_DIR_EXTRA`` the 2nd U-Boot build directory, if applica=
+ble.
+>   - ``U_BOOT_RESULT_DIR`` the test result directory.
+>   - ``U_BOOT_PERSISTENT_DATA_DIR`` the test persistent data directory.
 >  =20
->   u-boot-test-console
->   '''''''''''''''''''
 >=20
 
