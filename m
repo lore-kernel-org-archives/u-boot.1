@@ -4,70 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3482CFD356
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 22:14:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C65BFCFD360
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 22:25:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62F0483EF5;
-	Mon, 24 Nov 2025 23:14:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 29D0283EF5;
+	Mon, 24 Nov 2025 23:25:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oCkb60Qi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="heHZcoS9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B065B83F00; Mon, 24 Nov 2025 23:14:33 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0172983F00; Mon, 24 Nov 2025 23:25:28 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF0A183EF5
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 23:14:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2A7583EE8
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 23:25:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dFg9066qtz9vCC;
- Mon, 24 Nov 2025 23:14:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1764022469;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vCN++haiSav0Uv4lUuMjb6OOj299aDM/Tfni46w/uKs=;
- b=oCkb60QiKSNaCVe30D/j86xPzJkyzB72RgNIVCsSZTG5NjVpojAf+AYNOtNToocaoXvNYj
- XD5EPqOjo06cOOiIkTMm9atM+hmaSsankbziXxW3MTBFYU4eFMS1xNz8NnhByfCsXXkQZC
- mWXtZF+UfnThUTMwkeu36WNDQwGGXXZneIIEcxyTMsgrzhNLACBiOritJzDrK/qhC4wced
- IXQ+3YcWZHur5vxs/8Q2jdbu5naSUd1b62JVMcF5qFiHk4qMfj2nqPkKv/KxkjgIC22qfp
- MPrTqg0POC2V7kFlTl0euI0X6EtFpi8MlSRKlGe/59H9E5Y0a41+O6mlmb4Hjg==
-Message-ID: <7b21c476-ed12-48da-95f7-dd354e116a70@mailbox.org>
-Date: Mon, 24 Nov 2025 20:23:58 +0100
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7c7aee74dceso458987a34.2
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 14:25:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1764023124; x=1764627924; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DBLz9avz3yru1xckhK5SxWQcC8TCI/GihsARTXSat+s=;
+ b=heHZcoS99TE5nm1KMd1kPl0pXmoi1e8/hfAnlKzAKBRSful4olrpQRTG+ZI6AfSnrD
+ B8GBgTSJlW43KEJuqoIQg+CIRUiTFyHXPcGqfYxb3h8zZAGDS3iHblAbgHU1i7HO6ck2
+ HR/BuWF4jkvFSHDQEs3cBjsOVfS059q6X1mYe7nyLpabbnppFT8lh1zChlumr1XRU0Sd
+ PmdoPzJUQXKMqzUf4BQSL5Enmyrg66u2zs5KFf+wxHd+EsKQBnAnatVWdd3kYvhLo9hU
+ U0ejTgcMEBLi1iFXgL9k5k9HePKvpfVKFVYvNPy3OjQa1uoCYnBK7gRsL2w+xXJfe7hZ
+ xfUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764023124; x=1764627924;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DBLz9avz3yru1xckhK5SxWQcC8TCI/GihsARTXSat+s=;
+ b=k1kxOH9tAl4VFyeoejOYoQhsMiPK5blHi7/XM8dQWIhYWvV4rkxXQuM01o8CElLc22
+ VvK+kso+4eviYwzOj8OBPn3iSXIVNRa74JVO8gmWlKPf8JGhLXTrzSAd4GKcU+GyjlVv
+ cJg3icP4Sq10G+oVFC78mVhq1LwFFGN9GBllLeOTKco5cdoWWXieOqVwbUF09QDnJDjg
+ RHhQvfRMkSz28mezU1+AuexGprL2Xyi437abzQr3QjXECBmRGPvnZoOnf7PoHBoXnJgn
+ /WNQTgS2DqYuEIKpAeIHHDLn4OiwwRdcXTAv0NQraOlN2xNj2vn4DiF8dBv7sioyMCgS
+ xO6w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUZEUClJF16KO5txljWKwtb79NsPNAGmOsMB5fEZBXZ43nUejmLzkFHdZi6KyrRTDoKKN7LlCY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzcjOSGobP/lARvh4xqgftixHzUIBx3nqovOHDofeYcp8g0yBA
+ JpNSnUXxTjtLF/6X4zPh4+hKL33loiXzyP2VgHVNZiCw7oA6xNLpLry84B7mSjl4vA8gbP8M8S4
+ DwCOS1TZi5qMHRjgVWZRAofjPG2gORLo=
+X-Gm-Gg: ASbGncvoLufgGweA4Y3XmzfjQRkD1lVTb36/IUb8Dd9CdU9xZGGFAvq1uw9ytjbrO9C
+ fYmLVgGICrocRs/7c1ZAEOGG856AGKnEiFOvuIuWme8aqAb+VfL8JB/mBGUUBHESfei3RwwN7Z8
+ cbp4u5D5lHPkg+NH9ph/jYkAb8p5yYbgGShLjO6knPTovYo7vTDBExgUYo8riJXQ+rKHlWpf3cJ
+ X/rfG/8b1pBIaYW0qi7eS9j9UIxopx6qcf2LJ7gbMZofNiIYilCMOHsMz1F5GLDEa7/Vu99
+X-Google-Smtp-Source: AGHT+IFjrxlV7bAgRKFSR3B0H7Gip15JMWi3FWWOYfu4XOvt6tqKblTa3YAeOpFK5i0m0PAwzKiQXIlpeekfBvIJuBs=
+X-Received: by 2002:a05:6830:922:b0:78e:a394:ca24 with SMTP id
+ 46e09a7af769-7c798f7fe84mr7676376a34.8.1764023124242; Mon, 24 Nov 2025
+ 14:25:24 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH] mkimage: Add support for bundling TEE in mkimage -f auto
-To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Cc: =?UTF-8?Q?Carlos_L=C3=B3pez?= <carlos.lopezr4096@gmail.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
- u-boot@dh-electronics.com
-References: <20251118232045.578034-1-marek.vasut@mailbox.org>
- <9e9ec219-3ae7-4ec8-8f85-5edb4bbbe53a@cherry.de>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <9e9ec219-3ae7-4ec8-8f85-5edb4bbbe53a@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: r5sj6369xmy1x6srrayifo3c14abr9gr
-X-MBO-RS-ID: aba6834988e0e6a9998
+References: <20251020133455.1870-1-briansune@gmail.com>
+ <adaf5081-3b9b-4cdc-b7d3-ec9756f60ead@altera.com>
+ <CAN7C2SDVD+bpF=CGDPXDqLE3U9cMm2YqxnwXScvxiFh3OypP=A@mail.gmail.com>
+ <009323c1-98b3-490a-912a-35249efbfd9d@altera.com>
+ <CAN7C2SBU1xozPwfRG_tdcqos4jDZRm-qzXR5MEVTG7jXebp_7Q@mail.gmail.com>
+ <20251114173535.GD6688@bill-the-cat>
+ <9cc70ebc-2391-407c-97c0-78c687dc7915@altera.com>
+ <e2557c4f-19b8-45b9-b956-a8131271c7a6@siemens.com>
+In-Reply-To: <e2557c4f-19b8-45b9-b956-a8131271c7a6@siemens.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Tue, 25 Nov 2025 06:25:13 +0800
+X-Gm-Features: AWmQ_bkn_GcE_HSr2sErF9Xtdzwd7mI5ge3zrKcWXWL0yTtZ8lDbu4SkDr0HKQ0
+Message-ID: <CAN7C2SDc9uQO40+hR-tsTW490sCMUAsLsb_52a3kvHqiDOLtYg@mail.gmail.com>
+Subject: Re: [PATCH v4] Altera SoCFpga Boot Stall Fix
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: "Chee, Tien Fong" <tienfong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
+ Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,44 +101,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/24/25 4:05 PM, Quentin Schulz wrote:
+> I'm all for finding the best technical solution in the end, but I wonder
+> if we can at least come to an intermediate solution for the upcoming
+> release so that folks do not need to carry too many extra patches in
+> their pipelines (https://patchwork.kernel.org/project/cip-dev/patch/cf43e9da3cfc59771e801d3215d3b3794f3602a8.1763446144.git.jan.kiszka@siemens.com/)
 
-Hello Quentin,
+I am not sure why point to patch v4 but I did provide the final path
+version that T.F. should be ok with.
+https://patchwork.ozlabs.org/project/uboot/patch/20251114160423.1518-1-briansune@gmail.com/
 
->> Example invocation:
->> "
->> $ mkimage -E -A arm -C none -e 0xc0008000 -a 0xc0008000 -f auto \
->>            -d arch/arm/boot/zImage \
->>            -b arch/arm/boot/dts/st/stm32mp135f-dhcor-dhsbc.dtb \
->>            -z ../optee_os/out/arm-plat-stm32mp1/core/tee-raw.bin \
->>       -Z 0xde000000 \
->>            /path/to/output/fitImage
->> "
+What this delay is that there are several feature coverage on the same file.
+Meanwhile, there are several similar patches pushed and T.F. action time
+is a bit slow.
 
-...
+The very first patch was almost two months ago.
+https://patchwork.ozlabs.org/project/uboot/patch/20251019092341.1158-1-briansune@gmail.com/
 
-> Which formats are supported for the --tee-file parameter? OP-TEE OS 
-> itself has multiple versions for the binary header (v1 and v2?) and we 
-> can pass either a binary (tee.bin) or an ELF (tee.elf) in binman, c.f. 
-> tools/binman/etype/tee_os.py
+So I had no clue why that huge delay. BTW it is supposed to revert
+that pointed out patch to easily fix things.
 
-The raw binary only, see the example invocation above.
-
-[...]
-
-> OK so... On Rockchip we have TF-A and OP-TEE OS split in multiple 
-> entries with different load addresses (see @atf-seq and @tee-seq in 
-> arch/arm/dts/rockchip-u-boot.dtsi). I guess this means we wouldn't be 
-> able to use this auto FIT?
-
-Are those multiple "versions" of these binaries or are those really 
-separate parts of a single binary ? The later seems a bit odd. Do you 
-have an example of such configuration?
-
-Note that you could include multiple TFA BL31/TEE binaries in fitImage, 
-but to support that from command line would probably be overloading 
-mkimage -f auto already.
-
-...
-
-The rest, I hope, is addressed in V2.
+Brian
