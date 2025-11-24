@@ -4,140 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0932DCFD318
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 05:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20D7ECFA466
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 07:57:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E86C83BF1;
-	Mon, 24 Nov 2025 06:22:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 59C3183BF1;
+	Mon, 24 Nov 2025 08:57:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="mG5Bj7aM";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FhqqYRhm";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="R3gH+IJl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C6DF83C14; Mon, 24 Nov 2025 06:22:29 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id C630D83D01; Mon, 24 Nov 2025 08:57:33 +0100 (CET)
+Received: from mx-relay48-hz3.antispameurope.com
+ (mx-relay48-hz3.antispameurope.com [94.100.134.237])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3995983BEF
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 06:22:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 765B483BF1
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 08:57:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5AO0MoO12193127
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 05:22:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- pPy8h8U9GzDzvObMnFOAN5hH04qgnv8YUO1Sb8gbfpg=; b=mG5Bj7aMrk/mi6+g
- d055T/VLZ2jGtfQM57rrkjrPCsCFiZjJ6IbBecaQmp4XdCeNRP5uefq2ChEYYmd7
- 9o8nFTHMHyTSwLoBGfNXoYGQkJvaRJw9IS+d6QRmUj6+gJ3pYkrCBkdpoMTIpOm+
- rpVnRsyfTcCBPPbO+58jrWeuNMUqvcOiLcfGL3Ed2W6r6uXWS5hpmAbNCTEnONRb
- Otx+n0N+Q1rkLYHboFqMynmD1pWihrSnPKxWn65XI8K2OswIX4ZsqeyEzCpFWlx2
- 4gzZ9jFRwC72712CZ35OkjscFYQsPi9W1AMmkEsO+RTZG9bqf+yFl0gfqHrEllRW
- 19vvfA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ak6f83pmm-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 05:22:25 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-297e66542afso142392985ad.3
- for <u-boot@lists.denx.de>; Sun, 23 Nov 2025 21:22:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1763961745; x=1764566545; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pPy8h8U9GzDzvObMnFOAN5hH04qgnv8YUO1Sb8gbfpg=;
- b=FhqqYRhmDb6vN0zRl8NofVKZfFP7YlciaUKoW6VIuFaMrrBgGyWPI24oBDmc7ydUUC
- LgzUaCgCIieBoFyBiLF4H6qnwMSfLNBYTMWJIYlWDYMXYfqVEMffENhqN9+oYIKm9nDK
- 4akv5xk7vYwLMZ5ZioqZF+ko5a9bck0+CABp8NMZEZBA2CMTOpYXnc+HkvTJcZ7w/RJB
- JW82WkdFA9y+L0XelX5HwDNvRwa5OTPxr+fGeqqayP53aYNjNxDQZvU0ycCyffs1l8S9
- TARxFljqM91unXDaDX1k03w4vCj4JL6NX0U+tuVZNDxjadOeHwT+B5hSLB1kqkiqIPJt
- rr3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1763961745; x=1764566545;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pPy8h8U9GzDzvObMnFOAN5hH04qgnv8YUO1Sb8gbfpg=;
- b=K0e+2bijayXjroEG++lGfZfwhTAE2xD/3fYcKCwPvQ6d0g+bValcU/kxvBhmzZc0Sv
- KsCHG0AhMR7V0kXAtU/BCebehnmHolrmux5JkV+MILWbNJvhyjnm6KB2IQdz3q3QpMH3
- XP9GJB0j7VhQL8j7UhgW/UfDgAHNAEQ3npZB/58TiwdS/p6gFqXPo5/yYyohXzRyC0cd
- oC3Ta9ixBHPpVmWmQ03ccYum7TJcqSq6dNSanbbPSGS+YwD6Nv1jEp1bQ8RoyO9MJD/d
- fyrTZ9ru6S6AE2idfZdSpiKgR6CCidRV1Wzux/0DqRYxgWXi3yxUxCyvHSiwU/mYdWGf
- cpzg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWDKsmPwOZicc+sMtJXaz5Xd09vpjjH+rmj7K5XMCkio8Zy0LwXX7gHp6j70PPF0FoTBPl4UMc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy6v5gwKhNSOqAA3gDr9SRZR51/5Z6hfl409CupFLU9k5mfsr1n
- B1eSQMu2D4JLuzQJ0GqNiMTp4vnf1XYOBvI2jSMncQpIZTbvyxW2AQxOVvKSx+8qG/qej4J4qk4
- 4Vcoran0oIFowRJZFIA9+JJphD8mqmZPwtidnDuKv264qLaUz3MjO74+h
-X-Gm-Gg: ASbGncuPT5ReCGpWJ3IbqCu/K0xXqz/w/9NkcznD8PKVlfwydbMhZT9+nnd2StuJmPE
- 32kJrb6OnHrhM0bK0mHIbv2X/r5ykECPXISoTQXcmHiilcuK6m0+hWDLnOs6cO3kjiRhLDoZptW
- 8GoWEE61meNCkHioLqpTLrYeQq0AsX/q9s1xCHEUql4AVySo5DTmsWllNCtOJw5dThsDLpDp4Fq
- 4MjzJqI5DT8y4tUUhC3A0rnKUUy0VQcmFtLfATNuLNxekKYaaAtd2/R7naQHY+CckE68wNQmflb
- k9SkgmG+AWU+VfplMJONWKQmcxZ64/C3LvSYcY+19aR9LIdV9LpkOHXRCbxm/NjlDN1+CnykBHI
- RknCt+NXn5si6TMP1t25RcqEBO1rnZxMTztUyZzLNCADu3g==
-X-Received: by 2002:a17:902:848b:b0:298:5736:de9b with SMTP id
- d9443c01a7336-29b6bf5c8bdmr86332755ad.50.1763961744691; 
- Sun, 23 Nov 2025 21:22:24 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH95Sjb1VJSaGO+F530qYfkmZgjPXQCr6IuE9zVnIGM64hNAVYgrIfoSog2Y7jU50pMKdBYQg==
-X-Received: by 2002:a17:902:848b:b0:298:5736:de9b with SMTP id
- d9443c01a7336-29b6bf5c8bdmr86332595ad.50.1763961744293; 
- Sun, 23 Nov 2025 21:22:24 -0800 (PST)
-Received: from [10.151.41.95] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-bd75def6346sm11932672a12.4.2025.11.23.21.22.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 23 Nov 2025 21:22:24 -0800 (PST)
-Message-ID: <0e4e3e51-0c45-41c3-b08e-98f0e5ced72f@oss.qualcomm.com>
-Date: Mon, 24 Nov 2025 10:52:18 +0530
+ smtp.mailfrom=prvs=0416cdc3b4=max.merchel@ew.tq-group.com
+ARC-Authentication-Results: i=1; mx-gate48-hz3.hornetsecurity.com 1; spf=pass
+ reason=mailfrom (ip=94.100.132.6,
+ headerfrom=ew.tq-group.com)
+ smtp.mailfrom=ew.tq-group.com
+ smtp.helo=hmail-p-smtp01-out03-hz1.hornetsecurity.com; dmarc=pass
+ header.from=ew.tq-group.com orig.disposition=pass
+ARC-Message-Signature: a=rsa-sha256;
+ bh=+NBDW5zbwPoK5kgj3eLvtFk3lRxSfQsitKP+Q7oPn54=; c=relaxed/relaxed;
+ d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
+ t=1763971048;
+ b=NurHCv0X80YJHvpCQSzjgB0F4k13uGoPEd3nYIyBHF+UwEe44SC8nkLQGjYZoGmb23GZ+A84
+ woF155AGAHFQMcA0klpR8c4Yf+B78BmNaZkrCDCvHIkVCJlWaQH0osYrfJmrRdULEyMTaoTVzBt
+ 0Pfx/+kvhZUltDikMBy7hb06l0y37B8OFDETDYZZFR8c0qc1qkxOic/neJmFeIhFYq6XPjRPg+B
+ MYMhT7hPvD9o2rlZp8fvg4UB+YSfDVjqSCZqujK49g7/bgwSCbN2xEzZ2+JKCmP9L17xO0VwaTL
+ Xk+L9/VpykJwJLsJL3s4RGJ4IHvwZPuXMy1vIwxqCLV7A==
+ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
+ t=1763971048;
+ b=Xxx2WzSp+u2UHirsCgyGVpU+0PlhC3nArYFWCR6IRv/7uUYFRtACwgYe13diNMVs4aPxFikn
+ 7iIOilNhfCj80F5EOHiGrpq9Qt5+C614pbWp+YFZixYmw9x+cXrsyeLkCuxIAwKvHo6psY93JGY
+ u7k+ahCu43jEi1r5aLtcZZeF/oTnXQIwoKO0zMlp8Dxfbt4oZhXa4X9HLIcbf/ls207C7Fvbe+6
+ PcxFzY0ugKZ7U07uzFdjJUURvJBUBvaMDeylqZTmxOA7PWk5sIeMPYpuecGBhf2oom8k+/yt+Gu
+ nDwhDah/0k0x+nK57qXA/qrjNKBgPxL9bx3K+XFo3MPKw==
+Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
+ mx-relay48-hz3.antispameurope.com; Mon, 24 Nov 2025 08:57:28 +0100
+Received: from merchelm-W2.tq-net.de
+ (host-82-135-125-110.customer.m-online.net [82.135.125.110])
+ (Authenticated sender: max.merchel@ew.tq-group.com)
+ by hmail-p-smtp01-out03-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
+ B6447CC0CC5; Mon, 24 Nov 2025 08:57:15 +0100 (CET)
+From: Max Merchel <Max.Merchel@ew.tq-group.com>
+To: Markus Niebel <Markus.Niebel@ew.tq-group.com>,
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@denx.de>
+Cc: Max Merchel <Max.Merchel@ew.tq-group.com>, Stefan Roese <sr@denx.de>,
+ u-boot@lists.denx.de, u-boot@ew.tq-group.com
+Subject: [PATCH v2 1/4] tqma6: Remove empty function tqma6_iomuxc_spi()
+Date: Mon, 24 Nov 2025 08:55:23 +0100
+Message-ID: <20251124075540.14930-2-Max.Merchel@ew.tq-group.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251124075540.14930-1-Max.Merchel@ew.tq-group.com>
+References: <20251124075540.14930-1-Max.Merchel@ew.tq-group.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] efi_loader: improve device path matching for
- partition lookup
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, xypron.glpk@gmx.de, adrianox@gmail.com,
- moritzf@google.com, sjg@chromium.org, maks.mishinfz@gmail.com,
- javierm@redhat.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250724090009.569341-1-balaji.selvanathan@oss.qualcomm.com>
- <20250724090009.569341-2-balaji.selvanathan@oss.qualcomm.com>
- <CAC_iWj+_W+be_nXTWXiGkBJ3q01MpDUDzk6+Hr_QRtWwD9Eyhg@mail.gmail.com>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <CAC_iWj+_W+be_nXTWXiGkBJ3q01MpDUDzk6+Hr_QRtWwD9Eyhg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: vLSrPhxND-HOnUHS4TjruGXR80yppn3C
-X-Proofpoint-GUID: vLSrPhxND-HOnUHS4TjruGXR80yppn3C
-X-Authority-Analysis: v=2.4 cv=SINPlevH c=1 sm=1 tr=0 ts=6923eb91 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=ByvV7kiTjxqpls6wHGcA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI0MDA0NSBTYWx0ZWRfX3Z4bsO8JEYFG
- Pn8uIZOpAiVE5gugRuoTea1IfpD9nuwwwQc0hsrpVOquUAk0S312iNaaFFlru5gJ94tBqesop+t
- DPAML1hpkL30SA5QDhscqN0ZhHno2+Q8RUlTvlgHbeDc0m5yJQF4OvpmNModM1YTh7nQni3qLY2
- /ERYBzXrwjf/aYkQqRSd9S5wz0hFEugRjlObVan6mRC7kwD79ji/fT+hATXY/sC/gQJIYdOY9sF
- dfL3rd4yDLVisUUpX4+fZpXUaSLePD02Y1/RDN3YJrs16JAvv97xRupDM9sjWFVaBoc9kOfnJcg
- 6teQ0lWaPRrthWLWoLeYGDxtirVa1lprEiBV1CfRo3hWDwqan4S8a/IAB827JXgy3eoNpLIUbBK
- VrLOQUaG8xz5/f/S6dKUvvsZmIYZ9w==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-24_02,2025-11-21_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 priorityscore=1501 impostorscore=0 clxscore=1015 phishscore=0
- bulkscore=0 lowpriorityscore=0 malwarescore=0 spamscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511240045
+Content-Transfer-Encoding: 8bit
+X-cloud-security-sender: max.merchel@ew.tq-group.com
+X-cloud-security-recipient: u-boot@lists.denx.de
+X-cloud-security-crypt: load encryption module
+X-cloud-security-Mailarchiv: E-Mail archived for: max.merchel@ew.tq-group.com
+X-cloud-security-Mailarchivtype: outbound
+X-cloud-security-Virusscan: CLEAN
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
+ mx-relay48-hz3.antispameurope.com with 4dFJ7w2m6gz1kPGJT
+X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
+ IP=94.100.132.6
+X-cloud-security-Digest: bbcb1b07d3824ac45adc56feb180c439
+X-cloud-security: scantime:1.934
+DKIM-Signature: a=rsa-sha256;
+ bh=+NBDW5zbwPoK5kgj3eLvtFk3lRxSfQsitKP+Q7oPn54=; c=relaxed/relaxed;
+ d=ew.tq-group.com;
+ h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
+ t=1763971048; v=1;
+ b=R3gH+IJliVTZvQIkIvvfeafsnkVRumCnqg3Q59tqhORDUKuVK82soWS0X2uIGpazI8nsnuhc
+ H8kFlGUjZMeVF/HPYyp/DPjYGhHrCHpi4/2qHL1cFte5cc2jRuNNzUf/i7vzKo+WIXjs8yFSmvT
+ tBaoxGG5fEsbcgbfRmZDHocfULXlc20uGNqQc1MD14A0xHbX5EaQQ3cebuzF4VNCgO24zGlzMbP
+ ijrZ5yqcBN1kN818T7Ozz761dd+RjiZPJPq+aXgFDKjc0QMsEurDOA3TXan7qEiNYgMaonAJIhV
+ JsSQUNDJc3p1Sbfs+fj0ULSroIxsOUVvRG6lXZijtFRfQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,14 +106,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct, it will break other user cases. Will revert it.
+The function `tqma6_iomuxc_spi()` was removed in the commit
+"tqma6: Remove non-DM board code".
+The original function was overwritten with an empty function in the
+WRU4 baseboard and should also have been removed.
+Therefore, the function and its call are being removed.
 
-Regards,
+Fixes: 93552cc442de ("tqma6: Remove non-DM board code")
 
-Balaji
+Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
+---
+ board/tq/tqma6/tqma6.c      | 3 ---
+ board/tq/tqma6/tqma6_wru4.c | 5 -----
+ 2 files changed, 8 deletions(-)
 
+diff --git a/board/tq/tqma6/tqma6.c b/board/tq/tqma6/tqma6.c
+index 40369f03e72..a7317b9e761 100644
+--- a/board/tq/tqma6/tqma6.c
++++ b/board/tq/tqma6/tqma6.c
+@@ -48,9 +48,6 @@ int board_init(void)
+ 	/* address of boot parameters */
+ 	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
+ 
+-#ifndef CONFIG_DM_SPI
+-	tqma6_iomuxc_spi();
+-#endif
+ 	tqma6_bb_board_init();
+ 
+ 	return 0;
+diff --git a/board/tq/tqma6/tqma6_wru4.c b/board/tq/tqma6/tqma6_wru4.c
+index 21c710188e0..aa53212e0e8 100644
+--- a/board/tq/tqma6/tqma6_wru4.c
++++ b/board/tq/tqma6/tqma6_wru4.c
+@@ -254,11 +254,6 @@ static void gpio_init(void)
+ 		gpio_direction_output(GPIO_UART3_PWRON, 0);
+ }
+ 
+-void tqma6_iomuxc_spi(void)
+-{
+-	/* No SPI on this baseboard */
+-}
+-
+ int tqma6_bb_board_early_init_f(void)
+ {
+ 	setup_iomuxc_uart4();
+-- 
+2.43.0
 
-On 11/21/2025 5:38 PM, Ilias Apalodimas wrote:
-> This function is not only used in capsule updates. Requiring to have
-> an ESP GUID installed to search for the file will break other use
-> cases.
