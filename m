@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C65BFCFD360
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 22:25:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D3C2CFD362
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 22:33:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29D0283EF5;
-	Mon, 24 Nov 2025 23:25:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2331683F01;
+	Mon, 24 Nov 2025 23:33:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="heHZcoS9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lkYELg1d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0172983F00; Mon, 24 Nov 2025 23:25:28 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id A749083F0A; Mon, 24 Nov 2025 23:33:39 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2A7583EE8
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 23:25:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 487EB83EF5
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 23:33:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7c7aee74dceso458987a34.2
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 14:25:25 -0800 (PST)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c6e815310aso2792154a34.0
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 14:33:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764023124; x=1764627924; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1764023616; x=1764628416; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DBLz9avz3yru1xckhK5SxWQcC8TCI/GihsARTXSat+s=;
- b=heHZcoS99TE5nm1KMd1kPl0pXmoi1e8/hfAnlKzAKBRSful4olrpQRTG+ZI6AfSnrD
- B8GBgTSJlW43KEJuqoIQg+CIRUiTFyHXPcGqfYxb3h8zZAGDS3iHblAbgHU1i7HO6ck2
- HR/BuWF4jkvFSHDQEs3cBjsOVfS059q6X1mYe7nyLpabbnppFT8lh1zChlumr1XRU0Sd
- PmdoPzJUQXKMqzUf4BQSL5Enmyrg66u2zs5KFf+wxHd+EsKQBnAnatVWdd3kYvhLo9hU
- U0ejTgcMEBLi1iFXgL9k5k9HePKvpfVKFVYvNPy3OjQa1uoCYnBK7gRsL2w+xXJfe7hZ
- xfUw==
+ bh=/mlaqmxSFVKsLC+XjhSbdO7eNt4m0LOBJct9oXdE6cs=;
+ b=lkYELg1d6fK0j5QkXtBaS0QrDBDd5XjwqMz3BQulhk3LsFvK7tlIpQ/TeTCuFYPbJN
+ 8oeOm5torlWYqJqZuQHeuzm+Hj3eIWWzQKbMvNm9pIBdePdq+uHuYqE0DP2fFn/SkQSb
+ sJjY5rsjaUDYqEOeJrUzj9aMpTBq0D8DsOu7eFGK3gZ8ieXhIE/AiOgO4c7P0+lluB1D
+ q679Z3POb36ljZMQhK1uysckvHSmuZRI+qnXgni5085HY1YcNFM0swkn3IAeS10Ec9ih
+ 6vpU1pZIFgpn9CwvcVHQ2vE5o8cO0UtgI97hOjwBDAIJmJgeQlM3hViRlcu0aIAemPu8
+ IWKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764023124; x=1764627924;
+ d=1e100.net; s=20230601; t=1764023616; x=1764628416;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DBLz9avz3yru1xckhK5SxWQcC8TCI/GihsARTXSat+s=;
- b=k1kxOH9tAl4VFyeoejOYoQhsMiPK5blHi7/XM8dQWIhYWvV4rkxXQuM01o8CElLc22
- VvK+kso+4eviYwzOj8OBPn3iSXIVNRa74JVO8gmWlKPf8JGhLXTrzSAd4GKcU+GyjlVv
- cJg3icP4Sq10G+oVFC78mVhq1LwFFGN9GBllLeOTKco5cdoWWXieOqVwbUF09QDnJDjg
- RHhQvfRMkSz28mezU1+AuexGprL2Xyi437abzQr3QjXECBmRGPvnZoOnf7PoHBoXnJgn
- /WNQTgS2DqYuEIKpAeIHHDLn4OiwwRdcXTAv0NQraOlN2xNj2vn4DiF8dBv7sioyMCgS
- xO6w==
+ bh=/mlaqmxSFVKsLC+XjhSbdO7eNt4m0LOBJct9oXdE6cs=;
+ b=FrVj0Gj3tQWwlDjOOXKiA4esFH2pGKSnB42Yf5lSHhe0aNSnjvliItkUquP7jIdGFz
+ l1zyeqRiOHxP8xHH85UBf5kajcsJoA1zlhvmzwJCwPoh9RQ9a5IMNEdUyCmKfsDcZr4w
+ VuBmy+Qd/08FXnJLyFdSlA3hEeK5225UsoKUaBmAKSVU6xYyb7hub/HRvjsuV/yq3bm3
+ Dakq5qSSra+yhRnw5rBxOKAU/SJRfNo6QjhEnrJ6j56TSU6LYgRELCFiTZLdHqWizbQH
+ Jgk21/xRwgEnMLbv5enwsz3/4SQfn6sFHINRmbYQpYeYiT6I3BgU0nx/S5wUr0QequYN
+ Mx0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZEUClJF16KO5txljWKwtb79NsPNAGmOsMB5fEZBXZ43nUejmLzkFHdZi6KyrRTDoKKN7LlCY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxzcjOSGobP/lARvh4xqgftixHzUIBx3nqovOHDofeYcp8g0yBA
- JpNSnUXxTjtLF/6X4zPh4+hKL33loiXzyP2VgHVNZiCw7oA6xNLpLry84B7mSjl4vA8gbP8M8S4
- DwCOS1TZi5qMHRjgVWZRAofjPG2gORLo=
-X-Gm-Gg: ASbGncvoLufgGweA4Y3XmzfjQRkD1lVTb36/IUb8Dd9CdU9xZGGFAvq1uw9ytjbrO9C
- fYmLVgGICrocRs/7c1ZAEOGG856AGKnEiFOvuIuWme8aqAb+VfL8JB/mBGUUBHESfei3RwwN7Z8
- cbp4u5D5lHPkg+NH9ph/jYkAb8p5yYbgGShLjO6knPTovYo7vTDBExgUYo8riJXQ+rKHlWpf3cJ
- X/rfG/8b1pBIaYW0qi7eS9j9UIxopx6qcf2LJ7gbMZofNiIYilCMOHsMz1F5GLDEa7/Vu99
-X-Google-Smtp-Source: AGHT+IFjrxlV7bAgRKFSR3B0H7Gip15JMWi3FWWOYfu4XOvt6tqKblTa3YAeOpFK5i0m0PAwzKiQXIlpeekfBvIJuBs=
-X-Received: by 2002:a05:6830:922:b0:78e:a394:ca24 with SMTP id
- 46e09a7af769-7c798f7fe84mr7676376a34.8.1764023124242; Mon, 24 Nov 2025
- 14:25:24 -0800 (PST)
+ AJvYcCVrNq6FZghlvW6qrSZmp8e7QawCZp6h6+cnmbTFry4MTk5MYHa6FSFXbHmV4fsb24bAism/ETY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwUoLOpkkHg+fJbrD+TOQNgTGwsbLMwTIjolgJgHLmfJ5B1owjY
+ Xbu1FaS4v9FtdNOe6JSXJ2eyRARufzVVik2WbjbA/J7Y/uhN8oOTisMk7sp0iBisVeb0+bM4A5t
+ Lkm6xx5O9yj+yOxfIOse/FTUtJ6AOBjPCh1+DM1xgOA==
+X-Gm-Gg: ASbGncs6F6AjmcuOjqQBgl9bExMz98rdeFjdQYpO32A2a8kNmkqkDuHuwyBKdXI6tL0
+ XfF9Ya1Vw3ZTMSTUJVnV2NixsvUFTBnCQkBj2FbOFma5qZ3pCjVkIOHK/VJUbqK+ogGzwNBK4E8
+ 7pd/2QDxJT0oB5Mi3mnq2S0PTyMxDnz+ltJ5eCVYHBqFQl4mKFmlcjFkXrmOsumlBi+NH60P9R2
+ SeBMBrVwLnquUMbgF+/PnKWYeIsRaUCjuQ9MTsZDhuJujrbkFUpojHrdQOzA24bLDL9vyNm
+X-Google-Smtp-Source: AGHT+IFR0xSlw3GPjvZuOqXFKhzvojtjtXk28ftesB01nEB80TsxekfibAGfpQKUL1FgnJYeEa2E+jRurUWY9pMlQn0=
+X-Received: by 2002:a05:6830:2685:b0:7c7:5974:3563 with SMTP id
+ 46e09a7af769-7c798de46f2mr5684379a34.29.1764023616046; Mon, 24 Nov 2025
+ 14:33:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20251020133455.1870-1-briansune@gmail.com>
- <adaf5081-3b9b-4cdc-b7d3-ec9756f60ead@altera.com>
- <CAN7C2SDVD+bpF=CGDPXDqLE3U9cMm2YqxnwXScvxiFh3OypP=A@mail.gmail.com>
- <009323c1-98b3-490a-912a-35249efbfd9d@altera.com>
- <CAN7C2SBU1xozPwfRG_tdcqos4jDZRm-qzXR5MEVTG7jXebp_7Q@mail.gmail.com>
- <20251114173535.GD6688@bill-the-cat>
- <9cc70ebc-2391-407c-97c0-78c687dc7915@altera.com>
- <e2557c4f-19b8-45b9-b956-a8131271c7a6@siemens.com>
-In-Reply-To: <e2557c4f-19b8-45b9-b956-a8131271c7a6@siemens.com>
+References: <20251115113118.783-1-briansune@gmail.com>
+ <CAN7C2SCQQ62=e6FEVW=jrLSj8hoWjDxUWMjQGohrpaeYjY-W9w@mail.gmail.com>
+ <27fc092f-36e5-4f20-b8b6-c25e529fbe2b@cherry.de>
+ <CAN7C2SCCA9CV1rSEy1fosaE=EDE70LMOLcfTsVz4nvNMsH0mFg@mail.gmail.com>
+ <62d063ff-7420-462a-ad51-a47a2e53c52a@cherry.de>
+In-Reply-To: <62d063ff-7420-462a-ad51-a47a2e53c52a@cherry.de>
 From: Sune Brian <briansune@gmail.com>
-Date: Tue, 25 Nov 2025 06:25:13 +0800
-X-Gm-Features: AWmQ_bkn_GcE_HSr2sErF9Xtdzwd7mI5ge3zrKcWXWL0yTtZ8lDbu4SkDr0HKQ0
-Message-ID: <CAN7C2SDc9uQO40+hR-tsTW490sCMUAsLsb_52a3kvHqiDOLtYg@mail.gmail.com>
-Subject: Re: [PATCH v4] Altera SoCFpga Boot Stall Fix
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: "Chee, Tien Fong" <tienfong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
- Marek Vasut <marex@denx.de>
+Date: Tue, 25 Nov 2025 06:33:25 +0800
+X-Gm-Features: AWmQ_bnMCl04uihCxui8ZudCxf2p77ynXn6O6ZC01gLNpEkSvh37LoJvXA4qEuQ
+Message-ID: <CAN7C2SCs0jzd3go5Y326JtOHThe3QY3dWT62M2tjQ1nJ5q=VEQ@mail.gmail.com>
+Subject: Re: [PATCH v1] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,23 +96,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> I'm all for finding the best technical solution in the end, but I wonder
-> if we can at least come to an intermediate solution for the upcoming
-> release so that folks do not need to carry too many extra patches in
-> their pipelines (https://patchwork.kernel.org/project/cip-dev/patch/cf43e9da3cfc59771e801d3215d3b3794f3602a8.1763446144.git.jan.kiszka@siemens.com/)
+> My hunch is that SPL_WDT is enabled (or whatever other mechanism can be
+> used to start the watchdog on this architecture/vendor) and somehow the
+> watchdog is started in SPL but not in proper, in which case the watchdog
+> isn't pinged. It could also be a remnant from the previous boot if this
+> is a warm reboot (e.g. the IC isn't entirely/correctly reset before
+> booting U-Boot).
 
-I am not sure why point to patch v4 but I did provide the final path
-version that T.F. should be ok with.
-https://patchwork.ozlabs.org/project/uboot/patch/20251114160423.1518-1-briansune@gmail.com/
+For this I also tried manually master resetting the system (push button).
+Hard to succeed but if "Barry Allen" suddenly helps you then it passes.
+And triggered a boot and manually entered reset on command. The
+system will fail as well.
 
-What this delay is that there are several feature coverage on the same file.
-Meanwhile, there are several similar patches pushed and T.F. action time
-is a bit slow.
+Any compiled flag change i.e. optimized with size etc will even worsen
+the boot success rate. Also make me feel the more you do before cal.
+the worst it gets.
 
-The very first patch was almost two months ago.
-https://patchwork.ozlabs.org/project/uboot/patch/20251019092341.1158-1-briansune@gmail.com/
+For register map [1].
 
-So I had no clue why that huge delay. BTW it is supposed to revert
-that pointed out patch to easily fix things.
+But I am really sorry I don't have enough knowledge to debug the root
+cause of it.
+
+[1] https://www.intel.com/content/www/us/en/programmable/hps/cyclone-v/hps.html
 
 Brian
