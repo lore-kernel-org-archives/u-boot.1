@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A992CFD315
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 08:48:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE1ACFD364
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 08:48:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63A7583F75;
-	Tue, 25 Nov 2025 09:48:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 15E5583F89;
+	Tue, 25 Nov 2025 09:48:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="DJ0Epv5N";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OBUjGfkr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9062683F20; Mon, 24 Nov 2025 23:44:36 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 2940283F20; Mon, 24 Nov 2025 23:44:38 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3916783EF5
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 23:44:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F204683F15
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 23:44:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-4505b05e7b5so1087362b6e.2
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 14:44:34 -0800 (PST)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-3ec31d2b7f8so1306567fac.3
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 14:44:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764024273; x=1764629073;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764024275; x=1764629075;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6VPsWhjaRR0ZT35DQewbQder2dzfEIk7Zp6XaUFbN/I=;
- b=DJ0Epv5NEmUloHuT7TCYTBypD+gql3EbNHXI9JwSfEYO/b1Wxy0vVZgBYVJ1MfmVbI
- iSBR+4YUmLF8LPi1hhQC4Bh82qDjZadSJLCNxSjPBrRWajRU6hpn0j9LkxoRp+SW8oyG
- NDhpoZCpI5gvamZChXPnUte8UIQDI2ZM05lp03x0CDbbDHo2sDeenKs9GPOQ0abRh7/Q
- kcWHQKxADbeekZcim4CSFOHM6iPHv/bK2MMm0F9umfbxq12+gUqtiUzSOZa/gVHIEREr
- PgXL5Cj9B7H7ybtk//dtK2Evg2NITg3gx4U9f/MiNBiwVZ+zTa9MtRq0ebnLexfp5P50
- ZFgA==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=UZNNaqfoAEAMZAl2J2dTVjuSG0L6A0yijuyQNnA68pA=;
+ b=OBUjGfkrTJU6QSTaxtWa1ipLHuPs2TBpgBczq0hiomxnimwKaiZmTYscZZcoXTrYax
+ CGt1G05JhF4HD6oLkh43te4NvElK/F4GiNujFuRn+Hlgi5DcHFAbyvyFDsrsFodxezWd
+ YWWcUz48oeBF7McdplLm6kS39erLn4w8zs0eqPT7mUXjZVQ6gAyinywzEMmx8TBl7AF1
+ sfTVGp3w7C0DOocMFVA2+PvKWPWlP1U5zCPUFuIYa0nwiN0TN2tCWpZm3LanDWfXb68Y
+ XP+w9cVJujhYHwaf6wYO0L7+pfjCH9RVlu5HpY5/beM76+3996DICvKS9ho5R0r7EmwS
+ VLvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764024273; x=1764629073;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6VPsWhjaRR0ZT35DQewbQder2dzfEIk7Zp6XaUFbN/I=;
- b=ey+92HFgYbSKHwkxVNcM1iM4bLW4hmykmtdOshGr6TJWyFds3WqQkpTGNa5aCWhpIM
- TsFOzWnNjF8CrnFOf4SYFtYWtzMq1PHpS3saGrn4hf+p/zAnmtqTwXjvkWAhGg4HtFAm
- gzyyuNz81Nny0KyPy49VxRY9KOw1XI8u6wacV+HczY/ZkIvrV3MNxHIbdtqFRH0SfdWg
- rwlwBqBpV2tfArMFKvIunJ+9pNtjUNkqLHbQBVYp8nXSynvjT2WxhgnYHoJO2B3FJ73E
- wa8w3aunuX90RqT78fQd2a+w6o7mcGSaK1MR1fYXGV22khvGBrhOoA1Hew02XG/XGBDD
- 28IQ==
-X-Gm-Message-State: AOJu0YxSfwIVqdL7kG5CqtWnJnF+5TX0X4wjLYE6v/LCjwO27oC+39Ng
- yhhGhUHhA/xrcAKzbfrJB/DIz+GsTLvQOAU9OHsKOyXGk502QnLPuU7oZtpeBBzIeK8=
-X-Gm-Gg: ASbGnctISW4qT09yQdktsAULUlktG2MtMj5OKFvfhLzR8Yw9WZPfmmwbTj/x2rqYhr/
- 25y6DtXWYs0gVc+KrDFxrzGiTfHJ1azT31884q+7qiwuTzHNKpx0kxxdAlC0QQmPozkeZWC31Ea
- Cl4l4K4VBKSPwRFdurj/93aNjEvO04GMI8QAIsb2DhwBZn0lEe8Vduq+aUAZUvS9zwtC1+ZxWN7
- Z2KJ/yDULxfCb328p2UhtjdTz5vynmJM54Kmnofocz6Rn5JVrpmLuwteef85EXJir08c0cfWtkn
- F9Rxv42J6jTjS5WB5fbpd+7opbJuAlLDwZlIkASZ2PYAlYdqQbj0lLAe65Ma15ykr6lVHY7ePlz
- jsn85+1yYz/ZD1tQRUQ45RZBsvoRU/noE150v5fw9BYqJ9KIT8ptfkUdXCy2rFSWSWeiJNa9cjQ
- 2Tb3ZBPX5RKktSog==
-X-Google-Smtp-Source: AGHT+IEm+Vx5PPn3qBJeKcdH0r9LR/01S7LzeEUAqVKqoX+6eLPBibWgVBnuO441nv9/zbTvG1EgNw==
-X-Received: by 2002:a05:6808:6d90:b0:44e:c106:8192 with SMTP id
- 5614622812f47-4511294ed47mr5163296b6e.11.1764024272950; 
- Mon, 24 Nov 2025 14:44:32 -0800 (PST)
+ d=1e100.net; s=20230601; t=1764024275; x=1764629075;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=UZNNaqfoAEAMZAl2J2dTVjuSG0L6A0yijuyQNnA68pA=;
+ b=Ja4RkHbs1QlJzBeWTY6c9b3Pbhf/k9L6UaZou6pDFDS/0ZZ8Ry3knE6+DKolrEDp50
+ k5mwTPP/jT2cT1XQniGSSTBj6NMMnjPPPg5FuyvCDWoOwgixlpTlIeUNMrKKLx86FGdl
+ UKLlsBUO0XZ5EstfnZPxmMuUQucjWuMY8F1at1mLBuMZ0Qe8KYGILj69nJJ7v5IIWqrK
+ 5/zcZfnxCyUhs82awpsXeuf1qDblesgWRRPXfUEiL4XpOGe27+eCUGamen6b82VT+/Gm
+ s/xBFiO7rLALoPDWPW1c9WrlsfsDmPeWydJYyle4bW7AGCeF4apRcgxnCRFJJrXQ3kz3
+ gZcA==
+X-Gm-Message-State: AOJu0Yx5olqeVHwAct3CyGovFk471jCT9dFD1Myq8BgYWFMIyk/6gvRU
+ gWxuCzLlud8S2uY7vf36ylokgLTf4FjaTxj/fb6E54GY7pDzqJPhnRGV4ELjDGoym0w=
+X-Gm-Gg: ASbGncusfiON9leQe5xBl8cEtwZ+nMYazUMiGeiWQQVI4VFvDvTNoQJKJO4NkBsDr8F
+ R034JMvfRRLH2PQvdFxwTuHevStj5aU2kvWWO9eO8yNc42TJ5aw2oP3hSdZpdcJvZ+BWB5C681e
+ ivYED8M9AE2tMi8ilNHCwG9cfXzfPWYcz2z89Vq9RLyqf7JCn+wWVVA2tcKmBuKqV8SDmvIpZNH
+ wlhMc1Q5nwpXJ0qnvn+vZx1j6LqZ+M5z1k85hBv95cG/CFVqCMIkecfuNFjdLznD3DquCLVjxd+
+ p6k+Bv43/5lFFR3/JiJgZQ9HlGcS82vAPrzdrpwjo5Bz+YCgaOVjrTBH8fUOS94dcqLYS2oCRh0
+ I8AC0w0ElA036OGP5i6ff3+fSt6/B/fbtYtvGy2HTwB+Np9m1EMkFS1FxAoQ7DlvHEWKUM1v9qd
+ iWX11l2hTh7VpOWw==
+X-Google-Smtp-Source: AGHT+IELu2lTfnL7T1fPlhbpwZSUwrhD9dZCAutV4oW4p6H6csxfVqYIMdUoFP604l6wQMMY0U41cQ==
+X-Received: by 2002:a05:6808:2e48:b0:450:d1e8:6f5d with SMTP id
+ 5614622812f47-45115867592mr6348668b6e.5.1764024274707; 
+ Mon, 24 Nov 2025 14:44:34 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:8a36:4d72:5018:118])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450ffe65e6asm4095918b6e.6.2025.11.24.14.44.30
+ 5614622812f47-450ffe65e6asm4095918b6e.6.2025.11.24.14.44.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Nov 2025 14:44:31 -0800 (PST)
+ Mon, 24 Nov 2025 14:44:34 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/2] doc: pytest: fix hook script env vars
-Date: Mon, 24 Nov 2025 16:44:05 -0600
-Message-Id: <20251124-doc-pytest-fix-script-env-vars-v1-0-fec5b54007f1@baylibre.com>
+Date: Mon, 24 Nov 2025 16:44:06 -0600
+Subject: [PATCH 1/2] doc: pytest: fix hook script environment variable
+ names
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALXfJGkC/x2NQQqDQAwAvyI5N2C2emi/UnrQbNRc1iVZlor4d
- 5ceB4aZE1xMxeHdnWBS1XVPDejRAW9TWgU1NobQh5EoDBh3xnwU8YKL/tDZNBeUVLFO5tg/aaB
- IPPOLoUWySdP+g8/3um6E1ZuQcAAAAA==
-X-Change-ID: 20251124-doc-pytest-fix-script-env-vars-03141d1cbc9c
+Message-Id: <20251124-doc-pytest-fix-script-env-vars-v1-1-fec5b54007f1@baylibre.com>
+References: <20251124-doc-pytest-fix-script-env-vars-v1-0-fec5b54007f1@baylibre.com>
+In-Reply-To: <20251124-doc-pytest-fix-script-env-vars-v1-0-fec5b54007f1@baylibre.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -90,17 +89,17 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Jerome Forissier <jerome.forissier@linaro.org>, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=836; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1609; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=QKOwr8cvCj2M/BUzsYU5SRPNOMUXD2Bx63+xtCL6xM4=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpJN+6IwpNY8UoaZCY/fBbyoV0RbCZOAC9yzq/w
- eWaJlVEpEOJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaSTfuhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AcXwH/0lhHnTOzjp+d1YFm2k0eJ3RWcekLzX4sWyps6O
- S/Sd8a4qajMxWWh5PX/tdzJt2RWifNZ9UfXEe7eoHSLpl4dGPEKML0zr79L2ESdtor3XjkjAwhp
- Pjtfo6SVDp0I2rBP17x36Jg887ctmIMua00rdjcmHeiefswtU6EJHl9zQxNveL7f2qoAxmQwPJi
- Wi5LLfOVlIu6tI4TCpRCcAMlQuSdezIco9QYEiAjLmmukaFESEpUNtL2nnrBVR3CYmqyFH7xd5M
- kvC3LFSfbD7FaFe6f0dCAqHcmJwX13IKuGap7oMuuQ8odJ2+Xlnjfx5Q734PtOybGSqfDeha/m+
- Oi1Y=
+ bh=pSfznrZkSITmrUmfrkYy780Y8Li0/1DS/N0/zzIrgaQ=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpJN/BxqpB0YC56Qc9s5kFOV+b4LE2k6JZ0bDZ0
+ 5baV8fzTPCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaSTfwRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Azq4H/2qXgqg4lF+jZks8LJfX0Zna7C5wkiuRCMu8uh2
+ 4e0Ry6yvJjq6j4RExPhag1S8l0+VQJMKs2NLHbpfFfDauXcY/1TQYi0q8M0XjLcaa1hw6OqRvr5
+ VdqaKyZEEkj8PLMv44Y4iWnPkg9QHTaXS4zEyqmljTW9JT2L2vorBYlJvlDkE3dTmzmi9KLjXEo
+ 79RJE8JqQxx/ulfX6Eo6iU77cJKSj508F/EZIv/28vVKGQJcEnyIDRiqFrugcuIAtpLQDftIv/E
+ a9tp5LZNYN8aasS2l+h2IddjRzCU+MftMBd0CzjjhLrOsliGJBKEwF7b2inuM+P2GSj0AcqjW4t
+ +ttY=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Tue, 25 Nov 2025 09:47:59 +0100
@@ -120,25 +119,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When I tried to follow the docs and make some hook scripts, I found that
-the environment variables mentioned there were not actually being set.
-It turns out there was a typo and they were missing an underscore in
-U_BOOT. And I also noticed that some more variables we set in the
-environment, so there is a 2nd patch to document those as well.
+Fix the names of environment variables set for hook scripts. These
+have a U_BOOT_ prefix, not UBOOT_.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (2):
-      doc: pytest: fix hook script environment variable names
-      doc: pytest: add missing hook script env vars
+ doc/develop/pytest/usage.rst | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
- doc/develop/pytest/usage.rst | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
----
-base-commit: c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
-change-id: 20251124-doc-pytest-fix-script-env-vars-03141d1cbc9c
+diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.rst
+index 7335a39b9633bb16869dfc976adab32d78dc984f..7c42a31528fd0ef78d3e24f65ee86ce2d61d6e87 100644
+--- a/doc/develop/pytest/usage.rst
++++ b/doc/develop/pytest/usage.rst
+@@ -315,14 +315,14 @@ Environment variables
+ 
+ The following environment variables are set when running hook scripts:
+ 
+-- ``UBOOT_BOARD_TYPE`` the board type being tested.
+-- ``UBOOT_BOARD_IDENTITY`` the board identity being tested, or ``na`` if none
++- ``U_BOOT_BOARD_TYPE`` the board type being tested.
++- ``U_BOOT_BOARD_IDENTITY`` the board identity being tested, or ``na`` if none
+   was specified.
+-- ``UBOOT_SOURCE_DIR`` the U-Boot source directory.
+-- ``UBOOT_TEST_PY_DIR`` the full path to ``test/py/`` in the source directory.
+-- ``UBOOT_BUILD_DIR`` the U-Boot build directory.
+-- ``UBOOT_RESULT_DIR`` the test result directory.
+-- ``UBOOT_PERSISTENT_DATA_DIR`` the test persistent data directory.
++- ``U_BOOT_SOURCE_DIR`` the U-Boot source directory.
++- ``U_BOOT_TEST_PY_DIR`` the full path to ``test/py/`` in the source directory.
++- ``U_BOOT_BUILD_DIR`` the U-Boot build directory.
++- ``U_BOOT_RESULT_DIR`` the test result directory.
++- ``U_BOOT_PERSISTENT_DATA_DIR`` the test persistent data directory.
+ 
+ u-boot-test-console
+ '''''''''''''''''''
 
-Best regards,
 -- 
-David Lechner <dlechner@baylibre.com>
+2.43.0
 
