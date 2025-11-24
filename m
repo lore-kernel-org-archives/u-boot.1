@@ -4,141 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 392E2CFD313
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 16:19:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BA80CFD318
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 16:31:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8947283E62;
-	Mon, 24 Nov 2025 17:19:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id DD00583E62;
+	Mon, 24 Nov 2025 17:31:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="C+xgE7fY";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dPg8plHM";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="HTHqH734";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6441783E63; Mon, 24 Nov 2025 17:19:32 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id C2FDA83EA6; Mon, 24 Nov 2025 17:31:50 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAACF83BF1
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 17:19:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5AOFv14k4058991
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 16:19:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ZZHBWxALcG6ICsdCIG7eOrpAJWfQF5pKcAvBQyMPcSY=; b=C+xgE7fY9OLepSO7
- 6Tt2X1zU+HPMJp+vY1vPNtzbTMt16xzm2+MFFGBoU4uq61Yz5ANxwf8xQzRvpHV8
- ct2By4uozTWFbjRe8F+ZLloFti7x6vzQSs30ivX0g+yZ7AcwBvjEGRO6trMVfLbP
- rqpjhl1njSCE+mGzs1EWJjoZukSdH4rwN9bt/hmxewZwV0YhAdHSq1KkePXgLOfp
- eG+hnPs/k1uv5pZwisO7/paXJZK9xQWxflJ3VYSdSaJATXmcHhsP2Iwbped1p7al
- UuDm3RaL/BPuHjob6uhvv3a9FNUZ8Twra2eXRRt3drUmOw6lnIQzDs/s5MPYQY3l
- ffOX8A==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ama09amqy-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 16:19:22 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-29806c42760so179429065ad.2
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 08:19:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1764001162; x=1764605962; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ZZHBWxALcG6ICsdCIG7eOrpAJWfQF5pKcAvBQyMPcSY=;
- b=dPg8plHMFHv75t1W0QDvAEGf8ftEq024HQSe+dPRJGZjKfuiUA3qc94AYX6agJlC8y
- 07ko9tXTWTO8tl3F99npM/wzDPBYznWi9qzOonmzka1TQgUTSPS5BLG+tNXHrptMIprG
- 2KXu2wOLcxDP8/H8IuLKAN681Ux1l7qllYgtEwtuS0E7HnawuLwWat25pKrMcLrn+jgO
- xK8PEccgsV7HHIymX6geWP/vsuTpac01zg9NG74Y328UX/Hs5mK05u1RG7vuaE0nY1fI
- nEGztyiudYOiyvOJMe4Ue9C3xTYiY16Y+AoOH+cZysllol7icF0u8Oby3A9WsklWJ5gh
- GeNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764001162; x=1764605962;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZZHBWxALcG6ICsdCIG7eOrpAJWfQF5pKcAvBQyMPcSY=;
- b=MK7CyawyML2noGoc8ooAQqgjXRXNI4WBh7hxPq6xKCx7mdbmD5t2ALUBIsOlhYTw1c
- iop+4o3ZjWPVQlgbOqWcBW2Zoa5VfMv9i+P2ngdsAB2H96UAW+lhRF52TSF/7v2RMNOL
- Hpmxz5YQGbS8yO5RELp3gQiylO62R89BJHvwBnokfSaETnI4DzwObIju2zImEG0jPyCB
- LrMuwYWp8otxJAH7F5BbDeFXplQGfazIwN6KoXfw5egk0jr5ZJngKk+RxyN9sb21BNor
- xruswPwH9WsdZi5gKsWka4CnxU32Yfai3ADtnXYqKSognUwccf1E3whOodcHfYtzfQtE
- sxHw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWYAFok6GcWP021Aenvw8CFRBhfSKmBkHXQTPRA2c35mNpPQ81w3QQiBbaLbUV18EPaN1xYyEo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDjUIcw7LG370HJO3osKBEqPfP0Y9WLLJlOagvuzHK7gWqi5Qi
- rSk9NH0qEiXxFZuMOwtI/+VuQgQ4P48dFfI/yHJ5sPoVTP0bS2WQSqn49Qm5TfHo5iKtSPZF12a
- kIYtCWeYkN0MpkmsGelt65v393nO4KzK/OhTVpjoaHXJzn/HihBcDMOnH
-X-Gm-Gg: ASbGnct2t2DNyh8qtUIk0GjAwYJv5hRinfM59+S01+SvXNzWfJzN5QPDTbQDcV3Nllc
- RBmoGXhqbKz2JLdQoP+KnIU2Y0CTw3GXYDrFh9DdX9ws1Kb8eNBGk1uBAUq4h0XPPJ73jQkftRI
- HtPy24OvlKWNKL0yJhryxKap98r6rbAPmhAoR056FVmDfR9317g25XOPRLBaZCldY6RcpkUoirx
- nF3Gjo8dbwuhEZqHtKmolhYlvcAkAlJK6JlEHDzYQvJUOaVnUeQ3NhOtGrwVJJM+x+/uAmhmCo+
- Gr/8mhen7HO57NP+t8dW5QRBFKJTsTXnbw+XG2bAyA1chTW6i17hX4bKnHH3T+l3o941t9lPBMb
- l70MFiJwtxAZzXA48boAyCmKhDwH/k3nl7ImOJuQQxOu3vA==
-X-Received: by 2002:a17:903:1ac3:b0:269:b6c8:4a4b with SMTP id
- d9443c01a7336-29b6be77f41mr142094635ad.6.1764001162339; 
- Mon, 24 Nov 2025 08:19:22 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHFThAUMtsjz+/n3AKoRdiN4Zo3Hx0H8HrHTtj4K9WHx19wwN/Qu32OxBqHgArev0KWPpD9+g==
-X-Received: by 2002:a17:903:1ac3:b0:269:b6c8:4a4b with SMTP id
- d9443c01a7336-29b6be77f41mr142094235ad.6.1764001161875; 
- Mon, 24 Nov 2025 08:19:21 -0800 (PST)
-Received: from [192.168.0.3] ([183.82.31.131])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29b5b25c104sm141271175ad.54.2025.11.24.08.19.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Nov 2025 08:19:21 -0800 (PST)
-Message-ID: <49744bd5-bafb-414c-a761-e8faf83e0cf7@oss.qualcomm.com>
-Date: Mon, 24 Nov 2025 21:49:15 +0530
-MIME-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id 9E2F383BF1
+ for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 17:31:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Ahu95VvcVMrA5ijI8jjO9w0iic3vGsTHaSz+AbWCn24B8MMPgtkXdLl00f+H0HmXBL6RDaTht2FgUbEBcqPuS2rOTzygp5TaOH8X8oNKuAYsffH/smFxA5eQn9haHzFCSCby3Uppq+bZvSf7WrWwvutT3Rke1lBISc+gn8CwXFt/+5YNkxm+NFvM030gRiLiKbNuTS9AUkPvWFpGV97SSRgNEqLwHjBbo///Drr2/cJOwBxEUdaAk4SZcZyOdKBFSDBF0zVa52vzyhLci8tLcTP/rVw/D+T3R+JfMLcayRHudc1+gua35fX7QSLBZG+2/alLTtlUCg9gVd2htoMpdQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UzdNIJPTF3meBSdYVY7TOZp+6Ydty7Iqi23Z3pL2UxY=;
+ b=X9jEGmrq8huSeZrGvOp85BeTSZgTCIvJzadzOc12vvcbcYgRXVYvIHVGSaGgNmigW4VrLH1IglJ1tObrf7vQcYWHbByA9sA2VtOtucWFxlxGMVu2c17EbO5eArbs2ydOOJYLBe3EjyQ8kvvPCUex1ivbL9BITjK2oxX7jBBu0tkGKGniDvQH7hrsJej7OhpYkeVX/qPxbvJFO99k8rbcFiFz8ZGcinDJPt3Qwef4tgmsGnZM3aCCGjGAye2lZoXYn3rCrKEPDgrBFb4Ej4PmGFyW3klXesNYAHTKuxylblrVETrdbI9yJWyiqHqy3uEAV+8aH6QZBO/Qu25WpjMafA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UzdNIJPTF3meBSdYVY7TOZp+6Ydty7Iqi23Z3pL2UxY=;
+ b=HTHqH734IOJsoAiClB/3ReZl4Pb8m76k4T3MYLlQ0wdyhSVXJPUfpKZM5pXqv+QkieoF33ljopKe8I1UC9kIwTBEt1kPUEhbTQOO2aSHA6yUnptp68foFlhx6VZhWP0bQ5+ygD7FK6lBV+JxLWbhqcXVYsWd9FObn0SMByVMsik=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by PAXPR04MB9154.eurprd04.prod.outlook.com (2603:10a6:102:22d::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Mon, 24 Nov
+ 2025 16:31:44 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9343.016; Mon, 24 Nov 2025
+ 16:31:43 +0000
+Message-ID: <5bfefc10-b58f-4235-83ee-209237c4a2e2@cherry.de>
+Date: Mon, 24 Nov 2025 17:31:42 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/6] drivers: usb: dwc3: Add delay after core soft reset
-To: Marek Vasut <marek.vasut@mailbox.org>, trini@konsulko.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com, marex@denx.de,
- ilias.apalodimas@linaro.org, rui.silva@linaro.org,
- luca.weiss@fairphone.com, quic_varada@quicinc.com,
- mkorpershoek@kernel.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20251119152530.4175628-1-balaji.selvanathan@oss.qualcomm.com>
- <20251119152530.4175628-3-balaji.selvanathan@oss.qualcomm.com>
- <39057967-fc84-46e3-a250-53e877c242d0@mailbox.org>
+Subject: Re: [PATCH 1/2] net: phy: micrel_ksz90x1: disable asymmetric pause
+ for KSZ9031
+To: Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: Markus Niebel <Markus.Niebel@ew.tq-group.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+References: <20251121081810.73852-1-Max.Merchel@ew.tq-group.com>
+ <20251121081810.73852-2-Max.Merchel@ew.tq-group.com>
 Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <39057967-fc84-46e3-a250-53e877c242d0@mailbox.org>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251121081810.73852-2-Max.Merchel@ew.tq-group.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: pebDfIEtQfJjLNctbkNjpCyCgPr1pP4N
-X-Authority-Analysis: v=2.4 cv=PdHyRyhd c=1 sm=1 tr=0 ts=6924858b cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=JdFg733T8uQF556z/T/deA==:17
- a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=kv_A79fCu33pd85-ikIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI0MDE0MiBTYWx0ZWRfX1lLp9yis1rF4
- pvQiRSXKx6Y1v3NaRhpTr5st+XKwABDYgv1HQRWqq0vZ0yw6jIS2vToxKHmna9aEKoFYjW3TQz5
- AeLNWCAlY1qo5/97yQ0SGbcgHK7SzfDttnRuDfWkn1LdUk0V1hSL2KGAW9UDecN+61AsPoKQ9Rr
- 9UL71HCxQRwlq7IwILMjmS/ur69mlzleDlIjRog5iXA36XxgH0CIs446O4s1drielmvXhDQZZwY
- lrlittpyc/d+rAGqB3KBJF9ufmkZ9NcAqJjzmbMKv6cYPcr0j/Qmq20ocQOUxvVadaCp0ycbENA
- QwEpLO5PR/HhLXRAyqQIW2SajI/gEsvHU1hZdKTZNIXjuwewDkvQxuFMSvoSdXyLpM4AS/sPXP5
- 2ZhANEnZNiL3+zjMcxkCF+tR0gXonA==
-X-Proofpoint-GUID: pebDfIEtQfJjLNctbkNjpCyCgPr1pP4N
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-24_06,2025-11-24_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 spamscore=0 suspectscore=0 malwarescore=0
- clxscore=1015 priorityscore=1501 phishscore=0 lowpriorityscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511240142
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR0502CA0022.eurprd05.prod.outlook.com
+ (2603:10a6:803:1::35) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PAXPR04MB9154:EE_
+X-MS-Office365-Filtering-Correlation-Id: 179de576-ca93-42bb-6c25-08de2b76f441
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|10070799003|376014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VTVKU0hpeFhuRldlTTRnN2dJTDZnU3JsbkwySWxWTDY4amtJTGVtWEtuS1Np?=
+ =?utf-8?B?S3psSDM1cWFhTzNaNTRTQ1RHZ1hLR0E0dEd3L3pnYjNabWk5b2FmdWU0YUdy?=
+ =?utf-8?B?TDRrdkxNUmVjKytFaFdMTktZdkZCVUE5OWRkTjNzODFjeU4vMlRJaFp2ZFl5?=
+ =?utf-8?B?RGdoa25kMUpmb0JmMUJuMmNDeEtKaXBMMTU3RTJhR1NxTXFRWjB6bjFZNDF6?=
+ =?utf-8?B?VVVSNktPV3JPeCtnMkhSY01uQTluL04vRExqTW11UkxnbHZZOW9Xb2NHTXMv?=
+ =?utf-8?B?UFBLNWljb2grTlplSEFJZGtyaENWQlZ1c3llcnNiZUZqTzNqZ3lsdHJHcjZG?=
+ =?utf-8?B?RjFHMVBBNWJmeFVNc2taMEpuc3QyNHhISEowcGhyd29QT3RxYThURGtwVmdO?=
+ =?utf-8?B?eWhUM2Y2aHJWVytZU0NvSHl5VmxyVVVKOFg4SU14OEdYejM1K3FTT3V2ckhq?=
+ =?utf-8?B?MVJzR0h6U3RaTDkxL0J3d0F1a0ovYUNkVnB5ZlVWeUhsTEMxcHVlS0RQa0No?=
+ =?utf-8?B?NHYyZFJtYzBMYklzY0V3Mi9aMFFFQTRnbTdtZ3Nrdk9DY1lpYTQzMzRGMnRK?=
+ =?utf-8?B?OXF4dHcwUFJhTWQ3dmNyWDJjWjVCbnRmMjFMRUEwZmhMZWZ3b2pMalpCWDdZ?=
+ =?utf-8?B?WWFyemtRWFlJM0J0ZFN1WXc2c20wZjJqTGhrSldZbjN2bjhoVExMYmtPQW5Q?=
+ =?utf-8?B?WEM0NWtITlV5NHpNTDJscHZVa1VDWkdWU1hmRmNtd3doWGYraFcwdXgrL0ZU?=
+ =?utf-8?B?ZCtDNUJDenhWcHZJMXM0bzJ4YjI3NWVFejQ2cFdpbThCOHVjOVpXY2hLRERC?=
+ =?utf-8?B?a2ZuSnNBRy8wZWNxVWl1V0RlZmlVYTUxaUVuMndzcFBuREk0b1BuMWlPVzNJ?=
+ =?utf-8?B?WFdJUG85NndoQVJqaG9hcVVncHJYZUt3MmIwd3ZZOTRjR1o1SWsrK3JwWU1z?=
+ =?utf-8?B?WXFHWjI3ZXEzcnFYanJJcDdXMTNkMkk1MnBDc3pUUVFpYmFrNm5TcGNDcFF5?=
+ =?utf-8?B?N3lJaU9ZQXdhSkRNdm1LR2lPK0VFMWhyeVhpRnUvSWVsRzQ5QWQ5QXpUWmt0?=
+ =?utf-8?B?SWxVTzdFWFFNWmxhRmRDQVlDVFhrMHRkbWV0OUdQcGJ1V1dEWUdvZVIrckd4?=
+ =?utf-8?B?REtDeGd6MVk0Rmd5d0VuR0V3WVE5cXZHWWZKcXRmQzJFQk5PU2pidHB6N1Bo?=
+ =?utf-8?B?RFFKd0Z3OVUrdmJUZkJUdWRTR0p2VmsvUWZKTENNbTgyS1lNVU1NVXd5aG9v?=
+ =?utf-8?B?WUxDZmRhN0NjNnJ2aHA5VFRIRkh6VUt3S3crTEhIWENCZ05VNkdwMXl6dFZr?=
+ =?utf-8?B?RXVlRmd6eE1BWFQxREVlbEhGZlIyV1BlQisyMG5QcFFhVEVNNlZzZWlBVmpS?=
+ =?utf-8?B?eHhzNTYvc3p5cDNzOU5vOHpZWUEyZ1RQdjlqTTVnTjdOMUs4YnFiSGFYN0lv?=
+ =?utf-8?B?QjhRRVNRc0hHRFNlcEpVWVlFYXZENnluNExDb3FmMEFVR001VXQya0thR2lX?=
+ =?utf-8?B?T0Rkdzc3WDlWMVZGWkpSZTBrekJDYUNSRVVSRHdDSUk2R0x1NW1FcGw5QTYw?=
+ =?utf-8?B?U2w1UkpDYWpVdjRuQkI1WklzLzhaTzc0TkZyL0x6aTd0ZFQ4NVhWSUZGU2hP?=
+ =?utf-8?B?WEpzU2ZCdzRtWjV3VGs3N3dPN2JsMnE4UXJzUVNQd1d3Vm13YnBaY0hKOTdh?=
+ =?utf-8?B?Tzl2bEVQbFM4M29VS3J0VFpBbVptYW1RSGwwRko1WUcvaWRNK2NOSHdtOUtK?=
+ =?utf-8?B?dFdBY25BZ1ExZ0R6bTMrZ1pwUEI3eEZWQ0RObTlIdjdzNWdNVjNUa3llQS95?=
+ =?utf-8?B?aFJCTFhxaGpFYzBaeVN1aitkL0V3MElhK0c1emE5UUZSakxxOGwwYTYwTGJR?=
+ =?utf-8?B?UjM3R3FDdnFKcjBmbjhwVTROZ0lNbzhpU0c5TkxPVThkeXFBNlZsUUpQUUp4?=
+ =?utf-8?Q?isdVUPi/ExFAMMpnUBvC13Ub3a58rjAk?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(10070799003)(376014)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b0NkcXljMi9IcHJQK2R5REhOVzVrTm9INTJoNm1ML3NOSzY4eG1TeHJaejg2?=
+ =?utf-8?B?eW14R0JrcEVaa1VIZUp3MENTWDNNem1PVHFLcXBkL1lYUVNQc3Y2WkxqZWxq?=
+ =?utf-8?B?Rm1WUUF4WWRKQnBhU3RIeWJWMTBNU2NSdFFKNEovTDR1RjhhdXVSY1gwNEQz?=
+ =?utf-8?B?MGNHbE5GanJZRDd4QkNRdkVraGZtOExOZG5VZDRTdVN2bjRRd0QzbVJyVzRo?=
+ =?utf-8?B?V2NhZXo4Q3B6VmhtdldzMWZDMHlKU2QxYXJRVnEyclZsM2lrS0IxcEgxOVF3?=
+ =?utf-8?B?bTJVQXBjaTJwMVZENVQzVCtxR0huR3UrM05yRGpIeExhcjZuSHJVSUF4MWp3?=
+ =?utf-8?B?ZVp2UGhnZG1JSmdWV0h6WVY2VTBsNEFVUmVQcmhTWk1jaFZrK0tsSjM0ZkE3?=
+ =?utf-8?B?RVdPYzNrdEhZSnNkOWYrM3pyam1ta1Y1Z3dRNG0yYUMrSjM3cXhKdEdQRG1P?=
+ =?utf-8?B?K29HS2w5VFl0OFBFUXVnUDhUQUl0dzVpbWhuZWd2MGNKdWw2aGZxRDZYU21X?=
+ =?utf-8?B?QTZmZ1dZTmJmY0tTVUczTktPajR0NTJRZmRGUk1NYTRMNTZvbHZGL2tCWktv?=
+ =?utf-8?B?SWY5cU5QNVBVWFlET2VBRTROYlBtQ2c2Q1lqenRXbWQ5Y0ZNKzM5VlAyQWwz?=
+ =?utf-8?B?d3FQS2tRRm5ndnRPTm9KNUdQUkJtQldNa0JGZ1MvL2MwVmVVc3dRRFFQdE90?=
+ =?utf-8?B?YWVTV0RaRVgycWh6cFY2MTFGcGhDUDJKc0k5S2l4ek9uR2FiSmlFbmxQRzdT?=
+ =?utf-8?B?VUgvM3p6T2xNOVoxL01tdk5BWFZYMEpKL1dCbFpXcGpQSWFWM0M0TkFZWkNE?=
+ =?utf-8?B?T1RiR0FKYXcwbTN3MDQ1amJFaFJEeGJXVjkxZXBHTkVSRGppci9nQ1RXMzQ1?=
+ =?utf-8?B?elB6RW5yMzBiR2l3YzdqQ1JXdWI4eGxlLzFCZmFmSFdYUFNmZXRkZmNQUUFt?=
+ =?utf-8?B?Z3VxWmgwWkpVSFVZb2oxWExvRmJRTDBkcFRJVllZdlYxd1dLZ2RPRk1SekNi?=
+ =?utf-8?B?aEhVL3dnd2U3Y0VRcHg4a2NLSndFY1VxUzN3TVY3cW5SQW5weU80UWFmMmpu?=
+ =?utf-8?B?UGdTMFFjSWJ6SSsyY29VTERzTld6UUo1WnBXMEZYeXJUSHpueFlRbDM3QWZ3?=
+ =?utf-8?B?UElUYVlrL1FwcDVPNloxVjEwTjZ5cHpzWGRMbWJHeVgrY2gwTWN2RGtQVzVX?=
+ =?utf-8?B?MlB6Rzl3N3hMMFhlYVhJbTIvUFZQbVYzeDRKeWFJUnphRFFQeURLR3hmVFE4?=
+ =?utf-8?B?dGRJYkpqaC85d0k5QStGMm9CeTlmaks4UkVuaWJSZmpETEJKaGIydTY3NDJ3?=
+ =?utf-8?B?emZRZE44N3RUZFdMV1hDOG9iVDhLSnA0UnBhYnlPWmswTitOb0RmVUx2eENo?=
+ =?utf-8?B?Wk9yM1BzaisvUXhJTGtteEQvSFF5SHVxRjg4SUgwNjhHVGFzdENqcVhRYnNo?=
+ =?utf-8?B?MjhyMy9MNU4wTUFrbk83elh3d3BXendTUHpxeEZ6UDd4UmhMSEE1ZW4zeUNV?=
+ =?utf-8?B?N2lETEszaXkxeEdLMUdDcGp1UHY1VDR2TVFwbzRXcVVJbkNNbHQ2ekpMZ2dR?=
+ =?utf-8?B?a0h5a1djeDYvR0owQUJBeVo5aC9IR3lwSkFvRXgvR3l6eWVPNmZ5aDNQR1lO?=
+ =?utf-8?B?ekluT1lVRmtwbTNSOWZQTVJrb1BhSDIvNlRqSkduWkRLVXpnK2V6MGlaNnh2?=
+ =?utf-8?B?WTlnL3lOdFI4R1FJeUFSNStsOWpWbjVzOC9VVlpLSmtpejRPcEFlZVlUTHBY?=
+ =?utf-8?B?NGpQbldsR2M3bkc0MWp3dTFIQk5SNkdoNGdRbWlpdU9zem9QNkxZZGpXdHJG?=
+ =?utf-8?B?RkJZbERYWllXa3RnVGlBVGhOVFZkcEZsNHNyL3ZHN3VKZGlDL2lESXM0T1VE?=
+ =?utf-8?B?YU0yMXkyaThTWTV1R1pVRS9oMG5hSFRXc25kVnhxVktueUt2VFd4OHZHK0hM?=
+ =?utf-8?B?YzBSV2JBRFhDaEY0eTJJbHJrdHRRbjFEZ3RBZkxidzZPNXZqK2Yxc1R3TDVv?=
+ =?utf-8?B?WHpLV0o3VFRuNFhma0pzSUxVTWJ3OFZMejIrSy94YmJyMkJJY0F2dDNwS0lL?=
+ =?utf-8?B?QkRRUnRqaEF4dTZQZXRiZ2NkZzFOeE0vcGNVY3FWaGVpL1QrR0Q2dnBmZ0Q5?=
+ =?utf-8?B?Z2lOaDVuRHZPdHJmWlZEMmVueCtCbnRYQVhidE1NdFlTbXM3TjBGYzU4K1RT?=
+ =?utf-8?Q?081rvW3Mhgk5/JCego60X8g=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 179de576-ca93-42bb-6c25-08de2b76f441
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 16:31:43.8215 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UpnUkLxW+VrSSF6CEj0yw2QmoaN0L9I70s4DEZynssjoEgqMrc9wGpmdXCyduC1bFr2sdX73WRK0XhA5tFzfpGUHc/RZFRb7vYdMzkbIIFE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9154
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,52 +182,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Max, Markus,
 
-Thanks for the feedback. Pls find replies to your queries below.
+On 11/21/25 9:18 AM, Max Merchel wrote:
+> From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+> 
+> Disable the support due to chip errata and call genphy_config_aneg
+> instead of genphy_config. For a complete describtion look at the
+> errata sheets: DS80000691D or DS80000692D.
+> 
 
-Thanks,
+Linux counterpart seems to be 3aed3e2a143c ("net: phy: micrel: add Asym 
+Pause workaround"). It does seem to set an additional bit 
+(ADVERTISE_PAUSE_CAP in U-Boot) but the explanation doesn't seem to 
+apply to U-Boot.
 
-Balaji
+Though another interesting commit is in the Linux tree as well, 
+407d8098cb1a ("net: phy: micrel: add Asym Pause workaround for 
+KSZ9021"). I assume we need a similar fix in ksz9021_config()?
 
-On 11/21/2025 7:36 PM, Marek Vasut wrote:
-> On 11/19/25 4:25 PM, Balaji Selvanathan wrote:
->> Add a 100 ms delay after clearing the core soft reset bit to ensure
->> the DWC3 controller has sufficient time to complete its reset
->> sequence before subsequent register accesses.
->>
->> Without this delay, USB initialization can fail on some Qualcomm
->> platforms, particularly when using super-speed capable PHYs like
->> the QMP USB3-DP Combo PHY on SC7280/QCM6490.
->>
->> The change is taken from following upstream Linux implementation:
->> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/usb/dwc3/core.c?id=3d25d46a255a83f94d7d4d4216f38aafc8e116b0 
->>
->
-> Is this the correct commit ?
->
-> 3d25d46a255a ("pmdomain: qcom: rpmhpd: Add rpmhpd support for SM8750")
->
-> It seems it is not, so which commit added that 100ms delay to Linux ?
-Sorry, this is the correct commit that adds the delay: 
-https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/usb/dwc3/core.c?id=f88359e1588b85cf0; 
-Have updated the same in this respin:
-https://lore.kernel.org/u-boot/20251124155503.2839766-3-balaji.selvanathan@oss.qualcomm.com/ 
+> Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+> Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
+> ---
+>   drivers/net/phy/micrel_ksz90x1.c | 18 +++++++++++++++++-
+>   1 file changed, 17 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel_ksz90x1.c
+> index a02dbe900b8..bc42506c65e 100644
+> --- a/drivers/net/phy/micrel_ksz90x1.c
+> +++ b/drivers/net/phy/micrel_ksz90x1.c
+> @@ -336,6 +336,7 @@ static int ksz9031_phy_extwrite(struct phy_device *phydev, int addr,
+>   
+>   static int ksz9031_config(struct phy_device *phydev)
+>   {
+> +	unsigned int features = phydev->drv->features;
 
->
->> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->> ---
->>   drivers/usb/dwc3/core.c | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
->> index 847fa1f82c3..ff0bca0dd8e 100644
->> --- a/drivers/usb/dwc3/core.c
->> +++ b/drivers/usb/dwc3/core.c
->> @@ -94,6 +94,8 @@ static int dwc3_core_soft_reset(struct dwc3 *dwc)
->>       reg &= ~DWC3_GCTL_CORESOFTRESET;
->>       dwc3_writel(dwc->regs, DWC3_GCTL, reg);
->>   +    mdelay(100);
->> +
-> Is this DWC3 specific or QCOM specific delay ?
-It is DWC3 specific delay.
+It's a u32 member, so we can simply use a u32 for the local variable.
+
+This will be overshadowed by unsigned features in the if block, just 
+remove the overshadowing variable and features = phydev->drv->features; 
+in the if block since you'll already have set it.
+
+>   	int ret;
+>   
+>   	ret = ksz9031_of_config(phydev);
+> @@ -371,7 +372,22 @@ static int ksz9031_config(struct phy_device *phydev)
+>   		return 0;
+>   	}
+>   
+> -	return genphy_config(phydev);
+> +	/* Silicon Errata Sheet (DS80000691D or DS80000692D):
+> +	 * Whenever the device's Asymmetric Pause capability is set to 1,
+> +	 * link-up may fail after a link-up to link-down transition.
+> +	 *
+> +	 * Workaround:
+> +	 * Do not enable the Asymmetric Pause capability bit.
+> +	 */
+> +	features &= ~ADVERTISE_PAUSE_ASYM;
+> +	/* update feature support and forward to advertised features */
+> +	phydev->supported = features;
+> +	phydev->advertising = phydev->supported;
+> +
+> +	/* genphy_restart_aneg called from genphy_config_aneg */
+> +	return genphy_config_aneg(phydev);
+> +
+> +	return 0;
+
+Don't need the return 0 here as it won't be reached.
+
+Is this errata only applicable if 1000BASE-T is supported? I couldn't 
+find that in the doc but maybe I misread. In which case, we need the 
+exact same logic in the if (env_get("disable_giga")) section I think?
+
+Cheers,
+Quentin
