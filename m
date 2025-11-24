@@ -4,83 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C080CFD360
-	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 23:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44AF1CFD35F
+	for <u-boot@archiver.kernel.org>; Mon, 24 Nov 2025 23:47:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A390083F01;
-	Tue, 25 Nov 2025 00:12:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7F01B83EAE;
+	Tue, 25 Nov 2025 00:47:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bxMkg3Pw";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="OnqxbOwl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E689D83F15; Tue, 25 Nov 2025 00:12:51 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4315483EDE; Tue, 25 Nov 2025 00:47:02 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A3E983E4C
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 00:12:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BDD283E8E
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 00:47:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c6d1ebb0c4so3199095a34.1
- for <u-boot@lists.denx.de>; Mon, 24 Nov 2025 15:12:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764025965; x=1764630765; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KZTbp2GrVPX5rS91UNOJhnm+Pyr+Gj5+PNtgaE5YqSM=;
- b=bxMkg3PwMjBXkGk+rp8QxHuHBmrwt8ojutvHix5kyOM/dLBmP7S8opNbR39jGNyMyn
- +pEbR89epEeW/+R4dl5YMvmcBlpqVuN/6k8ylcuwCm3xZPoJTKv+/BF0bHrPwfvcnPM4
- NzXGigJalB84dk3RpSebAhhwowmOuwzWvGO9n0rTbJ7ttC9dE1q/C2LJCf7+W6an8fcA
- 3GSahQl8eMq4SZo4t0WlYqlE7CeOLKLldpBfL2ultvdIK8MQRUY6UxzUFa7S328uXk+m
- iyqkV4/DVtp19ZT4zkOm7FwiO88e7MTaVua6PVorXA6TJQxdXMbT9KJdGdB/W4omN61A
- xemQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764025965; x=1764630765;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KZTbp2GrVPX5rS91UNOJhnm+Pyr+Gj5+PNtgaE5YqSM=;
- b=G+bl+pzQZLWzIHyAlPaHqrnbafpqOOEoIkSkzdEfy4Y2D9hrQy3xO3wamkIkQ49tid
- PfSFozF5f1oKW7iX8b8DnMfZ5GrJ+0AAaUN8oxhBkehtRyTbPZIzUipie1oK+L/jcOaO
- Ku9eLR7xSYgR9Aw9xl1gM2Bius2AwFGBWCKypGojxwEjI+xJ9bne6o6sE6GaJ0NFYQoV
- G64H6DpTuMeDepXeKe8e19EV5bdA67lA4DKRyeDWY+WdTAznNj9C0nPBl+5N0oVVxDxa
- Tp1nWzhuVHbEN1zBfZv22F6phmoQSovQ1LgsO6EARGlq17Xj/7BxnoD4MkE6+LFHG3rw
- 0bMg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXLJQ+i7QC/CvZcZgPDatwvyLMJJ4pIzXtHqswue331JEIbol5X6raHY/K42r4yddwjkd2StWg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxnUCGpXq042aZ7jpQtZJ5VRJcZUXRypCkorau7tJ2s1HmQCxIA
- MTaAqime76x8LxGAzXW/KxTNvpW/14k6dY0U88/4Aw6AEV1rKt81Vn0vsIj0J3E6WiTsG9uhKt5
- +40Ae3DWq/yBbp0UKLHQVuZAPdSJ2icg=
-X-Gm-Gg: ASbGncsWf1/ME6TBRah146BzTYAoaXpa+BhZY3hpK0KWPlQtdHXn1ZgmfRC+YENvTQ1
- jpOQww/QTinYG3j58DDLwemVcMepUMEqViug4nQgbjLgl+asaIEk80VIlveR8zkLQsaVNT0huBH
- E4RtiElQe6gPRQnVGRjNGPEBD5hj92izFh5ZQsPemBrngKkDDz81n7BbW7LpykrWHFp/AtMcY9f
- acTJ0IxgrvhtAB1fRkphUVr/aB0DrJkXIoGS/AOyu32gNV8XqsynKDTehufHymO6Pv0xi/EzAjP
- xabNxLE=
-X-Google-Smtp-Source: AGHT+IE3PhWx1EuhXZEvB0RZfR3hXc1SG60cMqIqV1ZxpywMAIkl5XL5TMx3W0AcutDFAwzr7d8xN+gQYz+jgwcxOyc=
-X-Received: by 2002:a05:6830:2b13:b0:7c7:61e0:a4ee with SMTP id
- 46e09a7af769-7c798be508dmr7307168a34.11.1764025965004; Mon, 24 Nov 2025
- 15:12:45 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1764028005; x=1764632805; i=xypron.glpk@gmx.de;
+ bh=CPbVP2YiLTXPGJi0/NMHXbL+XqfhXRWxOw07OumJxpo=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=OnqxbOwlhhY8NF2Sipk5hIz8EvOwZBzE6pLWaPeoGPgTMP9L+z7jDmljPpsVwEge
+ H6NKHoeFi7eiSUN27sDbpKDxIwWakGlEPPyYzqwENTZ0Rm3bQDmZrdjTE8o8v5zqi
+ CEKqRpvV6rb9J+xzRLpmz+NoSE9rvTQnqyemtoRyXUPHVi9Ur5mLf20qUwIwIJNQW
+ +vJchSeMRo8QZ5BBtKvEJdw6iXbSJpFA5F/pfPQlbgzZO1MHF8RXedqQ2k4btiBZ8
+ FAysodxP59Pj0uOVQCBPS8mlXoR03WX++0n8zAcXD7ho60EL+lgvVongEV3fsB/Kk
+ frYnRdr+qmtXoXnPag==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M4s51-1vNOss2mDn-003sWn; Tue, 25
+ Nov 2025 00:46:45 +0100
+Message-ID: <d4cad994-e978-4319-958a-95371224ace8@gmx.de>
+Date: Tue, 25 Nov 2025 00:46:40 +0100
 MIME-Version: 1.0
-References: <20251115113118.783-1-briansune@gmail.com>
- <CAN7C2SCQQ62=e6FEVW=jrLSj8hoWjDxUWMjQGohrpaeYjY-W9w@mail.gmail.com>
- <27fc092f-36e5-4f20-b8b6-c25e529fbe2b@cherry.de>
- <CAN7C2SCCA9CV1rSEy1fosaE=EDE70LMOLcfTsVz4nvNMsH0mFg@mail.gmail.com>
- <62d063ff-7420-462a-ad51-a47a2e53c52a@cherry.de>
-In-Reply-To: <62d063ff-7420-462a-ad51-a47a2e53c52a@cherry.de>
-From: Sune Brian <briansune@gmail.com>
-Date: Tue, 25 Nov 2025 07:12:33 +0800
-X-Gm-Features: AWmQ_bmeRb0UUNo0DU4pOpdfBpWhaUAo1_SUBB2rXY1F1Jnr_cJXExRohI22LXM
-Message-ID: <CAN7C2SA3-_wqVdYrpX=g73HBiP5hOPgKVXOOKy57vXsLp-X66A@mail.gmail.com>
-Subject: Re: [PATCH v1] SDRAM Calibration Failed fix for GEN5 SoCFPGA
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] doc: pytest: fix hook script environment variable
+ names
+To: David Lechner <dlechner@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+References: <20251124-doc-pytest-fix-script-env-vars-v1-0-fec5b54007f1@baylibre.com>
+ <20251124-doc-pytest-fix-script-env-vars-v1-1-fec5b54007f1@baylibre.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251124-doc-pytest-fix-script-env-vars-v1-1-fec5b54007f1@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:tndhM7SGGO5zGFr8kSd7VTUQJ9in+ABP3lY+Z4ly0nhiglBWXsy
+ 2uYSXSV6qrxF+5sI1b7BlkPoD6kyRCN2Ued6D329H8PiID5iAhq9ArsUddxjHNishvWba19
+ Wgsywl3MvE+jKBY6dR1laHNnPBgfwaXzacIMsrrCIUgbfc5datwV/fG2xwDScJ5PUXNshFR
+ oHTCrRFQplJk7UKeuXesA==
+UI-OutboundReport: notjunk:1;M01:P0:4D84rVCy4BI=;JwainezDHZ5U4pGFumSxBBgbsMQ
+ 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
+ 0yKgOxMX2yrDphQU9YRg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,128 +156,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Looking into socfpga_cyclone5_defconfig it seems that SPL_WATCHDOG is
-> enabled but no driver is. Can you tell us which (failing) defconfig
-> you're using (and if it supports multiple boards, which one) so we can
-> check assumptions without going back and forth with you?
+On 11/24/25 23:44, David Lechner wrote:
+> Fix the names of environment variables set for hook scripts. These
+> have a U_BOOT_ prefix, not UBOOT_.
+>=20
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>   doc/develop/pytest/usage.rst | 14 +++++++-------
+>   1 file changed, 7 insertions(+), 7 deletions(-)
+>=20
+> diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.rst
+> index 7335a39b9633bb16869dfc976adab32d78dc984f..7c42a31528fd0ef78d3e24f6=
+5ee86ce2d61d6e87 100644
+> --- a/doc/develop/pytest/usage.rst
+> +++ b/doc/develop/pytest/usage.rst
+> @@ -315,14 +315,14 @@ Environment variables
+>  =20
+>   The following environment variables are set when running hook scripts:
+>  =20
+> -- ``UBOOT_BOARD_TYPE`` the board type being tested.
+> -- ``UBOOT_BOARD_IDENTITY`` the board identity being tested, or ``na`` i=
+f none
+> +- ``U_BOOT_BOARD_TYPE`` the board type being tested.
 
-Fresh build is repeatable on that calibration failure.
-I have done what I can, so if there are any issues feel free to point them out.
+I checked for the variable names in U-Boot origin/next and=20
+u-boot-test-hooks.
 
-Brian
+I could not find U_BOOT_BOARD_TYPE via grep.
 
-Logs as follow:
+> +- ``U_BOOT_BOARD_IDENTITY`` the board identity being tested, or ``na`` =
+if none
+>     was specified.
+> -- ``UBOOT_SOURCE_DIR`` the U-Boot source directory.
+> -- ``UBOOT_TEST_PY_DIR`` the full path to ``test/py/`` in the source dir=
+ectory.
+> -- ``UBOOT_BUILD_DIR`` the U-Boot build directory.
+> -- ``UBOOT_RESULT_DIR`` the test result directory.
+> -- ``UBOOT_PERSISTENT_DATA_DIR`` the test persistent data directory.
+> +- ``U_BOOT_SOURCE_DIR`` the U-Boot source directory.
 
-* WDT disable DT enable fails.
+ok
 
-* WDT enable DT enable pass.
-  Warm and cold reset pass.
+> +- ``U_BOOT_TEST_PY_DIR`` the full path to ``test/py/`` in the source di=
+rectory.
 
-U-Boot SPL 2026.01-rc3-00013-gc3a95cc3c6cd-dirty (Nov 25 2025 - 07:01:29 +0800)
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01efd394
-l4wd1-wdt_ccvr: 0x00000000
-SDRAM calibration failed.
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01a3204c
-l4wd1-wdt_ccvr: 0x00000000
-### ERROR ### Please RESET the board ###
+U_BOOT_TEST_PY_DIR does not exist.
 
-U-Boot SPL 2026.01-rc3-00013-gc3a95cc3c6cd-dirty (Nov 25 2025 - 07:01:29 +0800)
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01efd2c3
-l4wd1-wdt_ccvr: 0x00000000
-SDRAM calibration failed.
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01a31e7d
-l4wd1-wdt_ccvr: 0x00000000
-### ERROR ### Please RESET the board ###
+There is a variable TEST_PY_DIR used in test/py/conftest.py.
 
-U-Boot SPL 2026.01-rc3-00013-gc3a95cc3c6cd-dirty (Nov 25 2025 - 07:01:29 +0800)
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01efd2ef
-l4wd1-wdt_ccvr: 0x00000000
-SDRAM calibration failed.
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01a31ef2
-l4wd1-wdt_ccvr: 0x00000000
-### ERROR ### Please RESET the board ###
+> +- ``U_BOOT_BUILD_DIR`` the U-Boot build directory.
 
-U-Boot SPL 2026.01-rc3-00013-gc3a95cc3c6cd-dirty (Nov 25 2025 - 07:01:29 +0800)
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01efd2ac
-l4wd1-wdt_ccvr: 0x00000000
-SDRAM calibration failed.
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01a31eee
-l4wd1-wdt_ccvr: 0x00000000
-### ERROR ### Please RESET the board ###
+ok
 
-U-Boot SPL 2026.01-rc3-00013-gc3a95cc3c6cd-dirty (Nov 25 2025 - 07:01:29 +0800)
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01efd318
-l4wd1-wdt_ccvr: 0x00000000
-SDRAM calibration failed.
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01a31ee0
-l4wd1-wdt_ccvr: 0x00000000
-### ERROR ### Please RESET the board ###
+> +- ``U_BOOT_RESULT_DIR`` the test result directory.
 
-U-Boot SPL 2026.01-rc3-00013-gc3a95cc3c6cd-dirty (Nov 25 2025 - 07:08:42 +0800)
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01efd155
-l4wd1-wdt_ccvr: 0x00000000
-Trying to boot from MMC1
+U_BOOT_RESULT_DIR does not exist.
 
+> +- ``U_BOOT_PERSISTENT_DATA_DIR`` the test persistent data directory.
 
-U-Boot 2026.01-rc3-00013-gc3a95cc3c6cd-dirty (Nov 25 2025 - 07:08:42 +0800)
+U_BOOT_BUILD_DIR_EXTRA (used in test/py/conftest.py:167) is missing in=20
+the list.
 
-CPU:   Altera SoCFPGA Platform
-FPGA:  Altera Cyclone V, SE/A5 or SX/C5 or ST/D5, version 0x0
-BOOT:  SD/MMC Internal Transceiver (3.0V)
-DRAM:  2 GiB
-Core:  33 devices, 18 uclasses, devicetree: separate
-WDT:   Started watchdog@ffd02000 with servicing every 1000ms (10s timeout)
-MMC:   dwmmc0@ff704000: 0
-Loading Environment from MMC... Reading from MMC(0)... OK
-In:    serial
-Out:   serial
-Err:   serial
-Model: Altera SOCFPGA Cyclone V SoC Development Kit
-Net:   eth0: ethernet@ff702000
-Hit any key to stop autoboot: 2
-U-Boot SPL 2026.01-rc3-00013-gc3a95cc3c6cd-dirty (Nov 25 2025 - 07:08:42 +0800)
-l4wd0-wdt_cr: 0x00000001
-l4wd1-wdt_cr: 0x00000000
-l4wd0-wdt_ccvr: 0x01efd0ff
-l4wd1-wdt_ccvr: 0x00000000
-Trying to boot from MMC1
+Best regards
 
+Heinrich
 
-U-Boot 2026.01-rc3-00013-gc3a95cc3c6cd-dirty (Nov 25 2025 - 07:08:42 +0800)
+>  =20
+>   u-boot-test-console
+>   '''''''''''''''''''
+>=20
 
-CPU:   Altera SoCFPGA Platform
-FPGA:  Altera Cyclone V, SE/A5 or SX/C5 or ST/D5, version 0x0
-BOOT:  SD/MMC Internal Transceiver (3.0V)
-DRAM:  2 GiB
-Core:  33 devices, 18 uclasses, devicetree: separate
-WDT:   Started watchdog@ffd02000 with servicing every 1000ms (10s timeout)
-MMC:   dwmmc0@ff704000: 0
-Loading Environment from MMC... Reading from MMC(0)... OK
-In:    serial
-Out:   serial
-Err:   serial
-Model: Altera SOCFPGA Cyclone V SoC Development Kit
-Net:   eth0: ethernet@ff702000
-Hit any key to stop autoboot:  3
