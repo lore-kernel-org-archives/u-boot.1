@@ -4,91 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7EE0D0EE0C
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 16:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B9CED0EE0C
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 16:51:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F556840ED;
-	Tue, 25 Nov 2025 17:48:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id ED3B2840ED;
+	Tue, 25 Nov 2025 17:51:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="pOw03MSL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZXf69G2r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C29A840ED; Tue, 25 Nov 2025 17:15:21 +0100 (CET)
-Received: from mx-relay163-hz1.antispameurope.com
- (mx-relay163-hz1.antispameurope.com [94.100.133.246])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6828984105; Tue, 25 Nov 2025 17:51:18 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8092840E0
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 17:15:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0417def1e3=alexander.feilke@ew.tq-group.com
-ARC-Authentication-Results: i=1; mx-gate163-hz1.hornetsecurity.com 1;
- spf=pass reason=mailfrom (ip=94.100.132.6, headerfrom=ew.tq-group.com)
- smtp.mailfrom=ew.tq-group.com
- smtp.helo=hmail-p-smtp01-out03-hz1.hornetsecurity.com; dmarc=pass
- header.from=ew.tq-group.com orig.disposition=pass
-ARC-Message-Signature: a=rsa-sha256;
- bh=k/7DIufJiJVQlQtfzNnEFpo4gRBZIumW/M5bXxAhrQs=; c=relaxed/relaxed;
- d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
- t=1764087317;
- b=hfFfNM6eglxfFI9CzYgRfABl4L18IdGZvrqiQ0QWxrP7EPzf0esTRRStESi5cTbPe9EOLSa0
- ZpXjYXy4DhXrQj0qFrL724U+XSLqO3oERKAbWnWlAo5xC6ss3SoUG84YRCBhlioWixXWtjhi8b6
- Tzj6ey6Nlcx4yIo5ZNQS+ULhIheqLho0wtfy4JyI1ugAO+P1foNMp4zKDYxMySo0VWuvSlMAM8N
- QHI7eZA5x1MGo18fvha/Ri35m0dpPbuiug5DqTNp3+Tqrf7BDi9oPU0y5QtaQWfw1/cPoQq8wes
- cE8WVwjGRPrtRUAmo7yCp+nIJKOi+aYL88uNN1v65ImzQ==
-ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
- t=1764087317;
- b=WF02V8Zw+fF+Qu/pjwqTYLOXjkFjSuOKAbYSfoKqluCauV4q2x2SbL3EnHyaoAj27HlR/K67
- GayAUkOxwAZRvQYWZMTQtWTK1YADq0A+4iECpMEsjsERxRsabQ7WKN3AuIwluqJMXhaE2W0dryA
- hjMlFZyOYEw5RyQIGO8Wau5iFQ/ap9uOo0IwNM4VKfMa4NrI32i3ajKXqpsIQhkGIKem0xUDpd4
- vkUMe4HUBODKMJKYMrYGbpi4yNW9CyOEBfSrWpycipTg4++9pusxTkb6LC1Yrrg8B3JyqwTuPZ8
- wiss7xDwW4Pku6KCZEqX8XfTxrOFxQfTGQLFW9lZ5760g==
-Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
- mx-relay163-hz1.antispameurope.com; Tue, 25 Nov 2025 17:15:16 +0100
-Received: from FEILKEA-M.tq-net.de (host-82-135-125-110.customer.m-online.net
- [82.135.125.110])
- (Authenticated sender: alexander.feilke@ew.tq-group.com)
- by hmail-p-smtp01-out03-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
- 57D19CC0A1D; Tue, 25 Nov 2025 17:15:05 +0100 (CET)
-From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
-To: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com,
- Alexander Feilke <alexander.feilke@ew.tq-group.com>
-Subject: [BUG] silent hangup when debugging lib/fdtdec.c
-Date: Tue, 25 Nov 2025 17:14:12 +0100
-Message-Id: <20251125161427.1155-1-Alexander.Feilke@ew.tq-group.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id 3D4CC840E6
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 17:51:16 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-3e8317b1262so6311029fac.3
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 08:51:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764089475; x=1764694275; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=n92xEnPajb94tGzD2YYouZfAdjso2poTPvdlxbDbOVY=;
+ b=ZXf69G2rvLXo2ke7+6wfRc0tRVtHrFnkuXF8HpXdTloxBiTa9MUHgcsgt8cHii3vUA
+ l6T4okeOjFQYj0WZiOkZSYiO+rwwSE1/nBqMTwRaHPnGTiECR9dZ3MiRzIjIA7qX8UOo
+ 3Nv2THKNTFQyWmMZ1YeHjOmUj4mRPqnvfEFvs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764089475; x=1764694275;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=n92xEnPajb94tGzD2YYouZfAdjso2poTPvdlxbDbOVY=;
+ b=WcSlv7GAjMgl+bN6uzKcFEclEf2mrjiDVRGtDUAVCs0v9GduSMmZABZ3kDFqdUL2mq
+ yJLpBFGVF0l71aiGX4b3fwOqrFaWOgwIi1QgmEqdxOqMe0biQpcHslIpL0lYYSE3fzbb
+ YMn5/s1YSw81FaUmOMobHLUzxt5bhDkiv5bhuLBQ5RD3KPrQTXimn7mpJ2iVafqYvAzh
+ UeZIFIzQJ1km5RE+/wLgIjuPWpyk/EZ+9UX2Av0nzmwHZCzGaVgYVHqQ3ecaoXkBE5Dq
+ 9Rky7pd43zLaqLM5f1rRXJMjr+H0E0ZATm7Oc0kK+Sx15SVjXR63gv5yU5aIkP02xOfx
+ +SSA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVgAe9cZJu7vf6kb5FWLGJA4OWXcxPBckg/ZVtxijXRAeiGO2o24o+l47YxpFv5D9uumdCkLsk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/hYNNssA5CyQsCRy9W0ndnhI3Vl4LNAGV8SYLIjcaar9GJRuH
+ FDP3QLFofAcgHQJsYodsQvjF1H3HdEFCeEbYMQ9QHFfjd2Wo6dqSzBHjbSio5l+X07/+OQ7aauZ
+ /tKUNVVw=
+X-Gm-Gg: ASbGncvG1tW3b6fGHQsAzBbgjXT7eOkibP7I2DuTDSTIYfMdbQxvGuuvg6s7x5AgORg
+ kGLIuuYyqIaDEgpYv7xweF/u/OVLQc/FVMP008zobH3ULRgSHoAKFKTCAbMgpUFfFbqp4Gdmuwz
+ 66ZrlTiz8dzijHWvUK+d/eiWR6zNJDPM3J+9rLfwmba2EnXxiKM8Fd7QjJnZGFM50DtJe8C00qN
+ DWzwj10ptvIHShi86Sfzyn/ArLYqJqZRYMZ+gYwvXN86C/3RhFYxbCFb4F+Z7SWuOi24SVMImVn
+ 2Pvkezo1rooKtU//yCb+9Ln4lvCE3SdOMhChwDiCSLI4ALI0orfPfwL2uudbAg/8wjZengRoulA
+ /tlb0GOXdJLVxn2QgoJQa5ZeUunH0R6nXSBfAILQbTZTjpTDaHWTC4e8LN9TvK1bhwzxsvhlq/O
+ 9VcTVezzi6W+Ybx/Gv5lzJirCCLP6YAcQNpP16QOvJUb032GdD3w==
+X-Google-Smtp-Source: AGHT+IFqBMQ5CAFmfXWF/TIubG++HjK+aFglg2KDPh1IDI3vXyL4xSZQIJqH6f0bcS7tOCelr58k5w==
+X-Received: by 2002:a05:6808:c165:b0:450:ccef:c00c with SMTP id
+ 5614622812f47-45115b887d2mr5214386b6e.48.1764089474768; 
+ Tue, 25 Nov 2025 08:51:14 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-450ffe6893csm4662623b6e.9.2025.11.25.08.51.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Nov 2025 08:51:14 -0800 (PST)
+Date: Tue, 25 Nov 2025 10:51:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: David Zang <davidzangcs@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] autoboot: Fix inconsistent countdown output
+Message-ID: <20251125165112.GR2125796@bill-the-cat>
+References: <20251027002458.16741-1-semen.protsenko@linaro.org>
+ <20251028165056.GG6688@bill-the-cat>
+ <CAPLW+4=JOiPk+gOHH4umevJxJweitAn3dpec1xTe9ZrgCAVAMA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-cloud-security-sender: alexander.feilke@ew.tq-group.com
-X-cloud-security-recipient: u-boot@lists.denx.de
-X-cloud-security-crypt: load encryption module
-X-cloud-security-Mailarchiv: E-Mail archived for:
- alexander.feilke@ew.tq-group.com
-X-cloud-security-Mailarchivtype: outbound
-X-cloud-security-Virusscan: CLEAN
-X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
- mx-relay163-hz1.antispameurope.com with 4dG77t036Rz1Z1m4
-X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
- IP=94.100.132.6
-X-cloud-security-Digest: 4ede2fffc9ab647837e22f61aed7829f
-X-cloud-security: scantime:1.968
-DKIM-Signature: a=rsa-sha256;
- bh=k/7DIufJiJVQlQtfzNnEFpo4gRBZIumW/M5bXxAhrQs=; c=relaxed/relaxed;
- d=ew.tq-group.com;
- h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
- t=1764087316; v=1;
- b=pOw03MSLAMIF82SCLQPMimAYh9PIpiu+wEWENT2OE2FPWUsmAxVXFX041o/sJloBu/XB0/l7
- +ieKwMtzloorLt4UAt7gGcWojTQaqNBPtc2Jhst39RZYMs5KMYWHHn3VtX15Pd+a9QxoanOOCmA
- ze7/3Trbfb+o5rCuOf9K6tRaLVXFWk9K5LatKc+zGe4d9t8nTzWyey0GFgwmde6IjJzpaBhJEhx
- S2p1kf5/1lW2cN2oGtB7OzSRxzQHz7Nqd8t6HDCae90osiRwpf9wQxFmRfpMYVEpviXSkuua2jm
- XCpUjO8PEjhO8Ftgl7UYdj30iOTlt6mb/Ga0kT2geIb2A==
-X-Mailman-Approved-At: Tue, 25 Nov 2025 17:48:34 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZEvUomXIMkEyHUb1"
+Content-Disposition: inline
+In-Reply-To: <CAPLW+4=JOiPk+gOHH4umevJxJweitAn3dpec1xTe9ZrgCAVAMA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,46 +101,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-Description: U-Boot hangs silently during boot when enabling DEBUG in
-lib/fdtdec.c
+--ZEvUomXIMkEyHUb1
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Not sure if its really a bug or rather a configuration issue on my side.
+On Mon, Nov 24, 2025 at 02:49:23PM -0600, Sam Protsenko wrote:
+> Hi Tom,
+>=20
+> On Tue, Oct 28, 2025 at 11:51=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
+ote:
+> >
+> > On Sun, Oct 26, 2025 at 07:24:58PM -0500, Sam Protsenko wrote:
+> >
+> > > Commit 5f70be08b015 ("Fix autoboot countdown printing wrong") introdu=
+ces
+> > > inconsistency in how the countdown is displayed. For example, in case
+> > > when BOOTDELAY=3D5, the next output is observed during the boot:
+> > >
+> > >     Hit any key to stop autoboot:  5
+> > >     Hit any key to stop autoboot: 4
+> > >     Hit any key to stop autoboot: 3
+> > >
+> > > That happens due to different printf format (%2d vs %1d). Moreover, t=
+he
+> > > mentioned commit fails to handle the case when the user is holding so=
+me
+> > > key before the countdown is shown. E.g. if BOOTDELAY=3D101, the next
+> > > malformed output is being produced:
+> > >
+> > >     Hit any key to stop autoboot: 1 0
+> > >
+> > > That's because the fast path code wasn't modified accordingly, and st=
+ill
+> > > tries to erase the number using '\b\b\b' format.
+> > >
+> > > Fix both issues by introducing a dedicated routine for printing the
+> > > whole countdown line.
+> > >
+> > > Fixes: 5f70be08b015 ("Fix autoboot countdown printing wrong")
+> > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> >
+> > This seems the reasonable path, given everything in the following parts
+> > of the thread, thanks.
+> >
+> > Reviewed-by: Tom Rini <trini@konsulko.com>
+> >
+>=20
+> Since there are no new or outstanding comments for this patch, can you
+> please pull it for the next release?
 
-Minimal steps to reproduce: <see patch>
+I'm going to take this for -next rather than master, soon, as it's just
+cleaning up some output. Thanks.
 
-The hang is caused by `panic("FDT overlap");` later inside the if block.
-(see `lib/fdtdec.c:1279` in `fdt_find_separate(void)`)
+--=20
+Tom
 
-Additionally, no boot log can be seen because serial is initialized after
-loading the devicetree in this boot stage (see `common/board_r.c:665` in
-`initcall_run_r(void)`)
+--ZEvUomXIMkEyHUb1
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Tested on i.MX6 with configs for tqma6d_mba6 and other tq boards that aren't,
-mainlined yet (tqma6ulx_mba6ul and tqma7d_mba7).
+-----BEGIN PGP SIGNATURE-----
 
-Any idea what to look for to fix this on our side?
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSXeeAAKCRAr4qD1Cr/k
+CmyYAP9jP4azyvoi7S8v6rwcC5Awa3q6Sh+qi+BtutwRg7lW6QEAlCEIyqxovTP9
+Zpy7JwkwFJ4BERg1ZYs5hWzZTh1yhQY=
+=G/p7
+-----END PGP SIGNATURE-----
 
-Thanks in advance,
-Alexander
----
- lib/fdtdec.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index c38738b48c7..0f2f7c948cd 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1257,7 +1257,7 @@ static void *fdt_find_separate(void)
- 	/* FDT is at end of image */
- 	fdt_blob = (ulong *)_end;
- 
--	if (_DEBUG && !fdtdec_prepare_fdt(fdt_blob)) {
-+	if (1 && !fdtdec_prepare_fdt(fdt_blob)) {
- 		int stack_ptr;
- 		const void *top = fdt_blob + fdt_totalsize(fdt_blob);
- 
--- 
-2.34.1
-
+--ZEvUomXIMkEyHUb1--
