@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3422DCFD315
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 06:48:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A6C2CFD368
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 06:48:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9C5C83EAE;
-	Tue, 25 Nov 2025 07:48:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE63283EAE;
+	Tue, 25 Nov 2025 07:48:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="miK6YnUg";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="a7/HFrrY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0834E83F2B; Tue, 25 Nov 2025 07:48:09 +0100 (CET)
+ id B29D583F61; Tue, 25 Nov 2025 07:48:51 +0100 (CET)
 Received: from PA4PR04CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32E0383D13
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 07:48:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BC0683D13
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 07:48:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=S7Ef9nX3M61Oh9428uLSmijPeApIiIsg97oTmoaTh++VjK7He3PwShX3tbEage22ta8ciPOhDXVuspmfsALAUUjJPoWs7mvTeSscnTTmeFG4INkDdCT49lfMiPDzBw436ae5ui4Z0uVMHykziD2CkFeaR6pG0izIvO+B6DT2+qT7vO+znSexs7kreY5DG+3/NqclTxXKI2ThUOo9eKIKyJYnzd9QIku4svuNQ+sXLB+lkJ6BJgUlWuoC7RMabR+5kVmX/LFSoCuEyBYGxeDaiYertik4ZqvHIZckEMv7sB0ZAk8kAS/gIqNW1ZdXUvJKlp3GMmXCGXGf+8CTIBn3wQ==
+ b=pf2MsgPtP7WchmkbpMondqZFzUftOobsPTLBojHXkgU305c4qtNXm9aFYmcvJaERVm4W66AXj8K1ZC+9k5fVimZlh+s3DK5GjObZUmWAsGCcyiMCJnAu+OY/h21nw+gAHkyl7F8GBNwqTF18XuHB8lCBTliJtCWRiu8+eVpcsHiVjE1UDfyw1bm2fNf0S5yECvZVKwTjeil9A7gvGISAAgjJbS9FO3yJsiBemVbOuZhPmYv//7zf66NCRuvYJ0mD8Y0qbMbHwJU8rtnY5y1AXrN19alvgK+9BPBxd1FKSkQB9cQYH5jVopZuCJLY0ksgzYULktE9KiJSvOlLlegCgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+6XaTUT7FKUuJBcC9aYc1oBvAF2tYBVSnHE1oBqFG4A=;
- b=exnFrUCjRvAHNOIDXmwgxNwJI5ZSlKKU+m4T6k1OQ1Vodb9vXtYdSELj/3V98i4XlbMNvDV1jgEP+gC2G9SVCSZ/ksSwVqEePP2NsvBgi0LOZSgCiX1BSZDr7iwAF0gXX2thNq+aQjGMiTIAR5Mz0h/nphDUWqgxmbRr6c/ksb1S30vHl42ivRAMqxXvsqkiJl5uEBvY3vqH9UjObAlGZsd+1jBlUO/I6iYy6TQvPOoDKVnOuhy6VP1VpC482Y//38zYN0oq5oihHk2a6SgEL1cJjFOo4kUe4xBp0vjgggvtn8BrVxRzscNpYxVtIG5rFsiTqEz7icStuBwrpBsDGg==
+ bh=DkChEmQ3aQER5UPNCzDM3PZ6kvfyA5aQbRXor85cvp8=;
+ b=yeaYRjJGsQqOaW8lw0+WBwvlpERojrZNFEq82dbPGRhLC6ZhTgn9vJ8Qku7EzzA8uW5tsS4Esjg13kjGnh8xyh1JT/AwlTILAbEpLwQqk9iCMLrz6YdHoCJAYP5gn7eVGIJMEqIUwBpPxVmL+DfLGPDdMDLzeVbpMivMemWDEYkP/CN1T9adXzMBbk7Ej9FZiIbJ1+QKHgAXqXr2IHDybEYM0EAGACmosm0+ZciiKxoye1UCo5wBALn38IeFVRRoLGL8sEhjJg2W1mzOC0Y22LqTR5IOsqzEFLeRn/zJCAD3tvt2Jt1Jaml6iWbDxOnOvxGCkTdQnbm/DOhElgLRbQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
  dkim=pass header.d=siemens.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+6XaTUT7FKUuJBcC9aYc1oBvAF2tYBVSnHE1oBqFG4A=;
- b=miK6YnUgn+NKvr5lgclEy1cM13oB2sk/Kpipo1MYIpSdTzM05+X8FVSrd5V5qs7G+9YhFRp6M8O6Y5mHLfyOm0WOXTTtyeMtz5ZyoPOrDivES9RSyH6kyWi7Ywvoex/XwZbhaO7vxFxuHlcfp44g/oAQ1rvG5JHV/xcJnsI7kwPsvOkjg+FbdImNjrN6pPjkzG6ZSc9uTrqsnGp9Wfa34+Y847IwTD87XCDTg+T9lPM+VnZRJhORFt6e4nbKRxZ/jMYXQsvTa/pn9e3U+3/N2VQdRArRPqZ5dl7re+9jFocgn9FRucEg8EI4pvgB7vr0+DEHd7B6TmIhmaVcYjtERw==
+ bh=DkChEmQ3aQER5UPNCzDM3PZ6kvfyA5aQbRXor85cvp8=;
+ b=a7/HFrrYPFcTP2z49mb4VRlz5FpaXuHCe+W2tPHU2zDdQODTjfRFM6RIrO45xwDFVDT2tHpzkKFub6WJLXQgjEKvhqexspecWGfaBZSXuqq0Uv/E/8UwPaREodT2QEfZdpX991fUAmFbBD2kLYCmATNhPW7wmXI8iaYNcKs1vLRmSMlxc6qAQBLa2b/zXSD86/YkKd+CtbcgF3UsBGyaU3/pfvsIe23EwOfVdVbCmIK7U0HmN5EZVYiCAjNjn+40ntbTzZhAha0WWY0vHewjLRGBWCd7VdVjXZFejpIteYxm9TCNI/nW96DaPTfYMjUCzgxsFnf153LJMzDgddKPRA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=siemens.com;
 Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
  by DU4PR10MB8831.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:55d::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.18; Tue, 25 Nov
- 2025 06:48:04 +0000
+ 2025 06:48:47 +0000
 Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8fe1:7e71:cf4a:7408%6]) with mapi id 15.20.9366.009; Tue, 25 Nov 2025
- 06:48:04 +0000
-Message-ID: <a27e5bb7-dea7-4659-be32-4111bf8a5f9d@siemens.com>
-Date: Tue, 25 Nov 2025 07:48:02 +0100
+ 06:48:47 +0000
+Message-ID: <1d8381ed-655f-45a5-97f1-b7e998d1523a@siemens.com>
+Date: Tue, 25 Nov 2025 07:48:45 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] spl: mmc: Account for
- SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE being a choice
+Subject: Re: [PATCH v4] Altera SoCFpga Boot Stall Fix
 To: "Chee, Tien Fong" <tienfong.chee@altera.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Marek Vasut <marex@nabladev.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-References: <cover.1763140421.git.jan.kiszka@siemens.com>
- <2a3e21ea1dd00565857793228cf1a0ee27d550db.1763140421.git.jan.kiszka@siemens.com>
- <93c1f877-ac83-4802-bfc4-4338658d8e5e@altera.com>
+ Sune Brian <briansune@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
+References: <20251020133455.1870-1-briansune@gmail.com>
+ <adaf5081-3b9b-4cdc-b7d3-ec9756f60ead@altera.com>
+ <CAN7C2SDVD+bpF=CGDPXDqLE3U9cMm2YqxnwXScvxiFh3OypP=A@mail.gmail.com>
+ <009323c1-98b3-490a-912a-35249efbfd9d@altera.com>
+ <CAN7C2SBU1xozPwfRG_tdcqos4jDZRm-qzXR5MEVTG7jXebp_7Q@mail.gmail.com>
+ <20251114173535.GD6688@bill-the-cat>
+ <9cc70ebc-2391-407c-97c0-78c687dc7915@altera.com>
+ <e2557c4f-19b8-45b9-b956-a8131271c7a6@siemens.com>
+ <CAN7C2SDc9uQO40+hR-tsTW490sCMUAsLsb_52a3kvHqiDOLtYg@mail.gmail.com>
+ <edcf7ddb-966e-46e5-9fef-b218c0d4de1d@altera.com>
 From: Jan Kiszka <jan.kiszka@siemens.com>
 Content-Language: en-US
 Autocrypt: addr=jan.kiszka@siemens.com; keydata=
@@ -113,103 +116,104 @@ Autocrypt: addr=jan.kiszka@siemens.com; keydata=
  qH4kDzsqKX8zzTzfAWFxrkXA/kFpR3JsMzNmvextkN2kOLCCHkym0zz5Y3vxaYtbXG2wTrqJ
  8WpkWIE8STUhQa9AkezgucXN7r6uSrzW8IQXxBInZwFIyBgM0f/fzyNqzThFT15QMrYUqhhW
  ZffO4PeNJOUYfXdH13A6rbU0y6xE7Okuoa01EqNi9yqyLA8gPgg/DhOpGtK8KokCsdYsTbk=
-In-Reply-To: <93c1f877-ac83-4802-bfc4-4338658d8e5e@altera.com>
+In-Reply-To: <edcf7ddb-966e-46e5-9fef-b218c0d4de1d@altera.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0038.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:48::21) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: FR0P281CA0037.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:48::19) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:588::19)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|DU4PR10MB8831:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4fccd81-f5c4-440c-ed25-08de2bee95b0
+X-MS-Office365-Filtering-Correlation-Id: 09ee752c-b0a2-4be8-b61b-08de2beeaef5
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dHU1MVFhdElnWTNqVzZIUG4xckh4REdsWUtwcERFcWpGN3A0NXowQ3VPcFFq?=
- =?utf-8?B?VVhkakNmVS9aY2M2WWt4N1g1QThSVDVLSzZDdGlPU1ZxcG5LTjg4dkhuaFNK?=
- =?utf-8?B?eE5JekhkWEQ5dllMZzJ3YktjTjMra2hEREpsN0YyUHhpT3Y0dU9CM1hvdXFY?=
- =?utf-8?B?US9tZDFOb0lNQmVOdExVS0krdWVOMk1aTGJQeTBjc1NMa3VDVFZEZ3Q4bDV2?=
- =?utf-8?B?V2JGVWsyM2poUGM2d2xsMkMvUmhHM3l0VjM2c0Y1REJoZ2h0ZGdqTm5SSGZi?=
- =?utf-8?B?SStvY3VwbWpGZEJUbGxoUnU3K0daSC9PeU5vc2wyYWRrN09QbGtZU2JjZnJK?=
- =?utf-8?B?cmZ4ckJiSzQvMjBqV3BLbXkzeHBRTFRhWEdHcVN5d3NGS3lBQ1JUZmZnZTBY?=
- =?utf-8?B?WWpvc29JYkRXb0cyKzJMb2xnRHc1NzF5OW1NT2g0YXlWRCswK29TVmZ5V29l?=
- =?utf-8?B?T3NVMlh5ME54emFKZlpjRFFKYnZJWVcxbUVnZkRFUVpVNWRkZzVFVUFsTFl1?=
- =?utf-8?B?bERDbHRtZW5yemtRNnNxOHhCM2ZjZy8ya1hmUElWSC94K1IzbG0xNEN6cWNJ?=
- =?utf-8?B?bHZDVnVtdXg2TUYwRkVxV09CRHhKV3EwYmx5bXdtSmgxUW1Uc2RlOUpwSGli?=
- =?utf-8?B?Ny85ZmN1bTVGYkdCYjJOVVNyZGxjS2pyM3JNYytUUFBtYVdTQmxidEFka09a?=
- =?utf-8?B?UEpmdjBXanhLQkhPcWpneitLK1VjNEJZK3pkQzdJTnpLWHZSWjIwQytMWEdU?=
- =?utf-8?B?WlliTXBra0VLM3J6dHYzc3VUNDBsK3JEdG5Xc00xRHVDcW82V2Z2czk1QVhU?=
- =?utf-8?B?T05CcDNyMmJmVG5aVGhpMW9JN1pHeERoM0s5bDV2Z0d5ZnFTb2wxbTY0NVc1?=
- =?utf-8?B?cDNhajh0RVJtZGNLbkxGUDRjZWRHanFtQXJCSTZpMlo0ZmJFL09sWGcvaGVS?=
- =?utf-8?B?MEJ3allzSDdPblJZMzRTckFSSWlsaFd2TmtiWHR1bVZrQU05VE1ScVV0bmFh?=
- =?utf-8?B?cmwvM2Z5bU1pTlludTJpcDMrc2RKQStsSlhHTkVUb0ZJbzBMK2VvZ29TTGdk?=
- =?utf-8?B?NE9Wcmt3ZHFUeHhLWG4zSUwzZ0NkbUE2RmFuTzVhWlZWOUpra3Q4QkZZdWtC?=
- =?utf-8?B?VHdpU0kzZmM4QWgwWHJqRHZ2RENKeG5qWElEdVF0ZHFoSE5zVy95MTI3Zlpv?=
- =?utf-8?B?aUd3a3VBOEtFMU5SQnhURE5YR1JaNlNCRWZxckx4R0tLSVJEQlVXNkhDcEFH?=
- =?utf-8?B?NU5UR1JSQmowSmpycDg5TTRGa1pLd25DWXFwUnVsWnFudzF5N25lVTBESFIv?=
- =?utf-8?B?b2tra2RmbDVTUitLbERKdlgzTXpERVN5eFBXcGM3ZVFPNmtjeEtWQlRPR2F4?=
- =?utf-8?B?UzZUQ1JEaGpzR1RqM2VyaWE2RGdzN2R5Z0NsUXNVMnErYlB0MGJKaXlraVl0?=
- =?utf-8?B?NjM3Y0tyWVF2TXJib2dOeUpsZEp2RWFIVkNvODZvNGpucDhoOW1CWFpCbThh?=
- =?utf-8?B?YzRrazR3SXFaTWpmL0daR2ZZOHZkTit4eHFyamk1L3RKbjV4bzBrZUlVYlBy?=
- =?utf-8?B?ZUJYUXFIV2RzVHdFS3ZXTitXL1hGMlViajhWamhrQlgxajBMWUxacE1rY24x?=
- =?utf-8?B?czBBNjhEWU0wek92MFFDYlRQbmZxZk1ERHNzRG1vS1RMMENyK2NSRGxwQU0w?=
- =?utf-8?B?RHNyU0hIQ3ZjbFZjaVRQZVlWUjRRb2l1MVVYLzZBRTF6NlkvUFR6cDhGVndN?=
- =?utf-8?B?b3BaVW5vSWw0NitnTjV0VW4yajhldEg4THlRWU5rZk54d1UyWk1YU29LWnc0?=
- =?utf-8?B?ZnhlQmxOZzlBeTZFRlgwZ1o3bDNnNm1rTFZKZTVGc2ZUcnllaUtBdEZpZ3Jp?=
- =?utf-8?B?Rm9nZ2NyaW5qUC9EdG8zeWlhcHdreXduSUw4ZHNwSnJuMVk3Tjl3WEhkODBG?=
- =?utf-8?Q?ZNAshd0AMV+wGjGyCdMmzDP1ep8zuTMa?=
+X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|366016|1800799024|13003099007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SCsxZ0Z2WHE2eVVLRnd1QjFxcXdncTNpWk9YMTJQZHQ0ZEdoakRkb0ZGcDZV?=
+ =?utf-8?B?dTMyd2w3aXNFdVcyaWFGVDlKbHVSQ1NjRllvUzlRODFSbDZwOGV4N3drVmlq?=
+ =?utf-8?B?THlWYWxpelUzREFXcmJwNm9Ja253Vk5tTDYyQnBJWk1KbmZzN1JQVVdkRFdE?=
+ =?utf-8?B?QmtLMUp6MnFNTzZBUlg4QmRPbnJGRFl4K29uZmRJN1haY2JLdEliZEdtSlFj?=
+ =?utf-8?B?N2hjMzRubWJoNVVBUnpkYzdvT2xrUjlNYWE3Y2xyZGhVdmRSeWxYSHUzeng0?=
+ =?utf-8?B?YmVOYndxOUNPRHJZUW1xWXVvdEVreHpuR3BlS3lLU3dsbFZZbm9YREtjNXBs?=
+ =?utf-8?B?SmxBSTNZV2ZGRHJkMWI5RW4reXdMQjF4QjZQYklOZWd0eDJmRnBRcVRwQnBD?=
+ =?utf-8?B?ZWFlTEh1QUdISkdGYVlhWkQxVWhrVi9XSVdYeGd0MnE2cndVTUxGUWVKVys3?=
+ =?utf-8?B?MUkxaWNLWmZMemh6dC80a1FkUzVUdXJ6TURwcGQyMXFoZDh4NEM2bVRMSzNn?=
+ =?utf-8?B?b1kwT3VuK3dEMEtuL3BTakF4QnBXemRDWDFKaXVRWlVocHZkenlBN3JDTW53?=
+ =?utf-8?B?VEFmK09RL3VHanlBMy83ZHZHTmxFYXJtZGJLOFV4Vkp2YmdsTStHYnJLWlZJ?=
+ =?utf-8?B?YURVQWcrQ3M1NFp4YmxXN2tPdktyQlp1NmhvYVNsWHdEeGVQNHI2eE9hblNx?=
+ =?utf-8?B?WWg5a3FpVkJXbDVheTVIMlJTcTJtU3VZUGlzZm4zMm0vZTNHcVF6UGM4b3Nj?=
+ =?utf-8?B?RklUdVRIY3QySTVGYm5sdTZ6VmV0a0Rkb1drenVmVHpVNTBzVWNQanI1S1g3?=
+ =?utf-8?B?NW5hbzBuMW9HcEJRSk1vQllQN2lyNnF1RHhoNDJRK2JaVnZkb0wwbUFlbjBD?=
+ =?utf-8?B?blBxL3RSaFRrSUg1L3doL0R2VFZoVjY3R3plUU1NVmFhcCt2eFpIWDQwNm1B?=
+ =?utf-8?B?TlhGQmR5SUFBOUhNeE9TWEo4NERXc2RXMWdKSUk0UmRmZE5NSEdmRktySjIx?=
+ =?utf-8?B?MUhub3RZTHpGVS9iVVhpbjdkQTlDcXhTVlZkMnhGZU4vRXdyNE5rNDUxdWNR?=
+ =?utf-8?B?Zlh6NUlXN2ZDbWNGc0dqNXFvRHJOTmo0Mld0QnJiR0dRaE5TUXpicHA5emFB?=
+ =?utf-8?B?cmlrM09lTU5xMy9pUzZPNXVhZmo3OE53MjBwTjVseDNDaCtPZlBFUzQyc3hn?=
+ =?utf-8?B?VkxncThtYWZHT01QUy9zT2tWZjA2TVdkbmo3NFBsUmpQQ3JxOU1CazdFOW1o?=
+ =?utf-8?B?bWs2Z3F0Zmc3d0N3Z3M2amI2SnE3MHdob3cyTCs3Y0RsMTVOeHgyYTQvdEI1?=
+ =?utf-8?B?VTgybmNoMCs1VVhBL2NwMjN6d2VTV0ovVTg4TmhyVVlSZkE3am04NUpUZ2Vw?=
+ =?utf-8?B?YWdwcitReVBKam1ENWI1MnBsRkh3aW5KdDhnVG16dlY0aHFFSEw3YjZ0TStH?=
+ =?utf-8?B?NEVXMzZ1R3h0QWZtQzlOQUtrQzllLzdrOW5rWkJhYk95MDhWeGNZMUtEcnda?=
+ =?utf-8?B?eTlyWng3eFdwMElkczFiRTlpZzdtK3lIMXFjWlFJckNablUzZzRlcmQyRVZQ?=
+ =?utf-8?B?T0FoL1VDSllqdzc4cmNRUVpndjlJS203SklpUFFDbi9iMUlURG05Mi9XSjVu?=
+ =?utf-8?B?MVg1emU0alBVV0pXcmdvY1BYeHB3MnVvTVlpTGYxMXMxZmtRWHNGNnczVzkw?=
+ =?utf-8?B?UFAwbnM3OUprRUZPZHdSa2RvOTN4cVRHSFJFcFBmbmpuVlpUU3hOOHBWQ04y?=
+ =?utf-8?B?ckZGUElPTS82Q0tJcnViSjBiR1lBZWJOTGhNRXQvNzlqUllreGdabDA4SEpD?=
+ =?utf-8?B?cXV2UktTRnhyajZheWxSM3lVa1lkS1RnZHJVL0JVZnFuRDJuWGZMcmFRZFZ1?=
+ =?utf-8?B?QWtsZG5wc2NPdjFRSFBDWG9yWS95NjFvNzlCcXdpTTQyTitHNGl2VEwwd1Za?=
+ =?utf-8?B?dFFqa29oa1pKangrMTRoZlVUdW5lakJYWUhZdFpBWnJRNlNCMVBKdDdlM2tq?=
+ =?utf-8?B?UXBMQWZrT1hRPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(366016)(1800799024)(13003099007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N2ZxRkVFZ0h6Z0VvNzRnYkhwRnV1QVF2dzlSdTF1aTFJQWsyQ3JQdDMrRS9F?=
- =?utf-8?B?dnd2Y1BEUDlpTHIxTjk0ZmFKM0NBd1lXT3ZLWCsvcTBxU05Db2pFS0FzVjlW?=
- =?utf-8?B?WnpNL1lUOGtLdkxxcHkvVVdnTDdnWHNRRjBONkhOaytPRzZ5UTNEQXlvMmtL?=
- =?utf-8?B?SXRkU1pGeHYwUGVZODZUdE53RGVURUk3d3dOSEJ6cHFFK1FrM0ZTRnJ0SUty?=
- =?utf-8?B?UzY0NWprUC95WHB3aVFuSkt3SHFhL1A3SENybUZ3Z1JxVW8ydGtFcWtPVmpw?=
- =?utf-8?B?UG96OHdpUmhUNzUzbjNLbHBJZG9sejhDenIwR3F3OENsamxLY1BsMnRPWW9w?=
- =?utf-8?B?VkR6UW1TQW1uZ0lNNnpraXNiOVM3cGlCbjNUejB4dXVNaFRVOFZFcUZVaENi?=
- =?utf-8?B?VnFiSnU3V1ZRZWdIcURsVE9mMjZZZTZhTm9qaVQ0SlZvR0pGa3V5bGhRRUxk?=
- =?utf-8?B?VWRkdzh5Vzc5S1BrVk5XZkVDeWJHaWtXdFRMWGIzcFdFVHkxSUdvcGFQQUU4?=
- =?utf-8?B?SDdBMkFXcFZSRmNTcUNNMDFpZGxwVG9oN2ZSbjdXcjNnYktGMkJmV3dXdGF3?=
- =?utf-8?B?V2VJNm9kV1pDbG1ZYUViWWduOWVhMkdrQnptRERvUVd1OFJmR0tSanlROHFk?=
- =?utf-8?B?Tm9nZXBJVUNEdGRUd29lM1FNUkVWRXhGbStibFdCOUZUdTZFZTUyY3owUGM4?=
- =?utf-8?B?V09DbWhjTlVFeHF1b1JxdEwyOWo0TUY3eWNMd0xqLytDVUE5UHN3Ui94RllF?=
- =?utf-8?B?VVpBRVg2UGtrdGdnVjVJN2dkajI1Z24yeDUyTGtOY3VwNjFFWHdzTUhMSDRF?=
- =?utf-8?B?V3I4aGtPWWNkbnlhcnYyZU8xaUFETkNkM1ZERG5WbTRnNDFBeHU4cm8wS29C?=
- =?utf-8?B?SzRJRlBCclpDUVZ4WE1lSXFSY1lDbUtZRXF4QlcyS0NDbkYxZGx2Z2kvTmkz?=
- =?utf-8?B?QVBDUnZrNERQc05WV0ZVOWNSTWgreTNJVDFQM09rU3loYWJ0VUREclNyc3Ry?=
- =?utf-8?B?ZnNxaWJJQnh6cEF2aXA3YnNQSUE0cXN5K3UyVUJsZUNuTW81d1JBMXc4TVJl?=
- =?utf-8?B?R01RM01KMVQrZjZvM0w0eGRXalhkYkVDNCtQTWZ6UTFJNkdlTVVLZ2NFdHhU?=
- =?utf-8?B?YlNjcnNYY21OQ1NsRWorcjdFM0hYM01SRUUwUzdlLzUxK2FKZ2hYRndCRkIv?=
- =?utf-8?B?akJuSW91cFd3TTdFdTA2elFGQzY2V2FxNkhsVkFXU1QrNmMyU1BubE9XdEp5?=
- =?utf-8?B?TjV5NjR2RE1JdVp1Y1pCZkQ3RmRkaWxFTUJFdDlWaE0ybVo3aGFRcVoxcy9K?=
- =?utf-8?B?dW91UlNwbEE2N2lNa3hZNStrQ1NaREVtcDFuMlNvMmZpc3JvVWhzdlhnSE16?=
- =?utf-8?B?ZU12VVVFTzhONUIyZm93cndldyt3ZmRwanV1UFRQTGEwaVdDbzBQR1hneUNv?=
- =?utf-8?B?TytRQThBei9jNzduTHdPQ21VeFJZSHRpZlE1ODIzTW1vSVkrclFWWnp4ZEN1?=
- =?utf-8?B?YTQyTnFTR2p6TllNRkhqeVFMN0svTGZmT1R0eVJyaHp2TWxLbUZKQlhkSk1k?=
- =?utf-8?B?SEo5R25reUhhcW1md0hTaDBVUzZ2RHBwb1VuKzNFN09tS3NFL250QWt1b1hC?=
- =?utf-8?B?bnNsZmx6MmJDT0k4WnRpeTBPYzRmZHoycG5qWWI0TFh3ZGM3U1VPZmFyL1Mw?=
- =?utf-8?B?WTZXVS9sVGpFUTNkTkdsekpmTGJIa0FMNkVqUm5YWWMyZXc0Z05pYUFhTnln?=
- =?utf-8?B?dDdDSm45MVNiK0FvSGR4ZVhqWEp6aEdSTXVhSzBjNEFTTCsvY1NzaW9DcUtZ?=
- =?utf-8?B?S0l3Skxuc0kzcXF3blNBVW52RlRTWG1UeVdrTnpRMkc4R1Q3aEQ3MGpibFBt?=
- =?utf-8?B?T0sxRmdxd2UyS0QvaTQxbFl1NXFYQU50L0FIWklld0xPWmNiVFNydm1mZ2RX?=
- =?utf-8?B?c2w1dUNQQzVIVnRJTEYrMTM1Vk5DaGUvTFFTbEZWeXFjb2dTZEZSRnVRTEFr?=
- =?utf-8?B?TGVCcm1rc1B2eUZjMU53MUcwbHJLRUt1NnZ0L0crcUgzeFp1Qmh1ZkVMQW5I?=
- =?utf-8?B?TlR4WmJab2pnY2I4REh3Vy9ld3FtdlBiVnJDRFJtSExsS080VndxNUlRMjlL?=
- =?utf-8?B?TlZ2c1lqWGZFYTg4Tm1sSWxReEZ6bjJERjhSTFI2VFpXRnJUd1pBY3BxMys2?=
- =?utf-8?B?NEE9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Rm45dGxSM2RiU0hZU0kvS2RsRW0yNzIzNkdiaVBIa2ZJZVVHb29zZzVVSVBm?=
+ =?utf-8?B?NlkraUwwNXgzRnFwTjUxM2p4UWRmS1NEd1B2NnhNUk1YbXl2WEl5V08ySFAy?=
+ =?utf-8?B?TnNoaEpUd0JITjlxdk1KdVpOZVlaOVJxZHRnZG1uVzhaYm1Ld0RtSWIvYUsw?=
+ =?utf-8?B?cFFFRExxTFh0N0MvQUJWUjVvaGxQVXRqdktpSnJ4ZzlmK0VWZExZWmZKMlEz?=
+ =?utf-8?B?YzIvTXBxbFNYN01ZLzdDTEdYM08zWFR2SGdwK3VJRGhLQzQ5bWVvM3ltQStR?=
+ =?utf-8?B?dVF3R2JySU0wenFqMm5oNFpHTVBHUVA4Q05KNWtKZFl5WnBLeCtxQTgxV2p2?=
+ =?utf-8?B?eWE3Q2VmSUEvUXRMdG9jOHJLV3A2V29aUVdvRERXWWprS2ZtV0ZUOGlqSzJJ?=
+ =?utf-8?B?aUdGVlV1eHpJWkdYN1VHaHZvTS9zVGNrd3hxeHhZMGlmZ3ZJcm1Ka0NrSHBz?=
+ =?utf-8?B?REp0UTRoeXV0ZkE4ZHVNWjJ0enMzZm1YVU1KTFdWb0RERElka2R3NGNZdVNs?=
+ =?utf-8?B?aHJHeTd2RlNSdVFPTXpaYXlpb09NbytJUXZNYlpHUmFGTGF5OENtdkp4SDkx?=
+ =?utf-8?B?RmxMUHJYbU9pZkFlS3hmSGVvWFlvSjh0YjhNWjQ3QWFIbmoyYm85ekc1SnFo?=
+ =?utf-8?B?Mi9lUldFVUdsaFlQRUZUekp0WlptRDgvZ0VFQ3c1ZlB4RVF6YkhIQWJ4ZjBi?=
+ =?utf-8?B?UUJiYjZ3UUVybyt2MHpuR3UwSWJ5dVVFci85Slh5QzZ3ZXNSeVVvN3BvWDVv?=
+ =?utf-8?B?d1FybUlVR2Nhc3NHQ2NMUnBBb2tXREJuQ2F6bndpMkQ1eHhEUC9nZGgwRFdU?=
+ =?utf-8?B?ZDhmU0xEUUgrSHcxVkpDVWg2djA4M05xc2pwUEZ1VmhnYjFyemtBQmhkVnpl?=
+ =?utf-8?B?dEYzQ2lIUEFWMTF6R2xwcFVYaHRGTDBWWVRVVVNCazdwYU5IcUdvbjBDUHVx?=
+ =?utf-8?B?akRka05KNCtIRDFKcUdCK2k0b1FtMkdhYm5Pd0xEM0lhb1RvbXRkZm1UUS9k?=
+ =?utf-8?B?bmFoL1lqNHNWcVJEOGd4VDZSM1VpOGExZkdzcE9Felg1cUZYUWxjVlBpYkI1?=
+ =?utf-8?B?VDgrUGhQMzR0U3l6RXlEQjRTUzI2ZExpQzRrUmhyZ0F1aWJtbXVUeHQraG0x?=
+ =?utf-8?B?MHh2NnR6WmV5QmxDUUI0cVFVYXBSRjFWVlJ6VjNWYW9GWmYwM2tSVE9Pd0pj?=
+ =?utf-8?B?ZmZLbUVwenhPSExlbEowbWdHa2kwdjBHeGs1Q1dBY1h3SCtIWGthVzBvVVVG?=
+ =?utf-8?B?bUFKMUJheXZlbERFanZlMjBuRS9mNzRJUVdTNzJITkhsUWQwZ0h5Y25QQ0FJ?=
+ =?utf-8?B?SDFkV1M3L0JKTkcvejc0UE9iTnJWL1hZRFZVMk9VTWUrUGQvdjcxOWpsSTBZ?=
+ =?utf-8?B?V3krTS92bndLaVZCdUhaMVh2bm1xK0tlZjd1V09DcWQvVnhHOStzZUFqS1h6?=
+ =?utf-8?B?eWhPeHFPVXBwMytKY3FLL2pBbTNnZmJBdWgxU1lVcm5DQU5QZCtUWDczZVo2?=
+ =?utf-8?B?eVUwVEdiSEV6ZVN4dFlMNlVKbFhONnRtVGhocEF0UFZJS0l1cmVqYmFHMFh2?=
+ =?utf-8?B?bmc4SStmUE9yWGMycUZhbVphZVZ1SklEd1ZCamovaDdTeVBBWE1IcU1aRjJG?=
+ =?utf-8?B?SEJWeTBpRFlEY0ZWWVRZRUlTa1dYOFEyNUMyMmpoVHRTZTQ2TUR4UEhNaUxD?=
+ =?utf-8?B?bGJxamVSWUoxSFhNb245ZUJvM2M1clZXY3lDUU5yMW9pZkZqRlR1eE11aFo5?=
+ =?utf-8?B?VUZaQWZmcXhnTzArdDJ6ckdEaFhoMGUyWVZuUjdsZVpOd1Z5VjdRV25pK2dN?=
+ =?utf-8?B?VVF3NVkyWDNvM0pqd05kN2xGY0NQSUxGVUduUGM1RVgvaDEyOFY0UmY0NU1v?=
+ =?utf-8?B?NVplQUtKRXNkUlZRQ0doaU9JRDlxVnFwWFJUeE8yNUo0bmovS2pMZ2NSbGZl?=
+ =?utf-8?B?bVErQ01Zd1EzQzNXbE9ySkxocE5qZFlXMGFtMHQzVHl5QUpDZ0hGZFVNYUJ6?=
+ =?utf-8?B?QW1tN01qRHp6YmEzdFlyNkI2cTIrU09LNFRkSlBlQ0dFRWdRTXlENy8wdGdF?=
+ =?utf-8?B?WFhmaXhPaHJaK09LV2ZURk9FVjVIVXhxZWM0QzR6eGpwelE1OW1ORHRjbDZ6?=
+ =?utf-8?B?Z2sxRkpxSWRPNkRFTFJtdzBlTmN6SEpIZzNIK0RRYkdmekEzVGp3c0FPbWFl?=
+ =?utf-8?B?S3c9PQ==?=
 X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4fccd81-f5c4-440c-ed25-08de2bee95b0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 09ee752c-b0a2-4be8-b61b-08de2beeaef5
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 06:48:04.8469 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 06:48:47.2189 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SwWG0TwFtA9s+w0e5Wp9f8h1doMhUgNx+sTtFp/mXeX5bwi4Hk2h0IGSy4iq10NWx+1BhiIRXerqDjtJo1g5NQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4zDlhYeNWNiF2+b/XQ9meRybwGAHxcMgXXYJC6l1OGZH/tCmtzIOEPQaunNL39Uueubqld/12AdvdSdtOodVkQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR10MB8831
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -227,89 +231,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.11.25 04:58, Chee, Tien Fong wrote:
-> Hi Jan,
+On 25.11.25 04:10, Chee, Tien Fong wrote:
+> Hi Jan, Brian
 > 
-> On 15/11/2025 1:13 am, Jan Kiszka wrote:
+> On 25/11/2025 6:25 am, Sune Brian wrote:
 >> [CAUTION: This email is from outside your organization. Unless you
 >> trust the sender, do not click on links or open attachments as it may
 >> be a fraudulent email attempting to steal your information and/or
 >> compromise your computer.]
 >>
->> From: Jan Kiszka <jan.kiszka@siemens.com>
->>
->> Add SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE as condition where so
->> far SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION was enough - though often
->> by chance as both options were enabled.
->>
->> We also need to explicitly select SPL_LOAD_BLOCK when UES_PARTITION_TYPE
->> is enabled, just like the other choices do.
->>
->> Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
->> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
->> ---
->>   common/spl/Kconfig   |  1 +
->>   common/spl/spl_mmc.c | 16 ++++++++--------
->>   include/part.h       |  3 ++-
->>   3 files changed, 11 insertions(+), 9 deletions(-)
->>
->> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
->> index 8dade2b501e..d24466b0c66 100644
->> --- a/common/spl/Kconfig
->> +++ b/common/spl/Kconfig
->> @@ -573,6 +573,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
->>
->>   config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
->>          bool "MMC raw mode: by partition type"
->> +       select SPL_LOAD_BLOCK
->>          depends on DOS_PARTITION
->>          help
->>            Use partition type for specifying U-Boot partition on MMC/
->> SD in
->> diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
->> index 467114f8d9a..09e881c464c 100644
->> --- a/common/spl/spl_mmc.c
->> +++ b/common/spl/spl_mmc.c
->> @@ -106,7 +106,8 @@ static int spl_mmc_find_device(struct mmc **mmcp,
->> int mmc_dev)
->>          return 0;
->>   }
->>
->> -#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
->> +#if defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
->> +    defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
->>   static int mmc_load_image_raw_partition(struct spl_image_info
->> *spl_image,
->>                                          struct spl_boot_device *bootdev,
->>                                          struct mmc *mmc, int partition,
->> @@ -415,19 +416,18 @@ int spl_mmc_load(struct spl_image_info *spl_image,
->>
->>                  raw_sect = spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
->>
->> -#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
->> -               ret = mmc_load_image_raw_partition(spl_image, bootdev,
->> -                                                  mmc, raw_part,
->> -                                                  raw_sect);
->> -               if (!ret)
->> -                       return 0;
->> -#endif
->>   #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
->>                  ret = mmc_load_image_raw_sector(spl_image, bootdev, mmc,
->>                                                  raw_sect +
->>                                                 
->> spl_mmc_raw_uboot_offset(part));
->>                  if (!ret)
->>                          return 0;
->> +#else
-> 
-> 
-> There is a build issue when CONFIG_SYS_MMCSD_RAW_MODE is disabled.
-> 
+>>> I'm all for finding the best technical solution in the end, but I wonder
+>>> if we can at least come to an intermediate solution for the upcoming
+>>> release so that folks do not need to carry too many extra patches in
+>>> their pipelines (https://patchwork.kernel.org/project/cip-dev/patch/
+>>> cf43e9da3cfc59771e801d3215d3b3794f3602a8.1763446144.git.jan.kiszka@siemens.com/)
+>> I am not sure why point to patch v4 but I did provide the final path
+>> version that T.F. should be ok with.
+>> https://patchwork.ozlabs.org/project/uboot/
+>> patch/20251114160423.1518-1-briansune@gmail.com/
 
-Let me check, but if you can disable CONFIG_SYS_MMCSD_RAW_MODE but leave
-any of CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_* enabled, we had more
-problems here.
+Due to recent discussions in that thread, it floated on top of the
+mailing list history for me. No other reasons.
 
+>>
+>> What this delay is that there are several feature coverage on the same
+>> file.
+>> Meanwhile, there are several similar patches pushed and T.F. action time
+>> is a bit slow.
+>>
+>> The very first patch was almost two months ago.
+>> https://patchwork.ozlabs.org/project/uboot/
+>> patch/20251019092341.1158-1-briansune@gmail.com/
+>>
+>> So I had no clue why that huge delay. BTW it is supposed to revert
+>> that pointed out patch to easily fix things.
+>>
+> 
+> Thanks for your patience. We have completed testing with Brian’s patch
+> as well as Jan’s patch series, along with a few additional issues we
+> identified during integration. We have addressed those issues in our own
+> fixes, and we plan to send the patches out for review today.
+> 
+> Brian’s patch:
+> https://patchwork.ozlabs.org/project/uboot/patch/20251114160423.1518-1-
+> briansune@gmail.com/
+> 
+> Jan’s patch series:
+> https://patchwork.ozlabs.org/project/uboot/cover/
+> cover.1763140421.git.jan.kiszka@siemens.com/
+> 
+> During our testing, we found an issue in Jan’s series; I will follow up
+> separately on those to provide detailed feedback.
+> 
+> Once our patches are posted, we would appreciate your review and
+> testing. Please let us know if you spot anything that still needs
+> adjustment.
+
+I'm happy to test if you CC me, at least on the DE0 Nano SoC then. Also,
+please tell us which patches you need updates of or which you would
+integrate yourself.
+
+Thanks,
 Jan
 
 -- 
