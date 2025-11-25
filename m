@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F263ED0EE3D
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 21:30:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7024D0EE1C
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 21:34:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2701C84101;
-	Tue, 25 Nov 2025 22:30:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 085CE84132;
+	Tue, 25 Nov 2025 22:34:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UmxiUUqU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DPaHCSCb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECF3384121; Tue, 25 Nov 2025 22:30:12 +0100 (CET)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
+ id 4A17E84137; Tue, 25 Nov 2025 22:34:07 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 547AC840E6
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 22:30:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 203E884101
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 22:34:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-7aa9be9f03aso5232061b3a.2
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 13:30:10 -0800 (PST)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7c75387bb27so1796997a34.1
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 13:34:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764106209; x=1764711009; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=+4C78FifQ/xaK3+mvub3bcFgpRMQnW93phKlX0XdPM4=;
- b=UmxiUUqUmIMR47/99CcR6HQ0RZZtb1ipkVPT1uMCY7wTNig1RGEPzfQLLcvdDqNQIL
- AcKiL4zPIOlpHQGZeokU1pBFJyW7aDe7xPuZf0fZISeKcnYBtRcBA3n+gI+S9JV8ocT5
- VhI3BqBhDYfW83wMeqt5HJRFEz+5VQEzviP+h1WUHo7Mx2KkJ5I2m6wqXCXkjl4BSEsL
- a8QVQqNNhS6HvA/mc5l1ml5l9A5D1clD0vHVB77oL7K+rvAk9WZKCOLn1ty/pxobKrwt
- dr0EfT3qWPpfjOyZMl8pBfCIPO1rpD2O4gsMk7OzS0M4B6Dm2NuGIME2q7KtPtkxPU71
- tWuw==
+ d=gmail.com; s=20230601; t=1764106444; x=1764711244; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tU76EpcIl3/EaMUt7CLRiU/OzqLXrnJdekSdpFoS6nk=;
+ b=DPaHCSCb3kwSeHFHYxApPuhS7i6hS9W6Og8xef1ciNPrkfLGAHJORZkEZUedAvEE6y
+ KvuuQiEAHYh5WcYHBfhiJtVD5+GqsJenAeVIs0nMuVyJ7bxg0yiAGDQrUs3S9ei01wKf
+ Ro6YEb1A+kbDklXcbwdYKCPhfH2gqo9GH1d8+eHHww5gzMaUH4PK+MCceb/BkDMd4ioK
+ BTWRnYRvJ8J9lSXTCQjvPElYxri/EXaP9tAr/PG3vw2VO7nxP5NrcsKNLVuhjhh6Asqi
+ OG9n0q0s60T4BBANKs62X/T47zFfC+qHrmc8rEkz5AjRmsl+2HXQ6N7msrVsII7SIWbm
+ yu6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764106209; x=1764711009;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+4C78FifQ/xaK3+mvub3bcFgpRMQnW93phKlX0XdPM4=;
- b=D5REFNzTvQXNxS4N/YkuC5eNcoC4FFUkQKWwZDGplWCx+kLY9btbZAaDrt9Cq92jFN
- CdQgVf7bAyrS+Gm0xm4qtcvRINC1Cm+TxqH6mDpsoIqfWWbkxtSjnkkclKfMY/bISzrw
- F2Bji9+TzyXNugCkcLgdFJ57LEA4yttMxLYwU6Xu2KJPU+Y/3Qpkva+yxl4z7LH6PZf4
- w1uPtwwhdfHT+IF1/skj6NU/Or+/1gB27KuEtJaVVs80uyRrQ7HSrwLMH6DYLlQgWStj
- ZqhMqyRK3aVrT+lgBBk4KC6grm4X4ku6QBeHntezjvUORzNHwieHMXDPAwqAyewGULg2
- CBPg==
+ d=1e100.net; s=20230601; t=1764106444; x=1764711244;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tU76EpcIl3/EaMUt7CLRiU/OzqLXrnJdekSdpFoS6nk=;
+ b=GtbnU/rgFRaSSlxWo/kMKg6aAL2clJlV2+XpVDTtw0GfwHo4+kXQf3hTJKOu3GGqWW
+ McVLE5a2iLC5FJLKKJfvxEJyz61+Drwk9O6rGszeVrX8nvp03rL/X90HGi7SedWK1s/V
+ FeRvWroaTcYROeoQYxusfzBSzvW3qHNM+0HEh31s3zDThO4W2Bp00z7dLZv0wGoox6pI
+ toU9UoO88Q26REx0UPozShcXJ83Hmjg6J+otm73AqcnobKhw2WjkjU8JBlDR0qU5iRAb
+ y9YyN5hyUZCFuy+f2JBjJITH0nEvf5p/18FJCQ7VcviA0hM/e6/Hhd+D6e0UWs7ug3Qn
+ ajNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOolLC2pt/SlEh0/rgdqeUVDZecYjpKVbpCzW4SwQEJ7FmWfK5mUhIDUcwRizl7v0nQjHJsnc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7shXA8WKy+jzMl3at6e/BskMZRDwGkbGKjXVLvQ41NBpgGC13
- Mgc4c/uwxWbJlF9wYE7gvQlHub1jDMFDBqpqQkW512JU0eHiz/ZOi6CVbPzfO0+CwEMvPQ==
-X-Gm-Gg: ASbGncuo6KYMAHPSk0Mv2P93Vs0g/574AAaF3B5M6n0AYzLS/BvXx+CJNXHk2+b328g
- oNJc/oLQAJ4ct1d9HaPnUWhmMK9xc9a6ju6qD6hlWG0OZb6iKQ3qHOdHTa7qoFv/+WLSKnW3RCX
- DR1Fo653cZv6BEAfg1HCrK7uuAK0QtlEYPoAmvs66dSlCw6RMHk0X9Velt/+1HKyLgorU3VD7rn
- LtprfwQdkp+GTdMg5NxP27jWN+LPL2h6stEc0NEOtoJyhL/6RgHwXw/pv1xC7SKeJrfRRQAc87G
- ep4Co9Yf5yxV77VXdR3/V094hK+30JkeVyF8DxHvbZ0pTw4KYLMDIgLet2fkHwJZknrQfhVjKUD
- A/i9i6mgsN8AMbafmEFCynWn+/eHwyprOYT5b8kfvW8dcgF32MoLL5/p0uZCVwlp8b4aR0luzWb
- JxFClyyz1NU0/rtoo0cYdsp1m+m2i9urfkBrE=
-X-Google-Smtp-Source: AGHT+IHTN+n21/C2RyOJTCuUiWIcRN7VNitIRRXCj4Xc2iH3tMnBnrdPtAAXxQ1Kzr4rJprwIxV+RQ==
-X-Received: by 2002:a05:6a00:230a:b0:7ba:13f4:a99a with SMTP id
- d2e1a72fcca58-7c58e6032f4mr17915224b3a.27.1764106208689; 
- Tue, 25 Nov 2025 13:30:08 -0800 (PST)
-Received: from localhost.localdomain ([185.213.82.8])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7c3ed379558sm18915255b3a.25.2025.11.25.13.30.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Nov 2025 13:30:08 -0800 (PST)
-From: Brian Sune <briansune@gmail.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
-Date: Wed, 26 Nov 2025 05:29:53 +0800
-Message-ID: <20251125212953.1733-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.47.1.windows.1
+ AJvYcCXd105kf8p8q+vY1Y08S17Oh0xVKlXYRRXnZeHTdlbWnXgHBDlAuw3oa4w9QLs4KMSIABVA/6I=@lists.denx.de
+X-Gm-Message-State: AOJu0YygEMzJ55nLHWMBR0r3gne8YMv9Q0P77xIhjm/RqysXxNfZdqsu
+ 3FHYrxhTSMn17DSWTCKEAYKExJ/qLw/A6nB4w34pFTdXK/qyyxn+2bJlDnJYGXGah4I+sFXq89W
+ q8csKe02+ZoXOQ0VhaU3ES2vHwUoYh/w=
+X-Gm-Gg: ASbGnctoLeziL6+VD0WCHjZD+OelviC77OVtPgwninu7QtlRFUd1IN0FKU7ma22K40m
+ dx6PMji38bmLXogH4iwT2Etw0fwX9cd4411xHElVVfHPSukA4Q0H5M2zhWZPpEBncas0+cfo/B0
+ hxDKIBUrLembD7JKR/ZKRBsyEFJwooxNXPyCDEjc7fKm99vbRVwUpbDJuMSGWy+VndhaF2d/XH1
+ lCCgmXFkGd74PI/uSS2SMydh4QiROugve+2l1r+5jO5/fU76OlrNnQihhLTC4kEnzVaOlHmR0/H
+ yktU
+X-Google-Smtp-Source: AGHT+IGvkyNUffCkieSvOmUT6o0EdiaxvV5Adra48xF3bcA1ioe70KaX+4339wV5CTWO1OK069KzfFxdQ92LSfiVUjg=
+X-Received: by 2002:a05:6830:3147:b0:7c7:59a1:48be with SMTP id
+ 46e09a7af769-7c798ac9483mr8422594a34.5.1764106443795; Tue, 25 Nov 2025
+ 13:34:03 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251125123847.307-1-briansune@gmail.com>
+ <05987960-b2fa-4798-9504-78aab483e146@cherry.de>
+In-Reply-To: <05987960-b2fa-4798-9504-78aab483e146@cherry.de>
+From: Sune Brian <briansune@gmail.com>
+Date: Wed, 26 Nov 2025 05:33:51 +0800
+X-Gm-Features: AWmQ_bmafM8UFspdYrJjyIQWtOH-KXJpygBlZOErNHCqdpKzpZYEyN3OWROqq9s
+Message-ID: <CAN7C2SAh5cfXKWxVq1omhtTkgbbFCZ2-kcG8A-+tggWuPUWqpA@mail.gmail.com>
+Subject: Re: [PATCH v3] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,28 +94,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-New SPL introduce cyclic and without initial
-the interrupt of SDRAM calibration could fail.
-Initialize the default CYCLIC setup fix it.
+> Are you even sure SPL_CYCLIC is required? Wouldn't enabling CYCLIC be
+> enough?
 
-Signed-off-by: Brian Sune <briansune@gmail.com>
----
- arch/arm/mach-socfpga/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+Short test answer is no. SPL_CYCLIC must be init with default timeout #.
 
-diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
-index f2e959b5662..1f536c7ea74 100644
---- a/arch/arm/mach-socfpga/Kconfig
-+++ b/arch/arm/mach-socfpga/Kconfig
-@@ -117,6 +117,8 @@ config TARGET_SOCFPGA_CYCLONE5
- 
- config TARGET_SOCFPGA_GEN5
- 	bool
-+	select CYCLIC
-+	select SPL_CYCLIC
- 	select SPL_ALTERA_SDRAM
- 	imply FPGA_SOCFPGA
- 	imply SPL_SIZE_LIMIT_SUBTRACT_GD
--- 
-2.34.1
+> Since you have not identified the root issue yet, can you please provide
+> the actual defconfig used before this change so we can figure out what
+> is happening, if other boards are impacted and how to fix it properly so
+> this possible misconfiguration cannot happen anymore?
 
+socfpga_cyclone5_defconfig
+
+But my patch did not target ONE config file. Because the risk or possible
+hazard could happen on other GEN5 socfpga. Need others to report btw.
+b.c. it requires complete fresh build to trigger possibly.
+
+New patch V4 had pushed. CMD CYCLIC seems like not a must.
+
+Brian
