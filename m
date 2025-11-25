@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DD92D0EE18
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 21:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1598FD0EE18
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 22:15:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 981AE840E6;
-	Tue, 25 Nov 2025 22:47:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4A4AF84142;
+	Tue, 25 Nov 2025 23:15:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P5HvrRQM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hPMhgIt5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7F1784132; Tue, 25 Nov 2025 22:47:42 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 7390A84144; Tue, 25 Nov 2025 23:15:15 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7EF383F3F
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 22:47:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76322840E6
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 23:15:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c75fd8067fso3477421a34.2
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 13:47:40 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b736cd741c1so1062913466b.0
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 14:15:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764107259; x=1764712059; darn=lists.denx.de;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hACXirWnD3p+YdHPp+NGswpmgpkggfn32ycHMjQR5yY=;
- b=P5HvrRQManq4Tfe3J1b9Ou5jbqFwHwICQ0mjcCom11opeTQmHt51yaiXjiQZwsBhrl
- rtYFjzSGXrC5QXQHiyFKLJN6v+bPwoo35uv/Bo3SUtzgSPvUgLjUiOtFoKIySK+Wgq1y
- ZMqIm5wWzNqsdUqQUl10XkkAR3AskCRESLoyS+itUVnWqsOjGh4xvhI6wMgw0K46d+da
- /Pk1x1M6OWwcmEi8aBp0SmI3tMTt5SepkIfWOn7FJxQeDE6syfoliYsiG+Xhjk+IQEY2
- qX4AAhxA9+4ct6JGl1M3s6P5LT7sKNlrHlElroQLEOjoeLz9XT8xP61YDpYdWLZOuWKL
- 2XTA==
+ d=chromium.org; s=google; t=1764108913; x=1764713713; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qxJGch4t6af1d3EvcbUy9PECy9xeNOtFzfDjq603c48=;
+ b=hPMhgIt5b0nNerActSdnl3YQw8TSRhB61BvbTH2os/BQFZuOpxhebJBRP5FChRknsQ
+ QHYfDEjgCeTNInHA1vqcZS8B/gPrNLPlmIQWRWF1fQku8UkgoEQ3CFogjpMv6LB2bJqF
+ hL7wp7MyX2t1rQUYKBCWY1LiU5kLwkqEo1Gh4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764107259; x=1764712059;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hACXirWnD3p+YdHPp+NGswpmgpkggfn32ycHMjQR5yY=;
- b=CxirI0i8I4Q3ti//SLOkBwBAOH+DORqM7iPS5xpfwVTTEq8SIpwyBU01qMigv1x6cg
- tSf1bg7jaYyPjNDOQhFMDz5N2Lvagw/wOpKYVIhMvF3zSMI9vm1L4Lofq0fV95Q3J9+r
- qCmLxQrqNTaXlxu7JCYsqkfpbzPHDHUpu0La7uZPgC7EH2EfuH8MrmzbFeaaZ9Q5hUQr
- GxZvjFh98xXeX5lQNUeN+GIX9MVjcG2TgngVFQGK0jTQMYCuoUGUeTzjW49Vx/yKVJ7Q
- tsqYWoVOyqvUpV1xOP/8YRPLfLf9gFy3huSs8FpUTGir2315bfZ46E66nZ86N7DatVwf
- 0yMA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUXEROl0m8Ul+M1J0TjnywBcBI1p/45wub7xgxxw46S25IDoofjOY446wDvR4n88YXZuh2zVf0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw5o8mVDJxj/LtJAFMgGpqgzbM0pMUmAxuujxBkAmu6TTOTMy5P
- SapgbwkOJh/2Zk260x0DMEnIPPBQmoRXXjxMjpivspaaLrAB78NWtB5y8LrXhC3FYAcUsKBoB1E
- CMLs+n/VjtOiTMBy7bNc1vfzhegRhYmUZ30+EvzXTDvqN
-X-Gm-Gg: ASbGnct8xKPqoT8wvZTWfuD+Wssvgvs6SN7Rfk/fynj1/v6CiRSOe2LTOCv7dFkkfGy
- mJ8tYlutKEe37Xbj8WWentFL6fnHiH1bYmCVyC/QIi30JCkM84+KGm94KeRVKH3OyL8WYgGDtfd
- 8wWDdhXkKT2MZavBJi33Sc+NtEyoeiqoHy6E+J0LA0j2H1OabuZZytDDSifl3YVX60AGfuk3QQh
- 8/9iuFcXviSAPpguNY3LeKzgILlSq6lIVS1tCzBy+MNEQi8DKvDvfCVcGwG+pSzjJpEVMCUpLMV
- VCAo
-X-Google-Smtp-Source: AGHT+IEUC3AfcDVXX3z4ucPVDLrW3VMl2Zjfk3xsrTGr/0TOFsntQcbpysAwIUODsZCFrgZo/x+zzdCeqWa6LIGJcbk=
-X-Received: by 2002:a05:6830:440e:b0:7c6:e92f:41ca with SMTP id
- 46e09a7af769-7c7c42a837fmr3046321a34.8.1764107259599; Tue, 25 Nov 2025
- 13:47:39 -0800 (PST)
+ d=1e100.net; s=20230601; t=1764108913; x=1764713713;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qxJGch4t6af1d3EvcbUy9PECy9xeNOtFzfDjq603c48=;
+ b=KC7AqBIjzGLTai9Wa8nGcONvoPx5T+SkSUsuMTWNhDDt/FaBJv/Im/p2QZiDi41EoQ
+ k4bseWqrKBV7mcC0TyTR0AMVy3XQ1CS7ypfAqDRjoFZ0DxauNyltmPwHvgXDFfQlk9U+
+ SedILcvWx7NcxVZHsN9tZ5lLWrQp6iqCSBziYEidIn8BOkMCfmSNtRoVCKhRY9OXRV8A
+ 5M0vMXdEV8573WRkNscJm65rExMwDU7bEjyFhX+eKMlorQbMkXN7J0bPyP+G0YjvUFN9
+ o9O7lbfUeJ5zzRD6uW1xp5qaRtgfcv/vSNaKS/nQNh1kCjfL9J8PAT7Wp7cvIZxpoFF5
+ AwiQ==
+X-Gm-Message-State: AOJu0YzS0vjkTvGZKqhtSKiDgIiIaYr0qI/MqAy/4Si4rkl2iGjiKeaJ
+ X16LpOLWu7Uj+eCurGPk9weMpiw/pXFGfLLnN655yVfvUZvPNAX8LnjAzZSIGn8s2zFeuO+1pgS
+ unLuudZXkyubcKbktzY26UBtFOhhCLKEHRKLqTlvs
+X-Gm-Gg: ASbGncuXSToh+lL+wWbDZl36m9PehqHGzlIqaqnLVEf1UWxk07oUvHSJ2N8EOnLVIYC
+ utrQhp6U2SJ7qGyT/JS8oqEX+F3aow46qZyRJhO/Qzbk0jFO7gJQHbmDhlWvHFFw7CETYwk8j7V
+ KicC5mYGwLx08b4C74EoqRhFKNulh3lMhKYlIWuccLfGvCuO7ngPCw8LBXeXNgqHZbmGRDqj37/
+ hzgfKtUC8mkwQksIdc/ZrR8A8pFvOJZ2tVKYliY/xfd57xLM3Gl0jKt5OBJYvxMNC83Mw==
+X-Google-Smtp-Source: AGHT+IGVnk3IiEl4io0naacJ37dkk3dRRyevVELVmyRrNgGYGQGyw8gsEj+ICtdwlxtV87kOMw7NW5WKlT33Q1l8hF8=
+X-Received: by 2002:a17:906:1345:b0:b76:3c91:68d with SMTP id
+ a640c23a62f3a-b7671695533mr1218236266b.33.1764108912840; Tue, 25 Nov 2025
+ 14:15:12 -0800 (PST)
 MIME-Version: 1.0
-References: <20251125212953.1733-1-briansune@gmail.com>
-In-Reply-To: <20251125212953.1733-1-briansune@gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Wed, 26 Nov 2025 05:47:28 +0800
-X-Gm-Features: AWmQ_bkJLsM6jfs6xKs1Qz8gULvrZTmAht-y6GdbFD5M7CRTSo0DlijeDzsU9sc
-Message-ID: <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
-Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
-To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
+References: <20251121-a-few-test-py-improvements-v1-0-bacb4148fb0d@baylibre.com>
+ <20251121-a-few-test-py-improvements-v1-2-bacb4148fb0d@baylibre.com>
+In-Reply-To: <20251121-a-few-test-py-improvements-v1-2-bacb4148fb0d@baylibre.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 25 Nov 2025 15:14:57 -0700
+X-Gm-Features: AWmQ_blMJooHyB_lwMSqPzhQLwkWkfSr84KcTDsd_JFdXS5F22vd_1cQ6-cXvNk
+Message-ID: <CAFLszTjm94_iH5srp44mTMDJ-vJSAJMtgisBs+E=fNWk++KP6Q@mail.gmail.com>
+Subject: Re: [PATCH 2/2] test.py: check ubconfig exists before using it
+To: David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,23 +91,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> +       select CYCLIC
-> +       select SPL_CYCLIC
->         select SPL_ALTERA_SDRAM
->         imply FPGA_SOCFPGA
->         imply SPL_SIZE_LIMIT_SUBTRACT_GD
+Hi David,
 
-Hi Quentin,
+On Fri, 21 Nov 2025 at 07:36, David Lechner <dlechner@baylibre.com> wrote:
+>
+> Add a check in the show_timings() function of test/py/test.py to ensure
+> that the global `ubconfig` variable was actually created before trying
+> use it.
+>
+> If tests fail early, e.g. because --build failed, ubconfig may not have
+> been created yet and results in an exception in an atexit handler.
+> Adding this check avoids unnecessary noise in the output.
+>
+>     Exception ignored in atexit callback: <function cleanup at 0x7de475ea6b60>
+>     Traceback (most recent call last):
+>     File "u-boot/test/py/conftest.py", line 669, in cleanup
+>         show_timings()
+>     File "u-boot/test/py/conftest.py", line 616, in show_timings
+>         if ubconfig.timing:
+>         ^^^^^^^^
+>     NameError: name 'ubconfig' is not defined
+>
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>  test/py/conftest.py | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/test/py/conftest.py b/test/py/conftest.py
+> index 8ce680a92a0c37f36489b0782921d6cf4078850d..f889e3d3ae26db3ae19f79e236a281471d4b6de9 100644
+> --- a/test/py/conftest.py
+> +++ b/test/py/conftest.py
+> @@ -613,7 +613,7 @@ def show_timings():
+>          if too_long:
+>              show_bar(f'>{get_time_delta(max_dur)}', too_long_msecs, too_long)
+>          log.info(buf.getvalue())
+> -    if ubconfig.timing:
+> +    if "ubconfig" in globals() and ubconfig.timing:
+>          print(buf.getvalue(), end='')
 
-But interestingly do you tried any case that when defconfig
-had given
-CONFIG_CYCLIC=y
-CONFIG_SPL_CYCLIC=y
-but empty CMD_CYCLIC?
+Please put 'ubconfig = None' at the top of the file, then this can be:
 
-What my observation is that it is automatically turn on
-CMD_CYCLIC during .config recovery.
+     if ubconfig.timing:
 
-So I had no clue what you want on this correlated settings.
-
-Brian
+Regards,
+Simon
