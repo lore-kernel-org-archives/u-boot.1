@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96EA3CFD379
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 09:42:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E6D2CFD315
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 09:44:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02AA383FBD;
-	Tue, 25 Nov 2025 10:42:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7C0B83FBD;
+	Tue, 25 Nov 2025 10:44:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="btwYZpmD";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="AwTxt1cS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52CD483FC0; Tue, 25 Nov 2025 10:42:06 +0100 (CET)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazon11013064.outbound.protection.outlook.com
- [52.101.83.64])
+ id 4D2A783FC4; Tue, 25 Nov 2025 10:44:21 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6C2183F88
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 10:42:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 55A3883F88
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 10:44:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Qff84Q2ebsUpc6Mg7b0wpuzxYecfqTVsQRB25GJ4XT+vwJbCCktl1oYtBBHX/ijThVdBgWgsjp0ulEobXQ5XiNFqNK/fVLw8HzcL03TH5zHlmzeA9/6PmfG1vS+gF/uLZA4pS+wGHWgvfFh46+oak0oe+iRyMR4nCDcuyLWyvo2vBiodCUFuFrFzlEHELB1hOiQOAGac7G0cRbo/saZ1oZZgqZ4Oj7JT+3qvelHwHRGv5u+veGuXmMFOfUBwhlRYqVJ2Y7bUCL067Uj2y4shdWKnfsIApEhMevJgeDKcAhUcm9UROU0JQPAHihp/Ebmc76zsFSmnBOTcuyp3fTFstA==
+ b=wvZezoms1SXYgfogNQJqrVIPvKYoqwcAYI7DUra81el/m9bWMjj/GwXPZv/XS2qlAZaCrnOT1kVlsDE40UYzFmGMKjJVAIAp22LGRMoG57D24Uh6ZGtI+1Npah0Ymteu/0AKbjkDwVfXS0RkFz0t0Z9qmh7J5Ht2kUdnjFueBZmzoCRBMgYsoMnXYTcGi3UfZFg78hhEg+/Jo0U6CRkBRfj0HHEVlZLiJlovWI4y92udsJ1pqEMzIG+v8nPqTQXpqsHjjUbLUwhV/PRIIDAsjhEZHQZDCUUsyG4hjmvuiBRd7JsMnlceUlb/kSL9lI6/wzsM080WgfXj/iv/M+lKmA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MaNtbbpm5wj403xZn8YPoDW3DnQYBaTLU3bOjbqLs7A=;
- b=qxSEeBZ/kVlUHi9liLiT0VvJOGxnZNYkbo1INHBDETXH6OlGrfcnGAuJ63t5wUFP7bfbhdgObQi9QEGBLHxpPMN4QNw4k9uzMvUUPUYnE4KaEn5fWZVGPh6xMEGIPAadojZMH2oT/LO04jGTWl2p68CvcbLWRyXgSSxJJeEFfDnErd8qqoC0nbap8q0MViyV6nIXeRWLhOzxPIUbSAlFPUZv4pGgfTP0epAWHWiZNfAp54VCAFyx0d66V9xXL+JPGHKR+icdoEUxPZIHIiwCff+FYPJElliIPkFlZhqailnPYAMvzYfZgJuTXr+f577aJHBGiaFTib70vR2jUmzyiQ==
+ bh=1E7J9ZMp5GalC78LWVlGFpmkjVr35kRvGNmkgCNSUVA=;
+ b=FSXGzdKIYOLyzkG3Ik/A48AYY+gC5hwBX3O0+CmUGr6bhUa6nZ5t1czfmpwBZSWxi3ARf8Ae+7DD3Qn0YfjdCC2R8rES2zOs2MwC5SJ/tbkYOkajpQkT79Ynu67mISbjkioioadFJoALMCIxIsHlaRyAQmDw6NWIY26YR3Jr68N5ARUyV2otkZLbZ+IpDshf1I/pb3mmZpLbdlWapuJ7fqUCVe5UlEc/DtRodY0+uP1DKMOWnp/OnMHx8BDAMH7Y0YnvsD2VSzFwT/r9+mkHSnHT6R7lukYQfXf3LrqiIQ76GJ0+KukUf+e54DCNUz6if/uQds22qxbKB9qSAY7RyQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
  dkim=pass header.d=siemens.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MaNtbbpm5wj403xZn8YPoDW3DnQYBaTLU3bOjbqLs7A=;
- b=btwYZpmDZAylN2Vx1gN/NJD+mAinmTkn4XcZ44IBY9nDg8dERprTZliwMo3qi7BkRNOEChaNk0bHtKtqtc5i+VH3X5KbyBYuSl+bL9EBvVw/sIaDLaIL7s3F9aJpmlzlRb97BiWP0fcviCEXQeIY3/LPleQRw85NlQo0+FFQOVJ5GGzTZm3Nr4o7EtyVJTAolaLnCyFSyh6QTUPG5/EY1eztDSTE9tXu9zyFOFP7lALF8eLnwBBqgdCi1IO/z1E5uL4mdTZEsdrTCX0bEio0ZYhGPex4N3fLzH+n+wcbTeDu+oQrHyAIndrpezQ9JF+0flty6zeduzyPeJe4C74fIg==
+ bh=1E7J9ZMp5GalC78LWVlGFpmkjVr35kRvGNmkgCNSUVA=;
+ b=AwTxt1cSMTLb/R6FBkRMQyctP38nKU5KBp71YV879dynylQL8kIxY445HBzbxvkMVXSI1w3HyUHIvKiZiK3iWnSc+xIsWsiwk+3LFyO76+uLmVXl38RwzBXyy2nAoMLYjXueDz7N9wQa+ddJRM3GdnxTVz5qjXA/qDVn2j/tH2lmPyJE4Ugc4Hw7XEmoB2lfnplwXf+aR68tZ3NPERKKAgPmTUJKNs4w4XZ9z80ma0MqqMdGdUE/axrnhfNANvfDKPoyihSzCERR5dAgtP/o05xpwBHTZlG/OcU8Ww6e9KdmDEEMOMA+cZ3QNcpNG8RLL5o6eUjtuPVSC6vem7JhGg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=siemens.com;
 Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
  by GV1PR10MB6218.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:92::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Tue, 25 Nov
- 2025 09:41:43 +0000
+ 2025 09:44:15 +0000
 Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8fe1:7e71:cf4a:7408%6]) with mapi id 15.20.9366.009; Tue, 25 Nov 2025
- 09:41:43 +0000
-Message-ID: <896ecbf4-d85b-4c09-b8d0-9730be370673@siemens.com>
-Date: Tue, 25 Nov 2025 10:41:37 +0100
+ 09:44:15 +0000
+Message-ID: <808832bf-e185-43f0-89ba-58941d2535c9@siemens.com>
+Date: Tue, 25 Nov 2025 10:44:14 +0100
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v1 6/8] configs: cyclone5: Enable SPL FAT support
+From: Jan Kiszka <jan.kiszka@siemens.com>
 To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
 Cc: Marek Vasut <marex@nabladev.com>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
@@ -64,7 +65,7 @@ Cc: Marek Vasut <marex@nabladev.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, Brian Sune <briansune@gmail.com>
 References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
  <20251125081316.17329-7-alif.zakuan.yuslaimi@altera.com>
-From: Jan Kiszka <jan.kiszka@siemens.com>
+ <896ecbf4-d85b-4c09-b8d0-9730be370673@siemens.com>
 Content-Language: en-US
 Autocrypt: addr=jan.kiszka@siemens.com; keydata=
  xsFNBGZY+hkBEACkdtFD81AUVtTVX+UEiUFs7ZQPQsdFpzVmr6R3D059f+lzr4Mlg6KKAcNZ
@@ -109,103 +110,103 @@ Autocrypt: addr=jan.kiszka@siemens.com; keydata=
  qH4kDzsqKX8zzTzfAWFxrkXA/kFpR3JsMzNmvextkN2kOLCCHkym0zz5Y3vxaYtbXG2wTrqJ
  8WpkWIE8STUhQa9AkezgucXN7r6uSrzW8IQXxBInZwFIyBgM0f/fzyNqzThFT15QMrYUqhhW
  ZffO4PeNJOUYfXdH13A6rbU0y6xE7Okuoa01EqNi9yqyLA8gPgg/DhOpGtK8KokCsdYsTbk=
-In-Reply-To: <20251125081316.17329-7-alif.zakuan.yuslaimi@altera.com>
+In-Reply-To: <896ecbf4-d85b-4c09-b8d0-9730be370673@siemens.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: CH2PR10CA0027.namprd10.prod.outlook.com
- (2603:10b6:610:4c::37) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: FR5P281CA0042.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f3::15) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:588::19)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|GV1PR10MB6218:EE_
-X-MS-Office365-Filtering-Correlation-Id: 533bd086-edef-4466-5c4a-08de2c06d79c
+X-MS-Office365-Filtering-Correlation-Id: 6c7c1026-8cfd-4530-fdba-08de2c073283
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZEp4U0J5NllwQjZMaHp0ZkJBM3dVSkJNTEFLOFZ6dDR5bWpDRnI1NGFkQnA1?=
- =?utf-8?B?c29VUjVqSXhrOHpIYzIzNkpua3lPM0llVTJSNExDWU03bkZXV0RlTGNvS3VP?=
- =?utf-8?B?NGNTWVNUNXhRWXlkcitMU3hKMlZuc1Q2SUxxV3VyM2w1aGNSZ2cwZ2xMa1p1?=
- =?utf-8?B?ckx4UGwrS0lMTjJZRDJXalF3OVNxRWgwQW82QlczR2s2ZVpHaVh0dUl1ZEdW?=
- =?utf-8?B?WXpBSEhvb1ZFN1ZZdGs5OGIza3FSeUJKRHhCaFVmeUozaWlCcVcyYzNReVJH?=
- =?utf-8?B?MFplUFRhTFU0dnVFNFgwOW15KzBIL2FXMzQvYmxWcTdha2hiUTBKQXdJb3lP?=
- =?utf-8?B?K0hFY2tNWFpnejdBTzBLdndJWUZ2REVxdlMxWTQwM1ExQ05Fdzg3NmxKUW4v?=
- =?utf-8?B?SmFOMG02dFpqTExheERlRU5DVU96TkVHWGhxTThQbVFPN0kvcHVjN21lVnBj?=
- =?utf-8?B?K3VMTkZLd1dKVmpiYzUwSEwxT095bStNSVA2VGdFb25HY25kUmhzY0ZGdVEy?=
- =?utf-8?B?ZWJiSmRld0tETG1HUE53dUkrT3NWZ3hJcmU3MGpOeExkYXJBTEVOTHdhL3pQ?=
- =?utf-8?B?K0VvbWhHSGtwRmRCa0lNV3dhcWlQMHphOWprcVp6YVV1NTJSSldNNzVQYnVh?=
- =?utf-8?B?ZUZGQk5rL2gyQk55N0dWYW1UaDBrMVh6MkpmZytTOVJhRDRnTURoS2l5azd4?=
- =?utf-8?B?SU9uUW56ZEVoaTdKcEcvOTNoelZzdWtwTnFpSDdsZEdhdC9hRUpTZG91eVJO?=
- =?utf-8?B?UnFJUDVvOTArWWVSeTJRNzY5anZvQWp3NW9XMWdrMFBTTG5nOUxKNGxwdmlF?=
- =?utf-8?B?UHAzMGxqK2Y4cURtcUdMaVl1SkU3bDZJSFR6S0JxUWdodklLOEQ0NTBZSlRr?=
- =?utf-8?B?cUtzQjJ2Qk5NTlFLaXZYVFZ0S1lzWnUraVNjSzc5R3F5dGoyaGNkamlVczR5?=
- =?utf-8?B?UjFGdjFhRTlZdXIzdmdWN3VtYVZwZXVHWHV4YlZHdTVRUDJ5YnVSVHBndzJF?=
- =?utf-8?B?SmdaTmJwdi94c2pBY0ZQRXRKanJzakdsUTNTUS9ybGtaSWI4c2p5dWdNVnBu?=
- =?utf-8?B?WmZxT0lnZXhWOWVwM2E1L3NIejc1b0tybkhDQVBrbVBsaWJEOThnMUlUNTBl?=
- =?utf-8?B?ZzV6MlR4RmIrMExLNmhaNWJzY1VGSVBPaWJvakxkVDJiZzNkVStybTc4RzJX?=
- =?utf-8?B?b3k2VS9jeFMxcDEweUpkVkI1NTl6R01Cd2N0NzAvQXUwTkgvSE9rTjZLd3hz?=
- =?utf-8?B?Zlh5aE1lL3hxRTYydjltazY1RWdENFc1eDhmTWduL1d2MURrVXl5d2NjaE1F?=
- =?utf-8?B?L21JYytDdy9LZjlBa04zNlRoMEM4Q21YM0RHb2Rtd1Z5anZobUFWR3QwREhF?=
- =?utf-8?B?ZEV3MzJ1UlVxOXhaekUwS0E5TG5QeklpVG1EUnhkalNYT1k5NGlRWXhsT2g5?=
- =?utf-8?B?V3V1L3ZYZXhmaXlBeCtJQ2c2VXdsZ3BTbCs5NTU4TWo4cjJxUmpvT3VmdVRp?=
- =?utf-8?B?YVpWSWdRd3dyNkh3eXJyVWVZYkJHSTEySUhoSzFuVW0xbDNHSG1kajdXRmp2?=
- =?utf-8?B?ejJabnpvWFgyaXhYLzU1Tmw2eFBCVzVZandCTWhGdzdJcXBGZEQ0MER3QUpH?=
- =?utf-8?B?cnlCbWRZMStJb1BUZlU2aVVoaHlReUxDTTdGYkRUR2N5UEl1QnhGWHpDdlQ1?=
- =?utf-8?B?dHBNbzZPQnAzZ2U5SmUvSEc1UmxPY2l6STRjUktJNDZqMkRoUFJRazlMbWdB?=
- =?utf-8?B?T2dZVzZvVDJFWW5VbFFSeUVMQ1F2T0FaVHVFSzZjLzZOSTliWEprM1Z5Sk05?=
- =?utf-8?B?KzBZZWQ4STIzQ1BHdUtHRytLRTNIYUxVMWJnZjBuWWtpOGNzMlQ3RjZpZWNj?=
- =?utf-8?B?YjZnajJiZVExTncvcHlUR2JRUEkxemRnZnZteWpvR0hpTEYySk56ZStmUzVF?=
- =?utf-8?Q?jY04DK3VDwXNprz/g9hvDEuwxohY+DQM?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Yit5VksyVStzZCs4eVNpUGNMaWRIK1FyZktGVUQ2UGxPdWZYRi91eFZlOFYz?=
+ =?utf-8?B?cDJ4cGpoOWU3TWNNN3BVM2hrd1A1Y1BHV2FGL1pJemhJQ1NaUExLMlVtT1h1?=
+ =?utf-8?B?K2paSGxGeXhHMFg3MXlnSmJuUXlTTmJqQzhIT0o0V3lXaE1jNUZ2aG9FcmxF?=
+ =?utf-8?B?UXhOMXZsY0JsQWpDeThydFE0Yy81V09oYlR0T1ZyU3FEeGhPMmZFQ3EwcWU2?=
+ =?utf-8?B?RFFYSjEyeGZZQ1FMTlREZGhST1c3VDNmbHhnS1c5U3VJMDdXdjFySGpSS3pG?=
+ =?utf-8?B?ejg4a25hdVhKZ1VRRHZ0azBTVi8xZUFxVEF4RFd6MjhjMjhuZGVheW8yRnhQ?=
+ =?utf-8?B?UWRWbHFOYXU2MmFGRXY5RTRKNzNtTEZEYTh1b0hHN3VGcXdOb2diamlJNGZh?=
+ =?utf-8?B?enJjN2VxTTVkemtJSGN5WUpYRTRFQytQbW9sVTE3emNqcE5yOWo5My91eTZ1?=
+ =?utf-8?B?c082eXJIaityM2V3c2MxTGZ3c2F0bmQ0OUk3d2lmbXlzWEQ1Q3IvUG5GVllL?=
+ =?utf-8?B?Q01GWXBVUlFNQTJRR09aYkZDdkxybmwvSm0wWHlmZ3J0d1YwbnFmMW83aG9S?=
+ =?utf-8?B?T1MzZ2YzQlVJSFZ2YzhpTmNvNmRYSzg2OWVtcXlCQ3Zib3pIM2xHNjNVeHoz?=
+ =?utf-8?B?eng2Q0pwUUhMVkhQbE5xeGRGZTJCVnJVYzRjSW9pbG1oVVVBTlJneEpVTzlF?=
+ =?utf-8?B?NThTQ0t2MkFXNlB6eFF3KzY0QzBOVDNUVDVYaWxmcXAwalVpSWRQYi82K0U2?=
+ =?utf-8?B?QlJQbXljR3FweC8vdUx6ZS9ublIyZmdYQjZkenhGUmpjaEd4Z0xEbWdqcmxR?=
+ =?utf-8?B?OExLNHlMc09NVlBEUVN5WnpEdlZidnNNdVRxZ1krb29JYU5WMC8rY1BIU0py?=
+ =?utf-8?B?YmM2RFFVbTFxMHFkY2xYRC9ObHNXbWxTWndNZy9tZ2xETUJRNEgvRGlSQ0lU?=
+ =?utf-8?B?WDFNM01sdFMvTmVmVG9uTlBlMVVKcEtucUUwb2VDbUJLdjRsNDNzZnR4UjBT?=
+ =?utf-8?B?a3NCay9RR0FtYytqT2pWem1JRjJqUVNJdDJlWTh4T0s2UENOV3AyaFVlaFJT?=
+ =?utf-8?B?UjE5dTcxVk13MjR2WXE0M1ljWUpjVXRKNTB5Z1kxNklhNU5RVHkvSjBScWVx?=
+ =?utf-8?B?dXVpcElRSFVFaS9qZ08rNkNUaTI0RU9QTzQ2WnA4SXBmSjdJbDEyNEcwTUwy?=
+ =?utf-8?B?Yk8yeEpBNWpBT0ZVek0zWndoNGpDVnk5Y09qanhyR0pYSEphVHQxZUNkWWV3?=
+ =?utf-8?B?anFwWHRGMmpUSnJzNXBNLzg0eHlad3QvMkcydE94Mlc4V1JwUEV2Q2lheUo5?=
+ =?utf-8?B?emNENG1IaU1OVng3cDhReFFLN1RZRjBscDRmUjVrQmcwaXNaRlJObDdFK0dE?=
+ =?utf-8?B?aXQ0RGhyYXJTNE9tMEpac0hSejRHOGZPN3B1VFlISWt1TldpZkpUeUlWbUdG?=
+ =?utf-8?B?N1hobGIzU2N5bDFteklkVmxBcDRoTmIwVWJLeHlncitRSThDb21ZcnJJMWVt?=
+ =?utf-8?B?VmJVaFFLM0RHQVR3VDNnQzNRVGRxaFlkR3l2cFQ3b2kvSmVCazhndkY5L1p1?=
+ =?utf-8?B?NDgycHRHS0xwVC9XM2ZaejhSU2hSR3RWWEtLMGJWVE42dEtPZGRoeXRDS3g4?=
+ =?utf-8?B?ZUt3cytzQXdpNHpiRE41WjBPYmdKN0dsVFhld0lXRFFZazY5bXFFSW1KQ1FN?=
+ =?utf-8?B?UWxSY29ZcUtrK1VTc2RFTEkzN1BtOSthUHFWalFlNnFpREhmc0ZTZ2RRVEhN?=
+ =?utf-8?B?ZU85cVRWUElienUvSHF2RndDWHJORi92MzlIaHphRmFodWt0S3BUSDNkZ0Zh?=
+ =?utf-8?B?bDA0UjBKQ29uMFNKSnIva281SnBWQml6d3EvR05INWVScHVWYW1DMTRud0x0?=
+ =?utf-8?B?Znlmay9hUElBcjQyRm04T2daVHFYTUorM0I0dmUyb3dTYkNTUlJzOE85YmFi?=
+ =?utf-8?Q?ugaRPwDglXCmRYsC/6CykZuXh69Ve74d?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V3djRGFNMzN5WFdTMzZNRWlLSW9UZlhwbS9Mdk5GbGVzMDc5dTBoWW9yTUdo?=
- =?utf-8?B?RlFSU3MvSVJuQk5PdzA3aDRFbWt1N0k2ai9FeDR6VCtQdHBzSE5ndnZhVmVU?=
- =?utf-8?B?eWQ4QUYzT0p6NWlhRlRJVG5Lak9PamV2bUI1dkxhWW1iQTlBVWNwdVBoSktw?=
- =?utf-8?B?Qlo1aGhSVzl4dm9adlUxdFBoclFMK0JjRVA1NmZlNElvZlFIRVRBSDlNZU9t?=
- =?utf-8?B?NzZBb3NacjY2VVFWSEVFZjNwakFNK1Q4U0swUWYwSU9wbE4yRERrMjhyUGlT?=
- =?utf-8?B?c0xqZExlM2M1enRveGVUazE4UVZQeGxNeXpKYnBkN3JYam1sRTlGZ0J2OXUv?=
- =?utf-8?B?dVJqNkk0V0ZrbEpILzAzUE1oMWJkK0NzS3J3akttd1RWdkRwaXpZT1o1N3N6?=
- =?utf-8?B?NGlDa0Y2MXZEOFg2Q0gySGdrSXhKZjYzSUNjb2N1dXJvYzROVWNRZ3VUSG96?=
- =?utf-8?B?U2t4OHdGVDdjRHNnSnBZb1dkMElGRVNDSkhNeW9XYlJRQUpPTWVSNHBmZEsw?=
- =?utf-8?B?N0hjY0NRZW5ER1VjVHRCaW1VSEJVVzB2cmdHNmllNCtYSTVFcitGR2x2dUJy?=
- =?utf-8?B?QmlMVWpjUG5TWktnT1ZPNUhmZlFiNlFMYndPdE9ZdHBSYlQ0TEkwd2FYSjFV?=
- =?utf-8?B?NU1kNEEvbGVhNVdSeStVK1FoQjIydjVhTnRhL0FCcnh6bjJGemt1R3VFQVlo?=
- =?utf-8?B?SWtYRHZtVHBEZlBxcWRRMmQwQ3c4bVVHalZFY0Y0dTVHblVvYnZnRCtEeUIz?=
- =?utf-8?B?cktHcW50aDF1ckJSSUlkTHUvVlBFQmQxdlg1U3RQdlhHa0hDekx4dnlsSmhG?=
- =?utf-8?B?L001cnlKQVN5VENmeVRIdEI3ZjBXNHV1S0NwbDJpNWZiUnl6S0tvRVJDSXFa?=
- =?utf-8?B?YlFVUUV1dm9pL3VSd0k4SGxxcUhuTjVXdXM2cG9sdUhyZk5Kb1l0cFZsL3Br?=
- =?utf-8?B?VGJ0anp5U002OXczN2MvNnh3RDlIR290c3FuRFlKZ3BoTDBoamZvK2M0OThZ?=
- =?utf-8?B?MDQvVWJHVlZweXZTenEyN094Ri9Xc0ZLWlc0Z0pnWjZDTnBtQlZxWDRxak5x?=
- =?utf-8?B?MjNwMXZQVU1IY2JVUkQ2eHBGd3FLMVpVdldTNkVBRVBJdEtRWHFhNHRVZ2xl?=
- =?utf-8?B?SlhsUThMYW9YZkZQSkREaDhUNGpzbUlLV1ExSklBL25SVlZMbS9YM1FWNVhh?=
- =?utf-8?B?ekgzbllESDF6cGZsS0pkcHMvMnRSQ01IMjhlS2I0U3dydXB6czQwNU9aQnZX?=
- =?utf-8?B?TkdIU0lzQWRGUFVRRXR2Y3NYTUNWZjI0K0lVOHBwcWpqWU1DR2R4bHF1dWFn?=
- =?utf-8?B?cUUySVl6Sm9HVnFEdVFmMzVYbVVSM0JDT3FOYnFvaldOM0svRzdnN0FzcVgw?=
- =?utf-8?B?NGJiNENkS1laMUMxK0dJMVlJNkFXOVhmR216bmxDSEFMMCtsbWpOVTNKREFM?=
- =?utf-8?B?QSt0cWEwZU43YVNmbGliQTNMYXloRGtaMkFiLy9FRWR5alVVenNWMlFhVG12?=
- =?utf-8?B?UmJhTGcwRmsreVhvMSt2S3ZLSUlLOWdmWkkwY1JmT0hmMjJ4djFtSUU5MWJJ?=
- =?utf-8?B?cU9vemRSU2RZeFpodEpObVV2YW9LT1BlaXA2dHl6RURYQmVvRCtRYmprWXZW?=
- =?utf-8?B?RnZxK1hMZGppekNNZ3l0eW1LeDRuUVRiUm1oenhyd1cwTm44ZnZzUTRCZGEz?=
- =?utf-8?B?R0kwc2E1bEt3cXhzbUtxemlCWEQrbVpLbWo0TVZJbEI3QkNXUDFGYUdxSzVU?=
- =?utf-8?B?NlZ0SHFUaFpVTzR3VkQrY2Rwc1h5bEJLVzQ0QVpiZGtlZG9qY1FJV1RaTjdv?=
- =?utf-8?B?WHk3cElGVEFucm5BWXhaVHBYSEd1T0pteXQvNXAwMEpQVUZpb2UxdE9aVVNJ?=
- =?utf-8?B?WlIzaWNQb0cwd3IzL09qUDlmNzFVOE53bXVCQmtiV282a3N4TzNzZkczM2hV?=
- =?utf-8?B?QU5JdWVSem1WLzVtQVk0RVdVRXJqdzdBank3b0k2NisxUG5kUmF1U0ZWU2xN?=
- =?utf-8?B?Vi9GaXhOTWMyMzMvbG92RXlRakQ5QlNDKzIrcmNVMG1FOG0veXVzVjlGNTRp?=
- =?utf-8?B?VEhSclB5WWo5aHFCWGMweld3SG9uWElFdHBOcC91RzhEbWRrbTlUazR6N3B2?=
- =?utf-8?B?cm8wVHVEclFFWGpTWVVJVitrN3BuNDFzZTFVWTkwd2drVDBKVlQ2SkRjWTBq?=
- =?utf-8?B?N1E9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Tmh3UlI4VEFvZTgxTVcxa1FDZnFXTitqdzV6RmRmc09uUEU2QUYxYUVXTkFJ?=
+ =?utf-8?B?ZnVwb0JFb0VNOGwzTVJSL05TTkprdXhKMFhWa2Uyd0cwRHdQMVlLNXdld0xU?=
+ =?utf-8?B?SlM3MTM0MXlTQUVkRkNKY2tvMzg4aDlsQ0oxcjU2alBmYm8zUUhKRlFOMStQ?=
+ =?utf-8?B?MHRtUWlhWVRBV3hjYk0vaWN2QzlrWlBoNFpvYjE2YStNeXlSRVJ0YTV6dUor?=
+ =?utf-8?B?N3dUVTNBUndydTVHbzhYVkZxVVBaamJQS3FXSXkrRnlKYlZZaFZJMXRBNHJP?=
+ =?utf-8?B?SWxwQTZ4QkZidmtvazJYbEkxZklpbjBMbEpXcWNFL1FBaDllQlNScjh5U0NI?=
+ =?utf-8?B?Z2o5cGQxS29vcUhnZDhTRjVvR09xKzN0T0IxYkNHSmlDZHBNdUgwcXN1NEhv?=
+ =?utf-8?B?L214MXRoeEV1bXlPQ3M5Skh1eVVGdVRwbVBHd3E3akNLQlZ6ZXBYOUhXR05w?=
+ =?utf-8?B?cERNRUs0aURVdTlLYWIxdS9ZQ2dZbW9rb1JJK3VjM2JXWG5KQ1Q1VmpxWGhV?=
+ =?utf-8?B?dHhhaTRrdWdLaFVmWEFRRXBWWXZMVHdUbWZjQ0NEV0JHN0lLdGVhYXdZekc2?=
+ =?utf-8?B?ZmUvQjJZSFg1cGg5YTFLcldGenZBb0NIWHdObFB3V0VLM2hOdHpGdGNLQk5l?=
+ =?utf-8?B?VVNWdzI2SWpmcUF1UGExdWs3YlhZMVZuSGxBN3h0cE9jRTdNYVdhMmdtdWdw?=
+ =?utf-8?B?d2ZHd2tYR3dyTzNOaDc0emFiY1NMeXhBRDM5cDg0YjJrNVJZY08ydHVrMGor?=
+ =?utf-8?B?VkM1SGpnVys3SFUrYmh1U0NFTFEwaDNXRGdJOEtrOVpwdFJVV1NjRkQrelBa?=
+ =?utf-8?B?ZExjLys1NytuUzluWmpsOUJOMkFLN3VyUERjWlZKa3cwanZHdmR3WGpLYUlL?=
+ =?utf-8?B?SjJGbGNOd245NHhvdTlOYTVRd1BqL2JIOXZRSGxxdnZ0cXkvSEREMTF4NWpW?=
+ =?utf-8?B?UXF4a2Z2VHNCQ0c0VFNiQ2JmUUxjVldmbVJ5ZVB5R2JVNW9SQ1I2Z0wxbkUx?=
+ =?utf-8?B?VW5LWERaZGxjaTNRYUM5elhFVHg4SFd2SU1zQlA5WjJ2ZnlncUVMNlVqU3hL?=
+ =?utf-8?B?Tjc2QTFwejZRbGxtV1BJamJCaU56R29yd3NGcWYzZDFtb3RtbkU1Vk5HSm5x?=
+ =?utf-8?B?S0hIMVlKTktid2FxeTV5TjRnWU4zekJWZStSTUZpV3dxczdVMFZLME5oNVNi?=
+ =?utf-8?B?VFBSSDR4RFk1dWJoT3ZiYWpkRk5wY3J2STNiYm9DbnltUU5WYlFCTlQ5RFpn?=
+ =?utf-8?B?WHpTNEZXVVoxbWxxQkdKZU8vVzFqYm9sQjNrMUl5dHlwSzN4ZGdSV2MxN3ZM?=
+ =?utf-8?B?bnVaTkplN25FK0lvY2ZYYTZsdGJkclp2UEdGbmNvWkcyVDR0MldueGpxd2lK?=
+ =?utf-8?B?eGJRbHZaMnE2LzJxdHBWak5iQ2o5WFZ4c2g2RVFDbGRxdllubTR0ZzZDbmZz?=
+ =?utf-8?B?WVNVTUVoQ0hZWXdDV3U1c3dqYUJNZS81Q2ZkbjloVkF6VjlKc3RtaWUxZ1Vp?=
+ =?utf-8?B?MmpodkJ0Qnk4YmZuMmpnc1hTcXN0MW1CMUV4OU1iTkd3QjFaNkRGWW9ZSzRy?=
+ =?utf-8?B?OEJxMXlOTVhESjhOS2s0aVhFWnB2SG5aSkZnZVFGSnlnUzJoOXdvcjBQTWhz?=
+ =?utf-8?B?bVhhZGNKeCtBNGFWcGhsdU9rZzRFQkcvSmNFSk9lOWVYc3ZFNXAvdlQwQzVZ?=
+ =?utf-8?B?bHJlU2xsWEFrWklLUjA5NEw5cVR2eHdSajFrRVlRT2t3TlkyZm0wdGJHZy9V?=
+ =?utf-8?B?dTFMSzk4ZllIK1hydnhydVV6NnJGeVlZK0ptelJ6dlZneDBHd0dvYUtSRE1U?=
+ =?utf-8?B?b01KQXp4ZmJLdDRFeWhiNGkvc04wL25mcFgvOEFvc2J4aDNQanZBTXd2c1ZL?=
+ =?utf-8?B?WFJmVG82M25tN0pPc1YxMnk0T25ZdkthdGxXYmZlZTVqcnp5VkU4NWNTQjRm?=
+ =?utf-8?B?QXdsTWNEaGlmMFVGY0pPa09DSmZpcWM5Y1dScEc5cFRhSjArdnBkUnB6ZUNJ?=
+ =?utf-8?B?ZXF2bHlxTEM1V0t2NGRqU3dsOGNzR2tJZjllU0JRV2FHL1BSeEFyMy9GOStB?=
+ =?utf-8?B?S3RVMGsrZHVxOHJWUEJLeGxrUytZNzNLYjZmcGc3K01wZ0VZbTNZcHFhTVZP?=
+ =?utf-8?B?bmtqSWpyTWU5eitXTmV1MGRVdUVZMW9rbXNMSjJRNXlITnl1MXdmMnBrMXNN?=
+ =?utf-8?B?bVE9PQ==?=
 X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 533bd086-edef-4466-5c4a-08de2c06d79c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6c7c1026-8cfd-4530-fdba-08de2c073283
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 09:41:43.2754 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 09:44:15.8367 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: a/53bOMR4DMtRz3whLohEafU87FuoWJ7dX5yOBxik6RYEaqjElA5sWXCr/Xr3VrskQQY2gvLkiTp82+X9tDZIg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: j1U8MZT3AqnyjbP4XL4DHnoMij7bmBv5XmpjIOfK5+1IrcKQTY4XzgrFRvY28xb0CmgTLntEitljJXz3nGYqsg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB6218
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -223,46 +224,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.11.25 09:13, alif.zakuan.yuslaimi@altera.com wrote:
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+On 25.11.25 10:41, Jan Kiszka wrote:
+> On 25.11.25 09:13, alif.zakuan.yuslaimi@altera.com wrote:
+>> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>>
+>> Enable support for FAT filesystem with SPL for CycloneV instead of raw
+>> mode.
+>>
+>> Recent changes breaks CycloneV MMC boot from raw mode, and so we are taking
+>> this opportunity to migrate MMC boot mode to FAT as smaller OCRAM size is
+>> required, as well as aligning MMC boot flow with our other devices.
+>>
+>> Fixes: 2a00d73d081a1 ("spl: mmc: Try to clean up raw-mode options")
+>>
+>> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>> ---
+>>  configs/socfpga_cyclone5_defconfig | 2 ++
+>>  1 file changed, 2 insertions(+)
+>>
+>> diff --git a/configs/socfpga_cyclone5_defconfig b/configs/socfpga_cyclone5_defconfig
+>> index 2bec82b0625..2b2435a27bb 100644
+>> --- a/configs/socfpga_cyclone5_defconfig
+>> +++ b/configs/socfpga_cyclone5_defconfig
+>> @@ -12,6 +12,7 @@ CONFIG_DM_RESET=y
+>>  CONFIG_SPL_STACK=0x0
+>>  CONFIG_SPL_TEXT_BASE=0xFFFF0000
+>>  CONFIG_TARGET_SOCFPGA_CYCLONE5_SOCDK=y
+>> +CONFIG_SPL_FS_FAT=y
+>>  CONFIG_TIMESTAMP=y
+>>  CONFIG_FIT=y
+>>  CONFIG_DISTRO_DEFAULTS=y
+>> @@ -27,6 +28,7 @@ CONFIG_SPL_PAD_TO=0x10000
+>>  CONFIG_SPL_NO_BSS_LIMIT=y
+>>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+>>  CONFIG_SPL_HAVE_INIT_STACK=y
+>> +# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
+>>  CONFIG_SPL_SPI_LOAD=y
+>>  CONFIG_SYS_SPI_U_BOOT_OFFS=0x40000
+>>  CONFIG_SYS_MAXARGS=32
 > 
-> Enable support for FAT filesystem with SPL for CycloneV instead of raw
-> mode.
+> But what about other boards for the cycline5? If you want to switch,
+> switch them all. This looks half-backed.
 > 
-> Recent changes breaks CycloneV MMC boot from raw mode, and so we are taking
-> this opportunity to migrate MMC boot mode to FAT as smaller OCRAM size is
-> required, as well as aligning MMC boot flow with our other devices.
-> 
-> Fixes: 2a00d73d081a1 ("spl: mmc: Try to clean up raw-mode options")
-> 
-> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> ---
->  configs/socfpga_cyclone5_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/configs/socfpga_cyclone5_defconfig b/configs/socfpga_cyclone5_defconfig
-> index 2bec82b0625..2b2435a27bb 100644
-> --- a/configs/socfpga_cyclone5_defconfig
-> +++ b/configs/socfpga_cyclone5_defconfig
-> @@ -12,6 +12,7 @@ CONFIG_DM_RESET=y
->  CONFIG_SPL_STACK=0x0
->  CONFIG_SPL_TEXT_BASE=0xFFFF0000
->  CONFIG_TARGET_SOCFPGA_CYCLONE5_SOCDK=y
-> +CONFIG_SPL_FS_FAT=y
->  CONFIG_TIMESTAMP=y
->  CONFIG_FIT=y
->  CONFIG_DISTRO_DEFAULTS=y
-> @@ -27,6 +28,7 @@ CONFIG_SPL_PAD_TO=0x10000
->  CONFIG_SPL_NO_BSS_LIMIT=y
->  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->  CONFIG_SPL_HAVE_INIT_STACK=y
-> +# CONFIG_SPL_SYS_MMCSD_RAW_MODE is not set
->  CONFIG_SPL_SPI_LOAD=y
->  CONFIG_SYS_SPI_U_BOOT_OFFS=0x40000
->  CONFIG_SYS_MAXARGS=32
 
-But what about other boards for the cycline5? If you want to switch,
-switch them all. This looks half-backed.
+BTW, the FAT refers to a u-boot.bin file on a fat partition, right? And
+the SPL will be kept in the A2 raw partition then?
 
 Jan
 
