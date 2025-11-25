@@ -4,54 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5AD4D0E6D2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 12:41:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45265D0E6D8
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 13:02:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25B898403D;
-	Tue, 25 Nov 2025 13:41:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ysoft.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DF5884011;
+	Tue, 25 Nov 2025 14:02:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ysoft.com header.i=@ysoft.com header.b="KqxZMG7o";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wyEgLJBR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38DB983F88; Tue, 25 Nov 2025 09:58:58 +0100 (CET)
-Received: from uho.ysoft.cz (uho.ysoft.cz [81.19.3.130])
+ id A660D84011; Tue, 25 Nov 2025 14:02:30 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 723DC83F89
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 09:58:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ysoft.com
+ by phobos.denx.de (Postfix) with ESMTPS id AEAB183FFE
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 14:02:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michal.vokac@ysoft.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ysoft.com;
- s=20160406-ysoft-com; t=1764061134;
- bh=nh1G4vmLOj1+rp478eAQAPxVysiDyG4wgGWuroHwNXY=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=KqxZMG7oQeX1L+McvMiSVnNf9G7WejrpnIsfycKMd8i0t7VNt8l0HvwWY4h/tLZkk
- Y6qtxq+ab5QZv37o78KppQVTIHFthWc3roZRz51pirLGDWml62Tmtn40G2tYLfLg3U
- uuoZ9PKi0jdmtoQr0MLvS+C/hmRhu8hmjdQLL+u0=
-Received: from vokac-nb.ysoft.local (unknown [10.1.8.111])
- by uho.ysoft.cz (Postfix) with ESMTP id C7818A05D4;
- Tue, 25 Nov 2025 09:58:54 +0100 (CET)
-From: =?UTF-8?q?Michal=20Vok=C3=A1=C4=8D?= <michal.vokac@ysoft.com>
-To: Marek Vasut <marex@denx.de>,
-	Tom Rini <trini@konsulko.com>
-Cc: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- =?UTF-8?q?Petr=20Bene=C5=A1?= <petr.benes@ysoft.com>,
- =?UTF-8?q?Michal=20Vok=C3=A1=C4=8D?= <michal.vokac@ysoft.com>
-Subject: [PATCH 2/2] usb: ci_udc: cosmetics: EP and requests debug info
-Date: Tue, 25 Nov 2025 09:58:46 +0100
-Message-ID: <20251125085846.507591-2-michal.vokac@ysoft.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251125085846.507591-1-michal.vokac@ysoft.com>
-References: <20251125085846.507591-1-michal.vokac@ysoft.com>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4dG2sV3LyGz9twM;
+ Tue, 25 Nov 2025 14:02:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1764075742;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5boNwHv5ya061yqBKGoV+WfyxP69UmUkpOpb+Y8ftXA=;
+ b=wyEgLJBREh4i4xbdAZVz/6VxnMBGu/23gM+gO8RKZ1XcILekY2PTKzfWLHVCfk2H10DruI
+ oejmf62/6zqlyWraQwmhLxlQnPMQZlScmobJHPzUPqXIkXZ6LMDbqkSsfvoX8fy46umkNn
+ HGbbYcyJRV1rFgZ50sGrj+JSi2OTkIcOCLNC7faeRIvc0kNMTMZyGNbrerGyk6hkcUDbB4
+ GbmorpY2BPjZknj+3oVzpCiNZY5m0BxJm8ZAwHFJGY/MHiIrcqNgMXfMImd7PP7lm7zYvH
+ NSNCRLqWIeYBsDJhV6b2qMJualHjVzHdLvCGFupGYYsFLXC5vKdgr8Q4CCOtTQ==
+Authentication-Results: outgoing_mbo_mout; dkim=none;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <45a5d75f-99f6-4583-9071-2f892aadb2e6@mailbox.org>
+Date: Tue, 25 Nov 2025 12:55:30 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 25 Nov 2025 13:41:17 +0100
+Subject: Re: [PATCH] driver: nand: skip BBT scan during SPL to reduce size and
+ complexity
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, dinesh.maniyam@altera.com,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Tien Fong <tien.fong.chee@altera.com>, Kok Kiang <kok.kiang.hea@altera.com>,
+ Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>,
+ u-boot@lists.denx.de
+References: <20251113030357.15397-1-dinesh.maniyam@altera.com>
+ <e7e19789-6c0b-4ede-b7a3-ad5002a7b9ed@gmx.de>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <e7e19789-6c0b-4ede-b7a3-ad5002a7b9ed@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 34a98f32053b4a4c1a9
+X-MBO-RS-META: 5rw8wcwomwt6tquh8wxyk3rcmpojuwd3
+X-Rspamd-Queue-Id: 4dG2sV3LyGz9twM
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,54 +90,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Petr Beneš <petr.benes@ysoft.com>
-
-Make a note in an unexpected situation, e.g. queuing a request
-on a disabled endpoint, enabling an enabled endpoint...
-
-Signed-off-by: Petr Beneš <petr.benes@ysoft.com>
-Signed-off-by: Michal Vokáč <michal.vokac@ysoft.com>
----
- drivers/usb/gadget/ci_udc.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
-index b3bbbb6ad32c..ea8939060efd 100644
---- a/drivers/usb/gadget/ci_udc.c
-+++ b/drivers/usb/gadget/ci_udc.c
-@@ -273,8 +273,10 @@ ci_ep_alloc_request(struct usb_ep *ep, unsigned int gfp_flags)
- 	if (ci_ep->desc)
- 		num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
- 
--	if (num == 0 && controller.ep0_req)
-+	if (num == 0 && controller.ep0_req) {
-+		DBG("%s: already got controller.ep0_req = %p\n", __func__, controller.ep0_req);
- 		return &controller.ep0_req->req;
-+	}
- 
- 	ci_req = calloc(1, sizeof(*ci_req));
- 	if (!ci_req)
-@@ -296,6 +298,8 @@ static void ci_ep_free_request(struct usb_ep *ep, struct usb_request *req)
- 
- 	if (ci_ep->desc)
- 		num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
-+	else
-+		DBG("%s: no endpoint %p descriptor\n", __func__, ci_ep);
- 
- 	if (num == 0) {
- 		if (!controller.ep0_req)
-@@ -622,8 +626,10 @@ static int ci_ep_dequeue(struct usb_ep *_ep, struct usb_request *_req)
- 			break;
- 	}
- 
--	if (&ci_req->req != _req)
-+	if (&ci_req->req != _req) {
-+		DBG("%s: ci_req not found in the queue\n", __func__);
- 		return -EINVAL;
-+	}
- 
- 	list_del_init(&ci_req->queue);
- 
--- 
-2.43.0
-
+On 11/25/25 1:00 AM, Heinrich Schuchardt wrote:
+> On 11/13/25 04:03, dinesh.maniyam@altera.com wrote:
+>> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+>>
+>> Guard the Bad Block Table (BBT) scanning with `#ifndef CONFIG_SPL_BUILD`
+> 
+> Thank you for looking into this issue.
+> 
+> In the patch you use CONFIG_XPL_BUILD not CONFIG_SPL_BUILD.
+> 
+>> to prevent running `chip->scan_bbt()` in SPL builds.
+>>
+>> The SPL only requires basic NAND read functionality to load the next
+>> stage and does not need full BBT management. Running the BBT scan in
+>> SPL unnecessarily increases code size, memory usage, and boot time.
+>>
+>> This change ensures the BBT is scanned only in U-Boot proper, where the
+>> full NAND subsystem and dynamic memory are available.
+How do you guarantee that the content that you read from the NAND is not 
+corrupted, or read from already spent cells, or is even aligned with 
+what U-Boot would read after scanning the BBT ? NAND suffers from 
+considerable bitflips and short cell erase cycle count, the bad block 
+table scanning is very likely mandatory. Disabling it because it 
+increases code complexity and size is not a good reason for disabling it.
