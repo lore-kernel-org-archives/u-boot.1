@@ -4,96 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2781CFD37F
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 10:18:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16A1DD0E6C1
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 10:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3386183FD6;
-	Tue, 25 Nov 2025 11:18:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DCC183FDB;
+	Tue, 25 Nov 2025 11:33:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CeojhPxS";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XXyxvqpo";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OOfP/wrR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF61D83FD9; Tue, 25 Nov 2025 11:18:08 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D270383FDC; Tue, 25 Nov 2025 11:33:22 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA1CD83FBD
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 11:18:06 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7c6d1ebb0c4so3429226a34.1
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 02:18:06 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CAF583FD6
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 11:33:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5AP9wNuu2659054
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 10:33:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 65tFglqRL57RNDVhTWXbOG1bJSZAxb2ClDBZuE9vOpI=; b=XXyxvqpo0VJRqsTx
+ FbVAvWRWJZ6yiETmIwMwVEGBfuFwjaSqU1ob/JcOPVW5gw3iCMziYjp/06v10BmS
+ lap3k+59g0etXIiZcaa+hrxjGB+lVLfVRY7OedLnZ15smLYijEL/3w71vg75Dh+a
+ +pd61GFlt9WNnuA8lhWlEb06jZzJ3iw0PWlUtMvY1w0VcfYFutOBjzflhi9rDdcb
+ lq4Z+IcMrtNRpd89ftxWHGmY53PyZWMWVXKv+eyNU89m3Oh7Qq9hF5BToL36ZVnm
+ nEm6x8oASvmsP87zfER3Zu5oftVymcpXHhSUEtJRHb9K7biUdXKuwgS8OzqHNBTW
+ OiWR1A==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ana9x839a-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 10:33:17 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-3437b43eec4so8557700a91.3
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 02:33:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764065885; x=1764670685; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0ekJWS3cAWHpYP+Gad6UsHwVkUCxuLHAP3ynT6WVyh4=;
- b=CeojhPxSFtiAPTOB0bZBNj9hBTYey61ahAduSdEGWjzIkA2/+J76O1Ot49lifDYzyU
- r0hdHPCglCytzC979XSArxNZv1mZhVE8cb2h5fcZosK5d4S/pkx9DYm7IddKUsk1gooa
- /UOqNRwf56bb/1+UkU4wAAM/pBJxf8hhdiwNzW2r09bWDZNZdCVN7kxcAPL2QJEw6PFE
- dMf8ls5/Nx5SdVBjIaoitbp1Mz4sw1R8itrhy6iWHxryl4/3DwHMWhiFGAqAR+8udQ7m
- 3k9rxhyuJWDIUzdn3zDz+pEpBZsx+xlt0A6AlLAvuMC9LAtpuJNAR+/Aa3MXDqNqAAiN
- timg==
+ d=oss.qualcomm.com; s=google; t=1764066796; x=1764671596; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=65tFglqRL57RNDVhTWXbOG1bJSZAxb2ClDBZuE9vOpI=;
+ b=OOfP/wrRLY/qlAh8ojgRQtV9waHhKud1s8QPAlZZG6ttXWB5ZEjGYQPVTusiFP063F
+ jLEO9W0XNWJpmWIEB0QIvVVy9aF0m+YqYmG1blKMYcQp0XHA08f2e2ebbJJ9E4Mo33ym
+ hOjoh0eoU7xMpqoOa4LPEsCIIl5/B/X+iPRhhuQKboTCYXhnBTnLDua18V5vJCFJZ+O4
+ irPs3S4ZR8ggKxoWSxN88+fCgvsLN3UwUYq0ZOxuC3/EtRrYVCMxfpZYvA3tSwOmUk/I
+ nOTuGGaX8lG8egIy9XGLkA8CyWMeCrFHDs4fzsqsbcve5/qr15gGVEYy/AaC0iBnxXJ9
+ eMPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764065885; x=1764670685;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=0ekJWS3cAWHpYP+Gad6UsHwVkUCxuLHAP3ynT6WVyh4=;
- b=BmjSeMyGlbzh230YgPoqcCMpIiGRUWQIkCCNABNb+PgrOeEZgJoVGT5Pl8dANXOGq1
- YZjsjwN7xQlGYy1NzfIrdlRIT8hczXYHLUkjqWbDtqOiWLNoV4ss4aoJNwUwU/gNF885
- +7mi9879z4xLovfvfFfqzYZcdkhg1lqDCs1LJMTpMxlbpV05D9wVFCyF65oNte/fiw2f
- 6hGtnHTfkMNiCpfq2U9xX2Y2umvBMeR2MUHnpyI3PDIM08h3QKkEStFlMb+jz+85TlCW
- Bg/5gC6AJ8T5ib0ZjTD0gtiBwW9+tqsJyrx/ZJcjRBT3PHjM+kqucJJgt7r7iMiCRzBJ
- vvGQ==
+ d=1e100.net; s=20230601; t=1764066796; x=1764671596;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=65tFglqRL57RNDVhTWXbOG1bJSZAxb2ClDBZuE9vOpI=;
+ b=a5TAxfu2N/zlJU2DwA3qEYd8kdx+1IiwGCmCc5YOWL+9rV7ArwqO9OnI1J6fW4nINr
+ J55OKdUA5F+QY+sCAaTm0qH8EAzVCsIfuPlreIT3m8uhd2K5YHKFeMZ97Ocdfgg62kPF
+ Fq3V26+7z6TYMl9Cyqh6YULzf4KO2noNn2z4GtDoxjcOwERqBqeGaXi/W2dEiwzLKqQy
+ W1u15MgGPJJjg7ZEt6T2PU8mVvBJkcLdK2T9vDsiCMUAXFJVc36x16IBakLAYOCHJu1w
+ 1FduBfsL1BXpmi8qauMA/NmebQmMBh/N6AkAdXhG2wf0mq9ZAa0kwJBqN5or5DypOCnA
+ OvwA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXFJPrMN7eHIuUVKp0z9sS7D8xsiMOtlpeQZauecIfhdfavOyp/EPS95cz35s6l5r3okz3LpFQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy9Zh1MfGYjdV/4/9BcXOLDL5lOOPyHFpzYgdf9CBEmwpFlyym+
- 1lEtplTm8y7S5AuZeoFfs4zQ+cSqFDO5/XwToNGxS2pTDPszdPPtDfU8wY+dR+A0M+25gIdXZN/
- Qvt1UTwgDJk7Q6eTrzS+YuCLNQKlUmmE=
-X-Gm-Gg: ASbGncvQgDoSGisURRzKvdPeRcgmRqzlv/ORAOmo9+QfiwoJPjM2h07tGqsHUo4OeRX
- 4ls3yT9o4L+WudiDZRJVKdkBAShkKM3CchBW/3vlIP0TdPPzkgbwAxMrjfntmA2pmqPCdO3nNrg
- T186qczz5gZ0c4FGx+hNk6qCgbVEoeIbK9MhshdIsmEMt2SlShRGr6ZWCrZHIVcjOiea5feMoaJ
- dhNYeMf7F1oWVk/L+OCiUoCL+9PZPO8sbg4+/V+oK7fIPKlR2frtrwtUv8jTNyVwP95bQ==
-X-Google-Smtp-Source: AGHT+IEMDlPkMNsUZAB/VGOX+YeZdQ1jT5ugXgJvnV+TGmDj5aBuBOJvSNj8a9O3Wpv1M3mgSSJMILknY08CJHc1yJs=
-X-Received: by 2002:a05:6830:268b:b0:7af:353b:95ea with SMTP id
- 46e09a7af769-7c798be781amr7065938a34.14.1764065885445; Tue, 25 Nov 2025
- 02:18:05 -0800 (PST)
+ AJvYcCXbyu3LlVSNHA2OI2c4YyyAhiku8N8J/9Frn5NejM2h0Rk45zPKlPIFcYgk1u8L61UO08IaTzw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwClBqJxdnGm0SyqvOXgWGwJDge3ra3Idmhl0ZBTs2EcETAMnCJ
+ wMeADlT2wo48d67I7Dh6IPHX1Cg8NWYqObGqGxV6KI11mRdwSbqkkNzv7VLFJUe1UGlrxsPVTEy
+ g3mZe5ZWAyW035XcBN0h/Wv0q/IspSY7DpchI4CHLYr8wS2DNiJ7nr/Wx
+X-Gm-Gg: ASbGncuejflvT33p/qrxZuwa7qjUmUIIFLvhCVrVi6PBVL/w2Ccgn6PbbpN7UHArQQo
+ xZ9eNa0oyDDkiB3WN8wfDPquxp4f6SQsq2mpjBj8IpT8dWyEOwNdTn9lKj3KBkH+/7z90GVpbO+
+ XzXhOS2svLSN8PW2DNP8pdnh/Vab/WS6hVefzGHgnhGg86bQPkVHZcp3zWys7TIK0klj3sUZsDq
+ 57slmxhooMXbhZUGd++iRVnf7Db4KGzHq+l65Xg/m+rojFz0QJNWsTadyIWcEUCJI/wr8oYIY3h
+ b/VmvHPoHTGf3b5QCxSwEtieM3T5cY+/FmTKBUWBlUAHhfZeqemnB0FqKvhqorAlkT9XSkehF1s
+ ZOSUyb2p6KeHvlBuoqH9nDO70yLCRh7c=
+X-Received: by 2002:a17:90b:3fc3:b0:343:60ab:ca8e with SMTP id
+ 98e67ed59e1d1-34733f14df2mr17996680a91.17.1764066796375; 
+ Tue, 25 Nov 2025 02:33:16 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEnhb/y8rh+ZpclI/ATc1fDg0xtWFnDdFub6ooDmwkRW1RLWLYdXco85j9BLNn5xVIraNQfwQ==
+X-Received: by 2002:a17:90b:3fc3:b0:343:60ab:ca8e with SMTP id
+ 98e67ed59e1d1-34733f14df2mr17996618a91.17.1764066795746; 
+ Tue, 25 Nov 2025 02:33:15 -0800 (PST)
+Received: from [10.151.41.95] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-34727d5208csm16411458a91.15.2025.11.25.02.33.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Nov 2025 02:33:15 -0800 (PST)
+Message-ID: <acae301f-3e16-4f4e-a2b2-fb1cd786c11a@oss.qualcomm.com>
+Date: Tue, 25 Nov 2025 16:03:06 +0530
 MIME-Version: 1.0
-References: <cover.1763140421.git.jan.kiszka@siemens.com>
- <c1dc5e70f6bbde1f2b7dfd027a90f09bb4c1e939.1763140421.git.jan.kiszka@siemens.com>
- <e39163e2-cf21-4a73-8170-8066d93db049@altera.com>
- <c536c33d-8330-49b1-821d-3d218c49ae23@siemens.com>
- <CAN7C2SCEnkiLtRyiRx9ykLWOWJFNkUOh-UNZ+Qaq=bD5wk_a=g@mail.gmail.com>
- <c813c1a0-d224-4e82-8494-1a7d2676b29e@siemens.com>
- <CAN7C2SBtyc_i3inaCMBCUr_x40_d1LqEARtb2iJms=rHt2TtsA@mail.gmail.com>
- <74bf28a9-dbcb-4bf0-8f99-9239018a94a3@siemens.com>
- <CAN7C2SDz08cDgKQXMwJfDf_pVfqhhz2BJhVKHk2WqHP+hhE5Ow@mail.gmail.com>
- <bf13f555-b1e9-4208-9497-baa3870bc0ed@siemens.com>
-In-Reply-To: <bf13f555-b1e9-4208-9497-baa3870bc0ed@siemens.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Tue, 25 Nov 2025 18:17:54 +0800
-X-Gm-Features: AWmQ_bnPwehiBqqzmIxHGa_C4kujp3Lg7enqEbrIgJzWdgXpkbOuBpaKJ3Bcfa4
-Message-ID: <CAN7C2SCQd9M=ghBFt2t2Kg1w=VLA0DOMY9HnbwTH2Yram1iYfw@mail.gmail.com>
-Subject: Re: [PATCH 3/4] arch: arm: mach-socfpga: Adjust a raw sectors for MMC
- loading of U-Boot from SPL
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: "Chee, Tien Fong" <tienfong.chee@altera.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Marek Vasut <marex@nabladev.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>, 
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/7] drivers: phy: qcom: Add QMP USB3-DP Combo PHY
+ driver
+To: Tom Rini <trini@konsulko.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com, marex@denx.de,
+ malysagreg@gmail.com, arturs.artamonovs@analog.com,
+ utsav.agarwal@analog.com, vasileios.bimpikas@analog.com,
+ ian.roberts@timesys.com, nathan.morrison@timesys.com, peng.fan@nxp.com,
+ alif.zakuan.yuslaimi@altera.com, kory.maincent@bootlin.com,
+ sjg@chromium.org, jerome.forissier@linaro.org, ziyao@disroot.org,
+ stefan.roese@mailbox.org, mkorpershoek@kernel.org,
+ rui.silva@linaro.org, ilias.apalodimas@linaro.org,
+ luca.weiss@fairphone.com, quic_varada@quicinc.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20251124155503.2839766-1-balaji.selvanathan@oss.qualcomm.com>
+ <20251124155503.2839766-4-balaji.selvanathan@oss.qualcomm.com>
+ <20251124195108.GN2125796@bill-the-cat>
+Content-Language: en-US
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20251124195108.GN2125796@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: t5omtOPdecXJdeUF1zdTwGuxmvNfalw7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI1MDA4NiBTYWx0ZWRfX8KKKnYNqhXcq
+ Kex+svYBz9pfOOt6FZBcWLhwOxvV+CeV+DeWtY7PISiVREuAeSB0eiwk7fR/QPWpLV+NvvHAO0O
+ o/hhh2UZaBknOU+XBTnyJa6IvOIcP2AxbRxDIvrVrHJUkKQHKpTQEkveQSrQ7BMEfWXThdzUfMq
+ HDFWDDbbnGrdnl/YlUINMYHnNSb9CpIefo7UmYJcG5GbvWeFvOq71Oz9URdXzXGatT9jA00mmil
+ ZrsHMPlnO8TB1BB2gIY5SphttYQrQqxnN+m5IvD3OUwzQBNixwVq2+rX070PdU+34rB/vY9EQLC
+ AFoxJpx39gYo6MUpgdO34zfGUBhVmBY8SQTAIG0Cwfg8wzsdSbmA0tgHSOvvp8YUzIKUpfqyJum
+ 9X1+fVJHZz3zhZBlgtXy3gZ7dq7sng==
+X-Authority-Analysis: v=2.4 cv=Sfj6t/Ru c=1 sm=1 tr=0 ts=692585ed cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=OiyNyS6jHDBp4_hPUT0A:9 a=QEXdDO2ut3YA:10 a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-ORIG-GUID: t5omtOPdecXJdeUF1zdTwGuxmvNfalw7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-25_02,2025-11-24_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 malwarescore=0 suspectscore=0 clxscore=1015
+ spamscore=0 impostorscore=0 phishscore=0 lowpriorityscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ definitions=main-2511250086
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,24 +162,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jan,
 
-To be honest, it has nothing to do with the board.
-> Different boards.
+On 11/25/2025 1:21 AM, Tom Rini wrote:
+> On Mon, Nov 24, 2025 at 09:24:59PM +0530, Balaji Selvanathan wrote:
+>
+>> Add support for the Qualcomm QMP USB3-DP Combo PHY found on
+>> SC7280 and QCM6490 platforms. This driver currently implements
+>> USB3 super-speed functionality of the combo PHY.
+>>
+>> The QMP Combo PHY is a dual-mode PHY
+>> that can operate in either USB3 mode or DisplayPort mode. This
+>> initial implementation focuses on USB3 mode to enable Super-Speed
+>> USB support.
+>>
+>> This is a port of the upstream Linux files to U-Boot:
+>> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/phy/qualcomm/phy-qcom-qmp-combo.c?id=3d25d46a255a83f94d7d4d4216f38aafc8e116b0
+>>
+>> Enabled and tested the driver on Qualcomm RB3 Gen2 (QCS6490) board.
+>>
+>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> [snip]
+>> diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
+>> index 0dd69f7ffd0..49f830abf01 100644
+>> --- a/drivers/phy/qcom/Kconfig
+>> +++ b/drivers/phy/qcom/Kconfig
+>> @@ -12,6 +12,14 @@ config PHY_QCOM_IPQ4019_USB
+>>   	help
+>>   	  Support for the USB PHY-s on Qualcomm IPQ40xx SoC-s.
+>>   
+>> +config PHY_QCOM_QMP_COMBO
+>> +	bool "Qualcomm QMP USB3-DP Combo PHY driver"
+>> +	depends on PHY && ARCH_SNAPDRAGON
+>> +	help
+>> +	  Enable this to support the USB3-DP Combo QMP PHY on various Qualcomm
+>> +	  chipsets. This driver supports the USB3 PHY functionality of the combo
+>> +	  PHY (USB3 + DisplayPort). Currently only USB3 mode is supported.
+>> +
+>>   config PHY_QCOM_QMP_PCIE
+>>   	tristate "Qualcomm QMP PCIe PHY driver"
+> Can you please do a follow-up to fix this tristate (and any other in
+> qualcomm specific Kconfig files) ? Thanks!
 
-deconfig itself also requires alteration from first place.
-As of early this year the boot detection, so any sync
-patch had been pushed?
-The detection is completely universal on cyclone V HPS.
-Unless you have the power to reload the HPS bootloader.
+Sure Tom, will create a seperate patch to fix the tristates.
 
-But long story short, I did not have any issue on
-Cyclone V socdk
-Custom board two variants on size.
-"=E5=B0=8F=E6=A2=85=E5=93=A5SOC Cyclone V" by china vendor.
-Which this board is a clone of DE0 nano
+Thanks,
 
-So I cannot see how DE0 can have such power to defer.
-So long story short this patch is not really a must.
+Balaji
 
-Brian
+>
