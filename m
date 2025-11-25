@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C2E0CFD364
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 08:14:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 156EECFD315
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 08:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE86883F9D;
+	by phobos.denx.de (Postfix) with ESMTP id F0F9283FA5;
 	Tue, 25 Nov 2025 09:13:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="RSG5n09u";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Eb8KWLT2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2878D83F72; Tue, 25 Nov 2025 09:13:38 +0100 (CET)
+ id BBE1B83E8E; Tue, 25 Nov 2025 09:13:38 +0100 (CET)
 Received: from CH1PR05CU001.outbound.protection.outlook.com
  (mail-northcentralusazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD6CC83F85
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 09:13:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4980583F88
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 09:13:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KuoTMcYGwE7Jk3vaDCO16FZmIMYwMnILop3P+InMzVhLtfMP6wpKPHcb9CWlvh1R17FO9/t+ZR4yJ51yBwPOLpxeqKQaWhnzJqTWgAZl2SIrZfsy7Ih+3s5OdOC8sBfzymye2uOfqIPwzzlCCZFsLfFtRhz4B31wpnZLoZE2OPd1foDSyvQjR8G3XjXP092+T+eKrnG9ch86leZHTOnm/XVU/ybfRf9BjE8TTwGD670w1F1g/nf9u7tITaekAOnFJllyMN1u8RvT1q5wc+xyh6j2wV34ekqT1D95ThqtHPRaq58tD7NSTtVqi+J/lWAa6CRmG/dPFduTKX+NFOmzOQ==
+ b=yA4RSH9z21MCAKixKtJxguqlEbsm4aR4LhpRrAd7KTtsuoGjducEHh0SY8Yx8tc4fQIeq9ku0vAyObqnAQpo2+3Ir4urrMTDd00xyFgp4WksDxLESQkM4hKyZ7OmZZWxDIHqPT4kr03lNkvp2YpvwLLSQ0BYm5lJEjERf5yFjf5kvVEKCAukGwd5AvqJlgk0QWaDpeR3kRpU41DIBdd/D9WxOofR0V9sXeMNKdH3ltuzwpjrJ8BJ7tfqyPO6ry581tO+Ok75NfXK/EnOxMWQbVxWNt0q5o9zC8fs0jpElYMXrbJG6N44v1RoLpeu7hXVlUL3eks0dJgC5WX8WU22YA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Z/OuUwlq0xxHWmR7k5ITQc9INNbCuq2aAhjGtDAhtvs=;
- b=Anh3R0myQUv16hYlYiRYghFhd272X4ETmtP4rlQHsZrNXTNVYOTbftXgMsXIu1BoqUfd1dbBf7bv58H673ctGeuv7McVt9Ym1sh5zhiPj4eViLv9iVeWm12Y6QYfnbJfdeavHHoTToi0CTnuH4iyS3s3ysb5dK6gQYcB9s+H+cmnVT9Qd5xB1myAQRxZaoD0Zdu24ktcFGjtKx5jiE1NMv41WMg0rU4tWuGXK9TiPkBZIAaoXGBmM4ennt47OSyYUgeNmY5CwrNwx9eWP66qAu+4YaPso7bapG3MJYP+2OS0B5c10CIJpAxQyxXsRNhsmuUjtUMrSxp8KetsZ7n8dw==
+ bh=ATg8KO14tTH3lODgKiqCypX944Dkeq/8f4RPIMtuVqw=;
+ b=w1YErcaH6w2+jdtLCu/RXdD72CQMZRLO9h4kbQw4/KkFWNXd4bIAJEGaCiB+OuLHWygnKMungMMerYaeSx1EQLFRk+kwVjpTmgJf+EnGodrllig+JgtMWE+xERroJ6mk7e7jSf4uov9iM5Rp2dIjCOpXauqAc1AstKTHzFZHGKM4MoEOqjSMMEsZq+SJtdU0muRHoX+K677n/1n6ibJCZrbQkPPwYLh/zzTxh1sMJjDD567TrnUQ2mM2/K4LPah5F73dQWAd4RhgNztwUU1Vr7pUhy9hUJqwFTQlGo1Ymzidz4oz6JKGW+PGJsV54etIsCviRoBou/XoPWSOP0rVkg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Z/OuUwlq0xxHWmR7k5ITQc9INNbCuq2aAhjGtDAhtvs=;
- b=RSG5n09uyZQEzHs2zMMgET4P4KmfBV3p/TP3oictmA6gaI07BfOX/exWUszRfaxDlGsxnDk7dAyNkK6jk9R9wPbMErib+ialWyLu6bqpLE9emdaqUQ6qEQkE8qzzjZymUwfrY53w6XGawHqnvZB/iOVKiEcOShutBfukwoDha9JU9ljNX0oB16xH7lWtFzbqSmizUpb9/x7MrW6b7JowGDmAiGMgGDOq2CcTzk4Wbq4hgXc7mSxoTT0ODLhX9ihANb4kD5qNx/4DJZWXoL5uQK2kxOdwqbs+f0rEA1F6/CRQl71khYflV4QYdE1qepgMvDWLXynmXOsuiizhH0ZT2A==
+ bh=ATg8KO14tTH3lODgKiqCypX944Dkeq/8f4RPIMtuVqw=;
+ b=Eb8KWLT2W+7pFrj3n4F8CGcS1pnWn9L+aMDZVrgdWZWJWhXQSJUI4Jm1NlxaxQwJg6Rgcwnv2cuw9VaXrI9XZ/nhpF+ySAkA2+1QvCIw2r0RiEEDxJIH2LE+Eb494t8g9QwMYgz3WdR0y2er04uDmJLS421ELhH2/l6CcjblRxvQoWqAWlc+8AiCuHE5ju6bYdsDGtbkopIjEsS8nJuUmKBaYGQp0Inc3SLK60JH612FXVe7l6/5aFPo+ORHcHZIN1WnYxRIqX4/vVMA8KAK3fZMD0dD61C1jR09SeqnSMUlHMNJopKAgqR1hznxwzJAyuDfEzznhJTVhejvumydDw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from SJ2PR03MB7072.namprd03.prod.outlook.com (2603:10b6:a03:500::15)
  by DS7PR03MB5447.namprd03.prod.outlook.com (2603:10b6:5:2c7::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Tue, 25 Nov
- 2025 08:13:30 +0000
+ 2025 08:13:31 +0000
 Received: from SJ2PR03MB7072.namprd03.prod.outlook.com
  ([fe80::194c:fdcc:dc20:149c]) by SJ2PR03MB7072.namprd03.prod.outlook.com
  ([fe80::194c:fdcc:dc20:149c%4]) with mapi id 15.20.9343.016; Tue, 25 Nov 2025
- 08:13:30 +0000
+ 08:13:31 +0000
 From: alif.zakuan.yuslaimi@altera.com
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@nabladev.com>,
@@ -61,9 +61,9 @@ Cc: Marek Vasut <marex@nabladev.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Jan Kiszka <jan.kiszka@siemens.com>, Brian Sune <briansune@gmail.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 5/8] spl: Remove ARCH_SOCFPGA from MMC raw mode enablement
-Date: Tue, 25 Nov 2025 00:13:13 -0800
-Message-ID: <20251125081316.17329-6-alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1 7/8] configs: cyclone5: Update boot command for CycloneV
+Date: Tue, 25 Nov 2025 00:13:15 -0800
+Message-ID: <20251125081316.17329-8-alif.zakuan.yuslaimi@altera.com>
 X-Mailer: git-send-email 2.43.7
 In-Reply-To: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
 References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
@@ -75,77 +75,77 @@ X-ClientProxiedBy: BYAPR06CA0044.namprd06.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR03MB7072:EE_|DS7PR03MB5447:EE_
-X-MS-Office365-Filtering-Correlation-Id: 45cb14e7-b578-4abe-9972-08de2bfa8471
+X-MS-Office365-Filtering-Correlation-Id: c8255539-0afb-4c49-65c9-08de2bfa84e0
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?h9HuURcSP0c5x/FUABJFFqdxK7VwBtB8BLCsvpdTzXQ3zok5RSeEXAOih2x0?=
- =?us-ascii?Q?AIUnXjtnOl4sTeBJT/kmQj4ym6cU8W4UHEfYsj5x2xm9CFtgrAC6HJ2+OVz7?=
- =?us-ascii?Q?rVAIr8bjnJyZjHzLRYmU+6vpbiRvNThlImeYX4iuVDU9JeQ3hLYxNKL9awQN?=
- =?us-ascii?Q?8VbnUEr5s4JRfweZWn3gLXKjdJjjiwioxBafniwFU5nhlBYQZo3dkYk8KmoC?=
- =?us-ascii?Q?VEvCwBYC9YtSjC3+jTz9cmAoBKd1LEjcM5X4zfHXs3hsOnu8dnd6GttQspkV?=
- =?us-ascii?Q?nkov8fefde3bWKKdFaBfWEk+R/MB7QIdU1mg5zJ4/LVizJ9DYKVk4JQ4Txih?=
- =?us-ascii?Q?RY+LJfpEnjIUIg/SpTtMCw10jtOj+ot9jeX5PJ6Sdc8DSTsvp6sZ0VnA04xk?=
- =?us-ascii?Q?osaNeHZpNLR+4s+k50KykBF/fjUkjpe1z6tbk73vMcMZZ6sXq8yIiEAMrE5S?=
- =?us-ascii?Q?Rg+Ees6O7/tZ0c5AFqfqkJ6GqU0uu9YkKl6uCYWjhbZ2W4s5pNPGsCStoUqU?=
- =?us-ascii?Q?ao36zNONKLFPTxwgT8Zj5v4DuO1/lldgu3UIEDwq3n08drjy0IFh/+QgKjjj?=
- =?us-ascii?Q?vN4dzkLUvaHMgq6qeBbk9eXCAvDfI7EeKJRJao1ch7w4lP23LYEThFwIqA1n?=
- =?us-ascii?Q?fA/dgOJuIJbTvKTI+SWjNAU7tiCjfLe+XjJgjEo0F0et3j//PGr8IjF77Bn9?=
- =?us-ascii?Q?f/gOLN0EESeMe3uF07SD7c6ttZk8qlPogI5BLpPjgHO1lLbrVyipHnryUf52?=
- =?us-ascii?Q?tQSxi+8nXT8KCA4K13FU2HcqovOyl18mFG/xUvTZP0tOJ52VR12JWyxdHXCX?=
- =?us-ascii?Q?+bEx8QYxWphmQpoNhVwZslfF7bRCluJ0k0Pg7pSOTaxBWnitQEumQwSkPdVZ?=
- =?us-ascii?Q?QXFQzGSGl1N/zwoIsOhXg6uolBCyamcZs05lIVKJdZ1TOVB8bheVRNOgNvRV?=
- =?us-ascii?Q?Zdo8t04ERLyJ9MDBvZ4D2aE51Q2tX7qOlWEbulEKrl+BOu4XcsN+YnZgLz7m?=
- =?us-ascii?Q?BqVPhbnCLMHalFMna8gFh4+j7gHiBTEfpesaVBN4lrlPU+g7qUUBnPCHUjEO?=
- =?us-ascii?Q?kfSgIhTfzu4qwnknaKrV4kaGMxClUj0NFoheMvElzBOWbx1aX4IZ2QIfWrtb?=
- =?us-ascii?Q?jlDXdNzzta/U/TBgPIn2Ai+KABgW1omin2IcnAjwFrtIzKQ265znl6DVZtYf?=
- =?us-ascii?Q?IR2LNUXHlsfljruzMy/H0Xaj5VCpnPIE95Wuir9zemiEX8LD/Momx/+jZq29?=
- =?us-ascii?Q?k5pvOtdc9GPjahfzxScdNPJjJVlX7JZ3vJB0HE0SN6rAdNKBBI/m4GF5w7OF?=
- =?us-ascii?Q?cfqTl/diXGF/zuxseHRopF4kdOoqndb09rcdkHsdfnSIzI56xiL9WO1ptu2m?=
- =?us-ascii?Q?hIuAhVn3qULg4Nn8SqNB/ojHK1ZZImLRPhRGABA/DUM7No9I615xgHEXjuR+?=
- =?us-ascii?Q?uN9+kqv2M2pKg6x1cw9v1FbBhby9GGF5?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?3PEvbb9Uwm39Z3Rc+yYKYPGhmDF3SdRukue+QVtMi/LTdqVgVH+M6eHt5Ltz?=
+ =?us-ascii?Q?PoDJvp0V2rNIo0KaaaJUKvdPIyP6/WwtYcS8HRI8Arvfe2qtVf7JbRU78JTl?=
+ =?us-ascii?Q?I3ejzrVGfsTvQf43yuCRaok+jScNtEBx9BWFGM/j05JN2Mil3rJjlApivMHG?=
+ =?us-ascii?Q?jcOd/5evuhfAglEt6HZJ1Pf2Xhhum1oQ2FyLBO4DNIcRAm4QLJuqNkCxKzQx?=
+ =?us-ascii?Q?z4nTErKKcpuGBqD2HZ8pq2n6tgJfZ6p32vOypn9Mm4RNuHwoAoi3Yk0hxHva?=
+ =?us-ascii?Q?qxL6AvCuVL3VExK4EnhZWQ1V4RnaMVuzL4n5CW6Om+QAGe59MCiQh8SW8nXC?=
+ =?us-ascii?Q?DNpQZVi58bfRwk+gqz9YEv3MAkqFFlcGqSw3or1f4nKOXS7M0G1a+J483CuY?=
+ =?us-ascii?Q?Vb1dRU2e7sWKZE/IzrbQ9Dax/DwoEfWTa10yJOof47fPSFkLNlHT0Ypw/kMA?=
+ =?us-ascii?Q?LSZr6AmRYLSLH9lxgNr0PVSJcfJE/vHZ4rmMaJftmR3L6EmX6GTebMF23D82?=
+ =?us-ascii?Q?IXCoI4Xk/PWYS/v564jMIuj2q8k/XJnrdyxGldQsfCfJAhIFLe1Dh/uqy87v?=
+ =?us-ascii?Q?Qt78UkVxx7b6X6BN0jkigb6wplwhPtYCMnaE0ezT7Yj1nXapZXxiTHuz3vrr?=
+ =?us-ascii?Q?lTUhHTSJoul7Kj1Fegop8tlIqg0Pb25Q4jzjFlEaF+Wo0aBv/PyMnv5bmMbm?=
+ =?us-ascii?Q?wG0Waw2fsgXLcg206MLdTIUsEv11lCBuieJNA05joR9E22fx6L/EcVDlWCpv?=
+ =?us-ascii?Q?OjoTlyLXIaRImY4vg6hsxeMAGsvCYDOLdkH3UAXZZnAtAkElTYJMKxlr3uwa?=
+ =?us-ascii?Q?MONPH8n+XfSHwEVes8A6cWx/wgiHxK9kKzCyOFta6DNpDmYmjlb+bTLJz5ry?=
+ =?us-ascii?Q?0RTaxU35GhTwKWWmrwBKnzX+zPaDn8LbJQIHGHw5lzCeRwxXiUL3e60CaEyq?=
+ =?us-ascii?Q?JlO9kY9f2s+dL0cqrTQzBgVkar+CnRFhfDPn9BhRb0vGf5zUnxUtg35uXRJ3?=
+ =?us-ascii?Q?hlCycRmXqGjc3uHRspQCdcQBmpMuwoj33Bs8vaZQ4gGx4XcHmkga28oLSiWB?=
+ =?us-ascii?Q?7pGjIryyrYcaqBrIj6ifRBXbuV5YnvM0LDlr2QYsGm+rVTyzQ4Rh7MQXR58B?=
+ =?us-ascii?Q?CTda4LKSgoDF+1fCDqXJ+A0sNdW0KexYLzfic3Y5mv1d70ObERggrXj/jbkA?=
+ =?us-ascii?Q?eLQKX5WG/f+EHfiZOw/hZSMcTPXfphA0kymtadISkMy9gZ16yr9hr4ZwF8ME?=
+ =?us-ascii?Q?MXliIEUD1ScKwj0Y5qBJqRhqy/L4V5LFrgDcGJVnNa7Um+imiUa5rOmt1u0D?=
+ =?us-ascii?Q?ojtdnxBtX6QhqhyHfehSDN0pYCdPHmBg0TGLP/RIUpz62/dd1ny0yczjFWWj?=
+ =?us-ascii?Q?cuugeueLPE9oGzRZdzTj8orq9O/4cNlXzUdDflXzlDx6BnTKtxz0gmxIsaft?=
+ =?us-ascii?Q?x0ePrO0EB32N+UMsv45vdIXsvwPNpHI2?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR03MB7072.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?SpbX/+QHdOrwJgA64otvRkhw0Qx5q64NZVX4Swnf6Rj1XJHbLqPk9C7vEcJQ?=
- =?us-ascii?Q?7K3Y1D4LZcf8LRluVckO//dmigyA8xkkZSYRNefU6MZXv+asmkpRCplrvb78?=
- =?us-ascii?Q?xKw55IVzmAmR/JpIHNff+zY2y/PhnOI0nCroyHgH2ScaZ/6NYwALjOe/I+ly?=
- =?us-ascii?Q?iyK0vk4xKisid+VC4HksIDa5L2+8U0I+K0X97bKk0OfknwtDo7wdWdg03pT7?=
- =?us-ascii?Q?cxK/Rnu9xxLu6Z8zmHlmSI8hm6a9erSuLfSVvgM67f6vFigKWrbc7gnVd1OG?=
- =?us-ascii?Q?Iers83kXrwjvjt1voXXQ2UWEjz9GSFK3rvNjmLIoA7lVf+41nBOhPLfL6Tc5?=
- =?us-ascii?Q?vfGdxA5W5WnGW4nzKv+/c+zr+33XPAzn/ECSPU5/8osEEgPYX9Um7JuhbVAh?=
- =?us-ascii?Q?v19YXuU9oUTtG/GOkyxFL2VrUIBTA8BLBywg6BeBfOBSmhx+PjFNNQKZgGq4?=
- =?us-ascii?Q?px1f4ggBxEIfFjJwayia5KjHjsCryNd1ag5HUe9EsPdo7QMA6JxCcu/K3wTU?=
- =?us-ascii?Q?oj5KNeSsuzUoqqLdG46+oLn3/jMTJ8ShsCAaA+SUFwmsnOJqiTIoyDS1hMWB?=
- =?us-ascii?Q?0juBkcFuDBsLgTuwkyrA859OwxCudQ2RucpW+0PWBF4IESWM3vBPfL9CuL2F?=
- =?us-ascii?Q?R/ejdMJx+Vh+Ix9lZuze8M0txqqp0fI5qm6CaNNBl8jORmTWcCJMiAxGGKwp?=
- =?us-ascii?Q?+Ufc3fw8uDj1zpx04ypzLA555xrHDic2fSGufQ4J/4l2vWMSjPlzahKuXeye?=
- =?us-ascii?Q?rtUW9NTardy8Ouqxq02pnAEGDd5wm3zGuxjqmmCdS1PB1xheikyw0QTGBmNs?=
- =?us-ascii?Q?BwT/ECK0WGnX4f7GEvF7IwsKiPNQbswKlHG9KxZBgweC7oxHHN1q559Bake5?=
- =?us-ascii?Q?i+G2qI/WgT1biPuSASZds/f1ThzDSq0OF0o1Br9MJUDep4X9uuhsniUbB2FA?=
- =?us-ascii?Q?0eMVzHct1ir310mwWRHrSRZKORCWZejCuQvC015gsP7uwHFf85zEdSfVHpT+?=
- =?us-ascii?Q?DXPWfoaMiqtr8eaty1Nlv3a6BcjF1ECVgpWdlQLq7rmHRuFISZNN2LVgvR9G?=
- =?us-ascii?Q?fHe147Ho/cajMJRNEkEbp5K8IvwIkQb3ubQm0oGfOyFjhrGZitoIzh0xec+/?=
- =?us-ascii?Q?At5TwMHNvu3iBO2gVN6csnbuSU1C7JQXmohGjecfHKOz2pB7L346nScWiz/j?=
- =?us-ascii?Q?GJ0kgIk12dOTvQc/UPZOcG3sitWqkx7OMVcAixaFYi6ndxkj03HpJu8zBwig?=
- =?us-ascii?Q?rOtI3vYF3pHeQT6HnvjDymo7BN1e+qho5U1+SQbzBGVDyS0J7CJ97xuFvjoX?=
- =?us-ascii?Q?2h8VMdketHFQBgLn40Cy/7mWYnv78sbMb5wr4h7lWKqjmDzEo/F5ZGnmJZ4U?=
- =?us-ascii?Q?iuTE6YADHqUownxaSEbwqrFwhA5BWb+QTzReJaCdq9W4//JtBgaF82mxpCVz?=
- =?us-ascii?Q?XtTa/kkR2wpS0ayYWJETTgLwbBHNLlJxAhdvlgXkrwxfM14fv4t1cpcF9JjY?=
- =?us-ascii?Q?6zdJuLE66iN9wv8kScwsR3/Uf7pY7Dzg+Huzs5zh6+z0so7SS3fB8EMjzilE?=
- =?us-ascii?Q?CUDtY29FLNVlxSTIVTrPynCNGXW8u9Cddi4vMHJM7GFWDEsHbaG8i8p0yiO3?=
- =?us-ascii?Q?qA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?qCiKVNwqpYzJi3CBClMu5JS+KPIy2QZ+xJnh8QaMmQhgx+YT7t9H4m+yhtZc?=
+ =?us-ascii?Q?NCgIUz6Qfa/OtnVnXTxGbfBn5PlbknV3Q1BoDoICrLGh5RPUzsi6J66yX9FX?=
+ =?us-ascii?Q?SsrUjoPpB5Khg+BiP97Dhgo9zDu3R8qWZ/4O0mPnYnJQwTxzhCR6Y3eu2/0E?=
+ =?us-ascii?Q?aW41KUPuyF2XPbYgoV0a4tOFVsa9HEuJHkS/VK2LgVLYo3kSlHET0iYwV+Z0?=
+ =?us-ascii?Q?DkeQ6/f1Zl6G442pTW8rcmhDSF+nDLgRS2cCp1LzTcZ9L3rroySnge0o6o7x?=
+ =?us-ascii?Q?X68Y+oexLvWdtFmgi4Iwu3JSnj3j0OGdFxoV24cx1fehwfLoMGtqnhtZDzNh?=
+ =?us-ascii?Q?YkKERQIisij3hVizbYhxW6gP4UtgiV6gtRThiWSSHrl0fUCohtFMrVfHsgt0?=
+ =?us-ascii?Q?XAjf9aolmxqpMW/lwmfpuRoJQ91lKE8jb8yRMCkRDTpa5tcygGK+5/YdNg4e?=
+ =?us-ascii?Q?Vkw7mF+MmLuYbjWhHgAHJUkYmKiwX0P9eLOrxARB2cSZCmvxgv0nj+0+0ikf?=
+ =?us-ascii?Q?bUoIp56ykUdbwrcZkQ/7lx4Q6/orjsAsecRvHYC3nWRV25d4fPqUGJAGm8+F?=
+ =?us-ascii?Q?Zh00wl10LL9+wgLHpjPA0oFOc84dTYimy9t4M6hYNCG+QNzmTRnMyvwiThki?=
+ =?us-ascii?Q?GXHXTjqoAQYiox19a9SHFyDvlxjhbo+cHLp+WM8W3GxLrII0LwYWgjcYcdJe?=
+ =?us-ascii?Q?EDVfv7TiaLCAx2cnT5ZHTsSZKh/0NdVqX12ARiZ6ZEjLtWgw/6J5pwWGUW02?=
+ =?us-ascii?Q?noIjpDta+V7lo8hHVktRC6yLuJonz1VVztdACqVqKVal8S1xBtZXFf2aKxry?=
+ =?us-ascii?Q?cacf8Q2xVRVh6VPiGou0nZWts0M79qMeujdN8ND7ZoV81FJLnZb96pM5Yo6u?=
+ =?us-ascii?Q?SH14ZbZQHS8Ywb2UHpuq5EkXknoyzFk03/CtB1Oa74eugdlj91sgcfGd4r/d?=
+ =?us-ascii?Q?inTxMG/iSXnw7Kcl3X6bJ6k/cMnNzaJ+Jw4MB8TOJ+XrGi63ZWDr3GiDvLQr?=
+ =?us-ascii?Q?P0zaMK7Y0lTkZOrKvCqLfHh/BCyY21EuQSWQngqqFx60fgOdNjbwYaelZOYI?=
+ =?us-ascii?Q?t2Xe4EBekt7cuDzSMGTZIK/NOAufnqSRQQhfinHHhvvW7q3NDyOxEF8PrO9X?=
+ =?us-ascii?Q?SI6BycKhIEMC+8Vk/ULVQYN/Smao76WrlL1jycQW2e9f1BlK/7kUPFU65SXV?=
+ =?us-ascii?Q?RYu52Wf/IG2GT7VvOt3D/R8s2LD14rtIpSOc2YhxVUWiEt9kB50K/D7Q/RR1?=
+ =?us-ascii?Q?291W1tOShRC0UrvPdHzLH9nsLeVTiCDsLjAEVMI+3KgmpbVUzMZjUEMBqN9v?=
+ =?us-ascii?Q?ZUwYhSihulrJH3W55SPneS+z4hXXegcNavlNaLUU59aMhoHXv7oX+At202PZ?=
+ =?us-ascii?Q?ezIf1ylSIysovtfChDiLVPYczEXdgZeuYxrIz8IUxw+tsA0ONYfI+kO6LXf1?=
+ =?us-ascii?Q?lRlx1c3ctdlMQV6sPM70ZH3py6tHt1WBYcmga6y0fbutTD2/1Lk8DpoYgtKV?=
+ =?us-ascii?Q?tpf0IZo5R12/GvZu3p/RHu9+tMEmBqtOmPW5I2EeEjGK6YF3fK18+tBUvqZl?=
+ =?us-ascii?Q?zyUy9jPADToZKhKXzuB43Iah9B+i62AZHf4w4X6TkpKONTgiD6CfiNJTisND?=
+ =?us-ascii?Q?nKkBpGKM8oD1ve2Olf81E1A=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 45cb14e7-b578-4abe-9972-08de2bfa8471
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8255539-0afb-4c49-65c9-08de2bfa84e0
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR03MB7072.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 08:13:29.7784 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 08:13:30.6077 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: r6H45IZdQfc5+LGBoYbmcHwju6dzBV+S8TgD7ANqAMs2g2CXU4/JeuLwAi0pTfNd2QLfJQPm98m3ink2fJCMJCSnxtbwljyA+X03lBlprRc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: Jk5h43RztiGFLiJ2bC7hu5v28ZpIFH0G9SR6kaZ6+9cCxE/bql64RMSPOkidry7x1S6Cx4BWbFVqNpaWXt2VXfMnzCRRbKKhEmKBZ3Ce/kI=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR03MB5447
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -165,39 +165,26 @@ X-Virus-Status: Clean
 
 From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-We no longer use raw mode to boot from MMC for our devices in favor
-of FAT filesystem.
-
-Maintaining this config for legacy gen5 devices as to not risk breaking
-any configurations still utilizing raw mode.
+Update CycloneV boot command to sync with Altera official release
 
 Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 ---
- common/spl/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ configs/socfpga_cyclone5_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index d24466b0c66..142cdb34cd5 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -545,7 +545,7 @@ config SPL_SYS_MMCSD_RAW_MODE
- 	depends on SPL_DM_MMC || SPL_MMC
- 	default y if ARCH_SUNXI || ARCH_DAVINCI || ARCH_UNIPHIER || \
- 		     ARCH_MX6 || ARCH_MX7 || \
--		     ARCH_ROCKCHIP || ARCH_MVEBU ||  ARCH_SOCFPGA || \
-+		     ARCH_ROCKCHIP || ARCH_MVEBU || TARGET_SOCFPGA_GEN5 || \
- 		     ARCH_AT91 || ARCH_ZYNQ || ARCH_KEYSTONE || OMAP34XX || \
- 		     OMAP54XX || AM33XX || AM43XX || \
- 		     TARGET_SIFIVE_UNLEASHED || TARGET_SIFIVE_UNMATCHED
-@@ -590,7 +590,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
- 	default 0x8a if ARCH_MX6 || ARCH_MX7
- 	default 0x100 if ARCH_UNIPHIER
- 	default 0x0 if ARCH_MVEBU
--	default 0x200 if ARCH_SOCFPGA || ARCH_AT91
-+	default 0x200 if TARGET_SOCFPGA_GEN5 || ARCH_AT91
- 	default 0x300 if ARCH_ZYNQ || ARCH_KEYSTONE || OMAP34XX || \
- 		         OMAP54XX || AM33XX || AM43XX || ARCH_K3
- 	default 0x4000 if ARCH_ROCKCHIP
+diff --git a/configs/socfpga_cyclone5_defconfig b/configs/socfpga_cyclone5_defconfig
+index 2b2435a27bb..94bb05d20ff 100644
+--- a/configs/socfpga_cyclone5_defconfig
++++ b/configs/socfpga_cyclone5_defconfig
+@@ -16,7 +16,7 @@ CONFIG_SPL_FS_FAT=y
+ CONFIG_TIMESTAMP=y
+ CONFIG_FIT=y
+ CONFIG_DISTRO_DEFAULTS=y
+-# CONFIG_USE_BOOTCOMMAND is not set
++CONFIG_BOOTCOMMAND="run fatscript;bridge enable; run distro_bootcmd"
+ CONFIG_DEFAULT_FDT_FILE="socfpga_cyclone5_socdk.dtb"
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+ CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
 -- 
 2.43.7
 
