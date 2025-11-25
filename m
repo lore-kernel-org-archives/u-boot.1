@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3BF3D1036C
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 23:43:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE16CD1036D
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 23:43:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CC3884180;
-	Wed, 26 Nov 2025 00:42:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 84F9984172;
+	Wed, 26 Nov 2025 00:42:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Lx7lQ/3I";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="JB6RyljF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C249784159; Wed, 26 Nov 2025 00:42:38 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id 04C94840B0; Wed, 26 Nov 2025 00:42:44 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9F328415E
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 00:42:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 022FF84172
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 00:42:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.bonnefille@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 78F6D4E418D1;
- Tue, 25 Nov 2025 23:42:36 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 8D1F31A1D5D
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 23:42:39 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 50405606A1;
- Tue, 25 Nov 2025 23:42:36 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 64B35606A1;
+ Tue, 25 Nov 2025 23:42:39 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 952C4102F08B6; Wed, 26 Nov 2025 00:42:34 +0100 (CET)
+ with ESMTPSA id 593B3102F08B7; Wed, 26 Nov 2025 00:42:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1764114155; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1764114158; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=YYsat+DPZ90G5V/H66snwPX+nLrXk6IhngjZC0yjKFg=;
- b=Lx7lQ/3IPU35cxd1mzS1EuPKmpdiSM+ONZhSeLOQJKkQzVcteyFBUIgCiz6nZJBFpAHQS0
- 9hykZl2rKKya8HBvkhvLSIfU8i+evvA4b7icU1sJKurS/SOAz68q/ZV5u082UVD0fCtwsY
- cILu5gogVyojr96EaNYEMgCq3wXQRSvVGUy0drXbntCiava0t6r7kEAiEBlSBOEZ1bgaW2
- eESg4R/lvNdHNRKhZz0t3pspRwqb8DfOmThvyGrJZ5sNWk/KP/Gp5iP7g3ov1DYexPx3FI
- ooTk3MQgFu1dFSPuTyEyiHipj1fpJ6leQJLxdxdO40czSXot2+MQ0n5nGCSqXg==
+ bh=PdPW9b4NRmp2SRIdEBIE+AGtlCqFGFH13D18tzWdWQ0=;
+ b=JB6RyljFtI2x1VoDAODfeoJzlHa6To3rVQqYHDHHpyTGVuUJ1+et0FIxZty8DFVxtlSU4k
+ s4KcNaNSp/FDRvNoWAB5mF4s7GZvQ1jXcajCdudG6mqedC3B2xo2xHf7mp/O6RrK9Z2+eA
+ rBEnFmoieo55rs3NvC9XC8pY0UKmGkQvNrR8qriIzeMk85D89JMJ1lSLyP4t9b7yD7E8Se
+ RaUotIzOMjNB8gyJ76C1GNEST9yYPUAAPZ2hf9T+HK8NR0nL0BTS3jmWvBjQLhD65jqK2+
+ gLQLwxNJhXKP88N4oZso3feI6T6O4tZAcLkGhtXTtYIArh+MeU+NLf/qtMoM3A==
 From: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
-Date: Wed, 26 Nov 2025 00:41:55 +0100
-Subject: [PATCH 3/5] mx7: clock: add pwm enabling clock function
+Date: Wed, 26 Nov 2025 00:41:57 +0100
+Subject: [PATCH 5/5] board: toradex: add splash screen to Toradex i.MX7D
+ Colibri board
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251126-repair_imx7_splash-v1-3-d3877afb7381@bootlin.com>
+Message-Id: <20251126-repair_imx7_splash-v1-5-d3877afb7381@bootlin.com>
 References: <20251126-repair_imx7_splash-v1-0-d3877afb7381@bootlin.com>
 In-Reply-To: <20251126-repair_imx7_splash-v1-0-d3877afb7381@bootlin.com>
 To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
@@ -77,68 +78,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add function to enable the clock of the different PWM controllers on i.MX7.
+This commit fixes the PWM<A> that was previously used as a GPIO output
+instead of a real PWM, it also reserve the framebuffer region to
+preserve the splash screen while the OS is booting.
 
 Signed-off-by: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
 ---
- arch/arm/include/asm/arch-mx7/clock.h |  3 +++
- arch/arm/mach-imx/mx7/clock.c         | 29 +++++++++++++++++++++++++++++
- 2 files changed, 32 insertions(+)
+ board/toradex/colibri_imx7/colibri_imx7.c | 40 +++++++++++++++++++++++--------
+ 1 file changed, 30 insertions(+), 10 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-mx7/clock.h b/arch/arm/include/asm/arch-mx7/clock.h
-index 48c7c3367a5..03d1cc76e53 100644
---- a/arch/arm/include/asm/arch-mx7/clock.h
-+++ b/arch/arm/include/asm/arch-mx7/clock.h
-@@ -347,6 +347,9 @@ void clock_init(void);
- #ifdef CONFIG_SYS_I2C_MXC
- int enable_i2c_clk(unsigned char enable, unsigned i2c_num);
- #endif
-+#ifdef CONFIG_PWM_IMX
-+int enable_pwm_clk(unsigned char enable, unsigned int pwm_num);
-+#endif
- #ifdef CONFIG_FEC_MXC
- int set_clk_enet(enum enet_freq type);
- #endif
-diff --git a/arch/arm/mach-imx/mx7/clock.c b/arch/arm/mach-imx/mx7/clock.c
-index a8328a0b224..72e0051373f 100644
---- a/arch/arm/mach-imx/mx7/clock.c
-+++ b/arch/arm/mach-imx/mx7/clock.c
-@@ -524,6 +524,35 @@ unsigned int mxc_get_clock(enum mxc_clock clk)
- 	return 0;
- }
+diff --git a/board/toradex/colibri_imx7/colibri_imx7.c b/board/toradex/colibri_imx7/colibri_imx7.c
+index 69a8a18d3a7..b5d22337a04 100644
+--- a/board/toradex/colibri_imx7/colibri_imx7.c
++++ b/board/toradex/colibri_imx7/colibri_imx7.c
+@@ -7,6 +7,8 @@
+ #include <env.h>
+ #include <init.h>
+ #include <net.h>
++#include <fdt_simplefb.h>
++#include <video.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/crm_regs.h>
+ #include <asm/arch/imx-regs.h>
+@@ -29,6 +31,7 @@
+ #include <netdev.h>
+ #include <power/pmic.h>
+ #include <power/rn5t567_pmic.h>
++#include <pwm.h>
+ #include <usb.h>
+ #include <usb/ehci-ci.h>
+ #include "../common/tdx-common.h"
+@@ -114,7 +117,7 @@ static iomux_v3_cfg_t const backlight_pads[] = {
+ 	/* Backlight On */
+ 	MX7D_PAD_SD1_WP__GPIO5_IO1 | MUX_PAD_CTRL(NO_PAD_CTRL),
+ 	/* Backlight PWM<A> (multiplexed pin) */
+-	MX7D_PAD_GPIO1_IO08__GPIO1_IO8   | MUX_PAD_CTRL(NO_PAD_CTRL),
++	MX7D_PAD_GPIO1_IO08__PWM1_OUT   | MUX_PAD_CTRL(NO_PAD_CTRL),
+ 	MX7D_PAD_ECSPI2_MOSI__GPIO4_IO21 | MUX_PAD_CTRL(NO_PAD_CTRL),
+ };
  
-+#ifdef CONFIG_PWM_IMX
-+/* pwm_num can be 0 - 3 */
-+int enable_pwm_clk(unsigned char enable, unsigned int pwm_num)
-+{
-+	u32 target;
+@@ -123,6 +126,8 @@ static iomux_v3_cfg_t const backlight_pads[] = {
+ 
+ static int setup_lcd(void)
+ {
++	int ret = 0;
 +
-+	if (pwm_num >= 4)
-+		return -EINVAL;
+ 	imx_iomux_v3_setup_multiple_pads(backlight_pads, ARRAY_SIZE(backlight_pads));
+ 
+ 	/* Set BL_ON */
+@@ -130,10 +135,14 @@ static int setup_lcd(void)
+ 	gpio_direction_output(GPIO_BL_ON, 1);
+ 
+ 	/* Set PWM<A> to full brightness (assuming inversed polarity) */
+-	gpio_request(GPIO_PWM_A, "PWM<A>");
+-	gpio_direction_output(GPIO_PWM_A, 0);
+-
+-	return 0;
++	enable_pwm_clk(1, 0);
++	ret = pwm_init(0, 0, 0);
++	if (ret)
++		return ret;
++	ret = pwm_config(0, 0, 6666666);
++	if (ret)
++		return ret;
++	ret = pwm_enable(0);
+ }
+ #endif
+ 
+@@ -142,12 +151,11 @@ static int setup_lcd(void)
+  */
+ void board_preboot_os(void)
+ {
+-#ifdef CONFIG_VIDEO
+-	gpio_direction_output(GPIO_PWM_A, 1);
+-	gpio_direction_output(GPIO_BL_ON, 0);
+-#endif
++	if (IS_ENABLED(CONFIG_VIDEO) && IS_ENABLED(CONFIG_VIDEO_REMOVE)) {
++		gpio_direction_output(GPIO_PWM_A, 1);
++		gpio_direction_output(GPIO_BL_ON, 0);
++	}
+ }
+-
+ static void setup_iomux_uart(void)
+ {
+ 	imx_iomux_v3_setup_multiple_pads(uart1_pads, ARRAY_SIZE(uart1_pads));
+@@ -277,6 +285,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
+ #if defined(CONFIG_IMX_BOOTAUX) && defined(CONFIG_ARCH_FIXUP_FDT_MEMORY)
+ 	int up;
++	int ret = -1;
+ 
+ 	up = arch_auxiliary_core_check_up(0);
+ 	if (up) {
+@@ -313,6 +322,17 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	}
+ #endif
+ 
++	if (IS_ENABLED(CONFIG_FDT_SIMPLEFB))
++		ret = fdt_simplefb_enable_and_mem_rsv(blob);
 +
-+	if (enable) {
-+		clock_enable(CCGR_PWM1 + pwm_num, 0);
-+
-+		/* Set i2c root clock to PLL_SYS_MAIN_120M_CLK */
-+
-+		target = CLK_ROOT_ON |
-+			 PWM1_CLK_ROOT_FROM_PLL_SYS_MAIN_120M_CLK |
-+			 CLK_ROOT_PRE_DIV(CLK_ROOT_PRE_DIV1) |
-+			 CLK_ROOT_POST_DIV(CLK_ROOT_POST_DIV2);
-+		clock_set_target_val(PWM1_CLK_ROOT + pwm_num, target);
-+
-+		clock_enable(CCGR_PWM1 + pwm_num, 1);
-+	} else {
-+		clock_enable(CCGR_PWM1 + pwm_num, 0);
++	/* If simplefb is not enabled and video is active, then at least reserve
++	 * the framebuffer region to preserve the splash screen while OS is booting
++	 */
++	if (IS_ENABLED(CONFIG_VIDEO) && IS_ENABLED(CONFIG_OF_LIBFDT)) {
++		if (ret && video_is_active())
++			return fdt_add_fb_mem_rsv(blob);
 +	}
 +
-+	return 0;
-+}
-+#endif
-+
- #ifdef CONFIG_SYS_I2C_MXC
- /* i2c_num can be 0 - 3 */
- int enable_i2c_clk(unsigned char enable, unsigned i2c_num)
+ 	return ft_common_board_setup(blob, bd);
+ }
+ #endif
 
 -- 
 2.52.0
