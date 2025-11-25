@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F96CD10362
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 22:15:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82F65D10362
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 22:41:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C78CB84159;
-	Tue, 25 Nov 2025 23:15:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EAC4484142;
+	Tue, 25 Nov 2025 23:41:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JV2jtwf8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MHk3i+4N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F04384154; Tue, 25 Nov 2025 23:15:25 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 4A81A8414B; Tue, 25 Nov 2025 23:41:37 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2061C84154
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 23:15:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A6FD840E6
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 23:41:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-6418b55f86dso10244472a12.1
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 14:15:23 -0800 (PST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b73875aa527so974643266b.3
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 14:41:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1764108922; x=1764713722; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1764110495; x=1764715295; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z8Qv2P46PUorLTylr5C9+YCygJ7WxxmK+aeG7Fo6iTE=;
- b=JV2jtwf8TVBPE9bPXeaqjcuJd3WDjG+okS97X5xq3jB4jqN0f2EkaoPSL1BTEJNf9/
- dEGbroye2Q18wDkoNedR5CeXUW+Uk7Watj4doC/64ekr7n4lDKXi9OSR8S5/g5FoU0Jc
- 4BkE89FsQLQjN2dV4EKsmKlVAI0GofFkakD8Y=
+ bh=GDsGopUjgfwVNAH7biL7SLVcUod72fCgESG3kbswY00=;
+ b=MHk3i+4NPnOgnr0xQ0VmluZnN3fjsqI0xwhUXgSDd1mPYGTZx1MMrvUFB9HD/3gsI8
+ MoRB+ePIYTjB4ZJzdYaGWCv6QdF8+6unPl7FkGd+7I6Zb0OGTqiBnu3EIDLk8lst0LU0
+ TK2pijDadr6n0CgLhP+EgIMdkqVfGJMxVv8O4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764108922; x=1764713722;
+ d=1e100.net; s=20230601; t=1764110495; x=1764715295;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z8Qv2P46PUorLTylr5C9+YCygJ7WxxmK+aeG7Fo6iTE=;
- b=cDQ/SmOfQ8gdfLk131VSZx4+TfA3jSQRbzmhaNNpBTjUc3JVLLkpZer4BzvLegq0yD
- C34LrDSwXGJOUFvcK6TeCdGEzOdX22SsJPWendFeBoULrkbNG1qVVA4eutF+VVdt1PIB
- Een9uHQsn5jlH/b102eTRmSuyJ9vZkVbWtyW8bOz0atSOvHmwOc6YUP4VurESLIs+Lyf
- 1d185vYbU/+iYKq0CKEvjzpUwWeLhd85GbhxrL3dnB4jsujvFlPNrspo2n03sQGqplfZ
- WPk9X8K4Y8MjIK3fvGwneg2XiYWdwpyoizjN+/ySr2QctuaBMSDouba/za63ukwmTcnQ
- B1Gw==
-X-Gm-Message-State: AOJu0Yz9D6za+ykLkYZVqKnHzWB3T92SnEJGCPtJJPM6KDz6QBO69BbD
- 6LWzwj6XqgWTBtdJR/WEWxYv6HwHBdTxFs0fWxqtLy2o6QjSm967exEmUcL3bXBMxdMk+EZADPL
- R0H2x45K+Hd3HODoee+im8GA3OqxDCc87gF9NX+CZ
-X-Gm-Gg: ASbGncsPpMG1PIbq4bgXQ4o3XqCTFSJ2Tvb1Ffk9FjO/h2BXpA+JCpU8kroUu05pYMa
- saygsv8CVIXgzK7YYdSiagRHyeLlF82JSxNhnAneFs7pWLwmKtUXXEpK4glMIgmVlts6PelLXD4
- PzHANUUArn3G/RaXQ5jUZf9cif0S/XW5LYkKRddn8ptY18zr6UjECBA9KowdTRxXitaQAM6ULIv
- vG9z5iw1L78iPuoe6qbIng47K4qs4MvutG2vXW6jNrMLVq4NezwWyUMPw4VGzlH5FtE9g==
-X-Google-Smtp-Source: AGHT+IFmOIaHKQhX+1hdpzyPv+DpbJBH+bzUlvA2CR4PAv2wwX4eziiAfSGGxgqag61mYnRCgPYujVYCndtsp6UbIrc=
-X-Received: by 2002:a17:907:928e:b0:b73:6931:558a with SMTP id
- a640c23a62f3a-b76715aba52mr2035800966b.18.1764108922563; Tue, 25 Nov 2025
- 14:15:22 -0800 (PST)
+ bh=GDsGopUjgfwVNAH7biL7SLVcUod72fCgESG3kbswY00=;
+ b=L7Lu+401kDbL4cBexZbZmgi9Oc7sszptwVQ4ktWCJ5tzK70TIFvYE7bLPaIkK5RoVZ
+ 9VoimOep/yeTPAZSy1wPK6L5WfvZByFmdPf4z7DwsCsHzfLZZ9zQhALh4hWoltllEUAi
+ zFepbnsaoYm8G4TAI5Mk109W3vEa9uEov5vrOz6XsiUUkE+msONncmm3HHA0pMoG3ip9
+ NeH+prYjqF9sBTfis09/8GAhxEiPKrNvuKtnP9tNt++iybYu3rigPBCimrKCGXAWkLgm
+ 8bB+/8MxDijmvKolpDpMJm6cSQ/zCgglkjxFCSJsL+2c9wRpTU0VaS35q8zlZu6FGCkD
+ nxGA==
+X-Gm-Message-State: AOJu0Yxuc/BHTj18wb5YCymOdCxictm2mVgSALLorS21BZZujrHK2pox
+ lD9h6Gli8P87x30Q2di2KKvMClElV05+UCwE/O1jJ0CV2WJsR7gu6M0jIdyevVKQrO2dNGdWIzo
+ 8k7EscPpIsbbPYNsFHmckP9+eR7hoFauEOf42h2R/
+X-Gm-Gg: ASbGncsIECVKLb8gnelllar0JPFuYz/CHoxHjVRK8S6KNhWk7cbUAc/rlCeIMk+h+vg
+ hi6NJmCfVzRDq8i03Gq4WHkf5DPy1F389WeakjmxxGFAXBiP0qIhNwRbfGL/xfn8zSkuuIYaI4d
+ HPCSfXzveG13QX0ij1oThGNo27TNUuyLKc9jnK19aIIH1i+SjIErdb3GUsXydbSQkJs4c+cVEQB
+ 0pEtneeG5PZEc3Pj9f4EtBMpup0DrwAkYDCM/WgXGW2BQueGynSx8o07qJ3502FblRUpA==
+X-Google-Smtp-Source: AGHT+IEP8cETY+PIxE9Ox8Zx8ZL0p2RkrGcyV69uGNx8OcyUpHYlg77zGiDL2mv5Tzh8USRgtiPfYM1dCNoLcadfc9E=
+X-Received: by 2002:a17:907:2d20:b0:b73:8bdd:eec9 with SMTP id
+ a640c23a62f3a-b7671558a7dmr1971061266b.5.1764110494840; Tue, 25 Nov 2025
+ 14:41:34 -0800 (PST)
 MIME-Version: 1.0
-References: <20251121-binman-engine-v3-0-b80180aaa783@cherry.de>
- <20251121-binman-engine-v3-4-b80180aaa783@cherry.de>
-In-Reply-To: <20251121-binman-engine-v3-4-b80180aaa783@cherry.de>
+References: <20251121-a-few-test-py-improvements-v1-0-bacb4148fb0d@baylibre.com>
+ <20251121-a-few-test-py-improvements-v1-2-bacb4148fb0d@baylibre.com>
+ <CAFLszTjm94_iH5srp44mTMDJ-vJSAJMtgisBs+E=fNWk++KP6Q@mail.gmail.com>
+ <0d1a05c3-6a29-404c-98a2-3b820bfe077b@baylibre.com>
+In-Reply-To: <0d1a05c3-6a29-404c-98a2-3b820bfe077b@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 25 Nov 2025 15:15:02 -0700
-X-Gm-Features: AWmQ_blV5ssnZbICSLFZA8dymaaJOLg-0uj6zsrTJzr2QGHBYnvkbvqT-vhFtWI
-Message-ID: <CAFLszThxhLBEm731QjvB-wbOGryGBfh1_09NeWNy13nLwqZW4A@mail.gmail.com>
-Subject: Re: [PATCH v3 4/4] tools: binman: fit: add tests for signing with an
- OpenSSL engine
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Shiji Yang <yangshiji66@outlook.com>, Anton Moryakov <ant.v.moryakov@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
- Bryan Brattlof <bb@ti.com>, 
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Eddie Kovsky <ekovsky@redhat.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Yannic Moog <y.moog@phytec.de>, Quentin Schulz <quentin.schulz@cherry.de>
+Date: Tue, 25 Nov 2025 15:41:23 -0700
+X-Gm-Features: AWmQ_blkh_bRSJndvFpNVPj3M8ixj5r_8Q-ypl6xdiC-JIt-WF6XdiTmsjqeFxI
+Message-ID: <CAFLszTgoa=Yk+XS5jUXigoko_5dHedYn7qMyYYbmdQcTA1dGOA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] test.py: check ubconfig exists before using it
+To: David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,79 +93,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi David,
 
-On Fri, 21 Nov 2025 at 10:15, Quentin Schulz <foss+uboot@0leil.net> wrote:
+On Tue, 25 Nov 2025 at 15:29, David Lechner <dlechner@baylibre.com> wrote:
 >
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+> On 11/25/25 4:14 PM, Simon Glass wrote:
+> > Hi David,
+> >
 >
-> This adds a test that signs a FIT and verifies the signature with
-> fit_check_sign.
+> ...
 >
-> OpenSSL engines are typically for signing with external HW so it's not
-> that straight-forward to simulate.
+> >> diff --git a/test/py/conftest.py b/test/py/conftest.py
+> >> index 8ce680a92a0c37f36489b0782921d6cf4078850d..f889e3d3ae26db3ae19f79e236a281471d4b6de9 100644
+> >> --- a/test/py/conftest.py
+> >> +++ b/test/py/conftest.py
+> >> @@ -613,7 +613,7 @@ def show_timings():
+> >>          if too_long:
+> >>              show_bar(f'>{get_time_delta(max_dur)}', too_long_msecs, too_long)
+> >>          log.info(buf.getvalue())
+> >> -    if ubconfig.timing:
+> >> +    if "ubconfig" in globals() and ubconfig.timing:
+> >>          print(buf.getvalue(), end='')
+> >
+> > Please put 'ubconfig = None' at the top of the file, then this can be:
+> >
+> >      if ubconfig.timing:
 >
-> For a simple RSA OpenSSL engine, a dummy engine with a hardcoded RSA
-> 4096 private key is made available. It can be selected by setting the
-> OpenSSL engine argument to dummy-rsa-engine. This can only be done if
-> the engine is detected by OpenSSL, which works by setting the
-> OPENSSL_ENGINES environment variable. I have no clue if dummy-rsa-engine
-> is properly implementing what is expected from an RSA engine, but it
-> seems to be enough for testing.
+> I think you mean this?
 >
-> For a simple PKCS11 engine, SoftHSMv2 is used, which allows to do PKCS11
-> without specific hardware. The keypairs and tokens are generated on the
-> fly. The "prod" token is generated with a different PIN (1234 instead of
-> 1111) to also test MKIMAGE_SIGN_PIN env variable while we're at it.
+>         if ubconfig and ubconfig.timing?
 >
-> Binman will not mess with the local SoftHSMv2 setup as it will only use
-> tokens from a per-test temporary directory enforced via the temporary
-> configuration file set via SOFTHSM2_CONF env variable in the tests. The
-> files created in the input dir should NOT be named the same as it is
-> shared between all tests in the same process (which is all tests when
-> running binman with -P 1 or with -T).
->
-> Once signed, it's checked with fit_check_sign with the associated
-> certificate.
->
-> Finally, a new softhsm2_util bintool is added so that we can initialize
-> the token and import keypairs. On Debian, the package also brings
-> libsofthsm2 which is required for OpenSSL to interact with SoftHSMv2. It
-> is not the only package required though, as it also needs p11-kit and
-> libengine-pkcs11-openssl (the latter bringing the former). We can detect
-> if it's properly installed by running openssl engine dynamic -c pkcs11.
-> If that fails, we simply skip the test.
-> The package is installed in the CI container by default.
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
->  tools/binman/btool/softhsm2_util.py                |  21 ++
->  tools/binman/ftest.py                              | 223 +++++++++++++++++++++
->  tools/binman/test/340_dummy-rsa4096.crt            |  31 +++
->  tools/binman/test/340_fit_signature_engine.dts     |  99 +++++++++
->  .../test/340_fit_signature_engine_encrypt.dts      | 100 +++++++++
->  .../test/340_fit_signature_engine_pkcs11.dts       |  99 +++++++++
->  .../340_fit_signature_engine_pkcs11_object.dts     | 100 +++++++++
->  tools/binman/test/340_openssl.conf                 |  10 +
->  tools/binman/test/340_softhsm2.conf                |  16 ++
->  tools/binman/test/Makefile                         |   6 +-
->  tools/binman/test/dummy-rsa-engine.c               | 149 ++++++++++++++
->  11 files changed, 853 insertions(+), 1 deletion(-)
 
-Not sure of the changes from last time, but I assume the test coverage
-is finished.
-
-Not important, but I think instead of:
-
-+            self.assertIsNotNone(signature)
-
-we typically do: self.assertTrue(signature)
-
-and for:
-
-+            self.assertIsNotNone(signature.props.get('value'))
-
-self.assertIn('value', signature.props)
+Ah yes, thanks.
 
 Regards,
 Simon
