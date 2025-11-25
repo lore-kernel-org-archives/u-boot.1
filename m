@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E41B5CFD364
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 08:13:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 709D9CFD315
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 08:13:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AB5683F93;
-	Tue, 25 Nov 2025 09:13:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8855583EAE;
+	Tue, 25 Nov 2025 09:13:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="vXjxwg8M";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="wtOacHWk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A67983F87; Tue, 25 Nov 2025 09:13:34 +0100 (CET)
+ id 4328D83F82; Tue, 25 Nov 2025 09:13:36 +0100 (CET)
 Received: from CH1PR05CU001.outbound.protection.outlook.com
  (mail-northcentralusazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CBD683EAE
+ by phobos.denx.de (Postfix) with ESMTPS id C66C483F70
  for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 09:13:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ch0Ybo3zTBtY+6UTqYdUtBVGdls4hGvZWBcjVJdgRm6gpnJi80KkFF52yjTPZSoLcP2ocTX0wiNUaB8mqtUDy/X0rBf6sXpPYzC7OGZPSyPiGCdlUwa8jIbdyVpDaRncmB65zABkqxluIsasmxpMeTuZUeRoY1w+oh3659pIyMxBPX5X3evBZw79/3iuSRJDlkTe9BO63E4dgfUp2zDJeoxdXtHkoiTrX2mVeIiq5HoziLZpdXQrCIZUdyThD4udfxJcq4kxKevzqRmXOQf5WAlL8qBQNtw7phxNzG2SrbE36Umx9Tig7gWhCmbmQ0gl45BBzba0V0b8J0tfRgKBYQ==
+ b=FiWtMpV95mVdokQhUKANNdSRDbjeuIXWLSwfXqE/1aRpzPaIAxFO4kV8zazuKQNKJ5nDD3IWtrqbrMKa63ImVpd3cleyjwZ976PYwPzobR942SO1PMEKwelUS7JwFFkgzl9S38ihw4eoShM1hJzJkB+rGsN4VQnnyhjpIpdEYLAFGjEK0XO1lwUSvA4mDOOe1VkeMRG10rUxiRTT4vQv7xbYog4MCRe/lA9UDRdSoz6ZdFxgseCw79Q9hqlgp2dT9q0bMn0/V2l6fx6zcmgE2volPTgHLKNTDo8KIeGOjgtOKiuf43aI6MoTLz7m+2vQgyiroG2Dh2n1l8Oq8VGXkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8etTl4i0Hu5qXTEcfCEG/t3mqnpyNBClUtM1KXn6B3g=;
- b=nTO5jtOzzYe/nG6U8KYdD1WV/EhMk2WqQf385t1aVvYhfNDSrBENFxtflk66kvq4EAfpmxRAYHP93ROroFRRSpWES/U+Zj5H0N9/URvsg9/gj/n7q1tItSRM5gYVQ5JThPfbSNvfffNr8o7p0gv/0G8mpM3/dnd32uyIup8WMPWWIafwwkCqU/2kQ1DPWJgqd2kd+1a5CbgtOk5m/SCU0LPzV2jANIKBQtCzFeb8kIwv0IVwR0wwJH8zSdB7lwkcUC/2Fm9mLs0x9kib2wZZ5ObPMcC+6vwqRJCSF2j+pehDcBozVGRm2tJcr39PmWoe24m+rabmMIWe7NvrPIvoMA==
+ bh=ZwUyA6KEpOwTK4AOTM05gTFiiNXHiBeSO0vqRiT4cQ4=;
+ b=WXQRbmFyQj3K/gx9nadYwY64EqZFzlwabXvGyoOGft+dBK/Q8kCiq1FDoTbo1XxjviuoVEMR3eqABbLBCWm6Nq2sLkz78YV43oBOso5s0t1t70V7/PR2xNrY7EckYFi+3JyzyoGjx9g3NpiUCxePnr42aeTbYUdEpl31GYZhBow51GWL+vA1fhYyrmoybOpLnZCUh/C1x3m1xBuPg76fcez8OXVC2OCwkGv9qpuVh6hiMT/4LCuWNcs98FxXT1G6dqAxEr7l9MCUQRCmgWTO2QO6KMPhSw0Y3H31wSsF0RgM6KWXYZyt8JRBXuRTBJzc/hMQjLZJznVzjKYX/sdCWw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8etTl4i0Hu5qXTEcfCEG/t3mqnpyNBClUtM1KXn6B3g=;
- b=vXjxwg8MFuSZSLX4+NcOvwfMT+zUNvCVxeZcCgCQ1zHw5QtZKmUdw1rUNvp3yOIb3pobS8Ww4vIMlad9qRYML/21l8uCyiF/ncucmSrnDuqap//B9k05pvYh0K3lxnALdRqVajWCIkTwdSX4ngtyGuYA4Zw8wweM9rxAobYQQsGFwLfTyR/an+vqHzZb+jrdtr+vp01YSGqAexVJD0g93eiUguSrY+XVK/qkUgMe+YPtMYPxuFE9ZwnqJqb0tdCjl7ba3kQooy441U3I+Az9NpbDxtmOvOGAVNic6QhK8a3f/h4MQ1OmuvrT0ak90oIrX3AZv5NJtuMxV5jpP9xJnw==
+ bh=ZwUyA6KEpOwTK4AOTM05gTFiiNXHiBeSO0vqRiT4cQ4=;
+ b=wtOacHWk+zwaE+RUS6QK0QeiKzAXaBiZwennKJJ3PFGMRjym+xswJOS72KkxSLUNWoJNIwwS8pJLbuYAINjY74OQg4AhmQWI8SC4m1BZxBRzaZ/3gTHrZEwZkAMNjDrm/6Kv2drC+O/xecG+twQEVLAlkPfd3AAl+cbdeGr8d/RjsToquyWWXCF0HpnVDW1s90M8ClVlWOw5EvBnwnxV/XDnDm0LgG271vmJuJj5aV+SEgClbwUKBtJsWRAs7IrpO7Dz9BwejHEo7H7TpWsXJSbps6jxyRMoyx4d4TrarZ2iN/89e+LpI+ZVuseeLoI4Zjj1CdChLrhu7B5sB8jaqw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from SJ2PR03MB7072.namprd03.prod.outlook.com (2603:10b6:a03:500::15)
  by DS7PR03MB5447.namprd03.prod.outlook.com (2603:10b6:5:2c7::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Tue, 25 Nov
- 2025 08:13:28 +0000
+ 2025 08:13:29 +0000
 Received: from SJ2PR03MB7072.namprd03.prod.outlook.com
  ([fe80::194c:fdcc:dc20:149c]) by SJ2PR03MB7072.namprd03.prod.outlook.com
  ([fe80::194c:fdcc:dc20:149c%4]) with mapi id 15.20.9343.016; Tue, 25 Nov 2025
- 08:13:28 +0000
+ 08:13:29 +0000
 From: alif.zakuan.yuslaimi@altera.com
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@nabladev.com>,
@@ -60,11 +60,15 @@ Cc: Marek Vasut <marex@nabladev.com>,
  Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Jan Kiszka <jan.kiszka@siemens.com>, Brian Sune <briansune@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 0/8]SoCFPGA: Update Boot Support for CycloneV in U-Boot
-Date: Tue, 25 Nov 2025 00:13:08 -0800
-Message-ID: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from empty
+ built-in.a in SPL/TPL/VPL builds
+Date: Tue, 25 Nov 2025 00:13:10 -0800
+Message-ID: <20251125081316.17329-3-alif.zakuan.yuslaimi@altera.com>
 X-Mailer: git-send-email 2.43.7
+In-Reply-To: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
+References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-ClientProxiedBy: BYAPR06CA0044.namprd06.prod.outlook.com
@@ -73,94 +77,94 @@ X-ClientProxiedBy: BYAPR06CA0044.namprd06.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR03MB7072:EE_|DS7PR03MB5447:EE_
-X-MS-Office365-Filtering-Correlation-Id: 11e56d19-f8f5-40e7-ace6-08de2bfa836d
+X-MS-Office365-Filtering-Correlation-Id: e5ef7026-99b2-4243-624c-08de2bfa83da
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?S1Q4dktLanJpN0NBVkJBTTdRODBjYjZqTENVaWlMY29OQktOT3ZHM29TQnUz?=
- =?utf-8?B?MWlwRnNDaXpKZzAwR295eTM5dUpFV0dpRVg4bElpaXU3WS9DbFV0T0ozN0g1?=
- =?utf-8?B?QUo1aVNVVDNIMFdtSXBoM1ZKZTFzQmdpRkZRTjUxeVdrcmZGVlAvU3FmNEdr?=
- =?utf-8?B?bTVjbDEwS1hmWXlJVDByYVV3T3RaMURSdytQR2prZXdMcThCVUhkRUNyU1Y5?=
- =?utf-8?B?QUZvT1g4NzdOSXR4c2N3NUxwWEMyZk4xWjN5QlByZ2kyV1FtNi9VN3NXN3VH?=
- =?utf-8?B?WEM5UkF1Q25WUWU1dWJtT2V6VHd3ZzlKVWtQaVNXZU5xVkhuclhOUFAzalFP?=
- =?utf-8?B?Y3lZZi9FOWsyb29LNVRJcVU0SEFmUjNGMzlSamd4bHNnaGFEVzVMaUQ2S2pT?=
- =?utf-8?B?RzFHbFlNMTZLMnZkT1dGQkpKaWh4TDdLb1QrQVF6VW5hamIvVVloQ2d2RlEr?=
- =?utf-8?B?TE9PYmdjc3BHajhUR1BtdUZMWnNCd1ZkLzlybWhZRVJnNDNleldiS3RqMXR6?=
- =?utf-8?B?ZlpwQjJmbEo5T0prdk1QVmtnMlBkajYweEdUclk0ajRCWTJVVjRvcUdiWjNu?=
- =?utf-8?B?WG5NZ3BNZWdFbFA1Z0lQOGtsb0dDWXJVTkFYdjJ4YnQwV0FNYVlYRWhOWTho?=
- =?utf-8?B?Mnl1d2d5ZUZZQ24xVlZVcXd1SGFqNktaOVplaGk1OFVoL29KdE4vZ1lDMU5D?=
- =?utf-8?B?VzNsOW5yQVNublFpU1ExVWh4S2dPQ1FLVHVUZTVGVDcrb0ZRQmd3QWtKMFRw?=
- =?utf-8?B?aGNxVnkxZWN2L1RRQjN2azhSWVdVL3o4Q1VLMmhJUndUVGUxSllnUnM3VXdX?=
- =?utf-8?B?ZjB0SnRTUk1Oenk5RUJRRUNQUzJjWlRTY3ltVkxTK05JazlDejExUzY3ZUJh?=
- =?utf-8?B?N3Eyck1PMlU0aHVxV1VvT0ZEUFAyemQ3anRTQVNpbmFrTk1Kdlp0TUhjMGUx?=
- =?utf-8?B?YzJaWFc5NDFyY3JGaEI1REl6M3RLY3pZNklhSytFaEF2eWcxbTZ5V2t0Zm9J?=
- =?utf-8?B?VUdLOW5hb2xRN0NGQkFSb1BuQWE4aTRVK2laVnRaT0pNclNQaC9pQTI5UWRG?=
- =?utf-8?B?TXlybFNvVjd2S1M4K1J5NHM0MzVYMHFBZHd1L2tTSG1oVUZnay9xMXI5djZW?=
- =?utf-8?B?UUkvK3VPTzNKcXltd1daRGdmV054cWRNSmk3Mlh1OHdiQkZrcXpVNEVBRUtt?=
- =?utf-8?B?YTRpUkZhdFdwOHZzUEhnbjRhYy8vYW5zK1diN0lMcWVzMUwzNkFmcFJGRElI?=
- =?utf-8?B?ZUZmUzlhUGRmRWhLYndlbzBEOFplcThnMHBnT3AxUjIrN0hPcnhUMDJHQi9t?=
- =?utf-8?B?M1c1OElabW1xOGVqQ2gwZG01clhGM2llenNmYVIvQy8xL2lOeklhOHhvQzc4?=
- =?utf-8?B?emxpZ0daNDlSTzZvZVlFcUYvVjBFMmNGZ1Zqb21FSHJwUHJMdmFwbXZLTm5x?=
- =?utf-8?B?MFRiMFkrQ2puTFFPS3RCVytTbnQvbTIreEVDTnQybG9MYnNHdXpvZU9JUWdW?=
- =?utf-8?B?TVdmVVFYdkNWTUlQWXZzdUpxWDJ3QUVsMHpTS05JeXh1ZThXSFdRME5Ga0Vq?=
- =?utf-8?B?dFFFMFBPWjdLeThoSzJoOVRYYS9IUlU0Y25OT2ZxSWhadGJBNFk5RmphZUtI?=
- =?utf-8?B?V3pDS3NvMjg1ZFcxSlVxek5pbHl2QlpYbFp1RGMvSHhkOE1kd1p5bmxlVFla?=
- =?utf-8?B?YXJEVW1vK2dqWTNGaURqY0txL0FoSWQwYm15cnY4Z0V1WHBNVU1WRE9pTExs?=
- =?utf-8?B?MHhkQmJVRG9pZzl3ZjJOalR1bkNINTBRaG4yMzdkcXJxNXN6RzRCM0RUemJv?=
- =?utf-8?B?ZHNOeWZpUXJSUlNjTWlRWkFPSk5COW16TkNYd2Y4RTV5RmZ5V1hXRm56a0Fi?=
- =?utf-8?B?ejhjUWR4dDNmd0ZWcjJvK1Z3c0F3MS9zUG9sbnI5Yzg5dFhaZFVXSkszd25z?=
- =?utf-8?Q?JTsTp3uZQJip3M9/UJwxB0RtLhT88P4d?=
+X-Microsoft-Antispam: BCL:0; ARA:13230040|366016|376014|1800799024|13003099007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Q3F0QXQ2L3YxU3NTNXE2bnpsM0dKM2xxRCtzS3YwVkNTbFVCaElvWkVDTEhx?=
+ =?utf-8?B?TkpUZnZBRUVFcEljWWdzaVRQOENlZ0NpWnJDdmZ4eUlGb1RWZ2Y0OHdTL0VS?=
+ =?utf-8?B?RlIrZTlMZHNHYisvNGswNEQ5NE1VZ1JmQ3dON2FpeHZhenRuZGxadmYrR21p?=
+ =?utf-8?B?VFJ1ZGRRdENITS9UY3VSRXFORzlHdGw2M2F0R3QzNE5rbGRWaksySU9sSkh0?=
+ =?utf-8?B?VEVpNzNGYUw2ek51aXhyM1p5aHo3b3pxSk9HRm8vR2h1TW52aS9OYm9Ha1p4?=
+ =?utf-8?B?aDhGbXdRLy92cDFXdUplN0hNUTh3eFZpM2JEU2JacXNpOHcvYlRYQ1pXaDVY?=
+ =?utf-8?B?ZmhnRGgzZFQ5VlhLQWR3SWJtd2RuS0ptcGpTWU1FbEZmL0RIeEcwU2V1bGdH?=
+ =?utf-8?B?QkdWQ2ZINzV1aUk2U0crUzRVaVR3blJPeDlrTjBMc3V4ZmF6M3RidTZqRmVV?=
+ =?utf-8?B?eC9nelZuOVVkK2EvSmNiZ1N2SkZSMGZWYnNKVkZVL29IeXFBS0twYXNuVzQ1?=
+ =?utf-8?B?V3o3Y0ZreWJXdGlqNFVaZ1FCZjJoY1M0MENRVUt3MnN3SU01SUlCUlVMc3Qx?=
+ =?utf-8?B?OW9ZVFJKS2NwQmg4RC9ZVDhCRVJzYitKcTdWOVVFdTExcWtrUlBVVEVvQUxw?=
+ =?utf-8?B?VENHQ1ZnNE5rYjBtTW9TNm9JeldrcnpYWE1qQy84cThjcXE5RVhsTUxhRHdT?=
+ =?utf-8?B?alIxbzZVNXFvY2JpaHNWT3laMWdUVlUwbGZOTm9xeDJ5U2VwYjlkMWUxSThw?=
+ =?utf-8?B?WUxLT0JtMGtqempXUlNJQWMvOXhEU1QvdUVFT1RjSXVPRzFPdU10N3Z1OFJJ?=
+ =?utf-8?B?OTVtRGZkVHZraUtMcVdwS3cyWlhHazBONm5SV0JiNjVLQldEbFN2eVR2VTdE?=
+ =?utf-8?B?blJscGJCaHlVeWxCODZxR0hObEdscEtDUk8xRE9mN3hkWm9ITVRJY1dXelpl?=
+ =?utf-8?B?SUNKRE1lcjFFcU0yQkduY1VhMHdBVExld2NxSlQ4KytITXdTeEIveGphVkpi?=
+ =?utf-8?B?TkNtUXBBUWJ5d0NEbEFRdkxtYkh2OU5hVnJtVG1YZEdGV2pkdW5TOWVGcTJs?=
+ =?utf-8?B?c0FZNTFGSlhRa25rSzNPVWRNQzNzdWxCZElVVFlmV1B1ZEZyQ0RBV2E1aDBj?=
+ =?utf-8?B?ZGRkSlNYZm5VVm1XQmhqREE5OE1GRGUraHl2cGNsMUZqQjFkemo2bzA5bkxZ?=
+ =?utf-8?B?c2dWcVpZTUlzdk9QLzZaSGlVVUtCdUxHRS82dk81QVI4T2RvYlN5R0t0SmJi?=
+ =?utf-8?B?dmFDT3hRYWNaS0w0RkhoMUNMZ3EyOC9yQjhYckR3M3VyclpOcnNjUlZiMHll?=
+ =?utf-8?B?cGVJWnljYzY1RTFLdWw2SkFPNC9GSzRtWDAvU29ycUxjNFp2N05wQWJZTWU3?=
+ =?utf-8?B?VG5GUExtQXlnZXUxY1oyZ3F2akhramNYWURiR24vN1RydXY0dU5sQmh6SHRM?=
+ =?utf-8?B?cDVNMlhMbVh6UmhCWkRHR1NML2hZY2pWV1RLOXU2RjkwTGp5N04xV0xqTzJr?=
+ =?utf-8?B?bnFYTmh5OE8yS2xGYW9kNTRHd1BnbkU1WmVBNHl4QjUycnFTRnFHQzVxMWRO?=
+ =?utf-8?B?OUtXaUtxWngzZzBnbDJHTXNHSytVY3AvQkMyOGdYZ2szckU2TW5FLzBFdDRa?=
+ =?utf-8?B?aURuQnZMUFczQVVwSUprMXBrVzRLM1NZM3hQSFVqV1hVbVhzbTJnZXFEZHRD?=
+ =?utf-8?B?UEJHV2ZGWWVyODRaREtnRHJ0L1dBY1g4M1FoWXpOU0cyK3k0RGsySzFQZEEr?=
+ =?utf-8?B?SXhucXd6Z1ZMWnlMZHRtQ0VYaXBKYXFLYjVBMjlCdlUrWUFoTjhUR2JLdWI0?=
+ =?utf-8?B?TmJWSlNqSWVoVEU4bjhZK3hsTXpqVTI5T1BsYXM1dG8rQ0gzSFVsSm5FRGo5?=
+ =?utf-8?B?cUNRbmR6OS84Y01NTTlqWWJSMlE3YWlFd29aMlJuZ29SRERJZ2ZBTjQva2Ny?=
+ =?utf-8?Q?XmtpABhTzXZEIC0xsARA586AnO10CSpI?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR03MB7072.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(366016)(376014)(1800799024)(13003099007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M21UV2g2OGtjT0F3cGJwaWRTdFpvVU1JNDZCV1dEWjdzV210YTYwV0Z2R3Zu?=
- =?utf-8?B?U2pWYWNTSnRiNXJBRkxMOUxxcmRZc0dQdTBTa1RURW9qZy9tTjVTcTkvd25T?=
- =?utf-8?B?WUUzSTJPWFJteWxkSjVnWXg1R3dSdlRraW9lSDdvb0lrWEVCeHJtUllkL0sr?=
- =?utf-8?B?bXV3UUdsR1NMRjBtbTlCNWlqQlp5K3VaOHdBL3J5UnFEaHMxdlFHUXZmUzJw?=
- =?utf-8?B?WEcyR2dCSXZrMnRrMlFJYkRoUC9mSDRGK0xqQS8yN1VWcExxcWNTUENITjd4?=
- =?utf-8?B?a091dkh6WktlVXNjTTFNYVh4SUhBaWorVnJpZ2s1RFNNa0JRRnQ2SEVSZnVM?=
- =?utf-8?B?Uy81K0lnMWZhVmtFWkFvTlJyVlV1cUJvMkZiTUN3bUdFSU9rYXBNbUhxaWxp?=
- =?utf-8?B?ZUhWa0VHV3ZCR2R6N1Vqa0k5T0FQME9CNTE4ME9BZVlBejRpU2wzRFkzcENR?=
- =?utf-8?B?QUM3Ujl5M3ZvMFdxeStJYllVOWpGMHkwSkxDUU9mVTJkSUw0WlJQbEJHeEs1?=
- =?utf-8?B?dURlT3FGTVpGQ0tXUTVISmRSTlR3dWVXOEZQR1p5bFZpNHh4U1hyZ3BqZ09M?=
- =?utf-8?B?aUVnU3p3OW9VOTE2alJxWGtReUlRNzFPdTVlUExDOVh6NGJFaUwrdmFPNk1Y?=
- =?utf-8?B?ZVZ2V2IxRmROeFVFRHIxQkk5a2djTmxrNEdhcjhNd0hQWmxJMEVzNEc1Tk54?=
- =?utf-8?B?akFrQVJlMlJOVzY0dGMvYXJYODBGSHdmRkpBK3oxcllYSFZ3ajUrbmU2dmJC?=
- =?utf-8?B?L1FPSnZVbjcyWmZHdzVWc004cEhYMzBuVjJGU3ZqWVVRVkdybUFYdlVOdkVQ?=
- =?utf-8?B?dzJyanNUa2V3V0prUlo4WVgwRWpYRUV2WXJONldueEFvVXVJUEd6aUp6TFZ0?=
- =?utf-8?B?S0ZrVXhXTW4vcWZudGhuN0R1RjczQVVqaTB5eEZnRmNjQWpkOVhyRVIwcGQ5?=
- =?utf-8?B?OWNTQlJ4bnRiSjJzaDROVlJrT1FkOEgzdFUrNlovTDdsdGcvV1k2ZmRlY1Fv?=
- =?utf-8?B?SGVlOHNsdDM4VTZGZkhyZDRpRnRIVDFWMEN3VTRraTNNOGdHMmQ3MnREbEc1?=
- =?utf-8?B?UzJhMnA2czliNmV4WEY1OFl6bjJDZFV6N1pxeDdCY0tydVVUR2hTU2ZWR0Y1?=
- =?utf-8?B?WEw3OVFmNFJ5S1IzNG02TXBxd1VRM0NDTFVsWVhhZzhLaVQ3SjhjWUZIRSs2?=
- =?utf-8?B?ZWdITFArbTdSdGgrc1JmSDB4eTNoVTRpMXZsNUJZTXE0a2Y2bTVyRERobW9X?=
- =?utf-8?B?TnVOY0xaNTJHVElhNzU2c3poSzRyS3NrdDJERXhMS1B0SHAwSmVMTFpLT3JR?=
- =?utf-8?B?ODFXYzVSNzFYVU81OGxOdW91cENteWRSYmlDMWwwcGRSMUtoNUZBcjFNeFF5?=
- =?utf-8?B?Uzkzb202Vm9ZaEZtTUE0ZmxTcksyQ0ZkOG4vL2J1c1JoMzcrMURHTmVudVFR?=
- =?utf-8?B?N1QwcEdGUjN5eXROUWFYbGZURW9QTGVjVVlnOFZlckk1Ym9JR0QvWmxSWGxs?=
- =?utf-8?B?NFRObmx6c0NjSDFYUEx6VTZGL0t0aVl6cFdvc2pXK0M1NVlFVC9xSi9ZS2RW?=
- =?utf-8?B?cXlhR0JvK1RvVC9ZaGExb29FK0ZPbEVielhreWQ5cHZ1SDhZenUzUW9WbEFx?=
- =?utf-8?B?TUpRM1NTVUswUVpXa01MQzQwekt3UG5EaWF4SnVPMU94eVYvQkY3YnVJb0xw?=
- =?utf-8?B?OEM5aVJ1bi95aTNuTjQxcjVNNmczc2p1STJkRWs4d25ZR05WbGpYT1ZZQnpa?=
- =?utf-8?B?cm96ZFpaNE8xZ3dMZlY1N1dZVFpXZnB4aUJpeVYzNkdqRWtnUTVOMm1FandV?=
- =?utf-8?B?bkRHRVJLYXEvNEIrZEphZjZleWVvNEVhTWZiTXlOdUhTQnBzNVRtcDM0Wk12?=
- =?utf-8?B?WTgyRFlGWm94eTF4NEdadTRVMVJITjhOU2lhM0k0aHdwNGNML2huT1g0UnFV?=
- =?utf-8?B?Q2huSWdsZmRwaHZReUY3RXEzSDZPc2xLV2k0VXJvM0JkZXhVZjJDdUxkMXF3?=
- =?utf-8?B?UkhTTU9SeExNNjcxaXFmL29wUkFCM0Z4cEd3MWRHUkxxSjAxYm95L1pGc3dJ?=
- =?utf-8?B?UVkvKy9oanA1V0FiU0dmOExCK2UvSmpiV1NUL1VLYW1XUkpqditOeFcrN1FP?=
- =?utf-8?B?NjNhYUJUQko3TXRwL0RrVDAreW9Obzd3eEhoZ1hYZDF5L3grRzFYY3NkdHNG?=
- =?utf-8?Q?f6K0VTNGLWid986cr6x8hw0=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VzloSGY5Ri8zL3JIOHZxcUlqZFoxSkpPVVY4eURnY3V4b0F3TU9Gd2V6QW5y?=
+ =?utf-8?B?QWxnYXE0dk8rNnA3TWp4cTlUVTdvN3FwcCsyNlIvYmZ6QzB0SHBHWm90UnR5?=
+ =?utf-8?B?c3REc1g2Q2lmcmYvZlZsWHR1dWZUNk1uZ1BhbklrQ3FNc212aDllUG5hL3BL?=
+ =?utf-8?B?SUhaMzM3TnVZL3RUTjd2UFplb2tZREYzcldNUTJJWnc2UGdPN00wRFAyT05G?=
+ =?utf-8?B?V3J2N3hUVEt4SGlQcjBrWG15S1BtMm9YanJ6TVNsYmMrM1FhTFFEZW1YK0FR?=
+ =?utf-8?B?ZWtWbE1FUXphOTRCOWJQR3pCcFN4eFFTNkw1VkEvQ1YvRGlqR3VoSUxUNGZU?=
+ =?utf-8?B?VThRSVc3WFNLNWFHbFlYUzl3TFNxa3RGemc0OWk1Q1JrVzNxSlA4YUtJTEZz?=
+ =?utf-8?B?cENKeDFXZ2xlNG1YOU9DY2lRS0RjbzVidURtODd3R2hkMERoNTJveHl1OWdv?=
+ =?utf-8?B?MlRTTTJUN1ladUJQMU5WWnRPd3pxQm5WRXhFSzJXOEpNMmVLQjNNa3QvQW1L?=
+ =?utf-8?B?Wk5qelZvbXN1bjJXQ3M5QjVZVjFnZVdqY0k3M2J5Z2gxWlJpejZLaU9WQW1Z?=
+ =?utf-8?B?THVnQ09BeVBMVkpMcmJBVGFBaWtYa1A5a1VSdU5ZajBEUDZlNVpQRzFodDJI?=
+ =?utf-8?B?S3ZRVi9rREl5ajVuZmZLQnJtSzA1ZklqNC9OeXd1SUhhNmpwWnpIenUxaTE3?=
+ =?utf-8?B?aTlyWCs1ZUhLSXkxR2Vmd2hKMzNhYkE2VWRNdjRIb2RhZjJVZ3A4dlFlaXNH?=
+ =?utf-8?B?ZHpuajNqSitpSW5VNXFXdTJaZ1h2QmZpSlh3aDJUR05ndmdSS05QMTg1M1pE?=
+ =?utf-8?B?Ym5walRnMlc2T2NzTTlNRjVQRHp2N3pZT1c4UlVMREtkdkNJcVZJdnBCZ0Rm?=
+ =?utf-8?B?WFVwUmNDQVVpQmJWQVY0ZEdIRzYwRC9BSXE3aFBXZ0xIaFJCcHVBNThoVFUy?=
+ =?utf-8?B?TTM4VGhjOGxWTlZMdU1Tdm5HcXp0aXRlWmUzK0NUMmtPTTM0VUFqR1FueHFQ?=
+ =?utf-8?B?eVVsKzB3UjJ4bWl6N2NjSVdLcitoWVREVG8vbkdkeVhUWlhRdlN1SXE3a0I0?=
+ =?utf-8?B?UEgrOHNhZjM2TWltZUFvT0xZbVF6OWd3a0tOZ054UEEzazdoS1Y3bGZwaUZr?=
+ =?utf-8?B?eFBJUDN1YndlWlR0WmtHeE9teE9nRmFBNFY4dVM0MHVhNUo4RE1xYkFGdGlz?=
+ =?utf-8?B?SEZZaW1xVDZ6RERVQTJESXNCVDZ1R25TRlhJR1hvaHlXVXNxMG04SGtGeFNk?=
+ =?utf-8?B?RFlqTnU1aVBVbkw0UktWWEs4R1JPTkxLMjIwOFhxcm9MTjVIK3B4bVd0dk1l?=
+ =?utf-8?B?K1dtRkZYdGtmSzByMDdHVnp1Y0IyVElISjc0YWRKT3I5U25BTkNuMktvY3dt?=
+ =?utf-8?B?OGZJalRBam5ZWDdvamliL00xS2ZjaVh0WE04blkvajZEc0xKNlcvOG9LcTRI?=
+ =?utf-8?B?SWR2aU4xMkdjQnE1a0lxcGh6OEdDQmdxZHRkOTFnY0haVGNIQlN2TXhaR2s5?=
+ =?utf-8?B?aW14WHErUWlLTnQzN2wrcEgwckhVZ0RQdEhhelI0TlB2QlNvZ2tkZnRIZjZk?=
+ =?utf-8?B?OEZMZnhEZk1ucWNEVWo1ZFQzdXNFbHZXOGoxWUFlNC9QeHVWQWhITS9MNEdV?=
+ =?utf-8?B?dHNoc1IwTjdXb1Y5Y1h3U2krMHZYTSt1M2xuOUR2K2JUQ1hiN1NmWVZhVHZ6?=
+ =?utf-8?B?KzFEdmFGaUxxOThPWFc0NlF0MHFjZUUydzRUTHpzeTVmcnNxUHBGU1pBUHJV?=
+ =?utf-8?B?T0M2Tzhzb2E5a1Bja2EvNjg1Ky90NlBuRm9NdVIxS2l3SHJwVWZSV2FXWUJy?=
+ =?utf-8?B?MkNlZU1jZE5FRkVLRDZuY0NQUmJuUHBNY1ZwUnZVNnpCTC8wMk80SGI2eHZZ?=
+ =?utf-8?B?cWNncVh0RDNKMHVKcFV2UmMwVlVrajRUWnFncklFaDVBTHk4bHBPcWFnSnVa?=
+ =?utf-8?B?dWc0SnBxTXZueE5xbmZyWFl4cStrZWlueE80ZTJHZ3dxdytZZVlQMGpaYTVy?=
+ =?utf-8?B?UE92bWQzYkh6NjV6UW01NFBCYVViZS9TcFJCT0tMYkdiT2pKZ3VDZmRzL0Fa?=
+ =?utf-8?B?VGVDb3hZazF1UmdFWUJTbE1Tengzc0FRYmdoM21DMUJFVEEyZms1U2dBSm5Z?=
+ =?utf-8?B?Q0g1UTE1bFc4MHA5cWlsU0VUcldtNiszMDhmVnpIOTNQaWl6dEhQaDVNQmtR?=
+ =?utf-8?B?amc9PQ==?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 11e56d19-f8f5-40e7-ace6-08de2bfa836d
+X-MS-Exchange-CrossTenant-Network-Message-Id: e5ef7026-99b2-4243-624c-08de2bfa83da
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR03MB7072.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 08:13:28.1350 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 08:13:28.8476 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: s2AjeSMhQ1sJKTvVmXOxX5uSbTufnBPC2+MnZnuBXs/bLWEd73QR2GKIhYmMpJb9i1g4np+PcHcQZiT/NoIMmvWP7s4hNAupdLQQpq5HSMs=
+X-MS-Exchange-CrossTenant-UserPrincipalName: PNjSUNLtS3nCwJo0kSDMq3mX9ntDGGF/HvabJrFA3OLdVnBMD1+J/K6xjYibPfxulwj7oHnpXNsw11Nyy7YyPsQ8aKoC6neG8OCl/h+xp0Q=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR03MB5447
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -178,48 +182,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+From: Tien Fong Chee <tien.fong.chee@intel.com>
 
-This patch set updates the boot support for the Altera SoCFPGA CycloneV platform in U-Boot. The changes include:
-	1. Board-specific configurations and setup required to enable CycloneV multiboot operation in U-Boot.
-	2. Migration from raw to FAT mode for SPL MMC boot
-	3. Backwards compatibility support for legacy SoCFPGA devices to enable/disable SDMMC clock in common SoCFPGA MMC driver.
+When building 32-bit ARM SPL (e.g. Arria 10), linking may fail with:
 
-This patch set has been tested on CycloneV devkit with SDMMC boot and RAM boot (TFTP & ARM DS debugger).
+    arch/arm/cpu/built-in.a: file not recognized: File truncated
+    cmd/built-in.a: file not recognized: File truncated
+    dts/built-in.a: file not recognized: File truncated
 
-Alif Zakuan Yuslaimi (7):
-  configs: cyclone5: Disable mkeficapsule tool build
-  configs: cyclone5: Enable random MAC address
-  mmc: socfpga_dw_mmc: Restore legacy clkmgr address retrieval
-  spl: Remove ARCH_SOCFPGA from MMC raw mode enablement
-  configs: cyclone5: Enable SPL FAT support
-  configs: cyclone5: Update boot command for CycloneV
-  configs: cyclone5: Disable SPI in SPL
+This happens when a directory (such as arch/arm/cpu/, cmd/, or dts/)
+produces no object files under SPL. GNU `ar` still creates a zero-length
+archive, which older ARM 32-bit linkers (arm-linux-gnueabihf-ld) treat as
+invalid. The final link step then aborts with the "file truncated" error.
 
-Tien Fong Chee (1):
-  arm: Fix "file truncated" linker errors from empty built-in.a in
-    SPL/TPL/VPL builds
+By contrast, 64-bit SoCFPGA (Agilex 5) builds use aarch64 linkers that
+tolerate empty thin archives, so the same condition does not cause an
+error.
 
- arch/arm/cpu/Makefile              |  2 +-
- arch/arm/cpu/dummy.c               |  7 +++++
- cmd/Makefile                       |  4 ++-
- cmd/dummy.c                        |  7 +++++
- common/spl/Kconfig                 |  4 +--
- configs/socfpga_cyclone5_defconfig |  8 +++++-
- disk/Makefile                      |  5 ++++
- disk/dummy.c                       |  7 +++++
- drivers/mmc/socfpga_dw_mmc.c       | 46 +++++++++++++++++++-----------
- dts/Makefile                       |  5 ++++
- dts/dummy.c                        |  7 +++++
- env/Makefile                       |  5 ++++
- env/dummy.c                        |  7 +++++
- 13 files changed, 93 insertions(+), 21 deletions(-)
+To make XPL (SPL/TPL/VPL) builds consistent across architectures, this
+patch ensures each affected directory always contributes at least one valid
+object:
+
+  * `arch/arm/cpu/Makefile` — add a persistent `dummy.o`
+  * `cmd/Makefile` — add `dummy.o` only when CONFIG_XPL_BUILD=y
+  * `dts/Makefile` — add `dummy.o` only when CONFIG_XPL_BUILD=y
+
+These dummy objects define no functional code and do not affect runtime
+behavior. They only guarantee a valid archive for the linker, preventing
+false "file truncated" errors on strict toolchains.
+
+Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+---
+ arch/arm/cpu/Makefile | 2 +-
+ arch/arm/cpu/dummy.c  | 7 +++++++
+ cmd/Makefile          | 4 +++-
+ cmd/dummy.c           | 7 +++++++
+ disk/Makefile         | 5 +++++
+ disk/dummy.c          | 7 +++++++
+ dts/Makefile          | 5 +++++
+ dts/dummy.c           | 7 +++++++
+ env/Makefile          | 5 +++++
+ env/dummy.c           | 7 +++++++
+ 10 files changed, 54 insertions(+), 2 deletions(-)
  create mode 100644 arch/arm/cpu/dummy.c
  create mode 100644 cmd/dummy.c
  create mode 100644 disk/dummy.c
  create mode 100644 dts/dummy.c
  create mode 100644 env/dummy.c
 
+diff --git a/arch/arm/cpu/Makefile b/arch/arm/cpu/Makefile
+index a0e1c2a651d..fc409bc5a90 100644
+--- a/arch/arm/cpu/Makefile
++++ b/arch/arm/cpu/Makefile
+@@ -1,3 +1,3 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
+-obj- += dummy.o
++obj-y += dummy.o
+diff --git a/arch/arm/cpu/dummy.c b/arch/arm/cpu/dummy.c
+new file mode 100644
+index 00000000000..a7a55a02c20
+--- /dev/null
++++ b/arch/arm/cpu/dummy.c
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ *  Copyright (C) 2025 Altera Corporation <www.altera.com>
++ */
++
++void __arch_arm_cpu_dummy(void) { }
++
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 25479907797..104e8a770e7 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -3,7 +3,9 @@
+ # (C) Copyright 2004-2006
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-ifndef CONFIG_XPL_BUILD
++ifdef CONFIG_XPL_BUILD
++obj-y += dummy.o
++else
+ # core command
+ obj-y += boot.o
+ obj-$(CONFIG_CMD_BOOTM) += bootm.o
+diff --git a/cmd/dummy.c b/cmd/dummy.c
+new file mode 100644
+index 00000000000..a4d10f413bc
+--- /dev/null
++++ b/cmd/dummy.c
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ *  Copyright (C) 2025 Altera Corporation <www.altera.com>
++ */
++
++void __cmd_dummy_placeholder(void) {}
++
+diff --git a/disk/Makefile b/disk/Makefile
+index 2248a659f8b..eb17dac8b67 100644
+--- a/disk/Makefile
++++ b/disk/Makefile
+@@ -18,3 +18,8 @@ obj-$(CONFIG_$(PHASE_)ISO_PARTITION)   += part_iso.o
+ obj-$(CONFIG_$(PHASE_)AMIGA_PARTITION) += part_amiga.o
+ obj-$(CONFIG_$(PHASE_)EFI_PARTITION)   += part_efi.o
+ endif
++
++# Avoid empty dts/built-in.a during SPL/TPL/VPL builds
++ifdef CONFIG_XPL_BUILD
++obj-y += dummy.o
++endif
+diff --git a/disk/dummy.c b/disk/dummy.c
+new file mode 100644
+index 00000000000..0d7d99f744e
+--- /dev/null
++++ b/disk/dummy.c
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ *  Copyright (C) 2025 Altera Corporation <www.altera.com>
++ */
++
++void __disk_dummy_placeholder(void) {}
++
+diff --git a/dts/Makefile b/dts/Makefile
+index fd4ae31a533..1bf5577b403 100644
+--- a/dts/Makefile
++++ b/dts/Makefile
+@@ -89,3 +89,8 @@ subdir- += ../arch/arc/dts ../arch/arm/dts ../arch/m68k/dts ../arch/microblaze/d
+ 	   ../arch/mips/dts ../arch/nios2/dts ../arch/powerpc/dts ../arch/riscv/dts	\
+ 	   ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xtensa/dts	\
+ 	   ./upstream/src/arm64 ./upstream/src/$(ARCH)
++
++# Avoid empty dts/built-in.a during SPL/TPL/VPL builds
++ifdef CONFIG_XPL_BUILD
++obj-y += dummy.o
++endif
+diff --git a/dts/dummy.c b/dts/dummy.c
+new file mode 100644
+index 00000000000..8007239d3f6
+--- /dev/null
++++ b/dts/dummy.c
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ *  Copyright (C) 2025 Altera Corporation <www.altera.com>
++ */
++
++void __dts_dummy_placeholder(void) {}
++
+diff --git a/env/Makefile b/env/Makefile
+index d11b87702c1..4ebb6018b4a 100644
+--- a/env/Makefile
++++ b/env/Makefile
+@@ -31,3 +31,8 @@ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_FLASH) += flash.o
+ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_SCSI) += scsi.o
+ 
+ CFLAGS_embedded.o := -Wa,--no-warn -DENV_CRC=$(shell tools/envcrc 2>/dev/null)
++
++# Avoid empty dts/built-in.a during SPL/TPL/VPL builds
++ifdef CONFIG_XPL_BUILD
++obj-y += dummy.o
++endif
+diff --git a/env/dummy.c b/env/dummy.c
+new file mode 100644
+index 00000000000..dc23f8439d0
+--- /dev/null
++++ b/env/dummy.c
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ *  Copyright (C) 2025 Altera Corporation <www.altera.com>
++ */
++
++void __env_dummy_placeholder(void) {}
++
 -- 
 2.43.7
 
