@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B9CED0EE0C
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 16:51:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA55FD0EE00
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 17:01:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED3B2840ED;
-	Tue, 25 Nov 2025 17:51:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 69D3584101;
+	Tue, 25 Nov 2025 18:01:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZXf69G2r";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="I7lYZgeS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6828984105; Tue, 25 Nov 2025 17:51:18 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id E8CE784109; Tue, 25 Nov 2025 18:01:44 +0100 (CET)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D4CC840E6
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 17:51:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2846C840ED
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 18:01:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3e8317b1262so6311029fac.3
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 08:51:16 -0800 (PST)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-657509d761dso2883078eaf.0
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 09:01:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764089475; x=1764694275; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n92xEnPajb94tGzD2YYouZfAdjso2poTPvdlxbDbOVY=;
- b=ZXf69G2rvLXo2ke7+6wfRc0tRVtHrFnkuXF8HpXdTloxBiTa9MUHgcsgt8cHii3vUA
- l6T4okeOjFQYj0WZiOkZSYiO+rwwSE1/nBqMTwRaHPnGTiECR9dZ3MiRzIjIA7qX8UOo
- 3Nv2THKNTFQyWmMZ1YeHjOmUj4mRPqnvfEFvs=
+ d=gateworks.com; s=google; t=1764090101; x=1764694901; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8nEEWeNAUjiCCKHOptUR7FBuMOaX+9U51Pk9pcd1PXM=;
+ b=I7lYZgeSMqbIlkFFaQtv5r0Xg+uDrXTs1GiHMX6m5ch0oJ/U9SE7S/c1MJOY+Gmcsp
+ pp/l0EKtnq1dvfnXwNprvsXkhTm4SzOf8RrRP5v+fBUUDRHUURLdmYcZ4W86OJPmqku6
+ Lmxe/RZtF8NOcrfzWPN5SS7S72XU/2QNACI35fMC5noEs+9vKCgATiDtsu4J6AcdRw6S
+ 5bwaFxWZI8/L3SJuP+jNw+smAKdhQQoqybmJyZUZEoHTmOFfdVIbTb+06IlUCmRkesO+
+ sKXIgL6xBoOov736BHAhyDNnCJfu94gtJ9tbLvyXfuB/PPaBp4fygZ32OCCCBrr/D9/S
+ HYbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764089475; x=1764694275;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=n92xEnPajb94tGzD2YYouZfAdjso2poTPvdlxbDbOVY=;
- b=WcSlv7GAjMgl+bN6uzKcFEclEf2mrjiDVRGtDUAVCs0v9GduSMmZABZ3kDFqdUL2mq
- yJLpBFGVF0l71aiGX4b3fwOqrFaWOgwIi1QgmEqdxOqMe0biQpcHslIpL0lYYSE3fzbb
- YMn5/s1YSw81FaUmOMobHLUzxt5bhDkiv5bhuLBQ5RD3KPrQTXimn7mpJ2iVafqYvAzh
- UeZIFIzQJ1km5RE+/wLgIjuPWpyk/EZ+9UX2Av0nzmwHZCzGaVgYVHqQ3ecaoXkBE5Dq
- 9Rky7pd43zLaqLM5f1rRXJMjr+H0E0ZATm7Oc0kK+Sx15SVjXR63gv5yU5aIkP02xOfx
- +SSA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVgAe9cZJu7vf6kb5FWLGJA4OWXcxPBckg/ZVtxijXRAeiGO2o24o+l47YxpFv5D9uumdCkLsk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx/hYNNssA5CyQsCRy9W0ndnhI3Vl4LNAGV8SYLIjcaar9GJRuH
- FDP3QLFofAcgHQJsYodsQvjF1H3HdEFCeEbYMQ9QHFfjd2Wo6dqSzBHjbSio5l+X07/+OQ7aauZ
- /tKUNVVw=
-X-Gm-Gg: ASbGncvG1tW3b6fGHQsAzBbgjXT7eOkibP7I2DuTDSTIYfMdbQxvGuuvg6s7x5AgORg
- kGLIuuYyqIaDEgpYv7xweF/u/OVLQc/FVMP008zobH3ULRgSHoAKFKTCAbMgpUFfFbqp4Gdmuwz
- 66ZrlTiz8dzijHWvUK+d/eiWR6zNJDPM3J+9rLfwmba2EnXxiKM8Fd7QjJnZGFM50DtJe8C00qN
- DWzwj10ptvIHShi86Sfzyn/ArLYqJqZRYMZ+gYwvXN86C/3RhFYxbCFb4F+Z7SWuOi24SVMImVn
- 2Pvkezo1rooKtU//yCb+9Ln4lvCE3SdOMhChwDiCSLI4ALI0orfPfwL2uudbAg/8wjZengRoulA
- /tlb0GOXdJLVxn2QgoJQa5ZeUunH0R6nXSBfAILQbTZTjpTDaHWTC4e8LN9TvK1bhwzxsvhlq/O
- 9VcTVezzi6W+Ybx/Gv5lzJirCCLP6YAcQNpP16QOvJUb032GdD3w==
-X-Google-Smtp-Source: AGHT+IFqBMQ5CAFmfXWF/TIubG++HjK+aFglg2KDPh1IDI3vXyL4xSZQIJqH6f0bcS7tOCelr58k5w==
-X-Received: by 2002:a05:6808:c165:b0:450:ccef:c00c with SMTP id
- 5614622812f47-45115b887d2mr5214386b6e.48.1764089474768; 
- Tue, 25 Nov 2025 08:51:14 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450ffe6893csm4662623b6e.9.2025.11.25.08.51.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Nov 2025 08:51:14 -0800 (PST)
-Date: Tue, 25 Nov 2025 10:51:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: David Zang <davidzangcs@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] autoboot: Fix inconsistent countdown output
-Message-ID: <20251125165112.GR2125796@bill-the-cat>
-References: <20251027002458.16741-1-semen.protsenko@linaro.org>
- <20251028165056.GG6688@bill-the-cat>
- <CAPLW+4=JOiPk+gOHH4umevJxJweitAn3dpec1xTe9ZrgCAVAMA@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1764090101; x=1764694901;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=8nEEWeNAUjiCCKHOptUR7FBuMOaX+9U51Pk9pcd1PXM=;
+ b=hAWI9Ddb6SILnDIEwavAtwwQFMNhDgyTWBbL9MLThRyr+gAA4wS90OrxV7tnRoDXJk
+ NJslahERuKZN622nBoFba4rzIT7aWnW9DWbsOcbEgJQ8d3sifUzpcRPIiSowtMuoLXC3
+ VH/ZJmmELSFgJacLe3me6Cur83qZXvT6Kn02SSI3qCwIfVoQzn8qrlIS9wUm5CJEInJ5
+ mKcd90mIf7a2BU9m0jH/XBQMI5KBZejSAkG9G5RnTj69Jdkrvs3CJIQjeaOnCGmzZMge
+ 2rOCStojKUoG5xKOWIXlEmv6PkeK1eWugqMCJUkVZvjrladYtrDgPPLeM3iSOo0D3cLk
+ vHVg==
+X-Gm-Message-State: AOJu0Yysq+CVr/SiEMZDeJpSNGSSH7ZOd6fqas3A9mCoQwGhf5nUpQYF
+ KPeZsEQzHonql8XKP2ZVsbBFDr4/bLfqcBOKD3jE4RIuTNLZs5amWnPyRRxvaWzYyw2msdAkUg4
+ 7w2UPS6XEWQWH6MS1RhVjW8QhDs3w17khbTh4lYD8x9L6E7TM5/OMynw=
+X-Gm-Gg: ASbGncs6XtA925l/zl2APfyLKg9gYrCZsK0APPblKJ4Vlt/1IgtCk/TsuTUycJw6g2Z
+ 03OsDkfWObavB56mhfmqLMl4bvkyeyw1PouJAli3iehRxhgOwO3zg0A/6dpAdblzGipNigTY+yp
+ H+m3pGIebUYGRv43xr9Pn+Dv50RRARCxWwfRnp98w2/taSunnZts3d9lloya3QrQt8ReSL9LjwO
+ eYGNjCMnY5h+imViBMhgndHdNYAecMPEpvgbkDeDnP8ft+eSA6tm6wd21Y4Xorc6Uw=
+X-Google-Smtp-Source: AGHT+IHtaj6M1uXmjLL5FazqMpuWdL4dUYza2GRgCJypIwaNvv9wRX3EBIxbCnk3dd7q+/f7C1FlL4/lovxCYRsY5YE=
+X-Received: by 2002:a05:6820:a0a:b0:657:63b1:660 with SMTP id
+ 006d021491bc7-65792500ce1mr6257785eaf.4.1764090098888; Tue, 25 Nov 2025
+ 09:01:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZEvUomXIMkEyHUb1"
-Content-Disposition: inline
-In-Reply-To: <CAPLW+4=JOiPk+gOHH4umevJxJweitAn3dpec1xTe9ZrgCAVAMA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251118180345.590913-1-trini@konsulko.com>
+In-Reply-To: <20251118180345.590913-1-trini@konsulko.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Tue, 25 Nov 2025 09:01:27 -0800
+X-Gm-Features: AWmQ_blM_Nq-Dz0ucH-qiekhQ-FdhmuW64iEe1MEXCq9cwBXRqIqu86dAwv14M0
+Message-ID: <CAJ+vNU3yBoZSYSkwu1o9gmz3zXk5fwzKUd13tqGoFyfpWRG0fg@mail.gmail.com>
+Subject: Re: [PATCH] gw_ventana: Stop disabling device tree relocation
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,72 +92,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Nov 18, 2025 at 10:03=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+> Remove setting of fdt_high to ~0, which disables device tree relocation,
+> from the default environment. Doing so prevents U-Boot from correcting
+> problems such as having an unaligned device tree and leads to various
+> failure modes in the OS.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> If there is some window of memory that must be used for where the device
+> tree is relocated to, bootm_low + bootm_size (or often just bootm_size)
+> or bootm_mapsize are the correct way do this. Please see
+> doc/usage/environment.rst for more details.
+>
+> Cc: Tim Harvey <tharvey@gateworks.com>
+> ---
+>  board/gateworks/gw_ventana/gw_ventana.env | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/board/gateworks/gw_ventana/gw_ventana.env b/board/gateworks/=
+gw_ventana/gw_ventana.env
+> index 9a316c74f215..4322baa3d8a2 100644
+> --- a/board/gateworks/gw_ventana/gw_ventana.env
+> +++ b/board/gateworks/gw_ventana/gw_ventana.env
+> @@ -13,7 +13,6 @@ hwconfig=3D_UNKNOWN_
+>  disk=3D0
+>  part=3D1
+>
+> -fdt_high=3D0xffffffff
+>  fdt_addr=3D0x18000000
+>  initrd_high=3D0xffffffff
+>  fixfdt=3Dfdt addr ${fdt_addr}
+> --
+> 2.43.0
+>
 
---ZEvUomXIMkEyHUb1
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Tom,
 
-On Mon, Nov 24, 2025 at 02:49:23PM -0600, Sam Protsenko wrote:
-> Hi Tom,
->=20
-> On Tue, Oct 28, 2025 at 11:51=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
-ote:
-> >
-> > On Sun, Oct 26, 2025 at 07:24:58PM -0500, Sam Protsenko wrote:
-> >
-> > > Commit 5f70be08b015 ("Fix autoboot countdown printing wrong") introdu=
-ces
-> > > inconsistency in how the countdown is displayed. For example, in case
-> > > when BOOTDELAY=3D5, the next output is observed during the boot:
-> > >
-> > >     Hit any key to stop autoboot:  5
-> > >     Hit any key to stop autoboot: 4
-> > >     Hit any key to stop autoboot: 3
-> > >
-> > > That happens due to different printf format (%2d vs %1d). Moreover, t=
-he
-> > > mentioned commit fails to handle the case when the user is holding so=
-me
-> > > key before the countdown is shown. E.g. if BOOTDELAY=3D101, the next
-> > > malformed output is being produced:
-> > >
-> > >     Hit any key to stop autoboot: 1 0
-> > >
-> > > That's because the fast path code wasn't modified accordingly, and st=
-ill
-> > > tries to erase the number using '\b\b\b' format.
-> > >
-> > > Fix both issues by introducing a dedicated routine for printing the
-> > > whole countdown line.
-> > >
-> > > Fixes: 5f70be08b015 ("Fix autoboot countdown printing wrong")
-> > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> >
-> > This seems the reasonable path, given everything in the following parts
-> > of the thread, thanks.
-> >
-> > Reviewed-by: Tom Rini <trini@konsulko.com>
-> >
->=20
-> Since there are no new or outstanding comments for this patch, can you
-> please pull it for the next release?
+Acked-By: Tim Harvey <tharvey@gateworks.com>
 
-I'm going to take this for -next rather than master, soon, as it's just
-cleaning up some output. Thanks.
+Best Regards,
 
---=20
-Tom
-
---ZEvUomXIMkEyHUb1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSXeeAAKCRAr4qD1Cr/k
-CmyYAP9jP4azyvoi7S8v6rwcC5Awa3q6Sh+qi+BtutwRg7lW6QEAlCEIyqxovTP9
-Zpy7JwkwFJ4BERg1ZYs5hWzZTh1yhQY=
-=G/p7
------END PGP SIGNATURE-----
-
---ZEvUomXIMkEyHUb1--
+Tim
