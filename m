@@ -4,91 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B43C7D0E6FF
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 15:38:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D24D0E6FF
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 15:38:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4156983F89;
-	Tue, 25 Nov 2025 16:38:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 851F8840D8;
+	Tue, 25 Nov 2025 16:38:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xk5bkFkZ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kzzupLmD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E94A840D4; Tue, 25 Nov 2025 16:38:43 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 02BA1840E0; Tue, 25 Nov 2025 16:38:54 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E5C183F75
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 16:38:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C583D83F75
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 16:38:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-47798ded6fcso34381745e9.1
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 07:38:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764085120; x=1764689920; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b1IKzL6DkppaQV6nfPyBuUeyaWkIGtr6R9OD3PJOkqY=;
- b=Xk5bkFkZxgb2in10QGZ1HYyfQffLsZZlhODjIUpBnrXDdrAFy6KapKEzB32SAb6dbX
- cal817ntPKJb+BM1CaXLSjdDf5SdTwzOsFzavdoUB1szXnt1P3VaNJAs+znJXQZ5rYJh
- kjckoALTtGnI9m1tGC1fCaxxPcrVD0T9kxNgx12WaWznoyc3joAN8mIitPcLLDxKQWV0
- 5sNp/5m9nAU9XqOcPjolhNIbx0QbICCbmN+ykZ4W3mJ/BPIxIiGQ/LOC2ODhF5CsYJvv
- YSQpL1jtcs6aJ+DbPszztYXAhrb3AAfg0YMrDuOejgphdiOOwN669SRYwXdbvxJgzOjr
- f7Hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764085120; x=1764689920;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=b1IKzL6DkppaQV6nfPyBuUeyaWkIGtr6R9OD3PJOkqY=;
- b=mSuSTbdDVprRSVD/jBzDheq3S+BEdLdp2OhqgSY5yXHAb1JrG6qm817rjecLUoaPQt
- BESbsWIxzO+mPSp+mXXMZtew5JsH5iGoQtOPT05cG7l763i/1aRTRDcnOe52wkqZ1vA0
- dxbbuRDRyonWG12zmQwbNkETqVfrd/YAD2/v6zCJhWGSLDpbp/WpzILOrAxPs1s193mu
- BT3l817TUhZD9vdEqS/bD4lZzXMZn1G7cHLK79o4E775NIi/T7GyQ2F4lhiJlaNCrOZ4
- pzsRXMiPKa24kmSaMO2t8MkKC0Uvq2b/RETlAUI6tfSL8e4LwbjQyw4gjCbweDweMjQp
- 7UjA==
-X-Gm-Message-State: AOJu0YyFzcvGSL+Iixx0eXZfZsqzbpIbj04A/JIRdowpAjdBPCjbctT6
- l/m/GyTnEdJbTs5He2rCStnNT4QtqTH8ZXageqQHEABe9qDLO9uS1BzeouqYKNEyEIo=
-X-Gm-Gg: ASbGncsv706WFX/mexT1A+rYU0AmD159GWCnnSNsnD3zAne3Kabx3OuXwQzE5gDM5C9
- A9asQi8BI+Ot/bw5k6KJLwCzg40jU99RjMDC+MyiejRl9f/sMzNgR9fKEvOYKYnSPIAE8sc/j1A
- Cl0SQkZnYI4KFAszCrvfHKLgdbPUSqnIoD92LyZk4tTtqyy3q/osSEaSnhEGXy0OAdXIq3/w7OB
- MFKfhK2Jf/gyutten1uakVshonmn4+PhV7eMbleRZvJREvFWU1RZezjsJBP3b5eBU6W2+UOEHk7
- JsyqAulKbEMNTRbYiOp/mN8fJ1QW7njacov5Y5PphiRl0BM61eLrrndBQeaCXwNDc6pUEWuHitp
- u7Ro71NoFYsFOAY5XpYN2k++1jrqCmaRb3bMhtuDrqsu5q0mI2xFWDPwufvVPGELH3DTt1wD2D+
- xOIygotzMb6ySnVxSX
-X-Google-Smtp-Source: AGHT+IGBgnk97TjSLkmen0/QBcPIWpDSgXXjXN8b1kIYLGD0YjwCM3Xa/qbiCslCHqLDwzTEwj82hQ==
-X-Received: by 2002:a05:600c:5489:b0:477:b0b8:4dd0 with SMTP id
- 5b1f17b1804b1-477c1119c31mr141229605e9.17.1764085119979; 
- Tue, 25 Nov 2025 07:38:39 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-477bf355af6sm261261405e9.3.2025.11.25.07.38.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Nov 2025 07:38:39 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Anshul Dalal <anshuld@ti.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Michal Simek <michal.simek@amd.com>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, 
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>, u-boot-qcom@groups.io
-In-Reply-To: <20251030223626.20005-1-marek.vasut+renesas@mailbox.org>
-References: <20251030223626.20005-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 1/4] ufs: cadence: Rename CONFIG_CADENCE_UFS to
- CONFIG_UFS_CADENCE
-Message-Id: <176408511923.2395300.10396516683752155810.b4-ty@linaro.org>
-Date: Tue, 25 Nov 2025 16:38:39 +0100
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4dG6L069ftz9vRj;
+ Tue, 25 Nov 2025 16:38:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1764085128;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=evdPJP8+m5gD5kt6QweUcdTtZYE80PzHPHGOKOG9PX0=;
+ b=kzzupLmDXCMr4Rug56tW4tHR03U8JMDHfwwIyeuoRZLTQOUgc4cwfDTHAdNrRbMrmJGeCC
+ brlwuneEB9lQaz9+dBEPR6y4cBtxHEaINlmWlfZ9V89ufBwEtCiidxsYZc+iUfuAeFKJed
+ gBbWKKGP9xl/ZmJQ8721sDz95veA3finTeoXfI+QfJC9YemgoNqJhZkfvRetwrf/7+5K5D
+ jsxzghJqkv18TY5ZKoyJnJGM72o2gq3rzRLpEnoe4QdGd2pJT99MmWZd2zKUb8n01uB7yF
+ yTJ7gpWi0mDBmy3u7kmfDoYwNTJg/JZNwo7aPu7E+kBPh6959OHXeWWamUSqcw==
+Message-ID: <d99ac773-1728-4a0e-8be9-507fdd6f6116@mailbox.org>
+Date: Tue, 25 Nov 2025 16:38:45 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Subject: Re: [PATCH] mkimage: Add support for bundling TEE in mkimage -f auto
+To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Cc: =?UTF-8?Q?Carlos_L=C3=B3pez?= <carlos.lopezr4096@gmail.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ u-boot@dh-electronics.com
+References: <20251118232045.578034-1-marek.vasut@mailbox.org>
+ <9e9ec219-3ae7-4ec8-8f85-5edb4bbbe53a@cherry.de>
+ <7b21c476-ed12-48da-95f7-dd354e116a70@mailbox.org>
+ <9bb15fc9-7434-4ba4-814b-d99cdcd7a4f8@cherry.de>
+ <889f9772-a50f-47e2-a678-1316a8be296a@mailbox.org>
+ <b3d8ae61-1549-4126-807b-22f85ce4894c@cherry.de>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <b3d8ae61-1549-4126-807b-22f85ce4894c@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 73040293da8f9cd6fee
+X-MBO-RS-META: exzp8i4ex53mm6r4u6usteckr6nx3ucm
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,25 +89,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On 11/25/25 4:18 PM, Quentin Schulz wrote:
 
-On Thu, 30 Oct 2025 23:35:42 +0100, Marek Vasut wrote:
-> Align the Kconfig option with the rest of the subsystem, use
-> CONFIG_UFS_<vendor> format for the Kconfig option.
+Hello Quentin,
+
+>>>>>> Example invocation:
+>>>>>> "
+>>>>>> $ mkimage -E -A arm -C none -e 0xc0008000 -a 0xc0008000 -f auto \
+>>>>>>            -d arch/arm/boot/zImage \
+>>>>>>            -b arch/arm/boot/dts/st/stm32mp135f-dhcor-dhsbc.dtb \
+>>>>>>            -z ../optee_os/out/arm-plat-stm32mp1/core/tee-raw.bin \
+>>>>>>       -Z 0xde000000 \
+>>>>>>            /path/to/output/fitImage
+>>>>>> "
+>>>>
+>>>> ...
+>>>>
+>>>>> Which formats are supported for the --tee-file parameter? OP-TEE OS 
+>>>>> itself has multiple versions for the binary header (v1 and v2?) and 
+>>>>> we can pass either a binary (tee.bin) or an ELF (tee.elf) in 
+>>>>> binman, c.f. tools/binman/etype/tee_os.py
+>>>>
+>>>> The raw binary only, see the example invocation above.
+>>>>
+>>>
+>>> Must be documented then please.
+>>
+>> Where would you document this ? In the manpage ? Elsewhere ?
+>>
 > 
+> Wherever the user can see it when using the tool. The manpage for sure 
+> yes. Maybe in the mkimage usage help string but I'm worried it'll make 
+> it harder to read.
+
+Done in V3
+
+> Also, turns out that one really is supposed to use the raw binary format 
+> for OP-TEE OS (since 3.8.0). I had missed that part so it kinda makes 
+> sense to only support that, after all 3.8.0 is already 6 years old! 
+> Blobs from Rockchip do have a .bin extension so I assume they are raw 
+> binaries.
+
+[...]
+
+>> Neither of the binaries listed above is TEE ?
+>>
 > 
-
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-ufs-next)
-
-[1/4] ufs: cadence: Rename CONFIG_CADENCE_UFS to CONFIG_UFS_CADENCE
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/f8d245f3698aae3fdbd9ef6b8328f36747955e5d
-[2/4] ufs: qcom: Rename CONFIG_QCOM_UFS to CONFIG_UFS_QCOM
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/9ce92c31d3da03c052dfae49b4ad917fe315df21
-[3/4] ufs: rockchip: Rename CONFIG_ROCKCHIP_UFS to CONFIG_UFS_ROCKCHIP
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/ddeb78b022417158a290499ec5957dd5f906b081
-[4/4] ufs: ti: Rename CONFIG_TI_J721E_UFS to CONFIG_UFS_TI_J721E
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/b71967457883eddc022dc376251ad3c5c5d9c163
-
--- 
-Neil
-
+> Oopsies. Got distracted by reviewing both tf-a (already merged) and tee 
+> support in mkimage -f auto. So this applies to TF-A part only, where we 
+> (Rockchip) use the ELF file (for Rockchip blobs; maybe upstream TF-A is 
+> loadable in raw binary form as well?) and that is split by binman. Since 
+> one is supposed to use the raw bin for OP-TEE OS and that binman doesn't 
+> actually split this into multiple entries, this doesn't apply, sorry for 
+> the noise.
+No worries, thank you for checking !
