@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 316DDD1036D
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 23:42:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3BF3D1036C
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 23:43:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3A178416F;
-	Wed, 26 Nov 2025 00:42:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3CC3884180;
+	Wed, 26 Nov 2025 00:42:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="uloIymh+";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Lx7lQ/3I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B55584159; Wed, 26 Nov 2025 00:42:38 +0100 (CET)
+ id C249784159; Wed, 26 Nov 2025 00:42:38 +0100 (CET)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A4508415D
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 00:42:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9F328415E
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 00:42:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.bonnefille@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 29AF44E418D0;
- Tue, 25 Nov 2025 23:42:35 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 78F6D4E418D1;
+ Tue, 25 Nov 2025 23:42:36 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id F34ED606A1;
- Tue, 25 Nov 2025 23:42:34 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 50405606A1;
+ Tue, 25 Nov 2025 23:42:36 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1DDAE102F08B7; Wed, 26 Nov 2025 00:42:33 +0100 (CET)
+ with ESMTPSA id 952C4102F08B6; Wed, 26 Nov 2025 00:42:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1764114154; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1764114155; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=9UePOrgf57oFBBympX+FNo/WXZzqoIOzpR49T9jplq0=;
- b=uloIymh+/BeZxR+qKgSQNpsmSsqlYuLTL0xoS+rNcVQwlUmU5SPFFAYBiVJDYiWpJkMeNl
- JeYkrk90tHuwvzXvlB7nVj1YeYXlo7h3zmHCXn/D/dN3ozJzY6TALjZ1+XpdRWGkIG45vP
- t8FIUuB1crX3542dn1EC5h1yCNqN4ehHTfn86telMQSLG7tPtJ28pIGoI0TjSoIcpLEd9o
- HtMd4tJist9tJDEeYOm4YyPmw0IiNZY7p4WL9uuCYDEyeoP1ixEytB4lswcaxeN4iE9iaX
- 9Mxewz4OgoEr/TRsgFr6oWhm1BVZly9UMlSR6PICeSaBbGt+Kug8m/85LCKEkg==
+ bh=YYsat+DPZ90G5V/H66snwPX+nLrXk6IhngjZC0yjKFg=;
+ b=Lx7lQ/3IPU35cxd1mzS1EuPKmpdiSM+ONZhSeLOQJKkQzVcteyFBUIgCiz6nZJBFpAHQS0
+ 9hykZl2rKKya8HBvkhvLSIfU8i+evvA4b7icU1sJKurS/SOAz68q/ZV5u082UVD0fCtwsY
+ cILu5gogVyojr96EaNYEMgCq3wXQRSvVGUy0drXbntCiava0t6r7kEAiEBlSBOEZ1bgaW2
+ eESg4R/lvNdHNRKhZz0t3pspRwqb8DfOmThvyGrJZ5sNWk/KP/Gp5iP7g3ov1DYexPx3FI
+ ooTk3MQgFu1dFSPuTyEyiHipj1fpJ6leQJLxdxdO40czSXot2+MQ0n5nGCSqXg==
 From: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
-Date: Wed, 26 Nov 2025 00:41:54 +0100
-Subject: [PATCH 2/5] arm: include: imx7: rename PWM registers to match
- driver name
+Date: Wed, 26 Nov 2025 00:41:55 +0100
+Subject: [PATCH 3/5] mx7: clock: add pwm enabling clock function
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251126-repair_imx7_splash-v1-2-d3877afb7381@bootlin.com>
+Message-Id: <20251126-repair_imx7_splash-v1-3-d3877afb7381@bootlin.com>
 References: <20251126-repair_imx7_splash-v1-0-d3877afb7381@bootlin.com>
 In-Reply-To: <20251126-repair_imx7_splash-v1-0-d3877afb7381@bootlin.com>
 To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
@@ -78,63 +77,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The imx pwm driver uses PWMn_BASE_ADDR as the address of the different
-PWM controllers, as the current names used for the PWM addresses aren't
-used anywhere, this commit renames the macro to match what has been done
-for i.MX6 and i.MX5.
-
-It also adds some basic bit descriptions, macros and structure to give
-to the pwm-imx driver based on what has already been done for the other
-i.MX models.
+Add function to enable the clock of the different PWM controllers on i.MX7.
 
 Signed-off-by: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
 ---
- arch/arm/include/asm/arch-mx7/imx-regs.h | 25 +++++++++++++++++++++----
- 1 file changed, 21 insertions(+), 4 deletions(-)
+ arch/arm/include/asm/arch-mx7/clock.h |  3 +++
+ arch/arm/mach-imx/mx7/clock.c         | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 32 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-mx7/imx-regs.h b/arch/arm/include/asm/arch-mx7/imx-regs.h
-index 849c5482241..d1cc176d6dc 100644
---- a/arch/arm/include/asm/arch-mx7/imx-regs.h
-+++ b/arch/arm/include/asm/arch-mx7/imx-regs.h
-@@ -127,10 +127,10 @@
- #define ECSPI4_BASE_ADDR                (AIPS2_OFF_BASE_ADDR+0x30000)
- #define FTM1_IPS_BASE_ADDR              (AIPS2_OFF_BASE_ADDR+0x40000)
- #define FTM2_IPS_BASE_ADDR              (AIPS2_OFF_BASE_ADDR+0x50000)
--#define PWM1_IPS_BASE_ADDR              (AIPS2_OFF_BASE_ADDR+0x60000)
--#define PWM2_IPS_BASE_ADDR              (AIPS2_OFF_BASE_ADDR+0x70000)
--#define PWM3_IPS_BASE_ADDR              (AIPS2_OFF_BASE_ADDR+0x80000)
--#define PWM4_IPS_BASE_ADDR              (AIPS2_OFF_BASE_ADDR+0x90000)
-+#define PWM1_BASE_ADDR                  (AIPS2_OFF_BASE_ADDR + 0x60000)
-+#define PWM2_BASE_ADDR                  (AIPS2_OFF_BASE_ADDR + 0x70000)
-+#define PWM3_BASE_ADDR                  (AIPS2_OFF_BASE_ADDR + 0x80000)
-+#define PWM4_BASE_ADDR                  (AIPS2_OFF_BASE_ADDR + 0x90000)
- #define SYSCNT_RD_IPS_BASE_ADDR         (AIPS2_OFF_BASE_ADDR+0xA0000)
- #define SYSCNT_CMP_IPS_BASE_ADDR        (AIPS2_OFF_BASE_ADDR+0xB0000)
- #define SYSCNT_CTRL_IPS_BASE_ADDR       (AIPS2_OFF_BASE_ADDR+0xC0000)
-@@ -970,6 +970,23 @@ struct aipstz_regs {
- 	u32	opacr4;
- };
+diff --git a/arch/arm/include/asm/arch-mx7/clock.h b/arch/arm/include/asm/arch-mx7/clock.h
+index 48c7c3367a5..03d1cc76e53 100644
+--- a/arch/arm/include/asm/arch-mx7/clock.h
++++ b/arch/arm/include/asm/arch-mx7/clock.h
+@@ -347,6 +347,9 @@ void clock_init(void);
+ #ifdef CONFIG_SYS_I2C_MXC
+ int enable_i2c_clk(unsigned char enable, unsigned i2c_num);
+ #endif
++#ifdef CONFIG_PWM_IMX
++int enable_pwm_clk(unsigned char enable, unsigned int pwm_num);
++#endif
+ #ifdef CONFIG_FEC_MXC
+ int set_clk_enet(enum enet_freq type);
+ #endif
+diff --git a/arch/arm/mach-imx/mx7/clock.c b/arch/arm/mach-imx/mx7/clock.c
+index a8328a0b224..72e0051373f 100644
+--- a/arch/arm/mach-imx/mx7/clock.c
++++ b/arch/arm/mach-imx/mx7/clock.c
+@@ -524,6 +524,35 @@ unsigned int mxc_get_clock(enum mxc_clock clk)
+ 	return 0;
+ }
  
-+#define PWMCR_PRESCALER(x)	((((x) - 1) & 0xFFF) << 4)
-+#define PWMCR_DOZEEN       BIT(24)
-+#define PWMCR_WAITEN       BIT(23)
-+#define PWMCR_DBGEN        BIT(22)
-+#define PWMCR_CLKSRC_IPG_HIGH  (BIT(17) | BIT(16))
-+#define PWMCR_CLKSRC_IPG   BIT(16)
-+#define PWMCR_EN           BIT(0)
++#ifdef CONFIG_PWM_IMX
++/* pwm_num can be 0 - 3 */
++int enable_pwm_clk(unsigned char enable, unsigned int pwm_num)
++{
++	u32 target;
 +
-+struct pwm_regs {
-+	u32	cr;
-+	u32	sr;
-+	u32	ir;
-+	u32	sar;
-+	u32	pr;
-+	u32	cnr;
-+};
++	if (pwm_num >= 4)
++		return -EINVAL;
 +
- struct wdog_regs {
- 	u16	wcr;	/* Control */
- 	u16	wsr;	/* Service */
++	if (enable) {
++		clock_enable(CCGR_PWM1 + pwm_num, 0);
++
++		/* Set i2c root clock to PLL_SYS_MAIN_120M_CLK */
++
++		target = CLK_ROOT_ON |
++			 PWM1_CLK_ROOT_FROM_PLL_SYS_MAIN_120M_CLK |
++			 CLK_ROOT_PRE_DIV(CLK_ROOT_PRE_DIV1) |
++			 CLK_ROOT_POST_DIV(CLK_ROOT_POST_DIV2);
++		clock_set_target_val(PWM1_CLK_ROOT + pwm_num, target);
++
++		clock_enable(CCGR_PWM1 + pwm_num, 1);
++	} else {
++		clock_enable(CCGR_PWM1 + pwm_num, 0);
++	}
++
++	return 0;
++}
++#endif
++
+ #ifdef CONFIG_SYS_I2C_MXC
+ /* i2c_num can be 0 - 3 */
+ int enable_i2c_clk(unsigned char enable, unsigned i2c_num)
 
 -- 
 2.52.0
