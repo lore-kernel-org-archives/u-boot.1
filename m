@@ -4,219 +4,174 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07011CFD37A
-	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 09:59:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB0BCFD37D
+	for <u-boot@archiver.kernel.org>; Tue, 25 Nov 2025 10:07:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DDAF83FBD;
-	Tue, 25 Nov 2025 10:59:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B86B83FBD;
+	Tue, 25 Nov 2025 11:07:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="maY79ZE4";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="nxPemiFu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18BA383FCD; Tue, 25 Nov 2025 10:59:26 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 0C19083FD3; Tue, 25 Nov 2025 11:07:35 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1095283FA5
- for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 10:59:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE19583FA5
+ for <u-boot@lists.denx.de>; Tue, 25 Nov 2025 11:07:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jan.kiszka@siemens.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OeXGyrVF6kqy85Djbd4Z0UtF0nQUCNTH9uzFytAN5R/+xotkxOYw2zSoeB7kaeYCXM9ZeAvY/zHLSYSFjLXRg2CTVvlvSUTthMjx0+lm2lzaAsYq3SLUsCF1V5TqdNi4vSSWm8YNrtApidMLil+o9DUnp2kiM7MpqAeNY2TujCZLX9oxSz4svTJvdcE1aV1IvuPrPsgbIVM9JyRLAAHanxu/tciA9zIrpLZzarslBFa/vQZCreJxw989CLyfsL8/XLy26Z13fAowIa80+ygsnUqkNz0JypHtDN1rMUwlk+Mj9Kii/svShMe4xWFoS31BmJMYk/MM7RFoB8dhqWuJTw==
+ b=Jx1ckyLxoCzlwdeh2gHkOCzVjz8MrE/mhE6EyRXZ6Wp3zuajIX+mxDpj9MW5bJjNzFD39rFcM9zF+Bjdfo90DA1DyLWbxyApD7V4kBP/0pEEp8M21Wf0/S4WigrbJIo6spejwlxZEpCOZ6fW41VYR24OHCqvj21VFhqAoGJZXVH8psEnEEas7kbMJJA1qPU/ZgjBsZwPWkBZSQT4vQvRLV2WJ6IMqdnAoYZ6Ch35B0fsrQk8dug+avfpUq3D8Sp0MrjAgjHREbiHR+K70E/No2s60X19bs9j0YCIsAVs5xdWO3W4lfy0NKfOR05ZPGNt7axz7FDnOEN50lzKaqsK5A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nY/do1poy+IRCK52gDxJ/uvgLpeuksvWWh0fg+20Hss=;
- b=GogXrE8WpyLRDU+VpK+nKzMiPRuh6jzMGGUE7o5HBr+au7IuRr76TE/TCp/X8pvg35bE5Er/R527oM9IAfCZomHwD4OeQFuQx4RSk3i9E8Pcv7avg2Pcj6fVbTpu6ZlnVL828LuO+eTcelBz13Pln2JEIf5w9Aap9gO1S1kUElqhAh+a3VTVdd/jToC3NPFTABk+TQ8K8N9LhHTDgQs4z+3+rtl/y0BpRBK/j4IMw3kDB4LcUdHEyZTYnK1kZhxe8ZjgqlhiZnbBW9Nuegih7e/zfMyKWpVh5GA+/UFq5QsVNMHzwazcsQHK6uHN/Go3taau6cQgf48ZJrmx32aO7g==
+ bh=2qJl0Df2YeD10DD60kvyrUm76bpNEFYiXRhluzz4FYM=;
+ b=whwmLaksI37SHotHJcr929W40H8ywKSWQqdpEs5J6xKk58n9jeJRwntqUZqseLVSZHFh27kk9V0tjFjQFTcZtcOEem2YZnOTxfTctkzcWODhu6muhjjSOtpM18GL+nj2eECgjJBJ2sP4MR3YuN4G8le6QlNCOdKOT8R/lN4WeTwGwbGb+Fk77ij747x44MQrdkx0RZ8RebiYhQ/gJCbV3tt1vXrxNIjQzr0itlZ0WBiHw3w69RogirRu5lXehSxErTY8aVzlEtPkynfAh5c7zRcA1yLefHF0AFfuybFhfpkHBVgqxXQM6jUdUOQfmdanfVOcH3v2HFfKKxCbmuPy/w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nY/do1poy+IRCK52gDxJ/uvgLpeuksvWWh0fg+20Hss=;
- b=maY79ZE4k7rv5ZrhSnwL764770ZIl0q8fjo2bJZAy3kc1nu7K9ZldO/vPRgGh5AGK05mpMq2zUNv6p2PHLkPIP+ozNZApnsfoHtOwfKYC0oOpb1qLuAuWSvon9R5u+2Pgg3PSDXfqEzsj4xAzBlM0aHti/PMIGSeIOaOmHLGEmS/G9VMuAD3V7ht/BAuyLKUvu1za0AInGL+h9Uh2RQFdTBg1KtARBgagK7hXefDWIwxOy9pfKKrIn//V/GE1XVbmeak5VgLEXpFMNHpYgJvVOpPw2KA6aM8QIhGoyptoSqdo4sS2F/VE5WaB68Z2tG7NSSF0YEsXOQeZfaLWnN4YA==
+ bh=2qJl0Df2YeD10DD60kvyrUm76bpNEFYiXRhluzz4FYM=;
+ b=nxPemiFuiR5u7n5Bg+irUKF8YvKj+fGDC7OnggaEmdjGjt0WQkuCl//Rz1b+sfgcZ/jwI9PZfphDzPdSQpzIfm768ovSyznYsydWUWtNx9U0xcTD2TWQbKVkV/lS9dSq8LGSxYF2h6sWIMaQee0ayr5hsAg7wmfsOdkDdciVk5k=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by GV1PR10MB9160.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:1cc::8)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by AM7PR04MB6854.eurprd04.prod.outlook.com (2603:10a6:20b:10c::9)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.18; Tue, 25 Nov
- 2025 09:59:22 +0000
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408%6]) with mapi id 15.20.9366.009; Tue, 25 Nov 2025
- 09:59:22 +0000
-Message-ID: <bf13f555-b1e9-4208-9497-baa3870bc0ed@siemens.com>
-Date: Tue, 25 Nov 2025 10:59:21 +0100
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.14; Tue, 25 Nov
+ 2025 10:07:30 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9366.009; Tue, 25 Nov 2025
+ 10:07:30 +0000
+Message-ID: <9bb15fc9-7434-4ba4-814b-d99cdcd7a4f8@cherry.de>
+Date: Tue, 25 Nov 2025 11:07:28 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] arch: arm: mach-socfpga: Adjust a raw sectors for MMC
- loading of U-Boot from SPL
-To: Sune Brian <briansune@gmail.com>
-Cc: "Chee, Tien Fong" <tienfong.chee@altera.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marex@nabladev.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-References: <cover.1763140421.git.jan.kiszka@siemens.com>
- <c1dc5e70f6bbde1f2b7dfd027a90f09bb4c1e939.1763140421.git.jan.kiszka@siemens.com>
- <e39163e2-cf21-4a73-8170-8066d93db049@altera.com>
- <c536c33d-8330-49b1-821d-3d218c49ae23@siemens.com>
- <CAN7C2SCEnkiLtRyiRx9ykLWOWJFNkUOh-UNZ+Qaq=bD5wk_a=g@mail.gmail.com>
- <c813c1a0-d224-4e82-8494-1a7d2676b29e@siemens.com>
- <CAN7C2SBtyc_i3inaCMBCUr_x40_d1LqEARtb2iJms=rHt2TtsA@mail.gmail.com>
- <74bf28a9-dbcb-4bf0-8f99-9239018a94a3@siemens.com>
- <CAN7C2SDz08cDgKQXMwJfDf_pVfqhhz2BJhVKHk2WqHP+hhE5Ow@mail.gmail.com>
-From: Jan Kiszka <jan.kiszka@siemens.com>
+Subject: Re: [PATCH] mkimage: Add support for bundling TEE in mkimage -f auto
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
+Cc: =?UTF-8?Q?Carlos_L=C3=B3pez?= <carlos.lopezr4096@gmail.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ u-boot@dh-electronics.com
+References: <20251118232045.578034-1-marek.vasut@mailbox.org>
+ <9e9ec219-3ae7-4ec8-8f85-5edb4bbbe53a@cherry.de>
+ <7b21c476-ed12-48da-95f7-dd354e116a70@mailbox.org>
 Content-Language: en-US
-Autocrypt: addr=jan.kiszka@siemens.com; keydata=
- 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
-In-Reply-To: <CAN7C2SDz08cDgKQXMwJfDf_pVfqhhz2BJhVKHk2WqHP+hhE5Ow@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <7b21c476-ed12-48da-95f7-dd354e116a70@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0216.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ac::20) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:588::19)
+X-ClientProxiedBy: FR0P281CA0231.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b2::11) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|GV1PR10MB9160:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4c6106fb-4561-4d4a-8a6a-08de2c094eec
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AM7PR04MB6854:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1669d988-6fa0-4d2a-c5ca-08de2c0a7197
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|7416014|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?b0NpaThJWkpmVVBGcis5L3pKTVU4dzBRM1FobmcyRmlqdnljTGV0RWxxN3F3?=
- =?utf-8?B?RTJJMTEydU5mRmVZeVBtejRzbUhPMUxtRTRRMXFkWnFURFkyWGI3MFV3bW4w?=
- =?utf-8?B?MTl3ZGE2N2tLNnZ0YVhTM01HY2ErYy9pQmRyTlVqWVpmYXFzZ3FBRHZVVXYz?=
- =?utf-8?B?VjA5R0dMb2pKMGYzNmdDYUFKV0ZhemFYTzZBSzBpTHlzVEMzL21jQnk0TDdi?=
- =?utf-8?B?a0tKOUxWWVlic0hwMEUvQ1V5Sk4yeXZIUFFMOVBKclkzWTBCcWs3SHFUREI0?=
- =?utf-8?B?Q1hKR2tQTGxGaTR2Y0cvN1VMd0plTVNxamM1NElRQjhJQVRlelVSaGZqbHhD?=
- =?utf-8?B?dHRZM1lCTnNweDlvYkJTQjIzbk1xdk9KS0swRTFJMmIzL21CT3k2eFBUM2p3?=
- =?utf-8?B?dXI3UFAyd1k4Ym9ocnZCd29oT24zcTdXczEzR0U3STdWaUFpYno3Lzhlazl3?=
- =?utf-8?B?c0pBQ1EvdE1Da3cxdlNxNDREQU5WSUMwR0o5SXpUd2pLYzUyc0xaejBHYmJh?=
- =?utf-8?B?Vm5NSUZzOXRJNEZkUVZUWGsyTFh5ZnNXWHBiUjl6M1Q4M1RlWlBMcTJocVhH?=
- =?utf-8?B?UHkzRXd3VnVyNENHMmY4SWlaZVlWVUFYWU9RNzVHMitmUnJ5RU1ZUTgybUZC?=
- =?utf-8?B?TlBJMTBzV2EvMHV0Qk9lWnJIek9qd3NJWnd6dXA1bWE4ZTFXbm83L09wL01l?=
- =?utf-8?B?aEpUOGJYRmhYM2R5WTZUQUU5VzF2V1R1bVNuaWs1NTNDTmxpTGlVdlc2dG9y?=
- =?utf-8?B?UzZ4ZzlGenY3ZnhISCtvWXhPUkpObFYxRGZKaG9VU3huR2tXQXVwSHBhYzZa?=
- =?utf-8?B?TVRtTktTS3RLVEZDVjZzeFFWakE0cmtpeEd0TnNwMms1WnArbE9qRHljV0py?=
- =?utf-8?B?TytYM3NKVTVpdVdUWWZmd1dQR2wxb09lOGxZckxneU1WRzEzbGJad25MUnhM?=
- =?utf-8?B?Vk1ScHFTcExRNW9HVlZTaUhvL0lhQjlqYXJhRFhRdUtDbURYOVlaYk5NQ0Ro?=
- =?utf-8?B?ZTFWNkQrM0NwMmZyZHlQVlFrUFhqOEJEQzh6U1N6elNDTWNnTk9RK3ZRd0Yv?=
- =?utf-8?B?Y3EvRDI4WVRmRHRId0tmbm5UTm9hU25zUVFPMStyOXBFc09nZW1TNW1vb2Fx?=
- =?utf-8?B?NTZWTDU1TUR0WDdkVkpyY1NodUJxMTF6MmQyZCtLNVFhQzE5RUdVWkhVbHFy?=
- =?utf-8?B?R2xnOFRlUXdBMDA1M0xVMFdRK0xqSnQ5eWVpS2N6dUtRUVI2SDFIeXN4RjdT?=
- =?utf-8?B?WGVyU1h1WVF6THI2by8vYmtpMGdaNys2SE5DK3M0VGhHWHRjZWQyUktES0tF?=
- =?utf-8?B?R3dEZ3lGcm9hUkl6dEZLZjREdUloVVBUUEluMlJGNkZpeVdUZzVTbDVES0xL?=
- =?utf-8?B?ZVJNYUJuUVBVWUVXbS9CaldpMHdWTkw1TjZTTVJYdWxUTGFzMVh3OFNXMXdw?=
- =?utf-8?B?RExkWjlYbzI4UTJDTlpqQVJscU4zQzNNdlNxSlN3VnJLVHZwekpicnRnMnF2?=
- =?utf-8?B?cmV5OUNIN3dyeVp6M2lWYXlaUTkrOUJzZmZlSGdQby82UGlIeStzSkdCeUgr?=
- =?utf-8?B?UWZHaGlLK0V4bnJ2clNaaHZYNERGSUdHb0EvUS9vRzlkY2xSRXZGK1Q4Skpn?=
- =?utf-8?B?alBHQ0VMdU1kUVZQNEhWdnhpaU9UZS9UNWFhalZ5Q25tK0xKbURPVlFMVGMx?=
- =?utf-8?B?d2pQeHYzV3hOcTFlSnNMSXlQaE9KdTBoVEovdnVtdUxZTFNCT3NOcnNhVUdu?=
- =?utf-8?B?ZU1Rb05BU1BibjVkVmNRend0ejNGVVNZazlSWnVNVXNxUk1zZVFuVFhUQVRY?=
- =?utf-8?B?ZEw5ZGNPcHVYdlAyN0xnMFA5ZUN2V0FsU3RETitDQ2dsbFYxckE2RHJ5blZ2?=
- =?utf-8?B?ZU5FcVBKMnE1UXJCcXJvR1kwVFNlejdqbm9qaXA0SUpBaTcxdDRHOXBmQWtH?=
- =?utf-8?Q?9dVF5SlyY2rCqwdgLoPpTNlFMZw4dckr?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|1800799024|366016|10070799003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZGFGdHd5MEIrdXFsRGdlY2J2QUFEVXBDM3ZOalF6N2xOaEdDMGdTK3VZaU44?=
+ =?utf-8?B?dk1mZ1VTSHE5M3FZQXhzNGx0Zk1XUi8xQTB0YmRvSzBnbW5QazlBQ2tQSUc5?=
+ =?utf-8?B?ZVF5cFRjMVJ2V0VaT3k5VTBwK0FRWU13WjliRzdjUUljMGdSV0FMYVprOHFU?=
+ =?utf-8?B?Vll4ZGpZUHlrWUdhNU90V0NiWHBoYWtBUXJoS04rbG5NaU00VjZBbUUxMG9V?=
+ =?utf-8?B?SWx6VjErelFsaVl4NTR6Ym5XNzZtaWVYR1NPUEhSRVkrTEdGQmJkUGFmTUFP?=
+ =?utf-8?B?dHZBM1M4ajlQSkZpSzVLcVRUT0kySTR0WGxIRDdhMjNOeFVoanJUc3hmOHdn?=
+ =?utf-8?B?QUhJaHJrQllUS01yeWFXc25TV2FpR1oxSG16eUxKTlBJWENLWEpjWG9JNnA1?=
+ =?utf-8?B?Z3N0MGtJME9oQlZzQ0pJZnI3ZEcyb0xLc1RJZE1SMm9PS0V4eW1XZnI5R3c3?=
+ =?utf-8?B?SWQrQTB6OXh2TVVXMHBpMll6d284MEhXT3F2ZHpubG9wbGtNb3BjRlJQK05z?=
+ =?utf-8?B?S0hSelAyckxPNW5nVGllNHR3OXdUWW5odHVkSXNOLzNiL0hrWU92UmFuZXh4?=
+ =?utf-8?B?ak41U24xM0pHZHlXS01GdWw2ZFlmTzRoWmZjTzZhTzlRYUJjR2ovRjFmem55?=
+ =?utf-8?B?c09SU0RZM1dwREUyK1BaTllEYVh4eDZNVnJ6YXFUZjBRenVQQmFvNHBuOWkw?=
+ =?utf-8?B?dmhzNnVjZ29tMG9oUU9OTnN0elNIYVBUR1VzNWJ3b0xsRE9tSHliZ0RNbVpK?=
+ =?utf-8?B?ZjVYUHZaYzFiZDJNaWttUDBEWUViQzJpS09mdSt5dE9pUGFkWWpwclNrZ1o2?=
+ =?utf-8?B?TDRHZlhVbmtPVlpLaDhRSUhkMUpCc0U2NXljMjBLamJwQzQxaUhwejFjN09Z?=
+ =?utf-8?B?UHVDbEszSSt1SWpYdzI2dTh5eDd0Z3V3Nk1pcTdUa2NuWS9uZk80V3d6VC9m?=
+ =?utf-8?B?VGJQZ0o3YTNhN1MxNDZDZFJhc1k4RlByV2E2ZCtTZWl0eUF1c3UyRjIza2po?=
+ =?utf-8?B?SDRFM1gwWnBZVEZsVlNxK3ZSM2l6eGFFWmxrR1RXYnRENHZuTldIeTNtakh1?=
+ =?utf-8?B?QkhQbFMxd3N0d1JwOXBmQThZMG9mNXFCeHJXaTZNM05YWUUxMjZraWFkZTBx?=
+ =?utf-8?B?YVB0TEFpaUpOQU9ydFRIRVVWejJrT0p3WXQwUzJlRXduSVFKSGV1OFNtTTJM?=
+ =?utf-8?B?VTJyRE1aeG5CMDBlREx0TlRkYkRWaU8yNzVTUkd6d2xTMkhWakhEYitaQkNW?=
+ =?utf-8?B?bDYzRUNOZGFqZGVOUWpha2NGTERMdzFHa0F3eVdQYXBmL0YrVHRuRG1EY3Q3?=
+ =?utf-8?B?MTl4TWt1YmxrYW1mb0VWUXc1dnpjRkdaS2lzNUV5U0k3T091VW1GVHNzWUlI?=
+ =?utf-8?B?R0g3ZW8zaTFzYkttSmFnTGZ6VVNycitwVEJ6N2thYkhIS0hxVXFyT3Z1eWxi?=
+ =?utf-8?B?WEUxZ25wTmlKb2pvOWdraG1qVWdkeVZGSHozblgyTWRyWjNQWWhuaitJMCtS?=
+ =?utf-8?B?QnhyUG5IUGRFdlpDdnVCNVdyaVlWaTlTZVN1WGx4eFU3UThPLy9NODZnakhj?=
+ =?utf-8?B?TjNBK1pHVjJaeURuTktwL3hQQ2dEVW5MNlhlaUlZbDRtanhTSVAyd05aMXJo?=
+ =?utf-8?B?S2Z1L2J0OEx1aDFycWUxQ0FTUFg1MFEvbUp2RExCWWp5ckRBT1dIQklVejls?=
+ =?utf-8?B?NHp2aElNV2xDUXhLSnR3cVRtOERHamZSRVpJOHlta1ZLQThEWDZqTDVxS05w?=
+ =?utf-8?B?ZlhyS2trbkRqajBUV2R0SHpMekhYN1VYWXVNbjNLcTZZeGFiSlg4eVlIeXhw?=
+ =?utf-8?B?eGl6Y2Y0cS9iMmFNWjZaelVmN1J0SGovRzRaeEZqbGdMOWFON1l6NVVtcWRI?=
+ =?utf-8?B?OC9EVE8vYzhNeXh1T1RrOG9ZeHVhVjBhTlBZUGJTdTdtdzgrcE1TOXdnaWdo?=
+ =?utf-8?Q?ItzCU8TDdmTiMQX9vAxkHYwLF8c1GDHB?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(376014)(366016); DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(1800799024)(366016)(10070799003); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WVBmTWR2SDlmZDVDMStnUllqY25DakhNQnZvVS9lU0kwSHZ0OTE5dnhoN2hy?=
- =?utf-8?B?YWZ1bG13K0xuWm03eElkcHc4d2pXbHlESWVCU1hTTnJyeVR5SnZtbFNleE51?=
- =?utf-8?B?eWJ3U3EzNFlSbVlaMk5NSVdpdW01clhmZGxuUnV6aE9mcG5vTE9yKzFzNDgw?=
- =?utf-8?B?VFVVRjN0RStvbGRvZEdIRFUxNm1YdGc1WjY0UjVOTXhrT0xnY3ZHRVNrQnpy?=
- =?utf-8?B?bVhnZjcwSkJqMXlMR3YwMGhiTklOTitDUWxXbm1CanlsWUQ5cTFacnI1YUEr?=
- =?utf-8?B?NERkOUxIME84N2NFc2lyTlR2R2hRQWgzbTM0bkFFbGFmeUFaMEhINFptZFBC?=
- =?utf-8?B?UmxTcjJJWGF1YmdtaGVlckVnb1JHK01NdzlNZ1B2WVpJcG5zUThreG0yM3VU?=
- =?utf-8?B?VEVnNGQreUJ6SHhOcm1NeVUvcUZTbUxvQTYzZGxORUlnVjN0dGsrMlJqVDZG?=
- =?utf-8?B?ZDFIM3J6Q001TkFEbTRmdkYvMUEvdCsxVDh1KzJPOERUS1haREhiYS9uS3ZZ?=
- =?utf-8?B?Ylg1ekxoeXNDa3pKV1BHVlN1YVNOYmVHV0RQZk5hTEplM3JXQzNqYjVDNHJz?=
- =?utf-8?B?ZCsxWmhNYXlmaVJ4bkNmR3pWKzhLQlVBUUp1blFBNXlJZG9zME5oa1VxU0pT?=
- =?utf-8?B?Znl1RkxOYTRDeTZPanRINmpHSm1jYUFnNGFpV0hXY2J6MmRQeUZRQUhGTnlB?=
- =?utf-8?B?YXI0M3pKbXA5enF6TUh0aXRUZkNXNUpQWHF5c0d3c3lDdUZEY2dWNU1lenhO?=
- =?utf-8?B?L1A2S2pVNUhrUXFzT2ZSazZTVFZES0pVMzEzc0V6allKT1ZUUWl4Y1BNUjFo?=
- =?utf-8?B?bFZWZWZqRWw0R2daSVJySVNyc0FoNTJkbFlJdzBYRnBMVUJGRFByU2lVVW44?=
- =?utf-8?B?TjBhTEtEYW83SGdheVFWelNKMElsSU5JdjlFcTZXZjBMcDZlNTZvNEkvQUR6?=
- =?utf-8?B?c1BZRFBzRFFnbVFpdXhVU1ZXeW5PWFNxakZJZ3hINy8yRzV4c3VXZkdUaDhJ?=
- =?utf-8?B?RUxBVHpoOWx2ZkIwL1UxcnBVWmkvQmdBYSsyTVpxMnNMNzBNRktWaWZjeHJy?=
- =?utf-8?B?N3NZYTBXQ00yUUg2a1paMU1GZjF5R21nVitnSWRiY0I2enBWWXB5Z2lpbitG?=
- =?utf-8?B?ZW1raFhDMXhCbTNWT3VoNlp1WThjM3ZwTEk0RlNlVnhWQzhOcUsyS2l6bE56?=
- =?utf-8?B?cVV0WE5DNHlEN3doUlRLTVJMa3JPcmZ1YWw4VEFjaVliaXgwVmE2WUJXTTgz?=
- =?utf-8?B?K2N1bTlrVHJlT3JVMGdNa1NiWk93SDI2UncwQy9PR0lLKzlVcVBURFRSa2Jq?=
- =?utf-8?B?MGh5WlZsVWl5TzVlQXJaU3NnRm02VTIyWGVhL29ySlRONG91bHk1dGdTYS9v?=
- =?utf-8?B?c2Q3OWgrS2dUL1ZhSEhoM21IeTNpOTA3MUIyYitxRzBGa0g2Yy9zSEVNelEx?=
- =?utf-8?B?ZVlScWNTcFQvSkNwNlBlR3hZdWRRbkdzWFlxdVZ2MXJqRzZwV25JdWZHakp6?=
- =?utf-8?B?bkhvVllaUWw0QWxqbjE0UmVMdWY2aWtxcDJUWGNpT0lLSStpT2NHcVNRS25T?=
- =?utf-8?B?ZG8zckN4azVYNHQ2cE9pQTZBNngvZVF4aHN3U2FSL1QwVFRRYjRCdkVKMG9B?=
- =?utf-8?B?akU3TDRtYWpEVkdFLzJMVGg5OE5MTk5FUG5ZTUYwbDlyV2xTaGFTOU1UeFMv?=
- =?utf-8?B?YWVCdGtxdjdpMFgxUkYzVjNsV2UxenF6MUNRMzlMa1RBOFVKSWt0NllXYkx3?=
- =?utf-8?B?eDdOTnYxOTJJKytwYWNmb2JjaEZRRU5lL0NrWjJMSmNMV1k2Tmhza1V2NzZN?=
- =?utf-8?B?WUk5SHVabi9lem9pa1ovNUpCNk91cElkc2RmaXoyQ3BGQnozYlRyZGx0Tk1h?=
- =?utf-8?B?MnloVWJ6VnRzaExaZHloRkpFZGdDWHpVZ1IrWndPSUI3WEQxeVYyNDdKcEEz?=
- =?utf-8?B?ZEJWVDZzWnl0MWxsdEpiaTh5eXQrdW5TYURqK2RjL2k1YnQvWUNWOUlJYVRx?=
- =?utf-8?B?dHBhR01Nd2liTkg5ZzhsMkJGL055YXVFSk5XWWpPZm0wOHY1TmcxSklLR2dB?=
- =?utf-8?B?M0JDYVJWSGthcGJmbjBCeDB5KzFubmowYkIrcFRzNDZmWUU3MzdtbUdocm4z?=
- =?utf-8?B?WHBHdE15aFU2Q0RBcjd2cmpnZ29DWDJJa2dlSlVBWm5GNFR5VExUUjZoMk8w?=
- =?utf-8?B?WkE9PQ==?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4c6106fb-4561-4d4a-8a6a-08de2c094eec
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VUhhc1ZocytUcFB6OERUL2N5VFBzS2lScG5sbjBaMENvSURwYzNJMjY1NDBp?=
+ =?utf-8?B?RldacVJNR2ZBQnpRMEQyN1dJajZvUEY4RUEyY2RsSU1pZ0xlZExNemNEM0tk?=
+ =?utf-8?B?WG9kRkp0c3pEN0RHazNxWFZMZFVtTUJRKy9pamV2YUdmTDBHUkY1M2xjWHM3?=
+ =?utf-8?B?L0tqYS9yb1VJa3ByUFdHZnlUWUNYeVZrR083d2RxUndFNlNtMmJHNjhIQ0dw?=
+ =?utf-8?B?RjZldVVMQWFjcmdIQWdMamtnVEh5dUVtbENieVhsV25wb1pTRnBubVhkaW1v?=
+ =?utf-8?B?TjFaT0tYM0pzNlZ1N3kxSXg1Z1dkMUdQQ2l1YzRMYUQ3NEhlSW43NE5ZdWJ6?=
+ =?utf-8?B?aDBiRGs1VzVma0Z4aG5XSEIzRSthMloyc3NITlVKenMxelNGSHVlMG96Rjl6?=
+ =?utf-8?B?VlR0Nm5BdVNmY2h0VTZwU3o3cGJLbS9lREo0OExiS0VyRHhweEs4bUEyc25G?=
+ =?utf-8?B?T2lyYnFqamt0VGlzWE02NlR3bjRqSEhqbndUN2pqRDBLUy9lNHEzSFhqeWNt?=
+ =?utf-8?B?ZlIyeW5XekFCWUcrWWFoSlhFbWxBakIwaklJYksyVS9YQWFlVDBGencrVzRq?=
+ =?utf-8?B?MXlUT0hvRGI1djdMQis1aUZoWnd2U1gzWGFSY21PMFR2YWF2SlVXTzdVcXhx?=
+ =?utf-8?B?QzIzKzFJN2U1Tjl3L1BnZzRRZkV0NkpSN2pHTUd1MVhhV0RQNVlZclVkd3pE?=
+ =?utf-8?B?Z3lodS9BdHRFQVMxVjRFWklhS24yNnR4TFpLZzl5cU1uQTVvLzR5TVNvUWlW?=
+ =?utf-8?B?UHU0SXRld09DRXRKOWViSHZBeGVqZ1FKaXNndjUybDVCQXFPS0NMVWcwUy9i?=
+ =?utf-8?B?M0lGTnNsSjh4dUR5cTlucE9XZFNCZUxqTVJSRzNmMmg4UlUyRjRSTUdCV1NH?=
+ =?utf-8?B?ZjVFZXNBd2ViNGVwcjhXZnlMN2Q5MnNpMThWcnhXR1FJYTM3eHpHSFhheXll?=
+ =?utf-8?B?RWZoN1lBS0UyUjl4L0hMMmFOQk9jSXNOR2ZheXo2Y0gwTUVZRGFMMXdoWWFz?=
+ =?utf-8?B?ekJ4c3g1ODBsbkJGMEljbDd6REpleXF0aWEyd2VaRkV5bzhVak9QL1pyaHR1?=
+ =?utf-8?B?S0MxZU83WTNvblhIMmdvU1BvNnh1Rll5eUZTSU1aaUgxY2dkSjFvYTNFRG5Q?=
+ =?utf-8?B?RTA3MG45WlZ3aGZkSS95TEVrM1dXYWxGYUFYb2JkVmJwZTJzM0FWSUJydFBm?=
+ =?utf-8?B?aktTYVF3YkNOYUdQSnUzNWVPY0tiaFFlN05qNGc0aEw4MU5oRnFRWTdhekxO?=
+ =?utf-8?B?QVpjR0VGZUhGL3RvczltdUtwUFRyUllUSDFvcTd0UDZrMUNoSGhncGpCcmVU?=
+ =?utf-8?B?ZE9WSzFKU3llNlN1akdEMnhHbkxPUEpHeHFLS1BBVzIxMGVsUVUzRTVYS0ox?=
+ =?utf-8?B?Ri8vWUlHQXVLUDYzU3ZMRlNTU2FOb1NRL1JDSEpVdmw3N1hUTlg0VEdFSXBh?=
+ =?utf-8?B?eUZPN2I1SkpHa1NRTmIxV3ZITk5BV1hvdGtJR1U4QXdFV0Nrb2F5S0E5NDlI?=
+ =?utf-8?B?Y2JHcFJ0RlVaVWl0eklLNjhXTjhwbzNjbnk0NzRYRmdyK25kbTNDNjhKMmFs?=
+ =?utf-8?B?RFQxTWtGTm5KNlROK29lcU9ib1dOb0FMUlgrdmxYd3R2UjNEQUJXaFJHSjNN?=
+ =?utf-8?B?RmptTHVLcW43cGVqem5TOUdqaVM4b2JrUEVtN0RDMmxjc2Q2M25KaUcxNGQ1?=
+ =?utf-8?B?Y3lJRkFBczFjMkpMKys1ZWNHanUvYzRwOCtNc2U3TDZ2alNlWTh6c3ZuY3Az?=
+ =?utf-8?B?MEl5ekpESDM1aU1WNm5oTW5HdkR3TDd0cXdPbDdJV0dicVgxZGtTandyVkxF?=
+ =?utf-8?B?MkxXZHB5enlPeUtHSXphSE5KSVIwRENVYXJhYmtHSm1oMUg2eHdVME0rdU1O?=
+ =?utf-8?B?UUtPSFUxVFFWQkx3cE91bVp5cHgyWEM1cVltcG5rcXZJcDh0OGpSZ1NEaGFU?=
+ =?utf-8?B?UlNMOHk3WDhsWkplbmxnT1FvNkJZbTdMSEhyZW9zb21Oak5mSWdkMXRZU2hY?=
+ =?utf-8?B?VGtsSzQxZ0FxRy81WnA1ZEorNTVrZFh0VkVkeVUvWXZIdjVDdHZqcTRiTnd3?=
+ =?utf-8?B?S1VhKzZzOXZmYkx4ZzdZbm1jU2toaDdRbnRCYUVtbVlSZDQ3ZmpEWm9aUlFk?=
+ =?utf-8?B?N0M2NmlOMkMvcmNMMlllYXllY0lCWmhVaXVOc2wxUi92R3FXUUFGWFdZSWdF?=
+ =?utf-8?Q?pP6Phon62EoRexRG5VpaNHE=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1669d988-6fa0-4d2a-c5ca-08de2c0a7197
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 09:59:22.5001 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2025 10:07:30.1327 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qLLNFPPKog+NXbT48Yu6qTD2wSrScRIMOyPWlShqOsluFlN8yTRENijtzw6rJqBAcH6K1SB4J60kjhNagP3aLQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB9160
+X-MS-Exchange-CrossTenant-UserPrincipalName: H7fr8SJLNeb/d4mPySuTXySkwPPeRNMVee/cBS/k0RicMEB/TJ+6DtfYbwWgGACCzJ12BkHHRsUqzu3obiQFKIVKsjxBK+rlOoAdG7sc7V4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB6854
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -233,52 +188,263 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.11.25 10:45, Sune Brian wrote:
->> That's because it never used that (intentionally). We always booted from
->> a partition ID, but the old versions had all methods enabled, and that
->> papered over the fact that they were mangled into something that was
->> supposed to use partition ID but used bits from the other paths as well
->> to compensate mistakes.
+Hi Marek,
+
+On 11/24/25 8:23 PM, Marek Vasut wrote:
+> On 11/24/25 4:05 PM, Quentin Schulz wrote:
 > 
-> Are you using the mainstream or Altera U-Boot trunk from the beginning?
-
-We never used downstream.
-
-> Why does it sound like we are not on the same page?
-
-Different boards.
-
+> Hello Quentin,
 > 
-> It is not even allowed to select two settings since early 2025 major
-> changes on the detection of the boot method.
+>>> Example invocation:
+>>> "
+>>> $ mkimage -E -A arm -C none -e 0xc0008000 -a 0xc0008000 -f auto \
+>>>            -d arch/arm/boot/zImage \
+>>>            -b arch/arm/boot/dts/st/stm32mp135f-dhcor-dhsbc.dtb \
+>>>            -z ../optee_os/out/arm-plat-stm32mp1/core/tee-raw.bin \
+>>>       -Z 0xde000000 \
+>>>            /path/to/output/fitImage
+>>> "
 > 
-> [*] Use raw reads to locate the next boot phase
->                                            │ │
->   │ │                                                 Method for
-> locating next phase of boot (e.g. U-Boot) (MMC raw mode: by partition
-> type)  --->                │ │
->   │ │                                           (0xa2) Partition Type
-> on the MMC to load U-Boot from
+> ...
 > 
-> How can you select two at a time?
-
-I was referred to the time before the cleanup attempts.
-
+>> Which formats are supported for the --tee-file parameter? OP-TEE OS 
+>> itself has multiple versions for the binary header (v1 and v2?) and we 
+>> can pass either a binary (tee.bin) or an ELF (tee.elf) in binman, c.f. 
+>> tools/binman/etype/tee_os.py
 > 
->>
->> Just study my series to see all the breakages. It was never clean,
->> though, and that may explain working setups by luck.
+> The raw binary only, see the example invocation above.
 > 
-> I am using a custom board na socfpga on Cyclone V SoC. There are
-> no such things about luck. Either it works or fails.
+
+Must be documented then please.
+
+> [...]
 > 
-> Completely lost on your case and the patch.
+>> OK so... On Rockchip we have TF-A and OP-TEE OS split in multiple 
+>> entries with different load addresses (see @atf-seq and @tee-seq in 
+>> arch/arm/dts/rockchip-u-boot.dtsi). I guess this means we wouldn't be 
+>> able to use this auto FIT?
+> 
+> Are those multiple "versions" of these binaries or are those really 
+> separate parts of a single binary ? The later seems a bit odd. Do you 
+> have an example of such configuration?
+> 
 
-Your defconfig may compensate the bugs then. I was not lucky in finding
-a reasonable way to adjust the de0 config to make things work again.
+Same binary split.
 
-Jan
+Rk3399, PX30 and RK3588 (the three Rockchip SoCs we use on our product 
+line) have this.
 
--- 
-Siemens AG, Foundational Technologies
-Linux Expert Center
+- For PX30:
+
+Checkout trusted-firmware-a repo and build with
+
+make CROSS_COMPILE=aarch64-linux-gnu- PLAT=px30 -j`nproc`
+
+Compile U-Boot:
+
+export BL31=/path/to/trusted-firmware-a/build/px30/release/bl31/bl31.elf
+
+make CROSS_COMPILE=aarch64-linux-gnu- O=build/ringneck 
+ringneck-px30_defconfig -j`nproc`
+
+- For RK3399:
+
+Checkout trusted-firmware-a repo and build with
+
+make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3399 -j`nproc`
+
+Compile U-Boot:
+
+export BL31=/path/to/trusted-firmware-a/build/rk3399/release/bl31/bl31.elf
+
+make CROSS_COMPILE=aarch64-linux-gnu- O=build/puma puma-rk3399_defconfig 
+-j`nproc`
+
+For PX30:
+
+$ mkimage -l build/ringneck/u-boot.itb
+FIT description: FIT image for U-Boot with bl31 (TF-A)
+Created:         Tue Nov 25 10:52:42 2025
+  Image 0 (u-boot)
+   Description:  U-Boot
+   Created:      Tue Nov 25 10:52:42 2025
+   Type:         Standalone Program
+   Compression:  uncompressed
+   Data Size:    659944 Bytes = 644.48 KiB = 0.63 MiB
+   Architecture: AArch64
+   Load Address: 0x00200000
+   Entry Point:  0x00200000
+   Hash algo:    sha256
+   Hash value: 
+2f6a1658befcd8330843ed5d61ee5b539000f3dca5f2b35311be064596fc94f7
+  Image 1 (atf-1)
+   Description:  ARM Trusted Firmware
+   Created:      Tue Nov 25 10:52:42 2025
+   Type:         Firmware
+   Compression:  uncompressed
+   Data Size:    106496 Bytes = 104.00 KiB = 0.10 MiB
+   Architecture: AArch64
+   OS:           ARM Trusted Firmware
+   Load Address: 0x00040000
+   Hash algo:    sha256
+   Hash value: 
+e6d48a0c4a47d8132d8185b58a1f5e44c025eed6eb9c4328a40feec85446281e
+  Image 2 (atf-2)
+   Description:  ARM Trusted Firmware
+   Created:      Tue Nov 25 10:52:42 2025
+   Type:         Firmware
+   Compression:  uncompressed
+   Data Size:    129 Bytes = 0.13 KiB = 0.00 MiB
+   Architecture: AArch64
+   OS:           ARM Trusted Firmware
+   Load Address: 0x0005a000
+   Hash algo:    sha256
+   Hash value: 
+3125317584ab4860216e817612321962a0a904f14c830fd64961eaf12c15215a
+  Image 3 (atf-3)
+   Description:  ARM Trusted Firmware
+   Created:      Tue Nov 25 10:52:42 2025
+   Type:         Firmware
+   Compression:  uncompressed
+   Data Size:    112 Bytes = 0.11 KiB = 0.00 MiB
+   Architecture: AArch64
+   OS:           ARM Trusted Firmware
+   Load Address: 0xff020000
+   Hash algo:    sha256
+   Hash value: 
+d856721b954d3b7d74bca14ae49a3ce52b17acde932bb2218f927af73c422b9b
+  Image 4 (fdt-1)
+   Description:  fdt-rockchip/px30-ringneck-haikou
+   Created:      Tue Nov 25 10:52:42 2025
+   Type:         Flat Device Tree
+   Compression:  uncompressed
+   Data Size:    72912 Bytes = 71.20 KiB = 0.07 MiB
+   Architecture: Unknown Architecture
+   Hash algo:    sha256
+   Hash value: 
+0d8d2d650a311a7085ccb883409e680daec58df83a27b76724de60465342777e
+  Default Configuration: 'config-1'
+  Configuration 0 (config-1)
+   Description:  rockchip/px30-ringneck-haikou.dtb
+   Kernel:       unavailable
+   Firmware:     atf-1
+   FDT:          fdt-1
+   Loadables:    u-boot
+                 atf-2
+                 atf-3
+
+According to datasheet:
+
+0x00040000 = DRAM
+0x0005a000 = DRAM
+0xff020000 = PMU_MEM (SRAM?)
+
+$ mkimage -l build/puma/u-boot.itb
+FIT description: FIT image for U-Boot with bl31 (TF-A)
+Created:         Tue Nov 25 10:53:47 2025
+  Image 0 (u-boot)
+   Description:  U-Boot
+   Created:      Tue Nov 25 10:53:47 2025
+   Type:         Standalone Program
+   Compression:  uncompressed
+   Data Size:    897112 Bytes = 876.09 KiB = 0.86 MiB
+   Architecture: AArch64
+   Load Address: 0x00200000
+   Entry Point:  0x00200000
+   Hash algo:    sha256
+   Hash value: 
+5da93c500366e99d5fe3acb84b32b5757a90d8ef32fe73052bc20f6ca17f0b89
+  Image 1 (atf-1)
+   Description:  ARM Trusted Firmware
+   Created:      Tue Nov 25 10:53:47 2025
+   Type:         Firmware
+   Compression:  uncompressed
+   Data Size:    143360 Bytes = 140.00 KiB = 0.14 MiB
+   Architecture: AArch64
+   OS:           ARM Trusted Firmware
+   Load Address: 0x00040000
+   Hash algo:    sha256
+   Hash value: 
+30e187d1b9c029657b1a9e029e5f7ad34fbfd5f9ca4a44cb1cb48750a92cf09b
+  Image 2 (atf-2)
+   Description:  ARM Trusted Firmware
+   Created:      Tue Nov 25 10:53:47 2025
+   Type:         Firmware
+   Compression:  uncompressed
+   Data Size:    81 Bytes = 0.08 KiB = 0.00 MiB
+   Architecture: AArch64
+   OS:           ARM Trusted Firmware
+   Load Address: 0x00063000
+   Hash algo:    sha256
+   Hash value: 
+7380684a38dedb22d648d835934ef573c3e32a15e4b81cbc4ec158d17cb707ea
+  Image 3 (atf-3)
+   Description:  ARM Trusted Firmware
+   Created:      Tue Nov 25 10:53:47 2025
+   Type:         Firmware
+   Compression:  uncompressed
+   Data Size:    8024 Bytes = 7.84 KiB = 0.01 MiB
+   Architecture: AArch64
+   OS:           ARM Trusted Firmware
+   Load Address: 0xff3b0000
+   Hash algo:    sha256
+   Hash value: 
+a887bbaec347403739e27430cc512922178b694ebe001e22c2cb4774254d67e6
+  Image 4 (atf-4)
+   Description:  ARM Trusted Firmware
+   Created:      Tue Nov 25 10:53:47 2025
+   Type:         Firmware
+   Compression:  uncompressed
+   Data Size:    8192 Bytes = 8.00 KiB = 0.01 MiB
+   Architecture: AArch64
+   OS:           ARM Trusted Firmware
+   Load Address: 0xff8c0000
+   Hash algo:    sha256
+   Hash value: 
+67bf4dd100c6c99dbbf76c0b19072e6e9756383925795d94ced000c2a7cf3b9e
+  Image 5 (atf-5)
+   Description:  ARM Trusted Firmware
+   Created:      Tue Nov 25 10:53:47 2025
+   Type:         Firmware
+   Compression:  uncompressed
+   Data Size:    0 Bytes = 0.00 KiB = 0.00 MiB
+   Architecture: AArch64
+   OS:           ARM Trusted Firmware
+   Load Address: 0xff8c2000
+   Hash algo:    sha256
+   Hash value: 
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  Image 6 (fdt-1)
+   Description:  fdt-rockchip/rk3399-puma-haikou
+   Created:      Tue Nov 25 10:53:47 2025
+   Type:         Flat Device Tree
+   Compression:  uncompressed
+   Data Size:    97832 Bytes = 95.54 KiB = 0.09 MiB
+   Architecture: Unknown Architecture
+   Hash algo:    sha256
+   Hash value: 
+5439f6f77ab01fa191a6a69a8691165669497fe74fc909f13a6d448b1004d629
+  Default Configuration: 'config-1'
+  Configuration 0 (config-1)
+   Description:  rockchip/rk3399-puma-haikou.dtb
+   Kernel:       unavailable
+   Firmware:     atf-1
+   FDT:          fdt-1
+   Loadables:    u-boot
+                 atf-2
+                 atf-3
+                 atf-4
+                 atf-5
+
+According to the datasheet:
+
+0x00040000 = RAM
+0x00063000 = RAM
+0xff3b0000 = INTMEM1 (SRAM)
+0xff8c0000 = INTMEM0 (SRAM)
+0xff8c2000 = INTMEM0 (SRAM)
+
+RK3399 is a special case because TF-A is running both on A and M cores.
+
+Cheers,
+Quentin
