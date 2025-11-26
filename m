@@ -4,161 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB28CD10F5D
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 15:01:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA0BED10F58
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 15:07:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CDBA8394E;
-	Wed, 26 Nov 2025 16:01:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 319C18397D;
+	Wed, 26 Nov 2025 16:07:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="bxen4gql";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="X7zeQR4p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F312583957; Wed, 26 Nov 2025 16:01:14 +0100 (CET)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id 668AE8394E; Wed, 26 Nov 2025 16:07:12 +0100 (CET)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02CD68393F
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 16:01:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 239D68398C
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 16:07:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mNGn/I8JmLDfVKhGaKYW40QiJXVZ9O34wliF4vW0oyKZ56BetH5qWHuPw91zO6/0fU+/15fp6nno2dmIoGnZ+7Qn1zqTaBGgem9JIgTTa9UNS//735lW2dtCpLiS84SjAfPOn7vTTVTEWcud3xnifoV10v3rOGH2/cGgGZ+b0GsWSEaVxAZzXzBLYmH94oYZeh164ecPJLruBuzgjAItHl+TJZYbZTPmKzvDj95TH074TNqPflqgMgJ/WYU5sFzRtCwrCEw4gLYg5+j8e1Ko472pjTRBInGs7axoj7XWZx37LxzB6aji4vf3g7LuxMFvhsXxqqi2AE9VxPAwXu7VkA==
+ b=RiclufUIyN9iIAulhZGgaH/dWDIvkjE+ApSkeN8qLw3hzEYHjx122YVNZWtQgDVsASDscbtQ2JZJgRL/PMFGNdr1YgdbH2n58iFnbC7j62QCQiJKltD+thL2XXCULb2FL+vvtKQKmuSoZn8udspocIZBkUbSSoS41eTwYzUDYAFcXOam487aBzmVJjRhYjfyJpzU81WTvGnkDJiDx9QCqzWzTdLDvvqtUr+uXVnHi8Z6nnXb42y6BgRS6ELwWBuypkVb7LpLW4tkXZv8HxgzwYWa/45mZS9T66xKCIkvikV7GOyvZ6hMl62laENhPmp5XjBmbjuiYg5BeoPUg+jQzg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kDDKQlL1/XQWjf00jY4dq64Dr4kXW/SFIOKI6Ykmgg4=;
- b=BYDoaKCI8cpklYxmT8APkhCkmn+TrdDALQbW93LwBN3HOGi6ZX2zl3QBbJcnsea4BarDKzIrVjnJT7956QIczGc00JMT0t4Ru9UMRNG+UydCZ5Ts10LMO70Dgxyo0mKPRYwkCz2kkKTqJX0IVmJxeqmf08PUtHMcdBFS6E21QQ2LyczIvnf866GqVD/3fqf9pTFMfPpu/HSWTSn7xoq6mBORb1OyZ3/Qptfn44IhSorzcDoF0r8TswSsjkRrGQglNn3XSLVmCSmvbryNG3s+ZqAuoWzY0EVOLz3ZzdLnyERFbqYF2Zl40xfZaL+oedZqQ0wPHuiumfr6buU+mA+stg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ bh=VZ1taBl1KxBVh99rzkUVO+2KAbiJzlYciVgK35QpiLY=;
+ b=G+mk0Ft13XrUidG0rYLF7q1KQ5lCJLWEd1MgUkAafFo5isvMPAjoiZq7ZnFw/aO5MlTuA1Ww7VZ+NKZa0FDreUM7xmwKLFbrhKTbY62R1O+bey9Ix0vABcM60rp0BbDBShM7drFKR+14JveNzIb0wqDnoePoNajV70OKbRKf76wTy8NvZRRxJQiwsX+3UjFAyxae8TVlOdhWuvb2TDqDKnzaVWDUbvv+VL2Vq5xxaUit6dvW5OyE0mc/wC6mmN36Nx+HK0lzMMEA5+ycz+kPYVTn9U4pssbGVGaFDXTnaLbKpEiaOIb0aLF96H0Fa7KUKrlXLUNDC1R+NqofFcCDNQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kDDKQlL1/XQWjf00jY4dq64Dr4kXW/SFIOKI6Ykmgg4=;
- b=bxen4gqlZoI+hguPeBp+DnNnw4NU4xPC2g80ZVY3NHEI1rN4cnnhLfpH4pVn+WmNu9/unmJCowQYkxVQjohFkf2BFbghGOUy7WGWFxpLLhiJZ9vu0LFRDLJHkmQLPS03Q7jbTXlmDvNrUt+ge5hRnmEK6wOKvLx3zomdUS9e1cY=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by PA1PR04MB10723.eurprd04.prod.outlook.com (2603:10a6:102:491::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.12; Wed, 26 Nov
- 2025 15:01:08 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9366.009; Wed, 26 Nov 2025
- 15:01:08 +0000
-Message-ID: <94561b0d-8203-4210-b599-93070eb934cf@cherry.de>
-Date: Wed, 26 Nov 2025 16:00:44 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] Raxda Rock Pi 4A serial console output stops prematurely
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Stuebner <heiko@sntech.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Jonas Karlman <jonas@kwiboo.se>
-References: <e7b7b905-4a6c-4342-b1a5-0ad32a5837cf@gmx.de>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <e7b7b905-4a6c-4342-b1a5-0ad32a5837cf@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA2P291CA0025.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1f::6) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ bh=VZ1taBl1KxBVh99rzkUVO+2KAbiJzlYciVgK35QpiLY=;
+ b=X7zeQR4pH8ujMxrJ1ZKEo9+Mro5DxU/DTZKFePFtzHI1yqTvxNCAHOjfFEFW+NnQGRPHTMm+pbY+fdpGz+OLQEW3YquUO54Nua3fAmVnjf94UO7b4BEeAP4UduVAIy2pLE7p5UPUONDfftutrYXbvqZmHMC79vipmpEsNEBkq8I=
+Received: from DS7PR03CA0183.namprd03.prod.outlook.com (2603:10b6:5:3b6::8) by
+ DM6PR12MB4091.namprd12.prod.outlook.com (2603:10b6:5:222::16) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9366.13; Wed, 26 Nov 2025 15:07:04 +0000
+Received: from DS1PEPF00017092.namprd03.prod.outlook.com
+ (2603:10b6:5:3b6:cafe::32) by DS7PR03CA0183.outlook.office365.com
+ (2603:10b6:5:3b6::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.17 via Frontend Transport; Wed,
+ 26 Nov 2025 15:07:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ DS1PEPF00017092.mail.protection.outlook.com (10.167.17.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9366.7 via Frontend Transport; Wed, 26 Nov 2025 15:07:04 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 26 Nov
+ 2025 09:07:01 -0600
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Wed, 26 Nov 2025 07:07:00 -0800
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Padmarao Begari <padmarao.begari@amd.com>, Bhupesh Sharma
+ <bhupesh.linux@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neha Malcom Francis <n-francis@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ufs: Disable UTP command timeout in slow mode
+Date: Wed, 26 Nov 2025 16:06:41 +0100
+Message-ID: <e6deb9086afab9d2bdd53db8ecbc7db93af5204d.1764169598.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1500; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=MGsvG9fFg0JwSxyI0HAoFXjaXxLzjd8mM9x5vbTauAA=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSqizf9N9ve5qj/+KiLRWxXztSJs19/eWpxxC79VcGTS
+ XGcpnXhHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjCRz5EMfzjnahtapTw+Leq9
+ TnH5E2enlIBZc1cvEn7Z91+QvU3ZQZ2RoaNzh3+dc2ljo6thW6DNzZNrqn+s1jM685xhUqFa48F
+ jnAA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PA1PR04MB10723:EE_
-X-MS-Office365-Filtering-Correlation-Id: 84628699-55bc-4fbc-7ad9-08de2cfca110
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017092:EE_|DM6PR12MB4091:EE_
+X-MS-Office365-Filtering-Correlation-Id: ebffc12e-212c-4824-e122-08de2cfd7593
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?anhhc29YemxBdEhHTzFMcW1jYkpKUllkSkRCMHpBZFRaL0NvazdWN2dYRksv?=
- =?utf-8?B?VDhOWjVMckRidDN2SFBTUmsvNHZ5SG92bkJmYStDa2RuQUc5U2lRR0toOHZM?=
- =?utf-8?B?MmlXTjliNFp1VWZJQU1CeFFEa0dZYWw1a0NpcW4yT05CcHA2SEEvZytFZ1dN?=
- =?utf-8?B?d21ORXdCOXJ0SVFnS3IzUEFwK1BURmFzY21URXBoOG1BRW1ORlVDOG1jZlRm?=
- =?utf-8?B?NVZ5WHZFU0dxb2pNTkIzODVmQkpBYzQzMEpFMlp5WE5pSDF3MlU4YkFaZEoz?=
- =?utf-8?B?MEs4RHlwMS8ySFBzTzBzTkdWZDBnYlRZbTVFbC9hVjRWVEI0SUlsa0lLUHJ5?=
- =?utf-8?B?K0hXUkFISGhYVmxQN1NmZ3h2QkErOXphb05lVUtheUlaRENOVnRXVWlyaEVO?=
- =?utf-8?B?RHdldTFDdU82V0JyT1JNZXVyaGlMc1dCRWY2RnRvMkxyS29aUlpuZ09WU1dX?=
- =?utf-8?B?YmVDMWo3S1BhQ0FXKzB2cEdvK0NmRVZiM1NyVGtHMVMvbWozQTE0WXZlOEpI?=
- =?utf-8?B?TkhHU2lUci9FaWNMclRZbVBRRHdlTXdhZmtNUUJuNHY1YkNwK24vZk5oTFZu?=
- =?utf-8?B?QndXRncxSC81dnNwN2E3KzZPbkJFelR3M2JmUFhrc0dVK2NFOWpuaDUzY0E4?=
- =?utf-8?B?djBqRlRSQi9uZVQrdGR3VE56RVBRRVRqTmdFSzVCZW83a3pFMldMamh5L2cz?=
- =?utf-8?B?RDYvN2pXMmhMM21mbklNNnc2eUpZWS9VNXFhTDBGZTJTTUJhOFR0cjIwbll4?=
- =?utf-8?B?RlcyQ1ZTUVNLUnkxTXZraEdEWDQ0UmZGODFSR2V6L1hkdE1sd3B4S09LNzJs?=
- =?utf-8?B?Z095WW1BbWNWVU9tblZkclNZOE5HTHd4V0NjMXpsKzVaWnBjMUphaFlXUFpD?=
- =?utf-8?B?SVZzM0RIRC9PN00wTmNBSDIzb1FKeVdNUEN2VlVTMnpQNVZBZEhuNzAvaGVB?=
- =?utf-8?B?NFd3djFCYXFVeXpmckdIYkxDZURqVEEvQzVsZmpqZktYVFJhRXRsUmROSWRu?=
- =?utf-8?B?WnlBU3FveHdUek9EdXVYLzgvNUsvYWdmTjlxWnRZcXZkVnBSS09NbEFzdmRr?=
- =?utf-8?B?S3FpOWNQWjVqTXpmSWlJOHU5ZU9QbDk1anBONEtHYmZ4ZWllblNNZ0o0YWlh?=
- =?utf-8?B?ZE13Mm1JMTk0M2JGV3QzVHBHb0pkR2JlNG5lU2hJR2NkRXN5T0gzaHZzWDJQ?=
- =?utf-8?B?dDVrZ0N0M0NjUk8zdFpuRU9rZU9sWWFvMFF0S3JuWWFXelhDa0hYMHBISWhl?=
- =?utf-8?B?Z1ZCeC84eEdrOHZwRnVBL0hSc0FiV3c4U2JtbyszNUxXMW5VQU9BaFFGa00r?=
- =?utf-8?B?Nmw4bkFTTUhDam9SNmg5b3pqTXQ3UVlPeEtEU3VGV2paS3l4aTg1QzgycFZW?=
- =?utf-8?B?dWlsMlQ5K3djT3FtbXZjelVxdHVpNHBDN2VmdGdpZHl0OVRZUFZ6QmFBMFg0?=
- =?utf-8?B?bXZIWW9rUGNrZFpJS3lBNDZBZHpKV2ZkOCtQM21OaHUzbXJQWHdPZWVoM3FT?=
- =?utf-8?B?djZrREJuUzdLSmtzUUEranE3YzNnWnREd3JXYUE2S0QvamxtaHhiZFl2aWRI?=
- =?utf-8?B?ZXU2U0ZBNmc2cXU3ZUxXY1RWaHVSYTh6eTRzQ3hqVnRCK2s0dUFkKzFCdkRZ?=
- =?utf-8?B?SmZuQ3pTNlZWd2FiSTh6VDMrWElQQVl6ZURyYlpmSFV4T2VrUW5IUU9Vc1I4?=
- =?utf-8?B?RExVTnUwZ09BM1lDU3Fudi9NVWkrV1JzWWZTTDZLYjJrV05nbnpuMTZVMjJG?=
- =?utf-8?B?NFZkdThWTFhGOWtOK0c1aFFQZXNSTjVSQ0Fhd29wazBDcDVsektzMGI4VWQ0?=
- =?utf-8?B?WGFyb2hxbVFKUWxEQmRRb2Nmb1dIRWNuMWg3a3RGaFZBU25EWkp3dGtvTzVM?=
- =?utf-8?B?NU9qQ1dLelpaekJ6Uk1XcFlBY3lUcU1kT0ZuZFI2ODY1NElDclM5WjlQR3pE?=
- =?utf-8?Q?JgFKXL6uA6RlxjWOHyDPHs9rK2Z5MKGR?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ekZYRzdPTVFZd1ZtV0JlMXVtUlQrdnMzbUZ4NGZOMXBFeDUybVZEKytGSmZG?=
- =?utf-8?B?QXZLRjBnbktUOGVoQTdmeXMxQlBxVkVoRUtza1VnVFhpb0pGTzh1RitIOFRM?=
- =?utf-8?B?ZlNlNjlxV2hKNUNUUVRUS0dHVGJDLzM4S09rZnVMYmxnNXN1dzRLcDFvK0JM?=
- =?utf-8?B?OVFLOHVHV25KUWJpZXNDSkhIVGZCSGVNYTc1SHpjd21nSkxLTExFaTRkR1Qz?=
- =?utf-8?B?QmcvTnpFUmNHSEdkMEJaNUVHa1BMWklML2x6bTdpKzNhRCsvMnFLNU1sWUtJ?=
- =?utf-8?B?Rm5hTGpVbFZZVW5zNWJwWUlFZlBOMzFWVTBlQVkxeDlZRkNRN2xNYnYzQ29Q?=
- =?utf-8?B?Qmp3dHZwM2wzUUl0NWdXWWFqcFZ1MnQ5T0pGRUxFbitUYzhyTWlUMVNiUHdZ?=
- =?utf-8?B?aUJMR0wrd2N1MTFMWFQ2ZHFBQlFsdkVET0VOU3lKNDl1bmRMUWdyc0xBajlr?=
- =?utf-8?B?bXlCVC9XODNjQzh1NndDM2RTdjFKRG93ODdiZ1NCa3VTbXdiTFczNXNNNXlt?=
- =?utf-8?B?WThIQUdkYWNDdnFibkFnbFJhd0JVMmg4eXdXa3VoT21jand1OGsyZ05ad3ZP?=
- =?utf-8?B?bWdBM2M1UXhGU1lyRFpSdHArbmFPU0RFdTNHYzJhMjh3bHA5RDZKYzh1WGlw?=
- =?utf-8?B?VnNRYjcxZDFFc2V3Q2tDS2RXUjlJaktYSDV0dy9LdTlacldNOWFiK25ZVlJs?=
- =?utf-8?B?WWhQczJ2VnFIcHhIdDhyWVdMcGZlOXNjM1dkUCs3cTJUYTBZOW9SQnVCL2dO?=
- =?utf-8?B?WTlHSUJIQndXNGFjYXFhNmkzMVlrY3M5WkUwamsyNVRRVGZDSlJzTEswbFg0?=
- =?utf-8?B?cjd2MHhNL0FHb1RqUXM1N1RsR0g0L0VjcE9mcm53dlk4L0R6MFV5QWdsYlFj?=
- =?utf-8?B?NkFZazc1Vy9uWnZBbkRFUlpCVDBaak1xNThXcWxCRWJqMzFuQ1JReC9tSzBP?=
- =?utf-8?B?cVZRcmdQcWFHTmN1TGtPZ0t2cnBnNDg3KzBKWVk2Tzk0MnJYdVA3cTVnZFFw?=
- =?utf-8?B?Rkp6eDU0SWZOYkRubGN6MWo4djZPMXNFclExZnlpVE5WRFoxYVVKNDlqUmNU?=
- =?utf-8?B?L3hsVzlBUms2WFV1ZWVvUmUwRFR6VlgzMFBsM21UeW1yU1htcVUxSFJIQWxK?=
- =?utf-8?B?L01hY3RRb1hsYWY4ODRXdE42STJ6UXJ0OFl2ZDg0SitpWTEwM1FKUW44QkV2?=
- =?utf-8?B?SjUrcE55WG00YzJtRHNXbVNVMGRKV1A2SkZLYUI1UzdwU0xTbzZOTWxsVTFV?=
- =?utf-8?B?Y2VjTFQ3MnlTK2NTWEc0TzJaUHo4MWRncE5VblU5VHlIT2grR3VnL05zS0xn?=
- =?utf-8?B?RkxtNWowaVVjc1BHRng1SEY3TEhtd0IybkxHeC80WER0ZEJ4czYxYVZKK1Ji?=
- =?utf-8?B?WXpKR3I3em5vSHJiMlJBWXhCcllndXU3R3dkVlJ3QzNTdTcvcW8vZWp2S2li?=
- =?utf-8?B?SENKY1RjUjl1c1R3MGhBWFZUU2oyanhuOTVqSGMzUzZTZlkxNmZ3MnQyNEk4?=
- =?utf-8?B?MkpVaW1xTUJRdnJUNHllZ3JrYjA5VmNyRXFZZ1hrOC9UQjhSZUwvRjdnalJU?=
- =?utf-8?B?ZnhHa0dDcXpKWUJEOTN4TytHZkdQaDk3bXZQa0JmYXYyb0p5STF3UUs2OGE1?=
- =?utf-8?B?VnhpZ3F2aU9lWkRmZ3R4VDNTTkRzcVZGVHdKSklHZUI3OGdQd2FQTk9Kd1gv?=
- =?utf-8?B?VUxycDlGYzY0ZnlaMnI1aUwzbVJTaFIzU3JjZzZ5aDdXa21QQjVoT3BrSVFM?=
- =?utf-8?B?OWFQN3Zab3l4b1B6NXBpU0I0TjFUZFJxMUtjZ2c4RldxT2RIRXJ4QjBqa0dn?=
- =?utf-8?B?eXEzUWRPeTBUdElBZUhOWjcram5mMU44alprS2M4eHhlOXRUVWF4bHdQd21u?=
- =?utf-8?B?K1FqOFlMOVNTdWh5WlFBQkZEay96MHd6L1VWNkZ1NkxYclFnOUJxL0E0RU5G?=
- =?utf-8?B?WEk3UHJEckFoY1pCalNaajNNYlgxam1NSk12NHlBZ1pnOE4vbEkxMVd6eUZI?=
- =?utf-8?B?QytYTXFWZGlHVkpqUEtKVHFRdnBvOVZlajVHL2tsSlJkdjZzaDdEVnlpdnB2?=
- =?utf-8?B?cUdzWWRFVWYzMjlXZ1Zrd0FWTElua2dhczZQcHhab3RtQXZ4VEF1UGhWellh?=
- =?utf-8?B?cTRzNjRIbTZUek1XazdjWVh3R3plbmRCMVRLVjhneitxSmw4eWl4anNDUmJj?=
- =?utf-8?B?Smc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 84628699-55bc-4fbc-7ad9-08de2cfca110
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2025 15:01:07.9873 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XRb/WpC/i2aauqiu5Xg3BwwglH0NGLsZc2A495hgm0UDW0Dbs0SD6AbhvNPh/P9nZx624d+ZnrHq5a9Xl/qW42tPf3mk18U2SEpSDw/qTvI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10723
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?SPBdyvHeZTfjasmtiH5sk/BEKsVrGvxovJnhhen+Bd7FK3kythPmzVoKh2/d?=
+ =?us-ascii?Q?lBQHOdRJpk7G9U5XNcxnf+4J+90BahREUo1Rg5ohY4r6QS/ekZGCWnmPwZfq?=
+ =?us-ascii?Q?B3L5+h/VCIeEC3JatCU+oysjK87JbKjlWFhF3DSK/pQ9/z7Hr4ll2GOVoiVq?=
+ =?us-ascii?Q?/Ik5pmNn69kU6WYueEel6kQE1+wW7hJXvo9ZZn5MZ1i2vOrkjF7tCDj5b4PC?=
+ =?us-ascii?Q?nVeAQoERFUrbp9lUgeW5cA5nsxpfFDFA6c6wgupWQdaVUiHfgWT9B+vSACns?=
+ =?us-ascii?Q?3rs6QW/i4/c6WookFhdSoKUo+UDcLzflAjsBed21jBhNqcUYLFLpNBgkBASO?=
+ =?us-ascii?Q?tI8jcSwhs2uU5e775ONAjMxUh85qpaSfoslPdCLPtsTdQmWLl2JKysDUO2H3?=
+ =?us-ascii?Q?Kd+13jytvd0CNOWdMthIpEVYBJ6z2VOq5Yf4TcGzWl++q+s0Dm8ZoCfXWdkk?=
+ =?us-ascii?Q?mihh8Uc0xvU31vjEIMikhTNkSXmAinCe8bkGip4oOYu1/KOzOSfpCjvRUPHe?=
+ =?us-ascii?Q?m7iy8kPwUOlyvYPc2M55pNwxv7/UhWHCUUP7SpgNy3Z4PEY0YADwcvKKjwoZ?=
+ =?us-ascii?Q?kxFkLGrJ7I07BFdF2Jk0NNnNCxZpyhGcIRvWiWEqw6C8gGJq3JZZN99IBbcj?=
+ =?us-ascii?Q?Zimgc9XrD4KuGxrY0b4LHjj3W9ofzjbJiMgApuSdUlCj+gifbVixYEuQ3e50?=
+ =?us-ascii?Q?imm4rg0Vt6vOGBDCwFP3C56RTTR+3QD0pWahU/b9EOKmpWkZHyKqcsPkGdK5?=
+ =?us-ascii?Q?aYYuzFmprRiDrN0jQTRuTnOM+JCnanbCEl9Afgi5lETsCiipt7goo3Rbmw+i?=
+ =?us-ascii?Q?u5cP+hmugcGT19hK6QCbe3Kz2YMK86nImKxPEPFd0MFR5h5+WLiytAVdrbdq?=
+ =?us-ascii?Q?S5PXMlbteXw1hB4UkhV7As3i3hSFfKHAxR6HvJOJ3AE0Aw4hw21T/17bdbjt?=
+ =?us-ascii?Q?EGDoXwP8cICC1VWutWT3mMJVI6g4me0mipCKLq2rcRsbLiFHE/vX46RSWfkd?=
+ =?us-ascii?Q?yCxaBIMnzeK9wstp+TGo2aDCfUF0SKK5BXah3qBQ2EtbHUeJwNHRaeiNM8dn?=
+ =?us-ascii?Q?D0eNtx79i9+Gkt1kzyzhiOHPHVxhp1NBIJEMdsvoeSajQdEj+GyUNvtgpI2E?=
+ =?us-ascii?Q?a4yPQv58FiVokrW64aJX04nJRgU5EdHXZCV5c/MfzV7ZrXeYkAPoDPPl7My3?=
+ =?us-ascii?Q?gl5J52eLMJf2brZOZJbpAAN0oXqg8HLJJ6Mfyuqw4+0YtYTFTtEdnvQD1SLi?=
+ =?us-ascii?Q?eUrc59zOdQNTMrnNdR9zVZuFouOWlOR6X7WJywKsrY3EuCcp5fZcNHL1QV3K?=
+ =?us-ascii?Q?dqNuTY7qiWqw8/0z/SB+pbJ9Frb/dpY0GN0Cfb9fsEa90j84HQmuf6PJN2ua?=
+ =?us-ascii?Q?Aw3zp+mq3EY8W4kPqy4YscBVdF3YcVs1M396rqOIrzOYV/26taiDL1CwLCzd?=
+ =?us-ascii?Q?Jq+S7ojijaXm8RVg/q9wjFA69fp4E65oY1iuiwoJYIaGcXB0R7JWtOF2s0nO?=
+ =?us-ascii?Q?z6r7drZdwyKjisduAddfULSf4jAHSccwocsx+JDvWaKdaLwD1MDJQeNzrmOY?=
+ =?us-ascii?Q?9laQWgjwqdauL/QwgE8=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2025 15:07:04.3696 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ebffc12e-212c-4824-e122-08de2cfd7593
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017092.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4091
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,56 +156,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+From: Padmarao Begari <padmarao.begari@amd.com>
 
-On 11/25/25 7:02 PM, Heinrich Schuchardt wrote:
-> Hello Jagan, hello Heiko,
-> 
-> When testing U-Boot origin/master on my Raxda Rock Pi 4A serial console 
-> output stops after "PMIC:  RK808". The same can be observed with v2025.01.
-> 
-> The serial console works as expected if I disable CONFIG_ROCKCHIP_IODOMAIN.
-> 
+When the UFS controller is operating in slow (PWM) mode,
+the driver is disabled the timeout for UTP send commands.
+In high-speed mode, the timeout remains enabled to
+detect stalled or failed transfers. This change ensures reliable
+operation in slow mode, where command completion may take longer
+and timeouts are not required.
 
-It is I believe implied here but asking for confirmation. The board 
-doesn't actually boot right? It's not that the serial console is gone, 
-it's that the device is stuck?
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-> The problem seems to be specifically related to the bt656-supply. 
-> Removing the line below also fixes serial console output:
-> 
-> diff --git a/drivers/misc/rockchip-io-domain.c b/drivers/misc/rockchip- 
-> io-domain.c
-> index a0573c52193..b0d78f2d4b4 100644
-> --- a/drivers/misc/rockchip-io-domain.c
-> +++ b/drivers/misc/rockchip-io-domain.c
-> @@ -239,7 +239,7 @@ static const struct rockchip_iodomain_soc_data 
-> soc_data_rk3328 = {
->   static const struct rockchip_iodomain_soc_data soc_data_rk3399 = {
->          .grf_offset = 0xe640,
->          .supply_names = {
-> -               "bt656-supply",         /* APIO2_VDD */
-> 
+ drivers/ufs/ufs-uclass.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-The UART2 (which I assume is the serial you're using for the console) 
-isn't on that IO domain. And there doesn't seem to be anything important 
-to booting on APIO2 domain according to Rock 4A schematics[1].
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 3c8e4299259c..7a80a9d5664b 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -917,11 +917,13 @@ static int ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag)
+ 		enabled_intr_status = intr_status & hba->intr_mask;
+ 		ufshcd_writel(hba, intr_status, REG_INTERRUPT_STATUS);
+ 
+-		if (get_timer(start) > QUERY_REQ_TIMEOUT) {
+-			dev_err(hba->dev,
+-				"Timedout waiting for UTP response\n");
+-
+-			return -ETIMEDOUT;
++		if (hba->max_pwr_info.info.pwr_rx != SLOWAUTO_MODE &&
++		    hba->max_pwr_info.info.pwr_tx != SLOWAUTO_MODE) {
++			if (get_timer(start) > QUERY_REQ_TIMEOUT) {
++				dev_err(hba->dev,
++					"Timedout waiting for UTP response\n");
++				return -ETIMEDOUT;
++			}
+ 		}
+ 
+ 		if (enabled_intr_status & UFSHCD_ERROR_MASK) {
+-- 
+2.43.0
 
-bt656-supply also doesn't seem to be anything special. LDO5 (vcc_3v0) on 
-RK808, which is using VCC10 (vcc10-supply) which is a fixed regulator 
-whose parent supply is also a fixed regulator. So I am not sure what 
-could be going wrong there.
-
-RK3399 Puma and RockPro64 have APIO2 set to 1.8V vs 3.0V for Radxa Rock 
-4A. Puma boots master reaches U-Boot CLI with the IO domain driver 
-compiled in.
-
-Can you check the error paths (all the ones with a continue;) in 
-rockchip_iodomain_probe()? Which ones do you enter for which supply?
-
-Not sure where to start debugging tbh.
-
-[1] https://dl.radxa.com/rockpi4/docs/hw/rockpi4/4a/ROCK_4A_V1.52_SCH.pdf
-
-Cheers,
-Quentin
+base-commit: 966dbf4bdcb2970846eaf61271ad456aa802688b
+branch: debian-sent3
