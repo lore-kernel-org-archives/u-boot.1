@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D085CCF9F5
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 22:18:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD458CCF9F5
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 22:18:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ED6A83A98;
-	Wed, 26 Nov 2025 23:18:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5FDB783A71;
+	Wed, 26 Nov 2025 23:18:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="b87zj1dU";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="ZnBw7xQx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71D6783A9F; Wed, 26 Nov 2025 23:18:01 +0100 (CET)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ id 0013D83A98; Wed, 26 Nov 2025 23:18:51 +0100 (CET)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9782E83A64
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 23:17:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 252F283A64
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 23:18:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1764195392;
- bh=cQIadE8rav5PEG4WJhAK9orAT8v45e69yV+wQ/AjPNs=;
+ s=s2025; t=1764195399;
+ bh=2c4yQMwP5PFbodjB51A2a2HpcGMCq6BUmOQev0ffeeY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=b87zj1dURToxGjQufAq5nX8wzO/DAFkqCCm37HQzXYL47tNnYoVUd2fBXVaV2miyY
- v8AYPc2WepFojTjc2dBwwbA1XY7R5VAgzfSdQgp1P8PfH1cj0etEYIDGKPhuCY3T6A
- rhlfjb/RCuvqRmh5YNs5jdCv+xE669L8Djw0LwuJW2Y2t/Z3uUKOzfJoNEJ6r0I1Mi
- 23mPafKhUq4T4DgbbCK5EsWlX0Ub2Vq7/FQQzdLVoOPaQQg05GKopT2Q1clJquigD5
- lICbRZyRTMDtptVfMC6tv+B0zYFUtc8p/pQ0ecnDJMSUilaIzFeBvbzDOBtEvdIX7y
- ZEd7TblCmE1AQ==
+ b=ZnBw7xQxkTH6Q9BX8XaBtLJYtMeF9/nmlBkLWZ3pmheCF5imX2sWzoxf74wB/ol7h
+ vBjKaewNFcehGyoZhwn+GPu6gPPPpGQ6J/bM/rxDPJ2X08Zvhag+1WwOTGybeoNV7L
+ 1+Q7SvhX+09P9Asju9BcYW+9xrI8y/cNL592PNHSVXu3BgJM4McDGOx22JSGqQ8ank
+ /2oA9c1mExTJpnB+JWxga6XJvY0R2BTkBO54/LlASW8qmaLwzGQum2z8j7HPWT2ABl
+ PfCSYrAR4HCN0U3edXmq/MAynWeiRou0AD9xbkoGkjGlcSWFMhmKFxolfSnMwIMfey
+ 1K9G6+0PCZkDA==
 Received: from hay.lan (unknown [IPv6:2605:59c0:2078:cf00:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id C06F8B22131B;
- Wed, 26 Nov 2025 23:16:30 +0100 (CET)
+ by freeshell.de (Postfix) with ESMTPSA id 158D2B22131C;
+ Wed, 26 Nov 2025 23:16:36 +0100 (CET)
 From: E Shattow <e@freeshell.de>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@kernel.org>
 Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
  Icenowy Zheng <uwu@icenowy.me>
-Subject: [RFC PATCH v1 2/4] board: starfive: visionfive2: Add Orange Pi RV
- selection by product_id
-Date: Wed, 26 Nov 2025 14:15:27 -0800
-Message-ID: <20251126221552.87574-3-e@freeshell.de>
+Subject: [RFC PATCH v1 3/4] riscv: dts: Add placeholder files for pending
+ upstream Orange Pi RV
+Date: Wed, 26 Nov 2025 14:15:28 -0800
+Message-ID: <20251126221552.87574-4-e@freeshell.de>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20251126221552.87574-1-e@freeshell.de>
 References: <20251126221552.87574-1-e@freeshell.de>
@@ -70,42 +71,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add identifier for Orange Pi RV to dts selection callback in SPL, and to
-fdtfile environment variable default value selection in payload.
+Create placeholder file for Orange Pi RV in dts/upstream to placate the
+build system. This is required when building on a dts that is not yet
+landed in devicetree-rebasing and adopted as an dtsi include.
+
+This placeholder file is empty and should be superseded when
+devicetree-rebasing release candidate for Linux 6.19 is sync'ed.
 
 Signed-off-by: E Shattow <e@freeshell.de>
 ---
- board/starfive/visionfive2/spl.c                  | 3 +++
- board/starfive/visionfive2/starfive_visionfive2.c | 2 ++
- 2 files changed, 5 insertions(+)
+ dts/upstream/src/riscv/starfive/jh7110-orangepi-rv.dts | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 dts/upstream/src/riscv/starfive/jh7110-orangepi-rv.dts
 
-diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
-index 2d9431d2976..684605278c0 100644
---- a/board/starfive/visionfive2/spl.c
-+++ b/board/starfive/visionfive2/spl.c
-@@ -131,6 +131,9 @@ int board_fit_config_name_match(const char *name)
- 		    !strncmp(get_product_id_from_eeprom(), "MARC", 4) &&
- 		    !get_mmc_size_from_eeprom()) {
- 		return 0;
-+	} else if (!strcmp(name, "starfive/jh7110-orangepi-rv") &&
-+		    !strncmp(get_product_id_from_eeprom(), "XOPIRV", 6)) {
-+		return 0;
- 	} else if (!strcmp(name, "starfive/jh7110-pine64-star64") &&
- 		    !strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
- 		return 0;
-diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
-index 6c39fd4af35..d59622f6b64 100644
---- a/board/starfive/visionfive2/starfive_visionfive2.c
-+++ b/board/starfive/visionfive2/starfive_visionfive2.c
-@@ -63,6 +63,8 @@ static void set_fdtfile(void)
- 		} else {
- 			fdtfile = "starfive/jh7110-milkv-marscm-lite.dtb";
- 		}
-+	} else if (!strncmp(get_product_id_from_eeprom(), "XOPIRV", 6)) {
-+		fdtfile = "starfive/jh7110-orangepi-rv.dtb";
- 	} else if (!strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
- 		fdtfile = "starfive/jh7110-pine64-star64.dtb";
- 	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110A", 7)) {
+diff --git a/dts/upstream/src/riscv/starfive/jh7110-orangepi-rv.dts b/dts/upstream/src/riscv/starfive/jh7110-orangepi-rv.dts
+new file mode 100644
+index 00000000000..e69de29bb2d
 -- 
 2.50.0
 
