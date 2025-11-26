@@ -4,52 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD458CCF9F5
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 22:18:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 323EDD111B3
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 22:20:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FDB783A71;
-	Wed, 26 Nov 2025 23:18:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B711E83A71;
+	Wed, 26 Nov 2025 23:20:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="ZnBw7xQx";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="VTEeejd+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0013D83A98; Wed, 26 Nov 2025 23:18:51 +0100 (CET)
+ id 8801E83AA9; Wed, 26 Nov 2025 23:20:13 +0100 (CET)
 Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 252F283A64
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 23:18:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B398183A64
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 23:20:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1764195399;
- bh=2c4yQMwP5PFbodjB51A2a2HpcGMCq6BUmOQev0ffeeY=;
+ s=s2025; t=1764195405;
+ bh=vD3uiaPxN3Fdn4wbhckSiAo43sx308HvEYv4C5EWCic=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZnBw7xQxkTH6Q9BX8XaBtLJYtMeF9/nmlBkLWZ3pmheCF5imX2sWzoxf74wB/ol7h
- vBjKaewNFcehGyoZhwn+GPu6gPPPpGQ6J/bM/rxDPJ2X08Zvhag+1WwOTGybeoNV7L
- 1+Q7SvhX+09P9Asju9BcYW+9xrI8y/cNL592PNHSVXu3BgJM4McDGOx22JSGqQ8ank
- /2oA9c1mExTJpnB+JWxga6XJvY0R2BTkBO54/LlASW8qmaLwzGQum2z8j7HPWT2ABl
- PfCSYrAR4HCN0U3edXmq/MAynWeiRou0AD9xbkoGkjGlcSWFMhmKFxolfSnMwIMfey
- 1K9G6+0PCZkDA==
+ b=VTEeejd+asysQ41c1Nwwp4mHitDSaVrJEXOi1WtejLdF/5ra/q5Kqc9IQRXWyi7n3
+ z+hqGUlbfmatcHv9LFIRiZKuI71dwR+3qHYQp8X5GotnnTkV4cPa5l1u9sW83fYIuu
+ +ebaUoe1+XOzKq1gKmniftlGFwyd6BaaCjCn2/qLQ1uS9qk2VsFNT4ktLQcy+3jhOV
+ W7qfI8Fkhehyi6lNPbRxIx6S/2/qjDdvH6zVHiCtb+vyAuD1rLGCzHsD9wX9ZUqHeS
+ iKqgcicncLHmRkRq/cFL7IVFa3cp4pLm0Ki29ysbzxDacckl4j4S+lfxlzHa+J1oXO
+ O02EOjQtPn+6Q==
 Received: from hay.lan (unknown [IPv6:2605:59c0:2078:cf00:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 158D2B22131C;
- Wed, 26 Nov 2025 23:16:36 +0100 (CET)
+ by freeshell.de (Postfix) with ESMTPSA id A3C87B221382;
+ Wed, 26 Nov 2025 23:16:43 +0100 (CET)
 From: E Shattow <e@freeshell.de>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sumit Garg <sumit.garg@kernel.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
  Icenowy Zheng <uwu@icenowy.me>
-Subject: [RFC PATCH v1 3/4] riscv: dts: Add placeholder files for pending
- upstream Orange Pi RV
-Date: Wed, 26 Nov 2025 14:15:28 -0800
-Message-ID: <20251126221552.87574-4-e@freeshell.de>
+Subject: [RFC PATCH v1 4/4] configs: starfive: Add Orange Pi RV to visionfive2
+Date: Wed, 26 Nov 2025 14:15:29 -0800
+Message-ID: <20251126221552.87574-5-e@freeshell.de>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20251126221552.87574-1-e@freeshell.de>
 References: <20251126221552.87574-1-e@freeshell.de>
@@ -71,22 +69,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Create placeholder file for Orange Pi RV in dts/upstream to placate the
-build system. This is required when building on a dts that is not yet
-landed in devicetree-rebasing and adopted as an dtsi include.
-
-This placeholder file is empty and should be superseded when
-devicetree-rebasing release candidate for Linux 6.19 is sync'ed.
+Add Orange Pi RV to visionfive2
 
 Signed-off-by: E Shattow <e@freeshell.de>
 ---
- dts/upstream/src/riscv/starfive/jh7110-orangepi-rv.dts | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 dts/upstream/src/riscv/starfive/jh7110-orangepi-rv.dts
+ configs/starfive_visionfive2_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/dts/upstream/src/riscv/starfive/jh7110-orangepi-rv.dts b/dts/upstream/src/riscv/starfive/jh7110-orangepi-rv.dts
-new file mode 100644
-index 00000000000..e69de29bb2d
+diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
+index fa83ecfa10f..1dd35c59553 100644
+--- a/configs/starfive_visionfive2_defconfig
++++ b/configs/starfive_visionfive2_defconfig
+@@ -79,7 +79,7 @@ CONFIG_CMD_WGET=y
+ CONFIG_CMD_BOOTSTAGE=y
+ CONFIG_OF_BOARD=y
+ CONFIG_DEVICE_TREE_INCLUDES="starfive-visionfive2-u-boot.dtsi"
+-CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01 starfive/jh7110-milkv-mars starfive/jh7110-milkv-marscm-emmc starfive/jh7110-milkv-marscm-lite starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
++CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01 starfive/jh7110-milkv-mars starfive/jh7110-milkv-marscm-emmc starfive/jh7110-milkv-marscm-lite starfive/jh7110-orangepi-rv starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
+ CONFIG_MULTI_DTB_FIT=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
 -- 
 2.50.0
 
