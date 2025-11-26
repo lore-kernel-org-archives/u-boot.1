@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A37E5D10F58
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 15:41:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4857DD10F58
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 16:24:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6E17841D2;
-	Wed, 26 Nov 2025 16:41:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7ADBA839E8;
+	Wed, 26 Nov 2025 17:24:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ih0kpebW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TlfdC9P5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 718898425C; Wed, 26 Nov 2025 16:41:45 +0100 (CET)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id E81A983BF1; Wed, 26 Nov 2025 17:24:12 +0100 (CET)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BBC783FD6
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 16:41:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82842839A8
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 17:24:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-45090ef26c6so1169339b6e.2
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 07:41:42 -0800 (PST)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-3eae4e590a4so2268314fac.1
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 08:24:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764171702; x=1764776502; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3a0spk92dUrRdzO7pDDzJqbsFgUejBhiQbzyM1mblic=;
- b=ih0kpebWOp1CaKkbPCln8bPJLUGox+ZaVxm07xNzR6nsXwasavZGsaG/Be2yIC8BVS
- 7tipwuptRkmU6pEgqQ8xBgwao76gKux9jKcQpfbvb6c+1xiYjXFDNlvPyX+dfXGW5hCF
- 8VvvoaZfB+fWh2RT5xm8A+BbbU8AX5I24BhCw=
+ d=konsulko.com; s=google; t=1764174249; x=1764779049; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TUUzeR+N8OmNeUnHdb4HOa/Mq+3q820cNNX7qxJxsGE=;
+ b=TlfdC9P5VWyyT3OvLen0Nk7JNIQWBJ79yVsc8B/JjoHuIsaUY+hnvhYfe+EiZp8WlS
+ oa9x4PoEzd/nBijUKvC33weQ44bay6mbH+tI1pW0Ko8aomRKksEXWOpuGUFL8ovE+rJg
+ FyhKPvBHyHB0uTZDdcjX7zAzTy1pK4oAL+UTY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764171702; x=1764776502;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3a0spk92dUrRdzO7pDDzJqbsFgUejBhiQbzyM1mblic=;
- b=NL4pPw3KkbpaVvH/EgzISnms0ZYpImBSqO0KIOIWSiKW7kjtvydnIbYLZKgLX3NVFV
- 0WvRGNhnbIfCBl2Lz/HGdPEXff/TxxWVcidgp5SfQpOzmVbe/c7gfXqoF2FHDDTebq58
- xfQuV2Urk0vXzvBQz0mOPjdSlc7Ls3M1NiXl3xTX97nxlFzD8vSOVYWs8r2FDSUH1WXT
- DoudNKWL8h9yEBQgzJZiVfPI6LgW3ZWG06RsIWWUWaMz11vlWOSkv6bMlXuEvr4btP00
- putkmwQfkr1U+UG05NwLL2BmHDs1W0g/umKd6DIkyesN/slDW3ePnxIxEIYzzHeFcMCp
- WGYg==
-X-Gm-Message-State: AOJu0YzuoC/S3LS+y1CzY44HplqWgjRPInfJRBwgUCOBxEiLg70tc+5a
- ZM4uAjzqqO5XCKCpurTB+WQCwYoeKGtGXYXulCLSsjPNsct77meH+vo0nGoZBd5yCVwoS96FO4j
- RscwlRiU=
-X-Gm-Gg: ASbGnctzPEI2rGSit+N1MnWS9pPBuwdP1SOLGqpb0VGRLiBx8J9n8Typm0n+xHXVQlF
- lEibWB/lP7UdJAr004Kzx08OtxEJejVlpLJvg5zOFwNZZDc6fJmWm9WVnZWeUEMzDW0HXojGSW6
- lCLFc0RvGQ0plxpV830AMJ4sqYFxuWkJda5BNmZED9p7Hq1D6+DEYkGlo9o5LGeSeV0PSYJI84k
- HW/WiWbxN31H5wihXhg2L4Tcscd08u48LsN6UrcT8liUNhF5LTvLniR3966qBI2vpWz+ms/Nk7K
- i+Ggb3nIkIMPdfR4xUMbx9vYghkdMvg7zjaiJNDX7H7WDJsgMmnHKB2GbUTULjKbgFVUWRw8min
- IKRNCfdivURTL7pvlrwrJ68cFVeVccs5U/KmFZg2M+zY3JsLY98jV3H/h3rWoq7KmHiGoEsiSCk
- eneiN3iB9jpOu9ySLWKLLRacAMdCFheBat5pV0Peu1BNQlt4enSA==
-X-Google-Smtp-Source: AGHT+IHYLr6lBw30WAPtw/r0IPeY5Vy/qjlp9s6wo3NN709FtsbRq+bncYhcacjuCgftugc3/8P06w==
-X-Received: by 2002:a05:6808:1454:b0:450:b7a0:41ca with SMTP id
- 5614622812f47-451159c4925mr8120471b6e.22.1764171701750; 
- Wed, 26 Nov 2025 07:41:41 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1764174249; x=1764779049;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TUUzeR+N8OmNeUnHdb4HOa/Mq+3q820cNNX7qxJxsGE=;
+ b=s1GW0XN6Xkj3VlyMkG5K+CkX71M3NKvf9PdlfDYarP5Aw+iRZpiUkfYQdZWzGiG2IY
+ ZpZ+ZsT84YBmvn3tUhpllMt6FGkPX4H5bk+gRVyXdAA34JZNdLkICJAU1+zw2ak+QBUU
+ Zh4Uq2OsVlhaMluac99KqatHFl+zug38I8RvSYSByvd2kq+/qXBUlQmOfC6g2YJS7A4y
+ UU3KxtA0Mq/Fyz7LUGf7j9B2LFI6UinlpFMuFtGkGkVfqHPNpGVl3882Q94aEKChwq3X
+ gCKGqDbP9KHUj1l01HKkaVtqrh+VZwzFAecFgoFojYBNDZUtJ3txETZnTQR12DL3l+J6
+ 6Hdg==
+X-Gm-Message-State: AOJu0YxNLASVWUC7dTdoiMaEOj1ERZCnWnUQWrgncZCFOsHUTeFzhX+h
+ itndJ6ILO1oomApml3xg2Mo0+tKUgCiUDP9QnUKldUuoTp5RsHhkIbfPA5sWvsYKHDeLxJ6FU6y
+ yQ/etcPQ=
+X-Gm-Gg: ASbGncs3+D2vaqExAlJRWW5gYwvvv+xuz35hvJwkKKLgGphRg/bg8/yza5/V8bORj04
+ 5H/imrPBK8rxSY4yT93ffWHj12e44zeUPGxXnEvoz1T49gc/AK8vWUPlY0UY1Tk6jQ3+CWg2OMR
+ C1k7eu2UdbjzMwQgDyaOaLibc4uS06CEudBfTJGIDzfIHWjcZb2gu+zCs9YLNqvw7Bij3F2p61m
+ TdWqSoLancND4wRw72u0a3QNR2u5Guea51U98C2FeZTWQo/Us+X+U2UCy2mSG+yTpAD/ATlgLVf
+ L4iMOJhGtIPc+ULXOysyNuhRbXiaWwiw7R5ADuSF1XmW+wAKuvNSPsL7RlnVWLk7kzNzLDWYG24
+ bDW8ywiwMp2wcOoOOBvwAHWx6dSSyEBxWdIERlAD2dL9HD9P2UXzjAk7mkC97EOLViPQQM68/A6
+ G8UccJI/YrOLCL7Jq4CkwBBd2x8/VPE04StvTrVDuwZpOXaHXLkk2gyd2/8EyH1oQ=
+X-Google-Smtp-Source: AGHT+IH7f9qVsV2UkpCwxSgJABIbMgtRp2QdTyS8zwR331F2TV3AaHaLK88rpqlh1z39xTqod286Rw==
+X-Received: by 2002:a05:6870:56aa:b0:3ec:3845:f229 with SMTP id
+ 586e51a60fabf-3ecbe6238a3mr8362245fac.46.1764174249166; 
+ Wed, 26 Nov 2025 08:24:09 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450ffe2cf67sm5541289b6e.2.2025.11.26.07.41.40
+ 586e51a60fabf-3ec9dc8e0e1sm9276858fac.18.2025.11.26.08.24.08
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Nov 2025 07:41:41 -0800 (PST)
-Date: Wed, 26 Nov 2025 09:41:39 -0600
+ Wed, 26 Nov 2025 08:24:08 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH] docker: Use GitHub-mirrored TF-A repository to avoid
- clone failures
-Message-ID: <20251126154139.GA3759421@bill-the-cat>
-References: <20251110133758.1644822-1-bmeng.cn@gmail.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] Dockerfile: Update building trace tools slightly
+Date: Wed, 26 Nov 2025 10:24:07 -0600
+Message-ID: <20251126162407.3767965-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kTSfBUrtYEHy4e1q"
-Content-Disposition: inline
-In-Reply-To: <20251110133758.1644822-1-bmeng.cn@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,64 +93,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+We have not been picking a tag for the trace-cmd build process.
+Currently the tip of libtraceevent fails to build. Address both problems
+here by picking recent stable tags for libtraceevent and libtracefs
+(trace-cmd has no recent tags). Further, as it is often reported that
+this fails to build due to a race, stop using "make -j$(nproc)" as this
+is also small enough of a set of builds to not be an issue.
 
---kTSfBUrtYEHy4e1q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ tools/docker/Dockerfile | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-On Mon, Nov 10, 2025 at 09:37:58PM +0800, Bin Meng wrote:
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index f98b42e73570..960e4a7177f5 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -311,17 +311,19 @@ RUN git clone https://github.com/stefanberger/swtpm /tmp/swtpm && \
+ 
+ # Build trace-cmd
+ RUN mkdir /tmp/trace && \
+-    git clone https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git /tmp/trace/libtraceevent && \
++    git clone --depth=1 https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git /tmp/trace/libtraceevent \
++	-b libtraceevent-1.8.6 && \
+     cd /tmp/trace/libtraceevent && \
+-    make -j$(nproc) && \
++    make && \
+     sudo make install && \
+-    git clone https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git /tmp/trace/libtracefs && \
++    git clone --depth=1 https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git /tmp/trace/libtracefs \
++	-b libtracefs-1.8.2 && \
+     cd /tmp/trace/libtracefs && \
+-    make -j$(nproc) && \
++    make && \
+     sudo make install && \
+     git clone https://github.com/rostedt/trace-cmd.git /tmp/trace/trace-cmd && \
+     cd /tmp/trace/trace-cmd && \
+-    make -j$(nproc) && \
++    make && \
+     sudo make install && \
+     rm -rf /tmp/trace
+ 
+-- 
+2.43.0
 
-> GitHub Actions consistently fails to clone the upstream TF-A repo,
-> returning the error: "The requested URL returned error: 403".
->=20
-> To improve compatibility in building the docker image with GitHub
-> Actions, switch to the GitHub-mirrored TF-A repository instead.
->=20
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> ---
->=20
->  tools/docker/Dockerfile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> index d2384219c06..201a1cdbac1 100644
-> --- a/tools/docker/Dockerfile
-> +++ b/tools/docker/Dockerfile
-> @@ -243,7 +243,7 @@ RUN git clone --depth=3D1 https://github.com/OP-TEE/o=
-ptee_os.git /tmp/optee_os \
-> =20
->  # Build fiptool, bl1 and fip for fvp and qemu_arm64
->  RUN git clone --depth=3D1 -b mbedtls-3.6 https://github.com/ARMmbed/mbed=
-tls.git /tmp/mbedtls
-> -RUN git clone --depth=3D1 https://git.trustedfirmware.org/TF-A/trusted-f=
-irmware-a.git /tmp/tf-a \
-> +RUN git clone --depth=3D1 https://github.com/ARM-software/arm-trusted-fi=
-rmware.git /tmp/tf-a \
->  	-b v2.13.0 && \
->  	cd /tmp/tf-a/ && \
->  	make CROSS_COMPILE=3D/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64=
--linux- \
-
-How consistent is this failure? I've had problems this past year
-building various parts of the container due to AI scraper overloads but
-never had a problem with the TF-A repository.
-
-That said, it would also be good to document how to build the containers
-with GitHub actions.
-
---=20
-Tom
-
---kTSfBUrtYEHy4e1q
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaScfrAAKCRAr4qD1Cr/k
-CknaAP0QpDaNDSYZL3iGA8h9BkECEk8dRyMp8rrlvrp5Jbh4qAEAix0SfnFw7dWc
-hnzSoI8qgcjody4XB5Gz7JnCFgBlUQo=
-=zO5B
------END PGP SIGNATURE-----
-
---kTSfBUrtYEHy4e1q--
