@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5E79D10F38
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 12:17:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97348D10F32
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 12:17:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B528841DD;
-	Wed, 26 Nov 2025 13:17:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DDC7B841F2;
+	Wed, 26 Nov 2025 13:17:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="OARmd+PQ";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="S89S+q8z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C62C83FDF; Wed, 26 Nov 2025 13:17:36 +0100 (CET)
-Received: from out-171.mta0.migadu.com (out-171.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::ab])
+ id 08C6A841E6; Wed, 26 Nov 2025 13:17:38 +0100 (CET)
+Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::ba])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FCCB83F3F
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 13:17:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D28A8409C
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 13:17:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,29 +29,26 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1764159451;
+ s=key1; t=1764159454;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=PnX7wWKRJkwcU2CNGUKoXiFgnMk4/qUMOWykPosJaIk=;
- b=OARmd+PQHeSamN9CbyIHkYiA+kcxlRZEBnDKb+u0s2Abu+v2AeswTMVT/zinnGe+8oQn0p
- pWzxFzNlxyIw5GvDq7apVRAAUOpniMPOAl5jyqqAIhNLxMOkb8FcujN3M3mcpHe5ooqWES
- bXrtZb3iETNqn5gGgu9WIlfTAwrT+EgrFq3Nt7ie6VuZ60mG9zSEbp1jjSjzfIXr2HKDal
- /dCmlFjSwoE/xJq+oYSnLk9HNcMGCyWO0xItS7N0gggL+xMAop8keqegyrjSgKcbYyQ74q
- uqvuN34POnb26zocU5/aYEfA4x5OlH7dIl04mL9M0T82leSVQnydS1zgvUItmA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=aAD7QP/4I5IdkuVeN3KvcpRpNsVk/n4EAUkXu7L9gyY=;
+ b=S89S+q8zEk2PYKFmy3qLuNLqWJ14E5p2nbf/Z+wJzzmD1BzcdKZxpLbw0iArOwWzdzfS5d
+ 7BWiRU5RAVmjW9Ix/d0PV/U8IJNGSOaJlKO/eHkEjrIP1YhiJ6t3rMWs7Cs561rteYDotM
+ l5JiSBHNM+kxf5j1L8Who3x6/CKZDRtIWOStCZg1Lo/PiljEgA8vIAXTbG70YMjXRxwMfh
+ L049UZhUTTI6d66SUByvDk6ZOkfAER5JHKtck1MCPLoye9xKIeIws2kZtqBy0emjUhxo/B
+ NKNTKp7CUapVb6UK/LNz/5o0PFyAxFDx39gJRFoaEkkYjjDTJib3kMUYaqmgsQ==
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Subject: [PATCH v5 00/10] initial U-Boot SPL support on Amlogic GX SoCs
-Date: Wed, 26 Nov 2025 12:17:02 +0000
-Message-Id: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
+Date: Wed, 26 Nov 2025 12:17:05 +0000
+Subject: [PATCH v5 03/10] serial: serial_meson: add minimal non-DM driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAL7vJmkC/3XOzY7CIBSG4VsxrMUcfo6AK+/DzIIKVKKWBhrix
- PTeB53YuNDld8LzhjspPkdfyG51J9nXWGIa2sD1ihxPdug9ja5twoEjaAG0jBfa3yhjUneonRM
- dI+3xmH2It2fo8NP2KZYp5d9nt7LH9T9hQL0SlVGgQgmDzoSANuzHVKarzWc/pbJJuSePUuVvm
- i0fqLxpHZBbe5TKg/yixaIZgF60aBqNMVuhXJCd+aLlm2a4aNl0QKeCB8E5dh/0PM9/yzu1/F0
- BAAA=
-X-Change-ID: 20250830-spl-gx-1148b58dd3b1
+Message-Id: <20251126-spl-gx-v5-3-6cbffb2451ca@postmarketos.org>
+References: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
+In-Reply-To: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
 To: Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
  Jaehoon Chung <jh80.chung@samsung.com>, 
@@ -60,21 +57,21 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  ~postmarketos/upstreaming@lists.sr.ht, 
  Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7632;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4802;
  i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=BqWoiW8i4TOC5l10Cz2acVyJu8+vFQnzK645CgdXS8Y=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBpJu/RegU7ypE0QVX7O89XRE0qyRnxmXWpyHmd2
- Lxu4X3tHziJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaSbv0QAKCRCEr8vQ14ma
- A3luEACYFIlOz6B1S0BhcymmU6Gfy0m8S3+gnoKqBDaPbw3JZ+LxlWox4ndLI26DZil/dsabs7J
- DUpUPgIZ3b2qB//TlCLH60hjaJoNEkG5GTMPThxId4N8Nx14TRU0jxbSlaF5EDhOvTXJ3F0k5pp
- vhp7EyQbpfcpjQtBajFBZ4i5ISKim+zmmQlMUPtVt81vTqOMyz5in0ekcuL+Fv9CG8RJEHOI1wB
- ElywpO2mpwg0CqcNOyQ1Nb8etnqmbaVRBnJnMTviPFGB0YqXKP1mjmlVV9u4sJ6q8rmWhqabnOM
- kk2339bgyTnNvEDsdVByJptTBYsWoxVUFes0cyNFzC+uBqNPETol6y+IIn8NGI6UOHZB/MrjZEt
- ftdisxqumKl02zam17sLQ4tZzu6LC43aEfYZhZb+nX3qSNMWd6O3KH5eW59WSpFvNrUdLpgNSCV
- MOk1zwYjPGAEoezca2/wVFCi/St/3Vic51CoCcjll+hBNYB5C1q0SJD4E5p91NJU97ga6rw50un
- GMWnxWq8Vfn0coKh/dwZq9rkhfoVPjh7u6wU+dund0/XV2UmKdMkFGa+4h5tnq/luHQaEQ0lRbG
- 29lE50wgQmWJoUF6ppM9bup3vqt77JHKKGEcSZMAtivxq1Gf+FgdJGo3UZTAqzOmSQbrYJCKUon
- dyIkyXALWHuxQWQ==
+ bh=xkk9Q5RIo13bzB5He5lBndoT9V0UyuHWbyNMo5H0T0c=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBpJu/XlIRhKHuWw+BDfSrSqGeYai1mECLNIURFs
+ 2meuiKKlqKJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaSbv1wAKCRCEr8vQ14ma
+ A2foD/4wWkWTM7yGF+MdEI4W5ikhlceTwldN1AK4Fnj1mNhmqsI/N02b2R6cPoF9K8nQlO8AOni
+ mMDd7HWxZTJggmMeWIkIbTGgDRk+C83/QMhgiA8opNl7EJHrhGtYzJhlb65H33eN44x+9WzpVCX
+ 6vOStD68obn7z7FYfshZA6/01cksPlO2PWA/sTp8mcrni+KmYwmnHniEsH1zaMdP1Drl6KwaYSX
+ EiODj3kDBE3FVaz3xN0pz0s6yV3vm839NIOxtWWHP0DewKoJPgMmn8KHJSc3bIlNdL5CHaWIm/u
+ H/xfoI+11c/Y2Xis3NA3EySa4jk6ohoWwpXbF35sDIU11i1Tg7L3rVch9CMDQ6+Fq0zLMaNjmpw
+ aaj/6du1fEtH1Wijf0Db8nhybi9YK7OYw4IqDW19OPlTy0gXUELb8Je2rUSVZsnSziks8Cw6v2K
+ Nah3qC8X9NnvtsLKobvjCVg6zhyIflW9zphCFas0Vwqnzx4jSsYJ7RsmKQOKuHLPvfufU6LSLtf
+ wNCu9iVeKT8c/zHBa0AvrFwsi5gKDCsEAVDcCUshnDFmpPWVhQsgYnq6XaLd4+//kwoXE9rrwFK
+ lpE82BEfga4zZ1hcGh0k3IBXcHPHRk/GyJ59L0+p5U31iV4zLVA/ec9JCmpQMfvE5rbsxLXFwCd
+ O9gLXYONnsBBpqg==
 X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
  fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
 X-Migadu-Flow: FLOW_OUT
@@ -94,162 +91,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series adds support for U-Boot SPL booting on Amlogic GX SoCs,
-replacing the "bl2.bin" binary blob running as TF-A BL2 on these boards.
+It is very limited and minimal, only implements putc/puts.
+This minimal driver is intended to be used in SPL, and other
+size-constrained situations.
 
-Boards tested:
- - Libre Computer LePotato (S905X, 1 GB)
- - Videostrong KII Pro (S905)
- - Xiaomi Mi TV Stick (S805Y) - downstream defconfig [1]
- - ODROID-C2 (S905)
-
-Each of these boards were tested booting mainline u-boot and TF-A BL31,
-either from an SD card or using Ymodem, and then booting to Linux.
-
-More testing is, of course, very much welcome. In particular, further
-testing of other boards that could not be tested, of the ODROID-C2, and
-of the 2 GB LePotato would be appreciated.
-
-Currently known issues:
- - LPDDR2/LPDDR3 support not implemented
- - some DRAM rank modes are not supported
- - eMMC booting is broken (pwrseq?)
- - SPI boot is untested
- - we are quite limited in space, so e.g. the clock driver does not fit
-
-Future work:
- - add logic to automatically detect rank mode and DRAM size
- - investigate using U-Boot TPL to free some space
-   - may fix eMMC booting as a side effect
- - support more rank modes
- - add support for Amlogic g12b/sm1 SoCs
- - ...
-
-See doc/board/amlogic/spl.rst for building and installation instructions.
-
-This patch series depends on Jonas Karlman's amlimage work, which was
-sent in the mailing list [2]. It has been rebased for resending as part 
-of this patch series. Thanks Jonas!
-
-I would like to also thank Libre Computer and MNT Research for donating
-boards to me and the rest of the linux-amlogic community for the
-invaluable help.
-
-[1]: https://scm.dersco.re/amlogic/u-boot-kii-pro.git/commit/?h=wip/spl-aquaman-2025.08&id=d030951d0aaac04f1e2cc8a8eb01eb662a782f21
-[2]: https://lore.kernel.org/all/20250103215904.2590769-1-jonas@kwiboo.se/
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
-Changes in v5:
- - Mention future work in cover letter
- - Remove unrelated changes from binman patch
- - Enforce SPL max size at build system level rather than at the mkimage
-   level
- - Add meson-gxbb-u-boot.dtsi (similar to already existing
-   meson-gxl-u-boot.dtsi)
- - DT: Drop a few #define's:
-   - BL31_ADDR => BL31 address now set in gxbb/gxl-u-boot DTSI
-   - SCP_ADDR
-   - Don't check CONFIG_MESON_GX (already implied)
- - DT: SHA256 hash on all images
-   - Check CONFIG_SPL_FIT_SIGNATURE and CONFIG_SPL_SHA256 (except for
-     SCP image, not a dealbreaker if it cannot be verified in SPL, as it
-     is verified by the SCP bootROM anyway)
- - DT: move mkimage args to gxbb/gxl-u-boot DTSI
- - Mention AML_STDPARAMS=1 in TF-A building docs
- - Fix typo in spl.c (s/YMODEM/YMODEM_SUPPORT/)
- - Link to v4: https://lore.kernel.org/r/20251015-spl-gx-v4-0-f5d7fe03225b@postmarketos.org
+ drivers/serial/serial.c       |   2 +
+ drivers/serial/serial_meson.c | 119 +++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 120 insertions(+), 1 deletion(-)
 
-Changes in v4:
- - Remove "RFC" prefix, no longer an RFC patch (but still testing
-   and feedback very much welcome)
- - Continue using meson_gx_mmc_is_compatible in DM MMC driver
- - Fix typo in amlimage secure boot info printf
- - Drop FIT image post-processing on libretech-cc
- - Add Neil's R-b tags for all the other patches except MMC patch
- - Link to v3: https://lore.kernel.org/r/20251008-spl-gx-v3-0-5999637df4b9@postmarketos.org
+diff --git a/drivers/serial/serial.c b/drivers/serial/serial.c
+index e10ca6eef76..c0b1eb30561 100644
+--- a/drivers/serial/serial.c
++++ b/drivers/serial/serial.c
+@@ -129,6 +129,7 @@ serial_initfunc(pxa_serial_initialize);
+ serial_initfunc(smh_serial_initialize);
+ serial_initfunc(sh_serial_initialize);
+ serial_initfunc(mtk_serial_initialize);
++serial_initfunc(meson_serial_initialize);
+ 
+ /**
+  * serial_register() - Register serial driver with serial driver core
+@@ -167,6 +168,7 @@ int serial_initialize(void)
+ 	smh_serial_initialize();
+ 	sh_serial_initialize();
+ 	mtk_serial_initialize();
++	meson_serial_initialize();
+ 
+ 	serial_assign(default_serial_console()->name);
+ 
+diff --git a/drivers/serial/serial_meson.c b/drivers/serial/serial_meson.c
+index bb79b972957..cc71381f87e 100644
+--- a/drivers/serial/serial_meson.c
++++ b/drivers/serial/serial_meson.c
+@@ -3,9 +3,11 @@
+  * (C) Copyright 2016 Beniamino Galvani <b.galvani@gmail.com>
+  */
+ 
++#if CONFIG_IS_ENABLED(DM_SERIAL)
+ #include <dm.h>
+-#include <errno.h>
+ #include <fdtdec.h>
++#endif
++#include <errno.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/compiler.h>
+@@ -25,6 +27,15 @@ struct meson_serial_plat {
+ 	struct meson_uart *reg;
+ };
+ 
++#if !CONFIG_IS_ENABLED(DM_SERIAL)
++/* UART base address */
++#if defined(CONFIG_MESON_GX)
++#define AML_UART_BASE	0xc81004c0
++#else /* G12A, AXG, ... */
++#define AML_UART_BASE	0xff803000
++#endif
++#endif
++
+ /* AML_UART_STATUS bits */
+ #define AML_UART_PARITY_ERR		BIT(16)
+ #define AML_UART_FRAME_ERR		BIT(17)
+@@ -51,6 +62,7 @@ struct meson_serial_plat {
+ #define AML_UART_REG5_USE_NEW_BAUD	BIT(23) /* default 1 (use new baud rate register) */
+ #define AML_UART_REG5_BAUD_MASK		0x7fffff
+ 
++#if CONFIG_IS_ENABLED(DM_SERIAL)
+ static u32 meson_calc_baud_divisor(ulong src_rate, u32 baud)
+ {
+ 	/*
+@@ -245,6 +257,111 @@ U_BOOT_DRIVER(serial_meson) = {
+ 	.plat_auto	= sizeof(struct meson_serial_plat),
+ };
+ 
++#else
++
++static int meson_serial_init(void)
++{
++	struct meson_uart *const uart = (struct meson_uart *)AML_UART_BASE;
++	u32 val;
++
++	val = readl(&uart->control);
++	val |= (AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
++	writel(val, &uart->control);
++	val &= ~(AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
++	writel(val, &uart->control);
++	val |= (AML_UART_RX_EN | AML_UART_TX_EN);
++	writel(val, &uart->control);
++
++	return 0;
++}
++
++static int meson_serial_stop(void)
++{
++	return 0;
++}
++
++static void meson_serial_setbrg(void)
++{
++}
++
++static void meson_serial_putc(const char ch)
++{
++	struct meson_uart *uart = (struct meson_uart *)AML_UART_BASE;
++
++	/* On '\n' also do '\r' */
++	if (ch == '\n')
++		meson_serial_putc('\r');
++
++	while (readl(&uart->status) & AML_UART_TX_FULL)
++		;
++
++	writel(ch, &uart->wfifo);
++}
++
++static void meson_serial_puts(const char *s)
++{
++	while (*s)
++		meson_serial_putc(*s++);
++}
++
++static int meson_serial_getc(void)
++{
++	struct meson_uart *const uart = (struct meson_uart *)AML_UART_BASE;
++	uint32_t status = readl(&uart->status);
++
++	if (status & AML_UART_RX_EMPTY)
++		return -EAGAIN;
++
++	if (status & AML_UART_ERR) {
++		u32 val = readl(&uart->control);
++
++		/* Clear error */
++		val |= AML_UART_CLR_ERR;
++		writel(val, &uart->control);
++		val &= ~AML_UART_CLR_ERR;
++		writel(val, &uart->control);
++
++		/* Remove spurious byte from fifo */
++		readl(&uart->rfifo);
++		return -EIO;
++	}
++
++	return readl(&uart->rfifo) & 0xff;
++}
++
++static int meson_serial_tstc(void)
++{
++	struct meson_uart *const uart = (struct meson_uart *)AML_UART_BASE;
++	uint32_t status = readl(&uart->status);
++
++	if (status & AML_UART_RX_EMPTY)
++		return 0;
++	return 1;
++}
++
++struct serial_device meson_serial_device = {
++	.name	= "meson_serial",
++	.start	= meson_serial_init,
++	.stop	= meson_serial_stop,
++	.setbrg	= meson_serial_setbrg,
++	.getc	= meson_serial_getc,
++	.tstc	= meson_serial_tstc,
++	.putc	= meson_serial_putc,
++	.puts	= meson_serial_puts,
++};
++
++void meson_serial_initialize(void)
++{
++	serial_register(&meson_serial_device);
++}
++
++__weak struct serial_device *default_serial_console(void)
++{
++	return &meson_serial_device;
++}
++
++#endif
++
+ #ifdef CONFIG_DEBUG_UART_MESON
+ 
+ #include <debug_uart.h>
 
-Changes in v3:
- - Do not depend on DEBUG_UART_BASE in the non-DM UART driver
- - Grammar fixes in documentation
- - amlimage: check digest type in _print_header, version in _verify_image
- - Link to v2: https://lore.kernel.org/r/20250910-spl-gx-v2-0-8f52aac47e04@postmarketos.org
-
-Changes in v2:
- - Drop "mmc: meson_gx_mmc: don't bail if there is no clock driver",
-   given SPL does not use the DM MMC driver by default anyway
- - Drop spurious DM_DRIVER_ALIAS from UART driver
- - Document in send_scp() why it is only needed for GXBB
- - Move GXBB/GXL-specific code to separate spl-gxbb/spl-gxl files
- - Add a few defines for pll init
- - Actually disable FIT image post-processing on GXL
- - Add Neil's R-b tag (subset)
- - Link to v1: https://lore.kernel.org/r/20250907-spl-gx-v1-0-37395d9ff5af@postmarketos.org
-
----
-Ferass El Hafidi (9):
-      mmc: meson_gx_mmc: add minimal non-DM driver
-      serial: serial_meson: add minimal non-DM driver
-      arm: meson: initial u-boot SPL support for GX SoCs
-      arm: meson: spl: add support for SPL DRAM init
-      arm: dts: meson: add meson-gxbb-u-boot.dtsi
-      arm: dts: meson-gx-u-boot: add binman configuration for U-Boot SPL
-      board: amlogic: add kconfig fragments for SPL
-      spl: meson: set SPL max size for GX SoCs
-      doc: board: amlogic: add u-boot-spl documentation
-
-Jonas Karlman (1):
-      tools: mkimage: Add Amlogic Boot Image type
-
- MAINTAINERS                                        |   1 +
- arch/arm/dts/meson-gx-u-boot.dtsi                  | 125 ++++++
- arch/arm/dts/meson-gxbb-kii-pro-u-boot.dtsi        |   2 +-
- arch/arm/dts/meson-gxbb-nanopi-k2-u-boot.dtsi      |   2 +-
- arch/arm/dts/meson-gxbb-odroidc2-u-boot.dtsi       |   2 +-
- arch/arm/dts/meson-gxbb-p200-u-boot.dtsi           |   2 +-
- arch/arm/dts/meson-gxbb-p201-u-boot.dtsi           |   2 +-
- arch/arm/dts/meson-gxbb-u-boot.dtsi                |  27 ++
- arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi      |   2 +-
- arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi    |   2 +-
- arch/arm/dts/meson-gxl-u-boot.dtsi                 |  20 +
- arch/arm/include/asm/arch-meson/clock-gx.h         |  14 +
- arch/arm/include/asm/arch-meson/dram-gx.h          | 341 +++++++++++++++++
- arch/arm/include/asm/arch-meson/dram-gxbb.h        | 168 +++++++++
- arch/arm/include/asm/arch-meson/dram-gxl.h         | 193 ++++++++++
- arch/arm/include/asm/arch-meson/dram-settings-gx.h | 296 +++++++++++++++
- arch/arm/include/asm/arch-meson/dram-timings-gx.h  | 117 ++++++
- arch/arm/include/asm/arch-meson/gx.h               |  41 ++
- arch/arm/mach-meson/Kconfig                        | 112 +++++-
- arch/arm/mach-meson/Makefile                       |  10 +
- arch/arm/mach-meson/board-common.c                 |  11 +
- arch/arm/mach-meson/dram-gx.c                      | 419 +++++++++++++++++++++
- arch/arm/mach-meson/dram-gxbb.c                    | 174 +++++++++
- arch/arm/mach-meson/dram-gxl.c                     | 167 ++++++++
- arch/arm/mach-meson/spl-gx.c                       | 168 +++++++++
- arch/arm/mach-meson/spl-gxbb.c                     | 113 ++++++
- arch/arm/mach-meson/spl-gxl.c                      |  39 ++
- arch/arm/mach-meson/spl.c                          | 123 ++++++
- board/amlogic/p200/spl-odroid-c2.config            |  38 ++
- board/amlogic/p200/spl-videostrong-kii-pro.config  |  39 ++
- board/amlogic/p212/spl-libretech-cc-1gb.config     |  36 ++
- board/amlogic/p212/spl-libretech-cc-2gb.config     |  38 ++
- boot/image.c                                       |   1 +
- common/spl/Kconfig                                 |   1 +
- doc/board/amlogic/index.rst                        |   1 +
- doc/board/amlogic/pre-generated-fip.rst            |   9 +
- doc/board/amlogic/spl.rst                          |  77 ++++
- drivers/mmc/meson_gx_mmc.c                         |  77 ++++
- drivers/serial/serial.c                            |   2 +
- drivers/serial/serial_meson.c                      | 119 +++++-
- include/image.h                                    |   1 +
- tools/Makefile                                     |   1 +
- tools/amlimage.c                                   | 255 +++++++++++++
- 43 files changed, 3379 insertions(+), 9 deletions(-)
----
-base-commit: 072264c4b3406aee50dad08355588577a547ab48
-change-id: 20250830-spl-gx-1148b58dd3b1
-
-Best regards,
 -- 
-Ferass El Hafidi <funderscore@postmarketos.org>
+2.51.2
 
