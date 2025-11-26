@@ -4,77 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54272D10F2E
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 12:19:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBB53D10F43
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 13:02:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F04CC84201;
-	Wed, 26 Nov 2025 13:17:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 5799C84191;
+	Wed, 26 Nov 2025 14:02:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="DYyWhuPn";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="pzLnlJGv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D55E83F3F; Wed, 26 Nov 2025 13:17:47 +0100 (CET)
-Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b1])
+ id 52C3B8416F; Wed, 26 Nov 2025 02:04:23 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAEAD841FF
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 13:17:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id D197A84101
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 02:04:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1764159464;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TnBbH0jq510p88/tBYwLAV30JKs0tB8Mo9K7t1w2Nyk=;
- b=DYyWhuPnoFqFEjnvyXSG87FIV/Zscf/jmRSE9+v4YKHfVJsOgUOxJDswKmg2yJZ/KC140e
- OgSQhYY9J1EFLML8PIzT7tzkEg6kn3z1h7tFaj50dExc/yMIrNQ7n4bpSoqz5UUBIX7U3h
- EnQVFGw/I4MoAhSppm4do7MEth7dsYycL9vtfi/BzqkMPuIzCR/GQw6kTkYB7dIDEfMytT
- b22Ww9DwYkgl8+5IIQC0uj5qNZC4XUacTaNwXznDIoo950sS/VOYKtxOakMzkL/V6CPCWI
- y0G4nerzsoM+qymuAGNtGSUrSAQ+4gRFsPVMqWLI+GjmY4c6Cg9hxbW3o4ae4Q==
-From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 26 Nov 2025 12:17:12 +0000
-Subject: [PATCH v5 10/10] doc: board: amlogic: add u-boot-spl documentation
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=azEBuDZwp+l47pakxI3f/bQF5gp5wHHpv9VNqH7/fHlCUGqhXGZMwJKBUGq/QnF/MmTX2sBSU6Lz1j0/UDnr7XGe3HdPWFnsF/SgQBonWdrwYzojfKCIRReYhHfZ28NHc4LSOz779tXC7LBSNBR/H/6uD298v6DzMZm22UPy5RMbBZ51P1uiVisdUUJYStcysZZsDWbbRMQBqBDkKYaJ+1mk7A+tLTkjarnDj7SuJdMqfZduU2W7tnF2D/eN+JsTNm5Tn0NaxNQHkUQjRa6KqZXYlTzUZrqBHTMaFmHnbZ9hsZA7iBvcSKn//uHRhk2IWk5oj7CJFtY4LI7VniGUpg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FeJUBIKe8+8tIk8GkucUZJd4dVJD1W+ZAsI6NXssdXk=;
+ b=f9lriZ0qSWrOy3Xv9YO5IV8kyN1XK/Ry4+zEPVSN7v4FMPe2wfyuSV6hdFoU5XEEFfacT4+qCfNw0ck2cP+fO85S7dfMNlt3ttKh84C/ENyj/ndt7TW12MmvRe5Gsh1qnzgzrVXFqqjL2yRJ4Ys4eKvzwzlnTMbIU5tPa5iAFwrOS+ztf6v+Kdt+M4pKb44QUjWiFFt8xLwGAPNISezWrbLwG8YSrSxTEhJD055fo6xTZrbxKi6q067mlD5OVOiS1HincYJma0cS2dr9TedJqqCkHBc/8Sqn3SQouMmyuHhuKj/9QyZK4vsUNcufb6ky8sTzem02lAIz8KW536yFrw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FeJUBIKe8+8tIk8GkucUZJd4dVJD1W+ZAsI6NXssdXk=;
+ b=pzLnlJGvEiHyyM5+PHS+gmm2sMNpEFmBlwaL+U5j19DDkFd7W58S+xoTvZFPUwgXUT9FR1kwMrVLrPGx6Mv6ilSadQPJIhWBavxWc1k8BE80QxUXSXdVekEXgxzMbmUJtyqgIsRSCz+WNV0Rfb+/hjVnE5HI88R55P7saNSWq/hqaPtPhr5Z3mV+94KKAUJ48BXG0OQ+BTPmtnlUYk6LIVj4JKGY+tITxy07tG2wKxn4tBrDRvkab9e2ye3LACnOBTyZ3jng2tIBOZZ4fVC+Ase5l143kuEhlyZQuQAWznEltveTJ7rDbOTal9S4b0EARly/OjcIt+w2WgfD4sFGeA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by VI1PR04MB10001.eurprd04.prod.outlook.com (2603:10a6:800:1d9::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.18; Wed, 26 Nov
+ 2025 01:04:18 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9366.009; Wed, 26 Nov 2025
+ 01:04:18 +0000
+Date: Wed, 26 Nov 2025 10:17:18 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Cc: u-boot@lists.denx.de, peng.fan@nxp.com, jh80.chung@samsung.com,
+ trini@konsulko.com, marex@denx.de, tien.fong.chee@altera.com,
+ balsundar.ponnusamy@altera.com
+Subject: Re: [PATCH 1/8] mmc: sdhci-cadence: Add reset control support
+Message-ID: <aSZjLjm7saoeQYBs@nxa18884-linux.ap.freescale.net>
+References: <20251110173737.24545-1-tanmay.kathpalia@altera.com>
+ <20251110173737.24545-2-tanmay.kathpalia@altera.com>
+ <aRv_hIwxZshKJQI1@nxa18884-linux>
+ <3668b44b-9525-4bad-8d24-de10311a4df3@altera.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3668b44b-9525-4bad-8d24-de10311a4df3@altera.com>
+X-ClientProxiedBy: SI1PR02CA0049.apcprd02.prod.outlook.com
+ (2603:1096:4:1f5::18) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251126-spl-gx-v5-10-6cbffb2451ca@postmarketos.org>
-References: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
-In-Reply-To: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
-To: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Beniamino Galvani <b.galvani@gmail.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>, 
- u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- ~postmarketos/upstreaming@lists.sr.ht, 
- Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4593;
- i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=Zdi10uel7EB7OHkvY+i9PQxsHbu5EHWXbT13N3Gijfc=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBpJu/ZFrLcsinR0c+zW4ooxcok7iqArXGyjCuCY
- Cmvc58nPSiJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaSbv2QAKCRCEr8vQ14ma
- Ax8ZD/4un0gPMcj7T+AvDLtvMNPiy2QHekKdY4ain+rFmVOw9709WGFCpRQItYFTuloQK9VJKgl
- jkP9SgW/mOTGrljvLJRRHTujroMUCdiypmAik0RMdAmLwT43ff/jEZPi7Sbg6FVASHAFxGumm7k
- ZKHVrut1nfzP6UwX5oJ6w334dF4p4Lv1E70VxoY16A1QewVgJSXfjzkjzf+z7YpuGIuAKKq5n79
- VH3SfxhhfaRRB3+Ach4AbPZpki0mNmLrUThWS4rgbw9ubWj0lZKJtRCK6INKdnvSZpPbgP2Gey5
- nDnHoAl87VVB5cDRcOBsatAOUUs4/Qt1zXxzvJhBqxbuapRCOJ75Vy+dgSdmYHp99TCOcvJXtF1
- jLz5z/LSAvAVwvuMpYtNpoSTJksq1z6u3FAmyfPJ0fQS3AqaZCvkbauHx6GRzqAqC/ziSQ5izJX
- Jjbtu+gp7ANPSofCSnBVkGG3/PBGW9X3pB9LUsr5g+JK601wIiJc6jfoCxTCqlynxba4pBmR0Y9
- KVg4psa9+a1EPveJXV32TxqQ20uz+fuuNi/vj3fEgTODrPrRFB4cVffSbkg2BertgN/koxSfBDw
- d9JxE+m4fCSzJ8oLnbwgLXf/rg+ytXW376556KYOnbYyMrlF8ZNYODSQ9n37qOx+YpoPcNs9ibh
- UO0ACLsr1N2EXKQ==
-X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
- fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
-X-Migadu-Flow: FLOW_OUT
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI1PR04MB10001:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1636234f-6f49-480c-add9-08de2c87b961
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|19092799006|52116014|1800799024|7053199007|38350700014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?VMUHHSVqvWW4iRBAHFosRHYvjRD+FmbI1lr7Na0rEOie9ppn/9blMbFb5fgq?=
+ =?us-ascii?Q?OX8QNKqYhuHfEdCm70bg+04j1nLCgFwGWTSua0v3IQTdULV25aRGIz5VjPv1?=
+ =?us-ascii?Q?t3YjDjIjJRxJKN/9dqkiHor/9u3H3brMlYjmMXCcyD78W51ttwjNV6g1ohxP?=
+ =?us-ascii?Q?ZEz4Z5whTgPECx1SiJxWUEhGr6huEiuR+kNd1PN8ObO6MOlXsNnpP1Sjhq0D?=
+ =?us-ascii?Q?f4Y6Xi1HPzaLdZt0JVxTi6ha6kVYNVfYNw5TDTW186N5a1B4YeFlnXhT4RVy?=
+ =?us-ascii?Q?pEElMSzy3CerVcRHmXr7t+wFfanOk/0p+DMCpjpCq8uDR6hOl6dknjcgR0hm?=
+ =?us-ascii?Q?km78646q8gBmOw4r0hLzt6YOCURiP3dxlA2GoTWCqIMIsZBdSeUowye3qLBp?=
+ =?us-ascii?Q?qrlepkEQmmbsANb3cBXIijs0qPUt7bndRdvoKW3oWyyvFQFx9YCFlZKW83yI?=
+ =?us-ascii?Q?3MdhyLXNeVZzROWmsfFnhOIXVHHUT+Muz0CbA0XFRTFD6Fg46FZEirA+J+s9?=
+ =?us-ascii?Q?u82r8ohEQ4FpfwBRcXoql22KOoMh0PIXi08Y84cBojjLziH8QumOSSygpW+y?=
+ =?us-ascii?Q?3iNlzjDf8FMDhWT8fgb8YRcrqzwNeaC5V5nOkR7RSrE+60YOldoYLqBv1Lna?=
+ =?us-ascii?Q?oPvBFjAHQk4QsENQecv8/2a8srKNMieEvSoOfkWfuNLnJhgxoiKIAbqLlSGP?=
+ =?us-ascii?Q?5H8Z2qL6aZHZ3lPmpNoLKhI4oDIoyE7Qtu0CneMgVu/nk1fAmQpeShayPjIO?=
+ =?us-ascii?Q?B75LmMOseXoYYKi/yKfMybvzny/im2VDGGLTQBn8blnAJSOOVFFbDpCOwXXs?=
+ =?us-ascii?Q?uJyuOzwO8VbQdg3cksF6cDqv5KhW6FMEWG6wiLpb3dVrhkt/9wpJ8jcCRiKu?=
+ =?us-ascii?Q?MzRVwQdT/72BLt2adySUDt0S0hcfd2tyx3nMjLJGKdnJv/viFh/v4f1Nfwo2?=
+ =?us-ascii?Q?fLnIaLSD9kgqRt14Sd+qa9vCcZrGRfA+f7dWvV2w17o8Z96wriHlhIncApb5?=
+ =?us-ascii?Q?1+EWLpiq4gvKnn6jBV419Dc8Xo95/JuM1x4m8dK46+pPf64pejYOCakPbV9+?=
+ =?us-ascii?Q?EtVzWPbu8kT63MPU6Xt0c2IfMWn7llb3/tzeUyfPziruaUN0Y4FrJPJEI9Bn?=
+ =?us-ascii?Q?7m8Ql76/hkQbzBo/TI/EFQ+CqGypbiY2U4PQcD9tEUWLx/Pe4BWRF5H2wlAJ?=
+ =?us-ascii?Q?dGKuPCFOdU4dvNqHAOFAXZhv81vw+/KSAxbrLAt+emDFUQOYbkRGgP/4ss8O?=
+ =?us-ascii?Q?+zZLHCPGGrnBHOJXtQrLF717dNdsPVMWk/IM44pOspzZg4c5gECMqf7JHqxr?=
+ =?us-ascii?Q?Y/xfTT3fGfGQ7X//RuzrVLtPo/st34UQ4zIEVNvPEMlJxBs667Wdifs+3BGq?=
+ =?us-ascii?Q?uSSwnTFW2GSj7PgZA2svVYG7k0I88YZRsCvtMtd/1lY2pWloFRf05sU3zZdF?=
+ =?us-ascii?Q?yA7vsICJA64plVjj0WF+aXkBC0v/aDOLCeMpUnZzpv83p/B2S6Bz7MsUexij?=
+ =?us-ascii?Q?uzr7ljNhgeEY/b8mZN9KnpRQP3TfgSXqkONZ?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(19092799006)(52116014)(1800799024)(7053199007)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?unJR2tlV8VGOEkXVbTwB2YcdgKA2GbbtSqFBRMT7fxf3La+Hc6naxJxk1owv?=
+ =?us-ascii?Q?5ZhGClZUcrTByQReP4+kDulYMS8z9BRtmxWXEdS+nYgdUrSgAvJM0lg6omrQ?=
+ =?us-ascii?Q?FBN82noL2QLnNO1sl9ARcbYCxejgLPaa6FF6IQb5fSShhLCrEYJtvbPzNRLb?=
+ =?us-ascii?Q?DDUbYjcP6/Egyf8JmKysk09Xij6ozkjnvRPpQ6GxOtU4o4qUKg2SIa9oD9av?=
+ =?us-ascii?Q?iPKMIrZKa+GzpD+bUQo/nYJRNyiasA8xcV4inflx8q0fSLpGENqzZyKyMLJV?=
+ =?us-ascii?Q?KvbCb0VB4IWGCxGWDxh14/uR/eFvBGc4t6OViKfZHdlQ8XwEm6Tpxcaxvyie?=
+ =?us-ascii?Q?4uKHEMChugJcVkbAFbH76pBuvChm2jhyfquy5X0yDy/ZNBC6wex3SolY+sRG?=
+ =?us-ascii?Q?NA9VmmyBDg6c0SEP19MrktbR6PRFd1HJ9ufsK5NTG/9pG4+RR3RC+Hhl7HNF?=
+ =?us-ascii?Q?D6KKZHl0AjfRTU9zHDLlu4o8g6vSPyAE4ziuOz8rzbsNrZCS/5/msvPzJboB?=
+ =?us-ascii?Q?gvKemnZrTqkTCEu7EylgIWWe5Nwim87ILXJ7jk1sVv2lsSpvw/keTiXJrPOK?=
+ =?us-ascii?Q?KoWgrgQ0xDi1MljlBi6nvifTN6WfPQ/nz410BI39UOn2MJZj0yjhgIinJ9lg?=
+ =?us-ascii?Q?jFf2Vb7sYwuz7mkZfsKkmy3Ku6i6KxTZU+Z/WnLksv3bNN/6x79ic4EMUUkj?=
+ =?us-ascii?Q?L55TW7BbO2hsfWW+J02IUByQgoOtmM1iOlrcwSr0S3Glwdui79FejvC0Ohsg?=
+ =?us-ascii?Q?2DeAdf6NkdqB4ofv8XFUifED3G3GejpyIOJRuVhuQK6Kn7OEGJaDzgKZh8zs?=
+ =?us-ascii?Q?fCa4OEBwvyFBJ3zlVrJl38k+jQ4Jlh6cBuZ5Nt237dGPQ96r5jn6rsKGJGr5?=
+ =?us-ascii?Q?KJFU0hSROfgZP8084lZYSEZDEfT2ed3FZJK9OWDuXOhIZatt5c3b2aUmEdcR?=
+ =?us-ascii?Q?C9Ij4e1kDTvCq5IBKz5BB3eoYiir9avotDoqVYPbZNrkPqqCIMF8VsxvtD/K?=
+ =?us-ascii?Q?Obbr/3s2NisvxL5DbFCe44kiC4hmsOiubCqPDiir84RpcWc/ipHmQMJxn1Jx?=
+ =?us-ascii?Q?bv0gM5ozyDyrBKlJ5V+Ih4atVrQzi5Uxfvn6W0tuCR2xT9nOcGXWjEJgFGtF?=
+ =?us-ascii?Q?84BaGhgvp1qL285vcxiwAIgqyLbbLZ+XIUak7DO+O1crS76d8jfZY2Q8jl7c?=
+ =?us-ascii?Q?wFDaIb5SJSgeHqQEuqsdjaYm/9ve+9Ly99MKA+5SFAKeEweflo8J9MnrV2Go?=
+ =?us-ascii?Q?R3SkQ3tsIa3CedQCETmH8BV8FJey9RjLZkkaXhA7979WF7NKCOfdRuG3TZVc?=
+ =?us-ascii?Q?9OMmy3xXz3hHYjUsWJjrOeL3EYdnlmnDV7Bz9r5WeYrXt/FellyhmlIUIp6a?=
+ =?us-ascii?Q?0fdvUA9uRPSIpDHQF9qzqic9BqxlFM+4P6qWPLJDwz+aoN2fKoe4No1Wqlp7?=
+ =?us-ascii?Q?LMbBfAkOfBMrhNOrqfZLNVgmtxKsRJkIvYxGtf6nHhEyilG4XaiuT7ZlAFFu?=
+ =?us-ascii?Q?Y32BK1OX2fnmfmYGp+UmeThnc1c4lGnp4rk1EYpPdZqChMAXXMfYY4plRKgS?=
+ =?us-ascii?Q?h5XyFGjdYl+KJC50S4Cz1y2WDy4zkoUuQXY46IXl?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1636234f-6f49-480c-add9-08de2c87b961
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2025 01:04:18.3999 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +tMqg5uUF1OhnT3j2zpu66AgoclQn13diSZ5Lu3ZWflJhX16xTrE6Jp1DNHqz7UB0+NSYTjFYM2i0nlK2tGzXA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB10001
+X-Mailman-Approved-At: Wed, 26 Nov 2025 14:01:59 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,136 +166,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add building and usage instructions for SPL.
+On Thu, Nov 20, 2025 at 08:29:11PM +0530, Tanmay Kathpalia wrote:
+>Thanks for your comment, Peng.
+>
+>On 11/18/2025 10:39 AM, Peng Fan wrote:
+>> On Mon, Nov 10, 2025 at 09:37:30AM -0800, Tanmay Kathpalia wrote:
+>> > Add reset control functionality to the SDHCI Cadence driver to properly
+>> > handle hardware reset sequences during probe. This ensures the controller
+>> > is in a known state before initialization.
+>> > 
+>> > Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+>> > Reviewed-by: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
+>> > ---
+>> > drivers/mmc/sdhci-cadence.c | 8 ++++++++
+>> > 1 file changed, 8 insertions(+)
+>> > 
+>> ....
+>> > 
+>> > @@ -225,6 +227,12 @@ static int sdhci_cdns_probe(struct udevice *dev)
+>> > 	if (!plat->hrs_addr)
+>> > 		return -ENOMEM;
+>> > 
+>> > +	ret = reset_get_bulk(dev, &reset_bulk);
+>> 
+>> Should this be optional? Some in tree platforms may not have
+>> the reset supported.
+>> 
+>
+>Yes, you're right-some in-tree platforms may not have reset support. In those
+>cases, the code will print a warning message ("Can't get reset") and continue
+>the probe process.
+>If you prefer, I can remove the warning and let the function fail silently
+>instead, or is there any other way you would suggest to make this optional?
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
----
- doc/board/amlogic/index.rst             |  1 +
- doc/board/amlogic/pre-generated-fip.rst |  9 ++++
- doc/board/amlogic/spl.rst               | 77 +++++++++++++++++++++++++++++++++
- 3 files changed, 87 insertions(+)
+devm_reset_bulk_get_optional() may help.
 
-diff --git a/doc/board/amlogic/index.rst b/doc/board/amlogic/index.rst
-index dcd935224ac..23380ac33f2 100644
---- a/doc/board/amlogic/index.rst
-+++ b/doc/board/amlogic/index.rst
-@@ -78,6 +78,7 @@ Boot Documentation
- 
-    boot-flow
-    pre-generated-fip
-+   spl
- 
- Board Documentation
- -------------------
-diff --git a/doc/board/amlogic/pre-generated-fip.rst b/doc/board/amlogic/pre-generated-fip.rst
-index 6a43d776d43..d820bd09115 100644
---- a/doc/board/amlogic/pre-generated-fip.rst
-+++ b/doc/board/amlogic/pre-generated-fip.rst
-@@ -98,6 +98,13 @@ The repo also provides the following files used with GXBB boards:
- The repo also supports the open-source 'gxlimg' signing tool that can be used to sign
- U-Boot binaries for GXL/GXM/G12A/G12B/SM1 boards: https://github.com/repk/gxlimg
- 
-+The following binaries can be replaced with open-source implementations:
-+
-+- bl2.bin (GXBB and GXL only)
-+- bl31.img (GXBB, GXL, AXG and G12A only)
-+
-+Refer to `Experimental U-Boot SPL Support`_ if you wish to replace them.
-+
- Licensing
- ---------
- 
-@@ -129,3 +136,5 @@ clarified. The current Amlogic distribution licence is below:
-     // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-     // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-     // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-+
-+.. _`Experimental U-Boot SPL Support`: spl.rst
-diff --git a/doc/board/amlogic/spl.rst b/doc/board/amlogic/spl.rst
-new file mode 100644
-index 00000000000..0495cd1ee9f
---- /dev/null
-+++ b/doc/board/amlogic/spl.rst
-@@ -0,0 +1,77 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Experimental U-Boot SPL Support
-+===============================
-+
-+There's some experimental support for some Amlogic SoCs, in U-Boot SPL.  It
-+replaces the proprietary bl2.bin blob used for DRAM init.  Currently Meson GX
-+SoCs (GXBB, GXL) are supported.
-+
-+A subset of Amlogic boards have SPL enabled.  These boards have been tested and
-+are known to work to an extent.
-+
-+
-+Building Arm Trusted Firmware (TF-A)
-+------------------------------------
-+
-+This U-Boot SPL port requires the BL31 stage of mainline Arm Trusted
-+Firmware-A firmware. It provides an open source implementation of secure
-+software for Armv8-A. Build it with:
-+
-+.. code-block:: bash
-+
-+    $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-+    $ cd trusted-firmware-a
-+    $ make CROSS_COMPILE=aarch64-linux-gnu- PLAT=your_soc AML_STDPARAMS=1
-+
-+Replace ``your_soc`` with the SoC target you wish to build for. For GXBB it's
-+``gxbb`` and for GXL it's ``gxl``.
-+
-+
-+Building a bl30_new.bin binary
-+------------------------------
-+
-+``bl30_new.bin`` has both ``bl30.bin`` and ``bl301.bin`` binary blobs
-+bundled. The former is the proper system control processor firmware and the
-+latter is a "plug-in" for board-specific DVFS/suspend-resume parameters. For
-+more info you may wish to read this page: `Pre-Generated FIP File Repo`_.
-+
-+To build using the FIP file repo, simply issue the following commands:
-+
-+.. code-block:: bash
-+
-+    $ cd amlogic-boot-fip/your_board
-+    $ make bl30_new.bin
-+
-+
-+.. _`Pre-Generated FIP File Repo`: pre-generated-fip.rst
-+
-+
-+U-Boot compilation
-+------------------
-+
-+U-Boot SPL is not enabled by default, instead there are config fragments that
-+can be used to enable it, with per-board configuration:
-+
-+- ``spl-libretech-cc-1gb.config``: 1 GB LePotato board
-+- ``spl-libretech-cc-2gb.config``: 2 GB LePotato board
-+- ``spl-odroid-c2.config``: ODROID-C2
-+- ``spl-videostrong-kii-pro.config``: Videostrong KII Pro
-+
-+Pick one of them then:
-+
-+.. code-block:: bash
-+
-+    $ export CROSS_COMPILE=aarch64-linux-gnu-
-+    $ export BL31=path/to/tf-a/bl31.bin                 # Upstream TF-A BL31 binary
-+    $ export SCP=path/to/bl30_new.bin                   # bl30_new.bin binary
-+    $ make <yourboardname>_defconfig spl-<yourboardname>.config
-+    $ make
-+
-+Write to SD:
-+
-+.. code-block:: bash
-+
-+    $ DEV=/dev/boot_device
-+    $ dd if=u-boot-meson-with-spl.bin of=$DEV conv=fsync,notrunc bs=512 seek=1
-+
+Regards
+Peng
 
--- 
-2.51.2
-
+>
+>> Regards
+>> Peng
+>
+>
