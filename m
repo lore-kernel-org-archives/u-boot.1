@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A41A0D11192
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 19:06:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36179D11193
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 19:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBD8483A24;
-	Wed, 26 Nov 2025 20:06:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8EA3F83A7A;
+	Wed, 26 Nov 2025 20:10:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TLBdZaYc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kEGJY5SM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7056583A28; Wed, 26 Nov 2025 20:06:31 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 2BBE683A94; Wed, 26 Nov 2025 20:10:30 +0100 (CET)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4468A839E4
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 20:06:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 123FE839E4
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 20:10:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7c6cc44ff62so101416a34.3
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 11:06:29 -0800 (PST)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-6574d7e451dso49446eaf.0
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 11:10:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764183988; x=1764788788; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=oq6t/dNHoH9Fb46IYqhNQT8SG8o3REzf27XQnojIN+c=;
- b=TLBdZaYcfqRyIj1uRpWmPbHrS87GquJiYQZMN5zRGu9CHHr6lYjbXC4ES9VSmpzYiG
- RHyBGgCt3imacWn/4W0MDmrB9A2uZfq82dE+cnTH8kx/yElSoq7m63f1kMxjCDmObKUV
- Hns1sjjYGQX+cEItGIIcBtnchUOwWj/AciRRg=
+ d=konsulko.com; s=google; t=1764184227; x=1764789027; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=uTk/EFXmPpVhT9eSWj6v3inBDErcETniQgKSHis4EtM=;
+ b=kEGJY5SMjUZPxn/5B+5Kb7sfsHMcBMOxOf3Fz/kFiroDL9TExPzFoEV9POCCgcJlNk
+ NaQJ4Sjm0gowT7c1PSWd7iu6a6JPbwDUk/pmS+oScv60a+jmnZE1DC4FSkB7pK9vmfvL
+ G+UG1h839MrQ7bjGvdOfRNE+9oZ+jzae2D95k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764183988; x=1764788788;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oq6t/dNHoH9Fb46IYqhNQT8SG8o3REzf27XQnojIN+c=;
- b=Xl3ZKyDHaxb769zbh0N8NsExw4cSYWuh3NkZKfy4N4V749fPrJC+9bEe5zmnFB6ogo
- dCWt9TP9+sen3NF3zqUYY/lZQKoNPGpGANywdCYyHgoSaBFdXZTHILuABza95IVHpdxF
- wlMIgu013xJTHdY/25HuPy2mjX2G5wd70sD9Svu/37fU9AhSCCDu91wSgg5dB2zZccxy
- fGT8XH9XGTxnluk9cVz5WLFpIFt20iyU5SZ3FctKUP86lyiUbcuaZc3gtuM2DgAGKIRf
- xLwIZ7p+UtI9oHERJsk+4fN75H555ffqSvul+5Urlgcwbse0GRCUHES1YLLFhJ79xqLG
- 6LgQ==
-X-Gm-Message-State: AOJu0YwNbmkqTbyxCArPFRj5KTrJThU0bAG+mEr4ecRH+ouywWoYZwLT
- V41yBX2POPrsDgDaXcwWKBsIZImCH3eZx3ZMuKOTveX2qOIVnMhfSjK0X1nR32F2XykclEBlqu8
- I16onF40=
-X-Gm-Gg: ASbGnctjH0fNfMeeoNfENm3N1Yrl1oWtcd1wFdYQJGv8oUJ9BXK95yUTuPmceGRfZ9R
- R7hAFD7N/nqlWd7J9LJWGH2kIgz9L3DKomlWNyvebkNTIMp27jq5nRVR0JFuEoe1YzIpke6TQmW
- PiUNcNrsxJMHJ7/hoU7a5/zmrpZzzS4MpyyG4rKdtOgNb8l204x9/vVjz+joJn+aGP8uQgNU2Mu
- B9IIgjD7YcKiXxHGVAlqor5YTEPwFabUC+XgNVUXdsYWgkmZ+cnKekW4hg8T25hLjPPsp1DeU/0
- AIkhLDHTbqaVcRhYvo1rJivbgZsnvvG15haW7BZv+gT4LmJez+IxNJOvNM3gBSSfXMUgkA6+pFP
- xHLCbBvk12KVko2cVN4fssUmDC68Gnja0XaMSBUlE7BG2Eyq9RmaM9YFeHkc5Avx0pRESpIqN9N
- cd1bkmQIBmNbzErMw56xIwR6f4XKzrpczXoCv8x4Y/jBsE2KrS4CIF
-X-Google-Smtp-Source: AGHT+IFqARhFAQfvo17NYCOvHVISBaDnVUXmCKL88xD6R5823VD/VWdxbFE5Kb8An5eO4XJ/Fpxbxw==
-X-Received: by 2002:a05:6830:6f47:b0:7c7:827f:8730 with SMTP id
- 46e09a7af769-7c7c4485d9fmr3903482a34.38.1764183987963; 
- Wed, 26 Nov 2025 11:06:27 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1764184227; x=1764789027;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=uTk/EFXmPpVhT9eSWj6v3inBDErcETniQgKSHis4EtM=;
+ b=NB04tay2oYRACdEeGkH/uIt7cUc9lgKpBnOq2NIWHAjSgo4DnR0SeexetrlZyyRrq4
+ uAXabNkm5llGLuMRUU8YfHnjjpftXLMwErRxy2pknOibW6bAdFLCqx8xio3LTty89+Xw
+ BPOLILDG11iDVUB86MRSP70tynRCE+R2WlCqS85ALUcqN+A8gN0aslskpYRpZdTDbrSP
+ zn57L7I4IHGisNkeDaeD/vDXIYv492OSu+Tsr9nv26hC4M3jnzBBfw55e465wfG2eoUF
+ RdHDRKd5i5wt788l7E7dwDwVKVccU0uV2VS5WPcvO982c+v9oedlKbyJllJjtJpENBWd
+ OLmg==
+X-Gm-Message-State: AOJu0YzRToWzQ9k9ur6Twc0fyGdDv+fdAVpdfTDf6gDPXiN2fIfGIw/Z
+ By6+8B+fK3+QiENKV+76PAZm5CpyJE8bxDIc3Xlt/e0YW9d08gs+KkXiV0RqvZO5FqTu3CLQa8e
+ yPuyI4qU=
+X-Gm-Gg: ASbGncsm6RRhK5fdt5t7exnXmNyqSFZMachiAFNb4HYtNawFZ+soxGuLwAExasZIYAG
+ v2K5ebM9kCrIWYVqravVEpK7Ra2Cq95nw/NSN5r5oIQqtYtb/AXj0aTV9gLR50DJ2vi4DvtA/Qw
+ E3h7zLjLxV47AVNB8RIBktdDoAXzpGhOlqNj+St9P6Os+bUXvoPYmfNE2y6GTUSm/moe2WQzBxG
+ loBJ3nJ+6fsTo9SrUVsCGGqpqy4vNFzRTE8rNzFpbHAcJv0f7UJVyWV4JIXUEE/z+zpUB3Uugf3
+ XsNKj3Y+hV2hJHeUVpfCFmx/WIDhsjJrHXtLk0UQejcsaof86dx5EcXBCtWfzhtKT9btzMdxnCM
+ Huebz8B0q1gjB5CCVox69/ns7o3q9/wT2cD7dzs2fiikaNZOw96u9J87z0MZcZEfAVCBzk7P2on
+ GDrXyz5ut6I4/PiKcWmJIN1zRBn/lEe1gwRu60L1RLqnNM/gKI
+X-Google-Smtp-Source: AGHT+IHX4iA8RvgNNnkRL8TmtrDu/CQ8qMzjdqanK/NeqdUnH2iZeYwul548ehDiop7wawJVBRAH5A==
+X-Received: by 2002:a05:6820:989:b0:657:5ed8:c6ba with SMTP id
+ 006d021491bc7-65790a0915bmr7430922eaf.1.1764184226795; 
+ Wed, 26 Nov 2025 11:10:26 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c78d42801fsm7746362a34.27.2025.11.26.11.06.27
- for <u-boot@lists.denx.de>
+ 006d021491bc7-65782bacf02sm5227803eaf.15.2025.11.26.11.10.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Nov 2025 11:06:27 -0800 (PST)
+ Wed, 26 Nov 2025 11:10:26 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] CI: Update to latest container
-Date: Wed, 26 Nov 2025 13:06:26 -0600
-Message-ID: <20251126190626.3799644-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20251119143258.838466-1-trini@konsulko.com>
+References: <20251119143258.838466-1-trini@konsulko.com>
+Subject: Re: [PATCH for v2026.10] Docker: Update QEMU to 10.0.6
+Message-Id: <176418422604.3800471.316721811218848122.b4-ty@konsulko.com>
+Date: Wed, 26 Nov 2025 13:10:26 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,58 +95,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- Move to jammy-20251013 tag
-- Bring in tkinter so that FATtools should run and more tests should be
-  run.
-- Update to QEMU 10.0.6
-- Pick tags for (most of) trace-cmd
+On Wed, 19 Nov 2025 08:32:58 -0600, Tom Rini wrote:
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- .azure-pipelines.yml    | 2 +-
- .gitlab-ci.yml          | 2 +-
- tools/docker/Dockerfile | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+> The QEMU project has the 10.0.x series as an LTS release. While we are
+> not doing an LTS ourselves, we can be confident in the changes between
+> 10.0.2 and 10.0.6, so update ourselves.
+> 
+> 
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 3f671dd078d7..0c7c38ba7300 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -2,7 +2,7 @@ variables:
-   windows_vm: windows-2022
-   ubuntu_vm: ubuntu-24.04
-   macos_vm: macOS-14
--  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20251001-04Nov2025
-+  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20251013-26Nov2025
-   # Ensure we do a shallow clone
-   Agent.Source.Git.ShallowFetchDepth: 1
-   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 86d3c741ea17..e7234e003ea5 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -18,7 +18,7 @@ workflow:
- 
- # Grab our configured image.  The source for this is found
- # in the u-boot tree at tools/docker/Dockerfile
--image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20251001-04Nov2025
-+image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20251013-26Nov2025
- 
- # We run some tests in different order, to catch some failures quicker.
- stages:
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 960e4a7177f5..8ab1cff55843 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -2,7 +2,7 @@
- # This Dockerfile is used to build an image containing basic stuff to be used
- # to build U-Boot and run our test suites.
- 
--FROM ubuntu:jammy-20251001
-+FROM ubuntu:jammy-20251013
- LABEL org.opencontainers.image.authors="Tom Rini <trini@konsulko.com>"
- LABEL org.opencontainers.image.description=" This image is for building U-Boot inside a container"
- 
+Applied to u-boot/master, thanks!
+
+[1/1] Docker: Update QEMU to 10.0.6
+      commit: bd19527c755963de9c1d231fdacd112e54f33480
 -- 
-2.43.0
+Tom
+
 
