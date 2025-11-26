@@ -4,96 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09324D10F58
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 14:28:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59ABDD10F57
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 14:30:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5565284247;
-	Wed, 26 Nov 2025 15:28:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DA68C84239;
+	Wed, 26 Nov 2025 15:30:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eLijtKkf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="elJWKCv0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B94884248; Wed, 26 Nov 2025 15:28:56 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 507D68423F; Wed, 26 Nov 2025 15:30:51 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5054E8423F
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 15:28:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4466C84214
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 15:30:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-477a219dbcaso60806135e9.3
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 06:28:54 -0800 (PST)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-42b32ff5d10so608562f8f.1
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 06:30:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764167334; x=1764772134; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1764167448; x=1764772248; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=1wQk+6WXBHdGLWOItOIJWP+FvGsGFJB9qe/vfOKgDLE=;
- b=eLijtKkfiz3ygKgbL+MnG5b8u6KVV/VAMMJ2v93zvUL3Yp0X0CG9u73d6KGV4lwe3a
- BvI3FHTh21bQgeajncMXKGKY7Q1s30+gIycyhFiBBGXA9q2Nx3rJLKs9ddkK9xlHyjbZ
- 7kI/KL+Zo+aY1iAWSerPtAwWQKsNpOrEpjzEEKeJUlQS3yX7MmGEA+Rb80+aWUxXOVf5
- YRQ/+Zitga/9aJjXzb6mu4Ljar6kuEZmtgtYf2x2f464q8p5tKntHfyW8MoChuvkM1wu
- 6kfBnC437SydbUF9QAjF3R9uMLnKlKu/I4DNePdP/oyaIcjxaFBnTlXeBD/A06FAwA+G
- P4OQ==
+ bh=vibX9gdqLJS8CiMjl3+VzDoeCZtluiKkFJtTviEUgq4=;
+ b=elJWKCv0VI6pZn80BpdxH8ZIpeiQ0x5dqogElDHE1mvKtyD8LXTy+b077S2uEwB279
+ ZT183uf2Tcji+0WTRKhmPf2iGE+2WOL4xRWIvIxCmaPwfiocFXUn+IcEuU+btNP/vhVP
+ 9bangmtAwk07BVqaoQtL5vWOHCFuCvDaXblcAHfxil0Rfg4e44a8Vhfs0/7t47wRUSVx
+ 9/4STPQ6NP4IIsP1QINrIZk44WU5zn4751K4QbN5GEnQpi0caXyZG1E7Fhy/BK0ef9QN
+ r/OgdbaYubBcqQJ1MXn6N82c7tv50jjt74z6Zu+lkn/T2XlAgrPkqYtsQpbIIGNQHoBf
+ 4R5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764167334; x=1764772134;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1764167448; x=1764772248;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1wQk+6WXBHdGLWOItOIJWP+FvGsGFJB9qe/vfOKgDLE=;
- b=m1WADR8oKU/aUcx84i8M/Aw0Gunkgpvwuj1coeK+BURDz2Z6daIiKi1L/7jwBmGTIf
- xb99em4E+im6YayhIx7QwobvdNK4xKjnDQ3LXADY6jOKpYkMPG1l7QNW0zk1olSONV0f
- u5VXIoOBEvz85t7yxS0j3dNVIlcdgxiq+FSMUOd21MoCXhVQAjuJ3sRTL4pLoIei0osb
- tLdIXWkLcn1dGiZI0kGJo0+10V+OBQJlJ09Vs7gMuQMfa0oDXXUbAuRxyeK99EGupjW7
- O4ACOoqxhKRHmBibuIpNakhI6vyIvaov/lIBqJmqUpY0eNT+VaJHpXw5swPrl7ZjYkB3
- TNyQ==
-X-Gm-Message-State: AOJu0YxYQejH8kkIBfwJA0Lfu2i7I+2bEz7W+aRjiAagQEIUjzzlEJwg
- Ofqabx7VLOi69XgM7I6AAX1f/fSANIcNTZKFE3aCTyitqJmMPGq2bz19RMDzYd3u4yA=
-X-Gm-Gg: ASbGncv2X0RSqObltpFkpOFI9av77b8pB2Y/hWIeULTh/wLBp463x1W3rDKj+RuAOzr
- KVAIWdtOFtI7QkMo1dtkDG+6N4SyguotHPb4uSpgfhqKk0fFVPgOkH1pThxay3NaTWsmOVVAQOp
- 8uen2KDYyU+MwMMtU6zWUb00ye8K68sVmrEJCcfu2iUJquNMZPBKGAkmnmhU6DfSCJ4OY4kKU9g
- PEk5ABTouxytRU3iGTFZga0ySgMqJYEH209fyAY+Si1PzzF078kESsZ14GAVmX563N7ne1fdo2f
- VqU7KavAVQHfF9hQyXSIpJTnh4rTTqGxJ14GOAcXAqm/qM3XLdbJKd7p2cKIxpxw+ETiDGXjuGn
- 0NWb5sSdLaeJ21gMqQfHnuavX3hPaCbJBQcUeWh9Yv9xejgC8QNTujgIRqYRIvgOW/7mJOwm6LO
- WJOBwJsqmiedjPQmkDGGBBPuPgMe8KzsZgAVUeH4ulmvTM60NGc2J2ArBmbqyP9Zz1hA==
-X-Google-Smtp-Source: AGHT+IEgc9YRxEIWu1FYojy8TKAU8TDcTYbu1aiZhv1X3P6vHcxZwS5FR1AXTBqFVdX5+d23gKswWg==
-X-Received: by 2002:a05:600c:1d0e:b0:471:21:554a with SMTP id
- 5b1f17b1804b1-477c01860aemr190932285e9.13.1764167333731; 
- Wed, 26 Nov 2025 06:28:53 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:74cf:cf99:df2c:2480?
- ([2a01:e0a:3cb:7bb0:74cf:cf99:df2c:2480])
+ bh=vibX9gdqLJS8CiMjl3+VzDoeCZtluiKkFJtTviEUgq4=;
+ b=VqXEAKJNXWJNzW0vHlx8HGX0rYDwrOxdgJ55Xc/pKG/00KitqO3ctwUoOaRDq3MruS
+ aUgsACynt5MT1myQgprxlO+Kbx/lc/4jc+AAxufRxiVTzadep0ZEj2373yEr310jibim
+ VHJLXKSFLamjTLBD19iWwZ5i6myo5R4sfRcESoB5GiXX5QR1pB8sehkT1qulGnLKAneX
+ FBmxci8N+wb5RLE4ULQAK7WXltkWTGZQkXnX12JgJnmbl01Gor0QXxBozcbkUg1GA1n3
+ 2cu0uGpeZ73m4aH65zSe/0w29ddLN1Pp6HLrTyT8KvDMv9BbcC+EjWwstgkTyG1aoTKq
+ 9hTQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVOVSyYtCb578bz8/7+mlJ+nIzA8RbYZ0Sx+VPIgqq236+dAnbRJPsUzXvhBKKlOwTMec4svR0=@lists.denx.de
+X-Gm-Message-State: AOJu0YypWjjWzgnuxBVYJzUuTwVIHfDtgi6JpQdLSDNM+KtVmtdPSCHX
+ oqc/tIONNCV3BG0pES8RReSNgrQiv2eBO9Wa3HaS4vkVH49T1n9P2nZOJTYKTONjQeE=
+X-Gm-Gg: ASbGncvHnajnqfoPuDHBd6L3Y26gMcdKEi3KEEhGwbQB4bWIbBNld+Q6zr/jSshp9tV
+ QZX9oRRJPYkYKdhzOcP2hzxJqGPlqvA72reeo4dmBAwnu8eoE6eNwlEuCI9z5llHtAPGFCeSGmH
+ X57DOa/GUvQ/IbsYJ4bj/bm6XBOy0yfJst/4Y4hnq76hGs5iBb5UKEckMDlNoRle4zDAAB96w8o
+ eXoEXpSB6QbtVUpITr9dhMm5ggPzp6sWQH9vMRIEbsf5LHw/Vtu5JWezSkmaUdRYy/YsOFo4EsU
+ +wc19h9hlHexTNIJps1BtlbN4+bIAJFVi8uSwCWURrv3+B8jXNsxeCi5DRJBv3Dt0w/GPW6TSul
+ sxY9N/TQmlLhNjqZQM1DrtOCJOqQSmz7hV/T+DXfdDRuxC+uIc2+K4wvvk5SRQ1mICs2xlbqszK
+ kywne1TfW10McXF20AlR1CLv2gKLwWIXPoS8UYeeuINDNGmIJtHziS
+X-Google-Smtp-Source: AGHT+IHOKbkFaZsZIWCVLBolEE63ERYEVMsqHxAVVJ/A6FXs6SqEnaZkLUUt5rf5KP9MyT0cMQ2f8w==
+X-Received: by 2002:a5d:584f:0:b0:428:56ed:c68e with SMTP id
+ ffacd0b85a97d-42cba652ec0mr27418000f8f.9.1764167447826; 
+ Wed, 26 Nov 2025 06:30:47 -0800 (PST)
+Received: from [192.168.1.36] (p549d4195.dip0.t-ipconnect.de. [84.157.65.149])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4790b0c3a28sm48170185e9.9.2025.11.26.06.28.52
+ ffacd0b85a97d-42cb7fd8e54sm42137622f8f.40.2025.11.26.06.30.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Nov 2025 06:28:53 -0800 (PST)
-Message-ID: <2177d026-59a4-46eb-874f-9e02bebe4902@linaro.org>
-Date: Wed, 26 Nov 2025 15:28:51 +0100
+ Wed, 26 Nov 2025 06:30:47 -0800 (PST)
+Message-ID: <174f3c4b-40fd-43cd-813a-b0d815c32db0@linaro.org>
+Date: Wed, 26 Nov 2025 15:30:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 0/2] net: phy: aquantia: Switch to generic firmware
- loader
-To: Marek Vasut <marek.vasut@mailbox.org>, Beiyan Yun <root@infi.wang>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Zi Yao <ziyao@disroot.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Sky Huang <SkyLake.Huang@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>
-References: <20251101123401.110681-1-root@infi.wang>
- <4D63D655-F67F-4FC7-B02F-653BF49754EB@infi.wang>
- <59b26617-ea1d-4a65-a474-de16399f8205@linaro.org>
- <7e2b90c8-b814-4027-a7ad-9a0a5e747557@mailbox.org>
+Subject: Re: [PATCH v2 1/7] drivers: clk: qcom: sc7280: Add USB3 PHY pipe clock
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <7e2b90c8-b814-4027-a7ad-9a0a5e747557@mailbox.org>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ lukma@denx.de, seanga2@gmail.com, marex@denx.de, malysagreg@gmail.com,
+ arturs.artamonovs@analog.com, utsav.agarwal@analog.com,
+ vasileios.bimpikas@analog.com, ian.roberts@timesys.com,
+ nathan.morrison@timesys.com, peng.fan@nxp.com,
+ alif.zakuan.yuslaimi@altera.com, kory.maincent@bootlin.com,
+ sjg@chromium.org, jerome.forissier@linaro.org, ziyao@disroot.org,
+ stefan.roese@mailbox.org, mkorpershoek@kernel.org, rui.silva@linaro.org,
+ ilias.apalodimas@linaro.org, luca.weiss@fairphone.com,
+ quic_varada@quicinc.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20251124155503.2839766-1-balaji.selvanathan@oss.qualcomm.com>
+ <20251124155503.2839766-2-balaji.selvanathan@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20251124155503.2839766-2-balaji.selvanathan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -114,20 +115,30 @@ X-Virus-Status: Clean
 
 
 
-On 11/26/25 15:24, Marek Vasut wrote:
-> On 11/26/25 3:22 PM, Jerome Forissier wrote:
->> Hi Yun,
->>
->> On 11/15/25 08:48, Beiyan Yun wrote:
->>> Hi all,
->>>
->>> Gentle ping. Any comments on this patch?
->>
->> Since there is no comment I will pick it up and move it to my net-next queue.
+On 24/11/2025 16:54, Balaji Selvanathan wrote:
+> Add support for GCC_USB3_PRIM_PHY_PIPE_CLK which is required by
+> the USB3 PHY on SC7280/QCM6490 platforms.
 > 
-> Ideally the driver should use one firmware loader, not both.
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-Is this a NACK or can things be improved later on?
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>> ---
+>  drivers/clk/qcom/clock-sc7280.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/clock-sc7280.c
+> index 55a233df394..a2af73cd976 100644
+> --- a/drivers/clk/qcom/clock-sc7280.c
+> +++ b/drivers/clk/qcom/clock-sc7280.c
+> @@ -111,6 +111,7 @@ static const struct gate_clk sc7280_clks[] = {
+>  	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0xf01c, 1),
+>  	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf054, 1),
+>  	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf058, 1),
+> +	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK, 0xf05c, 1),
+>  	GATE_CLK(GCC_CFG_NOC_USB3_SEC_AXI_CLK, 0x9e07c, 1),
+>  	GATE_CLK(GCC_USB30_SEC_MASTER_CLK, 0x9e010, 1),
+>  	GATE_CLK(GCC_AGGRE_USB3_SEC_AXI_CLK, 0x9e080, 1),
 
 -- 
-Jerome
+// Casey (she/her)
+
