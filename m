@@ -4,143 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AAEFD10F5D
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 15:10:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FF8FD10F58
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 15:12:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C743D8398D;
-	Wed, 26 Nov 2025 16:10:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D08968389A;
+	Wed, 26 Nov 2025 16:12:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="gU2SSkWQ";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="5I7SI+rC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA5A68399B; Wed, 26 Nov 2025 16:10:04 +0100 (CET)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id EF2E48398D; Wed, 26 Nov 2025 16:12:51 +0100 (CET)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93A8E83980
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 16:10:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D68618312A
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 16:12:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eGZ7FfpQo0n5C8ZBhtXliq9a36fUdiCOiXmoZrYhfKIqatoO/loI7KL8xiVgHIwT8waMCQcGN87qMYAqUUOB1nuL4JzOTllvPZ6MCLfXcCUEhNGoiAM1K9yReAqd97BkzpSdu4oIkEE/S+40akLzuxld6HW3HSx+UM5hnW9OEiqV7Ka8IYi9yEVTtF1az9VBOk3u1ZnaOMSm5ePvNvtiSoUeXhidyZUtHI5durJxWm5hrYcOLUl8TLtjJzsFuj27WqjX3qgr1tB3wncVTqwfKDnE8POwMn1qOlLOHJLAGFEbom+lNUA6IBN8drsWWtKhYJ6Hw2qOY6tADS+PFHoH3Q==
+ b=jZDLEluseMA7fmA0G+ybFNuQqJPeLYObKWkOatUwKLsd6A1keRMLcPS92HRENxivWcmTAq6ra7jqnidIrXbPiW9gBrxIPa24NCmj5zYJwHKwWZ0hmG0b9V8VRNanpq3PluEoR8LQ+vWHqFd77Lx7+MZf9BKfLSektzj4COvNeF//ZE1EU3Fk7IY4Nkmyds5415EO6shbjubj8GLCl06NDB4t5/+QvfduqMgwiAX8ZKUTpgPvhRIDqg0qGT0elDXjKwV+chrJi9ny3drk0sGqIt1zNeiZ1uioHvjdAxrwUf0lmAxbY627gEOhkoQ91IXG+ZQrslZKlkEqFPKiRp12Mg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iEV3Anj3SD3gAgrgGaxipLsDhlz0Fv1KOE8CiPiETSQ=;
- b=x6sfLIWs5BUH6PUZnKtamFNGWffJv8o2nWC22bcqcxcW3gBmAr3sTMGvzLAmzMGxf7G/Y2VhE6cdejAMRLk4zJX5NzJwmAGjiVGfGV9GXt8PasHr/nI5D/MZvY6nC2iE/ITZlb/59uGWq9b+M+moi/EzHdFXDxblmgNi+0ns7AcGh0zkVjHAiGEXApbO4Yuq1UdiAlk5pSryFYTCcagTalL8CQ9VgWilywhEfzBkY89kjilAG8YOQPR0GiDYADmz/2xE9EdtSak+ofnUoGbRJGhsqr6+dWxHzowmrzEqO9vzTauAdaNxvic1bDLE7eJOiKLpm/DP6+RK+SGc4ZWvgQ==
+ bh=XqUT7X5bt9p0NxcB/4GVfUeJUUad48jX6zTQuoGycAo=;
+ b=dIcak0nl3cdWjI8HyaMQmNgsb9iANB1SEjy720rnQ0n/tzuHG9IVnCnJrv3JWHCQOUn/hFNFJzrjaX7tNpab6o5mZEtm1N3Ie7V05iL0RUjAVzH5qWuKlNp+K/HPJ1WW+aSLDdLN+6cR3EXrvP2ulbiQlBDLQ0s+6aV96H7jnGOExMzeyCCvRlIZe/Ce2kZE1ujj/opRDiQOjBnngaBMe5o/MXZDzIEhxIDkZsSeSGuJGSotXen5WBxG1iQl6LSpRyt56aZ6CazfoLat5YXayvrTBCDZeiAXVJeV1kNnWObo9h+ejUZlmWSg88uLPuRst3+mRduKRSGH4eDkltprBg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iEV3Anj3SD3gAgrgGaxipLsDhlz0Fv1KOE8CiPiETSQ=;
- b=gU2SSkWQFAftmyCS9C0we1QOQLqqVks0d5bIzjX3vANDhsrkB8Ii0MV4Z+OyTdIgkBKYFW49JnBE2pqr5OcDJl4xHBZ2YAiABcOliByVmpY/MUCcF+BcbOkv4qpCMf1Iz4MJk+ucDkXys/cOf1K5/65Fkdwui+C2FoWMAOMzvqI=
-Received: from DS7PR03CA0194.namprd03.prod.outlook.com (2603:10b6:5:3b6::19)
- by DM4PR12MB9072.namprd12.prod.outlook.com (2603:10b6:8:be::6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9343.17; Wed, 26 Nov 2025 15:09:56 +0000
-Received: from DS1PEPF00017091.namprd03.prod.outlook.com
- (2603:10b6:5:3b6:cafe::50) by DS7PR03CA0194.outlook.office365.com
- (2603:10b6:5:3b6::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.17 via Frontend Transport; Wed,
- 26 Nov 2025 15:09:56 +0000
+ bh=XqUT7X5bt9p0NxcB/4GVfUeJUUad48jX6zTQuoGycAo=;
+ b=5I7SI+rCWo8U0WBRegk1V3sJnEJh3eG+8gGs8I+xpiilvFJGbLAv1ES4chzSI6cjrNqJmKhFwQDzDMWBhB+wMTZIZ1rdoNqVcrrASHDQgz8pOaqTGJ63sZiW/zSwpzvllsYk/BNqR559n/hfK7/yi4ubJG8uuIUXDlbsyI/J7J4=
+Received: from SJ0PR03CA0263.namprd03.prod.outlook.com (2603:10b6:a03:3a0::28)
+ by BN7PPF28614436A.namprd12.prod.outlook.com
+ (2603:10b6:40f:fc02::6c9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.11; Wed, 26 Nov
+ 2025 15:12:45 +0000
+Received: from SJ5PEPF000001CF.namprd05.prod.outlook.com
+ (2603:10b6:a03:3a0:cafe::fe) by SJ0PR03CA0263.outlook.office365.com
+ (2603:10b6:a03:3a0::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.12 via Frontend Transport; Wed,
+ 26 Nov 2025 15:12:45 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- DS1PEPF00017091.mail.protection.outlook.com (10.167.17.133) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SJ5PEPF000001CF.mail.protection.outlook.com (10.167.242.43) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9366.7 via Frontend Transport; Wed, 26 Nov 2025 15:09:55 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9366.7 via Frontend Transport; Wed, 26 Nov 2025 15:12:45 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 26 Nov
- 2025 09:09:51 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 26 Nov
- 2025 07:09:50 -0800
+ 2025 09:12:43 -0600
 Received: from localhost (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Wed, 26 Nov 2025 07:09:50 -0800
+ Transport; Wed, 26 Nov 2025 07:12:43 -0800
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] common: memtop: Update the MEM_RGN_COUNT macro to 64
-Date: Wed, 26 Nov 2025 16:09:41 +0100
-Message-ID: <d9f73d26af832e19dfd79a4b7bfcf09c498a4873.1764169780.git.michal.simek@amd.com>
+CC: Padmarao Begari <padmarao.begari@amd.com>, Heiko Schocher
+ <hs@nabladev.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] i2c: cdns: Add timeout for RXDV status bit polling
+Date: Wed, 26 Nov 2025 16:12:35 +0100
+Message-ID: <ba53d57c179f3390b32bc6094f3ffb5f4cde931e.1764169953.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=821; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=+PF9lZwGdUCvSZR7l9zfWd0nYcGLd/4BxkmC8T4V1yw=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSqS5jPM4vIytJdVCzaF5q9Wbv9xMXVSj9KpUzfhP2c2
- imsPDOvo5SFQYyDQVZMkWU6k47Dmm/Xlootj8yHmcPKBDKEgYtTACayWYeRYbOH7Ev/Hj8f4eBn
- /2ek9zhdFaztuF8U7iRbJS4ssFSph5FhTojw5CcWLjVmDU/1AldqXE653HRlLrtzxKmFN+Ry171
- kAwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1904; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=9Wzz5OTg7HraH3V7hYWaxa+yO3JN33yZZ19pQRm4X+8=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSqSzz5/W7Z70UKjhNvZysVS+n6dh+X3nXBYlG509WzW
+ wLOvTgb0FHKwiDGwSArpsgynUnHYc23a0vFlkfmw8xhZQIZwsDFKQATWfGfkWFX44GF147sMn+7
+ MeTOuY49edMEJc/b7hDutL11NupL+P6fDP+jzP5Pv8q86fmmpI1M84Kz8kQSf9z2t2pKv23Xl2j
+ ROZsbAA==
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017091:EE_|DM4PR12MB9072:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6a50b554-1d86-4430-5bf3-08de2cfddbc7
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CF:EE_|BN7PPF28614436A:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0031b93f-59ef-487d-a449-08de2cfe40b4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?p1yv4VHKfNWo023sT29CYyd8AHn6fz6shxeOfTzgHO8FXC6iIR8NZ5xRXw8t?=
- =?us-ascii?Q?tZUqZAQTaMtQRoSTgO6o1QR/YeFBhCgIY3iib0uhAsf1nwiOK52kKq8bD0G6?=
- =?us-ascii?Q?rdoJS46wFqmEZq8gOJ80+0D32Sux/idUM9ChsjrhpNG/sl8X0lkx0hJZK+cd?=
- =?us-ascii?Q?6k6yLjhmdJD/R5V/yo6dOa/DJ4lsK0Ztbj+C5YjDG5HPmWk8LZ9mMowB5lu0?=
- =?us-ascii?Q?IgYdvL8OnEZNuOSSYB+bzssSNEcpRZj5ozVIL3b9mcNPZnNuY2dQfSXnw5PS?=
- =?us-ascii?Q?P/y3aV4r0ZeAsGtBFn91Gwyj/703+W/jVvZKbfjVgcFPzJ2OM2JQmM4Id7k0?=
- =?us-ascii?Q?nnqpyxfeFOoMAQnIGvMZbGHSwG4YwCC69i58A+iSGab2AoMj6TUCkgDB2gM0?=
- =?us-ascii?Q?J6MuLBQkB9oJDGqJoy5ry7/SI3llezPZJLBIOdXzgOnzkUFJBgXwEfW8HLTn?=
- =?us-ascii?Q?pJlKGHzrA86rWpLizkJsMliAKVMem+M/bd8S64AUfI5ez+Xf5iSHNecMQvhy?=
- =?us-ascii?Q?i3NCNRtQIQnJgsNj+aEK5dHbfjPd/ZRxmIasF0mEzqBCYSIi/duUIkd9P+oN?=
- =?us-ascii?Q?2xe9/iZCsWdE1LCErR4Ff+NkPY7hcbwKmw8aT5xasMgdk8tz01TxRe7BGal1?=
- =?us-ascii?Q?oh0XnXuogw3Hi+CRDyP2uAOStmD/bt1tgp1LgFuSnwzNVupont7jFzqx6kar?=
- =?us-ascii?Q?FmIAonVKzd76dZNsxdLSDbQhg8qXfz5qt4CAypb5624Tw4vkMWqlxwuFP65O?=
- =?us-ascii?Q?uxX+z40TcvYon61rHXl5Qz8R5567m8sJsFc804uhdPpLCEgkp4Sb3nVRUbwH?=
- =?us-ascii?Q?iSO+sc9CwGnu3nZZNauU5t4zYUAHBSbmdWOuNXrk2CuFjhj05hufbCAzP7bq?=
- =?us-ascii?Q?8giTNUz2Y+MQZP+W6Z5A4rz+ojkzUXg+/C/efbJ7WKx05/vcV77kKe1crjw9?=
- =?us-ascii?Q?DF00dcKDV6ODU8ySNwFOKYmTb6cK1PBCGiVgBLxSZJ44j6sB/nVv+vijHbiK?=
- =?us-ascii?Q?HGVN7OfcvuiDdpw4y80iYFYSgjpjw2xsxwHXSlnUBl+vrUYMhioVj5CS2lBd?=
- =?us-ascii?Q?XW1JrSWwkTEGxiFAeZ1Cl1NTEgnQ6CWgDJUEElal0SzvdQRI8wpRSxWsW3Fk?=
- =?us-ascii?Q?wgN7Zd7TNL40fW2lJJrGh0O1KwKnSn6f/38NghfTc567+Q0ej94SWtljEN5Q?=
- =?us-ascii?Q?TxVFv1Ad2eEuoF9OIWAxXjitA+pDnhymreVCZ+Xwg/eRNu0gTxINA7pJSI4D?=
- =?us-ascii?Q?+FUlCqH+ms1egknYox8vyZrWtFH8n9jpfD8KubY+IFWIgSV1uOCXoMefcRVo?=
- =?us-ascii?Q?vFah6c+T2PBeqTb7iapFJrpRiTzGBUW0mzJRnoJj4ngouRsmEu4Dlo99W/zx?=
- =?us-ascii?Q?UNadTr2NF2dR7jPapXus9ysZMPBhZfjJj6hfW7J0imhujhhCiCRHUtI3RIDv?=
- =?us-ascii?Q?l15xo9nyWxd1wymUs0QTHRppOmSnhr/O60YjFR2Xwi5c48Ymtmef+gdVa1Pg?=
- =?us-ascii?Q?CoE2lgGa3fH74+q0tw0AIBiAGhdnTvNjsQdOXCQgIVj8eaLbtcpKB6bE1sL7?=
- =?us-ascii?Q?tHkeRNRNGYt2NYAsK6o=3D?=
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?FxZYEx9u+u0OcbRP9N1B4uwJbW2ng0Yj0Wet1YboVjmC4tFZcftw6MbQHs0U?=
+ =?us-ascii?Q?EIH8s2eh3sx7d8iCDh5WnMkf3TI0vTEuS+K0CXdVyXSqBMpQRreXKPiiJ59l?=
+ =?us-ascii?Q?UfjNVM4eTvTtkcvNuZSYJ0arEc16eZtc7Wqg6lwDwxJvuswPejjI1Z2gz2nc?=
+ =?us-ascii?Q?38sJZWWCIxSlt82lBexhOWBCSz8iZXI5dMO/yKGeai53MbE03GsWHME2e2QE?=
+ =?us-ascii?Q?nSbt6xAx6LNy+dqdGq6Y1LoTYaxnNonhL616hDIg/37ee5NFERp1Fcpn1bfm?=
+ =?us-ascii?Q?f8fpGTw+uEnYi5uYCNPLE5byUJiuztpYrBghfXPBs3y7YM7j7e4QairnC08O?=
+ =?us-ascii?Q?aJflgcORu6fd371DvwLho1YI64nbzmtep7R1ncPi4rEDzqKIXfRnVW+qOg7M?=
+ =?us-ascii?Q?jJch4wgWChuyddu/KgwaAAhsztqXIvadjPwXB2Str0fKW1r34F6zKKlbPK+m?=
+ =?us-ascii?Q?xOO5OoghTDEcXZTYFHcuM+NtUeAgOJc/86WTDwV2qM/WHsov9nXTw02Gfv9A?=
+ =?us-ascii?Q?+YaGvla9ojvxuk/aOU7IGB+NKVs0N3wFJ7ooIknlKZ9+HeKQmOxCOtqTC4iP?=
+ =?us-ascii?Q?qlvngRmnj44VCxiLuB7VxutdjtrtoEaFiw7Dvs0mShMX62wtCaw3IokHCsoj?=
+ =?us-ascii?Q?DnCupTzA5bHkCUHKTKEPqxXS/KlBk+N6HeUtJhQMcb4fGrDRRZIVQe7Tnp8Q?=
+ =?us-ascii?Q?BnfLGwmaSB6G4K//faXVsAW88jd2XW0DTYgRTCwdsOlDR9OQbLNek3lhStZE?=
+ =?us-ascii?Q?Y83ZiO3EmNmwdPN/p6wkZqBuZcw/nGBBG1OCVolbr7vMv8cyE0Iddo7RlztW?=
+ =?us-ascii?Q?jMgZdq82KGjYaLrEakUduUpbQpZAxn3U2N8My8U4PZosAS/lSijG31PlndoZ?=
+ =?us-ascii?Q?idKvpqCi4hq0dnL2i5PLsX11t6KyE68cGpAP4MK1jEZmBzPdvFGjS+KwDSJW?=
+ =?us-ascii?Q?4g7yLP052FBfxUnlQdaoUa9ExbIdvHoFOsbSthkR2fPT2+n8BKfIBzMW5mgu?=
+ =?us-ascii?Q?jExuj5fCchtTXaPBVZe+rMsfaNyMkhR+VzKRlrVwygniEKvuRwYr5erGBOZh?=
+ =?us-ascii?Q?n3NtU87AekjuA6s48Lw6oAuKoXbqlgAdDQjNY+X6zSstpInrkzJK6RoYTc0B?=
+ =?us-ascii?Q?TlqAfLWhE9xqAI4E2EvcSyM+2guzB2olN3jOjtVQ+TDELwM2/9S1WG+SoTXz?=
+ =?us-ascii?Q?5p7QuHzaBGc5P21VVK32craiOdZ8g+2yEck4Rqi29Bx+zsEKYiaXdyJqhrzm?=
+ =?us-ascii?Q?f+S7bvEZqsrI1MpkiHG2VKjncWC3Fxj177nUCWIU/2UDiy1Dvl6ecjPmsYhz?=
+ =?us-ascii?Q?CUT8pARx1Mlo++lwbJQev2usdWSGpaRmdv92x89GlhbUJq9W8H0LKiP1NdDo?=
+ =?us-ascii?Q?a6SGZ94XlxVzaIh18DbNAkSd27NunDwYOkjw4u/JIdKjdhpIiXGW3wAcEJ56?=
+ =?us-ascii?Q?ifkk60gBEkUmazBj89y+Nh9DLyX7hOacLE8J56olsKFDkjvvLrjMTrPmqn6w?=
+ =?us-ascii?Q?Yc9wt32exdNSD0mFVpRzQ3N5/hpTvcvsKg/Iz4EDeKJf0ekUw9KuATYSLZpn?=
+ =?us-ascii?Q?oDy+g5iVJ/bpZI1IAA8=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2025 15:09:55.8138 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6a50b554-1d86-4430-5bf3-08de2cfddbc7
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2025 15:12:45.0732 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0031b93f-59ef-487d-a449-08de2cfe40b4
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017091.namprd03.prod.outlook.com
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CF.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB9072
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PPF28614436A
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,35 +154,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+From: Padmarao Begari <padmarao.begari@amd.com>
 
-Crashes are occurring due to the number of reserved memory regions
-exceeding the current maximum limit of 16. It is recommended to
-increase the supported number of memory regions to 64, as newer
-platforms may utilize more reserved regions.
+Add a timeout mechanism when waiting for the RXDV (Receive Data
+Valid) status bit to be set before reading data from the FIFO.
+This prevents infinite polling loops that could occur if the
+hardware doesn't respond as expected.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+The timeout is set to 1000ms (CDNS_I2C_RXDV_TIMEOUT_MS) and uses
+the wait_for_bit_le32() function to poll the status register. If
+the timeout expires, an error code is returned.
+
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- common/memtop.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/i2c/i2c-cdns.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/common/memtop.c b/common/memtop.c
-index bff27d8211ed..8ad394193f35 100644
---- a/common/memtop.c
-+++ b/common/memtop.c
-@@ -9,7 +9,7 @@
+diff --git a/drivers/i2c/i2c-cdns.c b/drivers/i2c/i2c-cdns.c
+index 3f7cf8533ec7..4e9d4e44899a 100644
+--- a/drivers/i2c/i2c-cdns.c
++++ b/drivers/i2c/i2c-cdns.c
+@@ -85,6 +85,8 @@ struct cdns_i2c_regs {
  
- #include <asm/types.h>
+ #define CDNS_I2C_ARB_LOST_MAX_RETRIES	10
  
--#define MEM_RGN_COUNT	16
-+#define MEM_RGN_COUNT	64
++#define CDNS_I2C_RXDV_TIMEOUT_MS	1000
++
+ #ifdef DEBUG
+ static void cdns_i2c_debug_status(struct cdns_i2c_regs *cdns_i2c)
+ {
+@@ -349,6 +351,11 @@ static int cdns_i2c_read_data(struct i2c_cdns_bus *i2c_bus, u32 addr, u8 *data,
+ 	hold_quirk = (i2c_bus->quirks & CDNS_I2C_BROKEN_HOLD_BIT) && updatetx;
  
- struct region {
- 	phys_addr_t base;
+ 	while (recv_count && !is_arbitration_lost(regs)) {
++		int err = wait_for_bit_le32(&regs->status, CDNS_I2C_STATUS_RXDV,
++					    true, CDNS_I2C_RXDV_TIMEOUT_MS, false);
++		if (err)
++			return err;
++
+ 		while (readl(&regs->status) & CDNS_I2C_STATUS_RXDV) {
+ 			if (recv_count < i2c_bus->fifo_depth &&
+ 			    !i2c_bus->hold_flag) {
+@@ -452,6 +459,10 @@ static int cdns_i2c_xfer(struct udevice *dev, struct i2c_msg *msg,
+ 			ret = cdns_i2c_write_data(i2c_bus, msg->addr, msg->buf,
+ 						  msg->len);
+ 		}
++
++		if (ret == -ETIMEDOUT)
++			return ret;
++
+ 		if (ret == -EAGAIN) {
+ 			msg = message;
+ 			nmsgs = num_msgs;
 -- 
 2.43.0
 
-base-commit: e6deb9086afab9d2bdd53db8ecbc7db93af5204d
+base-commit: d9f73d26af832e19dfd79a4b7bfcf09c498a4873
 branch: debian-sent3
