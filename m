@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE383D1039D
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 11:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE04ED10F23
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 11:44:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F69483B55;
-	Wed, 26 Nov 2025 12:29:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C6ED83DEC;
+	Wed, 26 Nov 2025 12:44:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Sos1iMU0";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="leRTcD2a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CF3983B55; Wed, 26 Nov 2025 12:29:06 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 1BC9F83E4C; Wed, 26 Nov 2025 12:44:36 +0100 (CET)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF99983655
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 12:29:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5EC2833C6
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 12:44:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s4fc4jJYnidmVJxA7m0Wn8G4XbzNhBACGIirhiyXoGUMTTTBODcpXis5/Mhkh3LWCAxP1t5z5HvMWKM8Ipp9Rj26DHtB71FL+VDUYGOat26ZkBjyOTfOAhTmkf5EMW8Zg/SXOKMogs9zPJ7XBbwShlA8T0a+lVmUQ8GPrf7Z3rXtwxNSHqzphBbYY+pWonx07ndaxuwYzIGsYWMTa9GJWU1G5oXpv+Us3V8S5TEZ7CHselfVPJ2h6Iwfkjnkg+YjMEL/Y7hsWtGLG9NHqWoJRwyMjyPSZUDD+f7fOlIdEmFGN2Y34GiByNKxbl6sDooitXpg9DlkBfA25MMUPS79lw==
+ b=iglH+7/+LXc4kS0T9F3UajDJ7D1kJMuP/ehyVIkVirAIDN8y51jLPt/ERbpuayu0jeBvqdwv+eOpH8GD3uM0c1364UuD671eiDrG+IFh5hdmrabd1CO75hjHChEm2UOvcEiWXiY1cwqtxYk8G1y54tghpIedNKXh+lFSH8Va0WwqrheTbxKyFGQeQnIYHtTurpWCJRFcS5/h4ZOpKCzfO3OGImNGttup+xZng0sakdA3PA5jlVbAU+RAek6r6U1a0A76Qdc4R+D80HQTRsS4WymnpFmOlHjVVk6pnZm3KVvYgMUgW44UpE59A0qZxaVgdgAXt33vyK8H5xltecVsRg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Xe4CYhmtPprwn8pPDQUoqtkYpm05owASjHg+gsNra4s=;
- b=wJK/gDSCHJoIN/OsApCQOLySoBjRutJBV5qbbPCU+cptCqzpF7sWlKDEz1NHDFq9Hb/UEJ/Dzplbw6SlcTK4DHK8hbWSxMUdtX5TSV21jAdDXPdZzFIGD+Jt0RHOKkkkWsG6+VwngpmzecqZllgCHN83u3yKzDishWXcJOeZtjajRIif03leQItd0v1e3yRx6+NwYEdDfl6OeePUgmf5a2ehq+cQttoDH2BXCFd9K33xz+wk6zo2Xo0OnsudXqgxAVjLyrKTqiR2I3wF/vk4F/N+681Vs64HaxHC7FkWzNLrN1QVweGcSiqT83uxb/ORMOlUQocaFdDD/D1WWcTGfg==
+ bh=RXdTufwtbnaOw+HHBvgZNWnUuOcmdc9vV39bdGd5A5A=;
+ b=nEVzomydPp5mCrxQr0HFyA6ug0vpCKOdcuVbxBUc72R2gDL9RvhYcDwuYF7wA8wSU/YsuDErv3HnjU7OHwrQ/vCEMywkgXuym6G76pPIjlW6GqcB6a0pZhhEJy5KYybA5YjE/6pqPi04aASYuVpuYHmfCBXSJIzyn1llVmb3ZYku/4usY6FhQlooINAuzdELW12pKfjxj4w7Pgq9/J/aW3y5FZF5THjeZMGHEW66nJMWFX6JMTKiRasgZt9eanzqJ0StSNxSIM9P/7IKilc5rSUZ/IISVw5bqAmv1RksjGqXLjugS7em6fsFGoUQ9TDz5zTa+dZS2jLPoHMGKGFhnA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Xe4CYhmtPprwn8pPDQUoqtkYpm05owASjHg+gsNra4s=;
- b=Sos1iMU0NsupmT+EsE8AaiSc7sOBf/VftAtFkRjS6BC+NmxP14s+5UluVIJQMafCgClFwYpPrX8Lm6XaH0JmDQCroY6esl/5WxdFtczmK7ln1+43GA7uyIKMx4VsbTKz1VBO+FMCj9DqS2zrMziF2momzASv8Q4FYYQQOOq1CTk=
+ bh=RXdTufwtbnaOw+HHBvgZNWnUuOcmdc9vV39bdGd5A5A=;
+ b=leRTcD2a2bk2Zls2oqBVNQfEZdYUHf6Uy1iRaMB7/oUbvczL6aWcbmvSk2sF7xAIC4B0FpUHIcnOEFTlGskf0CjkJSG8Fw+rdynYyHMbe9g9nlciqJfVFwAwUBc0QX/xMAy3w0snRDfUoW6Si2B+MgBbBByiQKB31vbL3h/auKc=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by DBBPR04MB7979.eurprd04.prod.outlook.com (2603:10a6:10:1ec::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.12; Wed, 26 Nov
- 2025 11:29:00 +0000
+ by DB9PR04MB9401.eurprd04.prod.outlook.com (2603:10a6:10:36b::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.11; Wed, 26 Nov
+ 2025 11:44:29 +0000
 Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
  ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
  ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9366.009; Wed, 26 Nov 2025
- 11:28:59 +0000
-Message-ID: <50d0c028-374e-45d7-ad85-29d43bdb9767@cherry.de>
-Date: Wed, 26 Nov 2025 12:28:55 +0100
+ 11:44:29 +0000
+Message-ID: <6b2751af-783b-40d4-b205-5859b7eaa0d2@cherry.de>
+Date: Wed, 26 Nov 2025 12:44:24 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] tools: binman: fit: add support for OpenSSL engines
+Subject: Re: [PATCH v3 4/4] tools: binman: fit: add tests for signing with an
+ OpenSSL engine
 To: Simon Glass <sjg@chromium.org>, Quentin Schulz <foss+uboot@0leil.net>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
@@ -70,106 +71,108 @@ Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Peter Robinson <pbrobinson@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>,
  Kever Yang <kever.yang@rock-chips.com>, Yannic Moog <y.moog@phytec.de>
 References: <20251121-binman-engine-v3-0-b80180aaa783@cherry.de>
- <20251121-binman-engine-v3-3-b80180aaa783@cherry.de>
- <CAFLszThFdfMeFTtvDyXfH1iO2zx5fe9rJJSz=MQBGJiXB4HG5w@mail.gmail.com>
+ <20251121-binman-engine-v3-4-b80180aaa783@cherry.de>
+ <CAFLszThxhLBEm731QjvB-wbOGryGBfh1_09NeWNy13nLwqZW4A@mail.gmail.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAFLszThFdfMeFTtvDyXfH1iO2zx5fe9rJJSz=MQBGJiXB4HG5w@mail.gmail.com>
+In-Reply-To: <CAFLszThxhLBEm731QjvB-wbOGryGBfh1_09NeWNy13nLwqZW4A@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0034.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1f::7) To GVXPR04MB12038.eurprd04.prod.outlook.com
+X-ClientProxiedBy: BE1P281CA0235.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:8c::10) To GVXPR04MB12038.eurprd04.prod.outlook.com
  (2603:10a6:150:2be::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|DBBPR04MB7979:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1accbffd-f7cc-4663-87ca-08de2cdefe84
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|DB9PR04MB9401:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8d45362e-ed31-42ee-19e1-08de2ce12852
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YzRtMmdGc0E5ZE9mSEdRSmhLbGpPVnM0V0lwR29EM292V3lmMHNpTjJYTzVZ?=
- =?utf-8?B?VWdVLzRkVVJJTjgrck03NmtJMk5sWWwwRFhOODErMWY5VFNucXlBWk1uTG1T?=
- =?utf-8?B?emM5SlcrMlA3azh4RjVDdzNIWjVqVGZEMW5UWnVRUFhyTTNaWFRBM0V5dHJ5?=
- =?utf-8?B?ZHNrTmNmaVByV2tRY2ZoTUpTNFdTUjBIeWhUMXl2LzNtWUZDUTlGd1dCdkUw?=
- =?utf-8?B?b3g3ZW1hVkk0bTNrVmJ4MjVvL3l0Si9hcWREV2tqTmZBSzA3d29rUVpaSDZT?=
- =?utf-8?B?U1hLd3VNdDQrdEQzY0RwTFR4bnloU2ZRQnQzTHZKVUFMdkNIdjJPajNHdCtk?=
- =?utf-8?B?VGNuRXRDK1VOMzZSMlJ0cW0wRFV4RnRJbGhtOTZSSXpwYytONEZ5NmI5cHM3?=
- =?utf-8?B?NVNmcU5tbmdqWnI0dEZkeDF5ZTNKVU9tTW1pSWcxVmhkYWhHRVMrYmQrSGQy?=
- =?utf-8?B?NWE5eHordU10YWpjYUZGN0wwWnNheEtVbHBRVWVYTVlVKzZycFB1S1l0aEc4?=
- =?utf-8?B?V0loTE5BSDZBYkdXQVd4MDhaTUZleGg1VDl4TzVPUFI2bGJoYS9KQWtnTUR5?=
- =?utf-8?B?d2d2WDdxUnlXamZDNnpNOVB4UnJ6RExmTUJXMGRFa1FHcERVeXRiWjJJQ250?=
- =?utf-8?B?cmVZM3cxcnUyRGNPQy9YM2wyUmpONEtMeEJ6Y0trSkNOSmRrc21YM01HRk1K?=
- =?utf-8?B?MktJVHNlNUFOR1hMV3BuWWVyT3dKRlFBdHd1Nkgvc0lSME93dkZmeTRFdlZs?=
- =?utf-8?B?RjBXV3ZBU09IQjIrZ0U5MzIvWFZVb2pWN091dmNvWGpWaHh5bDUvMGxwaDJy?=
- =?utf-8?B?clNpM0cvaVNTN0M0ZklLcmxWekhFVVFyQkJNU1VxTXpvZVE1SkJZQXhWUWQy?=
- =?utf-8?B?Qy91THRwQjBWRjVVTzFwM2gyclNQNDBxWVRVTWNSQjg2VVNiR1Q3UWtwdXR3?=
- =?utf-8?B?U25mK1ZGeFBpODhqOGpNamdLdm14eW0vK1RwSE9TWkJuUnZaOGZIS0RWemo0?=
- =?utf-8?B?NGpodEx4YjBSUG5ENDN6NFF4VTg1bHZVdXdmSEsxN2hYQTRBaUFlY3E0ME5q?=
- =?utf-8?B?QkpraGpGZTNFUmRJUFdzRDd4L1JrUVgrd3NlUXQyQ21SWVFtTEhFOFlpL251?=
- =?utf-8?B?UitLQ29NQ3dlTHA5STNCL3hCenBPME1wY1VOdmt2M0lNMmROeHgrUU9FelVT?=
- =?utf-8?B?bXY0VXJJYlRpVzV1TU1LUWdEL05uNUg0THBSWUFuVEtNLzZRM0VJREova2hG?=
- =?utf-8?B?T2Fxd1hXSkVTTzlqUlNXQ1Ayb1l5cm5ISXpJbUNReVpYbmZETXJnS1U1RXZZ?=
- =?utf-8?B?QjBUZ1k3ck1xK2lWbFFYdE5ka2lac1QrU0UwUWRBZDBhek9yYmpOUStyWEt5?=
- =?utf-8?B?WFhWdGRxNEdmZFVaNWN5ZUl0K3lRc0k3QVdzVFlENnhoT2pjaUh0bnZjWnY3?=
- =?utf-8?B?TkFXWTZoYy9acnRjaWpBSldKVDUvQzFndVFjU3ltVGNFeVhrci9PaFU2Q3Jl?=
- =?utf-8?B?TE1hNVdiRWRTZ0VCeDdYOEhXNnRnVzdlUGh3UWRVdTVpVUR1aEtjNnozUURY?=
- =?utf-8?B?UHJGNFhsbTcveEZrNGlsK21CYVlka0hmSVpzdTMzK3ZYdzBuYXZZNE95Ujdz?=
- =?utf-8?B?MXloMU81Qm9ZRG1hRzAzZjB4MHo3U3RnSklldG1lMXBwdTZUa1NoMHJldzZl?=
- =?utf-8?B?RitRWmR6RjdhbGR1Vkl2OGcwbXhURWZKVWtaT2Zaanp4N0s1eVBzcVhiSHhL?=
- =?utf-8?B?ekp0WGwrekViM2VBaDhmVFhLVXk3VGlzcXhxRFFwYzNvNEZ6amkzMmtWd1ZO?=
- =?utf-8?B?Wk50eWR4a2o4aG5kV0Z5TzB2cUpJZm1qYXpQc1R1K0NJb1R5SDE0WVRJUW9O?=
- =?utf-8?B?dUFFZ1dTZzVOTWVvQW1GdCtjVU8rdHZBMHl3bGpyeFVTbUE9PQ==?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|7416014|376014|366016|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MzJpUURZQjRwYWhQdHhKVjM3MXVjVVEwTFZUbkRkSGpma2M5eGJkb094K0ph?=
+ =?utf-8?B?VndSQ3hOWDZpY0RKNE0vNHJHaFE2TzhpanB2Vm9JNG41Z05IVFJSZ2pCVTNl?=
+ =?utf-8?B?Z2tjTUtmRUZ3cnNqWkNjREQ5WXlSRkU0Zjl5T1Fqc0dYY29aczZlUzFrUm9Q?=
+ =?utf-8?B?UWJLb3ZUM3hhbVBjRlVXS08vR1BSaGlsV05Qekl6cHVZQlptU042ZG1YNmFI?=
+ =?utf-8?B?ZkR5aFA0SmlWazRyQlptMGNubmw0bTVxYTlvYThpZkpVQTJBazFxSzUwaGxl?=
+ =?utf-8?B?YTlMUzQvWTV2NVBlV1dEOCt5U0FRbjBOSHlJZjI0Qkk1TXJOYU5JSlQ3YTBm?=
+ =?utf-8?B?ZVo2c3lVMDBhUWhvdy9lcFRqRXd2cUlPRDhuQlV2TEcwYUxkVjZzZWpzZXVP?=
+ =?utf-8?B?eWJxZWRCQjZkNzQrdUEvZGI0WFBYOVlsbzVpODJhK1QyTlNiQm82MDVMRGF4?=
+ =?utf-8?B?Y0hHQzdlV25FNzJSRFlMM2hEdDk1d2owcWRUZENUblB6QVhEdkNxZmhkZXN1?=
+ =?utf-8?B?ZkVITkdxY2VHc1REVk81cTJ1N04wc1JVd1p3R0MwbWtEU2gxbzBXZXY5cTJ0?=
+ =?utf-8?B?blJQSG5RWE4rSERhV0RkYTVnQjdtT3hoYnV3cXBPSXd0SmxIbGxUNWhZb2x6?=
+ =?utf-8?B?bnBzbzJXZFZ2bEFodUh1Sm5STE5uOFBoNHdPMllyR2N4UDlSRHhRVXJyaGEy?=
+ =?utf-8?B?Zml2dWZRRjZDL05iOW4zWkZEN3Z4dzZ3WWVpVFNacGZobmhhZjY0VUdDYmRr?=
+ =?utf-8?B?Vnl0WndYQ0laQ3Zoa1R6Q2FlQUxobExnc3NQczJkc0NEWDlyWWR1bGR4ZDcy?=
+ =?utf-8?B?SnVFVENJM3ZWZlZmZTkzRStPdmJDTzMwVCszOXViVkNKaDdVY05iNVcwcUhK?=
+ =?utf-8?B?dzRqUFpCaGVmSllOdmdoZnlCTkhRRFpQRUtVVkNaWjhYUXpRZ3NPeGh5V0gr?=
+ =?utf-8?B?RE13WjQzZ2VlUnp2RUU5eVVUSHZnSml1RTRPdDZsWVFuOHB5WnFXeTFzeFdH?=
+ =?utf-8?B?QS9ONC9yRnVxOVNESjFXNUl2THAybUVPNTcrNTIvaWlUYVRwL05peHNLTGpl?=
+ =?utf-8?B?Wjk0WWNRMEh0YXpJSnU1SmFUS2lKY3p3djJQSjljU1pBVm1qUis1Z3Fuem82?=
+ =?utf-8?B?cm1idEZmaEIzUEVrNkdNbmJWbVBQdXRDRFhZTS96WVFVRjNiZ1FGR1g5STdN?=
+ =?utf-8?B?bEIwK2lXRFhJbys5aDNvNGE5NVE0R1VyTEp6MXVBT0gwaStZczgyWUFxUXhs?=
+ =?utf-8?B?TFhxWk9MSFJhb2ErUVMvT2FKajZ2V2NvaUM4UDhyR1NCS29VK1g2MUNiSUsw?=
+ =?utf-8?B?SGF4VWhZMzFxMVd1bWpYamt6N0FMRDA2ZERBYnFvUkd0ZWE3djRmUnAwaGYr?=
+ =?utf-8?B?ZEs0SVpEVENUTlRDZXp4dXN5dGNqanBGMk8zNVZrNHdTZUNJRGJNVGNEMG1R?=
+ =?utf-8?B?RjVBM3huanpna0EvYllUL0JwUE91ckVJalpIQ3F6clM4bE5TMXVsODJ2ZjIz?=
+ =?utf-8?B?UnNLdWNOVVJYQ2xNY05abzZ0OE10QmZ0ZDNpdkZ2TDhkaUxXZUN1S2M5VUp1?=
+ =?utf-8?B?K1NiQVBocUNlWWlhbmtZV2g3YklvMDhMeUZwNWp1aG96ZkNNS1pkcEVaaURV?=
+ =?utf-8?B?T1pVbjFVdjA2SjdGY25NTWRTOGtoa1ViWEhycHN4Rnhia3lsTmJXWnNxR2Jx?=
+ =?utf-8?B?QU9FWWtNWFM1eG9VcjJTNDhiVkRVQ3JLZlFHTnVsS3U2U0VabzVDa1ljM3N4?=
+ =?utf-8?B?S3kvY2IyUFVIYThCUUk2RGo4NkdnelpqMjlDUGc2YW4vckxpZlVqblZzTHV2?=
+ =?utf-8?B?NzhFdjFRZk9xaGpiZm45eUEzVzU1cXRCWWpoNXFrb1ZzdWJ6cnR3TVMyQkpW?=
+ =?utf-8?B?YUtJbW1pRnJtOXdzM1QwSjM4N0c1YTU1M0hnYzd3VWhpT2c9PQ==?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(7416014)(376014)(366016)(13003099007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SDN0ZWorb3U2ZmxjYjlKTDBBdGt1ZWhNWlhBTmJleldrTW1ZTk5VV2RIZVNv?=
- =?utf-8?B?dDZYaXNrbWxBWGx3eUZncTBCUktKaUtJZzl5SFhlMlBhU3RCVTVHQ3Rza0sx?=
- =?utf-8?B?Z2tKL0tqTkNoL0VaT0p4SFFrQ2xLYmVaQktyc0piUHpUbkc3MHVOWkEzMm5P?=
- =?utf-8?B?SUNsdk1kYkk2RjdOOHpTWHFQb3k3bHRnRm9VT0gxMzlDSlNobFcyVHlzQVRx?=
- =?utf-8?B?Tmh2WVdveHV5M3o2Z2paRmZYRTd1Z3dhbXY4Mmh6clRoNXU1ZGQ5czRUZWxk?=
- =?utf-8?B?cnJwcmtZU1BZMDBQcUtLN2pSaG13dDlsSWRwVHpRVVVHM3FCRXpKNkRVck9U?=
- =?utf-8?B?R1BybE9mTFZUZkdKWGFHRlFSUUdOR3E1MERVTXRtUlRkblE1RW5hZ29Remc3?=
- =?utf-8?B?Q0Z2bGZUSGxQU05OMEsyVlBxcko4dllJUXkwbEIyaVpiRHdGVWFvbHAxN3l2?=
- =?utf-8?B?dk9WSEhUUzdJMmFyNmpLN0FWalpHRHdHMzNySGcvNmY5ZHBaZ3N3R0JEb3NO?=
- =?utf-8?B?dWg4US9xcmhTNWh0N2pHdDVqNjZIZ0h2WGZUNkFFS2Vjdk5PYnNiSnZVZDJR?=
- =?utf-8?B?SC93QjJxQmRQbjhJOHVBVllMYXBaQVV3VTF0WW9Ecm1namI3SUZYSWV1dXRT?=
- =?utf-8?B?dlBmY1ZmOEFkQzZ1UW9zbStEb1JQZVdKb1IzeExQb0dVOWdVaWZpYWZFRzk2?=
- =?utf-8?B?UktZMnFLOTZMNzBtSGdiZ2VzaEVnRStiYnBRbk04WERBL1NGOFNXazFZOENq?=
- =?utf-8?B?Njg2SytpV0hHR1l0YkM1d2hNb0xud1dyUGVYcFJNaUFzUkZwQ0hCUXgzUWZs?=
- =?utf-8?B?QW1POEdkR1hHZU5uZjlFTVlxcnlYVjNBNWpoTHEySm1xR1h5ckg1a29aUVpO?=
- =?utf-8?B?WGVuYldoZ2E4TC9GYkp1cm81ZmkyTzIvN1l4SlpOc3NuUXB1VThuQ2lqZE5q?=
- =?utf-8?B?TERmaWFRTlRUL2hObnZHTVZqV29BZmFQendXNGJtYVYzaVpuQTVDeGtFUmZU?=
- =?utf-8?B?NVp6SGJIdVB3NkxVNElwZE1Sbm1pL3oxT3YyWEgyRUJzZkVOakhpdlM4ME5U?=
- =?utf-8?B?L3RucHNmcWM2eW5sbGtBK0xOenZOdThGSEZ3QU91YWFib25XQmUwMFowblkr?=
- =?utf-8?B?V2JFekhTRnBVSlgyQ0ZnUUNqRitPOFJ6OEdvemhURmNyTTZLZ1V4Zk5tczc4?=
- =?utf-8?B?Uk9ZbWViL3ViWnN2ZWZQeGxSN3RVamdjQWd3RzIzU0w3emdtaGZHaFAwTDZv?=
- =?utf-8?B?MStubnRQYzJheU5EOSsrNGNBZ0hqdHd5VDBXcVFxY05xbXNCY0dCb1NCbmcr?=
- =?utf-8?B?OGh5bmIyaEFEQzEyZXcrNHJuZ0duazNxWUFVajRVTHhMdVZFMTduMG1tS3Fy?=
- =?utf-8?B?NXdSTXgxM2FHZDRrcFVMcXpGUWZRMXV3Vng0aVA4YnVTTE5BSi9oR2N1Q3Fk?=
- =?utf-8?B?MlJ2ekJKY1phVmxZR1EwRUpjbWlEeHU3YzVmWVhpZytoZTFDSFpyWE9BVkxI?=
- =?utf-8?B?bGlRcHhoVmlNbmJRMTRKZXZVcG51VFJxYU51V2hiUFhIYk43bkk1Tm1sV2po?=
- =?utf-8?B?T3FhWFBDdDkvc3RpbTIxT0llUnNIaGlOOVdueWEwWWFQQkVQNDJjZWJQeW5N?=
- =?utf-8?B?cXpmNmxCdjYwa095ZnFJK0hxdnhVVGtiSXVJaEpiOFRtM3BvNVhnd21KLzFu?=
- =?utf-8?B?YWlZS0dkc1ZJeU1EUU5QL2xGclFUWDJ2MU5EQkRubGl0TEN6dlFIbWZNRmIw?=
- =?utf-8?B?WjJidkVpNHFMajZTeWNwSjRLOTVqZ0ZmU1pUNmdtRVZuakk1czJWUXNsL3pG?=
- =?utf-8?B?bFY0M21XMnNta0NZbTRxcjVXR2JMMFhhNkthVXZsM2h6emp5OEFYOXFpMTNk?=
- =?utf-8?B?YUkwSUQ3c2Z5dGpqKzQzYWJGbnNyUVpwdVVqbVZYVmw0dmNiUHkwcFNUVmpX?=
- =?utf-8?B?NlQ4ZE5xVTBzVGgvS0N2cE5TQmJUMUs4bWJYWnQzaDBTcVJsUHFiRHU3K1Iy?=
- =?utf-8?B?b2ZQUDBZQUwvbHR1cTh3d0xiOTFJNWJQVnNzU3djb2NaVEd0UFFGQTdkNkxO?=
- =?utf-8?B?SzdSd1JxZDl3L1hocVdNTnpFTk56Wk1nTUVVY1pkUCtWdUdiMEdxS3hDVVQr?=
- =?utf-8?B?MksrQTVvVEkxMTcwNGFJMXVoczU5SmdrdGc0OUJ1ajZXV1QvUVhicjU5eEZ6?=
- =?utf-8?B?V0E9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z0JrNXpCeWRjL2FwamxZc2RxUDROYi9IS2RJMVNUTTFsandvaTFNa3RVRVZw?=
+ =?utf-8?B?R2g2NDQ1UEk0NVJTakxHQXQ5WC9KTEFKem9wMU0yZFFrakxyY0JiYWQ0aU80?=
+ =?utf-8?B?bmFJYkRtVTdscnY3VTVSaDNJZHM4SU5tc2VqZVVYUkpaMmRmK2pJR2FUODBt?=
+ =?utf-8?B?L0dDVVVnRWtFV3M1eUhObE9RNGE1V0kvbTZhT0E4TUt3K2tkTkc0am44VWQv?=
+ =?utf-8?B?ditBT1M2TU9WNGxrVEdGVFFQY0h1UEhZVXN5VXR2N2NqM3diTDJtZW5lOGhy?=
+ =?utf-8?B?QmxIcmdLVDJaUHdTU2xkU3ZXS0JvN1JocUdnOFF5RVY3SVJQN0JERTFPR1d1?=
+ =?utf-8?B?enc5Z1JkRlVmUHA5TDg3bWJLOWo3ZTFhQlJsd2YzaDJuMExzRVFkK1hhQ2J0?=
+ =?utf-8?B?VkNGaFc2WGxsZ2c1ckFBNFp4RVlBc2NnNnQ3THQzOTJaZkc1MHhpYStPRk1D?=
+ =?utf-8?B?eFVvVmFuVVE0SmFKQ1I2czFtbmorb3ZQeUVsaCtRbTVuVllmOVBmbE5ieDNi?=
+ =?utf-8?B?dm83VFJ6b1JuMHNnaktZUERRY3kyUXNhaUNqS1pSUkhMQ2xoanlLZkxRVWM3?=
+ =?utf-8?B?WkFXcjNLTUtHWHV6bUlwTGFyVjVYYmxOOWpVV1UrYlczaFBmL09yUG5kbWpp?=
+ =?utf-8?B?ZjdVUklUMTBIcTJ5aDNWU0t2YmRUV1QwMTRXZHY3S1NnWk0rcElpT2U5eHFG?=
+ =?utf-8?B?RHVYLzVXaHFKZUJSSExYVTBwTU5JZ09uR3ZsOUZ1Y1hOTlJnbHpBNnIvRXF6?=
+ =?utf-8?B?VVN6RzR6MHdlZ0lxRnhRYmdzcU1NcytmdFZCQzBzbHhwRGRJYUQxTlVjS0FM?=
+ =?utf-8?B?UFNPeU0renlzNG90RmxlTFpwZW1wQnlTR1pJWXJkZXB3czBIUXFZL1hRTUM0?=
+ =?utf-8?B?MEMyM25XdUlUT3M0YS9jV0kyQU11QlFORmxyU0dEZ0QwVkJFY1VHNW1sYTlN?=
+ =?utf-8?B?ZmFGOXk3TFA0MGlTUitCbzU1MzcxSGlyQkd6NndnWjBXTmdCNEp4TlBxM09I?=
+ =?utf-8?B?L296a0FvcktKczhHM0xvTzFSVmtJcVdaS1FCU2sxOTM3Q3BHTmYxcHF4MWNJ?=
+ =?utf-8?B?cDVUeDRydFBMNVBYTEwyQlRaQ1I3MG1SMGJSVnIyR1pXREUxTXQxWDVYOG12?=
+ =?utf-8?B?QUlabVNBaFhxMHQvN282S0c3RG52TzFnZ3B2b0JtSklvMkt2Sm5QNnMreHBS?=
+ =?utf-8?B?OUFRenI4SWMxbW9CeHVLenVEOXIxbFdkZnVIdWVxcWQwMmI0SHRKK3ViOWRn?=
+ =?utf-8?B?S2hjM3hpOVJBYkpTcDl2VklCUjI4bnBLNlIwRHl2aktFMzdNVlc5ZXA4R2RK?=
+ =?utf-8?B?UmNXa21DbmdWbzBNN0tmcDJuaFR3c0ppYmNGQTI4UC9aaTBUakFNcEFuZjJJ?=
+ =?utf-8?B?U0Zac3B1VWJVSFJhMHVhTStLUG9CUnBGTE5sSnJqbmpuRm5PQkZZKzN0VVJF?=
+ =?utf-8?B?NlVVM094OGg4blJlK0p4cnF4TUJCRjRoZGg1YjNlNUZaZXh3blg2Z3FBZmg5?=
+ =?utf-8?B?ekduSWtoVHdCQTQ4TFk0dUgvaXZ4cjNPSkFjQk9sdjVrZTZjQWx6VXdvbjVR?=
+ =?utf-8?B?a1A4SEprdytRa0V5MURXV2pZY25iRmlpbUUrMnFOclBhOFVhVEJFRzRJNXlv?=
+ =?utf-8?B?MW1oSTNSTDhmZmhHZlJUbkcxS3E3dEo1bDd0UVErR0hqYStzeGM4WURtWW5E?=
+ =?utf-8?B?RlJBd3JyelRkVlc2MXpxcVc5cEZLOXppQlQ0a1RtUitlQUxQQ2JEYzlNclY2?=
+ =?utf-8?B?WEtWeElKSXlLYWcyZCtpY0JSWDY3SjJKNHBwYVpNbzRQNnhMZ3Fsekd0WEtV?=
+ =?utf-8?B?OE9qeXlDaE42VG1lQldBeWQ2TjErMlBoWEpNWU1Rc1VCS1FzRGhqRlpqS2sz?=
+ =?utf-8?B?My9hRWpXWW14ekQwLzhXcHlkU0Q2d00yWEdocWY3VFZDVzdjalJlL1pjV21L?=
+ =?utf-8?B?ZkNxMGZIM25PSTF3Y3U3Kzg0OTJ5ejJwaTFlell2Y1JDUWt2T2NOdW9oWHpN?=
+ =?utf-8?B?YlBubnQrczZYYjMwUERlbXcvNWpORWtZd0V3V3E1WEowWkdwazFYaEduc0hr?=
+ =?utf-8?B?c0k2UWxucUZNT2gxTE1zcmtFY0cwTERvYkFzQXRITzNRY2xNODIvWUVtc00w?=
+ =?utf-8?B?dW5ERnhLbGFYMzhYMXl6dnNCMjQvdWMyMzFBSS8wZUIxY2YzdnRXeVdYWWFK?=
+ =?utf-8?B?d3c9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1accbffd-f7cc-4663-87ca-08de2cdefe84
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8d45362e-ed31-42ee-19e1-08de2ce12852
 X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2025 11:28:59.8676 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2025 11:44:28.9828 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vaKFcNtYg3mkQXeVZ4S+5SNSLqPWJQXBeZ8mIkTNsk7BCXASAwCkK1js0PYwKFGC29WCZGPNBMXOr7DLWf5BuCLDs+lPbECHTzZk/DAkF68=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7979
+X-MS-Exchange-CrossTenant-UserPrincipalName: +c5br/MVjg+7VuxlGXdkgI1HRG4dC1j7/IZ8/rjAwidX2wrM06AtuclTqp8vxI2zEocj39kYK9IjlElOaGK8fwr1q/uCa32fUFAs4+k7n8M=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9401
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -195,258 +198,105 @@ On 11/25/25 11:15 PM, Simon Glass wrote:
 >>
 >> From: Quentin Schulz <quentin.schulz@cherry.de>
 >>
->> This adds support for using an OpenSSL engine for signing a FIT image.
->> To use it, one should set the fit,engine property at the FIT node level
->> with the engine to use. This will in turn call mkimage with the -N
->> option.
+>> This adds a test that signs a FIT and verifies the signature with
+>> fit_check_sign.
 >>
->> The -k argument to mkimage can be specified via fit,engine-keydir. If
->> not specified, -k is not passed to mkimage. This property is especially
->> useful for pkcs11 engine to specify slots, token label, etc...
+>> OpenSSL engines are typically for signing with external HW so it's not
+>> that straight-forward to simulate.
 >>
->> As far as I could tell, mkimage encrypts and signs a FIT in one go, thus
->> the -k argument applies to both signing and encrypting. Considering we
->> reuse the -k argument for two different meanings (info to pass to the
->> engine when using an engine otherwise the directory where keys are
->> stored), we cannot reasonably encrypt using local keys and signing with
->> an engine, hence the enforced check. I believe it should be possible to
->> support encrypting and signing with the same engine (using different
->> key pairs of course, via different key-name-hint likely), but this is
->> left for the next person to implement.
->> This is why the property is named fit,engine and not fit,sign-engine.
->> Ditto for fit,engine-keydir.
+>> For a simple RSA OpenSSL engine, a dummy engine with a hardcoded RSA
+>> 4096 private key is made available. It can be selected by setting the
+>> OpenSSL engine argument to dummy-rsa-engine. This can only be done if
+>> the engine is detected by OpenSSL, which works by setting the
+>> OPENSSL_ENGINES environment variable. I have no clue if dummy-rsa-engine
+>> is properly implementing what is expected from an RSA engine, but it
+>> seems to be enough for testing.
 >>
->> The public key (with .crt extension) is still required if it needs to be
->> embedded in the SPL DTB for example. We could probably support
->> retrieving the public key from an engine, but this is a change to make
->> to fdt_add_pubkey.c.
+>> For a simple PKCS11 engine, SoftHSMv2 is used, which allows to do PKCS11
+>> without specific hardware. The keypairs and tokens are generated on the
+>> fly. The "prod" token is generated with a different PIN (1234 instead of
+>> 1111) to also test MKIMAGE_SIGN_PIN env variable while we're at it.
+>>
+>> Binman will not mess with the local SoftHSMv2 setup as it will only use
+>> tokens from a per-test temporary directory enforced via the temporary
+>> configuration file set via SOFTHSM2_CONF env variable in the tests. The
+>> files created in the input dir should NOT be named the same as it is
+>> shared between all tests in the same process (which is all tests when
+>> running binman with -P 1 or with -T).
+>>
+>> Once signed, it's checked with fit_check_sign with the associated
+>> certificate.
+>>
+>> Finally, a new softhsm2_util bintool is added so that we can initialize
+>> the token and import keypairs. On Debian, the package also brings
+>> libsofthsm2 which is required for OpenSSL to interact with SoftHSMv2. It
+>> is not the only package required though, as it also needs p11-kit and
+>> libengine-pkcs11-openssl (the latter bringing the former). We can detect
+>> if it's properly installed by running openssl engine dynamic -c pkcs11.
+>> If that fails, we simply skip the test.
+>> The package is installed in the CI container by default.
 >>
 >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >> ---
->>   tools/binman/entries.rst  | 54 +++++++++++++++++++++++++--
->>   tools/binman/etype/fit.py | 93 +++++++++++++++++++++++++++++++++++++++++++++--
->>   2 files changed, 140 insertions(+), 7 deletions(-)
->>
->> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
->> index 8922d6cd070..a81fcbd3891 100644
->> --- a/tools/binman/entries.rst
->> +++ b/tools/binman/entries.rst
->> @@ -885,9 +885,10 @@ The top-level 'fit' node supports the following special properties:
->>
->>       fit,sign
->>           Enable signing FIT images via mkimage as described in
->> -        verified-boot.rst. If the property is found, the private keys path
->> -        is detected among binman include directories and passed to mkimage
->> -        via  -k flag. All the keys required for signing FIT must be
->> +        verified-boot.rst.
->> +        If the property is found and fit,engine is not set, the private
->> +        keys path is detected among binman include directories and passed to
->> +        mkimage via -k flag. All the keys required for signing FIT must be
->>           available at time of signing and must be located in single include
->>           directory.
->>
->> @@ -898,6 +899,53 @@ The top-level 'fit' node supports the following special properties:
->>           required for encrypting the FIT must be available at the time of
->>           encrypting and must be located in a single include directory.
->>
->> +        Incompatible with fit,engine.
->> +
->> +    fit,engine
->> +        Indicates the OpenSSL engine to use for signing the FIT image. This
->> +        is passed to mkimage via the `-N` flag. Example::
->> +
->> +            fit,engine = "my-engine";
->> +
->> +        A `-k` argument for mkimage may be passed via `fit,engine-keydir`.
->> +
->> +        When `fit,engine` is set to `pkcs11`, the following applies:
->> +
->> +        - If `fit,engine-keydir` is absent, the value of `key-name-hint` is
->> +          prefixed with `pkcs11:object=` before being passed to the OpenSSL
->> +          engine API::
->> +
->> +              pkcs11:object=<key-name-hint>
->> +
->> +        - If `fit,engine-keydir` contains either `object=` or `id=`, its
->> +          value is passed verbatim to the OpenSSL engine API,
->> +
->> +        - Otherwise, the value of `fit,engine-keydir` is followed by
->> +          `;object=` and the value of `key-name-hint` before being passed
->> +          to the OpenSSL engine API::
->> +
->> +              <fit,engine-keydir>;object=<key-name-hint>
->> +
->> +        If `fit,engine` is set to something different than `pkcs11`, the
->> +        value of `key-name-hint` (prefixed with the value of
->> +        `fit,engine-keydir` if present) and passed verbatim to the OpenSSL
->> +        engine API.
->> +
->> +        Depends on fit,sign.
->> +
->> +        Incompatible with fit,encrypt.
->> +
->> +    fit,engine-keydir
->> +        Indicates the `-k` argument to pass to mkimage if an OpenSSL engine
->> +        is to be used for signing the FIT image. Example::
->> +
->> +            fit,engine-keydir = "pkcs11:model=xxx;manufacturer=xxx";
->> +
->> +        Read `fit,engine` documentation for more info on special cases when
->> +        using `pkcs11` as engine.
->> +
->> +        Depends on fit,engine.
->> +
->>   Substitutions
->>   ~~~~~~~~~~~~~
->>
->> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
->> index db40479d30e..f28b1e6b4cb 100644
->> --- a/tools/binman/etype/fit.py
->> +++ b/tools/binman/etype/fit.py
->> @@ -104,9 +104,10 @@ class Entry_fit(Entry_section):
->>
->>           fit,sign
->>               Enable signing FIT images via mkimage as described in
->> -            verified-boot.rst. If the property is found, the private keys path
->> -            is detected among binman include directories and passed to mkimage
->> -            via  -k flag. All the keys required for signing FIT must be
->> +            verified-boot.rst.
->> +            If the property is found and fit,engine is not set, the private
->> +            keys path is detected among binman include directories and passed to
->> +            mkimage via -k flag. All the keys required for signing FIT must be
->>               available at time of signing and must be located in single include
->>               directory.
->>
->> @@ -117,6 +118,53 @@ class Entry_fit(Entry_section):
->>               required for encrypting the FIT must be available at the time of
->>               encrypting and must be located in a single include directory.
->>
->> +            Incompatible with fit,engine.
->> +
->> +        fit,engine
->> +            Indicates the OpenSSL engine to use for signing the FIT image. This
->> +            is passed to mkimage via the `-N` flag. Example::
->> +
->> +                fit,engine = "my-engine";
->> +
->> +            A `-k` argument for mkimage may be passed via `fit,engine-keydir`.
->> +
->> +            When `fit,engine` is set to `pkcs11`, the following applies:
->> +
->> +            - If `fit,engine-keydir` is absent, the value of `key-name-hint` is
->> +              prefixed with `pkcs11:object=` before being passed to the OpenSSL
->> +              engine API::
->> +
->> +                  pkcs11:object=<key-name-hint>
->> +
->> +            - If `fit,engine-keydir` contains either `object=` or `id=`, its
->> +              value is passed verbatim to the OpenSSL engine API,
->> +
->> +            - Otherwise, the value of `fit,engine-keydir` is followed by
->> +              `;object=` and the value of `key-name-hint` before being passed to
->> +              the OpenSSL engine API::
->> +
->> +                  <fit,engine-keydir>;object=<key-name-hint>
->> +
->> +            If `fit,engine` is set to something different than `pkcs11`, the
->> +            value of `key-name-hint` (prefixed with the value of
->> +            `fit,engine-keydir` if present) and passed verbatim to the OpenSSL
->> +            engine API.
->> +
->> +            Depends on fit,sign.
->> +
->> +            Incompatible with fit,encrypt.
->> +
->> +        fit,engine-keydir
->> +            Indicates the `-k` argument to pass to mkimage if an OpenSSL engine
->> +            is to be used for signing the FIT image. Example::
->> +
->> +                fit,engine-keydir = "pkcs11:model=xxx;manufacturer=xxx";
->> +
->> +            Read `fit,engine` documentation for more info on special cases when
->> +            using `pkcs11` as engine.
->> +
->> +            Depends on fit,engine.
->> +
->>       Substitutions
->>       ~~~~~~~~~~~~~
->>
->> @@ -588,6 +636,29 @@ class Entry_fit(Entry_section):
->>
->>           return paths[0] if len(paths) else None
->>
->> +    def _get_fit_engine(self):
->> +        """Detect whether an OpenSSL engine is to be used for the FIT
->> +
->> +        Returns:
->> +            Tuple(str, str): Name of the engine to use, as first element of the
->> +                             Tuple. None if no engine to use.
->> +                             keydir arguments to pass with the engine to the
->> +                             OpenSSL API, as second element of the Tuple. None
->> +                             if no keydir to pass.
->> +        """
->> +        engine = None
->> +        engine_keydir = None
->> +
->> +        prop = self._fit_props.get('fit,engine')
->> +        if prop is not None:
->> +            engine = prop.value
->> +
->> +            prop = self._fit_props.get('fit,engine-keydir')
->> +            if prop is not None:
->> +                engine_keydir = prop.value
->> +
->> +        return engine, engine_keydir
->> +
->>       def BuildSectionData(self, required):
->>           """Build FIT entry contents
->>
->> @@ -620,7 +691,21 @@ class Entry_fit(Entry_section):
->>               args.update({'align': fdt_util.fdt32_to_cpu(align.value)})
->>           if (self._fit_props.get('fit,sign') is not None or
->>               self._fit_props.get('fit,encrypt') is not None):
->> -            args.update({'keys_dir': self._get_keys_dir(data)})
->> +            engine = None
->> +            keydir = None
->> +
->> +            # Engine only supported for signing for now
->> +            if self._fit_props.get('fit,sign') is not None:
->> +                engine, keydir = self._get_fit_engine()
->> +
->> +            args.update({'engine': engine})
->> +            # If no engine, keys must exist locally, find them
->> +            if engine is None:
->> +                keydir = self._get_keys_dir(data)
->> +            elif self._fit_props.get('fit,encrypt') is not None:
->> +                self.Raise('fit,engine currently does not support encryption')
->> +
->> +            args.update({'keys_dir': keydir})
->>           if self.mkimage.run(reset_timestamp=True, output_fname=output_fname,
->>                               **args) is None:
->>               if not self.GetAllowMissing():
->>
->> --
->> 2.51.1
->>
+>>   tools/binman/btool/softhsm2_util.py                |  21 ++
+>>   tools/binman/ftest.py                              | 223 +++++++++++++++++++++
+>>   tools/binman/test/340_dummy-rsa4096.crt            |  31 +++
+>>   tools/binman/test/340_fit_signature_engine.dts     |  99 +++++++++
+>>   .../test/340_fit_signature_engine_encrypt.dts      | 100 +++++++++
+>>   .../test/340_fit_signature_engine_pkcs11.dts       |  99 +++++++++
+>>   .../340_fit_signature_engine_pkcs11_object.dts     | 100 +++++++++
+>>   tools/binman/test/340_openssl.conf                 |  10 +
+>>   tools/binman/test/340_softhsm2.conf                |  16 ++
+>>   tools/binman/test/Makefile                         |   6 +-
+>>   tools/binman/test/dummy-rsa-engine.c               | 149 ++++++++++++++
+>>   11 files changed, 853 insertions(+), 1 deletion(-)
 > 
-> Were there any changes on this one? It looks OK to me.
+> Not sure of the changes from last time, but I assume the test coverage
+> is finished.
 > 
 
-Yes. You can see the git-range-diff between both versions with:
+They are listed in the cover letter in the Changes section.
 
 $ b4 diff -v 2 3 -- 
 https://lore.kernel.org/u-boot/20251121-binman-engine-v3-0-b80180aaa783@cherry.de/T/\#t
 
-Also see cover letter where I list the changes made to the v3 compared 
-to v2 and why I decided to not add your and Wolfgang's trailers.
+will show you the git-range-diff between both versions for a given commit.
 
-> You should be able to do: if 'fit,sign' not in self._fit_props
+Yes, both the tests (parallel by default) and test coverage (single 
+thread/process) pass now. You can verify this for yourself by fetching 
+the code with
+
+$ b4 shazam 
+https://lore.kernel.org/u-boot/20251121-binman-engine-v3-0-b80180aaa783@cherry.de/T/\#t
+
+and follow the instructions from the .gitlab-ci.yml file in the job 
+named "Run binman, buildman, dtoc, Kconfig and patman testsuites" up 
+till "./tools/binman/binman ${TOOLPATH} test -T" from within the CI 
+container. e.g.
+
+podman run -it --rm --userns=keep-id -w $PWD -v $PWD:$PWD --pull always 
+docker.io/trini/u-boot-gitlab-ci-runner:noble-20251001-14Nov2025
+
+> Not important, but I think instead of:
+> 
+> +            self.assertIsNotNone(signature)
+> 
+> we typically do: self.assertTrue(signature)
+> 
+> and for:
+> 
+> +            self.assertIsNotNone(signature.props.get('value'))
+> 
+> self.assertIn('value', signature.props)
 > 
 
-$ git grep "in self._fit_props" tools/binman/etype/fit.py
-
-returns nothing. I would rather have the same logic to get properties 
-within a given file.
+Both copied from testFitSignSimple() which uses self.assertIsNotNone(). 
+I like having the "shared" code implemented the same way so that if 
+there's an issue in one test we can hopefully easily spot the same error 
+in others and fix them in one go. It's also seldom used on nodes in 
+tools/binman/ftest.py, 3 out of the 29 times it appears in the file. 
+self.assertIsNotNone() is used on nodes 17 out of the 26 times it 
+appears in the file.
 
 Cheers,
 Quentin
