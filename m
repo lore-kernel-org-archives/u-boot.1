@@ -4,84 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7E3D10F43
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 13:03:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32AC1D10F40
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 13:03:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 712C18422F;
-	Wed, 26 Nov 2025 14:02:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7059184236;
+	Wed, 26 Nov 2025 14:02:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O60/M2xb";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="n7LPkjh1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE99883E0E; Wed, 26 Nov 2025 10:06:50 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0964583F70; Wed, 26 Nov 2025 11:41:26 +0100 (CET)
+Received: from mx-relay49-hz3.antispameurope.com
+ (mx-relay49-hz3.antispameurope.com [94.100.134.238])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 659CF83C53
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 10:06:48 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-37a415a22ecso6201091fa.0
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 01:06:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764148007; x=1764752807; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vLD4iCtGjSSkVw/9kgCVQ2ApNxA4gjWGu5JsUxQZqqk=;
- b=O60/M2xbFyNZzmh7ZVV5eSiwIzI8G5KRz9jjTfAQRRbEgDf0WaMTyUh7GVXYAfIlct
- 4bkTEHaMF18dnWxOH9sWbHiFyKmEWrc1Cop/W1iWoRchWlmNy5/BZ9S/nc3HOMFvsIqr
- NZ+zyiIGalpjz0ftJnEY44jlRh50IfPv/yqR/Qw8Y8ulldDAElbjrpMw99Lr1ZoqmEYp
- GU8WN0WwnOZl8P5+QjdN6t4dyc2O2FZ3KGFzoITpQYk75S9txtzutVBcIwVVIkvVH3NX
- T+vvQuopwMmfywW1RaJYv8uBYOCm3LQHeygkRY1s57P/o2BSvnENOuJFd2DRTVYumOYK
- uLsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764148008; x=1764752808;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vLD4iCtGjSSkVw/9kgCVQ2ApNxA4gjWGu5JsUxQZqqk=;
- b=XO+4iKzXxrrFihNLjR2PBv+BnsmV1Mk7+0MUquneyRtq8kGdbXpnDLUOOlQg0+4wGX
- 6CkIzqnQI2TUdyuJorjMF3EuvtvHRIzA6cfZg+tERrdxdqo5/h2Z0W8NfdnN0rcZZmt8
- wORsXZHLbek86MOaPKfzD+3lmvKsJNpErR6bvf5n54iq/S/y+Oja7kim0vGNaI5Vt+Yr
- 1xrGYRJo21fLqCEfMJS4Gr8Ce6mU7l1D/on6iPwSmazhJBokdqlXHGGCV7opUJNLYFLx
- vMfIYkp9OxEfxb9OKHWCtuLPaCdwy1HBuboyU+d9VISsT+xaFd8EHpqKh/5S810gekjc
- 9qgg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXgNBdXIjHq3ACfI5A9XxQjQWCVtlP3xA40/a3+9QHXETiFZF3drhHwAZQgokENfy0/BzsGGeQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxI/g6j8Yt7Ktg235KPLJJ83/LA1UKYGCr2djrPuAgXXwmhN/+A
- ZNaOyjwnVT45WAPPlGoeturQV/dW+bevy/ifVPPH/61F9CG7Eagh23q4oTU8lGcMB5fTogY0cP8
- pdekIJ2PqZ1gLL7rpCJHdT6nxOFVzjKvscGKY
-X-Gm-Gg: ASbGnct6eLsIU/u+q3hXmQbgaeicbyuzimvtJEDoRYW0z4B2YtiVW2ugqExqlda+Vh5
- sl23YFGUdpt/aYGjr4gn3UBhBAuCeKjoKQj7sR94YM/de0w5p3eNmTGC2tdxdjrN2Uqz8nOewZz
- UWOssiOP5T2umPMhCZHWrGcgZZgyxM8CsV+a7vGHxx6j7C4Ib6WpTrexkkC16LLXbHR2ygCQIy2
- 613A1ftaqjGl5C6QCPejsfZKXBC3CPIpVCQA1/YCLV5Ff7if00wr4yKWejrqnLU1bV0Adux2rLB
- EeHKYAcObZxSeifCe35nCrLQQ6D4
-X-Google-Smtp-Source: AGHT+IFM9cJuLQkx1V4t9OqowYsgJbhhmn23s/EjO4oJ8THJLLqT46y+LKnMdst9jU8GQOVPc3FvmI+NUyNOc6rXCGM=
-X-Received: by 2002:a05:651c:1111:b0:37a:4277:86f8 with SMTP id
- 38308e7fff4ca-37cd802f8a6mr44478711fa.10.1764148007333; Wed, 26 Nov 2025
- 01:06:47 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id E680D83F2E
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 11:41:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0418545a05=alexander.feilke@ew.tq-group.com
+ARC-Authentication-Results: i=1; mx-gate49-hz3.hornetsecurity.com 1; spf=pass
+ reason=mailfrom (ip=94.100.132.6,
+ headerfrom=ew.tq-group.com)
+ smtp.mailfrom=ew.tq-group.com smtp.helo=smtp-out01-hz1.hornetsecurity.com;
+ dmarc=pass header.from=ew.tq-group.com orig.disposition=pass
+ARC-Message-Signature: a=rsa-sha256;
+ bh=RN0eUf+LNL+cY77fwHtiX5Yk+cz76kYtwHn6vGTqDQY=; c=relaxed/relaxed;
+ d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
+ t=1764153683;
+ b=F2tqWTDkBFiEjAi/mJyJ5bx6wm4lTPFTkMnaZdAjsQB7VjU4F3Fs0anx5aOAMis7dlycx9Q+
+ Lg8+ZbXl0I2dNe/tOVyHrduE9/c6c+1jm6b9GrQn13byLUm8ExVtHk9x5SeZ8f4pqaI71w2x2ky
+ uwZYF+hoVoNCjLA+eeVKQECNuqPMbb8WoptLiMwzFeaN6BnrVEASw50quwgIsS5bcguZIUTOXCB
+ 70sbqbEfRdd9Z6oSID3EABDgdOHl5P/p+xSX9oPPu3RdWEV/JlEE2vBsC5ZEFkBTWgoWrzl645/
+ K9pIQ9J8eZd1KoyEfcvshKaEb97MNmecjI2/dyz70w3GA==
+ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
+ t=1764153683;
+ b=qoAzzJSVJbVxev5zp9ih7GE6j5Q3tzHrAzlXu78U3M5nzqaCMtESJrCT/2648SmzHxx+4tti
+ tAbrub3S3Wa3O3/sPVgtw/iXPL2gkb1LkpZJOQCuVihI8fsCzoVCjXDIq9yFkSlWw7qMOHp5qpN
+ 2PtWZG1ySBcKrQDctQSz66cNUJbRbKePO6X1H1cKk0iRp6WZczBDqY0y/Zxm5FOumlPmKIUiWQp
+ Pvow/Z2xqPF7SuE3RqUdtZkdivsNOTyH9kZe76wwluRp9KLiSubdVmixWcP+Lk7GnCZq/o5ed3+
+ Gryp19ecMRna0bmcMgdgnDT+PXo0cC0sKyloUJKgLCRPg==
+Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
+ mx-relay49-hz3.antispameurope.com; Wed, 26 Nov 2025 11:41:23 +0100
+Received: from he-web01-hz1.hornetsecurity.com (unknown [10.1.31.91])
+ (Authenticated sender: alexander.feilke@ew.tq-group.com)
+ by smtp-out01-hz1.hornetsecurity.com (Postfix) with ESMTPSA id 87022A41379;
+ Wed, 26 Nov 2025 11:41:14 +0100 (CET)
+From: =?utf-8?q?alexander=2Efeilke=40ew=2Etq-group=2Ecom?=
+ <alexander.feilke@ew.tq-group.com>
+In-Reply-To: <20251125163524.GQ2125796@bill-the-cat>
+Content-Type: text/plain; charset="utf-8"
+X-Forward: 127.0.0.1
+References: <20251125161427.1155-1-Alexander.Feilke@ew.tq-group.com>
+ <20251125163524.GQ2125796@bill-the-cat>
+Date: Wed, 26 Nov 2025 11:41:14 +0100
+Cc: "Simon Glass" <sjg@chromium.org>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+To: "Tom Rini" <trini@konsulko.com>
 MIME-Version: 1.0
-References: <20251118232119.17928-1-semen.protsenko@linaro.org>
- <CAPLW+4m9eTWDYfJt7rjorHpwZcM2MCKR-aq+uddN6=v=2m0rkA@mail.gmail.com>
-In-Reply-To: <CAPLW+4m9eTWDYfJt7rjorHpwZcM2MCKR-aq+uddN6=v=2m0rkA@mail.gmail.com>
-From: Minkyu Kang <promsoft@gmail.com>
-Date: Wed, 26 Nov 2025 18:06:34 +0900
-X-Gm-Features: AWmQ_bmtH5Kii8Mt00U4rvHTIZOag-NsyhePtN9dovkzino5rQMz_f3hdw5dPc4
-Message-ID: <CALrBrZ0mDfjAJmjbUsunabjStbqKU1_C-CJdNDmKVHEY_J0BHA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/6] board: samsung: e850-96: Support USB boot
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
- Peng Fan <peng.fan@nxp.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-X-Mailman-Approved-At: Wed, 26 Nov 2025 14:01:59 +0100
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <2db22e-6926d980-129-2e0bef80@48422766>
+Subject: =?utf-8?q?Re=3A?= [BUG] silent hangup when debugging 
+ =?utf-8?q?lib/fdtdec=2Ec?=
+User-Agent: SOGoMail 5.12.1
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-cloud-security-sender: alexander.feilke@ew.tq-group.com
+X-cloud-security-recipient: u-boot@lists.denx.de
+X-cloud-security-crypt: load encryption module
+X-cloud-security-Mailarchiv: E-Mail archived for:
+ alexander.feilke@ew.tq-group.com
+X-cloud-security-Mailarchivtype: outbound
+X-cloud-security-Virusscan: CLEAN
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
+ mx-relay49-hz3.antispameurope.com with 4dGbhB5ZX6z3yYmw
+X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
+ IP=94.100.132.6
+X-cloud-security-Digest: 8bb1d2c7ae153f190c506527a427bbf7
+X-cloud-security: scantime:2.013
+DKIM-Signature: a=rsa-sha256;
+ bh=RN0eUf+LNL+cY77fwHtiX5Yk+cz76kYtwHn6vGTqDQY=; c=relaxed/relaxed;
+ d=ew.tq-group.com;
+ h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
+ t=1764153682; v=1;
+ b=n7LPkjh1vY9hvxUDqBo+QA+15XbGfiCLCENz6qWQHfbdcKsLHmipGS3gCmGkTIO7aNMUkjHa
+ DNE75c7bn/X7RdgIr5/y9aCTO3+i6m7xvQ7U3bhSCVu88qMjACdqUtKpA9Rj8kN9r+lNa6D0yp3
+ eCIONiNebgI5TJ5mcU5qkNDcyTeMzYlLyTO86wfwXOElMmf9K+saj43L5FQHZtFa3223j2Oab3N
+ KqMdl3BUNT+r+gJRtgBF3kEjg/F72ErBAut7C8oyROUMTvVpASeAfO22lug64yE7qd/tsJAryKE
+ XiKnfGmsSzfcg9yWNeJjVltcbTcJMTYKTrYSblQJ9exZg==
+X-Mailman-Approved-At: Wed, 26 Nov 2025 14:01:59 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,95 +110,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Tuesday, November 25, 2025 17:35 CET, Tom Rini <trini@konsulko.com> =
+wrote:
+
+> On Tue, Nov 25, 2025 at 05:14:12PM +0100, Alexander Feilke wrote:
+>=20
+> > From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+> >=20
+> > Description: U-Boot hangs silently during boot when enabling DEBUG =
+in
+> > lib/fdtdec.c
+> >=20
+> > Not sure if its really a bug or rather a configuration issue on my =
+side.
+> >=20
+> > Minimal steps to reproduce: <see patch>
+> >=20
+> > The hang is caused by `panic("FDT overlap");` later inside the if b=
+lock.
+> > (see `lib/fdtdec.c:1279` in `fdt=5Ffind=5Fseparate(void)`)
+> >=20
+> > Additionally, no boot log can be seen because serial is initialized=
+ after
+> > loading the devicetree in this boot stage (see `common/board=5Fr.c:=
+665` in
+> > `initcall=5Frun=5Fr(void)`)
+> >=20
+> > Tested on i.MX6 with configs for tqma6d=5Fmba6 and other tq boards =
+that aren't,
+> > mainlined yet (tqma6ulx=5Fmba6ul and tqma7d=5Fmba7).
+> >=20
+> > Any idea what to look for to fix this on our side?
+> >=20
+> > Thanks in advance,
+> > Alexander
+>=20
+> For very early failures you might need to look at enabling DEBUG=5FUA=
+RT
+> which wires in a more direct "just write this to serial port".
+>=20
+> --=20
+> Tom
+
+Thanks for pointing that out. The debug log shows that the global data =
+is
+still located in the SRAM after relocation.
+Printing all variables involved in the panic condition shows, that the =
+stack
+pointer also overflowed, so there appear to be two separate issues.
+
+if (top > (void *)gd || top > (void *)&stack=5Fptr) {
+
+including top, sp and sys=5Finit=5Fsp=5Faddr for completeness:
+
+<debug=5Fuart>
+FDT 8789d3a0 gd 0091de40
+top 878a7aa8 sp 878543e7
+sys=5Finit=5Fsp=5Faddr 0091ff20
+FDT overlap
+resetting ...
+System reset not supported on this platform
+### ERROR ### Please RESET the board ###
 
 
-2025=EB=85=84 11=EC=9B=94 25=EC=9D=BC (=ED=99=94) 05:47, Sam Protsenko <sem=
-en.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+Note: I don't use CUSTOM=5FSYS=5FINIT=5FSP=5FADDR so the default is use=
+d. GENERATED=5FGBL=5FDATA=5FSIZE is 0xe0
 
-> Hi Minkyu,
->
-> If there are no objections, can you please apply this series to your tree=
-?
->
-> Thanks!
->
-> On Tue, Nov 18, 2025 at 5:21=E2=80=AFPM Sam Protsenko
-> <semen.protsenko@linaro.org> wrote:
-> >
-> > When U-Boot is executed during USB boot [1,2] on E850-96 board, two
-> > issues happen:
-> >
-> >   1. eMMC fails to initialize
-> >   2. Attempt to use USB PHY driver leads to abort
-> >
-> > It was identified that issue #1 happens due to enalbed Flash Memory
-> > Protector bits in MMC block registers during USB boot, and it's handled
-> > in patch series [3].
-> >
-> > Issue #2 on the other hand happens because ROM code expects the
-> > bootloader (U-Boot) to download remaining binaries (LDFW and TZSW) over
-> > USB using SMC calls. Before that, the access to USB blocks (USB PHY and
-> > DWC3) is disabled, probably because corresponding TrustZone domains are
-> > configured for access from Secure World only.
-> >
-> > This patch series implements downloading LDFW and TZSW firmware over US=
-B
-> > during USB boot, which makes it possible to use U-Boot for flashing
-> > images to eMMC using fastboot and DFU protocols. That in turn simplifie=
-s
-> > the U-Boot development, as one can use `dltool' [1] to run U-Boot binar=
-y
-> > during USB boot, and update U-Boot on eMMC this way (e.g. using DFU).
-> > It's not possible when using LittleKernel bootloader, as it expects
-> > non-standard Samsung GPT partition, but in case of U-Boot we use the
-> > regular one.
-> >
-> > Once this patch series and patch series [3] are applied it'll be
-> > possible to use U-Boot during USB boot. The two series are independent
-> > of each other, and can be applied in any particular order.
-> >
-> > Changes in v3:
-> >   - Added PATCH #6 (enter DFU automatically on USB boot)
-> >   - Rebased on top of the most recent master
-> >
-> > Changes in v2:
-> >   - PATCH #4: Return 0 on success in load_image_usb()
-> >
-> > [1] https://gitlab.com/LinaroLtd/e850-96/tools/dltool
-> > [2] https://docs.u-boot.org/en/latest/board/samsung/e850-96.html
-> > [3]
-> https://lore.kernel.org/u-boot/20251026010658.19271-1-semen.protsenko@lin=
-aro.org/
-> >
-> > Sam Protsenko (6):
-> >   board: samsung: e850-96: Keep public functions together
-> >   board: samsung: e850-96: Add routines for checking boot dev
-> >   board: samsung: e850-96: Split LDFW loading and init
-> >   board: samsung: e850-96: Add routine for loading images over USB
-> >   board: samsung: e850-96: Load firmwares over USB on USB boot
-> >   board: samsung: e850-96: Enter DFU automatically on USB boot
-> >
-> >  board/samsung/e850-96/Makefile  |  2 +-
-> >  board/samsung/e850-96/bootdev.c | 99 +++++++++++++++++++++++++++++++++
-> >  board/samsung/e850-96/bootdev.h | 23 ++++++++
-> >  board/samsung/e850-96/e850-96.c | 71 ++++++++++++++++++-----
-> >  board/samsung/e850-96/fw.c      | 76 ++++++++++++++++++-------
-> >  board/samsung/e850-96/fw.h      | 10 +++-
-> >  6 files changed, 246 insertions(+), 35 deletions(-)
-> >  create mode 100644 board/samsung/e850-96/bootdev.c
-> >  create mode 100644 board/samsung/e850-96/bootdev.h
-> >
-> >
-> > base-commit: 91861e5a30d217d8e70130c9124c1646f4afef29
-> > --
-> > 2.47.3
-> >
->
+#define SYS=5FINIT=5FSP=5FADDR	(CFG=5FSYS=5FINIT=5FRAM=5FADDR + CFG=5FS=
+YS=5FINIT=5FRAM=5FSIZE
+ - GENERATED=5FGBL=5FDATA=5FSIZE)
+#define CFG=5FSYS=5FINIT=5FRAM=5FADDR	IRAM=5FBASE=5FADDR
+#define CFG=5FSYS=5FINIT=5FRAM=5FSIZE	IRAM=5FSIZE
 
-applied to u-boot-samsung.
+Do you have any idea how to address these two problems?
 
-Thanks,
-Minkyu Kang.
+Alexander
 
->
