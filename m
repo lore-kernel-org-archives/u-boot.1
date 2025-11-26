@@ -4,98 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75011D10F5B
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 14:26:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09324D10F58
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 14:28:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6B0C84241;
-	Wed, 26 Nov 2025 15:26:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5565284247;
+	Wed, 26 Nov 2025 15:28:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iVFu7412";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eLijtKkf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C28898423F; Wed, 26 Nov 2025 15:26:39 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 5B94884248; Wed, 26 Nov 2025 15:28:56 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B792D8423F
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 15:26:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5054E8423F
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 15:28:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-42b387483bbso5104994f8f.1
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 06:26:37 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-477a219dbcaso60806135e9.3
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 06:28:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764167197; x=1764771997; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1764167334; x=1764772134; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ZOntupVcfr3M8XmhEXE5gl8RdASq8d0R1kfmnOqm4AI=;
- b=iVFu7412nWrYivfYzTmcOVTe9cghZQQAFqHYngXRS5Y5y9bcZrF2V8CXg3aHDTFyqx
- fc6IKzOf0WbkSvYQNH4bIYjl4BIZ8FYmYKlBXqd8/MGr6AwGLfr79UhKLINpNMHo7OIw
- wevDLrUOhQpCgF25mcXmgcN+ZjClZCZ3JQsWJxP4PWi0S0a4Lsuz3xntODFKJ1eEpPDX
- dHd3WKWSTnZtcCIkUOCflwFcbvbJuVl0hT5rwMnKaq4wLf2m/WAtowryLeTvzkoekwQh
- YeB6hDCGHDBzI1VmC0vQUSjwBscCgzi1+NxVUtGL9lvVHbO2Vg+diy2m6getaWLaBcsj
- HGvw==
+ bh=1wQk+6WXBHdGLWOItOIJWP+FvGsGFJB9qe/vfOKgDLE=;
+ b=eLijtKkfiz3ygKgbL+MnG5b8u6KVV/VAMMJ2v93zvUL3Yp0X0CG9u73d6KGV4lwe3a
+ BvI3FHTh21bQgeajncMXKGKY7Q1s30+gIycyhFiBBGXA9q2Nx3rJLKs9ddkK9xlHyjbZ
+ 7kI/KL+Zo+aY1iAWSerPtAwWQKsNpOrEpjzEEKeJUlQS3yX7MmGEA+Rb80+aWUxXOVf5
+ YRQ/+Zitga/9aJjXzb6mu4Ljar6kuEZmtgtYf2x2f464q8p5tKntHfyW8MoChuvkM1wu
+ 6kfBnC437SydbUF9QAjF3R9uMLnKlKu/I4DNePdP/oyaIcjxaFBnTlXeBD/A06FAwA+G
+ P4OQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764167197; x=1764771997;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1764167334; x=1764772134;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZOntupVcfr3M8XmhEXE5gl8RdASq8d0R1kfmnOqm4AI=;
- b=MzwuU3Qic/mwkxZ4WG+SLI+K+p+nU96tXpGcEaAjIOlibDZQ7/nYy/+X9C0tsJ4H4z
- G+wZRrLse/a8D9B1vpNxeSY7MiukDek02lFptSxV++oJlH5TeoF+MKCrRBsKVBg6P6vC
- 7OOxExBWYmlq5uI3/izdg3VvLcIn8vPVGbuP2BT6eLKleOkTXWpcDOINz4yxvcn2Q80S
- wTQGc+knWfnjwQQXZ5jFQPhIVjIAmP7p2SuuB8+u8LHdK8gqCZ1fYzxN4If2veWqOYI4
- 0C2HpFhUbNDy+gAHb+6tpP/D5nqM4YyC4mipzeJzqgD33jaPiYQIU76mhlgpa/U7aJ8G
- hvbw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUNotRQm8ORua/N3bWsaad1mKw8VDC391/6OOxTZnr0yIY3N1970V9u5u55Wd0a6B+QAy8gRA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0F0s7RoarenGQC9coYoe4MdhYVjXKjVC11/fQWdgYhvMRQYC6
- njK1ZYwU9VGueE/mQjpEWoGooLmp1ELp84l6OjDZTNC5W6Y0FxxljKeTLssjTKaicpM=
-X-Gm-Gg: ASbGncs5L+nJb0Wti+oYP4AJfDiI3P7t2EA0toOzaQS6Zstqs23nEEpZVnkOAnctVWu
- Mwe0LmS2EXahQ4+JjfgL3/DRDPV+s2EUER7mA9htZbnwF+rijvIV7RpGjGrHQPQByE9CC1QKK6L
- Qyl+w9gVovVnz3/OmPI282QdQKppMhJdZyAEYwuzbOCv3KPMJepgn5/R61A1jbJs01VZR+64E6v
- Wk5bcGDalGGu87f4EhoDbQRAuoczm0dfvGJ5kqI7wQv1GhO+sQt5gtl46///rDxiCqYSokFjdz3
- tp2qGkSzlvshKiXO+VrFkJXSV9EUL4alTa6IejfPb9Njsh8J9+q4CZNsyNT5TaYxBXK1N6RIHdv
- 1OsrefCYajGa0+1APPgs9Z58HW1R6YUpS6CS5lTWhX5YkpxynVZQN/9f+cuiz14XSBAcqir1ZXW
- XlUmMQB6UKmwQzSPzLhKMLjw6o1mry4wi9F0A2pt9Xh5h4oHLIRkgl
-X-Google-Smtp-Source: AGHT+IH6i5HJUFX0fT5t73VuW5beQ9alD8w9rLkOQ9yWyDLGrm8bRfakNskP+tP+fnnxo4Ff2CxMjw==
-X-Received: by 2002:a05:6000:1846:b0:42b:5628:f4a3 with SMTP id
- ffacd0b85a97d-42cc1cd8f11mr22110898f8f.1.1764167197017; 
- Wed, 26 Nov 2025 06:26:37 -0800 (PST)
-Received: from [192.168.1.36] (p549d4195.dip0.t-ipconnect.de. [84.157.65.149])
+ bh=1wQk+6WXBHdGLWOItOIJWP+FvGsGFJB9qe/vfOKgDLE=;
+ b=m1WADR8oKU/aUcx84i8M/Aw0Gunkgpvwuj1coeK+BURDz2Z6daIiKi1L/7jwBmGTIf
+ xb99em4E+im6YayhIx7QwobvdNK4xKjnDQ3LXADY6jOKpYkMPG1l7QNW0zk1olSONV0f
+ u5VXIoOBEvz85t7yxS0j3dNVIlcdgxiq+FSMUOd21MoCXhVQAjuJ3sRTL4pLoIei0osb
+ tLdIXWkLcn1dGiZI0kGJo0+10V+OBQJlJ09Vs7gMuQMfa0oDXXUbAuRxyeK99EGupjW7
+ O4ACOoqxhKRHmBibuIpNakhI6vyIvaov/lIBqJmqUpY0eNT+VaJHpXw5swPrl7ZjYkB3
+ TNyQ==
+X-Gm-Message-State: AOJu0YxYQejH8kkIBfwJA0Lfu2i7I+2bEz7W+aRjiAagQEIUjzzlEJwg
+ Ofqabx7VLOi69XgM7I6AAX1f/fSANIcNTZKFE3aCTyitqJmMPGq2bz19RMDzYd3u4yA=
+X-Gm-Gg: ASbGncv2X0RSqObltpFkpOFI9av77b8pB2Y/hWIeULTh/wLBp463x1W3rDKj+RuAOzr
+ KVAIWdtOFtI7QkMo1dtkDG+6N4SyguotHPb4uSpgfhqKk0fFVPgOkH1pThxay3NaTWsmOVVAQOp
+ 8uen2KDYyU+MwMMtU6zWUb00ye8K68sVmrEJCcfu2iUJquNMZPBKGAkmnmhU6DfSCJ4OY4kKU9g
+ PEk5ABTouxytRU3iGTFZga0ySgMqJYEH209fyAY+Si1PzzF078kESsZ14GAVmX563N7ne1fdo2f
+ VqU7KavAVQHfF9hQyXSIpJTnh4rTTqGxJ14GOAcXAqm/qM3XLdbJKd7p2cKIxpxw+ETiDGXjuGn
+ 0NWb5sSdLaeJ21gMqQfHnuavX3hPaCbJBQcUeWh9Yv9xejgC8QNTujgIRqYRIvgOW/7mJOwm6LO
+ WJOBwJsqmiedjPQmkDGGBBPuPgMe8KzsZgAVUeH4ulmvTM60NGc2J2ArBmbqyP9Zz1hA==
+X-Google-Smtp-Source: AGHT+IEgc9YRxEIWu1FYojy8TKAU8TDcTYbu1aiZhv1X3P6vHcxZwS5FR1AXTBqFVdX5+d23gKswWg==
+X-Received: by 2002:a05:600c:1d0e:b0:471:21:554a with SMTP id
+ 5b1f17b1804b1-477c01860aemr190932285e9.13.1764167333731; 
+ Wed, 26 Nov 2025 06:28:53 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:74cf:cf99:df2c:2480?
+ ([2a01:e0a:3cb:7bb0:74cf:cf99:df2c:2480])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7fb9022sm41029627f8f.36.2025.11.26.06.26.35
+ 5b1f17b1804b1-4790b0c3a28sm48170185e9.9.2025.11.26.06.28.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Nov 2025 06:26:36 -0800 (PST)
-Message-ID: <bc4f1b0e-36b5-4cf1-a6f4-4f595db40ced@linaro.org>
-Date: Wed, 26 Nov 2025 15:26:35 +0100
+ Wed, 26 Nov 2025 06:28:53 -0800 (PST)
+Message-ID: <2177d026-59a4-46eb-874f-9e02bebe4902@linaro.org>
+Date: Wed, 26 Nov 2025 15:28:51 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/7] arch: arm: dts: qcs6490-rb3gen2: Override USB3 PHY
- clocks
+Subject: Re: [PATCH v5 0/2] net: phy: aquantia: Switch to generic firmware
+ loader
+To: Marek Vasut <marek.vasut@mailbox.org>, Beiyan Yun <root@infi.wang>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Zi Yao <ziyao@disroot.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>
+References: <20251101123401.110681-1-root@infi.wang>
+ <4D63D655-F67F-4FC7-B02F-653BF49754EB@infi.wang>
+ <59b26617-ea1d-4a65-a474-de16399f8205@linaro.org>
+ <7e2b90c8-b814-4027-a7ad-9a0a5e747557@mailbox.org>
 Content-Language: en-US
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- lukma@denx.de, seanga2@gmail.com, marex@denx.de, malysagreg@gmail.com,
- arturs.artamonovs@analog.com, utsav.agarwal@analog.com,
- vasileios.bimpikas@analog.com, ian.roberts@timesys.com,
- nathan.morrison@timesys.com, peng.fan@nxp.com,
- alif.zakuan.yuslaimi@altera.com, kory.maincent@bootlin.com,
- sjg@chromium.org, jerome.forissier@linaro.org, ziyao@disroot.org,
- stefan.roese@mailbox.org, mkorpershoek@kernel.org, rui.silva@linaro.org,
- ilias.apalodimas@linaro.org, luca.weiss@fairphone.com,
- quic_varada@quicinc.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20251124155503.2839766-1-balaji.selvanathan@oss.qualcomm.com>
- <20251124155503.2839766-6-balaji.selvanathan@oss.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20251124155503.2839766-6-balaji.selvanathan@oss.qualcomm.com>
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <7e2b90c8-b814-4027-a7ad-9a0a5e747557@mailbox.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -114,43 +112,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
-
-On 24/11/2025 16:55, Balaji Selvanathan wrote:
-> Override the USB QMP PHY clock properties to use only GCC clocks
-> supported in U-Boot, removing the unsupported RPMH_CXO_CLK from
-> the qcs6490-rb3gen2's device tree.
-
-That clock should be handled by the stub clock driver, are you seeing an
-error without this patch (with CONFIG_CLK_STUB=y)?
 
 
+On 11/26/25 15:24, Marek Vasut wrote:
+> On 11/26/25 3:22 PM, Jerome Forissier wrote:
+>> Hi Yun,
+>>
+>> On 11/15/25 08:48, Beiyan Yun wrote:
+>>> Hi all,
+>>>
+>>> Gentle ping. Any comments on this patch?
+>>
+>> Since there is no comment I will pick it up and move it to my net-next queue.
 > 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
->  arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-> index 50674b692ed..14669b50821 100644
-> --- a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-> +++ b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-> @@ -22,6 +22,14 @@
->  	/delete-property/ usb-role-switch;
->  };
->  
-> +&usb_1_qmpphy {
-> +	clocks = <&gcc GCC_USB3_PRIM_PHY_AUX_CLK>,
-> +		 <&gcc GCC_USB3_PRIM_PHY_COM_AUX_CLK>,
-> +		 <&gcc GCC_USB3_PRIM_PHY_PIPE_CLK>;
-> +	clock-names = "aux",
-> +		      "com_aux",
-> +		      "usb3_pipe";
-> +};
->  // RAM Entry 0 : Base 0x0080000000  Size 0x003A800000
->  // RAM Entry 1 : Base 0x00C0000000  Size 0x0001800000
->  // RAM Entry 2 : Base 0x00C3400000  Size 0x003CC00000
+> Ideally the driver should use one firmware loader, not both.
+
+Is this a NACK or can things be improved later on?
 
 -- 
-// Casey (she/her)
-
+Jerome
