@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E57D1118E
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 20:29:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C603AD1119B
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 21:52:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8271A839E8;
-	Wed, 26 Nov 2025 21:29:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DA5E183A24;
+	Wed, 26 Nov 2025 22:52:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bD6oyFKe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M/xpyOZR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF33083A26; Wed, 26 Nov 2025 21:29:31 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 72D6883A3D; Wed, 26 Nov 2025 22:52:05 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3C71839D9
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 21:29:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0973383990
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 22:52:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c76f65feb5so189384a34.0
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 12:29:29 -0800 (PST)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7c6da5e3353so205149a34.3
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 13:52:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764188968; x=1764793768; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rvtEsFiqhLRuv/JoIWdCZTyf6KFtkjw7xSL6mE5+3dk=;
- b=bD6oyFKebDB9KhDJ9iR2U6Jyx1jp06mMMpI4Xv8v8NFDMiRq/nCAwWKo1n2ADD2g1t
- BPzyDMw6YfFKp77U2g+efsKEaK+MVj4HKB4LSyZlP+QU1BNbzDxGeBo4r0/wifwuxPZ9
- uESC/sw31jas+hoYCW4AVq2p7BTsflS5l1tWg=
+ d=konsulko.com; s=google; t=1764193922; x=1764798722; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=U8PkgeSSYjcbMyxupmWPQirg7lf5ayGICl/4OxxR5G8=;
+ b=M/xpyOZRM5P01cM/o0o5DkIlX053HnianCIfqlZ91fFdV1WBxL0kdb1531MTSD+Oji
+ 24JhN12jj9JI2e4M2NF6iXTtbkkG2NqH5WbhfNIv7rYAcNimPaixXPnJg6lC6Nf9pT6y
+ lz9ILVbgsN5ah8xC413lwmdZeDx/U9iu0Dn1Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764188968; x=1764793768;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rvtEsFiqhLRuv/JoIWdCZTyf6KFtkjw7xSL6mE5+3dk=;
- b=jK/c4hEY5dWF3bcS3zrEq6AJsTWkaHYuZ/zSi32yXK7EgJlvf4WZ2QTeOTtuRZvaIE
- g4mN51i2P4GGmWhqhDcJNU0hUNyHbUElEtRWy+RSoBvi1vyiYslJ5Twl/thpOjrQ1Lbr
- MoL+7z3gG2B1NiPZuw2Z2F2LKx2MO9WaZQHly2i1VvZSqEVfYWvaye1zzlhIG8Vw+al9
- m2Yq8ma++vhZLWaIJoHNYfDOesRqtECWGYK3G5uiriMOnsP1AU8KA1ADzzfrSI8tqjIx
- BSQI6iAbysKNo1d2pNSktysjRkRxcfrBJGlrlGwGfsNaunmAV3eUcrxfD/K2vbXlgbQF
- QjHw==
-X-Gm-Message-State: AOJu0Yyfi+t2JUZfbuRuK41r5nDIuvK1q80zWtGngiqqlDQH4aFsC0jl
- 7caNgTAMw8xdcJMowHkWmjkYcotJ9xr88E3SCnWx+T1bsVbar551ah0X+Wbw7wg3zz4=
-X-Gm-Gg: ASbGncsOeb5XBj8exdP6q5N6acm4ruCRR9imbJ2a5a2wuva/tSt9d1R66pvbV38lJch
- grLw6DYstANahXfrbo++QzTHuxtOixFsWE5KFDuVZv0pRhLiaUPc5ZJxk0GDnUESI3aTgkz0Qb2
- dHHgzmdNymhoemruNiRFgVHP91td4AGehaqrfS+DlUb3IxJrJCWxshlwUBBQwW+W5ZxeiVxvW/L
- qH0Ji9szjUSyyfeU8rWPyG+7CQSavxiNvupgxse72GJbOMQil1ksYd5z38j5/KeAu6/ti7hMQQK
- tTBrs86/cFh86XEQi/hY1xMUE6YEDjwCYq5ePz24wCan+CgqGoad8WCSZddz/AtFPqf4VciXnQ1
- xwWTxXUvsR+7dSgfNATnaY1c2p1ofgakYow/vWQVCVuU/P3VsUwjN7QQH/OX0OsKljwnQK5YEau
- 83/2qskB9Lgbk62jtAhz8gTyLB26hEG783lCPWi6is395gE/JfYQ==
-X-Google-Smtp-Source: AGHT+IG8I9ZNUQtNlu7PNtrNAegaF+KUw50xctG25RPwyp7hMsk7iYtgE+bDSPARZS1HSCif24N+6A==
-X-Received: by 2002:a05:6830:3147:b0:7c7:59a1:48d7 with SMTP id
- 46e09a7af769-7c798b895f6mr10532935a34.2.1764188968565; 
- Wed, 26 Nov 2025 12:29:28 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1764193922; x=1764798722;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=U8PkgeSSYjcbMyxupmWPQirg7lf5ayGICl/4OxxR5G8=;
+ b=NxhKBv+IHG2Y857YFcqroUPK3yYWJh/Hr1hhcaj7RYZ54pKjP6wHLxSHswrAkNs66F
+ ANR/tRWGZBDYmaUE4VYYZlWBQg366mD14enUev6l4pMd84JKV7pGZZj9TgUzAqrGBlwh
+ /2U/Xp4lSvcJe5e7/HSK+W8S3E1GUD5VsQ1KplkkUQ5ELNEn8hAcQW6P/dvEXiV71nOY
+ iQUlsTX9WphAs56IO7ciCgbM4+8S364ifvS8jB1CzeVMjfe/LacBVb1zenveHcfgZzlx
+ 3ODz10DXjuCRxr1Z7R6TixN2lsN6pJRBvVZdj8AX/ScwhxkCHtmA23jhiMBPgdcEpsRU
+ ZxaA==
+X-Gm-Message-State: AOJu0YxUzpZnuTS/UDkKmuvxHNfwDWiy9u5ZbUiMmSTbzIKcppEnzJR5
+ oFEIEnpz0WYJroZIAgx+rQ+zoo0kgxZEVnlR1kC8QZcY0glBV+lX1zd6tHHbvpOxEMsUv9LABW5
+ urKfE7hQ=
+X-Gm-Gg: ASbGnctSKHZf2ASpAXRjoLf1j4SkdqAFlDGumLAO+OvxNkKp8CFkQMk/RK+Ks8zSZ/r
+ vkwK15anh/yRP5AIw4Z0Fb0ve1FKOir9SLk28UgYn9nSoYV8X/Bw5EBc7Z8CxeDdsH8B/zUEPJ0
+ MmtxziLlSsZsqmZtrDNns5Dm0e99huld9oPNXd49OMFYVotVwfuuegG8FarxCTCoVvHmIqIiO0C
+ Q+bzq6+jCTWulw2Lnsg3i1RkAUVOmaukdQ/PKueSBwd1aYy9XE+Fs2A9Meb8RySXoKQG28FvVXb
+ WKBrxsXHiajAhBzGPqKhFgpiFwk0CSCD2Nj31cNIo/BLn5WgdFVy/iww8jOlAhit0gAn39vDu5F
+ FL/+TSF6yBHWIIoPrMGcGgHmNeXPaqKIuzwT7woMv046pqpFFeYWSxN1y4lGd/Qbz6c5Mv2HmTE
+ pTsZrAIHJuGLzcE6D+KcaC4FXNXt3o0TTCTx98jjOfRWaM/j8xubAB
+X-Google-Smtp-Source: AGHT+IEtCYxgpakdX3/bcZvh7mcut13IZB1+n71HzFoU5vYmr+V13El+ISGbbMug2qssEzia8jE/dw==
+X-Received: by 2002:a05:6830:6998:b0:7c7:2c63:f2d6 with SMTP id
+ 46e09a7af769-7c7c412ecc7mr4261704a34.11.1764193921712; 
+ Wed, 26 Nov 2025 13:52:01 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ec9dc21868sm9548183fac.14.2025.11.26.12.29.27
+ 586e51a60fabf-3ec9dc21380sm9544731fac.12.2025.11.26.13.52.01
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Nov 2025 12:29:28 -0800 (PST)
-Date: Wed, 26 Nov 2025 14:29:25 -0600
+ Wed, 26 Nov 2025 13:52:01 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, "Andrew F. Davis" <afd@ti.com>
-Subject: Re: [PATCH] configs: am335x_hs_evm_spi_defconfig: Remove duplicate
- symbols
-Message-ID: <20251126202925.GU2125796@bill-the-cat>
-References: <20251126-topic-am33-hs-evm-remove-duplicate-v2026-01-v1-1-5008cdb30536@baylibre.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] Dockerfile: Switch to distro-provided trace-cmd
+Date: Wed, 26 Nov 2025 15:52:00 -0600
+Message-ID: <20251126215200.3887177-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="azeO4BxB70yyrky5"
-Content-Disposition: inline
-In-Reply-To: <20251126-topic-am33-hs-evm-remove-duplicate-v2026-01-v1-1-5008cdb30536@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,51 +93,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Now that we have moved to Ubuntu 24.04 the distribution provided
+trace-cmd is new enough for our needs. Switch to installing that and
+stop building it from source.
 
---azeO4BxB70yyrky5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ tools/docker/Dockerfile | 17 +----------------
+ 1 file changed, 1 insertion(+), 16 deletions(-)
 
-On Wed, Nov 26, 2025 at 09:25:56PM +0100, Markus Schneider-Pargmann (TI.com=
-) wrote:
-> Remove symbols already present in the included file.
->=20
-> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
-> ---
->  configs/am335x_hs_evm_spi_defconfig | 3 ---
->  1 file changed, 3 deletions(-)
->=20
-> diff --git a/configs/am335x_hs_evm_spi_defconfig b/configs/am335x_hs_evm_=
-spi_defconfig
-> index df009844defad13109adf2523580181b6ed6b5ca..ad1777f2bcb45bd2c8424011a=
-dc231f0e7d4ceee 100644
-> --- a/configs/am335x_hs_evm_spi_defconfig
-> +++ b/configs/am335x_hs_evm_spi_defconfig
-> @@ -1,8 +1,5 @@
->  #include <configs/am335x_hs_evm_defconfig>
-> =20
-> -CONFIG_ARM=3Dy
-> -CONFIG_ARCH_OMAP2PLUS=3Dy
-> -
->  CONFIG_SPL_SPI_FLASH_SUPPORT=3Dy
->  CONFIG_SPL_SPI_SUPPORT=3Dy
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 630b7f0e1416..f2ee724d118c 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -139,6 +139,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+ 	sudo \
+ 	swig \
+ 	texinfo \
++	trace-cmd \
+ 	util-linux \
+ 	uuid-dev \
+ 	vboot-kernel-utils \
+@@ -310,22 +311,6 @@ RUN git clone https://github.com/stefanberger/swtpm /tmp/swtpm && \
+ 	make install && \
+ 	rm -rf /tmp/swtpm
+ 
+-# Build trace-cmd
+-RUN mkdir /tmp/trace && \
+-    git clone https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git /tmp/trace/libtraceevent && \
+-    cd /tmp/trace/libtraceevent && \
+-    make -j$(nproc) && \
+-    sudo make install && \
+-    git clone https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git /tmp/trace/libtracefs && \
+-    cd /tmp/trace/libtracefs && \
+-    make -j$(nproc) && \
+-    sudo make install && \
+-    git clone https://github.com/rostedt/trace-cmd.git /tmp/trace/trace-cmd && \
+-    cd /tmp/trace/trace-cmd && \
+-    make -j$(nproc) && \
+-    sudo make install && \
+-    rm -rf /tmp/trace
+-
+ # Build coreboot
+ RUN wget -O - https://coreboot.org/releases/coreboot-25.03.tar.xz | tar -C /tmp -xJ && \
+     cd /tmp/coreboot-25.03 && \
+-- 
+2.43.0
 
-Did you confirm that buildman still works? That's usually the reason we
-have this kind of duplication, thanks.
-
---=20
-Tom
-
---azeO4BxB70yyrky5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSdjIgAKCRAr4qD1Cr/k
-CoQQAQCK0kamNEv1AtF2qnBfeXT6FkN30ZaSTFNsAl1Z8kxA5wD/eoUohfsYp7EM
-PaCGDDsDJAsoUjn13IFU572VwwkCeQA=
-=BnJs
------END PGP SIGNATURE-----
-
---azeO4BxB70yyrky5--
