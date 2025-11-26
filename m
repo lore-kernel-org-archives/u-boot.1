@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20001CCF9F5
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 22:17:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D085CCF9F5
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 22:18:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A888A83A71;
-	Wed, 26 Nov 2025 23:17:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0ED6A83A98;
+	Wed, 26 Nov 2025 23:18:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="WM+1RJRw";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="b87zj1dU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 982B483A8C; Wed, 26 Nov 2025 23:17:36 +0100 (CET)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id 71D6783A9F; Wed, 26 Nov 2025 23:18:01 +0100 (CET)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEAD483A64
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 23:17:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9782E83A64
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 23:17:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1764195385;
- bh=/oOm9g3y6UJyuEhHw5QHLV9Wo39h1vgZKCo+o4Bc1qw=;
+ s=s2025; t=1764195392;
+ bh=cQIadE8rav5PEG4WJhAK9orAT8v45e69yV+wQ/AjPNs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=WM+1RJRwRFBBQfq+DfUQ5ml3HCVx4ox67krhFDEIn+/NX2hjlBzxfneUtfeylJ+d2
- K19YodlX3OYzm1aHtlQiGo2NQFyYqX9LnPCGojHwM6B2GUq56N+zSQNdLmqLDTWx/d
- taioLlXsJYp1Nwi/hyrI4tbWNAtwoZ3/RFAbWsFZza3xLIwhKCV2L+OMEGQNZ8tUZA
- PcYx5j5obmi+2LIW/AweM+XCLj1arTcy91/c90XaXcyBX+sgKcjfhisPyt6qNr41dn
- 69PcLzuCq/6SlY3nqEylJN4xzXXGw67wJcIYhrg/ZTnRmwljpHaslYWNKku1bKwWCO
- 60sS691FOri4w==
+ b=b87zj1dURToxGjQufAq5nX8wzO/DAFkqCCm37HQzXYL47tNnYoVUd2fBXVaV2miyY
+ v8AYPc2WepFojTjc2dBwwbA1XY7R5VAgzfSdQgp1P8PfH1cj0etEYIDGKPhuCY3T6A
+ rhlfjb/RCuvqRmh5YNs5jdCv+xE669L8Djw0LwuJW2Y2t/Z3uUKOzfJoNEJ6r0I1Mi
+ 23mPafKhUq4T4DgbbCK5EsWlX0Ub2Vq7/FQQzdLVoOPaQQg05GKopT2Q1clJquigD5
+ lICbRZyRTMDtptVfMC6tv+B0zYFUtc8p/pQ0ecnDJMSUilaIzFeBvbzDOBtEvdIX7y
+ ZEd7TblCmE1AQ==
 Received: from hay.lan (unknown [IPv6:2605:59c0:2078:cf00:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 04E9BB221311;
- Wed, 26 Nov 2025 23:16:23 +0100 (CET)
+ by freeshell.de (Postfix) with ESMTPSA id C06F8B22131B;
+ Wed, 26 Nov 2025 23:16:30 +0100 (CET)
 From: E Shattow <e@freeshell.de>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Minda Chen <minda.chen@starfivetech.com>,
@@ -45,10 +45,10 @@ To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
  Icenowy Zheng <uwu@icenowy.me>
-Subject: [RFC PATCH v1 1/4] riscv: dts: starfive: Add Orange Pi RV from
- upstream Linux for-next
-Date: Wed, 26 Nov 2025 14:15:26 -0800
-Message-ID: <20251126221552.87574-2-e@freeshell.de>
+Subject: [RFC PATCH v1 2/4] board: starfive: visionfive2: Add Orange Pi RV
+ selection by product_id
+Date: Wed, 26 Nov 2025 14:15:27 -0800
+Message-ID: <20251126221552.87574-3-e@freeshell.de>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20251126221552.87574-1-e@freeshell.de>
 References: <20251126221552.87574-1-e@freeshell.de>
@@ -70,98 +70,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Import dts for Orange Pi RV as per-board automatic inclusion. This
-commit should be reverted when devicetree-rebasing release candidate for
-Linux 6.19 is sync'ed.
+Add identifier for Orange Pi RV to dts selection callback in SPL, and to
+fdtfile environment variable default value selection in payload.
 
 Signed-off-by: E Shattow <e@freeshell.de>
 ---
- arch/riscv/dts/jh7110-orangepi-rv-u-boot.dtsi | 76 +++++++++++++++++++
- 1 file changed, 76 insertions(+)
- create mode 100644 arch/riscv/dts/jh7110-orangepi-rv-u-boot.dtsi
+ board/starfive/visionfive2/spl.c                  | 3 +++
+ board/starfive/visionfive2/starfive_visionfive2.c | 2 ++
+ 2 files changed, 5 insertions(+)
 
-diff --git a/arch/riscv/dts/jh7110-orangepi-rv-u-boot.dtsi b/arch/riscv/dts/jh7110-orangepi-rv-u-boot.dtsi
-new file mode 100644
-index 00000000000..053c35992ec
---- /dev/null
-+++ b/arch/riscv/dts/jh7110-orangepi-rv-u-boot.dtsi
-@@ -0,0 +1,76 @@
-+// SPDX-License-Identifier: GPL-2.0 OR MIT
-+/*
-+ * Copyright (C) 2025 Icenowy Zheng <uwu@icenowy.me>
-+ */
-+
-+/dts-v1/;
-+#include "jh7110-common.dtsi"
-+
-+/ {
-+	model = "Xunlong Orange Pi RV";
-+	compatible = "xunlong,orangepi-rv", "starfive,jh7110";
-+
-+	/* This regulator is always on by hardware */
-+	reg_vcc3v3_pcie: regulator-vcc3v3-pcie {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc3v3-pcie";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-always-on;
-+	};
-+
-+	wifi_pwrseq: wifi-pwrseq {
-+		compatible = "mmc-pwrseq-simple";
-+		reset-gpios = <&sysgpio 62 GPIO_ACTIVE_LOW>;
-+	};
-+};
-+
-+&gmac0 {
-+	assigned-clocks = <&aoncrg JH7110_AONCLK_GMAC0_TX>;
-+	assigned-clock-parents = <&aoncrg JH7110_AONCLK_GMAC0_RMII_RTX>;
-+	starfive,tx-use-rgmii-clk;
-+	status = "okay";
-+};
-+
-+&mmc0 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	cap-sd-highspeed;
-+	mmc-pwrseq = <&wifi_pwrseq>;
-+	vmmc-supply = <&reg_vcc3v3_pcie>;
-+	vqmmc-supply = <&vcc_3v3>;
-+	status = "okay";
-+
-+	ap6256: wifi@1 {
-+		compatible = "brcm,bcm43456-fmac", "brcm,bcm4329-fmac";
-+		reg = <1>;
-+		/* TODO: out-of-band IRQ on GPIO21, lacking pinctrl support */
-+	};
-+};
-+
-+&mmc1 {
-+	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_HIGH>;
-+};
-+
-+&pcie0 {
-+	status = "okay";
-+};
-+
-+&pcie1 {
-+	status = "okay";
-+};
-+
-+&phy0 {
-+	rx-internal-delay-ps = <1500>;
-+	tx-internal-delay-ps = <1500>;
-+	motorcomm,rx-clk-drv-microamp = <3970>;
-+	motorcomm,rx-data-drv-microamp = <2910>;
-+	motorcomm,tx-clk-adj-enabled;
-+	motorcomm,tx-clk-10-inverted;
-+	motorcomm,tx-clk-100-inverted;
-+	motorcomm,tx-clk-1000-inverted;
-+};
-+
-+&pwmdac {
-+	status = "okay";
-+};
+diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
+index 2d9431d2976..684605278c0 100644
+--- a/board/starfive/visionfive2/spl.c
++++ b/board/starfive/visionfive2/spl.c
+@@ -131,6 +131,9 @@ int board_fit_config_name_match(const char *name)
+ 		    !strncmp(get_product_id_from_eeprom(), "MARC", 4) &&
+ 		    !get_mmc_size_from_eeprom()) {
+ 		return 0;
++	} else if (!strcmp(name, "starfive/jh7110-orangepi-rv") &&
++		    !strncmp(get_product_id_from_eeprom(), "XOPIRV", 6)) {
++		return 0;
+ 	} else if (!strcmp(name, "starfive/jh7110-pine64-star64") &&
+ 		    !strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
+ 		return 0;
+diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
+index 6c39fd4af35..d59622f6b64 100644
+--- a/board/starfive/visionfive2/starfive_visionfive2.c
++++ b/board/starfive/visionfive2/starfive_visionfive2.c
+@@ -63,6 +63,8 @@ static void set_fdtfile(void)
+ 		} else {
+ 			fdtfile = "starfive/jh7110-milkv-marscm-lite.dtb";
+ 		}
++	} else if (!strncmp(get_product_id_from_eeprom(), "XOPIRV", 6)) {
++		fdtfile = "starfive/jh7110-orangepi-rv.dtb";
+ 	} else if (!strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
+ 		fdtfile = "starfive/jh7110-pine64-star64.dtb";
+ 	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110A", 7)) {
 -- 
 2.50.0
 
