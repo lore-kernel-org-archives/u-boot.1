@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97348D10F32
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 12:17:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0348DD10F32
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 12:18:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDC7B841F2;
-	Wed, 26 Nov 2025 13:17:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 249B6841E2;
+	Wed, 26 Nov 2025 13:17:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="S89S+q8z";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="GfIdbLcV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08C6A841E6; Wed, 26 Nov 2025 13:17:38 +0100 (CET)
-Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::ba])
+ id 01BC383FF4; Wed, 26 Nov 2025 13:17:41 +0100 (CET)
+Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com
+ [91.218.175.178])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D28A8409C
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 13:17:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A8088409C
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 13:17:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,24 +29,24 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1764159454;
+ s=key1; t=1764159458;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=aAD7QP/4I5IdkuVeN3KvcpRpNsVk/n4EAUkXu7L9gyY=;
- b=S89S+q8zEk2PYKFmy3qLuNLqWJ14E5p2nbf/Z+wJzzmD1BzcdKZxpLbw0iArOwWzdzfS5d
- 7BWiRU5RAVmjW9Ix/d0PV/U8IJNGSOaJlKO/eHkEjrIP1YhiJ6t3rMWs7Cs561rteYDotM
- l5JiSBHNM+kxf5j1L8Who3x6/CKZDRtIWOStCZg1Lo/PiljEgA8vIAXTbG70YMjXRxwMfh
- L049UZhUTTI6d66SUByvDk6ZOkfAER5JHKtck1MCPLoye9xKIeIws2kZtqBy0emjUhxo/B
- NKNTKp7CUapVb6UK/LNz/5o0PFyAxFDx39gJRFoaEkkYjjDTJib3kMUYaqmgsQ==
+ bh=W8aXFaUKIvMuOO1Dwwvmh1aNLKqrD3RskAzRCdE1C4o=;
+ b=GfIdbLcVZZbDozQytYj+w0tsQXKQkqMU7PTu9c2m1uLwhec40nzeP8fpf3c8rlCwv5u/UE
+ P0Eo2duMbTSabSupsDw30/QQE5VALL1im17QL2OtB/7KApV8d9C7IJYZ20Fj7V4R8H1Jrn
+ QcEqoOHKtDgjnwh2NnzY1bunbY0vDDtjzyldzKA721BGIbZ64qmk1/aMdPDMJvCm9soHeC
+ J8kS8Kh0zCjccja1N76pBixyGX6gYGG8D3PLgyWIo7DzkU546mYSRlPnV3Xz4NkceckNTv
+ CYYml3gYgmdtz+qrEaeiDZW+BTDx1C83voPWsR2Fh1lNHBYF0vhnk2xl2yQcIg==
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 26 Nov 2025 12:17:05 +0000
-Subject: [PATCH v5 03/10] serial: serial_meson: add minimal non-DM driver
+Date: Wed, 26 Nov 2025 12:17:08 +0000
+Subject: [PATCH v5 06/10] arm: dts: meson: add meson-gxbb-u-boot.dtsi
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251126-spl-gx-v5-3-6cbffb2451ca@postmarketos.org>
+Message-Id: <20251126-spl-gx-v5-6-6cbffb2451ca@postmarketos.org>
 References: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
 In-Reply-To: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -57,21 +57,21 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  ~postmarketos/upstreaming@lists.sr.ht, 
  Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4802;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4134;
  i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=xkk9Q5RIo13bzB5He5lBndoT9V0UyuHWbyNMo5H0T0c=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBpJu/XlIRhKHuWw+BDfSrSqGeYai1mECLNIURFs
- 2meuiKKlqKJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaSbv1wAKCRCEr8vQ14ma
- A2foD/4wWkWTM7yGF+MdEI4W5ikhlceTwldN1AK4Fnj1mNhmqsI/N02b2R6cPoF9K8nQlO8AOni
- mMDd7HWxZTJggmMeWIkIbTGgDRk+C83/QMhgiA8opNl7EJHrhGtYzJhlb65H33eN44x+9WzpVCX
- 6vOStD68obn7z7FYfshZA6/01cksPlO2PWA/sTp8mcrni+KmYwmnHniEsH1zaMdP1Drl6KwaYSX
- EiODj3kDBE3FVaz3xN0pz0s6yV3vm839NIOxtWWHP0DewKoJPgMmn8KHJSc3bIlNdL5CHaWIm/u
- H/xfoI+11c/Y2Xis3NA3EySa4jk6ohoWwpXbF35sDIU11i1Tg7L3rVch9CMDQ6+Fq0zLMaNjmpw
- aaj/6du1fEtH1Wijf0Db8nhybi9YK7OYw4IqDW19OPlTy0gXUELb8Je2rUSVZsnSziks8Cw6v2K
- Nah3qC8X9NnvtsLKobvjCVg6zhyIflW9zphCFas0Vwqnzx4jSsYJ7RsmKQOKuHLPvfufU6LSLtf
- wNCu9iVeKT8c/zHBa0AvrFwsi5gKDCsEAVDcCUshnDFmpPWVhQsgYnq6XaLd4+//kwoXE9rrwFK
- lpE82BEfga4zZ1hcGh0k3IBXcHPHRk/GyJ59L0+p5U31iV4zLVA/ec9JCmpQMfvE5rbsxLXFwCd
- O9gLXYONnsBBpqg==
+ bh=vi4TTr1wv1tNC9Hsm0/7a1YhPJqvY3kp8HVjOfiWWUg=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBpJu/Yq+o3AZn+63Z0p4s1Aerq1cl6qJdwx5FOU
+ F2sM9j5RPaJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaSbv2AAKCRCEr8vQ14ma
+ A60UD/9+eTtf3TPczI9Itg19R08WKWGYUIPLAPHSu9b8VPj+E09NylvkNlFVV/s1r/ndlP5WWxy
+ n0GklwdpnYtXgSpe2HqNUeKlxO+tst81pOiS6wlaPhHfrK/P7UkUoX3OKYnNBB91UUwLxlvqZ4b
+ LQl855SnbJHPa40ts7CU685WtaXpEekIjFv9g3gNzAyz4/pyRJsw0YO/M/lTRsbmBsdATHRvzHm
+ 6Q8TaZjjaS7k+EuvjKejsKm5RqoN9hNFJly7GxD0dZVj0sfb6MzrLxDIlRetZ+XwdLsP5ctfgB2
+ r/pu8OTaP2mjeeqCOy04w3vK3IfQSAjiTwCFGmHMSiZPT9YTK4Ml8dMP4HGUCaZzj1AC3vIq8YX
+ 5XlA+YyqyWhKOs37Up8xt/FdfQ8ogA/PpX1eH9DmRdORAnPIaYgzlvFVRi0WjCzZoKuM4uQzqYH
+ wt6Fsq1mkg2aK9lxN/sS+uuD0lINVXIV2YaXICFBp3bnZNXtuNm3g4LXdn71kGD9D75Re/TBkrj
+ G8/uddIPv08k+CfjleXpPtd1hCYOw3oO2MUqo6WqNYJc38Ep1HRB9uId/D3yF8GV0Hp440ci5IC
+ LRbiMNwRLanovgjRH80D3bY5oZwTxR8WxueVDcXVZTJHNMvwfYue3mq1IF7pTLbJhcAmUNN5lcK
+ oQ53Gb+EwNw0VHg==
 X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
  fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
 X-Migadu-Flow: FLOW_OUT
@@ -91,190 +91,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is very limited and minimal, only implements putc/puts.
-This minimal driver is intended to be used in SPL, and other
-size-constrained situations.
+Add a common GXBB DTSI, similar to the meson-gxl-u-boot.dtsi file,
+which GXBB devicetrees can include.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
- drivers/serial/serial.c       |   2 +
- drivers/serial/serial_meson.c | 119 +++++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 120 insertions(+), 1 deletion(-)
+ arch/arm/dts/meson-gxbb-kii-pro-u-boot.dtsi     | 2 +-
+ arch/arm/dts/meson-gxbb-nanopi-k2-u-boot.dtsi   | 2 +-
+ arch/arm/dts/meson-gxbb-odroidc2-u-boot.dtsi    | 2 +-
+ arch/arm/dts/meson-gxbb-p200-u-boot.dtsi        | 2 +-
+ arch/arm/dts/meson-gxbb-p201-u-boot.dtsi        | 2 +-
+ arch/arm/dts/meson-gxbb-u-boot.dtsi             | 7 +++++++
+ arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi   | 2 +-
+ arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi | 2 +-
+ 8 files changed, 14 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/serial/serial.c b/drivers/serial/serial.c
-index e10ca6eef76..c0b1eb30561 100644
---- a/drivers/serial/serial.c
-+++ b/drivers/serial/serial.c
-@@ -129,6 +129,7 @@ serial_initfunc(pxa_serial_initialize);
- serial_initfunc(smh_serial_initialize);
- serial_initfunc(sh_serial_initialize);
- serial_initfunc(mtk_serial_initialize);
-+serial_initfunc(meson_serial_initialize);
- 
- /**
-  * serial_register() - Register serial driver with serial driver core
-@@ -167,6 +168,7 @@ int serial_initialize(void)
- 	smh_serial_initialize();
- 	sh_serial_initialize();
- 	mtk_serial_initialize();
-+	meson_serial_initialize();
- 
- 	serial_assign(default_serial_console()->name);
- 
-diff --git a/drivers/serial/serial_meson.c b/drivers/serial/serial_meson.c
-index bb79b972957..cc71381f87e 100644
---- a/drivers/serial/serial_meson.c
-+++ b/drivers/serial/serial_meson.c
-@@ -3,9 +3,11 @@
-  * (C) Copyright 2016 Beniamino Galvani <b.galvani@gmail.com>
+diff --git a/arch/arm/dts/meson-gxbb-kii-pro-u-boot.dtsi b/arch/arm/dts/meson-gxbb-kii-pro-u-boot.dtsi
+index 191c5192c68..4a027b9022b 100644
+--- a/arch/arm/dts/meson-gxbb-kii-pro-u-boot.dtsi
++++ b/arch/arm/dts/meson-gxbb-kii-pro-u-boot.dtsi
+@@ -4,7 +4,7 @@
+  * Author: Neil Armstrong <narmstrong@baylibre.com>
   */
  
-+#if CONFIG_IS_ENABLED(DM_SERIAL)
- #include <dm.h>
--#include <errno.h>
- #include <fdtdec.h>
-+#endif
-+#include <errno.h>
- #include <linux/kernel.h>
- #include <linux/bitops.h>
- #include <linux/compiler.h>
-@@ -25,6 +27,15 @@ struct meson_serial_plat {
- 	struct meson_uart *reg;
- };
+-#include "meson-gx-u-boot.dtsi"
++#include "meson-gxbb-u-boot.dtsi"
  
-+#if !CONFIG_IS_ENABLED(DM_SERIAL)
-+/* UART base address */
-+#if defined(CONFIG_MESON_GX)
-+#define AML_UART_BASE	0xc81004c0
-+#else /* G12A, AXG, ... */
-+#define AML_UART_BASE	0xff803000
-+#endif
-+#endif
-+
- /* AML_UART_STATUS bits */
- #define AML_UART_PARITY_ERR		BIT(16)
- #define AML_UART_FRAME_ERR		BIT(17)
-@@ -51,6 +62,7 @@ struct meson_serial_plat {
- #define AML_UART_REG5_USE_NEW_BAUD	BIT(23) /* default 1 (use new baud rate register) */
- #define AML_UART_REG5_BAUD_MASK		0x7fffff
+ &ethmac {
+ 	snps,reset-gpio = <&gpio GPIOZ_14 0>;
+diff --git a/arch/arm/dts/meson-gxbb-nanopi-k2-u-boot.dtsi b/arch/arm/dts/meson-gxbb-nanopi-k2-u-boot.dtsi
+index 2a245bbe7f2..53d5c0113fc 100644
+--- a/arch/arm/dts/meson-gxbb-nanopi-k2-u-boot.dtsi
++++ b/arch/arm/dts/meson-gxbb-nanopi-k2-u-boot.dtsi
+@@ -4,7 +4,7 @@
+  * Author: Neil Armstrong <narmstrong@baylibre.com>
+  */
  
-+#if CONFIG_IS_ENABLED(DM_SERIAL)
- static u32 meson_calc_baud_divisor(ulong src_rate, u32 baud)
- {
- 	/*
-@@ -245,6 +257,111 @@ U_BOOT_DRIVER(serial_meson) = {
- 	.plat_auto	= sizeof(struct meson_serial_plat),
- };
+-#include "meson-gx-u-boot.dtsi"
++#include "meson-gxbb-u-boot.dtsi"
  
-+#else
-+
-+static int meson_serial_init(void)
-+{
-+	struct meson_uart *const uart = (struct meson_uart *)AML_UART_BASE;
-+	u32 val;
-+
-+	val = readl(&uart->control);
-+	val |= (AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
-+	writel(val, &uart->control);
-+	val &= ~(AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
-+	writel(val, &uart->control);
-+	val |= (AML_UART_RX_EN | AML_UART_TX_EN);
-+	writel(val, &uart->control);
-+
-+	return 0;
-+}
-+
-+static int meson_serial_stop(void)
-+{
-+	return 0;
-+}
-+
-+static void meson_serial_setbrg(void)
-+{
-+}
-+
-+static void meson_serial_putc(const char ch)
-+{
-+	struct meson_uart *uart = (struct meson_uart *)AML_UART_BASE;
-+
-+	/* On '\n' also do '\r' */
-+	if (ch == '\n')
-+		meson_serial_putc('\r');
-+
-+	while (readl(&uart->status) & AML_UART_TX_FULL)
-+		;
-+
-+	writel(ch, &uart->wfifo);
-+}
-+
-+static void meson_serial_puts(const char *s)
-+{
-+	while (*s)
-+		meson_serial_putc(*s++);
-+}
-+
-+static int meson_serial_getc(void)
-+{
-+	struct meson_uart *const uart = (struct meson_uart *)AML_UART_BASE;
-+	uint32_t status = readl(&uart->status);
-+
-+	if (status & AML_UART_RX_EMPTY)
-+		return -EAGAIN;
-+
-+	if (status & AML_UART_ERR) {
-+		u32 val = readl(&uart->control);
-+
-+		/* Clear error */
-+		val |= AML_UART_CLR_ERR;
-+		writel(val, &uart->control);
-+		val &= ~AML_UART_CLR_ERR;
-+		writel(val, &uart->control);
-+
-+		/* Remove spurious byte from fifo */
-+		readl(&uart->rfifo);
-+		return -EIO;
-+	}
-+
-+	return readl(&uart->rfifo) & 0xff;
-+}
-+
-+static int meson_serial_tstc(void)
-+{
-+	struct meson_uart *const uart = (struct meson_uart *)AML_UART_BASE;
-+	uint32_t status = readl(&uart->status);
-+
-+	if (status & AML_UART_RX_EMPTY)
-+		return 0;
-+	return 1;
-+}
-+
-+struct serial_device meson_serial_device = {
-+	.name	= "meson_serial",
-+	.start	= meson_serial_init,
-+	.stop	= meson_serial_stop,
-+	.setbrg	= meson_serial_setbrg,
-+	.getc	= meson_serial_getc,
-+	.tstc	= meson_serial_tstc,
-+	.putc	= meson_serial_putc,
-+	.puts	= meson_serial_puts,
-+};
-+
-+void meson_serial_initialize(void)
-+{
-+	serial_register(&meson_serial_device);
-+}
-+
-+__weak struct serial_device *default_serial_console(void)
-+{
-+	return &meson_serial_device;
-+}
-+
-+#endif
-+
- #ifdef CONFIG_DEBUG_UART_MESON
+ &ethmac {
+ 	snps,reset-gpio = <&gpio GPIOZ_14 0>;
+diff --git a/arch/arm/dts/meson-gxbb-odroidc2-u-boot.dtsi b/arch/arm/dts/meson-gxbb-odroidc2-u-boot.dtsi
+index 5a2be8171e1..1bd000eaa86 100644
+--- a/arch/arm/dts/meson-gxbb-odroidc2-u-boot.dtsi
++++ b/arch/arm/dts/meson-gxbb-odroidc2-u-boot.dtsi
+@@ -4,7 +4,7 @@
+  * Author: Neil Armstrong <narmstrong@baylibre.com>
+  */
  
- #include <debug_uart.h>
+-#include "meson-gx-u-boot.dtsi"
++#include "meson-gxbb-u-boot.dtsi"
+ 
+ / {
+ 	smbios {
+diff --git a/arch/arm/dts/meson-gxbb-p200-u-boot.dtsi b/arch/arm/dts/meson-gxbb-p200-u-boot.dtsi
+index c35158d7e9e..1bef64dc01d 100644
+--- a/arch/arm/dts/meson-gxbb-p200-u-boot.dtsi
++++ b/arch/arm/dts/meson-gxbb-p200-u-boot.dtsi
+@@ -4,4 +4,4 @@
+  * Author: Neil Armstrong <narmstrong@baylibre.com>
+  */
+ 
+-#include "meson-gx-u-boot.dtsi"
++#include "meson-gxbb-u-boot.dtsi"
+diff --git a/arch/arm/dts/meson-gxbb-p201-u-boot.dtsi b/arch/arm/dts/meson-gxbb-p201-u-boot.dtsi
+index c35158d7e9e..1bef64dc01d 100644
+--- a/arch/arm/dts/meson-gxbb-p201-u-boot.dtsi
++++ b/arch/arm/dts/meson-gxbb-p201-u-boot.dtsi
+@@ -4,4 +4,4 @@
+  * Author: Neil Armstrong <narmstrong@baylibre.com>
+  */
+ 
+-#include "meson-gx-u-boot.dtsi"
++#include "meson-gxbb-u-boot.dtsi"
+diff --git a/arch/arm/dts/meson-gxbb-u-boot.dtsi b/arch/arm/dts/meson-gxbb-u-boot.dtsi
+new file mode 100644
+index 00000000000..c35158d7e9e
+--- /dev/null
++++ b/arch/arm/dts/meson-gxbb-u-boot.dtsi
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2019 BayLibre, SAS.
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ */
++
++#include "meson-gx-u-boot.dtsi"
+diff --git a/arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi b/arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi
+index 3743053eb9c..cd2e9b5099e 100644
+--- a/arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi
++++ b/arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi
+@@ -4,7 +4,7 @@
+  * Author: Neil Armstrong <narmstrong@baylibre.com>
+  */
+ 
+-#include "meson-gx-u-boot.dtsi"
++#include "meson-gxbb-u-boot.dtsi"
+ 
+ &ethmac {
+ 	snps,reset-gpio = <&gpio GPIOZ_14 0>;
+diff --git a/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi b/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi
+index 3743053eb9c..cd2e9b5099e 100644
+--- a/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi
++++ b/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi
+@@ -4,7 +4,7 @@
+  * Author: Neil Armstrong <narmstrong@baylibre.com>
+  */
+ 
+-#include "meson-gx-u-boot.dtsi"
++#include "meson-gxbb-u-boot.dtsi"
+ 
+ &ethmac {
+ 	snps,reset-gpio = <&gpio GPIOZ_14 0>;
 
 -- 
 2.51.2
