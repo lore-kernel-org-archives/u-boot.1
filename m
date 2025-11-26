@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0206D111A7
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 22:50:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 476FBD111A7
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 22:50:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4372C83D13;
+	by phobos.denx.de (Postfix) with ESMTP id 8412883FD6;
 	Wed, 26 Nov 2025 23:50:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="15ewJ2tc";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Uuk2Zw4o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1240383A64; Wed, 26 Nov 2025 21:31:54 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 134FA83AA9; Wed, 26 Nov 2025 21:31:55 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08A9383A64
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 21:31:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FD7D839D9
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 21:31:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-477a2ab455fso1031755e9.3
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 12:31:52 -0800 (PST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-42b32900c8bso161216f8f.0
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 12:31:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764189111; x=1764793911;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764189112; x=1764793912;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mpKjS3M3rM9RKB3wRTEiBn4P5Eu1c+GXMyKW+/dod08=;
- b=15ewJ2tcF3+hdKf+60u0o8Y0+4rTXGzIKXq2XlOAv1XLUipe2JkQK0HK1Yh2kJxWw7
- f5wCE4XGy9BiMQavy+NeDzEbVv+xP5nLYXk4coBGa2FlgicJ5a2QBKBmWEOxYjlvklYE
- rCorOfxHxnyIlEYHtD2m+L7OoLqSqMJM9b0AWRntfbfxrHddcbZlKzllZvRfWH0tdlka
- yIiJAH8agXtLS50EXSLjI+nqj4Bqz6RNGIg7TAQLxBLDX4AgOIHQ/kIL4b6j/2rwdQIX
- lWx+4P2gBs56VhnY0jectoUXIvVgq37JSf7UYJhlzzPqLop6btJjqyAEG0Evrlmfi+Mc
- kMPQ==
+ :reply-to; bh=chxytI03mFjueu6/FFpWHWHz1dBGwXEIshhQsaDzdAg=;
+ b=Uuk2Zw4oION1RkXad7gkS26+tfIRqpo4P5JWMr/dN9CJQ74GjmgHvtkg5g+mRFJ9KI
+ LuLR8qcmnFVWfJTD/URL7AzK7Ye3J0aMb45l3GPfxeWSPZUeZ28lwSgOmln2HzwNijJv
+ cndku7cUDUkdYOC5UDJD8cCPrfSzKGjrrFJYwowOcKG3heRZw5N+6aVo4ZWocGo16sF7
+ I7HVPSDl8POtTs1Fn6TvrqB2iUfpNvR8600vrm21TQJSrk2tng7eLZ/KCe2Ri2/Y3MRd
+ rzeC5GXDsslCGR4v23snCA4T0xRhCOsA6B0G/5MLIzSkOg08gAT9cEbkUTW2dVAZ0IQE
+ 1b4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764189111; x=1764793911;
+ d=1e100.net; s=20230601; t=1764189112; x=1764793912;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=mpKjS3M3rM9RKB3wRTEiBn4P5Eu1c+GXMyKW+/dod08=;
- b=qBLYpmc/3De1gdUVdpvYIezojKyKIx4Yuf9Q4iSHS4muPmO7l226QZe/1Z2mebhl4g
- +oWdYHcEauSMOoRqzm2UAW5oH3tIu/smkHOC8L93T9BvIRGX6HfJyiPdpWKG7x9sbvjz
- MWZ92ltqZcQ+nGbNRggOzizYsUXlqtCgRplVF1N3LajgPJBLtERFbJLSRfYK8WN9ZNoO
- CpPWtFU6531/F3ye5pfSuEEdd/1N+on0BGeECdeUlAbI/ws8+Oem0+ntU5n6DWfU4XHz
- +dmvf/dplXqsjza/5+epz3PKZVZjOkpBrF1GTk/85YrnIphhqVepqGYIc6Dy0HZrkQQR
- CsmA==
-X-Gm-Message-State: AOJu0YxeSLXipOBbj/x8/r5C/WzGr+ZpHAVzoED/NMVyZDJVdxHEZhKI
- 5fZnxlHviyMDj7wT7yV+dtKvyBRLpfOJPmFIEM9FX9gzMfmUaEZhqOJy2/+nqT898vk=
-X-Gm-Gg: ASbGnctKl0DNOKIHen9gF9fv9kQvX4AkOGZCmUh8uQgi9xLZ7kf3MWDhzY8q6fftEYE
- x/Bu37lr79R37ierTw0wB9GMty47JHZkP6EADZYvXBh36SySxFx6AAlNjy8tKRlPFW2FhVYdzUy
- 9hXgsrDcVUvQRFAP/JAalzYJjZJI+cnbTj8JwTm81ajxZwt2YAH4eOUTUzub5fjS563FIOwjcoj
- Gztm63Z1D1S3a5cMQsf/Xug4yp/yomdQZgACIdqKy/1ws6Eg0zQS2tu53V8DtugauRQLAWYKemH
- fLc0bn0i1bUiANqgfPc1+vzzSxbbB7Oh867xWpMjznYnosYrjwpRgNSODIxkKdVdgrr73q5G0xb
- VUXDX0vrecuepbLXB4DRVEaTFGA2T1f3ozaBKo03kuRjzuOMlXqzJG4JtEddVbFGuSeLv9my6N8
- T8p6fpUcQ=
-X-Google-Smtp-Source: AGHT+IEr/V9As4h9RinUkxEA9g1JOewsxDqIR+Y4gc0WVEvig+G3rjf980mAS+fC1B7sau+41TjlFg==
-X-Received: by 2002:a05:600c:5489:b0:45d:5c71:769a with SMTP id
- 5b1f17b1804b1-477c112400amr185541945e9.26.1764189111469; 
- Wed, 26 Nov 2025 12:31:51 -0800 (PST)
+ bh=chxytI03mFjueu6/FFpWHWHz1dBGwXEIshhQsaDzdAg=;
+ b=oZ70TOrfN6IqiklzNrcjM9E52U4m5Z/HCIMbvMKNBoze2F09FjB5TPfT/VrkexRA7I
+ Ef3PZAUA+7XLDcXi5Sc38r1dQweO38qz3CwCK+cuU1mINPOROa2JR8H1bqPJyHGturxn
+ Lyer9U5Lo8oFdPd6/jCwVeSKOaUWRuMnMVjez8XrVXz7sAKQlMkNFQoLxaz8daeE/8i+
+ TCm9bJHU9CwHSvjKXcBenRGO8M1Dt1welVwHhZiFr3SsanPgDqjRohIK2U4LVxrUGybl
+ v2Pxf2IpnZDoLZjv52OxB8cGRmui8PUHB2mNsQk84wY1qdtAFUFFWVLdofQnVCmUrxVj
+ WI8Q==
+X-Gm-Message-State: AOJu0YxxldSQ1JALyHalcH/L3TgXuNy9Ktsmwjm+zkatY7O2GfbpjXAo
+ 9UFeAq2I9zJ7Z0D8wAsAjt+Z7FGtvLO8Sj8uEgGERZi7gci7Yzrk8mNvZCA0UJac56Y=
+X-Gm-Gg: ASbGncv1xrvcdmuqn5jA7x7mSw+ojIRq23nxNR0K2dwvyYVxisZMud+yxGAIjVEuGEP
+ ZdBG4kRqT/VZqGwinmwQpCaI9E9tawe1ufSiOxq1KMROz1//ljB1nXAexF9hcj5zbw2l4lxHEJj
+ DMywHDPR5sRbVYCg+VQJBblaLsYBQgBEpyQls+HaIIv6bOkDQB1kbyTZTcj74s8bMOtFZ5aVDa1
+ XIi5di7pDQ80L1+Pwp/mss46mfxifHgF/y2RPMftD/psZ2mlOZK28Uwt1nT6iSNp8u442qB6UJe
+ czkOVZbdTEvU3uU9mzUzQKyIDd2vd1ONY3CqNVA9O6LUuqlnW7hKg0uEQH+itBI3F2y45XVuHqu
+ fJcXmxCRfUIEpfqaO+XeNUzTdBXoaOJsIWE+UDeXMcX9gxKSkiiw3jhYgp8Lg5ZnawCdfEs/6n0
+ XGsS7c/VE9eQI9qKn+gA==
+X-Google-Smtp-Source: AGHT+IElGSSo87y2vMKkczM5Eh4ZW283nLbnLljg54DqD05FvBjFD8OxW5NJ3kGYRP+f7P+CtipYHw==
+X-Received: by 2002:a05:6000:22c9:b0:42b:2eb3:c910 with SMTP id
+ ffacd0b85a97d-42cc1cd9466mr21316753f8f.3.1764189112506; 
+ Wed, 26 Nov 2025 12:31:52 -0800 (PST)
 Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
  by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-4790adddb4bsm60143665e9.7.2025.11.26.12.31.50
+ ffacd0b85a97d-42cb7ec454csm40781600f8f.0.2025.11.26.12.31.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Nov 2025 12:31:51 -0800 (PST)
+ Wed, 26 Nov 2025 12:31:52 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Wed, 26 Nov 2025 21:31:07 +0100
-Subject: [PATCH 1/4] dm: core: Support multiple drivers with same compatibles
+Date: Wed, 26 Nov 2025 21:31:08 +0100
+Subject: [PATCH 2/4] test: dm: Add compatible multimatch test
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251126-topic-musb-probing-v2026-01-v1-1-ff8d8c487130@baylibre.com>
+Message-Id: <20251126-topic-musb-probing-v2026-01-v1-2-ff8d8c487130@baylibre.com>
 References: <20251126-topic-musb-probing-v2026-01-v1-0-ff8d8c487130@baylibre.com>
 In-Reply-To: <20251126-topic-musb-probing-v2026-01-v1-0-ff8d8c487130@baylibre.com>
 To: u-boot@lists.denx.de
@@ -90,12 +90,12 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Heiko Schocher <hs@nabladev.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3498; i=msp@baylibre.com;
- h=from:subject:message-id; bh=wBfgyl1xfgpyJReq6elItJyYIlzMB9+0XL3RGJlFxfg=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkz15IWfJoppP5HnP8HEVfGVdYp4i0W+0B8W70Nc0fOU0
- nNYDiztKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIm0bmD47zI9JX5f893tMq8v
- nG6+IzPHI/ps36Hvq3MtFF/a7uk6XsjwP74oxe2Uza2rolYck5OC7zGmLZ6fo36n+EMYX9Dl5mx
- XXgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2661; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=4GVrBPElNgHZ+EB9C2l188FcTWbFJvRyOMdGRhih1Jk=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkz15GVeVZ+N81NOvWUImrB4Y5ZZS/Bh763/utm4sk+uK
+ 1j5Nje0o5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACaydhfDX6Hbdlv5wg/85tae
+ Jt2yZH9ygKbIymbTlOCW01qsVxr1/jD8D+s7df3D6viw493PLTXWyukUK0qsv/fHpdty4aq9rYu
+ 38QEA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Wed, 26 Nov 2025 23:50:13 +0100
@@ -115,112 +115,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently once a driver matched the compatible string of a device, other
-drivers are ignored. If the first matching driver returns -ENODEV, no
-other possibly matching drivers are iterated with that compatible of the
-device. Instead the next compatible in the list of compatibles is
-selected, assuming only one driver matches one compatible at a time.
-
-To be able to use the bind function to return -ENODEV and continue
-matching other drivers with the same compatible, move the for loop a bit
-to continue the for loop after -ENODEV was returned.
-
-This is required for ti-musb-host and ti-musb-peripheral which both
-match on the same device but differ based on the dr_mode DT property.
-Depending on this property, the driver is either UCLASS_USB or
-UCLASS_USB_GADGET_GENERIc. By checking the DT property in the bind
-function and returning -ENODEV the other driver can probe instead.
+Add a test for binding of multiple drivers with the same compatible. If
+one of the drivers returns -ENODEV the other one needs to be bound.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- drivers/core/lists.c | 62 +++++++++++++++++++++++++++-------------------------
- 1 file changed, 32 insertions(+), 30 deletions(-)
+ arch/sandbox/dts/test.dts |  4 ++++
+ test/dm/core.c            | 15 +++++++++++++++
+ test/dm/test-driver.c     | 25 +++++++++++++++++++++++++
+ 3 files changed, 44 insertions(+)
 
-diff --git a/drivers/core/lists.c b/drivers/core/lists.c
-index c7be504b6fc69ec2870a6766eed35cb9eba46a97..144e31286b3bb53a90b4f8bb0d3fba6e25a47f9e 100644
---- a/drivers/core/lists.c
-+++ b/drivers/core/lists.c
-@@ -237,8 +237,9 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
- 		log_debug("   - attempt to match compatible string '%s'\n",
- 			  compat);
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index a2c739a2044c728a96b5f4acbf439a42d7e12fb5..9cc854ffe80e994e34010e299029a7f1756697e0 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -457,6 +457,10 @@
+ 		mux-control-names = "mux0";
+ 	};
  
--		id = NULL;
- 		for (entry = driver; entry != driver + n_ents; entry++) {
-+			id = NULL;
++	multimatch-test {
++		compatible = "sandbox,multimatch-test";
++	};
 +
- 			if (drv) {
- 				if (drv != entry)
- 					continue;
-@@ -247,39 +248,40 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
- 			}
- 			ret = driver_check_compatible(entry->of_match, &id,
- 						      compat);
--			if (!ret)
--				break;
-+			if (ret)
-+				continue;
-+			if (pre_reloc_only) {
-+				if (!ofnode_pre_reloc(node) &&
-+				    !(entry->flags & DM_FLAG_PRE_RELOC)) {
-+					log_debug("Skipping device pre-relocation\n");
-+					return 0;
-+				}
-+			}
+ 	phy_provider0: gen_phy@0 {
+ 		compatible = "sandbox,phy";
+ 		#phy-cells = <1>;
+diff --git a/test/dm/core.c b/test/dm/core.c
+index 53693f4f7ed7c7265218e4154ebf81a044a3a431..78ee14af228ab20a6639bb076260296adaea2c92 100644
+--- a/test/dm/core.c
++++ b/test/dm/core.c
+@@ -1410,3 +1410,18 @@ static int dm_test_try_first_device(struct unit_test_state *uts)
+ 	return 0;
+ }
+ DM_TEST(dm_test_try_first_device, 0);
 +
-+			if (entry->of_match)
-+				log_debug("   - found match at driver '%s' for '%s'\n",
-+					  entry->name, id->compatible);
-+			ret = device_bind_with_driver_data(parent, entry, name,
-+							   id ? id->data : 0, node,
-+							   &dev);
-+			if (ret == -ENODEV) {
-+				log_debug("Driver '%s' refuses to bind\n", entry->name);
-+				continue;
-+			}
-+			if (ret) {
-+				dm_warn("Error binding driver '%s': %d\n", entry->name,
-+					ret);
-+				return log_msg_ret("bind", ret);
-+			}
++/* Test that all drivers are iterated when bind returns -ENODEV */
++static int dm_test_multimatch(struct unit_test_state *uts)
++{
++	struct udevice *dev;
 +
-+			found = true;
-+			if (devp)
-+				*devp = dev;
-+			break;
- 		}
- 		if (entry == driver + n_ents)
- 			continue;
- 
--		if (pre_reloc_only) {
--			if (!ofnode_pre_reloc(node) &&
--			    !(entry->flags & DM_FLAG_PRE_RELOC)) {
--				log_debug("Skipping device pre-relocation\n");
--				return 0;
--			}
--		}
--
--		if (entry->of_match)
--			log_debug("   - found match at driver '%s' for '%s'\n",
--				  entry->name, id->compatible);
--		ret = device_bind_with_driver_data(parent, entry, name,
--						   id ? id->data : 0, node,
--						   &dev);
--		if (ret == -ENODEV) {
--			log_debug("Driver '%s' refuses to bind\n", entry->name);
--			continue;
--		}
--		if (ret) {
--			dm_warn("Error binding driver '%s': %d\n", entry->name,
--				ret);
--			return log_msg_ret("bind", ret);
--		} else {
--			found = true;
--			if (devp)
--				*devp = dev;
--		}
- 		break;
- 	}
- 
++	ut_assertok(uclass_find_device_by_name(UCLASS_TEST, "multimatch-test",
++					       &dev));
++	ut_assertnonnull(dev);
++	ut_asserteq_str("test_multimatch_second", dev->driver->name);
++	ut_asserteq(2, dm_testdrv_op_count[DM_TEST_OP_BIND]);
++
++	return 0;
++}
++DM_TEST(dm_test_multimatch, UTF_SCAN_FDT);
+diff --git a/test/dm/test-driver.c b/test/dm/test-driver.c
+index 759de3a5f77f4b64ea577a293586a737e4623f60..bf953d7814df6a0e6efd6c2a3960a925a3fbe5a7 100644
+--- a/test/dm/test-driver.c
++++ b/test/dm/test-driver.c
+@@ -197,3 +197,28 @@ U_BOOT_DRIVER(test_act_dma_vital_clk_drv) = {
+ 	.unbind	= test_manual_unbind,
+ 	.flags	= DM_FLAG_VITAL | DM_FLAG_ACTIVE_DMA,
+ };
++
++static int test_multimatch_first_bind(struct udevice *dev)
++{
++	dm_testdrv_op_count[DM_TEST_OP_BIND]++;
++	return -ENODEV;
++}
++
++static const struct udevice_id test_multimatch_ids[] = {
++	{ .compatible = "sandbox,multimatch-test" },
++	{ }
++};
++
++U_BOOT_DRIVER(test_multimatch_first) = {
++	.name	= "test_multimatch_first",
++	.id	= UCLASS_TEST,
++	.of_match = test_multimatch_ids,
++	.bind	= test_multimatch_first_bind,
++};
++
++U_BOOT_DRIVER(test_multimatch_second) = {
++	.name	= "test_multimatch_second",
++	.id	= UCLASS_TEST,
++	.of_match = test_multimatch_ids,
++	.bind	= test_manual_bind,
++};
 
 -- 
 2.51.0
