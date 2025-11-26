@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05360D1118E
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 19:51:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E57D1118E
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 20:29:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52F8B835B3;
-	Wed, 26 Nov 2025 20:51:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8271A839E8;
+	Wed, 26 Nov 2025 21:29:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ac6HgUwd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bD6oyFKe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9081B835C6; Wed, 26 Nov 2025 20:51:29 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id DF33083A26; Wed, 26 Nov 2025 21:29:31 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E5608352B
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 20:51:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3C71839D9
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 21:29:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-78a6c7ac3caso1972797b3.0
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 11:51:27 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7c76f65feb5so189384a34.0
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 12:29:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764186686; x=1764791486; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EHszzabYegN8xNsWOAKZrT7Vbl4Qn18Ca46L4w9fXD4=;
- b=ac6HgUwdwCazrfQgIrx/AKqqyQT2AhKvL/xxuFvwFB4Qnh063kKk6W6B7CPZyJnJj1
- hGlkUrj8+yLBOfH7/97d1mhTYhiy2bBlVFtvs5j7izW49jiay07OZd1b0EkBdEQbud89
- EAbazH7N69H1WRkGOHXwnn2JfygccUUJ3r1zMCFk6IdozrsZmlYCQTD2I0kMY/v9F75q
- cp7P0cmK7W+ptHsouoqQrgjaoeQ8EJzouTrdCbonXQixcrb7aTkoy2I04WUCiR2UMmII
- GS6Xg8ks2o12/dQVblwxTTO7l4a62qoy4lfCwEZJPUqy0VI3YwXWZ8reoC9cisax9Xtp
- sY1Q==
+ d=konsulko.com; s=google; t=1764188968; x=1764793768; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rvtEsFiqhLRuv/JoIWdCZTyf6KFtkjw7xSL6mE5+3dk=;
+ b=bD6oyFKebDB9KhDJ9iR2U6Jyx1jp06mMMpI4Xv8v8NFDMiRq/nCAwWKo1n2ADD2g1t
+ BPzyDMw6YfFKp77U2g+efsKEaK+MVj4HKB4LSyZlP+QU1BNbzDxGeBo4r0/wifwuxPZ9
+ uESC/sw31jas+hoYCW4AVq2p7BTsflS5l1tWg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764186686; x=1764791486;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EHszzabYegN8xNsWOAKZrT7Vbl4Qn18Ca46L4w9fXD4=;
- b=PmzhKDVm06yqSwNYy339WoZCa1LZa2AS2xz5pqd+yBgjxCgxqfeJPOeRJtREi+r+dD
- sXue84+giR97uLZp1LoGfv+/f/zZUMBZyfBTz2DdupOOizhF6vmZE7uHXNz7m391bu20
- N9FolBm+P1/Nq0z3yd0yUXxEqsg3L2WAGa5PjwHZiN/3UXIi8d7I8+vtKiQJc4B9xtRe
- 9th5GCV1XB+sljMI0ZSQfxRBLLQBE6TJ0E73KPgiL4yrToFj0jaDrnv+SbLgJ811E4NN
- 0dSy39j9pm8cnTbzycNv5VA8cz/+/q+3r1v4Wc1zc9K4/s99COpx7wPeJaF228PK5tCI
- mkkg==
-X-Gm-Message-State: AOJu0YwJ+1v70p41E+XdrDdMIxfAvHaSzAS1OxfG4wDAzi3S2NYZd6pX
- z9pFKaA/IqJeyUuk9eRcq6N+nYulyW+3IbsNPwytQs4cosp49EABi43v+gz2
-X-Gm-Gg: ASbGncsT51FVuhNsWxeg/Z+MKC8JQ+feTmb84sYhOS59tWHOJYu8kFOj5q5yVyapYHZ
- Q1gb8/vnECBQrkAJ23nUaN/nW1oUoxsYmOICRQ/idVrRyk1Z9bNTP7p61cNRHt/qiSmfLdmFdpx
- 79tQEJkZrfY3R45D5lAt8MOodOwpNsaQWVxMlR6IDdJf2ECHKiC4hbz267fkRZyDGIOSEoPYv9e
- gTLlOAX/LDy0rBbnHGnog2XuDkffif2B4CqiqOMYNNbieuAnONhsY5He/oflCcyXSlCrDl7tIh0
- KyVbPsDTu7OcGR71e7n73U/6tKmbEFqEUvwcHL1FJQXjfvS8OoDLFBoF+fBfp9DWreugSHG/DnH
- 2Q7s62cjY3/C7XXyai0ZGWY7ApafvX4ztaGxf6CKvwDW72MfUlyljLxdgwC/TBuTWlAo+uhn7uM
- ac2wxjtLSB6ImSJHD2CiX3le/AXY4iEcspkpdQ
-X-Google-Smtp-Source: AGHT+IGTto5oZGK2BdLzHDZZd3stJueF0I7NTQnURUSSVMuQo7QPIbz8kGbG17JEyIyacKw2P+fGwg==
-X-Received: by 2002:a05:690c:6707:b0:789:6c45:5df with SMTP id
- 00721157ae682-78a8b472270mr172904847b3.23.1764186685970; 
- Wed, 26 Nov 2025 11:51:25 -0800 (PST)
-Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-78a7992511esm70227077b3.35.2025.11.26.11.51.25
+ d=1e100.net; s=20230601; t=1764188968; x=1764793768;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rvtEsFiqhLRuv/JoIWdCZTyf6KFtkjw7xSL6mE5+3dk=;
+ b=jK/c4hEY5dWF3bcS3zrEq6AJsTWkaHYuZ/zSi32yXK7EgJlvf4WZ2QTeOTtuRZvaIE
+ g4mN51i2P4GGmWhqhDcJNU0hUNyHbUElEtRWy+RSoBvi1vyiYslJ5Twl/thpOjrQ1Lbr
+ MoL+7z3gG2B1NiPZuw2Z2F2LKx2MO9WaZQHly2i1VvZSqEVfYWvaye1zzlhIG8Vw+al9
+ m2Yq8ma++vhZLWaIJoHNYfDOesRqtECWGYK3G5uiriMOnsP1AU8KA1ADzzfrSI8tqjIx
+ BSQI6iAbysKNo1d2pNSktysjRkRxcfrBJGlrlGwGfsNaunmAV3eUcrxfD/K2vbXlgbQF
+ QjHw==
+X-Gm-Message-State: AOJu0Yyfi+t2JUZfbuRuK41r5nDIuvK1q80zWtGngiqqlDQH4aFsC0jl
+ 7caNgTAMw8xdcJMowHkWmjkYcotJ9xr88E3SCnWx+T1bsVbar551ah0X+Wbw7wg3zz4=
+X-Gm-Gg: ASbGncsOeb5XBj8exdP6q5N6acm4ruCRR9imbJ2a5a2wuva/tSt9d1R66pvbV38lJch
+ grLw6DYstANahXfrbo++QzTHuxtOixFsWE5KFDuVZv0pRhLiaUPc5ZJxk0GDnUESI3aTgkz0Qb2
+ dHHgzmdNymhoemruNiRFgVHP91td4AGehaqrfS+DlUb3IxJrJCWxshlwUBBQwW+W5ZxeiVxvW/L
+ qH0Ji9szjUSyyfeU8rWPyG+7CQSavxiNvupgxse72GJbOMQil1ksYd5z38j5/KeAu6/ti7hMQQK
+ tTBrs86/cFh86XEQi/hY1xMUE6YEDjwCYq5ePz24wCan+CgqGoad8WCSZddz/AtFPqf4VciXnQ1
+ xwWTxXUvsR+7dSgfNATnaY1c2p1ofgakYow/vWQVCVuU/P3VsUwjN7QQH/OX0OsKljwnQK5YEau
+ 83/2qskB9Lgbk62jtAhz8gTyLB26hEG783lCPWi6is395gE/JfYQ==
+X-Google-Smtp-Source: AGHT+IG8I9ZNUQtNlu7PNtrNAegaF+KUw50xctG25RPwyp7hMsk7iYtgE+bDSPARZS1HSCif24N+6A==
+X-Received: by 2002:a05:6830:3147:b0:7c7:59a1:48d7 with SMTP id
+ 46e09a7af769-7c798b895f6mr10532935a34.2.1764188968565; 
+ Wed, 26 Nov 2025 12:29:28 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ec9dc21868sm9548183fac.14.2025.11.26.12.29.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Nov 2025 11:51:25 -0800 (PST)
-From: Greg Malysa <malysagreg@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Greg Malysa <malysagreg@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Tom Rini <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, adsp-linux@analog.com
-Subject: [PATCH] board: adi: Fix missing semicolon in nfsroot
-Date: Wed, 26 Nov 2025 14:50:31 -0500
-Message-ID: <20251126195047.866-1-malysagreg@gmail.com>
-X-Mailer: git-send-email 2.49.1
+ Wed, 26 Nov 2025 12:29:28 -0800 (PST)
+Date: Wed, 26 Nov 2025 14:29:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Cc: u-boot@lists.denx.de, "Andrew F. Davis" <afd@ti.com>
+Subject: Re: [PATCH] configs: am335x_hs_evm_spi_defconfig: Remove duplicate
+ symbols
+Message-ID: <20251126202925.GU2125796@bill-the-cat>
+References: <20251126-topic-am33-hs-evm-remove-duplicate-v2026-01-v1-1-5008cdb30536@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="azeO4BxB70yyrky5"
+Content-Disposition: inline
+In-Reply-To: <20251126-topic-am33-hs-evm-remove-duplicate-v2026-01-v1-1-5008cdb30536@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,32 +97,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The nfsroot constructed as part of the default Analog Devices boot
-strategy is missing a semicolon between the server ip and the root path
-itself. This adds the missing semicolon.
 
-Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+--azeO4BxB70yyrky5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
----
+On Wed, Nov 26, 2025 at 09:25:56PM +0100, Markus Schneider-Pargmann (TI.com=
+) wrote:
+> Remove symbols already present in the included file.
+>=20
+> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+> ---
+>  configs/am335x_hs_evm_spi_defconfig | 3 ---
+>  1 file changed, 3 deletions(-)
+>=20
+> diff --git a/configs/am335x_hs_evm_spi_defconfig b/configs/am335x_hs_evm_=
+spi_defconfig
+> index df009844defad13109adf2523580181b6ed6b5ca..ad1777f2bcb45bd2c8424011a=
+dc231f0e7d4ceee 100644
+> --- a/configs/am335x_hs_evm_spi_defconfig
+> +++ b/configs/am335x_hs_evm_spi_defconfig
+> @@ -1,8 +1,5 @@
+>  #include <configs/am335x_hs_evm_defconfig>
+> =20
+> -CONFIG_ARM=3Dy
+> -CONFIG_ARCH_OMAP2PLUS=3Dy
+> -
+>  CONFIG_SPL_SPI_FLASH_SUPPORT=3Dy
+>  CONFIG_SPL_SPI_SUPPORT=3Dy
 
- include/env/adi/adi_boot.env | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Did you confirm that buildman still works? That's usually the reason we
+have this kind of duplication, thanks.
 
-diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
-index d56b14f5172..7f0dfe15ff9 100644
---- a/include/env/adi/adi_boot.env
-+++ b/include/env/adi/adi_boot.env
-@@ -41,7 +41,7 @@ addip=setenv bootargs ${bootargs} ip=${ipaddr}:${serverip}:${gatewayip}:${netmas
- /* Boot modes are selectable and should be defined in the board env before including */
- #if defined(USE_NFS)
- // rootpath is set by CONFIG_ROOTPATH
--nfsargs=setenv bootargs root=/dev/nfs rw nfsroot=${serverip}${rootpath},tcp,nfsvers=3 ${adi_bootargs}
-+nfsargs=setenv bootargs root=/dev/nfs rw nfsroot=${serverip}:${rootpath},tcp,nfsvers=3 ${adi_bootargs}
- nfsboot=run init_ethernet;
- 	tftp ${loadaddr} ${tftp_dir_prefix}${imagefile};
- 	run nfsargs;
--- 
-2.49.1
+--=20
+Tom
 
-base-commit: caa740df9cae5ddc74b18b88a4fea43e27b2fdf6
-branch: uboot-master
+--azeO4BxB70yyrky5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSdjIgAKCRAr4qD1Cr/k
+CoQQAQCK0kamNEv1AtF2qnBfeXT6FkN30ZaSTFNsAl1Z8kxA5wD/eoUohfsYp7EM
+PaCGDDsDJAsoUjn13IFU572VwwkCeQA=
+=BnJs
+-----END PGP SIGNATURE-----
+
+--azeO4BxB70yyrky5--
