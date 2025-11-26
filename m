@@ -4,58 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6398AD1039D
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 11:59:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C165D10F25
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 12:17:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B1BE839A8;
-	Wed, 26 Nov 2025 12:59:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 5DFA283FFE;
+	Wed, 26 Nov 2025 13:17:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="fTwSIuAC";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="ICyXSQNp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FE5D83E46; Wed, 26 Nov 2025 12:59:39 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ id E56BC841D5; Wed, 26 Nov 2025 13:17:35 +0100 (CET)
+Received: from out-182.mta0.migadu.com (out-182.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39C0583966
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 12:59:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A1ED83FDF
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 13:17:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 26E101F92A;
- Wed, 26 Nov 2025 12:59:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1764158375;
- bh=OvUxBedo0FzsLRKdmHaD0EVqnhKRr3Amjb3FfkdZpWU=; h=From:To:Subject;
- b=fTwSIuACv7NQbGDyCzIsCN3B4gLXbGMto+98A9K1fGcA9TTOtxupKvmz/fmJqEx+g
- P6cIEq6uHw/ymJXvjhosjwBG/Lj30jQUOuOjmuXOgXWuDdRG71fy5Hh4fHLS2hcWDQ
- ROUqltoHJEY0sJ3+OUaa0V1HYzI+VfFXn9G9aaqDQLTezu4Y7ppmVD5alXShSjyNgq
- WoDZVpY4b+JR7OoHaqOheEDjMtq5swjQBsG1/kRPMp+RGfC/3LNu6mtLZVkaSORklo
- bmkAZTVeJ34qG/YRGxkLaA2yVPW5q4lp1ZXlcMnAFUSdKd0S0jds9OZ8nP2l1QhgEC
- 8YY+gEEgr8zvA==
-Date: Wed, 26 Nov 2025 12:59:31 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- =?iso-8859-1?Q?Miqu=E8l?= Raynal <miquel.raynal@bootlin.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: Re: [PATCH 5/5] board: toradex: add splash screen to Toradex i.MX7D
- Colibri board
-Message-ID: <20251126115931.GA26872@francesco-nb>
-References: <20251126-repair_imx7_splash-v1-0-d3877afb7381@bootlin.com>
- <20251126-repair_imx7_splash-v1-5-d3877afb7381@bootlin.com>
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1764159452;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=jjPFurt9aC5LrBeAxQ+lkMylaL2ldGhOLCJtRYHf+JU=;
+ b=ICyXSQNpXbxnwzDtlaedG3Hcrf3D0naIitEZoDDnUp4Z3NdTRlOYM1g9gTmfSbHNayOcI0
+ qJxezTUQ4zbP1x6q/Ii6tOzxyNYuj60LefKQUmLxRYQM4ygvjGXOhPhiVPMYIPSZD6CDlJ
+ nrRlTXko0+fN7DNfMwqkpLZD8If/135giEudJumAJ95Ai8ZzmAaLvK+t41NGHGMSO+Gom1
+ /GLoPwtLmaqLuaZnlokNvfrBiIZXH2wXRoWiSkmVhqWinmdJSnh6GH0b32Gskk1NDngD/l
+ pAIDZknQt6vbvsohPB/zmyDAG62dKxYnZRGXfp9MiiMqAnrapcrYSGc7Y3Vemg==
+From: Ferass El Hafidi <funderscore@postmarketos.org>
+Date: Wed, 26 Nov 2025 12:17:03 +0000
+Subject: [PATCH v5 01/10] tools: mkimage: Add Amlogic Boot Image type
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251126-repair_imx7_splash-v1-5-d3877afb7381@bootlin.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251126-spl-gx-v5-1-6cbffb2451ca@postmarketos.org>
+References: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
+In-Reply-To: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
+To: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Beniamino Galvani <b.galvani@gmail.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>, 
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ ~postmarketos/upstreaming@lists.sr.ht, 
+ Ferass El Hafidi <funderscore@postmarketos.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10862;
+ i=funderscore@postmarketos.org; h=from:subject:message-id;
+ bh=hZrWdM79bo4HjPZFXTbYzAYo56KhwLMWVRp25wTk6Xk=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBpJu/W0uLdbgNGFOaIvAYP2Xmbr1U0Qe+wnrEmt
+ 1ACgQS2qd+JAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaSbv1gAKCRCEr8vQ14ma
+ A6IwEACbIEIZRnv7qaISAjktxaZCqf/oLwLiWr2PAfeThkN3ICE0wTaSFCxc740ac+BD6ZRZNIU
+ N1MeOJ6QUxkRXBeYxvq9xXShjlldIyvGzMEI9w9TxHw8E0NabqSAAp0Ad6+y9rhVFQ6Zo9zB7RV
+ Ti8TVQl3Q/ueijj19qflFazm7PbHn6MfC3bZ/zF9CJSb5IGplZkdBqGiMM0q+nw1yTEMTI9VTxu
+ nzx91/5XOG4eq/pWtDPNCRWhaAZkUch5DjuYlpibfYyf6XRpL/jwcN8KDZ9QeGeH7XVIJQUye39
+ +EhMRH6j77dU/UWHMOGfueyyjqADyzOjH4AD6Bvtdu2xQO+nUwBnrQErZThSurgreVmzV8Zr297
+ hh3ybtUT/7bdrWJa4r62KbJvkwSRTtYSi9eqgLd7ecRQLKI5zvL5Yb71S2Pr8sUjn55YetWfBTi
+ UHUwL8lJ1rUMf7TFK7YEhS6ygYVUrgulgYzfSSLkTb5EevGYp23MGTohqYvaCB87KNIYNGe9jhG
+ BCIRWBy69iSr7e4pzXChvpi+/2udlaD3SkxUfT6T/gEPiM8Fjh+3aGfUzufIVV5NH2nWJqy58/6
+ JteF/c01pna1BP0yuBJ9tl4iZQyw9P56FqlLcioUzQcidOMhqlFVqVH4fkfjfLJXuz4PXTdE7l9
+ uV04foJKyS18DSA==
+X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
+ fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,80 +91,362 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Thomas,
-thanks for your patch
+From: Jonas Karlman <jonas@kwiboo.se>
 
+Add support for creating an Amlogic Boot Image that pass CHK in BL1 on
+Amlogic AArch64 SoCs.
 
-On Wed, Nov 26, 2025 at 12:41:57AM +0100, Thomas Bonnefille wrote:
-> This commit fixes the PWM<A> that was previously used as a GPIO output
-> instead of a real PWM, it also reserve the framebuffer region to
-> preserve the splash screen while the OS is booting.
-> 
-> Signed-off-by: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
+Images can optionally be signed for secure boot scenario, however
+creation of signed images has not been implemented.
 
-From a quick look it seems ok to me, however ...
+Example of how to use it:
+  # Create an amlogic boot image
+  tools/mkimage -T amlimage -n gxbb -d u-boot-spl.bin u-boot-amlogic.bin
 
-> ---
->  board/toradex/colibri_imx7/colibri_imx7.c | 40 +++++++++++++++++++++++--------
->  1 file changed, 30 insertions(+), 10 deletions(-)
-> 
-> diff --git a/board/toradex/colibri_imx7/colibri_imx7.c b/board/toradex/colibri_imx7/colibri_imx7.c
-> index 69a8a18d3a7..b5d22337a04 100644
-> --- a/board/toradex/colibri_imx7/colibri_imx7.c
-> +++ b/board/toradex/colibri_imx7/colibri_imx7.c
-> @@ -7,6 +7,8 @@
->  #include <env.h>
->  #include <init.h>
->  #include <net.h>
-> +#include <fdt_simplefb.h>
-> +#include <video.h>
->  #include <asm/arch/clock.h>
->  #include <asm/arch/crm_regs.h>
->  #include <asm/arch/imx-regs.h>
-> @@ -29,6 +31,7 @@
->  #include <netdev.h>
->  #include <power/pmic.h>
->  #include <power/rn5t567_pmic.h>
-> +#include <pwm.h>
->  #include <usb.h>
->  #include <usb/ehci-ci.h>
->  #include "../common/tdx-common.h"
-> @@ -114,7 +117,7 @@ static iomux_v3_cfg_t const backlight_pads[] = {
->  	/* Backlight On */
->  	MX7D_PAD_SD1_WP__GPIO5_IO1 | MUX_PAD_CTRL(NO_PAD_CTRL),
->  	/* Backlight PWM<A> (multiplexed pin) */
-> -	MX7D_PAD_GPIO1_IO08__GPIO1_IO8   | MUX_PAD_CTRL(NO_PAD_CTRL),
-> +	MX7D_PAD_GPIO1_IO08__PWM1_OUT   | MUX_PAD_CTRL(NO_PAD_CTRL),
->  	MX7D_PAD_ECSPI2_MOSI__GPIO4_IO21 | MUX_PAD_CTRL(NO_PAD_CTRL),
->  };
->  
-> @@ -123,6 +126,8 @@ static iomux_v3_cfg_t const backlight_pads[] = {
->  
->  static int setup_lcd(void)
->  {
-> +	int ret = 0;
-> +
->  	imx_iomux_v3_setup_multiple_pads(backlight_pads, ARRAY_SIZE(backlight_pads));
->  
->  	/* Set BL_ON */
-> @@ -130,10 +135,14 @@ static int setup_lcd(void)
->  	gpio_direction_output(GPIO_BL_ON, 1);
->  
->  	/* Set PWM<A> to full brightness (assuming inversed polarity) */
-> -	gpio_request(GPIO_PWM_A, "PWM<A>");
-> -	gpio_direction_output(GPIO_PWM_A, 0);
-> -
-> -	return 0;
-> +	enable_pwm_clk(1, 0);
-> +	ret = pwm_init(0, 0, 0);
-> +	if (ret)
-> +		return ret;
-> +	ret = pwm_config(0, 0, 6666666);
+  # List boot image header information
+  tools/mkimage -l u-boot-amlogic.bin
 
-You are setting a period here for the PWM backlight (150Hz?),
-considering that colibri imx7 is a SoM, e.g. there is no actual display
-part of it, is this number generic enough?
+  # Extract amlogic boot image payload
+  tools/dumpimage -T amlimage -o bl2-payload.bin u-boot-amlogic.bin
 
-Francesco
+Or with binman using something like:
+  binman {
+	u-boot-amlogic {
+		filename = "u-boot-amlogic.bin";
+		pad-byte = <0xff>;
 
+		mkimage {
+			filename = "bl2.bin";
+			args = "-n", "gxbb", "-T", "amlimage";
+
+			u-boot-spl {
+			};
+		};
+	};
+  };
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+[Ferass: check digest type in _print_header, version in _verify_image]
+Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+---
+ MAINTAINERS      |   1 +
+ boot/image.c     |   1 +
+ include/image.h  |   1 +
+ tools/Makefile   |   1 +
+ tools/amlimage.c | 255 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 259 insertions(+)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 1db1070d5f8..e6c42bf1c7d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -186,6 +186,7 @@ F:	drivers/video/meson/
+ F:	drivers/watchdog/meson_gxbb_wdt.c
+ F:	include/configs/meson64.h
+ F:	include/configs/meson64_android.h
++F:	tools/amlimage*
+ F:	doc/board/amlogic/
+ N:	meson
+ 
+diff --git a/boot/image.c b/boot/image.c
+index abac2c7034b..dd96f712b6f 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -185,6 +185,7 @@ static const table_entry_t uimage_type[] = {
+ 	{	IH_TYPE_STARFIVE_SPL, "sfspl", "StarFive SPL Image" },
+ 	{	IH_TYPE_TFA_BL31, "tfa-bl31",  "TFA BL31 Image", },
+ 	{	IH_TYPE_STM32IMAGE_V2, "stm32imagev2", "STMicroelectronics STM32 Image V2.0" },
++	{	IH_TYPE_AMLIMAGE,   "amlimage",   "Amlogic Boot Image" },
+ 	{	-1,		    "",		  "",			},
+ };
+ 
+diff --git a/include/image.h b/include/image.h
+index b695cc39447..be6356c93d6 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -234,6 +234,7 @@ enum image_type_t {
+ 	IH_TYPE_STARFIVE_SPL,		/* StarFive SPL image */
+ 	IH_TYPE_TFA_BL31,		/* TFA BL31 image */
+ 	IH_TYPE_STM32IMAGE_V2,		/* STMicroelectronics STM32 Image V2.0 */
++	IH_TYPE_AMLIMAGE,		/* Amlogic Boot Image */
+ 
+ 	IH_TYPE_COUNT,			/* Number of image types */
+ };
+diff --git a/tools/Makefile b/tools/Makefile
+index 02297e8c93a..59e1b2285fe 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -110,6 +110,7 @@ ROCKCHIP_OBS = generated/lib/rc4.o rkcommon.o rkimage.o rksd.o rkspi.o
+ 
+ # common objs for dumpimage and mkimage
+ dumpimage-mkimage-objs := aisimage.o \
++			amlimage.o \
+ 			atmelimage.o \
+ 			$(FIT_OBJS-y) \
+ 			$(FIT_SIG_OBJS-y) \
+diff --git a/tools/amlimage.c b/tools/amlimage.c
+new file mode 100644
+index 00000000000..ecb06bc535b
+--- /dev/null
++++ b/tools/amlimage.c
+@@ -0,0 +1,255 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++// Copyright Contributors to the U-Boot project.
++
++#include "imagetool.h"
++#include <u-boot/sha256.h>
++
++/*
++ * Image contain data in the following order:
++ *  Nonce	16 byte
++ *  Header	64 byte
++ *  Digest	32 byte
++ *  Padding	align up to 4K
++ *  Payload
++ */
++
++#define HEADER_MAGIC		0x4c4d4140	/* @AML */
++#define HEADER_OFFSET		0x10		/* 16 */
++#define HEADER_SIZE		0x40		/* 64 */
++#define PAYLOAD_OFFSET		0x1000		/* 4096 */
++
++struct amlimage_header {
++	uint32_t magic;
++	uint32_t total_size;
++	uint8_t header_size;
++	uint8_t root_key_index;
++	uint8_t version_major;
++	uint8_t version_minor;
++	uint32_t padding1;
++	uint32_t digest_type;
++	uint32_t digest_offset;
++	uint32_t digest_size;
++	uint32_t data_offset;
++	uint32_t key_type;
++	uint32_t key_offset;
++	uint32_t key_size;
++	uint32_t data_size;
++	uint32_t payload_type;
++	uint32_t payload_offset;
++	uint32_t payload_size;
++	uint32_t padding2;
++} __packed;
++
++struct amlimage_variant {
++	const char *name;
++	const struct amlimage_header hdr;
++};
++
++#define VARIANT(name, major, minor, size)	\
++	{ name, { .magic = HEADER_MAGIC, .header_size = HEADER_SIZE, \
++		  .version_major = major, .version_minor = minor, \
++		  .payload_size = size, } }
++
++static const struct amlimage_variant variants[] = {
++	VARIANT("gxbb", 1, 0, 0xb000),
++	VARIANT("gxl",  1, 1, 0xb000),
++	VARIANT("gxm",  1, 1, 0xb000),
++	VARIANT("axg",  1, 1, 0xb000),
++	VARIANT("g12a", 1, 1, 0xf000),
++	VARIANT("g12b", 1, 1, 0xf000),
++	VARIANT("sm1",  1, 1, 0xf000),
++};
++
++static const struct amlimage_variant *amlimage_get_variant(const char *name)
++{
++	if (!name)
++		return NULL;
++
++	for (int i = 0; i < ARRAY_SIZE(variants); i++)
++		if (!strcmp(name, variants[i].name))
++			return &variants[i];
++
++	return NULL;
++}
++
++static int amlimage_check_params(struct image_tool_params *params)
++{
++	const struct amlimage_variant *variant =
++		amlimage_get_variant(params->imagename);
++	int datafile_size;
++
++	if (params->lflag || params->iflag)
++		return EXIT_SUCCESS;
++
++	if (!variant) {
++		fprintf(stderr, "%s: unsupported image name: %s\n",
++			params->cmdname, params->imagename);
++		exit(EXIT_FAILURE);
++	}
++
++	datafile_size = imagetool_get_filesize(params, params->datafile);
++	if (datafile_size < 0) {
++		exit(EXIT_FAILURE);
++	} else if (datafile_size > variant->hdr.payload_size) {
++		fprintf(stderr, "%s: datafile is too large (%#x > %#x)\n",
++			params->cmdname, datafile_size,
++			variant->hdr.payload_size);
++		exit(EXIT_FAILURE);
++	}
++
++	return EXIT_SUCCESS;
++}
++
++static int amlimage_verify_header(unsigned char *buf, int size,
++				  struct image_tool_params *params)
++{
++	const struct amlimage_header *hdr = (void *)buf + HEADER_OFFSET;
++
++	if (size >= HEADER_OFFSET + HEADER_SIZE + SHA256_SUM_LEN &&
++	    hdr->magic == HEADER_MAGIC && hdr->header_size == HEADER_SIZE &&
++	    hdr->version_major == 1 && hdr->version_minor <= 1)
++		return 0;
++
++	return -1;
++}
++
++static void amlimage_print_header(const void *buf,
++				  struct image_tool_params *params)
++{
++	const struct amlimage_header *hdr = buf + HEADER_OFFSET;
++	uint8_t digest[SHA256_SUM_LEN];
++	sha256_context ctx;
++	bool valid;
++
++	printf("Amlogic Boot Image %" PRIu8 ".%" PRIu8 "\n",
++	       hdr->version_major, hdr->version_minor);
++	printf("Total size: %" PRIu32 "\n", hdr->total_size);
++	printf("Digest %" PRIu32 ": %" PRIu32 " @ 0x%" PRIx32 "\n",
++	       hdr->digest_type, hdr->digest_size, hdr->digest_offset);
++	printf("Key %" PRIu32 ": %" PRIu32 " @ 0x%" PRIx32 "\n",
++	       hdr->key_type, hdr->key_size, hdr->key_offset);
++	printf("Payload %" PRIu32 ": %" PRIu32 " @ 0x%" PRIx32 "\n",
++	       hdr->payload_type, hdr->payload_size, hdr->payload_offset);
++
++	if (hdr->digest_type == 0) {
++		/* sha256 digest (normal boot) */
++		sha256_starts(&ctx);
++
++		/* Header and data is used as input for sha256 digest */
++		sha256_update(&ctx, (void *)hdr, hdr->header_size);
++		sha256_update(&ctx, (void *)hdr + hdr->data_offset, hdr->data_size);
++		sha256_finish(&ctx, digest);
++
++		valid = !memcmp((void *)hdr + hdr->digest_offset,
++				digest, SHA256_SUM_LEN);
++
++		printf("Data: %" PRIu32 " @ 0x%" PRIx32 " - %s\n",
++		       hdr->data_size, hdr->data_offset, valid ? "OK" : "BAD");
++	} else {
++		/* RSA (secure boot) */
++		printf("Data: %" PRIu32 " @ 0x%" PRIx32 " - Secure Boot\n",
++		       hdr->data_size, hdr->data_offset);
++	}
++}
++
++static void amlimage_set_header(void *buf, struct stat *sbuf, int ifd,
++				struct image_tool_params *params)
++{
++	struct amlimage_header *hdr = buf + HEADER_OFFSET;
++	sha256_context ctx;
++
++	/* Use header size as initial size */
++	hdr->total_size = hdr->header_size;
++
++	/* Use sha256 digest (normal boot) */
++	hdr->digest_type = 0;
++	/* The sha256 digest is stored directly following the header */
++	hdr->digest_offset = hdr->total_size;
++	/* Unknown if this is used as block size instead of digest size */
++	hdr->digest_size = 512;
++	hdr->total_size += hdr->digest_size;
++
++	/* Use key as padding so that payload ends up 4K aligned in TZRAM */
++	hdr->key_type = 0;
++	hdr->key_offset = hdr->total_size;
++	hdr->key_size = PAYLOAD_OFFSET - HEADER_OFFSET - hdr->key_offset;
++	hdr->total_size += hdr->key_size;
++
++	/* With padding above payload will have a 0x1000 offset in TZRAM */
++	hdr->payload_type = 0;
++	hdr->payload_offset = hdr->total_size;
++	/* Payload size has already been copied from the variant header */
++	hdr->total_size += hdr->payload_size;
++
++	/* Set the data range to be used as input for sha256 digest */
++	hdr->data_offset = hdr->digest_offset + SHA256_SUM_LEN;
++	hdr->data_size = hdr->total_size - hdr->data_offset;
++
++	sha256_starts(&ctx);
++	/* Header and data is used as input for sha256 digest */
++	sha256_update(&ctx, (void *)hdr, hdr->header_size);
++	sha256_update(&ctx, (void *)hdr + hdr->data_offset, hdr->data_size);
++	/* Write sha256 digest to the 32 bytes directly following the header */
++	sha256_finish(&ctx, (void *)hdr + hdr->digest_offset);
++}
++
++static int amlimage_extract_subimage(void *buf,
++				     struct image_tool_params *params)
++{
++	const struct amlimage_header *hdr = buf + HEADER_OFFSET;
++
++	/* Save payload as the subimage */
++	return imagetool_save_subimage(params->outfile,
++				       (ulong)hdr + hdr->payload_offset,
++				       hdr->payload_size);
++}
++
++static int amlimage_check_image_type(uint8_t type)
++{
++	if (type == IH_TYPE_AMLIMAGE)
++		return EXIT_SUCCESS;
++
++	return EXIT_FAILURE;
++}
++
++static int amlimage_vrec_header(struct image_tool_params *params,
++				struct image_type_params *tparams)
++{
++	const struct amlimage_variant *variant =
++		amlimage_get_variant(params->imagename);
++	const struct amlimage_header *hdr = &variant->hdr;
++
++	/* Use payload offset as header size, datafile will be appended */
++	tparams->header_size = PAYLOAD_OFFSET;
++
++	tparams->hdr = calloc(1, tparams->header_size);
++	if (!tparams->hdr) {
++		fprintf(stderr, "%s: Can't alloc header: %s\n",
++			params->cmdname, strerror(errno));
++		exit(EXIT_FAILURE);
++	}
++
++	/* Start with a copy of the variant header */
++	memcpy(tparams->hdr + HEADER_OFFSET, hdr, hdr->header_size);
++
++	/* Pad up to payload size of the variant header */
++	return hdr->payload_size - params->file_size;
++}
++
++/*
++ * amlimage parameters
++ */
++U_BOOT_IMAGE_TYPE(
++	amlimage,
++	"Amlogic Boot Image",
++	0,
++	NULL,
++	amlimage_check_params,
++	amlimage_verify_header,
++	amlimage_print_header,
++	amlimage_set_header,
++	amlimage_extract_subimage,
++	amlimage_check_image_type,
++	NULL,
++	amlimage_vrec_header
++);
+
+-- 
+2.51.2
 
