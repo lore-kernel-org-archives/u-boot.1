@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62C98D10F44
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 13:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1DDAD10F45
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 13:11:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2DB484201;
-	Wed, 26 Nov 2025 14:10:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5F67684201;
+	Wed, 26 Nov 2025 14:10:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QY4CrmAb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uqX/egI+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F00584222; Wed, 26 Nov 2025 14:10:31 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 03CB98422F; Wed, 26 Nov 2025 14:10:58 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75C94841E6
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 14:10:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 055F8841E6
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 14:10:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-42b32900c8bso3938606f8f.0
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 05:10:28 -0800 (PST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-42b3377aaf2so3901198f8f.2
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 05:10:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764162628; x=1764767428; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1764162655; x=1764767455; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Hz3L9YdKjJc0eMl8GQaznxrAmPx7lWZ0oJVTt9DQsXM=;
- b=QY4CrmAbTD0In2jBscuhsK+gsbDr6YM+8SCJL41hruD1kECqwRzk1j1g8b6WWMvgRY
- AL0ielaP4UgeBobm42lAOPu/k5C88k/2KkdSuAr0EVFjnP82dtOHTermA9UZEo6tGZjk
- Qduuqoi/+G8xmqMaTbewq2nOh5quPsdYp1ue0CM44PoLcSkojbmXdyltYCcJPHOqsYOY
- x0XW1ypCvM/Bw6B1szAsC3Kx++3JFje/zNsuuSytqQUqUXYBnCUYFnoqATzqYJhchEpS
- 7JeO+9Oh8I71drirDvhDNPNt+NErbIVSXS6PVK2nHhTpxK1fylXZMpQ45A4JJd+oUb2o
- ixig==
+ :reply-to; bh=KrIoBFBz2wgdKcbz2c+A/gjGCkE3op5fxDQoX0ddYek=;
+ b=uqX/egI+2hirXe+t+A9Aw1USgfG8hLdfXS7RtiBUGwOj+5+yGZ1P89wBNzzQ70up1q
+ r8ZakfdywHFwbcLOJEyh4KXdcQ3aTb9HJk66X6QCg43vuwCex2pXpzQd/Zg2SEspt1pW
+ Wi7pZggVoG5Ci396VoE1YyZdOX+Use8c8WVG8dHE3XM9JP/WuwuxjFhYIqULTuVUvEXU
+ kvUm5m8hAY6DJyJWyLUtgb0QylqtTvWS6IjtV2OU8ACPX4wkTj/Mdzvlb/29tLKBj4yZ
+ YbsyZaNbpvpgrUrRg9T7kGzXUTeVcltXTM6dRFDIM/QekI1+ke05kJ2husPD1xF7Uqiw
+ iH8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764162628; x=1764767428;
+ d=1e100.net; s=20230601; t=1764162655; x=1764767455;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Hz3L9YdKjJc0eMl8GQaznxrAmPx7lWZ0oJVTt9DQsXM=;
- b=Mt66SonNI+TzQNxXigktRICxzh2dXyLNL9YerRth1sDPLZ7IK3YjGFzRVcCMXtlvKq
- MNiJJOoKE0pm9mFkONL+Vd9DaTZ0+IN4/jS9WRPM5WS2S7+vga2jazxEbwpe1kHXoKGz
- rE2heetEkVIepoMD3EGX3K0a9OYGcP6b9Xof4q/C6viinht2QRZE29R9wnY2OkUm/qqd
- zs1TD0ZsR0kUTNVfIXilAVSjG4MJ86jqaBFo2IRBW+g3H3u8LKUPtf/t28S2rxwRs+UN
- Q0itqoWj3HX/8imOre5QIZbv8nTLwZxugxVtzzpRaEekb8Z6YyEqfAfRbCzYUzT90t77
- +Qrg==
+ bh=KrIoBFBz2wgdKcbz2c+A/gjGCkE3op5fxDQoX0ddYek=;
+ b=iApXFYybLCHBYJKeTdaG8NXUl2AdjnO3rQ6bQGvYoTs8VVNNldvEC7KTURg3DWX/zg
+ LPQ6mFkLqfYjK8vELJrWL4+4IJRp4AhBRVIPvcWWV+/3MM/KQoLiRVa96f9o9eLfUeDi
+ w9/GMxrxsWAXZFKFYg2AFaNPfYvDe0KJr40at3Fj1whYiEarq1ycydO7aJX7mlHTYxyh
+ JAZeXxcMKJZaCiaPb2OxHWcHIKewy4xz1FPq8GFKVSM2E8/01NALnBYMnzCMBI2B1erj
+ 6aBNLsFX/NGpvzmbJFhz+G3VyEhv/v4I43uuFJQ2tYezuNguALbS0P1WRKvs84FQeWeL
+ NwpQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbODqsUC5b0UAAdXVVkEweUZP1323O8b4RGbVWFv7mwjwIuEOkHgS261ulcRy2d3zWhDmJKfc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzJBWq0cQwXyGWkWwVWL0jctU7x1da28jkjLdRkBuvvHrx17os7
- GQQueOwSOu8dCgBoQxQGHNo+47P7dPKsJkSiA4IUNGHqzCNz3TQrrig8s0jRfNQRlP0=
-X-Gm-Gg: ASbGnctCy0K9vAMi5SkX8aBRfU5fU4m4H1607fRheVHp2rMz1XFv3lO1BmnStXJaS5C
- rPrTeRYRFnrM+FsnG65x+4VDzYv7gUTC2xWXWUAAH4f/qZTE3eRmlC0WDPZy/t9Up1olLVm2ss9
- vbUW9oeA+BsUwXK/NpQnSU1Fl+iPsxFiX7uoei+zP98mO/ddEFcRkmHuNJPEfDF5Aj8Uz0MsnXO
- QCpPW1wotYGl1WonJDsnQ6DPArxQcB1blp3fb14cwRXd8B8CdX9Y0egn4ej2cgDglzU/DrZ1YDh
- nALtitMOBUs/S+dDRlCE480YGT+6MWAYgb/T2DwkwtVRBHc8p+vanysAgPf4gVgues83bV3EhBw
- OAGn99v2aBirmkQMPCGLdGnjhxn004kfPm7e1Xr9UVYroOh0sRhuUrlZ2fd69BrzQRj44YlXLIa
- sae3109/kF6kA83AOlQGpnOWL7WpDWC9JnmnYfTCMQg1R2yLvIOjvzLgnslVBc
-X-Google-Smtp-Source: AGHT+IFMmLFNjjYdZ00MBXXpQc7ocEEhhGae0SZ20TvFNCzVmXKiswE6tz9qsO7dqtn+VN1WgrQwHQ==
-X-Received: by 2002:a05:6000:184a:b0:42b:549d:cdfc with SMTP id
- ffacd0b85a97d-42cc1d2e36dmr20716869f8f.35.1764162627697; 
- Wed, 26 Nov 2025 05:10:27 -0800 (PST)
+ AJvYcCWp0ziW9stUFbgDczWZveo2lzkQusqhZSIPSt4flY3lCQANuIWz7fdYiL97hYb2VnOOnig7Qf8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzXhLTEaTzy9cLuNBCYhqFfZdm22r9mzNqJB7RB+6tYHBUHq8qP
+ RtRY2IWYoB1e5o4eraGqzHX3urA21aq0DDPcT+IW/auqR8DAUenco4WdYctqK6POyX0=
+X-Gm-Gg: ASbGncuRo7ZPivPGEZSAaaAmV/+uRiWvR1+PmHDb19aPd/Bxho1qk69BIlDlrqDh9ah
+ cno9/tDoZmq4WhjrWAwkLlMHMQzyE4Ln6VXh3QcWrqgEVzsFmOxc+INXhuZw8qAv9s0f0kO1OKC
+ 1ibPj0d0qaV+D1/GRlggtg1ngY+FOHzHdkDCL9bPxWXaO6QpTC0CHoguJ2Jx0TwIbbkEn7upv66
+ Psp9rmuWT/BSAxds+ITidKwRRJjlrmLUedQI52cysDh9NcozdvkDIF3uJ49m9ldx7AFGHvXRJhL
+ crNgLY3sRuOFeJVo+OVuOHKiE33+ZhViiJO5m36k47nHWdhJjKycMIxf2GGYMujN+mYNLrZEy0c
+ +0+UzZTOY/P4GoNQw4XTLldsu84pPmJ1GZDbckFPh3vV8Yd3FFqoTWv0uO6bpbMwkiX5li82Lsd
+ gCMDnMk4jh26TjO6gds/G7v8s5u+cBTiH0o5feSC/+sn8vSaXsFKnGvYGIGD9q
+X-Google-Smtp-Source: AGHT+IFHNz54TgWOUUVPb68Mxt5+k8eUSXq+l4G0w88Y7ghi6Oq9JQUWxGnslhA2eOHbkFl/WYV8cw==
+X-Received: by 2002:a05:6000:228a:b0:42b:2eb3:c90f with SMTP id
+ ffacd0b85a97d-42cc1ac98b4mr20719151f8f.10.1764162655306; 
+ Wed, 26 Nov 2025 05:10:55 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3d9:2080:91ba:3a5e:334:4534?
  ([2a01:e0a:3d9:2080:91ba:3a5e:334:4534])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42cb7fd8baesm40803619f8f.39.2025.11.26.05.10.26
+ ffacd0b85a97d-42cb7fd8baesm40805651f8f.39.2025.11.26.05.10.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Nov 2025 05:10:27 -0800 (PST)
-Message-ID: <fec8b234-289b-43d7-a974-c4225fa6e3aa@linaro.org>
-Date: Wed, 26 Nov 2025 14:10:26 +0100
+ Wed, 26 Nov 2025 05:10:54 -0800 (PST)
+Message-ID: <4934bf6f-a667-4b29-885d-045fe68c7763@linaro.org>
+Date: Wed, 26 Nov 2025 14:10:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v5 02/10] mmc: meson_gx_mmc: add minimal non-DM driver
+Subject: Re: [PATCH v5 09/10] spl: meson: set SPL max size for GX SoCs
 To: Ferass El Hafidi <funderscore@postmarketos.org>,
  Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -89,7 +89,7 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  ~postmarketos/upstreaming@lists.sr.ht
 References: <20251126-spl-gx-v5-0-6cbffb2451ca@postmarketos.org>
- <20251126-spl-gx-v5-2-6cbffb2451ca@postmarketos.org>
+ <20251126-spl-gx-v5-9-6cbffb2451ca@postmarketos.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -116,7 +116,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20251126-spl-gx-v5-2-6cbffb2451ca@postmarketos.org>
+In-Reply-To: <20251126-spl-gx-v5-9-6cbffb2451ca@postmarketos.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -137,174 +137,26 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/26/25 13:17, Ferass El Hafidi wrote:
-> Add a minimal non-DM MMC driver for use in size-constrained
-> environments.
+> Enforce the max size for U-Boot SPL at the Kconfig level, to prevent the
+> build system from producing an image too large for the bootROM to load.
 > 
 > Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 > ---
->   arch/arm/include/asm/arch-meson/gx.h |  5 +++
->   drivers/mmc/meson_gx_mmc.c           | 77 ++++++++++++++++++++++++++++++++++++
->   2 files changed, 82 insertions(+)
+>   common/spl/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/arch/arm/include/asm/arch-meson/gx.h b/arch/arm/include/asm/arch-meson/gx.h
-> index 26ec5d0bc34..8cfc6b00329 100644
-> --- a/arch/arm/include/asm/arch-meson/gx.h
-> +++ b/arch/arm/include/asm/arch-meson/gx.h
-> @@ -41,4 +41,9 @@
->   #define GX_GPIO_IN(n)		GX_PERIPHS_ADDR(_GX_GPIO_OFF(n) + 1)
->   #define GX_GPIO_OUT(n)	GX_PERIPHS_ADDR(_GX_GPIO_OFF(n) + 2)
->   
-> +/* Non-DM MMC init */
-> +#if CONFIG_IS_ENABLED(MMC) && !CONFIG_IS_ENABLED(DM_MMC)
-> +struct mmc *meson_mmc_init(int mmc_no);
-> +#endif
-> +
->   #endif /* __GX_H__ */
-> diff --git a/drivers/mmc/meson_gx_mmc.c b/drivers/mmc/meson_gx_mmc.c
-> index 5852b24c6d2..d1558ebe3a2 100644
-> --- a/drivers/mmc/meson_gx_mmc.c
-> +++ b/drivers/mmc/meson_gx_mmc.c
-> @@ -16,6 +16,7 @@
->   #include <linux/log2.h>
->   #include "meson_gx_mmc.h"
->   
-> +#if CONFIG_IS_ENABLED(DM_MMC)
->   bool meson_gx_mmc_is_compatible(struct udevice *dev,
->   				enum meson_gx_mmc_compatible family)
->   {
-> @@ -23,6 +24,7 @@ bool meson_gx_mmc_is_compatible(struct udevice *dev,
->   
->   	return compat == family;
->   }
-> +#endif
->   
->   static inline void *get_regbase(const struct mmc *mmc)
->   {
-> @@ -67,10 +69,14 @@ static void meson_mmc_config_clock(struct mmc *mmc)
->   	 * Other SoCs use CLK_CO_PHASE_180 by default.
->   	 * It needs to find what is a proper value about each SoCs.
->   	 */
-> +#if CONFIG_IS_ENABLED(DM_MMC)
->   	if (meson_gx_mmc_is_compatible(mmc->dev, MMC_COMPATIBLE_SM1))
->   		meson_mmc_clk |= CLK_CO_PHASE_270;
->   	else
->   		meson_mmc_clk |= CLK_CO_PHASE_180;
-> +#else /* U-Boot SPL on GX SoCs */
-> +	meson_mmc_clk |= CLK_CO_PHASE_180;
-> +#endif
->   
->   	/* 180 phase tx clock */
->   	meson_mmc_clk |= CLK_TX_PHASE_000;
-> @@ -82,9 +88,14 @@ static void meson_mmc_config_clock(struct mmc *mmc)
->   	meson_write(mmc, meson_mmc_clk, MESON_SD_EMMC_CLOCK);
->   }
->   
-> +#if CONFIG_IS_ENABLED(DM_MMC)
->   static int meson_dm_mmc_set_ios(struct udevice *dev)
->   {
->   	struct mmc *mmc = mmc_get_mmc_dev(dev);
-> +#else /* U-Boot SPL */
-> +static int meson_legacy_mmc_set_ios(struct mmc *mmc)
-> +{
-> +#endif
->   	uint32_t meson_mmc_cfg;
->   
->   	meson_mmc_config_clock(mmc);
-> @@ -193,10 +204,16 @@ static void meson_mmc_read_response(struct mmc *mmc, struct mmc_cmd *cmd)
->   	}
->   }
->   
-> +#if CONFIG_IS_ENABLED(DM_MMC)
->   static int meson_dm_mmc_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
->   				 struct mmc_data *data)
->   {
->   	struct mmc *mmc = mmc_get_mmc_dev(dev);
-> +#else /* U-Boot SPL */
-> +static int meson_legacy_mmc_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
-> +				     struct mmc_data *data)
-> +{
-> +#endif
->   	struct meson_mmc_plat *pdata = mmc->priv;
->   	uint32_t status;
->   	ulong start;
-> @@ -235,6 +252,59 @@ static int meson_dm_mmc_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
->   	return ret;
->   }
->   
-> +#if !CONFIG_IS_ENABLED(DM_MMC) /* Non-DM MMC driver for use in U-Boot SPL */
-> +struct meson_mmc_plat mmc_plat[2];
-> +
-> +static int meson_legacy_mmc_init(struct mmc *mmc)
-> +{
-> +	/* reset all status bits */
-> +	meson_write(mmc, STATUS_MASK, MESON_SD_EMMC_STATUS);
-> +
-> +	/* disable interrupts */
-> +	meson_write(mmc, 0, MESON_SD_EMMC_IRQ_EN);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct mmc_ops meson_mmc_ops = {
-> +	.send_cmd	= meson_legacy_mmc_send_cmd,
-> +	.set_ios	= meson_legacy_mmc_set_ios,
-> +	.init		= meson_legacy_mmc_init,
-> +};
-> +
-> +struct mmc *meson_mmc_init(int mmc_no)
-> +{
-> +	struct meson_mmc_plat *pdata = &mmc_plat[mmc_no];
-> +	struct mmc_config *cfg = &pdata->cfg;
-> +
-> +	cfg->voltages = MMC_VDD_33_34 | MMC_VDD_32_33 |
-> +			MMC_VDD_31_32 | MMC_VDD_165_195;
-> +	cfg->host_caps = MMC_MODE_8BIT | MMC_MODE_4BIT;
-> +	cfg->f_min = DIV_ROUND_UP(SD_EMMC_CLKSRC_24M, CLK_MAX_DIV);
-> +	cfg->f_max = 6000000; /* 6 MHz */
-> +	cfg->b_max = 127; /* max 128 - 1 block */
-> +	cfg->name = "Meson SD/eMMC";
-> +	cfg->ops = &meson_mmc_ops;
-> +
-> +	if (mmc_no == 0) /* MMC1: SD card */
-> +		pdata->regbase = (void *)0xd0072000;
-> +	else if (mmc_no == 1) /* MMC2: eMMC */
-> +		pdata->regbase = (void *)0xd0074000;
-> +
-> +#if CONFIG_IS_ENABLED(MMC_PWRSEQ)
-> +	/* Enable power if needed */
-> +	ret = mmc_pwrseq_get_power(dev, cfg);
-> +	if (!ret) {
-> +		ret = pwrseq_set_power(cfg->pwr_dev, true);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +#endif
-> +
-> +	return mmc_create(cfg, pdata);
-> +}
-> +
-> +#else /* DM-based driver for use in U-Boot proper */
->   static const struct dm_mmc_ops meson_dm_mmc_ops = {
->   	.send_cmd = meson_dm_mmc_send_cmd,
->   	.set_ios = meson_dm_mmc_set_ios,
-> @@ -282,6 +352,12 @@ static int meson_mmc_probe(struct udevice *dev)
->   	cfg->b_max = 511; /* max 512 - 1 blocks */
->   	cfg->name = dev->name;
->   
-> +	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
-> +		cfg->host_caps &= ~(MMC_MODE_HS_52MHz | MMC_MODE_HS);
-> +		cfg->f_max = 6000000; /* 6 MHz */
-> +		cfg->b_max = 127; /* max 128 - 1 block */
-> +	}
-> +
->   	mmc->priv = pdata;
->   	upriv->mmc = mmc;
->   
-> @@ -336,3 +412,4 @@ U_BOOT_DRIVER(meson_mmc) = {
->   	.of_to_plat = meson_mmc_of_to_plat,
->   	.plat_auto	= sizeof(struct meson_mmc_plat),
->   };
-> +#endif /* CONFIG_IS_ENABLED(DM_MMC) */
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index f34b96efc02..bc233fa2ed9 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -41,6 +41,7 @@ config SPL_SIZE_LIMIT
+>   	default 0x11000 if ARCH_MX6 && !MX6_OCRAM_256KB
+>   	default 0x31000 if ARCH_MX6 && MX6_OCRAM_256KB
+>   	default 0x30000 if ARCH_MVEBU && ARMADA_32BIT
+> +	default 0xb000 if ARCH_MESON && MESON_GX
+>   	default 0x0
+>   	help
+>   	  Specifies the maximum length of the U-Boot SPL image.
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
