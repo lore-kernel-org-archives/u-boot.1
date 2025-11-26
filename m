@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F55D10F58
-	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 15:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A37E5D10F58
+	for <u-boot@archiver.kernel.org>; Wed, 26 Nov 2025 15:41:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BA1683FD6;
-	Wed, 26 Nov 2025 16:38:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D6E17841D2;
+	Wed, 26 Nov 2025 16:41:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SQ9Bq7eo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ih0kpebW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6A5884239; Wed, 26 Nov 2025 16:38:04 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 718898425C; Wed, 26 Nov 2025 16:41:45 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81E9883ABA
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 16:37:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BBC783FD6
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 16:41:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-450b3f60c31so2320491b6e.3
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 07:37:57 -0800 (PST)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-45090ef26c6so1169339b6e.2
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 07:41:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764171476; x=1764776276; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d+VS77j6ltespC8HLeY0FqG90VXc88JtKvZ2OmNsBIg=;
- b=SQ9Bq7eo6YqqO1tVUQDoPtLNU7xFNBSW3XyY5PsKqkDQ8BGvpxybjICH7N8NITuJ5J
- Q35nHnWhC2pNQamBqgFs131ExxFDg91RgNQhae1qsHkNQkz1iP1cf8OxIgLMrWrzR2Dx
- YbFOxG/WGkPy9ksJ7pcq9wQonYqikzxPLlImY=
+ d=konsulko.com; s=google; t=1764171702; x=1764776502; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=3a0spk92dUrRdzO7pDDzJqbsFgUejBhiQbzyM1mblic=;
+ b=ih0kpebWOp1CaKkbPCln8bPJLUGox+ZaVxm07xNzR6nsXwasavZGsaG/Be2yIC8BVS
+ 7tipwuptRkmU6pEgqQ8xBgwao76gKux9jKcQpfbvb6c+1xiYjXFDNlvPyX+dfXGW5hCF
+ 8VvvoaZfB+fWh2RT5xm8A+BbbU8AX5I24BhCw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764171476; x=1764776276;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=d+VS77j6ltespC8HLeY0FqG90VXc88JtKvZ2OmNsBIg=;
- b=WkOp/ldNub6zPK5dWc+9+qRFVy3p0tCf8yq4Z6os7J3Tff4ATGzkeAk+4dZjphqsOn
- hSQlsigb3ArYhabmlXFGkhF2hP2L8fPLO4vXCvJHR8n1MQIe/r+v/62FrhC2IB61ji+j
- zJ5LMyS2EL/y/cl2+F+jbTvr/tPM6wWUSsX/hCn7NPm5Q0b0KM4XxPi8IclyDOOAHhHU
- 9ti7hl3ZxjP8HrGcRGqybJsgXt7nop17V0LI2To5k4lfRyEKX6kCytujomyKpPT63Fyw
- QoJ0jTXdvaH7RKUjHKt5hD4apa5r+eunmXETkJ/bwoOLRsZWx3zY7MVw0NY/yghJtk6P
- 0+Tg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU38zetzOk20/QahuETtjBJM8OFbsmrcdm5WWMvWnp5JMnT1iHsOjJPkZtBE21iePauBnirNtk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxdm2UdQacPlT+I/rCNaG7K9ee5ayvyLDm0P5OEGCQ0/aoWTdWK
- fK0DyC+AA/iibWnTQTdA36zSx6clgIw0HrPq/F56s/9bZ9D2SpP1iZs97FCBG1QvUuDUuHZj1v1
- v+rcxz3Q=
-X-Gm-Gg: ASbGncuLswPtWFVImcXtALfhIbab542vrsXj17zcc7HYgxV3ox0LLMEJXzdY59pUvHe
- pMLmcGjl0QgkVbM6qr6y65FuLV7WnQGXESA7hIfcmmgXr/bWRlmAWrGxX/80lGyjt7bP3/Zkc+3
- KQNFZbyPs9iMfBUWwoasWOZLu9u1revCUpKrizXI9yOB4sxJ8H8jLynO4xzHhWmV6pUGiQWMG3I
- VLquP4wh5+n9xaPGhWb6X6hfXy8VkMo+4Fts2pPcsBeKtPsTOsI5LybtbAXJYhCn60nAu4Kzs5q
- 7xH9TJFHaVmqz201TXWeV1V8i6xp83NBnJKZbIVN2tBbkMdVsV54t4slEFFL5Hna/z3zNd0ALrV
- PacOSXB2LlcErdQh6/+m33CU55Yk8DqAYky8XUmWsaaZSjkqHGqof/hZDbDRvv5xHGma7oUKFoQ
- 7k30090Q8Cl9IPZkr7FJqSqzvAa4hREN5rab7RCwoqCq3a7t1uXEwNZl0sUXA=
-X-Google-Smtp-Source: AGHT+IH+oARMkQTsWJzksdcuQ4G5FnQO7iJ3RzCG3wVYbbVoqmMtzBrSE+Qlzptrcn4d7WnaEfV0Qw==
-X-Received: by 2002:a05:6808:8953:b0:450:d568:a50 with SMTP id
- 5614622812f47-4514e834249mr3228612b6e.56.1764171476199; 
- Wed, 26 Nov 2025 07:37:56 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1764171702; x=1764776502;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3a0spk92dUrRdzO7pDDzJqbsFgUejBhiQbzyM1mblic=;
+ b=NL4pPw3KkbpaVvH/EgzISnms0ZYpImBSqO0KIOIWSiKW7kjtvydnIbYLZKgLX3NVFV
+ 0WvRGNhnbIfCBl2Lz/HGdPEXff/TxxWVcidgp5SfQpOzmVbe/c7gfXqoF2FHDDTebq58
+ xfQuV2Urk0vXzvBQz0mOPjdSlc7Ls3M1NiXl3xTX97nxlFzD8vSOVYWs8r2FDSUH1WXT
+ DoudNKWL8h9yEBQgzJZiVfPI6LgW3ZWG06RsIWWUWaMz11vlWOSkv6bMlXuEvr4btP00
+ putkmwQfkr1U+UG05NwLL2BmHDs1W0g/umKd6DIkyesN/slDW3ePnxIxEIYzzHeFcMCp
+ WGYg==
+X-Gm-Message-State: AOJu0YzuoC/S3LS+y1CzY44HplqWgjRPInfJRBwgUCOBxEiLg70tc+5a
+ ZM4uAjzqqO5XCKCpurTB+WQCwYoeKGtGXYXulCLSsjPNsct77meH+vo0nGoZBd5yCVwoS96FO4j
+ RscwlRiU=
+X-Gm-Gg: ASbGnctzPEI2rGSit+N1MnWS9pPBuwdP1SOLGqpb0VGRLiBx8J9n8Typm0n+xHXVQlF
+ lEibWB/lP7UdJAr004Kzx08OtxEJejVlpLJvg5zOFwNZZDc6fJmWm9WVnZWeUEMzDW0HXojGSW6
+ lCLFc0RvGQ0plxpV830AMJ4sqYFxuWkJda5BNmZED9p7Hq1D6+DEYkGlo9o5LGeSeV0PSYJI84k
+ HW/WiWbxN31H5wihXhg2L4Tcscd08u48LsN6UrcT8liUNhF5LTvLniR3966qBI2vpWz+ms/Nk7K
+ i+Ggb3nIkIMPdfR4xUMbx9vYghkdMvg7zjaiJNDX7H7WDJsgMmnHKB2GbUTULjKbgFVUWRw8min
+ IKRNCfdivURTL7pvlrwrJ68cFVeVccs5U/KmFZg2M+zY3JsLY98jV3H/h3rWoq7KmHiGoEsiSCk
+ eneiN3iB9jpOu9ySLWKLLRacAMdCFheBat5pV0Peu1BNQlt4enSA==
+X-Google-Smtp-Source: AGHT+IHYLr6lBw30WAPtw/r0IPeY5Vy/qjlp9s6wo3NN709FtsbRq+bncYhcacjuCgftugc3/8P06w==
+X-Received: by 2002:a05:6808:1454:b0:450:b7a0:41ca with SMTP id
+ 5614622812f47-451159c4925mr8120471b6e.22.1764171701750; 
+ Wed, 26 Nov 2025 07:41:41 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-450ffe32decsm5477749b6e.5.2025.11.26.07.37.55
+ 5614622812f47-450ffe2cf67sm5541289b6e.2.2025.11.26.07.41.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Nov 2025 07:37:55 -0800 (PST)
+ Wed, 26 Nov 2025 07:41:41 -0800 (PST)
+Date: Wed, 26 Nov 2025 09:41:39 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-In-Reply-To: <20251116014531.2133243-1-jonas@kwiboo.se>
-References: <20251116014531.2133243-1-jonas@kwiboo.se>
-Subject: Re: [PATCH] rockchip: rk3588: Map SCMI shared memory area as
- non-cacheable
-Message-Id: <176417147524.3758873.12546592711160822442.b4-ty@konsulko.com>
-Date: Wed, 26 Nov 2025 09:37:55 -0600
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH] docker: Use GitHub-mirrored TF-A repository to avoid
+ clone failures
+Message-ID: <20251126154139.GA3759421@bill-the-cat>
+References: <20251110133758.1644822-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="kTSfBUrtYEHy4e1q"
+Content-Disposition: inline
+In-Reply-To: <20251110133758.1644822-1-bmeng.cn@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,29 +98,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 16 Nov 2025 01:45:29 +0000, Jonas Karlman wrote:
 
-> The SCMI shared memory area is no longer automatically marked as
-> non-cacheable after the commit a5a0134570c8 ("firmware: scmi: Drop
-> mmu_set_region_dcache_behaviour() misuse").
-> 
-> This change in behavior cause Rockchip RK3588 boards to fail boot with:
-> 
->   SoC:   RK3588
->   DRAM:  8 GiB
->   scmi-over-smccc scmi: Channel unexpectedly busy
->   scmi_base_drv scmi-base.0: getting protocol version failed
->   scmi-over-smccc scmi: failed to probe base protocol
->   initcall_run_r(): initcall initr_dm() failed
->   ### ERROR ### Please RESET the board ###
-> 
-> [...]
+--kTSfBUrtYEHy4e1q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Mon, Nov 10, 2025 at 09:37:58PM +0800, Bin Meng wrote:
 
-[1/1] rockchip: rk3588: Map SCMI shared memory area as non-cacheable
-      commit: e8c10f9d2446d66f56fc3621752c995dd6e99192
--- 
+> GitHub Actions consistently fails to clone the upstream TF-A repo,
+> returning the error: "The requested URL returned error: 403".
+>=20
+> To improve compatibility in building the docker image with GitHub
+> Actions, switch to the GitHub-mirrored TF-A repository instead.
+>=20
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> ---
+>=20
+>  tools/docker/Dockerfile | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index d2384219c06..201a1cdbac1 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -243,7 +243,7 @@ RUN git clone --depth=3D1 https://github.com/OP-TEE/o=
+ptee_os.git /tmp/optee_os \
+> =20
+>  # Build fiptool, bl1 and fip for fvp and qemu_arm64
+>  RUN git clone --depth=3D1 -b mbedtls-3.6 https://github.com/ARMmbed/mbed=
+tls.git /tmp/mbedtls
+> -RUN git clone --depth=3D1 https://git.trustedfirmware.org/TF-A/trusted-f=
+irmware-a.git /tmp/tf-a \
+> +RUN git clone --depth=3D1 https://github.com/ARM-software/arm-trusted-fi=
+rmware.git /tmp/tf-a \
+>  	-b v2.13.0 && \
+>  	cd /tmp/tf-a/ && \
+>  	make CROSS_COMPILE=3D/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64=
+-linux- \
+
+How consistent is this failure? I've had problems this past year
+building various parts of the container due to AI scraper overloads but
+never had a problem with the TF-A repository.
+
+That said, it would also be good to document how to build the containers
+with GitHub actions.
+
+--=20
 Tom
 
+--kTSfBUrtYEHy4e1q
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaScfrAAKCRAr4qD1Cr/k
+CknaAP0QpDaNDSYZL3iGA8h9BkECEk8dRyMp8rrlvrp5Jbh4qAEAix0SfnFw7dWc
+hnzSoI8qgcjody4XB5Gz7JnCFgBlUQo=
+=zO5B
+-----END PGP SIGNATURE-----
+
+--kTSfBUrtYEHy4e1q--
