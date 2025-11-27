@@ -4,146 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A55CFD2F6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 08:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A928CFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 08:29:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A1C684320;
-	Thu, 27 Nov 2025 09:29:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id E1362838BB;
+	Thu, 27 Nov 2025 09:29:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="hMhkDvWU";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="P6JHAjA9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 321658432E; Thu, 27 Nov 2025 09:29:05 +0100 (CET)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
+ id 5FDC78334F; Thu, 27 Nov 2025 09:29:30 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C50D884312
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 09:29:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E11BE84332
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 09:29:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ujRmQtzzl1xgYea9wb6B7ygDta9WtcaFkn3+cXfIrVkLSla2nG5TXuwDD1o8M86YuuW0rj73lBhWINscDJ3wd05fZ7PvluZ8qJP9/NfA+Gy9l4Xbm/ibHKYFdzrtbPTmkFitg1ZdV7N3SkMIHCIVfep4ML0j0/U2VPm61Qa6tOTajH9yukOkw6Nn0ItlVibOcD332H7OT9O7NRyk7ZDUTwl48TS1FO9gYK0DcGl4oxp49xL/9SSpcY37APBuNqd5a4etzD30JoSlLFagmrOJeLJoyfAexCCOWvMUqzfHqCPtVBHyN+i4irBweye/nuLUmFP8YATVgST+iKwzbHdbfA==
+ b=Y+t0/ZL3Mxjg5Nd77o4bh0AgRjn9Fk05FjFHNgh6dfX33EsYJnQ3Dc1RaAa9By3LC9sgY9GOfLkh7G79iLeGpqA7t8c7r8yEvuEmE9CiiDTKEKYjHy6RCrC0gm2K+UGP0hc3nE1mKfeQsyD2k4bbk+uBMmjfaH/Dvkr5kxKXVKS9KGuDkBfh71LRy8AJjsoSoTO3ZnYoWAuLbvL3gb0ZncvI3ptvDvin1CZXUcf9gH5jtRW38BMs04N+23NWyeRSqD4I3lkE0UwGRT96/3964pJHqCQbTNJZTlpWH3A6jE47SMT5sXGJuRwMG51WIw1O+miOY4On5bEmRF/Db6xFTQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7oFMOfVrcBIt/KDBBJcc/rxzJdQRwsPY3gWt0bW2m2Q=;
- b=suo5ofhEprSxeOSo5Q98CEj+EODXAGYauauc4oP163bY9wM/8ams7AMEzyfBFLLw9TyNspKT147P8nj9tp4CR4DhXuoMBYRehfoAJb6JZdwXD64L00yajMPr3sYMk88MQrJO5nqs+S/ktmpQY1sBrpCUD0C7vN7YJzQjEvtmbcb/BWo9W6kEJ4W2WY8K410fPKPEBfUZMi52MdY8uPpTXF9qv6mDmN3zRZ/iuOkYJzHfyamtc+b0HdgD290xHpFJbmkv8I5iRlJUSuw46lRnIv68xSAfz4bJwfu0wlK4kIljE3XeTbd7QLpwoyGU5Sz+wKn9ldWdJekwvL9+ci8W/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=Xs4HH9qIOlgf1fsjYOnV2y3Gd+O5rj+XL7XBcgxdFcA=;
+ b=mhMwKUdabNx2WybMVTDkA0jVoD+SYmERMBee0Gvb99CAot32D9yT4HvlK9O73VNP0Bin/UvEpJyjvT/n3ti5/kYtsg58Uu756ocUQGmrt1CEa6Em5cNnYZTPx7+tejbar4FMXC4p5F+VQV4QJTF31Ray+xpEyS25X4kcI6p52Cli2/CuVHymr1b8daPCGu3P5bvuePxVcEyVZ/CVUvjuU/hZvyQy4SYUgTtGOmEf2Di2h/I4E2s5fsusHEsmhFf/en7AGu1XPv/4umyLuER58kPg411692epBjrdj8ux8XVQ+ruScjR9EZWXThDZ9W1nqh2cL4j5t7L+oycRpXfqEg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7oFMOfVrcBIt/KDBBJcc/rxzJdQRwsPY3gWt0bW2m2Q=;
- b=hMhkDvWUavaEJE9o1FWGrLWEk9zMvnlu/94zb3C42JOB4P0DIAvAiblSp0DGQG9YY6A+eyPaR5EGBhJzKjXoy/zWWAWQ33pBxs1RJ3YW9zMJleLuNzUSZNxANnCBHt2C0bO+1GNoDnrGG7wMCvJSanc0ROT9T0px9dDtrOVBNQE=
-Received: from BN0PR04CA0158.namprd04.prod.outlook.com (2603:10b6:408:eb::13)
- by PH7PR12MB8826.namprd12.prod.outlook.com (2603:10b6:510:26a::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Thu, 27 Nov
- 2025 08:28:58 +0000
-Received: from BN2PEPF0000449E.namprd02.prod.outlook.com
- (2603:10b6:408:eb:cafe::35) by BN0PR04CA0158.outlook.office365.com
- (2603:10b6:408:eb::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.13 via Frontend Transport; Thu,
- 27 Nov 2025 08:28:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BN2PEPF0000449E.mail.protection.outlook.com (10.167.243.149) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9366.7 via Frontend Transport; Thu, 27 Nov 2025 08:28:58 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 27 Nov
- 2025 02:28:57 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 27 Nov
- 2025 00:28:57 -0800
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Thu, 27 Nov 2025 00:28:56 -0800
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Naman Trivedi <naman.trivedimanojbhai@amd.com>, Padmarao Begari
- <padmarao.begari@amd.com>, Prasad Kummari <prasad.kummari@amd.com>, "Senthil
- Nathan Thangaraj" <senthilnathan.thangaraj@amd.com>, Tom Rini
- <trini@konsulko.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] arm64: versal2: Read and show multiboot value
-Date: Thu, 27 Nov 2025 09:28:46 +0100
-Message-ID: <fd7564ce2f51d965c273e939e98de01beb92e6f5.1764232124.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3489; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=AQtgmFEuJXkdCoaWnkG+6F86zHKBnKw+ge4basEtbz8=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRqcO9XthB4Jx7+aSF/zsedz+68COIp8Iw1npR2rHbn5
- FdT/0n86yhlYRDjYJAVU2SZzqTjsObbtaViyyPzYeawMoEMYeDiFICJNOQwMnz/UDuh6TEzhyqb
- Oe/8O62zfjD2KN2N63AqF161JvyH8jeG32xr7nporlAun3n4enJrZOd+4/OiZtGhy8TulzfecJq
- /lhcA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+ bh=Xs4HH9qIOlgf1fsjYOnV2y3Gd+O5rj+XL7XBcgxdFcA=;
+ b=P6JHAjA9MAfkti5E90K9PTB/hQv4RaLlIhXgRGmR/KmZCFDChiN86prm63Ae7mkcDbGHi5yjadyWpHa9K7MqJIKRPcc3HnA7zElre97ZXUksRsxAB7E5VGoLuubn4H4SvRzdO7CzocGhrKhcjECYaTEdgE/pEvyXI9antSlLarUCv0Mj8q/+rx/Hae+rc/+nbI7dOd+zj77g7MqdVZVlqCot7fMA6SwdV5c3CV/NTrxAOjlxJVPBf5+at3GeWIdKCH3WMG21ET+23p2RhAbaJqnAqibCT6lkoFyROFNZXfv+lQK3e2f8EgOIAYtJZOAGiv9XKBbNUd1rpw5SF9nx4Q==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by BL4PR03MB8051.namprd03.prod.outlook.com (2603:10b6:208:58d::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.14; Thu, 27 Nov
+ 2025 08:29:23 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844%3]) with mapi id 15.20.9366.012; Thu, 27 Nov 2025
+ 08:29:23 +0000
+Message-ID: <77c022a6-0751-468a-aeb0-9d028ad1fd70@altera.com>
+Date: Thu, 27 Nov 2025 13:59:13 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/8] mmc: sdhci-cadence: Add reset control support
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.denx.de, peng.fan@nxp.com, jh80.chung@samsung.com,
+ trini@konsulko.com, marex@denx.de, tien.fong.chee@altera.com,
+ balsundar.ponnusamy@altera.com
+References: <20251110173737.24545-1-tanmay.kathpalia@altera.com>
+ <20251110173737.24545-2-tanmay.kathpalia@altera.com>
+ <aRv_hIwxZshKJQI1@nxa18884-linux>
+ <3668b44b-9525-4bad-8d24-de10311a4df3@altera.com>
+ <aSZjLjm7saoeQYBs@nxa18884-linux.ap.freescale.net>
+Content-Language: en-US
+From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+In-Reply-To: <aSZjLjm7saoeQYBs@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: MA0PR01CA0073.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:ad::12) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF0000449E:EE_|PH7PR12MB8826:EE_
-X-MS-Office365-Filtering-Correlation-Id: 139a49a2-e4ca-4b4d-3c04-08de2d8f02be
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|BL4PR03MB8051:EE_
+X-MS-Office365-Filtering-Correlation-Id: ec23c436-97dc-4c0e-2d14-08de2d8f112c
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dnS7OkBB663/QR6Iug0rMsTyTfjtEkFdFb+If1dIsPq/kwpoEgqY1lgwQ7ng?=
- =?us-ascii?Q?7fFlwPNJHwRNxPmWhUXt4nm4HbGAr0gGc67fkVTOfaRrgzTg+qdn3V/iwH25?=
- =?us-ascii?Q?qpKAHctPLWRQ6ckX4uW4eYQzqVLu7Et0Emhf+kxHLWaABOPfalNEkgzZ7xjY?=
- =?us-ascii?Q?JZhIBmXvBW4otnQrbvcob4UlzjyWRofRd52JW3G4u2m2vj54W1WNTeGV+876?=
- =?us-ascii?Q?RDe1wmCdtJov9UbS9zzhL6Z+Ut1CmJVPBicsYbEl7PRbBNmMZqvSVK28hwjG?=
- =?us-ascii?Q?wZVFSLh7WjKh1hZIz/932roRAdL2fxLHEst8dQsODB5mie0gekIl/lxPbAy4?=
- =?us-ascii?Q?oGkRJStltAF5mGVbrO3/IfWCYz0JLc9OFdivOB3zIbKwcDYCPNC42eMdSwL7?=
- =?us-ascii?Q?Iwa0v9+sfmKvjf6WO1FdXRvfsYbxHKTBNIU48myyAsmYJ6koQkKd7Gg5Lw1Y?=
- =?us-ascii?Q?2QKggG04h/dgZb3NYwVjILnt4AeAi3dpwR77yu1mdufykUTx5fyIoJ90JNlB?=
- =?us-ascii?Q?ihK+mVpUOW3u1+qbs15+DdgijtmmW+QYsFss4eXc67hwQ/qyw/r3CN/13W7e?=
- =?us-ascii?Q?RZNKH+LWldNzXHHE51Ka+wMb8/eXcHb9EErqKm5fIIRZTGd+lHyE/2jonK9s?=
- =?us-ascii?Q?/9ZJW13TN8nEP3p5R3oNw4Uwu8NyooMvnGI0f8pcqSSBSasvB7WAT0zXQrPv?=
- =?us-ascii?Q?Th01XyvusQD6RBfhQeRNvYpHn6cBjMnNUHSHNzAx8XXBRpYuFB7MUWoHbiU3?=
- =?us-ascii?Q?VWzebTU7oiN0RodYe5QcY9Js3re9U2Fi3nzNg2QzLG00/oZHPHRAFdvRXmqH?=
- =?us-ascii?Q?wD+auWoB0l5goCaPS1cGCF2PQVEvdf1Dp7UTXqJkZNHxNPP7E5LOMHRBW+Id?=
- =?us-ascii?Q?JTtiGe3wwnpe93b+T5ZfHF+2GEl1jrNIS51/4S4ezcyc6Nw+sHFcmEAFhSfN?=
- =?us-ascii?Q?BW+pxSqlGsSnjtmRWn3NOo/FttdwRDcuQTDJ3nYJM6ohnRoBCIvQDVmXucPr?=
- =?us-ascii?Q?6TGZiWbSB6QXZjui9L2bWcGcEhKQ5cHEQfvXsaIAttFOmTM7WkRd/jZ4AQyB?=
- =?us-ascii?Q?WceH6K/9b/YXSP0woN5MMdbtVADWeaHmfZsgtev1f0HDAL0DEnabrNIzCsDK?=
- =?us-ascii?Q?36Y5B3LROhamZiskSezUBUZtdlk2+JCMOUxRWFTkEeGe5ZIq8eYJ0HVvsdqM?=
- =?us-ascii?Q?taOo+ESN+VnGJHL9NwYuNzfOBy2c0HbKG+lMYPLbgn1YENmv7WLkklQB1pAf?=
- =?us-ascii?Q?+RZDVLSzS1Ts5+0fdifxJnaqeFPX2jX8wtOJeR5XAsQfJ9ZkIr5BTfXWgDwF?=
- =?us-ascii?Q?aHEZGnulb3TWg+Xteo1pSZkHf10vLfZKJl/0femYANZgU1+pgCK8N4alN+xc?=
- =?us-ascii?Q?3NKWguGeszesw8hk32pBREvNx1GgkCVa2IKSapvvtgJPCFjiKVV/qUxPHjqD?=
- =?us-ascii?Q?dXjq3WIxLvioCJnrwd8YC1kQmvaCC5oxFcaCEhAQeso4yqh6eT5Z9rlbqm+Y?=
- =?us-ascii?Q?+BdtQCfu/xWqY2uYQ/BphJRcxRanHpYleh+MYc0eXP83T1qRX4QCspCdJcW0?=
- =?us-ascii?Q?iOWJNLM6OJO5LVE3V6Y=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2025 08:28:58.2358 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 139a49a2-e4ca-4b4d-3c04-08de2d8f02be
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF0000449E.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8826
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eHlISThGUFp3bDNaRnh1TUp0aFp0ZDJXUW9ZbXlrYmZGVlNCVEkwdGEyQmNW?=
+ =?utf-8?B?dG1qbjBpUjhQbXlDMnNTR2ZYSWlrVnhWSW1HdHdrdks2TzFCTm9XZ2JTeHNO?=
+ =?utf-8?B?OWxKOTQwb0F6cGRjc0ExeFJDSzlsZXhsTmRRSVkvNUtUUmRSb0dmeVZTT1Z1?=
+ =?utf-8?B?YkQ5YWRuSTlBQnBtUTVPM2dIMFNWR1RmMGdUbzFmcXBVeXA1K1hzWVk3VHB1?=
+ =?utf-8?B?K2dHZk9kbGRBcVpsNFNkVmx5cFZDZW5rZWhzUWhGbG5mcUMrc05DS0VuYy9r?=
+ =?utf-8?B?MkUwbU9QaHNPdm9WZlJ3NmdOcVYwL01hYUxlcEZZUmpHNVR3Y0xodEhBTHEx?=
+ =?utf-8?B?Tm45bERHZTVubEJIZTFhRG8rVlJqaWlEUUM0VzdjcGpxYk9UNG9PSm1sTklM?=
+ =?utf-8?B?c1drRUFwZWpuUXMxV2ZoZjZNbXJzNUZFMjBwZVV0bVoxaGRFTG44WExXeEEr?=
+ =?utf-8?B?QXN3eGxIOTFndjJEdjNGMUVlT1ZqelM5SGkvZlpPazNhR2gydS9NY0lQaFlZ?=
+ =?utf-8?B?bjRpU0RwaHVTNE5vMjU5SzNYR3FLQ1BmZmdMUEhwUTN2NktaZ2VlcW90WVdK?=
+ =?utf-8?B?c1VYOG1kVWdvVlVORHNIZGlMRllENzZMWXcvamg4QllJbWNBK2RGTEFUU3Ns?=
+ =?utf-8?B?NmRpclN4aDczSVJmVys4enRsS3hSN1R0dGdvcTRzQUlNdmwyaEcxZjFFakhT?=
+ =?utf-8?B?WTVhVUZhb25yTE1Dd3NuWmpSdStKd2VBSWg5YjFvM0xnKzBySWVLUGxYRDVj?=
+ =?utf-8?B?OGRpVGxiZVNsWEpabkw5aTVGK1ZEaW1ycy9aVkpqTzRMU1dHUld0WHEwQWVS?=
+ =?utf-8?B?WXhUcDBtcFRZNUIwSVVMNGJLbUtHRkEyMmhwcTNSNjhEbG44cHg0eFN6YVdm?=
+ =?utf-8?B?bXB3N3JkMGEweitlNUxDWFI5Mlp5OUVuRkJPK2g3RjBBVHdXK3krdHV4TkVt?=
+ =?utf-8?B?bHlXc3dRZXVZQkVNSFMwdjNyZ0pwRnV5QWx0M2ExelNYVi9sY2QxUE5CR21V?=
+ =?utf-8?B?azZ3aWo5R2dKaDZkMjJ6dXBGRlAvL2llV1JubzUzVXRnejliam1xT2ZmZmpx?=
+ =?utf-8?B?eC9vNW83UldMczJ3ajlVbzR2WGF5em5YTGF4VGVucUJwZUZyOFNsT0RsczZ4?=
+ =?utf-8?B?RkJ5VGRoRU1wbC9YRVNONllUaXo2SVR0N3llOUhTT2ZlamQraXRUT0svazdX?=
+ =?utf-8?B?Qk0wZExNamZBTVJkL2lpTTNCK0FmaUptTWtlWDZRbXdBRXh5QVpqY1kxNjhS?=
+ =?utf-8?B?UDgvSmZBNTFGMGMvSmJPUkxCTmVsWW80N3FhdjltaFFZSVMrRFpETFBCTko5?=
+ =?utf-8?B?M3BXeWo0N2VXMTczclFEcTQzT1VreEdPRkVzaVA4c3dnTFNBN2FRWnVYOGpO?=
+ =?utf-8?B?Wm9sTkZaOW9EWWR0ZGR0ZUZhTnJZdElhaFkrM3RhU2RwTUF2Rm9LbjZ3eEtI?=
+ =?utf-8?B?c0YweXhudS90MU5aWTBuMldxblROMTVCVytyVUhpVlhGYTE2cFIzRExVUHd0?=
+ =?utf-8?B?bkZvMHF4MHhmZTZPb0hJd1pBa1g0SmpRMHE4bzJLa01pSHVmMDQrU3lBTXZK?=
+ =?utf-8?B?V1FnOENaemdjY09WUm56VHdNclpqaFI5aHBNOWhsZ0FtRElHTWxhTDQ3b0Zt?=
+ =?utf-8?B?ZG9qZXlLSnhERGxjZDV4bUhNcDdWSnliMnY4R0hCeGpKTjZzVzduRnlZUm5r?=
+ =?utf-8?B?M08wT3BvWGk0Rkc4VlNJai92ekdFaVpsbHBhaHlxNVNUTk1BaU05VUg1Ry9u?=
+ =?utf-8?B?ZDJHSGdaNHpTT0RJMG1UQjhZNmhLbzRCOVV2TktjR21zVUcvOWEvZ1JXdDJF?=
+ =?utf-8?B?VVNZT3lEelIwVHRzWmJza0JiWlhrY3hrWmQ2SFEwWG54TTdBTmFpSExqM0ky?=
+ =?utf-8?B?TVd5Wisyam9yQzVKL2wwNU5CU2JtWGRKZGJiVXplSDY0OUs5MGx5dG1HcXF0?=
+ =?utf-8?Q?LuYxZYEFqKfLqJZ33X3MuwX+GY/GRSKk?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Ymh4WVhLcG0yWFJRcjZmZUFxdzViWHhvYTA2dFpyZmtJcnViOE1uaFNsc01a?=
+ =?utf-8?B?MlZMNVdsUjVubi9ESUxCNHVTbUNVZ1BRZnh3MllFV243Qi9ydWcvRkZxNG9H?=
+ =?utf-8?B?S3Y1OFEwWXVWNGdDNUVjUDE1TExvQTVTZ1BibUtHSFdzTDRybDA5SWZnRGlT?=
+ =?utf-8?B?dkFMd0gxRnhxUzgzT1RNRUVkMnJvd1gvcHdabU44Z3Q5QW5hd0l0MHUvWXlE?=
+ =?utf-8?B?NkFKU21STmFady94eTRMMXFlSlhxWk11ZGY4cldUd3VNaDg5WkZjbmVOcVov?=
+ =?utf-8?B?TGU5VnJXSnd4anFGU1dsRkNzZTFLbnpJTjZ4S3pJWjc5MlVmWkZodGFEODYv?=
+ =?utf-8?B?MStuaVpQeWRkYWtwNUt6SDZDeDZpVmJhQnpoQ2FzRjFhV0dIVVVKejJNbkdw?=
+ =?utf-8?B?NzQvMEt5RDdLSDZnR0Vwdk14QWhYclNvSHJuTUdJSzQ5R25Kc3VKQVppU0NY?=
+ =?utf-8?B?TW4rWmlSVlREaTIwRUNmNUVLNWl5NHE1OHJEc1FJb1VoRHBudzg2dkRlaThp?=
+ =?utf-8?B?SkpUVWtRSTFOZXhlekwxaEw2VXVGVlVQcFhlbWJIUUxOVU5WUms3eHFONGdZ?=
+ =?utf-8?B?WVFuYWViUFVVcVhmN3ZzdUp5ekhycGtBREtBazROMUJZaUE4N0NLVkp6bjVB?=
+ =?utf-8?B?NFZKSy9aTmtQNGNmWGxodXpZUC9yaGRtQ3dzeER1MjhKUllkM2haakRObm1m?=
+ =?utf-8?B?OEZ1UEFHVDAxMDdCdHhZL3lERVhvMTA0K2k2bm5DT1JXeWlwZEVyMEtGUE9R?=
+ =?utf-8?B?cmUwbThYRDk1eHBwWkswRjkzTWJzWlYvejcyOCs3Q01yNE1ia0VSbGJ6SDRP?=
+ =?utf-8?B?TU5laWY2anlhSWpyd09naU9sVVR5MVh4cU1oMDZOY0VMaDdtdU1ieENzNDEr?=
+ =?utf-8?B?cmdKVkMwY0FCWkw4Qk5lZEZpaGhtUUZsQmowU2NQQVpYODc2cnRRM3F0RHdi?=
+ =?utf-8?B?TnpEN2t3RkxjSFRFL3BVNkQ5YktHRWRhZzNTTUFtbFFTSkxidXRVRUR1akRu?=
+ =?utf-8?B?WndlNVJsaEs3N3NCNTV3czFieWI5Q2RjZE1saHY1SnZ5VHFUWitKUDFUUFBk?=
+ =?utf-8?B?elhjcklxWHEvUHIrODV1dU1lNjJ3M1ZrVHBNNmMxOE1DenM2YWdPUTlrd01F?=
+ =?utf-8?B?RkNmL3BQcmIyaEhieWQvaGNyQlZ4SkxOVTZqdTV0a0d1ZERsdGpENVZJRzY0?=
+ =?utf-8?B?OFQ3RVVucjlIcXRLbUVKNDdtZzhtc2xLSlRvQzRveFpSRzlhcUtLNS9nNGcx?=
+ =?utf-8?B?Q3ZFOTZVMDd4VXRIT3p6L05ib2ZzbXhaSHZDN2IrR1Q2bTJDb21VTGphOG1u?=
+ =?utf-8?B?Y0h1MTN5TEtrRERxeFZYYkVRWEdCR3NxWVJOZ1pYaFZzLzFLOEJhUVhnOTMr?=
+ =?utf-8?B?SzB4QkJRdC9RZE1OL1MxZVM3dzExRUM3ZjNZR1JmTndkMlQzaU9TbmF6TlMw?=
+ =?utf-8?B?MTZjNVNKd0VmMzZzSVNkR0oveGNkQUw1elpQNXlHeWEzRXdDMnZPbzlvSGg1?=
+ =?utf-8?B?Y215K2JPMEU2WWt3Z3FqQ3AzenM2UWV6cHRnek1ZbkxhZERPWFRjTnhaYVlk?=
+ =?utf-8?B?RDI3VDg1T0lxVGZkWGNUdGx5OThDOEZyWmZCK2x1WHQyZ1NjbFg5SGk3d001?=
+ =?utf-8?B?Vm1rWkQvaEVtNmhmM3pSYk5OV1dwT0JMdzlBeDFRS21EOEhERGlmR2pnSXlY?=
+ =?utf-8?B?WHVabDFhRlkvajFxYzY1ZlZ5ZUVKUEFIbHcyclFoQU16N0JuZHlIL3lDQmJF?=
+ =?utf-8?B?bE9KWHJ1WTgrMlV2QVlpWFZkN0dBeTZ2cUhxT3N4Q2dQMjlIbE5paUMva0s1?=
+ =?utf-8?B?cnp1Rk5VQU14akZKZmhDQXI0bnh1T0h1K1FGMW5hKzRHY1pZMTkrZFVGQWh4?=
+ =?utf-8?B?VUFVRUcvT3dQVjZ1UEtkVHlYNmNMdWZLSlQwenE2bXpzYXZxZEs1eU1XZTVN?=
+ =?utf-8?B?QlVWSUJlV054VlNSVWtscEpuREkyUTh2aitGUFdUemN1SXk2TkxCU3lWQW1Y?=
+ =?utf-8?B?L1lpOHJ5NUJUcVY3Z0daZHlnUkxtVFhMcWpod2E4TlFrUjkyelM1TnY5V2Z2?=
+ =?utf-8?B?U0ZIWUVib2dqS3RkcnVUd0tzRXpSMHNlOGxaR3lZSkZ6cURGLzE1blh0dTZr?=
+ =?utf-8?B?OXFEcmhZOE02VmhFZjIybXFQS3A5ZXBTSDFuOEVCVlBmQ2Ryb0hkSk0rOFYy?=
+ =?utf-8?B?ZUE9PQ==?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ec23c436-97dc-4c0e-2d14-08de2d8f112c
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2025 08:29:22.9904 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: J1i3YUD3OPIH8zqVe6huE/cNSHAbZsA5j3TBr8jDDQcDvvSpUYUdwNyuJXu5TmHXcJFem0IevKZzWCsWcRMOb7wsbaLcJlFaJiryxQOzvPs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL4PR03MB8051
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,119 +182,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SOC can boot from different boot medias and also different offsets that's
-why by default show multiboot value to be aware which image system is
-booting out of. It is especially useful for systems with A/B update
-enabled.
-Also limit zynqmp_pm_get_pmc_multi_boot_reg() usage only for Versal and
-Versal Gen 2.
+Thanks for the suggestion, Peng.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+On 11/26/2025 7:47 AM, Peng Fan wrote:
+> On Thu, Nov 20, 2025 at 08:29:11PM +0530, Tanmay Kathpalia wrote:
+>> Thanks for your comment, Peng.
+>>
+>> On 11/18/2025 10:39 AM, Peng Fan wrote:
+>>> On Mon, Nov 10, 2025 at 09:37:30AM -0800, Tanmay Kathpalia wrote:
+>>>> Add reset control functionality to the SDHCI Cadence driver to properly
+>>>> handle hardware reset sequences during probe. This ensures the controller
+>>>> is in a known state before initialization.
+>>>>
+>>>> Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+>>>> Reviewed-by: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
+>>>> ---
+>>>> drivers/mmc/sdhci-cadence.c | 8 ++++++++
+>>>> 1 file changed, 8 insertions(+)
+>>>>
+>>> ....
+>>>>
+>>>> @@ -225,6 +227,12 @@ static int sdhci_cdns_probe(struct udevice *dev)
+>>>> 	if (!plat->hrs_addr)
+>>>> 		return -ENOMEM;
+>>>>
+>>>> +	ret = reset_get_bulk(dev, &reset_bulk);
+>>>
+>>> Should this be optional? Some in tree platforms may not have
+>>> the reset supported.
+>>>
+>>
+>> Yes, you're right-some in-tree platforms may not have reset support. In those
+>> cases, the code will print a warning message ("Can't get reset") and continue
+>> the probe process.
+>> If you prefer, I can remove the warning and let the function fail silently
+>> instead, or is there any other way you would suggest to make this optional?
+> 
+> devm_reset_bulk_get_optional() may help.
+> 
+> Regards
+> Peng
+> 
 
- arch/arm/mach-versal2/include/mach/hardware.h |  4 +++-
- board/amd/versal2/board.c                     | 22 +++++++++++++++++++
- drivers/firmware/firmware-zynqmp.c            |  2 ++
- 3 files changed, 27 insertions(+), 1 deletion(-)
+I looked into devm_reset_bulk_get_optional(), and I see that it 
+dynamically allocates the struct reset_ctl_bulk and adds it to the 
+device resources list if CONFIG_DEVRES is enabled. However, if 
+CONFIG_DEVRES is not enabled, we need to manually free the memory using 
+reset_release_bulk() in the driver's remove function. This means we 
+would need to store a pointer to struct reset_ctl_bulk in the driver's 
+private data, which would require additional changes to the 
+sdhci-cadence driver (since it currently uses the generic struct 
+sdhci_host with .priv_auto = sizeof(struct sdhci_host)).
 
-diff --git a/arch/arm/mach-versal2/include/mach/hardware.h b/arch/arm/mach-versal2/include/mach/hardware.h
-index 7ca2bbb7550f..81a0df893574 100644
---- a/arch/arm/mach-versal2/include/mach/hardware.h
-+++ b/arch/arm/mach-versal2/include/mach/hardware.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * Copyright (C) 2016 - 2022, Xilinx, Inc.
-- * Copyright (C) 2022 - 2024, Advanced Micro Devices, Inc.
-+ * Copyright (C) 2022 - 2025, Advanced Micro Devices, Inc.
-  */
- 
- #ifndef __ASSEMBLY__
-@@ -73,6 +73,8 @@ struct crp_regs {
- #define JTAG_MODE	0x00000000
- #define BOOT_MODE_USE_ALT	0x100
- #define BOOT_MODE_ALT_SHIFT	12
-+#define PMC_MULTI_BOOT_REG	0xF1110004
-+#define PMC_MULTI_BOOT_MASK	0x1FFF
- 
- enum versal2_platform {
- 	VERSAL2_SILICON = 0,
-diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
-index 7d91d288d2ed..1fd05a1157ab 100644
---- a/board/amd/versal2/board.c
-+++ b/board/amd/versal2/board.c
-@@ -21,6 +21,7 @@
- #include <dm/device.h>
- #include <dm/uclass.h>
- #include <versalpl.h>
-+#include <zynqmp_firmware.h>
- #include "../../xilinx/common/board.h"
- 
- #include <linux/bitfield.h>
-@@ -180,6 +181,23 @@ static u8 versal2_get_bootmode(void)
- 	return bootmode;
- }
- 
-+static u32 versal2_multi_boot(void)
-+{
-+	u8 bootmode = versal2_get_bootmode();
-+	u32 reg = 0;
-+
-+	/* Mostly workaround for QEMU CI pipeline */
-+	if (bootmode == JTAG_MODE)
-+		return 0;
-+
-+	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE) && current_el() != 3)
-+		reg = zynqmp_pm_get_pmc_multi_boot_reg();
-+	else
-+		reg = readl(PMC_MULTI_BOOT_REG);
-+
-+	return reg & PMC_MULTI_BOOT_MASK;
-+}
-+
- static int boot_targets_setup(void)
- {
- 	u8 bootmode;
-@@ -319,6 +337,7 @@ static int boot_targets_setup(void)
- int board_late_init(void)
- {
- 	int ret;
-+	u32 multiboot;
- 
- 	if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
- 		debug("Saved variables - Skipping\n");
-@@ -328,6 +347,9 @@ int board_late_init(void)
- 	if (!IS_ENABLED(CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG))
- 		return 0;
- 
-+	multiboot = versal2_multi_boot();
-+	env_set_hex("multiboot", multiboot);
-+
- 	if (IS_ENABLED(CONFIG_DISTRO_DEFAULTS)) {
- 		ret = boot_targets_setup();
- 		if (ret)
-diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
-index 2ef499bf4084..f8a9945c1daa 100644
---- a/drivers/firmware/firmware-zynqmp.c
-+++ b/drivers/firmware/firmware-zynqmp.c
-@@ -248,6 +248,7 @@ u32 zynqmp_pm_get_bootmode_reg(void)
- 	return ret_payload[1];
- }
- 
-+#if defined(CONFIG_ARCH_VERSAL) || defined(CONFIG_ARCH_VERSAL2)
- u32 zynqmp_pm_get_pmc_multi_boot_reg(void)
- {
- 	int ret;
-@@ -271,6 +272,7 @@ u32 zynqmp_pm_get_pmc_multi_boot_reg(void)
- 
- 	return ret_payload[1];
- }
-+#endif
- 
- int zynqmp_pm_feature(const u32 api_id)
- {
--- 
-2.43.0
+Let me know if you’re okay with this approach, as it would require other 
+changes in the driver, or if you have any further recommendations.
+Alternatively, I can simplify the implementation as shown below:
 
-base-commit: 3fd0641a164a4d628fdf28a94771829f3bf9cb0c
-branch: debian-sent3
+ret = reset_get_bulk(dev, &reset_bulk);
+if (!ret)
+	reset_deassert_bulk(&reset_bulk);
+
+Please let me know your preference.
+
+Regards,
+Tanmay
+
+>>
+>>> Regards
+>>> Peng
+>>
+>>
+
