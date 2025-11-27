@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6EB7CFD2F6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 12:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD5DD11183
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 12:16:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E21D98432D;
-	Thu, 27 Nov 2025 13:06:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7F6FD8432D;
+	Thu, 27 Nov 2025 13:16:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LKc2PxGb";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h17l4WNg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEDB584370; Thu, 27 Nov 2025 13:06:55 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 80F7B842C7; Thu, 27 Nov 2025 05:15:45 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A83AE84320
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 13:06:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25A5D842BF
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 05:15:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5957db5bdedso916697e87.2
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 04:06:53 -0800 (PST)
+ spf=pass smtp.mailfrom=davidzangcs@gmail.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-3437c093ef5so467801a91.0
+ for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 20:15:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764245213; x=1764850013; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PG+Wug4dYp8yq2KtMicfAMP1JuTVFpc6yL/2gtV3od0=;
- b=LKc2PxGb3cjVo4qqjnb7u79/iYZ2PC5JhEYIpXWYyc3UvAiz3ZPoEKXLoHqpMa6z17
- KOXzDN2RqJb+Ya09pcrHVNa7F2CVYDTM4dmaOD0uuCmvAIBCyvHoENMJUbXWQZF6qe87
- CEbII/YOHww0kQLTbzAbsrRv284PrtEQWFWwhkJsnWF0vV60I1cElLiUgAa+/uBtTg/g
- 5vQfhGC/x0qx8Pij1GTCMb7ljNwrutiWavLhNlMkr+NJM83YyRyQoI2Ts2XSB3cezR53
- Y/Jw9i2o+LiOvyfklzRkQUH+DATRfsvRgR8pareIepZJVge1ka0Ss4MRT3DLCYfXFUD3
- DRQA==
+ d=gmail.com; s=20230601; t=1764216941; x=1764821741; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=o32Wa6PqOrZUKiHEIDfKUl6PzZPpX4K6DMrjKMjnNTY=;
+ b=h17l4WNg77ZC/WmwyoEZbmya7ZwtbkMwJEZASDm2eudfvS/LozTNvt46XGzQgfHNQ6
+ i0UIQIvWNyE9A+2wANhMIZPKKSZeYr0q+zmJp4Tz9QP9iw1xUZhOyR3/zMRLElJA/1l2
+ fLZQIU+45rsBK32OWTRec3RNniKgJScKBRI01N+D8zObY+DjcZQPJKazgXTGsZwnS8he
+ pxSwInldYOIHGyFYm+aMcusZ7gQ45niwqMpIxRnhlumnMgi7/EwKJmddmCnOmm4zDyHm
+ 3LjaQ1OVYnculxQ2UToCJSZ1ZZD1yGGfIwFfK8iGq4VwGWBjhenT3Rit9Ci+EyaKtKhZ
+ hdmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764245213; x=1764850013;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=PG+Wug4dYp8yq2KtMicfAMP1JuTVFpc6yL/2gtV3od0=;
- b=M8OaK4uKF7rAEiTrF/9SjIBhPDJhWl+m7MQ1fyPj0udnn1GmpTAl+7WcY/eIIufBrp
- TaLzPGCkQLtKZorMOsJziee+OMUJbuU243H6FoP7+Rx+kr+Ad9M3uE9d6Yiz71bJGJD6
- okfotdYcKKqFDthh12hXQklkahi+K5qZKFVRa2pXsEqpqotllsRaoyiQOqOh2ufEbm0f
- VHnLEgwPreXg9wpKnddnkjqC7/ykF6m0B4fGsrXOuhsvs1Z3i2MqP6Do5E7YmRKDAcTM
- 9152oaor43SYajHrbn+Sz8rqee70PUeODvEII3jO9v9H8prjtQC6iaWFyL8J2/f/OoJT
- MdmA==
+ d=1e100.net; s=20230601; t=1764216941; x=1764821741;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o32Wa6PqOrZUKiHEIDfKUl6PzZPpX4K6DMrjKMjnNTY=;
+ b=g4N7scinlhWN/MKG4U9HZD1VtFBl0pisWRUcOElHpR2ic5TC5WvOA3Ief+EieUXUop
+ pfcaBV4VAGtaTJhFgGpB02Bk7i4DwjuTodXVStsd9O64x502h7BlLaMFu5M+P7199uGg
+ Poi8YMiM3yj6yTHW6VhgPT7hzX/DMJXr8r/MG/Wi+teSHiTqGDBi/s6/4KCWAf6+1lB1
+ w2PQlTAIkd0JwVeTUI7Q5659TEjmN+CMd5/a0vrULGkBEVZjyvgfVJO4A+L1sqAhZ0ah
+ 5rQi23dfivr6OvXgdsHmPeW484SlJoylf5sI09VQp6Yp1g+6BD32f83E+bJR50dWN/FR
+ XJ6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXD18HzZIPajstEHaVhbYpmbSloV7CIh0Mwqm/nP1KPtvpJ+GQwk2efN4DaefbfVU6da/RIgDM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzLqWbh3rjZRjFkji0kPYYYL+fIf+iMYdlXmtWIyvBnK6vnR4Mt
- u3zXultJI3ZnCYVKpfKUEZ/Yds4zS1iECvP5WavNDz4MFo+hCD7/dRMw+yEU/efIsi5d3zDuBuQ
- RoPZpl8SS6f+/fA3osFFlJzDZthSkpfA=
-X-Gm-Gg: ASbGnctQz8DS7+R02KsvLsviBk+9mYiDYDJY8wO4mBytUYg3eOH2xb1/N/g2qqsmI6D
- Uufl/MZZJ1jIzxg76vreeZGQvZ8bJjTIhnx1TVIe+mC6fbRpdYkZDcJ+N8qmlWoMe1z557SqzNV
- VZjrUdc7HSdHAHHmFz9M8ngWSo1iC9m90jn/HOK8eCK9P7SHFWZoXSSxfaAZ0Wzb1ubMN5Uf+DA
- nNa/XBTqJfY38A5sWWO6bjTreTxbvRHQA/vP7Mzi4MoePtgGmg28w0veDzNqTcyFYJxo/lxVezs
- JfwXXrHdvlcpFWUOZ+0x91a2PAc=
-X-Google-Smtp-Source: AGHT+IGzYbLEP45zj9j8WqdoYM2XjsCcIM5XcS0KXsHzhOvjbPRgpIZMNmwBRwFiYU2nkMpPZV25EPZbflorN3ctvBs=
-X-Received: by 2002:a05:6512:12d3:b0:595:8350:5824 with SMTP id
- 2adb3069b0e04-596a3e9fbf8mr9191416e87.7.1764245212477; Thu, 27 Nov 2025
- 04:06:52 -0800 (PST)
+ AJvYcCUa6yDun+c7A/c6+Amipu+wSIj1IWyO2KCM008NWOsXZ2XDkuFFqZIl9/Mf2FHaN8UxvDoxj3k=@lists.denx.de
+X-Gm-Message-State: AOJu0YwF67jOBs6FDN75f52HRyFcGalzM8TzkkNCv98tM9ss/kgPPC66
+ IFhX+RRQFlg/GhekzTXd3T8vxn5kBFQ6m9O1Pr8RTp40qYA8LaaDVpDg00jkemdXWKfDRNXHrRv
+ eiL0suc/tMiAdYf0wUwkIgTGBK5pXJzNw/Ka5
+X-Gm-Gg: ASbGnctweC0v9Hl7XkqTzzgnrHJnZPsrm5qmzjz6yU6DGuHq0iubZMn5yN5ohV+6WKB
+ tkTl6fDZb26/UwlWtmxmYqhEZUrGAyI9AqYbpiiNK6vkXPXOb4h3v7+aXRuSJWvYh/Cn/DTr8+W
+ dGVNKj05OusZErzIRu4B3/9UwUqFckpWcAhrVu+taylHbgfWTnZn6xC8bgBVhmvaR/1ZM5FJ16v
+ LwAtdLKdUsXICQ5xzICsnxRVsS23pLsWsarIeS2MGc6diDUqJva+KEFOlfY5E/0ePLu
+X-Google-Smtp-Source: AGHT+IEYJw3Ag4A0FDyMNIi/ZlbMOjQ/rLwu2HSlCV5tN8X3i+gYSJM+liRMrYgpwliW84e7nHpEYYOEP2WEjt+FnWk=
+X-Received: by 2002:a17:90b:4b09:b0:341:6164:c27d with SMTP id
+ 98e67ed59e1d1-34733e2d49amr20769526a91.3.1764216941495; Wed, 26 Nov 2025
+ 20:15:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20251127-imx91_frdm-v1-0-8f42646d89ad@nxp.com>
- <20251127-imx91_frdm-v1-1-8f42646d89ad@nxp.com>
-In-Reply-To: <20251127-imx91_frdm-v1-1-8f42646d89ad@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 27 Nov 2025 09:06:40 -0300
-X-Gm-Features: AWmQ_bn6O88VDexB7lqE4gPAZjLgqN5kjUjs08ODHiePc9T_tfLqFCKJmsdsg7U
-Message-ID: <CAOMZO5AFdPrPR=gRuf-70k1iEzN1ZiMs7aKRtuT8BMkQDPvCQA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] arm64: dts: add NXP FRDM-IMX91 device tree
-To: Joseph Guo <qijian.guo@nxp.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>, Ye Li <ye.li@nxp.com>, 
- Alice Guo <alice.guo@nxp.com>, Adam Ford <aford173@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Simon Glass <sjg@chromium.org>, 
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+References: <20251027002458.16741-1-semen.protsenko@linaro.org>
+ <20251028165056.GG6688@bill-the-cat>
+ <CAPLW+4=JOiPk+gOHH4umevJxJweitAn3dpec1xTe9ZrgCAVAMA@mail.gmail.com>
+ <20251125165112.GR2125796@bill-the-cat>
+In-Reply-To: <20251125165112.GR2125796@bill-the-cat>
+From: David Zang <davidzangcs@gmail.com>
+Date: Wed, 26 Nov 2025 22:15:30 -0600
+X-Gm-Features: AWmQ_bmvTK11VgnqiIBAbT-wekwm8_SYVFBToNfc1mvMN199akL7pwV5EMzJLF0
+Message-ID: <CACwB3C8g2QGzQESKGnBr3BFU84y8H7d1K2T5Z2cBrvZ1U529Hg@mail.gmail.com>
+Subject: Re: [PATCH] autoboot: Fix inconsistent countdown output
+To: Tom Rini <trini@konsulko.com>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
+X-Mailman-Approved-At: Thu, 27 Nov 2025 13:16:04 +0100
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,21 +98,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Joseph,
+Thank you Sam for the fix.
+Acked-by: David Zang <davidzangcs@gmail.com>
 
-On Thu, Nov 27, 2025 at 6:55=E2=80=AFAM Joseph Guo <qijian.guo@nxp.com> wro=
-te:
+On Tue, Nov 25, 2025 at 10:51=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
+e:
+
+> On Mon, Nov 24, 2025 at 02:49:23PM -0600, Sam Protsenko wrote:
+> > Hi Tom,
+> >
+> > On Tue, Oct 28, 2025 at 11:51=E2=80=AFAM Tom Rini <trini@konsulko.com> =
+wrote:
+> > >
+> > > On Sun, Oct 26, 2025 at 07:24:58PM -0500, Sam Protsenko wrote:
+> > >
+> > > > Commit 5f70be08b015 ("Fix autoboot countdown printing wrong")
+> introduces
+> > > > inconsistency in how the countdown is displayed. For example, in ca=
+se
+> > > > when BOOTDELAY=3D5, the next output is observed during the boot:
+> > > >
+> > > >     Hit any key to stop autoboot:  5
+> > > >     Hit any key to stop autoboot: 4
+> > > >     Hit any key to stop autoboot: 3
+> > > >
+> > > > That happens due to different printf format (%2d vs %1d). Moreover,
+> the
+> > > > mentioned commit fails to handle the case when the user is holding
+> some
+> > > > key before the countdown is shown. E.g. if BOOTDELAY=3D101, the nex=
+t
+> > > > malformed output is being produced:
+> > > >
+> > > >     Hit any key to stop autoboot: 1 0
+> > > >
+> > > > That's because the fast path code wasn't modified accordingly, and
+> still
+> > > > tries to erase the number using '\b\b\b' format.
+> > > >
+> > > > Fix both issues by introducing a dedicated routine for printing the
+> > > > whole countdown line.
+> > > >
+> > > > Fixes: 5f70be08b015 ("Fix autoboot countdown printing wrong")
+> > > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> > >
+> > > This seems the reasonable path, given everything in the following par=
+ts
+> > > of the thread, thanks.
+> > >
+> > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > >
+> >
+> > Since there are no new or outstanding comments for this patch, can you
+> > please pull it for the next release?
 >
-> Add the device tree files for the FRDM-IMX91 board.
-> Provide the initial DT support for FRDM-IMX91.
-
-Has this dts been sent upstream? If so, please include the lore link
-of the submission.
-
-We want to use the upstream device trees in U-Boot as much as possible.
-
-It is OK to include the dts in U-Boot first, but please make it clear
-that there is an ongoing effort to upstream it.
-
-After it hits upstream, then we can switch to OF_UPSTREAM and delete
-the U-Boot dts copy.
+> I'm going to take this for -next rather than master, soon, as it's just
+> cleaning up some output. Thanks.
+>
+> --
+> Tom
+>
