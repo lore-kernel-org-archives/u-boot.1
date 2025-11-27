@@ -4,98 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA322D111A8
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 17:48:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4783BCFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 17:54:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A8E884459;
-	Thu, 27 Nov 2025 18:48:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B20768437E;
+	Thu, 27 Nov 2025 18:54:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VvUUXDCx";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TYxS1aOv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B144B8448F; Thu, 27 Nov 2025 18:48:26 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6CC258437F; Thu, 27 Nov 2025 18:54:49 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 944878437E
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 18:48:24 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c75fd8067fso641377a34.2
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 09:48:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764265703; x=1764870503; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ElPV5k75LQSBDCPI4M2AuE8aym+4xT9Zdiq4PXIlmZo=;
- b=VvUUXDCxeDnDks7gq5PS4SPKg/auE8SGGwH4IE2Anlyr9WZs/kfYPYkFBKjMq0bfTI
- iOd1/TEAQivgyV7mxE0LheEXunB280hqKL7qwi3Ut0cG2LiXUkc1zAYUS4UdQ5Qi27Ia
- j4XVKEjg0QHd5fQ0juWTuADZibHYs9nLVXrCi6hjdEicPYc1dcNsvKpTHT3AqgK1qZ2z
- uxLyaENnv3kVZ2BIc0/MYGi0YJfnJLDTHwV9UapS6tEZWvZGEsl/gEAEqX5XCGrQVdQz
- LO0jUKx2ua3uwpXctI2SbXi0JajeNdH5jJ1GqRdlhn6Dj18o2ET/mQKnUmd2gkgbluYg
- uZXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764265703; x=1764870503;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ElPV5k75LQSBDCPI4M2AuE8aym+4xT9Zdiq4PXIlmZo=;
- b=r81Koer7jXa2OC/TjUp7FVfU+K0DQuObCGd9wkDv+w3ksDh8qwuIZvg+0ar+XeltTm
- 4a1XQY3DlWoPnebODjE/Wd1knp2ErsTwrmjYObV43TqfJG7+hAOyuU8k0U9uhsIIirpZ
- Jwj6wNrmUsFyH524SvQsmD+3zQke4YEIH/flYXzJnPsBsrBZxce24kySZMgRE+a+blbX
- ctYw3oA+oeeF1JkiQjUOrKD000Q7KcTHtxCIjfs8tmAZUE/BUh5xP1g9sjvICqgM9NJH
- q1ZGzqPErhCxqovbSjp6OVfiSF/9kv6MUNFitFZAkeUBqVC2ISEcDbH1tnICPRhxFFL4
- 4w8A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWrspVet9++6gk9jtmH3LoJXJm7H9Q2Gwroj28jx0lo5ML1HVWw8LHgLvDyLwWQQb8P7kPwGeg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLNbSyg+GkL+/EDaTYcrCdE5wbMr2OIkE2iGfnanYT8OLEMtVu
- OoNd1lJc6PAEkt0/RQWRUJ++zRLeZtozp+FsyrADz7F7z2iRhfzFfu3fqRLVHHpc//d/fz7u6MW
- CmDofluVbSq8eiu/AODC4r2imQYHRCdpQgu3hutg=
-X-Gm-Gg: ASbGnctZ5X9bgmkQPURqG8Ybtehpjn/YlIzhNiSCbIpH5l5vl1MVBRoGTiap8hTeIRL
- HS7Hp7maNWPWiLeBS9d/6SHvlHT98KdlXMAMZcFxgk5AYYo4ALqWLhB4pt9zCMsp8Hr/b9hBM1H
- +nb1M1nYd6B3vX/wXL6xE+n9far7WBtA71TXRNJpL2R1q+NPZQ2fAwheJPJb7q66MRp7p9nC9f9
- RNHw4EYd3RY65kxnL+PYxr00+UCxJScNAkrn1s6/VHIwyU5xMdHWSjGum+mHGTvdaiRodjpMhLp
- lqGPSg==
-X-Google-Smtp-Source: AGHT+IGxDL06xw3/10JNWD+7rkAzCG044orOuF1OiTlkhZQMnVfLJD2ZIcPxqGHFWtz4nRPYi34cSsxQfHASrSosWMw=
-X-Received: by 2002:a05:6830:6104:b0:7bc:6cc3:a624 with SMTP id
- 46e09a7af769-7c7c45314a4mr6281154a34.32.1764265703286; Thu, 27 Nov 2025
- 09:48:23 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7144583B2C
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 18:54:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from rpi5.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id C4D5C42490; 
+ Thu, 27 Nov 2025 17:54:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1764266086;
+ bh=qFdPcW4WJQmdLypDhnMLoGM/guGRUiuNUCDOrY96o84=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=TYxS1aOvitRrNGd5SSGbSTW2ZFfl3ALcgh7/EcgsmLbPJTn3ZReO7ZQH/ELEYHjxt
+ P9dnI+qjTE4canXN1K9dGQzqYfWBcx+gIdJgAt1vHDTtBBLuT2EJX3FSivq3D3Gavb
+ JMU6usSUViUbvv89Ef/CK7eWhnaA5k319fF1y9kYuad4TPt35/5FgH5N3JeXt/yjHh
+ lwv/nkV7Q3/V2xhY76lkszo63dnIDpe20CCFTDsc4ZjyZOghPWIv9pRqGCcPsc6Foa
+ YroyVNNmRIguxMVSaqaZ/nQW3T4SES0EPHg9FElVUPCGyLVl7ygKgRvWL4APqmO4AL
+ DUXSIpKDxs8JYWOZ6exBVPN3LUVYD2sLlKl0LrzJy17a7RCGXCync8NsyfyfCgDE63
+ ESN/BdgH4HH0OYe7rxOg64Crwdul3CRMpB5eoN/yj7Ta9o4GDY/u1gCD1IfeHCWTKe
+ 1ZxebpGWiqVb8xctaKuq7IoTCbQIdeVYiwzgxubSVhy+igjDZu/aECHm7n63IV6eWW
+ U9NmpCH3gjz4YIJdhzIoQoOh4nIWZGyzFRqXvsg8co7Q9c2RXRsjLjRrb+ulndv6e2
+ BvPU6y85tyLXm9k9CAWW2OtjxcQJ0kqWOJLBzkevE50I8pcNwKUgAP37fdTa48uyyv
+ 730Jm0TmCKZegOPaIZtltPwA=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Bin Meng <bmeng.cn@gmail.com>,
+	Marek Vasut <marex@denx.de>
+Cc: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2] usb/xhci: avoid noisy 'Register NbrPorts' message
+Date: Thu, 27 Nov 2025 18:54:25 +0100
+Message-ID: <20251127175425.639086-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
- <20251125081316.17329-7-alif.zakuan.yuslaimi@altera.com>
- <896ecbf4-d85b-4c09-b8d0-9730be370673@siemens.com>
- <e2f1c154-573e-4326-ae8c-ee9ded46c71d@altera.com>
- <dbe16e20-ae32-441e-b987-6cb5feaeeb93@siemens.com>
- <CAN7C2SCmt1z_rtQBpoBwpDJBCcXWAX7eZTz=mxQ1SqPR=rqWfw@mail.gmail.com>
- <75a890fd-48c0-439e-962d-6fa85fe67953@siemens.com>
- <CAN7C2SCSr3h6dJLEXrUEdvAHQYyEfo3jWtkUkNccSWYTv9M7fg@mail.gmail.com>
- <0c42e18e-60d7-417d-9b83-dea8ffd4a362@siemens.com>
- <CAN7C2SDH6g0PgDUsu8hEnEA4yr6z+YA5afWhK9-D7-7wBbe33A@mail.gmail.com>
- <b977adfc-f16e-4436-91eb-8824932379af@siemens.com>
- <CAN7C2SCiTqJDK2ZVjJ_859NEDg6tD3KWQqzVHqqmbyM8+aBvLQ@mail.gmail.com>
- <d4b1acef-fd8e-44d2-b583-450d4c61190f@siemens.com>
- <CAN7C2SCQkBfbq1f7b6W2sm9Q-rtB3+5a5NUMOrXWCite7BTLNw@mail.gmail.com>
- <4f44bb43-3b8e-4cc0-956b-af6f1e6e65c4@siemens.com>
-In-Reply-To: <4f44bb43-3b8e-4cc0-956b-af6f1e6e65c4@siemens.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Fri, 28 Nov 2025 01:48:11 +0800
-X-Gm-Features: AWmQ_bmeBAaHFbUqLw6KPej0InvHY0pUaZRGL4p2pWhdizpjtvmpLQD5YIwPbHI
-Message-ID: <CAN7C2SDKj_Pstez_gPOu3CSbNU9uzn0eBTLgpTK+Ezs4fg5qqQ@mail.gmail.com>
-Subject: Re: [PATCH v1 6/8] configs: cyclone5: Enable SPL FAT support
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: "Chee, Tien Fong" <tienfong.chee@altera.com>,
- alif.zakuan.yuslaimi@altera.com, 
- u-boot@lists.denx.de, Marek Vasut <marex@nabladev.com>, 
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,22 +75,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Now, let's assume someone still wants raw mode (and [1] suggests that
-> there might be cases), the raw sector mode is not so desirable because
-> it forces you to place the binary at a specific location on the disk,
-> requiring that to be synchronized with your image layout (such as a wks
-> file). Given that the romloader happily uses part-by-id, I would prefer
-> that for the SPL as well. Still, if someone configures another mode,
-> that should still work (when providing the right magic sector value).
+We should avoid overwhelming users with non-essential messages.
 
-Doesn't matter I had completed all three modes boot with minimum
-change on latest u-boot. I do check your patch include indeed is
-bug. I will pass out patches and this group members should help a bit.
-Just need to finish checking that the fat boot is not affected.
-Old u-boot-with-spl.sfp on my patches should run w/o issue.
+'Register NbrPorts' is a debug message for EHCI. Do the same for XHCI.
 
-I will acknowledge your work with no worries. Then let T.F. see which
-is better for u-boot mainstream as well as Tom.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	improve the commit title an message
+---
+ drivers/usb/host/xhci.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks,
-Brian
+diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+index 3ee1f67190f..d59804580f1 100644
+--- a/drivers/usb/host/xhci.c
++++ b/drivers/usb/host/xhci.c
+@@ -1249,7 +1249,7 @@ static int xhci_lowlevel_init(struct xhci_ctrl *ctrl)
+ 
+ 	reg = xhci_readl(&hccr->cr_hcsparams1);
+ 	ctrl->hub_desc.bNbrPorts = HCS_MAX_PORTS(reg);
+-	printf("Register %x NbrPorts %d\n", reg, ctrl->hub_desc.bNbrPorts);
++	debug("Register %x NbrPorts %d\n", reg, ctrl->hub_desc.bNbrPorts);
+ 
+ 	/* Port Indicators */
+ 	reg = xhci_readl(&hccr->cr_hccparams);
+-- 
+2.43.0
+
