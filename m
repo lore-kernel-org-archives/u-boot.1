@@ -4,70 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85211D111A8
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 20:15:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B32BCFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 22:04:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13465844D3;
-	Thu, 27 Nov 2025 21:15:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D2343844C4;
+	Thu, 27 Nov 2025 23:04:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Hd5CDn2Y";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nLg1zbiL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ikjJ+9a7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E82DE844C5; Thu, 27 Nov 2025 20:58:15 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4CE0C844C5; Thu, 27 Nov 2025 23:04:27 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCBD18449C
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 20:58:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2DE58449C
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 23:04:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4dHS0P3t3Tz9scQ;
- Thu, 27 Nov 2025 20:58:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1764273493;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=v/DLDbnzaKFNiTiRUgt825cH7kdB5LbVSGi9/a7WZQs=;
- b=Hd5CDn2YMFSBQcYVQYb5zynpuOLCrSe1hEBtkn46vwWgXLNt9dOamqTTFsgDJbQZGWA6Sf
- ftX01PtzFVwR+A9klfULHFQ1IhcrFKikRyauKAfBjIilzATq/CKfzuGDwAsBxqsM9JDhVq
- VHqN5dOP4T9Ua3Cn1f8oMJzzJNa1OxovqBfdR/DVyW8lQVX0U1MPWUXFUE65g0Ha5uxHWj
- rQxBnV+bfuBEMhs0Ktnfxueo445ycjjkkknNpluw4uDuagIzkwGhyTqL03Kq2YGCY66/6V
- 7NY1IMwrJxakb6XpIxQsfxlLcbGexDsoQIa/MqDWcKzT+p4/DxTAOjM98ge8+A==
-From: Marek Vasut <marek.vasut+usb@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1764273491;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=v/DLDbnzaKFNiTiRUgt825cH7kdB5LbVSGi9/a7WZQs=;
- b=nLg1zbiLblrm89ReDpMPEWw20HW9k/rofSL8VhP4Yzzp0gQG+mTCbZEzpJeYiF3Ly5Awpn
- tZetpoBjwgDZ42IkGjg6JuQ1aoad3P+/ghwHAZ2uEHoi0GpFLLvyunjVhZOL4c/L5ygUld
- GDBmybPMaxQBWyLaeaswSsatvzbVz1JyaHeyCsybuwB7lRjvLV/3R0WUMGleIsJMsDW6qG
- IV8YiLjkZJTD4YO0P/Dg1DQUTz5Lmx5zpoyiHAUPpAhFqF8QIVZCA0g8qZLo3EC76eO+kV
- sUnybMGhunFdabaQuOmuLHHCqtIJLW0qcVraGjnijQnilfLlrJEZXPcI4VXcTQ==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PULL] u-boot-usb/master
-Date: Thu, 27 Nov 2025 20:57:40 +0100
-Message-ID: <20251127195749.81156-1-marek.vasut+usb@mailbox.org>
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c7613db390so585576a34.2
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 14:04:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1764281063; x=1764885863; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WJ7vS25KXKGVVHm8AdDalmZ3Si9Ucek3DbPnLLA8DdU=;
+ b=ikjJ+9a7vjl8f0obcCWL9g/U4Za3QYWSlAuWE9UZnED930DCz5AQAlcvjy3Uf6fowN
+ D6r1o5So4paCbYzyWOpPzOE9xChXypt69pi73uHdb0fksISzkzEEwc3hR4P9MQ6gZc59
+ cI9SQzawckfGBylOau2dYF3Hpbbr6PjowhCufSCtH3ShbhpnFr+MfUXE6M54G5Bn2CYO
+ xoPaR2w0sbhdswiRtPcqzRvVHbzZgbMIj/nmJxnXLRMg1F9+J5x8hnHBWXipYUQQas5c
+ +detxOYX9L5QeirBfl5SPBeGWKaQ4XrxBsLop0IK4MKow2ebZg3fIdnovccjL74jI66/
+ KONg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764281063; x=1764885863;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WJ7vS25KXKGVVHm8AdDalmZ3Si9Ucek3DbPnLLA8DdU=;
+ b=uoXmDc/QmWpsY9XqtE+Bo3NM6lzNp8+MeIpx5cBHzUdbLOlP46C8bKIKmbKRVcFiTN
+ uUDlTIt21qjHuk/Y8u5GwOsonKD59OrjuEHuztcHuK5LfW+XGfK8T05UYuexKF/i+XCy
+ hRC0bSJDZu18gs7DXy/5NoDXLuoH0W/+WEuQ0z/+sIE5Yt4+cVn0xHFp7abw/pyhiVzK
+ oQmwFGgXLhJ2G2Is33790A3Ti3h1fw9VEWLTCZWiFqk1PgaEsMucM3Xc7+MjkemxGMlh
+ pYOA6qJduz6+fHH4Vca3aAoEW+dg9RGcGdZsutT6PKswP/Qsd2wWehfpGdiJGHHcfo9w
+ 31Iw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXgQWJ7NWUg2oyNDSARy/tuZPswN8DKqRtHBys0RrhpF6D7NMIfVx1rRgfF5Ox21mwz+VHWuvU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxD6HM2WJe1zZZ805pGzvMuZCw8XHOOJDxMdzVK6kxVE4PniC5t
+ IGuT3KNQBxs5G/1V5yKaFPqung3ii9EU26nsRiDC/b0y83G03Ucfl9Yj2PPq0q84MgTuIlnhuBk
+ gZlWp+Pko7ZkiXixTUlPsJEvU8oE+fi0=
+X-Gm-Gg: ASbGnct/eDhnUIgJTEx+wWHM9xXPkK0O87zvP1YAhriaeDP3TrwhVGNxOnC7Pnwibqs
+ jF/JfEWk3jNII9DYHur790IzU6vqY5nivcrpozIcjjmHnXb4dzTJM0z1vFE/ejlOrs06qgCi3nz
+ EQHIrJrnUuTpQsLATxH1iorImpwrgrSztAvBhcmzHlN6GzFdtUjP+63AOCR6IJl+HApE5LMibTg
+ YcEG21aC+t6FmmI2Ps+Q0nDt454Lw2mBZRI0oAzqDWAjUfOfcvas/E48AvkW/2FVb7PLHc=
+X-Google-Smtp-Source: AGHT+IEqnX6Kku8tcVoZ8I9VBTtpgfEjc7mDCUpwwnt8z+mBI/pbnXHp5z+QbJcGG3rHQ7P1RkrPXfgC64G46mUjx/M=
+X-Received: by 2002:a05:6830:71a9:b0:7c7:1e8a:c9d8 with SMTP id
+ 46e09a7af769-7c798e031efmr11708081a34.36.1764281063293; Thu, 27 Nov 2025
+ 14:04:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 82d14dba53c6d432002
-X-MBO-RS-META: fpfnjmsfczpybyyasz6ezju7hdjmribh
-X-Mailman-Approved-At: Thu, 27 Nov 2025 21:15:36 +0100
+References: <20251125212953.1733-1-briansune@gmail.com>
+ <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
+ <d024aad3-6ad5-471e-8290-e802bdbf7ead@cherry.de>
+ <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
+In-Reply-To: <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Fri, 28 Nov 2025 06:04:11 +0800
+X-Gm-Features: AWmQ_blGCZLNKRyRdW7l6QYZX9JuS0_NmgqE_Ueg8xazdxkEilZjeDNYmfmRIZU
+Message-ID: <CAN7C2SBPC=u7QJD7T=3NUUOjPqXo1UWqHb_QRzsOR_wtvZrk7Q@mail.gmail.com>
+Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+To: Quentin Schulz <quentin.schulz@cherry.de>, "Chee,
+ Tien Fong" <tienfong.chee@altera.com>, 
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,23 +97,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 962711498ddac6179f1d1f3fa123397ba02a381b:
+Hi all
 
-  bootstd: rauc: Only require partitions for one slot (2025-11-27 09:27:03 -0600)
+> > CMD_CYCLIC is enabled by default ("default y") if its dependencies are
+> > met (that is "CYCLIC" as specified by "depends on CYCLIC" in
+> > cmd/Kconfig). So when you enable CONFIG_CYCLIC via menuconfig, it
+> > enables (by default) CMD_CYCLIC as well. But you can disable it if you
+> > don't need it for example. If you add a "select OPTION" in an option in
+> > Kconfig, you cannot disable OPTION anymore.
+> >
+> > CMD_CYCLIC is not required, so you shouldn't "depends on" or "select" it.
+>
+> Yes this patch had removed it by cross-check via real board on the fail
+> calibration issue. But CYCLIC and CYCLIC_SPL still a must to fix the issue.
+>
+> Brian
 
-are available in the Git repository at:
+Would Altera also confirm this issue a bit?
+I can repeat this issue by a fresh pull build.
 
-  git://source.denx.de/u-boot-usb.git master
-
-for you to fetch changes up to 7dbcc316a64d3e5bf86632f078c5c08295e882fd:
-
-  usb/xhci: avoid noisy 'Register NbrPorts' message (2025-11-27 19:41:03 +0100)
-
-----------------------------------------------------------------
-Heinrich Schuchardt (2):
-      usb: USB_EHCI_PCI depends on PCI
-      usb/xhci: avoid noisy 'Register NbrPorts' message
-
- drivers/usb/host/Kconfig | 1 +
- drivers/usb/host/xhci.c  | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+Thanks,
+Brian
