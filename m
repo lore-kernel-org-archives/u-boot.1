@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46EC7CFD2F6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 16:56:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE73CFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 16:56:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AB3183B4A;
+	by phobos.denx.de (Postfix) with ESMTP id B4B9684480;
 	Thu, 27 Nov 2025 17:55:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B8bUi78v";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P+VgILq6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F4868447E; Thu, 27 Nov 2025 17:55:52 +0100 (CET)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 9917084380; Thu, 27 Nov 2025 17:55:53 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6818D83B4A
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 17:55:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8795C8447D
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 17:55:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-3ebd1b07919so272067fac.0
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 08:55:50 -0800 (PST)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-6579872f00dso418538eaf.1
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 08:55:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764262549; x=1764867349; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764262550; x=1764867350; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6hQGHVzmTonZro0TAaVBiRXP7oPJK1nzVw4Dli8nQuM=;
- b=B8bUi78vyx7xLfRum2U8vIdk4RES81Z/9VClq9OL8IXYddJBEIF77R89Fvl5AhMCAO
- 1JwOqEsE+nAafPsVNwUE4UpVvPwiZSkW8r1zV9oBi8ZKT/Yzn7PqRxzGYCXtanPD3REa
- Cu2jWBY6TZE3Rmrroy171+jv+nseL4Lq1FJjQ=
+ bh=nkNDm4jW8QyKjtucN0QnroXFJdiZ39jesn7FN2wRsuQ=;
+ b=P+VgILq66T7Dx9nAiQUIHMH0K5oNdAq8f+hTBpaJBoCqKpUlWi9xHJXyFbCim3FdCW
+ 5RiTN9DFZfSpnBBD1p8l4UsG6XsYCjdMY9XBXqEJ8DVlBoufKNGmqh9g1LKsklanWmV1
+ LBpluH2kvzdCUgj7a5JH08oBrISSjBm3Zpb38=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764262549; x=1764867349;
+ d=1e100.net; s=20230601; t=1764262550; x=1764867350;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=6hQGHVzmTonZro0TAaVBiRXP7oPJK1nzVw4Dli8nQuM=;
- b=n8V5O/jg3nwUeN3BR915QX9l015gDWa+d3xsmcJnoPPenA5adnfwXQrkKC21hGDjrz
- HWFlBnLR77h75XYXG6s9q00204SeFF4XvFnFSkj/TFAIyW3ZqZj+qZha42uR9yuJ+WR4
- BSyhNQbsEM22FXKrMgMlKimcDmkFJvQLgxjOjJfKvQFVdTbjJkAWIxKqT5AX3ejERk6O
- 6HE/gaq3uOacoMK62FEOWr6vt7d3szDnc8iQvYR0N8DSJVAx9ei7utBkNSqSnBMeMpmF
- ylz3wbHHZTd9sVfBwrBIL3vgGu97pqwJhCEi2GiPY+dEj6X3T+tSBPmjz+ncVirfjBwe
- e3TA==
-X-Gm-Message-State: AOJu0YzxTSFOB4UQZG15g74cA4ncLuM9HMuCvuz0mjHHOXmG/XWkdTiJ
- noDBdAM9/Pw28vszggD8T4LxQ+Ug7VxKpMPb+WW8/uJR3+Yt+y9sPVHjy4lZpzbeBrDIZGbJH89
- kNuCIyS0=
-X-Gm-Gg: ASbGncusxAEw+TYGgJyhnu7XgJwROW0nfBX6/l5KezxAbt/M0rwBXW4UEYwVvYxx5ol
- o2Ne/PVdfITJYMVGTMu3VSOeA2bYJA+kBNOJouhu9ROiq6GRi+RHMVvY8aFG/gunXp1MBYhHeWw
- s9/RTApyZxV7Acg+6HefDpkkvJzLyrpaNER5v2w+7J8kNLkJ+aK4io9NvrCLIQV8iKtiVwhApkb
- +jlExy1FQMWDV7IGYTqE+kamy/gQCGmQwYRqNjEVrJ241R05wpt90SDSiz1ReT4i25mtTKumreY
- 9r7C4NzXzrNzzewxm5m1Jl31wGus4gx62y3tRAIgKPJZJChMLA0f3YDKxLsOppEGDvJyhA1p9FQ
- fDcVCAtP06HsE1cY+jiAqIGfj4WkxDFkBATcuCQ88i+MuhDUBiGc+R83py4HUfWUEp/5CFbonVe
- FQIKv2tVgJqM+cFXU3eThk/oThqrzfnQeKNH+Xj4dTF9r22zKC
-X-Google-Smtp-Source: AGHT+IEyNPp/xVkvToq+wgVCDYm5SDxkdQtkU1MHBHpIgIFvydSayCRu4cuvXEW4bu0AwuirS0JRtA==
-X-Received: by 2002:a05:6870:d6a6:b0:3ec:5cc6:315f with SMTP id
- 586e51a60fabf-3ecbe2c4617mr10094027fac.3.1764262549196; 
- Thu, 27 Nov 2025 08:55:49 -0800 (PST)
+ bh=nkNDm4jW8QyKjtucN0QnroXFJdiZ39jesn7FN2wRsuQ=;
+ b=OT1mfcJrbUpEL2ea1GXxH4fClS88HtwuFeRrAwpPpDAqPjdPArp12QnNq3G5AA3eJ2
+ 8XVo6xoUTteNdcAB8tvR3l5o6OQNas92aCj/30wuH2PS433cMt/i1GohhVGepmaTtONy
+ 2FMhGoKyRckl9575a2zPW415vF4JBbN64ClxvO+60VUM6BtuhpHayyYdG4of01U5X+qs
+ gLb2R0Et/5ODQTYsvomtZjJH8/7+LW4jyrFX8qOzkiAox3jf/E2vMoP/ruCyCOtlGmci
+ GDokhorBupi7ai/eET1YftU50Bb6bHhuyAPUCtC9HRhwXIVqAhZrN9j7xZF5YA8khmhu
+ qecw==
+X-Gm-Message-State: AOJu0Yyj0hCFrXpELTtVXeEMEGL9DVERVAJtBiS9hjf0CY94r6RpBFYU
+ /DHFMgG7N4krG0NhlGlMVP1Cp/wyJ6wuz4247UbFEml8Y82w/H0/LIEboGtrX9AWyHKiht4Wfgx
+ 87eJ3VMw=
+X-Gm-Gg: ASbGnctgOoa/XWOhMkA41IQ/QLkU7NgnE+o2m+Lkhmybgv3HqM0+Nz87iJMBLe2t2YP
+ bqfjiNKwXvPCHRQz3gqAWSdEwQicLva7/LhUKLAzDkp+iTt01PlAEBavZG7O016W3wFL2fqwdmP
+ 4L5s856fAi5d5ea10H+jQ40ZGmvY/2kQ3RhuRYCEzDRHM1bHuJXjGovt6t9lyYXxX4RQLtxWj/W
+ lMKHjcfIDTtl/rXgxNY7qJv390CFJPBV4irf3ACTW/KPT9k0mTTUijEe09FjZr5Zkd3id7qgUz9
+ 04OzOtITmUen9Fb+N8q9XKE77mrawigJByq19BZlAXSnPtwSshAry9WSWE2Iz/+Bkh7P8+0Pucu
+ BgzPTornojqqWtu1/8jHA4LeLCA3/OfdBcjSl9lGcF/ULmf8D1CJsURWfM2N+a+3aRKhFDF1Qaz
+ GRMt4xkct0IeJoIfKNv6MPqfur5wEjdtpSJ28StUOD/u39fUsE
+X-Google-Smtp-Source: AGHT+IFoaNTv1jqAeugD78WIVf8xWE1atiuEwlYkk2I/Fv9LkkS1YJbIslc3a60xuLVc/hBLN4TbaQ==
+X-Received: by 2002:a05:6808:a60d:10b0:453:f62:de06 with SMTP id
+ 5614622812f47-4530f62f34amr1503572b6e.35.1764262550330; 
+ Thu, 27 Nov 2025 08:55:50 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f0dd05e0afsm741584fac.20.2025.11.27.08.55.48
+ 586e51a60fabf-3f0dd05e0afsm741584fac.20.2025.11.27.08.55.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Nov 2025 08:55:48 -0800 (PST)
+ Thu, 27 Nov 2025 08:55:49 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Maarten Brock <Maarten.Brock@sttls.nl>
-Cc: Kory Maincent <kory.maincent@bootlin.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-In-Reply-To: <GV2PR05MB11941393665E8D8E4EC9BA1E883D1A@GV2PR05MB11941.eurprd05.prod.outlook.com>
-References: <GV2PR05MB11941393665E8D8E4EC9BA1E883D1A@GV2PR05MB11941.eurprd05.prod.outlook.com>
-Subject: Re: [PATCH] board: ti: am335x: Fix DM_TPS65910 condition
-Message-Id: <176426254846.4117678.287766807160012328.b4-ty@konsulko.com>
-Date: Thu, 27 Nov 2025 10:55:48 -0600
+To: u-boot@lists.denx.de, Greg Malysa <malysagreg@gmail.com>
+Cc: Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, adsp-linux@analog.com
+In-Reply-To: <20251126195047.866-1-malysagreg@gmail.com>
+References: <20251126195047.866-1-malysagreg@gmail.com>
+Subject: Re: [PATCH] board: adi: Fix missing semicolon in nfsroot
+Message-Id: <176426254936.4117678.5481533728564911601.b4-ty@konsulko.com>
+Date: Thu, 27 Nov 2025 10:55:49 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,18 +102,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 25 Nov 2025 13:55:24 +0000, Maarten Brock wrote:
+On Wed, 26 Nov 2025 14:50:31 -0500, Greg Malysa wrote:
 
-> scale_vcores_generic() calls functions implemented in
-> tps65910.c, not tps65910_dm.c. Change guard from CONFIG_DM_PMIC_TPS65910 to
-> CONFIG_SPL_POWER_TPS65910.
+> The nfsroot constructed as part of the default Analog Devices boot
+> strategy is missing a semicolon between the server ip and the root path
+> itself. This adds the missing semicolon.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] board: ti: am335x: Fix DM_TPS65910 condition
-      commit: f06e1c04bffb89cd14d559c8d3e219ab2b815093
+[1/1] board: adi: Fix missing semicolon in nfsroot
+      commit: 70ab39e2305f6ab9b7b1752e26b0e4293129009b
 -- 
 Tom
 
