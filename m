@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57895D111A8
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 16:55:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47E68CFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 16:56:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CDAC84459;
-	Thu, 27 Nov 2025 17:55:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B8CB284462;
+	Thu, 27 Nov 2025 17:55:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YpaTCcH0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cIKLt18Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB9728443A; Thu, 27 Nov 2025 17:55:47 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id BCA0C84462; Thu, 27 Nov 2025 17:55:48 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 948BD83B4A
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 17:55:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A94C583B27
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 17:55:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-3e80c483a13so251629fac.2
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 08:55:45 -0800 (PST)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3f0c93ecf42so851598fac.0
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 08:55:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764262544; x=1764867344; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764262545; x=1764867345; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kzoECjDWx1Pe5DEU/QVa937maoeStl0clfC4oOsSXho=;
- b=YpaTCcH0Eawb92sCd+7m70ANkW0ZRrqz5UtcIai3XxmsMBrWs9Md1RaQ72QcQfNx+k
- YoNsm1QLSIebdOHOyqSTDAD2wkTWyggQ5e7r4VQJ0/UBz02XfTgBotYpUhGtVvJsC1Xf
- +yyLpXGO3GzcxmaZI0CoC4L9oK3ED7A3IZ8f0=
+ bh=oR/MGbOleMxTomSQSQJzkh2PysIR4F1JiFtffZm3uPA=;
+ b=cIKLt18ZDworyCmqhPJm7r/ALB4qdmph/lmWkvF83t6xb+z+3xmdtK1ebPILcAS6Xp
+ oirz2p8zCB+jol8v9UYBvWRR0/lcUoqJ4jr+g6vpswTlEjlWOyYqcsfnhRPeob8P6trP
+ YfVHwarl+MwLYIn2cyI0wSwP3LK4t3jImJOlo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764262544; x=1764867344;
+ d=1e100.net; s=20230601; t=1764262545; x=1764867345;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=kzoECjDWx1Pe5DEU/QVa937maoeStl0clfC4oOsSXho=;
- b=UV+DGTanuo4jlnGNulFgClpxIr1Ko7hecWjchUYHvpt9i3J2o7/jwVC5azarzL4+X6
- wHxGMnQA9RC1z/DAhBb5B1PQ/LITGJtKTQg7AvvrH34ZK0YiZpdbc7W1CihhWSsPBckv
- lhTUhG7kNxDHIyS6GxDFVfocKV8iEQrZRfPzWdNK+mLkKbbYUmrxDRbcH3oJHldMjOx4
- 08RUO6tI92/5yYUJgsBrCSRkCyWmQiuZMrbr1ihmCZN0ByWDWscvhLcIu63VPd6TOv0v
- 2b3QuY4O5fep9oWrum1VwdgqtGzeuOb3gGARm51wZ+HPem+Ilz+vC2WhW67V7j61HYr+
- KDeg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWgVdq+a2yvs7m5s9dJp1diksSCAZJ4A+VdF6QZYHrz2rizTrstrLrgcu54OBv8nqp/Pwbkm6o=@lists.denx.de
-X-Gm-Message-State: AOJu0YxrXZpnDr3fDEwktdS+XPCsaOxRp4UQ1U7+xNHjobwYnNRi6/rf
- o4prs7pegaOc7xNay2frahbTCM+qts8rOG2aetSOprKqzJO9ei6YluOkKQzcL12dM2pczXHEYXi
- nt3BO2P4=
-X-Gm-Gg: ASbGncvtPrN1igugYu0xHc+CFprEZvZci8jd5+qpFyBtgNZNvDbulLezUXSaW1YoZea
- nyLmPsBISekytsGN8YfgtWlaMZdhQcsNCoL7b7thMNMXzRLskbc3OVx7DDik1TmS7rPazuKsdn+
- Fn8aTpJyARS+ib41BIRQz4UOuFiqUXA1RjyJzMLuCfHwhvtRhH/Vsjwi0SComIe4K4kbBO/jqDW
- Tsg4yhh9qetQLRAFzoF9kmr4vhvrg8j1oGkzIIZfnejUuaGmuBorj/EhRw4nKRbdsqgCC5FhBl0
- 6yY52YJaR1Ph8yfw3Dw8Ra8kM4L/BzHEoRmIwKYWmaITL+Aolxh+a5d/vCifhS2mXWaWk4BwWr+
- qAFi/byjsaBi9uVL+m0z/uD8JyuhVdj28NGrHQsScQWotmwvJhdK+rcsXsK9kWHsSt98cckCt36
- TPl7ddhC2I3frvTPUAq1YOK4McCLestlW+xha3m3P/hxwn1tsO
-X-Google-Smtp-Source: AGHT+IG/l/9uP7uhjZSGUAkLIC+NUao7xZfTyJ+3CL5exaGl8NdTbdPK2tEOEfwpkMAr/pUdWT/4cQ==
-X-Received: by 2002:a05:6871:7a7:b0:3ec:5e8e:87fc with SMTP id
- 586e51a60fabf-3ecbe5639f1mr12920344fac.31.1764262544338; 
- Thu, 27 Nov 2025 08:55:44 -0800 (PST)
+ bh=oR/MGbOleMxTomSQSQJzkh2PysIR4F1JiFtffZm3uPA=;
+ b=eybixG6j6koVhNHmSxMzFdLjDF+qbsC4pM5XPTvTYIBz1sROZOwZa+BqzsZjUX2hWN
+ wGNrDspx5yNU2+xmXE4Dveu6v5DSWhDcAxJhC7F885fbFsQZW5dD/6mbxqnlUJ9ADrBu
+ X58Zub7E9EsTkKc6eQKK6ym8jjJDc2uCt+8FglD/SGZD0aZ/GdKTi/9h8DRUm1lydgOF
+ a7vbNt/o4ed1tqPxssupgrN1Ljt/UKoAS395k93UgRQDlQf/FtSEfUkSbrx3e0z/OkCw
+ mkZtjDiuKaJjb5yvU97kNa2wCnzOzLBefhgR1AQzOnDu7mQ1i9Uvpf/qAB+xgYL3H5IK
+ tGrQ==
+X-Gm-Message-State: AOJu0Yw1ua7npGbK6x3k5CfITs4VXz5s/xhk5FjZTT9Zhx4chX5R5qIK
+ kAqZRlzNI59VDfHPNUjtNk8dQal1JQ+j0ClMoMrPJ6E7c0OZ4QvtDyuPR2in6OHMJefIrFJnCnT
+ gXJuTHQI=
+X-Gm-Gg: ASbGncseakLNrYDZnSJ0cJtXYJnxoQmoyDaNfFBXaxU5lNe0HxdbKlwoE3nz1KzL7iY
+ 8R6yWicmGcV9lPVumqewkR0ybs9oGwlCYzrz1298lvuODFYXJctoP5l0ywHtypRAIjnEBNnORc+
+ Ghaq+I6Fd1LirHzFFHeh65zAZAzSEu4HU10Z7OGkiQbI71ZYnMdIAOibK4N8SazslEmll8HRnYY
+ yDAvQOYlCPBArBZuSMokBvf2tH/AuDHUaNFnaohaUY3QvmsXUMeDlTDoiYxOiAL+ubhmbaNeZCt
+ Oea0pKj/cle5DHMx2RdL/QRKt/XbXZ8us9qUk22e/SakQViNI4ltPQCcyFF4xe4AuNn1z9T2egD
+ 9zEEnrTI7K2ezybRzkSq6t8CntdvjMlRJ4eSqGWJ5cM8FiQR6JxqfSQoboV3c1xkmpfwN689+mU
+ dIWIGWk3EvXUGTOsDVXD8VB8gDvr8Z/jMwj0Q3+22fxw2CfbYK
+X-Google-Smtp-Source: AGHT+IF9zAUIrhQbAWCcRXXYP5WvuwBbwc0E1UqVI+7O7lQkJHbNSXVktAVWBvFBky930UhZ72/IEA==
+X-Received: by 2002:a05:6870:a40c:b0:314:9689:a467 with SMTP id
+ 586e51a60fabf-3ecbbe338f7mr11628718fac.23.1764262545465; 
+ Thu, 27 Nov 2025 08:55:45 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f0dd05e0afsm741584fac.20.2025.11.27.08.55.43
+ 586e51a60fabf-3f0dd05e0afsm741584fac.20.2025.11.27.08.55.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Nov 2025 08:55:43 -0800 (PST)
+ Thu, 27 Nov 2025 08:55:45 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Kory Maincent <kory.maincent@bootlin.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-In-Reply-To: <20251116114153.118217-1-heinrich.schuchardt@canonical.com>
-References: <20251116114153.118217-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] cmd/extension: avoid NULL pointer dereference
-Message-Id: <176426254356.4117678.6221981127942600299.b4-ty@konsulko.com>
-Date: Thu, 27 Nov 2025 10:55:43 -0600
+To: jh80.chung@samsung.com, peng.fan@nxp.com, afd@ti.com, m-chawdhry@ti.com, 
+ u-kumar1@ti.com, t-kristo@ti.com, h-salunke@ti.com, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: u-boot@lists.denx.de, srk@ti.com
+In-Reply-To: <20251118122055.1972591-1-s-vadapalli@ti.com>
+References: <20251118122055.1972591-1-s-vadapalli@ti.com>
+Subject: Re: [PATCH v3] power: domain: ti: fix ti_pd_get() to return after
+ verifying transition
+Message-Id: <176426254450.4117678.14321544737968554197.b4-ty@konsulko.com>
+Date: Thu, 27 Nov 2025 10:55:44 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,17 +100,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 16 Nov 2025 12:41:53 +0100, Heinrich Schuchardt wrote:
+On Tue, 18 Nov 2025 17:50:52 +0530, Siddharth Vadapalli wrote:
 
-> extension_get_list() will return NULL if there is no extension device.
-> Check for this situation.
+> The helper function "ti_pd_get()" is responsible for powering on a
+> domain if it is powered off. In the current implementation, if a power
+> domain is determined to be powered off - no prior users and the PDCTL
+> register indicates that the user desired state is OFF, then powering on
+> the domain constitutes setting 'PDCTL_STATE_ON' field of the PDCTL
+> register.
 > 
-> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] cmd/extension: avoid NULL pointer dereference
-      commit: 642a9e716e1e4ecfa64e01a81e815b74e9c142bf
+[1/1] power: domain: ti: fix ti_pd_get() to return after verifying transition
+      commit: e3b7dd93d39e1c0a6bcf95d13b3ac4e8035c5db2
 -- 
 Tom
 
