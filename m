@@ -4,172 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F7A3CFD2F6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 09:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73EA4CFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 10:12:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E34CF84332;
-	Thu, 27 Nov 2025 10:52:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id D296C84332;
+	Thu, 27 Nov 2025 11:12:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="fXfkpQK1";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="g8OWyIoD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD7468435B; Thu, 27 Nov 2025 10:52:52 +0100 (CET)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
+ id 3C77C84335; Thu, 27 Nov 2025 11:12:36 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 870C98432D
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 10:52:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE6528432D
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 11:12:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=D0pg168t8jWzsxmy5uZC/e7jOizXTSnBuz6Xrwq32Ddv5TVWZjY3YkdpVDLTtxNqOTmeiOdDjP/M5g4pjoKxxjV817fHj2CnFTalSIOLQXjYDwHVauzuRRAM/U/4nlO5HX/kCowlu/Y55CmAltfsGgAgBE4tsek+22pp/H0Kn6l3TprEsi6w/Lob0cD673wlMB9TaC2cC4IBnS3vPDAhPoZ8XkBRuVSXzQpXPHj1LCNIHO5EobTzYtEKoef1SwLxwl3RLMY3H+gTqYeItGHN7lZh+KWPLjbq8bAWBvRRAiB76feOoW6b71nwREU+4pn7Xmi9QmKbZ91B06M9VyZVUw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JWnZIoES4gL+4C1d1VI5UWbu5E/WAysqvji36ZKQWYw=;
- b=fP8TUpZTroYoaTnb+ghZHAf5h28mQgVaWYKw7yPAeWrOa+8TqSKGYr38ggl+ZPHTeEYVjo3WlGgmWcpsH7dyruwbRIr4og8TQrSbzWVAn6A1RMOcJPxWxL6OGM1d4DpSGHNQh2xRw5DCuNkmpJvBoyv/UWgwsjktsyGG7SzeN6zRO6P0urMXyICxgOq1WpqcKKvR/s/T4AVHXLEWaTdkq2qSwMTqBoKlV/zVRABofsmbnrAUZCDxcr8vsgPJzD9MSpZSHISK9mhCcQAP5SLTkulsnW9Uosr084H3Fn5i6UTXNZUSH2gjqrV/Y4o+FBZmBlGyQ4eJPXbPKGqh7ZlBkA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JWnZIoES4gL+4C1d1VI5UWbu5E/WAysqvji36ZKQWYw=;
- b=fXfkpQK1DqRdnl2EtWaJtDkBEBcssg6ZT65oxtCWmyd9q4z+xpyYUL4uvwtxsly4GV7yEYYBwfbIrsk2QN3DhS783ork38cVhcIBhYEj/x2aqnu8LOVzRArvmnC/+nwGl+GtrzWuV8qUogfer7NDA5aRd2e6+5050msLoZrU9fg6RY1OBOVNpO8pdbQvxbrRNlpK468LUcjLPrmAQaJLqPSoIgWnYcoZBx26866QBHb3HDEKLOgXa5vUJfcR2tJdsgVtm9OVq3IIQT98rrO/fp61MAyo3MQ/Oxmkls0YQvBZC2jVtsRwfFRrsnQYZ3m8D5pFse8+peuZGCzC9+0lHA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
- by BY5PR03MB5032.namprd03.prod.outlook.com (2603:10b6:a03:1eb::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.11; Thu, 27 Nov
- 2025 09:52:46 +0000
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::6735:e440:e9a1:e844]) by DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::6735:e440:e9a1:e844%3]) with mapi id 15.20.9366.012; Thu, 27 Nov 2025
- 09:52:46 +0000
-Message-ID: <bdbcf8b7-1a1d-43ae-848e-e4d009b1067b@altera.com>
-Date: Thu, 27 Nov 2025 15:22:36 +0530
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/8] mmc: sdhci-cadence: Add reset control support
-To: Peng Fan <peng.fan@nxp.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
- "trini@konsulko.com" <trini@konsulko.com>, "marex@denx.de" <marex@denx.de>,
- "tien.fong.chee@altera.com" <tien.fong.chee@altera.com>,
- "balsundar.ponnusamy@altera.com" <balsundar.ponnusamy@altera.com>
-References: <20251110173737.24545-1-tanmay.kathpalia@altera.com>
- <20251110173737.24545-2-tanmay.kathpalia@altera.com>
- <aRv_hIwxZshKJQI1@nxa18884-linux>
- <3668b44b-9525-4bad-8d24-de10311a4df3@altera.com>
- <aSZjLjm7saoeQYBs@nxa18884-linux.ap.freescale.net>
- <77c022a6-0751-468a-aeb0-9d028ad1fd70@altera.com>
- <PAXPR04MB8459B3E517FE7375521DC49E88DFA@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-In-Reply-To: <PAXPR04MB8459B3E517FE7375521DC49E88DFA@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MA0PR01CA0061.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:ac::18) To DM4PR03MB6208.namprd03.prod.outlook.com
- (2603:10b6:5:39c::19)
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id B9115600B0;
+ Thu, 27 Nov 2025 10:12:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15603C4CEF8;
+ Thu, 27 Nov 2025 10:12:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1764238352;
+ bh=R6+dMIOgM6BfcpPRAyVmvoGFJtx3AdrZx1gRNf8f5uI=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=g8OWyIoDzKrdXzVgT8p3ZiJIGKIoSKOOGB5Oe2bptuB1YOv/3AEu2LqTkONOHSODI
+ rTQMVjKYdlp5gFTaG+UQi41vQ7TmqtM8giTC3sDcmBs1qYZnm7BijyAVwxdXInnJ0I
+ qI7e0L1hckjSiiQ0+zrcjAhWhJPwW+JdkNfNFCvbjw3YzxlBTt3DoBXfbsDb0Yw/Dg
+ 1N+AVUXODxoOl49y6tocvMHR2eoTKEpg8gRNUy0HuRsfawO39UV03CijgTWVsV8b2k
+ lCthGifPWDtmiMinVAK4jT3fLBgGL3SpdlrDu7Cda+mkgUM4e3HOZjsepgt2pfq32e
+ zQqlVCzYzdT2A==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Michal =?utf-8?B?Vm9rw6HEjQ==?= <michal.vokac@ysoft.com>, Marek Vasut
+ <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, u-boot@lists.denx.de, Petr =?utf-8?Q?Bene?=
+ =?utf-8?Q?=C5=A1?= <petr.benes@ysoft.com>, Michal =?utf-8?B?Vm9rw6HEjQ==?=
+ <michal.vokac@ysoft.com>
+Subject: Re: [PATCH 1/2] usb: ci_udc: Check ci_ep->desc before use
+In-Reply-To: <20251125085846.507591-1-michal.vokac@ysoft.com>
+References: <20251125085846.507591-1-michal.vokac@ysoft.com>
+Date: Thu, 27 Nov 2025 11:12:29 +0100
+Message-ID: <87fr9zss1e.fsf@kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|BY5PR03MB5032:EE_
-X-MS-Office365-Filtering-Correlation-Id: 491779f1-77ca-4c28-5e4e-08de2d9ab7a2
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dTFMcHdKejZyUVZjbUt0ZjdBYjZWOEFKUU5KUWdyenE1Mzl1dXd4Vkdra29i?=
- =?utf-8?B?SGJlOEpGRERWUEwzeWsxRWptZURnTmtuYVVnVXNBNExTaUQyL3AxVHUyNW1Q?=
- =?utf-8?B?QTVqV3AzQTNGOHZTUUxFb1Y5RW9DVmlYUkszNy9rd0tvUnVQMWhmR0c3Tldy?=
- =?utf-8?B?ZGpienFlbVdxa1Vzd3pIZnF1Z0xkUDl3aU9XOEJ0dzFGVkMvTjd4S1RGaG95?=
- =?utf-8?B?SkVtS2ZMTnBOZmIvcWZkSjJtdWhVWGl1TlB5Z1JRNkllYThnY3gzVFc5N00v?=
- =?utf-8?B?ODZoOGk0cjI1b0g2ZHNEN0gxZ2VyUWhTYXhPV1BDSWJXSExIQndFL05iYVps?=
- =?utf-8?B?R1VoSGdua2ZJSmk0K1B3Ky9id0tPTlRGTEdBc2xwU3l2aXIrd2xEVzNoQVJ3?=
- =?utf-8?B?U3dRMENjY3Uwd1JzS3JHNWdtclJzRWcyb2NpQmtXbGFpKzhIN1VVRXE1VndF?=
- =?utf-8?B?WDB1SFBZK05TV2QzUnFPRzFVUkZ3ZExKZkhUMVNYYlBoYjhaOWlkTW9hN2xT?=
- =?utf-8?B?NHUwWkdxMnVMRDlTKzZiZy9zVDl2aUxzSVhoUkhvVERza2txYnNpVW9XT21a?=
- =?utf-8?B?WVNtSFJvNTlDbkM4aXNjMERqTnZabzhqTDV2RmE2eDdFWEFRSmhUR3dYYjBr?=
- =?utf-8?B?KzJKWUtueVBTVmNVNm9MZWQ1bXlLYlNGL0ZmaDJQVkdwOHpmd2p6QkR3Nit3?=
- =?utf-8?B?TDA4WGZOVFRPRHZOaHhNeU4vYml0VzNPZTZqWDlvZVlkQkwvNlE0Mk9xUWRo?=
- =?utf-8?B?RHZCWGpXS1VWTFViZFVYQjcyOFN2NDJndjNzNWJxQUZoeURzNUpWdENtU2NX?=
- =?utf-8?B?Yk5GMFpoNzAzOHlCd2xvcGljdmV2cm1oUEp4VTRoUnVJM0pvQkVFaTFTdzZT?=
- =?utf-8?B?S2V6TXBxSEdxd3hNcms3S3FJSjF0bnBmZWVQaW90UmRXenlZdC9BK2hyR2tj?=
- =?utf-8?B?bWl6K2NQaFQ3RGMvRVUvdmRxY1hEdXdHS2pPUDBIMDdNN2ZIbEFBeFJ3UEEr?=
- =?utf-8?B?YkJlcnFoaENrMXZ6WVJWdVZNdk03T0ZwR1I0SjV1SldNbmNLN2dmNzJMNElw?=
- =?utf-8?B?aVpVMFRqaHRNOXMvN0poeFRMeUtaMDNUTjNlTlFMQTh0alE4aS96dkxYT2s4?=
- =?utf-8?B?b0R4TUtmTmhoMktFcVlBcVg2bDZKN0luRnRUQUNnVGZHVG84bmV3c0lobDJh?=
- =?utf-8?B?dVBQT2JxR29VYmUydTFkU2FZcGd1Y1ZEbzFDYnpnUTBwb3pFTlBtSzVDNmFK?=
- =?utf-8?B?Y3Rsb1pudWZJQk9tVU1scGs4dVVYVEhIK2xsL0tuSElPTE84OFhLZEtZdDJD?=
- =?utf-8?B?OGMvaG5hWDd0SjJORTIybVMzQ090djdyWjN1aGVZa0thMGVUSnIycFZHWis4?=
- =?utf-8?B?UnpSeHdyMHJRTGlBMEFUL1E2R2NNckRDQlExNHAweW0zZ3hYamFYZjY1WVdV?=
- =?utf-8?B?K3lzbGhLMStkTjB6QVU3SmFUd3lNYzE4R0F4eDZiL3lmQWJvTlZIZHhTVlA5?=
- =?utf-8?B?UlZ1emdyLytoamlsODhvUDg3bUdSTUJ4ajlGNmthT1lUYlRFbnlkZWlRUDk0?=
- =?utf-8?B?ZndMQ3VuNWZEMU9TQUxPVEwwN3E2TjNpdHl0MXYvODIzZGZrMTIyRUJOZnNl?=
- =?utf-8?B?Ti9YNmhIUW9kYjZTZXhnSVFKM0NHL29hUms5RndTUFdiRG5NT1FNS3A5N0Ir?=
- =?utf-8?B?bko0SlUrd0J6UW5kOWRoUnJRb3dkMjYwMjgxVnJyRGFQS3lLcmVHSW5kSDI2?=
- =?utf-8?B?RWYzQTBlc0pQZFlCbjkyVC84aUoyMXdZR003NUJmaEloWGgwTmVlaUNpTE00?=
- =?utf-8?B?bEZsMERlR2hEY1o5clVpa2ZLalJRV1lUN1dRbFRLSGpPUVZmUGtGVXVCL0VO?=
- =?utf-8?B?S2kwdE9YNk9OQnJvY09zZllWd2dRNzUyUStlRll3bXJUQkl5alpSbVd0SEh2?=
- =?utf-8?Q?HUa1Z/wUJfG25H/fOxuk51DH/GGsbtHx?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UXNrZWkvT2dSMFRrdXJnaXlKZ0N1bGlmazVZa2x5YW1vcDFDOVFRWFpHUVpR?=
- =?utf-8?B?YzlGQnUrL0JFWUtuRm5MK1hRby9PTkNqbW9kR3NnM2RJVFhIbUMwNndHZEov?=
- =?utf-8?B?T0w5dGFObDBZNGR5OEtXZExuZkt0NkJSMTYzS3N0enM4SkdwWnNIbHlJOHlO?=
- =?utf-8?B?YS8yYXhiOVcwOWxZa3VHTmlkWGxhYVY5NXJVTnE1R25EaDFpclA2MXNBd1R1?=
- =?utf-8?B?c1dOM0tRMVNyODNweVo4K01sdHIyNGFvU1lsMFluVklFMGpYeW00cFphU3Vk?=
- =?utf-8?B?K1RRTy82OGxKcVRWd1ZRMG9LekNFNk43cDErK1lzblB4UWZsV3F5L2VZSTZj?=
- =?utf-8?B?UWx4bEtlcHJDRUVlenErOWg1U0ZFOThVMnhtMmhEa0dQZEtmQkM5bjB5M25W?=
- =?utf-8?B?TmJTRnVNSnN3RUIrZWRtbzNETExkT3g5cGpPOHh6bjBUWXBKemNmaW85K3F3?=
- =?utf-8?B?OVJNRCtVeUFvWFYrVlNvaEM1djZiSnJxV3Vnc2xmby9qdnBFbkZzdUdDSEE3?=
- =?utf-8?B?UmxrWnhVbGxPSWNySnF6aEd3ZkRaN1NJNXg0RDcwV1cybU9Yb3dnM1hEbVZt?=
- =?utf-8?B?OUo5QUNsSFFBalBNcHBmeG1EUnN3RXROeUNOQ3orZDJkZ1hLTmdEalQrd3ds?=
- =?utf-8?B?Z1pzY3FOZWtEM3dEUngyaU9ISHZNaWN2WXZSVXJWRzdNZlJMTlJQdWpHbkh6?=
- =?utf-8?B?aktyQ0lBWFNIUUFLZTF2aFMvbUJkTTFNc3lELzJyVUFyaEwxY09VWk85c1NF?=
- =?utf-8?B?RWZ1Ung1bTQxbE1HTnFwaHYwNzI4bkV4ZnIwNEdIdlpDTzAxZHpZWXJmMFll?=
- =?utf-8?B?Ni9WeFJwWDJDZlZ3ZlovNm5TR0NGQmpXTnArUTkyV2I1OEJDWHVmK2hsTlUw?=
- =?utf-8?B?cjdnUHJkRXZEbUZ2b0FsNkdJamo0Rm14VDh5K0hKOE9BTDM0d1lsb3NRamg4?=
- =?utf-8?B?V0x6T205Z0FqTWFLZC90T3pSOVBiMUdVUjZKaU5kRXRKOUlFNTF2Qm1ZWHlK?=
- =?utf-8?B?QmtxYTBXTGVoUjNEazd1dmFOTTRod0tYMkZXOXY4Y0NyS0l0cWYwY09GallK?=
- =?utf-8?B?WThYcjluQWc1R01NMTNqTXpod3lFRlJTYWlaNFJoQWMvTHZtUGNFYWtIUmty?=
- =?utf-8?B?aHdkRnkxNXAyRDV6OUxqQWI2azB0ek5MR040dHVCVENybnM1WFBzNTlORllE?=
- =?utf-8?B?N3ZRQkVaYzRHZkhabDdyREI3SVF1dnk1dW9SM3YzMlBwV3pKTGZqYUhubEs4?=
- =?utf-8?B?Um5BbkNxNG9TK0hERW11MjdhOG9hcHdzalZKRG53SFRlbVdoTVVwVnp5c0ZN?=
- =?utf-8?B?amdxUkFScy91WjF2NG9GRCs0b3dLbE4vc0JDM2dOcjlPT0hHdmdzREcvR3Y1?=
- =?utf-8?B?WXpSUHV2Y254cm5OL1NFbVJuVkM5ZVNWSXYxNzQyM2d2eTl5c1VDbm1CRjNk?=
- =?utf-8?B?dVhmQlVrclFOUU13dHNnNWdrTjZ3VVVKWHdseXA1bEk4eW1jODZEZFl0cFNC?=
- =?utf-8?B?S2p1aTUvTDduRHVKSVBiZ1NnMkxhOEdTZEpESThjaWN1c0NMU3N0OEdONXVD?=
- =?utf-8?B?ZTJvS2dDMDErRDB3bTIxdmNpeXVkQzFsUFVoQitoMkpYSHZNcUhJNm5oT29v?=
- =?utf-8?B?MEhiUUVTYXhJYnVCQkNVaHlTam13YWZkaXVManZmaFFhUHdQNjVnNUUvU3Ba?=
- =?utf-8?B?QnRJczdkSmNUOXFkK0NGWVc4UHNEamNYcmVMYWEzWFJCSzFCaW55K0g2OGpy?=
- =?utf-8?B?b25nTjZGMzFFN3JPaFpyK2ZaZi9FQlRramwvMS93NWdGVHZqcUdTQ042NVNM?=
- =?utf-8?B?b3dNVGlYL2RzbmhDSEJYUkI1SVBZUHhCbi9JcVZlekw1L3NObHd2S1BNbDN3?=
- =?utf-8?B?QUoyMFVoRXRmMEg1czl1US8zL0xtb29VdmtTSkNrNUY1VVVIeG1yNFVpUkY1?=
- =?utf-8?B?L1h4UzhiejEzWk1tT0oycThPOHlEdER1K0VKYmZ5N1MzZS91VnVxTEtQUWNI?=
- =?utf-8?B?Y3p4YzFCM1RySnZaUThvMWVIbVl0YnlQV0N3TWJCN1VRL1ZOdFhWUE9ySVF0?=
- =?utf-8?B?NkVDMUdmU3dTbzErajhIS2NwL1FnSzRYbWppbENlam1Fa0UzK1dvUDBaVGw2?=
- =?utf-8?B?eEg1QzR5YjVuNlQyQ1UwbndRSnhyNnN0NFF2Tm0vWlJKZDlFbmRSMmx0RThs?=
- =?utf-8?B?d0E9PQ==?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 491779f1-77ca-4c28-5e4e-08de2d9ab7a2
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2025 09:52:46.5847 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5F3KZ3W6m/Tt+LwPoG2hCGkWTTIgcJATCMhgLv7kn6FtuLuPCUYsqFHHdYpi6LMFANvyL1Dfgm+WuPIROGtUBI3uYGCQOpRwW4lnX64Oik0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB5032
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -186,102 +72,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Michal,
 
+Thank you for the patch.
 
-On 11/27/2025 3:18 PM, Peng Fan wrote:
->> Subject: Re: [PATCH 1/8] mmc: sdhci-cadence: Add reset control
->> support
->>
->> Thanks for the suggestion, Peng.
->>
->> On 11/26/2025 7:47 AM, Peng Fan wrote:
->>> On Thu, Nov 20, 2025 at 08:29:11PM +0530, Tanmay Kathpalia
->> wrote:
->>>> Thanks for your comment, Peng.
->>>>
->>>> On 11/18/2025 10:39 AM, Peng Fan wrote:
->>>>> On Mon, Nov 10, 2025 at 09:37:30AM -0800, Tanmay Kathpalia
->> wrote:
->>>>>> Add reset control functionality to the SDHCI Cadence driver to
->>>>>> properly handle hardware reset sequences during probe. This
->> ensures
->>>>>> the controller is in a known state before initialization.
->>>>>>
->>>>>> Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
->>>>>> Reviewed-by: Balsundar Ponnusamy
->> <balsundar.ponnusamy@altera.com>
->>>>>> ---
->>>>>> drivers/mmc/sdhci-cadence.c | 8 ++++++++
->>>>>> 1 file changed, 8 insertions(+)
->>>>>>
->>>>> ....
->>>>>>
->>>>>> @@ -225,6 +227,12 @@ static int sdhci_cdns_probe(struct
->> udevice *dev)
->>>>>> 	if (!plat->hrs_addr)
->>>>>> 		return -ENOMEM;
->>>>>>
->>>>>> +	ret = reset_get_bulk(dev, &reset_bulk);
->>>>>
->>>>> Should this be optional? Some in tree platforms may not have the
->>>>> reset supported.
->>>>>
->>>>
->>>> Yes, you're right-some in-tree platforms may not have reset support.
->>>> In those cases, the code will print a warning message ("Can't get
->>>> reset") and continue the probe process.
->>>> If you prefer, I can remove the warning and let the function fail
->>>> silently instead, or is there any other way you would suggest to
->> make this optional?
->>>
->>> devm_reset_bulk_get_optional() may help.
->>>
->>> Regards
->>> Peng
->>>
->>
->> I looked into devm_reset_bulk_get_optional(), and I see that it
->> dynamically allocates the struct reset_ctl_bulk and adds it to the
->> device resources list if CONFIG_DEVRES is enabled. However, if
->> CONFIG_DEVRES is not enabled, we need to manually free the memory
->> using
->> reset_release_bulk() in the driver's remove function. This means we
->> would need to store a pointer to struct reset_ctl_bulk in the driver's
->> private data, which would require additional changes to the sdhci-
->> cadence driver (since it currently uses the generic struct sdhci_host
->> with .priv_auto = sizeof(struct sdhci_host)).
->>
->> Let me know if you’re okay with this approach, as it would require
->> other changes in the driver, or if you have any further
->> recommendations.
->> Alternatively, I can simplify the implementation as shown below:
->>
->> ret = reset_get_bulk(dev, &reset_bulk);
->> if (!ret)
->> 	reset_deassert_bulk(&reset_bulk);
-> 
-> For better, an optional API is preferred, since non-devres API
-> is not there, I am fine with your above changes.
-> 
-> Regards
-> Peng.
-> 
+On Tue, Nov 25, 2025 at 09:58, Michal Vok=C3=A1=C4=8D <michal.vokac@ysoft.c=
+om> wrote:
 
-I will make the changes and push the V2 series.
+> From: Petr Bene=C5=A1 <petr.benes@ysoft.com>
+>
+> There are two places where ci_ep->desc could be accessed despite it is
+> not valid at that moment. Either the endpoint has not been enabled yet
+> or it has been disabled meanwhile (The ethernet gadged behaves this way
+> at least.). That results in dereferencing a null pointer.
 
-Regards,
-Tanmay
+I wonder if this is not a generic problem (that ep->desc) is reused.
 
->>
->> Please let me know your preference.
->>
->> Regards,
->> Tanmay
->>
->>>>
->>>>> Regards
->>>>> Peng
->>>>
->>>>
-> 
+Looking at usb_ep_enable() in include/linux/usb/gadget.h:
 
+"""
+static inline int usb_ep_enable(struct usb_ep *ep,
+				const struct usb_endpoint_descriptor *desc)
+{
+	int ret;
+
+	if (ep->enabled)
+		return 0;
+
+	ret =3D ep->ops->enable(ep, desc);
+	if (ret)
+		return ret;
+"""
+
+Can you please explain why the generic code is not enough to handle
+this?
+
+>
+> Moreover, the patch gets rid of possible outstanding requests if the
+> endpoint's state changes to disabled.
+>
+> Signed-off-by: Petr Bene=C5=A1 <petr.benes@ysoft.com>
+> Signed-off-by: Michal Vok=C3=A1=C4=8D <michal.vokac@ysoft.com>
+> ---
+>  drivers/usb/gadget/ci_udc.c | 43 +++++++++++++++++++++++++++++++++++++
+>  1 file changed, 43 insertions(+)
+>
+> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+> index 4bff75da759d..b3bbbb6ad32c 100644
+> --- a/drivers/usb/gadget/ci_udc.c
+> +++ b/drivers/usb/gadget/ci_udc.c
+> @@ -308,6 +308,27 @@ static void ci_ep_free_request(struct usb_ep *ep, st=
+ruct usb_request *req)
+>  	free(ci_req);
+>  }
+>=20=20
+> +static void request_complete(struct usb_ep *ep, struct ci_req *req, int =
+status)
+> +{
+> +	if (req->req.status =3D=3D -EINPROGRESS)
+> +		req->req.status =3D status;
+> +
+> +	DBG("%s: req %p complete: status %d, actual %u\n",
+> +	    ep->name, req, req->req.status, req->req.actual);
+> +
+> +	req->req.complete(ep, &req->req);
+> +}
+> +
+> +static void request_complete_list(struct usb_ep *ep, struct list_head *l=
+ist, int status)
+> +{
+> +	struct ci_req *req, *tmp_req;
+> +
+> +	list_for_each_entry_safe(req, tmp_req, list, queue) {
+> +		list_del_init(&req->queue);
+> +		request_complete(ep, req, status);
+> +	}
+> +}
+> +
+>  static void ep_enable(int num, int in, int maxpacket)
+>  {
+>  	struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl->hcor;
+> @@ -335,6 +356,12 @@ static int ci_ep_enable(struct usb_ep *ep,
+>  	int num, in;
+>  	num =3D desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+>  	in =3D (desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+> +
+> +	if (ci_ep->desc) {
+> +		DBG("%s: endpoint num %d in %d already enabled\n", __func__, num, in);
+> +		return 0;
+> +	}
+> +
+>  	ci_ep->desc =3D desc;
+>  	ep->desc =3D desc;
+>=20=20
+> @@ -385,16 +412,27 @@ static int ep_disable(int num, int in)
+>  static int ci_ep_disable(struct usb_ep *ep)
+>  {
+>  	struct ci_ep *ci_ep =3D container_of(ep, struct ci_ep, ep);
+> +	LIST_HEAD(req_list);
+>  	int num, in, err;
+>=20=20
+> +	if (!ci_ep->desc) {
+> +		DBG("%s: attempt to disable a not enabled yet endpoint\n", __func__);
+> +		goto nodesc;
+> +	}
+> +
+>  	num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+>  	in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+>=20=20
+> +	list_splice_init(&ci_ep->queue, &req_list);
+> +	request_complete_list(ep, &req_list, -ESHUTDOWN);
+> +
+>  	err =3D ep_disable(num, in);
+>  	if (err)
+>  		return err;
+>=20=20
+>  	ci_ep->desc =3D NULL;
+> +
+> +nodesc:
+>  	ep->desc =3D NULL;
+>  	ci_ep->req_primed =3D false;
+>  	return 0;
+> @@ -606,6 +644,11 @@ static int ci_ep_queue(struct usb_ep *ep,
+>  	int in, ret;
+>  	int __maybe_unused num;
+>=20=20
+> +	if (!ci_ep->desc) {
+> +		DBG("%s: ci_ep->desc =3D=3D NULL, nothing to do!\n", __func__);
+> +		return -EINVAL;
+> +	}
+> +
+>  	num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+>  	in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+>=20=20
+> --=20
+> 2.43.0
