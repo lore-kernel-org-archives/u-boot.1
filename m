@@ -4,65 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB99DD111A8
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 18:04:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00FFD111A8
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 18:09:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DDE68437E;
-	Thu, 27 Nov 2025 19:04:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 3C0648430C;
+	Thu, 27 Nov 2025 19:09:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Q7VKXzNT";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BeX6ZKLc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 871F5844A5; Thu, 27 Nov 2025 19:04:12 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id F1D8783B03; Thu, 27 Nov 2025 19:09:52 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6924B8430C
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 19:04:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18B008437E
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 19:09:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jeremie.dautheribes@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id E5C3A4E4192A;
- Thu, 27 Nov 2025 18:04:08 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id B464460722;
- Thu, 27 Nov 2025 18:04:08 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 250C8103C8BD9; Thu, 27 Nov 2025 19:04:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1764266648; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=3GDiNwjJ5kKQEsGa+u4aEpvRyUsuU1AMl0SrTOMF1JA=;
- b=Q7VKXzNTl+O7iWESJz8qwAJIc0caCoRVs51WDxr5cL97WbLgP4Rdl6eGErAWRXYNMdTmBO
- 8RSu3KLAh6VwhJQC8yR7eT9xRt2SW7HuCT8fZO2zg0DYmnrU1YRVhCPqUufOSBUh+nU0n1
- 0/tQRRTJCFHRzJ65uEVhnatgCDOL62hPg2Suhz7vHVCYCuiw//OhzBnLAbLwh3jsWZNT+o
- GQ2W7BFAeYJSelPNo6dvWq9Tdx3HL3eBhWlND1jzzJEuzD+FX6ztQJnY03SLCrlMZLi1/2
- iDslViB7dI76lK7O2Lx2+KFOcV0lAYOAjI42Rqt3BfGDswMdCtVx3iutG9Sz4A==
-Message-ID: <89715907-3d24-483d-943f-a027097962aa@bootlin.com>
-Date: Thu, 27 Nov 2025 19:04:06 +0100
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dHPbK1NRpz9skc;
+ Thu, 27 Nov 2025 19:09:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1764266989;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xq3hVB/E/2HxrRP10zqQ5KJbvu8Pz9KRVBJSNeZxvXs=;
+ b=BeX6ZKLc9BMG6BHf696EDZ84Kl8UBtxl5UV1dAFaVllGqa1uXWJ7HSGB561mUpHz6SChlV
+ 321knfYtY2OpcVuoLdnfgfs+DwjV++1H7cB/kqFp2Y20KO/ktVO1uaYTTc7BdLdDYS7KIq
+ S+8g76NomGuA7Hc3lBB1+KsYWfMpDQbBhoG2fMEDyUUhn1XGzxfPfcZmUAlDD6aMIl61m/
+ kAtbTU+vgTtmceyQnl5IIg4xZe+n4ybn4zch4vraWYWb1TVtqMjOLPoCATcP+Bd43nNH0q
+ VTYn28nscdI2LrBymhunXSnjCgQVxYDDrodOeOoLsdysmq9IxWCT3E5qhKi5pg==
+Message-ID: <850d9627-1928-4902-9770-2313f349e703@mailbox.org>
+Date: Thu, 27 Nov 2025 19:09:47 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] binman: blob_dtb: improve error message when SPL is not
- found
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- =?UTF-8?Q?Miqu=C3=A8l_Raynal?= <miquel.raynal@bootlin.com>
-References: <20250820150654.1398992-1-jeremie.dautheribes@bootlin.com>
- <20250909170357.GA1799865@bill-the-cat>
+Subject: Re: [PATCH v2] usb/xhci: avoid noisy 'Register NbrPorts' message
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Bin Meng <bmeng.cn@gmail.com>
+Cc: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de
+References: <20251127175425.639086-1-heinrich.schuchardt@canonical.com>
 Content-Language: en-US
-From: =?UTF-8?B?SsOpcsOpbWllIERhdXRoZXJpYmVz?=
- <jeremie.dautheribes@bootlin.com>
-Organization: Bootlin
-In-Reply-To: <20250909170357.GA1799865@bill-the-cat>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251127175425.639086-1-heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 4pxii1ohgswd64grq4c9wggzcy68ikag
+X-MBO-RS-ID: babf470a3747a6f7853
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,57 +75,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On 09/09/2025 19:03, Tom Rini wrote:
-> On Wed, Aug 20, 2025 at 05:06:54PM +0200, Jérémie Dautheribes wrote:
+On 11/27/25 6:54 PM, Heinrich Schuchardt wrote:
+> We should avoid overwhelming users with non-essential messages.
 > 
->> When using binman with the '-a spl-dtb=y' flag, if the SPL blob is not
->> found, binman throws a cryptic error message:
->> binman: 'NoneType' object has no attribute 'startswith'
->>
->> Let's improve the error message to explicitly state which SPL blob is
->> missing.
->> This is particularly useful when binman is used as a standalone tool
->> outside the U-Boot source tree.
->>
->> Signed-off-by: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
->> ---
->>   tools/binman/etype/blob_dtb.py | 5 +++++
->>   1 file changed, 5 insertions(+)
->>
->> diff --git a/tools/binman/etype/blob_dtb.py b/tools/binman/etype/blob_dtb.py
->> index b234323d7cf..772579394d4 100644
->> --- a/tools/binman/etype/blob_dtb.py
->> +++ b/tools/binman/etype/blob_dtb.py
->> @@ -8,6 +8,8 @@
->>   from binman.entry import Entry
->>   from binman.etype.blob import Entry_blob
->>   from dtoc import fdt_util
->> +import errno
->> +import os
->>   import struct
->>   
->>   # This is imported if needed
->> @@ -42,6 +44,9 @@ class Entry_blob_dtb(Entry_blob):
->>           """Get the device-tree from the list held by the 'state' module"""
->>           self._filename = self.GetDefaultFilename()
->>           self._pathname, _ = self.FdtContents(self.GetFdtEtype())
->> +        if self._pathname is None:
->> +            raise FileNotFoundError(errno.ENOENT,
->> +                                    os.strerror(errno.ENOENT), self._filename)
->>           return super().ReadBlobContents()
->>   
->>       def ProcessContents(self):
+> 'Register NbrPorts' is a debug message for EHCI. Do the same for XHCI.
 > 
-> Sorry for the delay in review. We also need to update the function
-> comment so that python coverage remains at 100%.
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Sorry but I'm really not familiar with python coverage. I had a look to 
-the official documentation and it looks like I need to add a test to 
-cover this specific function. That is what you are requesting?
-
-Thanks in advance,
-
-Jérémie
-
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
