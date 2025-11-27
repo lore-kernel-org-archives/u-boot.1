@@ -4,40 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D8A4CFD2F6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 16:04:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7803CFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 16:04:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 446468441B;
+	by phobos.denx.de (Postfix) with ESMTP id AC8D78442A;
 	Thu, 27 Nov 2025 17:04:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="XAKGVzwy";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBB5584409; Thu, 27 Nov 2025 16:48:04 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4845483642
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 16:48:02 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frazer.carsley@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D4532176A;
- Thu, 27 Nov 2025 07:47:53 -0800 (PST)
-Received: from e138143.arm.com (unknown [10.57.6.161])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 13A123F66E;
- Thu, 27 Nov 2025 07:47:59 -0800 (PST)
-From: Frazer Carsley <frazer.carsley@arm.com>
-To: u-boot@lists.denx.de
-Cc: abdellatif.elkhlifi@arm.com, hugues.kambampiana@arm.com,
- Frazer Carsley <frazer.carsley@arm.com>,
- Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH 1/1] corstone1000: Add Cortex-A320 support on FVP
-Date: Thu, 27 Nov 2025 15:47:51 +0000
-Message-ID: <20251127154752.589691-1-frazer.carsley@arm.com>
-X-Mailer: git-send-email 2.43.0
+ id EF08484409; Thu, 27 Nov 2025 16:50:32 +0100 (CET)
+Received: from mx-relay168-hz1.antispameurope.com
+ (mx-relay168-hz1.antispameurope.com [94.100.132.138])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C6796839DD
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 16:50:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0419b688bb=alexander.feilke@ew.tq-group.com
+ARC-Authentication-Results: i=1; mx-gate168-hz1.hornetsecurity.com 1;
+ spf=pass reason=mailfrom (ip=94.100.132.6, headerfrom=ew.tq-group.com)
+ smtp.mailfrom=ew.tq-group.com smtp.helo=smtp-out02-hz1.hornetsecurity.com;
+ dmarc=pass header.from=ew.tq-group.com orig.disposition=pass
+ARC-Message-Signature: a=rsa-sha256;
+ bh=E3PY/9HNDAqh68W2X+X8zlY88SiMeHTkfdMPQ4QYm58=; c=relaxed/relaxed;
+ d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
+ t=1764258630;
+ b=ekXupFPih/Ho7I5VC7sr6gDI7n80hHj6nDuj+dBNYk/EAvMgvryCMXtLfK1m2bY7wg6xARzC
+ g4CWkP1okGF3mjVnpz3k/8sieQRVhecl/DCauLeWd7VqDKuyb09yCY5hXngJHLEtULIR+q1bYBa
+ lUfnsiu7lVY9iFPMlmw4UA2DwTNlVy8ONA5uASm3nutXMaKO8eEXnsz6GS6q9u0UcvZMiCF9Cgu
+ zj23xqX3YuJXAmvxcany0nBgVrqSpFbuRNkv4pmLSm7W/qnRK73LGaJ4I5+0AgUCnUVcoxj2ddg
+ 3Qmw1l5Y+9spVbPlzJ/94s7Roo5TQd3cjT62QV1dD1edg==
+ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
+ t=1764258630;
+ b=OYOwH4fQIgpwCtpIR6fkL3Du9CPk9PIH+M38246awYVl6EuiMuzkzvYaycBSYApNQTHdzwyM
+ vkMvaetYhn4oNBeo2dX/QhWz/HmxsW28nEyDH6JrFqbSvmnXxUBEbpWTEx/ROG/mPsAFzNyAYO/
+ V8ce6Yuxc3nJCQEDnHszo4NiQPdCAgt2Fa2X/4ZyTDt224ZGc/pzar5Rd8l4iioMSQJE/4Pnexk
+ PiAhFb0tLZgAtvoCK21Ju4ehCNGWv3KKTjKYyr+0oQOK4Ew/c5uEeRhd4UDzNEKmaVltZEuV/Xe
+ Uhat4mUolyZ2ffLqouaxPkV9zpVtXivMu56kUmxbiKjTg==
+Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
+ mx-relay168-hz1.antispameurope.com; Thu, 27 Nov 2025 16:50:29 +0100
+Received: from he-web01-hz1.hornetsecurity.com (unknown [10.1.31.91])
+ (Authenticated sender: alexander.feilke@ew.tq-group.com)
+ by smtp-out02-hz1.hornetsecurity.com (Postfix) with ESMTPSA id E78E15A103D;
+ Thu, 27 Nov 2025 16:50:19 +0100 (CET)
+From: =?utf-8?q?alexander=2Efeilke=40ew=2Etq-group=2Ecom?=
+ <alexander.feilke@ew.tq-group.com>
+Content-Type: text/plain; charset="utf-8"
+X-Forward: 127.0.0.1
+Date: Thu, 27 Nov 2025 16:50:19 +0100
+Cc: "Tom Rini" <trini@konsulko.com>, "Simon Glass" <sjg@chromium.org>,
+ u-boot@lists.denx.de, u-boot@ew.tq-group.com
+To: "Fabio Estevam" <festevam@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Message-ID: <302c38-69287300-35-2a0bce00@4807151>
+Subject: =?utf-8?q?Re=3A?= [BUG] silent hangup when debugging 
+ =?utf-8?q?lib/fdtdec=2Ec?=
+User-Agent: SOGoMail 5.12.1
+Content-Transfer-Encoding: quoted-printable
+X-cloud-security-sender: alexander.feilke@ew.tq-group.com
+X-cloud-security-recipient: u-boot@lists.denx.de
+X-cloud-security-crypt: load encryption module
+X-cloud-security-Mailarchiv: E-Mail archived for:
+ alexander.feilke@ew.tq-group.com
+X-cloud-security-Mailarchivtype: outbound
+X-cloud-security-Virusscan: CLEAN
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
+ mx-relay168-hz1.antispameurope.com with 4dHLVN16vCzYcsB
+X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
+ IP=94.100.132.6
+X-cloud-security-Digest: 45e14b6c17c12266d6bb84f7662ac0b1
+X-cloud-security: scantime:2.169
+DKIM-Signature: a=rsa-sha256;
+ bh=E3PY/9HNDAqh68W2X+X8zlY88SiMeHTkfdMPQ4QYm58=; c=relaxed/relaxed;
+ d=ew.tq-group.com;
+ h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
+ t=1764258629; v=1;
+ b=XAKGVzwy1et4lm9lnICKibGBuT3EnViFUHmD44d9k1aQ4CjAoCvSykLY68btOhwoyOIPN5Ez
+ ZBqpIeS3OILajqwlNUzJXnG+ovuRk0vx+m6ypOJZulVt6pMF7dCeW0a5DGCswm23VyHRHJgSKgm
+ GEjNOm8TidBx6DFg4jZ95PhoROwnHshNkyxVTm0y2vkYXmmMzRMqa46iB3HJ3cfd7fZT5zfsHqA
+ RMUPAHSnpC8uogIkBAtxpwHueiXfnTiL0qVKH+E4+hN+GJdlzuaQdnAW6/qh/uWWkKViWPgQv5V
+ ti3nYKi72QL4/sSKS0NCldHUHQzhHVE0o0MM6djy4WaMA==
 X-Mailman-Approved-At: Thu, 27 Nov 2025 17:04:13 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -55,215 +106,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable Cortex-A320 support on the Corstone-1000 platform
-(including FVP) and update the device tree to support the integrated
-Ethos-U85 NPU and GIC-600 interrupt controller. These updates make
-the platform fully compatible with Cortex-A320 while retaining
-backward compatibility with Cortex-A35 and GIC-400.
+On Thursday, November 27, 2025 15:02 CET, Fabio Estevam <festevam@gmail=
+.com> wrote:
+> On Thu, Nov 27, 2025 at 9:33=E2=80=AFAM alexander.feilke@ew.tq-group.=
+com
+> <alexander.feilke@ew.tq-group.com> wrote:
+>=20
+> > I also have a mx7dsabresd but I cannot bring it to boot with a mast=
+er build unfortunately.
+>=20
+> Just tested booting the top-of-tree U-Boot on a mx7dsabresd and it bo=
+ots:
+>=20
 
-**Cortex-A320 enablement**
+Thanks! When using 0ae3dc6809ff like you I can boot and reproduce the h=
+angup issue on mx7dsabresd:
 
-* Extend Corstone-1000 compatibility list to include `cortex-a320`.
-* Ensure build and device-tree logic support both Cortex-A35 and
-  Cortex-A320 configurations.
+<debug=5Fuart>
+FDT 8787da38 gd 0091de20
+top 87887538 sp 87800000
+sys=5Finit=5Fsp=5Faddr 0091ff10
+gbl=5Fdata=5Fsize 000000f0
+FDT overlap
+resetting ...
+System reset not supported on this platform
+### ERROR ### Please RESET the board ###
 
-**Ethos-U85 integration**
+This is the patch that enables debug uart and demonstrates the issue:
 
-* Add `/ethosu@1a050000` node describing the NPU register block at
-  `0x1A050000`.
-* Introduce associated reserved memory regions:
-  * `ethosu_sram@02400000`: 2 MiB on-chip SRAM (`no-map`).
-  * `ethosu_reserved@A0000000`: 32 MiB DDR carve-out
-     (`shared-dma-pool`).
-* Connect memory regions through `memory-region` and `sram` phandles.
-* Add `dma-ranges`, interrupt spec, `region-cfgs`, `cs-region`, and
-  `ethosu-mem-config` for full driver support.
-* Enable the NPU node conditionally via `CONFIG_ETHOS_U85`.
+From 9ee6e3244f15c8a1d9cb86130186cc9f221721c6 Mon Sep 17 00:00:00 2001
+From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+Date: Thu, 27 Nov 2025 16:47:23 +0100
 
-**GICv3/GIC-600 support**
-
-* Introduce `CONFIG_GIC_V3` to toggle between GIC-400 (v2) and
-  GIC-600 (v3).
-* Add full GICv3 node guarded by `#ifdef CONFIG_GIC_V3`.
-* Adjust `cpu@1..3` `reg` values to `0x100/0x200/0x300` under
-  GICv3 (keep `0x1/0x2/0x3` for GIC-400).
-* Update Ethos-U85 interrupt assignment to **SPI 16** to align with
-  the new interrupt map.
-
-These updates align the Corstone-1000 platform with Arm’s latest
-Cortex-A320 and Ethos-U85 configurations and ensure proper interrupt
-and memory mapping for both secure and non-secure domains.
-
-Upstream-Status: Pending
-Signed-off-by: Frazer Carsley <frazer.carsley@arm.com>
-Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- arch/arm/dts/corstone1000-fvp-u-boot.dtsi | 18 +++++-
- arch/arm/dts/corstone1000-u-boot.dtsi     | 76 +++++++++++++++++++++++
- arch/arm/include/asm/armv8/cpu.h          |  1 +
- board/armltd/corstone1000/Kconfig         |  7 +++
- 4 files changed, 99 insertions(+), 3 deletions(-)
+ board/freescale/mx7dsabresd/mx7dsabresd.c | 6 ++++++
+ configs/mx7dsabresd=5Fdefconfig             | 5 +++++
+ lib/fdtdec.c                              | 5 +++++
+ 3 files changed, 16 insertions(+)
 
-diff --git a/arch/arm/dts/corstone1000-fvp-u-boot.dtsi b/arch/arm/dts/corstone1000-fvp-u-boot.dtsi
-index 6b89d653417..0539e6c092a 100644
---- a/arch/arm/dts/corstone1000-fvp-u-boot.dtsi
-+++ b/arch/arm/dts/corstone1000-fvp-u-boot.dtsi
-@@ -17,24 +17,36 @@
- &{/cpus} {
- 	cpu1: cpu@1 {
- 		device_type = "cpu";
--		compatible = "arm,cortex-a35";
-+		compatible = "arm,cortex-a35","arm,cortex-a320";
-+#ifdef CONFIG_GIC_V3
-+		reg = <0x100>;
-+#else
- 		reg = <0x1>;
-+#endif
- 		enable-method = "psci";
- 		next-level-cache = <&L2_0>;
- 	};
- 
- 	cpu2: cpu@2 {
- 		device_type = "cpu";
--		compatible = "arm,cortex-a35";
-+		compatible = "arm,cortex-a35","arm,cortex-a320";
-+#ifdef CONFIG_GIC_V3
-+		reg = <0x200>;
-+#else
- 		reg = <0x2>;
-+#endif
- 		enable-method = "psci";
- 		next-level-cache = <&L2_0>;
- 	};
- 
- 	cpu3: cpu@3 {
- 		device_type = "cpu";
--		compatible = "arm,cortex-a35";
-+		compatible = "arm,cortex-a35","arm,cortex-a320";
-+#ifdef CONFIG_GIC_V3
-+		reg = <0x300>;
-+#else
- 		reg = <0x3>;
-+#endif
- 		enable-method = "psci";
- 		next-level-cache = <&L2_0>;
- 	};
-diff --git a/arch/arm/dts/corstone1000-u-boot.dtsi b/arch/arm/dts/corstone1000-u-boot.dtsi
-index b29ac74217e..206403ea9a5 100644
---- a/arch/arm/dts/corstone1000-u-boot.dtsi
-+++ b/arch/arm/dts/corstone1000-u-boot.dtsi
-@@ -29,6 +29,15 @@
- 	};
- };
- 
-+&{/cpus} {
-+	cpu: cpu@0 {
-+		device_type = "cpu";
-+		compatible = "arm,cortex-a35","arm,cortex-a320";
-+		reg = <0>;
-+		next-level-cache = <&L2_0>;
-+	};
-+};
+diff --git a/board/freescale/mx7dsabresd/mx7dsabresd.c b/board/freescal=
+e/mx7dsabresd/mx7dsabresd.c
+index bef4f901ff7..1fdd39d437c 100644
+--- a/board/freescale/mx7dsabresd/mx7dsabresd.c
++++ b/board/freescale/mx7dsabresd/mx7dsabresd.c
+@@ -25,6 +25,7 @@
+ #include <i2c.h>
+ #include <asm/mach-imx/mxc=5Fi2c.h>
+ #include <asm/arch/crm=5Fregs.h>
++#include <linux/delay.h>
+=20
+ DECLARE=5FGLOBAL=5FDATA=5FPTR;
+=20
+@@ -233,6 +234,11 @@ int board=5Fearly=5Finit=5Ff(void)
+ 	return 0;
+ }
+=20
++void board=5Fdebug=5Fuart=5Finit(void)
++{
++	setup=5Fiomux=5Fuart();
++}
 +
- &{/soc} {
- 	extsys0: remoteproc@1a010310 {
- 		compatible = "arm,corstone1000-extsys";
-@@ -37,3 +46,70 @@
- 		firmware-name = "es_flashfw.elf";
- 	};
- };
-+
-+#ifdef CONFIG_ETHOS_U85
-+&{/reserved-memory} {
-+	ethosu_sram: ethosu_sram@02400000 {
-+		reg = <0x02400000 0x200000>;
-+		no-map;
-+	};
-+
-+	ethosu_reserved: ethosu_reserved@A0000000 {
-+		compatible = "shared-dma-pool";
-+		reg = <0xA0000000 0x02000000>;
-+		no-map;
-+	};
-+};
-+
-+/ {
-+	ethosu: ethosu@1A050000 {
-+		compatible = "arm,ethosu-direct";
-+
-+		// Base address and size of NPU registers
-+		reg = <0x1A050000 0x4000>;
-+
-+		memory-region = <&ethosu_reserved>;
-+		sram = <&ethosu_sram>;
-+
-+		// Address mappings to translate between bus addresses (NPU) and physical host CPU addresses
-+		dma-ranges = <0x02400000 0x02400000 0x200000>,
-+		<0xA0000000 0xA0000000 0x02000000>;
-+
-+		interrupts = <0 16 4>;
-+		interrupt-names = "irq";
-+
-+		// Memory region configuration
-+		region-cfgs = <3 3 0 3 3 3 3 3>;
-+
-+		// Memory regions used for the command stream
-+		cs-region = <2>;
-+
-+		// Memory interface configuration for Ethos-U85
-+		ethosu_mem_config {
-+			compatible = "arm,ethosu-mem-config";
-+			// <beats outstanding_read outstanding_write>
-+			sram = <0 64 32>;
-+			ext  = <1 64 32>;
-+			// <mem_domain mem_type axi_port>
-+			configs = <0 0 0>,
-+			<0 0 0>,
-+			<0 0 1>,
-+			<0 0 1>;
-+		};
-+	};
-+};
-+#endif
-+#ifdef CONFIG_GIC_V3
-+gic: &{/interrupt-controller@1c000000} {
-+		compatible = "arm,gic-v3";
-+		#interrupt-cells = <3>;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges;
-+		interrupt-controller;
-+		reg = <0x1c000000 0x00010000>,
-+		<0x1c040000 0x00080000>;
-+		interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_LOW>;
-+	};
-+#endif
-+
-diff --git a/arch/arm/include/asm/armv8/cpu.h b/arch/arm/include/asm/armv8/cpu.h
-index 4dbb589aab8..ffd8f8f358f 100644
---- a/arch/arm/include/asm/armv8/cpu.h
-+++ b/arch/arm/include/asm/armv8/cpu.h
-@@ -8,6 +8,7 @@
- #define MIDR_PARTNUM_CORTEX_A57		0xD07
- #define MIDR_PARTNUM_CORTEX_A72		0xD08
- #define MIDR_PARTNUM_CORTEX_A76		0xD0B
-+#define MIDR_PARTNUM_CORTEX_A320		0xD8F
- #define MIDR_PARTNUM_SHIFT		0x4
- #define MIDR_PARTNUM_MASK		(0xFFF << MIDR_PARTNUM_SHIFT)
- 
-diff --git a/board/armltd/corstone1000/Kconfig b/board/armltd/corstone1000/Kconfig
-index 709674d4cf7..9476d64d0b0 100644
---- a/board/armltd/corstone1000/Kconfig
-+++ b/board/armltd/corstone1000/Kconfig
-@@ -9,4 +9,11 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "corstone1000"
- 
-+config ETHOS_U85
-+	bool "Enable Arm Ethos-U85 NPU support"
-+	default n
-+
-+config GIC_V3
-+	bool "Enable GIC v3 support"
-+	default n
- endif
+ int board=5Finit(void)
+ {
+ 	/* address of boot parameters */
+diff --git a/configs/mx7dsabresd=5Fdefconfig b/configs/mx7dsabresd=5Fde=
+fconfig
+index a5a562af0c0..9f0631fe868 100644
+--- a/configs/mx7dsabresd=5Fdefconfig
++++ b/configs/mx7dsabresd=5Fdefconfig
+@@ -10,6 +10,11 @@ CONFIG=5FTARGET=5FMX7DSABRESD=3Dy
+ # CONFIG=5FARMV7=5FVIRT is not set
+ CONFIG=5FIMX=5FRDC=3Dy
+ CONFIG=5FIMX=5FBOOTAUX=3Dy
++CONFIG=5FDEBUG=5FUART=5FBASE=3D0x30860000
++CONFIG=5FDEBUG=5FUART=5FCLOCK=3D24000000
++CONFIG=5FDEBUG=5FUART=3Dy
++CONFIG=5FDEBUG=5FUART=5FANNOUNCE=3Dy
++CONFIG=5FDEBUG=5FUART=5FBOARD=5FINIT=3Dy
+ CONFIG=5FIMX=5FHAB=3Dy
+ CONFIG=5FSYS=5FMEMTEST=5FSTART=3D0x80000000
+ CONFIG=5FSYS=5FMEMTEST=5FEND=3D0xa0000000
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index c38738b48c7..dff471228d6 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -9,6 +9,7 @@
+ #ifndef USE=5FHOSTCC
+=20
+ #define LOG=5FCATEGORY	LOGC=5FDT
++#define DEBUG
+=20
+ #include <bloblist.h>
+ #include <boot=5Ffit.h>
+@@ -35,6 +36,7 @@
+ #include <linux/ctype.h>
+ #include <linux/lzo.h>
+ #include <linux/ioport.h>
++#include <system-constants.h>
+=20
+ DECLARE=5FGLOBAL=5FDATA=5FPTR;
+=20
+@@ -1276,6 +1278,9 @@ static void *fdt=5Ffind=5Fseparate(void)
+ 		 */
+ 		if (top > (void *)gd || top > (void *)&stack=5Fptr) {
+ 			printf("FDT %p gd %p\n", fdt=5Fblob, gd);
++			printf("top %p sp %p\n", top, stack=5Fptr);
++			printf("sys=5Finit=5Fsp=5Faddr %p\n", SYS=5FINIT=5FSP=5FADDR);
++			printf("gbl=5Fdata=5Fsize %p\n", GENERATED=5FGBL=5FDATA=5FSIZE);
+ 			panic("FDT overlap");
+ 		}
+ 	}
+--=20
+2.34.1
+
