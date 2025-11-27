@@ -4,89 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42C42D10375
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 05:21:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69BE6CFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 05:21:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78E63842DF;
-	Thu, 27 Nov 2025 06:21:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D7A1A842E7;
+	Thu, 27 Nov 2025 06:21:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=icenowy.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PLvY3/9Y";
+	dkim=pass (2048-bit key; unprotected) header.d=icenowy.me header.i=uwu@icenowy.me header.b="U+HBOdvH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79C29842E0; Thu, 27 Nov 2025 06:20:59 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 61725842EB; Thu, 27 Nov 2025 06:21:18 +0100 (CET)
+Received: from sender3-op-o15.zoho.com (sender3-op-o15.zoho.com
+ [136.143.184.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B6A6842CD
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 06:20:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2BD1842CD
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 06:21:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-657244ed2c2so92009eaf.1
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 21:20:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764220856; x=1764825656; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DGvEzCNJvN5taWw7A1p2d/oe2FbbFAYVl3+1/J8L0tU=;
- b=PLvY3/9YuWdiY+Rcdj2JMH6Yj+dBoYB0vkd1uMHtSsLLwIfu/d/9QoXWq0AclNPRuB
- FoA/iiy6zxYZaNA2p4vSeFjJ1bNTkTJX4RrGgqvzpWkyO+Woz+awtfnRr4J9oTIf0Kot
- dTlZ4IOHCsGfxu7ey1pYYuGiRj8krC6u4P3qg+uwIP0E6ClppiUSPbCGb/ZdKtlA/whv
- ApDr4lhpuw43i8EKmQM5gSBwp9DRIY98KpvRG5ufT35ywe3pAYdsBihAsYKe8F8cs6Bw
- /d6ni2+RJCYLXzbMWipkznBcUGIZiSFSaofgptFspZgi03sA5eSOaNgS0zIWQvjUP3IF
- CuxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764220856; x=1764825656;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DGvEzCNJvN5taWw7A1p2d/oe2FbbFAYVl3+1/J8L0tU=;
- b=MZMDVGy3AKI5DQjpl9p7q03bhrqKDsC3ofRU5RJe9M/z98FuRjn5FZDVYDa+RyL22Z
- OgJpycrJb24aBbuTYs90GBFeBm4KkuIWolhne0FPsEUF6abrPAcrToAaSYsdDVmGlsDf
- DQPFDOOB6Ab+LRHZV0xh79vPUxjurNidSc+QC3evJyBMGhJOnWvB8Yhr2KrVxc/M9C+O
- Db9gxeti7YGBlawki4E1loRtSSShuUcfBPNwaEef9NZNJFxJgbe494TOjQQolJmD3B8W
- 6RFBZPckmrPWv6AfDGZo67NXODpPCvWzimVUnHGrW/ioOmeqML4KiT6XiIupMjzWBNKJ
- CAPw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUpsTMLD2fqT5M9Yx9pd8Fg5lzwU6FnsAXifSgIPuLoKk1e10yLo4G/schnA6+O4Dm1KB+9d1E=@lists.denx.de
-X-Gm-Message-State: AOJu0YxhWv+3Hwuk9kbXbCKJVfNrHARZlcbMR0rNk/0KEVZC7lBmprKI
- qECvV/e13CZDaVGh9JgXnlXMX+ZQxOv4OWEs1MY/l/M7HVnDsmsq5WVdDShH5anKmMd1zR9kP19
- d1YKop9NYDaogVrdr5oylqvbLw12rcjg=
-X-Gm-Gg: ASbGnctfcytzzoQll4fkREcmFwfRTDBPAfldgPd6iIBTuXOwPHUj2zPxdi0uQJtB/Xf
- EHCEO5jF+Z+lo8KJDhlsmxVTaBhAdnqGoh6hzd04cSudWe52H0nmqYvh70RrPtHbSRfpiz+ZPOy
- pGp4z48f+6dj2LRJxXdlrVyBvOvCOut/BoeG7awZGFAWReNWME81ulOKooNqC6v1QlUbxnhlcuS
- YQjUj+fT9K7vcjvkfv6UusBuXrZcFNq91DLxLk9VSr48PU8/TSonKMD/rju9pSV4Iq6hs8=
-X-Google-Smtp-Source: AGHT+IEe8u0gl5i4oERTmHMO0uA93e9AQ+P12c4DceASAft+EaYbon86YfKLj7rF2iaGBA+ARAxxeumJBYLaM/4ZS6Q=
-X-Received: by 2002:a05:6830:4126:b0:7c6:cb39:adf7 with SMTP id
- 46e09a7af769-7c798f6199bmr10963340a34.6.1764220855972; Wed, 26 Nov 2025
- 21:20:55 -0800 (PST)
-MIME-Version: 1.0
-References: <cover.1763140421.git.jan.kiszka@siemens.com>
- <c1dc5e70f6bbde1f2b7dfd027a90f09bb4c1e939.1763140421.git.jan.kiszka@siemens.com>
- <e39163e2-cf21-4a73-8170-8066d93db049@altera.com>
- <c536c33d-8330-49b1-821d-3d218c49ae23@siemens.com>
- <0720e9a5-536a-490f-bb28-87efe50289a4@altera.com>
-In-Reply-To: <0720e9a5-536a-490f-bb28-87efe50289a4@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Thu, 27 Nov 2025 13:20:44 +0800
-X-Gm-Features: AWmQ_bkDvVLkeYCHvfokwbRtqq8D8uirmRAoblRsRplJWvGYXbQ3oBBXM0YVwBc
-Message-ID: <CAN7C2SDhuPmFV7JjqGwvAOi6s68AbdihmcJ5dapm18=ON0i5jw@mail.gmail.com>
-Subject: Re: [PATCH 3/4] arch: arm: mach-socfpga: Adjust a raw sectors for MMC
- loading of U-Boot from SPL
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>
-Cc: Jan Kiszka <jan.kiszka@siemens.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Marek Vasut <marex@nabladev.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>, 
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+ dmarc=pass (p=none dis=none) header.from=icenowy.me
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=uwu@icenowy.me
+ARC-Seal: i=1; a=rsa-sha256; t=1764220870; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=ThE6pOMGvgHPduGqVCOfwa61E0O1oGvveFmq05wjS7GFS1TjiLdRWD/oD7leDXU2ku7wSxA969mtSIsYpxK1vGbhZoui1Uv9ShkDBRKtDBBz7YNKt8uY20Jzcprb0gBrxisFMFBDgGu4HWDzOL9sWExRTocymBqbCnSmsc4+2S4=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1764220870;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=z/avwZ+N+jyT4/41QIpboQf5cXD2GV0yr5/gml7TCvE=; 
+ b=QMY1fz74OylzDwBR5ydz4XBeT3cesJx+3vXoDSCo/305+1pLAw4tZySafFwhotJmkNMKJ3zcQHBj17yka6errLbhCNSs/9i/Io12DuGhgKXoS0EXu5cNZD4SsgkE7fQf6ADB3baxhlw+1N+7JhlqPdJrtKq4lQ1hdQL25t0KekY=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=icenowy.me;
+ spf=pass  smtp.mailfrom=uwu@icenowy.me;
+ dmarc=pass header.from=<uwu@icenowy.me>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1764220870; 
+ s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
+ h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
+ bh=z/avwZ+N+jyT4/41QIpboQf5cXD2GV0yr5/gml7TCvE=;
+ b=U+HBOdvHL5escfwButY8Kytm4EX8mr8rAXm1UnNHSESiqgegDCkwX2IP47TrvxDi
+ gnjXs8N/bOkMVtQGwAZja3Vcg/9ja++TCJjVlqD2jOrHC0FPfev+FJPM5cB8GTzMMPW
+ DB4uHJgu64E5725uOaf/GpTfgE+mRXfyAq7wKu49jzR1izY2h6glvb3KPIw0EK5q9RF
+ mBBEsNyP11So6P00r1m0BJel78BwD95wkIbdQTlvmQSzPzUX9Q2o8/7LWz7AjZDaS4P
+ XQd9YYQ8RdzbI/sXKm/XsmwsVxE/jh/qDY1HSbLMIVO5eStYNhX1qQLd0rZAYRGAGuB
+ +yAlG7M43A==
+Received: by mx.zohomail.com with SMTPS id 1764220867614444.11489814522906;
+ Wed, 26 Nov 2025 21:21:07 -0800 (PST)
+Message-ID: <3011ae00cb3784c885cba99ea9892fdb288c4565.camel@icenowy.me>
+Subject: Re: [RFC PATCH v1 0/4] Add upstream board Xunlong Orange Pi RV
+From: Icenowy Zheng <uwu@icenowy.me>
+To: E Shattow <e@freeshell.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Minda Chen
+ <minda.chen@starfivetech.com>,  Hal Feng <hal.feng@starfivetech.com>, Tom
+ Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Date: Thu, 27 Nov 2025 13:21:02 +0800
+In-Reply-To: <1cb6747e-a54d-4b54-8cbc-f41932e1a29a@freeshell.de>
+References: <20251126221552.87574-1-e@freeshell.de>
+ <B7BF64B9-B3C7-4885-B1F2-767D69298313@gmx.de>
+ <1cb6747e-a54d-4b54-8cbc-f41932e1a29a@freeshell.de>
+Organization: Anthon Open-Source Community
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4 
+MIME-Version: 1.0
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,36 +84,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Our POC confirms that this restriction applies to SPL only. Once SPL is
-> running from OCRAM, it can load U-Boot proper from FAT32 without issue.
-> This reduces OCRAM usage, simplifies the MMC layout, and preserves FAT32
-> benefits.
+=E5=9C=A8 2025-11-26=E6=98=9F=E6=9C=9F=E4=B8=89=E7=9A=84 15:42 -0800=EF=BC=
+=8CE Shattow=E5=86=99=E9=81=93=EF=BC=9A
+>=20
+> On 11/26/25 14:34, Heinrich Schuchardt wrote:
+> > Am 26. November 2025 23:15:25 MEZ schrieb E Shattow
+> > <e@freeshell.de>:
+> > > Xunlong Orange Pi RV patches are now queued up for the next merge
+> > > window
+> > > to Linux v6.19, so let's introduce support for this board.
+> > >=20
+> > > Note: The content of EEPROM is not known to be unique on this
+> > > board, and
+> > > in this RFC there is a placeholder value of "XOPIRV".
+> >=20
+> > If OrangePi is not providing a unique value, shouldn't we create a
+> > separate defconfig (including the vf2 one) and override the output
+> > of the eeprom reading function by a configuration value?
+> >=20
+> > That way we can reuse most code and avoid that users have to update
+> > the EEPROM to "XOPIRV".
+> >=20
+> > Best regards
+> >=20
+> > Heinrich
+> >=20
+> > >=20
+> > > E Shattow (4):
+> > > =C2=A0riscv: dts: starfive: Add Orange Pi RV from upstream Linux for-
+> > > next
+> > > =C2=A0board: starfive: visionfive2: Add Orange Pi RV selection by
+> > > product_id
+> > > =C2=A0riscv: dts: Add placeholder files for pending upstream Orange P=
+i
+> > > RV
+> > > =C2=A0configs: starfive: Add Orange Pi RV to visionfive2
+> > >=20
+> > > arch/riscv/dts/jh7110-orangepi-rv-u-boot.dtsi | 76
+> > > +++++++++++++++++++
+> > > board/starfive/visionfive2/spl.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 3 +
+> > > .../visionfive2/starfive_visionfive2.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 |=C2=A0 2 +
+> > > configs/starfive_visionfive2_defconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 |=C2=A0 2 +-
+> > > .../src/riscv/starfive/jh7110-orangepi-rv.dts |=C2=A0 0
+> > > 5 files changed, 82 insertions(+), 1 deletion(-)
+> > > create mode 100644 arch/riscv/dts/jh7110-orangepi-rv-u-boot.dtsi
+> > > create mode 100644 dts/upstream/src/riscv/starfive/jh7110-
+> > > orangepi-rv.dts
+> > >=20
+> > >=20
+> > > base-commit: c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
+> >=20
+>=20
+> Sure I'd like more testing data about these boards, I don't have the
+> board myself so I don't know the answer to that.
+>=20
+> What is the content of EEPROM, for reference?
 
-Hi T.F.
+```
+root@opirv [ ~ ] # i2cdump 5 0x50
+No size specified (using byte-data access)
+WARNING! This program can confuse your I2C bus, cause data loss and
+worse!
+I will probe file /dev/i2c-5, address 0x50, mode byte
+Continue? [Y/n]=20
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f    0123456789abcdef
+00: 53 46 56 46 02 00 02 00 88 00 00 00 01 00 01 00    SFVF?.?.?...?.?.
+10: 58 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    X...............
+20: 00 00 00 00 00 00 00 00 20 20 53 74 61 72 46 69    ........  StarFi
+30: 76 65 20 54 65 63 68 6e 6f 6c 6f 67 79 20 43 6f    ve Technology Co
+40: 2e 2c 20 4c 74 64 2e 00 00 00 56 46 37 31 31 30    ., Ltd....VF7110
+50: 42 31 2d 32 32 32 38 2d 44 30 30 34 45 30 30 30    B1-2228-D004E000
+60: 2d 30 30 30 30 30 32 37 31 00 6d da 04 00 02 00    -00000271.m??.?.
+70: 14 00 00 00 02 00 01 41 c0 74 2b fc f4 0e 6c cf    ?...?.?A?t+???l?
+80: 39 00 00 00 00 00 f4 9e ff ff ff ff ff ff ff ff    9.....??........
+90: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff    ................
+a0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff    ................
+b0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff    ................
+c0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff    ................
+d0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff    ................
+e0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff    ................
+f0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff    ................
+```
 
-Can you confirm or recap a bit.
+From my OPi RV, where the original Linux upstream DT is developed.
 
-First I had no issue since the new update from mixed seek
-to three individual seek methods, TYPE, PAR#, OFFSET.
+>=20
+> If it's all the same as VisionFive 2 and boots with dts from
+> VisionFive
+> 2 (1.3b?) then it might not be needed to do more than add
+> documentation
+> for the board to reference the VisionFive 2 and explain how to
+> properly
+> set fdtfile. Inventing a new board identifier when the manufacturer
+> has
+> not provided one sounds convenient to me, and it is not to the
+> exclusion
+> of a separate board config just for that special situation. The
+> documentation can explain either or both situations, expanding how to
+> compile for the board.
+>=20
+> How does network and eMMC function with the series applied, not
+> changing
+> the EEPROM content (remains what I was understood is the same as
+> VisionFive 2), and manually setting the fdtfile variable?
+>=20
+> -E
 
-But what my best guest Jan is trying to fix does not exist
-from the beginning. There are no need to follow old days
-combined splx4+uboot to A2 but simply spl on A2 and
-uboot in FAT.
-
-To confirm --->
-For u-boot-with-spl.sfp simply dd using old method aka
-early like 2025.05 or before will not require the uboot to exist
-in FAT32 and simply all combined and flashed to A2. But
-using such will only stop at SPL and the U BOOT phase never
-completes.
-<---
-
-Simply follow old boot or flash flow and blindly run
-make board_defconfig and no sync or update results in fails.
-
-So what my comment is just a very bad naming on
-latest u-boot generated file "u-boot-with-spl.sfp" ?
-
-Thanks,
-Brian
