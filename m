@@ -4,84 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD5DD11183
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 12:16:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B862DCFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 12:16:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F6FD8432D;
+	by phobos.denx.de (Postfix) with ESMTP id CEC9184380;
 	Thu, 27 Nov 2025 13:16:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h17l4WNg";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80F7B842C7; Thu, 27 Nov 2025 05:15:45 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B978A8439E; Thu, 27 Nov 2025 10:55:04 +0100 (CET)
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25A5D842BF
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 05:15:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E8A084370
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 10:55:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=davidzangcs@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3437c093ef5so467801a91.0
- for <u-boot@lists.denx.de>; Wed, 26 Nov 2025 20:15:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764216941; x=1764821741; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=o32Wa6PqOrZUKiHEIDfKUl6PzZPpX4K6DMrjKMjnNTY=;
- b=h17l4WNg77ZC/WmwyoEZbmya7ZwtbkMwJEZASDm2eudfvS/LozTNvt46XGzQgfHNQ6
- i0UIQIvWNyE9A+2wANhMIZPKKSZeYr0q+zmJp4Tz9QP9iw1xUZhOyR3/zMRLElJA/1l2
- fLZQIU+45rsBK32OWTRec3RNniKgJScKBRI01N+D8zObY+DjcZQPJKazgXTGsZwnS8he
- pxSwInldYOIHGyFYm+aMcusZ7gQ45niwqMpIxRnhlumnMgi7/EwKJmddmCnOmm4zDyHm
- 3LjaQ1OVYnculxQ2UToCJSZ1ZZD1yGGfIwFfK8iGq4VwGWBjhenT3Rit9Ci+EyaKtKhZ
- hdmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764216941; x=1764821741;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=o32Wa6PqOrZUKiHEIDfKUl6PzZPpX4K6DMrjKMjnNTY=;
- b=g4N7scinlhWN/MKG4U9HZD1VtFBl0pisWRUcOElHpR2ic5TC5WvOA3Ief+EieUXUop
- pfcaBV4VAGtaTJhFgGpB02Bk7i4DwjuTodXVStsd9O64x502h7BlLaMFu5M+P7199uGg
- Poi8YMiM3yj6yTHW6VhgPT7hzX/DMJXr8r/MG/Wi+teSHiTqGDBi/s6/4KCWAf6+1lB1
- w2PQlTAIkd0JwVeTUI7Q5659TEjmN+CMd5/a0vrULGkBEVZjyvgfVJO4A+L1sqAhZ0ah
- 5rQi23dfivr6OvXgdsHmPeW484SlJoylf5sI09VQp6Yp1g+6BD32f83E+bJR50dWN/FR
- XJ6g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUa6yDun+c7A/c6+Amipu+wSIj1IWyO2KCM008NWOsXZ2XDkuFFqZIl9/Mf2FHaN8UxvDoxj3k=@lists.denx.de
-X-Gm-Message-State: AOJu0YwF67jOBs6FDN75f52HRyFcGalzM8TzkkNCv98tM9ss/kgPPC66
- IFhX+RRQFlg/GhekzTXd3T8vxn5kBFQ6m9O1Pr8RTp40qYA8LaaDVpDg00jkemdXWKfDRNXHrRv
- eiL0suc/tMiAdYf0wUwkIgTGBK5pXJzNw/Ka5
-X-Gm-Gg: ASbGnctweC0v9Hl7XkqTzzgnrHJnZPsrm5qmzjz6yU6DGuHq0iubZMn5yN5ohV+6WKB
- tkTl6fDZb26/UwlWtmxmYqhEZUrGAyI9AqYbpiiNK6vkXPXOb4h3v7+aXRuSJWvYh/Cn/DTr8+W
- dGVNKj05OusZErzIRu4B3/9UwUqFckpWcAhrVu+taylHbgfWTnZn6xC8bgBVhmvaR/1ZM5FJ16v
- LwAtdLKdUsXICQ5xzICsnxRVsS23pLsWsarIeS2MGc6diDUqJva+KEFOlfY5E/0ePLu
-X-Google-Smtp-Source: AGHT+IEYJw3Ag4A0FDyMNIi/ZlbMOjQ/rLwu2HSlCV5tN8X3i+gYSJM+liRMrYgpwliW84e7nHpEYYOEP2WEjt+FnWk=
-X-Received: by 2002:a17:90b:4b09:b0:341:6164:c27d with SMTP id
- 98e67ed59e1d1-34733e2d49amr20769526a91.3.1764216941495; Wed, 26 Nov 2025
- 20:15:41 -0800 (PST)
+ spf=pass smtp.mailfrom=qijian.guo@nxp.com
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 7671520004F;
+ Thu, 27 Nov 2025 10:55:01 +0100 (CET)
+Received: from aprdc01srsp001v.ap-rdc01.nxp.com
+ (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 3F351200064;
+ Thu, 27 Nov 2025 10:55:01 +0100 (CET)
+Received: from lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com
+ (lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com [10.52.9.99])
+ by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id 7B0221800093;
+ Thu, 27 Nov 2025 17:54:58 +0800 (+08)
+From: Joseph Guo <qijian.guo@nxp.com>
+Subject: [PATCH 0/2] Add FRDM-IMX91 initial support
+Date: Thu, 27 Nov 2025 18:54:56 +0900
+Message-Id: <20251127-imx91_frdm-v1-0-8f42646d89ad@nxp.com>
 MIME-Version: 1.0
-References: <20251027002458.16741-1-semen.protsenko@linaro.org>
- <20251028165056.GG6688@bill-the-cat>
- <CAPLW+4=JOiPk+gOHH4umevJxJweitAn3dpec1xTe9ZrgCAVAMA@mail.gmail.com>
- <20251125165112.GR2125796@bill-the-cat>
-In-Reply-To: <20251125165112.GR2125796@bill-the-cat>
-From: David Zang <davidzangcs@gmail.com>
-Date: Wed, 26 Nov 2025 22:15:30 -0600
-X-Gm-Features: AWmQ_bmvTK11VgnqiIBAbT-wekwm8_SYVFBToNfc1mvMN199akL7pwV5EMzJLF0
-Message-ID: <CACwB3C8g2QGzQESKGnBr3BFU84y8H7d1K2T5Z2cBrvZ1U529Hg@mail.gmail.com>
-Subject: Re: [PATCH] autoboot: Fix inconsistent countdown output
-To: Tom Rini <trini@konsulko.com>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPAfKGkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDQ0Nz3czcCkvD+LSilFxd80SjlCRL0zQjc8sUJaCGgqLUtMwKsGHRsbW
+ 1AJOdktNcAAAA
+X-Change-ID: 20251117-imx91_frdm-7a2db95f279d
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Ye Li <ye.li@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Adam Ford <aford173@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, 
+ Joseph Guo <qijian.guo@nxp.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1764237298; l=1863;
+ i=qijian.guo@nxp.com; s=20250519; h=from:subject:message-id;
+ bh=P8ebul3LuzgiWOwX0euw4kL9NWcXh+sZn/mK61SRPqY=;
+ b=xZo9xYPASLliRmoWeI6i6Qjkr+haRkFnTuxJNc+O6+yoAs1v9g5JGEkYBP+jYKvUQTW6JgnWr
+ twwtXjTHcWIClizinUI/jUtJL5zkXG/nJSd+tRNIwZLLmmS3pAjQqYx
+X-Developer-Key: i=qijian.guo@nxp.com; a=ed25519;
+ pk=VRjOOFhVecTRwBzK4mt/k3JBnHoYfuXKCm9FM+hHQhs=
 X-Mailman-Approved-At: Thu, 27 Nov 2025 13:16:04 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,63 +79,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you Sam for the fix.
-Acked-by: David Zang <davidzangcs@gmail.com>
+This series add initial support for the FRDM i.MX91 11x11 development
+board in U-Boot.
 
-On Tue, Nov 25, 2025 at 10:51=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
+Include:
+- Device tree for the board.
+- Defconfig and Kconfig for the board.
+- Header file defining memory layout and hadware addresses.
 
-> On Mon, Nov 24, 2025 at 02:49:23PM -0600, Sam Protsenko wrote:
-> > Hi Tom,
-> >
-> > On Tue, Oct 28, 2025 at 11:51=E2=80=AFAM Tom Rini <trini@konsulko.com> =
-wrote:
-> > >
-> > > On Sun, Oct 26, 2025 at 07:24:58PM -0500, Sam Protsenko wrote:
-> > >
-> > > > Commit 5f70be08b015 ("Fix autoboot countdown printing wrong")
-> introduces
-> > > > inconsistency in how the countdown is displayed. For example, in ca=
-se
-> > > > when BOOTDELAY=3D5, the next output is observed during the boot:
-> > > >
-> > > >     Hit any key to stop autoboot:  5
-> > > >     Hit any key to stop autoboot: 4
-> > > >     Hit any key to stop autoboot: 3
-> > > >
-> > > > That happens due to different printf format (%2d vs %1d). Moreover,
-> the
-> > > > mentioned commit fails to handle the case when the user is holding
-> some
-> > > > key before the countdown is shown. E.g. if BOOTDELAY=3D101, the nex=
-t
-> > > > malformed output is being produced:
-> > > >
-> > > >     Hit any key to stop autoboot: 1 0
-> > > >
-> > > > That's because the fast path code wasn't modified accordingly, and
-> still
-> > > > tries to erase the number using '\b\b\b' format.
-> > > >
-> > > > Fix both issues by introducing a dedicated routine for printing the
-> > > > whole countdown line.
-> > > >
-> > > > Fixes: 5f70be08b015 ("Fix autoboot countdown printing wrong")
-> > > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> > >
-> > > This seems the reasonable path, given everything in the following par=
-ts
-> > > of the thread, thanks.
-> > >
-> > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > >
-> >
-> > Since there are no new or outstanding comments for this patch, can you
-> > please pull it for the next release?
->
-> I'm going to take this for -next rather than master, soon, as it's just
-> cleaning up some output. Thanks.
->
-> --
-> Tom
->
+Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
+---
+Joseph Guo (2):
+      arm64: dts: add NXP FRDM-IMX91 device tree
+      imx: Support i.MX91 11x11 FRDM board
+
+ arch/arm/dts/imx91-11x11-frdm-u-boot.dtsi          |  195 ++
+ arch/arm/dts/imx91-11x11-frdm.dts                  |  670 +++++++
+ arch/arm/mach-imx/imx9/Kconfig                     |    8 +
+ board/freescale/imx91_frdm/Kconfig                 |   19 +
+ board/freescale/imx91_frdm/MAINTAINERS             |    7 +
+ board/freescale/imx91_frdm/Makefile                |   16 +
+ board/freescale/imx91_frdm/imx91_frdm.c            |   28 +
+ board/freescale/imx91_frdm/imx91_frdm.env          |   88 +
+ .../imx91_frdm/lpddr4_2400mts_1gb_timing.c         | 1996 ++++++++++++++++++++
+ .../imx91_frdm/lpddr4_2400mts_2gb_timing.c         | 1996 ++++++++++++++++++++
+ .../imx91_frdm/lpddr4_2400mts_ecc_1gb_timing.c     | 1996 ++++++++++++++++++++
+ .../imx91_frdm/lpddr4_2400mts_ecc_2gb_timing.c     | 1996 ++++++++++++++++++++
+ board/freescale/imx91_frdm/lpddr4_timing.h         |   12 +
+ board/freescale/imx91_frdm/spl.c                   |  204 ++
+ configs/imx91_11x11_frdm_defconfig                 |  143 ++
+ configs/imx91_11x11_frdm_inline_ecc_defconfig      |  143 ++
+ doc/board/nxp/imx91_frdm.rst                       |   99 +
+ doc/board/nxp/index.rst                            |    1 +
+ include/configs/imx91_frdm.h                       |   25 +
+ 19 files changed, 9642 insertions(+)
+---
+base-commit: 69cc92d6869b8ff4591e5b8850872da34934bab9
+change-id: 20251117-imx91_frdm-7a2db95f279d
+
+Best regards,
+-- 
+Joseph Guo <qijian.guo@nxp.com>
+
