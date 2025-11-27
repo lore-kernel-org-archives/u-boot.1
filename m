@@ -4,61 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4783BCFD2F6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 17:54:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB99DD111A8
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 18:04:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B20768437E;
-	Thu, 27 Nov 2025 18:54:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8DDE68437E;
+	Thu, 27 Nov 2025 19:04:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TYxS1aOv";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Q7VKXzNT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CC258437F; Thu, 27 Nov 2025 18:54:49 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 871F5844A5; Thu, 27 Nov 2025 19:04:12 +0100 (CET)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7144583B2C
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 18:54:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from rpi5.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id C4D5C42490; 
- Thu, 27 Nov 2025 17:54:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1764266086;
- bh=qFdPcW4WJQmdLypDhnMLoGM/guGRUiuNUCDOrY96o84=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=TYxS1aOvitRrNGd5SSGbSTW2ZFfl3ALcgh7/EcgsmLbPJTn3ZReO7ZQH/ELEYHjxt
- P9dnI+qjTE4canXN1K9dGQzqYfWBcx+gIdJgAt1vHDTtBBLuT2EJX3FSivq3D3Gavb
- JMU6usSUViUbvv89Ef/CK7eWhnaA5k319fF1y9kYuad4TPt35/5FgH5N3JeXt/yjHh
- lwv/nkV7Q3/V2xhY76lkszo63dnIDpe20CCFTDsc4ZjyZOghPWIv9pRqGCcPsc6Foa
- YroyVNNmRIguxMVSaqaZ/nQW3T4SES0EPHg9FElVUPCGyLVl7ygKgRvWL4APqmO4AL
- DUXSIpKDxs8JYWOZ6exBVPN3LUVYD2sLlKl0LrzJy17a7RCGXCync8NsyfyfCgDE63
- ESN/BdgH4HH0OYe7rxOg64Crwdul3CRMpB5eoN/yj7Ta9o4GDY/u1gCD1IfeHCWTKe
- 1ZxebpGWiqVb8xctaKuq7IoTCbQIdeVYiwzgxubSVhy+igjDZu/aECHm7n63IV6eWW
- U9NmpCH3gjz4YIJdhzIoQoOh4nIWZGyzFRqXvsg8co7Q9c2RXRsjLjRrb+ulndv6e2
- BvPU6y85tyLXm9k9CAWW2OtjxcQJ0kqWOJLBzkevE50I8pcNwKUgAP37fdTa48uyyv
- 730Jm0TmCKZegOPaIZtltPwA=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Bin Meng <bmeng.cn@gmail.com>,
-	Marek Vasut <marex@denx.de>
-Cc: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2] usb/xhci: avoid noisy 'Register NbrPorts' message
-Date: Thu, 27 Nov 2025 18:54:25 +0100
-Message-ID: <20251127175425.639086-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 6924B8430C
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 19:04:09 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jeremie.dautheribes@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id E5C3A4E4192A;
+ Thu, 27 Nov 2025 18:04:08 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id B464460722;
+ Thu, 27 Nov 2025 18:04:08 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 250C8103C8BD9; Thu, 27 Nov 2025 19:04:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1764266648; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=3GDiNwjJ5kKQEsGa+u4aEpvRyUsuU1AMl0SrTOMF1JA=;
+ b=Q7VKXzNTl+O7iWESJz8qwAJIc0caCoRVs51WDxr5cL97WbLgP4Rdl6eGErAWRXYNMdTmBO
+ 8RSu3KLAh6VwhJQC8yR7eT9xRt2SW7HuCT8fZO2zg0DYmnrU1YRVhCPqUufOSBUh+nU0n1
+ 0/tQRRTJCFHRzJ65uEVhnatgCDOL62hPg2Suhz7vHVCYCuiw//OhzBnLAbLwh3jsWZNT+o
+ GQ2W7BFAeYJSelPNo6dvWq9Tdx3HL3eBhWlND1jzzJEuzD+FX6ztQJnY03SLCrlMZLi1/2
+ iDslViB7dI76lK7O2Lx2+KFOcV0lAYOAjI42Rqt3BfGDswMdCtVx3iutG9Sz4A==
+Message-ID: <89715907-3d24-483d-943f-a027097962aa@bootlin.com>
+Date: Thu, 27 Nov 2025 19:04:06 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: blob_dtb: improve error message when SPL is not
+ found
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ =?UTF-8?Q?Miqu=C3=A8l_Raynal?= <miquel.raynal@bootlin.com>
+References: <20250820150654.1398992-1-jeremie.dautheribes@bootlin.com>
+ <20250909170357.GA1799865@bill-the-cat>
+Content-Language: en-US
+From: =?UTF-8?B?SsOpcsOpbWllIERhdXRoZXJpYmVz?=
+ <jeremie.dautheribes@bootlin.com>
+Organization: Bootlin
+In-Reply-To: <20250909170357.GA1799865@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,31 +79,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We should avoid overwhelming users with non-essential messages.
+Hi Tom,
 
-'Register NbrPorts' is a debug message for EHCI. Do the same for XHCI.
+On 09/09/2025 19:03, Tom Rini wrote:
+> On Wed, Aug 20, 2025 at 05:06:54PM +0200, Jérémie Dautheribes wrote:
+> 
+>> When using binman with the '-a spl-dtb=y' flag, if the SPL blob is not
+>> found, binman throws a cryptic error message:
+>> binman: 'NoneType' object has no attribute 'startswith'
+>>
+>> Let's improve the error message to explicitly state which SPL blob is
+>> missing.
+>> This is particularly useful when binman is used as a standalone tool
+>> outside the U-Boot source tree.
+>>
+>> Signed-off-by: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
+>> ---
+>>   tools/binman/etype/blob_dtb.py | 5 +++++
+>>   1 file changed, 5 insertions(+)
+>>
+>> diff --git a/tools/binman/etype/blob_dtb.py b/tools/binman/etype/blob_dtb.py
+>> index b234323d7cf..772579394d4 100644
+>> --- a/tools/binman/etype/blob_dtb.py
+>> +++ b/tools/binman/etype/blob_dtb.py
+>> @@ -8,6 +8,8 @@
+>>   from binman.entry import Entry
+>>   from binman.etype.blob import Entry_blob
+>>   from dtoc import fdt_util
+>> +import errno
+>> +import os
+>>   import struct
+>>   
+>>   # This is imported if needed
+>> @@ -42,6 +44,9 @@ class Entry_blob_dtb(Entry_blob):
+>>           """Get the device-tree from the list held by the 'state' module"""
+>>           self._filename = self.GetDefaultFilename()
+>>           self._pathname, _ = self.FdtContents(self.GetFdtEtype())
+>> +        if self._pathname is None:
+>> +            raise FileNotFoundError(errno.ENOENT,
+>> +                                    os.strerror(errno.ENOENT), self._filename)
+>>           return super().ReadBlobContents()
+>>   
+>>       def ProcessContents(self):
+> 
+> Sorry for the delay in review. We also need to update the function
+> comment so that python coverage remains at 100%.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	improve the commit title an message
----
- drivers/usb/host/xhci.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Sorry but I'm really not familiar with python coverage. I had a look to 
+the official documentation and it looks like I need to add a test to 
+cover this specific function. That is what you are requesting?
 
-diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
-index 3ee1f67190f..d59804580f1 100644
---- a/drivers/usb/host/xhci.c
-+++ b/drivers/usb/host/xhci.c
-@@ -1249,7 +1249,7 @@ static int xhci_lowlevel_init(struct xhci_ctrl *ctrl)
- 
- 	reg = xhci_readl(&hccr->cr_hcsparams1);
- 	ctrl->hub_desc.bNbrPorts = HCS_MAX_PORTS(reg);
--	printf("Register %x NbrPorts %d\n", reg, ctrl->hub_desc.bNbrPorts);
-+	debug("Register %x NbrPorts %d\n", reg, ctrl->hub_desc.bNbrPorts);
- 
- 	/* Port Indicators */
- 	reg = xhci_readl(&hccr->cr_hccparams);
--- 
-2.43.0
+Thanks in advance,
+
+Jérémie
 
