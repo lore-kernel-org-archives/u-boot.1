@@ -4,88 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B2FCFD2F6
-	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 18:40:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68DE0CFD2F6
+	for <u-boot@archiver.kernel.org>; Thu, 27 Nov 2025 18:41:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57BF48430C;
-	Thu, 27 Nov 2025 19:40:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E53088430C;
+	Thu, 27 Nov 2025 19:41:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="x6lXjwNp";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xD5A05xw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vyk/jUnn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76918844AE; Thu, 27 Nov 2025 19:40:29 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ED0E78430C; Thu, 27 Nov 2025 19:41:05 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59505842A7
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 19:40:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BABD5842A7
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 19:41:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dHQGg0mWfz9scY;
- Thu, 27 Nov 2025 19:40:27 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1764268827;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=P/aNbC1YP94TLpnBwQ0ic36ulr4ymb/eeCXHL3OtXW0=;
- b=x6lXjwNpkZPLzl8hFHPzPFtPpl/ej6SJJ1j1DjE2Uu8tcxiL/EWKNT9p2dVE95wCluo4Fz
- Ue0yJtuS/TpnYHEyOxJ/4qDEyNFF2T8DmYTLMzIK2Q5O8xh/Ze+91UNUjwxTRFDbY6lFVM
- lGVIWSruhCZw+WpZZp6mAtkmi5HNh3xtj7m6fnm7/enRkx3CvF881tnQbwL7StdPb+6CMy
- VO7TrosKOuiUpW4BMHA5P2Q9eaOOJ5WKjJnBL/lyQAwj98O/m+jpRcm1hnb/BkrnZwuQme
- PY6m7LUzEvxKvJfgDDPwgGhAgm3HDsh1dIQPvyXo95//I0oIhGP57Vy3qGGTJA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=xD5A05xw;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <d4b29293-3858-4168-b964-90421f98e9d4@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1764268825;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=P/aNbC1YP94TLpnBwQ0ic36ulr4ymb/eeCXHL3OtXW0=;
- b=xD5A05xwvgjyGNprN5lQNjIny4HRHnU+z1/5S/Y/QCzv31ltZcatqruLULjklxkfqLSHlG
- DVSRi9qSWbhm5nFEKnlLL4woaL5u2M/WCQ7oOiE3s2YkvaHOT0QDSWqyEMKxGnZ1HI1t3B
- 62HNW4fa+dVdfkqYNvcEd4oz9aJ7tjXg38mTY3lEdtU2MWFH2+YGvOcLzCozDqibgIH8Xq
- 80eHzmrJzOLZd7xZ0YGuKZZqlQnTCFkqrmttlk2iPYDYlxvuzvA4JD1Y79pHLuzILzS7mF
- 3eV9tQEzeMMM4GlttvVgiwMI0ONjKjFbcXGz0X08g8B5c7hq7KyIBjsqyDoBvw==
-Date: Thu, 27 Nov 2025 19:40:21 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-3ec31d2b7f8so289475fac.3
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 10:41:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764268862; x=1764873662; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vLGWEFwekip+co2GDpIKUvnlKh4QKC7t5T8AfA9uSTY=;
+ b=Vyk/jUnnyIlTpYJxI01luwxRe//6qBhcNDJ2t8m/v/v04J0+fAhxUSeE239skzOOnz
+ FrnGHyFULX2ILtuvARL4HC0G+spK/t3PWj2nUiOtjc8ytyxtWXwvdGfy1/rpR/BPrIWl
+ Dwxbs43pczFWDMC6bUrTuMp1+Yz4DmjgIOAqw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764268862; x=1764873662;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vLGWEFwekip+co2GDpIKUvnlKh4QKC7t5T8AfA9uSTY=;
+ b=ZYyR9eSHrJLs6UZWz+GMmBsMfqh4d7McoSphsySFUo+nydXFNLj6fLJWtt8fN4hP7X
+ azjbxKJ/nm0WIeyZ6w4hLcoQk3ZUjlXRRHrqGBXJlXfpFESO39/bItVIYZGj1Ea8bmZl
+ aXFCCtXzUxb7rDT/XHyn+zYmOY0SuU7f7QZVnneYWbtDNqJapTxI8UdNEtOvN7SiqsU/
+ JysR/9JHnvh87DYtKLLoPFpU/dKlqO70Y+FFVQuoF85IHiqB/sPY0f3fzo6vb/em8w3t
+ 2jBgiciLzg3+hdtJkWf4KoNBilZljI8wTIRnN3nvdIybvlw9JBY9q07PEmLhO//YTkqH
+ 9kAw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVUmHD2dQaoDVp7/PaVey3qP5C0mNRNowqMIYqFnUU5wSGsdMdWBnGpw3yTkWrKx6xg68ra3ac=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMCCBlx7qrYmJijcRI30RK8ouGwnjJg2Bfo9W6S/6xml2kUvx4
+ TElsLmMq11TO8zMBTuKnDbg+6F1ScfiU7JgN03INkc8hjl3KBxF01Ym42TCX9qKyWHI=
+X-Gm-Gg: ASbGncurdwXiVLlo+c/IcRBhp/9ISkyr3GRfD+JLDhBerFYD5IZUI1JkRXlhgNKvTzu
+ LKVHum65lApYcXATGl35ZA8fAy3cPNHRedFTZDhFeju28Mpcx/nV0M/x9TxmvB+LCTQj/XeNyxd
+ Fjwtn0m9xOsrGu7Zpf7KeMAj4X33Oyv5rEq4Iit107QBwCOCDkfbINdjf0gmnfp+Si/fR60LM5P
+ yS6dUtayh390zJDrgymfoi7CzRVEcXAaEcXhMRiulkX3AE2oVM7vX4m6MVthjON+/dTQNJBy++Y
+ yhP74zPsUeAWiCbaAJMZWtTJEy5T7h2O5c6EyO69kD1CK0i5gCekAylB1kVbvtniinG/bQAG1XW
+ QeVrqZd6In80kX2svYu34ONdd+fEHiSTasoY0rwIFJqhAZRQ0xh6vOY98Hb4blnPqdezOPVsh5L
+ jzoaIIFf3fJRHZvz7KEDQyNpBwoEPWLMNaTQ4BZQdzd0UUOcYuHg==
+X-Google-Smtp-Source: AGHT+IFzTlCk+Ik/ablFhI4SRS0R1qUbS3nws5Tcgg45TbMfyJ+m/PUgfCjJKPa0XYgIAtQzpLOfIw==
+X-Received: by 2002:a05:6808:1a21:b0:450:bb4e:8395 with SMTP id
+ 5614622812f47-45115b2ae36mr8448950b6e.53.1764268862391; 
+ Thu, 27 Nov 2025 10:41:02 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-453169b3785sm636827b6e.3.2025.11.27.10.41.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Nov 2025 10:41:01 -0800 (PST)
+Date: Thu, 27 Nov 2025 12:40:59 -0600
+From: Tom Rini <trini@konsulko.com>
+To: =?iso-8859-1?Q?J=E9r=E9mie?= Dautheribes <jeremie.dautheribes@bootlin.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ =?iso-8859-1?Q?Miqu=E8l?= Raynal <miquel.raynal@bootlin.com>
+Subject: Re: [PATCH] binman: blob_dtb: improve error message when SPL is not
+ found
+Message-ID: <20251127184059.GX2125796@bill-the-cat>
+References: <20250820150654.1398992-1-jeremie.dautheribes@bootlin.com>
+ <20250909170357.GA1799865@bill-the-cat>
+ <89715907-3d24-483d-943f-a027097962aa@bootlin.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] imx9: scmi: soc: USB instance number change for silicon
- revision B0
-To: Fedor Ross <fedor.ross@ifm.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>,
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <ravi@prevas.dk>
-References: <20251127-imx95_b0-v1-1-fc3bd2ba1b56@ifm.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251127-imx95_b0-v1-1-fc3bd2ba1b56@ifm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: b7426b9c129562624ed
-X-MBO-RS-META: ufrnp4n7b9um99tsmnr4nuct1sc164z4
-X-Rspamd-Queue-Id: 4dHQGg0mWfz9scY
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QSn1bino08xOhEmS"
+Content-Disposition: inline
+In-Reply-To: <89715907-3d24-483d-943f-a027097962aa@bootlin.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,34 +104,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/27/25 6:50 PM, Fedor Ross wrote:
-> For silicon revision A1, the USB instance number for USB1 is 3 and for
-> USB2 it is 4. This changed for revision B0 where the USB instance number
-> for USB1 is 0 and for USB2 it is 1, which is the intended instance
-> number. Select the correct numbering according to the selected revision
-> in the defconfig. The config for the B0 revision is IMX95 and for A1 it
-> is IMX95_A0.
-> 
-> This patch is based on the information provided by:
-> "AN14750 Migration Guide from i.MX 95 A1 to B0; Rev. 1.0" .
-> 
-> Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
-> ---
->   arch/arm/mach-imx/imx9/scmi/soc.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
-> index dbaa19a9e6e..354df7d88a4 100644
-> --- a/arch/arm/mach-imx/imx9/scmi/soc.c
-> +++ b/arch/arm/mach-imx/imx9/scmi/soc.c
-> @@ -921,7 +921,7 @@ enum boot_device get_boot_device(void)
->   		break;
->   	case BT_DEV_TYPE_USB:
->   		boot_dev = boot_instance + USB_BOOT;
-> -		if (IS_ENABLED(CONFIG_IMX95))
-> +		if (IS_ENABLED(CONFIG_IMX95_A0))
 
-It seems this can also be made even more generic:
+--QSn1bino08xOhEmS
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
--if (IS_ENABLED(CONFIG_IMX95))
-+if (is_imx95() && (soc_rev() < CHIP_REV_2_0))
+On Thu, Nov 27, 2025 at 07:04:06PM +0100, J=E9r=E9mie Dautheribes wrote:
+> Hi Tom,
+>=20
+> On 09/09/2025 19:03, Tom Rini wrote:
+> > On Wed, Aug 20, 2025 at 05:06:54PM +0200, J=E9r=E9mie Dautheribes wrote:
+> >=20
+> > > When using binman with the '-a spl-dtb=3Dy' flag, if the SPL blob is =
+not
+> > > found, binman throws a cryptic error message:
+> > > binman: 'NoneType' object has no attribute 'startswith'
+> > >=20
+> > > Let's improve the error message to explicitly state which SPL blob is
+> > > missing.
+> > > This is particularly useful when binman is used as a standalone tool
+> > > outside the U-Boot source tree.
+> > >=20
+> > > Signed-off-by: J=E9r=E9mie Dautheribes <jeremie.dautheribes@bootlin.c=
+om>
+> > > ---
+> > >   tools/binman/etype/blob_dtb.py | 5 +++++
+> > >   1 file changed, 5 insertions(+)
+> > >=20
+> > > diff --git a/tools/binman/etype/blob_dtb.py b/tools/binman/etype/blob=
+_dtb.py
+> > > index b234323d7cf..772579394d4 100644
+> > > --- a/tools/binman/etype/blob_dtb.py
+> > > +++ b/tools/binman/etype/blob_dtb.py
+> > > @@ -8,6 +8,8 @@
+> > >   from binman.entry import Entry
+> > >   from binman.etype.blob import Entry_blob
+> > >   from dtoc import fdt_util
+> > > +import errno
+> > > +import os
+> > >   import struct
+> > >   # This is imported if needed
+> > > @@ -42,6 +44,9 @@ class Entry_blob_dtb(Entry_blob):
+> > >           """Get the device-tree from the list held by the 'state' mo=
+dule"""
+> > >           self._filename =3D self.GetDefaultFilename()
+> > >           self._pathname, _ =3D self.FdtContents(self.GetFdtEtype())
+> > > +        if self._pathname is None:
+> > > +            raise FileNotFoundError(errno.ENOENT,
+> > > +                                    os.strerror(errno.ENOENT), self.=
+_filename)
+> > >           return super().ReadBlobContents()
+> > >       def ProcessContents(self):
+> >=20
+> > Sorry for the delay in review. We also need to update the function
+> > comment so that python coverage remains at 100%.
+>=20
+> Sorry but I'm really not familiar with python coverage. I had a look to t=
+he
+> official documentation and it looks like I need to add a test to cover th=
+is
+> specific function. That is what you are requesting?
+
+So, doc/develop/binman_tests.rst talks a bit about testing of binman and
+python coverage. In this case I believe the issue is that the function
+you're modifying needs to have the comment block annotations updated to
+include the exception it can throw.
+
+--=20
+Tom
+
+--QSn1bino08xOhEmS
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSibMwAKCRAr4qD1Cr/k
+CmlvAQCLsjQ2Nd4YlKObvID/GtZYgIRJOpzKCKblDCyCTAzRlgD6AhL96X/xzf5y
+/+dw9UeR6XIVLwdJmDo4fiFmYlmqxQU=
+=KFXI
+-----END PGP SIGNATURE-----
+
+--QSn1bino08xOhEmS--
