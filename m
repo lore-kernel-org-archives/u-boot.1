@@ -4,98 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E3E4D116E2
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93040D116E2
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 17:41:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0814A83AC6;
-	Fri, 28 Nov 2025 17:50:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD30083B05;
+	Fri, 28 Nov 2025 18:41:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="H8AQpdTw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ESqggGLq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A44D783B64; Fri, 28 Nov 2025 17:50:06 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 492E983B8C; Fri, 28 Nov 2025 18:41:25 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FDEE83966
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:50:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 30C6683AAC
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 18:41:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7c76f65feb5so1452272a34.0
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:50:01 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c765f41346so723711a34.3
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 09:41:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764348600; x=1764953400; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZA3ZXxcHCk/44/0v2Xnwdmzse1J51IXjlrvZztO7SgY=;
- b=H8AQpdTwyM8IiJwuBnLDMkzJgwo1haYAoJTa3D5KYiae0hnK3b65Du+EgM/ql+gufK
- M9I03BYsE1yiFpoY4UlB9wFIoK+6QXgpyTtyHxuVGRXHYxMq3Ygx6unjVySfNDgH0Gbj
- VXeB6CSpAZHacruJFm9f21RxDIAGI4RxEzr9w=
+ d=konsulko.com; s=google; t=1764351682; x=1764956482; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=neqHGi2Om5JTYYdyEaF8DIyo1DSLm3wwaILUJg360nc=;
+ b=ESqggGLqvUBFu47ga/xW+sk79rxCncb0vVKN7CSAv17rx2Tpx2D9r19DvfzVnCw5vB
+ 3kNlWZF0mu8FXyxzsx46qNBkL6mik/dVNitlc6FF2rdqayHGc1l2PiWgAXYHIIFY/MrZ
+ AhjSBUSQfq2JViO7nDKz7Z5rrq5epJh6AfciQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764348600; x=1764953400;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZA3ZXxcHCk/44/0v2Xnwdmzse1J51IXjlrvZztO7SgY=;
- b=s94np6B5zcs4golirY8aHsU6nJeIT9xQEk4geJQi1JseD2S1Q8yrHaE3jf1Q/ju4Ep
- G1QNyT0M3Twe8wEoy7uwe0d91J7EGQfvN0kOAzDhxOxO4/rgGyH0NlEDbi7zBAuEH8Re
- fOLpPnufQ7R4FvnUkyyvwcFkKtdMM3SLepaEHTQTsukZd5iS/JOEfvb5/bJZj97aGchb
- C7X2jxF3iCvosAEI/myA8bZiKqVuMfNgSkZjr8x2YX9leycYOPueqTjORg2cjuiQMtkv
- NBTuNBNOJtH1Jigmjyqa4+8N7aakQa9ppm5SieS407l6v1KP9GbRls9GtaYD9n5STVnH
- MVrg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZg/S/icq7U/iyS9DKW95TvaZJcM+wjBx8CTBjBhO1N4rdj2x23h8c75Z9uA5k+c0k36ZwBzk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzejk+TyKf3gQwy8pQTuxHJKr/bHEnMencouSSlJ2hlEbGsFCcu
- 4vblhmo3g4lJGteYRF4R+LuQZI5nPXAOSGGqSHf23g5/oncQtw1evqf6nlUMxn6Sp/4=
-X-Gm-Gg: ASbGnctDW9JQWxzyThnm6tt61B43x/TLahLOkg+fw84L6pB7NVziY99NphyAo9Egyxd
- DUw4R9PWtVnyPylTyt6vclFKYPvZqCpn3Zl7aC1MpwPxCxZmNY5nmieTa4WYdFKlHg9TXeRFjAl
- Jgz8mibA2/EE0iVe9N9m0VvUV2PbkziMXAH4TC96+Vmy99DiBFEqD//gik5RjOadz5bHugs+23T
- 3Yz6Bk5VlFzqNnAK5Y71GgTU7YeHQT1MElFUTlnvGGPWq1PwNRUVJbQN8m1AWqAAcuut/VpdeKg
- FxO+4dvYDOvR41FXrGj4eCunvzZoB9E49VdFnAOwKvetKs/iNmPq9Y8i/FUu2o2gpsoqoEkWPV0
- 9GxfYNZdSq8uJA/ols0YEPRfsN5s01VJ2wMXKm4vMzcmgUYBIuKvJYxAHUGInqUL9Qu2F54+GCZ
- Hwdzfz+yxiJAiyD0PVzwDxZ9IQPeM3O3x4hNLQWN0Dz7Mq3DThipt4VJq9pNpD
-X-Google-Smtp-Source: AGHT+IG0rXACzUtW0d6EZOHnagoAlGUZW3V44utZY8brkfg4G5S3YdP5bscPgroKv9bKsbhdIEtSkw==
-X-Received: by 2002:a05:6830:4107:b0:7c7:6558:277a with SMTP id
- 46e09a7af769-7c798bff0d0mr13213907a34.15.1764348600024; 
- Fri, 28 Nov 2025 08:50:00 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1764351682; x=1764956482;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=neqHGi2Om5JTYYdyEaF8DIyo1DSLm3wwaILUJg360nc=;
+ b=BtCowbkUu18ZZMskZnvkhHskLf9R+uSUO0zJqbMidlFCWdXmYufqaoBXks9EmnMyDf
+ vsjucxq5ev9KgKMI9Rt3fhy5Gg5L7Ie5ei8u2PrRvipnxjifL6b38ii6Q0rUcEmq3jCE
+ otECizB7/QyPBrTJ33p0kN8Gp3CFmN82XMoy+M90q8HSt0rQheVFpUHb4mX0rkOwR2BG
+ ajlsKPAlE5Dk7lInTZEFt3N+a+q0XfOv1aYHL6FVX1vctKUZdD5j415uwRPH5TTOwwEX
+ diPXzLhLBSsRpFZHM4hJ7XaCTrYGXmNQSHamRIfkv+UnoavqalFh3vmNRdvdSMQo0Q4p
+ HI5g==
+X-Gm-Message-State: AOJu0YyfXCmOeIatjG6gou03rUbng8n7UBCrOrB5tNAUqmNu1qTez9sn
+ EY7dNN5Qr0H5ZTvV6pYwzyLjV42B+EPPRQVkmiD1mmFXWU+W4C0tOHHgaz38Or3KEAY=
+X-Gm-Gg: ASbGncsf/dClmE7Jf/FlGyD+ao5Y/SBgIs5DU575ZxAsJp5FqdASdW1aKT9e2GcA6pZ
+ sDtssBdzT70l/lAlCFd2p5JmGDzKPJzBnURZk1t2tKTcXr2NmBaJ2aGnBeAvkutOzqwp+tnpTgk
+ JTM8AeqKuQ+kkexTrNUhlz+hQ/77tJs3kkOOndArwrTu1Pd9cEDMXCDHaXZ4NCw5rCi1B8IL/8V
+ H9fl4MJ9c487FqzHgP3eH0n+1MMs4uvXZZGND82kmjT67US6E5Sl7sQwOUo1xtoDcpylYmTQil+
+ vEKC+E4KnEqMWzalDDJ842kf3JVIwgOr1m/ql1WW3IT5836N3MmIQU5oT/krUZbqr6/A3vxhIZF
+ 58zfG+g7XGUolKf6ji5g97tQ61bbhXXEJjYAsdYmuuXADw3LFX6p+yqG7ee8PFgyhadMTxsZVqx
+ BnhJjPuC0ZXDN+dy0q9kY1gkuVz5Ek4H2vUMq5qBU3CTxnpzcD
+X-Google-Smtp-Source: AGHT+IH/05L0PQv8tDNYrkg96bp0bL2fdY5BjldXrmb+JVs200p0RP+cKtyOviNem9kUUL+nNg9SwA==
+X-Received: by 2002:a05:6830:6309:b0:7c7:2df4:faa3 with SMTP id
+ 46e09a7af769-7c798cc1c64mr14037539a34.33.1764351681916; 
+ Fri, 28 Nov 2025 09:41:21 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c90fe0be23sm1721276a34.21.2025.11.28.08.49.58
+ 46e09a7af769-7c90fe0f650sm1771543a34.23.2025.11.28.09.41.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 08:49:59 -0800 (PST)
-Date: Fri, 28 Nov 2025 10:49:57 -0600
+ Fri, 28 Nov 2025 09:41:21 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
- Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Brian Sune <briansune@gmail.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from
- empty built-in.a in SPL/TPL/VPL builds
-Message-ID: <20251128164957.GD2125796@bill-the-cat>
-References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
- <20251125081316.17329-3-alif.zakuan.yuslaimi@altera.com>
- <3e4de604-292d-4232-893d-db43e29b469c@mailbox.org>
- <19c33d9d-4cab-4add-9dff-f3b9e051f146@altera.com>
- <3b219e15-5513-4474-aae9-9d9a8abeb61e@mailbox.org>
- <f13e8fd9-9705-46ec-a2c4-9fc4c6a63e38@altera.com>
- <20251128153130.GC2125796@bill-the-cat>
- <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+In-Reply-To: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
+References: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] boot: Assure FDT is always at 8-byte aligned address
+Message-Id: <176435168078.233357.200393600306508316.b4-ty@konsulko.com>
+Date: Fri, 28 Nov 2025 11:41:20 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0PtVx24FNCry4QG2"
-Content-Disposition: inline
-In-Reply-To: <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,73 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 13 Nov 2025 12:54:51 +0100, Marek Vasut wrote:
 
---0PtVx24FNCry4QG2
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> The fitImage may contain FDT at 4-byte aligned address, because alignment
+> of DT tags is 4 bytes. However, libfdt and also Linux expects DT to be at
+> 8-byte aligned address. Make sure that the DTs embedded in fitImages are
+> always used from 8-byte aligned addresses. In case the DT is decompressed,
+> make sure the target buffer is 8-byte aligned. In case the DT is only
+> loaded, make sure the target buffer is 8-byte aligned too.
+> 
+> [...]
 
-On Fri, Nov 28, 2025 at 06:44:12PM +0200, Ilias Apalodimas wrote:
-> On Fri, 28 Nov 2025 at 17:31, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Nov 28, 2025 at 10:11:53AM +0800, Yuslaimi, Alif Zakuan wrote:
-> > >
-> > >
-> > > On 27/11/2025 11:09 pm, Marek Vasut wrote:
-> > > > [CAUTION: This email is from outside your organization. Unless you =
-trust
-> > > > the sender, do not click on links or open attachments as it may be a
-> > > > fraudulent email attempting to steal your information and/or compro=
-mise
-> > > > your computer.]
-> > > >
-> > > > On 11/27/25 3:12 AM, Yuslaimi, Alif Zakuan wrote:
-> > > >
-> > > > Hello everyone,
-> > > >
-> > > > > I already have the referenced commit in my test branch, and I can
-> > > > > confirm that the same compilation error still appears on CycloneV=
- when
-> > > > > certain directories produce no SPL objects.
-> > > > >
-> > > > > The existing fix ensures that built-in.o is always present, but i=
-t does
-> > > > > not prevent ar from generating empty built-in.a archives, which o=
-lder
-> > > > > ARM 32-bit linkers (such as CycloneV toolchains) reject as =E2=80=
-=9Cfile
-> > > > > truncated=E2=80=9D.
-> > > >
-> > > > Which toolchain is this ?
-> > > >
-> > >
-> > > I am using Linaro arm-linux-gnueabihf GCC 7.5.0 to compile our SoC32 =
-devices
-> > > - CycloneV and Arria10
-> >
-> > Ilias, do you recall the solution to this problem from when it came up
-> > on IRC a few weeks ago?
->=20
-> Nop unfortunately not.
-> Was this caused by the Kbuild bump? I remember the logic around
-> builtin changing significantly.
+Applied to u-boot/next, thanks!
 
-Yes, and I kinda thought we narrowed it down to something being missing
-=66rom the update, since the kernel does support this old of a toolchain
-(or at least the 10.x? someone else this on).
-
---=20
+[1/1] boot: Assure FDT is always at 8-byte aligned address
+      commit: 8fbcc0e0e839a8e25f636c76e59311033d3817b5
+-- 
 Tom
 
---0PtVx24FNCry4QG2
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSnSsQAKCRAr4qD1Cr/k
-Ci4OAP0VRGV9KxAw6Xc+WF6NIZM7dgqdd54BVo8IL2o8PtY70wEA5bMyLueXa9oH
-bB8u4SP8suek64y0jTD+BhN8x/4Sgwk=
-=A/d7
------END PGP SIGNATURE-----
-
---0PtVx24FNCry4QG2--
