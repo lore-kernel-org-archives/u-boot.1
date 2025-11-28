@@ -4,86 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA81D116E2
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:49:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E3E4D116E2
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:50:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 166E5839E8;
-	Fri, 28 Nov 2025 17:49:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0814A83AC6;
+	Fri, 28 Nov 2025 17:50:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bvZB9ON1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="H8AQpdTw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05AC083A28; Fri, 28 Nov 2025 17:49:09 +0100 (CET)
-Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
- [IPv6:2607:f8b0:4864:20::e2f])
+ id A44D783B64; Fri, 28 Nov 2025 17:50:06 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F90A83966
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:49:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FDEE83966
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:50:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-5dfcfbcbcc0so633222137.2
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:49:03 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7c76f65feb5so1452272a34.0
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:50:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764348543; x=1764953343; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gGADX9wC/te5+ywOrahLVKiQ78ITfCXa4wwWhdNUB4I=;
- b=bvZB9ON1378vm2w0aJ4+5vzZimAZtp+xzC67D6enee14EyFoSkZwLuKEYC620cGo/T
- w1LVpnjYsPrQeWUhU5OAZP6xlnK1djdjLZkW3h7q050tKd1/rJtAKuXNtEERwKbao25O
- E6KDjgcJeqKy9J8Qkt6pgSAaL2B7QDiJg21JSxyUku1t1FEHrx0XHKNDo+l7wYy7Ydt6
- jU+56RuRKi2l5WqwM6FMF/XgtC6YdiJRM67XwIbNxKLVdHttg903x5edm1AI0wTuGelL
- 6KSbzfjxYnW4vgneGN8/3UoZ8jcHk7cimNldeXRD+L0zN2W6cYrrChaselLiOprPNGzN
- 8mnQ==
+ d=konsulko.com; s=google; t=1764348600; x=1764953400; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZA3ZXxcHCk/44/0v2Xnwdmzse1J51IXjlrvZztO7SgY=;
+ b=H8AQpdTwyM8IiJwuBnLDMkzJgwo1haYAoJTa3D5KYiae0hnK3b65Du+EgM/ql+gufK
+ M9I03BYsE1yiFpoY4UlB9wFIoK+6QXgpyTtyHxuVGRXHYxMq3Ygx6unjVySfNDgH0Gbj
+ VXeB6CSpAZHacruJFm9f21RxDIAGI4RxEzr9w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764348543; x=1764953343;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gGADX9wC/te5+ywOrahLVKiQ78ITfCXa4wwWhdNUB4I=;
- b=IvTC1S99w371cM7mnwVYmtd/CJxcCI10c0KYssCTZQreNwGhQhbT4Sy1spUVFGzhQz
- B/n40zVEqF9mqn3hLz7d/L/Pbzd+HCoixsYrbVtiK26RJaOy1yRHi4X2wYeSo1QGOnuh
- yM3753x45oyjCVDl1CSSW/5TWLodyU1O8krrT0qh44kS66kndkBfQNgFyO64CNoYAv4t
- GwvhKT7drKXxlF4HjMXEewPARg8a6ZmtcFAiB2IRnllnBFCGP1PRpNDxs20HQ+lEebMI
- 5U+L8LjpJDLkNopYTOFd9HSdzxRxn8KsKgNz52RgF5OYLs4nN5+7aMX2huCC3j0jyNZE
- EOXA==
+ d=1e100.net; s=20230601; t=1764348600; x=1764953400;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZA3ZXxcHCk/44/0v2Xnwdmzse1J51IXjlrvZztO7SgY=;
+ b=s94np6B5zcs4golirY8aHsU6nJeIT9xQEk4geJQi1JseD2S1Q8yrHaE3jf1Q/ju4Ep
+ G1QNyT0M3Twe8wEoy7uwe0d91J7EGQfvN0kOAzDhxOxO4/rgGyH0NlEDbi7zBAuEH8Re
+ fOLpPnufQ7R4FvnUkyyvwcFkKtdMM3SLepaEHTQTsukZd5iS/JOEfvb5/bJZj97aGchb
+ C7X2jxF3iCvosAEI/myA8bZiKqVuMfNgSkZjr8x2YX9leycYOPueqTjORg2cjuiQMtkv
+ NBTuNBNOJtH1Jigmjyqa4+8N7aakQa9ppm5SieS407l6v1KP9GbRls9GtaYD9n5STVnH
+ MVrg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV8ACriwsIExBNhiBwOLUtJxmzBYOb8g0tFb9Pjn5nEe9/0D2rClJGg7WriQIz2544mDAxIink=@lists.denx.de
-X-Gm-Message-State: AOJu0YyCL+Qruc+AEb3wdUQDYtq4SfDR9W2irpBLYoltm3Llx4rGXjAB
- JLPTjvjUWSHCjonWHXZRxoV+VbJkhO2ODNrhY4oKFHRKabVUAZycxbbatQVe2J3kGA4Ok7f4sC1
- Hk/KgElQfQ02WwZkl6hgYtwDNZJAD2AN4c7vvnBhH8Q==
-X-Gm-Gg: ASbGnctC1vNml2DRETdLSgWK0K24v6UTz35fRojFkYreEL259NdbsTMsoLv+vgv/Wlt
- Z5odwmFpFyeAIk0cO5J0FXNI/IlHH3FCmkrPBNDSZv0WFBghG8xAg7Raf6R6W2XZC8celXxLZAS
- 98qczWg5mIdGvnj3lUtJ48tsHzodUA8fSX8Bx1UNOnqmiOKVmkJDYKY7bjNpORy8hkfhaIAxK10
- hFFfl5qNdO3kGtOeDw0y8yEJOqosUprEbK2dKFDXvwje0nE9oOi/MvTAYjnVIb7CtEitdwL0Pxi
- cYEc
-X-Google-Smtp-Source: AGHT+IG9mCnmYOJZBP6zwES9J5dS0TJUt7QWrhQoJ2JCEL/4xrMUcXIGHA4UFrndMvJfB5o1uzF+pe4fdXBXkvCouxE=
-X-Received: by 2002:a05:6102:3f14:b0:5db:2b4d:f1ee with SMTP id
- ada2fe7eead31-5e1de137573mr10144384137.17.1764348542689; Fri, 28 Nov 2025
- 08:49:02 -0800 (PST)
+ AJvYcCWZg/S/icq7U/iyS9DKW95TvaZJcM+wjBx8CTBjBhO1N4rdj2x23h8c75Z9uA5k+c0k36ZwBzk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzejk+TyKf3gQwy8pQTuxHJKr/bHEnMencouSSlJ2hlEbGsFCcu
+ 4vblhmo3g4lJGteYRF4R+LuQZI5nPXAOSGGqSHf23g5/oncQtw1evqf6nlUMxn6Sp/4=
+X-Gm-Gg: ASbGnctDW9JQWxzyThnm6tt61B43x/TLahLOkg+fw84L6pB7NVziY99NphyAo9Egyxd
+ DUw4R9PWtVnyPylTyt6vclFKYPvZqCpn3Zl7aC1MpwPxCxZmNY5nmieTa4WYdFKlHg9TXeRFjAl
+ Jgz8mibA2/EE0iVe9N9m0VvUV2PbkziMXAH4TC96+Vmy99DiBFEqD//gik5RjOadz5bHugs+23T
+ 3Yz6Bk5VlFzqNnAK5Y71GgTU7YeHQT1MElFUTlnvGGPWq1PwNRUVJbQN8m1AWqAAcuut/VpdeKg
+ FxO+4dvYDOvR41FXrGj4eCunvzZoB9E49VdFnAOwKvetKs/iNmPq9Y8i/FUu2o2gpsoqoEkWPV0
+ 9GxfYNZdSq8uJA/ols0YEPRfsN5s01VJ2wMXKm4vMzcmgUYBIuKvJYxAHUGInqUL9Qu2F54+GCZ
+ Hwdzfz+yxiJAiyD0PVzwDxZ9IQPeM3O3x4hNLQWN0Dz7Mq3DThipt4VJq9pNpD
+X-Google-Smtp-Source: AGHT+IG0rXACzUtW0d6EZOHnagoAlGUZW3V44utZY8brkfg4G5S3YdP5bscPgroKv9bKsbhdIEtSkw==
+X-Received: by 2002:a05:6830:4107:b0:7c7:6558:277a with SMTP id
+ 46e09a7af769-7c798bff0d0mr13213907a34.15.1764348600024; 
+ Fri, 28 Nov 2025 08:50:00 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c90fe0be23sm1721276a34.21.2025.11.28.08.49.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Nov 2025 08:49:59 -0800 (PST)
+Date: Fri, 28 Nov 2025 10:49:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Brian Sune <briansune@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>
+Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from
+ empty built-in.a in SPL/TPL/VPL builds
+Message-ID: <20251128164957.GD2125796@bill-the-cat>
+References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
+ <20251125081316.17329-3-alif.zakuan.yuslaimi@altera.com>
+ <3e4de604-292d-4232-893d-db43e29b469c@mailbox.org>
+ <19c33d9d-4cab-4add-9dff-f3b9e051f146@altera.com>
+ <3b219e15-5513-4474-aae9-9d9a8abeb61e@mailbox.org>
+ <f13e8fd9-9705-46ec-a2c4-9fc4c6a63e38@altera.com>
+ <20251128153130.GC2125796@bill-the-cat>
+ <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
 MIME-Version: 1.0
-References: <20251116103934.63668-1-heinrich.schuchardt@canonical.com>
- <CAMDkj5wQ=pRGFrf_S-HPUs9Zd-uWGFyLFDk3S2TRGCCuvJCMgA@mail.gmail.com>
- <15d4a8ae-5fd2-45df-af9d-e879faf6be1f@canonical.com>
- <CAMDkj5ya41Ea8_VU_VrmRHfMgYJ2q2qLexv14AT1CGYW7vYtwA@mail.gmail.com>
- <c7727c37-c4a0-4399-82fe-ce421dad7c57@canonical.com>
-In-Reply-To: <c7727c37-c4a0-4399-82fe-ce421dad7c57@canonical.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Fri, 28 Nov 2025 11:48:52 -0500
-X-Gm-Features: AWmQ_bllRDBHI3mYp2m7XVpkk3O3DJcCiQPvLURi8jBvY11y6RwDRxHhcVM1F4I
-Message-ID: <CAMDkj5yoC_Qsbj7JV-+1kjw7=BkwO2cytRsXQ=kbcTESVs8+NA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] cmd: smbios: correct output for table type 4
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="0PtVx24FNCry4QG2"
+Content-Disposition: inline
+In-Reply-To: <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,259 +112,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-Sorry for the late reply.
+--0PtVx24FNCry4QG2
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 17, 2025 at 12:27=E2=80=AFPM Heinrich Schuchardt <
-heinrich.schuchardt@canonical.com> wrote:
+On Fri, Nov 28, 2025 at 06:44:12PM +0200, Ilias Apalodimas wrote:
+> On Fri, 28 Nov 2025 at 17:31, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Nov 28, 2025 at 10:11:53AM +0800, Yuslaimi, Alif Zakuan wrote:
+> > >
+> > >
+> > > On 27/11/2025 11:09 pm, Marek Vasut wrote:
+> > > > [CAUTION: This email is from outside your organization. Unless you =
+trust
+> > > > the sender, do not click on links or open attachments as it may be a
+> > > > fraudulent email attempting to steal your information and/or compro=
+mise
+> > > > your computer.]
+> > > >
+> > > > On 11/27/25 3:12 AM, Yuslaimi, Alif Zakuan wrote:
+> > > >
+> > > > Hello everyone,
+> > > >
+> > > > > I already have the referenced commit in my test branch, and I can
+> > > > > confirm that the same compilation error still appears on CycloneV=
+ when
+> > > > > certain directories produce no SPL objects.
+> > > > >
+> > > > > The existing fix ensures that built-in.o is always present, but i=
+t does
+> > > > > not prevent ar from generating empty built-in.a archives, which o=
+lder
+> > > > > ARM 32-bit linkers (such as CycloneV toolchains) reject as =E2=80=
+=9Cfile
+> > > > > truncated=E2=80=9D.
+> > > >
+> > > > Which toolchain is this ?
+> > > >
+> > >
+> > > I am using Linaro arm-linux-gnueabihf GCC 7.5.0 to compile our SoC32 =
+devices
+> > > - CycloneV and Arria10
+> >
+> > Ilias, do you recall the solution to this problem from when it came up
+> > on IRC a few weeks ago?
+>=20
+> Nop unfortunately not.
+> Was this caused by the Kbuild bump? I remember the logic around
+> builtin changing significantly.
 
-> On 11/17/25 18:13, Raymond Mao wrote:
-> > Hi Heinrich,
-> >
-> > On Mon, Nov 17, 2025 at 11:43=E2=80=AFAM Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com
-> > <mailto:heinrich.schuchardt@canonical.com>> wrote:
-> >
-> >     On 11/17/25 16:48, Raymond Mao wrote:
-> >      > Hi Heinrich,
-> >      >
-> >      > On Sun, Nov 16, 2025 at 5:39=E2=80=AFAM Heinrich Schuchardt
-> >      > <heinrich.schuchardt@canonical.com
-> >     <mailto:heinrich.schuchardt@canonical.com>
-> >      > <mailto:heinrich.schuchardt@canonical.com
-> >     <mailto:heinrich.schuchardt@canonical.com>>> wrote:
-> >      >
-> >      >     In the QFW case the SMBIOS specification version is
-> >     controlled by QEMU.
-> >      >     Field 'Thread Enable' is not available before SMBIOS v3.6.
-> >      >
-> >      >     We should not print the core, core enabled, and thread count=
-s
-> >     twice.
-> >      >     Use the appropriate based on the SMBIOS version.
-> >      >     Use decimal output which is easier to read for humans.
-> >      >
-> >      >     Signed-off-by: Heinrich Schuchardt
-> >      >     <heinrich.schuchardt@canonical.com
-> >     <mailto:heinrich.schuchardt@canonical.com>
-> >      >     <mailto:heinrich.schuchardt@canonical.com
-> >     <mailto:heinrich.schuchardt@canonical.com>>>
-> >      >     ---
-> >      >       cmd/smbios.c | 21 +++++++++++++++------
-> >      >       1 file changed, 15 insertions(+), 6 deletions(-)
-> >      >
-> >      >     diff --git a/cmd/smbios.c b/cmd/smbios.c
-> >      >     index 671c14e05b5..f9a352c107d 100644
-> >      >     --- a/cmd/smbios.c
-> >      >     +++ b/cmd/smbios.c
-> >      >     @@ -262,6 +262,8 @@ static const struct str_lookup_table
-> >      >     md_tech_strings[] =3D {
-> >      >              { SMBIOS_MD_TECH_OPTANE,        "Intel Optane
-> persistent
-> >      >     memory" },
-> >      >       };
-> >      >
-> >      >     +static u16 smbios_version;
-> >      >     +
-> >      >       /**
-> >      >        * smbios_get_string() - get SMBIOS string from table
-> >      >        *
-> >      >     @@ -504,18 +506,23 @@ static void smbios_print_type4(struct
-> >      >     smbios_type4 *table)
-> >      >              smbios_print_str("Serial Number", table, table-
-> >      >serial_number);
-> >      >              smbios_print_str("Asset Tag", table,
-> table->asset_tag);
-> >      >              smbios_print_str("Part Number", table, table-
-> >      >part_number);
-> >      >     -       printf("\tCore Count: 0x%02x\n", table->core_count);
-> >      >     -       printf("\tCore Enabled: 0x%02x\n",
-> table->core_enabled);
-> >      >     -       printf("\tThread Count: 0x%02x\n",
-> table->thread_count);
-> >      >     +       if (smbios_version < 0x0300) {
-> >      >     +               printf("\tCore Count: %d\n",
-> table->core_count);
-> >      >     +               printf("\tCore Enabled: %d\n", table-
-> >      >core_enabled);
-> >      >     +               printf("\tThread Count: %d\n", table-
-> >      >thread_count);
-> >      >     +       } else {
-> >      >     +               printf("\tCore Count: %d\n",
-> table->core_count2);
-> >      >     +               printf("\tCore Enabled: %d\n", table-
-> >      >core_enabled2);
-> >      >     +               printf("\tThread Count: %d\n", table-
-> >      >thread_count2);
-> >      >     +       }
-> >      >
-> >      >
-> >      > I think for ">=3D 0x0300", both parts are needed.
-> >      >
-> >      > Below is the description of " Core Count 2" in spec: https://
-> >      > www.dmtf.org/sites/default/files/standards/documents/
-> >     DSP0134_3.8.0.pdf <http://www.dmtf.org/sites/default/files/
-> >     standards/documents/DSP0134_3.8.0.pdf>
-> >      > <https://www.dmtf.org/sites/default/files/standards/documents/
-> >     <https://www.dmtf.org/sites/default/files/standards/documents/>
-> >      > DSP0134_3.8.0.pdf>
-> >      > Number of Cores per processor socket. Supports core counts >255.
-> >     If this
-> >      > field is present, it holds the core count for the processor
-> >     socket. Core
-> >      > Count will also hold the core count, except for core counts that
-> >     are 256
-> >      > or greater. In that case, Core Count shall be set to FFh and Cor=
-e
-> >     Count
-> >      > 2 will hold the count. See 7.5.6. Legal values: 0000h =3D unknow=
-n
-> >      > 0001h-00FFh =3D core counts 1 to 255. Matches Core Count value.
-> 0100h-
-> >      > FFFEh =3D Core counts 256 to 65534, respectively. FFFFh =3D rese=
-rved.
-> >      >
-> >      > Similar for core_enabled2 and thread_count2, they are all
-> extensions
-> >      > when values above 255.
-> >
-> >     The descriptions of fields "Core Count 2", "Core Enabled 2", "Threa=
-d
-> >     Count 2" all say: "If this field is present, it holds the ... for t=
-he
-> >     processor socket."
-> >
-> >     So there is no need to look into the old fields "Core Count", "Core
-> >     Enabled", "Thread Count" for SMBIOS version >=3D 3.0 and test for 0=
-xff.
-> >
-> >
-> > But it also says: " Core Count will also hold the core count, except fo=
-r
-> > core counts that are 256 or greater. In that case, Core Count shall be
-> > set to FFh and Core Count 2 will hold the count."
-> > So the "old" fields might be with the same values as the "new" ones, or
-> > they might be "FFh".
-> > That is the reason I believe it is still valuable to print and show
-> > whether it is aligned to the spec.
->
-> For values below 256 the values will be equal. Why do you want to print
-> redundant information?
->
->
-Actually, I have a better idea to use 'table->hdr.length' for version
-control instead of introducing the version explicitly.
-The 'table->hdr.length' is tied to the version and it is already being used
-for type 1.
-I sent a patch [1] to extend the usage of 'table->hdr.length' to all types
-we have and it covers all logics from 2.0 to 3.7+,
-and it looks neat.
-Please see if that matches your cases.
+Yes, and I kinda thought we narrowed it down to something being missing
+=66rom the update, since the kernel does support this old of a toolchain
+(or at least the 10.x? someone else this on).
 
-[1]
-https://lore.kernel.org/u-boot/20251128163535.2301653-7-raymondmaoca@gmail.=
-com/T/#u
+--=20
+Tom
 
-Regards,
-Raymond
+--0PtVx24FNCry4QG2
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSnSsQAKCRAr4qD1Cr/k
+Ci4OAP0VRGV9KxAw6Xc+WF6NIZM7dgqdd54BVo8IL2o8PtY70wEA5bMyLueXa9oH
+bB8u4SP8suek64y0jTD+BhN8x/4Sgwk=
+=A/d7
+-----END PGP SIGNATURE-----
 
-> Best regards
->
-> Heinrich
->
-> >
-> > But anyway, it is not really a big deal to print them or not in cmd - i=
-t
-> > is just for demo/debug purposes, what I wanted to highlight is the logi=
-c
-> > to exclude fields for old versions < 0x0300 should be needed in
-> lib/smbios.
-> >
-> > Regards,
-> > Raymond
-> >
-> >     We should avoid printing duplicate information.
-> >
-> >     Best regards
-> >
-> >     Heinrich
-> >
-> >      >
-> >      > So, if for the consideration of the old versions of spec, the
-> change
-> >      > should be:
-> >      > ```
-> >      > -       printf("\tCore Count 2: 0x%04x\n", table->core_count2);
-> >      > -       printf("\tCore Enabled 2: 0x%04x\n",
-> table->core_enabled2);
-> >      > -       printf("\tThread Count 2: 0x%04x\n",
-> table->thread_count2);
-> >      > +      if (smbios_version >=3D 0x0300) {
-> >      > +               printf("\tCore Count 2: %d\n",
-> table->core_count2);
-> >      > +               printf("\tCore Enabled 2: %d\n", table-
-> >      >core_enabled2);
-> >      > +               printf("\tThread Count 2: %d\n", table-
-> >      >thread_count2);
-> >      > +       }
-> >      > ```
-> >      > Moreover, I think the same logic should be done when the table i=
-s
-> >     being
-> >      > constructed in lib/smbios.c, where the real content of tables is
-> >     located.
-> >      >
-> >      > Regards,
-> >      > Raymond
-> >      >
-> >      >              printf("\tProcessor Characteristics: 0x%04x\n",
-> >      >                     table->processor_characteristics);
-> >      >              smbios_print_lookup_str(processor_family_strings,
-> >      >                                      table->processor_family2,
-> >      >
-> >     ARRAY_SIZE(processor_family_strings),
-> >      >                                      "Processor Family 2");
-> >      >     -       printf("\tCore Count 2: 0x%04x\n",
-> table->core_count2);
-> >      >     -       printf("\tCore Enabled 2: 0x%04x\n", table-
-> >      >core_enabled2);
-> >      >     -       printf("\tThread Count 2: 0x%04x\n", table-
-> >      >thread_count2);
-> >      >     +       if (smbios_version < 0x0306)
-> >      >     +               return;
-> >      >              printf("\tThread Enabled: 0x%04x\n", table-
-> >      >thread_enabled);
-> >      >       }
-> >      >
-> >      >     @@ -719,6 +726,8 @@ static int do_smbios(struct cmd_tbl
-> >     *cmdtp, int
-> >      >     flag, int argc,
-> >      >                      struct smbios3_entry *entry3 =3D entry;
-> >      >
-> >      >                      table =3D (void *)(uintptr_t)entry3-
-> >      >      >struct_table_address;
-> >      >     +               smbios_version =3D ((u16)entry3->major_ver <=
-<
-> 16) +
->
-
-A typo of '<< 8' ? - smbios_version is a u16.
-
-
-> >      >     +                                (u16)entry3->minor_ver;
-> >      >                      snprintf(version, sizeof(version),
-> "%d.%d.%d",
-> >      >                               entry3->major_ver,
-> entry3->minor_ver,
-> >      >     entry3->doc_rev);
-> >      >                      table =3D (void *)(uintptr_t)entry3-
-> >      >      >struct_table_address;
-> >      >     --
-> >      >     2.51.0
-> >      >
-> >
->
->
+--0PtVx24FNCry4QG2--
