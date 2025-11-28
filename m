@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF1E4D116F1
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 14:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B035AD116F1
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 14:11:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54A368457E;
-	Fri, 28 Nov 2025 15:07:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3299C8456C;
+	Fri, 28 Nov 2025 15:11:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="StCvGyzr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rF45D58l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4862C84581; Fri, 28 Nov 2025 15:07:53 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 71FCE8456C; Fri, 28 Nov 2025 15:11:12 +0100 (CET)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1BCB84565
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 15:07:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BDC384565
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 15:11:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-64162c04f90so3483884a12.0
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 06:07:50 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-3f0cbfae787so1333205fac.3
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 06:11:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764338870; x=1764943670; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7npi6mmum1j3+mjyndjNEmM4ueFIHHGsattNJK+Fj6c=;
- b=StCvGyzrQQQdCWPcT8eMpDSRQaIfuIWAiJC4rX0Ts81XfbAI9EQ7WHCz2ywOivDHxx
- eNSJXlHXgkIFUbSANphFO7QdM0pQUr7hJT6tM1rxOntDLguB1hhg81wazKSyNmd7mCkV
- FVUpm+jNJ5Aaw2LcKTljmSqmZkIXZ8eT0OTuo7UYmed6Qv2agYMGzilcOcaaqdHOLlmI
- gkFGo4rF8sEhtdIpnYccKqlSSbxypXx+Jh+PUcngrsTa+6l/ZKP6OF+VIZVPfrJda89p
- XgJZUaUZYcWLC/s4NeYCNBXuzpj46ZbNNuDe83PrGdIE1Rq4ugispZ6J6ky2gykOosy2
- /3Fw==
+ d=konsulko.com; s=google; t=1764339069; x=1764943869; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fNqA4qzOdwK1ZCrQ+x4vOdym5ZHOfK6row//nEymub0=;
+ b=rF45D58lhKV8z4TbkvaZce3bwjiOd1zKwvsJ3CmGX8U8moXjzdx4GQjmwK6gMIpDSR
+ wIp623/t8CNeMOgK35uOfUi6sRv4hqnJ/7qDewLDUQCf5j4KUdd2rdI8qEPwoxTeyqNM
+ PmcgIZRSrgVsoqk/DOc1fx26xAnL89i+QBxrY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764338870; x=1764943670;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7npi6mmum1j3+mjyndjNEmM4ueFIHHGsattNJK+Fj6c=;
- b=uZfb67P09sWB2snio6zUxJXEX3+QXAmFAryT6boYdxMGICVvz1pr3MeoP+cp31N6Ap
- AEw6lKQhRS7byYFKyNVLWPxEJjX0uIAhzfYR4tO6Z91ZR4fBLFp9K1+NyaTu8RrC+v36
- T38WWyhoc9WOUimLaMKGXD1nADti8QKz/PUUoHRYKezmqjqg9+lXkdSkGhDTwZhS/anE
- SPJpvcZWbzsGIc+WWtOKPpmCGD0WpoZrTBlBpjMw0XLwBASoR9dYT4hYhXo3IGPQ8WxA
- +Z7TMa2copoSKBWsq8cPMRLzWsiVW8fuNY6zGtjvR4rpq36Q5RJVCJUPMb41MZCTIddq
- X1yA==
+ d=1e100.net; s=20230601; t=1764339069; x=1764943869;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fNqA4qzOdwK1ZCrQ+x4vOdym5ZHOfK6row//nEymub0=;
+ b=nAq5jIwwcuzRTFNVi3RMzMt1EltyGCexuQlp9c1RKc6diPQbpKtVtVUnMiFFlGNxrG
+ k9bX1gfOpSmUrS8bq0FCbqwnuJHRrA1LdlIzrKHVHpp9JQZopEJMqVPC2isLPbyr6fT7
+ e9CcVUN59i/t+b6wxjFR5xeLXd/1bEaLL4/rS+0RtXU9shi6X4BlqFaWufQ5byz0mJ9k
+ iXR250PKIQr9jM+cpfqGI7zp2oS2LgDQtgP5en1zyf6ZNBIzsu8Yvma241wDWUuoxyqu
+ 8OCYE85kQQXsGM2esJ8wnDFmWn86fJ4zekz1/NogVviWNCAsI8f/BY16ujuh5LTmLCy+
+ /j8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVerYYl16J5abkL6gLfqh7d23KnOm1VJ3ywXtiRz39zvFRRtOjGVRpwDOSlSt2rpC47fUPzJ2A=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTKi+G/z5Laxv9aUt9x8PIo1dPD+GXB2x0GN/TmmQ+wV53uAjL
- xT7EzwkWRSNN9rXKfNHhQ3f04H1WqMohw/831mCZ8mYuU0LJ/WMA85SJ8WOzQfWtCJPp0gOJARt
- wY684ZctRfn6j8GNXmBr+G+nTEn/rkMI=
-X-Gm-Gg: ASbGncvyLSLFRHr1qH5aMkvr4JlZQxHnsW68E35bwyfYkPCQObtHgWtTYlMfTUZ8umW
- hs3PWTeNMvqcYblJ9bpUnK3Kj21L42um8MJgRK+QKH19VP2cR0NxSicSYTS9BFVUZsv6Mj8IZ1u
- J9OmZpOXD7jB65yyRow3cby6fnt+eqB3vkz8Djon9YCrGTG8Cf6acT6iqW/33EHSbPQZ7K+fR1g
- fMJZ/X9fTSp0TcG59aPW83bFYoTDJ+xsqrlPscluRazWw0TU0zGy94hFYsyZo9/3gphvMPwsOKX
- js+23kqsv27/XZLjCCNqd8NnCjQLrjSgoQIMV3fClr122pbF0LnCdyr9JPFaj4co8ahYNz5b7yw
- zMhgfi7QXNlp99ZiXzPvWIPTb2akZML83GApwpAxxGeXm9FGnCYtb6USL/y94RCVTl5/iF1Dfj9
- 8=
-X-Google-Smtp-Source: AGHT+IHcNrkchFeyRhtGRH9twpS/rAVP2euQjDkDdXFPMaPoSSkmQ87YGBxTjb4VpS4AFxN3NDk0dxuB4z7aacsYeLs=
-X-Received: by 2002:a05:6402:274f:b0:645:cd64:31c5 with SMTP id
- 4fb4d7f45d1cf-645cd6431f3mr16169917a12.26.1764338869950; Fri, 28 Nov 2025
- 06:07:49 -0800 (PST)
-MIME-Version: 1.0
-References: <20251125102358.1850991-1-anders.roxell@linaro.org>
- <CALeDE9O4KOsRFsxZcnJxOVTzzJkn62k+bT=vgHa-k__qkjO0Yg@mail.gmail.com>
- <CADYN=9+atsqWkdBa+3jM-EhkNUyV-ZuJdtNqL6bZh6AsnkiSag@mail.gmail.com>
-In-Reply-To: <CADYN=9+atsqWkdBa+3jM-EhkNUyV-ZuJdtNqL6bZh6AsnkiSag@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 28 Nov 2025 14:07:38 +0000
-X-Gm-Features: AWmQ_bmwSShk9xHm6a3f6QRNNwGGQ5huk5xhTuS_IhLkcpbt92Nkly_mu4JQAe8
-Message-ID: <CALeDE9OSBLFTamgmZfPVQgYe=n+-p180aGkE3+xRLx0GRc+h1A@mail.gmail.com>
-Subject: Re: [RFC][PATCH] rpi: Fix DRAM size reporting to show total RAM
-To: Anders Roxell <anders.roxell@linaro.org>
-Cc: mbrugger@suse.com, trini@konsulko.com, ilias.apalodimas@linaro.org, 
+ AJvYcCUyjVg3keESKOCVDkEqRfh4CsAA5UFDMIxoItTRDEOMvUOPUFQCYyn+s8l6nxV9TO66hsPQq74=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtNmwo/nUGoLMk3w25ZQIIiFko24FSD8cKqYMz/2CBVrnJACI+
+ rQsNon1yM4Z8rRnRZN6bWAfg88uP4n3kX1W6eBVDV5ziKQOyb3bI1tC1DswNUoOii8Q=
+X-Gm-Gg: ASbGncv7OTN48yZ7t1u2U0SIxYhgs+AoCKEl7VMDFnUnhI8UIudvJZHFRmoBm7/PBFY
+ ibUi8Ir6lbhP1NrrhoyyOU3fO6uuLr0OYD3s3jvd52QShnu8Vm/z4nEIZ40VablENsXT6XRBAav
+ GHu7hnzMpMoUkPLcd5dUct+AhvKfpdMy5WUAkLr+/JRAVfqgmiDYTyHPr1QOAbqSDT9+oN8TwRl
+ eRn7b6mE5yE6p40bOqrADwnjIF6a/1v6v4lAkTOjR9X5vwxb53nHDxe3GboKYa5xZ93gSiqfdgW
+ Gc4b4ew4dZlRn/9q+R5Hxqd7XEZNb+FOLKqoahV+hpCaOViKrtfZOwsb7yStE0fiWS3gNam2AEf
+ cT3csUEkbDR1ljKfxvXiyV5gWpCEhHEfA8wAvskhX8FFzR4UifOrGsD3ewYChuviMOFqgFCO9YU
+ tDMttIRw1GVfte8StQXUklkAt8nQcVfaab31yhIhhqUJ3vFZHBFtyUypbLjVXU
+X-Google-Smtp-Source: AGHT+IF60WGh6sI9AwAHhrHfk0WL7is9WX0X1OMUy9amFQ0YrBGfvuRDZ3KqeE8SfXw+nbueNfxcUg==
+X-Received: by 2002:a05:6871:2e88:b0:3d4:8741:edd3 with SMTP id
+ 586e51a60fabf-3ecbe326813mr11501252fac.20.1764339068762; 
+ Fri, 28 Nov 2025 06:11:08 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3f0dd029507sm1783264fac.17.2025.11.28.06.11.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Nov 2025 06:11:07 -0800 (PST)
+Date: Fri, 28 Nov 2025 08:11:05 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Beleswar Padhi <b-padhi@ti.com>
+Cc: afd@ti.com, nm@ti.com, n-francis@ti.com, u-kumar1@ti.com,
  u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH 1/2] configs: am571x_hs_evm_defconfig: Reserve EMIF
+ memory used by PPA
+Message-ID: <20251128141105.GZ2125796@bill-the-cat>
+References: <20251128064353.1295063-1-b-padhi@ti.com>
+ <20251128064353.1295063-2-b-padhi@ti.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="NyvxjMRHO847HyW1"
+Content-Disposition: inline
+In-Reply-To: <20251128064353.1295063-2-b-padhi@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,32 +101,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 25 Nov 2025 at 12:47, Anders Roxell <anders.roxell@linaro.org> wrote:
->
-> On Tue, 25 Nov 2025 at 13:20, Peter Robinson <pbrobinson@gmail.com> wrote:
-> >
-> > On Tue, 25 Nov 2025 at 10:25, Anders Roxell <anders.roxell@linaro.org> wrote:
-> > >
-> > > The VideoCore mailbox GET_ARM_MEMORY only reports the size of the
-> > > first accessible memory region (~947 MiB on RPi4 with 8GB), not the
-> > > total RAM. This causes U-Boot to display "DRAM: 947 MiB (total 7.9 GiB)"
-> > > instead of "DRAM: 7.9 GiB".
-> > >
-> > > On Raspberry Pi 4 with 8GB RAM, the memory is split across multiple
-> > > non-contiguous banks. The dram_init() function only sets gd->ram_size
-> > > to the first bank size reported by the VideoCore firmware, while
-> > > fdtdec_setup_memory_banksize() correctly populates all memory banks
-> > > from the device tree.
-> > >
-> > > Fix this by updating gd->ram_size after dram_init_banksize() has
-> > > populated all memory banks, so it reflects the actual total RAM
-> > > across all banks.
-> > >
-> > > Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
-> >
-> > Please add details as to why this is RFC? What comments are you actually after?
->
-> I don't commit to u-boot that much, so I wasn't sure if this was the
-> right thing to do.
 
-Yup, all looked fine, I've applied it.
+--NyvxjMRHO847HyW1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Nov 28, 2025 at 12:13:52PM +0530, Beleswar Padhi wrote:
+
+> The AM571x SoC has 1 GB DDR space. As part of normal re-location process
+> U-Boot copies itself to the top of DDR bank. However, on HS devices, the
+> top 0x2500000 is used by PPA and is firewalled. This results in an
+> exception and the boot fails.
+>=20
+> Introduce a new defconfig for AM571x HS platforms and set
+> CONFIG_SYS_MEM_TOP_HIDE to reserve the top 0x2600000 memory (aligned to
+> 2MB as per page size for ARM32) for the same.
+>=20
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> ---
+>  configs/am571x_hs_evm_defconfig | 3 +++
+>  1 file changed, 3 insertions(+)
+>  create mode 100644 configs/am571x_hs_evm_defconfig
+
+Missing MAINTAINERS update as well to catch this.
+
+--=20
+Tom
+
+--NyvxjMRHO847HyW1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSmteQAKCRAr4qD1Cr/k
+CpsSAQCECGwEqEjff5JHz0anP8Pr/9rX+leG4sVhGMFw0GuK9gEAxKFqFnLw0O+j
+WxANmQRR8kh1qjrXgQR5xDOC2IgTSQQ=
+=UzuW
+-----END PGP SIGNATURE-----
+
+--NyvxjMRHO847HyW1--
