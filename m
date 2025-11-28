@@ -4,93 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A59CFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2AFCFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:25:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13DE283A3D;
-	Fri, 28 Nov 2025 17:21:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BB1283A36;
+	Fri, 28 Nov 2025 17:25:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K572Gx5C";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BMLUr42h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF7B683A5A; Fri, 28 Nov 2025 17:21:11 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id AE3E783A9F; Fri, 28 Nov 2025 17:25:41 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17D7E835C6
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:21:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8A2783A7A
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:25:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7c6da5e3353so1271537a34.3
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:21:08 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-44fff8c46bbso514087b6e.1
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:25:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764346867; x=1764951667; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yu+jmZIDln7+NHdvNJQFNFbTrBP2bwEWYh/KF7Dx3rc=;
- b=K572Gx5Cqj+6cO2gvblMv6SWV/3vwhmumrsZEozCPLKa4q3ciworMfC33vouNBGcGp
- VMyWfWT8l62KSmwQsj11znBil9ntR+z1AX5tnrJo7VWjZQbDEz86nPsyU5W4Vs8SPMYX
- kgatb1mgbrFALuuPC4laRDAnbzYpvSJRX4HjGVXv8s1ifTDnU1s8mGPrwcwXchjuUiqp
- o9AoJXO2aMevKx3BqNiWmjFpXcKJDusEagbmhoosUNP11EFrgwAH0Q2VQDshJelAcuaf
- 3YLYyNACy6B/jte3W3egn2jgw0zmkaEbuj+m4ZzMC+5WHGwYIpd9rFt3wl+oJENwQZ/A
- bOYw==
+ d=konsulko.com; s=google; t=1764347137; x=1764951937; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=BGSC8GPMva0ajzyFjYANbBzS+ZxxVm1EKlHS+8A0nr0=;
+ b=BMLUr42h40p3tTPuUIgohFob1up19Km8dzEWaJxPndA9WTTRplYBPxzRrYw7RuVv59
+ I3mv4I1ccS568TBg8zb0TxeEKs+H71472K5B7/8G0xAvUXZUN/tZA3eoYYQXMluznvqn
+ J1FSu8YRu1HuhxDCmOP5NwKH3GOQ8LXOvm5b0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764346867; x=1764951667;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=yu+jmZIDln7+NHdvNJQFNFbTrBP2bwEWYh/KF7Dx3rc=;
- b=JkI5DKaSVDtC+3gizhh3/pKFTKRF/mpXluyTUy9lIxD6Oo6klB6yqAe82nqRBUGr+8
- uLawZelibQ1WiuqmiionXhW4fCfZVYbLJ7xn82aOsh/a9pLaFiLHk7/5MAwZDsa104MQ
- Qv+Ij1z6dXxqxta+hH3FSSWHgBe9eWiXNsgX8a04HBK6hRmoVJPl/kqOd0ngzmK54mmu
- cLesteSpY+76kgsN9ju8Kq5sf86Cy5WkoEqUg5dHDDIQSute6jY4wH54UJAqXEwHw4pF
- f5XiIpN/wK/iqcSxDhBNUQRxY7uUFPHR2SYaJDz3SJb5NppXQKvjsgVvhxzGPdVanuPp
- alAw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWpohLEFADAzpfuyPKixnLeQnF/cayLmV7H2b11sJD0oaB3PjYQc3C0JCL/SevvafkTVKMoIaM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz5d0jBbBqMp+0pDQ+lXqQNWU6Xb1GnX9B/iZiAlMBFD9YXFwB4
- cUSkkHEmC6qO1k8/F8vPpeLwIFCZddP402W0yVBA//JxgUZQrFqcKMIijLzMIVo6CY3PL3wofSR
- RyHZznRgKb2awkfk0Vdw9POTDe1+WfR8=
-X-Gm-Gg: ASbGnctQ/X6W+k8VC62Lfo7osQIY9jznLvCNLIjtUKb44bDSHXbxDVz4QskQP7Yoy96
- a6KoZiioGse5WU/CVa67lgZXOdXkiNHsRs1pCg9/fIy9K9MBeXAM5HlSosecC2af8mBbnmedT/v
- ZQUi2IKllgnPNjLCUjytGVyKMDDH21XUv1G0VFKGtso7qUMc4PSzMlHOxkmcHOYY1Lwcq/Q9FJZ
- NYKh/XfNuEd/6ZKNNvoiSZAdDEUT8rMOkZrXrCqXMpPwTs0YEldhFtEDoWODf/OsAjZkgo=
-X-Google-Smtp-Source: AGHT+IE+w31/6KyIgKEBue3L97n8JbwM2zGL/VZ6pDjVtxssCRiMtDYFdV5/jdjH/uLjS9FGR2B+7WoG5BK0CZDPZiM=
-X-Received: by 2002:a05:6830:83b1:b0:7c7:69c8:2d2 with SMTP id
- 46e09a7af769-7c7c4130bdemr8149524a34.13.1764346867119; Fri, 28 Nov 2025
- 08:21:07 -0800 (PST)
+ d=1e100.net; s=20230601; t=1764347137; x=1764951937;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=BGSC8GPMva0ajzyFjYANbBzS+ZxxVm1EKlHS+8A0nr0=;
+ b=idXtNMF5ukzfLn5rKsiZje8El4UAxKci8a7LOPXgY/TOpngqDWtTOyn9IVc0Qfud59
+ ibYciUpSM29Sw56LsGbPE6jWrKJLOxe2leN8K21zFQ8mSGzHJRQoCHJilg/8j3/KZn3f
+ OjRupO8NoZAz5LBif31cJ9XLh4tRir8zmzMoGAI7u9PsTSNyNP6kTdqI8NVZ62scLPDE
+ hxjkNrDah7tQGUgQ+YNBnTyzcMYMdD0hNsOmlrrUIZ2Z+Tfkl4tTeUOMPfYbV4n3Jp2+
+ +TXHtVUewaEecTyYbE65602aypuUI0Jr7ia4DaD4YHANipMcgSWWatpK9g0luTdrDu+q
+ SOmA==
+X-Gm-Message-State: AOJu0Yz1+ew7OvcyyLoRRKtpdp/RHFwN9Ob6bFnraGbpzytBuuC4z6Uh
+ gQQM3ILCxXtNSyXouepZ4yz/GfhIgW6qrA06OV8tP/TpOptdjoB9p7uVzOOqDpyOoTS1yRUWB5h
+ VTJ8fHqk=
+X-Gm-Gg: ASbGnctTwLrK4WzMbWuUXxAT73C2AkEK/woPzfqh8mIvp1IXxcySqcR4dahcN+Mo63p
+ 25uttS9FzgiCE6AyckLywS0oG/0f0XuUtOltQEWWxGb9XPNYwFWHKijbHiSzx6chjrd9ljq3BFx
+ LbsvJc1Vyq4Nz8UXBTopPoM6oA/mk7vadf/T2H7g8aQ0qc8lTXrkV7y0DtHaHXFPJvGDk6jzI1x
+ o6SQ340Oobk0MYnAW6sm58mv6KmuuXXlKpsBSQc3KGCg6kUy9b6LO+p0Hvy4vD1wYB1oL5TZ/iE
+ /+oAIxVEHc4BIn19TwRiEEiZrOhtezVJB6ppO7Y4FMonqgXctItY98GT17kz+imJy7tRmjMVDPb
+ e8i1kubWMRIzUKsQRWaeWc8El+Vko74Sl455Zhb7PNvcFlLt+pjbmOAf0yEOyORUAjIESdBDJgT
+ aCvGBls23TgTP4g+z/j7USK7eNlWKjnSJQ3bgA2SUXN2HaVOT0
+X-Google-Smtp-Source: AGHT+IFyzyzWfNvtJluXaSdegj63VtG3U0tzcGrsKrzHuwOzufChJkDq8VbsIhEx8fDmz/Kddf/ikw==
+X-Received: by 2002:a05:6808:1310:b0:450:7169:80e5 with SMTP id
+ 5614622812f47-45112aa801cmr10543074b6e.27.1764347137585; 
+ Fri, 28 Nov 2025 08:25:37 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3f0dc9ff3f3sm1973682fac.2.2025.11.28.08.25.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Nov 2025 08:25:37 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20251118184618.599462-1-trini@konsulko.com>
+References: <20251118184618.599462-1-trini@konsulko.com>
+Subject: Re: [PATCH v2] labgrid: sage: Add new lab
+Message-Id: <176434713697.219281.8109620372952570248.b4-ty@konsulko.com>
+Date: Fri, 28 Nov 2025 10:25:36 -0600
 MIME-Version: 1.0
-References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
- <20251125081316.17329-3-alif.zakuan.yuslaimi@altera.com>
- <3e4de604-292d-4232-893d-db43e29b469c@mailbox.org>
- <19c33d9d-4cab-4add-9dff-f3b9e051f146@altera.com>
- <3b219e15-5513-4474-aae9-9d9a8abeb61e@mailbox.org>
- <f13e8fd9-9705-46ec-a2c4-9fc4c6a63e38@altera.com>
- <20251128153130.GC2125796@bill-the-cat>
-In-Reply-To: <20251128153130.GC2125796@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Sat, 29 Nov 2025 00:20:54 +0800
-X-Gm-Features: AWmQ_bkYT80QyAnZjPIb03GhxNi7L5Ruk9ZYnGKICugaipxNEX5iOYL-S_BuE7Q
-Message-ID: <CAN7C2SCe5s2m9G8ep_GDc_7YU6YTVrO5jf=+X_0CyNzwqLmwEg@mail.gmail.com>
-Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from empty
- built-in.a in SPL/TPL/VPL builds
-To: Tom Rini <trini@konsulko.com>
-Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- u-boot@lists.denx.de, Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
- Tien Fong Chee <tien.fong.chee@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,46 +95,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, 18 Nov 2025 12:46:18 -0600, Tom Rini wrote:
 
-Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B411=E6=9C=8828=E6=97=A5=
-=E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=8811:31=E5=AF=AB=E9=81=93=EF=BC=9A
->
-> On Fri, Nov 28, 2025 at 10:11:53AM +0800, Yuslaimi, Alif Zakuan wrote:
-> >
-> >
-> > On 27/11/2025 11:09 pm, Marek Vasut wrote:
-> > > [CAUTION: This email is from outside your organization. Unless you tr=
-ust
-> > > the sender, do not click on links or open attachments as it may be a
-> > > fraudulent email attempting to steal your information and/or compromi=
-se
-> > > your computer.]
-> > >
-> > > On 11/27/25 3:12 AM, Yuslaimi, Alif Zakuan wrote:
-> > >
-> > > Hello everyone,
-> > >
-> > > > I already have the referenced commit in my test branch, and I can
-> > > > confirm that the same compilation error still appears on CycloneV w=
-hen
-> > > > certain directories produce no SPL objects.
-> > > >
-> > > > The existing fix ensures that built-in.o is always present, but it =
-does
-> > > > not prevent ar from generating empty built-in.a archives, which old=
-er
-> > > > ARM 32-bit linkers (such as CycloneV toolchains) reject as =E2=80=
-=9Cfile
-> > > > truncated=E2=80=9D.
+> This adds support for the "sage" lab, that is utilizing stock labgrid to
+> control a Raspberry Pi 3, a Raspberry Pi 4, a Pine64 Plus and a SolidRun
+> Hummingboard 2. The board environment files enable additional tests by
+> pointing to content which is any of:
+> - Copy/pasted from the documentation for a test.
+> - Obvious in its source (e.g. Linux Kernel or GRUB).
+> - Random content (1MiBtest.bin was created with dd from /dev/urandom).
+> 
+> [...]
 
-I encountered this mid of this year after 2025.07.
-The uncompilable distro is Ubuntu 18.04, however once I update
-to 20.0x and 22.xx there are no issue anymore.
+Applied to u-boot/u-boot-test-hooks.git/master, thanks!
 
-But I did not deep investigate this issue because distro updated can
-resolve this issue. I simply think it is u-boot no longer support old GCC.
-Just want to point out the failing point of my experiences.
+[1/1] labgrid: sage: Add new lab
+      commit: 6c5be1a225361926f04fd630c136eeea8fa1a9a5
+-- 
+Tom
 
-Thanks,
-Brian
+
