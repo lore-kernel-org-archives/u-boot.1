@@ -4,93 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D28AECFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 11:24:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3B5CCFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 11:27:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5294F84508;
-	Fri, 28 Nov 2025 12:24:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 409C084514;
+	Fri, 28 Nov 2025 12:27:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RgXBI9cD";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="KGMc8aXE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D586784509; Fri, 28 Nov 2025 12:24:36 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 997B884517; Fri, 28 Nov 2025 12:27:56 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D6B0844EC
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 12:24:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54B7484513
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 12:27:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-42b32a3e78bso1661592f8f.0
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 03:24:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764329074; x=1764933874; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NJIoNzXvV/MqWILhYSVmF8FUeYEww6oFu9SojaoxcjE=;
- b=RgXBI9cDQClEaNJRShzI+sD48Fne9W8O1kap3ET6VZk/le5MxdZd0LKz/npr+nvxaT
- 3mZPT9qdNmLwkj0p3ButZu4/zgAaqr/kMHLW7+2ZXMKOBcZChDnXsRARRVT25hRMO5Fm
- VBAFGiOLly34xBOQJGe/bgmUrtnw8i3e1Tw5oeaqP1ABlvKzCKtEYTirA4RsqSmXjPrj
- +cBuho1ytslwE+lIEYJsHqbZnX+sfGLQ58lZYAkpCBvI3j94aRxakUmPFZV24Fg5GfSq
- xGrEoJ2ruba6cwXbgYLxnAApYyv64wPv8j/slsZLjpyC+C/otce2pvra3VwSADyC5Uzw
- 7xjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764329074; x=1764933874;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NJIoNzXvV/MqWILhYSVmF8FUeYEww6oFu9SojaoxcjE=;
- b=Qn2miQTuzpJvp6rQexqrJ9a1r+qaK49FHudk+BIAJgV1CMmcbx73PePkGSfQwN9a/z
- kE9E2TTQqnoPCi4sKkN7hK3G1i/+mWkFmGKryKkXvyyKDf91uPO48KlsDYP8yEifkorY
- MSfMfsUIN8VtUWQpwDsVrALhNce8jfX/flLuJ14szTwx9sZ+3AajZNeCVnQ+CfZVBRJm
- OQW0r56Nlk5yi6gLk3UhRiA1iOEyDQ+EkXaQCny3oaAhyVFEsSBhDRMnH1aH1winyQYe
- onDhNIQ6iUEf3+A7LEd8gjpFsqEMEJszDXZsMhhpDWYT+I4c8kXm5324oB+KYV19nrC9
- MuIg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUE/eXMRu/GjzS9WfU56vqyfGQ87ZexSUGdl3Lghmy2cyiYk4Ven6Ui6ceTS6CrSd8dNby92r0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjS0ch5QT9gO+9efEw5pjSa4G/iGKC7x8K95gDmqvq7Ji5k2Cu
- lBfhgeAppVE7CfFLH9TT1fYJqVAyTd6hoaKuunEza6UA4QDgKNaIbarLnvRtHDn3CBo=
-X-Gm-Gg: ASbGnctxHqTp/q2tXTdL+vBTOZfFS+0fHUHTFC0Dmsrl0B0+jyndF3P04JSXFiadLim
- I7cmYRIo+ZNTj2V9qhMV+mequQoZyEOSy7HBoBpNySDb00A3GH4mngb3UFx68m20hsyaCKXR7Gm
- DQTfxnZkD0sw9BJfpg/6cyisS+6BTpurXO+ODpebLljzQXeN9xxY56d8jk6Ft5AdORpMDteSEw7
- HhNtk1O10d7UqNl7ApVNjH6bMnRYPUz10OMgz+1My29SoZOn/ClaVLB9C0LqcuRfCW7SgNbomfO
- bj50jwXV3wI1KUyuMbC4d2z192lyKyB8iDqMvQYJu98r+OwcieHZogn2UbMSlwdiy6yJGETC8fe
- hg+OGjU1gm860FMihXpagbyQh30ncZ1b21sqpzw++8cCy2f9JciOrFpQPN6VV3GPH8JWZUIAw0n
- oySVwJeggfGtpD4utzYX4sly97Noi3qt568fmhCwiz4xV4JG1iRsSut+Ry7yR1l2rUMaaFJyhJj
- 87a
-X-Google-Smtp-Source: AGHT+IEa7uL3rXGhMohvKtKYM6ki83XZjiFw5dWNzTyRw8qYb7dhskvpy9f9AozZMR6CTq3i+VXH3A==
-X-Received: by 2002:a05:6000:2c10:b0:429:d33e:def1 with SMTP id
- ffacd0b85a97d-42cc1d0cef2mr30396979f8f.29.1764329073455; 
- Fri, 28 Nov 2025 03:24:33 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:b0d9:d0c7:cd48:383c?
- ([2a01:e0a:3cb:7bb0:b0d9:d0c7:cd48:383c])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42e1caa5d02sm9243083f8f.36.2025.11.28.03.24.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Nov 2025 03:24:33 -0800 (PST)
-Message-ID: <beffce51-87fd-467c-b35f-1b580ecc0099@linaro.org>
-Date: Fri, 28 Nov 2025 12:24:32 +0100
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 291AB1F928;
+ Fri, 28 Nov 2025 12:27:53 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1764329273;
+ bh=leLYWNzbvulv+5IXFcE3M+nBQ7V92R2CdQqjVclyyVo=; h=From:To:Subject;
+ b=KGMc8aXEVjMa0h2qBPc3Rf5zt5Ojuv7SJGy7oNA2/SiHUvIIIwFH1MVbwyxSTV1xb
+ V7M0csT4JKKR4JhVlg5Js5EruOdXQM5s+cV9P5dg8jPYKXqCfzKH4FerfCU7h3UXzj
+ oSHIOHpV5PXaNr6jrf9wdxRfUs5ZM2eBDTqUIVshzG+5aA8Krs7I6T3+dnpTA5LY6Z
+ zd/H52l2uK1GW0faZPVS/LC3xrAgqwAK8/DJDwOQKHRWSoVYuJanLz966iI4gAc8rL
+ i4J2otsXTrC2qASMbe2Bl29fCwErNKMBTmvDh4AN212dZ9rUJuFI7sPOInCringbCX
+ t9/TMDfgNk6pg==
+Date: Fri, 28 Nov 2025 12:27:49 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
+Cc: Francesco Dolcini <francesco@dolcini.it>, u-boot@lists.denx.de,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ =?iso-8859-1?Q?Miqu=E8l?= Raynal <miquel.raynal@bootlin.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: Re: [PATCH 5/5] board: toradex: add splash screen to Toradex i.MX7D
+ Colibri board
+Message-ID: <20251128112749.GA32259@francesco-nb>
+References: <20251126-repair_imx7_splash-v1-0-d3877afb7381@bootlin.com>
+ <20251126-repair_imx7_splash-v1-5-d3877afb7381@bootlin.com>
+ <20251126115931.GA26872@francesco-nb>
+ <DEITI8FI29LO.GOPV4GAORCZD@bootlin.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docker: Use GitHub-mirrored TF-A repository to avoid
- clone failures
-To: Peter Robinson <pbrobinson@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20251110133758.1644822-1-bmeng.cn@gmail.com>
- <CALeDE9OdRuey0yWsXU2R4cPiuG_poPCb5c8g+XnQjUBk=M9VPQ@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CALeDE9OdRuey0yWsXU2R4cPiuG_poPCb5c8g+XnQjUBk=M9VPQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <DEITI8FI29LO.GOPV4GAORCZD@bootlin.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,50 +75,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 11/28/25 12:12, Peter Robinson wrote:
-> On Mon, 10 Nov 2025 at 14:03, Bin Meng <bmeng.cn@gmail.com> wrote:
->>
->> GitHub Actions consistently fails to clone the upstream TF-A repo,
->> returning the error: "The requested URL returned error: 403".
->>
->> To improve compatibility in building the docker image with GitHub
->> Actions, switch to the GitHub-mirrored TF-A repository instead.
->>
->> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
->> ---
->>
->>  tools/docker/Dockerfile | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
->> index d2384219c06..201a1cdbac1 100644
->> --- a/tools/docker/Dockerfile
->> +++ b/tools/docker/Dockerfile
->> @@ -243,7 +243,7 @@ RUN git clone --depth=1 https://github.com/OP-TEE/optee_os.git /tmp/optee_os \
->>
->>  # Build fiptool, bl1 and fip for fvp and qemu_arm64
->>  RUN git clone --depth=1 -b mbedtls-3.6 https://github.com/ARMmbed/mbedtls.git /tmp/mbedtls
->> -RUN git clone --depth=1 https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/tf-a \
->> +RUN git clone --depth=1 https://github.com/ARM-software/arm-trusted-firmware.git /tmp/tf-a \
+On Wed, Nov 26, 2025 at 06:54:48PM +0100, Thomas Bonnefille wrote:
+> Hello Francesco,
+> On Wed Nov 26, 2025 at 12:59 PM CET, Francesco Dolcini wrote:
+> > [...]
+> >> -
+> >> -	return 0;
+> >> +	enable_pwm_clk(1, 0);
+> >> +	ret = pwm_init(0, 0, 0);
+> >> +	if (ret)
+> >> +		return ret;
+> >> +	ret = pwm_config(0, 0, 6666666);
+> >
+> > You are setting a period here for the PWM backlight (150Hz?),
+> > considering that colibri imx7 is a SoM, e.g. there is no actual display
+> > part of it, is this number generic enough?
 > 
-> If you're going to use a github mirror use the TFA one, I've seen
-> issues with the way they sync to the one above in the past where
-> things like tags disappear.
-> 
-> https://github.com/TrustedFirmware-A/trusted-firmware-a/
+> Indeed there isn't, however for my tests I used the Toradex Colibri
+> Evaluation Board with the Toradex 7 inch Capacitive Touch Display [1] that is
+> meant to be used with the Colibri Evaluation Board.
+> This display typically uses a 150Hz PWM for its backlight so I chose this
+> value.
+> However there the pwm_config configure a 150Hz PWM with 0ns duty cycle so
+> in fact, no matter the frequency, this pin will act as an always off GPIO.
 
-+1, good catch. It's then one we've been using for OP-TEE CI.
+Yes, make sense. At the same time you might have display with the
+opposite polarity for the PWM ...
 
-Thanks,
--- 
-Jerome
+To me this change is ok to go in, it does not make the code any more
+specific than it was before.
 
-> 
->>         -b v2.13.0 && \
->>         cd /tmp/tf-a/ && \
->>         make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
->> --
->> 2.34.1
->>
+Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+
+Not sure if you have any next step planned, but adding support for a
+specific display in the generic SoM support code does not seem right to
+me.
+
+
