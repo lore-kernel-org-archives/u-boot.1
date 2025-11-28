@@ -4,110 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBA5CFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:28:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97E25D116E2
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:35:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E11BF83B2C;
-	Fri, 28 Nov 2025 17:28:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A88E83AA9;
+	Fri, 28 Nov 2025 17:35:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z9vynWoj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="acOx9C+h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEC048457A; Fri, 28 Nov 2025 15:31:56 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id 983D883AD1; Fri, 28 Nov 2025 17:35:47 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D114584564
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 15:31:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D615838FA
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:35:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-657509d761dso928573eaf.0
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 06:31:49 -0800 (PST)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-8b0f54370ecso192374585a.2
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:35:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764340308; x=1764945108; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/+/rt3J9PtNOlaRLlus8Duc0vrVUVCYLcLd1qgOfwjg=;
- b=Z9vynWojhhNaxPfBgoqnC2AbqGEErm1PyoLRQFKsYcgtvIc4iwUhJ5vbbmpuNFB0mm
- TZd2Asmzf0IR8lZEWK5TaxGTyBE/ZUqgSoYjIj3aiseI9MDvamx34W0NoUciOvKnNJFs
- 6jDvjeHnlH3N+yz5sOGjl8qU7eyfXqLfBzXZA=
+ d=gmail.com; s=20230601; t=1764347744; x=1764952544; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bYN4w1qA5kNuyz9XImp5Mp7TK32rdY6HZ51sLP1DdnU=;
+ b=acOx9C+hzTaL8CikhyrYcUoIlZ/0l3DibRMqTY09clK+ErxiM65kglJ/29JVXLuQa/
+ 61CUZjSOV41lg8lK5Dr4+GS/DuSmoZ13JIYRTnJsARKG/tjXpdGaVv4q8C3//H9MZQSw
+ /QH6YNAKs8QQYngf3XP3E9IUL/KqN49xQqh5sjr5OGEvs6clymahx2iqzWc0iYh9EkRX
+ 76Tk5w2RFHnxFT/JX1RNlPah1Z35vhRpNHxIKZRAJQVQrmQMmJmJ8ojpmKaerZQZW+LH
+ 6uR3fPvEW/D8yPzH8/hifkur65T7g0xgwxQPibIMLYfVO4MQZndiB9B1PqBtPg/kds14
+ SwlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764340308; x=1764945108;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/+/rt3J9PtNOlaRLlus8Duc0vrVUVCYLcLd1qgOfwjg=;
- b=eBbhBBwJizNIrPZOCRH2MqKqDCAitTYAEJDnRxwZHSivB1HugNRY/RhudNjd9Ew3Xf
- QzhewAisQUxke/yPpUAtBWkf7dEvwHSzYWt6PQ3Tx7/ddngRrEfGxkNmFNaTyZ0ph+AK
- lfZ61rPOj7+DcT1AVeWS4aXWrNUGY9IBSSacpK5EsOK++BfXz1/TXjE8uh4d+pe3S5mN
- JvPEHRjEERa4ZvnNaU2u96g9CIvW/icOoWRzEHTGeg3v3EaIZSFSzg5+lpDx2o9gE1yH
- 2Uwf8Qwy+MmxsZxWGu59GR4aYAVsUauGHMUQKn4w5tYxEu9HgKw+5xgYVS/h83KQkRN/
- TpsQ==
-X-Gm-Message-State: AOJu0YyCDD1xBLA0ncoT0n8eWwO+ePPIycRbxU2G9ihzekbwItOl/UdX
- +qfK9B656d18SpEvqI9DZ5AVLFJ3TMFoorCqTB3R3Xan2lJ3GptFsSG4Ji6RvcxCJOg=
-X-Gm-Gg: ASbGncugYbMYx8UbMrKVCaUn17tV+ztrUohNMGlUdoyEtnrH2IViU0xTpGIClFFlZCl
- ifrm65fRCEaCaBz7XbxZnvTsfC+UrYKrFOiKFFUZ6rRXgoPAMVCbdJ6jK1NHCZxYGQubv4/3V3s
- 9j4MuDJhfXMcgWLqi3X49b6vji9zNo7ceoA2ryWrtQRrX84ImyjJAIRk4BlSX8W27To86urhWOT
- anjPn5kS0CZrSKsZ0uxgBrAGCwkc7CKNPmSOhizrZpxU4uZHUQRMtvlFiA29IejwMoW03VvYnw0
- cr1CreOTlrLhE5dcicTFfFTPWreFnbxw8D0AMSCRgtStOzl/nMUN/0qd9bwBXEOQalGCHuxr3h9
- rh2T96+HOm5M/bQLxT/SojoHK02W4ynz2oZYPJE2y90U+CHXouQkeWRhzipg+KIhOhy7RrWDBvR
- CQD2smGSL3F5DTdgPcIpDVey5jCwMQSJ3/1jMi+aOc7U5CzxiOefjw8mEPo+3J
-X-Google-Smtp-Source: AGHT+IF0Pe64u8Ae76cs1P0DjyyaOC+pWgG83YjK7sbmzlek3EOTc1h3bjsulh7VX1JavIbSD7Hq5g==
-X-Received: by 2002:a05:6808:19a3:b0:44d:a0ec:d9a5 with SMTP id
- 5614622812f47-451159c872fmr11572221b6e.1.1764340308349; 
- Fri, 28 Nov 2025 06:31:48 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45317113578sm1274332b6e.22.2025.11.28.06.31.45
+ d=1e100.net; s=20230601; t=1764347744; x=1764952544;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bYN4w1qA5kNuyz9XImp5Mp7TK32rdY6HZ51sLP1DdnU=;
+ b=KYoyMBHe6Fq6BHSEXQUYZ8nlzzth0AWsJ1qLvetQqRtsQeiO8MacOF8j0+gib7vl4a
+ S+clnlVNTMQKfA3aW6K8ry9NCU7G+FWmI1Ro0tgQ6PpXRSrXeNkEsi+w3eeAqPSRp0Gm
+ HaCDagH4YnQO2VelSRXNJ7f5wKOvXAOb2iY6xcPAl+822z1O0MQ0nfPTnjrt3u7dr4Ma
+ WKtjJqzA9uv/mEIg03IOK+a54ae5BXLLoXv3BEClD6orkJ23T14eehAR8pe3mEZX6y8h
+ H7PtRZfz/V20IKkjQGCjdTgAXWssjYNqR27Tnz9uaLkb3tS5bowr9/kCoYL+K3rO5JDk
+ X7HA==
+X-Gm-Message-State: AOJu0YzhnWwXzp+kxJoBYVDR2ec91ZuPTauozO4FWmbx8AMzNLzXuYyb
+ NvbrELenKU8HIL57t45gjT2abYhl9zj1UziyxLHpryBLDhfbN1jVdzaoXBnORsoFC9c=
+X-Gm-Gg: ASbGncsxj3AVRAOv88LQJp3On4Tk7gonBXxBKOGjuLuzYDvgNu+rs+EDi4bL75lsjCj
+ +kf5g6iXiuEdTwTmStCxTFnjEYUS0or9jzgi7dzBfiEvJd0nJZCcdWwhvYAOyLP+btM3fKe4L2v
+ 1ncWvGEmBP0SzUZpyqDBOTH7aSovvhXO05X3P6DTUnj1r5vw+bDDi8kBILKZsYMLYWJG03sETHY
+ XD4SjDauJ4hm5GRmn9UuBnti0k8MHciJijpeuKri9WchdBciL5aTP0s8DoEsB/SZVUrEmFYmRtT
+ aenaLx+b51sER5mghWuiDDWq8HP/7/iocd3vRmC+ssZAwG6XfbF4WEHwbasphtoisR1WhHONuMP
+ wMBf9HlhuHGGasjWOQj9AvAS4k3OdobIhzIDF9OwCcuNmxhGT/+rH877oZ0F6SSMepEI5rdZxCN
+ OyIszFbRksucRQvi78PGNwvK6S5P9YLu8=
+X-Google-Smtp-Source: AGHT+IHxLm98JeqlMH6C856gWcjRWmbOD/1hY/rcq37VyBHPGlUhadCTM+SL3M2AcOpI5ExxYQVr0A==
+X-Received: by 2002:a05:620a:4496:b0:8b2:dabe:de42 with SMTP id
+ af79cd13be357-8b4ebdb0549mr2082560385a.46.1764347744084; 
+ Fri, 28 Nov 2025 08:35:44 -0800 (PST)
+Received: from ubuntu.localdomain ([216.58.22.99])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8b52a1b75a9sm331227985a.25.2025.11.28.08.35.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 06:31:47 -0800 (PST)
-Date: Fri, 28 Nov 2025 08:31:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Sjoerd Simons <sjoerd.simons@collabora.co.uk>,
- Govindaraji Sivanantham <Govindaraji.Sivanantham@in.bosch.com>,
- Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>,
- "Andrew F. Davis" <afd@ti.com>,
- Javier =?iso-8859-1?Q?Mart=EDnez?= Canillas <javier@dowhile0.org>,
- Felix Brack <fb@ltec.ch>, Heiko Schocher <hs@nabladev.com>,
- Enric Balletbo i Serra <enric.balletbo@collabora.com>,
- Adam Ford <aford173@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Marcin Niestroj <m.niestroj@grinn-global.com>,
- Nikita Kiryanov <nikita@compulab.co.il>,
- Thomas Weber <weber@corscience.de>, Enrico Leto <enrico.leto@siemens.com>,
- "Derald D. Woods" <woods.technical@gmail.com>,
- "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
- Niel Fourie <lusus@denx.de>, Parthiban Nallathambi <parthiban@linumiz.com>,
- Paul Kocialkowski <contact@paulk.fr>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Tomas Peterka <atheiste@seznam.cz>, Anurag Dutta <a-dutta@ti.com>,
- Fabio Estevam <festevam@gmail.com>, Anshul Dalal <anshuld@ti.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH 2/2] clk: ti: omap4-cm: Add Kconfig symbol
-Message-ID: <20251128143144.GB2125796@bill-the-cat>
-References: <20251128-topic-am33-clk-regmap-dep-v2026-01-v1-0-d722c79506b2@baylibre.com>
- <20251128-topic-am33-clk-regmap-dep-v2026-01-v1-2-d722c79506b2@baylibre.com>
+ Fri, 28 Nov 2025 08:35:43 -0800 (PST)
+From: Raymond Mao <raymondmaoca@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Baocheng Su <baocheng.su@siemens.com>,
+ Li Hua Qian <huaqian.li@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Samuel Holland <samuel.holland@sifive.com>
+Subject: [PATCH v5 0/6] Implement all missing SMBIOS types required by distro
+ tooling
+Date: Fri, 28 Nov 2025 08:35:17 -0800
+Message-Id: <20251128163535.2301653-1-raymondmaoca@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4UIV3QjgeduwORQ6"
-Content-Disposition: inline
-In-Reply-To: <20251128-topic-am33-clk-regmap-dep-v2026-01-v1-2-d722c79506b2@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Fri, 28 Nov 2025 17:28:20 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,78 +103,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series finish the last missing puzzle of required SMBIOS types by:
+1) Fixing duplicated handles when multiple instances exist in one type;
+2) Implementing the rest of required types 9/16/17/19;
+3) Adding version control when printing properties for all types.
 
---4UIV3QjgeduwORQ6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Type 9/16/17/19 are generally DT-based, the idea is to write these tables
+using a hybrid approach:
+Explicit DT definitions under existing '/smbios/smbios' take precedence,
+with fallback to scan and interpret values from the entire DT.
 
-On Fri, Nov 28, 2025 at 11:17:00AM +0100, Markus Schneider-Pargmann (TI.com=
-) wrote:
+Moreover, all below APIs:
+smbios_get_val_si()
+smbios_get_u64_si()
+smbios_add_prop_si()
+are on top of sysinfo, thus allow vendors to get values from other
+subsystems by implementing their own sysinfo driver if needed.
 
-> Add a Kconfig symbol for this stub driver to avoid clock dependencies on
-> an architecture symbol. I added the new symbol to all defconfigs that
-> would need it.
->=20
-> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
-[snip]
->  49 files changed, 54 insertions(+), 2 deletions(-)
-[snip]
-> diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
-> index 7b8da69712e4fa61c15f3fb0cbdc9f3fd8de31bb..9b6829793fa87c91db3aefac8=
-ea9cea8180c2ad3 100644
-> --- a/drivers/clk/ti/Kconfig
-> +++ b/drivers/clk/ti/Kconfig
-> @@ -10,6 +10,12 @@ config CLK_TI_OMAP2PLUS
->  	help
->  	  Common clock functions used in some TI clock drivers.
-> =20
-> +config CLK_TI_OMAP4_CM
-> +	bool "TI OMAP4 clock manager driver"
-> +	depends on CLK && ARCH_OMAP2PLUS
-> +	help
-> +	  This enables the OMAP4 clock manager (CM) stub driver.
-> +
->  config CLK_TI_AM3_DPLL
->  	bool "TI AM33XX Digital Phase-Locked Loop (DPLL) clock drivers"
->  	depends on CLK && OF_CONTROL && ARCH_OMAP2PLUS
-> diff --git a/drivers/clk/ti/Makefile b/drivers/clk/ti/Makefile
-> index 329fae67889b11a9ef3c646b166243abcb956144..74e4329a3430d66c11a3c034f=
-1938c0804f4c918 100644
-> --- a/drivers/clk/ti/Makefile
-> +++ b/drivers/clk/ti/Makefile
-> @@ -3,14 +3,13 @@
->  # Copyright (C) 2020 Dario Binacchi <dariobin@libero.it>
->  #
-> =20
-> -obj-$(CONFIG_ARCH_OMAP2PLUS) +=3D omap4-cm.o
-> -
->  obj-$(CONFIG_CLK_TI_AM3_DPLL) +=3D clk-am3-dpll.o clk-am3-dpll-x2.o
->  obj-$(CONFIG_CLK_TI_CTRL) +=3D clk-ctrl.o
->  obj-$(CONFIG_CLK_TI_DIVIDER) +=3D clk-divider.o
->  obj-$(CONFIG_CLK_TI_GATE) +=3D clk-gate.o
->  obj-$(CONFIG_CLK_TI_MUX) +=3D clk-mux.o
->  obj-$(CONFIG_CLK_TI_OMAP2PLUS) +=3D clk.o
-> +obj-$(CONFIG_CLK_TI_OMAP4_CM) +=3D omap4-cm.o
->  obj-$(CONFIG_CLK_TI_SCI) +=3D clk-sci.o
->  obj-$(CONFIG_$(PHASE_)CLK_K3_PLL) +=3D clk-k3-pll.o
->  obj-$(CONFIG_$(PHASE_)CLK_K3) +=3D clk-k3.o
+Raymond Mao (6):
+  smbios: Fix duplicated smbios handles
+  smbios: add support for dynamic generation of Type 9 system slot
+    tables
+  smbios: add support for dynamic generation of Type 16 table
+  smbios: add support for dynamic generation of Type 17 table
+  smbios: add support for dynamic generation of Type 19 table
+  smbios: print the properties only when they exist in a specified
+    version of spec
 
-Given how the old logic worked, we should default y this new symbol I
-think. Thanks.
+ arch/arm/dts/smbios_generic.dtsi |   12 +
+ cmd/smbios.c                     |  365 +++++++++-
+ drivers/sysinfo/smbios.c         |    5 +
+ include/smbios.h                 |  151 ++++
+ include/smbios_def.h             |  250 +++++++
+ include/sysinfo.h                |    4 +
+ lib/smbios.c                     | 1152 +++++++++++++++++++++++++++++-
+ 7 files changed, 1906 insertions(+), 33 deletions(-)
 
---=20
-Tom
+-- 
+2.25.1
 
---4UIV3QjgeduwORQ6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSmyUAAKCRAr4qD1Cr/k
-Co5MAP9uZD2AjoT4Tf6BYsSkHUpa32ztZkQslEuOvUT0/vrAbAEAtLYQM3JgeuSP
-GNqfztwzqey/RnQ0wsCHlCyn/c0Ywgg=
-=dcUu
------END PGP SIGNATURE-----
-
---4UIV3QjgeduwORQ6--
