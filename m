@@ -4,85 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A35FECFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 14:06:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41719D116F1
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 14:07:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C453E84568;
-	Fri, 28 Nov 2025 15:06:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A2E7484575;
+	Fri, 28 Nov 2025 15:07:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bpRf64Uz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YhaCAGSP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A0DA8456B; Fri, 28 Nov 2025 15:06:36 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id D1DD784577; Fri, 28 Nov 2025 15:07:11 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 280B684565
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 15:06:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B06FA84565
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 15:07:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c75a5cb752so1038391a34.2
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 06:06:32 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-63c489f1e6cso2876583a12.1
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 06:07:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764338791; x=1764943591; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=giG/moWrlB0eMXucSkwUbfXXdJf63BbiyuiGV6mrXHU=;
- b=bpRf64UzC2fOefiJkE8C75bkcnpxwGhz/+nmC+eZZdHX4upeUn+LqWPjEY/IHFc+f/
- KxW01aA0KTH7dOFeg/w7bwZQ1uM/i5D2LhN9Nrk7UBgMJxgOt9fpZCJEw+Wuy7WHuzb8
- AAAKlVB0ot4ynSPKJSMQdDVnAsx/weoCn0cHg=
+ d=gmail.com; s=20230601; t=1764338829; x=1764943629; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=yDMCIquly7j3icU8cMz2kaajCw9YEZVuoJwUbGgSxPY=;
+ b=YhaCAGSP7Z+iG0slCMGVLwM/cDDEQycNsur8nG/S2Os9Y+m94l3SO+0TLnmkP1wrrp
+ ZMzNUop8Me1/UKOnMFGb0mxNS7p3rMtXtdQd93N6b1UBvtM5ds0xpNxLmkwY7Fz3tY9a
+ ZSXy3bOh+0Q6FFU4cyRXNnHQLMjpCr3oVebVoxa5lA+G6QzCD6rFF2AmFZYi8hrROaLt
+ 4RHBQOtxq8ayWm4it5aNsn1Tk9svoYz1ZZ2BNYBwqvEFUYZnEBCjlolMXq8uSr98Whhi
+ emfuA1epwJMBBAmU39D+lzQecCKxTH4pZSAC2D8XpribnHRBZlyiQaABzeLbM/wEoVv3
+ ZL/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764338791; x=1764943591;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=giG/moWrlB0eMXucSkwUbfXXdJf63BbiyuiGV6mrXHU=;
- b=WGKEko5fMYzGxo/qQmZEV6NtMQZkwKM4q4hEzsEVdfOpinPdTsbjeJjD1q6VjXEKw6
- qI4GwLhZHBlI2BUdzwrDlUjcno6UngXfxZLDTO4CMLJELEaUvxtxRdU6XW5dfKe6u+EH
- p4QMf/fCa0jozurHXbRVLHb0EZ5JdmN5y55ZFjOZ+9k13IhoBkfUj2cMxKL9q7vwln0H
- rOKnXG2lvSANcMsq3hYPv9OhX2KWQhx74z++sqPj16Mw6Fi52/X7cc0LzRJdZ/fUMIy+
- E93GCxD9VQtEYk8KygnrvXlPAPqf5bmCCTQEjLok0EJ7wZpijGQuy2sOzN0rbFkMMV7+
- zILg==
-X-Gm-Message-State: AOJu0Yy1HnwZWNM5oCU1SVuAsGCW+k5E6lRIuEo8h8mGjknCpzeyVu+z
- 8lDc6SK91uiJOBBoX/ttHAPmO547LRWxhtsUE6qID8OyQCaa36Mg6Frtu1D9sSdaWSg=
-X-Gm-Gg: ASbGncsbqF8dQKKvevMRrXlDGczn+SrdRwdcteb32JveN5fo68WgRLwRrhPtUoIdxvr
- OHND78gYR8tUc1ztz59RSb7W4uAL038MlwnDin/LssP6NnUvT1bWgsscTlL92FF96hb+wnoRa3Y
- EiIKSq0yYNrodU+oQBdmWS6X3je0GL6fwOniCgIKqG4K3e9wvi58QyF5v6ZDUtRlzQl0dir+qxP
- D9scodqwuEvSYDYGyTPv0ji5jDKECVj5v5SabakHDwzsK4GSGipwKsxzbJh89hfv6ndQm/QI8UQ
- DeShrEv+mDFjUMPyhXxak+9aaeM1D3gJNOj7hvXbIkV6Zhzo7fe3T465nUjSL6/UZl2nuvO2AjK
- TvGsqtFhUQwaw9+DbD6QouqOz/PQznp9ZoL/s7dWI4b395Qk2VQWraOSggvY+2rro5ady/Z6y6x
- vP47xxiUt3AJpfj5L0GN2FLpwdAY3KkQFYcxbI7MRhXmlr9my/7w==
-X-Google-Smtp-Source: AGHT+IGdfd2mZZpHwJ0zeTm9qAYXhhumxPYjs2FYnDv1o09dQao86xyyHrHlM5plK2KEP5xl4Qg8Rw==
-X-Received: by 2002:a05:6830:924:b0:7c7:dff:2ac1 with SMTP id
- 46e09a7af769-7c798b8a7dbmr14981675a34.3.1764338790738; 
- Fri, 28 Nov 2025 06:06:30 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c90f5d7d82sm1597177a34.6.2025.11.28.06.06.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 06:06:29 -0800 (PST)
-Date: Fri, 28 Nov 2025 08:06:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Markus Schneider-Pargmann <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, "Andrew F. Davis" <afd@ti.com>
-Subject: Re: [PATCH] configs: am335x_hs_evm_spi_defconfig: Remove duplicate
- symbols
-Message-ID: <20251128140627.GY2125796@bill-the-cat>
-References: <20251126-topic-am33-hs-evm-remove-duplicate-v2026-01-v1-1-5008cdb30536@baylibre.com>
- <20251126202925.GU2125796@bill-the-cat>
- <DEJR900FXLVU.1GCOQ4964FVP4@baylibre.com>
+ d=1e100.net; s=20230601; t=1764338829; x=1764943629;
+ h=to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=yDMCIquly7j3icU8cMz2kaajCw9YEZVuoJwUbGgSxPY=;
+ b=lEznE5XkChD3ThZ0dz+z1zHMmikZOuu0xhjFZmsWa3Fg/gkLXuG2uF9I+NUZDGld6R
+ Pv6L7eLVjVlwmVsIjNFaXNGIf7G0hI7H3AdqSKtS4U7i0oRjrSAANglr6J84SFQeuyGh
+ /STG/UGv8xMADfEUjY4opxnha4o8Fl0IBuEEGG236UaAWgKWcOrfnR9cJ0chUrbrxwon
+ BatCN1yli2sHpwFFsQF3AKSTNPHa8PrG5GrNefs9ikWpAImuzTcbWdQpfrHCTN2sCypq
+ /qQz0vrMiUVWtop45xyfMwhouPczVOQFqKoQlAdOKI2DCqhXkcuJKZyHj721ceFm0DCc
+ tNbg==
+X-Gm-Message-State: AOJu0YxWamcPGi8rMORPi4SQT3suoQAnEuNBsgFLQrJ7/ugzjxfy5BhM
+ Z1nae0D0bLWl45WUyD9KBjCITuuAKBrxxsEQKpIRz+zuZOA+whu53h4L4OnGL89cDvlU7encYMR
+ wWMc2HirAQzWUVbs65mrNXw+zFBscGk1NH1nM
+X-Gm-Gg: ASbGncsAfMSWY/CEh338AbzUiaFQx9TnyM3S95I863SJrWPvLX0ZW8I2lYOhsRiK7Ou
+ BjW/sqQt90TVuTRhrhT4jrNhWzNGBp3fwSuvlrsKHijGaJVdK0GMr6p2RjZbLcKi1tS9my9kNsj
+ +UsqYog2F//L7Y7+YaE3QuDuFWX/eQ0otILn52/NRz4AaboXYchaBjV4GmOcx9ooStKQlowVP9r
+ uZLRW7qnsNR8cAGSXNlNCgnkRQtYbBEQpFT9JvNrAnfV2SC8ijYPO34ySo02E7PYzSLMXEMl5Aq
+ 75tlK4+ESKfkOsEp2nF1/UTmbiiD3JT0VWr5cZ51rsMUkXms1ItGTLgC3ANzrR1u23Ws8m02sel
+ FqFo1ckAl8Cw0q309W5JW6dimOP5gArKQm4A2YJdeW8HwAo0Vl+HaFqXcUbzi7bP9
+X-Google-Smtp-Source: AGHT+IE2MMaNVsnet4/4n/KlC6g8dNKy+IUSRk0ZN43x2T6zzCkmUeDE9xTYf8V2inc6qMTxca+rl6u/OZEXZBXqdEI=
+X-Received: by 2002:a05:6402:1462:b0:640:b625:b920 with SMTP id
+ 4fb4d7f45d1cf-6455508090amr27313005a12.6.1764338828920; Fri, 28 Nov 2025
+ 06:07:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="n2jdRsru04vfpMAN"
-Content-Disposition: inline
-In-Reply-To: <DEJR900FXLVU.1GCOQ4964FVP4@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 28 Nov 2025 14:06:57 +0000
+X-Gm-Features: AWmQ_bnZLI826dbecTzizzNVhM8oCRBHXPWqRVA9t6hFehM3GNvKfihWk1ZPlgw
+Message-ID: <CALeDE9MjchwyyuRahALK9EU=ie1BuAhBgP2M=hXt4LAmYBo3Rw@mail.gmail.com>
+Subject: Pull request: rpi-2026.01
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, mbrugger@suse.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,71 +88,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---n2jdRsru04vfpMAN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Please pull the updates for the Raspberry Pi.
 
-On Thu, Nov 27, 2025 at 09:21:22PM +0100, Markus Schneider-Pargmann wrote:
-> Hi Tom,
->=20
-> On Wed Nov 26, 2025 at 9:29 PM CET, Tom Rini wrote:
-> > On Wed, Nov 26, 2025 at 09:25:56PM +0100, Markus Schneider-Pargmann (TI=
-=2Ecom) wrote:
-> >> Remove symbols already present in the included file.
-> >>=20
-> >> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
-> >> ---
-> >>  configs/am335x_hs_evm_spi_defconfig | 3 ---
-> >>  1 file changed, 3 deletions(-)
-> >>=20
-> >> diff --git a/configs/am335x_hs_evm_spi_defconfig b/configs/am335x_hs_e=
-vm_spi_defconfig
-> >> index df009844defad13109adf2523580181b6ed6b5ca..ad1777f2bcb45bd2c84240=
-11adc231f0e7d4ceee 100644
-> >> --- a/configs/am335x_hs_evm_spi_defconfig
-> >> +++ b/configs/am335x_hs_evm_spi_defconfig
-> >> @@ -1,8 +1,5 @@
-> >>  #include <configs/am335x_hs_evm_defconfig>
-> >> =20
-> >> -CONFIG_ARM=3Dy
-> >> -CONFIG_ARCH_OMAP2PLUS=3Dy
-> >> -
-> >>  CONFIG_SPL_SPI_FLASH_SUPPORT=3Dy
-> >>  CONFIG_SPL_SPI_SUPPORT=3Dy
-> >
-> > Did you confirm that buildman still works? That's usually the reason we
-> > have this kind of duplication, thanks.
->=20
-> Thanks for the hint. I wasn't aware of buildman, but it looks good.
->=20
-> I checked if buildman still works for it just now with this command:
->=20
->   tools/buildman/buildman am335x_hs_evm_spi
->=20
-> This worked. I am currently not sure if this is everything that can
-> break with buildman?
+Updates for RPi for 2026.01:
+- rpi: Fix DRAM size reporting to show total RAM
+- rpi: Use the U-Boot control FDT for fdt_addr
+- pinctrl: bcm283x: Add GPIO pull-up/down control for BCM2835 and BCM2711
+- rpi: Fix compilation with larger configs
 
-Well hunh. We have, historically, needed some slight amount of
-duplication in defconfigs that use #include in order to make sure it was
-still parsed right by buildman, but it seems that's no longer true.
-Thanks for checking.
+The following changes since commit
+c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---n2jdRsru04vfpMAN
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSmsXAAKCRAr4qD1Cr/k
-Cph9AQDeAOh46/OGQ4uCi7rgyvKFyh6VW4hiQFum2uy9Wv6gGwD8DpcP1arAk6sX
-0D4duYxJsxJjYEej9i6WVwNAJkF4hwk=
-=lsel
------END PGP SIGNATURE-----
-
---n2jdRsru04vfpMAN--
+https://source.denx.de/u-boot/custodians/u-boot-raspberrypi.git
+tags/rpi-2026.01-rc3
