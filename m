@@ -4,93 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C158D116EA
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 22:33:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA4FD116E2
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 22:33:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A325A83C19;
+	by phobos.denx.de (Postfix) with ESMTP id E853A83C94;
 	Fri, 28 Nov 2025 23:32:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="26IEasTi";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="0xBCGr4a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D55D83B63; Fri, 28 Nov 2025 21:22:50 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id A60F483B8B; Fri, 28 Nov 2025 21:47:37 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA5F683B8B
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 21:22:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5955B83B63
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 21:47:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-47790b080e4so10326055e9.3
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 12:22:47 -0800 (PST)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-42b3c965df5so1355097f8f.1
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 12:47:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764361367; x=1764966167;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764362855; x=1764967655;
  darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=0GLthAwtFIQORRqx9EDwptQkIZf1iTm4IHJL5aHlKLw=;
- b=26IEasTiJSUriIt9liV87X4GLADF3IYmun7L+VCNXlNhzPcIN7L037gabjwE7SG9vu
- P4hbPQBPeU3luro0gvFfw58jZThsSwBTqNL9fMWOw5puuI7y6OtY9XUqC5ylqqy3DWqI
- Trxwb224QWLImDC6tDPaWU3mc5ODSKwPS/N1pXAVJf8MDJIQ3CSEvdbtp4ofVbrVg2wh
- cNF6AfFNHd25x1Tn/e64HG4yJWATz2xo2TDpiGeHz+LZXFsInMd9qNtDy8/PG7iZvI47
- uWY8D62CATHza4aDVoDFXY66X/4jRjACwQnIBX0vRrdIGnTVdhq9hgn0JZ+xA/Lf+S95
- 1UzA==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9Uy3/kSuGr/+Qcz1ghwrkCdCerBpub7DYivsZI06Ngs=;
+ b=0xBCGr4apU0KOesmFYpHxcAxQZKZmkg85hX5CcivgR3nbiDlqP96+Che089iabD1o3
+ RlDAtF5niaVF6cGpqowLVWr1OVnWC5m/4dAx53jbYjzToOeTDICKAvN40O8mtpdj+Kbi
+ e8juojdyY9ZodRpfG3yaVnK736iBeKNS9VWjhHjGhQplxl350PwFabZg58KNEtsfEMfB
+ CIypHNgXdrIXHjO+OSRLABy+410YxLtL/K/saTdw62yJASQaDE8k1I+nCa6TCyq6ISil
+ msf35s41Hrd2P8lJnYnDspPsCD2l4RHeqYcHUY3teeWCq52DCRLKuoyQfDkSEcCfW+2h
+ Wi6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764361367; x=1764966167;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=0GLthAwtFIQORRqx9EDwptQkIZf1iTm4IHJL5aHlKLw=;
- b=wR0MVsnUmTVXyI7mhJk1IitV4JW+CAjPBMtoPSr53ig7afj/B+4PIePmpiSpMczhrP
- guWrkZ8eBMSXFS74prCC4A7ZR71oHq947HW4Ck7B0UnAxs/kzFx8X95YI5tmYEIQ0S/5
- Gm+z0iA55HsoE9629qHvwQz2WEZq/ve345uWGvrl7QsTPtbeKHLSoiErxInX4+cnbtq+
- ykH+fdjrxp9ZUHag6w/yyY0idCQPEzTuhQ5eDC7zaapz1W+VbBxdO7Zqy8io2jkXVzpt
- oD/SuTReb+KAH8kYpxQrK3QMfMKCV2gbFv9hpngsJevSS5SeISAAtnIpLYM2aoQySRAX
- fNyw==
-X-Gm-Message-State: AOJu0YyMOvR/J1gLRonsMIqENeflIyJSjCzPzRix6Y3txtmYH+tQlM7p
- OEFT1LucYX7P6RjrOZhWy9b/5DpaZiQwwB5hPLXYfhiKKve6tKEnwyjEdyBYpOdhBEM=
-X-Gm-Gg: ASbGncu9Jh2QkKzYN/iIPEmXH/YmcQJHb1o+lIP4CJXfjqrN1WVuuP6ZLUut2hBcKUe
- janAF+MV/iy9lK3XezffYtdtqE+9mSi3MXZoj+UTxWUqKHi1WECs0pNC6ACLf3n2FnIGve9DYvE
- rA150DbFdVDCkhH+0+mnoCz+LlR8U5Jy3Dd2RGanSqXK/Ui9AxioU/87vrol/bxaVY5eZNnJ7Zu
- vlhhohFGn2z5mIZDb5AkYiZX2VZysd9RhUyue2dSClc3BCBLdu+rzH4uEaIV+Ylb51aDX/UzXcl
- L/+pftOsa76ufrnNUWO63RziKg2M56nbEQnypV94YcbPr1xpvQA1L/9O2Wr0VGKoP9avwQXPpOS
- yShaEfjfaVOVh9pA6awWaygNJWOHxZUCN51JL9Yo/Z3n3ynEpjsqRuKJsxobw0HxfwNGk3n2D3o
- gpwhxuk0CeOZmSTXc/Yw==
-X-Google-Smtp-Source: AGHT+IF0ldU7vokEaSzwCmE7XjAl0PGnZzsADLOaOllsEr2SVrmgGwXdPfuL7YG4+NT60gYA4Sv0Mw==
-X-Received: by 2002:a05:600c:4685:b0:477:7768:8da4 with SMTP id
- 5b1f17b1804b1-477c10c84eamr284933415e9.7.1764361367114; 
- Fri, 28 Nov 2025 12:22:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1764362855; x=1764967655;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9Uy3/kSuGr/+Qcz1ghwrkCdCerBpub7DYivsZI06Ngs=;
+ b=q/saBPC5bF35B/UbIzMcrfYKTrefYXzZ1/OQ0cWNdzr2lqirRwdojNN1X432akFBKQ
+ bAn/8mKAC9Q5A5TuYEUeAx91k3LwdV/MvtVSqmusqRht13vboHNpOiZRiCIDXIjBiB+2
+ HyAzdbKOF6qsFJ/l3U9FURPR08CmOsuzup1HgeYdLiUylRQRvEnVu9DjV3HJPvXWj1rb
+ wr03ySzak8+JUHpYnOkfGSrgFStKjv9qsCHA/UQ91TS38RL/dxtHipQOaa7K4Dtzbomz
+ PswmWXs6VmvX9ATsVEmxjYWzQdv/A6aIWb8MaKNSYQAbi22QoyHRQDbw8wsrFMH15U6z
+ hOJg==
+X-Gm-Message-State: AOJu0YwzTk1B2jnw6V1mY9veaU49+qBgxjUVuXqusoj4gdssz3+Cg2HY
+ vslQr2c2zt8PUCwS3PuapPoIFeI+DYIZpK0kD4jeeD6nx/IpFNP1gdRMsC3nFY17c14=
+X-Gm-Gg: ASbGncux0xbqZx2UFdxnfEvGZYEUCgyzv9joQPQntktc9ZIApBc3QCqYrT4JjWzoFsY
+ TJwd4sQXVxaOASmyRkmuRzqinDOoCDVuwc36X+joP5P9yVf/LoeVOCZblzhCLY3/jyZOlRR1wHG
+ IO/FTEksN5yB8ZVUpA5RQpOYV3p0GCGkUfs79D31oW5pyqaROXRN7tAuSk8gTLB1ZQtgmM2lbrm
+ qsdQsxLBfmO6FCZSW30hNnBUvzfgACx9LJmgt8gfD455YPrChFQRUjhMQLCYjf9zrtiql+M4wQ2
+ x3BhPMlVTFSTCdKZYo7wqnWxBZAu7ZzDpFw/iHv3KnO1dfSugdcw8IW69Puxg7Wc90rMIoQCkY0
+ nhi/FKxw3HWV//rPfXORQ3H480L0MaBHwYrjKf7ixkYOGOFc37LV4nF24prw0AmnYP91PF+pPaX
+ 4Tm1sP7mA=
+X-Google-Smtp-Source: AGHT+IGTwp9nc5pZhDyyvoCfj2sjB8+ydVBg1PmsLPlsXVbW7jprjlRV2zIoifGB+Y0Hf5zMU4w1Cw==
+X-Received: by 2002:a05:6000:4313:b0:401:5ad1:682 with SMTP id
+ ffacd0b85a97d-42e0f213731mr17636663f8f.14.1764362854650; 
+ Fri, 28 Nov 2025 12:47:34 -0800 (PST)
 Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
  by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-42e1caae37esm11492112f8f.40.2025.11.28.12.22.46
+ ffacd0b85a97d-42e1ca1a6fesm12083415f8f.20.2025.11.28.12.47.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 12:22:46 -0800 (PST)
+ Fri, 28 Nov 2025 12:47:34 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Fri, 28 Nov 2025 21:22:19 +0100
-Subject: [PATCH v2 2/2] clk: ti: omap4-cm: Add Kconfig symbol
+Subject: [PATCH v2 0/7] arm: am335x: Switch to upstream devicetree
+Date: Fri, 28 Nov 2025 21:46:30 +0100
+Message-Id: <20251128-topic-am33-evm-oftree-v2026-01-v2-0-42a863304498@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251128-topic-am33-clk-regmap-dep-v2026-01-v2-2-451b4f4e7e85@baylibre.com>
-References: <20251128-topic-am33-clk-regmap-dep-v2026-01-v2-0-451b4f4e7e85@baylibre.com>
-In-Reply-To: <20251128-topic-am33-clk-regmap-dep-v2026-01-v2-0-451b4f4e7e85@baylibre.com>
-To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Yegor Yefremov <yegorslists@googlemail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
+X-B4-Tracking: v=1; b=H4sIACYKKmkC/42RS27CMBCGr4K87iA/IAlZ9R4VC3s8Bqsxdu0QF
+ SHuXhPUwqIqXY5H8/0Pn1mh7KmwfnFmmSZffDzUQb4sGO71YUfgbZ2Z5HIthOhgjMkj6KAU0BQ
+ gujETwVT3DXABpFsuiCvXoWMVkjI5/zkLvG3rvPdljPk0603i+vpv9CSAw0YgCYVNI0i+Gn0av
+ Mm0xBjY9nKTy/RxrDHGmyYzuhDUffBjv5hZy8rKqNhjxJp4diHXjy5weIdMu6ATWEp3J7LppFY
+ bQ2R1P8m/SeFYDKQcjT/s7gihVso514m2MX0t4lfEdyXFhzQQpADmWCCmsX6SHqq9iO/lgYlWd
+ cZ2VtnuKfOn5gHtHcH5yrUrLREdPkXEazEph/s5blqUHO2atL6eby+XL9eZmPhiAgAA
+X-Change-ID: 20251118-topic-am33-evm-oftree-v2026-01-ea701e03f8cf
+To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
+Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Romain Gantois <romain.gantois@bootlin.com>, 
+ Parvathi Pudi <parvathi@couthit.com>, 
+ Basharath Hussain Khaja <basharath@couthit.com>, 
+ Paul Barker <paul.barker@sancloud.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1818; i=msp@baylibre.com;
- h=from:subject:message-id; bh=BtHwVkyPmUxyqNMoZc8rl2GSyusaRG9XLDo27voVBI0=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwtlh4fti+2/fHhSy/NK/709696lvxfeZGYi5qfk+TDd
- neskxPuKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIm0OjD895tsy1aRGfzQp8jp
- +dbXJo9uabcpzddJs5CWW2qj5fVCkZHhimPWl9kXbztzivKuqjV8Ln1vSZyR3LWd0Uv3/e95t4G
- BEwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4368; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=4BL8nGibMZUo2D8xUhvzPpFSxTbm/HaSGHLAylBJhHw=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwtLu1La8y/CYfO+lFyxdk6+cfOup2Jk8L+i76vlPhdK
+ i784+LZjlIWBjEuBlkxRZbOxNC0//I7jyUvWrYZZg4rE8gQBi5OAZiIw1NGhpdeyY1hplri6340
+ yc89fmt68Kkkvo2hTKdWMBa+VLZnVmL4p2Jds0VlU3LglYdO1m3FgUwn/vO6zfOR5HBYW9/18nI
+ pNwA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Fri, 28 Nov 2025 23:32:55 +0100
@@ -110,54 +119,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a Kconfig symbol for this stub driver to avoid clock dependencies on
-an architecture symbol. Enable it by default.
+The series is split into two logical groups:
+
+- Patches 1-3: Fixes for am335x-evm to boot and support the LCD panel
+  with the current u-boot devicetree.
+- Patches 4-7: Make upstream devicetree working with uboot. This
+  adds tick-timer, adds compatibility of the board code for different
+  USB probing and updates the defconfig.
+
+The series has been tested on am335x-evm. Note that I don't have all
+other boards built with the am335x_evm_defconfig, so tests are
+appreciated.
+
+Dependencies:
+  - clk: ti: Cleanup common functions and omap-cm
+      https://lore.kernel.org/r/20251128-topic-am33-clk-regmap-dep-v2026-01-v1-0-d722c79506b2@baylibre.com
+  - dm: core: Support same compatible in host/gadget musb drivers
+      https://lore.kernel.org/r/20251126-topic-musb-probing-v2026-01-v1-0-ff8d8c487130@baylibre.com
+  - simple-pm-bus: Make clocks optional
+      https://lore.kernel.org/r/20251128-topic-simple-pm-bus-optional-clocks-v2026-01-v1-1-e38040c88b6d@baylibre.com
+  - video: simple_panel support for am335x evm panel
+      https://lore.kernel.org/r/20251128-topic-am33-evm-lcd-v2026-01-v1-0-ef75d4330d3d@baylibre.com
+  - power: domain: Add ti-omap-prm stub
+      https://lore.kernel.org/r/20251128-topic-omap-prm-v2026-01-v1-1-72c5cc4c7728@baylibre.com
+
+Best,
+Markus
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- drivers/clk/ti/Kconfig  | 7 +++++++
- drivers/clk/ti/Makefile | 3 +--
- 2 files changed, 8 insertions(+), 2 deletions(-)
+Changes in v2:
+- Most of the independent patches were extracted in smaller series
+- Added patch to add vidconsole for am335x-evm
+- Add chosen tick-timer to all devicetrees that are used with the
+  am335x_evm_defconfig
+- Link to v1: https://lore.kernel.org/r/20251118-topic-am33-evm-oftree-v2026-01-v1-0-91ce13c661e2@baylibre.com
 
-diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
-index 7b8da69712e4fa61c15f3fb0cbdc9f3fd8de31bb..9517363ebb38f5b2c207f25879858c77f4c7f3d5 100644
---- a/drivers/clk/ti/Kconfig
-+++ b/drivers/clk/ti/Kconfig
-@@ -10,6 +10,13 @@ config CLK_TI_OMAP2PLUS
- 	help
- 	  Common clock functions used in some TI clock drivers.
- 
-+config CLK_TI_OMAP4_CM
-+	bool "TI OMAP4 clock manager driver"
-+	depends on CLK && ARCH_OMAP2PLUS
-+	default y
-+	help
-+	  This enables the OMAP4 clock manager (CM) stub driver.
-+
- config CLK_TI_AM3_DPLL
- 	bool "TI AM33XX Digital Phase-Locked Loop (DPLL) clock drivers"
- 	depends on CLK && OF_CONTROL && ARCH_OMAP2PLUS
-diff --git a/drivers/clk/ti/Makefile b/drivers/clk/ti/Makefile
-index 329fae67889b11a9ef3c646b166243abcb956144..74e4329a3430d66c11a3c034f1938c0804f4c918 100644
---- a/drivers/clk/ti/Makefile
-+++ b/drivers/clk/ti/Makefile
-@@ -3,14 +3,13 @@
- # Copyright (C) 2020 Dario Binacchi <dariobin@libero.it>
- #
- 
--obj-$(CONFIG_ARCH_OMAP2PLUS) += omap4-cm.o
--
- obj-$(CONFIG_CLK_TI_AM3_DPLL) += clk-am3-dpll.o clk-am3-dpll-x2.o
- obj-$(CONFIG_CLK_TI_CTRL) += clk-ctrl.o
- obj-$(CONFIG_CLK_TI_DIVIDER) += clk-divider.o
- obj-$(CONFIG_CLK_TI_GATE) += clk-gate.o
- obj-$(CONFIG_CLK_TI_MUX) += clk-mux.o
- obj-$(CONFIG_CLK_TI_OMAP2PLUS) += clk.o
-+obj-$(CONFIG_CLK_TI_OMAP4_CM) += omap4-cm.o
- obj-$(CONFIG_CLK_TI_SCI) += clk-sci.o
- obj-$(CONFIG_$(PHASE_)CLK_K3_PLL) += clk-k3-pll.o
- obj-$(CONFIG_$(PHASE_)CLK_K3) += clk-k3.o
+---
+Markus Schneider-Pargmann (TI.com) (7):
+      arm: dts: am335x-evm: Add backlight to the panel
+      configs: am335x_evm_defconfig: Enable panel
+      include: configs: am335x_evm: Enable vidconsole
+      arm: dts: am335x-*-u-boot: Add chosen tick-timer
+      am33xx: Fix comment about config symbols
+      am33xx: Support upstream devicetree binding
+      configs: am335x_evm_defconfig: Switch to upstream devicetree
 
+ arch/arm/dts/am335x-bone-common-u-boot.dtsi           | 14 ++++++++++++++
+ arch/arm/dts/am335x-bone-u-boot.dtsi                  |  6 ++++++
+ arch/arm/dts/am335x-boneblack-u-boot.dtsi             |  6 ++++++
+ arch/arm/dts/am335x-bonegreen-u-boot.dtsi             |  6 ++++++
+ arch/arm/dts/am335x-evm-u-boot.dtsi                   |  6 ++++++
+ arch/arm/dts/am335x-evm.dts                           |  3 ++-
+ arch/arm/dts/am335x-evmsk-u-boot.dtsi                 |  6 ++++++
+ arch/arm/dts/am335x-icev2-u-boot.dtsi                 |  4 ++++
+ arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi          |  6 ++++++
+ .../dts/am335x-sancloud-bbe-extended-wifi-u-boot.dtsi |  6 ++++++
+ arch/arm/mach-omap2/am33xx/board.c                    | 16 ++++++++++------
+ configs/am335x_evm_defconfig                          | 19 +++++++++++++++++--
+ include/configs/am335x_evm.h                          |  2 ++
+ 13 files changed, 91 insertions(+), 9 deletions(-)
+---
+base-commit: f4cc2a9f36bdc1b9731aa285cc305d76c48ec79c
+change-id: 20251118-topic-am33-evm-oftree-v2026-01-ea701e03f8cf
+prerequisite-change-id: 20251125-topic-am33-clk-regmap-dep-v2026-01-2682a39beeda:v2
+prerequisite-patch-id: adc433677bb6413c278d00b9e1d6b04b12d4a825
+prerequisite-patch-id: 949cc619ccbb8cca5b29ab30ac37377e45ae607f
+prerequisite-change-id: 20251125-topic-musb-probing-v2026-01-1343fff8176b:v1
+prerequisite-patch-id: b8514a3b43228ff9ef6812dc5fe5eb53e2f141ae
+prerequisite-patch-id: abfdeaa1999e4cbf98229c4eeafa9dd8dac4509e
+prerequisite-patch-id: c6cc3f7eba8b785fbb8ea91cea349517c7c364fe
+prerequisite-patch-id: 37352dffe91e2aef085c2a08fcbc922723dae7c1
+prerequisite-change-id: 20251128-topic-simple-pm-bus-optional-clocks-v2026-01-1cd38bd8d3d8:v1
+prerequisite-patch-id: af032219347b46e51f58b7d26dac1f59de77fda9
+prerequisite-change-id: 20251128-topic-am33-evm-lcd-v2026-01-004f74a2ccfc:v1
+prerequisite-patch-id: e00071ea7e9f3cff3f91b320134fcf9164986449
+prerequisite-patch-id: 65efd192958e9b5f852dc4bafb30afe526624649
+prerequisite-change-id: 20251128-topic-omap-prm-v2026-01-c97c20cd5eaa:v1
+prerequisite-patch-id: 92857feb9e8685fe0e68a0e8e18dcdb57df56634
+
+Best regards,
 -- 
-2.51.0
+Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 
