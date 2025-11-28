@@ -4,98 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18DF0CFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 14:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F9BCCFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 14:34:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81012845E4;
-	Fri, 28 Nov 2025 15:13:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A4A1584565;
+	Fri, 28 Nov 2025 15:34:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="l/mSg6Ty";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LQFji8/x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4B6783B81; Fri, 28 Nov 2025 11:34:40 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 2A1698457A; Fri, 28 Nov 2025 15:34:17 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7C5183B43
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 11:34:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E11A84564
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 15:34:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-477b5e0323bso15650125e9.0
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 02:34:37 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5957e017378so2224694e87.3
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 06:34:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764326077; x=1764930877;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vVL7W+VJNYZCVENkgVRkKLKuEBNKdeJGqIsQ4VzhMA8=;
- b=l/mSg6Ty7lz2IThzcMQ7KhgAFeKSolEjNEktli7+K/TcU+1v+fuzw8tEEjqp1f+/Q5
- yAELEdCrGbCEDoSaTBseJe9r+O+SEqcSdqhEZrJfSmQKw+IrsEJx0Sutj/n/3Kz9cmIE
- EapcWkS1StI2GMd78tNqYCOrOACl0PKNbfZO07ulqarXRjX8recu2FniwOdJWlt0Vf2t
- QBXXT6emzYFLd1QiX0bsBauQfDTyqujmUGZ1PMxBy41YZyISUQsIV4XgnIiL0hG/Hfmm
- fLo74SwpHBjqAXK8tqQKrSSMKjUNuYmWlqElmDdZknWuwQH+7jMdZX8x68Z93gUNz6S+
- 4vtg==
+ d=gmail.com; s=20230601; t=1764340454; x=1764945254; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=U0bMkG9X8SZpZzoyqdXtQUomPXZ2hOrt7ssU+L92bgY=;
+ b=LQFji8/xwgqj0nChofG5bwRrMKwEKv21wNKKY+mHmm2qo9l4m6Q+n0gsLqS1c0Nfjw
+ mUrI7c6TANLE9u56EqChzVBxzHJxipiC0wwyXhwDkwBrs0r3BuGxqyJpi47Vx0970NUd
+ Z7KYBIm2CbOfLuCbIx5C/DRp310u4pbu/ybKCzFbnwzdvmuowSP46tDG1FQTr1r8PBOD
+ tQo6ijjhg0ZmERtkq3sFzLxKWhIM7HMxofWVzrCndza78ySDN96IY1DCV2Iix0TfIwxq
+ UXX430SAMQ/INSiJ4wUSIRV2EknnreTgFW0JXcR0uXnPTgb0+WR6JU7n2KFcmW9tWJsa
+ RlaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764326077; x=1764930877;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=vVL7W+VJNYZCVENkgVRkKLKuEBNKdeJGqIsQ4VzhMA8=;
- b=vcFe4QJgW6wLspwtqH1ajsxiw6++TTZvqK4JWojRhCixlL2+bxzSn8LtgNf1Z1DGZJ
- 50Ba9ay6XYcdnkD250i4K9MJaDo9MkHyDoGv7obnC5VSnVRxgJ9HuK9S6k+/YIsravBe
- qZNWZqwOzFpEL45bsvwPoPOS8BqNt24W0PLUrFWBCd8wyfG4E355I1yY3AN2USDYUD5+
- 4ZxNOxQVpSL7Um9tvrI+EQ1SHoSFU2K9gBq0/ySF62JcdY4/tKJyo4jdiEEKTua/qgzI
- DD7jA+Hunm7DTX/DrDqe6qmFZ0EI+f4x3UkKlG3sDL5Nq08NF0VcBOd+fWvOoDvhSF2K
- 2u8Q==
-X-Gm-Message-State: AOJu0Yy7iyj7UHWpDVOMYptSHMBskBdDlkF//uILuL+p7agxftd9LCTC
- 9EB3wQgBSHWn+Q7l6y3Sqxmv/asfVTe9/qrFidzlrhVGIpXyp23rQoFikVg0kAtZsWs=
-X-Gm-Gg: ASbGncsmJYov86Oz+REcNIKQFOeg2QYNoB9p8bLG4ulmw7MIR9u6iO/vN/UZE1j409y
- IX2Q4Ocj0tsrZWZCOIEauTpFurDV4FNSTuGxF14RjKqcwci7AKhrydzL/aVmcS0WRfj7HfC1ED3
- sfz0E+D4yiSXjgCXj5814XuHnuD/0h/VNvDYsSr4d1vWH88pbRTdgHtwmQXnGTTjvweE3hMDCyS
- 5mrw8kJVbxOQHuePWKGhtwxfjgwVOOdgYmshw2CbTEdtfgVpF37nsxceVpPucisxplhtuvvmQCp
- SqbbDCudL7BZkZ4A4X/+9GwERzfOiA9BmwzdP8nKm/CLJR1ZaF4lNh0bmTajUcph5AOfJe/0sp2
- Dr2QMaq8RSxBp6JdELtGclk4ptj5xjcWiudRfMBkuUnp/AgJM54Rb0lwC9v9TbFOQ2kykFhmB/s
- hLUgRlnuA=
-X-Google-Smtp-Source: AGHT+IGCK7wfGPKxXWfXh1yTLNfoRfWAIc+XC73jMyp/wj0BWcbMn8Yw360FI9D3LuEfnMOBdfOhfw==
-X-Received: by 2002:a05:600c:c8a:b0:471:5c0:94fc with SMTP id
- 5b1f17b1804b1-477c04cfb70mr295141305e9.6.1764326077183; 
- Fri, 28 Nov 2025 02:34:37 -0800 (PST)
-Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-479040d81e4sm93259385e9.3.2025.11.28.02.34.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 02:34:36 -0800 (PST)
-From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Fri, 28 Nov 2025 11:34:19 +0100
-Subject: [PATCH 2/2] video: ti: am335x: Support OF graph
+ d=1e100.net; s=20230601; t=1764340454; x=1764945254;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=U0bMkG9X8SZpZzoyqdXtQUomPXZ2hOrt7ssU+L92bgY=;
+ b=so4aWtvU2w1qyMRowtBuRZl+cdZ3Y123hstQ4sj9qzNHyWrtnJSDbzVHEYEozpMdXE
+ b98EdSijXuGmWHFxz6lI+j48hI2Gm/gRW/Zq5XR/2oQ4/gDJfKH/wi/EW6VBLODetDFN
+ 1VinLEdntMaTK6FiDqyquGlTGG0P5BCcY8h2RiDIucsv6CPsY+eaO2+wbaGiA7QzJ0Ih
+ w/Ofy+++nfTi9aTTJ5M/l2B8XlcvGzMpCM6sq8MS09A3StOx8JV7JyLvzMhIzp08Haif
+ tU8ysNl6/URcL5erfXEr4mr2JVbCxv+/dR+PtPmtuoX8hwhNOx0I/MBGQhv7WlfHfGTZ
+ 7log==
+X-Gm-Message-State: AOJu0YxwQY0CxXW6Wkby4awM6xWUBqYqTWWlkxezlk3sQ6AUKJSQOWIU
+ kbpj+pK/tqaY2VJYSRP8Aw64kBNHHjmylfvgrFDFmfb3dYz0Z6pSgR1+YTu0vU6GZXxnteiGauZ
+ FZwL+IXFVeMAzedlUK6b8EEgGkv/pgnU=
+X-Gm-Gg: ASbGncuIhLVhBtj/321GIkTfyrs1xfqA2H+nqsMsrHOG2fTgvyabQPyDvbOefEQJfqv
+ dc86GRQIQOHvDMOTH/ozNHmEEIJAH3VA+fRrR+BKbdHNzdZIs5ljwErC9ufR41XoKNe0rPrkIQ2
+ B3x+mhpkuF9IO3wu6no1EDbnUc81wVyrTW1nIRw+e/GtXxhYNoNvdQFfQgjXlrE+hqEMwOh230C
+ f/CaUtmKyAKpFXeWznoHr8lOsA2Lg3kTIwFi/K3KWdHKBGc1CuwtesMemWrdxKkk6SFoDMYlOVC
+ thYhvNBeX5Komken9vkPSLw+5g==
+X-Google-Smtp-Source: AGHT+IElOt33ZSpOMI4fpHXFAuGoYku6MEVInjHx81dvhVyLt3mN2bTUrWHEq96iJYBe1+LgPY965PpwTXvx2Nv2EYE=
+X-Received: by 2002:a05:6512:1383:b0:591:c346:1106 with SMTP id
+ 2adb3069b0e04-596a3eb5c4dmr10474128e87.9.1764340454014; Fri, 28 Nov 2025
+ 06:34:14 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251128-topic-am33-evm-lcd-v2026-01-v1-2-ef75d4330d3d@baylibre.com>
 References: <20251128-topic-am33-evm-lcd-v2026-01-v1-0-ef75d4330d3d@baylibre.com>
-In-Reply-To: <20251128-topic-am33-evm-lcd-v2026-01-v1-0-ef75d4330d3d@baylibre.com>
-To: u-boot@lists.denx.de
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ <20251128-topic-am33-evm-lcd-v2026-01-v1-1-ef75d4330d3d@baylibre.com>
+In-Reply-To: <20251128-topic-am33-evm-lcd-v2026-01-v1-1-ef75d4330d3d@baylibre.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 28 Nov 2025 11:34:02 -0300
+X-Gm-Features: AWmQ_bk9EwTPxZlhtLWx9oPrrDwLZC3QY9ntMYrkd-Iwx6s-lwS3v-fYfXZcYbM
+Message-ID: <CAOMZO5A=o-VM=rGzkt6YdDWX9Te-+__NGQyn8yH4P3=D=ZQSdA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] video: simple_panel: Add tfc_s9700rtwv43tr_01b
+To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
  Tom Rini <trini@konsulko.com>, Yannick Fertre <yannick.fertre@foss.st.com>, 
  Patrice Chotard <patrice.chotard@foss.st.com>, 
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
- Sukrut Bellary <sbellary@baylibre.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2969; i=msp@baylibre.com;
- h=from:subject:message-id; bh=BLqCJ5mUVvTnsP3XHcrulNh/wDuhDSCUp6GaeQHqvYA=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkzNqq2VSw9dLC4QP/so7qL46ZNy1zZPzTCV97Pq5z90z
- jJBm026o5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTAC7yhZGh8cibgJktJTx1U7OO
- by7eqs2/fV3Dsi+hsT8vrNSO/V78nuG/78X1jqsitpvM1Y3imOuhEMa1eFOy4bZdjRuic7h96zS
- YAQ==
-X-Developer-Key: i=msp@baylibre.com; a=openpgp;
- fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
-X-Mailman-Approved-At: Fri, 28 Nov 2025 15:13:26 +0100
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Sukrut Bellary <sbellary@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,100 +98,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for OF graph parsing. When using OF graph the default
-tilcdc_panel_info is used which is the same as defined in Linux.
+On Fri, Nov 28, 2025 at 11:24=E2=80=AFAM Markus Schneider-Pargmann (TI.com)
+<msp@baylibre.com> wrote:
 
-Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
----
- drivers/video/ti/tilcdc.c | 46 ++++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 38 insertions(+), 8 deletions(-)
+> +static const struct display_timing tfc_s9700rtwv43tr_01b_timing =3D {
+> +       .pixelclock =3D { 30000000, 30000000, 30000000 },
 
-diff --git a/drivers/video/ti/tilcdc.c b/drivers/video/ti/tilcdc.c
-index 340c79299bacabc5a95dbeafbed3cb729afe7576..b498e81864b87464c00c1b23cb1d35394b06d9e8 100644
---- a/drivers/video/ti/tilcdc.c
-+++ b/drivers/video/ti/tilcdc.c
-@@ -6,6 +6,7 @@
- #include <clk.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-+#include <dm/ofnode_graph.h>
- #include <log.h>
- #include <panel.h>
- #include <video.h>
-@@ -113,6 +114,18 @@ struct tilcdc_priv {
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+static const struct tilcdc_panel_info tilcdc_panel_info_default = {
-+		.ac_bias                = 255,
-+		.ac_bias_intrpt         = 0,
-+		.dma_burst_sz           = 16,
-+		.bpp                    = 16,
-+		.fdd                    = 0x80,
-+		.tft_alt_mode           = 0,
-+		.sync_edge              = 0,
-+		.sync_ctrl              = 1,
-+		.raster_order           = 0,
-+};
-+
- static ulong tilcdc_set_pixel_clk_rate(struct udevice *dev, ulong rate)
- {
- 	struct tilcdc_priv *priv = dev_get_priv(dev);
-@@ -173,6 +186,8 @@ static int tilcdc_probe(struct udevice *dev)
- 	struct udevice *panel, *clk_dev;
- 	struct tilcdc_panel_info info;
- 	struct display_timing timing;
-+	bool is_legacy_panel = false;
-+	ofnode remote;
- 	ulong rate;
- 	u32 reg;
- 	int err;
-@@ -181,10 +196,21 @@ static int tilcdc_probe(struct udevice *dev)
- 	if (!(gd->flags & GD_FLG_RELOC))
- 		return 0;
- 
--	err = uclass_get_device(UCLASS_PANEL, 0, &panel);
--	if (err) {
--		dev_err(dev, "failed to get panel\n");
--		return err;
-+	/* Try using remote node first, then fall back to using UCLASS_PANEL */
-+	remote = ofnode_graph_get_remote_node(dev_ofnode(dev), -1, -1);
-+	if (ofnode_valid(remote)) {
-+		err = uclass_get_device_by_ofnode(UCLASS_PANEL, remote, &panel);
-+		if (err) {
-+			dev_err(dev, "failed to get panel via OF graph\n");
-+			return err;
-+		}
-+	} else {
-+		err = uclass_get_device(UCLASS_PANEL, 0, &panel);
-+		if (err) {
-+			dev_err(dev, "failed to get panel\n");
-+			return err;
-+		}
-+		is_legacy_panel = true;
- 	}
- 
- 	err = panel_get_display_timing(panel, &timing);
-@@ -205,10 +231,14 @@ static int tilcdc_probe(struct udevice *dev)
- 	if (timing.vactive.typ > LCDC_MAX_HEIGHT)
- 		timing.vactive.typ = LCDC_MAX_HEIGHT;
- 
--	err = tilcdc_panel_get_display_info(panel, &info);
--	if (err) {
--		dev_err(dev, "failed to get panel info\n");
--		return err;
-+	if (is_legacy_panel) {
-+		err = tilcdc_panel_get_display_info(panel, &info);
-+		if (err) {
-+			dev_err(dev, "failed to get panel info\n");
-+			return err;
-+		}
-+	} else {
-+		info = tilcdc_panel_info_default;
- 	}
- 
- 	switch (info.bpp) {
+Adding the three entries makes sense when the datasheet specifies min,
+typical, and max values.
 
--- 
-2.51.0
+Repeating all three values is not helpful.
 
+Linux supports tfc_s9700rtwv43tr_01b:
+
+static const struct drm_display_mode tfc_s9700rtwv43tr_01b_mode =3D {
+.clock =3D 30000,
+.hdisplay =3D 800,
+.hsync_start =3D 800 + 39,
+.hsync_end =3D 800 + 39 + 47,
+.htotal =3D 800 + 39 + 47 + 39,
+.vdisplay =3D 480,
+.vsync_start =3D 480 + 13,
+.vsync_end =3D 480 + 13 + 2,
+.vtotal =3D 480 + 13 + 2 + 29,
+};
+
+Can this format be supported in U-Boot?
