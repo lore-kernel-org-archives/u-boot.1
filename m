@@ -4,85 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEFA5CFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 10:47:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D6B7D116E2
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 10:48:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6AB2844D3;
-	Fri, 28 Nov 2025 11:47:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BC60E844DF;
+	Fri, 28 Nov 2025 11:48:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aX4pUv6F";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="GYFDNxJZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDF44844D8; Fri, 28 Nov 2025 11:47:06 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 18772844E3; Fri, 28 Nov 2025 11:48:53 +0100 (CET)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65DE2844C4
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 11:47:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EDCC844C4
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 11:48:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7c704bdd57aso839594a34.3
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 02:47:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764326823; x=1764931623; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AFm8s0qUcVdX38c/HAHfWP972hqmnd++r2fLD70tJnM=;
- b=aX4pUv6FHkRWKdkjXePVHR3HmSQLQNkETSXdOH7hnj7i9xu+PcPfI7mLSMr5j2VMWz
- XoPDo6PvFtjCv0dmKaaiaxYl4miVivtOYw5uzfxGGE9XaRwFdaB0vunFSl45OdWEVI6W
- VdGbZN76RvC+0oM290/+7DEmjdqgwisBlRPWxbksiSqDqvMvT+/JWWzRPN3yA4b9fcSg
- i0wVo+KEqve/B0Q9Qp6ct3MrmmSxXyydbNF5XZkw7XpCMzcT5jOjtcgdZQdW8xEPz09e
- ixjdZeQfkThEvwB7q+2k5Karn2984Rpw5S/AGT83oYjIxH/zFAeC/1q2ArY9z+4luWBx
- HDEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764326823; x=1764931623;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AFm8s0qUcVdX38c/HAHfWP972hqmnd++r2fLD70tJnM=;
- b=mpYnkK301AS5+oYyd/6dRDHdkVxp6/vItFZUQo4uAKMWsHdlh3mNVixLyQ6doIJk4d
- ya/oVazfH4u6VR1bLThMIF6spFyXIkLaV2uY3XLdQ5JasWZGleirY7eC+3gC4fyHsXNN
- CaX1UEf1rdUTxDVm1q53aYKAgRKxPi0yF64LEAr+umYqZxGLptkibFRavLGQlkduHMOT
- /f51/6FiVxAS5N8NYxTtcEVw6bd/99SwAIgYnd6zaW13zp8v43LMFnRlug5edxEm/uqH
- 41QrE0o2uZjPTgyKyMG2+QFbtgEhjfOXiohS4AkV/aXwDo9+pcvJXvG94p0Bqc9xZXNa
- lp8g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQXo3ru7a6IVVGhO31KcAxo+Y2lDWubyZiDlD09TyfZ0xLG9RipnEaLR+iz4VndVc3mH+Y1FY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzQhYOem/POgpu6K64Z3oBHY7SBQ3yxdfZoHaD7KTgdm777G1fo
- RArlHJ5aeLwpN+Gekg6I7sC2h1zzctQAMdeIk1GD3F7wnAAv25snNTOx5tM9EyQcOm8ou1yqGR7
- l6HJ4XA2Nm4eMGLfiQe+sL1W1QwZZm/c=
-X-Gm-Gg: ASbGncsqkqXAijz4g6LjDHDok3xTjer3W7wn0p6WckcAiHa27HbFlIJwvoRupsM2VSQ
- 8Ih1mND7b/JcWVRZaDsGnw6bI3tl7AnYjz42QAUPKSTOJgZTPeXa3UOwFVmFfIhTIDkHkfRAU7J
- YiO0464cSHA0lKFRN8IuNryBBSuXa/cYc1oKm1A5+ASIiBxyVZ/yaD+0oMHOuDeW97RPE9SjS5Y
- ArdaF9N+JNZSqtMHO0dnZkS2b6q1Xrwq0WYtN9W29eaJAqu0KwtHxHEUknq+atvuc0Jvkw=
-X-Google-Smtp-Source: AGHT+IEddheL88aIKnq70qoLoKzHFltMvqBgZH+OJ2yZjjUWDbgbwkvd/HD7ulslzzTCMG3VYZL/BQ+jCDvUw7IwYMg=
-X-Received: by 2002:a05:6830:3786:b0:7bb:7a28:51ba with SMTP id
- 46e09a7af769-7c7c44c81d7mr7556456a34.26.1764326822876; Fri, 28 Nov 2025
- 02:47:02 -0800 (PST)
+ spf=pass smtp.mailfrom=jeremie.dautheribes@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 1E8CB1A1DF7;
+ Fri, 28 Nov 2025 10:48:49 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id E912F60706;
+ Fri, 28 Nov 2025 10:48:48 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 6DFCF103C8F95; Fri, 28 Nov 2025 11:48:47 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1764326928; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=GUzcGO2NQQ1B6VksLoLaT81r2zZMA5wErlNcKDpajII=;
+ b=GYFDNxJZtEQBCwj5igI+iIIJH5aim57Op0jJR4F85SSgkGc6uzqk4sPIjIsh9i/5gzn7cb
+ 7k5lQWTN02rSkfj1SyWdmK2LApe3kP5YxV+MDXf7vv+klnXfxDG/TybkEbWx7w2ni7GfeO
+ Ci1Jl8c0/LY9/c18r0nWJJ/QzxysOVoPp87rFZfOMlcMuEPhveQothiZHG5m7FDwR5xrKr
+ 14KlWixo4CPPueP+4vqB/yD+oNLK+aQ3mx6R06BwTVjJj9HlDef1vWd5WOw8WLwtREDPao
+ M7ASs1wJAA4jKJGNbhbGBm/kwmOrGro+NPye3rc1/CplQPcMrUxHNUuKeXJ9wA==
+Message-ID: <c2099136-0cfe-4345-a9ca-7c4f5e870dd0@bootlin.com>
+Date: Fri, 28 Nov 2025 11:48:46 +0100
 MIME-Version: 1.0
-References: <20251125212953.1733-1-briansune@gmail.com>
- <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
- <d024aad3-6ad5-471e-8290-e802bdbf7ead@cherry.de>
- <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
- <CAN7C2SBPC=u7QJD7T=3NUUOjPqXo1UWqHb_QRzsOR_wtvZrk7Q@mail.gmail.com>
- <85af1053-f8c6-4983-adba-7a1e845651e4@altera.com>
-In-Reply-To: <85af1053-f8c6-4983-adba-7a1e845651e4@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Fri, 28 Nov 2025 18:46:51 +0800
-X-Gm-Features: AWmQ_bkFQqn4bvYk8-cXDGImKUVzDqDjZQJ7LVkSKYhqMVJO7mqozT8VjJlOcWY
-Message-ID: <CAN7C2SBaoHRj6sY-MgVu+-0q0vDcq6g==OcWts4W3uLKEwyweQ@mail.gmail.com>
-Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, 
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: blob_dtb: improve error message when SPL is not
+ found
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ =?UTF-8?Q?Miqu=C3=A8l_Raynal?= <miquel.raynal@bootlin.com>
+References: <20250820150654.1398992-1-jeremie.dautheribes@bootlin.com>
+ <20250909170357.GA1799865@bill-the-cat>
+ <89715907-3d24-483d-943f-a027097962aa@bootlin.com>
+ <20251127184059.GX2125796@bill-the-cat>
+Content-Language: en-US
+From: =?UTF-8?B?SsOpcsOpbWllIERhdXRoZXJpYmVz?=
+ <jeremie.dautheribes@bootlin.com>
+Organization: Bootlin
+In-Reply-To: <20251127184059.GX2125796@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,13 +81,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Altera official U-Boot (SoCFPGA):
-> https://github.com/altera-fpga/u-boot-socfpga - branch socfpga_v2025.07
->
 
-Confirm downstream on default cyclone v socdk always works stable.
-No settings are touch nor any file are modified.
 
-What other confirmations are required?
+On 27/11/2025 19:40, Tom Rini wrote:
+> On Thu, Nov 27, 2025 at 07:04:06PM +0100, Jérémie Dautheribes wrote:
+>> Hi Tom,
+>>
+>> On 09/09/2025 19:03, Tom Rini wrote:
+>>> On Wed, Aug 20, 2025 at 05:06:54PM +0200, Jérémie Dautheribes wrote:
+>>>
+>>>> When using binman with the '-a spl-dtb=y' flag, if the SPL blob is not
+>>>> found, binman throws a cryptic error message:
+>>>> binman: 'NoneType' object has no attribute 'startswith'
+>>>>
+>>>> Let's improve the error message to explicitly state which SPL blob is
+>>>> missing.
+>>>> This is particularly useful when binman is used as a standalone tool
+>>>> outside the U-Boot source tree.
+>>>>
+>>>> Signed-off-by: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
+>>>> ---
+>>>>    tools/binman/etype/blob_dtb.py | 5 +++++
+>>>>    1 file changed, 5 insertions(+)
+>>>>
+>>>> diff --git a/tools/binman/etype/blob_dtb.py b/tools/binman/etype/blob_dtb.py
+>>>> index b234323d7cf..772579394d4 100644
+>>>> --- a/tools/binman/etype/blob_dtb.py
+>>>> +++ b/tools/binman/etype/blob_dtb.py
+>>>> @@ -8,6 +8,8 @@
+>>>>    from binman.entry import Entry
+>>>>    from binman.etype.blob import Entry_blob
+>>>>    from dtoc import fdt_util
+>>>> +import errno
+>>>> +import os
+>>>>    import struct
+>>>>    # This is imported if needed
+>>>> @@ -42,6 +44,9 @@ class Entry_blob_dtb(Entry_blob):
+>>>>            """Get the device-tree from the list held by the 'state' module"""
+>>>>            self._filename = self.GetDefaultFilename()
+>>>>            self._pathname, _ = self.FdtContents(self.GetFdtEtype())
+>>>> +        if self._pathname is None:
+>>>> +            raise FileNotFoundError(errno.ENOENT,
+>>>> +                                    os.strerror(errno.ENOENT), self._filename)
+>>>>            return super().ReadBlobContents()
+>>>>        def ProcessContents(self):
+>>>
+>>> Sorry for the delay in review. We also need to update the function
+>>> comment so that python coverage remains at 100%.
+>>
+>> Sorry but I'm really not familiar with python coverage. I had a look to the
+>> official documentation and it looks like I need to add a test to cover this
+>> specific function. That is what you are requesting?
+> 
+> So, doc/develop/binman_tests.rst talks a bit about testing of binman and
+> python coverage. In this case I believe the issue is that the function
+> you're modifying needs to have the comment block annotations updated to
+> include the exception it can throw.
+> 
 
-Brian
+Ok I got it, I'll send a V2 including this comment annotation, thanks 
+for your help!
+
+Jérémie
+
