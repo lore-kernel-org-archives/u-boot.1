@@ -4,82 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE7FED116F3
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 11:31:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 760ADCFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 11:35:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DD348452C;
-	Fri, 28 Nov 2025 12:31:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7ED9F84531;
+	Fri, 28 Nov 2025 12:35:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=socionext.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H39s6bxL";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 440938452D; Fri, 28 Nov 2025 12:31:13 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EC3584513
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 12:31:11 +0100 (CET)
+ id 6DA3C84534; Fri, 28 Nov 2025 12:34:56 +0100 (CET)
+Received: from mx.socionext.com (mx.socionext.com [202.248.49.38])
+ by phobos.denx.de (Postfix) with ESMTP id 00B3284513
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 12:34:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=socionext.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7c6d1ebb0c4so1100151a34.1
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 03:31:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764329470; x=1764934270; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uWb0NSLfIvJ3HgI1ZbQuacwSeVn2HhI5/7PPcUEIX1Y=;
- b=H39s6bxLUI17t3vlcDtegZfGaBpk+cWZemA7ba1frUM+H8GbiP/NOo5ZrylOEP4e4r
- jM2UsYnlEJjabk3SgsZoRaltiPoTZImdugKRIAEjkom4e5WusS7HTsE1JfkS7swTwCwL
- 6YyBFlfWaxWn5tn7FKF8wTGWZae239eo3I8JDSry6Sfb3gzMOiuf60nLpP4vPnd7hK5i
- 40h1jebrYWZ/2DFvbl8SrBsrYbbZpf4zCOsSEba1kI0VMpDQYlb+viZwsoymDtIYnJBr
- u7kB+Sj9tlYy7apRwOwHUcO0EfWsB6bstWoI2mrsA/9eHxqgK78ylDj4ITdCmd05yfYX
- NiZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764329470; x=1764934270;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uWb0NSLfIvJ3HgI1ZbQuacwSeVn2HhI5/7PPcUEIX1Y=;
- b=BIMiN9PXJEVZlxbkjDnkK2BYVaFPup+lUCK5cXA3NwFf2c1x395ap9Vsb+V4PHl4bo
- k9oCumaLZfX7dLGbX6nt+5Mib8a+FKkR3Vrq6w/yWCGJZsiwRRoMzlHlBIq+cKBweyYE
- RBoUc7KaaBS+MhRKGon1Fv8J1tvQqWnyNfKw2ZgXpeRecMxJnaeBz+H64xBc7yYjMw34
- 0+45QJ2Jc5NIbYRRkYzDIRHlioqGapakteTnso+5I9qKH06TqYzMvqtlYw6vlpOawuaS
- 6q8015vtoA5PzAfF6dnWAxJawr/1+37JDV34lbbrgKKFE9YZlyO0jgw/5FWUMRhPbiMt
- dFSw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVRxnN+ab8G0g1rs8oC2i2u43gKh+4A4aeG8ribL4xDWWD6sbCVJTYxGRDSaTqj/Is+FPXcEcU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw6h7d98SKIwKRT9H7Aa0r9qbqSgjkOzuXk1wl/r+8ys/04bcO5
- GZyc4OtcHvin9KV+Ir3xUH/W1vp+ypdR++uO0QLfVE5qIbRNNOibJowxsOVSKkaoHnSkirrOoPF
- qNfyq3bc67g9lPVS4mRe5pUwWtZzAaJ0=
-X-Gm-Gg: ASbGncvIFT+Y5f5tJgBFNlr+NI3MhoBK238u5weP/K3QU7CbAjURDla4HXHVLitZLaL
- 85q4rTxmNPMSRGymTqr6l3FMTWib5xH1c/bWJHyNJyBS6F7lsfW4km0Njja0EnxOq4Gnn4zHETH
- /kHM4SF+WfJv+J9uUogEMsHF3i/cEorU+Mw4kZz/pMYPjuJpPttMFCBsRPCntvZljMcp9xzYbws
- LfvSzXoVpKn4QYhfZ+N0A0M37h2m5CqPX9LBDGd+Heg+abzlay525m0X922ewvw4e0xSGs=
-X-Google-Smtp-Source: AGHT+IGW996Ws5SXA+aA/jkPn1HDv1G5cJWMtwQhYNgkS+nEFbLMqtbVk1VyIIZuWWJe3Q1XCg1eD2NW536AE1qaF4g=
-X-Received: by 2002:a05:6830:6f1f:b0:7c5:307e:3d8d with SMTP id
- 46e09a7af769-7c798cf3f9dmr10481210a34.30.1764329469650; Fri, 28 Nov 2025
- 03:31:09 -0800 (PST)
+ spf=pass smtp.mailfrom=hayashi.kunihiko@socionext.com
+Received: from unknown (HELO kinkan3-ex.css.socionext.com) ([172.31.9.52])
+ by mx.socionext.com with ESMTP; 28 Nov 2025 20:34:49 +0900
+Received: from mail.mfilter.local (mail-arc01.css.socionext.com [10.213.46.36])
+ by kinkan3-ex.css.socionext.com (Postfix) with ESMTP id 75C412069FC4;
+ Fri, 28 Nov 2025 20:34:49 +0900 (JST)
+Received: from iyokan3.css.socionext.com ([172.31.9.53]) by m-FILTER with
+ ESMTP; Fri, 28 Nov 2025 20:34:49 +0900
+Received: from [10.212.247.49] (unknown [10.212.247.49])
+ by iyokan3.css.socionext.com (Postfix) with ESMTP id 48B4A10A013;
+ Fri, 28 Nov 2025 20:34:48 +0900 (JST)
+Message-ID: <b7e755f4-2925-4400-9efd-7cb8ca781847@socionext.com>
+Date: Fri, 28 Nov 2025 20:34:48 +0900
 MIME-Version: 1.0
-References: <20251127192136.168-1-briansune@gmail.com>
- <1d42f643-41a0-4a16-8269-5bad7bf8953e@siemens.com>
- <CAN7C2SBQOCtCPyJA5+HXd4CU14eNKxkj+GQPCpf+GRsXoAPN+g@mail.gmail.com>
- <66810c5a-f589-42cb-ab11-b692217dd235@siemens.com>
-In-Reply-To: <66810c5a-f589-42cb-ab11-b692217dd235@siemens.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Fri, 28 Nov 2025 19:30:58 +0800
-X-Gm-Features: AWmQ_bn5oQeovYdoAHriNVkc7FFmYUzlyr9wDhpNfMu7FuSY2Zu9tvj0A3McvCQ
-Message-ID: <CAN7C2SA7pHy=VKPZGjp280p0pbp5cDeFpW3OboEex=HqtBWKPg@mail.gmail.com>
-Subject: Re: [PATCH v1] Fix socfpga GEN5 boot by spl+u-boot sfp on RAW
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: Chee Tien Fong <tienfong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] bootm: fix boot failure from compressed image for
+ IH_OS_EFI
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ kojima.masahisa@socionext.com, morimoto.masashi@socionext.com
+References: <20251120233851.2726487-1-kojima.masahisa@socionext.com>
+ <b60d74a5-8085-4c6a-ad90-bf59dc41e37f@gmx.de>
+Content-Language: en-US
+From: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+In-Reply-To: <b60d74a5-8085-4c6a-ad90-bf59dc41e37f@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,32 +63,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> I read it, and I also disagree - one fix per topic, and there are
-> multiple topics, affecting particularly
-> SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE for any board that may want
-> to use it.
->
-> I'm happy to take comments bits by bits, and I'm also happy to drop or
-> modify patches if there are better solutions. I'm also fine if a subset
-> of your current patch will go on top of a subset of my series in the end.
+Hi Heinrich,
 
-This is ONE fi, fixing the RAW boot. splitting file just for reading
-purposes and nothing to do with this patch.
+On 2025/11/21 17:41, Heinrich Schuchardt wrote:
+> On 11/21/25 00:38, Masahisa Kojima wrote:
+>> The bootm command can handle the compressed image, but current
+>> code fails to boot from it.
+>>
+>>       ## Loading kernel (any) from FIT Image at a8000000 ...
+>>       <snip>
+>>            Compression:  gzip compressed
+>>            Data Start:   0xa80000d4
+>>            Data Size:    10114520 Bytes = 9.6 MiB
+>>            Architecture: AArch64
+>>            OS:           EFI Firmware
+>>            Load Address: 0x90000000
+>>
+>>       <snip>
+>>          Uncompressing Kernel Image to 90000000
+>>       ## Transferring control to EFI (at address a80000d4) ...
+>>       Booting <NULL>
+>>       Not a PE-COFF file
+>>       Loading image failed
+>>
+>> To take care of the compressed image, the load address needs
+>> to be passed instead of the original compressed image address.
+>>
+>> Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+> 
+> Hello Masahisa,
+> 
+> Thank you for diving into this problem.
+> 
+> In test/py/tests/test_efi_fit.py we are testing on the sandbox with and
+> without compression. Why would the problem not show up in the test?
+> 
+> 539         # Run tests
+> 540         # - fdt OFF, initrd OFF, gzip OFF
+> 541         launch_efi(False, False, False)
+> 542         # - fdt ON, initrd OFF, gzip OFF
+> 543         launch_efi(True, False, False)
+> 544         # - fdt OFF, initrd ON, gzip OFF
+> 545         launch_efi(False, True, False)
+> 546
+> 547         if is_sandbox:
+> 548             # - fdt OFF, initrd OFF, gzip ON
+> 549             launch_efi(False, False, True)
+> 550             # - fdt ON, initrd OFF, gzip ON
+> 551             launch_efi(True, False, True)
+> 552             # - fdt OFF, initrd ON, gzip ON
+> 553             launch_efi(False, True, True)
+> 
+> The test should be corrected to show you issue.
 
-Depending on files are must and required to work properly on this topic.
-Splitting to different patches for other topics does not fit this patch topic.
+Can you show us how to run it with sandbox?
 
-So you will simply delay the entire patch flow. For example include files that
-need to be fixed due to other functions using it. One topic
+To understand the situation, I tried running the test using v2025.10.
 
-Then for include need to run properly Kconfig change need to change a line.
-But then due to the RAW function then it requires another fix on the same file.
-You can split each line individually by a topic.
+     ./test/py/test.py --bd sandbox   --build  -k efi_fit
+     ./test/py/test.py --bd sandbox64 --build  -k efi_fit
 
-If any one has issues due to unreasonable splits then do it as you like.
-I can always git apply after pull and remain this patch offline.
+The test was skipped as follows:
+     test/py/tests/test_efi_fit.py::test_efi_fit_launch SKIPPED (.config feature "generate_acpi_table" enabled)
 
-This is why reading your patches are confused somehow on some topic.
+After disabling ACPI, the test failed with the following error
+and could not be reproduced.
 
-Thanks,
-Brian
+     => /u-boot
+     Bloblist at 100 not found (err=-2)
+
+There might be differences in the environment or procedure,
+so please let us know if you have any tips.
+
+Thank you,
+
+---
+Best Regards
+Kunihiko Hayashi
