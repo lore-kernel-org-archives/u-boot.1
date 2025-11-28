@@ -4,101 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCA28D116EA
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 22:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9658AD116E2
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 22:38:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC3D483DDF;
-	Fri, 28 Nov 2025 23:32:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 1850983B8B;
+	Fri, 28 Nov 2025 23:38:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xwBqrpeU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jNEKCvMe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5848983B8B; Fri, 28 Nov 2025 21:47:45 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 8DF5083BAD; Fri, 28 Nov 2025 23:38:22 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CDBC83B85
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 21:47:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 663D583B63
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 23:38:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-47118259fd8so19886695e9.3
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 12:47:43 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-453316a8418so70606b6e.3
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 14:38:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764362863; x=1764967663;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=KuQiTUgIcIfw5ITo04ojlvfPm6g44aZdgCapT5gQBEY=;
- b=xwBqrpeUfdK/5OBQ9QPRjEd8PMIAHc2yBPEEQVtlzKc2qaEMyCnjz/FTo5WeDZxfvK
- 6Yk8bF6gC5gHN273uB6zTjn7E8bZf0G1G6Xo+NmRPpr5jg8xAiwaTQ/9EBHTdlB5H4jG
- 15crU2hqV8NJAgOGcX5XcJUC6Ze7se8r80CYScUJMDFIEfnHxA061uWbkp62Rh8VLdBq
- pHPiB43q4y1AN+dOXoYD/s827i181YMI3PAcUc9pRZUhm5X3QkwmFDX7iI67mDDCVl5a
- uOjALJMnVFOOIzE52Sk1o1ufblxo1Yzx9KmUwCadStyCTYbANclmHDCc476MeKb7Tui+
- Vb6A==
+ d=konsulko.com; s=google; t=1764369499; x=1764974299; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=18tQK8y+QW2wjUZAw0LFB9UZ2qR3OSaDBe9CoRUimlY=;
+ b=jNEKCvMeMvT1V3QZcC5uzBTYKbIyMI8Y8/kt32SoKzcMWSTE6Mr0iZATPB83gRw0Xd
+ ABz++V5TXCCyqMHUXRvuzZvfDpDB4OC/BxNZDKNBAl3vNf4Ex744IdFGoDEsUUGkwDTH
+ TT1couzt2GZtaa7cUXLCuw5HjFWKNiCtXNvAY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764362863; x=1764967663;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=KuQiTUgIcIfw5ITo04ojlvfPm6g44aZdgCapT5gQBEY=;
- b=wgMLaKjjYrcFJdaZtdqxvldMUYvhj/3urLSzBkKXOFPwMxpQndvlUGK2CimuRp8bP1
- FpnNO6VCpwlVfmv1cVgWrT7c5j840kW7VVWKnELlDYV17B7AJ1uIzG8J1e12VuHnogNN
- dVT1yhgI1nC1pdL08Y4BPMOacxa/NJY59KpPg07CodQA/3UpeKLRgDz4bkYgtzr2lonB
- o/6Gt0Hwass16DHgol9vsn57V5JWZN/RCj64TW7pT9M2RNCeDiUiFH8vTyrM1X665wOz
- rX3ryTO/anGAcTNFkqKeGJ/WWIE5k1aPtBhFNyliiQbphOMpEwrHeHdpH1IE9IjQMSDJ
- 6uag==
-X-Gm-Message-State: AOJu0YyyjTKYd0CCQhljFPudO12Dgo/rPD8VYPTuOQexMqpqOhdTbB43
- Jag4u+n5VseBlUQtk3+iz+U9LF3C1N44o+NyFZOCRA5WvyRNk2MFl/DUoUD1qMxRAzQ=
-X-Gm-Gg: ASbGncuEW4fvF2NoiTYknFlF/sF7hZ2jkev3qqsDg8CeZSQYJcQc7f/t2n0hE6FtWrc
- cLEwrWLlSHkEEMFCXTavOO28k7Oc8EgkLCoPNCoV2+S7Qy/QOiT7O0lynld2AkfPJLgLV+V1NG0
- xoQfeKMSQMCXGgA5jVf68RcaDpPTRsw4zS9v7kAnPoIpTF08Lx3nFwZ5BGhHNpZgkgo4gH/hGnR
- CQbqokc9IboYFG7D5JLVFW8kz5QkHz7bI0Bao7mzMM1OiUuNzbNmcFnfoon8iEdKmlxxaVqnx6I
- uGQ3kWuOF2cFaazC+AVN0BBlrGB6QYLXb3zmkTnBtdjwDs3NY230BIMu3DoYMESAcmlJSxaQzqU
- d33IaoutQI5PyFlg+PtH+NrdRCpk+NUG+S+S8e6WacMlK62ePG7xnO/lUzb3826gMRTqyWrpCis
- vQVGxh1Ak=
-X-Google-Smtp-Source: AGHT+IGW8oXYke7HJG9MJObH/Q4JqrrUt/ZxLdAtGaOK9oR9Abyap6CVp9VMgZo5Tz/V2OKMvG482w==
-X-Received: by 2002:a05:600c:1c0d:b0:477:9a28:b0a4 with SMTP id
- 5b1f17b1804b1-47904a6867fmr194793295e9.0.1764362862829; 
- Fri, 28 Nov 2025 12:47:42 -0800 (PST)
-Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-479052daee3sm95621355e9.12.2025.11.28.12.47.42
+ d=1e100.net; s=20230601; t=1764369499; x=1764974299;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=18tQK8y+QW2wjUZAw0LFB9UZ2qR3OSaDBe9CoRUimlY=;
+ b=JX8S4E24AqvxOqqQavNTUncKBc5N8HB9RZkcpwbaqQvr5iQmuMIv2HgHDW0xNviu2X
+ WDs2Z8M+wviAyi/Ar/CcrVNObNvH37J/eOxEW5GROEHU6mdlSrXqGVyz04nkrMqraT7b
+ sx0aAhwDc9NLpWxrgYgfowGR4cQRaScO8FeAc9+qWr/SmlztOvErf6oJY0u9/oAhDgvm
+ iWOANpcG4dQXPAzsQaCnqK5TtFBcDXTPvZ3oNWuTFfXkxsqNo1cFYBFLP4qwrG0FB5J3
+ Shm6nmUGEvBuhbt1/r+eTsfr9bX4MWHan3w0dk94YFQ0HiZL15kcSL10zO3kOhb9PwtL
+ EmYQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVN2+qlWy2KFJouiKltjzTa14/qMQ565jZTRZdwA+RyemSlf02PX1/IWk9FNwKbPP8MH4R9/C0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzqfvbBN0vfWZTec0JmWI3EbOSqEMY1DdprNymz/LdGK99RVgzK
+ 2/w/LTdZpGUoYfO4FfgR7kjmeCo+rHrw47TaT9ZKrqhIKtbNKe+BJ5Zic6GjYA51UWc=
+X-Gm-Gg: ASbGncus03zXX3lVaRMfNPMaqCj1aEC+u+3+CfSFReWLUDf3W0a5Fuvi66uhjHJT9mz
+ PDB1+cYMf8haP7/OfQkkwsPLYLkjlIF8WuHGOtyuB6/uyKzn1bsD7xuacmrip8Zc/exnFqS8SX2
+ VyTJae9g/y9Zpld1ehQso2cWbhXCHssDrwkhAk9hOspHKgERrz/+ku/gctsk9yLjrHJsU8qhbO2
+ c9VebaZVjYl2qQjIiGdGbh76ryJayuYzzNrj1/M7r1f2bLEvTgLueZs63M3myr3oX9HUzrqeMxM
+ L0kkR0IPxzAU9Qs6HKxrx111LbnuCKApyEqD2sxUZSEiin4VVDj5/jeOE4vtXzBrW94Fx1CarHY
+ 6PIpvsU9/CPygOwLiLRgpVtoL+S1N4UzzueqkZkr9j8jMKoioWZba2bLqVP2mQrNs299bZ7lJcN
+ V29zE2BIvqO6UL8hOhQ0ynhGE9PEV7hR4mcjItOg/QoqFg6F4NSA==
+X-Google-Smtp-Source: AGHT+IFDSgdYRVjgXOCtPO1/KN+o7qLt5rvm9fSbsWupvf9NhJw/KP4HJcgDbLeKVT/VhmV/OJFgkQ==
+X-Received: by 2002:a05:6808:1310:b0:450:7169:80e5 with SMTP id
+ 5614622812f47-45112aa801cmr11131853b6e.27.1764369499023; 
+ Fri, 28 Nov 2025 14:38:19 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4531708f1e5sm1721640b6e.10.2025.11.28.14.38.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 12:47:42 -0800 (PST)
-From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Fri, 28 Nov 2025 21:46:37 +0100
-Subject: [PATCH v2 7/7] configs: am335x_evm_defconfig: Switch to upstream
- devicetree
+ Fri, 28 Nov 2025 14:38:18 -0800 (PST)
+Date: Fri, 28 Nov 2025 16:38:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Raymond Mao <raymondmaoca@gmail.com>, Xu Zhang <423756212@qq.com>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] armv8: Fix transfer list passing with KVM
+Message-ID: <20251128223815.GA289289@bill-the-cat>
+References: <20251111075906.38701-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251128-topic-am33-evm-oftree-v2026-01-v2-7-42a863304498@baylibre.com>
-References: <20251128-topic-am33-evm-oftree-v2026-01-v2-0-42a863304498@baylibre.com>
-In-Reply-To: <20251128-topic-am33-evm-oftree-v2026-01-v2-0-42a863304498@baylibre.com>
-To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
-Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, 
- Kory Maincent <kory.maincent@bootlin.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Romain Gantois <romain.gantois@bootlin.com>, 
- Parvathi Pudi <parvathi@couthit.com>, 
- Basharath Hussain Khaja <basharath@couthit.com>, 
- Paul Barker <paul.barker@sancloud.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2033; i=msp@baylibre.com;
- h=from:subject:message-id; bh=KY+FQNTMWDx6jYw6mrniov3mLgedRECAW6Fzn+bRzi0=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwtrricL7ozjh8Wv/vARsHzvuQ9p4+Ne1NTsqIXljUs3
- vNr/tXZHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCR51sZ/meaHvTyl2fiVT6Y
- dujrHGPtkLX7eT69mbdMquVIc1VGlAjDPzOFDG/5iR/KZwU7setkvzVa/DdvWvnEE7z/zr0Q3xy
- YwAgA
-X-Developer-Key: i=msp@baylibre.com; a=openpgp;
- fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
-X-Mailman-Approved-At: Fri, 28 Nov 2025 23:32:55 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KpjQ0gwwEhAD/XcZ"
+Content-Disposition: inline
+In-Reply-To: <20251111075906.38701-1-ilias.apalodimas@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,42 +100,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The upstream devicetree uses simple-pm-bus, so CONFIG_POWER_DOMAIN is
-required now. CONFIG_POWER_DOMAIN enables probing power domains, the PRM
-power domain driver is requierd as well now.
 
-Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
----
- configs/am335x_evm_defconfig | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+--KpjQ0gwwEhAD/XcZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
-index bd188c252780fb541afbbe61a243bddaab79be93..5826562988c674cc05f45e3d8ee8e131adcba069 100644
---- a/configs/am335x_evm_defconfig
-+++ b/configs/am335x_evm_defconfig
-@@ -3,7 +3,10 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SF_DEFAULT_SPEED=24000000
--CONFIG_DEFAULT_DEVICE_TREE="am335x-evm"
-+CONFIG_DEFAULT_DEVICE_TREE="ti/omap/am335x-evm"
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_TI_OMAP_PRM_POWER_DOMAIN=y
-+CONFIG_SIMPLE_PM_BUS=y
- CONFIG_AM33XX=y
- CONFIG_CLOCK_SYNTHESIZER=y
- CONFIG_AM335X_USB0=y
-@@ -50,7 +53,8 @@ CONFIG_MTDIDS_DEFAULT="nand0=nand.0"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand.0:128k(NAND.SPL),128k(NAND.SPL.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-spl-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),8m(NAND.kernel),-(NAND.file-system)"
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_OF_CONTROL=y
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-sancloud-bbe am335x-sancloud-bbe-lite am335x-sancloud-bbe-extended-wifi am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-sancloud-bbe ti/omap/am335x-sancloud-bbe-lite ti/omap/am335x-sancloud-bbe-extended-wifi ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
-+CONFIG_OF_UPSTREAM=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+On Tue, Nov 11, 2025 at 09:59:06AM +0200, Ilias Apalodimas wrote:
 
--- 
-2.51.0
+> When loading U-Boot in a low memory address, the adpr instruction
+> to preserve saved_args[] end up within the memory space of QEMUs
+> mapped pflashes. As a result the following store pair instructions
+> lead to a crash since instructions that modify more than one registers
+> can't trap into KVM.
+>=20
+> This problem can be solved with loading U-Boot with -kernel
+> and defining a different text base address. But when running with
+> -bios we always start from 0x0. So let's postpone the calculation
+> of saved_args[] post relocation, where we will have an address that
+> doesn't collide with the QEMU flashes.
+>=20
+> Acked-by: Raymond Mao <raymondmaoca@gmail.com>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+> Changes since v1:
+> - Move comments to the appropriate place
+> - Add missing ifdefs when calculating the bloblist placement
+>=20
+>  arch/arm/cpu/armv8/start.S | 9 ++++-----
+>  arch/arm/lib/crt0_64.S     | 7 +++++++
+>  2 files changed, 11 insertions(+), 5 deletions(-)
 
+This, funny enough, breaks our qemu_arm64 + tfa + handoff test with a
+failure to boot.
+
+--=20
+Tom
+
+--KpjQ0gwwEhAD/XcZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSokVAAKCRAr4qD1Cr/k
+Co8eAP93FZmrzurxgzgWPNEeP4e25+2CdiQS0oYQgaMhZL1TxAD/Wd2642G9Jx1X
+jj0MsbY6kNKCjiwJ/NUB6aYPL3d5jA8=
+=y1Ei
+-----END PGP SIGNATURE-----
+
+--KpjQ0gwwEhAD/XcZ--
