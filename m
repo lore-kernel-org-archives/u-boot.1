@@ -4,98 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E68BD116E2
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:28:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBA5CFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:28:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A79C783AEF;
+	by phobos.denx.de (Postfix) with ESMTP id E11BF83B2C;
 	Fri, 28 Nov 2025 17:28:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Ejs3B1Yp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z9vynWoj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B77A8457A; Fri, 28 Nov 2025 15:31:19 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id CEC048457A; Fri, 28 Nov 2025 15:31:56 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4649984564
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 15:31:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D114584564
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 15:31:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-42b3d7c1321so1185151f8f.3
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 06:31:17 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-657509d761dso928573eaf.0
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 06:31:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764340277; x=1764945077;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LIFloz8h+ZbuCmYh3VGSGhb4RfETp6sodp9Kfsf8Apc=;
- b=Ejs3B1YpNMJHizlBe8lwQO9wphEFv+b5w2yn6VyCoTOjsvRPhzu9pslz13EGV5QD8C
- GZ/Le7+QKpjMElp90T6jN0P2Hj/9ynaXwJ0rPIsVQ98x+mIgRVffx9Tpju8sIH60z9JN
- 6LHcFEZ5TSgOu/fHf1rXH1pBrtUC49WulASQ5euhzIYo1n9OIK8SzKiIsu39idwDiJ3Q
- WIrFtKHRT2AteTpWeXIfR7wwx16BW8QZSeyYWClThcYsM2teMvVGcVPUWzTR/j6BQA7k
- uN3l9h2vA3CEAbMYHaYGAMmzVeq0/Jv47Cl3Ju27n39ioQaeeufUZERt8gOZZtVAFXX3
- yE/Q==
+ d=konsulko.com; s=google; t=1764340308; x=1764945108; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/+/rt3J9PtNOlaRLlus8Duc0vrVUVCYLcLd1qgOfwjg=;
+ b=Z9vynWojhhNaxPfBgoqnC2AbqGEErm1PyoLRQFKsYcgtvIc4iwUhJ5vbbmpuNFB0mm
+ TZd2Asmzf0IR8lZEWK5TaxGTyBE/ZUqgSoYjIj3aiseI9MDvamx34W0NoUciOvKnNJFs
+ 6jDvjeHnlH3N+yz5sOGjl8qU7eyfXqLfBzXZA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764340277; x=1764945077;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LIFloz8h+ZbuCmYh3VGSGhb4RfETp6sodp9Kfsf8Apc=;
- b=Kj86vGf1jS7IQJtTkmhMIYUfdr3QbmnwwPaTAvSwzsUPry/6reUgRPuKFSGl1FBdbL
- XMdGmqIMGi29muB8y/iypnlQxg/kABGa5phS9Dj+nNtwFaNCUvChjh7Ulo0YL8crU+Pe
- JOKQR4zq3Q/e/yQtGZyw6J9DbrX485hdHxJyM8IJvpzFLAxoTyStQ1l1HyLZe1YFpnrG
- QClmx0RsBG6b/5tZtyaMGQR5e0mMQAuKugkDcLuadScTSyIXYuZbJXaUeC/rM7P3F1PV
- CD0WjaQz8GyFnNJZWDLmq2wfPZYiF7iHijeqLYWay/+O52JFiXgrzW+Ue9Qpzopprgce
- ZbDA==
-X-Gm-Message-State: AOJu0YwYjMPei7A60/9LAk1enU07I72rGu+6vGB4/ECcTDfqrDffO3uu
- hQijx3+nzj0V+hV6gxMqV8zE/ICOtz7Xcsx8Ub7oUsDlDUfnlyPN6mL88Xmn71eR46M=
-X-Gm-Gg: ASbGncuUH19kkpjvq32z7X1GyBEUD/qd/Z22mZnS9P9BL76M4sn9H+/o68Sqi5uWmv/
- lV0OJQSLhqUie0EAa0pUmQzdkkcXu1dd8eJxmuF7PJWQGZtevqn3PGLZZRpmjcQ71KGwUer/36E
- +RrLn/tD858AtvQsmqP8FJy5d/7Yf6J5LGL93vVEnSvE/DzelY1Kzz5RIyrg2rh/yAnkcNEwK6+
- /+ErnakNpDJfYpEbmJoVFYLB5gKni+ZJ54osw7TlS2LCKnpLtbl40o6ttjg2BZIu+E8Cb7Rluio
- W9KPuAOQ9cSocrAuV2xS8vc0eZHSp6+mwo/PfFphiMfTbGaa+gVCI9heW1iMhuyuUy7b1DkhjCJ
- M5Z1GOJLwGl6DZkG15ugQN8VfQ5/qDr3BSYm/D4kjJCuxZXx/YfFWBBplq81JDs4+HM3NZBxanj
- P6ANxtBLk=
-X-Google-Smtp-Source: AGHT+IGj4MUXX5h/JYKSIQlahX55kXK0inJaB9r5I7fGYfNsAUD8MzGikK7R9RaqGEbXAcrXbWHfCw==
-X-Received: by 2002:a05:6000:3106:b0:429:cda2:9ffe with SMTP id
- ffacd0b85a97d-42e0f1fb97amr17163726f8f.7.1764340276640; 
- Fri, 28 Nov 2025 06:31:16 -0800 (PST)
-Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-42e1caa767dsm10100990f8f.38.2025.11.28.06.31.16
+ d=1e100.net; s=20230601; t=1764340308; x=1764945108;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/+/rt3J9PtNOlaRLlus8Duc0vrVUVCYLcLd1qgOfwjg=;
+ b=eBbhBBwJizNIrPZOCRH2MqKqDCAitTYAEJDnRxwZHSivB1HugNRY/RhudNjd9Ew3Xf
+ QzhewAisQUxke/yPpUAtBWkf7dEvwHSzYWt6PQ3Tx7/ddngRrEfGxkNmFNaTyZ0ph+AK
+ lfZ61rPOj7+DcT1AVeWS4aXWrNUGY9IBSSacpK5EsOK++BfXz1/TXjE8uh4d+pe3S5mN
+ JvPEHRjEERa4ZvnNaU2u96g9CIvW/icOoWRzEHTGeg3v3EaIZSFSzg5+lpDx2o9gE1yH
+ 2Uwf8Qwy+MmxsZxWGu59GR4aYAVsUauGHMUQKn4w5tYxEu9HgKw+5xgYVS/h83KQkRN/
+ TpsQ==
+X-Gm-Message-State: AOJu0YyCDD1xBLA0ncoT0n8eWwO+ePPIycRbxU2G9ihzekbwItOl/UdX
+ +qfK9B656d18SpEvqI9DZ5AVLFJ3TMFoorCqTB3R3Xan2lJ3GptFsSG4Ji6RvcxCJOg=
+X-Gm-Gg: ASbGncugYbMYx8UbMrKVCaUn17tV+ztrUohNMGlUdoyEtnrH2IViU0xTpGIClFFlZCl
+ ifrm65fRCEaCaBz7XbxZnvTsfC+UrYKrFOiKFFUZ6rRXgoPAMVCbdJ6jK1NHCZxYGQubv4/3V3s
+ 9j4MuDJhfXMcgWLqi3X49b6vji9zNo7ceoA2ryWrtQRrX84ImyjJAIRk4BlSX8W27To86urhWOT
+ anjPn5kS0CZrSKsZ0uxgBrAGCwkc7CKNPmSOhizrZpxU4uZHUQRMtvlFiA29IejwMoW03VvYnw0
+ cr1CreOTlrLhE5dcicTFfFTPWreFnbxw8D0AMSCRgtStOzl/nMUN/0qd9bwBXEOQalGCHuxr3h9
+ rh2T96+HOm5M/bQLxT/SojoHK02W4ynz2oZYPJE2y90U+CHXouQkeWRhzipg+KIhOhy7RrWDBvR
+ CQD2smGSL3F5DTdgPcIpDVey5jCwMQSJ3/1jMi+aOc7U5CzxiOefjw8mEPo+3J
+X-Google-Smtp-Source: AGHT+IF0Pe64u8Ae76cs1P0DjyyaOC+pWgG83YjK7sbmzlek3EOTc1h3bjsulh7VX1JavIbSD7Hq5g==
+X-Received: by 2002:a05:6808:19a3:b0:44d:a0ec:d9a5 with SMTP id
+ 5614622812f47-451159c872fmr11572221b6e.1.1764340308349; 
+ Fri, 28 Nov 2025 06:31:48 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-45317113578sm1274332b6e.22.2025.11.28.06.31.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 06:31:16 -0800 (PST)
-From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Fri, 28 Nov 2025 15:31:06 +0100
-Subject: [PATCH] power: domain: Add ti-omap-prm stub
+ Fri, 28 Nov 2025 06:31:47 -0800 (PST)
+Date: Fri, 28 Nov 2025 08:31:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Sjoerd Simons <sjoerd.simons@collabora.co.uk>,
+ Govindaraji Sivanantham <Govindaraji.Sivanantham@in.bosch.com>,
+ Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>,
+ "Andrew F. Davis" <afd@ti.com>,
+ Javier =?iso-8859-1?Q?Mart=EDnez?= Canillas <javier@dowhile0.org>,
+ Felix Brack <fb@ltec.ch>, Heiko Schocher <hs@nabladev.com>,
+ Enric Balletbo i Serra <enric.balletbo@collabora.com>,
+ Adam Ford <aford173@gmail.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Marcin Niestroj <m.niestroj@grinn-global.com>,
+ Nikita Kiryanov <nikita@compulab.co.il>,
+ Thomas Weber <weber@corscience.de>, Enrico Leto <enrico.leto@siemens.com>,
+ "Derald D. Woods" <woods.technical@gmail.com>,
+ "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
+ Niel Fourie <lusus@denx.de>, Parthiban Nallathambi <parthiban@linumiz.com>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Tomas Peterka <atheiste@seznam.cz>, Anurag Dutta <a-dutta@ti.com>,
+ Fabio Estevam <festevam@gmail.com>, Anshul Dalal <anshuld@ti.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH 2/2] clk: ti: omap4-cm: Add Kconfig symbol
+Message-ID: <20251128143144.GB2125796@bill-the-cat>
+References: <20251128-topic-am33-clk-regmap-dep-v2026-01-v1-0-d722c79506b2@baylibre.com>
+ <20251128-topic-am33-clk-regmap-dep-v2026-01-v1-2-d722c79506b2@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251128-topic-omap-prm-v2026-01-v1-1-72c5cc4c7728@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIACmyKWkC/x2MywqAIBAAfyX23IIK9vqV6CDbVnswRSMC6d+Tj
- sMwUyBzEs4wNQUS35IlnBV02wAd7twZZa0MRhmrtRnwClEIg3cRY/J4V9Gh0khjT0bRatk5qHV
- MvMnzn+flfT8yf9AdaQAAAA==
-X-Change-ID: 20251128-topic-omap-prm-v2026-01-c97c20cd5eaa
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Peng Fan <peng.fan@nxp.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3353; i=msp@baylibre.com;
- h=from:subject:message-id; bh=PP24nOxnzuLxEnE/i/cUR7QDLP0+fPrz+ZlT99ppZaQ=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkzNTTordseeF1kuwNwspP3xSOTDHf+uXZs36+DiPYevN
- F7YxGP+vqOUhUGMi0FWTJGlMzE07b/8zmPJi5ZthpnDygQyhIGLUwAm4tjH8N9PbZpcVdTmKIN/
- N8K2fzS3kt5gqlqgMf8Y2xreSwUKsZMYfrM9dFz3Qp3ng72Hm/CEr0G9xmzqS3Vc46YV7prA28+
- WwwwA
-X-Developer-Key: i=msp@baylibre.com; a=openpgp;
- fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4UIV3QjgeduwORQ6"
+Content-Disposition: inline
+In-Reply-To: <20251128-topic-am33-clk-regmap-dep-v2026-01-v1-2-d722c79506b2@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Fri, 28 Nov 2025 17:28:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,96 +124,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upstream DT uses simple-pm-bus instead of simple-bus. simple-pm-bus
-requires power domain support. On am33xx, PRM manages power domains but
-all domains are enabled at boot. Add stub driver with custom of_xlate
-that expects no argumetns to allow simple-pm-bus and dependent devices
-to probe.
 
-Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
----
- drivers/power/domain/Kconfig       |  8 ++++++++
- drivers/power/domain/Makefile      |  1 +
- drivers/power/domain/ti-omap-prm.c | 36 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 45 insertions(+)
+--4UIV3QjgeduwORQ6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-index 0ad885c9e8ba7fe7f687b5d9bad4ef6384d55276..935f282d6c53acd3f02b8894764cc317c109c41f 100644
---- a/drivers/power/domain/Kconfig
-+++ b/drivers/power/domain/Kconfig
-@@ -125,6 +125,14 @@ config TI_POWER_DOMAIN
- 	help
- 	  Generic power domain implementation for TI K3 devices.
- 
-+config TI_OMAP_PRM_POWER_DOMAIN
-+	bool "Enable the TI OMAP PRM power domain driver"
-+	depends on POWER_DOMAIN && ARCH_OMAP2PLUS
-+	help
-+	  Enable support for TI OMAP Power and Reset Manager (PRM) power domains.
-+	  The driver is currently a stub to be able to probe devices that
-+	  require this type of power domain device.
-+
- config ZYNQMP_POWER_DOMAIN
- 	bool "Enable the Xilinx ZynqMP Power domain driver"
- 	depends on POWER_DOMAIN && ZYNQMP_FIRMWARE
-diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
-index 8e03f620437edc6f3d39922b0d5c972fdcd57801..b2c0bd8a61a1f289cbc4d14fa3da13b9781d70e5 100644
---- a/drivers/power/domain/Makefile
-+++ b/drivers/power/domain/Makefile
-@@ -21,4 +21,5 @@ obj-$(CONFIG_SCMI_POWER_DOMAIN) += scmi-power-domain.o
- obj-$(CONFIG_TEGRA186_POWER_DOMAIN) += tegra186-power-domain.o
- obj-$(CONFIG_TI_SCI_POWER_DOMAIN) += ti-sci-power-domain.o
- obj-$(CONFIG_TI_POWER_DOMAIN) += ti-power-domain.o
-+obj-$(CONFIG_TI_OMAP_PRM_POWER_DOMAIN) += ti-omap-prm.o
- obj-$(CONFIG_ZYNQMP_POWER_DOMAIN) += zynqmp-power-domain.o
-diff --git a/drivers/power/domain/ti-omap-prm.c b/drivers/power/domain/ti-omap-prm.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..c240e2682ea93c9e9addcbac9c3a3ea66a0196b7
---- /dev/null
-+++ b/drivers/power/domain/ti-omap-prm.c
-@@ -0,0 +1,36 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * TI OMAP PRM (Power and Reset Manager) power domain driver
-+ *
-+ * Stub driver to provide power domain support.
-+ */
-+
-+#include <dm.h>
-+#include <power-domain-uclass.h>
-+
-+static int ti_omap_prm_xlate(struct power_domain *power_domain,
-+			     struct ofnode_phandle_args *args)
-+{
-+	if (args->args_count != 0)
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id ti_omap_prm_ids[] = {
-+	{ .compatible = "ti,am3-prm-inst" },
-+	{ .compatible = "ti,am4-prm-inst" },
-+	{ .compatible = "ti,omap-prm-inst" },
-+	{ }
-+};
-+
-+static struct power_domain_ops ti_omap_prm_ops = {
-+	.of_xlate = ti_omap_prm_xlate,
-+};
-+
-+U_BOOT_DRIVER(ti_omap_prm) = {
-+	.name = "ti-omap-prm",
-+	.id = UCLASS_POWER_DOMAIN,
-+	.of_match = ti_omap_prm_ids,
-+	.ops = &ti_omap_prm_ops,
-+};
+On Fri, Nov 28, 2025 at 11:17:00AM +0100, Markus Schneider-Pargmann (TI.com=
+) wrote:
 
----
-base-commit: c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
-change-id: 20251128-topic-omap-prm-v2026-01-c97c20cd5eaa
+> Add a Kconfig symbol for this stub driver to avoid clock dependencies on
+> an architecture symbol. I added the new symbol to all defconfigs that
+> would need it.
+>=20
+> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+[snip]
+>  49 files changed, 54 insertions(+), 2 deletions(-)
+[snip]
+> diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
+> index 7b8da69712e4fa61c15f3fb0cbdc9f3fd8de31bb..9b6829793fa87c91db3aefac8=
+ea9cea8180c2ad3 100644
+> --- a/drivers/clk/ti/Kconfig
+> +++ b/drivers/clk/ti/Kconfig
+> @@ -10,6 +10,12 @@ config CLK_TI_OMAP2PLUS
+>  	help
+>  	  Common clock functions used in some TI clock drivers.
+> =20
+> +config CLK_TI_OMAP4_CM
+> +	bool "TI OMAP4 clock manager driver"
+> +	depends on CLK && ARCH_OMAP2PLUS
+> +	help
+> +	  This enables the OMAP4 clock manager (CM) stub driver.
+> +
+>  config CLK_TI_AM3_DPLL
+>  	bool "TI AM33XX Digital Phase-Locked Loop (DPLL) clock drivers"
+>  	depends on CLK && OF_CONTROL && ARCH_OMAP2PLUS
+> diff --git a/drivers/clk/ti/Makefile b/drivers/clk/ti/Makefile
+> index 329fae67889b11a9ef3c646b166243abcb956144..74e4329a3430d66c11a3c034f=
+1938c0804f4c918 100644
+> --- a/drivers/clk/ti/Makefile
+> +++ b/drivers/clk/ti/Makefile
+> @@ -3,14 +3,13 @@
+>  # Copyright (C) 2020 Dario Binacchi <dariobin@libero.it>
+>  #
+> =20
+> -obj-$(CONFIG_ARCH_OMAP2PLUS) +=3D omap4-cm.o
+> -
+>  obj-$(CONFIG_CLK_TI_AM3_DPLL) +=3D clk-am3-dpll.o clk-am3-dpll-x2.o
+>  obj-$(CONFIG_CLK_TI_CTRL) +=3D clk-ctrl.o
+>  obj-$(CONFIG_CLK_TI_DIVIDER) +=3D clk-divider.o
+>  obj-$(CONFIG_CLK_TI_GATE) +=3D clk-gate.o
+>  obj-$(CONFIG_CLK_TI_MUX) +=3D clk-mux.o
+>  obj-$(CONFIG_CLK_TI_OMAP2PLUS) +=3D clk.o
+> +obj-$(CONFIG_CLK_TI_OMAP4_CM) +=3D omap4-cm.o
+>  obj-$(CONFIG_CLK_TI_SCI) +=3D clk-sci.o
+>  obj-$(CONFIG_$(PHASE_)CLK_K3_PLL) +=3D clk-k3-pll.o
+>  obj-$(CONFIG_$(PHASE_)CLK_K3) +=3D clk-k3.o
 
-Best regards,
--- 
-Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+Given how the old logic worked, we should default y this new symbol I
+think. Thanks.
 
+--=20
+Tom
+
+--4UIV3QjgeduwORQ6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSmyUAAKCRAr4qD1Cr/k
+Co5MAP9uZD2AjoT4Tf6BYsSkHUpa32ztZkQslEuOvUT0/vrAbAEAtLYQM3JgeuSP
+GNqfztwzqey/RnQ0wsCHlCyn/c0Ywgg=
+=dcUu
+-----END PGP SIGNATURE-----
+
+--4UIV3QjgeduwORQ6--
