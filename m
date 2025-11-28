@@ -4,91 +4,154 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F11D116EA
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 07:24:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F2DFCFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 08:10:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CE8083B9B;
-	Fri, 28 Nov 2025 08:24:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 930D383B9B;
+	Fri, 28 Nov 2025 09:10:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="Zu12JU9j";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="P2epe8DK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD2E6842FE; Fri, 28 Nov 2025 08:24:00 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4782983F87; Fri, 28 Nov 2025 09:10:23 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A79DE83B8C
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:23:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3EC283B8C
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 09:10:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b735487129fso224232666b.0
- for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 23:23:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1764314638; x=1764919438;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ec0roNInj0R0cEtiVOUKO94jDTVNzB77yw530Wq/+MU=;
- b=Zu12JU9jl2LbdipnHyp5+vmUjEvGJMrVTFJcMSbuMRSHmBcSLB4g6Hw7VW1KQSyz70
- 7ldR4JrVY8rJ64qOgWxWIKdsriIfIg6FNbNNxRm0PaLTZrFDst7gyzHFKe06tb/5uhll
- IL2Ex3NUZlo87SeBElbD2a/5U9WzRexq/MowXXfeU8FBftolQtK5FBZbcUyJeXRfSggS
- FnLbDc4uSekUWAOrqW9IHiLbeVmPBw+lBCi2CoOcJxGi3zPfKjrTmDLY1ZWihNn64n4M
- ycBzHnoq8FADxnr6YM2C+Eu3EFwjAvh/lfiNuGcZs33ztAO8rMMK8AT1NENBi1njpe9E
- ZaiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764314638; x=1764919438;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ec0roNInj0R0cEtiVOUKO94jDTVNzB77yw530Wq/+MU=;
- b=cGs3dTDjYTvRAizRvJAOrTgmkLUCtohuwEFjC4IK+mCP6rRdqoWnR/0Zz+mlLFxx4q
- suifnE5rnnbCoF/0ubOaACEphnDC1Ol27v2vjZK9c5fv/6udVIjOpPiqDRRRs6iUWLi5
- qbGqhZGz538u0Y2FCbYUdW1TplUxAk1R/RJi0vwJOf3v1IHxDYNWoeVd+RFWyHIMGKMN
- p9xSGvZvEEf9P6gPaxZDmY5jrOwAtOZuyBxml8wYOEjSytZ7ByQ8IZli3LZNKYkhIhsq
- 1JXfejLDGA+lauFiCFyaswzGmMIH+5+v2MjC+vU6iqABYXtZh7AOpMkQbM59fBW0g9j6
- /HLg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUo0vvcU4rChHCLc3NSUddBgYP6dufXlOdIQfpOsyvNRGfVgMlUPzrQqZmVsReds8nXa6UKZ7c=@lists.denx.de
-X-Gm-Message-State: AOJu0YwAsWbNq+qJ+patcjPr0Tz3CVXaY3IIbfycUWWe9BToUORFl80T
- WADitVXesOzRIXoU5lTgZKUts8sgRs6yXI1Yl756vlVm6WPXiptCy1sNIO9G20l+2L72cpsY/uN
- K1cNSjg==
-X-Gm-Gg: ASbGncu/eDNtGKVj1Q+/2TZ6EndXF55y8o1qYaR2H1pNzwaQZIF0b602b1CgcKdydfK
- geqyl5YpAJxqTAvMcCGaZe5awGXOB3EO99guxuu7pI75CRfC8+BJxtSv2ZWcj+b6QrjvLRKg9mQ
- Gp1C1kfOIIGMq0QUPACwcv2MgSKXYLfmCpE58CMGAvo+D081Wu6Is+TLNGTf6KwLHT76xAOdlgA
- LtQz2HYCJevwj5LHoifFkzrTnM7R6MG5yMePloU5KegXO7xc0EVoXDiIlgmTP6M1pzoMGwIk+Pn
- EfWdkXlpGhcF76fmmJZaxtctQguNBoyRE2XDbBIOuSxSZPRxbB01OgezYPJQXo9h2Bp3PmseNnY
- 5MIznUijwpMKeYlVORvjhO9QFlMgw+WGzLIDVXzyCKofuA01+sqFlMrxOF8lMcDb9V1VDup3iCJ
- ScAdgUANCNqNkK
-X-Google-Smtp-Source: AGHT+IH9UKunAe7OARcSMbgAHAsa/GZP0xaV9JQkZrhoYTPqBmyDTCWwchIMJpcxqqkRT1cv/ftxkQ==
-X-Received: by 2002:a17:906:fe4c:b0:b76:694a:b0ca with SMTP id
- a640c23a62f3a-b76715ebba8mr2828648066b.27.1764314637839; 
- Thu, 27 Nov 2025 23:23:57 -0800 (PST)
-Received: from [10.254.183.223] ([149.199.62.131])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b76f5a7afb4sm367009966b.70.2025.11.27.23.23.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Nov 2025 23:23:57 -0800 (PST)
-Message-ID: <52b477fa-6d3f-486e-ab77-9b2d682973df@monstr.eu>
-Date: Fri, 28 Nov 2025 08:23:53 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DwSokXOEFZPl0zL2wZ11Aj2Yn1sMaJvNRHaSa7YvG3oQuxHFhbiJdhvCUWdPNQuLfLXTyV758MbdHuoBTOHRDbUeCqAo6VpQLoIrulvLUE1/Eo3yUjx4xsJSw/6skn/lFG2xT3bEma5/v1Jx77LfWx1RUkRIE7gInaQSxko6jH59deVF2S/0Yntky2B070De4ovBH5bextrUiHU4aCC2WQ9OBTacMJrVK39VgUeVZTr72GLD4FdxGKybCON0W5sPuv+o1giF2QN8fvaV0+NQaaTNslnTE2Owq+r+D9O5albhDFTyC7qK5ebjlNWuk63HMsP4r94Ts3U9LPjlOhF7hQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KwUpr6WCL24ZphM8/o7aZzy+caL7cXe0qk+I2kuQdaI=;
+ b=GeuhVXA57JY2PyW1lXh/k0cAYo9y+B0XRKXiLAvVbrXMCmw3fqc0H3JdoKyMKdgBrO7BGWOqwG+3CphEcGmnS/TLZvfvB3hHnDCsrtPjY9jV3tteiG9fP2qpXlh7DLllmwPcgVsaWZ+L5OPDOdUy1vk7aewJaHOdYQYVSrDPigZa6krubQ9XegwqOhKwg2ZO3BRA2A/yNWI6ZNwaEy8SmXKnFpbxjKm0Shx2Qc5ljNzH8KCktgHweuSjBjoP8u1Zuiu9KeXXraOse17I/A5D27azLCuG5eyUUcen2mbRkWl+4HYLBwxOJ/KyeZQJZdgFGIrYkAF6q4aiuA5yp0FDwg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KwUpr6WCL24ZphM8/o7aZzy+caL7cXe0qk+I2kuQdaI=;
+ b=P2epe8DKbpCc8Qjghl5ENOIawyj62td7bHdYjDbRG/6Fjv63J0BjXMDHLHa68BxLqOfwsyuteAvg3rolkdJ7/2CKyCgSTsUgJsW+c4HQJ+uh8CeahxQv/vHsOsJQs7lnnjfo4H4GjGy0QBfHo3pllSCbBASEAtIUGoHLLbbC0cA=
+Received: from BN0PR04CA0118.namprd04.prod.outlook.com (2603:10b6:408:ec::33)
+ by MW4PR10MB6512.namprd10.prod.outlook.com (2603:10b6:303:22d::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.12; Fri, 28 Nov
+ 2025 08:10:17 +0000
+Received: from BN1PEPF00006003.namprd05.prod.outlook.com
+ (2603:10b6:408:ec:cafe::b) by BN0PR04CA0118.outlook.office365.com
+ (2603:10b6:408:ec::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Fri,
+ 28 Nov 2025 08:10:14 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN1PEPF00006003.mail.protection.outlook.com (10.167.243.235) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9366.7 via Frontend Transport; Fri, 28 Nov 2025 08:10:15 +0000
+Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
+ 2025 02:10:11 -0600
+Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
+ 2025 02:10:11 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 28 Nov 2025 02:10:11 -0600
+Received: from [172.24.235.38] (lt5cd2489kgj.dhcp.ti.com [172.24.235.38] (may
+ be forged))
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AS8A9MF028687;
+ Fri, 28 Nov 2025 02:10:09 -0600
+Message-ID: <5b3385ee-e96c-4879-b01b-74ca132d853b@ti.com>
+Date: Fri, 28 Nov 2025 13:40:08 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: How to boot u-boot from embedded ELF file in Microblaze core
-To: =?UTF-8?B?w4FsdmFybyBHLiBNLg==?= <alvaro@linenoise.info>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <34fcf068f421f6d95d41271ef52400d7464d080e.camel@linenoise.info>
- <139d4052ed5e16f7de90ad681d032282f0bc74ad.camel@linenoise.info>
+Subject: Re: [PATCH 1/2] configs: am571x_hs_evm_defconfig: Reserve EMIF memory
+ used by PPA
+To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
+CC: <afd@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>,
+ <u-kumar1@ti.com>
+References: <20251128064353.1295063-1-b-padhi@ti.com>
+ <20251128064353.1295063-2-b-padhi@ti.com>
 Content-Language: en-US
-From: Michal Simek <monstr@monstr.eu>
-In-Reply-To: <139d4052ed5e16f7de90ad681d032282f0bc74ad.camel@linenoise.info>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20251128064353.1295063-2-b-padhi@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00006003:EE_|MW4PR10MB6512:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5faf2a80-01fa-4172-a1d0-08de2e558ff8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MVI0Ynh2aXlTY1pHY0xxVE9Jb1Y4NGluaytyTlpkc0ZIY1JLMmZtQVNLeTdV?=
+ =?utf-8?B?eUt2elJWWXZkQ3FjUVVmM0paTTR5bnVPQ2NKL3VackE2RE5WYWJxNXhIUlVL?=
+ =?utf-8?B?bStBMnAydnBzVk96U3BYQkhPckRwNVZ2T0Z6aGdoN3ZjYzdrU1ArVWZxS0E2?=
+ =?utf-8?B?a083MHFUcmQ3Mi9xRit0K2FqNkI0OUVNVzZsdXBiZC9mU05zK2hrUjNXR3po?=
+ =?utf-8?B?b255SmVCcjNkVS9PZ3dUUy9hQURjTzJPbWljV3EvcEZ4VWEvdTk1bHdKRUVY?=
+ =?utf-8?B?c0gvQUliVndxVExqT2RvWUxYR0h3eVJCVVZSMUVJMXJnaUtwV3QvRmgrZ1Ny?=
+ =?utf-8?B?elN4bXdhQ3hNYzVRTXR2N0NyZjRPc3NnN05tQXVtY0ZOUnRhSnRUZ2cyUk4r?=
+ =?utf-8?B?TWUydVdCSndaSTZJLzFaOWNFUlJDbEZYcU11cUs0V2NMTzJPYTNXeTB0V3Jr?=
+ =?utf-8?B?ZTA2Q3owaHZFY2tUNVprRGZUVCtHM2hCUVFjUjJYWHd0cFIrUnJJTWcrZnBt?=
+ =?utf-8?B?dktGUHQvN1pRRzAxRVU5d3Z4Q2NoSWVJUG1JeVhVTkZURXRuckdvNUl6bUdK?=
+ =?utf-8?B?L1BRMTFJY0QxNk9kRnQ0UWhwc3RQWUVncUVGZkRqeGxTaDhmNy9wQ2cxMUJl?=
+ =?utf-8?B?SUNtdnIzeUREeWFnbTlDQjNCM3U1Ym1kMnpXSzNSVEZ2S2FhUVNvTTFoMHZU?=
+ =?utf-8?B?cDdHLy9ZOXBCMTZNZHBvWENyVHBXb2VvSCsrN3l5MGs0bmdWSitHUlNOYjlh?=
+ =?utf-8?B?MW1LNWZINVZwekF3cWlleEcxbS8zSVoyRFlUdjQyZmY0cWM4V0UzWXUvS2ZW?=
+ =?utf-8?B?TDhWVVFONFdUZnYxNlB2dHZPUnpZRTJJWWFpbkJTNEZWOGFSYmMwdE9ScXBt?=
+ =?utf-8?B?eVdhemx0M0x1NVNjdDA0NTlHUXhDbVdaWXlVWEwxcElSa3k1Uy9NUFM1b0pF?=
+ =?utf-8?B?S1VjKzJDcU44enUyc2NXd0lzVndkeWpGTGhRdFhpam41M1VGSSsxQk9TeFRG?=
+ =?utf-8?B?VVRaUks1NlNsbjFsR1hVdlAvTXZzZmdzQUZmYi9vTmQrS1RuNWRwMUJOUnFl?=
+ =?utf-8?B?RmNWMnFORkp2bWg3SE1FVFExN3VEWGJ0eUwxYlFRQ0s4VDJzNU8xYUdoWDY5?=
+ =?utf-8?B?KzJTZTRHalBIdU4xUHRINTJGbjNsT0FtVkZtMlJJMStiN2Nza0Qxcmw3cXRF?=
+ =?utf-8?B?SUxlYkpvU0Y1Y3dpcG55OENLb2M0cnBveFBoUUZhVGVUa2JoVUVNUW9NOE53?=
+ =?utf-8?B?c3d6TnN5V0hlUnQvYjcySE92aVliektCdDhMN2hqQm9iYXljWEUzRHZVZlhX?=
+ =?utf-8?B?OG96TUdJdFNJbG1rRzdSN0VJQnZBQ3YzMVlQSG9NOHdKSzBjaHM3WjNSckJn?=
+ =?utf-8?B?OWRHKytSb05nSEVLdW9qNFlEckQycHBFR2ZMSEZ0N0k2R1lhWGJmU1VEZ3BT?=
+ =?utf-8?B?NHZvNkcwcHZ4eGx1RFRWR01KbDhJeWFNYzBqTVNYVFR4MEVHMUJtNUVjZ1Yx?=
+ =?utf-8?B?bW9Tc1o1emlLZHRSQnNLdCtrWjExNVJnS1dMQW1aaVZxcjltZ3lBa0crTFE5?=
+ =?utf-8?B?NmJ1YkhmTnM1eWdkVGtubDd0MHRMYzdXbnB6R1JYSitSeGtOWklFT21iZktu?=
+ =?utf-8?B?Q1ZHZ2E0L21YTVV2OGNGQjNCK1daN0Y2RisraSs1eVV6UVYxd005TDBTTm05?=
+ =?utf-8?B?R0FPZW5xNnIzUm1lYUNsWExEMXRWcktCbVRWWGpaM2lOZlNRRVR2TzdJblJU?=
+ =?utf-8?B?VXUyYy9ETEV0R0NTUnE3RnBJV1J2bjBLVkE2L0tFU2pNQjhMZU5LV0Nzd1dW?=
+ =?utf-8?B?b2VKZkNmcVlUN01BWFBsblZOdEFadVQ3dnJRNmtVUUdVbWg0Yk5vOXEraCtQ?=
+ =?utf-8?B?RW1RQlVwU1ZrKzUyNnB3RmtZSTdIci83NGdBRkpiMGhnQ05oRjlMNkYrdktB?=
+ =?utf-8?B?MXh1N2VXWEhSSGlZeitNVnZWWWdLM25XMzNwamN6OUJMbG9QOUpKNU9oa0VW?=
+ =?utf-8?B?emdRTzZPa2VDRTAySE1nMVJLK2NEVU9uU0c1Ylo1Tzg3Yi9uSkw0THRaVFBp?=
+ =?utf-8?B?WVlaK0RZVlZacEVwWGpTM1JUSUR6dFQyMXIybjV3RURGN2NnV1RZRUJvRGtN?=
+ =?utf-8?Q?G9U0=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2025 08:10:15.4655 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5faf2a80-01fa-4172-a1d0-08de2e558ff8
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00006003.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,100 +168,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 11/28/25 07:42, Álvaro G. M. wrote:
-> Hi all,
-> 
-> I've been working a bit on this and now I have more doubts than before...
-> 
-> On Fri, 2025-11-14 at 11:30 +0100, Álvaro G. M. wrote:
->>
->> [...]
->> I can load this via xsdb and u-boot works and is capable of booting Linux
->> kernel. However, there are a couple of things I don't understand.
->>
->> First off, if I set CONFIG_TEXT_BASE=0x80000000 (the exact beginning of RAM), it
->> won't boot, not even early debug message will appear. Why is that?
->>
-> 
-> I still haven't been able to solve this. Why is this value invalid? And which
-> value should I put there to embed u-boot.elf into the microblaze boot memory?
+On 11/28/2025 12:13 PM, Beleswar Padhi wrote:
+> The AM571x SoC has 1 GB DDR space. As part of normal re-location process
+> U-Boot copies itself to the top of DDR bank. However, on HS devices, the
+> top 0x2500000 is used by PPA and is firewalled. This results in an
 
-Because you need early stack pointer which is allocated in front of u-boot 
-itself at start. It means you need at least small space there.
-U-Boot is going to be relocated to the end of memory anyway that's why it 
-shouldn't really matter that TEXT base is not aligned with DDR start.
+0x2500000 to 37MB
 
+> exception and the boot fails.
+>
+> Introduce a new defconfig for AM571x HS platforms and set
+> CONFIG_SYS_MEM_TOP_HIDE to reserve the top 0x2600000 memory (aligned to
+> 2MB as per page size for ARM32) for the same.
 
-> 
->> And the second thing, my endgame is to embed u-boot.elf into Microblaze itself,
->> so it acts as FSBL. I reduced the size to the maximum and I got a quite small
->> binary, even smaller than my current bootloader (the one from Xilinx that loads
->> an SREC image from flash), so there shouldn't be any issue from that part. To do
->> this, I set CONFIG_TEXT_BASE=0x0, but again, no early boot debug message
->> appears.
->>
->> I've tried different values for CONFIG_TEXT_BASE in this case, but none of them
->> will work. Also, in either case, I'm not sure why, but I can't debug step by
->> step via xsdb, I won't see what ASM or C code matches with current PC address.
->> However, SPL will let me run it step by step via xsdb.
->>
-> 
-> I've discovered that I can launch u-boot file with xsdb and debug step by step
-> via xsdb. But this file won't boot up properly, because somehow it seems to be
-> missing the DT? But the file is bigger than u-boot.elf. If I load u-boot.elf, I
-> get uboot console and am able to use sf probe and sf read to launch the kernel.
-> But this file is smaller and I can't debug it step by step. So I don't really
-> understand anything.
-> 
-> $ ls -al u-boot{,.elf}
-> -rwxr-xr-x 1 sslayer sslayer 1882032 Nov 27 10:06 u-boot
+0x2600000 to 38MB
 
-this is file with all symbols
-
-> -rwxr-xr-x 1 sslayer sslayer  215224 Nov 27 10:06 u-boot.elf
-
-This is recreated file from binary. The best is to run make V=1 u-boot.elf
-
-Then you will see
-   microblazeel-xilinx-linux-gnu-objcopy --gap-fill=0xff  -O binary   u-boot 
-u-boot-nodtb.bin && {  echo '  tools/relocate-rela  '; tools/relocate-rela 
-u-boot-nodtb.bin u-boot; } || { rm -f u-boot-nodtb.bin; false; }
-   tools/relocate-rela
-   cp u-boot-nodtb.bin u-boot.bin
-microblazeel-xilinx-linux-gnu-objcopy -I binary -B microblaze  -O 
-elf32-microblaze u-boot.bin u-boot-elf.o
-   microblazeel-xilinx-linux-gnu-ld u-boot-elf.o -o u-boot.elf -EB -T 
-u-boot-elf.lds --defsym="_start"=0x29000000 -Ttext=0x29000000
-
-Which is showing you what files are used.
-
-For you the best option is to use CONFIG_OF_EMBED=y which includes DTB directly 
-in binary that you don't need to deal with it.
-
-Regarding sizes and location. I didn't try to put u-boot to BRAM but I can't see 
-any reason why you can't do it.
-Overall binary size is all the time question what exactly you want to do with it.
-SPL is another option but I didn't try it for a while but should be enabled.
-
-Keep in your mind that full relocation is enabled that's why you u-boot itself 
-is finding out where it runs and then update sections. Based on your loading 
-address you can in xsdb remap symbols to see them by:
-
-memmap -file u-boot -reloc $reloc_addr
-
-Keep in mind that Microblaze is pretty much EOL and for new designs you should 
-focus on Microblaze V(risc-v compatible version).
-
-Thanks,
-Michal
-
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
-
+>
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+> ---
+>   configs/am571x_hs_evm_defconfig | 3 +++
+>   1 file changed, 3 insertions(+)
+>   create mode 100644 configs/am571x_hs_evm_defconfig
+>
+> diff --git a/configs/am571x_hs_evm_defconfig b/configs/am571x_hs_evm_defconfig
+> new file mode 100644
+> index 00000000000..7e44ee5221a
+> --- /dev/null
+> +++ b/configs/am571x_hs_evm_defconfig
+> @@ -0,0 +1,3 @@
+> +#include <configs/am57xx_hs_evm_defconfig>
+> +
+> +CONFIG_SYS_MEM_TOP_HIDE=0x2600000
