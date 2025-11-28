@@ -4,54 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52300CFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 06:42:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A649CFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 06:44:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A0DF83B9B;
-	Fri, 28 Nov 2025 07:42:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linenoise.info
+	by phobos.denx.de (Postfix) with ESMTP id CE377842FE;
+	Fri, 28 Nov 2025 07:44:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linenoise.info header.i=@linenoise.info header.b="Loei2rK8";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DMdXl3CV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41E70842BF; Fri, 28 Nov 2025 07:42:34 +0100 (CET)
-Received: from ibeerc.linenoise.info (ibeerc.linenoise.info [130.61.186.89])
+ id 6DBD0842FE; Fri, 28 Nov 2025 07:44:10 +0100 (CET)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEADF83B8C
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 07:42:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linenoise.info
+ by phobos.denx.de (Postfix) with ESMTPS id 53B6A83B8C
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 07:44:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alvaro@linenoise.info
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linenoise.info;
- s=ibeerc; t=1764312147;
- bh=NQgpBrwz13vfsBE+5HlrNcwPeQ3hDJ63XzUerUgcN2Q=;
- h=Subject:From:To:Date:In-Reply-To:References:From;
- b=Loei2rK8NUbzKWmReNfWY3JdJjwv5eWNpMR6t0x5gqu851nBfCcl+tMtvyywe1gLH
- kDTAeYyQjsuAOdpy0Sh8PgNaOOM4N+4WsOgwvMn4bd5h0k+WJ+yKX8Ee52UYFwnz3i
- zouyQ2lilbD2I5CQjtZSpbqIUf/N2m28PH2KJDV8CW6LzllZAEgBd9f4fGy/KHq39E
- nJUwWqxe9Sbiu7MFpaZDAft54YIjY+o1sgY4H4HP3otb+6vlqaLhv9vJpZbeAAgokL
- WZFTYNvkpO8FlN/88utcTh29HOhnlYqDgN2KfjXbMjUjmVkvQKz/msV4qRcgedal/V
- nOPYvctk5kQYw==
-Received: from [192.168.2.3] (unknown [109.227.150.179])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
- SHA256) (No client certificate requested)
- by ibeerc.linenoise.info (Postfix) with ESMTPSA id 9C86E2023B
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 07:42:27 +0100 (CET)
-Message-ID: <139d4052ed5e16f7de90ad681d032282f0bc74ad.camel@linenoise.info>
-Subject: Re: How to boot u-boot from embedded ELF file in Microblaze core
-From: =?ISO-8859-1?Q?=C1lvaro?= "G. M." <alvaro@linenoise.info>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Date: Fri, 28 Nov 2025 07:42:27 +0100
-In-Reply-To: <34fcf068f421f6d95d41271ef52400d7464d080e.camel@linenoise.info>
-References: <34fcf068f421f6d95d41271ef52400d7464d080e.camel@linenoise.info>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-7 
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MQWmVhL9DHO6pFtqD71iuTWcQeah8Ug1GYkfQr2EsGF0TZeM6VWJeZJiU1k/Sl7WQSEd8MXXotO57DaOzahssjt7fAGcxBugzPj96jFroMPWq2AEXJ+3D0oUCGMO1SOx5+wVZw5o45/qbC5wn4DeWBTNO0jNo6uxpgTMl0LKi5Xs4WN33ziyL+PyCJn4bp3mErvBFKoPGdvTPWMeUUENG2TxAGBr6iSvtK9JZwAzSSHpfQ0MeE6geW2UhzkBQUtlh2RzPh5QaESY5RL7E/2mCYi9LdOdBDaR9kqC+F4VtroLt0q0pZFPN/whh3HUmT5ZTRMK+l3sY+e1LabexdbvCA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KwUKyjHdgkKVj1TGuAUY86MYknAf+l409sNdNCBbU0I=;
+ b=bnAcHW2KmikL0+6ptrHqkMFZvMFaIaeso6ICQ2Vay6LUuYBdi37Pn0GFCiG+3hnp0hsDbVy+uGugcvYujbjiIA7ZHbGoqa4DXnREMImoeNSem+P5cSSOaJO7hbiaX6NzqPAU4dfGjkU5G4QuZG83rXhpNDMEeCc2fUNJqnAVXzgWFLn8r6HNi+f5mB98vpX+4nw8XxqB63UxbRvRFNQTYRquIRNQc9nnEEKvCzknivC2G3kUHgkeCTDhmXWgqVofh2Crc3dtNx4tvXaaOnUpc5FPS3TR1XgT54LvuLPA9EpIQ2540DAWv9XHF3o6XVrvbF1Nxe3mDzDwD6bp4QUpLQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KwUKyjHdgkKVj1TGuAUY86MYknAf+l409sNdNCBbU0I=;
+ b=DMdXl3CVfTOvkyUyyYSgIjPJjpzKLnS+i4aoxjal1Bj+IxR0RLMcSvzgWM9o/BZ0lBungmoT+pp+89UdW6Kh/ymRhDEaCIzgwfnSN56UsP1lRP17CRGeh6a0YlPD9qs4y1yrHVF4Z50bvc++4LhhGxi96E2V0H5iuvWfWzauKtQ=
+Received: from BN9PR03CA0285.namprd03.prod.outlook.com (2603:10b6:408:f5::20)
+ by SJ0PR10MB4783.namprd10.prod.outlook.com (2603:10b6:a03:2d9::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.16; Fri, 28 Nov
+ 2025 06:44:02 +0000
+Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
+ (2603:10b6:408:f5:cafe::c6) by BN9PR03CA0285.outlook.office365.com
+ (2603:10b6:408:f5::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.12 via Frontend Transport; Fri,
+ 28 Nov 2025 06:44:02 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9388.0 via Frontend Transport; Fri, 28 Nov 2025 06:44:00 +0000
+Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
+ 2025 00:43:56 -0600
+Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
+ 2025 00:43:56 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 28 Nov 2025 00:43:56 -0600
+Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.234.212])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AS6hrRS4092368;
+ Fri, 28 Nov 2025 00:43:54 -0600
+From: Beleswar Padhi <b-padhi@ti.com>
+To: <trini@konsulko.com>
+CC: <afd@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
+ <b-padhi@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH 0/2] Fix boot for TI AM571x HS EVM board
+Date: Fri, 28 Nov 2025 12:13:51 +0530
+Message-ID: <20251128064353.1295063-1-b-padhi@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|SJ0PR10MB4783:EE_
+X-MS-Office365-Filtering-Correlation-Id: f95f6c28-1452-42f6-a96a-08de2e498393
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?/FHZqCRFAIyLhi7mz+BPtQlBM+izW93/4QlopQXxTHW8zcGkFyF3SDU5NKF3?=
+ =?us-ascii?Q?wUYjiz4F1C3zUEuaRMRfpOLIN8tuK1agaiGGaQsGfFcf9dRvUK5euzYKO/ba?=
+ =?us-ascii?Q?LyK8psHh396igUMdbuXoUNMI6itDs/zHjNePoVJim+ZseuO69wEo1JCk/uFM?=
+ =?us-ascii?Q?dBZtUzSk4JilH1DoeqU9tXCuIz3hhjUUCP7hFDjs1gIwFw0V0KTIUieeanyJ?=
+ =?us-ascii?Q?lW5R5P+581+qNfFJarR9LK43YemmJ082OOaN7ukqBfpPZ/+Y9RINiYYCUzaS?=
+ =?us-ascii?Q?DLBeOGz1AgF4NMV2u8lyABSNiPF5uHGqG0qwXnc9Agb4mhrM5VvRnUYbWtIa?=
+ =?us-ascii?Q?Cgl5r7Mx/EbqSO0+KpGI3Q2oe+nhdfdNmz7mEfVCvAeb4PniTrA6o3PrY9LI?=
+ =?us-ascii?Q?v/G5pr688ebAWeDEG6hVHk3bd7sJfNRvU9RkYCLRkFeXEee9QojJX8nPBiVf?=
+ =?us-ascii?Q?1jkjTBqYSn4sXPbZki2UoJiPpa0OkjpeQ9oHfBggioxnEFiqmQW6juwJaXaI?=
+ =?us-ascii?Q?ap6umF1MvGA7fjI2WQCnBGPbacKgFAGZPQZd38JwlxJjptJ1rT6+7YuFiB5f?=
+ =?us-ascii?Q?/BHk8fLhYNnBWupHBQvjhAP3nb3IiBUdQWYtJTFo2bEBR+ji5QVNW0+NlNwj?=
+ =?us-ascii?Q?I4l3/tVZ9qlGV8mgtTqBjYaZaKxDqDZa9kHR9K7ZngQYnz8antL9fyprdPQ1?=
+ =?us-ascii?Q?Kw0gz4/kfx+Q5Fq3HlKVTDob/HLhvm4TQWBfokpAvxmIwK7JOKmQ+gnT0jcm?=
+ =?us-ascii?Q?I7x3rYw1Vc5xVEGUX+vXMJiMWoVNcWemHtT1+GPqIi7cQOvM8W8Kx4b8Oujj?=
+ =?us-ascii?Q?U1xRXMhYoJh5rjZPK8dyV9YPqacyW0bJNHTUY3lID2DkxozYQ22FYK9XLIez?=
+ =?us-ascii?Q?L1E9qnXTyaEGjo70EadG6spANPHNCQObl7XXiQsW2tNQTWRAoJQMnZXcbX46?=
+ =?us-ascii?Q?rIfxqWeyY7ysL1q36TLqIFmqRoWE9tpebQ3GOWOB/ld9AOwCbV/bvrnd85p6?=
+ =?us-ascii?Q?OIzpaK0cZxEqWicsCdGrvt01hRqD+5SnYSa9WWjNyJBeiZh+4oHR2WM0bLut?=
+ =?us-ascii?Q?fq0SocLaLl6oEt7woODMlxL+PnanL29ncw47U3V1zY+AIkG1n+iTC+qAKe3N?=
+ =?us-ascii?Q?uM6UjIdFFALcUPzGFRq+rWqBH7zkrGeXhp2bZcq29LdJkSlVJtJbJazkOY/A?=
+ =?us-ascii?Q?Fj/bbpiIiLk8JqMffKTZntm3dHRXDeypRA1lW1g+HVe19uiFBMEdfmf2GqAL?=
+ =?us-ascii?Q?wP2AElsaMOJr7jeNPq3eoLKGxuAH8ngUk4iffgfChIrnjPs4TZ9rFRvoA+N+?=
+ =?us-ascii?Q?y1s5eM8f8cNQ/59cR4Ar0/8WGORhuGi/bCbVzBvArcmL4e7UPDIYdcsepdDZ?=
+ =?us-ascii?Q?+dOCCtvoUAIG5QF8RMqVJfeaNTrujQcQuqVGvRB+J8Avd/FekAag6b8NPspt?=
+ =?us-ascii?Q?Emb+h0sFxj0KnDK8r2v2UQGDY4IjTR7zpOojGUuQ0afU8lKCwPVNsky5dMge?=
+ =?us-ascii?Q?6JnqkVRV7mdKj2tU6gd/755/2ldLatYXRc0d?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2025 06:44:00.7027 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f95f6c28-1452-42f6-a96a-08de2e498393
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B06C.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4783
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,131 +152,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+The AM571x SoC has 1 GB DDR space. As part of normal re-location process
+U-Boot copies itself to the top of DDR bank. However, on HS devices, the
+top 0x2500000 is used by PPA and is firewalled. This results in an
+exception and the boot fails.
 
-I've been working a bit on this and now I have more doubts than before...
+Fix this by reserving the top 0x2600000 memory (aligned to 2MB as per
+page size for ARM32) in defconfig and devicetree.
 
-On Fri, 2025-11-14 at 11:30 +0100, =C3=81lvaro G. M. wrote:
->=20
-> [...]
-> I can load this via xsdb and u-boot works and is capable of booting Linux
-> kernel. However, there are a couple of things I don't understand.
->=20
-> First off, if I set CONFIG_TEXT_BASE=3D0x80000000 (the exact beginning of=
- RAM), it
-> won't boot, not even early debug message will appear. Why is that?
->=20
+Test logs:
+https://gist.github.com/3V3RYONE/e86b3f4551986b0400d0e0f66d6ecc66
 
-I still haven't been able to solve this. Why is this value invalid? And whi=
-ch
-value should I put there to embed u-boot.elf into the microblaze boot memor=
-y?
+Beleswar Padhi (2):
+  configs: am571x_hs_evm_defconfig: Reserve EMIF memory used by PPA
+  arm: dts: am571x-idk: Reserve EMIF memory used by PPA
 
-> And the second thing, my endgame is to embed u-boot.elf into Microblaze i=
-tself,
-> so it acts as FSBL. I reduced the size to the maximum and I got a quite s=
-mall
-> binary, even smaller than my current bootloader (the one from Xilinx that=
- loads
-> an SREC image from flash), so there shouldn't be any issue from that part=
-. To do
-> this, I set CONFIG_TEXT_BASE=3D0x0, but again, no early boot debug messag=
-e
-> appears.
->=20
-> I've tried different values for CONFIG_TEXT_BASE in this case, but none o=
-f them
-> will work. Also, in either case, I'm not sure why, but I can't debug step=
- by
-> step via xsdb, I won't see what ASM or C code matches with current PC add=
-ress.
-> However, SPL will let me run it step by step via xsdb.
->=20
+ arch/arm/dts/am571x-idk.dts     | 12 ++++++++++++
+ configs/am571x_hs_evm_defconfig |  3 +++
+ 2 files changed, 15 insertions(+)
+ create mode 100644 configs/am571x_hs_evm_defconfig
 
-I've discovered that I can launch u-boot file with xsdb and debug step by s=
-tep
-via xsdb. But this file won't boot up properly, because somehow it seems to=
- be
-missing the DT? But the file is bigger than u-boot.elf. If I load u-boot.el=
-f, I
-get uboot console and am able to use sf probe and sf read to launch the ker=
-nel.
-But this file is smaller and I can't debug it step by step. So I don't real=
-ly
-understand anything.
+-- 
+2.34.1
 
-$ ls -al u-boot{,.elf}
--rwxr-xr-x 1 sslayer sslayer 1882032 Nov 27 10:06 u-boot
--rwxr-xr-x 1 sslayer sslayer  215224 Nov 27 10:06 u-boot.elf
-
-$ file u-boot{,.elf}
-u-boot:     ELF 32-bit LSB executable, Xilinx MicroBlaze 32-bit RISC, versi=
-on 1
-(SYSV), static-pie linked, with debug_info, not stripped
-u-boot.elf: ELF 32-bit LSB executable, Xilinx MicroBlaze 32-bit RISC, versi=
-on 1
-(SYSV), statically linked, not stripped
-
-
-So, loading u-boot
-xsdb% rst; dow u-boot ; con
-Downloading Program -- uboot-2025.10/u-boot
-	section, .text: 0x80100000 - 0x80122e7f
-	section, .plt: 0x80122e80 - 0x80122e7f
-	section, .rodata: 0x80122e80 - 0x801286c7
-	section, .dynstr: 0x801286c8 - 0x8012891a
-	section, .hash: 0x8012891c - 0x80128aaf
-	section, .gnu.hash: 0x80128ab0 - 0x80128c6f
-	section, .dtb.init.rodata: 0x80128c70 - 0x8012c9ef
-	section, .data: 0x8012c9f0 - 0x8012e5bb
-	section, .dynamic: 0x8012e5bc - 0x8012e653
-	section, .got: 0x8012e654 - 0x8012f04f
-	section, __u_boot_list: 0x8012f050 - 0x8012f737
-	section, .dynsym: 0x80133344 - 0x80133723
-	section, .bss: 0x80133724 - 0x8013675f
-	section, .dynbss: 0x80136760 - 0x8013675f
-	section, .rela.dyn: 0x8012f738 - 0x80133343
-100%    0MB   0.2MB/s  00:01   =20
-Setting PC to Program Start Address 0x80100000
-
-Gets me this on the console:
-<debug_uart>
-No valid device tree binary found at 00000000
-initcall_run_f(): initcall fdtdec_setup() failed
-### ERROR ### Please RESET the board ###
-
-
-But loading u-boot.elf; con
-Downloading Program -- uboot-2025.10/u-boot.elf
-	section, .data: 0x80100000 - 0x80133723
-100%    0MB   0.2MB/s  00:01   =20
-Setting PC to Program Start Address 0x80100000
-Successfully downloaded /home/sslayer/Proyectos/ART/ESA/build/DRVM-software=
--
-upgrade-buildroot/DRVM/output/build/uboot-2025.10/u-boot.elf
-Info: MicroBlaze #0 (target 3) Stopped at 0x80100004 (Step)
-
-Gets me this:
-
-<debug_uart>
-
-
-U-Boot 2025.10 (Nov 27 2025 - 10:06:43 +0100)
-
-Model: Xilinx MicroBlaze
-DRAM:  248 MiB
-Core:  7 devices, 6 uclasses, devicetree: embed
-Flash: ## Unknown flash on Bank 1 - Size =3D 0x00000000 =3D 0 MB
-0 Bytes
-Loading Environment from <NULL>... OK
-In:    serial
-Out:   serial
-Err:   serial
-Model: Xilinx MicroBlaze
-Unknown command 'echo' - try 'help'
-Unknown command 'echo' - try 'help'
-U-Boot-mONStR>=20
-
-Any pointers I could get on these would be greatly appreciated
-
-Thanks,
