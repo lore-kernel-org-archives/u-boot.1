@@ -4,141 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FE5CFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 06:44:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E4DFCFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 06:47:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFD9983B9B;
-	Fri, 28 Nov 2025 07:44:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 85A6683B9B;
+	Fri, 28 Nov 2025 07:46:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OTzuUiCI";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KlhDwiMi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42A448444D; Fri, 28 Nov 2025 07:44:15 +0100 (CET)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::2])
+ id 41011842E6; Fri, 28 Nov 2025 07:46:57 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EBAA84326
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 07:44:12 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CpGA+U7+9rzQDKoUIc8HwXAVUPU+S87Q7PnW7xIyy9yQslBV7JPuCDZf5unWPxUlgprRumSTLS2jLpMIAjwVLwZuNfvzdMJRhMixUxtiPX/Rd5LlsND3vJ2X5p2VnJTZWD+PUzjF2iV78yiOk00+3PRJtiD2t3CNTc/uiVat5dPAuZAOmD2aXHzwGo88pUPIT0GUtcEhUO1EhpZuiFC5Qh+MNk2MOX/hJpJXrg6VlApgqysBUF6oEbpnKUuE1xQ1efyQIflsDCmLpCoieYEJFG4EBFDGB0xa+24ZNkdAERBAB1CIBv0konIEoUcBXt4mKnAVf+rDPjEVQxBRKserdA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Oh8KXcIbQQ4ITZhtYQ72RLNJCFM8bqkbnphZBlkXQBE=;
- b=rLIdDbDEstK+l2E9gUl77KaVE5aRk/ewJsez0105KP7rdSVoxOmwaQzQ7s9hvqsXR3/m0wNqmmpC+RY6ZhAy7SKiVTxUeJUbNHhILP3NwBx9Ig0+iCsd85JyqIm07yctqjwG8fqKRpeuk1oELESOJHvIAlCzjFbBn/DI0tW3G0r436LBDIqQBpJlNXssm9L3E8hORqM8LxOF5eeO6pDw6kPlPhf+1mO32hY0dTBJ1gQNtxKhnNiBVtW2+t+PK06oqkSraEgCd+2/z3nJ8V7TPdBG1C292n18sffVdKvdCf2x8Q4Dgh8axuJVNWksly2mcq0PZNpWa5o1sDlUKq2/2Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Oh8KXcIbQQ4ITZhtYQ72RLNJCFM8bqkbnphZBlkXQBE=;
- b=OTzuUiCIm3zl51rts2rPl4RX320Jsiza8m6k3OKvguP2BCeHNHa5fR9dWFHmKLYKgYK5iKdfb8iygZzptNB9+Ns0fMjBahZwVCgV3jYNvMdbBux5S3FmMuETmUQZZbg/dTOW07YVjCTDdFWj836ii2Dg/fzxh2GydIMXJP8LoAw=
-Received: from BN9PR03CA0273.namprd03.prod.outlook.com (2603:10b6:408:f5::8)
- by LV8PR10MB7726.namprd10.prod.outlook.com (2603:10b6:408:1e8::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.16; Fri, 28 Nov
- 2025 06:44:09 +0000
-Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
- (2603:10b6:408:f5:cafe::51) by BN9PR03CA0273.outlook.office365.com
- (2603:10b6:408:f5::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9343.18 via Frontend Transport; Fri,
- 28 Nov 2025 06:44:09 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.0 via Frontend Transport; Fri, 28 Nov 2025 06:44:08 +0000
-Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
- 2025 00:44:01 -0600
-Received: from DFLE209.ent.ti.com (10.64.6.67) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
- 2025 00:44:01 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 28 Nov 2025 00:44:01 -0600
-Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.234.212])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AS6hrRU4092368;
- Fri, 28 Nov 2025 00:43:59 -0600
-From: Beleswar Padhi <b-padhi@ti.com>
-To: <trini@konsulko.com>
-CC: <afd@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
- <b-padhi@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH 2/2] arm: dts: am571x-idk: Reserve EMIF memory used by PPA
-Date: Fri, 28 Nov 2025 12:13:53 +0530
-Message-ID: <20251128064353.1295063-3-b-padhi@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20251128064353.1295063-1-b-padhi@ti.com>
-References: <20251128064353.1295063-1-b-padhi@ti.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 7E73B83B8C
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 07:46:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03 (dynamic-046-114-108-100.46.114.pool.telefonica.de
+ [46.114.108.100])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 3CE383F5DB; 
+ Fri, 28 Nov 2025 06:46:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1764312413;
+ bh=APN4CFbOvyOFi/aKBePKI550W/QwGsniGMiXvue27Wk=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=KlhDwiMiL+jkGa3EuwWsfhrXuQTsDPGw3sybppV2DYkVMkHoLPrpI52qlnBDfS5DL
+ 4fouQQHK2IvIuXDD4CgnLDk8dT6k1uXqqhyQ80kGa2Q/AV1ixMysIDG68Tlyg1TjEd
+ hxDEGZ/nvLuCVVx14H6HR0JFONiVNN0uE9pPKdmILEyFvxoV+LDTX1MA8Mlb5Ceb3W
+ KAW8QcsJtnOuIR2awFmfwrMBJqE8zIEHyXA8JZ4kbFIXlfpwwR/d4Jau0AKdQdyoJ2
+ gIJEPXo5mzuHMobGvEyekUHGgpiHcis3/rsufgm+hbePxRIEpq9Kr1u3X7K1H06Jil
+ GVOgdXP+U6+lBWGr24kQ34yNrQfnJrWpdQJ0stK0U1qRMFKnTAiRQCG2VwRepxEoyn
+ pwUgGeUOWU6KCtPptYB9daFeU2M9on4Wyb9EtcwIPLrdPJHMRRxCGZKeaZJLwHxw4U
+ TqOTaRiGAZ2aONfgQJ1lvgvuPpY1M571WT9RNIl7OvaYjXl3AxLcfHJnmwlxh/5sMb
+ PCvdDBxzb+nQHKrRfMyBk9czOPrJmMHxQBG7n0cTxOzgussy8whKz5f9XPd46hUQRY
+ ujc4T6sj+HYFFbW3+2utRrdEkDeXs2Ox3MdZ4nKtX3mlEyuHazClzXW/3HIH29x5cE
+ gEJbDFmN0taTInrUdu2cXaFE=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Bin Meng <bmeng.cn@gmail.com>,
+	Marek Vasut <marex@denx.de>
+Cc: Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] usb: xhci: avoid noisy 'Starting the controller' message.
+Date: Fri, 28 Nov 2025 07:46:47 +0100
+Message-ID: <20251128064647.12162-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|LV8PR10MB7726:EE_
-X-MS-Office365-Filtering-Correlation-Id: 132639b9-09d4-49fb-c966-08de2e4987ef
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?hRw/WOs94ipFJqObs8x5qcLd1x3C5uLGCagyJsqRoVJEJRVglxJHd2ekyVaZ?=
- =?us-ascii?Q?KqpANxKht1A2BpsrTrSRpqbUqYuAKTdknI+OfEVnLQPpRU8kqyBWWy0WiE9n?=
- =?us-ascii?Q?b8N/niaolM/Zd7QLxvZVy4Rvm/FigXkbeKEivWuWJRAr5GDYWJtP0od5zDuY?=
- =?us-ascii?Q?JhgMeIOSmzVQ5GIPOt3rAwSCE4L7Pfp7IkmZo3SOnwcccuOW2HRRnJBqnowB?=
- =?us-ascii?Q?SFYyQ1eGAZbULYM7g+NYKlaA9f25DzR882Fx4SJ5yrz4pawBJs9xlraBsvD7?=
- =?us-ascii?Q?qsGdKb/wAxLlXvVKoSyeJcXrGi0muUxGyNeD9HVYrVC7iVkM6Bs5BRvMqoPv?=
- =?us-ascii?Q?TKfW4r0z6Ty+Yh1GaXcyP/2gxojdnIoGsDJ6KmQmb9bF/rKgy+tHJD6I0DZ0?=
- =?us-ascii?Q?p8JwByustHb6L4KN3UO+TC/AuROwukB1/7u568aNwd8Z6nJ/WT8fqgek8c7E?=
- =?us-ascii?Q?WO9xIuUt9x5luvEY/FunCj30RMNN91BGn04ZXhDwB6LyS4mfcnEW0EbZINfL?=
- =?us-ascii?Q?M5xHfAieK1cZQxJARJXwRl3wKJxY1DE+do7mkwwdFYMW/0sN/M8B+EjlmHZj?=
- =?us-ascii?Q?sWCSssDzLpkrx9H5iZcZBN51sFXDiGKcukDg5XmOja+bvuBQndNwzw/fPHTn?=
- =?us-ascii?Q?SeuY36pksF4fa9BK1ZYKtyJ/XHeKoyVmx56sl7NDHwqPfcHJgDUNW4nsPMgl?=
- =?us-ascii?Q?fcUs/Wg0G4becBlZP0+HSA7EZHzC2MWIB8pKMmLO7dKKLNYg9Iu0Iq+IQzRR?=
- =?us-ascii?Q?7dDqsIwzTj82VEOtvsxSiuY87OUKQ3hx45hnjZEZ2uhRr4RcPKbh3pzu6tiv?=
- =?us-ascii?Q?Ce1A9zchtP96Le/0n2Iz9ktaFOgz115+OkrUHT3YJSYM0Tn11gvMv680xZuD?=
- =?us-ascii?Q?WwpFM/0a6+QFZQXrUAHPfJoEkNT74C1FaWdhXB2KJGrgs4blk/7rGjZFRNRp?=
- =?us-ascii?Q?WA1hicUGd2bKjMogCvZ2XzYVKpk4gVE2qsUFzgsmcMBoGRgD45XGcarflPX8?=
- =?us-ascii?Q?xsjQ/s/GMA4WbDXM+ZugaKuOda/hXoHgLudJztL1Hdpfbbli2KYJdwDoIZ3Y?=
- =?us-ascii?Q?ffjHEw18oLx6uOEWwT4nRA2Fo0d7Hx/rgpKdSpch9JV1cT2nhQDja3u3qhww?=
- =?us-ascii?Q?S29ElyHmorklbM5sooJypC5/1owkhzZOVAqFtQMVmIqZMgcX1Yal7cvEfarR?=
- =?us-ascii?Q?ueKMDTzFqIShLcyAIfFOq83kTPTHY1awgflLnT+SePLPJav/aa3akUpbQijX?=
- =?us-ascii?Q?nChRuZrlZr9uT8z+lVMVjb72D8K0bU7TZpDE3tvfLb2Pge8k4zkXYoS6Tovw?=
- =?us-ascii?Q?XseTJplCNDlNazmA4iclXl6AYHPeWR1XGAEKuiUTgTXBk9akde5NYbmSMuaM?=
- =?us-ascii?Q?ORn9QCCfTR/10vXCJioUsaQPDWWhEI0wvKosEN/EVJfN7yISvavMW7hNYegl?=
- =?us-ascii?Q?mV6N88K1nKPxa+8ZBmArs8grSEcfg3LvzbH7NCKsSXnvBY7TUTnMqcGE/M+/?=
- =?us-ascii?Q?ceSg5SpqZu5hQpLOjUJArAMqtu2CzsmdCbBbRyxC4AXORt0zKHmb3j02jV10?=
- =?us-ascii?Q?l9YXUckg14pny2kG8kA=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2025 06:44:08.0100 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 132639b9-09d4-49fb-c966-08de2e4987ef
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B06C.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR10MB7726
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,40 +78,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The AM571x SoC has 1 GB DDR space. However on HS devices, the top
-0x2500000 is used by PPA and is firewalled. We should reserve this
-memory in device-tree so that U-Boot doesn't use that memory for
-anything. Reserve the top 0x2600000 memory (aligned to 2MB as per page
-size for ARM32) for the same.
+We should avoid overwhelming users with non-essential messages.
 
-Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+The message 'Starting the controller' is not written for EHCI.
+We should not write it for XHCI either.
+
+Adjust the Python test accordingly.
+
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/arm/dts/am571x-idk.dts | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ drivers/usb/host/xhci.c   | 2 +-
+ test/py/tests/test_usb.py | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/dts/am571x-idk.dts b/arch/arm/dts/am571x-idk.dts
-index b3592b22a0c..0cbd8c8a685 100644
---- a/arch/arm/dts/am571x-idk.dts
-+++ b/arch/arm/dts/am571x-idk.dts
-@@ -20,6 +20,18 @@
- 		reg = <0x0 0x80000000 0x0 0x40000000>;
- 	};
+diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+index 3ee1f67190f..15d81da4447 100644
+--- a/drivers/usb/host/xhci.c
++++ b/drivers/usb/host/xhci.c
+@@ -158,7 +158,7 @@ static int xhci_start(struct xhci_hcor *hcor)
+ 	u32 temp;
+ 	int ret;
  
-+	reserved-memory {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		ppa_firewall_memory_region: ppa-firewall-memory@bda00000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0xbda00000 0x00 0x2600000>;
-+			no-map;
-+		};
-+	};
-+
- 	leds {
- 		compatible = "gpio-leds";
- 		cpu0-led {
+-	puts("Starting the controller\n");
++	debug("Starting the controller\n");
+ 	temp = xhci_readl(&hcor->or_usbcmd);
+ 	temp |= (CMD_RUN);
+ 	xhci_writel(&hcor->or_usbcmd, temp);
+diff --git a/test/py/tests/test_usb.py b/test/py/tests/test_usb.py
+index 1dcd0834f55..9226d1c174d 100644
+--- a/test/py/tests/test_usb.py
++++ b/test/py/tests/test_usb.py
+@@ -58,7 +58,7 @@ def test_usb_start(ubman):
+     assert 'USB init failed' not in output
+     assert 'starting USB...' in output
+ 
+-    if 'Starting the controller' in output:
++    if ubman.config.buildconfig.get('config_usb_xhci_hcd'):
+         assert 'USB XHCI' in output
+ 
+     output = ubman.run_command('echo $?')
+@@ -104,7 +104,7 @@ def test_usb_reset(ubman):
+     assert 'USB init failed' not in output
+     assert 'resetting USB...' in output
+ 
+-    if 'Starting the controller' in output:
++    if ubman.config.buildconfig.get('config_usb_xhci_hcd'):
+         assert 'USB XHCI' in output
+ 
+     output = ubman.run_command('echo $?')
 -- 
-2.34.1
+2.51.0
 
