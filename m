@@ -4,90 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE4ED116E2
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55576D116E2
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:39:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3587583B71;
-	Fri, 28 Nov 2025 17:36:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BBE3183B8A;
+	Fri, 28 Nov 2025 17:39:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RmJNVRoM";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="E0zgB0j1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA7AB83B7F; Fri, 28 Nov 2025 17:36:31 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 771C883B99; Fri, 28 Nov 2025 17:39:05 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F54A838FA
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:36:29 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-8b2aa1ae006so266359485a.2
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:36:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764347788; x=1764952588; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lX+bcRs1hmYzw20ahsx4LOqTaP16ACjHDDSO7fJk7wo=;
- b=RmJNVRoMHi/k73HwHg0wMPjH+V/GPhvCswKlpRphfk0rEoByybCj7QH1BFmpIw/7KN
- 9pRvDKjN4q8OUW3P+elOFywzp6m8QCocaRBYGGjfpQT6OigDyFu4jhN9ut/QU+FBw/XC
- eLw7bZqWsZ0kOmcmHPclf3VGVI/foMjkV2n4RjEtijaeKvZx0WVdSHISDSoh0h+S811i
- Jlt3/QD79/mIh2EUxcr6E7Ng0GT2FZkwZbM8WTTfLTpRqacC5xRuVdZwJZtcWSLisJlO
- Gj8XO6kprfdwfyU3NHVb0AfZJyG6tgQPA4tF40LYmHwdfOYjShNHf3WkM5bBAAYbVKgI
- rqdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764347788; x=1764952588;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=lX+bcRs1hmYzw20ahsx4LOqTaP16ACjHDDSO7fJk7wo=;
- b=alQbcQFnCYL0RCvozlQ05jq3n9T2WXDbeRr8SqIhEtQVoRnHDu/oDC8fTx180CXmSl
- Yxr8nT+9aLgJ2Nwajr0rlJMMnBv0t5XCoAIUY3QySgk0+QufNgLMQKXolDKNnO1TRdng
- t8ipUe+PKojL8YJ5cEN9tG0CMxfkTwC3191uABSiYJN/SejHYZtxhLqhMVkDtgOOVsGT
- RDqnM+dYd+iuOgG+GYwohm32RkMS6V+aLHN2sa0K1AFz1I58p17kH+LwLw2w1kjuZ7zh
- sqV8sLdcGvmoD+LG0nluRzq0XIVl5xaGgPQU8Zss5RK5nAbKOzE9LwmqvYGTjJQx6nbC
- iBHw==
-X-Gm-Message-State: AOJu0Yz4d3Bjmw8HvJ1jMpV4O+VuIMFl8XP7qv5kM0vFhnaxUn5vXeAe
- 6L0VC3w+Dmby1vI1z38KsEi8lPj3GDXhTYWcjVwFNL16QZREITTofAPwazUqgWt2g28=
-X-Gm-Gg: ASbGncsOFLetvQygLFUjatklDPOXXaFhlg1UvplKMaggTZG8amUxpp7JFFlcxXePy6B
- QDG/dsQZoaUNSavgaoSxTxFVMq1onVT51bosxuuiL/3PO27EzJbFnwcrga7E6gmQmHAVsn+rD/v
- 6PC+pDvVFdk0OWZNijB7lswuM3h8O9CSA3+1Ml1p3PIXLEfzzhUF3KfTOA39OVMMM3HLSSPXWM9
- E2SntZik4zR0It9mYOwjUZ8CQ2AzhdGGBfI37gMc1IzulWpFx0PMR9usMCf14KFDQNeq37cSzC5
- 6+8Bkkm2HWXrM6xqYzIV1bHiHiOo2Rs5TAeQiY1QeLtvdAAGdTwtDAsLgVHlgRZESfAe8vCEn0c
- GWygURptkYEndd0R1RvHgaClCQvL6widU/dZI43cT9YbmX6aGcwZ9ytOi2o3UrYIi1g5K1Dhlxa
- Tc1kDZmKRaiBCxJQGxxLtHlmOie058LSvIpv39Y6ATDw==
-X-Google-Smtp-Source: AGHT+IEC4Qg3uH502KMD4VsnOX8CbrfTDKi2TlWXW/SFlb6tg7DJlN3vcThFNbzWOMRUhyE1WmGfng==
-X-Received: by 2002:a05:620a:2a14:b0:8b1:8082:aec5 with SMTP id
- af79cd13be357-8b33d47825bmr3401434685a.58.1764347788067; 
- Fri, 28 Nov 2025 08:36:28 -0800 (PST)
-Received: from ubuntu.localdomain ([216.58.22.99])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8b52a1b75a9sm331227985a.25.2025.11.28.08.36.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 08:36:27 -0800 (PST)
-From: Raymond Mao <raymondmaoca@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mark Kettenis <kettenis@openbsd.org>,
- Baocheng Su <baocheng.su@siemens.com>,
- Li Hua Qian <huaqian.li@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Samuel Holland <samuel.holland@sifive.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v5 6/6] smbios: print the properties only when they exist in a
- specified version of spec
-Date: Fri, 28 Nov 2025 08:35:23 -0800
-Message-Id: <20251128163535.2301653-7-raymondmaoca@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20251128163535.2301653-1-raymondmaoca@gmail.com>
-References: <20251128163535.2301653-1-raymondmaoca@gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id C2154838FA
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:39:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=IEKVDpMggJcft+ABy53jMpC0lh4TBy+Kr/ug4Avg9lel/3wdco3LaoDQ++H+fc/3yNZFD3geskB9wH3iN6tW63IXOFmjQnbwGMzjijfx6nMiHxndLvjV/Og6S20wnQkYsZSzoj57Ft4k1dOh8USxcTbWdlxJ4xwSO97Z3Onw8Pz4LUh9vQXYTTrm760Pygs5U7zBfAlZN7C+gQmaeSWP5dq723rZLoj4SB5IO9axZusamBe7rio3PWYY3r1iqX5aqezvVhTnj5/MBgVBY6S37EzJdmh8odms0r1DZPiyoA2+hc4z48p4GFS+mgjkRXwm6PkrE6ywxedrmFjKt4mKTQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sR/KFYjXo8mfFhEvag4NlQq51CPQhPMqD+329JKkLFM=;
+ b=Cv+bFDcLUNj7z8bmjWCSwZBjN7N6KoLLdy3VoAft8B+FqnSEO8IpPIcgX1t3mOaUpZhoHpz/YmtlSZ5Dq88DwuBXpTt6E3PhPPclvgzvHtKoKIFnK/qXWxAFoH75yyIWhwZ0JnD7LJ2BxlNn7oYXWMVrBdA9uOjLN603jGr47/U0Iosz13FZOlsXNhLnfcyM+MPKhvO+6Mecdc4fRocMAvYwIBlfCVSpBMhKYwPqmhAKH/3RaYhJM4L6H0eO1Zf3Vf/Ec1XH89emf7YUfEhBOQSw7sLXBwEB0nOI8nz015tUjZXr0yvNa1Mi+8CxGH5piET2TGzUhpwhz678VkhEmg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=mailbox.org smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sR/KFYjXo8mfFhEvag4NlQq51CPQhPMqD+329JKkLFM=;
+ b=E0zgB0j1Kb9q9nvfFdJZ5Us1NFiVncl7ZOTRFxGr6yRT2LxNYwyewgDiHbm+q2Y47XNfCON9lQFH4yCwqufbq9vJTLUyxmOlrbdAsOVgAAdrjS+z7d3ERjMq5IJjXFb72qP+hRGwa001YQRuXFlTiTZfQL5LmH5P5dZVEEXimuP+07h/86VFnk6Ht42iR1nHb1+drPCg8jN1glmWdNXMrPEupZI04vm4Xt10e78fsE7T4DAGJhCyxkRhdnsqf/ETTism9goSYKWarG1vmLb9m18HrMMR8VBwZ4s4eZBEq/p6a+IO5DO3nlcClcphIjLes18u17MohLxZV8mX8B07DA==
+Received: from CWLP123CA0255.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:19e::23)
+ by AM9P195MB1266.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:3a8::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.15; Fri, 28 Nov
+ 2025 16:39:00 +0000
+Received: from AMS0EPF000001B0.eurprd05.prod.outlook.com
+ (2603:10a6:400:19e:cafe::aa) by CWLP123CA0255.outlook.office365.com
+ (2603:10a6:400:19e::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Fri,
+ 28 Nov 2025 16:38:55 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Postix.phytec.de (91.26.50.189) by
+ AMS0EPF000001B0.mail.protection.outlook.com (10.167.16.164) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9388.8 via Frontend Transport; Fri, 28 Nov 2025 16:38:59 +0000
+Received: from [192.168.2.141] (172.25.39.126) by Postix.phytec.de
+ (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Fri, 28 Nov
+ 2025 17:38:59 +0100
+From: Benjamin Hahn <B.Hahn@phytec.de>
+Subject: [PATCH v2 0/6] phytec: imx8: cleanup environments
+Date: Fri, 28 Nov 2025 17:38:40 +0100
+Message-ID: <20251128-wip-bhahn-imx8_cleanup_env-v2-0-93ebfd1591c7@phytec.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABDQKWkC/43NQQ7CIBCF4as0sxYDBJLqynuYpgE6lUmUEqjYp
+ undxZ7A5fcW/9sgYyLMcG02SFgo0xQq5KkB5014IKOhGiSXWgip2Ycis974wOi1tL17ognv2GM
+ obLTGtgPno9EaaiAmHGk54veu2lOep7QeX0X81r+yRTDOlFCtvDgurLK36NcZ3XlA6PZ9/wKU3
+ mAmxAAAAA==
+X-Change-ID: 20251125-wip-bhahn-imx8_cleanup_env-fbab8d00fa55
+To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, NXP i.MX U-Boot Team
+ <uboot-imx@nxp.com>
+CC: Teresa Remmet <t.remmet@phytec.de>, Tom Rini <trini@konsulko.com>, "Peng
+ Fan" <peng.fan@nxp.com>, Leonard Anderweit <l.anderweit@phytec.de>, "Marek
+ Vasut" <marek.vasut+renesas@mailbox.org>, Martin Schwan <m.schwan@phytec.de>, 
+ Yannic Moog <y.moog@phytec.de>, Simon Glass <sjg@chromium.org>, Yunus Bas
+ <y.bas@phytec.de>, Stefano Babic <sbabic@nabladev.com>, Fabio Estevam
+ <festevam@gmail.com>, Benjamin Hahn <B.Hahn@phytec.de>
+X-Mailer: b4 0.14.3-dev-2ce6c
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1764347939; l=2208;
+ i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
+ bh=0usdINBKAXLUdWg+nDbo2l0+ByV2IVoQZdLN9cI9Khg=;
+ b=nPWT63hBw4HPfH+fvwrcVRut0k1KfQhjZEKhcPhdMpp+FrFPGQXHF+CbwNrUdhHSO+9nPhoeB
+ oOQ1rIfj7LRDwrRDmslrySCQDKZpZl0ZgllBvKTk+EfmwdVovOmIfmP
+X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
+ pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
+X-Originating-IP: [172.25.39.126]
+X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
+ (172.25.0.11)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001B0:EE_|AM9P195MB1266:EE_
+X-MS-Office365-Filtering-Correlation-Id: 49bde022-4e90-4a07-309c-08de2e9ca1d0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700013|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MjJ3bXcyemdVQ3duYThpZ2RkTkhXSjUwRTMrM3V2bmM4b24yall3RUw4aVhV?=
+ =?utf-8?B?eTdRa1ZtWHZEbGEyWmhtSnpaSmcvZFpCQTVXWTlUOTNwVlRIRnBvVjVoWGpD?=
+ =?utf-8?B?MFZqeXdodmd2T0loVkFGTk1VRVV5L0hWYXpIdHJ4NmZqVXd2b1kzZTBMOVVN?=
+ =?utf-8?B?MjFEdmRYbWVCT1RpT0t5WDYydTI4cGpPL0ZoVkUzbnpGMGpwZVh3Mnd5Mytw?=
+ =?utf-8?B?ekxxbWxwNGdpZW9LL3NsMEJZUnNtMWcreWwyMDJIYWZpdEVTQ0FHbUp0eHp4?=
+ =?utf-8?B?aVBkOGRNa0szQ1VkSEdsTTRkR3dtNmpXTzVMMTZGdUpaelF6bjNRZVhla0Vm?=
+ =?utf-8?B?cTZpa2ZKQXB0ZDl2Z2VoamxadkVNN1gyS1gwOHVlWURvczhkSmVYaENjeDJO?=
+ =?utf-8?B?aDRUaFZtOUdtaFdQcWJuY040czRHSkdOQlpwYTU4bEVLTW5kV3NiVTZWcHJZ?=
+ =?utf-8?B?ZXJNK3ZtQ2R3R1EzenAzQmIxejRoRmVxOTN1N1E0d0lPcEF4YW1laFl0cFVU?=
+ =?utf-8?B?UEIwankwaE9JYzBhOVhWSUNqRTBUVCtWWUVxZzBSM1ZuSFJ5clRTNHFjakhS?=
+ =?utf-8?B?OW9keGkzR0ZqZEhaVFhQc2JOMmJhajZFakRPNGh0SzA5QUJJNWNuVXJocjI1?=
+ =?utf-8?B?RkFBOFM1VFBLVW8zamRaM1JIeVA4MFdyYW9xUG9HV3h3U1hGT2NxQWJ0Q3pw?=
+ =?utf-8?B?blZnK0VnRmwvZ2Q4UXlkaldmYVhsTnNJU3JwaFZVd2pkNjY2aVA0STltWG9X?=
+ =?utf-8?B?dGJPQWtYbzhSR0R4K0lqdjhVRzNSK3dobmU0SzJqN3BSNnFaYjE5Ym16Wjls?=
+ =?utf-8?B?OEdCOXlYYXVEVUEzV0FuWitheFNVekh0ckZWZTRpM3NTcXV6blpCRUZQZDZB?=
+ =?utf-8?B?b2VXUksyakZMMWpHeEtyNTErSU5LSUkwWXdxdFI1ejQ2aEs2Wmh2ZFpDNmxH?=
+ =?utf-8?B?VE4zNVR6c3NkSlMzS21FNEt4SVl6VHdORTdMUmF4Z2NPdmxhazc4UGYydXpP?=
+ =?utf-8?B?SXBsTjdaWVM3eThkc1FSdkFVTkxhMzlnOWhHcUp4Qy91U1Myd3VSUTRBRi9D?=
+ =?utf-8?B?S2ZiN2lTTHFJRHk3dXJMNmQ5QTJWbUVMZW1mZ2hkZzZGL3A4K2FraWQ4Zktv?=
+ =?utf-8?B?RDYyK0FuaDM2OXZMYS81cFZqdE1pYnAvUVBoTnNQRXNob1BVNFlDTmpRdENr?=
+ =?utf-8?B?UUxrd0ZKdURlb2puOVdENHVORUNZWkVmU0lnNWM2dkpIL1V3dTFwRUJDeHJq?=
+ =?utf-8?B?K1Qrelp4bllmaktNV2JEakd5KzU5R2M5dUpRdTlieVRsVGdXOHdHaXBMcDZr?=
+ =?utf-8?B?cUtQUDY1WDlDVWYrc3lwMUFhTENQMnlQWWR5dXlPRnpkczFYUG9CVXIzSUtS?=
+ =?utf-8?B?b2RrWTJCdS9TR1dVckhXdmxEVjdwWVMreXVGeGJXY01WRnlPaGhoNkhGS1dZ?=
+ =?utf-8?B?bTVwc2VESWlqN2t2alhtZnJDdm04Q1gvcTZVays2aUJ3NWp5elQ5RUhNOGpI?=
+ =?utf-8?B?MEVrRUZlZmZpUXJYN0JGRzMxTGZFYUI3TFU5ZTdCMUhCZmp3TFNRK1Q5c1JO?=
+ =?utf-8?B?d1ZuNk44RElCMXU2bkk0eU5iZklrbmZJT1NoMDExcG9SWWgyZVpqQmFQMGNv?=
+ =?utf-8?B?Z3VjN2ZKODd2TC9SOHF3d1hkUjdmVUVlYVMrOVAwVmhtVGFSYmF4MWJValFJ?=
+ =?utf-8?B?Vm43TG9DNFVEUVdoMzRZRExOMWZBTktuZVcwSlJQcEpoMTNqNEZFUVB5T3pu?=
+ =?utf-8?B?THQ3djgzRmhLU3JEVG9GRk5PVUFLZDJNUWJCNHoyT2F0RFJOT1N4YmN1Vk5s?=
+ =?utf-8?B?bHFKcW9PTnRQTWpNRmFlY3NITmo5a3E0RFhuTXZuTGxZYnZzcVBGaEdObXcz?=
+ =?utf-8?B?YjMrSXk0MkFRQ05RU2JCVVRZOGQ2enFRWFE2NEEvNTVrZXNrUmg2cHUvQURx?=
+ =?utf-8?B?clgwc2dhdXRxeWVHZHkyTEFXYzhCV1ZSb240Qlg4ZUlnNDl2czNXSEhwd3Rj?=
+ =?utf-8?B?alo4eEJaMEQ4M0Z1RWJieEhIYk5rVUMrZWxIQWhReFdIQmJQdXZ4SHJoeS9v?=
+ =?utf-8?B?UWRJWVFRUjVLN3B6TVdKNktReUZBRUo5N25meXRsSG9yVyt2WGpvd0dsNWwz?=
+ =?utf-8?Q?cBznodpQPFj7iGgJcWiNHlA/m?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2025 16:38:59.7334 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49bde022-4e90-4a07-309c-08de2e9ca1d0
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Postix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001B0.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9P195MB1266
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,256 +170,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-By checking the payload length, we can know the version of the spec and
-skip the ones which are not expected to exist.
+The state of the environments are different for imx8 boards. Some boards
+have more and some have less features. Cleanup the environment and bring
+all phytec imx8 boards to the same level. This includes:
+- remove unused variables
+- modify variables for use with ampliphy-boot bootscripts
+- set bootdevices, bootmeths in devicetree for standardboot
+- modify boot_devices dynamically for sdcard boot
+- let standardboot set bootcmd
+- sort env variables alphabetically
 
-Signed-off-by: Raymond Mao <raymondmaoca@gmail.com>
+Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
 ---
-Changes in v5:
-- Initial patch.
+Changes in v2:
+- fix for modifying boot_devices dynamically for sdcardboot
+- reordering patches (modify boot_devices depends on setting them in the
+  devicetree)
+- remove bootenv_addr_r as it is no longer used with ampliphy-boot
+- Link to v1: https://lore.kernel.org/r/20251125-wip-bhahn-imx8_cleanup_env-v1-0-414829c01b4b@phytec.de
 
- cmd/smbios.c     | 65 ++++++++++++++++++++++++++++++++++++++++--------
- include/smbios.h | 32 ++++++++++++++++++++++++
- 2 files changed, 86 insertions(+), 11 deletions(-)
+---
+Benjamin Hahn (6):
+      phytec: adapt env to ampliphy-boot bootscripts for imx8 boards
+      phytec: add emmc_dev and sd_dev env vars for imx8 boards
+      phytec: set bootdevices and bootmeths in devicetree for imx8 boards
+      phytec: change preferred bootdevice dynamically
+      phytec: use fdtoverlay_addr_r
+      phytec: sort .env files alphabetically for imx8 boards
 
-diff --git a/cmd/smbios.c b/cmd/smbios.c
-index 671c14e05b5..3fafa46d0a5 100644
---- a/cmd/smbios.c
-+++ b/cmd/smbios.c
-@@ -348,6 +348,8 @@ static void smbios_print_type0(struct smbios_type0 *table)
- 	printf("\tBIOS ROM Size: 0x%02x\n", table->bios_rom_size);
- 	printf("\tBIOS Characteristics: 0x%016llx\n",
- 	       table->bios_characteristics);
-+	if (table->hdr.length < SMBIOS_TYPE0_LENGTH_V24)
-+		return;
- 	printf("\tBIOS Characteristics Extension Byte 1: 0x%02x\n",
- 	       table->bios_characteristics_ext1);
- 	printf("\tBIOS Characteristics Extension Byte 2: 0x%02x\n",
-@@ -360,6 +362,8 @@ static void smbios_print_type0(struct smbios_type0 *table)
- 	       table->ec_major_release);
- 	printf("\tEmbedded Controller Firmware Minor Release: 0x%02x\n",
- 	       table->ec_minor_release);
-+	if (table->hdr.length < SMBIOS_TYPE0_LENGTH_V31)
-+		return;
- 	printf("\tExtended BIOS ROM Size: 0x%04x\n",
- 	       table->extended_bios_rom_size);
- }
-@@ -371,17 +375,16 @@ static void smbios_print_type1(struct smbios_type1 *table)
- 	smbios_print_str("Product Name", table, table->product_name);
- 	smbios_print_str("Version", table, table->version);
- 	smbios_print_str("Serial Number", table, table->serial_number);
--	if (table->hdr.length >= SMBIOS_TYPE1_LENGTH_V21) {
--		printf("\tUUID: %pUl\n", table->uuid);
--		smbios_print_lookup_str(wakeup_type_strings,
--					table->wakeup_type,
--					ARRAY_SIZE(wakeup_type_strings),
--					"Wake-up Type");
--	}
--	if (table->hdr.length >= SMBIOS_TYPE1_LENGTH_V24) {
--		smbios_print_str("SKU Number", table, table->sku_number);
--		smbios_print_str("Family", table, table->family);
--	}
-+	if (table->hdr.length < SMBIOS_TYPE1_LENGTH_V21)
-+		return;
-+	printf("\tUUID: %pUl\n", table->uuid);
-+	smbios_print_lookup_str(wakeup_type_strings, table->wakeup_type,
-+				ARRAY_SIZE(wakeup_type_strings),
-+				"Wake-up Type");
-+	if (table->hdr.length < SMBIOS_TYPE1_LENGTH_V24)
-+		return;
-+	smbios_print_str("SKU Number", table, table->sku_number);
-+	smbios_print_str("Family", table, table->family);
- }
- 
- static void smbios_print_type2(struct smbios_type2 *table)
-@@ -501,21 +504,31 @@ static void smbios_print_type4(struct smbios_type4 *table)
- 	printf("\tL1 Cache Handle: 0x%04x\n", table->l1_cache_handle);
- 	printf("\tL2 Cache Handle: 0x%04x\n", table->l2_cache_handle);
- 	printf("\tL3 Cache Handle: 0x%04x\n", table->l3_cache_handle);
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V23)
-+		return;
- 	smbios_print_str("Serial Number", table, table->serial_number);
- 	smbios_print_str("Asset Tag", table, table->asset_tag);
- 	smbios_print_str("Part Number", table, table->part_number);
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V25)
-+		return;
- 	printf("\tCore Count: 0x%02x\n", table->core_count);
- 	printf("\tCore Enabled: 0x%02x\n", table->core_enabled);
- 	printf("\tThread Count: 0x%02x\n", table->thread_count);
- 	printf("\tProcessor Characteristics: 0x%04x\n",
- 	       table->processor_characteristics);
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V26)
-+		return;
- 	smbios_print_lookup_str(processor_family_strings,
- 				table->processor_family2,
- 				ARRAY_SIZE(processor_family_strings),
- 				"Processor Family 2");
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V30)
-+		return;
- 	printf("\tCore Count 2: 0x%04x\n", table->core_count2);
- 	printf("\tCore Enabled 2: 0x%04x\n", table->core_enabled2);
- 	printf("\tThread Count 2: 0x%04x\n", table->thread_count2);
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V36)
-+		return;
- 	printf("\tThread Enabled: 0x%04x\n", table->thread_enabled);
- }
- 
-@@ -529,6 +542,8 @@ static void smbios_print_type7(struct smbios_type7 *table)
- 	printf("\tInstalled Size: 0x%04x\n", table->inst_size.data);
- 	printf("\tSupported SRAM Type: 0x%04x\n", table->supp_sram_type.data);
- 	printf("\tCurrent SRAM Type: 0x%04x\n", table->curr_sram_type.data);
-+	if (table->hdr.length < SMBIOS_TYPE7_LENGTH_V21)
-+		return;
- 	printf("\tCache Speed: 0x%02x\n", table->speed);
- 	smbios_print_lookup_str(err_corr_type_strings,
- 				table->err_corr_type,
-@@ -542,6 +557,8 @@ static void smbios_print_type7(struct smbios_type7 *table)
- 				table->associativity,
- 				ARRAY_SIZE(associativity_strings),
- 				"Associativity");
-+	if (table->hdr.length < SMBIOS_TYPE7_LENGTH_V31)
-+		return;
- 	printf("\tMaximum Cache Size 2: 0x%08x\n", table->max_size2.data);
- 	printf("\tInstalled Cache Size 2: 0x%08x\n", table->inst_size2.data);
- }
-@@ -574,8 +591,12 @@ static void smbios_print_type9(struct smbios_type9 *table)
- 	printf("\tSlot ID: 0x%04x\n", table->slot_id);
- 	printf("\tSlot Characteristics 1: 0x%04x\n",
- 	       table->slot_characteristics_1);
-+	if (table->hdr.length < SMBIOS_TYPE9_LENGTH_V21)
-+		return;
- 	printf("\tSlot Characteristics 2: 0x%04x\n",
- 	       table->slot_characteristics_2);
-+	if (table->hdr.length < SMBIOS_TYPE9_LENGTH_V26)
-+		return;
- 	printf("\tSegment Group Number (Base): 0x%04x\n",
- 	       table->segment_group_number);
- 	printf("\tBus Number (Base): 0x%04x\n", table->bus_number);
-@@ -611,6 +632,8 @@ static void smbios_print_type9(struct smbios_type9 *table)
- static void smbios_print_type16(struct smbios_type16 *table)
- {
- 	printf("Physical Memory Array:\n");
-+	if (table->hdr.length < SMBIOS_TYPE16_LENGTH_V21)
-+		return;
- 	smbios_print_lookup_str(ma_location_strings, table->location,
- 				ARRAY_SIZE(ma_location_strings), "Location");
- 	smbios_print_lookup_str(ma_use_strings, table->use,
-@@ -622,12 +645,16 @@ static void smbios_print_type16(struct smbios_type16 *table)
- 	printf("\tMemory Error Information Handle: 0x%04x\n",
- 	       table->mem_err_info_hdl);
- 	printf("\tNumber of Memory Devices: 0x%04x\n", table->num_of_mem_dev);
-+	if (table->hdr.length < SMBIOS_TYPE16_LENGTH_V27)
-+		return;
- 	printf("\tExtended Maximum Capacity: 0x%016llx\n", table->ext_max_cap);
- }
- 
- static void smbios_print_type17(struct smbios_type17 *table)
- {
- 	printf("Memory Device:\n");
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V21)
-+		return;
- 	printf("\tPhysical Memory Array Handle: 0x%04x\n",
- 	       table->phy_mem_array_hdl);
- 	printf("\tMemory Error Information Handle: 0x%04x\n",
-@@ -644,17 +671,27 @@ static void smbios_print_type17(struct smbios_type17 *table)
- 	smbios_print_lookup_str(md_type_strings, table->mem_type,
- 				ARRAY_SIZE(md_type_strings), "Memory Type");
- 	printf("\tType Detail: 0x%04x\n", table->type_detail);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V23)
-+		return;
- 	printf("\tSpeed: 0x%04x\n", table->speed);
- 	smbios_print_str("Manufacturer", table, table->manufacturer);
- 	smbios_print_str("Serial Number", table, table->serial_number);
- 	smbios_print_str("Asset Tag", table, table->asset_tag);
- 	smbios_print_str("Part Number", table, table->part_number);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V26)
-+		return;
- 	printf("\tAttributes: 0x%04x\n", table->attributes);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V27)
-+		return;
- 	printf("\tExtended Size: 0x%08x\n", table->ext_size);
- 	printf("\tConfigured Memory Speed: 0x%04x\n", table->config_mem_speed);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V28)
-+		return;
- 	printf("\tMinimum voltage: 0x%04x\n", table->min_voltage);
- 	printf("\tMaximum voltage: 0x%04x\n", table->max_voltage);
- 	printf("\tConfigured voltage: 0x%04x\n", table->config_voltage);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V32)
-+		return;
- 	smbios_print_lookup_str(md_tech_strings, table->mem_tech,
- 				ARRAY_SIZE(md_tech_strings),
- 				"Memory Technology");
-@@ -671,6 +708,8 @@ static void smbios_print_type17(struct smbios_type17 *table)
- 	printf("\tVolatile Size: 0x%016llx\n", table->volatile_size);
- 	printf("\tCache Size: 0x%016llx\n", table->cache_size);
- 	printf("\tLogical Size: 0x%016llx\n", table->logical_size);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V33)
-+		return;
- 	printf("\tExtended Speed: 0x%04x\n", table->ext_speed);
- 	printf("\tExtended Configured Memory Speed: 0x%04x\n",
- 	       table->ext_config_mem_speed);
-@@ -683,10 +722,14 @@ static void smbios_print_type17(struct smbios_type17 *table)
- static void smbios_print_type19(struct smbios_type19 *table)
- {
- 	printf("Memory Array Mapped Address:\n");
-+	if (table->hdr.length < SMBIOS_TYPE19_LENGTH_V21)
-+		return;
- 	printf("\tStarting Address: 0x%08x\n", table->start_addr);
- 	printf("\tEnding Address: 0x%08x\n", table->end_addr);
- 	printf("\tMemory Array Handle: 0x%04x\n", table->mem_array_hdl);
- 	printf("\tPartition Width: 0x%04x\n", table->partition_wid);
-+	if (table->hdr.length < SMBIOS_TYPE19_LENGTH_V27)
-+		return;
- 	printf("\tExtended Starting Address: 0x%016llx\n", table->ext_start_addr);
- 	printf("\tExtended Ending Address: 0x%016llx\n", table->ext_end_addr);
- }
-diff --git a/include/smbios.h b/include/smbios.h
-index a0e47d51852..14a7d8e6c30 100644
---- a/include/smbios.h
-+++ b/include/smbios.h
-@@ -110,10 +110,42 @@ struct __packed smbios_type0 {
- 	char eos[SMBIOS_STRUCT_EOS_BYTES];
- };
- 
-+#define SMBIOS_TYPE0_LENGTH_V24		0x18
-+#define SMBIOS_TYPE0_LENGTH_V31		0x1a
-+
- #define SMBIOS_TYPE1_LENGTH_V20		0x08
- #define SMBIOS_TYPE1_LENGTH_V21		0x19
- #define SMBIOS_TYPE1_LENGTH_V24		0x1b
- 
-+#define SMBIOS_TYPE4_LENGTH_V20		0x1a
-+#define SMBIOS_TYPE4_LENGTH_V23		0x23
-+#define SMBIOS_TYPE4_LENGTH_V25		0x28
-+#define SMBIOS_TYPE4_LENGTH_V26		0x2a
-+#define SMBIOS_TYPE4_LENGTH_V30		0x30
-+#define SMBIOS_TYPE4_LENGTH_V36		0x32
-+
-+#define SMBIOS_TYPE7_LENGTH_V20		0x0f
-+#define SMBIOS_TYPE7_LENGTH_V21		0x13
-+#define SMBIOS_TYPE7_LENGTH_V31		0x1b
-+
-+#define SMBIOS_TYPE9_LENGTH_V20		0x0c
-+#define SMBIOS_TYPE9_LENGTH_V21		0x0d
-+#define SMBIOS_TYPE9_LENGTH_V26		0x11
-+
-+#define SMBIOS_TYPE16_LENGTH_V21	0x0f
-+#define SMBIOS_TYPE16_LENGTH_V27	0x17
-+
-+#define SMBIOS_TYPE17_LENGTH_V21	0x15
-+#define SMBIOS_TYPE17_LENGTH_V23	0x1b
-+#define SMBIOS_TYPE17_LENGTH_V26	0x1c
-+#define SMBIOS_TYPE17_LENGTH_V27	0x22
-+#define SMBIOS_TYPE17_LENGTH_V28	0x28
-+#define SMBIOS_TYPE17_LENGTH_V32	0x54
-+#define SMBIOS_TYPE17_LENGTH_V33	0x5c
-+
-+#define SMBIOS_TYPE19_LENGTH_V21	0x0f
-+#define SMBIOS_TYPE19_LENGTH_V27	0x1f
-+
- struct __packed smbios_type1 {
- 	struct smbios_header hdr;
- 	u8 manufacturer;
+ arch/arm/dts/imx8mm-phyboard-polis-rdk-u-boot.dtsi   | 16 ++++++++++++++++
+ arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi      | 16 ++++++++++++++++
+ arch/arm/dts/imx8mp-phyboard-pollux-rdk-u-boot.dtsi  | 20 ++++++++++++++++++++
+ board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.c   |  2 +-
+ board/phytec/imx8mp-libra-fpsc/imx8mp-libra-fpsc.env | 14 ++++++--------
+ board/phytec/phycore_imx8mm/phycore-imx8mm.c         |  2 ++
+ board/phytec/phycore_imx8mm/phycore_imx8mm.env       | 14 ++++++++------
+ board/phytec/phycore_imx8mp/phycore-imx8mp.c         |  5 ++++-
+ board/phytec/phycore_imx8mp/phycore_imx8mp.env       | 17 +++--------------
+ configs/phycore-imx8mp_defconfig                     |  1 -
+ 10 files changed, 76 insertions(+), 31 deletions(-)
+---
+base-commit: a22f664b64aaa7ab8d431e1e6c021c6e63fd9a51
+change-id: 20251125-wip-bhahn-imx8_cleanup_env-fbab8d00fa55
+
+Best regards,
 -- 
-2.25.1
+Benjamin Hahn <B.Hahn@phytec.de>
 
