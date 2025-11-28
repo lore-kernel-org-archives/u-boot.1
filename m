@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B997CFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:11:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F474D116E2
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:11:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF889839C6;
-	Fri, 28 Nov 2025 17:11:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE25B83A84;
+	Fri, 28 Nov 2025 17:11:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ClYKLCYp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MvyFBAYg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D544E83A5C; Fri, 28 Nov 2025 17:11:11 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 997CC83957; Fri, 28 Nov 2025 17:11:12 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13DF983957
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:11:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 72F9C83A57
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:11:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7c7503c73b4so1162522a34.3
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:11:07 -0800 (PST)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-3ec96ee3dabso1488121fac.1
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:11:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764346266; x=1764951066; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764346264; x=1764951064; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=7u2+H5AXePJsFjU1M5tz3yKIpXpC2EI/c2TSGwpKY1Y=;
- b=ClYKLCYpvXX8/EBtl57UMBIA5YAKk/bOmBHg5L1HjbHclGYkAUw0AfYd51lfgfsdV8
- TvGt8kqdyVxAeMUFaUEL/8I+1+iT+sG53ydingjKYer6408WmMBANxf8IF1fT2xhFDoz
- 2AHuAsOEh1sN8QpGhlt8c77AVZhHY1pqPm58k=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AX5wS5Xd1oHOx4/fmKdjDtDWBESQKc38D+Flgf408RE=;
+ b=MvyFBAYgUgn5tRaFcQHOFwBnSgHoUnU0OTIOEjXs6g0R5FFpssm7Zg4dOD3R80kpNn
+ RwK3dQhiQQpXBkIdFTDGZcBBlw/EXok3RekKOffaSjj0vSVmWMHl8XH863hhtfa+Cecw
+ xIZfUMVKooxXhs8Bo2FdJoc+m+FR1W4612zpc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764346266; x=1764951066;
+ d=1e100.net; s=20230601; t=1764346264; x=1764951064;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=7u2+H5AXePJsFjU1M5tz3yKIpXpC2EI/c2TSGwpKY1Y=;
- b=VivrenWf5Vwr9EC3BSjqOF3ZLEBeqDlxs9ocWrzV++KbGH8qJhVJWvNItv9bt/0mU7
- yHz5jObKwQIdJqG7mbuus0ntiMHQnoo29mFcXdj5rS+3ew78yPtaVh2dQsSuuvvi0sUk
- T2EB0gMhucG9Pm3SGJzzJwmyOwwBABjO2Lfl4GErxWUTRpriew/NfABQvp8jUim6ruaY
- 5ziHN7ZrC3FX5RLYs2Y4cPWLFDjzsb9TlYNvYt0qF56zZCaQl9skMh5LJp+FlbamXMlc
- +ncbymfzmoSnzX5NjPkKFhAsWnl7WYL31wxYQV3X8NSmojHS5V14NrTnKpo59OB1nD3X
- asgQ==
-X-Gm-Message-State: AOJu0YzZJ9NmD5nMfwlQKyZecXMyqzjaCE4vczfEv26NbHdOg0R9Byio
- Ey1DPs494JIwcOwhLJmSqxraZnkAHYQX2xX9x4Q7XgSixiJ2aa9fe34uB3S5S8eh1QU=
-X-Gm-Gg: ASbGnctDxe3WQHvfUsCH7C832qPImdeExGZDE3OToZzjaIQi4k/mIE+J00tVKOrK7Le
- c9HkGQ1BFwBmAkiNQwI0y28bapmEVWOH6IamAqY3hnZ3nNYzy4u6HiYJHE1prOXIAnQ6zqV0cNk
- mLLHBSpyPgg0xaTN+rjQAiU3cFwHTbZLfMhWt+bph3eaSSmkuCm9qVn7kyDwsx4VMcEIVN97MvA
- ftkxjTjJlKrDbWasgozTtYCg0wNkV8HQsu9zc2YLLJ8jR6PvppFvSpmwNmRHlN9B5yFyc3PbZB4
- Gnp1kBdJ4jEvFvVRvICR2+Hkpvpxy2gp+PWS/7aKlKrbSAy9ucsGcA/IVkS2faJqvKOnqM5An9V
- UEG0JVxsDQT+s/R22VLHu1Y9LVjeYDnw6iU0tqfoDO9RP7P1vWSmNHjsJGnTtl14DdaiZc1OJED
- 6/91rZliHsj7LhTUQ3rJ/OM6NDyDG/jh5AdVQvvkx9LeLUlov0
-X-Google-Smtp-Source: AGHT+IGXVO3PMk1rnvrUhiUNU/a9aBzgp+yaLQXZ+Mr5893CFjbfDnU5HNS/N9fZMDtdr34x9HHI0A==
-X-Received: by 2002:a05:6808:f8d:b0:44f:6a32:535e with SMTP id
- 5614622812f47-451159c88a9mr11897368b6e.10.1764346264722; 
- Fri, 28 Nov 2025 08:11:04 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=AX5wS5Xd1oHOx4/fmKdjDtDWBESQKc38D+Flgf408RE=;
+ b=D4XeahMeE5rYwdO996z6IMNuCFmGcZgys0WmuCS0poFTKtLCja0IyzO9uM7Yy7Wvka
+ mSCutdc71y7glePb+/L995leLBK35hg1IkKLk+OIHc+Tw7iZbh+kwgcHkI9cU7R/yBHK
+ P3Aygv+P6dcW+DtDgGxZURGQh6jAxxlADM1BWx4tW+YadAV/OnmbPhl7xhtzjMyvOU9X
+ 279OPgiEFgaHS5sicNbwklkzeCQ5DQ5webocWQlcYWa/IAURpK3hwsc/1awqxYppV/mK
+ YR6fgaNFUun1LTMxMh0qPUWLrxGK0bAfhGzVp2JHPiaAylrqecdeP2+IwJLhH56augoc
+ 2bhw==
+X-Gm-Message-State: AOJu0Yyaygq3C/PUoNpybCKUMYXrtAjU4XgWU9PpVXrXyss7OkY3OOvb
+ yvL6/LFCXrEsxNfR/dsBgvMp2WLTGGK3Fa8s1i7LjUSoojKnreOhZ6rrKMbN1hMQH00=
+X-Gm-Gg: ASbGncvdfwLKpSCQJ8v1CR5Z3iRxCuQGc7Ee7s+aUNAHpMDLKJq+LBw+JwLhMf165wd
+ l7IpTjvt7tuZ/pUHcrtjDmpT1jn4zhg18CWbEQUbbd1ECluLaB2PDBVNPFzFeRqkaqVjia+JDPB
+ d+OvPkfyqEMR/X700pfanJlwMteZ4LJGyweWrG3b3owf9kxJf2IGhzFzQsuDk4v00+P5vWf6sUg
+ vktOUDcfiVrT00EDZ9Zx7NqudMttNX/RRWrM4uDwLMdCurHo/VyvLUQVv4PQdYpHf6h3ZmvkXNa
+ 3MUeJ1M5P2okZ0xWp0e0aZGcfYtEXIKiIZSfFXIrb22w+uXU/Y0WGvW188geteu4arGrf5u7gkj
+ nrOmBCcdo0ND8E5WtvDET2EtgyTISZyXTda9czxkNFVRtbby/Fy95q9H0yevVczC6HNxFXgrtcj
+ vYKddPDaSliPCfTV2oYe+R9ABK7kSQvb6dcRrRi3bbUZ0CcanX
+X-Google-Smtp-Source: AGHT+IFgtVBkQ3sWxQOCzgK1snKRlFRqtXe27i+tRD9jCale1BkDy0sllXd8MeOdYlIplA+mYx+jlw==
+X-Received: by 2002:a05:6870:bb05:b0:3e7:eb08:654a with SMTP id
+ 586e51a60fabf-3ecbe2b7c7bmr14058757fac.4.1764346263940; 
+ Fri, 28 Nov 2025 08:11:03 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f0dca3e8a5sm1957358fac.7.2025.11.28.08.11.04
+ 586e51a60fabf-3f0dca3e8a5sm1957358fac.7.2025.11.28.08.11.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 08:11:04 -0800 (PST)
+ Fri, 28 Nov 2025 08:11:03 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, mbrugger@suse.com, 
- Peter Robinson <pbrobinson@gmail.com>
-In-Reply-To: <CALeDE9MjchwyyuRahALK9EU=ie1BuAhBgP2M=hXt4LAmYBo3Rw@mail.gmail.com>
-References: <CALeDE9MjchwyyuRahALK9EU=ie1BuAhBgP2M=hXt4LAmYBo3Rw@mail.gmail.com>
-Subject: Re: Pull request: rpi-2026.01
-Message-Id: <176434626410.216060.9632287798852009379.b4-ty@konsulko.com>
-Date: Fri, 28 Nov 2025 10:11:04 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251127195749.81156-1-marek.vasut+usb@mailbox.org>
+References: <20251127195749.81156-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <176434626313.216060.4938073951295499125.b4-ty@konsulko.com>
+Date: Fri, 28 Nov 2025 10:11:03 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,15 +96,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 28 Nov 2025 14:06:57 +0000, Peter Robinson wrote:
+On Thu, 27 Nov 2025 20:57:40 +0100, Marek Vasut wrote:
 
-> Please pull the updates for the Raspberry Pi.
+> The following changes since commit 962711498ddac6179f1d1f3fa123397ba02a381b:
 > 
-> Updates for RPi for 2026.01:
-> - rpi: Fix DRAM size reporting to show total RAM
-> - rpi: Use the U-Boot control FDT for fdt_addr
-> - pinctrl: bcm283x: Add GPIO pull-up/down control for BCM2835 and BCM2711
-> - rpi: Fix compilation with larger configs
+>   bootstd: rauc: Only require partitions for one slot (2025-11-27 09:27:03 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   git://source.denx.de/u-boot-usb.git master
 > 
 > [...]
 
