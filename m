@@ -4,59 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA0ACFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 08:42:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C90F0D116EA
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 09:08:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0472D842CD;
-	Fri, 28 Nov 2025 09:42:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id DE6AF842CD;
+	Fri, 28 Nov 2025 10:08:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aG4G15mY";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="UEGA5Xww";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA16984326; Fri, 28 Nov 2025 09:42:29 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 93CD48432D; Fri, 28 Nov 2025 10:08:46 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54F7183B86
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 09:42:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 3937183B86
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 10:08:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 32DD360267;
- Fri, 28 Nov 2025 08:42:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65FE7C4CEF1;
- Fri, 28 Nov 2025 08:42:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764319345;
- bh=K2gpvJfzeJdHTAObGB2WW4PFPz6j9dWGUMkGWMmOI+Q=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=aG4G15mY1IDwFcW2BZlj508E1KgH8+/TlQusc3PTm4p6Q1VJKpzNVXlm9wQsptVfw
- 3BwmFw4Ylq/2Ur8dgcA/qNfXa+gciSJMC8jbOxhej428LiBtntLAu045h/D45WmN2D
- tIRV+kxhHFxAUNQJPG3jYXFMTV+BG9BuGDl02eIwQdgMCSGblqqbd3kO8ci/7pgTTV
- a7b3VZz5xs66ICHsjW9y2mLbmDYdQ5V/BzBeve0cS+ypPQh+u1UzMEWydiYsAqYfGV
- VVnyZKY/PZv73OG7akOWf+du74oKvc5jwEOgeZRDIqfor1wIn7Zwi6huEV8raF5IV3
- TzCbUWk+obfNA==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Petr Benes <petr.benes@ysoft.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Michal =?utf-8?B?Vm9rw6HEjQ==?=
- <michal.vokac@ysoft.com>, Marek
- Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] usb: ci_udc: Check ci_ep->desc before use
-In-Reply-To: <6cc1b997-2713-42be-9b0a-dc44db251b06@ysoft.com>
-References: <20251125085846.507591-1-michal.vokac@ysoft.com>
- <87fr9zss1e.fsf@kernel.org>
- <6cc1b997-2713-42be-9b0a-dc44db251b06@ysoft.com>
-Date: Fri, 28 Nov 2025 09:42:22 +0100
-Message-ID: <87a506sg41.fsf@kernel.org>
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=b0dvRrvvaTyQVAWZSwPPLdx2pO2UUznYQHSduAljUn1j4feAdZ1HxTiqSZbrPZEmdY7D3AwMmENFRWvDEioXFIzuKkUH0+jLJCRX6HSaeVwdPNOi3cNFtYWgvN6+FaDy3ZiHuzva3VBtcSlsDWpyIpTQMwJXUauOSnnEfbWXuZmqhgYpnnOoti/JWbYmkypicuVfjFjfIjHqITWdIAWuki0qSXRY9gFVsjYusbVpCCDivHGGpuihuXbb0p5mT2nlE/FHavIFZx0n21wNaMCvSFZ/WBtg4ZBflJmScDNFHBmmJNM9lLop1Gb9TolmpAgLQ8Gn7Li+N1avu2Fgyspl/g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DZs8xxxnco7NnsJSpJ9mCOr6V6PjuiA1oEaDPZLmfRw=;
+ b=MhF3KID4FwBOXjBFp2sVDg1nzB9eqOoqJGhZ00V1wzTDy7lbDdjlbd+Y2j124gzVXp/9fVPj70w7cD3kSjDU8WRdbGPzJ9CJELs5gTBxRBj7QgZzLGRk5hKcBbNQUU6mVHuQrQtxO7Sbe6OJQYOGG1CHMzpGhVDxI8c2ULAUpWs/SsOvW59Hf2xmy+bbk6fWwEk5eKVuqo+Mflgm3HGsUv2LHgq44KQAm1rlXwxH/6c5XhEvvYLFk/zydsXd+Q+tb9QbRRfq6fZkfjXB1x6046jfKTGXAlSVUmJEEHrNfExyEWt+/mX8pDlQuJbspDahb3RZ6O+maS8qe4XO0dh91A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DZs8xxxnco7NnsJSpJ9mCOr6V6PjuiA1oEaDPZLmfRw=;
+ b=UEGA5XwwZ9yLhnUoWqxyKkTNk/gEMPRGbrB0g9u24Nne9kD+MQxUrM7zYu1FQqYHUlvOxFH5A46HwID9xj9/Kg8Ie87XeNh117X7gi+UbRLadzL618M2anKeGkpusmB6tGNEmniJMlGYt3PHyRLCozOZdspF8YVFlYz93ZUNkX8H9fhbQHSOb6Nc+XHnfpo/o25c2NTJyTeJ40My0dQLAIa6TYCOyMKiEmnv3hJagLiOCrF15Nx71a9XjcV0mcB9abaTrlxlQeBi4qqxz+5SxSAibZaJjseTtLaj0DNVRt+Pl96XZ4yPSCQbXI1sWhj2qNn4yl6cx8saR2S1xqXPDw==
+Received: from DU0PR04MB9636.eurprd04.prod.outlook.com (2603:10a6:10:320::21)
+ by VI1PR04MB9737.eurprd04.prod.outlook.com (2603:10a6:800:1dc::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.15; Fri, 28 Nov
+ 2025 09:08:41 +0000
+Received: from DU0PR04MB9636.eurprd04.prod.outlook.com
+ ([fe80::8be1:62a3:dca7:efa3]) by DU0PR04MB9636.eurprd04.prod.outlook.com
+ ([fe80::8be1:62a3:dca7:efa3%6]) with mapi id 15.20.9366.009; Fri, 28 Nov 2025
+ 09:08:40 +0000
+From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, dl-uboot-imx <uboot-imx@nxp.com>,
+ "sbabic@nabladev.com" <sbabic@nabladev.com>, "festevam@gmail.com"
+ <festevam@gmail.com>, "trini@konsulko.com" <trini@konsulko.com>
+CC: Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>, Ji Luo
+ <ji.luo@nxp.com>, Alice Guo <alice.guo@nxp.com>
+Subject: =?gb2312?B?u9i4tDogW1BBVENIIHYxXSBpbXg5NV9ldms6IEluaXRpYWxpemUgdGhlIEVM?=
+ =?gb2312?Q?E_RNG_context?=
+Thread-Topic: [PATCH v1] imx95_evk: Initialize the ELE RNG context
+Thread-Index: AQHcVHatrOw7DIavo0yONWMxnixY37UH5DsQ
+Date: Fri, 28 Nov 2025 09:08:39 +0000
+Message-ID: <DU0PR04MB96367EBECA5951D3B9B7925BE2DCA@DU0PR04MB9636.eurprd04.prod.outlook.com>
+References: <20251113082145.898431-1-alice.guo@oss.nxp.com>
+In-Reply-To: <20251113082145.898431-1-alice.guo@oss.nxp.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DU0PR04MB9636:EE_|VI1PR04MB9737:EE_
+x-ms-office365-filtering-correlation-id: 3df98283-3e40-4ac0-cd11-08de2e5db8c2
+x-ms-exchange-sharedmailbox-routingagent-processed: True
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|19092799006|366016|376014|1800799024|38070700021|7053199007; 
+x-microsoft-antispam-message-info: =?gb2312?B?dzFCSitYSi9kdFJYTnoxc1BlY0U4YTdleVlaU0w4eVozaGhDcFI5VGNsUEl6?=
+ =?gb2312?B?dHl6OXpvZmR6OEdXNWNHZEh0bW95VTdTU1BRTVhHTWZMbjVaVkZGcXJJZXNj?=
+ =?gb2312?B?eWM2UXRvRHlaQXloY1IwRDJBOGRHcFlYWlE2YmNPZ0pyMXNhbk1DS3ViTy81?=
+ =?gb2312?B?QWpIaVpLVis4NEhKR1VWSVBxQzdUU3Z0R2ZUcWJDc3JrZjF0dlpBcG5rZ0I5?=
+ =?gb2312?B?L3kvTUxLVmNoT2NJcHNSTzVKR1IwQjRlNHo5RGdhUkNOV2JNNC9LV2g2cVRl?=
+ =?gb2312?B?Z2pHbC9zZ3hrMzM1VEwxUXpmV1lwS29lOXNGSXcxVmMyWklrQnlZTnhINXpv?=
+ =?gb2312?B?MHdkSVI0bnZOK3ZTY0RnQm1jWFhPaS8yamxzRi9RdjZVcHgyUmN0Um14UWVw?=
+ =?gb2312?B?OVpYSnIzcHpveHY5WS9ucjhEdllzckt5OENKMUhLbmJ6SWFqaDlreXpMeXZ6?=
+ =?gb2312?B?emtwUmxra1pVbDRLN1AyRUdHbGc0MzEvdnk2Tm5kR1RGSndiUFROSm4rY2ps?=
+ =?gb2312?B?S29LTU9aYmtlZjlJQ3p3azB5cCtHVnRBN0pEaXFBRFdtT2wzQzBuOUcyUTND?=
+ =?gb2312?B?akJ1V3FmTEpra2pzMEZDVGNyUWE4R25xOEQvdm5hUUppeXpCcTM5TVlyTXN4?=
+ =?gb2312?B?RUJXZ3BkL1M5c1RBTTBvY2JpaUl4SURVS0lCaUFscGRCZXAwanVzOWh0Z0h5?=
+ =?gb2312?B?NU4xR080TUs3OUMrWEUyZVBucElsR0RsRG1SNVpzaEMxU2ZoZjFVOU92RXJi?=
+ =?gb2312?B?aU41S3QvUnFIODk5aTNxQ2VtN1U2NlpwVjdLRDc2VVhvcTVkSndjYjRlMGVt?=
+ =?gb2312?B?WVFLejdhdzBQS2NYU0k0ckE5cUtFaWhDSS8rb2d0VXRyQjN3U0tNazBFRHNN?=
+ =?gb2312?B?aXJRRVRkaldwMHNvaDd6RlJJZHVkYnpZTVhJdXhvaTJvVmE0OXo0MzZqcFVX?=
+ =?gb2312?B?ZEwxcnZQTUxKK0FIeWpUYVdnQ2hVODh1Q2VZV0Frd0xKLzF6SUlUVS9LTC9w?=
+ =?gb2312?B?UXVzdVRPM2dFNjhxci8wTTI4ZnE3OE1SdWhJU1BWWGxzYTBUU2ZUTzk1NlJa?=
+ =?gb2312?B?Q09qa1Y2UzlBSVF2ZVFEaExoUGZJUng0VHdHTmVlR1ZXczJIWWFqY01iV29t?=
+ =?gb2312?B?QVRWU1pXVmlsZXU3YjkyNHpiNkUxMWVXcndJa0x5N2UzTzg1UzBqd0V2aWJN?=
+ =?gb2312?B?a0d1eExvS1liLzlNdzZuRitGM1EyV3UySWRaV0RCblFLb01yTEk3YXk2L3pN?=
+ =?gb2312?B?SVgzSVRFTmdETzlidWpMcmZRdzN3aWRxdm1OYndjLzFHTHBkeGNXandtRHBC?=
+ =?gb2312?B?Y3ZUNnNsQ2hZQWJTb3c4a0l6MWlKUkNXL2N1anhESk8vMzdjaEVOS2dvVnZV?=
+ =?gb2312?B?WXhydUVyWFJzT0pzRythbUl6V3lqaDJ5R3FneUhwVTVvRWtMTjVnNkRnRTZE?=
+ =?gb2312?B?dE56TXpSZlJDOWFxbVk4M1JOSzQzeUQxdXNwdzN5dzJmRDZxUlpRY1lJWnNi?=
+ =?gb2312?B?dU1Sc2puRmgyeGlXenpwWFREa01sblJQVkVuSlNlSE5pTENuMWtyNGcrNll1?=
+ =?gb2312?B?b3hBUUg4Yi9PQlh4UWZtUitYUE45OWZOem14OGpJdGtvTElmZVlPTUt3S0J2?=
+ =?gb2312?B?YStwanBXZG9VMEIrMEtRYVhVMHB5Nzhjb25LL1RwTHMxTmhhVXRvT0hjTkhw?=
+ =?gb2312?B?dDJqM3VxVFdTREl6a1BCcnczQmk5YVM3ZHhpRG9VWERjK3Y0Z1M5QStVL3dF?=
+ =?gb2312?B?WDNTSUdBUU1WNDhVUHBnQWxIUlY5RFhYNG1ENVNTd2pyQk9keUI4MDBZaURi?=
+ =?gb2312?B?TUJYQmFmYVBKNjZYWVdGZmFpK0dWZXZwanlmUTdQWUx5aXE1U0pFQ1AvMFhL?=
+ =?gb2312?B?U2VyeFhsV0ZVcUFOV0VQZGQ2THlBTll5RkFOMDhPTG54dlhUZk1BcFZyL08y?=
+ =?gb2312?B?Y2pHcWludHdLcXpCR3hDcU8wcW05NlVLb3hJNHRBS0J3dkwya0FhakQ3Nk1Y?=
+ =?gb2312?B?TzRLWVZrNzhzcWhDOWlGdEJOcXBFdXlRS1A4Y3NIRUZBL1VETjA1cnFIdjZD?=
+ =?gb2312?Q?cBBBSC?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
+ SRV:; IPV:NLI; SFV:NSPM; H:DU0PR04MB9636.eurprd04.prod.outlook.com; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(19092799006)(366016)(376014)(1800799024)(38070700021)(7053199007);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?gb2312?B?MnZXbDZsV1JleTZoVFA4VGpLb2NHVmRONVorQTJXNms4bVpmWGN2SHRrRi9U?=
+ =?gb2312?B?ZGtTZGNuaTcwbVRSZTRSR09DNUZoc1NLNkdoUTZJRzE4WTZPTExSZmwyMzBO?=
+ =?gb2312?B?VS82TmVRd1NvQVc1aVZKdy94aTN6T0RKcHZYV2M3Rm1LZU13OG0zdXVGbnFW?=
+ =?gb2312?B?SnJOK1B6SitqN0ZLa2lnUy90azB4VWRDTGcwSi92UHdGcnE1czE2djM4VWtr?=
+ =?gb2312?B?TUJQYi85RXVYempNR1BpMCtGVFdoZkdLU3hqcHJveVMwYWVJRG1EZWRENm5U?=
+ =?gb2312?B?YXNHSUVmRDU4ajJleHVlOEJURFpCS25uNXBRZ05zOFZZR1VBZ3A4ZmJCdXVE?=
+ =?gb2312?B?UHJkVUZJYk5iSTZxd1pIRG9YZFVFTXlpTkExVVJ5Zi9NUjFmVUFpbFlCUkdt?=
+ =?gb2312?B?WmgvODV1M0Q2eGxZcis3dG8rdU9WdmwrdzdCYnhQNUpkY21weWlaTDY3RnhB?=
+ =?gb2312?B?VS9YN0NsaDFPR3BsNjRaenV4NXh1V0pXT2YrTDAwVzBhbi9wM3VueWVPSkl6?=
+ =?gb2312?B?aHJZQm9LZEFsZjlnR2I3bW9pZm5iWnBWVVRzS0VaYUwzVFJpUmovL0dYVWJE?=
+ =?gb2312?B?S2NWQU9FNXhoNnlhRXNLRDN2RmR6d1FLdDdkVkdTZVlOdDZUOFVxaGNZRkdG?=
+ =?gb2312?B?cjFZeWtYZm5tazhIU0tXdE5UVVJEWTR5ek1IcnVVT1lkaGsyTVFpU0taWGNG?=
+ =?gb2312?B?WjFQaUhiWlp2YkQ1a2dBdUdpWmZ2QVRsM1NOdHB5UVpHK1BMcllqNDFZblZx?=
+ =?gb2312?B?OW1sakZVN0JNV3paQWdQRHk3ZlJUT3hmcFdNeUpHbTI5MDMvYWRYUjh0SmZX?=
+ =?gb2312?B?bEc4UmVYQ2xNOURvS2pCbElhNFV6WUYydDJxN2VvVXlVeUV4L0JwNUoxdC8w?=
+ =?gb2312?B?TngrSFpYNmtsaG1VK21oVmZ5d1hGT2FYK3cycUUxbHhXZXBobHBnNWdnbWFu?=
+ =?gb2312?B?TTRDeTJXT1FOS25JZkhsak5KTEQ4d0s3UldYVXYySFFWUTk1ZkFHYzUwUGNh?=
+ =?gb2312?B?NnpTTEt3Z1FaVS8vSWFYT1ExRlVqSDk3NFBwbjRaS003WVd2Y0diVE5BazRm?=
+ =?gb2312?B?UWo4K1lmNmtLMk81TnNINkRxNTYxa0dOOW1mSFc3d09FYzFzOFdqMHdyVVY3?=
+ =?gb2312?B?dEZQRjBVa1RiamRVL3NlTDA1VmswbVhhWGhkdVJPcUJGc0F4dUNQNnlvRFc2?=
+ =?gb2312?B?TlFxTnAzL21EVm9JMHBtekNiVXRkTXRVekxFbUh3VU1OU3ZKOU9oTDZJSk5J?=
+ =?gb2312?B?cFZVL0Yzc01HcWdGcitsRHBVNHp5ekdBZG0xS09tV2toUDB4cmZjTS9SS1dm?=
+ =?gb2312?B?N05CeGZMalVvcHViRkdNazdRK2p2cjFmTm1GYVJ0c0FWekN1Uml2WSsrSXFr?=
+ =?gb2312?B?eDBXYktzd0dBeEpDQjdDdXJFeitLcEJOdWFWTlk3dldQTXpTRUp0RVVvcDVX?=
+ =?gb2312?B?U0o0dm42VDFJME5GV2wzd3lURmVwK3hwcGpCZzJtd3lLUWdLSnExL2NERWtG?=
+ =?gb2312?B?ektmbVlNektZSE5qeTVGWS9jYXl0bnlBMTkzY1JPVFYzUXo5bWE2NlN0RVd5?=
+ =?gb2312?B?STZSQTF2UEVUM1FjM1pEdkp4RzZGNElIZWlpbVFPek1NQjR3ODk4Rzdob00y?=
+ =?gb2312?B?emxhUmZ5NiswSllqeTA5VzBDQldXcEU1Y0c4dGtDR2ZaTUpHelZrczF1ZVlk?=
+ =?gb2312?B?V1A0UWhob2tET1ppbGhmN1ZhQlowOU8vc1c4aUFZdUFxSjdrdWxCSUVWelV1?=
+ =?gb2312?B?NE5iWHo3cFRjMmFkV0g4WlhMdStlQ1lrNFZqT3ZIZFdId1lkWkR0S3JvS2Zt?=
+ =?gb2312?B?UklyU0ZQVnEvSjd2aHBCMnJ1c3NBclRGYjkvSlJtOVJYOXFXTVFzLzNlVE5o?=
+ =?gb2312?B?eGMxTTdVRzBDWmdVS2R3eVhZNStmOWFXSnNVNW1tRFVsbDA2bzk2djdKTlox?=
+ =?gb2312?B?dFpnODF5NTluajBDa3J6dHdsdDEyN2dYTFVOa2M3enZnSGhQcjN3OXVQRzRU?=
+ =?gb2312?B?TENmSEswV0ZvNlByS1B4ZmQrRnpheW9aU01PNzdVTW8rQ2VDam1Kei82VlMv?=
+ =?gb2312?B?d3dhWk9rSnRXOFQ0YmZZNzNCWlczQzdwcGtlcGpJandFSU1rZjV6MmNUNTQ4?=
+ =?gb2312?Q?DNLw=3D?=
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DU0PR04MB9636.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3df98283-3e40-4ac0-cd11-08de2e5db8c2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Nov 2025 09:08:39.9383 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: rGrQUPJrf1RSK7cSPtoy69Fw8bWk+QKp010ABmorb3+fXV+RY67Z857ALZKZNHj6bNDuEwkFcWd5u8l6b5XFjw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB9737
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,196 +187,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 27, 2025 at 14:44, Petr Benes <petr.benes@ysoft.com> wrote:
-
-> On 11/27/25 11:12 AM, Mattijs Korpershoek wrote:
->> Hi Michal,
->>
->> Thank you for the patch.
->>
->> On Tue, Nov 25, 2025 at 09:58, Michal Vok=C3=A1=C4=8D <michal.vokac@ysof=
-t.com> wrote:
->>
->>> From: Petr Bene=C5=A1 <petr.benes@ysoft.com>
->>>
->>> There are two places where ci_ep->desc could be accessed despite it is
->>> not valid at that moment. Either the endpoint has not been enabled yet
->>> or it has been disabled meanwhile (The ethernet gadged behaves this way
->>> at least.). That results in dereferencing a null pointer.
->>
->> I wonder if this is not a generic problem (that ep->desc) is reused.
->>
->> Looking at usb_ep_enable() in include/linux/usb/gadget.h:
->>
->> """
->> static inline int usb_ep_enable(struct usb_ep *ep,
->>                                  const struct usb_endpoint_descriptor *d=
-esc)
->> {
->>          int ret;
->>
->>          if (ep->enabled)
->>                  return 0;
->>
->>          ret =3D ep->ops->enable(ep, desc);
->>          if (ret)
->>                  return ret;
->> """
->>
->> Can you please explain why the generic code is not enough to handle
->> this?
->
-> Can't speak for for generic gadget stuff without preparation. In this
-> case it is solely ci_udc who does the mess.
->
-> It works with its own
->
-> struct ci_ep {
->         struct usb_ep ep;
->         struct list_head queue;
->         bool req_primed;
->         const struct usb_endpoint_descriptor *desc;
-> };
->
-> Which are held in (struct ci_drv).ep[] and the problematic code is
-> ci_udc specific.
-
-Ok.
-
-I have compared the changes with the linux driver
-(drivers/usb/chipidea/udc.c) and see a couple of differences in error
-handling
-
-For example, in linux, in ep_disable(), we return -EBUSY instead of 0.
-
-0 seems to tell the caller that we sucesfully disabled an ep but we did
-not do anything since it was already disabled.
-
-Can we do the same error handling as in the linux driver ?
-
->
->>
->>>
->>> Moreover, the patch gets rid of possible outstanding requests if the
->>> endpoint's state changes to disabled.
->>>
->>> Signed-off-by: Petr Bene=C5=A1 <petr.benes@ysoft.com>
->>> Signed-off-by: Michal Vok=C3=A1=C4=8D <michal.vokac@ysoft.com>
->>> ---
->>>   drivers/usb/gadget/ci_udc.c | 43 +++++++++++++++++++++++++++++++++++++
->>>   1 file changed, 43 insertions(+)
->>>
->>> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
->>> index 4bff75da759d..b3bbbb6ad32c 100644
->>> --- a/drivers/usb/gadget/ci_udc.c
->>> +++ b/drivers/usb/gadget/ci_udc.c
->>> @@ -308,6 +308,27 @@ static void ci_ep_free_request(struct usb_ep *ep, =
-struct usb_request *req)
->>>        free(ci_req);
->>>   }
->>>
->>> +static void request_complete(struct usb_ep *ep, struct ci_req *req, in=
-t status)
->>> +{
->>> +     if (req->req.status =3D=3D -EINPROGRESS)
->>> +             req->req.status =3D status;
->>> +
->>> +     DBG("%s: req %p complete: status %d, actual %u\n",
->>> +         ep->name, req, req->req.status, req->req.actual);
->>> +
->>> +     req->req.complete(ep, &req->req);
->>> +}
->>> +
->>> +static void request_complete_list(struct usb_ep *ep, struct list_head =
-*list, int status)
->>> +{
->>> +     struct ci_req *req, *tmp_req;
->>> +
->>> +     list_for_each_entry_safe(req, tmp_req, list, queue) {
->>> +             list_del_init(&req->queue);
->>> +             request_complete(ep, req, status);
->>> +     }
->>> +}
->>> +
->>>   static void ep_enable(int num, int in, int maxpacket)
->>>   {
->>>        struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl->hcor;
->>> @@ -335,6 +356,12 @@ static int ci_ep_enable(struct usb_ep *ep,
->>>        int num, in;
->>>        num =3D desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
->>>        in =3D (desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
->>> +
->>> +     if (ci_ep->desc) {
->>> +             DBG("%s: endpoint num %d in %d already enabled\n", __func=
-__, num, in);
->>> +             return 0;
->>> +     }
->>> +
->>>        ci_ep->desc =3D desc;
->>>        ep->desc =3D desc;
->>>
->>> @@ -385,16 +412,27 @@ static int ep_disable(int num, int in)
->>>   static int ci_ep_disable(struct usb_ep *ep)
->>>   {
->>>        struct ci_ep *ci_ep =3D container_of(ep, struct ci_ep, ep);
->>> +     LIST_HEAD(req_list);
->>>        int num, in, err;
->>>
->>> +     if (!ci_ep->desc) {
->>> +             DBG("%s: attempt to disable a not enabled yet endpoint\n"=
-, __func__);
->>> +             goto nodesc;
->>> +     }
->>> +
->>>        num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
->>>        in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
->>>
->>> +     list_splice_init(&ci_ep->queue, &req_list);
->>> +     request_complete_list(ep, &req_list, -ESHUTDOWN);
->>> +
->>>        err =3D ep_disable(num, in);
->>>        if (err)
->>>                return err;
->>>
->>>        ci_ep->desc =3D NULL;
->>> +
->>> +nodesc:
->>>        ep->desc =3D NULL;
->>>        ci_ep->req_primed =3D false;
->>>        return 0;
->>> @@ -606,6 +644,11 @@ static int ci_ep_queue(struct usb_ep *ep,
->>>        int in, ret;
->>>        int __maybe_unused num;
->>>
->>> +     if (!ci_ep->desc) {
->>> +             DBG("%s: ci_ep->desc =3D=3D NULL, nothing to do!\n", __fu=
-nc__);
->>> +             return -EINVAL;
->>> +     }
->>> +
->>>        num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
->>>        in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
->>>
->>> --
->>> 2.43.0
->
->
-> ________________________________
->
-> CONFIDENTIALITY NOTICE
-> This message is for the named person's use only. It may contain confident=
-ial, proprietary or legally privileged information.
-> If you receive this message in error, please immediately delete it and al=
-l copies of it from your system, destroy any hard copies of it and notify u=
-s by email to info@ysoft.com with a copy of this message. You must not, dir=
-ectly or indirectly, use, disclose, distribute, print or copy any part of t=
-his message if you are not the intended recipient. Y Soft and any of its su=
-bsidiaries each reserves the right to monitor all e-mail communications thr=
-ough its networks.
-> Y Soft is neither liable for the proper, complete transmission of the inf=
-ormation contained in this communication nor any delay in its receipt. This=
- email was scanned for the presence of computer viruses. In the unfortunate=
- event of infection Y Soft does not accept liability.
-> Any views expressed in this message are those of the individual sender, e=
-xcept where the message states otherwise and the sender is authorised to st=
-ate them.
+PiAtLS0tLdPKvP7Urbz+LS0tLS0NCj4gt6K8/sjLOiBVLUJvb3QgPHUtYm9vdC1ib3VuY2VzQGxp
+c3RzLmRlbnguZGU+ILT6se0NCj4gYWxpY2UuZ3VvQG9zcy5ueHAuY29tDQo+ILeiy83KsbzkOiAy
+MDI1xOoxMdTCMTPI1SAxNjoyMg0KPiDK1bz+yMs6IHUtYm9vdEBsaXN0cy5kZW54LmRlOyBkbC11
+Ym9vdC1pbXggPHVib290LWlteEBueHAuY29tPjsNCj4gc2JhYmljQG5hYmxhZGV2LmNvbTsgZmVz
+dGV2YW1AZ21haWwuY29tOyB0cmluaUBrb25zdWxrby5jb20NCj4gs63LzTogWWUgTGkgPHllLmxp
+QG54cC5jb20+OyBQZW5nIEZhbiA8cGVuZy5mYW5AbnhwLmNvbT47IEppIEx1bw0KPiA8amkubHVv
+QG54cC5jb20+OyBBbGljZSBHdW8gPGFsaWNlLmd1b0BueHAuY29tPg0KPiDW98ziOiBbUEFUQ0gg
+djFdIGlteDk1X2V2azogSW5pdGlhbGl6ZSB0aGUgRUxFIFJORyBjb250ZXh0DQo+IA0KPiBGcm9t
+OiBKaSBMdW8gPGppLmx1b0BueHAuY29tPg0KPiANCj4gT1AtVEVFIHJlcXVpcmVzIGEgdHJ1c3Rl
+ZCBSTkcuIFRoaXMgaXMgcHJvdmlkZWQgYnkgRUxFIG9uIGkuTVg5NS4gU3RhcnQgdGhlDQo+IGlu
+aXRpYWxpemF0aW9uIG9mIHRoZSBFTEUgUk5HIGNvbnRleHQgYmVmb3JlIE9QLVRFRSBzdGFydHVw
+IHRvIGFsbG93IE9QLVRFRSB0bw0KPiBkZXJpdmUgUk5HIGxhdGVyLg0KPiANCj4gU2lnbmVkLW9m
+Zi1ieTogSmkgTHVvIDxqaS5sdW9AbnhwLmNvbT4NCj4gU2lnbmVkLW9mZi1ieTogQWxpY2UgR3Vv
+IDxhbGljZS5ndW9AbnhwLmNvbT4NCj4gLS0tDQo+ICBib2FyZC9mcmVlc2NhbGUvaW14OTVfZXZr
+L3NwbC5jIHwgNyArKysrKysrDQo+ICAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspDQo+
+IA0KPiBkaWZmIC0tZ2l0IGEvYm9hcmQvZnJlZXNjYWxlL2lteDk1X2V2ay9zcGwuYyBiL2JvYXJk
+L2ZyZWVzY2FsZS9pbXg5NV9ldmsvc3BsLmMNCj4gaW5kZXggM2Q2NDA5N2I0YzcuLjQ4YjQ3ZDJh
+ZWQ5IDEwMDY0NA0KPiAtLS0gYS9ib2FyZC9mcmVlc2NhbGUvaW14OTVfZXZrL3NwbC5jDQo+ICsr
+KyBiL2JvYXJkL2ZyZWVzY2FsZS9pbXg5NV9ldmsvc3BsLmMNCj4gQEAgLTcsNiArNyw3IEBADQo+
+ICAjaW5jbHVkZSA8YXNtL2FyY2gvbXUuaD4NCj4gICNpbmNsdWRlIDxhc20vYXJjaC9zeXNfcHJv
+dG8uaD4NCj4gICNpbmNsdWRlIDxhc20vbWFjaC1pbXgvYm9vdF9tb2RlLmg+DQo+ICsjaW5jbHVk
+ZSA8YXNtL21hY2gtaW14L2VsZV9hcGkuaD4NCj4gICNpbmNsdWRlIDxhc20vc2VjdGlvbnMuaD4N
+Cj4gICNpbmNsdWRlIDxoYW5nLmg+DQo+ICAjaW5jbHVkZSA8aW5pdC5oPg0KPiBAQCAtMzIsNyAr
+MzMsMTMgQEAgaW50IHNwbF9ib2FyZF9ib290X2RldmljZShlbnVtIGJvb3RfZGV2aWNlDQo+IGJv
+b3RfZGV2X3NwbCkNCj4gDQo+ICB2b2lkIHNwbF9ib2FyZF9pbml0KHZvaWQpDQo+ICB7DQo+ICsJ
+aW50IHJldDsNCj4gKw0KPiAgCXB1dHMoIk5vcm1hbCBCb290XG4iKTsNCj4gKw0KPiArCXJldCA9
+IGVsZV9zdGFydF9ybmcoKTsNCj4gKwlpZiAocmV0KQ0KPiArCQlwcmludGYoIkZhaWwgdG8gc3Rh
+cnQgUk5HOiAlZFxuIiwgcmV0KTsNCj4gIH0NCj4gDQo+ICB2b2lkIGJvYXJkX2luaXRfZih1bG9u
+ZyBkdW1teSkNCj4gLS0NCj4gMi40My4wDQoNCkdlbnRsZSBwaW5nOiBBbnkgY29tbWVudHMgb24g
+dGhpcyBwYXRjaD8NCg0KQmVzdCByZWdhcmRzLA0KQWxpY2UgR3VvDQo=
