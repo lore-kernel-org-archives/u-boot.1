@@ -4,82 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FF40D116EA
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 17:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C36ADD116EA
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 22:32:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 755F683C98;
-	Fri, 28 Nov 2025 18:41:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C104D83B82;
+	Fri, 28 Nov 2025 23:32:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CJQ1nrY3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y8ZyeG53";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D20F83B24; Fri, 28 Nov 2025 18:41:31 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 609FB83B82; Fri, 28 Nov 2025 20:24:55 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E592A83AAC
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 18:41:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BB6C83B5E
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 20:24:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7c6d13986f8so1383170a34.0
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 09:41:28 -0800 (PST)
+ spf=pass smtp.mailfrom=ernestvanhoecke@gmail.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-477563e28a3so15166345e9.1
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 11:24:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764351687; x=1764956487; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E5YWV9o0sXmFxa34N+wfuRWuKyJqUEzqA887yfpwYOg=;
- b=CJQ1nrY36fZVAQ7yBN3byFYPz2pOgh8Mv0i1FJVzhjrOaFksUqIs6kTxzXqJzkEPGy
- CmlsSFHL0TwHHKJ/A+6QTvb2hzBkNTHqaBXtUGXEShuGnf5m1BYgy9mQnhLM6+3aLLHO
- S7hkK4n8LD51VUbMQ98AG7awjv9/lEINOd1nc=
+ d=gmail.com; s=20230601; t=1764357893; x=1764962693; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YLtbRn0rl4nw1yOcFD/AjkqqflLZkz6rxqdlaSmNomI=;
+ b=Y8ZyeG53yTYHbaI4eK1jwnxQOQq++gM1gHic55kq9JztCKw6GEC6AetatQuYMt6lEn
+ iHlfLKuJTGqqegpiQM6l8Oc8eiMOJC/ORNcm+Z4atOTsM5Pm9REvJXZryIYYiFPyG/Vm
+ 9aBtGI22Wxk/aiPQv+nzskUwwDPPnMGcbKs/mFgWuhDO83UNJiEyXEISUil70AfBRIcR
+ wjzaty897hDU0zyh4dqaS15MfuisgR+/LCVpHBJNjoEHc5t/jMumDdfOESdBpTyO7w2Q
+ u0YRi8k0bPd31a2Wo/vTjbw2baM2KrFS6lTaarIyAWGCTjDG44uUoyuwW4IAEzUKkWT7
+ Bklw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764351687; x=1764956487;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=E5YWV9o0sXmFxa34N+wfuRWuKyJqUEzqA887yfpwYOg=;
- b=K6nYrSEiFi/AT698rJwTsJaRs0UqhYg8r2jke/EJ9w8mi5cF2dh3CmGbIwS16xkxQy
- PzFrtTYtKJ+qS4qDjQyeBgQuBiNLo5Op7TOEVGPpS+aNHQErhzWKYQ6UFI1bqy7Agqvg
- ifUB+X1cqlI4ijw8uwIpqhnJ9HTqwh7u3gOKjc45Qbl8OFbuziSLJYeHaCzeJ8Eb71Dy
- 3Y3yujC4tts7GGjaow/78Nf8RPgwpiekyTxRdCEOR3C9Jz3x4Jfi/FMeU+OZDUtJi8DT
- NX+jBRC+uVrOl/ePX6AKZRKAuc5nJzUBmD7H6gtf3GFeKAs+kMMBo+OvvJNgeDgLz+Bw
- iN/A==
-X-Gm-Message-State: AOJu0Yw+7rLVpe7rd8S2rB9wf0jnlCUOlluVFPcTDEpdDdL7otN5pNZW
- r89uWfdvujL3H7VrWLTLMqLT0PnQa/pgkiCdW8SVdwjkgfuv8j0Nu0Pndj28Mt+uqT8=
-X-Gm-Gg: ASbGncsVVa+mciCba1MjDDYueceSzrGPoJCobofP73/Xo9ctSWiViyCoRXPJX29EAhQ
- gWKT8vglpa0GLRujAdo4eQDt3qk8iuA+I934VBHSmcuGHcHfTggDXGCPYdycnMwSpEaKcOIfsPZ
- ngwRg1vlBzuNWpKmT6Vxi3vYT0itkk3IR1v9RrvgqULpmExXQNeviMCBMaxPVv3j3ZUKf0SD82s
- CuORWRNf/fIsseryVimns4y6SVtCpRH81njxsnpPPxYrQrXcSDeGqwGE9ZNIdvTt5uKVtaDBZfh
- S0F6zO4lKcWuO3pki05X+dYIQy9JHLmCid8rn5NPegmMV1Yqv0rTwiXsPZ9zpt9FKTxLxzNSwU0
- PuZaCsUKlZCPDrWFE8Mzv1AYHdvF6CsIBBDsc/GnsoCWPn2j4/znw1bEfa+ILlIdfbmBRKv+rpB
- /M086nWNKWrmLJpEldbR3oFyiVupUTCMFcOqykrSACS5w+jggVdQGH4uV+pVI=
-X-Google-Smtp-Source: AGHT+IG22sotz8TmzjKKkpA15d33ZifxDUcLKSV6vGTZsnCGYaWfjQDKUkVhShhz3DfNjW+a1LuoYg==
-X-Received: by 2002:a9d:62c6:0:b0:7c7:ad8:68b3 with SMTP id
- 46e09a7af769-7c78eb1601emr13146130a34.14.1764351687718; 
- Fri, 28 Nov 2025 09:41:27 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c90fe0f650sm1771543a34.23.2025.11.28.09.41.27
+ d=1e100.net; s=20230601; t=1764357893; x=1764962693;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YLtbRn0rl4nw1yOcFD/AjkqqflLZkz6rxqdlaSmNomI=;
+ b=Fx13MsD4yfF4r1Es0o/IrL7pkpPibVf56CdPqiFM8WrmX1ezkJaO5VVpN5YnyK/7Tu
+ YX0mg3kxRFmKUET63Urj6tZQwSzXXjQ5waOG3q1vJsR9pOxjBOr3glg/1hJp/mp9KzSY
+ 7psobeleg5fRqtPVY6Ln5tAnl8DOkOzsSL3csXUFYqOBSnoOKMJ4ubWOR17+jKFLYaCE
+ Fx5v1cbKzFzBY7s47Yp1TLLZasBMIz74N+IpJpHYPa3cElIWzCSYTOCqgzJMpXYEJDQ1
+ 27+2I14Pqzi87Ya94s0AASSOjiEv9N21Y7ddXBijvL+5BGQeC1TmFYH8ThE+iEALJJRd
+ ChEA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV7vZagTVPi5DFjFgMycT3fjSE9kQ+YIPYKA56FdxD91LjuVhIZkB05ialBe9BY0n5Nhxw7jj0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXN5YJM1WuE2+RpjTcRrFGI0ypK2eDIDIWX65xuRXXhtdI1Cia
+ KHwhF7BOJHenJjEkwnq+eAvo56mtDtkyKa2Y/Mv31P7AcdSouz6TCSTI
+X-Gm-Gg: ASbGncvW1z6TrOqmHDyhnQHRH1jtkkAFIFCmaWS4EEEMEqxMtaRAvJzdTCIC7VaQ5V6
+ gYUeQb5IaFv49xJckr5/QYfSU39WiXq44ce5XzlcetLs4Ut7kW1QmA7io+/IPChhIifAIR3jWdg
+ IXHmZWBbjydzy8bKzWEm9UwNIZkphOQcOv0cITmsJYGyd5q5BDH7GK32JKJLMXqrq/LD3qaB0sy
+ nOIMbdq8sTg5A+s6nnJnzCMgHqpPIV3AVP/8vnzCZiSRhI/bpDul9PxRlM/FK9bspgVuJkd0T82
+ SjCJq6t2ILbASlQV7yYAT1R81UtJKRCwgKkosA0nWlEktA36aEqLzpPRoLiMq8ATw5B/NZjZIok
+ DVt7nnVOlUgRYHEmtJmwQlt+odGlTE2kexXcxMZshZ/Bg/mSjJbVpSAItfPcR0ajurxul9TzFr4
+ kRIKjLIO3YXC6hWDZnxZ7Agy332wl+Xx5Hz+MeBoZdMSNV3ROASEBHt+V49phLs3B92XxVJ+ioX
+ j6bN3FiWK7iCQ==
+X-Google-Smtp-Source: AGHT+IFVNE4TWLg6Kl8gage9Z3AZ2amSfvSWtTJ9e3jef8S/1BLpZnvklGk6qmW6O3TyjosOk5Rkbg==
+X-Received: by 2002:a05:600c:12c9:b0:479:13e9:3d64 with SMTP id
+ 5b1f17b1804b1-47913e93d6emr44071255e9.15.1764357892571; 
+ Fri, 28 Nov 2025 11:24:52 -0800 (PST)
+Received: from ernest.hoecke-nb
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4790adc6f7bsm174892905e9.2.2025.11.28.11.24.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 09:41:27 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Max Filippov <jcmvbkbc@gmail.com>
-In-Reply-To: <20251116001934.675130-1-marek.vasut+renesas@mailbox.org>
-References: <20251116001934.675130-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] xtensa: Fix big endian build
-Message-Id: <176435168710.233357.4875955417884944243.b4-ty@konsulko.com>
-Date: Fri, 28 Nov 2025 11:41:27 -0600
+ Fri, 28 Nov 2025 11:24:51 -0800 (PST)
+Date: Fri, 28 Nov 2025 20:24:51 +0100
+From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+Cc: Prasanth Mantena <p-mantena@ti.com>, Tom Rini <trini@konsulko.com>, 
+ sjg@chromium.org, alpernebiyasak@gmail.com, u-boot@lists.denx.de,
+ vigneshr@ti.com, n-francis@ti.com
+Subject: Re: [PATCH] common: spl: Enable Instruction cache after relocation
+ in board_init_r
+Message-ID: <hkcauyeizj56liomndagywfj54u3qpm2i3ameo5oyt2ja2mnrq@kluwp7dalbma>
+References: <20250317064507.1702120-1-p-mantena@ti.com>
+ <20250317151318.GR2640854@bill-the-cat>
+ <20250325053420.4wuenxmlnqsojuyt@prasanth-server>
+ <n57czo3z2lzyarh22y7oien3b6vgyum5lt5z7xe2p3rrcktxpp@qmdmk65aagng>
+ <4684aa54-db50-47de-a565-e529bde793d3@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <4684aa54-db50-47de-a565-e529bde793d3@ti.com>
+X-Mailman-Approved-At: Fri, 28 Nov 2025 23:32:55 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,20 +109,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 16 Nov 2025 01:19:01 +0100, Marek Vasut wrote:
-
-> Make sure the correct PLATFORM_...FLAGS are assigned in each
-> case, consistently. Assign PLATFORM_ELFFLAGS for both LE and
-> BE case. The previous PLATFORM_CPPFLAGS makes no sense for
-> these particular parameters, which are passed to objcopy.
+On Wed, Nov 26, 2025 at 06:34:15PM +0530, Kumar, Udit wrote:
+> Thanks Ernest for reviving this patch ,
 > 
+> Changes in arch/arm/mach-k3/common.c seems good to me.
+> 
+> but common/spl/spl.c can not pushed in generic way, I can think of few
+> platforms running SPL w/o caches on.
 > 
 
-Applied to u-boot/next, thanks!
+Hi Udit,
 
-[1/1] xtensa: Fix big endian build
-      commit: 534eaa4d4dec9efed662189fd68f78b3b7b1e636
--- 
-Tom
+Thanks for your prompt reply and input. I have now tested this patch but
+with the enable_caches in common/spl/spl.c dropped, and everything looks
+great to me. I will continue running the tests over the weekend, but can
+confirm that this change seems unnecessary to fix the issue we saw with
+sporadic boot failures.
 
+A v2 that only touches mach-k3/common.c would be suitable. If you
+prefer, I have a patch ready that we can send. I don't believe much
+functionality is lost by simply dropping the spl.c line, platforms can
+enable caches themselves as they want.
 
+Kind regards,
+Ernest
