@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93040D116E2
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 17:41:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05FE6D116EA
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 17:41:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD30083B05;
-	Fri, 28 Nov 2025 18:41:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 14B3583BEF;
+	Fri, 28 Nov 2025 18:41:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ESqggGLq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UTg0xK7I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 492E983B8C; Fri, 28 Nov 2025 18:41:25 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 46B7B83BC8; Fri, 28 Nov 2025 18:41:26 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30C6683AAC
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 18:41:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BC4383B24
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 18:41:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7c765f41346so723711a34.3
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 09:41:23 -0800 (PST)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7c77fc7c11bso1565532a34.1
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 09:41:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764351682; x=1764956482; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764351683; x=1764956483; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=neqHGi2Om5JTYYdyEaF8DIyo1DSLm3wwaILUJg360nc=;
- b=ESqggGLqvUBFu47ga/xW+sk79rxCncb0vVKN7CSAv17rx2Tpx2D9r19DvfzVnCw5vB
- 3kNlWZF0mu8FXyxzsx46qNBkL6mik/dVNitlc6FF2rdqayHGc1l2PiWgAXYHIIFY/MrZ
- AhjSBUSQfq2JViO7nDKz7Z5rrq5epJh6AfciQ=
+ bh=8LEO7vuIBluFZEPeq7HzrQ6PdIu0RpsR1PYmYSGvRFo=;
+ b=UTg0xK7Iuz4FFgOdROy2ZcTHwHLvWHL/IqvmqX9zfxaRAI7GAlOiBxstA6ZeCGI4h2
+ DD7ChES9apVXhOgb13CabuKENdAQL+c5rAVi+lXiEN9U7eRV64Ox4Ofu0Tws4fmWgz9t
+ MUbhzVCSpB0awJ5Ov9H6X3MYGGF5G5X2uMdho=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764351682; x=1764956482;
+ d=1e100.net; s=20230601; t=1764351683; x=1764956483;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=neqHGi2Om5JTYYdyEaF8DIyo1DSLm3wwaILUJg360nc=;
- b=BtCowbkUu18ZZMskZnvkhHskLf9R+uSUO0zJqbMidlFCWdXmYufqaoBXks9EmnMyDf
- vsjucxq5ev9KgKMI9Rt3fhy5Gg5L7Ie5ei8u2PrRvipnxjifL6b38ii6Q0rUcEmq3jCE
- otECizB7/QyPBrTJ33p0kN8Gp3CFmN82XMoy+M90q8HSt0rQheVFpUHb4mX0rkOwR2BG
- ajlsKPAlE5Dk7lInTZEFt3N+a+q0XfOv1aYHL6FVX1vctKUZdD5j415uwRPH5TTOwwEX
- diPXzLhLBSsRpFZHM4hJ7XaCTrYGXmNQSHamRIfkv+UnoavqalFh3vmNRdvdSMQo0Q4p
- HI5g==
-X-Gm-Message-State: AOJu0YyfXCmOeIatjG6gou03rUbng8n7UBCrOrB5tNAUqmNu1qTez9sn
- EY7dNN5Qr0H5ZTvV6pYwzyLjV42B+EPPRQVkmiD1mmFXWU+W4C0tOHHgaz38Or3KEAY=
-X-Gm-Gg: ASbGncsf/dClmE7Jf/FlGyD+ao5Y/SBgIs5DU575ZxAsJp5FqdASdW1aKT9e2GcA6pZ
- sDtssBdzT70l/lAlCFd2p5JmGDzKPJzBnURZk1t2tKTcXr2NmBaJ2aGnBeAvkutOzqwp+tnpTgk
- JTM8AeqKuQ+kkexTrNUhlz+hQ/77tJs3kkOOndArwrTu1Pd9cEDMXCDHaXZ4NCw5rCi1B8IL/8V
- H9fl4MJ9c487FqzHgP3eH0n+1MMs4uvXZZGND82kmjT67US6E5Sl7sQwOUo1xtoDcpylYmTQil+
- vEKC+E4KnEqMWzalDDJ842kf3JVIwgOr1m/ql1WW3IT5836N3MmIQU5oT/krUZbqr6/A3vxhIZF
- 58zfG+g7XGUolKf6ji5g97tQ61bbhXXEJjYAsdYmuuXADw3LFX6p+yqG7ee8PFgyhadMTxsZVqx
- BnhJjPuC0ZXDN+dy0q9kY1gkuVz5Ek4H2vUMq5qBU3CTxnpzcD
-X-Google-Smtp-Source: AGHT+IH/05L0PQv8tDNYrkg96bp0bL2fdY5BjldXrmb+JVs200p0RP+cKtyOviNem9kUUL+nNg9SwA==
-X-Received: by 2002:a05:6830:6309:b0:7c7:2df4:faa3 with SMTP id
- 46e09a7af769-7c798cc1c64mr14037539a34.33.1764351681916; 
- Fri, 28 Nov 2025 09:41:21 -0800 (PST)
+ bh=8LEO7vuIBluFZEPeq7HzrQ6PdIu0RpsR1PYmYSGvRFo=;
+ b=SBrl/kTrjrG0uoiXpOCgbpHQFBzGnojdcVEKGmjw54KitKlVpmNEtvpWNHHjzZxVNV
+ D0/MLjIGNPM0FB1Kkrq0aIbIGNEqtUy4wzTfzWVfDR7aEwWPZXdxIlLwft2mwLqq7ywT
+ cloPj2pje9T+95lTG5kMnyh5VkwJprbDHjircxwlM9mTy2ftGF4ABTS+RZLv5CJzn4mt
+ j2qCra6M/m1hauYxxebO5bCzibiA/xSrvxPUe79fm1EIT0SgrpuNpBKCz/eq5E6Psasx
+ 07hik6IlSLom221a6L7yIdAaBQyKtQOOBsjlaR+jlCO0renggzgJVsi34zC/68mBM/is
+ ffUQ==
+X-Gm-Message-State: AOJu0YxO2aB1U9XNocWoQPgtbSfWcD7u0tHZiE2FyFLdwYbWkvR7y1J5
+ 4AAvKubTsjdFuVW7+VKuDpTohQ4fHrMfV3cvzsPnpZfb5RE33RXXLZKLvxlUe0XhIRU=
+X-Gm-Gg: ASbGncuP+uulfyUqSvMX3pr5a+UO25ZJ23bQ9Qa7ZUlpPUZCztTg6FvMsQzyfFXJZ03
+ QaoCsLPBblhpQK5loQpvWq9HAwgQG9S0awq3zE3W3g9ZDw87aGMYbha2pi08AvL1tttiowXcLeD
+ UTV8wea6mKYknsIEb+1z5f6fmc+qw+omPAR1yzqHT97MY31hKjgSQ1uIH565IvWZ4c1A7uYXD45
+ dSjq9n128cjIyZScZFhyfZAwCvcHhX+yazs02hk4jP9IZfGEKC1qBBB2yIASRx4d4u0QLt51udO
+ Nj8R27Fv2RLNpJz4KESyhPRe5GP+phLeoVnbz/wTHzKZcwn+lxRKAGgv9sDwcC1tKcV8TfeYtDC
+ WyGMj8Pf7yaf78oGXNGC2RxzX7+iAyb+H7k7037r2S1PjB7SziBRjWsgeCeEJcvdTVGFyvhSX2M
+ kfEe41gCi/MeZ1PBZNEQVTHGPeYOR8Vsph2eGwg7hb9qxBl19+
+X-Google-Smtp-Source: AGHT+IFWGlNThiJGgl+S8yrG+q+IoHIqBgoTAQ+NsslgxdMe22MeP2i6CqI7pxYXXtKJEcTKeY3afw==
+X-Received: by 2002:a05:6830:1296:b0:7c7:53bd:23c1 with SMTP id
+ 46e09a7af769-7c78eb37c5cmr12142767a34.17.1764351682981; 
+ Fri, 28 Nov 2025 09:41:22 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c90fe0f650sm1771543a34.23.2025.11.28.09.41.20
+ 46e09a7af769-7c90fe0f650sm1771543a34.23.2025.11.28.09.41.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 09:41:21 -0800 (PST)
+ Fri, 28 Nov 2025 09:41:22 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-In-Reply-To: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
-References: <20251113115516.947835-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] boot: Assure FDT is always at 8-byte aligned address
-Message-Id: <176435168078.233357.200393600306508316.b4-ty@konsulko.com>
-Date: Fri, 28 Nov 2025 11:41:20 -0600
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+In-Reply-To: <20251113115539.947871-1-marek.vasut+renesas@mailbox.org>
+References: <20251113115539.947871-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] arm: qemu: Eliminate fdt_high and initrd_high misuse
+Message-Id: <176435168204.233357.8916957152135655009.b4-ty@konsulko.com>
+Date: Fri, 28 Nov 2025 11:41:22 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,21 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 13 Nov 2025 12:54:51 +0100, Marek Vasut wrote:
+On Thu, 13 Nov 2025 12:55:28 +0100, Marek Vasut wrote:
 
-> The fitImage may contain FDT at 4-byte aligned address, because alignment
-> of DT tags is 4 bytes. However, libfdt and also Linux expects DT to be at
-> 8-byte aligned address. Make sure that the DTs embedded in fitImages are
-> always used from 8-byte aligned addresses. In case the DT is decompressed,
-> make sure the target buffer is 8-byte aligned. In case the DT is only
-> loaded, make sure the target buffer is 8-byte aligned too.
+> The fdt_high and initrd_high have nasty side-effects , which may lead
+> to DT placed at 4-byte aligned offset when used in place, which then
+> prevents Linux on arm64 from booting. This is difficult to debug and
+> inobvious, with little to no gain. Remove this to let U-Boot place the
+> DT at correctly aligned address.
+> 
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] boot: Assure FDT is always at 8-byte aligned address
-      commit: 8fbcc0e0e839a8e25f636c76e59311033d3817b5
+[1/1] arm: qemu: Eliminate fdt_high and initrd_high misuse
+      commit: eb726cf6ae0e202f36aabcce88e21358cd3a7c5b
 -- 
 Tom
 
