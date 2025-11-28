@@ -4,153 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26FABCFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 08:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFA0ACFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 08:42:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D63983B2C;
-	Fri, 28 Nov 2025 09:14:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0472D842CD;
+	Fri, 28 Nov 2025 09:42:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Hoc3qO3W";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aG4G15mY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1D0384312; Fri, 28 Nov 2025 09:14:53 +0100 (CET)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
+ id DA16984326; Fri, 28 Nov 2025 09:42:29 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EEE1839D5
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 09:14:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54F7183B86
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 09:42:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VTIe/s0QfosAJwwvaTiORZQh14fsEN0cG/3zFplSHWjZYFSyvoBwvZeuKRzDXpEiJH1YfSeAYUkpz+XZR9WZSKD82uJA7xztqrUOsVz6dnHXzj1yyYxfPItPYJpZtKN50vzBPxCIcHPr7k+77cmBXDI00rdrjGkRM88+uyYzACytx85NfQaH1dTBlLjxI8ELCpFw03P2XP1RMU33h84qHbs4ggGtyo90CqeRhOz/ABovixI3yPwAn3vDLQI+CigH1Hw98lc514E5VM78LO8MCyCiS3ZEZoUULERDBGQ0MBh2B1K3lhaLVK+7RtfDq/b39x2zVkzIwyZWjqNP+/fYhQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tO8Y473QvtztkvMOjLU5gQxF+vrMN+MIOkBIGuSc7ME=;
- b=c/CdZmWohT9yf30p7oVOMfxvcJDwFRmapeIGX+N/JVyDO9fBn+J9NfTK0SCGhqLU2wmOdP0oBWA5VdbYgStnJMsRkKFkKDJzepvKzWV+j4XXlhn3Bf3PuLuxETxp/m+4pjGbgBfHjn64oqJOD/gOX4NVLH3YZX5eTSLfuFEA6GWU+bOGs46skwWvAJEtdnCDFOzyojVQ+pa7iNuL9+1pkLn6ngCwYDVhQc3bhAkU/IzW1xhs0LnM5oXP5yaOcf22qayTxeZj1tQTeMmHuNO/FeH6u1zi6qXIzLQiHDT7pL4tOeEvh8Yr2sF6jlAi1YV9ES7Qo83pk7T1WtyTi4MFoA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tO8Y473QvtztkvMOjLU5gQxF+vrMN+MIOkBIGuSc7ME=;
- b=Hoc3qO3WZXMf9x0EtS09bPtx9CcKMfZCdNNRLAtSG7vEC9poSkn4XVr+3cMYxJkK70ondJYF3ww1sIuD7fMK/Nv/7gLOSdekojaEUAd2TpM/1eTD7uqytyGPAriToHR5YP2fGIFiLg7UVA5z1ZSPzWuCp77NIqx5zw9dPY78Eno=
-Received: from CH5PR02CA0014.namprd02.prod.outlook.com (2603:10b6:610:1ed::18)
- by SJ0PR10MB4448.namprd10.prod.outlook.com (2603:10b6:a03:2ad::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Fri, 28 Nov
- 2025 08:14:46 +0000
-Received: from CH1PEPF0000AD7F.namprd04.prod.outlook.com
- (2603:10b6:610:1ed:cafe::c5) by CH5PR02CA0014.outlook.office365.com
- (2603:10b6:610:1ed::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Fri,
- 28 Nov 2025 08:14:41 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CH1PEPF0000AD7F.mail.protection.outlook.com (10.167.244.88) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9366.7 via Frontend Transport; Fri, 28 Nov 2025 08:14:45 +0000
-Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
- 2025 02:14:43 -0600
-Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
- 2025 02:14:43 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 28 Nov 2025 02:14:43 -0600
-Received: from [172.24.235.38] (lt5cd2489kgj.dhcp.ti.com [172.24.235.38] (may
- be forged))
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5AS8EeVG018347;
- Fri, 28 Nov 2025 02:14:41 -0600
-Message-ID: <821d9b15-cc5c-450e-8ee9-2531d2ec5e85@ti.com>
-Date: Fri, 28 Nov 2025 13:44:40 +0530
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 32DD360267;
+ Fri, 28 Nov 2025 08:42:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65FE7C4CEF1;
+ Fri, 28 Nov 2025 08:42:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1764319345;
+ bh=K2gpvJfzeJdHTAObGB2WW4PFPz6j9dWGUMkGWMmOI+Q=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=aG4G15mY1IDwFcW2BZlj508E1KgH8+/TlQusc3PTm4p6Q1VJKpzNVXlm9wQsptVfw
+ 3BwmFw4Ylq/2Ur8dgcA/qNfXa+gciSJMC8jbOxhej428LiBtntLAu045h/D45WmN2D
+ tIRV+kxhHFxAUNQJPG3jYXFMTV+BG9BuGDl02eIwQdgMCSGblqqbd3kO8ci/7pgTTV
+ a7b3VZz5xs66ICHsjW9y2mLbmDYdQ5V/BzBeve0cS+ypPQh+u1UzMEWydiYsAqYfGV
+ VVnyZKY/PZv73OG7akOWf+du74oKvc5jwEOgeZRDIqfor1wIn7Zwi6huEV8raF5IV3
+ TzCbUWk+obfNA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Petr Benes <petr.benes@ysoft.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Michal =?utf-8?B?Vm9rw6HEjQ==?=
+ <michal.vokac@ysoft.com>, Marek
+ Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] usb: ci_udc: Check ci_ep->desc before use
+In-Reply-To: <6cc1b997-2713-42be-9b0a-dc44db251b06@ysoft.com>
+References: <20251125085846.507591-1-michal.vokac@ysoft.com>
+ <87fr9zss1e.fsf@kernel.org>
+ <6cc1b997-2713-42be-9b0a-dc44db251b06@ysoft.com>
+Date: Fri, 28 Nov 2025 09:42:22 +0100
+Message-ID: <87a506sg41.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm: dts: am571x-idk: Reserve EMIF memory used by PPA
-To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
-CC: <afd@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>,
- <u-kumar1@ti.com>
-References: <20251128064353.1295063-1-b-padhi@ti.com>
- <20251128064353.1295063-3-b-padhi@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251128064353.1295063-3-b-padhi@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7F:EE_|SJ0PR10MB4448:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8aaa9515-c4fd-4238-70b5-08de2e563119
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Y3FobFBRc0NDaEsvR2hXZWpZWjY3UFZEYWkvZEVlanJrZk9XRHRZY1VqcVds?=
- =?utf-8?B?d2J1eDAzdlZEVnR2ZHFNZXZqL2hOL2hocWhlMjV0NjV0WWxjbitRa3Uycmw0?=
- =?utf-8?B?MWxPNXJONG9DbGg1NCswRG51eXV2T1VvcDZjRVJhMHNKU0VYREU4RmU2cXZ6?=
- =?utf-8?B?NEJZWU5xUmx3cTlCamFLa3ZUVDdlalkxczRCYzRwRU1pcW5nNWlsY2hxMGNi?=
- =?utf-8?B?SDVZa2N0ZktJeW9jNGU0RHBZQ2Y4LzUyODBJSGE2Sy9HbTBEejFva1k4ejA4?=
- =?utf-8?B?Y2JRSkI0TmxhSE9kUWJLNzRNVC9JamRwVlR0Z3QvQ25TUWxvV0tYWmN5WDZI?=
- =?utf-8?B?S01jTXl3SlNoUTBtS3kyREd2b0ZWYzhyaVRicW5LL3ZKZ20zaGZhYnMxL0Z4?=
- =?utf-8?B?K3E2UVVNcHpEOW4zY3d3Mlo4Q0JTaUlmRm1Kb01nZjJvb1JWa2loZlcra1hh?=
- =?utf-8?B?ZHRpcnRrMnBaditmdkx1REpZbmVEN3ZFeE5FZ0EyaWJQVFIzTTJ4eVdDWWk3?=
- =?utf-8?B?NXZZdkVOZDAwc2ZEY01tR0Z4S2grOEFJN3JmeU15ZlhGdzlMT1RTbGJvKzFI?=
- =?utf-8?B?WHUvR0w3bFhkRFkzUVFTQTdXMnVmL2dEU29Jb3czYmVpL3E1REJBS1E1eGY2?=
- =?utf-8?B?cDkvWStCWHdjeE52R2hQR1VkR09qU0RkYk1xdElTOHZQclpHcDJYTWxiMUtT?=
- =?utf-8?B?cExsVTBxNTdoYjY2VlJPOEx1U1NmZnpTYlVpajRYUFpYUXRlbUpmcEhzcVFO?=
- =?utf-8?B?Q1JqdHU2ODJtNjcvYTRUNUtLVWdZS3J1bjBsSjFMc3hobVQ0YTcwL2FaMnlY?=
- =?utf-8?B?OWt5bWV1Ym9RMW5qcFZyOEZKdjZnOFo0ZnBIUDFWQ1hXY0hleUVGNzFDcEF6?=
- =?utf-8?B?RVp1ZDJ4STU4bUFPOUFwRmp6ZExtV2p2WklmUVJ5NDgza0hEQ1RaUUQ4blY1?=
- =?utf-8?B?cncwdlhubndJTzFuY2hscGF2RzVabCtPU3FGbTRXcFBJUHlzNCt3eHQ1cWRn?=
- =?utf-8?B?eXZjMGRxZVBYTi8yTlVMZGpqQWVsK1E1N21FT2k1WUEwOWpKeGVxV0ZwSzRk?=
- =?utf-8?B?TGtsc3FDSkh1N0EwZlJCUlZha0pwRnZvSTFhczg4RHdDMFI0WWt0R1JBaHRH?=
- =?utf-8?B?cjdWeUM0cklYNDdsQWpBckJuZEJwREhjeGJpMU95Znl2UG9UWml6ZjMrU3JX?=
- =?utf-8?B?M0ZOYm5PcU5tcFV4OUNVK2pQaVYxVWZ1WWhkd0RodUV1SnJqRUt1dGdIZU5J?=
- =?utf-8?B?bzN3SHBJSWtkNzlwTytWOHpuQ0NzdGZPOXUyTWVORGZwMm1zK1pQNklSYkFL?=
- =?utf-8?B?bDJjVUVobkFKVHhYcExSYmVKRnhiZGJEakRWUXRKK1dSTXNPeEZXVEZpNWpH?=
- =?utf-8?B?M3R4K0FKakVIRFFPSEJncWZaVUNSMnFrc0w3NUwzTXVVV1hxVVdRanlCY1VK?=
- =?utf-8?B?eVZVUGJwWlJER1NaVkZaejd4ZC94Y0xNeVRSNDlRMnZCdVozcHJTYVpieStK?=
- =?utf-8?B?K1pHaUs2eWJzdE0rUHNMbGlFc2FCUitFMFJ4MWRyRTcwYTBVcFZkRG9ETkxn?=
- =?utf-8?B?SC9yTjVkeXFiV0diN2lpTHMrNURNdEVHZEJhaXJ3dW1RcWZwRmRhR3ZKcHJl?=
- =?utf-8?B?U2hxd25VVHdDaTI5azdubGdMcjhIYXVJYmgxRE1tK1Y4RmlEOUpvb2ZvQVo1?=
- =?utf-8?B?WXZqQUo0VWc1aUU2QjZINXAyd3cwd29xcWIvK2RLRjlkaVNFWmF5ODU5THhV?=
- =?utf-8?B?WUZaUVhBNHFTb0thdTQ1U3NsWHN2ZmQycm9LTFpRajZaa2JOeEgyVTcwV2NH?=
- =?utf-8?B?WjBmNHQ2WU1mcUJzQ25CTzM4eHhVd2VPM201bE14MVU4U2ZpL3cyTGZKWkFC?=
- =?utf-8?B?WGc0VlI0L0IybEdzdWlsSTYwNzRrV3pCUVhkTVE4RVFoNmFUVUdJTlREOUta?=
- =?utf-8?B?a2xkWUQ2b0JkWTJ2UFZnTytwRXVwT2ZXWjI4T2JyQlFWZDZuZWNUN2theGl4?=
- =?utf-8?B?RG5uNXBMRFpJN2VuTFZ1eTNpSXd1aGZzcHcrVjF5ODFBUytVMloycWkxaFNE?=
- =?utf-8?B?cktJN0pNNHdQRkQxRDEyMkNrK1RMdGJDYWwya20rdm52Mmo3UUljWE5uZ1RN?=
- =?utf-8?Q?Ly2c=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2025 08:14:45.8524 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8aaa9515-c4fd-4238-70b5-08de2e563119
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7F.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4448
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,46 +73,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Nov 27, 2025 at 14:44, Petr Benes <petr.benes@ysoft.com> wrote:
 
-On 11/28/2025 12:13 PM, Beleswar Padhi wrote:
-> The AM571x SoC has 1 GB DDR space. However on HS devices, the top
-> 0x2500000 is used by PPA and is firewalled. We should reserve this
-> memory in device-tree so that U-Boot doesn't use that memory for
-> anything. Reserve the top 0x2600000 memory (aligned to 2MB as per page
-> size for ARM32) for the same.
+> On 11/27/25 11:12 AM, Mattijs Korpershoek wrote:
+>> Hi Michal,
+>>
+>> Thank you for the patch.
+>>
+>> On Tue, Nov 25, 2025 at 09:58, Michal Vok=C3=A1=C4=8D <michal.vokac@ysof=
+t.com> wrote:
+>>
+>>> From: Petr Bene=C5=A1 <petr.benes@ysoft.com>
+>>>
+>>> There are two places where ci_ep->desc could be accessed despite it is
+>>> not valid at that moment. Either the endpoint has not been enabled yet
+>>> or it has been disabled meanwhile (The ethernet gadged behaves this way
+>>> at least.). That results in dereferencing a null pointer.
+>>
+>> I wonder if this is not a generic problem (that ep->desc) is reused.
+>>
+>> Looking at usb_ep_enable() in include/linux/usb/gadget.h:
+>>
+>> """
+>> static inline int usb_ep_enable(struct usb_ep *ep,
+>>                                  const struct usb_endpoint_descriptor *d=
+esc)
+>> {
+>>          int ret;
+>>
+>>          if (ep->enabled)
+>>                  return 0;
+>>
+>>          ret =3D ep->ops->enable(ep, desc);
+>>          if (ret)
+>>                  return ret;
+>> """
+>>
+>> Can you please explain why the generic code is not enough to handle
+>> this?
 >
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
->   arch/arm/dts/am571x-idk.dts | 12 ++++++++++++
->   1 file changed, 12 insertions(+)
+> Can't speak for for generic gadget stuff without preparation. In this
+> case it is solely ci_udc who does the mess.
 >
-> diff --git a/arch/arm/dts/am571x-idk.dts b/arch/arm/dts/am571x-idk.dts
-> index b3592b22a0c..0cbd8c8a685 100644
-> --- a/arch/arm/dts/am571x-idk.dts
-> +++ b/arch/arm/dts/am571x-idk.dts
-> @@ -20,6 +20,18 @@
->   		reg = <0x0 0x80000000 0x0 0x40000000>;
->   	};
->   
-> +	reserved-memory {
-> +		#address-cells = <2>;
-> +		#size-cells = <2>;
-> +		ranges;
-> +
-> +		ppa_firewall_memory_region: ppa-firewall-memory@bda00000 {
-> +			compatible = "shared-dma-pool";
-> +			reg = <0x00 0xbda00000 0x00 0x2600000>;
-> +			no-map;
-> +		};
-> +	};
+> It works with its own
+>
+> struct ci_ep {
+>         struct usb_ep ep;
+>         struct list_head queue;
+>         bool req_primed;
+>         const struct usb_endpoint_descriptor *desc;
+> };
+>
+> Which are held in (struct ci_drv).ep[] and the problematic code is
+> ci_udc specific.
 
-You will lose this memory on GP device as well .
+Ok.
 
-I suggest to have DT specific to HS device, or reserve this at run-time 
-after detecting HS device.
+I have compared the changes with the linux driver
+(drivers/usb/chipidea/udc.c) and see a couple of differences in error
+handling
 
+For example, in linux, in ep_disable(), we return -EBUSY instead of 0.
 
-> +
->   	leds {
->   		compatible = "gpio-leds";
->   		cpu0-led {
+0 seems to tell the caller that we sucesfully disabled an ep but we did
+not do anything since it was already disabled.
+
+Can we do the same error handling as in the linux driver ?
+
+>
+>>
+>>>
+>>> Moreover, the patch gets rid of possible outstanding requests if the
+>>> endpoint's state changes to disabled.
+>>>
+>>> Signed-off-by: Petr Bene=C5=A1 <petr.benes@ysoft.com>
+>>> Signed-off-by: Michal Vok=C3=A1=C4=8D <michal.vokac@ysoft.com>
+>>> ---
+>>>   drivers/usb/gadget/ci_udc.c | 43 +++++++++++++++++++++++++++++++++++++
+>>>   1 file changed, 43 insertions(+)
+>>>
+>>> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+>>> index 4bff75da759d..b3bbbb6ad32c 100644
+>>> --- a/drivers/usb/gadget/ci_udc.c
+>>> +++ b/drivers/usb/gadget/ci_udc.c
+>>> @@ -308,6 +308,27 @@ static void ci_ep_free_request(struct usb_ep *ep, =
+struct usb_request *req)
+>>>        free(ci_req);
+>>>   }
+>>>
+>>> +static void request_complete(struct usb_ep *ep, struct ci_req *req, in=
+t status)
+>>> +{
+>>> +     if (req->req.status =3D=3D -EINPROGRESS)
+>>> +             req->req.status =3D status;
+>>> +
+>>> +     DBG("%s: req %p complete: status %d, actual %u\n",
+>>> +         ep->name, req, req->req.status, req->req.actual);
+>>> +
+>>> +     req->req.complete(ep, &req->req);
+>>> +}
+>>> +
+>>> +static void request_complete_list(struct usb_ep *ep, struct list_head =
+*list, int status)
+>>> +{
+>>> +     struct ci_req *req, *tmp_req;
+>>> +
+>>> +     list_for_each_entry_safe(req, tmp_req, list, queue) {
+>>> +             list_del_init(&req->queue);
+>>> +             request_complete(ep, req, status);
+>>> +     }
+>>> +}
+>>> +
+>>>   static void ep_enable(int num, int in, int maxpacket)
+>>>   {
+>>>        struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl->hcor;
+>>> @@ -335,6 +356,12 @@ static int ci_ep_enable(struct usb_ep *ep,
+>>>        int num, in;
+>>>        num =3D desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+>>>        in =3D (desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+>>> +
+>>> +     if (ci_ep->desc) {
+>>> +             DBG("%s: endpoint num %d in %d already enabled\n", __func=
+__, num, in);
+>>> +             return 0;
+>>> +     }
+>>> +
+>>>        ci_ep->desc =3D desc;
+>>>        ep->desc =3D desc;
+>>>
+>>> @@ -385,16 +412,27 @@ static int ep_disable(int num, int in)
+>>>   static int ci_ep_disable(struct usb_ep *ep)
+>>>   {
+>>>        struct ci_ep *ci_ep =3D container_of(ep, struct ci_ep, ep);
+>>> +     LIST_HEAD(req_list);
+>>>        int num, in, err;
+>>>
+>>> +     if (!ci_ep->desc) {
+>>> +             DBG("%s: attempt to disable a not enabled yet endpoint\n"=
+, __func__);
+>>> +             goto nodesc;
+>>> +     }
+>>> +
+>>>        num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+>>>        in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+>>>
+>>> +     list_splice_init(&ci_ep->queue, &req_list);
+>>> +     request_complete_list(ep, &req_list, -ESHUTDOWN);
+>>> +
+>>>        err =3D ep_disable(num, in);
+>>>        if (err)
+>>>                return err;
+>>>
+>>>        ci_ep->desc =3D NULL;
+>>> +
+>>> +nodesc:
+>>>        ep->desc =3D NULL;
+>>>        ci_ep->req_primed =3D false;
+>>>        return 0;
+>>> @@ -606,6 +644,11 @@ static int ci_ep_queue(struct usb_ep *ep,
+>>>        int in, ret;
+>>>        int __maybe_unused num;
+>>>
+>>> +     if (!ci_ep->desc) {
+>>> +             DBG("%s: ci_ep->desc =3D=3D NULL, nothing to do!\n", __fu=
+nc__);
+>>> +             return -EINVAL;
+>>> +     }
+>>> +
+>>>        num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+>>>        in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+>>>
+>>> --
+>>> 2.43.0
+>
+>
+> ________________________________
+>
+> CONFIDENTIALITY NOTICE
+> This message is for the named person's use only. It may contain confident=
+ial, proprietary or legally privileged information.
+> If you receive this message in error, please immediately delete it and al=
+l copies of it from your system, destroy any hard copies of it and notify u=
+s by email to info@ysoft.com with a copy of this message. You must not, dir=
+ectly or indirectly, use, disclose, distribute, print or copy any part of t=
+his message if you are not the intended recipient. Y Soft and any of its su=
+bsidiaries each reserves the right to monitor all e-mail communications thr=
+ough its networks.
+> Y Soft is neither liable for the proper, complete transmission of the inf=
+ormation contained in this communication nor any delay in its receipt. This=
+ email was scanned for the presence of computer viruses. In the unfortunate=
+ event of infection Y Soft does not accept liability.
+> Any views expressed in this message are those of the individual sender, e=
+xcept where the message states otherwise and the sender is authorised to st=
+ate them.
