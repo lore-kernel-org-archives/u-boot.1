@@ -4,169 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA465CFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 03:26:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C0FCFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 03:32:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A17AC83B8F;
-	Fri, 28 Nov 2025 04:26:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id B1AA983B8C;
+	Fri, 28 Nov 2025 04:32:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="DDxZPsOj";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="DxevQzgG";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hsTQG3LU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E97A83B99; Fri, 28 Nov 2025 04:26:45 +0100 (CET)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 0022683B8F; Fri, 28 Nov 2025 04:32:09 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB26083B8C
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 04:26:42 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ye.li@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WLAoPtjgMllgETTMUwL6W6XNbx50CqsJLifC4UfcKIyeqgwC2rMNRF6ojbTZr13QP/qjwzU3TGak4HeHLEr8GcNk2o7OwRD5/SwMpy9pDRv8TDZqBppS6Z1ef6pCaHr5hmDApkrN/cbO1/T8wsr/WTgvopXskYlyFaUyMSimVf6Jn3dgghtMTfRdEMN73+GqUtV0rz/1Ku0fxq1XM17J6Ulcr3q0DPxZ/p/CLWBqouet+o7jnNqS6gIwiVxugiwAk7zonqqcRgBPrfqrClkdrl5SDtRcT8Rvky6sj5RoSSlW2tCBBnGwtj7kdrVbMnS4Te5Vk7ilCTGjI9IbgSQnkw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CW4CsFk37o4fHNgBhCcopsNj77UZ3FkAhu4Tit04PAs=;
- b=vulis7f2vWnha1/gqXl3f/0eP7J/dTJ/k/o5k3KGvHLneSI01zxGPbh9WmwUvGSbJ8BjXHNOZ/i1tVBlv+S8db1nPXjBG9PXX2pF2xPzyba10PERz4gXjJjCwCJekyqcxpvC2p8jbMrEbR1H+BFg437CZWhyfvmZ3z1Ul7J7ZmIA13LrpbMHGMaRGx5asETDIWZ1Yg8aFfxLlyEvXhenqVXtiBOZAYF3lDJsPnOjg5bdATIj2jNi1QOQ80vZyUdhMC32eKpYVEJybOnrPVtXCsYosvbfXNP1WyX23aWkEjZaPW89kc74bU4J/IqidoA/fzncx1NoBQYQH619o3NcDw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CW4CsFk37o4fHNgBhCcopsNj77UZ3FkAhu4Tit04PAs=;
- b=DDxZPsOj/+iJVaj3I/9hZNOK1MIXCnxP1EkeMxK3Slyo8fB97A5peiCxPS+k2YbomIc93gV6mBkRxiIJwtW+vH3ZSERKfvICcVuVd92JdP+23mb84fqzwQEBchP3cptvO2QJlyKJqzxQPckADRmyTmT3tbcw2vUN0gi/NICDAosYfb652+eq+FtS+DWypEjIYhLkUB+IXldKUG4xt6f8xttdcF3e9dLH9WQNQCz0sJwdl/zQ+LPNMWUbG4U1jYQ41ZgSOg31T7b69qm4YLGRHzn8ezCdcXT3vc/9lJn0HFeMJbABvdhbVLm/hAGux7p8jStk0XU1Y5stZlsFsqQn1w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AS4PR04MB9436.eurprd04.prod.outlook.com (2603:10a6:20b:4ec::5)
- by PA2PR04MB10185.eurprd04.prod.outlook.com (2603:10a6:102:401::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.14; Fri, 28 Nov
- 2025 03:26:38 +0000
-Received: from AS4PR04MB9436.eurprd04.prod.outlook.com
- ([fe80::afae:fb35:fc8:5c90]) by AS4PR04MB9436.eurprd04.prod.outlook.com
- ([fe80::afae:fb35:fc8:5c90%6]) with mapi id 15.20.9366.009; Fri, 28 Nov 2025
- 03:26:38 +0000
-Message-ID: <3da2565f-523d-47df-8202-0624bf0a445c@oss.nxp.com>
-Date: Fri, 28 Nov 2025 11:26:51 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] imx: container: Eliminate IMX_PQC_SUPPORT
-To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
-Cc: fedor.ross@ifm.com, =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
- <joao.goncalves@toradex.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Fabio Estevam <festevam@gmail.com>,
- Jacky Bai <ping.bai@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
-References: <20251127192633.79935-1-marek.vasut@mailbox.org>
-Content-Language: en-US
-From: Ye Li <ye.li@oss.nxp.com>
-In-Reply-To: <20251127192633.79935-1-marek.vasut@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: TPYP295CA0036.TWNP295.PROD.OUTLOOK.COM (2603:1096:7d0:7::8)
- To AS4PR04MB9436.eurprd04.prod.outlook.com
- (2603:10a6:20b:4ec::5)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D46683B7F
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 04:32:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5ARBWNRx724762
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 03:32:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ rjncKFdA/vDA2GvZcBlMtTrRM2fYGUYJiHNkQGNBaSI=; b=DxevQzgGUcdrMAnY
+ MSK6MGqKJsx+l+jL35CzFYeGYFUbdTfkXar18HzyMISK+utc2Z5fCI0Jm96YsFuV
+ 9Jli59Mvv+Sn/ZcAJDJwP/aJW8UdqiIrWrBzmwfg0hIJCx4hSUiNCpYCz2gaDMtb
+ ItFD7TM6YUltgH+MOayzVNosHWjC/fbwa9mmZaARHzm0TK9/0X/pGhE5uN5Q2Fd9
+ LkaR0Zf0+l62lJ/VDrqtNhKRSVFoM5HXsu3wRwewaOgr3MR5TalNElD8DjNhqemR
+ rnopY4cyXjQRxlqyOEX5DaYpbYD6JGF/R6jWua9h9oYCn+bAjUO9Rop+FS9yoR0a
+ S9OqlA==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
+ [209.85.210.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4apnud9r6x-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 03:32:03 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id
+ d2e1a72fcca58-7a4c4eeeef2so3066179b3a.0
+ for <u-boot@lists.denx.de>; Thu, 27 Nov 2025 19:32:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1764300722; x=1764905522; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=rjncKFdA/vDA2GvZcBlMtTrRM2fYGUYJiHNkQGNBaSI=;
+ b=hsTQG3LUbV48aTjRZ8PPF+4jRcwDaRoy/tXW4SvCpucK9u8U4rHQivXeocw8dHZ1UR
+ nlk6ORWvIXTednqN7hRvwA72OSiky+0yI6dYs1LJSAeaWUSbDe8fZ0k3sxq4mzVaUq+I
+ vo18GJhTYW/kpkuz6EhZxWK7H0UqTnqRQ/YeHZXFegTFt8SiFc9qxuejSwAe8O2IjY3c
+ GNKtOKPwpAlghRpWQ/ZuSCQ63z736F0V5gZHV68rdWTQ+EssUBRKGqlD939BtG14kOv1
+ eh/M/bGJKMVjySvT4HqtxquVl6j3kcyS7bqw3UgbL888V5mbGqoEsMl7VRiywdSwJ5iK
+ Z9XA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764300722; x=1764905522;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rjncKFdA/vDA2GvZcBlMtTrRM2fYGUYJiHNkQGNBaSI=;
+ b=FPDZ/7J4smVz//5Th4m0MEkwJtR3LXfEe4jCtoWtXsZ1YYmQi/FRcrRXpreU41/afe
+ gu+AlzAJLX7NG+qTesyjtBLpvqe03RzPR35nNg3gxt3cOSSoZlFGm38oH9R9bAdUJp/L
+ x/yel4wlakP2Ky4OHexiUPxyTP+36/ndOnnQdgH1dJ8vuvwMUsRGn9LsvPW9QWNAnvif
+ D03BbK3+BBIT8g1Qz7YIHTpRbTtuXjoiAu2Ri2ofu3dbGLX/BWqeluz6NTDNV40O9DDL
+ v+DngShKtNR/uUt9Wz9N+ECttj9sLp4pMEwXogjCtz2x7LnX237emW5F9wGU9fwqoDhK
+ WuJg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVrSNIurdwwRgCuw4uu0n27JmlCPVqv4eaJ7tg9FaSZAHJCud4QHC76jVeWrSTIuJ9WFCiIv7g=@lists.denx.de
+X-Gm-Message-State: AOJu0YxaegwcZoDgFTEiLDOeBqIjee7aQ7gI5X1Y3nnK4SdAbXIvBPW4
+ wUENiIp3ZVme2C9BRcweHWqM8a6+KV7PIkAa5U8do4N+HaODtije1GFfmnbHIyWFVbMrjtF8zdS
+ dJg3g3XHBSJ3bS18V/NhsMs3eO8b1Tm+mcEaduOZs/1UvqGwR6q7bYjj5
+X-Gm-Gg: ASbGncu3H/0o2Kbh0Gqi22y8cVhveq19pbanLd3JE2ifPWD31qFB0xq7M9+02+5jQXO
+ wiBRNQBknFZsOcDJtQIeC8b5pmA8xytmValwAoSaV+D1gMuxoGu+/DUMFp24PNPK5+4kLgscQXB
+ mWQxauHiJut7uG3OFlmZu8o2jcuSU7g6KDzInZ8nJJEmjF5Scdd54YKQ+FND1Qfs5ZQiw+Pox+h
+ Hi80ObuDmJkg73dU7pyUa1TkJhGTRLsUsfSy/ZgBNSMgwW4BBLu39bDoRWXEPTwo6OY54mzFlqG
+ xyBcs4Cylq25rxBfQqsrbuR7ZUyf017T8JIcwbrwKG1N9a/6b88JxEm5qbxz81l68uXhJ9cIdFq
+ 1elEK/bw4mCc/rvWAPn7M4e1piqCDtmg7KjpH7RgBikEF9g==
+X-Received: by 2002:a05:6a00:2449:b0:7b7:6f69:e9ba with SMTP id
+ d2e1a72fcca58-7ca877f8a52mr14162869b3a.1.1764300722346; 
+ Thu, 27 Nov 2025 19:32:02 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGz0mg2lg9ok3qwiaudjBGsS96BEbMB7KOikvy1Qe+LAk2GXg73Z5Gr1cBrTjjYhkJI0hdD5A==
+X-Received: by 2002:a05:6a00:2449:b0:7b7:6f69:e9ba with SMTP id
+ d2e1a72fcca58-7ca877f8a52mr14162843b3a.1.1764300721674; 
+ Thu, 27 Nov 2025 19:32:01 -0800 (PST)
+Received: from [10.151.41.95] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7d14b870a4dsm3333695b3a.0.2025.11.27.19.31.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 27 Nov 2025 19:32:01 -0800 (PST)
+Message-ID: <ba36051e-fe56-4198-8ca5-7e2c52442efd@oss.qualcomm.com>
+Date: Fri, 28 Nov 2025 09:01:52 +0530
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR04MB9436:EE_|PA2PR04MB10185:EE_
-X-MS-Office365-Filtering-Correlation-Id: 09fc5fa5-556e-4508-304c-08de2e2df0c5
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|42112799006|19092799006|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VlErZy9RWkc4UjhmSTU1dTdlUm9qci9TNEZPMlg5OS8xWW1Zb0poZTFtWTBx?=
- =?utf-8?B?OE4rNU1mOG9XaU0zdUVzcXhZMGRPK04xbUlDY2hWcWkxa3o3TkNuUGZoU0I1?=
- =?utf-8?B?UFRORzdYR2JGNU1DZzJySGhPdU8wMllKWXBhcnRMYTlyWDY4Q1dMenl1N29E?=
- =?utf-8?B?b3BadjFhRUZ4ZEpTZlBVZ0FRZEdYZTY4NVJ0SDkxMkJEbnJDdngydUVJMkFH?=
- =?utf-8?B?MmhuaWhvNGh2eForcnlDczg1azhzVzFZb3hIN2pvVjVlWWVSUU1TVk5IRTZL?=
- =?utf-8?B?Y0dmamp3U3NXYUVpUXZmNWQ2VU9kYWh4bzZCZVlzNDNxeGNSMWVXTGpJVUVB?=
- =?utf-8?B?aWFuc3NaQXRvT1hkRCtWTE1tNjBpZmgzbWdZdDhnYSs4bGcwWG1EN2hYNC9B?=
- =?utf-8?B?VWNxR2xja2wydlQreWJZSlJPZVM3R0FZRmh3SVd5QWlJbU1LbkZ4dDZERUxO?=
- =?utf-8?B?c0o5ek5wOGVvd2hIbDducjVQcjRnRFlEMEFYN2Jxa24wb2NkMlloQTRFMU85?=
- =?utf-8?B?dW1qTEdCNE5GKzYycnhjOExsRFlGMEdkdVdNdHpGZ2lWVFVkRU15ZU5WUzF6?=
- =?utf-8?B?c084UThJQk5LMjFMb25IaWZGbDZxK1JtV0t1N1hvRGtCNFI4MFNXUm9wajZi?=
- =?utf-8?B?WVdqVXdlZ3ZpS3FHak5HUHlVQ0E0ZG40UjFoYk94dnNJRjhIN3V5S0NRM1VC?=
- =?utf-8?B?OUVHV0NSTE53cGxPUGg3bUVRbkNLTHB5SS9NdzdtVnc4UlRsWXYwSU5DQUFI?=
- =?utf-8?B?ZURsTEtVL0JsRUV5c0k4bkN0K2Z5amt0aUgzdG1PSVovSS9RMlpwQVdTWG42?=
- =?utf-8?B?K2t2V21CKzQxWnNkaFNDNFRzam9EMmRqYkRqYy9HdU1DNnF4VHROSUVpV0lq?=
- =?utf-8?B?MTdMcWdqSXZDeUJXL2JWYUFRekJBVkx4ejFuVmVVQUJmV1hDVFE3d09Kd1ph?=
- =?utf-8?B?MG9TNDFPeDd1SEk2UENjcGtoYlRxUDVvR045MXBpakcrOENxNGZLZjBnZldw?=
- =?utf-8?B?V1RROGlGRHIxZ2tIRG81WlJtNFRSUGYzaFFySUJRRlNqWlFsdzVvMjAxRmpD?=
- =?utf-8?B?djZsczBrbVlJdEx1QnFpSDZVdU9xdEtiSGFvQUliOG85MStlZ0tOWVlOYjQv?=
- =?utf-8?B?YmtvQjd1cVlvbDllM1VwcTcySFBES0VOVDNxVTFYZzg4SEUyODFFaUdpaXh0?=
- =?utf-8?B?ZmIrclhGbERiZEpmVzVyU1RnQUVrR1RPeDhlOUJZd2hjZzliZ2VQV1RxWi9n?=
- =?utf-8?B?djJYbmRreFovNU1IZ0lta1ZnRHE1T1NvUVRrUytVa0JDYzMyZk1odXlJSHJD?=
- =?utf-8?B?YjdMT3FuZGFjK0ZHalE0THdhM011YVJkd3VPamtXMm96d3l6M0pZWnA4a3F2?=
- =?utf-8?B?RC9BYnhMR29kazZJMjZGMEo2bm1MZnB6QU84YnlMaC9ZUXZycEtBUk9HQmM0?=
- =?utf-8?B?a3ltcHVFZlc2TVplakFqc1JrSnFYRGEveXdZeWdISkJPZGRadmloeG1aU203?=
- =?utf-8?B?elFXZXk0TkdwNEZXb3l4cUFBTmJOWi9rdDA5RDBZTlFyenMyTjcweWN0dG8w?=
- =?utf-8?B?dEFRVEhHb253TlV0Ymt6VCtVZWVOYTNCbGVvRXlrMG03R0RBZ3RLSkFPaVFx?=
- =?utf-8?B?OU82RWt3YjExb0hleGJYV21aMlNYVERkakVzNUhjQm9KdG8yNEFsZTdseXcy?=
- =?utf-8?B?ZXQyaWJTMExDSGJrWW9ibDdEeHVDTCtoUHRodVlvZkdTQWx6YTNMbStFVDVT?=
- =?utf-8?B?ZEFwSjNDYUhRMXlQaW4xREdIWDh3NFA2c0VxRk02MUw3Vk5Hb082N0dUaVlp?=
- =?utf-8?B?alMrT3crc0hqTndvSE1Nc082aE5CRkI2SGQ4UTZ6RThrUlBNZStmY3dvTzNo?=
- =?utf-8?B?UGF2OUMzS0U4YVhKWUNtZktEckc4Unl2MjlHZFdRN0dqdkYwdXNrSFhGRDdz?=
- =?utf-8?Q?2rodaEpCk45mLaS572wqu8vf3jtjFy8G?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR04MB9436.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(42112799006)(19092799006)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OVRyWmxtTU9zUEhGR29PamdKVmQzcGVURWdmZjQwVEFsVCtwUURuR1lGWk96?=
- =?utf-8?B?VVA0NkpDelo2SWgyRFAwTGZmTDREV2p2NkNvVzlFR1BzeE9PN0Eyeld3WG92?=
- =?utf-8?B?aFN2RnBJYUI1UmxZUmg1SDZyMFFIUTBMME1COTN6RmVSNGtSWldZMzgwWmFq?=
- =?utf-8?B?Y3ptRGoreXV6cTlSOXVnbXhUWU5hdnRUSnVQQjBxSGFjZDR2TlRaSkp3MlBx?=
- =?utf-8?B?dkJhYStrSnQxZmNiU1ZSWWF6YXl5YW5rTC8yNXFxUnZuSVZBME9jN3doOC9h?=
- =?utf-8?B?SGo2RlhLaWM4QTkzenIrQXRBMklHZFRmMjIxTEs3bEV4YUlPcHV4elJWSlZF?=
- =?utf-8?B?SGVhRFBpUmR3S28vczBoVUVRa1ZRWmh4K29Gb2o0Z09JVEIxRHY1YkN0MHZC?=
- =?utf-8?B?OTI3Sm1aTDNqTlJTK0FSNGkwMmFLNnBOQ1NXT2NGbjR3d0JxN1hkbmY0UTE1?=
- =?utf-8?B?S1E1aFpvOWpmc1ZGakhEcWpyWkpyUG82a1F0VXdFUkRJeUhDVHJ3NUZhWkRQ?=
- =?utf-8?B?Q2F0Ui9PTTN2QlZHV1AxY3dwM1ZrZGs2WThIYkhycUErK0p2SEo2WEc5djJ4?=
- =?utf-8?B?bGlRdzRtakNTVnlScDNYTTB1M01teHltRENiUGI3Z0lXOVFNL1JsdWlMWEtW?=
- =?utf-8?B?OWZGMkg3dXdMWE5RTjN4UTNMS1hGcUhHWkVCN3RTU2g1bFNWa2pMZ0lvVEJI?=
- =?utf-8?B?NVBZZ1p6RkdXK2tsVmV1Y2xKS2N2OWNGNHJaRCtsZE9rSHZ0K0dVeDUxMEFr?=
- =?utf-8?B?c0hmUTZtSjFKQVBuVUZ0MUNmaTVPS0FVekYrUU5iS1MrenJaNXpIbURkOUtC?=
- =?utf-8?B?bDNwRG5EWGpWWi9rZ2Q2S0cyK3FJVzZibDVMYW4wb2lRYWs3Z3pLR01lSTdj?=
- =?utf-8?B?SDJWV00wSEsyb3JQWGM3WWl5VkhRcHBqb1dpU2JwZTYxdUx6ak1aWTIwNXJ1?=
- =?utf-8?B?YWNwUkFCNUNQS0t6ZzFIT2ZFVW1CdFhDRVkzaWxKaTBHWWVSYTBqZVFaZnJJ?=
- =?utf-8?B?eSsyeVVSdEw3ekw2OWlrNkkyV3pFanZpUk92N2ZkODVuZm5ESlpRRzhnTzl0?=
- =?utf-8?B?ZFp4VngyY2RLdnYxYTFERE10NDR0bDU2MVZQeW1zY2lVbUVWNGZHWUN0bSts?=
- =?utf-8?B?bE9mZVIwWk9yU09yTHp3R1VDdytIUXB1d3JDZFhiWVhiSklXSnRoSVJJZUNS?=
- =?utf-8?B?aG0wOG00OVNUWEQ3SEg0dEpaYmZUVjJ0QXdDbk00Q211dm9CNmRpYjd3VDNG?=
- =?utf-8?B?SnRRSk1SenUzQnREUzBab0NudHBSMGxRVWlYWTNndEE0OTgyRjkyYk55ZzNy?=
- =?utf-8?B?aWZLN2JNeHRINDdzZFhiaWhBMGpzUGI0eENSRldmZE9NUTdzVlo3TGZDWGF1?=
- =?utf-8?B?SDJOellLM2xUNndaV1ZFREFNVnBlS2F0ZTlrQ3FWMVNNekNCMWwyVjlXeTZS?=
- =?utf-8?B?enpOTmxKR3FYVHNVOURPQWgzRUVqYkZDenZtajQrM2tuWXBETHhrdUQzblRW?=
- =?utf-8?B?NCs3M3pEbGZDUmFMWEsrcHgrbmVRQmwrbi9JVXFURi9HWDAyMVY4Qjl0andu?=
- =?utf-8?B?Y25yU0tiMWUyZEE5czduVmlKZWNrQ254dDJXdldoLzVGUks3L01RellFUDlh?=
- =?utf-8?B?M0szNDAzbU5FbDM2QnBFa3pMa1hlb0FIb0YyOEI2UFh0RCtjb1Q0NGl6SW5M?=
- =?utf-8?B?VVgxaHEySlVWUlBMVE40czgrZ0RhTmJTZi9xVThsVjkrWUF2b2FQZHpycldH?=
- =?utf-8?B?eWlEQlBtMGJEMFNUSDRDRGMxYkpGb0hYNFhMVUhkcWovWDFTeGJITzgxaFJn?=
- =?utf-8?B?VzhUV3ByVmg2ek1JbEg3OUROMVpOQkFQTlE3VjljVEdvU1gxL01ySmh0Ui9X?=
- =?utf-8?B?M3BmeTluVzRBTk84YWVFL1E4NS95Rlhrem5tdEVBNkQrZDVnOThtVEZDbGh4?=
- =?utf-8?B?WFp0bkMxOXRLVXkxcGhiRzI3VlJWemRCTGxtWmQ4YjFpT2xmNmJIYVNvSHQ3?=
- =?utf-8?B?cVFDMmNWckhXTWJmRHIxS2hIckN6TXpPUmJnS24yTURrZFVSWEFRZVQyUWht?=
- =?utf-8?B?YTh4b080Vk01NUZ6MjF2eG5yQktmcEJPMVBYNlFBU1JhUkRsNEhIVnNGb0Ra?=
- =?utf-8?Q?KxdW6euXPetzBiMr91gVrFwap?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 09fc5fa5-556e-4508-304c-08de2e2df0c5
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR04MB9436.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2025 03:26:38.4917 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FIeK2M9ef5zEsf1E59+nFkHslHAA1rpF03DCxa8Bze3TvqpHdU/sO7mIcA7JboaJ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10185
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/7] drivers: phy: qcom: Add QMP USB3-DP Combo PHY
+ driver
+To: Casey Connolly <casey.connolly@linaro.org>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@denx.de,
+ seanga2@gmail.com, marex@denx.de, malysagreg@gmail.com,
+ arturs.artamonovs@analog.com, utsav.agarwal@analog.com,
+ vasileios.bimpikas@analog.com, ian.roberts@timesys.com,
+ nathan.morrison@timesys.com, peng.fan@nxp.com,
+ alif.zakuan.yuslaimi@altera.com, kory.maincent@bootlin.com,
+ sjg@chromium.org, jerome.forissier@linaro.org, ziyao@disroot.org,
+ stefan.roese@mailbox.org, mkorpershoek@kernel.org,
+ rui.silva@linaro.org, ilias.apalodimas@linaro.org,
+ luca.weiss@fairphone.com, quic_varada@quicinc.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20251124155503.2839766-1-balaji.selvanathan@oss.qualcomm.com>
+ <20251124155503.2839766-4-balaji.selvanathan@oss.qualcomm.com>
+ <838611bc-35e8-433c-afc0-c8ea203ad78e@linaro.org>
+Content-Language: en-US
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <838611bc-35e8-433c-afc0-c8ea203ad78e@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: L9psUYIDYBT3LscetT54U6eEId6Hd1nU
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI4MDAyNCBTYWx0ZWRfX1kmc9OLTTpSo
+ bjOGDq0nhxkBSwia84tM25XCLdI6RLlIP+zcHZ4xKY9ZmjbdxGAWYuol2l6F4Wq8bBDoCoalflU
+ a1d4OmEcO2w7vPEa7lxcEzoQxGCMkGq76jKqL0v9h5eyV8dxpGRY67d6fV9WgUGltex+h7iNtSq
+ prJlsKLBDJ2usSxfklkasfUrwj6ywjHX5jT2UdCfiQMWj42xiyA/lyvdky4G88gJ1HgSgFnIn6s
+ OOerHN2pqtXgrIHc4NrTVYjm09R68Y9N01Ue3RGZZNx01ReVfMn675NBbA6/YEbyc54HvyTOuGz
+ VQLMGpOIDgdc5mL0wWhl+GXwa1PyOaD8qV/Yl2sV4CNuntdDI2sMEzVUAQKg3BY2APA1GsH79Fc
+ xc7SF1m6UaC97wzM+nTEhbmnOIT8oQ==
+X-Proofpoint-ORIG-GUID: L9psUYIDYBT3LscetT54U6eEId6Hd1nU
+X-Authority-Analysis: v=2.4 cv=MKNtWcZl c=1 sm=1 tr=0 ts=692917b3 cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=YdfYJPwUIXPQLronQVYA:9 a=QEXdDO2ut3YA:10 a=zc0IvFSfCIW2DFIPzwfm:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-25_02,2025-11-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 adultscore=0 clxscore=1015 phishscore=0 lowpriorityscore=0
+ spamscore=0 suspectscore=0 malwarescore=0 impostorscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511280024
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -183,283 +161,444 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Casey,
 
-On 11/28/2025 3:25 AM, Marek Vasut wrote:
-> The PQC support is available on i.MX94 and i.MX95 B0 and newer.
-> This can be detected at runtime using is_imx94()/is_imx95() and
-> soc_rev() macros.
-> 
-> Eliminate IMX_PQC_SUPPORT and CONTAINER_HDR_ALIGNMENT and make
-> U-Boot generic on i.MX95 A0, A1, B0 and newer once more.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
-> ---
-> Cc: "João Paulo Gonçalves" <joao.goncalves@toradex.com>
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Alice Guo <alice.guo@nxp.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Jacky Bai <ping.bai@nxp.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Ye Li <ye.li@nxp.com>
-> Cc: u-boot@lists.denx.de
-> ---
-> NOTE: Compile-tested only
-> ---
->   arch/arm/mach-imx/image-container.c | 20 +++++++++++---------
->   arch/arm/mach-imx/imx9/Kconfig      |  2 --
->   common/spl/Kconfig                  |  7 -------
->   common/spl/spl_imx_container.c      |  7 ++++---
->   include/imx_container.h             | 23 +++++++++++++----------
->   5 files changed, 28 insertions(+), 31 deletions(-)
-> 
-> diff --git a/arch/arm/mach-imx/image-container.c b/arch/arm/mach-imx/image-container.c
-> index 78f2488cf6d..59169db2fa0 100644
-> --- a/arch/arm/mach-imx/image-container.c
-> +++ b/arch/arm/mach-imx/image-container.c
-> @@ -131,7 +131,8 @@ int get_container_size(ulong addr, u16 *header_length)
->   
->   static int get_dev_container_size(void *dev, int dev_type, unsigned long offset, u16 *header_length, bool *v2x_cntr)
->   {
-> -	u8 *buf = malloc(CONTAINER_HDR_ALIGNMENT);
-> +	const int hdr_alignment = container_hdr_alignment();
-> +	u8 *buf = malloc(hdr_alignment);
->   	int ret = 0;
->   
->   	if (!buf) {
-> @@ -146,7 +147,7 @@ static int get_dev_container_size(void *dev, int dev_type, unsigned long offset,
->   
->   		count = blk_dread(mmc_get_blk_desc(mmc),
->   				  offset / mmc->read_bl_len,
-> -				  CONTAINER_HDR_ALIGNMENT / mmc->read_bl_len,
-> +				  hdr_alignment / mmc->read_bl_len,
->   				  buf);
->   		if (count == 0) {
->   			printf("Read container image from MMC/SD failed\n");
-> @@ -160,7 +161,7 @@ static int get_dev_container_size(void *dev, int dev_type, unsigned long offset,
->   		struct spi_flash *flash = (struct spi_flash *)dev;
->   
->   		ret = spi_flash_read(flash, offset,
-> -				     CONTAINER_HDR_ALIGNMENT, buf);
-> +				     hdr_alignment, buf);
->   		if (ret != 0) {
->   			printf("Read container image from QSPI failed\n");
->   			return -EIO;
-> @@ -170,7 +171,7 @@ static int get_dev_container_size(void *dev, int dev_type, unsigned long offset,
->   
->   #ifdef CONFIG_SPL_NAND_SUPPORT
->   	if (dev_type == NAND_DEV) {
-> -		ret = nand_spl_load_image(offset, CONTAINER_HDR_ALIGNMENT,
-> +		ret = nand_spl_load_image(offset, hdr_alignment,
->   					  buf);
->   		if (ret != 0) {
->   			printf("Read container image from NAND failed\n");
-> @@ -181,12 +182,12 @@ static int get_dev_container_size(void *dev, int dev_type, unsigned long offset,
->   
->   #ifdef CONFIG_SPL_NOR_SUPPORT
->   	if (dev_type == QSPI_NOR_DEV)
-> -		memcpy(buf, (const void *)offset, CONTAINER_HDR_ALIGNMENT);
-> +		memcpy(buf, (const void *)offset, hdr_alignment);
->   #endif
->   
->   #ifdef CONFIG_SPL_BOOTROM_SUPPORT
->   	if (dev_type == ROM_API_DEV) {
-> -		ret = spl_romapi_raw_seekable_read(offset, CONTAINER_HDR_ALIGNMENT, buf);
-> +		ret = spl_romapi_raw_seekable_read(offset, hdr_alignment, buf);
->   		if (!ret) {
->   			printf("Read container image from ROM API failed\n");
->   			return -EIO;
-> @@ -282,6 +283,7 @@ static unsigned long get_boot_device_offset(void *dev, int dev_type)
->   
->   static ulong get_imageset_end(void *dev, int dev_type)
->   {
-> +	const int hdr_alignment = container_hdr_alignment();
->   	unsigned long offset[3] = {};
->   	int value_container[3] = {};
->   	u16 hdr_length;
-> @@ -298,7 +300,7 @@ static ulong get_imageset_end(void *dev, int dev_type)
->   	debug("seco container size 0x%x\n", value_container[0]);
->   
->   	if (is_imx95() || is_imx94()) {
-> -		offset[1] = ALIGN(hdr_length, CONTAINER_HDR_ALIGNMENT) + offset[0];
-> +		offset[1] = ALIGN(hdr_length, hdr_alignment) + offset[0];
->   
->   		value_container[1] = get_dev_container_size(dev, dev_type, offset[1], &hdr_length, &v2x_fw);
->   		if (value_container[1] < 0) {
-> @@ -308,14 +310,14 @@ static ulong get_imageset_end(void *dev, int dev_type)
->   
->   		if (v2x_fw) {
->   			debug("v2x container size 0x%x\n", value_container[1]);
-> -			offset[2] = ALIGN(hdr_length, CONTAINER_HDR_ALIGNMENT) + offset[1];
-> +			offset[2] = ALIGN(hdr_length, hdr_alignment) + offset[1];
->   		} else {
->   			printf("no v2x container included\n");
->   			offset[2] = offset[1];
->   		}
->   	} else {
->   		/* Skip offset[1] */
-> -		offset[2] = ALIGN(hdr_length, CONTAINER_HDR_ALIGNMENT) + offset[0];
-> +		offset[2] = ALIGN(hdr_length, hdr_alignment) + offset[0];
->   	}
->   
->   	value_container[2] = get_dev_container_size(dev, dev_type, offset[2], &hdr_length, NULL);
-> diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
-> index d9725a96043..8a01b9045dd 100644
-> --- a/arch/arm/mach-imx/imx9/Kconfig
-> +++ b/arch/arm/mach-imx/imx9/Kconfig
-> @@ -36,14 +36,12 @@ config IMX95
->   	select DM_MAILBOX
->   	select SCMI_FIRMWARE
->   	select SPL_IMX_CONTAINER_USE_TRAMPOLINE
-> -	select IMX_PQC_SUPPORT if !IMX95_A0
->   
->   config IMX94
->   	bool
->   	select ARMV8_SPL_EXCEPTION_VECTORS
->   	select DM_MAILBOX
->   	select IMX9
-> -	select IMX_PQC_SUPPORT
->   	select SCMI_FIRMWARE
->   	select SPL_IMX_CONTAINER_USE_TRAMPOLINE
->   
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 8dade2b501e..f8fd502f5a5 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -372,13 +372,6 @@ config SPL_IMX_CONTAINER_USE_TRAMPOLINE
->   	help
->   	  Enable SPL load reader to load data to a trampoline buffer.
->   
-> -config IMX_PQC_SUPPORT
-> -	bool "Enable to support i.MX ROM PQC Container"
-> -	depends on SPL && SPL_LOAD_IMX_CONTAINER
-> -	help
-> -	  Support i.MX ROM new PQC container format. If your chip does not use
-> -	  PQC container, say 'n'.
-> -
->   config IMX_CONTAINER_CFG
->   	string "i.MX8 Container config file"
->   	depends on SPL && SPL_LOAD_IMX_CONTAINER
-> diff --git a/common/spl/spl_imx_container.c b/common/spl/spl_imx_container.c
-> index 79d021f81dc..e0e8ee0a5e6 100644
-> --- a/common/spl/spl_imx_container.c
-> +++ b/common/spl/spl_imx_container.c
-> @@ -87,11 +87,12 @@ static struct boot_img_t *read_auth_image(struct spl_image_info *spl_image,
->   static int read_auth_container(struct spl_image_info *spl_image,
->   			       struct spl_load_info *info, ulong offset)
->   {
-> +	const int hdr_alignment = container_hdr_alignment();
->   	struct container_hdr *container = NULL;
->   	u16 length;
->   	int i, size, ret = 0;
->   
-> -	size = ALIGN(CONTAINER_HDR_ALIGNMENT, spl_get_bl_len(info));
-> +	size = ALIGN(hdr_alignment, spl_get_bl_len(info));
->   
->   	/*
->   	 * It will not override the ATF code, so safe to use it here,
-> @@ -104,7 +105,7 @@ static int read_auth_container(struct spl_image_info *spl_image,
->   	debug("%s: container: %p offset: %lu size: %u\n", __func__,
->   	      container, offset, size);
->   	if (info->read(info, offset, size, container) <
-> -	    CONTAINER_HDR_ALIGNMENT) {
-> +	    hdr_alignment) {
->   		ret = -EIO;
->   		goto end;
->   	}
-> @@ -124,7 +125,7 @@ static int read_auth_container(struct spl_image_info *spl_image,
->   	length = container->length_lsb + (container->length_msb << 8);
->   	debug("Container length %u\n", length);
->   
-> -	if (length > CONTAINER_HDR_ALIGNMENT) {
-> +	if (length > hdr_alignment) {
->   		size = ALIGN(length, spl_get_bl_len(info));
->   
->   		free(container);
-> diff --git a/include/imx_container.h b/include/imx_container.h
-> index 684fc3bc988..1a19d2503e7 100644
-> --- a/include/imx_container.h
-> +++ b/include/imx_container.h
-> @@ -6,17 +6,14 @@
->   #ifndef __CONTAINER_HEADER_H_
->   #define __CONTAINER_HEADER_H_
->   
-> +#include <asm/arch/sys_proto.h>
-> +
->   #include <linux/sizes.h>
->   #include <linux/types.h>
->   
->   #define IV_MAX_LEN			32
->   #define HASH_MAX_LEN			64
->   
-> -#if IS_ENABLED(CONFIG_IMX_PQC_SUPPORT)
-> -#define CONTAINER_HDR_ALIGNMENT 0x4000
-> -#else
-> -#define CONTAINER_HDR_ALIGNMENT 0x400
-> -#endif
->   #define CONTAINER_HDR_EMMC_OFFSET 0
->   #define CONTAINER_HDR_MMCSD_OFFSET SZ_32K
->   #define CONTAINER_HDR_QSPI_OFFSET SZ_4K
-> @@ -76,14 +73,20 @@ int get_container_size(ulong addr, u16 *header_length);
->   
->   static inline bool valid_container_hdr(struct container_hdr *container)
->   {
-> -#if IS_ENABLED(CONFIG_IMX_PQC_SUPPORT)
->   	return (container->tag == CONTAINER_HDR_TAG ||
->   		container->tag == 0x82) &&
->   		(container->version == CONTAINER_HDR_VERSION ||
->   		 container->version == 0x2);
-> -#else
-> -	return container->tag == CONTAINER_HDR_TAG &&
-> -	       container->version == CONTAINER_HDR_VERSION;
-> -#endif
-> +}
-> +
-> +static inline int container_hdr_alignment(void)
-> +{
-> +	if (is_imx94())
-> +		return 0x4000;	/* PQC */
-> +
-> +	if (is_imx95() && (soc_rev() >= CHIP_REV_2_0))
-> +		return 0x4000;	/* PQC on i.MX95 B0 and newer */
-> +
-> +	return 0x400;	/* Non-PQC on i.MX95 A1 and older */
+Thanks for your valuable feedback. Will address your comments and do a 
+respin soon.
 
+Thanks,
 
-I understand you want to use single uboot and spl image for A0 and B0. 
-But A0 is not production. Only early customers get few A0 samples. NXP 
-marketing has notified these customers to replace A0 to B0. Are you 
-still using A0 board? Is it necessary to do such change as we want to 
-remove A0 to simplify the codes?
+Balaji
 
-Eliminate IMX_PQC_SUPPORT config is not a good way. When adding new SOC, 
-developer has to update the container_hdr_alignment, then it will be a 
-long list in this function. Actually only iMX95 is the exception. If you 
-insist keeping A0, I prefer change like below and retain IMX_PQC_SUPPORT.
-
-#if IS_ENABLED(CONFIG_IMX95)
-static inline u32 container_hdr_alignment(void)
-{
-	if (is_imx95() && (soc_rev() >= CHIP_REV_2_0))
-		return 0x4000;
-	else
-		return 0x400;
-}
-#else
-static inline u32 container_hdr_alignment(void)
-{
-#if IS_ENABLED(CONFIG_IMX_PQC_SUPPORT)
-	return 0x4000;
-#else
-	return 0x400;
-#endif
-}
-#endif
-
-Best regards,
-Ye Li
-
->   }
->   #endif
-
+On 11/26/2025 8:16 PM, Casey Connolly wrote:
+> Hi Balaji,
+>
+> In general this looks great! I'm very excited to have SuperSpeed up and
+> running in U-Boot at long last :D
+>
+> I'll try and give this a spin soon on my boards.
+>
+> On 24/11/2025 16:54, Balaji Selvanathan wrote:
+>> Add support for the Qualcomm QMP USB3-DP Combo PHY found on
+>> SC7280 and QCM6490 platforms. This driver currently implements
+>> USB3 super-speed functionality of the combo PHY.
+>>
+>> The QMP Combo PHY is a dual-mode PHY
+>> that can operate in either USB3 mode or DisplayPort mode. This
+>> initial implementation focuses on USB3 mode to enable Super-Speed
+>> USB support.
+>>
+>> This is a port of the upstream Linux files to U-Boot:
+>> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/phy/qualcomm/phy-qcom-qmp-combo.c?id=3d25d46a255a83f94d7d4d4216f38aafc8e116b0
+> For future reference, the best format for this is something like:
+>
+> Taken from Linux commit 3d25d46a255a ("pmdomain: qcom: rpmhpd: Add
+> rpmhpd support for SM8750")
+>
+> You can get this with "git top --pretty="%h (\"%s\")" COMMIT_SHA", you
+> can stick an alias for this in your .gitconfig.
+>
+> Few more comments below.
+>
+>> Enabled and tested the driver on Qualcomm RB3 Gen2 (QCS6490) board.
+>>
+>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>> ---
+>> v2:
+>> - Added pipe clock disable in qmp_combo_power_off sequence
+>> - Added all required clocks except pipe clock in qmp_combo_phy_clk_l
+>> - All clocks except pipe clock are enabled and disabled seperate from pipe clock
+>> - Added support for regulator power supplies
+>> - Added a minimal xlate to only return the USB3 phy
+>> ---
+>>   drivers/phy/qcom/Kconfig                   |   8 +
+>>   drivers/phy/qcom/Makefile                  |   1 +
+>>   drivers/phy/qcom/phy-qcom-qmp-combo.c      | 642 +++++++++++++++++++++
+>>   drivers/phy/qcom/phy-qcom-qmp-common.h     |  62 ++
+>>   drivers/phy/qcom/phy-qcom-qmp-dp-com-v3.h  |  18 +
+>>   drivers/phy/qcom/phy-qcom-qmp-pcs-usb-v4.h |  34 ++
+>>   drivers/phy/qcom/phy-qcom-qmp.h            |  17 +
+>>   7 files changed, 782 insertions(+)
+>>   create mode 100644 drivers/phy/qcom/phy-qcom-qmp-combo.c
+>>   create mode 100644 drivers/phy/qcom/phy-qcom-qmp-common.h
+>>   create mode 100644 drivers/phy/qcom/phy-qcom-qmp-dp-com-v3.h
+>>   create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-usb-v4.h
+> [snip]
+>
+>> diff --git a/drivers/phy/qcom/phy-qcom-qmp-combo.c b/drivers/phy/qcom/phy-qcom-qmp-combo.c
+>> new file mode 100644
+>> index 00000000000..f5596aa5e50
+>> --- /dev/null
+>> +++ b/drivers/phy/qcom/phy-qcom-qmp-combo.c
+>> @@ -0,0 +1,642 @@
+> [snip]
+>
+>> +/* list of clocks required by phy */
+>> +static const char * const qmp_combo_phy_clk_l[] = {
+>> +	"aux", "com_aux",
+>> +};
+>> +
+>> +/* list of regulators */
+>> +static const char * const qmp_phy_vreg_l[] = {
+>> +	"vdda-phy",
+>> +	"vdda-pll",
+> On U-Boot it's necessary to use the full DT property name:
+> "vdda-phy-supply".
+>
+>> +};
+>
+> [..]
+>
+>> +static int qmp_combo_power_off(struct phy *phy)
+>> +{
+>> +	struct qmp_combo *qmp = dev_get_priv(phy->dev);
+>> +	void __iomem *com = qmp->com;
+>> +
+>> +	clk_disable(qmp->pipe_clk);
+>> +
+>> +	/* PHY reset */
+>> +	qphy_setbits(qmp->pcs, QPHY_V4_PCS_SW_RESET, SW_RESET);
+>> +
+>> +	/* Stop SerDes and Phy-Coding-Sublayer */
+>> +	qphy_clrbits(qmp->pcs, QPHY_V4_PCS_START_CONTROL,
+>> +		     SERDES_START | PCS_START);
+>> +
+>> +	/* Put PHY into POWER DOWN state: active low */
+>> +	qphy_clrbits(qmp->pcs, QPHY_V4_PCS_POWER_DOWN_CONTROL, SW_PWRDN);
+>> +
+>> +	/* Power down common block */
+>> +	qphy_clrbits(com, QPHY_V3_DP_COM_POWER_DOWN_CTRL, SW_PWRDN);
+> Should we also turn off the regulators here?
+>
+>> +
+>> +	return qmp_combo_com_exit(qmp);
+>> +}
+> [...]
+>
+>> +static int qmp_combo_vreg_init(struct qmp_combo *qmp)
+>> +{
+>> +	const struct qmp_phy_cfg *cfg = qmp->cfg;
+>> +	struct udevice *dev = qmp->dev;
+>> +	int num = cfg->num_vregs;
+>> +	int i, ret;
+>> +
+>> +	if (!num)
+>> +		return 0;
+>> +
+>> +	qmp->vregs = devm_kcalloc(dev, num, sizeof(*qmp->vregs), GFP_KERNEL);
+>> +	if (!qmp->vregs)
+>> +		return -ENOMEM;
+>> +
+>> +	for (i = 0; i < num; i++) {
+>> +		ret = device_get_supply_regulator(dev, cfg->vreg_list[i],
+>> +						  &qmp->vregs[i]);
+>> +		if (ret) {
+>> +			dev_dbg(dev, "regulator %s not found (optional)\n",
+>> +				cfg->vreg_list[i]);
+> Are these really optional?
+>
+>> +			qmp->num_vregs = 0;
+>> +			return 0;
+>> +		}
+>> +	}
+>> +
+>> +	qmp->num_vregs = num;
+>> +	dev_dbg(dev, "found %d regulators\n", num);
+> Please drop this debug print.
+>
+> Kind regards,
+>
+>> +	return 0;
+>> +}
+>> +
+>> +static int qmp_combo_parse_dt(struct qmp_combo *qmp)
+>> +{
+>> +	const struct qmp_phy_cfg *cfg = qmp->cfg;
+>> +	const struct qmp_combo_offsets *offs = cfg->offsets;
+>> +	struct udevice *dev = qmp->dev;
+>> +	void __iomem *base;
+>> +	int ret;
+>> +
+>> +	if (!offs)
+>> +		return -EINVAL;
+>> +
+>> +	base = (void __iomem *)dev_read_addr(dev);
+>> +	if (IS_ERR(base))
+>> +		return PTR_ERR(base);
+>> +
+>> +	qmp->com = base + offs->com;
+>> +	qmp->serdes = base + offs->usb3_serdes;
+>> +	qmp->tx = base + offs->txa;
+>> +	qmp->rx = base + offs->rxa;
+>> +	qmp->tx2 = base + offs->txb;
+>> +	qmp->rx2 = base + offs->rxb;
+>> +	qmp->pcs = base + offs->usb3_pcs;
+>> +	qmp->pcs_usb = base + offs->usb3_pcs_usb;
+>> +	qmp->pcs_misc = base + offs->usb3_pcs_misc;
+>> +
+>> +	ret = qmp_combo_clk_init(qmp);
+>> +	if (ret)
+>> +		return ret;
+>> +
+>> +	qmp->pipe_clk = devm_clk_get(dev, "usb3_pipe");
+>> +	if (IS_ERR(qmp->pipe_clk)) {
+>> +		dev_err(dev, "failed to get pipe clock (%ld)\n",
+>> +			PTR_ERR(qmp->pipe_clk));
+>> +		return ret;
+>> +	}
+>> +
+>> +	ret = qmp_combo_reset_init(qmp);
+>> +	if (ret)
+>> +		return ret;
+>> +
+>> +	ret = qmp_combo_vreg_init(qmp);
+>> +	if (ret)
+>> +		return ret;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int qmp_combo_probe(struct udevice *dev)
+>> +{
+>> +	struct qmp_combo *qmp = dev_get_priv(dev);
+>> +	int ret;
+>> +
+>> +	qmp->dev = dev;
+>> +	qmp->cfg = (const struct qmp_phy_cfg *)dev_get_driver_data(dev);
+>> +	if (!qmp->cfg) {
+>> +		printf("Failed to get PHY configuration\n");
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	ret = qmp_combo_parse_dt(qmp);
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +static const struct qmp_phy_cfg sc7280_usb3dpphy_cfg = {
+>> +	.offsets		= &qmp_combo_offsets_v3,
+>> +	.serdes_tbl		= sm8150_usb3_serdes_tbl,
+>> +	.serdes_tbl_num		= ARRAY_SIZE(sm8150_usb3_serdes_tbl),
+>> +	.tx_tbl			= sm8250_usb3_tx_tbl,
+>> +	.tx_tbl_num		= ARRAY_SIZE(sm8250_usb3_tx_tbl),
+>> +	.rx_tbl			= sm8250_usb3_rx_tbl,
+>> +	.rx_tbl_num		= ARRAY_SIZE(sm8250_usb3_rx_tbl),
+>> +	.pcs_tbl		= sm8250_usb3_pcs_tbl,
+>> +	.pcs_tbl_num		= ARRAY_SIZE(sm8250_usb3_pcs_tbl),
+>> +	.pcs_usb_tbl		= sm8250_usb3_pcs_usb_tbl,
+>> +	.pcs_usb_tbl_num	= ARRAY_SIZE(sm8250_usb3_pcs_usb_tbl),
+>> +	.vreg_list		= qmp_phy_vreg_l,
+>> +	.num_vregs		= ARRAY_SIZE(qmp_phy_vreg_l),
+>> +
+>> +	.has_pwrdn_delay	= true,
+>> +};
+>> +
+>> +static int qmp_combo_xlate(struct phy *phy, struct ofnode_phandle_args *args)
+>> +{
+>> +	if (args->args_count != 1) {
+>> +		debug("Invalid args_count: %d\n", args->args_count);
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	/* We only support the USB3 phy at slot 0 */
+>> +	if (args->args[0] == QMP_USB43DP_DP_PHY)
+>> +		return -EINVAL;
+>> +
+>> +	phy->id = QMP_USB43DP_USB3_PHY;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static struct phy_ops qmp_combo_ops = {
+>> +	.init = qmp_combo_power_on,
+>> +	.exit = qmp_combo_power_off,
+>> +	.of_xlate = qmp_combo_xlate,
+>> +};
+>> +
+>> +static const struct udevice_id qmp_combo_ids[] = {
+>> +	{
+>> +		.compatible = "qcom,sc7280-qmp-usb3-dp-phy",
+>> +		.data = (ulong)&sc7280_usb3dpphy_cfg,
+>> +	},
+>> +	{ }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(qmp_combo) = {
+>> +	.name = "qcom-qmp-usb3-dp-phy",
+>> +	.id = UCLASS_PHY,
+>> +	.of_match = qmp_combo_ids,
+>> +	.ops = &qmp_combo_ops,
+>> +	.probe = qmp_combo_probe,
+>> +	.priv_auto = sizeof(struct qmp_combo),
+>> +};
+>> diff --git a/drivers/phy/qcom/phy-qcom-qmp-common.h b/drivers/phy/qcom/phy-qcom-qmp-common.h
+>> new file mode 100644
+>> index 00000000000..71356fb7dd0
+>> --- /dev/null
+>> +++ b/drivers/phy/qcom/phy-qcom-qmp-common.h
+>> @@ -0,0 +1,62 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * Copyright (c) 2017, The Linux Foundation. All rights reserved.
+>> + */
+>> +
+>> +#ifndef QCOM_PHY_QMP_COMMON_H_
+>> +#define QCOM_PHY_QMP_COMMON_H_
+>> +
+>> +struct qmp_phy_init_tbl {
+>> +	unsigned int offset;
+>> +	unsigned int val;
+>> +	char *name;
+>> +	/*
+>> +	 * mask of lanes for which this register is written
+>> +	 * for cases when second lane needs different values
+>> +	 */
+>> +	u8 lane_mask;
+>> +};
+>> +
+>> +#define QMP_PHY_INIT_CFG(o, v)		\
+>> +	{				\
+>> +		.offset = o,		\
+>> +		.val = v,		\
+>> +		.name = #o,		\
+>> +		.lane_mask = 0xff,	\
+>> +	}
+>> +
+>> +#define QMP_PHY_INIT_CFG_LANE(o, v, l)	\
+>> +	{				\
+>> +		.offset = o,		\
+>> +		.val = v,		\
+>> +		.name = #o,		\
+>> +		.lane_mask = l,		\
+>> +	}
+>> +
+>> +static inline void qmp_configure_lane(struct udevice *dev, void __iomem *base,
+>> +				      const struct qmp_phy_init_tbl tbl[],
+>> +				      int num, u8 lane_mask)
+>> +{
+>> +	int i;
+>> +	const struct qmp_phy_init_tbl *t = tbl;
+>> +
+>> +	if (!t)
+>> +		return;
+>> +
+>> +	for (i = 0; i < num; i++, t++) {
+>> +		if (!(t->lane_mask & lane_mask))
+>> +			continue;
+>> +
+>> +		dev_dbg(dev, "Writing Reg: %s Offset: 0x%04x Val: 0x%02x\n",
+>> +			t->name, t->offset, t->val);
+>> +		writel(t->val, base + t->offset);
+>> +	}
+>> +}
+>> +
+>> +static inline void qmp_configure(struct udevice *dev, void __iomem *base,
+>> +				 const struct qmp_phy_init_tbl tbl[], int num)
+>> +{
+>> +	qmp_configure_lane(dev, base, tbl, num, 0xff);
+>> +}
+>> +
+>> +#endif
+>> diff --git a/drivers/phy/qcom/phy-qcom-qmp-dp-com-v3.h b/drivers/phy/qcom/phy-qcom-qmp-dp-com-v3.h
+>> new file mode 100644
+>> index 00000000000..396179ef38b
+>> --- /dev/null
+>> +++ b/drivers/phy/qcom/phy-qcom-qmp-dp-com-v3.h
+>> @@ -0,0 +1,18 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * Copyright (c) 2017, The Linux Foundation. All rights reserved.
+>> + */
+>> +
+>> +#ifndef QCOM_PHY_QMP_DP_COM_V3_H_
+>> +#define QCOM_PHY_QMP_DP_COM_V3_H_
+>> +
+>> +/* Only for QMP V3 & V4 PHY - DP COM registers */
+>> +#define QPHY_V3_DP_COM_PHY_MODE_CTRL			0x00
+>> +#define QPHY_V3_DP_COM_SW_RESET				0x04
+>> +#define QPHY_V3_DP_COM_POWER_DOWN_CTRL			0x08
+>> +#define QPHY_V3_DP_COM_SWI_CTRL				0x0c
+>> +#define QPHY_V3_DP_COM_TYPEC_CTRL			0x10
+>> +#define QPHY_V3_DP_COM_TYPEC_PWRDN_CTRL			0x14
+>> +#define QPHY_V3_DP_COM_RESET_OVRD_CTRL			0x1c
+>> +
+>> +#endif
+>> diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-usb-v4.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-usb-v4.h
+>> new file mode 100644
+>> index 00000000000..d7fd4ac0fc5
+>> --- /dev/null
+>> +++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-usb-v4.h
+>> @@ -0,0 +1,34 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * Copyright (c) 2017, The Linux Foundation. All rights reserved.
+>> + */
+>> +
+>> +#ifndef QCOM_PHY_QMP_PCS_USB_V4_H_
+>> +#define QCOM_PHY_QMP_PCS_USB_V4_H_
+>> +
+>> +/* Only for QMP V4 PHY - USB3 PCS registers */
+>> +#define QPHY_V4_PCS_USB3_POWER_STATE_CONFIG1		0x000
+>> +#define QPHY_V4_PCS_USB3_AUTONOMOUS_MODE_STATUS		0x004
+>> +#define QPHY_V4_PCS_USB3_AUTONOMOUS_MODE_CTRL		0x008
+>> +#define QPHY_V4_PCS_USB3_AUTONOMOUS_MODE_CTRL2		0x00c
+>> +#define QPHY_V4_PCS_USB3_LFPS_RXTERM_IRQ_SOURCE_STATUS	0x010
+>> +#define QPHY_V4_PCS_USB3_LFPS_RXTERM_IRQ_CLEAR		0x014
+>> +#define QPHY_V4_PCS_USB3_LFPS_DET_HIGH_COUNT_VAL	0x018
+>> +#define QPHY_V4_PCS_USB3_LFPS_TX_ECSTART		0x01c
+>> +#define QPHY_V4_PCS_USB3_LFPS_PER_TIMER_VAL		0x020
+>> +#define QPHY_V4_PCS_USB3_LFPS_TX_END_CNT_U3_START	0x024
+>> +#define QPHY_V4_PCS_USB3_RXEQTRAINING_LOCK_TIME		0x028
+>> +#define QPHY_V4_PCS_USB3_RXEQTRAINING_WAIT_TIME		0x02c
+>> +#define QPHY_V4_PCS_USB3_RXEQTRAINING_CTLE_TIME		0x030
+>> +#define QPHY_V4_PCS_USB3_RXEQTRAINING_WAIT_TIME_S2	0x034
+>> +#define QPHY_V4_PCS_USB3_RXEQTRAINING_DFE_TIME_S2	0x038
+>> +#define QPHY_V4_PCS_USB3_RCVR_DTCT_DLY_U3_L		0x03c
+>> +#define QPHY_V4_PCS_USB3_RCVR_DTCT_DLY_U3_H		0x040
+>> +#define QPHY_V4_PCS_USB3_ARCVR_DTCT_EN_PERIOD		0x044
+>> +#define QPHY_V4_PCS_USB3_ARCVR_DTCT_CM_DLY		0x048
+>> +#define QPHY_V4_PCS_USB3_TXONESZEROS_RUN_LENGTH		0x04c
+>> +#define QPHY_V4_PCS_USB3_ALFPS_DEGLITCH_VAL		0x050
+>> +#define QPHY_V4_PCS_USB3_SIGDET_STARTUP_TIMER_VAL	0x054
+>> +#define QPHY_V4_PCS_USB3_TEST_CONTROL			0x058
+>> +
+>> +#endif
+>> diff --git a/drivers/phy/qcom/phy-qcom-qmp.h b/drivers/phy/qcom/phy-qcom-qmp.h
+>> index 99f4d447caf..06dac21ddc4 100644
+>> --- a/drivers/phy/qcom/phy-qcom-qmp.h
+>> +++ b/drivers/phy/qcom/phy-qcom-qmp.h
+>> @@ -12,12 +12,17 @@
+>>   #include "phy-qcom-qmp-qserdes-com-v3.h"
+>>   #include "phy-qcom-qmp-qserdes-txrx-v3.h"
+>>   
+>> +#include "phy-qcom-qmp-qserdes-com-v4.h"
+>> +#include "phy-qcom-qmp-qserdes-txrx-v4.h"
+>> +
+>>   #include "phy-qcom-qmp-qserdes-pll.h"
+>>   
+>>   #include "phy-qcom-qmp-pcs-v2.h"
+>>   
+>>   #include "phy-qcom-qmp-pcs-v3.h"
+>>   
+>> +#include "phy-qcom-qmp-pcs-v4.h"
+>> +
+>>   /* Only for QMP V3 & V4 PHY - DP COM registers */
+>>   #define QPHY_V3_DP_COM_PHY_MODE_CTRL			0x00
+>>   #define QPHY_V3_DP_COM_SW_RESET				0x04
+>> @@ -112,4 +117,16 @@
+>>   #define QSERDES_V6_DP_PHY_AUX_INTERRUPT_STATUS		0x0e0
+>>   #define QSERDES_V6_DP_PHY_STATUS			0x0e4
+>>   
+>> +/* QPHY_SW_RESET bit */
+>> +#define SW_RESET                                BIT(0)
+>> +/* QPHY_POWER_DOWN_CONTROL */
+>> +#define SW_PWRDN                                BIT(0)
+>> +
+>> +/* QPHY_START_CONTROL bits */
+>> +#define SERDES_START                            BIT(0)
+>> +#define PCS_START                               BIT(1)
+>> +
+>> +/* QPHY_PCS_STATUS bit */
+>> +#define PHYSTATUS                               BIT(6)
+>> +
+>>   #endif
