@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC21CD116E2
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE4ED116E2
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 16:36:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1BE883B6C;
-	Fri, 28 Nov 2025 17:36:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3587583B71;
+	Fri, 28 Nov 2025 17:36:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PQ4w2F1e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RmJNVRoM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B994383B81; Fri, 28 Nov 2025 17:36:24 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id CA7AB83B7F; Fri, 28 Nov 2025 17:36:31 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D755838FA
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:36:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F54A838FA
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 17:36:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-8b2da83f721so205863985a.1
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:36:22 -0800 (PST)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-8b2aa1ae006so266359485a.2
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 08:36:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764347781; x=1764952581; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1764347788; x=1764952588; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5FccaBGjMXKiCNFMO+6/Ec5Q2zXorHTG2DRhSzDtFbU=;
- b=PQ4w2F1eE/xdwBIBrip5NcrT0T8gXoj6akxDU8NcSeb2CRZdOELQ9ysoVdVhf7zCuD
- WW9cuH6MffbPaK/KjjdgqcMzg1pXXuAARXCx6VeIGWI64SCMJD/hP1TnH4T72SfolXl6
- pSYRhtyMVzh/GTlEI+Rwgg9OVxNZAg7ZfB511RTGWoCRY0n/QbqrgUUXtAVMTsCSz3Uk
- 0aGaFpqoj13URQw441rDB/u9A6IRgAhHp9ATCflFdls05/41UqRxJQsNZBayUVUTvMF1
- kDPcFH7/VWDGpdJgcJrbOG2EkhnwKto5SbKd7FXHxPHXsB9Aib3S6yIa5ttKTum5d9SS
- 5FBg==
+ bh=lX+bcRs1hmYzw20ahsx4LOqTaP16ACjHDDSO7fJk7wo=;
+ b=RmJNVRoMHi/k73HwHg0wMPjH+V/GPhvCswKlpRphfk0rEoByybCj7QH1BFmpIw/7KN
+ 9pRvDKjN4q8OUW3P+elOFywzp6m8QCocaRBYGGjfpQT6OigDyFu4jhN9ut/QU+FBw/XC
+ eLw7bZqWsZ0kOmcmHPclf3VGVI/foMjkV2n4RjEtijaeKvZx0WVdSHISDSoh0h+S811i
+ Jlt3/QD79/mIh2EUxcr6E7Ng0GT2FZkwZbM8WTTfLTpRqacC5xRuVdZwJZtcWSLisJlO
+ Gj8XO6kprfdwfyU3NHVb0AfZJyG6tgQPA4tF40LYmHwdfOYjShNHf3WkM5bBAAYbVKgI
+ rqdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764347781; x=1764952581;
+ d=1e100.net; s=20230601; t=1764347788; x=1764952588;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=5FccaBGjMXKiCNFMO+6/Ec5Q2zXorHTG2DRhSzDtFbU=;
- b=GY/oTIgPoJr+nPTiaFV94PV3NL3+8gmBuZ7jqOF6e76WGnWsDn/4qJJ4VwyjF/36gW
- I7wUgE0IRoZTdQNOfInFrfFX87HtyEtWp/2Rdd2tY8AhDDRLZbP5+Xz8ov54uN1WkzUe
- MWpltliKL1/r+V7drVgTPvOS262QyClkSqf7r9DHOEI+zs7WMOOsq4l5fbZWHnfI+Cdo
- FRnwrpDJogv+YRvrLO8W+UhxZEPn3xmUEJCD1G3mO/T/0Lv9iqGGszfV0WGe1nT47P4d
- lair8c13PxLIc7OvtFol61jYcgAvWDgsidaNVDbj5c9ORw09ZTeB2LSVQdCSe4WnqOpl
- TlUQ==
-X-Gm-Message-State: AOJu0Yx07IDbCIHHRMsA8Vz9sOGLNd8EyMbVG9OFmjNe0irJIPphb9S5
- mByZnWVhdv/uhKp8nK8dix9zWXWUGXAXhysuC6mZdgeAco5WscWpdtoDnl7B8ltU1II=
-X-Gm-Gg: ASbGnctQAXkOpybM2zH4H8rfkohTnGTfovCOgkgBX1VdYUrzuSBdRj0Ritnp0ZTB+4H
- xeVsZftsB0DEf6mggzbTHvgZEXmIMWhoaXbAgvwlOKVShr4sJkF8y3YZ1yo8QZJuopFUqPL+iVj
- Y7iC3DkjnAxIFn1zs5M6QXa7LgkX4hCs9PEbD1FuTnPf4bzX+vRzV65JNth6sq6eok0jy2C92TM
- Pk+nJYE0rwfzSs8hrab7wdSi22UadfmiwanjiKkeu5gia9NMDpjFncwDSBQgvVFy1YYSik8uIdX
- XwxLdLS1mvYXzyHMQK9zTDDbGATFERiX9byJrTlo4lni1F5iLqzHqlj1YDDmx4R0HX7pE+fI/6q
- KnqnTkyKUrNI6RPH7XIHBJmlmn/xIPyG8mASf98uSIDuxxLQzFieQiKPOthnFC1veLhvGJ1BgSg
- nOna/EFQj2JnkdWVG2+FJs0FHlmbeGVUU=
-X-Google-Smtp-Source: AGHT+IF+iGWbkS06CZZu2IDqV9t37j37zhRdxmR3LCyt3dM8NgUnKxsDKiqZFP6kzkE4wIIgXyRC1g==
-X-Received: by 2002:a05:620a:318b:b0:8a9:eb31:1033 with SMTP id
- af79cd13be357-8b33bde837cmr4534235985a.30.1764347780970; 
- Fri, 28 Nov 2025 08:36:20 -0800 (PST)
+ bh=lX+bcRs1hmYzw20ahsx4LOqTaP16ACjHDDSO7fJk7wo=;
+ b=alQbcQFnCYL0RCvozlQ05jq3n9T2WXDbeRr8SqIhEtQVoRnHDu/oDC8fTx180CXmSl
+ Yxr8nT+9aLgJ2Nwajr0rlJMMnBv0t5XCoAIUY3QySgk0+QufNgLMQKXolDKNnO1TRdng
+ t8ipUe+PKojL8YJ5cEN9tG0CMxfkTwC3191uABSiYJN/SejHYZtxhLqhMVkDtgOOVsGT
+ RDqnM+dYd+iuOgG+GYwohm32RkMS6V+aLHN2sa0K1AFz1I58p17kH+LwLw2w1kjuZ7zh
+ sqV8sLdcGvmoD+LG0nluRzq0XIVl5xaGgPQU8Zss5RK5nAbKOzE9LwmqvYGTjJQx6nbC
+ iBHw==
+X-Gm-Message-State: AOJu0Yz4d3Bjmw8HvJ1jMpV4O+VuIMFl8XP7qv5kM0vFhnaxUn5vXeAe
+ 6L0VC3w+Dmby1vI1z38KsEi8lPj3GDXhTYWcjVwFNL16QZREITTofAPwazUqgWt2g28=
+X-Gm-Gg: ASbGncsOFLetvQygLFUjatklDPOXXaFhlg1UvplKMaggTZG8amUxpp7JFFlcxXePy6B
+ QDG/dsQZoaUNSavgaoSxTxFVMq1onVT51bosxuuiL/3PO27EzJbFnwcrga7E6gmQmHAVsn+rD/v
+ 6PC+pDvVFdk0OWZNijB7lswuM3h8O9CSA3+1Ml1p3PIXLEfzzhUF3KfTOA39OVMMM3HLSSPXWM9
+ E2SntZik4zR0It9mYOwjUZ8CQ2AzhdGGBfI37gMc1IzulWpFx0PMR9usMCf14KFDQNeq37cSzC5
+ 6+8Bkkm2HWXrM6xqYzIV1bHiHiOo2Rs5TAeQiY1QeLtvdAAGdTwtDAsLgVHlgRZESfAe8vCEn0c
+ GWygURptkYEndd0R1RvHgaClCQvL6widU/dZI43cT9YbmX6aGcwZ9ytOi2o3UrYIi1g5K1Dhlxa
+ Tc1kDZmKRaiBCxJQGxxLtHlmOie058LSvIpv39Y6ATDw==
+X-Google-Smtp-Source: AGHT+IEC4Qg3uH502KMD4VsnOX8CbrfTDKi2TlWXW/SFlb6tg7DJlN3vcThFNbzWOMRUhyE1WmGfng==
+X-Received: by 2002:a05:620a:2a14:b0:8b1:8082:aec5 with SMTP id
+ af79cd13be357-8b33d47825bmr3401434685a.58.1764347788067; 
+ Fri, 28 Nov 2025 08:36:28 -0800 (PST)
 Received: from ubuntu.localdomain ([216.58.22.99])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8b52a1b75a9sm331227985a.25.2025.11.28.08.36.20
+ af79cd13be357-8b52a1b75a9sm331227985a.25.2025.11.28.08.36.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Nov 2025 08:36:20 -0800 (PST)
+ Fri, 28 Nov 2025 08:36:27 -0800 (PST)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Mark Kettenis <kettenis@openbsd.org>,
- Baocheng Su <baocheng.su@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Li Hua Qian <huaqian.li@siemens.com>,
+ Baocheng Su <baocheng.su@siemens.com>,
+ Li Hua Qian <huaqian.li@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
  Samuel Holland <samuel.holland@sifive.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v5 5/6] smbios: add support for dynamic generation of Type 19
- table
-Date: Fri, 28 Nov 2025 08:35:22 -0800
-Message-Id: <20251128163535.2301653-6-raymondmaoca@gmail.com>
+Subject: [PATCH v5 6/6] smbios: print the properties only when they exist in a
+ specified version of spec
+Date: Fri, 28 Nov 2025 08:35:23 -0800
+Message-Id: <20251128163535.2301653-7-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20251128163535.2301653-1-raymondmaoca@gmail.com>
 References: <20251128163535.2301653-1-raymondmaoca@gmail.com>
@@ -104,298 +104,256 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit implements SMBIOS Type 19 (Memory Array Mapped Address)
-generation with a hybrid approach supporting both:
-
-1. Explicit definition via Device Tree 'smbios' node:
-   Child node under '/smbios/smbios/memory-array-mapped-address' will be
-   used to populate as individual Type 19 structure directly.
-   - Properties follow SMBIOS field names with lowercase letters and
-     hyphen-separated words (e.g., 'starting-address', 'ending-address',
-     'partition-width', etc.).
-   - This method supports precise platform-defined overrides and system
-     descriptions.
-
-2. Fallback to automatic DT-based discovery:
-   If child node under '/smbios/smbios/memory-array-mapped-address' does
-   not exist, the implementation will:
-   - Scan all top-level 'memory@' nodes to populate Type 19 structure with
-     inferred size and location data.
-   - Scan nodes named or marked as 'memory-controller' and parse
-     associated 'dimm@' subnodes (if present) to extract DIMM sizes and
-     map them accordingly.
-
-This dual-mode support enables flexible firmware SMBIOS reporting while
-aligning with spec-compliant naming and runtime-detected memory topology.
-
-Type 19 support is under GENERATE_SMBIOS_TABLE_VERBOSE to avoid
-increasing rom size for those platforms which only require basic SMBIOS
-support.
+By checking the payload length, we can know the version of the spec and
+skip the ones which are not expected to exist.
 
 Signed-off-by: Raymond Mao <raymondmaoca@gmail.com>
 ---
-Changes in v4:
-- Initial patch.
 Changes in v5:
-- None.
+- Initial patch.
 
- arch/arm/dts/smbios_generic.dtsi |   3 +
- cmd/smbios.c                     |  14 +++
- include/smbios.h                 |  11 +++
- include/smbios_def.h             |   5 ++
- lib/smbios.c                     | 150 +++++++++++++++++++++++++++++++
- 5 files changed, 183 insertions(+)
+ cmd/smbios.c     | 65 ++++++++++++++++++++++++++++++++++++++++--------
+ include/smbios.h | 32 ++++++++++++++++++++++++
+ 2 files changed, 86 insertions(+), 11 deletions(-)
 
-diff --git a/arch/arm/dts/smbios_generic.dtsi b/arch/arm/dts/smbios_generic.dtsi
-index fd2df8d02e0..fe16037fc20 100644
---- a/arch/arm/dts/smbios_generic.dtsi
-+++ b/arch/arm/dts/smbios_generic.dtsi
-@@ -86,6 +86,9 @@
- 
- 			memory-device {
- 			};
-+
-+			memory-array-mapped-address {
-+			};
- 		};
- 	};
- };
 diff --git a/cmd/smbios.c b/cmd/smbios.c
-index 39c9c44a28e..671c14e05b5 100644
+index 671c14e05b5..3fafa46d0a5 100644
 --- a/cmd/smbios.c
 +++ b/cmd/smbios.c
-@@ -680,6 +680,17 @@ static void smbios_print_type17(struct smbios_type17 *table)
- 	printf("\tRCD Revision Number: 0x%04x\n", table->rcd_rev_num);
+@@ -348,6 +348,8 @@ static void smbios_print_type0(struct smbios_type0 *table)
+ 	printf("\tBIOS ROM Size: 0x%02x\n", table->bios_rom_size);
+ 	printf("\tBIOS Characteristics: 0x%016llx\n",
+ 	       table->bios_characteristics);
++	if (table->hdr.length < SMBIOS_TYPE0_LENGTH_V24)
++		return;
+ 	printf("\tBIOS Characteristics Extension Byte 1: 0x%02x\n",
+ 	       table->bios_characteristics_ext1);
+ 	printf("\tBIOS Characteristics Extension Byte 2: 0x%02x\n",
+@@ -360,6 +362,8 @@ static void smbios_print_type0(struct smbios_type0 *table)
+ 	       table->ec_major_release);
+ 	printf("\tEmbedded Controller Firmware Minor Release: 0x%02x\n",
+ 	       table->ec_minor_release);
++	if (table->hdr.length < SMBIOS_TYPE0_LENGTH_V31)
++		return;
+ 	printf("\tExtended BIOS ROM Size: 0x%04x\n",
+ 	       table->extended_bios_rom_size);
+ }
+@@ -371,17 +375,16 @@ static void smbios_print_type1(struct smbios_type1 *table)
+ 	smbios_print_str("Product Name", table, table->product_name);
+ 	smbios_print_str("Version", table, table->version);
+ 	smbios_print_str("Serial Number", table, table->serial_number);
+-	if (table->hdr.length >= SMBIOS_TYPE1_LENGTH_V21) {
+-		printf("\tUUID: %pUl\n", table->uuid);
+-		smbios_print_lookup_str(wakeup_type_strings,
+-					table->wakeup_type,
+-					ARRAY_SIZE(wakeup_type_strings),
+-					"Wake-up Type");
+-	}
+-	if (table->hdr.length >= SMBIOS_TYPE1_LENGTH_V24) {
+-		smbios_print_str("SKU Number", table, table->sku_number);
+-		smbios_print_str("Family", table, table->family);
+-	}
++	if (table->hdr.length < SMBIOS_TYPE1_LENGTH_V21)
++		return;
++	printf("\tUUID: %pUl\n", table->uuid);
++	smbios_print_lookup_str(wakeup_type_strings, table->wakeup_type,
++				ARRAY_SIZE(wakeup_type_strings),
++				"Wake-up Type");
++	if (table->hdr.length < SMBIOS_TYPE1_LENGTH_V24)
++		return;
++	smbios_print_str("SKU Number", table, table->sku_number);
++	smbios_print_str("Family", table, table->family);
  }
  
-+static void smbios_print_type19(struct smbios_type19 *table)
-+{
-+	printf("Memory Array Mapped Address:\n");
-+	printf("\tStarting Address: 0x%08x\n", table->start_addr);
-+	printf("\tEnding Address: 0x%08x\n", table->end_addr);
-+	printf("\tMemory Array Handle: 0x%04x\n", table->mem_array_hdl);
-+	printf("\tPartition Width: 0x%04x\n", table->partition_wid);
-+	printf("\tExtended Starting Address: 0x%016llx\n", table->ext_start_addr);
-+	printf("\tExtended Ending Address: 0x%016llx\n", table->ext_end_addr);
-+}
-+
- static void smbios_print_type127(struct smbios_type127 *table)
+ static void smbios_print_type2(struct smbios_type2 *table)
+@@ -501,21 +504,31 @@ static void smbios_print_type4(struct smbios_type4 *table)
+ 	printf("\tL1 Cache Handle: 0x%04x\n", table->l1_cache_handle);
+ 	printf("\tL2 Cache Handle: 0x%04x\n", table->l2_cache_handle);
+ 	printf("\tL3 Cache Handle: 0x%04x\n", table->l3_cache_handle);
++	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V23)
++		return;
+ 	smbios_print_str("Serial Number", table, table->serial_number);
+ 	smbios_print_str("Asset Tag", table, table->asset_tag);
+ 	smbios_print_str("Part Number", table, table->part_number);
++	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V25)
++		return;
+ 	printf("\tCore Count: 0x%02x\n", table->core_count);
+ 	printf("\tCore Enabled: 0x%02x\n", table->core_enabled);
+ 	printf("\tThread Count: 0x%02x\n", table->thread_count);
+ 	printf("\tProcessor Characteristics: 0x%04x\n",
+ 	       table->processor_characteristics);
++	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V26)
++		return;
+ 	smbios_print_lookup_str(processor_family_strings,
+ 				table->processor_family2,
+ 				ARRAY_SIZE(processor_family_strings),
+ 				"Processor Family 2");
++	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V30)
++		return;
+ 	printf("\tCore Count 2: 0x%04x\n", table->core_count2);
+ 	printf("\tCore Enabled 2: 0x%04x\n", table->core_enabled2);
+ 	printf("\tThread Count 2: 0x%04x\n", table->thread_count2);
++	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V36)
++		return;
+ 	printf("\tThread Enabled: 0x%04x\n", table->thread_enabled);
+ }
+ 
+@@ -529,6 +542,8 @@ static void smbios_print_type7(struct smbios_type7 *table)
+ 	printf("\tInstalled Size: 0x%04x\n", table->inst_size.data);
+ 	printf("\tSupported SRAM Type: 0x%04x\n", table->supp_sram_type.data);
+ 	printf("\tCurrent SRAM Type: 0x%04x\n", table->curr_sram_type.data);
++	if (table->hdr.length < SMBIOS_TYPE7_LENGTH_V21)
++		return;
+ 	printf("\tCache Speed: 0x%02x\n", table->speed);
+ 	smbios_print_lookup_str(err_corr_type_strings,
+ 				table->err_corr_type,
+@@ -542,6 +557,8 @@ static void smbios_print_type7(struct smbios_type7 *table)
+ 				table->associativity,
+ 				ARRAY_SIZE(associativity_strings),
+ 				"Associativity");
++	if (table->hdr.length < SMBIOS_TYPE7_LENGTH_V31)
++		return;
+ 	printf("\tMaximum Cache Size 2: 0x%08x\n", table->max_size2.data);
+ 	printf("\tInstalled Cache Size 2: 0x%08x\n", table->inst_size2.data);
+ }
+@@ -574,8 +591,12 @@ static void smbios_print_type9(struct smbios_type9 *table)
+ 	printf("\tSlot ID: 0x%04x\n", table->slot_id);
+ 	printf("\tSlot Characteristics 1: 0x%04x\n",
+ 	       table->slot_characteristics_1);
++	if (table->hdr.length < SMBIOS_TYPE9_LENGTH_V21)
++		return;
+ 	printf("\tSlot Characteristics 2: 0x%04x\n",
+ 	       table->slot_characteristics_2);
++	if (table->hdr.length < SMBIOS_TYPE9_LENGTH_V26)
++		return;
+ 	printf("\tSegment Group Number (Base): 0x%04x\n",
+ 	       table->segment_group_number);
+ 	printf("\tBus Number (Base): 0x%04x\n", table->bus_number);
+@@ -611,6 +632,8 @@ static void smbios_print_type9(struct smbios_type9 *table)
+ static void smbios_print_type16(struct smbios_type16 *table)
  {
- 	printf("End Of Table\n");
-@@ -768,6 +779,9 @@ static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
- 		case SMBIOS_MEMORY_DEVICE:
- 			smbios_print_type17((struct smbios_type17 *)pos);
- 			break;
-+		case SMBIOS_MEMORY_ARRAY_MAPPED_ADDRESS:
-+			smbios_print_type19((struct smbios_type19 *)pos);
-+			break;
- 		case SMBIOS_END_OF_TABLE:
- 			smbios_print_type127((struct smbios_type127 *)pos);
- 			break;
+ 	printf("Physical Memory Array:\n");
++	if (table->hdr.length < SMBIOS_TYPE16_LENGTH_V21)
++		return;
+ 	smbios_print_lookup_str(ma_location_strings, table->location,
+ 				ARRAY_SIZE(ma_location_strings), "Location");
+ 	smbios_print_lookup_str(ma_use_strings, table->use,
+@@ -622,12 +645,16 @@ static void smbios_print_type16(struct smbios_type16 *table)
+ 	printf("\tMemory Error Information Handle: 0x%04x\n",
+ 	       table->mem_err_info_hdl);
+ 	printf("\tNumber of Memory Devices: 0x%04x\n", table->num_of_mem_dev);
++	if (table->hdr.length < SMBIOS_TYPE16_LENGTH_V27)
++		return;
+ 	printf("\tExtended Maximum Capacity: 0x%016llx\n", table->ext_max_cap);
+ }
+ 
+ static void smbios_print_type17(struct smbios_type17 *table)
+ {
+ 	printf("Memory Device:\n");
++	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V21)
++		return;
+ 	printf("\tPhysical Memory Array Handle: 0x%04x\n",
+ 	       table->phy_mem_array_hdl);
+ 	printf("\tMemory Error Information Handle: 0x%04x\n",
+@@ -644,17 +671,27 @@ static void smbios_print_type17(struct smbios_type17 *table)
+ 	smbios_print_lookup_str(md_type_strings, table->mem_type,
+ 				ARRAY_SIZE(md_type_strings), "Memory Type");
+ 	printf("\tType Detail: 0x%04x\n", table->type_detail);
++	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V23)
++		return;
+ 	printf("\tSpeed: 0x%04x\n", table->speed);
+ 	smbios_print_str("Manufacturer", table, table->manufacturer);
+ 	smbios_print_str("Serial Number", table, table->serial_number);
+ 	smbios_print_str("Asset Tag", table, table->asset_tag);
+ 	smbios_print_str("Part Number", table, table->part_number);
++	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V26)
++		return;
+ 	printf("\tAttributes: 0x%04x\n", table->attributes);
++	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V27)
++		return;
+ 	printf("\tExtended Size: 0x%08x\n", table->ext_size);
+ 	printf("\tConfigured Memory Speed: 0x%04x\n", table->config_mem_speed);
++	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V28)
++		return;
+ 	printf("\tMinimum voltage: 0x%04x\n", table->min_voltage);
+ 	printf("\tMaximum voltage: 0x%04x\n", table->max_voltage);
+ 	printf("\tConfigured voltage: 0x%04x\n", table->config_voltage);
++	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V32)
++		return;
+ 	smbios_print_lookup_str(md_tech_strings, table->mem_tech,
+ 				ARRAY_SIZE(md_tech_strings),
+ 				"Memory Technology");
+@@ -671,6 +708,8 @@ static void smbios_print_type17(struct smbios_type17 *table)
+ 	printf("\tVolatile Size: 0x%016llx\n", table->volatile_size);
+ 	printf("\tCache Size: 0x%016llx\n", table->cache_size);
+ 	printf("\tLogical Size: 0x%016llx\n", table->logical_size);
++	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V33)
++		return;
+ 	printf("\tExtended Speed: 0x%04x\n", table->ext_speed);
+ 	printf("\tExtended Configured Memory Speed: 0x%04x\n",
+ 	       table->ext_config_mem_speed);
+@@ -683,10 +722,14 @@ static void smbios_print_type17(struct smbios_type17 *table)
+ static void smbios_print_type19(struct smbios_type19 *table)
+ {
+ 	printf("Memory Array Mapped Address:\n");
++	if (table->hdr.length < SMBIOS_TYPE19_LENGTH_V21)
++		return;
+ 	printf("\tStarting Address: 0x%08x\n", table->start_addr);
+ 	printf("\tEnding Address: 0x%08x\n", table->end_addr);
+ 	printf("\tMemory Array Handle: 0x%04x\n", table->mem_array_hdl);
+ 	printf("\tPartition Width: 0x%04x\n", table->partition_wid);
++	if (table->hdr.length < SMBIOS_TYPE19_LENGTH_V27)
++		return;
+ 	printf("\tExtended Starting Address: 0x%016llx\n", table->ext_start_addr);
+ 	printf("\tExtended Ending Address: 0x%016llx\n", table->ext_end_addr);
+ }
 diff --git a/include/smbios.h b/include/smbios.h
-index 45131416253..a0e47d51852 100644
+index a0e47d51852..14a7d8e6c30 100644
 --- a/include/smbios.h
 +++ b/include/smbios.h
-@@ -372,6 +372,17 @@ struct __packed smbios_type17 {
+@@ -110,10 +110,42 @@ struct __packed smbios_type0 {
  	char eos[SMBIOS_STRUCT_EOS_BYTES];
  };
  
-+struct __packed smbios_type19 {
-+	struct smbios_header hdr;
-+	u32 start_addr;
-+	u32 end_addr;
-+	u16 mem_array_hdl;
-+	u8 partition_wid;
-+	u64 ext_start_addr;
-+	u64 ext_end_addr;
-+	char eos[SMBIOS_STRUCT_EOS_BYTES];
-+};
++#define SMBIOS_TYPE0_LENGTH_V24		0x18
++#define SMBIOS_TYPE0_LENGTH_V31		0x1a
 +
- struct __packed smbios_type32 {
- 	u8 type;
- 	u8 length;
-diff --git a/include/smbios_def.h b/include/smbios_def.h
-index ce913f2f32a..ae50e1a808e 100644
---- a/include/smbios_def.h
-+++ b/include/smbios_def.h
-@@ -436,4 +436,9 @@
- #define SMBIOS_MD_ERRINFO_NONE		0xFFFE
- #define SMBIOS_MD_ERRINFO_NOERR		0xFFFF
+ #define SMBIOS_TYPE1_LENGTH_V20		0x08
+ #define SMBIOS_TYPE1_LENGTH_V21		0x19
+ #define SMBIOS_TYPE1_LENGTH_V24		0x1b
  
-+/* Memory Array Mapped Address */
++#define SMBIOS_TYPE4_LENGTH_V20		0x1a
++#define SMBIOS_TYPE4_LENGTH_V23		0x23
++#define SMBIOS_TYPE4_LENGTH_V25		0x28
++#define SMBIOS_TYPE4_LENGTH_V26		0x2a
++#define SMBIOS_TYPE4_LENGTH_V30		0x30
++#define SMBIOS_TYPE4_LENGTH_V36		0x32
 +
-+/* Partition Width */
-+#define SMBIOS_MAMA_PW_DEF	1 /* not partitioned */
++#define SMBIOS_TYPE7_LENGTH_V20		0x0f
++#define SMBIOS_TYPE7_LENGTH_V21		0x13
++#define SMBIOS_TYPE7_LENGTH_V31		0x1b
 +
- #endif /* _SMBIOS_DEF_H_ */
-diff --git a/lib/smbios.c b/lib/smbios.c
-index 8a3fa42cef5..fcecf9516c0 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -1808,6 +1808,155 @@ static int smbios_write_type17(ulong *current, int *handle,
- 				     smbios_write_type17_from_memctrl_node);
- }
- 
-+static void smbios_pop_type19_general_si(struct smbios_ctx *ctx,
-+					 struct smbios_type19 *t)
-+{
-+	t->partition_wid =
-+		smbios_get_val_si(ctx, "partition-width ",
-+				  SYSID_NONE, SMBIOS_MAMA_PW_DEF);
-+}
++#define SMBIOS_TYPE9_LENGTH_V20		0x0c
++#define SMBIOS_TYPE9_LENGTH_V21		0x0d
++#define SMBIOS_TYPE9_LENGTH_V26		0x11
 +
-+static void smbios_pop_type19_addr_si(struct smbios_ctx *ctx,
-+				      struct smbios_type19 *t)
-+{
-+	t->start_addr = smbios_get_val_si(ctx, "starting-address", SYSID_NONE,
-+					  0);
-+	t->end_addr = smbios_get_val_si(ctx, "ending-address", SYSID_NONE, 0);
-+	t->ext_start_addr = smbios_get_u64_si(ctx, "extended-starting-address",
-+					      SYSID_NONE, 0);
-+	t->ext_end_addr = smbios_get_u64_si(ctx, "extended-ending-address",
-+					    SYSID_NONE, 0);
-+}
++#define SMBIOS_TYPE16_LENGTH_V21	0x0f
++#define SMBIOS_TYPE16_LENGTH_V27	0x17
 +
-+static void
-+smbios_pop_type19_addr_from_memory_node(ofnode node, struct smbios_type19 *t)
-+{
-+	const fdt32_t *reg;
-+	int len;
-+	u64 sz;
-+	u64 addr;
++#define SMBIOS_TYPE17_LENGTH_V21	0x15
++#define SMBIOS_TYPE17_LENGTH_V23	0x1b
++#define SMBIOS_TYPE17_LENGTH_V26	0x1c
++#define SMBIOS_TYPE17_LENGTH_V27	0x22
++#define SMBIOS_TYPE17_LENGTH_V28	0x28
++#define SMBIOS_TYPE17_LENGTH_V32	0x54
++#define SMBIOS_TYPE17_LENGTH_V33	0x5c
 +
-+	/* Read property 'reg' from the node */
-+	reg = ofnode_read_prop(node, "reg", &len);
-+	if (!reg || len < sizeof(fdt32_t) * 4 || len % sizeof(fdt32_t))
-+		return;
++#define SMBIOS_TYPE19_LENGTH_V21	0x0f
++#define SMBIOS_TYPE19_LENGTH_V27	0x1f
 +
-+	/* Combine hi/lo for size and address (typically 64-bit) */
-+	sz = ((u64)fdt32_to_cpu(reg[2]) << 32) | fdt32_to_cpu(reg[3]);
-+	addr = ((u64)fdt32_to_cpu(reg[0]) << 32) | fdt32_to_cpu(reg[1]);
-+
-+	t->ext_start_addr = cpu_to_le64(addr);
-+	t->ext_end_addr = cpu_to_le64(addr + sz - 1);
-+
-+	/* If address range fits in 32-bit, populate legacy fields */
-+	if ((addr + sz - 1) <= 0xFFFFFFFFULL) {
-+		t->start_addr = cpu_to_le32((u32)addr);
-+		t->end_addr   = cpu_to_le32((u32)(addr + sz - 1));
-+	} else {
-+		t->start_addr = cpu_to_le32(0xFFFFFFFF);
-+		t->end_addr   = cpu_to_le32(0xFFFFFFFF);
-+	}
-+}
-+
-+static int
-+smbios_write_type19_from_memctrl_node(ulong *current, int handle,
-+				      struct smbios_ctx *ctx, int idx,
-+				      u64 base, u64 sz)
-+{
-+	struct smbios_type19 *t;
-+	int len;
-+	u8 *eos_addr;
-+	void *hdl;
-+	size_t hdl_size;
-+
-+	len = sizeof(*t);
-+	t = map_sysmem(*current, len);
-+	memset(t, 0, len);
-+
-+	fill_smbios_header(t, SMBIOS_MEMORY_ARRAY_MAPPED_ADDRESS, len, handle);
-+
-+	/* eos is at the end of the structure */
-+	eos_addr = (u8 *)t + len - sizeof(t->eos);
-+	smbios_set_eos(ctx, eos_addr);
-+
-+	/* Read the memory array handles */
-+	if (!sysinfo_get_data(ctx->dev, SYSID_SM_MEMARRAY_HANDLE, &hdl,
-+			      &hdl_size) &&
-+	    hdl_size == SYSINFO_MEM_HANDLE_MAX * sizeof(u16))
-+		t->mem_array_hdl = *((u16 *)hdl + idx);
-+
-+	t->ext_start_addr = cpu_to_le64(base);
-+	t->ext_end_addr = cpu_to_le64(base + sz - 1);
-+
-+	if ((base + sz - 1) <= 0xFFFFFFFFULL) {
-+		t->start_addr = cpu_to_le32((u32)base);
-+		t->end_addr   = cpu_to_le32((u32)(base + sz - 1));
-+	} else {
-+		t->start_addr = cpu_to_le32(0xFFFFFFFF);
-+		t->end_addr   = cpu_to_le32(0xFFFFFFFF);
-+	}
-+
-+	/* Write other general fields */
-+	smbios_pop_type19_general_si(ctx, t);
-+
-+	len = t->hdr.length + smbios_string_table_len(ctx);
-+	*current += len;
-+	unmap_sysmem(t);
-+
-+	return len;
-+}
-+
-+static int smbios_write_type19_mem(ulong *current, int handle,
-+				   struct smbios_ctx *ctx, int idx,
-+				   int type)
-+{
-+	struct smbios_type19 *t;
-+	int len;
-+	u8 *eos_addr;
-+	void *hdl;
-+	size_t hdl_size;
-+
-+	len = sizeof(*t);
-+	t = map_sysmem(*current, len);
-+	memset(t, 0, len);
-+
-+	fill_smbios_header(t, SMBIOS_MEMORY_ARRAY_MAPPED_ADDRESS, len, handle);
-+
-+	/* eos is at the end of the structure */
-+	eos_addr = (u8 *)t + len - sizeof(t->eos);
-+	smbios_set_eos(ctx, eos_addr);
-+
-+	if (type == SMBIOS_MEM_CUSTOM) {
-+		smbios_pop_type19_addr_si(ctx, t);
-+		t->mem_array_hdl = smbios_get_val_si(ctx, "memory-array-handle",
-+						     SYSID_NONE, 0);
-+	} else if (type == SMBIOS_MEM_FDT_MEM_NODE) {
-+		smbios_pop_type19_addr_from_memory_node(ctx->node, t);
-+		/* Read the memory array handles */
-+		if (!sysinfo_get_data(ctx->dev, SYSID_SM_MEMARRAY_HANDLE, &hdl,
-+				      &hdl_size) &&
-+		    hdl_size == SYSINFO_MEM_HANDLE_MAX * sizeof(u16))
-+			t->mem_array_hdl = *((u16 *)hdl + idx);
-+	}
-+
-+	/* Write other general fields */
-+	smbios_pop_type19_general_si(ctx, t);
-+
-+	len = t->hdr.length + smbios_string_table_len(ctx);
-+	*current += len;
-+	unmap_sysmem(t);
-+
-+	return len;
-+}
-+
-+static int smbios_write_type19(ulong *current, int *handle,
-+			       struct smbios_ctx *ctx)
-+{
-+	return smbios_write_type1719(current, handle, ctx,
-+				     smbios_write_type19_mem,
-+				     smbios_write_type19_from_memctrl_node);
-+}
-+
- #endif /* #if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE) */
- 
- static int smbios_write_type32(ulong *current, int *handle,
-@@ -1858,6 +2007,7 @@ static struct smbios_write_method smbios_write_funcs[] = {
- 	{ smbios_write_type9, "system-slot"},
- 	{ smbios_write_type16, "memory-array"},
- 	{ smbios_write_type17, "memory-device"},
-+	{ smbios_write_type19, "memory-array-mapped-address"},
- #endif
- 	{ smbios_write_type32, },
- 	{ smbios_write_type127 },
+ struct __packed smbios_type1 {
+ 	struct smbios_header hdr;
+ 	u8 manufacturer;
 -- 
 2.25.1
 
