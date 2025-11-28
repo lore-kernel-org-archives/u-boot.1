@@ -4,49 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 760ADCFD376
-	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 11:35:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E38FCFD376
+	for <u-boot@archiver.kernel.org>; Fri, 28 Nov 2025 11:35:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ED9F84531;
-	Fri, 28 Nov 2025 12:35:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=socionext.com
+	by phobos.denx.de (Postfix) with ESMTP id 8EAA784540;
+	Fri, 28 Nov 2025 12:35:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X8/JDRhH";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DA3C84534; Fri, 28 Nov 2025 12:34:56 +0100 (CET)
-Received: from mx.socionext.com (mx.socionext.com [202.248.49.38])
- by phobos.denx.de (Postfix) with ESMTP id 00B3284513
- for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 12:34:52 +0100 (CET)
+ id 098828453E; Fri, 28 Nov 2025 12:35:56 +0100 (CET)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id ACB5E8453E
+ for <u-boot@lists.denx.de>; Fri, 28 Nov 2025 12:35:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=socionext.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hayashi.kunihiko@socionext.com
-Received: from unknown (HELO kinkan3-ex.css.socionext.com) ([172.31.9.52])
- by mx.socionext.com with ESMTP; 28 Nov 2025 20:34:49 +0900
-Received: from mail.mfilter.local (mail-arc01.css.socionext.com [10.213.46.36])
- by kinkan3-ex.css.socionext.com (Postfix) with ESMTP id 75C412069FC4;
- Fri, 28 Nov 2025 20:34:49 +0900 (JST)
-Received: from iyokan3.css.socionext.com ([172.31.9.53]) by m-FILTER with
- ESMTP; Fri, 28 Nov 2025 20:34:49 +0900
-Received: from [10.212.247.49] (unknown [10.212.247.49])
- by iyokan3.css.socionext.com (Postfix) with ESMTP id 48B4A10A013;
- Fri, 28 Nov 2025 20:34:48 +0900 (JST)
-Message-ID: <b7e755f4-2925-4400-9efd-7cb8ca781847@socionext.com>
-Date: Fri, 28 Nov 2025 20:34:48 +0900
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DOGy21xI96IRM49lHgWRyN6rJAcI+04XIdNEvP3hF2QhF1yYjphIrLTEJvUaRZy6EKW3kPyRKkHqeKbQxrSwvsVovAApfIkjzdgDccw1/qSL+zyaTYqXSjCMPK6x1SFArQfs2PR6UadTVXWlItJ5QPaU2vLFagkkYraykbHMxC8ooYoxhcQOkr3Td2gjNFuaaNrfWONXqiqQrGFjjdbHLghUcaGUqNz0iyGJlHOh2EI7Q1ctTWZeoZEu+QZxaWaBmWnfMypFGftrGc7RprdwZRUaYY+xKLT4lfuAE3+eij0p+PPLiY4H0AYgOUu+vnkh6viBysgrEfZOoclgL+VSOw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ri6kd05qBwnuPZYFZnyEJknSP4nQgRGdzwBvzxlWKyI=;
+ b=UIi1ofZV+hNI/dQ2hkMucyhjsMl6rMZE8c4itli928dztPaDOgkOz7zIq4QLbgesvz67RbjRF7jBSG87jj8MuZ24io5k1HSxQOwMczHLuAEPtk7QMmjHMd3E3oPlRmuKAj/BhChnWzs4qyAq1zBBVtZq1CnxU1pIaZcKD4H+joVDCXzwDS9AVw8WuSERjwk2gI9q8QNZ1mMP6a8ceARwUALnFiCzV6NCifRtsrsdSPtvUbijWBQoUQJFOTWoczKJSFZUsVnSixpddzALuefPLay/I2HG3oYJvZG412mAnat/DMTyZ52ImZVwBtHrrF0wGqZovh5FBk6+3EHT8lLJ2w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ri6kd05qBwnuPZYFZnyEJknSP4nQgRGdzwBvzxlWKyI=;
+ b=X8/JDRhHTwyykzGMWMMfVL1v+qfqlJUOGHHGFLZGJrUJkZFnYRfSX5+nsKEXXS8N5P6ZSgtDikL75kGsT/6FUvxQbSih++Oo6Au+vhu5kHcDWA9/ShV72whx8jtQzdPFWM2Pz79mr7LA9SKBpGeay3v+yoov2CaQUwGQJ94+xTY=
+Received: from SJ0PR13CA0038.namprd13.prod.outlook.com (2603:10b6:a03:2c2::13)
+ by MW4PR10MB6321.namprd10.prod.outlook.com (2603:10b6:303:1e1::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.16; Fri, 28 Nov
+ 2025 11:35:51 +0000
+Received: from MWH0EPF000989E8.namprd02.prod.outlook.com
+ (2603:10b6:a03:2c2:cafe::95) by SJ0PR13CA0038.outlook.office365.com
+ (2603:10b6:a03:2c2::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.4 via Frontend Transport; Fri,
+ 28 Nov 2025 11:35:51 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ MWH0EPF000989E8.mail.protection.outlook.com (10.167.241.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9366.7 via Frontend Transport; Fri, 28 Nov 2025 11:35:50 +0000
+Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
+ 2025 05:35:46 -0600
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 28 Nov
+ 2025 05:35:46 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 28 Nov 2025 05:35:46 -0600
+Received: from [172.24.231.164] (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.231.164])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5ASBZik7264868;
+ Fri, 28 Nov 2025 05:35:45 -0600
+Message-ID: <f23f1568-fc01-4a39-acc9-5e99ccab9876@ti.com>
+Date: Fri, 28 Nov 2025 17:05:44 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] bootm: fix boot failure from compressed image for
- IH_OS_EFI
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- kojima.masahisa@socionext.com, morimoto.masashi@socionext.com
-References: <20251120233851.2726487-1-kojima.masahisa@socionext.com>
- <b60d74a5-8085-4c6a-ad90-bf59dc41e37f@gmx.de>
+Subject: Re: [PATCH] arm: mach-k3: j722s: Update SoC auto-gen data
+From: Chintan Vankar <c-vankar@ti.com>
+To: Michael Walle <mwalle@kernel.org>, Tom Rini <trini@konsulko.com>
+CC: <u-kumar1@ti.com>, <vigneshr@ti.com>, <u-boot@lists.denx.de>
+References: <20251125094639.1754402-1-c-vankar@ti.com>
+ <DEHU1N85F4DN.3W3VX01XHQTCH@kernel.org>
+ <4c468d40-4d4c-4acf-a758-5b9b88963b90@ti.com>
 Content-Language: en-US
-From: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
-In-Reply-To: <b60d74a5-8085-4c6a-ad90-bf59dc41e37f@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <4c468d40-4d4c-4acf-a758-5b9b88963b90@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989E8:EE_|MW4PR10MB6321:EE_
+X-MS-Office365-Filtering-Correlation-Id: 23d1c2ed-1385-4272-5678-08de2e72485c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eHpZNFNxQXZZTTZvYmJjbkt2UDl1R1FOMjR4aG8zNXFhalVwSHJ1L3pGYVNU?=
+ =?utf-8?B?NWFub2ZMZjg0T3NkUVZ1UWZTMGEvckRHV3M5TWJIbG16ajhpTHh0NUJacGpH?=
+ =?utf-8?B?ZWt4dldxZ0l0VFYybzhydUpCNFlqaHlkWXQzRHFPYlZxcDZKRWZSbUliSUdn?=
+ =?utf-8?B?SzF1cXR2aWxaMWdVVHVyenR3YUlGVDZGbDdLZ0gxS01MN2dzNkdsb2c3RWVZ?=
+ =?utf-8?B?SThRM1NUR3p3MU1oUnJsWDBWSzljTnhnVE9sY2NmUkdNZkhPQzl6ckdZL0JS?=
+ =?utf-8?B?UHRHc2twdXQrak9XU1FKQnRNK0czOTl5aDRyWHlOcTcyUlpwZTJWMG1BQ0RJ?=
+ =?utf-8?B?WDlFNE82SnFFV2xuTFR3dy9ockNmL0ZWWnZxOEpDT2tiZWFyd2dlWkcvYVBK?=
+ =?utf-8?B?a3MzK1hUS1hrbzFqOVB5TmVWeG0wSXJUdks0d1Jna0dPT0phd1dkRjc1bDF0?=
+ =?utf-8?B?QXJJYmJSQXB2Y0dzWkJBL2d2czBRY2ZLaFZIZnB6SGsyZ2IrNFNzM0NtbmhD?=
+ =?utf-8?B?ZWJkTjlIREprbTBkemZaa3FYeXoyZjlzMCtHZk9xUGZnOVpoZEhjWkh2bGN2?=
+ =?utf-8?B?QjRnOThGWHlvaVFwYkJUVmVibGhVQWNLa2Q2S3crRFQ2T0p6b1JOZk1BVG9N?=
+ =?utf-8?B?RzJ3UGxMbHFZeXhTWVlOVW51M1hNTzhReUNSdWNVRDZlUEg3QklQcGF2M0JL?=
+ =?utf-8?B?MFcxVjhseFhJcmdzbHF6M1ZFWm9rdEFmc2V4Mmdia0U5THFCaHdhOFpvc2I3?=
+ =?utf-8?B?bEZZRkRPWGR5ZURoTjVjeGlXRlRGMEFBTlVyQXBBMEx2UGFuSndESDl6bENY?=
+ =?utf-8?B?RmE2bVJpTXdGUXd2YVJvOFpXLzhmZ0dTK3N1bUJYYkcvMGJwVUNFdFlFUVFO?=
+ =?utf-8?B?RmxxZjYwWFc2NGZvMUJOdURwSi96UG4wZUVzeE4vMWw5RDhFWXhBUjdxTmM2?=
+ =?utf-8?B?Ri9XWDkvQ3hEV3BrYlF6UWZvRUVkNkROTTNCWFBVVDMySVBzKzNpZWNMSzVo?=
+ =?utf-8?B?a1drcEZQOEhseHhMemlZZzJpMGJxUk9XUVpQdTV2emZ1RkpEVnJTTVo1YkNm?=
+ =?utf-8?B?QkFPaENIV0JjU1BFcnZSUUpLbkdiYnRIdG9vekVGWDZ1d1o3WmkwL1ZUeXFH?=
+ =?utf-8?B?QXZlMFc4ZktBdnZtOFFQOWZBMitmV3U3SGtEYkNnbU9xanM2cVErUzIxejlt?=
+ =?utf-8?B?YWdRd0lKZ0RGbHE5OU1rTlVHV3E3eUpRT3QxR3g5SWx2L3p1UkpjZEtGZFFI?=
+ =?utf-8?B?bVBxME9EWEM1Wm5iYjVVSHdKTXBkbWEvVmxoVkZPbHEvenlmZ1MrWlNoUkNQ?=
+ =?utf-8?B?b1ZWalJLUmhQUjY0V00vQ2VPVkY3dDVpTTkyaGZhVHlaSHpGQUxuMlViMzBJ?=
+ =?utf-8?B?czlEd3YxbEtzRm9Wamp2aFBoNVlKQmxkUGRNUEU1MGszb0FnemtQaXpKR0hZ?=
+ =?utf-8?B?S2JOTmMwa0lmdGcrUDBCN2x5dHhmM2VFajdYcDRhYTl6OXNBTEQ1S2Jlb3U2?=
+ =?utf-8?B?OXd6TXhWSy9DUkRFOGNEeUNuYksvSzFIdHZmVHFyVUxad1o2SUlnYjB3clMy?=
+ =?utf-8?B?WkZ2TWFBaTBUblJrVUdIdm1Rd3JiZHhaZ0dkTGZNdlZjbmFwY0FTb0VSSzBm?=
+ =?utf-8?B?SXB5V0ZucVR3YXVwTHhvcGxZRnNCbmRkWmJTRGNLWFllQUtCTEY4UnlXTFph?=
+ =?utf-8?B?QW9Zclp4QjUrWE5Bek9teE5ISHhBbFdxVWRKMHBqRFlKNVNhVUhSeGhkSG94?=
+ =?utf-8?B?ckpHR0JCbTdSM0NtRnFsRWZ2SWFhckNDNjZ4VEQvMUgzSzlsakRONW14ME1X?=
+ =?utf-8?B?TU5hVFlPS0FuSk5ZY3luZXB5R2ZxMWNGVFFYSXVzMHRtUkFGcU1KM2lnK1JR?=
+ =?utf-8?B?NUZTU0FpYUU3d3JqVGxoL2hvT1F3S2RMVno5aVg0eGtDQjcwUlZoVEwvM1Rt?=
+ =?utf-8?B?c1ZkREpMZmRUUjBRWWd1eFNHTHovNkg2RXZJZlZraXdhRXFuMFZxWGhxZG9k?=
+ =?utf-8?B?VzI2ekVvK1MzU1h0UTFKdW5HOVRpZjY2Nko1SHVrUC9uZTRVQkNDdklBU25t?=
+ =?utf-8?B?eEJsZDdna1BoNXowOVpxeVJRcXozYXJaOGtJZmJ2NHg3NkFucjhwbGVTWHJy?=
+ =?utf-8?Q?o6ek=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2025 11:35:50.7328 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 23d1c2ed-1385-4272-5678-08de2e72485c
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989E8.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6321
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,80 +167,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hello Michael,
 
-On 2025/11/21 17:41, Heinrich Schuchardt wrote:
-> On 11/21/25 00:38, Masahisa Kojima wrote:
->> The bootm command can handle the compressed image, but current
->> code fails to boot from it.
+On 27/11/25 00:53, Chintan Vankar wrote:
+> Hello Michael,
+> 
+> On 25/11/25 19:37, Michael Walle wrote:
+>> On Tue Nov 25, 2025 at 10:46 AM CET, Chintan Vankar wrote:
+>>> Update dev-data and clk-data to fix the eMMC boot for J722s-EVM.
 >>
->>       ## Loading kernel (any) from FIT Image at a8000000 ...
->>       <snip>
->>            Compression:  gzip compressed
->>            Data Start:   0xa80000d4
->>            Data Size:    10114520 Bytes = 9.6 MiB
->>            Architecture: AArch64
->>            OS:           EFI Firmware
->>            Load Address: 0x90000000
+>> Isn't there any more information? Why was it dropped in the previous
+>> commit?
 >>
->>       <snip>
->>          Uncompressing Kernel Image to 90000000
->>       ## Transferring control to EFI (at address a80000d4) ...
->>       Booting <NULL>
->>       Not a PE-COFF file
->>       Loading image failed
+> 
+> It was not dropped on purpose, I was enabling CPSW device and
+> unknowingly I removed device id 57.
+> 
 >>
->> To take care of the compressed image, the load address needs
->> to be passed instead of the original compressed image address.
+>>> Fixes: a02009f3a816 ("arm: mach-k3: j722s: Update SoC autogenerated 
+>>> data to enable Ethernet boot")
+>>> Reported-by: Michael Walle <mwalle@kernel.org>
+>>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+>>> ---
+>>>
+>>> This patch is based on commit "4a4871e3dc38" of origin/next branch of
+>>> u-boot.
 >>
->> Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+>> This shall go into origin/master, no? The issue is present in the
+>> v2026.01-rcN.
+>>
 > 
-> Hello Masahisa,
+
+I saw that the patch is already on top of the origin/master branch with
+tag "v2026.01-rc3". Can you please add "Acked-By" to unblock it for a
+maintainer to get it merged?
+
+Regards,
+Chintan.
+
+> Ack, I will rebased onto origin/master and resend.
 > 
-> Thank you for diving into this problem.
+>> That being said,
+>> Tested-by: Michael Walle <mwalle@kernel.org>
+>>
 > 
-> In test/py/tests/test_efi_fit.py we are testing on the sandbox with and
-> without compression. Why would the problem not show up in the test?
+> Thank you.
 > 
-> 539         # Run tests
-> 540         # - fdt OFF, initrd OFF, gzip OFF
-> 541         launch_efi(False, False, False)
-> 542         # - fdt ON, initrd OFF, gzip OFF
-> 543         launch_efi(True, False, False)
-> 544         # - fdt OFF, initrd ON, gzip OFF
-> 545         launch_efi(False, True, False)
-> 546
-> 547         if is_sandbox:
-> 548             # - fdt OFF, initrd OFF, gzip ON
-> 549             launch_efi(False, False, True)
-> 550             # - fdt ON, initrd OFF, gzip ON
-> 551             launch_efi(True, False, True)
-> 552             # - fdt OFF, initrd ON, gzip ON
-> 553             launch_efi(False, True, True)
 > 
-> The test should be corrected to show you issue.
+> Regards,
+> Chintan.
+> 
+>> Thanks,
+>> -michael
+> 
 
-Can you show us how to run it with sandbox?
-
-To understand the situation, I tried running the test using v2025.10.
-
-     ./test/py/test.py --bd sandbox   --build  -k efi_fit
-     ./test/py/test.py --bd sandbox64 --build  -k efi_fit
-
-The test was skipped as follows:
-     test/py/tests/test_efi_fit.py::test_efi_fit_launch SKIPPED (.config feature "generate_acpi_table" enabled)
-
-After disabling ACPI, the test failed with the following error
-and could not be reproduced.
-
-     => /u-boot
-     Bloblist at 100 not found (err=-2)
-
-There might be differences in the environment or procedure,
-so please let us know if you have any tips.
-
-Thank you,
-
----
-Best Regards
-Kunihiko Hayashi
