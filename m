@@ -4,76 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28D51CFD2F6
-	for <u-boot@archiver.kernel.org>; Sat, 29 Nov 2025 09:53:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6288ED116EA
+	for <u-boot@archiver.kernel.org>; Sat, 29 Nov 2025 14:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 597AC83642;
-	Sat, 29 Nov 2025 10:53:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C7EC83655;
+	Sat, 29 Nov 2025 15:37:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B59A283655; Sat, 29 Nov 2025 10:53:08 +0100 (CET)
-Received: from smtpbguseast1.qq.com (smtpbguseast1.qq.com [54.204.34.129])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16254832AD
- for <u-boot@lists.denx.de>; Sat, 29 Nov 2025 10:53:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: zesmtpip3t1764409950td390d5c4
-X-QQ-Originating-IP: 7oHdUk2xku+QLiyrWBhXuwOvmt3//ilSBZeKiPykt3s=
-Received: from [IPV6:240f:10b:7440:1:380f:45ef ( [localhost])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Sat, 29 Nov 2025 17:52:28 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 12468510341776165117
-Message-ID: <53143B48341F9068+600cd801-8c7e-4407-a3e9-13c83ac5ca67@radxa.com>
-Date: Sat, 29 Nov 2025 18:52:28 +0900
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tWSIxBJm";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 841CE8367F; Sat, 29 Nov 2025 15:37:09 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A6294832AD
+ for <u-boot@lists.denx.de>; Sat, 29 Nov 2025 15:37:05 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7c704bdd57aso1365387a34.3
+ for <u-boot@lists.denx.de>; Sat, 29 Nov 2025 06:37:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764427024; x=1765031824; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0QTumz0jLQs9zuo6um1h7610XYyV0mLOlJf1IaKKvH8=;
+ b=tWSIxBJmCPaYoWw3ZQRP8aAPoUCdiT8h8UPyK33CniRoeBT6xMGyN6T1X+pH/pO0sd
+ txWRyPDLB3YQc8mO65DgyirQQuim/AppFTE0Yd1B5mfl8TiiWKMCA/VNkJRmE8vsNuUx
+ nQw0ed3h/eXnmTW4X0Kg3NkBWYPMJkc2uxVpc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764427024; x=1765031824;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0QTumz0jLQs9zuo6um1h7610XYyV0mLOlJf1IaKKvH8=;
+ b=GxFmKtWNTsqf0kPqu/2EsJNoK0a5Tvj1mXzPuxgR0IuI5bUdphuf8pKXcCdkFjeW+m
+ gv5dWRsvTDS7fPsIvS33EmNrqSOYw1YPgfYe4y3khDhjo4gxnhCq/3LbYVCqWG+eF6e/
+ f4EcdxqXvONvekLR6DOcrPtaEDw7iPsPjvlpLC532JxxWtMO7bmdpgwzw/epdY5yHdqp
+ hWxdT3hHzHiuoSl8huibx8bIJyDUKZ8J6tbw2x+Rno/uNL9cxaeC9Dx5qobX8XhPFzNO
+ +L3l9e9775vkxiRiVplBG78M4miE8frID3dc5naeecxVRkPX0wfiUOkRJP4kVbVPZzad
+ VuSQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVYLVZYr17tVQIlgI4fXnX/4RMwvqc1f1Ys3JV0oEwkwpqi4h3kExGjQ9ptj0je6zFtpGnKxCs=@lists.denx.de
+X-Gm-Message-State: AOJu0YypFXhyA7ym7cBq9jR29JAWD5bH5SvSutAy/pSfd2BkeXrCMUvT
+ Fln+ELCwwLcGBcpnYr4+H71+d1BXRsTmxtElAcTiBREywIc53EruGPZUCLvc6IIuQdw=
+X-Gm-Gg: ASbGnctV0l9uMnfXfbWsprkxNnNHZyS8jLfhpqqbIpVGeJo/znDBZ6HWB0yXIrTiuUt
+ vfVUGFkdITOXa+614iwxaMIBeIWYCDV56+9KF8AUvP73Jb7C6jofWYX+2s5XEkU7gL1/nd2CXek
+ 2PJV+EwybD+TietXS/aRdB8qol22/5bgDcLYZLfu2ygDRnQ1QDsuM7d7F2ZZ49CUMOLToAhhNhq
+ YZRLchqaA7RbvsZPNTA71W+tvR1tCncUTvD1r+joHO+JJ4pCYmTwgnUTp2n1mjRRTOGby5qxkzT
+ dAWVN0P5332smZGryQnkDf/PVkCRSoleP5A7wkeDvlrZYgqKCtX+bxqG/YKUT6TI1AbiVBlJJc7
+ jmBs2QM678kxGzQUStcPNRjJJ9kc1fec81nUJCpxzEyT4uIjMDdm/EntWgvHNi03E9pNagVS9KT
+ F716saFrMiP6jgpI+i6lTO/f2XJzAvMJifeT99PhppFp09IG+W9RE0ikWtiyP1
+X-Google-Smtp-Source: AGHT+IHjw7k8khfB4LQpb0lZukzczd6IZ+5deppHmCo6cvP3mvrtu1Rj8seCSJwyA6RPsmzQklaQkQ==
+X-Received: by 2002:a05:6830:34a7:b0:7b4:1768:ff3b with SMTP id
+ 46e09a7af769-7c7c4466f4fmr8479136a34.22.1764427024337; 
+ Sat, 29 Nov 2025 06:37:04 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c90fe15847sm2759522a34.25.2025.11.29.06.37.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 29 Nov 2025 06:37:03 -0800 (PST)
+Date: Sat, 29 Nov 2025 08:37:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Hrushikesh Salunke <h-salunke@ti.com>
+Cc: c-vankar@ti.com, u-kumar1@ti.com, marek.vasut+renesas@mailbox.org,
+ n-francis@ti.com, peng.fan@nxp.com, semen.protsenko@linaro.org,
+ s-vadapalli@ti.com, jm@ti.com, m-chawdhry@ti.com,
+ u-boot@lists.denx.de, danishanwar@ti.com
+Subject: Re: [PATCH v3 0/5] arm: k3: j784s4: Add PCIe boot support
+Message-ID: <20251129143700.GA470491@bill-the-cat>
+References: <20251112064725.1049199-1-h-salunke@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] Raxda Rock Pi 4A serial console output stops prematurely
-To: Anand Moon <linux.amoon@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Stuebner <heiko@sntech.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <e7b7b905-4a6c-4342-b1a5-0ad32a5837cf@gmx.de>
- <94561b0d-8203-4210-b599-93070eb934cf@cherry.de>
- <89385ade-7d7d-4a8c-b929-f4eb47e254cc@gmx.de>
- <4fcde736-c5e1-4800-8b75-ab87c0dd8b0a@cherry.de>
- <53057b6b-12b2-498c-aea6-88f535c0b096@cherry.de>
- <CANAwSgQcFRYKW0+vG6TVj_-EYYQSdF=t3KYFF0FtOSkN5uLtvw@mail.gmail.com>
- <11d29eb3-bc21-46e1-842a-bb163995fe59@gmx.de>
- <CANAwSgS9+naVnyFv=+1BDHdH4DpHGSCzWWZHFxiDKmDUXu+zCg@mail.gmail.com>
- <0FB759C1BA7AEB85+a26afcc4-c5e8-4452-a6ce-e19736be395b@radxa.com>
- <CANAwSgRRYg-QLATDWcdf8nubv1+Hqn9r_R8D1bFYui3i1nYitw@mail.gmail.com>
-Content-Language: en-US
-From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <CANAwSgRRYg-QLATDWcdf8nubv1+Hqn9r_R8D1bFYui3i1nYitw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz4b-0
-X-QQ-XMAILINFO: MLyssK0sPeZUBF4pAabUpFqpVcjf7bj+BBDsCIn8xaTBTs07Y4Mf5nku
- 0QKPsZlMD3xRXnoWD2xh4TmOE7pMbw4OPkv39QfBpRK0808Ryb75SUfmzXpxcs616iNuCkc
- tbjq4HBxty3gbbTp1/AJ9hoZ4seXpisXNCCF5gWY3+Niyg5BvmdCvXChaBqHF9r4rL+1Ch+
- Yfugx8lmAibbQFbgDtbrPjhQ3hLWIa9dnJUStJV3Ou2OPEKc2hoLM7jV8NzDhnwOChWPtRk
- SSY56R1FLVNVtD7KSxp5yaUOHpXyKlao1wuE9toRQJJGT2RHwqE1JgPVLLcrL35mDCZJqjd
- WpU5UqOT51HVYkkV85S5R9zKY7/TlwXK9/se9+K47ISYFlCMznxftrdH51r/jsVkx1Yr4IK
- i2vhohMvffz5L6KaU8dth7grFuRQRS6DVzCyWiIpYBbjKDtPB/uM+KWTjy7Om/o4qXtXo4U
- GQRMm1X2UEFwnCv2OxJ+CaYxliFbwh38Mo9ogyDxYRR8RTs11i/TUZlaZ2NZ/lIfydxje1U
- SgqWj1lm6wsNrEW3A9ums5beCUF4Xgy5y4yq8X1bFbxvJyJ9gQK3zK9mD7TQ51EEHGCNhUj
- d0ZpS8tyWY+lcG7fN5P4HzeX30IqcBcAKNA1HIoBkZOy3iZmNu2fr54gHbcWFLRYs63s877
- 4SNHgNXqnk6uog+Yz7gqTHKovaMZraJQF2E9LLe6P+r380B74nnpc11neGZ08SBPi0/HdWp
- Za0ipZCL3qxKSQUDLVI/7azIhnpyrUYvsiE1dbvvlZjbaNUVmeoD2pmIXcxfO3iXZoVkHPl
- fCaKxsU+Lknar0AkVtUYH/W9ItYXvAyysikWKRlSF0NvFm/BMhXSVY457iMliKopBTxvWlu
- bn9FMi1j+/9USexJiyLRy5UwtVHnk3YRFtZHZ2fUqgypXO9SUjC/9Wu6GSJgxl0mGYgMR6/
- 6V6qzBrHtGtshjSjZ/rDOG3xEOhmFVrH1Gxn+OGjRazctz/C8PYoIItmcDhUDSkIPXkyrTc
- ZyzEpiLQ==
-X-QQ-XMRINFO: NS+P29fieYNw95Bth2bWPxk=
-X-QQ-RECHKSPAM: 0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="K5dzctAuBVHFprqO"
+Content-Disposition: inline
+In-Reply-To: <20251112064725.1049199-1-h-salunke@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,97 +101,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anand,
 
-On 11/29/25 16:25, Anand Moon wrote:
-> Hi FUKAUMI,
-> 
-> On Sat, 29 Nov 2025 at 10:09, FUKAUMI Naoki <naoki@radxa.com> wrote:
->>
->> Hi Anand,
->>
->> On 11/28/25 14:50, Anand Moon wrote:
->>> Hi Heinrich,
->>>
->>>>> Thanks. I am having the same issue with my Radxa Rock Pi 4 B Plus.
->>>>>
->>>>> But I am booting from SPI flash, so I cannot stop this board in the
->>>>> U-Boot prompt.
->>>>>
->>>>> Is there any other way to flash the SPI flash u-boot-rockchip-spi.bin image
->>>>> in the user space to spi flash? using dd coammnd
->>>>>
->>>>>    From the schematics, it has W25Q64FWZPIG
->>>>>
->>>>> [1] https://dl.radxa.com/rockpi4/docs/hw/rockpi4/rockpi4_v13_sch_20181112.pdf
->>>>>
->>>>> I have tried to enable SPI flash, but it is not getting detected on
->>>>> the board in userspace.
->>>>
->>>>
->>>> https://wiki2.radxa.com/Rockpi4/dev/usb-install
->>>> has some guidance how to avoid booting from SPI NOR flash.
->>>>
->>> Thanks for your tip.
->>>
->>> I've attempted this method, but it hasn't worked for me.
->>> Could you provide the SPI details for this board so I can map it in driver code
->>> and from userspace and then attempt to erase or reflash the image?
->>>
->>> on my board
->>> [    1.282609] mmcblk0boot0: mmc0:0001 SLD64G 4.00 MiB
->>> [    1.285862] spi-nor spi1.0: unrecognized JEDEC id bytes: ff ff ff ff ff ff
->>
->> Are you using dts with "audio-supply = <&vcc_3v0>;"? It should fix SPI too.
->>
-> Thanks for your tip.
-> 
-> I have applied the patch from FUKAUMI, and now my console output has
-> started working
-> 
->> 1. Make u-boot-rockchip.bin with "audio-supply = <&vcc_3v0>;"
->> 2. Write it to microSD card
->> 3. Insert it
->> 4. Kill SPI flash
->> 5. Boot U-Boot from SD card
->> 6. Revert 4.
->> 7. Try "sf probe" "sf erase"
->>
-> Yes, I have tried these steps (4 Kill SPI flash) ->
-> I have shortened the SPI1_CLK and GNG in the GPIO header
-> But this board first boots from SPI flash, I don't know the reason.
-> 
-> I noticed your patch references the W25Q128.
-> Did you get this device detection in userspace?
-> 
-> This output is from your patch.
-> => led blue:status off
-> => sf probe
-> SF: Detected w25q128 with page size 256 Bytes, erase size 4 KiB, total 16 MiB
-> => led blue:status on
-> => sf probe
-> jedec_spi_nor flash@0: unrecognized JEDEC id bytes: ff, ff, ff
-> Failed to initialize SPI flash at 1:0 (error -2)
-> 
-> Could this explain why I’m unable to detect the device from userspace?
+--K5dzctAuBVHFprqO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-What happens if you lower the SPI clock?
-e.g.
-  spi-max-frequency = <10000000>;
+On Wed, Nov 12, 2025 at 12:17:20PM +0530, Hrushikesh Salunke wrote:
 
-Best regards,
+> This series adds PCIe endpoint boot support for the TI J784S4 SoC.
+>=20
+> PCIe boot allows the device to boot as a PCIe endpoint, where the
+> bootloader images are loaded by a PCIe host through Device Firmware
+> Upgrade (DFU) over PCIe.
+>=20
+> The J784S4 SoC uses PCIe1 instance with SERDES0 for endpoint boot.
+> To enable this functionality, the SERDES and PCIe peripherals must be
+> configured early in the R5 SPL stage before the bootloader images can
+> be transferred from the host.
+>=20
+> This series:
+> 1. Adds the required clock and device data for SERDES0 and PCIe1
+> 2. Enables Cadence Torrent PHY driver at SPL stage
+> 3. Enables J721E WIZ SERDES wrapper driver at SPL stage
+> 4. Enables PCIe boot configs for R5 and A72 stage
+>=20
+> This feature has been tested on J784S4 EVM. Following are the logs
+> corresponding to this feature.
+>=20
+> https://gist.github.com/hrushikesh221/cf48b512eb4cd90c1612ad2e531b8ffe
+>=20
+> Program used to copy bootloaders from PCIe Root-Complex to Endpoint:
+>=20
+> https://gist.github.com/hrushikesh221/94e6042dbd717c74b74a5c9fc8ec5b6c
+>=20
+> This series is based on commit :
+> 6b27b688694 Merge branch 'master' of https://source.denx.de/u-boot/custod=
+ians/u-boot-sh
 
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
+This adds failure to build on am69_sk_r5 am69_sk_r5_ethboot
+j742s2_evm_r5 j784s4_evm_r5 on current next, thanks.
 
->> Best regards,
->>
->> --
->> FUKAUMI Naoki
->> Radxa Computer (Shenzhen) Co., Ltd.
->>
-> Thanks
-> -Anand
-> 
+--=20
+Tom
 
+--K5dzctAuBVHFprqO
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSsFCQAKCRAr4qD1Cr/k
+ChpFAP9E+GCYX0qxi7ohpvli64SwLOSc17FqY2uRM/RqHymt6gD/czUDW2BwTAVW
+a6synfyUL+1EBNEFFCdBToB2nh2Ndgs=
+=TwC8
+-----END PGP SIGNATURE-----
+
+--K5dzctAuBVHFprqO--
