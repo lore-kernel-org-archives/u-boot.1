@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76260CFD376
-	for <u-boot@archiver.kernel.org>; Sun, 30 Nov 2025 13:58:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9276D116F3
+	for <u-boot@archiver.kernel.org>; Sun, 30 Nov 2025 13:58:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97DC983849;
-	Sun, 30 Nov 2025 14:58:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D80D5838E6;
+	Sun, 30 Nov 2025 14:58:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="onlf+LQo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mKv8fnf7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7E3683885; Sun, 30 Nov 2025 14:58:11 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 80A33838FA; Sun, 30 Nov 2025 14:58:19 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBF2D8312A
- for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 14:58:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EA618312A
+ for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 14:58:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c75b829eb6so2277992a34.1
- for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 05:58:09 -0800 (PST)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-3e3dac349easo2120884fac.2
+ for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 05:58:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764511088; x=1765115888; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mLbimmiDsVcH9H6/G05aerjB/sfOEpjGpmiESfHn3pw=;
- b=onlf+LQomWHDyCqxUQEqJrtD8i6KeEVaGpVRRx5vt5HX4pVKXdacE4KU0lzi1OYLkt
- VGO8/tLI3ITPS0LMKeGVhX5mX8jBAn/uqscB8Fjs+HiXT1IxMmPF+IP+yu3Fia+8U7pL
- qLKSd2NydjF/UlcbG1ICksB5kCalbtgcuJBSA=
+ d=konsulko.com; s=google; t=1764511096; x=1765115896; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xl7OTceyffe1ihoofjJbUtv7cnVvOkm4xwAX74lI3Uo=;
+ b=mKv8fnf7OVfvcKRXEMKL2slx94U3L9bWNxLRu4IpZClQOxxHhedxXqesdGEJwSUrqQ
+ 9bV7qB9XeoDwva8C77Bni80GP8z/WWHZHCLCunYln4qAqXEuE2kqptLyu64RsgGajTti
+ swgsK0bB9v98gQW5Yo53E0RsgQcqOQG9eh5IU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764511088; x=1765115888;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=mLbimmiDsVcH9H6/G05aerjB/sfOEpjGpmiESfHn3pw=;
- b=odUh/pmif9lcUjB/PnquTzuuakpHFurF+JR1pje5TR9e4nB1S2T+yEmWvoVrCJKu7S
- 8xK08PHISAN0P4/z3bg64p6vWCJ+YKn9JUS2/Fy9pomEeETl3YjT31NJAuocXBh4babS
- QRvAwQ3RhvHGBDm4FXHp4ZJBch0e49wdiWT+ojdW0mNYtYLOk351Zb2cTzprhVC37a/5
- mfKq7uVaJkgWKAkhj+nCq0AcJ7bLHIJhfVi1zHs3+vCgc+FKZQnygj9TiVVx3m3xr9JV
- 9IsjXEmreewb1pJdFrdUpveaC5ZdT9LNp3wzvkqyKL4gCH4Fav7AeZA5xlOFb5aKX35H
- l3vA==
-X-Gm-Message-State: AOJu0YwxT4JOpdqmDDUmj+B5a3QAXsead3fnS5fmRUHIyLX2XY22cc34
- G112/5FN2fmH0mtZhtgpC95V+V36C3H8wrzs4+i5Yt2gmgC/lU/hZRYxwAK1ZF81j5P438jGapQ
- MWIe9wgY=
-X-Gm-Gg: ASbGncvlUi+RrWX6V6YKHd1CoaKV28KovVKKvb+nYKgrpYhqA9WXyS0SdoLb4F6h1kC
- rjrF8K9LUmRirqBaQUr3nWRUu9D7YJS5A1gdyPr6jLh70gvIqr0X90FJc1toUVTUF+8c9ZfQJm7
- 1GCygQZ4D9I6c66le/nYte4i46FkSAhTYWg3lIAZMAH58tlVAz/ninQfJmxqHoC5tlsUUNNJvh+
- JuuAQRIym56MdPyRMiG7cXTZR1nDBmSZrA1F4wazuhnfUfCKd/vhFlERrh4wqhWUO4v8PaF0s/u
- 6lu11Tmt/JpCVE6/o0QVa4s59k28oVOW1b1xJZGe6QU5qFPN78cpW5EYD9hue6j7p+VohQKybYL
- VurCt+vbBlFo2p10ZueEEPP/fS+EIUygRiWBatleDFTkIAM3JJijf307TaoOvJa10NqqLPC/4l5
- bn8Jx+HmQB9GwLbwUgna1Yd+ipn+QCRUCSwnouM44s6m9cgUaMIC4N6o+kbU2SilY=
-X-Google-Smtp-Source: AGHT+IEMQjFfV68//YiyX4NdVU/RxKS7Mb829EOpvtNTEnFaTxXixg1CDnDsKza831GqOmRESoxYoQ==
-X-Received: by 2002:a05:6808:1441:b0:44d:a429:e816 with SMTP id
- 5614622812f47-45115b8c89cmr13405582b6e.53.1764511088391; 
- Sun, 30 Nov 2025 05:58:08 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1764511096; x=1765115896;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=xl7OTceyffe1ihoofjJbUtv7cnVvOkm4xwAX74lI3Uo=;
+ b=FKT8QfLaP9C+8iH/P6YukPkRXJ73EnuWlbV40VFPAQrWwnThe/cRvvHKgDG9nwEX7T
+ KQ2A93HInSXMqxIQEjnZbPW8+tvJ5lMxQRw/w/Ltcbn92LQUdKU6o+U0FVCXFFFJ1Bse
+ tUMzj3s3MYzYhUJubZgQchdMyvb6AsJ2GGXFvSbT5qdP7YjGuUT9fZxteyfMRPUvSDKm
+ 8rhPNB2Gw1G3iIHo2pXzmdW3SR8UsTWmBs/0NQmw+suyInmelF6TK2dLtjiemjeAhZrO
+ WKIL4VaCCvkRN5ygBZa7UBtPTwgOJvpLN2gThuDxT18XcxIXBYZx4r6HY+GVoWdoYcN5
+ k5FA==
+X-Gm-Message-State: AOJu0Yxi21OdJNAwQrc0M5zs2r32F4MopQHjIPVIsLdU3qOwHhV6k8+p
+ a3Tzbs4Jqm/iwS4bFTmJaEyZWQ40yOAC2TIIkk3KRj4+T9+3GlMD8nl3PmAk7Q4gZPI=
+X-Gm-Gg: ASbGncs2M16SgiwdBmGnf5GFYbmiRQrRZs+FBk7Pebmt89gW0FrwhbKYcXkCdGeya1a
+ Zvl7s01ZJGes8bsJe9bgX888U1s9cZN6nGAe+fEFvPENLkV9D/RzIGWbR31SVSnnb5WjoSqg7Vh
+ QD8vBggA6+wjBnybWrAHvdOD9BSKVAZONEoGWmtUMdndvjDdzknN7GMBWmFAI6xOu74yfbyz5md
+ JsuSwQiWr/ZiehXjIdkFh9cgp4NAvLcaZwH7m994KqmVdsXJmjNHFenJwkZpSTeyFCySoqNGltR
+ +ckGZKYDQGTPXbnr6S3k8qk5rKq0G6VHsCFgMOqZcrrlg+IpTw3BwomwGEcbpNvAFSyaFe+Os4+
+ znef9FPa9dYYacQZ39ElJs1mbsmj08cY8a9zQtVUPr/NucxAsWvkyM/zAIvYGZ7alsn76TIMm3Q
+ ifdvdMDybkSy1YCEOhznG+pzA4RWgkJ46yMwmdoPdrVFFLE2dN
+X-Google-Smtp-Source: AGHT+IHFz71jaBZIpiOCd7oeYRxLMuzrrYrnH/gFZ1dSax8JHL3w7bZQeqpMe7xq1EiMspBUuIP5kg==
+X-Received: by 2002:a05:6871:c709:b0:399:58c2:2e5b with SMTP id
+ 586e51a60fabf-3ecbe52543dmr15705469fac.51.1764511096141; 
+ Sun, 30 Nov 2025 05:58:16 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-453169b3ea7sm2919966b6e.1.2025.11.30.05.58.06
+ 586e51a60fabf-3f0dd021aa4sm4113367fac.15.2025.11.30.05.58.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Nov 2025 05:58:07 -0800 (PST)
+ Sun, 30 Nov 2025 05:58:15 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de,
-	Michael Walle <mwalle@kernel.org>
-Subject: Re: [PATCH v2 0/2] Add support for two RTCs
-Date: Sun, 30 Nov 2025 07:58:05 -0600
-Message-ID: <176443215473.486823.14730750782485796708.b4-ty@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251117103315.2212686-1-mwalle@kernel.org>
-References: <20251117103315.2212686-1-mwalle@kernel.org>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20251129211708.2995513-1-festevam@gmail.com>
+References: <20251129211708.2995513-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20251129
+Message-Id: <176451109502.784214.10092394214787312841.b4-ty@konsulko.com>
+Date: Sun, 30 Nov 2025 07:58:15 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,26 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 17 Nov 2025 11:32:49 +0100, Michael Walle wrote:
+On Sat, 29 Nov 2025 18:17:08 -0300, Fabio Estevam wrote:
 
-> I'll soon post support for the Kontron SMARC-sAM67 u-boot support.
-> I'm still waiting for the linux device trees to be merged (in -next
-> right now) and then to be synced to the u-boot tree. That board
-> features two different RTCs and this will already support for these.
+> Please pull from u-boot-imx/next, thanks.
 > 
-> You can find the device tree at [1]. RTC nodes are in the overlays,
-> though there is none for the RV3032 at the moment.
+> The following changes since commit 7af532a8ef1c6685eac58d587c9502ab31855aae:
+> 
+>   Merge patch series "Add support for two RTCs" (2025-11-29 08:37:26 -0600)
+> 
+> are available in the Git repository at:
 > 
 > [...]
 
-Applied to u-boot/next, thanks!
+Merged into u-boot/next, thanks!
 
-[1/3] drivers: rtc: convert tristate to bool
-      commit: aa2f8e35326276c81f94919b8173e386a6f6968f
-[2/3] drivers: rtc: add PCF85063 support
-      commit: 1c2a2253f7980355ecaec76e45a5901635f00621
-[3/3] drivers: rtc: add RV3032 support
-      commit: 788f2d3800e3d7e66a42aaffcb6cbc44390353d2
 -- 
 Tom
+
 
