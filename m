@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF439D116EA
-	for <u-boot@archiver.kernel.org>; Sun, 30 Nov 2025 00:07:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9574BD111A8
+	for <u-boot@archiver.kernel.org>; Sun, 30 Nov 2025 05:01:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D75F783045;
-	Sun, 30 Nov 2025 01:07:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CA2DA8382A;
+	Sun, 30 Nov 2025 06:01:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e+ISWPnU";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="L4W9zDwt";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="eXdQiPyK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD3858307F; Sun, 30 Nov 2025 01:07:13 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F22D783106; Sun, 30 Nov 2025 06:01:14 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABE0683015
- for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 01:07:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0746983015
+ for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 06:01:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5957c929a5eso4739120e87.1
- for <u-boot@lists.denx.de>; Sat, 29 Nov 2025 16:07:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764461231; x=1765066031; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vHanrEPZZtFitdqCIlJg4NIj8MMSP9EoxtD/vR2JDNg=;
- b=e+ISWPnUj5yriYmvvwh6cT08D+LQNXxzD/CoG2sntLIfZu/V1W7tpSs9KPH0uETMSB
- X9ABvHAZPKaJVA6T6LSfnBJDG+jaY+0rPB+pc+e891rzyeH27pUkFWGIXSyJMhh+Vf/V
- vfk6mW/9wE/lbZbzwb/09SgzMXMFi9DCl//7OFRzLNyQ54siIhxJV6ZUlyMWYApXtQNG
- cdPADy8dqH1UNA8fIl8nKGT1YNU+XUEedYWDXj2mNFcMMciSyndtW9zyEWc2SjSR1jc9
- WZQX/DFVX0YbJo36kIUlC1vG1UGOrj56mRnj5EPg+B2gUOPxFUMuvGt6Fh517H7dLjeY
- jXHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764461231; x=1765066031;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=vHanrEPZZtFitdqCIlJg4NIj8MMSP9EoxtD/vR2JDNg=;
- b=uogo3+5hqNKixnWesopqWPyQ4IGAihiWEMkeWbETFs9ZrFXw6pHGEazNoBqtrxm9fY
- 7dw2uQ2di1af7LrgcnQqLKaXG/1xYYtrfwt9u0iQESpPuNnXUrsffpUteutl/VL9rTN9
- qg4E1yJPVWjWJ74lp9GnyhZ2yVOw7O4b7uBW3bUUUNlYrTFUG5jnDasLv+f7PDZyWqhO
- fwTBnIW516486JKSnqw2nlZdIEVV8uPsySvWVNcD8/YkzjdfSh3onawtmpw/pnYDB5uB
- bJ3LsryBXrlgqZVhpawAM570VA2L5C+t4Bmh6gCu4nvujt9eQxDCuN3I1sen9md4JYy4
- YEbA==
-X-Gm-Message-State: AOJu0YyWGnnlouVhaHOqe2E8I6Ys+8HotaBR+hzHsHpF1NQcSuIpY0Av
- 2kCEYMiZmTUctkKwUxPNf06PnBepFtSfl4UKSty5dU3WJqPV/YjdR2+ptAlP0WFDKjZ7ivvG/JR
- VU688gBhY7Kg9q36a+3RIv3t0Q8rrbVE=
-X-Gm-Gg: ASbGnctaFRr+c59iaR5mPR+XGIsokI+vRgxDJBk0xRNo3BIw1iOv6BF2hirCjNR5s0m
- ha7KWnAALqre3uYtxOmEmCE8wntMyb//87RLCKhSmPvkOEl2vwicH34cCJNd0Wj2686bqTSJuQT
- tdjszT1JHkMwJBqaREpC5JM+bHoeaBubH1G3exHo2psuVgG8Wzq79J9BWtL8iEUydYypZ/I56R9
- h+wrYLQJSAOcXc+kw7r+BfWol4do216A/JRHdlgSuXnwBIblWHz2HdEAW3aehDFtX1ieHUwC9+z
- XXTIkbnfunzLWynA93xRny9kDgY=
-X-Google-Smtp-Source: AGHT+IEDv5cnsrit1jaR1e0UM4TWpYxUQOXDAEmO/ocXxUm5B9O/RSQMfxhk1Az4/n467SlQF2v9zA4EiatYmVsiA5c=
-X-Received: by 2002:a05:6512:3c8a:b0:595:8350:5812 with SMTP id
- 2adb3069b0e04-596b5287ff7mr6766443e87.36.1764461230608; Sat, 29 Nov 2025
- 16:07:10 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dJvxz4Db6z9scY;
+ Sun, 30 Nov 2025 06:01:11 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1764478871;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4jaWNx1vaFhUwNGWKw1jOMHQCcO2S5WHtYOYZsMj3zA=;
+ b=L4W9zDwt7K4q9bDGAUcYwpyqmukHJoP7N4nzO4LhodTDu4aRaczYSsSf6I+ErsQuXj6QLh
+ isupRbKr7LY35+jnRhYa9fcrnMtDZYmhaCiiJhs0BveWXKSD2+yPGQbptA8IY+La6pyfoK
+ MjZbSD52iwst5KEeNciyf/7TcgskNPJ3IKJyhycRfsHHt5NsWYtrnqEiW50SazgG+lmRWi
+ YJTARNVud2JjwSRsNxMBypytOA2DoF9GbQp8If5lEscRyBYETLzUh8uClUXOHajF5gTIXX
+ hfoUbw+euWEkqTc3shC2uTweNodx+J8AQ1Iz5jtJxfnvhni1AVj9ulNZWv7Szg==
+Message-ID: <a016c693-071e-47f2-b5a8-f03ccaa7a7f9@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1764478869;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4jaWNx1vaFhUwNGWKw1jOMHQCcO2S5WHtYOYZsMj3zA=;
+ b=eXdQiPyKG6vJtGzOjydE2XNYCCaSD9dJk1A1AkINxd5S+4qVrss2jQR5U1NT/cbArsNGgX
+ lwKThetUUdlQi1Zks9tIqkUd3kYbuHKzZ1mFKVXAG+Gtwa8nCLY9vPQdcVJHtowVLY872q
+ /6UqXckQdsAP/A/+CLa1whdVe0hb06SJMzg1gVufiHl1BLkMe+d78BzzBiBX+7gAHjPEs7
+ emw9bRrp+bM1zMG0au4/TfO/3EOomVRUyyhbIICX7od3y6/2BLijUG/FM1GccghueyRi8L
+ QFy5680PhA9V1t7lEXzniwUCkiskgJic44VnRFkHNnWxfzSV05oQSh9fFQ4rOQ==
+Date: Sun, 30 Nov 2025 02:05:05 +0100
 MIME-Version: 1.0
-References: <20251128-usb2-v1-0-25ec5ac127ff@nxp.com>
- <20251128-usb2-v1-4-25ec5ac127ff@nxp.com>
-In-Reply-To: <20251128-usb2-v1-4-25ec5ac127ff@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 29 Nov 2025 21:06:59 -0300
-X-Gm-Features: AWmQ_bl-0yfaK9IWFKTvJt8DALr6sxj4dC9JTB-91PzCW3hLcBVf_UbwQFmsI0A
-Message-ID: <CAOMZO5DisnpWRxfzwp0F7VOMPBLb+nmYE5vdCHADCe5VbP3Ejw@mail.gmail.com>
-Subject: Re: [PATCH v1 4/4] imx8ulp: dst: Enable USB controller at 0x29920000
- in host mode
-To: alice.guo@oss.nxp.com
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Marek Vasut <marex@denx.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, 
- Ye Li <ye.li@nxp.com>, Tim Harvey <tharvey@gateworks.com>, 
+Subject: Re: [PATCH v1 1/4] ehci-mx6: Add powerup_fixup implementation
+To: alice.guo@oss.nxp.com, u-boot@lists.denx.de,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Marek Vasut <marex@denx.de>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ Ye Li <ye.li@nxp.com>, Fabio Estevam <festevam@gmail.com>,
+ Tim Harvey <tharvey@gateworks.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
  Stefano Babic <sbabic@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
- Lukasz Majewski <lukma@denx.de>, 
- Simon Glass <sjg@chromium.org>, David Zang <davidzangcs@gmail.com>,
- Alice Guo <alice.guo@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
+ David Zang <davidzangcs@gmail.com>, Alice Guo <alice.guo@nxp.com>
+References: <20251128-usb2-v1-0-25ec5ac127ff@nxp.com>
+ <20251128-usb2-v1-1-25ec5ac127ff@nxp.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251128-usb2-v1-1-25ec5ac127ff@nxp.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 057ac75191f974a2941
+X-MBO-RS-META: nimpcbwjf6fof6mebs6dfndat1w7iqtz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,39 +97,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Nov 28, 2025 at 10:18=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
+On 11/28/25 2:16 PM, alice.guo@oss.nxp.com wrote:
+> From: Ye Li <ye.li@nxp.com>
+> 
+> When doing port reset, the PR bit of PORTSC1 will be automatically
+> cleared by our IP, but standard EHCI needs explicit clear by software.
+> The EHCI-HCD driver follow the EHCI specification, so after 50ms wait,
+> it clear the PR bit by writting to the PORTSC1 register with value
+> loaded before setting PR.
+> 
+> This sequence is ok for our IP when the delay time is exact. But when
+> the timer is slower
 
-> diff --git a/arch/arm/dts/imx8ulp-evk.dts b/arch/arm/dts/imx8ulp-evk.dts
-> index 7aec1706382..fb28748ec17 100644
-> --- a/arch/arm/dts/imx8ulp-evk.dts
-> +++ b/arch/arm/dts/imx8ulp-evk.dts
-> @@ -44,6 +44,26 @@
->         status =3D "okay";
->  };
->
-> +&usbotg2 {
-> +       pinctrl-names =3D "default", "sleep";
-> +       pinctrl-0 =3D <&pinctrl_otgid2>;
-> +       pinctrl-1 =3D <&pinctrl_otgid2>;
-> +       dr_mode =3D "otg";
-> +       hnp-disable;
-> +       srp-disable;
-> +       adp-disable;
-> +       over-current-active-low;
-> +       status =3D "okay";
-> +};
+How can the timer be slower ? Maybe there is some bug somewhere else ?
+
+> , some bits like PE, PSPD have been set by controller
+> automatically after the PR is automatically cleared. So the writing to
+> the PORTSC1 will overwrite these bits set by controller. And eventually
+> the driver gets wrong status.
+> 
+> We implement the powerup_fixup operation which delays 50ms and will
+> check the PR until it is cleared by controller. And will update the reg
+> value which is written to PORTSC register by EHCI-HCD driver. This is
+> much safer than depending on the delay time to be accurate and aligining
+> with controller's behaiver.
+> 
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> ---
+>   drivers/usb/host/ehci-mx6.c | 28 +++++++++++++++++++++++++++-
+>   1 file changed, 27 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
+> index 25907f22612..0b3f1b69657 100644
+> --- a/drivers/usb/host/ehci-mx6.c
+> +++ b/drivers/usb/host/ehci-mx6.c
+> @@ -265,6 +265,25 @@ int usb_phy_mode(int port)
+>   }
+>   #endif
+>   
+> +static void ehci_mx6_powerup_fixup(struct ehci_ctrl *ctrl, uint32_t *status_reg,
+> +				   uint32_t *reg)
+> +{
+> +	u32 result;
+> +	int usec = 2000;
 > +
-> +&usbphy2 {
-> +       status =3D "okay";
-> +};
+> +	mdelay(50);
 > +
-> +&usbmisc2 {
-> +       status =3D "okay";
-> +};
-
-These USB nodes are already present in
-dts/upstream/src/arm64/freescale/imx8ulp.dtsi
-dts/upstream/src/arm64/freescale/imx8ulp-evk.dts
-
-Please send a patch to convert imx8ulp-evk to OF_UPSTREAM, then resend
-this series.
+> +	do {
+> +		result = ehci_readl(status_reg);
+> +		udelay(5);
+> +		if (!(result & EHCI_PS_PR))
+> +			break;
+> +		usec--;
+> +	} while (usec > 0);
+> +
+> +	*reg = ehci_readl(status_reg);
+> +}
+Can't the core EHCI code simply check whether PR is cleared already and 
+skip updating PORTSC if it is instead ?
