@@ -4,63 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCD78D111A8
-	for <u-boot@archiver.kernel.org>; Sun, 30 Nov 2025 21:47:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C56DAD111A8
+	for <u-boot@archiver.kernel.org>; Sun, 30 Nov 2025 22:09:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4DB9839A8;
-	Sun, 30 Nov 2025 22:46:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
+	by phobos.denx.de (Postfix) with ESMTP id 4803483957;
+	Sun, 30 Nov 2025 23:09:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 25DD38312A; Sun, 30 Nov 2025 22:46:40 +0100 (CET)
-Received: from smtp.gentoo.org (woodpecker.gentoo.org
- [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77FA3839D7
- for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 22:46:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gentoo.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
-Received: from ofovo.local (unknown [116.232.18.222])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: dlan)
- by smtp.gentoo.org (Postfix) with ESMTPSA id 966BC340FC2;
- Sun, 30 Nov 2025 21:46:33 +0000 (UTC)
-From: Yixun Lan <dlan@gentoo.org>
-Date: Sun, 30 Nov 2025 21:45:19 +0000
-Subject: [PATCH v2 10/10] sunxi: mmc: enable support for A733
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X218xkIr";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CEA368399B; Sun, 30 Nov 2025 23:09:21 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D96E083935
+ for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 23:09:19 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5959da48139so3450977e87.1
+ for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 14:09:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1764540559; x=1765145359; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ak72vqUqWD7TEZGLUkmoCCSls8wg/A8pKt5EEXR/6Eo=;
+ b=X218xkIrvxLmNL4N41bfX7Etjnrd8Ru4ZIZey+bkm2o45JJ0Q40uPhnmq+Fh0hbRrn
+ stq79/q9Np+ZpRwMI/yxGU4zcRXD5OkG2cYFTPjJXRNLkf7EDI07wTWDde5iGiy5BNrd
+ KmSQAjLZSrtP7yUrLhxhGhA3anL6WddctebXlH3pTqKbQUpsMD/aG8Rp5tCdaORpfZrf
+ rtzC4lQrypIXJ6eSU2x/b4JTgjX82mkRtU59xCSAcX+EeaTSNXnxmgvfgqvlpfcOhsjd
+ wqsJhap0gcU0H/TGhfyQRs4xSLMjomDrxvNsN+0zE0J4KSPVYrw1txpnmYnufR8TVHmm
+ fhMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764540559; x=1765145359;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Ak72vqUqWD7TEZGLUkmoCCSls8wg/A8pKt5EEXR/6Eo=;
+ b=SUN0TJ6qejI0X6PH2cpxN1CVtFZyk19CdijZ4GdgShG5sX0RSVqzuHXcFQSErgYvBz
+ Y3eOo0fuhqFUYLgCtDhGoSw9Ya+MbpDa+l6VHZyfcExe8rYeIC7kXLxMkV+28EO/AyO2
+ l7pTAM6BqAX650331T/ZKFJvr+zrzP9JRVJbk+02UYtOmraTtb/BFmXfRSc03SPyGdxT
+ oEX6YYLSWbzQzur5LT7UDDkO+1PjBieiPBEWOZbFCziVxCc+uGOTNoRFppWPPn8j/SXK
+ DzDhcuerTa+bPbvXa0f9guQx1HMGHLgsu2xsyLQ5Xhz64nq3hagf8IQLxSiYcEJt8tiS
+ ZDXg==
+X-Gm-Message-State: AOJu0YwS+S2nnW5Fse1gl0FwS7Jw5gSDA8dO1euvG5qhkuSJaRN7R45y
+ joM3knwmbeESp5DsDm69gLNiV+fCrIsfqQzWJR9Jm6YbAHauUuUNXUVzc8p2XLebx/vlDescr3x
+ DS6vXTm8Ac1wM61tHseXFbMEgzYyjTQ8=
+X-Gm-Gg: ASbGncsUHgwlHFAtcZbtqAlQCvifmex6JdR6U/7W9U8ZfedTUQpVnXDUnzt6fHceP63
+ V1rniSzQYa0NJ6HiIE3hYheA8EBoW4J81DwhGO0oJxKK7eGTif5SnOBeZMqyB37FnHt1OeYeG0t
+ Bzd4g6c8t1/PKBHZPhUIZUAbmeRmPuw/aH2b7hVX5dDvsfVesqfOKLLF7TThDp+5WrsnhPRj1bt
+ 8KTROKS6FRuKtGTkdXUBpd0vnL5dOmo9IS4yOkHSeA9B26aKXR87LtcGEgLnuU3Yngu0BPGTYs/
+ 1F8jj9fpQtCepF0vjk3cEyjftlg=
+X-Google-Smtp-Source: AGHT+IEOJcVzq3wJFIH6Qt3VxQ+yrDjwFeeidoppkOQjRoH5ZW2FpUGTT6qw4zk+iCsig3Q4kCWlua5+WpZqK+xwdPU=
+X-Received: by 2002:a05:6512:3d10:b0:595:831d:2308 with SMTP id
+ 2adb3069b0e04-596b4e5298amr8623531e87.1.1764540558808; Sun, 30 Nov 2025
+ 14:09:18 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251130-01-a733-soc-support-v2-10-18bdd4376fad@gentoo.org>
 References: <20251130-01-a733-soc-support-v2-0-18bdd4376fad@gentoo.org>
-In-Reply-To: <20251130-01-a733-soc-support-v2-0-18bdd4376fad@gentoo.org>
-To: u-boot@lists.denx.de
-Cc: linux-sunxi@lists.linux.dev, Andre Przywara <andre.przywara@arm.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>, 
- Yixun Lan <dlan@gentoo.org>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2200; i=dlan@gentoo.org;
- h=from:subject:message-id; bh=CFG2W3JtISCVhPCvMYQmLmzdHb0+M97uNT8O8uYdCUE=;
- b=owEBzQIy/ZANAwAKATGq6kdZTbvtAcsmYgBpLLsV3e4TOAio2hkGQhGNfVTWxMKLkA+S3lxNs
- WnBLz0DYWuJApMEAAEKAH0WIQS1urjJwxtxFWcCI9wxqupHWU277QUCaSy7FV8UgAAAAAAuAChp
- c3N1ZXItZnByQG5vdGF0aW9ucy5vcGVucGdwLmZpZnRoaG9yc2VtYW4ubmV0QjVCQUI4QzlDMzF
- CNzExNTY3MDIyM0RDMzFBQUVBNDc1OTREQkJFRAAKCRAxqupHWU277TpkD/9MBrLhkmfp4lRgrK
- /cWR6/XWZvZUOQa7/l1yo29Z2dxesKysW4lFsQQFnYspNaxpdUUut2r7zT1nR+G5Tx9EuH9pag7
- NVJf2MQc06wpiYGLgd3tG8Yi2u421Jauc5rjONVuF/ETVYOPeB8JUkUkNb2w7sjbai2prrDmnv1
- OOeDpAqCHdmBXgRvPcEPWsFIFB8Ahh54n3XR5HRQVqTQwpy6fohBZqh3UEGXml7gG3dnFwVjBUt
- UUBsVg6NMVzYiTVHaMs0xjOfFnZzvlnAVfR680zHu6la2J2lmv4ibUsfjlK9EG0nzAazhrXTtfp
- 3hndRHofIHf4RwSaB1w/9JKiNOLzmkySCLTOcRw0owZxQEFhzc8tF65oqwCmF6292B5rZ+y8u86
- fV//BC39tlRADQHmiyb4PVy2BbXFjc/cQv2CYsjThQYf0gMcJ1rftoAlmPU6HX+CKJeUjs3CTv5
- zPd2RC5Po9RBFP2Iq99QP0oTNuqmIEbYGLxyD0tH/tY9lf7yrhMp2aRzJuFqOMeW91j/wsCpasj
- ufq/sDqNMoJpZXIjYmyzfOZtauhFQRJgp/tqSYySxPx4TpPSLesvs1udmqcGzBNe/nnZR6bCXdD
- zZtjIErltHiJHvRvIOnyXIOdBfsYrmP6zdCUdchjM7wgd6IWK1vQHQiTzGAY4oEP93ZA==
-X-Developer-Key: i=dlan@gentoo.org; a=openpgp;
- fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
+ <20251130-01-a733-soc-support-v2-6-18bdd4376fad@gentoo.org>
+In-Reply-To: <20251130-01-a733-soc-support-v2-6-18bdd4376fad@gentoo.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 30 Nov 2025 19:09:07 -0300
+X-Gm-Features: AWmQ_bnHvrE5VvClEN731IF4cEfOYkHQKOOLCbxqUd6JrTcAyOXhC5-bZ7cqewk
+Message-ID: <CAOMZO5BG63ndAg7yTdMtBi7nHQjCGcrS9Sr0M5XfAiBkrC-oAA@mail.gmail.com>
+Subject: Re: [PATCH v2 06/10] gpio: a733: add initial support
+To: Yixun Lan <dlan@gentoo.org>
+Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev, 
+ Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Tom Rini <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,78 +98,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Minor clock adjustment for new A733 MMC controller, the SMHC0_CLK_REG
-start at offset 0x400, and with step size of 0x10.
+On Sun, Nov 30, 2025 at 6:47=E2=80=AFPM Yixun Lan <dlan@gentoo.org> wrote:
 
-Signed-off-by: Yixun Lan <dlan@gentoo.org>
----
- drivers/mmc/sunxi_mmc.c | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+> +config SUNXI_NEW2_PINCTRL
 
-diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
-index e28c81afffe..689bec6693c 100644
---- a/drivers/mmc/sunxi_mmc.c
-+++ b/drivers/mmc/sunxi_mmc.c
-@@ -112,6 +112,9 @@ static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
- 			if (priv->mmc_no == 2)
- 				pll_hz *= 2;
- 		}
-+
-+		if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
-+			pll_hz /= 3;
- 	}
- 
- 	div = pll_hz / hz;
-@@ -167,7 +170,8 @@ static int mmc_set_mod_clk(struct sunxi_mmc_priv *priv, unsigned int hz)
- 	}
- 
- 	/* The A523 has a second divider, not a shift. */
--	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523))
-+	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523) ||
-+		IS_ENABLED(CONFIG_MACH_SUN60I_A733))
- 		n = (1U << n) - 1;
- 
- 	writel(CCM_MMC_CTRL_ENABLE| pll | CCM_MMC_CTRL_N(n) |
-@@ -661,17 +665,28 @@ static const struct dm_mmc_ops sunxi_mmc_ops = {
- 	.get_cd		= sunxi_mmc_getcd,
- };
- 
--static unsigned get_mclk_offset(void)
-+static unsigned int get_mclk_offset(void)
- {
- 	if (IS_ENABLED(CONFIG_MACH_SUN9I_A80))
- 		return 0x410;
- 
-+	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
-+		return 0xd00;
-+
- 	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
- 		return 0x830;
- 
- 	return 0x88;
- };
- 
-+static unsigned int get_mclk_size(void)
-+{
-+	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
-+		return 0x10;
-+
-+	return 0x4;
-+};
-+
- static int sunxi_mmc_probe(struct udevice *dev)
- {
- 	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
-@@ -707,7 +722,7 @@ static int sunxi_mmc_probe(struct udevice *dev)
- 	ccu_reg = (u32 *)(uintptr_t)ofnode_get_addr(args.node);
- 
- 	priv->mmc_no = ((uintptr_t)priv->reg - SUNXI_MMC0_BASE) / 0x1000;
--	priv->mclkreg = (void *)ccu_reg + get_mclk_offset() + priv->mmc_no * 4;
-+	priv->mclkreg = (void *)ccu_reg + get_mclk_offset() + priv->mmc_no * get_mclk_size();
- 
- 	ret = clk_get_by_name(dev, "ahb", &gate_clk);
- 	if (!ret)
+This name is not very descriptive.
 
--- 
-2.51.2
-
+What about SUNXI_A733_PINCTRL?
