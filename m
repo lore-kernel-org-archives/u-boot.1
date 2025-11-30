@@ -4,137 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A22CFD376
-	for <u-boot@archiver.kernel.org>; Sun, 30 Nov 2025 18:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3219DCFD376
+	for <u-boot@archiver.kernel.org>; Sun, 30 Nov 2025 21:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8EFF83885;
-	Sun, 30 Nov 2025 19:35:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 43B49838FA;
+	Sun, 30 Nov 2025 22:46:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ZTC2TrsM";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8AF78389A; Sun, 30 Nov 2025 19:35:18 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 79C0B838BB; Sun, 30 Nov 2025 22:46:08 +0100 (CET)
+Received: from smtp.gentoo.org (smtp.gentoo.org
+ [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33F1C8312A
- for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 19:35:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 066158312A
+ for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 22:46:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1764527715; x=1765132515; i=xypron.glpk@gmx.de;
- bh=FlIt7Ap/EqB0LtTLmij4xU7ZstajjIzGX4Ki/I4u9+Y=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=ZTC2TrsMvi42rY0cGlZaV3UMBruL06w9tXUOBDLuRRwdxhRRWp2pYIRouGh8aEmB
- ml4k3Y/rQ6hYYJKCDBhGaoesGh8jHKCF7Up1ImbzIVTl9/0QPi4s/wZU6G29VojYC
- 0nrWa9k6mpDv5IfD7TLrasqbnMVMci3RZIpVgYuZrUts6jjz2VADVSZPbin9ICo4n
- 0jhaA98FNxcB6miz5DW5Jnhf7Hn6JQXxfbAVgKL3VBsRli9BocCYOB63kHaT1QGBs
- Ogip1A34/z3IKYIY4LX0t4//8DZvMOOY02ZBBD4qKXeSQC1IoHXMZ96cpwPDiH9Bf
- nM0udZ99DpOXmiQMqQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from ehlo.thunderbird.net ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MEm6F-1vK2pc1AL5-001lfm; Sun, 30
- Nov 2025 19:35:15 +0100
-Date: Sun, 30 Nov 2025 19:35:12 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: E Shattow <e@freeshell.de>, Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Leo Liang <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>
-CC: u-boot@lists.denx.de
-Subject: Re: [PATCH] configs: starfive: enable wget https
-User-Agent: Thunderbird for Android
-In-Reply-To: <d9088cf7-07c0-4458-852d-e083fa0aeb8f@freeshell.de>
-References: <20251112005451.41285-1-e@freeshell.de>
- <d9088cf7-07c0-4458-852d-e083fa0aeb8f@freeshell.de>
-Message-ID: <596F9E2B-C1C1-494E-B229-624627186144@gmx.de>
+ dmarc=fail (p=none dis=none) header.from=gentoo.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
+Received: from ofovo.local (unknown [116.232.18.222])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: dlan)
+ by smtp.gentoo.org (Postfix) with ESMTPSA id 0FE37335D0E;
+ Sun, 30 Nov 2025 21:46:00 +0000 (UTC)
+From: Yixun Lan <dlan@gentoo.org>
+Subject: [PATCH v2 00/10] sunxi: Add support for A733 SoC
+Date: Sun, 30 Nov 2025 21:45:09 +0000
+Message-Id: <20251130-01-a733-soc-support-v2-0-18bdd4376fad@gentoo.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:0um3yxEoTac7kDmyfkSW5ODULoeil2ovteR53o6hsTPmrubFaIs
- iNe23dLzUHDYYqUOLoLmCbvdKTtUuxCwQqZ+k6+OhiZQzvl1rwFf4ZUNozJeyuzOP3o020A
- 0HhYgInkBeDsmuC+c41F2HO7unhjPqxcYoskffFS+HZf9G6Ef7dRbllqHi7KQjZ/xZWuzPD
- F5u763XNxraezd5K1vIxQ==
-UI-OutboundReport: notjunk:1;M01:P0:GtWnZNWd5vU=;YpSXFEnXpNqkXTn3xi9ot9CqFTS
- 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
- mCgrerz1pM8WcVe7iOjzlSLfUavzJbide6SV/E
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOa6LGkC/22NQQ6CMBBFr0Jm7Zi2CEVX3sOwgDKUbjqkrURDe
+ ncriTuX7yX//R0iBUcRbtUOgTYXHfsC6lSBWQZvCd1UGJRQjZSyQSFx0HWNkQ3G57pySNjqUbS
+ iNtdOEJTlGmh2r6P66AsvLiYO7+Nkk1/767V/e5tEgfN4Md006o50c7fkE/OZg4U+5/wBLTwCl
+ LcAAAA=
+X-Change-ID: 20251115-01-a733-soc-support-67b0603c980e
+To: u-boot@lists.denx.de
+Cc: linux-sunxi@lists.linux.dev, Andre Przywara <andre.przywara@arm.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
+ Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>, 
+ Yixun Lan <dlan@gentoo.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4038; i=dlan@gentoo.org;
+ h=from:subject:message-id; bh=Nb1fH6/Hd+2SB22o2Mcx9g8dnU0dc1B+z3coMidrlE0=;
+ b=owEBzQIy/ZANAwAKATGq6kdZTbvtAcsmYgBpLLr151JdRgdR0I4S0Bas4PMPJcIDxdva+PuX+
+ AlEE4R2xPeJApMEAAEKAH0WIQS1urjJwxtxFWcCI9wxqupHWU277QUCaSy69V8UgAAAAAAuAChp
+ c3N1ZXItZnByQG5vdGF0aW9ucy5vcGVucGdwLmZpZnRoaG9yc2VtYW4ubmV0QjVCQUI4QzlDMzF
+ CNzExNTY3MDIyM0RDMzFBQUVBNDc1OTREQkJFRAAKCRAxqupHWU277XNaD/9jGPxxRra++HsG9t
+ /8KPpelxw0SwfYwAJrYGsKx74yNelwOW0TgW8rQyJW1xolhDr94U+ObDoogBmW2UOJcIYBSuxZC
+ D5dgLSo8IWVtYEqTyVAxF0EaKKVlbGzsl7eOgoKe1IUJqk0QIkmbxh56fu5BaDXR6xa5wQoTxST
+ C8q1FtHTAGqCfVaJTJFxn/uAf45Otm5YjlmBjJtTxVt6H2BGKBa6035ZlHXQ6z538kv8XOPlZ/7
+ S2CvQsaChPTawZfKK16uayjUtJQwlrG5mkLoyOt2kW0mxBdci3HoniX2lsg0y/Hf2EvozX13rvq
+ n4Us3Co73sivQZRmV48lexGQNXdEdQlgicd+SB1zhQCsKvIZ4A9lKNtAn2UGvDiqOEExW4OrJZW
+ 6PAD8frDUFrfAmdRFbZZkvzdMCHmFVYW6NqqLs5vdDLzHUEoe4x0lh3875EyktDf1+P/ta1/Zqf
+ 4grTci2N612TGsXz1QyiHfP11XXOLdYh8YTnRjDU+fZTFTzf+dcPBaVHMCDP7/JT72/rEF33R4p
+ 20yFfGCM4A+N40ZjKyn5kl3x2DIBmmfYL94exC0mWwYixeqWybc5b0T4HNMTsq4p9plXvEg1Cxc
+ 0JqoJeLtWrPtK/+kOx4ko77xtUwfFVZkQoTYRboZSDgStYJlNbAv0BRQnLrS3z4MOjBA==
+X-Developer-Key: i=dlan@gentoo.org; a=openpgp;
+ fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,52 +80,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 30=2E November 2025 12:00:03 MEZ schrieb E Shattow <e@freeshell=2Ede>:
->Hi to all,
->
->On 11/11/25 16:54, E Shattow wrote:
->> Enable WGET_HTTPS (no CA verification; also enables dependency MBEDTLS_=
-LIB)
->>=20
->> Signed-off-by: E Shattow <e@freeshell=2Ede>
->> ---
->>  configs/starfive_visionfive2_defconfig | 2 ++
->>  1 file changed, 2 insertions(+)
->>=20
->> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_=
-visionfive2_defconfig
->> index fa83ecfa10f=2E=2Ea754134a313 100644
->> --- a/configs/starfive_visionfive2_defconfig
->> +++ b/configs/starfive_visionfive2_defconfig
->> @@ -76,6 +76,7 @@ CONFIG_CMD_PCI=3Dy
->>  CONFIG_CMD_USB=3Dy
->>  CONFIG_CMD_WDT=3Dy
->>  CONFIG_CMD_WGET=3Dy
->> +CONFIG_WGET_HTTPS=3Dy
->>  CONFIG_CMD_BOOTSTAGE=3Dy
->>  CONFIG_OF_BOARD=3Dy
->>  CONFIG_DEVICE_TREE_INCLUDES=3D"starfive-visionfive2-u-boot=2Edtsi"
->> @@ -154,3 +155,4 @@ CONFIG_USB_GADGET=3Dy
->>  # CONFIG_WATCHDOG_AUTOSTART is not set
->>  CONFIG_WDT=3Dy
->>  CONFIG_WDT_STARFIVE=3Dy
->> +CONFIG_MBEDTLS_LIB=3Dy
->>=20
->> base-commit: caa740df9cae5ddc74b18b88a4fea43e27b2fdf6
->
->If there are no objections then can this then be applied for the 2026=2E0=
-1
->release?
->
->-E
+Allwinner A733 SoC[1] is an octa-core Cortex-A76/A55 processor, below
+list the brief features. 
 
-With mbedTLS U-Boot pulls in libgcc which on current Ubuntu requires RVA23=
- and leads to crashes on the VF2 board=2E We need to move to using a privat=
-e GCC library=2E I am on it=2E
+- Dual-core Cortex-A76, Hexa-core Cortex-A55, RISC-V E902 core
+- UP to 16GB RAM, 192K+512K SRAM
+- Imagination BXM-4-64 MC1 GPU
+- Optional 3 TOPS NPU
+- UFS3.0 storage
+- eMMC, SD, SDIO
+- Octal SPI
+- HDMI, RGB, LVDS, eDP, MIPI display interface
+- MIPI CSI, up 4 lanes
+- Audio 5x I2S
+- GMAC Ethernet
+- USB3.1, 2.0 support
+- PCIe 3.0 DM
 
-Best regards
+Add support for Allwinner A733 SoC, target to support booting mainline
+U-boot via FEL download mode, also add eMMC driver support, make it
+able to load images from the eMMC/SD storage device.
 
-Heinrich
+I've not pushed DT part patches, but put a more complete working branch
+at my development branch[2] for reference or testing if people
+interested. Please note, we reply on vendor boot0 firmware for the DDR
+initialization, then use sunxi-fel to down and execute U-Boot, see doc[3].
 
-Best regards
+Link: https://linux-sunxi.org/A733 [1]
+Link: https://github.com/dlan17/u-boot/tree/allwinner/A733/next [2]
+Link: https://github.com/dlan17/a733/blob/main/boot-fel.md [3]
+Signed-off-by: Yixun Lan <dlan@gentoo.org>
+---
+Changes in v2:
+- reuse CONFIG_SUNXI_GEN_NCAT2
+- merge clock initialization code with H6 driver
+- add pmu driver for SPL stage
+- rework for PIO register layout, introduce PIO_OFFSET
+- squash commit for changes of Kconfig
+- Link to v1: https://lore.kernel.org/r/20251116-01-a733-soc-support-v1-0-fb4c8db78e75@gentoo.org
+
+---
+Yixun Lan (10):
+      sunxi: sun60i: initial support for A733 SoC
+      sunxi: spl: a733: config text and stack address
+      sunxi: a733: uart: setup serial console
+      clock: a733: implement support for mmc/uart
+      clock: reset: a733: add initial support
+      gpio: a733: add initial support
+      pinctrl: sunxi: a733: add initial support
+      pmu: axp318w: implement pmic/regulator support
+      power: pmic: sunxi: add SPL support for the AXP318W
+      sunxi: mmc: enable support for A733
+
+ arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h |  31 ++++
+ arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h |  36 +++++
+ arch/arm/mach-sunxi/Kconfig                       |  15 ++
+ arch/arm/mach-sunxi/board.c                       |   3 +-
+ arch/arm/mach-sunxi/clock_sun50i_h6.c             |  14 +-
+ arch/arm/mach-sunxi/cpu_info.c                    |   2 +
+ common/spl/Kconfig                                |   3 +
+ drivers/clk/sunxi/Kconfig                         |  14 ++
+ drivers/clk/sunxi/Makefile                        |   2 +
+ drivers/clk/sunxi/clk_a733.c                      |  75 +++++++++
+ drivers/clk/sunxi/clk_a733_r.c                    |  36 +++++
+ drivers/clk/sunxi/clk_sunxi.c                     |  10 ++
+ drivers/gpio/Kconfig                              |   7 +
+ drivers/gpio/sunxi_gpio.c                         |  17 +-
+ drivers/mmc/sunxi_mmc.c                           |  21 ++-
+ drivers/pinctrl/sunxi/Kconfig                     |  10 ++
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c             |  57 ++++++-
+ drivers/power/Kconfig                             |  10 ++
+ drivers/power/Makefile                            |   1 +
+ drivers/power/axp_spl.c                           |  20 +++
+ drivers/power/pmic/axp.c                          |   1 +
+ drivers/power/regulator/axp_regulator.c           |  50 ++++++
+ include/axp_pmic.h                                |   1 +
+ include/configs/sun60i.h                          |  11 ++
+ include/dt-bindings/clock/sun60i-a733-ccu.h       | 188 ++++++++++++++++++++++
+ include/dt-bindings/clock/sun60i-a733-r-ccu.h     |  34 ++++
+ include/dt-bindings/reset/sun60i-a733-ccu.h       |  85 ++++++++++
+ include/dt-bindings/reset/sun60i-a733-r-ccu.h     |  22 +++
+ include/sunxi_gpio.h                              |  14 ++
+ 29 files changed, 778 insertions(+), 12 deletions(-)
+---
+base-commit: 23987e10905146def3ab61e55ec912c6e742efdc
+change-id: 20251115-01-a733-soc-support-67b0603c980e
+
+Best regards,
+-- 
+Yixun Lan <dlan@gentoo.org>
 
