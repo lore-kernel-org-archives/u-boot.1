@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6541CD116F1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 08:44:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B21AD116F8
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 08:50:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D607E838A5;
-	Mon,  1 Dec 2025 09:44:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C98C83A41;
+	Mon,  1 Dec 2025 09:50:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k59ashBP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hVLDtBnh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FC56809A5; Mon,  1 Dec 2025 09:44:45 +0100 (CET)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 1583E83A5B; Mon,  1 Dec 2025 09:50:21 +0100 (CET)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 746DB809A5
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 09:44:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CF3A839A5
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 09:50:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-656b0bd47b8so605189eaf.0
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 00:44:43 -0800 (PST)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-65745a436f7so1621272eaf.3
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 00:50:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764578682; x=1765183482; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1764579017; x=1765183817; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0VtJZwGAsbcwAgP8+ou/EKu7eEZ3xHrocbnYxZrUVb0=;
- b=k59ashBPB/pFyXY0v+U5D+v3wL5yyKGBNIzHEPYK/PbVhOJEJbgQPIk3e6UlPgZvun
- lG74isdyydMGvAXWT6W7vVIzuspWQppfzEyQ2oEe2cTc/sqs4l54QA045/b10bKtbhaA
- 6KXgPAPWENvhjjW5Wl1r9ncTJOV8MawaXHX25rjZlDG6gouCJ+Ug/BJr5jSAWLJiQblD
- kSscLof7wPp3tlHrdQGsiMe8UobxfMgdBIFRrzIQWDXFXFK1r1Z3khikg3evdROs6fxw
- isAecRnFKEm3YcXGZMWtcwWK/m5XtH71XHPLL/O0Nv580V3JF/Quj6NcjL/cPaaTHiS3
- WljQ==
+ bh=Da21vmr2MGnV99/CC1cHtlk6/6F3M0jJ7i663GPRNG4=;
+ b=hVLDtBnhyO2QTruSjvobu4ezPIFsYIOuw9/weBxMAAk+qGODt8s+FfxCQ/+n2jETqi
+ /saXgjGjz18bxwE5GHjG6bp8AgOT/gl4NI3deuqhAf8R9NfZvIg8/kT5qIIfekX4EP6c
+ k4U09Q4imRfrJg2V5+Z/RKR25YZUGv2ySBkWaTtGBLWttNIvXJWRkZxbqO+Y8tUzbW5W
+ pURWS73yjdJ8AyalAIPAL+UTAZHTO/Ez2nwiLL6fwx1K4EdKxG+gDuaUwq4djMd2dRHl
+ WqabSX0yvt+2WEeXk1mUv8M5JfLUxHax9YS/DFwMlUzj0E7UPmU9xIKEP9/reIbAaq4E
+ xJaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764578682; x=1765183482;
+ d=1e100.net; s=20230601; t=1764579017; x=1765183817;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0VtJZwGAsbcwAgP8+ou/EKu7eEZ3xHrocbnYxZrUVb0=;
- b=OB7zGm5gWjSdwM2fnLEv935YYKWXSwrp9+Xwl8Gk+e4qUolYFJYvwAmYMuPhCrZ8e5
- XQmJM0Tb4TBhnfp4NWELGBqdrjqUNTFIrN3mymoVMvGlhgHv9wgA17l6BJzh8TibneXT
- /xeYL7rwd0BW/8XlEGZ7qmdgZxJqSDjZebIQ9K+R8lo80IBYeJDLMEZjihQh59xT652P
- yAARwHPdRBLQpgiHvFqXwFyaiGXGuAc21kTPv7PRrU+uUBBptoO+heQXVxq3gjX9brmq
- Qaj9zHLqwzsl8301K4bE5dpqdLEhujl5CjZ22jzzhs23hWTtdnDyg0elRDHmljOsVPqJ
- pKVA==
+ bh=Da21vmr2MGnV99/CC1cHtlk6/6F3M0jJ7i663GPRNG4=;
+ b=wBZCMMRArQC71fW7UfK7aSyI4p6qCwc/L+M01mnRuiYeZPqmlkSM/zIpwGdo2qXHkx
+ UMwuSwuuCa5F4HiJcnxKB2iAD8j1DF62cNVdmrAG+4HrRo/ap2RJNER7M043gKrC0GPp
+ UYqc5Ir2DIMQY+qihPS+0NlkVBsAXLHecigLyojEjnVaAou4HohFLYoKTseZieTRuhkq
+ dxmTd83w/1urrfJsvjFGXpGtC+ZGUAwljknT1Ed2moIBCTczcBibH+EyKL9RXsJbeDF8
+ 8unbQGSBgCELc6YYxRbREDbVfYGGUFjtpXHsLwsCM1e2yoNiL4ghUlw1/A6kqejmf1eF
+ Gqrg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWUdf/W+Tw63B4PSn21k2882IrbmdIxeepSIAMdVofMuYoYX57zSjeIsDyPjaAAb8o9p2sKrJ0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJM5O5rrPvjW6AudehnXZKpXwCA1jNY4AXB2IOrJVRDxP3CJI2
- NUicJvoFQYt+YBAwmW1LXXmRBjY7YEklJSkPHqVUSEgWRp1WUtnkM9M4GW+ax87WfyCy8HnS55w
- ibbJa/dNur1RpQnpQmGDkSQzawtr4ONI=
-X-Gm-Gg: ASbGncvjJbYdprvNW3Z0uNwRjPHjTmAmL1/SV0DZRyeDeU/nwgzHr4J3mi0RKFRgyFl
- n8ExH4yvqpBZH5NRFaBslhIeTwi9vH0hyEDx9cEePcEwg/6H6GCsQ57cR2LVjBZQBwhbESb/T9i
- abiUPBePWjQMjDSRTuxxEGU34h/V0R1wGPRxbXnEfV9Y4Um4Jem31rQ6BhmvUWhAvDMCou1tA1e
- KVHChF1m44BLx9v/YD8GIMmJqQOLrD3OGeO6d7kCCkgx47W9haf8iGSpJuGjrRM0Q9uME9d
-X-Google-Smtp-Source: AGHT+IFFo+GRvQuzdZ166nJzmr4VGCFy4YpGzPTehqgsm3B/22iHR0Hnvu3u+yrSJoOGjls1zAHKF8bOfMbgDLUzvu0=
-X-Received: by 2002:a05:6830:67a1:b0:758:5a29:cba0 with SMTP id
- 46e09a7af769-7c7990ae795mr16786123a34.33.1764578682087; Mon, 01 Dec 2025
- 00:44:42 -0800 (PST)
+ AJvYcCV770dYCw00uK0oCZ1k6ifB35mKDT41xGCK7iz63Y0gqsllJXuEc2vAhASvlODXRRwhk8p/tVE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTLKt82DqF6Po+C4pHaiRptnKuub8oc7H+qBFM0m8iJH7bPueo
+ X2hyhOPNSjT839Lxmwpm+RZnlSqEKv3KLbRGNyNQGh+409DAmUuqp5OtJdoPN1y4tZBqPDK3cMu
+ vFDTONsicKiTpn1y7q/p5XdWnp7pFt9Q=
+X-Gm-Gg: ASbGnctTxko4UlxpyrjjRQDAFlOhuHOtsuzHFWVEsqBeTtflm3u8SgsZvDJghz2e/U6
+ 9cGGOHTUlmQF5ryhnQZBcLGvNt1sygiJTj550NS09Z6AVzngveGuYMkS0AkP0bz0FnAm5fniZfx
+ zQViil4LXT/75wsVR9aTSkf9Z25iQ4j12Av+gdwaaph/j0phBSwnhUuXtLYVDIISFmBfKTB+V8L
+ 0yrsvz3D69OWjz/WeopepddU5fN0cvFJqYLggH6ZLX5y4z4PVXvVx1DTHyS5YEcdbPaYh7F
+X-Google-Smtp-Source: AGHT+IEkk1jm8/Vug9C48pvxxQynBpbz6QFSuEMRK9BlUCg7N4hZJQxoFyoe9FL4I9hMtk7+LG/4jVtdTEeQGpTjKRg=
+X-Received: by 2002:a05:6830:71a4:b0:771:5ae2:fce0 with SMTP id
+ 46e09a7af769-7c798ccd7ddmr19583576a34.20.1764579017363; Mon, 01 Dec 2025
+ 00:50:17 -0800 (PST)
 MIME-Version: 1.0
-References: <20251119111653.456-1-briansune@gmail.com>
- <fcb799fb-4eba-4155-aa0c-46b5279b7171@altera.com>
- <a2600334-a459-4063-a76c-cd14b8698356@altera.com>
-In-Reply-To: <a2600334-a459-4063-a76c-cd14b8698356@altera.com>
+References: <20251129064818.1587-1-briansune@gmail.com>
+ <d2984f4e-0105-466a-8645-60ba30dfebba@siemens.com>
+In-Reply-To: <d2984f4e-0105-466a-8645-60ba30dfebba@siemens.com>
 From: Sune Brian <briansune@gmail.com>
-Date: Mon, 1 Dec 2025 16:44:31 +0800
-X-Gm-Features: AWmQ_blxRDMWgz0aqGARYMQHm32VNjC0dyIs_bszgrjx0SYVbQw-BSIDmtul5ak
-Message-ID: <CAN7C2SA0x2nZt234oZ-jw5w8nA3zU-=ry0G1Qk8znTRqwdsvaA@mail.gmail.com>
-Subject: Re: [PATCH v8] Add optimized Makefile support for SoCFPGA handoff
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Mon, 1 Dec 2025 16:50:06 +0800
+X-Gm-Features: AWmQ_bkaO9yNh-CT3cUxRZHfAxLoUcPEJ81LU_yDCv0LfBJshk9vRfDFtPRHDLI
+Message-ID: <CAN7C2SDZPWxKL9k43JB3rp-8tD8nwbwoe2cx70xFs5NZLCYUiQ@mail.gmail.com>
+Subject: Re: [PATCH v2] Fix socfpga GEN5 boot by spl+u-boot sfp on RAW
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: Chee Tien Fong <tienfong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,11 +94,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi T.F.
+>  - a lot if ugly board-specific ifdefs - my approach in [2] does not
+>    need that
+>
+> Jan
+>
+> [1]
+Complete unnecessary.
 
-> Could you please resend the patch in clean git format-patch (mbox)
-> format so that I can apply and submit for PR.
+> [2] https://patchwork.ozlabs.org/project/uboot/list/?series=483978
 
-I send it as V9.
+Are you 100% sure modifying as such can kept all u-boot supported device
+untouched?
+ If not there are no ugly "board specific", btw it is generation
+specific on socfpga.
+C5 and A5 only. You don't familiar with other brand and family.
+
+Sorry your new patch series are still not able to confirm the compatibility.
+
+And you patch itself also used your claimed ugly board specific method.
+So if you really like to take this patch "as yours"
+work then move on. I drop mine. But I don't see your original patch is
+fixed as such.
+
++#if (defined(TARGET_SOCFPGA_ARRIA10) || defined(TARGET_SOCFPGA_GEN5)) && \
++    defined(CONFIG_XPL_BUILD)
+
 
 Brian
