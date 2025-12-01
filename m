@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD82D111A8
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 00:01:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC829D111A8
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 02:44:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4E498312A;
-	Mon,  1 Dec 2025 01:01:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B87B8839B1;
+	Mon,  1 Dec 2025 03:44:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BjHRV0rl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kj/YkPgC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A24438393F; Mon,  1 Dec 2025 01:01:37 +0100 (CET)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 46ACE839DD; Mon,  1 Dec 2025 03:44:18 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72FE28309A
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 01:01:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4394283935
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 03:44:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-656de56ce7aso567427eaf.3
- for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 16:01:35 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5942bac322dso3854141e87.0
+ for <u-boot@lists.denx.de>; Sun, 30 Nov 2025 18:44:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764547294; x=1765152094; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=P12WkWP0Hh0Y8WPBeLcJtJw1wz18VL0eg/A7bi8ixv0=;
- b=BjHRV0rlpINJWUTx2HqyssBGbeju5j7Xc0Sl/igdfGCjxq3ZzXfFqqMFEVOpb3u0Fk
- YNPdDtecLoxtjrf9IEqXLNAPm5mDnpjQLHlsCHZJu5BBDGaT0lr0mlF3d62zGK8SgU5V
- Zv0NjtxRksoKE0JkhkExPYbk84nvTETcY9Ack=
+ d=gmail.com; s=20230601; t=1764557055; x=1765161855; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6pfAqcOhYqS5S/bX5zDa+WuRJxrwWer0CBKKGuCPWlM=;
+ b=kj/YkPgChE9NTg6tKSgp9KL0zNH0Cx1IH7c0lk3GNrQ1np9QHBVF1aMgo+wGPlPPjk
+ Px1cZ0hQnH3b+iUO9VFYjAdxkosiqOQMMfOia87y8FGh0Qb4X2XWcgY5/TqaxuKGgE92
+ +O9AvuEtSD7aqPaaUZVzmypr6ZdeiwaSlMpkA1kE8A8uVm7uUbzBbyVydhfxjjHL2LXV
+ U9v7w3tx1h9gk/QQdSWpq35z85FvJHF6UO7APp6ikgmuW4IztBNPMIDlZcNX3BTOekgw
+ QEpMBwLBNeHuwBllHeXKvo2T7RE8aZxArav8R5ePJXRKzKh8876W2iH/9ETV7YWzPQUX
+ Pg0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764547294; x=1765152094;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=P12WkWP0Hh0Y8WPBeLcJtJw1wz18VL0eg/A7bi8ixv0=;
- b=a1TguXxImyVcdVcJcjTSPLY8j8ZpyI8+Yn75M7u2XCo2gGNoGd0POlfiB4i0PBpEHI
- wVD5YJtaQgl7Pd/GtewiHUfvvEq6iaH/lJ/z2QdGmO2mbtbB7917fwgzzoCxbqRZSQSv
- 7y3+a6Z4LAxbbFsNNs0QNNDhwYgv91OKf+TlR7UKg4yhTk+XtVehsesE70ljwjXgwskB
- xcjQNHpY9U+6ndpe6fgah5ig+2erY6quDQz6IJ2uL2RcEuSH+UHuz50F95qYaw2jGBop
- qZluECbYvHyU+x5G7+DhH0hF58YLcrRFxPdTg/tM+FL1pGQofJZGMQd1Eus4qnDyqh+t
- 12sw==
-X-Gm-Message-State: AOJu0YwpRx66V4bBc92WLFI3CAmcliNNiCZ6UdXrEGQU0vLOOfzUeVVW
- BJ3SiTAdrBNlVvTX9sZ2gajQZZqpefofbpuVYJ26dlFidHhLMrYfdWZP+RHkg+nD1yA=
-X-Gm-Gg: ASbGncto0sO5qSNH54IhVKjGK9giCiXJOozbgL0jaGwlf0m0OS4j2xsQTmXv4fiABN7
- aaCpfgK4ChOvXanODHpYX+c98QHIow4ODgcgHrgTpL4idurha3TK4BFhnMPOFatbRPyqR0qSrGS
- DPClr1L2lzjTcI8kNdcPCICaXmoBkUp2NujrIi/aHmZ2Gd5kweJfVRhNsWtXbMVhTLLKRiNWhUy
- WZIbxorrsdpjG0Kr0u4lnG/BNYrJf9u304eTIkb3RtH8UjF5wGnxdaDfd7rvcyZJNZ0JZcv3w4D
- 0b5031WDTwwUS3PFgJZAKZ7fZOCGGGiro8P0HEi8H2DrCyNBdZSIFWYXoadev6jLdGeTvpUWqyl
- 02OgO4Xsg4pyPl6kfm5kEj/C+D88hKTgIrIok0guHGgFZ2qtqDEYIsu4qz3Gkn895tSBO5DqJAC
- MYr/IUHK/J98VyJwqca+7q3+X5Yul3IFCQM3ZAQlbGMCMy54Tg9Q==
-X-Google-Smtp-Source: AGHT+IFvcsQe3gxDo6B8HfGSuVYEUot66tfw4FlPZFrxQmAU07KEeWjNbKgfzmaRG58Xtrgm9Bun6A==
-X-Received: by 2002:a05:6820:2d04:b0:653:6c32:6fe9 with SMTP id
- 006d021491bc7-657923c46d0mr10130643eaf.2.1764547294102; 
- Sun, 30 Nov 2025 16:01:34 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-659332cf148sm2193561eaf.3.2025.11.30.16.01.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Nov 2025 16:01:28 -0800 (PST)
-Date: Sun, 30 Nov 2025 18:01:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yixun Lan <dlan@gentoo.org>
-Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
- Andre Przywara <andre.przywara@arm.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>
-Subject: Re: [PATCH v2 06/10] gpio: a733: add initial support
-Message-ID: <20251201000125.GB303283@bill-the-cat>
-References: <20251130-01-a733-soc-support-v2-0-18bdd4376fad@gentoo.org>
- <20251130-01-a733-soc-support-v2-6-18bdd4376fad@gentoo.org>
+ d=1e100.net; s=20230601; t=1764557055; x=1765161855;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=6pfAqcOhYqS5S/bX5zDa+WuRJxrwWer0CBKKGuCPWlM=;
+ b=CHZIUMiyAmzQKQModfA9OVUHEweCiK4EII/Kw5JSQvpyHX6sHuSjEhtllB5NaWthwQ
+ scAxGwzWDJr2L85PRhnGLFdzLUGBzQCwrVat6lHM3R0aV0jtEO6NVfdUIAvJ8Q8gXjlA
+ UUp4iQ4idZZXbG4cIS3nXItGTrdLCDQC9MdW4J8ra+OucxONHOWKyoxG5vp1iojtptip
+ aF3w6XGR2IpU80SR88PH/N6+tJ08SqLkF1cinFXr9aR+5mAy4uOWCTZwZLLe5vjEWN2d
+ 6frAu+hI62wz+3EppeAkUUj90/WduM+KEcH9ha9IVu1C00/ytAjwgsnC5n48tKnxeFDR
+ K3ow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU1k4mCfo1YWWWJPBjecGvUwq6j3jj0XT+05xaNRTWJ7Bwl/gfhUA17Uo2FeXISFWQ5PV+MnXI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxrhPc+AAM+CIuC7ciW2d7c3BRz3ooSiKsUhVySwlPlJP/ZqPtn
+ qTQfH6RdogSrN4lq3vm8H5/St20RMQ6Jh9ukUZae0rBiMlugd1p/2C6xa3zPAIHxUhDaEd7QUJt
+ wozwSPW5ThAKHgYU8rMdsE71rdZY9q9o=
+X-Gm-Gg: ASbGncssfzP/R/GKxadJfw45wSkZl+Ib4up0YVSovOl0EzyVBD95x9552KkdtmapQO/
+ NMaYWRX8OIuAzkm8n3Z+H0xk/FKuvJZaSomgzoWEuZRbSPA2hfUx8FZrUxhxiN+OoqNyX8QoZaa
+ jzGlxuX1r1rqqxAI+Ann6d3HpGOO/czXWY5l0rz5DUNvYB94GU0lPHPTPYfz/YXyAvjv6yPIxn2
+ CK8C1hqxsJMVNN1z1YrRp+cczn0YRD5eilKQF58pZQTT+FKUZrKuOu6fn4hlg+wLtzduF83H8u8
+ 47f9h7l0/dBnCtHnhx7FxDvq6Eg=
+X-Google-Smtp-Source: AGHT+IHezemzSt2UU0wCejhAmyJ84p2MtJ/XYcY1bHUf1/DDtDnZrNJYV8uDecLBf7g8Pni+4F6kg1buHLnRxkHBrHk=
+X-Received: by 2002:a05:6512:3992:b0:57a:2be1:d779 with SMTP id
+ 2adb3069b0e04-596a3ecf608mr11694212e87.31.1764557055151; Sun, 30 Nov 2025
+ 18:44:15 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1w1l3+03nLbg7XwP"
-Content-Disposition: inline
-In-Reply-To: <20251130-01-a733-soc-support-v2-6-18bdd4376fad@gentoo.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251127-imx91_frdm-v1-0-8f42646d89ad@nxp.com>
+ <20251127-imx91_frdm-v1-2-8f42646d89ad@nxp.com>
+ <20251127141451.GV2125796@bill-the-cat>
+ <aSz/0jfNn9A3pUmB@lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com>
+In-Reply-To: <aSz/0jfNn9A3pUmB@lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 30 Nov 2025 23:44:03 -0300
+X-Gm-Features: AWmQ_bmlkXafaqx-OAW56BnJdswd9ctdNtiiH1VtQxzgEljZE6tei4TY1ZIl2M8
+Message-ID: <CAOMZO5A9Le6GKXGtR87Dpaj+2esYCXLO_WZq0DRZ8RNsPBoN-A@mail.gmail.com>
+Subject: Re: [PATCH 2/2] imx: Support i.MX91 11x11 FRDM board
+To: Joseph Guo <qijian.guo@nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@nabladev.com>, Peng Fan <peng.fan@nxp.com>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Ye Li <ye.li@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Adam Ford <aford173@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,63 +106,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, Nov 30, 2025 at 11:39=E2=80=AFPM Joseph Guo <qijian.guo@nxp.com> wr=
+ote:
 
---1w1l3+03nLbg7XwP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Can you please point out which node and why?
 
-On Sun, Nov 30, 2025 at 09:45:15PM +0000, Yixun Lan wrote:
-
-> In A733 SoC, the GPIO IP block has changed its arrangement, so initial
-> GPIO base address and bank size need to be adjusted.
->=20
-> Introduce new SUNXI_NEW2_PINCTRL in order to reuse the driver in future.
->=20
-> There is no PA bank exist in A733, but introducing a virtual one as offset
-> 0x80, and with the bank size 0x80, it will iterate other bank correctly
-> starting from PB as offset 0x100.
->=20
-> Signed-off-by: Yixun Lan <dlan@gentoo.org>
-
-So, looking at:
-
-commit 452369cd0c636123321d021298b4bc35a34f4941
-Author: Andre Przywara <andre.przywara@arm.com>
-Date:   Tue Sep 6 12:12:50 2022 +0100
-
-    pinctrl: sunxi: add new D1 pinctrl support
-   =20
-    For the first time since at least the Allwinner A10 SoCs, the D1 (and
-    related cores) use a new pincontroller MMIO register layout, so we
-    cannot use our hardcoded, fixed offsets anymore.
-    Ideally this would all be handled by devicetree and DM drivers, but for
-    the DT-less SPL we still need the legacy interfaces.
-   =20
-    Add a new Kconfig symbol to differenciate between the two generations of
-    pincontrollers, and just use that to just switch some basic symbols.
-    The rest is already abstracted enough, so works out of the box.
-   =20
-    Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-    Reviewed-by: Sam Edwards <CFSworks@gmail.com>
-    Tested-by: Sam Edwards <CFSworks@gmail.com>
-    Tested-by: Samuel Holland <samuel@sholland.org>
-
-Is there some way to abstract things so that again, non-SPL has a single
-driver, and for SPL we can just hard-code a few things?
-
---=20
-Tom
-
---1w1l3+03nLbg7XwP
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaSza0gAKCRAr4qD1Cr/k
-Ck3JAQDsSp069E9pnwH01auJEOBqtlTjAOpke/GsTUOtr/WCXgEAq6DiJVDXvLUP
-SN9uJY5KNEcZNCLW49dBXBybeR+WJg0=
-=YLnO
------END PGP SIGNATURE-----
-
---1w1l3+03nLbg7XwP--
+Tom is referring to the bootph- properties. These properties are
+accepted in upstream Linux.
