@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14869D116F1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:04:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DB34D116F3
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:04:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADBF483C02;
+	by phobos.denx.de (Postfix) with ESMTP id EB19483C0C;
 	Mon,  1 Dec 2025 17:03:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jPrrd9xK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O1ngWO8+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4630D83B81; Mon,  1 Dec 2025 17:03:39 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id DA24383B91; Mon,  1 Dec 2025 17:03:39 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABEE683B91
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:03:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B6D2783B63
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:03:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c71cca8fc2so2740339a34.1
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 08:03:36 -0800 (PST)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7c6cc366884so1049150a34.1
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 08:03:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764605015; x=1765209815; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764605016; x=1765209816; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=goEvcDj5jy4C6beON6+OQeVft9ik2r0Bh7I+s8SnsR4=;
- b=jPrrd9xKnaX5EY5wpYOigPyhNXCHlu691s2+dfNFRW5r40+c2I0Z3I/gRgYDROdGWS
- wpSAnbCCEfy1nb3ocLohxPdAKoHkWDD8MU9kzLIWWaBvLXzTFEL0FlleO9B6f+qi0rOQ
- 32VATFvrFk+TMCI9c+0+s/PmEhQeAQQ4G8xzg=
+ bh=cw/UqlCrUazTRKXeod1KOuFH2GloofG3paW/R7bPo+8=;
+ b=O1ngWO8+D8Fwt8HSCLnUBa0H/tVJL+lC9Yo9ERE7E2tQMKZlKT417yI9Y7RUkyD2eg
+ lYp7USDJZ5CIDRMk7vCXAeqvTEkNuhuIK4TgEAgkhzpm25YcW14ksM8LCBUrx1kJ7EZH
+ IKO0e54d70xywB+6qmYwPX3/FFzdkivL4z0hM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764605015; x=1765209815;
+ d=1e100.net; s=20230601; t=1764605016; x=1765209816;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=goEvcDj5jy4C6beON6+OQeVft9ik2r0Bh7I+s8SnsR4=;
- b=adXFNuVa5WMiTTBgEYs/HukYPi4H0eqpmSMt0FrJ0Op1y3dxI+oyz5DTn0dMN1bEjo
- AA43297+YJsdOOOWVXXyzTEhNBvwXVhy1io48hZtvvhEm3JSIZmgfyxbjhcteFi4Imem
- LfChlahzTfSiR82esU/8eTTMz+aeXvrUOnRAPW9QX7OZdndPRpJ6gYrlYx+O6cSK9mr7
- 6Fhc/eyorTzVJoOB/UAvx3WaHHNGq3U8uYfTcGmjH8aCnXlbKVpkpRZ2LDPktP68rsa7
- EeluWNaV7RceMa8lwYimlVmp6dv9MbQ9Cy/tgQos8rAxvUoilxrqpwNH+KnYUyYmG8nv
- 7ecQ==
-X-Gm-Message-State: AOJu0YwjMSxdK11tqpUlZ5JpQEe8zX5VMh1z5Yf9NsowSLM6yVqnmG6G
- oAU0+fNIsB2CITeQzwGT5Zj4/XutItPniQYFvFro5qOkFtB2d3wM1OYRjD4omKujOe845v8ffiY
- UaJ7qqac=
-X-Gm-Gg: ASbGnctrjnR9eQ4OD2uvss6s0FNRiLvw75nePNH7yc9Ob6zXFFYnACilqkqMv+Rdhv6
- tPM75ntmLfgDd33zPVBmsGkFqPnjxAXfu57nfxnTxunJejpdFgaNoB9CU7bwRyIlO1Kc4v+LfI9
- Hj4uNrOgk1l9aZcaeKVEusamNehoFbVv9uuISCm1NFDWZg6z9NG2IsZCD1fziGGHTI8xSrJQ4b7
- qJ9jPsziQ6qxxxW05QhV3wMTb7qrUzoy271I7kq/eWbOxgYsdQVmo9t+0o2seE9dHSlfZhHsDZj
- FaR/dvAjiIdWUKCGGzPc2cCobpK17KqikT3zJMdAJQs533waOBhzr3B1yreGQBnAOQ9npYfq1bi
- I8pVHuN282/qWWdR8wJ/52MBQ9MUvVPbgePJZN7dNJVoQAM5D6TsNBaKnyab9msojvJ9f2sXXvz
- RBVX+wxw9Kux800ClBXkLc2+HcEpnW/61UIAB50cJ8aP/Kof2C
-X-Google-Smtp-Source: AGHT+IEJIhe+9v7KcxEVueIxqMzIXsgWWI12pjNcemwqB/ABAFXvV7gzJFCHzPQy1O0p3kHd3S4CAg==
-X-Received: by 2002:a05:6830:3509:b0:7c7:55da:91e with SMTP id
- 46e09a7af769-7c798c9be45mr20740051a34.13.1764605015252; 
- Mon, 01 Dec 2025 08:03:35 -0800 (PST)
+ bh=cw/UqlCrUazTRKXeod1KOuFH2GloofG3paW/R7bPo+8=;
+ b=qF2V5MEVZGeiG8ABFHEQlslYneZFNU7urrY2j8ZFr0T7Dzsscfi3RuH1jjyutAWg06
+ oaYCQdyFVmycmCmjrC92PtFhPKBghCCfxVOUEj79q2dD0q0joUaSzmHUGlD+RGhOUelS
+ N6Xo/LJoMYQZ3dwjTfQouC/Em21sInPP1RVCni5fbzv6Vb2x16KQ289ID3eobuEEgGem
+ Cf6cyk9T2IQ3MWuHsfP89S1xf1VZIU4Rs5gKjOc4XWhnIAxCRLmx1IGfY9iuRMHSyEJe
+ y1Q1BsMjmVkRJeWcRvqLzronxbI3aER+3yQp7DjTlbAsP4XJsuAVWa6mCVSPdiDKylbh
+ nf4Q==
+X-Gm-Message-State: AOJu0Yzn//Liwp5h9RzRnY+fTKbxaaed7ztCWb6mgnR4/2vSZTPj7Yzr
+ YGJSCdrrJAT3WO3Z0m9NLj0WT9jx2yWFRwqdghJenNWqLyEuDOiMDAGGjA4GYkegGiw=
+X-Gm-Gg: ASbGncuVxpc2dFh1gusWFU/d0zYIp2S/roFKhSjk23boHW2QCE76qSkiUuHYhQ2Yfyv
+ YaAZ3Z8vlcEWD7c4FanjnhpzwWKSOdx31CF+IQmyqH0NQCJ/UHngDZz9aXR8rkJLTBZ/4QC0G69
+ S3HqdFEmrCCF+9RQKnM+tydVKiu6+lww0h9d+7NKq1O1emty0OlNNH4HVLRBbF8AITRuGfW+XWX
+ dMUYZwn6jn+hdPiC8tnA7aWjb2JwDPX0yHS7yhB1cBq34ura/E0TQMBrKxi1c6zy+eOz/ldkkIj
+ +D8puuG6cccfCOIdtfGRDUds1mFnYfs4lPe/oF3B2tm4GPdxuM6JRMT5GXBXcmAupKsz4wXpx+Z
+ mO+gAYZ43SCUJuQBoTrRFbn0V3AAE/KmVVzu6yXQT9PNdNeVY7UuaYXur+BIUp/IE6NaogRJxDI
+ MkJUCSrndO8bPcQZBEZIZ9XSZwBSi/Q9fqxB2JZB7tOrTpfDHG
+X-Google-Smtp-Source: AGHT+IFdPJbOvsctbMHR9DJ0A0pNEI8ngxk3mR3ES2lH27Vu0ViKPYrQVbZKxHSsHN9BUMyDTUSj/w==
+X-Received: by 2002:a05:6830:81e8:b0:7c7:3b3:fdbc with SMTP id
+ 46e09a7af769-7c798f9f9c6mr20580164a34.14.1764605016204; 
+ Mon, 01 Dec 2025 08:03:36 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c90f5d811asm4708061a34.1.2025.12.01.08.03.34
+ 46e09a7af769-7c90f5d811asm4708061a34.1.2025.12.01.08.03.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 08:03:34 -0800 (PST)
+ Mon, 01 Dec 2025 08:03:35 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Quentin Schulz <foss+uboot@0leil.net>
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Raymond Mao <raymondmaoca@gmail.com>, 
  Quentin Schulz <quentin.schulz@cherry.de>, 
  Raymond Mao <raymondmaoca@gmail.com>
-In-Reply-To: <20251121-pkcs11-ci-v1-1-8ba6da56c2f5@cherry.de>
-References: <20251121-pkcs11-ci-v1-1-8ba6da56c2f5@cherry.de>
-Subject: Re: [PATCH] CI: add libengine-pkcs11-openssl package for pkcs11
-Message-Id: <176460501440.1117748.18364275471932559549.b4-ty@konsulko.com>
-Date: Mon, 01 Dec 2025 10:03:34 -0600
+In-Reply-To: <20251127-gnu-mirror-v2-0-c86fa2e8d464@cherry.de>
+References: <20251127-gnu-mirror-v2-0-c86fa2e8d464@cherry.de>
+Subject: Re: [PATCH next v2 0/3] CI: use mirrors for GNU tools
+Message-Id: <176460501535.1117748.7857258369470219152.b4-ty@konsulko.com>
+Date: Mon, 01 Dec 2025 10:03:35 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,18 +99,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Nov 2025 18:10:54 +0100, Quentin Schulz wrote:
+On Thu, 27 Nov 2025 14:29:25 +0100, Quentin Schulz wrote:
 
-> In the future, we'll need proper pkcs11 support so that we can validate
-> mkimage/binman works well with pkcs11 OpenSSL engine/provider via
-> softhsm2-util (already installed).
+> I have to add one (1) package to the Dockerfile as a new dependency and
+> wanted to build the image to verify it works. I wasn't able to because
+> GNU servers are just not reliable at all.
 > 
+> The git server URL we're using doesn't seem to be a mirrored one, and
+> switching to mirror URLs seem to make fetching possible again.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] CI: add libengine-pkcs11-openssl package for pkcs11
-      commit: d69c937b309f57462ba046c72657060d76503cb3
+[1/3] CI: use GNU mirror for grub (and switch to HTTPS)
+      commit: e0c72161710e3df45ed41302643b20952528eb4d
+[2/3] CI: use mirror for gnulib dependency of grub
+      commit: 93316f15339d6b696f58a0ef99b057bd45b76c2b
+[3/3] CI: use coreboot mirror for GNU dependencies of coreboot
+      commit: 6e39395a1869d9fb850e5bf5e9ba2da4663ac873
 -- 
 Tom
 
