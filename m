@@ -4,166 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD266D111A8
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 03:10:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F15D111A8
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 03:58:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4706983935;
-	Mon,  1 Dec 2025 04:10:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id AE17683A1A;
+	Mon,  1 Dec 2025 04:58:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="eHqvtryC";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="CPy4hUJS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4255C83935; Mon,  1 Dec 2025 04:10:46 +0100 (CET)
+ id 8DA0A83A28; Mon,  1 Dec 2025 04:58:50 +0100 (CET)
 Received: from BL2PR02CU003.outbound.protection.outlook.com
  (mail-eastusazlp17011000f.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C6AE83B0D
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 04:10:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD2A383966
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 04:58:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o0IAg98dAoqZcGACSP+BFcOtXl34WIhL8HQavg+mqX5L5TDpbi3ZpKTNDl8da1QQcGE2TRAufFmbq28yJaZ+V/NPoJR/B4Zh4JK6h0dRUKEiRtVHVYtzLA+59oIhhC1dWxdM469RcudN85kJq19hmZi6Jn1jRiSBhC3bQAb0dSk5EumyghLWNkuOx6lxvnZCpAXbEgFez/YKKjGlmegs5u3FoC2fFmZnfHR0ta8arHOU4fJEe1n36hAjpP8KN1oLItez5WZXuINXdd95AWOauD7lYc+zIdGoWXJIpY0/ARCrtJY/xObz7Kn9olroSGp06/YKrqTMKdVo62NBExxpdQ==
+ b=W/F4gmf7YB9Gerx2kYi/r+KNBWJPekWMsDI5htXIyWF9Mem/KPqH5bb/YVASIwWMNAIj0cqYiKUSC5ZrWyL3YaYai+xlfnIDUvjvjrhWSL8TxGlmO6lWF5SuwWqEV+HQ00hh53QAb0OrBFS5/D+TFru0fEe68ka6p665k869t3nTJn5Vp28n58G35Bcs+6rkJ78jylpcSxJ/uC2dUvHRiScomInVADsLdTb4Sgb56mRnFsIluV4abfGSMRZkoOg3qaeg18U+IwSc863CMYr5ERU27HIwRfv7DiIKGmN71zxJEjrfebTbrft1cxgyc1TAPv2Q4hrQfqBRKTdzOhO72Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wXfKfbPDl5xxda7AaxtSBcPUyxjMf5g95rrtySBv2FI=;
- b=LBDNPeHuUqfa4XQ7tUXJQD+x6tPkz2cLjeJXUpFhNxaZ149527wy0BZOCD+o893w27r6BdokCkbVuxi0k1Icim+onLyXSNlVHFhW+r2rcf055fhg8Z6B9Rk43TEFr9RqtyIghz8V7D7JmvyrZ/V/C70a3A0RU7hvweP6mdGIkg33I7+ekjAqB/51i1VGukqv5mn7QJYrpQl0akBy5vzWo9Rye27asbRuwfdreZHJqLwy+jJMYip5JmsE/dxP5g1b9TXXrYzP340ZiqpZ7b/rdJ6QZMJ8QIVk4cp+n5N7+N61dyPMzhzlI55druFyzA4shO21iU7IKx2ZEgzntq5k0g==
+ bh=YVuqcTuh6UCq+pf+NVbt/+jnXw/z8u7RFTLZvmMBKcM=;
+ b=mkXJm6CoOmZitAC50Yyfo4R6Z5jv+cO+Iwdx99C1kKAcnHwi070xi/mlzbhyRajyE5HxwumO1/88U1RBgvlcVhKVWtJZqups3LzUFKximG9NA9BuGq6vNqE+cXiP0JcO4aPRb5ZLUQIvlsj+nWvTI7J36XyBENvEUafIasRCsKQtRbTTaK1cWmcw7Y0XB2s5naHThUtMjo4lVP/hoHFw45lx6MbgDjfqbc3uikI91zjyk3zeNVl4eALsNnqQtJIsORxbZuzPmePdW2pE1fgzCK5g4QYi7Mx8nWuWcDbD0bOahQko4ZvNSxUg+W47En8Xj+NQBwlr7qoJbH883Ik6dA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wXfKfbPDl5xxda7AaxtSBcPUyxjMf5g95rrtySBv2FI=;
- b=eHqvtryCoJhdTELZ5uyK/MpRLtwMbKllJZLG6tjr/liZbLOqmR37jQfis2XlDeY/jKJo3SeJzOvsIDNO121W0YiYE1G7OwxVzblVzOhO42G1gzODfTS4H8UKl8EIAu3X+aB2E82eLBIgc4HqLWtviCzM2FzCzo+WjdWx+IFcH9UEVQ0QT6A3TX4y0/SGtxWfbrMEd+6i96OAUCCiHQaDBEnaqbdVOw2z7TUOauFqJFR8h1FL0dWbW9t+Zx7xVItUWwrgoqvXfraSSGRLlHX2RdlNshI5kKYGBe2D6wasnmY6+xr3UvLDXBwsgm4Fde4agXxlqLJVOiwL3RwHdYT1Mw==
+ bh=YVuqcTuh6UCq+pf+NVbt/+jnXw/z8u7RFTLZvmMBKcM=;
+ b=CPy4hUJSOj+6HL2aHvtatInVLPWZYR9wpJf/Ver+HPNbPGjSduGT1fVMnjKW3Tgga5IV+eaC5Zi9m8vre6rKuK7qGz0E48rx/OSWTtM4MtyFxlu8PVpH5swAScT1+ngfVPs30iVYXSiHfvw05IPj7oXJaCJw1GdsABt1Ct31dIBJ6oOSLOCqRXiJBs95Y7E0ahd5mIlya+tSJxWX2c3lR57tuG4PU3knb5aTsAWo8dwUIuIs1UnmZYCpa2UcCdE+qYNI1X493ZSfW63svnzBwl8VEdRipYH0Plsg/2hkHfIdshM52zSup9Tr/CFtT4pVTwCc4adPHgPT3FJMalBWxA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by SA5PR03MB8377.namprd03.prod.outlook.com (2603:10b6:806:47d::22)
+ by PH7PR03MB7509.namprd03.prod.outlook.com (2603:10b6:510:2f1::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
- 2025 03:10:35 +0000
+ 2025 03:58:44 +0000
 Received: from LV8PR03MB8137.namprd03.prod.outlook.com
  ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
  ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9366.012; Mon, 1 Dec 2025
- 03:10:35 +0000
-Message-ID: <bbd0ef04-a550-4180-a75c-63d665469832@altera.com>
-Date: Mon, 1 Dec 2025 11:10:27 +0800
+ 03:58:44 +0000
+Message-ID: <3456e9b7-6ba1-4753-840b-5db60e3a95e4@altera.com>
+Date: Mon, 1 Dec 2025 11:58:36 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 8/8] configs: cyclone5: Disable SPI in SPL
-To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>,
+Subject: Re: [PATCH] board: softing: vining: migrate to modern LED framework
+To: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Brian Sune <briansune@gmail.com>
-References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
- <20251125081316.17329-9-alif.zakuan.yuslaimi@altera.com>
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>
+References: <20251119-led-legacy-vining-v1-1-6107439085a0@cherry.de>
 Content-Language: en-US
 From: "Chee, Tien Fong" <tienfong.chee@altera.com>
-In-Reply-To: <20251125081316.17329-9-alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SG2PR04CA0156.apcprd04.prod.outlook.com (2603:1096:4::18)
- To LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+In-Reply-To: <20251119-led-legacy-vining-v1-1-6107439085a0@cherry.de>
+X-ClientProxiedBy: KL1PR01CA0141.apcprd01.prod.exchangelabs.com
+ (2603:1096:820:4::33) To LV8PR03MB8137.namprd03.prod.outlook.com
+ (2603:10b6:408:295::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|SA5PR03MB8377:EE_
-X-MS-Office365-Filtering-Correlation-Id: def228c2-3dbc-4dd9-fc9d-08de30873220
+X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|PH7PR03MB7509:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6166ca51-890f-44c2-1c36-08de308debc1
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VFp2RjRwNnhUVVZDWWlsTDdqcmJnMjhnUnJ0Z0ZCQTc4VzVNM3VTWThodndq?=
- =?utf-8?B?RU9Zd3EwUUtKOUVJeUZ1ODZiUlI5enZNVFY1aDVVNC9tU2dRaWhtd0VGdlE3?=
- =?utf-8?B?c0YrOUk2a2dEejZwb2RvM1BQckRXL21UWUg5cW1sMnpCZSs4bmxHSE1pSER6?=
- =?utf-8?B?dTF1dWZ5ci85YjY3Vm1yY0h3MjRzbmRNYUFVM2s2NSswMzNuaWs3VDRaWGpv?=
- =?utf-8?B?b0wxb0NrWERTUnNtZUt3a1RKZGlVaDcwelNhcDZPYjh1S3c5bHozdExPbE44?=
- =?utf-8?B?M0JRS3l5RlNBbnR2UnJIYTF3NTVBK0xacmNOOXAwUnN4TWtYOHYrMEtDd2lZ?=
- =?utf-8?B?UDNRM2h0dUI1Z2hNQ2dHUE5BV3Y3T2xqRUJUaEo0Rnpadm0zSS9IN3M0ZnBr?=
- =?utf-8?B?T21DanJSVU91ekxKbjZMR0VlYmZLck9tUFZMa1lnd25PQXQ1dnlJR0FRSFFs?=
- =?utf-8?B?cERCL3ZQcXZyR1Q1R0NYTmNJRENZQ0RNWEpCakV4RCtpRlF6dUZJZWI5NHJl?=
- =?utf-8?B?amczdVkzZnpRMFRIZXczRDFZc2UvcnBPOVlMUFVkOUJ5RERkOGNSU09kVVR1?=
- =?utf-8?B?eHg2QVlyazhmNVBWQVJCZmZZaG9aS2U5bGpUOFp1TWl6ODJOa2JGTGhVL0F2?=
- =?utf-8?B?akhVRVRCb3lTZ3JQR3JselF2S2FhNEZaWUc3SU5hSndjd2FqUjBGRXFKZXlp?=
- =?utf-8?B?WlpjUFo2NE5ZOWtmVnNPanBLNW1yOW1iNUI1ekduSVRVaURzbkc4bU84aU1X?=
- =?utf-8?B?UUdsUzhYL3NEYk9VVXpxZmVrQTNkMEtmMW8vQ3JrUWdrZnhURmR0YTdEYXQz?=
- =?utf-8?B?OWFHellzWG1hU2g0bno0VCt3cU96MnNjNzNjdTlacytYTW5reG9abTE0elVn?=
- =?utf-8?B?ejVQbkxSU1JMMmRuMWVNbktmb0E1aFBjalViTks4Q29ReThyNVBIWkpnMkl5?=
- =?utf-8?B?ckl4ZnZ5NnlnUVBpYjhxcUUvblVlelgwNDhYL0tJUTJWV1NqdU9WY05pV0JQ?=
- =?utf-8?B?dk15VXlNazAwWGZsQmYrRWhqT2hQaC9KWTRPUG1hNm9PNzFFQVh0K04zTC9Z?=
- =?utf-8?B?dy8xbDRQN0FNaGRSNEpWdzZ1WDVsczAzWUp1WmF1dkIzWDZqdi9JYTJjeWFr?=
- =?utf-8?B?K0JRY2RCUGxrSGw0OVdUZG1SVXZWRlZqNEdZczJiS0RvajBZc1JDUXBFa0E0?=
- =?utf-8?B?MDdpaENlYnJJOVhSZ2xuV3c5T01nUnR2SFdFNVlTWjA3YmU0RGJZMDkraTVQ?=
- =?utf-8?B?RDlOZTE4dnE3R0VtdmJ1eVU5YVQ5Q1RDaTNhMTljMUlwL3dPNlJNc0FncG10?=
- =?utf-8?B?eFhBaUlKRCtub1N6cDZzdFNGNkZGUmd0NlJYTXZpTWtRTFNzS1lxemFxSXJP?=
- =?utf-8?B?ZHg2dnd0MlE3d2RRN1VqQ2s2YWpqVjB3OHoweDl5amVBY3hDOGp5TmNRVmJa?=
- =?utf-8?B?bzViazRVQlk5WUJLcWRsTU5VZm1BYUhrcVVOd25QOXFKOG53R0ZTZHJ4YTI0?=
- =?utf-8?B?TG5aWFBDc2l5VWpOUkI1QkF3dEhjWnB4MHhJK3F1K3ZLaFBFZjErbDNUNUli?=
- =?utf-8?B?WmlYcHpPeEhJM3lUVjQ0WWVwZFkzeCswMWtBTjB0WDFVVzVsL2lmWWVaSVRt?=
- =?utf-8?B?MjJYZ0Q5MmtLR3NCMCtKc0dxdm1JemptdzN4TXdkdDdweFVzNjVQTXFxWSsy?=
- =?utf-8?B?WkR2N1JTRFB2ZllCZGJuZURLaFlkQnY1S0pRL2NURDFhRWN0OTNyY2pJMksr?=
- =?utf-8?B?RExLTk5TVDF3Um84VU5Ub2Z0NGUvbmxzc0hIQTl1TXc3QXlQUFpEQ3lqdGR2?=
- =?utf-8?B?UUxPRE1rN2h5MjlhTGhWVUZIOTNSenRhaW1FaHVlYVBZbGFRZlEwODZFTnBJ?=
- =?utf-8?B?bW1RMU1YZktrN2wveGF4SU0vejh4Z2QvVUpjNzZVZzE5cnZ0bEx0R3dzZ0hr?=
- =?utf-8?Q?LK92R9WGBlXoAjlWSneyBGKQ35LLmiku?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|8096899003|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eHV4VXpKdURRallRRTlhN0c3QVBTVS93aFZTTC8xN1BLdldSVmRIMzhGSGRU?=
+ =?utf-8?B?NTl2aFI1cjROMks1SjVVNlRlYXlTb0gvcXVtbEpyTzBTd1RwbkgwRDR6NUVj?=
+ =?utf-8?B?cjBSSFN2MXROWE1pRWoreGhHaDNhSTJTUUFGVHlPRlpOZ0lRc3hYdklwOHNh?=
+ =?utf-8?B?NGVpWEEyTlMyWjFIZ01xd2grQi9idkRhV2RONkVqOHlQTEJnMXFnbW5QRzFy?=
+ =?utf-8?B?SXRIVllNdTg0R3JKZnVXYlFUSkJPaW53MUZpRVkyMUhuQjVVR3cvU1R2NjJD?=
+ =?utf-8?B?clFhbHdLQXZlUGRvdkgvZU5PVjlVL1lScGt2S25EVFdQdnBMQWdCdGlOdjNv?=
+ =?utf-8?B?Y2pncHM5Uit6Y3Zmb3FTUFJsbi9QZG5pNCtYaERwc1VtZ28vaXFCVDV4SS9h?=
+ =?utf-8?B?bC9qbno4bjFaRnZKUkRnRkFhWm82QW1yL0pQc3d5N0lNMFRXOENGUU5KSWIx?=
+ =?utf-8?B?R1VEWGVIY3ErQllmbWZ4WDZoVkNKbTlBQlIxQ1lOckRURGgvTU5rc3lyb2xn?=
+ =?utf-8?B?ZWZOaHphZ1NpZzRBWnQxeU5DTis2bWY5TUFSRHY4OE9XMEgvSSsydzJSRDlP?=
+ =?utf-8?B?S2QwNUJFc3lVZjBxcjkxRlNlbmFOY2MxSUFJRjFSY3FPK1RSUndwRWhjVmh2?=
+ =?utf-8?B?d0RubjVYTllaT3d4Yy9yMVhNUklMMzViREZlNUdNL1FBVDg1bE5mZVRyM3Qz?=
+ =?utf-8?B?emVaR3BUVUpjTWE1NkFOU1BCbjdZd0R6MXBuc2h2aFBJU25xbzZ3a3dwam5I?=
+ =?utf-8?B?QjBMd1YveUd6UzR3YzFJYUFTWFRvOHNnU0VRU2hYT3hMdTdpYWtjU2JyanIz?=
+ =?utf-8?B?Ti9uNGVNWEsvdHdueFgvZ3FNd0U0cG5uTUxoR1dySEI1dHRYZzRMTjhTOHRP?=
+ =?utf-8?B?aXBhbkcwVWVONk9CaE1KYjhuMEZpM2tqa210enB3RDkvMW9BWjZkUjBhK0dK?=
+ =?utf-8?B?MThwQm9VN3RuVjJRU3I0WVorOHBjQzNvd3BwdERZOXh5QnkwVUlRNnJ1UEI1?=
+ =?utf-8?B?d1ZmT3hMSDBnbUwrblZlSUlCSVFla1RLT1FVbjVnaHQ1VXl5R3pCZ0xPVU82?=
+ =?utf-8?B?OGRZS3hkRDhWU3NmUkZKUEdTNXRKT3F1YmRoUVFGc0hEWUpYNUZYbnZlZytx?=
+ =?utf-8?B?ZUF6c053Nnd5ZWV0QUZFRjZDaUY2cU1wZWhRUkhuRi82S0s0c0d0Wk84MEJH?=
+ =?utf-8?B?eFA3b1B5Mm9qSTFZNjAwYWliVVhjcG11QWtJUmQwNTlmMU9kWkpGbytoQnZQ?=
+ =?utf-8?B?WCtKUGdsYStuckZzaDNyRUVZZmFkQmROeDg4THZWQnpydmVMaHdmUytuK1Nv?=
+ =?utf-8?B?cENtODV5RXRIOFAyN0x2c04xTUpFT0t3ZUJtUDA4RG5IaWVtWXAyUGFreHlw?=
+ =?utf-8?B?ZVF4TFY5Y2pISzJ6eXhVVDBYVTdENldJS2piQXhiVmxsUjdEK0ZyWjdnNEJV?=
+ =?utf-8?B?dkxuc2Mrc1BYNXJ6cUNKT3QvTFlrSHZlYmVSUU01enUrRzdLTzV0RDEvRmpU?=
+ =?utf-8?B?SG82eVdRU251c1pkUUpUWEFrcThYbEFaSFVYaC8rK1J4UkFmVlMyb08wZUtp?=
+ =?utf-8?B?ZENXazZ2RXZWMWtXR1dxUjdJajR0TEVIVEFjV3NodGJvVEMzalMxazFqVk5H?=
+ =?utf-8?B?T092RG1MT3RZU3pIREE3TjRtU1V3U0k3aGNyb2gwRFVubStHaTAxZ2JRbjl1?=
+ =?utf-8?B?bUtOVllaMWEvamJSWmp1VXlnbWVXQVBtck9FVzZnU29ab1NGZllHOUxzUlpl?=
+ =?utf-8?B?ZDQxZ3c2L3NuU2k1dS9xNGpTWVV5YVFqL1BJZEc3a1BWdXVHM29iT2poQ1pK?=
+ =?utf-8?B?cHVIR0NmelhydHNLV1pYLzJWb0JqQUVaZTl0RDdhd1FTZzVQQURMWjhWaXo4?=
+ =?utf-8?B?NU9ZUWxUam1BRUtsRUNYaUh3SUJRb215MERwd21ITTd6cU9maVZkdEVwTDJn?=
+ =?utf-8?B?djZnQmk2ME96b21ZdUhEbTB1b0REVTFJVVpONjBRRUkxM1NxSWl5NHRoTjZ3?=
+ =?utf-8?B?bkhESEE0a0RRPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(366016)(376014)(8096899003)(13003099007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R1FHOXRoTWZxRFVJY09tMEREYlhEOHpka2VhSWl1VUtoeDc1ZXdJMTdhRWZm?=
- =?utf-8?B?VnlBek5jZzF6Q2xRUTZyY1d3cEtZTWt6ajV6RVV3YzNqK255RDZyeUdrRU4z?=
- =?utf-8?B?RXYwZkpGWWVla0gwWlRPU2NPMU95NjY3dnhWUk9KRlZvMjdac29oQUJVcWs0?=
- =?utf-8?B?RHdJa3QyUG1nNmFZVm9iMGZTdWRNaTF1VWtKYWtBRXJEdGNQZUFLQlRUazNo?=
- =?utf-8?B?b3FjaGhLOVFiVDB0MUcxSVFRTUgySTFlaHpSREp0R2dqMWk4MVFBck5lY0FD?=
- =?utf-8?B?WjZOaWkvSHIzMGQ5Y3FvQ2ZiemwxSTVWQ0M0T05SSlBjcUFXdVdmZVhoQU40?=
- =?utf-8?B?NkxHazRpVU5reFowWHR2c1FqUTZyU0x4dFQyYURMbkZDakV4VmZ6VWtGMHdB?=
- =?utf-8?B?YnZhOGFyTXQ2bTRUY1ZQMTZFakVvMjh3cG1Td2ViRk9aM1hXNGlPL1pBSGkw?=
- =?utf-8?B?OFk0T3NYV2ZYRjV3SnM0WmwvOUhaVzB5ajFuK0JITTFjb3ZJTnNwTWk4UTZH?=
- =?utf-8?B?Z2t0SG9JK2ZiTnVrOXRNTDhXSWxRcE1uZEZzWnZGK2NXbVpiaWxjdWdGNkJL?=
- =?utf-8?B?QXI1U2lMUjg5QTBZZytWMzJwTWVDL3dQSzhYeDZrV0luSFhuYTJIQzJmMHBG?=
- =?utf-8?B?WEJCTzk3NHVZK29VVDNTVU5NL3NTVHcrSDEwTWFtTTQvQVFPdzNLUTNHZUhK?=
- =?utf-8?B?bDFPMStvTjJwM2FkTlRnRTV2VFI0ekwzak5VWkMyb2JIQXZHaVFrdVhsMFFt?=
- =?utf-8?B?YkRMUzN0T1dQTnQ1dk4rMUtKZmNYYkhGRVB0QnlYQXlGRFMzY2lWclVXNE1F?=
- =?utf-8?B?SnBDZDBDV05uOHdvQVVXUndMcEJ1YThIQ3k4dERPWTZhZkJybEQ4YjdQU2Vy?=
- =?utf-8?B?TGluVjB1OWFiS2JIMjNWUGhuaEZtM2xxd0Q2czhvWSsrb2tqUmttK2hhSDNn?=
- =?utf-8?B?R3RvZmZPRGNkMERJaVFka1BkQ29PN1duTjF6SDFKZ2l6M1JUaGJ1c3hsSk1r?=
- =?utf-8?B?RzFOUm9ObXM0bmFwdFFoWHFEdU1KblYyTGxqc0tpc3RsZ1VVZGdGSDhETDNm?=
- =?utf-8?B?eEF2akRQTUFuempzLy9aQW8wS2FGQVJ2bnZQMDBzQUdNTjc3VDU4TjgvNXkv?=
- =?utf-8?B?YkhaTWRzbm5MQ0dPYXk0S2FIQVdNRTBrM0d0N25VU1dIQVIzOUY3UW9JWldo?=
- =?utf-8?B?RSs5ekMrM1YzSURud3VVSHhIcHArQ2FCZEpLM1YxcnlTLzFmMTZpWDhJdmpX?=
- =?utf-8?B?SkdhV3hmME04UDh2VW9tOGxKdEdXSStEQUIvOWtHQ25wZHVwZUp4YnhaY0FT?=
- =?utf-8?B?bWR5U2s1dnZKNjkzcE8xS2xuOEZFTUpSZE9yMVhpdW1oMmRrNDI1dnJ6QnZh?=
- =?utf-8?B?WE5wdjBtUGJJQzJxeWV4TDhWMHlDaFBiVHY3RDB6NGRuQVNWOTFRT0R4Qkpa?=
- =?utf-8?B?a2NKdmtIL3owZDBtbmZ5aG5DdnJOZXRqSjh4cGVzZVBqMkNRcjFoZUROZEQz?=
- =?utf-8?B?bXNhMUxhZDhOL21KTE95N0p5T1UyMVpZYytwS1doREZna1M5UTRNeGFkdnVY?=
- =?utf-8?B?RVZYdTROWElaMHQ4OWlrUWRJNW56ZXJKV3RzUFJETXNHRU9xc2w1anB6aGJx?=
- =?utf-8?B?S2Q1dTB2TmQvSjhkM3Y0Sm9ONjJzM05yblVDNHFCdlJTQWZCakcxNzBqeG9X?=
- =?utf-8?B?NHJPSDdzSzZnKzlTbVJPanpQamdWM0FLcmk1bDBnaEZhOVBIa081ZVFtU1Yx?=
- =?utf-8?B?R3FLOThaVncyaXdQakgwSktIM01Gb2lpVmRSRFZiY09RVXk1SHNaNmJzK1Uv?=
- =?utf-8?B?VEpWM282Zlg1RVR2ZFN6Q29maWdEU200T2liNVJsRGFYajloWFNTZ2J5c1lN?=
- =?utf-8?B?NXNZeVF2V3plbTFJSEFnZjlyaWhkQ0JjT1d3aitjd3U5MmlvVlpKOU1EbDZM?=
- =?utf-8?B?Ylh1K1NZNFd2T3lvY1V5WVpnMEZnYjlYc1ptd0JNMWVIaWF3bXJvUHQ3ZzFL?=
- =?utf-8?B?TnZSV1pFYlE4RE1oY204MTk2cWl0UWpZZ0dUWisxeXo5TWVrT2ZSWk9yRnlr?=
- =?utf-8?B?VnU0ZW5iVFdEeSswQVBBSmFMK0JkbXVKbitZRUd5aloyNE5iTEhmeGNkQW5n?=
- =?utf-8?B?RUljN2RRdFpSeFRqZnhBbmZEZXFIRnVucC9teWl4Z2R4K0tWa2xVamV1SVp3?=
- =?utf-8?B?aWc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZHg2N0ZNbjBQaGJiZDdUOFVseDNSOEFKSXl3RStSdnJCVHg5SUp3SzA3KzNB?=
+ =?utf-8?B?MWVEWWR0dWhPT1RkV25Kd0UzNHQyUjBPZ3VtRmh2cmZxWDFPWWJOdmNYU1Yz?=
+ =?utf-8?B?bmp6dGhrVXgzUGJLNTQxeWI4azFIS3J0QjNJdWlXOUlqYThwQXM3TjNkSnps?=
+ =?utf-8?B?cVV2NDk5d0JWS3JuemM5a0gwNW5keUVEclA2QXZrYmlVdzlKdFdaVFR4R0JZ?=
+ =?utf-8?B?cytXZ1ZqSGE4amxhUWNjZ0IvQnRFd1h4OEJYRUF3RXphUWp1WnUvUzdybjR3?=
+ =?utf-8?B?cXNvWWhHTzE0OUVPOG9MVnpkeUhnejVWSEtZUVNkWlRPNzczSmlRNHkweUEr?=
+ =?utf-8?B?dkF5c0xCWFI2aUxoNmsvOXV5TkJ1ZWUvOWZxZGVMYmpjK2pGYUN4aU9pNjdu?=
+ =?utf-8?B?VzdybjJhaGxiZUhGendYeE1mMUF3UTlUb2x0dko4K3pxekU5Y2Q4L28vYWZW?=
+ =?utf-8?B?M2JrZXJWWnRHNjgxR2laNHhpUm13WTJqa04wb0hFdENXMEluNzVRYzhpbDd1?=
+ =?utf-8?B?TG9aU1RwVUhXMGpaaE9pVzB1MjNFWUI0bjRVOFBQVnl4S1hseENTd0lGRHRU?=
+ =?utf-8?B?bDd6OHhQR2M5SGZwRWpwNjFTa1F6bys4bkhIaklqdUR6dk5XRlp0UERxQ3lw?=
+ =?utf-8?B?WDJhZWYzVG9UMlhTUGxVL1NJcU1wYWV1YnRLMXp4ZC9nMkJQelVCNzdPYjcw?=
+ =?utf-8?B?NFB4UU1JTnZNZ0k5QzdTazQyS2lhUHRhVVNMSGtiNEMxTVFIdmNOQ2Vqbzg1?=
+ =?utf-8?B?MzZHbFZia0tId1N2d09HRUNmc3JLdC9XQkplditUU3VRcFgyVDI1U0k0THdI?=
+ =?utf-8?B?VXArOXRQbUxVSHJGWWFOV1lFV0UwQVl5TkVCcGFNaHQ2Tjg4WXpseUdQUUZz?=
+ =?utf-8?B?NXJLQnFWTDN3WWpIWm84b056UlNGYW10SCtMMEN1aEVXSS9iZDJhK04xQWtk?=
+ =?utf-8?B?VTVPUTBxcStwaWduWkV4aFZ4UzFER1dONktZbm5zRmQvdmxHSVIyREZkYXpI?=
+ =?utf-8?B?dDJCZXZ0eWtHRlJGTWlRc3FJTnZUdzM0b0pnQTU5ckhIdzVRclNjMk1FS0hD?=
+ =?utf-8?B?TXkyOGkwVmZ2MGV4K1NYSldjbUl3TUVMNWYxaVVNdG00NlNDRUl2enhqbWZr?=
+ =?utf-8?B?V3hEOTQ2clV2K2dPVFFFSi9DR3BkTzZtTmZGZ0RjRmt5TCtiQjV4eFZhUkJL?=
+ =?utf-8?B?VWRzUURuTWZEUkVpT0VHclpLWFdGVzlFdk9jYWFER3RmaUJzUjRTeHl0K2Qr?=
+ =?utf-8?B?YjNydU12VTFGUXhzSzcyV3BBcHhEMEhDcFQxakY0eS9zOS8xU1Jab2F5M2Qz?=
+ =?utf-8?B?MGhUZndQMVNwUkhDTkNPckxINGMxMERLOGdIRCtzU0t1eDh5bE5RdGYwMndr?=
+ =?utf-8?B?Ylp6bHIzOGpjdUM4N2pLUnNaWXVGR0RrUitra3JlTHlLYVZEMmVyRWRySW8r?=
+ =?utf-8?B?aHlrdC8xbFhtdm1NUEJGR0s4Tm5iWjRKcTBUaTdHakc4b3h6ZVRGV0daeDEw?=
+ =?utf-8?B?R0JNd21DQ2lrVm9PNEYzMGI1ajFybGpRbml4S1FDN0dLc3BBUjZaMFEzREha?=
+ =?utf-8?B?TjdoUWJ6THJTU0RzMk1ZVmM3ckN3SnhPS2NzQzVXNFJuUzluRG9CZFVkZ2tQ?=
+ =?utf-8?B?ZzJrUXFnanBRL3ZoU241UHByZVFURms2cWcwMDdxTndFMHgyaXU0aTlxL0M1?=
+ =?utf-8?B?bStSVmhLVGwvdzZxM1dNSXZramNkZHk2RU1EWVp2S3FPYmpla054WjNoS25x?=
+ =?utf-8?B?dXNWV1YxV2YwbTduYWEwaWpiUnFXQ2J2NW83bnZ4Y0NCNUtUK0ZCV3lKZmxY?=
+ =?utf-8?B?YmVCbGw5THZuSWhIZmdwT05uQWduOHZGb1pVYzB6cDN2YUVaTmVoVTBlN0lp?=
+ =?utf-8?B?d21hM1QvVzR6ZWVPaERSRy92eW1mMHpEMS9CdzFIV3VIZS9MT2hnM2MrcnJO?=
+ =?utf-8?B?OHpSbWVISkx4RFBuc2lpRzhFVGNsU1pxb244UXlqQVFTQnpySEIzZzZnVDZs?=
+ =?utf-8?B?bmZ2ck13cTM5Z2swa0lOZEJMWEF2UHduNytsTHdhVGRmSmhKWkVmVzFESUcv?=
+ =?utf-8?B?ZUtkMVh5VnREcU5Ed3BZcUthRXJRWjhaSlc0V0hLWWt6cWdsbkc0eW84dkJi?=
+ =?utf-8?B?NllFM1hJc1lKUklKT3FZM2M2SkZxWkRveld5M29lRVZjd3lFaEpDV1hMcCtP?=
+ =?utf-8?B?TEE9PQ==?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: def228c2-3dbc-4dd9-fc9d-08de30873220
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6166ca51-890f-44c2-1c36-08de308debc1
 X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 03:10:35.7220 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 03:58:44.1768 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Xk2mOf81N1hvUhW+0b3tnoTeIQDGLzijJN1IbAegZYLqfy3edNjzYIcvp9ypfTfXFzVNeWJs4b+HZx3D99ky8PaI3pQcHvoVB+Q8+O4KEk8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PR03MB8377
+X-MS-Exchange-CrossTenant-UserPrincipalName: SjryIX+L8HHuS31D2hBH5maa8ScNPJ+zzB++j4TAyjtpFSerAugpuHSIxHet6R/dU4A/gZtZZAUh8mG1kz8jJkj0/P5mdA6RChqcP0JRJ5k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR03MB7509
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,34 +184,157 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 25/11/2025 4:13 pm, alif.zakuan.yuslaimi@altera.com wrote:
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+On 20/11/2025 1:19 am, Quentin Schulz wrote:
+> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
 >
-> Disable support for using SPI in SPL to solve Cyclone V storage issue as
-> the OCRAM is only 64kb. The SPI configurations are only
-> required during uboot proper only.
+> From: Quentin Schulz<quentin.schulz@cherry.de>
 >
-> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> This migrates from the legacy LED API to use the modern LED framework
+> which makes use of the FDT.
+>
+> Signed-off-by: Quentin Schulz<quentin.schulz@cherry.de>
 > ---
->   configs/socfpga_cyclone5_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+> This migrates the Softing VIN|ING FPGA board to use the modern LED API.
 >
-> diff --git a/configs/socfpga_cyclone5_defconfig b/configs/socfpga_cyclone5_defconfig
-> index 94bb05d20ff..6d9acf6c231 100644
-> --- a/configs/socfpga_cyclone5_defconfig
-> +++ b/configs/socfpga_cyclone5_defconfig
-> @@ -12,6 +12,7 @@ CONFIG_DM_RESET=y
->   CONFIG_SPL_STACK=0x0
->   CONFIG_SPL_TEXT_BASE=0xFFFF0000
->   CONFIG_TARGET_SOCFPGA_CYCLONE5_SOCDK=y
-> +# CONFIG_SPL_SPI is not set
->   CONFIG_SPL_FS_FAT=y
->   CONFIG_TIMESTAMP=y
->   CONFIG_FIT=y
+> I do not own such board so I cannot test it. I'm a bit unsure about the
+> port and pin in the port to use for the GPIO LEDs. The numbering for the
+> GPIO controller in arch/arm/dts/socfpga_cyclone5_vining_fpga.dts seems
+> incorrect too (29 pins in GPIO0 means 0..28, 29 pins in GPIO1, means
+> 29..57). I'm unsure about the polarity as well.
+>
+> The GPIO LEDs are only automatically probed (and controlled) if they
+> have a default-state. In our case, the LEDs are init to off as far as I
+> could tell, so we add the default-state property to each node and set it
+> to off. To be able to lit LED_STATUS1 and LED_STATUS2, we need to access
+> them via their label.
+>
+> This is only build tested as I do not own the board. Would appreciate if
+> anyone could test it. As far as I understood, all LEDs should be turned
+> off automatically during boot by U-Boot and then two LEDs should be
+> turned on. One should be able to control all 4 LEDs from U-Boot proper
+> CLI with the led command.
+>
+> This is a follow-up to:
+> -https://lore.kernel.org/u-boot/20251112-led-old-dt-v1-0-2892d49517db@cherry.de/
+> -https://lore.kernel.org/u-boot/20251114162417.4054006-1-patrice.chotard@foss.st.com/
+> -https://lore.kernel.org/u-boot/20251119-legacy-led-unused-code-v1-0-bc0ae1235baa@cherry.de/
+> -https://lore.kernel.org/all/20251119-corvus-led-red-green-v1-0-ce86b8d59dfc@cherry.de/
+>
+> to continue the effort of getting rid of the legacy LED API. This series
+> depends on the series listed above.
+>
+> Multiple other smaller series are coming. I split the whole thing into
+> different chunks as separate series:
+>   - "shot in the dark" migration of Socfpga Softing Vining board (this
+>     series)
+>   - removal of LED support for a board with no easy migration path
+>   - make Sunxi community bear the cost of maintaining the last part of the
+>     legacy API by making it Sunxi-specific,
+>   - migrate Olinuxino to new API (which requires net/bootp.c to use the
+>     new API at the same time) + remove everything related to legacy LED
+>     API,
+> ---
+>   .../dts/socfpga_cyclone5_vining_fpga-u-boot.dtsi   | 26 ++++++++++++++++++++++
+>   board/softing/vining_fpga/socfpga.c                | 12 +++++++---
+>   configs/socfpga_vining_fpga_defconfig              | 13 ++---------
+>   3 files changed, 37 insertions(+), 14 deletions(-)
+>
+> diff --git a/arch/arm/dts/socfpga_cyclone5_vining_fpga-u-boot.dtsi b/arch/arm/dts/socfpga_cyclone5_vining_fpga-u-boot.dtsi
+> index 330949c0184..bf5e12ec90c 100644
+> --- a/arch/arm/dts/socfpga_cyclone5_vining_fpga-u-boot.dtsi
+> +++ b/arch/arm/dts/socfpga_cyclone5_vining_fpga-u-boot.dtsi
+> @@ -13,6 +13,32 @@
+>                  spi0 = "/soc/spi@ff705000";
+>                  udc0 = &usb1;
+>          };
+> +
+> +       leds {
+> +               compatible = "gpio-leds";
+> +
+> +               led-0 {
+> +                       default-state = "off";
+> +                       gpios = <&portb 20 GPIO_ACTIVE_HIGH>;
+> +               };
+> +
+> +               led-1 {
+> +                       default-state = "off";
+> +                       gpios = <&portb 25 GPIO_ACTIVE_HIGH>;
+> +                       label = "status_1";
+> +               };
+> +
+> +               led-2 {
+> +                       default-state = "off";
+> +                       gpios = <&portb 26 GPIO_ACTIVE_HIGH>;
+> +                       label = "status_2";
+> +               };
+> +
+> +               led-3 {
+> +                       default-state = "off";
+> +                       gpios = <&portc 7 GPIO_ACTIVE_HIGH>;
+> +               };
+> +       };
+>   };
+>
+>   &mmc {
+> diff --git a/board/softing/vining_fpga/socfpga.c b/board/softing/vining_fpga/socfpga.c
+> index ec2c7ea3631..475c19f2781 100644
+> --- a/board/softing/vining_fpga/socfpga.c
+> +++ b/board/softing/vining_fpga/socfpga.c
+> @@ -8,7 +8,7 @@
+>   #include <env.h>
+>   #include <init.h>
+>   #include <net.h>
+> -#include <status_led.h>
+> +#include <led.h>
+>   #include <asm/arch/reset_manager.h>
+>   #include <asm/global_data.h>
+>   #include <asm/io.h>
+> @@ -24,10 +24,16 @@ DECLARE_GLOBAL_DATA_PTR;
+>   int board_late_init(void)
+>   {
+>          const unsigned int usb_nrst_gpio = 35;
+> +       struct udevice *dev;
+>          int ret;
+>
+> -       status_led_set(1, CONFIG_LED_STATUS_ON);
+> -       status_led_set(2, CONFIG_LED_STATUS_ON);
+> +       ret = led_get_by_label("status_1", &dev);
+> +       if (!ret)
+> +               led_set_state(dev, LEDST_ON);
+> +
+> +       ret = led_get_by_label("status_2", &dev);
+> +       if (!ret)
+> +               led_set_state(dev, LEDST_ON);
+>
+>          /* Address of boot parameters for ATAG (if ATAG is used) */
+>          gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
+> diff --git a/configs/socfpga_vining_fpga_defconfig b/configs/socfpga_vining_fpga_defconfig
+> index f3b6cb717b3..396b7a9715d 100644
+> --- a/configs/socfpga_vining_fpga_defconfig
+> +++ b/configs/socfpga_vining_fpga_defconfig
+> @@ -78,17 +78,8 @@ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1000000
+>   CONFIG_DWAPB_GPIO=y
+>   CONFIG_DM_I2C=y
+>   CONFIG_SYS_I2C_DW=y
+> -CONFIG_LED_STATUS=y
+> -CONFIG_LED_STATUS_GPIO=y
+> -CONFIG_LED_STATUS0=y
+> -CONFIG_LED_STATUS_BIT=48
+> -CONFIG_LED_STATUS1=y
+> -CONFIG_LED_STATUS_BIT1=53
+> -CONFIG_LED_STATUS2=y
+> -CONFIG_LED_STATUS_BIT2=54
+> -CONFIG_LED_STATUS3=y
+> -CONFIG_LED_STATUS_BIT3=65
+> -CONFIG_LED_STATUS_CMD=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+>   CONFIG_MISC=y
+>   CONFIG_I2C_EEPROM=y
+>   CONFIG_SYS_I2C_EEPROM_ADDR=0x50
 
 
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
+Acked-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
 Best regards,
 Tien Fong
-
