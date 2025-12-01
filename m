@@ -4,87 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6DA0D116F3
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 18:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27C6FD116F1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 18:22:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 536BC83CBD;
-	Mon,  1 Dec 2025 19:01:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2AFBE83CE3;
+	Mon,  1 Dec 2025 19:22:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XLCjlzCX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cSMpCF40";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 303FE83D03; Mon,  1 Dec 2025 19:01:41 +0100 (CET)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4931A83CF2; Mon,  1 Dec 2025 19:22:50 +0100 (CET)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01373803F5
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 19:01:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 272CC83CAA
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 19:22:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-44ffaeda17fso1728066b6e.1
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 10:01:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764612098; x=1765216898; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=54UB4bWdTmhr9G+c7hD/IRyiwSJmqCau8ZZhlmy8a5Q=;
- b=XLCjlzCXzDwj6yAPoAvmkzGrri1saqPOeb/YumWH4cHY0Rv9iOZIUnT3DRcHoErXRW
- FC4B3jdk7Jn8B71O055DFhjILTPA4MSmJjatU8Jag5lqUPJcQi50rxg6pnVgqz3rkIWy
- hrS9qDawtzPEtbLzjJL8Z03z6i5TB3i2sArgY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764612098; x=1765216898;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=54UB4bWdTmhr9G+c7hD/IRyiwSJmqCau8ZZhlmy8a5Q=;
- b=k+IccyiMEscb7c9XjZjRxkueZencqCGRlLL/Vk+pQ31Q5oDEo8yAIM8V0iZMELVaoA
- sFDDZuUwiGUpXWPcndzFshj8S7MYeokD06AgZrXbFierbW7r9kw/sag0AH0X0pz7dXXL
- KJNtRJxmLXwfisB0vZkga94x1odOPnXqQDR/jCRgYOBMIgoEBpbdbcF6NIZ0jmgx9l2q
- xcmYjaQYH7xjBEGb0pcqr4aKJJT2XsSwMPXWchQUgFOVJjoeTtNH9OXp9cXGGOWlhrZw
- 2a7GGMsLBQT4xmGYL/u6T8/WbeaG6eRfBizKs9Wea+HupfyDDiNRRr6sD90BrhmQz2/k
- xZlg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXmTnQHQTm9JU71HgGzNv5qFwjHN+bKCeVLm+FXL8QLVuXApKpGpwbqhP9f4uYCZpvJR5m0s4U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxr0JPcgSIffODff1n7DocdXlPTWiKHGGfJXbPSpTzxqHpr39uo
- FPLVy5SCccSZNd6oRG/XqTmoRSnNMjdqeKxEBDt4SIN/geyqJS0nKqPtAQw8sS6Vcrs=
-X-Gm-Gg: ASbGnct170Hqkmv3ERpB7U8h9orNa7RBCS6KOxudnCXLpefpzKUd59A56AIIakN3NLN
- 0Rvhyk8mwUm5Q55fKbVyxelws5YTDGOoH/QRjU7iCOM4erNMdCaFJWVEpLKzMKpBxfbgPzKIbRK
- 29RHrUgRAEN2o5l+3FOo5t2Bf+iat1NqDGZagrAmPMv+s2ekao1G4d6L/ZqO8/vHN1rKd8/w171
- d24u3B0uMUjPnccWs3AZIQtEsLz0uXj8YWclPv5FtzdecR2+fOty49pP3Wn1cR/5RgUkkO4G9C+
- /1KY2NR5uWHmG9K6kboYmv90kKSl3ZtEBdCAJ26RKEznzNu67K8CMKCiPjuDhn4v3FYtxcMNv5e
- 5jvYjyD+Q5W3xRhxVLzQpNZLQDRHPPVDnTIgNYGLkwEEb3n/neG4ANUq6jVrIwJu1j4s1ZbT1f3
- hpxw9XiUTw8bxE54lHImpbLHOdpHBZQ0OCcQNGutPIEh0r1tbFOQ==
-X-Google-Smtp-Source: AGHT+IGilpxMZLxbaJd6P+fe100GIg/FyrX/roetqgt/8swzgUZDL4sgENHVh5EuV2WwWk0h4cmGyQ==
-X-Received: by 2002:a05:6808:30a2:b0:450:cfd3:cfba with SMTP id
- 5614622812f47-45112d29054mr18364667b6e.57.1764612097344; 
- Mon, 01 Dec 2025 10:01:37 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f0dd0299c0sm5524696fac.18.2025.12.01.10.01.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 10:01:36 -0800 (PST)
-Date: Mon, 1 Dec 2025 12:01:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Frazer Carsley <frazer.carsley@arm.com>
-Cc: abdellatif.elkhlifi@arm.com, harsimransingh.tungal@arm.com,
- hugues.kambampiana@arm.com, u-boot@lists.denx.de
-Subject: Re: [PATCHv2 1/1] corstone1000: Add Cortex-A320 support on FVP
-Message-ID: <20251201180134.GN303283@bill-the-cat>
-References: <20251127154752.589691-1-frazer.carsley@arm.com>
- <20251201090424.34519-1-frazer.carsley@arm.com>
- <20251201090424.34519-2-frazer.carsley@arm.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oBNZ/OXmr8ALnbYtbeD1EJEF7CVArHBVPAy53D/+pDVuDEZEMyFrEXuYzS6ngUl/u0FT0Y8417ARzuK3jLrGWVYrEnv3rs2bMPFytE0rQmMGTBLeJMWFKfj6s9ZtsISfSrRHDXzoPyrfNVWUSlmMJuFDCjMcO+1E1zqlwc/CuXlqzpkAnEYuiU4m0BE1Ky23DCh/tE1Z6rxOgY2Ty3roTAkk+N9FhHc7BRScuEQjaLzcyTSlIFY+CjNwO12Hk9IQ8TdKRnGCry8Nk9Egp8F8Q0veZNThDJu51PulGTPbNAoav0/eaN1nGJwJGYv48xiLQRUja/9/Bgxf26spgEQRHA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=LyE6U+zzK/MUnwQxjNDXUyVTNcaAdUt9NI1njJTa5HE=;
+ b=FHfeGmi13Kq0U4vSQLqYWoMjyUYspx9XTyoaQQs29I9qvLYJPkrcuwTf8KK2bwttDDaWdcfAIbh7qNR1ykS/hyBJS3tqG2ef6o4qxXjPUpLubW2x5jpPFikN/Nbha77KrHPOadkCs7mMFcJEFn8SHDG3/oN/5wFV7GCyXB++U5b0OSA89OsJ58G3QhWuPoVViVPsYHCcIKo2hN2s7jHZ8pp3yPkfOQhy5YtnIEqsT97lydDZvnmzzWzDBd33NsgfG9sB20n9SzHk67IScVBRhgLsiWQ57tvA2kSxRlVrVVp6KHVsLf1ISin9KNnPkk7LigZJ4YDu6Q0krJVoBnadxg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LyE6U+zzK/MUnwQxjNDXUyVTNcaAdUt9NI1njJTa5HE=;
+ b=cSMpCF40eBq/3qXKptKUyw/C74PNCOULYCRd40eTJQKpG5Qt1DgzdjbJskchJz2GBwWbhLFrhWZYNIo8V79DWRSjlsXohLbiqg6KF3H2AH3LQw7VmYdKqRgONIGFxA3yfH4RncjqtcPm6zG4GT2ByGEgXOHSFBnqubImBwmvf0s=
+Received: from BYAPR05CA0005.namprd05.prod.outlook.com (2603:10b6:a03:c0::18)
+ by PH5PR10MB997757.namprd10.prod.outlook.com (2603:10b6:510:39e::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
+ 2025 18:22:44 +0000
+Received: from MWH0EPF000989E8.namprd02.prod.outlook.com
+ (2603:10b6:a03:c0:cafe::93) by BYAPR05CA0005.outlook.office365.com
+ (2603:10b6:a03:c0::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.9 via Frontend Transport; Mon, 1
+ Dec 2025 18:22:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ MWH0EPF000989E8.mail.protection.outlook.com (10.167.241.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9388.8 via Frontend Transport; Mon, 1 Dec 2025 18:22:41 +0000
+Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
+ 2025 12:22:37 -0600
+Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
+ 2025 12:22:37 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 1 Dec 2025 12:22:37 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B1IMa4E890350;
+ Mon, 1 Dec 2025 12:22:37 -0600
+Message-ID: <5f575e86-a687-4427-af8a-108f08ee4d39@ti.com>
+Date: Mon, 1 Dec 2025 12:22:37 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kiZaI2dO7zOf7wSs"
-Content-Disposition: inline
-In-Reply-To: <20251201090424.34519-2-frazer.carsley@arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: k3-am62d-evm-binman: Update DM
+To: Paresh Bhagat <p-bhagat@ti.com>, <trini@konsulko.com>,
+ <u-boot@lists.denx.de>
+CC: <praneeth@ti.com>, <vigneshr@ti.com>, <v-singh1@ti.com>, <khasim@ti.com>, 
+ <anshuld@ti.com>
+References: <20251128110210.4143342-1-p-bhagat@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20251128110210.4143342-1-p-bhagat@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989E8:EE_|PH5PR10MB997757:EE_
+X-MS-Office365-Filtering-Correlation-Id: 73aba8dd-8fc0-42e9-3cfe-08de31069ddc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700013|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Qlp3eHg2U3dDcDg4Y2FTWWRXQmFibmdEVXQrUkNVTHpOU2FpRDBlaDNmS2ZS?=
+ =?utf-8?B?UHFWUHVzQUxUV3QzSXYzN09MaEh2REJvQ3VuMnVoQnNPWEtZZFo4dHErVEZJ?=
+ =?utf-8?B?dWJHV3ZmZXlrL3Urc0pKM0hRa2tqZEJrNVowWXJvVWFGOXFnbFRiSnVDRDF3?=
+ =?utf-8?B?OTg2Ti9wWFUyUW5QWUY4WlNzc25vclhpSml1dnYxTkJsK3JZSERSZThIdVpa?=
+ =?utf-8?B?eHB1RW9xbDF4a3BBMFFBOUNRSk80ZW5WcjRhTFBQWUNWUkZFdmozRnZaWFdx?=
+ =?utf-8?B?ejJMWklWcERSVFZNSGREMm1sUFZCT3FYYi8xMjhSOUU4TTJWNnVDYzRGUW40?=
+ =?utf-8?B?V1BabEM3WTM2TjhxUStxNWxSQkp6QjRRbEtJSGFrQUpIU0l0NVZzaGcySWNP?=
+ =?utf-8?B?MXViSS9vV0FnY0t6ZEtjK002dDlSclFTbmVuTVFWZFIvKzY4U2RmekVWYVU3?=
+ =?utf-8?B?Q3pvWkxaVWx6TE54bmZNM0N3ZEtYTTcyR0FrejhTa0F1WFJLajR5TDQyRGM4?=
+ =?utf-8?B?L1hsL00rQnBzR090SWJ3OURWMVBjR3FoY0U2RzdYdlV2Zlp6N0hhOExjdEY0?=
+ =?utf-8?B?ODNEaDVRM1NFTzRJemtWWmJPUzNNNjRXQlBvbjAvTlV6Q2lLeEJmNXFJS3NP?=
+ =?utf-8?B?bms1d0hnK3FyZGkzSnFkUzU0YVlhbEdNT1N4aEFIZFYwWnpNU1pzSXpiSGNy?=
+ =?utf-8?B?bzFXdVlRd3o3UTBBZ0U3OG9mTVo1VlhWZzIxTW9MUEowQUFmTmxJS2cxNWpF?=
+ =?utf-8?B?YTVnUzNoNHFCbDRWbmFvMDFBNTU2S3E3Ujk2dktTUlhnb2ZqWDZQY21YQm8r?=
+ =?utf-8?B?ZmF0RG94eUR5dldDUnJud1JUZHo5bWlvNEkrQUc3bE9xVGdJZlp6emJlNUs1?=
+ =?utf-8?B?VkhrQTEzcGEwaDJLZXdPQkw1WGp5SVVHYXkvUy9VL3UrWDZQWWR6ZThJdmZx?=
+ =?utf-8?B?K1plNnU3cmg3ZnRaVkxiTStQNzBWbjgxTVA5T3NoK2FQVFVOOEJlL3J2SG5x?=
+ =?utf-8?B?TzZZOHZKTVFEOHdwL0FpclA5TlNybmRlbkFTS09uTWttQkJzNXVVaUw5SktZ?=
+ =?utf-8?B?TDRybFFLNS9YQTNKTFBrSVVaeExIVkxDL05LcWI3WHlKT3dKeDFmblFKbU9Z?=
+ =?utf-8?B?TzJVVDJQL2d3aGJLY0tyZlgxWmsrQUxpcW03aXV6U3lJRnUvem4rWFFNRHdV?=
+ =?utf-8?B?M3h2VmZ2djNGTTZRZjJheUh6Zmx5R2IyMU5mcHlmNThIWng5eE5kZXhjakZI?=
+ =?utf-8?B?aHM2UWFMemN3T3ZvVllzOGVqWE5yQS9zQUZ3TnNLRFN1UUxHME5UOTNUQ0Fv?=
+ =?utf-8?B?KzVJSTdqU2hFN0pYOFp3N2pnWkh2dVNQeVpFQ3BSRkZVekNDVW5Cc2lFVnFY?=
+ =?utf-8?B?RlhENUlUTDh2UFI5NnI2Qk1nWlFlR0Vzam5XSEdoblVLNE90blQ2US9xZ2d1?=
+ =?utf-8?B?K2p2elZoY3hPWDZjY2wwS2lTNCs5YklHUFpjQ295QzljOXdYR3V4Z01TTjhJ?=
+ =?utf-8?B?dlk4VWRvdFcyTlpLWm54NHo0K0Z0bkhDcUhUMzA5YkdFUzVvOGhsVEN5K1RY?=
+ =?utf-8?B?VGp4TEZsczNlbzhXdmROeFJ3c2xleWtUWGF6TUEvOG5aeEdqbEVUVFVaeU90?=
+ =?utf-8?B?TkVHOUh1djBMeXpNVC94QXlUVG1Ec2tTU0JOUXhWNk5vZlJYWkVIblRiS1Zr?=
+ =?utf-8?B?LzdseVFDaVVOQlNQaWpzbk0zWVBPUTZMTmU0L0h0eXA5U0wxMVNMUHFBdFl5?=
+ =?utf-8?B?cHpNRmp3UmppaFVYUXBMUnZHcjhkL3I4QWErVHNOWUVaZVd1d2pyaldPNHJx?=
+ =?utf-8?B?VlBNWjJQUmQ4YmdiR0thbTJRYm5UWllEQ0NpOElLcjhJM2tmMWt0YzZvem52?=
+ =?utf-8?B?NlZnMGppNm5zRTY3a1VubVA2RXA1endLRlZ6S25FZmlodklQcnFMbGl3S3I3?=
+ =?utf-8?B?NnUzVm1sTllVNlkyV0JDcmVRYTNCOWRiYUFOakx5ZTVNR09HSy91cDZKUS9G?=
+ =?utf-8?B?VGIwUlhJby9tSlN2RytrUEtQOXpYVkFITE9Za3VmMG93TnVPUTh3L2kzVlVN?=
+ =?utf-8?B?NG1jK2xLVWJJc3FRK1l0dkIrdHZkbVVic0VtbjVNTkNQSlM3TWxSTm1PbDNw?=
+ =?utf-8?Q?EF3Q=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 18:22:41.9992 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73aba8dd-8fc0-42e9-3cfe-08de31069ddc
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989E8.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH5PR10MB997757
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,94 +166,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/28/25 5:02 AM, Paresh Bhagat wrote:
+> AM62d previously reused the AM62a DM. Since a dedicated DM is now
+> available, migrate to device specific DM.
+> 
+> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+> ---
+> Boot logs
+> https://gist.github.com/paresh-bhagat12/38bce75c43466b5074271f4cb2ddc3f3
+> 
+>   arch/arm/dts/k3-am62d-evm-binman.dtsi | 8 ++++++++
+>   1 file changed, 8 insertions(+)
+> 
+> diff --git a/arch/arm/dts/k3-am62d-evm-binman.dtsi b/arch/arm/dts/k3-am62d-evm-binman.dtsi
+> index 7bf0e955645..3a0ab9f8b2b 100644
+> --- a/arch/arm/dts/k3-am62d-evm-binman.dtsi
+> +++ b/arch/arm/dts/k3-am62d-evm-binman.dtsi
+> @@ -101,4 +101,12 @@
+>   	description = "k3-am62d2-evm";
+>   };
+>   
+> +&dm_falcon {
 
---kiZaI2dO7zOf7wSs
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Not related to this patch, but just noticed we have a different DM node for
+falcon vs regular, would these ever be different? Could we reuse the same
+filename for both, was this a limitation of binman or an oversight?
 
-On Mon, Dec 01, 2025 at 09:04:22AM +0000, Frazer Carsley wrote:
+Anyway for this patch, LGTM,
 
-> Enable Cortex-A320 support on the Corstone-1000 platform
-> (including FVP) and update the device tree to support the integrated
-> Ethos-U85 NPU and GIC-600 interrupt controller. These updates make
-> the platform fully compatible with Cortex-A320 while retaining
-> backward compatibility with Cortex-A35 and GIC-400.
->=20
-> **Cortex-A320 enablement**
->=20
-> * Extend Corstone-1000 compatibility list to include `cortex-a320`.
-> * Ensure build and device-tree logic support both Cortex-A35 and
->   Cortex-A320 configurations.
->=20
-> **Ethos-U85 integration**
->=20
-> * Add `/ethosu@1a050000` node describing the NPU register block at
->   `0x1A050000`.
-> * Introduce associated reserved memory regions:
->   * `ethosu_sram@02400000`: 2 MiB on-chip SRAM (`no-map`).
->   * `ethosu_reserved@A0000000`: 32 MiB DDR carve-out
->      (`shared-dma-pool`).
-> * Connect memory regions through `memory-region` and `sram` phandles.
-> * Add `dma-ranges`, interrupt spec, `region-cfgs`, `cs-region`, and
->   `ethosu-mem-config` for full driver support.
-> * Enable the NPU node conditionally via `CONFIG_ETHOS_U85`.
->=20
-> **GICv3/GIC-600 support**
->=20
-> * Introduce `CONFIG_GIC_V3` to toggle between GIC-400 (v2) and
->   GIC-600 (v3).
-> * Add full GICv3 node guarded by `#ifdef CONFIG_GIC_V3`.
-> * Adjust `cpu@1..3` `reg` values to `0x100/0x200/0x300` under
->   GICv3 (keep `0x1/0x2/0x3` for GIC-400).
-> * Update Ethos-U85 interrupt assignment to **SPI 16** to align with
->   the new interrupt map.
->=20
-> These updates align the Corstone-1000 platform with Arm=E2=80=99s latest
-> Cortex-A320 and Ethos-U85 configurations and ensure proper interrupt
-> and memory mapping for both secure and non-secure domains.
->=20
-> Signed-off-by: Frazer Carsley <frazer.carsley@arm.com>
-> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-[snip]
-> diff --git a/board/armltd/corstone1000/Kconfig b/board/armltd/corstone100=
-0/Kconfig
-> index 709674d4cf7..9476d64d0b0 100644
-> --- a/board/armltd/corstone1000/Kconfig
-> +++ b/board/armltd/corstone1000/Kconfig
-> @@ -9,4 +9,11 @@ config SYS_VENDOR
->  config SYS_CONFIG_NAME
->  	default "corstone1000"
-> =20
-> +config ETHOS_U85
-> +	bool "Enable Arm Ethos-U85 NPU support"
-> +	default n
+Reviewed-by: Andrew Davis <afd@ti.com>
+
+> +	filename = "ti-dm/am62dxx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
+> +};
 > +
-> +config GIC_V3
-> +	bool "Enable GIC v3 support"
-> +	default n
->  endif
+> +&dm {
+> +	filename = "ti-dm/am62dxx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
+> +};
+> +
+>   #endif
 
-The first, small thing is that "default n" is default, so those lines
-should go away. The bigger thing is that we will soon enough be seeing
-code to support these options I assume? And I don't know how broadly
-ETHOS_U85 will apply to other designs, we have things related to GIC_V3
-elsewhere, and so I think this symbol belongs somewhere else, probably
-arch/arm/Kconfig near the other GIC*V3 options (inconsistent naming
-today) and maybe should just be GIC_V3_ITS once used?
-
---=20
-Tom
-
---kiZaI2dO7zOf7wSs
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS3X/gAKCRAr4qD1Cr/k
-CoVeAP9bEA9gGkIiBAFGGgq8bapqWFZRSGb5DLMeS5yFqFObbAD+LjzkvP8joZmg
-TlGSohT4TzdbbTRiIFdKLzgCJ8vk8Ac=
-=Zi2I
------END PGP SIGNATURE-----
-
---kiZaI2dO7zOf7wSs--
