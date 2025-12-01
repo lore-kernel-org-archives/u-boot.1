@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6650D116F1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 11:02:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F71D111A8
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 11:02:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1322483B55;
-	Mon,  1 Dec 2025 12:01:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5383283B72;
+	Mon,  1 Dec 2025 12:01:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nV1REQ8J";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ISkdMEm8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F13F83B22; Mon,  1 Dec 2025 12:01:35 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazon11012025.outbound.protection.outlook.com [52.101.53.25])
+ id EFB2C83B30; Mon,  1 Dec 2025 12:01:36 +0100 (CET)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D1A983AAC
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 12:01:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED0AF83B55
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 12:01:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Z+PczDOOH7B/5ckNwhquBGd0v+oTw2CCIC0YWMoEMb1HjZuXdNFVQABPmUvNOzJeqY0GEVwRxEAgiOcngOjKxu2nGGUZSN0v8sViHNJxiPJzlocusg51jqAekEPcmwVOkAkV38p6U+O5yD7JLVcYE0ZG8eVXw7eFmnoHo75d6ZC+crQ0emRHapcyqgMx90iNx3RnXdD2/410NVGFpJDK8sTjFOhEeW4lIutOIB/yYi8zgyvE7USZlNAOeRkcB3TSoemgCeWKZnuicdvDAiQk9TBuaw+TKxC16wE+MzcMD2P8p7+/jUYtlN2zziiPoI4jbrdh1Pxxd3s0T4OgleR/2g==
+ b=GKeHirq3Ky9U72kzz+AOdv9/cgrZea9azN/noQ4eNs9uEpYoCJUM8fICWOJ/ULSasVUAyh1ROTXE8tXc0G2+BE5fX6DgZqi4tSHqaLUPSXj2v19vGUlwOMyXuw689mm8xQ6dbmfhkqXRgZLoEOqtr8HE5h4Qz2iuYdPFLVoOA+ZkFOIdo7bunaUFxyxQSLMUefHwBuxQlbiZGqIrjk7lL8FwUoQFm2/j0UdRHJ2J6De9fcilnSkC6LF+mqCc/VkKp55llmpfblaLEOZjgv2E/s7jPpEjKF5gHXIez3yd/pMJ2yv8/+/EiBKYX8d7ebXlZyffY5vDvnfT1jb016kyjg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ugBxetSz6Xh5sX1oH7sBXeG4hl67Z/hIk+/Z7Pexuvc=;
- b=Njb23zwh2IsgNtrsx7Qn23IORzI5gUh3VwlH4okjkHb6IPruY9zUqD9Yx2WKMmG1pNcdYIRstnCWmkPqUtxo6hxJrM548mAmNOonp5FLqkIjwc5OqfWMMZBvF0gFh9J8ySMqN+0mxYQMiJdos5L/W1X+Sn9vQVPfjQsVHCwIXreH9gkM9cKpqGXNqOffEld6xUl3z8rMOPeitmtlmmU6MbexBy7/KTLYJIlVilrGQTHgeseqwLME7kyAs7RVrmBSh7CDfspTWFixCe5gUFuOv4MaGpeV++EuDaWdMsJ3X2R9s/nApkN4td4Wiz78+cShUsddEDgj68CB9sc/nyuERA==
+ bh=t2vpFSX3slLQaUw25wqfn57Mzw13fPGQyfY0QsLk1I0=;
+ b=afD8lV0DtFx6zkAeNKaAWd6TgQgo9Q4eIjVcMhU6bHUhcmdWP68BAmD+eIq+OrKl0N95meItH+NQf530pOwIAOY60N4JkocgKUsg4Rbf2gFmRFgQvMSIeg1UY9Qj6Sj5AcTeoFNY9Hks2/Em1kgRTb/csnsd+ulVjzJtbmFwTcF9B9FPeZCv7u2uTITEzpuzgvy6P9sX7tahtDSDVej+Be2vqkSVNvyf7W20CLHLyTTp5EJ/Srn0VlP0s2FM2IZgkn3TZ8FgIk70SZKWCA/GOZRid8kz6a5v6Mi/1HwahdNieG7Lj11SBIdDq84CrK6OPP+pRyUkTCb/qfZNrhwdew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ugBxetSz6Xh5sX1oH7sBXeG4hl67Z/hIk+/Z7Pexuvc=;
- b=nV1REQ8JWFo36fDgy0uXv6aI3SbvEzmokg5fZdw31tD7FksdErdVfPcqv0t9cjRU2Fdf+4pPpWHb8h7p2eklpUIq9umZ5p373X4sy9l/cXIC4sdHTYfl0y4R2x1nvk8Fq+7jiTLgmc4XPByJGvTyc4wQOQiMpnrXc46/brWiN8w=
-Received: from CH2PR18CA0047.namprd18.prod.outlook.com (2603:10b6:610:55::27)
- by DS4PR10MB997621.namprd10.prod.outlook.com (2603:10b6:8:31c::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.19; Mon, 1 Dec
- 2025 11:01:16 +0000
-Received: from DS3PEPF0000C380.namprd04.prod.outlook.com
- (2603:10b6:610:55:cafe::7e) by CH2PR18CA0047.outlook.office365.com
- (2603:10b6:610:55::27) with Microsoft SMTP Server (version=TLS1_3,
+ bh=t2vpFSX3slLQaUw25wqfn57Mzw13fPGQyfY0QsLk1I0=;
+ b=ISkdMEm8LjS0OpwYi+YTToWXHAUer7HDxzlsccy8gRi3NHkuoj4MmSsC75uz7yqBir8nQHBqfOGgsd4yXqVtlT9KEa0gC6L5PPMUflBzCc7UoQQB5MFg7th3WQhCgv7YqJgQ3H2zko0OqIWVWedKdZWA750wLWcg4crnITz3kio=
+Received: from PH0P220CA0018.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:d3::33)
+ by LV3PR10MB7865.namprd10.prod.outlook.com (2603:10b6:408:1b8::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
+ 2025 11:01:31 +0000
+Received: from CY4PEPF0000EDD1.namprd03.prod.outlook.com
+ (2603:10b6:510:d3:cafe::cc) by PH0P220CA0018.outlook.office365.com
+ (2603:10b6:510:d3::33) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Mon,
- 1 Dec 2025 11:01:16 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ 1 Dec 2025 11:01:30 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- DS3PEPF0000C380.mail.protection.outlook.com (10.167.23.10) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CY4PEPF0000EDD1.mail.protection.outlook.com (10.167.241.197) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Mon, 1 Dec 2025 11:01:16 +0000
-Received: from DLEE201.ent.ti.com (157.170.170.76) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9388.8 via Frontend Transport; Mon, 1 Dec 2025 11:01:29 +0000
+Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 05:01:14 -0600
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 05:01:24 -0600
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 05:01:13 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 05:01:22 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 1 Dec 2025 05:01:13 -0600
+ Transport; Mon, 1 Dec 2025 05:01:22 -0600
 Received: from hp-z2-tower.dhcp.ti.com (hp-z2-tower.dhcp.ti.com
  [172.24.231.157])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B1B14qY306512;
- Mon, 1 Dec 2025 05:01:09 -0600
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B1B14qa306512;
+ Mon, 1 Dec 2025 05:01:18 -0600
 From: Hrushikesh Salunke <h-salunke@ti.com>
 To: <trini@konsulko.com>, <a-nandan@ti.com>, <m-chawdhry@ti.com>,
  <c-vankar@ti.com>, <u-kumar1@ti.com>, <j-keerthy@ti.com>,
@@ -83,10 +84,10 @@ To: <trini@konsulko.com>, <a-nandan@ti.com>, <m-chawdhry@ti.com>,
  <anshuld@ti.com>, <s-vadapalli@ti.com>, <ahalaney@redhat.com>,
  <semen.protsenko@linaro.org>, <mkorpershoek@kernel.org>
 CC: <u-boot@lists.denx.de>, <h-salunke@ti.com>, <danishanwar@ti.com>
-Subject: [PATCH v4 01/10] arm: mach-k3: j784s4: Update SoC autogen data to
- enable PCIe boot
-Date: Mon, 1 Dec 2025 16:30:54 +0530
-Message-ID: <20251201110103.845413-2-h-salunke@ti.com>
+Subject: [PATCH v4 03/10] phy: ti: Add config to enable J721E WIZ SERDES
+ wrapper at SPL stage
+Date: Mon, 1 Dec 2025 16:30:56 +0530
+Message-ID: <20251201110103.845413-4-h-salunke@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251201110103.845413-1-h-salunke@ti.com>
 References: <20251201110103.845413-1-h-salunke@ti.com>
@@ -96,54 +97,53 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF0000C380:EE_|DS4PR10MB997621:EE_
-X-MS-Office365-Filtering-Correlation-Id: 156881bf-6d71-455e-9032-08de30c8f31b
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD1:EE_|LV3PR10MB7865:EE_
+X-MS-Office365-Filtering-Correlation-Id: a2cb6b29-3b14-4011-c231-08de30c8fb41
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026|13003099007|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nhQ6anYt4qAEcvguyollt6BHjb0biRTmjmcibp7+Pk2LFuiYoFEY1ywlmD9T?=
- =?us-ascii?Q?uXhcS/6XYt48q6zFZbdUobJxyJ5dRrOhv9uhxS7xxppo+X2LOwKIC8EqMOht?=
- =?us-ascii?Q?1wQsXXJaO+2Y4gU+3A/sRgKDcR0g8ntpfpax5GJgBQ0JhxxZ9EAe5OSxEyoK?=
- =?us-ascii?Q?4v/QtTfRqs9y35CdDRDK3W4Bo3AaLPuzJkV/OyuN0Io6OVggiX8CxairUUqs?=
- =?us-ascii?Q?pND8CINYDKD7aQIO8MLpyKVNhOWaA17Yv2UTrt/2DFopANMVBXv8VaYuyxqB?=
- =?us-ascii?Q?F51KB3CzsbNwAQpco618/yf+ey+CSz+tA3UsE5RLvihM9o2Qr4WH9U1dmxHU?=
- =?us-ascii?Q?ecyJO5xrcO3YrB609Dvofe8100pvao3jxrRxOSLBM2koHKsCaU/hogMpExT7?=
- =?us-ascii?Q?CObv8OxnHtmhxiJeTx2rTGjFZg+z+ZCJD6nbU6JihoAGVDkacjg6nal1eUpY?=
- =?us-ascii?Q?Q3hFnFlVb9U4svv6+DDiI0LXilXknSZ46tjkhNimGy+DYogx0U1oeIhQHz5O?=
- =?us-ascii?Q?YtxJoqdcpjJWi8iFt5idbt8e8f8iYv+mHnPx1CT08ayeP0FLoyVIwtZIqiYJ?=
- =?us-ascii?Q?6+gVRcW6InNhe/YWp5eviH1Tov9I9CRyrHW7fZt1xo3Y6fe5qUhSMZtpSmoS?=
- =?us-ascii?Q?YF+nW5NEX+5//q6wLh1M8c5zdVgAsNo8KdVXipNfhPMaceDIuhZRorOdkNdY?=
- =?us-ascii?Q?l3QMAo7GLlO81YltcmOZU+nUPXjAFlqgEJ6v2+va6mx2Odw1DCf+ixo+Dv0m?=
- =?us-ascii?Q?lR/EoCu4E9PpM1GSKgV4iFFUZws/MJ6cR3Rx1BhADzhx1BErbelsZMo40HW6?=
- =?us-ascii?Q?+or2LbjVJy3jRDqcOem7VLnsctcke9rIZD365z2DQ1qPAqzQGPeUa+ZY1kgd?=
- =?us-ascii?Q?Lmm2lau/VIuZdrkHMr8EgF6Chs+K14nHxR1E32H9pOuhXRVlV/k23/BdAt6j?=
- =?us-ascii?Q?nT5hFlHiJKHzLo8FB60KiiqpxohzKQV9r3IsZ2fUE40pyIMD95X2aZEDa51J?=
- =?us-ascii?Q?d08E6LOAS9e8zuqVkiYTIeL4dFK6/llhcoHP9t75kngM3pmZiGAZUhD2J9Y6?=
- =?us-ascii?Q?NPASTS8QtzeCsKQuszV6Fe/spRdxhLgZA+5d2da18d3p2456yfCuLOZQcD+D?=
- =?us-ascii?Q?6eaCMu4m98QsMynPXqfaWKYROFKebgQMOoo7eIsbnEuwXPXgIvhv8ez4ZNV9?=
- =?us-ascii?Q?yZHyZKdjdpP2SGZt+4ZVJEhcfeI/jLGL/eNEKWOzEleeWqRLYR0svpku5A7O?=
- =?us-ascii?Q?bvP/o6tkdHV4SEnka/sUdLJ34TYysAv3VjiA57XI7TQ8sX+UmKfCEsA5QqvV?=
- =?us-ascii?Q?0LGtHXiC36LL5WGfTjppcYQS7Hz7JczHck04RRphcQSjrmUOECNEUJiVpn/o?=
- =?us-ascii?Q?VBVD7/X+RxeFrg8QavjfWXM2KM5rLjLjKhJo/Gm6YSuzMeihY5tNklAMlk45?=
- =?us-ascii?Q?8XqAQUQZ0GerBqGqHEIyx66lXQqGfCiNvREp7V7gAJPhvLROsZSKNwF2gsW6?=
- =?us-ascii?Q?iO+/lyiZFpwFyU0GdJF9l3OaBr/aQRGPChNt8gaV5qVifuOxhi4hsAQL3smk?=
- =?us-ascii?Q?Q96C8SeWQDuEkKP3AyjASjQ5U6LtC4pNE1rDn/EY?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026)(13003099007)(921020);
- DIR:OUT; SFP:1101; 
+ ARA:13230040|376014|82310400026|36860700013|1800799024|921020; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?a3UDULGyMoQR1+UL1SWU9DNARBjkb0FSSAefJP43VS2yZGoeUMutAw+gjLyf?=
+ =?us-ascii?Q?3HnsqZzXVG98gIlQh1Y1wJcihygawDca79jzmztygNrmxbl2hM9nIWcXn6Jx?=
+ =?us-ascii?Q?Xvka4tGAcXJq+CIYadsOUpm2x8oCfsaatuZg4zpnzQMIP8EiSEfjk1c78fVu?=
+ =?us-ascii?Q?ZvfESjDTF7WGJF7oBhC59SAfhJ9VVWwV4heQVozD0gmtmRnpBVF0qlo+EaIR?=
+ =?us-ascii?Q?P1Ux4294F3Zu41cT/7+VtkNW+CDgaJdC3fk81oHQhad6w2lANYdWYPZHOXq5?=
+ =?us-ascii?Q?7N/6oY32NIB5hnhEe5Z9/86xWiR/mQkFMteMGTonjC128nBuUQJM9t74Rqos?=
+ =?us-ascii?Q?dAht2Ncz89UIRzNLNyyfAHI4NtSvQHBk/apm9C9hBuCVqHEMzoOuk5Boaz0J?=
+ =?us-ascii?Q?0iC9bBda4nSs8kmx48kUVM2yMJ7BK6y4IcTiqY20fxpQygu2FDyEIjOgIb55?=
+ =?us-ascii?Q?3XvMJiWhp+1YuKrQc+NOpCRMLR2Bm4v+7hX0uBCwmDYeFNNhfx8csDI5JTVP?=
+ =?us-ascii?Q?YAKcJ/UK9TO0udEriKzPvJSvmx2hajmri64rtCTo2sfSc1/TMtcnImifadNo?=
+ =?us-ascii?Q?oeXiKXQbSkfZzwQM0bScfVM8KM+tSKznWXQswUjjPQHrclSc0imBHRm8Sl34?=
+ =?us-ascii?Q?r17zOnNOH/b0Avx5t4W8PKsVqzN/eaLhAxD/jpsCs6yIPclSYeQsfKTBg479?=
+ =?us-ascii?Q?pf2/UQEO31EEHYuTAarfX+pR99bxfLqgWmDHLRc/Fcj1rPp4QyO4jsdNvpgf?=
+ =?us-ascii?Q?Q46vPWoZbQvPyuJKp6vLvHoCs4ECIvA5cfn5xZF5O3QqyRS3dsGUotZ7D2Up?=
+ =?us-ascii?Q?UDkf6omrXTkj28ZSM4QddV26qLMIKnYXzQ4tgmOM/BkGs2TEwbwIDvY3YP+y?=
+ =?us-ascii?Q?xoCvnwnbG8tlH45lx7LtbIJi2lLQL1PxuugeRsVE6IBUYPIegWFjVXboUf3E?=
+ =?us-ascii?Q?1JkjbskSI/SnuOTxPMOoVqbq0Jk0+wJG6xUnmYSREXevT2ZYsouNCay2C0cB?=
+ =?us-ascii?Q?lAjrpDa39NZFx7kznescJU3vBoU7ED+QDE8l67cM1HuM4VaAXSMH0SnMaryD?=
+ =?us-ascii?Q?gFnsmXizRoCfbsfcXlF8UZR4wkRCs/XgbBuEmrgs/w9nAKLknigsZizz4mEr?=
+ =?us-ascii?Q?aOsVTUZZSTbjVzgtm9hoCotmtYnDTWo03B1ndhkHdkLze46x+aKIXa02C8NQ?=
+ =?us-ascii?Q?aJTM3MVLGplOfodKOrnCGbA4SU3y07GxgxGh6Uo3R+oQlcHCO/eLAH4DrBIo?=
+ =?us-ascii?Q?2a49HqO4BgGsTb2be0XKSNdSxZFEnviWfZ2lFuRP7FYEIo09f8/NB57U2ngZ?=
+ =?us-ascii?Q?9v/0ME+N7ZOfgabUKducyZ4WZF8s7MZQz/8bQYlK8AO+qInw3mBbxUnRwqu2?=
+ =?us-ascii?Q?j2J+p6m192ZUs4NTcpv2pw5nrw57sAo/l1ZaRPQWF6XtIVGgmNhFmDKO6tYw?=
+ =?us-ascii?Q?Jy27JxKzj9JTcEOUlxVjO2JxzYeSl6FMPgn5+nsF9UpDtg67SRXxlq8I9iM2?=
+ =?us-ascii?Q?CzIDA+GA4KksSabE2DMLhPzcfvKU+weyHtrlAw4RfUXSitn10HLABUdh1RIw?=
+ =?us-ascii?Q?IU2c1fv4dh4XPhjQfzEpBL+y2vetpqrRfHHj0DBV?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024)(921020); DIR:OUT;
+ SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 11:01:16.2514 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 156881bf-6d71-455e-9032-08de30c8f31b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 11:01:29.9707 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a2cb6b29-3b14-4011-c231-08de30c8fb41
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF0000C380.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD1.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR10MB997621
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7865
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,388 +160,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To enable PCIe boot on J784S4 SoC SERDES0 and PCIE1 should be enabled
-and configured at r5 stage. Add the required clk-data and dev-data
-for SERDES0 and PCIE1.
+Add SPL_PHY_J721E_WIZ configuration option to enable the WIZ SERDES
+wrapper driver in SPL stage. This is required for PCIe boot support
+where SERDES configuration must be done early in the boot sequence
+before loading bootloader image over PCIe.
 
 Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
 ---
- arch/arm/mach-k3/r5/j784s4/clk-data.c | 184 ++++++++++++++++++++++++--
- arch/arm/mach-k3/r5/j784s4/dev-data.c |  43 +++---
- 2 files changed, 200 insertions(+), 27 deletions(-)
+ drivers/phy/ti/Kconfig | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/arch/arm/mach-k3/r5/j784s4/clk-data.c b/arch/arm/mach-k3/r5/j784s4/clk-data.c
-index 24780eb6562..ce111377e41 100644
---- a/arch/arm/mach-k3/r5/j784s4/clk-data.c
-+++ b/arch/arm/mach-k3/r5/j784s4/clk-data.c
-@@ -5,7 +5,7 @@
-  * This file is auto generated. Please do not hand edit and report any issues
-  * to Bryan Brattlof <bb@ti.com>.
-  *
-- * Copyright (C) 2020-2024 Texas Instruments Incorporated - https://www.ti.com/
-+ * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
- #include <linux/clk-provider.h>
-@@ -64,13 +64,13 @@ static const char * const cpsw2g_cpts_rclk_sel_out0_parents[] = {
- 	"board_0_cpts0_rft_clk_out",
- 	"board_0_mcu_ext_refclk0_out",
- 	"board_0_ext_refclk1_out",
-+	"wiz16b8m4ct3_main_0_ip2_ln0_txmclk",
-+	"wiz16b8m4ct3_main_0_ip2_ln1_txmclk",
-+	"wiz16b8m4ct3_main_0_ip2_ln2_txmclk",
-+	"wiz16b8m4ct3_main_0_ip2_ln3_txmclk",
- 	NULL,
- 	NULL,
--	NULL,
--	NULL,
--	NULL,
--	NULL,
--	NULL,
-+	"wiz16b8m4ct3_main_0_ip1_ln2_txmclk",
- 	NULL,
- 	"hsdiv4_16fft_mcu_2_hsdivout1_clk",
- 	"k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk",
-@@ -166,6 +166,31 @@ static const char * const emmcsd1_lb_clksel_out0_parents[] = {
- 	"board_0_mmc1_clk_out",
- };
- 
-+static const char * const usb0_serdes_refclk_mux_out0_parents[] = {
-+	"wiz16b8m4ct3_main_0_ip3_ln3_refclk",
-+	NULL,
-+};
+diff --git a/drivers/phy/ti/Kconfig b/drivers/phy/ti/Kconfig
+index 111085f235d..df750b26d66 100644
+--- a/drivers/phy/ti/Kconfig
++++ b/drivers/phy/ti/Kconfig
+@@ -7,3 +7,13 @@ config PHY_J721E_WIZ
+ 	  signals to the SERDES (Sierra/Torrent). This driver configures
+ 	  three clock selects (pll0, pll1, dig) and resets for each of the
+ 	  lanes.
 +
-+static const char * const usb0_serdes_rxclk_mux_out0_parents[] = {
-+	"wiz16b8m4ct3_main_0_ip3_ln3_rxclk",
-+	NULL,
-+};
-+
-+static const char * const usb0_serdes_rxfclk_mux_out0_parents[] = {
-+	"wiz16b8m4ct3_main_0_ip3_ln3_rxfclk",
-+	NULL,
-+};
-+
-+static const char * const usb0_serdes_txfclk_mux_out0_parents[] = {
-+	"wiz16b8m4ct3_main_0_ip3_ln3_txfclk",
-+	NULL,
-+};
-+
-+static const char * const usb0_serdes_txmclk_mux_out0_parents[] = {
-+	"wiz16b8m4ct3_main_0_ip3_ln3_txmclk",
-+	NULL,
-+};
-+
- static const char * const k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents[] = {
- 	"main_pll_hfosc_sel_out0",
- 	"hsdiv4_16fft_main_0_hsdivout0_clk",
-@@ -197,18 +222,44 @@ static const char * const gtc_clk_mux_out0_parents[] = {
- 	"board_0_cpts0_rft_clk_out",
- 	"board_0_mcu_ext_refclk0_out",
- 	"board_0_ext_refclk1_out",
-+	"wiz16b8m4ct3_main_0_ip2_ln0_txmclk",
-+	"wiz16b8m4ct3_main_0_ip2_ln1_txmclk",
-+	"wiz16b8m4ct3_main_0_ip2_ln2_txmclk",
-+	"wiz16b8m4ct3_main_0_ip2_ln3_txmclk",
- 	NULL,
- 	NULL,
-+	"wiz16b8m4ct3_main_0_ip1_ln2_txmclk",
- 	NULL,
-+	"hsdiv4_16fft_mcu_2_hsdivout1_clk",
-+	"k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk",
-+};
-+
-+static const char * const pcien_cpts_rclk_mux_out1_parents[] = {
-+	"hsdiv4_16fft_main_3_hsdivout1_clk",
-+	"postdiv3_16fft_main_0_hsdivout6_clk",
-+	"board_0_mcu_cpts0_rft_clk_out",
-+	"board_0_cpts0_rft_clk_out",
-+	"board_0_mcu_ext_refclk0_out",
-+	"board_0_ext_refclk1_out",
-+	"wiz16b8m4ct3_main_0_ip2_ln0_txmclk",
-+	"wiz16b8m4ct3_main_0_ip2_ln1_txmclk",
-+	"wiz16b8m4ct3_main_0_ip2_ln2_txmclk",
-+	"wiz16b8m4ct3_main_0_ip2_ln3_txmclk",
- 	NULL,
- 	NULL,
--	NULL,
--	NULL,
-+	"wiz16b8m4ct3_main_0_ip1_ln2_txmclk",
- 	NULL,
- 	"hsdiv4_16fft_mcu_2_hsdivout1_clk",
- 	"k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk",
- };
- 
-+static const char * const serdes0_core_refclk_out0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+	"hsdiv4_16fft_main_3_hsdivout4_clk",
-+	"hsdiv4_16fft_main_2_hsdivout4_clk",
-+};
-+
- static const struct clk_data clk_list[] = {
- 	CLK_FIXED_RATE("osc_27_mhz", 27000000, 0),
- 	CLK_FIXED_RATE("osc_26_mhz", 26000000, 0),
-@@ -270,11 +321,17 @@ static const struct clk_data clk_list[] = {
- 	CLK_FIXED_RATE("board_0_mcu_ext_refclk0_out", 0, 0),
- 	CLK_FIXED_RATE("board_0_mmc1_clklb_out", 0, 0),
- 	CLK_FIXED_RATE("board_0_mmc1_clk_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_serdes0_refclk_n_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_serdes0_refclk_p_out", 0, 0),
- 	CLK_FIXED_RATE("board_0_tck_out", 0, 0),
- 	CLK_FIXED_RATE("board_0_vout0_extpclkin_out", 0, 0),
- 	CLK_FIXED_RATE("emmcsd4ss_main_0_emmcsdss_io_clk_o", 0, 0),
- 	CLK_DIV("hsdiv4_16fft_mcu_2_hsdivout0_clk", "pllfracf2_ssmod_16fft_mcu_2_foutvcop_clk", 0x40d02080, 0, 7, 0, 0),
- 	CLK_DIV("hsdiv4_16fft_mcu_2_hsdivout1_clk", "pllfracf2_ssmod_16fft_mcu_2_foutvcop_clk", 0x40d02084, 0, 7, 0, 0),
-+	CLK_FIXED_RATE("pcie_g3x4_128_main_1_pcie_lane0_txclk", 0, 0),
-+	CLK_FIXED_RATE("pcie_g3x4_128_main_1_pcie_lane1_txclk", 0, 0),
-+	CLK_FIXED_RATE("pcie_g3x4_128_main_1_pcie_lane2_txclk", 0, 0),
-+	CLK_FIXED_RATE("pcie_g3x4_128_main_1_pcie_lane3_txclk", 0, 0),
- 	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_main_0_foutvcop_clk", "main_pll_hfosc_sel_out0", 0x680000, 0, 2000000000),
- 	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
- 	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", 0x680038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
-@@ -294,8 +351,42 @@ static const struct clk_data clk_list[] = {
- 	CLK_DIV("postdiv3_16fft_main_0_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x6800a0, 0, 7, 0, 0),
- 	CLK_DIV("postdiv3_16fft_main_1_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", 0x681094, 0, 7, 0, 0),
- 	CLK_DIV("postdiv3_16fft_main_1_hsdivout7_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", 0x68109c, 0, 7, 0, 0),
-+	CLK_FIXED_RATE("usb3p0ss_16ffc_main_0_pipe_txclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_cmn_refclk_m", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_cmn_refclk_p", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip1_ln2_txmclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln0_refclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln0_rxclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln0_rxfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln0_txfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln0_txmclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln1_refclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln1_rxclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln1_rxfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln1_txfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln1_txmclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln2_refclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln2_rxclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln2_rxfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln2_txfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln2_txmclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln3_refclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln3_rxclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln3_rxfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln3_txfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip2_ln3_txmclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip3_ln3_refclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip3_ln3_rxclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip3_ln3_rxfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip3_ln3_txfclk", 0, 0),
-+	CLK_FIXED_RATE("wiz16b8m4ct3_main_0_ip3_ln3_txmclk", 0, 0),
- 	CLK_MUX("emmcsd1_lb_clksel_out0", emmcsd1_lb_clksel_out0_parents, 2, 0x1080b4, 16, 1, 0),
- 	CLK_MUX("mcu_clkout_mux_out0", mcu_clkout_mux_out0_parents, 2, 0x40f08010, 0, 1, 0),
-+	CLK_MUX("usb0_serdes_refclk_mux_out0", usb0_serdes_refclk_mux_out0_parents, 2, 0x104000, 27, 1, 0),
-+	CLK_MUX("usb0_serdes_rxclk_mux_out0", usb0_serdes_rxclk_mux_out0_parents, 2, 0x104000, 27, 1, 0),
-+	CLK_MUX("usb0_serdes_rxfclk_mux_out0", usb0_serdes_rxfclk_mux_out0_parents, 2, 0x104000, 27, 1, 0),
-+	CLK_MUX("usb0_serdes_txfclk_mux_out0", usb0_serdes_txfclk_mux_out0_parents, 2, 0x104000, 27, 1, 0),
-+	CLK_MUX("usb0_serdes_txmclk_mux_out0", usb0_serdes_txmclk_mux_out0_parents, 2, 0x104000, 27, 1, 0),
- 	CLK_DIV("hsdiv0_16fft_main_12_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_12_foutvcop_clk", 0x68c080, 0, 7, 0, 0),
- 	CLK_DIV("hsdiv0_16fft_main_26_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_26_foutvcop_clk", 0x69a080, 0, 7, 0, 0),
- 	CLK_DIV("hsdiv0_16fft_main_27_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_27_foutvcop_clk", 0x69b080, 0, 7, 0, 0),
-@@ -310,14 +401,18 @@ static const struct clk_data clk_list[] = {
- 	CLK_DIV_DEFFREQ("hsdiv4_16fft_main_1_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681080, 0, 7, 0, 0, 192000000),
- 	CLK_DIV("hsdiv4_16fft_main_1_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681088, 0, 7, 0, 0),
- 	CLK_DIV("hsdiv4_16fft_main_2_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_2_hsdivout4_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682090, 0, 7, 0, 0),
- 	CLK_DIV("hsdiv4_16fft_main_3_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_3_foutvcop_clk", 0x683084, 0, 7, 0, 0),
- 	CLK_DIV("hsdiv4_16fft_main_3_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_3_foutvcop_clk", 0x683088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_3_hsdivout4_clk", "pllfracf2_ssmod_16fft_main_3_foutvcop_clk", 0x683090, 0, 7, 0, 0),
- 	CLK_MUX_PLLCTRL("k3_pll_ctrl_wrap_main_0_sysclkout_clk", k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
- 	CLK_DIV("k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk", "k3_pll_ctrl_wrap_main_0_sysclkout_clk", 0x410118, 0, 5, 0, 0),
- 	CLK_MUX("dpi0_ext_clksel_out0", dpi0_ext_clksel_out0_parents, 2, 0x108300, 0, 1, 0),
- 	CLK_MUX("emmcsd_refclk_sel_out0", emmcsd_refclk_sel_out0_parents, 4, 0x1080b0, 0, 2, 0),
- 	CLK_MUX("emmcsd_refclk_sel_out1", emmcsd_refclk_sel_out1_parents, 4, 0x1080b4, 0, 2, 0),
- 	CLK_MUX("gtc_clk_mux_out0", gtc_clk_mux_out0_parents, 16, 0x108030, 0, 4, 0),
-+	CLK_MUX("pcien_cpts_rclk_mux_out1", pcien_cpts_rclk_mux_out1_parents, 16, 0x108084, 0, 4, 0),
-+	CLK_MUX("serdes0_core_refclk_out0", serdes0_core_refclk_out0_parents, 4, 0x108400, 0, 2, 0),
- 	CLK_DIV_DEFFREQ("usart_programmable_clock_divider_out0", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x1081c0, 0, 2, 0, 0, 48000000),
- 	CLK_DIV("usart_programmable_clock_divider_out5", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x1081d4, 0, 2, 0, 0),
- 	CLK_DIV("usart_programmable_clock_divider_out8", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x1081e0, 0, 2, 0, 0),
-@@ -338,6 +433,11 @@ static const struct dev_clk soc_dev_clk_data[] = {
- 	DEV_CLK(61, 4, "board_0_cpts0_rft_clk_out"),
- 	DEV_CLK(61, 5, "board_0_mcu_ext_refclk0_out"),
- 	DEV_CLK(61, 6, "board_0_ext_refclk1_out"),
-+	DEV_CLK(61, 7, "wiz16b8m4ct3_main_0_ip2_ln0_txmclk"),
-+	DEV_CLK(61, 8, "wiz16b8m4ct3_main_0_ip2_ln1_txmclk"),
-+	DEV_CLK(61, 9, "wiz16b8m4ct3_main_0_ip2_ln2_txmclk"),
-+	DEV_CLK(61, 10, "wiz16b8m4ct3_main_0_ip2_ln3_txmclk"),
-+	DEV_CLK(61, 13, "wiz16b8m4ct3_main_0_ip1_ln2_txmclk"),
- 	DEV_CLK(61, 15, "hsdiv4_16fft_mcu_2_hsdivout1_clk"),
- 	DEV_CLK(61, 16, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
- 	DEV_CLK(61, 17, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-@@ -349,6 +449,11 @@ static const struct dev_clk soc_dev_clk_data[] = {
- 	DEV_CLK(63, 7, "board_0_cpts0_rft_clk_out"),
- 	DEV_CLK(63, 8, "board_0_mcu_ext_refclk0_out"),
- 	DEV_CLK(63, 9, "board_0_ext_refclk1_out"),
-+	DEV_CLK(63, 10, "wiz16b8m4ct3_main_0_ip2_ln0_txmclk"),
-+	DEV_CLK(63, 11, "wiz16b8m4ct3_main_0_ip2_ln1_txmclk"),
-+	DEV_CLK(63, 12, "wiz16b8m4ct3_main_0_ip2_ln2_txmclk"),
-+	DEV_CLK(63, 13, "wiz16b8m4ct3_main_0_ip2_ln3_txmclk"),
-+	DEV_CLK(63, 16, "wiz16b8m4ct3_main_0_ip1_ln2_txmclk"),
- 	DEV_CLK(63, 18, "hsdiv4_16fft_mcu_2_hsdivout1_clk"),
- 	DEV_CLK(63, 19, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
- 	DEV_CLK(63, 20, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
-@@ -404,6 +509,8 @@ static const struct dev_clk soc_dev_clk_data[] = {
- 	DEV_CLK(157, 239, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
- 	DEV_CLK(157, 243, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
- 	DEV_CLK(157, 245, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
-+	DEV_CLK(157, 324, "wiz16b8m4ct3_main_0_cmn_refclk_m"),
-+	DEV_CLK(157, 326, "wiz16b8m4ct3_main_0_cmn_refclk_p"),
- 	DEV_CLK(157, 354, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
- 	DEV_CLK(157, 359, "dpi0_ext_clksel_out0"),
- 	DEV_CLK(157, 360, "mshsi2c_wkup_0_porscl"),
-@@ -461,6 +568,42 @@ static const struct dev_clk soc_dev_clk_data[] = {
- 	DEV_CLK(279, 2, "wkup_i2c_mcupll_bypass_out0"),
- 	DEV_CLK(279, 3, "hsdiv4_16fft_mcu_1_hsdivout3_clk"),
- 	DEV_CLK(279, 4, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(333, 0, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(333, 2, "pcien_cpts_rclk_mux_out1"),
-+	DEV_CLK(333, 3, "hsdiv4_16fft_main_3_hsdivout1_clk"),
-+	DEV_CLK(333, 4, "postdiv3_16fft_main_0_hsdivout6_clk"),
-+	DEV_CLK(333, 5, "board_0_mcu_cpts0_rft_clk_out"),
-+	DEV_CLK(333, 6, "board_0_cpts0_rft_clk_out"),
-+	DEV_CLK(333, 7, "board_0_mcu_ext_refclk0_out"),
-+	DEV_CLK(333, 8, "board_0_ext_refclk1_out"),
-+	DEV_CLK(333, 9, "wiz16b8m4ct3_main_0_ip2_ln0_txmclk"),
-+	DEV_CLK(333, 10, "wiz16b8m4ct3_main_0_ip2_ln1_txmclk"),
-+	DEV_CLK(333, 11, "wiz16b8m4ct3_main_0_ip2_ln2_txmclk"),
-+	DEV_CLK(333, 12, "wiz16b8m4ct3_main_0_ip2_ln3_txmclk"),
-+	DEV_CLK(333, 15, "wiz16b8m4ct3_main_0_ip1_ln2_txmclk"),
-+	DEV_CLK(333, 17, "hsdiv4_16fft_mcu_2_hsdivout1_clk"),
-+	DEV_CLK(333, 18, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(333, 19, "wiz16b8m4ct3_main_0_ip2_ln0_refclk"),
-+	DEV_CLK(333, 20, "wiz16b8m4ct3_main_0_ip2_ln0_rxclk"),
-+	DEV_CLK(333, 21, "wiz16b8m4ct3_main_0_ip2_ln0_rxfclk"),
-+	DEV_CLK(333, 23, "wiz16b8m4ct3_main_0_ip2_ln0_txfclk"),
-+	DEV_CLK(333, 24, "wiz16b8m4ct3_main_0_ip2_ln0_txmclk"),
-+	DEV_CLK(333, 25, "wiz16b8m4ct3_main_0_ip2_ln1_refclk"),
-+	DEV_CLK(333, 26, "wiz16b8m4ct3_main_0_ip2_ln1_rxclk"),
-+	DEV_CLK(333, 27, "wiz16b8m4ct3_main_0_ip2_ln1_rxfclk"),
-+	DEV_CLK(333, 29, "wiz16b8m4ct3_main_0_ip2_ln1_txfclk"),
-+	DEV_CLK(333, 30, "wiz16b8m4ct3_main_0_ip2_ln1_txmclk"),
-+	DEV_CLK(333, 31, "wiz16b8m4ct3_main_0_ip2_ln2_refclk"),
-+	DEV_CLK(333, 32, "wiz16b8m4ct3_main_0_ip2_ln2_rxclk"),
-+	DEV_CLK(333, 33, "wiz16b8m4ct3_main_0_ip2_ln2_rxfclk"),
-+	DEV_CLK(333, 35, "wiz16b8m4ct3_main_0_ip2_ln2_txfclk"),
-+	DEV_CLK(333, 36, "wiz16b8m4ct3_main_0_ip2_ln2_txmclk"),
-+	DEV_CLK(333, 37, "wiz16b8m4ct3_main_0_ip2_ln3_refclk"),
-+	DEV_CLK(333, 38, "wiz16b8m4ct3_main_0_ip2_ln3_rxclk"),
-+	DEV_CLK(333, 39, "wiz16b8m4ct3_main_0_ip2_ln3_rxfclk"),
-+	DEV_CLK(333, 41, "wiz16b8m4ct3_main_0_ip2_ln3_txfclk"),
-+	DEV_CLK(333, 42, "wiz16b8m4ct3_main_0_ip2_ln3_txmclk"),
-+	DEV_CLK(333, 43, "j7am_wakeup_16ff_wkup_0_wkup_rcosc_12p5m_clk"),
- 	DEV_CLK(392, 0, "usart_programmable_clock_divider_out5"),
- 	DEV_CLK(392, 3, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
- 	DEV_CLK(395, 0, "usart_programmable_clock_divider_out8"),
-@@ -473,11 +616,36 @@ static const struct dev_clk soc_dev_clk_data[] = {
- 	DEV_CLK(398, 1, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
- 	DEV_CLK(398, 2, "postdiv3_16fft_main_1_hsdivout7_clk"),
- 	DEV_CLK(398, 3, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(398, 4, "usb0_serdes_refclk_mux_out0"),
-+	DEV_CLK(398, 5, "wiz16b8m4ct3_main_0_ip3_ln3_refclk"),
-+	DEV_CLK(398, 7, "usb0_serdes_rxclk_mux_out0"),
-+	DEV_CLK(398, 8, "wiz16b8m4ct3_main_0_ip3_ln3_rxclk"),
-+	DEV_CLK(398, 10, "usb0_serdes_rxfclk_mux_out0"),
-+	DEV_CLK(398, 11, "wiz16b8m4ct3_main_0_ip3_ln3_rxfclk"),
-+	DEV_CLK(398, 14, "usb0_serdes_txfclk_mux_out0"),
-+	DEV_CLK(398, 15, "wiz16b8m4ct3_main_0_ip3_ln3_txfclk"),
-+	DEV_CLK(398, 17, "usb0_serdes_txmclk_mux_out0"),
-+	DEV_CLK(398, 18, "wiz16b8m4ct3_main_0_ip3_ln3_txmclk"),
- 	DEV_CLK(398, 20, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
- 	DEV_CLK(398, 21, "usb0_refclk_sel_out0"),
- 	DEV_CLK(398, 22, "gluelogic_hfosc0_clkout"),
- 	DEV_CLK(398, 23, "board_0_hfosc1_clk_out"),
- 	DEV_CLK(398, 28, "board_0_tck_out"),
-+	DEV_CLK(404, 2, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(404, 3, "board_0_serdes0_refclk_n_out"),
-+	DEV_CLK(404, 4, "board_0_serdes0_refclk_p_out"),
-+	DEV_CLK(404, 5, "hsdiv4_16fft_main_3_hsdivout4_clk"),
-+	DEV_CLK(404, 6, "serdes0_core_refclk_out0"),
-+	DEV_CLK(404, 7, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(404, 8, "board_0_hfosc1_clk_out"),
-+	DEV_CLK(404, 9, "hsdiv4_16fft_main_3_hsdivout4_clk"),
-+	DEV_CLK(404, 10, "hsdiv4_16fft_main_2_hsdivout4_clk"),
-+	DEV_CLK(404, 39, "pcie_g3x4_128_main_1_pcie_lane0_txclk"),
-+	DEV_CLK(404, 45, "pcie_g3x4_128_main_1_pcie_lane1_txclk"),
-+	DEV_CLK(404, 51, "pcie_g3x4_128_main_1_pcie_lane2_txclk"),
-+	DEV_CLK(404, 57, "pcie_g3x4_128_main_1_pcie_lane3_txclk"),
-+	DEV_CLK(404, 81, "usb3p0ss_16ffc_main_0_pipe_txclk"),
-+	DEV_CLK(404, 129, "board_0_tck_out"),
- };
- 
- const struct ti_k3_clk_platdata j784s4_clk_platdata = {
-diff --git a/arch/arm/mach-k3/r5/j784s4/dev-data.c b/arch/arm/mach-k3/r5/j784s4/dev-data.c
-index 19901821225..19ac1986b20 100644
---- a/arch/arm/mach-k3/r5/j784s4/dev-data.c
-+++ b/arch/arm/mach-k3/r5/j784s4/dev-data.c
-@@ -21,10 +21,11 @@ static struct ti_pd soc_pd_list[] = {
- 	[1] = PSC_PD(3, &soc_psc_list[1], NULL),
- 	[2] = PSC_PD(0, &soc_psc_list[2], NULL),
- 	[3] = PSC_PD(1, &soc_psc_list[2], &soc_pd_list[2]),
--	[4] = PSC_PD(14, &soc_psc_list[2], NULL),
--	[5] = PSC_PD(15, &soc_psc_list[2], &soc_pd_list[4]),
--	[6] = PSC_PD(16, &soc_psc_list[2], &soc_pd_list[4]),
--	[7] = PSC_PD(38, &soc_psc_list[2], NULL),
-+	[4] = PSC_PD(5, &soc_psc_list[2], NULL),
-+	[5] = PSC_PD(14, &soc_psc_list[2], NULL),
-+	[6] = PSC_PD(15, &soc_psc_list[2], &soc_pd_list[5]),
-+	[7] = PSC_PD(16, &soc_psc_list[2], &soc_pd_list[5]),
-+	[8] = PSC_PD(38, &soc_psc_list[2], NULL),
- };
- 
- static struct ti_lpsc soc_lpsc_list[] = {
-@@ -44,13 +45,15 @@ static struct ti_lpsc soc_lpsc_list[] = {
- 	[13] = PSC_LPSC(20, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[5]),
- 	[14] = PSC_LPSC(23, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[5]),
- 	[15] = PSC_LPSC(25, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[5]),
--	[16] = PSC_LPSC(43, &soc_psc_list[2], &soc_pd_list[3], NULL),
--	[17] = PSC_LPSC(45, &soc_psc_list[2], &soc_pd_list[3], NULL),
--	[18] = PSC_LPSC(78, &soc_psc_list[2], &soc_pd_list[4], NULL),
--	[19] = PSC_LPSC(80, &soc_psc_list[2], &soc_pd_list[5], &soc_lpsc_list[18]),
--	[20] = PSC_LPSC(81, &soc_psc_list[2], &soc_pd_list[6], &soc_lpsc_list[18]),
--	[21] = PSC_LPSC(120, &soc_psc_list[2], &soc_pd_list[7], &soc_lpsc_list[22]),
--	[22] = PSC_LPSC(121, &soc_psc_list[2], &soc_pd_list[7], NULL),
-+	[16] = PSC_LPSC(29, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[5]),
-+	[17] = PSC_LPSC(43, &soc_psc_list[2], &soc_pd_list[3], NULL),
-+	[18] = PSC_LPSC(45, &soc_psc_list[2], &soc_pd_list[3], NULL),
-+	[19] = PSC_LPSC(64, &soc_psc_list[2], &soc_pd_list[4], NULL),
-+	[20] = PSC_LPSC(78, &soc_psc_list[2], &soc_pd_list[5], NULL),
-+	[21] = PSC_LPSC(80, &soc_psc_list[2], &soc_pd_list[6], &soc_lpsc_list[20]),
-+	[22] = PSC_LPSC(81, &soc_psc_list[2], &soc_pd_list[7], &soc_lpsc_list[20]),
-+	[23] = PSC_LPSC(120, &soc_psc_list[2], &soc_pd_list[8], &soc_lpsc_list[24]),
-+	[24] = PSC_LPSC(121, &soc_psc_list[2], &soc_pd_list[8], NULL),
- };
- 
- static struct ti_dev soc_dev_list[] = {
-@@ -78,14 +81,16 @@ static struct ti_dev soc_dev_list[] = {
- 	PSC_DEV(398, &soc_lpsc_list[13]),
- 	PSC_DEV(141, &soc_lpsc_list[14]),
- 	PSC_DEV(140, &soc_lpsc_list[15]),
--	PSC_DEV(146, &soc_lpsc_list[16]),
--	PSC_DEV(392, &soc_lpsc_list[17]),
--	PSC_DEV(395, &soc_lpsc_list[17]),
--	PSC_DEV(198, &soc_lpsc_list[18]),
--	PSC_DEV(202, &soc_lpsc_list[19]),
--	PSC_DEV(203, &soc_lpsc_list[20]),
--	PSC_DEV(133, &soc_lpsc_list[21]),
--	PSC_DEV(193, &soc_lpsc_list[22]),
-+	PSC_DEV(333, &soc_lpsc_list[16]),
-+	PSC_DEV(146, &soc_lpsc_list[17]),
-+	PSC_DEV(392, &soc_lpsc_list[18]),
-+	PSC_DEV(395, &soc_lpsc_list[18]),
-+	PSC_DEV(404, &soc_lpsc_list[19]),
-+	PSC_DEV(198, &soc_lpsc_list[20]),
-+	PSC_DEV(202, &soc_lpsc_list[21]),
-+	PSC_DEV(203, &soc_lpsc_list[22]),
-+	PSC_DEV(133, &soc_lpsc_list[23]),
-+	PSC_DEV(193, &soc_lpsc_list[24]),
- };
- 
- const struct ti_k3_pd_platdata j784s4_pd_platdata = {
++config SPL_PHY_J721E_WIZ
++	bool "TI J721E WIZ (SERDES Wrapper) support"
++	depends on ARCH_K3
++	help
++	  This option enables support for WIZ module present in TI's J721E
++	  SoC at SPL stage. WIZ is a serdes wrapper used to configure some
++	  of the input signals to the SERDES (Sierra/Torrent). This driver
++	  configures three clock selects (pll0, pll1, dig) and resets for
++	  each of the lanes.
 -- 
 2.34.1
 
