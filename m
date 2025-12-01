@@ -4,58 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC6ED116F3
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:23:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF847D116F1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:36:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5FAD83CB9;
-	Mon,  1 Dec 2025 18:23:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1B1F283C72;
+	Mon,  1 Dec 2025 18:36:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LY14ZLM5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b4MqVAOs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC16183CC7; Mon,  1 Dec 2025 18:23:23 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E27A983C93; Mon,  1 Dec 2025 18:36:24 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFBFE83C01
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:23:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id E2C7A60152;
- Mon,  1 Dec 2025 17:23:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70F1EC4CEF1;
- Mon,  1 Dec 2025 17:23:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764609799;
- bh=N6TRaT8Wmx5N8jznkmk2QbmDnzTxxbIrKykbdJPV/pw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LY14ZLM5E8As2sEitE450qAGHpUwzpHWHHyeiPlXxvghDo+5AasdjuMZSpwCuyzba
- SIbE0NW3XXWCKK65ePvDTLo7IIcZSivyaoqgXD+zq8SqTTucMnc68Ig15ktUXsDRLU
- ZZRJkSUW6uhuD67IjqDJqaB56TF/BKH1s3uAWuKpVQVHXmf8lCv4lGw8stcC6cQcpu
- gZ+FLzTX8vG5Az8LuKMYlBZ7iOy3K0rM5z/TN7SWJn2PVb5DV4oRB1feRmIHIGiAi6
- pOiymGIORAhLXOxP3WgIFwFF00x6dTRp/IGt5x2JHIsz46pRPv058t/LKcjnuJcHJZ
- 0n4uoFjI9S25w==
-Date: Mon, 1 Dec 2025 11:23:17 -0600
-From: Rob Herring <robh@kernel.org>
-To: Quentin Schulz <foss+dt@0leil.net>
-Cc: Ahmad Fatoum <a.fatoum@pengutronix.de>,
- Heiko Stuebner <heiko@sntech.de>, Simon Glass <sjg@chromium.org>,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Daniel Golle <daniel@makrotopia.org>,
- devicetree-spec@vger.kernel.org, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v2] Add 'bootsource' /chosen property
-Message-ID: <20251201172317.GA3694867-robh@kernel.org>
-References: <20250505-bootsource-v2-1-5a315d9bff26@cherry.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 8D70B83C6C
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:36:22 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-78ab03c30ceso39166727b3.2
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:36:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1764610581; x=1765215381; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LSIkJZzxgEP92IWCSvdhNj/A091Zgf2r2Udqgo6Sx9w=;
+ b=b4MqVAOs5prvAPXWDSGmpY5RU78kndm+xWz+2IHpt1NYtkLDByaOCXdxWiQh49naUz
+ kJI5MY6dEG6cvBw5Wj8oG+vMDecxz1MSsa7d+PQLigVtfBensrzT5sDFNua6DQMrTUBM
+ uFKRJXHWVxEQ+eCMaQiZW3nfm7xtacxJPSqz6tTqU2duPdbC6SjY7sAMuU/cAu2FeUh8
+ Q/tDbuFKj0na7ZFUN5iNNRMeFx4jhsl/0VVmzosaAfLmrFnTYK9pWD4vtn7B2HSduG/v
+ sUf8D8uiE9Iw1+dQLbS1GYJGrSm5cZiVIb5l6/I2PtZHKvzPmtw19cI5U9qXIaTAa3uR
+ x4Dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764610581; x=1765215381;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LSIkJZzxgEP92IWCSvdhNj/A091Zgf2r2Udqgo6Sx9w=;
+ b=RomZ1xnvlgzWLiXiR7LtLHg+bLyycQh49m8ZpiGnHSe0DrA6uTcSuuLvgoT0T4CDlF
+ 3/pVewncReJFoszuIoo+OvsWHccc8qOjJ9MtZzRMGaHPjnNO0UzP1JVSEnSU5kSNzFnP
+ 9gcAScr5aNwXjEl2+Et8Yzg7nub9WqbLbAkl5AEnD2ibdiw2uQffFcqkR9DF1K9vV8k6
+ bxu5xIIRh5PUx1V+QZXLPM2waAApmUCW63R0es6YYMInnpz7aWDPOtXm6KRxfRbcMMI6
+ QTzRJqq+G9bHuPdg+ij2hKQmf+5VTZFLvv9SKH2tmxQt9vKTYGEujY6cuLMzw1kNfSz+
+ eKUw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXeg+4bj3u0OWZ5h0bpGBU/PVEV6eR/4c6GBKbzifiCCq66CghtsoYKcH8a5K0WEXQPh0Wujyc=@lists.denx.de
+X-Gm-Message-State: AOJu0YywODacVuwXO3NlI9vcw2olHDiAEJYydrZLuMrTtwvBKxu531Mx
+ 2Mm8FU/ZDJtimCCP6pC+wlb6AUv3qqoVgJDqGPkbEWKMc8kZamRNMj7Khua7OUVoRrfUaUYTL89
+ tfLzU5pkQNnl0cA+awIUQTIDvJhzP0Xb5v1RUBAbA9TO1T7jWDuqIJ/NjMQ==
+X-Gm-Gg: ASbGncttzwTViziGgk9wHqXgt6s2xAH8U1z7Cxa2vB0IIzC+yFzmULOg5/M7MjNxoWi
+ i0DMFDdlge/WzxrtkeKmdErZnFKbAs+Eiby5UrlKs+fkY42kMSYFq9viVKtTiCZMY6irYmeY2nj
+ RM9GUQubqUQBhBLYPzxWEvBBPPow029LtN0VPdCrHKPSx28BYiS/C8TxevAHu1bs1t2EojfIEr1
+ UJAykKsAEAnIB0eXodhdpPXNB+KOpklmPGo+a6IAdzEL+j/CIyE43GiXQdGb3TqKHFOfJckAEDQ
+ 6P9cRMqnSLy7nZoBZhN32Sg30lRWeZq7Dkcz3RySBIsBxiwrFKrT+scp1jjWMQs/1oEzy5WAbs2
+ psHpGlg==
+X-Google-Smtp-Source: AGHT+IEz537YdkO5m8/Tkfaq0AAG3vkJpiiObUXvdp4swlEnSrFqgTb2+5bpFGC7ttWVoM6N3wWA+Yzm2cUfFaeZ2qc=
+X-Received: by 2002:a05:690c:2781:b0:787:e9bc:fa1f with SMTP id
+ 00721157ae682-78a8b54d8cemr326146677b3.46.1764610581093; Mon, 01 Dec 2025
+ 09:36:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250505-bootsource-v2-1-5a315d9bff26@cherry.de>
+References: <20251201151724.338924-1-zfsdt@canonical.com>
+In-Reply-To: <20251201151724.338924-1-zfsdt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 1 Dec 2025 19:35:44 +0200
+X-Gm-Features: AWmQ_bnL4gCybx1l5JcPUan3emjT7p77YqUMKKix9N2ge3rN_wIQEh9SNgSpqWs
+Message-ID: <CAC_iWjK4Hqgzt==CTZRGvJ50teFe3SJkiuyCUidkV5Sdz1DBgA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] cmd: lwip/wget: avoid NULL dereference in
+ _set_cacert()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Michael Walle <mwalle@kernel.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,79 +96,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, May 05, 2025 at 05:34:22PM +0200, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> Bootloaders typically can be loaded from different storage media, such
-> as eMMC, SD card, SPI flash, EEPROM, but also from non-persistent media
-> such as USB (via proprietary protocols loading directly into SRAM, or
-> fastboot, DFU, etc..), JTAG, ...
-> 
-> This information is usually reported by the SoC-ROM via some proprietary
-> mechanism (some specific address in registers/DRAM for example).
-> 
-> It would be useful to know which medium was used to load the first stage
-> of the bootloader. SoC-ROM shall be ignored and not reported in this
-> property.
-> 
-> This can allow client programs to detect which medium to write to when
-> updating the boot program, or detect if fallback mechanisms to
-> unexpected medium were used to reach the client program's execution.
-> 
-> In cases where a boot program is split into multiple stages (like
-> U-Boot), it only represents the device that was used to load the very
-> first stage (in case of U-Boot, VPL/TPL/SPL whichever is executed first)
-> and not any of the later stages (in case of U-Boot, TPL/SPL/proper) or
-> any client program. They may match, but they may not and this property
-> is meant to only represent the device used for loading the very first
-> stage.
-> 
-> I have a board running U-Boot which currently has 9 boot scenarios
-> (eMMC/SD/SPI-NOR for the first stage, eMMC/SD/SPI-NOR for the next
-> stages; not counting USB loading yet, which would make it a few more). I
-> cannot force the BootROM of this board to select a specific device aside
-> from erasing the other media.
-> The only way to identify which device was used for the first stage is to
-> parse U-Boot first stage console output or add some custom logic for my
-> board. To validate that a new version of the bootloader works, including
-> the fallback mechanisms, I need to make sure the BootROM loads the first
-> stage from the expected device otherwise I may have false positives.
-> This would be useful for automated testing.
-> 
-> I could also very well see this being used to identify where the first
-> stage of the boot program is stored (which may differ from where the
-> later stages are! that's the case for U-Boot proper for example!) to be
-> able to update it from a client program.
-> 
-> Note that Barebox has been using this property for a while already, with
-> this very content[1].
-> 
-> This is chosen as a string so that it matches other properties in
-> /chosen (e.g. stdout-path) as well as allows for extending it, in case
-> one needs to provide additional information (e.g. HW boot partition for
-> eMMC, a specific disk on an AHCI controller, a specific USB device on
-> a USB bus, etc.).
-> 
-> [1] https://lore.kernel.org/u-boot/0066fcc2-3431-48be-8dc2-00ea7e2550c2@pengutronix.de/
-> 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> Note that this property is already set by Barebox and I'm planning on
-> adding it to U-Boot as well, specifically for Rockchip SoCs.
-> 
-> I have some doubts about the wording, especially in the case of
-> hypervisors or chained boot programs. I'm not entirely sure what would
-> make the most sense to put in the property for those scenario.
-> ---
-> Changes in v2:
-> - added usecases, non-usecases and increased verbosity of the definition
->   of the property name as requested by Simon,
-> - Link to v1: https://lore.kernel.org/r/20250205-bootsource-v1-1-95f4ba69ac27@cherry.de
-> ---
->  source/chapter3-devicenodes.rst | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
+On Mon, 1 Dec 2025 at 17:18, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>
+> Running `wget cacert builtin` leads to a crash in _set_cacert():
+>
+>     Unhandled exception: Load access fault
+>
+> Function _set_cacert() dereferences variable wget_info.
+> We must initialize it before executing the cacert sub-command.
+>
+> Fixes: d3761a31ef09 ("lwip: split net/lwip/wget.c")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Applied, thanks.
-
-Rob
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  cmd/lwip/wget.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/cmd/lwip/wget.c b/cmd/lwip/wget.c
+> index fc9bc11cd83..4883ad61bce 100644
+> --- a/cmd/lwip/wget.c
+> +++ b/cmd/lwip/wget.c
+> @@ -180,6 +180,8 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+>         ulong dst_addr;
+>         char nurl[1024];
+>
+> +       wget_info = &default_wget_info;
+> +
+>  #if CONFIG_IS_ENABLED(WGET_CACERT)
+>         if (argc == 4 && !strncmp(argv[1], "cacert", strlen("cacert")))
+>                 return set_cacert(argv[2], argv[3]);
+> @@ -214,7 +216,6 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+>         if (parse_legacy_arg(url, nurl, sizeof(nurl)))
+>                 return CMD_RET_FAILURE;
+>
+> -       wget_info = &default_wget_info;
+>         if (wget_do_request(dst_addr, nurl))
+>                 return CMD_RET_FAILURE;
+>
+> --
+> 2.51.0
+>
