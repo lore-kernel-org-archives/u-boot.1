@@ -4,146 +4,180 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88671D111A8
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 11:03:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F34D6D116F1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 11:05:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B43E683B9B;
-	Mon,  1 Dec 2025 12:02:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A6F283AA4;
+	Mon,  1 Dec 2025 12:05:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kWl3cPgo";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="mvSKJIpG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA5A883BFE; Mon,  1 Dec 2025 12:02:14 +0100 (CET)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
+ id EA7D083BD2; Mon,  1 Dec 2025 12:05:11 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8067883B85
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 12:02:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 69F8283942
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 12:05:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=E3SNLrwFUkzfdNSgKu7ms8tfnc8m+6FpKOe+/rlh1nSSXojO4/3YfOWFQ62wx4eF/T2MjCq78rYMzL3d8eOkxFoxpdwlfSDjBcbEJYa9+vSaUGIXMyD1av/4nlc76Jo0nn0wCg4lNPAMYkzLuGbSCaULDY4/jegc61s38TdR7tPviQdWwCBX3+D6QZDYv6zOChc5bZzzYS38VsnQIieiIyi8cSWRFRP/HJI0iLGR9QlLDDqNPdfW2R7LNkBc78CrEHNpYwIe1DhiLgt04rzU9nE2zNUKp6lNSZZb38Mf48U3B2lgGt/lLus6nzliboFPPVTtuLV5uDUUtTlFs7Eiyw==
+ b=h/39vb/euirkFIZpsnbg3ax7GV42/Sp3j8TYd1xFFQa8re9dnK3YebAao5frdXFeLlpRpzjtGag5783HlLeo4oXDuyuXrx/Hn0sL/8SHTx7JXN7QBCO/6ovnG/4T/jo3a40h2ik+aebWNDBRzOqEF82Y4Uvih2z1DmqBwIoRRIi6yElwqrkDoJHFN0MoaSenZBa3/MwZUbPZjWJWyquvoutpHio9MOcE/58GCmVO5kohC3yetF7d3/tdg7OqGT20oXWwVbMxrriUbZ9Qem25eFqMb0c2JxzfOPskPThZSjN8XG1xroirI8sK0YyepaXoBC4zGpI20WvLaYsp36Xbew==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=U4Nrk6hEDt3fh+Co+JWta5r9UnhzEI1+KX4gp29Hj/g=;
- b=YMy10Vr+fqLya4INsxYcT1dQ2HTcFOGvrlM3DRqNgZB4lewZczngYfa4iobxzNBdYUwicXxU8v2BowcQxAPwYe1DJPdoXdeTbNhK6c4ONB7U6H7ovoKuYMNt7Rn9dGqS4VQcdmS0I17PCTZXLwzV+Zai2l5oXVbkBhrigRJHJvVKdoh6rt5vw7+JFdsrXSA0dJL7/mS1oXZUp/1Lpa7paO6IvV45jXYE3YCnWd1R1nTOn0ZUUKSMwe20HmUd6VXKWcz+66TrK3TOdbTncnrGT0q4FVM4wmdrM3HMlfhidd0DK0bUOaug1QznEXu8y2o8jDUwTFW30dsMz4RR3kaDtQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=AfiJFd83aF2ouvM1NLa+TO8pWgdjJZDHXmuBlfDWVsM=;
+ b=WiOqfAM7KAUkiFApYn5kScWAmuUKOgsvmVfUH1jEMaXjNZdV7Q0CAvbdDr4J+7VzeH6U3GZiHRIngJNcuK3uMrZQyKPjLQTqVi78+j6gSvGQZ7IIqumh78fOTVLlSknPlD0IjEL3ouNAZh0tYV3OCQtppzwFJTQQmAa8343bFvwG44WBHZA4F1JGxW8gWKfQsKOkZ9gRT61yc8M4UTcvd6VYCnYTrJb2fyXsV7IP+iNfhsoM0HniDU3RVbWzJ5Ahg1K262hz0Ydc0QixhuOxm7YXgXHtnkATG7jQteP8IYn0U7QMCSowKj179eV5Dq0PNPaJ/9u1ulVoc9S7NvMkuQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U4Nrk6hEDt3fh+Co+JWta5r9UnhzEI1+KX4gp29Hj/g=;
- b=kWl3cPgoVjz4AnVNX0l2/3bbfKk561Vq9pBacB+4ZD06S0vCxiEyLxp9r8YoRwTPip+P9+Y+8DbcviHCGmG6wSHG8W/aIGnfvXyqR7B+GxzHiyTdGaBGtWeGY+kf/80SEhJ44rvJCxoaE+vvllh6Yg9c+iBzubCynSfAkL/ItZ8=
-Received: from CH0P221CA0027.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:11d::8)
- by SJ0PR10MB6325.namprd10.prod.outlook.com (2603:10b6:a03:44a::19) with
+ bh=AfiJFd83aF2ouvM1NLa+TO8pWgdjJZDHXmuBlfDWVsM=;
+ b=mvSKJIpG4UyBpyKi2Y7YqamU9yEHSVXNQEsSqPR+B+CVQUFkiY6pyTVEGV7sgYdxxLg7+9jPHlZ+EZ1kCHKWJVlklZAC+K5OcsDsGM3t/4lfWws1RiljKlmO2eiXvrLuTJhfolg4K0UjJX9xhwDoUOXqHt7S1ceSTfrJp4b98DZ+LT9hjYwZS7gL98dM/3uZiEPga7ZAOlMR42EEiKhdONkB6yc0/PVJO/vQmGoXj2Xjul0BYnzmtpabXwYpEBUk88hpHABN/LyQ01ad8e1n+0Ohn+pMVR3BbAfOzH+cgkCHI+z7u0N3+eLvwBSwPTP+veDl/kOVtkKKl4J66LfEFQ==
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by DB8PR04MB6970.eurprd04.prod.outlook.com (2603:10a6:10:fa::17) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.15; Mon, 1 Dec
- 2025 11:01:57 +0000
-Received: from DS3PEPF0000C37E.namprd04.prod.outlook.com
- (2603:10b6:610:11d:cafe::55) by CH0P221CA0027.outlook.office365.com
- (2603:10b6:610:11d::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Mon,
- 1 Dec 2025 11:01:50 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- DS3PEPF0000C37E.mail.protection.outlook.com (10.167.23.8) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Mon, 1 Dec 2025 11:01:56 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 05:01:55 -0600
-Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 05:01:55 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 1 Dec 2025 05:01:55 -0600
-Received: from hp-z2-tower.dhcp.ti.com (hp-z2-tower.dhcp.ti.com
- [172.24.231.157])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B1B14qh306512;
- Mon, 1 Dec 2025 05:01:50 -0600
-From: Hrushikesh Salunke <h-salunke@ti.com>
-To: <trini@konsulko.com>, <a-nandan@ti.com>, <m-chawdhry@ti.com>,
- <c-vankar@ti.com>, <u-kumar1@ti.com>, <j-keerthy@ti.com>,
- <marek.vasut+renesas@mailbox.org>, <n-francis@ti.com>, <jm@ti.com>,
- <anshuld@ti.com>, <s-vadapalli@ti.com>, <ahalaney@redhat.com>,
- <semen.protsenko@linaro.org>, <mkorpershoek@kernel.org>
-CC: <u-boot@lists.denx.de>, <h-salunke@ti.com>, <danishanwar@ti.com>
-Subject: [PATCH v4 10/10] docs: board: ti: j784s4_evm: Add PCIe boot
- documentation
-Date: Mon, 1 Dec 2025 16:31:03 +0530
-Message-ID: <20251201110103.845413-11-h-salunke@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20251201110103.845413-1-h-salunke@ti.com>
-References: <20251201110103.845413-1-h-salunke@ti.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF0000C37E:EE_|SJ0PR10MB6325:EE_
-X-MS-Office365-Filtering-Correlation-Id: d6ff7dbc-3c2c-45bc-972d-08de30c90ae9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?UK/53O408mQ5ZYukgEV9qsbALmvUtXqLKLP/+HLMrgSEQVw4nN4FuIEX6Wdz?=
- =?us-ascii?Q?9f1GH/3tHBVxDhhXIGhU9czz3LTB0UC/4Kj7ZoGRxdHVG0ZYf7e+WWCivXvJ?=
- =?us-ascii?Q?40cSVoG0ZrWyxsAPs8KV2xqkZ+EWzotft295aQc5rEcq/s3AVGXXZB7ubpB3?=
- =?us-ascii?Q?/Ne3LoIBBDy6cwJ3GeJfj9UHw6AD4j1cv6PEGpuB9oVnPi6tmaHm0tl8nDrk?=
- =?us-ascii?Q?xkZ3cX5fsCDY/F6lGa0n2Ecmwx+fmKeCxyoC45v1jAu4tYI9+mucGRTzY3LY?=
- =?us-ascii?Q?hQQuCpoopKeTX/rI7/hyYY0SeEjrrLAYWXIE8kDzWsqDq8vYvZE4WvPJvDtc?=
- =?us-ascii?Q?d/+5eGV2AtjJQNqh2VpDob8q44cVy0bvYAoF3EDR+vAkrQVuQDUw/pOtf2pd?=
- =?us-ascii?Q?OY69Uf5MUgXN7xNog2+7H5OTxPjVB6igmdzrD3kAWjiuWY+Uabu8sDu18TRQ?=
- =?us-ascii?Q?h95Fo3a1eFm8y2DFxXVA2MzozlFxk1GALvrG6+jLK6c3b0uGl9GaoQaolnbU?=
- =?us-ascii?Q?jt1FWTzsypcVx1xsIjDyCG7JCWAMm8aHGZAkFjLkSTHx6IbXZy34+aoytVdN?=
- =?us-ascii?Q?jua78AGhHOFzO7Gvz6O/juDOowAlhnGQhtRC9/8pEprFmzEw7Oqb5fqpFbJh?=
- =?us-ascii?Q?uHa7KRA+RrHlv7Y55H57o5iehgyQrPH3i7FosgjOKr6eRki5EXVzENdevUVw?=
- =?us-ascii?Q?sVm0v1jLkCrCEAgJrO3VMtcQu+8bRbxIydxrKsO+N6+iGA+nUQRqRusaoAYD?=
- =?us-ascii?Q?QvJKyYIqJgfnB9aP0J+Wh/6irclPTyPG2hiN788xxVKNRHO7nOy+mhaYbFvR?=
- =?us-ascii?Q?x8V52WL9xpxq+O7P8mvDLwYHA1kS6FoPEiBwYHPYy6eGYgdsZRzvCGArP1av?=
- =?us-ascii?Q?XBTA2GLz12hahl2KfqyrVwr9sqxqgGpRHyCVCFgDz5mu1K6Mzo8Tm8XEIB0O?=
- =?us-ascii?Q?V7mQUMJXWXMqFD44R3OXVDNz8CllSDqMrVboUhbj68IJlIw1tL0wuP7Her7q?=
- =?us-ascii?Q?ljTqYbaFTwAOKnirXCsVbfy1U4xNzIrMnEY9CGS6DYdbCRz+XpjoVJ+nT4Jm?=
- =?us-ascii?Q?lEY4/8VVjCMycHIxFFdamC/3TljfFJPS/SAUuBLqA3N9BVYs/A/N3Bnrr1Wo?=
- =?us-ascii?Q?eLjVVyz6hfqNe1cHH7UAQHxO+ynS6V0YQ4+7AX5nwYqrQ2JGvqdY5pZhioLE?=
- =?us-ascii?Q?lYcqCIgERmUo8eytRzaiBW5wKYaBw53fRT4llmDV73FAT5IS6YgQ5HRqnuD4?=
- =?us-ascii?Q?0iyhFZxEHYT2Hm0VCtqoOfeFRNn7lNLQ9JXhz/MZ1PLJjZ8isIMcpnlc6jf2?=
- =?us-ascii?Q?gnV4y4ysEiVT5jSzl/l/aWaXpn6mJ8uSmI425ojuFtvJzDrLKCJZrSY8Je1U?=
- =?us-ascii?Q?T9IErHycKGTMg0g68KX44ZCnVd0qJgCeG3c+LqS8TtoYfCzZzkLluvxt6uhJ?=
- =?us-ascii?Q?yVD/1vFCGhxamiHUvU7sZMKpLFPWGVage3mwyY7d0auKaMccqGVZM0nMyvpK?=
- =?us-ascii?Q?bYvYap2UVRO+5QFYs7eWFHrzi9w5dFbzv44Lt/6b1RkTaJiC1Q2i65NxwmJy?=
- =?us-ascii?Q?aiELaTO6q4LATLq/8NlCDf7l1n49hn+j4pMQNgix?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014)(921020);
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
+ 2025 11:05:05 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9366.012; Mon, 1 Dec 2025
+ 11:05:05 +0000
+From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+To: Fabio Estevam <festevam@gmail.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, dl-uboot-imx
+ <uboot-imx@nxp.com>, Marek Vasut <marex@denx.de>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, Ye Li
+ <ye.li@nxp.com>, "tharvey@gateworks.com" <tharvey@gateworks.com>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Stefano Babic <sbabic@nabladev.com>, Peng Fan
+ <peng.fan@nxp.com>, Lukasz Majewski <lukma@denx.de>, Simon Glass
+ <sjg@chromium.org>, David Zang <davidzangcs@gmail.com>, Alice Guo
+ <alice.guo@nxp.com>
+Subject: =?utf-8?B?5Zue5aSNOiBbUEFUQ0ggdjEgNC80XSBpbXg4dWxwOiBkc3Q6IEVuYWJsZSBV?=
+ =?utf-8?Q?SB_controller_at_0x29920000_in_host_mode?=
+Thread-Topic: [PATCH v1 4/4] imx8ulp: dst: Enable USB controller at 0x29920000
+ in host mode
+Thread-Index: AQHcYrJYFWjKIGzyfUGR4Xxfl6TFzQ==
+Date: Mon, 1 Dec 2025 11:05:05 +0000
+Message-ID: <PAXPR04MB96447CF4C79D53663C3F298FE2DBA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+References: <20251128-usb2-v1-0-25ec5ac127ff@nxp.com>
+ <20251128-usb2-v1-4-25ec5ac127ff@nxp.com>
+ <CAOMZO5DisnpWRxfzwp0F7VOMPBLb+nmYE5vdCHADCe5VbP3Ejw@mail.gmail.com>
+In-Reply-To: <CAOMZO5DisnpWRxfzwp0F7VOMPBLb+nmYE5vdCHADCe5VbP3Ejw@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB9644:EE_|DB8PR04MB6970:EE_
+x-ms-office365-filtering-correlation-id: d6b3a7ff-807f-442a-6474-08de30c97b8d
+x-ms-exchange-sharedmailbox-routingagent-processed: True
+x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|19092799006|7416014|376014|366016|38070700021; 
+x-microsoft-antispam-message-info: =?utf-8?B?dzhEVHZzaHpOU1RvcDBTUStYSDRvNlViU0UvdEd6QVFMRGRHNyt6ZXdPMDNz?=
+ =?utf-8?B?bVNtcVJxd2twK1hnT1lLQ3pvQ2hWcmJ4aEtpK3dEYWJlK3pCeXp0SkQyZXdj?=
+ =?utf-8?B?N0R0anJSOXVKbmt3SCtyVCtRMkllNlh6S0RBb3F0UTVHems4S09yZXM2clQz?=
+ =?utf-8?B?eENLQXZseHFDakFDbnUvMWY5N0VRbURrVWtTVGM2UUdQU2dSd3V3NEZGT2ho?=
+ =?utf-8?B?NHg3TThjWm1wSFZKRG1TWStLcG9NNm0vMzVxVFY1ZHZ6UWZXcGJUZjFEUTJk?=
+ =?utf-8?B?b05GRTJvWENxZjlSZHVNQ2YzVFhzRURCVFpBMHEvai81dkJJbEMvNXFVOGFp?=
+ =?utf-8?B?RTl0SERSRndIaTFLa0xUcW1FaHg2TnVUODVOWUlMbmZxVUtzNklyc1FDQk43?=
+ =?utf-8?B?Y2UvbWFKZEhOZEVMQi81ckUyb1dSSkFaaStEQndxY2FBNXhqREtkRzZoKzAw?=
+ =?utf-8?B?RnJBWHJYVUNib0QydXIyMm9YaEQvYzJzVzRkU0NySXJ0QmJNek1QSnNBaDVK?=
+ =?utf-8?B?MnVGelg0YUUxeEQxdWlHd3MrTGs1akpJK1I2Rzl2a1ZtL1NzRkhlbkEvSWZl?=
+ =?utf-8?B?WDR2VURWTFd4R3VIRWZ4NzQvK2RERUNZT1BvS1JLSEtrd2lLMTVCZEl4dVdm?=
+ =?utf-8?B?UkEwYUE2RlV2NkJNTjBaUksyMkgxRU9tbFlyRG16VlFBL3NxTVc4eEJDUXEz?=
+ =?utf-8?B?c0dKZ01WbDNRV0JCYjdIOWpTMTV4N1FjbHFDR1NHaUxwZ1d3NG9ILzRrU1Fq?=
+ =?utf-8?B?Vm55THZxZ1lMZFJjZlQxZkhhYitPODdrMjFmTDFCRUMrYU9pWDZMUFg4TTRX?=
+ =?utf-8?B?aklNQlFadW5OMTBPemNqUHgwMzUzNXVDUmlERmVzTUlnMHFvM3NuRnFkRGxQ?=
+ =?utf-8?B?L3pBbERYYkptRDl2YWNySWNpWmY2bS9uTW90SGFTSHA0cEZTRVN2YXl5WHVF?=
+ =?utf-8?B?TFVQdUxmeU45ZFhWQ1ZWMVBBNkUvaTF5Skk3QlVWN2V3SkRGaVdzOUMwZTc5?=
+ =?utf-8?B?L3QvOHJMdTZZYmdQUG41VUhVT3Nud1FUM0x2dEM0Ui9MRjFHdnVyVnVnbHZu?=
+ =?utf-8?B?VVB5L0FXZDhCNE1xa2dzTVJmVVdMZXlrUHdpU2hNSmRvU3IyYStjZ1l1SmNW?=
+ =?utf-8?B?YURGMWhNb2NOUU5JK0tIa1EycG14WWI5YmxVSllpdEhwM3JuUy8rWTBNdzlj?=
+ =?utf-8?B?V0VvOVRlaEt3N3dqQXBhcmJFWm1DUTBIYklVcjMrYjY1TkdmTjc1RzNkUjlY?=
+ =?utf-8?B?bUswSE9XbmgwWmRWSUFxUEZTRjlwTXB3QWMyOTM4T3p1dXlXTU1acktGbXgv?=
+ =?utf-8?B?STA4NUp6RUM3b0V6UEtvbVVNbHNiQVdqdTN2L3VnTXR6WVBBdWNMcHNYNDdG?=
+ =?utf-8?B?b0k4cUUxTjhpeFhkZHNueDErR3dVOTFYVWZjY25zVmJqQWV4Q0lQNUVGdnFn?=
+ =?utf-8?B?dXhSdnNGL1VOMExYaklDcFVuRmF5NDRDWU9aVFdNSGt0bWhlZytObXFObng3?=
+ =?utf-8?B?bGZVdGJXbGU4UTVkcUhLMFZnd3luTForSjcwYzBzMG5ITzlPUE1UVDJlTHRp?=
+ =?utf-8?B?NFBzbEpvL0NHNklVSHJXQnlTVElsZDRuNmt1alhHSXU3N2xJK05WSVlMYkU4?=
+ =?utf-8?B?MnlXSUszZmM2QWtkVmlJdktPTDlha3pGUGVjWk5NV2R0cUhDeXVzczRWQ2NY?=
+ =?utf-8?B?Mkx3YzJDcVozcGx3UE9TUmlMNHNBNlppeWxTTFRraUt2eWNSK2NUR0ZETUpI?=
+ =?utf-8?B?S0xWRTFOZWJveEpZcUI4elZEc0JaeEJGbS9NVXhyQVplMy9wYk5QcG5EZkFq?=
+ =?utf-8?B?aVg5dlkzVHh2OGNjaGl5M1hoOUV4aGlmYjFSR3pWZU11Z2tlVzZnYnkybHg4?=
+ =?utf-8?B?UkwrRTVvNGE5SVdXQzArMTFTZ2FCZFpHalBWdVFKc2xaWGJGdFBHRmduY3Mr?=
+ =?utf-8?B?RGtOendXNjNoSlMvR0R2a2N1SUliK0hranpKQit5VTlOY00xRWIxaWxDTjl5?=
+ =?utf-8?B?eGozVFRWOHBnPT0=?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
+ SRV:; IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(19092799006)(7416014)(376014)(366016)(38070700021);
  DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 11:01:56.2281 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d6ff7dbc-3c2c-45bc-972d-08de30c90ae9
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF0000C37E.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB6325
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UzU1d3lndHg0TERTRzZjSXFpTURVdW5qU04xYU9jT2x6M3RwUnpGOXlxYk82?=
+ =?utf-8?B?VGpxd3drY3dLVFZndE91VGU0THZod3hrbm8xQkV0S0VReTF1cTNPUXVTMTgx?=
+ =?utf-8?B?UE10czV3cm9HY2NFMUxPMzFER3FZTTIxa0ttSWdlNkJWRkx3NXB2Q2wyK2xt?=
+ =?utf-8?B?SEJ3VW0ra0xxVk15TVNpWEdNVnB3UDN2cXBUMUdpWStvbzhFcmdCbFhVS1g1?=
+ =?utf-8?B?ODBjUEdKN2IxQUJ5VG8xcVEzelVmODE1M2kzVTdBNjZBK3gwTzNjWXR6RFFk?=
+ =?utf-8?B?RkpsWDM2MExBUnNYZWhOT0pVWjZxVTZMQlVDWitnQ3pTVmI4Y1hPM1IzNWNM?=
+ =?utf-8?B?cU83d1ZYZFdoUHpjY1pnajRDdDFrU3hSS1V0UVZGZlZwOXZ1L2J2ZXRmT1h2?=
+ =?utf-8?B?NVhKd0ZQSDdjYTk4V0gvRFcxay9tL3F6WDlOYWdJeGtlKzlHMW9RS3g4WmRR?=
+ =?utf-8?B?OGZsV29aZUlZdVprYVNMejZYR0JkWi9wMHdYVEZNeWg0bEZRQ2Q3d1o5a0pJ?=
+ =?utf-8?B?bFZ1ZGJkK0dWdUlraVFPMzJxT2Z3cGNkZGlNbi9ZMlBjbkNsT2FiU3NwODRj?=
+ =?utf-8?B?UEFmeGw0L1FndWNqempUYUxzZVFobEVjQkpSNE9weW9OWHpNTFNPTGJ3aUxZ?=
+ =?utf-8?B?TWVJQ1ZNbDkvRWM4c1ZSZjhkSUw5d3J1TFpTbWtIQXRaaWRJblQ5RVk4MTNq?=
+ =?utf-8?B?QVVjOUM1WitGUDZUdkplZlkvajFSOXF2VHZzQlVCNW1lb3FjOEk4eDZrYlpx?=
+ =?utf-8?B?enJncDh4UkFNYXg0c2lKaTIrcjdVa3Q2aXZVUUlBNjBJM0paNTdJQnhkVEY0?=
+ =?utf-8?B?aUNtSks4MlljVmJXWlVhVlVvTmxQbUthRDFGeXFQS08zckJDd2pGVkFmQ0ZW?=
+ =?utf-8?B?U1plNEY3TGZ0UzU5R2tOY2RVUHdOZVlBSmdjaDB3TUJjL2pXQlo2emV2MjZU?=
+ =?utf-8?B?bk1wTm54Syt0cTNNdWRFYk9CQmczLzRad2ZMa0lUYnNzcGRlaDZmNHEzWGVk?=
+ =?utf-8?B?WVJ4TmUrWmQyQjFwbVNYS01adTRTMno0NFo2WDA4Zkg3TzB5S0l6eWxYV2tm?=
+ =?utf-8?B?eHBGdW1QNmJLRjFYM2VzSURySWRMN0xBTithQlhMc1pKR1VHdzFTSFdNazkz?=
+ =?utf-8?B?NGhuTkxjcDJQaSszaDN4T1JRZHRBWWUyWStMOHFJVkpCSVJsaTB3TkNURW03?=
+ =?utf-8?B?a3pEcllBU1JydkRLaUVWMVI4VmdjYUFId0hOa21qejI5Q0ROUUZjb2tlYUFS?=
+ =?utf-8?B?SXkxTHNJdzRaYjA1TWhuK1JTck51aHhjUnlHWjJuODAvdDNERFB5d3R5MFBH?=
+ =?utf-8?B?SG00YzB2aXA0MmZabDM0QXR6VVgxQXJMdlRJRE5lYXVoVHpQOGJKUnN1WW51?=
+ =?utf-8?B?UkRycytRY0VwNFdXRFNBYW1zWER6SHNlZXMycWNJZHZoN3A3eWk3cHZoM1Zp?=
+ =?utf-8?B?elY1elJpZTZJSmhwekhia1BrZk5HUGhuZXh2Sm5mZlY1YXVCWDdqZUVYSGdG?=
+ =?utf-8?B?cEdOQVVaNnE3T1BsbStWU0kvL3pyZGpEcFdVSzU2YWUyL3BuL3R6UG5TeFBa?=
+ =?utf-8?B?Y2Y2dzgrU25ybjVJNEN5dmE3UEhGY0JPMlVRZXhrOERHWFRSMGF6QnR2SFk2?=
+ =?utf-8?B?UzU5aGFTTU5YUnpyZ285ZkN1bzgramNIM2kxYzMvckxHc2lzS3B0dmJmVjlF?=
+ =?utf-8?B?d25qckwza0xxa2twS1UvWHl4MThHc0plY0lkUWFkV04yaVplbkI3dmVubFRn?=
+ =?utf-8?B?WG5vUnE0dmJYbm5LQzZINUpiZU5FcDlHbi9TekVFTGwzSlcrZU1xSVFBQVhY?=
+ =?utf-8?B?eHFISGlKK05lbytSeDNnc3NIRFpxVGpWclVzZDNWNGdUN0p5SnlqZjlzR1Rs?=
+ =?utf-8?B?Um9uajJiRFllWUpCaGExYzhxTUFPVFFOajI4SzN3QVQ5TEVjcEp0LzdjcVNr?=
+ =?utf-8?B?SkFnbnBmelVhbWJOZUtQWHU3enRML2tJalU0UkQ5ck44RUFJQy9YcWgvYVk0?=
+ =?utf-8?B?M2Z6MjV3TVg1b3lIZm9nc1Nib2dtcnZRS1VkUDJ3a3hEb3ZQSzJ6V3g4bFlL?=
+ =?utf-8?B?MFlYZllYTnREVXVOVXpUUkFWV0VtR1dOZzV0aERiU1NtVmhaV1RFTzNVN3J3?=
+ =?utf-8?Q?4TfOx6RW8wOSXjgvpKWPiTj5h?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d6b3a7ff-807f-442a-6474-08de30c97b8d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Dec 2025 11:05:05.2142 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: LgV6clTI5feG8VFhLOYXERV6HelqwFrnSS9iZeUH2e774Fwglx4K0JH+a44Q8WyuyvZl3KhskpaJh1IqMkmKUQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB6970
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,300 +194,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add PCIe boot documentation for J784S4-EVM including boot mode switch
-settings, hardware setup requirements, endpoint configuration details
-and step-by-step boot procedure.
-
-Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
----
- doc/board/ti/j784s4_evm.rst | 267 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 267 insertions(+)
-
-diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-index 22442874110..0c9dad122a7 100644
---- a/doc/board/ti/j784s4_evm.rst
-+++ b/doc/board/ti/j784s4_evm.rst
-@@ -280,6 +280,10 @@ http://www.ti.com/lit/zip/spruj52 under the `Boot Mode Pins` section.
-      - 00000000
-      - 01110000
- 
-+   * - PCIe
-+     - 10001000
-+     - 01010000
-+
- For SW7 and SW11, the switch state in the "ON" position = 1.
- 
- Boot Mode Pins for AM69-SK
-@@ -311,6 +315,269 @@ section.
- 
- For SW2, the switch state in the "ON" position = 1.
- 
-+PCIe Boot
-+---------
-+
-+The J784S4 SoC supports booting over PCIe, allowing the device to function
-+as a PCIe endpoint and receive boot loader images from a PCIe root complex.
-+
-+Hardware Setup
-+^^^^^^^^^^^^^^
-+
-+To boot J784S4 via PCIe, the following hardware setup is required:
-+
-+1. Configure the boot mode switches on J784S4-EVM for PCIe boot:
-+
-+   .. code-block:: text
-+
-+      SW7:  01010000
-+      SW11: 10001000
-+
-+2. Connect the J784S4-EVM (endpoint) to a PCIe root complex (e.g., x86 host)
-+   using a PCIe cable. Both boards should be powered off before making the
-+   connection.
-+
-+Endpoint Configuration
-+^^^^^^^^^^^^^^^^^^^^^^
-+
-+The following configuration options are enabled by default in
-+``j784s4_evm_r5_defconfig`` and ``j784s4_evm_a72_defconfig``:
-+
-+- ``CONFIG_SPL_PCI_DFU_BAR_SIZE``: Size of the PCIe BAR for DFU/boot image download
-+- ``CONFIG_SPL_PCI_DFU_VENDOR_ID``: PCIe vendor ID advertised by the endpoint
-+- ``CONFIG_SPL_PCI_DFU_DEVICE_ID``: PCIe device ID advertised by the endpoint
-+- ``CONFIG_SPL_PCI_DFU_MAGIC_WORD``: Magic word written by root complex to signal image transfer completion
-+- ``CONFIG_SPL_PCI_DFU_BOOT_PHASE``: Current boot phase indicator for root complex
-+
-+By default, PCIe root complex mode is enabled in the device tree. To enable
-+endpoint mode, build the boot loaders with the device tree overlay
-+``k3-j784s4-evm-pcie0-pcie1-ep.dtso``.
-+
-+PCIe Boot Procedure
-+^^^^^^^^^^^^^^^^^^^
-+
-+The following steps describe how to boot J784S4 over PCIe:
-+
-+1. Compile the sample host program (provided below):
-+
-+   .. prompt:: bash
-+
-+      gcc -o pcie_boot_copy pcie_boot_copy.c
-+
-+2. Power on the J784S4-EVM (endpoint) after configuring boot mode switches.
-+
-+3. On the root complex, check PCIe enumeration:
-+
-+   .. prompt:: bash
-+
-+      lspci
-+
-+   The endpoint will appear as a RAM device or with multiple functions:
-+
-+   .. code-block:: text
-+
-+      0000:00:00.0 PCI bridge: Texas Instruments Device b012
-+      0000:01:00.0 RAM memory: Texas Instruments Device b012
-+      0000:01:00.1 Non-VGA unclassified device: Texas Instruments Device 0100
-+      0000:01:00.2 Non-VGA unclassified device: Texas Instruments Device 0100
-+
-+4. Copy ``tiboot3.bin`` to the endpoint. Use ``lspci -vv`` to identify the BAR
-+   address:
-+
-+   .. prompt:: bash
-+
-+      sudo ./pcie_boot_copy j784s4 0x4007100000 tiboot3.bin
-+
-+   The sample program automatically writes the image start address to
-+   ``0x41CF3FE0`` and the magic word ``0xB17CEAD9`` to ``0x41CF3FE4``.
-+
-+5. After ``tiboot3.bin`` is processed, the PCIe link will go down briefly.
-+   Remove the PCIe device and rescan the bus:
-+
-+   .. prompt:: bash
-+
-+      echo 1 > /sys/bus/pci/devices/0000\:01\:00.0/remove
-+      echo 1 > /sys/bus/pci/devices/0000\:00\:00.0/rescan
-+      lspci
-+
-+   The enumeration will change:
-+
-+   .. code-block:: text
-+
-+      0000:00:00.0 PCI bridge: Texas Instruments Device b012
-+      0000:01:00.0 RAM memory: Texas Instruments Device b010 (rev dc)
-+
-+6. Copy ``tispl.bin`` to the new BAR address (use ``lspci -vv`` to find):
-+
-+   .. prompt:: bash
-+
-+      sudo ./pcie_boot_copy j784s4 0x4000400000 tispl.bin
-+
-+7. After ``tispl.bin`` is processed, the PCIe link will go down again. Remove
-+   and rescan the PCIe device:
-+
-+   .. prompt:: bash
-+
-+      echo 1 > /sys/bus/pci/devices/0000\:01\:00.0/remove
-+      echo 1 > /sys/bus/pci/devices/0000\:00\:00.0/rescan
-+
-+8. Copy ``u-boot.img``:
-+
-+   .. prompt:: bash
-+
-+      sudo ./pcie_boot_copy j784s4 0x4000400000 u-boot.img
-+
-+9. After ``u-boot.img`` is successfully loaded, the boot process is complete
-+   and endpoint should boot till U-BOOT prompt.
-+
-+.. note::
-+
-+   During the boot process, "PCIe LINK DOWN" messages might appear in kernel
-+   logs. This is expected as the endpoint resets and re-initializes the PCIe
-+   link after processing each boot stage.
-+
-+Sample Host Program
-+^^^^^^^^^^^^^^^^^^^
-+
-+The following C program can be used on the root complex to copy boot images
-+to the J784S4 endpoint:
-+
-+.. code-block:: c
-+
-+   #include <stdio.h>
-+   #include <stdlib.h>
-+   #include <fcntl.h>
-+   #include <sys/mman.h>
-+   #include <unistd.h>
-+   #include <string.h>
-+
-+   #define MAP_SIZE 0x10000000
-+
-+   int main(int argc, char *argv[])
-+   {
-+      char *bootfilename = NULL;
-+      char *platform = NULL;
-+      off_t bar1_address = 0;
-+      int fd;
-+      void *map_base;
-+      int i = 0;
-+      unsigned char *check;
-+      int read_result;
-+      long lSize;
-+      int i;
-+      FILE * fptr;
-+      off_t load_addr, load_addr_offset, start_addr_offset;
-+      unsigned int magic_word = 0;
-+      int use_magic_word = 0;
-+
-+      if (argc != 4) {
-+         printf("Usage: %s <platform> <bar_address> <binary_file>\n", argv[0]);
-+         printf("  platform: am64x or j784s4\n");
-+         return 0;
-+      }
-+
-+      platform = argv[1];
-+      bar1_address = strtoul(argv[2], NULL, 16);
-+      bootfilename = argv[3];
-+
-+      printf("platform: %s\n", platform);
-+      printf("bootfilename: %s\n", bootfilename);
-+      printf("bar1_address: 0x%lx\n", bar1_address);
-+
-+      if(!strcmp(bootfilename,"tiboot3.bin"))
-+      {
-+         if(!strcmp(platform, "j784s4"))
-+         {
-+            load_addr = 0x41C00000;
-+            load_addr_offset = 0x00;
-+            start_addr_offset = 0xf3fe0;
-+            magic_word = 0xB17CEAD9;
-+            use_magic_word = 1;
-+         }
-+         else
-+         {
-+            printf("Unsupported platform: %s\n", platform);
-+            return 0;
-+         }
-+      }
-+      else
-+      {
-+         load_addr = 0x0;
-+         load_addr_offset = 0x0;
-+         start_addr_offset = MAP_SIZE - 0x4;
-+      }
-+
-+      printf("load_addr: 0x%lx\n", load_addr);
-+      printf("load_addr_offset: 0x%lx\n", load_addr_offset);
-+      printf("start_addr_offset: 0x%lx\n", start_addr_offset);
-+      if (use_magic_word)
-+         printf("magic_word: 0x%x\n", magic_word);
-+
-+      printf("try to open /dev/mem.\n");
-+      fd = open("/dev/mem", O_RDWR | O_SYNC);
-+      if(fd == -1)
-+      {
-+         printf("failed to open /dev/mem.\n");
-+         return -1;
-+      }
-+
-+      map_base = mmap(0, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, bar1_address);
-+      if(map_base == (void *)-1)
-+      {
-+         printf("can't mmap.\n");
-+         return -1;
-+      }
-+      printf("mmap done\n");
-+
-+      fptr = fopen(bootfilename, "rb");
-+      if (fptr == NULL) {
-+         printf("can't read bootfile.\n");
-+         return -1;
-+      }
-+
-+      fseek(fptr, 0, SEEK_END);
-+      lSize = ftell(fptr);
-+      rewind(fptr);
-+
-+      printf("bootfile size = 0x%lx\n", lSize);
-+
-+      check = (unsigned char *)malloc(sizeof(char) * lSize);
-+      if(check == NULL)
-+      {
-+         printf("malloc failed\n");
-+         return -1;
-+      }
-+
-+      read_result = fread(check, 1, lSize, fptr);
-+      if(read_result != lSize)
-+      {
-+         printf("fread failed\n");
-+         return -1;
-+      }
-+
-+      for(i = 0; i < lSize; i++)
-+      {
-+         *((char *)(map_base) + load_addr_offset + i) = check[i];
-+      }
-+      printf("Image copy done.\n");
-+
-+      sleep(1);
-+
-+      *(unsigned int *)(map_base + start_addr_offset) = (unsigned int)(load_addr_offset + load_addr);
-+
-+      // Write magic word for J784S4 at R5 stage
-+      if(use_magic_word)
-+      {
-+         *(unsigned int *)(map_base + start_addr_offset + 4) = magic_word;
-+         printf("Magic word written.\n");
-+      }
-+
-+      return 0;
-+   }
-+
-+This program copies the boot image to the PCIe endpoint's memory region and
-+writes the necessary control words to signal image transfer completion.
-+
- Debugging U-Boot
- ----------------
- 
--- 
-2.34.1
-
+PiAtLS0tLemCruS7tuWOn+S7ti0tLS0tDQo+IOWPkeS7tuS6ujogRmFiaW8gRXN0ZXZhbSA8ZmVz
+dGV2YW1AZ21haWwuY29tPg0KPiDlj5HpgIHml7bpl7Q6IDIwMjXlubQxMeaciDMw5pelIDg6MDcN
+Cj4g5pS25Lu25Lq6OiBBbGljZSBHdW8gKE9TUykgPGFsaWNlLmd1b0Bvc3MubnhwLmNvbT4NCj4g
+5oqE6YCBOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsgZGwtdWJvb3QtaW14IDx1Ym9vdC1pbXhAbnhw
+LmNvbT47IE1hcmVrIFZhc3V0DQo+IDxtYXJleEBkZW54LmRlPjsgTWFyZWsgVmFzdXQgPG1hcmVr
+LnZhc3V0K3JlbmVzYXNAbWFpbGJveC5vcmc+OyBUb20NCj4gUmluaSA8dHJpbmlAa29uc3Vsa28u
+Y29tPjsgWWUgTGkgPHllLmxpQG54cC5jb20+OyB0aGFydmV5QGdhdGV3b3Jrcy5jb207DQo+IE1h
+dHRpanMgS29ycGVyc2hvZWsgPG1rb3JwZXJzaG9la0BrZXJuZWwub3JnPjsgUGF0cmljZSBDaG90
+YXJkDQo+IDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+OyBTdGVmYW5vIEJhYmljIDxzYmFi
+aWNAbmFibGFkZXYuY29tPjsgUGVuZw0KPiBGYW4gPHBlbmcuZmFuQG54cC5jb20+OyBMdWthc3og
+TWFqZXdza2kgPGx1a21hQGRlbnguZGU+OyBTaW1vbiBHbGFzcw0KPiA8c2pnQGNocm9taXVtLm9y
+Zz47IERhdmlkIFphbmcgPGRhdmlkemFuZ2NzQGdtYWlsLmNvbT47IEFsaWNlIEd1bw0KPiA8YWxp
+Y2UuZ3VvQG54cC5jb20+DQo+IOS4u+mimDogUmU6IFtQQVRDSCB2MSA0LzRdIGlteDh1bHA6IGRz
+dDogRW5hYmxlIFVTQiBjb250cm9sbGVyIGF0IDB4Mjk5MjAwMDAgaW4NCj4gaG9zdCBtb2RlDQo+
+IA0KPiBPbiBGcmksIE5vdiAyOCwgMjAyNSBhdCAxMDoxOOKAr0FNIDxhbGljZS5ndW9Ab3NzLm54
+cC5jb20+IHdyb3RlOg0KPiANCj4gPiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vZHRzL2lteDh1bHAt
+ZXZrLmR0cw0KPiA+IGIvYXJjaC9hcm0vZHRzL2lteDh1bHAtZXZrLmR0cyBpbmRleCA3YWVjMTcw
+NjM4Mi4uZmIyODc0OGVjMTcgMTAwNjQ0DQo+ID4gLS0tIGEvYXJjaC9hcm0vZHRzL2lteDh1bHAt
+ZXZrLmR0cw0KPiA+ICsrKyBiL2FyY2gvYXJtL2R0cy9pbXg4dWxwLWV2ay5kdHMNCj4gPiBAQCAt
+NDQsNiArNDQsMjYgQEANCj4gPiAgICAgICAgIHN0YXR1cyA9ICJva2F5IjsNCj4gPiAgfTsNCj4g
+Pg0KPiA+ICsmdXNib3RnMiB7DQo+ID4gKyAgICAgICBwaW5jdHJsLW5hbWVzID0gImRlZmF1bHQi
+LCAic2xlZXAiOw0KPiA+ICsgICAgICAgcGluY3RybC0wID0gPCZwaW5jdHJsX290Z2lkMj47DQo+
+ID4gKyAgICAgICBwaW5jdHJsLTEgPSA8JnBpbmN0cmxfb3RnaWQyPjsNCj4gPiArICAgICAgIGRy
+X21vZGUgPSAib3RnIjsNCj4gPiArICAgICAgIGhucC1kaXNhYmxlOw0KPiA+ICsgICAgICAgc3Jw
+LWRpc2FibGU7DQo+ID4gKyAgICAgICBhZHAtZGlzYWJsZTsNCj4gPiArICAgICAgIG92ZXItY3Vy
+cmVudC1hY3RpdmUtbG93Ow0KPiA+ICsgICAgICAgc3RhdHVzID0gIm9rYXkiOw0KPiA+ICt9Ow0K
+PiA+ICsNCj4gPiArJnVzYnBoeTIgew0KPiA+ICsgICAgICAgc3RhdHVzID0gIm9rYXkiOw0KPiA+
+ICt9Ow0KPiA+ICsNCj4gPiArJnVzYm1pc2MyIHsNCj4gPiArICAgICAgIHN0YXR1cyA9ICJva2F5
+IjsNCj4gPiArfTsNCj4gDQo+IFRoZXNlIFVTQiBub2RlcyBhcmUgYWxyZWFkeSBwcmVzZW50IGlu
+DQo+IGR0cy91cHN0cmVhbS9zcmMvYXJtNjQvZnJlZXNjYWxlL2lteDh1bHAuZHRzaQ0KPiBkdHMv
+dXBzdHJlYW0vc3JjL2FybTY0L2ZyZWVzY2FsZS9pbXg4dWxwLWV2ay5kdHMNCj4gDQo+IFBsZWFz
+ZSBzZW5kIGEgcGF0Y2ggdG8gY29udmVydCBpbXg4dWxwLWV2ayB0byBPRl9VUFNUUkVBTSwgdGhl
+biByZXNlbmQgdGhpcw0KPiBzZXJpZXMuDQoNCkhpIEZhYmlvLA0KDQpQYXRjaCB0byBjb252ZXJ0
+IGlteDh1bHAtZXZrIHRvIE9GX1VQU1RSRUFNIGlzIHNlbnQgb3V0LiBodHRwczovL2xvcmUua2Vy
+bmVsLm9yZy91LWJvb3QvMjAyNTEyMDExMTAwMzQuMTk2ODg3MS0xLWFsaWNlLmd1b0Bvc3Mubnhw
+LmNvbS9ULyN1DQoNCkJlc3QgcmVnYXJkcw0KQWxpY2UgR3VvDQo=
