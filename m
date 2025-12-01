@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D8DED116F3
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:49:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5ED9D116F3
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:49:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FE6383CB1;
-	Mon,  1 Dec 2025 18:49:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0CFE583D1A;
+	Mon,  1 Dec 2025 18:49:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="q67K7nV+";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ATqr2FuA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B14283D1A; Mon,  1 Dec 2025 18:49:42 +0100 (CET)
+ id 5899883C6C; Mon,  1 Dec 2025 18:49:43 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF95B83D0C
+ by phobos.denx.de (Postfix) with ESMTPS id ADFA283CB1
  for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:49:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
@@ -31,63 +31,63 @@ Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5125D3FA6A
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:49:28 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D098E40F03
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:49:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1764611368;
- bh=Q+1s8w8kvYcvqyfpjFQgvbWb7I9WRuDEMHA9PooceB8=;
+ s=20251003; t=1764611365;
+ bh=I04SWr+/ylu8E7ccB/fzcEi5Lruw4AbZ8b0oeSNoaRw=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=q67K7nV+bulMtxk5y5nhe9XU2icKLJcArAU2tbJSdTMhyMFBVEQwJ3v2pVrBI0nCc
- 3iF9NyJcx0IUMpQumYV4o98v0ckOqurbus7cfi2Yrt2wlyESQ3Jav3YVBBRnZEvKjU
- st1rLp2X1G0bKws2VuQiZQBn+kopSkTZvzQHMJz/ussOHVl94bggGTP9Q8s1at4JsC
- 2KSN7jV1y2eKT4PIRXHYWFt/CXK5eBxLGTqDPClbMaRALlbz+G4iN7hIoLpuA59NHz
- OgcU1lmIIaUP4zbR0r8WT6pscFzWWGRAxXq1wjxLAV5iFbYGFP2g8LuwHGnLFEs4kZ
- ankhdt2yS81Y1tVcAya7BDlAAVlIYbh1onIw0ph/nDMUSHDbBiEoXmIMjX5oEUZZbJ
- NyWI89N0/FGsTPeozLEbrHW/sXPuNK2HngPoDn07M3Js1gZblP21oP1rls7Zy7l7di
- XMs3wgDJQQkXUOH0IjuBt0jSFAuEC2r5E2vtM+wM6NuIKQT1EcrzjECPnza8r62p0O
- kLVBYKAN8tp/cQEcPU2A5iZKYmH1P5R2/GvcTkpi/KCTizUIdwYsilgfqMpZ+WHw2p
- wIjh9fcFL1QIDqow1Z16ySI3pGmD4mBLUwo+uxEZlnmn2QCpKQUDslUzeKD+LAyYav
- 1OqA7sMacC1wF5iCT8igzeic=
+ b=ATqr2FuAIZto+dwcK50XxWUFJeRtz84bZAX+TjZTGMu2/jRd6UMZ5J8clOKjLvMP5
+ CQmI3Sd52rbGgaj8/QNXwbtBZE3WETdi2BHZLTZj+aBZsBfxo8x5r6zkuG6BNAA4ZG
+ 3dNuhCsiOnzvRdMHV4xJgSedGkXx1dS3F5Q4i6862AVZmsC2k1rft5G/qcScpmnQ/w
+ pUPQQEGbuol3lm7i3JBCmxZWUnQ0O3DnC1Jy3eV69t8linvP7m2e5enQMCow6QwHS1
+ LmOsRqw7Y0SDhCkFkTwM6PL9pobAhFxX3+HfmMAK7Hpg6OKQboV4uegOBf9HPH+grt
+ nIly/H77/k2IYBUVEV7YbC3Hl9KDLywozOfkv1AxKjensbIoxsM21qKpGAXWoMqDl2
+ hXeyMCpKodfgfWW3R81R8cC7TbkH1lDNReR9e8mmO3veTfyrvhf0D+01agv+AFEGhS
+ o0jwGV1Z5+eL7PARDGaeBPKstmz5+bjxRXUb0IQAkf+3IDk1V9P1T2Ho1HW4S0JC/w
+ PcNWChf6TGJTaa0XqKZrUUHsDB6abeaLerkIllFhB6AeqdjuZdPAnwPd0E1jv4yezK
+ BLsGixwZv16KBD9hBXK3eurBOBmH1g4r8UN1bbu0O7uvFPvtUp1WD8s2zhHe9CeTrW
+ rHkCQXkbVMh+DnVJ/Zmj6ncE=
 Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-477939321e6so26109755e9.0
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:49:28 -0800 (PST)
+ 5b1f17b1804b1-477563e531cso39100915e9.1
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:49:25 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764611360; x=1765216160;
+ d=1e100.net; s=20230601; t=1764611358; x=1765216158;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Q+1s8w8kvYcvqyfpjFQgvbWb7I9WRuDEMHA9PooceB8=;
- b=mTqeqFYVoFrAfYDhMT8EnVGN3tMGRyBTN7XEnei2eKI4tnmF8Dn1qGUg2EkTRckv7n
- 4vaELqkfOSJAYb5/xLwHpwhxMmD5b61KQPdabaWxaC22NKF9N6nfE81IxImZjZU5ya+o
- KkczEqNsT8CH1SEP1c73W7upt3ZrSMF8ImMhKlRQV6Wctx/A5xPTHf6+YmDOW8wsyeyq
- MYaBtsaGQcMNdlvWJnOPXIMKRKuuAn0dd57wQO2fWYNlXdiI0SSgSVeXVPfJ2W3ywi8O
- yP+aHaVb/a7vL7iKtf6IH37/jdG6l4VF8zR5CiU/A3LJHKvcLu9koUi9XlN5AjJjXR51
- O1uw==
+ bh=I04SWr+/ylu8E7ccB/fzcEi5Lruw4AbZ8b0oeSNoaRw=;
+ b=vexAmp9i7eYuzcXKdkOblvRz2ivccOCPPw200Tqwt3jJomXPBq2raEl5kXVOAF8Gk9
+ B7wofjN35CCZ+hw4Pl28NgGOyROy/oUCxCAfKllxcbOO1TDz2e7Bfs36knL/1oT4bYzs
+ I5x6/HsEu8gqiWcyj9MwVaMrqDTN3PwR/HaeOKYAx4L17m0vItmnBKTZScD6CDEuHrRb
+ RIiaeDWX8yjYMOQtPoA8GDUumPvIrzWDxLPIyQwmKkum/1vInOtMA2VV1Tm706Cx2x53
+ x1dx8C4UkOKkzdI5JQcUyqliuTGnsLF6yyWYsM8DbXroBrhaqtfOa6dVREHw9UE2jdfg
+ /F6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZkHW7mpAijv8oWe3xaLHj4K8SyTQKmYCklYKx+ecxyVE3H3/2zyRrb//mdqGZYVcloGxp2pM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzUAEALZ87g1tXTfWKIGWdv76TihGCZFpFt/o42SDf7GbRbyoku
- AEoQWRvf4ICyp4LWX5MgFTNQi/KRi6y8/1iaNRy3zRI98LECIdD9b8gWxXln3IW3mj5ZXM0XB5k
- JrexRZuqA0Jj1vQInmlSgQzKvoqeCnLr7oeeS8bxC8mG1/cuZ/EPF1luRV8HHGLNvPF11hWA=
-X-Gm-Gg: ASbGncvO/7vbjXJ4Kpej3zPzZVLEnu/RNuBgL8g9QBR+EmdjZPVfrKCUZKbZznHnNMg
- 8YT7hmxZpAE5PEvuEYgSn13uozvYmF8St4BnQQu28FPwIwZye1iiRJPjmpih9CWoRyHuUK7wO4l
- KTgFYy8wv/6c0svkbukwXJS2SXzhq5s7VkD9itmaFRQqri7/hl/YxKjO3sppkcvyyh1sSDP/jSD
- yEM9dQEbcRUMBQ2KjXYFEpeesM5cngK3V6H/sTLODnJyrAVAchvaRtdzfw/muOSZUiMnM4X1gzq
- YcnPDNa+XZLvJ0wOe4Lel3IwQEzeWBzFSiLTgPXzKpV2zMq8/NT5N+5yPAx3n+ks1lo500vGHeH
- mBBOIICvx1RFhxPXp80gPrCaOdw+XwBOPes1wNlZsDPIDpfyXy4S3E0qyWMNNnia5Uf1ZeAqxUg
- np
-X-Received: by 2002:a05:600c:1f94:b0:477:73cc:82c2 with SMTP id
- 5b1f17b1804b1-47904ad4af1mr236042525e9.9.1764611360195; 
- Mon, 01 Dec 2025 09:49:20 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGLzaTSY3p7/HChAZNLDPDzBp6Y9giOwYiFv3Zk1dMq5D7hwNHwoQbom3q2B/AsdpPg/Zpa6Q==
-X-Received: by 2002:a05:600c:1f94:b0:477:73cc:82c2 with SMTP id
- 5b1f17b1804b1-47904ad4af1mr236042235e9.9.1764611359744; 
- Mon, 01 Dec 2025 09:49:19 -0800 (PST)
+ AJvYcCVg88T2O4lVBHIF0cisGhOXtkP+y1Hc+oFGnTgh4tP51qVeqfZrICR+Wwg4RusCiSsUYKG/fPU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy26aEd0+sF7X93TRNqmADrtbcoC22VV4v549+fWIR+ibiDzG34
+ MIPt+lKLdEOnLIMAkwvaPFWIPBZ8GBlaT8o5ODutTBIFUZTjurB4ERhiPwsAPEhxdt5UnAxqk2W
+ RnBUIJhiwR86gGg+twqqsl+gLyicxZZND2wo7pg5IS2TU88xZf52dEk0VpkUQDC0j2Jn5J7M=
+X-Gm-Gg: ASbGncuu+ujIvFZvuEhvg/vQgbMTjnEpXX17cMDGBn/uxVM0EY3awhZhRhI1C0y8nT1
+ cNsJO8qyKY2zXHpf/T6Pj60cBnXGMeg+ppJ9ij/P4EYuIMqSwcHesW+DOqqJSkgPDOc0F0aAB/B
+ eqVbJA9wyaHjIzWbE7kUXj24May2NWYq7WoVKiuoBSdrdW1pHLjWTa1vm+e3zA/8r+hJjThxS+m
+ zS2drXUKY1UwnyE9MtuxwR45bUZDXe+l7KF78Rjwe2KLMZkvGiWFX6ID3QJcsjdIjYtglzjO5BZ
+ 083jME67tEp4F58nYKhMK+jLYS9jmjssLR29SMTdiOcD3lQOttIgXkNJfg0oOsOfixtg0H3vDSr
+ kOFad4ZGBa/xfdQkhmfT5RjhXGHyEMZhJKCGXZuVh2o0mpKSutW+T+g0PQiSP9N5vlRFIEa0fgd
+ De
+X-Received: by 2002:a05:600c:3b96:b0:477:b0b9:312a with SMTP id
+ 5b1f17b1804b1-477c11030a4mr426381495e9.7.1764611358164; 
+ Mon, 01 Dec 2025 09:49:18 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEFgVzvLlJ8z6rbt5W7mgBctqx9f/yvE9UPBjm7FLwgjK5/8WZfFDeM8/qR/8vSjpRHu5+IGQ==
+X-Received: by 2002:a05:600c:3b96:b0:477:b0b9:312a with SMTP id
+ 5b1f17b1804b1-477c11030a4mr426381255e9.7.1764611357715; 
+ Mon, 01 Dec 2025 09:49:17 -0800 (PST)
 Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
  [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4790b0c3a1dsm324072125e9.10.2025.12.01.09.49.17
+ 5b1f17b1804b1-4790b0c3a1dsm324072125e9.10.2025.12.01.09.49.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 09:49:19 -0800 (PST)
+ Mon, 01 Dec 2025 09:49:17 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Rick Chen <rick@andestech.com>,
 	Leo <ycliang@andestech.com>
@@ -96,10 +96,9 @@ Cc: Yao Zi <ziyao@disroot.org>, E Shattow <e@freeshell.de>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/2] test: provide unit tests for the RISC-V private GCC
- library
-Date: Mon,  1 Dec 2025 18:49:04 +0100
-Message-ID: <20251201174904.652954-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/2] RISC-V: implement private GCC library
+Date: Mon,  1 Dec 2025 18:49:03 +0100
+Message-ID: <20251201174904.652954-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251201174904.652954-1-heinrich.schuchardt@canonical.com>
 References: <20251201174904.652954-1-heinrich.schuchardt@canonical.com>
@@ -121,151 +120,281 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add unit tests for the functions for counting leading and trailing zero
-bits.
+The following functions are provided:
+
+Count leading zero bits
+
+* int __clzsi2 (unsigned int a)
+* int __clzdi2 (unsigned long a)
+* int __clzti2 (unsigned long long a)
+
+Count trailing zero bits
+
+* int __ctzsi2 (unsigned int a)
+* int __ctzdi2 (unsigned long a)
+* int __ctzti2 (unsigned long long a)
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/lib/Makefile   |  4 ++++
- test/lib/test_clz.c | 53 +++++++++++++++++++++++++++++++++++++++++++++
- test/lib/test_ctz.c | 53 +++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 110 insertions(+)
- create mode 100644 test/lib/test_clz.c
- create mode 100644 test/lib/test_ctz.c
+ arch/Kconfig            |   1 +
+ arch/riscv/lib/Makefile |   2 +
+ arch/riscv/lib/clz.c    | 105 ++++++++++++++++++++++++++++++++++++++++
+ arch/riscv/lib/ctz.c    |  95 ++++++++++++++++++++++++++++++++++++
+ lib/Kconfig             |   2 +-
+ 5 files changed, 204 insertions(+), 1 deletion(-)
+ create mode 100644 arch/riscv/lib/clz.c
+ create mode 100644 arch/riscv/lib/ctz.c
 
-diff --git a/test/lib/Makefile b/test/lib/Makefile
-index 35b40b584c4..7c9dc180c8d 100644
---- a/test/lib/Makefile
-+++ b/test/lib/Makefile
-@@ -10,6 +10,10 @@ obj-y += abuf.o
- obj-y += alist.o
- obj-$(CONFIG_EFI_LOADER) += efi_device_path.o efi_memory.o
- obj-$(CONFIG_EFI_SECURE_BOOT) += efi_image_region.o
-+ifdef CONFIG_RISCV
-+obj-$(CONFIG_USE_PRIVATE_LIBGCC) += test_clz.o
-+obj-$(CONFIG_USE_PRIVATE_LIBGCC) += test_ctz.o
-+endif
- obj-y += hexdump.o
- obj-$(CONFIG_SANDBOX) += kconfig.o
- obj-y += lmb.o
-diff --git a/test/lib/test_clz.c b/test/lib/test_clz.c
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 3133f892f94..4af0da2485f 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -159,6 +159,7 @@ config PPC
+ config RISCV
+ 	bool "RISC-V architecture"
+ 	select CREATE_ARCH_SYMLINK
++	select HAVE_PRIVATE_LIBGCC if 64BIT
+ 	select HAVE_SETJMP
+ 	select HAVE_INITJMP
+ 	select SUPPORT_ACPI
+diff --git a/arch/riscv/lib/Makefile b/arch/riscv/lib/Makefile
+index f1f50918eff..a527b3e9ae3 100644
+--- a/arch/riscv/lib/Makefile
++++ b/arch/riscv/lib/Makefile
+@@ -6,6 +6,8 @@
+ # Copyright (C) 2017 Andes Technology Corporation
+ # Rick Chen, Andes Technology Corporation <rick@andestech.com>
+ 
++lib-$(CONFIG_USE_PRIVATE_LIBGCC) += clz.o ctz.o
++
+ obj-$(CONFIG_$(PHASE_)LIB_BOOTM) += bootm.o
+ obj-$(CONFIG_$(PHASE_)LIB_BOOTI) += image.o
+ obj-$(CONFIG_CMD_GO) += boot.o
+diff --git a/arch/riscv/lib/clz.c b/arch/riscv/lib/clz.c
 new file mode 100644
-index 00000000000..11fd527d063
+index 00000000000..7b173d3c858
 --- /dev/null
-+++ b/test/lib/test_clz.c
-@@ -0,0 +1,53 @@
++++ b/arch/riscv/lib/clz.c
+@@ -0,0 +1,105 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
++ * libgcc replacement - count leading bits
++ *
 + * Copyright 2025, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 + */
 +
-+#include <test/lib.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+int __clzsi2(int a);
-+int __clzdi2(long a);
-+int __clzti2(long long a);
++#include <linux/types.h>
 +
 +/**
-+ * test_clz() - test library functions to count leading zero bits
++ * __clzti2() - count number of leading zero bits
 + *
-+ * @uts:	unit test state
++ * @x:		number to check
++ * Return:	number of leading zero bits
 + */
-+static int test_clz(struct unit_test_state *uts)
++int __clzti2(long long x)
 +{
-+	ut_asserteq(0, __clzti2(0xffffffffffffffffLL));
-+	ut_asserteq(0, __clzti2(0x8000000000000000LL));
-+	ut_asserteq(1, __clzti2(0x4000000000000000LL));
-+	ut_asserteq(17, __clzti2(0x0000500000a00000LL));
-+	ut_asserteq(62, __clzti2(0x0000000000000002LL));
-+	ut_asserteq(63, __clzti2(0x0000000000000001LL));
++	int ret = 64;
 +
-+#if BITS_PER_LONG == 64
-+	ut_asserteq(0, __clzdi2(0xffffffffffffffffLL));
-+	ut_asserteq(0, __clzti2(0x8000000000000000LL));
-+	ut_asserteq(1, __clzti2(0x4000000000000000LL));
-+	ut_asserteq(17, __clzdi2(0x0000500000a00000LL));
-+	ut_asserteq(62, __clzdi2(0x0000000000000002LL));
-+	ut_asserteq(63, __clzdi2(0x0000000000000001LL));
-+#else
-+	ut_asserteq(0, __clzdi2(0xffffffff));
-+	ut_asserteq(0, __clzdi2(0x80000000));
-+	ut_asserteq(1, __clzdi2(0x40000000));
-+	ut_asserteq(9, __clzdi2(0x0050a000));
-+	ut_asserteq(30, __clzdi2(0x00000002));
-+	ut_asserteq(31, __clzdi2(0x00000001));
-+#endif
++	if (!x)
++		return 64;
 +
-+	ut_asserteq(0, __clzsi2(0xffffffff));
-+	ut_asserteq(0, __clzsi2(0x80000000));
-+	ut_asserteq(1, __clzsi2(0x40000000));
-+	ut_asserteq(9, __clzsi2(0x0050a000));
-+	ut_asserteq(30, __clzsi2(0x00000002));
-+	ut_asserteq(31, __clzsi2(0x00000001));
++	if (x & 0xFFFFFFFF00000000LL) {
++		ret -= 32;
++		x >>= 32;
++	}
++	if (x & 0xFFFF0000LL) {
++		ret -= 16;
++		x >>= 16;
++	}
++	if (x & 0xFF00LL) {
++		ret -= 8;
++		x >>= 8;
++	}
++	if (x & 0xF0LL) {
++		ret -= 4;
++		x >>= 4;
++	}
++	if (x & 0xCLL) {
++		ret -= 2;
++		x >>= 2;
++	}
++	if (x & 0x2LL) {
++		ret -= 1;
++		x >>= 1;
++	}
++	if (x)
++		ret -= 1;
 +
-+	return 0;
++	return ret;
 +}
-+LIB_TEST(test_clz, 0);
-diff --git a/test/lib/test_ctz.c b/test/lib/test_ctz.c
++
++/**
++ * __clzsi2() - count number of leading zero bits
++ *
++ * @x:		number to check
++ * Return:	number of leading zero bits
++ */
++int __clzsi2(int x)
++{
++	int ret = 32;
++
++	if (!x)
++		return 32;
++
++	if (x & 0xFFFF0000) {
++		ret -= 16;
++		x >>= 16;
++	}
++	if (x & 0xFF00) {
++		ret -= 8;
++		x >>= 8;
++	}
++	if (x & 0xF0) {
++		ret -= 4;
++		x >>= 4;
++	}
++	if (x & 0xC) {
++		ret -= 2;
++		x >>= 2;
++	}
++	if (x & 0x2) {
++		ret -= 1;
++		x >>= 1;
++	}
++	if (x)
++		ret -= 1;
++
++	return ret;
++}
++
++/**
++ * __clzdi2() - count number of leading zero bits
++ *
++ * @x:		number to check
++ * Return:	number of leading zero bits
++ */
++int __clzdi2(long x)
++{
++#if BITS_PER_LONG == 64
++	return __clzti2(x);
++#else
++	return __clzsi2(x);
++#endif
++}
+diff --git a/arch/riscv/lib/ctz.c b/arch/riscv/lib/ctz.c
 new file mode 100644
-index 00000000000..96c08202dc2
+index 00000000000..6c875e39f0e
 --- /dev/null
-+++ b/test/lib/test_ctz.c
-@@ -0,0 +1,53 @@
++++ b/arch/riscv/lib/ctz.c
+@@ -0,0 +1,95 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * Copyright 2025, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
++ * libgcc replacement - count trailing bits
 + */
 +
-+#include <test/lib.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+int __ctzsi2(int a);
-+int __ctzdi2(long a);
-+int __ctzti2(long long a);
++#include <linux/types.h>
 +
 +/**
-+ * test_ctz() - test library functions to count trailing zero bits
++ * __ctzti2() - count number of trailing zero bits
 + *
-+ * @uts:	unit test state
++ * @x:		number to check
++ * Return:	number of trailing zero bits
 + */
-+static int test_ctz(struct unit_test_state *uts)
++int __ctzti2(long long x)
 +{
-+	ut_asserteq(0, __ctzti2(0xffffffffffffffffLL));
-+	ut_asserteq(63, __ctzti2(0x8000000000000000LL));
-+	ut_asserteq(62, __ctzti2(0x4000000000000000LL));
-+	ut_asserteq(21, __ctzti2(0x0000500000a00000LL));
-+	ut_asserteq(1, __ctzti2(0x0000000000000002LL));
-+	ut_asserteq(0, __ctzti2(0x0000000000000001LL));
++	int ret = 0;
 +
-+#if BITS_PER_LONG == 64
-+	ut_asserteq(0, __ctzdi2(0xffffffffffffffffLL));
-+	ut_asserteq(63, __ctzdi2(0x8000000000000000LL));
-+	ut_asserteq(62, __ctzdi2(0x4000000000000000LL));
-+	ut_asserteq(21, __ctzdi2(0x0000500000a00000LL));
-+	ut_asserteq(1, __ctzdi2(0x0000000000000002LL));
-+	ut_asserteq(0, __ctzdi2(0x0000000000000001LL));
-+#else
-+	ut_asserteq(0, __ctzdi2(0xffffffff));
-+	ut_asserteq(31, __ctzdi2(0x80000000));
-+	ut_asserteq(30, __ctzdi2(0x40000000));
-+	ut_asserteq(13, __ctzdi2(0x0050a000));
-+	ut_asserteq(1, __ctzdi2(0x00000002));
-+	ut_asserteq(0, __ctzdi2(0x00000001));
-+#endif
++	if (!x)
++		return 64;
 +
-+	ut_asserteq(0, __ctzsi2(0xffffffff));
-+	ut_asserteq(31, __ctzsi2(0x80000000));
-+	ut_asserteq(30, __ctzsi2(0x40000000));
-+	ut_asserteq(13, __ctzsi2(0x0050a000));
-+	ut_asserteq(1, __ctzsi2(0x00000002));
-+	ut_asserteq(0, __ctzsi2(0x00000001));
++	if (!(x & 0xFFFFFFFFLL)) {
++		ret += 32;
++		x >>= 32;
++	}
++	if (!(x & 0xFFFFLL)) {
++		ret += 16;
++		x >>= 16;
++	}
++	if (!(x & 0xFFLL)) {
++		ret += 8;
++		x >>= 8;
++	}
++	if (!(x & 0xFLL)) {
++		ret += 4;
++		x >>= 4;
++	}
++	if (!(x & 0x3LL)) {
++		ret += 2;
++		x >>= 2;
++	}
++	if (!(x & 0x1ll))
++		ret += 1;
 +
-+	return 0;
++	return ret;
 +}
-+LIB_TEST(test_ctz, 0);
++
++/**
++ * __ctzsi2() - count number of trailing zero bits
++ *
++ * @x:		number to check
++ * Return:	number of trailing zero bits
++ */
++int __ctzsi2(int x)
++{
++	int ret = 0;
++
++	if (!x)
++		return 32;
++
++	if (!(x & 0xFFFF)) {
++		ret += 16;
++		x >>= 16;
++	}
++	if (!(x & 0xFF)) {
++		ret += 8;
++		x >>= 8;
++	}
++	if (!(x & 0xF)) {
++		ret += 4;
++		x >>= 4;
++	}
++	if (!(x & 0x3)) {
++		ret += 2;
++		x >>= 2;
++	}
++	if (!(x & 0x1))
++		ret += 1;
++
++	return ret;
++}
++
++/**
++ * __ctzdi2() - count number of trailing zero bits
++ *
++ * @x:		number to check
++ * Return:	number of trailing zero bits
++ */
++int __ctzdi2(long x)
++{
++#if BITS_PER_LONG == 64
++	return __ctzti2(x);
++#else
++	return __ctzsi2(x);
++#endif
++}
+diff --git a/lib/Kconfig b/lib/Kconfig
+index f5c1731f456..7b390608b33 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -212,7 +212,7 @@ config IMAGE_SPARSE_FILLBUF_SIZE
+ config USE_PRIVATE_LIBGCC
+ 	bool "Use private libgcc"
+ 	depends on HAVE_PRIVATE_LIBGCC
+-	default y if HAVE_PRIVATE_LIBGCC && ((ARM && !ARM64) || MIPS)
++	default y if HAVE_PRIVATE_LIBGCC && ((ARM && !ARM64) || MIPS || RISCV)
+ 	help
+ 	  This option allows you to use the built-in libgcc implementation
+ 	  of U-Boot instead of the one provided by the compiler.
 -- 
 2.51.0
 
