@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDD0D116F5
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 12:12:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07EC2D116F5
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 12:27:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0222D83A28;
-	Mon,  1 Dec 2025 13:12:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 47FF583AEE;
+	Mon,  1 Dec 2025 13:27:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xV8mcguM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IvdGdYZp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C415883A98; Mon,  1 Dec 2025 13:11:59 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 8929083B03; Mon,  1 Dec 2025 13:27:33 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F1DE830A0
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 13:11:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 88B7183AB8
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 13:27:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-47118259fd8so38427315e9.3
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 04:11:57 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-595825c8eb3so3770738e87.0
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 04:27:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764591117; x=1765195917; darn=lists.denx.de;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1764592051; x=1765196851; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AD0OKVHyQuCouXMSNlo1D0ekyqejWVegmH+8e9a4m2w=;
- b=xV8mcguMeX2u7ElPgWIufhPS9XlMPuEkWw3xn0WqX/krcWeBe97Y3Iq8de3QCrEssB
- OhDg6fs/RTRdP5QM0WohDdNpxjso5fLnz2alaGuq0DRnP4sD8f7qlEk0TDOKQ3krc3T2
- I/gDGX8dM7irwRMxTnQtnSLQVzc8M/s/WAbSsXvJ02EcN7vSGCMufTI5p21oaE5JJxeu
- DTkyA8GIK70QRRSKZSRuY5DG14w5VgIs+UcV16x+h20nDlXxsqB6tkPGcAXBvLZ+ZHaU
- TfhvPtOA4Wfm9nWAjI/46JnWLtok8N55IhNQdYWgludjXr/3z6r9Qnq4pOtpToMfY+Ad
- mVEQ==
+ bh=PaaNBfuVXdtj85Liu9TEgpc/ZpuoPZYsjV23+r2I644=;
+ b=IvdGdYZpAiaNdTfuyp66DHol8PEbB9P0JyxG3kL6AP/LbWo4Zwp4QpwsngWLa6/Fz/
+ cF/thWgwCjYT3sqK094p4eCo83I+17YPnoHHxHgNX0PR+AUDPyVyAo4G6qpgEeoYIGLB
+ 8KKjpkone2otDfXm4qiFaHJ39lq3JYjW5lxgV5ZxYpODuF5bJ3hZmcgKmtj5QAkQ00P2
+ Kncf26fBoSSjDRty2cUqDsDl4BBfsgKijIw88ffDpYKh6YTsIADgBQQ+NgyV9DXuCg0f
+ fc88d3Sn2K1TKycPfxo/38joomqFDHdZhoC2RzXi3lvrVu8VC7jYlvIyRAbPzKAT8yOK
+ 4pHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764591117; x=1765195917;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=AD0OKVHyQuCouXMSNlo1D0ekyqejWVegmH+8e9a4m2w=;
- b=ImgE2jx9lsgfw2acejurQJPrVE6iLNEmdF1NvAMNLE53l7j8fLY4ZYARIxZEChUz4K
- sE/gbSasLQsNmGBZtKy1uJL0MHpbs/PC65rCyewTCPgJmWRSMLiv3VfLfiVjr7kzhx2S
- NwH63p5owlft238pWwnPX7BvbtMssAnkoUxJMGXtLHAByiXfVIubnACtw7EkLUtoi0B5
- RAWbGrhD8SdQ42FDOLgTcsBnhMwKZBl/hdTWCqipK3jBIHwJsfy5PUA7uEF1Aq50ivoh
- wufuWHO4sMhlCsBTS17W/qsSHcUBNRQ5p9/iuTv9RJtva4fB1slycukrbINgIZwhNeQ4
- DP5g==
-X-Gm-Message-State: AOJu0Yw4OtILJvRN7CGmRug2F86lkNIejSqxLivEnYeStT5IMMHwnIqh
- hNPh/VpCNk6nQpzBCCUMRIfpv5/XWsSPZmJiSCX4214A+c3P4i+LnnbIyBEqK/n+HnW4geHFZj1
- xCMcw
-X-Gm-Gg: ASbGncuSvwxRQHpS6TW06V5ZpjZHzriRTNNbWHcyufeW9HPArizvh+9mb42vXJn3Ljc
- /L5DTVxHBIcuqn8cQ4hHHm9NN5NqbbxICIwuV6N0bKn9Xi5qqoLF4sAvYt0f3a2aKGqqVmDVj6+
- 1nvwVKyuwcEBSj7TiTyyGViZpkZdzpWYfkFIj8qXTbHzwn+5QBIAoEKnNpWxMLJPX6UOGrNoDoH
- z68K8f6hxzJMUBlu26hEsS1c5yfVgdpgHbEZAaxeE19zgcrLq536gw/sUPnTzS8Ab9cyYqO+CnX
- rO9pSrPAqo3T90zw4z4U4ubG110ve30omNfrKGm2Z4jdsfvexxiLBnsI4fuNc7lhQ8oZp5ILSW6
- vvIVrU92bsCdBVHP4mLevzx1nooR1bvsgXpkboXbegpu5vFbUmaN2J2cP45VKRed/I/WpdsyIol
- /1qoxRLZNXEjW2F2kmvqYfIDySWaR3YH/nniYRd62p43T27dWhOTjVBzD8qmMSJ5qACw==
-X-Google-Smtp-Source: AGHT+IG4kT+CgvTDrYduoHGDyq/m5gz4KEq2ZcVlE8NXLIbdsVCMJcPomAbV7FIvtgOnSsCW3/WNTg==
-X-Received: by 2002:a05:600c:4f46:b0:477:fcb:226b with SMTP id
- 5b1f17b1804b1-47904ac44c0mr268975035e9.2.1764591116754; 
- Mon, 01 Dec 2025 04:11:56 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:72ad:24ac:eba1:9535?
- ([2a01:e0a:3cb:7bb0:72ad:24ac:eba1:9535])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47903e5fae6sm163603585e9.0.2025.12.01.04.11.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 Dec 2025 04:11:55 -0800 (PST)
-Message-ID: <def8f892-abc8-485b-9916-c3c1c7318226@linaro.org>
-Date: Mon, 1 Dec 2025 13:11:54 +0100
+ d=1e100.net; s=20230601; t=1764592051; x=1765196851;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=PaaNBfuVXdtj85Liu9TEgpc/ZpuoPZYsjV23+r2I644=;
+ b=gsLtiHxAeVtEyH7c42gH2221uB/KOIjWws//OrSeOv5x4yxz/FJ0i+eqDDRxdVbNLH
+ udosWhXDNXLkSuxHyxaL+qUCww1aN60Eih/64Eb9foYB/D4GQ74wGLNFJjEp4w6r+gX5
+ EumJUs4pwdfZ8NGWBp3YfUzYCde1/Q4bHi1bgtBs3sJq4UeUuqZ1N27dU9bkvetu0aOL
+ RnlIZLzDQtDIo60La9OnFyjYiIqJ+w1nNO9Qc70AI7FouJyYZ49bbsG/NaSDaFDNY+FG
+ 1iUDXcFzNLYzO5zeEmwTN+r4I4fUiDaEpw43RuMw8vRWkPZMAI7uArqaJQUHtkmIthh3
+ BRjw==
+X-Gm-Message-State: AOJu0YwmW2tn+wTmFgnnvMGeRvhC+OC1CPd/vVw2+zXAczaFXIIrLUM1
+ lKlQaemnWUDB/d82Hay7EvK37PH7DMtUbzZtFsmQcX0qhhMUt+Gv5pa1kcScp75x+hSkulu7HDK
+ uO6BK2iQjxa4oNOZiMZgemIb0eRgnCSU=
+X-Gm-Gg: ASbGncvt5T3pa5z0jptVbhc9LhQxfQqMlRRGXDz3TdBnGhApxdAhu+BCjFCuKhYhssp
+ iI5DGdyKMBSG/0a00y+s6caqFV/KWyT4z3PC0wGNlrGMMxpPt5EoOYU2xY135JsoiN9pnwjnjwe
+ qehATPJfn/HdnFW+mj+EZHTqTrk16y/wb3AnxclFItNdkgPrYRjIVHlBsJ7YlWSf0H0kFCJIlIg
+ +br34Z8DwfAs52ERUHn50joVSjlVVf6rEqx9aJbUAjc6IC/52HWaz3peqIl7TH+dVnfr2vCuZS9
+ IRi7UpjI2dqhzW2kKSdyoynLug==
+X-Google-Smtp-Source: AGHT+IG9lHNgdhkkYsFbHlogG1SXylUqelnXRSdmeBTL1GMR1dxOlcWYcqoVULiEtJsapX5AMT65uJyLao3kPGiQRhA=
+X-Received: by 2002:a05:6512:4022:b0:594:5000:4555 with SMTP id
+ 2adb3069b0e04-596b5277ce4mr8795391e87.29.1764592050428; Mon, 01 Dec 2025
+ 04:27:30 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Jerome Forissier <jerome.forissier@linaro.org>
-Subject: Please pull net-next-20251201
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20251201110034.1968871-1-alice.guo@oss.nxp.com>
+In-Reply-To: <20251201110034.1968871-1-alice.guo@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 1 Dec 2025 09:27:19 -0300
+X-Gm-Features: AWmQ_blXbeRPZUv_Rgn-Dyu0AXAo4vfR5nCM2oSu8Hpq9bjMltHlTPJxjzbP1-w
+Message-ID: <CAOMZO5ASAXjAzZOTCusDhpVAACDgNQXi+tEuVmT7FLEgyWG8Zg@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] imx8ulp_evk: Switch to use devicetree imported
+ from Linux kernel release
+To: alice.guo@oss.nxp.com
+Cc: u-boot@lists.denx.de, uboot-imx@nxp.com, trini@konsulko.com, 
+ sbabic@nabladev.com, peng.fan@nxp.com, alice.guo@nxp.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,66 +95,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Alice,
 
-The following changes since commit 65a131531077d75eaa01f8376d8f7f04c146a457:
+On Mon, Dec 1, 2025 at 8:01=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
+>
+> From: Alice Guo <alice.guo@nxp.com>
+>
+> Enable OF_UPSTREAM for i.MX8ULP EVK so that devicetree imported from
+> Linux kernel release can be used.
+>
+> If mailbox@29220000 is enabled, gd->arch.ele_dev will be set to this
+> device for communication with ELE firmware. This is incorrect because
+> mu@27020000 is the MU used for communication with the ELE firmware. To
+> prevent misconfiguration, disable mailbox@29220000.
+>
+> The driver model for watchdog timer is not enabled yet, so disable wdog3
+> temporarily.
+>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
 
-  Merge tag 'u-boot-imx-next-20251129' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx into next (2025-11-29 15:39:36 -0600)
+Now that OF_UPSTREAM is used, the following local U-Boot dts files are
+no longer used:
 
-are available in the Git repository at:
+arch/arm/dts/imx8ulp.dtsi
+arch/arm/dts/imx8ulp-evk.dts
 
-  https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-next-20251201
-
-for you to fetch changes up to c10e1c2eded4783b8f4650da879ebae2beffcce6:
-
-  net: tftp: Remove tftp_init_load_addr error path (2025-12-01 10:37:06 +0100)
-
-----------------------------------------------------------------
-Pull request net-next-20251201
-
-net:
-- phy: Add the Airoha EN8811H PHY driver
-- airoha: bind MDIO controller on Ethernet load
-- phy: Disallow PHY_MSCC and PHY_VITESSE under COMPILE_TEST
-- phy: aquantia: refactor firmware upload helpers
-- phy: aquantia: use generic firmware loader
-
-net-legacy:
-- tftp: Remove tftp_init_load_addr error path
-
-----------------------------------------------------------------
-Beiyan Yun (2):
-      net: phy: aquantia: refactor firmware upload helpers
-      net: phy: aquantia: use generic firmware loader
-
-Christian Marangi (1):
-      net: airoha: bind MDIO controller on Ethernet load
-
-Leonard Anderweit (1):
-      net: tftp: Remove tftp_init_load_addr error path
-
-Lucien.Jheng (1):
-      net: phy: Add the Airoha EN8811H PHY driver
-
-Tom Rini (1):
-      net: phy: Disallow PHY_MSCC and PHY_VITESSE under COMPILE_TEST
-
- drivers/net/Kconfig                 |   1 +
- drivers/net/airoha_eth.c            |  32 ++
- drivers/net/phy/Kconfig             |  27 +-
- drivers/net/phy/Makefile            |   1 +
- drivers/net/phy/airoha/Kconfig      |  11 +
- drivers/net/phy/airoha/Makefile     |   3 +
- drivers/net/phy/airoha/air_en8811.c | 805 ++++++++++++++++++++++++++++++++++++
- drivers/net/phy/aquantia.c          | 101 +++--
- net/tftp.c                          |  18 +-
- 9 files changed, 918 insertions(+), 81 deletions(-)
- create mode 100644 drivers/net/phy/airoha/Kconfig
- create mode 100644 drivers/net/phy/airoha/Makefile
- create mode 100644 drivers/net/phy/airoha/air_en8811.c
-
-CI link: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/28573
-
-Thanks,
--- 
-Jerome
+Please remove them.
