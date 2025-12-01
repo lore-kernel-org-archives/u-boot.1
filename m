@@ -4,88 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5536DD116F3
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF789D116F5
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:49:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE09783CC7;
-	Mon,  1 Dec 2025 18:49:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 52F6B83D0B;
+	Mon,  1 Dec 2025 18:49:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ulOJmk96";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pMrgCm81";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1649783D03; Mon,  1 Dec 2025 18:49:26 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CB81483D17; Mon,  1 Dec 2025 18:49:39 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E83D283C6C
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:49:23 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c77fc7c11bso3619478a34.1
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:49:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764611363; x=1765216163; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aoxxnNxUuHxZLj30kAU1Wl6nOQh/l/2REkZ659AMCt0=;
- b=ulOJmk96GDQflm8CqKRv7UZgJvosGFQs2uysCXCJ+jm9XAJnEMZb2VmQRgJQDu9cpu
- 6Ykz/HIoScHnEBnMh+f6KDtPa1lrvYeuwGsbqSJ2A+2zzAmWXXJ7F7qoYjtfR5R7sSXx
- 0E+3FAX9k5pnqpoXuG+E41ELhJLYhC+i74evA=
+ by phobos.denx.de (Postfix) with ESMTPS id A3CFF83C6C
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:49:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 515B940F02
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:49:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1764611365;
+ bh=GIwgyRGtSZOgUf90kJfDowhu4KjgEeQ2YthmkdKcSU8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=pMrgCm81LjbGAKOIDZTQpvkBEVTWbrmJVNCMC6kq8kjHJSkYwV20X05pUIfICNuDD
+ GSTu52rrV9QHX1OuwavgxDkr0+fcgMmPTddWUHorR8e8xcE0oio0pzZj7KdTbU7zJ4
+ QKUcAI62g9LWovtji8LHKV0jPh1qO1TMmQdEtzjpFY7l8dbuhYKqSfRCv5tLcxMGEQ
+ E9UTI7/fHPRTXsoNnKcNlQmYcZYHTOTLFrdcO1LtxFDRvsk6Zc5SMPdIHd9Ilm1xjW
+ P6IjOsT06QXN+fDhk+kUg1vSDEQDqewLGwOK79MzWQPe/IAHgybwoctsxjZTovohjz
+ y8mDRoo/kp+2XWArlog5B8CjmH5QEb+3As4xqrwL7+bXB8BTMZt1HLptHrfRkrODI2
+ RI82ONUdLcXdul2enAQyHdRjxpw4epxRPRIZUiv6HDTjFijotRYEKkq7wPgG4eWzUW
+ /XU3pfxeGH1zLjff9pGWZeokP2XVQ8UlKinKGTGRPPVxRP9tvyu1zC6wiu1ANi9THW
+ 9QMDc/OBZjGA433aAJjG3F3uVLPWOh1NoC6ItkHh/BpfFViw1ViLIPjagKyp6WhN00
+ 9cD/yBUEhuuMuSSbSJz/PwbDWdc4cevmeFHJTX/179MTowJIXYi+4VhzZ+Z0UwdiHw
+ j13TGJuS97pvPzPFafm3fOoE=
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-47775585257so31765415e9.1
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:49:25 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764611363; x=1765216163;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aoxxnNxUuHxZLj30kAU1Wl6nOQh/l/2REkZ659AMCt0=;
- b=qRVjpVE2XqZvGPg2qt+QnxqhyDtbMCIIFhfM3VF2sMQ2H5apwDg6/fpKwFqTAE4vWp
- 5UWvuyhQB0Aa5oSivPocnI7N2JB/KQpTv70LQZRDFxi+GaPyHn6m88BtBB3H0grlgpA/
- fBwDgKR0xYN+TrmnYStpbPWh2xg0hLqxwUByTuUhRQlTkePgiyqvmpMNT6k/wa8UcSAx
- UYjXgbyBw207PYM71aN9bC5gKuHUayuPnQwNf3cJSnEMIoXVb+1y3TLD95F2N1pm5EXB
- MvQe/EzF7CbhcZLnc8GxfAC55hiRuFDvJFAf8H2aKv307Oyn63g0pTowv9ux9fvhEEin
- J9JA==
-X-Gm-Message-State: AOJu0YzDqA472Dbi6MQO/spRBQXTtrz43sntOskMKK45Ey17XFK6RGeL
- MM9FWoObaX7JS/BXRBDJe6J7tVBpeYm4iwgYp4yO/ThzUCLiA9MbBzITFmFw+hEZwUI=
-X-Gm-Gg: ASbGncseUhkSJ/dmv5DzM2V+QOdysQUlS0cDhgco7VZfKyXL7jUWRHwTEGp4Cs8S6Kx
- ZuTgARfsmGqxLeEl/5vqwBQX6Vbs/4z4wVE9bsyKarW2aOv9IzBbIxl3S2euPIbvjvmehQav6+h
- QwDuvoKgXIUlJw1n7P6CIabPY4Icgq0HbZWyJL+f/26tzX2CIes5utm5cW0RoVnEXmlaKeq95L2
- 1US5wuzPlBAKR2maVRym+KDKQdIUy9N7qju8DiJGtdv4O5ZB7oatPeeWEaWAP/6IyaRPxRNv3lW
- pFmW20tm07qu/bPcMf2oEhEs+zgSVZY/yXcGuUy5t4Dro9RKjo9Cy9teCJJ7CBl86KR5sIZBcwC
- 5pWmNGtNva76KAaixLW+Z/t0XwCVAdvI+TlS4zNoE5v1k8uzGUIM6JBxfZq3qS0mZ2FkRqSa4SJ
- iVpwK5Zeju3KDpAw/5w3bSE+Y21x5zEIlBIB4mzmq8WSpIQtNxfw==
-X-Google-Smtp-Source: AGHT+IFb9FqyF/OZXglBD5VbPUDh2ra2Nz6KXMm9aiHWgA2Tg6vfDgR4uceuw1TkKioR7SWqyRZeLQ==
-X-Received: by 2002:a05:6830:4486:b0:7c7:6e32:dc72 with SMTP id
- 46e09a7af769-7c7989ee704mr18241161a34.2.1764611362481; 
- Mon, 01 Dec 2025 09:49:22 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c910025e06sm4856299a34.28.2025.12.01.09.49.21
+ d=1e100.net; s=20230601; t=1764611357; x=1765216157;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GIwgyRGtSZOgUf90kJfDowhu4KjgEeQ2YthmkdKcSU8=;
+ b=vrfU+exGnw6+JgUw3jWSvhRE06qu5BcqzIIpkI1O1hF8Ojoe53hR+WAB4STLrSlC+a
+ Y9Nd3IGato4nt+g9tQ42N8OeF09awjOr05FYUKdyb3zmsDgOwgvDQNSc7xZoiWgylaKY
+ 32aw9j2QINsIWafmGlUnlOvXaHR80cv45t5Okq3wucPWA+OXuLLJGRGfTa1hS4N6ROn5
+ BI/D9eGqITOBltQ8nGpJ8DOZXWD7joHs0smFM27wYsVY7DnP+84dZksY5EwtwmKk+olP
+ WiaH90mIWr4XNgMOttSIV9xdRegYCS89HaOiQ9UFKt5GyIKM6IGspv/GY/spayV5JIH0
+ 2r8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXGk0ono0+3IClNwnx/ukcbpC9qSSQlJzpBccwuvq8eUlpjePYDpOs4YSnt6baD1t44PuQCPek=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzvfpa29o9UgATbvcG5bm+xbcHlEk05OTgNHff3sssPI5esvJiq
+ OhCzwKk7R5+X3unjQQ0W488gwmjzKQXFxhHdYs2O6WtHg07NIXYx+wtpCVNORO95ZdREuiHre2G
+ lvW7HLTcWIBlxi0CAhPlz5R027xkE9lVSPyJYvR4LMAirdNMcZelUIWFQQ8J0ynVtnFHjP0I=
+X-Gm-Gg: ASbGnctks342u0Rva8sdH4NtnpQiRJBJe0oTNurRdjzdkqK3rStvdCOuKUciYqEy2TN
+ QedYQo8ZJefjrAYZq15sH4KVHVxxSy683bZ6Aga/I9NW4/E6IVWMvUGi0A06EoQGNbkrMdSg1h0
+ y/T3m4wFQH1kwRur8pFAAkuuLop/QySsYkfTLqZxVV0RNu/aLO7oRZZiT397XR5rSJKkmiJ/zEg
+ 7yL8BXaTwz9Y36Ecxchk/XS2Mku6Kzhz2CUViwiEVIoA/C1rRLsFFMwcmVTHxFeAMpAhps/uX5j
+ 6iY5Oc2OQiwkBwSaDTCT8s2/rKJOJPjfANedH/g0OvYJXTImHc4FTpsluUzi+xt2E6Mnrtkimil
+ B0KRDLsv0eiL/qr3Xw5Js7OQl8SnhlL+MUhgnwbC1DWZWeiO5iugOHxQY0b5VrXVgtQdmVPA6ey
+ +A
+X-Received: by 2002:a05:600c:1c98:b0:46e:37fc:def0 with SMTP id
+ 5b1f17b1804b1-477c10d4887mr359935915e9.9.1764611357151; 
+ Mon, 01 Dec 2025 09:49:17 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IETbMF5A6ISmL8lT4TB1ZKZMOsqYtH8uK3p/DtNudDLmcuj/uAQY+TV6/iIEPcNYuUqi0mauQ==
+X-Received: by 2002:a05:600c:1c98:b0:46e:37fc:def0 with SMTP id
+ 5b1f17b1804b1-477c10d4887mr359935495e9.9.1764611356688; 
+ Mon, 01 Dec 2025 09:49:16 -0800 (PST)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4790b0c3a1dsm324072125e9.10.2025.12.01.09.49.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 09:49:21 -0800 (PST)
-Date: Mon, 1 Dec 2025 11:49:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marex@nabladev.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Simon Glass <sjg@chromium.org>, Sune Brian <briansune@gmail.com>
-Subject: Re: [PATCH v2 1/5] spl: Kconfig: Add missing SPL_LOAD_BLOCK for
- SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
-Message-ID: <20251201174919.GA2247668@bill-the-cat>
-References: <cover.1764574369.git.jan.kiszka@siemens.com>
- <db6aa161176dfcc4d2764e9411b4d195c9c3208c.1764574369.git.jan.kiszka@siemens.com>
+ Mon, 01 Dec 2025 09:49:16 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Rick Chen <rick@andestech.com>,
+	Leo <ycliang@andestech.com>
+Cc: Yao Zi <ziyao@disroot.org>, E Shattow <e@freeshell.de>,
+ Hal Feng <hal.feng@starfivetech.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/2] RISC-V: implement private GCC library
+Date: Mon,  1 Dec 2025 18:49:02 +0100
+Message-ID: <20251201174904.652954-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yNfO8uuHPVBtiOjS"
-Content-Disposition: inline
-In-Reply-To: <db6aa161176dfcc4d2764e9411b4d195c9c3208c.1764574369.git.jan.kiszka@siemens.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,36 +117,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+We currently include libgcc.a when building for the RISC-V architecture.
+For instance lib/mbedtls/external/mbedtls/library/bignum.c uses __ctzdi2().
 
---yNfO8uuHPVBtiOjS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+At least the Ubuntu Linux distribution has switched to building libgcc.a
+for the RVA23S64 profile. Using this library on RVA20 systems results in
+crashes. We therefore need a private replacement library.
 
-On Mon, Dec 01, 2025 at 08:32:45AM +0100, Jan Kiszka wrote:
+With the series a private GCC library and unit tests are provided for
+64-bit RISC-V. This is enough to build for CONFIG_WGET_HTTPS as suggested
+in E's patch
 
-> From: Jan Kiszka <jan.kiszka@siemens.com>
->=20
-> We need to explicitly select SPL_LOAD_BLOCK when USE_PARTITION_TYPE is
-> enabled, just like the other choices do.
->=20
-> Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+[PATCH] configs: starfive: enable wget https
+https://lore.kernel.org/u-boot/20251112005451.41285-1-e@freeshell.de/
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Heinrich Schuchardt (2):
+  RISC-V: implement private GCC library
+  test: provide unit tests for the RISC-V private GCC library
 
---=20
-Tom
+ arch/Kconfig            |   1 +
+ arch/riscv/lib/Makefile |   2 +
+ arch/riscv/lib/clz.c    | 105 ++++++++++++++++++++++++++++++++++++++++
+ arch/riscv/lib/ctz.c    |  97 +++++++++++++++++++++++++++++++++++++
+ lib/Kconfig             |   2 +-
+ test/lib/Makefile       |   4 ++
+ test/lib/test_clz.c     |  53 ++++++++++++++++++++
+ test/lib/test_ctz.c     |  53 ++++++++++++++++++++
+ 8 files changed, 316 insertions(+), 1 deletion(-)
+ create mode 100644 arch/riscv/lib/clz.c
+ create mode 100644 arch/riscv/lib/ctz.c
+ create mode 100644 test/lib/test_clz.c
+ create mode 100644 test/lib/test_ctz.c
 
---yNfO8uuHPVBtiOjS
-Content-Type: application/pgp-signature; name="signature.asc"
+-- 
+2.51.0
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS3VHwAKCRAr4qD1Cr/k
-CkdTAQC8AG5OdAYxPv6HO8Rj1ILXRGjCAOPN95LMHQRYw1xWjQEA6/JthiXrTayx
-NIxm/pJupCuUrE2QnMFzq/SBUhqhUgk=
-=9xPi
------END PGP SIGNATURE-----
-
---yNfO8uuHPVBtiOjS--
