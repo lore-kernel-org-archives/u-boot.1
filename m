@@ -4,163 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B7CDD116E2
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 07:54:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4520D116E2
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 08:20:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71485839D5;
-	Mon,  1 Dec 2025 08:54:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CF3B839FA;
+	Mon,  1 Dec 2025 09:20:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ysoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="nUS1lX7y";
+	dkim=pass (2048-bit key; unprotected) header.d=ysoft.com header.i=@ysoft.com header.b="o7tnNDsm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BF9A839FA; Mon,  1 Dec 2025 08:54:32 +0100 (CET)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
+ id DC9BF83A2B; Mon,  1 Dec 2025 09:20:42 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D57FA83966
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 08:54:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9AAD839A5
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 09:20:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ysoft.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ spf=pass smtp.mailfrom=Petr.Benes@ysoft.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zUEDy0pEoPPeIqUVFQZJBg1a7q7Y4fGqHqdiLi279dEesYORWdiozPvrQVmfN1bCnp+p0Rd44k0I9r5JUZCgaaAC989WbgwCrvvG3Oy3PgHFZ/Zz4a5tMsRQLzz8h/24sALU9ZC/DAIbGJvbFDu95MOcNJ1glTwyiO70hIq0lD7hjMINMKuOj9iaQLclHmTpyYw7KejPkGv74Z8uz2g8/3hg8DmxbvbmUoD5e1tCI49rdm1HiAlCjrCE7DF2EFunUnQb1Qcw6kJOgLaKsuai6dhza8qTOZUVa3tamWCJCTXgeodPVf2siiZlRjjQLUNn6xRSQz7EaCdW/YAZrzUJsw==
+ b=a4KUQ5dbxfdxOcKJeysPpCI8TofiWPGEzpBHF9o6zSyJtwkKbQW5lQh+278K3sf09z/TWUXFMBge6VuiIqFWHTRKZ20j9IbEtFJRGXT5/7GhGbJg38a/MWYbWUxRQaZrIlp55tteMmebQi20xktjHfESKrQvryB1XfGOj9VUBzVDQq0yuwp5S/ZhyNfUoc3RAbrkPqvhcpELdYrki66qGXU36ACU3KEEYVS1mpB2bW//zXdDssKtZm0wo0zUGoEQGZJ5TY5c2qQ+8SUMSvTUcKaU7d61FQC4A5cOcRKESMVBq+/XzbRYML4ttP0QLxr6QNCt1TRlGRiugVk0nEGfGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E9JSDIawGIJlDtdSpyauRAk6arphaYhq76zt4RKy4SQ=;
- b=X5uVt4Sab/rF583LwM/5p9eteroq1aNO6kqxuQbGz4Mf0akGTjUif933fiAjLC8YvOAPeEVSRCeqzaSFBsUM8QFSy88KZ2v+SVLann/P3g6kropg+yZ5iQ69GJnTVnfw6Ii9INgczGaeJ6jYfBSltD7gvpPQVokSo1odKmd84QRKgn8lmG4xayOKi6Apf+oQjBqtuYCNjs6+F25Rhvc6cvdLPX3ICw1iXxWJzO/wVNKtaKaml89bHyMYj3skxsKW57K9N6ZrAogFMi2PoexmRMoj3+Cw8MwRS/+Z2oasi+Jq0erjvuZQH2EhHSiddHdj2NSxnhE9wxpcXn7lH4SG0A==
+ bh=fnf1GyRE6xQURCXanyYzbEDg584gYDCHVfVRi7ESOtA=;
+ b=x6kAulVaZpr2NPfvOTkvEdyMrY1bNGsEIeUfnlCl9pK8xdxh49rRyWpamORLaMGazH5FJVjx9CglTAPhjqHN29wS/0thD6cc+9IurXrpA4N9HsnobVRKfp4bRw4DhVGphjzX4l0wNNZ0ecM6apmS4v4XprWZS5sWUJphcao6HTfaHWADLKpvOXCgpUsU+cGRt9wTZbvhVIgSHZNbisCunHKnp9lxP8OeS3DcpzbGlgIshr/YBjFnVRBN6nKBHFTyRYe4u80jC24RJuygAoEzOK5b7VdmY0KzS1Sqeqli86S6wi0zSC4ArqgIXHijqQ0USvvrhdu3yA6aGHUMsvcsFw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ smtp.mailfrom=ysoft.com; dmarc=pass action=none header.from=ysoft.com;
+ dkim=pass header.d=ysoft.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ysoft.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E9JSDIawGIJlDtdSpyauRAk6arphaYhq76zt4RKy4SQ=;
- b=nUS1lX7yHxalRCplOVHO2jeszmPcC8fJztzje3guQteVm4CFlphsvuzKxFW1LdYu9o/IMnmmlIdUazGXLieX2z7CQEIZ6GW1FCayHXRrYTGfFwtfXX2NgWISid5wzAW0VwN6DsiBz+xWuvFtSH/az0Y2eBdSKx6rVOGxmb/oHqpwwrfURbtDFTDHafLJNyo/HsiT2LV2qnGzaOX00tvglybA+KACeAkhA80e4uQm0yacjOqaFM0c7zC7XHs+7n8AIjDXwQh6mPbLqVkQhGzwSjSQvUENmGOM5XzQTgCzFgG/BkurNsGi0U7Q0yP/jqMLTQQaLNKKFg4frmhDJyT8uA==
+ bh=fnf1GyRE6xQURCXanyYzbEDg584gYDCHVfVRi7ESOtA=;
+ b=o7tnNDsmIKCPs/Rd2CDECuTG+dTvhPisXMgMFJW8jTGpSM+ja3M4KtT2RulDqJHLlap9Jzc8BecY/UtySLc217EdG2+oywEQe7wZMs62jgAlrOiwA3s4Fa5uO0sWdFnVD2xa8MXZr9TCR5lwYg6MqlCNXfrnhsLQ3FfRIXTHAGNVeEx/+Xs5N9/DJp55T1Y24HLm8288ZgFHmY+MjT/qvRGBdd/nDI/7PALrhY/y+K/Led1jdegmipFGgACx7ZB5Qn0aWvCwBae1hlW8kC+WDJCvrt3/+BHV8k4sFYv79JS3g5gBygjL6T8Ls2l49O5UEj6ICgrCHi0dRXuWWDnKog==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by CO1PR03MB7794.namprd03.prod.outlook.com (2603:10b6:303:275::17)
+ header.d=none;dmarc=none action=none header.from=ysoft.com;
+Received: from AM9PR04MB7538.eurprd04.prod.outlook.com (2603:10a6:20b:2d8::5)
+ by AS8PR04MB8834.eurprd04.prod.outlook.com (2603:10a6:20b:42d::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
- 2025 07:54:26 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9366.012; Mon, 1 Dec 2025
- 07:54:24 +0000
-Message-ID: <a2600334-a459-4063-a76c-cd14b8698356@altera.com>
-Date: Mon, 1 Dec 2025 15:54:06 +0800
+ 2025 08:20:38 +0000
+Received: from AM9PR04MB7538.eurprd04.prod.outlook.com
+ ([fe80::e597:9071:d0c4:c01b]) by AM9PR04MB7538.eurprd04.prod.outlook.com
+ ([fe80::e597:9071:d0c4:c01b%6]) with mapi id 15.20.9366.012; Mon, 1 Dec 2025
+ 08:20:38 +0000
+Message-ID: <45eb3702-466e-4e22-b27d-6710ac765dcb@ysoft.com>
+Date: Mon, 1 Dec 2025 09:20:37 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8] Add optimized Makefile support for SoCFPGA handoff
-From: "Chee, Tien Fong" <tienfong.chee@altera.com>
-To: Brian Sune <briansune@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20251119111653.456-1-briansune@gmail.com>
- <fcb799fb-4eba-4155-aa0c-46b5279b7171@altera.com>
+Subject: Re: [PATCH 1/2] usb: ci_udc: Check ci_ep->desc before use
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ =?UTF-8?B?TWljaGFsIFZva8OhxI0=?= <michal.vokac@ysoft.com>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
+References: <20251125085846.507591-1-michal.vokac@ysoft.com>
+ <87fr9zss1e.fsf@kernel.org> <6cc1b997-2713-42be-9b0a-dc44db251b06@ysoft.com>
+ <87a506sg41.fsf@kernel.org>
 Content-Language: en-US
-In-Reply-To: <fcb799fb-4eba-4155-aa0c-46b5279b7171@altera.com>
+From: Petr Benes <petr.benes@ysoft.com>
+In-Reply-To: <87a506sg41.fsf@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SI2PR04CA0013.apcprd04.prod.outlook.com
- (2603:1096:4:197::6) To LV8PR03MB8137.namprd03.prod.outlook.com
- (2603:10b6:408:295::8)
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: VI1PR07CA0293.eurprd07.prod.outlook.com
+ (2603:10a6:800:130::21) To AM9PR04MB7538.eurprd04.prod.outlook.com
+ (2603:10a6:20b:2d8::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|CO1PR03MB7794:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9ef51a27-d811-4741-4788-08de30aed247
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: AM9PR04MB7538:EE_|AS8PR04MB8834:EE_
+X-MS-Office365-Filtering-Correlation-Id: 78b44e42-5f52-4d11-ee5f-08de30b2825f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NHo5UmZHWHZRbytZVkVRNDRsSmY0TERMeW1VdWRXbklVUXpzcGo3cllJakxO?=
- =?utf-8?B?U1kreDNtNE1QT1Jrd0FqRndJcnNRQzdQdE4rUndycnlsVDZpZjE1bFpjUDVZ?=
- =?utf-8?B?Tk9FTkgxYzRkSWdmaW9UZnJhbWV6R20vU083NGNiM3U0T3N0ODlQRzJGMkpE?=
- =?utf-8?B?c0ViOWtrT0VmMkxNT2N4dE84UzlMSnRoaXZiYVZkQTVQWndpMGN6V2llSnBn?=
- =?utf-8?B?SzZpQWpvUDgwU0F1clZGZDFESDhNdm56NmI2Tnk4QklqY3lwLzNjSWxmcGtE?=
- =?utf-8?B?L0JhSytIamJGVHh0dS9RaTJLb3o0UStpUW5LU0hUK25XaXNjZEViNDZjL0R1?=
- =?utf-8?B?M0hteHNsbmhCV1BnVnZtcGdyL1NGNzg3RGFBODl2dzRFSVdFWlMvRVhtbEdv?=
- =?utf-8?B?N05sdm5QRElzb0VINUtBZWxwZktuM3dMMjB2dE5OSHhLTEdlaXZjZ3FlSVdx?=
- =?utf-8?B?c2FaUFZrMWZiSGxJaVlFeXh3aTNobm5jTDFtU3dwR2Z6STAzakhicENpTHN3?=
- =?utf-8?B?NFVGUkpod0NpeXpjU01kdE1yOEh5YkhsL0w0TC81S29wZExFSVRFYldUZnhE?=
- =?utf-8?B?NDFQTEo5L012bnZkdTJKUUhRSnVnKzJqUGVURmZtZjhxejJJMWdMVURyQWI5?=
- =?utf-8?B?VE92dm5jWnVCRWpRUWh2R2I4b0F5U2twRTRoZDFXSTRnL0NwRXFveWpIQUIy?=
- =?utf-8?B?d0hrS0pESGdSQjBIRmVzRWNYbFNWQUJoZEI4VjhnRWlFbHU2TXROUjB1NlhP?=
- =?utf-8?B?RmRZdUt5NUZTem0xOWxIdjQzQUFKRHUwekYwaDJjQVd1R3VQM2VFUkwvOElt?=
- =?utf-8?B?aG1wZlpmeUp1UkJCRlFIbkVDYncyaGZ5M3dnbC9GSWNVcTdsTi9DVWNlVEdX?=
- =?utf-8?B?azREdG1nQmxxdUJMUk9xeGxhNXBSa1NBNmdYemlKN1FPWXVKK3cyaEF3Wmla?=
- =?utf-8?B?MUd5UzE3L250c2MzZ3VEUWwrY0ZtVUhoOUVoeHAwWXB6ajVSdlA4Y2M0QWxU?=
- =?utf-8?B?ZXR1cnFzeGx6TTh5NGxkVEw1TFpxV2hRaHdPajFnc1RvWGs2RjRGU3dvNko5?=
- =?utf-8?B?bHVJT3czWjlqVDBUWmIyUkxSSUpoRjhtN3NwNmxGWVBwWmdINHMxWkd2bEF0?=
- =?utf-8?B?dEhoUHlsUWJvMVcxdTN4OFpPZFNiam5qZjB2U1BiS0xlK3lMa0lhakhZQ2VW?=
- =?utf-8?B?QXMxczdRdEE1cEJ2Q2NjSXlEeXRrRHRJKzVRaldFaTVWTk44U0F1Q1VXQ0Fy?=
- =?utf-8?B?SXJnOFpIc0pzeE8rcHB3Y2lBa21pVFdIRlpsdytjc0NNaDVpWTJGQ215eWJl?=
- =?utf-8?B?RUFBSTFHVWE2TUh1amQ1SDVFMEV6clNwMGwrUS9rMkwza0dvQW8wSTFwcEJF?=
- =?utf-8?B?M0R0aksyOXhVTUU5L0g2WktaUUtXQ0FUYkNWVVV6bURkc3ZpdHVSU2FzeVhQ?=
- =?utf-8?B?MTFWVVVvSTQ4d2Zoa3hzOGszaC9mOXdCQk9SdU9HU0ZxMkJsUnRHWGlyd2Yw?=
- =?utf-8?B?VTFmKyt0ZWQ3aFZqOTJWQVZaMnMrdmF0cHdFa3RvbDNvZXRlc2t1S1IxOGlX?=
- =?utf-8?B?TVZxMU1SYm10NngwcHNxWnVIakdONy9hMUlLdk5IdGMydm8zTjVicmpDdFZp?=
- =?utf-8?B?ZXNRZjdaNHd5amt2Rk90QlRWb1JWN0ZPOE40SWQwck1KblpEeTd3TG9RSnVm?=
- =?utf-8?B?KysxQ3pHcitkWjRwTzlRM0ZsS1R6SS9KbjdnalFpRlQyUG1iMXM1VG51dGs1?=
- =?utf-8?B?aXdpck0wZUljeTNUZ1pJb0Q2WlVwWWFBcERGVm81cmNZekN2QjJ1d0VTc05J?=
- =?utf-8?B?V2N6amFhdFhrU2NLdFhaYW10Q3AxN3B5OTl5dEpDL2E0M1ZvWU5qVFZlOG1x?=
- =?utf-8?B?UEEzVjRENnkwLzFZVDdMeFFJTDd4eU5QSGp0VGVjQ281aDBOT2UxZTZXTHJh?=
- =?utf-8?Q?s7xqQo1ltaG9/ZcfJgWVfx4zx7hDpzLv?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eTcyNEk3TndXZXlsWkYvMWdwWW45cGY0MTdNc1NDTVI5UnJqb3BUczRCR0N6?=
+ =?utf-8?B?M0ZZYlJTVU9qNlpKZjdyQXRUR1REOERTYWhETWkwNXFwcVFQTnJoTytDbm81?=
+ =?utf-8?B?Wmd6ZGNGa3NIaCt6NWt6MHBVVE1Rd3psWGFUYlJoVUlRVXhuc0xpK2REck41?=
+ =?utf-8?B?Uk8zL29hdGxkQS90YmhHTDlVa3c2Rmg2eEIwdFV4dmxnSUk3bHBjeWN6WCtj?=
+ =?utf-8?B?aWNOUTd0ZnNwcmdQOWQ4RHFtZ0ZYazlBQ1Q0T1pTYk1MWGduTFNKcnludTZ0?=
+ =?utf-8?B?NUd5TXk1NTU0b204RXhwMGI4TCs3UkJQMHA4RTRhTjNwWk9jZzAzbHhNZ1Vy?=
+ =?utf-8?B?V3p4UFdMbldqTWU3alVZNTJYNE9rbnIrcjN3d2dVNHNyZWJoQmtJNzNZU3FE?=
+ =?utf-8?B?MnJUWjdPbzM2TFFtNDJZTnN5VVRreHNWTmREVGIzUFpPSDJGREtROWs5TDkz?=
+ =?utf-8?B?NUNDb3hxczc3L1FOUnM0bDVyRjZUQzlXTE5XUnE2bm1jZjA5SjdUc3dxd2Ni?=
+ =?utf-8?B?eE9LdEFSNkdNLzNLN3kyQjREM29TWENhaFN1eHdDNTAwYklaa2hEdlJyTnNI?=
+ =?utf-8?B?RndsVXBsdmVTTnlCV0pOYTh4d21nN0thUHNvMHVwRDRvQzlpYkgzbXRUS3Q1?=
+ =?utf-8?B?eHkrdXNYUDJHQ1lNWTV3OHIyL2Q2c2x2RjZmSDdLV2NLUTlmWXk4ZnRBUTBU?=
+ =?utf-8?B?VXhGSysxdUVLUGtaZXNKN3M5OFZXWVJuMWFSRHF6QVNCUUFxK2VvTnVWUUFW?=
+ =?utf-8?B?VTJYakdqbUNRaGdvQTNEVDduZjZnd1ZmbUpWOVRLVUFJTWpFNGM3RS9VWXNr?=
+ =?utf-8?B?c2VleEZiaFZwSWlocW1GTCt1czVWdTNPcWZIN3NkMDlqQ2k1K3d5cmNybGs1?=
+ =?utf-8?B?YlFrYk96ZURtS0kxbWJGaHA1Skd6SmxnU3RsTlFmWC81Ymw1ZjNBRlJzcVA2?=
+ =?utf-8?B?VTVoVTNsK3JRRHdEL2tFNUFXV0F3OXpFdFZsUUkxUVBoUlduT3pVZjEwSmxD?=
+ =?utf-8?B?cjExenRLOGc4TS9ScS9uK0hsczRBZk1jQ01XenlMSGo5UWVaYkdNWHZLVnZY?=
+ =?utf-8?B?Q292Z3pNc0piVmlVd3h4czY0RG1Ma0t2eG5SRWwvZFkwZk9mc0t2bldiNjBX?=
+ =?utf-8?B?b3I4dlhiU0twaGFZaFFwWDdsaTd0cjVpbk1LOStqK3dPcFRucEVZVzZCa0xT?=
+ =?utf-8?B?UmJhZUdPT3ZYS3kwVkhDcjZWK25pZzRPbDIwdmRXQ0xTV2xmbUZkTXpQTkZJ?=
+ =?utf-8?B?WG5FVzF3eWI0NjFYT0xkM29oOC9Ga0xpV3ZLNTRBaGRpNTZwTXVWSmVzb0xw?=
+ =?utf-8?B?eWRTSUxGa0lFQmxpaEtTaW1FcDdybndFSU1HVUMrT0tYUUZNTzVWZVJZSGx2?=
+ =?utf-8?B?aUpqNmFxUUN0WW1FUG1iVklDOGNySVVZd0E2OGg0YmkvaGRYL3l4ODJqLzdh?=
+ =?utf-8?B?aU9FMC8wZEVtWHBSM0plbk1GbitqeXgvU0pGL1dQM3BBbG5ORURzQmhmNHFi?=
+ =?utf-8?B?L1p0dnNYd0VtRVJnMVdqbFNWZUtUcWx1NmtESU9IekQxbnN0c1k4eXNCaDJZ?=
+ =?utf-8?B?Zlc1VU1YOFFmc3hwY2lhL3pBOHA2UkJNUTh3eGQxQW1vdWVoaXRxZEcxb1pM?=
+ =?utf-8?B?RzlZLzhCNWEwVkdXY3pHYXB2UnI4aUtjOFRWL1lyTjEyTURLbFlBS1RDV1hp?=
+ =?utf-8?B?R1puM3B1d0NXYktTd2RFa0NpTyt4S1hxbU50MW5YTHdrc1NXMlhZbyt0ZkR6?=
+ =?utf-8?B?NkpnVnd4aWVFQnRadVJEY3U4OEtnSHNMTVZmNUlCZG1aN0VwQ01Pb3dJL3pw?=
+ =?utf-8?B?NUZxRGFRRDhKcndQYzdmVldYM1IvbnZxVldXOE9wNVhsR0xMQkVEVHVBbFI4?=
+ =?utf-8?B?bTcvb1MwZFc0ZnZ1aklhemV2Z2NMcmNaUWNUdWJ2bCtFY2FyQ2RrcVA5b1hq?=
+ =?utf-8?Q?bKqDH8/prk3zfq1socJBT+k+K7LzxUE6?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:AM9PR04MB7538.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZTBnOHNYS3NISnh6YWhOaWY5NTdmWmpMbWJQdlBhbEk4OXlPSjVkSUIyS21G?=
- =?utf-8?B?enhQSlJYTkdDMjFLR285MUNaQWRLaWY0bXgyWGJlY2NRM3poWmhEUWhGMCtM?=
- =?utf-8?B?U3NhWWk0OUxtMkhnOTBoWUdWV29OUnFaL1pYK2FWQ2UyWG13bDRCNTcxZzFy?=
- =?utf-8?B?ZlVYMHhBaS8vMFhlaTNTelFlSGR4V0dsOGVkYWo1NWtTbFNJb0N6b1hmazR4?=
- =?utf-8?B?Ymczejk4bkZXTWJ6WmtldWtlaFhqUnZUL1Q5UHNSMkVYck8zQk1nT2prQUFh?=
- =?utf-8?B?UVY1MkY2R0ZjR09lUFNRa2p5M2UwT01lRVpTbEJYQXl2SHd2d2NpbHN3OGdp?=
- =?utf-8?B?WHIvVkxNUEYxSU1VNGp3NUdXZU5BbnFKTlY0UGZUUG03ZkVQVTdraVBnaE5o?=
- =?utf-8?B?b1loMG52QWJWeXdFckJBbHlqZGtIYTh0RytWSFpOWW0rVk90L2VsSERhelp1?=
- =?utf-8?B?YXJJNS9maFpFbktMZzZFTjhZRTlXTm5FL0E0VUNVak9IRUphV1pTUVM1NEZH?=
- =?utf-8?B?OVlPdnBiQ3p0eHpjWjdoOXhseXlWTFljblZEZG1Ec2tBc05rTmNPdFpoYk81?=
- =?utf-8?B?SEFKZ3dJUFU1VUdRVktXSUNKU29QcHkwc1l3ck1tL0dDL1Awc241eHZtTTZv?=
- =?utf-8?B?RnZRWWlrWTRReWxralEyM05ZVzBUU2t5aEpkQWhaN1U5Vm54TFlVT2Z1Zjh6?=
- =?utf-8?B?SWI2ZmxjUW5JQUFsQ0NTSW1iMURZcU1xQWhqV1R5bURDVGlPU1l3bWtRK1pw?=
- =?utf-8?B?VVQ1MkhpUlV1VFpjYlg2eWJuZWZzVjI3YlArWXl6ZklBdXZSL2FCb1BLbHlS?=
- =?utf-8?B?YXlmTWdMOFY2cTBxVTh5NjU0Y05rNmZiWkRsS2hLT09qb2ZyeWJjdXNjVjdv?=
- =?utf-8?B?L3phUzRYdDRPQ0F2TFpZNlB6WFhiNXRVblN0MUcyZSs0ODB0RU1tOGxvMHhF?=
- =?utf-8?B?UVdQc2YwamxYOGp1T0FSa25Tc28zZmtlc3VJWEdYKzZRUVN2bVhoUUtHKzFP?=
- =?utf-8?B?djZEN1JSWUtoeW1GSkZ3UjdheWQ5NWRZQkxhcEpKcGlLY3oyTE01RGEwZ2xW?=
- =?utf-8?B?ekNBWnhXblFmaldLd2xBS2kyYy8wT1E2UnhwS2dSUFNDKzNRK050QlltTkJ3?=
- =?utf-8?B?M0FIVWhxY1huOGloanFleXlGQmJIb0Fmbm5OYkJYcU9nZTZ6eWNPeUpreFox?=
- =?utf-8?B?eEVPSDcralQ2b0xIOVFFMVJTSFZPSzhJUjVZM3lzQkZGd1d6TktHaVZtNitF?=
- =?utf-8?B?aDd0Z2FkTFQvM3RsUnNuSHpCTklDdnpFRXd0M29NeWg4VThuZitzcC9DRUJz?=
- =?utf-8?B?eXZpRXovbEVlZnE5TllaVTZGUVkvZFhmYkdDY2xDMnF6YTFRLzdDR1JjRGpr?=
- =?utf-8?B?VmxZcVg3NGg5S2g3bGVsZjNVWFhWeTJpUmpMcndoQmg4Sm5ja2w0OGdBTzBV?=
- =?utf-8?B?c1U1VGhZZ3lSTTZYbDR4bUZxR080T2JmeG40VFYzb0lQUnhrUVJZZXBtU2hM?=
- =?utf-8?B?VXpZYVFRb1BkS0daYW1vVmFvMEhiYmx4dUE5ei94TmNiWjBvYmFUQUlSeWxh?=
- =?utf-8?B?KzlNdjl6VWd1Z0RNMGIzSiszVjVoNTc0Y0hrRkNKUDZUUUV2azcxemViWitM?=
- =?utf-8?B?aElXcnQvbjNEU2hNRUVpSURHTk1vb0s4YjVVMWY0bW0wZ2crcDJ3RnFGdW95?=
- =?utf-8?B?MjYzU1cyaXRid3I2bGxrdkhEVjhZYkxwZkpBcTU2STA5eTk5RDQ3bk1UQlFQ?=
- =?utf-8?B?M25WMzRtMVVjdzdLNVZSREp3Q1dhaER1WXlibzVwS1ZndDcxU2xMRDFrRlky?=
- =?utf-8?B?TnVBMGthQnJYem5JcFZWMHE1QUNzRlE4bHFQRXFCMUhJNDhIMk1Fc3IrRlB2?=
- =?utf-8?B?aHp4U1ViZE1ub05MWWszMkxYUlRubGVwRG5aVWJER0hvZ01NcnZxZllwSnpH?=
- =?utf-8?B?eXJSTVZvN0JEQUhXRit4U1Fyejc3UzQ1elJuRVlETUo4S1YrcHRqQ2JNeFY0?=
- =?utf-8?B?YzJESlVQdlI4Ui9xYmJPZGE1alFPMCtXSFJJZEVLL0d4QW9jckJXUURmUUdR?=
- =?utf-8?B?RVpCY0xLUkRMcy9QdW5ZYjh5YklBLzdOWUFUSEwyd2dHZ2lNUGhHL0xGc2x6?=
- =?utf-8?B?S0I3UE9BcWs2N1FvbUZmdVgvOFVvcnBqa1JLMEprMmtRRVB2VlB3clpJb01J?=
- =?utf-8?B?dVE9PQ==?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ef51a27-d811-4741-4788-08de30aed247
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aHR0RXpKbUF1S2ZPbTg3eTdLK3E4WDFjM1ZQWHZGYWRsRFo4SmJIdGw0RVFL?=
+ =?utf-8?B?L2t3OG5LWHZUYlZOMnpERVBXOVczY21LbW5nRUwzM1NnU3BLVnF5Sy81ck9M?=
+ =?utf-8?B?Nm0ydWY0cW1xZmtncEpxeHU2MmtpbC9ndFJSL05LTXdIVWRVbDdORjNGbFhr?=
+ =?utf-8?B?M0xZYXIyTXdPeXhVTFZvNEp0dlBzM2Y0Wm1NejRON1R3S1d2aDdxUjhka0dN?=
+ =?utf-8?B?MkZjUUIwcVZpdmIxdi91Rks3V25Gc0NMSE0yczQ1eTNNM1R3UHkrT1NsNkN0?=
+ =?utf-8?B?OXllaS84bENlMzkxaEpxbTMwUkZ1TXl4MlZVSnhleDNSOEMrcUR4NzI3VzlN?=
+ =?utf-8?B?YlJVSXgzc1d0UmZxMEc3SkVVWUluWWlPbU1VZEVTRFVpNy80YUMxQ3RUdW5x?=
+ =?utf-8?B?UWNTcGYza3ZIelBORmtwN0JHYnJCSk1YdUdSbmtlWi9LeWgrQ3ZrczdaTWxo?=
+ =?utf-8?B?c1BVQjMyNzNqNGJTVGhaN3g3Wk1WV25Sb2g4REdrMVcvYlQxUVY5SEd3aldh?=
+ =?utf-8?B?dmpCdzVzK2ZtbW4vSzc0YWt2ZWxXWFgvNkdvMXl2U0xQVHRIOFphaHdpdGQy?=
+ =?utf-8?B?YlFYVS9qamZmOHY0Si9aWHFrWTMwNEp5aFZmQTdVTHdpNXpUOFo0SmpZYWdr?=
+ =?utf-8?B?Nks0elV4dmE4d3Nrc21ERWxBd2Uyai9PaWtEYkhSekpiR3cvdTRYdDU1VE1I?=
+ =?utf-8?B?RmFLa3dwNEVva1diOTJZNm1DRTlIYWUxZk5pUUhhcHdManFnZzdyVFdGZU45?=
+ =?utf-8?B?eVNTdDVwdXV2bDNqZVBCUDFtYkRrM2xwTFh0STFUNUhCT05CN3BoSEpWbEVm?=
+ =?utf-8?B?V1UwcXRUMXU1Vm4zeFpXbWdCRFJncCtDTmJSTncwckFyVERKQndpU2JnWFh4?=
+ =?utf-8?B?dVBJMGFQWk0yL1JEY1lEaEZJVGhBcnZJMnpETzF5UkJucHRwYkl4djRCMWUv?=
+ =?utf-8?B?eEF6WWV0SEZ6TWFaUkxPWEpYbGEva2FQdXZiZVF3TjQxd2tRYTlZeEkySi9F?=
+ =?utf-8?B?WXR0QWlyS0RPN3YwRlNGMkZNb0UzUW9WaGlYUjNwb1oxMlFES2tYeGZ1WERI?=
+ =?utf-8?B?c1lGenlVbnNYUGkvUG82bkd2YU55R3hMbnlrTWZrRzlnM3IvRWlnVVlWTjUz?=
+ =?utf-8?B?M1hlUlBMK1E3dFFzeWlzODB0Tkwrb1Q1aEhpRzJaaHdSUnNmZHVpS0VZcnFC?=
+ =?utf-8?B?ejRzeEFJZExzbm9FZ3k3aUZOdkZOVVBXL0VsWEU3OS85dUJFOVNCdGdicE5i?=
+ =?utf-8?B?Qy9vWm5kT1BxOVp0eEZ4Y2xzSi9TQ3ZIM0srV0lQYVJoMi9Wejg2VlhHTW5u?=
+ =?utf-8?B?d2w3OCtCWUpFamUwb0pEbEQ2UkhZNXFqOWpCZWtjU0NvRVBaVUs4RzlHS3g4?=
+ =?utf-8?B?TFlSRTJRakNjZ09yTm53QVpkckFGVUhidkdQVU0xUDVjaGUrUlpsdnhYVGVn?=
+ =?utf-8?B?WXk3UWJ5aFl3MFN3R2xxTW1SanJGRWFoeHJKalA5RDBXNVlQbkM0aFJyelVk?=
+ =?utf-8?B?UHVMNElIaW0yZ3hjZ21VemlKOUVJRmg1eGZTUVQ4MlJvVXZENUZRS0U3V05i?=
+ =?utf-8?B?dDJUbGcvbVVjNU5yQmJjaGJNS3h6SDNyZDZDVGF4eXlmbDkvTUFlS0VBcVo5?=
+ =?utf-8?B?NlpwdzNrckZBWk80b3F1dzZxUnV3RUwwanBqTEVvd2YrQkNGc0sycTZIS0Fn?=
+ =?utf-8?B?ODdMblFPNm9zOWVkaXYwQTRKdldpTUo2akNlUVI1a2NvbXpUVUovdVRQMnlw?=
+ =?utf-8?B?UmxNOGlnWitVUlVjY09ZcFJ3NGZickFCdjg3TC9EWG9UNnd5cUpSUVZCTWRV?=
+ =?utf-8?B?MEdSa0g0WGtzdTFzZS80L1NVWjRjNm4vMmRCcUdWVUIyTjZVRnRiZkVNUmk3?=
+ =?utf-8?B?RzZJYTd5OGlXSE9IaGFBUTczYjdpd3RUNFpWNDBrUTFzamlybm80Zkx4d2dM?=
+ =?utf-8?B?YmlTOHlEWGpJNnNPOG9BWU5Tbzc5clJyekc1WEtxZ0JreCt6UWJlb1R6TEhI?=
+ =?utf-8?B?SFMwakFpaGRXMHEvcmlRWGJleitTaW0wMUtjdGZZcDVveGpEbWR4NndLeElW?=
+ =?utf-8?B?UFFBTXpDTlZLbk1MRFpyVXptMjlET3RLRDNoYzJXMk5DTWFLeCt3RE5rbVl3?=
+ =?utf-8?Q?5E511p4SBtH9dl0tFfW20RmTi?=
+X-OriginatorOrg: ysoft.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 78b44e42-5f52-4d11-ee5f-08de30b2825f
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB7538.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 07:54:23.1180 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 08:20:38.4316 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-Id: b5839965-430f-4be2-b282-d7a3149f2b37
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5g0l19SYJ9tbr5KM3ZG4wBFClxF/Zo7uli2TpL7VfMVJsuPjvDYqqKgL0tspFJEkzw0qiZRGqwqF6GKBQBf48P6YWoxCii0ESlgib887Qo0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB7794
+X-MS-Exchange-CrossTenant-UserPrincipalName: VZxIytpqVxR25/Ig0YCmzfNYxcEcMTGo59EWXh+EzT5UVIO/6vXpLcayDNuGLIOiWotDAPqAVqwe8APtd7TGBA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8834
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,119 +177,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian,
-
-On 27/11/2025 11:18 am, Chee, Tien Fong wrote:
+On 11/28/25 9:42 AM, Mattijs Korpershoek wrote:
+> On Thu, Nov 27, 2025 at 14:44, Petr Benes <petr.benes@ysoft.com> wrote:
 >
-> On 19/11/2025 7:16 pm, Brian Sune wrote:
->> [CAUTION: This email is from outside your organization. Unless you 
->> trust the sender, do not click on links or open attachments as it may 
->> be a fraudulent email attempting to steal your information and/or 
->> compromise your computer.]
+>> On 11/27/25 11:12 AM, Mattijs Korpershoek wrote:
+>>> Hi Michal,
+>>>
+>>> Thank you for the patch.
+>>>
+>>> On Tue, Nov 25, 2025 at 09:58, Michal Vok=C3=A1=C4=8D <michal.vokac@yso=
+ft.com> wrote:
+>>>
+>>>> From: Petr Bene=C5=A1 <petr.benes@ysoft.com>
+>>>>
+>>>> There are two places where ci_ep->desc could be accessed despite it is
+>>>> not valid at that moment. Either the endpoint has not been enabled yet
+>>>> or it has been disabled meanwhile (The ethernet gadged behaves this wa=
+y
+>>>> at least.). That results in dereferencing a null pointer.
+>>>
+>>> I wonder if this is not a generic problem (that ep->desc) is reused.
+>>>
+>>> Looking at usb_ep_enable() in include/linux/usb/gadget.h:
+>>>
+>>> """
+>>> static inline int usb_ep_enable(struct usb_ep *ep,
+>>>                                   const struct usb_endpoint_descriptor =
+*desc)
+>>> {
+>>>           int ret;
+>>>
+>>>           if (ep->enabled)
+>>>                   return 0;
+>>>
+>>>           ret =3D ep->ops->enable(ep, desc);
+>>>           if (ret)
+>>>                   return ret;
+>>> """
+>>>
+>>> Can you please explain why the generic code is not enough to handle
+>>> this?
 >>
->> Add optimized Makefile support for SoCFPGA handoff
+>> Can't speak for for generic gadget stuff without preparation. In this
+>> case it is solely ci_udc who does the mess.
 >>
->> - Introduce socfpga_g5_handoff_prepare target in U-Boot
->>    arch/arm/mach-socfpga/config.mk
->> - Users can convert the handoff via make prepare.
->> - Detects Altera/Intel SoCFPGA boards from .config
->> - Combines vendor/board extraction into a single shell call
->> - Checks for hps_isw_handoff folder and .hiof files
->> - Uses ls -d instead of find for faster folder detection
->> - Runs BSP generator script only if files exist
->> - Non-blocking: continues if handoff folder or files are missing
->> - HANDOFF_PATH user define allows overriding auto-detected folder
->> - Minimizes subshells and other slow constructs for faster CI
+>> It works with its own
 >>
->> Signed-off-by: Brian Sune <briansune@gmail.com>
->> ---
->>   arch/arm/mach-socfpga/config.mk | 50 +++++++++++++++++++++++++++++++++
->>   1 file changed, 50 insertions(+)
->>   create mode 100644 arch/arm/mach-socfpga/config.mk
+>> struct ci_ep {
+>>          struct usb_ep ep;
+>>          struct list_head queue;
+>>          bool req_primed;
+>>          const struct usb_endpoint_descriptor *desc;
+>> };
 >>
->> diff --git a/arch/arm/mach-socfpga/config.mk 
->> b/arch/arm/mach-socfpga/config.mk
->> new file mode 100644
->> index 00000000000..df1eb909129
->> --- /dev/null
->> +++ b/arch/arm/mach-socfpga/config.mk
->> @@ -0,0 +1,50 @@
->> +# SPDX-License-Identifier: GPL-2.0+
->> +#
->> +# Brian Sune <briansune@gmail.com>
->> +
->> +ifeq ($(CONFIG_TARGET_SOCFPGA_CYCLONE5),y)
->> +archprepare: socfpga_g5_handoff_prepare
->> +else ifeq ($(CONFIG_TARGET_SOCFPGA_ARRIA5),y)
->> +archprepare: socfpga_g5_handoff_prepare
->> +endif
->> +
->> +socfpga_g5_handoff_prepare:
->> +       @SOCFAMILY="$(SOCFAMILY)"; \
->> +               if [ -z "$$SOCFAMILY" ]; then \
->> +                       exit 0; \
->> +               fi; \
->> +               echo "[INFO] SOC family detected: $$SOCFAMILY";
->> +               @set -- $$(awk -F'"' ' \
->> +                   /^CONFIG_SYS_VENDOR=/ {v=$$2} \
->> +                   /^CONFIG_SYS_BOARD=/ {b=$$2} \
->> +                   END {print v, b}' .config); \
->> +               VENDOR=$$1; \
->> +               BOARD=$$2; \
->> +               if [ -z "$$VENDOR" ] || [ -z "$$BOARD" ]; then \
->> +                       exit 0; \
->> +               fi; \
->> +               BOARD_DIR=$(src)/board/$$VENDOR/$$BOARD; \
->> +               if [ "$$HANDOFF_PATH" ]; then \
->> +                       echo "[INFO] Using manually specified handoff 
->> folder: $$HANDOFF_PATH"; \
->> +               else \
->> + HANDOFF_BASE=$$BOARD_DIR/hps_isw_handoff; \
->> +                       if [ ! -d "$$HANDOFF_BASE" ]; then \
->> +                               exit 0; \
->> +                       fi; \
->> +                       HANDOFF_PATH=$$(ls -d "$$HANDOFF_BASE"/*/ 
->> 2>/dev/null | head -n1); \
->> +                       if [ -z "$$HANDOFF_PATH" ]; then \
->> +                               exit 0; \
->> +                       fi; \
->> +                       echo "[INFO] Auto-detected handoff folder: 
->> $$HANDOFF_PATH"; \
->> +               fi; \
->> +               HIOF_FILE=$$HANDOFF_PATH/$$(basename 
->> $$HANDOFF_PATH).hiof; \
->> +               if [ ! -f "$$HIOF_FILE" ]; then \
->> +                       echo "[WARN] No .hiof file found in 
->> $$HANDOFF_PATH, skipping BSP generation."; \
->> +                       exit 0; \
->> +               fi; \
->> +               echo "[INFO] Found hiof file: $$HIOF_FILE"; \
->> +               echo "[INFO] Running BSP generator..."; \
->> +               python3 
->> $(src)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" 
->> -o "$$BOARD_DIR/qts" || echo "[WARN] BSP generator failed, 
->> continuing..."; \
->> +               echo "[DONE] SoCFPGA QTS handoff conversion complete."
+>> Which are held in (struct ci_drv).ep[] and the problematic code is
+>> ci_udc specific.
+>
+> Ok.
+>
+> I have compared the changes with the linux driver
+> (drivers/usb/chipidea/udc.c) and see a couple of differences in error
+> handling
+>
+> For example, in linux, in ep_disable(), we return -EBUSY instead of 0.
+>
+> 0 seems to tell the caller that we sucesfully disabled an ep but we did
+> not do anything since it was already disabled.
+
+Fair.>
+> Can we do the same error handling as in the linux driver ?
+
+Sure. -EBUSY seems to used mainly by *_register_driver(), I'll test it
+and return with the updated patch.>
+>>
+>>>
+>>>>
+>>>> Moreover, the patch gets rid of possible outstanding requests if the
+>>>> endpoint's state changes to disabled.
+>>>>
+>>>> Signed-off-by: Petr Bene=C5=A1 <petr.benes@ysoft.com>
+>>>> Signed-off-by: Michal Vok=C3=A1=C4=8D <michal.vokac@ysoft.com>
+>>>> ---
+>>>>    drivers/usb/gadget/ci_udc.c | 43 ++++++++++++++++++++++++++++++++++=
++++
+>>>>    1 file changed, 43 insertions(+)
+>>>>
+>>>> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+>>>> index 4bff75da759d..b3bbbb6ad32c 100644
+>>>> --- a/drivers/usb/gadget/ci_udc.c
+>>>> +++ b/drivers/usb/gadget/ci_udc.c
+>>>> @@ -308,6 +308,27 @@ static void ci_ep_free_request(struct usb_ep *ep,=
+ struct usb_request *req)
+>>>>         free(ci_req);
+>>>>    }
+>>>>
+>>>> +static void request_complete(struct usb_ep *ep, struct ci_req *req, i=
+nt status)
+>>>> +{
+>>>> +     if (req->req.status =3D=3D -EINPROGRESS)
+>>>> +             req->req.status =3D status;
+>>>> +
+>>>> +     DBG("%s: req %p complete: status %d, actual %u\n",
+>>>> +         ep->name, req, req->req.status, req->req.actual);
+>>>> +
+>>>> +     req->req.complete(ep, &req->req);
+>>>> +}
+>>>> +
+>>>> +static void request_complete_list(struct usb_ep *ep, struct list_head=
+ *list, int status)
+>>>> +{
+>>>> +     struct ci_req *req, *tmp_req;
+>>>> +
+>>>> +     list_for_each_entry_safe(req, tmp_req, list, queue) {
+>>>> +             list_del_init(&req->queue);
+>>>> +             request_complete(ep, req, status);
+>>>> +     }
+>>>> +}
+>>>> +
+>>>>    static void ep_enable(int num, int in, int maxpacket)
+>>>>    {
+>>>>         struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl->hcor;
+>>>> @@ -335,6 +356,12 @@ static int ci_ep_enable(struct usb_ep *ep,
+>>>>         int num, in;
+>>>>         num =3D desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+>>>>         in =3D (desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+>>>> +
+>>>> +     if (ci_ep->desc) {
+>>>> +             DBG("%s: endpoint num %d in %d already enabled\n", __fun=
+c__, num, in);
+>>>> +             return 0;
+>>>> +     }
+>>>> +
+>>>>         ci_ep->desc =3D desc;
+>>>>         ep->desc =3D desc;
+>>>>
+>>>> @@ -385,16 +412,27 @@ static int ep_disable(int num, int in)
+>>>>    static int ci_ep_disable(struct usb_ep *ep)
+>>>>    {
+>>>>         struct ci_ep *ci_ep =3D container_of(ep, struct ci_ep, ep);
+>>>> +     LIST_HEAD(req_list);
+>>>>         int num, in, err;
+>>>>
+>>>> +     if (!ci_ep->desc) {
+>>>> +             DBG("%s: attempt to disable a not enabled yet endpoint\n=
+", __func__);
+>>>> +             goto nodesc;
+>>>> +     }
+>>>> +
+>>>>         num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MA=
+SK;
+>>>>         in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+>>>>
+>>>> +     list_splice_init(&ci_ep->queue, &req_list);
+>>>> +     request_complete_list(ep, &req_list, -ESHUTDOWN);
+>>>> +
+>>>>         err =3D ep_disable(num, in);
+>>>>         if (err)
+>>>>                 return err;
+>>>>
+>>>>         ci_ep->desc =3D NULL;
+>>>> +
+>>>> +nodesc:
+>>>>         ep->desc =3D NULL;
+>>>>         ci_ep->req_primed =3D false;
+>>>>         return 0;
+>>>> @@ -606,6 +644,11 @@ static int ci_ep_queue(struct usb_ep *ep,
+>>>>         int in, ret;
+>>>>         int __maybe_unused num;
+>>>>
+>>>> +     if (!ci_ep->desc) {
+>>>> +             DBG("%s: ci_ep->desc =3D=3D NULL, nothing to do!\n", __f=
+unc__);
+>>>> +             return -EINVAL;
+>>>> +     }
+>>>> +
+>>>>         num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MA=
+SK;
+>>>>         in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+>>>>
+>>>> --
+>>>> 2.43.0
 
 
-I tried applying it onto the latest main branch using:
-     git am -3 < v8-Add-optimized-Makefile-support-for-SoCFPGA-handoff.patch
 
-However, the application fails with :
-    Applying: Add optimized Makefile support for SoCFPGA handoff
-    error: corrupt patch at line 61
-    error: could not build fake ancestor
-    Patch failed at 0001 Add optimized Makefile support for SoCFPGA handoff
+________________________________
 
-It looks like the patch file may have been corrupted during generation 
-or transmission (possibly formatting or mbox header issues).
-
-Could you please resend the patch in clean git format-patch (mbox) 
-format so that I can apply and submit for PR.
-
-
-Thanks.
-Tien Fong
-
-
-
+CONFIDENTIALITY NOTICE
+This message is for the named person's use only. It may contain confidentia=
+l, proprietary or legally privileged information.
+If you receive this message in error, please immediately delete it and all =
+copies of it from your system, destroy any hard copies of it and notify us =
+by email to info@ysoft.com with a copy of this message. You must not, direc=
+tly or indirectly, use, disclose, distribute, print or copy any part of thi=
+s message if you are not the intended recipient. Y Soft and any of its subs=
+idiaries each reserves the right to monitor all e-mail communications throu=
+gh its networks.
+Y Soft is neither liable for the proper, complete transmission of the infor=
+mation contained in this communication nor any delay in its receipt. This e=
+mail was scanned for the presence of computer viruses. In the unfortunate e=
+vent of infection Y Soft does not accept liability.
+Any views expressed in this message are those of the individual sender, exc=
+ept where the message states otherwise and the sender is authorised to stat=
+e them.
