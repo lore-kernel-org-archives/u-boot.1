@@ -4,81 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB6DD116F1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:04:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E3ED116F3
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:09:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D20183BD2;
-	Mon,  1 Dec 2025 17:03:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F7A683B81;
+	Mon,  1 Dec 2025 17:09:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ifm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gs1qCAUl";
+	dkim=pass (2048-bit key; unprotected) header.d=ifm.com header.i=@ifm.com header.b="jRuflT+6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D21D983C0C; Mon,  1 Dec 2025 17:03:41 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B4AB183BC4; Mon,  1 Dec 2025 17:08:58 +0100 (CET)
+Received: from pp0155.ppsmtp.net (pp0155.ppsmtp.net [132.145.231.114])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC54E83B81
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:03:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0568683B7E
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:08:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=ifm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7c75dd36b1bso2750590a34.2
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 08:03:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764605018; x=1765209818; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Af7xbPQOyg4XrMRBb1ZHOhYAQ4h2Xu6rvFI3NyXfHt4=;
- b=gs1qCAUlfBSfpYuwot8RypxcQS4H4aGvzTTUcUR6+hw85gM2Ap0oB+i1qZ/RTAIwSZ
- o13NXRotuGTjmoKpTgp3WX9r/DeaUQACBcSH8QV5NPajvDXAmCiesvNXfR82AvL48JLF
- 0tnbPMayn2T6qVADMNJkrIramzVxuh+SfqLrU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764605018; x=1765209818;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Af7xbPQOyg4XrMRBb1ZHOhYAQ4h2Xu6rvFI3NyXfHt4=;
- b=MLXF/Uf4nalfGD9YoBzlDDBElnSu7Kq8s8JN0/l+3YGbU4NBXHgwQW1XzIVdYi/hVo
- eiqrOR9shG1VqHsCOkeMeLUk10wJeUjEW5/lhcPDIfCx0d+r9zBA+zfTLxtxWfCJYQBf
- HyKnbDLyz40w4Zut0AJaiVl99+v4PWIc55XDcRgGY9psp5Abg+mC4SP6Q7IJ+O4i6N/3
- 4+wCmyBdmkhmGvjx/pDJX3w4hok+IA2NQfYfY2K2B31a1jNlqI5uirHaErh+74IQbFx1
- CbI0PaaoJu04QZEy6trD3GbJvySpXrES16Pmm1+72fAdikZfdNvpOi+gxbVN+KYtcacS
- Hr+Q==
-X-Gm-Message-State: AOJu0Ywb/bjDko3nvpxbwntUOoa434CIRiB8D4S4ZEcgut0/MPWeP/DY
- KbTNZF6nW/BeUMUMBqnATqN8alGaIDXaOJbm19c+xmfTLp6f1VSnsDxRBWXz93OQjc6UTSbznyW
- RhQlXfGA=
-X-Gm-Gg: ASbGncvQvolXDCf8EEl898ozNgasAa/ZYJdoz0Gdi+mA04FOyeATbNc+eLT9X3QYUNj
- m4DAlFN7sXI7Vpo6jcVSDcsRJMf8PRQkWJPZYFe7+rg6xnDB1SboEl8t4lQbALi7jqkA5ohZusU
- 6Oj4h9MlgmS3hu9P/MgsZlOcSdUcA8FJxJyge1lyIwHLVptYpCAjc/XmUNM2RjLrrmA2+h0daI2
- Lfqo2eVI+Gf4mqxo0bFEWAna8GtmKh/SkTsJzISjhbpesZAynmKuoLMgx92EKuNMFXu1co93cgd
- qpnxBUfa1dhLCojTYW7meuIZfFeQnYcYw3aJ7ECJ8CIAsuO6NyOuULqRCcVuEsOBb0kT0f69QIO
- B0h39+eGhMrcNYATZcGx5wu84WwNIkWqwHVMEOMQhauL2eXQeyzlroF5AcEjHMkt1TA1/lNOocX
- yj88CIIqpjc+6QquArzx+L+11RldELJz7BiF92VlrEnLEQY/4d
-X-Google-Smtp-Source: AGHT+IHkkKVIC+yh3dZ5A2n14KOAwYDI89dz1beEU+lnL66whiW0uGsjMkudnv36JuBPKJtTF4qdmg==
-X-Received: by 2002:a05:6830:6aab:b0:7c6:e92f:41e1 with SMTP id
- 46e09a7af769-7c7c417815fmr15634161a34.14.1764605016928; 
- Mon, 01 Dec 2025 08:03:36 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c90f5d811asm4708061a34.1.2025.12.01.08.03.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 08:03:36 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251201140656.1045134-1-trini@konsulko.com>
-References: <20251201140656.1045134-1-trini@konsulko.com>
-Subject: Re: [PATCH] CI: Update to latest container images
-Message-Id: <176460501632.1117748.5866125537905395871.b4-ty@konsulko.com>
-Date: Mon, 01 Dec 2025 10:03:36 -0600
+ spf=pass smtp.mailfrom=fedor.ross@ifm.com
+Received: from pps.filterd (pp2080.ppsmtp.internal [127.0.0.1])
+ by pp2080.ppsmtp.internal (8.18.1.2/8.18.1.2) with ESMTP id 5B1CYhVY022460;
+ Mon, 1 Dec 2025 17:08:54 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ifm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=pps; bh=//cZQMdmG9/IgfHMk+RQN36dc/at
+ DMPj9BCFPq1ZDpU=; b=jRuflT+6tLS8YsZj+1clSmXqniadEQcBU7E4cc53B7me
+ 6PX0a6J6MtVOHieh4zXg4pCs59nNp9ZyRgxenMBUtGgVHu74Zo1oBUdzvOBQ9+aJ
+ aa1o0hn+Rmt8NzEixe4iJ05xVr6mCNT3rh5AQKC4cSTzHseDYf+R98cqpWUb4k5/
+ 6GRG8lBT2+qMmm5Rgt8WQUm8ay7BJJ8fRK6Oo7iwVx6CI1/qMn8q5pbosaukRtC+
+ 0gk+EjSOb/GcqiHbwgk5bihC+5pvHel+BAOPe3vKg2PRCsq7kq4sHPB00Ps9F5SS
+ vpNvdjHZaVMNA0U3RWpSrzn2MJsux+Vv3H9BOXJhug==
+From: Fedor Ross <fedor.ross@ifm.com>
+Date: Mon, 1 Dec 2025 17:08:06 +0100
+Subject: [PATCH v2] imx9: scmi: soc: USB instance number change for silicon
+ revision B0
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Message-ID: <20251201-imx95_b0-v2-1-7bc9851b7456@ifm.com>
+X-B4-Tracking: v=1; b=H4sIAGW9LWkC/23MywrCMBCF4VcpszaSmRJvK99DijTpxM4ibUkkV
+ Ere3di1y/9w+DZIHIUT3JoNImdJMk816NCAG/vpxUqG2kCaDCKdlYT1ap5WKzYXxJZRk7NQ70t
+ kL+tOPbrao6T3HD+7nPG3/kEyKlTetXYg26M1p7v4cHRzgK6U8gWqfraRngAAAA==
+X-Change-ID: 20251127-imx95_b0-e58113e102cb
+To: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, <u-boot@lists.denx.de>
+CC: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Ye Li
+ <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>, Ranjani Vaidyanathan
+ <ranjani.vaidyanathan@nxp.com>, =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
+ <joao.goncalves@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, Fedor Ross <fedor.ross@ifm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1764605333; l=1477;
+ i=fedor.ross@ifm.com; s=20251127; h=from:subject:message-id;
+ bh=GNuNgTpb6Vv8eNqCdVQ4Vxd1T5X9mgSN7mw5gLeSB4o=;
+ b=pqWQUVxUewCPNILVYIo2UlaFE8H3thjzM/x3lUWsB8EW+gCC3PRTPkPzxn+25fZIAgENEeSBr
+ GRbnw5/LqP3Bqxjmki1bqIZ2M5+rl4WEB+gZE7IzVQ1Nqd+jlkl1sC3
+X-Developer-Key: i=fedor.ross@ifm.com; a=ed25519;
+ pk=QXV2AUGQzqdu1EMmSJgH2f2Z1Mu1wSx7+5+dcQzQ864=
+X-Originating-IP: [172.19.129.122]
+X-ClientProxiedBy: DEESEX10.intra.ifm (172.26.140.25) To DEESEX10.intra.ifm
+ (172.26.140.25)
+X-Proofpoint-ID: SID=4aqqk54vpf QID=4aqqk54vpf-1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-28_08,2025-11-27_02,2025-10-01_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,22 +88,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 01 Dec 2025 08:06:56 -0600, Tom Rini wrote:
+For silicon revision A1, the USB instance number for USB1 is 3 and for
+USB2 it is 4. This changed for revision B0 where the USB instance number
+for USB1 is 0 and for USB2 it is 1, which is the intended instance
+number. Select the correct numbering according to the selected SoC
+(IMX95) and its revision.
 
-> - Bump to noble-20251013
-> - Include tools for sage lab, build TF-A for platforms there.
-> - Switch to distro provided trace-cmd, add libengine-pkcs11-openssl
-> - Use mirrors for GNU projects
-> - Switch to QEMU 10.1.x
-> 
-> 
-> [...]
+This patch is based on the information provided by:
+"AN14750 Migration Guide from i.MX 95 A1 to B0; Rev. 1.0" .
 
-Applied to u-boot/next, thanks!
+Reviewed-by: Alice Guo <alice.guo@nxp.com>
+Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
+---
+Changes in v2:
+- Changed conditional to be more generic, based on feedback.
+- Updated the commit message.
+- Link to v1: https://lore.kernel.org/r/20251127-imx95_b0-v1-1-fc3bd2ba1b56@ifm.com
+---
+ arch/arm/mach-imx/imx9/scmi/soc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-[1/1] CI: Update to latest container images
-      commit: 42a4ff5f63baacc414b564c02541cd1f5c0862ee
+diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
+index dbaa19a9e6e..c1458ccca3c 100644
+--- a/arch/arm/mach-imx/imx9/scmi/soc.c
++++ b/arch/arm/mach-imx/imx9/scmi/soc.c
+@@ -921,7 +921,7 @@ enum boot_device get_boot_device(void)
+ 		break;
+ 	case BT_DEV_TYPE_USB:
+ 		boot_dev = boot_instance + USB_BOOT;
+-		if (IS_ENABLED(CONFIG_IMX95))
++		if (is_imx95() && (soc_rev() < CHIP_REV_2_0))
+ 			boot_dev -= 3; //iMX95 usb instance start at 3
+ 		break;
+ 	default:
+
+---
+base-commit: 31bf4a1c308773895a8e7ea047b3cea037e4c922
+change-id: 20251127-imx95_b0-e58113e102cb
+
+Best regards,
 -- 
-Tom
-
+Fedor Ross <fedor.ross@ifm.com>
 
