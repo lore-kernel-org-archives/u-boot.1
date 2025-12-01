@@ -4,152 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27C6FD116F1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 18:22:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CB4FD116F3
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 18:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AFBE83CE3;
-	Mon,  1 Dec 2025 19:22:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BD0CB83D01;
+	Mon,  1 Dec 2025 19:27:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cSMpCF40";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lk4aYAAI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4931A83CF2; Mon,  1 Dec 2025 19:22:50 +0100 (CET)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0BE6E83D01; Mon,  1 Dec 2025 19:27:36 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 272CC83CAA
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 19:22:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E03583CAA
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 19:27:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oBNZ/OXmr8ALnbYtbeD1EJEF7CVArHBVPAy53D/+pDVuDEZEMyFrEXuYzS6ngUl/u0FT0Y8417ARzuK3jLrGWVYrEnv3rs2bMPFytE0rQmMGTBLeJMWFKfj6s9ZtsISfSrRHDXzoPyrfNVWUSlmMJuFDCjMcO+1E1zqlwc/CuXlqzpkAnEYuiU4m0BE1Ky23DCh/tE1Z6rxOgY2Ty3roTAkk+N9FhHc7BRScuEQjaLzcyTSlIFY+CjNwO12Hk9IQ8TdKRnGCry8Nk9Egp8F8Q0veZNThDJu51PulGTPbNAoav0/eaN1nGJwJGYv48xiLQRUja/9/Bgxf26spgEQRHA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LyE6U+zzK/MUnwQxjNDXUyVTNcaAdUt9NI1njJTa5HE=;
- b=FHfeGmi13Kq0U4vSQLqYWoMjyUYspx9XTyoaQQs29I9qvLYJPkrcuwTf8KK2bwttDDaWdcfAIbh7qNR1ykS/hyBJS3tqG2ef6o4qxXjPUpLubW2x5jpPFikN/Nbha77KrHPOadkCs7mMFcJEFn8SHDG3/oN/5wFV7GCyXB++U5b0OSA89OsJ58G3QhWuPoVViVPsYHCcIKo2hN2s7jHZ8pp3yPkfOQhy5YtnIEqsT97lydDZvnmzzWzDBd33NsgfG9sB20n9SzHk67IScVBRhgLsiWQ57tvA2kSxRlVrVVp6KHVsLf1ISin9KNnPkk7LigZJ4YDu6Q0krJVoBnadxg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LyE6U+zzK/MUnwQxjNDXUyVTNcaAdUt9NI1njJTa5HE=;
- b=cSMpCF40eBq/3qXKptKUyw/C74PNCOULYCRd40eTJQKpG5Qt1DgzdjbJskchJz2GBwWbhLFrhWZYNIo8V79DWRSjlsXohLbiqg6KF3H2AH3LQw7VmYdKqRgONIGFxA3yfH4RncjqtcPm6zG4GT2ByGEgXOHSFBnqubImBwmvf0s=
-Received: from BYAPR05CA0005.namprd05.prod.outlook.com (2603:10b6:a03:c0::18)
- by PH5PR10MB997757.namprd10.prod.outlook.com (2603:10b6:510:39e::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
- 2025 18:22:44 +0000
-Received: from MWH0EPF000989E8.namprd02.prod.outlook.com
- (2603:10b6:a03:c0:cafe::93) by BYAPR05CA0005.outlook.office365.com
- (2603:10b6:a03:c0::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.9 via Frontend Transport; Mon, 1
- Dec 2025 18:22:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- MWH0EPF000989E8.mail.protection.outlook.com (10.167.241.135) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Mon, 1 Dec 2025 18:22:41 +0000
-Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 12:22:37 -0600
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 12:22:37 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 1 Dec 2025 12:22:37 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B1IMa4E890350;
- Mon, 1 Dec 2025 12:22:37 -0600
-Message-ID: <5f575e86-a687-4427-af8a-108f08ee4d39@ti.com>
-Date: Mon, 1 Dec 2025 12:22:37 -0600
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7c77ed036c3so2845555a34.0
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 10:27:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764613652; x=1765218452; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vmwAxuTQJaUodfsomcnFYuXztWWOo4o4n9olIlSYuNw=;
+ b=Lk4aYAAI+Q5hgA4PV29CyYefMhya3EoOAwC1LEL6x5WOumCU/vfVUWZnMO83zR8UxB
+ Wsbda30/r2kNCmSewZHOyYwsbYhcFpOAkqII6qxcvFmeWUBDAdj9jGCIwkMeDTy44s33
+ dO8Mqg4va8fPGh35O0okwQtNYpEv3OGdDFhf8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764613652; x=1765218452;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vmwAxuTQJaUodfsomcnFYuXztWWOo4o4n9olIlSYuNw=;
+ b=io0ZP6amK9UhZBQsuw0t+evEL/1nU9jzk+WC8US3+0jsA6YtClF59DmVbEiQbLRCXj
+ ueUsr6U0TAJuXKgN6swUGe/GF6CjXWZwVrdfEQg8CZosV4luRMyP4uJAvZdmZBGc28EB
+ gkr9dFSFvtIzbIajC9mZ8/pbgjBxIl7FlXVtHor+tEowOd/jyeG3DHmXPIHpffk5xIoI
+ GLIXjhKfVmrSH3JikiDpBqjiqYuEFbFRuuxE33/+wCOj353KwFA4FJgEg2MFsOGKmsWv
+ 6qHc8GBhEwzSllcEa/U2oaF1NABjJDbGHPvtrHv0AdwPtcuu2ypZulTjrqC23TGbU2FS
+ gFPg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXVFVBO2BZyJjFmzIb4NWcwWPirkAb5CJixyFW4v0NrqDhewCFaT5U2P4rxu9EmXqxTOxbSrGI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzSfuLG5fKrcs2Wcv7yApDhNk7CcNig07SjA48P52jCtdLoe/at
+ IapWil9dPnUc1agYZDFAaAmT9NsLdCRuWD4IsOorxt+QtNk4xWzEiqmUvT4pWOyyj+g=
+X-Gm-Gg: ASbGncvSZiUL4pAaKusBCGx23iy9WbBqX9y/VD9GGep4XspYsodA515rNeA8C7WoeT4
+ +Di0xXn0Q/KnMHBKNLnxGyjfJmBPepDPPVyJofNcyuUh7q6zceSWQPpIqSZApOjTy5M1WPfTUE0
+ OYJjj4nSkJ49+/qJVLnNFZ2XegfJrCjyxDhKB4HygUrmB3Vx4BKSREvMQj2zDewZnhd0po4cYYV
+ ITn0PwS9QL8mZwKUyzTi+Fxc1EoQyPch6fjFIczbhO6RsInLGfbyTYIL1JCNqzlTfcf3Jyty4uf
+ FSkTkMO+/dKw914SWc0x1DbkqeL+MvTgv4ypq1i+U4FZtwXVU5PqK1tI6e+o/rTtD5J8dqctZKO
+ Z94YUKHahZtPdjyEO4kcMl6thB83g/1HbLaI/0jxA/1U5rhYX3K/mQncLDwv/xlz9R0bNYkQ8aH
+ 2xxvQf2xzBYtwkHz8Am0r4FlOSBr26AHQY0K6Dqykxv72CY8k/gVI4M2mAJ+DA
+X-Google-Smtp-Source: AGHT+IFCmmTwYvXGb00jKI9GcFRmzPyKVhyfVL0gXUbbT1TZ92c63f8NKjKAA6epQyiHzosw2vjuag==
+X-Received: by 2002:a9d:760b:0:b0:7c6:9fc6:1346 with SMTP id
+ 46e09a7af769-7c78ea8a4a9mr16549527a34.8.1764613652086; 
+ Mon, 01 Dec 2025 10:27:32 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c910025e06sm4924161a34.28.2025.12.01.10.27.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Dec 2025 10:27:31 -0800 (PST)
+Date: Mon, 1 Dec 2025 12:27:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sune Brian <briansune@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>
+Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from
+ empty built-in.a in SPL/TPL/VPL builds
+Message-ID: <20251201182729.GP303283@bill-the-cat>
+References: <20251128153130.GC2125796@bill-the-cat>
+ <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
+ <20251128164957.GD2125796@bill-the-cat>
+ <CAN7C2SCpM4V3GL=_tox+9ePEx6DcVNK+pdfxn_ysiOyvYuEn+A@mail.gmail.com>
+ <20251201164405.GG303283@bill-the-cat>
+ <CAN7C2SBPwcPdUQeufJ+c3XxVKVmU4PE7nbYqLaNy9ynqkWhJgA@mail.gmail.com>
+ <20251201165422.GI303283@bill-the-cat>
+ <CAN7C2SBP7_kGmuXN2J5CF97ebxSpxtmtZ81_kGPjcV=_n-FyQw@mail.gmail.com>
+ <20251201170938.GL303283@bill-the-cat>
+ <CAN7C2SDmv=0gubdEy_ikENQWy47UGFa9JHv+E-QZO2GCZnz_Rw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: k3-am62d-evm-binman: Update DM
-To: Paresh Bhagat <p-bhagat@ti.com>, <trini@konsulko.com>,
- <u-boot@lists.denx.de>
-CC: <praneeth@ti.com>, <vigneshr@ti.com>, <v-singh1@ti.com>, <khasim@ti.com>, 
- <anshuld@ti.com>
-References: <20251128110210.4143342-1-p-bhagat@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20251128110210.4143342-1-p-bhagat@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000989E8:EE_|PH5PR10MB997757:EE_
-X-MS-Office365-Filtering-Correlation-Id: 73aba8dd-8fc0-42e9-3cfe-08de31069ddc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Qlp3eHg2U3dDcDg4Y2FTWWRXQmFibmdEVXQrUkNVTHpOU2FpRDBlaDNmS2ZS?=
- =?utf-8?B?UHFWUHVzQUxUV3QzSXYzN09MaEh2REJvQ3VuMnVoQnNPWEtZZFo4dHErVEZJ?=
- =?utf-8?B?dWJHV3ZmZXlrL3Urc0pKM0hRa2tqZEJrNVowWXJvVWFGOXFnbFRiSnVDRDF3?=
- =?utf-8?B?OTg2Ti9wWFUyUW5QWUY4WlNzc25vclhpSml1dnYxTkJsK3JZSERSZThIdVpa?=
- =?utf-8?B?eHB1RW9xbDF4a3BBMFFBOUNRSk80ZW5WcjRhTFBQWUNWUkZFdmozRnZaWFdx?=
- =?utf-8?B?ejJMWklWcERSVFZNSGREMm1sUFZCT3FYYi8xMjhSOUU4TTJWNnVDYzRGUW40?=
- =?utf-8?B?V1BabEM3WTM2TjhxUStxNWxSQkp6QjRRbEtJSGFrQUpIU0l0NVZzaGcySWNP?=
- =?utf-8?B?MXViSS9vV0FnY0t6ZEtjK002dDlSclFTbmVuTVFWZFIvKzY4U2RmekVWYVU3?=
- =?utf-8?B?Q3pvWkxaVWx6TE54bmZNM0N3ZEtYTTcyR0FrejhTa0F1WFJLajR5TDQyRGM4?=
- =?utf-8?B?L1hsL00rQnBzR090SWJ3OURWMVBjR3FoY0U2RzdYdlV2Zlp6N0hhOExjdEY0?=
- =?utf-8?B?ODNEaDVRM1NFTzRJemtWWmJPUzNNNjRXQlBvbjAvTlV6Q2lLeEJmNXFJS3NP?=
- =?utf-8?B?bms1d0hnK3FyZGkzSnFkUzU0YVlhbEdNT1N4aEFIZFYwWnpNU1pzSXpiSGNy?=
- =?utf-8?B?bzFXdVlRd3o3UTBBZ0U3OG9mTVo1VlhWZzIxTW9MUEowQUFmTmxJS2cxNWpF?=
- =?utf-8?B?YTVnUzNoNHFCbDRWbmFvMDFBNTU2S3E3Ujk2dktTUlhnb2ZqWDZQY21YQm8r?=
- =?utf-8?B?ZmF0RG94eUR5dldDUnJud1JUZHo5bWlvNEkrQUc3bE9xVGdJZlp6emJlNUs1?=
- =?utf-8?B?VkhrQTEzcGEwaDJLZXdPQkw1WGp5SVVHYXkvUy9VL3UrWDZQWWR6ZThJdmZx?=
- =?utf-8?B?K1plNnU3cmg3ZnRaVkxiTStQNzBWbjgxTVA5T3NoK2FQVFVOOEJlL3J2SG5x?=
- =?utf-8?B?TzZZOHZKTVFEOHdwL0FpclA5TlNybmRlbkFTS09uTWttQkJzNXVVaUw5SktZ?=
- =?utf-8?B?TDRybFFLNS9YQTNKTFBrSVVaeExIVkxDL05LcWI3WHlKT3dKeDFmblFKbU9Z?=
- =?utf-8?B?TzJVVDJQL2d3aGJLY0tyZlgxWmsrQUxpcW03aXV6U3lJRnUvem4rWFFNRHdV?=
- =?utf-8?B?M3h2VmZ2djNGTTZRZjJheUh6Zmx5R2IyMU5mcHlmNThIWng5eE5kZXhjakZI?=
- =?utf-8?B?aHM2UWFMemN3T3ZvVllzOGVqWE5yQS9zQUZ3TnNLRFN1UUxHME5UOTNUQ0Fv?=
- =?utf-8?B?KzVJSTdqU2hFN0pYOFp3N2pnWkh2dVNQeVpFQ3BSRkZVekNDVW5Cc2lFVnFY?=
- =?utf-8?B?RlhENUlUTDh2UFI5NnI2Qk1nWlFlR0Vzam5XSEdoblVLNE90blQ2US9xZ2d1?=
- =?utf-8?B?K2p2elZoY3hPWDZjY2wwS2lTNCs5YklHUFpjQ295QzljOXdYR3V4Z01TTjhJ?=
- =?utf-8?B?dlk4VWRvdFcyTlpLWm54NHo0K0Z0bkhDcUhUMzA5YkdFUzVvOGhsVEN5K1RY?=
- =?utf-8?B?VGp4TEZsczNlbzhXdmROeFJ3c2xleWtUWGF6TUEvOG5aeEdqbEVUVFVaeU90?=
- =?utf-8?B?TkVHOUh1djBMeXpNVC94QXlUVG1Ec2tTU0JOUXhWNk5vZlJYWkVIblRiS1Zr?=
- =?utf-8?B?LzdseVFDaVVOQlNQaWpzbk0zWVBPUTZMTmU0L0h0eXA5U0wxMVNMUHFBdFl5?=
- =?utf-8?B?cHpNRmp3UmppaFVYUXBMUnZHcjhkL3I4QWErVHNOWUVaZVd1d2pyaldPNHJx?=
- =?utf-8?B?VlBNWjJQUmQ4YmdiR0thbTJRYm5UWllEQ0NpOElLcjhJM2tmMWt0YzZvem52?=
- =?utf-8?B?NlZnMGppNm5zRTY3a1VubVA2RXA1endLRlZ6S25FZmlodklQcnFMbGl3S3I3?=
- =?utf-8?B?NnUzVm1sTllVNlkyV0JDcmVRYTNCOWRiYUFOakx5ZTVNR09HSy91cDZKUS9G?=
- =?utf-8?B?VGIwUlhJby9tSlN2RytrUEtQOXpYVkFITE9Za3VmMG93TnVPUTh3L2kzVlVN?=
- =?utf-8?B?NG1jK2xLVWJJc3FRK1l0dkIrdHZkbVVic0VtbjVNTkNQSlM3TWxSTm1PbDNw?=
- =?utf-8?Q?EF3Q=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 18:22:41.9992 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 73aba8dd-8fc0-42e9-3cfe-08de31069ddc
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989E8.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH5PR10MB997757
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="7LY+6fmZHtH2m5Es"
+Content-Disposition: inline
+In-Reply-To: <CAN7C2SDmv=0gubdEy_ikENQWy47UGFa9JHv+E-QZO2GCZnz_Rw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,42 +115,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/28/25 5:02 AM, Paresh Bhagat wrote:
-> AM62d previously reused the AM62a DM. Since a dedicated DM is now
-> available, migrate to device specific DM.
-> 
-> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
-> ---
-> Boot logs
-> https://gist.github.com/paresh-bhagat12/38bce75c43466b5074271f4cb2ddc3f3
-> 
->   arch/arm/dts/k3-am62d-evm-binman.dtsi | 8 ++++++++
->   1 file changed, 8 insertions(+)
-> 
-> diff --git a/arch/arm/dts/k3-am62d-evm-binman.dtsi b/arch/arm/dts/k3-am62d-evm-binman.dtsi
-> index 7bf0e955645..3a0ab9f8b2b 100644
-> --- a/arch/arm/dts/k3-am62d-evm-binman.dtsi
-> +++ b/arch/arm/dts/k3-am62d-evm-binman.dtsi
-> @@ -101,4 +101,12 @@
->   	description = "k3-am62d2-evm";
->   };
->   
-> +&dm_falcon {
 
-Not related to this patch, but just noticed we have a different DM node for
-falcon vs regular, would these ever be different? Could we reuse the same
-filename for both, was this a limitation of binman or an oversight?
+--7LY+6fmZHtH2m5Es
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Anyway for this patch, LGTM,
+On Tue, Dec 02, 2025 at 01:59:53AM +0800, Sune Brian wrote:
+> Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B412=E6=9C=882=E6=97=
+=A5=E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=881:09=E5=AF=AB=E9=81=93=EF=BC=9A
+>=20
+> >
+> > On Tue, Dec 02, 2025 at 01:07:00AM +0800, Sune Brian wrote:
+> > > Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B412=E6=9C=882=E6=
+=97=A5=E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=8812:54=E5=AF=AB=E9=81=93=EF=BC=9A
+> > > >
+> > > > On Tue, Dec 02, 2025 at 12:52:06AM +0800, Sune Brian wrote:
+> > > > > Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B412=E6=9C=882=
+=E6=97=A5=E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=8812:44=E5=AF=AB=E9=81=93=EF=BC=
+=9A
+> > > > > >
+> > > > > > On Sat, Nov 29, 2025 at 08:46:14AM +0800, Sune Brian wrote:
+> > > > > > > Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B411=E6=9C=
+=8829=E6=97=A5=E9=80=B1=E5=85=AD =E4=B8=8A=E5=8D=8812:50=E5=AF=AB=E9=81=93=
+=EF=BC=9A
+> > > > > > > >
+> > > > > > > > On Fri, Nov 28, 2025 at 06:44:12PM +0200, Ilias Apalodimas =
+wrote:
+> > > > > > > > > On Fri, 28 Nov 2025 at 17:31, Tom Rini <trini@konsulko.co=
+m> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Fri, Nov 28, 2025 at 10:11:53AM +0800, Yuslaimi, Ali=
+f Zakuan wrote:
+> > > > > > > > > > >
+> > > > > > > > > > >
+> > > > > > > > > > > On 27/11/2025 11:09 pm, Marek Vasut wrote:
+> > > > > > > > > > > > [CAUTION: This email is from outside your organizat=
+ion. Unless you trust
+> > > > > > > > > > > > the sender, do not click on links or open attachmen=
+ts as it may be a
+> > > > > > > > > > > > fraudulent email attempting to steal your informati=
+on and/or compromise
+> > > > > > > > > > > > your computer.]
+> > > > > > > > > > > >
+> > > > > > > > > > > > On 11/27/25 3:12 AM, Yuslaimi, Alif Zakuan wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > Hello everyone,
+> > > > > > > > > > > >
+> > > > > > > > > > > > > I already have the referenced commit in my test b=
+ranch, and I can
+> > > > > > > > > > > > > confirm that the same compilation error still app=
+ears on CycloneV when
+> > > > > > > > > > > > > certain directories produce no SPL objects.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > The existing fix ensures that built-in.o is alway=
+s present, but it does
+> > > > > > > > > > > > > not prevent ar from generating empty built-in.a a=
+rchives, which older
+> > > > > > > > > > > > > ARM 32-bit linkers (such as CycloneV toolchains) =
+reject as =E2=80=9Cfile
+> > > > > > > > > > > > > truncated=E2=80=9D.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Which toolchain is this ?
+> > > > > > > > > > > >
+> > > > > > > > > > >
+> > > > > > > > > > > I am using Linaro arm-linux-gnueabihf GCC 7.5.0 to co=
+mpile our SoC32 devices
+> > > > > > > > > > > - CycloneV and Arria10
+> > > > > > > > > >
+> > > > > > > > > > Ilias, do you recall the solution to this problem from =
+when it came up
+> > > > > > > > > > on IRC a few weeks ago?
+> > > > > > > > >
+> > > > > > > > > Nop unfortunately not.
+> > > > > > > > > Was this caused by the Kbuild bump? I remember the logic =
+around
+> > > > > > > > > builtin changing significantly.
+> > > > > > > >
+> > > > > > > > Yes, and I kinda thought we narrowed it down to something b=
+eing missing
+> > > > > > > > from the update, since the kernel does support this old of =
+a toolchain
+> > > > > > > > (or at least the 10.x? someone else this on).
+> > > > > > >
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > Actually I am not sure u-boot itself have minimum requirement=
+ on each tag
+> > > > > > > or branch listed?
+> > > > > >
+> > > > > > We do not currently have a test for anything other than "newer =
+than
+> > > > > > gcc-6" for ARM, but should have the same minimum requirements a=
+s the
+> > > > > > linux kernel, but are lacking enforcement checks (but I also th=
+ink the
+> > > > > > kernel is?).
+> > > > > >
+> > > > > > --
+> > > > > > Tom
+> > > > >
+> > > > > Hi Tom,
+> > > > >
+> > > > > Oops, missing the kernel version. Add it back for better debug.
+> > > >
+> > > > Sorry, what I meant was that it's a kbuild related issue as to what
+> > > > version of gcc can be used. We don't have a check, and should, but =
+also
+> > > > the versions in question here should be expected to work. There's j=
+ust
+> > > > some change we're missing.
+> > > >
+> > > > --
+> > > > Tom
+> > >
+> > > So long story short this patch itself should not introduce from begin=
+ning.
+> > > It is a GCC version depended issue.
+> > > But how to pin-point down to which version is a bit hard.
+> > > Distro link with GCC version and not all gcc version can easily check=
+ed.
+> > >
+> > > Any idea how to easily check this?
+> >
+> > We can use the check we have today in arch/arm/config.mk under
+> > "checkgcc6" to check for something much newer. But! It's a problem of a
+> > missing kbuild change I think, based on when this problem was first
+> > reported.
+> >
+> > --
+> > Tom
+>=20
+> Tom,
+>=20
+> For GCC version sub-version do not matters?
+> For example 6.x.x 7.x.x 8.x.x
+> Or 9.3 9.4 etc also matters?
+> So to determine the supported version it just need to pin-point to
+> the major GCC version?
+> Then the possible version break only <=3D10 or <10?
+> Based on the previous build success case.
+> 9.2.0 fails 11.4.0 passed.
 
-Reviewed-by: Andrew Davis <afd@ti.com>
+Looking through logs now, I see the kernel says 8.1 or newer:
+https://www.kernel.org/doc/html/latest/process/changes.html which is why
+I have been saying there's an underlying kbuild problem (missing
+change(s)) that needs to be resolved. I don't know if 10.x works or
+fails, but that's still beside the point to me as 9.2.0 should work.
 
-> +	filename = "ti-dm/am62dxx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-> +};
-> +
-> +&dm {
-> +	filename = "ti-dm/am62dxx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
-> +};
-> +
->   #endif
+--=20
+Tom
 
+--7LY+6fmZHtH2m5Es
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS3eBwAKCRAr4qD1Cr/k
+CrV/AP0YnDNFjVGCNokFPLMBlYtgqTR2R5WIK55xkK7sWVsC/gD+Ph7XR7Bcwn4q
+R1XFUvXRq6r3w6JcqYdj0Wx+fm30mAQ=
+=oq5V
+-----END PGP SIGNATURE-----
+
+--7LY+6fmZHtH2m5Es--
