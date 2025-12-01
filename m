@@ -4,156 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A160D116F1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:47:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CFB6D116F3
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:51:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A53A183C04;
-	Mon,  1 Dec 2025 17:47:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E2B383C23;
+	Mon,  1 Dec 2025 17:51:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b5zfY3l0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="txgkK9mi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6E0E83C0B; Mon,  1 Dec 2025 17:47:51 +0100 (CET)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EEFCC83C39; Mon,  1 Dec 2025 17:51:27 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EF4D83B8C
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:47:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CC30F83BF4
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:51:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=h+LS31FwbC9qBtZAODRqc/XIY0FKG8S6iPXQEiDEm1IlohroXJv00SIB8xafB8yH1mNJxNOZV1e5lpN23E+kW/d6mrRg4OoHLcQMlK/BcDGF1G1YYvbuW9LfkhqZRQpga1Ote0HFJ7kh9egYajJMnilxS0WIiX7hRZpBg8yUcxHwXvE0VnrFy9GiuF+GzDEdtlIsogcPH8Pdqk+Jb1Uon9DK30AYUXgVIFl+V0EHQ2n3/itJ1H2wDzYopHEO2NXmRz6er1cuvwhgi57TqYkbv90fvOFpIEY4udnN9ZvaIS0M87o86fLtRj/drEZEvcz4FK5OEJnf0bFMjd1KiQGweA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lP3YkudnIIJbZYHFiA/virl5XkLkfSNGdpY0OT2wODk=;
- b=jhKRERoTTfIhfXHlptQiL1NixV36hrLOH2Rm4lkeOT3wSgL9FeUMT1uv54TpPii91sIaEQtQ7o6X3asOt2WuWEF8bQFCx9ZXBf4M8hdmVzXBFmYVJOIbPxm9VVJBASJJvvbnj80iZQQE8yQrGp7Mf3ENAefOXqyoRtG5dDo9E9qWT3OW7TMaZKglq0xgZkvGgbLQ1it7U1IKQCurVNWlTiCI+Ff5s3ElLH8VqY59DifAoGUJZEHby4qQQ34EkXcTqBTT943sX54ckw3l5cnL3ox1zabjOwoVG4stKq16s8zeDTC/r9aYjDBKr4uTfYgXiGArdE8rt4E5ZROp84TZ4g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lP3YkudnIIJbZYHFiA/virl5XkLkfSNGdpY0OT2wODk=;
- b=b5zfY3l0OaIJw4QY3x2ZNfYT+KfgAJlkr2ZzD9ybjCYJhGvLDWAcBRTBICwER5OzM6gnDiT5sksEpDE0iLROnPDJAJrGapXpW/xeYpeHAYoW0ZHHQDIbgufDzvYNaR/z/Bgd+KYlLY8cWyh2YWGtD/I5dUfsc5M79xVVzn/pw1U=
-Received: from MW4PR02CA0019.namprd02.prod.outlook.com (2603:10b6:303:16d::23)
- by MN6PR10MB8045.namprd10.prod.outlook.com (2603:10b6:208:4fb::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
- 2025 16:47:44 +0000
-Received: from CO1PEPF000075F3.namprd03.prod.outlook.com
- (2603:10b6:303:16d:cafe::15) by MW4PR02CA0019.outlook.office365.com
- (2603:10b6:303:16d::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Mon,
- 1 Dec 2025 16:47:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CO1PEPF000075F3.mail.protection.outlook.com (10.167.249.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Mon, 1 Dec 2025 16:47:44 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 10:47:41 -0600
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 10:47:40 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 1 Dec 2025 10:47:40 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B1GlZlQ764700;
- Mon, 1 Dec 2025 10:47:36 -0600
-Message-ID: <90a2a3d6-e308-4507-9706-abc68c5ce2ee@ti.com>
-Date: Mon, 1 Dec 2025 22:17:35 +0530
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c6d699610cso1022418a34.0
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 08:51:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764607884; x=1765212684; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1JiugMQjI0q8kX8uYBEw+of8tkY7YGqhsYCSh0zlyo0=;
+ b=txgkK9miJe5r+HPGWHl8cULC9pqQlemt4A1OeG1nUVXo/iwAPvHd0XYbn+bSIpRHH/
+ NRpSXw6ED2Gx9QpibYt+dr3x7uiSR6CQjtNORRpjmZIjMtzerU7g/+Z1+H3u9YZ+uPQJ
+ Ybfxnuhd94qNfg6R3ENrOjUOfb3AG3fcJ8Uq8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764607884; x=1765212684;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1JiugMQjI0q8kX8uYBEw+of8tkY7YGqhsYCSh0zlyo0=;
+ b=moE3P8Z09HP9ijAuCHdbO00LjhDizCTrzx+Fl9AboSdkm83n6Z/72ckLrWaYtc4njj
+ vguI7CQo3ODGyPGCS5EkWpPazonhPjfW8urABDxNiNMChU0vJoNvfcpPJi8CR1Sbpf6Q
+ u629L4U3ewLOJAGNB+CWOlQ+7rwE9EpDTwBAZxH13URX8NUew0Mm6cQnjouG9rfAcGWi
+ 1ptJexhbzL4U7tx5g9kUe0bxoHr7MurLlXvu20gGdnDjloj8Ct4pgpuJbPAJXjtdfoA7
+ 6xDrv/Jx9kHN7WbnLxqLxsrrKmXeKWLALhyuvC291M5FL/RtPo5nIDzfmvmVI1fwBN32
+ fybQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/Gk4rrWAUdwXKonWR+4bntKfd/8rVHZSrkYlu+5XacHyq1hjff31oLSyV9VUAsFPy1KHJXlk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxfE/Ost1QWv8THm7mVB76DCPAXKBq9eBdEqA1KEU0uGCSjrSb8
+ QzNEsxUBzRpnuyPQ8U8Wfu5+zRFTda0gvgl/LtIUH7d+/YdzNwjseSXO8M9Cm1Z0hCY=
+X-Gm-Gg: ASbGncvduef2M9J71X5IZFxbDwETGjHrXpMZgNfijksDmVlu3U1ulkt8tkQ9noUVmP7
+ 12u0YFZS0e47JyaSZJtnGWdAZTIzCbRi8G2zjYcGcOHETInyxCY+go6AMB3iKwmhLKazatrDy4i
+ F1AoXZ40cExJGOOeNztHmtBVQAGdEbuJcL2s51Y5LzFybDDmR0RFAnnnbkKtEf5FbY1ztbuJorB
+ kxIya4714dtDum/9FMLEWrwUM+945Hp299u18cfsY2MPV3sDsqwdFnCXzyhQ594Dnkfpbmda4nA
+ HsSe4LOaXUfJApYs7hcIjjrFu6ZjEVd1enWqLnW5GESQNpKmGLQVxLeU8Kyl6A1WKCMfIdhOEJa
+ 8LDEHfDoO+LSMcHr75IsX8qBYfMU/rJyYfx3qPG1Ukj4R0BUFQrMRrq2onW1guBokdX7FziyN1u
+ 18tMdlTehF29yMDXj01rE0iREQUBMJz9oN3rOgsZeHusBCS9ulf9E9/EqRGFR2
+X-Google-Smtp-Source: AGHT+IFlUbae+NoDbaaTnETnk0Lmv+DlGzZkZScAZTxDmNFqhB8HPe+/Par4qsAP+9iQQ6m1tSMjRA==
+X-Received: by 2002:a05:6830:4126:b0:7c6:cb39:adf7 with SMTP id
+ 46e09a7af769-7c798f6199bmr18834788a34.6.1764607884521; 
+ Mon, 01 Dec 2025 08:51:24 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c90f5fedbbsm4810151a34.10.2025.12.01.08.51.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Dec 2025 08:51:23 -0800 (PST)
+Date: Mon, 1 Dec 2025 10:51:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Brian Sune <briansune@gmail.com>
+Cc: Jan Kiszka <jan.kiszka@siemens.com>,
+ Chee Tien Fong <tienfong.chee@altera.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] Fix socfpga GEN5 boot by spl+u-boot sfp on RAW
+Message-ID: <20251201165122.GH303283@bill-the-cat>
+References: <20251129064818.1587-1-briansune@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 10/10] docs: board: ti: j784s4_evm: Add PCIe boot
- documentation
-To: Hrushikesh Salunke <h-salunke@ti.com>, <trini@konsulko.com>,
- <a-nandan@ti.com>, <m-chawdhry@ti.com>, <c-vankar@ti.com>,
- <j-keerthy@ti.com>, <marek.vasut+renesas@mailbox.org>, <n-francis@ti.com>,
- <jm@ti.com>, <anshuld@ti.com>, <s-vadapalli@ti.com>, <ahalaney@redhat.com>,
- <semen.protsenko@linaro.org>, <mkorpershoek@kernel.org>
-CC: <u-boot@lists.denx.de>, <danishanwar@ti.com>, <u-kumar1@ti.com>
-References: <20251201110103.845413-1-h-salunke@ti.com>
- <20251201110103.845413-11-h-salunke@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251201110103.845413-11-h-salunke@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000075F3:EE_|MN6PR10MB8045:EE_
-X-MS-Office365-Filtering-Correlation-Id: f284eb5a-b9a1-4b59-a34b-08de30f959a1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700013|82310400026|921020; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QVJwWHB3cDMzTEVSVHpSYkNtUmhNeWUvYm1NS0JhOTE4R21INlZMaGJHZ0xT?=
- =?utf-8?B?NXE3WDhyOWFhaG90RVJGdkRTRGJQbFBJTTFvdXVBR3FxcTZIZFF0YWk4d0wr?=
- =?utf-8?B?V05Ga3JheWJ4alQzdnEwT3l3KzRkSkZNY3g2dDBhbVVJWWt5LzE3ZStxSlBr?=
- =?utf-8?B?TVNIR0Q0V0t3cklXZlgzZ3FNOFNtZ1dWMnJTWjlVa1VtVVV5MFlrNE8rTmxk?=
- =?utf-8?B?UFNRckdPNmtWRjVMTUhVdU1QMElxaTlLdlFXakxyZU9xS3I3RGh4SkhWSVBN?=
- =?utf-8?B?SjMzTDQ0a1gzcWcyRjZudjRLQ0ZIcEtPQ2JDT1JKdE84aFBSMEN4ckZIdlc3?=
- =?utf-8?B?bWZFdkk1WUJ3YXFUQzc2L3lyZld5dGNSMStuc21RODZqeFpXUmlDV3hQM2U3?=
- =?utf-8?B?MWRuNmdYVkpNcDZkcXBzaFRwaEhyUm5CNDNibFYzdXlienRjYmFTa0tZeVll?=
- =?utf-8?B?UmNEK3E3cnZoUlRRbkFuTEkvRmJOdTQzcUx3b2ZKdk5yMHhPV1FUVitQbk43?=
- =?utf-8?B?VG1wckFEK0RaZ3ptRnFLTlZtUzdFcjFNWVBCV0FvLytkM2hSNGFZUXBCWWtL?=
- =?utf-8?B?V3VIOW5tMXVKTGhQVWc2QXJQOWlRYVVWTkVBQXNHSWl4SVpEQ3U1UkRwTUFV?=
- =?utf-8?B?c0RQc1NGSkdsMWtGSkZyVnRhOS9iQUV1NXpRajZmaUtxQmk2TEhyeXZkY3ZV?=
- =?utf-8?B?K2xUbkxjK0tPODhWb0lCeURXZ2xtcWoxSTFYOFVWV1BQR2dkcFpLMVdBcC9m?=
- =?utf-8?B?cVBqVlNUYVlPM0hQQU9QZEJkOHo5cnJJa2c4MHlmRnJmN3hBN1M2Y0NHZnRk?=
- =?utf-8?B?cmhrSFBQdFVkRmVFTS9uTzArSEp2L3Z5Y2VJUEorNHBjclpHcGNUYTJTUEZ4?=
- =?utf-8?B?T3V2NGpmOWJNTklYMHJzeVBEMmowQ09neFdCM3JQMXBLVlA5NVc4QVB0YUlz?=
- =?utf-8?B?RHBjaG5ESmd2VGdMZEhxN3paM3QrU215TG9QK0IyaGhEdXJaYjdtek9rN1g5?=
- =?utf-8?B?bDRnQWFjZ3pldzdSNXE0dGJZeGxVUmJaNDJEdzRLcFZ0ZHVHSGYvRi9QNFFr?=
- =?utf-8?B?THc4aXczMjV1YUp2a09ta0oxbm1TY2EwQzdBK05kWEp4N3UzUWFhMkJxL1hR?=
- =?utf-8?B?WFBuT1p6dkdPNUV6QlMrVGVEUFFYaTFNS3NXaUpuL2JtR0t4WVNmWkZwSCtJ?=
- =?utf-8?B?NGRoVS9qT0t1RGdPSnVIUW5paFB6djZLNlNxY1U0dHU0Z3NZaU0yUXdacmM2?=
- =?utf-8?B?UEdzS2h6eE5malE0NlBLZm1NaU5CSVdHYmVaU1g5dU9URFpzUnVSRldkSlZ4?=
- =?utf-8?B?KzBNcFd5a3ZiMHZsMCtqeUd4MWptM1lZNStBelFwNFBqRmpqZE5iYkNFTFNw?=
- =?utf-8?B?K2VPKyswRUhVdnAzaTc4THVpMEJBSnBiUW9QUGFaaUxodjNwTmlPbU9zT3Vk?=
- =?utf-8?B?K28wSVEyV3k3U2NsYXlGcTdTUUZuNUdKaDN6ajQzdUFDTVB1WDQwdlppRGhX?=
- =?utf-8?B?aTVHYy8zUDRub2pHWlpSL1oxcUxjYlpJQUFzRzRsUjN0VXFEYUNnT0g4L2tm?=
- =?utf-8?B?UUJBQVM1Z3VWRkVGcE1ZekRvN3VHSjlBbm9EV24xVjBKbVJVdHZUUWtOdmJT?=
- =?utf-8?B?NDExQkEvQ3ZhS0RxVFVxWDJWRURNQ3ViNnJwT254bEI4Ymg2STBDeDFnKzQr?=
- =?utf-8?B?N2lpZCsvZ2t5Wmh4R3lyS1V6ZVFpclBlTUJ3MmZhNFdqQk9rUXFCSmhUNG1R?=
- =?utf-8?B?ZUUwSFd4cmxKaTYwTkxCRDJuVFZCZEFOVVArSlJIMkZNYXVQN0wzUC9uMmly?=
- =?utf-8?B?UVlCVld0Q3JEUFZ1UVpkYmpJTzhYSmUzVXgwM09KK3V3Q1pJQ2c1TXNwVy9l?=
- =?utf-8?B?STdPL2pidldRZ0ZneTdNR0cvc3dhQmV3d1JyTitNR203WDBJNTRWdE9zazBL?=
- =?utf-8?B?UE5VSlY1WUFEUjNkbUZoUzU3QjduaDBQbDFCV0FWYm0rQ1VMeWxqUExlOVRY?=
- =?utf-8?B?dFhZWmpPNjQ0TGdMU3JJbFMreTBiQlA2Q1hFdHVKNm5WblpveVdvRlpSTmRM?=
- =?utf-8?B?NDZCVGhxaDJuNy82Z0x5QVJDYnlyUHFNRFA4SG0wTGFyUFpVTUN1dnpHTWlH?=
- =?utf-8?Q?iBcz4FiV1bk+X/qXKOZokWEzh?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026)(921020);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 16:47:44.0930 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f284eb5a-b9a1-4b59-a34b-08de30f959a1
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075F3.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR10MB8045
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ri9XMpKZfqpVtWFP"
+Content-Disposition: inline
+In-Reply-To: <20251129064818.1587-1-briansune@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,81 +100,67 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 12/1/2025 4:31 PM, Hrushikesh Salunke wrote:
-> Add PCIe boot documentation for J784S4-EVM including boot mode switch
-> settings, hardware setup requirements, endpoint configuration details
-> and step-by-step boot procedure.
->
-> Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
-> ---
->   doc/board/ti/j784s4_evm.rst | 267 ++++++++++++++++++++++++++++++++++++
->   1 file changed, 267 insertions(+)
->
-> diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-> index 22442874110..0c9dad122a7 100644
-> --- a/doc/board/ti/j784s4_evm.rst
-> +++ b/doc/board/ti/j784s4_evm.rst
-> @@ -280,6 +280,10 @@ http://www.ti.com/lit/zip/spruj52 under the `Boot Mode Pins` section.
->        - 00000000
->        - 01110000
->   
-> +   * - PCIe
-> +     - 10001000
-> +     - 01010000
-> +
->   For SW7 and SW11, the switch state in the "ON" position = 1.
->   
->   Boot Mode Pins for AM69-SK
-> @@ -311,6 +315,269 @@ section.
->   
->   For SW2, the switch state in the "ON" position = 1.
->   
-> +PCIe Boot
-> +---------
-> +
-> +The J784S4 SoC supports booting over PCIe, allowing the device to function
-> +as a PCIe endpoint and receive boot loader images from a PCIe root complex.
-> +
-> +Hardware Setup
-> +^^^^^^^^^^^^^^
-> +
-> +To boot J784S4 via PCIe, the following hardware setup is required:
-> +
-> +1. Configure the boot mode switches on J784S4-EVM for PCIe boot:
-> +
-> +   .. code-block:: text
-> +
-> +      SW7:  01010000
-> +      SW11: 10001000
-> +
-> +2. Connect the J784S4-EVM (endpoint) to a PCIe root complex (e.g., x86 host)
-> +   using a PCIe cable. Both boards should be powered off before making the
-> +   connection.
-> +
-> +Endpoint Configuration
-> +^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +The following configuration options are enabled by default in
-> +``j784s4_evm_r5_defconfig`` and ``j784s4_evm_a72_defconfig``:
-> +
-> +- ``CONFIG_SPL_PCI_DFU_BAR_SIZE``: Size of the PCIe BAR for DFU/boot image download
-> +- ``CONFIG_SPL_PCI_DFU_VENDOR_ID``: PCIe vendor ID advertised by the endpoint
-> +- ``CONFIG_SPL_PCI_DFU_DEVICE_ID``: PCIe device ID advertised by the endpoint
-> +- ``CONFIG_SPL_PCI_DFU_MAGIC_WORD``: Magic word written by root complex to signal image transfer completion
-> +- ``CONFIG_SPL_PCI_DFU_BOOT_PHASE``: Current boot phase indicator for root complex
-> +
-> +By default, PCIe root complex mode is enabled in the device tree. To enable
-> +endpoint mode, build the boot loaders with the device tree overlay
-> +``k3-j784s4-evm-pcie0-pcie1-ep.dtso``.
+--ri9XMpKZfqpVtWFP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Do you think, you need bootph property in pcie_ep node ?
+On Sat, Nov 29, 2025 at 02:48:18PM +0800, Brian Sune wrote:
 
+> Thanks to Jan Kiszka had provided info on
+> u-boot is not able to boot by u-boot-with-spl.sfp.
+>=20
+> All three TYPE, NUM, OFFSET mode methods
+> are nonfunctional on combined raw boot.
+>=20
+> The major cause is spl+u-boot structure is
+> defined as 4x[spl+zero_pad] + u-boot.img.
+> Deal to this configuration since GEN5 is used,
+> the spl would require to seek by an offset
+> on top of the spl offset. This means for
+> each spl=3D0x10000 the offset is 0x40000.
+>=20
+> However latest u-boot do not consider this
+> major structure on GEN5 socfpga.
+> Meanwhile, the default include file as Jan
+> pointed out is completely wrong syntax and
+> caused issue.
+>=20
+> Combining both concepts, the minimum fix
+> patch is provide as follows.
+>=20
+> 1) Offset is control and default set to a
+> proper offset under:
+> SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
+>=20
+> 2) Only GEN5 socfpga will be affected and
+> minimized contamination on other devices.
+>=20
+> 3) Only one compuatation adjustment is made
+> on spl_mmc_load. And simply introduce the
+> offset adding by the kconfig offset control.
+> It should be 0 by default and gate as well.
+> So no possible harm should be done.
 
-> +
-> +PCIe Boot Procedure
-> +^^^^^^^^^^^^^^^^^^^
-> [..]+
-> +The following steps describe how to boot J784S4 over PCIe:
+This sounds like a tricky problem to solve in a "nice" looking way.
 
-> +
-> [..]
+The first thing that's unclear to me is, which of
+SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR,
+SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION or
+SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is being used here?
+
+--=20
+Tom
+
+--ri9XMpKZfqpVtWFP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS3HiQAKCRAr4qD1Cr/k
+CvesAP9p9Fbxl7KxAEWos60QQ+D3xhnjNTBmqdsISAkkWFp4/gEA2Dt7h0GVzSt/
+EAtiWlHd/DJAB5Tpop6r1bASShvaZws=
+=pJaN
+-----END PGP SIGNATURE-----
+
+--ri9XMpKZfqpVtWFP--
