@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF847D116F1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:36:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 365FAD116F3
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:40:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B1F283C72;
-	Mon,  1 Dec 2025 18:36:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B783783C9F;
+	Mon,  1 Dec 2025 18:40:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b4MqVAOs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V2VC0I0S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E27A983C93; Mon,  1 Dec 2025 18:36:24 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id D26EE83C6C; Mon,  1 Dec 2025 18:40:43 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D70B83C6C
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:36:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD72883C6C
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:40:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-78ab03c30ceso39166727b3.2
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:36:22 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c750b10e14so1437584a34.2
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:40:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764610581; x=1765215381; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LSIkJZzxgEP92IWCSvdhNj/A091Zgf2r2Udqgo6Sx9w=;
- b=b4MqVAOs5prvAPXWDSGmpY5RU78kndm+xWz+2IHpt1NYtkLDByaOCXdxWiQh49naUz
- kJI5MY6dEG6cvBw5Wj8oG+vMDecxz1MSsa7d+PQLigVtfBensrzT5sDFNua6DQMrTUBM
- uFKRJXHWVxEQ+eCMaQiZW3nfm7xtacxJPSqz6tTqU2duPdbC6SjY7sAMuU/cAu2FeUh8
- Q/tDbuFKj0na7ZFUN5iNNRMeFx4jhsl/0VVmzosaAfLmrFnTYK9pWD4vtn7B2HSduG/v
- sUf8D8uiE9Iw1+dQLbS1GYJGrSm5cZiVIb5l6/I2PtZHKvzPmtw19cI5U9qXIaTAa3uR
- x4Dg==
+ d=konsulko.com; s=google; t=1764610840; x=1765215640; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eujT/i+aOoqokbRN1k5H3+ZU8GbZSjzkujQjOj7fCQ0=;
+ b=V2VC0I0SCmoPak/hqwqSt0DAvpdf8KFu7QmMw2WdGrJxRexYt3nUk7dAg6enAo52NF
+ abjBQvVJE+Yb8Bti/JXQGPR9SIQI32wJT6CLpxI4PHi0YLPVTrhBvINWeKR+bTqsIZH3
+ 61D1at2bI5P+vWeD7XB5vw0Ksl8kttgfPWxFM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764610581; x=1765215381;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1764610840; x=1765215640;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LSIkJZzxgEP92IWCSvdhNj/A091Zgf2r2Udqgo6Sx9w=;
- b=RomZ1xnvlgzWLiXiR7LtLHg+bLyycQh49m8ZpiGnHSe0DrA6uTcSuuLvgoT0T4CDlF
- 3/pVewncReJFoszuIoo+OvsWHccc8qOjJ9MtZzRMGaHPjnNO0UzP1JVSEnSU5kSNzFnP
- 9gcAScr5aNwXjEl2+Et8Yzg7nub9WqbLbAkl5AEnD2ibdiw2uQffFcqkR9DF1K9vV8k6
- bxu5xIIRh5PUx1V+QZXLPM2waAApmUCW63R0es6YYMInnpz7aWDPOtXm6KRxfRbcMMI6
- QTzRJqq+G9bHuPdg+ij2hKQmf+5VTZFLvv9SKH2tmxQt9vKTYGEujY6cuLMzw1kNfSz+
- eKUw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXeg+4bj3u0OWZ5h0bpGBU/PVEV6eR/4c6GBKbzifiCCq66CghtsoYKcH8a5K0WEXQPh0Wujyc=@lists.denx.de
-X-Gm-Message-State: AOJu0YywODacVuwXO3NlI9vcw2olHDiAEJYydrZLuMrTtwvBKxu531Mx
- 2Mm8FU/ZDJtimCCP6pC+wlb6AUv3qqoVgJDqGPkbEWKMc8kZamRNMj7Khua7OUVoRrfUaUYTL89
- tfLzU5pkQNnl0cA+awIUQTIDvJhzP0Xb5v1RUBAbA9TO1T7jWDuqIJ/NjMQ==
-X-Gm-Gg: ASbGncttzwTViziGgk9wHqXgt6s2xAH8U1z7Cxa2vB0IIzC+yFzmULOg5/M7MjNxoWi
- i0DMFDdlge/WzxrtkeKmdErZnFKbAs+Eiby5UrlKs+fkY42kMSYFq9viVKtTiCZMY6irYmeY2nj
- RM9GUQubqUQBhBLYPzxWEvBBPPow029LtN0VPdCrHKPSx28BYiS/C8TxevAHu1bs1t2EojfIEr1
- UJAykKsAEAnIB0eXodhdpPXNB+KOpklmPGo+a6IAdzEL+j/CIyE43GiXQdGb3TqKHFOfJckAEDQ
- 6P9cRMqnSLy7nZoBZhN32Sg30lRWeZq7Dkcz3RySBIsBxiwrFKrT+scp1jjWMQs/1oEzy5WAbs2
- psHpGlg==
-X-Google-Smtp-Source: AGHT+IEz537YdkO5m8/Tkfaq0AAG3vkJpiiObUXvdp4swlEnSrFqgTb2+5bpFGC7ttWVoM6N3wWA+Yzm2cUfFaeZ2qc=
-X-Received: by 2002:a05:690c:2781:b0:787:e9bc:fa1f with SMTP id
- 00721157ae682-78a8b54d8cemr326146677b3.46.1764610581093; Mon, 01 Dec 2025
- 09:36:21 -0800 (PST)
+ bh=eujT/i+aOoqokbRN1k5H3+ZU8GbZSjzkujQjOj7fCQ0=;
+ b=a1OvF8Pv+5R0WglrwDw2hI/S9WJBUdY62xQJmzHpGiVQUinyTdEZq4ljm8ZmtiDKYx
+ TsMP/5oyuCcJJWjMlHNQrKvvagmDT7faeBs7O/Ha7xdSsnXH4nAh5JHVCNM3I5jjbg7B
+ TWeDrLMI4spIFvabZtMg+Q0LLCjkTM4NryrMKubHb8NIyMoJ3WMrIxO1HQppxozTSiAA
+ FnKAN0YYefaLsLgu2wrFen1RAjgn79PAJopYD82hlXj5E8R2g9jTKq6ygwHISD1velyE
+ OTWI+LYceu3YKHo/Nr7/iPohWGyQSXfTP9iIAj8nWY/Wn4Ot9IDqbUJZIXrfUETiHxZt
+ D0OA==
+X-Gm-Message-State: AOJu0YwTo9PklZs30bSpHoGQt4L8ynXxAj2UQOamXBUbTzbTD1CDgdb/
+ yR/TGfLfuzlfHBOP1NZm1RIUG7sH5KUXvTArUOt5pxBxxFh5ioEd3cDpRznbFI0VTz1fXhluMkF
+ O2vSn7IE=
+X-Gm-Gg: ASbGncvU4gBLvjzCthgNPTq2bEr96F5gOcjMjib56+N64KFcspqtFfAhejdDmLajpfX
+ /jSb9HtTwxGPDE5dIxEiRmcQaWezDWUO7UAfT+QB9vJXsKK7ufGDgYeScC42ryP34OcFis1f7qu
+ txJBR9d4Q5UUivOhSjgAelldeKixdbVbJPHLcUif4wn40Y3esP5WvzW//mSFbXMbAClhDLKHOhV
+ kCkmGMQJlv2j83WEfooqJdZgF49z0ZzmkpdM7ZjW1g1MxqZKsvvmsd+OOhk4wI5NxQRSlBhTw4N
+ eN0soo8aXrVQkdEWoIsUoRAz6pAwfP8AomwtYWShn2o/0jtQQTLJotnfKwvOtn6Rdae2t5XcZnY
+ iCjkUTOulplADqLlphEiTz5bm9WOFnwudi8bpwJLICaU8AvNK/zDRpiLa7Z4QNYvDOOkO8g++o5
+ xowyeamHs3neEhWFncmR1IZQnzfEFqhnGyHqntkoRwAA4qWfgC+z6S
+X-Google-Smtp-Source: AGHT+IFyr21DvHGLmulbjPET4/12jLl+rPrrGMuBvuyXJIjHXx/LCZi+RxDwut7lFUBZ6B0qk8EGzw==
+X-Received: by 2002:a05:6830:a90:b0:7c7:1c77:f107 with SMTP id
+ 46e09a7af769-7c798cc684dmr21596583a34.34.1764610840380; 
+ Mon, 01 Dec 2025 09:40:40 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-65933cedba1sm2686544eaf.14.2025.12.01.09.40.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Dec 2025 09:40:39 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] boot/image-fit.c: Restore building tools on macOS
+Date: Mon,  1 Dec 2025 11:40:38 -0600
+Message-ID: <20251201174038.2246180-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20251201151724.338924-1-zfsdt@canonical.com>
-In-Reply-To: <20251201151724.338924-1-zfsdt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 1 Dec 2025 19:35:44 +0200
-X-Gm-Features: AWmQ_bnL4gCybx1l5JcPUan3emjT7p77YqUMKKix9N2ge3rN_wIQEh9SNgSpqWs
-Message-ID: <CAC_iWjK4Hqgzt==CTZRGvJ50teFe3SJkiuyCUidkV5Sdz1DBgA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] cmd: lwip/wget: avoid NULL dereference in
- _set_cacert()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Michael Walle <mwalle@kernel.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,47 +93,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 1 Dec 2025 at 17:18, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->
-> Running `wget cacert builtin` leads to a crash in _set_cacert():
->
->     Unhandled exception: Load access fault
->
-> Function _set_cacert() dereferences variable wget_info.
-> We must initialize it before executing the cacert sub-command.
->
-> Fixes: d3761a31ef09 ("lwip: split net/lwip/wget.c")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+The ordering of headers in this file doesn't follow our rules exactly
+because this file ends up being included when building host tools and so
+has to be correct for host include paths and ordering as well. We need
+to have <malloc.h> higher in the file or macOS will fail to build due to
+declaration problems.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  cmd/lwip/wget.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/cmd/lwip/wget.c b/cmd/lwip/wget.c
-> index fc9bc11cd83..4883ad61bce 100644
-> --- a/cmd/lwip/wget.c
-> +++ b/cmd/lwip/wget.c
-> @@ -180,6 +180,8 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
->         ulong dst_addr;
->         char nurl[1024];
->
-> +       wget_info = &default_wget_info;
-> +
->  #if CONFIG_IS_ENABLED(WGET_CACERT)
->         if (argc == 4 && !strncmp(argv[1], "cacert", strlen("cacert")))
->                 return set_cacert(argv[2], argv[3]);
-> @@ -214,7 +216,6 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
->         if (parse_legacy_arg(url, nurl, sizeof(nurl)))
->                 return CMD_RET_FAILURE;
->
-> -       wget_info = &default_wget_info;
->         if (wget_do_request(dst_addr, nurl))
->                 return CMD_RET_FAILURE;
->
-> --
-> 2.51.0
->
+Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always at 8-byte aligned address")
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+ boot/image-fit.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index cccaa48f6839..3f66bec49041 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -23,6 +23,7 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <asm/io.h>
++#include <malloc.h>
+ #include <memalign.h>
+ #include <asm/global_data.h>
+ #ifdef CONFIG_DM_HASH
+@@ -35,7 +36,6 @@ DECLARE_GLOBAL_DATA_PTR;
+ #include <bootm.h>
+ #include <image.h>
+ #include <bootstage.h>
+-#include <malloc.h>
+ #include <upl.h>
+ #include <u-boot/crc.h>
+ 
+-- 
+2.43.0
+
