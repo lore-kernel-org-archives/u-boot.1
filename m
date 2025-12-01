@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D6FFD116F3
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 20:45:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 961B7D116F3
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 01:44:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0E5483D92;
-	Mon,  1 Dec 2025 21:45:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D5DD83D90;
+	Tue,  2 Dec 2025 02:44:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uZYLndrt";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fFJwXSWu";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="a6cWJUwM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C40A83D92; Mon,  1 Dec 2025 21:45:18 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 67A1783D8A; Tue,  2 Dec 2025 02:44:19 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7671D83D8B
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 21:45:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 693BE83CF3
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 02:44:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-45085a4ab72so2269437b6e.1
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 12:45:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764621915; x=1765226715; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nWyRGlEkZWC26tt01iJOry2aUjjY92NXEQ3kv4Xhbv4=;
- b=uZYLndrtDn7+5XHrRcmipXV3+jDtVMbGQtYYIoHa7CLgFRS8YeDPdUbJ/HzvUNVfjL
- KXKfd+UwAPhGzKvQMCHI54o3ntZzDbfmlNGmzKe8x+ipPqfYkQ4/Fj/VEfkQTVuCJHM6
- G6+sGnLKoqeS1Iq1B727pkZmrAO2MyvqpZuGE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764621915; x=1765226715;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nWyRGlEkZWC26tt01iJOry2aUjjY92NXEQ3kv4Xhbv4=;
- b=BcjOuqH86fnbZWsGvtAVD36C4YHV+JlORt9F6q9gqk1p6RPxOcxj3NYPsXkbFHHchZ
- MTBM5vLF8dkfuxevfJ11lsEH6z6F1hXpH8nAZhZdXgnil/X8hJa8BYaFPOMFmLodHsN0
- 1HWp7v7mkv2PywOmYlNLV99w9UZci1L8WOpffXHt+Y8H21MZyiQnaHEZFoqGirRJCRdC
- yMtG0GnnRacCf/c5/8IHDFSN/sDh2r9NCQQ2HyiLalrQQdEWjLv/GhmYy59PDwxk33ze
- 3b/IEk68WUJ2/uQFf5ze/9TcOsY+86TFHH0wV/oN71iy8aAmvwhwVXK3CHS6XhsTM1um
- CK0Q==
-X-Gm-Message-State: AOJu0YyttKhJJ5yXa/+QpbKjsUkENwdGW+5tkv/tCeuiKHkDawbt9pyU
- mhgWDrBNrGKsV49tZbhEBNW8pwnqh0fLISrN+7bNaniYs8G9OCyKfi1/RrBtXdrhjdUSP/V3gMT
- 8aff/kiU=
-X-Gm-Gg: ASbGncvF1Ew+auCAAhZCQ6+h1N8otXUJT/Hk7xoD3cpWBV+OewD8G1p8KrGirQA23eq
- PIMWM+xnaOwom4poRz8wdefi+EmZ4FCZ+/GaA85v6xI7CuXMV0MXuy38pJx29GQznJTLUJbM3Wt
- 9HKMauKJajmNZ5UztcMcHoHx15IeCmvwYXYO0pZ7LXqeAkVHMvNy0yDpRQ8iy8jMf3lRmAXI94A
- t46B83FaN7XVwwokqBNk/NvCGJc5nq28MUvaUeEphs5vh5YMwoOIHrkp1VkdSDYE9iE6xjKhUKh
- jaV8ECnVxbLDajoU97p+zwACbasvGtw5c/1bb+0EO/OH9JLN41hwIhNVdE2w8pXWCiztKiv5S8n
- sID9S6vv3eLbDN7qOzO/RX2pilxuTYk/POWusOMAR5hrRhRuBZv2sZsA48yrLDxfbzRJ4aMG4zd
- LhBohcJZE76EhOda1Vnhf0lZqdSDtUeEXOGANnmt440jr8RNx3sw==
-X-Google-Smtp-Source: AGHT+IHIOIljkA+psN0kjXERZGdAGCmUAh6ZF3kkslyyfUyYhvtP2GN9F5eaQbTTXouBYidoiJ67xA==
-X-Received: by 2002:a05:6808:1a27:b0:437:dade:463f with SMTP id
- 5614622812f47-4514e7a233amr13146097b6e.34.1764621915197; 
- Mon, 01 Dec 2025 12:45:15 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65933cedba1sm2918787eaf.14.2025.12.01.12.45.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 12:45:14 -0800 (PST)
-Date: Mon, 1 Dec 2025 14:45:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] boot/image-fit.c: Restore building tools on macOS
-Message-ID: <20251201204512.GZ303283@bill-the-cat>
-References: <20251201174038.2246180-1-trini@konsulko.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4dL3Tr6T8Mz9tDy;
+ Tue,  2 Dec 2025 02:44:16 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1764639856;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Pm8Tm8e99Z3KQAesOPw+gxvXuUzJl5WqCpdOUGjYEWw=;
+ b=fFJwXSWusUb6zAlM6CxNo49zvyEOc8vZ0Ptc7VlyPBzwf5Nsp1ftVu+asIl8PBhvVgJZ5i
+ G6XbSndkQxy3PFw9VrkaMwUdOM2q/GEA/eKFGvq0T82P+M/QGMeL7a5qS5UPSqp0t8bc3t
+ bJL/VuFzXG74/9cM2/pCqwDB6gJJ47p7F/oBw0ZkKVtfj6+M0xc5+aIYl+YK6ANfGJULxm
+ kcMqOb71lqxNOCLqVu8G/ZSU6F/hTbkwJ4/GGJpN9njPxRlz/NLgowoq5VDneHPfIDGILa
+ p9fIlTJYovSG8c3oZPqzV5TJD8lnoqEYA0+qDo6T3uW3/h3pwPiQ27+9Gv0/jA==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=a6cWJUwM;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <849be528-a4f7-4878-9a24-8c5b46f1ecd9@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1764639855;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Pm8Tm8e99Z3KQAesOPw+gxvXuUzJl5WqCpdOUGjYEWw=;
+ b=a6cWJUwMducawhcplOe5bPkh2qA/ydnJ9O/pXLOZIyb4tBaLcoDx2Ms1mJQ9KJIzvGgXwP
+ 9RYVSvG16BV+ewZTr82vOLH8VYluic1eCJRxc+EZTUC8csenp0BjmvJOAEnHl7gEuNa2xU
+ ILMG4LGezikjZO+ty7Dzai/lrVjYjw2fbQuOu/lDfH5T0WawsnwdhsVex/yR8eq/ffQUQ/
+ TK7GqRkaLfSCpXmrGJVFzeENpDrE6w47Md9MuejKFTT77+Gx42kuzwCUgFQxcCMpEcAVuU
+ tUGsxj4DNJnq0eaE4DYM8qtDfdqjOWJb9LYKbbjRJy9ufygDscpmdvPQsvv3kA==
+Date: Mon, 1 Dec 2025 18:43:03 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="szJJrjjHWrsPrGJI"
-Content-Disposition: inline
+Subject: Re: [PATCH] boot/image-fit.c: Restore building tools on macOS
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20251201174038.2246180-1-trini@konsulko.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
 In-Reply-To: <20251201174038.2246180-1-trini@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: a18bb2a94851884fe25
+X-MBO-RS-META: a5ptr9i9i8hjj5p3n4agqo85jxeodo6z
+X-Rspamd-Queue-Id: 4dL3Tr6T8Mz9tDy
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,64 +93,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---szJJrjjHWrsPrGJI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Dec 01, 2025 at 11:40:38AM -0600, Tom Rini wrote:
-
+On 12/1/25 6:40 PM, Tom Rini wrote:
 > The ordering of headers in this file doesn't follow our rules exactly
 > because this file ends up being included when building host tools and so
 > has to be correct for host include paths and ordering as well. We need
 > to have <malloc.h> higher in the file or macOS will fail to build due to
 > declaration problems.
->=20
-> Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always at 8-byte aligned addres=
-s")
+> 
+> Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always at 8-byte aligned address")
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
 > Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
->  boot/image-fit.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> index cccaa48f6839..3f66bec49041 100644
-> --- a/boot/image-fit.c
-> +++ b/boot/image-fit.c
-> @@ -23,6 +23,7 @@
->  #include <log.h>
->  #include <mapmem.h>
->  #include <asm/io.h>
-> +#include <malloc.h>
->  #include <memalign.h>
->  #include <asm/global_data.h>
->  #ifdef CONFIG_DM_HASH
-> @@ -35,7 +36,6 @@ DECLARE_GLOBAL_DATA_PTR;
->  #include <bootm.h>
->  #include <image.h>
->  #include <bootstage.h>
-> -#include <malloc.h>
->  #include <upl.h>
->  #include <u-boot/crc.h>
 
-Well, this blows up *everywhere* and so is wrong. I'll figure out
-something or another for a v2.
+I ran across this missing malloc() once before, but never triggered it 
+in CI after changing the fixed patch slightly. It seems it does trigger 
+sometimes, so:
 
---=20
-Tom
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
---szJJrjjHWrsPrGJI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS3+VAAKCRAr4qD1Cr/k
-Cv0+AP9UFfURTG0JzgI5wnUzxgjYbuRlBbFahwqHZacAL26eiQD9GhwcXEvuVDQA
-dQfxI3XgyxmINIuU1fDEmQUE8LYgqQQ=
-=eyzu
------END PGP SIGNATURE-----
-
---szJJrjjHWrsPrGJI--
+Thanks !
