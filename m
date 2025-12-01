@@ -4,100 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFAC0D116F1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:54:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF3DD116F1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:55:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EBAE83C61;
-	Mon,  1 Dec 2025 17:54:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A38AE83C0B;
+	Mon,  1 Dec 2025 17:55:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BzHfreZ6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Bj6btW7h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D06C583C62; Mon,  1 Dec 2025 17:54:28 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 1CAD583C29; Mon,  1 Dec 2025 17:55:10 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D02B83BF4
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:54:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF81A830A0
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:55:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-30cce892b7dso2134883fac.1
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 08:54:26 -0800 (PST)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-4510974a6bbso718981b6e.3
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 08:55:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764608065; x=1765212865; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764608105; x=1765212905; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TLhD5LbpLEiPeueNhHiZhtWWNLJSEwpJkxQISR3z5dg=;
- b=BzHfreZ6csNfchoswNkH9kUojLK8lEjdo3sKCmsys3vBitfY8YWflDUBfEwk7LpCmN
- O/bNA7zZ+sltuQ35gCPVBFs/vl0q5V2wH0g7kG52WdXJWiGgmoHgBYKshXziyAX+tGrL
- UiJb7Y+V7BVW2XUBPF/xTjHKLfNg34xrh8278=
+ bh=H9DezaX2hxv6gtRDE1uEJtaXOYVtqRAtE9i4+GKuVvA=;
+ b=Bj6btW7heEj3hNIp34VB7LBb56NxnaI/u5NwkYC5nDFru0VSIos+7DvRIBZ/SD9POg
+ UVh/mGYcVmafy7V4lMY1m2ekrMPtH7JUEtskoCM2kZ5RNFROUNsRXyIunBnZ3eAgxVhC
+ Deb3SJMmY6I/MfaYP6fQ368BQjuSFxyYNHblw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764608065; x=1765212865;
+ d=1e100.net; s=20230601; t=1764608105; x=1765212905;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TLhD5LbpLEiPeueNhHiZhtWWNLJSEwpJkxQISR3z5dg=;
- b=qShKZQIHRLPqDqqmlpoRaPNpq6tlVS29qLV9Tn1DHurdb2NqnkqoUomNnjvEMgXsWG
- eMfbuw3u6tVvaKEutbIHnguuMey8qBi2bU7GS7iN8wcTK/9JeXQc1YLvuhjL/s51+aBB
- vXhnlWC8LOEO7ievwTc9Q+lmcljMMCYqkxl4Cx9JTX5zSeGmoA66P2f29THT0pGc8meB
- 69c+Nx+neljSnZOIGU6aNY+1ZwVAQITRB1lGiPxR4t8B626RkAogxndJRx5IjwgDHnZV
- npi4DZo7nzloKrWddvsh2MGr4YBT3hMeSoueCql6XqzQvnpY2Hnn8bGU6E1DqfsnSJSP
- 5RDw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVfAoRLrWkHdTnHjhvATeUJxUUInVQBVw05g/SS3aBTg00GU02ud7yqKPhj1KeM2aZngJ4dP4U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx7LcO9j2PXKdetoAiOWh2CPgt1SOIcGAD9l+7E9IyFgTV7oT1M
- PI93bHTNb/KMfbt3Tp7hXPsMguMf6qI/7+HmCSLUd2tUkuPPHb9i/ZpFaqxqFvfA87E=
-X-Gm-Gg: ASbGncv4k+6LMg1Ovb2c+W8r/+WWfqjAwL5QIL7FKuFwam20oQtk7WSKUOFohW9jPw+
- OUD0W4H2+g0lfXpRgm167UlPPy4T+tyEeBKQE2KGm3gb7uwlYgsRSow/+rJ5I7lfOVAd6U2Rqn2
- eJtUbmBaD/YQFwxR/s9l+uS8DSq1KH4APHx3MSVen+bF3AgQ4q/oPwRLPouxF/JdQJU5WyM0RH0
- Jgc26jMchQzL5oN2Ubc6F1ThxB0G8Wt4PGPYaR9cbC4ncWawpkT07XfAnJcLHNRX6zbDZTXXC9G
- 2uahsEkLHcZc4UZSWSJ4HeIDJaXciMwcY+m5PYcwWRmuo9C+L2SbtCI9V8fNNMdwZgq9OXAK8sq
- BPpxyFfozm5qx4QRCc/+2kSaIDy84Ee/YYnzS5EQqzK+AYb6qTqYl3poLLGi6pn5b2rBfxon+9Z
- lckns5/HnuP2L05FHSO8dYjxrDi+Nah8vgdpJe5zalIN/uLEfZ2HvUiHxdAo5S
-X-Google-Smtp-Source: AGHT+IHbXbef0NX+nBzRFrz2+97tlAceegCzKjUlIapDVz55loftJOBJjU27tsNmVv2Axot2iDZwog==
-X-Received: by 2002:a05:6871:4083:b0:3ec:4f18:9c79 with SMTP id
- 586e51a60fabf-3ecbe244ad7mr19711315fac.13.1764608065259; 
- Mon, 01 Dec 2025 08:54:25 -0800 (PST)
+ bh=H9DezaX2hxv6gtRDE1uEJtaXOYVtqRAtE9i4+GKuVvA=;
+ b=nU5+oLpFgnRjfY5gw3bvhZrjeS0yrws6f/wsjLxaghDeox1Rw/TR3uEb2DvIamexfa
+ rT66TaFdshApa4gFnAny+viv4bKoUUYvOSF4YDVCJU5+/2L0uutGLxcIBgiKEPsnPyMS
+ j+Qy0pF4ElwOnHhnPpgWFI1hc8iq9skGgzSzcse7DAITUH8oOx5dDl8R76IzOHCgopVk
+ xRwN4NRYqpttxPawk9e7If6mtqI66RFDgT/SlM4USA0gwZ1Ad2TBUs1b3/boUcMeguvs
+ NM8RSWv+SOSUSDZqq+Iv7oNVzcC9WmlQKpRCdtk3yIQI4PM/ZGU0vfQebWwOz2+uxzfg
+ 9TzA==
+X-Gm-Message-State: AOJu0YwsbwYbMJm8NoYFR2vhMjAY2a5KQoc8cjgm5TOLIB2+zPcVdxLR
+ fzh4HDOKr8oc45OY0yhi9+iF7GtHLGXcHHKi0eDTe8lROPBq/tkC+mm38g3q+AqS/jY=
+X-Gm-Gg: ASbGncu1EMxx/sPpvHxhGjKAB8CcBHDMsGKWmD8hk23a+Kz55Ea0+yoLBKN2y47t4jI
+ rzcic1hY2xrTVSfkLXAttPis30fsm8UfhJ7BGsAZnYB4/osdy5maQC7ztoXC23tC+xVZenibhRM
+ 0m7mmoWgvj93s5XDh9+UwrpGX91QaJIGPZjxfr716w7rSGvT80wkl9rKWcmwghsZxI5AetndV+z
+ woIkEBfDOklXphOQBhG5+J090t/L+bnJ6LItNWmissQy6tA4094NkPFsX81loeB8XAEXuOB/GxR
+ SvGvzRO3doh3SmbekzJrzKKSrZST89a3ZUywrzEwkENz8K/AiM+czKDAxtt6QQiF39Mx9QpJey4
+ DvnduUT3+8S9C3BBt/HybOTuDirzccc4dx9o0mu2hYEDt1yJ1RFOFL/j4SiyUTJAn9asidWuFVt
+ ONN/QnVh2hZ9QxE/DEK1tMiGhvRn87Lv0jtFWq5BVZFHpP854WGw==
+X-Google-Smtp-Source: AGHT+IHpPx/f3x2wPeXOgArTmvUhVQ801DbwJTKWvL7i9cI6re5Lt5zXZtx5sfHr/eqW1ihNjBEiaQ==
+X-Received: by 2002:a05:6808:14d0:b0:44f:fc6d:1c39 with SMTP id
+ 5614622812f47-45115b3413fmr16318092b6e.57.1764608105064; 
+ Mon, 01 Dec 2025 08:55:05 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f0dd05bc9asm5470281fac.22.2025.12.01.08.54.23
+ 586e51a60fabf-3f0dca3e8a5sm5515724fac.7.2025.12.01.08.55.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 08:54:24 -0800 (PST)
-Date: Mon, 1 Dec 2025 10:54:22 -0600
+ Mon, 01 Dec 2025 08:55:04 -0800 (PST)
+Date: Mon, 1 Dec 2025 10:55:02 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Sune Brian <briansune@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
- Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from
- empty built-in.a in SPL/TPL/VPL builds
-Message-ID: <20251201165422.GI303283@bill-the-cat>
-References: <3e4de604-292d-4232-893d-db43e29b469c@mailbox.org>
- <19c33d9d-4cab-4add-9dff-f3b9e051f146@altera.com>
- <3b219e15-5513-4474-aae9-9d9a8abeb61e@mailbox.org>
- <f13e8fd9-9705-46ec-a2c4-9fc4c6a63e38@altera.com>
- <20251128153130.GC2125796@bill-the-cat>
- <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
- <20251128164957.GD2125796@bill-the-cat>
- <CAN7C2SCpM4V3GL=_tox+9ePEx6DcVNK+pdfxn_ysiOyvYuEn+A@mail.gmail.com>
- <20251201164405.GG303283@bill-the-cat>
- <CAN7C2SBPwcPdUQeufJ+c3XxVKVmU4PE7nbYqLaNy9ynqkWhJgA@mail.gmail.com>
+To: Francois Berder <fberder@outlook.fr>
+Cc: u-boot@lists.denx.de, Huang Jianan <jnhuang95@gmail.com>
+Subject: Re: [PATCH] fs/erofs: Fix realloc error handling
+Message-ID: <20251201165502.GJ303283@bill-the-cat>
+References: <BESP194MB2805A8A998129AB7ABA1B929DACFA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+ <20251118213359.GA630712@bill-the-cat>
+ <BESP194MB28057D1468C08C867A8D8D76DADDA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KhD2ILSrnpwj0zYk"
+ protocol="application/pgp-signature"; boundary="kSkgpXS1J563w3hN"
 Content-Disposition: inline
-In-Reply-To: <CAN7C2SBPwcPdUQeufJ+c3XxVKVmU4PE7nbYqLaNy9ynqkWhJgA@mail.gmail.com>
+In-Reply-To: <BESP194MB28057D1468C08C867A8D8D76DADDA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,109 +99,106 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---KhD2ILSrnpwj0zYk
-Content-Type: text/plain; charset=utf-8
+--kSkgpXS1J563w3hN
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 02, 2025 at 12:52:06AM +0800, Sune Brian wrote:
-> Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B412=E6=9C=882=E6=97=
-=A5=E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=8812:44=E5=AF=AB=E9=81=93=EF=BC=9A
-> >
-> > On Sat, Nov 29, 2025 at 08:46:14AM +0800, Sune Brian wrote:
-> > > Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B411=E6=9C=8829=E6=
-=97=A5=E9=80=B1=E5=85=AD =E4=B8=8A=E5=8D=8812:50=E5=AF=AB=E9=81=93=EF=BC=9A
-> > > >
-> > > > On Fri, Nov 28, 2025 at 06:44:12PM +0200, Ilias Apalodimas wrote:
-> > > > > On Fri, 28 Nov 2025 at 17:31, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Fri, Nov 28, 2025 at 10:11:53AM +0800, Yuslaimi, Alif Zakuan=
- wrote:
-> > > > > > >
-> > > > > > >
-> > > > > > > On 27/11/2025 11:09 pm, Marek Vasut wrote:
-> > > > > > > > [CAUTION: This email is from outside your organization. Unl=
-ess you trust
-> > > > > > > > the sender, do not click on links or open attachments as it=
- may be a
-> > > > > > > > fraudulent email attempting to steal your information and/o=
-r compromise
-> > > > > > > > your computer.]
-> > > > > > > >
-> > > > > > > > On 11/27/25 3:12 AM, Yuslaimi, Alif Zakuan wrote:
-> > > > > > > >
-> > > > > > > > Hello everyone,
-> > > > > > > >
-> > > > > > > > > I already have the referenced commit in my test branch, a=
-nd I can
-> > > > > > > > > confirm that the same compilation error still appears on =
-CycloneV when
-> > > > > > > > > certain directories produce no SPL objects.
-> > > > > > > > >
-> > > > > > > > > The existing fix ensures that built-in.o is always presen=
-t, but it does
-> > > > > > > > > not prevent ar from generating empty built-in.a archives,=
- which older
-> > > > > > > > > ARM 32-bit linkers (such as CycloneV toolchains) reject a=
-s =E2=80=9Cfile
-> > > > > > > > > truncated=E2=80=9D.
-> > > > > > > >
-> > > > > > > > Which toolchain is this ?
-> > > > > > > >
-> > > > > > >
-> > > > > > > I am using Linaro arm-linux-gnueabihf GCC 7.5.0 to compile ou=
-r SoC32 devices
-> > > > > > > - CycloneV and Arria10
-> > > > > >
-> > > > > > Ilias, do you recall the solution to this problem from when it =
-came up
-> > > > > > on IRC a few weeks ago?
-> > > > >
-> > > > > Nop unfortunately not.
-> > > > > Was this caused by the Kbuild bump? I remember the logic around
-> > > > > builtin changing significantly.
-> > > >
-> > > > Yes, and I kinda thought we narrowed it down to something being mis=
-sing
-> > > > from the update, since the kernel does support this old of a toolch=
-ain
-> > > > (or at least the 10.x? someone else this on).
-> > >
-> > > Hi Tom,
-> > >
-> > > Actually I am not sure u-boot itself have minimum requirement on each=
- tag
-> > > or branch listed?
-> >
-> > We do not currently have a test for anything other than "newer than
-> > gcc-6" for ARM, but should have the same minimum requirements as the
-> > linux kernel, but are lacking enforcement checks (but I also think the
-> > kernel is?).
-> >
-> > --
-> > Tom
+On Sat, Nov 29, 2025 at 12:12:23PM +0100, Francois Berder wrote:
+> Hello Tom,
 >=20
-> Hi Tom,
+> On 11/18/25 22:33, Tom Rini wrote:
+> > On Tue, Nov 11, 2025 at 01:49:30PM +0100, Francois Berder wrote:
+> >=20
+> >> If realloc failed, raw was not freed and thus memory
+> >> was leaked.
+> >>
+> >> Signed-off-by: Francois Berder <fberder@outlook.fr>
+> >> ---
+> >>  fs/erofs/data.c | 7 +++++--
+> >>  1 file changed, 5 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/fs/erofs/data.c b/fs/erofs/data.c
+> >> index 95b609d8ea8..b58ec6fcc66 100644
+> >> --- a/fs/erofs/data.c
+> >> +++ b/fs/erofs/data.c
+> >> @@ -319,12 +319,15 @@ static int z_erofs_read_data(struct erofs_inode =
+*inode, char *buffer,
+> >>  		}
+> >> =20
+> >>  		if (map.m_plen > bufsize) {
+> >> +			char *tmp;
+> >> +
+> >>  			bufsize =3D map.m_plen;
+> >> -			raw =3D realloc(raw, bufsize);
+> >> -			if (!raw) {
+> >> +			tmp =3D realloc(raw, bufsize);
+> >> +			if (!tmp) {
+> >>  				ret =3D -ENOMEM;
+> >>  				break;
+> >>  			}
+> >> +			raw =3D tmp;
+> >>  		}
+> >> =20
+> >>  		ret =3D z_erofs_read_one_data(inode, &map, raw,
+> >=20
+> > I'm not sure how this changes anything? The function is currently
+> > (snipped for clarity):
+> > static int z_erofs_read_data(struct erofs_inode *inode, char *buffer,
+> > 			     erofs_off_t size, erofs_off_t offset)
+> > {
+> > [snip]
+> > 	char *raw =3D NULL;
+> > [snip]
+> > 		if (map.m_plen > bufsize) {
+> > 			bufsize =3D map.m_plen;
+> > 			raw =3D realloc(raw, bufsize);
+> > 			if (!raw) {
+> > 				ret =3D -ENOMEM;
+> > 				break;
+> > 			}
+> > 		}
+> >=20
+> > 		ret =3D z_erofs_read_one_data(inode, &map, raw,
+> > 					    buffer + end - offset, skip, length,
+> > 					    trimmed);
+> > 		if (ret < 0)
+> > 			break;
+> > 	}
+> > 	if (raw)
+> > 		free(raw);
+> > 	return ret < 0 ? ret : 0;
+> > }
+> >=20
+> > And per include/malloc.h, calling realloc with a null pointer is the
+> > same as calling malloc. So we had nothing previously allocated to free
+> > later when this failed. How did you find this particular issue? Thanks.
+> >=20
 >=20
-> Oops, missing the kernel version. Add it back for better debug.
+> I found this issue (and most bug fixes I submitted recently) by running
+> cppcheck and scan-build against u-boot source code and triaging warnings =
+reported by these tools.
+>=20
+> I think my fix should still be applied. Looking at z_erofs_map_blocks_ite=
+r and z_erofs_do_map_blocks, I cannot guarantee that map.m_plen does not in=
+crease during the loop execution. Hence, realloc could be called several ti=
+mes and we need to properly handle realloc failure.
 
-Sorry, what I meant was that it's a kbuild related issue as to what
-version of gcc can be used. We don't have a check, and should, but also
-the versions in question here should be expected to work. There's just
-some change we're missing.
+Thanks for explaining more. Yes, the loop part was what I missed on my
+earlier look over the code.
 
 --=20
 Tom
 
---KhD2ILSrnpwj0zYk
+--kSkgpXS1J563w3hN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS3IPgAKCRAr4qD1Cr/k
-Cm/eAQDFemi8oVCpCp6q4NqdHnKfqFy+JfnPT4svO2O39UGU6QD9E0vf4ukKoh2G
-qc5yhWvluJmwJY84g0fgjXDX1X2CLwc=
-=V7bb
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS3IZgAKCRAr4qD1Cr/k
+CtJkAQDGYQ4eJVh3MlD8CCUU9RS1zkTW+nyyN8MkkCyzeMzNOwEA29SDX9tfUduC
+nVz+3mCtEm1hB5ZiXAZPYnk+xEPDOQs=
+=9K2N
 -----END PGP SIGNATURE-----
 
---KhD2ILSrnpwj0zYk--
+--kSkgpXS1J563w3hN--
