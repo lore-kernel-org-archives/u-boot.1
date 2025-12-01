@@ -4,85 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CFB6D116F3
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:51:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46363D116F1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 16:52:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E2B383C23;
-	Mon,  1 Dec 2025 17:51:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AE03583C46;
+	Mon,  1 Dec 2025 17:52:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="txgkK9mi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V3lFX0yW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEFCC83C39; Mon,  1 Dec 2025 17:51:27 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 3659483C4B; Mon,  1 Dec 2025 17:52:21 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC30F83BF4
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:51:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EE9EF83BF4
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 17:52:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7c6d699610cso1022418a34.0
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 08:51:25 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c75dd36b1bso2799828a34.2
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 08:52:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764607884; x=1765212684; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1JiugMQjI0q8kX8uYBEw+of8tkY7YGqhsYCSh0zlyo0=;
- b=txgkK9miJe5r+HPGWHl8cULC9pqQlemt4A1OeG1nUVXo/iwAPvHd0XYbn+bSIpRHH/
- NRpSXw6ED2Gx9QpibYt+dr3x7uiSR6CQjtNORRpjmZIjMtzerU7g/+Z1+H3u9YZ+uPQJ
- Ybfxnuhd94qNfg6R3ENrOjUOfb3AG3fcJ8Uq8=
+ d=gmail.com; s=20230601; t=1764607938; x=1765212738; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0Qb0ssB46aGpTZdqa2rT9m3d8EmBvyw6fViSol0Ns1U=;
+ b=V3lFX0yWKju3ICymWr983NOfeWRw2Aje2jmTO7nDAISw6h6nJmShbEvgTd8OHAjQnk
+ 96i4tv/xGQ1LEJiA4Q2SJb13gUPmzmZKscE/97LJdWqjGpLrGf9Qb389jl7Llde/kc31
+ hHd2Qf/AijECQkOA6rvrutlmvLkmRtSyGr20e9NUD42Tvc+wWxM/zB910LBfDvRRDrbq
+ 3w/2CEinDzMsYD5VlK3rivfI94q62soYWnhs7cRTybcJIZoFkSFEd9xgCIA2yvkuIc0/
+ YERfs6YjTvXpbEEJMw+BjBQ8d2dc86+QXG1lt79i3U2tIkYkMXcK/w5kCA5OqXzJOkyR
+ cNLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764607884; x=1765212684;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1JiugMQjI0q8kX8uYBEw+of8tkY7YGqhsYCSh0zlyo0=;
- b=moE3P8Z09HP9ijAuCHdbO00LjhDizCTrzx+Fl9AboSdkm83n6Z/72ckLrWaYtc4njj
- vguI7CQo3ODGyPGCS5EkWpPazonhPjfW8urABDxNiNMChU0vJoNvfcpPJi8CR1Sbpf6Q
- u629L4U3ewLOJAGNB+CWOlQ+7rwE9EpDTwBAZxH13URX8NUew0Mm6cQnjouG9rfAcGWi
- 1ptJexhbzL4U7tx5g9kUe0bxoHr7MurLlXvu20gGdnDjloj8Ct4pgpuJbPAJXjtdfoA7
- 6xDrv/Jx9kHN7WbnLxqLxsrrKmXeKWLALhyuvC291M5FL/RtPo5nIDzfmvmVI1fwBN32
- fybQ==
+ d=1e100.net; s=20230601; t=1764607938; x=1765212738;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=0Qb0ssB46aGpTZdqa2rT9m3d8EmBvyw6fViSol0Ns1U=;
+ b=wxV9PAP1JY3odcaF6wKQmn0AmCvSmtD5KM0h44D1LUqo4DTiL3mnNdxaPp1krPsJOq
+ GJqJ18fKj4GN28J+W2UDpR4WVCoHxYnNDtBuFk7k39uOcvZZ3tPXuzWOszQEzXxFb3t2
+ 5m3bJJKT3y2dAlXVFvinEN9aabiNtIHDQERDtWZOnOciL//DB8E/yF5SgJihPNpZ30AA
+ Eltqckf9QYnhntTSCfUDixuPwJnqrKeGGMksok6AoStpUpHRxDbcoVfqvwM4qFlMjIqN
+ mKGQZvU0k2H9/FbH4py/VewlLuIqOAmJxv/nJjHaNldzKkp5iXdjtLQqSuofVX4bE/Ua
+ qyUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/Gk4rrWAUdwXKonWR+4bntKfd/8rVHZSrkYlu+5XacHyq1hjff31oLSyV9VUAsFPy1KHJXlk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfE/Ost1QWv8THm7mVB76DCPAXKBq9eBdEqA1KEU0uGCSjrSb8
- QzNEsxUBzRpnuyPQ8U8Wfu5+zRFTda0gvgl/LtIUH7d+/YdzNwjseSXO8M9Cm1Z0hCY=
-X-Gm-Gg: ASbGncvduef2M9J71X5IZFxbDwETGjHrXpMZgNfijksDmVlu3U1ulkt8tkQ9noUVmP7
- 12u0YFZS0e47JyaSZJtnGWdAZTIzCbRi8G2zjYcGcOHETInyxCY+go6AMB3iKwmhLKazatrDy4i
- F1AoXZ40cExJGOOeNztHmtBVQAGdEbuJcL2s51Y5LzFybDDmR0RFAnnnbkKtEf5FbY1ztbuJorB
- kxIya4714dtDum/9FMLEWrwUM+945Hp299u18cfsY2MPV3sDsqwdFnCXzyhQ594Dnkfpbmda4nA
- HsSe4LOaXUfJApYs7hcIjjrFu6ZjEVd1enWqLnW5GESQNpKmGLQVxLeU8Kyl6A1WKCMfIdhOEJa
- 8LDEHfDoO+LSMcHr75IsX8qBYfMU/rJyYfx3qPG1Ukj4R0BUFQrMRrq2onW1guBokdX7FziyN1u
- 18tMdlTehF29yMDXj01rE0iREQUBMJz9oN3rOgsZeHusBCS9ulf9E9/EqRGFR2
-X-Google-Smtp-Source: AGHT+IFlUbae+NoDbaaTnETnk0Lmv+DlGzZkZScAZTxDmNFqhB8HPe+/Par4qsAP+9iQQ6m1tSMjRA==
-X-Received: by 2002:a05:6830:4126:b0:7c6:cb39:adf7 with SMTP id
- 46e09a7af769-7c798f6199bmr18834788a34.6.1764607884521; 
- Mon, 01 Dec 2025 08:51:24 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c90f5fedbbsm4810151a34.10.2025.12.01.08.51.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 08:51:23 -0800 (PST)
-Date: Mon, 1 Dec 2025 10:51:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Brian Sune <briansune@gmail.com>
-Cc: Jan Kiszka <jan.kiszka@siemens.com>,
- Chee Tien Fong <tienfong.chee@altera.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] Fix socfpga GEN5 boot by spl+u-boot sfp on RAW
-Message-ID: <20251201165122.GH303283@bill-the-cat>
-References: <20251129064818.1587-1-briansune@gmail.com>
+ AJvYcCWzNtsVXAuycHQAaBxzkcE+QsjJc9ILDnlRFxcJoMhUFlhqK+Ty65vgvvKSrM7BnBky1vtEmRc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz048/cSz4Pwz2K4QSitOZ8B6dw5LJmFLbfLjspd+7ohkJ0t9f2
+ WckDbhOdItRKPtkaCfUdm/g4OzfTDJ0EveSPxE1kJ4Cmfc07cjpHFVmqCFJQ7htDmhVkjXG5W8m
+ euw8+aGvuqkV9Zft58HG41u+1EWrNmp8=
+X-Gm-Gg: ASbGncv/iHRfZ9NhWb99en/40SoIp/IQeuu5LVXSzofSu6eEvpaDRg4Nyi5SGUpUcEq
+ OSB31KDzD3ICi7EodT4bO8Y0tNqdpdlpCyy/PAugU3dkIb+7iV9Pc5ECR4J8Z4PVPz5qxtRvT7R
+ 0Ax/alHHhqd4wvtsabjxvuQJWtWVbcxv1AmvfrvxB/kNO4Bj9qsIsdHdQlvv+Ed7NFC4iKSdjJz
+ 376aAm8C6QW/68bhH/5iISw5m7thRT6Ieqv0CmwShLFtEVZ18GkobpuEPl0m5WNWNEqJzEQIo58
+ ZGpkFGY=
+X-Google-Smtp-Source: AGHT+IEFbTN5rLRe7j1lmzXITu1V83YrfdkK52ar1WAEDtwkgKwbaUYkma+OgIr1zySXohXWHdFb0tMn/6bKHJdQhfQ=
+X-Received: by 2002:a05:6830:6f14:b0:7c7:5f09:879c with SMTP id
+ 46e09a7af769-7c7c43d39e5mr12726262a34.26.1764607937638; Mon, 01 Dec 2025
+ 08:52:17 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ri9XMpKZfqpVtWFP"
-Content-Disposition: inline
-In-Reply-To: <20251129064818.1587-1-briansune@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
+ <20251125081316.17329-3-alif.zakuan.yuslaimi@altera.com>
+ <3e4de604-292d-4232-893d-db43e29b469c@mailbox.org>
+ <19c33d9d-4cab-4add-9dff-f3b9e051f146@altera.com>
+ <3b219e15-5513-4474-aae9-9d9a8abeb61e@mailbox.org>
+ <f13e8fd9-9705-46ec-a2c4-9fc4c6a63e38@altera.com>
+ <20251128153130.GC2125796@bill-the-cat>
+ <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
+ <20251128164957.GD2125796@bill-the-cat>
+ <CAN7C2SCpM4V3GL=_tox+9ePEx6DcVNK+pdfxn_ysiOyvYuEn+A@mail.gmail.com>
+ <20251201164405.GG303283@bill-the-cat>
+In-Reply-To: <20251201164405.GG303283@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Tue, 2 Dec 2025 00:52:06 +0800
+X-Gm-Features: AWmQ_bknIau7ucvGyHWXORu4Pif5ggAWIbJaRgNlKHLlZswiep7P5qJ4i5MeyF8
+Message-ID: <CAN7C2SBPwcPdUQeufJ+c3XxVKVmU4PE7nbYqLaNy9ynqkWhJgA@mail.gmail.com>
+Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from empty
+ built-in.a in SPL/TPL/VPL builds
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, 
+ u-boot@lists.denx.de, Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
+ Tien Fong Chee <tien.fong.chee@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,68 +112,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B412=E6=9C=882=E6=97=A5=
+=E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=8812:44=E5=AF=AB=E9=81=93=EF=BC=9A
+>
+> On Sat, Nov 29, 2025 at 08:46:14AM +0800, Sune Brian wrote:
+> > Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B411=E6=9C=8829=E6=
+=97=A5=E9=80=B1=E5=85=AD =E4=B8=8A=E5=8D=8812:50=E5=AF=AB=E9=81=93=EF=BC=9A
+> > >
+> > > On Fri, Nov 28, 2025 at 06:44:12PM +0200, Ilias Apalodimas wrote:
+> > > > On Fri, 28 Nov 2025 at 17:31, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Fri, Nov 28, 2025 at 10:11:53AM +0800, Yuslaimi, Alif Zakuan w=
+rote:
+> > > > > >
+> > > > > >
+> > > > > > On 27/11/2025 11:09 pm, Marek Vasut wrote:
+> > > > > > > [CAUTION: This email is from outside your organization. Unles=
+s you trust
+> > > > > > > the sender, do not click on links or open attachments as it m=
+ay be a
+> > > > > > > fraudulent email attempting to steal your information and/or =
+compromise
+> > > > > > > your computer.]
+> > > > > > >
+> > > > > > > On 11/27/25 3:12 AM, Yuslaimi, Alif Zakuan wrote:
+> > > > > > >
+> > > > > > > Hello everyone,
+> > > > > > >
+> > > > > > > > I already have the referenced commit in my test branch, and=
+ I can
+> > > > > > > > confirm that the same compilation error still appears on Cy=
+cloneV when
+> > > > > > > > certain directories produce no SPL objects.
+> > > > > > > >
+> > > > > > > > The existing fix ensures that built-in.o is always present,=
+ but it does
+> > > > > > > > not prevent ar from generating empty built-in.a archives, w=
+hich older
+> > > > > > > > ARM 32-bit linkers (such as CycloneV toolchains) reject as =
+=E2=80=9Cfile
+> > > > > > > > truncated=E2=80=9D.
+> > > > > > >
+> > > > > > > Which toolchain is this ?
+> > > > > > >
+> > > > > >
+> > > > > > I am using Linaro arm-linux-gnueabihf GCC 7.5.0 to compile our =
+SoC32 devices
+> > > > > > - CycloneV and Arria10
+> > > > >
+> > > > > Ilias, do you recall the solution to this problem from when it ca=
+me up
+> > > > > on IRC a few weeks ago?
+> > > >
+> > > > Nop unfortunately not.
+> > > > Was this caused by the Kbuild bump? I remember the logic around
+> > > > builtin changing significantly.
+> > >
+> > > Yes, and I kinda thought we narrowed it down to something being missi=
+ng
+> > > from the update, since the kernel does support this old of a toolchai=
+n
+> > > (or at least the 10.x? someone else this on).
+> >
+> > Hi Tom,
+> >
+> > Actually I am not sure u-boot itself have minimum requirement on each t=
+ag
+> > or branch listed?
+>
+> We do not currently have a test for anything other than "newer than
+> gcc-6" for ARM, but should have the same minimum requirements as the
+> linux kernel, but are lacking enforcement checks (but I also think the
+> kernel is?).
+>
+> --
+> Tom
 
---ri9XMpKZfqpVtWFP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Tom,
 
-On Sat, Nov 29, 2025 at 02:48:18PM +0800, Brian Sune wrote:
+Oops, missing the kernel version. Add it back for better debug.
 
-> Thanks to Jan Kiszka had provided info on
-> u-boot is not able to boot by u-boot-with-spl.sfp.
->=20
-> All three TYPE, NUM, OFFSET mode methods
-> are nonfunctional on combined raw boot.
->=20
-> The major cause is spl+u-boot structure is
-> defined as 4x[spl+zero_pad] + u-boot.img.
-> Deal to this configuration since GEN5 is used,
-> the spl would require to seek by an offset
-> on top of the spl offset. This means for
-> each spl=3D0x10000 the offset is 0x40000.
->=20
-> However latest u-boot do not consider this
-> major structure on GEN5 socfpga.
-> Meanwhile, the default include file as Jan
-> pointed out is completely wrong syntax and
-> caused issue.
->=20
-> Combining both concepts, the minimum fix
-> patch is provide as follows.
->=20
-> 1) Offset is control and default set to a
-> proper offset under:
-> SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
->=20
-> 2) Only GEN5 socfpga will be affected and
-> minimized contamination on other devices.
->=20
-> 3) Only one compuatation adjustment is made
-> on spl_mmc_load. And simply introduce the
-> offset adding by the kconfig offset control.
-> It should be 0 by default and gate as well.
-> So no possible harm should be done.
+For Ubuntu 18.04
+Default used old 5.4.0-150-generic
 
-This sounds like a tricky problem to solve in a "nice" looking way.
+For Ubuntu 22.04
+Default used 5.15.0-161-generic
 
-The first thing that's unclear to me is, which of
-SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR,
-SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION or
-SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is being used here?
+So working kernel not even up to kernel 6.
 
---=20
-Tom
+But do that issue actually caused by GCC version or not?
+When gcc-6 should able to build properly.
 
---ri9XMpKZfqpVtWFP
-Content-Type: application/pgp-signature; name="signature.asc"
+And do gcc-6 means kernel or the gcc version itself.
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS3HiQAKCRAr4qD1Cr/k
-CvesAP9p9Fbxl7KxAEWos60QQ+D3xhnjNTBmqdsISAkkWFp4/gEA2Dt7h0GVzSt/
-EAtiWlHd/DJAB5Tpop6r1bASShvaZws=
-=pJaN
------END PGP SIGNATURE-----
-
---ri9XMpKZfqpVtWFP--
+Thanks,
+Brian
