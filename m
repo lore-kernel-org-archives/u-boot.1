@@ -4,152 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64944D116F3
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29234D116F3
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:05:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E93A83C54;
-	Mon,  1 Dec 2025 18:02:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BFB683C62;
+	Mon,  1 Dec 2025 18:05:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LeUQ0Llg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ar46YInE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1A6683C54; Mon,  1 Dec 2025 18:02:07 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 162AD83C65; Mon,  1 Dec 2025 18:05:42 +0100 (CET)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02CC083C39
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:02:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C781483C29
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:05:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AVMVJPuXnEwud2yub6ggqZhQsR32buZwyyX2zNkh1C+W2a9BWF1FN2B9V+33uKlZe2Rx6LIJp4X7P2FreoCD8Cq37blrcJIk2pq87itqMdxTxVc3KWvLeaIw+u1WUUNfDh0VWrykh5+7pEP+oX+5DgDLbLaOHkSmMk9vU2TvIrojzRFRYdBy/xqXEuVTK+SQiJ5rjW8WETRr8cW9dL1c3EePeBLt6OzSfHQNnB092il1eQesHc/Eahz0qIztpdhBlGCq28fngB8Lga5V+p8MSDUmiUeH5SGP3SfdZ6pq6p6OSMlIcZyk9XsRCxxuGYh4dpdEnR/E7FFc+/uezDoCZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zhM0b4doLoCdHSG7zzUtdOjFh3LoQa5EB1ZUwF2z+40=;
- b=a7n0Rp0oWXegEo8+8bmnuHNc/vaUGeIFP635TJunU/HQcIyQmX19y9VKG5/+hHave7jTGsOQ/1UCWZVwbraen7ydOhrEu+GOuCJi7GjE8RRpOzfwScwyfb496ZdVGCUk6KkUkLWtZFGyEjvB/+WrKd8N4gLOgJvf9GFOht8RPoWF0bHfvYh6UwrL1vIcrRqGZOD6uwRjNzNzeN705luQs2G7HEwfGdFEIfUi8g8YHtf2lkyd2WW/pJoUFc5UsNQ6S52rVSf/n6pxQ0OgFZyQhmjtHIOqWwHFLMkdBwLJnwSLK8graGa5W5BMlUabzDN8lukfWjYvTsW1jrFe32ovCQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zhM0b4doLoCdHSG7zzUtdOjFh3LoQa5EB1ZUwF2z+40=;
- b=LeUQ0LlgwlAI7aR+OAIZGBXW9ybphVuWCQQA6aiF9a055/vfXVAfrUYBnl7rSwfxUEObinDMlx7NxTi2xEHjvPAadvc3kq7dwKzeLTts4oUlGZbHv8ZacRj/9VWtS5n9s62Cb8ey24I5WHSzm9vGVHC2kmbrAfMT3A7wjpC6l5A=
-Received: from PH7P220CA0139.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:327::30)
- by CY8PR10MB6540.namprd10.prod.outlook.com (2603:10b6:930:58::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
- 2025 17:01:56 +0000
-Received: from CY4PEPF0000E9CE.namprd03.prod.outlook.com
- (2603:10b6:510:327:cafe::80) by PH7P220CA0139.outlook.office365.com
- (2603:10b6:510:327::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Mon,
- 1 Dec 2025 17:01:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CY4PEPF0000E9CE.mail.protection.outlook.com (10.167.241.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Mon, 1 Dec 2025 17:01:54 +0000
-Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 11:01:50 -0600
-Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
- 2025 11:01:49 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 1 Dec 2025 11:01:49 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B1H1lYG789493;
- Mon, 1 Dec 2025 11:01:48 -0600
-Message-ID: <df77fb4b-8cdc-4029-abf9-4757d7d8ca25@ti.com>
-Date: Mon, 1 Dec 2025 22:31:46 +0530
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-6593155d8d6so2487611eaf.3
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:05:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764608738; x=1765213538; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=iOm/McY1P5vb9KvWKT6xoJO0S4z4ZPPtqjrbIGWSZTA=;
+ b=Ar46YInEwCa0AUpP/5UydxKxwid3+4L73fgeBIeqENkyBi6WTFGO2+BCQgYQsrzTEQ
+ DI9k38GmR95PiPSljXmJCxEflDPzaDT0JIejVxWv1ui03ROXFx59RarF6VIpm53pA/Uc
+ 9v3Y7daPm5h6iaYRKeJqXZWqUO+rriUt7OgcA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764608738; x=1765213538;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=iOm/McY1P5vb9KvWKT6xoJO0S4z4ZPPtqjrbIGWSZTA=;
+ b=I2Az84tdGXnViMsom+rQCCewyeHwZpl/muK0GLJ0y3NlNOlZD2rZgx3y+H2lhse27P
+ Hx7gWqKy5Fgps2k16Z+VaVf/SbepmpptLDIen+NdLAOMKfN3Tp/PC4xFfuF8GxpO6cpG
+ 14RDKv/zuZjAwktP3dwNW6F2WsglVvUxJ2g1SIrJqHO5hK2iwsCRQhgUTgZkrsPevJLA
+ 98x/3kY9CMZLAcwFJwK9J4AptQe7iWg92mU+9Mjd17zwZY0zSvjazTdu/2Mz7zbMuC2q
+ b2YphK7rqVufBe7O8Snx5ewSqaLYQtSzS72M5joeltZpPc55mVvKOYhgDvHKclu9L7pS
+ fnJg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX9IzUkkqXarI2fgwmTrm/sVNJiwhDFtDVm9qJwWd8QOM/RhSMWUOTFTLB+e41eBIZZWXb0KQM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzETjhWC93nMHFO/PAkPvUSmfpHa8cHwcUCjtFHcQ2wOoOUYumQ
+ YSCzXgYSm+1bZe8eBqG/Cn6gIKJ8rzpE47CwOB5VetC5xAjWvHMUKSYKfApD3QNYcK8=
+X-Gm-Gg: ASbGncvd3i2aVxnF/m14sSl/VU32Ojutuw6Au/tL+2u0O6XYiPq1r3V/pVZ5L+B8Tdz
+ Py7PkhiTrGhI0elDRWdPZX16xjK3SB9YdB3I1AXZE/bt1fU256C4K3c8QjrKYXgQJjri3kBjmi1
+ MdwYDg6P6voxUdt/cF7IB+ui0ZYcwIiA33G8eOAm7fDDqEjYHWta/6jQkdGJK6HgOoad729uj8V
+ DeucMeaCVmCyA787GacYSsO8btLMkEhtDlj3nSYJhgkhmrGnH5lryjXh6V2U6mI309tFKz4WfpI
+ 3W1w0fOOSqtthnWL0v0/RYNyyQSTCOdxGP4PBldT0EqXMr9QIl8cI2ze9S3ypgNWjMC5zFlV+yr
+ of+RNCs0unmheG0AWOzGIWpq3eh3kouTPd8DMYfqskvPGNZcaafdJ+EQil2kgdUzpjXkyYjEjdE
+ uUpQc2Hn3FksUlwTgTJFgUOH4lztJyy6rM7gxbLo/wyv2ykSG+Pw==
+X-Google-Smtp-Source: AGHT+IFTrr5TmyRoQSGDBIwgum62MdSzJFlBxNcG4g+CsB7BEnlLKXay2wlebzM+1deOpcPsaktq7Q==
+X-Received: by 2002:a05:6820:1890:b0:657:4e49:83b7 with SMTP id
+ 006d021491bc7-6579206444bmr14703319eaf.1.1764608736977; 
+ Mon, 01 Dec 2025 09:05:36 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-659332e0031sm2729155eaf.5.2025.12.01.09.05.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Dec 2025 09:05:36 -0800 (PST)
+Date: Mon, 1 Dec 2025 11:05:34 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sune Brian <briansune@gmail.com>
+Cc: Jan Kiszka <jan.kiszka@siemens.com>,
+ Chee Tien Fong <tienfong.chee@altera.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] Fix socfpga GEN5 boot by spl+u-boot sfp on RAW
+Message-ID: <20251201170534.GK303283@bill-the-cat>
+References: <20251129064818.1587-1-briansune@gmail.com>
+ <20251201165122.GH303283@bill-the-cat>
+ <CAN7C2SAGqRqd-TXpp-ALrDzbsgBmLaxywGbw6j9w0MZipEQHnA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] arm: mach-k3: j722s: Fix eMMC boot functionality
- broken by Ethernet boot
-To: Chintan Vankar <c-vankar@ti.com>, Tom Rini <trini@konsulko.com>
-CC: <vigneshr@ti.com>, <mwalle@kernel.org>, <u-boot@lists.denx.de>,
- <u-kumar1@ti.com>
-References: <20251201060839.777816-1-c-vankar@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251201060839.777816-1-c-vankar@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CE:EE_|CY8PR10MB6540:EE_
-X-MS-Office365-Filtering-Correlation-Id: d0c247dd-bbaa-4654-5775-08de30fb5498
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MFo5N1huby9STnk0NDRNZUNmdFhJMjgxOTNIMVdVM2ZTVjhta1orVkdjYm1Y?=
- =?utf-8?B?Q3Nld1VGbkFQbmhCYTRMOXd6V1hLT2s1YXAra3MvejdCL2NGSzJtbWVjazhZ?=
- =?utf-8?B?YnBUUWppWVF1Y3Z0dkcwejRkVlp0cUp1M2pWa2xUZEk3azFrRGFGYlp4bmtp?=
- =?utf-8?B?ZER5RThQempOM21EZjZlUzlFSExqclZXVEI0Mzd2MzJsUkMxVTFKamF3Uk9t?=
- =?utf-8?B?Unh4SGwrWXpYOTZUMVk0K3lFNkw4Q3hLZDZJYklQOHhmajZkTHJkZ0tNMVhn?=
- =?utf-8?B?RkNvaGU4ZFJNd0lCL1VEWjZsQWhscmRacXhwc29sOG5DeGZZRWdweWhXakxv?=
- =?utf-8?B?MHRoVnZoR01veGhQeUVxT1RtN1R4ZVFzRFNHSWZhQk9aZGg2OTFXekVyeUxJ?=
- =?utf-8?B?V01hRXpZVnRzZFoxaWF5YnBxcEs2NjU1K3gzS2dVUUlSYmVoRXVuSFZ6TFdy?=
- =?utf-8?B?VFY5ZEFHSDQ5YTJrc3hWRnE2WFpkYkVFVHc1SmhwbWJnazZrK1Y0Y1ZNMWRT?=
- =?utf-8?B?dzI1aVdIV1Zwd2ZSQUE3VlJHaENLZEV3OHhaYnF2S1BhbEYxTEdaWkQ1d015?=
- =?utf-8?B?ZFBLOEdpMVhjUSs1eDFwUTBwOEd5NG9YbW5PelJYVzVQMkRGSkdJMm1CNXJS?=
- =?utf-8?B?U0NVbENuWG1zeGdZamV2bDhXdUpvRGhuL1FyN3p1eU5PQXowUTl0VFFvblUz?=
- =?utf-8?B?Ky9JcTdpVlgzVXYrWW1ZSFlYbi90b3R2S1B6azBOS3hjTGY1aUYwb0toRjdr?=
- =?utf-8?B?NElnWWRtUmxVSGxqdFVzS2M4REU3bkZBVnE1VExyNXlyNW5qd01Ia1MvZms5?=
- =?utf-8?B?VzJMRVlWSVhnNHhUNjk2ZFFYdHJTY0Z4Mi9nSE44clpkTnE5d2czV3R5U0hQ?=
- =?utf-8?B?UmNHRW9pSkxsUWh3VDBManhJa3d3NkdKdmg5S2M1ekVSRGZ1TGxmWmppaW83?=
- =?utf-8?B?VjRYZjQvYUVNTWM5bHZTcUIyKzMzRE9yaGVmUkFxYTZnTmpCSWpUM0ZzOHk5?=
- =?utf-8?B?N09SWXkrRkExMWtDL2dKL2dCL2F1dDBCY21NcmcrU24xL1dWR0hiZ3FHZGdP?=
- =?utf-8?B?MGN1alMzRmJMcjJ4YlNVSlhBcnBIK29aRkxVUHNQbGhJTmJheFJTK1VDalJL?=
- =?utf-8?B?azJIckV6bzEzL2R5d2tXcUNkN0NQeEdVNnhWY1MzVlhlYWtYVGFObmpyMlc5?=
- =?utf-8?B?eDhGTUVTOE5MQ2RvYWRLRWFjcWljc0FiU3lrUUpRMHN6SjBqUElEVnZnUFJB?=
- =?utf-8?B?a0ZuZndPSUNPeHA3YldUUXZLRW5MOHlyb0pnYmx3T1dZN09ERjBZa3FyRTMx?=
- =?utf-8?B?aFBUR3VHRWR0Ym43Q3Zwb2I2VnVpYldLZlRBTHpZaTBqd3piYUtpNVlLcTc3?=
- =?utf-8?B?cUJNdjR2STZISGNCTnpYZ2dHbG9reWtvQmhOS1JiemRDUkVWOHgzMmtTdi9L?=
- =?utf-8?B?aUJ5OFVjZW9mNlQ2WHRnRk8vV0pKcU9FeHZQdVFGUnRKLzNGOEpkakF6VVRn?=
- =?utf-8?B?QUd6SGhFbWJpaHlqWFZlZHd2ZWI0SitoOEswOE0yNVErUS9VSTJkMFpUUXp5?=
- =?utf-8?B?RWg3TmhFSW5rcWl5MVM2WmxLL2NEZnk3OE9CaUZVelVoaWxuRDVaaTBLY1RD?=
- =?utf-8?B?WVc3Q1VIWXdUaDR3NHlFaVVtUkdYZnR4bi95WVlUaHBUVVBVWU5Pc1JuWks4?=
- =?utf-8?B?MG9tNUF1eithMEVlV004OXpYdG5zZUF6ZFladEwrSUdsOWdDYlZJTTR1OFdN?=
- =?utf-8?B?M1JESmdjZ0dxWXl2dkxYUC9aeEI5L08ySzFaaDhkUTZPR3E4N2pFOWpQSkVP?=
- =?utf-8?B?WEhGelc3REJlQ0lDWmFVbFNkS2I3MFF4VUZhUnJLU0Zxb1VYaWFYYzQrMTg2?=
- =?utf-8?B?SjlJSmFQL1diWEg0aGc3ajFWTXoyYml2Y3I5dVZYM280dDNLSVVSVWg0YWVJ?=
- =?utf-8?B?a0lMM3oxZTY3R2xEcWgyUWM1Sm1YVFpNUnd6cGxWYnpLVkwzV2c2WTJTdVlB?=
- =?utf-8?B?d0wzeTV1Y0xSaWdEUU1XU1Z4Z21ySUtWNnU5dzgra1lmVGNvVWFhQjQvL3VL?=
- =?utf-8?B?VVRwd205RUxidjg5VThNUUNBWE5KMVMxU2FsYkRyNTBWbmhjelJkMXJwT3hK?=
- =?utf-8?Q?DQtU=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 17:01:54.7077 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d0c247dd-bbaa-4654-5775-08de30fb5498
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9CE.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB6540
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Z3ehL+9MYQI1SEJ3"
+Content-Disposition: inline
+In-Reply-To: <CAN7C2SAGqRqd-TXpp-ALrDzbsgBmLaxywGbw6j9w0MZipEQHnA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,33 +102,107 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 12/1/2025 11:38 AM, Chintan Vankar wrote:
-> While adding CPSW device support to enable Ethernet boot for J722S in
-> dev-data, the eMMC boot functionality was broken. Fix this by adding the
-> missing device ID 57 and its associated clock configurations.
+--Z3ehL+9MYQI1SEJ3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Tue, Dec 02, 2025 at 01:01:48AM +0800, Sune Brian wrote:
+> Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B412=E6=9C=882=E6=97=
+=A5=E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=8812:51=E5=AF=AB=E9=81=93=EF=BC=9A
+> >
+> > On Sat, Nov 29, 2025 at 02:48:18PM +0800, Brian Sune wrote:
+> >
+> > > Thanks to Jan Kiszka had provided info on
+> > > u-boot is not able to boot by u-boot-with-spl.sfp.
+> > >
+> > > All three TYPE, NUM, OFFSET mode methods
+> > > are nonfunctional on combined raw boot.
+> > >
+> > > The major cause is spl+u-boot structure is
+> > > defined as 4x[spl+zero_pad] + u-boot.img.
+> > > Deal to this configuration since GEN5 is used,
+> > > the spl would require to seek by an offset
+> > > on top of the spl offset. This means for
+> > > each spl=3D0x10000 the offset is 0x40000.
+> > >
+> > > However latest u-boot do not consider this
+> > > major structure on GEN5 socfpga.
+> > > Meanwhile, the default include file as Jan
+> > > pointed out is completely wrong syntax and
+> > > caused issue.
+> > >
+> > > Combining both concepts, the minimum fix
+> > > patch is provide as follows.
+> > >
+> > > 1) Offset is control and default set to a
+> > > proper offset under:
+> > > SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
+> > >
+> > > 2) Only GEN5 socfpga will be affected and
+> > > minimized contamination on other devices.
+> > >
+> > > 3) Only one compuatation adjustment is made
+> > > on spl_mmc_load. And simply introduce the
+> > > offset adding by the kconfig offset control.
+> > > It should be 0 by default and gate as well.
+> > > So no possible harm should be done.
+> >
+> > This sounds like a tricky problem to solve in a "nice" looking way.
+> >
+> > The first thing that's unclear to me is, which of
+> > SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR,
+> > SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION or
+> > SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is being used here?
+> >
+> > --
+> > Tom
+>=20
+> Hi Tom.
+>=20
+> This issue all happened due to the old "u-boot-with-spl.sfp" structure.
+> The old auto generated u-boot-with-spl.sfp that file itself has spl x4 and
+> zero padding. then it inserts u-boot.img.
+>=20
+> All are user dependent and have no restriction from the beginning.
+> SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR any sector with A2 type.
+> SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION any partition with A2 type.
+> All are completely dependent on the user SD MMC setup.
+> So users can even use the last sector aka the most end of the SD MMC.
+>=20
+> That's why it is so tedious. And users even allow to simply use u-boot-sp=
+l.sfp
+> Then manually use dd  command to an offset that is in the A2 partition and
+> load the u-boot.img
+>=20
+> I didn't even like this idea and that's why I changed to the FAT boot met=
+hod
+> after 2025.07.
+> I simply bypassed the inherent issue that Jan was faced with.
+>=20
+> So long story short either completely drop this old compatible boot flow =
+or
+> do it in a very tedious way aka spl offset on top of u-boot.img offset.
 
-What does device ID 57 represent here , give some reference or
+Well, wait, this doesn't make sense. The first thing is you pick which
+of the three I asked about as to how to find everything else at boot. We
+don't need to support all three, we need to support one of them. I
+suspect the first thing is we need a default one-of-those if SYMBOL.
+This is what we do for MVEBU platforms which have, I suspect at least, a
+similar odd constraint.
 
-you can simply say, while enabling CPSW support... dev-data and clk-data 
-for eMMC
+--=20
+Tom
 
-was removed by mistake, which leads to eMMC boot failure. So add this back
+--Z3ehL+9MYQI1SEJ3
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS3K2gAKCRAr4qD1Cr/k
+CmzrAQDwzRErxX9/U3puk/+4c7b+k8PYer3tG++o1LFtypd+CwD+IjjOscyyqeSA
+PVXcNMSZASDbuWiV9c4UgRQMl9aUygY=
+=BCHg
+-----END PGP SIGNATURE-----
 
-> Fixes: a02009f3a816 ("arm: mach-k3: j722s: Update SoC autogenerated data to enable Ethernet boot")
-> Reported-by: Michael Walle <mwalle@kernel.org>
-> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
-> Tested-by: Michael Walle <mwalle@kernel.org>
-> ---
->
-> This patch is based on commit '31bf4a1c30877' of origin/master branch of
-> u-boot.
->
-> Changes from v1 to v2:
-> - Updated commit subject and message to convey what has changed by this
->    patch.
-> - Collected "Tested-by" tag from Michael Walle.
->
->   [..]
+--Z3ehL+9MYQI1SEJ3--
