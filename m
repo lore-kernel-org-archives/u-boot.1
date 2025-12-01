@@ -4,87 +4,212 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 782A0D116F1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 19:49:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE3CD116F3
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 19:59:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7EE783C2B;
-	Mon,  1 Dec 2025 20:49:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id BB48A83D6C;
+	Mon,  1 Dec 2025 20:59:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FDfjDUY8";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="OBoYiueV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D94083D39; Mon,  1 Dec 2025 20:49:12 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 671E283D8A; Mon,  1 Dec 2025 20:59:31 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CDA583C01
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 20:49:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 559BD83D4A
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 20:59:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-42b38de7940so2281886f8f.3
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 11:49:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1764618548; x=1765223348; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wviNbVxIsMdxAKAl2Pqlm2UGGQ3V/eAIf/ewkacilik=;
- b=FDfjDUY8rr6usOb8OQEzbhJbsCF287lwYF0wka0W1tHQMMqcG676Nt7lzahW2jfdqo
- 5O4sGw7YN+mo+k/nlQTUzYieLoAiu97OhQl0gWTTK0dxGXltP2tgFesJDwDslyWq8UUd
- 1lyBEZs9ZbL6niAvp/ZMLsUDUj8pUHttRRLyk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764618548; x=1765223348;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wviNbVxIsMdxAKAl2Pqlm2UGGQ3V/eAIf/ewkacilik=;
- b=LQ82I+Fe9GQ83CbixbVbXLoOb93HXrbdafFqOGO1B4fCTk7AcmPhQM/+ucD31o65nd
- yqI9+07p2c0Qrdt2iBWyNyjKtgpMBIrdV+9Vlw0U2BOybNs7iU5B405a74wjw1eN8hDD
- 3MK1G78O8jem5PnTbsP2af8LTlPg7URxiP2mRAjcGdh+sjeUSw1p/jmSYfrkfSZuR3IR
- m0Klqwm4u/guXMLXg9RkIBj8NQcpMwL3JCVycTSVThm9Ggk0RBh3TtSQkSolh6LxSvFA
- T2IDVfAzGAzBwO9GEzkVEbz+kzaHCPJg2OjjZkSOsZk6w3q10Y/90gvQbNsFN+5Z27Im
- PYkw==
-X-Gm-Message-State: AOJu0YzJxZrQ8RK/H6RPXXe288L8YH3vvVE4xiajr90V+8k0mkJIbuVT
- b14NEA6h5KX981Dpejn4uPIUooXyauyXheSGdMXJ1iDXZjjLVQ/MKQ+ptwEl/bvn/KjeGEiLCSe
- Sg9a1dg==
-X-Gm-Gg: ASbGncuBuE5HZd1is8YDNvE/fFby458bVqrQoC2XJYiFRM5TI+q7GQgnljKUE/07ECq
- +w2cUqz3BUw55IV6eMEtPqb6DEuZ+MtYMNo5VAzjzkNglo0YZ2WFuJVqRt7cJC7f4Iecev7FHxK
- XmgyDXY5egFgkhq8sVDRHCFwc2nxu2406G2OM2XW7azqBA+ObCtvHKixj1Sxt9Pycz4Wn0M1Gek
- RiLcEeZBJCm62d34YsI51HO/EP3AHHZTmyQkfzDT1ePtjYXDM4Gnx1C2m1Xuw2JMLLjndWKK3GY
- Y7TGWralfMq2qEUfCWmN/09d6Ld0KkqTob59Ky0q0v/sqFZ301XiXOox8kD78RdVtB+KuCY91Ng
- MjwltQ1WTEWYEiMIBAY6IDirQta4tMs5hsHl9LOOOLlENN6U1/JSbO9i/TGuOvij6fI7dhg1von
- AcjSj1h5a6WRG8SNGtNUUz6o304CuPLBL8mgmRUiuqU0qr9qCjKQ==
-X-Google-Smtp-Source: AGHT+IHTNo/pZ978sQVaLEWbihGBEQvkTabtlYPpMnCRjYSQb1NsCJQG0aJfSKy+Jff8VtV7yxMtxA==
-X-Received: by 2002:a05:6000:601:b0:426:d5ac:8660 with SMTP id
- ffacd0b85a97d-42cc1d198a8mr43380238f8f.58.1764618547988; 
- Mon, 01 Dec 2025 11:49:07 -0800 (PST)
-Received: from chromium.org (82-132-233-99.dab.02.net. [82.132.233.99])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42e1ca1a310sm29261904f8f.26.2025.12.01.11.49.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 11:49:06 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Claude <noreply@anthropic.com>, Anurag Dutta <a-dutta@ti.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Hrushikesh Salunke <h-salunke@ti.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Pavel Herrmann <morpheus.ibis@gmail.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH] dm: core: Create ofnode stubs when OF_REAL is disabled
-Date: Mon,  1 Dec 2025 19:48:51 +0000
-Message-ID: <20251201194857.2371332-1-simon.glass@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jan.kiszka@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hQAL+8HWw3/D3ML+s0NYb7nwir2hzMwlkNLGC/Dxy/pPhuVsTM8vdvUAeRItsb/toQ5eFyVSwIqsuT8iBDCrbA5B0IKPO+E5Wa8/f5gHBJHMCF0MB06QmO8D+wHxBbLxN6ua0JUhm0YaMNnXKWaY9qiKVJk8MStOFAN06xgs4DViRoCayVM5gIh9eUvyi6/Uo5yP4KphVMLTe1JBqfCB5If9t4QJrD6zg2Ju+RWzcTASfEOf6z3PXJHIvk7Mvhu4m43X0Yt2TD5QZ7bf+VBCovXEyJ26wvfkQ10eL5lMB3vX7ZbCjOYGkWuW8QGsgCYyrazvPxiyhuxAcyP27VIptA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=elMq6k/lBBypw/QRACv+3Dg1OIxFmmBKy1+0qHLK2Fc=;
+ b=PMvyik8t4PnNcVBFlUKxxcoGgmZoofAVWSTVkToctvYzTGPXVWNVnj0GGziH/+e/Z6oB5O45CZbVslPi+5j9b0Jmdi3vokCXBxIkJmz59I1YedTjVZClcAPEpMGCtUuhpiOg+fr0k9wq2HBztwnVFqWZy/0dcOEXoeoiYBIrla9zwOe9zD2UyW3xHZT1gpC9/8KntokfAYOT+KY1V7QypwF29E6FYpRDKzN1J6NlkcEQgjuoLFYO1Eou9us1JBaD0p9o07E5FJI/p94w3xnq0x+vJPrByzYhvsJXAFPbERqVyZrNcGR1ygeZqH0zpMnH1wy7+ETFY3/4MToRbNFlnw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=elMq6k/lBBypw/QRACv+3Dg1OIxFmmBKy1+0qHLK2Fc=;
+ b=OBoYiueVpAFf/u+dfrDu9yBcblxwhRJmT4+LY0IjbTCEIMmFFBgn669mrCsXdmMa76u+NQxVzaGRCtVZRblCaaQMkW6qKncTFfA2g1QBZCf1I9H7alzvuufIl1sff6kQCqyttPLNTYVPPVWuJhVOorl7frDX4EncEQi2JGvK42Jkv1je1xAergeexLgJjOuehvrKf+2NWIRQZCNNuKMEN3w+L76Q+hUrT6DZEGEDb23EMUHuG2HGJe3/0ukUhYJ4dC1VknRIreXVJBeEyu4LnB5OEBiPqvMF5UXiBRPIOYbo/Tqp2El5IbTsdrUIFlAuq9BhI/YTRRGSmNawfFdEoA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
+ by PA3PR10MB9260.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:4ad::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
+ 2025 19:59:28 +0000
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8fe1:7e71:cf4a:7408%6]) with mapi id 15.20.9366.012; Mon, 1 Dec 2025
+ 19:59:28 +0000
+Message-ID: <8a3bc250-48fd-468b-8ca5-630c0d819f8f@siemens.com>
+Date: Mon, 1 Dec 2025 20:59:26 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/5] spl: mmc: Account for
+ SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE being a choice
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marex@nabladev.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>,
+ Sune Brian <briansune@gmail.com>
+References: <cover.1764574369.git.jan.kiszka@siemens.com>
+ <56c8a3fb4a86a72839a3651dc6a7ca871b62bd01.1764574369.git.jan.kiszka@siemens.com>
+ <20251201175518.GB2247668@bill-the-cat>
+From: Jan Kiszka <jan.kiszka@siemens.com>
+Content-Language: en-US
+Autocrypt: addr=jan.kiszka@siemens.com; keydata=
+ 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
+In-Reply-To: <20251201175518.GB2247668@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0006.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a::16) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:588::19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|PA3PR10MB9260:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2faf82ad-7521-4d4b-2d72-08de31142276
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SmYwN2k1MS84M3FqL1ZnRU5rRzVpTUYzMC9pbk9YcFB4NUVoa2JvVDl3eEUr?=
+ =?utf-8?B?WlRjS1orUUltNUtpcjlnRko2THEyMGpXN2RobWxsVUQ4RmVpVGYyT1JGMFZR?=
+ =?utf-8?B?TGtmcUpFaXFnM3hjSzROb245OTZTL0hhL3NGUzZJS0d3S0FNSENpbkFoa2N1?=
+ =?utf-8?B?TXFTZWdoUGFWa29uUVlRQkZDZG5WNFpYNUxsQyszaXA4RXhMV1dHQ3p3NS9z?=
+ =?utf-8?B?a0ZyamZzMjlCQXRSRGRlTnc2bEFQaUFPT2dpK1A3RUNKekptTTVqNnQwSXla?=
+ =?utf-8?B?K3d0NVppVTVVUmVXcE5PajFDQ051WEl4bis1U3R1Y2c5R2hiUnRmbUQ5ekRz?=
+ =?utf-8?B?dnBSeStPc296OUZXUE5JbDBDbnRrd09Iay9aZzliOThqcTZCZ1pISWpVZnBr?=
+ =?utf-8?B?eTliUS9QVW9Od2l1M2pPNW4wZnU5TnA4NXNraUtIa21iV2lZQllRckxMWnoz?=
+ =?utf-8?B?dG52L2FPTEJVL1dIdFlOWTFYSWNXNE5keUhCZzdiWVhGZFpVNnlzSnhZbUta?=
+ =?utf-8?B?d0JMMlVDdGRrZXZ4dFBEL3FFNTd0RzhTM0s5VkpQTEdmVGovYXc1aS83cmwy?=
+ =?utf-8?B?VmpON3BFSmo5aEowM1lpTDdDR0xLTmR5NTlYSTZjV2lSbzhVamdPTmZPSDdl?=
+ =?utf-8?B?Q1FXRWxPT1R5M0dseDlLbk50WWgvSlhGTlBLTlE0Y3RzVW90aDN5eUR5OEsr?=
+ =?utf-8?B?eXVyaHVGbnNpWXUyVnNCZlVWeGUvOHVYMXhCNXkxRHFmYjllVFlmdlpCM1kx?=
+ =?utf-8?B?ZHJJNk9JcEE1NisyTWVVMjFnUGRaNVBCQmhwMkpjWktVa1YyRUJsU0ZZREFO?=
+ =?utf-8?B?NHBISWRKNWZjR0MvVllWdUpWQ2E5OGQ2c0RvUWpBOEEzWVpuUEZqRmFZWkdW?=
+ =?utf-8?B?R3JIUnUyMUV2NUZtRS81Qzd4WjdlT2F4a2RtYkE5QjNWci8xMEZWTUVDTm9U?=
+ =?utf-8?B?YWdDRm9HbnJPYnpTSytiWlR2RFJKcEs4bUJJbUQ1dm5YUXYzZHBPeFhqRkFP?=
+ =?utf-8?B?TjE0cDBlUTd6dDBJSWE0VUV6ekxlcllUQVpnZG1aZE40RjZmOXplR1hHWk5G?=
+ =?utf-8?B?Z3dCMm5QaDZNSStKT2hJekE4Wnk4RStIQkUweC9aTmc0MGhpMlQzL2dsN2xt?=
+ =?utf-8?B?aG1vYTVTMk1oYmRIeDM4MzFPcmx3YVY5RkFsaVUyY2F4cmV4SHM3ck5QT01S?=
+ =?utf-8?B?RHRKQTZTeFFXUkgxTVNUc0F6SzdmN1o5aWV6VFhGOHRWYUprZTc1enJMREJr?=
+ =?utf-8?B?L0lLMHlhcmlJcDFQMnhCV2FsMnVWNHo1dW5jeFRtdkxwVVBsRVJhWkhQbVVn?=
+ =?utf-8?B?cXNsa1dzaGN1ZnQ0ZlRBTHpHM1VobGUzSDBRa2xZVC9tb2ZUcUtSbGhiMStl?=
+ =?utf-8?B?N0t2TW1DcTRlZG9uWk84L050aHU4bUV6Y0RRWjU3bnBzcmY2dHdWRVM4MmtG?=
+ =?utf-8?B?Y0lnOS9HQXgzR0NCWkFacFBUTkxkR3FKODlLYU5kenZjSDRQR0thWmxoUWJD?=
+ =?utf-8?B?d05MbEpkT0hzcnByQmNKQjhUUmxoY3NQZzBNaVRERTJ1c0s2eUpVNmswUXFv?=
+ =?utf-8?B?bG9WMVEyNm5Felg0aU80bStVVEJDeHBJdFhJYmtyVlpsb25CSzIxZlRzWDRY?=
+ =?utf-8?B?WCtLaVBRM2ZiZ20yV0hyZmdJR1huc003NkdjY1U4OVZKSUxjMThwUElQTTBG?=
+ =?utf-8?B?WTNvdCtSam13aXUxMFFBWHJmVTE0Y3VMY0FMWEJMNjBzNnd4SFFXbjJuRVpK?=
+ =?utf-8?B?cW0yaTRha2tZVjdPQnV4M0VCM3h0czl3NGpPdE85SHM0L2o4K1ZOeS8vUm5B?=
+ =?utf-8?B?bWhBK1ZtcUhuSU14VTI4dEczRHpHSTRvRDNBRG5lMS9pNkZzeThEY3hHMXpR?=
+ =?utf-8?B?dGIycGErbFNtOTRsMGtwS2w3V2puVHJGSnEvRE1mUUVzd2d1MFZUeXNBZGdJ?=
+ =?utf-8?Q?SMkF6FddqVBBJfXjEZFuBWUMA4TYOHyP?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ejRHRlhZTkRoUVZiYnRIQ1B2TGpSaHN4c212azJwTklNOFk0aTIwQko4aTRt?=
+ =?utf-8?B?SW5nUUpBS29ZL29HS1RuSGNJNzRZYWRsU1lSM1dIdFhicGM4REVOM3pWTzFp?=
+ =?utf-8?B?Z1krMnM3K0lrSjFZdlkrNERiWnF1LytGWEswcllJY3g3M1lpY0VBTnFsRVNT?=
+ =?utf-8?B?bnlzSDFTRHQ5QUV6S2NXYnpUTDkrM1YzY1dyeTlzUFdkcjltY0dVUVBodWlZ?=
+ =?utf-8?B?WGFvQzQ3YlliTFJnVERla0d5dEZ6Z1Q5SjduVzFpOXlsejhCNkFNUk15a0NC?=
+ =?utf-8?B?RFptMldzU2pLSFdrMGpoU09LazBxaHE1RDBHVWxZZm04cHN6SmE0SEw3d0hI?=
+ =?utf-8?B?RDIvVFhWZXJrUFZta1dzNFRWYklBdkd0TUVBNGVPeXFmM2JJbndUditaVU41?=
+ =?utf-8?B?dVY4TEg0UlZ6VEFpa0hVellJS2ZJbnJkTDREa1hFL3A3L29SSlRsZlc3cE80?=
+ =?utf-8?B?UEFVellzb1k0dVVhbzk0NWZPQy9aamswazBOOEsweEVsOGhwUE5mMnNGc29s?=
+ =?utf-8?B?bGRwVitZMzhpa1dPZUZHMjIwcTZsb0FZVmNoMytKWko5OEdUelRGRkNndkRW?=
+ =?utf-8?B?R0dpQmozbkJ2RkVVdElaRHNXTFFKa083RHUvUlpjOWx5QnZTVFVjTTRmNXpj?=
+ =?utf-8?B?RVYzS2xnaHo0R1d4bEtKeXhJc2k5TnZHRXgwWDhrNzVzQ2MwZW5JMXhZUDMz?=
+ =?utf-8?B?Y3J6QmxlVnFUa1pvVzQwNGduSHhJVkM4cFkyUUFRTFRSYndOdUNOTG51cUtZ?=
+ =?utf-8?B?dFNXaGNHRkw2aytQSFRwVGNIazZWTEtjNCtSTmFPQ0JwRkw4eUpUN2tGRTZn?=
+ =?utf-8?B?QmpPZWRrVDlLU1VlSGZjdk5xVDNaOEdWRE84QUhhaTlOVDBHOUxEUnhqMVU2?=
+ =?utf-8?B?dXZjR2Rnakh4d0Z0WFh5NCs5cGJ0cGlzSU1FY29sV0wxckYyZ0EvR0dRU04x?=
+ =?utf-8?B?Mmt6NytzR2RaVHhxQnhFTTRpOUF4TVZqeEI4Qm96b2t5UkxPQkx6L2JCK095?=
+ =?utf-8?B?eDJEdDNZT2FGaTgyOGR4TkhtK3ExRkRpdldUUURuVU84WGIya3NwdE5RQXpn?=
+ =?utf-8?B?bm4zZXlhblpCS1pKTnlpMEFvazlVSWZEVkVxcUVtTzlBZThxM0puOFVJNWZQ?=
+ =?utf-8?B?cml5RzJpN0xrUDdxKzNrMWkvYmNUam5KcjBReUswSURrOU81bDFRSXI2STZV?=
+ =?utf-8?B?YVFNT0d3ZVJ0TVJWWXFMVW5qOXJ2Zmg0RFFrZGo5RUN6TmVjOTBNQVZVL0RN?=
+ =?utf-8?B?eDRqd01leDhLN1MzNDd1RG5FWVNrRmk3cjFiK0dNM3M0cHF1ZkswVjZjTHVU?=
+ =?utf-8?B?WXkxS0pPYVN6UjBJKzRWQ1NVVTBUL0lROHNSdWU5WkdQVFAwMnZEa29raXB0?=
+ =?utf-8?B?RGRud2hGRDlIZjhLWWx0aUFVR0xsajlIV3JRTHU3MmJFSVIxakRuVmIweWdC?=
+ =?utf-8?B?YmZ1d1ZBbmdUUmZGWnljMzQ0Y1cybGFsMDRrNllwek1zYlprd0txS1ZtcW5y?=
+ =?utf-8?B?NG40OE5nMmRoV2gwekZVNmxoSUxvRW9SZVY1QVBSMHNwSXNHclNiMmdlMWw1?=
+ =?utf-8?B?NWVNVnEvL0w1N3o2SnJZcjl6TDIvK25tenQ5LzNLSE0zSDI4bVdNUThHTDA3?=
+ =?utf-8?B?cTF3Z21VakxJSkp0TVlBd3FhMWJrKzJPRFB2SWxDWHlUMm55SGR5NExIb3l6?=
+ =?utf-8?B?eWQvOFhZQlZ5OGRJeWQxOFlYR0JIcERHNG9ZQlZGZklUU0E0SXFXMDlBUC9k?=
+ =?utf-8?B?dFdRMlVsYWIveGVWUmtiM28vc0Z3TG5Hb2duV1RWcG1MVXZUSGZmSWYzRHdP?=
+ =?utf-8?B?YVZsL0FDYUtlNlpObWEyTjY5am83cExOaGxvUlgxcU85UGxrTmJWWlpnZHZp?=
+ =?utf-8?B?Vk0ralpzMEJoclVlck5LRVJyQmZweGltUjVDREFFcDFUQzQ3cFJFOStkUFZI?=
+ =?utf-8?B?RUNJYUw4c0R4RlVENlA3cFdFZGkzTnA1MFlVYlpmUUhpZWlaUnVnR1prTjE0?=
+ =?utf-8?B?RGR5Q2dIRmhRdktuTDRuTnRxbmxBVCtQbFhlcGFFVURXSjZ3Q0lCMjRsN3g4?=
+ =?utf-8?B?RkVod1ArZEg1Wk5sL2c2QkRFYXRNMnIxVllvZ0k4N3c5TlZCZnp4QlBMQklk?=
+ =?utf-8?B?aWQxVHU4TFN2OGJLbFIySjNzaXFoYmlEWUV1VzhPRjBZM2JGQ3BUWmloRUJq?=
+ =?utf-8?B?OFE9PQ==?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2faf82ad-7521-4d4b-2d72-08de31142276
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 19:59:28.1471 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NvjIU6St21i5N/SP0p2SiNyWyXp4dz8o9dJivJQrusnRRDR62IP+41CCmCGAXEftVt7ITl818APosvfVa1AsBA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA3PR10MB9260
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,887 +226,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When there is no device tree there is not point in trying to find nodes,
-etc. since they will all be null.
+On 01.12.25 18:55, Tom Rini wrote:
+> On Mon, Dec 01, 2025 at 08:32:46AM +0100, Jan Kiszka wrote:
+> 
+>> From: Jan Kiszka <jan.kiszka@siemens.com>
+>>
+>> Add SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE as condition where so
+>> far SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION was enough - though often
+>> by chance as both options were enabled.
+>>
+>> Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+>> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+>> ---
+>>  common/spl/spl_mmc.c | 17 +++++++++--------
+>>  include/part.h       |  3 ++-
+>>  2 files changed, 11 insertions(+), 9 deletions(-)
+>>
+>> diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+>> index d8ce3a84614..1942e417075 100644
+>> --- a/common/spl/spl_mmc.c
+>> +++ b/common/spl/spl_mmc.c
+>> @@ -106,7 +106,8 @@ static int spl_mmc_find_device(struct mmc **mmcp, int mmc_dev)
+>>  	return 0;
+>>  }
+>>  
+>> -#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+>> +#if defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
+>> +    defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
+>>  static int mmc_load_image_raw_partition(struct spl_image_info *spl_image,
+>>  					struct spl_boot_device *bootdev,
+>>  					struct mmc *mmc, int partition,
+>> @@ -419,19 +420,19 @@ int spl_mmc_load(struct spl_image_info *spl_image,
+>>  
+>>  		raw_sect = spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
+>>  
+>> -#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+>> -		ret = mmc_load_image_raw_partition(spl_image, bootdev,
+>> -						   mmc, raw_part,
+>> -						   raw_sect);
+>> -		if (!ret)
+>> -			return 0;
+>> -#endif
+>>  #ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+>>  		ret = mmc_load_image_raw_sector(spl_image, bootdev, mmc,
+>>  						raw_sect +
+>>  						spl_mmc_raw_uboot_offset(part));
+>>  		if (!ret)
+>>  			return 0;
+>> +#elif defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
+>> +      defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
+>> +		ret = mmc_load_image_raw_partition(spl_image, bootdev,
+>> +						   mmc, raw_part,
+>> +						   raw_sect);
+>> +		if (!ret)
+>> +			return 0;
+>>  #endif
+> 
+> Why do we change the order here?
+> 
 
-Add static inlines to skip the code in that case.
+Because v1 tried #if ...USE_SECTOR #else - and failed. Leftover. If
+preferred, I can keep the original order. OTOH, it's the order of mode
+enumerations now.
 
-Unfortunately this makes the file a little convoluted and there are
-two inlines for ofnode_is_enabled() and ofnode_first/next_subnode(). But
-it seems better than the alternative.
+Jan
 
-We could also consider splitting up the header file.
-
-Also add a rule in drivers/Makefile to compile ofnode.o when OF_REAL is
-enabled but DM is not (for kontron-sl-mx6ul) and move the
-ofnode_for_each_compatible_node/prop() macros outside the OF_REAL
-condition, since they only use functions that have stubs.
-
-Co-developed-by: Claude <noreply@anthropic.com>
-Signed-off-by: Simon Glass <simon.glass@canonical.com>
----
-
- drivers/Makefile      |   4 +
- drivers/core/Makefile |   3 +-
- include/dm/ofnode.h   | 714 +++++++++++++++++++++++++++++++++++++-----
- 3 files changed, 641 insertions(+), 80 deletions(-)
-
-diff --git a/drivers/Makefile b/drivers/Makefile
-index de993ae42ac..a440b3a18a7 100644
---- a/drivers/Makefile
-+++ b/drivers/Makefile
-@@ -8,6 +8,10 @@ obj-$(CONFIG_$(PHASE_)BUTTON) += button/
- obj-$(CONFIG_$(PHASE_)CACHE) += cache/
- obj-$(CONFIG_$(PHASE_)CLK) += clk/
- obj-$(CONFIG_$(PHASE_)DM) += core/
-+# ofnode functions are needed for OF_REAL even without full DM
-+ifndef CONFIG_$(PHASE_)DM
-+obj-$(CONFIG_$(PHASE_)OF_REAL) += core/ofnode.o
-+endif
- obj-$(CONFIG_$(PHASE_)DMA) += dma/
- obj-$(CONFIG_$(PHASE_)DMA_LEGACY) += dma/
- obj-$(CONFIG_$(PHASE_)DFU) += dfu/
-diff --git a/drivers/core/Makefile b/drivers/core/Makefile
-index a549890c22b..8bcba38de4d 100644
---- a/drivers/core/Makefile
-+++ b/drivers/core/Makefile
-@@ -16,6 +16,7 @@ ifndef CONFIG_DM_DEV_READ_INLINE
- obj-$(CONFIG_OF_CONTROL) += read.o
- endif
- obj-$(CONFIG_$(PHASE_)OF_PLATDATA) += read.o
--obj-$(CONFIG_OF_CONTROL) += of_extra.o ofnode.o read_extra.o ofnode_graph.o
-+obj-$(CONFIG_OF_CONTROL) += of_extra.o read_extra.o
-+obj-$(CONFIG_$(PHASE_)OF_REAL) += ofnode.o ofnode_graph.o
- 
- ccflags-$(CONFIG_DM_DEBUG) += -DDEBUG
-diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index 120393426db..3be7d0aea5b 100644
---- a/include/dm/ofnode.h
-+++ b/include/dm/ofnode.h
-@@ -128,6 +128,7 @@ static inline ofnode noffset_to_ofnode(ofnode other_node, int of_offset)
- 
- #endif /* OFNODE_MULTI_TREE */
- 
-+#if CONFIG_IS_ENABLED(OF_REAL)
- /**
-  * oftree_new() - Create a new, empty tree
-  *
-@@ -148,6 +149,17 @@ int oftree_new(oftree *treep);
-  * error
-  */
- int oftree_to_fdt(oftree tree, struct abuf *buf);
-+#else
-+static inline int oftree_new(oftree *treep)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int oftree_to_fdt(oftree tree, struct abuf *buf)
-+{
-+	return -ENOSYS;
-+}
-+#endif /* OF_REAL */
- 
- /**
-  * ofnode_to_np() - convert an ofnode to a live DT node pointer
-@@ -375,6 +387,7 @@ static inline oftree oftree_from_np(struct device_node *root)
- 	return tree;
- }
- 
-+#if CONFIG_IS_ENABLED(OF_REAL)
- /**
-  * oftree_dispose() - Dispose of an oftree
-  *
-@@ -481,6 +494,56 @@ int ofnode_read_u32_index(ofnode node, const char *propname, int index,
-  */
- int ofnode_read_u64_index(ofnode node, const char *propname, int index,
- 			  u64 *outp);
-+#else
-+static inline bool ofnode_name_eq(ofnode node, const char *name)
-+{
-+	return false;
-+}
-+
-+static inline bool ofnode_name_eq_unit(ofnode node, const char *name)
-+{
-+	return false;
-+}
-+
-+static inline int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline u8 ofnode_read_u8_default(ofnode node, const char *propname,
-+					u8 def)
-+{
-+	return def;
-+}
-+
-+static inline int ofnode_read_u16(ofnode node, const char *propname, u16 *outp)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline u16 ofnode_read_u16_default(ofnode node, const char *propname,
-+					  u16 def)
-+{
-+	return def;
-+}
-+
-+static inline int ofnode_read_u32(ofnode node, const char *propname, u32 *outp)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_u32_index(ofnode node, const char *propname,
-+					int index, u32 *outp)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_u64_index(ofnode node, const char *propname,
-+					int index, u64 *outp)
-+{
-+	return -EINVAL;
-+}
-+#endif /* OF_REAL */
- 
- /**
-  * ofnode_read_s32() - Read a 32-bit integer from a property
-@@ -496,6 +559,7 @@ static inline int ofnode_read_s32(ofnode node, const char *propname,
- 	return ofnode_read_u32(node, propname, (u32 *)outp);
- }
- 
-+#if CONFIG_IS_ENABLED(OF_REAL)
- /**
-  * ofnode_read_u32_default() - Read a 32-bit integer from a property
-  *
-@@ -618,8 +682,72 @@ ofnode ofnode_find_subnode(ofnode node, const char *subnode_name);
-  * subnode)
-  */
- ofnode ofnode_find_subnode_unit(ofnode node, const char *subnode_name);
-+#else
-+static inline u32 ofnode_read_u32_default(ofnode node, const char *propname,
-+					  u32 def)
-+{
-+	return def;
-+}
-+
-+static inline u32 ofnode_read_u32_index_default(ofnode node,
-+						const char *propname,
-+						int index, u32 def)
-+{
-+	return def;
-+}
-+
-+static inline int ofnode_read_s32_default(ofnode node, const char *propname,
-+					  s32 def)
-+{
-+	return def;
-+}
-+
-+static inline int ofnode_read_u64(ofnode node, const char *propname, u64 *outp)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline u64 ofnode_read_u64_default(ofnode node, const char *propname,
-+					  u64 def)
-+{
-+	return def;
-+}
-+
-+static inline const void *ofnode_read_prop(ofnode node, const char *propname,
-+					   int *sizep)
-+{
-+	return NULL;
-+}
-+
-+static inline const char *ofnode_read_string(ofnode node, const char *propname)
-+{
-+	return NULL;
-+}
-+
-+static inline int ofnode_read_u32_array(ofnode node, const char *propname,
-+					u32 *out_values, size_t sz)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline bool ofnode_read_bool(ofnode node, const char *propname)
-+{
-+	return false;
-+}
-+
-+static inline ofnode ofnode_find_subnode(ofnode node, const char *subnode_name)
-+{
-+	return ofnode_null();
-+}
- 
--#if CONFIG_IS_ENABLED(DM_INLINE_OFNODE)
-+static inline ofnode ofnode_find_subnode_unit(ofnode node,
-+					      const char *subnode_name)
-+{
-+	return ofnode_null();
-+}
-+#endif
-+
-+#if CONFIG_IS_ENABLED(OF_REAL) && CONFIG_IS_ENABLED(DM_INLINE_OFNODE)
- #include <asm/global_data.h>
- 
- static inline bool ofnode_is_enabled(ofnode node)
-@@ -651,7 +779,7 @@ static inline ofnode ofnode_next_subnode(ofnode node)
- 	return offset_to_ofnode(
- 		fdt_next_subnode(gd->fdt_blob, ofnode_to_offset(node)));
- }
--#else
-+#elif CONFIG_IS_ENABLED(OF_REAL)
- /**
-  * ofnode_is_enabled() - Checks whether a node is enabled.
-  * This looks for a 'status' property. If this exists, then returns true if
-@@ -681,8 +809,47 @@ ofnode ofnode_first_subnode(ofnode node);
-  * has no more siblings)
-  */
- ofnode ofnode_next_subnode(ofnode node);
--#endif /* DM_INLINE_OFNODE */
-+#else
-+static inline bool ofnode_is_enabled(ofnode node)
-+{
-+	return false;
-+}
- 
-+static inline ofnode ofnode_first_subnode(ofnode node)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline ofnode ofnode_next_subnode(ofnode node)
-+{
-+	return ofnode_null();
-+}
-+#endif
-+
-+/**
-+ * ofnode_for_each_subnode() - iterate over all subnodes of a parent
-+ *
-+ * @node:       child node (ofnode, lvalue)
-+ * @parent:     parent node (ofnode)
-+ *
-+ * This is a wrapper around a for loop and is used like so::
-+ *
-+ *   ofnode node;
-+ *   ofnode_for_each_subnode(node, parent) {
-+ *       Use node
-+ *       ...
-+ *   }
-+ *
-+ * Note that this is implemented as a macro and @node is used as
-+ * iterator in the loop. The parent variable can be a constant or even a
-+ * literal.
-+ */
-+#define ofnode_for_each_subnode(node, parent) \
-+	for (node = ofnode_first_subnode(parent); \
-+	     ofnode_valid(node); \
-+	     node = ofnode_next_subnode(node))
-+
-+#if CONFIG_IS_ENABLED(OF_REAL)
- /**
-  * ofnode_get_parent() - get the ofnode's parent (enclosing ofnode)
-  *
-@@ -1200,30 +1367,6 @@ int ofnode_first_property(ofnode node, struct ofprop *prop);
-  */
- int ofnode_next_property(struct ofprop *prop);
- 
--/**
-- * ofnode_for_each_prop() - iterate over all properties of a node
-- *
-- * @prop:	struct ofprop
-- * @node:	node (lvalue, ofnode)
-- *
-- * This is a wrapper around a for loop and is used like this::
-- *
-- *   ofnode node;
-- *   struct ofprop prop;
-- *
-- *   ofnode_for_each_prop(prop, node) {
-- *       ...use prop...
-- *   }
-- *
-- * Note that this is implemented as a macro and @prop is used as
-- * iterator in the loop. The parent variable can be a constant or even a
-- * literal.
-- */
--#define ofnode_for_each_prop(prop, node) \
--	for (ofnode_first_property(node, &prop); \
--	     ofprop_valid(&prop); \
--	     ofnode_next_property(&prop))
--
- /**
-  * ofprop_get_property() - get a pointer to the value of a property
-  *
-@@ -1438,52 +1581,6 @@ ofnode ofnode_by_compatible(ofnode from, const char *compat);
- ofnode ofnode_by_prop_value(ofnode from, const char *propname,
- 			    const void *propval, int proplen);
- 
--/**
-- * ofnode_for_each_subnode() - iterate over all subnodes of a parent
-- *
-- * @node:       child node (ofnode, lvalue)
-- * @parent:     parent node (ofnode)
-- *
-- * This is a wrapper around a for loop and is used like so::
-- *
-- *   ofnode node;
-- *   ofnode_for_each_subnode(node, parent) {
-- *       Use node
-- *       ...
-- *   }
-- *
-- * Note that this is implemented as a macro and @node is used as
-- * iterator in the loop. The parent variable can be a constant or even a
-- * literal.
-- */
--#define ofnode_for_each_subnode(node, parent) \
--	for (node = ofnode_first_subnode(parent); \
--	     ofnode_valid(node); \
--	     node = ofnode_next_subnode(node))
--
--/**
-- * ofnode_for_each_compatible_node() - iterate over all nodes with a given
-- *				       compatible string
-- *
-- * @node:       child node (ofnode, lvalue)
-- * @compat:     compatible string to match
-- *
-- * This is a wrapper around a for loop and is used like so::
-- *
-- *   ofnode node;
-- *   ofnode_for_each_compatible_node(node, parent, compatible) {
-- *      Use node
-- *      ...
-- *   }
-- *
-- * Note that this is implemented as a macro and @node is used as
-- * iterator in the loop.
-- */
--#define ofnode_for_each_compatible_node(node, compat) \
--	for (node = ofnode_by_compatible(ofnode_null(), compat); \
--	     ofnode_valid(node); \
--	     node = ofnode_by_compatible(node, compat))
--
- /**
-  * ofnode_get_child_count() - get the child count of a ofnode
-  *
-@@ -1661,8 +1758,423 @@ ofnode ofnode_get_phy_node(ofnode eth_node);
-  *	   error
-  */
- phy_interface_t ofnode_read_phy_mode(ofnode mac_node);
-+#else
-+static inline ofnode ofnode_get_parent(ofnode node)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline const char *ofnode_get_name(ofnode node)
-+{
-+	return NULL;
-+}
-+
-+static inline int ofnode_get_path(ofnode node, char *buf, int buflen)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline ofnode ofnode_get_by_phandle(uint phandle)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline ofnode oftree_get_by_phandle(oftree tree, uint phandle)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline int ofnode_read_size(ofnode node, const char *propname)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline fdt_addr_t ofnode_get_addr_size_index(ofnode node, int index,
-+						    fdt_size_t *size)
-+{
-+	return FDT_ADDR_T_NONE;
-+}
-+
-+static inline fdt_addr_t ofnode_get_addr_size_index_notrans(ofnode node,
-+							    int index,
-+							    fdt_size_t *size)
-+{
-+	return FDT_ADDR_T_NONE;
-+}
-+
-+static inline fdt_addr_t ofnode_get_addr_index(ofnode node, int index)
-+{
-+	return FDT_ADDR_T_NONE;
-+}
-+
-+static inline fdt_addr_t ofnode_get_addr(ofnode node)
-+{
-+	return FDT_ADDR_T_NONE;
-+}
-+
-+static inline fdt_size_t ofnode_get_size(ofnode node)
-+{
-+	return FDT_SIZE_T_NONE;
-+}
-+
-+static inline int ofnode_stringlist_search(ofnode node, const char *propname,
-+					   const char *string)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_string_index(ofnode node, const char *propname,
-+					   int index, const char **outp)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_string_count(ofnode node, const char *property)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_string_list(ofnode node, const char *property,
-+					  const char ***listp)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline ofnode ofnode_parse_phandle(ofnode node, const char *phandle_name,
-+					  int index)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline int ofnode_parse_phandle_with_args(ofnode node,
-+						 const char *list_name,
-+						 const char *cells_name,
-+						 int cell_count, int index,
-+						 struct ofnode_phandle_args *out_args)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_count_phandle_with_args(ofnode node,
-+						 const char *list_name,
-+						 const char *cells_name,
-+						 int cell_count)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline ofnode oftree_parse_phandle(oftree tree, ofnode node,
-+					  const char *phandle_name, int index)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline int oftree_parse_phandle_with_args(oftree tree, ofnode node,
-+						 const char *list_name,
-+						 const char *cells_name,
-+						 int cell_count, int index,
-+						 struct ofnode_phandle_args *out_args)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int oftree_count_phandle_with_args(oftree tree, ofnode node,
-+						 const char *list_name,
-+						 const char *cells_name,
-+						 int cell_count)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline ofnode ofnode_path(const char *path)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline ofnode oftree_path(oftree tree, const char *path)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline ofnode oftree_root(oftree tree)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline const void *ofnode_read_chosen_prop(const char *propname,
-+						  int *sizep)
-+{
-+	return NULL;
-+}
-+
-+static inline const char *ofnode_read_chosen_string(const char *propname)
-+{
-+	return NULL;
-+}
-+
-+static inline ofnode ofnode_get_chosen_node(const char *propname)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline int ofnode_read_baud(void)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline const void *ofnode_read_aliases_prop(const char *propname,
-+						   int *sizep)
-+{
-+	return NULL;
-+}
-+
-+static inline ofnode ofnode_get_aliases_node(const char *propname)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline int ofnode_decode_display_timing(ofnode node, int index,
-+					       struct display_timing *config)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_decode_panel_timing(ofnode node,
-+					     struct display_timing *config)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline const void *ofnode_get_property(ofnode node, const char *propname,
-+					      int *lenp)
-+{
-+	return NULL;
-+}
-+
-+static inline bool ofnode_has_property(ofnode node, const char *propname)
-+{
-+	return false;
-+}
-+
-+static inline int ofnode_first_property(ofnode node, struct ofprop *prop)
-+{
-+	return -FDT_ERR_NOTFOUND;
-+}
-+
-+static inline int ofnode_next_property(struct ofprop *prop)
-+{
-+	return -FDT_ERR_NOTFOUND;
-+}
-+
-+static inline const void *ofprop_get_property(const struct ofprop *prop,
-+					      const char **propname, int *lenp)
-+{
-+	return NULL;
-+}
-+
-+static inline fdt_addr_t ofnode_get_addr_size(ofnode node, const char *propname,
-+					      fdt_size_t *sizep)
-+{
-+	return FDT_ADDR_T_NONE;
-+}
-+
-+static inline const uint8_t *ofnode_read_u8_array_ptr(ofnode node,
-+						      const char *propname,
-+						      size_t sz)
-+{
-+	return NULL;
-+}
-+
-+static inline int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
-+				       const char *propname,
-+				       struct fdt_pci_addr *addr,
-+				       fdt_size_t *size)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_pci_vendev(ofnode node, u16 *vendor, u16 *device)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_eth_phy_id(ofnode node, u16 *vendor, u16 *device)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_addr_cells(ofnode node)
-+{
-+	return 0;
-+}
-+
-+static inline int ofnode_read_size_cells(ofnode node)
-+{
-+	return 0;
-+}
-+
-+static inline int ofnode_read_simple_addr_cells(ofnode node)
-+{
-+	return 0;
-+}
-+
-+static inline int ofnode_read_simple_size_cells(ofnode node)
-+{
-+	return 0;
-+}
-+
-+static inline bool ofnode_pre_reloc(ofnode node)
-+{
-+	return false;
-+}
-+
-+static inline int ofnode_read_resource(ofnode node, uint index,
-+				       struct resource *res)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_resource_byname(ofnode node, const char *name,
-+					      struct resource *res)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline ofnode ofnode_by_compatible(ofnode from, const char *compat)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline ofnode ofnode_by_prop_value(ofnode from, const char *propname,
-+					  const void *propval, int proplen)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline int ofnode_get_child_count(ofnode parent)
-+{
-+	return 0;
-+}
-+
-+static inline u64 ofnode_translate_address(ofnode node, const fdt32_t *in_addr)
-+{
-+	return OF_BAD_ADDR;
-+}
-+
-+static inline u64 ofnode_translate_dma_address(ofnode node,
-+					       const fdt32_t *in_addr)
-+{
-+	return OF_BAD_ADDR;
-+}
-+
-+static inline int ofnode_get_dma_range(ofnode node, phys_addr_t *cpu,
-+				       dma_addr_t *bus, u64 *size)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_device_is_compatible(ofnode node, const char *compat)
-+{
-+	return 0;
-+}
-+
-+static inline int ofnode_write_prop(ofnode node, const char *propname,
-+				    const void *value, int len, bool copy)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ofnode_write_string(ofnode node, const char *propname,
-+				      const char *value)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ofnode_write_u32(ofnode node, const char *propname, u32 value)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ofnode_write_u64(ofnode node, const char *propname, u64 value)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ofnode_write_bool(ofnode node, const char *propname,
-+				    bool value)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ofnode_delete_prop(ofnode node, const char *propname)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ofnode_set_enabled(ofnode node, bool value)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline ofnode ofnode_get_phy_node(ofnode eth_node)
-+{
-+	return ofnode_null();
-+}
-+
-+static inline phy_interface_t ofnode_read_phy_mode(ofnode mac_node)
-+{
-+	return PHY_INTERFACE_MODE_NA;
-+}
-+#endif /* OF_REAL */
- 
--#if CONFIG_IS_ENABLED(DM)
-+/**
-+ * ofnode_for_each_compatible_node() - iterate over all nodes with a given
-+ *				       compatible string
-+ *
-+ * @node:       child node (ofnode, lvalue)
-+ * @compat:     compatible string to match
-+ *
-+ * This is a wrapper around a for loop and is used like so::
-+ *
-+ *   ofnode node;
-+ *   ofnode_for_each_compatible_node(node, compatible) {
-+ *      Use node
-+ *      ...
-+ *   }
-+ *
-+ * Note that this is implemented as a macro and @node is used as
-+ * iterator in the loop.
-+ */
-+#define ofnode_for_each_compatible_node(node, compat) \
-+	for (node = ofnode_by_compatible(ofnode_null(), compat); \
-+	     ofnode_valid(node); \
-+	     node = ofnode_by_compatible(node, compat))
-+
-+/**
-+ * ofnode_for_each_prop() - iterate over all properties of a node
-+ *
-+ * @prop:	struct ofprop
-+ * @node:	node (lvalue, ofnode)
-+ *
-+ * This is a wrapper around a for loop and is used like this::
-+ *
-+ *   ofnode node;
-+ *   struct ofprop prop;
-+ *
-+ *   ofnode_for_each_prop(prop, node) {
-+ *       ...use prop...
-+ *   }
-+ *
-+ * Note that this is implemented as a macro and @prop is used as
-+ * iterator in the loop. The parent variable can be a constant or even a
-+ * literal.
-+ */
-+#define ofnode_for_each_prop(prop, node) \
-+	for (ofnode_first_property(node, &prop); \
-+	     ofprop_valid(&prop); \
-+	     ofnode_next_property(&prop))
-+
-+#if CONFIG_IS_ENABLED(OF_REAL)
- /**
-  * ofnode_conf_read_bool() - Read a boolean value from the U-Boot config
-  *
-@@ -1800,8 +2312,7 @@ int ofnode_read_bootscript_address(u64 *bootscr_address, u64 *bootscr_offset);
-  */
- int ofnode_read_bootscript_flash(u64 *bootscr_flash_offset,
- 				 u64 *bootscr_flash_size);
--
--#else /* CONFIG_DM */
-+#else
- static inline bool ofnode_conf_read_bool(const char *prop_name)
- {
- 	return false;
-@@ -1817,7 +2328,29 @@ static inline const char *ofnode_conf_read_str(const char *prop_name)
- 	return NULL;
- }
- 
--static inline int ofnode_read_bootscript_address(u64 *bootscr_address, u64 *bootscr_offset)
-+static inline bool ofnode_options_read_bool(const char *prop_name)
-+{
-+	return false;
-+}
-+
-+static inline int ofnode_options_read_int(const char *prop_name, int default_val)
-+{
-+	return default_val;
-+}
-+
-+static inline const char *ofnode_options_read_str(const char *prop_name)
-+{
-+	return NULL;
-+}
-+
-+static inline int ofnode_options_get_by_phandle(const char *prop_name,
-+						ofnode *nodep)
-+{
-+	return -EINVAL;
-+}
-+
-+static inline int ofnode_read_bootscript_address(u64 *bootscr_address,
-+						 u64 *bootscr_offset)
- {
- 	return -EINVAL;
- }
-@@ -1827,9 +2360,9 @@ static inline int ofnode_read_bootscript_flash(u64 *bootscr_flash_offset,
- {
- 	return -EINVAL;
- }
-+#endif /* OF_REAL */
- 
--#endif /* CONFIG_DM */
--
-+#if CONFIG_IS_ENABLED(OF_REAL)
- /**
-  * of_add_subnode() - add a new subnode to a node
-  *
-@@ -1885,5 +2418,28 @@ int ofnode_copy_node(ofnode dst_parent, const char *name, ofnode src,
-  *
-  */
- int ofnode_delete(ofnode *nodep);
-+#else
-+static inline int ofnode_add_subnode(ofnode parent, const char *name,
-+				     ofnode *nodep)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ofnode_copy_props(ofnode dst, ofnode src)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ofnode_copy_node(ofnode dst_parent, const char *name,
-+				   ofnode src, ofnode *nodep)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ofnode_delete(ofnode *nodep)
-+{
-+	return -ENOSYS;
-+}
-+#endif /* OF_REAL */
- 
- #endif
 -- 
-2.43.0
-
-base-commit: 42a4ff5f63baacc414b564c02541cd1f5c0862ee
-branch: ofn-us
+Siemens AG, Foundational Technologies
+Linux Expert Center
