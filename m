@@ -4,94 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61FE2D116F3
-	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:09:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E42D116F1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Dec 2025 17:15:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD84283C29;
-	Mon,  1 Dec 2025 18:09:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A459F83C4B;
+	Mon,  1 Dec 2025 18:14:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LkyRvZpm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mLHrZjVv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B431B8006D; Mon,  1 Dec 2025 18:09:51 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id B5AD683C6C; Mon,  1 Dec 2025 18:14:57 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7A4D83C29
- for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:09:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00C5083C01
+ for <u-boot@lists.denx.de>; Mon,  1 Dec 2025 18:14:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-6406f3dcc66so7815216a12.3
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:09:49 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c6ce4f65f7so3125182a34.0
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 09:14:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764608989; x=1765213789; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1764609293; x=1765214093; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B9wYFs0q3JxF/bOnYDa4IQCdl79iH0yJQGUrHUEMM+U=;
- b=LkyRvZpm394hQwHgYIp1FTSwUodLpmYOBcmSP++POvWHPHJ0CCHiVWCpESCwJ+WXPE
- +p7JVBxODu11km8vKS2w4NPfKJHjYwNlNy8TAPYP3Rim6H8b40JAUP/+4EqJ8NmTLDb6
- H8NiBNVJ9TZkgRf0jwVyzVwJH8COyBInGMR8R+OoMPkJClZ8Nvps2GAE1/lOEwpTvOLZ
- a2swp4thUN8u8u0B4xArlxdA6OaItLgzY2ckzJo6PF12yx0fV4Vb95hd2Eiy0bSAeeOq
- hGGsWDKN5AkVzg7dR7OEYNbZVRiy//b6G8Zvtb7Y43Is9kxpGHFSEwuhJTnHIMTvMhqa
- rz0A==
+ bh=ATvZt+N5OqcvDlKDeGp2up6Ep+bxMicySMusfLa7pXo=;
+ b=mLHrZjVvCWWcVDd2gvd6xF6xYWCMp7SmMBNNopXV6P0qN/VCxZeLYzIpki0D98iEVx
+ iBL2Gwv5x3jRgIpLFhCgsMo4oSDiT+KxdyrkCLcn5CEvRT6mnsUkbPTekfN4hKjU1IwL
+ Imw06VG7zkY9Sc79/K5gSO6i0cg1BxJAjPvNxLdi6pm1+HBNaMo0uyIUrXSmZNesomhJ
+ cekGPngJ0mdxWUxIIUNnJfBeeNwTJH4WfytvtiB4XbM6X9karixWob/QJMDoNckxU9bl
+ E1BZZN8A4NAM6grssDds5ei4ilv/93NmtuyGdXzPt1DmLnl2+gl1tz0W0I33EHQ+QWtM
+ H1iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764608989; x=1765213789;
+ d=1e100.net; s=20230601; t=1764609293; x=1765214093;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=B9wYFs0q3JxF/bOnYDa4IQCdl79iH0yJQGUrHUEMM+U=;
- b=ShypmyU9sX+FsONdfXeZ0ddlA3LafiFB6z6rq/6HGFOgk5i9GqD+AMGbZMTQCIoA6a
- nARBupVUkmDfEeAqNR1bm/26RyZ/b3pzNhcwXYVIb6sEgvh0nYP4ySdPuMBNF4v1d8gH
- Kw9bFD9G9f4XPftdqUYa17/F9W5WZ586ppkk61OlJOx3sKRjQ3XCnuDJRJC566Cgpsbi
- P3SPl5phghGne0y4zAHh0hRIxYv8wh5qU69MPGlPcDObVJ1rXQi7nwGopoXiNwZjVl90
- hlFCyQcZh8vYZOw3KeSMt5WP2hPKho5f3vLPz3uQG48I9URNURApwYOktcKWEAXPcTXH
- ABaQ==
+ bh=ATvZt+N5OqcvDlKDeGp2up6Ep+bxMicySMusfLa7pXo=;
+ b=P4vd8BxN5203Dwn33RgVRXpPZ2/1SXMBPA14/xJ9OsgVf/g1So7rklHKDeblTYEaCP
+ DhZ1THxKCYmqXxuGc0c0D7bm7yoyATGtcbYhC8T15o+IjMQ6omtztDjzM9UgMIv93yBE
+ sF2rKFimGNXm2Vq8hg3z71tme7h0kKCBGytSJ00SWdDmOgeuOBzdyZudwcMdOTA0mbvY
+ sxaYNCz1snO592ORDX6ltdVsqskIRYOdnOQ+Vp8eYEIuOAs6+EjvyVPCx+EftbrOSVep
+ PNNi0/qhLOdnwfJ2zZOWa/pTOpykxIrxgo5qygFfUGwpyR8LhfjtprWdS0+QP7yxcazx
+ 4WPg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU55zW3M5/p/yaVcp1DRbhXVT/1Bca3kN3GztPbSSXvi06Ltm9h/3drh5Yb+5Mz78DOiE8UsAc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwY7/R0kqvmHITTCdJ9y19LlSUTpvKkfBb3espRwm4M0aBJts77
- nzR0tC0ItH1padOUJ6AQArwP1qbR0H16MbUbLsY2mvUUzTMhtguIus0/HR0p5mTTDqNkndSu6y7
- 1LPB/Z9Yg1xOgDREPJ9sPgJREyFHNNVk=
-X-Gm-Gg: ASbGncsf1RCDRxlIerb1oqx/uz/cld6o0oDQR4ltg4HJ1GHQZUDXy9ry9pGqcthI8g7
- stl/dKay6gRDMFEYC7/h1wNpaOTTo+uFzwFmDRai+PPapL63dRo6WeFtAD0CA1RE1nvtB9lPVUc
- zY2FZKjdTk9FdE+h/Se+eOtL1ZTR8BL6o4K0FncqcChyp2dJDEjcg63aj5bRm0n/ArWE02RHLKz
- 4bgC1zU4hZ7GQNdYN3QDr11osVmgwwfW9O20ZcUgTL9lqNqOcdGoI9p3X0kch5CBWv/bw==
-X-Google-Smtp-Source: AGHT+IEUHJ5f9TnSelktYTX8afDwcWYwxURQP9EZNfYQ9TH+QuBY1k8A9bJnVJfvzrZZxbs37sDvnUgh18Sur6B9pEI=
-X-Received: by 2002:a05:6402:1442:b0:640:ae02:d7cc with SMTP id
- 4fb4d7f45d1cf-64555b858f3mr40468538a12.3.1764608988879; Mon, 01 Dec 2025
- 09:09:48 -0800 (PST)
+ AJvYcCV2nG6UK6+5tRzkYcs7szKzEBhyv0hwMG98ihBJZFAeekoIn47Envj827OoMqmmBxki6apum/I=@lists.denx.de
+X-Gm-Message-State: AOJu0YzWvB5uvRgMUpssw9Vdo0MrWs52Q9pMkoipl0Tlno1eHX4bOWr0
+ okTi7w8rKtFe927WcHvLfL5s5ug6WbLFPlWuG4pKkgUpORJkxgsap/5hUEjve/KQsAHom+1y82p
+ fMPE798wneJ/R/Om/FaPbfSh/JMvoDPI=
+X-Gm-Gg: ASbGncu63hAK4nQJaCMBtA1gTMB8gr0pP8xo11Bv+nDyJY9gDzf0iEa2ZSCsWD7EXmu
+ TeAVbOR2k1MMfZK+EWqfWCx/GqBi4H2X9aAKYQlJ7HywvLmRJLZKlt3Ld4OXBUqpyWMb4aDOark
+ g5FL6eMtcv1Urzv0sa1xiXR9utXj4cr8VlqT9SRVhQjO0Id4aXqk1DBdgthAwKxJvTBZgteg3gB
+ yKrGpcecFO9w94ACMs9SHQjonY1z1zlE4m2Fn6X8EFo/AHgf9x+OtAwfYIsFVL2WBUQYk+Q
+X-Google-Smtp-Source: AGHT+IEWVaYuMMMQrLEicaYSr74pUqpM9cRdlvAom7xdOJjzyOzm9inzp/7DTprb8g0iKMVV43mmUC0yqGU627xQJUM=
+X-Received: by 2002:a05:6830:81d6:b0:7b7:59c5:766c with SMTP id
+ 46e09a7af769-7c7c443b5a4mr14021144a34.33.1764609293570; Mon, 01 Dec 2025
+ 09:14:53 -0800 (PST)
 MIME-Version: 1.0
-References: <e7b7b905-4a6c-4342-b1a5-0ad32a5837cf@gmx.de>
- <94561b0d-8203-4210-b599-93070eb934cf@cherry.de>
- <89385ade-7d7d-4a8c-b929-f4eb47e254cc@gmx.de>
- <4fcde736-c5e1-4800-8b75-ab87c0dd8b0a@cherry.de>
- <53057b6b-12b2-498c-aea6-88f535c0b096@cherry.de>
- <CANAwSgQcFRYKW0+vG6TVj_-EYYQSdF=t3KYFF0FtOSkN5uLtvw@mail.gmail.com>
- <11d29eb3-bc21-46e1-842a-bb163995fe59@gmx.de>
- <CANAwSgS9+naVnyFv=+1BDHdH4DpHGSCzWWZHFxiDKmDUXu+zCg@mail.gmail.com>
- <0FB759C1BA7AEB85+a26afcc4-c5e8-4452-a6ce-e19736be395b@radxa.com>
- <CANAwSgRRYg-QLATDWcdf8nubv1+Hqn9r_R8D1bFYui3i1nYitw@mail.gmail.com>
- <53143B48341F9068+600cd801-8c7e-4407-a3e9-13c83ac5ca67@radxa.com>
- <CANAwSgQBwoUNYQkhbkmBZ3UMAO=+NUw6rK+=vT0=BCBRxAjD6w@mail.gmail.com>
- <99ACD06BACB0AD72+efbd4b3a-db5a-4a83-97c5-c1df635385ff@radxa.com>
- <CANAwSgSc1AgkXUkEWHqKgWbOa4djL051mLh4J23m+mkVopRQdQ@mail.gmail.com>
- <a9a4deea-4f53-4103-97f9-32d96177c6e1@cherry.de>
-In-Reply-To: <a9a4deea-4f53-4103-97f9-32d96177c6e1@cherry.de>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Mon, 1 Dec 2025 22:39:31 +0530
-X-Gm-Features: AWmQ_blycBVa3dOsz6NU5TAsZCwtfHCza7jbcae0EFpLEz9nwFxT8OCVaDphnOw
-Message-ID: <CANAwSgR0cX8nkUMx6ubHjsLgrV95MMHeqMaUqGGgXgUhd77VBA@mail.gmail.com>
-Subject: Re: [BUG] Raxda Rock Pi 4A serial console output stops prematurely
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: FUKAUMI Naoki <naoki@radxa.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Stuebner <heiko@sntech.de>
+References: <20251129064818.1587-1-briansune@gmail.com>
+ <20251201165122.GH303283@bill-the-cat>
+ <CAN7C2SAGqRqd-TXpp-ALrDzbsgBmLaxywGbw6j9w0MZipEQHnA@mail.gmail.com>
+ <20251201170534.GK303283@bill-the-cat>
+In-Reply-To: <20251201170534.GK303283@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Tue, 2 Dec 2025 01:14:43 +0800
+X-Gm-Features: AWmQ_bmjmZDf54GYFz9_G0-yORADFmMDntR5PWL_4rqOP-URlBFK0yXgA2oH5Ds
+Message-ID: <CAN7C2SBn6pq9DBO2GezyWcUVB6iZb-wQgmFyJF2ph7hV4WmiQQ@mail.gmail.com>
+Subject: Re: [PATCH v2] Fix socfpga GEN5 boot by spl+u-boot sfp on RAW
+To: Tom Rini <trini@konsulko.com>
+Cc: Jan Kiszka <jan.kiszka@siemens.com>,
+ Chee Tien Fong <tienfong.chee@altera.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -110,79 +98,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin/ FUKAUMI,
-
-On Mon, 1 Dec 2025 at 16:12, Quentin Schulz <quentin.schulz@cherry.de> wrot=
-e:
-> > U-Boot TPL 2025.10-1 (Oct 31 2025 - 11:12:15)
-> > lpddr4_set_rate: change freq to 400MHz 0, 1
-> > Channel 0: LPDDR4, 400MHz
-> > BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D15 CS1 Row=3D15 CS=3D2 Die BW=3D16 Si=
-ze=3D2048MB
-> > Channel 1: LPDDR4, 400MHz
-> > BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D15 CS1 Row=3D15 CS=3D2 Die BW=3D16 Si=
-ze=3D2048MB
-> > 256B stride
-> > lpddr4_set_rate: change freq to 800MHz 1, 0
-> > Trying to boot from BOOTROM
-> > Returning to boot ROM...
+Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B412=E6=9C=882=E6=97=A5=
+=E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=881:05=E5=AF=AB=E9=81=93=EF=BC=9A
+>
+> On Tue, Dec 02, 2025 at 01:01:48AM +0800, Sune Brian wrote:
+> > Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B412=E6=9C=882=E6=97=
+=A5=E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=8812:51=E5=AF=AB=E9=81=93=EF=BC=9A
+> > >
+> > > On Sat, Nov 29, 2025 at 02:48:18PM +0800, Brian Sune wrote:
+> > >
+> > > > Thanks to Jan Kiszka had provided info on
+> > > > u-boot is not able to boot by u-boot-with-spl.sfp.
+> > > >
+> > > > All three TYPE, NUM, OFFSET mode methods
+> > > > are nonfunctional on combined raw boot.
+> > > >
+> > > > The major cause is spl+u-boot structure is
+> > > > defined as 4x[spl+zero_pad] + u-boot.img.
+> > > > Deal to this configuration since GEN5 is used,
+> > > > the spl would require to seek by an offset
+> > > > on top of the spl offset. This means for
+> > > > each spl=3D0x10000 the offset is 0x40000.
+> > > >
+> > > > However latest u-boot do not consider this
+> > > > major structure on GEN5 socfpga.
+> > > > Meanwhile, the default include file as Jan
+> > > > pointed out is completely wrong syntax and
+> > > > caused issue.
+> > > >
+> > > > Combining both concepts, the minimum fix
+> > > > patch is provide as follows.
+> > > >
+> > > > 1) Offset is control and default set to a
+> > > > proper offset under:
+> > > > SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
+> > > >
+> > > > 2) Only GEN5 socfpga will be affected and
+> > > > minimized contamination on other devices.
+> > > >
+> > > > 3) Only one compuatation adjustment is made
+> > > > on spl_mmc_load. And simply introduce the
+> > > > offset adding by the kconfig offset control.
+> > > > It should be 0 by default and gate as well.
+> > > > So no possible harm should be done.
+> > >
+> > > This sounds like a tricky problem to solve in a "nice" looking way.
+> > >
+> > > The first thing that's unclear to me is, which of
+> > > SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR,
+> > > SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION or
+> > > SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is being used here?
+> > >
+> > > --
+> > > Tom
 > >
-> > U-Boot SPL 2025.10-1 (Oct 31 2025 - 11:12:15 +0000)
-> > Trying to boot from MMC1
->
-> I believe this means you booted from eMMC. (MMC2 should be SD card as
-> far as I remember)
->
-> When you boot from SPI flash, you should see "Trying to boot from SPI"
-> first, if it fails then it'll try to boot from eMMC and then SD card.
-> This is due to
->
-> u-boot,spl-boot-order =3D "same-as-spl", &sdhci, &sdmmc;
->
-> in arch/arm/dts/rk3399-u-boot.dtsi + SPL_SPI* symbols in your .config.
->
-> > ## Checking hash(es) for config config-1 ... OK
-> > ## Checking hash(es) for Image atf-1 ... sha256+ OK
-> > ## Checking hash(es) for Image u-boot ... sha256+ OK
-> > ## Checking hash(es) for Image fdt-1 ... sha256+ OK
-> > ## Checking hash(es) for Image atf-2 ... sha256+ OK
-> > ## Checking hash(es) for Image atf-3 ... sha256+ OK
-> > ## Checking hash(es) for Image atf-4 ... sha256+ OK
-> > load_simple_fit: Skip load 'atf-5': image size is 0!
+> > Hi Tom.
 > >
+> > This issue all happened due to the old "u-boot-with-spl.sfp" structure.
+> > The old auto generated u-boot-with-spl.sfp that file itself has spl x4 =
+and
+> > zero padding. then it inserts u-boot.img.
 > >
-> > U-Boot 2025.10-1 (Oct 31 2025 - 11:12:15 +0000)
+> > All are user dependent and have no restriction from the beginning.
+> > SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR any sector with A2 type.
+> > SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION any partition with A2 type.
+> > All are completely dependent on the user SD MMC setup.
+> > So users can even use the last sector aka the most end of the SD MMC.
 > >
-> > SoC: Rockchip rk3399
-> > Reset cause: POR
-> > Model: Radxa ROCK Pi 4A
-> > DRAM:  4 GiB (total 3.9 GiB)
-> > PMIC:  RK808
+> > That's why it is so tedious. And users even allow to simply use u-boot-=
+spl.sfp
+> > Then manually use dd  command to an offset that is in the A2 partition =
+and
+> > load the u-boot.img
 > >
-> > You see, I could not control the UART with the key pressed.
+> > I didn't even like this idea and that's why I changed to the FAT boot m=
+ethod
+> > after 2025.07.
+> > I simply bypassed the inherent issue that Jan was faced with.
+> >
+> > So long story short either completely drop this old compatible boot flo=
+w or
+> > do it in a very tedious way aka spl offset on top of u-boot.img offset.
 >
-> Because you don't have the audio-supply patch for this U-Boot maybe? Or
-> you didn't actually flash your newly compiled U-Boot on the device this
-> U-Boot loads from.
+> Well, wait, this doesn't make sense. The first thing is you pick which
+> of the three I asked about as to how to find everything else at boot. We
+
+But I am afraid that is the case. You can actually use any one of three opt=
+ions
+to boot. The requirements on Altera Cyclone V or Arria V GEN5 socfpga requi=
+re
+a A2 partition to seek the SPL. So this involved "TYPE" and "PAR NUM".
+Then for the complete RAW setup it simply just uses the sector offset.
+
+> don't need to support all three, we need to support one of them. I
+> suspect the first thing is we need a default one-of-those if SYMBOL.
+> This is what we do for MVEBU platforms which have, I suspect at least, a
+> similar odd constraint.
 >
-My board=E2=80=99s SPI flash is running an outdated firmware that lacks the
-auto-supply patch.
-which results in the UART console being locked
+> --
+> Tom
 
-Thank you for your support and guidance. I understand that this
-process is tedious
-and challenging to resolve. I will continue debugging the kernel to
-enable erasing
-the SPI flash.
+That's why I don't even like to count debugging from first place after  202=
+5.07.
+SPL on A2 partition u-boot.img on FAT32 boot very fine and no issue.
+You don't even need to consider the u-boot.img offset on top of SPL offset.
+Very clean.
+Jan proposed to fix the RAW backward support on the old combined
+u-boot-with-spl.sfp boot method, which is completely not a must.
 
-I have a working development board available for testing and development.
-regardless of the SPI flash status.
+Hope this clears up some confusion.
 
-Please allow me some time to debug this issue.
-If I find a solution, I will share the details.
-
-> Cheers,
-> Quentin
-
-Thanks
--Anand
+Thanks,
+Brian
