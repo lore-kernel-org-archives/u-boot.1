@@ -4,84 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03C7CCFD376
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 04:10:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30C09CFD2F6
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 04:59:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4517283DBD;
-	Tue,  2 Dec 2025 05:10:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 95DE183DCA;
+	Tue,  2 Dec 2025 05:59:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WJls6uJy";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="EvQ+cauL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 822ED83DCA; Tue,  2 Dec 2025 05:10:48 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 739F183DDD; Tue,  2 Dec 2025 05:59:39 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D5AF83D9F
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 05:10:46 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-297e239baecso42551525ad.1
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 20:10:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764648644; x=1765253444; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=nMpxWU7wWzdYij9nUluKGYlv6hbwjNLDdsZoG9q9LLw=;
- b=WJls6uJyBkCB61F2E+HPJ4Ap4Y2Alr8xqOjJhk1FnW+WiOYBc+MS4fqHz69Dv2l19O
- Cw3VZT3JXFJ8UQ/cxa5Zo6pM0iB8qClnGeOsjNDhzi6dvMk+Q6udBQG5f6UFs85TCam7
- vPUxqdAaLJSSlDW2HdrErozvAAaIXYY1DwF2tU+4polIx8R9cFTgVpJCE4CsisRMqNhN
- tfRBUuwltZ+zUlc2sQhDgr8RXnJ489AkmdXY5HbMIOv5kiiJSvmXexjNWS4NU7OlkQXd
- HHI3VpQHnPZILSZXj+1BumNBrE9WXEnBCDdaYdAxarwK0b/40wy9tT+yPZJmBoOdT2FE
- 4PfA==
+ by phobos.denx.de (Postfix) with ESMTPS id 127C183D9F
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 05:59:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C90EF3F278
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 04:59:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1764651575;
+ bh=pna7Os2iEGEE10bRAq+dbKdmWvWHhvmwQP4VXcuSSYw=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=EvQ+cauLyUKBtdCzzGpSFgY2amjOEb2e9/WrGqrQZYCSpIyX+EA/gVdZodQ7k22yX
+ DdwnQpg4vIzN6eAkgXjGyk0if8pc40/7mARNAcTMcBuVurJXGIMafq+usblpcgL//1
+ 8uC7AUUQk2CEzmIbyJS95zCuqo53ul4HGsvGkm0ll68CLrNxDtWMCyprlbrcKqWj7d
+ j41XXGPQtlE6p6XYTSmgq9deImHgz3qXSRJu09kW8lg65/oJ8VxbCkY6Lik1elJyI+
+ 1rEG7TKSSEtkdYM+4StXf09KhOEC8eZEssqjjqBHxGysu4H61CPmKeXJzQ4I+r+tXO
+ zFlRJmGdwg0Pg11B06S8xFQU3VTlemParvfD6RAYoINP+gZuRh2fZxu4ITVoyvcj5j
+ 76DRyjaqT97u7USKvEPc1phYZFRo/Mt8p7nERkUP2TN3ce8St+3x8DJ82AJgGksy7R
+ ntVFEIHV6QZ6RthkTaVuxR1LyDY01M4qlHyEWf6r98ToEVX8ut5wfmQQ0pinKQ6BEj
+ oVk+yjXk50ZcRbi6f/DMum5nRMhi0gc22uZLvu0/gWUh2+97LO9d453fSjGlB/uDI2
+ 9U+2tHvkbf+NyO7vxUTC/VknGkosTsOKFmeiEGFNsvGeHWETIoKKx7V15L11s71b8n
+ d1ZNSBwZcPP34iap2K6vKz6Y=
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-47788165c97so35308995e9.0
+ for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 20:59:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764648644; x=1765253444;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1764651575; x=1765256375;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nMpxWU7wWzdYij9nUluKGYlv6hbwjNLDdsZoG9q9LLw=;
- b=kH5LylLkchA9JgllCgW15rpeDO09Xvpoy6xZlw4FX29zbbgDJ3l0S1CMzBWBaD/Rrm
- 9drqsamQmCH2aqDeT4IGbrtKTV3XCNyhkNBwYFY6snxa+31Dca9TtmuhBYf1hz1ebDN6
- Ht6zEFS80MdJqAY9iVrKhAfJXH6qDIcprBRUxZdklBGJfTF0ZL/yMLbeN6RwmQhBI+G9
- V+1+HkLOFhqBB9usjspn0nR7wt6G4Xcd4BGgiRZ8o+nSwMbiXKffN5fGlzrOisuLFFjJ
- TrMyNpYTG7bWtMLMizcvFz9zDPkmeD8/F3HDy32mX4nAibpnlq1CXHDQ/6BwDMGzqJEz
- fgfQ==
+ bh=pna7Os2iEGEE10bRAq+dbKdmWvWHhvmwQP4VXcuSSYw=;
+ b=W66Qe1X+6J6XLM7H4Cr806QaYKOUE4RrQpuinyAM6NxwuFPSt509l4MdMCYVBFED5A
+ 8oWIyeRk/l3i/nxVseJdMZsxfLuoASrB7abfAACbHHM1kyyzar/dpb81s7h5ZtVrEHcP
+ /Ikbumhy123/XKRXxep0BoZrAgK4M0yTlzTSPkxBHa8Zmk8wZfVF0ozlVYFvF9S5+UYZ
+ +IJdJo5dq6A1bAqTabq50P83AhUgyyBwBUada8iACInGnw+4VG8hb6Upvh+zcQaCyTs5
+ 5LjlLy/lmY8EzbmWASPRQUWyOZYCt7tnhnpT6HnkFdK9cbHU5NG+OctlzBh/0aoo0DGP
+ zJAA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0jF5pi5Cb0naKy97bl9/tvZOyT5GuExh2DXONFpr6/JRMo0KoYJ1w5cPtzKzGL+sXJoAqsXg=@lists.denx.de
-X-Gm-Message-State: AOJu0YykAocUNP5KtMUOc2N0JYp7Hni4tEr/tSKtEkJXrblyqA0Gs/fE
- kcomfpagx50/hxyM9pmGGi8YMK6BzlHGLM7fkf6Xqe0+NCnJno71suBF
-X-Gm-Gg: ASbGncvFSj6qj3zXu0ekz2ci8/kETXsh7ESqRDm1JBHQ1XD1kWKyQ+sC9NOou3Q9qSB
- nL60HxKnDwJnIdctTbJH0vkiY1pL1ztDj5pjkdm2VlAFr2Au0NR499gRBYXQvSv//2ZchpRYkSx
- eYm4F60eaTLoKjWe2U9o2jGYOrI8gOdjcUU2NGfwu6gbrOSSjllkOmiAfP/DlAhXkyjq75ewPdE
- kNQDOW8DUkqV/FwtbJW8I1uI4kxEnWJbsxIC2M1pUj/sWulaRWuA9cnMi8XL2PXup4j68NjNu9R
- C2XPUvvs2Y37+6VRxiqosxskzifhiAXZtylOp//2/DWRfAb9eVpLUpMBIgFgUPa+SbeQTzjHLwp
- v8jJsfp59a5a+Fj9cWvi9zOI3sCo1jvEFC0NfY9lQCP0OOIoBZQCm2mQHrE/1iV8X3JfP54MHl+
- 1JUjv5G7npO3ivk36/qMjo70Ga8LU5SKZMLIH3VQ==
-X-Google-Smtp-Source: AGHT+IEW3yO5UW5Rm4pv+kXWiFVMqpsc3lM2zIK2gqpVK95WtwLuAGX6Mcy1GSKQ+tuCZwhVjLRkeQ==
-X-Received: by 2002:a17:903:2cf:b0:297:c079:4c32 with SMTP id
- d9443c01a7336-29d5a4d8e3cmr16152965ad.11.1764648644561; 
- Mon, 01 Dec 2025 20:10:44 -0800 (PST)
-Received: from localhost.localdomain ([185.213.82.248])
+ AJvYcCXma/MCKknWjhGmymAwsmLxLwzMpg6GXucHUY8RLMEHDC6eBTO846QxfAMciw8HUbR5XyUgQ+Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9JysDxxaZfOWuMbxm9EjqPvWqw0RIdI+kes+Qg/gK9r2iP8LB
+ eTAX5J2l00FlYWOgLumor25P121+AEFfkI6ApWdNtzuc8avWL8Yy1I/z6FYaaN28CSh62oBBtMl
+ fn08U3eZN/ggxXuEcpwMPU8JugznIbrCQkOH/6P5szzUokMxyHxt6Bz+kgPhqQlvgm/hDqhQ=
+X-Gm-Gg: ASbGnctoOiWrlAxDe3BnYW0fH/kB2CPo6zttUdMI3hhQ7eMP59O+Z3tnxQc3Q8d6mEX
+ /MQHs2HoW4OiA3BpRHBPBu2hYBlRtDedtaYLieCM4X9GQpmoStHyex1gd8CTyh5GKNF+OMc9z6/
+ mRkGv3+OM3TnWSTzuGZiKOqwrEFsVT2bex4lUaLZyI6eMZC9ZFpPH6kLcYBkMrwfyS+n3w/wJ4n
+ w/K5luSRD2oZ9HAYuG5qBR84tVuprzKUCM69PuhhVbxx9w4ymrnn4QrnRNgyxxcV/i5jyYSUfWd
+ xun5i5N4X2V66vv8WyurRfmJKCezH1ANNSz0wNNqH/IzgcM7CMjbQ6nibGF/v08JJ87FJFP7Q94
+ UWhbbfjiP5xIrxGf7V2wb4lzPwg0iGaVrVARdllyh+aW17zWvO31lxNun8UIVfzzRb8FJrUEelF
+ D6yIxazd0=
+X-Received: by 2002:a05:600c:45cf:b0:477:8ba7:fe0a with SMTP id
+ 5b1f17b1804b1-477c01c001bmr462155685e9.24.1764651575350; 
+ Mon, 01 Dec 2025 20:59:35 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGOFPeCF+ZlZaLSqGQfIC2zrmZZJ8oLqn2raY3G/siyLJua6YxpEwH0jL7cv2/51Zuh8KF5MA==
+X-Received: by 2002:a05:600c:45cf:b0:477:8ba7:fe0a with SMTP id
+ 5b1f17b1804b1-477c01c001bmr462155595e9.24.1764651574978; 
+ Mon, 01 Dec 2025 20:59:34 -0800 (PST)
+Received: from [192.168.123.154]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29bceb275a3sm138355695ad.66.2025.12.01.20.10.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Dec 2025 20:10:44 -0800 (PST)
-From: Brian Sune <briansune@gmail.com>
-To: Chee Tien Fong <tienfong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH v1] update GCC version check after Kbuild bump
-Date: Tue,  2 Dec 2025 12:10:29 +0800
-Message-ID: <20251202041029.186-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.47.1.windows.1
+ 5b1f17b1804b1-47927a1944esm4409325e9.5.2025.12.01.20.59.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 01 Dec 2025 20:59:34 -0800 (PST)
+Message-ID: <7ed5d25b-c9ad-4b6c-8e5d-662290aede1d@canonical.com>
+Date: Tue, 2 Dec 2025 05:59:33 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] RISC-V: implement private GCC library
+To: Yao Zi <ziyao@disroot.org>
+Cc: E Shattow <e@freeshell.de>, Hal Feng <hal.feng@starfivetech.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
+References: <20251201174904.652954-1-heinrich.schuchardt@canonical.com>
+ <20251201174904.652954-2-heinrich.schuchardt@canonical.com>
+ <aS5jmyp_VanBqY6h@pie>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <aS5jmyp_VanBqY6h@pie>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,47 +124,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ARM GCC tool check is not up to date,
-while issues are reported such as file truncated linker errors.
-Using ARM official cross tools shows that 10.0.1 is a safe
-version to support latest kbuild bump properly.
+On 12/2/25 04:57, Yao Zi wrote:
+> On Mon, Dec 01, 2025 at 06:49:03PM +0100, Heinrich Schuchardt wrote:
+>> The following functions are provided:
+>>
+>> Count leading zero bits
+>>
+>> * int __clzsi2 (unsigned int a)
+>> * int __clzdi2 (unsigned long a)
+>> * int __clzti2 (unsigned long long a)
+>>
+>> Count trailing zero bits
+>>
+>> * int __ctzsi2 (unsigned int a)
+>> * int __ctzdi2 (unsigned long a)
+>> * int __ctzti2 (unsigned long long a)
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+> 
+> I noted there's another series with the same subject[1] sent almost at
+> the same time, and I couldn't tell the difference at the first glance.
+> Is this an incident?
 
-Signed-off-by: Brian Sune <briansune@gmail.com>
----
- arch/arm/config.mk | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Thank you for reviewing.
 
-diff --git a/arch/arm/config.mk b/arch/arm/config.mk
-index 73fddd50bd7..a7eff84a267 100644
---- a/arch/arm/config.mk
-+++ b/arch/arm/config.mk
-@@ -58,7 +58,7 @@ endif
- 
- # Only test once
- ifeq ($(CONFIG_$(PHASE_)SYS_THUMB_BUILD),y)
--archprepare: checkthumb checkgcc6
-+archprepare: checkthumb checkgcc10
- 
- checkthumb:
- 	@if test "$(call cc-name)" = "gcc" -a \
-@@ -69,13 +69,13 @@ checkthumb:
- 		false; \
- 	fi
- else
--archprepare: checkgcc6
-+archprepare: checkgcc10
- endif
- 
--checkgcc6:
-+checkgcc10:
- 	@if test "$(call cc-name)" = "gcc" -a \
--			"$(call cc-version)" -lt "0600"; then \
--		echo '*** Your GCC is older than 6.0 and is not supported'; \
-+			"$(call cc-version)" -lt "1000"; then \
-+		echo '*** Your GCC is older than 10.0 and is not supported'; \
- 		false; \
- 	fi
- 
--- 
-2.34.1
+That was my mistake. I have set the first mail series [1] to superseded 
+in Patchwork.
+
+> 
+>>   arch/Kconfig            |   1 +
+>>   arch/riscv/lib/Makefile |   2 +
+>>   arch/riscv/lib/clz.c    | 105 ++++++++++++++++++++++++++++++++++++++++
+>>   arch/riscv/lib/ctz.c    |  95 ++++++++++++++++++++++++++++++++++++
+>>   lib/Kconfig             |   2 +-
+>>   5 files changed, 204 insertions(+), 1 deletion(-)
+>>   create mode 100644 arch/riscv/lib/clz.c
+>>   create mode 100644 arch/riscv/lib/ctz.c
+>>
+>> diff --git a/arch/Kconfig b/arch/Kconfig
+>> index 3133f892f94..4af0da2485f 100644
+>> --- a/arch/Kconfig
+>> +++ b/arch/Kconfig
+>> @@ -159,6 +159,7 @@ config PPC
+>>   config RISCV
+>>   	bool "RISC-V architecture"
+>>   	select CREATE_ARCH_SYMLINK
+>> +	select HAVE_PRIVATE_LIBGCC if 64BIT
+> 
+> Are 32-bit platforms excluded for lacking of enough library functions?
+> Should we exclude !RISCV_ISA_F || !RISCV_ISA_D platforms as well? Though
+> there's no in-tree 64-bit port without F/D extension.
+
+As I am not aware of any RVA23 distro for 32bit RISC-V, I see no current 
+need.
+
+32-bit support will require additionally implementing __ashldi3, 
+__lshldi3, __udivdi3.
+
+If you want to implement these extra functions, you cannot trust the 
+documentation. The functions don't take the arguments described in 
+https://gcc.gnu.org/onlinedocs/gccint/Integer-library-routines.html. E.g 
+__ashldi3 expects a 64 bit value passed in registers a0 (low bits), a1 
+(high bits) while the shift is passed in a2. 32-bit __udivdi3 expects 
+two 64-bit values.
+
+See 
+https://github.com/gcc-mirror/gcc/blob/addda4a7e8593c37c90eb4c1d7edda29fa4bde31/libgcc/libgcc2.c#L412
+
+libgcc is published under GPL-3 and therefore we cannot simply copy that 
+code into our GPL-2 project.
+
+Best regards
+
+Heinrich
+
+> 
+>>   	select HAVE_SETJMP
+>>   	select HAVE_INITJMP
+>>   	select SUPPORT_ACPI
+> 
+> Regards,
+> Yao Zi
+> 
+> [1]: https://lore.kernel.org/u-boot/20251201174705.652626-1-zfsdt@canonical.com/
 
