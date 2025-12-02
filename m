@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 751A8D116F5
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 07:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA434CFD2F6
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 08:03:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD3CD83E16;
-	Tue,  2 Dec 2025 08:56:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F88283E1E;
+	Tue,  2 Dec 2025 09:03:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y6VO09aQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FCVc2wZr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E37383E1B; Tue,  2 Dec 2025 08:56:21 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 3B91E83E20; Tue,  2 Dec 2025 09:03:07 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AB2183DE0
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 08:56:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0338B83DE0
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 09:03:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-787df0d729dso49734257b3.3
- for <u-boot@lists.denx.de>; Mon, 01 Dec 2025 23:56:19 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c7aee74dceso1533522a34.2
+ for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 00:03:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764662178; x=1765266978; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1764662584; x=1765267384; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KqxFBM+Tb59btEeoe01LhwZANMNtbPaqqPtZx+DLyjE=;
- b=y6VO09aQxqRICPjIha7X+fhrKehPdL8GWnVEyBYFI0l8uaf4Zpx0LNaMRi+3htGgTI
- J0j21KGLDwmSrNyxhDRmBCK7h1t63fIVRMvCKHnpuiBOmsEkoeitKEXhesOk2Jym6NwJ
- 1vt2u/4GSUCK+n23rwzltksrI4WVRaHH2riKhCFOsbODpV/tbmGpbFh9tGAbssQf8sa6
- FDIX8nq5iywgdL4jZGPSimQdEoJ1VvugwrNEYgOSe4fYtiZzYbk0bfK5YtrO8BWScwzI
- M24dqsq7msh1U6vpKOUvryTRtezbtW6dShHW50M5mKHWBsDff0IMA5mQ1D6NUFnF1ftn
- qtlQ==
+ bh=1XCb4YOc0Ca4OHVzocPAFnnNYdfgw1SaQIcfrBa2D0s=;
+ b=FCVc2wZrJ3COlO1TplTgzzYFAkoXekP7rG0dhu1FJgmOYabpPffIYBUIwltUwr4PZ5
+ 35oFnPNBL2hAu2LSsdleIbdBi9PrMU3z4a9z3Do+QI4vBJpoAqSK+ZgpM+hJhz6qPoIa
+ EhMm8ckBisIox27bPWIFwZw42vXhbkQOv6yji8xiPdIyYj/AG2Mtrj8mEulofstOaFiD
+ KloUX4277veI6+OEmAy66iT7Jk6C6kp7V0Z20SIm3rlqmN4s1MWdmUIgQp2jXLDXa5Jk
+ 3Scgen11QN4bU9nDlQAnGDTZBV8HkdXmpZWskFPHDDw82fQTFXxidypeNHBP9g5sKpeu
+ 7xug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764662178; x=1765266978;
+ d=1e100.net; s=20230601; t=1764662584; x=1765267384;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=KqxFBM+Tb59btEeoe01LhwZANMNtbPaqqPtZx+DLyjE=;
- b=S0kx8nuBlE7pSiHfvKJx0iTXiSD+SShsxwNJAQnWuw0+uMkg5gCQ40CGaPcJLtcram
- o5Jb1BZ0HWkz5Km2idNZJmvb8SwiAtiEvnpLG9PaXdeawKgltlNcQo1ERWQQUXpBe71S
- 9js8C6zX1jGU5crRTDZdXQ/zH4zKzNLdMHYN3u/JAsfJ/tBh4SOMeMt66Q+lgpZtaWk1
- DKnWgYKFtL2vVmePuk/hAwC8Zk2MEdggdbRf9I2pc6RvnFcPgceeSf+J3OOaLgNlwokG
- SwHHQ/IrDitZwgIRCvUcV+Q+qLfq5wQiaMlAQX75soKzkzrlSNH3DNJ8X2JWhkxC8LOK
- hOcQ==
+ bh=1XCb4YOc0Ca4OHVzocPAFnnNYdfgw1SaQIcfrBa2D0s=;
+ b=jPiAqRBPNspfP6oN9tl2eQcDFf6BwKzhBnEbCP++BpCLjo1odV+/ge/VEe6++x/8Ix
+ ZZluaYGh3BkqDRf5pjdajdhWIvFWMHvkq1TGg9PDKLRF9ZiVL9Nkk0eGAdiSpQ0rz48x
+ 5e1npon6hSmJ+TSN2ZdQmLPMI17H670a7VxZSD3tuR8WG6nNY5DoNwoasP099tfiLAE2
+ Ps/fduZ5M3jmG7O9sm3AwOEs/eS1w6FX87J9hY3fGXMNM/wHPDHV2TawetGDMG2TtQhS
+ OlJFRKjq2gp048lFN1NB2onql8FA/ZrshHk0bJcI0n5O0Oy8udigricfGuVMAJMHClu7
+ F4/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOB1tFjdBcNiRdl5JyqlrsEz0xuBcze+FsDFhXKjCDwOnk4Ml9eBBCfz/cti+EIzGwRKsWzbs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw3Pm+POgaz2E+IxWlAS+gWEiXP9/5KNssoqg0mOeht+0oF2vkt
- 96/IUZtQwC5J3AEmlhP3FJv7/op9WIonTgPjuaqsKgxLAJSYolNM7HgAuSKqQybjjpw7aXB+Ey3
- DUK3R6O6UzQsx7QozO6EURA5TRcp0DNP6TNK/h/tAKXTi2QX/0RDK1Yo=
-X-Gm-Gg: ASbGncvRTqrcfHE+Ozh2YppfS2bDWtBm+YLaHQ9HSza5mhlyOoEe1/z7/xYeKV+kWo6
- E59JaSq4f1EayQdjOpaBxsKC7Fk4aMmiD78UbHYf6xrNh9cfgLhjrmPSsWmissB3sba3/EYxO8S
- 61OEBKaXb4PHZE+Hj6uIYifIzib3JPFYkoli6c5VgmcE3fsTAb7CN0pprOVuG1k/cyKp8/xcnH6
- kCOLEKRl9jFybVegu4PAobK/w1UdoP2wpo/07yx7kNo/I5NPIhwP6+5AtOeOyqNnKC4vrC3zECd
- iCaah68glT7vgViAewpt0ZYHcrOmvq/OE3PWQeBawlSTcQSOMu3kEx8dz/8F9JUJoYM1g57cDYt
- nWimkQ2ansEpHQ+egag==
-X-Google-Smtp-Source: AGHT+IH8ByvZZ6b1+2QtqYPtA2L8M0RR1QoKpDgyeLrhSE1z7ZNL/aXEddodPnU13UEDmC5bwyaj3eQZt2sp8JbU/rU=
-X-Received: by 2002:a05:690c:6892:b0:788:14a2:8bda with SMTP id
- 00721157ae682-78a8b527aedmr380758527b3.38.1764662177787; Mon, 01 Dec 2025
- 23:56:17 -0800 (PST)
+ AJvYcCVUUi0flMfopebtRmz385HVBOo1gmK2Do70e0w9mOjSmeaMfIvEWBggnvyEC+IWMKXOWXwahMw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBGyaGjTFv0RH+25Hcc7bijv9yBAtQ5DKiwKxLlX3fBHqI079/
+ PlWQP47HQ+vatmrUpWNUXlmu3GaKhqy6+4C2IDYd7rdrRoB5vJ9yBfYoKL7zeUmiL6ww/gAjazp
+ j17en6PKFoRbWf1Bwg6NO/5WqzDLCnuQ=
+X-Gm-Gg: ASbGncvGLAaoBcDGF79PKcGglOEa16ChE8HDrxMz5kphdtYcRTtkBUGBEgT6pXcgIOR
+ A3rq1FRrVVfvcGUKoGnsttYltCghnyAQBWhwWPgxg36wdDRFLlHxErzjTMpu1ZqEIeCasGAMVn0
+ fAfV5xxR6I83ob2WkaW2fKMfT9QodLea6QFBrZjskLyHweG8Sk4Pfr1teYCylYTm9U3jwMnD8CF
+ yKIdL4cEPjXl8zjEbkPdF83nR4IALtm3pyYQvM7RmAltjxfjVzEcWxrVs2TW4CL264AvWfA
+X-Google-Smtp-Source: AGHT+IFsPlzHOCdF44Yoft4c+8K685w5C19j3D6fztCwy2nDO4XS9FKQzfrMWluUX6kXw+OpY1WffOw9jF4030bxm8Y=
+X-Received: by 2002:a05:6830:61ca:b0:7c7:6319:da9e with SMTP id
+ 46e09a7af769-7c799075bfdmr21134713a34.19.1764662583670; Tue, 02 Dec 2025
+ 00:03:03 -0800 (PST)
 MIME-Version: 1.0
 References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
  <20251125081316.17329-3-alif.zakuan.yuslaimi@altera.com>
@@ -78,20 +76,22 @@ References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
  <20251128153130.GC2125796@bill-the-cat>
  <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
  <20251128164957.GD2125796@bill-the-cat>
-In-Reply-To: <20251128164957.GD2125796@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 2 Dec 2025 09:55:41 +0200
-X-Gm-Features: AWmQ_bn6-UcnYwjeCG9r5tHLmJuzLaYM96fCxjIVwn2UvGI4xFGHXd00irpeDQg
-Message-ID: <CAC_iWjLYvzHHJ+KYj68KWa=E+V3wc360HRf_dWCh7ny5bdEU9A@mail.gmail.com>
+ <CAC_iWjLYvzHHJ+KYj68KWa=E+V3wc360HRf_dWCh7ny5bdEU9A@mail.gmail.com>
+In-Reply-To: <CAC_iWjLYvzHHJ+KYj68KWa=E+V3wc360HRf_dWCh7ny5bdEU9A@mail.gmail.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Tue, 2 Dec 2025 16:02:52 +0800
+X-Gm-Features: AWmQ_bkMVn3KPU8GB_xTLlZ3FjtxDZykpRNKapf3cqZVeT8NC7DSw3W6cY949iA
+Message-ID: <CAN7C2SAEZgm8KshbGU3d48U3w01vtG5zvbzZRbA_3tE5S0E+Lw@mail.gmail.com>
 Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from empty
  built-in.a in SPL/TPL/VPL builds
-To: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
 Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
  Marek Vasut <marek.vasut@mailbox.org>, 
  u-boot@lists.denx.de, Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
  Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>, 
  Jaehoon Chung <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
- Brian Sune <briansune@gmail.com>, Tien Fong Chee <tien.fong.chee@intel.com>
+ Tien Fong Chee <tien.fong.chee@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -110,68 +110,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Fri, 28 Nov 2025 at 18:50, Tom Rini <trini@konsulko.com> wrote:
+Ilias Apalodimas <ilias.apalodimas@linaro.org> =E6=96=BC 2025=E5=B9=B412=E6=
+=9C=882=E6=97=A5=E9=80=B1=E4=BA=8C =E4=B8=8B=E5=8D=883:56=E5=AF=AB=E9=81=93=
+=EF=BC=9A
 >
-> On Fri, Nov 28, 2025 at 06:44:12PM +0200, Ilias Apalodimas wrote:
-> > On Fri, 28 Nov 2025 at 17:31, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Nov 28, 2025 at 10:11:53AM +0800, Yuslaimi, Alif Zakuan wrote=
-:
-> > > >
-> > > >
-> > > > On 27/11/2025 11:09 pm, Marek Vasut wrote:
-> > > > > [CAUTION: This email is from outside your organization. Unless yo=
-u trust
-> > > > > the sender, do not click on links or open attachments as it may b=
-e a
-> > > > > fraudulent email attempting to steal your information and/or comp=
-romise
-> > > > > your computer.]
-> > > > >
-> > > > > On 11/27/25 3:12 AM, Yuslaimi, Alif Zakuan wrote:
-> > > > >
-> > > > > Hello everyone,
-> > > > >
-> > > > > > I already have the referenced commit in my test branch, and I c=
-an
-> > > > > > confirm that the same compilation error still appears on Cyclon=
-eV when
-> > > > > > certain directories produce no SPL objects.
-> > > > > >
-> > > > > > The existing fix ensures that built-in.o is always present, but=
- it does
-> > > > > > not prevent ar from generating empty built-in.a archives, which=
- older
-> > > > > > ARM 32-bit linkers (such as CycloneV toolchains) reject as =E2=
-=80=9Cfile
-> > > > > > truncated=E2=80=9D.
-> > > > >
-> > > > > Which toolchain is this ?
-> > > > >
-> > > >
-> > > > I am using Linaro arm-linux-gnueabihf GCC 7.5.0 to compile our SoC3=
-2 devices
-> > > > - CycloneV and Arria10
-> > >
-> > > Ilias, do you recall the solution to this problem from when it came u=
-p
-> > > on IRC a few weeks ago?
+> Hi Tom,
+>
+> On Fri, 28 Nov 2025 at 18:50, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Nop unfortunately not.
-> > Was this caused by the Kbuild bump? I remember the logic around
-> > builtin changing significantly.
+> > On Fri, Nov 28, 2025 at 06:44:12PM +0200, Ilias Apalodimas wrote:
+> > > On Fri, 28 Nov 2025 at 17:31, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Fri, Nov 28, 2025 at 10:11:53AM +0800, Yuslaimi, Alif Zakuan wro=
+te:
+> > > > >
+> > > > >
+> > > > > On 27/11/2025 11:09 pm, Marek Vasut wrote:
+> > > > > > [CAUTION: This email is from outside your organization. Unless =
+you trust
+> > > > > > the sender, do not click on links or open attachments as it may=
+ be a
+> > > > > > fraudulent email attempting to steal your information and/or co=
+mpromise
+> > > > > > your computer.]
+> > > > > >
+> > > > > > On 11/27/25 3:12 AM, Yuslaimi, Alif Zakuan wrote:
+> > > > > >
+> > > > > > Hello everyone,
+> > > > > >
+> > > > > > > I already have the referenced commit in my test branch, and I=
+ can
+> > > > > > > confirm that the same compilation error still appears on Cycl=
+oneV when
+> > > > > > > certain directories produce no SPL objects.
+> > > > > > >
+> > > > > > > The existing fix ensures that built-in.o is always present, b=
+ut it does
+> > > > > > > not prevent ar from generating empty built-in.a archives, whi=
+ch older
+> > > > > > > ARM 32-bit linkers (such as CycloneV toolchains) reject as =
+=E2=80=9Cfile
+> > > > > > > truncated=E2=80=9D.
+> > > > > >
+> > > > > > Which toolchain is this ?
+> > > > > >
+> > > > >
+> > > > > I am using Linaro arm-linux-gnueabihf GCC 7.5.0 to compile our So=
+C32 devices
+> > > > > - CycloneV and Arria10
+> > > >
+> > > > Ilias, do you recall the solution to this problem from when it came=
+ up
+> > > > on IRC a few weeks ago?
+> > >
+> > > Nop unfortunately not.
+> > > Was this caused by the Kbuild bump? I remember the logic around
+> > > builtin changing significantly.
+> >
+> > Yes, and I kinda thought we narrowed it down to something being missing
+> > from the update, since the kernel does support this old of a toolchain
+> > (or at least the 10.x? someone else this on).
 >
-> Yes, and I kinda thought we narrowed it down to something being missing
-> from the update, since the kernel does support this old of a toolchain
-> (or at least the 10.x? someone else this on).
-
-Ok, let me go through my irc logs in case I find it.
-Reading the email thread we should compile with anything > 8.1 right?
-
-Cheers
-/Ilias
+> Ok, let me go through my irc logs in case I find it.
+> Reading the email thread we should compile with anything > 8.1 right?
 >
-> --
-> Tom
+> Cheers
+> /Ilias
+> >
+> > --
+> > Tom
+
+Hi llias and Tom,
+
+I have a question might be wrong or not even exist.
+Tom mentioned GCC 8.1 kbuild but u-boot is considered as
+kernel build or it does not always be that case?
+
+At least so fat there are nothing can build properly below 10.0.1
+Using ARM official cross compile binaries.
+
+Thanks,
+Brian
