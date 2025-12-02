@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B4DDD116F5
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 21:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55E25D12671
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 22:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3F4A83F56;
-	Tue,  2 Dec 2025 22:21:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A33D083F20;
+	Tue,  2 Dec 2025 23:15:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E7FtTbUp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eFdlEjPA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EB3383F4C; Tue,  2 Dec 2025 22:21:26 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id A9A0C83DA7; Tue,  2 Dec 2025 23:15:52 +0100 (CET)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E0A583F36
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 22:21:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9210483F20
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 23:15:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7c6cc366884so1849827a34.1
- for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 13:21:23 -0800 (PST)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-3f0ec55ce57so3891288fac.2
+ for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 14:15:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764710482; x=1765315282; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vIpWSbJ0h0RJtjdX56++J7Z9hwv2TW9Uk0Q1WW/lNJQ=;
- b=E7FtTbUpdu1trZmze9+RBfK7k2m9RCWLjOtnVrvD62bJ8g0ifop/lAC/wyDBz6W6CV
- 0tf6YH/43+6QmqJqIfFBrS+86HWYad9sDgElDeToAp6EIULrSbtdfzqq85QqziKeIHF6
- OAtk2VlUr3Fv9aF4y0W9WsR336nEEmivQbNaM=
+ d=konsulko.com; s=google; t=1764713745; x=1765318545; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Io5FysrbtGE+tTn8TRysgaezQy/ciVAi7Fi/vlw25K0=;
+ b=eFdlEjPAER87rr/NFx1I6KwD20OZ+V4CNg7P1DhE7lTk2fsnFisuz7gWIgNrJ/5ulC
+ oAOVv7Yu4i45mjOfmCb6LF1rbKZTex+ku2fTmmIi6ymLgsdkc1Zrd+XDfjmSSKQB0+Xy
+ P1A737UwGq2EoCgLyjyXiTu/8gXCJJsNQvC4c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764710482; x=1765315282;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=vIpWSbJ0h0RJtjdX56++J7Z9hwv2TW9Uk0Q1WW/lNJQ=;
- b=GUyVSTHFC+ZCNiAmXKvd/ICCUiHBZDypzZKMZEbyM69oQHXkSqPzvewhQ+VNpqZece
- OyUDbSFRHz/QYRfSj+oA30Kl3F5VihPACpJVhcUmx7wWDV5/vk3b0v1P0fcwziPQ1S55
- jsllT6MBJBpQakYzOyEhPguRlQipfH9mQY5tobgFAEQdjB6IATPjlPgCtoew5n0jw4x2
- TI+MItkhVFbFd+B3f3LWIF8TCDx0zYXJgDZmPllMuVzfOZSNANmXBvy8iojs0uEqQMJq
- 8NvPRf5NmKxlx0Zu8ILXK0s4stz1ury0F3gpm8NEEE8juwWZe4xp9yDJ+rTzZ89yBfB3
- DABw==
-X-Gm-Message-State: AOJu0YwJf+ZhdyfKHLxJ53BObmhhy9h2sOU0xUYE4pkWU/BFBjctadM8
- MgeROzVjHzAtshTy9NgRbMB4btX50RpdlwiUX7Gw57vWad5DRo5iOFGJ3CPncDIgDP5ZDHeBtjk
- xiCPIQJw=
-X-Gm-Gg: ASbGncuOiGPFPjPG//gY13cda6LjkNQmLhYnSLWrJ/eXhJKpp34b2nQ7kNnShW7NqZs
- P1XftjfozTXRuXDF3yMYJreVMHPdzNiiPx+aOOgPl+wQNZ4kBpnO3mkiZSNVtLYfvWqP+ERpSJA
- 7HyQ3op1/A7ymfLqZZa2KQAJfyklzKy+iWpwkJ6F+D5kJRcApKfFYRdlSgWZSM/9rWpDW95Shtz
- 09vaLuCBa4hdkbX5N/lmT+zSYoShBdsu9xVnHTTmeUiXmP6er6nhXf5iU2PubCrmmKKtsBXc9yv
- BsTP1fatWVEoBrXWmqxnEOtY5qVxiYk0iZPd7VsIcip+mBnNysv7E2eQM2+qDK+zC6kkAZvh9vK
- 4i3rlxU3XPVYt42dY93bF6weSnya4oZPb0jQqBpX4KkCqT7hOhDETr2zXpyC4t20LnPkjh8ISCE
- jpVSQJegpUPje5eGo//KaSl5ppalMdxkidLEJSNFC5+BnWGjIJOw==
-X-Google-Smtp-Source: AGHT+IGP2s3fSMqleoPD37s/dr/u8reRmSA22ewlLRa+xZSfCbk1Hex8v9QPdo8FzSlmOt/ck0H0rg==
-X-Received: by 2002:a05:6830:44ac:b0:7c7:53bc:54ac with SMTP id
- 46e09a7af769-7c94db40339mr54020a34.13.1764710482202; 
- Tue, 02 Dec 2025 13:21:22 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1764713745; x=1765318545;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Io5FysrbtGE+tTn8TRysgaezQy/ciVAi7Fi/vlw25K0=;
+ b=jkmxBNgvaHxdgOBES/h/EBIdlF1yUi71Zo8v/Q4pgOB9rsYVVvZWa411czqMECctn1
+ WQzEo5pNJGRiDJs3X51gvlSv+s7GaC/I4V5WguAso29xOw/eHx/cIqPZ6O+CkrPMoz2J
+ JDn8ivy6VKl331YT6mmo/OCwI4UOFknq2TxgncLS6sgy220urzSjkAHANGxkVnc3Q/MF
+ 3qV/MYFnxhdixZ8+rWqU/mtmWaRi6n+A3CqxY8fAvAhKjgHvr1rF4uQoFOAr5nzX0JVz
+ wlMARNpKHVwHUEHvq1ksN10Jqs+P4UXRj7+y5WabfJXqvgz8Eb1CuJ1XHKG0CINzZihh
+ haFA==
+X-Gm-Message-State: AOJu0YylkcO2KIWSE+aoBN19H7LzRJWcoczipRF/jwrXzbSEYmBjlOAP
+ u5jC1BGJfm66fzwTuXbJcDmLeOuRf1vMpit50u/2fhyReDmL4aaO1unqACB8u66A0rQ=
+X-Gm-Gg: ASbGncuD32eymKqTNK2Ac5+QViFf/eR7Mm/yxstj1m5A/gjqkxKZcEClme6jduCV+L3
+ hi0IFiDqmHNnbXW8sS0YX60LqQ9vyTjeYwYcxd7wIiL9P7EIv9n5P1yi1mUXoQwPtTHigVPwjCv
+ ML2ou+xqX/ixumKs6fSuWJh0L4nbr3njlZ57ZIC49t4i3ljMsNKUb1mCh8Im0smNeTDC5p19EWd
+ BtghMkg/zjYgDPw/MPufI7FF/SIpTLF9aRQWP3XRw92bwYspszujdLrg89OYVDCz+q0PNRnWMZb
+ knyqvYC1n1A1sAc+PJoBnb+ebdGrURrbtmpqfOl7OIvmaqxqlrDPKoaNyqFMydSAIw3LAF2yomq
+ lSVdbVt7g2XwPcV1r9hKj6hWp4m1CbhxHB188VntFVdpPZg0dxYtela4cH0AXrL4wbR/zt/xeb8
+ Ot1eEoV8CoFFLZ2OfXSMEaDK71H2SArYEvnravoW2q1DNwPgAD
+X-Google-Smtp-Source: AGHT+IFqGE93YZh91JEaqdzBdy9oRcIceqaRmRx1raQ0rS34ICmNN8YSZIOaEUgyEaWqzX0TrCoIpA==
+X-Received: by 2002:a05:6808:210c:b0:44f:e912:eaa3 with SMTP id
+ 5614622812f47-4536a29410amr633849b6e.32.1764713745162; 
+ Tue, 02 Dec 2025 14:15:45 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c90fe0f650sm7332456a34.23.2025.12.02.13.21.21
+ 586e51a60fabf-3f0dcfdb503sm8653606fac.14.2025.12.02.14.15.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Dec 2025 13:21:21 -0800 (PST)
-Date: Tue, 2 Dec 2025 15:21:19 -0600
+ Tue, 02 Dec 2025 14:15:44 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de,
- u-boot-board-maintainers@lists.denx.de
-Subject: Re: Dropping macOS and Windows host tool builds and support in U-Boot
-Message-ID: <20251202212119.GM303283@bill-the-cat>
-References: <20251202182403.GF303283@bill-the-cat>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251202195904.151388-1-marek.vasut+renesas@mailbox.org>
+References: <20251202195904.151388-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PULL] u-boot-sh/master
+Message-Id: <176471374445.2966856.5458180808118981197.b4-ty@konsulko.com>
+Date: Tue, 02 Dec 2025 16:15:44 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZF2BQWRZfXDNHt8Y"
-Content-Disposition: inline
-In-Reply-To: <20251202182403.GF303283@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,76 +94,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 02 Dec 2025 20:57:43 +0100, Marek Vasut wrote:
 
---ZF2BQWRZfXDNHt8Y
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Two fixes for R-Car Gen4 and CONFIG_ENV_OVERWRITE=n to always expect setenv -f
+> to be used when overwriting ethernet MAC on all R-Car.
+> 
+> The following changes since commit c6ee44b5573a90b0a3a36cf858954e04439ae632:
+> 
+>   Merge tag 'u-boot-socfpga-next-20251201' of https://source.denx.de/u-boot/custodians/u-boot-socfpga (2025-12-01 10:37:45 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-On Tue, Dec 02, 2025 at 12:24:03PM -0600, Tom Rini wrote:
+Merged into u-boot/master, thanks!
 
-> Hey all,
->=20
-> I am wondering if at this point in time, anyone still builds our host
-> tools (fw_printenv / fw_getenv, a few others) to run on macOS or
-> Windows, natively.
->=20
-> I ask for two reasons. The first of which is that a reason we still have
-> to support Azure (despite its slowness) for CI is it's where we have
-> macOS and Windows hosts. But at this point in time there's so many ways
-> to have Linux userspace running on Windows or macOS that I don't know
-> that there's any value to these builds.
->=20
-> The second reason is more macOS specific and is that with:
->=20
-> commit 8fbcc0e0e839a8e25f636c76e59311033d3817b5
-> Author: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Date:   Thu Nov 13 12:54:51 2025 +0100
->=20
->     boot: Assure FDT is always at 8-byte aligned address
->    =20
->     The fitImage may contain FDT at 4-byte aligned address, because align=
-ment
->     of DT tags is 4 bytes. However, libfdt and also Linux expects DT to b=
-e at
->     8-byte aligned address. Make sure that the DTs embedded in fitImages =
-are
->     always used from 8-byte aligned addresses. In case the DT is decompre=
-ssed,
->     make sure the target buffer is 8-byte aligned. In case the DT is only
->     loaded, make sure the target buffer is 8-byte aligned too.
->    =20
->     Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->=20
-> Which does things we must do, we now don't build on macOS. Why? As best
-> I can tell (and for a general purpose OS, is a good call), memalign(..)
-> doesn't exist and you need to use posix_memalign, a not drop-in
-> replacement. We could spend some time reworking the code here for that,
-> but for now I've instead gone with this workaround so that CI can
-> continue:
-> https://lore.kernel.org/u-boot/20251202162250.2613085-1-trini@konsulko.co=
-m/
->=20
-> But longer term, unless people say they need and use these tools, I'm
-> inclined to remove them from CI and remove this workaround, for the
-> v2026.04 release.
-
-We have solved this specific problem without a large work-around.
-However, the more general question remains. Does anyone use these tools
-on Windows / macOS?
-
---=20
+-- 
 Tom
 
---ZF2BQWRZfXDNHt8Y
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS9YSwAKCRAr4qD1Cr/k
-CmcuAP9num76Ea9gQVlzePxItLQlVqSm3dleikonVf1FYMbonAEAg8FMtEf2pZhi
-Bna7npHZc8EPCfwb+SR4oCirvzGwZQA=
-=a1sj
------END PGP SIGNATURE-----
-
---ZF2BQWRZfXDNHt8Y--
