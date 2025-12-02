@@ -4,66 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D878AD11707
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 16:19:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7E9D11707
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 16:22:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1B6583E81;
-	Tue,  2 Dec 2025 17:19:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CD1883E8A;
+	Tue,  2 Dec 2025 17:22:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Jsx+4R8q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BXVlD+3/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F73F83C01; Tue,  2 Dec 2025 17:19:50 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0E15283E8E; Tue,  2 Dec 2025 17:22:56 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8266F83E81
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 17:19:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF58183C01
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 17:22:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 004D21A1EDA;
- Tue,  2 Dec 2025 16:19:46 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id C0FC4606D6;
- Tue,  2 Dec 2025 16:19:46 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A137C11919CCA; Tue,  2 Dec 2025 17:19:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1764692386; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=u0wG0t9qzeW5IE7ApV3oGJHcHnRx+QZ2YLFewqcjppM=;
- b=Jsx+4R8qM4fqUTPGbp5O4rBumpREapZ4XLLdxxOUwtURMzPtBSBaiajIWgiLyaApKbYL7E
- dYIRejpwlJkdpjsqJ6TEo1UxkTXeNLOi7TpMeoDtqYWtnYXNqGEhwAYLfObqL390K84B6h
- OEwjJMctgPkmVPMg7fuPF2ETbiiyQnhKKFUDdGWRQ9m6v93YkaF0cssg6YiZ5DKZoPNPpl
- O31w9c4STB8fGRi+ANFlK4Shd94ZXLTRuE2bcSAA7QiQq3Z08+8ig6Yi/2CFJcwyPn/+xp
- YagnOb04QkdweTaR0L+ohs6jrKMoN662C76H5kKurNT3q1av4abPSntU+gdocg==
-Date: Tue, 2 Dec 2025 17:19:40 +0100
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: "Markus Schneider-Pargmann" <msp@baylibre.com>
-Cc: <u-boot@lists.denx.de>, "Marc Murphy" <marc.murphy@sancloud.com>, "Tom
- Rini" <trini@konsulko.com>, "Rasmus Villemoes" <ravi@prevas.dk>, "Marek
- Vasut" <marek.vasut+renesas@mailbox.org>, "Romain Gantois"
- <romain.gantois@bootlin.com>, "Parvathi Pudi" <parvathi@couthit.com>,
- "Basharath Hussain Khaja" <basharath@couthit.com>, "Paul Barker"
- <paul.barker@sancloud.com>
-Subject: Re: [PATCH v2 6/7] am33xx: Support upstream devicetree binding
-Message-ID: <20251202171940.02ff892f@kmaincent-XPS-13-7390>
-In-Reply-To: <DENULZHQKCD0.SD0HVKKGH4PE@baylibre.com>
-References: <20251128-topic-am33-evm-oftree-v2026-01-v2-0-42a863304498@baylibre.com>
- <20251128-topic-am33-evm-oftree-v2026-01-v2-6-42a863304498@baylibre.com>
- <20251201141416.03333902@kmaincent-XPS-13-7390>
- <DENULZHQKCD0.SD0HVKKGH4PE@baylibre.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-3ec3cdcda4eso4027904fac.1
+ for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 08:22:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764692572; x=1765297372; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QH/PPYzKRHNRyhJkfqjpkhnBufLbc/qVzXgfynxMoxo=;
+ b=BXVlD+3/2ACikfAYo1QEpHHWj/+NAbQoKIill3sQBEaUyuUGpVvCcV5/ENMbXh2mEy
+ 6C0873+SIaxL8Wy4Hwh3hf0ePFLQAy+o3CLKSS2jQmTzpgCSzm1D1NsZwO8V4rGbSQoW
+ ER5wLn9bmynoqYpNjgocsVc0k7/RKPKu+h+Ws=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764692572; x=1765297372;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QH/PPYzKRHNRyhJkfqjpkhnBufLbc/qVzXgfynxMoxo=;
+ b=eJB9DfYYkuV3Z3KaiFM6VLWvp/viwJ/y+gF5yiitOU04Tl6vqbJIFZTJriuwylw1Ez
+ w6v8gAJSJ1O/2vTZfKa6fdxrv+vBSCMgVWGJVoOQ8uA40bwKpvy5Xb8xNeblTrwgePVj
+ sSmHaq2K2rvdkaJC9X7P9BTJ7BtU+IUt6XJofTHzBVPaG/semco1VmoQtg5WUevudRyQ
+ byiPC9UPZd2yPoE0AK+qRh2pLSDXL7Byn0ORCqW4wQic6M3I3F6q9SsN2oJnQt/zkIZM
+ /VLeSv3o9gZRBPe1BCeKg/9+gkVC9OAC1H6vPrEZBPhq7bESrl/PV0glFXybAI/1C0mr
+ 19Uw==
+X-Gm-Message-State: AOJu0YxJ6e3iv2JNU/cd04nuEqW7pPLL5uSu659koMjzZW+6wb8OlUy0
+ h5GGonnbFyeQO4wCuczdnrL62SaCATZWst7R+otsRmW4i1fRIZ4qItj4FbQGMig0vBubd6EfEXr
+ 3hoJtg2Y=
+X-Gm-Gg: ASbGnct3xnNg6a22XC3H6o/jMZblw18SthDyd544zRXYX5CKxzNS5YvBgcvHkR7R78Q
+ Wky+DFPN0uZ/IrLMAa4/4wHoEBbtqBFwdFUy+sv5AWW8+dhKrLuKM2xiapWUZCWJzhTBbrr4mxU
+ mUien8KB5atJe5i0oyJFyI9OYX+2XC4oOJYuZFfv2iDJb4SIEv09K0+tx5bOXgIeF+BeHfM5z+7
+ 4YDUEk2FccVYmqrquXUiEnKUd7EngNutQaHfYBL8y3vVuBIMbQBhMbNIBCXv2L+u9lRvFVQ3E3+
+ BhbtSXx7IY+iN+ucYuscRjn6QL0uvhDaLmysTITDMkanCYv48JsTUk9pupy+ZS3yyREoiCT8Hu4
+ Lupt6y1nRylyPiUXlBzkT1Fchti5gfztqmfd2ZEk4eBbz7ZDFJZLisH5YAKR31Z2pOw87wEoD19
+ DQ+5cciTFbsvelS0E7rhdaJV3ehnOq+ZBbBlb9Tb5yJRG977E2o0Xa
+X-Google-Smtp-Source: AGHT+IHq262ubAjQkAG+Towq8lt4/UG3GKr0dOMp7areaz4Jeuvc0TgXhxbr69qUNyaIMSpwaB8IFg==
+X-Received: by 2002:a05:6808:2108:b0:450:e36:999f with SMTP id
+ 5614622812f47-4514e65c1e7mr14246601b6e.21.1764692572501; 
+ Tue, 02 Dec 2025 08:22:52 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4531708f2fdsm5819796b6e.14.2025.12.02.08.22.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Dec 2025 08:22:52 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCHv2] boot/image-fit.c: Resort to using malloc for USE_HOSTCC
+Date: Tue,  2 Dec 2025 10:22:50 -0600
+Message-ID: <20251202162250.2613085-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,77 +93,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 02 Dec 2025 16:50:03 +0100
-"Markus Schneider-Pargmann" <msp@baylibre.com> wrote:
+With the changes in commit 8fbcc0e0e839 ("boot: Assure FDT is always at
+8-byte aligned address") to call memalign(...) we now always call
+memalign(...) rather than malloc(...) when allocating a buffer that may
+contain a device tree. However, memalign(...) is not portable among all
+of the host OSes we support. Specifically on macOS it isn't seemingly
+possible to get memalign exactly. To keep alignment we would need to
+rework to use posix_memalign(...) for USE_HOSTCC and memalign(...) for
+U-Boot itself. This would get rather tricky. However, given the limited
+use case in question, it makes more sense to fall back to malloc(...)
+for the USE_HOSTCC case.
 
-> Hi Kory,
->=20
-> On Mon Dec 1, 2025 at 2:14 PM CET, Kory Maincent wrote:
-> > On Fri, 28 Nov 2025 21:46:36 +0100
-> > "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com> wrote:
-> > =20
-> >> Support musb being probed by ti,musb-am33xx. The non-upstream DT probi=
-ng
-> >> used a wrapper driver that probed ti-musb-peripheral and ti-musb-host.
-> >> This wrapper registered as UCLASS_MISC, which is why it is requested in
-> >> this board.c file.
-> >>=20
-> >> With the new devicetree the wrapper that registers as UCLASS_MISC is
-> >> gone, instead the UCLASS_USB and UCLASS_USB_GADGET_GENERIC have to be
-> >> requested.
-> >>=20
-> >> Also don't fail if the USB devices are not available.
-> >>=20
-> >> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
-> >> ---
-> >>  arch/arm/mach-omap2/am33xx/board.c | 12 ++++++++----
-> >>  1 file changed, 8 insertions(+), 4 deletions(-)
-> >>=20
-> >> diff --git a/arch/arm/mach-omap2/am33xx/board.c
-> >> b/arch/arm/mach-omap2/am33xx/board.c index
-> >> d7db260513308257f142ea70d5d5c643afc920c9..4bfdb55b2dd5c66cd58bce360cf1=
-c69fb7a00cd6
-> >> 100644 --- a/arch/arm/mach-omap2/am33xx/board.c +++
-> >> b/arch/arm/mach-omap2/am33xx/board.c @@ -266,12 +266,16 @@ int
-> >> arch_misc_init(void) struct udevice *dev;
-> >>  	int ret;
-> >> =20
-> >> -	ret =3D uclass_first_device_err(UCLASS_MISC, &dev);
-> >> -	if (ret)
-> >> -		return ret;
-> >> +	if (IS_ENABLED(CONFIG_OF_UPSTREAM)) {
-> >> +		uclass_first_device_err(UCLASS_USB, &dev);
-> >> +		ret =3D uclass_first_device_err(UCLASS_USB_GADGET_GENERIC,
-> >> &dev);
-> >> +	} else {
-> >> +		ret =3D uclass_first_device_err(UCLASS_MISC, &dev);
-> >> +	}
-> >> =20
-> >>  #if defined(CONFIG_DM_ETH) && defined(CONFIG_USB_ETHER)
-> >> -	usb_ether_init();
-> >> +	if (!ret)
-> >> +		usb_ether_init();
-> >>  #endif
-> >> =20
-> >>  	return 0; =20
-> >
-> > You are losing the error return value here. =20
->=20
-> Yes, on purpose. During my work on using the upstream devicetree I
-> didn't have a working USB yet but u-boot wouldn't start because
-> arch_misc_init failed. I don't see why u-boot shouldn't start a console
-> if something USB related is broken. That's why I did not return the USB
-> error code here.
+Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always at 8-byte aligned address")
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Indeed I missed it from the last line of your commit message.
-Maybe it should be in a separate patch as this change current boot behavior=
- and
-it is unrelated to you UCLASS USB change.
-Also I have noticed that your patch subject is a bit vague, you don't talk
-about USB at all.=20
+My biggest take-away from this is that I need to move up the plans I had
+about asking if anyone even uses the host tools on Windows / macOS from
+post-v2026.01 to instead be later today.
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+This change is a work-around at best. Ideally, we can drop Windows /
+macOS host build support and revert this commit at that time.
+
+Changes in v2:
+- Rework things entirely, and elaborate on the commit message.
+---
+ boot/image-fit.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index cccaa48f6839..3323ca1020d1 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -23,6 +23,7 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <asm/io.h>
++#include <malloc.h>
+ #include <memalign.h>
+ #include <asm/global_data.h>
+ #ifdef CONFIG_DM_HASH
+@@ -35,7 +36,6 @@ DECLARE_GLOBAL_DATA_PTR;
+ #include <bootm.h>
+ #include <image.h>
+ #include <bootstage.h>
+-#include <malloc.h>
+ #include <upl.h>
+ #include <u-boot/crc.h>
+ 
+@@ -2279,7 +2279,18 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 
+ 		log_debug("decompressing image\n");
+ 		if (load == data) {
++			/*
++			 * This could be a compressed device tree, and device
++			 * trees require 8 byte alignment for use. However, in
++			 * userspace we aren't using the tree, and getting at
++			 * a portable memalign is extremely difficult. Continue
++			 * to malloc in the host case.
++			 */
++#ifdef USE_HOSTCC
++			loadbuf = malloc(max_decomp_len);
++#else
+ 			loadbuf = memalign(8, max_decomp_len);
++#endif
+ 			load = map_to_sysmem(loadbuf);
+ 		} else {
+ 			loadbuf = map_sysmem(load, max_decomp_len);
+@@ -2291,11 +2302,13 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 			return -ENOEXEC;
+ 		}
+ 		len = load_end - load;
++#ifndef USE_HOSTCC
+ 	} else if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
+ 		   ((uintptr_t)buf & 7)) {
+ 		loadbuf = memalign(8, len);
+ 		load = map_to_sysmem(loadbuf);
+ 		memcpy(loadbuf, buf, len);
++#endif
+ 	} else if (load != data) {
+ 		log_debug("copying\n");
+ 		loadbuf = map_sysmem(load, len);
+-- 
+2.43.0
+
