@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68DF4CFD376
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 08:53:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33CADCFD376
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 08:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFB8083E0F;
-	Tue,  2 Dec 2025 09:53:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9A08683E36;
+	Tue,  2 Dec 2025 09:59:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pFZmemT4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M7nnJzdx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2796F83E21; Tue,  2 Dec 2025 09:53:54 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 4320583E3A; Tue,  2 Dec 2025 09:59:18 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6BD583C39
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 09:53:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C83C583E28
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 09:59:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-78a6c7ac3caso55814317b3.0
- for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 00:53:51 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7c7aee74dceso1548179a34.2
+ for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 00:59:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764665630; x=1765270430; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZpfkI+xNVDWuPr1LZRyNOl633zCF32W58uV/RiPm3CQ=;
- b=pFZmemT4LMbMe+EIGYOk3wtLHlCM0ScIVpLfgqDs9nmosuisPZpl/2lmT2whO/ovNW
- 5Q5sDNoIXeT+/DnRZ7yOW4Rm5ZqwDQV45GvrmDtUw5OQTxtu8d+QI0Pot+hbnrRKDBE1
- 71NrUcNWI37H9v1xbCWA+XT68JHieFuLEFIkFrGy7QStoiX2fjN8e/c3++ncA17mSW5l
- x7jPn8EmuSYCq3meDpcFZ422YInrsS007DxrYJc3/ebY6gc/7t0boWX/gmmZBhJizAme
- s9uaCNt8tyWBlMmcY10Zi/pqfblLf2GLzWeFkAWucXa5nh5oAW/HYrd6h7SMAAVHPomU
- b0HQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764665630; x=1765270430;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1764665954; x=1765270754; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZpfkI+xNVDWuPr1LZRyNOl633zCF32W58uV/RiPm3CQ=;
- b=Wm4DLt7sv7xBaGY1KNQ7ZET4TLegaqp58Iprd/vj2BqKNc0fyvLiztns6qlIh9B30Q
- yAB/Hq6Jrh+yW9JOU4AwWQ8o2+yGrtk19C4OGqbqAigiWIEfk4lw9XPKIwjgrE+7eGg7
- WTHOSr15dcHiDEGtU4nktNMh5hM8WgzkDU/CUNkv7ukmwxJXGuqyp/cHiFStONKUx1Hf
- V4NIDXynuPX2+n/8XOYbAnACvYGn124Mm13LJQCgDdflYTsmn65T8x9RCu+hFLcNdDUi
- 8qFBr1vSvW092bavYsOpF7WapnEj2Snob4xiA/aWrCxClazw7dmz2+dP7AQ9gvSZLR8h
- oTTw==
+ bh=8LxPmZe0iRurDe7Q2ByPjx510TV5X/C0lgYvHwfmn/4=;
+ b=M7nnJzdxN4weKOBhdno+vugSKnbGC4BTtY1HmA3TPvD7OtxbFxZAkcugC1TzxT+Mb7
+ WcGshXF2aPH+01wl9bBT0gBrsKdwG46XHDIZLVwmZF762Iu9InOLMt/r0gvmozRE9VcJ
+ /TM0IMX+mHOKPkztHoi9zaNPgqJNc6HAtijnj4+5uqP7HV+F3NULOe799TE6ZHvd2DtV
+ YcrzSbN9lwK07roj8Xf3M2be7ptseOmZq1JAN3sP+tBj3p8xMjZl7kckT0+jgh3cayUo
+ eJwbvw8oyOb2H/5PtR1x0CAJdO7FWsT3MSIC2hObMzvpJueVBXOFYCVR1yHneldTHZ22
+ OcGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764665954; x=1765270754;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=8LxPmZe0iRurDe7Q2ByPjx510TV5X/C0lgYvHwfmn/4=;
+ b=v7XjFV5WMcVdiVp392AvJwTzA6cg+3ox4Eh0L8FkziwfR+0cJoWZBxhEGKpYM8c3xa
+ ScLlhn6N5bBE/RlfJ09NiPkWpR3EEfRai867P8O2TvO2ev0uxi6lXgMGD40j5IJIwVAa
+ uUwK9DMKpfdcWk5mdUv+9P7QD4BIEwbsRs/dQpADNm08gSZRRZ3oCyxvPyauhiRG0LhQ
+ FXPo0U1E/ToHTIe8CqV14/7FXQ4dEVa/v7XXfqsANAZVp1afBWOV65saGNbB4Tq1HNvF
+ ot5r2ZNP2y7MUMeo5MkdDaQBNKXDhZ93wJQzq57AE43Jkx+78nHrM4ekhH2eU6tOBdn0
+ yjeg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+G+9AwUOw6hUEMUgkIuB2O4dVgUUi1hHXM+40CCrX9X1DnmQOkZu9Ncll0nNh//ScnxNF9Qc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyt0dkVI9tnSU+n45n1j/1WR3kqL6U9E6yUj1N00ATqKuzh2G66
- IOgPSNnxILahnTPREvGpD8/BqE4LZaJlbRsoJJMVtZrxGCY0ISkqNN6Qhuz45/e8Af/qNIusDzI
- OhEKDkrVwCN+dtfYJx6GJtQIvUyry+MEMQxUx6sbfRA==
-X-Gm-Gg: ASbGncul6QCB51HRyeZQ42Ie8OnwRSGR4ZkZjLrc/kxP+0sSY2aF+wNpAMfQjOQqI3r
- HK22DLb92PIjdwlyZ0hbY8x5ArvJfGe6lQ5SIrQFhMiV7pzBYRPmtUl0fwSoUVtNL4NC6htsU6K
- u7DbDQ9+Y6qs3J059GahgSNC8leBOnMnBl5URonao0E1eXoT9jr4X089QAy9NHMQVpCjNPO4BSf
- yG+rzuz/TEnhconNRdnEOjK0ozkXGIr7vfJhkD5EmTy8nEQDR2h8YgpWNNYBsNieqE4qaZdC1Ta
- hLgS/fa4AnnHHALslJHkYKvXL0P9AmZTUEceyUkFeL141fcyjD2W2MFOfRbPpNF5z1vUbSCTgJ6
- XmTVNOhU=
-X-Google-Smtp-Source: AGHT+IGXBLzYs7RybDlOthXZ1biIZd8VThcRtlrH6EkMfqr9KvSSbnjGVQovwhzmMzre6sPtChR4wSoqBH8gTT8YcqU=
-X-Received: by 2002:a05:690c:e3e4:b0:787:e9f8:1869 with SMTP id
- 00721157ae682-78a8b454672mr321840667b3.10.1764665630500; Tue, 02 Dec 2025
- 00:53:50 -0800 (PST)
+ AJvYcCW8FWn6KeT+nhzD0EuDEHD3cxTjBvxWDat0imrKkIWlfzHuKC42Eeky6MBPdYzbCgJeM2HfjCg=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywz2mm3GPeWKvTzYQWk6TdotsP61c7cHVzQ/pUF3PajsAytueeP
+ XmI/NjFO1zjvRa5N4rjSUXY4kiDYGyMnnOi1TQvZELAAsS59TwzgLhgYtTYJpcbkNZORq3GP8it
+ j08tqJKdpp5uFwLla0PX7vxdvoL792WQ=
+X-Gm-Gg: ASbGncvOIi7p7WNORnYHVoos+4Whf8HY7p0NdjahcG7aUguTkEHLPyJkdyR5CQS2Zp0
+ g+Zf3HWb4ma1ManQrSaYHfqoil79sStJ4hMelCXttsWuw5IHlDYONqjFAqAehynPXSqYm82aGuG
+ BmWN1FO2lRH7h9l395dLgJuQu1SP8HKSpIicrlpYv+/NoTf5tzpMILtg/4VphTdY1XjZznJ9c+n
+ QSih5S90ShDIp73eNF2hUX7TVTcAI0Kt32/KK+DIPtlCQ2gvXXFQj0hdOdXtsEuW62KOUMs
+X-Google-Smtp-Source: AGHT+IF/TLMK2WIbaECKdKib5M3+Z+xSw1z0FTx3jIFkJyhLARdDWEOagsBjFQsM5KD8rJ9YQ9xm0KJ1ISq/pp2FLF8=
+X-Received: by 2002:a05:6830:44ac:b0:7b7:6e45:7f2c with SMTP id
+ 46e09a7af769-7c799098bbfmr17956288a34.30.1764665954542; Tue, 02 Dec 2025
+ 00:59:14 -0800 (PST)
 MIME-Version: 1.0
 References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
  <20251125081316.17329-3-alif.zakuan.yuslaimi@altera.com>
@@ -79,14 +78,15 @@ References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
  <20251128164957.GD2125796@bill-the-cat>
  <CAC_iWjLYvzHHJ+KYj68KWa=E+V3wc360HRf_dWCh7ny5bdEU9A@mail.gmail.com>
  <CAN7C2SAEZgm8KshbGU3d48U3w01vtG5zvbzZRbA_3tE5S0E+Lw@mail.gmail.com>
-In-Reply-To: <CAN7C2SAEZgm8KshbGU3d48U3w01vtG5zvbzZRbA_3tE5S0E+Lw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 2 Dec 2025 10:53:13 +0200
-X-Gm-Features: AWmQ_bniyfofmqGetnfKiN0Zc4yFIuhWz7sqBFOGyYYl-GT-Rs4PHsQ8IUTyY68
-Message-ID: <CAC_iWj+Jo1fP2ucXPY+q6+rFhHsT3PKz7H2J4dH-3cyAk01HEg@mail.gmail.com>
+ <CAC_iWj+Jo1fP2ucXPY+q6+rFhHsT3PKz7H2J4dH-3cyAk01HEg@mail.gmail.com>
+In-Reply-To: <CAC_iWj+Jo1fP2ucXPY+q6+rFhHsT3PKz7H2J4dH-3cyAk01HEg@mail.gmail.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Tue, 2 Dec 2025 16:59:03 +0800
+X-Gm-Features: AWmQ_bn84s1GBWRJ7MwgnHfsVAENrZ45VKhWTfkvTgfbsBAS0M04G38iDSQ8mKk
+Message-ID: <CAN7C2SDDAtxfDiHUac9q-WfB8jr_eRPDKcbfrtbcyXDbdV7_nw@mail.gmail.com>
 Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from empty
  built-in.a in SPL/TPL/VPL builds
-To: Sune Brian <briansune@gmail.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, 
  "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
  Marek Vasut <marek.vasut@mailbox.org>, 
@@ -95,6 +95,7 @@ Cc: Tom Rini <trini@konsulko.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
  Tien Fong Chee <tien.fong.chee@intel.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,36 +112,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[...]
-
-> >
-> > Ok, let me go through my irc logs in case I find it.
-> > Reading the email thread we should compile with anything > 8.1 right?
-> >
-> > Cheers
-> > /Ilias
+Ilias Apalodimas <ilias.apalodimas@linaro.org> =E6=96=BC 2025=E5=B9=B412=E6=
+=9C=882=E6=97=A5=E9=80=B1=E4=BA=8C =E4=B8=8B=E5=8D=884:53=E5=AF=AB=E9=81=93=
+=EF=BC=9A
+>
+> [...]
+>
 > > >
-> > > --
-> > > Tom
+> > > Ok, let me go through my irc logs in case I find it.
+> > > Reading the email thread we should compile with anything > 8.1 right?
+> > >
+> > > Cheers
+> > > /Ilias
+> > > >
+> > > > --
+> > > > Tom
+> >
+> > Hi llias and Tom,
+> >
+> > I have a question might be wrong or not even exist.
+> > Tom mentioned GCC 8.1 kbuild but u-boot is considered as
+> > kernel build or it does not always be that case?
 >
-> Hi llias and Tom,
+> We use the same Kbuild system as the kernel. I updated that a few
+> months ago since we where stuck on a really old version.
 >
-> I have a question might be wrong or not even exist.
-> Tom mentioned GCC 8.1 kbuild but u-boot is considered as
-> kernel build or it does not always be that case?
-
-We use the same Kbuild system as the kernel. I updated that a few
-months ago since we where stuck on a really old version.
-
+> >
+> > At least so fat there are nothing can build properly below 10.0.1
+> > Using ARM official cross compile binaries.
 >
-> At least so fat there are nothing can build properly below 10.0.1
-> Using ARM official cross compile binaries.
-
-I think I tested with gcc11, but I I don't remember testing with 8.x.
-I probably missed something on the backporting. I'll try having a look
-
-Cheers
-/Ilias
+> I think I tested with gcc11, but I I don't remember testing with 8.x.
+> I probably missed something on the backporting. I'll try having a look
 >
-> Thanks,
-> Brian
+> Cheers
+> /Ilias
+> >
+> > Thanks,
+> > Brian
+
+Thank you IIias I don't really know all the u-boot things.
+I had provided the first draft for fixing GCC check.
+https://patchwork.ozlabs.org/project/uboot/patch/20251202041029.186-1-brian=
+sune@gmail.com/
+Now it is on 10.0.1 if 8.1 is the case will update after your confirmation.
+
+Thanks,
+Brian
