@@ -4,146 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3AD3CFD376
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 05:36:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F8A8CFD376
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 05:56:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8983383DEC;
-	Tue,  2 Dec 2025 06:36:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id D294983DE9;
+	Tue,  2 Dec 2025 06:56:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Ngwqzpi+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="A+3YvO1G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5A8283C64; Tue,  2 Dec 2025 06:36:35 +0100 (CET)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
+ id AB88883DEA; Tue,  2 Dec 2025 06:56:39 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9532B83DE0
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 06:36:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E5CD483DE0
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 06:56:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ePWK8lbjG4FDMiSgs1oPXNXRkWFbw99jHfWBbBVd0H7GCQ9zZcqpbMDDurGg8UvAi7ytS9xKY5l5x4T3lMRTbUFOQnKaHvQJ1jeUNVrTkzqgHicsgCrYewEq1SNHLVf5Ish78dBGgv8z7fs/rlsEtEcFstdYO/l7ExnZOokFyewLUEy/+9m9hKRzon0lvhM2M7vq8DzDYwlA8N72LFhPwAmg3pa0sIPo+2rtoLs9Rx4tH5/+MOkPxXpZ2A89EoV36JHW9m/zQocKA5hAaBoH2xgzvoSQqBes3U8w1LlfgMx0v01p6WCScLAUjapdU/agtusr7W1TTqdiNBrOw6QCJw==
+ b=rfY0VkCdy1GfCb2UGgSY3TqppddoGkqHXLCr3BrErnsbVV9Ox/+tOQhkJ8xX3KKSFmMHP762NGKNRbFnnGfidpo9cHt1tuzU8w6uwDdGpAzAPyJDreCfk9b9+72aepf2QFOjx2wuHUI6+LJnwVlcPBE6+czXIIo8S3pIvSg77VXpgF7AcP/8O+6VyUM+m7ZqufCC5m1rJk9kc8hTIylpBoq0DFl6WEnPNkHSXMSov85/toDJb6l42+YlKxtsS2AUBU/aDJ9pjTJVYgV15ZQB48gi1dteeUbrfYGFJLPHW2jtc/7XL1ggRkYnbIm51huU8prnjZb8Az1wIwVbfRfAUA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UVnqgMAJCM4iY8KX0vXbS4LQfjBXvK9Xt8bPN0H/hvo=;
- b=uHsWRM/SrzTRCKu16YeukWuK/PA0DxYqpLjNXdqv/LOzzNyWuFkYYoIEAzTmstKnzyOsL6RPEEq2+PEfYedSORWFz6MSoOyj+Zu+Y/SqREef8CPDP9AHeDouxduhFmKkAnWrVWTRU3cUfTb2d4fs3F3E7i88MKGftvQDJOBmtT5mPZyDLZb/bM2QId9dgDeBD8xFk8cU59uNwaEAOdDjp+ZGCBhJg9z8OQToYHXoKdC4iqoD7vRT1FJ35pJY6mKKf0HzUMhHfLWqjlPNGINueL9NycVJGsJuUFyf4ETS9RsFG7ysp4lGtE9Sfkx5I7q2uYjmY6qNP7Wb8Hod488UtQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ bh=+muceaDEqqk2i0Ie2wChm98sklHaLsXI9dZVTKw5csM=;
+ b=U/mAMchgm5MorSdBjpckK7C6KsWb+FFcYOoxeicX6MrXEvKEtp8idDV+sHXAn70gklvFekpcTG8qn88EFUxkNeT8PqyMNhZeLXoiUwHXAND+PXqmCD6bgEApeZ+2vp+RD5WguDRe3yCi0clXsURZiMslx79lHfkPiVF/JPqqBrzoaN+lmd9BzPym+EpsC5Q9wivGc7P0kLsMWCVj+aASPqiywfD86/JDP4RL0CzG/y0arjxjuXP7H3jWDAIsiXMdRVSQOXMJMd2zQ/d3RSF7r6fhMLWpZJKE01pAobkyTqdD8jNj2wB3t/SqI7bh6YZYiGw0SbdOLcBkvKkqMPPFHw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UVnqgMAJCM4iY8KX0vXbS4LQfjBXvK9Xt8bPN0H/hvo=;
- b=Ngwqzpi+PUgszG9hIYlL0L7LUqehBnv0uZwpsbN0twUY1T/5UgR15QjBndrynVtBhdTXtpwUdqV8++ergxqYPiPmKeIGqZc4CluwWUibv7a7BoTTieNPKwIH5iawn8odjpTiLkZ8i5LpJ7na/JYhbq2VegRPWKLEAsL5UQQBUBFaVfUun7sN4aex6yH/vMuzfn7fGBwJJaI79mKBIoedhOFqkuOu1GQY4NFZkZFDOPT2E4+WHg4GirNh5k/zC4xv/owS79Pywm1/KCgbucqzv8Ap9lKAMUffYhvzneaMOnXKd9Tu51yUo/rj3ftH/6PBDHB0lXDJAiATl6QnWXN5nQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by IA1PR03MB8240.namprd03.prod.outlook.com (2603:10b6:208:5b3::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Tue, 2 Dec
- 2025 05:36:30 +0000
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::d020:3494:f031:fc29]) by PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::d020:3494:f031:fc29%6]) with mapi id 15.20.9388.003; Tue, 2 Dec 2025
- 05:36:30 +0000
-From: alif.zakuan.yuslaimi@altera.com
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Brian Sune <briansune@gmail.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [resend v2 0/1] Enable random MAC address on CycloneV
-Date: Mon,  1 Dec 2025 21:36:25 -0800
-Message-ID: <20251202053626.6446-1-alif.zakuan.yuslaimi@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BYAPR02CA0061.namprd02.prod.outlook.com
- (2603:10b6:a03:54::38) To PH7PR03MB7063.namprd03.prod.outlook.com
- (2603:10b6:510:2a4::6)
+ bh=+muceaDEqqk2i0Ie2wChm98sklHaLsXI9dZVTKw5csM=;
+ b=A+3YvO1GAQKDH/aimB6eHcQvN7gi01jeD6+cM58TmB4aoZJouNi7VNyskb4XrSonfX5O5sz4hgCLk1iuKywGVsAjGoOithtcAN/laSaNLXE966Nr3MhlDNdZnSRCZQIegI+C8zfFwhlbDliSQYSJMWbwIGCTLwEZaS2ygWjnzfM=
+Received: from SN6PR2101CA0002.namprd21.prod.outlook.com
+ (2603:10b6:805:106::12) by CH2PR10MB4245.namprd10.prod.outlook.com
+ (2603:10b6:610:7b::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Tue, 2 Dec
+ 2025 05:56:33 +0000
+Received: from SN1PEPF0002636A.namprd02.prod.outlook.com
+ (2603:10b6:805:106:cafe::43) by SN6PR2101CA0002.outlook.office365.com
+ (2603:10b6:805:106::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.9 via Frontend Transport; Tue, 2
+ Dec 2025 05:56:33 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SN1PEPF0002636A.mail.protection.outlook.com (10.167.241.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9388.8 via Frontend Transport; Tue, 2 Dec 2025 05:56:32 +0000
+Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
+ 2025 23:56:31 -0600
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 1 Dec
+ 2025 23:56:31 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 1 Dec 2025 23:56:31 -0600
+Received: from [172.24.234.212] (uda0510294.dhcp.ti.com [172.24.234.212])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B25uT5i1709120;
+ Mon, 1 Dec 2025 23:56:30 -0600
+Message-ID: <52e73f71-6c4d-4630-88f4-81de3fedaf83@ti.com>
+Date: Tue, 2 Dec 2025 11:26:29 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] configs: am571x_hs_evm_defconfig: Reserve EMIF memory
+ used by PPA
+To: Andrew Davis <afd@ti.com>, <trini@konsulko.com>
+CC: <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+References: <20251128150455.3279166-1-b-padhi@ti.com>
+ <c5f858f8-0eb3-4ff0-bc7b-6286a43c93da@ti.com>
+Content-Language: en-US
+From: Beleswar Prasad Padhi <b-padhi@ti.com>
+In-Reply-To: <c5f858f8-0eb3-4ff0-bc7b-6286a43c93da@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|IA1PR03MB8240:EE_
-X-MS-Office365-Filtering-Correlation-Id: c72a8d2a-1d06-4e09-ef7c-08de3164bef3
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002636A:EE_|CH2PR10MB4245:EE_
+X-MS-Office365-Filtering-Correlation-Id: de655bb9-760b-4ce3-bb5b-08de31678bc3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ZF69IvqlGnPrLG1gz72kY8SWfmPg97Z1A31d95DlRgo7iLIvHewqBJbvYKwI?=
- =?us-ascii?Q?xd8qQkFL6DeWsfCeVbG8NKGfLRTsk2BtcMwr3ryYILn/XEVxh+rtM40ZXZmm?=
- =?us-ascii?Q?LWwVH6ft2l7FGl8BGdAWHXaiuC74vpj5MSeDBYjIDEtTBK7CiaPGpbw1Gs6z?=
- =?us-ascii?Q?dYXRSYJuk/K0E/nO4/Z4AW7kssD54J6y1iHqEdiuCtquAQ5dWuSHNFApw0O+?=
- =?us-ascii?Q?GMaXq86K+qm8R6xw4Na89dpmTKItdkjN0xcRaWdBqQNS1bBoXy7y+ug6ZMuW?=
- =?us-ascii?Q?ndtiD3FOemGArSxv1t3EeYulAD9Tolf1aEo8YNQb1EIUTcwT39hTTYMn3NwW?=
- =?us-ascii?Q?TDt2VabRu358HE8uvbb3CMWrDXF2oeB8MoI11PPCcEyLdDl4Qqlap83B/9cn?=
- =?us-ascii?Q?OaBAiF/gWG8owc3trGBhFkpVnKdxknb2EGSUSHLEfFZ4PIflNuQEMIB1l2EI?=
- =?us-ascii?Q?VRd8IBiBbnN8nmW7VUgoAvH1geK3GO7AG51UvYDUDQxiP6m4uDxvaMv9ZAtN?=
- =?us-ascii?Q?53962Ab5R0GuIccWga6fCZb0HFRG2peN/sgrNtA9eUzjkRSct1qpkczKeQEF?=
- =?us-ascii?Q?Y12fVjrNHsaVAFCk0C0U2fbiAKJzcXg/iIBW1h1uCMIds8QnrLsWXT8WFmv3?=
- =?us-ascii?Q?EVTrkZrSsRPjC402kYuoabEZx/QIGyG19yVRk4qGtDE7BcSJOjD+SNIlHsIb?=
- =?us-ascii?Q?kAmc+F7xWVEnYsde2CKLhetFRZy1gsh76nwD/ASgdXReXDCRk8ogD65F+v+5?=
- =?us-ascii?Q?fQT8on2G91dsPqeM68r91SP2BiaYIPlUO4lA5SIhVJXwjxMaISfItw90kv80?=
- =?us-ascii?Q?zg6m/CkujeHi8HjFWCtH+5kH3MFcs+3tzHDBSDqIIMeHkhK8/3aiiR9wvWJs?=
- =?us-ascii?Q?VD2axw9EdOTOXwPca6tdOTGJ+BMhUIZFD6htn9Tn12IJVpuwHHKH/RdT0B2f?=
- =?us-ascii?Q?iovoxAE5wYW6R6lzObsrnCkCTPgeQ+4dx6K1f39zfBvApU8D2sDn4y+s2ZYN?=
- =?us-ascii?Q?kfMYVKDek4w/imUidNEaP6EMbQyCmwNNZeqPLLc+VjHb8XqCwF1CFrhDTkQy?=
- =?us-ascii?Q?7i6AoAEL1XJJF+lPlcQ1Vpszn7QER8F2Ljr13zntmvyZfTzFz7h/xw38k2Go?=
- =?us-ascii?Q?j5oNO+tBqKTmXTcWWTochHX4Cf3qGEy7On3BWJ5QLVJqs7qcebk5L3SnEMny?=
- =?us-ascii?Q?GeeB3GXVS+9OknhZyrUyC1ALDVAhPV0BUDhiNjBlEPS9Imjtu1zRbM8xbDSC?=
- =?us-ascii?Q?IzCh1TPJPCjVuhbFpZXdyq8cE/QNsUUfaBXnAwsUeG62F5l1YXUGkWmzJ+Eo?=
- =?us-ascii?Q?8Q8qQSeZZV45S1qM+K5mUGU1FJvLZ0RLXD88Tvgplhub6rzqN2iGKIHcfNO2?=
- =?us-ascii?Q?i5S9ejw0Gmsm/OuhdnvRvvd7pL2pX9prM2AobNXPNIGvqjaHfVeyePDTADg0?=
- =?us-ascii?Q?0mCGrcC4HEa5I38GLYdglIifp/OMHHyJOipkjxASrXGRV8187lAgpQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CRQQb/6UJ05XtqRjVCNeI4dvAbrCCcY1OJ1Ndq6G5EZ2U2O9BW8uHE1Rjkik?=
- =?us-ascii?Q?VKPNdmxFyyBirDnt6A2rkuUODLaE4FnSPue8wzMSPoCgtzu2VkbfFfTZxA0n?=
- =?us-ascii?Q?/MlTfnaTkXOK9t/gTQwk47p/X1dJcLS/Uq0Qn/w7UCNaKYjQFHFUmECGo9Pt?=
- =?us-ascii?Q?67lGyn8FlEESIdhZa12XUjRcmzTLKd8udfzMdpSBnqNpr5LRoIHolUngcdCp?=
- =?us-ascii?Q?qNpauQqiKTQsItlRsPNMIgV5nQzaT5f7sX8yLccgMPSUflnorRFeN6VHJwOY?=
- =?us-ascii?Q?LKSxerXv0RLC1ykZcAtcrH+XiXYFYXMSqj9WRsgR6BF5r737Ds3It+43DFiv?=
- =?us-ascii?Q?5LiZrd3A2UsrHPXFV7SLUrGcoG78357K+6HuffBfoYswXlsG/Cxd6VRlcQv8?=
- =?us-ascii?Q?2UKaQohrkW8fZEb1bubIlr2gTuIbyOqZADEiX1kkV8EQfJhSsahwG+nHB4xu?=
- =?us-ascii?Q?PNQsxX9QmqX6MFSpeB1VZ11iCfycEHVepe+yMdoeaTxih2TMAyIWLkqFthnV?=
- =?us-ascii?Q?1Rtsa2T36ov/QGmjXNw8l133zfm4ot5XUnWrCqP2UaJC4BUC8xnfPpYuyewp?=
- =?us-ascii?Q?RcP0si2EAs0lW6IMVwrrtOU6Qh9DIpm/269k5jXlpBxbebbPhsA6/XzeZ2RX?=
- =?us-ascii?Q?wOSoCTzhoTJDW6usI8lmWr3xlU11U8gDJUKaGcRQCk1rE5aBRSfRgt1Qo+oX?=
- =?us-ascii?Q?XU9d1oNIO8iMg5vmzz6YotN6UGyaHuCIbvcv1uyE7NxwR91qufnWSurJzwW8?=
- =?us-ascii?Q?3JERgnnOMmNJx7LVK0e/U5CSPJBrPlKX9gsq+N4izpAq7kEAigW6k5OWiwsZ?=
- =?us-ascii?Q?ooDiplWyGvKq+XNsY4JqbSI02klizF3etdEIeT+Rz2q7uYdetaLMTD1UfkWp?=
- =?us-ascii?Q?Iq0Pv5xMXdqB0NZTNnUOsn5cKqmdODUd7YjzwgbtgkdzcIQ0NYGPkZsnlWcI?=
- =?us-ascii?Q?qy0dBJkGwm8XS5updA1bpAr6Dm6aPUjdLh83xN8E3KLdTb+gvl4VT5t23EP3?=
- =?us-ascii?Q?P4IanW0a9KsvDbFGJ345FqNAQEF4jI5seQt4rEdWOSKBsyjR75hGBLNWW17q?=
- =?us-ascii?Q?047KLr5k4T+F6+7sbmYDW3LT4jiErutIyWTYkUdC/0509VA5BWsgcJ1hXVLg?=
- =?us-ascii?Q?+H2TqMjI7WHqc3Cv+IR/MNiOkBzde5CkusBbYGXjagLVKAttZwpUhcnPrRuB?=
- =?us-ascii?Q?NAI/+H+RPRZ0w20XyGzfpY/MbB1jDUUaZLv0vGnE1I4qxuilT0jwEvP0eTWw?=
- =?us-ascii?Q?43Cc+12NO3p1UvjzJdROUx6JYffHR5k0J3aI1kiGPO3qtv8/WLGxVWzQrku7?=
- =?us-ascii?Q?UqIgbJx4AULnJwxcapGULkMNBjTnQkVyyPinGO8JnM9GylcP759uxkMl+ggn?=
- =?us-ascii?Q?p9aFfl+Hjh1rY6HjsIME0Y4GCPG56VYGSyvvIbfqsBndpS8DsIYnDksAkbiV?=
- =?us-ascii?Q?iEJ10mWJjRgp2yU3hhFdjf23/pVJiA0ZxyenhugkadnNN9CRoldXOm7F3BPL?=
- =?us-ascii?Q?qlqFTCnBs3LUF+9dknwWMBbXJzBYS9m1k7D3BhHIn9BCMYgvnTtRam5nrIcM?=
- =?us-ascii?Q?wC76inG6dZUAYtvjZ1+Mbl3DEe2t1qPf/xQ2AIz6WuWi/lbPS3QvPOAZFOBN?=
- =?us-ascii?Q?wg=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c72a8d2a-1d06-4e09-ef7c-08de3164bef3
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2025 05:36:30.5104 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /mazhnmalI3geOiIAzGsco+TltYgpx6rJ3TkLBC+PRhLtLRBCYtI59C8FL+cJqg3mA3SssHj7JdfsM9c0+IgEfRetcBDBm+4wgi3e79t1z4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR03MB8240
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?OVhJM3lPY3hTSFZsckJtbDYyN0tidzFaaHBpalYyZmREUlJuK0RGR3UxTTJt?=
+ =?utf-8?B?R3Yxa0hhbnVSSktseG0rQXlXTE5tS1Y4UDlzbkh5cEkvRUxFWEYxOEVVQnFs?=
+ =?utf-8?B?aEZ4K2JpaGZmUG5CZFE5eWdvclpVdHNEQzJOL3N6aDdvU00wOWNucTFCeTA3?=
+ =?utf-8?B?UEl4TCtnMXB1K3lIZldna0ZaU0JQZTVGODFXcGM0c21UT051aGJvNW9nUHpS?=
+ =?utf-8?B?MFROWFl0TEpFbTlKMDhQdEQwUGZJMTkxM0lDUXFHMmJVc0pnOGlvTUt0WklU?=
+ =?utf-8?B?Q1IwN0pvNTNXUlcvbHVjenV5TlNRbjJjMWxpRWlYOWZKYXNxK1crV3o4TmRv?=
+ =?utf-8?B?TkpoZ0JFTVdqNzRiN1RvZjlIamNNVkdCZTVTTWtCREJsY1NTUTkwVHpNSU9u?=
+ =?utf-8?B?aFBvK1gyWk9mVDVvaEkveUI0RkJFWlZXeXVQazJnM3NiK2pOdFdNNzBKdEN0?=
+ =?utf-8?B?bVlPaEtTWHRwd3NBdDNZZk5TK242L1lFYlpGNDdDc0p4Wmk3NWwvbzFzNFpZ?=
+ =?utf-8?B?UDJJMEoyMytwcGRyNVA5RWNBeG9leVJzWjlhZmcyc3l0SmhoUG5vSHBGSnl5?=
+ =?utf-8?B?cXZtL25Jc0xORG0vRW1SVTdJWUdMZE9IUW9RNFM5SlJtVkg2L0hnMnBZL2RI?=
+ =?utf-8?B?dCtXa0RUOUZsYktMTjdyV3BuQWxId3RIQ1JmTFErd3ZOUGJFS2tSVVJXd0Zw?=
+ =?utf-8?B?Njl6NGpwdnlFZTNJVGphdkwxL2NVRkdsREZjUWpSdlVIWGJySk1kU0Z5Y0Z1?=
+ =?utf-8?B?eWRmODF5NjFEd2phQ0VDTE0zbjE3Sm9nT2t0d2E3Z2RxazJieE14Si9pcXZv?=
+ =?utf-8?B?NE5YQW93aFhWamVlZWRCQzNQeG02dS9uTHZKQXM0Z0d5dnFLdmtpUXFBdDgx?=
+ =?utf-8?B?bGVzYjYzRnA1OERZWUxUNFJqYU1YeEloRWFBblhnaUNhbUVSdGo3cjlpci9s?=
+ =?utf-8?B?Rm10Z1d5citSbmRhZUxaN2czL2ZJNUErTDNtalRjdkxrcWVPVVRqRVl1V1Zs?=
+ =?utf-8?B?bDA1RkpmWk1uMm85SEwvRytjSzB0UkF0bGtvZXJmRTB3ZkR4RnRaaVJaQi8y?=
+ =?utf-8?B?OFpUMEVoenhrVkxoS21ySHFZbHorRmNuK2RPazhUdTVlWU9EazlvVEtrK2JZ?=
+ =?utf-8?B?c3FydUVGdHllL2Uzd29kL3BNM1hnM29rcG9yVGRrTFNCY1ZEUnkvRXN3bnRx?=
+ =?utf-8?B?VS9Ka201WGtDYTVwR3FtTUQzU1R1UTdmTTBwQTFBeVhMTUZkWWNrdmZBYWY0?=
+ =?utf-8?B?d2J4TXRmdjI1TjlVdGdwWUZqQUthRE0zNHFPTGdwcmNhY2R1RHJZbkkyUW1I?=
+ =?utf-8?B?aDROazd1L2dMd2pGWU5qdFNuTTIvVmhpSkRLMklaTXZPY0thYXpZMk5kUUFM?=
+ =?utf-8?B?eld2MHdnUFVSSmpSRldUajFMZFc3V1VBTXY0ZHoxZU10ZU5vdXplU1ZwUEpv?=
+ =?utf-8?B?U3VSTWk3SENwK3NxQXp4aTdHaTVrOHB1YlMrSW8xa1lYaXNwUlJzTFFrZVN2?=
+ =?utf-8?B?Q2cyanExYTZFT296TmRBTldaRXQ1MFhHVW5uTXZ4aXBOc3AwY3FXSVZrM1NW?=
+ =?utf-8?B?YjAxVjlzSW14aXNIYzJ3a2pFQTQ0NlJGbmVPWXVuMWpxek5xR3Q3VklwWHBP?=
+ =?utf-8?B?dWZrcDZIa3RkcDdocmJDVXFRV2xHaVh5Y0ZqeDA3aHVQOGtlajdTL1puTEFl?=
+ =?utf-8?B?MkJGR3NBTDMycXUrWkl0ejZnNVEzUlJrYS8wcXVPTW9BMk1acFpKNDBXdlIv?=
+ =?utf-8?B?UTZ5TzA5anBCMWd0S0tTdDFlOUF2cFgzaldlTUxDazFFUHFmVTlWS1B2bHJF?=
+ =?utf-8?B?Z2NoMnAvTE9iU1R5dlg2WDd4QUZpWS9lYWx3R1RWcExOc1JqYkNwTlFrNXpu?=
+ =?utf-8?B?YThyTnJTYVRmL0NjclN3c2hjcWdETFA2dnVlMy9qNWZyMUxXOUIyenYrSURt?=
+ =?utf-8?B?VnJLS0hXZlUwUzZvdGxtMXhoN2c5OFBnd2dSdjVWMC84dnFwWG1SS1pxV1F4?=
+ =?utf-8?Q?8ACg0NihH8Gi+bSP6AOB8VJRQp3pxo=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2025 05:56:32.8653 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: de655bb9-760b-4ce3-bb5b-08de31678bc3
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636A.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR10MB4245
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,31 +164,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Enable CONFIG_NET_RANDOM_ETHADDR to allow U-Boot to assign a random MAC
-address during Ethernet initialization when a valid MAC is not programmed
-in hardware.
+On 02/12/25 00:58, Andrew Davis wrote:
+> On 11/28/25 9:04 AM, Beleswar Padhi wrote:
+>> The AM571x SoC has 1 GB DDR space. As part of normal re-location process
+>> U-Boot copies itself to the top of DDR bank. However, on HS devices, the
+>> top 37 MB is used by PPA and is firewalled. This results in an exception
+>> and the boot fails.
+>>
+>> Introduce a new defconfig for AM571x HS platforms and set
+>> CONFIG_SYS_MEM_TOP_HIDE to reserve the top 38 MB memory (aligned to 2MB
+>> as per page size for ARM32) for the same.
+>>
+>
+> This "SYS_MEM_TOP_HIDE" looks new, for other OMAP-class HS devices we
+> use "CFG_PRAM"[0], seems these two configs do the same thing, could probably
+> combine them in some way..
+>
+> As CFG_PRAM is set based on TI_SECURE_EMIF_TOTAL_REGION_SIZE which is 32MB
 
-This avoids network initialization failures and MAC address conflicts,
-especially on boards used for development or shipped without a
-factory-programmed MAC.
 
-v1->v2:
---------
-- Updated commit message with more details
-- Removed duplicated CONFIG_DM_RESET=y
+CFG_PRAM is only set if TI_SECURE_EMIF_REGION_START is not set, but we
+have it set it to 0xbdb00000 in the am57xx_hs_evm_defconfig.
 
-History:
---------
-[v1]: https://patchwork.ozlabs.org/project/uboot/patch/20251125081316.17329-4-alif.zakuan.yuslaimi@altera.com/
+https://github.com/u-boot/u-boot/blob/master/include/configs/ti_omap5_common.h#L75-L81
 
-Alif Zakuan Yuslaimi (1):
-  configs: cyclone5: Enable random MAC address
+> for all other AM57x, why is this needed only for AM571?
 
- configs/socfpga_cyclone5_defconfig | 1 +
- 1 file changed, 1 insertion(+)
 
--- 
-2.43.7
+Other AM57x boards have >1 GiB DDR. So, the top of DDR space does not
+intersect with the firewalled EMIF region (0xbdb00000). Only in case of
+AM571x, the top of DDR collides with firewalled region, so boot fails while
+doing reloc.
 
+> We build for all
+> the AM57x with one defconfig, so this new defconfig will go unused. Just set
+> the default CFG_PRAM size to 64MB (same as AM43x), 
+
+
+I am guessing all AM43x devices have the same amount of memory unlike
+AM57x devices? If we set CFG_PRAM to 38MB by default, won't we lose out
+that memory on other devices which do not face this limitation?
+
+Thanks,
+Beleswar
+
+> should be enough for all
+> and doesn't hurt to have more than needed reserved to be safe.
+>
+> Andrew
+>
+> [0] https://github.com/u-boot/u-boot/blob/master/include/configs/am43xx_evm.h#L153
+>
+>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>> ---
+>> Fix boot for TI AM571x HS EVM board
+>> v2: Changelog:
+>> 1. Drop [PATCH v1 2/2] in v2 series. There is no need to add reserved
+>> memory node in DT as it is done by U-Boot as part of FDT fixups
+>> https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-omap2/fdt-common.c#L72-L107
+>> 2. Add entry in MAINTAINERS for new config.
+>> 3. Update commit message to use memory size in MB than raw hex bytes
+>>
+>> Link to v1:
+>> https://lore.kernel.org/all/20251128064353.1295063-1-b-padhi@ti.com/
+>>
+>> Test logs:
+>> https://gist.github.com/3V3RYONE/e86b3f4551986b0400d0e0f66d6ecc66
+>>
+>>   MAINTAINERS                     | 1 +
+>>   configs/am571x_hs_evm_defconfig | 3 +++
+>>   2 files changed, 4 insertions(+)
+>>   create mode 100644 configs/am571x_hs_evm_defconfig
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index b43dae882b3..e5d564cd760 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -1780,6 +1780,7 @@ F:    configs/am335x_hs_evm_spi_defconfig
+>>   F:    configs/am335x_hs_evm_uart_defconfig
+>>   F:    configs/am43xx_hs_evm_defconfig
+>>   F:    configs/am43xx_hs_evm_qspi_defconfig
+>> +F:    configs/am571x_hs_evm_defconfig
+>>   F:    configs/am57xx_hs_evm_defconfig
+>>   F:    configs/am57xx_hs_evm_usb_defconfig
+>>   F:    configs/dra7xx_hs_evm_defconfig
+>> diff --git a/configs/am571x_hs_evm_defconfig b/configs/am571x_hs_evm_defconfig
+>> new file mode 100644
+>> index 00000000000..7e44ee5221a
+>> --- /dev/null
+>> +++ b/configs/am571x_hs_evm_defconfig
+>> @@ -0,0 +1,3 @@
+>> +#include <configs/am57xx_hs_evm_defconfig>
+>> +
+>> +CONFIG_SYS_MEM_TOP_HIDE=0x2600000
+>
