@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05AB5CFD2F6
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 06:59:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 263F7CFD2F6
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 07:03:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E39F83DFF;
-	Tue,  2 Dec 2025 07:59:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 468B483E13;
+	Tue,  2 Dec 2025 08:03:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=icenowy.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="XAtMRDZ4";
+	dkim=pass (2048-bit key; unprotected) header.d=icenowy.me header.i=uwu@icenowy.me header.b="aMYs0trM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3825783E0E; Tue,  2 Dec 2025 07:59:41 +0100 (CET)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 115F383E16; Tue,  2 Dec 2025 08:03:41 +0100 (CET)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25D5183DE0
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 07:59:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F55483E0F
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 08:03:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mk7.kang@samsung.com
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20251202065933epoutp0181336eb298c29702b53cdba83e29e572~9U84hG0EL2628526285epoutp016
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 06:59:33 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20251202065933epoutp0181336eb298c29702b53cdba83e29e572~9U84hG0EL2628526285epoutp016
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1764658773;
- bh=SIOSeyuyovyamwWhaZ7bJfAxj4Ff3q+5UfD3+4780AA=;
- h=From:To:Subject:Date:References:From;
- b=XAtMRDZ4CuwtPeubXC4D9cZcgc5qr5uA7ru2ZA46M3paWDbCkfF1+yMhM1phcg/qR
- sEpOOSBJsSpnpD8avLIfFDCQ+Dp4wte2NzGEJPlNcVrkprU/NArAVYJuXY4JxHfbIh
- T1ZjsE7tlc+caEFZSe/YUHi/Nm1rBLmfGn7hOx6w=
-Received: from epsnrtp04.localdomain (unknown [182.195.42.156]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPS id
- 20251202065933epcas1p322ca54b81b654d0afa6266b9ba3f94b0~9U84V_3qI1902519025epcas1p3y;
- Tue,  2 Dec 2025 06:59:33 +0000 (GMT)
-Received: from epcas1p3.samsung.com (unknown [182.195.38.191]) by
- epsnrtp04.localdomain (Postfix) with ESMTP id 4dLBTd0fRfz6B9mL; Tue,  2 Dec
- 2025 06:59:33 +0000 (GMT)
-Received: from epsmtip2.samsung.com (unknown [182.195.34.31]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20251202065932epcas1p317a2fa75a3b16a4984a0c0bdf0515b5a~9U83buK7N2126121261epcas1p3J;
- Tue,  2 Dec 2025 06:59:32 +0000 (GMT)
-Received: from mk7kang01 (unknown [10.88.105.222]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20251202065932epsmtip23d107bc1abcb2fa3bf3118b29f6764b8~9U83Z9zEe1728217282epsmtip2E;
- Tue,  2 Dec 2025 06:59:32 +0000 (GMT)
-From: "Minkyu Kang" <mk7.kang@samsung.com>
-To: "'Tom Rini'" <trini@konsulko.com>, <u-boot@lists.denx.de>
-Subject: please pull u-boot-samsung master
-Date: Tue, 2 Dec 2025 15:59:32 +0900
-Message-ID: <0cdd01dc6359$36177b60$a2467220$@samsung.com>
+ dmarc=pass (p=none dis=none) header.from=icenowy.me
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=uwu@icenowy.me
+ARC-Seal: i=1; a=rsa-sha256; t=1764659013; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=jYaVOoQcwXZ4hPM9ahaKkY5yBkuChJejUy0Tq20CBXE6Obi7ovxLx2Yo5sj4494Iu8Y9ZC0mZfqgFLEsGEf/Ig+TiN+SbX7tGiyObhEN7zNVHWJlqiU9eI4QeO4MdsIVoMdCm4rxN4sCGEUcyxJ0mSe9dOIJxn/UpSCIaLnrd1I=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1764659013;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=6RbW+AwoVKUTOjAHtqb9Xx3G2Nq7g+CGbbKMVRQxy14=; 
+ b=D4dN/r2oyLDfiRyhljnjdQ6vds2mecUUwMxU0/4tRfBzXG6YBFajs/+NQaiRZapNFEi0Tz5o5xaU2SkGuEvv35OaFcJREEXnSmoQQlzqElIoicBZOpC/4uLAYO/jnMy2bzFc1qJ7LWZ25kPOSsAmNDDxrnEYicGHQHfYkGbFbpQ=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=icenowy.me;
+ spf=pass  smtp.mailfrom=uwu@icenowy.me;
+ dmarc=pass header.from=<uwu@icenowy.me>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1764659013; 
+ s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
+ h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
+ bh=6RbW+AwoVKUTOjAHtqb9Xx3G2Nq7g+CGbbKMVRQxy14=;
+ b=aMYs0trMF94DkQXIMvuKnbhlNSi23kyjMsZPq0ZZzVp0v3VLm5jOZ4K8qvbtDiTe
+ BeH4YZuHQIBmYb1VomhLspcxIhKc4AerVDYcICXccTojCA9qJefou3NyYQSylpi4Nut
+ pJPYXyq/ihbbwr/nSBm2DilriwtzDzk224qqtZlVE2+c34t/M2DbSOKaUb9NhIqvaOG
+ Uu1A2roCDzz/X0F5OaE13+ZrZsaY/lqIHR8QmKnsdkqNKbCjkUuw6Cs1Uv89zNwzKya
+ qbtz7Jruq80+Lzp58wZkcu8Jg5jFA1ap3nvzxA3YcQ8Fan0kD9jhUay5EY5bfOqYFCf
+ i7StLLvP1A==
+Received: by mx.zohomail.com with SMTPS id 1764659010069788.0144757490406;
+ Mon, 1 Dec 2025 23:03:30 -0800 (PST)
+Message-ID: <ae7181d47cdec3deca43d19b899ba27acddfa982.camel@icenowy.me>
+Subject: Re: [PATCH 1/2] RISC-V: implement private GCC library
+From: Icenowy Zheng <uwu@icenowy.me>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: E Shattow <e@freeshell.de>, Hal Feng <hal.feng@starfivetech.com>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>, Minda Chen
+ <minda.chen@starfivetech.com>, u-boot@lists.denx.de, Yao Zi
+ <ziyao@disroot.org>, Rick Chen <rick@andestech.com>, Leo
+ <ycliang@andestech.com>
+Date: Tue, 02 Dec 2025 15:03:24 +0800
+In-Reply-To: <0fb06358-cbed-4613-b9fd-b21962b2c0be@canonical.com>
+References: <20251201174904.652954-1-heinrich.schuchardt@canonical.com>
+ <20251201174904.652954-2-heinrich.schuchardt@canonical.com>
+ <aS5jmyp_VanBqY6h@pie>
+ <33d528eff4e6453fdd8d442866e6af2544c7c9ad.camel@icenowy.me>
+ <0fb06358-cbed-4613-b9fd-b21962b2c0be@canonical.com>
+Organization: Anthon Open-Source Community
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AdxjWTW4vb10q4aTTBWAc3UIFUhLRA==
-Content-Language: ko
-X-CMS-MailID: 20251202065932epcas1p317a2fa75a3b16a4984a0c0bdf0515b5a
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-cpgsPolicy: CPGSC10-702,Y
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20251202065932epcas1p317a2fa75a3b16a4984a0c0bdf0515b5a
-References: <CGME20251202065932epcas1p317a2fa75a3b16a4984a0c0bdf0515b5a@epcas1p3.samsung.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,105 +87,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+=E5=9C=A8 2025-12-02=E6=98=9F=E6=9C=9F=E4=BA=8C=E7=9A=84 07:15 +0100=EF=BC=
+=8CHeinrich Schuchardt=E5=86=99=E9=81=93=EF=BC=9A
+> On 12/2/25 06:28, Icenowy Zheng wrote:
+> > =E5=9C=A8 2025-12-02=E6=98=9F=E6=9C=9F=E4=BA=8C=E7=9A=84 03:57 +0000=EF=
+=BC=8CYao Zi=E5=86=99=E9=81=93=EF=BC=9A
+> > > On Mon, Dec 01, 2025 at 06:49:03PM +0100, Heinrich Schuchardt
+> > > wrote:
+> > > > The following functions are provided:
+> > > >=20
+> > > > Count leading zero bits
+> > > >=20
+> > > > * int __clzsi2 (unsigned int a)
+> > > > * int __clzdi2 (unsigned long a)
+> > > > * int __clzti2 (unsigned long long a)
+> > > >=20
+> > > > Count trailing zero bits
+> > > >=20
+> > > > * int __ctzsi2 (unsigned int a)
+> > > > * int __ctzdi2 (unsigned long a)
+> > > > * int __ctzti2 (unsigned long long a)
+> > > >=20
+> > > > Signed-off-by: Heinrich Schuchardt
+> > > > <heinrich.schuchardt@canonical.com>
+> > > > ---
+> > >=20
+> > > I noted there's another series with the same subject[1] sent
+> > > almost
+> > > at
+> > > the same time, and I couldn't tell the difference at the first
+> > > glance.
+> > > Is this an incident?
+> > >=20
+> > > > =C2=A0=C2=A0arch/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
+> > > > =C2=A0=C2=A0arch/riscv/lib/Makefile |=C2=A0=C2=A0 2 +
+> > > > =C2=A0=C2=A0arch/riscv/lib/clz.c=C2=A0=C2=A0=C2=A0 | 105
+> > > > ++++++++++++++++++++++++++++++++++++++++
+> > > > =C2=A0=C2=A0arch/riscv/lib/ctz.c=C2=A0=C2=A0=C2=A0 |=C2=A0 95
+> > > > ++++++++++++++++++++++++++++++++++++
+> > > > =C2=A0=C2=A0lib/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 2 +-
+> > > > =C2=A0=C2=A05 files changed, 204 insertions(+), 1 deletion(-)
+> > > > =C2=A0=C2=A0create mode 100644 arch/riscv/lib/clz.c
+> > > > =C2=A0=C2=A0create mode 100644 arch/riscv/lib/ctz.c
+> > > >=20
+> > > > diff --git a/arch/Kconfig b/arch/Kconfig
+> > > > index 3133f892f94..4af0da2485f 100644
+> > > > --- a/arch/Kconfig
+> > > > +++ b/arch/Kconfig
+> > > > @@ -159,6 +159,7 @@ config PPC
+> > > > =C2=A0=C2=A0config RISCV
+> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bool "RISC-V =
+architecture"
+> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0select CREATE=
+_ARCH_SYMLINK
+> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0select HAVE_PRIVATE_LIBG=
+CC if 64BIT
+> > >=20
+> > > Are 32-bit platforms excluded for lacking of enough library
+> > > functions?
+>=20
+> Yes. See=20
+> https://lore.kernel.org/u-boot/20251201174904.652954-1-heinrich.schuchard=
+t@canonical.com/T/#mbf44c9f5073649bbf2e1368ffbeaec82680a268d
+>=20
+> > > Should we exclude !RISCV_ISA_F || !RISCV_ISA_D platforms as well?
+> > > Though
+>=20
+> libgcc.a as provided by distros assumes that you have the D and F=20
+> extensions. Either a specific libgcc.a will be needed or we will have
+> to=20
+> implement the missing functions in the private lib if such platforms.
+>=20
+> It would make more sense to set CONFIG_USE_PRIVATE_LIBGCC=3Dn for such=
+=20
+> platforms than setting CONFIG_HAVE_PRIVATE_LIBGCC=3Dn.
+>=20
+> Which way we want to go can be decided when such platforms arrive.
+>=20
+> > > there's no in-tree 64-bit port without F/D extension.
+> >=20
+> > The S7 core in U74-MC complex seems to have only IMAC, no F/D.
+> The S7 core is not supported by U-Boot.
 
-The following changes since commit caa740df9cae5ddc74b18b88a4fea43e27b2fdf6:
+Well at least SPL is run on the S7 cores, although the SBI should keep
+the S7 core from being running main U-Boot.
 
-  Gitlab: Optimize the job dependency list more (2025-11-11 11:55:16 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-samsung.git master
-
-for you to fetch changes up to 422b15bb5b693376e345d3f32d7cec4588f3bfba:
-
-  doc: samsung: exynos-mobile: add documentation for exynos7870 (2025-12-02
-13:38:28 +0900)
-
-----------------------------------------------------------------
-Kaustabh Chakraborty (14):
-      clk: exynos: provide device pointer to clk_register_* functions
-      clk: exynos: add support for fixed rate and fixed factor clocks
-      clk: exynos: add support for PLL1417X
-      clk: exynos: add function for Samsung CMU ops->request
-      clk: exynos: add support for Exynos7870 CMU
-      clk: use private clk struct to access clock flags
-      pinctrl: exynos: bind GPIO driver along with pinctrl
-      pinctrl: exynos78x0: add proper support for exynos7870 pinctrl
-      serial: s5p: add compatible for exynos8895
-      soc: exynos-pmu: add support for Exynos7 PMU
-      gpio: s5p: increment bank base address only if bank is initialized
-      board: samsung: add support for Samsung Exynos mobile device boards
-      board: samsung: exynos-mobile: add exynos7870 support and three
-devices
-      doc: samsung: exynos-mobile: add documentation for exynos7870
-
-Sam Protsenko (6):
-      board: samsung: e850-96: Keep public functions together
-      board: samsung: e850-96: Add routines for checking boot dev
-      board: samsung: e850-96: Split LDFW loading and init
-      board: samsung: e850-96: Add routine for loading images over USB
-      board: samsung: e850-96: Load firmwares over USB on USB boot
-      board: samsung: e850-96: Enter DFU automatically on USB boot
-
-Tom Rini (1):
-      s5p4418_nanopi2: Stop disabling device tree relocation
-
- arch/arm/mach-exynos/Kconfig                        |  11 +-
- board/samsung/e850-96/Makefile                      |   2 +-
- board/samsung/e850-96/bootdev.c                     |  99 +++++++++
- board/samsung/e850-96/bootdev.h                     |  23 ++
- board/samsung/e850-96/e850-96.c                     |  71 +++++--
- board/samsung/e850-96/fw.c                          |  76 +++++--
- board/samsung/e850-96/fw.h                          |  10 +-
- board/samsung/exynos-mobile/Kconfig                 |  18 ++
- board/samsung/exynos-mobile/MAINTAINERS             |   6 +
- board/samsung/exynos-mobile/Makefile                |   5 +
- board/samsung/exynos-mobile/debug-exynos7870.config |   7 +
- board/samsung/exynos-mobile/exynos-mobile.c         | 403
-+++++++++++++++++++++++++++++++++++
- board/samsung/exynos-mobile/exynos-mobile.env       |  18 ++
- configs/exynos-mobile_defconfig                     |  72 +++++++
- doc/board/samsung/exynos-mobile.rst                 |  45 ++++
- doc/board/samsung/exynos-mobile/exynos7870.rst      |  85 ++++++++
- doc/board/samsung/index.rst                         |   1 +
- drivers/clk/clk-uclass.c                            |   6 +-
- drivers/clk/exynos/Kconfig                          |   7 +
- drivers/clk/exynos/Makefile                         |   1 +
- drivers/clk/exynos/clk-exynos7870.c                 | 929
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-++++
- drivers/clk/exynos/clk-pll.c                        |   4 +-
- drivers/clk/exynos/clk-pll.h                        |   4 +-
- drivers/clk/exynos/clk.c                            |  99 +++++++--
- drivers/clk/exynos/clk.h                            |  53 +++++
- drivers/gpio/s5p_gpio.c                             |   5 +-
- drivers/pinctrl/exynos/pinctrl-exynos.c             |  11 +
- drivers/pinctrl/exynos/pinctrl-exynos.h             |   1 +
- drivers/pinctrl/exynos/pinctrl-exynos7420.c         |   1 +
- drivers/pinctrl/exynos/pinctrl-exynos78x0.c         |  60 ++++++
- drivers/pinctrl/exynos/pinctrl-exynos850.c          |   1 +
- drivers/serial/serial_s5p.c                         |   1 +
- drivers/soc/samsung/exynos-pmu.c                    |   3 +
- include/configs/exynos-mobile.h                     |  14 ++
- include/configs/s5p4418_nanopi2.h                   |   1 -
- 35 files changed, 2089 insertions(+), 64 deletions(-)
- create mode 100644 board/samsung/e850-96/bootdev.c
- create mode 100644 board/samsung/e850-96/bootdev.h
- create mode 100644 board/samsung/exynos-mobile/Kconfig
- create mode 100644 board/samsung/exynos-mobile/MAINTAINERS
- create mode 100644 board/samsung/exynos-mobile/Makefile
- create mode 100644 board/samsung/exynos-mobile/debug-exynos7870.config
- create mode 100644 board/samsung/exynos-mobile/exynos-mobile.c
- create mode 100644 board/samsung/exynos-mobile/exynos-mobile.env
- create mode 100644 configs/exynos-mobile_defconfig
- create mode 100644 doc/board/samsung/exynos-mobile.rst
- create mode 100644 doc/board/samsung/exynos-mobile/exynos7870.rst
- create mode 100644 drivers/clk/exynos/clk-exynos7870.c
- create mode 100644 include/configs/exynos-mobile.h
-
-Thanks,
-Minkyu Kang.
-
-
+>=20
+> Best regards
+>=20
+> Heinrich
+>=20
+> >=20
+> > >=20
+> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0select HAVE_S=
+ETJMP
+> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0select HAVE_I=
+NITJMP
+> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0select SUPPOR=
+T_ACPI
+> > >=20
+> > > Regards,
+> > > Yao Zi
+> > >=20
+> > > [1]:
+> > > https://lore.kernel.org/u-boot/20251201174705.652626-1-zfsdt@canonica=
+l.com/
+> >=20
+>=20
 
