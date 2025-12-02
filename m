@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7E9D11707
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 16:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFA23D1171E
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 17:28:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CD1883E8A;
-	Tue,  2 Dec 2025 17:22:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C103F83E85;
+	Tue,  2 Dec 2025 18:28:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BXVlD+3/";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="K6B0lHB7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E15283E8E; Tue,  2 Dec 2025 17:22:56 +0100 (CET)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 87B8E83E9A; Tue,  2 Dec 2025 18:28:51 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF58183C01
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 17:22:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E16E283E85
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 18:28:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-3ec3cdcda4eso4027904fac.1
- for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 08:22:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764692572; x=1765297372; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=QH/PPYzKRHNRyhJkfqjpkhnBufLbc/qVzXgfynxMoxo=;
- b=BXVlD+3/2ACikfAYo1QEpHHWj/+NAbQoKIill3sQBEaUyuUGpVvCcV5/ENMbXh2mEy
- 6C0873+SIaxL8Wy4Hwh3hf0ePFLQAy+o3CLKSS2jQmTzpgCSzm1D1NsZwO8V4rGbSQoW
- ER5wLn9bmynoqYpNjgocsVc0k7/RKPKu+h+Ws=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764692572; x=1765297372;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QH/PPYzKRHNRyhJkfqjpkhnBufLbc/qVzXgfynxMoxo=;
- b=eJB9DfYYkuV3Z3KaiFM6VLWvp/viwJ/y+gF5yiitOU04Tl6vqbJIFZTJriuwylw1Ez
- w6v8gAJSJ1O/2vTZfKa6fdxrv+vBSCMgVWGJVoOQ8uA40bwKpvy5Xb8xNeblTrwgePVj
- sSmHaq2K2rvdkaJC9X7P9BTJ7BtU+IUt6XJofTHzBVPaG/semco1VmoQtg5WUevudRyQ
- byiPC9UPZd2yPoE0AK+qRh2pLSDXL7Byn0ORCqW4wQic6M3I3F6q9SsN2oJnQt/zkIZM
- /VLeSv3o9gZRBPe1BCeKg/9+gkVC9OAC1H6vPrEZBPhq7bESrl/PV0glFXybAI/1C0mr
- 19Uw==
-X-Gm-Message-State: AOJu0YxJ6e3iv2JNU/cd04nuEqW7pPLL5uSu659koMjzZW+6wb8OlUy0
- h5GGonnbFyeQO4wCuczdnrL62SaCATZWst7R+otsRmW4i1fRIZ4qItj4FbQGMig0vBubd6EfEXr
- 3hoJtg2Y=
-X-Gm-Gg: ASbGnct3xnNg6a22XC3H6o/jMZblw18SthDyd544zRXYX5CKxzNS5YvBgcvHkR7R78Q
- Wky+DFPN0uZ/IrLMAa4/4wHoEBbtqBFwdFUy+sv5AWW8+dhKrLuKM2xiapWUZCWJzhTBbrr4mxU
- mUien8KB5atJe5i0oyJFyI9OYX+2XC4oOJYuZFfv2iDJb4SIEv09K0+tx5bOXgIeF+BeHfM5z+7
- 4YDUEk2FccVYmqrquXUiEnKUd7EngNutQaHfYBL8y3vVuBIMbQBhMbNIBCXv2L+u9lRvFVQ3E3+
- BhbtSXx7IY+iN+ucYuscRjn6QL0uvhDaLmysTITDMkanCYv48JsTUk9pupy+ZS3yyREoiCT8Hu4
- Lupt6y1nRylyPiUXlBzkT1Fchti5gfztqmfd2ZEk4eBbz7ZDFJZLisH5YAKR31Z2pOw87wEoD19
- DQ+5cciTFbsvelS0E7rhdaJV3ehnOq+ZBbBlb9Tb5yJRG977E2o0Xa
-X-Google-Smtp-Source: AGHT+IHq262ubAjQkAG+Towq8lt4/UG3GKr0dOMp7areaz4Jeuvc0TgXhxbr69qUNyaIMSpwaB8IFg==
-X-Received: by 2002:a05:6808:2108:b0:450:e36:999f with SMTP id
- 5614622812f47-4514e65c1e7mr14246601b6e.21.1764692572501; 
- Tue, 02 Dec 2025 08:22:52 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4531708f2fdsm5819796b6e.14.2025.12.02.08.22.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Dec 2025 08:22:52 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCHv2] boot/image-fit.c: Resort to using malloc for USE_HOSTCC
-Date: Tue,  2 Dec 2025 10:22:50 -0600
-Message-ID: <20251202162250.2613085-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id DEA96C16A21;
+ Tue,  2 Dec 2025 17:28:23 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id EE700606D6;
+ Tue,  2 Dec 2025 17:28:46 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 15F3C11918119; Tue,  2 Dec 2025 18:28:33 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1764696524; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=D45Br6PnMVFJMX3W3Wi7C8nITHnF8B5UNw0+oIIx/XM=;
+ b=K6B0lHB74ZVkBJ5DnHe4bfAPS1Qi4sL8+pNgVATxqEml8cIL4eeWqMeR5lNudzvAlEB/wP
+ V1uUzlik3PcT9Bir3/XfVjRlp4qfTjLU10OQ/VrCGGt3bLLQPuiiczDG2E+w2A+su3nrrh
+ ChgRULa9BP93IYbxDh/38RJLYO73mjgXJ23fZUFyKcbydvj7HKfmj2raHYQJkPYxvhdZ4k
+ tKJm366AVkdGKomq29RBE18AIhpaTTpH5eARubKDmYK5X5+oGCuPvBQ/AdQrdKAJUYmdnR
+ hErxWCYK5jHt+QXDEWAf8qUhVzZlG/IpvGI9TuP0b78FKTpmeCBl3u9F97jgaw==
+From: Kory Maincent <kory.maincent@bootlin.com>
+Subject: [PATCH 0/6] Add support for fwumdata
+Date: Tue, 02 Dec 2025 18:28:25 +0100
+Message-Id: <20251202-feature_fwumdata-v1-0-d55154de4103@bootlin.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIALohL2kC/x3MQQqAIBBA0avErBOcwpKuEhGSY80iC80KorsnL
+ d/i/wciBaYIXfFAoJMjbz4DywKmxfiZBNtsqGSlEGUrHJkjBRrdlVZrDiOUVlLbBgltDTnbAzm
+ +/2U/vO8HOjMg2mIAAAA=
+X-Change-ID: 20251107-feature_fwumdata-58508d61e1d3
+To: u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Greg Malysa <malysagreg@gmail.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ E Shattow <e@freeshell.de>, Raymond Mao <raymondmaoca@gmail.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>, 
+ Daniel Golle <daniel@makrotopia.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Yao Zi <ziyao@disroot.org>, 
+ Leonard Anderweit <l.anderweit@phytec.de>, 
+ Kory Maincent <kory.maincent@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,88 +95,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the changes in commit 8fbcc0e0e839 ("boot: Assure FDT is always at
-8-byte aligned address") to call memalign(...) we now always call
-memalign(...) rather than malloc(...) when allocating a buffer that may
-contain a device tree. However, memalign(...) is not portable among all
-of the host OSes we support. Specifically on macOS it isn't seemingly
-possible to get memalign exactly. To keep alignment we would need to
-rework to use posix_memalign(...) for USE_HOSTCC and memalign(...) for
-U-Boot itself. This would get rather tricky. However, given the limited
-use case in question, it makes more sense to fall back to malloc(...)
-for the USE_HOSTCC case.
+Add a new fwumdata tool to allows users to read, display, and modify FWU
+(Firmware Update) metadata from Linux userspace. It provides functionality
+similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
+metadata, change active/previous bank indices, modify bank states, and set
+image acceptance flags. Configuration is done via fwumdata.config file.
 
-Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always at 8-byte aligned address")
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Made a few change to mkfwumdata tool along the way.
+
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 ---
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Kory Maincent (6):
+      tools: gitignore: Add mkfwumdata to the git ignore file
+      tools: Reorganize mkfwumdata tool into fwumdata_src directory
+      tools: mkfwumdata: Improve error message specificity
+      tools: mkfwumdata: Add bank count validation for FWU metadata v2
+      tools: Add support for fwumdata tool
+      tools: mkfwumdata: Remove dependency on fwu_mdata.h header
 
-My biggest take-away from this is that I need to move up the plans I had
-about asking if anyone even uses the host tools on Windows / macOS from
-post-v2026.01 to instead be later today.
-
-This change is a work-around at best. Ideally, we can drop Windows /
-macOS host build support and revert this commit at that time.
-
-Changes in v2:
-- Rework things entirely, and elaborate on the commit message.
+ MAINTAINERS                           |   7 +-
+ doc/develop/uefi/fwu_updates.rst      |   4 +-
+ doc/fwumdata.1                        | 222 +++++++++
+ tools/.gitignore                      |   2 +
+ tools/Kconfig                         |   9 +-
+ tools/Makefile                        |   4 +-
+ tools/fwumdata_src/Kconfig            |  19 +
+ tools/fwumdata_src/fwumdata.c         | 854 ++++++++++++++++++++++++++++++++++
+ tools/fwumdata_src/fwumdata.config    |  33 ++
+ tools/fwumdata_src/fwumdata.h         | 138 ++++++
+ tools/fwumdata_src/fwumdata.mk        |  10 +
+ tools/{ => fwumdata_src}/mkfwumdata.c | 105 +----
+ 12 files changed, 1314 insertions(+), 93 deletions(-)
 ---
- boot/image-fit.c | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
+base-commit: 31bf4a1c308773895a8e7ea047b3cea037e4c922
+change-id: 20251107-feature_fwumdata-58508d61e1d3
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index cccaa48f6839..3323ca1020d1 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -23,6 +23,7 @@
- #include <log.h>
- #include <mapmem.h>
- #include <asm/io.h>
-+#include <malloc.h>
- #include <memalign.h>
- #include <asm/global_data.h>
- #ifdef CONFIG_DM_HASH
-@@ -35,7 +36,6 @@ DECLARE_GLOBAL_DATA_PTR;
- #include <bootm.h>
- #include <image.h>
- #include <bootstage.h>
--#include <malloc.h>
- #include <upl.h>
- #include <u-boot/crc.h>
- 
-@@ -2279,7 +2279,18 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 
- 		log_debug("decompressing image\n");
- 		if (load == data) {
-+			/*
-+			 * This could be a compressed device tree, and device
-+			 * trees require 8 byte alignment for use. However, in
-+			 * userspace we aren't using the tree, and getting at
-+			 * a portable memalign is extremely difficult. Continue
-+			 * to malloc in the host case.
-+			 */
-+#ifdef USE_HOSTCC
-+			loadbuf = malloc(max_decomp_len);
-+#else
- 			loadbuf = memalign(8, max_decomp_len);
-+#endif
- 			load = map_to_sysmem(loadbuf);
- 		} else {
- 			loadbuf = map_sysmem(load, max_decomp_len);
-@@ -2291,11 +2302,13 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 			return -ENOEXEC;
- 		}
- 		len = load_end - load;
-+#ifndef USE_HOSTCC
- 	} else if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
- 		   ((uintptr_t)buf & 7)) {
- 		loadbuf = memalign(8, len);
- 		load = map_to_sysmem(loadbuf);
- 		memcpy(loadbuf, buf, len);
-+#endif
- 	} else if (load != data) {
- 		log_debug("copying\n");
- 		loadbuf = map_sysmem(load, len);
+Best regards,
 -- 
-2.43.0
+Köry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
 
