@@ -4,101 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EFB6D1266A
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 20:15:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F74D1266A
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 20:19:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D77BF83EE4;
-	Tue,  2 Dec 2025 21:14:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D558F83F26;
+	Tue,  2 Dec 2025 21:19:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ev0vj/oC";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="nPhEm5qM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B41E283F15; Tue,  2 Dec 2025 21:14:58 +0100 (CET)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2FDC083F2F; Tue,  2 Dec 2025 21:19:45 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B8D183EDF
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 21:14:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADAEB83F24
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 21:19:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-6597046fc87so127034eaf.0
- for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 12:14:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764706495; x=1765311295; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SUG/CqiPti4XyJ67iK6vEoflnwvHKL6BemBS39vY0lo=;
- b=ev0vj/oCrwjiWGKI9fLWcsWoNMIcSlBMfLPsvxvdT/Sneas2eeomvg5Q1WxHvJndXN
- m61+t5qQaUhI6cbcEb4NcTxEZmqx0cucPOVQnGw7+LMKQgsQ4hkL0gI6Q/hB5KLlLfU6
- am9tZBs/pW4xTpe8xm0irvX7ADqNI2EKxrTMg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764706495; x=1765311295;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SUG/CqiPti4XyJ67iK6vEoflnwvHKL6BemBS39vY0lo=;
- b=fGgNrme9uGelswj9StfbslD7mrevTwZmO8FspTaSkVMgKa3PswerSizTty3Se1xmtp
- X536QcQ4jyLvj1KWi6KRw6zjhaeQJH/k5faNHj7JwwCEyK2QZxsa46b4YculEwt0Zy5n
- FrLVJ/8mcPB4QHL2cZguYvJWHp48ErIpqwuPyTwhXNpsKu4v2nDjKEi2sAIZkc+E/eOI
- m6ZmCaXTPvIIPW4AINER47iXvaQT369pgrI54frCfHnv5+Rat8T59rXOKdw9vWe+kYhH
- hlh5k8xqJYnR5PbsPIZPXFkZp+iqPNGpTxcREho9ufCSTz50BYGhZK8mRBvZ25dnu9sa
- F6Yg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVz9scWzG5JCjtZsu7aZ7a8lie23q9HfIv0yyQ7VssIi5vGauM8Qlg3zWDRpBgin9EKV0HRZgs=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywp8PkMBOsWH3WHARJy/kLEllymJajpJGzP1uko3iAf3jBVpDcr
- VsuVt7JHa+3ZzMAOWVVt9RenYpijhGVJCRvRSwj/6KI3giiLmbnmh1OjxTmXuQLe88c=
-X-Gm-Gg: ASbGncsuyr1BQyped9hNbxtYrCMhOT+bVfjRqQoMhU0bR6OtKeZBS/XhfN9TcT6UvUb
- DBJBMetoWBySzYZWN1U5rXM+BBioJOFM3qNFCpfTAMh4cLiQbm8/rVv1HK8Pt2KxSiYxeJ96DUS
- Gevu4UA1qMXW2NOhFbReg12UN9EwdFR74vjWmaTpR2ETzIqz8CUa3X/0HRSkEpJ7IK2G21/sHY6
- wYvKrc/V4hzcqX8h6sK2frhs++sQms3d6t4sPfawArYnmw/uzPQ21QEm5sJK6ERbKS39fz5PnB4
- aIxVEJSUL0TSTY7uxyVOD0P4QV7LTOm6VNHdL9B7242s1wMgv4S8DP4QVFyqIzGWOshSlFhYM3b
- hZVklqEFzC1RLyoadKGkGmcChBMOg6HaubxqQq/FdW4RgZVQE02rmHMWN13laqDBOyoP0SQJQZ7
- rc5VGGqxrd/YImwKjG0p1jkp74DpFVvfJ+IeR7YJP9MkoYUslBHQ==
-X-Google-Smtp-Source: AGHT+IFY0X9CUJxJna5nfyFsbReUd2S8XTQnQ9JSgdpPL2JxeAFVsWkR30y9+UQW5EPyQT6+BjUG8Q==
-X-Received: by 2002:a05:6820:1c91:b0:657:6f7c:e5de with SMTP id
- 006d021491bc7-65790bac705mr15628601eaf.5.1764706494792; 
- Tue, 02 Dec 2025 12:14:54 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65933cc2b36sm4665113eaf.12.2025.12.02.12.14.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Dec 2025 12:14:54 -0800 (PST)
-Date: Tue, 2 Dec 2025 14:14:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
- Aristo Chen <jj251510319013@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Shiji Yang <yangshiji66@outlook.com>,
- Anton Moryakov <ant.v.moryakov@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Alice Guo <alice.guo@nxp.com>, Bryan Brattlof <bb@ti.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
- Peter Robinson <pbrobinson@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>,
- Kever Yang <kever.yang@rock-chips.com>, Yannic Moog <y.moog@phytec.de>
-Subject: Re: [PATCH v3 4/4] tools: binman: fit: add tests for signing with an
- OpenSSL engine
-Message-ID: <20251202201451.GL303283@bill-the-cat>
-References: <20251121-binman-engine-v3-0-b80180aaa783@cherry.de>
- <20251121-binman-engine-v3-4-b80180aaa783@cherry.de>
- <CAFLszThxhLBEm731QjvB-wbOGryGBfh1_09NeWNy13nLwqZW4A@mail.gmail.com>
- <6b2751af-783b-40d4-b205-5859b7eaa0d2@cherry.de>
- <CAFLszTh1Tt1=9SOHf1WdnENB3q1E7vdq4mK4XjPC7Bob5gQoEw@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="R+9clVrdBDNkXaBS"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTh1Tt1=9SOHf1WdnENB3q1E7vdq4mK4XjPC7Bob5gQoEw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 78df347f-cfbc-11f0-ad1a-005056999439
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 78df347f-cfbc-11f0-ad1a-005056999439;
+ Tue, 02 Dec 2025 21:21:23 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=gntvHPZ6Pw0/rlNA5MulqkDVHxqoNSP6/dngFfwCquQ=;
+ b=nPhEm5qM2+a0LLHfOdBBqgQTKzxSKzbKlFLivTAUZM23Cp4BeBbpTUX7yzOcx9Uf6bLGOPcekfr/O
+ bOER2U78ASgAGRjdB6B6XOVLg8ALWt7nXoKdcTgvbM9jTKymFtusw9Ts9ATKpVXpxTCIbgCDESk0cS
+ ZLJijGTd8+1DNBxY3a37E5OFsePV34J0x56Dqj0Dl+c4YU0WwshD+ipTXCvOrt1SwWZzjx4uqo3p3V
+ J9yTEuLKS79sPBdgGBMqrnmGbFBOLqiNPhxpPa1CjAx/bCvFpa1FyN1IuIQ91STKRc0XA/xahuYIvo
+ Kt+yZ/KMoKrVWumDz7cX2+ceUUMh4Mw==
+X-KPN-MID: 33|ckmfHXwAZXLRO7OIHRnLa3NE3jusIbOau/qWRhKDE2Woo/c2QqpGud+JfZVuBAW
+ ZXAI2sHdplwcOvkyJ4foRAO89jY2egtOx/XM1EnnqBh0=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|v9PcimjZMZFyQyzSYeXLr4OuSKVc1WjjgJs2TN+aC7++wHIvtWWKCuwZa5bSrFh
+ UhpFxM9IkvqBssJCp4uk6Xg==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 3bd9f86e-cfbc-11f0-bff1-00505699772e;
+ Tue, 02 Dec 2025 21:19:41 +0100 (CET)
+Date: Tue, 02 Dec 2025 21:19:41 +0100
+Message-Id: <874iq8bpr6.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot-board-maintainers@lists.denx.de, trini@konsulko.com,
+ u-boot@lists.denx.de, u-boot-custodians@lists.denx.de
+In-Reply-To: <DAE792B8-A6F7-4725-8F1F-6D874B508B74@gmx.de> (message from
+ Heinrich Schuchardt on Tue, 02 Dec 2025 21:01:26 +0100)
+Subject: Re: Dropping macOS and Windows host tool builds and support in U-Boot
+References: <20251202182403.GF303283@bill-the-cat>
+ <878qfkbty4.fsf@bloch.sibelius.xs4all.nl>
+ <20251202185222.GG303283@bill-the-cat>
+ <877bv4braq.fsf@bloch.sibelius.xs4all.nl>
+ <DAE792B8-A6F7-4725-8F1F-6D874B508B74@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,129 +78,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> Date: Tue, 02 Dec 2025 21:01:26 +0100
+> From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> 
+> Am 2. Dezember 2025 20:46:21 MEZ schrieb Mark Kettenis <mark.kettenis@xs4all.nl>:
+> >> Date: Tue, 2 Dec 2025 12:52:22 -0600
+> >> From: Tom Rini <trini@konsulko.com>
+> >> 
+> >> On Tue, Dec 02, 2025 at 07:49:07PM +0100, Mark Kettenis wrote:
+> >> > > Date: Tue, 2 Dec 2025 12:24:03 -0600
+> >> > > From: Tom Rini <trini@konsulko.com>
+> >> > 
+> >> > Hi Tom,
+> >> > 
+> >> > > Hey all,
+> >> > > 
+> >> > > I am wondering if at this point in time, anyone still builds our host
+> >> > > tools (fw_printenv / fw_getenv, a few others) to run on macOS or
+> >> > > Windows, natively.
+> >> > > 
+> >> > > I ask for two reasons. The first of which is that a reason we still have
+> >> > > to support Azure (despite its slowness) for CI is it's where we have
+> >> > > macOS and Windows hosts. But at this point in time there's so many ways
+> >> > > to have Linux userspace running on Windows or macOS that I don't know
+> >> > > that there's any value to these builds.
+> >> > > 
+> >> > > The second reason is more macOS specific and is that with:
+> >> > > 
+> >> > > commit 8fbcc0e0e839a8e25f636c76e59311033d3817b5
+> >> > > Author: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >> > > Date:   Thu Nov 13 12:54:51 2025 +0100
+> >> > > 
+> >> > >     boot: Assure FDT is always at 8-byte aligned address
+> >> > >     
+> >> > >     The fitImage may contain FDT at 4-byte aligned address, because alignment
+> >> > >     of DT tags is 4 bytes. However, libfdt and also Linux expects DT to be at
+> >> > >     8-byte aligned address. Make sure that the DTs embedded in fitImages are
+> >> > >     always used from 8-byte aligned addresses. In case the DT is decompressed,
+> >> > >     make sure the target buffer is 8-byte aligned. In case the DT is only
+> >> > >     loaded, make sure the target buffer is 8-byte aligned too.
+> >> > >     
+> >> > >     Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >> > > 
+> >> > > Which does things we must do, we now don't build on macOS. Why? As best
+> >> > > I can tell (and for a general purpose OS, is a good call), memalign(..)
+> >> > > doesn't exist and you need to use posix_memalign, a not drop-in
+> >> > > replacement. We could spend some time reworking the code here for that,
+> >> > > but for now I've instead gone with this workaround so that CI can
+> >> > > continue:
+> >> > > https://lore.kernel.org/u-boot/20251202162250.2613085-1-trini@konsulko.com/
+> >> > 
+> >> > Are you sure about this?
+> >> > 
+> >> > The code in boot/image-fdt.c is part of U-Boot itself, not the host
+> >> > tools.  As such it should be irrelevant whether the host OS provides
+> >> > memalign() or not; U-Boot provides its own implementation.
+> >> 
+> >> We use parts of this code as-is (and some other less obvious files) when
+> >> building host tools.
+> >> 
+> >> > OpenBSD doesn't have memalign() either.  But I can still build the
+> >> > targets I care about on OpenBSD.
+> 
+> We require C11 for building U-Boot. C11 defines function aligned_alloc(). If we add that function in our U-Boot library we can rid of the #ifdef in Tom's patch.
 
---R+9clVrdBDNkXaBS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+That should work for OpenBSD.  And almost certainly for the other BSDs as well.
 
-On Tue, Dec 02, 2025 at 08:06:02PM +0000, Simon Glass wrote:
-> Hi Quentin,
->=20
-> On Wed, 26 Nov 2025 at 04:44, Quentin Schulz <quentin.schulz@cherry.de> w=
-rote:
+> >> > 
+> >> > Or is this about sandbox?  Did sandbox ever work on macOS?
+> >> 
+> >> It's about "tools-only" build target, but also I suspect that if you try
+> >> the next branch right now it'll also fail and we'll need to figure
+> >> something out.
 > >
-> > Hi Simon,
+> >Ah, it is only on the next branch.  Yes
 > >
-> > On 11/25/25 11:15 PM, Simon Glass wrote:
-> > > Hi Quentin,
-> > >
-> > > On Fri, 21 Nov 2025 at 10:15, Quentin Schulz <foss+uboot@0leil.net> w=
-rote:
-> > >>
-> > >> From: Quentin Schulz <quentin.schulz@cherry.de>
-> > >>
-> > >> This adds a test that signs a FIT and verifies the signature with
-> > >> fit_check_sign.
-> > >>
-> > >> OpenSSL engines are typically for signing with external HW so it's n=
-ot
-> > >> that straight-forward to simulate.
-> > >>
-> > >> For a simple RSA OpenSSL engine, a dummy engine with a hardcoded RSA
-> > >> 4096 private key is made available. It can be selected by setting the
-> > >> OpenSSL engine argument to dummy-rsa-engine. This can only be done if
-> > >> the engine is detected by OpenSSL, which works by setting the
-> > >> OPENSSL_ENGINES environment variable. I have no clue if dummy-rsa-en=
-gine
-> > >> is properly implementing what is expected from an RSA engine, but it
-> > >> seems to be enough for testing.
-> > >>
-> > >> For a simple PKCS11 engine, SoftHSMv2 is used, which allows to do PK=
-CS11
-> > >> without specific hardware. The keypairs and tokens are generated on =
-the
-> > >> fly. The "prod" token is generated with a different PIN (1234 instea=
-d of
-> > >> 1111) to also test MKIMAGE_SIGN_PIN env variable while we're at it.
-> > >>
-> > >> Binman will not mess with the local SoftHSMv2 setup as it will only =
-use
-> > >> tokens from a per-test temporary directory enforced via the temporary
-> > >> configuration file set via SOFTHSM2_CONF env variable in the tests. =
-The
-> > >> files created in the input dir should NOT be named the same as it is
-> > >> shared between all tests in the same process (which is all tests when
-> > >> running binman with -P 1 or with -T).
-> > >>
-> > >> Once signed, it's checked with fit_check_sign with the associated
-> > >> certificate.
-> > >>
-> > >> Finally, a new softhsm2_util bintool is added so that we can initial=
-ize
-> > >> the token and import keypairs. On Debian, the package also brings
-> > >> libsofthsm2 which is required for OpenSSL to interact with SoftHSMv2=
-=2E It
-> > >> is not the only package required though, as it also needs p11-kit and
-> > >> libengine-pkcs11-openssl (the latter bringing the former). We can de=
-tect
-> > >> if it's properly installed by running openssl engine dynamic -c pkcs=
-11.
-> > >> If that fails, we simply skip the test.
-> > >> The package is installed in the CI container by default.
-> > >>
-> > >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> > >> ---
-> > >>   tools/binman/btool/softhsm2_util.py                |  21 ++
-> > >>   tools/binman/ftest.py                              | 223 +++++++++=
-++++++++++++
-> > >>   tools/binman/test/340_dummy-rsa4096.crt            |  31 +++
-> > >>   tools/binman/test/340_fit_signature_engine.dts     |  99 +++++++++
-> > >>   .../test/340_fit_signature_engine_encrypt.dts      | 100 +++++++++
-> > >>   .../test/340_fit_signature_engine_pkcs11.dts       |  99 +++++++++
-> > >>   .../340_fit_signature_engine_pkcs11_object.dts     | 100 +++++++++
-> > >>   tools/binman/test/340_openssl.conf                 |  10 +
-> > >>   tools/binman/test/340_softhsm2.conf                |  16 ++
-> > >>   tools/binman/test/Makefile                         |   6 +-
-> > >>   tools/binman/test/dummy-rsa-engine.c               | 149 +++++++++=
-+++++
-> > >>   11 files changed, 853 insertions(+), 1 deletion(-)
-> > >
-> > > Not sure of the changes from last time, but I assume the test coverage
-> > > is finished.
-> > >
+> >  In file included from tools/generated/boot/image-fit.c:1:
+> >  In file included from ./tools/../boot/image-fit.c:38:
+> >  include/malloc.h:824:20: error: conflicting types for 'sbrk'
+> >    824 | extern Void_t*     sbrk(ptrdiff_t);
+> >        |                    ^
+> >  /usr/include/unistd.h:449:7: note: previous declaration is here
+> >    449 | void    *sbrk(int);
+> >        |          ^
+> >  1 error generated.
 > >
-> > They are listed in the cover letter in the Changes section.
-> >
-> > $ b4 diff -v 2 3 --
-> > https://lore.kernel.org/u-boot/20251121-binman-engine-v3-0-b80180aaa783=
-@cherry.de/T/\#t
-> >
-> > will show you the git-range-diff between both versions for a given comm=
-it.
->=20
-> I normally review just in email (often on a Chromebook) so I don't
-> have that. It is also an extra step and I don't know where your log
-> argument comes from. It would be better to put the change log in the
-> patch as well.
-
-The cover letter is just an email. Perhaps a handy tips bit of
-documentation (and external ref to the general b4 docs) would be
-helpful, especially since b4 is a common and widely used tool these
-days.
-
---=20
-Tom
-
---R+9clVrdBDNkXaBS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaS9IuwAKCRAr4qD1Cr/k
-Ck5gAP9aKDNxY9tP6s18ROkRoJexOjjXVKFVEkwl4TgWgr1FIwD/RoZa1pf2kO6G
-4stZWcIF4qbvHr1zVHlax051ZVdyHAY=
-=ByqD
------END PGP SIGNATURE-----
-
---R+9clVrdBDNkXaBS--
+> >Which points out another issue with sharing code between U-Boot itself
+> >and the host tools this way.
+> 
+> 
