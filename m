@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BE1D1171E
-	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 17:29:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3859BD1171E
+	for <u-boot@archiver.kernel.org>; Tue,  2 Dec 2025 17:29:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B889E83E8E;
-	Tue,  2 Dec 2025 18:29:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0057183EC6;
+	Tue,  2 Dec 2025 18:29:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="hxpSo4Yr";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="cElrfKU1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B71A283C64; Tue,  2 Dec 2025 18:29:04 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id 018F783ED7; Tue,  2 Dec 2025 18:29:09 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD04283EA6
- for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 18:29:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D4B183EBA
+ for <u-boot@lists.denx.de>; Tue,  2 Dec 2025 18:29:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 585D44E419E6;
- Tue,  2 Dec 2025 17:29:02 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 92B7CC16A21;
+ Tue,  2 Dec 2025 17:28:43 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 2D317606D6;
- Tue,  2 Dec 2025 17:29:02 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id CD4FF606D6;
+ Tue,  2 Dec 2025 17:29:06 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3485111919F0B; Tue,  2 Dec 2025 18:28:54 +0100 (CET)
+ with ESMTPSA id 4395B11919E6F; Tue,  2 Dec 2025 18:29:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1764696540; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1764696545; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=keBGrGoLQ1oZdEi83j8RcWAFSXWUXrkBmAykWO+af3w=;
- b=hxpSo4YrgUI7exJHyCtMFDogRMU0HAsrfwHTiV2uCL6+fE271CLiEM/O2Nfuk4DfCI1O7I
- EOrSdJ88sOCOXjBZfwd/oANYggRvcRLDk5dnRnSF8yuA7QVFw95jI0aMGAAmlRcKqrixSL
- 9216AuGnHebKNEZTYTSscCZLGxOBIuW7IOEUlU0FE1PPHVMLk5ej/dInFRvK8yF+HNygx5
- LCFQDDsF3qNzBbpB43Nk7o6HvGKu+KEoWLbgTJM9pD7YonXzipnR73jMLoLF2ZicCab4Xx
- lGx8bvg4LLJ2vODLtwCQY9epGqSEYq4nb2R3Y8kvhrSALksX8o3b5NP7oB9JGQ==
+ bh=H6eANGEZqLlTrROt4is2CaAPAuVK1VG7ko0TOaWvLqs=;
+ b=cElrfKU1Tc5waVV9tQp1UWICZnbmrNKvH+3cAXg6xlBq1fbVsehrUFfl6oWZG1eJQxubgJ
+ /CalyQ3RGGz0a6gBFk7pUPBTF/aloRghI+gEu0bBzjMuDzLpPKD0ahLc4BnJV0QiZ+Uasb
+ 0mmOdbiPyxHfhsLUVil8UlmrfnyA+ZQZT0huYsanmGlFQRgZxlnYB7hlk1nCC6QfciLgGR
+ 0qRtWLnOKXtHbesFDUuer6mhv44S21NrMDyR6Epsbc+iFJDTY95eudzOMdbrHuNGGEmADI
+ IVxUiI2G/52ha7cTv3NgQVnUtrSqeeUNL/7Q0MmjEk2JHXbuVcSlHkhRWUGlYQ==
 From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Tue, 02 Dec 2025 18:28:28 +0100
-Subject: [PATCH 3/6] tools: mkfwumdata: Improve error message specificity
+Date: Tue, 02 Dec 2025 18:28:29 +0100
+Subject: [PATCH 4/6] tools: mkfwumdata: Add bank count validation for FWU
+ metadata v2
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251202-feature_fwumdata-v1-3-d55154de4103@bootlin.com>
+Message-Id: <20251202-feature_fwumdata-v1-4-d55154de4103@bootlin.com>
 References: <20251202-feature_fwumdata-v1-0-d55154de4103@bootlin.com>
 In-Reply-To: <20251202-feature_fwumdata-v1-0-d55154de4103@bootlin.com>
 To: u-boot@lists.denx.de
@@ -94,30 +95,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the generic error message with a more informative one.
-This helps users quickly understand the correct command-line argument
-format when the tool reports an error.
+The FWU metadata specification version 2 supports a maximum of 4 banks.
+Add validation to enforce this limit and prevent creation of non-compliant
+metadata structures when using version 2.
+
+Without this check, users could inadvertently create invalid metadata by
+specifying more than 4 banks, leading to potential compatibility issues
+with FWU-compliant firmware update implementations.
 
 Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 ---
- tools/fwumdata_src/mkfwumdata.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ tools/fwumdata_src/mkfwumdata.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/tools/fwumdata_src/mkfwumdata.c b/tools/fwumdata_src/mkfwumdata.c
-index fbc2067bc12..5ceec7a2980 100644
+index 5ceec7a2980..8b25539fd57 100644
 --- a/tools/fwumdata_src/mkfwumdata.c
 +++ b/tools/fwumdata_src/mkfwumdata.c
-@@ -473,7 +473,9 @@ int main(int argc, char *argv[])
+@@ -471,6 +471,12 @@ int main(int argc, char *argv[])
+ 		return -EINVAL;
+ 	}
  
++	if (version == 2 && banks > MAX_BANKS_V2) {
++		fprintf(stderr, "Error: Version 2 supports maximum %d banks, %ld requested.\n",
++			MAX_BANKS_V2, banks);
++		return -EINVAL;
++	}
++
  	/* This command takes UUIDs * images and output file. */
  	if (optind + images + 1 != argc) {
--		fprintf(stderr, "Error: UUID list or output file is not specified or too much.\n");
-+		fprintf(stderr,
-+			"Error: Expected %ld UUID string(s) and 1 output file, got %d argument(s).\n",
-+			images, argc - optind);
- 		print_usage();
- 		return -ERANGE;
- 	}
+ 		fprintf(stderr,
 
 -- 
 2.43.0
