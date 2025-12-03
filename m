@@ -4,83 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83049D1BDDD
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 20:46:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1604D1BDDD
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 20:52:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DCB283BF4;
-	Wed,  3 Dec 2025 21:46:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B3FA83BF1;
+	Wed,  3 Dec 2025 21:52:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="acexgIlZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cY5/G9kw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CB9883C08; Wed,  3 Dec 2025 21:46:51 +0100 (CET)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
+ id E009C83C28; Wed,  3 Dec 2025 21:52:53 +0100 (CET)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 130C983BF1
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 21:46:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EA2F83BB1
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 21:52:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-4ee28771052so258161cf.1
- for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 12:46:44 -0800 (PST)
+ spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-bc29d64b39dso92712a12.3
+ for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 12:52:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764794802; x=1765399602; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=GX4fdbQNybkVgtiYDfEDX2IoalG6xl/5e+0tQogMxiI=;
- b=acexgIlZuiEQ4nHF3c+YB2VvvtDZNV9Ud1RFuPlFLAog3/HQcIzd//SPyfOciAgUy5
- Ta5jK4ouIjsR5w5WgJ+VN9QVnq7GLQ0nrtl+uEe2wm4WdwHwWS35VDHZS7Zy4R7mDmWV
- dEmBhsMTTPnmHMOSpfjN5oHJ0QYhu9qUdvkdPI8i+0JfNeHtVOqS33af25tTIN5A/xmU
- iZEZ6avYee+0AceKunc3hfy/jg6sMMijZ8zRDt3eMPTRPLI3R4drdhcinT7w3aKXN+F1
- QEbCv5CVsG6lNUp6ALmeh8u7zxNsy3WQ5E0kwjgA4UPR9r81UmOxgP+gkRjIBLw+iw10
- vbIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764794802; x=1765399602;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1764795169; x=1765399969; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GX4fdbQNybkVgtiYDfEDX2IoalG6xl/5e+0tQogMxiI=;
- b=tt7eLOonrfJigfu7qvR8ySI7SCyT+OTKeBAw14ESZyWyv8EVZCJt5R6de/a/bLNwKq
- IgyVVLSUijMPHAcT9clADQDqyX/H2AQXxakgzna1EdLbNV/4cZl1222ezRdjN4/dwpy8
- 6l9fFM0/g9RNd+ElL0+96IEvyVD54zyWNovmjBZir6pv/c7gCKdGkqQOjIzj8UX7tGl+
- AbmWJ0Pxm5BDImGp7qSWq7HuhjChdBLIzRoBlJjlrCAFb/x4d50hPH4BYfhyKr6VxdLE
- 0GgYzn5/y0neWEASMByvGd3RAgRPS8zYX8y+csb4JU3cCBrYE6yeuaFhQqRysG1bEzHf
- 0low==
-X-Gm-Message-State: AOJu0YxOLyChm0m71AfllHmlnf2l6tNsaeuzaB4YRMD2LSrR2aC7qzSP
- I9Z2xDKwM5z69Q3tN65rded5KDc+D9ZBgkDhZMT2qZM91nHX2QwnOH1xWIqMRsO4
-X-Gm-Gg: ASbGnctwYmtWkYg7Mx9CCLsPNAs8St13BjPOfDldmGtw4NlCQK/+FmFDSFTxBUI/o94
- xzcqyJlasEU1x1SrSiqk8sN3RM75E1QLR4xs9A4QFvMgd5ja/YmSbLh8MfHI2iBnUATv5pyoC9b
- BhIXHAKjmPf185sI+ZnIylswPFK1zZDd8QItl+jgOkTPY6fpOLhv1jfeJmzpYBdY3bC0vgZTXqD
- hZ7iAeEzNwt2dq844r7v2rv56HUnwxjjIg2v0f1rEr6/RpKx6sgwO2qQ1KoDOguslGjt2ETYoB2
- vj9CZCrc2RfbRB1G+v4FxAVzVlf4m6G8nRfhXhHFnPJz+ySKdJtai3jqRq4Id3pFvnA6NkelYEg
- 7ls+9sDVYKherCzbSp54ksUkmPxA+eO0/P1XokQLmqRPkibG2FKTks3O3d3bAJx1GN0+S+9P3Ju
- MRzUxvR8NkAY2yksXhFq4AscBHRrvhFPaZRw/mSppxuJl5cAkYZcz/Ig==
-X-Google-Smtp-Source: AGHT+IEJschSUkOgd5M6sLjqhPT5frQ/z3hzoAZJ3vBp/Qur6sw7kpJUNvJ140UNfkGVgLXBgbVTCw==
-X-Received: by 2002:ac8:5992:0:b0:4eb:7dac:7b8d with SMTP id
- d75a77b69052e-4f0175eb7f5mr41285071cf.6.1764794802552; 
- Wed, 03 Dec 2025 12:46:42 -0800 (PST)
-Received: from localhost (pool-108-45-131-215.washdc.fios.verizon.net.
- [108.45.131.215]) by smtp.gmail.com with UTF8SMTPSA id
- d75a77b69052e-4f01c978757sm13704201cf.28.2025.12.03.12.46.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Dec 2025 12:46:42 -0800 (PST)
-From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Denis 'GNUtoo' Carikli <GNUtoo@cyberdimension.org>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH] test: strlcat: Fix SPDX license
-Date: Wed,  3 Dec 2025 15:46:40 -0500
-Message-Id: <20251203204640.1944971-1-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
+ bh=tAJkNYPa3yikGxdlsYw23j+TVCRNl96w1L2ykMC1wv4=;
+ b=cY5/G9kwwm36kVZI5V7hbFrBKF79IqpeUi8u2e1zN/GsMOgsAczmIO3asTNY708FAM
+ wcmOA/jArOXYXR1yP4frOHf5wVcqN1P8NdSnrRwAMJunOcW8JLvGz9IS4ElHrulm3LZ6
+ oL15Hht1C+Wpc7pC86b8RaRWkgCTikOYX/9/gFoEWNfbcp0N4J/n7zxevzVan2SdHz2v
+ Lkj1DeTOnF7/FUjHf5mYZ4g1E8iLtsSGdxQ6GAby6E8nrWqgshfXc0iJI/RIOIOcOEZ1
+ UkGVFX9PKHJ+vGPD/26FVAfAzChSnT47WkLeizF5GfZx4iDGirLwXO6Lufc8ylfeLKKT
+ v7zg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764795169; x=1765399969;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=tAJkNYPa3yikGxdlsYw23j+TVCRNl96w1L2ykMC1wv4=;
+ b=luaHJIKqpymX69y6h8CCDyRNZfLQifYIVnaxHyHqYwjF+QNGyJ3+1B/95fxjgTiAKe
+ IBsH5f4pvFG7h9rAVKszB7GmZc1HIlSxCGOF7hHtFg2tE5JjXsIskjxPjXGboeIgIDYu
+ 2V2yXNQ7brO48y8lL9EOQs3+PQ1hSQBnkJo1nj3Cnx1YA9BK9qMqnM9kEJdCO7t+Xa21
+ eXZcxBh9WiIrR7qyBGyg+LMX8d3PeddxL2wXg3AnJxXsxsT3RZdxnPTMamhTOETOfrvS
+ DuNb39U00yNpHCelUlN2Fk81HTUccecFvyTHPgKFGkywrmH9zg/dM8Sg+X3W2MbhSxN+
+ lCvQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXSHyUJEXM0n7h2sckPYIdae6UM64ZpqUuILTG2s2Jb8AczsNufUgEaCYvB0OKvNMzdGE0kzi4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzfC/i5ny0Dq4wVoC/nBaagq1673fPtwehqbj+g8i0Zeff9cW1L
+ fGd9ZNL5MBeey13UfdnnwXmliex7dfnFfmAZ9+0Bw2inxbdhiIY/1ncExVgQLQdd7zydzBi7iKb
+ EmUD3i296n8eCQsuNFr1OmC97Z+sAeem40zWZCxybcw==
+X-Gm-Gg: ASbGncvISMn8rw9BjFIKzy20hThj0CSu4FPgQVS2pOHPAAQcRdal4yCmMK8WKiQ9Rzq
+ r7nAoOjeg2PMXqnwHYGzEzGzPQpJdRqz9Oq8O9xvJMVjBKZXBy+v9bC7lHqVRH5dZzsZcz/aVaK
+ haF5J4059gr21eLHdKGM649Onk2AtiEHoa9PcMSFj2/CVnb0nTsSXsdBwVS7MtWukB3rsOm7WKw
+ 8QE/RttpGMLoBLVGBUU+xFvc9KNB/RzuQOUFK0IEepRdpfPo/mseA7k42tE8uCeovcELKz1Yvno
+ 1flcIJXB
+X-Google-Smtp-Source: AGHT+IFnCgFl8KMiYoY5MSljE8lBjIDPm0RutPVzsHrioFwzt00INYgLd5Y+g0ycO4NOTbM75k2NUWcSHx5G7TYY0CQ=
+X-Received: by 2002:a05:7301:28aa:b0:2a4:3593:ddf6 with SMTP id
+ 5a478bee46e88-2ab92e9abb6mr1860250eec.35.1764795168415; Wed, 03 Dec 2025
+ 12:52:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251125212953.1733-1-briansune@gmail.com>
+ <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
+ <d024aad3-6ad5-471e-8290-e802bdbf7ead@cherry.de>
+ <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
+ <CAN7C2SBPC=u7QJD7T=3NUUOjPqXo1UWqHb_QRzsOR_wtvZrk7Q@mail.gmail.com>
+ <85af1053-f8c6-4983-adba-7a1e845651e4@altera.com>
+ <CAN7C2SA78DM+XaXMJNA26o0EzxFkdwL26BfcH91boepT0bDPKQ@mail.gmail.com>
+ <CANp-EDaU0Vw0dqWOfAXKub6Qq8FN5LvNJyttB6-EA4imAK8mvw@mail.gmail.com>
+ <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
+In-Reply-To: <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Wed, 3 Dec 2025 15:52:37 -0500
+X-Gm-Features: AWmQ_blueLN951yRSCqK38Wb4LdurKg899VWqb5hd_-1uqo0QwOKXGkxMvrXcck
+Message-ID: <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
+Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+To: Sune Brian <briansune@gmail.com>
+Cc: "Chee, Tien Fong" <tienfong.chee@altera.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,29 +106,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When I modified this code I meant to accept the LGPL offer to convert the
-license to GPL. However, while there is an LGPL 2.1, the next version of
-the GPL after 2.0 is 3.0. Fix the license version
+Hi Brian,
 
-Fixess: c4ac52f55d9 ("test: Add test for strlcat")
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
----
+On Wed, Dec 3, 2025 at 1:17=E2=80=AFPM Sune Brian <briansune@gmail.com> wro=
+te:
 
- test/lib/strlcat.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> But did you disable also all "CYCLIC" as well?
 
-diff --git a/test/lib/strlcat.c b/test/lib/strlcat.c
-index d1a0293271b..a3d4eee4795 100644
---- a/test/lib/strlcat.c
-+++ b/test/lib/strlcat.c
-@@ -1,4 +1,4 @@
--// SPDX-License-Identifier: GPL-2.1+
-+// SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2021 Sean Anderson <seanga2@gmail.com>
-  * Copyright (C) 2011-2021 Free Software Foundation, Inc.
--- 
-2.37.1
+I have "CONFIG_CYCLIC is not set" which disables all the others.
 
-base-commit: 69c8ea98a713f88f4a6ffad9df2a72b1a767f629
-branch: strlcat_license
+I also have another patch to disable the watchdog, adapted from [1].
+This didn't seem to make any difference (but my ram calibration
+doesn't take very long).
+
+[1]  https://lore.kernel.org/all/20250603115442.19971-8-nareshkumar.ravulap=
+alli@altera.com/
+
+> 3) I use socfpga_cyclone5_defconfig and only change minimum settings
+> that I needs.
+> From this issue mentioned to current day.
+
+Then it sounds like it is a recent issue... hmm... I'm currently on
+2025.10 release version (plus some cherry-picks). I'll give a try on
+master/next once I get some other things stabilised...
+
+Regards,
+Ralph
