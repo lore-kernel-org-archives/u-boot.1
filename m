@@ -4,99 +4,183 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2151ED1266D
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 06:08:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 936AAD1266D
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 06:46:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2102A83F2E;
-	Wed,  3 Dec 2025 07:08:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D0B7B83F3F;
+	Wed,  3 Dec 2025 07:46:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lTgzbOJ0";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="XEZYaqf+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C2B983F3F; Wed,  3 Dec 2025 07:08:52 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8C15383F4C; Wed,  3 Dec 2025 07:46:35 +0100 (CET)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54A5C83E7F
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 07:08:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBE7D83F2D
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 07:46:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-640860f97b5so9505478a12.2
- for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 22:08:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764742130; x=1765346930; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ssVWBM11Ye90IYy8O0LMjQSQQ6O7uA/Z14jtBPgTp20=;
- b=lTgzbOJ0PI56AFyY2kvWU5SQQh03yZ+vtECCyC+VR1cmEXnlMhABV/bO4DEYzXjX5l
- 6c9VFL11VWiSf1gQloLlcvKVoRkYXpcd85qmYvB/NAikuow+73AiCdmzSKemCrCqo1K+
- VYIFaEhpPLJW3g7Y16lKZtHcy5AIIfL/buKVZ7eDOmd+lGN86H9eQGUgkDMbpFeGMNRG
- 0YuRgbuzauR/WRWM6PyE+cUOTJsseKXiTh8sqolQMpYPucd8U57nQhMBdlGSVsGddhtq
- I7MwtaVgZU9y1OW8mg/5ZIlNwde6wLBO+7aywtCrv2FasszaUtROijW62FdHkjFR3LJP
- tMQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764742130; x=1765346930;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ssVWBM11Ye90IYy8O0LMjQSQQ6O7uA/Z14jtBPgTp20=;
- b=CdKABXnSa4lChzB7oRZASbqoh0KgSQd2Wr5w45vfe9mYh/xQQhEddpE/fcY+6T/oYT
- cI1hJub+ZsUF++36yAEyedX+MofCMginpLzWCmuH3xQlEEDy+bUwxn3vOIXSCspKH+k9
- 1i2XnlEosyZlJThCKKGFNHtPN6ymTqjSvJDLG0Z8N6UlDFQOiyddjTMIAwcAGmiJL48O
- tyHoUgTI6mRHvALgNeYeQusxYfB1A65wFtHV1SOlpo/JnM6B347UGAz/oTYLoOlW5XPH
- hWJDliFDymPKCCeHAtBIA7Aw88SOaHI0kWffxcMyuWxrYwwe9vBmaNGDHN2xElzQsk8I
- Og7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWegL0y4J5ZdYXZZL8nRNJChlYbHRoP6qkSVwx/uAyXYFhoN549cON/2KHpOG1sGfMGXrTCh2U=@lists.denx.de
-X-Gm-Message-State: AOJu0YxloA9B+joJv9G21Vd/QoZUUJm4aPWfOOsfV4IVvFuQIFcIM1tA
- Xo9Z4E9wJOmeQnBcwfqOIJG+Uof9TXc6wBZZcX/yj5BgNzc3PlM0PxPpXM2oBEoWVHt5ZAhse9s
- Bje25KCoBNAKQNX4qhJgDFutYc3xG/q8=
-X-Gm-Gg: ASbGncuHFXIQU7plCtkRp9dTzE9845Egl/EtRQ2NtzVVyd4cH+W8ZhUCHIh+7bWciia
- /JCLH00qVl/ttnEt0n665PxlT3F2uClKoB0buhFYYdyEHoIAYx1mKU+pCvxa6getctfG4yq5HwL
- /IIhLpu+Z0Whj4+rEWTLy74im0824m4lM24aBFAcmDrTCxZ9yMBOh8ZeBsBxPg+Xmhr1jLDlzYp
- vzKMeuxCpoFUj8lDS7vJT8Uw1Nnc10UAH/f+9GwYWQ4CqqgWqg0BtEIctryh3BAaLf8AA==
-X-Google-Smtp-Source: AGHT+IGwIPb9TvaxfrgUO2nlWqgSE4JUywWFSZLuYP2yr9o4HVfWkecNO7EnNCvRqbibn0WGPDzlVeCooM8f3J4XYM4=
-X-Received: by 2002:a05:6402:350c:b0:643:c8b:8d61 with SMTP id
- 4fb4d7f45d1cf-6479c2f7296mr832329a12.0.1764742129523; Tue, 02 Dec 2025
- 22:08:49 -0800 (PST)
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jK6HwN7haZS5WFt0vpX/QkJwqI2sJkTPJnykbNKU5O4dPdqhg/GbV6Yryx8paoNU6KhKMNIedT59PZbuCPjebs3N87Va9nQnqpFLr7zSCFcJAB7FPZVTDAgn8JS68zWKbLrwvTy57oVHIlobmwgaxOI48XgWDHqs8vLMfwlEfxzXNuPVysJ2TYAXgwFK9RBB4sgOXTqJyvYbmipAOsPOiHcUqYnjFzh6oBwX96gbNPe/0uLvRC28Ron63tuLsVxhiEJTv1SKDvc14sk8txAKitI7MvjmraLtV7sYVnI97Zl593z6i0/QffA0wMNMpK2ZIew0jmvXFyUvMyb6qyozzw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pH3BMagNdKisgxOIkYt9oxx7h6Cxz444ybU6zI/PzPk=;
+ b=AZ8XKNtJx6ppGtaQd+RR/Hiork8WJxD0EeBDzncIR02xfOIPDwEBlZ4RJN3ZyWuVJiw+H2r+Xoxo7jkij4Wok2D29t0dQAwr17uvVcyuivswqskQyI4vzaxp5OHgjVKF6zjcSFFIBcsbDkvJ6aWyL4vnfy0/fUfUv5d6SV2rwSwmyVCCRjstZRluEzpZqEJs5spd44m7RAS57PrrkkWcU39AzFlz8e45KmJuthCXwR3Eefq6Fco/nzhmokC9YgA2rZJCcQLIQpMCQNCTmjmDzjnnlR7WsfwGEUW7U53LgHjb29YoNGHmVEY+1Gs3goEkWcTykebTpA9BnR1h5y0a4g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pH3BMagNdKisgxOIkYt9oxx7h6Cxz444ybU6zI/PzPk=;
+ b=XEZYaqf+V7QkS94S2gOA908IEaoBRERUGzkmNA3ZUK9dLyMJWZrzgyOgnIOR5YNRerDUJ3kO0h1e4JMdPSuPsSvnS0oJ92fFQM4VBSkjWv1siZgGo5eueMG1iVOCLWOc/xw/qVhPwOLpSLoCQhOhmOu/2WEHz2nhEdI3ygDHjazwxs5CJ7pUJhBvG601QzBzpmvYdJkU88h/xTrScxTDjTUKpGoh+u0+HC3eB33CF8zU9IFuXuc0ZU8h+tmq9ClWokgr7u7+EchhzLqqcBQIgT60nA597mzR/jBDxaotFtQaPBUh92/7vviXwb5PKnKavILcI5mCSUuVgnOxpjq7Gw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
+ by IA1PR03MB8061.namprd03.prod.outlook.com (2603:10b6:208:593::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Wed, 3 Dec
+ 2025 06:46:30 +0000
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::d020:3494:f031:fc29]) by PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::d020:3494:f031:fc29%6]) with mapi id 15.20.9388.003; Wed, 3 Dec 2025
+ 06:46:30 +0000
+Message-ID: <d481c4c4-76e2-4b6c-9bef-19c2d616fe23@altera.com>
+Date: Wed, 3 Dec 2025 14:46:23 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from empty
+ built-in.a in SPL/TPL/VPL builds
+To: Sune Brian <briansune@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>,
+ u-boot@lists.denx.de, Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>
+References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
+ <20251125081316.17329-3-alif.zakuan.yuslaimi@altera.com>
+ <3e4de604-292d-4232-893d-db43e29b469c@mailbox.org>
+ <19c33d9d-4cab-4add-9dff-f3b9e051f146@altera.com>
+ <3b219e15-5513-4474-aae9-9d9a8abeb61e@mailbox.org>
+ <f13e8fd9-9705-46ec-a2c4-9fc4c6a63e38@altera.com>
+ <20251128153130.GC2125796@bill-the-cat>
+ <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
+ <20251128164957.GD2125796@bill-the-cat>
+ <CAC_iWjLYvzHHJ+KYj68KWa=E+V3wc360HRf_dWCh7ny5bdEU9A@mail.gmail.com>
+ <CAN7C2SAEZgm8KshbGU3d48U3w01vtG5zvbzZRbA_3tE5S0E+Lw@mail.gmail.com>
+ <CAC_iWj+Jo1fP2ucXPY+q6+rFhHsT3PKz7H2J4dH-3cyAk01HEg@mail.gmail.com>
+ <CAN7C2SDDAtxfDiHUac9q-WfB8jr_eRPDKcbfrtbcyXDbdV7_nw@mail.gmail.com>
+Content-Language: en-US
+From: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+In-Reply-To: <CAN7C2SDDAtxfDiHUac9q-WfB8jr_eRPDKcbfrtbcyXDbdV7_nw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SI2PR02CA0035.apcprd02.prod.outlook.com
+ (2603:1096:4:195::22) To PH7PR03MB7063.namprd03.prod.outlook.com
+ (2603:10b6:510:2a4::6)
 MIME-Version: 1.0
-References: <e7b7b905-4a6c-4342-b1a5-0ad32a5837cf@gmx.de>
- <94561b0d-8203-4210-b599-93070eb934cf@cherry.de>
- <89385ade-7d7d-4a8c-b929-f4eb47e254cc@gmx.de>
- <4fcde736-c5e1-4800-8b75-ab87c0dd8b0a@cherry.de>
- <53057b6b-12b2-498c-aea6-88f535c0b096@cherry.de>
- <CANAwSgQcFRYKW0+vG6TVj_-EYYQSdF=t3KYFF0FtOSkN5uLtvw@mail.gmail.com>
- <11d29eb3-bc21-46e1-842a-bb163995fe59@gmx.de>
- <CANAwSgS9+naVnyFv=+1BDHdH4DpHGSCzWWZHFxiDKmDUXu+zCg@mail.gmail.com>
- <0FB759C1BA7AEB85+a26afcc4-c5e8-4452-a6ce-e19736be395b@radxa.com>
- <CANAwSgRRYg-QLATDWcdf8nubv1+Hqn9r_R8D1bFYui3i1nYitw@mail.gmail.com>
- <53143B48341F9068+600cd801-8c7e-4407-a3e9-13c83ac5ca67@radxa.com>
- <CANAwSgQBwoUNYQkhbkmBZ3UMAO=+NUw6rK+=vT0=BCBRxAjD6w@mail.gmail.com>
- <99ACD06BACB0AD72+efbd4b3a-db5a-4a83-97c5-c1df635385ff@radxa.com>
- <CANAwSgSc1AgkXUkEWHqKgWbOa4djL051mLh4J23m+mkVopRQdQ@mail.gmail.com>
- <a9a4deea-4f53-4103-97f9-32d96177c6e1@cherry.de>
- <CANAwSgR0cX8nkUMx6ubHjsLgrV95MMHeqMaUqGGgXgUhd77VBA@mail.gmail.com>
- <4D137134CA227A81+dba25938-64d5-4518-83a3-ee85e61eee60@radxa.com>
-In-Reply-To: <4D137134CA227A81+dba25938-64d5-4518-83a3-ee85e61eee60@radxa.com>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Wed, 3 Dec 2025 11:38:33 +0530
-X-Gm-Features: AWmQ_bkdhGsmDq3J2Xi1RlHfWN81JtTlpPfgtqFswG9xx75RVH5rgNqjq_5hncY
-Message-ID: <CANAwSgSAA9G_DYeuYD9HMn=asJEEfe_9_QPsyfkj6yvpxtebgg@mail.gmail.com>
-Subject: Re: [BUG] Raxda Rock Pi 4A serial console output stops prematurely
-To: FUKAUMI Naoki <naoki@radxa.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Jonas Karlman <jonas@kwiboo.se>, 
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Stuebner <heiko@sntech.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|IA1PR03MB8061:EE_
+X-MS-Office365-Filtering-Correlation-Id: fdc4ff6b-e7b7-4859-07e5-08de3237b057
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|7416014|376014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RkhWb1JYSUtsR2pzTUxLUFlnZTBxbi9IQUJneHBwMlVRNjQ2MjdPL2F0R1pR?=
+ =?utf-8?B?SER1UEIwQlVuaEEvUzJQTzdCQ1VtdmFrOGVmUU5UVmJsQkw3dStCRWNKWFV2?=
+ =?utf-8?B?N2NTcUhoMzJ1YWQ1TEl4MnZFdDgvdjBWbGtlcHd2NTFmeUJVWlRwSGtqWjlG?=
+ =?utf-8?B?WnVHYUhCVTNoMUtBaGVHelZhUTNER1pDUkk0UjVJdlJYcHhVazBkYW9FMnJk?=
+ =?utf-8?B?WDd0NDY0NlVZZnBJbDFaVlNvZWFQdTJwWG9PekpKNHIzeFNvVmw2NnRoTGhM?=
+ =?utf-8?B?M3M4QnpMVmFoeHlRdkxNVFU3T3M2Zm53aEhqek9BWVlTbWptQnBVTm5OYkVY?=
+ =?utf-8?B?ZE1Vd1ZrMWxSNGowd3M3cW9mdkVhT0ZRUDdoT1RrQ0VTb0draXI1V2tWOHJF?=
+ =?utf-8?B?cG1xMlhhNkJCbVcwWUJETFB3WFpLc3g0RUV3SWNodXhHOTlBbUcrQWVlajEv?=
+ =?utf-8?B?T3JmQUttMlZ4allUU3AvSUlySEdJU3I3ZjhkRDJ5b0xobkw5RlErRlZzY3No?=
+ =?utf-8?B?SzhmaU9KZ2NCMFg1aDZiOWQwL2dnY1FiakZsVFkyQmUyYk1HN0RQUCtxOE5k?=
+ =?utf-8?B?ZWFUaHpob285czdqTGhzajIzOUhScXBtc0NlQjg3SWUrR3BEK1VTa3Nab3dw?=
+ =?utf-8?B?VFYxOWM5b0cxbXpnSk14ZUE4KzN4bGRycjdXSDF3TWI1U3lQdm45dG1WaFFv?=
+ =?utf-8?B?Y1I0ekZ6aWZBTk1rZlJVdDBiTzAyVjQyNlpmK0sxYVYxenlPTXZKVGg1WTlY?=
+ =?utf-8?B?TWNBNFNaMEJrZ25vR2dLc1JCTW9lejRLdmlhUEVmbUkzdi9PSzlWVTNMVlJ3?=
+ =?utf-8?B?YlFNRW5ZbFpCaFZpNHE4V3FHN1dSZFJnVmx1UVN3SzJBa01JZmVlNTBxbVNV?=
+ =?utf-8?B?YmxybmZub2pUUzlJNTA1K0tOUWhWTm5Wa0cyL0NRaXZ1R2ZrdTZ4MEQvM0sr?=
+ =?utf-8?B?bERKbjdwTkFKb0xUdG1IcWtBOTlSWTV2Q3JLc1V1UnM5ZDRnQmpHTnhVUVhY?=
+ =?utf-8?B?YVhvTVhrdllqME1pbUxsTzNyaG5sQjUrbllMUUk3RStSc2V3djJMaWQ1WmxJ?=
+ =?utf-8?B?dDAySUpXcHpyaWJQZ05YYVlCcHNkYTBvRkZkVjZoT1ZDMDZ0RnhsZVF6cTZZ?=
+ =?utf-8?B?b016M2tLcGdSTXRMTjlRQXpwZkxEUUlaQzJ1RnZXRkxTTlFGNFYyUm5PVFlX?=
+ =?utf-8?B?T1AwV2xnQXlVSEdKLzFJUEpqaytjd2hqYUhxWk1mN1hvWTN6SlB1QThnNTFh?=
+ =?utf-8?B?SkU3Zk9aSDg4VUxWbnF3ckl5Mkx6MzBWaGtPL1BIZnNqcmZISWkrTUZxYWpE?=
+ =?utf-8?B?Q3VjRGRaSFkwd2o2Q0ljeVg0WGplQXJ0RC90eTlLNUtQTEZKczhLcnJaUUUx?=
+ =?utf-8?B?dU4vbHo1VjFyemd4SElvY0FyVzY5eW43cXovcFpOdGVleXFBcDFHMnErRyts?=
+ =?utf-8?B?UzVPbFI1ZFFTN2lzRFhkWGtHQmxsN3p1MDVpcklHaFE4TGltTnpOVDl6WTYz?=
+ =?utf-8?B?WTMzQXMvZVFXaU1zdWZ3YTZQZEZQMWxJb3BpQzFESHF3VXgvdzNuNitHT2FI?=
+ =?utf-8?B?SlpuTlpaQmcvaER1WEhGdkRCVStoOGRiY2JiQmMyamJFMlE0a21JZ0R5UUpa?=
+ =?utf-8?B?WFFRZnVKcjVOMVowd3U3T1EySEVJZVlFNFZlOUdMRDJpUWVSNVptR2pZRmJk?=
+ =?utf-8?B?NjVacGNKRnIyRjZQczZMTmFKb2cvMjYrUzMvVVRlT3JuM21ZYmNqcFh5MmtZ?=
+ =?utf-8?B?S1Fiam9RdXY3djFzTXF4aVFFL1V5Ni96cWxIZ3hVc05sUG96STVsaWlpL0Jh?=
+ =?utf-8?B?c0pab1pkaDJWaEFQdi9TaWV1Z0Y4YU1SN1A1eWYxTWc2M1draUJPK0FEaFRT?=
+ =?utf-8?B?WXhFM0wvVkx6eUJ6cWdkOVh3bmpSeUFYbHZMNmtITllCWURoRzcreTkrQ1Z2?=
+ =?utf-8?B?Qkphb1R6bXZFbVNhRmViMkJXUlBRajR0QUFxM3NXQlFiQ1BPcDl3dzYxMXBx?=
+ =?utf-8?B?QmpWZlY1YkFBPT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(7416014)(376014)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZGw4UUkwVGpOSytUT3NYODJoWXBQcWVIL0VsOHlmak9Vd2NadWZMc0RUWUhl?=
+ =?utf-8?B?ejkwbG5lRjVwT3ZHZDRDMm8rRnV5cTdZYkdsNE5mVkRPZ2xLU0YrNnJTTEN0?=
+ =?utf-8?B?SjY0dlFqQmpCUzVuWkl1RkF5TEQ0czFEVkVvaFdiL0h1U2FhMHR2TmxLa1RR?=
+ =?utf-8?B?dkFZWjF5eDVmWktBMUs4cWpvSEdEVVVzNzdmdkxRaW9UUVRpS1hvdS9rUngr?=
+ =?utf-8?B?RC9pVDRDVjcxTlk5MGxwdXg4Rmh3U1ZtSHJsZC9lQW1ESGE5TDMwUmpjSzZm?=
+ =?utf-8?B?TURrREp5V2ZLQ3ZjK29MVE5NcGswaG92ZUtuSVVtdk5VaGdhRTlYQVdQU3JJ?=
+ =?utf-8?B?eFB0ME55aFEyMy9pVjZwUEFneGlRSzc3YWRkYkcxRzRiS0NvdW4vREJBQ2dh?=
+ =?utf-8?B?YXMxNzRPU3hrOEM0bzloOHJ5NUtWb3R6ZGhkL2VCOC85dFMvZVU5M1hyYndV?=
+ =?utf-8?B?RHdHYnZnc0Zpd1pDeDFhUzl5TE45UzljcXlkWkZtRHRTclVPZThLZVljMnl2?=
+ =?utf-8?B?WXEwL0FoeUo1S3JIdk1BZUlZRVREWThqa1RwdW5ZMnZmYUg2QkxmeUhBOU9M?=
+ =?utf-8?B?UUxMdzBmcmZJVE8yRTdjLzROdkgrMzlmUEZBZHlBN3E4WTlSSW0ydjRJZ21s?=
+ =?utf-8?B?SkhvaVBteE8wUUNFbWgzR3ZXMjVMelJjd21HbFQ5OW8yVSs3U2pFQjEyOENt?=
+ =?utf-8?B?eGdsYzlubkxkQVhLbWF3bW9xSitwTjRndDFDU3l5dmtvRzlNWXJVN2FjVThy?=
+ =?utf-8?B?dWNlNW1Ca01PRXdOM2ZoMms0RnFxbzEwRzN1WWo1ZlB5ZFdIZkQ0RGt3NVli?=
+ =?utf-8?B?dlJwajlHa05VUW5aVXYwcG4yUCt0SU1icEdKcXNMOHA5b3F4N2w4YmlyTmc4?=
+ =?utf-8?B?ZTRqdGtYcllGNVJwQXB6K1lzVWYzUk04VDVOSlBzZDdzT0pHRktkMW85czNn?=
+ =?utf-8?B?ZHcwakxyR1pqWHVCQ2dwQkEyaGpwSTQwUldmNkREbmw4SThqdWlKcDR5Q2dr?=
+ =?utf-8?B?Rm1wYWVBY0hyeGJLeDlwdDE2RDJjR01Lei9aSnVscEo3ZXk0SDVNZjRsdVZw?=
+ =?utf-8?B?TkRkOGJac3ZCc1VsamFDay9FSnRFSkR0aXY0TzdXTXpPMEMvOWVUSzllMFRO?=
+ =?utf-8?B?MUpCK1NmTXFiZ0RVT09KbGVqZkM2b2tyOGxzaXlDalZadVlUZkE5K1VSY1p6?=
+ =?utf-8?B?dEJGZTZlWlI5bDhNZ2hXRmFoTTF4dDJudHNqVzFJYWJDcDNHcXFPMmsyMWJG?=
+ =?utf-8?B?Z2Raa2hzUUxncGlTVUQrY2VJOEMrT1hlUFBEMitKS05ldEJuS1RrbTdtZ0F4?=
+ =?utf-8?B?K3UzRE0wdmlhSit2TVhnU1kzekZ6MkdMSXlMQTBiQ0Zic013dzdJdkVSUXR5?=
+ =?utf-8?B?K2JUcDZGcWtIc3cySm1NNHZscFdkdjl3WklrUXhxekFvSExDQis1UVJpM3Bq?=
+ =?utf-8?B?WkJFQklCYzhjSVZzRGViQXdVOWlzUHkwdy9zQ3h1d2VxNnhqQUkzaHpwZVpR?=
+ =?utf-8?B?K3dYUlpuZzRKd3pIbTFNUGlkVVg4Nk4rM1pGbHFCbHZlWWpGVDIvcElqK2dj?=
+ =?utf-8?B?UzR2aTJpd09nQW9pV3ZwOEIvRnRVdHB6c0hQTjZRT1BZcU00NVN2Sm1Hc0hS?=
+ =?utf-8?B?dE9xZWI5UGxkVm8wdVdxQlRDSjJCdkNWZFBVZ0lIZXRTNmR1cEdITGJESURz?=
+ =?utf-8?B?M3JGbXdDZ2oxQ0Y3aWV4UnZONm1BenRWQlpaTiszanVTMFV1Y2tlN2pFbHJY?=
+ =?utf-8?B?SjMzR29scWtIdmpUSlBacUgwME5MU3dabjNXTG11U2srSnNXaVc0VjY4MWVY?=
+ =?utf-8?B?Sjh1MGpTUEVoYlhzcU9lb1R3bVJNVjZTWG9VWWNlRTRSdUFUNERWcmdDeU5I?=
+ =?utf-8?B?SzVJY2k4R1p1a01NMjhidVNDV3BvZXNLTGcyTVYyRWVCTnJQM1ZxNE1Za2xJ?=
+ =?utf-8?B?YnlkVE1sdU5lMFJIS012OVBrZG5iNGxvczBvMVlGK1Q5eCtuRTAvSkpQcDlW?=
+ =?utf-8?B?V0IyWW96TnNOaEVaTGhySndzYllmNGV6L3plWFdydERXYUJvZTRsVXdlbmtF?=
+ =?utf-8?B?TGdBMFRiQ0paMERhK3BBanpSY3RQYk81bVNIeDg5b2w3SVRIN3gzSnVVVkww?=
+ =?utf-8?B?U3M1SjIycXZaOU4yUS9vZ2VESnZndk5VVUVLWUVubGJzenZIOTNrUFBQanJ2?=
+ =?utf-8?Q?IPP10b2nG3n8500W9ZFhBOs=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fdc4ff6b-e7b7-4859-07e5-08de3237b057
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 06:46:30.0023 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1EKxg5ty5XGxN54+r8BNceLSFGsUr804DKoTNf4XHCSUX2zejsLLFNLB1+rzrTZTgDDFTLferIS0P1wNtQjokAQgOGc2FaaHOF3M6XoAh+0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR03MB8061
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,167 +197,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi FUKAUMI, Quentin.
+Hi,
 
-Thanks for your help.
+On 2/12/2025 4:59 pm, Sune Brian wrote:
+> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
+> 
+> Ilias Apalodimas <ilias.apalodimas@linaro.org> 於 2025年12月2日週二 下午4:53寫道：
+>>
+>> [...]
+>>
+>>>>
+>>>> Ok, let me go through my irc logs in case I find it.
+>>>> Reading the email thread we should compile with anything > 8.1 right?
+>>>>
+>>>> Cheers
+>>>> /Ilias
+>>>>>
+>>>>> --
+>>>>> Tom
+>>>
+>>> Hi llias and Tom,
+>>>
+>>> I have a question might be wrong or not even exist.
+>>> Tom mentioned GCC 8.1 kbuild but u-boot is considered as
+>>> kernel build or it does not always be that case?
+>>
+>> We use the same Kbuild system as the kernel. I updated that a few
+>> months ago since we where stuck on a really old version.
+>>
+>>>
+>>> At least so fat there are nothing can build properly below 10.0.1
+>>> Using ARM official cross compile binaries.
+>>
+>> I think I tested with gcc11, but I I don't remember testing with 8.x.
+>> I probably missed something on the backporting. I'll try having a look
+>>
+>> Cheers
+>> /Ilias
+>>>
+>>> Thanks,
+>>> Brian
+> 
+> Thank you IIias I don't really know all the u-boot things.
+> I had provided the first draft for fixing GCC check.
+> https://patchwork.ozlabs.org/project/uboot/patch/20251202041029.186-1-briansune@gmail.com/
+> Now it is on 10.0.1 if 8.1 is the case will update after your confirmation.
+> 
+> Thanks,
+> Brian
 
-On Mon, 1 Dec 2025 at 22:50, FUKAUMI Naoki <naoki@radxa.com> wrote:
->
-> Hi Anand,
->
-> On 12/2/25 02:09, Anand Moon wrote:
-> > Hi Quentin/ FUKAUMI,
-> >
-> > On Mon, 1 Dec 2025 at 16:12, Quentin Schulz <quentin.schulz@cherry.de> =
-wrote:
-> >>> U-Boot TPL 2025.10-1 (Oct 31 2025 - 11:12:15)
-> >>> lpddr4_set_rate: change freq to 400MHz 0, 1
-> >>> Channel 0: LPDDR4, 400MHz
-> >>> BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D15 CS1 Row=3D15 CS=3D2 Die BW=3D16 =
-Size=3D2048MB
-> >>> Channel 1: LPDDR4, 400MHz
-> >>> BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D15 CS1 Row=3D15 CS=3D2 Die BW=3D16 =
-Size=3D2048MB
-> >>> 256B stride
-> >>> lpddr4_set_rate: change freq to 800MHz 1, 0
-> >>> Trying to boot from BOOTROM
-> >>> Returning to boot ROM...
-> >>>
-> >>> U-Boot SPL 2025.10-1 (Oct 31 2025 - 11:12:15 +0000)
-> >>> Trying to boot from MMC1
-> >>
-> >> I believe this means you booted from eMMC. (MMC2 should be SD card as
-> >> far as I remember)
-> >>
-> >> When you boot from SPI flash, you should see "Trying to boot from SPI"
-> >> first, if it fails then it'll try to boot from eMMC and then SD card.
-> >> This is due to
-> >>
-> >> u-boot,spl-boot-order =3D "same-as-spl", &sdhci, &sdmmc;
-> >>
-> >> in arch/arm/dts/rk3399-u-boot.dtsi + SPL_SPI* symbols in your .config.
-> >>
-> >>> ## Checking hash(es) for config config-1 ... OK
-> >>> ## Checking hash(es) for Image atf-1 ... sha256+ OK
-> >>> ## Checking hash(es) for Image u-boot ... sha256+ OK
-> >>> ## Checking hash(es) for Image fdt-1 ... sha256+ OK
-> >>> ## Checking hash(es) for Image atf-2 ... sha256+ OK
-> >>> ## Checking hash(es) for Image atf-3 ... sha256+ OK
-> >>> ## Checking hash(es) for Image atf-4 ... sha256+ OK
-> >>> load_simple_fit: Skip load 'atf-5': image size is 0!
-> >>>
-> >>>
-> >>> U-Boot 2025.10-1 (Oct 31 2025 - 11:12:15 +0000)
-> >>>
-> >>> SoC: Rockchip rk3399
-> >>> Reset cause: POR
-> >>> Model: Radxa ROCK Pi 4A
-> >>> DRAM:  4 GiB (total 3.9 GiB)
-> >>> PMIC:  RK808
-> >>>
-> >>> You see, I could not control the UART with the key pressed.
-> >>
-> >> Because you don't have the audio-supply patch for this U-Boot maybe? O=
-r
-> >> you didn't actually flash your newly compiled U-Boot on the device thi=
-s
-> >> U-Boot loads from.
-> >>
-> > My board=E2=80=99s SPI flash is running an outdated firmware that lacks=
- the
-> > auto-supply patch.
-> > which results in the UART console being locked
->
-> As Quentin said, your board is booted from eMMC. This is why "kill SPI
-> flash" didn't work.
->
-> Please try to erase eMMC, e.g. `blkdiscard /dev/mmcblk0` on Linux.
->
-> Or, please make & insert bootable SD and press & hold maskrom button
-> (i.e. kill eMMC) while power on.
-I had tried this process earlier, but if did not work
->
-After installing a fresh new OS and recompiling the latest kernel
-I have finally been able to get the SPI flash to detect in userspace
-I just used your audio-supply patch to get this working.
+I am able to build CycloneV with the later GCC 10.3 version on my side 
+without this patch included in the patch series.
 
-alarm@rockpi4b:~$ sudo mtdinfo
-Count of MTD devices:           1
-Present MTD devices:            mtd0
-Sysfs interface supported:      yes
-alarm@rockpi4b:~$ cat /proc/mtd
-dev:    size   erasesize  name
-mtd0: 00400000 00001000 "spi1.0"
-alarm@rockpi4b:~$
+Thank you all for your valuable inputs.
 
-alarm@rockpi4b:~$ sudo flash_eraseall /dev/mtd0
-flash_eraseall has been replaced by `flash_erase <mtddev> 0 0`; please use =
-it
-Erasing 4096 Kibyte @ 0 -- 100 % complete
-alarm@rockpi4b:~$
-alarm@rockpi4b:~$ sudo flash_erase /dev/mtd0 0 1024
-
-[sudo] password for alarm:
-Erasing 4096 Kibyte @ 0 -- 100 % complete
-
-But this command did not erase the SPI flash completely
-
-After running the following command, I can flash the image to SPI flash.
-
-alarm@rockpi4b:~/u-boot-rpi4$ sudo flashcp u-boot-rockchip-spi.bin /dev/mtd=
-0
-alarm@rockpi4b:~/u-boot-rpi4$ re
-
------
-U-Boot TPL 2026.01-rc3-00080-gc589cff7dc5c (Dec 03 2025 - 11:23:01)
-lpddr4_set_rate: change freq to 400MHz 0, 1
-Channel 0: LPDDR4, 400MHz
-BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D15 CS1 Row=3D15 CS=3D2 Die BW=3D16 Size=
-=3D2048MB
-Channel 1: LPDDR4, 400MHz
-BW=3D32 Col=3D10 Bk=3D8 CS0 Row=3D15 CS1 Row=3D15 CS=3D2 Die BW=3D16 Size=
-=3D2048MB
-256B stride
-lpddr4_set_rate: change freq to 800MHz 1, 0
-Trying to boot from BOOTROM
-Returning to boot ROM...
-
-U-Boot SPL 2026.01-rc3-00080-gc589cff7dc5c (Dec 03 2025 - 11:23:01 +0530)
-Trying to boot from SPI
-## Checking hash(es) for config config-1 ... OK
-## Checking hash(es) for Image atf-1 ... sha256+ OK
-## Checking hash(es) for Image u-boot ... sha256+ OK
-## Checking hash(es) for Image fdt-1 ... sha256+ OK
-## Checking hash(es) for Image atf-2 ... sha256+ OK
-## Checking hash(es) for Image atf-3 ... sha256+ OK
-## Checking hash(es) for Image atf-4 ... sha256+ OK
-load_simple_fit: Skip load 'atf-5': image size is 0!
-
-
-U-Boot 2026.01-rc3-00080-gc589cff7dc5c (Dec 03 2025 - 11:23:01 +0530)
-
-SoC: Rockchip rk3399
-Reset cause: RST
-Model: Radxa ROCK Pi 4A
-DRAM:  4 GiB (total 3.9 GiB)
-PMIC:  RK808
-Core:  306 devices, 34 uclasses, devicetree: separate
-MMC:   mmc@fe320000: 1, mmc@fe330000: 0
-Loading Environment from MMC... Reading from MMC(0)... *** Warning -
-bad CRC, using default environment
-
-In:    serial,usbkbd
-Out:   serial,vidconsole
-Err:   serial,vidconsole
-Model: Radxa ROCK Pi 4A
-Net:   eth0: ethernet@fe300000
-
-Hit any key to stop autoboot: 0
-Scanning for bootflows in all bootdevs
-Seq  Method       State   Uclass    Part  Name                      Filenam=
-e
----  -----------  ------  --------  ----  ------------------------
-----------------
-
-Thanks for your support and guidance.
--Anand
+Alif
