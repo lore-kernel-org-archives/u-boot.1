@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1604D1BDDD
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 20:52:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E66FD1BDDE
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 21:02:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B3FA83BF1;
-	Wed,  3 Dec 2025 21:52:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A7C8383C98;
+	Wed,  3 Dec 2025 22:02:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cY5/G9kw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c1Zja/cc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E009C83C28; Wed,  3 Dec 2025 21:52:53 +0100 (CET)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id 47F2283DA7; Wed,  3 Dec 2025 22:02:49 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EA2F83BB1
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 21:52:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5300F83C08
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 22:02:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-bc29d64b39dso92712a12.3
- for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 12:52:50 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7c6cc366884so111099a34.1
+ for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 13:02:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764795169; x=1765399969; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1764795764; x=1765400564; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tAJkNYPa3yikGxdlsYw23j+TVCRNl96w1L2ykMC1wv4=;
- b=cY5/G9kwwm36kVZI5V7hbFrBKF79IqpeUi8u2e1zN/GsMOgsAczmIO3asTNY708FAM
- wcmOA/jArOXYXR1yP4frOHf5wVcqN1P8NdSnrRwAMJunOcW8JLvGz9IS4ElHrulm3LZ6
- oL15Hht1C+Wpc7pC86b8RaRWkgCTikOYX/9/gFoEWNfbcp0N4J/n7zxevzVan2SdHz2v
- Lkj1DeTOnF7/FUjHf5mYZ4g1E8iLtsSGdxQ6GAby6E8nrWqgshfXc0iJI/RIOIOcOEZ1
- UkGVFX9PKHJ+vGPD/26FVAfAzChSnT47WkLeizF5GfZx4iDGirLwXO6Lufc8ylfeLKKT
- v7zg==
+ bh=TzTUTTWLDjOg+v8sFIhYlOOQ1y5snW+xPSBOcKhovOU=;
+ b=c1Zja/cc+4TNuPNHudIDpp+DZEEsi+B1OVRJlZ55VJiAJSdsRlxovn6+M1CAPgHb1A
+ McMwaM49JoDB2uEL3PGAjUdftB67pQ+wmDWF5m2odqHtH2kC6nfpjV8N55HkDlPOIGRd
+ 6Bur1E0m6upRI4ZsE8fAZHvmeQjxTo/phQFPYm26kNI/Tqlc+ZuBK5PF10K4Jv9JLmOf
+ iC7BSz/Hwip708wWYx/KtdxKQUcT2OX2YPCh0O85E4tn5PCRfZy4PKaSwO9d5L0665Ae
+ Duakqtzb9n7YKa43nqI/jcGKjFcxvxcc82C0eBoiQvhlXWrwJOjH8Z9IrYXb3cK+qz8T
+ TtGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764795169; x=1765399969;
+ d=1e100.net; s=20230601; t=1764795764; x=1765400564;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=tAJkNYPa3yikGxdlsYw23j+TVCRNl96w1L2ykMC1wv4=;
- b=luaHJIKqpymX69y6h8CCDyRNZfLQifYIVnaxHyHqYwjF+QNGyJ3+1B/95fxjgTiAKe
- IBsH5f4pvFG7h9rAVKszB7GmZc1HIlSxCGOF7hHtFg2tE5JjXsIskjxPjXGboeIgIDYu
- 2V2yXNQ7brO48y8lL9EOQs3+PQ1hSQBnkJo1nj3Cnx1YA9BK9qMqnM9kEJdCO7t+Xa21
- eXZcxBh9WiIrR7qyBGyg+LMX8d3PeddxL2wXg3AnJxXsxsT3RZdxnPTMamhTOETOfrvS
- DuNb39U00yNpHCelUlN2Fk81HTUccecFvyTHPgKFGkywrmH9zg/dM8Sg+X3W2MbhSxN+
- lCvQ==
+ bh=TzTUTTWLDjOg+v8sFIhYlOOQ1y5snW+xPSBOcKhovOU=;
+ b=bgTk8l1pa+ITAhOR3DOa4pBQRZgLHaKtmkzeBviw/1G3yxld5DVa1QodXnmlHC8E1V
+ Wv5z0T8kDM9dC+ov145O/O2CDWMOA1CsQVUtHMU3USUjMEGP9mDfqZn9cl/RL5pXCkMO
+ 0lUhmb2NDySOfkAfwl92UZFYBh1gxMD3KRbU8sCJfzRM5b9LkGsUhXglBBfZDYEP+sLH
+ edlIEWsVXzvI0PF3xRMm0uXQTtYuWYfSo+B7tW+GiwY1ycW4ob1J8O7hXFZbsp2RVQjJ
+ 0n9SfvAkeXguMSTBwansTHcDCfemzdFROzlK3Wv1YTDKDe6WJq0piAlbKuRvvMRX3YCy
+ G6iQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXSHyUJEXM0n7h2sckPYIdae6UM64ZpqUuILTG2s2Jb8AczsNufUgEaCYvB0OKvNMzdGE0kzi4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzfC/i5ny0Dq4wVoC/nBaagq1673fPtwehqbj+g8i0Zeff9cW1L
- fGd9ZNL5MBeey13UfdnnwXmliex7dfnFfmAZ9+0Bw2inxbdhiIY/1ncExVgQLQdd7zydzBi7iKb
- EmUD3i296n8eCQsuNFr1OmC97Z+sAeem40zWZCxybcw==
-X-Gm-Gg: ASbGncvISMn8rw9BjFIKzy20hThj0CSu4FPgQVS2pOHPAAQcRdal4yCmMK8WKiQ9Rzq
- r7nAoOjeg2PMXqnwHYGzEzGzPQpJdRqz9Oq8O9xvJMVjBKZXBy+v9bC7lHqVRH5dZzsZcz/aVaK
- haF5J4059gr21eLHdKGM649Onk2AtiEHoa9PcMSFj2/CVnb0nTsSXsdBwVS7MtWukB3rsOm7WKw
- 8QE/RttpGMLoBLVGBUU+xFvc9KNB/RzuQOUFK0IEepRdpfPo/mseA7k42tE8uCeovcELKz1Yvno
- 1flcIJXB
-X-Google-Smtp-Source: AGHT+IFnCgFl8KMiYoY5MSljE8lBjIDPm0RutPVzsHrioFwzt00INYgLd5Y+g0ycO4NOTbM75k2NUWcSHx5G7TYY0CQ=
-X-Received: by 2002:a05:7301:28aa:b0:2a4:3593:ddf6 with SMTP id
- 5a478bee46e88-2ab92e9abb6mr1860250eec.35.1764795168415; Wed, 03 Dec 2025
- 12:52:48 -0800 (PST)
+ AJvYcCWgFKqNs5H1BxmcVawfKySzimY11VSqt1uWg8gz5ge+1lNew7t5d5EHBtxoyImALhY/4gOT1AI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy5aspEVfsKEoaggGUZLBZhQ4kXijfrDQxcjwgZhD3QsjuTAhcR
+ DHY6lHKosUwVu8zW3Z1+9FaXkSwXedcMobTQCyUeYVYcBBv/QCTeNW/HLQgHL4avv9E+6PAUcS5
+ mgIlGbkTcaIdQTXiOjq/4ODVni2W3idU=
+X-Gm-Gg: ASbGncv63NqaYa1H6rogworxvWgChwDp000VbxOwPLr7Hd/+S0iaCzZnlP6Gfi1NUbL
+ l1EzXxtzSyy5IBM3cKA5Qimdm67xgj2W3UXYoHys27iZ2wAfpe1TPNRRiE7jjBc3CCUE2es3KX+
+ o9mq7UGyPFy8Zgt1cqxWQatcjKGS6i48TAl9QdtZxNEpFqVn+td4EkvpBNbxo8nwIGn1jTgcQta
+ vtCv2bVXo0odY/n2HW4PO181RuUeqo/R3Y7v/9TC2+zVhkedKQmDqG6ACnG54y1svht9YU=
+X-Google-Smtp-Source: AGHT+IHSsXmDSYik2+6RHj9Bx4MqDSwd+SjLR+ydsL02S/JA5SrtiuveQKHuQMXjnVhRTJOSKe4kt+OHai4p2NaEbG8=
+X-Received: by 2002:a05:6830:2b0f:b0:7c5:3798:fa44 with SMTP id
+ 46e09a7af769-7c94db40316mr2353556a34.12.1764795763934; Wed, 03 Dec 2025
+ 13:02:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20251125212953.1733-1-briansune@gmail.com>
  <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
@@ -77,13 +76,14 @@ References: <20251125212953.1733-1-briansune@gmail.com>
  <CAN7C2SA78DM+XaXMJNA26o0EzxFkdwL26BfcH91boepT0bDPKQ@mail.gmail.com>
  <CANp-EDaU0Vw0dqWOfAXKub6Qq8FN5LvNJyttB6-EA4imAK8mvw@mail.gmail.com>
  <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
-In-Reply-To: <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
-From: Ralph Siemsen <ralph.siemsen@linaro.org>
-Date: Wed, 3 Dec 2025 15:52:37 -0500
-X-Gm-Features: AWmQ_blueLN951yRSCqK38Wb4LdurKg899VWqb5hd_-1uqo0QwOKXGkxMvrXcck
-Message-ID: <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
+ <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
+In-Reply-To: <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Thu, 4 Dec 2025 05:02:34 +0800
+X-Gm-Features: AWmQ_bncFv131qDZqqNd54EiNiyBnDRCQv3IAGzCfM7cgj72Wzfd6iTK8EltNVQ
+Message-ID: <CAN7C2SAjdQMUA+7sbeOgVg7stk_mvxVXomu+PO4+ENGbgAviTw@mail.gmail.com>
 Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
-To: Sune Brian <briansune@gmail.com>
+To: Ralph Siemsen <ralph.siemsen@linaro.org>
 Cc: "Chee, Tien Fong" <tienfong.chee@altera.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, 
  "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
@@ -106,29 +106,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian,
+Ralph Siemsen <ralph.siemsen@linaro.org> =E6=96=BC 2025=E5=B9=B412=E6=9C=88=
+4=E6=97=A5=E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=884:52=E5=AF=AB=E9=81=93=EF=BC=
+=9A
+>
+> Hi Brian,
+>
+> On Wed, Dec 3, 2025 at 1:17=E2=80=AFPM Sune Brian <briansune@gmail.com> w=
+rote:
+>
+> > But did you disable also all "CYCLIC" as well?
+>
+> I have "CONFIG_CYCLIC is not set" which disables all the others.
+>
+> I also have another patch to disable the watchdog, adapted from [1].
+> This didn't seem to make any difference (but my ram calibration
+> doesn't take very long).
+>
+> [1]  https://lore.kernel.org/all/20250603115442.19971-8-nareshkumar.ravul=
+apalli@altera.com/
+>
 
-On Wed, Dec 3, 2025 at 1:17=E2=80=AFPM Sune Brian <briansune@gmail.com> wro=
-te:
+Hi Ralph,
 
-> But did you disable also all "CYCLIC" as well?
+I do diff the mainstream and Altera trunk.
+I cam repeat the same behavior on altera trunk when all WDT CYCLIC turned o=
+ff.
 
-I have "CONFIG_CYCLIC is not set" which disables all the others.
+I plan to investigate under another board.
+TBH if it is board specific case then there is nothing harm to simply
+turn on CYCLIC or WDT.
+But the truth is that Altera trunk force using designware WDT by default.
+Because under distro I do full "memtester" and "stressapptest".
+Nothing really fails on those two.
 
-I also have another patch to disable the watchdog, adapted from [1].
-This didn't seem to make any difference (but my ram calibration
-doesn't take very long).
+> > 3) I use socfpga_cyclone5_defconfig and only change minimum settings
+> > that I needs.
+> > From this issue mentioned to current day.
+>
+> Then it sounds like it is a recent issue... hmm... I'm currently on
+> 2025.10 release version (plus some cherry-picks). I'll give a try on
+> master/next once I get some other things stabilised...
+>
+> Regards,
+> Ralph
 
-[1]  https://lore.kernel.org/all/20250603115442.19971-8-nareshkumar.ravulap=
-alli@altera.com/
+The major reason is the ECC on mainstream is completely missing.
+BTW [1] I do manually inserted and test no luck on that.
 
-> 3) I use socfpga_cyclone5_defconfig and only change minimum settings
-> that I needs.
-> From this issue mentioned to current day.
+Yet still thank you for the help.
 
-Then it sounds like it is a recent issue... hmm... I'm currently on
-2025.10 release version (plus some cherry-picks). I'll give a try on
-master/next once I get some other things stabilised...
-
-Regards,
-Ralph
+Brian
