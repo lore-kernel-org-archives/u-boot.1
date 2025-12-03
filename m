@@ -4,100 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18117D116F3
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 06:54:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 315BAD116F3
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 07:20:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 779C483F4D;
-	Wed,  3 Dec 2025 07:54:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 686F583F4C;
+	Wed,  3 Dec 2025 08:20:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PewzO/97";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="XYlSg/5Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D13683F4E; Wed,  3 Dec 2025 07:54:24 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E2F8E83F4E; Wed,  3 Dec 2025 08:20:56 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8243683F2D
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 07:54:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EF8B83F39
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 08:20:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7c6d13986f8so549672a34.0
- for <u-boot@lists.denx.de>; Tue, 02 Dec 2025 22:54:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764744860; x=1765349660; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zirXjXYWBpFfo6mL2PVMvuz3OHjQPcaaB31yVfuSwY8=;
- b=PewzO/97F+MABc0BbedSQt6Yn1wIL2EAZkDsqFlncny+rkxWvF648SqEbQDcdrT/PH
- 1AkcBoWr369tkZ5SO/xy5LbVjCUjdoPSUAkoade5zNBrUXBLytLqCtQvdIZA/P6AKOD0
- bt5b2RuBvWj+wAz0j8AQmEGN3uc+o1iOCWsUXKAMV24q1ZyZm3kojrJD5nAEXkQgaHrJ
- IjDCvvVyD+z2IhNogIJkwCP8PiJJkjqDbjg1bV2wp6qM991bGK754bmFAjJojrYKViJ0
- CXKj7/QpT0l+uUXVivbMgfAU+uUhGcgkdhF0eeaY5r7IvptpS+7IkAKbCGSJC2t5gUOY
- mung==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764744860; x=1765349660;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=zirXjXYWBpFfo6mL2PVMvuz3OHjQPcaaB31yVfuSwY8=;
- b=NrUwdcY16fJAlqmytL5igg15ey3j/GxcjPdbIEQoMLEZsJVakL+xOlc3Ieat1F0z/w
- BDT5EBRb/F9sZoQLZOAAyBe9CwRG4lHAyct+OIyc8Dz0HJWve8mIFok38Q0ECWdknrLp
- 0dQzsha2L1wWMaFfsu1sZF3O5AggKNl/K7kAmNpqyZKdZJ+X5XjOslNdcDZSZ3Fyoq+9
- OWbgvQ5oSt+6qPV9uW27dSLNaWyxo3Pss6+qJ7g7IdbvtvoN6O8XYuy9UB/hNX+je5pZ
- hr9xvq+LfE/qyZQ24l6JlN+wSNFSbXamoJdqKeplMg2RQ1pKU20OOc0vwz+huvnmNjlp
- BSTw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU5vOSP+VjDnR5RRX5iDmoMA9ezSSPlzQQv8ihF2+GHR/dGJhcViAdI1+a9gUQB2dtJBx5uT8Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YylKQ03XgRa2XTuqdlCG/aC7vn/2ZTcyywq6qUkNrK4z/KjTKCU
- Zdn+enIisCoScdJqM7VxEIDpIKQbsH/HySTXjVFa3lR7PHFDQBsDVi2Jp1DRy+FX9d6z3sRh/C9
- JiY27JGgnEsQAB6rHSThX+yEGKS1UggE=
-X-Gm-Gg: ASbGnctdN7S7jK+25BGdj0smw/Mxfy8VuktS/SXLzVRs1uDETHTMVSJfgjmuZ5XWUU6
- V1T9tuss/vYQxwIAxRU0Koye5osJr31wVdApzC7mP7j0DEOqT9diolzB0cw+gKO8ire+CjRatkf
- 8Hu42f2MOqztIxGuNIOHW0S6Qsdjnv3JQG4vnoHi8YE+soj3nqMf6oMCDTrsfqKsi9lFERsYzI/
- wkdFrm0IDr/8oBJyXvbuVytBCp//UBsbscbucOnpgTCKWtX3yvzH9laf7lI2Pn3j2x4HFM=
-X-Google-Smtp-Source: AGHT+IGJ/Xn9wiVc26qnpqWmxJCg4D/XBznYmmoK0Wpr7gxY0PriVbdFD5UD2z9ycL6ayTSveJ2a0c29O5mHphChPf8=
-X-Received: by 2002:a05:6830:674f:b0:7c7:7f85:d19 with SMTP id
- 46e09a7af769-7c94db6adbcmr679189a34.8.1764744860213; Tue, 02 Dec 2025
- 22:54:20 -0800 (PST)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Qma3v9UPflufBKcEvolMawzsIgsuo2RcxXNhw94VQuB+2BhRxfn76lKSgfb7Z6pCyXpEm7oCgPOLTpUW4bhMvy+qAFNikmSgQJXGpDaJaYXPVxqXMWWkkhlRDF9X5r90S4xCCt3zW6wth2wqnptBfFBlrqzfWhazqrn1Geq5Bmz3oL2a1GtpSCvjSWLhe8djnGss1NM5rNIZNzY6bgGkwjtn0JPccDXzX9/k5mFH6I/v3FdH43O0a7tPi2YKEZd3OiL7uEB15uY/Ji8OqmodpEwnNQsQK6eWFnZAlREzWr1m2dN1WsQQw78hxCX8hrT0lnJlC9NXUlsBbeDnDFW0+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TtoGyrDtmmW6N6dDy3wp3lo3WuoyxZML9Fm5k5OU8aM=;
+ b=CJltO8KmoXhD+kEvQ1g8xlOht6Ljmun4ROwrP+uh/Z/98zqget5Yj0DwvRuVtKvVokWnBDHssyVwFNMqNDGbK4281TZLOWch+gztoOECZKHhpsrVu8Uhli6rJd+MduhKyPcAT3bNi/tEg3CBziQUP+ocSihqtdxWoxEsCwDL/ozxxuRt/jNXqHqp+HZjdO+KhVVvGpFHYVp+zhvHurK2QEhJFy+LF/aM7WavrJ8BctLajJzZ0W8M9aL8z8AThfozNLKINMXUlxqI7f/8FvE44c2H/AAJn79NwSIB9cxgcyH7ORI/8fHTUxyabSxwXevDqey+x2XVt7ufPszsEwvqVQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TtoGyrDtmmW6N6dDy3wp3lo3WuoyxZML9Fm5k5OU8aM=;
+ b=XYlSg/5QbayTwFuUFYOMo+K5ybEbbRZ3MFMoDVLysc1R+I0aUYALUTTkcj+45RGBExI4KtHZsCBTLUUJRJ5+vV6OpP5CFkFbTe3/SvlvNSv5KC93ud1XEjqo6vasfpci9Uls/kK0mYTgoN1dXvLrzVK4+hsWwIllElkMQzp8xJI=
+Received: from SJ0PR03CA0288.namprd03.prod.outlook.com (2603:10b6:a03:39e::23)
+ by PH0PR12MB999111.namprd12.prod.outlook.com (2603:10b6:510:38d::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Wed, 3 Dec
+ 2025 07:20:49 +0000
+Received: from SJ1PEPF000023CB.namprd02.prod.outlook.com
+ (2603:10b6:a03:39e:cafe::b4) by SJ0PR03CA0288.outlook.office365.com
+ (2603:10b6:a03:39e::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Wed,
+ 3 Dec 2025 07:20:49 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SJ1PEPF000023CB.mail.protection.outlook.com (10.167.244.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9388.8 via Frontend Transport; Wed, 3 Dec 2025 07:20:49 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 3 Dec
+ 2025 01:20:38 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 2 Dec
+ 2025 23:20:37 -0800
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Tue, 2 Dec 2025 23:20:36 -0800
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Leo Yu-Chi Liang
+ <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Herren <sputnik@on-the-web.ch>, Peng Fan <peng.fan@nxp.com>, "Sam
+ Protsenko" <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, "Tom
+ Rini" <trini@konsulko.com>
+Subject: [PATCH] xilinx: mbv32: Disable floating point
+Date: Wed, 3 Dec 2025 08:20:32 +0100
+Message-ID: <2c043ed05643fee200a79eb08bfd5c0041663bd2.1764746430.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20251125081316.17329-1-alif.zakuan.yuslaimi@altera.com>
- <20251125081316.17329-3-alif.zakuan.yuslaimi@altera.com>
- <3e4de604-292d-4232-893d-db43e29b469c@mailbox.org>
- <19c33d9d-4cab-4add-9dff-f3b9e051f146@altera.com>
- <3b219e15-5513-4474-aae9-9d9a8abeb61e@mailbox.org>
- <f13e8fd9-9705-46ec-a2c4-9fc4c6a63e38@altera.com>
- <20251128153130.GC2125796@bill-the-cat>
- <CAC_iWjKp1ztEW23e7rujk-oFuYS_qfMi+CF+VEdwcCHmXrtgkg@mail.gmail.com>
- <20251128164957.GD2125796@bill-the-cat>
- <CAC_iWjLYvzHHJ+KYj68KWa=E+V3wc360HRf_dWCh7ny5bdEU9A@mail.gmail.com>
- <CAN7C2SAEZgm8KshbGU3d48U3w01vtG5zvbzZRbA_3tE5S0E+Lw@mail.gmail.com>
- <CAC_iWj+Jo1fP2ucXPY+q6+rFhHsT3PKz7H2J4dH-3cyAk01HEg@mail.gmail.com>
- <CAN7C2SDDAtxfDiHUac9q-WfB8jr_eRPDKcbfrtbcyXDbdV7_nw@mail.gmail.com>
- <d481c4c4-76e2-4b6c-9bef-19c2d616fe23@altera.com>
-In-Reply-To: <d481c4c4-76e2-4b6c-9bef-19c2d616fe23@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Wed, 3 Dec 2025 14:54:09 +0800
-X-Gm-Features: AWmQ_bm21tyeNJ-oJEvJr6FfGKJjPfJogRNncMjC5ih7706h0NIa5a_K4UtDLoA
-Message-ID: <CAN7C2SC+Bm2nQR2CHpFLkE_dRtY0FjXJ6vR2LQRyXy+rtpOEmA@mail.gmail.com>
-Subject: Re: [PATCH v1 2/8] arm: Fix "file truncated" linker errors from empty
- built-in.a in SPL/TPL/VPL builds
-To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de, 
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
- Tien Fong Chee <tien.fong.chee@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Developer-Signature: v=1; a=openpgp-sha256; l=823; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=ashBrKOkj5GokA01mfLiRROR8M+BGBCN2/vx02XxOiI=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWTqPzn0nCWp5/bVBadmXGjve2zg29nGzBC66/czc8HfC
+ 3+fUzud2lHKwiDGwSArpsgynUnHYc23a0vFlkfmw8xhZQIZwsDFKQATceVhZJi4r/h6m/nkxv0z
+ Wf7JBnJ8luCZHmCqkGfIzt3L8PvBgm6G/9G/352xM3S8X2MWz2K278vh9yeULFueGyQ+Td52icX
+ iLAcA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CB:EE_|PH0PR12MB999111:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2d70e9d7-5bb8-4e9e-e57c-08de323c7bf0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?r1TGT0L01aL+K5+uP3n/3XnqqRovPCC1hQEhyYjvQiIM8DMObWFbdIhKoXDl?=
+ =?us-ascii?Q?yN4YTq+ia/fgoCeFUv58hvkOpbvIrUvct5iAKyM/2PCe8rcZ6+B1wuw7Tmsa?=
+ =?us-ascii?Q?lNh8g3414AO3Vg7byWMRY11/y2THH4bHGC+lHxcT7qjmeaFlXiKO9V/2UJKs?=
+ =?us-ascii?Q?WXCkiHQPXi+8S+BMJiP7LouojS9k4tEyKqVo7p7ALZO7k23N6vpZ1tSAB/ir?=
+ =?us-ascii?Q?sY5Z9X80fptPPZo2bD81tnSUNdhPPTAzZeb5bmGvC/7MJ1FG1DqnJ3pPjhf6?=
+ =?us-ascii?Q?zpLkKgP31EB62aRLH47MGw+Uv0gWC+qn9txgm2lqD67J2V6E/IIMRqKKKPyf?=
+ =?us-ascii?Q?L5lF9INOS9WnlEXtSKpLeRtHU0OecDEyQn043QAHr5BtJjLSlpJRVD1vaBk/?=
+ =?us-ascii?Q?+jWLi15HAbScs35/orlHvTHvM21W1FQKQMQGLlkbr62g07xxeBPyxLO3coBg?=
+ =?us-ascii?Q?T17lNV1Z2je0z0l53cqaCfca6sZ9eWiPtvrDa4pGhQ+Vvli4okO5nacOywKy?=
+ =?us-ascii?Q?ghKkTH54gzQbdCR8Qwl2ByFsN7Ngs7yborUGCbt+LwzccOK53rCcfBkAnJeU?=
+ =?us-ascii?Q?dPo9HWn8An/Kq8SrN/GofNt/ENJJ3eX+zdlETB5seQmotdHpn0vsZxHm10C0?=
+ =?us-ascii?Q?HWwSZeJX55E/e9yy2i2ayDqPYkYIbkYRVXpCZddvwU229jEz1clFVjHfZ9N4?=
+ =?us-ascii?Q?rvwT/tmcLmzBxmqs4+DkzB4QwtM0AF7P3BbTlgnKOX8GzKvj6/NKRnnJJ9jo?=
+ =?us-ascii?Q?zRilnPMHtwbZ+8IbQoClksa+L0Fu6wQ/L6sqJlYhEQQu/R9q2l0peT9Mzrn1?=
+ =?us-ascii?Q?unsXE9ClWZt9TdPDmdoHzm+uwb8ZCq+xJ9taFMh5F0JuIxeneiaodRNAlE8r?=
+ =?us-ascii?Q?L82A8IHPZ5+TWFcQ3vFvsPXxNDBG/FB6WYqO/wzFmsx338ElpupVShg5lnF5?=
+ =?us-ascii?Q?ztdouDHZJuphyORxRytX+xLWgacc59PIsvEEVyHU6EEmfQHWcxW20zixUL54?=
+ =?us-ascii?Q?8aGi/AgPxPgT6KyP0rOnT6DyDb80j7eySUVjaBbUVk5l3KNmtpu8k7jTAngK?=
+ =?us-ascii?Q?tB2wE7gwoqxpleOWgr75KP8Gsz4f5vGM9Wr2dsEqOvF3MU4oHDVT16+QWJn1?=
+ =?us-ascii?Q?D0WaLyuwXAsudnaugQK90kLKE0pQFRbhQEhyVRVrEZ5a21A7ZV3/20aPokS4?=
+ =?us-ascii?Q?2HmIm4XzQzYO7JUng/A/OMs8Y8Kjk1D/HRzvL7Of5DzJyUfG3neu+arPkzVi?=
+ =?us-ascii?Q?43uhSklbQkYUZnk2+kWyTSmpXzjt0Y9Uhhx3TzvIc525dkT4sXLw+cUVI338?=
+ =?us-ascii?Q?NCHSbMulSdxq3lCbvJTMimZ6a7xEsA89/2wda82nta8NMokQbxuGMyE6OAga?=
+ =?us-ascii?Q?KgjXLDU+1lOZsK4Gu0q2KzPWEiB8GHOLjsqempexKEdNkrL9zoKs9Ybjp7Oh?=
+ =?us-ascii?Q?gU5NOfgDHSaINu7uqEam1z64yiQvkrCO3wb3Hn2wHbZCck37/t3NEnZryfZJ?=
+ =?us-ascii?Q?A7PTXsmbfTJhf8bHmHX0/nXDGsovCCslLzcJmTKhysRwH8lPSfz8v3QhJC91?=
+ =?us-ascii?Q?/d1CuzodlgnLquvbiBU=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 07:20:49.0669 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2d70e9d7-5bb8-4e9e-e57c-08de323c7bf0
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023CB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB999111
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,81 +161,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com> =E6=96=BC 2025=E5=
-=B9=B412=E6=9C=883=E6=97=A5=E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=882:46=E5=AF=
-=AB=E9=81=93=EF=BC=9A
->
-> Hi,
->
-> On 2/12/2025 4:59 pm, Sune Brian wrote:
-> > [CAUTION: This email is from outside your organization. Unless you trus=
-t the sender, do not click on links or open attachments as it may be a frau=
-dulent email attempting to steal your information and/or compromise your co=
-mputer.]
-> >
-> > Ilias Apalodimas <ilias.apalodimas@linaro.org> =E6=96=BC 2025=E5=B9=B41=
-2=E6=9C=882=E6=97=A5=E9=80=B1=E4=BA=8C =E4=B8=8B=E5=8D=884:53=E5=AF=AB=E9=
-=81=93=EF=BC=9A
-> >>
-> >> [...]
-> >>
-> >>>>
-> >>>> Ok, let me go through my irc logs in case I find it.
-> >>>> Reading the email thread we should compile with anything > 8.1 right=
-?
-> >>>>
-> >>>> Cheers
-> >>>> /Ilias
-> >>>>>
-> >>>>> --
-> >>>>> Tom
-> >>>
-> >>> Hi llias and Tom,
-> >>>
-> >>> I have a question might be wrong or not even exist.
-> >>> Tom mentioned GCC 8.1 kbuild but u-boot is considered as
-> >>> kernel build or it does not always be that case?
-> >>
-> >> We use the same Kbuild system as the kernel. I updated that a few
-> >> months ago since we where stuck on a really old version.
-> >>
-> >>>
-> >>> At least so fat there are nothing can build properly below 10.0.1
-> >>> Using ARM official cross compile binaries.
-> >>
-> >> I think I tested with gcc11, but I I don't remember testing with 8.x.
-> >> I probably missed something on the backporting. I'll try having a look
-> >>
-> >> Cheers
-> >> /Ilias
-> >>>
-> >>> Thanks,
-> >>> Brian
-> >
-> > Thank you IIias I don't really know all the u-boot things.
-> > I had provided the first draft for fixing GCC check.
-> > https://patchwork.ozlabs.org/project/uboot/patch/20251202041029.186-1-b=
-riansune@gmail.com/
-> > Now it is on 10.0.1 if 8.1 is the case will update after your confirmat=
-ion.
-> >
-> > Thanks,
-> > Brian
->
-> I am able to build CycloneV with the later GCC 10.3 version on my side
-> without this patch included in the patch series.
->
-> Thank you all for your valuable inputs.
->
-> Alif
+MB-V 32 has optional single precision FPU (64bit has single and double
+precision FPU) but there is no use and reason to enable FPU by default
+that's why disable it.
 
-Hi Alif
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-It is possible to align both sides with ARM official binary release?
-The ARM have compressed cross-compiled binary.
-10.0.1 should be the minimum it can runs.
+ configs/xilinx_mbv32_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-[1] https://developer.arm.com/downloads/-/gnu-a
+diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
+index 88d9e5ce6b2b..81c0f8e9e936 100644
+--- a/configs/xilinx_mbv32_defconfig
++++ b/configs/xilinx_mbv32_defconfig
+@@ -18,6 +18,7 @@ CONFIG_SYS_CLK_FREQ=100000000
+ CONFIG_BOOT_SCRIPT_OFFSET=0x0
+ CONFIG_DEBUG_UART=y
+ CONFIG_TARGET_XILINX_MBV=y
++# CONFIG_RISCV_ISA_F is not set
+ # CONFIG_SPL_SMP is not set
+ CONFIG_REMAKE_ELF=y
+ CONFIG_FIT=y
+-- 
+2.43.0
 
-Thanks,
-Brian
+base-commit: a0f0154ef89929517c3217efe025e8021a910b90
+branch: debian-sent3
