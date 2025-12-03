@@ -4,122 +4,182 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF74D12D60
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 14:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A7AD12D69
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 14:20:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10EC683FB6;
-	Wed,  3 Dec 2025 15:11:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
+	by phobos.denx.de (Postfix) with ESMTP id 7DE6C83FA6;
+	Wed,  3 Dec 2025 15:20:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="hAV4QLtP";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="Vq/JdonB";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="HxkxOtHS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F05983FBE; Wed,  3 Dec 2025 15:11:35 +0100 (CET)
-Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.1])
+ id 8F9EE83FA7; Wed,  3 Dec 2025 15:20:15 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFB6F83FB2
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 15:11:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 187CE83F82
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 15:20:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=valla.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256;
- d=outgoing.instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com;
- s=arckey; t=1764771092; 
- b=UZgGVF/djQkdjkLmIvxOAiQV6XQE7G2l1OoMaotUDYmmEa6o4qjzU1N5A7NYJC6cxlhE7LXLIP
- UAq/IJ1w9T610egJVLXdbN/5G6BMX4VriSwxo7cQgzulT0MorIZPCLg+7IW367PBRP4Iwb7v3n
- udw1uHt0Fuz85V8u/F4NKUoa13ukFEF52iud4ie5UerG4xRdSH8a5Vl/si1aPbCH/xhUxpTcuu
- xE12oVhKuFDZi8/B6o3OMvMHlYw/AI2pj8JpRTjITxvxRe8q+WWAle+zLr/GNUwsvo51huvBWs
- zvRg1aw3XC+8gwzy9+eLMSzJgCH5O4Lv3og/6tx1aBaJWg==;
-ARC-Authentication-Results: i=1;
- outgoing.instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com;
- smtp.remote-ip=35.214.173.214; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
- d=outgoing.instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com;
- s=arckey; t=1764771092; 
- bh=PSCHzYVVw2cADYKCkMvQaBMsxWRX1HdJahfTqh7qvBo=;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:
- From:Date:DKIM-Signature:DKIM-Signature;
- b=kadOIRvxtlI/zQwSc/ZzzFyzSthTfQ28PqW2cnquWkRQShvQ6Uax664D0vW8ScIlfhUVy6gdum
- 0rOZ2MNGkrUL+YoXxtUmVabdxCkoyDm8ZDiyOz594VVv8ibW/TOaz5Y9zHcp8MC4RN8QMxzvLm
- nQrPvL8LIMU/mOzLpuED+t4jt92NU/UZN23fcE+dqi9lE5TkS6oETRLBUt6RYRWGXYB67YxeYk
- 1tdWpyXA4l2FtGEf7gLGAdl4qkszGx/vu/8+zSQoF/EKJYVeicPhyThOW1mtkn91Ck0DU9v2o8
- wDSqYL29/9oUkSeV+wBDSWDCSPiqpAvlC05DrP1EtRLGyQ==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
- :Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- List-Unsubscribe:Content-Transfer-Encoding;
- bh=BoUan4rVMVXymggt88t7ep3h1UUzS7qrl5Wa/geWBds=; b=hAV4QLtPwLqQuhBo362/Lxszml
- MtiBimvWQKFswCd6eAxl2+u+obxyvbyN2rYxoKfETJLs4X27a0V6O1kL/BUt0qTSrRt2MkH7Y/zX7
- GURQFkX6HAdz422KDEDaNzhtRjvF6N70dOUcWOFlZpxQTB3ZJo7vSbEPfIWlWcoJPbJc=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
- helo=esm19.siteground.biz)
- by instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com with
- esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.98.1)
- (envelope-from <francesco@valla.it>) id 1vQnZp-00000009E9P-2tNM
- for u-boot@lists.denx.de; Wed, 03 Dec 2025 14:11:32 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
- s=default; h=Subject:Cc:To:From:Date:list-help:list-unsubscribe:
- list-subscribe:list-post:list-owner:list-archive;
- bh=BoUan4rVMVXymggt88t7ep3h1UUzS7qrl5Wa/geWBds=; b=Vq/JdonBYam02cLZqMNri1kCbs
- r3dcpnTt+40jVTzbNTqDOFBcC3dASlF5EoFYiAq5xcrR71hRKHBimRjjgpo60DJakkuiHNDJkriB1
- 6RFeKr+yVvne1iI5CG9kguxJw1ycVxfw+F9a+Ea8PEbSTxHNqxgAmgcLsGm9OllLzF/Y=;
-Received: from [82.59.186.57] (port=60761 helo=bywater)
- by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.98.1) (envelope-from <francesco@valla.it>)
- id 1vQnZj-00000000Dqj-1GpK; Wed, 03 Dec 2025 14:11:23 +0000
-Date: Wed, 3 Dec 2025 15:11:21 +0100
-From: Francesco Valla <francesco@valla.it>
-To: Joseph Guo <qijian.guo@nxp.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>, Ye Li <ye.li@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Adam Ford <aford173@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>,
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
- Jacky Bai <ping.bai@nxp.com>, Justin Jiang <justin.jiang@nxp.com>
-Subject: Re: [PATCH v2 0/2] Add FRDM-IMX91 initial support
-Message-ID: <aTBFCc-8NzeS4MzT@bywater>
-References: <20251202-imx91_frdm-v2-0-992b8aa99375@nxp.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4432a62892=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5B3EEa1U933320; Wed, 3 Dec 2025 15:20:06 +0100
+Received: from db3pr0202cu003.outbound.protection.outlook.com
+ (mail-northeuropeazon11010020.outbound.protection.outlook.com [52.101.84.20])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4asy5an5fx-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 03 Dec 2025 15:20:06 +0100 (CET)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=M9P1MCMaQDeXnxTTUhJFdufuKIeSz/sKeW1xcGfRF67GpBMW0nL/NjBfeEfOR0y9X11UJOpAkPSPQvdlW3PP4354QrSDw5XmmiDIZ7cRJq/GS0O61vOVMqH+gBwKN/5BiiQKV24Mn9vhyAYvx5K0QWL2mG97s4WIJQL2AtkQA+6GwWBZeJOoPP7BXmhtwKfmFv++iv0v7zi4zF6WlvtVgF97MJWcS0GY0pKn6e2blT0L5/0Pnu+wC1kyoNfL00LvG4t8/Eo6l8s3QTH9cS2t8EcEMJnsZJXISpgmgOHSYlqCNZlitL+d+WKo7tdBeCX0NuRMaS1eBMpcmFx1Kz8Edg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hBzMJF705OjS1nCO9W7ctxk7IwEtXJoGpGH5zLlqe/A=;
+ b=hBX7rnDdevvWw2rmo+7AiK9q36cQ9rD6W7BlCVcEO2Du4RUHQ1YIxsw4Laz0n9oVve8h1+39pODrLp81DPUPkoy1NkaWHY+rKpr6NJ8AnFefKSzQiOB9j5C0V4i/oPjHrHkBqVicAX7kHRESktgbpQniLRtF+tJr94YHnzuopvlW+8g3ZFCL2Ejp+sYti1gJfVLtRLfBjUgNHNhnuIF0eqMnckvYnCMMdCM30DxnkAzZvLDdhCLDpTxGW1FoFDjXKreqidYeiTN8v7nFwFzhESHYY0LvleNvMZppRCEz2c1fJn3e6gH9heeNGvtNOucd185NnSuqknm0DVovSXQChg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hBzMJF705OjS1nCO9W7ctxk7IwEtXJoGpGH5zLlqe/A=;
+ b=HxkxOtHSpMtCzJRb45Bxj0OAqvwYCTNtQiOB+kO8R2y/yj6mvwWhgosMlpSLL8sQxmWvYFLQdBJhKglZ9FqDtxR5ZwfUeG/P3riACoYKbd1ozo22WG+Y2JUOSaAJW2/CI0UoBeBfWV3ST6371JVwZrWeT8+RxojRh9igI+BaVXYPHK6253YqG7J55C5hBZhyZLSnXjc5xHNKgrVt0KggqPxcC5gj6fSwO0QH5eo2avtSNwPjqMtZkptXvaw7wH4wuyeRjLK6rfRikBejEsJ0wV0HtO7Mw1QPcJyvphipS1oRYGftarH5hvvVkmdxKrtvVkwGgtu1CKp84wvX+3CwZw==
+Received: from DUZP191CA0064.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:4fa::17)
+ by AS2PR10MB7480.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:590::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Wed, 3 Dec
+ 2025 14:20:01 +0000
+Received: from DB1PEPF0003922E.eurprd03.prod.outlook.com
+ (2603:10a6:10:4fa:cafe::93) by DUZP191CA0064.outlook.office365.com
+ (2603:10a6:10:4fa::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.10 via Frontend Transport; Wed,
+ 3 Dec 2025 14:19:59 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ DB1PEPF0003922E.mail.protection.outlook.com (10.167.8.101) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9388.8 via Frontend Transport; Wed, 3 Dec 2025 14:20:00 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 3 Dec
+ 2025 15:20:37 +0100
+Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 3 Dec
+ 2025 15:19:59 +0100
+Message-ID: <7d765b01-f905-4139-a72d-059f748eba87@foss.st.com>
+Date: Wed, 3 Dec 2025 15:19:59 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251202-imx91_frdm-v2-0-992b8aa99375@nxp.com>
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - esm19.siteground.biz
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - valla.it
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SGantispam-id: eb6f36cc1cc91f2838d6cbf5d24437fc
-AntiSpam-DLS: false
-AntiSpam-DLSP: 
-AntiSpam-DLSRS: 
-AntiSpam-TS: 1.0
-CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vQnZp-00000009E9P-2tNM-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: dts: stm32: Add 1 GiB DRAM settings for DH
+ STM32MP13xx DHCOR SoM
+To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20251118231953.578007-1-marek.vasut@mailbox.org>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20251118231953.578007-1-marek.vasut@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB1PEPF0003922E:EE_|AS2PR10MB7480:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0ff9494c-5be2-4b27-1a77-08de32770b8f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|36860700013|82310400026|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eXN0L3ZqZmk0TnJWRGNrYXJzWXlQc0FSNnRHa0JXdkdybERPL0JmcFVTVk41?=
+ =?utf-8?B?SFloNS9zOXc4STdZY3VwUDkrSXFsSFRySlY0Q0Q1UXVFYlpNMlVYVzZqeEkw?=
+ =?utf-8?B?UkQ5TTRWQ0FBSjhpQUZRR01jKzhKcno3RFhHWEJRSTRLY1BKUEx0UGlLVVhF?=
+ =?utf-8?B?dVhmNUFiWmNKZnlCNDEreG1YOG9MdnNRUnJWNzdHUmpySjNXaGhlS3E0TzI5?=
+ =?utf-8?B?VXh6am5UZHJGdzVMbThQWnNKQVpNdHVlWmhjU3ZyMCt4OS9tZnBRUkRMRytU?=
+ =?utf-8?B?Y1ZzZkZsdEc4NXJEV1N3RUhEamFjdVhwOU9BVTB5M1BwSmpYQmd3ZkEvOFJM?=
+ =?utf-8?B?OEYwU3ZuOHl0ZDBPcEdTbHJCcjBjTTZPMnkxN3hVdDNNY25mQ2RzZjZLS3di?=
+ =?utf-8?B?VDR1WC85K3piOFVERGtCYVFnU1dNOTZWZG9TZnJIQmMzY0lsbUxzQW4zbC9q?=
+ =?utf-8?B?YXNvZWZwNG9LNjBpdU00Qk5uMzgxMG5MTGIwd2Vna1B1aEh3THVsbUVEa2lT?=
+ =?utf-8?B?a0dLdmpwVkxvSXovdDhMQkJIaDloU3hZN1BFNUVsSkR4YkRzTWtRcjBFaUFO?=
+ =?utf-8?B?MG9FeVp0akZHeW1WL0h2T1ZmSkgvSmlVbWswVi9WdkpLWjdhRVQyei8wVUFa?=
+ =?utf-8?B?eGttVjh4eFg2aTFzQzhhWlJLcUdaeXl0cGxrVjVtd1FBZlNRU3QzeHpCK0lp?=
+ =?utf-8?B?ZGJpZUt4Sk52NlpqMEtTU2piNWtxMlV2K00xSFdudzBSTlBhRFRzbXVGcCtM?=
+ =?utf-8?B?YmwwTkdFanVCMEJTaE5zL2pVOUJHbXdIMEZuWlB6S1d1K3o0QzFjbExic0RW?=
+ =?utf-8?B?L1NSZDZnYW53ZHRrdnRXNUROS0xTdTBVbFgvR2xNQnROOCt0ZEdIWWQzVGRY?=
+ =?utf-8?B?Sk0zRnZYTUQ4dDQ2b0d6Nkx3bWZOYURXblhrdTh6WkNzbWRFanNEVDhzRnl1?=
+ =?utf-8?B?bzZob2tkaTBsaE1mM29JVC9zd0Q3WENjUi9NT0g4Z2J0SFcxY3NNdU9PcHJG?=
+ =?utf-8?B?WUc1VGFVNUpPOUJEY2tjSDZpd21SaDcwSlB3T3Q4NzhDdjZqdUs3QzBRTDJK?=
+ =?utf-8?B?UHZrNlE0SUtueElNYXRoVENVbjZqYlJncDk3WWRjaDhtSG4zckZQU1YxaXZY?=
+ =?utf-8?B?YlBsZ1ZLMmdFaUJ1SnQyUC9nQllmK01ReldmZzFNRTRPaDJwUlZmb0RET3A2?=
+ =?utf-8?B?bUJ2ZHRBZUYybUJkdnhVZE1uclRjZkNubkxydHJqZXlVc1U3L21FVWZNSlUz?=
+ =?utf-8?B?aHZmTXFmQnNTTERmNVNCTU83VFYzVDdrRzBqaTNPTHk2WnVXWitYUkVOOG83?=
+ =?utf-8?B?UHo5dE1WOEJHN0JlTTVwZHFaSXIzMm1OZ0luL2cxa2h0bHhiZjJ2OFArSkds?=
+ =?utf-8?B?Ym54VXMwZDEweTlEVmx3dExJRnhVempoeExVVUtiY2w3M3BoalZVVHhVR0kw?=
+ =?utf-8?B?NHh5SklPWUQrQlZTVzhCYmlXTC9qVHFVNENWZTFaeWgrdWZ2TFhZbzErQ2F0?=
+ =?utf-8?B?bHV0QTVTWWNQelRLSmZoS3ZKc1VZMUxFRWROZmtGeHJ0cVZuU1kySVZFRk1s?=
+ =?utf-8?B?bWFsc0VuNTJWSDQ2TldDVjhKSklVUU1FMi9rVjZIem9Pc1FET2RhQXA0c0lC?=
+ =?utf-8?B?c1MveDJhUE91K1pHRVJKQkxnbk4xcTR3UW5LMXhLcExwLzl5N1NrZElHTWFF?=
+ =?utf-8?B?SVR5TXNQRll3WXBFcTJwV0FVL25scEJNbHpHZDhXTW5UN2dkdy9OU0RCTUhr?=
+ =?utf-8?B?UlFMeCtBaDBnelNtMFViTHpRNDNVTit6OERhV0pKQndyb0tFYWFNWXpnYS9o?=
+ =?utf-8?B?SFJ5NWptcHk5Mkxub0dhdGdsUFZiR0lSRkZ5U2NiZVQ1MFdvUHBXREMyQXJt?=
+ =?utf-8?B?UVhCSjZlMm5LZys3VEphZGw2MjN3WHM5ZlZsamo2alY3U3J3NjNpNHNZb1Jh?=
+ =?utf-8?B?THdtOFkwZU9vWVRMRElUTTFqNnFoS2MrVzB3RVMvVXQ2ZFhHWkY1RHNKTUh3?=
+ =?utf-8?B?Kys0YWhhNjZZNkRCbTlYNmNzUjdaWk1jbHRKcTN3OHEwWkRMYmd6Tlg5Ni9L?=
+ =?utf-8?B?VTAwYjFRTGRzZ2pNdnA3cVhpblBYMHdiODhCVnAvMk9TTzg1dlBWY1A0WmZv?=
+ =?utf-8?Q?JwfY=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 14:20:00.8506 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0ff9494c-5be2-4b27-1a77-08de32770b8f
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF0003922E.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7480
+X-Proofpoint-ORIG-GUID: 2tfa4YAdGpc4EnAMcanwyUlMmTSEayP2
+X-Authority-Analysis: v=2.4 cv=S+vUAYsP c=1 sm=1 tr=0 ts=69304716 cx=c_pps
+ a=gpZAzFDmpECe51Nb6QHpHA==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=IkcTkHD0fZMA:10
+ a=wP3pNCr1ah4A:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=b3CbU_ItAAAA:8 a=8b9GpE9nAAAA:8 a=k-42gJp3AAAA:8
+ a=zk4-lHRcAAAA:8 a=phlkwaE_AAAA:8 a=5VH98buAzicV2Y1zDbUA:9 a=QEXdDO2ut3YA:10
+ a=Rv2g8BkzVjQTVhhssdqe:22 a=T3LWEMljR5ZiDmsYVIUa:22 a=uCSXFHLys93vLW5PjgO_:22
+ a=7cv85riZL9-k45RWW8P6:22 a=uKTQOUHymn4LaG7oTSIC:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjAzMDExMiBTYWx0ZWRfX8y1PdfCodmuT
+ YCGNcVAs3iSr8Zp40NKDA77IDE3k9hZs7nARRRgKtLN5kqHmoCD1CVO5mPzKCBc5g/xGDdQ+Ehr
+ Anzw7mFlpI8CUjBAJd/+5kYS0OGKF6899nbA3jFbZAM3CAnQ310SuMjiVGq7nEASGKNJ9g1OXZp
+ MGX04p5cvDmnXoCl9n53WaFdXRX2nJTlXnHaYoKWyxi8uVjwkaDkCJ1C6V42vGMdzoeES0Y2tEG
+ cEpO0+vus2jpPMmwIMpMdv5TApskFXpInegsJzvpNW69rZN5TQ19+DwnOIeHObXQLwYIvPrbyVr
+ sBT2mALEEGffYunsYPcbjBKxxokSjiV0m3wpsJHVOi8A8i0s+bVupTmtC1z/PX00kXHGBuj6Ix5
+ ysBBDSfvuT6LO63IQufmHTac8Won/w==
+X-Proofpoint-GUID: 2tfa4YAdGpc4EnAMcanwyUlMmTSEayP2
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-03_01,2025-11-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
+ lowpriorityscore=0 phishscore=0 suspectscore=0 bulkscore=0 spamscore=0
+ clxscore=1015 impostorscore=0 priorityscore=1501 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512030112
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,146 +196,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Joseph,
 
-thank you for the patch set.
 
-On Tue, Dec 02, 2025 at 07:05:01PM +0900, Joseph Guo wrote:
-> This series add initial support for the FRDM i.MX91 11x11 development
-> board in U-Boot:
-> https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-IMX91
+On 11/19/25 00:19, Marek Vasut wrote:
+> Add DRAM settings for 1 GiB variant of DH STM32MP13xx DHCOR SoM
+> and support for SoM DRAM coding HW straps decoding and automatic
+> DRAM configuration selection. Enable CONFIG_BOARD_EARLY_INIT_F on
+> all STM32MP1 DHSOM, as it is required for the HW straps decoding.
 > 
-> Include:
-> - Device tree for the board.
-> - Defconfig and Kconfig for the board.
-> - Header file defining memory layout and hadware addresses.
-> 
-> The board devicetree already attempted to upstream, but not been accepted yet:
-> https://lore.kernel.org/all/20251114-imx91_frdm-v1-0-e5763bdf9336@nxp.com/
-> 
-> Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
+> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 > ---
-> Changes in v2:
-> - add upstream link
-> - rename 'vrpi' to 'vexp' to keep align with upstream dts
-> - move bootph- property from u-boot.dtsi to dts   
-> - correct commit message 'EVK' to 'FRDM'
-> - use #include in ecc config file to avoid duplication
-> - add ecc description in README
-> - drop extraneous includes
-> - rename 'imx91_frdm.rst' to 'imx91_11x11_frdm.rst'
-> - drop IMX91_FRDM_LPDDR4 symbol
-> - Link to v1: https://lore.kernel.org/r/20251127-imx91_frdm-v1-0-8f42646d89ad@nxp.com
-> 
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
-> Joseph Guo (2):
->       arm64: dts: add NXP FRDM-IMX91 device tree
->       imx: Support i.MX91 11x11 FRDM board
+>  .../stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi | 100 ++++++++++++++++++
+>  arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi    |   1 +
+>  board/dhelectronics/dh_stm32mp1/board.c       |  30 ++++--
+>  configs/stm32mp15_dhsom.config                |   1 -
+>  configs/stm32mp_dhsom.config                  |   1 +
+>  5 files changed, 123 insertions(+), 10 deletions(-)
+>  create mode 100644 arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
 > 
->  arch/arm/dts/imx91-11x11-frdm-u-boot.dtsi          |   51 +
->  arch/arm/dts/imx91-11x11-frdm.dts                  |  767 ++++++++
->  arch/arm/mach-imx/imx9/Kconfig                     |    9 +
->  board/freescale/imx91_frdm/Kconfig                 |   12 +
->  board/freescale/imx91_frdm/MAINTAINERS             |    7 +
->  board/freescale/imx91_frdm/Makefile                |   16 +
->  board/freescale/imx91_frdm/imx91_frdm.c            |   25 +
->  board/freescale/imx91_frdm/imx91_frdm.env          |   88 +
->  .../imx91_frdm/lpddr4_2400mts_1gb_timing.c         | 1996 ++++++++++++++++++++
->  .../imx91_frdm/lpddr4_2400mts_2gb_timing.c         | 1996 ++++++++++++++++++++
->  .../imx91_frdm/lpddr4_2400mts_ecc_1gb_timing.c     | 1996 ++++++++++++++++++++
->  .../imx91_frdm/lpddr4_2400mts_ecc_2gb_timing.c     | 1996 ++++++++++++++++++++
->  board/freescale/imx91_frdm/lpddr4_timing.h         |   12 +
->  board/freescale/imx91_frdm/spl.c                   |  193 ++
->  configs/imx91_11x11_frdm_defconfig                 |  143 ++
->  configs/imx91_11x11_frdm_inline_ecc_defconfig      |    3 +
->  doc/board/nxp/imx91_11x11_frdm.rst                 |  100 +
->  doc/board/nxp/index.rst                            |    1 +
->  include/configs/imx91_frdm.h                       |   25 +
->  19 files changed, 9436 insertions(+)
-> ---
-> base-commit: e199db57c00ba2c2aba81069800126b6543a644c
-> change-id: 20251117-imx91_frdm-7a2db95f279d
-> 
-> Best regards,
-> -- 
-> Joseph Guo <qijian.guo@nxp.com>
-> 
+> diff --git a/arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
+> new file mode 100644
+> index 00000000000..1d268d58b54
+> --- /dev/null
+> +++ b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
+> @@ -0,0 +1,100 @@
+> +// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+> +/*
+> + * Copyright (C) 2025, DH electronics - All Rights Reserved
+> + *
+> + * STM32MP13xx DHSOM configuration
+> + * 1x DDR3L 8Gb, 16-bit, 533MHz, Single Die Package in flyby topology.
+> + * Reference used W638GU6QB11I from Winbond
+> + *
+> + * DDR type / Platform	DDR3/3L
+> + * freq		533MHz
+> + * width	16
+> + * datasheet	0  = W638GU6QB11I / DDR3-1866
+> + * DDR density	4
+> + * timing mode	optimized
+> + * address mapping : RBC
+> + * Tc > + 85C : J
+> + */
+> +#define DDR_MEM_COMPATIBLE ddr3l-dhsom-1066-888-bin-g-1x4gb-533mhz
+> +#define DDR_MEM_NAME	"DDR3-DDR3L 16bits 533000kHz"
+> +#define DDR_MEM_SPEED	533000
+> +#define DDR_MEM_SIZE	0x40000000
+> +
+> +#define DDR_MSTR 0x00040401
+> +#define DDR_MRCTRL0 0x00000010
+> +#define DDR_MRCTRL1 0x00000000
+> +#define DDR_DERATEEN 0x00000000
+> +#define DDR_DERATEINT 0x00800000
+> +#define DDR_PWRCTL 0x00000000
+> +#define DDR_PWRTMG 0x00400010
+> +#define DDR_HWLPCTL 0x00000000
+> +#define DDR_RFSHCTL0 0x00210000
+> +#define DDR_RFSHCTL3 0x00000000
+> +#define DDR_RFSHTMG 0x0081008B
+> +#define DDR_CRCPARCTL0 0x00000000
+> +#define DDR_DRAMTMG0 0x121B2414
+> +#define DDR_DRAMTMG1 0x000A041B
+> +#define DDR_DRAMTMG2 0x0607080F
+> +#define DDR_DRAMTMG3 0x0050400C
+> +#define DDR_DRAMTMG4 0x07040607
+> +#define DDR_DRAMTMG5 0x06060403
+> +#define DDR_DRAMTMG6 0x02020002
+> +#define DDR_DRAMTMG7 0x00000202
+> +#define DDR_DRAMTMG8 0x00001005
+> +#define DDR_DRAMTMG14 0x000000A0
+> +#define DDR_ZQCTL0 0xC2000040
+> +#define DDR_DFITMG0 0x02050105
+> +#define DDR_DFITMG1 0x00000202
+> +#define DDR_DFILPCFG0 0x07000000
+> +#define DDR_DFIUPD0 0xC0400003
+> +#define DDR_DFIUPD1 0x00000000
+> +#define DDR_DFIUPD2 0x00000000
+> +#define DDR_DFIPHYMSTR 0x00000000
+> +#define DDR_ADDRMAP1 0x00080808
+> +#define DDR_ADDRMAP2 0x00000000
+> +#define DDR_ADDRMAP3 0x00000000
+> +#define DDR_ADDRMAP4 0x00001F1F
+> +#define DDR_ADDRMAP5 0x07070707
+> +#define DDR_ADDRMAP6 0x07070707
+> +#define DDR_ADDRMAP9 0x00000000
+> +#define DDR_ADDRMAP10 0x00000000
+> +#define DDR_ADDRMAP11 0x00000000
+> +#define DDR_ODTCFG 0x06000600
+> +#define DDR_ODTMAP 0x00000001
+> +#define DDR_SCHED 0x00000F01
+> +#define DDR_SCHED1 0x00000000
+> +#define DDR_PERFHPR1 0x00000001
+> +#define DDR_PERFLPR1 0x04000200
+> +#define DDR_PERFWR1 0x08000400
+> +#define DDR_DBG0 0x00000000
+> +#define DDR_DBG1 0x00000000
+> +#define DDR_DBGCMD 0x00000000
+> +#define DDR_POISONCFG 0x00000000
+> +#define DDR_PCCFG 0x00000010
+> +#define DDR_PCFGR_0 0x00000000
+> +#define DDR_PCFGW_0 0x00000000
+> +#define DDR_PCFGQOS0_0 0x00100009
+> +#define DDR_PCFGQOS1_0 0x00000020
+> +#define DDR_PCFGWQOS0_0 0x01100B03
+> +#define DDR_PCFGWQOS1_0 0x01000200
+> +#define DDR_PGCR 0x01442E02
+> +#define DDR_PTR0 0x0022AA5B
+> +#define DDR_PTR1 0x04841104
+> +#define DDR_PTR2 0x042DA068
+> +#define DDR_ACIOCR 0x10400812
+> +#define DDR_DXCCR 0x00000C40
+> +#define DDR_DSGCR 0xF200011F
+> +#define DDR_DCR 0x0000000B
+> +#define DDR_DTPR0 0x36D477D0
+> +#define DDR_DTPR1 0x098B00D8
+> +#define DDR_DTPR2 0x10023600
+> +#define DDR_MR0 0x00000830
+> +#define DDR_MR1 0x00000000
+> +#define DDR_MR2 0x00000208
+> +#define DDR_MR3 0x00000000
+> +#define DDR_ODTCR 0x00010000
+> +#define DDR_ZQ0CR1 0x00000038
+> +#define DDR_DX0GCR 0x0000CE81
+> +#define DDR_DX1GCR 0x0000CE81
+> +
+> +#include "stm32mp13-ddr.dtsi"
+> diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> index bedb7c600d5..39ac5692e08 100644
+> --- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> @@ -6,6 +6,7 @@
+>  #include <dt-bindings/clock/stm32mp13-clksrc.h>
+>  #include "stm32mp13-u-boot.dtsi"
+>  #include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
+> +#include "stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi"
+>  
+>  / {
+>  	aliases {
+> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+> index c18f1911fe4..55526189d5a 100644
+> --- a/board/dhelectronics/dh_stm32mp1/board.c
+> +++ b/board/dhelectronics/dh_stm32mp1/board.c
+> @@ -304,17 +304,29 @@ static void board_get_coding_straps(void)
+>  int board_stm32mp1_ddr_config_name_match(struct udevice *dev,
+>  					 const char *name)
+>  {
+> -	if (ddr3code == 1 &&
+> -	    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x1gb-533mhz"))
+> -		return 0;
+> +	if (IS_ENABLED(CONFIG_TARGET_DH_STM32MP13X)) {
+> +		if (ddr3code == 1 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-1x2gb-533mhz"))
+> +			return 0;
+> +
+> +		if (ddr3code == 2 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-1x4gb-533mhz"))
+> +			return 0;
+> +	}
+>  
+> -	if (ddr3code == 2 &&
+> -	    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x2gb-533mhz"))
+> -		return 0;
+> +	if (IS_ENABLED(CONFIG_TARGET_DH_STM32MP15X)) {
+> +		if (ddr3code == 1 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x1gb-533mhz"))
+> +			return 0;
+>  
+> -	if (ddr3code == 3 &&
+> -	    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x4gb-533mhz"))
+> -		return 0;
+> +		if (ddr3code == 2 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x2gb-533mhz"))
+> +			return 0;
+> +
+> +		if (ddr3code == 3 &&
+> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x4gb-533mhz"))
+> +			return 0;
+> +	}
+>  
+>  	return -EINVAL;
+>  }
+> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
+> index 210ec201bf5..d5ecbac29e0 100644
+> --- a/configs/stm32mp15_dhsom.config
+> +++ b/configs/stm32mp15_dhsom.config
+> @@ -2,7 +2,6 @@
+>  
+>  # CONFIG_ARMV7_VIRT is not set
+>  # CONFIG_BINMAN_FDT is not set
+> -CONFIG_BOARD_EARLY_INIT_F=y
+>  CONFIG_BOARD_SIZE_LIMIT=1441792
+>  CONFIG_BOOTCOUNT_BOOTLIMIT=3
+>  CONFIG_BOOTDELAY=1
+> diff --git a/configs/stm32mp_dhsom.config b/configs/stm32mp_dhsom.config
+> index 56a40839d28..31fae2de19d 100644
+> --- a/configs/stm32mp_dhsom.config
+> +++ b/configs/stm32mp_dhsom.config
+> @@ -6,6 +6,7 @@
+>  # CONFIG_SPL_PARTITION_UUIDS is not set
+>  # CONFIG_SPL_PINCTRL_FULL is not set
+>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +CONFIG_BOARD_EARLY_INIT_F=y
+>  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+>  CONFIG_BOOTCOUNT_LIMIT=y
+>  CONFIG_CMD_BOOTCOUNT=y
 
-I tested the series on the actual hardware with [0] on top of the
-mainline Linux kernel and encountered a unmanaged interrupt warning
-during boot, which wasn't there using the downstream NXP u-boot
-version:
 
-[    1.840096] mmc1: host does not support reading read-only switch, assuming write-enable
-[    1.850352] mmc1: new high speed SDHC card at address 1234
-[    1.857170] mmcblk1: mmc1:1234 SA08G 7.21 GiB
-[    1.864850]  mmcblk1: p1 p2
-[    2.279012] random: crng init done
-[   11.720182] platform pwrseq-usdhc3: deferred probe pending: pwrseq_simple: reset control not ready
-[   11.734562] platform 42890000.ethernet: deferred probe pending: platform: wait for supplier /soc@0/efuse@47510000/mac-address@4ec
-[   17.947574] irq 99: nobody cared (try booting with the "irqpoll" option)
-[   17.954292] CPU: 0 UID: 0 PID: 55 Comm: irq/99-1-0022 Not tainted 6.18.0-01544-g0817234e6cf9-dirty #1 PREEMPT 
-[   17.954302] Hardware name: NXP FRDM-IMX91 Development Board (DT)
-[   17.954306] Call trace:
-[   17.954310]  show_stack+0x18/0x30 (C)
-[   17.954326]  dump_stack_lvl+0x60/0x80
-[   17.954335]  dump_stack+0x18/0x24
-[   17.954341]  __report_bad_irq+0x4c/0xec
-[   17.954351]  note_interrupt+0x33c/0x390
-[   17.954361]  handle_irq_event+0x94/0xbc
-[   17.954368]  handle_level_irq+0xd8/0x170
-[   17.954375]  handle_irq_desc+0x34/0x58
-[   17.954380]  generic_handle_domain_irq+0x1c/0x28
-[   17.954386]  vf610_gpio_irq_handler+0x70/0x110
-[   17.954395]  handle_irq_desc+0x34/0x58
-[   17.954401]  generic_handle_domain_irq+0x1c/0x28
-[   17.954407]  gic_handle_irq+0x4c/0x140
-[   17.954412]  call_on_irq_stack+0x30/0x48
-[   17.954419]  do_interrupt_handler+0x80/0x84
-[   17.954426]  el1_interrupt+0x38/0x60
-[   17.954436]  el1h_64_irq_handler+0x18/0x24
-[   17.954443]  el1h_64_irq+0x6c/0x70
-[   17.954448]  _raw_spin_unlock_irqrestore+0x8/0x44 (P)
-[   17.954457]  wake_threads_waitq+0x60/0x70
-[   17.954463]  irq_thread+0x194/0x32c
-[   17.954469]  kthread+0x12c/0x204
-[   17.954478]  ret_from_fork+0x10/0x20
-[   17.954485] handlers:
-[   18.064352] [<00000000ec900a2b>] irq_default_primary_handler threaded [<00000000a61af792>] pca953x_irq_handler
-[   18.074353] Disabling IRQ #99
-[   18.080294] nxp-pca9450 1-0025: pca9451a probed.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Further analysis led me to think that this is caused by the fact that
-the PCAL6524 GPIO expander (1-0022) shares its interrupt line with the
-USB Type C port controller (PTN5110). As soon as the first interrupt
-line from the PCAL is enabled (i.e., when the PCA9451A PMIC requests
-its interrupt line, which is provided by the aforementioned PCAL6524),
-the corresponding parent interrupt - which is shared - is also enabled
-and this causes an interrupt storm, at least until the PTN5110 driver
-is probed.
-
-The interrupt storm causes a noticeable delay during the boot sequence,
-as well as the disabling of the shared IRQ #99, making the device not
-really usable.
-
-In the downstream version of u-boot, this is taken care by the support
-for the TypeC port controller logic [1], which is however not available
-in upstream u-boot. Until that support is added, I'd suggest to add a
-workaround in here (maybe in SPL code?) that simply disables the
-interrupts for the PTN5110 and clears the interrupt latch as well.
-The IRQ can then be enabled in a proper way by the kernel driver.
-
-
-[0] https://lore.kernel.org/all/20251114-imx91_frdm-v1-0-e5763bdf9336@nxp.com/
-[1] https://github.com/nxp-imx/uboot-imx/blob/lf_v2025.04/board/freescale/common/tcpc.c#L1058
-
-
-Thank you
-
-
-Regards,
-
-Francesco
-
-
-
+Thanks
+Patrice
