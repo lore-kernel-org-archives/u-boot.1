@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45AE8D12D60
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 13:40:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7060D12D5F
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 13:42:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9576580433;
-	Wed,  3 Dec 2025 14:40:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 33C7483AB8;
+	Wed,  3 Dec 2025 14:42:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QYkjFR+l";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cYc6pbBq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DDE9808AF; Wed,  3 Dec 2025 14:40:53 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 5898983F82; Wed,  3 Dec 2025 14:42:23 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 633808003E
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 14:40:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D7DE80FA1
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 14:42:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5957d7e0bf3so950296e87.0
- for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 05:40:51 -0800 (PST)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-37d275cb96cso56395801fa.2
+ for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 05:42:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764769251; x=1765374051; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1764769340; x=1765374140; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RrFBrg/M8NvstuGrRQivhJAk1WQ1FSlRe3EiQhr5Rnc=;
- b=QYkjFR+l0wF9jIZ4vT3fdIXNhdYdtzXh8Tu9nGRikdj6LD9RfhgqDiH8RgfEkArcB4
- q1urYSZBI7PnhZo40ukE+MYpW2wTel/Ddqwt6WYfxvzE8Rswrp5fDknGrd9uHmYBpEMl
- RxiBw0c3y38pQveqRIPy7pUgTcwZxK7ytmSuTx4a4Rfl66IQMhWIyIUhTwk7sp/HvpWl
- kjhpvlgY4oGTIk5ihu2XMAurx/gw8b4w/DLTyqxbL08iE+LpXQTAGpEhUof3wJjhYgG8
- nZOCZ+JSIRhr7S0Am/NtPfMK5cHWfDeAi4/p5rwVB/AZ1fd6xaAdHXstoQNu2v+4LDC4
- 4+sQ==
+ bh=/uv8S3BUtgLam1OzpQPT9BN/qmdpMHj7pWM+zrsJnlM=;
+ b=cYc6pbBqHTeih2K5qeOvjhoeRXtQIuH3F5LrYPNFGhgahm8qwyiZbqf5aBO7yVkxR7
+ iTlFtfjMzYf9VYPwaHJOs0gwSTdrhWIu4L1w0Pw/k5xf08mE5GGeoS50LnSlA0i7xuJl
+ f99ArDcBzIiduQN7wf7olW8DetHt1owKFhh3fH2HugZJudsVic5Lnpl1YzEATgPv0g66
+ dXrAGkDDAsPPXpOo9GOvAB7kJIOftRZuJRmJrPO6qt9vwQA/QOD9eUf77+uhkdrQ4gVU
+ v9+cxsWxB2pwbhElApiC6MWfz32jD8xhrxn5HTMKW5RqLvtoHtM28alWqRspHoRUwxYa
+ 21BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764769251; x=1765374051;
+ d=1e100.net; s=20230601; t=1764769340; x=1765374140;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=RrFBrg/M8NvstuGrRQivhJAk1WQ1FSlRe3EiQhr5Rnc=;
- b=AKzo72OFq4pjklMbFOTLs+2JmZ2oHGrq6HHELl1wgNKvbdYgCARoCPN+dp9u1HdolW
- XuN/esmHbU4nyuWJUQwEow/oZalScAE0Whz648etp2UlgMepgtqZ/iwZ3Yiu6pIGdrUd
- azxXhNLvnHCc2IJlIRgo076r5wmwtirrLuaCb6HM/9ZSLq5WJkc1S87/lbU25A9QufWc
- oX74F5DSfBWAbHyAOGfh6a8IPYFTilihPK4sExCBWOXYt+17ECvJO+MOd/ia8U11fJyf
- feTjmGEiutOHRibncwLscktJ0lipa6zqo9Z4gVOwMUSNev69/8iifgw7ZqxzjA0sW3R+
- TP1w==
-X-Gm-Message-State: AOJu0YxTMOcx6K+T3AyUhvZyRUTyeH0Bwdj0R1bY1GJCsO8G2eTMak3J
- 7x9Tlt6aj1mZSa90vBuRsiPqFGj61Ugi4cA1aAh2CpoyoNBsOu9xtJEkt1eoZLRsymHm/cc3kRa
- abZYhp4c3zG9vI54Ue71kE5yhza9/pxY=
-X-Gm-Gg: ASbGnctp6vIAWi+MHEDI66eXWsAVetT8N4Mnup3miZ99u9WSizxkUYgz8LZb9TGThGP
- mRrzwTZJ9T4Yuz3cEcuzylesX+B9Gh8rQ757lu6Dgm4XB7c8QWwnodN/AfHAk8n5xqpd3cm7qjB
- FE+8w1ag6z9tIrVl4HonhmMRcmWBzLpncxnCbQNbfpYK+9MZqpNyi8LcnnOiFqjVoXNrDDSFdG+
- VBrV34swNmu0pRGDPpe/Nl887220gQnuY2Myz/1rdX6If8Ts2xIGwqeMMfgr1dqcMp+9eAdBv2i
- ur8XOXLrMPuuyeq3T+tMzbyZvXE=
-X-Google-Smtp-Source: AGHT+IGz8tlF0cku3XEjaZbZShKryATh5uGOqHUhMM8d+3jqq+wd1VCJzNfCoNkfZmgDq2qjEZJMuDyAOsWJjvI7mcg=
-X-Received: by 2002:a05:6512:1285:b0:594:1279:dfc0 with SMTP id
- 2adb3069b0e04-597d3e3c706mr994747e87.18.1764769250478; Wed, 03 Dec 2025
- 05:40:50 -0800 (PST)
+ bh=/uv8S3BUtgLam1OzpQPT9BN/qmdpMHj7pWM+zrsJnlM=;
+ b=bPPsEUXoXqLAmVprIG+ZpIq9HFPoLGyk6PQHBVL2apAf+dSJhNUT/Fm+DMQ2dJmf+w
+ iTdVhYueEt7623eNwqe8JedirV1tkX5V0qwK+7vxN0gXBe3eY8qur3vdQxNiZwcjIbou
+ oRKho30/LQIBUA5mh5460WsXmltK+5Gqdp6/SLBPwQQ/l1k8mzwwBN86p3mK0tENr7lM
+ G0AMWLxtzmZsvksjeSNnImv7CkHrNQNm4SZViQcYprdLsRpq6So8zfrjbds+73Nts9T4
+ SsR67tjsF3BspbppNHww298X5zI7wbYGkUCoA52+8dZcgZFi257G0FOtFjn96nG/Mv2S
+ D6iw==
+X-Gm-Message-State: AOJu0YxLnTYdXSh2F9wHPJLWdBy0Bd1Ih0FxI1QpW3o+aJVPk9fWP2hO
+ N9DletE/wsYVxXVQwIQYZdF+QMhnFgUITBfJ6kSNVuVDSDOtOApzgU2g7FoYFvC5PnoYu/toFKw
+ la7bcfmFfD7ZSgQCNCFDMk5EmkzEp46c=
+X-Gm-Gg: ASbGnctfTYK9WIql1dSgoZSwVu+Ysb2jUYTgef6mWxoexYDXvzj9xhoPqY0wHSHk4/l
+ xJLOml3y7N2pH6sXNnGPuAaads1nZUc9SlwQsnUYCjpo0mwC55HhCFvixspeGYPNBfWHa/4BUEm
+ meYYHe+C2NvkRhUNudF5W6Dbuh7hG3RWXVdP4c75RNrurgqXJPpvTWkC2zlwdBG99fYwgB32qdh
+ uq5W0Rw7oYQmXVLQrgO5i9/FQ2/GwL9HvXGDrYdzlJSHUussaN5Xa6hpoqGKbLSG984ygqLrD+H
+ ZAc9yvn1rbLteTHzzS8YQVG2vOg=
+X-Google-Smtp-Source: AGHT+IEp1zKmIx/QDhEt1jMgCHUzfCennp8S0tj73Q/6Wnk11kvpb/+aijpctm27o3gBoZx3jkUI6PAlhHGSrJIqQNY=
+X-Received: by 2002:a05:6512:2206:b0:595:7dc5:165e with SMTP id
+ 2adb3069b0e04-597d3f7b229mr922284e87.25.1764769340411; Wed, 03 Dec 2025
+ 05:42:20 -0800 (PST)
 MIME-Version: 1.0
 References: <20251203-topic-am33-evm-lcd-v2026-01-v2-0-262cf4f34eb5@baylibre.com>
- <20251203-topic-am33-evm-lcd-v2026-01-v2-3-262cf4f34eb5@baylibre.com>
-In-Reply-To: <20251203-topic-am33-evm-lcd-v2026-01-v2-3-262cf4f34eb5@baylibre.com>
+ <20251203-topic-am33-evm-lcd-v2026-01-v2-2-262cf4f34eb5@baylibre.com>
+In-Reply-To: <20251203-topic-am33-evm-lcd-v2026-01-v2-2-262cf4f34eb5@baylibre.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 3 Dec 2025 10:40:39 -0300
-X-Gm-Features: AWmQ_bl03NdZKl_aq0YpVPtGCVTXFJF_i3hnixvzQKzF4bvkfjNwYjcFiB5rUEU
-Message-ID: <CAOMZO5AdZs1+rsD+XB7tFRPpMG3o_FoJZAFK1HkRDVuKOBtEsA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] video: simple_panel: Add tfc_s9700rtwv43tr_01b
+Date: Wed, 3 Dec 2025 10:42:09 -0300
+X-Gm-Features: AWmQ_bnQf6rQAEF856bZT8KmIQdbgBrDPwCl_RWDC2MohjI_OHcJRk4VxOHNBHQ
+Message-ID: <CAOMZO5D0wZc2BQrKg=nRT2fPdPtsH=fCS1Z081KVrmR=uGWexQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] panel: Lightweight support of get_modes()
 To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
  Tom Rini <trini@konsulko.com>, Yannick Fertre <yannick.fertre@foss.st.com>, 
@@ -100,19 +100,22 @@ X-Virus-Status: Clean
 
 On Wed, Dec 3, 2025 at 7:19=E2=80=AFAM Markus Schneider-Pargmann (TI.com)
 <msp@baylibre.com> wrote:
+>
+> Linux uses get_modes() to fetch all available panel modes from the
+> driver. This is also used to fetch the modes from Linux's simple panel
+> implementation where a list of drm_display_mode structs is used to
+> define the different possible panels.
+>
+> To make our work easier, create a compatible way of fetching and
+> defining these modes in u-boot. get_modes() fetches the available modes
+> from the panel driver. The get_display_timing() call maps the
+> drm_display_mode properties to the display_timing struct. This call now
+> uses whatever panel operation is available, get_display_timing() or
+> get_modes().
+>
+> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 
-> +static const struct drm_display_mode tfc_s9700rtwv43tr_01b_mode =3D {
-> +       .clock =3D 30000,
-> +       .hdisplay =3D 800,
-> +       .hsync_start =3D 800 + 39,
-> +       .hsync_end =3D 800 + 39 + 47,
-> +       .htotal =3D 800 + 39 + 47 + 39,
-> +       .vdisplay =3D 480,
-> +       .vsync_start =3D 480 + 13,
-> +       .vsync_end =3D 480 + 13 + 2,
-> +       .vtotal =3D 480 + 13 + 2 + 29,
-> +       .flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-
-Thanks for respinning. It matches the simple-panel Linux driver:
+Allowing U-Boot to represent the panels like Linux does is very helpful, th=
+anks:
 
 Reviewed-by: Fabio Estevam <festevam@gmail.com>
