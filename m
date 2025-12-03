@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1E01D12D6D
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 14:47:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE864D12D6F
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 14:47:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E97883FFA;
+	by phobos.denx.de (Postfix) with ESMTP id 7C29684006;
 	Wed,  3 Dec 2025 15:46:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="z2ydH7ac";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yqOjshbx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 350EF839E2; Wed,  3 Dec 2025 11:19:55 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 830FB80077; Wed,  3 Dec 2025 11:19:55 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BCF080077
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 11:19:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54FF1828A2
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 11:19:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b725ead5800so871733066b.1
- for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 02:19:49 -0800 (PST)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-64162c04f90so12041350a12.0
+ for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 02:19:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764757189; x=1765361989;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764757190; x=1765361990;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=w7kscIIiMP0SAKkIqfIKnfGVimYARcA4EJ6WsYO5jrw=;
- b=z2ydH7ac9cZeSFtYOR+ShxyRl/le8BfH4Eb3VJCdas0X4r4Cj8XRmRqBSUqZazrRrL
- k//8l01D7RpSdsU/et2jth6HX54i6Yg7igFtgsLEjfuFInq4InmpC01gU9OHI4w5ECGY
- 89+O9xAJvYmGgHMipFJwvNwhZSv3HW6liwj5/7YW/55fdlJ3aZd5XgCofJhwf8iU7eVz
- amerp9K9XGeyFcuzxiEKn8RTCiVVkkEyHsAyzikJSKzYSeTGCxna9djbt9xc9VEes6yT
- 1uWKxEZ/+ZAN4949F+Djj0J4laU1Op3tZgp/8e7LRR2uSE/1O9or3H7IZ/L4cvkjS0e7
- clcg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=hXbWKDMbdjk8MVQ+e63xtDOVjiplIyEx1SXPsLeInKc=;
+ b=yqOjshbxw/9kEmjLo673FFuVtG/izDDXYTOT6abIZ9qfv9PCcNk2DJMknmTALlXKWg
+ yEwt/6HlfMmf/cIdhnmPVRJQP6EFtY3MSEfohWgiFUIKrNoVBmUS2XBGP1rFj/FBTcx2
+ qPFmMUbn7haRDWihRHHrL5g91kgyesx9H60I17pM8L4KX7QyZtgb17OvimIcOJL0S8XY
+ DwKpXjYsup7XCo70c9o6ZsgsJ0IRq/lUOuFtwCZhfkh2pq1/8YBhg5/gBphjg/RqRHy/
+ FlSvI9dEHipski/tH8oINs2XdcyvDfHmiKS1bGsokG9LzbVDGk6uSbr2dDlesKGOucDU
+ dQ/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764757189; x=1765361989;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=w7kscIIiMP0SAKkIqfIKnfGVimYARcA4EJ6WsYO5jrw=;
- b=nTkM/MrKN0+S+MxfRx7QDHATRuczVxI6gV+SysCrz9AiW5eqrdusR3E+5GvaBEvvBK
- 9bWFd5sK0TcpkToNN1R3HEj9bEIVvzZyUwx1p4+VCSVJllNgisZdpwuzl6SbUH3lydp7
- mdkNLhRHyry0VyM/TKUGwNJv+0eHa++Q5Vmfd0lEDhKESYeAfFxZI/O3hB+DGGgiDHhn
- AR5rUNy8RwtuNpkJR+0GurEL331x/mteXdUeF8H1IDgT3KEh3s3l17YuB4MYArR0nU5x
- fbE6sog2tiDGzHMyVjarnWtGf7h/dHafBD6LcJdOtYKSLBe26BEikaxW2UH8hFljcre1
- RE5Q==
-X-Gm-Message-State: AOJu0Yzy4lGXljZXQGE1jgTTAxQnRwNg/q0J/jO+/82I0En5Vhk+QiyD
- Jf5W1ZvnDt6AVT86TSOlsd/rtHbImsu0QHsItnvQxcNr1hYb2UKfDGC4oG4khHod7zs=
-X-Gm-Gg: ASbGnctAmqRxLuDpHLx+foCztWQRBWTxtIYtk0BfFH5svl9va6s+hpUWYaY/0jkBH8x
- 45vwlhNfjc/WeaN0RcdVF5nUZrQUgjMdzjxXhpRYA5VTw7EYMSFBoI5fBRFvxMLApboPnKG7mUm
- H1H7QS7pnAsx/6v6qUYZ4ZlO62fWa3GFQ51nIeNfnoXeCO2lmOO1xlpcn2oHSyr7/4R3CnDyIKA
- Hm5gsLXoRmzkgk5mQwJ1pcYlec7HzsiTEfra5j0VLGRZT1rHgGuohGBukCtyktcBRpgRG8fR7eO
- 7QmsItRxTXh339Mk6qazXNPRkuVmoAX70ryv5cECqgwA8qapUuAPIh3SVuSAJS4RXszpcdZt29a
- cDPdIXF+MXFrEj0poK5cxP1hLf7HIW5m7F7uE2TaNlE4qckoAZN2yRT8z9N1JIt4V06ZMlCRffu
- xsh4Yn9DY=
-X-Google-Smtp-Source: AGHT+IHJD5Qa7Ea/txJX6Jh+Dg8Qkx69Crh9k3cByym4qjuBT2ou7HqbzkG1b7aOlssBmjYq8OKtSQ==
-X-Received: by 2002:a17:907:7e9a:b0:b73:870f:fa37 with SMTP id
- a640c23a62f3a-b79dbe9c9c2mr167427266b.17.1764757188758; 
- Wed, 03 Dec 2025 02:19:48 -0800 (PST)
+ d=1e100.net; s=20230601; t=1764757190; x=1765361990;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=hXbWKDMbdjk8MVQ+e63xtDOVjiplIyEx1SXPsLeInKc=;
+ b=wJ271d92bEbHK2IDtQtGZrdux/74eFwJMlTqbxSAzSUIHBuv/GHvhiav0x9di1AWRS
+ nNrOm2fzinxU5U4iaXc2WvMRUvno4M/oqLVyTHZXdMtvuDP7kiGybuDqo4dKql9QpRFz
+ KAY+NetdF/fRzb9jPE0s9u07CYUfk2h+yHNth+xGmcwaW9F2ac7BHTwYnumG7TpnrkIY
+ oL7Wz4JjdYMd3Ty3yLCzthpmDx0nt5aiybFmWIEfbhwv2WEOyMXMpFqOrJ0bpo7w13QT
+ ZQxIUsm+Th1Sb6R8MSWv0XiAWY96pWOHxMTooaaj4Kq4pq1fG3t8e7C1J8CyUdxsKgrx
+ wlEw==
+X-Gm-Message-State: AOJu0Yy3qkbXLuMtcpF7X20okLJwEpD5YwB/PI/LNky3wmIjJyIr1QQ7
+ 4O52SK9Mn8+uLLxp/RbMjuZMcUmuyf8WfU10ILr62ONMoHXFVUc1NYOyNVCfmz2P9y0=
+X-Gm-Gg: ASbGnctjeQ9pxGQXdd9MZB0N/ZpUZ1zdPJRATaK7ly5s1mz1oRGhX65nVhEjAoY/zT8
+ fYOgPN2y4Jfiett+vUcUBnfNg6Avmh9sq5Q36CA/p40sG5V10D9eVF9YjoD6LoXfzjbU8xP06B7
+ CIrL+c1lnRFAD7rxxKZUegAEpIEvdFfrIhJZZfycPBFYv8ayS4sF7E6Y+pw3RToYyaUFmi+ePvN
+ Hu8Wyd2uHKE150+Blv3EjHyr5lGIeLPBgxF+sB7Ct5mO2w/V5xR2aCxk26AgIlgHBPCsx+f7npM
+ k8tEPAXpdY8vBdkZO6oLfo9s605OAudrudz+rA+4kVV8swE7KQNs3T/QWFcG/rsDmV89Naf3xlJ
+ uOY/wzR7Yis986ljlFr6iZK4UTG11FYkFvD0n5MbmxHJI7cxCm+jF4Ty6etCTehKDKH1e5lrVDC
+ UlIKdJBfA=
+X-Google-Smtp-Source: AGHT+IEYkG3H28AT2S6ZeuzFFiVFedklOfNPw33UenD8UQTPsBgXlkRRp9I1MGAKEGrdiF1TCjryyA==
+X-Received: by 2002:a05:6402:5209:b0:641:54ce:1bf9 with SMTP id
+ 4fb4d7f45d1cf-6479c47c2f9mr1322125a12.14.1764757189776; 
+ Wed, 03 Dec 2025 02:19:49 -0800 (PST)
 Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-64750a6eca9sm17667322a12.1.2025.12.03.02.19.47
+ 4fb4d7f45d1cf-64750a6ea4csm18123928a12.4.2025.12.03.02.19.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Dec 2025 02:19:48 -0800 (PST)
+ Wed, 03 Dec 2025 02:19:49 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Subject: [PATCH v2 0/4] video: simple_panel support for am335x evm panel
-Date: Wed, 03 Dec 2025 11:19:09 +0100
-Message-Id: <20251203-topic-am33-evm-lcd-v2026-01-v2-0-262cf4f34eb5@baylibre.com>
+Date: Wed, 03 Dec 2025 11:19:10 +0100
+Subject: [PATCH v2 1/4] panel: Add missing comment for the timing argument
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAJ0OMGkC/43NTQqDMBCG4atI1p2SH62lq96juIiTSR1QI4mEi
- nj3pp6gy/cbeGYXiSJTEo9qF5EyJw5zCX2pBA52fhOwKy201I1S+g5rWBjBTsYA5QlGdJDL8QZ
- SgZS1b2urET2KIiyRPH9O/dWVHjitIW7ns6x+639uLjSQbxtXGyOdcc/ebiP3ka4YJtEdx/EFi
- 8y758kAAAA=
-X-Change-ID: 20251128-topic-am33-evm-lcd-v2026-01-004f74a2ccfc
+Message-Id: <20251203-topic-am33-evm-lcd-v2026-01-v2-1-262cf4f34eb5@baylibre.com>
+References: <20251203-topic-am33-evm-lcd-v2026-01-v2-0-262cf4f34eb5@baylibre.com>
+In-Reply-To: <20251203-topic-am33-evm-lcd-v2026-01-v2-0-262cf4f34eb5@baylibre.com>
 To: u-boot@lists.denx.de
 Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
  Tom Rini <trini@konsulko.com>, Yannick Fertre <yannick.fertre@foss.st.com>, 
@@ -90,12 +87,12 @@ Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
  Sukrut Bellary <sbellary@baylibre.com>, Fabio Estevam <festevam@gmail.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1562; i=msp@baylibre.com;
- h=from:subject:message-id; bh=5C3x7WIDYjj1v1haSsAS4Ov88D0d2m0MCBE3nSSnvGQ=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwDvpVn5V6cfDKJxfdvylZO/dhs7gM9iu3Nk9smJRmzL
- blsbx3UUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABPJjmf472a6zP+IfQX7821S
- p0LO7b44s0fPUWH/svC5lxSWdUkv52H4yRjt7F570GrmmfQLHC9fn2JVMJdaZqld9GrTNVnvcqE
- OVgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1062; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=jjaf2QtdpNs0Zdz6W+uBGfcOJaKY+u0CY4SpeCu2MWk=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkwDvg1eucz/P7xcwmkWfLkjyuRXZxWvv7ekyQ7/R17Hw
+ 2577nXpKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIl8lWNkeChu9KlHobk2d6Gf
+ 1kXO5Wrcq1ZXcbfO+Hi4evbC+OadBxkZ1h+WmLziQIbYytaiA3Mued9iV5jDfvHVhJM2M1qULjJ
+ M4QUA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Wed, 03 Dec 2025 15:46:17 +0100
@@ -115,43 +112,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-this series adds the capability to define hardcoded panel settings to
-the simple_panel driver similar to the Linux Kernel and adds the panel
-used on am335x evm. panel-uclass.c is extended to support get_modes()
-for panels and drm_display_mode conversion. In a second step the tilcdc
-is extended to support OF graph to be able to connect to the simple
-panel devicetree node.
-
-Best
-Markus
+For completeness add it.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
-Changes in v2:
-- Add support for struct drm_display_mode in u-boot and in particular
-  the simple panel driver to make copying definitions from Linux easier
-  as suggested by Fabio
-- Link to v1: https://lore.kernel.org/r/20251128-topic-am33-evm-lcd-v2026-01-v1-0-ef75d4330d3d@baylibre.com
+ include/panel.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
----
-Markus Schneider-Pargmann (TI.com) (4):
-      panel: Add missing comment for the timing argument
-      panel: Lightweight support of get_modes()
-      video: simple_panel: Add tfc_s9700rtwv43tr_01b
-      video: ti: am335x: Support OF graph
+diff --git a/include/panel.h b/include/panel.h
+index ab417bc91ed1d23aadc64e861bb721418199fb0f..6c5e2c000fc79f271876daa179455f16da5bc3af 100644
+--- a/include/panel.h
++++ b/include/panel.h
+@@ -29,7 +29,7 @@ struct panel_ops {
+ 	 * get_timings() - Get display timings from panel.
+ 	 *
+ 	 * @dev:	Panel device containing the display timings
+-	 * @tim:	Place to put timings
++	 * @timining:	Pointer to the timing for storing
+ 	 * @return 0 if OK, -ve on error
+ 	 */
+ 	int (*get_display_timing)(struct udevice *dev,
+@@ -60,6 +60,7 @@ int panel_set_backlight(struct udevice *dev, int percent);
+  * panel_get_display_timing() - Get display timings from panel.
+  *
+  * @dev:	Panel device containing the display timings
++ * @timing:	Pointer to the timing for storing
+  * Return: 0 if OK, -ve on error
+  */
+ int panel_get_display_timing(struct udevice *dev,
 
- drivers/video/panel-uclass.c | 38 +++++++++++++++++++++--
- drivers/video/simple_panel.c | 62 ++++++++++++++++++++++++++++++++++----
- drivers/video/ti/tilcdc.c    | 46 +++++++++++++++++++++++-----
- include/panel.h              | 72 +++++++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 200 insertions(+), 18 deletions(-)
----
-base-commit: c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
-change-id: 20251128-topic-am33-evm-lcd-v2026-01-004f74a2ccfc
-
-Best regards,
 -- 
-Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+2.51.0
 
