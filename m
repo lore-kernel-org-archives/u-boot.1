@@ -4,193 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EF8BD12D68
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 14:06:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF74D12D60
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 14:11:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C58C83F9C;
-	Wed,  3 Dec 2025 15:06:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 10EC683FB6;
+	Wed,  3 Dec 2025 15:11:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="EGM93FR2";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="hAV4QLtP";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="Vq/JdonB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EB3483FAC; Wed,  3 Dec 2025 15:06:38 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id 7F05983FBE; Wed,  3 Dec 2025 15:11:35 +0100 (CET)
+Received: from delivery.antispam.mailspamprotection.com
+ (delivery.antispam.mailspamprotection.com [185.56.87.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD5F783F24
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 15:06:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFB6F83FB2
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 15:11:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4432a62892=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5B3Dt3Mr1916044; Wed, 3 Dec 2025 15:06:01 +0100
-Received: from duzpr83cu001.outbound.protection.outlook.com
- (mail-northeuropeazon11012065.outbound.protection.outlook.com [52.101.66.65])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4asrmvxw44-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 03 Dec 2025 15:06:00 +0100 (CET)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eecNoYBzuxjoD8NshwePuMg8q2NpLvwdVoIXwNSzt6Mo/FKza8VG1yh9ZngAn9iCO6fGpshGfrrqG13zxxqDB3QfH7XItFXJfnAfpmDpPer08UDrKge2IjGnRgcelbPfMRc0ZHnaClUbw/tKnZcz7TdDdXkHchVeTdXxk1MXrMQ3loML0gYIkNAjVmrYiDFR1R//kz0cKcrurX5i7vnpEVkYfoBF34Rnlv4SiF9tLsnt8lDuK22sneXTuyoczKNNuUDupzrOZjpLaRGfAT4c7S8h/MBOau2XY0fkidy2Uxuj0gZ0niSxBCjbwfWn7VeWhKz1RnZ8l/jjqpVRFr3DFA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yji/PstSVP9Nl6O7ft+wU0tqgHm6xeiWPM1fdcMWcDI=;
- b=cDCVTXeWdyPD+P1Qpyvp70fa+91Xbx42EN2N+9CIjGm6o1/Zo5SC+JyNWlkQ0Km3b/yV2GCRiTERTvwKBtSXv96C0IcciK9K7Kcsp5m/4SsFBBMRoijzdONYP43o/79gAMhy0hYqRqAjZQDYcv8lyxiOf9EjVyCT9WxPEjUkARArjbzGBBeljnE6j/Ji3Wr1U2z75qVsmEgs2vRRdTpVP/eNxRph5SxEX9XwkK4/t87S0ZGr2UZNN6GbYQ/WrOUsaf54j1QTHqS3jrmMxuSE5DFjvOZ1vh0ZehlHsS4Ru+zUEFVPtoPWfU6xSF4vriAgbF+SJ5XrCm1cMKElJPCNtA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yji/PstSVP9Nl6O7ft+wU0tqgHm6xeiWPM1fdcMWcDI=;
- b=EGM93FR2G+/4GidTnbmHzTGrbPpCjXmDnjALF4WL2p7j7+AbG4+0Kd7+z57ahwEb0VGW5G8GlM24Py52gkNQvxXm1tZQGIDA843EVDfjJHx1LeScxb+WAHlHznqT5IEFUuNRjTqFpU9Pe/MJYjYXCI33CsX4J8vt2zkmkdpep4nOHOSWs+pvojhsi7zQScpymD8F1UXxUk3d6ct8aFulBXJkB5OiowOP/2Lxv0VMPqYIQcGv0KIgNo01exH26ZIBOk0WS6Rkt/FvmdOGUpZx1LX1LOD4O34Ul1JV4DxsD/N2rXDazNZo0qgCYbIZDFxZjE3NoT0CnjF+NAP51kGPKA==
-Received: from DU2PR04CA0337.eurprd04.prod.outlook.com (2603:10a6:10:2b4::35)
- by DU4PR10MB8542.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:566::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Wed, 3 Dec
- 2025 14:05:58 +0000
-Received: from DB1PEPF000509FE.eurprd03.prod.outlook.com
- (2603:10a6:10:2b4:cafe::85) by DU2PR04CA0337.outlook.office365.com
- (2603:10a6:10:2b4::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Wed,
- 3 Dec 2025 14:05:58 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB1PEPF000509FE.mail.protection.outlook.com (10.167.242.40) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Wed, 3 Dec 2025 14:05:57 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 3 Dec
- 2025 15:06:34 +0100
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 3 Dec
- 2025 15:05:56 +0100
-Message-ID: <4ecb9533-1def-44bb-9401-d1cc2cb52e7e@foss.st.com>
-Date: Wed, 3 Dec 2025 15:05:56 +0100
+ dmarc=pass (p=none dis=none) header.from=valla.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@valla.it
+ARC-Seal: i=1; cv=none; a=rsa-sha256;
+ d=outgoing.instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1764771092; 
+ b=UZgGVF/djQkdjkLmIvxOAiQV6XQE7G2l1OoMaotUDYmmEa6o4qjzU1N5A7NYJC6cxlhE7LXLIP
+ UAq/IJ1w9T610egJVLXdbN/5G6BMX4VriSwxo7cQgzulT0MorIZPCLg+7IW367PBRP4Iwb7v3n
+ udw1uHt0Fuz85V8u/F4NKUoa13ukFEF52iud4ie5UerG4xRdSH8a5Vl/si1aPbCH/xhUxpTcuu
+ xE12oVhKuFDZi8/B6o3OMvMHlYw/AI2pj8JpRTjITxvxRe8q+WWAle+zLr/GNUwsvo51huvBWs
+ zvRg1aw3XC+8gwzy9+eLMSzJgCH5O4Lv3og/6tx1aBaJWg==;
+ARC-Authentication-Results: i=1;
+ outgoing.instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com;
+ smtp.remote-ip=35.214.173.214; 
+ iprev=pass (214.173.214.35.bc.googleusercontent.com)
+ smtp.remote-ip=35.214.173.214; 
+ auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+ dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+ arc=none
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
+ d=outgoing.instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1764771092; 
+ bh=PSCHzYVVw2cADYKCkMvQaBMsxWRX1HdJahfTqh7qvBo=;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:
+ From:Date:DKIM-Signature:DKIM-Signature;
+ b=kadOIRvxtlI/zQwSc/ZzzFyzSthTfQ28PqW2cnquWkRQShvQ6Uax664D0vW8ScIlfhUVy6gdum
+ 0rOZ2MNGkrUL+YoXxtUmVabdxCkoyDm8ZDiyOz594VVv8ibW/TOaz5Y9zHcp8MC4RN8QMxzvLm
+ nQrPvL8LIMU/mOzLpuED+t4jt92NU/UZN23fcE+dqi9lE5TkS6oETRLBUt6RYRWGXYB67YxeYk
+ 1tdWpyXA4l2FtGEf7gLGAdl4qkszGx/vu/8+zSQoF/EKJYVeicPhyThOW1mtkn91Ck0DU9v2o8
+ wDSqYL29/9oUkSeV+wBDSWDCSPiqpAvlC05DrP1EtRLGyQ==;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
+ :Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ List-Unsubscribe:Content-Transfer-Encoding;
+ bh=BoUan4rVMVXymggt88t7ep3h1UUzS7qrl5Wa/geWBds=; b=hAV4QLtPwLqQuhBo362/Lxszml
+ MtiBimvWQKFswCd6eAxl2+u+obxyvbyN2rYxoKfETJLs4X27a0V6O1kL/BUt0qTSrRt2MkH7Y/zX7
+ GURQFkX6HAdz422KDEDaNzhtRjvF6N70dOUcWOFlZpxQTB3ZJo7vSbEPfIWlWcoJPbJc=;
+Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
+ helo=esm19.siteground.biz)
+ by instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com with
+ esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.98.1)
+ (envelope-from <francesco@valla.it>) id 1vQnZp-00000009E9P-2tNM
+ for u-boot@lists.denx.de; Wed, 03 Dec 2025 14:11:32 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
+ s=default; h=Subject:Cc:To:From:Date:list-help:list-unsubscribe:
+ list-subscribe:list-post:list-owner:list-archive;
+ bh=BoUan4rVMVXymggt88t7ep3h1UUzS7qrl5Wa/geWBds=; b=Vq/JdonBYam02cLZqMNri1kCbs
+ r3dcpnTt+40jVTzbNTqDOFBcC3dASlF5EoFYiAq5xcrR71hRKHBimRjjgpo60DJakkuiHNDJkriB1
+ 6RFeKr+yVvne1iI5CG9kguxJw1ycVxfw+F9a+Ea8PEbSTxHNqxgAmgcLsGm9OllLzF/Y=;
+Received: from [82.59.186.57] (port=60761 helo=bywater)
+ by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.98.1) (envelope-from <francesco@valla.it>)
+ id 1vQnZj-00000000Dqj-1GpK; Wed, 03 Dec 2025 14:11:23 +0000
+Date: Wed, 3 Dec 2025 15:11:21 +0100
+From: Francesco Valla <francesco@valla.it>
+To: Joseph Guo <qijian.guo@nxp.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Ye Li <ye.li@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Adam Ford <aford173@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>,
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
+ Jacky Bai <ping.bai@nxp.com>, Justin Jiang <justin.jiang@nxp.com>
+Subject: Re: [PATCH v2 0/2] Add FRDM-IMX91 initial support
+Message-ID: <aTBFCc-8NzeS4MzT@bywater>
+References: <20251202-imx91_frdm-v2-0-992b8aa99375@nxp.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] clk: scmi: Force call of scmi_clk_get_attribute()
- during probe
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
- Valentin Caron <valentin.caron@foss.st.com>, "Vinh
- Nguyen" <vinh.nguyen.xz@renesas.com>, Casey Connolly
- <casey.connolly@linaro.org>, Kamlesh Gurudasani <kamlesh@ti.com>,
- "Leo Yu-Chi Liang" <ycliang@andestech.com>,
- Lukasz Majewski <lukma@denx.de>, Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Yao Zi <ziyao@disroot.org>,
- "u-boot@dh-electronics.com" <u-boot@dh-electronics.com>
-References: <20251114154259.4035206-1-patrice.chotard@foss.st.com>
- <20251114154259.4035206-3-patrice.chotard@foss.st.com>
- <4a71038b-ce5b-4119-9493-4e33642a8528@mailbox.org>
- <71047e69-164e-4c65-9eb7-587de4f147ff@foss.st.com>
- <d90e6eca-2b3d-4274-8738-b2eb49f1e722@mailbox.org>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <d90e6eca-2b3d-4274-8738-b2eb49f1e722@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509FE:EE_|DU4PR10MB8542:EE_
-X-MS-Office365-Filtering-Correlation-Id: e885c725-aabc-462c-2e29-08de3275152c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?T24zT0puRFVub1NhWFg5STJQeUpsanpuTTFJZGFReWgxY0VnV1Y4elVzZ1NM?=
- =?utf-8?B?REpXTXZwNk1BRmREVzYvNWkvanNpeUZEMStxVDZDcHA3cHRCek93V0pvMzFW?=
- =?utf-8?B?cXpLNDV6WWdyajFxL0dnUHR0Q2Z5cklaQkZwcTBnMEVxTXF1TU1LbnZwYXdh?=
- =?utf-8?B?clAxeGhMZENyMWNMamUxWXYwNmpZMXN2WFNTbXEvL2paNDA4WEo5YlRyR012?=
- =?utf-8?B?L1NNaE9VNVMzcDlEUEQrN2pzZUt2WFNkeGdTTTdhQnlyUE9YckdZSG9CazFl?=
- =?utf-8?B?S1kvSnZSZlljcyt4VHJGODZHdzNhaDNrditmd0NhVVJNc05FMzZnd092cVU4?=
- =?utf-8?B?V296RlRYUmdyN1ZCTjhZaE1Jamx3eWNnVEg1bkpFSTNuUDZzRzVzWTVSeDA2?=
- =?utf-8?B?TURQbVNXQjFpQzV5SndKajIzaVZvdnVzMzV0MFhzbHFBU1FBK2xpMDN2eW5j?=
- =?utf-8?B?emRCMEFyK1lWM1ZYVHVIb2FmK01vRFZWdDM5aUtzcmg4MWVkQ0FHWUNCQTRr?=
- =?utf-8?B?NEV3L1BzT2NNRnRNaHMrQ0tOYm5qWjhkaEljTDk3RDdqWFlDT3ZCWGtWV1BV?=
- =?utf-8?B?ZzRzNmRYSjQ5dkV4TFRjRnJ6a3YzVFdwa3J1aS9yalEyejRoSW1OK1lqbCsw?=
- =?utf-8?B?cit4RS9EOFlaOVg2TUZyeWRtMCtaWW1YbnkyRUxTTDIzVGlCV2dmS0xrSE9V?=
- =?utf-8?B?dnhuUEZjc0s1YlB3Qm4xT2M3V2w4aDJSUjZWSmd5QzJhRkZEK1pDWVR6UUJE?=
- =?utf-8?B?MzViRnZuQjkxSE96c3lhcFgrSlNnWEFndWtKVlh2aGJuSDBYUWtPemlhUnhI?=
- =?utf-8?B?Y3lRdlMyQi9ZMEh3dUtVZWxvd2d0amEweG9wa29MbXdUcis2NmplTklZMnJH?=
- =?utf-8?B?dksySHFtNVhPMGZteUt3V09XWDRhRVJFa0hqMWRPSUtza2VrWE5LS1pyeHA0?=
- =?utf-8?B?Ti82TXpreEJZUHo5MkdvYTR6b2ZhMVcxRWZPMjU1QmRWbDZxV1dVcWxjRGhD?=
- =?utf-8?B?c1dmdi9JSWtZTnNYZDJQZVhsZGZ0WlRyRmtnQTlEbDJOMmNna3ZSMlcyKzgv?=
- =?utf-8?B?S1BFZWNPWkVQVWRuQmF6VTVCMWhzS0RuTW1EQzdlSkE5Q0QxNXlmZzFURWhB?=
- =?utf-8?B?WXRVa1dYM3dkYytveUtOQzQzMWtXdElNNFUySmkxcDRSZ2NZcG1JbnFLRW83?=
- =?utf-8?B?SUs0MzBVMHY2YnltZWtMU1lLNkF3QXQvL3pKcENHTWF5OWN6dXFJZENpYnk0?=
- =?utf-8?B?SVpiYmNiVGwwNmpGK211bDZTeEl3bTVYWm1WWCtsV2hUWDRDM2F6TU5MNXhS?=
- =?utf-8?B?TVNYekY3V0t1OFdnaDVvZUYwcEprckxuVHoyWjQ1RHpsL2UzRHEvUmYwUndS?=
- =?utf-8?B?VHJLbmtnVEo3eXl4bjJveTFTb0tsRlRtS1VhL3BRdGpuL1NodXJwK0RsOU93?=
- =?utf-8?B?Mmg2TWJzWHRJcFlsT1NHd2QxK0RSMURMUFRrazVFd2J3Yndjck9TaE4vOVUr?=
- =?utf-8?B?WHdZTjhqaWtaQlJqaXIzbnM1T0dSemYzYXdVb0hNdDA0Q2Erais3UXY2OWdL?=
- =?utf-8?B?eTlaRHphOW1ncVgyN2lvQzJFOXBIRFF6cDUxblJSS2lydUhtUkZlc3dKd0RP?=
- =?utf-8?B?aWh1RS9reTVqYno5QzVncEdQZnZiQzd2K2lhZ2FHOGo0UVRZUXpMNU84ZDhU?=
- =?utf-8?B?ZFQ4bGRRQUVDZHBMWXN5M3Z6Qk9KYXVDY3BaSVMrRlcrZTJuMkNBbnZRSjBv?=
- =?utf-8?B?bnJXQVJRZ2IxQ3pvNzBtRG43aHVLL3FheTVBci9xZ0srWWdJY2lRbDZkbDlP?=
- =?utf-8?B?QjV3OGhXK0N1a21ObVVXWXNKTDFsU3JTNE9xZnMxbERMa3dtNXpYME9OY2Yw?=
- =?utf-8?B?amZ4TC9LUWRGWkhMeThZMGorV2p5d3B5R0F3WVBXa0MvaVpJNk5TUVE1N0hK?=
- =?utf-8?B?dXF5Nk1qa2ZkTFQrS1lOZG0zRWx2RjlrcUFndTBpT3dVNkYxb1RkTURYQ1du?=
- =?utf-8?B?NWc0eHRaalBmRlkrSWt6bGIwRlhVeTNtdldQMWhXQXVHcFZmOC9qQkxWNm5S?=
- =?utf-8?B?dzNPN3pGMHRmSTJhbXdDMFlwVjdkblFIK0NjZ3F5V2dwb1E4Sm9qMlJvTWdo?=
- =?utf-8?Q?KpYY=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(376014)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 14:05:57.9797 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e885c725-aabc-462c-2e29-08de3275152c
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509FE.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR10MB8542
-X-Authority-Analysis: v=2.4 cv=e8YLiKp/ c=1 sm=1 tr=0 ts=693043c9 cx=c_pps
- a=QwrbhXh03MhuZ2mRWfjA2w==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=IkcTkHD0fZMA:10
- a=wP3pNCr1ah4A:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=wZF5xgHrhGkYw9plCIAA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: 0OlS7QaojibFqLQ1vxM5tng_dJr_XiYq
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjAzMDExMiBTYWx0ZWRfX8Fb1XHFq+EcB
- ox4dQt7zhMoLrjWvLnqO4keH3CmTfsB59jeWT5xv0Bh1uSJWffE468KWd6oawMSs5IHmhv4vLNd
- CqTrb/CNcePXl/DtxOBMT1dPcEcXCuueNv9+fPDFPSRofEwX54VOUpYbmWTXs8qk4dXTeIAvjtf
- W92fl1xRWL2xbt5FT0utA+VAjo/u/n2qSFhn7WKouQPkYBnp8K461LxceYEFIzCalh6yGcWhLbV
- PQcGVFIhWna+s0KG5DfrXdtxcZwQKWv/Tgv4exFvzJNQERsXdjctIW9Cz29rRtWdT+jdySUQ47G
- 7ynhyV0/i7A+cI4Yj/NDrb5tT8qDWR/Q9YRJkaENCgTM5oEjYt6ua3uA5R1gN5SRtYBH/mCVl8X
- 66qH7eeiEumEtOjDQ58tY/20FrzmkA==
-X-Proofpoint-GUID: 0OlS7QaojibFqLQ1vxM5tng_dJr_XiYq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-03_01,2025-11-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- clxscore=1015 impostorscore=0 spamscore=0
- adultscore=0 malwarescore=0
- phishscore=0 lowpriorityscore=0 bulkscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512030112
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251202-imx91_frdm-v2-0-992b8aa99375@nxp.com>
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - esm19.siteground.biz
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - valla.it
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SGantispam-id: eb6f36cc1cc91f2838d6cbf5d24437fc
+AntiSpam-DLS: false
+AntiSpam-DLSP: 
+AntiSpam-DLSRS: 
+AntiSpam-TS: 1.0
+CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
+CFBL-Feedback-ID: 1vQnZp-00000009E9P-2tNM-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-qt3p.prod.antispam.mailspamprotection.com; 
+ iprev=pass (214.173.214.35.bc.googleusercontent.com)
+ smtp.remote-ip=35.214.173.214; 
+ auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+ dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+ arc=none
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -207,62 +136,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Joseph,
+
+thank you for the patch set.
+
+On Tue, Dec 02, 2025 at 07:05:01PM +0900, Joseph Guo wrote:
+> This series add initial support for the FRDM i.MX91 11x11 development
+> board in U-Boot:
+> https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-IMX91
+> 
+> Include:
+> - Device tree for the board.
+> - Defconfig and Kconfig for the board.
+> - Header file defining memory layout and hadware addresses.
+> 
+> The board devicetree already attempted to upstream, but not been accepted yet:
+> https://lore.kernel.org/all/20251114-imx91_frdm-v1-0-e5763bdf9336@nxp.com/
+> 
+> Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
+> ---
+> Changes in v2:
+> - add upstream link
+> - rename 'vrpi' to 'vexp' to keep align with upstream dts
+> - move bootph- property from u-boot.dtsi to dts   
+> - correct commit message 'EVK' to 'FRDM'
+> - use #include in ecc config file to avoid duplication
+> - add ecc description in README
+> - drop extraneous includes
+> - rename 'imx91_frdm.rst' to 'imx91_11x11_frdm.rst'
+> - drop IMX91_FRDM_LPDDR4 symbol
+> - Link to v1: https://lore.kernel.org/r/20251127-imx91_frdm-v1-0-8f42646d89ad@nxp.com
+> 
+> ---
+> Joseph Guo (2):
+>       arm64: dts: add NXP FRDM-IMX91 device tree
+>       imx: Support i.MX91 11x11 FRDM board
+> 
+>  arch/arm/dts/imx91-11x11-frdm-u-boot.dtsi          |   51 +
+>  arch/arm/dts/imx91-11x11-frdm.dts                  |  767 ++++++++
+>  arch/arm/mach-imx/imx9/Kconfig                     |    9 +
+>  board/freescale/imx91_frdm/Kconfig                 |   12 +
+>  board/freescale/imx91_frdm/MAINTAINERS             |    7 +
+>  board/freescale/imx91_frdm/Makefile                |   16 +
+>  board/freescale/imx91_frdm/imx91_frdm.c            |   25 +
+>  board/freescale/imx91_frdm/imx91_frdm.env          |   88 +
+>  .../imx91_frdm/lpddr4_2400mts_1gb_timing.c         | 1996 ++++++++++++++++++++
+>  .../imx91_frdm/lpddr4_2400mts_2gb_timing.c         | 1996 ++++++++++++++++++++
+>  .../imx91_frdm/lpddr4_2400mts_ecc_1gb_timing.c     | 1996 ++++++++++++++++++++
+>  .../imx91_frdm/lpddr4_2400mts_ecc_2gb_timing.c     | 1996 ++++++++++++++++++++
+>  board/freescale/imx91_frdm/lpddr4_timing.h         |   12 +
+>  board/freescale/imx91_frdm/spl.c                   |  193 ++
+>  configs/imx91_11x11_frdm_defconfig                 |  143 ++
+>  configs/imx91_11x11_frdm_inline_ecc_defconfig      |    3 +
+>  doc/board/nxp/imx91_11x11_frdm.rst                 |  100 +
+>  doc/board/nxp/index.rst                            |    1 +
+>  include/configs/imx91_frdm.h                       |   25 +
+>  19 files changed, 9436 insertions(+)
+> ---
+> base-commit: e199db57c00ba2c2aba81069800126b6543a644c
+> change-id: 20251117-imx91_frdm-7a2db95f279d
+> 
+> Best regards,
+> -- 
+> Joseph Guo <qijian.guo@nxp.com>
+> 
+
+I tested the series on the actual hardware with [0] on top of the
+mainline Linux kernel and encountered a unmanaged interrupt warning
+during boot, which wasn't there using the downstream NXP u-boot
+version:
+
+[    1.840096] mmc1: host does not support reading read-only switch, assuming write-enable
+[    1.850352] mmc1: new high speed SDHC card at address 1234
+[    1.857170] mmcblk1: mmc1:1234 SA08G 7.21 GiB
+[    1.864850]  mmcblk1: p1 p2
+[    2.279012] random: crng init done
+[   11.720182] platform pwrseq-usdhc3: deferred probe pending: pwrseq_simple: reset control not ready
+[   11.734562] platform 42890000.ethernet: deferred probe pending: platform: wait for supplier /soc@0/efuse@47510000/mac-address@4ec
+[   17.947574] irq 99: nobody cared (try booting with the "irqpoll" option)
+[   17.954292] CPU: 0 UID: 0 PID: 55 Comm: irq/99-1-0022 Not tainted 6.18.0-01544-g0817234e6cf9-dirty #1 PREEMPT 
+[   17.954302] Hardware name: NXP FRDM-IMX91 Development Board (DT)
+[   17.954306] Call trace:
+[   17.954310]  show_stack+0x18/0x30 (C)
+[   17.954326]  dump_stack_lvl+0x60/0x80
+[   17.954335]  dump_stack+0x18/0x24
+[   17.954341]  __report_bad_irq+0x4c/0xec
+[   17.954351]  note_interrupt+0x33c/0x390
+[   17.954361]  handle_irq_event+0x94/0xbc
+[   17.954368]  handle_level_irq+0xd8/0x170
+[   17.954375]  handle_irq_desc+0x34/0x58
+[   17.954380]  generic_handle_domain_irq+0x1c/0x28
+[   17.954386]  vf610_gpio_irq_handler+0x70/0x110
+[   17.954395]  handle_irq_desc+0x34/0x58
+[   17.954401]  generic_handle_domain_irq+0x1c/0x28
+[   17.954407]  gic_handle_irq+0x4c/0x140
+[   17.954412]  call_on_irq_stack+0x30/0x48
+[   17.954419]  do_interrupt_handler+0x80/0x84
+[   17.954426]  el1_interrupt+0x38/0x60
+[   17.954436]  el1h_64_irq_handler+0x18/0x24
+[   17.954443]  el1h_64_irq+0x6c/0x70
+[   17.954448]  _raw_spin_unlock_irqrestore+0x8/0x44 (P)
+[   17.954457]  wake_threads_waitq+0x60/0x70
+[   17.954463]  irq_thread+0x194/0x32c
+[   17.954469]  kthread+0x12c/0x204
+[   17.954478]  ret_from_fork+0x10/0x20
+[   17.954485] handlers:
+[   18.064352] [<00000000ec900a2b>] irq_default_primary_handler threaded [<00000000a61af792>] pca953x_irq_handler
+[   18.074353] Disabling IRQ #99
+[   18.080294] nxp-pca9450 1-0025: pca9451a probed.
+
+Further analysis led me to think that this is caused by the fact that
+the PCAL6524 GPIO expander (1-0022) shares its interrupt line with the
+USB Type C port controller (PTN5110). As soon as the first interrupt
+line from the PCAL is enabled (i.e., when the PCA9451A PMIC requests
+its interrupt line, which is provided by the aforementioned PCAL6524),
+the corresponding parent interrupt - which is shared - is also enabled
+and this causes an interrupt storm, at least until the PTN5110 driver
+is probed.
+
+The interrupt storm causes a noticeable delay during the boot sequence,
+as well as the disabling of the shared IRQ #99, making the device not
+really usable.
+
+In the downstream version of u-boot, this is taken care by the support
+for the TypeC port controller logic [1], which is however not available
+in upstream u-boot. Until that support is added, I'd suggest to add a
+workaround in here (maybe in SPL code?) that simply disables the
+interrupts for the PTN5110 and clears the interrupt latch as well.
+The IRQ can then be enabled in a proper way by the kernel driver.
 
 
-On 11/20/25 21:38, Marek Vasut wrote:
-> On 11/17/25 5:36 PM, Patrice CHOTARD wrote:
-> 
-> Hello Patrice,
-> 
->> On 11/15/25 00:08, Marek Vasut wrote:
->>> On 11/14/25 4:41 PM, Patrice Chotard wrote:
->>>> Since commit fdb1bffe2827 ("clk: scmi: Postpone clock name resolution"),
->>>> all clocks which are parent clocks are name "scmi-%zu" which
->>>> leads to error during their children clocks registration.
->>>>
->>>> In order to not cancel boot time optimization done in
->>>> commit 3547e315c188 ("clk: scmi: Defer issue of SCMI_CLOCK_ATTRIBUTES"),
->>>> choice has been done to re-introduce scmi_clk_get_attribute() call
->>>> during scmi_clk_probe() under new CLK_SCMI_FORCE_ATTRIBUTE flag.
->>>>
->>>> This restores boot on stm32mp13 and stm32mp2 family boards.
->>>>
->>>> Fixes: fdb1bffe2827 ("clk: scmi: Postpone clock name resolution")
->>> SCMI spec says that clock IDs have to be monotonic and incrementing, without gaps . This driver registers all SCMI clock for you exactly this way. What exactly is the problem on STM32 ? Are you maybe missing some reparenting somewhere else ? Maybe the clock parent resolution should happen when the clock are first used, just like attributes are now resolved when the clock are first used ?
->>
->> Hi Marek
->>
->> Initially, on STM32 we first registered SCMI clocks with their real names and then we registered all RCC clocks
->> in stm32_rcc_init(). For most of these latter clocks, their parent are SCMI clocks.
->>
->> After commit fdb1bffe2827 ("clk: scmi: Postpone clock name resolution"), the name of these SCMI "parent" clocks
->> becames "scmi-%zu" which makes clk_register() failed as we still try to register RCC clocks using their parent's "real names".
->>
->> For example: for STM32MP13, clock "ck_hse" becames "scmi-0", so all clocks which are "ck_hse"'s child can't be registered.
-> 
-> I don't think any clock driver can depend on SCMI clock shortnames for clock look up, because the SCMI clock shortnames are an optional hint.
-> 
-> Instead, if some clock registered in this RCC driver have SCMI parent clock, those SCMI parent clock have to be referred to by SCMI clock udevice and matching clock identifier (in this case, I assume that would be SCMI clock ID).
-> 
-> The relationship between this RCC clock and SCMI parent clock can likely be described in DT using 'clocks = <&scmi_clk N>' , which you already have in stm32mp131.dtsi:
-> 
->  788                         clock-names = "hse", "hsi", "csi", "lse", "lsi";
->  789                         clocks = <&scmi_clk CK_SCMI_HSE>,
->  790                                  <&scmi_clk CK_SCMI_HSI>,
->  791                                  <&scmi_clk CK_SCMI_CSI>,
->  792                                  <&scmi_clk CK_SCMI_LSE>,
->  793                                  <&scmi_clk CK_SCMI_LSI>;
-> 
-> Can you use that for the parent lookup and simply ignore the shortnames?
+[0] https://lore.kernel.org/all/20251114-imx91_frdm-v1-0-e5763bdf9336@nxp.com/
+[1] https://github.com/nxp-imx/uboot-imx/blob/lf_v2025.04/board/freescale/common/tcpc.c#L1058
 
-Hi Marek
 
-I reworked drivers/clk/clk-stm32-core.c, clk-stm32mp13.c and clk-stm32mp25.c and found 
-one additional issue in drivers/clk/clk_scmi.c.
+Thank you
 
-The serie will be soon submitted on mailing list.
 
-Thanks
-Patrice
+Regards,
+
+Francesco
+
 
 
