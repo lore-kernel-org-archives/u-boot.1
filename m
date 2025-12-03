@@ -4,85 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5714DD1BDD8
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 19:43:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF41CD1BDD8
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 19:53:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70F0A83B7E;
-	Wed,  3 Dec 2025 20:43:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2E73283B99;
+	Wed,  3 Dec 2025 20:53:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QiO80IOq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C1A5HoRi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 264A483B99; Wed,  3 Dec 2025 20:43:01 +0100 (CET)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id 52FA883BB1; Wed,  3 Dec 2025 20:53:31 +0100 (CET)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EF2383B4A
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 20:42:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 271DC83B24
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 20:53:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-bc0e89640b9so73158a12.1
- for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 11:42:58 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-8b30d1b467eso2021685a.1
+ for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 11:53:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764790977; x=1765395777; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uH8spR31xEL+AEW6jt77JHe08jvvuM4rRXUXTVamSK8=;
- b=QiO80IOqNTCyEWM1y8Y1zuIw9OtIAz+fCnPwZhTj5rBnSCGuRvqSsOln/0G3Llxzr4
- 2piSwuXMCTxpK8P0Dm9XLCFKZ9v1EOp9/HHgE8oHeYbQR/flCvlURbX4Q4vwKOnie0Sn
- WIfGUdVeLXSxbw0i106rakVVfWnUhiY6YeTVRq6rkHLg66srFNpIkQU2v0cF6EihWOMX
- BatyDtTo0KNOo6EkRVL8q0gGoalZ7RAo3ukEUnqTgb0CE6hlLjUQRH+6TAWCtSjZOCxR
- 1I4pHV0OPWYtJDs70RK0NwumJxzFj1iNKCknoTCMcoOJC17Wh3+EYLPuqBjACG9JZjVq
- NH6A==
+ d=gmail.com; s=20230601; t=1764791608; x=1765396408; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=c+E5Ehrt1TgHY8tpQcFmMGo3Gu/0MasK5ynsPrr5BFo=;
+ b=C1A5HoRicB+zBwKqPh8g0wyGwryUpGxSe7BUZ3o4Jw/laFyvSw0eIg/kImEMtxItOj
+ kUF43CPMOqQxZujdO8nFDpPqY/1FWd6mrv2NBYQDiXrvT43YCLwFzUykFqV62EBGIE58
+ 6ajsxLpbU/eZYZzCmXafoKP3aghGbVH3n0315snixiScEOc/wUgw1/CPFCZ7BKRyKWG2
+ 0xB6mGB6t2hTdAkyH4ovhKLZIc2/JQPx8q1tgNkSxjsfUIoO4OHocWj0loyVYxot7JVy
+ bIrmH4K2iqnpOhAprJznf0DfRrP7lR8MGOFa8TMsONbz5hvrYuPldIf7F/MxZsPRGYiA
+ Y9NA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764790977; x=1765395777;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=uH8spR31xEL+AEW6jt77JHe08jvvuM4rRXUXTVamSK8=;
- b=u8LbaHOPA8Y7xBQSgNxfD13Twfs7p45isLncK1bj3EXVqavalL/t4R5/F/U0XdY3wB
- ERSTwG5A5KY9vPSaQaEwEoAmyL0f1S4OLxXkmtbgz3Z6Bit1dpWIMWK8nWJE5mya/q3X
- OtXodny5shcUH6mj9tGaQ/1DoolZd5+RpZL2lrnCOpE8HrmIVBVxLm1LOSFvKjXcysYB
- 9jqbIRTNJAtwhO/pT4AaULWcdFEqiv0dx9vX85WUhNQn1/L5NpP+NsNsj/vtKvEI9TLr
- M7jYB9dDjjA67pSrvCbM2XS32dGhwE+1lDYymo+FrhZNeN9H8fxysPqpQGox3CrJaBV4
- 0CUg==
-X-Gm-Message-State: AOJu0YzjK1WeJBsXwNHYRThObc5aHgeLoPs5CM2D7j+VdbqbXSMUk9ZD
- 7avRObb7SyJ12X4T+mlScCemopjVMuiuyZgo8Fym2d4BpyT3rbtn8GQVNV1vkrkl7bX0WDGsfvm
- qo/Zf8IuDE6EESPI3pkSRGMu5lHSGe6l4uME2iqp6WA==
-X-Gm-Gg: ASbGnct267gNYCf0RPyWdPIeCt9Lm0Ucr/uAlGcX+121BpLuNoAPXehnjE5ZXmc+G89
- ozgnxDA1g4k7l7jdt1vFTe9rBNB09OFKIeSGpvEPKlGqP6kwuW/1gGw6RScaqX0x5j5F/iQcrxM
- XDimdBabeEJpqTd45dKZ3jceFSYJZie6G9qILni2Zc4N+eS5KZ+stAzR2wKCIEjn/6LbmBMdxLQ
- BN5AfZxU/llpbY3huSyDrD3AK7tFH8t0wGS83a2Ov1IgZXPQZ3JRu5SpSLNnbBG0HHtD5frXiZE
- /J4ws19j
-X-Google-Smtp-Source: AGHT+IFjdnGh4upez5KCNpmp3tuPzW5hBn52GqKz0hsKryd2vxy7TUPKEnTtxqCRUql+mVj8DDsRLtL1x+oNxm7B4MA=
-X-Received: by 2002:a05:7300:4628:b0:2a4:7b65:1a16 with SMTP id
- 5a478bee46e88-2ab92e2e189mr2308397eec.25.1764790976541; Wed, 03 Dec 2025
- 11:42:56 -0800 (PST)
+ d=1e100.net; s=20230601; t=1764791608; x=1765396408;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=c+E5Ehrt1TgHY8tpQcFmMGo3Gu/0MasK5ynsPrr5BFo=;
+ b=B4M9GNlNNVnZ2dRoEgdQG/NEsKj/XxkW6Htgdk7bR2mqy80MJBtnJV9m7/ZgvQCCoD
+ /WYgThj2d3lc3PQ6k+glgmTcgcm7lNP/lHaPHFe3gIKlBiEwyPa4UbVrI6HbY+o6V1Yg
+ k6vDsOrciT+YZUVtQHmMyOjandWC+8ApKKMZhgt5Ya+7P3hGKWgfzxPv33ln9r9mRUVp
+ zyg8exvming2qS+uirOASm+deCGrmxLoI/qX7pQXaqPP+EjvjC4r05KG2O/8NbDGD2q1
+ 96iVTKQ4dWgzBgk1B9lwYo/r2hh+louW8+7IaB8ElIFQAjfmvn4A2gd3DkyoVb6XfRGp
+ gc3Q==
+X-Gm-Message-State: AOJu0Yz9oiBtFhL90viefzF8h7UPraXRUySKenGFjQlvoOqPPyKBnYmb
+ HoQrYP2VrJC1aQy+/621kjiTfoXpxaGWbIYmL3ynLSoQDeRcgkPMiphJ
+X-Gm-Gg: ASbGncuoaGGw7gC/fdN7OWrl0NuJ6ANR39Tkxxx+Bens8G4boybpdCnLBmIQuBaMIfZ
+ u35dK/d25cZotszboDDT6/LIaRSQ0j4IcG9OK9+Du1EPXVXflxL4nBO0am54OL8AWblJ2xyMzp4
+ mNARCuxJ5qgfMfLaoOlDq4Sgp1ZmElvoX7bLLG511WbReUQHc2P4/rk/nlz0oZcYyPwMTjF7KKA
+ EQlj446UkoXoOMMQcm4+7adW+16JX4MsXQVWKrA8LRe2FY9wToGDuYlfujYVwOQhLPYNn2jIxXb
+ N93F7hq0O3BFUO9TD5oBKLIiLyzFtqCI9aoAx0kObzQpWNC6Frm73HtLRoYhhQCOO5qT3gJ46ek
+ w+MbHaeiaKDkK8fQEZhUCNoUnEp5UQfu6eERNTEiO+f/RpvOu1En9mblf5T0J3dPqpHzpgs83VS
+ 4fKY9cRshlmAmKajS/GdRBCQPEiSoW2kIoFvjUl6wBJnKqYvn4K3Qku97DQcg8fw==
+X-Google-Smtp-Source: AGHT+IEPINxeR/S/bTUpJtMZHLeIHvI8m0dh7fAFYjG1sJZbCGCN4nOVYHP190YJ0lWZgDjWczniXw==
+X-Received: by 2002:a05:6214:e85:b0:880:4585:da69 with SMTP id
+ 6a1803df08f44-8881d7bdceemr29469806d6.4.1764791607880; 
+ Wed, 03 Dec 2025 11:53:27 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-45-131-215.washdc.fios.verizon.net.
+ [108.45.131.215]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-88652b4afe8sm132570166d6.29.2025.12.03.11.53.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 03 Dec 2025 11:53:27 -0800 (PST)
+Message-ID: <712a7f7c-1785-1ba8-dc57-dab516200bd0@gmail.com>
+Date: Wed, 3 Dec 2025 14:53:26 -0500
 MIME-Version: 1.0
-References: <cover.1764574369.git.jan.kiszka@siemens.com>
- <ada2fc90d01cb54e178853b766896f0f69b26451.1764574369.git.jan.kiszka@siemens.com>
-In-Reply-To: <ada2fc90d01cb54e178853b766896f0f69b26451.1764574369.git.jan.kiszka@siemens.com>
-From: Ralph Siemsen <ralph.siemsen@linaro.org>
-Date: Wed, 3 Dec 2025 14:42:45 -0500
-X-Gm-Features: AWmQ_bnLF9gGONAYb2jPNvfdfcStyVs-Tw0gVr1wBw2M27RCm54_ebFN0jZK4YA
-Message-ID: <CANp-EDadXjDxHKTZDUSCSmdxruGKUk3CEFRB2tN6LCQnuPfKGQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/5] spl: mmc: Respect sector value passed to
- mmc_load_image_raw_partition
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marex@nabladev.com>, 
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>, 
- Sune Brian <briansune@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v2] test: correct strlcat license information
+Content-Language: en-US
+To: Denis 'GNUtoo' Carikli <GNUtoo@cyberdimension.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Leah Rowe <leah@libreboot.org>
+References: <20251124194556.GM2125796@bill-the-cat>
+ <20251202152055.12467-1-GNUtoo@cyberdimension.org>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20251202152055.12467-1-GNUtoo@cyberdimension.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,40 +104,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jan,
+On 12/2/25 10:20, Denis 'GNUtoo' Carikli wrote:
+> The GPL-2.1 isn't a valid license.
+> 
+> The copyright header says that "These tests adapted from glibc's
+> string/test-strncat.c" and test-strncat.c is under the
+> LGPL-2.1-or-later.
+> 
+> This was reported to us by Leah Rowe.
+> 
+> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@cyberdimension.org>
+> ---
+> ChangeLog v1->v2:
+> * Fixed the SPDX license identifier (LGPL-2.1+ like names are used
+>    Guix and I'm used to that, sorry for not spoting the issue).
+>    I've updated the commit message accordingly.
+> * Rebased on the 'next' branch.
+> ---
+>   test/lib/strlcat.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/test/lib/strlcat.c b/test/lib/strlcat.c
+> index d1a0293271b..dead1dfc70e 100644
+> --- a/test/lib/strlcat.c
+> +++ b/test/lib/strlcat.c
+> @@ -1,4 +1,4 @@
+> -// SPDX-License-Identifier: GPL-2.1+
+> +// SPDX-License-Identifier: LGPL-2.1-or-later
+>   /*
+>    * Copyright (C) 2021 Sean Anderson <seanga2@gmail.com>
+>    * Copyright (C) 2011-2021 Free Software Foundation, Inc.
+> 
+> base-commit: 42a4ff5f63baacc414b564c02541cd1f5c0862ee
 
-On Mon, Dec 1, 2025 at 2:33=E2=80=AFAM Jan Kiszka <jan.kiszka@siemens.com> =
-wrote:
-> --- a/common/spl/spl_mmc.c
-> +++ b/common/spl/spl_mmc.c
-> @@ -137,11 +137,7 @@ static int mmc_load_image_raw_partition(struct spl_i=
-mage_info *spl_image,
->                 return ret;
->         }
->
-> -#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
->         return mmc_load_image_raw_sector(spl_image, bootdev, mmc, info.st=
-art + sector);
-> -#else
-> -       return mmc_load_image_raw_sector(spl_image, bootdev, mmc, info.st=
-art);
-> -#endif
->  }
->  #endif
+My intent was to relicense this under the GPL per the terms of the LGPL.
 
-This patch seems correct, however in testing, it does not boot for me
-on cyclone V.
-
-The reason is because the sector offset is zero, rather than the
-expected value (0x200 for socfpga gen 5).
-
-This happens because of Kconfig dependency:
-https://gitlab.com/u-boot/u-boot/-/blob/master/common/spl/Kconfig?ref_type=
-=3Dheads#L586
-
-I removed this "depends on" and thereafter I am able to load the main
-u-boot successfully, although I don't think that is necessarily the
-right way to fix the issue.
-
-Regards
-Ralph
+--Sean
