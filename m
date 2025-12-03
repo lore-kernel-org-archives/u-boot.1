@@ -4,90 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF41CD1BDD8
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 19:53:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EB48D12D6A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 20:32:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E73283B99;
-	Wed,  3 Dec 2025 20:53:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 791C583BBE;
+	Wed,  3 Dec 2025 21:32:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C1A5HoRi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QcSTwo7q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52FA883BB1; Wed,  3 Dec 2025 20:53:31 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id EF4E383BF1; Wed,  3 Dec 2025 21:32:45 +0100 (CET)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 271DC83B24
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 20:53:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBE3483B6C
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 21:32:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-8b30d1b467eso2021685a.1
- for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 11:53:29 -0800 (PST)
+ spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-bc274b8b15bso130916a12.1
+ for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 12:32:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764791608; x=1765396408; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=c+E5Ehrt1TgHY8tpQcFmMGo3Gu/0MasK5ynsPrr5BFo=;
- b=C1A5HoRicB+zBwKqPh8g0wyGwryUpGxSe7BUZ3o4Jw/laFyvSw0eIg/kImEMtxItOj
- kUF43CPMOqQxZujdO8nFDpPqY/1FWd6mrv2NBYQDiXrvT43YCLwFzUykFqV62EBGIE58
- 6ajsxLpbU/eZYZzCmXafoKP3aghGbVH3n0315snixiScEOc/wUgw1/CPFCZ7BKRyKWG2
- 0xB6mGB6t2hTdAkyH4ovhKLZIc2/JQPx8q1tgNkSxjsfUIoO4OHocWj0loyVYxot7JVy
- bIrmH4K2iqnpOhAprJznf0DfRrP7lR8MGOFa8TMsONbz5hvrYuPldIf7F/MxZsPRGYiA
- Y9NA==
+ d=linaro.org; s=google; t=1764793962; x=1765398762; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DmfGfCLC5RJCmZnbnDk6eb5rgh7nECb6THqfmaSkzZU=;
+ b=QcSTwo7q1WyYx+JK5Sj7PnuS1TK2rKiEp6SZmqGDotYeBKe3KVgqrNU/WA+BCmH2+P
+ yjOYOG6AH8KJjUJW6MlfrhpI2cOI6+GbSwRRMDu9bihPhWpx8x7EoeFZYqWGiNRlJ7ET
+ 7WWd23y+KhGM5Baj4ka820t6FTG0F4EsPjsYliF5XKGIdFVJm7r2oqvNTyKjjeVAQC3Q
+ YNbkzlUpI9T8+Q5xIfcxeVHt4mCPgC5fwVE0AwjMmTC683VUNSgDoWXINurwgazodpqN
+ 38t9OHGELa0eU0oZ34lSX8RzZk3DFRyMF7qtdqGJaW3t8jVfNAeLLRpdwUSbCbQnxW4s
+ SEFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764791608; x=1765396408;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c+E5Ehrt1TgHY8tpQcFmMGo3Gu/0MasK5ynsPrr5BFo=;
- b=B4M9GNlNNVnZ2dRoEgdQG/NEsKj/XxkW6Htgdk7bR2mqy80MJBtnJV9m7/ZgvQCCoD
- /WYgThj2d3lc3PQ6k+glgmTcgcm7lNP/lHaPHFe3gIKlBiEwyPa4UbVrI6HbY+o6V1Yg
- k6vDsOrciT+YZUVtQHmMyOjandWC+8ApKKMZhgt5Ya+7P3hGKWgfzxPv33ln9r9mRUVp
- zyg8exvming2qS+uirOASm+deCGrmxLoI/qX7pQXaqPP+EjvjC4r05KG2O/8NbDGD2q1
- 96iVTKQ4dWgzBgk1B9lwYo/r2hh+louW8+7IaB8ElIFQAjfmvn4A2gd3DkyoVb6XfRGp
- gc3Q==
-X-Gm-Message-State: AOJu0Yz9oiBtFhL90viefzF8h7UPraXRUySKenGFjQlvoOqPPyKBnYmb
- HoQrYP2VrJC1aQy+/621kjiTfoXpxaGWbIYmL3ynLSoQDeRcgkPMiphJ
-X-Gm-Gg: ASbGncuoaGGw7gC/fdN7OWrl0NuJ6ANR39Tkxxx+Bens8G4boybpdCnLBmIQuBaMIfZ
- u35dK/d25cZotszboDDT6/LIaRSQ0j4IcG9OK9+Du1EPXVXflxL4nBO0am54OL8AWblJ2xyMzp4
- mNARCuxJ5qgfMfLaoOlDq4Sgp1ZmElvoX7bLLG511WbReUQHc2P4/rk/nlz0oZcYyPwMTjF7KKA
- EQlj446UkoXoOMMQcm4+7adW+16JX4MsXQVWKrA8LRe2FY9wToGDuYlfujYVwOQhLPYNn2jIxXb
- N93F7hq0O3BFUO9TD5oBKLIiLyzFtqCI9aoAx0kObzQpWNC6Frm73HtLRoYhhQCOO5qT3gJ46ek
- w+MbHaeiaKDkK8fQEZhUCNoUnEp5UQfu6eERNTEiO+f/RpvOu1En9mblf5T0J3dPqpHzpgs83VS
- 4fKY9cRshlmAmKajS/GdRBCQPEiSoW2kIoFvjUl6wBJnKqYvn4K3Qku97DQcg8fw==
-X-Google-Smtp-Source: AGHT+IEPINxeR/S/bTUpJtMZHLeIHvI8m0dh7fAFYjG1sJZbCGCN4nOVYHP190YJ0lWZgDjWczniXw==
-X-Received: by 2002:a05:6214:e85:b0:880:4585:da69 with SMTP id
- 6a1803df08f44-8881d7bdceemr29469806d6.4.1764791607880; 
- Wed, 03 Dec 2025 11:53:27 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-45-131-215.washdc.fios.verizon.net.
- [108.45.131.215]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-88652b4afe8sm132570166d6.29.2025.12.03.11.53.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Dec 2025 11:53:27 -0800 (PST)
-Message-ID: <712a7f7c-1785-1ba8-dc57-dab516200bd0@gmail.com>
-Date: Wed, 3 Dec 2025 14:53:26 -0500
+ d=1e100.net; s=20230601; t=1764793962; x=1765398762;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=DmfGfCLC5RJCmZnbnDk6eb5rgh7nECb6THqfmaSkzZU=;
+ b=U4RmO4h9iOny2z2zyvuLtUD1ZJM3IVFDky9K0oqPcs2mxOTmC7Lc5RLCqkl1wtTznx
+ 4k/yWlDOuBjhhOaFVXdgDOXZ0QqY09/hdFmpgojmO70rxXTMZ/pY/0FGbFTuv3qpDqdc
+ tOB/XEiw4NSrLqEynjCOKPb2NLREyXomkhZpW9JH7TOERMLSdB9FmH+Zf4v9DwXNYQJc
+ nRcY9nFzYYSvLpovAIoy44XaQEbr9yjIhy3NZl1mZG5IhcTAlN1Xw79uMK1pBdpbkOF4
+ QYToH9ARlZ6BHi5trxgFuTB6+juE0QEQ5lKRCj5AYtKYZ6Mwi3IkHEcN7cGEHRxthhvz
+ OirQ==
+X-Gm-Message-State: AOJu0YxITM2bVeKowVl/ZLqOTc3sMjsD3u0D6jF7C5kx+21p1JeQfXnY
+ C+GRYGOdJhFX1lvhP1RF4T9L/DsEY217lz8wF7fyguSXF1XiHZDZ/JqbyH+WILhws2eDgY8WaOE
+ ixiTwR+SfJd7QMqgfZ9DO9Wpwd6C1PEnFhoKwhhAt5Q==
+X-Gm-Gg: ASbGnct77COE6HkB5hXE2fT5LS7pSAvNzRh4QIlpyJXDekUJ+ejGKpZSpMb4XJOGSBk
+ hxRhR794tfmWNpiIXZlIGAa/djQgAk24eh28DTwjRvCnkIGTVvAkXhXILNqKqbRQnU6TKKMyZvO
+ tgJ0lSRxeBzGveamXnPsKNkMZxdLeat7dfwx6SUJtrlklVXh3NNkil+Lr0d9xyomi1WovuIbHlB
+ wVQWmrgpmiAKvNkkHaqegt/jkhZy6gyCPTeNSYQ9ZqF+iSCYjjs8aW81/J11vACR+1KMfTNuw==
+X-Google-Smtp-Source: AGHT+IGI5YFD7MneY0Pqdx9wCDOQc/SI3e6RjIYE+o4qAKZ6f5SWpzfKm54JXmTmBvUzaoFax+4IwO0EWJ9MvCoGAdQ=
+X-Received: by 2002:a05:7300:471f:b0:2ab:9cf9:4a8c with SMTP id
+ 5a478bee46e88-2aba451b667mr285426eec.35.1764793962037; Wed, 03 Dec 2025
+ 12:32:42 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2] test: correct strlcat license information
-Content-Language: en-US
-To: Denis 'GNUtoo' Carikli <GNUtoo@cyberdimension.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Leah Rowe <leah@libreboot.org>
-References: <20251124194556.GM2125796@bill-the-cat>
- <20251202152055.12467-1-GNUtoo@cyberdimension.org>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20251202152055.12467-1-GNUtoo@cyberdimension.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <cover.1764574369.git.jan.kiszka@siemens.com>
+ <ada2fc90d01cb54e178853b766896f0f69b26451.1764574369.git.jan.kiszka@siemens.com>
+ <CANp-EDadXjDxHKTZDUSCSmdxruGKUk3CEFRB2tN6LCQnuPfKGQ@mail.gmail.com>
+In-Reply-To: <CANp-EDadXjDxHKTZDUSCSmdxruGKUk3CEFRB2tN6LCQnuPfKGQ@mail.gmail.com>
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Wed, 3 Dec 2025 15:32:30 -0500
+X-Gm-Features: AWmQ_bkYRSMPKnRm2gBKDNGnwAZ8Nz70_NsvNWDEBgmtVeuI_kr0rWqOyKMgVVg
+Message-ID: <CANp-EDbmUxaviTO69HmWEYcFJDCDtOHXMgs_CfT-rE88ykGFvw@mail.gmail.com>
+Subject: Re: [PATCH v2 3/5] spl: mmc: Respect sector value passed to
+ mmc_load_image_raw_partition
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marex@nabladev.com>, 
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>, 
+ Sune Brian <briansune@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,39 +99,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/2/25 10:20, Denis 'GNUtoo' Carikli wrote:
-> The GPL-2.1 isn't a valid license.
-> 
-> The copyright header says that "These tests adapted from glibc's
-> string/test-strncat.c" and test-strncat.c is under the
-> LGPL-2.1-or-later.
-> 
-> This was reported to us by Leah Rowe.
-> 
-> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@cyberdimension.org>
-> ---
-> ChangeLog v1->v2:
-> * Fixed the SPDX license identifier (LGPL-2.1+ like names are used
->    Guix and I'm used to that, sorry for not spoting the issue).
->    I've updated the commit message accordingly.
-> * Rebased on the 'next' branch.
-> ---
->   test/lib/strlcat.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/test/lib/strlcat.c b/test/lib/strlcat.c
-> index d1a0293271b..dead1dfc70e 100644
-> --- a/test/lib/strlcat.c
-> +++ b/test/lib/strlcat.c
-> @@ -1,4 +1,4 @@
-> -// SPDX-License-Identifier: GPL-2.1+
-> +// SPDX-License-Identifier: LGPL-2.1-or-later
->   /*
->    * Copyright (C) 2021 Sean Anderson <seanga2@gmail.com>
->    * Copyright (C) 2011-2021 Free Software Foundation, Inc.
-> 
-> base-commit: 42a4ff5f63baacc414b564c02541cd1f5c0862ee
+On Wed, Dec 3, 2025 at 2:42=E2=80=AFPM Ralph Siemsen <ralph.siemsen@linaro.=
+org> wrote:
 
-My intent was to relicense this under the GPL per the terms of the LGPL.
+> The reason is because the sector offset is zero, rather than the
+> expected value (0x200 for socfpga gen 5).
 
---Sean
+Actually I see now that your subsequent patch in
+arch/arm/mach-socfpga/board.c should handle this, but there's a
+problem with the #if defined tests. I'll reply to that email.
+
+Ralph
