@@ -4,97 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8A15D15DBC
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 18:18:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5714DD1BDD8
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 19:43:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E11E83B71;
-	Wed,  3 Dec 2025 19:18:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 70F0A83B7E;
+	Wed,  3 Dec 2025 20:43:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WiKvtgne";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QiO80IOq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18AAB83B8F; Wed,  3 Dec 2025 19:18:30 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 264A483B99; Wed,  3 Dec 2025 20:43:01 +0100 (CET)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0E7A83A71
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 19:18:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EF2383B4A
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 20:42:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7c52fa75cd3so35842a34.3
- for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 10:18:27 -0800 (PST)
+ spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-bc0e89640b9so73158a12.1
+ for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 11:42:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764785906; x=1765390706; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1764790977; x=1765395777; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jgBncv8/DcZFy+bouh5b3+MBLluKMziJ6JS8HeGpw/c=;
- b=WiKvtgneSZ440oeHMUDWwKuf3WITBWnFBjCgO8Cq6U8s49LxabSHgC//p036k3EfE2
- LR2u0KNiR/iX2ZVGf6s8eb3PvUF78Q2gugCgofVSRLWq2LuXePAytiO4OjN4wPLNToXK
- RApYS2EBxCZzAeKDUI2CDEH0H5VzZNr52355o=
+ bh=uH8spR31xEL+AEW6jt77JHe08jvvuM4rRXUXTVamSK8=;
+ b=QiO80IOqNTCyEWM1y8Y1zuIw9OtIAz+fCnPwZhTj5rBnSCGuRvqSsOln/0G3Llxzr4
+ 2piSwuXMCTxpK8P0Dm9XLCFKZ9v1EOp9/HHgE8oHeYbQR/flCvlURbX4Q4vwKOnie0Sn
+ WIfGUdVeLXSxbw0i106rakVVfWnUhiY6YeTVRq6rkHLg66srFNpIkQU2v0cF6EihWOMX
+ BatyDtTo0KNOo6EkRVL8q0gGoalZ7RAo3ukEUnqTgb0CE6hlLjUQRH+6TAWCtSjZOCxR
+ 1I4pHV0OPWYtJDs70RK0NwumJxzFj1iNKCknoTCMcoOJC17Wh3+EYLPuqBjACG9JZjVq
+ NH6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764785906; x=1765390706;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20230601; t=1764790977; x=1765395777;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=jgBncv8/DcZFy+bouh5b3+MBLluKMziJ6JS8HeGpw/c=;
- b=PMxMsg9DjO3v6mjul+pWWybxG+whCyNY8DMoe1qrZoPUZG1ZDZ2LmD6CqgKpiF/XhU
- Bt681P90p3D1L/CucsYqlhKsatgkN7Tekg16Go73dyPpuNgDFqueaVk9BwE/5NqxRLdi
- WMrIClnVnuWj8FaDTRrS/fWGdYmw7NH8zUbl2iibENtRtGaQXNOlEjeG4NIh8LE5tkU/
- VsWDYElE8Z2Sd1liQ9uXXwQ9W+iEZnyUJ3WwPh1LBmxTnuGLw7jJoihbYfNV0A2pGfng
- FeCiqKrcequmWs4Qey6zQB/0AlV5OXR3u2MZdnGA0sIhQFi9Pbtu/BIk0+sRHC90zOBn
- n4bQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVd7cLEEZvZCDvJYOach9t02gt6lj43C1rsnF8Ay/fIepZGaDDu0jEuwP3HC9jBuu+hu44G5Ac=@lists.denx.de
-X-Gm-Message-State: AOJu0YydJvvL1R6ILC2KeXBXFywX9ZRf1RJkMXZkHWYRtIBiW6mTZGtm
- dWXDODCApmPBFXIXP3sASKYRu1jNupZ4Crjf4uDjGdFzlJCcx0gRURTA/4NaRlL/91c=
-X-Gm-Gg: ASbGnctURKHIA1sHpXThdTLLTb2SHQJDj7yIqGmq/7JitSg4g31Q0RxPwAKMohsbKSL
- 9dNZcKC/yJSZdnjtwSXI23Mvq5X1FVWT7FjFP7kzqho/mtUX4nZ2IJPe87Qvt8LLzKOcsP3YdAF
- x6Dk0y4fZBMYGl5MWtilT/3nLz8Pb7MyJh2OYQh+yap5Kd33qwAJTCAqKV2K7cC324Apt63fB6y
- peUF2K3pPvFs26252fMoW44hCNd/RGBUuJnQ3Hb9ioziBcoVXu+Ecujf3CKELwSLkvKUmAqRX9v
- ZJW0b5QGyFz+KuOSaZ9WlfWU4qvCjuJBLMIeXoR/2WKFvzkVHnz+5js8yDl31JSlJWI6OBpVMmt
- /ZsA9KgU4EafsaNdONAemEygf+0qUjritS6upyGz7ll+j0C3VZnttsUxwV7/LL0BJhNz9o7kyxt
- S92lSikIvmqMLpVeshgxRsGVsrQRyRl6eerC6V7oAdnyrBP+NZ
-X-Google-Smtp-Source: AGHT+IFb753UoDZIrN80JyIRvNUjUt6kJxWW/knYRALKegIjVxIHTRWPsohz/Khj7timJywSrZ1pOA==
-X-Received: by 2002:a05:6830:3101:b0:7c7:59a1:48d3 with SMTP id
- 46e09a7af769-7c94da8d4f4mr1606494a34.1.1764785906666; 
- Wed, 03 Dec 2025 10:18:26 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c90fe0be23sm9081915a34.21.2025.12.03.10.18.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Dec 2025 10:18:26 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Ziping Chen <techping.chan@gmail.com>, Simon Glass <sjg@chromium.org>, 
- u-boot@lists.denx.de, Quentin Schulz <foss+uboot@0leil.net>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
- Johan Jonker <jbx6244@gmail.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Klaus Goger <klaus.goger@cherry.de>, 
- Eugen Hristev <eugen.hristev@linaro.org>, 
- Durai Manickam KR <durai.manickamkr@microchip.com>, 
- Stefan Roese <sr@denx.de>, Zixun LI <admin@hifiphile.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, 
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Alexander Dahl <ada@thorsis.com>
-In-Reply-To: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
-References: <20251112-led-old-dt-v1-0-2892d49517db@cherry.de>
-Subject: Re: [PATCH 00/11] led: remove u-boot,boot-led and u-boot,error-led
- + add cmd doc
-Message-Id: <176478590510.3459899.7220764755940403918.b4-ty@konsulko.com>
-Date: Wed, 03 Dec 2025 12:18:25 -0600
+ bh=uH8spR31xEL+AEW6jt77JHe08jvvuM4rRXUXTVamSK8=;
+ b=u8LbaHOPA8Y7xBQSgNxfD13Twfs7p45isLncK1bj3EXVqavalL/t4R5/F/U0XdY3wB
+ ERSTwG5A5KY9vPSaQaEwEoAmyL0f1S4OLxXkmtbgz3Z6Bit1dpWIMWK8nWJE5mya/q3X
+ OtXodny5shcUH6mj9tGaQ/1DoolZd5+RpZL2lrnCOpE8HrmIVBVxLm1LOSFvKjXcysYB
+ 9jqbIRTNJAtwhO/pT4AaULWcdFEqiv0dx9vX85WUhNQn1/L5NpP+NsNsj/vtKvEI9TLr
+ M7jYB9dDjjA67pSrvCbM2XS32dGhwE+1lDYymo+FrhZNeN9H8fxysPqpQGox3CrJaBV4
+ 0CUg==
+X-Gm-Message-State: AOJu0YzjK1WeJBsXwNHYRThObc5aHgeLoPs5CM2D7j+VdbqbXSMUk9ZD
+ 7avRObb7SyJ12X4T+mlScCemopjVMuiuyZgo8Fym2d4BpyT3rbtn8GQVNV1vkrkl7bX0WDGsfvm
+ qo/Zf8IuDE6EESPI3pkSRGMu5lHSGe6l4uME2iqp6WA==
+X-Gm-Gg: ASbGnct267gNYCf0RPyWdPIeCt9Lm0Ucr/uAlGcX+121BpLuNoAPXehnjE5ZXmc+G89
+ ozgnxDA1g4k7l7jdt1vFTe9rBNB09OFKIeSGpvEPKlGqP6kwuW/1gGw6RScaqX0x5j5F/iQcrxM
+ XDimdBabeEJpqTd45dKZ3jceFSYJZie6G9qILni2Zc4N+eS5KZ+stAzR2wKCIEjn/6LbmBMdxLQ
+ BN5AfZxU/llpbY3huSyDrD3AK7tFH8t0wGS83a2Ov1IgZXPQZ3JRu5SpSLNnbBG0HHtD5frXiZE
+ /J4ws19j
+X-Google-Smtp-Source: AGHT+IFjdnGh4upez5KCNpmp3tuPzW5hBn52GqKz0hsKryd2vxy7TUPKEnTtxqCRUql+mVj8DDsRLtL1x+oNxm7B4MA=
+X-Received: by 2002:a05:7300:4628:b0:2a4:7b65:1a16 with SMTP id
+ 5a478bee46e88-2ab92e2e189mr2308397eec.25.1764790976541; Wed, 03 Dec 2025
+ 11:42:56 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <cover.1764574369.git.jan.kiszka@siemens.com>
+ <ada2fc90d01cb54e178853b766896f0f69b26451.1764574369.git.jan.kiszka@siemens.com>
+In-Reply-To: <ada2fc90d01cb54e178853b766896f0f69b26451.1764574369.git.jan.kiszka@siemens.com>
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Wed, 3 Dec 2025 14:42:45 -0500
+X-Gm-Features: AWmQ_bnLF9gGONAYb2jPNvfdfcStyVs-Tw0gVr1wBw2M27RCm54_ebFN0jZK4YA
+Message-ID: <CANp-EDadXjDxHKTZDUSCSmdxruGKUk3CEFRB2tN6LCQnuPfKGQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/5] spl: mmc: Respect sector value passed to
+ mmc_load_image_raw_partition
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marex@nabladev.com>, 
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>, 
+ Sune Brian <briansune@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,46 +99,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 12 Nov 2025 18:48:05 +0100, Quentin Schulz wrote:
+Hi Jan,
 
-> u-boot,boot-led and u-boot,error-led aren't actually handled by some
-> generic code but rather by board or architecture specific code. They
-> also aren't properties that are part of the official dt-binding so they
-> cannot be upstreamed. For u-boot,boot-led, there's actually a proper
-> replacement which is /options/u-boot/boot-led[1] (+ CONFIG_LED_BOOT=y).
-> 
-> For Rockchip boards, either nothing (for RK3066, PX30 and RK3399) was
-> using that property or (for RK3188) the code handling it was guarded by
-> symbols that were not enabled in the defconfig. For those, the property
-> and guarded code are removed.
-> 
-> [...]
+On Mon, Dec 1, 2025 at 2:33=E2=80=AFAM Jan Kiszka <jan.kiszka@siemens.com> =
+wrote:
+> --- a/common/spl/spl_mmc.c
+> +++ b/common/spl/spl_mmc.c
+> @@ -137,11 +137,7 @@ static int mmc_load_image_raw_partition(struct spl_i=
+mage_info *spl_image,
+>                 return ret;
+>         }
+>
+> -#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+>         return mmc_load_image_raw_sector(spl_image, bootdev, mmc, info.st=
+art + sector);
+> -#else
+> -       return mmc_load_image_raw_sector(spl_image, bootdev, mmc, info.st=
+art);
+> -#endif
+>  }
+>  #endif
 
-Applied to u-boot/next, thanks!
+This patch seems correct, however in testing, it does not boot for me
+on cyclone V.
 
-[01/11] cmd: led: fix help text for blink subcommand
-        commit: 29a7fe55c557e462457f4fb3dcb25681952b0803
-[02/11] doc: move legacy API documented in README.LED to doc/api/led.rst
-        commit: e8bc14192386b62fbd80c37baf5b0720cd4d61af
-[03/11] doc: cmd: document the led shell command
-        commit: b8c35fa9c58aeb16bd56433b551203ec70c87517
-[04/11] doc: dt-bindings: remove duplicates with dts/upstream
-        commit: b0f39c085dc8f99becd7b2a83d43958c5e6fa936
-[05/11] arm: dts: rockchip: rk3188-radxarock: remove unused u-boot,boot-led
-        commit: f8c3a6ddc62b0b8139dbe66dd8a1c610c41d76a4
-[06/11] rockchip: rk3188: remove setup_led from xPL
-        commit: 7759839fb299c9dea4beb1232dadb3141c7fa8bc
-[07/11] arm: dts: rockchip: rk3399-puma: remove u-boot,boot-led
-        commit: cf8e0d58cedc38375705ad2cf5c52b0f9bd760f2
-[08/11] arm: dts: rockchip: px30-ringneck: remove u-boot,boot-led
-        commit: 0636153fb199c110d0888c63072b248939f85594
-[09/11] arm: dts: rockchip: rk3066a-mk808: remove unused u-boot,boot-led
-        commit: d1ad89ad56ad27a5cb2dd5b4f82a74b7ccf966bd
-[10/11] sam9x60-curiosity: migrate Boot LED setup to use /options/u-boot/boot-led
-        commit: 98be3062088a81cf7124cf16f05c7ae735587bf7
-[11/11] doc: remove u-boot,boot-led and u-boot,error-led from "binding"
-        commit: eb02d87c7579f83f6fe153c80d420e5f53bde4c1
--- 
-Tom
+The reason is because the sector offset is zero, rather than the
+expected value (0x200 for socfpga gen 5).
 
+This happens because of Kconfig dependency:
+https://gitlab.com/u-boot/u-boot/-/blob/master/common/spl/Kconfig?ref_type=
+=3Dheads#L586
 
+I removed this "depends on" and thereafter I am able to load the main
+u-boot successfully, although I don't think that is necessarily the
+right way to fix the issue.
+
+Regards
+Ralph
