@@ -4,148 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93C53D12D47
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 11:36:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B465D12D55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 12:22:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1399583F6D;
-	Wed,  3 Dec 2025 12:36:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 66CAB83F85;
+	Wed,  3 Dec 2025 13:22:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Fnpn5n0n";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="imE/9Xuw";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="wY5osxxC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DE6583F85; Wed,  3 Dec 2025 12:36:51 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 747E883FA2; Wed,  3 Dec 2025 13:22:32 +0100 (CET)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8700683F39
- for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 12:36:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5B3BRqUr1975053
- for <u-boot@lists.denx.de>; Wed, 3 Dec 2025 11:36:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- MJ9wMwOtgKDNVtz7099oEEYCIjPdUQOQS29LWiPFikc=; b=Fnpn5n0nD5ym3vx9
- CED1RkPmWTli+V0q1cdnhnQL6SfkCnRz1s1/vUBVsOY/95DHI4Nmgk6od79iGM6J
- 6bKFiwGSvrw7Zi39D5m9pZQzAl/IciBdJOmDnkG4zy2FvnpF2wwSUg1fp7hdeeuo
- TkRNgrYk+3HAeL2X1IELDGjMC4c1x6RG1C0zzb9M0QgUcfYH8rxROZvnQ15JTZ1s
- fUZMsfM+VFy4cESZI6zC1lqImfH20I3IAET/S7NdRAeqzOwqvrKpY0AthfGkkbaC
- f2xFHaMlxniZcIMhAQhHixWFLbHuTIezbI7U9VpyBvmGXVrPqzZ+YYA6URep/c0+
- N+2seg==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4atmbtg0rh-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 11:36:46 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-7b9ef46df43so6528251b3a.1
- for <u-boot@lists.denx.de>; Wed, 03 Dec 2025 03:36:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1764761806; x=1765366606; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=MJ9wMwOtgKDNVtz7099oEEYCIjPdUQOQS29LWiPFikc=;
- b=imE/9Xuwx4DdmaJ6hKO4OUiK9bHSjMd4HAep6Nlgp/jvFH6ESLGLhcOSB6qGs2tSJ2
- fheS+eapPugHFxdSqDbpEnrq5MQty4cTDQCWMIeEm6ByQY7wlb0EdWXz4NVucwJUg2/2
- iEyGueyRzpOyeX++8qxykbOM5Rxxrqp+ZX9phePcm25Iaq6yaDBl5gcHKzTUK34Tugol
- xnZwA+7pdzsiFWM4XX+U9Txduf3twOx6SA5lmjJ2YlVRH9ZdULHvZ6bi6GN4RNihMBz0
- FRVrO0sn0W8tMPhN52hvWmRhH1PsCelkqW/DwL1Hb8Tq/6AY55M2nBnOm3d/1p7rpsXF
- TVxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764761806; x=1765366606;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MJ9wMwOtgKDNVtz7099oEEYCIjPdUQOQS29LWiPFikc=;
- b=TaEl5ulBIHPJV3r3E+ZJ+ABymkaFd0etq5ROoNRMShoOzJ9PhuCn+1EpXBbLAB30VE
- 6tdStnwea9R8TU87BFX+YNM+eXmEIHy4rM+9oZcSsyH9ZaQdEXoH1yfezgho3R0J+07l
- zwJgy4LIL088OmDrZr4ClsP2Ld7oZOzyT/8ItxSf91TwWmdMqmxgJP3i7QcYmgowJCxW
- PeT0gfued51Dw4xGoqOCNqvTwRKL12SCryaciNy/2n/8W3cZmAGIOcfml5RV3jOWl+lw
- qfwOIL1Mn5bFO8f8t5f0aqyjz4H1quoJn2C1aoV9sVv0Nk1EL21oLEl+JgHiwWHgOGYZ
- /HWg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVlG3jfbyaj2jpkb4UIiSaHyHDLtUUmTVwjPk+6pY8llMsuaOB5J3Fz9r4jUex+saZXvoWyLmk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyzn1jDDGqYv8IgYpG9HJjZdNRALEYGoN3cuBFM1Pe6qGTov7Wn
- nLXZP6m1eoNZBiXlOHhyOw8EdtaiUBZ2EUxPEJCZAYGOZxKgeDzipVDR3G/WqPClC4/65PfE5RB
- jR9q2dy1CvYMN3rgv8+DkQK6NTNTWW3edsh1IMpcSWR1w7wpheJyHHTau
-X-Gm-Gg: ASbGncvVJyWllTCrSiULcjKINv513LZP6WKoNYBJHzyBlqHNDRaX2L2OEvXhR1Lt/5v
- 2VnsY8VMtpj00DoKyBalvq5tYKJFdKwWcAKXx+FFWX0Syq35Sq3R/wU9FR+Vgh6dxBzXJzsSNnP
- WbAB0LJ55Wbr4LPEdCCU13qhGxzw93ehlHM33sF6axMzZqoaglGBqIhrAQuq067+m1XQSUbdDwS
- Rfx8KYHIbdL2uq74iuun/1fRuiU4vQvd2ia9JLGP30kMTJFgdNH8P5x6S2yBVxBf63X0eym8cnE
- 51E9hGFeQgeF86631j1djLoIPf+pbk5Ua3kRmPJ/XjgfLSoll7QfcyECP7e4o5mz9VV6VwVdlmt
- A5cQXNXlgf+2gy94+uZ2z+p57OYmgWCW9moTfLw3+j1lYGcw=
-X-Received: by 2002:a05:6a00:10d3:b0:7b7:631a:2444 with SMTP id
- d2e1a72fcca58-7e00eb72335mr1920351b3a.22.1764761805739; 
- Wed, 03 Dec 2025 03:36:45 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE75zbKFVfzbzyO4zscG7JQayKYKhXPcfFtIs9sDpiTx4i0nlbuigQQCCQy6TmufFKcrJtzCA==
-X-Received: by 2002:a05:6a00:10d3:b0:7b7:631a:2444 with SMTP id
- d2e1a72fcca58-7e00eb72335mr1920328b3a.22.1764761805244; 
- Wed, 03 Dec 2025 03:36:45 -0800 (PST)
-Received: from [192.168.0.5] ([183.82.204.226])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7d15fb1417csm19818052b3a.60.2025.12.03.03.36.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Dec 2025 03:36:44 -0800 (PST)
-Message-ID: <9bba86af-74c9-4540-a32b-3c5d12eddad5@oss.qualcomm.com>
-Date: Wed, 3 Dec 2025 17:06:37 +0530
+ by phobos.denx.de (Postfix) with ESMTPS id 6F20583F89
+ for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 13:22:30 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xV1bt2YmvxDzDNqQhB6fTgWrKzgMtSJMrpWtIQfyH6MWOEW4EgGyK2ShGh4xOezkbodKyy9vhX4HMxTuTu9YFhELs9g/A0WvwkyOZNrULPEFdlZZgiPC9tEq3e3GRnN5Lz5A/Um9h6XJQiE/iZihUH6lyj+epoqsfQ6bx+1iEilH0a+RQjhNFGoB+dGJTw8Hc4Cmo0I9SqY6XcOPJyfiV8574lu06xazbyoBF4O25ED3eCL+vt71voVHm7B+FWPPQFXQET5aIg1LrTun7kP2uJ3RYcPxO5NyhDiQjqbYkeDXBAAFm4KYpgdnmMrzMs2e4nKL99uwhj1tIqRvqdying==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xROAtUyMm7dSfFuRRGXAXRZyhDj58/0K4IK3d0ggjV4=;
+ b=lOqXG2vqg9DxfL1sakpWy4LXfwbQQiL4rxjzLOmJh+q1THFMi09WaOzNpNAmY1iaB3pxHLPQHeqT190uoCc8yKSbUi9iawI/LvTa7Wi/uJKqf3ljKNAoDFxAYeskvY7CxBcRg490XEaRNPNX/0WqncxjUqOh++S+Tw9XDnX9syXRCK7XEe0EkxKOO+uhTM5STDuk4APnHub+j7JHllBHLJXi/p9gYBoiuKChumXCsvoETplvSViQVnH0jcLqelgIIH6rWC9BkdZW+T/Wqr9s2CNArA09A2Nic1OmGUHIpUnPz6sb9MqUwrnkmH5nnvUQ54WcUKDHbAfoUma+z8JyCw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xROAtUyMm7dSfFuRRGXAXRZyhDj58/0K4IK3d0ggjV4=;
+ b=wY5osxxCjzndvuiq9dujHZmgEJv33NWwpT2AiV23fm1WDsHFk/UzYdnf8Xwz1AMDz3ZK17h9fsl10o2wR2eHVRxEJM7bOLGReDVZ42FyRayQ1AQ8A4sc6NC+56UYRYppcgoAwWoAAU9x/607zjpTqroJ9O2U1uSST66kzG6w0jw8CzHew6TM17+gNGBDfM7GbhWIbeTmfjYppDBjqL3uQCIpu7SQ+XQBN5GsBpkWS8p28mgM7k38y/PSjkizMRlYgKfWBizyQnvPxMUtNIx6DtiMrSWbkXKWCAORQSA8iRsS5ZCGWa9CNSJQfBu0YELatdTVUfIsfkh02RG4cFsjqw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by SA5PR03MB8452.namprd03.prod.outlook.com (2603:10b6:806:474::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Wed, 3 Dec
+ 2025 12:22:27 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::6735:e440:e9a1:e844%3]) with mapi id 15.20.9388.003; Wed, 3 Dec 2025
+ 12:22:27 +0000
+From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+To: u-boot@lists.denx.de
+Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>, peng.fan@nxp.com,
+ jh80.chung@samsung.com, trini@konsulko.com, marex@denx.de,
+ tien.fong.chee@altera.com, balsundar.ponnusamy@altera.com
+Subject: [PATCH v2 1/9] mmc: sdhci-cadence: Add reset control support
+Date: Wed,  3 Dec 2025 04:21:31 -0800
+Message-Id: <8bcab0e7b389d65f54746202c28a22a279a4691d.1764760325.git.tanmay.kathpalia@altera.com>
+X-Mailer: git-send-email 2.19.0
+In-Reply-To: <cover.1764760325.git.tanmay.kathpalia@altera.com>
+References: <cover.1764760325.git.tanmay.kathpalia@altera.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BY5PR03CA0002.namprd03.prod.outlook.com
+ (2603:10b6:a03:1e0::12) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/7] arch: arm: dts: qcs6490-rb3gen2: Override USB3 PHY
- clocks
-To: Casey Connolly <casey.connolly@linaro.org>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@denx.de,
- seanga2@gmail.com, marex@denx.de, malysagreg@gmail.com,
- arturs.artamonovs@analog.com, utsav.agarwal@analog.com,
- vasileios.bimpikas@analog.com, ian.roberts@timesys.com,
- nathan.morrison@timesys.com, peng.fan@nxp.com,
- alif.zakuan.yuslaimi@altera.com, kory.maincent@bootlin.com,
- sjg@chromium.org, jerome.forissier@linaro.org, ziyao@disroot.org,
- stefan.roese@mailbox.org, mkorpershoek@kernel.org,
- rui.silva@linaro.org, ilias.apalodimas@linaro.org,
- luca.weiss@fairphone.com, quic_varada@quicinc.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20251124155503.2839766-1-balaji.selvanathan@oss.qualcomm.com>
- <20251124155503.2839766-6-balaji.selvanathan@oss.qualcomm.com>
- <bc4f1b0e-36b5-4cf1-a6f4-4f595db40ced@linaro.org>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <bc4f1b0e-36b5-4cf1-a6f4-4f595db40ced@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=KNBXzVFo c=1 sm=1 tr=0 ts=693020ce cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=wdA8WxWTYlLD3QqB3+K4dA==:17
- a=IkcTkHD0fZMA:10 a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=GZkVBmGwvfKU06HuWzkA:9 a=QEXdDO2ut3YA:10 a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-GUID: e77jtqFeXcurkYw-gpKYyiAkf9zSgHq5
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjAzMDA5MiBTYWx0ZWRfXxw0WWgF/KuNu
- vlZNkqBYjqZOAwVFXreqp/iOGf9LoBPbvNuj13a1qnSGDJu6cUZlwVG9pXvnMm0f2ffIjGHHtFf
- u/ttWK8ryvukO2bg0er5Q0X3AKSgqTmfZqhA9HiEuLH2BEuNJNK5fesXwNoL7cne1tqSmEmSV2c
- TDNOIYG3kamVv64LLqZj6tTZRl1k+Ng49uVOzjJzAWI2iQZprYWWOlfGJKjjgrVU4WWzj9TmlUQ
- dENVyhiwe7Zku8uU4QDN40QEAkDhyq0gdjCq7rSgA4RtD5V2yvEtubJBX3MdLwMGfS7oEfpS3hK
- EnopI4CnR4t9+tDIMbMkUZs0y5XHeMUK13M5HA6e7df/hCzt6qRSb8ILYtdsktJemvngRo4iFeG
- yLF0aHEiuQhGhdUI+DzOI90LTK7GBA==
-X-Proofpoint-ORIG-GUID: e77jtqFeXcurkYw-gpKYyiAkf9zSgHq5
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-02_01,2025-11-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 suspectscore=0 adultscore=0 malwarescore=0
- bulkscore=0 phishscore=0 priorityscore=1501 impostorscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
- definitions=main-2512030092
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|SA5PR03MB8452:EE_
+X-MS-Office365-Filtering-Correlation-Id: 98c0cc11-93d6-423f-2252-08de32669f41
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?1cwrk60mjhwhB3aUBGKBOVewLM/kGxsRcAibmnoQpbBDfPpDllUvQx1BoM9K?=
+ =?us-ascii?Q?D7N1kxvsuwZ/kQqv3ZW5vnmAuGb8xyA8W1KWtVzalHQOWcO/tgCdv+b01vN1?=
+ =?us-ascii?Q?ZW2oc3bq4N4bBREY7N/xnCp9kKYSvZBaOxsfOeC+x7G+PhQKeousMo7s48Ee?=
+ =?us-ascii?Q?n8unZm5UFrNngkJnFP/Dy0e6CcCPG+qUQQvRYtwCsS1n2qgvCLe/qDjVxJzK?=
+ =?us-ascii?Q?pQagEidHNB4irrUX/ocI4nreLsmihGRX9kJDP7VRw4TE7zFhs4K2OwGcFGup?=
+ =?us-ascii?Q?naTnsvzdxdk2VvFfYycGzImJO7WkCvSzZ1/t7+Cq2+rNgp5DvAvOERKQStZw?=
+ =?us-ascii?Q?//YXowOopH+5c1HKvoVAwZUO/18kHF9ZU5l2uvqGuZLH8BuL41hSjRzYo0SD?=
+ =?us-ascii?Q?63i37U+wmOQkOyLDk8hS9QyTTuPZvAfv3TlIpdleV2PH495DBwhqFTbIasYf?=
+ =?us-ascii?Q?UB/jwvLjiNTq4rurr/ZGWHlJK3QeV8fqkJlMhHxTMffUP5b8lJO5SmNPJzuQ?=
+ =?us-ascii?Q?53U8KAshMrZMx9H14N3/aRYI6UAjmcLnOGKi5eBQuEG5EnZ1bazAG+crSCLR?=
+ =?us-ascii?Q?FpPq1aXbVaEMYvE5wYOnD1PNMXYO7zp1jqvjqMLNq6ZOHKnkMF/Z65iGqf+U?=
+ =?us-ascii?Q?Q6IPKy3Yrg2XCsP+ieEnVS+4rbT7wh1JMRqPN8N7+ZFOSiLSI5rT9grLFAlE?=
+ =?us-ascii?Q?3jzd2nR/8WbelIqHbyHeVCrDgNSoJQ4PLhUm/QJbBVi1xXHzfuKCSuubrR6T?=
+ =?us-ascii?Q?dHR3RWH/KPD1GoNHmnE8wErhHaDSInV8ujgrJrqyROYr6U5T9X30jJjHMUdE?=
+ =?us-ascii?Q?Sj+v+R0zCJUbVHFkNA+L8c812O/HcC0kxB1oAgiZyPdaD+szORjpuQ3GHKU1?=
+ =?us-ascii?Q?WG9m+Qh6Fx6MVVbfLpkYEU/zGofJ+dgdW5fpPbHvYWeLRg+AH5NtRbtPvmyZ?=
+ =?us-ascii?Q?ma+CIGwkk8BXTObIlBWlPTjVXNZFHQTxvX3rjHjOJ3e4fCG2v0GOCcrDb7NQ?=
+ =?us-ascii?Q?k4DJVCoYDvqSgvAKYufAZOEGimdkczc4dPdGZXYK/SUo+3MJj8fTGMvUloLy?=
+ =?us-ascii?Q?HUd7FbUy59zmn1C9l7oFHoWGZm9HAXW38PcwKVhCIhlKbyWZsJc5M8eaK2zW?=
+ =?us-ascii?Q?BwbXDDXffW+VwCr7VzDlO0iKkhEqvzQ6XTW+nt4ODRjQ0/PwkUHQj4+E0nww?=
+ =?us-ascii?Q?tpmJk8VaacOpZr8DLAoPc08nsV1Jmltmp7LNF5tbgnrMS1d169Yb7+RZAEUS?=
+ =?us-ascii?Q?O4lH0rYxHy60g7WRfAVl09B9G7AkzmthaugVYo7WWQQZ4VinltMpLrHx434G?=
+ =?us-ascii?Q?oz/q7FqvlKO62lTbig8YrfbqqB8K1SwSR0vJMlGbCaI4RL8BQ2ozyjqsRpQz?=
+ =?us-ascii?Q?lpsNOwH4GKV5FdIZYArkxxJg3DVmM8aMyWeEwtvlfGqnb615EWiElxsVBBdK?=
+ =?us-ascii?Q?S3kLt95swmy2EUWxjdIB35FCiVjIzbhh?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?r47nYBhpmOPTEGENrjgkVwR4KMQVlms87UucW1A3NaKD0Xb6aq6vPlY8znWR?=
+ =?us-ascii?Q?5f3Lb3RsKB2vf8rH2X3nralhAjWEoA5r76iWcXwDnJxlCYRYSVB2XtQ+zjLQ?=
+ =?us-ascii?Q?D2m2UHLjFeRHKhTQP2U9F/0XAHVO1FI5agFJR34cauwi383Ifhn89fmFOJZp?=
+ =?us-ascii?Q?Qd4daVFzgKwWROCxvX7i4buM+6C6h5fJPJCOnMHsmEmeRqmVwQVryKAShDna?=
+ =?us-ascii?Q?iGaNTowSrYDZTcPunKSFolJnsr7ap9nT4qV/9GhI1UaCHI3n6KsDmyiQJYaX?=
+ =?us-ascii?Q?XXba3hek28Dky+T41kApmYoqLY5LrXtpAVUcDp1glcuNKP60+XDciM9YJc25?=
+ =?us-ascii?Q?FGGw4kFy02+j437bj/R+Q694xj6VJ81q7tPD6mqHlT0W0Smra2MDsaMzyrHL?=
+ =?us-ascii?Q?ytO/K5/Gq6U3zoNYIadj8ZkFFG9rHM6HyjWtilEQe381x45S2n5h1L7dSgxX?=
+ =?us-ascii?Q?v9qqAk2GnMa52UYN1IAjrcmetZ82K9dJ/dNQ2IoZc4zY+jUuDLcxOLedzbIn?=
+ =?us-ascii?Q?u+TEWOZyVWOSEENwLqfCfhHYDjb8CZAlAAmm8eQOiOI0rGtDmK3UCYpslaO6?=
+ =?us-ascii?Q?Eis6ioaqvD/UBbWN2DwgQp4/X/YntfAXIPvYKovT1viu/avo3gw6Hcbljxo1?=
+ =?us-ascii?Q?v0tzEc0oTxyGz3VV+M0AbLBtqYBO6VxvlPf3m6Ags+Z0Xhtc2V5rJNLnWJZL?=
+ =?us-ascii?Q?vx9kx9wa5uYkiAYAZ+g16clmmuvjyjSgpzT5Z2de43ROjpOENFCmZhEO3dL3?=
+ =?us-ascii?Q?6/Zb9yiO/YrQGSWLIouDojEwxF7vgMNCcEQP158LElulodaxFcq6vqDZ+9KH?=
+ =?us-ascii?Q?PFjOgqKegClM9tlDXr6EzCk9T0yEZLER4lt0zIRVSnIvVR7fvyACUs/fLwDu?=
+ =?us-ascii?Q?LkVEm9dmM7G4QFfNXoknn7+IsMmMvF44GEDOyddq+0E5sC7z/bDa6fajVeCu?=
+ =?us-ascii?Q?NBOXYk0OneDlb2Bl9gK4haePLIuDEyETJz472VBgQ5Ai7XXaAIfWaajO9x9T?=
+ =?us-ascii?Q?cvVu65PeEEHlAnBqvDzdooMVNrWWj0IFSmUG7BvNqb2Y4/mIDp+ohhjuHfvh?=
+ =?us-ascii?Q?fWE3lFXt8keqn7JeAY+jkg85cpVvy99XSqlE/BkNbfGL4mi9reW3HBwpq/Z0?=
+ =?us-ascii?Q?zIamF/uncWbusJgghO6hTEmTHRQNNe17KPB94BDpxqN4DhHkYt4UOUaKimRb?=
+ =?us-ascii?Q?JIFBg692hrsBSLnp8Lgqq6EZ5CVSojVmSZF4AVz03xAFaFW7tJeb90Mr1CAP?=
+ =?us-ascii?Q?8pR6nLj9w7DVqKa3sLSASATr0w5BetPV8Q5I7UGRl4LwGlXoQU3VgA9PGp6t?=
+ =?us-ascii?Q?lgIofkNsL67qoLDM7a9tiI+ezFTaoJIW9GBpiuAU6pVrAQniQfSKcfwwEwio?=
+ =?us-ascii?Q?nkMGBzy9/G7KpxlIfNFEOzt9dcsAFIY6l7qN18hTVrN9J13zc2u9VvA5QVkS?=
+ =?us-ascii?Q?aUmsFuofJ/r+CPs3iRIjgEMw21vDKwEmfpTlCQmkjC8pVFM6ei3rt46nM7Sk?=
+ =?us-ascii?Q?VyBsVJx3DQoyp3lm0sxcrT4ThahMkfg9O2ENIif214EDlCfv+6iCoqOWjjY4?=
+ =?us-ascii?Q?y3VIXWw+ar2UWKfoWoS5xkmO0r7lCx5AT8MSOG4WC6DIig7UXhRSUwu3XrLO?=
+ =?us-ascii?Q?ww=3D=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98c0cc11-93d6-423f-2252-08de32669f41
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 12:22:27.4843 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: V+Y1sKNbUPlN/IqOkHRYqsiApHVUxP8BhjYvTCGK63A72UJKk9zESK299lNHW2HGerFWVKUZbwXPsVA6tLari++QCdhgdFTjlHxbnHm+IQ8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PR03MB8452
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,49 +160,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add reset control functionality to the SDHCI Cadence driver to properly
+handle hardware reset sequences during probe. This ensures the controller
+is in a known state before initialization.
 
-On 11/26/2025 7:56 PM, Casey Connolly wrote:
-> Hi Balaji,
->
-> On 24/11/2025 16:55, Balaji Selvanathan wrote:
->> Override the USB QMP PHY clock properties to use only GCC clocks
->> supported in U-Boot, removing the unsupported RPMH_CXO_CLK from
->> the qcs6490-rb3gen2's device tree.
-> That clock should be handled by the stub clock driver, are you seeing an
-> error without this patch (with CONFIG_CLK_STUB=y)?
+Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Reviewed-by: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
+---
+ drivers/mmc/sdhci-cadence.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-You are right. With CONFIG_CLK_STUB=y, it is working fine without any 
-additions in override dts file. So have removed this patch in this 
-respin: 
-https://lore.kernel.org/u-boot/20251203110735.1959862-1-balaji.selvanathan@oss.qualcomm.com/
+diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
+index 7d169efa476..6c9d24fe5f7 100644
+--- a/drivers/mmc/sdhci-cadence.c
++++ b/drivers/mmc/sdhci-cadence.c
+@@ -15,6 +15,7 @@
+ #include <linux/sizes.h>
+ #include <linux/libfdt.h>
+ #include <mmc.h>
++#include <reset.h>
+ #include <sdhci.h>
+ #include "sdhci-cadence.h"
+ 
+@@ -214,6 +215,7 @@ static int sdhci_cdns_probe(struct udevice *dev)
+ 	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
+ 	struct sdhci_cdns_plat *plat = dev_get_plat(dev);
+ 	struct sdhci_host *host = dev_get_priv(dev);
++	struct reset_ctl_bulk reset_bulk;
+ 	fdt_addr_t base;
+ 	int ret;
+ 
+@@ -225,6 +227,10 @@ static int sdhci_cdns_probe(struct udevice *dev)
+ 	if (!plat->hrs_addr)
+ 		return -ENOMEM;
+ 
++	ret = reset_get_bulk(dev, &reset_bulk);
++	if (!ret)
++		reset_deassert_bulk(&reset_bulk);
++
+ 	host->name = dev->name;
+ 	host->ioaddr = plat->hrs_addr + SDHCI_CDNS_SRS_BASE;
+ 	host->ops = &sdhci_cdns_ops;
+-- 
+2.43.7
 
-Thanks,
-
-Balaji
-
->
->
->> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->> ---
->>   arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi | 8 ++++++++
->>   1 file changed, 8 insertions(+)
->>
->> diff --git a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
->> index 50674b692ed..14669b50821 100644
->> --- a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
->> +++ b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
->> @@ -22,6 +22,14 @@
->>   	/delete-property/ usb-role-switch;
->>   };
->>   
->> +&usb_1_qmpphy {
->> +	clocks = <&gcc GCC_USB3_PRIM_PHY_AUX_CLK>,
->> +		 <&gcc GCC_USB3_PRIM_PHY_COM_AUX_CLK>,
->> +		 <&gcc GCC_USB3_PRIM_PHY_PIPE_CLK>;
->> +	clock-names = "aux",
->> +		      "com_aux",
->> +		      "usb3_pipe";
->> +};
->>   // RAM Entry 0 : Base 0x0080000000  Size 0x003A800000
->>   // RAM Entry 1 : Base 0x00C0000000  Size 0x0001800000
->>   // RAM Entry 2 : Base 0x00C3400000  Size 0x003CC00000
