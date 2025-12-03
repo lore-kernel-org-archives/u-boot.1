@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F8C5D12D56
-	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 12:23:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA83BD12D56
+	for <u-boot@archiver.kernel.org>; Wed,  3 Dec 2025 12:23:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58AF883FAA;
+	by phobos.denx.de (Postfix) with ESMTP id 9EB7983FAE;
 	Wed,  3 Dec 2025 13:22:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="CT0w2Zr9";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="m4v4bxuF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FC2A83F93; Wed,  3 Dec 2025 13:22:34 +0100 (CET)
+ id 8D0DE83F93; Wed,  3 Dec 2025 13:22:34 +0100 (CET)
 Received: from CH1PR05CU001.outbound.protection.outlook.com
  (mail-northcentralusazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23CC383F98
+ by phobos.denx.de (Postfix) with ESMTPS id 7629683F9B
  for <u-boot@lists.denx.de>; Wed,  3 Dec 2025 13:22:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LXmPxy4xT4EjfSSnVsj0+9sMizU9U0UlMErxPu3tP+u7LGXDcaStLM2YzRAWaxNbo8CdXZE3EBOwHfvEdQOUk0afWQGiNzayZzGv7IVJyqxn89TYsubp5+msJCAPsBtbXlP0N1Pyp9S7ujDA/l97eiane8XJNsa8Hd4OF+TSwuaJDWbBxZBPbWb/S/rhEchlpZt0SEIJFJjJmNLmixndr1yBD4Ol5Ieqvh2Q5XqNR1gddQiXda1b1axL5h3oVmm848beTo9/CE1PZdshWeT6af4oSoG5suZc4bZWWAokYML1UQTIzbvQs8h9VDdKITxD5JRXtFgvdjArmOpYuHMzhQ==
+ b=tIOh0elJRe2C+rH08t9PO8oDj5LqzDB7qvKNCw9Je0ZpL7Z3cPVMyNBI1ONRgneEsQiOhfKIckfKji9M60VBqQkblc3APn2G3x+QmMKcKtXXfvZD8G0I0b9nhSMzdIjdXhfRfCslKGXNSqNY8rTVBNUy09SEUNMSHEUJ0xWPN5MK/TqTPDxuC0T6SMCM6KRXAC81JZV9RZ94wjDCoi+IaqJID6Keda95gXwUOnLi3xNxPGjU+e3HX44kvjXVs/hVQaXKiJsW5IdKb4jkhbvwCRCCCtepA8bbeFut9jtwtJ58ixz+WAxLyyqOV/DQzEbIyzUu+21RcISnN6yngZwI/A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fTqYG2ohTI3DlvAXQppub5dFnzG5e31IytZBIM0LwUw=;
- b=G6UvlYdZ0GT0qKoUR9eKSA/i1kTnFGJ34CLxmeOnaZWBKwICdiz51brMC472BZcXd4QZwm+bC7vacqPC6mqe9bbq49sENET1PSO1osPhSnGbIquBvf9WeibLL7EyodyIDwt7jgUzqSxoGrurZUhr71SSPGe6qXPB7Gv5ROqqJVakRHGOpyNz+kklj6BmM1Vx7NEoD2AhcfGHGjantO0CSWBVhys8FmIzJcYKD/KNoIGnltaHHZTXvqlqb0xbzO+pd0YaH6S1Re0LjaCZTdK3/AUqr7L2e0DDlEKQWvpbEzYy00ohs54BSDpj25c3pdCjmP/mmi2VSx/rKVBQH7eE6Q==
+ bh=43S2uTzaZoebLMQ6Yrea0GrAhS83kks5JSyWVogG0Eg=;
+ b=M5ptHYOE7L+CutSIWdcOUfu2T6I0ny3meT1C7oTLMzeHXOU2QeeF9jS7iuoEAYYHhuWKGAH0Lsw5S7cuP6vZq8ayANql7HXBdYPfvY2NboNPciKGfxkaaTiZ+vLg592Efef9NXOSM875tWHn4DbZRgAP5jLV5FDFQDvlrfLUs5+26LnDKJ3bcgQtYiI8o62pyUACDhSQOMhQfD60Aq+UcrBGHLleudaHE4Y6akhIsHg2HWhOX6VUBPin4hNeTjIj37f0SmgSMRT1HYOwxEB3XtCS8EQAM8e7XEvSxkVs0MOzHUFeKcO3KMkQz+y1LDuts+O0MV99ZGoPE3kTHreAng==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fTqYG2ohTI3DlvAXQppub5dFnzG5e31IytZBIM0LwUw=;
- b=CT0w2Zr9JjHODBSsCIspqvxNV4edlU4Tv/KLNj5X1FyizzgLfat4U1uSEUC52uw8DjerpXKY5HltRs0X/fDExAr6yfhTxz2s94gVw4ogD9nUgCY5dGv1Jp5FZhHiZN47Hkylv55z9/2QukARUPxmKsyFKFcmpiDZCq2PQcqdYumV55mSgJr3QVaFJoDV6WZ1BUtUqYf0a13aDwNOdNuHgkXsB+/9zNV8+LrxELX5bKwdxEa89mjgNrfCRU4my5GljDPCvpznibDP5mvGJmsLB02wymJXyDGZYkEPpLa0h/meOYuMEtKZDqZ00uLT3bhQU3Wvsqo9/NFrG4uh4ZQBXA==
+ bh=43S2uTzaZoebLMQ6Yrea0GrAhS83kks5JSyWVogG0Eg=;
+ b=m4v4bxuFLIaimLXMJZ+FUnm9B/h4aPkEuyA5d1n9J4lyAX+xztaNOTB7YUmNXOt9c90cx/WF1dSTZc2JNBpTWsOO7ETMS8W+ffdfYw0D0ogonoDOE0eeMuDml+ZIHJJjlTnbe8bv41DzzVx5QQc7/0VSM+PYaUzbE6eX/ngwr06nEQNLZ83CfUgE3ai/nCYt5OIzxhVv6dw4VTNJAllP22P+7Yj94c8N9U1ANTECS9LvjjzmbZF/QHr1uqnrFC89z/4JxlBarr8RFYJNryT7yudJdE/l79dIjydcPk3MAnaqcJzlKQCW0+digZaw25ssecKca437ozlxgtSDSgPpsQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
  by SA5PR03MB8452.namprd03.prod.outlook.com (2603:10b6:806:474::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Wed, 3 Dec
- 2025 12:22:29 +0000
+ 2025 12:22:30 +0000
 Received: from DM4PR03MB6208.namprd03.prod.outlook.com
  ([fe80::6735:e440:e9a1:e844]) by DM4PR03MB6208.namprd03.prod.outlook.com
  ([fe80::6735:e440:e9a1:e844%3]) with mapi id 15.20.9388.003; Wed, 3 Dec 2025
@@ -58,10 +58,10 @@ To: u-boot@lists.denx.de
 Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>, peng.fan@nxp.com,
  jh80.chung@samsung.com, trini@konsulko.com, marex@denx.de,
  tien.fong.chee@altera.com, balsundar.ponnusamy@altera.com
-Subject: [PATCH v2 3/9] mmc: sdhci-cadence: Use max-frequency property from
- device tree
-Date: Wed,  3 Dec 2025 04:21:33 -0800
-Message-Id: <fe65b64f4f53d119302e2a6d884ab02f45e54c1c.1764760325.git.tanmay.kathpalia@altera.com>
+Subject: [PATCH v2 4/9] mmc: sdhci-cadence: Set controller and PHY speed modes
+ for SD and eMMC cards
+Date: Wed,  3 Dec 2025 04:21:34 -0800
+Message-Id: <fb91138ab3f1b6208eb5cf053441c8a19afd8443.1764760325.git.tanmay.kathpalia@altera.com>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <cover.1764760325.git.tanmay.kathpalia@altera.com>
 References: <cover.1764760325.git.tanmay.kathpalia@altera.com>
@@ -73,77 +73,77 @@ X-ClientProxiedBy: BY5PR03CA0002.namprd03.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|SA5PR03MB8452:EE_
-X-MS-Office365-Filtering-Correlation-Id: b4493c7c-a4ba-4ea9-b8b3-08de3266a02c
+X-MS-Office365-Filtering-Correlation-Id: 301c5eb9-0721-4400-4f1f-08de3266a0ad
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?sc7pnBjNo4ub+WYTRvH3rXd5YO+fGQB+4PnjkOLK1itZaR0v/XCkSnHr5Wbb?=
- =?us-ascii?Q?caI+XKJ+PxGALtWy8kE/ebcMfkSJXWvXouhKWqBwaKDkyYamqbznwMFLHYfS?=
- =?us-ascii?Q?mk5Ro54V9CYoRtjEUPBpvLgto62K8EE/bnK7cMn85BtCcngfv5yn7gpa8Owj?=
- =?us-ascii?Q?eHHbns4MA6YQVGAbljpyAL1wFCnYE4npbe8lhBHbD16hW7uBOxmEejxl1Okz?=
- =?us-ascii?Q?zms3NEj0e41Xbi7ZL1c6F4QOyMNd2119gt+Modz98h9LfvBDw+oKpcqQhhyG?=
- =?us-ascii?Q?vNgFpfFhfsTxTdmR93T0TO6KN1djIT9qtt7zOkPxilJwP+PgU/ELWTr676ji?=
- =?us-ascii?Q?sTz1g5ydvHvKjpF0TELRatjtkAsRQvxoc/N22798DfMfhrBKqHWuDBrRaKVA?=
- =?us-ascii?Q?i68Dgxdn6JYtMflacHhyBefSvDFmVXAKOcuEiivuGkXmoZZCW2DW9kHv8+DR?=
- =?us-ascii?Q?ZbPeAeDyswpkxtbugf40J+a3CmHYn7Nd7QOsWeN1wDOsVBJ5cUAiPEF/wRI5?=
- =?us-ascii?Q?I7pzDBhv9Nfb3Zb5aT9/akNRyd6Tak89GSNZCwwL1gxGFsykJ5y0c1kYdL1g?=
- =?us-ascii?Q?CHvsBT2gpzMnrggzrfDr5u1q2SoGb7LNy0G9SeueMzK8cK/NHVzPGIfAhbKl?=
- =?us-ascii?Q?x01lY2IzMxDaqAJEmBZsR+vVptNMevi/kPCMSE9ZzM9f6iJqyYljwJ8glKnn?=
- =?us-ascii?Q?+sGWqp2wybGd+qTGSnQcn50KxvaQV76KDlON7JVKtGy35pcHhfDMM0bhgrG8?=
- =?us-ascii?Q?ys5H1IDwq4tJzFchB/ss8iEUTtsxDIlVMl9bPCltiAOyLIoDpQ/3GZfNp6Ee?=
- =?us-ascii?Q?H0OzFJ4Ef6ZqRXBGhNV/dk7WxOvMgVNM2i5VxAkXalleDc5jaJCi8+lVqQtm?=
- =?us-ascii?Q?G0daIVj7E4WbVZXiVkh/FvEiPchRZIOI/f1QOdHuHHK5z/fAYcPot0MvOSjr?=
- =?us-ascii?Q?VTrsqecDV+W/cAQxg2V7FEwdBn9O23kqj+koWcgEqH3n7kW1FgvpB6D0/1fw?=
- =?us-ascii?Q?4emL8e4ellVL6lS15JoYpNEEq0xOnQdbP30tLJgpcbnyqj3J4dO/AaJNMV7D?=
- =?us-ascii?Q?Aso9HMQ0e1W8OYBidBqpSSCVyfPb69azXuiQWNvkne8OuRSptP60Y9rygZN8?=
- =?us-ascii?Q?+8QLpztLeZQ47MdZcfOTWfv/z39JUf6blpek0zueop9e8DYe6jUoVotjZiZm?=
- =?us-ascii?Q?VMfWeJ5xMAmC1Rs09UMKCeM+WYBfMvyUX0zNpjFTfk/T1LnhFLWeZXBXHtuG?=
- =?us-ascii?Q?atV6XhCo4LNJPImDG3hi/eGesFHTToRIVDcmLhMc/cPz3SpkHCMuOfEf0wz7?=
- =?us-ascii?Q?/hjIvVlLWtePwKhpBsSRBEiqbOXiZlzndedRk9S6XS2brUN860SjmE13xYNG?=
- =?us-ascii?Q?53CAFK+uX3XGBCjYvqH2n+YPp3w+OzjY+p5BLR6oKCHnI3bt0uh1h75o93Hv?=
- =?us-ascii?Q?TekENflfyFz56I9pj+O1oRlaYmQit8/U?=
+X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|366016|1800799024|13003099007;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?p75PLA/K9hKrMhUo13jKAtsMaXApOMmC9EbsgL6uepFiT0+oeATF6aVDe75T?=
+ =?us-ascii?Q?BYIBhsbtRcBldr5ZLJ7aWc/XX9xNjB9PjXwU/pAvnnQ707KSSNbJvc4X6jAG?=
+ =?us-ascii?Q?XmG2UC21LuKxado0hTzYh0qBdLVMiF/6TbvUYhhb6VzfzuKSJa2xBgJxMgAX?=
+ =?us-ascii?Q?Mc/+gVStIqh3mGlwSxoxnzaYrhZX9JHL9upEeMY3tvJxJN1zkxe6lwNYvWuH?=
+ =?us-ascii?Q?alNw3EA0jcdwucRd/aOFdUoZZuHPsSlYZ1Whp2ezx+cdehfGzJiBoNxqCzZR?=
+ =?us-ascii?Q?ZgQ8XiFTtN3NuFhzbt1G6rTU5Lq/MUWmeLZrU2hhWJXu5B8IP+a0K28l/sJa?=
+ =?us-ascii?Q?HiUYdd00W4wVFgLP3Y9IlTJGvr46jg1MCcHfSf+4OnuNpIbVj6LA+QhBeS1d?=
+ =?us-ascii?Q?18H75f5avysIGs+CFP6PumbcFvhAZzUPS2ELiFd9fRyQVgidjXT+tLPMIq28?=
+ =?us-ascii?Q?nWjbtC7yyzL5jMTOUN6hZWKNcmQVy1DvVT0WWNpP5meWsgEbsCdl4lsBWFrI?=
+ =?us-ascii?Q?8G84QJ0WV2OxRRsmJc+Q2p5mUksDYea/mSpHvoViEyrUpkR/u3VSBfbChFkn?=
+ =?us-ascii?Q?KYqBSfKNitW4ngBZXTGs0NWSBN8AGL4WQq77PYYKjVIHkxO74n92LVbIawoc?=
+ =?us-ascii?Q?XBeCfYLxoIvD7XwNn0bNKzpun28cFFu+I/B+X44ELFH/Kwf9OPDUMG20ahwt?=
+ =?us-ascii?Q?KDKyGCjVj4vh8dOXUo3cLbAvCLEyY7qzOTKxWTudN7CfQSRy5f4xvpIpVvvJ?=
+ =?us-ascii?Q?PnUjd5gOQtgIugTDLg/v5rBxWPORSHQxI+NxVSow4RIys2cwoUiwQqo1o2aR?=
+ =?us-ascii?Q?zfLB3fu0k9C/Yz1mfwdmfzuH2ybZXzjYTNTImLyvFmjhIjHenMOPIIxUyEbW?=
+ =?us-ascii?Q?eirhIKCY7PHo+k+stBlyY9f2x0ioxSpSCVbSTcV/VQjcONI+Skzd4W3l5z5U?=
+ =?us-ascii?Q?z5h2fhW2+R5gTtk8ZG7htXlAUz+2zmpnO6Yj5Zn+Ini2TI05VjZoltpslW0T?=
+ =?us-ascii?Q?Oc6ayfwYHYWaNNoTYPxctmsgsrKj0Ka34NK1e3TylOyNv8ddgpAXV3ayzYZc?=
+ =?us-ascii?Q?5lUX1tKKC5wPkI9pgnEGG15w7BagH1FF+B/wT6CPlaPw0HEvvtfq4+vbKllI?=
+ =?us-ascii?Q?3xvpCBAKM9b40ky157MS8bDm0IEPmka9JemBCBKFDfy4NSLF7DKeWrV78Hl1?=
+ =?us-ascii?Q?9erYdObQqpBOTNAKKH9qCBg4lQMAkcT3v8NN7RS1mEA4nvTtFDXwVODhkhGs?=
+ =?us-ascii?Q?Zo6S0x0DpbJdbnAzCXZTmshVN/GjhyHTVr95unpCWRM+S6H5P0Ksl9vfElDF?=
+ =?us-ascii?Q?ns3nVPM9Ehv+IgWSh6GJVQJElLObLkqjZfuCl+aQ/66uWp4N7HurBWcveKuj?=
+ =?us-ascii?Q?H+hjJx1422MBFH5yhmkGyu2E1tQSF8HikXqk+8HXKVcTUrDYPtzP3PnUhL2P?=
+ =?us-ascii?Q?Z8kl2PyK4vwYZmXOfmoKhDW7jUQiGvJU?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(366016)(1800799024)(13003099007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?UnUTvbfketPIwPtgTdENJ1XxnjrpStjXhTZVPafhCAQeYStCV66P4SD4ynQi?=
- =?us-ascii?Q?hq3gfxyEW1YIy0ebp3ZmBG7pxOdrJmVLso2Rw663hMHHQrUT/anSFsqeuWPU?=
- =?us-ascii?Q?ZOKaDYpjHEW7CHM6Nr7UTVTFlJ9sWu/ZmMT8JWzLwzIDV6clOwSrWfE6wP5q?=
- =?us-ascii?Q?qQ54hPqa0M2BmJBta8wCBW6l8+bYcPnJW1fJNP2idAI9yRpGeNvRMkOgTIwH?=
- =?us-ascii?Q?tMQhwmmSPFvR2ygqjEMaDyLEC2d1/huGjwTB6J/eSIeGtIZlVUdLQnEOVpAU?=
- =?us-ascii?Q?vCptbgKbV6TyD+ZI5Q6Wg3f4DbOBkpI9f8n+vRgUZT9WOuUD0L9LbouCwnp6?=
- =?us-ascii?Q?jKk+U0oAPCtlpLIN0HHs+prapuzb+TIjrb1H19v0XtEwbNVfLZ3jEQT3MVgO?=
- =?us-ascii?Q?4YdHmbezmbMpB+R1G5HNOhb30ZUGJKrG7rWUfeb4qu8rQPzKKxi1MTbMHtMX?=
- =?us-ascii?Q?xOCxcGXZTBdaI29Yko4gWTyy/Q04EcRk3NntE3RaQU7d+VSKFBMBjgzAJ84n?=
- =?us-ascii?Q?RTYc1dYwLgZPW61hVD5mddNQGHn6HYGwwIKSZjzpxKpM/PfK8ilLuInv7kit?=
- =?us-ascii?Q?N8hP79WDOQan++79IM3QzpDcHptoBWGTqAuBO1icUgEDH0OohPexcbY9nESb?=
- =?us-ascii?Q?bP/qExJMjLqEbYAu8bMTaAxk0igcJUK3iH99QbIO9vrVG+8BOpzJufZvz0E8?=
- =?us-ascii?Q?gxMsSxLfNDAeGvRHEQJ/7Mv2I2PtdyNrgb7BPFQqsRCGEP4XI+82GpuXK4N3?=
- =?us-ascii?Q?Z8Ku4L4kRjZwmAs7NZiUE1PlsmW+smfAI2+5sAGKazqEdJJN1ZRtTR3IHcpV?=
- =?us-ascii?Q?iII/1tN2yZ76WgdRXy9dPGg+Qad0LrjZBwFKl3fFoKd+6btTiOsuXyJ0tEiA?=
- =?us-ascii?Q?iwFa0Uc/YZAxND7XtpW0+k02qugzsIiAmv8RAe1J9Vbt9+F4yzpK0+KkfpcS?=
- =?us-ascii?Q?JcyEvysxI4knwc8gpWl4/dKzELSs9/aM6iePRuEE43rrPVaMj6M6B35pBh1r?=
- =?us-ascii?Q?WEC8GYDngzgeybXlEKdq02XNKFBNG16YyVC3Z5kT3zHPsFmBfxgHZSGX6swo?=
- =?us-ascii?Q?G6AJoGcwna11S14aahdZwgX9+kNjlQ/rDH1QLXfY2Ntn43zozOdbPxPTCcz7?=
- =?us-ascii?Q?Ty9NNjc/Ss93thoCb+PxIjE8IzCVhn9/R5ZAqjmY1kfCQylOcaP/kw5Trbrl?=
- =?us-ascii?Q?tmI6x7K9AjHHM3bQbke1uTCYrYOK2iDK16C/S5HDZxOWKA5YJLnYegvXvpRa?=
- =?us-ascii?Q?nIQ7E1zvPODr/8Lu/07Eqwnf+OTCnpTglbDvgU/lG1dtMgBcaiQDE003EIE3?=
- =?us-ascii?Q?6qchZZaBB/lYZ7+n6ALLdDnoOAf6xQT1E4bSJIKMnv1DAGqI0wpXl0J6G/y3?=
- =?us-ascii?Q?vbtiqpZNoVHMiKzyM3vANJAlpeG2Lx7sWHyiExgIngqpSt3lWQx3HRskGCer?=
- =?us-ascii?Q?utrrm+YcDNXp5uygQoWwTfHu2T2AieE2HynInqVNDsSBVdfDZJyVtQgmqebY?=
- =?us-ascii?Q?S+7ecst4HeWK3u3I05ahdcUfsD1h4OUK9ow5AlbPVlbgfG6eWES27CWEncIr?=
- =?us-ascii?Q?p7SiZfCf7dnHqwXGl0aby8fFGQ7CKxI7MujN+Vv6rw23/Bva1URvFNytaI9X?=
- =?us-ascii?Q?MA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uTXf9wcvs2NIJI8+inrurGwCriNftN95WM88e+oTKEnxuQfEjXInWNKXeIVl?=
+ =?us-ascii?Q?ughysuWT90SzlmQv6WkvOS6XI+O4kiwLIE2wb8LmzAIysKbjOUt5oa41D+DT?=
+ =?us-ascii?Q?SpiqyF0zGtGjmwSUNtDcZnIK8TGxeMlzWBG9+JWQ7ksaQK6bxI+lh/7iBzHr?=
+ =?us-ascii?Q?jC5uVVURsgLAaB5NoEMdSY/UN/BmUCNbUjXd0RtGUgxXA7IbUjSSrUT2F9Nk?=
+ =?us-ascii?Q?ZiXqGguhGzEhfPMAhN2ppkiEhdMnnU0EQJPSXBNDKth9JoNDW2xfLsfbTA0Y?=
+ =?us-ascii?Q?M1RZzRCRyIBCau6TJ+X+RQLhzBttFIk+9m+zuY/ZbVCQC1LWMyixqKRCGgeN?=
+ =?us-ascii?Q?BveTtbVhYrJ5b14AvmEn0AmzXn0R12ii3BYWnSMO4zkdhvZxSYHv16OWClwn?=
+ =?us-ascii?Q?T9UJao2MndaLIiqaoxANZUW7yEaOeIqIzYBQcGyWD92YadDlSmZWsMoKRhwo?=
+ =?us-ascii?Q?iOkTZwDU/K9bXSz/8Ry0Oeryk4sFcSN7T7WdWgfV0mD3V1g9oh7hWDj0ycdy?=
+ =?us-ascii?Q?+E/0nw7ntho3N+MbyES1Q6Mr+2zmRwEStHncyOzUJeRpF8oW2KnnaOVs8BZd?=
+ =?us-ascii?Q?yqATtloMHuTIgBadpjBCTUqpIqXSmy/++SZQ5VSi3+61GdFHfuDzeN/5MXZ/?=
+ =?us-ascii?Q?9oHVfpVma6KQGKBhYthq7MphaGADLHcZenLjvx8hum+M7SuEBzV4GuKgCaxB?=
+ =?us-ascii?Q?wtHltHO8Dm0YbOj3CTWZ8HjzsvIYXIDPydRXjTkrCKlLjWXh3e9zrBYIpaSu?=
+ =?us-ascii?Q?fUM9X4gMgQdeyWgsw9QL58EKF4uM4NrbhclLHFrmefBQfBmWLDLviToSm5ep?=
+ =?us-ascii?Q?HURrf4uqYydOjoYzBkYG4XOWh6fEs/yhu6SZXJYv0do47j3Jud4NwtCmHIme?=
+ =?us-ascii?Q?BaMT9GEOdQzIF9/YIjTCexyWwWp7wjwLlU9kE8dLi9deOVlSczpaS4vSUsez?=
+ =?us-ascii?Q?S6dgA1PwxiSVoDl7OlbKLQ06a0U9ShJiuqA0hXPhNQ6YVTowyH8q9/OKGJjc?=
+ =?us-ascii?Q?1WVcIKNyz5F4r0LVhIyncHgtuyzobaU7ylSFPMGVUjYAL/cK3hhNH/Eya2pY?=
+ =?us-ascii?Q?UX4VNXcvgJf9VNAyI66vDjlUsELd+jX9XBvJHwytz0kRyoFMgz/7eX8579vQ?=
+ =?us-ascii?Q?Fobu3se7pB1RG/S4qLmv0kDuilAwI+J7Nf4ZKAO/tCZW/3D6jGg4QJy5u/6O?=
+ =?us-ascii?Q?u/724IoYylkIktHIc975IWBWCW/NSHB2hfIYkQ8APz/cl2xjYHB+4NBYPxUP?=
+ =?us-ascii?Q?IzXfzORd/jrZsdxV4KcCXkpbM7eXwf+W+yuN1F++PnM1g5Gb/eBj16jNw4ey?=
+ =?us-ascii?Q?EkM29djOXLykMH0FMGMbD5yFsubEiOVzSfO3fU7B/NYpJJRGukb9EpYqrUA9?=
+ =?us-ascii?Q?M4OSSzn4vyCjEYproHe8H3sAHgzTpthhXy3OzA9ITEFToX5aXoXuQ7Rh7Vv/?=
+ =?us-ascii?Q?UBf6sfTzTiTnj/7SQKGeEig7+YLnKr58BXr5OiObaBqYThd7wI6qK3LyD+Wb?=
+ =?us-ascii?Q?+yZXoxQPCH+NzuYxJEN5UGCKtkB/jDUnlQPRJNn0oBhfW8Ttai+UAYqMEoDd?=
+ =?us-ascii?Q?sxGH/KtruyUFAKY3YiYEESjZQA8FqcrKUwlulvCwNvxt9y1LQ1MhPbZ11bOl?=
+ =?us-ascii?Q?TA=3D=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b4493c7c-a4ba-4ea9-b8b3-08de3266a02c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 301c5eb9-0721-4400-4f1f-08de3266a0ad
 X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 12:22:29.0342 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 12:22:29.7861 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pWMvhb845FEgDtWz8VpqZkSBbXzVPmVFke6F3rO7TWNm+XwivuQfep8R/hut3+WK3Q6dM9qo4jjvXwXZEapIWCssjvD6wNeLQI/kn/CPVaI=
+X-MS-Exchange-CrossTenant-UserPrincipalName: dOe8kdKAKRjwTQCX4gRwDGlkZM8sIm1POtxzoNBDOj+F+VF2Geu+9irkhNlhWY7riLiz1w2tI0pxf13AfvsYbxR9+HMY5BZh63iCgpQZCaE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PR03MB8452
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -161,38 +161,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When f_max parameter is 0 in sdhci_setup_cfg(), the function defaults
-to using the maximum frequency from host controller capabilities register
-instead of the max-frequency property parsed from device tree.
+Replace the legacy clock frequency-based timing mode selection with
+proper MMC timing mode constants.
 
-The max-frequency property from device tree is parsed by mmc_of_parse()
-and stored in plat->cfg.f_max, but sdhci_setup_cfg() was being called
-with f_max=0, causing it to ignore the device tree value and use the
-host capabilities register value instead.
+Changes to sdhci-cadence.c:
+- Add sdhci_cdns_get_hrs06_mode() helper function for mode selection
+- Replace clock frequency logic with mmc->selected_mode switch statement
+- Use proper MMC timing constants (MMC_HS, UHS_SDR104, etc.)
+- Add SD card specific handling with standard SDHCI control register setup
 
-Fix this by passing plat->cfg.f_max to sdhci_setup_cfg() to ensure
-the device tree specified maximum frequency is respected over the
-hardware default.
+Changes to sdhci-cadence6.c:
+- Add SD high speed PHY and control configuration arrays
+- Update sdhci_cdns6_phy_adj() to use timing modes instead of HRS06 modes
+- Support both SD and eMMC timing modes with appropriate PHY settings
 
 Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
 Reviewed-by: Balsundar Ponnusamy <balsundar.ponnusamy@altera.com>
 ---
- drivers/mmc/sdhci-cadence.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mmc/sdhci-cadence.c  | 72 +++++++++++++++++++++++++++---------
+ drivers/mmc/sdhci-cadence6.c | 39 ++++++++++++++++---
+ 2 files changed, 87 insertions(+), 24 deletions(-)
 
 diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
-index 6c9d24fe5f7..b92b3df3ed9 100644
+index b92b3df3ed9..5e2a4037605 100644
 --- a/drivers/mmc/sdhci-cadence.c
 +++ b/drivers/mmc/sdhci-cadence.c
-@@ -253,7 +253,7 @@ static int sdhci_cdns_probe(struct udevice *dev)
+@@ -2,6 +2,7 @@
+ /*
+  * Copyright (C) 2016 Socionext Inc.
+  *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
++ * Copyright (C) 2025 Altera Corporation <www.altera.com>
+  */
  
- 	host->mmc = &plat->mmc;
- 	host->mmc->dev = dev;
--	ret = sdhci_setup_cfg(&plat->cfg, host, 0, 0);
-+	ret = sdhci_setup_cfg(&plat->cfg, host, plat->cfg.f_max, 0);
- 	if (ret)
- 		return ret;
+ #include <dm.h>
+@@ -84,39 +85,74 @@ static int sdhci_cdns_phy_init(struct sdhci_cdns_plat *plat,
+ 	return 0;
+ }
  
++static unsigned int sdhci_cdns_get_hrs06_mode(struct mmc *mmc)
++{
++	unsigned int mode;
++
++	if (IS_SD(mmc)) {
++		mode = SDHCI_CDNS_HRS06_MODE_SD;
++	} else {
++		switch (mmc->selected_mode) {
++		case MMC_LEGACY:
++			mode = SDHCI_CDNS_HRS06_MODE_SD; /* use this for Legacy */
++			break;
++
++		case MMC_HS:
++		case MMC_HS_52:
++			mode = SDHCI_CDNS_HRS06_MODE_MMC_SDR;
++			break;
++
++		case UHS_DDR50:
++		case MMC_DDR_52:
++			mode = SDHCI_CDNS_HRS06_MODE_MMC_DDR;
++			break;
++
++		case UHS_SDR104:
++		case MMC_HS_200:
++			mode = SDHCI_CDNS_HRS06_MODE_MMC_HS200;
++			break;
++
++		case MMC_HS_400:
++		case MMC_HS_400_ES:
++			mode = SDHCI_CDNS_HRS06_MODE_MMC_HS400;
++			break;
++
++		default:
++			mode = SDHCI_CDNS_HRS06_MODE_SD;
++			break;
++		}
++	}
++	return mode;
++}
++
+ static void sdhci_cdns_set_control_reg(struct sdhci_host *host)
+ {
+ 	struct mmc *mmc = host->mmc;
+ 	struct sdhci_cdns_plat *plat = dev_get_plat(mmc->dev);
+-	unsigned int clock = mmc->clock;
+ 	u32 mode, tmp;
+ 
+ 	/*
+-	 * REVISIT:
+-	 * The mode should be decided by MMC_TIMING_* like Linux, but
+-	 * U-Boot does not support timing.  Use the clock frequency instead.
++	 * Select HRS06 mode based on card type and selected timing mode.
++	 * For SD cards, always use SD mode (000b) as per Cadence user guide,
++	 * section 12.7 (HRS06), Part Number: IP6061.
++	 * For eMMC, use selected_mode to pick the appropriate mode.
+ 	 */
+-	if (clock <= 26000000) {
+-		mode = SDHCI_CDNS_HRS06_MODE_SD; /* use this for Legacy */
+-	} else if (clock <= 52000000) {
+-		if (mmc->ddr_mode)
+-			mode = SDHCI_CDNS_HRS06_MODE_MMC_DDR;
+-		else
+-			mode = SDHCI_CDNS_HRS06_MODE_MMC_SDR;
+-	} else {
+-		if (mmc->ddr_mode)
+-			mode = SDHCI_CDNS_HRS06_MODE_MMC_HS400;
+-		else
+-			mode = SDHCI_CDNS_HRS06_MODE_MMC_HS200;
+-	}
++	mode = sdhci_cdns_get_hrs06_mode(mmc);
+ 
+ 	tmp = readl(plat->hrs_addr + SDHCI_CDNS_HRS06);
+ 	tmp &= ~SDHCI_CDNS_HRS06_MODE;
+ 	tmp |= FIELD_PREP(SDHCI_CDNS_HRS06_MODE, mode);
+ 	writel(tmp, plat->hrs_addr + SDHCI_CDNS_HRS06);
+ 
++	/*
++	 * For SD cards, program standard SDHCI Host Control2 UHS/voltage
++	 * registers for UHS-I support.
++	 */
++	if (IS_SD(mmc))
++		sdhci_set_control_reg(host);
++
+ 	if (device_is_compatible(mmc->dev, "cdns,sd6hc"))
+-		sdhci_cdns6_phy_adj(mmc->dev, plat, mode);
++		sdhci_cdns6_phy_adj(mmc->dev, plat, mmc->selected_mode);
+ }
+ 
+ static const struct sdhci_ops sdhci_cdns_ops = {
+diff --git a/drivers/mmc/sdhci-cadence6.c b/drivers/mmc/sdhci-cadence6.c
+index ead96dc0c91..d4e2cb1c83e 100644
+--- a/drivers/mmc/sdhci-cadence6.c
++++ b/drivers/mmc/sdhci-cadence6.c
+@@ -2,6 +2,7 @@
+ /*
+  * Copyright (C) 2023 Starfive.
+  *   Author: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
++ * Copyright (C) 2025 Altera Corporation <www.altera.com>
+  */
+ 
+ #include <dm.h>
+@@ -77,6 +78,13 @@ static struct sdhci_cdns6_phy_cfg sd_ds_phy_cfgs[] = {
+ 	{ "cdns,phy-dq-timing-delay-sd-ds", 0x00000001, },
+ };
+ 
++static struct sdhci_cdns6_phy_cfg sd_hs_phy_cfgs[] = {
++	{ "cdns,phy-dqs-timing-delay-sd-hs", 0x00380004, },
++	{ "cdns,phy-gate-lpbk_ctrl-delay-sd-hs", 0x01A00040, },
++	{ "cdns,phy-dll-slave-ctrl-sd-hs", 0x00000000, },
++	{ "cdns,phy-dq-timing-delay-sd-hs", 0x00000001, },
++};
++
+ static struct sdhci_cdns6_phy_cfg emmc_sdr_phy_cfgs[] = {
+ 	{ "cdns,phy-dqs-timing-delay-semmc-sdr", 0x00380004, },
+ 	{ "cdns,phy-gate-lpbk_ctrl-delay-emmc-sdr", 0x01A00040, },
+@@ -112,6 +120,13 @@ static struct sdhci_cdns6_ctrl_cfg sd_ds_ctrl_cfgs[] = {
+ 	{ "cdns,ctrl-hrs07-timing-delay-sd-ds", 0x00080000, },
+ };
+ 
++static struct sdhci_cdns6_ctrl_cfg sd_hs_ctrl_cfgs[] = {
++	{ "cdns,ctrl-hrs09-timing-delay-sd-hs", 0x0001800C, },
++	{ "cdns,ctrl-hrs10-lpbk_ctrl-delay-sd-hs", 0x00030000, },
++	{ "cdns,ctrl-hrs16-slave-ctrl-sd-hs", 0x00000000, },
++	{ "cdns,ctrl-hrs07-timing-delay-sd-hs", 0x00080000, },
++};
++
+ static struct sdhci_cdns6_ctrl_cfg emmc_sdr_ctrl_cfgs[] = {
+ 	{ "cdns,ctrl-hrs09-timing-delay-emmc-sdr", 0x0001800C, },
+ 	{ "cdns,ctrl-hrs10-lpbk_ctrl-delay-emmc-sdr", 0x00030000, },
+@@ -186,27 +201,39 @@ int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *plat, u32 m
+ 	int i, ret;
+ 
+ 	switch (mode) {
+-	case SDHCI_CDNS_HRS06_MODE_SD:
++	case UHS_SDR12:
++	case MMC_LEGACY:
+ 		sdhci_cdns6_phy_cfgs = sd_ds_phy_cfgs;
+ 		sdhci_cdns6_ctrl_cfgs = sd_ds_ctrl_cfgs;
+ 		break;
+ 
+-	case SDHCI_CDNS_HRS06_MODE_MMC_SDR:
++	case SD_HS:
++	case UHS_SDR25:
++	case MMC_HS:
++		sdhci_cdns6_phy_cfgs = sd_hs_phy_cfgs;
++		sdhci_cdns6_ctrl_cfgs = sd_hs_ctrl_cfgs;
++		break;
++
++	case UHS_SDR50:
++	case MMC_HS_52:
+ 		sdhci_cdns6_phy_cfgs = emmc_sdr_phy_cfgs;
+ 		sdhci_cdns6_ctrl_cfgs = emmc_sdr_ctrl_cfgs;
+ 		break;
+ 
+-	case SDHCI_CDNS_HRS06_MODE_MMC_DDR:
++	case UHS_DDR50:
++	case MMC_DDR_52:
+ 		sdhci_cdns6_phy_cfgs = emmc_ddr_phy_cfgs;
+ 		sdhci_cdns6_ctrl_cfgs = emmc_ddr_ctrl_cfgs;
+ 		break;
+ 
+-	case SDHCI_CDNS_HRS06_MODE_MMC_HS200:
++	case UHS_SDR104:
++	case MMC_HS_200:
+ 		sdhci_cdns6_phy_cfgs = emmc_hs200_phy_cfgs;
+ 		sdhci_cdns6_ctrl_cfgs = emmc_hs200_ctrl_cfgs;
+ 		break;
+ 
+-	case SDHCI_CDNS_HRS06_MODE_MMC_HS400:
++	case MMC_HS_400:
++	case MMC_HS_400_ES:
+ 		sdhci_cdns6_phy_cfgs = emmc_hs400_phy_cfgs;
+ 		sdhci_cdns6_ctrl_cfgs = emmc_hs400_ctrl_cfgs;
+ 		break;
+@@ -263,7 +290,7 @@ int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *plat, u32 m
+ 
+ int sdhci_cdns6_phy_init(struct udevice *dev, struct sdhci_cdns_plat *plat)
+ {
+-	return sdhci_cdns6_phy_adj(dev, plat, SDHCI_CDNS_HRS06_MODE_SD);
++	return sdhci_cdns6_phy_adj(dev, plat, MMC_LEGACY);
+ }
+ 
+ int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int val)
 -- 
 2.43.7
 
