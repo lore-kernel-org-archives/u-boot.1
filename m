@@ -4,150 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56638D2168F
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 15:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B202D2168E
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 15:30:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D04480107;
-	Thu,  4 Dec 2025 16:19:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8501183AEF;
+	Thu,  4 Dec 2025 16:30:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FBCVi910";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ddodn320";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 453248042F; Thu,  4 Dec 2025 16:19:54 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A3DC384053; Thu,  4 Dec 2025 16:30:44 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12F5480050
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 16:19:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FBEE8367F
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 16:30:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Smmv3DfoeBtSt0xzpLEdzsO3osy7WV8NxMjkowN+gFJyW3/9ir7MOnA80qH5m2AQ7+4WYmld4+eeSt4IqIAYHlelGXU1p69QZZvlP259+bCi9m20EnCG/aFw8kCJSaq9zBcjPmXPvy0SXr0lKgSUJVKvR23EYlTeppzUmTiRtirVhYFP0S73/LjSO5fYnuNM0bS2Sms9RfX4SZJNnpYhEeaFEZ8If2z8R1XVVniH5XMKrYGVqOxu9kVqUM40GwN6wMB/RM9IWKt/k7ivI73nerBl+oLzPu3eWd0Bw3JiAYw9o1WHX9rRMHIr3tuXvSNBOb5JIXa0WHq65cQV6pz92A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5siYlwWyELY6BG33Tpz4BSzEQuez2/P+fP+4AlO1QhE=;
- b=nrNDhTPh7TE3GK60Cy6sMRInCd4q6pLs1Hscb4Txe1FZml/XmKvZO60SwgROwCezpGxmq+rvjlxZcTBdHdiC0Vq16PAXNB+rMzIbJ131K3lndpdIMbRk7j2hQNUr+T8FeBVTvA5ugAQsgF05EfQYpswAJGlEBqDZu6m6ZWAIEmMbTuqI4UoKQoQbWdUy1KWhuccyroLgWrZW1ut39XF8NwvpUzvCXfGu2ujXeL/eg80dApKvpKerNZnZr8lL8mepb9imDT4ESOytZulG0harqsg22rz7VWOpd2TlKxHh4TZ+5ZhFcLJlxFuejjWRbtMktO1lnUuryVHDdiehAKdHng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=kernel.org smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5siYlwWyELY6BG33Tpz4BSzEQuez2/P+fP+4AlO1QhE=;
- b=FBCVi910rUeaFltcU9Q8c5J0S1FdzJ0fimZHCB3TJb/AeiL/+lbaj+E+U0Vx8zu9/JqqrMSb9o3wDhWSzhodDug7KLfDULpWOZBTHAsh0GvAIyZY0NgeGGc7nDUDvLlw7U/PYYE6Ahw9D+0TUQLhZ8VtjpJkpci3dTlw24iibIA=
-Received: from CY5PR18CA0046.namprd18.prod.outlook.com (2603:10b6:930:13::8)
- by SJ5PPF25BED9404.namprd10.prod.outlook.com (2603:10b6:a0f:fc02::794) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Thu, 4 Dec
- 2025 15:19:44 +0000
-Received: from CY4PEPF0000EDD4.namprd03.prod.outlook.com
- (2603:10b6:930:13:cafe::d8) by CY5PR18CA0046.outlook.office365.com
- (2603:10b6:930:13::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.10 via Frontend Transport; Thu,
- 4 Dec 2025 15:19:44 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CY4PEPF0000EDD4.mail.protection.outlook.com (10.167.241.200) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Thu, 4 Dec 2025 15:19:42 +0000
-Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 4 Dec
- 2025 09:19:40 -0600
-Received: from DFLE209.ent.ti.com (10.64.6.67) by DFLE205.ent.ti.com
- (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 4 Dec
- 2025 09:19:40 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 4 Dec 2025 09:19:40 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B4FJbSb1744730;
- Thu, 4 Dec 2025 09:19:38 -0600
-Message-ID: <c3416918-965e-44c9-b202-ab9703806ad2@ti.com>
-Date: Thu, 4 Dec 2025 20:49:36 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7c76607b968so462311a34.3
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 07:30:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764862241; x=1765467041; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dQ/h0NrSgPbbffDW6vpNFR7D+EG0Jlh2RdDeUry5P1g=;
+ b=Ddodn320aUSF4jl38Nk4O5PD3b2vFd3IM1F5/esTigH2Xcph9hRm2fmZQUUPs/d58E
+ vvWEa5cPxWvqiKjqn8HvL1I6VWPTmB8d0xFV49SsCJb9S2tSGT+nXIveTqEUuVccwOB+
+ PB580oS71UQRKsMOKpDtv6hU09FBhDbmVdJiI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764862241; x=1765467041;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dQ/h0NrSgPbbffDW6vpNFR7D+EG0Jlh2RdDeUry5P1g=;
+ b=dyuTSWJLAaBewZ6eNwj7ntmXbQn7mIhoV9GkQltQhaPssosWAImMxwiRl3dRQptQ6j
+ bN8NnDDVKkBerATmq71VLmZYrHcTlVkUwnjHOj7cmOtZTp7b/uhP/c0s3kugBnPhOelZ
+ 1VeDuqw/Uarn98pe41B07SoKk1UdZKDVBmNixsIbVVCuGy50EwMXRxld0sOJrmCLiU53
+ LFIdYIO8Ilr/hHfPw7Pl1o/yWauvF/lj0efM755WrniWT4AgzGxaBySGfNYi07gL5ls1
+ /BZ7vWGEa2BCAmR4eUWlfyImGk6bN9r0gc4ExIDeMA4O27TRBH9YVa0xfbV4u79+qnjl
+ Lh7Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWyqw9FoFXPGTTh4l+TwVZGoJDBu9UP0fQA6A0drGhgc8RxY02LyH21I57YFKRyS4b8S5F33jw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxUSh6W9j9ee1M/WR9WhphnjpbSASrlYPR3VWd0Df33Zr2Tubya
+ F5tEFO3ndBeJhajGsUwwOXfHPd0uPGuyNu2infRYblux9hdsenAcm1ZYTNxcX+XC4mmP1iumnEe
+ DOcLspAs=
+X-Gm-Gg: ASbGncsPvYI5JErJzmDuC6lRtL8FieUgrHZ5PiZ7tSru3IyVckyciNCRrDpwzwWWeMJ
+ IWWSRQjHdb7WSDIeg/13fRWpu2pogz9d37V/R/TW/4ls4X3k5C9fyTuDrf0Kl1KKbw/D7S3Hi0h
+ Dl+Z+bJPX0AjVnQHh8mgpHmeLTGMJoHXgleTlC9fER09I7hIYJbeaq2pR65LIYBB6omzzbNJ790
+ wYyWThhz+qR8x9ZDglVHtZp9F9wZyojpXpbq9nhrIj8PrfTli0/l4SOPmWviWkB478dcigELKce
+ E1XOyhn6BuJproJG2FDU+QFf8fWapX3AvgX4j7ynlogrJcqBCddPN+l79QbvpXfgzfMNcMaFQQC
+ QwoQqjxvT0vtSH4Se7bZu6/2MyTHGcoOpU9KGphuBmE7TUKvaP958r42r0xHqmYkHmpY5SJ1FWj
+ vJ5jXdH2z+90dKVH7EHxmADolnnm43wuMYrChd9+7GGQTv8ZO7MA==
+X-Google-Smtp-Source: AGHT+IGmOH56nZtpk8ibIO80MLT5ts5DQzZyj/0WxVlJsqaDpujnnbIj11XGMcowFtJy7KvvXAY4fQ==
+X-Received: by 2002:a9d:615d:0:b0:7c5:3eea:7bdb with SMTP id
+ 46e09a7af769-7c94db43d57mr3952961a34.10.1764862240988; 
+ Thu, 04 Dec 2025 07:30:40 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c95acfafeasm1527962a34.29.2025.12.04.07.30.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Dec 2025 07:30:40 -0800 (PST)
+Date: Thu, 4 Dec 2025 09:30:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+Cc: nm@ti.com, u-boot@lists.denx.de, mkorpershoek@kernel.org,
+ n-francis@ti.com, anshuld@ti.com
 Subject: Re: [PATCH] doc: board: ti: Add J742S2 support
-To: Tom Rini <trini@konsulko.com>
-CC: <nm@ti.com>, <u-boot@lists.denx.de>, <mkorpershoek@kernel.org>,
- <n-francis@ti.com>, <anshuld@ti.com>, <u-kumar1@ti.com>
+Message-ID: <20251204153037.GY303283@bill-the-cat>
 References: <20251204142451.834404-1-u-kumar1@ti.com>
  <20251204144840.GX303283@bill-the-cat>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251204144840.GX303283@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD4:EE_|SJ5PPF25BED9404:EE_
-X-MS-Office365-Filtering-Correlation-Id: 74f8be56-8b81-4ed8-4357-08de33488cd1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SXlwQVhjZGtURHNBL1Z2YUVDVURPRGpRdW1Zdkp1K2dKNnZYUU9OekVUNWJO?=
- =?utf-8?B?UjEyOTAxaTNnK1JvcUhWM3B2WTk0Rm52Z0JLRnlZaU4vdklWTVlWMGViUDI5?=
- =?utf-8?B?MXk0bDlJdmxxSnVHMXpUa2ZZbFRQOG1RTFI1MjNrc0NlN1daTTFaaXZ6QlNL?=
- =?utf-8?B?eW9OdVZTZEJlUDFxWlhxdERDS3M1S1N4dnNqTU04Y3FwZHoxcVJ3Y205bldk?=
- =?utf-8?B?NW5nRWZRZStEQlU5Qkwxblc3Q3JzOFVjUEF0V2NpRXFTRTRrdmR4NUpGRFdi?=
- =?utf-8?B?ajVHTm5saGZEQTlweE1TZXdYb1k3QkI3cy93TFRrL3VHdTFya1c4RkR0VTF0?=
- =?utf-8?B?SXpML1FkVUZBTG9vcDRTRHVFRjdYUXNvSEtwcUNCYnI1YUIwS0EveTJrbmpI?=
- =?utf-8?B?djQwamI1WTRhbG11K0ZTWUhJOVNKZWR5UlRxUVhSeXl0UWZZM0p3a2NEY3lG?=
- =?utf-8?B?Y3puYmticit0OXRvejR1dkd0MDZMejd4ZGYvZUNxdXRTdlhwZWh6R1FQcG0v?=
- =?utf-8?B?STRsd0grVHNDWjMwbi8wYUxmSEhCSzB0ZFpicVZxSk0zY1VHcDlEVWYvWVdx?=
- =?utf-8?B?L0VEcGZOVTZPenBjV1cwV0hIOU1BUDUyL1hrdTFtOC9zOGtHdlgvOUo4Y1Nu?=
- =?utf-8?B?VVI3anVWT0tkMmthcERyUXlQdnJTTHgwUDM1YzI5bFpCWC9XQUJjUGJHalVy?=
- =?utf-8?B?bC9BdWZIZjJhdmtWSjk2UTlhMm1UaVViWnh5UWM0VVFZZ2ppZ1dzSURtejZZ?=
- =?utf-8?B?azBpZDJyOU5WNWQ1cElmdzFGMDhPN29FWTBuS0U0L1Q3NDUwL2tsMGRHSWhq?=
- =?utf-8?B?OGdKclhnalA1QnhJVXZQKzliL1AwY0VNOUxUdXV1Z1p2NVArSUFsN0xHdytU?=
- =?utf-8?B?SzdieDVjcDA2eGVJNjJ1RXRwMkRnbU14STVTNVRVYmhkckVsMnFSU1BPK2Uz?=
- =?utf-8?B?ZjJCRnNLNzNlYVpYT2tBZUNGVHhad2s0RWxsZjVMVG5QeEJSNHlRVUk2N294?=
- =?utf-8?B?Y1dVZTVmNkJTZzJvajg4YkhsVzJWekpPNmJZV0dkRnFoRlR4VGV1bTFRTzlO?=
- =?utf-8?B?NzgrdEVORlBYQWZCaUVJY1ZxS1FXMy9vbkNVSWZ3ZkhDRzNTNlBTNnBkaXQ5?=
- =?utf-8?B?dHNMSUNEcS9WaE5RSXdrdEVDd09qc0J3SUkwd3k5dXRtSTNCbG9ObzdxdTUr?=
- =?utf-8?B?SzVENXlUdHVZTUk5VEo0Y0ZKRlhjVEVRaVR3UzA4RXZpTUkyQkFnTFB0Q0Vj?=
- =?utf-8?B?N2l5U3ZrdnRqZXlQaG5HQURLMU1nYUUzNWtvbDJjQXVvVFNyUkExT3F6dGY3?=
- =?utf-8?B?NzQ0R1E3ZG1LenZldzA0UTdzTEJ5dlRPZGNSYXNzTmhHWDd6YzhlVVlNRXhx?=
- =?utf-8?B?OFVQNGdNMnBvSXh2RFFjN0YrQ3FCaG91U2VudWpMbFpFZDU4dEdCazdKOHYv?=
- =?utf-8?B?Rkl1cDNmc0JZZjEreWNTTm9yZWZxUU1Qa01yMEc0am9XNnVKZXdDREtRMVhE?=
- =?utf-8?B?UDJuZ3dBdXBiWEgvaFp3bnIyMWcxK3pzeG1sLzErdlRISHhYaDQ3TW5VUEcy?=
- =?utf-8?B?MlhJcGFDSWl3cDFnTE9GcUFoTFhCN2RZZmUvMzB2NFFkSDhsK25Ucm1EL0F1?=
- =?utf-8?B?RDVRVHNSeGJqbVNjQ21TSGh3dWRRQlI4UHFqbTgzS092cjljVVo1VEdYd2Jt?=
- =?utf-8?B?SmQzNkJSSmh0Vk9oaWU5L3dQaWJRSnZuS3lZRGhOOGV3NW5pYjdJQmRWUXZV?=
- =?utf-8?B?QlhjMFhtOU03ek1nZXE3NEFRT1BBMnk0ZWhxVGFTb3kwOUZRNERYQWJRU2dD?=
- =?utf-8?B?SEZva2tOaENLYWlRdkVJOFNtcEVYOHEwK05YWkx1UzRNVG02S0FvelIrYUVj?=
- =?utf-8?B?RWJtSU8vb0YwMkNLVUFBQWJlWFBRekJDS1lqRWtGQnZKejl3NWZhb2p2Skc3?=
- =?utf-8?B?ZGFaUzNReUQ1YTZwNHBQNEkwN3pqZWRqck9uTWpVYnRwQkRidERlbUdEdFlk?=
- =?utf-8?Q?ndSBV+R5chDPasXZTCMsa6hkHTeayk=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2025 15:19:42.5679 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 74f8be56-8b81-4ed8-4357-08de33488cd1
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD4.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF25BED9404
+ <c3416918-965e-44c9-b202-ab9703806ad2@ti.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="fo4mt7hLQ+p9LV4l"
+Content-Disposition: inline
+In-Reply-To: <c3416918-965e-44c9-b202-ab9703806ad2@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,43 +102,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
 
-On 12/4/2025 8:18 PM, Tom Rini wrote:
-> On Thu, Dec 04, 2025 at 07:54:51PM +0530, Udit Kumar wrote:
->> J742S2 SOC is derivative of J784S4, most of build infra of j784s4 is used
->> to build u-boot for J742S2 EVM board.
->>
->> Add guide users on how to build for that board.
->>
->> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
->> ---
->>   doc/board/ti/j784s4_evm.rst | 24 ++++++++++++++++++++++--
->>   1 file changed, 22 insertions(+), 2 deletions(-)
->>
->> diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
->> index 22442874110..4162a42c075 100644
->> --- a/doc/board/ti/j784s4_evm.rst
->> +++ b/doc/board/ti/j784s4_evm.rst
->> @@ -1,8 +1,8 @@
->>   .. SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
->>   .. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
->>   
->> -J784S4 and AM69 Platforms
->> -=========================
->> +J742S2, J784S4 and AM69 Platforms
->> +==================================
-> This is too many '=' and now CI doc building will fail with a warning.
-> Please build doc changes with:
->            make htmldocs KDOC_WERROR=1
+--fo4mt7hLQ+p9LV4l
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Dec 04, 2025 at 08:49:36PM +0530, Kumar, Udit wrote:
+> Hi Tom
+>=20
+> On 12/4/2025 8:18 PM, Tom Rini wrote:
+> > On Thu, Dec 04, 2025 at 07:54:51PM +0530, Udit Kumar wrote:
+> > > J742S2 SOC is derivative of J784S4, most of build infra of j784s4 is =
+used
+> > > to build u-boot for J742S2 EVM board.
+> > >=20
+> > > Add guide users on how to build for that board.
+> > >=20
+> > > Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> > > ---
+> > >   doc/board/ti/j784s4_evm.rst | 24 ++++++++++++++++++++++--
+> > >   1 file changed, 22 insertions(+), 2 deletions(-)
+> > >=20
+> > > diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
+> > > index 22442874110..4162a42c075 100644
+> > > --- a/doc/board/ti/j784s4_evm.rst
+> > > +++ b/doc/board/ti/j784s4_evm.rst
+> > > @@ -1,8 +1,8 @@
+> > >   .. SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+> > >   .. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
+> > > -J784S4 and AM69 Platforms
+> > > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> > > +J742S2, J784S4 and AM69 Platforms
+> > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > This is too many '=3D' and now CI doc building will fail with a warning.
+> > Please build doc changes with:
+> >            make htmldocs KDOC_WERROR=3D1
+>=20
+>=20
+> When I checked locally, I haven't encountered any error
+>=20
+> https://gist.github.com/uditkumarti/94780fe8ec2bb4b55c46b1ab4afc7e7d
 
-When I checked locally, I haven't encountered any error
+But it also didn't rebuild the file in that gist. It's not like -Werror
+in that it fails immediately, it just prints a warning while building
+and then (only that) make instance will have a non-zero exit status.
 
-https://gist.github.com/uditkumarti/94780fe8ec2bb4b55c46b1ab4afc7e7d
+> Anyway, I will send v2 by removing one extra =3D
 
-Anyway, I will send v2 by removing one extra =
+Thanks.
 
+--=20
+Tom
 
-> To ensure CI passes. Everything else looks fine, thanks.
->
+--fo4mt7hLQ+p9LV4l
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTGpEwAKCRAr4qD1Cr/k
+CjKJAP45g3CWs02z6cpUFDZpSJ4j/u+xdw3eWqFwjfkHB2LCcQEAzmXU+FTlRpf6
+rykO41oZZG4NWIxx9TEDSeixYtr7iw8=
+=eYTn
+-----END PGP SIGNATURE-----
+
+--fo4mt7hLQ+p9LV4l--
