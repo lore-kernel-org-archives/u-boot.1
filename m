@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A30BD1F9DA
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 12:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75DD3D1F9DC
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 12:53:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDA698405E;
-	Thu,  4 Dec 2025 13:52:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3547F84067;
+	Thu,  4 Dec 2025 13:52:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3eEIQeh2";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="FEDRJPGz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CE4D83C51; Thu,  4 Dec 2025 09:31:48 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 7789483F5D; Thu,  4 Dec 2025 09:31:50 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1F3483C51
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 09:31:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 343C183CD2
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 09:31:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-64166a57f3bso947163a12.1
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 00:31:45 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b7277324054so94265166b.0
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 00:31:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764837105; x=1765441905;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764837103; x=1765441903;
  darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=VPjB7/zflWF74AbjXj6JOlfuKs3l9zOOnFTMRyELxxM=;
- b=3eEIQeh2IUx/2bB3hakNJtNBFZHpDT0CV20AsXGHDLJC0pmfTiIWust46vcQQvTJuA
- WCcoXoT1zqXPm6pZh9J1rTm5zXVmoNoRiyyV9IsZfVv6FYLW0zyv/77lZLZ7ONOIckRH
- CWSKW9Zz4X5SA9brn+1/IhUNMQD4YHPNkHyOs2D2oBmRa58eZvG5yYtsmzFVVuWs7Unr
- 45Mx2Gq/mKTKiFhHwJaDOYpLhmLaGTiNYzrZono0P1ml0EwFp4aGBUja1xAcz1uUViLI
- FoLbIaU7mUYgUGHlGFxXE3lV29daabPbfIaLE/sPr+h4n3IWTnhhqPJgo+F6KIuEp6vi
- 0cCA==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Sn23d0tb+U4fvPuy/HzukAM0HwcavNEYy95jJzVnZS8=;
+ b=FEDRJPGzED57KNq1ziil5S+eBQNFbCo7IgXJdnRnsTrhD730fXvfG+WKplsg6gU27K
+ MpxywJp2bEdZ5zxCM3ScPPh1YDzHerYbrUXgG/T/72mGee+Xffy/f7UjgrHpOAvx4unQ
+ Ca3n0W0qm/IbeeW3PbIZal6ndjj3CwWjrmbCEIMJoXckE1mN+XefNiF1QYncr6iTRI5v
+ TncumiO47u5fXU0HULRVowA/2wHYhBGCi8UWfbjaRnhQ5smhp4VczIVUZNvj352EZ04r
+ HzGQJwldiyJN8Oap6e7x3NlyO0HclVTZX1sQYuWfcFSOhzpazaxxMRKQqd9WEHy7kPIU
+ VBww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764837105; x=1765441905;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=VPjB7/zflWF74AbjXj6JOlfuKs3l9zOOnFTMRyELxxM=;
- b=PlTU2xjYEAQp1oFyTyqtR06OqtFM/BIl2c7eY0U9fDNewr8ndc+tcUUE92SSs0yXgY
- +k+3+1Ey4535KQd9PqrE1pCc7qY+WitFKuhlq3bEp8n7JJaVHJojeBgQg+O2M+5zV9Ai
- snLuLn8Q3Npjw9skoXRu1dmRgyYBDw1GNkVJCkklhJAt6S5ju5tLHt8oTLb5Gq251Wgc
- MdT/Oh8+ZzQusWdL8icwMDZB19yvWnyzFBM/pAQbBKkii1YFddVqvbyhrusliq+GqioT
- UUspRqYgfQul33rjVh2pI0AF7nCBwrvnktL1QLnhh1FPwZEXxKthTkUQoO4M8/1HpELV
- vxcQ==
-X-Gm-Message-State: AOJu0YyUAOkwUf3rYiISrF4lXnvdzP8Wo+9kCT/4rmMML+bqUCaaGv/Q
- KpTrQlXPlq0o2r21lk8UDJky+B5O5fSno4hZMZHf9aO5RjqNVTXb6wCQtdErowFSpRE=
-X-Gm-Gg: ASbGncu4A0se+jIHDS5NVeaiyI0BmRuGj4AgRmM6kNCP2LunQyY68c49T2NO6WPhrZJ
- NWlr2YJ5ZIFFZKqmcqmrEOw5RvF9vRV4iwXzaLC2gZ5IsnPu0dwkC+JYobLONX+EwY8r3ovMfX2
- 3mRFf2QDZhf0r0qRvko8+X8mrw/R5RGXdzZMIYntuRoaFaDtC0XgLf3+/1BkDHLda8I2kYBwHiw
- 5Ae/N8o7zjOqKpj6lq9nXBYQQw2YYiSq9lHFikbZzDcO9XDBv9X5izYVYBb0vnP9pIPG46jeNAg
- u0G0w9OYjtQMy/EmA9ti5bfnQqS98+zraT3f8PaNFcXXJFYpt3neLqUVL/WVHVpv+RGs2nexJjc
- +yd7wCXawqCKoau37ZgSGr7btBrpt7J7AwDusBST6/9c1v//xRWbV+EWJtQ3xdQQC3c+AL80BaH
- KRGdzOxZQ=
-X-Google-Smtp-Source: AGHT+IHOrd9mv3qm90UboUu4OJzrmey2zwqrBZOBtSUYvu0eiWpAl0EbZJqi183LC/i9TO6+XFE7vw==
-X-Received: by 2002:a17:907:6e90:b0:b6f:9db1:f831 with SMTP id
- a640c23a62f3a-b79ec456260mr240666966b.23.1764837105305; 
- Thu, 04 Dec 2025 00:31:45 -0800 (PST)
+ d=1e100.net; s=20230601; t=1764837103; x=1765441903;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Sn23d0tb+U4fvPuy/HzukAM0HwcavNEYy95jJzVnZS8=;
+ b=gmYR+LkfcZRDo5/Pc5UXZf7bMwhM8l9dDnEj/FvrEblslzlPkIRW0LULvO16Cv8DMk
+ nEMr/iIZUS2zB8/FU9LmNjji4jnp8MYb5JaacO1bhQ3zrvoVOYGLk9/X6F5jHADjO339
+ ibK0c9HSXgxe3ojNeF5FSHuTh9+WhjnJl9Q47qyRKoupsI6v41Ns3VkwtxE9oPDzUf7q
+ bNkeSpLihpaFiOppFQCuIz2hI4iab62/IMNpA+egsXPb38VGS5eI19tHDZmRPE1QNaSI
+ /5wHJaMyNNQUMhfOhWoSCAl9d4ueVzvQb8SdGHVw78lopN6KlgejLdLj6zTLD0inIVTb
+ aH2A==
+X-Gm-Message-State: AOJu0YxjK/miTSQflE3I40/xYjYRfpYari8El4BNOaC6UemiCtIhR25T
+ fDtFJR8srjmJVN9qC/nvkTsy0CL940govgE8bQ2R3LICg/xfokrBmn6cO497MM7bias=
+X-Gm-Gg: ASbGncs4W7U8QcPGGe42eQmz/0EkqmHLng971BAXcZKb5NFMNrKRUpihApnmDS/5qQL
+ lEF1113OhmIeU3n71QjJUlTDfqzeMWz3bi+QIQe7VEjhMCzmwLdxmZMb0ZZN601NtO9QQVzLOLG
+ 84PmUyAg0rjLOF8OALG5ku8kff4h2REHVE87n9/k0SBkF3O/zNNuA18OCvA+I5LYE3Qtdtkc4zH
+ GrHdSd3GIkFcY3pyM9g4EthOaEIkycNlb5Dgnhvt0FcRFVOxNuuoIsZK5mp9Nm4mj8/H9HHSVrw
+ JGRBUBlA2VcAFPuz9fv6ei3v3L3kV92y2BP+gP7uGl3Nj6YZDl+OKhC6t0D3mUYM9m8WZMt3C+D
+ CK/l0LQFSyOnkHAO4reBk6tW1QXxHSyUi6S+lNt2TbRrsuveWmTdPGM7k8nM2pVBzOscElChPNx
+ Oi4irwTxw=
+X-Google-Smtp-Source: AGHT+IEd9EBqnWbFvNCE+cPX3efkaJU2/Y/aYE5wTYx9knpylaqjBRxpoKQK4IjQoXIW23LhIelIoQ==
+X-Received: by 2002:a17:906:dc8d:b0:b65:b9fb:e4a7 with SMTP id
+ a640c23a62f3a-b79dbe5b366mr467987466b.9.1764837102491; 
+ Thu, 04 Dec 2025 00:31:42 -0800 (PST)
 Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b79f4975c56sm67466366b.33.2025.12.04.00.31.44
+ a640c23a62f3a-b79f4498d2fsm73404866b.21.2025.12.04.00.31.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 00:31:45 -0800 (PST)
+ Thu, 04 Dec 2025 00:31:42 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Thu, 04 Dec 2025 09:31:15 +0100
-Subject: [PATCH v3 2/4] panel: Lightweight support of get_modes()
+Subject: [PATCH v3 0/4] video: simple_panel support for am335x evm panel
+Date: Thu, 04 Dec 2025 09:31:13 +0100
+Message-Id: <20251204-topic-am33-evm-lcd-v2026-01-v3-0-ca74853bd5f0@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251204-topic-am33-evm-lcd-v2026-01-v3-2-ca74853bd5f0@baylibre.com>
-References: <20251204-topic-am33-evm-lcd-v2026-01-v3-0-ca74853bd5f0@baylibre.com>
-In-Reply-To: <20251204-topic-am33-evm-lcd-v2026-01-v3-0-ca74853bd5f0@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIANFGMWkC/43NTQrCMBCG4auUrB1JJmkrrryHuEiTiQ30j6QES
+ +ndTbsRXIjL9xt4ZmWRgqfIrsXKAiUf/TjkkKeCmVYPTwJvczPkWAqBF5jHyRvQvZRAqYfOWEj
+ 5WAEXwLlytdJojDMsC1Mg51+Hfn/kbn2cx7Acz5LY1//clGkgV5dWScmttLdGL51vAp3N2LOdT
+ vjhkMvfHGYOKzROOamoKb+4bdvehRKVxBgBAAA=
+X-Change-ID: 20251128-topic-am33-evm-lcd-v2026-01-004f74a2ccfc
 To: u-boot@lists.denx.de
 Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
  Tom Rini <trini@konsulko.com>, Yannick Fertre <yannick.fertre@foss.st.com>, 
@@ -87,12 +90,12 @@ Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
  Sukrut Bellary <sbellary@baylibre.com>, Fabio Estevam <festevam@gmail.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5730; i=msp@baylibre.com;
- h=from:subject:message-id; bh=l9yXpomwy6iu+FSkIB1gss4VS4x92gFZ/7Ah5pmSkAQ=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkxDt/vNBfZt3lPNp822ydMW6O3d56r9ak7xRvvds8oWT
- /kvHGbTUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABNpaWRkuPDk0t4ttZ5fr/xf
- sfi4kqGS3vlHWYbh8YE3pyw9ZRYkdJzhn1mnVr+HXOv7nCvaWQxLxA6oFRZLVNbv1Z8ssZzHcS4
- TKwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1735; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=fy7iCorLPZeCOceHR+PL6U1ltu1vc1bfqZi2qUqKM5k=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkxDtysHlbckPFW8sDYkY9unW09dp384wfYjwE2RwSJ+5
+ /rQNbJ/O0pZGMS4GGTFFFk6E0PT/svvPJa8aNlmmDmsTCBDGLg4BWAirxMYGW49UplauD5mEqtl
+ TXiv9zKR2D/rlzZ9+O5h7MW2qMqnRpKRYXvtuoSUzbGubOG1IrKaX7s7lq0zFPn9Ozy6h8PyT7Y
+ ABwA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Thu, 04 Dec 2025 13:52:18 +0100
@@ -112,168 +115,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Linux uses get_modes() to fetch all available panel modes from the
-driver. This is also used to fetch the modes from Linux's simple panel
-implementation where a list of drm_display_mode structs is used to
-define the different possible panels.
+Hi,
 
-To make our work easier, create a compatible way of fetching and
-defining these modes in u-boot. get_modes() fetches the available modes
-from the panel driver. The get_display_timing() call maps the
-drm_display_mode properties to the display_timing struct. This call now
-uses whatever panel operation is available, get_display_timing() or
-get_modes().
+this series adds the capability to define hardcoded panel settings to
+the simple_panel driver similar to the Linux Kernel and adds the panel
+used on am335x evm. panel-uclass.c is extended to support get_modes()
+for panels and drm_display_mode conversion. In a second step the tilcdc
+is extended to support OF graph to be able to connect to the simple
+panel devicetree node.
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+Best
+Markus
+
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- drivers/video/panel-uclass.c | 38 ++++++++++++++++++++++--
- include/panel.h              | 69 ++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 104 insertions(+), 3 deletions(-)
+Changes in v3:
+- Fix typo in first patch timining -> timing
+- Link to v2: https://lore.kernel.org/r/20251203-topic-am33-evm-lcd-v2026-01-v2-0-262cf4f34eb5@baylibre.com
 
-diff --git a/drivers/video/panel-uclass.c b/drivers/video/panel-uclass.c
-index 52a3466dc8c1203731dfcb62ebf4e63ed390bbb4..82e8339dde1bcd2cb8d93c7f7d75a29790089fb3 100644
---- a/drivers/video/panel-uclass.c
-+++ b/drivers/video/panel-uclass.c
-@@ -37,15 +37,47 @@ int panel_set_backlight(struct udevice *dev, int percent)
- 	return ops->set_backlight(dev, percent);
- }
- 
-+static void drm_mode_to_display_timing(const struct drm_display_mode *mode,
-+				       struct display_timing *timing)
-+{
-+	timing->pixelclock.typ = mode->clock * 1000; /* kHz to Hz */
-+	timing->hactive.typ = mode->hdisplay;
-+	timing->hfront_porch.typ = mode->hsync_start - mode->hdisplay;
-+	timing->hsync_len.typ = mode->hsync_end - mode->hsync_start;
-+	timing->hback_porch.typ = mode->htotal - mode->hsync_end;
-+	timing->vactive.typ = mode->vdisplay;
-+	timing->vfront_porch.typ = mode->vsync_start - mode->vdisplay;
-+	timing->vsync_len.typ = mode->vsync_end - mode->vsync_start;
-+	timing->vback_porch.typ = mode->vtotal - mode->vsync_end;
-+
-+	/* DRM_MODE_FLAG_* defines are already mapped to u-boot DISPLAY_FLAGS */
-+	timing->flags = mode->flags;
-+}
-+
- int panel_get_display_timing(struct udevice *dev,
- 			     struct display_timing *timings)
- {
- 	struct panel_ops *ops = panel_get_ops(dev);
-+	const struct drm_display_mode *modes;
-+	int ret = -ENOSYS;
- 
--	if (!ops->get_display_timing)
--		return -ENOSYS;
-+	if (ops->get_display_timing) {
-+		ret = ops->get_display_timing(dev, timings);
-+		if (ret != -ENODEV)
-+			return ret;
-+	}
- 
--	return ops->get_display_timing(dev, timings);
-+	if (!ops->get_modes)
-+		return ret;
-+
-+	ret = ops->get_modes(dev, &modes);
-+	if (ret < 0)
-+		return ret;
-+	else if (ret == 0)
-+		return -ENODEV;
-+
-+	drm_mode_to_display_timing(&modes[0], timings);
-+	return 0;
- }
- 
- UCLASS_DRIVER(panel) = {
-diff --git a/include/panel.h b/include/panel.h
-index e2764d72c57dcc4ae11d5f1553f1bfcd98996138..8d46fb26a07c2b1886a38f922eb6a90c3762ca38 100644
---- a/include/panel.h
-+++ b/include/panel.h
-@@ -7,6 +7,62 @@
- #ifndef _PANEL_H
- #define _PANEL_H
- 
-+#include <video.h>
-+#include <fdtdec.h>
-+
-+/* DRM mode flags mapped to U-Boot DISPLAY_FLAGS for direct compatibility */
-+#define DRM_MODE_FLAG_NHSYNC		DISPLAY_FLAGS_HSYNC_LOW
-+#define DRM_MODE_FLAG_PHSYNC		DISPLAY_FLAGS_HSYNC_HIGH
-+#define DRM_MODE_FLAG_NVSYNC		DISPLAY_FLAGS_VSYNC_LOW
-+#define DRM_MODE_FLAG_PVSYNC		DISPLAY_FLAGS_VSYNC_HIGH
-+#define DRM_MODE_FLAG_INTERLACE		DISPLAY_FLAGS_INTERLACED
-+#define DRM_MODE_FLAG_DBLSCAN		DISPLAY_FLAGS_DOUBLESCAN
-+#define DRM_MODE_FLAG_DBLCLK		DISPLAY_FLAGS_DOUBLECLK
-+
-+/**
-+ * struct drm_display_mode - DRM kernel-internal display mode structure
-+ *			     simplified for U-Boot
-+ * @hdisplay: horizontal display size
-+ * @hsync_start: horizontal sync start
-+ * @hsync_end: horizontal sync end
-+ * @htotal: horizontal total size
-+ * @vdisplay: vertical display size
-+ * @vsync_start: vertical sync start
-+ * @vsync_end: vertical sync end
-+ * @vtotal: vertical total size
-+ *
-+ * The horizontal and vertical timings are defined per the following diagram.
-+ *
-+ * ::
-+ *
-+ *
-+ *               Active                 Front           Sync           Back
-+ *              Region                 Porch                          Porch
-+ *     <-----------------------><----------------><-------------><-------------->
-+ *       //////////////////////|
-+ *      ////////////////////// |
-+ *     //////////////////////  |..................               ................
-+ *                                                _______________
-+ *     <----- [hv]display ----->
-+ *     <------------- [hv]sync_start ------------>
-+ *     <--------------------- [hv]sync_end --------------------->
-+ *     <-------------------------------- [hv]total ----------------------------->*
-+ */
-+struct drm_display_mode {
-+	unsigned int clock; /* in kHz */
-+
-+	u16 hdisplay;
-+	u16 hsync_start;
-+	u16 hsync_end;
-+	u16 htotal;
-+	u16 vdisplay;
-+	u16 vsync_start;
-+	u16 vsync_end;
-+	u16 vtotal;
-+
-+	u32 flags;
-+};
-+
- struct panel_ops {
- 	/**
- 	 * enable_backlight() - Enable the panel backlight
-@@ -34,6 +90,19 @@ struct panel_ops {
- 	 */
- 	int (*get_display_timing)(struct udevice *dev,
- 				  struct display_timing *timing);
-+
-+	/**
-+	 * get_modes() - Get display modes from panel
-+	 *
-+	 * Returns an array of display modes supported by the panel.
-+	 * Similar to Linux's drm_panel_funcs->get_modes().
-+	 *
-+	 * @dev:	Panel device
-+	 * @modes:	Pointer to an array of modes
-+	 * @return number of modes if OK, -ve on error
-+	 */
-+	int (*get_modes)(struct udevice *dev,
-+			 const struct drm_display_mode **modes);
- };
- 
- #define panel_get_ops(dev)	((struct panel_ops *)(dev)->driver->ops)
+Changes in v2:
+- Add support for struct drm_display_mode in u-boot and in particular
+  the simple panel driver to make copying definitions from Linux easier
+  as suggested by Fabio
+- Link to v1: https://lore.kernel.org/r/20251128-topic-am33-evm-lcd-v2026-01-v1-0-ef75d4330d3d@baylibre.com
 
+---
+Markus Schneider-Pargmann (TI.com) (4):
+      panel: Add missing comment for the timing argument
+      panel: Lightweight support of get_modes()
+      video: simple_panel: Add tfc_s9700rtwv43tr_01b
+      video: ti: am335x: Support OF graph
+
+ drivers/video/panel-uclass.c | 38 +++++++++++++++++++++--
+ drivers/video/simple_panel.c | 62 ++++++++++++++++++++++++++++++++++----
+ drivers/video/ti/tilcdc.c    | 46 +++++++++++++++++++++++-----
+ include/panel.h              | 72 +++++++++++++++++++++++++++++++++++++++++++-
+ 4 files changed, 200 insertions(+), 18 deletions(-)
+---
+base-commit: c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
+change-id: 20251128-topic-am33-evm-lcd-v2026-01-004f74a2ccfc
+
+Best regards,
 -- 
-2.51.0
+Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 
