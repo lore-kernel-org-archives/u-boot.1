@@ -4,166 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6BFDD20682
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 13:13:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6367DD20694
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 13:40:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 491B4801CF;
-	Thu,  4 Dec 2025 14:13:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 700C183A94;
+	Thu,  4 Dec 2025 14:40:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="KPnivb5I";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U8QYkvha";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71F958036B; Thu,  4 Dec 2025 14:13:38 +0100 (CET)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 32AF383A9F; Thu,  4 Dec 2025 14:40:54 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6336680077
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 14:13:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id E84C583A84
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 14:40:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pPypF3VDMndxTPG0+fdbIwcMamhQwA43Rnqy7vd5owl6CLI8x8QtYKXaha4/WtY79xZ4J7Z7ciAMcJkFDgGZVAWSHfoCsii9GMLmA37S2ER5rf9t3b/OVV1sqMXqqWlvpQ+sYFZPTMnyZH/cFmJX1VdRlQQJliNKSYAJKoaghIuyCeC30HnCCnotLRsTdKrN3TbiXCDYQSh1f/3bwqAkaZ2EaS9bi/lk8nmxKHCVn4XQ0COwaEJ/43O7fl/SdqWvzaXQiVfdm3h3PfcpRU95gfDJLS2AWFqSW0aNz69wpAK1EdHZ2+mBOrLgbbE39gKbbxG/zCQZRLqFuqypuDaPgQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1U2oPWWx4AzY8wNQduzv2KG9uH6pzG2nxODaZkvlpyM=;
- b=gAo+GCGKIe+D+ei1oWI2hL1wyhVeuXDpv5/O1weDxx3oTfXj4hOttrlqRhKAe3qwiDBMcq8x6gTAJf+CmGSi/YnXUB4S4L4wTFZQUD/u6FuhcHM3LwZw0P+59P7IjFcuN5zW1JKXqYiA8/ruWc2s8GtU+MW49us0kA2QhKdAc5tVFJ7ZfujyeLdqHD68BDSSbOfMV5/FiBw8HG01yTCmX2SwYAKnUIjfG33oN8oMcDWfknZ1cWWnzVVp3Cf/xEjayaQ5HVxrS8CBQjHqNAYdd99CQ2fcOqsti5dez4SIZ6TJ/YaTyWJWC15Qu24Yfl5mwV/KJb45QUb0nWR10WZxCQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1U2oPWWx4AzY8wNQduzv2KG9uH6pzG2nxODaZkvlpyM=;
- b=KPnivb5IPHUTP2pk4D7eyAUtWS/Vo8FxSXvXFtYXV6/gvvstQz/niMZGgN73GbX3pSXwj9fAmjYl8p1paRLPnRN78V0kMgSMf3svvIwHmXQe+KQ9bw4ug6M9t+mK7t5RxtBHNpESSVcU6UUudbt8nSPOHkvwmf4AOXoWkqzKDhc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by VI1PR04MB7168.eurprd04.prod.outlook.com (2603:10a6:800:129::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Thu, 4 Dec
- 2025 13:13:32 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::1033:5a9a:dc18:dad]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::1033:5a9a:dc18:dad%4]) with mapi id 15.20.9388.009; Thu, 4 Dec 2025
- 13:13:31 +0000
-Message-ID: <68fd4327-58b6-49d5-9f37-594e16209708@cherry.de>
-Date: Thu, 4 Dec 2025 14:12:47 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/23] board: st: Drop old LED code from stm32f429-disco
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Kamil Lulko <kamil.lulko@gmail.com>,
- Tom Rini <trini@konsulko.com>
-References: <20251114162417.4054006-1-patrice.chotard@foss.st.com>
- <20251114162417.4054006-2-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251114162417.4054006-2-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA0P291CA0019.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::21) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-3ec5df386acso666607fac.1
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 05:40:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764855645; x=1765460445; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=f4cDoF3B1tt6xQYZhXd4h7JptJIf85pCqOoBgs+2I6Y=;
+ b=U8QYkvhaE327xBa+oxnQSjZy3qbq2C/ZAPf8o/EO8LFP8PRQF6h1ue6cU2CVg74dNB
+ H8deirHsihpkcr/09SGrsPWlTNz9imkM0y9JMze8NaEYnL/9b0oh40tFIv57K6TRhY2g
+ F6HRi+M56dwoRRm20iymhOoBZvrdv8i2YChI0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764855645; x=1765460445;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=f4cDoF3B1tt6xQYZhXd4h7JptJIf85pCqOoBgs+2I6Y=;
+ b=gybMvHIdjO04nNM5SbhV8K+zFcuSCLJiiYl/d+Ri6qUP5p1w+lJVpXeMyI2SovHJSf
+ 8GtCUgHJEZbX683fHrTO5F7tFO6hWEpBUZ4DiX2U0VlyJbuFCZ8+mW47T8IPK3ee1Qz/
+ 127b0D+MtQAIR5lFlsglzCrqEaQ8/u64WjpdZ6du/uWAAPoByB+V2PBEC23FL7shvN3G
+ /I17wJRdo7YNIJT/udm7yD3UV4tOpCxvQRFNy3iGHSrQxW+pW5NGGRmtu5qx2bGU9cS6
+ JNVUo5CGFDiYxbDzQE5mIRIlovVuKhDqcNrjQBZD2KnD7geHR5mmxa6G0ycZHp3Xi+Ip
+ 7F8g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUuyms3aV27Jh9+/IaXcNglJZz8sB3rpRyVILcMXUjNjfCXTzynEZTbXYkiww2G3Caiz5PNyLs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzJe1ivv5TwUBzVjlDkfkELfaj3if4IUVOa/EoQcqEIcN6txl4t
+ MI2FPdJKFhoRYG6yLqGjd8MNC9ehw9yaKIQvBwZYOHKy4IZqtXjfq4AM2F9yxwPgeBY=
+X-Gm-Gg: ASbGnctTlZ4l68VB8xy1T9FX1Sf36+9kKGybLUbCYiNGo7bydD1DAHgdbbB7UAIU3vW
+ 3Zmvn0/YXu+wfpbi5sWYa0a299OWhviFGJ6dhcLOzfc/Uvv4lPQSkgaE/jnDH1UXKQCGkO2lgSq
+ 57DWfBA+w4HJBJmqSiTAJtNw/MaHBr3KWdim3bt7uhRewALJuKW9v4OrHN2H9Si+elj79u7cq6K
+ F8+bZTP0Ww+z5tZ2SGzsslOOU68FMWLAuOWVTFnOKpzS7JLdMh8PysamKcAf6V1gQJeVXOgIgh2
+ d64r9gZmJkLRVVWl4dbU0s9tHR3g+QfNwPUzctBMZQzTTXqB3Y81zhG7M7HCfze9h0hiQBPSivu
+ Big/KupAoHdOuExwJmLK7QKQFVSC0uPCaxA+REBX3GQBwQR0uSDExMQ/YXMk6HdUf2WjmQkRr2W
+ aXoKGwbYmHw6VdXJipLW3ZviZVgm24yAH1wkTQhb0j2yHSIgWe/w==
+X-Google-Smtp-Source: AGHT+IFYrIWWnRMDxocyRDdJhkRvbZ3L/E87RA7ftdqwiodMV9i5fXJrRDd1GuVBMnTJlJ256wzKYw==
+X-Received: by 2002:a05:6870:8886:b0:3e8:8e57:a7a4 with SMTP id
+ 586e51a60fabf-3f5067e6219mr1483134fac.55.1764855645490; 
+ Thu, 04 Dec 2025 05:40:45 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3f50a727d7csm1296464fac.0.2025.12.04.05.40.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Dec 2025 05:40:44 -0800 (PST)
+Date: Thu, 4 Dec 2025 07:40:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Kory Maincent <kory.maincent@bootlin.com>, Patryk <pbiel7@gmail.com>,
+ u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Greg Malysa <malysagreg@gmail.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ E Shattow <e@freeshell.de>, Raymond Mao <raymondmaoca@gmail.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Yao Zi <ziyao@disroot.org>,
+ Leonard Anderweit <l.anderweit@phytec.de>
+Subject: Re: [PATCH 0/6] Add support for fwumdata
+Message-ID: <20251204134040.GU303283@bill-the-cat>
+References: <20251202-feature_fwumdata-v1-0-d55154de4103@bootlin.com>
+ <20251203110108.1d93975d@kmaincent-XPS-13-7390>
+ <CAC_iWjJ0PFXABOkwPSSdjRuFSPUF79fVCWNRvU5s1PLCuV5ydQ@mail.gmail.com>
+ <CA+DkFDbecwtJkX-7wHzQjhVbi-tpjzZVzc7N3kvhr5OtKivgWA@mail.gmail.com>
+ <20251203155924.3dd3c5a0@kmaincent-XPS-13-7390>
+ <20251203151048.GP303283@bill-the-cat>
+ <CAC_iWjLbB=2FqXr5H5UdBNxyiEANUAJOdVO8Jh0BMVVbjQvocQ@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|VI1PR04MB7168:EE_
-X-MS-Office365-Filtering-Correlation-Id: a23c056a-ee2e-4011-ddad-08de3336ebcf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|376014|1800799024|366016|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UlRLUHluSWFLNmR0d0QyelBxYzNKVnU4ZHR6WUxoSGhnNUhwdE5wVlN2SjFS?=
- =?utf-8?B?a2luZ0xlbjVCYUJ4WElwWkpCMHp1a1dnVWFjN2ZxbnE0UUpkZ1M5OGsxaTNr?=
- =?utf-8?B?TEtvYUhtaVpOV1BVWTVka2lnNnZNa0Nlb3h1dDk3b3FPYzVHdDY0SmJ3WS9C?=
- =?utf-8?B?U2dzbmRibWRySGM5d3Fkb3hKTHhUWFo5UUkwRVdJbXF1WUN5SlRlQmdjMlVr?=
- =?utf-8?B?SHpJOUx2clljU3EwWUhMdmtVN3F3UDdxdkFZdVVKeGpqaUcvNjk4aytYblRQ?=
- =?utf-8?B?ZVE4Nkl6eW5jS0Uzb1V1QWdXT3h4Ti9DQ0pZMGRxMEs0N0I4aTVOUVlkUjQ2?=
- =?utf-8?B?SjYzREdPQXBBR0wzclEyVEJ3QVJxTU9uTjdHS3hWbFJRUWpiQ3RTOWQ2MnFB?=
- =?utf-8?B?bUFyNTdaM2RRN0psQUR1ZTBSNnBMYWVCQ1Z2VG5QN3dSNGFRY2ZJRW9zR2Fo?=
- =?utf-8?B?eFJjdzFIeEVKVGk1bm0zSDg4WUJJT0dyR1kzaDNMLy9WeWw1S2hOMGVvekha?=
- =?utf-8?B?NDA2emVXL05xWm9zUTRBSDZnaW1Zam1jYTB6RWJJZGZBT0ZjSjA2TjR0anBr?=
- =?utf-8?B?bHZ0NlRLZlRuL3ZaQ2IxanRkTTFIRG51Q3FPOTBIamJBUGFSSDMxUVh2c0NF?=
- =?utf-8?B?cmhHZFZBWk02L2NhcjJUeWJvQTNiN0pVSjJXenBoNkVCNHg2eEU3ZEVXS3FS?=
- =?utf-8?B?bGl1eVJmVldMekNIaVVXMlBPaHlIdUFIckwyRGx2VGZxVk1SWDlSay9ETUly?=
- =?utf-8?B?REt3Q095RU9HZ0lJeVkwODR5NXFwNXliMUpVS0gxemNhSHNqaDNIQzdCTkhz?=
- =?utf-8?B?a0owRUVuNUhmYTdIV2YvTVJzK1Vmd3liaXpSemxKME0xT0YxOGVlN3cwT2dJ?=
- =?utf-8?B?NFFScm9raU9BUVFBcjZWTVVHQ2s3aFE3K21XSjJpUXhYdThPeWZMZTlJSmtE?=
- =?utf-8?B?VXRZcU1vMmdwSHRWTzRUa0haeGZPTm91eEs3bjRoVzVub2hrcXJsSmkyM00w?=
- =?utf-8?B?aWJ0d01WQ0p4TGZ3RkVJODhBc3E0elVoQi9aSmtRaDJDRFc2Q1Q4QnNNWUkz?=
- =?utf-8?B?Nk9jeFV0Q0l5czJ1Ui90Q29ZS2lyam5TZkxJdFpTd0R1a2djUmlER09YM2NK?=
- =?utf-8?B?NGgzcUd5NUdwWnVFaTVRMFdBTTljbFA3NGxQUGlWYXZqVXNVcHFwKzF4UDVt?=
- =?utf-8?B?RkkvTCsyOTdjTDBqakJUa2o0c2RPRERIRGNUdDYzbjgyM3dhQmNBb09GUkg2?=
- =?utf-8?B?RmJkMHZTL29tQmRQa1F2Y1hqcnhWWExubmN1akZEa3ByL2ZrQm5MRWNta21J?=
- =?utf-8?B?WDVBSTRjazJhS1hHYkIyWmdod0JjY1dXUjZ0VHBNR1UyaUNtems3T0pjZjlj?=
- =?utf-8?B?MFZ5cHBBOVlQUVpWWnM4cldpVWVNdXdSVGtScFlYcHA2eERzWklFdE5jemFM?=
- =?utf-8?B?b2JhMytPR0IwU3JXOWNKYVRMY1FiSldRTytTR0dlbnkrU3gvYmdpaEZZWWZX?=
- =?utf-8?B?ZEl6R1QyNy9ubm1ia2xpK0dpRHlWZTMzcnNDb1NxVUFhNE9EMXlCbnFzQXdE?=
- =?utf-8?B?REdmbmN3MjZOTXQzNXB2WXk4ZkRqOWpGT2xFWkh1ZERJaFVXR0x5a0JHZ0pB?=
- =?utf-8?B?MW95bFZKUHh6cU5ORTQzTkdlRHNzZTBYSjdQQ1RaOU9oUXhHbGRTclEyVkpp?=
- =?utf-8?B?QXEwcVdPMmxvUjEwUER6VGErekgvSHp5eEhpUy9mRHVnRFJmSFRBQzZpNC9J?=
- =?utf-8?B?SU1qVHlLYkxBZmZSVTFBdUxMaG9EdkZpcUxzVUVmcWhqbDJ3eWlkK3R2NWpr?=
- =?utf-8?B?WE5WVVYrYlltdnpJL2ZVTWtmckVTVnl0djNkS1B4aS9MajNIOTRiMDBQemxy?=
- =?utf-8?B?dnFXZ2ppVkxqMUJWSlpRS3B5ekdscURjMVBTT2dRZFNRcHhyZzNEd04xbWh3?=
- =?utf-8?Q?A0Vd+9czt20hVY4ShlYVdA6IfwsnPcvL?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(376014)(1800799024)(366016)(7053199007); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dTBqcFZncEFVNHA1b1VrNEU3alpHMlJZRjRacmIrN2xoVUVVakdrc2lOTCtU?=
- =?utf-8?B?Y0lIZmdmVUF0N2ZTMkhCTjJRa09INTQ2T3JrSDVTamdNeCtUSFd4Qi9aU0Fj?=
- =?utf-8?B?WXRvZzkyTVM0V2NoVzJaZXd4ZGQ0OW9LQmxLT1ZmSzlMVU9WQU9BM3U5SVpk?=
- =?utf-8?B?c0hZWEUySDFZd2RadWpoQk1OZkdjQ3BwVGVCUnlCR1dkVHJOaXlQTTdzWWVC?=
- =?utf-8?B?ODBPcmdCSWlqSXJHQktxQm9BMDFXSFVGeG1PZnhJY2M3Q3IrMTNkKzI2bVFy?=
- =?utf-8?B?bWxzcnJMRnhHaWYzbHMxOUl3ZWxDcElRSTNiOE1yVXhjZlYrZ0hpUXd1elNz?=
- =?utf-8?B?QW1QZGtUcEZpM3lIRWtNenFJVG9TSUIwcXV0akgxaDVsL1A5TW0xYm12MFlG?=
- =?utf-8?B?TlcxTGlXZnBkRk5waFVsR2swRXZ2bTBtUi83bXZNTDR0SUtid2hDT2FLcytz?=
- =?utf-8?B?STFqc2tPekhsZDhJMWMwQjBKTjUwVER4UEVVTFhJR0txVHJ3U3VtbGVhcGgx?=
- =?utf-8?B?WVY1QmFHandsNU1iS2hnK09IdFpla09zZjBpb2RaN2VGbzUxUE9SRFExNE1W?=
- =?utf-8?B?QVM0K2hDWldjaU9zRDZ3eHY0UmFnSERKRm9IYStLN2w3WnF1Wm56Sm85VEpB?=
- =?utf-8?B?TUJyTGwxR2EyUFY2REhVRERFVDNoa3hJU2Z1ZmVNdEJpUit3RHIrSnhGUXl0?=
- =?utf-8?B?QUhxSHA1VmI2WWZjamNnUnFKeWVwYWpjc1F0bUtTQUE1ZDdLeWFydnVJMEhG?=
- =?utf-8?B?cWlDUXdqYWFjaTIzdjFvcldIWjBoaGxOelA5VTdhSzJ5V2hPRGVjd0xtVmlk?=
- =?utf-8?B?VTBPcUxRbTlDbFJsa0JGK29yL1dZYzBzYi9CYUZKWmRKWUJVdWRCWXM5QTlP?=
- =?utf-8?B?SEd4RnZ1WnQ1Qi9qRFRkaGRTV3hHVU1XWG5PbW5FTzJSRDhZWFpuZCtnUGc0?=
- =?utf-8?B?a1RPcUE5OEpuakFVWjJJYmtPUFMrTHQzd0pDRjhoQkN1TXRROEJrZ0FDTWgz?=
- =?utf-8?B?MU8zbGJpY3ZWYWVwUkk4bkFNclN2OHVoc2dBYkJHemk3UWZXdXdRVHZnMS9T?=
- =?utf-8?B?TEptekNVMzNxeXBab3dFdkoxZ1MxZ0wrSGNyaGJKMVFPVzhxNFBJS2VBOGJW?=
- =?utf-8?B?cDRGNEpDNGRBaWwwVDVBcW1RM0VLU2lLVys2UnB4UlpkejgyUnVsVlRBWnpI?=
- =?utf-8?B?U010QStmaXhFSmV4Wnd2YXRlNndraG1FOTdRb2ZCak1pK2h1dUk2ajJSZWJ0?=
- =?utf-8?B?bjM1WFpGSFZLSVdkUTVDQzJHRmRwcUZoUW9RakFJTzZUTnJJbGpFeFJQM0Zv?=
- =?utf-8?B?a3lZVGpHQ2VGQnhZQjBXbHlnbUl1SENLME8yRVBKVmdpaHd2TlBFOE9xZ3lL?=
- =?utf-8?B?QU9lS1cweGxocHFZZkhoUFRQOGZ2bit0dy92TnJWZklxVjFuT3A2MEpjSEd2?=
- =?utf-8?B?SHA1WVExdkZQcndoVmJLOUdKK0pTNmtxTm02Z05abEZMMHdZYVZEby9WUkl3?=
- =?utf-8?B?THE5S0dTWDc4OXZadk54MUlkYkdieWJFZk1TdzlaaTN1Z2RWMjRYZ0srV1hY?=
- =?utf-8?B?bitPcXlRQkIvM1I2MFp2MjkrZWhCbmlHcmFCTW9CdnVibktVSEQrNW1hMzVK?=
- =?utf-8?B?Q0s0aldCMUliWkV3THUrbXdkbEloWC9ISFV3UmV0V3B4QmVGb1J5QjhOVG5r?=
- =?utf-8?B?MXBzcUZoQTFjdCtUZStlQWkrZno3Nk5iNFlnVmZ4M3R2dXpjbW1aeWJhWkYr?=
- =?utf-8?B?ckpyUmZKODdhMkVKb1RJQXhnUmJNTlAvV0lyeTRuRnkvaGZjV2NVTFBydFpF?=
- =?utf-8?B?TDZvbXpJM1FOUkJ4UXFjSWVoT0tJT283cEJzK3IvdkUyTXNkQlZDQ3h1a0Zw?=
- =?utf-8?B?KzhwWk04aVBQMWVOQURkZjhQU0lubGh6QzRJek43aEtTYnVwR1JCTlBjQllu?=
- =?utf-8?B?aFkyUGErVjFRWXpPQ1gvWC9wYmNzR2ZUWFhjYTV3S25iOVllQXgvaDE5R2Yw?=
- =?utf-8?B?MXN5QytiTXBDUlJqMzk0UHpOR2R3LzRZdURKWFQzNTZ0V3pYYlQ3d1hzVFhs?=
- =?utf-8?B?VjJ0K01GWXdMV3NxN2NkVTNPWk9ISlFSc3c0UlM1Tkw2dW5EdUdHc0I5dkVJ?=
- =?utf-8?B?SG9PSjJCbmh6RklXU2JCdmZ4ekwwb2V1Z0hVVTNLUWcxSDRsc29uZnZCYmth?=
- =?utf-8?Q?6lz11X7MHuGwQvnezQVjYlY=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: a23c056a-ee2e-4011-ddad-08de3336ebcf
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2025 13:13:31.1648 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sNTndJd0qorHikHAQ/pEMa1bJHfbFnWnD44OSJbVYB9FxZo1vqJXa65KR3tO9/M7kc6At1EUsfr6KTUV79/uT75WahGUAqAM43RJ2IpLang=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB7168
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aOJUccF1hEuTv7X6"
+Content-Disposition: inline
+In-Reply-To: <CAC_iWjLbB=2FqXr5H5UdBNxyiEANUAJOdVO8Jh0BMVVbjQvocQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,86 +125,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrice,
 
-On 11/14/25 5:23 PM, Patrice Chotard wrote:
-> From: Simon Glass <sjg@chromium.org>
-> 
-> This predates the LED framework, so drop it.
-> 
+--aOJUccF1hEuTv7X6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Well, we could still use it with the legacy LED API if we enable it, but 
-stm32f429-discovery_defconfig doesn't, so I guess it's fine?
+On Thu, Dec 04, 2025 at 01:55:36PM +0200, Ilias Apalodimas wrote:
+> On Wed, 3 Dec 2025 at 17:10, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Dec 03, 2025 at 03:59:24PM +0100, Kory Maincent wrote:
+> > > On Wed, 3 Dec 2025 15:04:10 +0100
+> > > Patryk <pbiel7@gmail.com> wrote:
+> > >
+> > > > Hi Ilias,
+> > > >
+> > > > > > > Add a new fwumdata tool to allows users to read, display, and=
+ modify FWU
+> > > > > > > (Firmware Update) metadata from Linux userspace. It provides
+> > > > > > > functionality similar to fw_printenv/fw_setenv but for FWU me=
+tadata.
+> > > > > > > Users can view metadata, change active/previous bank indices,=
+ modify
+> > > > > > > bank states, and set image acceptance flags. Configuration is=
+ done via
+> > > > > > > fwumdata.config file.
+> > > > > > >
+> > > > > > > Made a few change to mkfwumdata tool along the way.
+> > > > > >
+> > > > > > Still wondering about the choice of putting this fwumdata tool =
+in U-Boot
+> > > > > > instead of TF-A. TF-A is the boot part that manages the update =
+process and
+> > > > > > rollback through the FWU metadata,
+> > > > > > therefore, this is where it should belong.
+> > > > > > Why, in the first place, mkfwumdata was accepted into U-boot in=
+stead of
+> > > > > > TF-A?
+> > > > >
+> > > > > The actual update happens via capsule updates only, which runs in
+> > > > > BL33. TF-A needs to be aware in case it's involved in the boot pr=
+ocess
+> > > > > and fails to boot. In that case BL2 is responsible for booting vi=
+a the
+> > > > > other bank.
+> > > > > But generally speaking it's U-Boot that processes and usually upd=
+ates that
+> > > > > file
+> > > >
+> > > > If I may add something - actually for me this is not that obvious,
+> > > > e.g. on our platform we update the metadata directly from Linux, not
+> > > > from the u-boot capsule. As far as I'm aware, the ST, in their
+> > > > OpenstLinux does the same. I'm also not sure why it would be the bad
+> > > > idea to do this from Linux. Ofc the BL2 handles bank selection as w=
+ell
+> > > > as rollback in case of boot failure on a newly selected bank.
+> > >
+> > > I agreed with Patryk. U-boot is only an update agent (as explained by=
+ the
+> > > standard) of FWU metadata as Barebox or Linux could be. FWU metadata =
+is an ARM
+> > > standard which is related to the update of the images that boot after=
+ the ARM
+> > > firmware. It is not related to any project. As TF-A is the mainstream=
+ project
+> > > for ARM firmware having mkfwumdata and fwumdata in it seems more suit=
+able.
+> > > I am not familiar with these EFI capsule update, does it not rely on =
+TF-A to
+> > > select the boot image according to the FWU metadata state?
+> > >
+> > > Anyway, now it is too late and mkfwumdata has already landed in U-boo=
+t for 2
+> > > years. Not sure what we should do here. Put all in U-boot and let the=
+ other
+> > > projects (barebox) copy the code if they need it? Or move all to TF-A=
+ while
+> > > keeping a deprecated copy of mkfwumdata in U-boot to not break things?
+> >
+> > Perhaps in the medium term we can split that tooling out from the main
+> > project source tree itself, to make it easier for OSes to use this tool
+> > (and other tools we have). There's nothing U-Boot specific about this,
+> > if I'm following the thread right.
+>=20
+> Indeed. However U-Boot was the first project to adopt and implement
+> that spec. So the tool was naturally added here
 
-Since it was disabled, I assume we don't need/want to migrate it to the 
-new LED framework using DT?
+Lets start by adding it here then, thanks.
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+--=20
+Tom
 
-Thanks!
-Quentin
+--aOJUccF1hEuTv7X6
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
-> 
->   board/st/stm32f429-discovery/Makefile |  1 -
->   board/st/stm32f429-discovery/led.c    | 39 ---------------------------
->   2 files changed, 40 deletions(-)
->   delete mode 100644 board/st/stm32f429-discovery/led.c
-> 
-> diff --git a/board/st/stm32f429-discovery/Makefile b/board/st/stm32f429-discovery/Makefile
-> index 6b02c0fddec..233eafdad3d 100644
-> --- a/board/st/stm32f429-discovery/Makefile
-> +++ b/board/st/stm32f429-discovery/Makefile
-> @@ -7,4 +7,3 @@
->   # Kamil Lulko, <kamil.lulko@gmail.com>
->   
->   obj-y	:= stm32f429-discovery.o
-> -obj-y	+= led.o
-> diff --git a/board/st/stm32f429-discovery/led.c b/board/st/stm32f429-discovery/led.c
-> deleted file mode 100644
-> index 4b8038341b9..00000000000
-> --- a/board/st/stm32f429-discovery/led.c
-> +++ /dev/null
-> @@ -1,39 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
-> -/*
-> - * (C) Copyright 2015
-> - * Kamil Lulko, <kamil.lulko@gmail.com>
-> - */
-> -
-> -#include <status_led.h>
-> -#include <asm-generic/gpio.h>
-> -
-> -#define RED_LED			110
-> -#define GREEN_LED		109
-> -
-> -void coloured_LED_init(void)
-> -{
-> -	gpio_request(RED_LED, "red led");
-> -	gpio_direction_output(RED_LED, 0);
-> -	gpio_request(GREEN_LED, "green led");
-> -	gpio_direction_output(GREEN_LED, 0);
-> -}
-> -
-> -void red_led_off(void)
-> -{
-> -	gpio_set_value(RED_LED, 0);
-> -}
-> -
-> -void green_led_off(void)
-> -{
-> -	gpio_set_value(GREEN_LED, 0);
-> -}
-> -
-> -void red_led_on(void)
-> -{
-> -	gpio_set_value(RED_LED, 1);
-> -}
-> -
-> -void green_led_on(void)
-> -{
-> -	gpio_set_value(GREEN_LED, 1);
-> -}
+-----BEGIN PGP SIGNATURE-----
 
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTGPVQAKCRAr4qD1Cr/k
+Ct4oAQCeyvs7pB/WtTCgNxnQzeSzU5l0+LfGoGr7SlbPbAMWAgD+PIY17HQEoTjs
+h8b4W/BJR9qZ4aSPbQKcc4vRCGdPKAA=
+=Y4CN
+-----END PGP SIGNATURE-----
+
+--aOJUccF1hEuTv7X6--
