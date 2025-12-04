@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8563D2CDE4
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 23:11:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E88DD2CDE6
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 23:11:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE22484194;
+	by phobos.denx.de (Postfix) with ESMTP id EBA9D84144;
 	Fri,  5 Dec 2025 00:10:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J5qm5SUg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b1yUY3aJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6A9B84144; Fri,  5 Dec 2025 00:10:35 +0100 (CET)
+ id 8D73A84144; Fri,  5 Dec 2025 00:10:36 +0100 (CET)
 Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
  [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B27084057
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 00:10:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 627BF84129
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 00:10:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c77fc7c11bso1685822a34.1
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 15:10:33 -0800 (PST)
+ 46e09a7af769-7c52fa75cd3so1375014a34.3
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 15:10:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764889832; x=1765494632; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764889833; x=1765494633; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ERxERwBmKnVdfg4/ftutoXewG7BGte71wDkI8st7ckQ=;
- b=J5qm5SUgaqvx2ZTC1bJlHF64juNjV9tMFJZkNavSBw3m8LM4KrzAP21kphdjIFjUHm
- L6hI9fPQCN/Mv6MCNdXhCyjCMzCdTUX/jg8euEoQ9eQps6DrLvZa2yiW0oayb/QgJfXL
- YSGQVu6jO7PQma69zrdsEPvg2qoOg4efOP1yk=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rQ2R6D0viQ2G2MLXPhtn1pQD1araq8aLw1lhEVXovEM=;
+ b=b1yUY3aJOHXtaLkBYijCgx2TdTa6WtEHC3jr0ZnnmsuyzZ+qbOWJOsS+LtwNtHyeYb
+ 9Jh1uroekl5HqnAIJM/HO4BoBiTjvA7Gtcv5KfgjK98IHCCIkuyH3DfhYaZOa1C/cQJk
+ APvUjcGEYGKjxVNYHAO6JP1ZGIsLa9EigkdFg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764889832; x=1765494632;
+ d=1e100.net; s=20230601; t=1764889833; x=1765494633;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=ERxERwBmKnVdfg4/ftutoXewG7BGte71wDkI8st7ckQ=;
- b=GaRZF+qpcjNGIOXwV9poYzkjz3Tw2JIzWXvmZcmi95njnWo0cPs36vatcOgFZGWKeZ
- E3aKO2CydCYBfStlWQO86Ry7vekHZnhz82YnAuUsPUI9+ng0pWTIV4QIJ39D0Fqa/Pq5
- Ob7wF6CFmjP5mIfGepIx9LWXdjbkauQL43VEn9ZzBmCsyyGyP18Z1SsJd8BvLfCrPAmm
- RbkAns6IVQISLxf/cxBHuu4MiI7NpKM3UqJFBksY4aQ7GO4ts/JDa7MsQ2SA+yr7SU11
- BKW12qaBPQd7HWAlFOwgnk1kvwQ5SnoBHItvo9uAgKjC2jECgHzAvY5TdYkoyX7Q03g7
- qjow==
-X-Gm-Message-State: AOJu0Yw9F2Qy66e97LxcnRFMeMyPkV6egcZSYrO1GA3cj4msQ8N71Er6
- +ZsrQcTG4zGMJp0xEykgP/O+/vpjvPb8aFpZ79bTZzmShTg2PQ9C0Awsbm6VttTjd4ekX6BECXO
- +ghRRpqQ=
-X-Gm-Gg: ASbGnctOUOJMc8psjYqbEy/goW5HoE4VJDPXyY94y+xA1OmmHGLAd4NvByYFqDCHYdr
- 4CXzxiMsri4BAyDLbNCMTKRzj57Qd5jGj7TWPaFGCWM22fry2U8X21i0c4Xy7aQ7t0Kd2XRfGLg
- n5n16rv9x9SFCi5lwzFYdInhJs2+eNOqlBPeIaGVBYj5gp0igNOhsMHt8JkRHqrgYM5tH5SWYwV
- Ei6mzVMu7VcKeG1WkSUtJh7U7KT2lK7xzmyKjrE7flXYXrcGh+2a+xv2vgHBoMlJQuYbgfznCKz
- 2mX50dgMHYxs/Vaz4yW8tXunozu1dqDLFzU4efJ9QrX1EBIT1emE3EoM+aJBPCWbynWpCDWUK8X
- gFuoOV9GBwy/c6Y86hjpHTVpZGLPlmmzg/XghlF8mwWUiQOags7gNqcahNPllKMh0BmJftfT1dW
- cOJPmSRA2yblDRssl8zS1H5y6AdU7c4m6AjQK3DJTVe03gKDuF
-X-Google-Smtp-Source: AGHT+IFv3csAgPy7XRLpARvY6WV+vMH88PnDGMd1JsgI7tI0MxlULyyAVjblhic5uQb6Tv+NxRaFpA==
-X-Received: by 2002:a05:6830:12d7:b0:785:6792:4b3 with SMTP id
- 46e09a7af769-7c957c597e8mr2532888a34.10.1764889832121; 
- Thu, 04 Dec 2025 15:10:32 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=rQ2R6D0viQ2G2MLXPhtn1pQD1araq8aLw1lhEVXovEM=;
+ b=kicY8oWDrxKg6Ytj/zh7ZM1PhkBKxRTwz01oEizMi953bS8Ybdtfwo+FrK1grjh3fB
+ /dU+avbLWJxuWHu8Mo19O8xUei1JmXrta00GQBX7+HNkk52q/kir0cGNhysfISDbadAi
+ UxAmPTF+PTiXF6xeeWFZxI0VxtdyVOZfN/5YfBp959vkSBcx37pKrA3kIY811m8h8VWx
+ 6kPayxc+y81zjiALus/ZpLlpLoRgQ08GDI65DzqhqGtqzFC0lcRy/XD1Lihd5JukMo9K
+ huOTO96lpOZTk7YJTiiP7DHquH+tA4YVRUwnQNisBWiuDdEYtR66HdBiJqheiwHfM1ph
+ nqRQ==
+X-Gm-Message-State: AOJu0YyMfVQ2SKClwtW/EkYdesuwEdu/arZr6bdXGtx6xRR+9J9iMc4A
+ SJMFqTjSVHI3SYVA5/2FASNK9tRogfodgfoySHrkRr/jsUervZGBXuBCP8NZ+L4fql8=
+X-Gm-Gg: ASbGnctYjru8vVF6MFHR4NghovkIoU4veNEB70DMjrb75Nh5n7WSlHH4Oeb8fixVtkI
+ kjvHd6sOLi+ATHJN2eAGJCd50wgccHaI5XTaHSdeBOc3bN+ozIFlk11XTiDU8xKQN4uFrxHH13k
+ GO/bU/8fOI/AgODc+juyXD+0dli0ro8p8G+Rp5L70IwKHPXmBnQWIqwjOUffC+GMun/GZok5Por
+ 6X7escup+wCBk3PVzUak1xt246OSrRPJHHUWe8qUFBEPOlwr6qKBHvLzIOKKFnkmiRdfEd48aOk
+ GN5oXcaL1Fmc86E+5VHVeH7+iCz5xXFm0u9ufmloyh9Xswbp8pMS5Y7Vj+uvm4wVdNYRDsZUGI4
+ v+tOMDErHdp0wOC6bUdbYfaJNrH4OgYNTVY+UKhq1n/KZOd3yFcPuzwkJJq0LOYnCseiQsuQJpd
+ 1LtentUGg2Hig7X1ZN8B/5P0D0biKr5nLFEg1cfopyd3UM54Xq
+X-Google-Smtp-Source: AGHT+IFdcssNVPblvThIzO67CBk9IiUuIG/mLiyz7cSv9klg8dOVHNXqIzBxhloAaPI+bcJdhCvAUw==
+X-Received: by 2002:a05:6830:4102:b0:7c5:3013:e50c with SMTP id
+ 46e09a7af769-7c94dbb5e02mr6370828a34.33.1764889833233; 
+ Thu, 04 Dec 2025 15:10:33 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acfafeasm2360264a34.29.2025.12.04.15.10.31
+ 46e09a7af769-7c95acfafeasm2360264a34.29.2025.12.04.15.10.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 15:10:31 -0800 (PST)
+ Thu, 04 Dec 2025 15:10:32 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251119145516.843145-1-trini@konsulko.com>
-References: <20251119145516.843145-1-trini@konsulko.com>
-Subject: Re: [PATCH] arm: Remove remainder of xpress board code
-Message-Id: <176488983116.2091996.17827460852064277260.b4-ty@konsulko.com>
-Date: Thu, 04 Dec 2025 17:10:31 -0600
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+In-Reply-To: <20251119145517.843161-1-trini@konsulko.com>
+References: <20251119145517.843161-1-trini@konsulko.com>
+Subject: Re: [PATCH] qemu-arm-sba: Stop disabling device tree relocation
+Message-Id: <176488983221.2091996.9752974798338480981.b4-ty@konsulko.com>
+Date: Thu, 04 Dec 2025 17:10:32 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,17 +96,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Nov 2025 08:55:15 -0600, Tom Rini wrote:
+On Wed, 19 Nov 2025 08:55:17 -0600, Tom Rini wrote:
 
-> When this platform was removed the config header file was missed. Remove
-> that now.
+> Remove setting of fdt_high to ~0, which disables device tree relocation,
+> from the default environment. Doing so prevents U-Boot from correcting
+> problems such as having an unaligned device tree and leads to various
+> failure modes in the OS.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] arm: Remove remainder of xpress board code
-      commit: 231de856cb75b7e11b0c506d4674d96bebbef1a1
+[1/1] qemu-arm-sba: Stop disabling device tree relocation
+      commit: 8d247f3e91178f048a5824c0061bed03f7a8fdf5
 -- 
 Tom
 
