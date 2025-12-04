@@ -4,89 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 462A8D206BF
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 14:47:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D6DD21683
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 14:48:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC37F84073;
-	Thu,  4 Dec 2025 15:47:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C32684082;
+	Thu,  4 Dec 2025 15:48:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FR1BzGsb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j7q6Sti9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B3EB84081; Thu,  4 Dec 2025 15:47:24 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id 936C884083; Thu,  4 Dec 2025 15:48:47 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD03583A57
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 15:47:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 735F783A57
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 15:48:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-657523b5db0so254600eaf.2
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 06:47:21 -0800 (PST)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-65979e14157so280738eaf.3
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 06:48:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764859640; x=1765464440; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764859724; x=1765464524; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=42W99Ubh69AmasOsBdP+CBH+846Z+LhKZ0aTjIl0wpI=;
- b=FR1BzGsbDS7KPzAt4GZRs7/FjkOuPfy4pzBIqKsdP6WjxcOEa/V//pXQjB+08FaVCd
- PJ0WfUeXqlEi/H3RkYkzchgceKx7JelmfydtdwZhkVcBcvnb30HtQtlp8OPuCUyh9k3s
- Q/g9Hx7c0EY+4RIsmcadsAdNV+Z2zo4xm/Oi4=
+ bh=ygTpmRhEAek+XHG/I7NyP+1F5g9Cu7c7lSEalkb4c2k=;
+ b=j7q6Sti9f0BpVj/XI0ayhPFPHznV4c27JXIV1JgFUwuJDC0DCMJTH9m9pDP5NS0hrH
+ uqCeyMFX6iJNnybk2uaQp3zRjyVOpYKFHkLGIWiiIezYO+ugb9O/Z/YzvfB596jQAPXF
+ TscqtUhZ0w813BRle5tcLI7oyNZnu7Oy7cjwo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764859640; x=1765464440;
+ d=1e100.net; s=20230601; t=1764859724; x=1765464524;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=42W99Ubh69AmasOsBdP+CBH+846Z+LhKZ0aTjIl0wpI=;
- b=PKDHWi7HNIUGikZmumJxWmjoRgJk6hfwYvLdsj/eVLkUJNZaNMzqv0POqGvqae8xlZ
- CrT3H1v+k7xRr6eS1fpCtmbk+Ux0nhVIKnJ1cYkH32X02+hapK8CfACYc7AdimKwrtCx
- 9mUC3s9cEhcGv+yM9LdFfQGfN0IQcD3pmNKl8rMV5tq3wJGHzxSyPbHGianEwH2UolN2
- gONdI2WL2XNXt2CRlVsP59rR2h+z5+UaWz3PHIZSOqLljCuuBsV6Z9Qe6VWBzUw9YN/K
- X5gGP83ewpSFdD4HK72bOjBsg4EbrKLEmU6SvPvxJS8qF3wwh6M5DLP2wzF0UrBEOgSf
- WJWw==
-X-Gm-Message-State: AOJu0YxQ7fHXZvCumQbtR5tjWTJ7bD8jQ/0OUOYNpD8ZByLSiyP0UmkA
- y3f5c1L8pyOb+U8FwvnDCFFekJzgwWCy/wwHldZo4Drc8tYA8fPy8BXWEF0EFU6MW8M=
-X-Gm-Gg: ASbGncsHz7tmTkFZ28WB30CykFWWpyOnKh6SJAwS7ZWba0694AoaLKrbdPQ7WvoWhQt
- Sg5/kNhH4i8qMoAlsDEXtjbxhKonzTVlI5OCwv7R/IJRJRbGasuoME7KeG09qxpZjtqKYQBGKxI
- zRqACzbhsmhTlQpVp2mOVaUqF2uUzpE8r4oNJFT9+gMztY7mmEf1EHMK1rABBngJki8s8rbc6XF
- OdzvfvMPE01ZK99IsBOLlinqzXiWug3PHQXHh2hw8lY/78afHIirduVWY/P++kcgmOcAyIWXQ3w
- X2gZkCunoQ39hI9N9VAKqQYioWUgi0aB6YLPpzOOS17sq4IyE8n/D8K9VfrIoyNglXTGb3EUIBo
- hLkAqSUh2LKmKygPXKLWBlcft9w7YLyAVlVDSntLFEhWcdCRT89Z9hrwntqRLk9ee7tLepYhQEh
- 4qTA7znfIODTE2cbS+8UIgaaCBBqNadYrjNAZYdkFjmqfW+lsuKw==
-X-Google-Smtp-Source: AGHT+IGlioqVJAFcHYF/3Es9SoeHl7HPHXNoyug7CFU/Lstk+op4o8ByI98h5uzvI80ef8bBzCGPag==
-X-Received: by 2002:a05:6820:704d:b0:659:7f3a:7d55 with SMTP id
- 006d021491bc7-6597f3a8059mr732840eaf.6.1764859640591; 
- Thu, 04 Dec 2025 06:47:20 -0800 (PST)
+ bh=ygTpmRhEAek+XHG/I7NyP+1F5g9Cu7c7lSEalkb4c2k=;
+ b=QkUmfJfmCYP8ymBGE4pYq8uM0bIupJwGFJPnsSb9pPElIb9ThSZZAHLqEJuBlV0yqZ
+ hP9R+RBECr3On4NtKf4aBaHWuXwa4ST5QV3ekhDDZRjDjzCXZtKaEwpEd+uZSJTp/bZO
+ 4egE/VmW5iQEMKi+dTlOulJDrfFOaiZd0JXtseXY9akffeU8J9O4EWR3CIgDZziCXhtK
+ OH8jZIXebzkR1czFiTRKCLYNwYdC/7uH1jyGicGYR+ByOlUeU1XE0NVBtgvwM3M65hUq
+ feNJPn4nk+DBg3oporALx0uKEScGNb15LHSvA3R158tzOnc2+1AkqvjSjPcxnhqnu5mD
+ fD7A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWyQ0TRkbDblSyL4p8lGox9NLmfYhwbGu6qZfzxXaHU66v1SYXBwG2PO+AP7mwV9XNoELqzfm4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy8eQ2jEDgNgY40ZdME66/EKYh9HCzrncedbythZVfXA03UnGZX
+ mOwHVi4lbFz6YnIvOU/EBsPBo9ikc3eZ58gfS1gjhqbic3+6lBlXI1YSof2lK6O51WA=
+X-Gm-Gg: ASbGncsbMAOuk2J+P4JZZ6Xs1h5wtf41i3+IFZXtB0UGVkxKpw9GpOX/CdEme88plYC
+ GUjZn2NXK+T8OyAPI/ZNcCmNZPS1zBoDQ0Z3xTVOcjO00R04Ith+jmr0fzrc1OMDQVVSKPFje43
+ JmIsBHqxOiGsAI81mEklWTsXyNdDoCeVrEto6ZT1+lnY58tKZEw7FpveL+FkvNo2cUaf3JtLNBA
+ ERgshMrhK/2bHfEKSMmp6J/vWGPDppMz06x0mQx0SaUluOLa4onLAP16b04je5KFlOcu4pC5HUd
+ puyYzfGeCD8qskD0WFcvlljB6W1hv4b3a/MHuhcfrrKQ+Y/FSP5i18IS6bUL1X4Cd2l8wAW4uPl
+ XRS0I8xUOd80LGOU3DevhFWLsVUBwx5QPs6BKOO0hwU+HMAWRL+PMKpZxjwBG0j5JVlzDXD8Cjx
+ 3+kCavHKy1ZNZ2NM+9Lb1c08ve6DlcfwtehHtuaBbiIR07BevYPA==
+X-Google-Smtp-Source: AGHT+IF2hmlPK34gijsEHPer6nzxssUB9+x6ZW6QYzT6cYo5mp0T+FE2JEMg0ohuoao2aPjeUvQxQg==
+X-Received: by 2002:a05:6808:1b0f:b0:450:839a:557 with SMTP id
+ 5614622812f47-4536e3a40fdmr3206704b6e.9.1764859724174; 
+ Thu, 04 Dec 2025 06:48:44 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6597ec25ed1sm788835eaf.1.2025.12.04.06.47.19
+ 5614622812f47-45380161d4dsm686092b6e.21.2025.12.04.06.48.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 06:47:20 -0800 (PST)
-Date: Thu, 4 Dec 2025 08:47:17 -0600
+ Thu, 04 Dec 2025 06:48:43 -0800 (PST)
+Date: Thu, 4 Dec 2025 08:48:40 -0600
 From: Tom Rini <trini@konsulko.com>
-To: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Parvathi Pudi <parvathi@couthit.com>,
- Basharath Hussain Khaja <basharath@couthit.com>,
- Paul Barker <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>
-Subject: Re: [PATCH v3 4/9] configs: am335x_evm: Unify evm board defconfigs
-Message-ID: <20251204144717.GW303283@bill-the-cat>
-References: <20251204-topic-am33-evm-oftree-v2026-01-v3-0-3d1566ce4dc7@baylibre.com>
- <20251204-topic-am33-evm-oftree-v2026-01-v3-4-3d1566ce4dc7@baylibre.com>
+To: Udit Kumar <u-kumar1@ti.com>
+Cc: nm@ti.com, u-boot@lists.denx.de, mkorpershoek@kernel.org,
+ n-francis@ti.com, anshuld@ti.com
+Subject: Re: [PATCH] doc: board: ti: Add J742S2 support
+Message-ID: <20251204144840.GX303283@bill-the-cat>
+References: <20251204142451.834404-1-u-kumar1@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="x4r2bR5w6IYeuG6V"
+ protocol="application/pgp-signature"; boundary="qThlHo+w8JFm2gby"
 Content-Disposition: inline
-In-Reply-To: <20251204-topic-am33-evm-oftree-v2026-01-v3-4-3d1566ce4dc7@baylibre.com>
+In-Reply-To: <20251204142451.834404-1-u-kumar1@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,41 +100,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---x4r2bR5w6IYeuG6V
+--qThlHo+w8JFm2gby
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 04, 2025 at 11:25:40AM +0100, Markus Schneider-Pargmann (TI.com=
-) wrote:
-
-> Much of the config symbols between the evm boards are the same
-> independent of the actual board. This patch creates a hierarchy for the
-> am335x_evm configs:
+On Thu, Dec 04, 2025 at 07:54:51PM +0530, Udit Kumar wrote:
+> J742S2 SOC is derivative of J784S4, most of build infra of j784s4 is used
+> to build u-boot for J742S2 EVM board.
 >=20
->   am335x_evm.config
->   `-> am335x_evm_defconfig
->   `-> am335x_evm_spiboot_defconfig
->   `-> am335x_hs_evm.config
->       `-> am335x_hs_evm_defconfig
->       `-> am335x_hs_evm_uart_defconfig
+> Add guide users on how to build for that board.
 >=20
-> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> ---
+>  doc/board/ti/j784s4_evm.rst | 24 ++++++++++++++++++++++--
+>  1 file changed, 22 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
+> index 22442874110..4162a42c075 100644
+> --- a/doc/board/ti/j784s4_evm.rst
+> +++ b/doc/board/ti/j784s4_evm.rst
+> @@ -1,8 +1,8 @@
+>  .. SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+>  .. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
+> =20
+> -J784S4 and AM69 Platforms
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+> +J742S2, J784S4 and AM69 Platforms
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+This is too many '=3D' and now CI doc building will fail with a warning.
+Please build doc changes with:
+          make htmldocs KDOC_WERROR=3D1
+
+To ensure CI passes. Everything else looks fine, thanks.
 
 --=20
 Tom
 
---x4r2bR5w6IYeuG6V
+--qThlHo+w8JFm2gby
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTGe8gAKCRAr4qD1Cr/k
-CtqwAP9m82SwXl/er6FjcMGnfxBXv2Jw0IDjO6l8PVpFsL7xYQD/ZqHo8QWUyQFT
-DXJgg4n76MKDN7lowvdvKaW7eE+qqAc=
-=PZeo
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTGfSAAKCRAr4qD1Cr/k
+CnZyAP980F1zR+hxj/KsY4nK6vJrL9D8ZciLWyrTcTCbKlQKWwEA/tdiywmgn26M
+KEO/5+vZfR2/ZwyCr9wtKjhnP3sJ6gE=
+=zQS/
 -----END PGP SIGNATURE-----
 
---x4r2bR5w6IYeuG6V--
+--qThlHo+w8JFm2gby--
