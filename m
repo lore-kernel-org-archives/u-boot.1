@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7426AD2A532
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 20:29:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A2BD2A532
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 20:29:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 963BC84131;
+	by phobos.denx.de (Postfix) with ESMTP id CF47B8414E;
 	Thu,  4 Dec 2025 21:28:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="py2Ori2I";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eKFhl2V9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F03084166; Thu,  4 Dec 2025 21:28:54 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 8978E84148; Thu,  4 Dec 2025 21:28:54 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A14184148
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 21:28:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BFE48414E
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 21:28:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c76607b968so615186a34.3
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 12:28:51 -0800 (PST)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-450ccefe6ffso841123b6e.1
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 12:28:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764880130; x=1765484930; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764880131; x=1765484931; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W22Aojrb1YvKy9b0CLlm3lu5oOX8yX0CBCOmHmIBf1w=;
- b=py2Ori2I8R3pzWXYKGaBWRjCrThw6GSxxY3RB0Ibl64LukRtjGVdgoZKDsfNaJV8FX
- tAQ1+vJaLTKEwLwKOxU16Cw7uKFr8AlL2X81RyDmYXakezBrc28aeWZiuY036bCox8kK
- IKcv2oS93FFmPq56yNeCpfY07rG5hP3v9shmY=
+ bh=ppFX6LsHrWEEsoIrf7o0LzTit4zlyGroDCmNS1YCjRo=;
+ b=eKFhl2V9op4i+V8kh/3DtecYGaiHnky5fU4uYpzVLnwk1HIj2eoD+mDyY5TUSWfk5X
+ isMCj6ToD+qWFYODGZCJZCDhrwmGk1+8X2+J9DntYTZrW5vddWo3Z3Eb+E4Scmt6haH7
+ USVnVnJNEeasmk1rylqToGvMYn5/Bynlnq5Bg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764880130; x=1765484930;
+ d=1e100.net; s=20230601; t=1764880131; x=1765484931;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=W22Aojrb1YvKy9b0CLlm3lu5oOX8yX0CBCOmHmIBf1w=;
- b=g8XMbcad0b2YCxKtyhyLp1EDX2JifGVRXqkA9Kgo7zI4nET+AwgBmh3hI40PjPh3rk
- oSSwo/IDRUgqM5aSbXqrgawpxUT2ks9JeNGEC6ofLSZRMIUoouP5wvSbEGwpm/Tpu462
- bpk5EzNUgtCZGbczC2LHlH9yRDPeXRST4ExO1L7JEbvDjOb0v6BOKKIVaGT8DOabxXcr
- Ib83W3U5okxv1NpyjcOPuOz5eKMKizYE+xj/eGqADkaP5QyRKgVNr1RaK63QNHiklvMq
- oxS+rk/xNz/DOeaylNfA2DRgrGI9PrPkphP3s5M0HrnxZ9NVscCOrUVXqaisBEb9+gS0
- 7Kew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUc6ul/LRcx5cM5v7YA8RZ+4wLhQxbfe/jDvSyMcU9tur87c0VmlG5zgvZreLdv/8ZYofLuuGw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxUqU1cw8nidpUkIt+LoTbGojEZuPbfEGGthS7HRMAs1LxxGWUJ
- YfimlxaQaGJmt1CnOYlWOD0F26j/IdsS+ALn69cuIwjFjAWrJqlV8eF1huyJA8Q+ie0=
-X-Gm-Gg: ASbGnctSyip9qG/Swmn56nn+W4X/qbRbwsuUrJPS6rZvChPAod1ObnTkML5SZPfi1Dt
- PSdJKq0kTiuNHW1h5+Hvg/tBbe8LZnlP3AwSzpu/4V0/1A7tdQtMQZIJjCNmCizJIrf/O4LoI+y
- 1ujF1AcVIXnZJXL7ry4otkEjgiymhwEuoEOW7QA1XYRsTiotVn8HpEoAn4BT6UklnfJiOFiqxnK
- ytldSH/Vq/oCxMiSN/Lll4exhV5QZjsHKSC1mgEph+X1wZ7VrUoUjFevRv9rJvp4ZgMObqjEdDq
- EwoQ30fKw4fGjf7KC27a/i7C3qt6FExKeIcBpMcp3JVcWJBRFBAiFNEGDMxUuJ5HSUaCJvdnzrv
- Rwxls75q6AizMQLDNXUO+U3E50rqFFspyTiryi3q/fJv5NHLLTcuVZsX42P2MjLQ2OLFfJRd9dG
- FPJgrSKjH5n+VIczsTgZLFilNuZlvOigtpFyi48xNLmQWP8P808IeN5jnCdi4=
-X-Google-Smtp-Source: AGHT+IEWx07jkR/CxaihEytppeRb457SqAaj7MBV6LG6T/+um8ExBemB3iock5v8dTG+C3L5hlUVDQ==
-X-Received: by 2002:a05:6830:4112:b0:7c7:5907:b1a8 with SMTP id
- 46e09a7af769-7c94db4a335mr4941194a34.13.1764880130139; 
- Thu, 04 Dec 2025 12:28:50 -0800 (PST)
+ bh=ppFX6LsHrWEEsoIrf7o0LzTit4zlyGroDCmNS1YCjRo=;
+ b=QrX6lxh9ZdiylYRWYXWlCVuo9EInRGBv0mk6I8U4KASlTOuKsEdRQij3Ug3ER/qFE2
+ Nd2AIcocJgjiJJospVXSMcKtaAwtEOA/D5Trz9kjwyqP+uRoGC81JenPpZEqCE/jyr2o
+ OiC5R5RrZtHMI7ySwlaxnR6fEuo2WVioZsk1goQ6oJKh1TnfspDlFeAQ11LTVdOBzmGC
+ RfrgiLa903IRhzttA6LsPSlslXsCd8MMu20jOvnv7nZH/FQPAxmnL2XJTU9yhbrMvkxS
+ tjinSQ/QTChxgfka/oXw4vzWhJeiVslXSCWUwTyfJdNcg2g/pJu9Ooe/sjbb0yeJ50jA
+ wf+Q==
+X-Gm-Message-State: AOJu0YyPLHi7sn53Eecca3G12WYtrRiCSGTipvNTUUvp7ePLl+Y8lZBc
+ oPX6Qd3PwcU/3MWBJCllpNT7oDkZIrULtmiqLDBBcQ1n5mTasc4HE1ndRntQ8yNqiNM7e3yEJ5Z
+ D1ZP61QY=
+X-Gm-Gg: ASbGncvgSJa/bQ8cWIUPGQsOGgux1u/2cG/Ogk4emAOZO6lsybyWDD3aQyjvhKXyMO7
+ Nm6/VGX2DpUNGDutgZW5ESNKkZQwLFB8Nn6x8xYoAHAUpHLLlTzJDjg3GVZnSV4LMvwHr9Cq5pn
+ aeVStDv1bhWs2GrdwACylquhptvSYXpLA8mCdY4PgEDsDh2E5jhvaIi7N4jd52rf4FVK4Vf68OC
+ ApMLPB8nEt14NHPwW/W50tLkjhsOBfgkMA5ERQRshuq+DwTUP1XuNqmBE4WF/apLMXAQDNwrMNH
+ aJAK39oEQX2aYmraCC73iF54glUkD9Q65oFV1hjHIcEGZEvpaEauWAYhM0brIrwkPbkudLDZtH4
+ ZBD7kw9q7A/niPkpwk/wB7Q59xNPR6pbxEUbrYRKgmiKGC51+JbgbtXkQh5KTgHWxCtewfZLIye
+ UOL4VDRJMxR80gkB2nWr/L98Ez6EVMBTtOtXJrcbOyLGfYkGZn
+X-Google-Smtp-Source: AGHT+IFfOLyI8bvSuTAzhqWe2hPkB9Nm4EK9ivnUS5+5AAuXvTQTMTTWgzs+sJQimfgcQN2TPbcjww==
+X-Received: by 2002:a05:6808:1209:b0:450:5e3a:6f16 with SMTP id
+ 5614622812f47-45378ee6decmr2927082b6e.27.1764880131132; 
+ Thu, 04 Dec 2025 12:28:51 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95a8f8d0bsm2336131a34.5.2025.12.04.12.28.49
+ 46e09a7af769-7c95a8f8d0bsm2336131a34.5.2025.12.04.12.28.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 12:28:49 -0800 (PST)
+ Thu, 04 Dec 2025 12:28:50 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Chukun Pan <amadeus@jmu.edu.cn>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- u-boot@lists.denx.de
-In-Reply-To: <20251202100000.372409-1-amadeus@jmu.edu.cn>
-References: <20251202100000.372409-1-amadeus@jmu.edu.cn>
-Subject: Re: [PATCH 1/1] binman: fallback to importlib_resources on Python 3.8
-Message-Id: <176488012941.2061624.17973242173177808066.b4-ty@konsulko.com>
-Date: Thu, 04 Dec 2025 14:28:49 -0600
+To: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>
+Cc: Denis 'GNUtoo' Carikli <GNUtoo@cyberdimension.org>
+In-Reply-To: <20251203204640.1944971-1-seanga2@gmail.com>
+References: <20251203204640.1944971-1-seanga2@gmail.com>
+Subject: Re: [PATCH] test: strlcat: Fix SPDX license
+Message-Id: <176488013026.2061624.14919211938439861394.b4-ty@konsulko.com>
+Date: Thu, 04 Dec 2025 14:28:50 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,18 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 02 Dec 2025 18:00:00 +0800, Chukun Pan wrote:
+On Wed, 03 Dec 2025 15:46:40 -0500, Sean Anderson wrote:
 
-> Python 3.7 and 3.8 lack the files attribute in importlib.resources.
-> Use importlib_resources to fix build errors with Python 3.8:
-> binman: module 'importlib.resources' has no attribute 'files'
+> When I modified this code I meant to accept the LGPL offer to convert the
+> license to GPL. However, while there is an LGPL 2.1, the next version of
+> the GPL after 2.0 is 3.0. Fix the license version
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] binman: fallback to importlib_resources on Python 3.8
-      commit: 02aa1a56a7cfcb858973ef8965e54cf539060fd9
+[1/1] test: strlcat: Fix SPDX license
+      commit: a0bf98cedbc6c1b8c32b0ce8e984386d3e5aa48f
 -- 
 Tom
 
