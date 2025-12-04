@@ -4,95 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD97D2A536
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 20:29:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9063D2A536
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 20:29:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 134478416F;
-	Thu,  4 Dec 2025 21:29:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 13F4D8414B;
+	Thu,  4 Dec 2025 21:29:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="arBTj0+k";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KLdxk8tv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7975F84144; Thu,  4 Dec 2025 21:28:56 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id AE62E8413A; Thu,  4 Dec 2025 21:29:19 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 910388412C
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 21:28:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A8368412C
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 21:29:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c6d1ebb0c4so1116834a34.1
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 12:28:49 -0800 (PST)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-3e7ead70738so930625fac.0
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 12:29:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764880128; x=1765484928; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DY/+CKzae7BobHhNPXEEWlZmcaMeKQDPQjVksUoX/uU=;
- b=arBTj0+kxMBVoRpnj2aNTzNV831dFwd8KrwwJKWUIkP+cmlecqMHvTGpSsLZ3w8wq6
- PPh1CuGPA8HNbtxxcYXq2dg/IvX54jr9f46AvgqpJ79T9fNWq+Jsk5aMLfur0k2DaPt7
- /yKwadaymKTLF+4SkonaKY5ukR9CrlRFC2a6U=
+ d=konsulko.com; s=google; t=1764880156; x=1765484956; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=T3Lqd+OYPjdR3kuAi9Meo2L1fKy0l5fQOmkHLmFpexk=;
+ b=KLdxk8tvVkGER/NxJGV9IhNfyychrWjSzsdYbUnGSCU6nXmcqIhwFeqMxNM7x70gLl
+ 683KkREFO+GFyO7rhvoLstJLE+GknLpfBMa65gizhRdz8ly1kZmXnW2LVoiDoqIJcpP1
+ qqzNDwOWWCxmhFGBtD2nUJtUEYbEmnUDibtbM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764880128; x=1765484928;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=DY/+CKzae7BobHhNPXEEWlZmcaMeKQDPQjVksUoX/uU=;
- b=wY4NSwgpHBZiTZbBW0Mnsf0+uZz0Jrw2TSNUOtLskbBnaqXd865Xan+68U8PpXzwGA
- R66WjYsZxlBoV1ljd0aQ89UW6qLSCHovVZIGEfxwcB3rFrZSNfmXoL/kle1MaVsKTQRe
- s1hOGxccu19yZ3oY1xzmmSQyADRHTNyrHnx9zgIURRAZ0JRxkxyIzJJGAaPKT7bg7SG1
- oKsgYF3J6upQxfuGM/H0LYM8FQ/DVuHp4hLBs0+bVLG0oTNAvFBEBSU05tk9n2OD+tBK
- BK4b4vC09j//gJq5c4mmMfJkPUQ8s5aNhiC38ah1hnUrfiIWgSyPK0faA/hPm3HFj5vw
- jrCQ==
-X-Gm-Message-State: AOJu0Yx5ptGXG+S7fisoG/DCicTrziY2d0arYD2k9aFsHGmALIWMdHav
- vnQ6iLOSys3uwv71d8Db9GnsH6pzOFZWpDzZ+GhV8BJNHgDFEEFm6B/YpYpKXJf5eB4=
-X-Gm-Gg: ASbGnctC3EZUss8XUgwbFc8n9I7lO9QJD6IeVco3AJ5+yN1lCisOLbvO6bjMUdm+lVZ
- rnTvQclykqZxnnVwJIPQ3ObqTQbAG/eSVzNQkjOIx2bEWef+ZA3Bcs4So7F5Lt949wqKVnK3TEU
- d1VvbKdZ/OEPJwsft6aIpTTz7NjAbkgzopnRWOjnZoCzX2NX0S794oxNsI1Tac75nmW/9Oj/CHm
- KzCWcNsd1iTKZ35Xf5wCM7wxP6/YHUaNNYzJa28qPX1W+75Qju25jmJB7Is1+O88xUB+rJYVxtq
- scgnZc/HWwQkyEV9URNWeujiY7Oaw7iCsnbzhCce1Lh+1QG2MC5x0UbcO/VuFkEFWnQX4ZlcxjP
- n5DyS7x+qg5dy4DYKOdexG3D4wOAwsotKGVCjCEKhQrtLUK1t4x3qx69nmHhntkw3iIwFiiOo3D
- pYVXHUCp/PH7Mv6AyPgkqzuCva+txCWH/sCLC0kVMfyJbXT1t+
-X-Google-Smtp-Source: AGHT+IFL/nEpuAZDLN5TXdCPGRuKWGYNBGj6KktmLOsDPUxxcvBksqXN10hNaDkORjRwIHwF0UMUaw==
-X-Received: by 2002:a05:6830:4410:b0:7c7:6348:5946 with SMTP id
- 46e09a7af769-7c94da26dafmr5160460a34.5.1764880128349; 
- Thu, 04 Dec 2025 12:28:48 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1764880156; x=1765484956;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=T3Lqd+OYPjdR3kuAi9Meo2L1fKy0l5fQOmkHLmFpexk=;
+ b=A/7F36k3tDqcO8+nDa0iYWYMk9WA25ym7sOkNOVx4/jIw8QZWupok1LR3JztkFD+7H
+ bnFh7QT2n4/IpGxOD9+P5hcA3dcMdxf0XQfOK974I3jFfcag51cmENk+d86GW/x8luCy
+ mDeTaLxtPUgo1Ee7xyeJQIHAT9a6GKQn3+eais/9FLW5pXrs9YEjOLfOXgr2k1SbJ4iD
+ iKZohLgOjggNqDZoW7ScApsCy+9ehFIX0v/XlQle0g/WveNkEut7fziCwEzu1G9faULu
+ mUboRpI+XzhYVTKE0wxItpI4tgdm6UtisJwJIaryn0Jh6a1sjjlkgJA4r3xDLhEO+RUU
+ KujA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVjLi0jRZAR3IM2794vTDtyxrtKMFZtJQGvwsW+NCnXeqMKfHbs6Ys2MCCV27N0fMpaO5KypFM=@lists.denx.de
+X-Gm-Message-State: AOJu0YylJ6YL9/QTiZ02w6mkj76UAWGdaRKlDz66taxBoxcRSVNUsm9V
+ z3x2lXzVCmH6rnA9L+EttVN5tLFPczCuQWdgeg8fGs48UDGzp05MrndC29ESS3R7asZZoLaSAh6
+ kitHDlyQ=
+X-Gm-Gg: ASbGncsOJRNQFRn9+aegTh9CFziioMz6tuIqNN23PaWY6zKrkEHoxbyMJqHOzFCJOXx
+ mjKKmLRLKv86d79MM70ArE5MrqIlS/172CvNNT1EHGUNLVGNxbAxke6MMMYOZ4mB4NXgcikI+Ox
+ SagVcYqdcCPt6+H4vhLnOueBpQ1CrYiso4SOOVNridKENdFzh8WTbp76sMcJ/yrgXn9pEHqzo6J
+ o9kE1whGwtEsHjy4rac4GYotXA2OiyPaLx8IdMnBrtjvqz76s8e9KnUnuGQg6zH3TD+cU5WDy9p
+ PR345EWZcFK1X/wrrLqB6gIFG/oBB+B0sGT4cgxCW10uGXeveSp7MN92tZp1YeK/NiabdPY1R4e
+ RQSPCyRT6WpL5lz+CCYBVWXVGtG0gyBq2c5cwt3ZJLAJFrkklKbkS0wxMoWeMzlYSO0jmW7k6YP
+ O7/fDljhAVzLdRghb9mlsxaSnOS+MwijfGnQSZDxn6gw7kJPWbDw==
+X-Google-Smtp-Source: AGHT+IGhp5dlBYA0X2sZKZ9poI/z+nws8lJB23xhQA0+Ke7v+dfc3CL6Ci1WvqtvdDp0GmTgoRntEw==
+X-Received: by 2002:a05:6870:b410:b0:3e8:8e57:a7a3 with SMTP id
+ 586e51a60fabf-3f5067e292cmr2169960fac.54.1764880156234; 
+ Thu, 04 Dec 2025 12:29:16 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95a8f8d0bsm2336131a34.5.2025.12.04.12.28.46
+ 586e51a60fabf-3f50aa34d4fsm1955374fac.5.2025.12.04.12.29.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 12:28:47 -0800 (PST)
+ Thu, 04 Dec 2025 12:29:15 -0800 (PST)
+Date: Thu, 4 Dec 2025 14:29:13 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Cc: Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>, 
- Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>, 
- Christopher Obbard <christopher.obbard@linaro.org>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Michal Simek <michal.simek@amd.com>, 
- No generic patch CC mail please <noreply@example.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Stefano Babic <sbabic@nabladev.com>, Sumit Garg <sumit.garg@kernel.org>
-In-Reply-To: <20251202092513.71879-1-wolfgang.wallner@br-automation.com>
-References: <20251202092513.71879-1-wolfgang.wallner@br-automation.com>
-Subject: Re: [PATCH] Change email addresses for B&R Industrial Automation
-Message-Id: <176488012675.2061624.2706868928832272572.b4-ty@konsulko.com>
-Date: Thu, 04 Dec 2025 14:28:46 -0600
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Lukasz Majewski <lukma@nabladev.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] clk: Remove myself as a maintainer
+Message-ID: <20251204202913.GD303283@bill-the-cat>
+References: <20251203210335.1946142-1-seanga2@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="z96+SdGpUKkdR2LH"
+Content-Disposition: inline
+In-Reply-To: <20251203210335.1946142-1-seanga2@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,23 +99,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 02 Dec 2025 10:24:58 +0100, Wolfgang Wallner wrote:
 
-> B&R Industrial Automation has been acquired by ABB in 2017, and this
-> will be reflected in our email addresses beginning from December 2025.
-> 
-> The email addresses change as follows:
->  @br-automation.com -> @<country-code>.abb.com
-> 
-> The existing email addresses will be valid until December 2026.
-> 
-> [...]
+--z96+SdGpUKkdR2LH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Wed, Dec 03, 2025 at 04:03:35PM -0500, Sean Anderson wrote:
 
-[1/1] Change email addresses for B&R Industrial Automation
-      commit: d9a765222dae01ea24fc3240cc05745b4b47c698
--- 
+> Unfortunately I don't really have time to review clock patches. When I
+> initially started maintaining this subsystem I had more free time than I =
+do
+> now. But I also found it hard to motivate myself to review patches.  Many
+> clock patches add support for new SoCs and they are time consuming to
+> review properly. You effectively have to spend a few hours reading the
+> reference manual (if it's public!) and reviewing drivers is no small feat
+> either. This is made more difficult since clocking is often very different
+> between SoCs and it can be difficult to determine whether something is a
+> bug in the driver or a workaround for some hardware behavior. I mostly
+> don't care about any given SoC unless I'm hacking on it so I ended up with
+> a ton (more than 7000) of unreviewed patches piling up in my inbox. I'd
+> love to be more active, but I have a day job and I usually want to work on
+> something more interesting when I get home. I still think the clock
+> subsystem is a major mess but I don't care enough to fix it :l
+>=20
+> The subsystem itself should probably get orphaned since AFAICT all patches
+> go through the mach/arch maintainer or to Tom.
+>=20
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+
+Thank you for your time and contributions over the years. Applied to
+u-boot/master. And yes, we do need to as a community figure out what to
+do next with the clk subsystem (and try harder to put SoC-specific parts
+under the SoC maintainers).
+
+--=20
 Tom
 
+--z96+SdGpUKkdR2LH
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTHvFgAKCRAr4qD1Cr/k
+CtJlAP9PrCpHknepg5semIHHLIZTW1Gy73cohJ6SH4o4/NxbwgD+MsaE60V39TVr
+e3l4ieQTZndh7ZebfITvAI8VUV7EUgs=
+=c+u1
+-----END PGP SIGNATURE-----
+
+--z96+SdGpUKkdR2LH--
