@@ -4,82 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA351D2A520
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 19:32:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CB3CD29FB2
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 19:32:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F28E84099;
-	Thu,  4 Dec 2025 20:31:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F23E7840CB;
+	Thu,  4 Dec 2025 20:32:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nCTwR1qM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eJzm+km6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2186B84083; Thu,  4 Dec 2025 20:31:53 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id D57D084083; Thu,  4 Dec 2025 20:32:05 +0100 (CET)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFABF84083
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 20:31:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 677628414E
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 20:32:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c75fc222c3so671436a34.0
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 11:31:50 -0800 (PST)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-657490df6f3so572753eaf.2
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 11:32:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764876710; x=1765481510; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764876714; x=1765481514; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wMYVLjqJmUtjRuLRjT3uR8EgJN/+gwN561+n8KfNsqA=;
- b=nCTwR1qMbRQDKWiMyNb3PtczKArmaLeZChk004ZaNaYEa6xzV1o4vzOCgSJRb6sxwc
- g6Hmt5w2RkX+ln4ZoZC5eYGFBY7MFdr+qjDp3hKtsZmB79FYCpMyvw5EWWalllchvsk6
- IEXjqoeNRiFBm7kH3XlYokPtQxTVkYRZ6i19c=
+ bh=8D2cDUV/unCXDEL1EOf4n/x9SMylcfXKFDXglbb1/Mc=;
+ b=eJzm+km6vm2fVC3zYkg0nW6HNTsxZ7uIRKBz5ypkNH0u9shTpTPTZM3Ob3WM234lnK
+ GM8ueGUP1HwNxE/2GQ4Pok2M2DDABC5O0CU1jQT28seFHmK0me2/CmmNp6ET6rolPWMJ
+ UBkk6lhRbtUXnponT9RbiaOUJJh6IoLU+ALcc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764876710; x=1765481510;
+ d=1e100.net; s=20230601; t=1764876714; x=1765481514;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=wMYVLjqJmUtjRuLRjT3uR8EgJN/+gwN561+n8KfNsqA=;
- b=drEEIFv0Eh3a7TffV4Rp1t0pnPpm/cP+JukoQZfy4GxweVjZnFjvYem9n82DiXRjQl
- BgRouwiQEsLMmZ4Tt4pe03BN34YpTWzc8kMz+EI3TKHCJkoLo9OriIM1F2N7k0BUrVDq
- uFQ3nms/zdmxncBf8pWFOhtlzrwrxot+TGOerMFCpzbkjWu69I/NbduvPbt92Y2Z5Xw2
- JQ87q+QNLEXLVrWPE8IODZxPDo12AgPsbLz4TC9u8FhOBqj5csXwI3+hKqXPn22f38wd
- A0iRkmyc68rmG5+Yyjq6U7FaMJYNCuPaIXAVM9MjUWWkgIvh5/I5jJdNgEXRmfeFH+4J
- Up6g==
-X-Gm-Message-State: AOJu0Yy+4rW996gOwUvxnPv1iK5TAhHt+hQjkKsyzOxnwy+erKJEC4Wa
- vvni3jcaLVYVXCZqG7DUGEoGbKjE3KT//ADEP9fTEZxyuA2ZU2clJyoQO7nxIl8aMLc=
-X-Gm-Gg: ASbGncvX4A20XD2aFvF2GF4w5lXoIqoSEY0hdnMRqeX+hwdOMEjEZvW+++r7odti1FU
- Ye0+YwSF9G3OziRKkEldBJ8aIJAt45KZN+aGZBLwqWQJHOlGS0q8D3DNMQmK58wyepGZDVo12n2
- ATzBL3FBU/5mRg0sPUkvfcX4gH0vAoLqSDOqzaPVSV1DaFtLnqyFB1TPI0eRH8i/BjUWEVR6y8D
- 6L/lsXoFflJ/n7AX+CmEuV3CSInvjp7AiMGMFtwwbc0PjHSlpEyj+rarZjc8tOoqkL621eAplLh
- ZUJBqksYHs9pgdAR4hZNnq08+9Vn6OUQBtyAfEJUaTqRW1VupK0XtxPjOW6K+FkHZn4Ml07+kf0
- OBg7Vb1rdcxW5+uY+GwgJLLJslyALO6h/lNBFHNiNdhlBKOnpNwYYXyiJsMNFPEGUb/yuNPbSH8
- HBwZDJImQgi+Ck8075wXyy+bboklCL0t+7JTX7RenU8lptAOKQ3XE3U7Q108U=
-X-Google-Smtp-Source: AGHT+IG8TIXzP71p2LeS/Vhjj5xl75wI+GD3WwzKjB99g1e1AMs1WBGTa9S8o0v4SBJZ/Fz5UMb35g==
-X-Received: by 2002:a05:6830:43a8:b0:758:1e20:c41b with SMTP id
- 46e09a7af769-7c94dc923e5mr4910806a34.33.1764876709682; 
- Thu, 04 Dec 2025 11:31:49 -0800 (PST)
+ bh=8D2cDUV/unCXDEL1EOf4n/x9SMylcfXKFDXglbb1/Mc=;
+ b=qM16V04OW20KJ0MoCDZW+Y4GcAi/2AY6KapEvyR8aERFGoaGyXSostujioCJxyiYx9
+ XrqUjRy4vELQcPsZcqi6yB9+bwIYlVGI29/CXNUtHvR6qvitnBb6knLpcPeCBoY22RGa
+ GK0VNuRoYalXfT9q9bRKVwYVBiPkUdcwFolmefww5vJJm1uCtxjrO8T+egrILshehPkN
+ go/TLyaJRtLFu8xjK4RpJm5dPXs+wlwiFbwAzeSsRBeKuXyHJdP9lZWfs6xOrOsdpYGT
+ 1VXGOTX7fU5I31qo4SLmKuLirDi+iH9eSnXxwg2Tg5Qr3+gfCQC455DXeRUkQuLi6eyH
+ +UcQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWaQ/3NbjZt/JoKViXAOKO/fRkQwJvznD4Gyhhnq+qoZOSYc+X5LupMrfLZ9MRgkBtbimWLR0A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxnmD29jBi1nw7kriOGZZD3CMzXYTHuSExNQdCR+mwG7h+merzd
+ VXGE/1p2oeqzTY6alRcehuOflR9DqGOhRcII27oyn4OtCyBw9MJHXkNFU2XvKPmvnXo=
+X-Gm-Gg: ASbGnctk7UHzKp8/6nOEn+b7gpDWEVYDdKla34pT+r5r3BwsLUxPW9Rl25Uxlo5sruY
+ kJ9yymf8tVKJH1oGtvMon8wuL5K935vsyQb5GNdv539LB6jYxuIWvcXQhrpNdjYCAgH/SJ6H2GK
+ mPjOkUBr3WblSodTqS/i8QC89I5wHFkkKqwwZ0akTUSRCkh/qMIFaXQGx3dghwcI4dUitfRH87u
+ 7fyzkXhhsn5AQB/Y+v2SNCzdoLCuoJfDKMZSJNQUQXJk3EhO5S0+AM+LTJPD0xU8cHw3iSmUUk6
+ nIxJKvaLoXmv/SUD9RE8hhkII6JO191LaJUHHZMvc568+XDX22VN7uPlv4K8UfdoCapkBmlD4eV
+ Hcs+O75JIfcitkchG8Iw3bC2iMPwcjgscURLyBxNxtqQ+/vGYcgYdDM88QHHwemNJCXJmBdJxVP
+ RpzehKEJHC0ntnrKLAjn3KTAtwSrIKTv6sETAed+o/LI19/Lxejis5Qww/Mkk=
+X-Google-Smtp-Source: AGHT+IFMlvebN+vUuaQlzRNtAbUpFfAt2pL6wMysFlIlSxIM3aiTZzKQjFS7mnwg8VTTKVQvyzDL6w==
+X-Received: by 2002:a05:6808:21a8:b0:450:b8da:b80e with SMTP id
+ 5614622812f47-4536e3a01dcmr4232382b6e.2.1764876714030; 
+ Thu, 04 Dec 2025 11:31:54 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6597ef0c840sm1147095eaf.9.2025.12.04.11.31.48
+ 006d021491bc7-6597ef0c840sm1147095eaf.9.2025.12.04.11.31.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 11:31:49 -0800 (PST)
+ Thu, 04 Dec 2025 11:31:53 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Tim Harvey <tharvey@gateworks.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Conor Dooley <conor.dooley@microchip.com>, Heiko Schocher <hs@nabladev.com>, 
- Jim Liu <JJLIU0@nuvoton.com>, Stanley Chu <yschu@nuvoton.com>
-In-Reply-To: <20251021-clk_funcs-v1-0-acf51a40eea7@linaro.org>
-References: <20251021-clk_funcs-v1-0-acf51a40eea7@linaro.org>
-Subject: Re: [PATCH 0/6] clk: Fix some error detection
-Message-Id: <176487670839.2050783.17210057518215020381.b4-ty@konsulko.com>
-Date: Thu, 04 Dec 2025 13:31:48 -0600
+To: bigunclemax@gmail.com
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Maxim Kochetkov <m.kochetkov@yadro.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ u-boot@lists.denx.de
+In-Reply-To: <20250829082628.623597-2-bigunclemax@gmail.com>
+References: <20250829082628.623597-2-bigunclemax@gmail.com>
+Subject: Re: [PATCH v1] clk: Only enable the parent clock if the clock was
+ enabled before reparenting
+Message-Id: <176487671289.2050783.12164735802509750286.b4-ty@konsulko.com>
+Date: Thu, 04 Dec 2025 13:31:52 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,32 +106,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 21 Oct 2025 17:08:24 +0100, Andrew Goodbody wrote:
+On Fri, 29 Aug 2025 11:25:00 +0300, bigunclemax@gmail.com wrote:
 
-> The function clk_get_rate() returns a ulong with 0 meaning an invalid
-> clock rate and also negative error codes being returned for other
-> errors. But being an unsigned return value this cannot simply be tested
-> for with a < 0 test. Instead use the IS_ERR_VALUE() macro to check for
-> negative errors appearing as very large positive values. Fix those
-> places that test for <= 0. Also fix some places checking the return of
-> clk_register() that incorrectly used ERR_PTR().
+> The current implementation of clk_set_parent() unconditionally enables
+> the new parent clock, even if the target clock was not previously enabled.
+> 
+> To avoid this implicit behavior, this patch adds a check for whether
+> the target clock has been enabled before parent enabling..
+> 
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/6] mmc: hi6220_dw_mmc: Fix error detection for clk_get_rate
-      commit: e24a7b3b172379b50a7fa96ab4634de109c3e432
-[2/6] mmc: fsl_esdhc_imx: Cannot test unsigned to be < 0
-      commit: 42d30f9447c136d2c1f46c8a12e6058e3cddc3b6
-[3/6] clk: microchip: mpfs: Fix error detection
-      commit: ae4f60801f344aa26e3f2d1ffe6f6227be6f16a2
-[4/6] i2c: npcm: Fix error detection
-      commit: eb13583b9de27005703ab085d5ef45fcdbb1d4fb
-[5/6] i2c: imx_lpi2c: Fix error detection
-      commit: 40ad377c1619eb9b83d088a96f40b86a907c8c19
-[6/6] timer: imx-gpt: Fix error detection
-      commit: ce219307a21fe7166b13542ba923ee09aef7f2f5
+[1/1] clk: Only enable the parent clock if the clock was enabled before reparenting
+      commit: b493db39ea7fb1205d3a2df269352cb79874c1c7
 -- 
 Tom
 
