@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD03D2CDE4
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 23:11:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 956A6D2CDE4
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 23:12:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF7DF840F1;
-	Fri,  5 Dec 2025 00:10:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 347FC84166;
+	Fri,  5 Dec 2025 00:10:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PQWckOz9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y8yMZkQH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3745B841BE; Fri,  5 Dec 2025 00:10:42 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id EACAE84172; Fri,  5 Dec 2025 00:10:42 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04EC284172
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 00:10:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B2F784057
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 00:10:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c75fd8067fso1064929a34.2
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 15:10:39 -0800 (PST)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7c6d1ebb0c4so1225820a34.1
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 15:10:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764889838; x=1765494638; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764889835; x=1765494635; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kv0gNq4QrSLxqJE6Mwx3JixBqpaHh0uLisOPIv6nJCk=;
- b=PQWckOz99xOGUnS/UK4saGyG6Lu4JIySgWq7CSED2RcCCmLRncTZB/so2JVrYbNITk
- shzF16pjBdRYW2G6S0t5FAzRL6yidsjnBnkMjwu1Br5sUjr+iVcLl2T+7EM9IBblSZ/P
- ZMD3ZEMh5Ni7wStaWGPxG0eC1bMrMvf3NCJ6s=
+ bh=PA3rNh8vWTEHVpAK5R2VPPw8Hr9N/Ln1bpDKaYxqvn4=;
+ b=Y8yMZkQHjSIy/C3l/c7IRx6jEngBVEE1l1fjQ6YsSoQmZEUyZAO7nlkpGtmv6iXa+Y
+ Y2RyFOG3sKrRzxZwZ35TaQQwy7HWLrHoN2pyXkRvuJG4ES2/NdS3ilDwNpBRhwR5LUZU
+ BnIiFUYwUaoewoAkuV6AssL2iN+sz6j8Pub6Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764889838; x=1765494638;
+ d=1e100.net; s=20230601; t=1764889835; x=1765494635;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Kv0gNq4QrSLxqJE6Mwx3JixBqpaHh0uLisOPIv6nJCk=;
- b=C6ryxVb4gdWR04VPBFV0au+I/4dxGe+qIx50zVCm+qR0p0hlqn6XoAo48EGP+K3iwc
- SL0hh29Qt85JRN1HGOnsoYvL7MHijJ8PRMqawpMHaZt+4Sq86X46kgOsPAykfTvE4Xt/
- 2f7cbMr/RsnTbgSTpubWaaSFWLVTXH55wuwzJUiNo4b5q2vluwdFOdvdeYK/ruWAUJid
- jFuFH+EWjdsSkYcanHDqpQkcxtxmxCFnqjQBn2p6MlOJndrnPs0s0YP/re8AoF/KgrL3
- CQq0I69z+ctkD/VA4+LR0VaxFklpz1i+n28zFdxoqgOmABeIzvbSp8jVNbx0buXSHocm
- Ozxw==
-X-Gm-Message-State: AOJu0Ywt3Ibjq8CXhvXdeOvAuQ6pg2j2KeJd+mSKRInfSMaCACiiQuyy
- N77Rzphzfza52aqVr6b6F7snMJrUROtBCuVlGVVL7NFno/iGRfJOCyPa/uj2eqjypzRc8VgfwXc
- vVqQTIcU=
-X-Gm-Gg: ASbGncumCgkrlzFmjg1EkqL/AZd2e5oT1585mn2xQOmnNDrY79ycnxkE/l2BjIpNSnl
- /IB5dA2b86UaEdTx7M9Kfw3Vq6sogfcUxBU9al2japUfYmXna3XNCJHIMwD8uBzhePhS9nv3BlI
- dgy+YsOz9vB3PRk1BGlIhlhpPR2UtPtm1Sk6IhXFKTZ8ohnvebA1xjKHIAAkyONtp3o+Z5Q2GJE
- 9TuKgaF6dIbLnj3NI1mk1BCqmCOby7E6dzMIFNGKStt+JJVw+KuAssbE0ebzxDMyE3NKbgfSxYX
- /1CKPLmKRdDg2dU6w9PmGBiYTVkPVBfndtPNLnsemuXDS2xIRtlb1ZauflHgMnfdT06lJ2UmJui
- vr/LeJWd1WjuxKABEbd4vimDm9f9t1VPE2QT7F6RqiqBJ080fW1mbqdSJpeMbnhguoSmF65joS+
- n/g1uQkU7YYD6eh/nsOXTdAQu8ouE2t2r5IMkxgxsR9VnyQG3f
-X-Google-Smtp-Source: AGHT+IH2ECsjutl8EUmCcxQr1Td+15aUWCuZVokvnBMLuANEWIF5eCvkqZAh4bBUpceabCbuTrBnnA==
-X-Received: by 2002:a05:6830:2690:b0:7bc:6cc3:a624 with SMTP id
- 46e09a7af769-7c958c62c44mr3005077a34.32.1764889838240; 
- Thu, 04 Dec 2025 15:10:38 -0800 (PST)
+ bh=PA3rNh8vWTEHVpAK5R2VPPw8Hr9N/Ln1bpDKaYxqvn4=;
+ b=fgCWW9Re3Zp5Gs5erjao072EcthfKpI4cJ9zgtUp6qKkC57d560V48dRRNxjX1bHkQ
+ UEcUqyPKT6i7IVTveVmFklknwkBIpZQ6z+CU5NFM0GFiV50/8q+KyKImAFkANc91892m
+ EUEesWz2eaiR54+f1NocXoeDc8oG0RINrcADJw9GvwdAjPNQHs/O7ETGZKjyKEzrBtpj
+ GPmqZsK/mgpfOn9KIQ0KedGFeUnx6DRsigeKfRmnZfWdynWrGDw+DCVsHcw1ZnW/5wAq
+ oKZCIVBlR4futuxvFUWHSonEBprDrokRk8l/2Cpr65XtFqCABNbMEOaUK19C5exuzn94
+ KyCg==
+X-Gm-Message-State: AOJu0YzYARETwr4gnHl8fFDPhjihe8FbaBJRhkXg6LEpehYlyRb5QuDL
+ 0vAgFeeMmaBiiLFybvv60btkPKlBKEGrmeXpea4aCAqI2c+zy/MQgKgBR0qmSfDkeBQ=
+X-Gm-Gg: ASbGncs5wC7uB+xMUmRYtDc1HPxpfjU6Ri6aO3vthlq6Z7Y+NUluW1ngfDXqldhV8AW
+ H0ppuLBMKW5hXs4HDl07rjphaVwICcsifa33RwM4rM0a6AljdRTiUf8VXhqPhQBmeNRNvX8p9XI
+ MyBzoHyeDxbtWMiVZs3oKIf8wp5c31cQ+XPcou+Mg3GlPoIcE8m1y9hStlkbGqPdBxUvwTK9VVD
+ MESawMAdckyzxwl3HWv7rl+herlKV2BiODW+YXZ0xj/Ub5SHzSTTyWUnJpPGyFcOiOFzkzY7jsQ
+ hcI23UKDMf+d9jzbwtO6wwK3VPhg8q0XsJ51AYUSgriN0wp6uD3CTvb3GIaENyhdb9hR16gnA70
+ 1nMjdIiW0sOJCM7EZNxq8RphAAmlLbasRiA5/J8T83VBHQAphupIv0i+kIFItUoLAlRZ3uqGrpS
+ hza4f2iMNGfU6IuG+/GRm+mJl450TDOtXe0ecC8rabJLOr4Zgs
+X-Google-Smtp-Source: AGHT+IGGi44LUCGutVPQuTqWS1UOhePXGCK3j9877EvT8e+XEbm2ReGh4wFh2LHkA/3trzF/0e3Few==
+X-Received: by 2002:a05:6830:2b09:b0:748:8b42:77ab with SMTP id
+ 46e09a7af769-7c94d8e55edmr5359727a34.0.1764889834885; 
+ Thu, 04 Dec 2025 15:10:34 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acfafeasm2360264a34.29.2025.12.04.15.10.37
+ 46e09a7af769-7c95acfafeasm2360264a34.29.2025.12.04.15.10.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 15:10:37 -0800 (PST)
+ Thu, 04 Dec 2025 15:10:34 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: "Albert ARIBAUD (3ADEV)" <albert.aribaud@3adev.fr>
-In-Reply-To: <20251119145533.843361-1-trini@konsulko.com>
-References: <20251119145533.843361-1-trini@konsulko.com>
-Subject: Re: [PATCH] pcm052: Stop disabling device tree relocation
-Message-Id: <176488983739.2091996.12112038745590083637.b4-ty@konsulko.com>
-Date: Thu, 04 Dec 2025 17:10:37 -0600
+Cc: Thomas Fitzsimmons <fitzsim@fitzsim.org>
+In-Reply-To: <20251119145522.843213-1-trini@konsulko.com>
+References: <20251119145522.843213-1-trini@konsulko.com>
+Subject: Re: [PATCH] bcmstb: Make use of bootm_size rather than fdt_high
+Message-Id: <176488983427.2091996.3598030784575196703.b4-ty@konsulko.com>
+Date: Thu, 04 Dec 2025 17:10:34 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,19 +96,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Nov 2025 08:55:33 -0600, Tom Rini wrote:
+On Wed, 19 Nov 2025 08:55:22 -0600, Tom Rini wrote:
 
 > Remove setting of fdt_high to ~0, which disables device tree relocation,
 > from the default environment. Doing so prevents U-Boot from correcting
 > problems such as having an unaligned device tree and leads to various
-> failure modes in the OS.
+> failure modes in the OS. However, this platform also has a large comment
+> block that explains that given previous stage loaders and other parts of
+> the memory map (that may not be in the device tree we see?), adjust this
+> to use bootm_size to restrict relocation to be below the CMA area and
+> update the comment to match.
 > 
-> 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] pcm052: Stop disabling device tree relocation
-      commit: a1e6508e491c8cdc97f1a76cf479098bbf0d644d
+[1/1] bcmstb: Make use of bootm_size rather than fdt_high
+      commit: 39b10f534f0fa016b228c8b76d090fd2d62d2378
 -- 
 Tom
 
