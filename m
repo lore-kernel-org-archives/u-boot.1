@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA2EFD2A54F
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 22:33:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 973FAD2CDE4
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 23:10:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2930883F6E;
-	Thu,  4 Dec 2025 23:33:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BEAA384159;
+	Fri,  5 Dec 2025 00:10:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CYdLfuym";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F4yax3cm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA4AB83B4F; Thu,  4 Dec 2025 23:33:30 +0100 (CET)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 2FFF884159; Fri,  5 Dec 2025 00:10:33 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D488A840F1
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 23:33:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E9ED84057
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 00:10:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-3f0ec55ce57so1261616fac.2
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 14:33:25 -0800 (PST)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c95936e43cso558741a34.0
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 15:10:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764887604; x=1765492404; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764889829; x=1765494629; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u3Wck14hfV8e+UdlEOLFzRSPx1pfWYOnyAtT2BeJo60=;
- b=CYdLfuymLQ8QnNAhOx3ZGmgRer/RaeQ+47A6bIPUsjkmIBymRWd6WnnKJn6FtOh2jq
- ftf61P5cMQy9CPJxH1j90ZRXvESWw7Ct0hHGHwXwUl77T+hFrvV5klW4XmDj7f7B84pb
- jVQXM55Dco7UBu4x2tM1ocB9cEeq+0UH7ldlM=
+ bh=kd4ioD3HqdkEHu309xzk6lIbsbn9haG3ENmKkSEv1QQ=;
+ b=F4yax3cmT4DdA1CUHEDxGZycE/ZzlXfv+90W1PInd3mvRKsEgZm/A8LwHsllLBfqF3
+ TTLab9a0PslQtP5vew20U/UElmHUXN0VY6AizTDcxbzPFAYzvJcQKC3h08/Ihba+rw3F
+ KWHh2vN9lw57vU8TGs1hijtYG9lp2HwTBcyKY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764887604; x=1765492404;
+ d=1e100.net; s=20230601; t=1764889829; x=1765494629;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=u3Wck14hfV8e+UdlEOLFzRSPx1pfWYOnyAtT2BeJo60=;
- b=kiPqpS35KqO6EfGhqwmzVIjh27a/JEn4OGS0RKqxE+tNfnugeKkBWf6ZMmBJ7j4gcC
- YhDTcAIZb+vIbP0zN/12ZLzwtkrwoAk+2pLNKkYpLUNLNGcWcE6XR1SHDHyKHKLZvIHa
- uu+DoUmRT+w//9L1SeJAxxzTmpErqGir9za6Rm5Uc/rKFwllUG7M1/zJqaSQo4dUw9Db
- fHwhtayasGXGM2JNUtmQ/PEYrCc4/iMHhVc5efX3TPbXw5QipiWgy26vEgCLYC+jcJY/
- AQjs/gvCKfyniHzvHAh5pOVu8EzACT5sHUra/gUjeF8MGj2ZqV/+3xQN9CPhvdRHNoqu
- KwCg==
-X-Gm-Message-State: AOJu0Yxk+UFZ6T+qL1WBZNUoK04Sn0sfW+THjzR4OZvaywL/j6sVO/8Y
- 8td6bZSwbxGh9OMh2LRgyka8ORASDsB7wqiWLc296CrMLZ3SMKnaJXNSgugniOJheDxS9Ik0PrO
- P5l2ZwKs=
-X-Gm-Gg: ASbGncuemDZ3TP+LY+K4POYyGQJkpElz+mX99kQ7tE3oUvrzpWow01WCAzxsju3Yy1r
- RpCMvXTTRY8OTV/8pQyUin9MNSZTeUb9MjKJ7uHa+GrErSzSWopMR5bXZ0KGRiyrT0iDRAf8I2R
- WhbqvN0kP4rbuuno/IU+x7ckMSi9GMsyz4N3bl9xQ82sDp3dAiN97KzhztJWKDe10WmwiuvQCVW
- Bd7ZvFS00EK6k+IhL87FJ2MjaihFipUFdgUmkENOkHO2lOLXvDmjthQ99BQs4iZVbdH1ERT2z2S
- USa0OOXdtqncozz2cFBAfNWUx70R5e2+94hWpZM06d0mBLl4SJTD8fgrDSLvGDPgGmCOmZ5ivBo
- Og+RH5U+BOEJgnPzTh8udyrless9Ro7Berhn6fknVF+6mzaXFYER9PEhQS8G6LLdV2UpjZtC9Wh
- DFsRWH79+oTJkwvPEx1EHYtL7MaRVgnv1i467wR7IlGcZBRFck
-X-Google-Smtp-Source: AGHT+IHoPirLbbzs5ttH9pIULC7+LMUzMksbgBTTpsIQeOCET8+hoI5Nfzg/UytzSQ9KV4pXSjGc2g==
-X-Received: by 2002:a05:6870:9690:b0:3d3:4834:b3c with SMTP id
- 586e51a60fabf-3f16935c369mr4720275fac.35.1764887604371; 
- Thu, 04 Dec 2025 14:33:24 -0800 (PST)
+ bh=kd4ioD3HqdkEHu309xzk6lIbsbn9haG3ENmKkSEv1QQ=;
+ b=g/yFe8VL9TBIEKZctK1E6P9snThgSUBkTvHmkJHgAxPvbWjM9sRcWYIBh9p/9tMCnB
+ b1PAo9KgKUo+DcpFbqbEQSAzGyfGCufJuTBuZStSB81Oi5k+TE2+tDsnafMKzypOpGyG
+ ngGi75ZphRKoyoIdtT2GJilht62cvj1sRQKnyBZ+6K07nfvHBJYQdHSnPt/brYzu3pid
+ ncwL/nWW9wE46IrYlu1GNJvJs3mCSqMILFI3PPUNeXtLin4HAfdGaMqFSWyVie6wCmT4
+ PhI4GVej38HyeaU2lNcW8RfiiAXvx/IZ3g70vteMBAQqcmG0PxCKvGc46LHgFNafmeDs
+ bpfA==
+X-Gm-Message-State: AOJu0YzvRxc7HJpPjtX0a71tDnACQ8ZinVjup4zbCjFJsW+Aljqzo6Te
+ CusHrV2YwXSfsSUigmM2D11lKouk+8FH6cQYV7JVdwj9jjspBRTol4q7HAkboDjFJeE=
+X-Gm-Gg: ASbGncu20hfQudNpdAnTrGH3l2mL4pXIAtvjaYyvCvU7QlWEEA4ofAG+MWtprWWh1HC
+ 8p76iGSuQZ20EfaKYPGfPIaIphnSvIj/fyp6VENMaKpcEP7nt18MzC5oyEDuISGle5kRL97kK+h
+ Lrg7TDsXdxUhT6B5JeIp8bPMqnayRTvbIPhbBS0bbyts57hWJmLHZugLFbILCcXnm4zS+n4Xns7
+ BfECHpSYAR35PmzrQljzLm9wtRN8Utz1nWS+5eK0AJqnOgaHn83MDS3qAvx5mUIu1bOo+YeUOfp
+ mr6opaXAGKlQac2MTpFr1XARYTSEWtPYUEO6kEgqhO7M9srGpDWOtQFSjiIzwyevvjgPbUIo/AR
+ o0QZVbCHVeHOJKjRjYgXHD4DK8Tyn+cE4ewafmSdR+gqjcRsQzjJxMYzxxYwdk5JdyIIgSOK/i8
+ ifEGjBhnh4GLp3MkVc7802QF8D/XAZPuKWh8Nu6kfHqb/wD9gT
+X-Google-Smtp-Source: AGHT+IHPCUi9ZpZdNMUl7w3wdqq1RdRgwUgOQ/Z9HsASMGQYgyXqz8Sc9wI6PE9W7xdumgilFqJU6g==
+X-Received: by 2002:a05:6830:2541:b0:7c9:5e2e:2984 with SMTP id
+ 46e09a7af769-7c95e2e2d02mr2411314a34.7.1764889829240; 
+ Thu, 04 Dec 2025 15:10:29 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f50aa31534sm2220312fac.2.2025.12.04.14.33.23
+ 46e09a7af769-7c95acfafeasm2360264a34.29.2025.12.04.15.10.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 14:33:23 -0800 (PST)
+ Thu, 04 Dec 2025 15:10:28 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: David Feng <fenghua@phytium.com.cn>, 
- Linus Walleij <linus.walleij@linaro.org>, Peter Hoyes <Peter.Hoyes@arm.com>
-In-Reply-To: <20251119145541.843466-1-trini@konsulko.com>
-References: <20251119145541.843466-1-trini@konsulko.com>
-Subject: Re: [PATCH] vexpress_aemv8: Stop disabling device tree relocation
-Message-Id: <176488760341.2085159.6934397254696990379.b4-ty@konsulko.com>
-Date: Thu, 04 Dec 2025 16:33:23 -0600
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20251202212033.2692954-1-trini@konsulko.com>
+References: <20251202212033.2692954-1-trini@konsulko.com>
+Subject: Re: [PATCHv3] boot/image-fit.c: Use aligned_alloc(...) not
+ memalign(...)
+Message-Id: <176488982841.2091996.1763416574097809110.b4-ty@konsulko.com>
+Date: Thu, 04 Dec 2025 17:10:28 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,19 +99,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Nov 2025 08:55:41 -0600, Tom Rini wrote:
+On Tue, 02 Dec 2025 15:20:33 -0600, Tom Rini wrote:
 
-> Remove setting of fdt_high to ~0, which disables device tree relocation,
-> from the default environment. Doing so prevents U-Boot from correcting
-> problems such as having an unaligned device tree and leads to various
-> failure modes in the OS.
+> With the changes in commit 8fbcc0e0e839 ("boot: Assure FDT is always at
+> 8-byte aligned address") to call memalign(...) we now always call
+> memalign(...) rather than malloc(...) when allocating a buffer that may
+> contain a device tree. However, memalign(...) is not portable among all
+> of the host OSes we support. The C11 standard does require that
+> aligned_alloc(...) exist and it takes the same parameters as
+> memalign(...) does. Change this file to call aligned_alloc rather than
+> memalign, and for the non-USE_HOSTCC case define that function back to
+> memalign.
 > 
-> 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] vexpress_aemv8: Stop disabling device tree relocation
-      commit: 59f9fcc1f514762674ac07c13c2a85f7aace7250
+[1/1] boot/image-fit.c: Use aligned_alloc(...) not memalign(...)
+      commit: abd6e0f252ee17b18e98be69d87aaca6a26e8336
 -- 
 Tom
 
