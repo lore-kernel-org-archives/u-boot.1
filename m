@@ -4,95 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05B23D2069D
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 14:03:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 984D1D2069D
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 14:03:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20A9083B48;
-	Thu,  4 Dec 2025 15:03:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D0C2683CD2;
+	Thu,  4 Dec 2025 15:03:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KBrNiL/W";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BU43wE/K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7607883B4A; Thu,  4 Dec 2025 15:03:29 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1943484015; Thu,  4 Dec 2025 15:03:37 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D23183B1E
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 15:03:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0871A83BB1
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 15:03:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-37e56b0712aso7790231fa.0
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 06:03:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764857007; x=1765461807; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y9E789lbLDE3ipogijPVvvtspCXoGcYkxeic+vTVaX4=;
- b=KBrNiL/WUVpBx9Pf7pz6XFrJN4vwwApeKKTwGcKTXqkqxxFFDfhurW/FlVrgyIQ/4z
- KbYfXQE/dK37eTy2GJ3OovHmf6HWPgdtS8ulrPiuj/KZKPiJ7z3o0LKf7EQpb9FN9OWg
- QVfUw1M5U6oBD4NLKcqqi2YPmI3nRAhdi0+/rrRsQyOcrHtHWDe12rOCatcDqdzLeCMM
- CaZnoldgPyuHrIe3mTS95iEIpWCh1+MIZpreSNzHIJfOcUy9+xprH5td8ngcxBTUIz9e
- NvMm/3LrwgZzH0NIvteUIBfF6SXRwq2Rm2YZUYiCXzn4JdBazImFEM0gzPLO4Ui/zzGw
- v/4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764857007; x=1765461807;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=y9E789lbLDE3ipogijPVvvtspCXoGcYkxeic+vTVaX4=;
- b=GRnbGym4BqwoIJWpLpbq47+as7Ck7WU6+ExHeBj4B8/xOlSwKosC6nivYWHQyO43f1
- mo4wO/KUphrBXp6OxP23GcRvhHlzHkbGpP9NQ9M3dZRo5tUHIU8Nxv3T7UPXmUQaSVbu
- a+7VC649Zph8uVQBdYYOnhuC7MbLg33wH8CEpzMn+9p7N9LTTgWHe+0vhHvCtjE0e2yt
- GsKc3hFrEyJfaMoXOZ8tAS00Hdmkku0VqAqvdoF+AH5sC8xe7PmBM6X6d40C2gIot5+s
- Kgqim13FAlhFNErKVhKzK8YDOdl/SfamaiElluA07qJvLVECVVVAMlkPxOatBZv9dKvx
- vEBw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWjc2ISI8Dg+v9XLLofsJBoodXi7qEOrUXSh/t4Hr7cL/WrH9ZuKIuM3sqVAOVPq4K0Nr3a/bo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+5l0FrVbi5kojPnaHzPK21WY4qolcZXPFzCz0r+U9qQGQ8gjc
- fP7YOlNkGpNb7sc3egamLqlCrvCH8z4Dtk8jit00KYKvmX8DC2i7IYzPuh52Hq0HgVciD/xhkwI
- GtTQI8/QP1ZHnHOMc2hSah1l3mCQO6Gc=
-X-Gm-Gg: ASbGncvrEM325cFRaNvtyvu9qIv/YD1BGWN6wkl7yFR/v2SADfZejKUn222oLOCddNN
- Q23Tmw8rz0Qm+DuiV+uFZt8DdYdabDpZVgKFYjYZ2ndtDmOX9lTuY4CO3BGkLLr933XPQ6kETb9
- zk/H25LgVA8IYR4w9zRzsiT4yyAupHEhM6jLa7UN2iIOTW9xc+0YpPFWJ9m6IS24BXIvWkRN5Bm
- dcHfVw9BPmpbDQECxg2S8/QYoWvkcXfWDxnlGMpcNDwBUl2J7V4BccIRDdWFjZ5HyM4Vf9obBLc
- rOfmJpigD3dtj1bMAzd34xM7iAI8ZxpYZerXRRg=
-X-Google-Smtp-Source: AGHT+IG/VjeswEW8gWeJXlGOHXxlsMZZHqOXlPLKbDhz3MCtGXO1ql7tU+kb6wwl9GKsybbPNBBjFS6pQU6g8HS24SQ=
-X-Received: by 2002:a2e:8083:0:b0:37a:7b74:fe13 with SMTP id
- 38308e7fff4ca-37e63959171mr16522531fa.45.1764857006352; Thu, 04 Dec 2025
- 06:03:26 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZfbRliXPnvr+lZaceabRHuM2IeQUOHWW3i7wzs4KvGR3ijRkilvCeE9JNZ3N1RsMZtSRE/UJyHRRdtXHmNyfJ3Gf+VbyjANRU3d6PGrQcRg3NYLGdu6TP2tCWSsjUXQ5gPnqz8G9yXUCpclWBjIvTHGLkhXlOwJNb3iyoeCoT/hnpi3/y8LFzSyrPETfWJWYzBtRJ7d9+5ATZ+W5WYA/J5b+KJfMYcENlL0cVD76/Cve2CKVKMbO3iU6DxIXQPV1rhCFgL2a/m9MDRL+CYYnG/hbo0YkznJ9q+Snm4wz5egRSYpQvFHToh2O2cDZccnzNJ9rBOIZNOICMNmjFbVaTQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eItvY2uUbSA7ugPDH0NZZvIgkXVHi9RzWmX+2Noa7hw=;
+ b=brmuvkdZ2FQ8JTtjgLS/5VYzwyibJLt7Ml+YotxD6XDOh37zQ8Z/Tst01kynjBf1SYmTVt6EZTT89hPeGnrxv7x1C03X9snI7s7i/BEEUXWkpUm5OD1MoIt4eU9BTjxH6RfUzNbwEYFymqkV53ED1SB45nVtKl5YetE8iZVH9G4xF09lpivd3whKtB/tU8w9MJDsB1fyRYcxf0m3VBVwt1IbikXUdIdwHJ2pZWWGln3x2/sZCSKgHQywFcYgFThBb4wlpj4xsxk0bXMmAgnqnaURYQHOMokDUHMxamRurS/tvz90YHjoeqyRjdwW2WFo7Qlt5U83PklXkMxY20v04A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eItvY2uUbSA7ugPDH0NZZvIgkXVHi9RzWmX+2Noa7hw=;
+ b=BU43wE/KoWMDrjlnAdPEWVZ7Ju0/bmhVsXzkolVN1Ru1H6Eb4mEvfLMGNwUi5QxuX1ulO2CTKfa354ZmEdonfQmtoZCwpkL0PIJUaaqV8aRlhr5ZNlmIOmrwYXo52Ter80O3Be3IUMs0P98PEjRb00Bpl2DYkEGylUpWCJhM2ZU=
+Received: from PH7P220CA0138.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:327::31)
+ by IA0PR10MB6724.namprd10.prod.outlook.com (2603:10b6:208:43e::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Thu, 4 Dec
+ 2025 14:03:22 +0000
+Received: from CY4PEPF0000E9CE.namprd03.prod.outlook.com
+ (2603:10b6:510:327:cafe::9a) by PH7P220CA0138.outlook.office365.com
+ (2603:10b6:510:327::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Thu,
+ 4 Dec 2025 14:03:20 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CY4PEPF0000E9CE.mail.protection.outlook.com (10.167.241.133) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9388.8 via Frontend Transport; Thu, 4 Dec 2025 14:03:20 +0000
+Received: from DFLE207.ent.ti.com (10.64.6.65) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 4 Dec
+ 2025 08:03:19 -0600
+Received: from DFLE209.ent.ti.com (10.64.6.67) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 4 Dec
+ 2025 08:03:19 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 4 Dec 2025 08:03:19 -0600
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B4E3HdK1651998;
+ Thu, 4 Dec 2025 08:03:18 -0600
+Message-ID: <4ed7ac60-97bd-450f-8313-6f9bf0d56d51@ti.com>
+Date: Thu, 4 Dec 2025 19:33:16 +0530
 MIME-Version: 1.0
-References: <20251202-imx91_frdm-v2-0-992b8aa99375@nxp.com>
- <20251202-imx91_frdm-v2-2-992b8aa99375@nxp.com>
- <CAOMZO5Bu6735Rb=CfwBMeiJdStqx6ATZVQU9=-EngzkK2qhVng@mail.gmail.com>
- <93024512-1ab0-4fdd-aed0-f52849528c21@oss.nxp.com>
-In-Reply-To: <93024512-1ab0-4fdd-aed0-f52849528c21@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 4 Dec 2025 11:03:15 -0300
-X-Gm-Features: AWmQ_blYn16FW7b2fsu7mNd6iZgZsVxG6dDoNVi9ayQl_slXcB-fd_PZlIiSGN0
-Message-ID: <CAOMZO5B+NtDy1WOgOF71F2OzrpNzbDeUctvOKk5eK55H9Z4f6g@mail.gmail.com>
-Subject: Re: [EXT] Re: [PATCH v2 2/2] imx: Support i.MX91 11x11 FRDM board
-To: "Joseph Guo (OSS)" <qijian.guo@oss.nxp.com>
-Cc: Joseph Guo <qijian.guo@nxp.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>, Ye Li <ye.li@nxp.com>, 
- Alice Guo <alice.guo@nxp.com>, Adam Ford <aford173@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Simon Glass <sjg@chromium.org>, 
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
- Francesco Valla <francesco@valla.it>, 
- Jacky Bai <ping.bai@nxp.com>, Justin Jiang <justin.jiang@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] arm: mach-k3: j722s: Fix eMMC boot functionality
+ broken by Ethernet boot
+To: Chintan Vankar <c-vankar@ti.com>, Tom Rini <trini@konsulko.com>
+CC: <vigneshr@ti.com>, <mwalle@kernel.org>, <u-boot@lists.denx.de>
+References: <20251204122127.717108-1-c-vankar@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20251204122127.717108-1-c-vankar@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CE:EE_|IA0PR10MB6724:EE_
+X-MS-Office365-Filtering-Correlation-Id: 93f3d19f-b757-4955-9527-08de333de16d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MVY3OWpBMU5CVTU2MkdJTHNWYVhYc1cwdXVaRGNUME1zMnF4Smt0L0pyOFlr?=
+ =?utf-8?B?TGthOGVvMUJJZmdEVHNYdU1xWlpzSU9nUkdCVDBIbjRER1BPV3YvdGdwUHA2?=
+ =?utf-8?B?MUg3VHFFYUFRUW5qZDJlYWpBamMwNzNHWUVIYVRka3lKdmRBVXdUbkpNdmhv?=
+ =?utf-8?B?OG5CdGRIa3czSUJwQWlQZnJiUGd3Uk55Wm52K1FIVytYTllpbkJWRk93UUlN?=
+ =?utf-8?B?K1p5R0cxdldnQzFUNFQydEpLcU9kT3VhRUFPbUJFZnJlLzh1N3ZtUEVoYlpQ?=
+ =?utf-8?B?cnlzY1hvZHEzb3dHNFZQalpVK05MUUhtYUhTc3pNUXdVdkYrTGpqWHJQSGVs?=
+ =?utf-8?B?WWZ1WFRnZlR3TlN4M2R6QWxMdTlqVzZWQkZhWEhXQnhVTXhWSis2RGhHUWhT?=
+ =?utf-8?B?S2RmRjlYUHp3SjIwSS9uR2toRGRhWERpUjkrTUU2ZTIvV05KQjkzWDl3UlJp?=
+ =?utf-8?B?VStnYVFoNkNTVVJadS9iQTBsTDBaUHhhd0IrNTZLbzNPcUZ2eHVacG5wblZS?=
+ =?utf-8?B?K1MyMFVJUEI1NzRpcWZNNVhoQUszNlVUTUlrejNMVVF0TTlHQ0hOcDJkUiti?=
+ =?utf-8?B?aWtnSEdlMks0a1BRSVpEdEVKOEVzOXhVRlRMRzdDN0hHVVNmeTh6TzhoNm1D?=
+ =?utf-8?B?UUlzU2RZdm5HaXJDM0YreEg3QnN6TzUyRU1mb0VOZ21Yb0lSSUNZbGdHVTkv?=
+ =?utf-8?B?a282ZE8rSTg3b1BaZG8yR3prVHE0ZjlIUk4wdFJRTTUzaWFYNnVWeXZKdVRl?=
+ =?utf-8?B?eHlTZ3IweFZsUjZKS0tldXRVR3JKYzI1Rnk5L3dmMXMySzEzTFVCczUyZ3dj?=
+ =?utf-8?B?S28rckJ0ak85YWJlSGtyRGVWWlVCS1h1cVFVemIzQUI0clc4TncrYm81RkR4?=
+ =?utf-8?B?MHMyUnUySXhaTTJnWjBuQWJKU2kyMGQrcXpFVFVzMHlmckxmT2liWnJWRmI5?=
+ =?utf-8?B?bjNlL1E0U1BpWkhXSWZ3akc1MDBRd0NMWW12ZnBLU2g2WldHMHVtZ3M0aFZT?=
+ =?utf-8?B?RVhtRXRxU0tiYi95K2xBaUJJY2NpM3h4enN5dTJ4MEkzbCttd0QxZGlUWmJV?=
+ =?utf-8?B?TlFWcVJ5NE5jTHpKUUtCVzlxYkt3VThpY1dRa2IwcjFMZzlQbERYTzB4N3Va?=
+ =?utf-8?B?QTdaSUxHVTAwcmhUbEtFdFNkVGVEMFp0cDZMVDhkSm9CKzJCS1hVQkNoVkZj?=
+ =?utf-8?B?OGt1V0Zaaks0UG84Rmt0Mm9IcVdUZW4yR1ZmNURrTkZNbkJML3lqTnRVd0V0?=
+ =?utf-8?B?elNtUFZlYk1vSEdzRmRzcnZVZi94ckJ0SkY1c1VmNHNtVnFTSUh0R2JnTlVS?=
+ =?utf-8?B?Wk9INDdJU0dJdnR4RW1jZUxidjZFaEo4Z2NEczFMUFptTWNHQUkwNDhRNFVV?=
+ =?utf-8?B?MzZ4TjQ3YXhHckRMV2JEWWFZcWF4Ri92SDE4cmNZVURneTZTOEpXKzBIK0Zt?=
+ =?utf-8?B?UXVkcVdjcTB1RjF4N1NxRThDeitENUp3aEpLVzUvNUJieWRNT3lnWmpxL3R5?=
+ =?utf-8?B?Q3JpVkRtTUozdkdPcEROUmFKVlZkK2hUcWxYNWgvQUxaRzRxbG42MlZuYVRC?=
+ =?utf-8?B?TWRFK2hlL0xyUEp6NnJLc29CdjhKNWxYSUhZYzUwUzRta01kSExnY2NyZUh3?=
+ =?utf-8?B?Ym8wVmpSemp4VnpnL0tJdHd1diswY0lvalo0WEtPbVRLZ2NueGpTKzlvRU5N?=
+ =?utf-8?B?Szg2aWN3Z0RUbVE4Y3k0WHdRVk5kdCtlSVRwY1l0aWFWRFd0WExpRkVrYVVE?=
+ =?utf-8?B?SVRXTDhLM0RkSk5nK2dkbDZsNG8zRXdBLzFKNEhIT2tzeVhqOExIdHFCU1hs?=
+ =?utf-8?B?anZBTVFpWXppSHVCSE04c2FBYmVtdTJpa2VVeXJFeGNwaDBadktMOWRiVW83?=
+ =?utf-8?B?VVlrb0dOUDFmNGRXSkVSWXBqd0ZpbnpHbkRWdEdNcWdXRVZtTjBwcXdpY00w?=
+ =?utf-8?B?aTZrMENkNGlsQytkYVVLV29BbGd1ZGlWUnpYbXdFQmxkQ0hPYzhpSzR2SHE4?=
+ =?utf-8?B?UXNDSUIxVTAvNktIRUhHV0VYeTJ5d2pnYWlXRjRJVE9hTUV5Q1FwVEdlSzAv?=
+ =?utf-8?B?Y1BpT1pvU1hGWnFoQXBIQUZxMi9ybmdGUHc3Q0xYbERIa2JaRERsRmNKallJ?=
+ =?utf-8?Q?vguo=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2025 14:03:20.0444 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 93f3d19f-b757-4955-9527-08de333de16d
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9CE.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR10MB6724
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,33 +165,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Joseph,
 
-On Thu, Dec 4, 2025 at 4:12=E2=80=AFAM Joseph Guo (OSS) <qijian.guo@oss.nxp=
-.com> wrote:
-
-> Hi Fabio,
+On 12/4/2025 5:51 PM, Chintan Vankar wrote:
+> While adding CPSW device support to enable Ethernet boot for J722S,
+> dev-data and clk-data for eMMC was removed by mistake, which leads to eMMC
+> boot failure. Update the dev-data and clk-data to fix that.
 >
-> USDHC2 is for SD card and its initial stage is at u-boot.
-> The IO voltage switch from 3.3v to 1.8v need extra 8ms time on some
-> platform. I also tested without this delay, SD card can work as SD3.0 on
-> imx91 frdm platform.
+> Fixes: a02009f3a816 ("arm: mach-k3: j722s: Update SoC autogenerated data to enable Ethernet boot")
+> Reported-by: Michael Walle <mwalle@kernel.org>
+> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+> Tested-by: Michael Walle <mwalle@kernel.org>
+> ---
 >
-> I prefer to remain this to avoid potential risk as 91evk 93evk 93frdm
-> all remain this property.
-
-I understand that a few NXP boards use this
-fsl,signal-voltage-switch-extra-delay-ms property.
-
-Linux does not use it. U-Boot should not use it either. Whatever
-solution the kernel applies to provide this delay, let's use it in
-U-Boot.
-
-I would really appreciate it if you could investigate this with the
-NXP folks and try to remove this custom property from U-Boot.
-
-Let's keep the U-Bot dts files as close as possible with Linux.
-
-I appreciate your understanding and cooperation.
+> This patch is based on commit '69c8ea98a713' of origin/master branch of
+> u-boot.
+>
+> Link to v2:
+> https://lore.kernel.org/r/20251201060839.777816-1-c-vankar@ti.com/
+>
+> Changes from v2 to v3:
+> - Updated commit message as suggested by Udit Kumar.
 
 Thanks
+
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+
+
+>   arch/arm/mach-k3/r5/j722s/clk-data.c | 12 +++++++
+>   arch/arm/mach-k3/r5/j722s/dev-data.c | 50 +++++++++++++++-------------
+>   2 files changed, 38 insertions(+), 24 deletions(-)
+>
+> diff --git a/arch/arm/mach-k3/r5/j722s/clk-data.c b/arch/arm/mach-k3/r5/j722s/clk-data.c
+> index 238d57d0aa0..cb3d864c5a3 100644
+> --- a/arch/arm/mach-k3/r5/j722s/clk-data.c
+> +++ b/arch/arm/mach-k3/r5/j722s/clk-data.c
+> @@ -68,6 +68,11 @@ static const char * const main_cp_gemac_cpts_clk_sel_out0_parents[] = {
+> [..]
