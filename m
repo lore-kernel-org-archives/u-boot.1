@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4799DD1D893
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 08:08:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB2BD1D893
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 08:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7546583D77;
-	Thu,  4 Dec 2025 09:07:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B08E583F7F;
+	Thu,  4 Dec 2025 09:07:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="H2oNL/KF";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="UR9a6lot";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F86483F69; Thu,  4 Dec 2025 09:07:51 +0100 (CET)
+ id 5832C8389A; Thu,  4 Dec 2025 09:07:53 +0100 (CET)
 Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A9998389A
+ by phobos.denx.de (Postfix) with ESMTPS id 0C35C83CD2
  for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 09:07:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=norik.com
@@ -32,17 +32,17 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com;
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BZee2LfQVnItISJGgRYUM9NMay/9DNhIGOJf/t64cA8=; b=H2oNL/KFOyhnYMe0tZEruS7QIY
- enxkM/WUIj3R6cHqQCJnHIiwXEG/WGs6EzKjohKCEGXmZpPZERriNM+N6jiNMKKOX7QM6XHBGVh0H
- qIyeJbBv+pso3WbYAwC1iWAnkAOXcu9X/NBlLbnZSVlL7NE91qbM2mVtpzrFPEuSfwP76keL6uqNr
- /9lNpYHVTur28kFjufwSRyjxWZp5+rr/qZU01NPWviCtF9kAtSVTRwlJAngDbACUFOOzO7gDOFvm2
- yBskYXo1EwvTUijd6BNQic975G9Xp8KFyN7RwoCp/gKLKp29Dkw7pMiag8NSGFm/d4Xni9JdVkj6M
- q3U5F8cw==;
+ bh=8RojWQGU/DEfI0smJL92OBXKd3i33M1O+E8q2wbxul8=; b=UR9a6lotalUJ4kUG15s3CTqfMD
+ bbe6fyRlKGWgaGJNR85Onxajckrt+qmAq5qtPHTAwhjFl6FqbrxySWg81qDTnbuleyqXiHt/2yfWW
+ UgA5H5ylYaHbgNav69virTXt7NEUDsfQY+DSH/V6vo+IWZION7CXKshoC9MLplQdDIF/SC3uMd+8j
+ ukNUHuB+kktG0bQlQIy0MKFqCkfrL4PsBhY1jGBt5diOjxcPbBpQmVY8XbHdP1/w8NP8N8RTUNi7V
+ xVrpkUNV9JBXExSt481vSf/UH3wP44ZUkITJjCSiaoushmC5fbDCuxrPVf5AduTFOqdcL1RJWfILm
+ iRVJouBw==;
 Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:43766
  helo=localhost.localdomain)
  by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.98.2) (envelope-from <primoz.fiser@norik.com>)
- id 1vR4NR-00000003FHo-1JVH; Thu, 04 Dec 2025 09:07:45 +0100
+ id 1vR4NR-00000003FHo-0xKu; Thu, 04 Dec 2025 09:07:45 +0100
 From: Primoz Fiser <primoz.fiser@norik.com>
 To: Mathieu Othacehe <m.othacehe@gmail.com>,
  Christoph Stoidner <c.stoidner@phytec.de>,
@@ -51,10 +51,9 @@ To: Mathieu Othacehe <m.othacehe@gmail.com>,
  Benjamin Hahn <B.Hahn@phytec.de>
 Cc: u-boot@lists.denx.de,
 	upstream@lists.phytec.de
-Subject: [PATCH 3/3] board: phytec: phycore-imx93: env: Add required uuu
- variables
-Date: Thu,  4 Dec 2025 09:07:44 +0100
-Message-Id: <20251204080744.3868067-3-primoz.fiser@norik.com>
+Subject: [PATCH 2/3] board: phytec: phycore-imx93: Set boot_targets dynamically
+Date: Thu,  4 Dec 2025 09:07:43 +0100
+Message-Id: <20251204080744.3868067-2-primoz.fiser@norik.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251204080744.3868067-1-primoz.fiser@norik.com>
 References: <20251204080744.3868067-1-primoz.fiser@norik.com>
@@ -87,30 +86,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add variable 'emmc_dev' and 'sd_dev' required for NXP uuu flash scripts.
+Set boot_targets environment variable dynamically, so that when booting
+from SD-card, boot binaries are also preferably fetched from the SD-card
+by default. If the user decides to set their own boot_targets, we should
+not overwrite them.
 
 Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 ---
- board/phytec/phycore_imx93/phycore_imx93.env | 2 ++
+ board/phytec/phycore_imx93/phycore-imx93.c | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/board/phytec/phycore_imx93/phycore_imx93.env b/board/phytec/phycore_imx93/phycore_imx93.env
-index 8a2161e4abdf..b6613d015032 100644
---- a/board/phytec/phycore_imx93/phycore_imx93.env
-+++ b/board/phytec/phycore_imx93/phycore_imx93.env
-@@ -3,6 +3,7 @@
- boot_script_dhcp=net_boot_fit.scr.uimg
- bootcmd=bootflow scan -lb;
- console=ttyLP0
-+emmc_dev=0  /* This is needed by built-in uuu flash scripts */
- fdt_addr_r=0x90000000
- fdtfile=CONFIG_DEFAULT_FDT_FILE
- fdtoverlay_addr_r=0x900c0000
-@@ -11,3 +12,4 @@ kernel_addr_r=0x88000000
- nfsroot=/srv/nfs
- prepare_mcore=setenv optargs "${optargs} clk-imx93.mcore_booted"
- scriptaddr=0x83500000
-+sd_dev=1    /* This is needed by built-in uuu flash scripts */
+diff --git a/board/phytec/phycore_imx93/phycore-imx93.c b/board/phytec/phycore_imx93/phycore-imx93.c
+index c6a4e923b074..cfc6d91f20f2 100644
+--- a/board/phytec/phycore_imx93/phycore-imx93.c
++++ b/board/phytec/phycore_imx93/phycore-imx93.c
+@@ -38,6 +38,8 @@ int board_late_init(void)
+ 	switch (get_boot_device()) {
+ 	case SD2_BOOT:
+ 		env_set_ulong("mmcdev", 1);
++		if (!env_get("boot_targets"))
++			env_set("boot_targets", "mmc1 mmc0 ethernet");
+ 		break;
+ 	case MMC1_BOOT:
+ 		env_set_ulong("mmcdev", 0);
 -- 
 2.34.1
 
