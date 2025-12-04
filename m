@@ -4,145 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF0E5D2A532
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 20:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D1EED2A532
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 20:31:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88D2C8416C;
+	by phobos.denx.de (Postfix) with ESMTP id C6B2F84179;
 	Thu,  4 Dec 2025 21:31:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.fr
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=OUTLOOK.FR header.i=@OUTLOOK.FR header.b="Qdc3QfHs";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="IIvuq6Zz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DC2984158; Thu,  4 Dec 2025 20:34:18 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazolkn190110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 81E498413A; Thu,  4 Dec 2025 20:48:16 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 392BE84083
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 20:34:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77358840FB
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 20:48:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.fr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fberder@outlook.fr
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JAOa8d6S2yhFsKfubwR0HQIAbp767lVnbN2STztpqgKDQ7uSgC1t+EbDdKsMlfp9fVqW6RZ769iJfuNID+fhkY/5gEHYGmLs/rPA/e6nRZbJFahrXUcAXtgf90ezjytQ31ODNC5iL6EwpKsW9EGJyVz0/bhY3qxa1Kr4AfyOvo3pdQUbmbtNIkAlV3ViSPjM44xV7UJ67A61LwOgKqHA6JbYTesGvqlHjyyvWFo8jvbb2T3yMCyJnyP209OjSolIvPqpGxQL5MalJnhd5jqUsikCweWt7bsdN8YLbDFPScvB883LCfZ8SABiMRFtfjyjMU35Xr1jPdxZnyTEHonHzQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3yypH85P+5ikugvIe+i20qqURUhazXEkxJiOboFcXfg=;
- b=e3NYNQrDugyFfpiDvTYk7HIc0tyRo1F38d7tw0E+LUrTQzJG3gPuCrhLRO49jUgrMJGgMgkFWdGfwZFXQg7I7Wmy6Htmfh27k2zKhrQP1vKOtFNtnePI79GTt83kLuo6lQpnrBpMcBW4gX7Y+6UWmAIFUiq9rAg2K74jiFsuhyKQCIEqFjQlKDrmwM53cfJsnlSx/0scLUu0P7VnWPVyRR211y4tAE4akVaiDRubieJ+8NJFJXoTUoruoRMruQehUWE4FFqpUKZS3bfCxhhpujyWpyjaIyLOtAzzzjNu9Xo5HzkPxaQxCjRxw4wUylmfwMstX+zwrbfeR7WZwop1bg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=OUTLOOK.FR;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3yypH85P+5ikugvIe+i20qqURUhazXEkxJiOboFcXfg=;
- b=Qdc3QfHsAjNXXHHczRH5XA9knPFzkiwZVMO8RNVwR96Czvj80CREl4AbRMbS4e0vCn7BTYR/6ncHTYpPI0zSt+t62qepksDwEcHKfSFlzb9iV4j3lMNldbXwHsLak5eQ3voSy/GTT7AzBaeY21jmOKPTf52lKhEn+iy0vobVLRipCIdXXyy80MfzzReyFV5rUleyDxaqnKw4/gnZ8amKocfyFU3UVfZ6ctxexnZIvt6tEGrIjFRvxtydLoKz7X4LXvZldt7uKKIGAf6ICN2zq4TO+zTbfCx4GW1vcM8/+CqH0QL1tYJIq4g1z1AA3tMdwalZZQ2IKkq1XgivDNEYnA==
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM (2603:10a6:b10:e8::5) by
- PAXP194MB1408.EURP194.PROD.OUTLOOK.COM (2603:10a6:102:1a2::17) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.9; Thu, 4 Dec 2025 19:34:15 +0000
-Received: from BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58]) by BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- ([fe80::116c:6a13:5362:4f58%6]) with mapi id 15.20.9388.003; Thu, 4 Dec 2025
- 19:34:15 +0000
-Message-ID: <BESP194MB2805B8F03A4EBD778B7656BADAA6A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Date: Thu, 4 Dec 2025 20:34:12 +0100
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Francois Berder <fberder@outlook.fr>
-Subject: [PATCH] dm: crypto: Check malloc return value
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Ion Agorria <ion@agorria.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PR1P264CA0130.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:2ce::15) To BESP194MB2805.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:b10:e8::5)
-X-Microsoft-Original-Message-ID: <57e3cacd-8f2c-48f7-a175-b3068acb15ee@outlook.fr>
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BESP194MB2805:EE_|PAXP194MB1408:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4c36f5e-b08e-4a3d-bd42-08de336c1bb8
-X-MS-Exchange-SLBlob-MailProps: 9IecXKUgicB/6FIclOKKnW91krwC5QVjaTjjPs3ghdG+QmExKnRX6DwzTeUTPywYE3GS3BGjtWJH8JW5/5TimRVuoMbgI+mm3rB1+CwzjZG5JTSvrFK7Y/d0W4xqdeF4RSuZSeYvD1WaGRH/ckFGuCMwMSxruOGuVgWaLubegB66hDp1o+Gjs3JG5c5ZRQMJjaWHQqliqOxoTQIIXltGEqw38s0GICHumYF2XxKavH6QEMqs4AN2Kiy6N7n6iHQdDCovAcqtsl/uXojyXlxiMCyZrXdBAy+XL53gDBINGrxm9aEw0zzwebna5g49Cg2kigtxn1w1SF0ZhmqzyL2DpqSe12DUMjvzWXdliVnbZN7HNXMGXKoK3w87hrbGsMWUE039nnSb1lZIs/CJ3ceujGjV2M156EVy0g8TOS6V07Hae1Kiy22sUYh0iueCXUdp1QyiRdWJnf84sJx7/Dwu2j450ObD4sfoVYhdoluEgFSwCnXWx1VwrETE9il9tv+u/P9amdAJ4zaMwKdUpv7tatI5kjVqSoMlJmKcFroP36RdH1JUz+UX9RfiSAYRZAlMWwMNkeTFV6lC3m9VABaTDReJ7l2uUHybThcyPPY4MIXC9lLpAp/YIKl+AfHVOE1nDPtPnqlDavq5cyRfBYMcpZkytSFSPxrk3J3F6UncpkwIhN+90BiAV+Hl0BXtL2pn/nQxxEelhy47NPpq2Yl4vkakByW+VkXOhrM+xYCmCIlKm4JDBGUH4g==
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|5062599005|5072599009|23021999003|41001999006|15080799012|8060799015|19110799012|461199028|6090799003|3412199025|440099028|13041999003|52005399003|40105399003|12091999003|14041999003|19111999003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?amZIYUFFdWNnVGZUSkRJRm1ZS3Z2ZHNhNmVoMjR4RjNYblR5ZHRUQ2lCNng2?=
- =?utf-8?B?di9aRnNmekxWbmJ2S2JobmQ3bVN3WTFaRTViTVY0QUd0VE9zTlhZYkRjNGty?=
- =?utf-8?B?UDBuM0x0OFd5emFWL2pQVCttR0pjK29XeWdCN1J5N3l2MmZnbDVDYTcvTjhF?=
- =?utf-8?B?VFBuVUhCbHlzbytVcGpyK0t2UHdISjFaYVl0NGxDL0xpbTRwamRQNzgxZDRT?=
- =?utf-8?B?T2N1RzlhWVhDTEsyVVlER1dnVlBtZUtRb0FSNkFsemxKNkRDcTZBNGNGK0t5?=
- =?utf-8?B?ZDhNSXp0MEpYSENhNS84TThvdkJ3V2JnZjA0QTNUeENDWFRWTmlRYjUycE9k?=
- =?utf-8?B?c2tra2FVc0YwaHhqRWp1UkR5b3RsUTI5N1RtSU1KajVoQ0hFSENabndhUmpN?=
- =?utf-8?B?RHk2Vk56UzhVZmxpRURNT1VDVm1jZTNuN1JpUmkzTVBGZVpZREdJbVNnUStH?=
- =?utf-8?B?clhETFZVMVFHNllVQ09jVGxMYVVsYmRxQnEzK0FNcFZhdFcvR0hBOUZiaHlB?=
- =?utf-8?B?QXM4MlhjVTRPOWVuTFVPSEZzQWtmSlR6bHNDYmYwckI3NmxFYTUvT3ZBc0ox?=
- =?utf-8?B?c0kwSUxwNTEyS2tGN0gxK2tWa0NSb2xjODJQK2RpaGc1aGJiYU1DZ1ZuWjYw?=
- =?utf-8?B?T1dIVXdyRDJYYTFuM2ZpRXJCMDdwL1p0V3dDb0NrakZHeG0rdWdzb0pvNS9X?=
- =?utf-8?B?UjFxU0wwdURBNi9IbTZXWmJVZVhVelpkZVdVVnM5ZXNLaG4zUFZxV09VWncv?=
- =?utf-8?B?VGFhNndvby9zL3FTdEpuUXIzb2ErTzh3V2RLcjVSbFBuLzg4ZlhTZG56VEpj?=
- =?utf-8?B?V3c2RFFENzB4d0hBcmpoOFdZOVdoYUhkSU1nQitXRXdwdFJpMXR1L1ZQWDBT?=
- =?utf-8?B?S2tMSWh1K00yR1I4SUZDZGVWRHNlSmk3ZnVEcDI5MWlhLzdnSTlpUlZZZjVv?=
- =?utf-8?B?M3ZZeldJWEZyZWtxK2pTR1paUU9lRWdQa0F3dXhsUy9mbzJaTmkwOUcyOURY?=
- =?utf-8?B?dzRDejgxUDM3MGFVUDhaK0o2ZHZUVm9rcm9ocno1Z1VzNGhJVjR2UnVJTXU2?=
- =?utf-8?B?OWZDcDFjeWRPVlFkTEVjMTdkS0Nkd09qdWcwckdLR2JJYWcrTUUyNXBrTXF4?=
- =?utf-8?B?dnhpM3kzUkREZUdOOEdvMEV5RlZzdTlYWGRjanF2YnNDOTcwOFlWR0o0eXdQ?=
- =?utf-8?B?UHR3c2F1SG1qNk13RFVTMXJVQkNBem9TUHRLeis1eUFVaE1yMFNWY3FPekkw?=
- =?utf-8?B?QVpybzkxK3ZFcjg4U09mdlVaR1V6OXM5cDV4dGFwZnFtK1JWUE1YR1YwUHNz?=
- =?utf-8?B?VURUSGNWUHhKeVAxMnMzNm5pSUFFUnpOV1BHdG5tVzZlc2RXM2gxZm45RkZv?=
- =?utf-8?B?WTRHVWVpQzhZaGZ5ZWFWNkMvbHFIaXhsSm5yS0dWUVBYdHdFZ3lSNDJUMFgw?=
- =?utf-8?B?ekp3VnJUYW9DVEthbzhJUGVRbUNrb2J3d1Y4SDF0ZHJZcW9vWEF0UUZUMXdV?=
- =?utf-8?B?S0laZmZsby9VSDdjVmZiZS9YV1Z5dTArajRRL2x0M01MbzVub2xyTDRkdHlR?=
- =?utf-8?B?NXlxcnIzb1dVc2xNcElvU2RsTlY1MFNwdGRhWW16MmVwdW9yc0EwN1RiN05P?=
- =?utf-8?B?N0xXb2tybjJRUXpYZUtyaHk4UlVLbnVtdVI3a3l0MDBON0hoaFprMXFneUJQ?=
- =?utf-8?B?N2x3NnpUSk4rbmt2SDBwUkE5UXBzWjVIOVg5VG12Vmg1Z3RWSWZqZmREVkhi?=
- =?utf-8?B?bElRMVJjYzA2ODE4Y21xeXgya0tTR0Q3Y1F3bEFoT1RrSzhKL3N1T0hxZXZa?=
- =?utf-8?B?L3BmQ2hZMDRRYnpJMGVnRkRRb1pORWJlYXRyK2lVMXJHOVVZWE5DN0gwckVp?=
- =?utf-8?B?aVZ3QjRxS2l5STdnNnZJTDRlVlBQOE5jbzZxMGk5a29zWGc9PQ==?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NnIxRDBWc0JrczFWRmozTjl1UnVmTXVFMjBFek9tUDV5NlkzUWhUT2NjRUdu?=
- =?utf-8?B?WnR1M1RadXU2Z0s1bkhncThIQ052S1kvbHA1SkFLNGJSMUlQSzcvMlcvR1ZK?=
- =?utf-8?B?Tlg2YzFnaWhqSjNySzRmSlZvT3RIR1RiR0dXZmtiQmdvZlAwUW5hR0xtbDRs?=
- =?utf-8?B?akRSbWdSdmIvNGZWUUtEMVROVC83Z253QXJ1YnRzek1QRGREbTBpOU9Pd0Ni?=
- =?utf-8?B?NGFSc3ZhTXBMN0JHK2ptZWkzVGZGQWdEQUJaK2VEeDVzakRMZ3I4eE1vNnZF?=
- =?utf-8?B?RXE3Q0duSEh4ZmpMTVZ0MDVtdEg2Umd4S2p5bThwVGVQYVhVaCs2WGY5bTVr?=
- =?utf-8?B?Z0pNcXdFNEs3eis0Q2tLa1JPWTZBOVFobFZOU0hvNm1xaUUzTTB3TkhXZCt6?=
- =?utf-8?B?aXJxRGFrdFFFT3ZvKytPM2Fza1NmM051K0E0RDlXdHJVRW1VS3dvMUs3NWFH?=
- =?utf-8?B?bXUra05kbUlXZGZxM0dDWXBaRitneWt2ODY5c0t4ZjB3TnYySU9WRlRnc2Qy?=
- =?utf-8?B?QlNucXZHS1k1dmlQQTZNbC82M1VwYVlSQ2tHODNuWXpYSU1MTDM3SFBQTlIw?=
- =?utf-8?B?ZW9GR2lEM3ZYdmxDdFV2VXFUeklNWnVxSEgyaTc2RTYvbDRlMmRKSWx0OHJk?=
- =?utf-8?B?V1lmemFPaWsvNFJXUWpaUnlwdVlUNW0zajVWSEdOOE5GckttNXVrQTVLWFB6?=
- =?utf-8?B?UW14SzludGFjdTZmUUxSRXZwL0tUVnFaRnJWVHdMZzlXM2gwbmpER2RWK1pl?=
- =?utf-8?B?Z0s0L3BWNzZsb0hVTkVRa3FjN202b3hPdHJSbHNkTjFLcWVpSUZ5dGZCam1J?=
- =?utf-8?B?bHRLYTUralk3cUxGUk1zb3F1REo0SENHRitvVkRYY1NpTWQyZ2d5RENNVHoy?=
- =?utf-8?B?T3FuZlhrOENtYVFyd0ZTRjNLNHIxNUlydHFVOUpQSVhwK2ZQTG9paHhTeE9n?=
- =?utf-8?B?NThCSGVONTM2Sk12Z0NQRWgwMVRDL1BGcTZXTTUzcnNGNkZGYk91cjJUbjBy?=
- =?utf-8?B?cHl1VWcybU5RNkVKaGhyOUZ2QlMydWY0d3ZkcGltZHFET3hlRElwRkdvU1BS?=
- =?utf-8?B?Z1h3dmY1WVNVd0dCcjRnY1h5TldNOVQwUHBaWlFhVEs5OGluaStOd1p6Z09U?=
- =?utf-8?B?Z1NzbXJjTWdvVjNUb3luR05Pd1ExWnZCWFFpZWZTWENRSjUwRXFPaTFXZHJL?=
- =?utf-8?B?R1hKdnMrWEhzZzd0SlVCSzhlaUlIL0t4NUthaXQ3OTFkNm1mQnFUcU1zL1py?=
- =?utf-8?B?M0xFaDVISStOT2ZaVUVTb2toaC9XMklCblZxZGw0ZlpaUUorMWtXK0lwNVZ6?=
- =?utf-8?B?SHZLaCtZRitZNWhuN1JTM29qSGxyekd4R0owSHplSk1jNndnMDRjYXFKcmFn?=
- =?utf-8?B?MmErR0syOTBwR01wQzR2emczdHpQNmFMMW9mb3V1NUZoL1JQbnpyUUxWdmxI?=
- =?utf-8?B?ZkowZnR0bnVJaEJ6QkFJK1k2WVhTS2NTcVo2VTMxZFlTOUJNUHM3a1NXMDdZ?=
- =?utf-8?B?bGhqU1lFL1QzREhVMUlsUmdIa2FUclJIcVZLeTRlcEsxVzRMSDhrYnZPYmk5?=
- =?utf-8?B?TlBsaTZNVDl0Sm8zNDBFZ1d4UG90c0hUZTBrYW1WNGRQa1kvSmZBMW40TEJF?=
- =?utf-8?Q?vjKQajyW9PJFGle3dueHZrTukeeozHFiNcE0DUePRYmI=3D?=
-X-OriginatorOrg: sct-15-20-8534-20-msonline-outlook-9bdce.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4c36f5e-b08e-4a3d-bd42-08de336c1bb8
-X-MS-Exchange-CrossTenant-AuthSource: BESP194MB2805.EURP194.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2025 19:34:15.0859 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXP194MB1408
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b73545723ebso206220766b.1
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 11:48:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764877694; x=1765482494;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EqmxrYTv0FZPnG+V9C1Pd215fqZlK8wuTGSX1k9kM8Y=;
+ b=IIvuq6ZzNDQFrt+WIMyJZl+J/KIjURP4Q5fQR97VdKmBOdwQKBjfjC2xgBrIKfGXnM
+ RWOid09fOZ9Ap6xq5q5PGwT42UD9IkqdWTq0YShqjOVMbY5jDIpOmEmjsI2DGrGgTPPU
+ 9vUPk6bpO1Y1tVvzSSX+436DyeJKwlFEUtkQL867+K1KKhdTSZ9YY9mCybJOZnwnMod7
+ D282AicFXK/qudigu6B06paoM4l5b559Bu3ipxwwP7fN4LPsX6RY+o3bSBIebamFRz0E
+ vwsXc7wUHggwzLQRdmDC7Pe8pg964QzImumr8QSIeZmA6CUZlGPFNN2iKPmBIftV+PaJ
+ Zqkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764877694; x=1765482494;
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EqmxrYTv0FZPnG+V9C1Pd215fqZlK8wuTGSX1k9kM8Y=;
+ b=dzpB28NJAvS4mBfclSsinfex4VGjJx8AdMlkjpZoDuWZWMYO4fo/56evzYPF/Y7jzQ
+ HHzOXTodj+eMwdVJEaaKAwgBG3rLeRo0eueN2Pw/oSwYOqDbrhHw3d6UjinKbZ5/NBIm
+ ETwbdsunHjZbD5vjuCGMsBJQIRKzip5w/N13XWH8MZSATRMOXLlvcY++5v77nypShE6z
+ GAHliVMkSNqYpA7Lc0Xt98LpyidgeE0YYK+oBueumB0xm9l8qmBL9V1+CE5AwJDmiSoA
+ vEPxj0kozy5LwrkZsLjFMyEhATUuDLLG58bZKUqwsBRV6dfAAQCh5qEd2awYEXfNCY8I
+ l60g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXFf3uMpB6aVZwIu1RkyfWICXsRlnF0Gp93mTbkRNoyb2XqsRR72AkJ6nfKM/3sww4LOnh2650=@lists.denx.de
+X-Gm-Message-State: AOJu0YxVGo5eyHFt9sGajbM/G8s3B2h+WJ0FgRPAddUhORtXZakOsWF1
+ l+8bGVTGTA+/JZy4IseVs/QYB+x/Ki4vRGWH0xhoC5GG5UQCrGKsWAkbfpRZpa9WGEg=
+X-Gm-Gg: ASbGnctOC4yg38j8VjXBOrSOZbgHQZB9y3Kk5Pc8hpi3SG4vyJav2oZkxrXnqTVVquU
+ tTEUgcS1vlYl3+uGSRvLH4aB3t18mUe9d+m18uUpL+HiHXGrjs8EJzhr093BGc2BAo+lGoMhXu1
+ Xjf+hUECAGDqIcwDTYfnY3HSk9n6Cg6ZrGh6QWc8phtIp8SOeZkfxg9jNd0hH/zT1IgLHcQMakJ
+ ObtJzUoWMHbJv2Z8E6gCyYju6mtA3Bb8qNSR2I+mtjBwv8bchheuA9kk2R0enYpwaZq/JKmh2+n
+ KeRyJ1JPdSTwcRQJ5yylfN1X1RdGoiCUAutqI5ZTmifwLDHBG/qRvhbm0rOWUXsIJQ33UzNAQ+6
+ sI2f/dipOUo7jA6jEkthxzAhrUiTi7ED+Ian4uXFtMKVCOoTOi1M+KfJHQQfJcfamkYgSI5C/Vx
+ P46m5f
+X-Google-Smtp-Source: AGHT+IELh2xYHA0VfGv2LTwZ1InCBLXDj6+Nd/iT+v9Ct86oCp5ulDmx1Z/LvF2M9bJgvs5HpANg2Q==
+X-Received: by 2002:a17:906:6a17:b0:b6d:9bab:a7ba with SMTP id
+ a640c23a62f3a-b79dc7586a4mr787731566b.42.1764877693600; 
+ Thu, 04 Dec 2025 11:48:13 -0800 (PST)
+Received: from localhost ([62.246.248.122]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b79f49a7951sm206031966b.49.2025.12.04.11.48.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Dec 2025 11:48:12 -0800 (PST)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=670fd56d81396f5ce24af06f69f98744ec2454987a84cd2bff6db88ff5b3;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Thu, 04 Dec 2025 20:48:07 +0100
+Message-Id: <DEPOXCMTQ7M4.2INWB9COZMHWS@baylibre.com>
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>, "Markus Schneider-Pargmann (TI.com)"
+ <msp@baylibre.com>, "Tom Rini" <trini@konsulko.com>, "Sumit Garg"
+ <sumit.garg@kernel.org>, "Nishanth Menon" <nm@ti.com>, "Robert Nelson"
+ <robertcnelson@gmail.com>, "Vignesh Raghavendra" <vigneshr@ti.com>, "Bryan
+ Brattlof" <bb@ti.com>
+Cc: "Vishal Mahaveer" <vishalm@ti.com>, "Kevin Hilman"
+ <khilman@baylibre.com>, "Dhruva Gole" <d-gole@ti.com>, "Sebin Francis"
+ <sebin.francis@ti.com>, "Kendall Willis" <k-willis@ti.com>, "Akashdeep
+ Kaur" <a-kaur@ti.com>, <u-boot@lists.denx.de>, "Anshul Dalal"
+ <anshuld@ti.com>, "Moteen Shah" <m-shah@ti.com>, "Santhosh Kumar K"
+ <s-k6@ti.com>, "Nathan Morrisson" <nmorrisson@phytec.com>, "Garrett
+ Giordano" <ggiordano@phytec.com>, "Judith Mendez" <jm@ti.com>, "Aparna
+ Patra" <a-patra@ti.com>, "Jayesh Choudhary" <j-choudhary@ti.com>, "Chintan
+ Vankar" <c-vankar@ti.com>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>, "Neha Malcom Francis" <n-francis@ti.com>,
+ "Prasanth Babu Mantena" <p-mantena@ti.com>, "Sughosh Ganu"
+ <sughosh.ganu@linaro.org>, "Beleswar Padhi" <b-padhi@ti.com>, "Manorit
+ Chawdhry" <m-chawdhry@ti.com>, "Andrew Davis" <afd@ti.com>, "Wadim Egorov"
+ <w.egorov@phytec.de>, "Andrew Goodbody" <andrew.goodbody@linaro.org>, "E
+ Shattow" <e@freeshell.de>, "Devarsh Thakkar" <devarsht@ti.com>, "Peng Fan"
+ <peng.fan@nxp.com>, "Jerome Forissier" <jerome.forissier@linaro.org>, "Sam
+ Protsenko" <semen.protsenko@linaro.org>, "Marek Vasut"
+ <marek.vasut+renesas@mailbox.org>, "Andre Przywara"
+ <andre.przywara@arm.com>, =?utf-8?q?Th=C3=A9o_Lebrun?=
+ <theo.lebrun@bootlin.com>
+Subject: Re: [PATCH v6 07/13] arm: mach-k3: common: Helper for LPM meta data
+ address from DT
+X-Mailer: aerc 0.21.0
+References: <20251120-topic-am62-ioddr-v2025-04-rc1-v6-0-6dd99a7271bb@baylibre.com>
+ <20251120-topic-am62-ioddr-v2025-04-rc1-v6-7-6dd99a7271bb@baylibre.com>
+ <b3e0d56c-a02f-408c-b6e8-966956b548c1@ti.com>
+In-Reply-To: <b3e0d56c-a02f-408c-b6e8-966956b548c1@ti.com>
 X-Mailman-Approved-At: Thu, 04 Dec 2025 21:31:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -160,40 +127,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-tmp_buffer is allocated using malloc but failure
-is not handled.
-This commit ensures that we do not use a NULL pointer
-if malloc fails.
+--670fd56d81396f5ce24af06f69f98744ec2454987a84cd2bff6db88ff5b3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Francois Berder <fberder@outlook.fr>
----
- drivers/crypto/aes/aes-uclass.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+On Mon Nov 24, 2025 at 5:06 AM CET, Udit Kumar wrote:
+>
+> On 11/20/2025 9:33 PM, Markus Schneider-Pargmann (TI.com) wrote:
+>> Add a small helper that uses memory regions referenced by the R5
+>> devicetree node to calculate the LPM meta data address.
+>>
+>> Tested-by: Anshul Dalal <anshuld@ti.com>
+>> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+>> ---
+>>   arch/arm/mach-k3/common.c | 43 +++++++++++++++++++++++++++++++++++++++=
+++++
+>>   arch/arm/mach-k3/common.h |  1 +
+>>   2 files changed, 44 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+>> index b28c2cd5776f29d75d54da9078e5fb17768d69c9..191254b391af68cb6c277f98=
+6069ed87211f2fc1 100644
+>> --- a/arch/arm/mach-k3/common.c
+>> +++ b/arch/arm/mach-k3/common.c
+>> @@ -16,6 +16,8 @@
+>>   #include <linux/printk.h>
+>>   #include "common.h"
+>>   #include <dm.h>
+>> +#include <dm/of_access.h>
+>> +#include <dm/ofnode.h>
+>>   #include <remoteproc.h>
+>>   #include <asm/cache.h>
+>>   #include <linux/soc/ti/ti_sci_protocol.h>
+>> @@ -36,6 +38,7 @@
+>>   #include <wait_bit.h>
+>>  =20
+>>   #define CLKSTOP_TRANSITION_TIMEOUT_MS	10
+>> +#define K3_R5_MEMREGION_LPM_METADATA_OFFSET	0x108000
+>>  =20
+>>   #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
+>>   #define PROC_BOOT_STATUS_FLAG_R5_WFI		0x00000002
+>> @@ -191,6 +194,42 @@ bool wkup_ctrl_is_lpm_exit(void)
+>>   }
+>>  =20
+>>   #if IS_ENABLED(CONFIG_K3_IODDR)
+>> +int wkup_r5f_am62_lpm_meta_data_addr(u64 *meta_data_addr)
+>
+> device specific function in common file ?
+>
 
-diff --git a/drivers/crypto/aes/aes-uclass.c b/drivers/crypto/aes/aes-uclass.c
-index 745c6ce57a9..5bdd3d736c4 100644
---- a/drivers/crypto/aes/aes-uclass.c
-+++ b/drivers/crypto/aes/aes-uclass.c
-@@ -156,13 +156,17 @@ int dm_aes_cmac(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks)
- 	/* Process all blocks except last by calling engine several times per dma buffer size */
- 	if (num_aes_blocks > 1) {
- 		tmp_buffer = malloc(AES_BLOCK_LENGTH * min(num_aes_blocks - 1, TMP_BUFFER_LEN));
-+		if (!tmp_buffer)
-+			return -1;
- 		while (num_aes_blocks > 1) {
- 			u32 blocks = min(num_aes_blocks - 1, TMP_BUFFER_LEN);
- 
- 			/* Encrypt the current remaining set of blocks that fits in tmp buffer */
- 			ret = dm_aes_cbc_encrypt(dev, tmp_block, src, tmp_buffer, blocks);
--			if (ret)
-+			if (ret) {
-+				free(tmp_buffer);
- 				return -1;
-+			}
- 
- 			num_aes_blocks -= blocks;
- 			src += blocks * AES_BLOCK_LENGTH;
--- 
-2.43.0
+Thanks, it is common between am62a7 and am62p5.
 
+Also thanks for the other reviews, I am addressing most of it in my next
+version.
 
+Best
+Markus
+
+--670fd56d81396f5ce24af06f69f98744ec2454987a84cd2bff6db88ff5b3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaTHldxsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlOy
+FgEAmeKKQKGO87c+Qk7vPMh8u057DLJkei9/7CS3ziG5mckA/2iBQUtRSROeFESQ
+0X9Y9rVcFLdNUUNoQZhls3X8uUgA
+=fj5i
+-----END PGP SIGNATURE-----
+
+--670fd56d81396f5ce24af06f69f98744ec2454987a84cd2bff6db88ff5b3--
