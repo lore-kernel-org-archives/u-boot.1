@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F3D8D1F9DD
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 12:55:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A651D1F9DE
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 12:55:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BA2F840D7;
+	by phobos.denx.de (Postfix) with ESMTP id 847BE840DF;
 	Thu,  4 Dec 2025 13:52:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="kGlAv4fU";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="M1fsvqkY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BC9683FE9; Thu,  4 Dec 2025 11:26:50 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 8E16E83FA5; Thu,  4 Dec 2025 11:26:53 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D18B983FE6
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 11:26:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D63E584015
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 11:26:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b76b5afdf04so108420166b.1
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 02:26:42 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b7277324204so118881066b.0
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 02:26:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764844002; x=1765448802;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764844001; x=1765448801;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lovfR9kk73gjIY+JdQ985NkL6w9bp2wOSMyRYQvcPlY=;
- b=kGlAv4fUxV1JXe26zNFbbJGOd8DHy7evifsv5oWmWJSTDGYZi1okRH480ylu/Imo0S
- FZB28yneDeqSq87SZTf4kiU0tlJRYeeKDxNbeD87Cdk2YaYUAlPExu2HbaK1CZtASUKK
- pS1mri77hzNgcXejkz3EIxFvRAkJH9gNYlJGMNCqFwSPbxOnLYTn9NyhqYAytYW1t8ZH
- +r1ZOhx0IL4PJtxJ+zbld4YTiUKnqrmtYXW4TT3P6q9rBm6Kmo1UA1rVb/Vi9wxzsHj+
- i/TRXuYIjqy2Bi6geklV9NE191c/hdOfSfK3AsYjSM+kqPfEDStZeKUQBusmVhXLtUOP
- 0Rvg==
+ :reply-to; bh=dxUG6eBiKqCJvuP04O+fw0ydtKH0quOigkZXjnRArvI=;
+ b=M1fsvqkYkDejbjCsT4qHPDaZo4ises6wDr4/D0YTHZa2cju3/HfY26Po9AGQCD0bgo
+ WdCprHhDVdurzNQ5y2s+hGiAyVhbBhvYSwu2PC7aGime9H3N9DPD6BLLOnm+BqPh/bQu
+ /TA7JgLjm+PjVnCm9Bbu2EdEMAdPctJP2fUJwhNqEXrBJCYeYNlFHrAyFYS7jrydnMcv
+ jUHoQ/Fd72wkFugT9u1g+/h7716lzCNl2SSZ4o24gEWCdddf4RlPfPZMiUuci1reS4gt
+ a2F7vtaYhlRMmY718P1Jl36vDitZKXo2YfCC9ANcrLbBE6lrFK62i6cTxM0U/mm0GS7N
+ 3x8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764844002; x=1765448802;
+ d=1e100.net; s=20230601; t=1764844001; x=1765448801;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=lovfR9kk73gjIY+JdQ985NkL6w9bp2wOSMyRYQvcPlY=;
- b=XuVaFLTcdhB04BuJyfyl9n4NbzG4yati4w+ox0bAmuN/EpoUclhTFm1otadsFHKded
- Uj/C6YHOrpKLthfJTBkspOzte9G9jHdtI3RS0KyAVGPPHUU9WW0yvIqEEhlzyIJRPBtU
- 3qX1lM61LK0mSvdaysaL6DEF2najGkEXs4HlG6wEXVm4HeonSCaRxrxsXTwKbyyWjbbl
- Uj3mLs3Rn06JwBpeYKCvA75VErDxMF7QKC79rCEUfqb713PDjo4NcBHjBaCQ/8/QaO/p
- HQR5TxvNV2QlMLbfjheRtwtl7DsXeyZzCSSzpUEVFVfe+SPDx/mmjzhDXvVxS8vMq7Sd
- fDAg==
-X-Gm-Message-State: AOJu0Yxd3HVgoqVFnt2DbQKGGJLF87e1JJncty22g9uB/qVmugZ6q4ZF
- YctISynpQ41ps7EcGCzqRDk4YzDCK4U9EGaM7t9y2Cd1nU0ILfgUx9Qfw9er02a0oMI=
-X-Gm-Gg: ASbGncug7hV4IqhNArpt+W6z/XM/EhqBcINK12fSzX7lX8ddTXPIghdq/n7YD1xf+va
- d4C9/b+ybQIWn+jd3Z/WIuJiCi/7qM96PbveLZQFEC31qKpJrgt2aZOXEezgKGSol5XFuQRgwKa
- TrGNhQ8YtBHFlvMs06oyfgFN9xH1D6KTJLe2EczLC4KKprHCqihLNnTFHtyeKniukHK/Cf+BrGh
- jO7AgR9FqrRAsOdiYAZ8DjqOYicujsAQbx8qy8BwzS/0qJ5PmRnnFT8S3cSvu6LNeU9BmdJy9nq
- gbTK6mwEi0s7Zp0migYJ+t8v2KsKrhGM/H08sFKi2RxnW7M0HfiVhQ4udKJFER8J1Pnajm2pnVj
- VpgzWDYO4deB+M95Nvzq5va5J96bcg2g4PzhihWSOZyfOCwHoTAu9EaA+kkACRr2ub+bAqozhf3
- mh5BGb640=
-X-Google-Smtp-Source: AGHT+IEcU0GNxeKJmNJVN44nLtYLNrg71xBNoCgLPbV99WQbskmmmkoSu7/e3SKOpUeCLj61ZOnJzw==
-X-Received: by 2002:a17:907:6e91:b0:b70:df0d:e2e9 with SMTP id
- a640c23a62f3a-b79dc76d523mr616151266b.44.1764844002247; 
- Thu, 04 Dec 2025 02:26:42 -0800 (PST)
+ bh=dxUG6eBiKqCJvuP04O+fw0ydtKH0quOigkZXjnRArvI=;
+ b=bPDjESw3ajo5ZDh06PVWBxSzrJ1mZnMtZFomVMWeBOOCf70LpsobCmUMixmLUE0qwx
+ 8iBk7FPeup0ZjSbByW/i7WsKraMi+sGnWt25SLf4nKxeEoakKsCNOghRwv3rwDXa7C+J
+ YMCZLTbQh5EISiB/J8F4Kyhy2V2uNDQ8S+PVdyJAUvQKESuZzRy4lO+nOurNG0tH9chG
+ SAGVZm+ngkbuexDq4s5j6a89tID0/8pFmjkH3N53XZliy2LhWWsYMNDjWooMLJH6CER4
+ 9oZ+P5qpGVXmuglwbfGW64lE4bMmYrlg9zZSQQ+Tdeo4gobPO0tzFDvDbNJy1+WmW/cu
+ 5ayA==
+X-Gm-Message-State: AOJu0YwHnd/VOdp+eAoA+4r+JE+iaViJaQxCjEvdcRa/KoIrEB25OSfS
+ ATgTk98q4AjPjixdLoqJUny0fsqRDye44OutnPiKpVpiRIUoYFW+xqwb3Aq1x/KE8DE=
+X-Gm-Gg: ASbGncsIZ/GFe5nBr/ZwdabGYeCq9vOqnDHi8b0YbRCqRTbeiM4h2Yev987bM549u8e
+ b6ZpAeRiJHy6bR6YirMIiZAyqvJEkpUBcTJACK6tiD8CLxUIbNSnMLUTWvyFEF/u6tjiFtA5Gzs
+ QR5rl58Ws1VULYuSU43q7514WcZ7J7cJty1uqdnYJzsI7cYxL0smTFn8/pvSwv2zUYYyR3Emqmy
+ DAgLKwMmzFLOJwk3IVbj1C/JgWjVBf0kho+d0EkD41oLcwzD1AUNJYvgqoPBITEnVwUoeg+xXk6
+ L+71aZPXyZrO/pfnQXO9hzUzUrsIVMR4yktEzolvE7ibZ/4F4eYD+Hmv6keRrgAchMyxk6NZ+7l
+ qE25imgsIO14Rt6XOSgWnbyeDzo32lIcUzpSViVEUSuVYIxz7gPYOcecYFZkJcRulhT0w8fOmkT
+ mCTpASBLA=
+X-Google-Smtp-Source: AGHT+IHn3VvvxhUm6QN6nqVOtsZ8AB0nYr8GcgWplrznK8ntPkjIR9/1+acV7osejq8NRgeTQzG9dg==
+X-Received: by 2002:a17:907:5c8:b0:b73:21af:99d4 with SMTP id
+ a640c23a62f3a-b79ec473903mr242999566b.24.1764844001218; 
+ Thu, 04 Dec 2025 02:26:41 -0800 (PST)
 Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b79f4975c88sm89430766b.35.2025.12.04.02.26.41
+ a640c23a62f3a-b79f445967fsm94637466b.10.2025.12.04.02.26.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 02:26:41 -0800 (PST)
+ Thu, 04 Dec 2025 02:26:40 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-Date: Thu, 04 Dec 2025 11:25:45 +0100
-Subject: [PATCH v3 9/9] configs: am335x_evm_defconfig: Switch to upstream
- devicetree
+Date: Thu, 04 Dec 2025 11:25:44 +0100
+Subject: [PATCH v3 8/9] am33xx: Support upstream devicetree USB device
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251204-topic-am33-evm-oftree-v2026-01-v3-9-3d1566ce4dc7@baylibre.com>
+Message-Id: <20251204-topic-am33-evm-oftree-v2026-01-v3-8-3d1566ce4dc7@baylibre.com>
 References: <20251204-topic-am33-evm-oftree-v2026-01-v3-0-3d1566ce4dc7@baylibre.com>
 In-Reply-To: <20251204-topic-am33-evm-oftree-v2026-01-v3-0-3d1566ce4dc7@baylibre.com>
 To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
@@ -90,12 +89,12 @@ Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
  Paul Barker <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>, 
  "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4612; i=msp@baylibre.com;
- h=from:subject:message-id; bh=JsLpW7uodswfYJMA71vrO+SAKUs1c0Gbt3Kriu00++8=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhkzDxMvTJ5u/NPi99Pmdt5XTthTcyF25uX7RRKf7l5fsy
- gncapxn2VHKwiDGxSArpsjSmRia9l9+57HkRcs2w8xhZQIZwsDFKQATeWbKyPA/O/CM6gKxLUe+
- dgqKMGTevLTFfbH+/Nvrep0k/G/v0uNhZGjkUTucPu/GAfmrxZlH3GW25O9W2XNg9abVO4/3sy9
- drMMKAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1638; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=IiE+vs1wlXtSAKgWwsqkG24+Nz8ibSF5V56Oqw0ALIY=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkzDxLOXSrd53Qry+mKdsLhYbtFa259P1Ny/tsf21dTkJ
+ hb7sEZ3lLIwiHExyIopsnQmhqb9l995LHnRss0wc1iZQIYwcHEKwEQW/mFkaFBknhI2N4/liV+S
+ TE3srqD3d9uXLkwvu1418/Fz0TM3cxn+Gd5wmFSxRfPhNdumRfo5HUnyPcZsel0WIW6/kwRvFfH
+ zAAA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Thu, 04 Dec 2025 13:52:18 +0100
@@ -115,83 +114,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The upstream devicetree uses simple-pm-bus, so CONFIG_POWER_DOMAIN is
-required now. CONFIG_POWER_DOMAIN enables probing power domains, the PRM
-power domain driver is requierd as well now.
+Support musb being probed by ti,musb-am33xx. The non-upstream DT probing
+used a wrapper driver that probed ti-musb-peripheral and ti-musb-host.
+This wrapper registered as UCLASS_MISC, which is why it is requested in
+this board.c file.
 
-This switches all evm defconfig variants to use the upstream devicetree.
+With the new devicetree the wrapper that registers as UCLASS_MISC is
+gone, instead the UCLASS_USB and UCLASS_USB_GADGET_GENERIC have to be
+requested.
 
 Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
 ---
- configs/am335x_evm.config            | 6 +++++-
- configs/am335x_evm_defconfig         | 2 +-
- configs/am335x_evm_spiboot_defconfig | 2 +-
- configs/am335x_hs_evm.config         | 2 +-
- 4 files changed, 8 insertions(+), 4 deletions(-)
+ arch/arm/mach-omap2/am33xx/board.c | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
 
-diff --git a/configs/am335x_evm.config b/configs/am335x_evm.config
-index ba39ae274c4095a61f2d102f0bc3de6d0637f53a..6d0b02c3d80c58a19cf6e4390eaec4e2dedd95c6 100644
---- a/configs/am335x_evm.config
-+++ b/configs/am335x_evm.config
-@@ -3,7 +3,10 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SF_DEFAULT_SPEED=24000000
--CONFIG_DEFAULT_DEVICE_TREE="am335x-evm"
-+CONFIG_DEFAULT_DEVICE_TREE="ti/omap/am335x-evm"
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_TI_OMAP_PRM_POWER_DOMAIN=y
-+CONFIG_SIMPLE_PM_BUS=y
- CONFIG_AM33XX=y
- CONFIG_CLOCK_SYNTHESIZER=y
- CONFIG_SYS_BOOTM_LEN=0x1000000
-@@ -12,6 +15,7 @@ CONFIG_TIMESTAMP=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_BOARD_SETUP=y
-+CONFIG_OF_UPSTREAM=y
- CONFIG_BOOTCOMMAND="run findfdt; run init_console; run finduuid; run distro_bootcmd"
- CONFIG_LOGLEVEL=3
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
-index 448b0a8308fcca04732b81313c72f7fd2247d1ca..9281178f914085b199e3d35e95d0ce1f3c0faaa5 100644
---- a/configs/am335x_evm_defconfig
-+++ b/configs/am335x_evm_defconfig
-@@ -24,7 +24,7 @@ CONFIG_CMD_SPL_NAND_OFS=0x00080000
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_MTDIDS_DEFAULT="nand0=nand.0"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand.0:128k(NAND.SPL),128k(NAND.SPL.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-spl-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),8m(NAND.kernel),-(NAND.file-system)"
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-sancloud-bbe am335x-sancloud-bbe-lite am335x-sancloud-bbe-extended-wifi am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-sancloud-bbe ti/omap/am335x-sancloud-bbe-lite ti/omap/am335x-sancloud-bbe-extended-wifi ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
- CONFIG_SPL_ENV_IS_NOWHERE=y
- CONFIG_CLK=y
- CONFIG_CLK_CCF=y
-diff --git a/configs/am335x_evm_spiboot_defconfig b/configs/am335x_evm_spiboot_defconfig
-index eebd916c02a2cad0d01ab738aab37b11dd3a9645..bbaca6c8800baf19377a457e49db446159e338a8 100644
---- a/configs/am335x_evm_spiboot_defconfig
-+++ b/configs/am335x_evm_spiboot_defconfig
-@@ -12,7 +12,7 @@ CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x20000
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
- # CONFIG_ENV_IS_IN_FAT is not set
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SPL_ENV_IS_NOWHERE=y
-diff --git a/configs/am335x_hs_evm.config b/configs/am335x_hs_evm.config
-index 7ade2fb163b204ad8bcc9554455fdd3e81657890..0bc8556b1d4b18a413ecd6879ab85be54f2730ef 100644
---- a/configs/am335x_hs_evm.config
-+++ b/configs/am335x_hs_evm.config
-@@ -8,7 +8,7 @@ CONFIG_SPL_NAND_DRIVERS=y
- CONFIG_SPL_NAND_ECC=y
- CONFIG_MTDIDS_DEFAULT="nand0=nand.0"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand.0:128k(NAND.SPL),128k(NAND.SPL.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-spl-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),8m(NAND.kernel),-(NAND.file-system)"
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
- CONFIG_SPL_DM_USB_GADGET=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_RSA=y
+diff --git a/arch/arm/mach-omap2/am33xx/board.c b/arch/arm/mach-omap2/am33xx/board.c
+index c3931900622957a5499fe6483473c61e3a62fff0..20556b8fb5f1eb469469006b3483003f716146b8 100644
+--- a/arch/arm/mach-omap2/am33xx/board.c
++++ b/arch/arm/mach-omap2/am33xx/board.c
+@@ -266,11 +266,17 @@ int arch_misc_init(void)
+ 	struct udevice *dev;
+ 	int ret;
+ 
+-	/*
+-	 * Trigger probe of the UCLASS_MISC device which is a USB wrapper driver
+-	 * ti-musb-wrapper that handles all usb host and gadget devices.
+-	 */
+-	ret = uclass_first_device_err(UCLASS_MISC, &dev);
++	if (IS_ENABLED(CONFIG_OF_UPSTREAM)) {
++		uclass_first_device_err(UCLASS_USB, &dev);
++		ret = uclass_first_device_err(UCLASS_USB_GADGET_GENERIC, &dev);
++	} else {
++		/*
++		 * Trigger probe of the UCLASS_MISC device which is a USB
++		 * wrapper driver ti-musb-wrapper that handles all usb host and
++		 * gadget devices.
++		 */
++		ret = uclass_first_device_err(UCLASS_MISC, &dev);
++	}
+ 	if (ret)
+ 		printf("Failed probing USB %d, continue without USB\n", ret);
+ 
 
 -- 
 2.51.0
