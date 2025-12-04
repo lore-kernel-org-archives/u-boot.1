@@ -4,174 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E11D1F9DC
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 12:52:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A30BD1F9DA
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 12:52:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96D6F84034;
+	by phobos.denx.de (Postfix) with ESMTP id EDA698405E;
 	Thu,  4 Dec 2025 13:52:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="NAvXbb/m";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3eEIQeh2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0528583CD2; Thu,  4 Dec 2025 08:12:24 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1CE4D83C51; Thu,  4 Dec 2025 09:31:48 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADC1C83AC6
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 08:12:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E1F3483C51
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 09:31:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=qijian.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NN2J98rz9ax22O9ks2yq4VhLug5LyFbQb2hTcqbALaB3MnawqYk2WgRO6bo2hR+5UMX9/+/tLKUE7olVmrT6ZCverVIMCigxBickh/jSaYeKXiBrQ3ptzKMO9YnAFMtEvwDnadK8RoopS9PSDjiTiQ2zwarJvZ/rYq0IxgbfbRv+mRS2iuZi7thh/IOSNA3moUCMJZyeqDDCFUgItRWMcqmTp1K0tfVqK60y/uxRXR5T0aCH94gZ0mHELIVFXziAheaQCBOQhgfzNE5aeLrp6xShWmVX+SnkAvukF0nRwICPMnM17/NVMmBitaPbUrA+ZQExcxgtragl0oV2ormniA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4qvUvSeN4f3Fzu6aw00WafqXmNjVh/sEzQN4ObfJV9I=;
- b=qPZFY/ym8PnslRvxVNtfMN0fMRF5mbbu8lc82jFcB7ABT/yPPM1wD5UIV6fCK+OSixkm1pGUpVf0zCqSiUObBK0ufswW49CoM55pE6Md5soqRZSrdH1eX1DoHOECOLSt1nrg1QzOY4QAydoNh8bjotLfQ9JREAnK+Vop96N48UI64O9fnC0rQKtPjRo5rRJp1IiJTm8YOh7QX/QLpXMANpgoxD9jpa/XhahIEHjpBObkMYyAv2B2M3NbeaSsODJUwtMmPS4ucehCBCuFrZGYGyvxHgN+ppIW3lIIY3SwCx/JpFnM7QjzD75b8ugxz+3Fwap2N9/8y2oWNYhgkgSIWA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4qvUvSeN4f3Fzu6aw00WafqXmNjVh/sEzQN4ObfJV9I=;
- b=NAvXbb/m5GHk+c7gLNvmWgC4y7OYEzeRM5ou6VHFGwvp4lkd1T+80AeH7j6BWdd2oyQ5WLD06oyTOWcjetg520WLICSzftf4PAtaSBr8tTNzWwGEv+V2rTpJvwQ9jUkgVKHJI5+KxAiur80Hr4x7Py/TcIxMWIb+5hZhmk7hY1yszVFU16pK2UoyF6RuIb1M8uYslvEWdjNBubPLS8Iek8halcbMoEEdmx+d7C29jipwHetbSHkZLPtjMxC1ZTfL4daYN5ke7C1dwmpO82IYVolQsBfGltn79ZhGmL2M4xuGbJO41jj3WF9Lb6reYGN/rVw93a+CGvqUirLlRT6UjA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from MRWPR04MB12117.eurprd04.prod.outlook.com (2603:10a6:501:97::14)
- by DU4PR04MB12109.eurprd04.prod.outlook.com (2603:10a6:10:643::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Thu, 4 Dec
- 2025 07:12:19 +0000
-Received: from MRWPR04MB12117.eurprd04.prod.outlook.com
- ([fe80::9a10:5b39:708:7f43]) by MRWPR04MB12117.eurprd04.prod.outlook.com
- ([fe80::9a10:5b39:708:7f43%6]) with mapi id 15.20.9366.012; Thu, 4 Dec 2025
- 07:12:19 +0000
-Message-ID: <93024512-1ab0-4fdd-aed0-f52849528c21@oss.nxp.com>
-Date: Thu, 4 Dec 2025 15:12:09 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [EXT] Re: [PATCH v2 2/2] imx: Support i.MX91 11x11 FRDM board
-To: Fabio Estevam <festevam@gmail.com>, Joseph Guo <qijian.guo@nxp.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Adam Ford <aford173@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass
- <sjg@chromium.org>, Mathieu Dubois-Briand
- <mathieu.dubois-briand@bootlin.com>, Francesco Valla <francesco@valla.it>,
- Jacky Bai <ping.bai@nxp.com>, Justin Jiang <justin.jiang@nxp.com>
-References: <20251202-imx91_frdm-v2-0-992b8aa99375@nxp.com>
- <20251202-imx91_frdm-v2-2-992b8aa99375@nxp.com>
- <CAOMZO5Bu6735Rb=CfwBMeiJdStqx6ATZVQU9=-EngzkK2qhVng@mail.gmail.com>
-Content-Language: en-US
-From: "Joseph Guo (OSS)" <qijian.guo@oss.nxp.com>
-In-Reply-To: <CAOMZO5Bu6735Rb=CfwBMeiJdStqx6ATZVQU9=-EngzkK2qhVng@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SI2PR06CA0003.apcprd06.prod.outlook.com
- (2603:1096:4:186::14) To MRWPR04MB12117.eurprd04.prod.outlook.com
- (2603:10a6:501:97::14)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-64166a57f3bso947163a12.1
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 00:31:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764837105; x=1765441905;
+ darn=lists.denx.de; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=VPjB7/zflWF74AbjXj6JOlfuKs3l9zOOnFTMRyELxxM=;
+ b=3eEIQeh2IUx/2bB3hakNJtNBFZHpDT0CV20AsXGHDLJC0pmfTiIWust46vcQQvTJuA
+ WCcoXoT1zqXPm6pZh9J1rTm5zXVmoNoRiyyV9IsZfVv6FYLW0zyv/77lZLZ7ONOIckRH
+ CWSKW9Zz4X5SA9brn+1/IhUNMQD4YHPNkHyOs2D2oBmRa58eZvG5yYtsmzFVVuWs7Unr
+ 45Mx2Gq/mKTKiFhHwJaDOYpLhmLaGTiNYzrZono0P1ml0EwFp4aGBUja1xAcz1uUViLI
+ FoLbIaU7mUYgUGHlGFxXE3lV29daabPbfIaLE/sPr+h4n3IWTnhhqPJgo+F6KIuEp6vi
+ 0cCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764837105; x=1765441905;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=VPjB7/zflWF74AbjXj6JOlfuKs3l9zOOnFTMRyELxxM=;
+ b=PlTU2xjYEAQp1oFyTyqtR06OqtFM/BIl2c7eY0U9fDNewr8ndc+tcUUE92SSs0yXgY
+ +k+3+1Ey4535KQd9PqrE1pCc7qY+WitFKuhlq3bEp8n7JJaVHJojeBgQg+O2M+5zV9Ai
+ snLuLn8Q3Npjw9skoXRu1dmRgyYBDw1GNkVJCkklhJAt6S5ju5tLHt8oTLb5Gq251Wgc
+ MdT/Oh8+ZzQusWdL8icwMDZB19yvWnyzFBM/pAQbBKkii1YFddVqvbyhrusliq+GqioT
+ UUspRqYgfQul33rjVh2pI0AF7nCBwrvnktL1QLnhh1FPwZEXxKthTkUQoO4M8/1HpELV
+ vxcQ==
+X-Gm-Message-State: AOJu0YyUAOkwUf3rYiISrF4lXnvdzP8Wo+9kCT/4rmMML+bqUCaaGv/Q
+ KpTrQlXPlq0o2r21lk8UDJky+B5O5fSno4hZMZHf9aO5RjqNVTXb6wCQtdErowFSpRE=
+X-Gm-Gg: ASbGncu4A0se+jIHDS5NVeaiyI0BmRuGj4AgRmM6kNCP2LunQyY68c49T2NO6WPhrZJ
+ NWlr2YJ5ZIFFZKqmcqmrEOw5RvF9vRV4iwXzaLC2gZ5IsnPu0dwkC+JYobLONX+EwY8r3ovMfX2
+ 3mRFf2QDZhf0r0qRvko8+X8mrw/R5RGXdzZMIYntuRoaFaDtC0XgLf3+/1BkDHLda8I2kYBwHiw
+ 5Ae/N8o7zjOqKpj6lq9nXBYQQw2YYiSq9lHFikbZzDcO9XDBv9X5izYVYBb0vnP9pIPG46jeNAg
+ u0G0w9OYjtQMy/EmA9ti5bfnQqS98+zraT3f8PaNFcXXJFYpt3neLqUVL/WVHVpv+RGs2nexJjc
+ +yd7wCXawqCKoau37ZgSGr7btBrpt7J7AwDusBST6/9c1v//xRWbV+EWJtQ3xdQQC3c+AL80BaH
+ KRGdzOxZQ=
+X-Google-Smtp-Source: AGHT+IHOrd9mv3qm90UboUu4OJzrmey2zwqrBZOBtSUYvu0eiWpAl0EbZJqi183LC/i9TO6+XFE7vw==
+X-Received: by 2002:a17:907:6e90:b0:b6f:9db1:f831 with SMTP id
+ a640c23a62f3a-b79ec456260mr240666966b.23.1764837105305; 
+ Thu, 04 Dec 2025 00:31:45 -0800 (PST)
+Received: from localhost ([2001:4090:a247:809c:875a:7c11:12fc:ed9])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b79f4975c56sm67466366b.33.2025.12.04.00.31.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Dec 2025 00:31:45 -0800 (PST)
+From: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+Date: Thu, 04 Dec 2025 09:31:15 +0100
+Subject: [PATCH v3 2/4] panel: Lightweight support of get_modes()
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MRWPR04MB12117:EE_|DU4PR04MB12109:EE_
-X-MS-Office365-Filtering-Correlation-Id: 49a7805c-9b6a-4e39-4b19-08de33047689
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|366016|376014|7416014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UE1WRjVJTlNiREw1OUordnVteEg0MlZ0MExkZkpPM0JwOGpDc3VQM1RsZk5C?=
- =?utf-8?B?VXVMVGQvcUNXcjdDMFUvZXZQNE9mblF6TkVxc3pWR2gzRDk0cUNTMHpReFJ4?=
- =?utf-8?B?aERvVFJPdkFqMkdwMWtlanhjSzMrYk0xM2tCTmNoTXA0Z1pMTGdpdEYxbmY5?=
- =?utf-8?B?ZHRCZG1lYjE1c2h0dzg1SzN6V3M1T3lYdHBhbGlmdmw2TnVLTFROM29aNlBW?=
- =?utf-8?B?aUdGeDlvT2wyejI3VXpOdW8vK3I3SUFlWSt1NzhOZGJEcUF1OFRlS2JKNUd6?=
- =?utf-8?B?WWFiKzZrUzNnWDVLREV2UHFrNU9MTzUwL1NWUUhPdFZaV2Z6eGVSRFRpTDdz?=
- =?utf-8?B?a0ltSjRGay8wNzNKOTVLRGdFVzNtTDIrUGNBR0oxSGlhbFFFTkhPNTQ4QmFa?=
- =?utf-8?B?dHpnV1Z2L1AyNVhkV2Z0ZVFjSC9objJtdkdvYloyT3JncldqMTJiUHd0MlVW?=
- =?utf-8?B?ZUlISDJBVklUcDVJR1lxZnVZZ3lITTd4SldDQlVBejhFYmlVUnQyVGNJTVhn?=
- =?utf-8?B?N1dkWEVCNVpoNlNvWko4d0tsZ3k3ZCtmRFhpMlFLU01FUzJTTU43SUJTQThU?=
- =?utf-8?B?RVhuZmNrVTJhTkVIWHJWZHlLbEUySjdvNm1raG9KYys2RGVuZERSb0ZSTVVp?=
- =?utf-8?B?emVGWCt2ODJwbzhsRzBWNFVXbHVGaU14bjNSMUdMVzl3OVo0RWZOYnlPRWZR?=
- =?utf-8?B?d2xNUjYyaGc2WU16bkVBZXZ3dGtzUWVQLzdMME1ySFlMMmw0Lzc3a0gzUm9Z?=
- =?utf-8?B?Tmo0ODJ3RlV2dUxLS0ZOWi9QODY5MGlUc2RsUkJseTBOTXFlQm5KVGEwLzRN?=
- =?utf-8?B?T2V0THlMNW90V3BOMFdzM2w5aU8vUEQvcWJoaFdzcjNpMDdHTVZYcm5kc1Mz?=
- =?utf-8?B?NkkzVTNqZEZzNHgzc0N0cmlEd253bm85MW1rRTY4MjdvY3JpeDRHQkVMU1M2?=
- =?utf-8?B?dVFOQnFucHU4WUsyNEpTa1o0TzRqZ0s2YnBvNGh4NmtkNUVraXpQd2hDY2JG?=
- =?utf-8?B?YjVBVHpFakJiaHhPdXJWdXBBNEwzTEdMMmZHK0hHOUw0Qk8xZXFWOGF0eElh?=
- =?utf-8?B?cldjNUdNc0NQdUVCS2x4bWNOS0VhVURLaHErdk1VUGQ5K0FmRzN3N3JNbEJT?=
- =?utf-8?B?alpnc1orQjNsKzFnVjVJc1FxUFNIU2J5bUIvQjJibXFvb0xHcmlJT051dUlp?=
- =?utf-8?B?YW1XM21XY1QrZUN6MjNyZmN6R25mMUhBUVBOdXQrRkR2N3NtVDFwZm51MlJH?=
- =?utf-8?B?d0hUOUVyZWJFaW15UnNkVHd3SDR4NGZocXVYTEhTVjNsaTZHVW5aU0hrakg1?=
- =?utf-8?B?UlB4alI4b1JncnQ5NUxhbTZqMEZHMDN4Z1VmUUVXTytLbW9FSTRlTVhQN2pD?=
- =?utf-8?B?Z0twR0NRT1NoOW5oN1R1LzhPNVdRN0FlUll6VUFQTm13VHJFQytkWStvVHlG?=
- =?utf-8?B?VzJTTmpVSkR0RkhEL2QwdVExZVl4MXpnVitkT1JMeWRNdHY5T3pzakFaalVx?=
- =?utf-8?B?UXVVVmZFb1ZobitVQ0UzS0JHNWtnd1NLbUszMi9qZFZSaHdIVTV1OHRRelBT?=
- =?utf-8?B?UWVsVTBZOGlqamR6bmQ5U3NvSDFVcFlFRlBWOExkaE5UK1VWY05rRit0OFl4?=
- =?utf-8?B?bStJQUtLUjIvWTQ2Y0ZQVzVUb1RYSU80Nm02SkEreE52S2ZXcE01WHdrNG4z?=
- =?utf-8?B?VW5HVXpVS01OdXprUWQzMlBoRW9VMUx6YVNOTi9oUlpBQ3IzV2ZSYnJtYXFs?=
- =?utf-8?B?ZWZDbTZHbkg4akloV2lQVVR6ZzNHcVYwcjV6ZXBoZ0dvRHpCandHdWlxc3dN?=
- =?utf-8?B?RmtuNDJWRDFCWG5uOEFTbXkvZzRHeTE5NHdISGhSMjlabFoySzdrTElEbVB1?=
- =?utf-8?B?eTkvNnRlV2F4SzlFQmhrUmpNU3YwV3BzMlFPY25RaTFDUktJakJsT3M5c1o2?=
- =?utf-8?Q?iRuUboiiG9wlg0P+Rpq4IfRySKdn5T+d?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MRWPR04MB12117.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(366016)(376014)(7416014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OVNBMjI2elY1Q3pKaWFMd3hMSS8xTEVXbmFtS2t4N09lNUs0MnFYbUZWa2ly?=
- =?utf-8?B?TS9ERlVIT210VWErWE5Yd3dnMUVIVFB6NXJRVzhzWUxRaHhGcnhnYnRKK1JK?=
- =?utf-8?B?Qld5Y2YwMlZzYUxUNGJlSGJBWm0rMGpjSTBqMDUrTEV1MXJUTFhUclNCYXFB?=
- =?utf-8?B?RlpCaTRHK01DOXBWbXNkbTFqVERGeStleXpCVGkvb3hLaDlzYjBXOU03d0tB?=
- =?utf-8?B?WWI1ZGExVXFQdzVIdUpkeXZockw4cnRLNGVYd2pNQUljQ0ZpdEdKZjdmcUVI?=
- =?utf-8?B?MWdzOTBzS2lsaExQOXpxK1I3Rko2a21CMk43Vk9wMmJIOEVpU3E3ZDhGR0VD?=
- =?utf-8?B?UlNHT0RoV1o0cTcyQjg1R1AzSjZ6WTlSWnZPcjE5aXBDT3UxV0laNlNYd0VG?=
- =?utf-8?B?MHdMdCtyR0pnUE5SNFJkRkRCanlSZi9YRnV1ejZ0b2NQS1N5SEtlUUMxUk93?=
- =?utf-8?B?QVh6WGQvRDAvL0tralB4L3pGeEYwZkJCZzZsUUtYYVl6RkxqZ2NBUUNUQ1hN?=
- =?utf-8?B?TFpNU05jVG1sWUhmWndEN0dNZmphL293OWI5WG1od3RTckZLRFZTaGN4djB4?=
- =?utf-8?B?NkhBUDBQRlpMWU8zWXJwc0VNM2R2ZVRwVWlwUXlLcU9sT1o5M2U0eE9MMXF3?=
- =?utf-8?B?OTFXeVgySUtublJDb2dqelQ5U0dwa0FGdDVHbUhzL05XYXgrZlFJQzh6b280?=
- =?utf-8?B?bGNETHdkODZIMlBiMFJLRVhqaWcxbjhqYVQxVXhkZ0RPTXIrUFd5MThLM1lQ?=
- =?utf-8?B?VnR6cERJZWFnL0NlL1pZakRwTXlFOEcrbVY1aUl1bjh2cmsxeC9XWkZFK3BK?=
- =?utf-8?B?NGVaVW1CeVQxd2hGVS9PTFhTT1BYS0Y2WFlnais1YXN0ZDJ5Rmh2WTJFQnZQ?=
- =?utf-8?B?dFFEak80SGpFZUhvQmdEczZKb3JoNlJzbGJTQlJuUHhFaE5UU0htODJJb0E0?=
- =?utf-8?B?Q0V2Tk0xTlloSWpwdllsRitQNDhqOXlFaVNCc05Vbm4yQjRkeHB6bkJOc29L?=
- =?utf-8?B?Zjd5djN1aUJlbW0rK1Zna3g2T1dYZFM4Sm1uemxidmJxcmtxNjVUbXNmWlpK?=
- =?utf-8?B?Q0J0bTZoRVJvcWExd1ZZaGcxWTFsZS95aE9ueHJtaDZmb1RqejNSbHlpcjN6?=
- =?utf-8?B?d3czeE1pR1UwVXRUZ2tOR2lWOW92bFdEcTlLcFN3ekFUSlE3cHQrMmlNUXpv?=
- =?utf-8?B?ZzRBR0ovZk8zbEEwajZPSm5SczN4MUpsNWd3Q0ZRelRQZTBPN3dwY2l1dWtK?=
- =?utf-8?B?S0lSbldBSlRJUDBiYXB6QW5BZVdDMmtsRXUvNW9UNU03L3NhUlFUNjJBaW5T?=
- =?utf-8?B?amsxb3FsNk9ydnJGMXpORG9rNXhpSjAra20rY2FEVzNtc3dUQWRubU9VOFZF?=
- =?utf-8?B?VVkyL2hIWTJvb1Z3cG5tQlJrazlCNFV1cTA4WWF5TkdXcTRjVnBzeWxEMXVF?=
- =?utf-8?B?cHdaeXpGQnNvckF0TFlwbEIzTVRCSkc4MUZ6NEFONmtxSGZQcWhOWGdGUS9u?=
- =?utf-8?B?Rmh0QUhKSEN3ZnpXaE9WNzlpUkRVNGZKVkhxZWFVWlIwZnRkYUEwaWtuUVdK?=
- =?utf-8?B?cFIxNjJ4dkRESUhxblgwYWZ0eGQ2RG9CZS9nUlV5bXVCaFJYRnNUOXVYTnNF?=
- =?utf-8?B?Nm5FV0hoVVpjKy9QRzhhaUwzRnozbjNrREM2S2x5QnNFUkRUeXVVYThXbzZw?=
- =?utf-8?B?WjBkRitZam9mTHZnNXZYNWwrRWdQSnpnajY4MG9ianE5YzFtaGQrTnB4MUkw?=
- =?utf-8?B?anUrcnphWE5wdnZnVjFHNnJPaVN6UEdkenI1RzhNQTJIbmdvZ1VFN3BMeS9w?=
- =?utf-8?B?dTZuK1NVUmRvNCtvdlBPMEpuUVRaMk9rNFhTMmhxeldMYVVGUVJscmRWbGRE?=
- =?utf-8?B?emIyNEJVVFJkd1lVdGJWQm1BWVBHUlljbDNpUzdNL28zZ1M1Y3ROZEZ5bzRo?=
- =?utf-8?B?cFArZ3NuR2RnTThPK1FraURHbUNQK3Y5V2V3NmpOeTFUTWMvSzVWb0JiKzJj?=
- =?utf-8?B?OTZTZWphMmRLNTVUcUtXQlNjMzlORUZzVlE5ejRHQWFvS3VaZUlMaVg1b0hw?=
- =?utf-8?B?QlVVSXh6VVQvN294WjdZQWRMTHJZaE8rR0FxcmhJdW1BNTg0dDB6NU5WRTk0?=
- =?utf-8?Q?U+wZKZ+XXO5bx6wheuzu+bNYS?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 49a7805c-9b6a-4e39-4b19-08de33047689
-X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12117.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2025 07:12:19.7012 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: el362o8IP+lPOhaOs9Mt314agOp+uFggFSO2ncaxZLXQgenpOaSjT6jfcmDu1igaqYFkvwPAogMRe7LuyyelMA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB12109
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251204-topic-am33-evm-lcd-v2026-01-v3-2-ca74853bd5f0@baylibre.com>
+References: <20251204-topic-am33-evm-lcd-v2026-01-v3-0-ca74853bd5f0@baylibre.com>
+In-Reply-To: <20251204-topic-am33-evm-lcd-v2026-01-v3-0-ca74853bd5f0@baylibre.com>
+To: u-boot@lists.denx.de
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Yannick Fertre <yannick.fertre@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
+ Sukrut Bellary <sbellary@baylibre.com>, Fabio Estevam <festevam@gmail.com>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5730; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=l9yXpomwy6iu+FSkIB1gss4VS4x92gFZ/7Ah5pmSkAQ=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhkxDt/vNBfZt3lPNp822ydMW6O3d56r9ak7xRvvds8oWT
+ /kvHGbTUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABNpaWRkuPDk0t4ttZ5fr/xf
+ sfi4kqGS3vlHWYbh8YE3pyw9ZRYkdJzhn1mnVr+HXOv7nCvaWQxLxA6oFRZLVNbv1Z8ssZzHcS4
+ TKwA=
+X-Developer-Key: i=msp@baylibre.com; a=openpgp;
+ fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Thu, 04 Dec 2025 13:52:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -189,60 +112,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Linux uses get_modes() to fetch all available panel modes from the
+driver. This is also used to fetch the modes from Linux's simple panel
+implementation where a list of drm_display_mode structs is used to
+define the different possible panels.
 
+To make our work easier, create a compatible way of fetching and
+defining these modes in u-boot. get_modes() fetches the available modes
+from the panel driver. The get_display_timing() call maps the
+drm_display_mode properties to the display_timing struct. This call now
+uses whatever panel operation is available, get_display_timing() or
+get_modes().
 
-On 12/3/2025 10:27 PM, Fabio Estevam wrote:
-> Caution: This is an external email. Please take care when clicking links or opening attachments. When in doubt, report the message using the 'Report this email' button
-> 
-> 
-> On Tue, Dec 2, 2025 at 7:05 AM Joseph Guo <qijian.guo@nxp.com> wrote:
-> 
->> +&usdhc2 {
->> +       fsl,signal-voltage-switch-extra-delay-ms = <8>;
-> 
-> Why does U-Boot need this property? It doesn't exist in Linux,
-> 
-Hi Fabio,
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
+Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
+---
+ drivers/video/panel-uclass.c | 38 ++++++++++++++++++++++--
+ include/panel.h              | 69 ++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 104 insertions(+), 3 deletions(-)
 
-USDHC2 is for SD card and its initial stage is at u-boot.
-The IO voltage switch from 3.3v to 1.8v need extra 8ms time on some 
-platform. I also tested without this delay, SD card can work as SD3.0 on 
-imx91 frdm platform.
+diff --git a/drivers/video/panel-uclass.c b/drivers/video/panel-uclass.c
+index 52a3466dc8c1203731dfcb62ebf4e63ed390bbb4..82e8339dde1bcd2cb8d93c7f7d75a29790089fb3 100644
+--- a/drivers/video/panel-uclass.c
++++ b/drivers/video/panel-uclass.c
+@@ -37,15 +37,47 @@ int panel_set_backlight(struct udevice *dev, int percent)
+ 	return ops->set_backlight(dev, percent);
+ }
+ 
++static void drm_mode_to_display_timing(const struct drm_display_mode *mode,
++				       struct display_timing *timing)
++{
++	timing->pixelclock.typ = mode->clock * 1000; /* kHz to Hz */
++	timing->hactive.typ = mode->hdisplay;
++	timing->hfront_porch.typ = mode->hsync_start - mode->hdisplay;
++	timing->hsync_len.typ = mode->hsync_end - mode->hsync_start;
++	timing->hback_porch.typ = mode->htotal - mode->hsync_end;
++	timing->vactive.typ = mode->vdisplay;
++	timing->vfront_porch.typ = mode->vsync_start - mode->vdisplay;
++	timing->vsync_len.typ = mode->vsync_end - mode->vsync_start;
++	timing->vback_porch.typ = mode->vtotal - mode->vsync_end;
++
++	/* DRM_MODE_FLAG_* defines are already mapped to u-boot DISPLAY_FLAGS */
++	timing->flags = mode->flags;
++}
++
+ int panel_get_display_timing(struct udevice *dev,
+ 			     struct display_timing *timings)
+ {
+ 	struct panel_ops *ops = panel_get_ops(dev);
++	const struct drm_display_mode *modes;
++	int ret = -ENOSYS;
+ 
+-	if (!ops->get_display_timing)
+-		return -ENOSYS;
++	if (ops->get_display_timing) {
++		ret = ops->get_display_timing(dev, timings);
++		if (ret != -ENODEV)
++			return ret;
++	}
+ 
+-	return ops->get_display_timing(dev, timings);
++	if (!ops->get_modes)
++		return ret;
++
++	ret = ops->get_modes(dev, &modes);
++	if (ret < 0)
++		return ret;
++	else if (ret == 0)
++		return -ENODEV;
++
++	drm_mode_to_display_timing(&modes[0], timings);
++	return 0;
+ }
+ 
+ UCLASS_DRIVER(panel) = {
+diff --git a/include/panel.h b/include/panel.h
+index e2764d72c57dcc4ae11d5f1553f1bfcd98996138..8d46fb26a07c2b1886a38f922eb6a90c3762ca38 100644
+--- a/include/panel.h
++++ b/include/panel.h
+@@ -7,6 +7,62 @@
+ #ifndef _PANEL_H
+ #define _PANEL_H
+ 
++#include <video.h>
++#include <fdtdec.h>
++
++/* DRM mode flags mapped to U-Boot DISPLAY_FLAGS for direct compatibility */
++#define DRM_MODE_FLAG_NHSYNC		DISPLAY_FLAGS_HSYNC_LOW
++#define DRM_MODE_FLAG_PHSYNC		DISPLAY_FLAGS_HSYNC_HIGH
++#define DRM_MODE_FLAG_NVSYNC		DISPLAY_FLAGS_VSYNC_LOW
++#define DRM_MODE_FLAG_PVSYNC		DISPLAY_FLAGS_VSYNC_HIGH
++#define DRM_MODE_FLAG_INTERLACE		DISPLAY_FLAGS_INTERLACED
++#define DRM_MODE_FLAG_DBLSCAN		DISPLAY_FLAGS_DOUBLESCAN
++#define DRM_MODE_FLAG_DBLCLK		DISPLAY_FLAGS_DOUBLECLK
++
++/**
++ * struct drm_display_mode - DRM kernel-internal display mode structure
++ *			     simplified for U-Boot
++ * @hdisplay: horizontal display size
++ * @hsync_start: horizontal sync start
++ * @hsync_end: horizontal sync end
++ * @htotal: horizontal total size
++ * @vdisplay: vertical display size
++ * @vsync_start: vertical sync start
++ * @vsync_end: vertical sync end
++ * @vtotal: vertical total size
++ *
++ * The horizontal and vertical timings are defined per the following diagram.
++ *
++ * ::
++ *
++ *
++ *               Active                 Front           Sync           Back
++ *              Region                 Porch                          Porch
++ *     <-----------------------><----------------><-------------><-------------->
++ *       //////////////////////|
++ *      ////////////////////// |
++ *     //////////////////////  |..................               ................
++ *                                                _______________
++ *     <----- [hv]display ----->
++ *     <------------- [hv]sync_start ------------>
++ *     <--------------------- [hv]sync_end --------------------->
++ *     <-------------------------------- [hv]total ----------------------------->*
++ */
++struct drm_display_mode {
++	unsigned int clock; /* in kHz */
++
++	u16 hdisplay;
++	u16 hsync_start;
++	u16 hsync_end;
++	u16 htotal;
++	u16 vdisplay;
++	u16 vsync_start;
++	u16 vsync_end;
++	u16 vtotal;
++
++	u32 flags;
++};
++
+ struct panel_ops {
+ 	/**
+ 	 * enable_backlight() - Enable the panel backlight
+@@ -34,6 +90,19 @@ struct panel_ops {
+ 	 */
+ 	int (*get_display_timing)(struct udevice *dev,
+ 				  struct display_timing *timing);
++
++	/**
++	 * get_modes() - Get display modes from panel
++	 *
++	 * Returns an array of display modes supported by the panel.
++	 * Similar to Linux's drm_panel_funcs->get_modes().
++	 *
++	 * @dev:	Panel device
++	 * @modes:	Pointer to an array of modes
++	 * @return number of modes if OK, -ve on error
++	 */
++	int (*get_modes)(struct udevice *dev,
++			 const struct drm_display_mode **modes);
+ };
+ 
+ #define panel_get_ops(dev)	((struct panel_ops *)(dev)->driver->ops)
 
-I prefer to remain this to avoid potential risk as 91evk 93evk 93frdm 
-all remain this property.
+-- 
+2.51.0
 
->> +};
->> +
->> +&fec {
->> +       compatible = "fsl,imx91-fec", "fsl,imx93-fec", "fsl,imx8mq-fec";
->> +       phy-reset-gpios = <&pcal6524 16 GPIO_ACTIVE_LOW>;
->> +       phy-reset-duration = <15>;
->> +       phy-reset-post-delay = <100>;
-> 
-> Using phy-reset-gpios is considered deprecated.
-> 
-> The PHY reset GPIO should be described inside the MDIO node.
-> 
-Ok, will change to main dts MDIO node.
->> +&ethphy1 {
->> +       reset-gpios = <&pcal6524 15 GPIO_ACTIVE_LOW>;
->> +       reset-assert-us = <15000>;
->> +       reset-deassert-us = <100000>;
-> 
-> Why is this inside the u-boot.dtsi instead of the main dts?
-> 
-
-Can move to main dts.
-> 
->> +#define CFG_SYS_SDRAM_BASE     0x80000000
->> +#define PHYS_SDRAM             0x80000000
->> +#define PHYS_SDRAM_SIZE                0x80000000 /* 2GB DDR */
-> 
-> What about:
-> 
-> #define PHYS_SDRAM_SIZE   SIZE_2GB
-make sense, will change.
-
-Regards,
-Joseph
