@@ -4,106 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B5DD1F9CF
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 11:56:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCC39D1F9CB
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 12:01:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B1EA8405F;
-	Thu,  4 Dec 2025 12:56:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 25DFF83FA5;
+	Thu,  4 Dec 2025 13:01:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U1SVs3c2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dz4/exoa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7ACA84062; Thu,  4 Dec 2025 12:56:15 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id AA76C8400F; Thu,  4 Dec 2025 13:01:32 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62D6E8405A
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 12:56:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5F8B83A94
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 13:01:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-786943affbaso5965267b3.0
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 03:56:13 -0800 (PST)
+ spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-42e33956e76so457718f8f.3
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 04:01:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764849372; x=1765454172; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ypfTwlaNfOmcjW/1jcEbIn+CugNCOZ1Gf6JO2JrvKnM=;
- b=U1SVs3c2UyURSFhZ5lOnlEWcIAG25gtGWjiDiZX9zo8DJFEiCVUpYMvNLiLuWz5xbT
- HH29sQKJSdPhsX+2aHjHoRJDWD99rrzLDSF1Z6yG6UyB71ntkBk5GFOJl2sBJHuUmovZ
- GEF8L/B02HJuEaMDSRw13UKuagosIsoMOpAmC3ewJTQ/4I4MsrRmI7L+L+x8nNSxF9jC
- h3q1AVrnMguHOH2PV9qYGdjURgI/saLXj4CM6W+tlqLGGskMODoFBxhwPTSt8KEMeQek
- 6AgN6ZJvuZhqei88TSldoVJGu9+A+9+pS0fAOioOX6y8zTpc8o2iy49er+Q5sA5vq1eQ
- sj3A==
+ d=gmail.com; s=20230601; t=1764849690; x=1765454490; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=U5Kgjp8IIOFl0WY1OD8A9Jh91/hZ2aozGCoLPlZMnfc=;
+ b=Dz4/exoa3/NHzCLLqAbpNTp50LhBTyXBB8Skto245qoxanrqSJ9J6lMZRblvEMcBW3
+ 9c1bnKhyPwEnrdIbiPLjQDN+xwFmgkaWpZvZhopCYY15Z7YgkXlzT4cxU/G0OEjZJZ1G
+ j7g690l7CkVzbSImVeu3UxHRZkuBtb5nHBOh/h7k5xxY2NU3bdxw/AycWiu/dHgTB18M
+ 3dqZRyuL44qI8wLjeNqPlFYDv2/1MCgZO030bHrYU1l7xJveeHqw8h32Mx7m+y9c617l
+ YEMxpTPUMxSkbUe78mHw52KD+WzFn9HKbZnLBbfQn0fAtI/DQZpH5hVqFGm7hNXrrkd8
+ 3wvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764849372; x=1765454172;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ypfTwlaNfOmcjW/1jcEbIn+CugNCOZ1Gf6JO2JrvKnM=;
- b=gFSzxs/E24kdRemo50pegLlifiCNr+fHir1MPopPbWe5c93WyIHEu41vX+elz2+nmE
- LNkksXc1JhX9PmIFB0/mwg4QvVYNajnMqX87+Mz65mUBrFOngr+Kno3hC0d+EbHO9p18
- /ymGi6bze6StPIvEZwO+3CfkbiTYh2b3Arxh95SuWMRFQhsPLg9HAzHmF3xibVCIfNrp
- +Zyyz114qHG8ebf8/z05r5oLzioOYOTvtMSQlrEc7zL2DqBVsz655HjyDRXSicpdPcny
- mgzTsonHVVkcea85qrqGR2AeIEiTuVfUT5XW2cY72pzZyNqGh99PaUaaWdZMzsVH0ewh
- ODvg==
+ d=1e100.net; s=20230601; t=1764849690; x=1765454490;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=U5Kgjp8IIOFl0WY1OD8A9Jh91/hZ2aozGCoLPlZMnfc=;
+ b=TcCStjtWnqOdXx8HdKC9DY2yOL2NaKtUO4jEiFwi5ZT1NB/oSmR0SuTOpJum15fwaK
+ 1aHkD/pyL04bN3/o2ql+vm2f/NDy+q5wrZe8ZgJL7X0eaZsTlBXgMljPn4nHG3qhnKhQ
+ m+zvzY081UwjmQtYenu3xM9VTzbZUJj2mIUVuzOWVe227BEQdSABlOvUt1m1XJk7WgC0
+ N6phrCyHm/eDYyyhWDAZRTX3Yq69+2bb9kkwl2bJEaIZ5HnW4zue2y2W8H1g3BDck66D
+ nhDfE7woIoJ/9XgC4Ben7+Vzb+SFRrnm69XatihPwJhGa3zEUk67Y+jK63hpBee/L+ga
+ QM7A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqjctuQsAA3nfCcQ4lP5uSiyUcbsxSauPTbIT27Dg0AqXhXSfOlGvBCbUDaWWtvQGSJG3Wd5I=@lists.denx.de
-X-Gm-Message-State: AOJu0YxgzVh3GRpQiYmvM03ox+jJ/oOpcOZqI77ToonHHRyh/EYfy4v2
- I2bscuY895s2ehAzHTHxe6dxsswb6oGFz5DL0yWtyVlZ5YlVOGyc829tHkTEz+iR4tUMk4wkEsH
- 8EB3d+HrciRnwMsyC6gPfFvbqs6io9s+MNcYuI8a33A==
-X-Gm-Gg: ASbGncso01W+p1UWzOKfOUkldroKgswYhD16e9QclkRhIzZlcvde/K/lMZSw86Z0EwA
- P+goHT9x12PBn38xTmYDT31J2Md/tph8Etmfit2x0TngPrWkJ/umCWXDtxiOwXoSodSJNGMzDOJ
- kj8V59H6W3PrTvt579AyISFY8ZhbhNUGucaYTGG+qaCClE8yyEsNeHkSeUOZwYv+RIfbU1Vi4b/
- Vsf0b0Xn+veYpvXNKGT/mODBTkXd8EjFesI+7y/uaXDNQO92stK5AQp+y2C4m8bw/VVpyEb6wHK
- tKEAgsdGQdtfd9K60lQOx/GZRKstwYxx8d/Ho8Bcs/1tpVRn6hDHmLcYrvOervyyZfajSe2+suy
- khZY5KRo=
-X-Google-Smtp-Source: AGHT+IHZOmrnxbDQy7Ji1XvZVtmyCC6a7an4f8Yku17zYSvqZmBD5RMkiIWYtAduD+EcK0TTHMzElZNKw0uiH5GIlnk=
-X-Received: by 2002:a05:690c:3601:b0:788:737:4830 with SMTP id
- 00721157ae682-78c188b2a47mr18689577b3.66.1764849372137; Thu, 04 Dec 2025
- 03:56:12 -0800 (PST)
+ AJvYcCVqMOvvy1Lr0Jrw+9RqgRt0O8IqR2uqOMhhODj/yA+GGvGBx7hOeX80iCeypX5cEJLq6QTgqxQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzlLAGYUPR/RxBOzqSv26qhQrF7a94DcIDP8rr0i8s6qIRUL2Ld
+ YGHCFAnG01dn9me0DVR4b+Dqm8Ds+I/A9fP1qv+fmF3tZ807Gfq23F6j
+X-Gm-Gg: ASbGnctB2XHpGyo6aM9ULZdCjkTpfD4rK1DxYEx/DaBkX0vB0OIiPba+3fr+prYMRMw
+ gZUGW2SA2NWXjwvZAlQ5lFBi8QlzGJnRW4ZT2jKCNwEAcDNJyZ+G+TQrPpWPgdfNyo2d4ORaoaa
+ yiG8FcEue1cNVkjSJrRA7hguplGIuGtxHOPW/PEhtrs2Ii9K8mBRwj0ANXQSZOd1guxGDQZW2vB
+ e9yY/kLUlyEVVAFNQArt7SKv5shl2Ilu9ITEMDAwm0szO0tA9MQVdWabfJn6lj4v9nm+7axERan
+ /zpU3PM6bnbJqYVv23avMkexjQVp2VxEK0kc8qlF2n4dK23ODQXPSdy/3X2YrL+dbEcThPOwAVe
+ xt4u1Ig7hOnrZlF/aFxxBpvPhMkTOcwhPJzs+uptw3T/70lyAlcMhAlVnRGwQwh26FPwKqxB+FU
+ hI3HDceLaADuxs33maciJFyoVerYt3WHIHaegNyBvczFWnoZ2EhGe29EI=
+X-Google-Smtp-Source: AGHT+IGK2kh5nqRBkAik9jOhWToGQHDsrMnFDN2+sDeOvN2TLRW7uWodobrxV63RXXO63dELIibAcg==
+X-Received: by 2002:a05:6000:22c4:b0:42b:2de5:251e with SMTP id
+ ffacd0b85a97d-42f73187118mr6107478f8f.26.1764849689714; 
+ Thu, 04 Dec 2025 04:01:29 -0800 (PST)
+Received: from [10.193.174.228] (93-44-42-122.ip95.fastwebnet.it.
+ [93.44.42.122]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-42f7d331a4fsm2963524f8f.33.2025.12.04.04.01.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 04 Dec 2025 04:01:29 -0800 (PST)
+Message-ID: <bc75cd00-2372-4dac-821e-74bef5790e34@gmail.com>
+Date: Thu, 4 Dec 2025 13:01:27 +0100
 MIME-Version: 1.0
-References: <20251202-feature_fwumdata-v1-0-d55154de4103@bootlin.com>
- <20251203110108.1d93975d@kmaincent-XPS-13-7390>
- <CAC_iWjJ0PFXABOkwPSSdjRuFSPUF79fVCWNRvU5s1PLCuV5ydQ@mail.gmail.com>
- <CA+DkFDbecwtJkX-7wHzQjhVbi-tpjzZVzc7N3kvhr5OtKivgWA@mail.gmail.com>
- <20251203155924.3dd3c5a0@kmaincent-XPS-13-7390>
- <20251203151048.GP303283@bill-the-cat>
-In-Reply-To: <20251203151048.GP303283@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 4 Dec 2025 13:55:36 +0200
-X-Gm-Features: AWmQ_bm0Uo3cNRWmFOJBYHtihNaNd8ceNp7fWUeBgALPSZA9Rls-A-EHcvbmkDI
-Message-ID: <CAC_iWjLbB=2FqXr5H5UdBNxyiEANUAJOdVO8Jh0BMVVbjQvocQ@mail.gmail.com>
-Subject: Re: [PATCH 0/6] Add support for fwumdata
-To: Tom Rini <trini@konsulko.com>
-Cc: Kory Maincent <kory.maincent@bootlin.com>, Patryk <pbiel7@gmail.com>,
- u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Greg Malysa <malysagreg@gmail.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Jerome Forissier <jerome.forissier@linaro.org>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Stefan Roese <stefan.roese@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- E Shattow <e@freeshell.de>, 
- Raymond Mao <raymondmaoca@gmail.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
- Shiji Yang <yangshiji66@outlook.com>, Daniel Golle <daniel@makrotopia.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Yao Zi <ziyao@disroot.org>, 
- Leonard Anderweit <l.anderweit@phytec.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] imx: Revert "imx: mx6ull: fix REFTOP_VBGADJ setting" and
+ fix comments
+To: Ye Li <ye.li@oss.nxp.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, uboot-imx@nxp.com, trini@konsulko.com,
+ dario.binacchi@amarulasolutions.com, u-boot@lists.denx.de,
+ u-boot@schwermer.no, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, Jacky Bai <ping.bai@nxp.com>
+References: <20251027115638.1186252-1-festevam@gmail.com>
+ <CAOMZO5B1sxS8Vh1awupGZd8oqqLhZ55abME07Kf5AZ-w9jUKhQ@mail.gmail.com>
+ <3ab1b3a6-b9ab-4571-a7c8-8288d4a8d290@gmail.com>
+ <CAOMZO5BcMu_94qn4vhDgxmdWVx0N-mCD9wYTvAPbXaK45EUFBA@mail.gmail.com>
+ <b6b82482-ec7d-4703-ad93-ccdd7a651b57@oss.nxp.com>
+ <e9c56d66-b2b9-456c-856e-2ef01a009e16@gmail.com>
+ <CAOf5uwktScqh0LrWTaz-MRA-tDoAVb9Mo8UhxDKz0dauO21QQg@mail.gmail.com>
+ <92d98692-5fd7-456f-b831-0986e6d499a9@oss.nxp.com>
+Content-Language: en-US
+From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+In-Reply-To: <92d98692-5fd7-456f-b831-0986e6d499a9@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,67 +116,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 3 Dec 2025 at 17:10, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Dec 03, 2025 at 03:59:24PM +0100, Kory Maincent wrote:
-> > On Wed, 3 Dec 2025 15:04:10 +0100
-> > Patryk <pbiel7@gmail.com> wrote:
-> >
-> > > Hi Ilias,
-> > >
-> > > > > > Add a new fwumdata tool to allows users to read, display, and modify FWU
-> > > > > > (Firmware Update) metadata from Linux userspace. It provides
-> > > > > > functionality similar to fw_printenv/fw_setenv but for FWU metadata.
-> > > > > > Users can view metadata, change active/previous bank indices, modify
-> > > > > > bank states, and set image acceptance flags. Configuration is done via
-> > > > > > fwumdata.config file.
-> > > > > >
-> > > > > > Made a few change to mkfwumdata tool along the way.
-> > > > >
-> > > > > Still wondering about the choice of putting this fwumdata tool in U-Boot
-> > > > > instead of TF-A. TF-A is the boot part that manages the update process and
-> > > > > rollback through the FWU metadata,
-> > > > > therefore, this is where it should belong.
-> > > > > Why, in the first place, mkfwumdata was accepted into U-boot instead of
-> > > > > TF-A?
-> > > >
-> > > > The actual update happens via capsule updates only, which runs in
-> > > > BL33. TF-A needs to be aware in case it's involved in the boot process
-> > > > and fails to boot. In that case BL2 is responsible for booting via the
-> > > > other bank.
-> > > > But generally speaking it's U-Boot that processes and usually updates that
-> > > > file
-> > >
-> > > If I may add something - actually for me this is not that obvious,
-> > > e.g. on our platform we update the metadata directly from Linux, not
-> > > from the u-boot capsule. As far as I'm aware, the ST, in their
-> > > OpenstLinux does the same. I'm also not sure why it would be the bad
-> > > idea to do this from Linux. Ofc the BL2 handles bank selection as well
-> > > as rollback in case of boot failure on a newly selected bank.
-> >
-> > I agreed with Patryk. U-boot is only an update agent (as explained by the
-> > standard) of FWU metadata as Barebox or Linux could be. FWU metadata is an ARM
-> > standard which is related to the update of the images that boot after the ARM
-> > firmware. It is not related to any project. As TF-A is the mainstream project
-> > for ARM firmware having mkfwumdata and fwumdata in it seems more suitable.
-> > I am not familiar with these EFI capsule update, does it not rely on TF-A to
-> > select the boot image according to the FWU metadata state?
-> >
-> > Anyway, now it is too late and mkfwumdata has already landed in U-boot for 2
-> > years. Not sure what we should do here. Put all in U-boot and let the other
-> > projects (barebox) copy the code if they need it? Or move all to TF-A while
-> > keeping a deprecated copy of mkfwumdata in U-boot to not break things?
->
-> Perhaps in the medium term we can split that tooling out from the main
-> project source tree itself, to make it easier for OSes to use this tool
-> (and other tools we have). There's nothing U-Boot specific about this,
-> if I'm following the thread right.
 
-Indeed. However U-Boot was the first project to adopt and implement
-that spec. So the tool was naturally added here
 
-Cheers
-/Ilias
->
-> --
-> Tom
+On 19/11/2025 08:49, Ye Li wrote:
+> Hi Michael, Emanuele,
+> 
+> On 11/12/2025 6:07 PM, Michael Nazzareno Trimarchi wrote:
+>> Hi all
+>>
+>> On Wed, Nov 12, 2025 at 10:57 AM Emanuele Ghidoli
+>> <ghidoliemanuele@gmail.com> wrote:
+>>>
+>>>
+>>>
+>>> On 12/11/2025 09:16, Ye Li wrote:
+>>>>
+>>>>
+>>>> On 11/11/2025 9:47 PM, Fabio Estevam wrote:
+>>>>> Hi Emanuele,
+>>>>>
+>>>>> On Thu, Nov 6, 2025 at 7:22 AM Emanuele Ghidoli
+>>>>> <ghidoliemanuele@gmail.com> wrote:
+>>>>>
+>>>>>> Hi Fabio, Ye,
+>>>>>>
+>>>>>> At Toradex we have been struggling since quite some time (back to 2018)
+>>>>>> with
+>>>>>
+>>>>> Does this problem only affect early i.MX6ULL silicon samples?
+>>>> Hi Emanuele,
+>>>>
+>>>>      I have same question as Fabio. Are these samples are early? Do you know
+>>>> the time of receiving these sample? And could you show the part number
+>>>> printed
+>>>> on the chip.
+>>> It could take a little to answer to the first two question. I can say that the
+>>> SoM I'm using to validate the patch was assembled in September 2021. Let me
+>>> know if this information are needed giving that I can report the marking on
+>>> the chip:
+>>> MCIMX6Y2CVM08AB CTDQ2107 1N70S CHINA QGDQCTA
+>>>
+>>>
+>>>>
+>>>>>
+>>>>>> the temperature readings and the thermal shutdown behavior on i.MX6ULL. The
+>>>>>> issue we observed is that the thermal shutdown seems to trigger too early.
+>>>>>>
+>>>>>> I have investigated the history around this topic and verified some
+>>>>>> internal
+>>>>>> notes in our bug tracker. With this revert applied, and on the devices
+>>>>>> we have
+>>>>>> (all trimmed with value 0), the reported temperature increases by about
+>>>>>> 10 °C
+>>>>>> compared to before the revert. The absolute accuracy of the readout is
+>>>>>> questionable: for example, on a device kept at around 20 °C, the
+>>>>>> temperature
+>>>>>> readout was ~19 °C before the revert, and ~31 °C after the revert.
+>>>>>>
+>>>>>> Consider that for devices with fuse value of 6, there is a -10 degrees
+>>>>>> offset
+>>>>>> after this revert (so, the other way around).
+>>>>>>
+>>>>>> I understand that for Sven this revert improves stability during large XZ
+>>>>>> decompression in userspace for few devices, but for us it means that the
+>>>>>> thermal shutdown happens roughly 10 °C earlier, which is a serious issue in
+>>>>>> our case.
+>>>>>>
+>>>>>> I would kindly ask NXP to double-check how these devices were trimmed.
+>>>>>> My gut
+>>>>>> feeling is that there might be an inconsistency, either the trimming
+>>>>>> scheme is
+>>>>>> not backward-compatible (e.g. old and new devices behave differently,
+>>>>>> and the
+>>>>>> code should cope, I don't know how, with this), or this patch must be
+>>>>>> reverted
+>>>>>> (because introduces a regression).
+>>>>>
+>>>>> Peng/Ye Li,
+>>>>>
+>>>>> How does NXP suggest we handle this? Were the early i.MX6ULL parts
+>>>>> incorrectly fused?
+>>>> I need to discuss it internally, will feedback you later.
+>>>>
+>>>>>
+>>>>> Can the fuse be read and dynamically adjusted?
+>>>>>
+>>>> The fuse is locked by MEM_TRIM_LOCK. Emanuele, can you help to read it by
+>>>> "fuse read 0 0 1".
+>>> Colibri iMX6ULL # fuse read 0 0 1
+>>> Reading bank 0:
+>>>
+>>> Word 0x00000000: 00320003
+>>> Colibri iMX6ULL # fuse read 1 0 1
+>>> Reading bank 1:
+>>>
+>>> Word 0x00000000: 00000080
+>>>
+>>
+>> As is clear this problem was the same we had some months ago, so we
+>> are on the same page
+>> with Emanuele
+>>
+>> Michael
+>>
+> 
+> 
+> Can you help to measure the VDD_ARM_CAP and VDD_SOC_CAP on your devices with
+> high temperature read issue, when REFTOP_VBGADJ is set to 3'b000 and 3'b110
+> respectively. Provide the measured voltage and target voltage.
+> And please read the Unique ID fuse of this device by "fuse read 0 1 2".
+Running u-boot, VDD_ARM_CAP and VDD_SOC_CAP respectively:
+- With REFTOP_VBGADJ set to b000: 1.08 V and 1.11 V
+- With REFTOP_VBGADJ set to b110: 1.06 V and 1.08 V
+
+Best regards,
+Emanuele>
+> 
+> Best regards,
+> Ye Li
+> 
+>>> Kind regards,
+>>> Emanuele
+>>>
+>>>>
+>>>> Best regards,
+>>>> Ye Li
+>>>>> Please advise, thanks.
+>>>>
+>>>
+>>
+>>
+> 
+
