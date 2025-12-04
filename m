@@ -4,85 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9063D2A536
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 20:29:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97656D2A532
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 20:31:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13F4D8414B;
-	Thu,  4 Dec 2025 21:29:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C4478405C;
+	Thu,  4 Dec 2025 21:31:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KLdxk8tv";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="0aWJtHFD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE62E8413A; Thu,  4 Dec 2025 21:29:19 +0100 (CET)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 4C8478405C; Thu,  4 Dec 2025 20:03:38 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A8368412C
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 21:29:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DA9884051
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 20:03:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-3e7ead70738so930625fac.0
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 12:29:17 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b73545723ebso202915266b.1
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 11:03:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764880156; x=1765484956; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=T3Lqd+OYPjdR3kuAi9Meo2L1fKy0l5fQOmkHLmFpexk=;
- b=KLdxk8tvVkGER/NxJGV9IhNfyychrWjSzsdYbUnGSCU6nXmcqIhwFeqMxNM7x70gLl
- 683KkREFO+GFyO7rhvoLstJLE+GknLpfBMa65gizhRdz8ly1kZmXnW2LVoiDoqIJcpP1
- qqzNDwOWWCxmhFGBtD2nUJtUEYbEmnUDibtbM=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764875015; x=1765479815;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=M09cFstP90rGGsY47tSZPSfvLcgz5YDoWuOHheOm3js=;
+ b=0aWJtHFDbdQ1E21FtmpTT9j3970Zq4m5qW3CBT2JUwrdVxRm4Hdgczv/gbOwWD6CbO
+ clknNxNL6c7gtTDxs3T89uFxoXFeFd/KTANpgdTvblxK8t6gIgUIUuXySpd3MezYcGtc
+ Z4k61Uuww1ERIYuAWZ1XIK9Oc3DgkG861zz0HuFeSsqgFi6XBEuaTrLkGcaPq/GNV2g9
+ SfeWtM5XM2kqdonWWPKIvELaT2EAc7F9J+g1ZYFrvT/aCVjSPAchqQ5Q7rDr1dGmPb0i
+ hy0vSzLorrrht5VKg2z+toRo658y88roZrlOjNuJZf6XD5FNrFKTvowHSH7PqbCgmiYA
+ f2lQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764880156; x=1765484956;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=T3Lqd+OYPjdR3kuAi9Meo2L1fKy0l5fQOmkHLmFpexk=;
- b=A/7F36k3tDqcO8+nDa0iYWYMk9WA25ym7sOkNOVx4/jIw8QZWupok1LR3JztkFD+7H
- bnFh7QT2n4/IpGxOD9+P5hcA3dcMdxf0XQfOK974I3jFfcag51cmENk+d86GW/x8luCy
- mDeTaLxtPUgo1Ee7xyeJQIHAT9a6GKQn3+eais/9FLW5pXrs9YEjOLfOXgr2k1SbJ4iD
- iKZohLgOjggNqDZoW7ScApsCy+9ehFIX0v/XlQle0g/WveNkEut7fziCwEzu1G9faULu
- mUboRpI+XzhYVTKE0wxItpI4tgdm6UtisJwJIaryn0Jh6a1sjjlkgJA4r3xDLhEO+RUU
- KujA==
+ d=1e100.net; s=20230601; t=1764875015; x=1765479815;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=M09cFstP90rGGsY47tSZPSfvLcgz5YDoWuOHheOm3js=;
+ b=NUOu0dvhmifwSTzUJHYW/zTsKI3nUh4NHAV4aHaqpNIRYXa1I81+KVe1sXHmcsCTvm
+ l5nJceyaThu2yVIGIxLGjIrEIFo0NFNQPwGTDuBr6n7RahPcx3DTNYUXcwqoSrVa6jqv
+ ++Dofh2OZMVxtuxasF5uZMMxMR4nAlN63k3kzy1dsyw0ndiT5osxXP84ChXQ9XdKJY4a
+ q/JIh/Gw7nEGrhQqbnotncvHminLlc1lYvmrZv/PEyQSpOCG9ycfTmYsmkquz/+Xbuuk
+ jrMv5ax3FgzV489XKgPxhaxfM9Bu1Ln8NHHiOZwTL4c7Sigo6/X3y4cFX5xf/BQxriDH
+ 0keA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVjLi0jRZAR3IM2794vTDtyxrtKMFZtJQGvwsW+NCnXeqMKfHbs6Ys2MCCV27N0fMpaO5KypFM=@lists.denx.de
-X-Gm-Message-State: AOJu0YylJ6YL9/QTiZ02w6mkj76UAWGdaRKlDz66taxBoxcRSVNUsm9V
- z3x2lXzVCmH6rnA9L+EttVN5tLFPczCuQWdgeg8fGs48UDGzp05MrndC29ESS3R7asZZoLaSAh6
- kitHDlyQ=
-X-Gm-Gg: ASbGncsOJRNQFRn9+aegTh9CFziioMz6tuIqNN23PaWY6zKrkEHoxbyMJqHOzFCJOXx
- mjKKmLRLKv86d79MM70ArE5MrqIlS/172CvNNT1EHGUNLVGNxbAxke6MMMYOZ4mB4NXgcikI+Ox
- SagVcYqdcCPt6+H4vhLnOueBpQ1CrYiso4SOOVNridKENdFzh8WTbp76sMcJ/yrgXn9pEHqzo6J
- o9kE1whGwtEsHjy4rac4GYotXA2OiyPaLx8IdMnBrtjvqz76s8e9KnUnuGQg6zH3TD+cU5WDy9p
- PR345EWZcFK1X/wrrLqB6gIFG/oBB+B0sGT4cgxCW10uGXeveSp7MN92tZp1YeK/NiabdPY1R4e
- RQSPCyRT6WpL5lz+CCYBVWXVGtG0gyBq2c5cwt3ZJLAJFrkklKbkS0wxMoWeMzlYSO0jmW7k6YP
- O7/fDljhAVzLdRghb9mlsxaSnOS+MwijfGnQSZDxn6gw7kJPWbDw==
-X-Google-Smtp-Source: AGHT+IGhp5dlBYA0X2sZKZ9poI/z+nws8lJB23xhQA0+Ke7v+dfc3CL6Ci1WvqtvdDp0GmTgoRntEw==
-X-Received: by 2002:a05:6870:b410:b0:3e8:8e57:a7a3 with SMTP id
- 586e51a60fabf-3f5067e292cmr2169960fac.54.1764880156234; 
- Thu, 04 Dec 2025 12:29:16 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f50aa34d4fsm1955374fac.5.2025.12.04.12.29.15
+ AJvYcCVvcm8tmQEYAqAups+UUTUVfoXXXV1HXtrVFAkS8MFSnlQ0ZtBiazweKnVZ3mZKodeEEADfd7g=@lists.denx.de
+X-Gm-Message-State: AOJu0Yws5Cf9CrLqwFXsCA0E8/UYKjsPnCa7MeZV8HXO7WOa4x3NN5KK
+ oTVQOXAn8N/C4pPke7veUKDH5v6Ywc8AEvh2KmoLwhDdt6PFo1IELxfqvajqFpxxMAg=
+X-Gm-Gg: ASbGncvdFfYaxxCXr6UAdtVEmOJxsWyx2B0uCEO0869srgorsYreniWAy3DJXd4Gs8j
+ FxzZyMHnGiR+bQMdKLJmh4onQvPwp0kJnIWVdmLCBRBJ35TuiS035ZLvADvyXGpIxq1jsAdtT5S
+ rpTjEINuDaSyBjBp8yUv1FtjREgkiXjAa3dU/DugPY2vn4EDtLRY50VPJQ5O9AeG0HqYvF9vvbA
+ sM1jgrHR5AacAfjpcz82fUiTQx2DzXBuymuHXCgj/THoMIT9Mx1PNqjZMqLsV1xImFzP9NuhDct
+ g78wagctL4kfH+ILuCfWTMwVCjsP+exUT7Mz91CQi68wCOmwikqcvTMk9YUtWn/cLKHv05ImVxa
+ GWP2Rmh89GorZAEASE5sOd50PUc8av4f54cXoG2N3J50gKG8KstQzG4erz+G3RPZBT6d3V6a75W
+ rL7EA1
+X-Google-Smtp-Source: AGHT+IHtlwHpy9MmPmOiAcMlxhAttR1xEdjk4RuhNS+pVwMMhNno0RjjwxJbkROqG9DvvNZuIO867A==
+X-Received: by 2002:a17:906:4fcb:b0:b76:3b3f:60e9 with SMTP id
+ a640c23a62f3a-b79dc75b301mr708098766b.45.1764875015299; 
+ Thu, 04 Dec 2025 11:03:35 -0800 (PST)
+Received: from localhost ([62.246.248.122]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-647b368dcf8sm1905095a12.19.2025.12.04.11.03.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 12:29:15 -0800 (PST)
-Date: Thu, 4 Dec 2025 14:29:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Lukasz Majewski <lukma@nabladev.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] clk: Remove myself as a maintainer
-Message-ID: <20251204202913.GD303283@bill-the-cat>
-References: <20251203210335.1946142-1-seanga2@gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="z96+SdGpUKkdR2LH"
-Content-Disposition: inline
-In-Reply-To: <20251203210335.1946142-1-seanga2@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ Thu, 04 Dec 2025 11:03:34 -0800 (PST)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=1c4d632a17c0a206ee3f0c167a8002f8ff47310955902c96bc4d6e386280;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Thu, 04 Dec 2025 20:03:26 +0100
+Message-Id: <DEPNZ52FI5M8.3ECX0AF0I9OYR@baylibre.com>
+Cc: "Tom Rini" <trini@konsulko.com>, "Rasmus Villemoes" <ravi@prevas.dk>,
+ "Kory Maincent" <kory.maincent@bootlin.com>, "Marek Vasut"
+ <marek.vasut+renesas@mailbox.org>, "Romain Gantois"
+ <romain.gantois@bootlin.com>, "Parvathi Pudi" <parvathi@couthit.com>,
+ "Basharath Hussain Khaja" <basharath@couthit.com>, "Paul Barker"
+ <paul.barker@sancloud.com>
+Subject: Re: [PATCH v3 4/9] configs: am335x_evm: Unify evm board defconfigs
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Andrew Davis" <afd@ti.com>, "Markus Schneider-Pargmann (TI.com)"
+ <msp@baylibre.com>, <u-boot@lists.denx.de>, "Marc Murphy"
+ <marc.murphy@sancloud.com>
+X-Mailer: aerc 0.21.0
+References: <20251204-topic-am33-evm-oftree-v2026-01-v3-0-3d1566ce4dc7@baylibre.com>
+ <20251204-topic-am33-evm-oftree-v2026-01-v3-4-3d1566ce4dc7@baylibre.com>
+ <42e52490-e940-4382-853c-e8f7029b7c91@ti.com>
+In-Reply-To: <42e52490-e940-4382-853c-e8f7029b7c91@ti.com>
+X-Mailman-Approved-At: Thu, 04 Dec 2025 21:31:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,52 +110,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---z96+SdGpUKkdR2LH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--1c4d632a17c0a206ee3f0c167a8002f8ff47310955902c96bc4d6e386280
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Dec 03, 2025 at 04:03:35PM -0500, Sean Anderson wrote:
+On Thu Dec 4, 2025 at 7:43 PM CET, Andrew Davis wrote:
+> On 12/4/25 4:25 AM, Markus Schneider-Pargmann (TI.com) wrote:
+>> Much of the config symbols between the evm boards are the same
+>> independent of the actual board. This patch creates a hierarchy for the
+>> am335x_evm configs:
+>>=20
+>>    am335x_evm.config
+>>    `-> am335x_evm_defconfig
+>>    `-> am335x_evm_spiboot_defconfig
+>>    `-> am335x_hs_evm.config
+>>        `-> am335x_hs_evm_defconfig
+>>        `-> am335x_hs_evm_uart_defconfig
+>>=20
+>
+> Idea looks good to me, but why not have am335x_evm_defconfig be the top
+> of the hierarchy instead of a new file? Same for HS, so something like th=
+is:
+>
+>      am335x_evm_defconfig
+>      `-> am335x_evm_spiboot_defconfig
+>      `-> am335x_hs_evm_defconfig
+>          `-> am335x_hs_evm_uart_defconfig
 
-> Unfortunately I don't really have time to review clock patches. When I
-> initially started maintaining this subsystem I had more free time than I =
-do
-> now. But I also found it hard to motivate myself to review patches.  Many
-> clock patches add support for new SoCs and they are time consuming to
-> review properly. You effectively have to spend a few hours reading the
-> reference manual (if it's public!) and reviewing drivers is no small feat
-> either. This is made more difficult since clocking is often very different
-> between SoCs and it can be difficult to determine whether something is a
-> bug in the driver or a workaround for some hardware behavior. I mostly
-> don't care about any given SoC unless I'm hacking on it so I ended up with
-> a ton (more than 7000) of unreviewed patches piling up in my inbox. I'd
-> love to be more active, but I have a day job and I usually want to work on
-> something more interesting when I get home. I still think the clock
-> subsystem is a major mess but I don't care enough to fix it :l
->=20
-> The subsystem itself should probably get orphaned since AFAICT all patches
-> go through the mach/arch maintainer or to Tom.
->=20
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+Yes, I would like to do that as well (and tried), but there are symbols
+set in am335x_evm_defconfig that are not set in am335x_hs_evm_defconfig
+for example. If I remove that symbol like this:
 
-Thank you for your time and contributions over the years. Applied to
-u-boot/master. And yes, we do need to as a community figure out what to
-do next with the clk subsystem (and try harder to put SoC-specific parts
-under the SoC maintainers).
+  # CONFIG_... is not set
 
---=20
-Tom
+'make am335x_hs_evm_defconfig' will complain:
 
---z96+SdGpUKkdR2LH
+  generated_defconfig:87:warning: override: reassigning to symbol CONFIG_..=
+.
+
+I don't know how to get rid of that warning without the additional files
+I introduced.
+
+Best
+Markus
+
+--1c4d632a17c0a206ee3f0c167a8002f8ff47310955902c96bc4d6e386280
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTHvFgAKCRAr4qD1Cr/k
-CtJlAP9PrCpHknepg5semIHHLIZTW1Gy73cohJ6SH4o4/NxbwgD+MsaE60V39TVr
-e3l4ieQTZndh7ZebfITvAI8VUV7EUgs=
-=c+u1
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaTHa/hsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlMa
+RAEA8NUMGcBLHJ0VmJ1rKiMekA43zvtWxCpnInsBIL3S49IBANYCoWLcndHfkitl
+eX6FwQd2JY2J1rPth0/qBBK00jwM
+=UrCX
 -----END PGP SIGNATURE-----
 
---z96+SdGpUKkdR2LH--
+--1c4d632a17c0a206ee3f0c167a8002f8ff47310955902c96bc4d6e386280--
