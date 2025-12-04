@@ -4,91 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9288D2444A
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 17:41:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAFA9D2445E
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 18:09:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 433B484132;
-	Thu,  4 Dec 2025 18:41:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 41D428410C;
+	Thu,  4 Dec 2025 19:09:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iY9e4b33";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VERgeIRl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30CB984132; Thu,  4 Dec 2025 18:41:20 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id AACF58412C; Thu,  4 Dec 2025 19:09:20 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA0578410C
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 18:41:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2BD1840FB
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 19:09:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7c7bfba3996so821805a34.0
- for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 09:41:17 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7c7660192b0so1098747a34.0
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 10:09:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764870076; x=1765474876; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=K7vEsFENon76SdaTKP1doZS1Wfpady4nh11L8I01Lz8=;
- b=iY9e4b330y+cHjuOsjmpxO4iBcvjLVKZzWxYiSbg8Id041h0z9XTP2iT3xWPSNn1kt
- 3ZmL0gPeUeU77bXesVRbF/51jCSDXZHboedeltarGcC32QNHrRjpUwYLEjIcAIukrEbg
- /OZ5BglYwJTMXWYO8aDFDjq/n8TE/9XKa9lk8=
+ d=gmail.com; s=20230601; t=1764871742; x=1765476542; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tL1HHcrelisV9/Kp3h2Ha4nMVvmfLJ5djDr4g/Hb6x8=;
+ b=VERgeIRl6U5vbrgSTjKl0X6olPXOoS251IskTgxU1muiFkx0yWDKAhFH/8HJ7W3RAh
+ HiHz13Ku9Efplw3d+q1Qr9rX4qVb9rQDryS9o9jTb7qKfnlXlF4ZbgexocW36N49jjSf
+ jAI/PhpsgmRYoyjhkF2Uu6HVro8b71XBuqV/4XxJV1r3I0ODK+nUAIk66TnrD6t4vrju
+ EhWWiVxs1yY/mWm95jAZYLzwW3wBlOXBd4hPtArEDO16zkbqGFrg4X1YD1qw++V19oqJ
+ ka4T0iDqlhtClVnMJDkf+VpHrdjt2r6pd1Yr7KWdFyLWC/EtJVjr1VE9YnZJBlM0+NaC
+ ZSbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764870076; x=1765474876;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=K7vEsFENon76SdaTKP1doZS1Wfpady4nh11L8I01Lz8=;
- b=k73tMxZIHi/u1ayrdq71AsQDID2VnwokaHdVDSJTTNq/J3V8MV1KoQVvsFSGbHjM/+
- aBRG0rH8B7olUM33kwG1NmjvbXjFpVqPyxFjCmCt9J0uw724GddaJXhufwmkJXXehDEQ
- Tw2jlbpS7uh1Iz7W3Fu5wmobhnCFaOTFDo+SDcSUQ3gEwcvwgcAajnr91AvgYfgg1c9h
- 8Jgou8VRAEyi1YADWljvyCbOsGukRQyYbrCGkWmI0Ohr3MDlIvZT5Dzdz+t4mN8G21y8
- j4DKbODfIozhhMFK4ga1ZlVbjSqCNqscV1Mz0mCCCScRYxp7qNSrS+EkpylAbUjSURfq
- 4Wqw==
+ d=1e100.net; s=20230601; t=1764871742; x=1765476542;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=tL1HHcrelisV9/Kp3h2Ha4nMVvmfLJ5djDr4g/Hb6x8=;
+ b=N5mUNTKzC1mIMSt14j1b4g+Ub6G8WYBN12Mj6TB2pJQ4DqnGvIWQRrhguAakaN28pA
+ 2gwWSENbWQYW98ixsoTcOW8+u/QPwrbHbdkcw+5FuBpjbOhG9FzR/aQbbt0vaw/rpYyi
+ oBcR2DRHOj7Q+ozBN8IS/1FUVafto3ILt96WQ9wujev8PCzMGjJv65iVHW+RcYd1pgV8
+ IVJ4vpKGySz1SxxoCcWuzSQNWsj0Mlq+JyB9hTM9P4qo8lAPEVYNFBeHP/r2oVwmKlB+
+ NxrBBTe1wJKoO2faLBNK5Y019YP0D2cetQKSXM4wARXib4P4szy7NR7UF+S14K5+nJyN
+ w74w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWEoxgohWRRdr8/JsE/9qeItcF7D8Ypi/C8qTDUT3H3gYlvPDlrbZPW3V5x4uS6oh0ksjR+ozo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyWLYB3ZhI8oY8ncvfDxNKgplN9dp3d2U1elDEo0+/QWfRczkT0
- Z6D9Zz6IqK99tmJFDb8i9VUZ8bg8WraTB7uaGrD6FqX4jsCCKSaotcA/D+cya2duEjk=
-X-Gm-Gg: ASbGnctnshxUham1CySitRlq2b1jLnzGvKqP21IzDAFrVp9MntbamjsX9A20QEEriww
- onZZPprtrJq7ID2ViRohC9Ij37/OiXvem/Cu23LjSNEdI0AGrSG4/tCQdH7rXKgn7bGaDtCapaU
- sjuEYNMzWdCSb9wQKU2/Iyu9LqWFbgVAwGJgSzzywHhU++sTy88Mz54KgH9DyMPUHgQuRN2WgGn
- 5bV9g428CTXqOO88hdomfpIbMHlZznA3CLI8KoNfG5ew+twvOFxwuoFQUkg9Aa6/x1P9b2jZ4yQ
- HAUw/G5dcweCsBXmsPF3U7ApsUL92p0ql4jlLqE5/SxFgLdm8lvTa2mJIErKXfFh4Pjp38DEExJ
- OpOCZEE21/dQOWZlu7i0dvqeVw7fS8k2cpiejwjkmnZMf6tLj3y3YgaAsvnruVQvM15rH8bDp2q
- Xtq0fb8CbY7SfDdhV/CB4zzjEPnTgVhUPeqGT5q/k5wtshQMph5SHR6KbxuHe5
-X-Google-Smtp-Source: AGHT+IHSZtxacssBWYcLrbEuk+R6RPHY/3oP1KzLOanMM2ComdE30hUnwNSO/Y0yW1JhKF2/6tJhqg==
-X-Received: by 2002:a05:6830:264a:b0:7c7:827f:872b with SMTP id
- 46e09a7af769-7c958cabca9mr2578043a34.37.1764870076369; 
- Thu, 04 Dec 2025 09:41:16 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95a93f050sm1930794a34.12.2025.12.04.09.41.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Dec 2025 09:41:15 -0800 (PST)
-Date: Thu, 4 Dec 2025 11:41:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: Re: [PATCH] pinctrl: single: Add missing free in
- single_allocate_function
-Message-ID: <20251204174113.GA303283@bill-the-cat>
-References: <BESP194MB2805A2491EFE4D94C777F9C5DAD8A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
- <97a3117c-7bab-47d1-a5ed-1a33e7c2441a@cherry.de>
- <20251203161142.GQ303283@bill-the-cat>
- <e25260e7-70ce-41c0-aa89-a8fb5a406b57@cherry.de>
- <20251203162826.GR303283@bill-the-cat>
- <20251204171536.GZ303283@bill-the-cat>
- <36b9d7da-13e7-4620-948f-1b3b3b61a250@cherry.de>
+ AJvYcCXTm30VmgNZO41259LLp0lIvFQOAsPkCXu6pc4QdC6L7xSOLpWcCy/hb63Yg9enoXeckiBSMTs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyforVgwB+LeWD+iEErVmyTjlM4BR6n0B47AjQCkeBqev7MvmyO
+ 1YE7hzb3D5lA0wikhvDH91oaxnppZXTIxQIi2L34rDHxIeEEAm8D+0Zj5hwM1Qd5Tx+5u9047RE
+ 5aNxiFCteoOYaU1zhYFdm3MbLgb4wZGg=
+X-Gm-Gg: ASbGncvVqBhGbBCsHy38L4OZ1IEE9G3NaBbgwDR6HLi8hQuwm2I0Cr/ROTKbysJgRG2
+ Ze6MzVu0hBn/Mkflld3ZixIiW+uNE9xybvymkbUiFpcmxvMA+SfEAfwPzdwnDhFkBJkAvEiQNdQ
+ JMsvE9q+B8kn4WAW+57F3Xrhn2yo5WjYQ8H9EMhRnx0sZscbmPX268M06vecD7/cIzqF/NXAlex
+ q8yP0JxrZlBBWDu4RAamEOc6IbIvQpAoGIy/btCftJxGVDYo3brmYXdEfQXu72Kly88Twum
+X-Google-Smtp-Source: AGHT+IGgY/rSHJnC7H80Uxqdlf4eIurSeFF+GMmwGy9Ch0cKow/SZUD7/lFQ/wwDMIwz0hBP913RNI6eZ5+Htxy0WV8=
+X-Received: by 2002:a05:6830:7182:b0:7c6:a62d:8663 with SMTP id
+ 46e09a7af769-7c94da3aa9cmr6186180a34.11.1764871742304; Thu, 04 Dec 2025
+ 10:09:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6imgIEGVf7HXW6rg"
-Content-Disposition: inline
-In-Reply-To: <36b9d7da-13e7-4620-948f-1b3b3b61a250@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251125212953.1733-1-briansune@gmail.com>
+ <CAN7C2SBn=6J0c7AOM64TOKsa8waGFTtLKUVYfnY7NyAYH_N1gA@mail.gmail.com>
+ <d024aad3-6ad5-471e-8290-e802bdbf7ead@cherry.de>
+ <CAN7C2SDdTsJADMWDZgugMnoTO-sqGUt1wQPsKyRwP=gHNdmQ2A@mail.gmail.com>
+ <CAN7C2SBPC=u7QJD7T=3NUUOjPqXo1UWqHb_QRzsOR_wtvZrk7Q@mail.gmail.com>
+ <85af1053-f8c6-4983-adba-7a1e845651e4@altera.com>
+ <CAN7C2SA78DM+XaXMJNA26o0EzxFkdwL26BfcH91boepT0bDPKQ@mail.gmail.com>
+ <CANp-EDaU0Vw0dqWOfAXKub6Qq8FN5LvNJyttB6-EA4imAK8mvw@mail.gmail.com>
+ <CAN7C2SBSYkFrkaTDg7kuE2NsqUsjshZVepCdad+5buMSpBEmDw@mail.gmail.com>
+ <CANp-EDZAJr5Hvh0T=53H-DeOU5G0mZ-ohs9c29+7eyOKny6yOA@mail.gmail.com>
+ <CANp-EDZa0Y4NFOD2sco1xvONeLeixFQOrGLZ+hC275wMCHuF6g@mail.gmail.com>
+ <CAN7C2SBop5h9WtF2GLRkWeNmLpBcDC5dHUmmR=WzRXTpr6-7VQ@mail.gmail.com>
+In-Reply-To: <CAN7C2SBop5h9WtF2GLRkWeNmLpBcDC5dHUmmR=WzRXTpr6-7VQ@mail.gmail.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Fri, 5 Dec 2025 02:08:51 +0800
+X-Gm-Features: AWmQ_bmfjgYCpDXxBsK3nlfkYIJ98CLtVP-11e83ye_GYIfAnqmgBN8E8II4nOs
+Message-ID: <CAN7C2SC7nfpDmQXjfJyZDw5m6HnfbSed+w_JNsS7+x2s190Huw@mail.gmail.com>
+Subject: Re: [PATCH v4] SDRAM Calibration Failed fix for GEN5 SoCFPGA
+To: Ralph Siemsen <ralph.siemsen@linaro.org>, 
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, 
+ "Chee, Tien Fong" <tienfong.chee@altera.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,138 +108,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---6imgIEGVf7HXW6rg
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Tom please reject his patch, thank you.
 
-On Thu, Dec 04, 2025 at 06:28:34PM +0100, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 12/4/25 6:15 PM, Tom Rini wrote:
-> > On Wed, Dec 03, 2025 at 10:28:26AM -0600, Tom Rini wrote:
-> > > On Wed, Dec 03, 2025 at 05:23:47PM +0100, Quentin Schulz wrote:
-> > > > Hi Tom,
-> > > >=20
-> > > > On 12/3/25 5:11 PM, Tom Rini wrote:
-> > > > > On Wed, Dec 03, 2025 at 04:36:49PM +0100, Quentin Schulz wrote:
-> > > > > > Hi Fran=E7ois,
-> > > > > >=20
-> > > > > > On 12/2/25 7:39 PM, Francois Berder wrote:
-> > > > > > > If func->pins could not be allocated, one must also free
-> > > > > > > func variable that was allocated previously.
-> > > > > > >=20
-> > > > > >=20
-> > > > > > Well.... devm_* functions should take care of this when the dev=
-ice is
-> > > > > > removed (or probe failed), but if and only if CONFIG_DEVRES is =
-enabled.
-> > > > > > However, in that case, this code may be executed outside of a p=
-robe scenario
-> > > > > > I guess (it is called in set_state() callback from the pinctrl =
-device). This
-> > > > > > thus makes sense to me here.
-> > > > > >=20
-> > > > > > Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> > > > > >=20
-> > > > > > I'm also wondering if we shouldn't check the return value of
-> > > > > > single_configure_pins/bits in set_state instead of always retur=
-ning 0?
-> > > > > >=20
-> > > > > > We probably need to devm_kfree a bunch of other devm_ allocatio=
-ns as well?
-> > > > > >=20
-> > > > > > I see a loop in single_add_gpio_func() we should probably unwin=
-d if there's
-> > > > > > a devm_kzalloc which fails?
-> > > > > >=20
-> > > > > > Maybe we need a .remove callback where we devm_kfree all of fun=
-ctions and
-> > > > > > gpiofuncs lists from single_priv, in case DEVRES isn't actually=
- set?
-> > > > >=20
-> > > > > I've wondered, but not fired off a build to check, what the growt=
-h is
-> > > > > going to be on default y for DEVRES. There's only a few platforms=
- /
-> > > > > chips doing it today and I think most drivers are written like the
-> > > > > kernel where freeing is automatic, so there's lots of cases like =
-this
-> > > >=20
-> > > > I see devm I assume it's automatically freed (or whatever counterpa=
-rt of the
-> > > > devm function is) if the device is removed or fails to probe but th=
-at's
-> > > > rarely the actual case.
-> > > >=20
-> > > > The issue here is that DEVRES is not enough, we would need SPL_DEVR=
-ES,
-> > > > TPL_DEVRES, VPL_DEVRES, WHATEVER_DEVRES (added and) enabled as well=
- as we do
-> > > > compile devres only if $(CONFIG_$(PHASE_)DEVRES) and then surround =
-code with
-> > > > CONFIG_IS_ENABLED(DEVRES).
-> > >=20
-> > > Yes, we'd also need to see about being concerned with xPL or not, more
-> > > widely, with respect to DEVRES.
-> >=20
-> > Checking this out now, and we've already handled the xPL case by
-> > deciding that we just don't support DEVRES there (and there's likely not
-> > space to do the work nor reason to, given the lifespan of the runtime).
-> >=20
->=20
-> I assume there's no way to have an issue reusing (if at all possible) the
-> malloc pool from xPL in a later stage?
+Hi Alif, and Ralph,
 
-Correct. Anything from previous stage passed to next stage must be done
-via that mechanism.
+As you both had undergo a board test.
+First sorry for cont'd bothering both of you.
 
-> > > > > one here.
-> > > > >=20
-> > > >=20
-> > > > I think this one is an exception as the device may still exist if t=
-he error
-> > > > path is taken, so I think it makes sense to explicitly free it here,
-> > > > regardless of DEVRES compilation state.
-> > >=20
-> > > And then it would only be the case of having to worry about some
-> > > failure paths rather than how it's leaked today, if I follow things
-> > > right.
-> >=20
-> > Here's where it gets more interesting. For the cases where we could be,
-> > but aren't, enabling DEVRES it's around 500 bytes growth, with the
-> > reward that we get proper and expected memory management. The challenge
-> > is that we have some platforms where there's nothing making use of
-> > devm_kmalloc and friends and so we need to go around and manually select
-> > DEVRES on functionality that makes use of it.
->=20
-> Don't define devm_* functions for proper + !DEVRES so that it fails to
-> build?
+If possible I would like to check if this is aligned disregarded to DRAM si=
+ze.
+On U-Boot latest or after 2025.07.
 
-Yes, something clever can be worked out so that a platform that enables
-say DM_RESET (select DEVRES in my WIP tree) and SPL_DM_RESET (no
-SPL_DEVRES) builds fine, and say T2080RDB (no devm_* allocs) builds fine
-and then still catch that ah, rkmtd also should select DEVRES.
+Issue 1:
+sequencer.c if turned on debug by including this at the very top.
+"#define LOG_DEBUG" and "#define DLEVEL 1 or 2"
+If will stall somehow on any brand of board my side current had.
 
-That said, the first practical problem is that
-drivers/clk/clk-uclass.c::clk_get_bulk calls devm_kcalloc() and so CLK
-should select DEVRES and so that's going to catch a lot of other
-existing callers. So that fix gets held off in the series I'd do until I
-can catch all the others.
+Issue 2:
+For DRAM size larger than 1GB, when w/o O.C. and using as stable
+setting as possible.
+Even it passed the calibration it will not cont'd boot when
+sdram_gen5.c is turned on debug flag via "#define LOG_DEBUG"
+However this issue is not found on 1GB nor 512MB.
 
---=20
-Tom
+Finding 1:
+This is very puzzling and completely lost control on what possible cause.
+If SDRAM fails same WDT or CYCLIC simply bypassed it.
+Aka 533MHz DRAM speed then it is a must to discover bitflip or any issue
+under distro test tools "memtester" or "stressapptest" on long sanity test.
+However neither of those return issue since the board used for development.
 
---6imgIEGVf7HXW6rg
-Content-Type: application/pgp-signature; name="signature.asc"
+Finding 2
+So long story short WDT or CYCLIC is not a solution to fix SDRAM
+calibration fail.
 
------BEGIN PGP SIGNATURE-----
+Thanks,
+Brian
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTHHrwAKCRAr4qD1Cr/k
-ChqcAQDkBjO7ggwEq0vSm41+ZMVy3jdCVihNDGSP3cT8SoTTlgD/TLPsc3i9b8jy
-KGzNFM37TrgaeCUyBOwyWpZjUjTekQs=
-=anXh
------END PGP SIGNATURE-----
-
---6imgIEGVf7HXW6rg--
+> > On Wed, Dec 3, 2025 at 3:52=E2=80=AFPM Ralph Siemsen <ralph.siemsen@lin=
+aro.org> wrote:
+> > > Then it sounds like it is a recent issue... hmm... I'm currently on
+> > > 2025.10 release version (plus some cherry-picks). I'll give a try on
+> > > master/next once I get some other things stabilised...
+> >
+> > Just a quick note to say that master branch (with Jan's v2 patches) is
+> > working fine for me. The calibration is passing on both cold/warm
+> > reboot, as well as power cycling (I tried a few dozen times each).
+> > Note that my board only has 512 MB.
+>
+> Thank you. Yet, no confirmation on 2GB situation. For 1G or 512M
+> I can also repeat normal boot on different brand.
+> Which for 512x16 ddr3 die can have several construction from the beginnin=
+g.
+> But the question still holds "WHY" CYCLIC or WDT can trigger a normal boo=
+t?
+> Cannot explain nor trace.
+>
+> Brian
+>
+> >
+> > Regards,
+> > Ralph
