@@ -4,165 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D81D1F9AA
-	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 10:25:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59912D1CDCA
+	for <u-boot@archiver.kernel.org>; Thu,  4 Dec 2025 10:25:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0639283B24;
-	Thu,  4 Dec 2025 11:25:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id B3ABC83FBF;
+	Thu,  4 Dec 2025 11:25:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="jYt0sCVx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DJFoVoM0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8281883F9C; Thu,  4 Dec 2025 11:25:08 +0100 (CET)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B7A7F83FCD; Thu,  4 Dec 2025 11:25:28 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F42E83AEF
- for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 11:25:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6612683AEF
+ for <u-boot@lists.denx.de>; Thu,  4 Dec 2025 11:25:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cHjIQGNXzkoMKzDi1XPmhp8sTN3jtfqUY4Q+8RVVWrUERT5k+HBDARQ3iYGuckZ4Z1qipTsX5NmhZXKtnI1MiUj4tI8GqAqFNHtZbrkFHfOPgEuE/rTv3yagkUMzSj4lvO1WeJk1DieESqU6L744W0JyeRFoA8mLRTsX6H0/hRxvIm5bp/K1Qkyncwrhq6/MoVm3UC+rvEXv5MA+iZPPpWhpoXR+4G/AUT5xUw0AT2yJj1Z6A9itYaPWMH5KQ7OtopcpHD0q2tj6TAjqHBLdTNmPvtAttx6V0Nw08gFttxg2prQuwoHZE5RAINVHWL5LWey39/XB6xoUfzMxIpvkxg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NNSUHPat4anqXPFD/tZ5Z3vVdWM2Ax7zrNkgvg6KfK4=;
- b=rpErFfuBqwI1RH2+3cRCt+a8hdih764MIwWKbdaXNaT5JF2R0UvMtHv+p//LrUtT9NKhA8I3VwHVfMZZZHMwDYw9mV6MhnASmeoWipV6QkbLJEBRDE6lkZtEtHRpmQG+EnjNm0l9IdhFIPG3IG7iPO0rSbbxH+D+nYyMLVpTJvldsD/LFYr9RyT49V3iq18YM/VUFVqQ3yDO42m9zr4ifV6prNg0esfdZJoUcDbVk9/JvJ4rZmr7kSMVBttpdmdY6+7H14g0K5o5NOv+WS+MhUxgp//RKh8yPwwCXShA3Td3k+UG+VYou4J0wrv51SD54yK96BbbSrigbT0LAMALzA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NNSUHPat4anqXPFD/tZ5Z3vVdWM2Ax7zrNkgvg6KfK4=;
- b=jYt0sCVxx4RrikZGPQiJaHfIQdo8RhxFiYpK4AnYqGlHy7tyeE6BOZrF/j3nwPiWK0vrQBMnvFVo4wxodynwG8wjf4p7n8e/0iPJDO585bN3lyh4a9k0PPsBG/6VgRRo/KT/XtD1XcKHfSGeSpECBX7B69jbtUgeFCQJhmoSNal+cylCsWOPR6MrSS8IJsZf7TNK9m9sg+uGAtxaIt8M3ZN01Cpu1SwynXJOtPnI+OnMZ3h5GXueiECJ8wbujyhaqOu1dJy0vCaERIrw6dZnSoT0U6gODZIQNft8eqq+73/QGufjSPHgK/PxKmXLpkO52TDfsN93lsm+2mzwO3K37A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by BY5PR03MB5267.namprd03.prod.outlook.com (2603:10b6:a03:225::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Thu, 4 Dec
- 2025 10:25:02 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9366.012; Thu, 4 Dec 2025
- 10:25:01 +0000
-Message-ID: <4e9267e2-e219-4680-a7e6-8c89fa46fcf6@altera.com>
-Date: Thu, 4 Dec 2025 18:24:53 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] configs: arria10: Disable mkeficapsule tool build
-To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-References: <20251204020810.24716-1-alif.zakuan.yuslaimi@altera.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tienfong.chee@altera.com>
-In-Reply-To: <20251204020810.24716-1-alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SG2PR03CA0130.apcprd03.prod.outlook.com
- (2603:1096:4:91::34) To LV8PR03MB8137.namprd03.prod.outlook.com
- (2603:10b6:408:295::8)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-787eb2d8663so11530817b3.0
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 02:25:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1764843924; x=1765448724; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d9/XNtRtxNhFxLHNSJ3Y0UkLQ2kQP6kgwpAn559Zv3k=;
+ b=DJFoVoM08hcR5QE25XSd835/URbPPWqOriGtn6KzntTJFzkOe88VwO4/V8R0YkghwT
+ pZxHxvuVxOqae6k9Cpnce922dWhlA7cMrweZu3XqjoGHw2x9/Q3QMpXeXODH0drXMXHI
+ 8/DLlWufZ4Z46lpvAhQ7HqpSXZDYkf8es79uChXQ6DxZvMIA8eRu70Id4nULygIVcD2C
+ iN4DxrwVNBoGJD7UvonIpLjR+wLGHv15S+KnrV55nRJmnwTipFBx8SWGiTqhqlFieUSo
+ Lb8NTiU6bulyUAGN2GtvIUd2A4P/GmVjnx9iZBWTDCi5Z1DQviXL+lyjkxj4Mz8PwEfr
+ EcWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764843924; x=1765448724;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=d9/XNtRtxNhFxLHNSJ3Y0UkLQ2kQP6kgwpAn559Zv3k=;
+ b=lj3Bt/W+NhZXkWOwXSbNqXokWYYr+Fky+kwjulPnsAuCVup7Mkxi8ogPr/LZljVIv1
+ x1F7zf6QAssNWJCxsofDaIcxZVjJnEgpwe2YGJMLPI06O00CUMslOzNXAtm8FTFwFRdN
+ HBzRuKkRb9dfpUzLYv0po1TsEv0OIuHZcsSCdCUYeztJ9sXQs0HC+ZAT8KVqCX8GrgdK
+ yga1p/COn8dh4iwcKHDVYmBeyrnRk7rdk50OAOrTpZ8Dbp0rlZ/3Q43mjMILAliFK+QT
+ 1b7F9ckXWw369D7zUZECmjT57k+jMyC5obXiquEP2F8TcGVLrAUJ+hRzHWlpxL4siMv5
+ tBEg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVGXEVubnxBZA/E5Qx5xk4u/I07rnt1kp9C7BTye5/Iz5PHqgSD2dSJ4wedqtDX/b9GdqUo4Gg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQy24mS4aVZGemAO5yMMkZ6unupOYeJ9cv+I7p+OCcvF6JuYR3
+ yvFD1AUufbhBp742+4FbQVlZmkvU4o6mx1TkMOPTCZasaCUBoZkmszyRPu1gUzZXT8okOE69CkV
+ y2glu7xQ1Il12WZHjxRBs1hOnAtKuqImlaNkJGu9+cQ==
+X-Gm-Gg: ASbGnctyLYlWGupSB4UnuCOTR/SWL1mPMcorMHg53wugxH3zGaY3pectytjGHBhuA92
+ +yS0haeKwBh586qQ49Xgmw/kwh/Uygg5czGJ6vxGVaRSK7dQNqx3HxPYfODegsWLTrrcSvSWE3R
+ dlR7HMYKADAsOJvGIb/jLh9px+RHAs08S24/rhragqr61VDEIW7EIkPvOXPxLuUXoA7X9wTB+JN
+ PITCvC1hnvhzQu0T4IWuYdbfkyyICy6wRpnnQSfwm755ZoX7yt4C7D8oDtbbvvuMdJoTFDtX+96
+ X2FYFJCYTgfe+SN08q97lQuImIil/HK1iUyVO39A+m9DyqfNaCVTGgQgkg0Q7rxBD7lXdEnVKDx
+ pOkzTPemeQENUY7TNUg==
+X-Google-Smtp-Source: AGHT+IG0wEihOzKVfKknFIcdBn39kkaq03Zcg2jBJVbG577wsBVmG1dAmWt4y8guIQG8+k6fHjtQ8tG8vR3ZPkovL7w=
+X-Received: by 2002:a05:690c:498f:b0:78a:9417:1eb9 with SMTP id
+ 00721157ae682-78c17163c4cmr21705037b3.5.1764843924081; Thu, 04 Dec 2025
+ 02:25:24 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|BY5PR03MB5267:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4f99c0e-b3c1-43f1-ae41-08de331f6193
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eitySkpGN1ZVTUFNWVpLeUVqNXZIWnEzcVNBRlVKWkJPWU5kbWR4ZUZPREpu?=
- =?utf-8?B?TXZ5WjRyWW5id2VjeXl4bEpDNnd6dHk4c2Z3bFhUb3FOOTgvdDFFeEsvdXdE?=
- =?utf-8?B?VkV3WEpXL3R6RjAyenBiMytyMzllcVh0QnQyRXRrTXV4VDhNTjZKSGY5UFNW?=
- =?utf-8?B?YlJxZ1pWS05OclFWcHBMZEk2RXJqZ3JRVVdxS3FNdlR3V0ZlZ0J0K3hnNWpK?=
- =?utf-8?B?NUJLaWs4RmN5WElra0JpL2FTaTd1OHdyNTdhd004WUc5STN5c0hISjBvSUZZ?=
- =?utf-8?B?dHkyN2FQd2NpSDRiZEFka0JqdlFIU1M0YnFJdHU4WWNXbEJlS2JtdnhoRVN4?=
- =?utf-8?B?a1JOOVovTmhmL3BUV2RlaG5aekRPZmpybU9lT09vMnBqaUo5UGduUmN1L2l1?=
- =?utf-8?B?RnFsOEJKMHFEakNIbHRkdHR1WHJBQVJLci9UTzkvT0FCWThsa1QwcGJqLzJu?=
- =?utf-8?B?dTJURDVlSy90SEVKZjlCN1lYRUxqajJVSVVyN1hyTE9PWlBwYmtRVmRkcng4?=
- =?utf-8?B?dUgvNFVBcEdoOHg2MC9sNTc3V3N6elJuVDl5djFwVDExbU13a1Z0ZC8vRjBB?=
- =?utf-8?B?MFJZdUNrQjBZcXMwdjRwMTVUUW83NERjYTdnQUhEaUJPajF0NWNtcnQrN3B1?=
- =?utf-8?B?NGZGRVhNSk1lcXVuTEF4cDIzekFVbjFycnNBdytJTEpyR05iRkVYUlJBRnZj?=
- =?utf-8?B?cXVKekMrbFRZRW9DeDJGMFdlSE1YT3gxNFM5SU1IREtVNVEweTdGOHNEMmhR?=
- =?utf-8?B?azhVaU0zN3RZTkRzVGJzYUpmcTN0cEdXU2pnYUhENzhZd0R6Q0pjaU5yQUh5?=
- =?utf-8?B?OTM4RU8rRU4yU2lkaTc3WlNqYTRsRlMwcEFteHNXbWtFRndielB3UnFjTW81?=
- =?utf-8?B?Qk9JRmdiRWpDb20wTFRLL3R3NW9aRFo2THNsL0tzamVwQzNLL2kwenNMbS82?=
- =?utf-8?B?eW05N0MvZnAzSG4vZnd4ZGE3d3lPMXVFQTROeGZmMDc0OXNsMUVPSzhQQjc5?=
- =?utf-8?B?blIrQnFTaHVneE1FMmg0WE12YUtoTExrUEtUOElIVjZNSFBGZDBVVURhbTB3?=
- =?utf-8?B?bzVLeUN1dFVyQnl6aUJLcWRQTi9ScUMvZEdBeGVMNW5PR1RIK0prTkcwMFNF?=
- =?utf-8?B?UUlhM0g1M05QL2hVNmVLRjhDR1AySTV2UmlHaUVuYkdGbXFGRXlQZ21sVDlW?=
- =?utf-8?B?dHNIeTFwUTBURm03N29LaU9nNE5XYjZkR2ZYaWhDakVuc1BTTm5XUndzV0Jl?=
- =?utf-8?B?MElyNi9ldDZCQjNMY3UwUG9KWGlVNFJrbytueGltL2c2ejhEdG1samcwZTUx?=
- =?utf-8?B?L01LTVlUS1d1VUF5ZHBqbGNIR2JYd1B2OGJ0OEplamZzdTRuNGtOWE9Jak5F?=
- =?utf-8?B?YitYaml4ZFMvVEdqSUNPWHNGdFhMVTZrR0swejRkWm5tSE9RN2ViSWY4VDZP?=
- =?utf-8?B?ejhYMVF4cjlBaDE1VDZFcVlqTDVjb2ZjSVhpeHlvVWdlRWhQVmhkNTU5Wkhp?=
- =?utf-8?B?T2kxQndGNDZOUE9XL0RpaHpXY1RPdXV1V2JWWG05alVZVzF0REhzOGlHRkpN?=
- =?utf-8?B?Y0k3NHU2dms4am9TYUlISVppNU5VeXdiTzEzMnFBc2tKaXVNVnlRNTlHR3VS?=
- =?utf-8?B?MllzUThoVHdUMzlGSjRHUEh4OHl3Y1RDVm5aSnJvSjIwNUNCeFF3V29OdjZs?=
- =?utf-8?B?L2ZVeXhuWllFbmNHai9hTUo4RDh3QWxjR29vbXZwL1dDTW1PKzB0WGtKSUNp?=
- =?utf-8?B?NEtrRVMwdFlmMlpRQWdVQzYrV1Z4V1pNWFBmdVY1bEtDZU1CS25kTWtXN2NU?=
- =?utf-8?B?WjI0cUs3YlNXZlRFNWNqdzlVeDFsWERiSlNXWFlQODRTbXVaZzUzTzUrelFM?=
- =?utf-8?B?R24vUitZcTdJV1gyRWpFRTd3OEw1dTArcnNwTXhGWUt4c3NOMTRYYTJER2Rs?=
- =?utf-8?Q?uicbbvf3Y+2+MZ5lvuRfOq4wqWHF+pdK?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S3ZqclhkRlB3dm9Zb2pabXFjUGtFSU0vbFY2TU9wL2NzU0hFc3g4blBjRitu?=
- =?utf-8?B?NG9tQ1ZFVnpVTGF4SWM5dURQZzRlVktWZm5LS25vR2hTb05yY0U3a1YrWHpQ?=
- =?utf-8?B?WTkvZ2p5Y256S0ZUeHhJM3NPdUcycjZCTXF6ZG94MHZjS1BPUFMwQUROTTY0?=
- =?utf-8?B?am4wZVBTMEJ5MTdNVmx3aGtER29XVlJUMnR6dGpNUi9BNW9tK1UxcXluN2hr?=
- =?utf-8?B?WTNvaUY5MVlEODQvcUJYZ25wNElyckN4MUhDREN0WlZWcGJrazROU2VxaVp3?=
- =?utf-8?B?UUhjM2IxZGtGZi9DYkxnc0pzUmc5NkhlV1FUR2ZSUXlEU09xNWNYSXpEWUV0?=
- =?utf-8?B?ZUZ0MllkZHlndE8weTV3OHNyeDZKcjdvbHl3SHV5dWo0L1JwUlZhVTludDdG?=
- =?utf-8?B?ZU9weWtiWVMvWGNHdXVoRTE3ZnJXdUFOMm9zdExBN3NSUUQxKzE3VXJTbUtG?=
- =?utf-8?B?ZDZzdnJSLys3dkxKVkJaRnBtUDVkelpxbDIyRlhyMjVxLzhZVFRMbmZkRmRY?=
- =?utf-8?B?V0YwVGl2UUp2NEFKK3ovZThycmxUdi9wbDFLN3pMZDVrMjVINTJ2dGNLNHQ0?=
- =?utf-8?B?RlJMQVBuVGQ5Tzkrb0F4dXovM2JSb0pjc1Q0ZWtpdThnR0NiNmxKZkdVVmxk?=
- =?utf-8?B?VTFNZ1Z0K0E2MG1BSGx0L2pTeGRmRU10VHVra1I3bVlDZ1R3VUdTTnZoU0k4?=
- =?utf-8?B?cHJZTFpSem1qNk5IREs0d3lzaWp5eXg5Z3FVc1Q5c1RYSG42QWowQWkyaTNi?=
- =?utf-8?B?bEp1SFEzOENNMGJlR2xsRS9WOS9pN0JxZm9sU3lKc1BnYVdYTmlFbVlydE5v?=
- =?utf-8?B?TGF4REwrL0F5d2M3VlRyZU5sRngzY0JJc05BL1JSUWs2UHZqdEhDa1c1UzJa?=
- =?utf-8?B?TEw5Tm5xT05mVXBvL1BnMlUvVlhlS1FBY0VGSnM3Tk85cFMveFRwcHdtcThJ?=
- =?utf-8?B?Y2VHSXkwUGlKd3lKSG44NUhBL0Fzait3cXFFb1RZTFJQajJrQXZ2NndSMk9q?=
- =?utf-8?B?TnhyRm12d1N2eDZqRytCWkRpRkd2VmR0WVBnTmd5bEMraHlQdVAzcHpPZldP?=
- =?utf-8?B?dnhaOWoxcVdFMStaTmpNR3BxN0FTUW85dTYrN0xURXNWSEJkd25SWm1JVUNp?=
- =?utf-8?B?NXAzd3pkRjZYeTNOa1JhUWpUNTZPVkRjZmNBZVF1cGc0andDTGZwN0o1eEZH?=
- =?utf-8?B?Mm1haks3dVpXSHMrUnliUHI4NnlvMmgrc00rMU5MWUlPeGVNVFZ2cVlpa2Ju?=
- =?utf-8?B?UTNKaCtNOEdyc21pK0FrM0YyTVIzKzFkRndtK1hpYWJhbXR5YkxZWHBmdE9Z?=
- =?utf-8?B?czJGdVM5cEptbWxEVTVPNkxSK0lDMjRsRHBNWTA4MDhDWWM3Y2dvRW1GckRW?=
- =?utf-8?B?UmJxL1ZMbjN4aFBkUlVCa2E4MVhxbEdGUnA3cG8yRzhUMkNnWEttQURTRVVD?=
- =?utf-8?B?NjZscmM3US9qNFlFT2RSMWJLUkVvTFVpV2V0TzVBdFpNaSs0dUtyN2VmUjRu?=
- =?utf-8?B?aVR6SXU4SzRvTlJ3enU0aG80STd2MGNZWkhreWpxK2FsdzhLeXhtZnlFNVhV?=
- =?utf-8?B?RkROTU9KWUN0QVVGTFRJVmEvS2hWMU13cXJLdDNVemdqNzJUemFucUlNTFpD?=
- =?utf-8?B?VW5jeURscExibm1pU2dIUVROb0dQQXZxV3dBRk01YjZ5a2djd3o4MFc0ZndI?=
- =?utf-8?B?L0RVVjdNbHUraXo3MUtoTUk5dUw3aXR5dERsUGNoTHpBVWhjN3diditXOTJ4?=
- =?utf-8?B?YXAxUGtDbmJlbi8yOWlNTUxFL05XTjM4MjkzREVmdGlmM3AvUXFMU2R5dGwv?=
- =?utf-8?B?WFdhWEdqKzRRZHduUEs3N1h6OU4vb0VCZ1Y5TE80azhUY2kwVzJkakpXSUJE?=
- =?utf-8?B?YmZaSU9HMmJkYzZTdE0veEdoYmtKN2xwR1VKRjY3UjkzT3dJcTRKZldoMzFj?=
- =?utf-8?B?Y2VLQkd4cEd3d1FaQ3JWbFpxUFh3SVArSThRRmRTNDUrcVp4K2cycVl2eTdv?=
- =?utf-8?B?RGVwekJHNFpPT3l4R0kveHZ0ZXp5S3l6c29yZkhsYXBaWDUwaUFBSXBWZHgv?=
- =?utf-8?B?Nng1UGZIb0dydVFTS2tQTTRLNithdCswU0ZFeFBUay9yQXgwcFZRMnZpWkdl?=
- =?utf-8?B?eGlRaHlmWEZib2dIVkoxK2QzN0hoUnhDUVJCMXdYS2Vpcm5MSXM0REtDOGRu?=
- =?utf-8?B?K3c9PQ==?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4f99c0e-b3c1-43f1-ae41-08de331f6193
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2025 10:25:01.3685 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UXWGbRfjNHvqAbHWKG+jF8KYcQund+AOEo6K4G9wPnV7WxDy2BuMSiWVh2x/WPpacF120ayhpOrSL8V28dvMOZfNBwwoA1ntlDTJDgPJgqc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB5267
+References: <20251202085101.1344799-1-ilias.apalodimas@linaro.org>
+ <b52c69db-5663-42c7-b26a-6178c88815b6@oss.qualcomm.com>
+In-Reply-To: <b52c69db-5663-42c7-b26a-6178c88815b6@oss.qualcomm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 4 Dec 2025 12:24:47 +0200
+X-Gm-Features: AWmQ_bn8Ie6abHNS3HtQ0VhG4k47xCPn5Z-kWcDIME-_3yCrEofu_gZfm9_mQJM
+Message-ID: <CAC_iWjLu6+6MK2_MBNdURZjLv-99N7qubFRO_xCB8wmJEvJ45A@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: Trigger capsule updates with automatically
+ generated boot options
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: heinrich.schuchardt@canonical.com, John Toomey <john.toomey@amd.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Adriano Cordova <adrianox@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Yao Zi <ziyao@disroot.org>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Maks Mishin <maks.mishinfz@gmail.com>,
+ Javier Martinez Canillas <javierm@redhat.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,34 +110,385 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Baaji,
 
-On 4/12/2025 10:08 am, alif.zakuan.yuslaimi@altera.com wrote:
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
->
-> mkeficapsule tool will be built by default if EFI_LOADER is set due to
-> commit b7a625b1ce49 ("tools: Build mkeficapsule tool by default if
-> EFI_LOADER is set").
->
-> This will cause compilation error on all our SoCFPGA devices, hence we will
-> be disabling this config as we do not utilize this tool.
->
-> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> ---
->   configs/socfpga_arria10_defconfig | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/configs/socfpga_arria10_defconfig b/configs/socfpga_arria10_defconfig
-> index 76fdc0aa4a6..b32f40ae408 100644
-> --- a/configs/socfpga_arria10_defconfig
-> +++ b/configs/socfpga_arria10_defconfig
-> @@ -68,3 +68,4 @@ CONFIG_DESIGNWARE_APB_TIMER=y
->   CONFIG_USB=y
->   CONFIG_USB_DWC2=y
->   # CONFIG_SPL_WDT is not set
-> +# CONFIG_TOOLS_MKEFICAPSULE is not set
+Thanks for testing, can you also send a reply with a tested-by: tag?
+/Ilias
 
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
-
-Best regards,
-Tien Fong
-
+On Thu, 4 Dec 2025 at 06:42, Balaji Selvanathan
+<balaji.selvanathan@oss.qualcomm.com> wrote:
+>
+>
+> On 12/2/2025 2:20 PM, Ilias Apalodimas wrote:
+> > The EFI spec in =C2=A78.5.5 says
+> > "The directory \EFI\UpdateCapsule is checked for capsules only within
+> >   the EFI system partition on the device specified in the active boot
+> >   option determine by reference to BootNext variable or BootOrder varia=
+ble
+> >   processing."
+> >
+> > Automatically generated boot options don't point to the ESP, they point=
+ to
+> > the disk itself and find_handle() won't match when searching for an ESP
+> > during a capsule update.
+> > This happens because find_handle() only matches device paths that are
+> > shorter or equal to the device path passed as an argument.
+> > Since the EFI spec allows it we want to allow capsule updates, when the
+> > boot option points to a disk, but that disk contains an ESP with a
+> > \EFI\UpdateCapsule  directory.
+> >
+> > find_handle() implicitly changes it's behavior depending on the passed
+> > arguments as well. If the 'rem' ptr is not valid it will only search fo=
+r
+> > an exact match. Otherwise it will match on the best match and return th=
+e
+> > remaining portion of the matched device path to 'rem'.
+> >
+> > Tweak this slightly and pass an enum with 3 options
+> > - EXACT   - Exact match, as if 'rem' was NULL
+> > - SHORTER - Match a shorter device path and put the remainder in 'rem'
+> > - LONGER  - Inverse the logic and match a longer device path. Put the
+> >              remainder into 'rem'.
+> >
+> > To avoid any regressions, LONGER is only used during capsule updates an=
+d
+> > since 'rem' always carries the remainder of the matched device path we
+> > can plug it in with minimal changes.
+> >
+> > Reported-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> > Reported-by: John Toomey <john.toomey@amd.com>
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >
+> > John, Balaji, can you check if this fixes your problem?
+>
+> Hi Ilias,
+>
+> Thanks for this patch. This fixes the problem and have verified the patch=
+.
+>
+> Regards,
+>
+> Balaji
+>
+> >
+> >   cmd/eficonfig.c                  |  2 +-
+> >   include/efi_device_path.h        | 10 +++---
+> >   lib/efi_loader/efi_bootmgr.c     |  6 ++--
+> >   lib/efi_loader/efi_boottime.c    |  5 +--
+> >   lib/efi_loader/efi_capsule.c     | 20 +++++++-----
+> >   lib/efi_loader/efi_device_path.c | 55 +++++++++++++++++++++++++------=
+-
+> >   lib/efi_loader/efi_disk.c        |  2 +-
+> >   7 files changed, 70 insertions(+), 30 deletions(-)
+> >
+> > diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+> > index d8d946c87ac8..e317f3c90c14 100644
+> > --- a/cmd/eficonfig.c
+> > +++ b/cmd/eficonfig.c
+> > @@ -1321,7 +1321,7 @@ static efi_status_t prepare_file_selection_entry(=
+struct efimenu *efi_menu, char
+> >               return EFI_OUT_OF_RESOURCES;
+> >
+> >       /* get the device name only when the user already selected the fi=
+le path */
+> > -     handle =3D efi_dp_find_obj(file_info->dp_volume, NULL, NULL);
+> > +     handle =3D efi_dp_find_obj(file_info->dp_volume, NULL, NULL, fals=
+e);
+> >       if (handle) {
+> >               ret =3D efi_disk_get_device_name(handle, devname, EFICONF=
+IG_VOLUME_PATH_MAX);
+> >               if (ret !=3D EFI_SUCCESS)
+> > diff --git a/include/efi_device_path.h b/include/efi_device_path.h
+> > index aae85228f681..f9c538730c94 100644
+> > --- a/include/efi_device_path.h
+> > +++ b/include/efi_device_path.h
+> > @@ -73,13 +73,15 @@ struct efi_device_path *efi_dp_shorten(struct efi_d=
+evice_path *dp);
+> >    *
+> >    * If @rem is provided, the handle with the longest partial match is =
+returned.
+> >    *
+> > - * @dp:     device path to search
+> > - * @guid:   GUID of protocol that must be installed on path or NULL
+> > - * @rem:    pointer to receive remaining device path
+> > + * @dp:                      device path to search
+> > + * @guid:            GUID of protocol that must be installed on path o=
+r NULL
+> > + * @rem:             pointer to receive remaining device path
+> > + * @inversed_match:  Match even if the dp is shorter. rem will stil ho=
+ild the
+> > + *                      remaining device path
+> >    * Return:  matching handle
+> >    */
+> >   efi_handle_t efi_dp_find_obj(struct efi_device_path *dp, const efi_gu=
+id_t *guid,
+> > -                          struct efi_device_path **rem);
+> > +                          struct efi_device_path **rem, bool inversed_=
+match);
+> >
+> >   /**
+> >    * efi_dp_last_node() - Determine the last device path node before th=
+e end node
+> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.=
+c
+> > index a687f4d8e85c..df7500a94876 100644
+> > --- a/lib/efi_loader/efi_bootmgr.c
+> > +++ b/lib/efi_loader/efi_bootmgr.c
+> > @@ -84,7 +84,8 @@ struct efi_device_path *expand_media_path(struct efi_=
+device_path *device_path)
+> >        * booting from removable media.
+> >        */
+> >       handle =3D efi_dp_find_obj(device_path,
+> > -                              &efi_simple_file_system_protocol_guid, &=
+rem);
+> > +                              &efi_simple_file_system_protocol_guid, &=
+rem,
+> > +                              false);
+> >       if (handle) {
+> >               if (rem->type =3D=3D DEVICE_PATH_TYPE_END) {
+> >                       char fname[30];
+> > @@ -625,7 +626,8 @@ static efi_status_t try_load_from_media(struct efi_=
+device_path *file_path,
+> >       struct efi_device_path *rem, *dp =3D NULL;
+> >       struct efi_device_path *final_dp =3D file_path;
+> >
+> > -     handle_blkdev =3D efi_dp_find_obj(file_path, &efi_block_io_guid, =
+&rem);
+> > +     handle_blkdev =3D efi_dp_find_obj(file_path, &efi_block_io_guid, =
+&rem,
+> > +                                     false);
+> >       if (handle_blkdev) {
+> >               if (rem->type =3D=3D DEVICE_PATH_TYPE_END) {
+> >                       /* no file name present, try default file */
+> > diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottim=
+e.c
+> > index ddc935d22409..0391b92a8be4 100644
+> > --- a/lib/efi_loader/efi_boottime.c
+> > +++ b/lib/efi_loader/efi_boottime.c
+> > @@ -1816,7 +1816,8 @@ efi_status_t efi_setup_loaded_image(struct efi_de=
+vice_path *device_path,
+> >       info->system_table =3D &systab;
+> >
+> >       if (device_path) {
+> > -             info->device_handle =3D efi_dp_find_obj(device_path, NULL=
+, NULL);
+> > +             info->device_handle =3D efi_dp_find_obj(device_path, NULL=
+, NULL,
+> > +                                                   false);
+> >
+> >               dp =3D efi_dp_concat(device_path, file_path, 0);
+> >               if (!dp) {
+> > @@ -2016,7 +2017,7 @@ efi_status_t efi_load_image_from_path(bool boot_p=
+olicy,
+> >       *size =3D 0;
+> >
+> >       dp =3D file_path;
+> > -     device =3D efi_dp_find_obj(dp, NULL, &rem);
+> > +     device =3D efi_dp_find_obj(dp, NULL, &rem, false);
+> >       ret =3D efi_search_protocol(device, &efi_simple_file_system_proto=
+col_guid,
+> >                                 NULL);
+> >       if (ret =3D=3D EFI_SUCCESS)
+> > diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.=
+c
+> > index eafc647f558f..103328c76a6e 100644
+> > --- a/lib/efi_loader/efi_capsule.c
+> > +++ b/lib/efi_loader/efi_capsule.c
+> > @@ -886,18 +886,18 @@ static efi_status_t get_dp_device(u16 *boot_var,
+> >    * @dp              device path
+> >    * Return:  true - yes, false - no
+> >    */
+> > -static bool device_is_present_and_system_part(struct efi_device_path *=
+dp)
+> > +static bool device_is_present_and_system_part(struct efi_device_path *=
+dp,
+> > +                                           struct efi_device_path **re=
+m)
+> >   {
+> >       efi_handle_t handle;
+> > -     struct efi_device_path *rem;
+> >
+> >       /* Check device exists */
+> > -     handle =3D efi_dp_find_obj(dp, NULL, NULL);
+> > +     handle =3D efi_dp_find_obj(dp, NULL, NULL, false);
+> >       if (!handle)
+> >               return false;
+> >
+> >       /* Check device is on system partition */
+> > -     handle =3D efi_dp_find_obj(dp, &efi_system_partition_guid, &rem);
+> > +     handle =3D efi_dp_find_obj(dp, &efi_system_partition_guid, rem, t=
+rue);
+> >       if (!handle)
+> >               return false;
+> >
+> > @@ -919,7 +919,7 @@ static efi_status_t find_boot_device(void)
+> >       efi_uintn_t size;
+> >       int i, num;
+> >       struct efi_simple_file_system_protocol *volume;
+> > -     struct efi_device_path *boot_dev =3D NULL;
+> > +     struct efi_device_path *boot_dev =3D NULL, *rem =3D NULL;
+> >       efi_status_t ret;
+> >
+> >       /* find active boot device in BootNext */
+> > @@ -940,7 +940,7 @@ static efi_status_t find_boot_device(void)
+> >
+> >               ret =3D get_dp_device(boot_var16, &boot_dev);
+> >               if (ret =3D=3D EFI_SUCCESS) {
+> > -                     if (device_is_present_and_system_part(boot_dev)) =
+{
+> > +                     if (device_is_present_and_system_part(boot_dev, &=
+rem)) {
+> >                               goto found;
+> >                       } else {
+> >                               efi_free_pool(boot_dev);
+> > @@ -967,7 +967,7 @@ skip:
+> >               if (ret !=3D EFI_SUCCESS)
+> >                       continue;
+> >
+> > -             if (device_is_present_and_system_part(boot_dev))
+> > +             if (device_is_present_and_system_part(boot_dev, &rem))
+> >                       break;
+> >
+> >               efi_free_pool(boot_dev);
+> > @@ -977,7 +977,11 @@ found:
+> >       if (boot_dev) {
+> >               log_debug("Boot device %pD\n", boot_dev);
+> >
+> > -             volume =3D efi_fs_from_path(boot_dev);
+> > +             if (rem->type =3D=3D DEVICE_PATH_TYPE_END)
+> > +                     volume =3D efi_fs_from_path(boot_dev);
+> > +             else
+> > +                     volume =3D efi_fs_from_path(rem);
+> > +
+> >               if (!volume)
+> >                       ret =3D EFI_DEVICE_ERROR;
+> >               else
+> > diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devi=
+ce_path.c
+> > index b3fb20b2501e..ad7f452c411b 100644
+> > --- a/lib/efi_loader/efi_device_path.c
+> > +++ b/lib/efi_loader/efi_device_path.c
+> > @@ -30,6 +30,12 @@ const struct efi_device_path EFI_DP_END =3D {
+> >       .length   =3D sizeof(EFI_DP_END),
+> >   };
+> >
+> > +enum match {
+> > +     EXACT,
+> > +     SHORTER,
+> > +     LONGER
+> > +};
+> > +
+> >   #if defined(CONFIG_MMC)
+> >   /*
+> >    * Determine if an MMC device is an SD card.
+> > @@ -109,10 +115,11 @@ struct efi_device_path *efi_dp_shorten(struct efi=
+_device_path *dp)
+> >    */
+> >   static efi_handle_t find_handle(struct efi_device_path *dp,
+> >                               const efi_guid_t *guid, bool short_path,
+> > -                             struct efi_device_path **rem)
+> > +                             struct efi_device_path **rem,
+> > +                             enum match match)
+> >   {
+> >       efi_handle_t handle, best_handle =3D NULL;
+> > -     efi_uintn_t len, best_len =3D 0;
+> > +     efi_uintn_t len, match_len =3D 0, best_len =3D 0;
+> >
+> >       len =3D efi_dp_instance_size(dp);
+> >
+> > @@ -137,22 +144,35 @@ static efi_handle_t find_handle(struct efi_device=
+_path *dp,
+> >                       if (!dp_current)
+> >                               continue;
+> >               }
+> > -             len_current =3D efi_dp_instance_size(dp_current);
+> > -             if (rem) {
+> > +
+> > +             match_len =3D len_current =3D efi_dp_instance_size(dp_cur=
+rent);
+> > +             switch (match) {
+> > +             case EXACT:
+> > +                     if (len_current !=3D len)
+> > +                             continue;
+> > +                     break;
+> > +             case SHORTER:
+> >                       if (len_current > len)
+> >                               continue;
+> > -             } else {
+> > -                     if (len_current !=3D len)
+> > +                     break;
+> > +             case LONGER:
+> > +                     if (len_current < len)
+> >                               continue;
+> > +                     match_len =3D len;
+> > +                     break;
+> >               }
+> > -             if (memcmp(dp_current, dp, len_current))
+> > +
+> > +             if (memcmp(dp_current, dp, match_len))
+> >                       continue;
+> >               if (!rem)
+> >                       return handle;
+> >               if (len_current > best_len) {
+> >                       best_len =3D len_current;
+> >                       best_handle =3D handle;
+> > -                     *rem =3D (void*)((u8 *)dp + len_current);
+> > +                     if (len_current <=3D len)
+> > +                             *rem =3D (void *)((uintptr_t)dp + len_cur=
+rent);
+> > +                     else
+> > +                             *rem =3D (void *)((uintptr_t)dp_current +=
+ match_len);
+> >               }
+> >       }
+> >       return best_handle;
+> > @@ -160,14 +180,25 @@ static efi_handle_t find_handle(struct efi_device=
+_path *dp,
+> >
+> >   efi_handle_t efi_dp_find_obj(struct efi_device_path *dp,
+> >                            const efi_guid_t *guid,
+> > -                          struct efi_device_path **rem)
+> > +                          struct efi_device_path **rem, bool inversed_=
+match)
+> >   {
+> >       efi_handle_t handle;
+> >
+> > -     handle =3D find_handle(dp, guid, false, rem);
+> > +     handle =3D find_handle(dp, guid, false, rem, EXACT);
+> >       if (!handle)
+> > -             /* Match short form device path */
+> > -             handle =3D find_handle(dp, guid, true, rem);
+> > +             handle =3D find_handle(dp, guid, true, rem, EXACT);
+> > +     if (handle)
+> > +             return handle;
+> > +
+> > +     handle =3D find_handle(dp, guid, false, rem, SHORTER);
+> > +     if (!handle)
+> > +             handle =3D find_handle(dp, guid, true, rem, SHORTER);
+> > +
+> > +     if (inversed_match && !handle) {
+> > +             handle =3D find_handle(dp, guid, false, rem, LONGER);
+> > +             if (!handle)
+> > +                     handle =3D find_handle(dp, guid, true, rem, LONGE=
+R);
+> > +     }
+> >
+> >       return handle;
+> >   }
+> > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> > index 130c4db9606f..0d3d7c187d72 100644
+> > --- a/lib/efi_loader/efi_disk.c
+> > +++ b/lib/efi_loader/efi_disk.c
+> > @@ -339,7 +339,7 @@ efi_fs_from_path(struct efi_device_path *full_path)
+> >       efi_free_pool(file_path);
+> >
+> >       /* Get the EFI object for the partition */
+> > -     efiobj =3D efi_dp_find_obj(device_path, NULL, NULL);
+> > +     efiobj =3D efi_dp_find_obj(device_path, NULL, NULL, false);
+> >       efi_free_pool(device_path);
+> >       if (!efiobj)
+> >               return NULL;
+> > --
+> > 2.51.0
+> >
