@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BE83D116F1
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 04:36:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B544FD2E01F
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 07:32:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE9A184189;
-	Fri,  5 Dec 2025 05:36:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CE23B84181;
+	Fri,  5 Dec 2025 08:32:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DMyyrPQQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cXHhYwYJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30EC38418E; Fri,  5 Dec 2025 05:36:25 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id 4AFF78418C; Fri,  5 Dec 2025 08:32:45 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E94484181
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 05:36:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C3598416E
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 08:32:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MgZAYqd+/O4ZtqFrrBW4Sw9b+akOXgwUBQ1u8VnYJaHr99TVI9EA6Hyrpb0zTi/TV00j6UPKdU6Mrw5J9dtt0VN5bGb4S2XJzmvE447TQ/mp0Cd2H7CRLtq1iX+qVV0SrYkJJ9Jc+RsI3dzCvHOjlJoKOh7kJv8jMZxF8zk/e4oWDCzHRHZ60+gIXUp7jIlnCgovFnpYDIGTycivrsR4TmjUHl+PHLOpceTu8Lh/RPPkCb7//FGfoUJ54EGGS/VjQznaiBpLN/Ta2G8s692qv20aJ4jPXAWhFXnOfzzaGjia4+xSJIHUBDgZOpyominE+FtpPwyumj0wvxgY+rO+5A==
+ b=NvsyLegZVh7tI4xn0XkymlQ1rGlrNRbiqtz9syKzoouoE5rUFPHHXY+eU1hMwaFNmapluzhhG8SJd48mEmizzGAnmXsbwx40xAOOFba8tm61MxXxhbO+uvxOPnX3twZG91AEhvIylPBIN5i5rmCUVrSFe+FvydeqCNPk/84XADkwadMV0ME4MbvY7QPVFJ0H/J3kSxh0x4jaO9CVe0VyIuaENI9pfxIztJvMVPbA0VV3DyYsKFyIl5dUSkpAnPtdmLIfpsC70+oHQ5oXUXuU43oMvrVUYzFCY/qqSP66ISGAwKHVxsVoiFMG9OptjV5q9plB7BEC8ktZjEvyraIdyA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DyW+M76omEOAOg7gOh3EoIicoqH6gPPBb+CbfEh99Fk=;
- b=yDomqYthBpf4ntL3/JylMVnkA6MzdvPXo71yFIes5yP0QVbroFywDIojOIv9St802BONBFKu+xx3gSRDQA4FZXzZakl5C4BApLEbRkqCY5YNMwNl5lpxthI8Q9Q5oo1KmPkUfv32fhhKvGgdDNpjwzIFDsWX3mJl0c+ZOxEmjtndN1kgl5kuUnbe+D4QcVccgYp1GEc5k92sadad4CoIVL+8Mj8Z7RzQtXXaQiGcSjGWEYSDg+sfz6Gsv2Xovh3OW9LTOAE1qK00BG13t5c2YGOcisvO1GtZDzYQQknTSB5mcZDA/86EYEiHYmdH2DqB82vdUtsHFWmd10lyzZz1Pw==
+ bh=j6yi7moNUUsmSIe2CiWw720BMkFh4CIbZz5Cb8RqDfc=;
+ b=KxWdDYcCEolCDf07gE0AQwwC41w68nXQ8vFXhSqxTyU4Eoa2rBP5FDeYBsq+Tyz4OnfGs8MfVADh3iiaJ/R7J8n+JKIyVZMAKk5jVbBubwd5+Bv+Lr5vtVFF2PbJPgcGr9XDO7rpU7khcR1a7F5mOFTUGmeis995+5yDhOZas1AlrHd3dWt9m2WopyUlRKs9l+uTFQNGw2bEGYjqSiME3bnirxdKSFFjFNL1E+ttr7Rbws0CLBA9X7ZgjMG739NMvK9KP9Ub4GXbib+qpARaX6BtVm9wt9xyE5f/w//AZ4xtvCK3aOci0n9tZk+B8lkhRX9aMJFWBoC785pfHYZ51w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=kernel.org smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DyW+M76omEOAOg7gOh3EoIicoqH6gPPBb+CbfEh99Fk=;
- b=DMyyrPQQnULHEhKspj1d9jCf6Zy/oaV4EVEF8SWZYDZPJpmTpOEGCXl7iszU7Q0IamMF1QD+SrdRUfMcvjjsHs9w96iJa/ecsqq39v16qYRMLozNxBf4osBRdje8zRFqX+VzMypzgcADlrl+myt54X2+mXWyXZWfCkPE3Ty6K9w=
-Received: from CY5P221CA0037.NAMP221.PROD.OUTLOOK.COM (2603:10b6:930:4::9) by
- BL3PR10MB6092.namprd10.prod.outlook.com (2603:10b6:208:3b8::10) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=j6yi7moNUUsmSIe2CiWw720BMkFh4CIbZz5Cb8RqDfc=;
+ b=cXHhYwYJVDVurn51qME9Lkh6oxvVijsm4E0U4tBCwL0aaqGZE2Dcqog+Czr2UeQVdsBW/aKb2YuI6z2CVr0kGuviDkTh1Nlt8IrbksVrGJhCOl1BQjp1GllvtztjUS3HmGhB8/0jGxD6MUapUg0f/KJCEbcPHIADrjOVjIrNd6c=
+Received: from MN0P220CA0019.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:52e::14)
+ by LV8PR10MB7727.namprd10.prod.outlook.com (2603:10b6:408:1ed::9)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Fri, 5 Dec
- 2025 04:36:13 +0000
-Received: from CY4PEPF0000E9D2.namprd03.prod.outlook.com
- (2603:10b6:930:4:cafe::2b) by CY5P221CA0037.outlook.office365.com
- (2603:10b6:930:4::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.11 via Frontend Transport; Fri,
- 5 Dec 2025 04:36:12 +0000
+ 2025 07:32:33 +0000
+Received: from BL02EPF0002992C.namprd02.prod.outlook.com
+ (2603:10b6:208:52e:cafe::d8) by MN0P220CA0019.outlook.office365.com
+ (2603:10b6:208:52e::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.10 via Frontend Transport; Fri,
+ 5 Dec 2025 07:32:32 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -58,85 +58,99 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.21.195 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
 Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CY4PEPF0000E9D2.mail.protection.outlook.com (10.167.241.137) with Microsoft
+ BL02EPF0002992C.mail.protection.outlook.com (10.167.249.57) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Fri, 5 Dec 2025 04:36:11 +0000
-Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet201.ext.ti.com
+ 15.20.9388.8 via Frontend Transport; Fri, 5 Dec 2025 07:32:31 +0000
+Received: from DFLE207.ent.ti.com (10.64.6.65) by flwvzet201.ext.ti.com
  (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 4 Dec
- 2025 22:36:10 -0600
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE205.ent.ti.com
- (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 4 Dec
- 2025 22:36:10 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 5 Dec
+ 2025 01:32:27 -0600
+Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 5 Dec
+ 2025 01:32:27 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 4 Dec 2025 22:36:10 -0600
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B54a7592697567;
- Thu, 4 Dec 2025 22:36:08 -0600
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>
-CC: <nm@ti.com>, <u-boot@lists.denx.de>, <mkorpershoek@kernel.org>,
- <n-francis@ti.com>, <anshuld@ti.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v2] doc: board: ti: Add J742S2 support
-Date: Fri, 5 Dec 2025 10:06:02 +0530
-Message-ID: <20251205043602.845730-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ Transport; Fri, 5 Dec 2025 01:32:27 -0600
+Received: from [172.24.234.212] (uda0510294.dhcp.ti.com [172.24.234.212])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B57WP3d2921063;
+ Fri, 5 Dec 2025 01:32:25 -0600
+Message-ID: <0a4d1065-24ce-4806-9696-b300717a672f@ti.com>
+Date: Fri, 5 Dec 2025 13:02:24 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] configs: am571x_hs_evm_defconfig: Reserve EMIF memory
+ used by PPA
+To: Andrew Davis <afd@ti.com>, <trini@konsulko.com>
+CC: <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+References: <20251128150455.3279166-1-b-padhi@ti.com>
+ <c5f858f8-0eb3-4ff0-bc7b-6286a43c93da@ti.com>
+ <52e73f71-6c4d-4630-88f4-81de3fedaf83@ti.com>
+ <1e980f3c-5955-47c1-81d4-f758dfa2d09c@ti.com>
+Content-Language: en-US
+From: Beleswar Prasad Padhi <b-padhi@ti.com>
+In-Reply-To: <1e980f3c-5955-47c1-81d4-f758dfa2d09c@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D2:EE_|BL3PR10MB6092:EE_
-X-MS-Office365-Filtering-Correlation-Id: c2f55ea8-be33-4344-f66a-08de33b7d101
+X-MS-TrafficTypeDiagnostic: BL02EPF0002992C:EE_|LV8PR10MB7727:EE_
+X-MS-Office365-Filtering-Correlation-Id: 135fc6de-3423-4916-ad66-08de33d07379
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?HlJ865x6H3azFmz+nSMXwPHyVq8Cntt7aPV3nv2DbzCxpFVa9WGvzTHRR/E0?=
- =?us-ascii?Q?u7g3KLBJ0t+hHR0UekODiS3DjD2mjNJ88zUtQxQh4a2wUwDsPdftlh0kkIPc?=
- =?us-ascii?Q?qxDtx8tCPl9WnVLU+mVV2QRMqov4zjBQYszwHbqBOaOWbZYB4kgIsQfxT9Fd?=
- =?us-ascii?Q?iFyIQn4EAyjei7oDrMYoFGfyjLyYpc+Ho7PfQtZp8OJR7f5oKltwSaA+acsG?=
- =?us-ascii?Q?nrJzg1q2Raxx4I43Ez11tYzzIhtIyYNbGiUsoLrXEKLM02gsKYHnRfde3/aE?=
- =?us-ascii?Q?xb02R9QFr1QPjUeC8+JQlu3o4h/w53GRfH4hPMtlT2R3Q9BUK+3MbvjpUPiF?=
- =?us-ascii?Q?YgHN8eYdu1R9DH9XhPnUTSQXT8IoNdgdewaJ8KwxhFrM2qbZhtJmorE0+5et?=
- =?us-ascii?Q?GxA5WXoqsB524Mc0uWak4ZjVUaEQev9h2gbvDQSTsrzuD00Ne2KMl5XxJ+5C?=
- =?us-ascii?Q?vnvg6bJPEIA2gj7G11nHkoxtiG40ZtsOzSR/3YLywyppQwbFSemJ9RJsvaUr?=
- =?us-ascii?Q?ah+m+VZVKUK/+79mT1NwQPkobc30cdWGFt4cncXtrWD2CAL4USZL3b3PMk9H?=
- =?us-ascii?Q?txyAQiTuQZRKbCeq7rm9O9IFCdNKTnUlsidjxgHl846PvhT7/IsmFGKRO1ij?=
- =?us-ascii?Q?w2+UMVJt0lMoPJ5Gp89QWaQCwF1p0O4LZNukUZ6xw1A6O0abM+P7Efzmhk0x?=
- =?us-ascii?Q?785H4nBljPI2KohsUrO54BTPJk429GTcXKrOC+x2wJxE/nZPIKTrmHTfJar9?=
- =?us-ascii?Q?Cpj3k6BmAVnopE7Sab4xzDbOTVieunMoojaM+j9CZo3RbmwiI1BQrEPNwQtI?=
- =?us-ascii?Q?tD8zH51qlFA1ZEMn9ZZEfVV5aL1CbzL+YKmj65NgywtemxpD+gSUvNNsNPb4?=
- =?us-ascii?Q?kTP1kVB2hgUar9CWWW93LRqg1zFTTZHAv64nSSbBm6/AdxU5FLQgUsY6KJoD?=
- =?us-ascii?Q?hisIHFz2pUcEpUptO/7mo429CP+iTBxBdpFgusMoixXCH6VQsXoIWYMgWhKG?=
- =?us-ascii?Q?H9nHAMB/gV7gxaWnULXKLJ12Cwbm72YXtz2G1tLN5S0r0xJeQDaa2KuX7u3D?=
- =?us-ascii?Q?NOwwZfXrehbi3j+90O9xOh52NV1tC+JcyOn5ui241ppImpVZOI23dHzBb0BU?=
- =?us-ascii?Q?lMq5r9ETYGt0rnQXL6UyiiKIezsW3Lg3Iq4ZNvz4vgFXagjoJuBhv9lkqaQy?=
- =?us-ascii?Q?pECuzKnX7m9J+WBC7j6r82jD1HLXh9ad0XXHAvtwtJ2rvH690QqU3zrbV1aV?=
- =?us-ascii?Q?jPhUo4PjrqvvIMgM9MupVa/xXBaUQ4cs0TWQRu1WQdgd1RmQH9zHNpcSUL+o?=
- =?us-ascii?Q?H5QCHfacF1+U2RnOJNtQJ6s1qK/+/LkPbtRssU0qgDMfWbZKMe9iPiO0ICLL?=
- =?us-ascii?Q?97zoEP6Gm7D7bcU0xpB6/BmeaiATL+hJgii60fjpy42ZPag2tJKwC68h0kYV?=
- =?us-ascii?Q?fqTLsbIzcWuZEBQKQ9oazjYNx5lYQ2nAzRanQdtzG5omXj2W23pS3DTJKr/L?=
- =?us-ascii?Q?6ytcGBH1i9yG9P6KUTz7/sTHYrbCRKYYsSd1?=
+ ARA:13230040|1800799024|82310400026|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MGlEaEhURXR4K1lmVWdJNUgrQTQ4L25zRmp1Y0VoSnVJQW02YkFQYnZkWUNO?=
+ =?utf-8?B?SlNCQnlJL3duK1RrNmluanhBMWFMU2VKaXg4RjVydkdGSnI3azlaOVc5MWJs?=
+ =?utf-8?B?aHAwRGdwWkNVcVZlOWF5eGxvSmwrRTgzenQvNnhDSmM3dTN2aU56aWNsb01m?=
+ =?utf-8?B?ak9RczlNbWVSWElwT3l2cUtkS01kQm9KUmd6MVU1a1lPb0U1UkhURHQ2elFx?=
+ =?utf-8?B?emYzR3AybWIvMWdRdDg1RGtFRjJYa3lMaDZKQzZkOGtDcVBaeU9ST011NjZD?=
+ =?utf-8?B?WnQ3ZjJYMlowRDh5bm1zT0FDTUxWeTYzcStmL1ppbFlKWDJWLzk3TlZCNk9y?=
+ =?utf-8?B?V3NBcVpucmx2WWpPd1JWWDFUNTlRSkNLNEVXUEZ1K0xuZnQ3eUFHRnpMK2Zq?=
+ =?utf-8?B?dk1nQzdjeXd4ZlZrNis4dlRvTjJQSGRpTVByckZxbENKbUptdDJhYnZSQ3Va?=
+ =?utf-8?B?dVRvRUFtRnRpUEpRdU1iUkZObG5KdEVuNW1yNm1uMGlrZDZOWHgzSWtLamR5?=
+ =?utf-8?B?MFptWXJOSUZWWHZMR20yOXVWNUI4WHRlM2JrUUgwc2Z1N1dYTzRwdXZoeTNY?=
+ =?utf-8?B?TExZVmVWVVpDaXVOcXMvMzdlMjg5L2dPOUlzUVQ0UEFWeklFaXAzaVhTMFJJ?=
+ =?utf-8?B?b2lodGhJbjhvZ25aRkxhL3Z6SUdQckZHb3lockJQY0h3eEZGOE1sY0crYmlZ?=
+ =?utf-8?B?bHpWVmJJZyswbGRPQllTRDJXN3o0RFJpUFlVdit0WHRRaUNNUFNHN0JzZUZQ?=
+ =?utf-8?B?WXo4ZnQ0UHlPZGYyRlU2TjZTRkljbGY0Q2E1Sy9VZmJvRlFRQmd1RXA5akNG?=
+ =?utf-8?B?WnEvMGJobzcwVmZOR1VKSVpCOEZTWlpEbjkwU3BkMHpDTGlLZEJBUWY4czZj?=
+ =?utf-8?B?ZHB2V2ZiQkMrSGRNdzZYOGZ0RFQ0RWo3amJRZ2pLeFQ4YU9hT0l5dHpGTVo4?=
+ =?utf-8?B?ZFBOejhxUzNJRnZ1S3prZHB6RitkRVY5KzZ4NlBEb2orc1NlR0VPK01zY1hK?=
+ =?utf-8?B?MGxNY0ZWcjV6THVNSlNlUDNiZ2sxYzFJVTl5L0ROcjRrZ2Mxbk5nSU5sQWxV?=
+ =?utf-8?B?T2I3bGtSaU1aUmFvck0zamFxMFVDd0JnZUZnQU9Qck15a0dLT0wyVndIMlQv?=
+ =?utf-8?B?TDloVndiQmFOSW13aDYxWTM3VnpyNGZaZWZCZ3lCRGdVbnZnd0UvOVBQUzZt?=
+ =?utf-8?B?VlhTbUVsZ2RhY2pFdnp4MXpKUU4rbmd1MDVtUWY5RnBUa0FPa2hybEo5L0tV?=
+ =?utf-8?B?TVovUUxjaGJKMnlKMlpmaGk1c25abFdoY2ZSUm04Szdrd2tXQlhYbzVrTmxt?=
+ =?utf-8?B?RkEyc1g0SGJJTWxIaVlyRXlhMzNybHFHKzJxdHZJWkhRMmVkVm9jOGR2SmpF?=
+ =?utf-8?B?Wlg5Qy83ek9MTXZRbUN5NllpMzQvVDloQys1UjlwMCs0cnZIK2JQM3dkY2Nu?=
+ =?utf-8?B?MEdGa1FuYW9idXo4MGRDSHoxZUtnZ011U08yRWtMUVdMczF5UGRhVGxVdmpH?=
+ =?utf-8?B?aitFYmwxaWR2L0F2bjFyaWMvbTMvbHVKQTREekhtcU01b0FwZUxxM0N1UGxJ?=
+ =?utf-8?B?U0NBMjRIaDY0ODdUamM0Um5aS1Nza2FRK3E5QWNaU2FwemM4eTF6eGVEWk9V?=
+ =?utf-8?B?NmtKTnBLUCtxWEZhU1o4L3ZvejZ4dGZDeW4yZmtBRU1PaXBhNmJ3Wld5Vmxt?=
+ =?utf-8?B?UFBHbTl0MEJTb1FJaC9KNi9hZUFvQ0xNMWVpYTU2TlAvSXljQlBvTjlzb0M2?=
+ =?utf-8?B?THV6NVRsODhhOFRZbDZ3VXNBNlpBT0NLRHN2Wnh3OHpCbys1T0drMnlONGZw?=
+ =?utf-8?B?dWpGZkNSUG9NTWFlQjNxaWtJNE1XNDVvckMwSVFGcm43cUorcm1ldzM2SlRU?=
+ =?utf-8?B?NXVhcWVVNVpZZGpvcElGcXFHOTFOZ2JPbGZub1d5S0oxdUp0WWhrcjVnSXRD?=
+ =?utf-8?B?V0JYSGJ4em10R2hla2srQXlEKy84UXlzMWYyRjU2SHZUdmVDRUYyN1BuUi8z?=
+ =?utf-8?B?RHNnV1BJeXp1ZENvbzc0d0N2WU5yekdVNEkrbitTZUNnNjdYSWE1bzhuTlNR?=
+ =?utf-8?Q?CvgJfn?=
 X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2025 04:36:11.0924 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c2f55ea8-be33-4344-f66a-08de33b7d101
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2025 07:32:31.5583 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 135fc6de-3423-4916-ad66-08de33d07379
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
  Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D2.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0002992C.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR10MB6092
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR10MB7727
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,88 +167,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-J742S2 SOC is derivative of J784S4, most of build infra of j784s4 is used
-to build u-boot for J742S2 EVM board.
 
-Add guide users on how to build for that board.
+On 02/12/25 18:47, Andrew Davis wrote:
+> On 12/1/25 11:56 PM, Beleswar Prasad Padhi wrote:
+>>
+>> On 02/12/25 00:58, Andrew Davis wrote:
+>>> On 11/28/25 9:04 AM, Beleswar Padhi wrote:
+>>>> The AM571x SoC has 1 GB DDR space. As part of normal re-location process
+>>>> U-Boot copies itself to the top of DDR bank. However, on HS devices, the
+>>>> top 37 MB is used by PPA and is firewalled. This results in an exception
+>>>> and the boot fails.
+>>>>
+>>>> Introduce a new defconfig for AM571x HS platforms and set
+>>>> CONFIG_SYS_MEM_TOP_HIDE to reserve the top 38 MB memory (aligned to 2MB
+>>>> as per page size for ARM32) for the same.
+>>>>
+>>>
+>>> This "SYS_MEM_TOP_HIDE" looks new, for other OMAP-class HS devices we
+>>> use "CFG_PRAM"[0], seems these two configs do the same thing, could probably
+>>> combine them in some way..
+>>>
+>>> As CFG_PRAM is set based on TI_SECURE_EMIF_TOTAL_REGION_SIZE which is 32MB
+>>
+>>
+>> CFG_PRAM is only set if TI_SECURE_EMIF_REGION_START is not set, but we
+>> have it set it to 0xbdb00000 in the am57xx_hs_evm_defconfig.
+>>
+>> https://github.com/u-boot/u-boot/blob/master/include/configs/ti_omap5_common.h#L75-L81
+>>
+>>> for all other AM57x, why is this needed only for AM571?
+>>
+>>
+>> Other AM57x boards have >1 GiB DDR. So, the top of DDR space does not
+>> intersect with the firewalled EMIF region (0xbdb00000). Only in case of
+>> AM571x, the top of DDR collides with firewalled region, so boot fails while
+>> doing reloc.
+>>
+>
+> Is there some way to detect this at runtime? Nothing prevents any of the
+> AM57x SoCs being used on boards with 1GB DDR (although they also might use
+> a different defconfig). How do we deal with this for K3 devices? Some use
+> an OP-TEE address aligned at 512MB and I'm sure one of them have that amount
+> of DDR.
 
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
-Test logs
-https://gist.github.com/uditkumarti/b2e23151728628805a680b6eab528e7c
 
-Changelog:
-Changes in v2:
-- Removed extra =
-- link to v1:
-https://lore.kernel.org/all/20251204142451.834404-1-u-kumar1@ti.com/
+Well, actually not...
+It's the AM62 SIP platform. From DT, it would look like OPTEE is at the top of the
+DDR[1], but we do a FDT fixup here in u-boot to replace the OPTEE to the start
+of DDR[2]
 
- doc/board/ti/j784s4_evm.rst | 24 ++++++++++++++++++++++--
- 1 file changed, 22 insertions(+), 2 deletions(-)
+[1]: https://github.com/torvalds/linux/blob/master/arch/arm64/boot/dts/ti/k3-am62x-sk-common.dtsi#L71
+[2]: https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-k3/am62x/am625_fdt.c#L84
 
-diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-index 22442874110..69deeee1076 100644
---- a/doc/board/ti/j784s4_evm.rst
-+++ b/doc/board/ti/j784s4_evm.rst
-@@ -1,8 +1,8 @@
- .. SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
- .. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
- 
--J784S4 and AM69 Platforms
--=========================
-+J742S2, J784S4 and AM69 Platforms
-+=================================
- 
- Introduction
- ------------
-@@ -37,6 +37,11 @@ Platform information:
- * https://www.ti.com/tool/J784S4XEVM
- * https://www.ti.com/tool/SK-AM69
- 
-+J742S2 is derivative of J784S24 SOC, More info can be found in
-+
-+* TRM : https://www.ti.com/lit/ug/spruje3/spruje3.pdf
-+* Platform Information : https://www.ti.com/tool/J742S2XH01EVM
-+
- Boot Flow
- ---------
- Below is the pictorial representation of boot flow:
-@@ -99,6 +104,15 @@ Set the variables corresponding to this platform:
-       export UBOOT_CFG_CORTEXR=am69_sk_r5_defconfig
-       export UBOOT_CFG_CORTEXA=am69_sk_a72_defconfig
- 
-+.. note::
-+
-+   For J742S2-EVM, use the following U_BOOT_CFG instead:
-+
-+   .. prompt:: bash
-+
-+      export UBOOT_CFG_CORTEXR=j742s2_evm_r5_defconfig
-+      export UBOOT_CFG_CORTEXA=j742s2_evm_a72_defconfig
-+
- .. j784s4_evm_rst_include_start_build_steps
- 
- 1. Trusted Firmware-A
-@@ -146,13 +160,19 @@ variant (GP, HS-FS, HS-SE) requires a different source for these files.
-  - HS-FS
- 
-     * tiboot3-j784s4-hs-fs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-+    * tiboot3-j742s2-hs-fs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-     * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
- 
-  - HS-SE
- 
-     * tiboot3-j784s4-hs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-+    * tiboot3-j742s2-hs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-     * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
- 
-+.. note::
-+
-+   For J742S2, GP variant is not available.
-+
- Image formats
- -------------
- 
--- 
-2.34.1
+I am not sure if we can do such a thing here for mem used by PPA/firmware
+as it could assume it has that memory hardcoded.
 
+>
+>>> We build for all
+>>> the AM57x with one defconfig, so this new defconfig will go unused. Just set
+>>> the default CFG_PRAM size to 64MB (same as AM43x),
+>>
+>>
+>> I am guessing all AM43x devices have the same amount of memory unlike
+>> AM57x devices? If we set CFG_PRAM to 38MB by default, won't we lose out
+>> that memory on other devices which do not face this limitation?
+>>
+>
+> We only really supported "officially" the AM437x-EVM. But our over-focus
+> on just our EVMs caused us to make assumptions that would later make
+> it difficult to add support for customer boards. Assuming DDR size was
+> one such assumption, and should a customer board have the "wrong" DDR
+> size things like this would break.
+>
+> So instead of making another one-off fix to get one of our EVMs working,
+> I'm trying to think of a way we can make this work automatically for any
+> combination of DDR size and firewalled region.
+
+TL;DR
+I think adding that dynamic support would be tied up only for TI usecase?
+
+Hmm yes, I get your point. But to be able to do this dynamically, we
+would want to see if gd->relocaddr intersects with CFG_PRAM:
+
+Case 1:
+gd->relocaddr > (SECURE_REGION_START + SECURE_REGION_SIZE)
+= Best case. U-Boot relocates to an address higher than firewalled addr
+
+Case 2:
+gd->relocaddr <= (SECURE_REGION_START + SECURE_REGION_SIZE)
+= Fixup needed. U-Boot relocates to an address which could overlap
+with secure region. Update the gd->relocaddr to a lower address range
+which won't overlap with secure region:
+
+    reloc_text_size = (RAM_TOP - gd->relocaddr);
+    gd->relocaddr = SECURE_REGION_START - reloc_text_size;
+
+
+And ofcourse, we can't put this logic in the existing 'reserve_pram'[3]
+INITCALL because gd->relocaddr gets modified in the subsequent
+initcalls like 'reserve_trace'. We would want to introduce a new
+INITCALL which would be invoked after all reserve_* initcalls and
+before the reloc_* initcalls; where we can put this logic.
+
+Let me know if you think this is worth adding, or is an overkill and
+we can live happily with CFG_PRAM = 38 MB for all AM57x devices :)
+
+[3]: https://github.com/u-boot/u-boot/blob/master/common/board_f.c#L990
+
+Thanks,
+Beleswar
+
+>
+> Andrew
+>
+>> Thanks,
+>> Beleswar
+>>
+>>> should be enough for all
+>>> and doesn't hurt to have more than needed reserved to be safe.
+>>>
+>>> Andrew
+>>>
+>>> [0] https://github.com/u-boot/u-boot/blob/master/include/configs/am43xx_evm.h#L153
+>>>
+>>>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>>>> ---
+>>>> Fix boot for TI AM571x HS EVM board
+>>>> v2: Changelog:
+>>>> 1. Drop [PATCH v1 2/2] in v2 series. There is no need to add reserved
+>>>> memory node in DT as it is done by U-Boot as part of FDT fixups
+>>>> https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-omap2/fdt-common.c#L72-L107
+>>>> 2. Add entry in MAINTAINERS for new config.
+>>>> 3. Update commit message to use memory size in MB than raw hex bytes
+>>>>
+>>>> Link to v1:
+>>>> https://lore.kernel.org/all/20251128064353.1295063-1-b-padhi@ti.com/
+>>>>
+>>>> Test logs:
+>>>> https://gist.github.com/3V3RYONE/e86b3f4551986b0400d0e0f66d6ecc66
+>>>>
+>>>>    MAINTAINERS                     | 1 +
+>>>>    configs/am571x_hs_evm_defconfig | 3 +++
+>>>>    2 files changed, 4 insertions(+)
+>>>>    create mode 100644 configs/am571x_hs_evm_defconfig
+>>>>
+>>>> diff --git a/MAINTAINERS b/MAINTAINERS
+>>>> index b43dae882b3..e5d564cd760 100644
+>>>> --- a/MAINTAINERS
+>>>> +++ b/MAINTAINERS
+>>>> @@ -1780,6 +1780,7 @@ F:    configs/am335x_hs_evm_spi_defconfig
+>>>>    F:    configs/am335x_hs_evm_uart_defconfig
+>>>>    F:    configs/am43xx_hs_evm_defconfig
+>>>>    F:    configs/am43xx_hs_evm_qspi_defconfig
+>>>> +F:    configs/am571x_hs_evm_defconfig
+>>>>    F:    configs/am57xx_hs_evm_defconfig
+>>>>    F:    configs/am57xx_hs_evm_usb_defconfig
+>>>>    F:    configs/dra7xx_hs_evm_defconfig
+>>>> diff --git a/configs/am571x_hs_evm_defconfig b/configs/am571x_hs_evm_defconfig
+>>>> new file mode 100644
+>>>> index 00000000000..7e44ee5221a
+>>>> --- /dev/null
+>>>> +++ b/configs/am571x_hs_evm_defconfig
+>>>> @@ -0,0 +1,3 @@
+>>>> +#include <configs/am57xx_hs_evm_defconfig>
+>>>> +
+>>>> +CONFIG_SYS_MEM_TOP_HIDE=0x2600000
+>>>
+>
