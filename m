@@ -4,105 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51335D32D9C
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 15:35:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB9DDD32D9C
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 15:38:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D17228420C;
-	Fri,  5 Dec 2025 16:34:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id EABC384201;
+	Fri,  5 Dec 2025 16:38:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="QkffrB7p";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="V4JX1BX2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAA35841BE; Fri,  5 Dec 2025 16:13:37 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3F4F584203; Fri,  5 Dec 2025 16:38:41 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C167E839E2
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 16:13:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABE178036B
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 16:38:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c6e815310aso1533953a34.0
- for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 07:13:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764947605; x=1765552405;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TampX8rjraq7O8EWbNr1MvgfMAO+trvtVw4Y92wpOg8=;
- b=QkffrB7pAJxrFonxfFyz0BorCArArgv9JWsVZHHXiq9PrpeNBTjMmsTWtAiIl4l7hb
- OSlz9tkCwMFpOk3iKYmhn+1BakmF/Mz6e5GF0jikN0+4l2KLUqKxJRAv6hnveOQvI79G
- xw6UhiSiINSrS1/UJJrFhYjVPpdxXoWnZk43dWgvP93af8lDDeez1RaVjy7sELCeuMsZ
- Zzkj0TrQfGPOkxNTQvPW4LlX7l2Wh3cGSbRCZx54yuum3+XJdkLuRHg3M1elmIwIQ/pV
- hH4Gv3erO6V8ivy1AelgtmWE2O/CRMM2ORbZ6DJui0PZ3XnlQVSSIjlBZJGbGgd/TaPb
- RYSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764947605; x=1765552405;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TampX8rjraq7O8EWbNr1MvgfMAO+trvtVw4Y92wpOg8=;
- b=PvAGzUT0D7J2v2StdcQQj5cWr+7l4P0QoLjDZ/ZrmBaLjF0Zl1YxafXROpOncMxmwy
- cPujPdDlWzSYoXV1p6XVWu37aVObHYDjp9ZSUwLuZ/z25ZnGOKnzt6dsziHBNWl/xq4g
- AglPGcLL9YT80HU4RpV6BJ0GLWHmRgoZAfjNU6Xs8RVS+hMoT5HDBos+PYuXeDN+mwWW
- 55HJY0rL/IZ0VMCtu4X+BJ8bdE3sOvc7nz5b7Olf72YVcmnYU5AlldEy9ZCOh45jix4b
- 89IwzAW6v+EHTsDmJULkIFlY5F3s16YyF+ljPMG1ybEIVAQZVlMN0M0tWY3izYlzjtwm
- 9Lng==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUr4JgG8A4wMa4zPXUppoXZhVfN9qBOuEq7ONbEk8hiCfzG8Oaje3La5UbmpjhkgT3PnOLAoys=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy5LX4QcarCO2ehf23GI4oQKzHDm6oMtlpZ4MJ3JRTUcGxxyMuW
- p58r2Cydks4lEJpUv2SNHsaJakptsdcrOZ0BxW7X3rXInNWZGSrbSWA+r0AFJXlYvNs=
-X-Gm-Gg: ASbGncvwDYbTTn/sP7uDMyrhDKm4HMrP/huFUG4tBtxqvyN9xnKqpJFhudyHFpyEXmT
- bHPXaR3BuE72xdzlGKGZUIxSDmWTjPWRWUV41qdv05p8CyuaoBjbOBr28o5fCIwdqa7IZ0R9EMy
- UWrO7kZHzIBCTUelHcetf2UQ4ME8rUerIPYwQHv4xC5BZVBWtU0I00kJCPUgAogHtzn5t5HqUmQ
- WG4LEa77I7UkKr2HqCLWN1BhS7rCNCbp4aUzTnj/USHZO8hRwcaDIgHfgQfgzCx9zARUJvfGFek
- dQ+BYdwBusGJzhnyzcdYsDRGzXdVYCPCcHxL7o1u54HmLX8cvbyy6zxdgW6GqNSt+0HCn3Bbbxe
- DsJZst7rnHfETO+CXw5F21o3SCE5UtkLqqb+5xHdKl1Yspb/S8NvdmAGEfghH1rFLz9OthBjFCA
- 5XpbRUo+iEPiTjimTrvw/Jq1Dvd0yr1hk4mMXPrFJyOcDto5ehSdR355L++DtpaOX2aQ==
-X-Google-Smtp-Source: AGHT+IGD9ADdWGL4bVOUcMv0Wuso+uZcKfLpr3ULn62+C0jj2o4r6fsNhQqOtaKTUmGu+EqaOsTQXg==
-X-Received: by 2002:a05:6830:3c8d:b0:7c6:ca92:3621 with SMTP id
- 46e09a7af769-7c94db6284amr7622482a34.22.1764947605314; 
- Fri, 05 Dec 2025 07:13:25 -0800 (PST)
-Received: from ?IPV6:2600:8803:e7e4:500:c301:de6:97d:1492?
- ([2600:8803:e7e4:500:c301:de6:97d:1492])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acb3cf1sm3952327a34.20.2025.12.05.07.13.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Dec 2025 07:13:24 -0800 (PST)
-Message-ID: <0e33d7ce-5b72-4edf-95c0-799acd445c19@baylibre.com>
-Date: Fri, 5 Dec 2025 09:13:23 -0600
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RqkLdm4sVE6+hy3C17mX0RP6Qe/tDEAJV8+wKiNQDg7dp+ziis4W8a8XCBaZ/zrKfVx+8rfXid/4hOUQ5cnGAIDq+fvbV6i17CeEe73JTMOgxQRtnL2OllnkLGBwT4FefUDrhNmyUz3P5vlal3bIdojfufX5qnKvXjuyk7ksK7SCiC55ZZQM81cDTGUnIhQNtH0qbTtZy9qyiOeA4X9l2BmnW6kEZ/N02gTVfbQqQU1eVGHbDxvpW68f3Z05hXhBx8ikpEDQ0vmdh33Ux5/jyVjc0dprJgS1Yf4bYtAMn4Mqj69AR0ATZJpM37LmuO+rGSF9bWiNkdXiThmzYloRBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=atxfZUXp5m0A9pXvYFsC/ZyXdz1cJIEeoEiGppH7vos=;
+ b=Uv7U62DOFhSEzjNp+KJj5tLax7SrWNdQzGgeHJcpyjRlcN+NXlTtuYzurj1vkveOmvO0tScWYE4lMoUvJCez6uzeOwsDuPsUp2HBbpOHFfnclO4tLCv9jzHWXM0/eLVgd9fGpisKh26WWppy65hqqB7vYy5tzdisISJs1c9ZYjPJ3xFw/97ccIGRXJe35CD92i/8yqAEteoo/NPWU771v6+jdEo9dlycsgdjUoihhxd128vbtnUZUICpIsPgK7BSQWnZjIQKB5ksEHvVUrH1HZkwsO13IVvCDtsDYMe+JrSicIS3bX9T86k2Z+y8SlMnwnBf+PHL0gmmTXC/i7sHJw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=atxfZUXp5m0A9pXvYFsC/ZyXdz1cJIEeoEiGppH7vos=;
+ b=V4JX1BX2CiU1YBbthXunXPWAqsEQRMPayju/wxIRqvMmARfurkimIktpRINtZaouAlQaIULMBnrqKZKwj8r14n3alSdUzmTD9W6gtEqtiGyal5N2iHod3nCl43Vaoksl21+hCiTWz9+O0grtXMiSkZxPeWOEHk66vKlnP16iRQoMjsjE7SHYMObc+M8H5f1O+O+BvHYsHFs1W6FDNpyQyG6+gV8O6npbgEzt50TL+sOdrVl0a4DwAmPPiTZAzkBgLPVnHsdl1shX4kqJcFqNgAK8KjmXZiE66Qs7ovYcn0htgPmJC2TovmgqKI+0W2fhlmml8pwkwlHoIRUs7s9PKQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from DB9P195MB1444.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:33e::16)
+ by VI2P195MB3006.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:2e0::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.12; Fri, 5 Dec
+ 2025 15:38:35 +0000
+Received: from DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
+ ([fe80::a4ad:a30e:789a:db7b]) by DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
+ ([fe80::a4ad:a30e:789a:db7b%4]) with mapi id 15.20.9388.009; Fri, 5 Dec 2025
+ 15:38:35 +0000
+Message-ID: <1af36341-21c6-40dc-8d7a-65ff5575ccdc@phytec.de>
+Date: Fri, 5 Dec 2025 17:38:15 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: mediatek: switch mt8365 to OF_UPSTREAM
-To: =?UTF-8?B?TWFjcGF1bCBMaW4gKOael+aZuuaWjCk=?= <Macpaul.Lin@mediatek.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- =?UTF-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?= <pablo.sun@mediatek.com>,
- =?UTF-8?B?QmVhciBXYW5nICjokKnljp/mg5/lvrcp?= <bear.wang@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: =?UTF-8?B?Q2h1bmZlbmcgWXVuICjkupHmmKXls7Ap?= <Chunfeng.Yun@mediatek.com>, 
- "trini@konsulko.com" <trini@konsulko.com>, "lukma@denx.de" <lukma@denx.de>,
- "igor.belwon@mentallysanemainliners.org"
- <igor.belwon@mentallysanemainliners.org>, "peng.fan@nxp.com"
- <peng.fan@nxp.com>, =?UTF-8?B?V2VpamllIEdhbyAo6auY5oOf5p2wKQ==?=
- <Weijie.Gao@mediatek.com>, Julien Masson <jmasson@baylibre.com>,
- "seanga2@gmail.com" <seanga2@gmail.com>, Ryder Lee <Ryder.Lee@mediatek.com>,
- "macpaul@gmail.com" <macpaul@gmail.com>,
- "semen.protsenko@linaro.org" <semen.protsenko@linaro.org>
-References: <20251125-arm-dts-mediatek-switch-mt8365-to-of_upstream-v1-1-707eee6dfdbc@baylibre.com>
- <7021158b1829c5daabf62b1901a8b4988a940a92.camel@mediatek.com>
+Subject: Re: [Upstream] [PATCH v2 1/3] board: phytec: phycore-imx93: Switch to
+ standard boot
+To: Primoz Fiser <primoz.fiser@norik.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ uboot-imx@nxp.com, Tom Rini <trini@konsulko.com>,
+ Benjamin Hahn <B.Hahn@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
+References: <20251205111044.3195322-1-primoz.fiser@norik.com>
 Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <7021158b1829c5daabf62b1901a8b4988a940a92.camel@mediatek.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 05 Dec 2025 16:34:34 +0100
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20251205111044.3195322-1-primoz.fiser@norik.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR06CA0114.eurprd06.prod.outlook.com
+ (2603:10a6:803:8c::43) To DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:10:33e::16)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9P195MB1444:EE_|VI2P195MB3006:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6f77da0c-a4c3-4266-2b1f-08de34145a4a
+X-LD-Processed: e609157c-80e2-446d-9be3-9c99c2399d29,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eHdxWEY1TVkrd0lUc05WaVIzdXJldFV2aWMrbkNJNlg1ZkVxM0hwQ1VhdFMy?=
+ =?utf-8?B?M2h1TjI3Q3ZoTmMzSHpueTVLN2M0bk9EcENvNnhJa3ptR1FHckNTWUs0Y3Av?=
+ =?utf-8?B?YnhaYytCWStOWVpWUGlXMGpFaThBL3VFcVhiQ25Ga0t0MndQYUhqQkpGbU55?=
+ =?utf-8?B?dkZRMEl6RnNUN0o4WnB4WWZxeDc5SThNai9yMHJnNmYyQ2d4d0YxV1VJTndU?=
+ =?utf-8?B?OTVlaWhlMi96RnZ1Um16bEVUM3hQV1N1a0orYW1CaWNabnUvM3NXTXJaeDFi?=
+ =?utf-8?B?ZGJ2UjBDYXI2TzZUREFhS1lhRUV6ZHpwb2hiOWp5Y2JpVC9zY1NQSjhpckll?=
+ =?utf-8?B?eGlpeVR6bEE4Rk1JRENEZk9zN0RrMUNHL0RCWStDVVFKZU5BMWhRVG8yU0s1?=
+ =?utf-8?B?VHVvQ0hEdE1Pdy9CUFN4YTVRZzh1SW9lV056TG5OYUtjVDBUMmM1QklsZ2or?=
+ =?utf-8?B?cy9xdlNacmREREZEZW9WUEJiczJ0RlFUZTRoc3lFNXdkNm0zUG5QNnFZWW9i?=
+ =?utf-8?B?ay8vbWZVRVY2OUpYclo0bWhIZGlPTkMxU1lBSWVVOFVVbjM4cGl2M1FzRkZF?=
+ =?utf-8?B?NTdBRHptazZrcUdWTFJ0U3lFZXNvYjFubElSdG5BUmNNSHJWQlJJMi9FV0dk?=
+ =?utf-8?B?Z1czSC9YNXVhT0VvV09PSTFtS3M4VFJTSWJJYWtBUTRtRktMK3pKOEVYSDl6?=
+ =?utf-8?B?OHRBM2JVVWsvQ0lGZ0VBUFFsenpEZFcvYTc4dkhBKzN4Rko1RU5TeU9ZczIy?=
+ =?utf-8?B?NmVsYlpFN0gyQmtPYS8vdk1wNjRKdnZjUzRWZFFUUk83L2RPcGpOa28yZlJO?=
+ =?utf-8?B?am5KVnNoTWdQTnFteUtCcmFJdWRka2p1SzJQTXNWZ1U5QlZrbUdIMjJlRE84?=
+ =?utf-8?B?b0NuMFhmdGFqYmYzTFpOSURpRVdXYkMrL0IwZWc4TlVna05WeElqUjVtajc0?=
+ =?utf-8?B?bC9jZGlRK3Q0cEFzeW1OMm52dVRnclRuckJsL0RZSENKRVpWc040dE4zVE1q?=
+ =?utf-8?B?QU1SZElXYUdmdmtzR1kxMHZ4Q053S0xZTVRhakpJcGVISWZ3aWdCVFIxMmhw?=
+ =?utf-8?B?TUJxclczVEkvM2ZtSnhSZW5jNWRMMVFXMVdsZjdOL0o0VjVDTkp3aDdHU0pi?=
+ =?utf-8?B?WDRNOVhuRU5iMHI0Lzg5TWRKUy8vTTF1Sjk0ZmNnMU52K0REd096a2NjL3F3?=
+ =?utf-8?B?VFNka1hxMlNkdk9CTFFJeTZMaEZ2UGF1VDFuODhpMDFpcWpCamk0cFBGZ1By?=
+ =?utf-8?B?UmZKYlJoYUJnWWk5eWZSNmlzMUduQ0F5VVBZT0djTjhoeVZYL3B4SFVRekYx?=
+ =?utf-8?B?dGFCTkZ5Ymp5VlVXblE1UUJBQnFtcnBHdzJnMTZvTzBXOUJSMkFEZnNkaGIr?=
+ =?utf-8?B?QmMzT2U1WGc1bjBsQnltbDhHUlhQM2NzaGtEZEFQUGlxbUdKUUg3VTQ5WUpV?=
+ =?utf-8?B?U1ZFaWFPUmhYd2Vwb3RqZENaZFFieVlvcU5OeDJPemgzWUZLalZwc3lyVmp2?=
+ =?utf-8?B?R1Z0aU9pL3RpRVBxOFo0TmNIQXlXaWxRWGtFbEMyV2ptZGNVeG1lZGtQM0E2?=
+ =?utf-8?B?VHZWV2Rxb1ZIOU9XTjZJK2cwZzBiVDVRMkJtV2F2L2VQUzVodnh5UWdOS0xW?=
+ =?utf-8?B?aFF0UUlvQ09Eb3BOa2haY1ZReTJmWHVCWlpldW5DYzRvQlBITktqQmlaNVZo?=
+ =?utf-8?B?Q015UHBPOGxVZEtIMDlya2hLZU1EZjlLcXF4ZDNqTUZhTFhGMVhKeE9MWkVn?=
+ =?utf-8?B?VWJrSzhCbU9RM25Yd25yQ1k1bUVObXpOOFFha2xuVzl2bXZhcENpbTFUYXh0?=
+ =?utf-8?B?Vk9QdkErMEJ6SDhSblRyaU5QQ2hqbFdmS3lxZlJXNFEwYzB1NVVoSkdFbk5Q?=
+ =?utf-8?B?WEt4VWcwUUd4WWVVVUZPK1ZSUytodWppcVJQMTQ0NG8zbUs0N3IxZ29vQk9h?=
+ =?utf-8?B?by9EOGRlMnFDUTh6OU9tZVljRkhlNXQ0K0VUNm9Ta3RXb0RMM3QyNXBZVWNK?=
+ =?utf-8?B?R1VBNTdQNDBRPT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9P195MB1444.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7053199007); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TERpVkJIODFvVUJVak94NExXRTNHbzRDcjN3VWZzVFFmQnNVWXBqZmtjblIx?=
+ =?utf-8?B?eVdjckdKRVQzZlhielJOWXd6RkJLbU1YbUFqQmM3d0MwWXd1ek05VFM4UTl3?=
+ =?utf-8?B?RHpGWEpJdnNUdDRzdHhWcE5ZdjZwS29xSmlUUW91cU1wem9MTlQ3THlRcWIw?=
+ =?utf-8?B?SW1jWXdlNEEzQVdlUWdqSUN5VGhGOXRPZ0tqMU5wSWhHb1dlMjdaUXo5bXJY?=
+ =?utf-8?B?K0FzTFVnK0NRYkhyamRESGVzQjhwQ05ZVWNqWnVpZCs0UTUxakpQTDFncU5h?=
+ =?utf-8?B?SFcwR043OG1HaVpUVGNhVlpyYjRqMzRYWUU4VklGYWVsTVpGWVN4WFlWWmJo?=
+ =?utf-8?B?UEI5ZUVOVlVJYUNMT2g3UVF1czNSK0lDbGJpbFZicGwxcmlwRVZzL21VRCtM?=
+ =?utf-8?B?ek1WRUp3WEpBbVNOeENqanQyRjRoSm5aYWJPOFRSYy9meURjdDd1YkRMR3Jz?=
+ =?utf-8?B?b3pVa3ZsUTJRaml1bDcydmg0c3A2aW1jYlFyVzlQMGswRUtQSG02T0Y1Zkxn?=
+ =?utf-8?B?N2ZwVTVvYkxoWnFscWVYbFJVc0pWVjcrUHVxMmVRTzdzaVl5R3RxcHMrMkhZ?=
+ =?utf-8?B?Wk5vTXRCS1NGcEtnOGZMTjBtSHhDRlFQTDQxRXBvd2lnbXhpZjJhSncvSEZz?=
+ =?utf-8?B?bStqczQ0YUNaazBQckZzQWZjOXBYK1picGdiZitCZGxoQVpvMUxqMlNmTGs0?=
+ =?utf-8?B?YkYwZDBSTFZuLzVkMys4OG5HdFRlaWlyZVJYRitWcEhnZ25zNU5Tbk1rei9N?=
+ =?utf-8?B?alpBLy9oZ1RMbUdzS2lqZHBVWTIza1VMbGlnUC90QllLR21scGk4T25UdnM0?=
+ =?utf-8?B?aGwxazQvMEREOHkyRWRyc2hJRklHMk52bUZyeE85MU8wNElrVFhHVVFmVExK?=
+ =?utf-8?B?UER3bGhOcXhFa1UwZkFMUmVOOVlhRXhhUG9hc2E5SytKNE4vZ0g3ZW9DZmZ1?=
+ =?utf-8?B?WU94c00rclhqc2htUU16clZXM0g1ZCs5YU1UZlVvc2pOQkpxRTA0aE9OYk9C?=
+ =?utf-8?B?Z0YxOVM1bXExSXBsVHVHdkdyYS84QWtqWXk2YThQQWt4YWE3R2x3N3JKOEEz?=
+ =?utf-8?B?L3daSHAxMmlhODFqYnlES1pCcVdQY29SOTBnWkhYK3U3ZXAzZEMwcDB3dDBz?=
+ =?utf-8?B?NXFqcWxQWFJmZE9NRmU3U2oybjhjOVBGT05ZZFlWNGRjUE05dEZVMWFyWitF?=
+ =?utf-8?B?TjR2WmRHbnhNa3ZIY3JaeGNyMG9PWWsxMnM2RXh6SlMvQ0lKVFVUSEthbGM4?=
+ =?utf-8?B?cDRIVTJpNk1sYm1OdHhiZVJxSFNzWTlvT0dsWGFxMEwvVUR1Yk1zbllXMzhX?=
+ =?utf-8?B?VW1BSGV1VzhZei9vY0EzK2FPNUdHOEJNOVQrRnlnc05maVlJOEdvWmc5WVl2?=
+ =?utf-8?B?ZnZaTGFsTkc3ZTFEY25WZGs1Nkg1dFVsY3Z0a2k2RDFvUmpXb0VPa2pLdGlm?=
+ =?utf-8?B?d2xjS1dwNlA4ODdadjBXT0NsTEdGK3N6TE9XNkgvVDFGckNWWmJVOVNXS1V4?=
+ =?utf-8?B?UzJiRnZSUWVYR2J5YU5QVTNJMzNQRkFCL3Q5ZUpwM0tNY3IvSjNSZWF2SnFp?=
+ =?utf-8?B?SjBBL3E3SlNXakNNSENSdlp1MVVLVzhjNmdqOGJHMVExZmxucG5ndXBZYjJw?=
+ =?utf-8?B?dkF5SWtoOTBMN0RLYy9pVHZuMWNLZi9UY2RQbEcyaFdTOU80aHVTclNJbnFF?=
+ =?utf-8?B?NGpzRGVFd1lDSmJYeG5hUndQYWNxcHFWcDRzN3RZUE91STVmMmlldXdocGoy?=
+ =?utf-8?B?eDdkcDE5b2xXVTZCMDdSam9wUWU2QjU0WkJ1bjJ0ei9xNHF1Yk5nVjZGbWtH?=
+ =?utf-8?B?dHJaNzBBRjh3OE1haWM4NG1ReW5OeTFaeFdaNm1iSVJBK1Z3ZXJTTEtmVlM5?=
+ =?utf-8?B?VGxjL05La09pc1MrWUFPWVQxT1RhVTJvREZZVXVacGxYZVEvYWtQM2k3WjFR?=
+ =?utf-8?B?L0lrSThqaFRoVTlEL25ZM0kwSng5aERQcis1RzVUS0dUVFFrT1VCeTNoY3Jk?=
+ =?utf-8?B?anBXelJGTXlBazJzd2V6ZkNMNzJWbkErZFR2MEZtSUVWNElDYksxODdMQ0tw?=
+ =?utf-8?B?YWlEemJKaTdhSnh0aTVJT2RPUytqb2pYY1NTclRvcWh0RnkybUovTVFKVWQv?=
+ =?utf-8?Q?QM9797h3fimDqFZWubzVLhHxF?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6f77da0c-a4c3-4266-2b1f-08de34145a4a
+X-MS-Exchange-CrossTenant-AuthSource: DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2025 15:38:35.3436 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9zBv14TzGA7Fk0KjLrPYe45btij9q1IrNwq3lbwpLfOOrWEaCxb39U8OIIDoxjk4erqs1I62dFd+oOJz6A4tKg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2P195MB3006
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,113 +181,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/4/25 9:16 PM, Macpaul Lin (林智斌) wrote:
-> On Tue, 2025-11-25 at 11:35 -0600, David Lechner wrote:
->> 
->> External email : Please do not click links or open attachments until
->> you have verified the sender or the content.
->> 
->> 
->> Change mt8365_evk_defconfig to use CONFIG_OF_UPSTREAM=y and delete
->> the
->> U-Boot copy of the devicetree source files for mt8365.
->> 
->> The upstream devicetree is identical to the U-Boot one being removed
->> (other than having more nodes for devices not used by U-Boot and
->> upstream fixed a compatible string in &scpsys, also not affecting
->> U-Boot).
->> 
->> There was one minor glitch with upstream missing a few topckgen macro
->> definitions, so those are added to the clock driver directly as a
->> workaround.
->> 
->> Signed-off-by: David Lechner <dlechner@baylibre.com>
->> ---
->>  arch/arm/dts/mt8365-evk.dts                     | 418 ------------
->>  arch/arm/dts/mt8365.dtsi                        | 840 --------------
->> ----------
->>  board/mediatek/mt8365_evk/MAINTAINERS           |   1 -
->>  configs/mt8365_evk_defconfig                    |   3 +-
->>  drivers/clk/mediatek/clk-mt8365.c               |   4 +
->>  include/dt-bindings/clock/mediatek,mt8365-clk.h | 375 -----------
->>  6 files changed, 6 insertions(+), 1635 deletions(-)
->> 
-> 
-> Thanks for your observation!
-> However, there are some basic checks should be ran and 
-> please keep in mind before you send the patch.
-> 
-> 1. Please always put the Maintainers and Reviewers (run
-> ./script/get_maintainer.pl) in "To:" when you
-> send the patch.
-> Otherwise reviewers might simply filter mail to the other folders 
-> in mail client and skip it.
 
-I used `b4 prep --auto-to-cc` and this is the default way it handles it. I can
-put everyone as To: next time.
 
+On 12/5/25 1:10 PM, Primoz Fiser wrote:
+> Enable standard boot for the phyCORE-i.MX93 board and use it as a new
+> default. Add required standard boot variables to the environment, while
+> removing old boot scripts and now unnecessary environment variables.
+> Adjust variables according to the requirements of PHYTEC ampliphy-boot
+> distro-boot. Last but not least, order environment vars by alphabet and
+> run 'make savedefconfig' to resync defconfig.
 > 
-> 2. Please always run ./script/checkpatch.pl and check errors 
-> before send out the patch.
+> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 
-I did run this and did not get these errors. I can see that your email server
-has modified the email by adding "External email : Please do not click links
-or open attachments until you have verified the sender or the content.". I
-believe that your email server has also changed it to Windows line endings
-during this process.
+Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
 
-> I've download this patch (.mbox) from evolution and found 
-> the following errors must be fixed.
-
-You should be able to get an unmodified version of the patch from:
-
-https://lore.kernel.org/u-boot/20251125-arm-dts-mediatek-switch-mt8365-to-of_upstream-v1-1-707eee6dfdbc@baylibre.com/raw
-
+> ---
+> Changes in v2:
+> - remove bootcmd from env by not removing CONFIG_BOOTSTD_DEFAULTS and
+>    CONFIG_USE_BOOTCOMMAND from the defconfig
 > 
-> ERROR: DOS line endings
-> #1809: FILE: configs/mt8365_evk_defconfig:8:
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"mediatek/mt8365-evk"^M$
+> Link to v1: https://lore.kernel.org/all/20251204080744.3868067-1-primoz.fiser@norik.com/
 > 
-> ERROR: DOS line endings
-> #1815: FILE: configs/mt8365_evk_defconfig:14:
-> +CONFIG_OF_UPSTREAM=3Dy^M$
+>   arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi | 16 +++++
+>   board/phytec/phycore_imx93/phycore_imx93.env  | 68 ++-----------------
+>   configs/imx93-phycore_defconfig               | 10 ++-
+>   3 files changed, 30 insertions(+), 64 deletions(-)
 > 
-> ERROR: patch seems to be corrupt (line wrapped?)
-> #1828: FILE: drivers/clk/mediatek/clk-mt8365.c:14:
-> 
-> 
-> ERROR: DOS line endings
-> #1829: FILE: drivers/clk/mediatek/clk-mt8365.c:15:
-> +/* Missing topckgen clocks definition in dt-bindings */^M$
-> 
-> ERROR: DOS line endings
-> #1830: FILE: drivers/clk/mediatek/clk-mt8365.c:16:
-> +#define CLK_TOP_CLK26M         141^M$
-> 
-> ERROR: DOS line endings
-> #1831: FILE: drivers/clk/mediatek/clk-mt8365.c:17:
-> +#define CLK_TOP_CLK32K         142^M$
-> 
-> ERROR: DOS line endings
-> #1832: FILE: drivers/clk/mediatek/clk-mt8365.c:18:
-> +^M$
-> 
-> total: 7 errors, 2 warnings, 0 checks, 36 lines checked
-> 
-> Best regards,
-> Macpaul Lin
-> 
-> ************* MEDIATEK Confidentiality Notice ********************
-> The information contained in this e-mail message (including any 
-> attachments) may be confidential, proprietary, privileged, or otherwise
-> exempt from disclosure under applicable laws. It is intended to be 
-> conveyed only to the designated recipient(s). Any use, dissemination, 
-> distribution, printing, retaining or copying of this e-mail (including its 
-> attachments) by unintended recipient(s) is strictly prohibited and may 
-> be unlawful. If you are not an intended recipient of this e-mail, or believe 
-> that you have received this e-mail in error, please notify the sender 
-> immediately (by replying to this e-mail), delete any and all copies of 
-> this e-mail (including any attachments) from your system, and do not
-> disclose the content of this e-mail to any other person. Thank you!
-> 
+> diff --git a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+> index 0c8d0ba9693f..646b617949d6 100644
+> --- a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+> +++ b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+> @@ -30,6 +30,22 @@
+>   		ethernet1 = &eqos;
+>   	};
+>   
+> +	bootstd {
+> +		bootph-verify;
+> +		compatible = "u-boot,boot-std";
+> +
+> +		filename-prefixes = "/", "/boot/";
+> +		bootdev-order = "mmc0", "mmc1", "ethernet";
+> +
+> +		rauc {
+> +			compatible = "u-boot,distro-rauc";
+> +		};
+> +
+> +		script {
+> +			compatible = "u-boot,script";
+> +		};
+> +	};
+> +
+>   	firmware {
+>   		optee {
+>   			compatible = "linaro,optee-tz";
+> diff --git a/board/phytec/phycore_imx93/phycore_imx93.env b/board/phytec/phycore_imx93/phycore_imx93.env
+> index 7b0a90e64472..4a5e5bfaee38 100644
+> --- a/board/phytec/phycore_imx93/phycore_imx93.env
+> +++ b/board/phytec/phycore_imx93/phycore_imx93.env
+> @@ -1,70 +1,12 @@
+>   /* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+>   
+> -#include <env/phytec/rauc.env>
+> -#include <env/phytec/overlays.env>
+> -
+> -bootcmd=
+> -	mmc dev ${mmcdev};
+> -	if mmc rescan; then
+> -		if test ${doraucboot} = 1; then
+> -			run raucinit;
+> -		fi;
+> -		if run loadimage; then
+> -			run mmcboot;
+> -		else
+> -			run netboot;
+> -		fi;
+> -	fi;
+> -image=Image
+> +boot_script_dhcp=net_boot_fit.scr.uimg
+>   console=ttyLP0
+>   fdt_addr_r=0x90000000
+> -fdtoverlay_addr_r=0x900c0000
+> -bootenv_addr_r=0x90500000
+>   fdtfile=CONFIG_DEFAULT_FDT_FILE
+> +fdtoverlay_addr_r=0x900c0000
+>   ip_dyn=yes
+> +kernel_addr_r=0x88000000
+> +nfsroot=/srv/nfs
+>   prepare_mcore=setenv optargs "${optargs} clk-imx93.mcore_booted"
+> -mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+> -mmcpart=1
+> -mmcroot=2
+> -mmcautodetect=yes
+> -mmcargs=setenv bootargs console=${console},${baudrate} earlycon
+> -	root=/dev/mmcblk${mmcdev}p${mmcroot} ${raucargs} rootwait rw ${optargs}
+> -loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
+> -loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
+> -mmcboot=
+> -	echo Booting from mmc ...;
+> -	if test ${no_bootenv} = 0; then
+> -		if run mmc_load_bootenv; then
+> -			env import -t ${bootenv_addr_r} ${filesize};
+> -		fi;
+> -	fi;
+> -	run mmcargs;
+> -	if run loadfdt; then
+> -		run mmc_apply_overlays;
+> -		booti ${loadaddr} - ${fdt_addr_r};
+> -	else
+> -		echo WARN: Cannot load the DT;
+> -	fi;
+> -nfsroot=/nfs
+> -netargs=setenv bootargs console=${console},${baudrate} earlycon
+> -	root=/dev/nfs ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp ${optargs}
+> -netboot=
+> -	echo Booting from net ...;
+> -	run netargs;
+> -	if test ${ip_dyn} = yes; then
+> -		setenv get_cmd dhcp;
+> -	else
+> -		setenv get_cmd tftp;
+> -	fi;
+> -	if test ${no_bootenv} = 0; then
+> -		if run net_load_bootenv; then
+> -			env import -t ${bootenv_addr_r} ${filesize};
+> -		fi;
+> -	fi;
+> -	${get_cmd} ${loadaddr} ${image};
+> -	if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
+> -		run net_apply_overlays;
+> -		booti ${loadaddr} - ${fdt_addr_r};
+> -	else
+> -		echo WARN: Cannot load the DT;
+> -	fi;
+> +scriptaddr=0x83500000
+> diff --git a/configs/imx93-phycore_defconfig b/configs/imx93-phycore_defconfig
+> index 4c952e966d1a..ac719372b411 100644
+> --- a/configs/imx93-phycore_defconfig
+> +++ b/configs/imx93-phycore_defconfig
+> @@ -5,10 +5,10 @@ CONFIG_SYS_MALLOC_LEN=0x2000000
+>   CONFIG_SYS_MALLOC_F_LEN=0x20000
+>   CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_ENV_SOURCE_FILE="phycore_imx93"
+>   CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_PHYTEC_SOM_DETECTION=y
+>   CONFIG_PHYTEC_EEPROM_BUS=2
+> -CONFIG_ENV_SOURCE_FILE="phycore_imx93"
+>   CONFIG_ENV_SIZE=0x10000
+>   CONFIG_ENV_OFFSET=0x700000
+>   CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
+> @@ -33,6 +33,9 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+>   CONFIG_SYS_MEMTEST_END=0x90000000
+>   CONFIG_REMAKE_ELF=y
+>   # CONFIG_ANDROID_BOOT_IMAGE is not set
+> +CONFIG_FIT=y
+> +CONFIG_FIT_SIGNATURE=y
+> +CONFIG_BOOTSTD_FULL=y
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_OF_SYSTEM_SETUP=y
+>   CONFIG_DEFAULT_FDT_FILE="oftree"
+> @@ -52,6 +55,9 @@ CONFIG_SPL_I2C=y
+>   CONFIG_SPL_POWER=y
+>   CONFIG_SPL_WATCHDOG=y
+>   CONFIG_SYS_PROMPT="u-boot=> "
+> +# CONFIG_CMD_BOOTDEV is not set
+> +# CONFIG_CMD_BOOTMETH is not set
+> +# CONFIG_CMD_BOOTSTD is not set
+>   CONFIG_CMD_ERASEENV=y
+>   CONFIG_CMD_NVEDIT_EFI=y
+>   CONFIG_CRC32_VERIFY=y
+> @@ -149,5 +155,7 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1fc9
+>   CONFIG_USB_GADGET_PRODUCT_NUM=0x0152
+>   CONFIG_CI_UDC=y
+>   CONFIG_ULP_WATCHDOG=y
+> +# CONFIG_RSA is not set
+> +# CONFIG_SPL_SHA256 is not set
+>   CONFIG_LZO=y
+>   CONFIG_BZIP2=y
 
