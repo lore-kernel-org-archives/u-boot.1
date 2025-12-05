@@ -4,97 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0856D3398D
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 16:27:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67E5DD33992
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 16:34:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5929A84203;
-	Fri,  5 Dec 2025 17:27:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F2B3F84221;
+	Fri,  5 Dec 2025 17:34:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t0XnYNX+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xNj4iI2w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 054D284227; Fri,  5 Dec 2025 17:27:08 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 8314D83655; Fri,  5 Dec 2025 17:34:49 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D33B58404A
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 17:27:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFB9683849
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 17:34:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-3ec47e4c20eso1625536fac.1
- for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 08:27:05 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-47118259fd8so21268265e9.3
+ for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 08:34:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764952024; x=1765556824; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tu8WqrA9hym8RSWqd25gDN9sJChnCFO2kQFpcGYNM8o=;
- b=t0XnYNX+hYo0s2XTquaQYiH0HIk72lk1xdRL2sakF2Cb5bnEcLkqhjLidGk/uiXmXS
- uiM0DZMYHsfp/TooLqpB1yk8EuWgqJspHRd06Kt7oqIt5FiGaNeEW4itL2Y2kdN4qQU5
- Zw0UnlXChGMo62D+glxsNW7sCKwd52Y6W2UXI=
+ d=linaro.org; s=google; t=1764952486; x=1765557286; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=Dg8PYcVybaPoOZZ9cizd4h779gJN0LycMKCnQ2LrsTI=;
+ b=xNj4iI2wKxhQDs4lnvYtCDI7da8DQcbBGpIex4utF+5/gjrviLt4NeLeB9PjLen4Sm
+ W+lFXw3O1/i9Nc0eOf7n8cbWijBMwBsr5Qi2uUlfHqQ60/CsTpyKVf8YuIF90MgbCDe4
+ mh0FMx7Cy7NIzsAZuInndci8KIhs1iXI2MwL639oOYY1rmk5Q0y2WpMpafFVgw9FdXWO
+ gL55DfV4SeyC5gXHHfwYLwwHsOmO/rJ//D1j4w9HW4leUZQbioJREvKx6loChaK2I++T
+ qoOPZh9HOYmY+NoDBeYz1FxwDcD4hEwnq2/nAyVhEbNAc031T5kriVHljbmGzYsNLZnd
+ pYoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764952024; x=1765556824;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Tu8WqrA9hym8RSWqd25gDN9sJChnCFO2kQFpcGYNM8o=;
- b=cX3XUQTvq2b3jxtLzDC1N6yrptBRTGNRFwGHJ8hk+D5JJdw/MjMrtvrK2xgx2TL+ef
- 5AI6+XWwkDx5YeTLSJbQ9y2kKV6kI4D9WfRKu95yTbG4a4RRJYeVWDXJb2BUYhhfeiX0
- kDHsBymc9LJKMJfW1raYYeZNxGJGlU+SGgXNjKT1RRaA3G5whocK92bP5e+2ckU/m0rW
- Lv/YbtVEYn2Yfx8XI0xmwHuOEo4XA5Tvp8se0D9osz7yVkyriXNtH3KBoXxV/OVkkRD5
- giVU6krRgep+BoPxVRPgfzS/bBQeh2JcfdUwSr1+DTeHA2HyCPvqr5OFje3ILTHswMfH
- Mvug==
+ d=1e100.net; s=20230601; t=1764952486; x=1765557286;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Dg8PYcVybaPoOZZ9cizd4h779gJN0LycMKCnQ2LrsTI=;
+ b=vcaujNB5FfJNkhIidunbJ1fFIzToKJH/cYC5guzYHw7LET09pHWH8nxTTUmNiFO3L7
+ /wJ3wgP+SFryW802i5gnrKhYPTSz7JYZWT9o0LuVMYULtyVH2spIvoLxEbqhuZb1K7w/
+ r1nqjFLAzfhZe4BDy2HDd44Sch2cEe86XPYRQKblu8HVFUAmhem7XRAeRYhoHQVXjK9n
+ 5+E0zrMLTmAKtFRz5wAdKEifC73Tn5ghL5rDYemp0RbJBENqKMP1Upsce+FzVz6H0RNB
+ sRDwUdA2K0Q9UQIlZ3MnC+iHjwQa/hBPJfIeMH1uv+U3rK1QOm6oy4y7tb5JI1CX++Es
+ KwLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXtV4ErmIlF1pKWfwQXx7RQiehTn77d6BorjMFWmam3DG1PKdTF+3IS2hIz1r4xBG/DU6QJeSo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyibm30W+qQy5PvUC2EH3Cb6zr/XOUK3YZNY0rLVU5pJmxTT5JI
- Y4jyaRLP3mksNOvRMmj44YUsjwJ95cyQFvWemRZElMZeNns3MBWxhnppSpmr5HwhN5g=
-X-Gm-Gg: ASbGnctnECgP2tFoScREjavdzjuYV6Y5QjzQ8f4JfyJnc0VQINHGXbalQEwlNgFHeR3
- 5RAIGKFCYgqVNA8H0KKpibi0Vc6gQM2bT344SZvdgHKuxTGzNqdsqCDDsfR9YTtPCXJtKESfOAx
- KMjqdIj9zcYM6I4VZaiQtXVCayHXvuf9hcXxswIXqkkxoZBygxzGYwcjfNlEljxtist+gGij1aM
- adak2Cmf3Shn4g19BIBKmXNO727AuF9U3izlXEzzzgWBvlvcCBDTr3yWwrpgFNN4lLuuQs2k9Bb
- WJj4VoVPd3JJ+DnRgBkLPZ+yCVQJmRWPHcpx7cgR0s3Au+DzkhSxjz8rcL++zYQxLKTWQkEyWwH
- RbNvF4kRivF4oObnGy6g8Vu64iHi77irVCXWSVk3tCmFP7PpFF+cKSExwL8h+ExY6w9CjYLeQXu
- zp0wmVA2BvJmiaE1ABFpT8iAVQKDHm4Lfs74FUeydCd0JvlW3O
-X-Google-Smtp-Source: AGHT+IG+Dup+PsTnXQI2ARZfbIpfOrbB+EnELl6DzUSJsrN2Hh9eMJrlqHUUn0u478fdjHR8ota/eA==
-X-Received: by 2002:a05:6870:c18c:b0:3d2:c24:30fc with SMTP id
- 586e51a60fabf-3f169451704mr6836728fac.48.1764952024442; 
- Fri, 05 Dec 2025 08:27:04 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f50aaa0fdasm3636773fac.9.2025.12.05.08.27.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Dec 2025 08:27:04 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, Paul Burton <paulburton@kernel.org>, 
- Alexander Graf <agraf@csgraf.de>, Bin Meng <bmeng.cn@gmail.com>, 
- =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Heiko Schocher <hs@nabladev.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Richard Weinberger <richard@nod.at>, 
- Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
-References: <20251123225711.227016-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 00/19] test: let UNIT_TEST imply CONSOLE_RECORD
-Message-Id: <176495202271.2280840.16157063354156916683.b4-ty@konsulko.com>
-Date: Fri, 05 Dec 2025 10:27:02 -0600
+ AJvYcCUzCLq1UQ8FxsUPWW4YFu7kQ5gD0Jug3W4vguiVuH/6nNIrsKMS0W4PcGFACUyxU4pU7syIAq8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxyCr/kAXGspPbCVlwxal3K5miYkVF5RWTYAzC6qYnPDo36O/lV
+ gORMx788dO3iTb4hzMOusSno1ssC8aDCPmY13jkDVsLgS5ImBqv7nrBbxirLiFQmxIU=
+X-Gm-Gg: ASbGncsITfDRsmt4FAJAK752buEQp6LJqLXSd6+GjOHAFQJ/EE1+jDNDYr5hSS3g8NV
+ XYpCdiGKNe4AYS1I0ekDCyJsCuUntXZteAf2qxbixx47TzEZi9eNLLWzg6p9ZswAgjy527lDdRL
+ CD2vYt1cU4+F2Zbyw+ZgviR+Gy1zrxcTLZIslAhE+4s6sTZyO8YOY8W3MK4/F34XFttEuuO0/3Y
+ 1qRgApRRD+EiPaP7zn0nZLpyeDUSb9L9Yb9IJlXD1BvNFheAcbamq/1NVX/uNRXO4PbLCCd/YQp
+ +ZQz1NV0MD5OvCVpst5LfT6T2pwkhEljbN5duOo5tbc2UGtWBZdeEdK39euqmVM155UleZIczP8
+ qaV/qn4ifLcJRCcCNm1WvQ3mcb/YVLOTwQQqunccBK5660jUZhLxiqqqDw5cVXKsH8eNHdAHrKV
+ 0DjlUMeLS8U/mxZGIWsBxAPI9CshnwLeQiJA7s1ibiMi30qeNXGYonetzEQBbubEc=
+X-Google-Smtp-Source: AGHT+IGq18mLafI6z707NQAe71/Vjbxy+jf0hmi/vMA8U8NemKc9ia4HrHm8WgGSPEAHw24aAhkQ2A==
+X-Received: by 2002:a05:600c:c494:b0:477:7d94:5d0e with SMTP id
+ 5b1f17b1804b1-4792f3954e9mr64769005e9.27.1764952486025; 
+ Fri, 05 Dec 2025 08:34:46 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3d9:2080:b735:1b21:d481:e64e?
+ ([2a01:e0a:3d9:2080:b735:1b21:d481:e64e])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47930cb6a96sm89672955e9.15.2025.12.05.08.34.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Dec 2025 08:34:45 -0800 (PST)
+Message-ID: <b2c5b0ac-04d3-44ee-9b70-4b123eaffaa6@linaro.org>
+Date: Fri, 5 Dec 2025 17:34:44 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] MAINTAINERS: update my email address
+To: Linus Walleij <linusw@kernel.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, David Feng <fenghua@phytium.com.cn>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20251205-linusw-kernel-org-v2-1-40c8652749b2@kernel.org>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20251205-linusw-kernel-org-v2-1-40c8652749b2@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,63 +126,118 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 23 Nov 2025 23:56:52 +0100, Heinrich Schuchardt wrote:
-
-> Many C unit tests are not executed if CONFIG_CONSOLE_RECORD is not set.
-> Hence Tom suggested to let UNIT_TEST imply CONSOLE_RECORD.
+On 12/5/25 17:01, Linus Walleij wrote:
+> I am moving over to using my email address at kernel.org.
+> Change this in all the affected MAINTAINERS files.
 > 
-> The first patch makes the skipped C unit tests visible.
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> Signed-off-by: Linus Walleij <linusw@kernel.org>
+> ---
+> Changes in v2:
+> - Collect Quentin's ACK.
+> - Also add a small .mailmap entry to push mail to the new address.
+> - Link to v1: https://lore.kernel.org/r/20251205-linusw-kernel-org-v1-1-a36e342c4b97@kernel.org
+> ---
+>   .mailmap                            | 1 +
+>   MAINTAINERS                         | 4 ++--
+>   board/armltd/integrator/MAINTAINERS | 2 +-
+>   board/armltd/vexpress64/MAINTAINERS | 6 +++---
+>   board/broadcom/bcmns/MAINTAINERS    | 2 +-
+>   5 files changed, 8 insertions(+), 7 deletions(-)
 > 
-> The rest of the series deals with hidden bugs in our tests.
+> diff --git a/.mailmap b/.mailmap
+> index 04daa274ef31..0e01452a70cb 100644
+> --- a/.mailmap
+> +++ b/.mailmap
+> @@ -75,6 +75,7 @@ Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <j
+>   Kalyani Akula <kalyani.akula@amd.com> <kalyani.akula@xilinx.com>
+>   Klaus Goger <klaus.goger@cherry.de> <klaus.goger@theobroma-systems.com>
+>   Masahisa Kojima <kojima.masahisa@socionext.com> <masahisa.kojima@linaro.org>
+> +Linus Walleij <linusw@kernel.org> <linus.walleij@linaro.org>
+>   Love Kumar <love.kumar@amd.com> <love.kumar@xilinx.com>
+>   Lukasz Majewski <lukma@denx.de>
+>   Marek Behún <kabel@kernel.org> <marek.behun@nic.cz>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index cddeca734ffb..1789f023631a 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -820,7 +820,7 @@ F:	include/linux/soc/ti/
+>   
+>   ARM U8500
+>   M:	Stephan Gerhold <stephan@gerhold.net>
+> -R:	Linus Walleij <linus.walleij@linaro.org>
+> +R:	Linus Walleij <linusw@kernel.org>
+>   S:	Maintained
+>   F:	arch/arm/dts/ste-*
+>   F:	arch/arm/mach-u8500/
+> @@ -1648,7 +1648,7 @@ F:	include/scmi*
+>   N:	scmi
+>   
+>   SEAMA
+> -M:	Linus Walleij <linus.walleij@linaro.org>
+> +M:	Linus Walleij <linusw@kernel.org>
+>   S:	Maintained
+>   F:	cmd/seama.c
+>   F:	doc/usage/cmd/seama.rst
+> diff --git a/board/armltd/integrator/MAINTAINERS b/board/armltd/integrator/MAINTAINERS
+> index 8af765eaebc8..a228fc3daec8 100644
+> --- a/board/armltd/integrator/MAINTAINERS
+> +++ b/board/armltd/integrator/MAINTAINERS
+> @@ -1,5 +1,5 @@
+>   INTEGRATOR BOARD
+> -M:	Linus Walleij <linus.walleij@linaro.org>
+> +M:	Linus Walleij <linusw@kernel.org>
+>   S:	Maintained
+>   F:	board/armltd/integrator/
+>   F:	include/configs/integratorcp.h
+> diff --git a/board/armltd/vexpress64/MAINTAINERS b/board/armltd/vexpress64/MAINTAINERS
+> index c38ab520c521..58ab5db7e4a2 100644
+> --- a/board/armltd/vexpress64/MAINTAINERS
+> +++ b/board/armltd/vexpress64/MAINTAINERS
+> @@ -1,18 +1,18 @@
+>   VEXPRESS64 PLATFORM
+>   M:	David Feng <fenghua@phytium.com.cn>
+> -M:	Linus Walleij <linus.walleij@linaro.org>
+> +M:	Linus Walleij <linusw@kernel.org>
+>   M:	Peter Hoyes <Peter.Hoyes@arm.com>
+>   S:	Maintained
+>   F:	board/armltd/vexpress64/
+>   F:	include/configs/vexpress_aemv8.h
+>   
+>   VEXPRESS_AEMV8A_SEMI BOARD
+> -M:	Linus Walleij <linus.walleij@linaro.org>
+> +M:	Linus Walleij <linusw@kernel.org>
+>   S:	Maintained
+>   F:	configs/vexpress_aemv8a_semi_defconfig
+>   
+>   JUNO DEVELOPMENT PLATFORM BOARD
+> -M:	Linus Walleij <linus.walleij@linaro.org>
+> +M:	Linus Walleij <linusw@kernel.org>
+>   S:	Maintained
+>   F:	configs/vexpress_aemv8a_juno_defconfig
+>   
+> diff --git a/board/broadcom/bcmns/MAINTAINERS b/board/broadcom/bcmns/MAINTAINERS
+> index 63c6d8bb4aca..4972d6cc9343 100644
+> --- a/board/broadcom/bcmns/MAINTAINERS
+> +++ b/board/broadcom/bcmns/MAINTAINERS
+> @@ -1,5 +1,5 @@
+>   BCMNS BOARD
+> -M:	Linus Walleij <linus.walleij@linaro.org>
+> +M:	Linus Walleij <linusw@kernel.org>
+>   S:	Maintained
+>   F:	board/broadcom/bcmns/
+>   F:	configs/bcmns_defconfig
 > 
-> [...]
+> ---
+> base-commit: c98b6a6dcd1fc7bcba081fc2353954e33de5053c
+> change-id: 20251205-linusw-kernel-org-f2cbcfa6d34b
+> 
+> Best regards,
 
-Applied to u-boot/next, thanks!
-
-[01/19] test: Let pytest indicate skipped C unit tests
-        commit: c448c933b9c2f55c6eff996fcd281c40e65d6eda
-[02/19] test: cmd/bdinfo: consider ARM architecture specific info
-        commit: 3144be7f405879964d7a300d869e726ea0426fc5
-[03/19] test: print_display_buffer must consider 64bit support
-        commit: ae7bcf6067113c3fcb46ad918517f7fb677e74f2
-[04/19] test: don't test for CONFIG_UNIT_TEST twice
-        commit: 3f8cefc0d4e80aa7bcfb06549f7df6926790a3f7
-[05/19] test: print_do_hex_dump test depends on HEXDUMP
-        commit: a63bd541d6136d24f5af22830289b57841b6d086
-[06/19] test: bdinfo: correct expected X86 arch info
-        commit: 728c717268278b6288a46d6016a2836681bbab1f
-[07/19] test: cmd_exit_test depends on CONFIG_HUSH_PARSER
-        commit: 1acf7ebf501d492c35606e473b2194f793498585
-[08/19] test: do not assume memory size 256 MiB in cmd_test_meminfo
-        commit: 85713aee969c63a3418f95dad4b47cb6f88b11f4
-[09/19] ppce500: increase SYS_MALLOC_F_LEN to 0x800
-        commit: 24bf56f36d00bd7c2b46a6dd7e9e7cef5fc15fbd
-[10/19] test: the cmd/font test requires the sandbox
-        commit: 061cdb247cb41decbc598d301cbb20131948f06b
-[11/19] test: correct comments in test/cmd/font.c
-        commit: 0978f3287c1b43ebac6f5f1e49fdf07182d55a60
-[12/19] test: fix bdinfo_test_all boot_params expectation
-        commit: 7dbcc4d806cce156dd9c00f535fb9cb0020b6e87
-[13/19] malta: increase SYS_MALLOC_F_LEN and SYS_MALLOC_LEN
-        commit: ad7f706ec79628bf20f4511cb803b99b0e1751c3
-[14/19] test: consider endianness in print_display_buffer
-        commit: 44217491465d95124bd5b11e4b3a781348b47fe8
-[15/19] test: fix cmt/msr test
-        commit: 6b0997c98c0e7c46e25ff3fc8a7d1142ce71bcbb
-[16/19] test: relax cread_test time constraint
-        commit: 3338e2e463793425c23acf859438238670a10a11
-[17/19] test: cmd/bdinfo: consider PPC architecture specific info
-        commit: c2ee1e3c4a7924c621f2852713ece0f17495eb08
-[18/19] cmd: fix 'fdt get value'
-        commit: 21fbda84b39a64fe74c1e34e4ff6e070a9ba200e
-[19/19] test: let UNIT_TEST imply CONSOLE_RECORD
-        commit: e3d4ab528693419f809a9dcbbb697a7cd3be7086
--- 
-Tom
-
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
