@@ -4,95 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2BF6D2F7EE
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 12:54:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC23AD2F7EE
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 13:24:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35F92841F4;
-	Fri,  5 Dec 2025 13:54:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 34749841CD;
+	Fri,  5 Dec 2025 14:24:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="CnANy+BD";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="YJ3Rc19t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96BAE84201; Fri,  5 Dec 2025 13:54:54 +0100 (CET)
+ id A57D2841DA; Fri,  5 Dec 2025 14:24:38 +0100 (CET)
 Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FF5C833C6
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 13:54:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BDF7841BC
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 14:24:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=443406b657=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 5B5CQUGY2544273; Fri, 5 Dec 2025 13:54:49 +0100
-Received: from am0pr02cu008.outbound.protection.outlook.com
- (mail-westeuropeazon11013047.outbound.protection.outlook.com [52.101.72.47])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4autdg1gxd-1
+ 5B5DIawo2637385; Fri, 5 Dec 2025 14:24:29 +0100
+Received: from osppr02cu001.outbound.protection.outlook.com
+ (mail-norwayeastazon11013057.outbound.protection.outlook.com [40.107.159.57])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4autdg1m4g-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 05 Dec 2025 13:54:49 +0100 (CET)
+ Fri, 05 Dec 2025 14:24:28 +0100 (CET)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RTi1M5ETxAwy+P4QX3GAzcs+Vpi2+n0zZM9kQ3IKC6E2d+JStrEWjg1X7GMiBqShOTgP2KCJbU40bp3oVFqf8hhnVZ7AJNTpxd7WNWtMcmZaZIxpviYlCk4IHLZoYgIaHOA2IBQt1WqufN5IQaZhmm0aiTcbslUcZn+otYmfztGUCkA2uFE3JIrsqBDYmU1ydvwfwkU/SP/HftHtHZyGQhii71lJ/9SOd2taGSo5TC98OIeQawt4BBzqc5/zzlX3/P86wtF+nd1eEKQoTHZ0QK+Y+hcjTav3lmzYGyBZTO2uNQTiv4CYnzv64cr9V2xo2tHbw1+aaHnFAT841PiC6g==
+ b=u3YxpTZAxID/7zcyV21JXhs99sTHT1ze0QyFql84LKNCv2S8pCyPDJZgZZaSmGR9CYfczpIf3XlSdRlpPfhsoceWOC7UPA1HHS4xxbUQDwWrZwUwHUdU/jLwnSCqBeIal21JibvpwsAJRjrQRFUk0UkBbBxkx6XXkoqAS8Leaulb2BfF2Qe4vMJ7esQmw7TTQW0swBlRDD6okzKdpK2y2rR2reCUKtkW7fQqAzwcifvMBhnONlpCLDEcgvebAHeGq/YEq+KSZaGZ2RKRZ8SA9RCUFUOqoZMBFPnszkbm+V9e1UqpcgqNO0JOxcCO/Os8p+HZcMqBhCSMAADDwl7FxQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xYWpfZ/sGH/rIlISqB2fIlui8r4ViDota0ZIla64nms=;
- b=xIZRv8fyB9I5YYNLYdqnO1+bRv6lveZJbGQpkV2q2A+lw1V+q02u3WZkNNjzwTckGPI7aKF1ce3fNChMpxLjNhCb5+yv14jBVhwU+I+Y0OrSNeyerNgjbsd6WU2nzPXO3RqM/xKjCKaY3TfzqMM6kZ44G6MjHXZSh11mVLCWDvNuCrMa/r42pYD4NFQRuQv+JjlfSJbH3ZAvuFurPbTffoQDv07SGWRRc2EGXrNkHb/swRw4/6cdkna5U0xx0wHl8iWq87UuoJ+LjTeKEw+tliymGDH6E0lbg1akI8SjdxVqWHYwNKbnUs4X1Q7r9L0ngHFmZvSEgee5fhBy3pvk+Q==
+ bh=KCweKlvpnt6SzzLlZyQTXcLrwRYJFkbGlSnKgU47r4U=;
+ b=k4GjIjVolzGKLbpUGAAG6gO7R5ZdGEwDzx1r2feVx6Q4wrzXT3KEdGA2Lyl1bnT4z5gwR+Spd2KAegEBpFOfKB6iqEYQ2Xb5oqHYiWzA2Prg35QO/yJwshjPreWGGuF2s7i1zTgjwdHKpLaXjrqi/BZZqHXjBIYp+Yk6SailjB8ciCOZm6CANeiaPcm5R9FiBApGZ3J5+XBjIDFCB+zFygyzIdSXavlu8nosyYn2pF6YAeO4qKJ+zh/9xPH3Pwn1oxP2rV7CN3fUR6xzxuxmbHx5dMMkJ8aQ3oe9OUtOYgBCcZgfDni8wu8/cB15iij8eyXfffbAE1OXr0pwN3roag==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
+ 164.130.1.60) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xYWpfZ/sGH/rIlISqB2fIlui8r4ViDota0ZIla64nms=;
- b=CnANy+BDiBYGj3hwRIas/kAHWToIgbCv5+lRVNTvTKW/VF7LZVhjy2pAPGNJUs6mYiUR4c4FNCe7B3gp5CuibMusLmSzmNxgvXOCWTXcSZXWTEraU4FcImkzvu3OC5zXznvjXZL+6k8SY78SCw8gYbYCXESaT1xKYwqJbFACjdBB4nkwSao2cAYKo2ZsQvzCGuFx948G/rt3p9K0y/XpU13JH0rEvgr1HEu/SDcaKpAQe9IdFooVKmhSNLGMGPkUpXSvJ0SSyo+HrNPNP2Qd8PwfPLwAZ5N+zPttU02Lr0rmsbAy0T99xAZBaHbxNFKFECjH1qMzRMCn40MOjfzp5A==
-Received: from DU7P195CA0007.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:54d::26)
- by AS2PR10MB6519.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:55b::14) with
+ bh=KCweKlvpnt6SzzLlZyQTXcLrwRYJFkbGlSnKgU47r4U=;
+ b=YJ3Rc19tkKWpHB8jV7PjwYdSLLuhTcJ0rcDaUcyiadYFjUBZyZs+uYtBzAu3XPrm512rB7hpbpjqBWQXmxTrG6jLYds8ZJRWyfVTXwGFeZIiGPBs5fNh9nwX1dKrTbL8ytpVOoO5nKOxPFHuaqdRhS/QeCXFUxiy7Izc7tuIQNembEEkcHnQWMLdG/G7ZzfKQnmemqE8h9QxVM4n8WGiX8/Wn1y0NNOqTfkCGmSRJVr3+gwEBxYptsdJMHLH5P/FkAskzahD5QyNMmWjND3U4uZqsV/cm3iLmlDsCGQ/SHichADzlPizGmYxARDwRcDrhNeoaORYnmG5jIOtQxev5Q==
+Received: from AS4P250CA0017.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:5e3::6)
+ by GV1PR10MB8938.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:1ce::21) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Fri, 5 Dec
- 2025 12:54:44 +0000
-Received: from DU6PEPF0000B61C.eurprd02.prod.outlook.com
- (2603:10a6:10:54d:cafe::3a) by DU7P195CA0007.outlook.office365.com
- (2603:10a6:10:54d::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.11 via Frontend Transport; Fri,
- 5 Dec 2025 12:54:44 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ 2025 13:24:25 +0000
+Received: from AM3PEPF00009B9F.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5e3:cafe::3a) by AS4P250CA0017.outlook.office365.com
+ (2603:10a6:20b:5e3::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.12 via Frontend Transport; Fri,
+ 5 Dec 2025 13:24:24 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DU6PEPF0000B61C.mail.protection.outlook.com (10.167.8.135) with Microsoft
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AM3PEPF00009B9F.mail.protection.outlook.com (10.167.16.24) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9388.8 via Frontend Transport; Fri, 5 Dec 2025 12:54:44 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9412.4 via Frontend Transport; Fri, 5 Dec 2025 13:24:24 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 5 Dec
- 2025 13:55:21 +0100
+ 2025 14:25:02 +0100
 Received: from [10.252.31.202] (10.252.31.202) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 5 Dec
- 2025 13:54:40 +0100
-Message-ID: <41597f9a-767f-43ca-8153-f31acedcff56@foss.st.com>
-Date: Fri, 5 Dec 2025 13:54:39 +0100
+ 2025 14:24:23 +0100
+Message-ID: <24fc65d7-befb-4e8a-9bd6-46edbf87cfa0@foss.st.com>
+Date: Fri, 5 Dec 2025 14:24:22 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: dts: stm32: Add 1 GiB DRAM settings for DH
- STM32MP13xx DHCOR SoM
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20251118231953.578007-1-marek.vasut@mailbox.org>
- <7d765b01-f905-4139-a72d-059f748eba87@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <7d765b01-f905-4139-a72d-059f748eba87@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, marek Vasut
+ <marex@denx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PULL] Pull request for u-boot next / v2026.04 = u-boot-stm32-20251205
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.252.31.202]
@@ -100,79 +95,77 @@ X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU6PEPF0000B61C:EE_|AS2PR10MB6519:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4fa4ac84-0adf-44f0-da77-08de33fd76bc
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9F:EE_|GV1PR10MB8938:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2e47d58e-906e-49d3-770d-08de34019bb1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?T1ZMc3JFR2d5TGxiWm84QUVDd1p2R1U4bU1SMllIVVBOWmh1VUFwTEFoNGVY?=
- =?utf-8?B?RjNuaGVabHRLbzhWRURCWFVVVWFGWnNvYzl6aU1tZUxmNC9KVEE2Z3VoVWo3?=
- =?utf-8?B?cWFNZVgwQzhZTXF3UFlpeGc5SFhhd1dPS29vV1Y5Y3VRU3hqTlUwTEdqRHY1?=
- =?utf-8?B?Wm5Ick9IVXpaSDNvd1diRG03L3Uzczh6bW1ZS0c3T0dZbVZvb2FjWVV6Ynpl?=
- =?utf-8?B?dlBSdTVWT2xZamFhN3FueWlCUDFCODZ1dWVJYTBMZlgwK3c5SCsrMDFOUHZE?=
- =?utf-8?B?L08yVmJFMXV2UzhGeGRMaVdVK3htb0tTRmQweVh3RzUvZUxzT3RGUzlmdm9X?=
- =?utf-8?B?NUMreDRoVy8vbEliS0ttQmR0SkVLRmlJRDlwR3hIdlZDN1dDb09LVlpFdGxM?=
- =?utf-8?B?Z1RNalZLM2xBMnBWN2w0VzdVU1ZuR05WZnh1aStLRWRkRUdINUtMN25hcDdX?=
- =?utf-8?B?UGZucENUZkNYZ3RYSnE1allvdy8yaUtPNDgwUis2aktDRFowQXpSYnhkd2gz?=
- =?utf-8?B?OGZ3d2U4UktYaXp3SDBqYzJKOTcyaGE0a0R5anAzdDlrbWRyRDBWeUdQRHZB?=
- =?utf-8?B?cmRVVGFyVitXOE1DSHJ2ZTk0bTZJYy9JaXhySEhRT3lMTk1jUnh1QnRGbHJX?=
- =?utf-8?B?T1NGWWtHdG9UNVg4MklHK0VhZDU1QkVNWW82VUU5NVdaMHRLOWNLYWRRb0k2?=
- =?utf-8?B?a3lMQTJVN0xDWTZLempzbTN2dXdEbHAyTzk4eTlOSFVZT05zeXZDaGRsdXBJ?=
- =?utf-8?B?YXZjQ0h4L1dTY0k3NTN3bXBBaFQ0UVd4bHpGQ0xIRnJNT3VVSDBneG0zb1Ny?=
- =?utf-8?B?RjlEZ3RYb0NBbnlqNzByZThjNW5YMHIzYm5CMXpSMy9LTndyNmxKNnpzcmND?=
- =?utf-8?B?UEhVczZSSS9iS1Y3akg3cGpvV2pWbE1Ubzhmanp6ckxiM0VOTGNnV2dpWTV1?=
- =?utf-8?B?WUpNZnF5bXhvTWhNcWp0Y28xL2kxZC9HU05jVFNGZ3hpRmJUWTY1VldkVVM1?=
- =?utf-8?B?citidXczeTZ1c2RNN2FCZ3VHTlFmSFVZekRSYVd2QUlNR3hNZWZWelZMZUhH?=
- =?utf-8?B?VDkxQytuVXNBbE5SWmwzekliQUhsYUJjZllySmFFNlRvMUZLMEI0MUM4YW5a?=
- =?utf-8?B?ZHBKOVdWdnB5NE9ncVkxVUpETnlnZGY2TWdobUNGRmpuaHdQaTdqc0VXMkpa?=
- =?utf-8?B?MU1CNWNPcUJKclEzRHJYQjlsWTRuT2VHd0xhWjZEVnJFcHY2Z1VRa2tCTUhM?=
- =?utf-8?B?OVJZOGFFWWdXTDg3akdXdkh5SCtsMkJFV3VVOHVuT2lLQ1E2ZXZUWG41TzhV?=
- =?utf-8?B?eXkwNlMrK3BwR1JhcFdCS3RONnJYZEd1eTZCQ3F2UEdiYzZlMjlETmpFakpM?=
- =?utf-8?B?d3JlTlgzWGtkN0MxdjMrWi9Cb28zeXBWR2JLWGkyT3VQamNyeEdNbTYzeEg3?=
- =?utf-8?B?Y0lBWElhRHg1LzNDdHQ5QlNGNlFydnN5Tkp6R3JRMG5oQmgreE9Lcnp6bXov?=
- =?utf-8?B?WC9mdXMvQ1o1T2I4eitseGNtcHFvVzBqeVROM2Nhdyt2NUlOQ2hNZDdQNi81?=
- =?utf-8?B?VHhVZWExWkJwTVFkT3VCSzNsbEpGK1ZyNlVGWFVmRTd0Z3VQVEtaZGt6QzQz?=
- =?utf-8?B?azJobmZHMTZoY1VHcGN2ZmZ5K3ZZU3dUeHZSNEk1ZEhaOW10QkdNcVg2Q3cz?=
- =?utf-8?B?MW90aTFpTzJBdVhZZ3hrTCtYaWxTQnZsZUNweFpHbnQ0K2UyaUZFYW0zRVMy?=
- =?utf-8?B?SjBFNUUyaVc1VmVkcFk3L0g1QmI5eGZPZVA1M3ZNcHluWkVtVmk5WWdqSW84?=
- =?utf-8?B?bi9wZng4L2pLMlRqNmVIVmoranJicHp3dnFRTVdpS25qS2Y2QzBBTUM1OE1w?=
- =?utf-8?B?cU1jZHpZanJaVENTaTV1YnRaYlhMTWNqUGtFMUNKRUFwdWtPcXpBK1Q0NVdS?=
- =?utf-8?B?eTBlKzl5dFJKNFdiUFhOY245UnBJdzk4dUpScEhhUlg4eTQwYlJlQXNZQXhY?=
- =?utf-8?B?bTFVNXl4bGlMTTVqWnlxaG03VXZzOFhaamkxMVVvZWRwaUxrV3JaODA5VXZW?=
- =?utf-8?B?L0dmUTl0WVhJZGxncWJ0UDhieWVMZ0lNNjh2V3JJMk5RRmlrY1FZVUp3NXZC?=
- =?utf-8?Q?aRY8=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|1800799024|82310400026|36860700013|376014|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TGxNZERnRm1lNWJLSEEydFB4SU04WWxoaVNrRytUcEk0K1VHSis5QmVya1E4?=
+ =?utf-8?B?ZkI4cVE5SzhDYmo4OEdic1IrMlJtY3pGdGhUTTNYNTJxMzJURXJWdEZZUkk5?=
+ =?utf-8?B?cjh2ckFQcll2MlFmRUhFU2ZKMGZQa1hVMEpkQ1JnSk9hdTJYSTVNK0VMcDFH?=
+ =?utf-8?B?MG5teTg5MFZlRGFrZEFCcDloUkgvcElNSDlaZGFvcGwzU3BaT2RFZENGUXg3?=
+ =?utf-8?B?TTlNVTRmTG9VLzEwSGRnQzZWTUs3OTg0em9IMUhFMHhtN25PK0FiVHllY0o3?=
+ =?utf-8?B?b1h4cUN1WDhVV0tHUDMzR2VVQmpKVE95bWh1MGtqcS9abzkrbkN4S1kzenNy?=
+ =?utf-8?B?MS9BckdaS2NvWEhHcHBJTHk5R2Q3RnBEcVRZOWNnZHlPd0dNV3d0c2phMkNp?=
+ =?utf-8?B?dzhNQmJJWHkwZzIrTEFtbU11dU0wZlF1d3ZyYlVuMmNlL3JDVkYvZDMvcExZ?=
+ =?utf-8?B?UUIwV1gxUm1vYi9CQVJEVUptNlBFcVIrZGx0Q3JCRmJEcFRsSTRsekpiZlBq?=
+ =?utf-8?B?eHBpWk1ITW02a29iN2pIeFRaMFdtKzd4eW9lMFBSOU5EWk9wSEhXZVlkMDgy?=
+ =?utf-8?B?UTRMUVVGbzYrcU5JaVFZK1hkNTRCTmZ4TE9rbzVCbnlTTStvN0Zydy8yMnlI?=
+ =?utf-8?B?NVR3anVDc3FBVUNSSjkvdE03NCtlY200QURqVS9BWERYaE9UdWx2S2dEZ0dE?=
+ =?utf-8?B?c0pYUFRJQ2lFbzJBWENhUjRKVnlnb0hnaHdqQ1BPK2w2OUNTUG5qV0t2RS9W?=
+ =?utf-8?B?d2JscGMvbUFMYWFUTktlazNuN3ZkS1ZJZEZLSGdiYVJZeE9JOEIyMUsvN2ww?=
+ =?utf-8?B?NlRlek81YmVOQzcrL2N6S3NQblI1R25wT0lrVzNSU2Fob0VHSzZNT3gyYnlw?=
+ =?utf-8?B?L1YzZ3dGVDgxRXdyRTdVblk5aCtMbXB1WG9kV1VpcElvaU1ZSldFMnlveTFi?=
+ =?utf-8?B?WWFlYkdKaTZGamNQSHpUMDF6cFdNcU1rd2RnMm1KNVdjeHBjblV3bUlkUUho?=
+ =?utf-8?B?UFM2N2N2Nkpna0M5djQyUnFLKzI2clArNFBxVlF2bmwvZDdoOUpPVXFreHhj?=
+ =?utf-8?B?Nzd6b3U4RWx2eWtpVUtXRXA4dExBNWhuMDNrYTBvdjR0MjM0SCtvdVdRdGQy?=
+ =?utf-8?B?N3A0Q3hwSUh1RE9zS255Um9PSlFKa0x3MU1IR0VwWlNIRnRaNS9nVGJCRnFv?=
+ =?utf-8?B?aTA4dnBSU3dudVMzS1VaQ0tHY2RsR3FlNTdUWEdJTnIzR0UyY0V5RStxbXN3?=
+ =?utf-8?B?QjRWVWc2TWh1WkN2TjVneWZESlNlRDVKOU1aMGhoUTFiam1ENWxjYnBKYlhU?=
+ =?utf-8?B?Szhma1ZlVkJqU201WldtY3d0dVpMYTdOeEZGWmpCUy9oSjVDU2YyM0cvMG5S?=
+ =?utf-8?B?Vm5NL2NVYjUxKzVacHNwL1pnWWNVZ3FKbFo1SUtmWDNUYXZUK2N5cW82Y2sv?=
+ =?utf-8?B?VjhWOXBpNzV0blQ2WHdRcGxjc0pjMHd4WDcremdub0hxdVlwU1J4cXRmU3JT?=
+ =?utf-8?B?SUhSNlhicDY5UDJWcHhrNGYwN0NFSHpkbFdUdERaR0d6aEhQR0hTaGcydzFm?=
+ =?utf-8?B?MmNVVlZwWndsb3EwSEVCemFtL1BUVHNnM3NqTEg0azdjMmg3c0M4OCtmbElE?=
+ =?utf-8?B?dzYrNzVUSTM5WGNoUml3Z0JMczVLQldHVjhUajJGQURVVnYzczhPTFVtUmVs?=
+ =?utf-8?B?bjBtS3ZQOFVrUDM2MWdidU9RaDBHVVlwMnIrT3NRYmVXejhnRHEyTEFJRUhL?=
+ =?utf-8?B?RlB0ZDhFZ09zNExHcllrMGdLbXJFRStvQXlSZE1URjU2VHMxL1E1UkxDbTBE?=
+ =?utf-8?B?RHRVMDE0Y2Fvd3pNZFZRN2Jja1V1ZDVGWm8vQ0hvRUg5WUdMY2trbU1sR2s5?=
+ =?utf-8?B?RTlEUTVtbmxtNE5lUG0zTE4vRVd3NUlzSW4ybG5PMVRtLzlwcC9Bc2kvV2RL?=
+ =?utf-8?B?WlVJK2FCMVlwMFcxTFB5T2RUVDhGdmJudnBWSTlkSWtiVWhaRytlOStWVFc3?=
+ =?utf-8?B?QU54aXNRa1Fac2VhbXU5QTgzbVI5b2FRMkVjS3h6RkJFRmZqUEZsamFrNGtQ?=
+ =?utf-8?B?QXorTG9rVDNJVEo4SGVmdnJ3dXJycEtoTVZTS2dyMEI1Nms0b3lYM0s5QUgy?=
+ =?utf-8?Q?XB0Y=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026)(7053199007);
+ SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014)(13003099007);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2025 12:54:44.3873 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4fa4ac84-0adf-44f0-da77-08de33fd76bc
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2025 13:24:24.4016 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2e47d58e-906e-49d3-770d-08de34019bb1
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF0000B61C.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009B9F.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6519
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjA1MDA5MiBTYWx0ZWRfXyZuxgzJJMcoR
- eu4dWolr3qyr2Ud9KPfv1JQucfuPnizh94TatLspXLtpYjyB3qJdLdrHsRx/Yp+xojHJxjtNMwl
- mP4hrNxsiHX20VDnxi+dX0YX/vCw59Q1dKFoJ/fdKXqNc6Xm1PMPJ77S0FV7KuK2oGOBs6hU3r7
- 5BLRVeCYUhncoYbDxVrk+xFqTFregkhrSnvn7IEYC5+xwAsB0xO4xoVCpUpNxwyEwRIwxV0RA1v
- rWD20Kndtg7St26XKDbIlWjhIlmP2SOO0B2PnB58BGsrClnLw6Rkd7jsiEmXNwdD9AxnISdp6PV
- CVNtDbCXstXsV+Rapu5dVMek5fXaEQ+fD2o7AJFTHDEqFFH//0YLODQs/wLdQ6KI7thsQF2keOF
- xsmIz1KarsMq1OdKRpayIKymRig0ew==
-X-Proofpoint-GUID: b2kHIwm10-J9iWJDFJUDLlaz93q5Yklz
-X-Proofpoint-ORIG-GUID: b2kHIwm10-J9iWJDFJUDLlaz93q5Yklz
-X-Authority-Analysis: v=2.4 cv=YrEChoYX c=1 sm=1 tr=0 ts=6932d619 cx=c_pps
- a=/riwZtEhZw8wleqld+6sWQ==:117 a=d6reE3nDawwanmLcZTMRXA==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB8938
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjA1MDA5NiBTYWx0ZWRfXx0dZh5Pm3Ixy
+ kZZbi0S2nPl3lQ45E9TVZWWguY5yHbVatSQdmPzpy5Vvw6DGDZlcfAXW03ckNevfIs/drvcdGYH
+ +xuClnr3stUxO5148Z62wx2fej13sgXYl3Ch6ZVW678MclX3STeWZMohpGUam5+AM4qQyA3r9iA
+ ojJXFGsJHrPiLjiJFu11LLPBidz9CSqYDgREWSALvIAg89oCJrV+gU7mh2DJ9ovyu59els+2F98
+ 4YcC1P3aYaNDta7ftDTE8mA3LrQlo94gYGQ/bx+BftsUqZ0rvAfjwCnQ23wturHJ2D12uZD62s/
+ Rx4K0oMWwF1Jwr7CiY9/ePBtlvYECH83/B5WblHY9Zr0mw5OvVtKb+F2IqNUjk79LnXaKWBq73P
+ nbu65IY3o5rh/8qrlEAXiq/nvYAtNA==
+X-Proofpoint-GUID: XidDti6Fd491ylDG7dujccHTzR7P3qkS
+X-Proofpoint-ORIG-GUID: XidDti6Fd491ylDG7dujccHTzR7P3qkS
+X-Authority-Analysis: v=2.4 cv=YrEChoYX c=1 sm=1 tr=0 ts=6932dd0c cx=c_pps
+ a=P96BltJlxYhvWyA3BXnrvA==:117 a=uCuRqK4WZKO1kjFMGfU4lQ==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Uo5EeBN78AAA:10 a=IkcTkHD0fZMA:10
  a=wP3pNCr1ah4A:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=b3CbU_ItAAAA:8 a=8b9GpE9nAAAA:8 a=k-42gJp3AAAA:8
- a=zk4-lHRcAAAA:8 a=phlkwaE_AAAA:8 a=gk4VONcb6n9A5HcdGCgA:9 a=QEXdDO2ut3YA:10
- a=Rv2g8BkzVjQTVhhssdqe:22 a=T3LWEMljR5ZiDmsYVIUa:22 a=uCSXFHLys93vLW5PjgO_:22
- a=7cv85riZL9-k45RWW8P6:22 a=uKTQOUHymn4LaG7oTSIC:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=YfCOm-DyAAAA:8 a=0tn0yRldiltswqKnMuMA:9
+ a=QEXdDO2ut3YA:10 a=zQLMK8awuJ6_Hvp-_9Ux:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-12-05_04,2025-12-04_04,2025-10-01_01
@@ -181,7 +174,7 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 impostorscore=0
  spamscore=0 clxscore=1015
  bulkscore=0 lowpriorityscore=0 priorityscore=1501 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512050092
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512050096
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -199,225 +192,102 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+Hi Tom
 
-On 12/3/25 15:19, Patrice CHOTARD wrote:
-> 
-> 
-> On 11/19/25 00:19, Marek Vasut wrote:
->> Add DRAM settings for 1 GiB variant of DH STM32MP13xx DHCOR SoM
->> and support for SoM DRAM coding HW straps decoding and automatic
->> DRAM configuration selection. Enable CONFIG_BOARD_EARLY_INIT_F on
->> all STM32MP1 DHSOM, as it is required for the HW straps decoding.
->>
->> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
->> ---
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@dh-electronics.com
->> Cc: u-boot@lists.denx.de
->> Cc: uboot-stm32@st-md-mailman.stormreply.com
->> ---
->>  .../stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi | 100 ++++++++++++++++++
->>  arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi    |   1 +
->>  board/dhelectronics/dh_stm32mp1/board.c       |  30 ++++--
->>  configs/stm32mp15_dhsom.config                |   1 -
->>  configs/stm32mp_dhsom.config                  |   1 +
->>  5 files changed, 123 insertions(+), 10 deletions(-)
->>  create mode 100644 arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
->>
->> diff --git a/arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
->> new file mode 100644
->> index 00000000000..1d268d58b54
->> --- /dev/null
->> +++ b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
->> @@ -0,0 +1,100 @@
->> +// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
->> +/*
->> + * Copyright (C) 2025, DH electronics - All Rights Reserved
->> + *
->> + * STM32MP13xx DHSOM configuration
->> + * 1x DDR3L 8Gb, 16-bit, 533MHz, Single Die Package in flyby topology.
->> + * Reference used W638GU6QB11I from Winbond
->> + *
->> + * DDR type / Platform	DDR3/3L
->> + * freq		533MHz
->> + * width	16
->> + * datasheet	0  = W638GU6QB11I / DDR3-1866
->> + * DDR density	4
->> + * timing mode	optimized
->> + * address mapping : RBC
->> + * Tc > + 85C : J
->> + */
->> +#define DDR_MEM_COMPATIBLE ddr3l-dhsom-1066-888-bin-g-1x4gb-533mhz
->> +#define DDR_MEM_NAME	"DDR3-DDR3L 16bits 533000kHz"
->> +#define DDR_MEM_SPEED	533000
->> +#define DDR_MEM_SIZE	0x40000000
->> +
->> +#define DDR_MSTR 0x00040401
->> +#define DDR_MRCTRL0 0x00000010
->> +#define DDR_MRCTRL1 0x00000000
->> +#define DDR_DERATEEN 0x00000000
->> +#define DDR_DERATEINT 0x00800000
->> +#define DDR_PWRCTL 0x00000000
->> +#define DDR_PWRTMG 0x00400010
->> +#define DDR_HWLPCTL 0x00000000
->> +#define DDR_RFSHCTL0 0x00210000
->> +#define DDR_RFSHCTL3 0x00000000
->> +#define DDR_RFSHTMG 0x0081008B
->> +#define DDR_CRCPARCTL0 0x00000000
->> +#define DDR_DRAMTMG0 0x121B2414
->> +#define DDR_DRAMTMG1 0x000A041B
->> +#define DDR_DRAMTMG2 0x0607080F
->> +#define DDR_DRAMTMG3 0x0050400C
->> +#define DDR_DRAMTMG4 0x07040607
->> +#define DDR_DRAMTMG5 0x06060403
->> +#define DDR_DRAMTMG6 0x02020002
->> +#define DDR_DRAMTMG7 0x00000202
->> +#define DDR_DRAMTMG8 0x00001005
->> +#define DDR_DRAMTMG14 0x000000A0
->> +#define DDR_ZQCTL0 0xC2000040
->> +#define DDR_DFITMG0 0x02050105
->> +#define DDR_DFITMG1 0x00000202
->> +#define DDR_DFILPCFG0 0x07000000
->> +#define DDR_DFIUPD0 0xC0400003
->> +#define DDR_DFIUPD1 0x00000000
->> +#define DDR_DFIUPD2 0x00000000
->> +#define DDR_DFIPHYMSTR 0x00000000
->> +#define DDR_ADDRMAP1 0x00080808
->> +#define DDR_ADDRMAP2 0x00000000
->> +#define DDR_ADDRMAP3 0x00000000
->> +#define DDR_ADDRMAP4 0x00001F1F
->> +#define DDR_ADDRMAP5 0x07070707
->> +#define DDR_ADDRMAP6 0x07070707
->> +#define DDR_ADDRMAP9 0x00000000
->> +#define DDR_ADDRMAP10 0x00000000
->> +#define DDR_ADDRMAP11 0x00000000
->> +#define DDR_ODTCFG 0x06000600
->> +#define DDR_ODTMAP 0x00000001
->> +#define DDR_SCHED 0x00000F01
->> +#define DDR_SCHED1 0x00000000
->> +#define DDR_PERFHPR1 0x00000001
->> +#define DDR_PERFLPR1 0x04000200
->> +#define DDR_PERFWR1 0x08000400
->> +#define DDR_DBG0 0x00000000
->> +#define DDR_DBG1 0x00000000
->> +#define DDR_DBGCMD 0x00000000
->> +#define DDR_POISONCFG 0x00000000
->> +#define DDR_PCCFG 0x00000010
->> +#define DDR_PCFGR_0 0x00000000
->> +#define DDR_PCFGW_0 0x00000000
->> +#define DDR_PCFGQOS0_0 0x00100009
->> +#define DDR_PCFGQOS1_0 0x00000020
->> +#define DDR_PCFGWQOS0_0 0x01100B03
->> +#define DDR_PCFGWQOS1_0 0x01000200
->> +#define DDR_PGCR 0x01442E02
->> +#define DDR_PTR0 0x0022AA5B
->> +#define DDR_PTR1 0x04841104
->> +#define DDR_PTR2 0x042DA068
->> +#define DDR_ACIOCR 0x10400812
->> +#define DDR_DXCCR 0x00000C40
->> +#define DDR_DSGCR 0xF200011F
->> +#define DDR_DCR 0x0000000B
->> +#define DDR_DTPR0 0x36D477D0
->> +#define DDR_DTPR1 0x098B00D8
->> +#define DDR_DTPR2 0x10023600
->> +#define DDR_MR0 0x00000830
->> +#define DDR_MR1 0x00000000
->> +#define DDR_MR2 0x00000208
->> +#define DDR_MR3 0x00000000
->> +#define DDR_ODTCR 0x00010000
->> +#define DDR_ZQ0CR1 0x00000038
->> +#define DDR_DX0GCR 0x0000CE81
->> +#define DDR_DX1GCR 0x0000CE81
->> +
->> +#include "stm32mp13-ddr.dtsi"
->> diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
->> index bedb7c600d5..39ac5692e08 100644
->> --- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
->> +++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
->> @@ -6,6 +6,7 @@
->>  #include <dt-bindings/clock/stm32mp13-clksrc.h>
->>  #include "stm32mp13-u-boot.dtsi"
->>  #include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
->> +#include "stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi"
->>  
->>  / {
->>  	aliases {
->> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
->> index c18f1911fe4..55526189d5a 100644
->> --- a/board/dhelectronics/dh_stm32mp1/board.c
->> +++ b/board/dhelectronics/dh_stm32mp1/board.c
->> @@ -304,17 +304,29 @@ static void board_get_coding_straps(void)
->>  int board_stm32mp1_ddr_config_name_match(struct udevice *dev,
->>  					 const char *name)
->>  {
->> -	if (ddr3code == 1 &&
->> -	    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x1gb-533mhz"))
->> -		return 0;
->> +	if (IS_ENABLED(CONFIG_TARGET_DH_STM32MP13X)) {
->> +		if (ddr3code == 1 &&
->> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-1x2gb-533mhz"))
->> +			return 0;
->> +
->> +		if (ddr3code == 2 &&
->> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-1x4gb-533mhz"))
->> +			return 0;
->> +	}
->>  
->> -	if (ddr3code == 2 &&
->> -	    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x2gb-533mhz"))
->> -		return 0;
->> +	if (IS_ENABLED(CONFIG_TARGET_DH_STM32MP15X)) {
->> +		if (ddr3code == 1 &&
->> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x1gb-533mhz"))
->> +			return 0;
->>  
->> -	if (ddr3code == 3 &&
->> -	    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x4gb-533mhz"))
->> -		return 0;
->> +		if (ddr3code == 2 &&
->> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x2gb-533mhz"))
->> +			return 0;
->> +
->> +		if (ddr3code == 3 &&
->> +		    !strcmp(name, "st,ddr3l-dhsom-1066-888-bin-g-2x4gb-533mhz"))
->> +			return 0;
->> +	}
->>  
->>  	return -EINVAL;
->>  }
->> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
->> index 210ec201bf5..d5ecbac29e0 100644
->> --- a/configs/stm32mp15_dhsom.config
->> +++ b/configs/stm32mp15_dhsom.config
->> @@ -2,7 +2,6 @@
->>  
->>  # CONFIG_ARMV7_VIRT is not set
->>  # CONFIG_BINMAN_FDT is not set
->> -CONFIG_BOARD_EARLY_INIT_F=y
->>  CONFIG_BOARD_SIZE_LIMIT=1441792
->>  CONFIG_BOOTCOUNT_BOOTLIMIT=3
->>  CONFIG_BOOTDELAY=1
->> diff --git a/configs/stm32mp_dhsom.config b/configs/stm32mp_dhsom.config
->> index 56a40839d28..31fae2de19d 100644
->> --- a/configs/stm32mp_dhsom.config
->> +++ b/configs/stm32mp_dhsom.config
->> @@ -6,6 +6,7 @@
->>  # CONFIG_SPL_PARTITION_UUIDS is not set
->>  # CONFIG_SPL_PINCTRL_FULL is not set
->>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->> +CONFIG_BOARD_EARLY_INIT_F=y
->>  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
->>  CONFIG_BOOTCOUNT_LIMIT=y
->>  CONFIG_CMD_BOOTCOUNT=y
-> 
-> 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> Thanks
-> Patrice
-Applied to u-boot-stm32/next
+Please pull the STM32 related patches for u-boot/next, v2026.04 = u-boot-stm32-20251205
+
+CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/28641
 
 Thanks
 Patrice
+
+
+The following changes since commit 59f9fcc1f514762674ac07c13c2a85f7aace7250:
+
+  vexpress_aemv8: Stop disabling device tree relocation (2025-12-04 15:11:26 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20251205
+
+for you to fetch changes up to b6e61ec06251351bcca22e7a14d9a720ad47ad07:
+
+  ARM: dts: stm32: Drop "u-boot-led" from stm32mp257f-ev1-u-boot (2025-12-05 11:39:42 +0100)
+
+----------------------------------------------------------------
+_ update LED management for STMicroelectronics boards
+_ Add 1 GiB DRAM support for STM32MP13x DHCOR SoM
+_ Fix 512 MiB DRAM support for STM32MP13x DHCOR SoM
+_ Fix handling OPTEE in middle of the DRAM
+_ Add missing debug UART build for STM32MP1 DHSOM
+
+----------------------------------------------------------------
+Marek Vasut (4):
+      stm32mp: Fix handling of OPTEE in the middle of DRAM
+      ARM: dts: stm32: Fix 512 MiB DRAM settings for DH STM32MP13xx DHCOR SoM
+      ARM: dts: stm32: Add 1 GiB DRAM settings for DH STM32MP13xx DHCOR SoM
+      ARM: stm32: Add missing build of debug UART init code on DH STM32MP1 DHSOM
+
+Patrice Chotard (22):
+      board: st: Update LED management for stm32mp1
+      board: st: Update LED management for stm32mp2
+      configs: stm32: Enable LED config flags for stm32f429-disco
+      configs: stm32: Enable LED config flags for stm32f429-disco
+      configs: stm32: Enable LED config flags for stm32f746-disco
+      configs: stm32: Enable LED config flags for stm32f769-disco
+      configs: stm32: Enable LED config flags for stm32h743-disco
+      configs: stm32: Enable LED config flags for stm32h743-eval
+      configs: stm32: Enable LED config flags for stm32h747-disco
+      configs: stm32mp13: Enable LED_BOOT for stm32mp13_defconfig
+      configs: stm32mp15: Enable LED_BOOT for stm32mp15_defconfig
+      configs: stm32mp15: Enable LED_BOOT for stm32mp15_basic_defconfig
+      configs: stm32mp15: Enable LED_BOOT for stm32mp15_trusted_defconfig
+      configs: stm32mp2: Enable LED_BOOT for stm32mp25_defconfig
+      configs: stm32mp2: Enable LED_BOOT for stm32mp23_defconfig
+      ARM: dts: stm32: Drop "u-boot-led" and "error-led" from stm32mp135f-dk-u-boot
+      ARM: dts: stm32: Drop "u-boot-led" and "error-led" from stm32mp157a-dk1-scmi-u-boot
+      ARM: dts: stm32: Drop "u-boot-led" and "error-led" from stm32mp157a-dk1-u-boot
+      ARM: dts: stm32: Drop "u-boot-led" and "error-led" from stm32mp157c-ed1-scmi-u-boot
+      ARM: dts: stm32: Drop "u-boot-led" and "error-led" from stm32mp157c-ed1-u-boot
+      ARM: dts: stm32: Drop "u-boot-led" from stm32mp235f-dk-u-boot
+      ARM: dts: stm32: Drop "u-boot-led" from stm32mp257f-ev1-u-boot
+
+Simon Glass (1):
+      board: st: Drop old LED code from stm32f429-disco
+
+ arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi |   6 +++---
+ arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi | 100 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp135f-dk-u-boot.dtsi                |   6 ------
+ arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi             |   1 +
+ arch/arm/dts/stm32mp157a-dk1-scmi-u-boot.dtsi          |   6 ------
+ arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi               |   5 -----
+ arch/arm/dts/stm32mp157c-ed1-scmi-u-boot.dtsi          |  14 --------------
+ arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi               |  14 --------------
+ arch/arm/dts/stm32mp235f-dk-u-boot.dtsi                |   1 -
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi               |   1 -
+ arch/arm/mach-stm32mp/dram_init.c                      |   4 +++-
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c                   |  11 ++++++-----
+ board/dhelectronics/dh_stm32mp1/Makefile               |   2 ++
+ board/dhelectronics/dh_stm32mp1/board.c                |  30 +++++++++++++++++++++---------
+ board/st/stm32f429-discovery/Makefile                  |   1 -
+ board/st/stm32f429-discovery/led.c                     |  39 ---------------------------------------
+ board/st/stm32mp1/stm32mp1.c                           |  45 ++++-----------------------------------------
+ board/st/stm32mp2/stm32mp2.c                           |  38 +-------------------------------------
+ configs/stm32f429-discovery_defconfig                  |   3 +++
+ configs/stm32f469-discovery_defconfig                  |   3 +++
+ configs/stm32f746-disco_defconfig                      |   3 +++
+ configs/stm32f769-disco_defconfig                      |   3 +++
+ configs/stm32h743-disco_defconfig                      |   3 +++
+ configs/stm32h743-eval_defconfig                       |   3 +++
+ configs/stm32h747-disco_defconfig                      |   3 +++
+ configs/stm32mp13_defconfig                            |   1 +
+ configs/stm32mp15_basic_defconfig                      |   1 +
+ configs/stm32mp15_defconfig                            |   1 +
+ configs/stm32mp15_dhsom.config                         |   1 -
+ configs/stm32mp15_trusted_defconfig                    |   1 +
+ configs/stm32mp23_defconfig                            |   1 +
+ configs/stm32mp25_defconfig                            |   1 +
+ configs/stm32mp_dhsom.config                           |   1 +
+ 33 files changed, 169 insertions(+), 184 deletions(-)
+ create mode 100644 arch/arm/dts/stm32mp13-ddr3-dhsom-1x4Gb-1066-binG.dtsi
+ delete mode 100644 board/st/stm32f429-discovery/led.c
