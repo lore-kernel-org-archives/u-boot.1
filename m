@@ -4,54 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3262D3398B
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 16:22:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2AABD3398D
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 16:27:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0587984056;
-	Fri,  5 Dec 2025 17:22:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1E7BF84220;
+	Fri,  5 Dec 2025 17:27:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Rh4vfPcN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Tr7y16j9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FE078421E; Fri,  5 Dec 2025 17:22:41 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8F72D84212; Fri,  5 Dec 2025 17:27:05 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A4E18404A
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 17:22:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 1EF4B8404A
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 17:27:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id A50E644004;
- Fri,  5 Dec 2025 16:22:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C983C4CEF1;
- Fri,  5 Dec 2025 16:22:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1764951757;
- bh=Jz9Mytt6li6gZ4t1zPTdSt3LTk/FJKoiw+ynEdcQfpU=;
- h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=Rh4vfPcNf4dKo97tWgk7Ijrlw0ov1huBbog5fe2vN01OG/8wLrGf2Vcon6f5bBQ+J
- 8ZIYsFXdmUpNP/jO5xg4Jvx8fxoLdkAikiDwHdrPsRXVxppZdJM8TPL2VAlF+HQuRe
- VwvLagYdWlfLgaWiim1E8MqOy79HDlT1NwPkeKZc9V5qxLXNxXrWk4eK6drMsdtbc6
- nxkkz9a9aqGNMyUC+4cv7yzgH3NeFseCY3rRtJQxkqmzwOUnkxWE/bz+X2dXNLs8nR
- leiQY4TZsQWTmraXwWoZwzaMPxtHGrM21I52zvD778sU1xWdFe5TVbt2WVp3Jhr7Ka
- HtWrnXCkmIdDQ==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Aaron Kling <webgeek1234@gmail.com>, Eddie Kovsky <ekovsky@redhat.com>, 
- George Chan <gchan9527@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
- Nicolas Belin <nbelin@baylibre.com>, Sam Day <me@samcday.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251119193311.127633-1-marek.vasut+renesas@mailbox.org>
-References: <20251119193311.127633-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v3 1/2] boot: android: Always use 8-byte aligned DT
- with libfdt
-Message-Id: <176495175488.66630.16033316142063703580.b4-ty@kernel.org>
-Date: Fri, 05 Dec 2025 17:22:34 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-6597b072cffso732797eaf.1
+ for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 08:27:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1764952021; x=1765556821; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wPNW1qF7YXUd+vw1NSVIBtSdhndvcXtzqMVPD961EYM=;
+ b=Tr7y16j9LqY693f2FrgfHeWD3T28nFlYfTSyA452h9yKzMIOpG5k03i8M9yNg3TQsz
+ CEyOVnwgWcGIFJaP5OMtdkrzCpGBrvl5k1UlvYTGRIQxcEidStLp0jnGHft6AvNxANd4
+ GotpU5qAQN2buGQRAmDTLpAWOY62nuOZvEijE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764952021; x=1765556821;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=wPNW1qF7YXUd+vw1NSVIBtSdhndvcXtzqMVPD961EYM=;
+ b=OGU2FudT5CA20rfe3e47BIq8oMNBlev+w49hCHtfCK1Olqfsh/epvUcS/vDdv8Lr47
+ EANIBKzXC3D4utT+Am5oVTU2YZ5F2yRt4PEbQZjLAgaLGaWjlDMPMzXEeTBCWVsFE8P5
+ qKaEXj3OWIlChTJ/6CBoODLZ+4HlCu1oPNrMA1hWLtslHa3pkHfY3fztCRSZjMFo+2VU
+ 0wVqEgAyILXDM5pNEVskRrXtKfi12Jql4jGuUA49fudH0NNxzSgw7OhgwX2Orf2itYh2
+ f8pjrpbzXLkfVuvyNtPBxUjyVNTgw0tPoEnBOuakfclKE5PylVfxiN7hLmBZrWhBopkZ
+ MGPA==
+X-Gm-Message-State: AOJu0Yz8sVqJB00KuzfS/2/NjoywQkRrwCzFHmJHgCn/7vGyiBHYzAof
+ +eExqA++Aa+Vn2OiOcmdCSyQUpL+bdmPgPZMIzQvFxv1vYopQzxLf2HWEmPg+0EOaNA=
+X-Gm-Gg: ASbGncv4T3IRdEIK6uYdALViOER7xWNorCK+RTOI8traqYgDfLN0Vyqr8TNWjYxvJuN
+ 6A+LWU6U08Kdt8+M594jEBtH0AgReoGkjZK/nvLOc3mYvnDZAGHR+xL4h2OaUEg+rPocmDCwBsj
+ MEqwmfL+6AXMZC4pM4g6yRKFbA0v3BnANlkSZ1khqNECOgAQqCXgktNlw0vfP47i8nAhs1j/XF6
+ vqWHcT50fSj1qHMz+4jLkw5MWYKBIQ8pUCR/YapK/qpoPShKZ3loowE1lztScv8jXvijTRn/+Yn
+ txSm8EZ0VAjn1CgRnzpK588PSoSeEc9ZdRovoHf2b/nft/ED2IKUc4JRJVCgLXTx2TMrwXnkq1N
+ w/TkF4jelW7wx1I+DgRNUtmE9x23pOSTSCXK/6fTHjjVjDU6NbwFoWqBMSoXeIadnW2Vez1Qu84
+ VoS/9jYj21SZfqhyhrs+N70ODpXYZEeq4oczXFGqBJKhM0GfZT
+X-Google-Smtp-Source: AGHT+IG6hXTE7oCSnbtb0vYj0b6R0augStqlCEdnkM9f9gG3vBp1K41w0qOZ0eurDG6qzLqIMXCKwQ==
+X-Received: by 2002:a05:6808:6d8f:b0:450:3ff9:f4dd with SMTP id
+ 5614622812f47-4536e44d19fmr5932125b6e.24.1764952021411; 
+ Fri, 05 Dec 2025 08:27:01 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3f50aaa0fdasm3636773fac.9.2025.12.05.08.27.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Dec 2025 08:27:00 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>
+In-Reply-To: <24fc65d7-befb-4e8a-9bd6-46edbf87cfa0@foss.st.com>
+References: <24fc65d7-befb-4e8a-9bd6-46edbf87cfa0@foss.st.com>
+Subject: Re: [PULL] Pull request for u-boot next / v2026.04 =
+ u-boot-stm32-20251205
+Message-Id: <176495202058.2280840.2288024739708712499.b4-ty@konsulko.com>
+Date: Fri, 05 Dec 2025 10:27:00 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -72,27 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Fri, 05 Dec 2025 14:24:22 +0100, Patrice CHOTARD wrote:
 
-On Wed, 19 Nov 2025 20:32:51 +0100, Marek Vasut wrote:
-> Newer versions of libfdt strictly check whether the FDT blob
-> passed to them is at 8-byte aligned offset, if it is not, then
-> the library fails checks with -FDT_ERR_ALIGNMENT . Currently,
-> android_image_print_dtb_contents() passed FDT directly mapped
-> from abootimg to libfdt, and this FDT is not always aligned to
-> 8-byte offset. Specifically, the FDTs are somewhat packed in
-> the abootimg, therefore if the first FDT blob is e.g. 0xfd bytes
-> long, then the next FDT blob ends up at 0xfd offset, which is
-> not 8-byte aligned.
+> Please pull the STM32 related patches for u-boot/next, v2026.04 = u-boot-stm32-20251205
+> 
+> CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/28641
+> 
+> Thanks
+> Patrice
+> 
 > 
 > [...]
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+Merged into u-boot/next, thanks!
 
-[1/2] boot: android: Always use 8-byte aligned DT with libfdt
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/2da3af2f9ee0dbacaf26e95e1ae5261445f1a43c
-[2/2] test/py: android: Point fdt command to aligned addresses
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/42ee514ed049d5e689e39bb4a8b6b5fb519aa3be
+-- 
+Tom
 
---
-Mattijs
+
