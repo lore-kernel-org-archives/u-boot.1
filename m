@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B506D2F7D1
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 11:11:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 574CED2F7D1
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 11:11:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A333841E7;
+	by phobos.denx.de (Postfix) with ESMTP id 4973D841F7;
 	Fri,  5 Dec 2025 12:10:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="Z8CFprOm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="cscyLY/X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18247841BC; Fri,  5 Dec 2025 12:10:50 +0100 (CET)
+ id 15AF1841BC; Fri,  5 Dec 2025 12:10:52 +0100 (CET)
 Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9B1A838A0
+ by phobos.denx.de (Postfix) with ESMTPS id CAFB084033
  for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 12:10:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=norik.com
@@ -27,22 +27,22 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=primoz.fiser@norik.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
  s=default;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
- Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=L137iBpQxrtxJ98F+PsBVpo4/FIaDuAoea9/AOgNlGY=; b=Z8CFprOmksH16XqTTT6yoMIIyv
- ttVltEo/A2okf5yzRI3xeceCsnrIBIg6KGd++V/H8evHQ3OTGLSYJyOn6qHAKvd1sI4VzmY5OwHcS
- 3ESUhBHXCJbep7hhcx7+TjetT12MpCSNZat0aEfuWMzpI1HuLC7DWi3MD/W3X71GI8uJpf/HquWa0
- 0kyElhv7AbWvQDhoEcGXzCZ/Dv2epLXgx6izStkZ9sf1vqpnIdcx1l7A6okKjXe+kPpiUl7tRe4pi
- fbQmhPcobE5+Qs1hyw7G6Tgn+tj0WvUAzarwDjk/eUspVkeqHuwIPBo8yd2CKEa+7jP/Sf8A3jAa3
- cIFjFDqA==;
+ bh=CrAQdHT1Yi6F3gB9Ct1DavTCNhCa4hxT3kDLR37ryMM=; b=cscyLY/XkdPAf+SgixgxFoYIkj
+ kQAwoush4LAVyX46pajOiip19oG5DPgDDQoPHeOShTAjXVGIXUHEWVQXSbntZ4l31JKDCSmbEreNA
+ 1N/MziyjpJST16AeJPbIfYz9MNikO8mAKjF6Lf0vXXL+JoQbdTyPDBX/IDqgCChi5m5XRkH71FpqU
+ PEyaVUESap9GXEPCm3pU0dmrCI5GnDg34SbiLopZH8/Ne9MIVtokPyC5EDFPvU95rIfh5xi438JyX
+ u7AbpZ44Vm1n5tlNjIm8TIpQyhOxX6GWnFZ6W4e5/RLD18fE1DYTmAo9TZNuyuVegZwJSdaaPCyuB
+ 8z1Dhl3g==;
 Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:53200
  helo=localhost.localdomain)
  by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.98.2) (envelope-from <primoz.fiser@norik.com>)
- id 1vRTi5-000000046RH-2VoW; Fri, 05 Dec 2025 12:10:45 +0100
+ id 1vRTi5-000000046RH-2qWY; Fri, 05 Dec 2025 12:10:45 +0100
 From: Primoz Fiser <primoz.fiser@norik.com>
 To: Mathieu Othacehe <m.othacehe@gmail.com>,
  Christoph Stoidner <c.stoidner@phytec.de>,
@@ -51,10 +51,13 @@ To: Mathieu Othacehe <m.othacehe@gmail.com>,
  Benjamin Hahn <B.Hahn@phytec.de>
 Cc: u-boot@lists.denx.de,
 	upstream@lists.phytec.de
-Subject: [PATCH v2 1/3] board: phytec: phycore-imx93: Switch to standard boot
-Date: Fri,  5 Dec 2025 12:10:42 +0100
-Message-Id: <20251205111044.3195322-1-primoz.fiser@norik.com>
+Subject: [PATCH v2 2/3] board: phytec: phycore-imx93: Set boot_targets
+ dynamically
+Date: Fri,  5 Dec 2025 12:10:43 +0100
+Message-Id: <20251205111044.3195322-2-primoz.fiser@norik.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20251205111044.3195322-1-primoz.fiser@norik.com>
+References: <20251205111044.3195322-1-primoz.fiser@norik.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-AntiAbuse: This header was added to track abuse,
@@ -84,177 +87,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable standard boot for the phyCORE-i.MX93 board and use it as a new
-default. Add required standard boot variables to the environment, while
-removing old boot scripts and now unnecessary environment variables.
-Adjust variables according to the requirements of PHYTEC ampliphy-boot
-distro-boot. Last but not least, order environment vars by alphabet and
-run 'make savedefconfig' to resync defconfig.
+Set boot_targets environment variable dynamically, so that when booting
+from SD-card, boot binaries are also preferably fetched from the SD-card
+by default. If the user decides to set their own boot_targets, we should
+not overwrite them.
 
 Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 ---
-Changes in v2:
-- remove bootcmd from env by not removing CONFIG_BOOTSTD_DEFAULTS and
-  CONFIG_USE_BOOTCOMMAND from the defconfig 
+Changes in v2:                                                                  
+- no changes                                   
+                                                                                   
+Link to v1: https://lore.kernel.org/all/20251204080744.3868067-2-primoz.fiser@norik.com/
 
-Link to v1: https://lore.kernel.org/all/20251204080744.3868067-1-primoz.fiser@norik.com/
+ board/phytec/phycore_imx93/phycore-imx93.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
- arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi | 16 +++++
- board/phytec/phycore_imx93/phycore_imx93.env  | 68 ++-----------------
- configs/imx93-phycore_defconfig               | 10 ++-
- 3 files changed, 30 insertions(+), 64 deletions(-)
-
-diff --git a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-index 0c8d0ba9693f..646b617949d6 100644
---- a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-+++ b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-@@ -30,6 +30,22 @@
- 		ethernet1 = &eqos;
- 	};
- 
-+	bootstd {
-+		bootph-verify;
-+		compatible = "u-boot,boot-std";
-+
-+		filename-prefixes = "/", "/boot/";
-+		bootdev-order = "mmc0", "mmc1", "ethernet";
-+
-+		rauc {
-+			compatible = "u-boot,distro-rauc";
-+		};
-+
-+		script {
-+			compatible = "u-boot,script";
-+		};
-+	};
-+
- 	firmware {
- 		optee {
- 			compatible = "linaro,optee-tz";
-diff --git a/board/phytec/phycore_imx93/phycore_imx93.env b/board/phytec/phycore_imx93/phycore_imx93.env
-index 7b0a90e64472..4a5e5bfaee38 100644
---- a/board/phytec/phycore_imx93/phycore_imx93.env
-+++ b/board/phytec/phycore_imx93/phycore_imx93.env
-@@ -1,70 +1,12 @@
- /* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
- 
--#include <env/phytec/rauc.env>
--#include <env/phytec/overlays.env>
--
--bootcmd=
--	mmc dev ${mmcdev};
--	if mmc rescan; then
--		if test ${doraucboot} = 1; then
--			run raucinit;
--		fi;
--		if run loadimage; then
--			run mmcboot;
--		else
--			run netboot;
--		fi;
--	fi;
--image=Image
-+boot_script_dhcp=net_boot_fit.scr.uimg
- console=ttyLP0
- fdt_addr_r=0x90000000
--fdtoverlay_addr_r=0x900c0000
--bootenv_addr_r=0x90500000
- fdtfile=CONFIG_DEFAULT_FDT_FILE
-+fdtoverlay_addr_r=0x900c0000
- ip_dyn=yes
-+kernel_addr_r=0x88000000
-+nfsroot=/srv/nfs
- prepare_mcore=setenv optargs "${optargs} clk-imx93.mcore_booted"
--mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
--mmcpart=1
--mmcroot=2
--mmcautodetect=yes
--mmcargs=setenv bootargs console=${console},${baudrate} earlycon
--	root=/dev/mmcblk${mmcdev}p${mmcroot} ${raucargs} rootwait rw ${optargs}
--loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
--loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
--mmcboot=
--	echo Booting from mmc ...;
--	if test ${no_bootenv} = 0; then
--		if run mmc_load_bootenv; then
--			env import -t ${bootenv_addr_r} ${filesize};
--		fi;
--	fi;
--	run mmcargs;
--	if run loadfdt; then
--		run mmc_apply_overlays;
--		booti ${loadaddr} - ${fdt_addr_r};
--	else
--		echo WARN: Cannot load the DT;
--	fi;
--nfsroot=/nfs
--netargs=setenv bootargs console=${console},${baudrate} earlycon
--	root=/dev/nfs ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp ${optargs}
--netboot=
--	echo Booting from net ...;
--	run netargs;
--	if test ${ip_dyn} = yes; then
--		setenv get_cmd dhcp;
--	else
--		setenv get_cmd tftp;
--	fi;
--	if test ${no_bootenv} = 0; then
--		if run net_load_bootenv; then
--			env import -t ${bootenv_addr_r} ${filesize};
--		fi;
--	fi;
--	${get_cmd} ${loadaddr} ${image};
--	if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
--		run net_apply_overlays;
--		booti ${loadaddr} - ${fdt_addr_r};
--	else
--		echo WARN: Cannot load the DT;
--	fi;
-+scriptaddr=0x83500000
-diff --git a/configs/imx93-phycore_defconfig b/configs/imx93-phycore_defconfig
-index 4c952e966d1a..ac719372b411 100644
---- a/configs/imx93-phycore_defconfig
-+++ b/configs/imx93-phycore_defconfig
-@@ -5,10 +5,10 @@ CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x20000
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_ENV_SOURCE_FILE="phycore_imx93"
- CONFIG_NR_DRAM_BANKS=2
- CONFIG_PHYTEC_SOM_DETECTION=y
- CONFIG_PHYTEC_EEPROM_BUS=2
--CONFIG_ENV_SOURCE_FILE="phycore_imx93"
- CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x700000
- CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
-@@ -33,6 +33,9 @@ CONFIG_SYS_MEMTEST_START=0x80000000
- CONFIG_SYS_MEMTEST_END=0x90000000
- CONFIG_REMAKE_ELF=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_SIGNATURE=y
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_DEFAULT_FDT_FILE="oftree"
-@@ -52,6 +55,9 @@ CONFIG_SPL_I2C=y
- CONFIG_SPL_POWER=y
- CONFIG_SPL_WATCHDOG=y
- CONFIG_SYS_PROMPT="u-boot=> "
-+# CONFIG_CMD_BOOTDEV is not set
-+# CONFIG_CMD_BOOTMETH is not set
-+# CONFIG_CMD_BOOTSTD is not set
- CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CRC32_VERIFY=y
-@@ -149,5 +155,7 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1fc9
- CONFIG_USB_GADGET_PRODUCT_NUM=0x0152
- CONFIG_CI_UDC=y
- CONFIG_ULP_WATCHDOG=y
-+# CONFIG_RSA is not set
-+# CONFIG_SPL_SHA256 is not set
- CONFIG_LZO=y
- CONFIG_BZIP2=y
+diff --git a/board/phytec/phycore_imx93/phycore-imx93.c b/board/phytec/phycore_imx93/phycore-imx93.c
+index c6a4e923b074..cfc6d91f20f2 100644
+--- a/board/phytec/phycore_imx93/phycore-imx93.c
++++ b/board/phytec/phycore_imx93/phycore-imx93.c
+@@ -38,6 +38,8 @@ int board_late_init(void)
+ 	switch (get_boot_device()) {
+ 	case SD2_BOOT:
+ 		env_set_ulong("mmcdev", 1);
++		if (!env_get("boot_targets"))
++			env_set("boot_targets", "mmc1 mmc0 ethernet");
+ 		break;
+ 	case MMC1_BOOT:
+ 		env_set_ulong("mmcdev", 0);
 -- 
 2.34.1
 
