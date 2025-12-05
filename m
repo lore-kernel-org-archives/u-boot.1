@@ -4,117 +4,182 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67E5DD33992
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 16:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF90FD33990
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 16:50:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2B3F84221;
-	Fri,  5 Dec 2025 17:34:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5E61384212;
+	Fri,  5 Dec 2025 17:50:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xNj4iI2w";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="bZhUNFaD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8314D83655; Fri,  5 Dec 2025 17:34:49 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E78D384223; Fri,  5 Dec 2025 17:50:15 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFB9683849
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 17:34:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB6228036B
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 17:50:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-47118259fd8so21268265e9.3
- for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 08:34:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764952486; x=1765557286; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Dg8PYcVybaPoOZZ9cizd4h779gJN0LycMKCnQ2LrsTI=;
- b=xNj4iI2wKxhQDs4lnvYtCDI7da8DQcbBGpIex4utF+5/gjrviLt4NeLeB9PjLen4Sm
- W+lFXw3O1/i9Nc0eOf7n8cbWijBMwBsr5Qi2uUlfHqQ60/CsTpyKVf8YuIF90MgbCDe4
- mh0FMx7Cy7NIzsAZuInndci8KIhs1iXI2MwL639oOYY1rmk5Q0y2WpMpafFVgw9FdXWO
- gL55DfV4SeyC5gXHHfwYLwwHsOmO/rJ//D1j4w9HW4leUZQbioJREvKx6loChaK2I++T
- qoOPZh9HOYmY+NoDBeYz1FxwDcD4hEwnq2/nAyVhEbNAc031T5kriVHljbmGzYsNLZnd
- pYoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764952486; x=1765557286;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Dg8PYcVybaPoOZZ9cizd4h779gJN0LycMKCnQ2LrsTI=;
- b=vcaujNB5FfJNkhIidunbJ1fFIzToKJH/cYC5guzYHw7LET09pHWH8nxTTUmNiFO3L7
- /wJ3wgP+SFryW802i5gnrKhYPTSz7JYZWT9o0LuVMYULtyVH2spIvoLxEbqhuZb1K7w/
- r1nqjFLAzfhZe4BDy2HDd44Sch2cEe86XPYRQKblu8HVFUAmhem7XRAeRYhoHQVXjK9n
- 5+E0zrMLTmAKtFRz5wAdKEifC73Tn5ghL5rDYemp0RbJBENqKMP1Upsce+FzVz6H0RNB
- sRDwUdA2K0Q9UQIlZ3MnC+iHjwQa/hBPJfIeMH1uv+U3rK1QOm6oy4y7tb5JI1CX++Es
- KwLA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUzCLq1UQ8FxsUPWW4YFu7kQ5gD0Jug3W4vguiVuH/6nNIrsKMS0W4PcGFACUyxU4pU7syIAq8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxyCr/kAXGspPbCVlwxal3K5miYkVF5RWTYAzC6qYnPDo36O/lV
- gORMx788dO3iTb4hzMOusSno1ssC8aDCPmY13jkDVsLgS5ImBqv7nrBbxirLiFQmxIU=
-X-Gm-Gg: ASbGncsITfDRsmt4FAJAK752buEQp6LJqLXSd6+GjOHAFQJ/EE1+jDNDYr5hSS3g8NV
- XYpCdiGKNe4AYS1I0ekDCyJsCuUntXZteAf2qxbixx47TzEZi9eNLLWzg6p9ZswAgjy527lDdRL
- CD2vYt1cU4+F2Zbyw+ZgviR+Gy1zrxcTLZIslAhE+4s6sTZyO8YOY8W3MK4/F34XFttEuuO0/3Y
- 1qRgApRRD+EiPaP7zn0nZLpyeDUSb9L9Yb9IJlXD1BvNFheAcbamq/1NVX/uNRXO4PbLCCd/YQp
- +ZQz1NV0MD5OvCVpst5LfT6T2pwkhEljbN5duOo5tbc2UGtWBZdeEdK39euqmVM155UleZIczP8
- qaV/qn4ifLcJRCcCNm1WvQ3mcb/YVLOTwQQqunccBK5660jUZhLxiqqqDw5cVXKsH8eNHdAHrKV
- 0DjlUMeLS8U/mxZGIWsBxAPI9CshnwLeQiJA7s1ibiMi30qeNXGYonetzEQBbubEc=
-X-Google-Smtp-Source: AGHT+IGq18mLafI6z707NQAe71/Vjbxy+jf0hmi/vMA8U8NemKc9ia4HrHm8WgGSPEAHw24aAhkQ2A==
-X-Received: by 2002:a05:600c:c494:b0:477:7d94:5d0e with SMTP id
- 5b1f17b1804b1-4792f3954e9mr64769005e9.27.1764952486025; 
- Fri, 05 Dec 2025 08:34:46 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3d9:2080:b735:1b21:d481:e64e?
- ([2a01:e0a:3d9:2080:b735:1b21:d481:e64e])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47930cb6a96sm89672955e9.15.2025.12.05.08.34.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Dec 2025 08:34:45 -0800 (PST)
-Message-ID: <b2c5b0ac-04d3-44ee-9b70-4b123eaffaa6@linaro.org>
-Date: Fri, 5 Dec 2025 17:34:44 +0100
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=443406b657=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 5B5GejHx2842572; Fri, 5 Dec 2025 17:50:06 +0100
+Received: from db3pr0202cu003.outbound.protection.outlook.com
+ (mail-northeuropeazon11010007.outbound.protection.outlook.com [52.101.84.7])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4aubndn28h-2
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Fri, 05 Dec 2025 17:50:06 +0100 (CET)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cFJdR4tZerx1JHqtNk0Pd3ld/h5Elc1lr2lJ2GHRISK+1h7urURUyvF5IXpukDbefURwFx82Nu2IjKAhpwNBQbo/uL6DVQ0WXISKOsAOWhh6A5z1OnDfAPr5kFSdxUYUUdxW/LEn1tMsHgbMW3hbBxPevaMy5NIQ54VGV6LXnOLWKeX87AVYMRvWCBDF97bJ0P0qANJLYcZ+apIoEPa9b/4/gkXeD/ouH6h6uv+NPolGXlcNDlUbzoVcCmHj7sqWlMVkoWHy3PSs0839nDpjxXeK2Md/cFv9ExVkas87E4iG9jR0plJ/3Awu/2piP62/SDceh339lgGoEr4hrWX+AQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Ktl48O2fRiXGMYnEi6H0NtyHVdifDGS0g6NHD8dUtvI=;
+ b=zBOy+TPwXcsVf+rSAcxR3EFg1WaD54yeQSOePfpP7xBBKv+JFTvVHoaQoole+4XX4JjzFOkYKUpDCzcm8qIScas2V+d1bn3ke2/sOdDK32w2Q8ytUbISaXdfUaCe3CYWiYDNuzU0m5s0yg28ZLS8pAVruy43Z5KiEZl73sFkS2hsrwiDlmLMNvobfnlZANK5NZuKlT1E4JsoHuQgS6+NWDqBQ4rmarnB5hPkZ8vpjSqTTEMLP4wcbjEl48okZa9zjRQm15jUynVoHdfmHxzO4EhP8r6eNtulvhE3u6VSxhYJeWBOlXY3HYyugDWZ7JxOa6ybXziPQLi1xlITrDjbcg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=bootlin.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Ktl48O2fRiXGMYnEi6H0NtyHVdifDGS0g6NHD8dUtvI=;
+ b=bZhUNFaDpqt10iMoQveCCFZh1DUCIB7JJGkmXw/YjUYgQz4zZHorqS+jVfEk04lcmNtzKEGd/ZFVihNlHgniOkOIHC6CXsPxBiW4asyZyM3kPnBtHEHt146fCX13LQ28hUslhlm5uvIjja61kFOW40nMs/bX9v0DSn0sRQV0+DsnEjnVTC/ZJD+ripz9kUgE5KndmqC8nq/X72Cl2UlEUxolcQZl2DGfbKvUkB+pjhb5+JGJUUArIzJKFd42urDJdqMs6TI8i6ndpXkQU9WTO5hn5X7sGL7vMEIb/UdbJrorOofhJYPesnMsOHyslQHsJ1sL7EcMaQg+Psyhc5XJHw==
+Received: from AS4P251CA0009.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:5d2::20)
+ by GV1PR10MB8967.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:1cb::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Fri, 5 Dec
+ 2025 16:50:00 +0000
+Received: from AMS0EPF0000019F.eurprd05.prod.outlook.com
+ (2603:10a6:20b:5d2:cafe::8b) by AS4P251CA0009.outlook.office365.com
+ (2603:10a6:20b:5d2::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.12 via Frontend Transport; Fri,
+ 5 Dec 2025 16:49:59 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AMS0EPF0000019F.mail.protection.outlook.com (10.167.16.251) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9388.8 via Frontend Transport; Fri, 5 Dec 2025 16:50:00 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 5 Dec
+ 2025 17:50:39 +0100
+Received: from [10.252.31.202] (10.252.31.202) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 5 Dec
+ 2025 17:49:58 +0100
+Message-ID: <d9943642-1cce-4513-8334-1ba3d675d9da@foss.st.com>
+Date: Fri, 5 Dec 2025 17:49:57 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] MAINTAINERS: update my email address
-To: Linus Walleij <linusw@kernel.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, David Feng <fenghua@phytium.com.cn>,
- Peter Hoyes <Peter.Hoyes@arm.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <20251205-linusw-kernel-org-v2-1-40c8652749b2@kernel.org>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20251205-linusw-kernel-org-v2-1-40c8652749b2@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] i2c: stm32f7_i2c: save some ms in
+ stm32_i2c_choose_solution
+To: Richard Genoud <richard.genoud@bootlin.com>, Heiko Schocher
+ <hs@nabladev.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>
+CC: Tom Rini <trini@konsulko.com>, Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+References: <20251205133641.2052099-1-richard.genoud@bootlin.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20251205133641.2052099-1-richard.genoud@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.31.202]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS0EPF0000019F:EE_|GV1PR10MB8967:EE_
+X-MS-Office365-Filtering-Correlation-Id: ca6c5dbd-baf3-4918-29a2-08de341e544f
+X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|82310400026|36860700013|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cHFCLzB3NHJhTVUwOU5QM0E5QUVnd0ZZb1hTM0hhQ1BKSnRMeVFXYW5nVHZi?=
+ =?utf-8?B?QUZaVUdXaDBIbzdoR29zWCtEeGNxb1J4Q3lVNDZOQ0ZPc2twcElmKzVaL3JW?=
+ =?utf-8?B?RzFxNUpKcHA3YVRIdVNlNko4RVByWWxyK0RtZmljdDRTZ1BiaGowdnRTRjlX?=
+ =?utf-8?B?RHlYOVJ1c0VScUhBQ0tiNWdWNVhtRDBtSUlUb2dIelBhMy84WllEN3o4dXZn?=
+ =?utf-8?B?L1N3ZHE5alJldlZoRTZabGJUNi9qYWV5bXdHMkYxUnZDSWdLcEZWbDdvNjN1?=
+ =?utf-8?B?WEptRTlxa2hCR25saDNpOGxKeVAxcnZjbHd3VVVRYkZDYVI0YTdIZDFPaFhq?=
+ =?utf-8?B?SmEwNUVNL1hteUJocFBMS2dzVFhLbzJmdzRwZVhjZGhNSDhxWkt4VHRleU9T?=
+ =?utf-8?B?bFRYczJNclhjQi9xcUxLaTNldUNYWHFEcG5rMjhEcCtHeW5VRVdOMWE4WjVK?=
+ =?utf-8?B?b2NFVTVGY2NrSDRReEo3TjNHS25NNXdjazZYQVV4ajFwSE5kRGNWVnpST1U1?=
+ =?utf-8?B?UlRoUklwOXcxM3pWNkFtbXRDVnJKN1U4aE1kTjUxWUZNZHdSSWlxenN0L1B3?=
+ =?utf-8?B?ZE8vSDViTzNYTEFZODRzR3RrcmhwMFp5TkxDZzBxeU9nNnN5dFdwSW9IQ3ZK?=
+ =?utf-8?B?YllxUm1QK012VWpJNllYbHdBRk9rd01tdWNtbFhYV3diM3hmQUc2ZVEzdkxj?=
+ =?utf-8?B?TG1yREJrUTNLZGt2Y2xTZ01SOXVPUnI0ZE02em00aVRYMnErQ0QzdnhHaUUz?=
+ =?utf-8?B?MlhTbkowQXhkOFdKUU02QzFVV3FzdUR0blZic1Q3dmFVODVPQXlnSDZ2VHlS?=
+ =?utf-8?B?VVk3Ynl3WWlkaDlzeVJYNDFmWVRIRzFSQmZQOGJPSTlGbElvMTdiRUNwRFFM?=
+ =?utf-8?B?eUlVMnljSlgzc1I2QytxUVNjMDZ2aHF4VUFSdUhiZlhadlN4RHp4OVhUc1hm?=
+ =?utf-8?B?ZWRqbkdlS1VwN0NBbnZHS0FoY0JqSHp5bS9KRzZoK01tNnNxVkpFU0VBM1E0?=
+ =?utf-8?B?ZGxMc0FTWWFQNmtVbEliYWxqOTFSVWNWV3RxM3JUK2Q1bTExLzhsWTI1NDBi?=
+ =?utf-8?B?SkpiSXh5RmtVcUdWaVQzL25ocmllT0hKODFHZlEzRG9UaHFJbUNLbDhxcDBp?=
+ =?utf-8?B?bUtpWk9ZZWlwbEVlUHhpQTFmUGFIYnVzVjRHdCtvZHNDM2pBQmtsd3EvaUdh?=
+ =?utf-8?B?cnlXN2h4b2diZXIvdVBFVDF5MEZ2MkJJNkVsMmRkMVZMdWFsODQxVklIVVU4?=
+ =?utf-8?B?SW84dm1rMWgraGcvTUFZSjJDTUJibHk4emtubUgvcVJqUmdXYjVnc3EyNnN4?=
+ =?utf-8?B?dzhRQ2RYZitwVGlwOUI3QVBsRWtwalFkOE1GTDM0aXZNNUdTOFUwQlIzNER1?=
+ =?utf-8?B?dHlRek8yeTNiUkNBSjJZMDRTQndYSEl5TWgwUENud0tGSUdjRWJmb1hCa0gv?=
+ =?utf-8?B?YWs1UDNQNG5waXlOU05DdXVmbjR4VUFNN0NRWk05Tmh0MHNhYVlad2IwNEtI?=
+ =?utf-8?B?d0FZZENJYjJaTWgxaVZPUFltOFBET2hpV2xUbVE1U2Nqck5CWTRzV2p5aFJk?=
+ =?utf-8?B?Mjc1cUNDODgvTFJpWURUTUFxb1N0Q1NObUJQTW1sY0xibTBwNWdXWCtoellk?=
+ =?utf-8?B?ZFpmS1ZneWlaLzJjUGxIS3RuTmdaOFhhMlR6NHB5czBkU1FTZEVpUUlVSEVI?=
+ =?utf-8?B?UzZ4VDlPYnBCZkpubFZZcTdrQVJLbENqRkJPUTdyNXI4WUdaSmY0TTRIeldY?=
+ =?utf-8?B?QXdzNmIwV1FqMStvR1pTUDR2TFRlR2xiQzhWczJKTjhMQXpjbWY5SXkxVzVD?=
+ =?utf-8?B?MFVtRG1PRDdRcDlFemZsVk1JUHdvRW5kc3orcHRYemYzRmc3Ri9md3ZTbFhk?=
+ =?utf-8?B?S0tjb1lNS0JpVHVjd0F2bHNSbjkwem91eHhjWFVhWC9lOEI5Q1hPajJhMzVW?=
+ =?utf-8?B?ZjJ3d24reUtBb1Mvb0NsSnBzNnFFSnhPL1JNdHN3RFpCQzBzZWwrdkxaVWRB?=
+ =?utf-8?B?TTJXREhZa3JjMU9IUE00UTNRWmxRT3Y1Rm5VaW1sdWZwMERtZWFhOXJabEpt?=
+ =?utf-8?B?bytFSStsSDl3YzdEcm9OdDdodk5FdjBHS0xnMXUxM24vN1RpczUzdXdKc0hi?=
+ =?utf-8?Q?HlZU=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2025 16:50:00.0437 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca6c5dbd-baf3-4918-29a2-08de341e544f
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF0000019F.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB8967
+X-Proofpoint-GUID: Je2DcaxBrtV-nBkJU-fQHY7PXl-LKs8v
+X-Proofpoint-ORIG-GUID: Je2DcaxBrtV-nBkJU-fQHY7PXl-LKs8v
+X-Authority-Analysis: v=2.4 cv=FtUIPmrq c=1 sm=1 tr=0 ts=69330d3e cx=c_pps
+ a=Dl26nKl42HOoYHHjd8jJkg==:117 a=d6reE3nDawwanmLcZTMRXA==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=Uo5EeBN78AAA:10 a=IkcTkHD0fZMA:10
+ a=wP3pNCr1ah4A:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=P-IC7800AAAA:8 a=StgzJPoknb80omNv__AA:9
+ a=QEXdDO2ut3YA:10 a=d3PnA9EDa4IxuAV0gXij:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjA1MDEyMyBTYWx0ZWRfXw3HVW50nixbt
+ m56iYS5DNJbM9wehd0hT/TfW38dPhW1Sz4iXySu5Eo4Cw6SfQSjRAdcZsoVu3N76HL63adhYs2l
+ sQeaka1F8AXEenD24T+fgCHW1L/ISeh0NxJr70h7KBlY9VttKeyIcZA4oo561YQm+WLxF0mFdAg
+ i/yWtiZBIhcbpSb5hEO076/5TYZhh+iMCBl7M9x3cuOhpBFtLE5wU8U6C4BQtXcY5Cn4fd04P/j
+ t34GyDaYfSFD8RGH4TwdQdwkkgoPOf38lfc/I/fHGnn10H2NxUYn6adFYwVYkoaMtEIedOG8818
+ yiiJ5cR8g9Z3t1REt3Z8USsxCeKdbYgz1pva6GDLxTs0/sxnyXhfVqTDwQ+QyJxRV+AgeoRNdtv
+ SI3KY/DmLfZn680nh7hT1NUV2Qs8rg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-05_06,2025-12-04_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ spamscore=0 adultscore=0 priorityscore=1501 bulkscore=0 lowpriorityscore=0
+ impostorscore=0 suspectscore=0 clxscore=1011 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512050123
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,118 +191,52 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/5/25 17:01, Linus Walleij wrote:
-> I am moving over to using my email address at kernel.org.
-> Change this in all the affected MAINTAINERS files.
-> 
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
-> ---
-> Changes in v2:
-> - Collect Quentin's ACK.
-> - Also add a small .mailmap entry to push mail to the new address.
-> - Link to v1: https://lore.kernel.org/r/20251205-linusw-kernel-org-v1-1-a36e342c4b97@kernel.org
-> ---
->   .mailmap                            | 1 +
->   MAINTAINERS                         | 4 ++--
->   board/armltd/integrator/MAINTAINERS | 2 +-
->   board/armltd/vexpress64/MAINTAINERS | 6 +++---
->   board/broadcom/bcmns/MAINTAINERS    | 2 +-
->   5 files changed, 8 insertions(+), 7 deletions(-)
-> 
-> diff --git a/.mailmap b/.mailmap
-> index 04daa274ef31..0e01452a70cb 100644
-> --- a/.mailmap
-> +++ b/.mailmap
-> @@ -75,6 +75,7 @@ Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <j
->   Kalyani Akula <kalyani.akula@amd.com> <kalyani.akula@xilinx.com>
->   Klaus Goger <klaus.goger@cherry.de> <klaus.goger@theobroma-systems.com>
->   Masahisa Kojima <kojima.masahisa@socionext.com> <masahisa.kojima@linaro.org>
-> +Linus Walleij <linusw@kernel.org> <linus.walleij@linaro.org>
->   Love Kumar <love.kumar@amd.com> <love.kumar@xilinx.com>
->   Lukasz Majewski <lukma@denx.de>
->   Marek Behún <kabel@kernel.org> <marek.behun@nic.cz>
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index cddeca734ffb..1789f023631a 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -820,7 +820,7 @@ F:	include/linux/soc/ti/
->   
->   ARM U8500
->   M:	Stephan Gerhold <stephan@gerhold.net>
-> -R:	Linus Walleij <linus.walleij@linaro.org>
-> +R:	Linus Walleij <linusw@kernel.org>
->   S:	Maintained
->   F:	arch/arm/dts/ste-*
->   F:	arch/arm/mach-u8500/
-> @@ -1648,7 +1648,7 @@ F:	include/scmi*
->   N:	scmi
->   
->   SEAMA
-> -M:	Linus Walleij <linus.walleij@linaro.org>
-> +M:	Linus Walleij <linusw@kernel.org>
->   S:	Maintained
->   F:	cmd/seama.c
->   F:	doc/usage/cmd/seama.rst
-> diff --git a/board/armltd/integrator/MAINTAINERS b/board/armltd/integrator/MAINTAINERS
-> index 8af765eaebc8..a228fc3daec8 100644
-> --- a/board/armltd/integrator/MAINTAINERS
-> +++ b/board/armltd/integrator/MAINTAINERS
-> @@ -1,5 +1,5 @@
->   INTEGRATOR BOARD
-> -M:	Linus Walleij <linus.walleij@linaro.org>
-> +M:	Linus Walleij <linusw@kernel.org>
->   S:	Maintained
->   F:	board/armltd/integrator/
->   F:	include/configs/integratorcp.h
-> diff --git a/board/armltd/vexpress64/MAINTAINERS b/board/armltd/vexpress64/MAINTAINERS
-> index c38ab520c521..58ab5db7e4a2 100644
-> --- a/board/armltd/vexpress64/MAINTAINERS
-> +++ b/board/armltd/vexpress64/MAINTAINERS
-> @@ -1,18 +1,18 @@
->   VEXPRESS64 PLATFORM
->   M:	David Feng <fenghua@phytium.com.cn>
-> -M:	Linus Walleij <linus.walleij@linaro.org>
-> +M:	Linus Walleij <linusw@kernel.org>
->   M:	Peter Hoyes <Peter.Hoyes@arm.com>
->   S:	Maintained
->   F:	board/armltd/vexpress64/
->   F:	include/configs/vexpress_aemv8.h
->   
->   VEXPRESS_AEMV8A_SEMI BOARD
-> -M:	Linus Walleij <linus.walleij@linaro.org>
-> +M:	Linus Walleij <linusw@kernel.org>
->   S:	Maintained
->   F:	configs/vexpress_aemv8a_semi_defconfig
->   
->   JUNO DEVELOPMENT PLATFORM BOARD
-> -M:	Linus Walleij <linus.walleij@linaro.org>
-> +M:	Linus Walleij <linusw@kernel.org>
->   S:	Maintained
->   F:	configs/vexpress_aemv8a_juno_defconfig
->   
-> diff --git a/board/broadcom/bcmns/MAINTAINERS b/board/broadcom/bcmns/MAINTAINERS
-> index 63c6d8bb4aca..4972d6cc9343 100644
-> --- a/board/broadcom/bcmns/MAINTAINERS
-> +++ b/board/broadcom/bcmns/MAINTAINERS
-> @@ -1,5 +1,5 @@
->   BCMNS BOARD
-> -M:	Linus Walleij <linus.walleij@linaro.org>
-> +M:	Linus Walleij <linusw@kernel.org>
->   S:	Maintained
->   F:	board/broadcom/bcmns/
->   F:	configs/bcmns_defconfig
-> 
-> ---
-> base-commit: c98b6a6dcd1fc7bcba081fc2353954e33de5053c
-> change-id: 20251205-linusw-kernel-org-f2cbcfa6d34b
-> 
-> Best regards,
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+On 12/5/25 14:36, Richard Genoud wrote:
+> In stm32_i2c_choose_solution, the double loop continues even after a
+> solution is found.
+> 
+> Breaking out of this double loop once a solution is found permits to
+> gain some precious ms.
+> 
+> This saves about 13ms in U-Boot.
+> 
+> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
+> ---
+>  drivers/i2c/stm32f7_i2c.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/i2c/stm32f7_i2c.c b/drivers/i2c/stm32f7_i2c.c
+> index 3f51b1dd1db4..cb5e2c0e31e5 100644
+> --- a/drivers/i2c/stm32f7_i2c.c
+> +++ b/drivers/i2c/stm32f7_i2c.c
+> @@ -651,11 +651,13 @@ static int stm32_i2c_choose_solution(u32 i2cclk,
+>  						v->sclh = h;
+>  						sol_found = true;
+>  						memcpy(s, v, sizeof(*s));
+> +						goto end_loop;
+>  					}
+>  				}
+>  			}
+>  		}
+>  	}
+> +end_loop:
+>  
+>  	if (!sol_found) {
+>  		log_err("no solution at all\n");
+> 
+> base-commit: c5e6d2ab7eba68cbfb600cdc131c0c375ced2ec9
+
+
+Hi Richard
+
+If i have well understood the algorithm, the original implementation selects the *best* solution
+whereas with your patch, the algorithm selects the *first* solution.
+
+Patrice
