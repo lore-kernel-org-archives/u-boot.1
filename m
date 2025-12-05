@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2C05D2F7CE
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 10:04:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7478D2F7CF
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 10:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BE6084199;
-	Fri,  5 Dec 2025 11:04:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BA91841C8;
+	Fri,  5 Dec 2025 11:04:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="VQXUBlLJ";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Ay+vIIFu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A28D7841A2; Fri,  5 Dec 2025 11:04:02 +0100 (CET)
-Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
+ id C9B078418E; Fri,  5 Dec 2025 06:03:27 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D837E840FB
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 11:03:59 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=norik.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=primoz.fiser@norik.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
- s=default;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=l4vH7jIQcCy4TO4s8NXNKxfbs9/ySN2LzDUr7xHj3is=; b=VQXUBlLJwpuHkCQrwoW2107tOW
- SfPU9AhiUx69j0RkfMao21IOghNr5ku+WS8r47/CWeMRs1q9n6BFw/USh0gcSal3FYcAnezJgiC2L
- pUa4//8os2RWLjlY0RTnNYeY6Z6p5aeFuaXrTYgyE5xoyPoQnyO3YdqRlWrj4CgxqIwGQMAGWQHny
- Kbl1iYEL5WjL20ypzLbb9VUceZHnRO4j9XoNYmpRxSQwAA1+YluJotgWBUPPznj3HM9v4ay0ojtXz
- LSwE9KR06z6aRm057CQE+L/DFLJodLHYzrGvFh3aDfjRUTEapTEmA1yvzMtRcA0N6wHrLQuk+kkUM
- zu42fTLQ==;
-Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:50770
- helo=[192.168.69.116])
- by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
- (Exim 4.98.2) (envelope-from <primoz.fiser@norik.com>)
- id 1vRSfR-0000000448g-3bpu; Fri, 05 Dec 2025 11:03:57 +0100
-Message-ID: <fec9f3b7-299f-4f7a-ac30-2ece6c362386@norik.com>
-Date: Fri, 5 Dec 2025 11:03:57 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 9B33F83AC6
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 06:03:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1A1CE102F2B; Fri,  5 Dec 2025 06:03:12 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1764911002;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=H8szaFzmFYgcKRxnvsGHbvU2bdsKM5Gc+XDeqj3Ch8o=;
+ b=Ay+vIIFuxrKWKe677CEMJHWjkWNgW5YwWr8zVj+PGnG1WadJNbOB9yDTpBocKo6BIhEFwd
+ 1sO1S/xi9Vksab2bGX87uoqJfGrPGaErxuPauyBmq7i1CSWRpzCJfVGjzeqvUrn9f+Sc+l
+ Nh+JhWJ4vJqbtMntweJCdVzKlIoovD0S/2Z+fT1ByjG6Uk2scrZE5F4B+P4Wpgn6WxQEuR
+ g52NjMaBt79ocjhHlY1hU2gTcISfK39iseY0MFBXh9386s/oihQTk/OwVsLtTrrJwQls3Y
+ B7x2qf2g/e6JheiTAkNcRCJ9BR/hTUcJXhLPUbAro37x2XNrsJGIhvu4RsK7Ew==
+Message-ID: <e2b4a1f7-d915-8e83-2f9b-7f48a56d8e2e@nabladev.com>
+Date: Fri, 5 Dec 2025 06:03:24 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] board: phytec: phycore-imx93: Switch to standard boot
-To: Benjamin Hahn <B.Hahn@phytec.de>, Mathieu Othacehe
- <m.othacehe@gmail.com>, Christoph Stoidner <C.Stoidner@phytec.de>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>
-References: <20251204080744.3868067-1-primoz.fiser@norik.com>
- <4b0bf7cf-db2d-48e8-93cc-854b0e7aa802@phytec.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v3 0/6] Add support for SM3 secure hash
 Content-Language: en-US
-From: Primoz Fiser <primoz.fiser@norik.com>
-Autocrypt: addr=primoz.fiser@norik.com; keydata=
- xjMEZrROOxYJKwYBBAHaRw8BAQdAADVOb5tiLVTUAC9nu/FUl4gj/+4fDLqbc3mk0Vz8riTN
- JVByaW1veiBGaXNlciA8cHJpbW96LmZpc2VyQG5vcmlrLmNvbT7CiQQTFggAMRYhBK2YFSAH
- ExsBZLCwJGoLbQEHbnBPBQJmtE47AhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQagttAQducE+T
- gAD+K4fKlIuvH75fAFwGYG/HT3F9mN64majvqJqvp3gTB9YBAL12gu+cm11m9JMyOyN0l6Os
- jStsQFghPkzBSDWSDN0NzjgEZrROPBIKKwYBBAGXVQEFAQEHQP2xtEOhbgA+rfzvvcFkV1zK
- 6ym3/c/OUQObCp50BocdAwEIB8J4BBgWCAAgFiEErZgVIAcTGwFksLAkagttAQducE8FAma0
- TjwCGwwACgkQagttAQducE8ucAD9F1sXtQD4iA7Qu+SwNUAp/9x7Cqr37CSb2p6hbRmPJP8B
- AMYR91JYlFmOJ+ScPhQ8/MgFO+V6pa7K2ebk5xYqsCgA
-Organization: Norik systems d.o.o.
-In-Reply-To: <4b0bf7cf-db2d-48e8-93cc-854b0e7aa802@phytec.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cp2.siel.si
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
-X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Greg Malysa <malysagreg@gmail.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymondmaoca@gmail.com>, Sean Edmond
+ <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ briansune <briansune@gmail.com>
+References: <20251118043042.27726-1-hs@nabladev.com>
+ <176487670995.2050783.17410258029578449020.b4-ty@konsulko.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <176487670995.2050783.17410258029578449020.b4-ty@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Fri, 05 Dec 2025 11:04:35 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,209 +99,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Benjamin,
+Hello Tom,
 
-On 5. 12. 25 10:41, Benjamin Hahn wrote:
-> Hi Primoz,
-> On 04.12.25 09:07, Primoz Fiser wrote:
->> Enable standard boot for the phyCORE-i.MX93 board and use it as a new
->> default. Add required standard boot variables to the environment, while
->> removing old boot scripts and now unnecessary environment variables.
->> Adjust variables according to the requirements of PHYTEC ampliphy-boot
->> distro-boot. Last but not least, order environment vars by alphabet and
->> run 'make savedefconfig' to resync defconfig.
+On 04.12.25 20:31, Tom Rini wrote:
+> On Tue, 18 Nov 2025 05:30:36 +0100, Heiko Schocher wrote:
+> 
+>> Add SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and described
+>> at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
 >>
->> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
->> ---
->>   arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi | 16 +++++
->>   board/phytec/phycore_imx93/phycore_imx93.env  | 69 ++-----------------
->>   configs/imx93-phycore_defconfig               | 12 +++-
->>   3 files changed, 33 insertions(+), 64 deletions(-)
+>> TPMv2 defines hash algo sm3_256, which is currently
+>> not supported and prevented TPMv2 chip with newer
+>> firmware to work with U-Boot. Seen this on a ST33TPHF2XI2C
 >>
->> diff --git a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
->> index 0c8d0ba9693f..646b617949d6 100644
->> --- a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
->> +++ b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
->> @@ -30,6 +30,22 @@
->>   		ethernet1 = &eqos;
->>   	};
->>   
->> +	bootstd {
->> +		bootph-verify;
->> +		compatible = "u-boot,boot-std";
->> +
->> +		filename-prefixes = "/", "/boot/";
->> +		bootdev-order = "mmc0", "mmc1", "ethernet";
->> +
->> +		rauc {
->> +			compatible = "u-boot,distro-rauc";
->> +		};
->> +
->> +		script {
->> +			compatible = "u-boot,script";
->> +		};
->> +	};
->> +
->>   	firmware {
->>   		optee {
->>   			compatible = "linaro,optee-tz";
->> diff --git a/board/phytec/phycore_imx93/phycore_imx93.env b/board/phytec/phycore_imx93/phycore_imx93.env
->> index 7b0a90e64472..8a2161e4abdf 100644
->> --- a/board/phytec/phycore_imx93/phycore_imx93.env
->> +++ b/board/phytec/phycore_imx93/phycore_imx93.env
->> @@ -1,70 +1,13 @@
->>   /* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
->>   
->> -#include <env/phytec/rauc.env>
->> -#include <env/phytec/overlays.env>
->> -
->> -bootcmd=
->> -	mmc dev ${mmcdev};
->> -	if mmc rescan; then
->> -		if test ${doraucboot} = 1; then
->> -			run raucinit;
->> -		fi;
->> -		if run loadimage; then
->> -			run mmcboot;
->> -		else
->> -			run netboot;
->> -		fi;
->> -	fi;
->> -image=Image
->> +boot_script_dhcp=net_boot_fit.scr.uimg
->> +bootcmd=bootflow scan -lb;
+>> [...]
 > 
-> If you leave CONFIG_USE_BOOTCOMMAND and CONFIG_BOOTSTD_DEFAULTS 
-> activated, you can remove th bootcmd env variable, as standardboot will 
-> set it for you automatically.
-
-True! Lets simplify it even more.
-
-I will send v2 for that.
-
-Thanks,
-
-BR,
-Primoz
-
+> Applied to u-boot/next, thanks!
 > 
-> Benjamin
-> 
->>   console=ttyLP0
->>   fdt_addr_r=0x90000000
->> -fdtoverlay_addr_r=0x900c0000
->> -bootenv_addr_r=0x90500000
->>   fdtfile=CONFIG_DEFAULT_FDT_FILE
->> +fdtoverlay_addr_r=0x900c0000
->>   ip_dyn=yes
->> +kernel_addr_r=0x88000000
->> +nfsroot=/srv/nfs
->>   prepare_mcore=setenv optargs "${optargs} clk-imx93.mcore_booted"
->> -mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
->> -mmcpart=1
->> -mmcroot=2
->> -mmcautodetect=yes
->> -mmcargs=setenv bootargs console=${console},${baudrate} earlycon
->> -	root=/dev/mmcblk${mmcdev}p${mmcroot} ${raucargs} rootwait rw ${optargs}
->> -loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
->> -loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
->> -mmcboot=
->> -	echo Booting from mmc ...;
->> -	if test ${no_bootenv} = 0; then
->> -		if run mmc_load_bootenv; then
->> -			env import -t ${bootenv_addr_r} ${filesize};
->> -		fi;
->> -	fi;
->> -	run mmcargs;
->> -	if run loadfdt; then
->> -		run mmc_apply_overlays;
->> -		booti ${loadaddr} - ${fdt_addr_r};
->> -	else
->> -		echo WARN: Cannot load the DT;
->> -	fi;
->> -nfsroot=/nfs
->> -netargs=setenv bootargs console=${console},${baudrate} earlycon
->> -	root=/dev/nfs ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp ${optargs}
->> -netboot=
->> -	echo Booting from net ...;
->> -	run netargs;
->> -	if test ${ip_dyn} = yes; then
->> -		setenv get_cmd dhcp;
->> -	else
->> -		setenv get_cmd tftp;
->> -	fi;
->> -	if test ${no_bootenv} = 0; then
->> -		if run net_load_bootenv; then
->> -			env import -t ${bootenv_addr_r} ${filesize};
->> -		fi;
->> -	fi;
->> -	${get_cmd} ${loadaddr} ${image};
->> -	if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
->> -		run net_apply_overlays;
->> -		booti ${loadaddr} - ${fdt_addr_r};
->> -	else
->> -		echo WARN: Cannot load the DT;
->> -	fi;
->> +scriptaddr=0x83500000
->> diff --git a/configs/imx93-phycore_defconfig b/configs/imx93-phycore_defconfig
->> index 4c952e966d1a..9e8ff9b6ca90 100644
->> --- a/configs/imx93-phycore_defconfig
->> +++ b/configs/imx93-phycore_defconfig
->> @@ -5,10 +5,10 @@ CONFIG_SYS_MALLOC_LEN=0x2000000
->>   CONFIG_SYS_MALLOC_F_LEN=0x20000
->>   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->> +CONFIG_ENV_SOURCE_FILE="phycore_imx93"
->>   CONFIG_NR_DRAM_BANKS=2
->>   CONFIG_PHYTEC_SOM_DETECTION=y
->>   CONFIG_PHYTEC_EEPROM_BUS=2
->> -CONFIG_ENV_SOURCE_FILE="phycore_imx93"
->>   CONFIG_ENV_SIZE=0x10000
->>   CONFIG_ENV_OFFSET=0x700000
->>   CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
->> @@ -33,8 +33,13 @@ CONFIG_SYS_MEMTEST_START=0x80000000
->>   CONFIG_SYS_MEMTEST_END=0x90000000
->>   CONFIG_REMAKE_ELF=y
->>   # CONFIG_ANDROID_BOOT_IMAGE is not set
->> +CONFIG_FIT=y
->> +CONFIG_FIT_SIGNATURE=y
->> +CONFIG_BOOTSTD_FULL=y
->> +# CONFIG_BOOTSTD_DEFAULTS is not set
->>   CONFIG_DISTRO_DEFAULTS=y
->>   CONFIG_OF_SYSTEM_SETUP=y
->> +# CONFIG_USE_BOOTCOMMAND is not set
->>   CONFIG_DEFAULT_FDT_FILE="oftree"
->>   CONFIG_SYS_CBSIZE=2048
->>   CONFIG_SYS_PBSIZE=2074
->> @@ -52,6 +57,9 @@ CONFIG_SPL_I2C=y
->>   CONFIG_SPL_POWER=y
->>   CONFIG_SPL_WATCHDOG=y
->>   CONFIG_SYS_PROMPT="u-boot=> "
->> +# CONFIG_CMD_BOOTDEV is not set
->> +# CONFIG_CMD_BOOTMETH is not set
->> +# CONFIG_CMD_BOOTSTD is not set
->>   CONFIG_CMD_ERASEENV=y
->>   CONFIG_CMD_NVEDIT_EFI=y
->>   CONFIG_CRC32_VERIFY=y
->> @@ -149,5 +157,7 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1fc9
->>   CONFIG_USB_GADGET_PRODUCT_NUM=0x0152
->>   CONFIG_CI_UDC=y
->>   CONFIG_ULP_WATCHDOG=y
->> +# CONFIG_RSA is not set
->> +# CONFIG_SPL_SHA256 is not set
->>   CONFIG_LZO=y
->>   CONFIG_BZIP2=y
-> 
-> 
+> [1/6] lib: Import rol32 function from Linux
+>        commit: 6a0c939b88fd42c6b0a374f7c87317f292df46a1
+> [2/6] lib: import sm3 256 hash parts from linux
+>        commit: 41c0131b950a16747929ab310588cf5db8e38123
+> [3/6] lib: sm3: implement U-Boot parts
+>        commit: c4ab316269debc321907acc4f8f02dfe5653aeaf
+> [4/6] test: cmd: hash: add unit test for sm3_256
+>        commit: 213601a600f1e8894cea76b0bfc131f038882407
+> [5/6] tpm2: add sm3 256 hash support
+>        commit: 7c3f05ad51e4bc23dd4f411f28968f1d8f43099c
+> [6/6] test: cmd: fix a typo in md5 test
+>        commit: b30557b3b46c5162cb88a57907c517ed95557239
+
+Oh, may a little to fast, as Ilias and Quentin had some comments
+about tpm2 implementation/test (tpm2: add sm3 256 hash support
+patch). But I can send changes on top of that patches (but
+give me some time for it... end of year rally has started...)
+
+bye,
+Heiko
 
 -- 
-Primoz Fiser
-phone: +386-41-390-545
-email: primoz.fiser@norik.com
---
-Norik systems d.o.o.
-Your embedded software partner
-Slovenia, EU
-phone: +386-41-540-545
-email: info@norik.com
-
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
