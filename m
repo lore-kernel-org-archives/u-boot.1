@@ -4,104 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00EA6D3748E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 19:33:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEE7ED374A1
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 21:04:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26C6284213;
-	Fri,  5 Dec 2025 20:33:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B78A84218;
+	Fri,  5 Dec 2025 22:04:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i9UTbnjy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mRudF7kN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FC5184218; Fri,  5 Dec 2025 20:33:16 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id E05958421A; Fri,  5 Dec 2025 22:04:15 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03B24839E8
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 20:33:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B31CE8420D
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 22:04:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7c75b829eb6so1886219a34.1
- for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 11:33:13 -0800 (PST)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-3e3dac349easo2189637fac.2
+ for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 13:04:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764963193; x=1765567993; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1764968652; x=1765573452; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AEUxsuiH62Gs5mWvUITmJopoecpKl/NIPUNIKeUcZuo=;
- b=i9UTbnjyglzwbBZNyF7rQWVlvuw4QYjwxI6xjUhFtUF/+PEogBIUAX2fN1tmLPRElj
- TYEl/9QLdwy6gmv2QLODqXqnDZTimtNLg4zmlZUsADY+VFSgvXFVeOosW82w80uaCJL/
- ofnhrTKQaHzw8y8ZLemCHHPd49SNM1lAl67Mg=
+ bh=pm20G7mqMlhXr8DLPllPWgNqnbSfTVBzfsBStnqz5YM=;
+ b=mRudF7kNPpm3EMy6wywZ+kir+yS/gTGE0eMIZgG6blxvDElnoXFUdlVMs3946Xkrx6
+ IFv/fU48RQERYqHypfOUb1SNFSkiQeDpzZs2AMu5ZXj0S3E14giu17knovAVR3A13Z4S
+ Rw9jDPDfAt+Skk6DHpB8gZGzwBz6FY3pZKbRI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764963193; x=1765567993;
+ d=1e100.net; s=20230601; t=1764968652; x=1765573452;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AEUxsuiH62Gs5mWvUITmJopoecpKl/NIPUNIKeUcZuo=;
- b=ApCQq2vYAfH+YfbUL4Cg+4SRIwLawp9W6Jvx8BcL1oriog1kaaXz4r+TQ8z42OFS4m
- AP31HN1NuLVnazFxk14mFI5uzulmjvYj6lc9uRZd77LGCYX9SO4jFbVBGwzZ6BLi7mlX
- tRE3KznEQ8Vg/xexU5DAbkKZliItUArPESs9K/9G09zJ+siiKuwjzEvg72PY9NDc0AwJ
- H6izuNlVe5syvyZwfaEc8P74oaDf6JO1qczTSpYFVJ5W97BhffmiudQfhY63yOoBFoCb
- Abwm34EXr/Jnk8Iqd2HspcB/PzlX4dzAeBRifa6jhte5EXyOIqAOAdC4m5ZQvTVXj4+h
- I28A==
-X-Gm-Message-State: AOJu0Yx9TL6WqVSXc+2upZY1HyzRr5UnrviKi2zjNdlvq24C05hSX/9F
- pa8jc3Ve6z2rEATJBzJon9OmpeXljAU4J8hPrT2DmVHll6lD13wTeVIZUIHjDCOY8dU=
-X-Gm-Gg: ASbGncukRCILgZtMNAhJW8VoAEftYcJneB/r2otqSb+BxSwHqyNHK6SpSsGAv1n8n09
- OwYyun+i66h+Pn+jTbRrDAj9nOypPG6RMK8n0yw8tuXbtaXA7xJ7lbhU+PoxRgqJf/FAE7MuY7d
- S44ItioRuNRKhiThgWexDiNoBG32WI+V5b2EATrlVTE/sryu4Tap22tW7eZAGsF/Dryyz5vt8+c
- 2qCaUfi78ZpVjpxtB/trFFAryYALGEDYzWT6w/30QzEIK99+T6AWzD28TCOp/QtGoi/2C+eUgtZ
- nHU4BcaR4ktR0IdN7/z2nhXicMBzkattZwOZsRGgzJdkKmUZ40iaCDdfo/veBAErGcsZAtskcu2
- vAQ5600SYLhOqw0wbaj0i4NMMvknbfrr9kVoFfbrSYzYwkCblrTtarxk3oYwO7ERcdbKjcVk0Hr
- mrc8B/5CbVsaMemSZsw1EXRMLF5K5SbMKzBlbvjbkGvtOqI+k0zQ==
-X-Google-Smtp-Source: AGHT+IGCJic0Xc+EjTTDwYd2poSQbvutuWSWN8ho297FcdwWkosVvPUfLLNKwtw5PwPKliqSgsdqgg==
-X-Received: by 2002:a05:6830:4424:b0:7c6:cedd:8bf8 with SMTP id
- 46e09a7af769-7c97083d09emr82828a34.27.1764963192729; 
- Fri, 05 Dec 2025 11:33:12 -0800 (PST)
+ bh=pm20G7mqMlhXr8DLPllPWgNqnbSfTVBzfsBStnqz5YM=;
+ b=PPYdjGbch3kUcMdhdtrztSoiRhOFqdEmQN+IBJz7XgDVyduXq/0lN4sgxfKLeb0fZF
+ QEUi4FHZxDhlV3Wved3hU2TBfLExwgtEpZkH9c2N0Elsi7Mq20CrDmnu97/4X1UcuOdV
+ zZmb82NZw2h08PfAmCaaXUBntxwMGJEHQmuQFATuAi/cqGbYb4mhIahlifKFCFZpxXUz
+ elvYBK7FrsNlTNYIjlEU+PQua1S0103Sroe2qW2ESoJNn8iBdiCva0pLkecSNH6X5sRv
+ PV5dKPxi0OhZCMResCzd0kntUPyB3AS0TMjpZL8lvp5+xECrP6+FywbOjeTxVTrpW1Ew
+ nCXQ==
+X-Gm-Message-State: AOJu0Yx/s/02bdQJq3qCCYFTYwarqW4xmSrMbeWxuzt0jsMMTqvV1Gny
+ aYUJ/XOKfKO60r4gAvRg5PrGEdTtZuKP/I+/XF1TeU+UQgHHlC/xf/fULJoC3AB+ReI=
+X-Gm-Gg: ASbGnct4Sl2SR2C3ae8yYHArwd8L3M4lOIkZe97UuMRgPtbpuQhkpnP0ZjUt/W0hDB0
+ 7v2Cr02q1FERtiuHwUtU0PsSCyZjmrA4wLRJYXCfxjmzFqgm13FygU8KKFUIFxkNNLibcU9jKPJ
+ f8OrLoDKMjInpwKrVHZP5TWF3PF1ksU/1LWxgmA4V4dCXSZGINTS5KG9+pxn4XuvQ7JLB7349E8
+ t29yxwrUYwBmq0n41Xc5CAevCHqWLMNslhMO0eq7/UbCYSRoKKSmjha2z5Y+WQXqGvA5nuPqtxs
+ lm84XN40tgeWyKp8Z0VVDqKqcp7/xAkNVR+Kxw/vMHH009ZVI6LeCh1lnO4wvEn0XPo2bP6uxtH
+ +U4TiVW7uUYmcKfUJ7bdWU1r4q/MukMZuJONsxFRYxOP9fhajoyAuzNvVpkRYMve8SwAW4k5gpx
+ 3B9I/cV7mTG41osPHC8VjNvdScPWgyE30nOCV2L0uvdRWYerstOw==
+X-Google-Smtp-Source: AGHT+IG9KZX9XoYFFtBad/aLRG0mUeMswnSguZtSORRMfrqSj/UKgns23hEYbvY2/lVVwNPaAby9Tw==
+X-Received: by 2002:a05:6820:81c9:b0:659:9a49:8dde with SMTP id
+ 006d021491bc7-6599a8ea4b3mr268608eaf.32.1764968652342; 
+ Fri, 05 Dec 2025 13:04:12 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95ac833d3sm4483836a34.17.2025.12.05.11.33.10
+ 006d021491bc7-6597ef5e74fsm2802837eaf.17.2025.12.05.13.04.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Dec 2025 11:33:12 -0800 (PST)
-Date: Fri, 5 Dec 2025 13:33:09 -0600
+ Fri, 05 Dec 2025 13:04:11 -0800 (PST)
+Date: Fri, 5 Dec 2025 15:04:09 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+Cc: u-boot@lists.denx.de, Heiko Schocher <hs@nabladev.com>,
  Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neha Malcom Francis <n-francis@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
  Raymond Mao <raymondmaoca@gmail.com>,
- Yegor Yefremov <yegorslists@googlemail.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
- Alexander Graf <agraf@csgraf.de>, Peter Robinson <pbrobinson@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Weijie Gao <hackpascal@gmail.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Alvin =?utf-8?Q?=C5=A0ipraga?= <alvin@pqrs.dk>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Max Merchel <Max.Merchel@ew.tq-group.com>, Mario Six <mario.six@gdsys.cc>,
- =?iso-8859-1?Q?J=2E_Neusch=E4fer?= <j.ne@posteo.net>,
- Sinan Akman <sinan@writeme.com>, Jesse Taube <mr.bossman075@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Eugen Hristev <eugen.hristev@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neha Malcom Francis <n-francis@ti.com>, Fabio Estevam <festevam@gmail.com>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH 1/5] led: remove code guarded by always false conditions
-Message-ID: <20251205193309.GA2316762@bill-the-cat>
-References: <20251119-legacy-led-unused-code-v1-0-bc0ae1235baa@cherry.de>
- <20251119-legacy-led-unused-code-v1-1-bc0ae1235baa@cherry.de>
+Subject: Re: [PATCH 1/4] corvus: remove green led support
+Message-ID: <20251205210409.GL303283@bill-the-cat>
+References: <20251119-corvus-led-red-green-v1-0-ce86b8d59dfc@cherry.de>
+ <20251119-corvus-led-red-green-v1-1-ce86b8d59dfc@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3h3q0Wvw+R7s63NO"
+ protocol="application/pgp-signature"; boundary="BmNrA2R58PbLI2eg"
 Content-Disposition: inline
-In-Reply-To: <20251119-legacy-led-unused-code-v1-1-bc0ae1235baa@cherry.de>
+In-Reply-To: <20251119-corvus-led-red-green-v1-1-ce86b8d59dfc@cherry.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -120,44 +109,37 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---3h3q0Wvw+R7s63NO
+--BmNrA2R58PbLI2eg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 19, 2025 at 05:43:45PM +0100, Quentin Schulz wrote:
+On Wed, Nov 19, 2025 at 06:01:12PM +0100, Quentin Schulz wrote:
 
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >=20
-> The last CONFIG_MVS in code was removed almost 12 years ago in commit
-> 3b98b57fa796 ("include: delete unused header files").
->=20
-> STATUS_LED_PAR was last seen 8 years ago when removed in commit
-> 5b8e76c35ec3 ("powerpc, 8xx: remove support for 8xx").
->=20
-> If CONFIG_LED_STATUS_BOARD_SPECIFIC is not defined, the build will fail
-> so we won't even reach this part of the code.
->=20
-> Let's simplify the if block to actually possible configurations.
+> green_led_on and green_led_off are only called by the legacy LED command
+> (CONFIG_LED_STATUS_CMD) when CONFIG_LED_STATUS_GREEN is enabled, both of
+> which aren't enabled for corvus, so let's simply remove it as it's dead
+> code.
 >=20
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Heiko Schocher <hs@nabladev.com>
 
-For the series (git pw series doesn't grab the cover letter), applied to
-u-boot/next, thanks!
+For the series, applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---3h3q0Wvw+R7s63NO
+--BmNrA2R58PbLI2eg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTMzcQAKCRAr4qD1Cr/k
-CjT3AQDihDGubdolrlguEQV7eFm9DI+DjlE/CbomkM84Iaw4GAD+NHh5bEKdy+Qf
-vBalVo54MepYTchXhVF028BCO6jldg4=
-=66Ac
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTNIwgAKCRAr4qD1Cr/k
+Cm0nAPsEWoQNZTfWMY8uO+BsvM9JeWqlsWTRYwx8fpSbV2Y+5AD8DVuGZA6hvVLc
+erewpUUnSCDtV+TzJJ6QEOzRROqATwI=
+=q0K/
 -----END PGP SIGNATURE-----
 
---3h3q0Wvw+R7s63NO--
+--BmNrA2R58PbLI2eg--
