@@ -4,121 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02332D33981
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 15:34:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51335D32D9C
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 15:35:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C63584205;
+	by phobos.denx.de (Postfix) with ESMTP id D17228420C;
 	Fri,  5 Dec 2025 16:34:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TMLcq/kf";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="QkffrB7p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 878BE84047; Fri,  5 Dec 2025 15:11:25 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id EAA35841BE; Fri,  5 Dec 2025 16:13:37 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63E4883A5E
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 15:11:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C167E839E2
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 16:13:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-3e7ead70738so1414586fac.0
- for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 06:11:22 -0800 (PST)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7c6e815310aso1533953a34.0
+ for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 07:13:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1764943881; x=1765548681; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vBCm9NNNZKrpGqnSI/9LLXq4S79ijI/MViRYxDl7+RE=;
- b=TMLcq/kfYAB+6UHXw00pYNJEYgnRMhwmZ1JjXBRCDXfAEQ86FzyLvC7a/Xc7Qn6F7Q
- w91i5ACchDXby1ZgzkMPf1KlHt7QZdTNEZM9kjV9hqsQ3dTNi6AHmzjycoGP753zL4Sr
- ES3k8VEyqzA3HJhai5imkq1dVi3HwztCkPXFY=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1764947605; x=1765552405;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=TampX8rjraq7O8EWbNr1MvgfMAO+trvtVw4Y92wpOg8=;
+ b=QkffrB7pAJxrFonxfFyz0BorCArArgv9JWsVZHHXiq9PrpeNBTjMmsTWtAiIl4l7hb
+ OSlz9tkCwMFpOk3iKYmhn+1BakmF/Mz6e5GF0jikN0+4l2KLUqKxJRAv6hnveOQvI79G
+ xw6UhiSiINSrS1/UJJrFhYjVPpdxXoWnZk43dWgvP93af8lDDeez1RaVjy7sELCeuMsZ
+ Zzkj0TrQfGPOkxNTQvPW4LlX7l2Wh3cGSbRCZx54yuum3+XJdkLuRHg3M1elmIwIQ/pV
+ hH4Gv3erO6V8ivy1AelgtmWE2O/CRMM2ORbZ6DJui0PZ3XnlQVSSIjlBZJGbGgd/TaPb
+ RYSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764943881; x=1765548681;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vBCm9NNNZKrpGqnSI/9LLXq4S79ijI/MViRYxDl7+RE=;
- b=pinYod8628Ez0SdN57+6jRh2KqCQeGzmEPRxK5cfh1G6trr8NTBWsJGQZmnD1qJuix
- 5UKF+PZpO3AZDD7dIkaPyFvBXqrcFBwiN4yB7WAxcH8Mtcbu1LjruKn9Uk8DB4HqXx6F
- 4OMF08c+oc1QZ5BIkNp9Myx6d4QH06bi3poa8lpMPuD8s6Oh/+Azze/Z/4LEio4i7+xi
- 7yDQkBYxvHIrJtOkscYl7D/xGYx+zBR90y9D3+fqL+CySB4aHGose7pP1Ezd1OCUYmR+
- ZnZOxQTfsGP3HNgek/RlcQpMLaa4wbjPTRrkZjcpcQexJDZ+eLMNQROIEsQ77ZyECtAk
- qkaA==
+ d=1e100.net; s=20230601; t=1764947605; x=1765552405;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TampX8rjraq7O8EWbNr1MvgfMAO+trvtVw4Y92wpOg8=;
+ b=PvAGzUT0D7J2v2StdcQQj5cWr+7l4P0QoLjDZ/ZrmBaLjF0Zl1YxafXROpOncMxmwy
+ cPujPdDlWzSYoXV1p6XVWu37aVObHYDjp9ZSUwLuZ/z25ZnGOKnzt6dsziHBNWl/xq4g
+ AglPGcLL9YT80HU4RpV6BJ0GLWHmRgoZAfjNU6Xs8RVS+hMoT5HDBos+PYuXeDN+mwWW
+ 55HJY0rL/IZ0VMCtu4X+BJ8bdE3sOvc7nz5b7Olf72YVcmnYU5AlldEy9ZCOh45jix4b
+ 89IwzAW6v+EHTsDmJULkIFlY5F3s16YyF+ljPMG1ybEIVAQZVlMN0M0tWY3izYlzjtwm
+ 9Lng==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXpjiT9O1oBEVLiSDjwaKObaUJXDuVZKsYG9mBwP3RWJg0ELTReaOSe1cX1aGlwtxLlW3Kdl9k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxb+67RZgIjKL9N3tHtX7mD6Aylz2N2zVxZsNhIFYFHu5AZjUXM
- ibvqmLKQXr0mmvxj0NkNdbBr7gSoRj0FlIOJea/9U8z0jEOOPT5wY00lGjnwvnC1vSM=
-X-Gm-Gg: ASbGncsaw/yg7HxmRLxHWhem5/9SAU2XW2YSCp6KmDEhrtzDrQBTDu1Niuo+CZRgr1q
- QskRSRseqY0sa0icebZZo444xxI7rHdxQAvBZkWAXBy5W1mZD7fqM5PTgNvY22d5L6+ofBNlva5
- wIrxgEvGUQNbkdw15iC9jtQQgeD+SDUVggXxmTM3hXQo8MZDyLrzmbzEh4EiTiO6DM0BNF7+GW9
- vUDZRmSi+VoPNCYSmFEldf3ppwRhZi0CAr2KABNuFWYTR+staWZ+1neGsKdjMYKHgVr/GtMa63l
- AL5+2lJWN8OsK4E8x6MA2OqCfuYfDVEzMNY3XziHZyLuXE+fP2nP2/fPPkWYkIc+1vpJLMmVcoW
- q6IylXEhAQ2JXicsSB9FDuF2Xch3FLgZsQo1fChvevNVq1NaeTJ0LPKxev/y56rujZvwFsob37o
- H9+tbP/lbP8ZOazByarkphRjGgyLEbZY4eA/CB2Z53ldthxRqx/w==
-X-Google-Smtp-Source: AGHT+IEq6qY8zFAu3Wd80RjuRgOOMMnyJ8rKj6uP1FIl+sWH4Cizj7uKOsYead2SM6jOEhHmB4d1Fg==
-X-Received: by 2002:a05:6870:b023:b0:3ec:4a8d:420b with SMTP id
- 586e51a60fabf-3f506780c6bmr3865892fac.42.1764943881005; 
- Fri, 05 Dec 2025 06:11:21 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3f50aaa0fdasm3431057fac.9.2025.12.05.06.11.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Dec 2025 06:11:20 -0800 (PST)
-Date: Fri, 5 Dec 2025 08:11:16 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heiko Schocher <hs@nabladev.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Anshul Dalal <anshuld@ti.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymondmaoca@gmail.com>,
- Sean Edmond <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- briansune <briansune@gmail.com>
-Subject: Re: [PATCH v3 0/6] Add support for SM3 secure hash
-Message-ID: <20251205141116.GH303283@bill-the-cat>
-References: <20251118043042.27726-1-hs@nabladev.com>
- <176487670995.2050783.17410258029578449020.b4-ty@konsulko.com>
- <e2b4a1f7-d915-8e83-2f9b-7f48a56d8e2e@nabladev.com>
- <CAC_iWjJJEG2aUKhNLLY9KgqnROtTbCKd9Ex3-mhviado=r++Cg@mail.gmail.com>
- <6d29ed19-4fd5-afc9-56e2-f4c9df34ff70@nabladev.com>
+ AJvYcCUr4JgG8A4wMa4zPXUppoXZhVfN9qBOuEq7ONbEk8hiCfzG8Oaje3La5UbmpjhkgT3PnOLAoys=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy5LX4QcarCO2ehf23GI4oQKzHDm6oMtlpZ4MJ3JRTUcGxxyMuW
+ p58r2Cydks4lEJpUv2SNHsaJakptsdcrOZ0BxW7X3rXInNWZGSrbSWA+r0AFJXlYvNs=
+X-Gm-Gg: ASbGncvwDYbTTn/sP7uDMyrhDKm4HMrP/huFUG4tBtxqvyN9xnKqpJFhudyHFpyEXmT
+ bHPXaR3BuE72xdzlGKGZUIxSDmWTjPWRWUV41qdv05p8CyuaoBjbOBr28o5fCIwdqa7IZ0R9EMy
+ UWrO7kZHzIBCTUelHcetf2UQ4ME8rUerIPYwQHv4xC5BZVBWtU0I00kJCPUgAogHtzn5t5HqUmQ
+ WG4LEa77I7UkKr2HqCLWN1BhS7rCNCbp4aUzTnj/USHZO8hRwcaDIgHfgQfgzCx9zARUJvfGFek
+ dQ+BYdwBusGJzhnyzcdYsDRGzXdVYCPCcHxL7o1u54HmLX8cvbyy6zxdgW6GqNSt+0HCn3Bbbxe
+ DsJZst7rnHfETO+CXw5F21o3SCE5UtkLqqb+5xHdKl1Yspb/S8NvdmAGEfghH1rFLz9OthBjFCA
+ 5XpbRUo+iEPiTjimTrvw/Jq1Dvd0yr1hk4mMXPrFJyOcDto5ehSdR355L++DtpaOX2aQ==
+X-Google-Smtp-Source: AGHT+IGD9ADdWGL4bVOUcMv0Wuso+uZcKfLpr3ULn62+C0jj2o4r6fsNhQqOtaKTUmGu+EqaOsTQXg==
+X-Received: by 2002:a05:6830:3c8d:b0:7c6:ca92:3621 with SMTP id
+ 46e09a7af769-7c94db6284amr7622482a34.22.1764947605314; 
+ Fri, 05 Dec 2025 07:13:25 -0800 (PST)
+Received: from ?IPV6:2600:8803:e7e4:500:c301:de6:97d:1492?
+ ([2600:8803:e7e4:500:c301:de6:97d:1492])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c95acb3cf1sm3952327a34.20.2025.12.05.07.13.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Dec 2025 07:13:24 -0800 (PST)
+Message-ID: <0e33d7ce-5b72-4edf-95c0-799acd445c19@baylibre.com>
+Date: Fri, 5 Dec 2025 09:13:23 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ddD44o6WL1k9cHrf"
-Content-Disposition: inline
-In-Reply-To: <6d29ed19-4fd5-afc9-56e2-f4c9df34ff70@nabladev.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: mediatek: switch mt8365 to OF_UPSTREAM
+To: =?UTF-8?B?TWFjcGF1bCBMaW4gKOael+aZuuaWjCk=?= <Macpaul.Lin@mediatek.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ =?UTF-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?= <pablo.sun@mediatek.com>,
+ =?UTF-8?B?QmVhciBXYW5nICjokKnljp/mg5/lvrcp?= <bear.wang@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: =?UTF-8?B?Q2h1bmZlbmcgWXVuICjkupHmmKXls7Ap?= <Chunfeng.Yun@mediatek.com>, 
+ "trini@konsulko.com" <trini@konsulko.com>, "lukma@denx.de" <lukma@denx.de>,
+ "igor.belwon@mentallysanemainliners.org"
+ <igor.belwon@mentallysanemainliners.org>, "peng.fan@nxp.com"
+ <peng.fan@nxp.com>, =?UTF-8?B?V2VpamllIEdhbyAo6auY5oOf5p2wKQ==?=
+ <Weijie.Gao@mediatek.com>, Julien Masson <jmasson@baylibre.com>,
+ "seanga2@gmail.com" <seanga2@gmail.com>, Ryder Lee <Ryder.Lee@mediatek.com>,
+ "macpaul@gmail.com" <macpaul@gmail.com>,
+ "semen.protsenko@linaro.org" <semen.protsenko@linaro.org>
+References: <20251125-arm-dts-mediatek-switch-mt8365-to-of_upstream-v1-1-707eee6dfdbc@baylibre.com>
+ <7021158b1829c5daabf62b1901a8b4988a940a92.camel@mediatek.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <7021158b1829c5daabf62b1901a8b4988a940a92.camel@mediatek.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 05 Dec 2025 16:34:34 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -136,75 +119,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/4/25 9:16 PM, Macpaul Lin (林智斌) wrote:
+> On Tue, 2025-11-25 at 11:35 -0600, David Lechner wrote:
+>> 
+>> External email : Please do not click links or open attachments until
+>> you have verified the sender or the content.
+>> 
+>> 
+>> Change mt8365_evk_defconfig to use CONFIG_OF_UPSTREAM=y and delete
+>> the
+>> U-Boot copy of the devicetree source files for mt8365.
+>> 
+>> The upstream devicetree is identical to the U-Boot one being removed
+>> (other than having more nodes for devices not used by U-Boot and
+>> upstream fixed a compatible string in &scpsys, also not affecting
+>> U-Boot).
+>> 
+>> There was one minor glitch with upstream missing a few topckgen macro
+>> definitions, so those are added to the clock driver directly as a
+>> workaround.
+>> 
+>> Signed-off-by: David Lechner <dlechner@baylibre.com>
+>> ---
+>>  arch/arm/dts/mt8365-evk.dts                     | 418 ------------
+>>  arch/arm/dts/mt8365.dtsi                        | 840 --------------
+>> ----------
+>>  board/mediatek/mt8365_evk/MAINTAINERS           |   1 -
+>>  configs/mt8365_evk_defconfig                    |   3 +-
+>>  drivers/clk/mediatek/clk-mt8365.c               |   4 +
+>>  include/dt-bindings/clock/mediatek,mt8365-clk.h | 375 -----------
+>>  6 files changed, 6 insertions(+), 1635 deletions(-)
+>> 
+> 
+> Thanks for your observation!
+> However, there are some basic checks should be ran and 
+> please keep in mind before you send the patch.
+> 
+> 1. Please always put the Maintainers and Reviewers (run
+> ./script/get_maintainer.pl) in "To:" when you
+> send the patch.
+> Otherwise reviewers might simply filter mail to the other folders 
+> in mail client and skip it.
 
---ddD44o6WL1k9cHrf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I used `b4 prep --auto-to-cc` and this is the default way it handles it. I can
+put everyone as To: next time.
 
-On Fri, Dec 05, 2025 at 09:02:28AM +0100, Heiko Schocher wrote:
-> Hello Ilias,
->=20
-> On 05.12.25 08:24, Ilias Apalodimas wrote:
-> > On Fri, 5 Dec 2025 at 07:03, Heiko Schocher <hs@nabladev.com> wrote:
-> > >=20
-> > > Hello Tom,
-> > >=20
-> > > On 04.12.25 20:31, Tom Rini wrote:
-> > > > On Tue, 18 Nov 2025 05:30:36 +0100, Heiko Schocher wrote:
-> > > >=20
-> > > > > Add SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and=
- described
-> > > > > at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
-> > > > >=20
-> > > > > TPMv2 defines hash algo sm3_256, which is currently
-> > > > > not supported and prevented TPMv2 chip with newer
-> > > > > firmware to work with U-Boot. Seen this on a ST33TPHF2XI2C
-> > > > >=20
-> > > > > [...]
-> > > >=20
-> > > > Applied to u-boot/next, thanks!
-> > > >=20
-> > > > [1/6] lib: Import rol32 function from Linux
-> > > >         commit: 6a0c939b88fd42c6b0a374f7c87317f292df46a1
-> > > > [2/6] lib: import sm3 256 hash parts from linux
-> > > >         commit: 41c0131b950a16747929ab310588cf5db8e38123
-> > > > [3/6] lib: sm3: implement U-Boot parts
-> > > >         commit: c4ab316269debc321907acc4f8f02dfe5653aeaf
-> > > > [4/6] test: cmd: hash: add unit test for sm3_256
-> > > >         commit: 213601a600f1e8894cea76b0bfc131f038882407
-> > > > [5/6] tpm2: add sm3 256 hash support
-> > > >         commit: 7c3f05ad51e4bc23dd4f411f28968f1d8f43099c
-> > > > [6/6] test: cmd: fix a typo in md5 test
-> > > >         commit: b30557b3b46c5162cb88a57907c517ed95557239
-> > >=20
-> > > Oh, may a little to fast, as Ilias and Quentin had some comments
-> > > about tpm2 implementation/test (tpm2: add sm3 256 hash support
-> > > patch). But I can send changes on top of that patches (but
-> > > give me some time for it... end of year rally has started...)
-> > >=20
-> >=20
-> > Yea I pinged Tom yesterday.
-> > tbh, my main concern was testing the changes. I dont mind if we revert
-> > and reapply or send the changes on top.
->=20
-> I am fine with sending updates on top.
+> 
+> 2. Please always run ./script/checkpatch.pl and check errors 
+> before send out the patch.
 
-Sorry for getting ahead of everyone else here, since it sounds like
-everyone is OK with updates on top, we can move forward. Thanks!
+I did run this and did not get these errors. I can see that your email server
+has modified the email by adding "External email : Please do not click links
+or open attachments until you have verified the sender or the content.". I
+believe that your email server has also changed it to Windows line endings
+during this process.
 
---=20
-Tom
+> I've download this patch (.mbox) from evolution and found 
+> the following errors must be fixed.
 
---ddD44o6WL1k9cHrf
-Content-Type: application/pgp-signature; name="signature.asc"
+You should be able to get an unmodified version of the patch from:
 
------BEGIN PGP SIGNATURE-----
+https://lore.kernel.org/u-boot/20251125-arm-dts-mediatek-switch-mt8365-to-of_upstream-v1-1-707eee6dfdbc@baylibre.com/raw
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTLoAQAKCRAr4qD1Cr/k
-CshZAP9p1NoFiGIMCHdwYj+S7xTX5BMA+waxd0iHUJGpqUW0nAD+KGo7oym39SUh
-HTde8G3LKhJtDtvSPRFgAs+nExd5bwc=
-=5izm
------END PGP SIGNATURE-----
+> 
+> ERROR: DOS line endings
+> #1809: FILE: configs/mt8365_evk_defconfig:8:
+> +CONFIG_DEFAULT_DEVICE_TREE=3D"mediatek/mt8365-evk"^M$
+> 
+> ERROR: DOS line endings
+> #1815: FILE: configs/mt8365_evk_defconfig:14:
+> +CONFIG_OF_UPSTREAM=3Dy^M$
+> 
+> ERROR: patch seems to be corrupt (line wrapped?)
+> #1828: FILE: drivers/clk/mediatek/clk-mt8365.c:14:
+> 
+> 
+> ERROR: DOS line endings
+> #1829: FILE: drivers/clk/mediatek/clk-mt8365.c:15:
+> +/* Missing topckgen clocks definition in dt-bindings */^M$
+> 
+> ERROR: DOS line endings
+> #1830: FILE: drivers/clk/mediatek/clk-mt8365.c:16:
+> +#define CLK_TOP_CLK26M         141^M$
+> 
+> ERROR: DOS line endings
+> #1831: FILE: drivers/clk/mediatek/clk-mt8365.c:17:
+> +#define CLK_TOP_CLK32K         142^M$
+> 
+> ERROR: DOS line endings
+> #1832: FILE: drivers/clk/mediatek/clk-mt8365.c:18:
+> +^M$
+> 
+> total: 7 errors, 2 warnings, 0 checks, 36 lines checked
+> 
+> Best regards,
+> Macpaul Lin
+> 
+> ************* MEDIATEK Confidentiality Notice ********************
+> The information contained in this e-mail message (including any 
+> attachments) may be confidential, proprietary, privileged, or otherwise
+> exempt from disclosure under applicable laws. It is intended to be 
+> conveyed only to the designated recipient(s). Any use, dissemination, 
+> distribution, printing, retaining or copying of this e-mail (including its 
+> attachments) by unintended recipient(s) is strictly prohibited and may 
+> be unlawful. If you are not an intended recipient of this e-mail, or believe 
+> that you have received this e-mail in error, please notify the sender 
+> immediately (by replying to this e-mail), delete any and all copies of 
+> this e-mail (including any attachments) from your system, and do not
+> disclose the content of this e-mail to any other person. Thank you!
+> 
 
---ddD44o6WL1k9cHrf--
