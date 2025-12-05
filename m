@@ -4,74 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC22BD2F7EE
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 13:47:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83351D2F7EE
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 13:53:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54310841DA;
-	Fri,  5 Dec 2025 14:47:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id C72278042F;
+	Fri,  5 Dec 2025 14:53:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="jL+oFCkq";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BQJynffr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83A8B841F9; Fri,  5 Dec 2025 14:47:27 +0100 (CET)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id D32B2809A5; Fri,  5 Dec 2025 14:53:06 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCD1B841BC
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 14:47:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 204438004F
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 14:53:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id C422DC19647;
- Fri,  5 Dec 2025 13:46:59 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 2C616606AC;
- Fri,  5 Dec 2025 13:47:23 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9251910B60A66; Fri,  5 Dec 2025 14:47:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1764942442; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=2XlITGHWg137G3xjPlp/SfM+2Oclqalw/LalvAUOnL8=;
- b=jL+oFCkql63yWBdvq8jZJjKlxQjNA4WfHroMxPMm3gc8/vDEUf6l9Mgn920DnqHXG7EL8v
- 80Nw0MMZKHI6zFpeb69sYFvjZGYErO6d6ecTg+3iYuuDWTV3/YkLWTvCYfm62EcsQdlsGW
- a4H5aBlq47uhdDA+LGdS29CRwx3FlgFY2tfom31JWaUNLWu8KOZh+w2pg+BTPbIYMdU0Be
- L7T/QC7smCEVoJ6CeMd9hnY7birrXZo0+P8KEtflptYyesrI3f7UHc7rpUUnLGuPA92ac5
- l72eIdFceOT8v0ZfC67oxK3peIaUWWyiMOIKgO+cL894Xko4XFFKjdOXDZZ65A==
-Date: Fri, 5 Dec 2025 14:47:11 +0100
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Julien Stephan <jstephan@baylibre.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, Ryder Lee
- <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, Chunfeng
- Yun <chunfeng.yun@mediatek.com>, Igor Belwon
- <igor.belwon@mentallysanemainliners.org>, Stefan Roese
- <stefan.roese@mailbox.org>, Greg Malysa <malysagreg@gmail.com>, Vasileios
- Bimpikas <vasileios.bimpikas@analog.com>, Arturs Artamonovs
- <arturs.artamonovs@analog.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Peng Fan <peng.fan@nxp.com>, Simon Glass
- <sjg@chromium.org>, Jerome Forissier <jerome.forissier@linaro.org>, Yao Zi
- <ziyao@disroot.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Alif
- Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, Sumit Garg
- <sumit.garg@kernel.org>, Julien Masson <jmasson@baylibre.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Sam Shih
- <sam.shih@mediatek.com>, David Lechner <dlechner@baylibre.com>
-Subject: Re: [PATCH 2/2] clk: mediatek: add MT8188 clock driver
-Message-ID: <20251205144711.543ba2a8@kmaincent-XPS-13-7390>
-In-Reply-To: <20251203-add-mt8188-support-v1-2-9a06ebb97734@baylibre.com>
-References: <20251203-add-mt8188-support-v1-0-9a06ebb97734@baylibre.com>
- <20251203-add-mt8188-support-v1-2-9a06ebb97734@baylibre.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 5EA3A43AF5;
+ Fri,  5 Dec 2025 13:53:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB778C4CEF1;
+ Fri,  5 Dec 2025 13:53:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1764942782;
+ bh=tIQNQxgEwWrx/A3zja2NFK5UaPdQCTCajcGDrnuivvk=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=BQJynffrMUPLNHPKjQYZMOx80GMLMHWnTmPxIc8NgCc0aErxG749um1QiyO/cf/OS
+ +/5qa8uPUU3xKok3VgSOkQitrD9aLZ66Q9LpKZouOmzlSJFyof5OvbJMqZjk8NWfyW
+ KoMLUfVDP0z4pWW+ICCJLGeHsrJmCMh6OGTmX455UQd0Ukwh4NReWx8bGxZqx5uGNJ
+ PJbwU+7fPPIuqMzfEpRgwzNyZOn0y7LRlVwtbvRCSoetEfv6jgb+KSYjuVNs9iM/mr
+ aHyiufhmXfY6WkO6SVYs+hkBrDG0rPLdJoAKAtcgpz7PnugjLciMpHpBJJqQYmH26m
+ OfYvXsqUZRI7A==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Udit Kumar <u-kumar1@ti.com>, trini@konsulko.com
+Cc: nm@ti.com, u-boot@lists.denx.de, mkorpershoek@kernel.org,
+ n-francis@ti.com, anshuld@ti.com, Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v2] doc: board: ti: Add J742S2 support
+In-Reply-To: <20251205043602.845730-1-u-kumar1@ti.com>
+References: <20251205043602.845730-1-u-kumar1@ti.com>
+Date: Fri, 05 Dec 2025 14:52:59 +0100
+Message-ID: <87pl8trq6c.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,200 +67,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 03 Dec 2025 10:31:53 +0100
-Julien Stephan <jstephan@baylibre.com> wrote:
+Hi Udit,
 
-> From: Julien Masson <jmasson@baylibre.com>
->=20
-> The following clocks have been added for MT8188 SoC:
-> apmixedsys, topckgen, infracfg, pericfg and imp_iic_wrap
->=20
-> These clocks driver are based on the ones present in the kernel:
-> drivers/clk/mediatek/clk-mt8188-*
->=20
-> Signed-off-by: Julien Masson <jmasson@baylibre.com>
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+Thank you for the patch.
+
+On Fri, Dec 05, 2025 at 10:06, Udit Kumar <u-kumar1@ti.com> wrote:
+
+> J742S2 SOC is derivative of J784S4, most of build infra of j784s4 is used
+> to build u-boot for J742S2 EVM board.
+>
+> Add guide users on how to build for that board.
+>
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 > ---
->  drivers/clk/mediatek/Makefile     |    1 +
->  drivers/clk/mediatek/clk-mt8188.c | 1840
-> +++++++++++++++++++++++++++++++++++++ 2 files changed, 1841 insertions(+)
->=20
+> Test logs
+> https://gist.github.com/uditkumarti/b2e23151728628805a680b6eab528e7c
+>
+> Changelog:
+> Changes in v2:
+> - Removed extra =
+> - link to v1:
+> https://lore.kernel.org/all/20251204142451.834404-1-u-kumar1@ti.com/
+>
+>  doc/board/ti/j784s4_evm.rst | 24 ++++++++++++++++++++++--
+>  1 file changed, 22 insertions(+), 2 deletions(-)
+>
+> diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
+> index 22442874110..69deeee1076 100644
+> --- a/doc/board/ti/j784s4_evm.rst
+> +++ b/doc/board/ti/j784s4_evm.rst
+> @@ -1,8 +1,8 @@
+>  .. SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+>  .. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
+>  
+> -J784S4 and AM69 Platforms
+> -=========================
+> +J742S2, J784S4 and AM69 Platforms
+> +=================================
+>  
+>  Introduction
+>  ------------
+> @@ -37,6 +37,11 @@ Platform information:
+>  * https://www.ti.com/tool/J784S4XEVM
+>  * https://www.ti.com/tool/SK-AM69
+>  
+> +J742S2 is derivative of J784S24 SOC, More info can be found in
+> +
+> +* TRM : https://www.ti.com/lit/ug/spruje3/spruje3.pdf
+> +* Platform Information : https://www.ti.com/tool/J742S2XH01EVM
+> +
+>  Boot Flow
+>  ---------
+>  Below is the pictorial representation of boot flow:
+> @@ -99,6 +104,15 @@ Set the variables corresponding to this platform:
+>        export UBOOT_CFG_CORTEXR=am69_sk_r5_defconfig
+>        export UBOOT_CFG_CORTEXA=am69_sk_a72_defconfig
+>  
+> +.. note::
+> +
+> +   For J742S2-EVM, use the following U_BOOT_CFG instead:
+> +
+> +   .. prompt:: bash
+> +
+> +      export UBOOT_CFG_CORTEXR=j742s2_evm_r5_defconfig
+> +      export UBOOT_CFG_CORTEXA=j742s2_evm_a72_defconfig
+> +
 
-...
+nitpick: Can't this be grouped in the same .. note:: block as for AM69
+defconfigs ?
 
-> +
-> +static int mt8188_apmixedsys_probe(struct udevice *dev)
-> +{
-> +	return mtk_common_clk_init(dev, &mt8188_apmixedsys_clk_tree);
-> +}
-> +
-> +static int mt8188_topckgen_probe(struct udevice *dev)
-> +{
-> +	return mtk_common_clk_init(dev, &mt8188_topckgen_clk_tree);
-> +}
-> +
-> +static int mt8188_topckgen_cg_probe(struct udevice *dev)
-> +{
-> +	return mtk_common_clk_gate_init(dev, &mt8188_topckgen_cg_clk_tree,
-> topckgen_cg_clks); +}
-> +
-> +static int mt8188_infracfg_ao_probe(struct udevice *dev)
-> +{
-> +	return mtk_common_clk_gate_init(dev, &mt8188_infracfg_ao_clk_tree,
-> infracfg_ao_clks); +}
-> +
-> +static int mt8188_pericfg_ao_probe(struct udevice *dev)
-> +{
-> +	return mtk_common_clk_gate_init(dev, &mt8188_pericfg_ao_clk_tree,
-> pericfg_ao_clks); +}
-> +
-> +static int mt8188_imp_iic_wrap_c_probe(struct udevice *dev)
-> +{
-> +	return mtk_common_clk_gate_init(dev,
-> &mt8188_imp_iic_wrap_c_clk_tree, imp_iic_wrap_c_clks); +}
-> +
-> +static int mt8188_imp_iic_wrap_w_probe(struct udevice *dev)
-> +{
-> +	return mtk_common_clk_gate_init(dev,
-> &mt8188_imp_iic_wrap_w_clk_tree, imp_iic_wrap_w_clks); +}
-> +
-> +static int mt8188_imp_iic_wrap_en_probe(struct udevice *dev)
-> +{
-> +	return mtk_common_clk_gate_init(dev,
-> &mt8188_imp_iic_wrap_en_clk_tree,
-> +					imp_iic_wrap_en_clks);
-> +}
-> +
-> +static const struct udevice_id mt8188_apmixed_compat[] =3D {
-> +	{ .compatible =3D "mediatek,mt8188-apmixedsys", },
-> +	{ }
-> +};
-> +
-> +static const struct udevice_id mt8188_topckgen_compat[] =3D {
-> +	{ .compatible =3D "mediatek,mt8188-topckgen", },
-> +	{ }
-> +};
-> +
-> +static const struct udevice_id mt8188_topckgen_cg_compat[] =3D {
-> +	{ .compatible =3D "mediatek,mt8188-topckgen-cg", },
-> +	{ }
-> +};
-> +
-> +static const struct udevice_id mt8188_infracfg_ao_compat[] =3D {
-> +	{ .compatible =3D "mediatek,mt8188-infracfg-ao", },
-> +	{ }
-> +};
-> +
-> +static const struct udevice_id mt8188_pericfg_ao_compat[] =3D {
-> +	{ .compatible =3D "mediatek,mt8188-pericfg-ao", },
-> +	{ }
-> +};
-> +
-> +static const struct udevice_id mt8188_imp_iic_wrap_c_compat[] =3D {
-> +	{ .compatible =3D "mediatek,mt8188-imp-iic-wrap-c", },
-> +	{ }
-> +};
-> +
-> +static const struct udevice_id mt8188_imp_iic_wrap_w_compat[] =3D {
-> +	{ .compatible =3D "mediatek,mt8188-imp-iic-wrap-w", },
-> +	{ }
-> +};
-> +
-> +static const struct udevice_id mt8188_imp_iic_wrap_en_compat[] =3D {
-> +	{ .compatible =3D "mediatek,mt8188-imp-iic-wrap-en", },
-> +	{ }
-> +};
+I tend to dislike multiple notes blocks one after another.
+It is fine if you don't want to change this as it's a "personal preference".
 
-Why don't you use udevice_id data field to describe each of the mediatek,mt=
-8188
-version? This would avoid having this number of probe function, udevice_id
-structs and U_BOOT_DRIVER definitions.
+>  .. j784s4_evm_rst_include_start_build_steps
+>  
+>  1. Trusted Firmware-A
+> @@ -146,13 +160,19 @@ variant (GP, HS-FS, HS-SE) requires a different source for these files.
+>   - HS-FS
+>  
+>      * tiboot3-j784s4-hs-fs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
+> +    * tiboot3-j742s2-hs-fs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
+>      * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
+>  
+>   - HS-SE
+>  
+>      * tiboot3-j784s4-hs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
+> +    * tiboot3-j742s2-hs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
+>      * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
+>  
+> +.. note::
+> +
+> +   For J742S2, GP variant is not available.
+> +
 
-> +
-> +U_BOOT_DRIVER(mtk_clk_apmixedsys) =3D {
-> +	.name =3D "mt8188-apmixedsys",
-> +	.id =3D UCLASS_CLK,
-> +	.of_match =3D mt8188_apmixed_compat,
-> +	.probe =3D mt8188_apmixedsys_probe,
-> +	.priv_auto =3D sizeof(struct mtk_clk_priv),
-> +	.ops =3D &mtk_clk_apmixedsys_ops,
-> +	.flags =3D DM_FLAG_PRE_RELOC,
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_clk_topckgen) =3D {
-> +	.name =3D "mt8188-topckgen",
-> +	.id =3D UCLASS_CLK,
-> +	.of_match =3D mt8188_topckgen_compat,
-> +	.probe =3D mt8188_topckgen_probe,
-> +	.priv_auto =3D sizeof(struct mtk_clk_priv),
-> +	.ops =3D &mtk_clk_topckgen_ops,
-> +	.flags =3D DM_FLAG_PRE_RELOC,
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_clk_topckgen_cg) =3D {
-> +	.name =3D "mt8188-topckgen-cg",
-> +	.id =3D UCLASS_CLK,
-> +	.of_match =3D mt8188_topckgen_cg_compat,
-> +	.probe =3D mt8188_topckgen_cg_probe,
-> +	.priv_auto =3D sizeof(struct mtk_cg_priv),
-> +	.ops =3D &mtk_clk_gate_ops,
-> +	.flags =3D DM_FLAG_PRE_RELOC,
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_clk_infracfg_ao) =3D {
-> +	.name =3D "mt8188-infracfg-ao",
-> +	.id =3D UCLASS_CLK,
-> +	.of_match =3D mt8188_infracfg_ao_compat,
-> +	.probe =3D mt8188_infracfg_ao_probe,
-> +	.priv_auto =3D sizeof(struct mtk_cg_priv),
-> +	.ops =3D &mtk_clk_gate_ops,
-> +	.flags =3D DM_FLAG_PRE_RELOC,
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_clk_pericfg_ao) =3D {
-> +	.name =3D "mt8188-pericfg-ao",
-> +	.id =3D UCLASS_CLK,
-> +	.of_match =3D mt8188_pericfg_ao_compat,
-> +	.probe =3D mt8188_pericfg_ao_probe,
-> +	.priv_auto =3D sizeof(struct mtk_cg_priv),
-> +	.ops =3D &mtk_clk_gate_ops,
-> +	.flags =3D DM_FLAG_PRE_RELOC,
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_clk_imp_iic_wrap_c) =3D {
-> +	.name =3D "mt8188-imp_iic_wrap_c",
-> +	.id =3D UCLASS_CLK,
-> +	.of_match =3D mt8188_imp_iic_wrap_c_compat,
-> +	.probe =3D mt8188_imp_iic_wrap_c_probe,
-> +	.priv_auto =3D sizeof(struct mtk_cg_priv),
-> +	.ops =3D &mtk_clk_gate_ops,
-> +	.flags =3D DM_FLAG_PRE_RELOC,
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_clk_imp_iic_wrap_w) =3D {
-> +	.name =3D "mt8188-imp_iic_wrap_w",
-> +	.id =3D UCLASS_CLK,
-> +	.of_match =3D mt8188_imp_iic_wrap_w_compat,
-> +	.probe =3D mt8188_imp_iic_wrap_w_probe,
-> +	.priv_auto =3D sizeof(struct mtk_cg_priv),
-> +	.ops =3D &mtk_clk_gate_ops,
-> +	.flags =3D DM_FLAG_PRE_RELOC,
-> +};
-> +
-> +U_BOOT_DRIVER(mtk_clk_imp_iic_wrap_en) =3D {
-> +	.name =3D "mt8188-imp_iic_wrap_en",
-> +	.id =3D UCLASS_CLK,
-> +	.of_match =3D mt8188_imp_iic_wrap_en_compat,
-> +	.probe =3D mt8188_imp_iic_wrap_en_probe,
-> +	.priv_auto =3D sizeof(struct mtk_cg_priv),
-> +	.ops =3D &mtk_clk_gate_ops,
-> +	.flags =3D DM_FLAG_PRE_RELOC,
-> +};
->=20
+Can't this note be in the - GP section?
+Just after:
+"""
+    * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
+"""
 
+In my opinion, it would make more sense than at the end of the
+Target Images section.
 
-
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+>  Image formats
+>  -------------
+>  
+> -- 
+> 2.34.1
