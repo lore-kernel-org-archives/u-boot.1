@@ -4,124 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 617E5D2F7D1
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 10:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 454B5D2F7D1
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 10:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD471841BD;
-	Fri,  5 Dec 2025 11:04:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 89234841D2;
+	Fri,  5 Dec 2025 11:04:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 33D5784181; Fri,  5 Dec 2025 07:44:03 +0100 (CET)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20729.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::729])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86A5184057
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 07:43:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hal.feng@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Q9vVlZm+tDqOTLrpCSM7KwXA/87xQkQ65rqUUPNkRnQUVr8dQZnWt7ZuS8UEP363Yu7ZcHOapSyFXTERelz7LxIsTvdlg6DRSFqcHwOqKg4msE4wXxZIzXCzyFR5nR2J0jrYn69GnCsfkzazFd7MaOwW1qnHHXdGTDTgjqn4YNIpkzeP1RteKJz0SjBiMsu7PgkpEFLDVF1T5jarlULtpdpfsoIPW5cYHpkHE/hn8Rn4UpJCEm7fA0+8CCTtn/IbocaakgSrj12io4/Sr44qH+fsvMe3SKYH7n8g42QhtnE3LGjIqM0GnlqQ2ta47kmG/y6sEenRJsiWopkpItUmrQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FDvVx9E2mejEcnjcqQGZzTlSCyvvUalutUntGCx3ppc=;
- b=AIgSrlPNXCdVF7wnnlOAM0+dEXZTN5n4BWLfyU/lSwgOBnelRBZBif7wpj6tC4hxpsRDYXeqi6pHhqAbcghuL9zDpONzw8fT2sEGqKiHk7KjSSL27dbqoio5X1C/mvREp9ID5xIqnoTvy6iLgjQlHOL1oHhJxymW2V9aMaY5xb5J9EhtTLVUJ+DJ6PDqXsACpxPw4vktJ0ETSLuM4yusBes49/XrjFiavtzL7Rl3UCw9QvRw3r0OKQaO9aPEcRWpNT6ik0X6MEPn8BXmAhu/1hh6908gjs8Eq5pQ7xse8Ag5P58xI2rpqtVLhYosL/lBAZdzVHsAO66LQ6QWfm9WrQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1227.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.12; Fri, 5 Dec
- 2025 06:43:50 +0000
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7%4]) with mapi id 15.20.9388.011; Fri, 5 Dec 2025
- 06:43:50 +0000
-From: Hal Feng <hal.feng@starfivetech.com>
-To: Leo Liang <ycliang@andestech.com>, Conor Dooley <conor@kernel.org>
-CC: E Shattow <e@freeshell.de>, Tom Rini <trini@konsulko.com>, Rick Chen
- <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>, Emil Renner
- Berthing <emil.renner.berthing@canonical.com>, Heinrich Schuchardt
- <heinrich.schuchardt@canonical.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: RE: [PATCH v1 2/9] riscv: dts: starfive: Add VisionFive 2 Lite board
- device tree
-Thread-Topic: [PATCH v1 2/9] riscv: dts: starfive: Add VisionFive 2 Lite board
- device tree
-Thread-Index: AQHcRMSITAF/Ez7TCUSKxA/KpCGn6bTRIJ0AgARk6SCAO/QfAIAAAoCAgAAOaICAAU2WAA==
-Date: Fri, 5 Dec 2025 06:43:50 +0000
-Message-ID: <ZQ2PR01MB1307333FA4ACAD7710DD3A5AE6A72@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-References: <20251024085932.83596-1-hal.feng@starfivetech.com>
- <20251024085932.83596-3-hal.feng@starfivetech.com>
- <ff0313ed-5d43-4603-aed4-6e41b2abed37@freeshell.de>
- <ZQ2PR01MB13075E9B291AF6D313AF347DE6FC2@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
- <aTFWSF-MFs40a37w@swlinux02> <20251204-exemplify-tribunal-bae6a028909e@spud>
- <aTFkgSMcRONFGI_X@swlinux02>
-In-Reply-To: <aTFkgSMcRONFGI_X@swlinux02>
-Accept-Language: zh-CN, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1227:EE_
-x-ms-office365-filtering-correlation-id: 95352b8e-994e-4ffe-5ce6-08de33c9a61a
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|41320700013|1800799024|38070700021; 
-x-microsoft-antispam-message-info: Vi5AikR1ZsldJjbpFcjLOMJXNp9kHucyMRhJSUhcg+d1UFaTE1bYHLJaQwTAer31eDFYb0t4L9WPiEAuR30y6yfKPggPOUOFO2pPhH0ACODRPMP3R8rN0oJU0Mb119dvHP6n5a2/jedPIwlV2ukW21dmY3s2BBIBE4kLczm99rz9KBVNngqCQMrIQaNS5SCVulHWuRLKUPdyqOyKF5tTkisI8xx6/XJIcx/zSqs0Kz9bkipElQmD06boVC0XUAbSjl6GqnTOgpFQ4FMjoY5w+ajuwtjzn1RimHVqElau8T2N6zJS+1h5sr2anbLESWpxcJMI+yIHVR6okSuqvVyiV1b40RxpmhQqf1YjiwP7z7OwytK3H0RhBNc2RS9Uh14rnopmuqZngfh8vSp04W3ZKX1iP3VwOBsOQJrvBN8Mu/6VkV7pz+k9mjhAjJvYHmNIHqurErBZw8BYMqKqVpMDQeuWDur5VoMFzhiFXa7ELN77BBUdfEBiGUl5JwnZzKv0y6eVXRAR414/SWpzLRDyeBywZSAIMUpSAd8wIoOYEemR2lA8VRbTT9khoDMiGWw/16u1bdJKy1W0ExrlKO08QA==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE; SFS:(13230040)(366016)(41320700013)(1800799024)(38070700021);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?IzpJHq5O7W6tL089w7s8OjIHy+ZCuOwa3Qz2h/Q6Ho1v1j8UTH1U/PMAjoeB?=
- =?us-ascii?Q?LRN0IXZIzeZuqLlQom7sTJY6s52sMmvYJeDD6iZ8S7aRHYIZGqpAPdbgFZ4K?=
- =?us-ascii?Q?smUkBQUINlR3ra3jyhIBeCNoXyPXPBslCkxPbUwf+ur05nCtz2P3A449muDq?=
- =?us-ascii?Q?fT4Gu6gq+s8Kw7r4NkO874OPcaH+Yg9KTqkW/Z/Co/Peda5/su2HLUeEb4YF?=
- =?us-ascii?Q?rhFxHFlrlkuVBJiL53FgNIIpU/tXxK3ZBJNm5/gX5wyZVmKhbAr71BHdUr1v?=
- =?us-ascii?Q?kObVc3WEN+8fNaF4Bl4TKe4Cc0wu96jIylcRONbuIl+UIvBEhhWu1N9F5hqN?=
- =?us-ascii?Q?UfWjw2kufPWuN0A7oSq7EqnCu9jOfKO1AdDNwLVGMoG2vh9DDY0zbEudaTVg?=
- =?us-ascii?Q?lOt4+zDE2+ubzvAlB6yg9S63Gba/ACF5P7TDr9U1b+0OoF9dEHVYA0I4XSRs?=
- =?us-ascii?Q?8ORCzRLae9HZtsmM5dWzWk6Z1BMCgAEYNqXkNJu/RM42cX9T3zFAFM+OuVbV?=
- =?us-ascii?Q?qfjbJcVApjXm/Ik76Bih1FlQq3Cv1u1HhZ0N4EXTSTfDzZlwkykCCRUqnxJ2?=
- =?us-ascii?Q?ZDJv1w56SplEnWft6tqQW7eFQIsJOTpvXXZ6kwqm/AyfxW2ORo33C9Yg7EcZ?=
- =?us-ascii?Q?H6jAX5nJoWqlDOYtV1XjGlkQ/whox3+mTqJ+lIGhZHigIVjmagjD4n6LsQBy?=
- =?us-ascii?Q?MNeasMYfody8MZL3WG0/n4iIMlAWo1fUkgOZJ+U5vP0KNVTc56l2ZY6Cc4pC?=
- =?us-ascii?Q?sEUgjJrrKA+ERn5NkThB+blthGkTDAfhAwa/TJooKDRP0LEl5pOcb7H/UaxH?=
- =?us-ascii?Q?WyoaOB5dlpQkTiCgLAWvOVnOwt/O6cMFi1SK4k0GXUvx0+Bu5rBZScnd9AdC?=
- =?us-ascii?Q?wPUNtgkx0XL7KeYgNU8aetnLzDJCI6Kgv5ERlf31UUOA9ZDkgQxUC0p9eT/7?=
- =?us-ascii?Q?ehL0uHMFpzIKXPgZRyYdk8dnmxpB4AxHetT6l96SNzd7xB+nRDW9Bl+AGKAd?=
- =?us-ascii?Q?mryTpMYJUJmOX9XlcPPt0dH+NAyrQKnA9gFIKQOofrN1Sdpi25HLUhQhZOtg?=
- =?us-ascii?Q?PgIoRFDcbl6yIXQFLtTZql1CMHCUWYLet5CZojAU1gz6yaUBzlUdlxyLGpra?=
- =?us-ascii?Q?eWOvSpr3w5RoHs6VJA5yoL9WCUPZvuHYmsMocj8pwNAD0e0RkYYi8AlphZgt?=
- =?us-ascii?Q?64NRze0He3zJLanSg68Ndjv0SVQUtbztgnNuznT1vr25fbVse2yrqp6VZTX/?=
- =?us-ascii?Q?LBFM0a+HAaQvxLyHCY7HD1/jl9/gBCouMNJ4a26z0+CmNqrvmdj76uQ+mDff?=
- =?us-ascii?Q?SuT5IEvV5jOMN2R5wat+gM9QB+e5YDw65N4PH9iJU3l2CB3n/wmJ5Ouq9tb0?=
- =?us-ascii?Q?PznUiYVMyhoDpUpJ2WTfiKtXwXMkBphKqUFkDA3kZbFdFFbGLTk+/ONwM2Wq?=
- =?us-ascii?Q?8QHLwPHBBoGvRmQ68Q5Dg1T+CbYmZ6wVFXRzn3WkKZ9nLVxAjXVb8grXpWgD?=
- =?us-ascii?Q?v10cssYHadiJBUk5PqqI/l6frVO5ygAMijmjy6HH3EZoZ8l3SEhxTnlYdPWk?=
- =?us-ascii?Q?Iw6vLgksDhwRRmvJ2qUpvs755EMkmd7uM31HJORj?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bHSAe78B";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9381B84181; Fri,  5 Dec 2025 08:25:23 +0100 (CET)
+Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
+ [IPv6:2607:f8b0:4864:20::b133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F53983AC6
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 08:25:21 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb133.google.com with SMTP id
+ 956f58d0204a3-64107188baeso1587281d50.3
+ for <u-boot@lists.denx.de>; Thu, 04 Dec 2025 23:25:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1764919520; x=1765524320; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Mf0r7UswpoFh8kJXcjkWqRTWg4RPfifnIh4+AmxYn90=;
+ b=bHSAe78BNdNibDWFwbd862TqgD8a6l8MUWDDQPdhunXlJgv0X2rHE5l3w8wzykiWST
+ KctBzhgRR1qHHxcjd99xBCkKmkWf+ZI5NnLgFOifYCUJiObqpYsIM4ZrTYvh5NeNb7/F
+ 51siQ4x5G8OL1lWa6K27YkPmwxUosVZgwYrlogJ9ygbcWh89KXqXIiXI7qJwjiriSG4u
+ 8fn7HF0T7Mtg1aDgvdwsc6k/pJfGph4e1oH+HvUBUHp3pnPYcB9iWPs4fkoMfZiibOX6
+ gM/G35vOLuUOu/HjJOHsKwN/9RAyPzRc1NqMg6envcVkopGH8I1bN4Bd1DJy0UjdHGZQ
+ TGQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1764919520; x=1765524320;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Mf0r7UswpoFh8kJXcjkWqRTWg4RPfifnIh4+AmxYn90=;
+ b=Nq6vhhimqf0YPrdVZtN44WQTzaEQhSCa4X+8QVVo8W53p1Cyh0ZtXDfPOLohowod0x
+ 4y6lcVLjfVYId/X1jM47xs7NUNRdI6KOGR7/zAta3D/Da4zLpZ1CDNVKlsktUBVgEJTd
+ lleBsvZF+TzOQlu/thL0eRDgZ9ofq8rZxCl01ZF3egI462DAkiIcLaEUJDhuAwfmVLQ7
+ SrGFgFIAVnYf/AqsLvDua3CPyPGok/EmMMw6bmr5yXYATOpKvdpuCzX2rZWKH4yASw+1
+ KgV1NL+VqHxidikUEXMkEJvVEzlCrdIGslO6dTh4e01IH2BW4CKUoS2aDPWjaTUdn9aV
+ kXHA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUizJazAWEYI1RMMP6WxMNBGXE6EGkeJSHM6KnszkiUqRac0TZRfR0DiPm6Ii+6Xddb7mQ3vAw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyyNoF0HPuIImaKVNCru/ZO4vYxmVRxamKmB15oUC1xMCseoirW
+ 7nPoskgterN5CQIaNGC0p4kHHzCJGZNGbznGWvFsHRwI92OmoWBCtX8ZJ1Okl9/FjbCeXOploRF
+ 7DS1J4yO8mGlSFa9czAt0NjutlwIhos7cCFgdvLalGQ==
+X-Gm-Gg: ASbGncttR5QSEUzcMj5ny/40by4AJ7XKbVtgNoLB2aWo0fTb9bmBEESfse+vzAmjg3W
+ WQb60P4ZFhJbgIGSJqSnbamKjoPwIdGY6QZuVC7i0UW9URuL+WlfJZSS5NvTfA7LyXvUPXUYrRQ
+ xVYBSAku23lIfBvi6kQtajC5uvugQKkCHymGxXK2RoUvL6pur3yzMzEWoEg7ti6CiUB7LQQbTFJ
+ 7F5cR52jz1K7fUrlcJIqmc7bZ+C+66aef1JRS6krcwmi7Nd81Y8aibztUN9T6Kuo/drv8geeYzd
+ svGok/pEgmJszpwbZEzsvTqZu9P1zpRauhwy0B1uwFeKmbjmcS60ZLcsXgRRj9USktsNnMjiqMM
+ 2UlxV90C6khBz48rwVA==
+X-Google-Smtp-Source: AGHT+IG7uDqRx12/ZwE/83u7TzoN8NLXfa2f1JqODJjTLgndF8xH1g5OdgdAX9CLX9dTE0wbI3DHKsf+MWLm86lJYqI=
+X-Received: by 2002:a05:690e:d08:b0:63f:b1d4:f9e3 with SMTP id
+ 956f58d0204a3-64436fb0184mr6233817d50.9.1764919519734; Thu, 04 Dec 2025
+ 23:25:19 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95352b8e-994e-4ffe-5ce6-08de33c9a61a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Dec 2025 06:43:50.1282 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 2DZ25yMLb8eQplUptUxHR5MHhE0XoDCvK/VZQoo90jP9g4w72+G3s+7FfkrUw9JOvKw5xkLdU0PTfb3Pt6pFAUEkgTsjJ0JP4ZeHJzw1cyk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1227
+References: <20251118043042.27726-1-hs@nabladev.com>
+ <176487670995.2050783.17410258029578449020.b4-ty@konsulko.com>
+ <e2b4a1f7-d915-8e83-2f9b-7f48a56d8e2e@nabladev.com>
+In-Reply-To: <e2b4a1f7-d915-8e83-2f9b-7f48a56d8e2e@nabladev.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 5 Dec 2025 09:24:43 +0200
+X-Gm-Features: AWmQ_bkaZHbdN1FWrSGq-tbXCqU4SBXxXUWMCYEPLI6lvdyb3q0zJI9D3bEJQSQ
+Message-ID: <CAC_iWjJJEG2aUKhNLLY9KgqnROtTbCKd9Ex3-mhviado=r++Cg@mail.gmail.com>
+Subject: Re: [PATCH v3 0/6] Add support for SM3 secure hash
+To: Heiko Schocher <hs@nabladev.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymondmaoca@gmail.com>,
+ Sean Edmond <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>, 
+ Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ briansune <briansune@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Fri, 05 Dec 2025 11:04:35 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -139,43 +127,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> On 04.12.25 18:38, Leo Liang wrote:
-> On Thu, Dec 04, 2025 at 09:46:19AM +0000, Conor Dooley wrote:
-> > [EXTERNAL MAIL]
->=20
-> > Date: Thu, 4 Dec 2025 09:46:19 +0000
-> > From: Conor Dooley <conor@kernel.org>
-> > To: Leo Liang <ycliang@andestech.com>
-> > Cc: Hal Feng <hal.feng@starfivetech.com>, E Shattow <e@freeshell.de>,
-> > Tom  Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>, Sumit
-> > Garg  <sumit.garg@kernel.org>, Emil Renner Berthing
-> > <emil.renner.berthing@canonical.com>, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com>, "u-boot@lists.denx.de"
-> >  <u-boot@lists.denx.de>
-> > Subject: Re: [PATCH v1 2/9] riscv: dts: starfive: Add VisionFive 2
-> > Lite  board device tree
+On Fri, 5 Dec 2025 at 07:03, Heiko Schocher <hs@nabladev.com> wrote:
+>
+> Hello Tom,
+>
+> On 04.12.25 20:31, Tom Rini wrote:
+> > On Tue, 18 Nov 2025 05:30:36 +0100, Heiko Schocher wrote:
 > >
-> > On Thu, Dec 04, 2025 at 05:37:22PM +0800, Leo Liang wrote:
-> > >
-> > > Got it. I have learned that the patchset is still being reviewed.
-> > > (https://lore.kernel.org/linux-riscv/20251125075604.69370-1-hal.feng
-> > > @starfivetech.com/T/#t) I will merge this patchset after the
-> > > dts/upstream/ is sync'ed with Linux device tree.
+> >> Add SM3 secure hash, as specified by OSCCA GM/T 0004-2012 SM3 and desc=
+ribed
+> >> at https://datatracker.ietf.org/doc/html/draft-sca-cfrg-sm3-02
+> >>
+> >> TPMv2 defines hash algo sm3_256, which is currently
+> >> not supported and prevented TPMv2 chip with newer
+> >> firmware to work with U-Boot. Seen this on a ST33TPHF2XI2C
+> >>
+> >> [...]
 > >
-> > Something must have gone wrong, because I applied those and sent a
-> > mail (via b4) that I had done so. They should appear in v6.19-rc1.
->=20
-> Hi Conor,
->=20
-> Understood! thank you for the clarification.
-> I'll wait for the dts to be sync'ed with linux after v6.19-rc1 before mer=
-ging the
-> patchset.
+> > Applied to u-boot/next, thanks!
+> >
+> > [1/6] lib: Import rol32 function from Linux
+> >        commit: 6a0c939b88fd42c6b0a374f7c87317f292df46a1
+> > [2/6] lib: import sm3 256 hash parts from linux
+> >        commit: 41c0131b950a16747929ab310588cf5db8e38123
+> > [3/6] lib: sm3: implement U-Boot parts
+> >        commit: c4ab316269debc321907acc4f8f02dfe5653aeaf
+> > [4/6] test: cmd: hash: add unit test for sm3_256
+> >        commit: 213601a600f1e8894cea76b0bfc131f038882407
+> > [5/6] tpm2: add sm3 256 hash support
+> >        commit: 7c3f05ad51e4bc23dd4f411f28968f1d8f43099c
+> > [6/6] test: cmd: fix a typo in md5 test
+> >        commit: b30557b3b46c5162cb88a57907c517ed95557239
+>
+> Oh, may a little to fast, as Ilias and Quentin had some comments
+> about tpm2 implementation/test (tpm2: add sm3 256 hash support
+> patch). But I can send changes on top of that patches (but
+> give me some time for it... end of year rally has started...)
+>
 
-Hi, Leo,
+Yea I pinged Tom yesterday.
+tbh, my main concern was testing the changes. I dont mind if we revert
+and reapply or send the changes on top.
 
-Could you merge patch 3 and patch 4 first? These two patches are just for f=
-ixing.
-
-Best regards,
-Hal
+Cheers
+/Ilias
+> bye,
+> Heiko
+>
+> --
+> Nabla Software Engineering
+> HRB 40522 Augsburg
+> Phone: +49 821 45592596
+> E-Mail: office@nabladev.com
+> Gesch=C3=A4ftsf=C3=BChrer : Stefano Babic
