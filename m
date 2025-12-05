@@ -4,93 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A3BD2F7CB
-	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 09:47:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2C05D2F7CE
+	for <u-boot@archiver.kernel.org>; Fri,  5 Dec 2025 10:04:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8C80841B1;
-	Fri,  5 Dec 2025 10:47:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0BE6084199;
+	Fri,  5 Dec 2025 11:04:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kgZzXjg+";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="VQXUBlLJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2425841B8; Fri,  5 Dec 2025 10:47:02 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A28D7841A2; Fri,  5 Dec 2025 11:04:02 +0100 (CET)
+Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB5B9840FB
- for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 10:46:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D837E840FB
+ for <u-boot@lists.denx.de>; Fri,  5 Dec 2025 11:03:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-42e2d52c24dso1043474f8f.1
- for <u-boot@lists.denx.de>; Fri, 05 Dec 2025 01:46:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1764928010; x=1765532810; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=k8fGKuOBR5KvrlOoXh38XVZmGOQ1lP+4Yb3CjiI2Q6U=;
- b=kgZzXjg+kSJ938XVQrK5F+xNgq6ZMLwNAiRuj8tZiio03iMkjQSJ04wAewKJPEc6AX
- l4j/V1R2qKtWZvtKOVOA6kr7ZugpcMjbycYfxanfEfkhwE00hAhjEYyF0WWUAe8c3KRC
- gPquehh6YunwUWfI+lNmngYMIwibmazV6crD/Y8e2rkROlL3K54iHl46W3IqgWvvpX3M
- xNQXnUfeBh6hCOiG4ET9oqvOqVKoAgTmZNFswxyL2jEebf9JJyXZghXRiY6QFB56Nt7V
- GFtxAXptGMEGeU7/gog4xfCbFY1PqMab2xyB+4EcLWWAbq6lPz8dy/dZQT0F8guC7c5y
- j4eg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764928010; x=1765532810;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k8fGKuOBR5KvrlOoXh38XVZmGOQ1lP+4Yb3CjiI2Q6U=;
- b=qgyRPDiYRJdL7SDL25cdGv0XlwTs+UCYPiL2zK7y5jnEzN3hORpTAifsRRSsYFZslp
- Cn49t8Bjo2DvSGEEhT9ypuFz65nFbpACRWhDneDgli4cTHDy8TiqYcwfhbPJfk0iWNMG
- U8OIjTxjTXnD3h249WKqA5Qp2VizM13tyy6W8BFkLY08hy2yzA4LdTZdvOr/tOQ1oCDH
- jVU9RFllg2w5aEQ0ND0NfEwrxps0omaDzHiXvY5A965qrztkmZI1JBuI47AJALUt8u+f
- EAqkFhfwRNp84cW52TGNLe6nDuS0kp6oJukI0H49H1x63pdBXGnpo+PhEbNCnekIFvsZ
- sPDQ==
-X-Gm-Message-State: AOJu0YwTWmr29zN1NIBphWGoNaJAjqPfHVonu4b++h5mxLS6cTP87wuR
- 2JyyOt6ncTkjGlRLeBX91k0M0EIKAZZYRUaAF+5ZG+d3YCZcGEC6yvT09yQztJQ5268=
-X-Gm-Gg: ASbGncur0SKvZlSW4cL5TO1qsp2OPDKT7gnPNssCiJZzmmFlSFGeRbpqvU9sjNGuZ8j
- oTz92gpoOM+Lj38NEV0As7+s50Rq7BLI6ZfYe5T6ArzCH/MSuJ262vODndzcTr/dgg6Rl+JvGuY
- NJ3qkHz5vgqLRkbKECsuwi84IBZfrt3E4DaEUS/1SJHwuYkVSc2YyCFZkGXiGdhFAqm9p11a1AB
- 4mf79LuQm1IUCdGfYdNUdawGh+ndUDTZ/cn3GgeCcKT8sE8ZG7LHAxf7roalZxMEdd23cSImk1R
- aBKSPaburWRSOnYG95ZdcpNlSkrVC50MztJS4xfQuIO7vxpNXIaOPaplFteWzC/zZJN1DHkHvce
- EAr3B+1CqJ/QmATZ2VvxRgHdg/AlCNoFRBUcdGPaIezx2KvpBA7FP9lENMeu+eWGojL05ovsC+m
- SbGlajjnD+CSLWK5ueB99gPp59yMjt6xVHJjZoUhg=
-X-Google-Smtp-Source: AGHT+IGTZPSIKXoVNB+Vsbz0aBY+pQw8rizBjjX5HcNx+P7KZSX5bJEw+uynBEPyljweg9K1eABUZQ==
-X-Received: by 2002:a05:6000:240f:b0:42b:2eb3:c909 with SMTP id
- ffacd0b85a97d-42f7319684emr9569326f8f.20.1764928010091; 
- Fri, 05 Dec 2025 01:46:50 -0800 (PST)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f7b:b001:ff09:b7cb:eda8:67f3])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42f7cbe8fe8sm7748842f8f.2.2025.12.05.01.46.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Dec 2025 01:46:49 -0800 (PST)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 05 Dec 2025 09:46:48 +0000
-Subject: [PATCH] net:lwip: Add debug line to net-lwip
+ spf=pass smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=l4vH7jIQcCy4TO4s8NXNKxfbs9/ySN2LzDUr7xHj3is=; b=VQXUBlLJwpuHkCQrwoW2107tOW
+ SfPU9AhiUx69j0RkfMao21IOghNr5ku+WS8r47/CWeMRs1q9n6BFw/USh0gcSal3FYcAnezJgiC2L
+ pUa4//8os2RWLjlY0RTnNYeY6Z6p5aeFuaXrTYgyE5xoyPoQnyO3YdqRlWrj4CgxqIwGQMAGWQHny
+ Kbl1iYEL5WjL20ypzLbb9VUceZHnRO4j9XoNYmpRxSQwAA1+YluJotgWBUPPznj3HM9v4ay0ojtXz
+ LSwE9KR06z6aRm057CQE+L/DFLJodLHYzrGvFh3aDfjRUTEapTEmA1yvzMtRcA0N6wHrLQuk+kkUM
+ zu42fTLQ==;
+Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:50770
+ helo=[192.168.69.116])
+ by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
+ (Exim 4.98.2) (envelope-from <primoz.fiser@norik.com>)
+ id 1vRSfR-0000000448g-3bpu; Fri, 05 Dec 2025 11:03:57 +0100
+Message-ID: <fec9f3b7-299f-4f7a-ac30-2ece6c362386@norik.com>
+Date: Fri, 5 Dec 2025 11:03:57 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] board: phytec: phycore-imx93: Switch to standard boot
+To: Benjamin Hahn <B.Hahn@phytec.de>, Mathieu Othacehe
+ <m.othacehe@gmail.com>, Christoph Stoidner <C.Stoidner@phytec.de>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "uboot-imx@nxp.com" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>
+References: <20251204080744.3868067-1-primoz.fiser@norik.com>
+ <4b0bf7cf-db2d-48e8-93cc-854b0e7aa802@phytec.de>
+Content-Language: en-US
+From: Primoz Fiser <primoz.fiser@norik.com>
+Autocrypt: addr=primoz.fiser@norik.com; keydata=
+ xjMEZrROOxYJKwYBBAHaRw8BAQdAADVOb5tiLVTUAC9nu/FUl4gj/+4fDLqbc3mk0Vz8riTN
+ JVByaW1veiBGaXNlciA8cHJpbW96LmZpc2VyQG5vcmlrLmNvbT7CiQQTFggAMRYhBK2YFSAH
+ ExsBZLCwJGoLbQEHbnBPBQJmtE47AhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQagttAQducE+T
+ gAD+K4fKlIuvH75fAFwGYG/HT3F9mN64majvqJqvp3gTB9YBAL12gu+cm11m9JMyOyN0l6Os
+ jStsQFghPkzBSDWSDN0NzjgEZrROPBIKKwYBBAGXVQEFAQEHQP2xtEOhbgA+rfzvvcFkV1zK
+ 6ym3/c/OUQObCp50BocdAwEIB8J4BBgWCAAgFiEErZgVIAcTGwFksLAkagttAQducE8FAma0
+ TjwCGwwACgkQagttAQducE8ucAD9F1sXtQD4iA7Qu+SwNUAp/9x7Cqr37CSb2p6hbRmPJP8B
+ AMYR91JYlFmOJ+ScPhQ8/MgFO+V6pa7K2ebk5xYqsCgA
+Organization: Norik systems d.o.o.
+In-Reply-To: <4b0bf7cf-db2d-48e8-93cc-854b0e7aa802@phytec.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251205-lwip_dbg-v1-1-f3406179c0b7@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAAeqMmkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDIwNT3ZzyzIL4lKR0XSMT4zQLy5REg8RECyWg8oKi1LTMCrBR0bG1tQA
- ITp7RWgAAAA==
-X-Change-ID: 20251205-lwip_dbg-243f89da0aa8
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Tim Harvey <tharvey@gateworks.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Martyn Welch <martyn.welch@collabora.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cp2.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
+X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,33 +98,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When debugging the LWIP NFS implementation this debug line helped to
-show the cause of an error. This could be useful to someone in the
-future.
+Hi Benjamin,
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- net/lwip/net-lwip.c | 1 +
- 1 file changed, 1 insertion(+)
+On 5. 12. 25 10:41, Benjamin Hahn wrote:
+> Hi Primoz,
+> On 04.12.25 09:07, Primoz Fiser wrote:
+>> Enable standard boot for the phyCORE-i.MX93 board and use it as a new
+>> default. Add required standard boot variables to the environment, while
+>> removing old boot scripts and now unnecessary environment variables.
+>> Adjust variables according to the requirements of PHYTEC ampliphy-boot
+>> distro-boot. Last but not least, order environment vars by alphabet and
+>> run 'make savedefconfig' to resync defconfig.
+>>
+>> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+>> ---
+>>   arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi | 16 +++++
+>>   board/phytec/phycore_imx93/phycore_imx93.env  | 69 ++-----------------
+>>   configs/imx93-phycore_defconfig               | 12 +++-
+>>   3 files changed, 33 insertions(+), 64 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+>> index 0c8d0ba9693f..646b617949d6 100644
+>> --- a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+>> +++ b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+>> @@ -30,6 +30,22 @@
+>>   		ethernet1 = &eqos;
+>>   	};
+>>   
+>> +	bootstd {
+>> +		bootph-verify;
+>> +		compatible = "u-boot,boot-std";
+>> +
+>> +		filename-prefixes = "/", "/boot/";
+>> +		bootdev-order = "mmc0", "mmc1", "ethernet";
+>> +
+>> +		rauc {
+>> +			compatible = "u-boot,distro-rauc";
+>> +		};
+>> +
+>> +		script {
+>> +			compatible = "u-boot,script";
+>> +		};
+>> +	};
+>> +
+>>   	firmware {
+>>   		optee {
+>>   			compatible = "linaro,optee-tz";
+>> diff --git a/board/phytec/phycore_imx93/phycore_imx93.env b/board/phytec/phycore_imx93/phycore_imx93.env
+>> index 7b0a90e64472..8a2161e4abdf 100644
+>> --- a/board/phytec/phycore_imx93/phycore_imx93.env
+>> +++ b/board/phytec/phycore_imx93/phycore_imx93.env
+>> @@ -1,70 +1,13 @@
+>>   /* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+>>   
+>> -#include <env/phytec/rauc.env>
+>> -#include <env/phytec/overlays.env>
+>> -
+>> -bootcmd=
+>> -	mmc dev ${mmcdev};
+>> -	if mmc rescan; then
+>> -		if test ${doraucboot} = 1; then
+>> -			run raucinit;
+>> -		fi;
+>> -		if run loadimage; then
+>> -			run mmcboot;
+>> -		else
+>> -			run netboot;
+>> -		fi;
+>> -	fi;
+>> -image=Image
+>> +boot_script_dhcp=net_boot_fit.scr.uimg
+>> +bootcmd=bootflow scan -lb;
+> 
+> If you leave CONFIG_USE_BOOTCOMMAND and CONFIG_BOOTSTD_DEFAULTS 
+> activated, you can remove th bootcmd env variable, as standardboot will 
+> set it for you automatically.
 
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index 8741f65fe12e23cc30068506453a762533f8a67f..f70857204b2808139ac3ccacd89d5719b7db12d2 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -297,6 +297,7 @@ static struct pbuf *alloc_pbuf_and_copy(uchar *data, int len)
- 	/* We allocate a pbuf chain of pbufs from the pool. */
- 	p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
- 	if (!p) {
-+		debug("Failed to allocate pbuf !!!!!\n");
- 		LINK_STATS_INC(link.memerr);
- 		LINK_STATS_INC(link.drop);
- 		return NULL;
+True! Lets simplify it even more.
 
----
-base-commit: 59f9fcc1f514762674ac07c13c2a85f7aace7250
-change-id: 20251205-lwip_dbg-243f89da0aa8
+I will send v2 for that.
 
-Best regards,
+Thanks,
+
+BR,
+Primoz
+
+> 
+> Benjamin
+> 
+>>   console=ttyLP0
+>>   fdt_addr_r=0x90000000
+>> -fdtoverlay_addr_r=0x900c0000
+>> -bootenv_addr_r=0x90500000
+>>   fdtfile=CONFIG_DEFAULT_FDT_FILE
+>> +fdtoverlay_addr_r=0x900c0000
+>>   ip_dyn=yes
+>> +kernel_addr_r=0x88000000
+>> +nfsroot=/srv/nfs
+>>   prepare_mcore=setenv optargs "${optargs} clk-imx93.mcore_booted"
+>> -mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+>> -mmcpart=1
+>> -mmcroot=2
+>> -mmcautodetect=yes
+>> -mmcargs=setenv bootargs console=${console},${baudrate} earlycon
+>> -	root=/dev/mmcblk${mmcdev}p${mmcroot} ${raucargs} rootwait rw ${optargs}
+>> -loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
+>> -loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
+>> -mmcboot=
+>> -	echo Booting from mmc ...;
+>> -	if test ${no_bootenv} = 0; then
+>> -		if run mmc_load_bootenv; then
+>> -			env import -t ${bootenv_addr_r} ${filesize};
+>> -		fi;
+>> -	fi;
+>> -	run mmcargs;
+>> -	if run loadfdt; then
+>> -		run mmc_apply_overlays;
+>> -		booti ${loadaddr} - ${fdt_addr_r};
+>> -	else
+>> -		echo WARN: Cannot load the DT;
+>> -	fi;
+>> -nfsroot=/nfs
+>> -netargs=setenv bootargs console=${console},${baudrate} earlycon
+>> -	root=/dev/nfs ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp ${optargs}
+>> -netboot=
+>> -	echo Booting from net ...;
+>> -	run netargs;
+>> -	if test ${ip_dyn} = yes; then
+>> -		setenv get_cmd dhcp;
+>> -	else
+>> -		setenv get_cmd tftp;
+>> -	fi;
+>> -	if test ${no_bootenv} = 0; then
+>> -		if run net_load_bootenv; then
+>> -			env import -t ${bootenv_addr_r} ${filesize};
+>> -		fi;
+>> -	fi;
+>> -	${get_cmd} ${loadaddr} ${image};
+>> -	if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
+>> -		run net_apply_overlays;
+>> -		booti ${loadaddr} - ${fdt_addr_r};
+>> -	else
+>> -		echo WARN: Cannot load the DT;
+>> -	fi;
+>> +scriptaddr=0x83500000
+>> diff --git a/configs/imx93-phycore_defconfig b/configs/imx93-phycore_defconfig
+>> index 4c952e966d1a..9e8ff9b6ca90 100644
+>> --- a/configs/imx93-phycore_defconfig
+>> +++ b/configs/imx93-phycore_defconfig
+>> @@ -5,10 +5,10 @@ CONFIG_SYS_MALLOC_LEN=0x2000000
+>>   CONFIG_SYS_MALLOC_F_LEN=0x20000
+>>   CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>> +CONFIG_ENV_SOURCE_FILE="phycore_imx93"
+>>   CONFIG_NR_DRAM_BANKS=2
+>>   CONFIG_PHYTEC_SOM_DETECTION=y
+>>   CONFIG_PHYTEC_EEPROM_BUS=2
+>> -CONFIG_ENV_SOURCE_FILE="phycore_imx93"
+>>   CONFIG_ENV_SIZE=0x10000
+>>   CONFIG_ENV_OFFSET=0x700000
+>>   CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
+>> @@ -33,8 +33,13 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+>>   CONFIG_SYS_MEMTEST_END=0x90000000
+>>   CONFIG_REMAKE_ELF=y
+>>   # CONFIG_ANDROID_BOOT_IMAGE is not set
+>> +CONFIG_FIT=y
+>> +CONFIG_FIT_SIGNATURE=y
+>> +CONFIG_BOOTSTD_FULL=y
+>> +# CONFIG_BOOTSTD_DEFAULTS is not set
+>>   CONFIG_DISTRO_DEFAULTS=y
+>>   CONFIG_OF_SYSTEM_SETUP=y
+>> +# CONFIG_USE_BOOTCOMMAND is not set
+>>   CONFIG_DEFAULT_FDT_FILE="oftree"
+>>   CONFIG_SYS_CBSIZE=2048
+>>   CONFIG_SYS_PBSIZE=2074
+>> @@ -52,6 +57,9 @@ CONFIG_SPL_I2C=y
+>>   CONFIG_SPL_POWER=y
+>>   CONFIG_SPL_WATCHDOG=y
+>>   CONFIG_SYS_PROMPT="u-boot=> "
+>> +# CONFIG_CMD_BOOTDEV is not set
+>> +# CONFIG_CMD_BOOTMETH is not set
+>> +# CONFIG_CMD_BOOTSTD is not set
+>>   CONFIG_CMD_ERASEENV=y
+>>   CONFIG_CMD_NVEDIT_EFI=y
+>>   CONFIG_CRC32_VERIFY=y
+>> @@ -149,5 +157,7 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1fc9
+>>   CONFIG_USB_GADGET_PRODUCT_NUM=0x0152
+>>   CONFIG_CI_UDC=y
+>>   CONFIG_ULP_WATCHDOG=y
+>> +# CONFIG_RSA is not set
+>> +# CONFIG_SPL_SHA256 is not set
+>>   CONFIG_LZO=y
+>>   CONFIG_BZIP2=y
+> 
+> 
+
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+Primoz Fiser
+phone: +386-41-390-545
+email: primoz.fiser@norik.com
+--
+Norik systems d.o.o.
+Your embedded software partner
+Slovenia, EU
+phone: +386-41-540-545
+email: info@norik.com
 
