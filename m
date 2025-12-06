@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF88FD339BC
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 16:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6898CD3B7D1
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 16:50:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2E7983A2B;
-	Sat,  6 Dec 2025 17:12:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B25CD839E4;
+	Sat,  6 Dec 2025 17:50:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pzfEeTwd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WEBghUhe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17AFE83A83; Sat,  6 Dec 2025 17:12:31 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 6002F839F1; Sat,  6 Dec 2025 17:50:40 +0100 (CET)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE9D3839D7
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 17:12:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4341C837F2
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 17:50:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7c7aee74dceso1243368a34.2
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 08:12:28 -0800 (PST)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-657c68a08a7so1620676eaf.1
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 08:50:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765037547; x=1765642347; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JV8BUgPRgN8Rb2VfKxQ0GvO5pxrziNykOhf5uZISr5k=;
- b=pzfEeTwdMv9Lt6LeRHH9Gw0Jwc2tkmPjoH6pjkPnM2mSR33wPbThSfT4p09LtxMHdx
- bS/48qTTdmuA9nNuKOTv+l3RhReo68lB12hC7DF0c5PqV3HJjkt+lilWIeItzOq53soR
- qY/6cl/VvFwWCTU29YV8TA8cPSOABn9TT73sk=
+ d=konsulko.com; s=google; t=1765039837; x=1765644637; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HIjwa47F0U311i+SAPHb10UJajmJohT1FBuTRoyaelE=;
+ b=WEBghUheCYY9eeyPa44nieE+E45r/PFYlt6rhR2jW/tNETGoPsycBCK51CpQJRjX+d
+ 6ga45xzgbB05q3vnzj3dD9xkUa0B7P980j/hq69btSQ4nwlrUXwL50IhmVCfOR0LMDp0
+ GZAH8sST74YNxjdqcMhm1IZyJ/FCfOzhgJcy4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765037547; x=1765642347;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=JV8BUgPRgN8Rb2VfKxQ0GvO5pxrziNykOhf5uZISr5k=;
- b=PKOq/XHejePzTxvkIN80mKx/MZ8O+708yqUU/nAB4UcdnkMHCdd2Bop8DUuVynkmkb
- mzmnjrCxnLMnTxSI97ocaCIZzyLi8y+ABzAVToSXefHKS05L7jMV7aahNjfVzrUZ6NEV
- d4d3TxBecqEMb2tYmbOazSQRZLzygzuFXecMraS9wT9xyeG+DrK7MBm+SAbk5gI1/9pT
- KK6sr5zQUbIDsiJSssjDD769SjOT3JBkhDuIRRHF6IAVm6RoOZAlpTOLc0YOb2W2HKSD
- 0aQzcqybwMdJ6lydAoG67OYTIBbyX3xHhz1ci3Iq6k4BA2jh1DJBUl9V8RuTECkcI3Ri
- YXQw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUeCPiCX+06CueJqvFMgDWhjORJJwU70sTykcF8qNqNazQc0+Ov0EAzgDHmWcEeFW43ekCv4Pw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzRR+VAHNJqxr9NAd5pl7SCdn8ruxpBu1Z4vfmhrkfRfgHdWtON
- Z3Uj4HqIrQGDKSEC5Q5A9N/f3SqfMH0mUq8uMjQw4FnP34R+joxUCBIXBmjnFCsTlKI=
-X-Gm-Gg: ASbGncs3Y+tUgwdgC2KwanZlNSNogZBJbYfpA+fiuspb6oD/2u2z6wawVrywwPFq2ZN
- P9q23wrpdEQww8jD79eFNkJr4N1O5TeF6zxNjLhBOCuIlnmzIfWXz9O5eB5xcV5bvR+TxenSyep
- D4BO2DBBxHEZu0W2Eog+KPquSqHs4umrsDj1pr9zQFh8iCSFKq9/puaAZA3RMUIKRgBjbTAkGSJ
- O/UKNBTNviuXVRTVlQV6vRjjvlSQ/WINj32Qkqn1MwG9QOREpVuR260RIkK6wuzIT6uzKxOmGjx
- ZXPSbNliOzcuGVfOG2BWyIuYX5EFLYseNSLAAxoOceKaDRbTiYtIPpc+F2GS1SgsjpUDPsVHWaM
- nTNt6l+NNXwkNKno3sx8daOdzA2uTjervvUgSHHuDou2PG8jOwCR+xbhsxIs7j9EDbh7lPm5nZ1
- ODVwXJJXSP6DVa62VLFJMDOtG2w3/Rkh3EG+XL3ysu6LHmZZcD
-X-Google-Smtp-Source: AGHT+IEM/0iNix/2JXk2C3kEd8ZbK2xxV0V+NbkGVDSI8cyZcKFpRzw1WGpfPbiFXcHt89y8dJq33w==
-X-Received: by 2002:a05:6808:138d:b0:450:d7b1:4fb5 with SMTP id
- 5614622812f47-4539dede186mr1137637b6e.12.1765037547635; 
- Sat, 06 Dec 2025 08:12:27 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1765039837; x=1765644637;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HIjwa47F0U311i+SAPHb10UJajmJohT1FBuTRoyaelE=;
+ b=kjA8vEsI/gX63f+m1wBWOXVVtvD5QtxkTZ7wXOqt0Oo6Itl8fiF7Q2ytFUqm/xrChN
+ WXasvlPVmXORiOVry5s1dk19+4q3euyz2jUWG5CgLvNRpKUnbg/+4RBj2M/C658Ds7eK
+ XWJJzZUH1XD+dR5KrbxujFQ+7xYNEFl4mdmGQ/1ELg0eexSH3iypQIxI3Gw1AbXMFIS6
+ sZ5lZ2h221b7f6vGA+syiGYq4aPbPND+VqgC+maKWwlSPM5rXKG+phvTDS93mRvCp6Jv
+ yFU/Yf7kgxwMc+Q2hip1Qn1cxXWK/BEFTY+K1uPHWhSEBW1DONtm5NvEadNhRqnerI07
+ 1JlQ==
+X-Gm-Message-State: AOJu0YxUXJMHEhDDsGrEDPHhUmvPk99nwPBdjihuGXDqOx47QcHEhbe2
+ hbaCManW2ySxlP22Hx95FmSykwzsRVjuKODz8KKQCpDDMDb6WC0ENdadFcNd03pC50INTQkGP8i
+ wPIG988U=
+X-Gm-Gg: ASbGncuGCW6/VS8Nnihb2cWrNtDemu9Bofan+tWJx+MKSrCwYVYT9ZEiYpRAUS9eKCh
+ o9hHjJ6g+59igq+VDA8o1KCgfMh7MELyGf8orLYPqfIpL7dgVXHcQGJzvFltrzAXWLxmmTR1Y7a
+ VIbEcvc0IG8l/7qpl4qlGoD3rM4EzrxaLVu+TpUj+9+sgn/yhLzHQt4pRB31BoYblPbbGJ9hNeg
+ xEENpFjLAxSzN2M/7STQ7zoYCUrQPugAyAsJiH5t86ofEnYK5kzMbzIBieqlZyyptQ0NPqux7fX
+ CUj+byAmFKrbb9LcgTai5jT4Q041xGriFSUd9FSh8hEeRDYer4wROliELQEWtzxM2myoYnxoWgt
+ ZE23H3FiiojhzgnmWWr0QpcgVMoktPpr6OISlNUuslHuSxPa15Kp7vrQyJdYLRDXrTVlsFK72Ci
+ I3Qg5dTPZ+WZL40AitJoRcLBIsGmnZZMCkEQlOi6BqS4ouuZVBNqEI
+X-Google-Smtp-Source: AGHT+IGjQm1cCUSVOIkDvF6LDx0E426iv3tzwIMUJG4Y06sfYmJAyqvTfyv6H75ifMgyNFhXoyOCkw==
+X-Received: by 2002:a05:6820:2299:b0:659:9a49:8f54 with SMTP id
+ 006d021491bc7-6599a905cfbmr1171456eaf.25.1765039837013; 
+ Sat, 06 Dec 2025 08:50:37 -0800 (PST)
+Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95a8fa21asm6946180a34.1.2025.12.06.08.12.26
+ 006d021491bc7-6597ef31fcbsm3536661eaf.14.2025.12.06.08.50.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Dec 2025 08:12:27 -0800 (PST)
+ Sat, 06 Dec 2025 08:50:36 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Chintan Vankar <c-vankar@ti.com>
-Cc: u-kumar1@ti.com, vigneshr@ti.com, mwalle@kernel.org, u-boot@lists.denx.de
-In-Reply-To: <20251204122127.717108-1-c-vankar@ti.com>
-References: <20251204122127.717108-1-c-vankar@ti.com>
-Subject: Re: [PATCH v3] arm: mach-k3: j722s: Fix eMMC boot functionality
- broken by Ethernet boot
-Message-Id: <176503754686.2614327.2051787395345428928.b4-ty@konsulko.com>
-Date: Sat, 06 Dec 2025 10:12:26 -0600
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH] doc: Update urllib3 version for building
+Date: Sat,  6 Dec 2025 10:50:34 -0600
+Message-ID: <20251206165034.2621363-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,19 +93,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 04 Dec 2025 17:51:27 +0530, Chintan Vankar wrote:
+The GitHub dependabot tool has reported two "high" priority bugs with
+this package. Update to the patched version.
 
-> While adding CPSW device support to enable Ethernet boot for J722S,
-> dev-data and clk-data for eMMC was removed by mistake, which leads to eMMC
-> boot failure. Update the dev-data and clk-data to fix that.
-> 
-> 
+Reported-by: GitHub dependabot
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+---
+ doc/sphinx/requirements.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Applied to u-boot/master, thanks!
-
-[1/1] arm: mach-k3: j722s: Fix eMMC boot functionality broken by Ethernet boot
-      commit: c7c2c3c0101f625c01bf101d652e03a6d4aa950f
+diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
+index 8572c15ef68f..dd433e2bb156 100644
+--- a/doc/sphinx/requirements.txt
++++ b/doc/sphinx/requirements.txt
+@@ -24,4 +24,4 @@ sphinxcontrib-jquery==4.1
+ sphinxcontrib-jsmath==1.0.1
+ sphinxcontrib-qthelp==2.0.0
+ sphinxcontrib-serializinghtml==2.0.0
+-urllib3==2.5.0
++urllib3==2.6.0
 -- 
-Tom
-
+2.43.0
 
