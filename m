@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB053D3B7D2
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 14:12:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBFE5D3B7D1
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 14:12:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB90983A97;
-	Sat,  6 Dec 2025 15:11:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 114A183A9A;
+	Sat,  6 Dec 2025 15:11:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NjKLc0tX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VIj57l3l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F3B883979; Sat,  6 Dec 2025 15:11:07 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 2BB1E839E4; Sat,  6 Dec 2025 15:11:07 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED61883A5E
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 15:11:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD35083A64
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 15:10:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7c71cca8fc2so2338676a34.1
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 06:11:00 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c52fa75cd3so2970473a34.3
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 06:10:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765030260; x=1765635060; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765030255; x=1765635055; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=7IRGyQ7rJ41TMoNUTMhhO+v9eYcyX6gNplR4Z7A/O7M=;
- b=NjKLc0tX55c2iSzdr5slbHCarJUfihASrpY2T/GypDU9cMoZu0fusG67Ept41qysJa
- 22QARU80/xeM6rWkg35yOiNFCOzwkc5w8/LfyvvCxUvMEQfXAKg/HASSYJ7JdsIHmVVL
- 4TTjrwyqp8BCF7gKmPGB2sYzKqJSBAlvqnPZM=
+ :reply-to; bh=iYyw/i/zb2mn+TG1gk1YDpVEIdLm0EzpFeX7MXSRGJk=;
+ b=VIj57l3lDTJvNE3OVaOWkqy+L1+LIqqgLsfkR+UBuHWzEQbGkL4isbovfNFH1xCtoc
+ b4lqVqFoIh0eyP1VpDU4k8a/DW1TldadYF4Vg1sBeNHTf2Se9v5I0kkzVsKkHDwMyfY+
+ RVXfTjNYrdykHGFn0p7bIEB50BqLgQpWH4i1A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765030260; x=1765635060;
+ d=1e100.net; s=20230601; t=1765030255; x=1765635055;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=7IRGyQ7rJ41TMoNUTMhhO+v9eYcyX6gNplR4Z7A/O7M=;
- b=Zu8fJA5Ei3ZA2cT3Sq9gQI5bqoqDGTy/ryOMj3NusLhCIVifnmcF5IivTKpdXyHFYs
- GTdbJuRipxI4eL/UU1l6v1S+1ifW1zT+ffbrUtho4MqX3v7XHFSiN+o3x4owhIw+Af4c
- xJltCFkGi7oGaH5K1hlREvL+hcrToDUCcr5Qx8TzRSeQLNwOBoy168UKXKs+sDaY3W9A
- Y493FO7IpdhzW9qP2aTGAN4hLeZoy5o/Skrihohs02NdsmNr+rH8rqNW16gYb4Hb1NnZ
- 9Ogplw78rJ2bY1KaycgJ+ewJdagTIAbwWrJRxCrKZ6how75+xakC9mReb7yrXjl0bCxe
- M9tg==
-X-Gm-Message-State: AOJu0Ywpf0cBwHS3r/0PYLT2/Li3QrdBTso0doPCyXfkNgZVotcXkkAk
- bxL6QGZQpBqgNB72wlS7/mGFmnIyW9TDd8ICZ0n6f57AdfojX7OFOyPKcSYCI0xlRLflhcPDAI2
- opsirfhI=
-X-Gm-Gg: ASbGnctKLmCWZV1SeLvtfBFUkVucTqekHmYkCuZsxtsuIqt09VW/Qox9czlgPYEOur8
- mdMIP/YXTxrIqNjiITFB/JxbAXsq6jn7E21LBkcX2WddNTvzjF4MqsM5BoTNtOIG4Ur0nk2fOnT
- BhNk3zhx5ckvduOOkTufO6KdgEBPPfhzdw4FIgzzpyeVYQNcVeVSqntVmFCJPNvqTuRkXZDo+ZP
- n7I0ksGkIZm+ahV5WBi3S74scSy3VP33ZRS6Z6IKmpDzi9xJn94mgRihOB61sAGaX+U+YPTKovK
- S5wWwW1qnwcPZgH5LlRdpDzVr1BDIAcgYCPqLwWILeA69oiejhTLJLQ4F7/NRNBaKFCYcYyDou1
- DDU05rVY5x1ll5Y4/Z33j+He/etoCYYSymvqy48XmxS0FVp+w/ckQ8QR2+ynw+vB1FFB74+4Npv
- w/JgUQlRYVtVK+61BkgDDAQWlq5O9yvx0EvlLlumv1l9urquCI
-X-Google-Smtp-Source: AGHT+IHMYDtnXu32x7Yl8FcoDLCP+fktmuyTms98t4m5IhQEFrg+0bbtClpKHiUP/T9sucZlGVexmQ==
-X-Received: by 2002:a05:6830:4426:b0:7c6:cd24:6392 with SMTP id
- 46e09a7af769-7c9708356f1mr1102945a34.34.1765030259739; 
- Sat, 06 Dec 2025 06:10:59 -0800 (PST)
+ bh=iYyw/i/zb2mn+TG1gk1YDpVEIdLm0EzpFeX7MXSRGJk=;
+ b=h8Qz4qYe+htrBKQmDUiFn9WCphQWAIQ+sIjyZsXgR6IQhDuVj9bUF7GJrsnRNyCLrk
+ TBA/Q/BE0CxiGTlxYdNubXinslALNQffkwmWrrZ/13CON919DNeL9BhYHM3GNFG5uy5X
+ AecWTM5v+R808j5VYt/a0PwFhPwpwvUpv1hixDfA1DULa1y9aJbbDvn5V6veaozMkD68
+ Fe7C6YvKAmGF2t2Zz3Ye3vQfIgB/2KmRTLPJurKdUTwmstALixT2uKppzEjxxb9DnJsp
+ 4PlI6bg2Q/pdaudDp0MDHmvG5lx4vqyGzLF0r2vAiE060Lma76dZVlEZIdaY9uCId0ll
+ RZ1A==
+X-Gm-Message-State: AOJu0YyKg2SmuCA0535yWXKLU1D33PIjXgdmLl3EHSBmBlJsh8iL/llG
+ i5kYYqTspvfYuBsR34ogz9V5ngduWzw7DOZQpAU7F2hiBG61z522INvVn704M+nypHlVFvToKh0
+ 5rQyKT6Y=
+X-Gm-Gg: ASbGncujXXGRMNwx8rSVoBQgADytPPI9Dho0kxbDME2ySElv5s4l1pg9y5LUqJwlT6W
+ vek9ek4Cshpeo9bto3FnQjDWSqbEOhWZZlxDHOXwoMA0pHLCqJgerZBxuIG0pL4mEzyQ2ov1MD+
+ gw7R3vrss71vfDjhYhn6G/Ptm4/9JNGv3EMs2NlGXzrxP6vKYLu/y9ZKNB/fFnIV1mtaqdacIo1
+ OOBHW5by4ItbaCMdzwwv0lmMpnMlnc0yKdWrVebFodmSriu7HxXPN8LMaR7tdpJpHyedPrvMvX7
+ WReWI4qSpmyq1VxhQPnf94fuKYmVGqcGuTaEzoSViF5gVWDe0Bns0zts/jmo7CQkZ28xCZGckBH
+ Mj64Skrne6psMuvxKy+kP80O8+Y3WA4sESFZlpCQBmYV3cdmloFNPojWYXaEBrWTDf+QRfuZhsF
+ LhoLzgP2y/0sEoeHSFZR04F+Razdqn68BY5/TT71trsFUHQe5sW6tJzDWshMA=
+X-Google-Smtp-Source: AGHT+IHhDu0EhHYklHE2BQ+ZcgleifbyNU7D61wTO9GZViPuBv/D5lqjWbJRBoSn3/G6I8VGDKEP5g==
+X-Received: by 2002:a05:6830:2b09:b0:7c7:6da2:6d67 with SMTP id
+ 46e09a7af769-7c97076d70bmr1430198a34.3.1765030255049; 
+ Sat, 06 Dec 2025 06:10:55 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acd733bsm6078499a34.26.2025.12.06.06.10.59
+ 46e09a7af769-7c95acd733bsm6078499a34.26.2025.12.06.06.10.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Dec 2025 06:10:59 -0800 (PST)
+ Sat, 06 Dec 2025 06:10:54 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Cibil Pankiras <cibil.pankiras@egym.com>
-In-Reply-To: <20251120133201.263725-1-cibil.pankiras@egym.com>
-References: <20251120133201.263725-1-cibil.pankiras@egym.com>
-Subject: Re: [PATCH] reboot-mode: Correct macro name from U_BOOT_DEVICE to
- U_BOOT_DRVINFO
-Message-Id: <176503025911.2523567.1417375560205861843.b4-ty@konsulko.com>
-Date: Sat, 06 Dec 2025 08:10:59 -0600
+To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
+In-Reply-To: <BESP194MB2805F70B5836B5CE97A190F6DAD2A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <BESP194MB2805F70B5836B5CE97A190F6DAD2A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH] examples: Fix checking id parameter in thread_start
+Message-Id: <176503025437.2523567.7052979757603557662.b4-ty@konsulko.com>
+Date: Sat, 06 Dec 2025 08:10:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,17 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Nov 2025 14:32:00 +0100, Cibil Pankiras wrote:
+On Sat, 22 Nov 2025 21:45:02 +0100, Francois Berder wrote:
 
-> The macro U_BOOT_DEVICE has been renamed to U_BOOT_DRVINFO.
-> This patch updates the reference in reboot-mode-gpio.h.
+> lthreads is of size MAX_THREADS, hence id must be lower than
+> MAX_THREADS to avoid any potential buffer overflow in
+> thread_start function.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] reboot-mode: Correct macro name from U_BOOT_DEVICE to U_BOOT_DRVINFO
-      commit: 1165e8efcba0ab3efd1ea4ff956d26746fc386b0
+[1/1] examples: Fix checking id parameter in thread_start
+      commit: 43ca62bf1943eb3e170cd408be0d2c2a2404b4c2
 -- 
 Tom
 
