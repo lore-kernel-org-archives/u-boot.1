@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85009D3B7D1
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 14:10:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87EE8D3B7D1
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 14:11:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7BE9839E8;
-	Sat,  6 Dec 2025 15:10:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E2F5D83A28;
+	Sat,  6 Dec 2025 15:10:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IZdWlkfN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o98M76U6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC63E839F1; Sat,  6 Dec 2025 15:10:56 +0100 (CET)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 94B9A839F1; Sat,  6 Dec 2025 15:10:57 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7A3C83979
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 15:10:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F39C839E4
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 15:10:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-45085a4ab72so1613138b6e.1
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 06:10:54 -0800 (PST)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c6da42fbd4so1620904a34.1
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 06:10:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765030253; x=1765635053; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765030254; x=1765635054; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=UUllkZab6Cbz8xtlD6A7w3EWon01ADuB/Vew2VcTBa0=;
- b=IZdWlkfNK5fjrh0VDhGsS6CWj5RzswXLWE9tlcD6SjU0OVCL4RmcodYrX2gpx9Fkzu
- CHPJ6Rex/3p+62mD/ZiSpAYsmhEdnfV4SB1g/cYBFcxOyoIVsPrXC6TFCENXa7rBxU/J
- l3V7dUDzNE3KMxIn3qJBy6MQbNHUQUOvCUjes=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FWjYo05SDfosHzWQwUJDhuBjn18f2CpKm6ViYVVgpOQ=;
+ b=o98M76U6iN1RoEiBKILM2bk+hxu5k4g5w0Q4OgmyucST4LGlm2ZJHhg7Lwwl3oI9es
+ 93Op9m8EhInNT4dqj4IxhWGdLv/0a9P6xIJ3nvWlcnv5D4qUP5CWlg7CdLCTYII/pmkU
+ rSysJ/jkHBsNUp6eJfvoI4gQUNFrfjUIqQ34k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765030253; x=1765635053;
+ d=1e100.net; s=20230601; t=1765030254; x=1765635054;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=UUllkZab6Cbz8xtlD6A7w3EWon01ADuB/Vew2VcTBa0=;
- b=FPR2MUiOKafGevoMeJXpiXv352Db4ZmpGEfHaz78g9/XN4qq/XBWdj3l1Dz4AnynaP
- 2hEAHIacL0QX5wua8ePJrAO7x8DA0dAuXKpAUz415xRVobWzS51Hsk6qpp0gV4aJIQrh
- sCfbjItmg0cJUL9EG9pJIzMbxKiZgRP4kZTkEkU2VfQ3nmjzw4ZCAuAzLzhtg3qIalZS
- jzopv9gQz4K8Jhm39dA1pnMJFARBEMeuqwRD/asocvAbznJRTKfw3wvcI1a6P49fz7fL
- J2DiGj/Ox5OBw1NRp3fuKK5EHvfSMfHuvwEe2r2HNtBmW8POzwlyQR6oe9F21ctinUa0
- NDrg==
-X-Gm-Message-State: AOJu0YwuHawgDtq0qbotAi1GX+NtR57+8ABaB0Tdauxoz8kdtQo7tYKm
- l7R5Bh0PCv1n4BDj1cmSjjECNJv54C2UA571sCtKijrUdy4kn4dVFkKa0NTOk6kp6YBvGDyczyu
- u6Th3ViI=
-X-Gm-Gg: ASbGncsulEUjp1CjH7kIAJ2Y0FyVKTjnXS8Ipdx840jYfd+f01gPKF4xZhGrN8JSR1a
- oEScc5xg5O+psoNRUMVZMc+V2Ps7XVkuxZkpkA2MhAXGOOhrkoAElh2bl+6eWAuqWT6+7GbbAYP
- 1mkJBSOwEAqwar94rImx8tIN3+Pj7RylrH8p05nXNOFpg7fgo0jJozSE5lc8lzuNKm30tPk2+jG
- xVJbroTQ0MqNmKpcx+1hwjr4E08aiMQjaksjI1CZ7ZTGsg4HMb5v9VOiYmNOPasrKlVZwLaQLqy
- cx8pbwpy220DPLUXUGOVBxfmnWl5WVCarZgCkjSZVMYaz4axeidt6PQx+3xudBwtVq0FEEn5Ku0
- 8thBf71T+WvQoxL1s4fVYgKVkAPjCvdt6TV+h2UnEUgMORMCKn3vCef+9IhTqC8dLrWrvsUCFve
- atS43PjfJmS6T4dXRDUzEx+5axAH0EVcrNbvm1uy6dQ6QmStjR
-X-Google-Smtp-Source: AGHT+IFJmqtJZioTiyOX8JX/y5gRrbKRy7Cr6tlVOZFMUbiSqOYCsT8O8KzoPZy84FZZvtO2gOJowA==
-X-Received: by 2002:a05:6808:2104:b0:450:4443:6421 with SMTP id
- 5614622812f47-4539df6fe07mr999403b6e.26.1765030253419; 
- Sat, 06 Dec 2025 06:10:53 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=FWjYo05SDfosHzWQwUJDhuBjn18f2CpKm6ViYVVgpOQ=;
+ b=nKlKRHSbhMbe9Zd7SdOkIwjLWUgzqjGGJD0tzaIEeiyYSJfNO7kTDsQwum22FRXjAN
+ Fh9rs0dl0CwcxT+r/DKXekCrsIeombPkxZz1vxSsnSF/O5HNZwZ3BAz3my749/thfyRJ
+ NNWU+nVDUXUrMdTG0Efnm15q+jnQZYkmSF1elmcQePFt8c9pkZ1j9j8lAPlLZj1QVVJO
+ WfJRa8FoW5/bdgbvq9rpgL+JqMrWRl1l6sMHFtvFi8lKH/1dXnk0orlnDD8R+tYT9rll
+ bvXpWxu+s9PK3LUuaT2wErhAhDh9NkkiI/17W5y/gLzQ4jV5+aZYwoZ1E8kg5JDndWSS
+ vkAA==
+X-Gm-Message-State: AOJu0YyVVfd3LqP+oXaxb/E2i9jV0SzpmMU22vakEWWVBh4DkMMNl79n
+ rBHAuocCN9yDCKiSIWBfgjg8PsrS+xPrVdi+I01muV+Cu/y77nfYvIFnsNBNlqR+3gUTXwotiiG
+ LXu05kLw=
+X-Gm-Gg: ASbGncuBuYhcKeExhOn7itfGkDNA6LZUlOvdGtv1DSR2FMsU/NITW7aGCVb0wCvKLvk
+ RPyt4ppw76Q++96I25Zrql51M9+ITvmwxz0mXvr3ZClCbf/7ag+9mgoyvb/3aNBO+K5CsbtxI1q
+ opZLLh1pH/gk7G5/NFajUtRrLKSxKnKtAGFAkhvg+OoUnmPSyg8k7tKqI0Zt7JumXJOOSofm5Xm
+ EQVq7VI6yhpJcfyozHfYbENN4leabi/TAtkCvaS6mSpXYNdVJpSoQ6WZ6xF8qOlz+AuyCpYIQt+
+ XjkV76P88ERsxmhH7m/OiuTPN5VYfsa8A+PvtVOozObL8TurNy/dRcDvh+DTobTSL7cFLn6iU9Z
+ lPrub6gC0RAp0eoWc3lLfMnJRqYvTmYC7WnhjF5D8YoMoRup1EHpIuG1Tr0HtJk34YW+Mdrobt2
+ zWEX3G0myPenIAIk1ALk2LKGa6vnCmtArSdRclNScr8wpqJLNjOnMErucN66A=
+X-Google-Smtp-Source: AGHT+IECV5ZVTxB/RGcfIh/NGcjeXas+AeODkIGY3ezF+yOtkpv7h6u+J8ibZ6zhiWoU7IYHMD0ZpQ==
+X-Received: by 2002:a05:6830:25c5:b0:7c7:62bd:7fa9 with SMTP id
+ 46e09a7af769-7c9707bd9dfmr1496810a34.4.1765030254262; 
+ Sat, 06 Dec 2025 06:10:54 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acd733bsm6078499a34.26.2025.12.06.06.10.52
+ 46e09a7af769-7c95acd733bsm6078499a34.26.2025.12.06.06.10.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Dec 2025 06:10:52 -0800 (PST)
+ Sat, 06 Dec 2025 06:10:53 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
-In-Reply-To: <BESP194MB280527E186AFA71E91BF5295DACFA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-References: <BESP194MB280527E186AFA71E91BF5295DACFA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Subject: Re: [PATCH v2] firmware: ti_sci: Fix memory leaks in
- devm_ti_sci_get_of_resource
-Message-Id: <176503025271.2523567.11529309442182851712.b4-ty@konsulko.com>
-Date: Sat, 06 Dec 2025 08:10:52 -0600
+Cc: Huang Jianan <jnhuang95@gmail.com>
+In-Reply-To: <BESP194MB2805A8A998129AB7ABA1B929DACFA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <BESP194MB2805A8A998129AB7ABA1B929DACFA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH] fs/erofs: Fix realloc error handling
+Message-Id: <176503025356.2523567.2665481656657366190.b4-ty@konsulko.com>
+Date: Sat, 06 Dec 2025 08:10:53 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,19 +97,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Nov 2025 11:30:19 +0100, Francois Berder wrote:
+On Tue, 11 Nov 2025 13:49:30 +0100, Francois Berder wrote:
 
->   - Fix temp memory leak
->   - Free memory during error handling
-> 
-> v2: rebased on top of 365a7079fb918643da0f0709660a7d8ea76dd6f3
+> If realloc failed, raw was not freed and thus memory
+> was leaked.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] firmware: ti_sci: Fix memory leaks in devm_ti_sci_get_of_resource
-      commit: 00e1fed93c8c3e4c9037741ea1b70a9e693a6e65
+[1/1] fs/erofs: Fix realloc error handling
+      commit: 1c1be32c31cbec61d32f7aaa498ccc25567ae3e0
 -- 
 Tom
 
