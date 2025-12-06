@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB400D3B7D0
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 16:12:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36893D339BC
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 16:12:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EAF483A26;
-	Sat,  6 Dec 2025 17:12:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5B59083A24;
+	Sat,  6 Dec 2025 17:12:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p2zCKFKm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gD8k7m8I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D13F839D7; Sat,  6 Dec 2025 17:12:28 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 3C71483A3B; Sat,  6 Dec 2025 17:12:29 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAE66839D7
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 17:12:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 297E4839F1
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 17:12:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c6ce4f65f7so2971157a34.0
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 08:12:25 -0800 (PST)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7c78d30649aso2726074a34.2
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 08:12:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765037544; x=1765642344; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765037546; x=1765642346; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bI6zfnkypYBfwCNeQsbe03KsVwxsF22hiiJzoCsp37Y=;
- b=p2zCKFKmjrBR/QIVErfMv8XNC+sGkG7k61MG8M/WFG0okXFjq7jQUjma+h4V/H3NZK
- qYtsrT+WxYQoImJZpWRcQmCQVZARUxdWb5jTbpOHjwbdASpp4KOgcs3hSvX9DHM4DaH7
- VXFY818pHDS3l7og/uFSIjj6PiX7BZg0SlKoY=
+ bh=FODOaCB28Ao+XZXMuwx8WlEgieu5YUADZ9aiedGEbKc=;
+ b=gD8k7m8IyN0xvNRv2RhFH1URnfarKCuvzhmUJXinxD2aaUUXCf90kmbB4faLp3w4I7
+ MbhN6Vq6v9AQbdKMTi3+b4tCPeCJ/bmpsy0EQT8ecVSIcnCsu/1DQ4vygXTngKbKfx/Y
+ w5BHwBcXQ1MAHD2CyoIBG/ltfP3QgPotPyEeA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765037544; x=1765642344;
+ d=1e100.net; s=20230601; t=1765037546; x=1765642346;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=bI6zfnkypYBfwCNeQsbe03KsVwxsF22hiiJzoCsp37Y=;
- b=lgehJuOgRSRCuF2hiIW5qkHn4+UWBVSNIA2u/sahWa9XN/OFA40X1cQ/NoKgPVAOF7
- FiWDVc59VAgfvCepsjcoG6QowCjpVyn0InoyCwB475tNCnWc7Fk0JkEjGU94xaGbNP1f
- e3aoHDvKo54C4evNJDp4vihmIqUY2gxELyuynpJccko0Heht+sb5Efsxi8ty0dBjJLeW
- VjeP7wC9y9NxZBmsbVVTznbM2T+TCAJQfYrmQ7lcrQBdf9749gpShQWlrL5fLB7nrC7D
- U7qbbcGRnd1F4mXYpTyviqN96JwR/v4E3Yn/qFByGyAdHBFW4biyu5/wwM6qNjPBSBG6
- h82w==
-X-Gm-Message-State: AOJu0YzfGctEBxtCH8MQeTitTszXuXvQrQ8TIlgC/D1XH5RJPo3wphpT
- E+gCp16dRSRnr7T37l5fuVRdQ7c01jI30KxUZsrC/nH8A8pduV72+vcFX0a10D59cD7lJYJdTPl
- t2fQ+e1I=
-X-Gm-Gg: ASbGncsNF3xejAK2G8eK8ywdmg/VAuXqCshsHU7cY46WnNv3UT66qNtShSlfI6Hb9GX
- xpGhW93qSyxai87BFmbuP3vx0RF9uIoabyXvIdlzmNVVc207qadKk19goojosU1dwiBMQTtTdZi
- 5XSaurR2WOhuY4UG9iDgwju9OGYWqb8JQsPJnXDppMcPj+e7FwG2m+clKuEHKIjQIbRl4KfB2vw
- J8z682iUsjxK8mSVaPx9s0CSchS7E5o5bsWhhHXKk38xx6OeuiXo6v6m4CDqK5NbsjVVBkdNBzT
- PuxlLUGpc4UWgEGBxbxSo/DKOSl+s98YpnKB2xUEPoxwz7ul5Ed/IOtFKywoJzIzmhaSVbWsotl
- dtyW19QTCm1YLSwo3j3HU30nJDWC/ZiEhSu8zB8PEXu2g4LNl5A2hBfecb4IsEV2rqfwaZZyazY
- oJ1C0/V5NR8vHuzjRQyEronKSgZcn8JZqI3yg6tAX1qxF+dY+w
-X-Google-Smtp-Source: AGHT+IHvEwhxL9CWUB1sYZ0orTMPIRs9DZMI9TKXvqZTGzllkPxPOXcclRO7QRhd9B32ndPzOrbEBw==
-X-Received: by 2002:a05:6830:411f:b0:7c3:e07f:568f with SMTP id
- 46e09a7af769-7c97076f7f8mr2157317a34.8.1765037544413; 
- Sat, 06 Dec 2025 08:12:24 -0800 (PST)
+ bh=FODOaCB28Ao+XZXMuwx8WlEgieu5YUADZ9aiedGEbKc=;
+ b=wxO/kQ5FVF9slrIqrpB9sTaqKEQ6onV/OWagwkSDDVbwJjewLnAYfRZPEodblTdL/X
+ i/eooa+HfYQfdNx4n/5gqAsjISMTj5UrD1GjtsRyueuw99iMt/xei8q6dtcceZzjqRtz
+ BnbEpLb/ADhB7TvtpJ+5HLDB6sh3oXYskqtyVs5M5xcGx7up4XXzNLUxmN0e/ZeO8K0e
+ iNEnUM6VgvIFtdCNjaRb7t+BIKdujPBzg/3lw7s+ff4iKOxenPG5qGmLCp/jw2UV/0fX
+ ehmmVmdIApVsOXaWpLLYRwmliwiqcIQsDW0ZneXEwPdt5V5+dhKnBtxgVpHW7UFr5XO/
+ zZmw==
+X-Gm-Message-State: AOJu0YypE6R1fkYzpscMTQhKsx92nmezsn7htnWOJ/7Ad3XjDDwvs45n
+ CVXR66G52z4fsm9A9l/BG2sIMcGHfk8R+tehjnfF/dOoBU3n/1q/2gVDlTf74z/LaS4R/raAniA
+ jfQtuw+U=
+X-Gm-Gg: ASbGncvn3dFY6Rqk8neAfOtCu90kYSdWZtvpXId55/my0s3eiSOsERYlpYO8FkNd47o
+ x7OY4Fa+b8kJt10NNWNLzZpeR+y1ebeDbpaAyyQN7A3ZTNA4KhqN6vkD3TOMJBVKy4lrfZHYLEK
+ ixXF97fxUBxUaXDbMLDcOPYaCqtGYKKohz+xKPS9OZz/jBI7InMBrvnzFSSjIgRTGrF+4swZXdj
+ k2tfZa2Usjra3OZspFj3BacFvNUksxIm86S9aG+GdMFOhKRST2CJ2kk07G+Tkv7YxIF8tmlthkj
+ UJQxa/45HuZU9IbNePlmngmFaG780LoXdly0VXJpBYrtqNUSQ8sAGK7BUKtOWa+HwtHMo1Tcgec
+ l1szA8KdWbV0uPlXAQsOA4jXh+sb2hYMJF3nassMj9JvOI3v8DCFSNVzjOlowJtGb/PjhZuv+wZ
+ +3xCx4KWQSi1J4Kt5jznecDz5QUpS1pWy3wQKpfo6QesQZYlg9LYI7Kg+s7tU=
+X-Google-Smtp-Source: AGHT+IHrpqYzAal8/aQnwEBxaDR1QTma2E3wWE/E9Q8wEVDjyh5EKDzoy3P0ZNGVgEfBFHMckTyHsQ==
+X-Received: by 2002:a05:6830:448c:b0:7c7:64b7:83e2 with SMTP id
+ 46e09a7af769-7c97083d179mr1691948a34.31.1765037545896; 
+ Sat, 06 Dec 2025 08:12:25 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95a8fa21asm6946180a34.1.2025.12.06.08.12.23
+ 46e09a7af769-7c95a8fa21asm6946180a34.1.2025.12.06.08.12.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Dec 2025 08:12:23 -0800 (PST)
+ Sat, 06 Dec 2025 08:12:25 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- David Lechner <dlechner@baylibre.com>
-In-Reply-To: <f2df6326-f97c-4081-b862-eda657e50ce0@gmx.de>
-References: <f2df6326-f97c-4081-b862-eda657e50ce0@gmx.de>
-Subject: Re: Pull request efi-2026-01-rc4 for master branch
-Message-Id: <176503754325.2614327.8771538036211399883.b4-ty@konsulko.com>
-Date: Sat, 06 Dec 2025 10:12:23 -0600
+To: u-boot@lists.denx.de, Linus Walleij <linusw@kernel.org>
+Cc: David Feng <fenghua@phytium.com.cn>, Peter Hoyes <Peter.Hoyes@arm.com>, 
+ Liviu Dudau <liviu.dudau@foss.arm.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251205-linusw-kernel-org-v2-1-40c8652749b2@kernel.org>
+References: <20251205-linusw-kernel-org-v2-1-40c8652749b2@kernel.org>
+Subject: Re: [PATCH v2] MAINTAINERS: update my email address
+Message-Id: <176503754513.2614327.7805558596533159407.b4-ty@konsulko.com>
+Date: Sat, 06 Dec 2025 10:12:25 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,21 +99,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 06 Dec 2025 14:35:40 +0100, Heinrich Schuchardt wrote:
+On Fri, 05 Dec 2025 17:01:38 +0100, Linus Walleij wrote:
 
-> The following changes since commit c98b6a6dcd1fc7bcba081fc2353954e33de5053c:
+> I am moving over to using my email address at kernel.org.
+> Change this in all the affected MAINTAINERS files.
 > 
->    clk: Remove myself as a maintainer (2025-12-04 13:45:30 -0600)
 > 
-> are available in the Git repository at:
-> 
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2026-01-rc4
-> 
-> [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
+[1/1] MAINTAINERS: update my email address
+      commit: b5d592eff12c8a7ad6a8d88573faaef0894f00b0
 -- 
 Tom
 
