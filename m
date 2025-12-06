@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8CEBD3B7E0
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 20:04:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22AD2D3B7E0
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 20:05:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E7A883A41;
-	Sat,  6 Dec 2025 21:04:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD26683A7A;
+	Sat,  6 Dec 2025 21:05:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MmtHVci6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R4auqTyW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F17B83A5B; Sat,  6 Dec 2025 21:04:57 +0100 (CET)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id 54A7E83A83; Sat,  6 Dec 2025 21:05:38 +0100 (CET)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48C8783957
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 21:04:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BFCD83957
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 21:05:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-5957ac0efc2so3680090e87.1
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 12:04:55 -0800 (PST)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-37e6dd536b0so27823981fa.2
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 12:05:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765051494; x=1765656294; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1765051535; x=1765656335; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AeOf1gpaN1QschjHcZ0SIkHyJcly/cIjcT1wSgxqs3A=;
- b=MmtHVci6LWA1mJdhWnWbZp0mnJiRVkr7abkHBQCUkvpwXsUSe9E+WkXs+RLEaE/Qcb
- +qL8LGAtWOoG+4QD9nTnxN8Ed3YFkfEl7eVRrm2bXLbcEC9tekDcCvdqq09y+E6NIgVC
- vBj/l+N9GXZvBPGnlM3DRTNAIZGjYW+mZAOF7Hc6qOL1owy1okisRvx8OU5jfUnLPaZ1
- eM6KigNglRdM2/ZiQJB74SZNgpU5tkZmb47iJgmBm+1RByR31GR77LOsTiIB1uLzxOM5
- nzyRm8ZphPQ8EIqaQnm+ebdzF4zxjcENST8iemsnYtaZP2HE7QsWdP/lg3eQ8xGZkyqh
- r+Qg==
+ bh=ICyUSjZqgpOzYYjk4LtDZBO4quMu7QwWyGRra1RDlZ4=;
+ b=R4auqTyWEBP7+MwolqADIEgBS8z6HUV4Mb19ZOiszs8Wl2mvP3pJ8+40H6d0/63yFe
+ YUVlOiAxAa7pbQmNNxN5P8JCgxb2ScINBqDD46+GmVhJx18+egm/l2x/KIafvCtqi1n1
+ bdATaniT+motdtkZ4Ehy10oVMq1S8lirMjLQ7NoIPz05bJTl/9GNU5PVF9lI3Nj8epoE
+ IU1Mdpc8J/rIYefprQc5KyRzc7svP7zoz72KOIhyq6exrzFHuRfFEy6xRxaHMUBaeF1Z
+ 70FjADzwH76DtwrD8vdKbq71W59TBU+pYoNp9SBT6qFj1xcqLPfodP9obz59Sgo24W3y
+ MpNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765051494; x=1765656294;
+ d=1e100.net; s=20230601; t=1765051535; x=1765656335;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=AeOf1gpaN1QschjHcZ0SIkHyJcly/cIjcT1wSgxqs3A=;
- b=u2gtoOaQk6VQsbSlz8hi5p3DR+tKfJSh3akKj1YGp6/wpWItA6vT6L7SnQevSCXlGQ
- 5XlSVxk76PWC3TfLhI54qZx/DETSZblJuTXtfDr47agtuc/4oNPmVfxFr0/IyAPV9aOa
- JIsJ4Huogcz//LgAx2aCWzlJ99g+BqjlFmsDRbrXsOit9PdeqMOvSuSxW/YksyItDA30
- srb3J2GO5cRAaX1ol7qtxxnH0ZSU956NdTAJ+BNMmO5kSXtWN6yOs8b+mamMZhp12EOj
- iZ965YPhvZmkjyUr0aynoC6cp/8FiaWCSPK0LWZD6cLnBBU3QPLYfMA6AW6vDaI7uhVj
- iELQ==
+ bh=ICyUSjZqgpOzYYjk4LtDZBO4quMu7QwWyGRra1RDlZ4=;
+ b=EMbS1HErMk74XPxGS0SbbeaVpJHORQZI92gRr9g7CqfsXNyRivD5W7+zmU7kMGVkml
+ /OxURW5lcberPVI9siIBM1JeOBKkeXNAXovuLOLNL1YMtbSDzqn69G1S0jtJSBogZIlU
+ 1AmserYgv5QNW5/6Eh06HYUjHs1ZXnuADiDhxoPlsu/tLl+czwKpjaCfb1RL7X8fff9x
+ IvvB2trOph7tqbTrGOoZcGwOgtxeL9Lyk9vliIBmueBlW175zy7mIigIEwUj5yRBVR/X
+ I468yi6wKG6SqU8GxNowqZINvXr6BZ0ktAxFKL4yFA/B13Xj/jtbsXmxxmo21rmD0GL1
+ oMoA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXD0/m50OJs/T7XvQTxYE51BONc/5yxo8+SM4w83x9XkuZDF18dr6ewb1UUX0Js/apPK3RlwIU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx63I7y2hD85r1NljEQXJM/hkTD3V9arIs8PAWd519kDp/y/RbE
- wZjAZWzKZK2TrzbyGy5sLadqWixRpSOD9/KWRvvDCztDvvQi00se3jsPyOoeD2iVQQ2JZTzkUoY
- aMdAjEx304d9O44EqugGyydsV/RHEZQM=
-X-Gm-Gg: ASbGncsgge3YojcdsJQxIubzsbrugUHD0vvDa7TljEkHvV0xvp9kGDyuF/l2FSbjzOl
- YbIEwD11NwLoLF0ziFYq6eeshY7rwc8PFUapr6TK0NHsiax2QQ44roENHpYAXabGV0fa3UcFYIP
- SrBI2ypuUiKvzSdbGjeOGpaUcwm9XtaSwQQ+9+Y0ZFD4lHN/dFn8OOB8TfutFz4FaajIbB4Yd1h
- arm/4WNfyQl9uZM5sSKttcU1+LeVA2GrdyTFSXE5zr2WvVEJ/4UJiZc4NT6THl5L/cAAKlIPLU9
- 9uTFZpbp0RrbeDBmp1jr9i11eCg=
-X-Google-Smtp-Source: AGHT+IGg9DTI8S5nzOzBSs1XaWLTyv6vkxwDWKLAwQnk2WxLb7cG32LGTbd2XQWmdkwT8R+zdxEn3aqDVryn3Q8OxCw=
-X-Received: by 2002:a05:6512:68b:b0:594:48e6:26b8 with SMTP id
- 2adb3069b0e04-598853caf93mr1111601e87.39.1765051494388; Sat, 06 Dec 2025
- 12:04:54 -0800 (PST)
+ AJvYcCXDMtj9LSEEyLbhU7HLnee2QcCF1Y+xKw88pe9KuPKM4tAI5a7yPv6kR9VnwAZ+Ya4PCzM91ew=@lists.denx.de
+X-Gm-Message-State: AOJu0YzfuIGYWX93CuZ3NGrtKBNLQ7XPg9rgsIpK2dCtCjDCz8wdbnUH
+ 9yJH9W6VKO4+e0+6sK1WFyIR1Wg6A/NlxPKsup0Zu5xylK3s8QbtlGh3Jgv8/XCXJ+G028XTVy8
+ cL7OAeL7rcuMJfeg5vADM0Mb/485BdrgZjM/6
+X-Gm-Gg: ASbGnctFDaYy+3N78OpT+lw5OJ6auzJO5l1OthhtIiyjLHawCIv/a5HPsvFd0AVXvj1
+ SpDvyALLDjkD6neSJoYKBe7Cl/nJE1SFucVaVZuw9hUfU8H/Tnehx2xsBn6Jviz22yg41bWIIbH
+ fbhuDSd54MZKwKQr7RC0y5TAm+y6o0GVNxhga0HPEKjT83IGtZYh0xKvR7RrHRY/9mvHUu4jwd/
+ 00OKT+c4faTFqMvy0skOFdCht99JHrP7dRtYt9O/cgkLHVYPh8f/da7fDBghyN8FddMgAnYt9NO
+ KcFEG0bo98dkbGaLiq0WyIWoWZg=
+X-Google-Smtp-Source: AGHT+IF01ApWYFDIXrzwe23jSnNZmnpMbtKkop/zbNGJfoDGse4MIEeJEQ+qdOinr7EQwuM0L3P5iWbzOM/n2zSuabQ=
+X-Received: by 2002:a2e:b8d6:0:b0:37a:44c6:1756 with SMTP id
+ 38308e7fff4ca-37ed2036e7fmr8744271fa.22.1765051535115; Sat, 06 Dec 2025
+ 12:05:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20251205111044.3195322-1-primoz.fiser@norik.com>
- <20251205111044.3195322-3-primoz.fiser@norik.com>
-In-Reply-To: <20251205111044.3195322-3-primoz.fiser@norik.com>
+References: <202512042130.5B4LUUcU013524@simong.net>
+ <20251205171354.GI303283@bill-the-cat>
+In-Reply-To: <20251205171354.GI303283@bill-the-cat>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 6 Dec 2025 17:04:41 -0300
-X-Gm-Features: AQt7F2qCWrs03BiD0qZhDWQYIgtcyF1MednBCw5ESfDoCHNvQTiGPeJ_GsjjK6E
-Message-ID: <CAOMZO5DzSPxx_fBkLy_k6oHCYp5CWuufmqZRcGYvn=62rGG0_g@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] board: phytec: phycore-imx93: env: Add required
- uuu variables
-To: Primoz Fiser <primoz.fiser@norik.com>
-Cc: Mathieu Othacehe <m.othacehe@gmail.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, 
- Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- Tom Rini <trini@konsulko.com>, 
- Benjamin Hahn <B.Hahn@phytec.de>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
+Date: Sat, 6 Dec 2025 17:05:23 -0300
+X-Gm-Features: AQt7F2p1G2eYjwjZwB5qdSKY_kRTmfvIEGzQgf3je3BmJrJo8dmO0Mjw_1WhZbc
+Message-ID: <CAOMZO5Buq06PTjQK4sZzUePR6JqeV4cfN8Fjds+N_XkEVNq9QQ@mail.gmail.com>
+Subject: Re: [PATCH v2] nitrogen6x: change maintainer
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Gaynor <boundary@simong.net>,
+ U-BOOT Mailing List <u-boot@lists.denx.de>, 
+ Simon Gaynor <simon.gaynor@ezurio.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -102,11 +98,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 5, 2025 at 8:10=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.com=
-> wrote:
+On Fri, Dec 5, 2025 at 2:14=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
 >
-> Add variable 'emmc_dev' and 'sd_dev' required for NXP uuu flash scripts.
+> On Thu, Dec 04, 2025 at 01:29:21PM -0800, Simon Gaynor wrote:
 >
-> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+> > Simon Gaynor shall be the new maintainer
+> >
+> > Signed-off-by: Simon Gaynor <simon.gaynor@ezurio.com>
+> >
+> > diff --git a/board/boundary/nitrogen6x/MAINTAINERS b/board/boundary/nit=
+rogen6x/MAINTAINERS
+> > index 17018d69f64..c7355b0e40e 100644
+>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 
-Applied the series to u-boot-imx/next, thanks.
+Applied to u-boot-imx/next, thanks.
