@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B07EBD3B7E0
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 20:04:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8CEBD3B7E0
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 20:04:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33E4E839D7;
-	Sat,  6 Dec 2025 21:04:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7E7A883A41;
+	Sat,  6 Dec 2025 21:04:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SZmEuwSr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MmtHVci6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F8C083A3B; Sat,  6 Dec 2025 21:04:18 +0100 (CET)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id 2F17B83A5B; Sat,  6 Dec 2025 21:04:57 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6C3683957
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 21:04:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48C8783957
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 21:04:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-37d13ddaa6aso20619301fa.1
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 12:04:16 -0800 (PST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5957ac0efc2so3680090e87.1
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 12:04:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765051456; x=1765656256; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1765051494; x=1765656294; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BEotqOIlOcfr04GRL7zpquY+e/yzghdX0+UDQNncJlg=;
- b=SZmEuwSr9O3ow+3wBKrrtLzOxGAQ0f6DfVpNFtENj0XxD/EIFVcUh76DRc+EusFuKX
- tTNPdaUA6hVH3NihPGSIZWY4dYamDnTsYy4DKzBFYUEWhvrrkVm/df1DoEWsekVpr4Oe
- j7CHbjtEwU2gK56nofLRBO/kY8yIJ7yBcG2lKKBbLCWZl+fuyn5sLgn1ZFjHcJ49mgye
- OXIMAR9S29fXygBMUi8koQWQQQMQ/B0DKS6I7xv0ZK0WoQaG1JCRHQ1lx1Rm0FjIslBy
- ROpTIiLI+lJgYOkhD6FtGKo5I++Uv9QbtV/HpYeHsXlboFIlZYj6W/yMC/MH60+HSACq
- VfPQ==
+ bh=AeOf1gpaN1QschjHcZ0SIkHyJcly/cIjcT1wSgxqs3A=;
+ b=MmtHVci6LWA1mJdhWnWbZp0mnJiRVkr7abkHBQCUkvpwXsUSe9E+WkXs+RLEaE/Qcb
+ +qL8LGAtWOoG+4QD9nTnxN8Ed3YFkfEl7eVRrm2bXLbcEC9tekDcCvdqq09y+E6NIgVC
+ vBj/l+N9GXZvBPGnlM3DRTNAIZGjYW+mZAOF7Hc6qOL1owy1okisRvx8OU5jfUnLPaZ1
+ eM6KigNglRdM2/ZiQJB74SZNgpU5tkZmb47iJgmBm+1RByR31GR77LOsTiIB1uLzxOM5
+ nzyRm8ZphPQ8EIqaQnm+ebdzF4zxjcENST8iemsnYtaZP2HE7QsWdP/lg3eQ8xGZkyqh
+ r+Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765051456; x=1765656256;
+ d=1e100.net; s=20230601; t=1765051494; x=1765656294;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=BEotqOIlOcfr04GRL7zpquY+e/yzghdX0+UDQNncJlg=;
- b=h6lNHaGwS46e6oNDciOUc+BfIzrwNs/fTtImHXPO48Tj87tXPPTI/F4gWNj12UXEMP
- dtYQ+Rg91oLZEmkCFeto840yGLHvp/bLToRPoSsWiPBCpqIwPpIfqGrzdEw1cGdgJTLj
- yIbl1IDyNwi8CfNG2fj1FoTWt4BKpPAKFpjk0uDl9OTHHCNeXMf2JenTrc/xteRTLsl1
- 01u9/aqjoW70OI94o6t/c+IoVTSyAHEhbkBg4KSznVf2/01E5qwOrwt3B+vz1tPN0ZnS
- 0xnTaqzY/8nnBrJcY7k1/wHvNE+5HSj1poJP9r++TCdoV/oTwZaWVBk9JebxTDk9prqa
- rl5A==
+ bh=AeOf1gpaN1QschjHcZ0SIkHyJcly/cIjcT1wSgxqs3A=;
+ b=u2gtoOaQk6VQsbSlz8hi5p3DR+tKfJSh3akKj1YGp6/wpWItA6vT6L7SnQevSCXlGQ
+ 5XlSVxk76PWC3TfLhI54qZx/DETSZblJuTXtfDr47agtuc/4oNPmVfxFr0/IyAPV9aOa
+ JIsJ4Huogcz//LgAx2aCWzlJ99g+BqjlFmsDRbrXsOit9PdeqMOvSuSxW/YksyItDA30
+ srb3J2GO5cRAaX1ol7qtxxnH0ZSU956NdTAJ+BNMmO5kSXtWN6yOs8b+mamMZhp12EOj
+ iZ965YPhvZmkjyUr0aynoC6cp/8FiaWCSPK0LWZD6cLnBBU3QPLYfMA6AW6vDaI7uhVj
+ iELQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUa2YgEfOgauQH4py4wKYRIGCNhuH5b+18w/UZ0Llit/0PsAaTd5hw8CIzL6owf7KeocN8GmAM=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywodv7cfNMSDNtsSi7J68SLdWegDLPbQThbdQgeSxhkTPPjPb7R
- ylxq6qPgOKGoTHqX+cdhb38YMVBg736me7KEiK2kEJUVts73WsMf2DjJrAwVUQ+MDNy1AY844ed
- hfFjHI9nebpb3GmFSJn1nsTFvkROPQSo=
-X-Gm-Gg: ASbGncs5xW0R4Sv/OpXi3DPtDvBKb0Tj0xOpTsb726N4CQMieC5p9OTxy1zxhWW9JUC
- Zm6xCUIhLs92Ick3H0J3EotVaRBkGeB+QV0YRxkFDwC0wldLHD4z3W4OemxlOBQdh0D/9XASChW
- yadIVYFT7GNDbUcTVttZGa9X7EXxVF9Kx6vdLhitEMjQi1vtUSulFChEm23YCt9Nat35CNtzrYQ
- SNymOvFnJ316hKzOf/nm0Eh3Y5wxZDE6umssoOEdqSHR9ee9xLiuOy/ih6m87Qdl3l5YXuLspPs
- YB6AbPZdMKNUiVSzBD3tFQqYd2I=
-X-Google-Smtp-Source: AGHT+IFtJTnh1aNSGN3+wQR7+9R7wEnxMWhX4PUkM/FDdawui+gM6WNuNdSsySz+MwskM2dQE80J+YwBF0ZcGy98ydY=
-X-Received: by 2002:a2e:b88f:0:b0:37b:a41b:58a1 with SMTP id
- 38308e7fff4ca-37ed83bef13mr8008961fa.35.1765051455751; Sat, 06 Dec 2025
- 12:04:15 -0800 (PST)
+ AJvYcCXD0/m50OJs/T7XvQTxYE51BONc/5yxo8+SM4w83x9XkuZDF18dr6ewb1UUX0Js/apPK3RlwIU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx63I7y2hD85r1NljEQXJM/hkTD3V9arIs8PAWd519kDp/y/RbE
+ wZjAZWzKZK2TrzbyGy5sLadqWixRpSOD9/KWRvvDCztDvvQi00se3jsPyOoeD2iVQQ2JZTzkUoY
+ aMdAjEx304d9O44EqugGyydsV/RHEZQM=
+X-Gm-Gg: ASbGncsgge3YojcdsJQxIubzsbrugUHD0vvDa7TljEkHvV0xvp9kGDyuF/l2FSbjzOl
+ YbIEwD11NwLoLF0ziFYq6eeshY7rwc8PFUapr6TK0NHsiax2QQ44roENHpYAXabGV0fa3UcFYIP
+ SrBI2ypuUiKvzSdbGjeOGpaUcwm9XtaSwQQ+9+Y0ZFD4lHN/dFn8OOB8TfutFz4FaajIbB4Yd1h
+ arm/4WNfyQl9uZM5sSKttcU1+LeVA2GrdyTFSXE5zr2WvVEJ/4UJiZc4NT6THl5L/cAAKlIPLU9
+ 9uTFZpbp0RrbeDBmp1jr9i11eCg=
+X-Google-Smtp-Source: AGHT+IGg9DTI8S5nzOzBSs1XaWLTyv6vkxwDWKLAwQnk2WxLb7cG32LGTbd2XQWmdkwT8R+zdxEn3aqDVryn3Q8OxCw=
+X-Received: by 2002:a05:6512:68b:b0:594:48e6:26b8 with SMTP id
+ 2adb3069b0e04-598853caf93mr1111601e87.39.1765051494388; Sat, 06 Dec 2025
+ 12:04:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20251204164133.1677471-1-max.oss.09@gmail.com>
-In-Reply-To: <20251204164133.1677471-1-max.oss.09@gmail.com>
+References: <20251205111044.3195322-1-primoz.fiser@norik.com>
+ <20251205111044.3195322-3-primoz.fiser@norik.com>
+In-Reply-To: <20251205111044.3195322-3-primoz.fiser@norik.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 6 Dec 2025 17:04:04 -0300
-X-Gm-Features: AQt7F2r-C39XAWvjqjUEdct0-K1JY4EU7u7FtAUWWsivS5Jb85CF7seSiHwkSJo
-Message-ID: <CAOMZO5BG-T-e-Gc_AP=nOnFPPXF3Ov7detWD5+0A1PiGH1wmiA@mail.gmail.com>
-Subject: Re: [PATCH 0/2] configs: apalis-imx8/colibri-imx8x: use default for
- SYS_MALLOC_F_LEN
-To: max.oss.09@gmail.com
-Cc: Max Krummenacher <max.krummenacher@toradex.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de
+Date: Sat, 6 Dec 2025 17:04:41 -0300
+X-Gm-Features: AQt7F2qCWrs03BiD0qZhDWQYIgtcyF1MednBCw5ESfDoCHNvQTiGPeJ_GsjjK6E
+Message-ID: <CAOMZO5DzSPxx_fBkLy_k6oHCYp5CWuufmqZRcGYvn=62rGG0_g@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] board: phytec: phycore-imx93: env: Add required
+ uuu variables
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: Mathieu Othacehe <m.othacehe@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
+ Tom Rini <trini@konsulko.com>, 
+ Benjamin Hahn <B.Hahn@phytec.de>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -100,15 +102,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 4, 2025 at 1:49=E2=80=AFPM <max.oss.09@gmail.com> wrote:
+On Fri, Dec 5, 2025 at 8:10=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.com=
+> wrote:
 >
-> From: Max Krummenacher <max.krummenacher@toradex.com>
+> Add variable 'emmc_dev' and 'sd_dev' required for NXP uuu flash scripts.
 >
-> Drop setting an explicit value for SYS_MALLOC_F_LEN. This increases
-> the available space to 0x10000.
->
-> While U-Boot works with the current setting of 0x4000 increasing the
-> size for cmalloc helps if further space is required, e.g. when
-> enabling more DM managed devices.
+> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 
-Applied to u-boot-imx/next, thanks.
+Applied the series to u-boot-imx/next, thanks.
