@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87EE8D3B7D1
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 14:11:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E07ED3B7D1
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 14:11:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2F5D83A28;
-	Sat,  6 Dec 2025 15:10:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 38B6383A5A;
+	Sat,  6 Dec 2025 15:11:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o98M76U6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PT13iBnz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94B9A839F1; Sat,  6 Dec 2025 15:10:57 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 4269E83A84; Sat,  6 Dec 2025 15:11:03 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F39C839E4
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 15:10:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DCD683979
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 15:10:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c6da42fbd4so1620904a34.1
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 06:10:55 -0800 (PST)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c6ce4f65f7so2904327a34.0
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 06:10:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765030254; x=1765635054; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765030256; x=1765635056; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FWjYo05SDfosHzWQwUJDhuBjn18f2CpKm6ViYVVgpOQ=;
- b=o98M76U6iN1RoEiBKILM2bk+hxu5k4g5w0Q4OgmyucST4LGlm2ZJHhg7Lwwl3oI9es
- 93Op9m8EhInNT4dqj4IxhWGdLv/0a9P6xIJ3nvWlcnv5D4qUP5CWlg7CdLCTYII/pmkU
- rSysJ/jkHBsNUp6eJfvoI4gQUNFrfjUIqQ34k=
+ bh=ynhfckTWYAIQ10Aye4yX6tYfdd8bSguauA4PYEuPIKM=;
+ b=PT13iBnznQ/dLYp6YRvoTz3At7Xo4xcoBl/nE3FFnsh6VVUi64KbSFB4qUE612Gea/
+ Udmx8jhmFYDv6eh5NDuIjQ1+x3sV4Lu9lZE4nPPKRsrI/zXVANDjhEcHYjHsqGphFrRh
+ U9e2hjCuWheBFX3pDcLVakljHoE7HIku+yZtg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765030254; x=1765635054;
+ d=1e100.net; s=20230601; t=1765030256; x=1765635056;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=FWjYo05SDfosHzWQwUJDhuBjn18f2CpKm6ViYVVgpOQ=;
- b=nKlKRHSbhMbe9Zd7SdOkIwjLWUgzqjGGJD0tzaIEeiyYSJfNO7kTDsQwum22FRXjAN
- Fh9rs0dl0CwcxT+r/DKXekCrsIeombPkxZz1vxSsnSF/O5HNZwZ3BAz3my749/thfyRJ
- NNWU+nVDUXUrMdTG0Efnm15q+jnQZYkmSF1elmcQePFt8c9pkZ1j9j8lAPlLZj1QVVJO
- WfJRa8FoW5/bdgbvq9rpgL+JqMrWRl1l6sMHFtvFi8lKH/1dXnk0orlnDD8R+tYT9rll
- bvXpWxu+s9PK3LUuaT2wErhAhDh9NkkiI/17W5y/gLzQ4jV5+aZYwoZ1E8kg5JDndWSS
- vkAA==
-X-Gm-Message-State: AOJu0YyVVfd3LqP+oXaxb/E2i9jV0SzpmMU22vakEWWVBh4DkMMNl79n
- rBHAuocCN9yDCKiSIWBfgjg8PsrS+xPrVdi+I01muV+Cu/y77nfYvIFnsNBNlqR+3gUTXwotiiG
- LXu05kLw=
-X-Gm-Gg: ASbGncuBuYhcKeExhOn7itfGkDNA6LZUlOvdGtv1DSR2FMsU/NITW7aGCVb0wCvKLvk
- RPyt4ppw76Q++96I25Zrql51M9+ITvmwxz0mXvr3ZClCbf/7ag+9mgoyvb/3aNBO+K5CsbtxI1q
- opZLLh1pH/gk7G5/NFajUtRrLKSxKnKtAGFAkhvg+OoUnmPSyg8k7tKqI0Zt7JumXJOOSofm5Xm
- EQVq7VI6yhpJcfyozHfYbENN4leabi/TAtkCvaS6mSpXYNdVJpSoQ6WZ6xF8qOlz+AuyCpYIQt+
- XjkV76P88ERsxmhH7m/OiuTPN5VYfsa8A+PvtVOozObL8TurNy/dRcDvh+DTobTSL7cFLn6iU9Z
- lPrub6gC0RAp0eoWc3lLfMnJRqYvTmYC7WnhjF5D8YoMoRup1EHpIuG1Tr0HtJk34YW+Mdrobt2
- zWEX3G0myPenIAIk1ALk2LKGa6vnCmtArSdRclNScr8wpqJLNjOnMErucN66A=
-X-Google-Smtp-Source: AGHT+IECV5ZVTxB/RGcfIh/NGcjeXas+AeODkIGY3ezF+yOtkpv7h6u+J8ibZ6zhiWoU7IYHMD0ZpQ==
-X-Received: by 2002:a05:6830:25c5:b0:7c7:62bd:7fa9 with SMTP id
- 46e09a7af769-7c9707bd9dfmr1496810a34.4.1765030254262; 
- Sat, 06 Dec 2025 06:10:54 -0800 (PST)
+ bh=ynhfckTWYAIQ10Aye4yX6tYfdd8bSguauA4PYEuPIKM=;
+ b=rYl/V6jtjMGTf3DukIB8VFWDRcOOHw+QiqvDG5zW8RPtmaCSGc3zsPIYrP7FRgIlwX
+ EnLO3XtX18piZ3yMUo9TjpB87oRdJJDVYpXO1pWRqdAIJ6cYu82xWCIEGw0qi5Dn7khq
+ 1vBL3CN8eCxN8GmS/gdWVvJ8W540QjA1tU2MLeaHysaOTbT51j8yZHLcYW2GRywrzHDs
+ qZEjTMvWGpug64gH++BxTy933YrhFSOK7Z4EHubSxfGVsOwY5LLQFel25qjNYM75sbwF
+ qm+xby1L6cy6thKhdNthon9kLWTNcwfqBS5tJepARgDCLvm0C2ey5AuG75wRZdcCZyrd
+ 8HOA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW5t8U0oJcP8FVUTvZ2TS/hbeA+uHJ5WtIJ1NUSwP+qbwGqv3jNie9IzsxWRE/qzvvk4Axs/aw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0iJho9MVwq4WswdzVUG+XkcnY6c0GMEbTyo9UXxzNhyUO6Pyb
+ 8ttKPDZRuuzUZHhU2Pc9tA5lz3pzrN2Ds9dMBDO4DUcN51WhDQ6GEdGvHx+YpRhQShIKh5Xg/IO
+ cQOTvL/Y=
+X-Gm-Gg: ASbGncvcXbCpm5dDOvfnDkV8iWdIlQxZ5DrRsT6SAdpoAcfXtXCAzG9S67P9HTfCqU2
+ LK6zEimTe5IjQkbKp9jrz6HCypRNoPZG9l5OD3rP41SZSLcf/66Zh9WK1tqZdkLSnY+3rZ4MpMr
+ NXInUOKa7r8V1m4azCmcqwdBoFGlZ1bfcF+DJkZMoi+CdnI2RVnFSzDv9Cu70ZNkLru2E2G8zsr
+ 4p7cjX3xu7T/rKL2lIoApUR6j6+MECjkSQrs/3Nnb1P4vwgvYIZGPecO65aokJotYbozh+1COfo
+ odcnZZlgTlXYrB5eLoUJVO/RHcBIPXYQippGO1+1wDgW7AbXlVrckL9qR2yVVIwdWv33aOl/i7A
+ WZRd063NgT7zgrAX8bEwDt0SVXLrOWTzpxN6o4kVA6qKdTR8tBa5ZrjT0SlUM5Zlrk/r/7Yk3RA
+ uxV1d/VoBS8qZmK+U43cempvhSJKEXiTxVfkoTywcbZXn+v8CN
+X-Google-Smtp-Source: AGHT+IGwbOOJyNmBRJhYsg/3Wx/IH1X9YGenKvvpcSop9LPWTQkUHDqVyVuuF0oL++LVglzwKg/U8Q==
+X-Received: by 2002:a05:6830:4d9b:10b0:7c7:3416:ff8d with SMTP id
+ 46e09a7af769-7c970786d71mr815729a34.9.1765030256005; 
+ Sat, 06 Dec 2025 06:10:56 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acd733bsm6078499a34.26.2025.12.06.06.10.53
+ 46e09a7af769-7c95acd733bsm6078499a34.26.2025.12.06.06.10.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Dec 2025 06:10:53 -0800 (PST)
+ Sat, 06 Dec 2025 06:10:55 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
-Cc: Huang Jianan <jnhuang95@gmail.com>
-In-Reply-To: <BESP194MB2805A8A998129AB7ABA1B929DACFA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-References: <BESP194MB2805A8A998129AB7ABA1B929DACFA@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Subject: Re: [PATCH] fs/erofs: Fix realloc error handling
-Message-Id: <176503025356.2523567.2665481656657366190.b4-ty@konsulko.com>
-Date: Sat, 06 Dec 2025 08:10:53 -0600
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: David Zang <davidzangcs@gmail.com>, u-boot@lists.denx.de
+In-Reply-To: <20251027002458.16741-1-semen.protsenko@linaro.org>
+References: <20251027002458.16741-1-semen.protsenko@linaro.org>
+Subject: Re: [PATCH] autoboot: Fix inconsistent countdown output
+Message-Id: <176503025514.2523567.1012799477389645993.b4-ty@konsulko.com>
+Date: Sat, 06 Dec 2025 08:10:55 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,17 +99,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Nov 2025 13:49:30 +0100, Francois Berder wrote:
+On Sun, 26 Oct 2025 19:24:58 -0500, Sam Protsenko wrote:
 
-> If realloc failed, raw was not freed and thus memory
-> was leaked.
+> Commit 5f70be08b015 ("Fix autoboot countdown printing wrong") introduces
+> inconsistency in how the countdown is displayed. For example, in case
+> when BOOTDELAY=5, the next output is observed during the boot:
 > 
+>     Hit any key to stop autoboot:  5
+>     Hit any key to stop autoboot: 4
+>     Hit any key to stop autoboot: 3
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] fs/erofs: Fix realloc error handling
-      commit: 1c1be32c31cbec61d32f7aaa498ccc25567ae3e0
+[1/1] autoboot: Fix inconsistent countdown output
+      commit: af38567cadcaa4842d85af179254886a50c93fc9
 -- 
 Tom
 
