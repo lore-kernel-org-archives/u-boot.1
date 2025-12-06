@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E07ED3B7D1
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 14:11:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BAC8D3B7D2
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 14:11:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38B6383A5A;
+	by phobos.denx.de (Postfix) with ESMTP id 7C0FF83A8E;
 	Sat,  6 Dec 2025 15:11:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PT13iBnz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EK669AZd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4269E83A84; Sat,  6 Dec 2025 15:11:03 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 5DAC0839DF; Sat,  6 Dec 2025 15:11:03 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DCD683979
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 15:10:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A13583A41
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 15:10:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7c6ce4f65f7so2904327a34.0
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 06:10:57 -0800 (PST)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7c6dbdaced8so2641708a34.1
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 06:10:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765030256; x=1765635056; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1765030258; x=1765635058; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ynhfckTWYAIQ10Aye4yX6tYfdd8bSguauA4PYEuPIKM=;
- b=PT13iBnznQ/dLYp6YRvoTz3At7Xo4xcoBl/nE3FFnsh6VVUi64KbSFB4qUE612Gea/
- Udmx8jhmFYDv6eh5NDuIjQ1+x3sV4Lu9lZE4nPPKRsrI/zXVANDjhEcHYjHsqGphFrRh
- U9e2hjCuWheBFX3pDcLVakljHoE7HIku+yZtg=
+ bh=7x4+M72aLDpwBnoKfwJCmFEFRWPch7f1FBEBgtlA2Vo=;
+ b=EK669AZdUGnwdsUtOqatTwLOv60ums1hjjJ9yTJ32dljah66MxTeJzXjTJRiDQll2e
+ EIUA9Ngpz3UF07FCmrXZg3q85UtNr4bh5B481x9nJcHZ5a35t4smEeID41J3w5Vue4OL
+ l/3tG5JiUZLIFpAOJmkTQPT8x+qwF8LYo9A5U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765030256; x=1765635056;
+ d=1e100.net; s=20230601; t=1765030258; x=1765635058;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ynhfckTWYAIQ10Aye4yX6tYfdd8bSguauA4PYEuPIKM=;
- b=rYl/V6jtjMGTf3DukIB8VFWDRcOOHw+QiqvDG5zW8RPtmaCSGc3zsPIYrP7FRgIlwX
- EnLO3XtX18piZ3yMUo9TjpB87oRdJJDVYpXO1pWRqdAIJ6cYu82xWCIEGw0qi5Dn7khq
- 1vBL3CN8eCxN8GmS/gdWVvJ8W540QjA1tU2MLeaHysaOTbT51j8yZHLcYW2GRywrzHDs
- qZEjTMvWGpug64gH++BxTy933YrhFSOK7Z4EHubSxfGVsOwY5LLQFel25qjNYM75sbwF
- qm+xby1L6cy6thKhdNthon9kLWTNcwfqBS5tJepARgDCLvm0C2ey5AuG75wRZdcCZyrd
- 8HOA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5t8U0oJcP8FVUTvZ2TS/hbeA+uHJ5WtIJ1NUSwP+qbwGqv3jNie9IzsxWRE/qzvvk4Axs/aw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0iJho9MVwq4WswdzVUG+XkcnY6c0GMEbTyo9UXxzNhyUO6Pyb
- 8ttKPDZRuuzUZHhU2Pc9tA5lz3pzrN2Ds9dMBDO4DUcN51WhDQ6GEdGvHx+YpRhQShIKh5Xg/IO
- cQOTvL/Y=
-X-Gm-Gg: ASbGncvcXbCpm5dDOvfnDkV8iWdIlQxZ5DrRsT6SAdpoAcfXtXCAzG9S67P9HTfCqU2
- LK6zEimTe5IjQkbKp9jrz6HCypRNoPZG9l5OD3rP41SZSLcf/66Zh9WK1tqZdkLSnY+3rZ4MpMr
- NXInUOKa7r8V1m4azCmcqwdBoFGlZ1bfcF+DJkZMoi+CdnI2RVnFSzDv9Cu70ZNkLru2E2G8zsr
- 4p7cjX3xu7T/rKL2lIoApUR6j6+MECjkSQrs/3Nnb1P4vwgvYIZGPecO65aokJotYbozh+1COfo
- odcnZZlgTlXYrB5eLoUJVO/RHcBIPXYQippGO1+1wDgW7AbXlVrckL9qR2yVVIwdWv33aOl/i7A
- WZRd063NgT7zgrAX8bEwDt0SVXLrOWTzpxN6o4kVA6qKdTR8tBa5ZrjT0SlUM5Zlrk/r/7Yk3RA
- uxV1d/VoBS8qZmK+U43cempvhSJKEXiTxVfkoTywcbZXn+v8CN
-X-Google-Smtp-Source: AGHT+IGwbOOJyNmBRJhYsg/3Wx/IH1X9YGenKvvpcSop9LPWTQkUHDqVyVuuF0oL++LVglzwKg/U8Q==
-X-Received: by 2002:a05:6830:4d9b:10b0:7c7:3416:ff8d with SMTP id
- 46e09a7af769-7c970786d71mr815729a34.9.1765030256005; 
- Sat, 06 Dec 2025 06:10:56 -0800 (PST)
+ bh=7x4+M72aLDpwBnoKfwJCmFEFRWPch7f1FBEBgtlA2Vo=;
+ b=JXwCjrtS/+P/vmeNwTi94ESVXD+rifljyubqWPvjWlOalrT4RQeTMmK3PZmeilIF4T
+ lXq6W0trFwa8F4X6utiNGGZy0GdWUYpGJDhy7QRQP1GH7YeGG1bi6EZvoJIOBZNPzroW
+ +bypfJeWeaBJImUPrhyFkkHrSaHoyALiaA97dnzwKrWn/aP4oe1qrwq3Bl7FeHOZE0ds
+ r02qS09NmgiUwVoFPUUAPmml1iDcNPsEKUeIB9b9kIAjJBzn0oPNtiT3Nft8HuaNaGkP
+ hNZhEDs7+POqnbHny+l5XVEKWdaB5qGSQnPgo8hF8qmQQ88ub7LydyAwaDVJogAwlTfd
+ /pSw==
+X-Gm-Message-State: AOJu0YwUBYvMDuf13lwqwdWFj+pOYcNNR4DD4d+o3PZAbyvChx7e3RLV
+ pTpApHMzY6Q6q7AYqIdgpztA/0CoOiX69td/oaETyo2ksEVy618J/sgWGKu89z1XnwI=
+X-Gm-Gg: ASbGncvcDU129V90BgcSOQghIhOG3GuKOybhQaUs+gZvYAWAiGt1pIYaU1pw5pTg7L9
+ V2BuxqWuxjQlFlw3r7V1vQCtLxrApGfP2B34/J9PTpt7jdlsZAsh66hXGvj/si93xk8Z4aMISEt
+ 3l+a3sfC0+pltwuan1/Ji3QZZue1R2zQFh39dKiNbcJWtvYsOiIf28dFjg64WJF3YpZWhVaf2/2
+ sHiw+gCoML56LtEbbKwVg88dQdn9DRZ189YXoPrepHYH4QKEVRO8bPByGOe3f+p7hoaRwWVSwNy
+ 7HCkdVDf5MsGO55kPDbW0bupBBXzjGqnbYXg+qNPfYcE2tCl5mWBMPJcngRPV67lpsmLZVTQl9p
+ 2hLWVRRO+ZM9A9ytjbF3XFtykofi4HPOepO0MqVAtGFWrKjENnt7OObMBghIVOB7o09RPSU/iUe
+ fVhhKYYR0vIhFr4K03ajSGmmOF0/On87jQcWXUVLz/IoF7A9/R
+X-Google-Smtp-Source: AGHT+IFFPmUc8D0GEQewmpW5UY/HvXZD8so+PKyhFpvWli3s3wtN0EMXAxbbqnlZ9WTy2BihW96cdA==
+X-Received: by 2002:a05:6830:25d1:b0:7bf:6dca:2055 with SMTP id
+ 46e09a7af769-7c97074e97emr1428014a34.4.1765030258083; 
+ Sat, 06 Dec 2025 06:10:58 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acd733bsm6078499a34.26.2025.12.06.06.10.55
+ 46e09a7af769-7c95acd733bsm6078499a34.26.2025.12.06.06.10.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Dec 2025 06:10:55 -0800 (PST)
+ Sat, 06 Dec 2025 06:10:57 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: David Zang <davidzangcs@gmail.com>, u-boot@lists.denx.de
-In-Reply-To: <20251027002458.16741-1-semen.protsenko@linaro.org>
-References: <20251027002458.16741-1-semen.protsenko@linaro.org>
-Subject: Re: [PATCH] autoboot: Fix inconsistent countdown output
-Message-Id: <176503025514.2523567.1012799477389645993.b4-ty@konsulko.com>
-Date: Sat, 06 Dec 2025 08:10:55 -0600
+To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
+Cc: Vignesh Raghavendra <vigneshr@ti.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, Judith Mendez <jm@ti.com>, 
+ Santhosh Kumar K <s-k6@ti.com>, Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Udit Kumar <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
+ Bryan Brattlof <bb@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
+In-Reply-To: <20251120-gpio_fix-v1-1-50ca8963c7cd@ti.com>
+References: <20251120-gpio_fix-v1-1-50ca8963c7cd@ti.com>
+Subject: Re: [PATCH next] configs: am64x, am65x: add CONFIG_DA8XX_GPIO
+Message-Id: <176503025703.2523567.6390067132783596688.b4-ty@konsulko.com>
+Date: Sat, 06 Dec 2025 08:10:57 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,22 +101,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 26 Oct 2025 19:24:58 -0500, Sam Protsenko wrote:
+On Thu, 20 Nov 2025 15:01:27 +0530, Anshul Dalal wrote:
 
-> Commit 5f70be08b015 ("Fix autoboot countdown printing wrong") introduces
-> inconsistency in how the countdown is displayed. For example, in case
-> when BOOTDELAY=5, the next output is observed during the boot:
+> The DA8xx GPIO driver was not being built as part of the A53 U-Boot
+> image on AM64x and AM65x. This meant only i2c GPIO expanders were
+> accessible to the users from the U-Boot prompt.
 > 
->     Hit any key to stop autoboot:  5
->     Hit any key to stop autoboot: 4
->     Hit any key to stop autoboot: 3
+> This patch fixes it by setting CONFIG_DA8XX_GPIO.
+> 
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] autoboot: Fix inconsistent countdown output
-      commit: af38567cadcaa4842d85af179254886a50c93fc9
+[1/1] configs: am64x, am65x: add CONFIG_DA8XX_GPIO
+      commit: d3ddbc1cf8ed7ed3fb63620c93001e55a1f480cb
 -- 
 Tom
 
