@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50AF5D3B7DB
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 20:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B07EBD3B7E0
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 20:04:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC9A683984;
-	Sat,  6 Dec 2025 21:03:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 33E4E839D7;
+	Sat,  6 Dec 2025 21:04:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bbU1A9jn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SZmEuwSr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0C25839F1; Sat,  6 Dec 2025 21:03:30 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 8F8C083A3B; Sat,  6 Dec 2025 21:04:18 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9BF683957
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 21:03:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6C3683957
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 21:04:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5957e017378so4203752e87.3
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 12:03:28 -0800 (PST)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-37d13ddaa6aso20619301fa.1
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 12:04:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765051408; x=1765656208; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1765051456; x=1765656256; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fB5BL+wMcqZgXPIpcqyS2Pte2agWpRE8Sd9SKwUce+c=;
- b=bbU1A9jnUA8eiEvC89ZBZ1+vTh2nYuAix3GWky842x88jkvacvrxopeJRtRhtBo9ke
- G7b9rrPr8Qz4fAkiSftqJoB42GoVJc9tK3L+aOR1MYdsXwWgNx7DaItBWyQsLrZ2vLr4
- Bd2Kwa8YPD/v293pehHzfUcaLpz5dENt3bO/hk4DrKQTalcBQQCliYXu5qy89vmEDovE
- T31imhw8WLPYJzZ7XvH5voYVqsyo06ShnrUQfWI3xOj6rbrqHaRw5cf4t26aoHyQHGFn
- PuGRUeSsZAJxmsfSONgmLdNDTcaMQI+EiRUhLxQ1ia2F7A+ALqwB3CJbki4I9TxLWimP
- ngGg==
+ bh=BEotqOIlOcfr04GRL7zpquY+e/yzghdX0+UDQNncJlg=;
+ b=SZmEuwSr9O3ow+3wBKrrtLzOxGAQ0f6DfVpNFtENj0XxD/EIFVcUh76DRc+EusFuKX
+ tTNPdaUA6hVH3NihPGSIZWY4dYamDnTsYy4DKzBFYUEWhvrrkVm/df1DoEWsekVpr4Oe
+ j7CHbjtEwU2gK56nofLRBO/kY8yIJ7yBcG2lKKBbLCWZl+fuyn5sLgn1ZFjHcJ49mgye
+ OXIMAR9S29fXygBMUi8koQWQQQMQ/B0DKS6I7xv0ZK0WoQaG1JCRHQ1lx1Rm0FjIslBy
+ ROpTIiLI+lJgYOkhD6FtGKo5I++Uv9QbtV/HpYeHsXlboFIlZYj6W/yMC/MH60+HSACq
+ VfPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765051408; x=1765656208;
+ d=1e100.net; s=20230601; t=1765051456; x=1765656256;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=fB5BL+wMcqZgXPIpcqyS2Pte2agWpRE8Sd9SKwUce+c=;
- b=X07ve9pQnwRgjygaEeKNwTn0v1aoW2JJt6uJaYZ3JzZ90/G8b5nW5wIT6NteRaMRCa
- cgHv9JrvMFzoLteEMR6gZmNsbPadzcEXfU9TxmaJAavrfBMXWkIOgr0a15ZAuQkv0ml0
- cVqXYhkHuL/Z/42TWm+ruTHYKU1DZQvAyCkbsvOEthquw0FmRsgO7k1LQAypjqiE+Mtf
- 23T9ym6hZq+ER/poYF+iq1ANsU8/LqrmyVjONHtuO2EL1xBTdSOekZ3vmUh1NTg+vBD+
- MMdbL0/qGft+/4taA+N7zBHnpkV1H36R1Qbfp+ImkT7nTw+8S1ahSecsDyELMq9w1d36
- 5pYQ==
-X-Gm-Message-State: AOJu0Yxz9ps8ii5Cr8oRkt5YPRxrBkLhiKFeFw/255p63Exy39TEzM/f
- W/Xu7G3Hpl3hZBp+KjuAB30Xpshi4wCAmtY/UsRE+IL9JEJQDotS3qucLnu0VNXWn8ekfCuu4tG
- 6/BGsN9SokAcSQLgreQIRYih0WwF+atsxs2uc
-X-Gm-Gg: ASbGncv0ESLwjAvnQYCEVmB39kWW7MOPLHkh+zej0sqltsNi2++eGKzaXWh0ItsjmNM
- utx+N0acBy4Yv3YZlZ+mCqxY86ozsWTl4IT2TqRxPUxyGCnsn+j0hMF3VdyWhEJAhun1u+GWgsT
- Jv5+7XMEIUqAPKccfs915+ScLSc8w3zLa5N8lCaiDyjaUuEli+4LFNRARDqQoBaUMCWyki7gRTn
- u0fiLi6v0CWtLYe6+cVhNfGbFsH/vSr3qOeGgCaiS1JxW2eJD1R+6jAHlE0P8VjJMGB+xadryeM
- LHOvNGU2D9tMwckXJ94W39ZFvK1KRSIEVIsVgw==
-X-Google-Smtp-Source: AGHT+IFw4Z8+r85eLYWHPLo9LXNnD9dA31v6erWm+xSu/tadxYQrsLf8fmAjCmuoOXQ1tZST4lS+cRVfZ95ukKN9oyE=
-X-Received: by 2002:ac2:4f03:0:b0:595:83f5:c33e with SMTP id
- 2adb3069b0e04-598754a59c3mr759971e87.11.1765051407899; Sat, 06 Dec 2025
- 12:03:27 -0800 (PST)
+ bh=BEotqOIlOcfr04GRL7zpquY+e/yzghdX0+UDQNncJlg=;
+ b=h6lNHaGwS46e6oNDciOUc+BfIzrwNs/fTtImHXPO48Tj87tXPPTI/F4gWNj12UXEMP
+ dtYQ+Rg91oLZEmkCFeto840yGLHvp/bLToRPoSsWiPBCpqIwPpIfqGrzdEw1cGdgJTLj
+ yIbl1IDyNwi8CfNG2fj1FoTWt4BKpPAKFpjk0uDl9OTHHCNeXMf2JenTrc/xteRTLsl1
+ 01u9/aqjoW70OI94o6t/c+IoVTSyAHEhbkBg4KSznVf2/01E5qwOrwt3B+vz1tPN0ZnS
+ 0xnTaqzY/8nnBrJcY7k1/wHvNE+5HSj1poJP9r++TCdoV/oTwZaWVBk9JebxTDk9prqa
+ rl5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUa2YgEfOgauQH4py4wKYRIGCNhuH5b+18w/UZ0Llit/0PsAaTd5hw8CIzL6owf7KeocN8GmAM=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywodv7cfNMSDNtsSi7J68SLdWegDLPbQThbdQgeSxhkTPPjPb7R
+ ylxq6qPgOKGoTHqX+cdhb38YMVBg736me7KEiK2kEJUVts73WsMf2DjJrAwVUQ+MDNy1AY844ed
+ hfFjHI9nebpb3GmFSJn1nsTFvkROPQSo=
+X-Gm-Gg: ASbGncs5xW0R4Sv/OpXi3DPtDvBKb0Tj0xOpTsb726N4CQMieC5p9OTxy1zxhWW9JUC
+ Zm6xCUIhLs92Ick3H0J3EotVaRBkGeB+QV0YRxkFDwC0wldLHD4z3W4OemxlOBQdh0D/9XASChW
+ yadIVYFT7GNDbUcTVttZGa9X7EXxVF9Kx6vdLhitEMjQi1vtUSulFChEm23YCt9Nat35CNtzrYQ
+ SNymOvFnJ316hKzOf/nm0Eh3Y5wxZDE6umssoOEdqSHR9ee9xLiuOy/ih6m87Qdl3l5YXuLspPs
+ YB6AbPZdMKNUiVSzBD3tFQqYd2I=
+X-Google-Smtp-Source: AGHT+IFtJTnh1aNSGN3+wQR7+9R7wEnxMWhX4PUkM/FDdawui+gM6WNuNdSsySz+MwskM2dQE80J+YwBF0ZcGy98ydY=
+X-Received: by 2002:a2e:b88f:0:b0:37b:a41b:58a1 with SMTP id
+ 38308e7fff4ca-37ed83bef13mr8008961fa.35.1765051455751; Sat, 06 Dec 2025
+ 12:04:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20251127172920.39740-1-jeremie.dautheribes@bootlin.com>
-In-Reply-To: <20251127172920.39740-1-jeremie.dautheribes@bootlin.com>
+References: <20251204164133.1677471-1-max.oss.09@gmail.com>
+In-Reply-To: <20251204164133.1677471-1-max.oss.09@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 6 Dec 2025 17:03:15 -0300
-X-Gm-Features: AQt7F2oHDKD-OkoBa399AILsOCYfIpp1P4aRnPFZaUm3coyaR1J0ii-ObE1FbD4
-Message-ID: <CAOMZO5BEBLz9KEWOQ5M6YodJUeGYY9stMfrHaa+66p27C7Cdgg@mail.gmail.com>
-Subject: Re: [PATCH 0/2] nxp-imx93image etype for the imx93
-To: =?UTF-8?B?SsOpcsOpbWllIERhdXRoZXJpYmVz?= <jeremie.dautheribes@bootlin.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>,
- uboot-imx@nxp.com, 
- =?UTF-8?Q?Miqu=C3=A8l_Raynal?= <miquel.raynal@bootlin.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Pascal EBERHARD <pascal.eberhard@se.com>, Wahid Essid <wahid.essid@se.com>
+Date: Sat, 6 Dec 2025 17:04:04 -0300
+X-Gm-Features: AQt7F2r-C39XAWvjqjUEdct0-K1JY4EU7u7FtAUWWsivS5Jb85CF7seSiHwkSJo
+Message-ID: <CAOMZO5BG-T-e-Gc_AP=nOnFPPXF3Ov7detWD5+0A1PiGH1wmiA@mail.gmail.com>
+Subject: Re: [PATCH 0/2] configs: apalis-imx8/colibri-imx8x: use default for
+ SYS_MALLOC_F_LEN
+To: max.oss.09@gmail.com
+Cc: Max Krummenacher <max.krummenacher@toradex.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -97,16 +100,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 27, 2025 at 2:29=E2=80=AFPM J=C3=A9r=C3=A9mie Dautheribes
-<jeremie.dautheribes@bootlin.com> wrote:
+On Thu, Dec 4, 2025 at 1:49=E2=80=AFPM <max.oss.09@gmail.com> wrote:
 >
-> From: "J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric)" <jeremie.dauth=
-eribes@bootlin.com>
+> From: Max Krummenacher <max.krummenacher@toradex.com>
 >
-> Hi all,
+> Drop setting an explicit value for SYS_MALLOC_F_LEN. This increases
+> the available space to 0x10000.
 >
-> This patch prepares for integrating the automatic secure boot signing
-> procedure into the i.MX93 platform, similar to what was done for the i.MX=
-8MP.
+> While U-Boot works with the current setting of 0x4000 increasing the
+> size for cmalloc helps if further space is required, e.g. when
+> enabling more DM managed devices.
 
 Applied to u-boot-imx/next, thanks.
