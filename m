@@ -4,106 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F29D3B7D3
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 10:58:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69DB4D3B7D1
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 12:27:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8D4883923;
-	Sat,  6 Dec 2025 11:58:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id CA289835C6;
+	Sat,  6 Dec 2025 13:27:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="EhjpjlW6";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="bBmGK7wL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46C2F839FA; Sat,  6 Dec 2025 11:58:20 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 8D26283642; Sat,  6 Dec 2025 13:27:45 +0100 (CET)
+Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31ADE800AD
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 11:58:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id BE600403F6
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 10:58:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1765018697;
- bh=jG2XaoNxI9dga9Mm/qr68u8aleCylhljcoMo3inOxmE=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=EhjpjlW6cdBDlBWAH64ii/LB+sgSjHoSyX/T2ZIht8McPAnj4nUJJyGxLRqSirF/e
- Dkj3+OMjs3F45YRd9nXchqAMTkbCjRm4+l2SGKLDqB9mGQqXhxYW6GUFpSYN8t54jJ
- p2ubn1CbLNAE89pMtPoQCoEUphQBBeMmxcXjLcZDACvjggR8DfQSwxJUMT5xTJLSjd
- 22UGutQS847sVPmsRc0d1WyG8kSsrajgqkjAiEtzn2z2TgnqHRUydTo8nx7L8l8AkR
- FasucLWT3Qfn3EgjJ5i1LwJhp8qpuu/wW5yJ1qFvnw6o9QpRL3igpNH/1pYo7/NHnT
- dultmBTWcEWU6CGbLcz18isfakyzNMmZ2g9TNRZzSfjMK81uYjW989qrwUDMxfOdbv
- JTt2xUqvl3Y83Jy9oNyGn8RjCNdpFQYZxaoC8NIyP/ejL1KUYqjm2Qek7mXvjDIcNl
- 4tAqKJK5K9OFaWNSG3WeQhS1QrMRigNq03GTHnFUsilDmbajJ4Hwg+OZdiWA9k3WL7
- FwFpH1DyVaH9Yo5yyUNEpMSZG5m4tALDJFH3h/ZqRTdrNSpY6JiZdEXq9Re066ourD
- 6jlNHgQICtnQoHH5s4miwWVcvckumGOiTtv1BVFI+W8RTj76Kxn5CiupYjz8it68Pm
- n2+v8o5OEbOgQKOWKe7JF8BA=
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4775d110fabso28811695e9.1
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 02:58:17 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765018697; x=1765623497;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jG2XaoNxI9dga9Mm/qr68u8aleCylhljcoMo3inOxmE=;
- b=m1J9PPYP/qPEmK/zAKzuShFJY2X9DRtxRlYctqUTW0zhdZXPuWLW2zQfuwl4OAuIkb
- 5AZLyAfW7Xjv3s2AIiwmMEwq4Sey5jfWf11/baYaOyETysNi4J9kdyYvqoaw0fqEiI6p
- 7NCWVhifRQwdm2tmtBEIinm00zmdTeHvrpiqxKynHqzn4PW8vUxZo8gIf2fDFgPgkG2F
- iyTzkMBdIOzZeD1EkFLZU9PGrKV/shLYmyTY2wDopBvxqJOHh66U9NMt4pl+56i0gtGb
- l3YUDn3U8HZI0pd5ej2MnYZS9Ak7vBGi1+dbyLi4IZiu0+2CafRhmKgdeUGT1ua5VJfK
- 2chQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXnO8Xbs8t41+9FhCGGhrVHl/iK0G7ZYom+rV3elyW/aiVw+3/eJ3bKlfU9DHt44Q3kzxLi/vk=@lists.denx.de
-X-Gm-Message-State: AOJu0YznbKanUqFP5TKGcqQWbJ9QHU2R+eJSw8hQH6WyLuFY0ueYyE/D
- +iWU10u0LNktYBWnM9Uh6JXF0J05xg+1LDsfWtzNrznNMrtOZ6fC/DjADNhI+9rfjZmZo6vV/HA
- MUPnZnzKAUhRW94yiY3LIlAVFYXkcv7Wm4bPrm3ihudYZ9jarLgRdPFJVafR1lNko21eGIoE=
-X-Gm-Gg: ASbGncuuUqH3zXfLLzWnBajGKrRf6WfcA2gEm5VxEjUDGPJteecPcJ7+nYUikYifMYx
- cfNH8j0CS21GdQgaNFpdYeYKDrrO0eZ2PYjQogFor2LAJI2ATbsFcBbBj+tSznCp+SoExAiEP96
- E0ziPbpyYvVjv5A+1HG1ECLK8MPiP4u2WPYNuXhzBOZrYW3ZfrbzOoorRHyI+ML2BlLGJ+NN7VL
- q9Z+LbA6z2j2zzsArmx/9keTIcFgU2dg+G1j7UuSzfCe4PFUwwRaeUySV8baAOnqG1g4FweVSxj
- +ErsP0BGlDlnH1pERRA4VKi5lr+lkD5FzSBFglUJGNx8KMASwwjGKIzVyHydt4hN+finlVAw+Sq
- 3x4YGBkn536KteGV119fiskgkAnRpDnDl1Zm/SYoAj/xAgN1wE+d6kuQc/iX8d+me5ppKPA754p
- HkyPeVKdk=
-X-Received: by 2002:a05:600c:4e12:b0:477:9eb8:97d2 with SMTP id
- 5b1f17b1804b1-47939dfa3femr25466465e9.8.1765018696649; 
- Sat, 06 Dec 2025 02:58:16 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH5bB6PXfeNH4mNi4VEikLGndFyAv8A2MdD6Gi9e9tDY0MG5AlOXRDftxbJO95hlf4eZJh+rA==
-X-Received: by 2002:a05:600c:4e12:b0:477:9eb8:97d2 with SMTP id
- 5b1f17b1804b1-47939dfa3femr25466255e9.8.1765018696272; 
- Sat, 06 Dec 2025 02:58:16 -0800 (PST)
-Received: from [192.168.123.154]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-42f7cbe90f0sm13864512f8f.9.2025.12.06.02.58.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 06 Dec 2025 02:58:15 -0800 (PST)
-Message-ID: <2a52827f-ee3e-4d11-a1cb-7fdac3e7a998@canonical.com>
-Date: Sat, 6 Dec 2025 11:58:14 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id B00A18334F
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 13:27:42 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=norik.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:Cc
+ :To:Subject:From:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=c0mDUDyqbRg1QQilBPn+GVlhRe2r+6fxybDrN4c4j5E=; b=bBmGK7wL6gbwHbGqqo/Z+eLopU
+ eDphs8KIWGJkimlKw2LNMLND0T+aSAhp/GIH/UxA66P7Fhj7gmsDQL84R+kSimB+gkyw+yc2PYATm
+ RRbcIbtpp70AtF7oa3GeCbKLm3i7iRQYFwpgqHXLrdBeXiV0kGNpOldJlYZF0okAa9WCipar+fjau
+ /azDjMMRu//37YTwcC2w/RNOD7BqgG2o8PMmFBMfe+Dw1Hscu5I0NDwUFCvIXgvWSuC0X9meFMeio
+ KpiBB3u4ftxdh5qsDZjwIj8RbTHmzdtt9aAVvECPlLAFNoAlKm3z5vFsMEnlhm/a+LIdKTBbziLeI
+ IPJNSw7A==;
+Received: from 86-58-106-10.dynamic.telemach.net ([86.58.106.10]:45482
+ helo=[192.168.0.129])
+ by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
+ (Exim 4.98.2) (envelope-from <primoz.fiser@norik.com>)
+ id 1vRrO6-00000004rtH-28n8; Sat, 06 Dec 2025 13:27:41 +0100
+Message-ID: <da69ba4a-b23b-4a64-85b2-afeed14ce38b@norik.com>
+Date: Sat, 6 Dec 2025 13:27:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] efi_loader: disk: Add print to show ESP device
-To: Padmarao Begari <padmarao.begari@amd.com>
-Cc: git@amd.com, michal.simek@amd.com, john.toomey@amd.com,
- u-boot@lists.denx.de, ilias.apalodimas@linaro.org
-References: <20251204094758.2800428-1-padmarao.begari@amd.com>
+From: Primoz Fiser <primoz.fiser@norik.com>
+Subject: Re: [Upstream] [PATCH v2 2/3] board: phytec: phycore-imx93: Set
+ boot_targets dynamically
+To: Wadim Egorov <w.egorov@phytec.de>, Mathieu Othacehe
+ <m.othacehe@gmail.com>, Christoph Stoidner <c.stoidner@phytec.de>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ uboot-imx@nxp.com, Tom Rini <trini@konsulko.com>,
+ Benjamin Hahn <B.Hahn@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
+References: <20251205111044.3195322-1-primoz.fiser@norik.com>
+ <20251205111044.3195322-2-primoz.fiser@norik.com>
+ <26dfb03f-ce98-447e-a931-ba9a34b2f8be@phytec.de>
 Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20251204094758.2800428-1-padmarao.begari@amd.com>
+In-Reply-To: <26dfb03f-ce98-447e-a931-ba9a34b2f8be@phytec.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cp2.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
+X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,49 +90,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/4/25 10:47, Padmarao Begari wrote:
-> Print a message for debug purposes when an EFI System Partition
-> (ESP) is detected on the device to indicate how many devices are
-> detected. Only one ESP device is used for capsule update; if
-> multiple ESP devices are found, it may indicate corruption in UEFI
-> variables. This is for informational purposes only, as the number
-> of removable media connected to a given board cannot be controlled.
+Hi Wadim,
+
+On 5. 12. 25 16:40, Wadim Egorov wrote:
 > 
-> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-> ---
->   lib/efi_loader/efi_disk.c | 5 +++++
->   1 file changed, 5 insertions(+)
 > 
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index 130c4db9606..8391de1527c 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -565,6 +565,11 @@ static efi_status_t efi_disk_add_dev(
->   		  diskobj->media.removable_media,
->   		  diskobj->media.last_block);
->   
-> +	if (part_info && part_info->bootable & PART_EFI_SYSTEM_PARTITION)
-> +		printf("EFI system partition: %s %x:%x\n",
-> +		       blk_get_uclass_name(desc->uclass_id),
-> +		       desc->devnum, part);
-> +
->   	/* Store first EFI system partition */
->   	if (part && efi_system_partition.uclass_id == UCLASS_INVALID) {
->   		if (part_info &&
+> On 12/5/25 1:10 PM, Primoz Fiser wrote:
+>> Set boot_targets environment variable dynamically, so that when booting
+>> from SD-card, boot binaries are also preferably fetched from the SD-card
+>> by default. If the user decides to set their own boot_targets, we should
+>> not overwrite them.
+>>
+>> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+>> ---
+>> Changes in v2:
+>> - no changes
+>> Link to v1: https://lore.kernel.org/all/20251204080744.3868067-2- 
+>> primoz.fiser@norik.com/
+>>
+>>   board/phytec/phycore_imx93/phycore-imx93.c | 2 ++
+>>   1 file changed, 2 insertions(+)
+>>
+>> diff --git a/board/phytec/phycore_imx93/phycore-imx93.c b/board/ 
+>> phytec/phycore_imx93/phycore-imx93.c
+>> index c6a4e923b074..cfc6d91f20f2 100644
+>> --- a/board/phytec/phycore_imx93/phycore-imx93.c
+>> +++ b/board/phytec/phycore_imx93/phycore-imx93.c
+>> @@ -38,6 +38,8 @@ int board_late_init(void)
+>>       switch (get_boot_device()) {
+>>       case SD2_BOOT:
+>>           env_set_ulong("mmcdev", 1);
+>> +        if (!env_get("boot_targets"))
+>> +            env_set("boot_targets", "mmc1 mmc0 ethernet");
+> 
+> I guess you don't define boot_targets in your env so you don't need to 
+> check for default env here?
 
-Hello Padmarao,
+This check ensures that if the user manually defines boot_targets in the
+environment, we don’t overwrite it, as described in the commit message.
 
-Thank you reviewing the ESP detection.
+So the intent is to only set boot_targets when it is not already present
+in the env. This mirrors the behavior Benjamin implemented on the PHYTEC 
+  i.MX8M boards.
 
-We already have debug output with EFIPRINT() for this information in the 
-subsequent lines. Please, have a look at CONFIG_LOG for enabling the output.
+BR,
+Primoz
 
-Generally noisy output should be avoided in the normal bootflow.
-A "message for debug purposes" should not use printf().
+> 
+> If so,
+> 
+> Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
+> 
+>>           break;
+>>       case MMC1_BOOT:
+>>           env_set_ulong("mmcdev", 0);
+> 
 
-Maybe we could add a subcommand to the efidebug command for users who 
-want to look up the identified ESP.
-
-Best regards
-
-Heinrich
