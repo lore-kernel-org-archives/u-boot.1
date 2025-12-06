@@ -4,82 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9318AD339BC
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 17:40:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06DBED3B7D8
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 18:11:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA6A7836D1;
-	Sat,  6 Dec 2025 18:40:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D11D83837;
+	Sat,  6 Dec 2025 19:11:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KWhlk86e";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="d+GwLHQ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B53683837; Sat,  6 Dec 2025 18:40:37 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1408283981; Sat,  6 Dec 2025 19:11:51 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 659668352B
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 18:40:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 854CD809A5
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 19:11:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7c75387bb27so1392461a34.1
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 09:40:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765042830; x=1765647630; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/cZ+uzBDPkPAWe2B6Bwp2WSoqE7O2YZ1/zcj2+r+WeA=;
- b=KWhlk86ebsa5zMpbrjSWmCK2YLNH1/ODTFRi/oMS7CdjvHARpPTBzJTSwoP1cYGRnl
- neb2yNAKws6EdcETK2va9Fo3M+Nh9hwHEOokkjt81LEI0Bf6Vs/Lj8Wzd1nta1+PfwYz
- EEypWOzRVe5DQot6pvn1FEAWfFQfsuD2ydZjk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765042830; x=1765647630;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/cZ+uzBDPkPAWe2B6Bwp2WSoqE7O2YZ1/zcj2+r+WeA=;
- b=xIQ6VoxHb5y2rfc1bLATeJiPtZCJJuZw5nZ2f3FUm66ZQIuSOYgdNo1XRvL87kWVVR
- 8vvsmqgXJpAI339cT0iVrtcJqVNQclofdpygUltWFR7XZVPIp53WJ4FGJQpGNETjdMZS
- KN01TT2oycaPQUh22HRWp8rZmWLpcDMXvakeKopqDeWFmeiqShq01AuP6bRpI+ZZN1LM
- 9j0BGsVszfnsUB8JVWWGr+C1Ju8hUxIM7JdhhwlOgK/MVPvoL9tMq5U7G0nLxDwltO8k
- FqtzVgZ5LFDTxIcUySm6ELZSzXqT7+fpCo0nFW3fE4uuIugJSjhbL1h+gF3xKoBLJQnR
- UEUg==
-X-Gm-Message-State: AOJu0Yxuj1bFjwutWQJTsbSc6oLsvhui3dzOIuHHElCG7VwfZyTureIu
- zIjqkZQVC8W/Dfj6BcMTM/C8ga81GNIwz6rrduuVjrYarM1WuXl8sLrIha8UWlHnhUc=
-X-Gm-Gg: ASbGncuu/BUEZEy3rx+G65PQWWs5KQq3lQNNrkAzJsSWc700m5K6kGxnsughjQEtiRT
- kzQ/V/3EK102hcS/rDxTA7GtGFxfcOwVanfewjTgPHktnaxBdiPb7EBNZ3mhvlsQYLpUHuUXF+y
- jH+WLSe8ua7WEikNhRdOfGCQFabfLddmIeo+rE2N0qXibBu3k/2r4RxFy5mItdMVER4xNprPnE0
- sG4BAE6nanPDUA81X5ZqjVsckHlAyRomq7Sv8kZL5+fJrhkTz7gKAC32Qqysf6bGRSJQeVIcCqC
- lTwk5IqJbtGG92lH36yZgKkPKKxOWMG21thtcXISfXKj9Gl8/qK0ToR9KJp3W0ZzcPpCXGWsvE4
- D0aa0Mg8nfC+mb3fArzP71osJET4WVSfUIANcbu1xNdTtj5gQdzG4wqAOqkMO1osEloIeG4TxPq
- TPs7nQ2UlIDnlgDRB2ZQkDIYtzG0Vx91RvFjWfau/pSStPyIYrBZgkTBSRR2ZG
-X-Google-Smtp-Source: AGHT+IHw/PCQtfUZFCpP/fVDiuJMSVbx4RpAriBqmhMVdMHka4wD+McqMiYqBOkL/zJeLPKIGKqo8w==
-X-Received: by 2002:a05:6830:254b:b0:7c7:6e32:dc7f with SMTP id
- 46e09a7af769-7c970696abcmr1931557a34.0.1765042830035; 
- Sat, 06 Dec 2025 09:40:30 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95ac85170sm6245180a34.15.2025.12.06.09.40.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Dec 2025 09:40:29 -0800 (PST)
-Date: Sat, 6 Dec 2025 11:40:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: yegorslists@googlemail.com
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] bus: ti-sysc: select CLK_TI_CTRL driver
-Message-ID: <20251206174027.GM303283@bill-the-cat>
-References: <20251117093954.1580394-1-yegorslists@googlemail.com>
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UHT04Yjk1HuS6hm2Xx5ubAOPhpBse2SD6Yn6/svXGQlZlv0qNhh51EUM1zf2ibmdl+SxC0TPVaOnEdWgV2YxSkpyjD5zG02xTeptZh3fm/fYDf4xO2ub6ZTFKzqp0xe9+KSGQr/Afw9uYUjz9cjoOH7b9YwLerW8o/XUWa0RjpS/BsUvL1baVPor5Mja8WLfhqsS1qtibjuHpE+eH75p+tqBs8BUofUALZEIoed/qL7+5mxZlufGvgdEsZ5vCQ+kBTt/KWo2BTVsbKJS45O7v9F8wfJdVmYU91qt7DabHJDVSYJieJCzzBkfJ0FKEDV9CWC5O0ujFq5h7rxigwne2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mHeeqg2eDHc8aWvhvGZ7sXEeqG82YgfMQQGViY7Vv2o=;
+ b=w4rnfq2NH6ESRpyo+v/umHExYEU5xwIFY3v2PFP2bkP4VtXLPoNdJ0jcEnxGlvPWncBcPChTS8MIGVvgDJskjmh53rGR9z57u4QfvPg1ur1eFdpvdE7liw75TZSqGs80otuvkU6IJSXyc0m8nE9gnQbS4/QsRG5UizK/5NIR1+oZnHtuxUWLsV3y6rw1NIS/r39cZxM1d3CO0gztMwdTeNJCwEB5TDoBw8pDJWH5pRKfQPVpttIrMQpsT0FPaeHdargrtongO6/4IXOEJoupYNOygfvNvX5S4gE9vlE1c8b3aCL3ghUhaAnjapiTE3Fn0mZ0H4Cwzr7wq939FmRUMw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mHeeqg2eDHc8aWvhvGZ7sXEeqG82YgfMQQGViY7Vv2o=;
+ b=d+GwLHQ/ffMDZKHzgkb+Rk9DmLrYTjOgCNlig13w9A/Qd/zSXoOeKTzruHKZyyYPbXfzmdrbHnz7VGnzn2DjeEOjBs3QivwfCaV2sF9MxEexwQEDnjUWukJ6S3pYPOZx/15hyxGVI4OsuIvfLnnFlk0NmuwezEcVZhnG/8f+KzA0LK6wbFbAYZERR7dXEJ4fAZSh9/r6CS1zAUGIGSKtasL9vd3Tfi2XdfZjmOtp1v08Eh1DZvH1TFO7+Qv9ZwCZ9G3Ne/odofZDTuO9azqAJH2LpJmqChEelATTZmCoHtRdTOfByQj7/eoKmA+9JOjNOOBbK/+HyCak7U/YbL9l6g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
+ by DB8P195MB0485.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:15d::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.13; Sat, 6 Dec
+ 2025 18:11:41 +0000
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a%2]) with mapi id 15.20.9388.012; Sat, 6 Dec 2025
+ 18:11:41 +0000
+Message-ID: <b1484162-476e-4377-b08e-635d1b064a83@phytec.de>
+Date: Sat, 6 Dec 2025 20:11:29 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [Upstream] [PATCH v2 2/3] board: phytec: phycore-imx93: Set
+ boot_targets dynamically
+To: Primoz Fiser <primoz.fiser@norik.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ uboot-imx@nxp.com, Tom Rini <trini@konsulko.com>,
+ Benjamin Hahn <B.Hahn@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
+References: <20251205111044.3195322-1-primoz.fiser@norik.com>
+ <20251205111044.3195322-2-primoz.fiser@norik.com>
+ <26dfb03f-ce98-447e-a931-ba9a34b2f8be@phytec.de>
+ <da69ba4a-b23b-4a64-85b2-afeed14ce38b@norik.com>
+Content-Language: en-US
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <da69ba4a-b23b-4a64-85b2-afeed14ce38b@norik.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: VI1PR0102CA0097.eurprd01.prod.exchangelabs.com
+ (2603:10a6:803:15::38) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oJ4zV3VlFhY5oz/0"
-Content-Disposition: inline
-In-Reply-To: <20251117093954.1580394-1-yegorslists@googlemail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|DB8P195MB0485:EE_
+X-MS-Office365-Filtering-Correlation-Id: 45aaa610-0f7c-401d-b998-08de34f2e817
+X-LD-Processed: e609157c-80e2-446d-9be3-9c99c2399d29,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dnNVOFgwbVlwTlo1REpublhTeGd0bGUvRWMwa3FkMkNEaDVLbVVzL0ZDZ3ow?=
+ =?utf-8?B?V1lrU3J3OUJ3YU5IdlRSL2xCdzhFVjQ0V2FHS0haN0tTbXE1T1RIM01BcWdX?=
+ =?utf-8?B?WXVmTFJtWUdkT080T3JxYi94TDBRa3daMXRESUlhZitaTGxpeFQyQnJWOVVK?=
+ =?utf-8?B?VEVyWERTN0hsRmtaTWdJbVZpU2pkelc1Q2FLSFJIWno5OWQ5aUlReGlCWnhQ?=
+ =?utf-8?B?UC82dXhZMExreFhGRldPNW9JZ1JzYlZ3M1krelhXUGFkcnZrYU5BczJFc1Z5?=
+ =?utf-8?B?dzJOYXhEQWplUEZ3UjZuQTlaa2cvUHpDSDcrRXNFd3B2SVRDRC9PM2lva3Vs?=
+ =?utf-8?B?NEYycE1rcENSak1TeW5xWUNzSllmK2hKNGlsQlo4VmxleWxBUENrY3F3T3Zl?=
+ =?utf-8?B?MFNPYldXWFBhV2sveHovc3VlbjVEeTVrdVNsR1dLQjRtNDhyVWEvbUprV3Bq?=
+ =?utf-8?B?bDZDZDc1Q3hkbUZvdmVFVy9LTDNKMGVTdVFBRjdyN1UrRHBEZmJvVWRmZFMz?=
+ =?utf-8?B?Y2hHdnM4R2M2T2JyS25XYWRSdnNhVnNScVdDOWhIbEd2VWY3S3NKTTZ4cUl2?=
+ =?utf-8?B?OWRPalQ0RU5YdHFpQWRJTC9OQUprKzh2U0hOVUJrajRzT2tpaG5PY1VPVG4z?=
+ =?utf-8?B?NTRlNTlnNUViWXdpNnhXOWVYVGxObzB2Rko5TEJTbmpLNzRBd1FyZWtrOVM2?=
+ =?utf-8?B?UWpvc3h4UzJzbzlVRjRTWVdMTXpZK3dRWlJBWmJuM2x1ZnBkOGpEQVVVdUlC?=
+ =?utf-8?B?VVlpQytpNnBiOURRWG9RVWhWWExXMjFCSmZQZEVUYlptMTlLRVQ3a203M1Y4?=
+ =?utf-8?B?d3hzR3V0OGoyUktKaDJqRDBqc3BaTDBHKzk4aGtONU4rVGlDbzUyOXJHOFdj?=
+ =?utf-8?B?VUs3aXhlZEgvQXhiVVFpN0ZNWlRmOHd5NTRnRzJoaWRpZGoxc0QwL1FBOG95?=
+ =?utf-8?B?dnBIbDQwR2NpOVkxVjc3ampMMUowRjdoR1VBb2FhUENwc0d3NFI5U3c5WERs?=
+ =?utf-8?B?bXVYOGlmL1FybkFrd2NzeWRBemlldktmZzVXOWVSM25MZW4rZDIwcUtiYjd1?=
+ =?utf-8?B?eCtZM29hR1JxVGsyMEJoQmJaNkZjK3BtRExCSlhNWldSVFhaMXo5RnE1Z2hN?=
+ =?utf-8?B?cVJIS1BZQWxQZVpPaytVS1FreHRSYmVCTVhUT3lFTGd5N2F0WjFhNFR4ZGRY?=
+ =?utf-8?B?cFBPSVlhVWhKTit4NERTQjZSaVRLZUZ2UDdLb0Z1dGp4blZTZ0tLMWwrdy9W?=
+ =?utf-8?B?Ymprbk1qQnppOUdNQmlKRVMxbWp0WlpCSmQydE5HR2RFS25OeVhEWFl6YTJl?=
+ =?utf-8?B?VzV0a1Z4NTI5UG5jK1VhMkpVWjc5NUh6ZHcxdlhOeWJjOUJ1aHhyN3NDTzV2?=
+ =?utf-8?B?aURGOHlDcm1jYmdGdmk0d29NSWNXV2pobW1waUhGZWkxQ01ndGhzeC96VC9L?=
+ =?utf-8?B?MXFSdkQ3RkpzV0FBUzB2R0RhVHJCV1VLQ2hIR2NPdWlubDBiSW1NSEJLK2Qx?=
+ =?utf-8?B?UmdSVzhXd3c1NlByVlJGR21Jb1ZjcE96bnBRb1BqRzZCOUxLcEY1aktvY25a?=
+ =?utf-8?B?aDcweS9yZ2R2WnB5Z3dYbUIrRnhYSXp1aEE1NHlrNFpBbmVlTDA4cHJTMTZs?=
+ =?utf-8?B?SkNwYmpSdXlMUHpTZ1dTcEx0SEU4M3U1Z2Y0bDFEQjJSNWIyYnEwcExaN1E0?=
+ =?utf-8?B?RDFzalViU3B0UUJvckNKSDcyTFZvVENza2h6M09kZEkrVTVSM1c5UWJFVGkz?=
+ =?utf-8?B?TEdkVFBIMjAwV2ZPVmpIckR3ZUR0UlZDSFBkY1RaQ0xTc2ZmdDFab3lQb2xl?=
+ =?utf-8?B?aWJsTjQ5aUoydmhVWEF3aTFVTHFDbEVyZDhzTGoxbkt0ZmkzaDU4T3FwOUpZ?=
+ =?utf-8?B?Z3Z6QWZVMVkvWmU3Rkc3YUQxWStQSkJVcUlFTDBieE1TeXFyNDFwZVVna2xx?=
+ =?utf-8?Q?xoOeWVu+3wWBvjhA4tZpZ5cKNh39cRjn?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7053199007); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NUNKekp3Y1pNQkNacE9pWHp4VFBiNlRCUG1vdFBBd0NjTy9mYTl5cjAveS9s?=
+ =?utf-8?B?ckxRWEwrcXNYc2xmeWw2alJDMFh4U3l1UGFOYitZMlFob0I3cEdrbmgwR0sz?=
+ =?utf-8?B?S3lUUHMxcWx2WHYvZ2hDZWhwVTdMallDL3NHNGxJdG5kN1hKWmYwcUkvajgr?=
+ =?utf-8?B?YnF3Y2hrbHQvU2h2Y1l6YjlGRXoyeURJU3JBTFA3SVkxNEV2d3phUGsvSkpU?=
+ =?utf-8?B?NnNxekE5TXR1WTZ3OG1kc0JXU2dyWU14MWp1TWVnK0RCYjFWU1dJR0Fvc1Qw?=
+ =?utf-8?B?NUpNNXhtUWdXWHRFc3hHVFZHeFNkV01YdkZqU2JCY0dnaVBpbHJJUjBDSmhY?=
+ =?utf-8?B?QkEyQXZSQkdlSzdzRk5ITHUzamtWZHMwNE94R3NWSCtSOVBzTEE2NjBUeGEz?=
+ =?utf-8?B?SUJYR0FicVVoOFpENm50d1lEZ2NGcSsrd3pJYXJKVkJjQVJIcHU5TkwzV1JR?=
+ =?utf-8?B?WFcwN1RJRzhZKzhhUEJLNGMvUXpiSGtSSnBzUE1ybmVJRkRXa3VjVEhtSDcx?=
+ =?utf-8?B?MjM5SEpoZUd2L1pXeHpwV1U3NWVrQXZOM254MC85VXRqNnk2Sll6bVZkSmF6?=
+ =?utf-8?B?Q2t3empYbnBESXAyU2grOUIxdEFNRmZhMDFyTHBsOStuOU1GZEpodWI3TkdX?=
+ =?utf-8?B?T2pKbTRFYzRzejlwM0QxaUd1MmxlckExSisvdWVyK2g0MnhTMC9pUmgzNDVz?=
+ =?utf-8?B?clovd05yU0xZbE9ITDJYYmlVTHMzT2xUV3g5UGEyek5zRm43ZjNTbTVwbk05?=
+ =?utf-8?B?dytxUjdJNEF4aEN0R1lTQWZFWHNoWGtCZElXcGp2U01aL2JEa09vT0xjWU81?=
+ =?utf-8?B?cE0ydDRRakpTVHhsNHNMVTNpcENUTjZJOFQvV0E1NmpZU1ZlcEFLSiszVUU3?=
+ =?utf-8?B?c1FyT2wyUHI3VUZtd1FtbXlqZFJ1cnAzR0c0anFjb3NXdlRhZUp1MXBYMDg1?=
+ =?utf-8?B?YkdtQjRRV0U4TS96QngzLzBER2tJWjFJcVRKeXRUSSt4MEFmcUUzaFpqRWhn?=
+ =?utf-8?B?T2ZTQnYvdmd0QUQ0aGMzQ2hjTDgvT24xdXZ1U2hveDBxUUdRSktwY2wzQXE3?=
+ =?utf-8?B?aEJ2MkdyK1U1b3pnbGgzRzBvdkc4QlBJNmkwRnFnOW9yUDNjOGRlUGhHeG43?=
+ =?utf-8?B?NnBHcWV2U0hZeW13Z3VrL3Rpd1Y0U0FSOGRtdnErWEpueGZLdXNWVzN6VU5J?=
+ =?utf-8?B?bEpLYkxHTXpUWkJXZElFQVF6WklyK01jcDhFbXZGN05yT2I1MEsvblY4dlVx?=
+ =?utf-8?B?NFF1WUszdERPeVRXMnovZ2tjYTFUV2kwUFdwVzJ1L0lDYXlEUEUrT0FLS3Ew?=
+ =?utf-8?B?WnI2cDF1MktnbFFEY0VJQVhudWZONCtzN3dtQzlCczl5dDN2U0FtVmkyYW9S?=
+ =?utf-8?B?LzZjb2sxRDRhbFNJSjJ4K1JpSDdtYkRYMzduZEpRN2pxbFBYSjZxTmd0VTNr?=
+ =?utf-8?B?VEVnYjJQaUh0WXViTEMwU1lRdkZCL0FSZldhanZIelV2dzdhVGN4T0JyTHRY?=
+ =?utf-8?B?c0I4UFNYWmJCMUtkZnFiYWxIZ3JPVXQ2OVlaZHFkbTk5bHV4S2hnaXBwcXRn?=
+ =?utf-8?B?R0hSWW9FQ1ZxRit5Sm5GKzBuNFdZbUxRQUNGSHJwUXhwM1oxWS9MMjZFT3Rh?=
+ =?utf-8?B?OFdONE1IVVNSZjc5YlVWZy9tNXY5OU5HVkVSaFRIODAwN1NGMEF4L0dCdkFv?=
+ =?utf-8?B?NkN1QWRKS2tjOE9DckJnL3M2REJJa3pKeEV4WHEwOFZzTnNaaGtkUTBINUNB?=
+ =?utf-8?B?SzdxNjBkVVI3aEc3c0EveGxManhwbmduSGtEQnhtVmtqcVBWc1NZdFJ1QU5n?=
+ =?utf-8?B?RTVYNyt4Ky9ub003UjluSGN5VGFIWG4wSXlibjlpWFhhQlpuTGYzQ1VmbDNJ?=
+ =?utf-8?B?VWtpLzNBNWNWMzh1WFRWMmlRQzNoSk13bGlLOUovR3BEYVM5MjdxMkFjRzdn?=
+ =?utf-8?B?c0djZHBMeTRPMGsxcC8yWVdTdGlWZk5TREQvOHFUWjdyU2czdFRpMWp6NEEv?=
+ =?utf-8?B?UWpLczE1dlZWTnhCVmtpU0xOQjNmUFdTSWxSeUErMm1LRXM1b3BUc0hhSk5B?=
+ =?utf-8?B?bG5GTEVzcHYwbW1qRGlCYWR5eWgvZG0wbzJVMEtGUXdnVDVRWWlpc2FIT3Nn?=
+ =?utf-8?Q?b0vwV7+e1CGgYKt/lUMZvX2KX?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45aaa610-0f7c-401d-b998-08de34f2e817
+X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2025 18:11:41.4971 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: h90WUGtmVMm/1DKEVNttojdnqRa/KZX1mNM9Pj08PdQw+TMBfo8tb7MgoYD1ZsI5WIKTzLvOa9mvktrhxDSq+g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8P195MB0485
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,62 +184,65 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oJ4zV3VlFhY5oz/0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 17, 2025 at 10:39:54AM +0100, yegorslists@googlemail.com wrote:
+On 12/6/25 2:27 PM, Primoz Fiser wrote:
+> Hi Wadim,
+> 
+> On 5. 12. 25 16:40, Wadim Egorov wrote:
+>>
+>>
+>> On 12/5/25 1:10 PM, Primoz Fiser wrote:
+>>> Set boot_targets environment variable dynamically, so that when booting
+>>> from SD-card, boot binaries are also preferably fetched from the SD-card
+>>> by default. If the user decides to set their own boot_targets, we should
+>>> not overwrite them.
+>>>
+>>> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+>>> ---
+>>> Changes in v2:
+>>> - no changes
+>>> Link to v1: https://lore.kernel.org/all/20251204080744.3868067-2- 
+>>> primoz.fiser@norik.com/
+>>>
+>>>   board/phytec/phycore_imx93/phycore-imx93.c | 2 ++
+>>>   1 file changed, 2 insertions(+)
+>>>
+>>> diff --git a/board/phytec/phycore_imx93/phycore-imx93.c b/board/ 
+>>> phytec/phycore_imx93/phycore-imx93.c
+>>> index c6a4e923b074..cfc6d91f20f2 100644
+>>> --- a/board/phytec/phycore_imx93/phycore-imx93.c
+>>> +++ b/board/phytec/phycore_imx93/phycore-imx93.c
+>>> @@ -38,6 +38,8 @@ int board_late_init(void)
+>>>       switch (get_boot_device()) {
+>>>       case SD2_BOOT:
+>>>           env_set_ulong("mmcdev", 1);
+>>> +        if (!env_get("boot_targets"))
+>>> +            env_set("boot_targets", "mmc1 mmc0 ethernet");
+>>
+>> I guess you don't define boot_targets in your env so you don't need to 
+>> check for default env here?
+> 
+> This check ensures that if the user manually defines boot_targets in the
+> environment, we don’t overwrite it, as described in the commit message.
+> 
+> So the intent is to only set boot_targets when it is not already present
+> in the env. This mirrors the behavior Benjamin implemented on the PHYTEC 
+>   i.MX8M boards.
 
-> From: Yegor Yefremov <yegorslists@googlemail.com>
->=20
-> The TI System Controller (TI_SYSC) driver utilizes clock management
-> functions provided by the TI Clock Controller (CLK_TI_CTRL) driver.
->=20
-> Specifically, the TI_SYSC driver relies on the 'ti,syscon' support,
-> which is used to access system registers for tasks like reset control
-> and power management. These operations often involve manipulating
-> clock-gating or reset signals managed by the underlying clock hardware.
->=20
-> Therefore, to ensure that the necessary register access and clock
-> manipulation functions are available for the System Controller
-> operations, CLK_TI_CTRL must be selected when TI_SYSC is enabled.
->=20
-> Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
-> ---
->  drivers/bus/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/drivers/bus/Kconfig b/drivers/bus/Kconfig
-> index a786fe430e4..05492c63bf0 100644
-> --- a/drivers/bus/Kconfig
-> +++ b/drivers/bus/Kconfig
-> @@ -15,6 +15,7 @@ config TI_SYSC
->  	bool "TI sysc interconnect target module driver"
->  	depends on DM && ARCH_OMAP2PLUS
->  	select CLK
-> +	select CLK_TI_CTRL
->  	help
->  	  Generic driver for Texas Instruments interconnect target module
->  	  found on many TI SoCs.
+OK, thanks for explaining.
 
-This leads to failure to build on:
-igep00x0 sniper am3517_evm omap35_logic omap35_logic_somlv omap3_logic
-omap3_logic_somlv omap3_evm devkit8000 am57xx_evm am57xx_hs_evm
-am57xx_hs_evm_usb dra7xx_evm dra7xx_hs_evm dra7xx_hs_evm_usb
+> 
+> BR,
+> Primoz
+> 
+>>
+>> If so,
+>>
+>> Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
+>>
+>>>           break;
+>>>       case MMC1_BOOT:
+>>>           env_set_ulong("mmcdev", 0);
+>>
+> 
 
---=20
-Tom
-
---oJ4zV3VlFhY5oz/0
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTRqiAAKCRAr4qD1Cr/k
-Cr3wAQD3hGbKZRQciC3fL+MF6X4UQoBHZuIicwNxMB87+zFRSQD/YNrfuR9cJRtg
-KHxaCia1pzakXuvy6SrFCJ7vpeQt6gk=
-=dLWJ
------END PGP SIGNATURE-----
-
---oJ4zV3VlFhY5oz/0--
