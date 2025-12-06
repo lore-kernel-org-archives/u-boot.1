@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6898CD3B7D1
-	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 16:50:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9318AD339BC
+	for <u-boot@archiver.kernel.org>; Sat,  6 Dec 2025 17:40:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B25CD839E4;
-	Sat,  6 Dec 2025 17:50:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CA6A7836D1;
+	Sat,  6 Dec 2025 18:40:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WEBghUhe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KWhlk86e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6002F839F1; Sat,  6 Dec 2025 17:50:40 +0100 (CET)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 6B53683837; Sat,  6 Dec 2025 18:40:37 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4341C837F2
- for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 17:50:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 659668352B
+ for <u-boot@lists.denx.de>; Sat,  6 Dec 2025 18:40:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-657c68a08a7so1620676eaf.1
- for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 08:50:38 -0800 (PST)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7c75387bb27so1392461a34.1
+ for <u-boot@lists.denx.de>; Sat, 06 Dec 2025 09:40:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765039837; x=1765644637; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=HIjwa47F0U311i+SAPHb10UJajmJohT1FBuTRoyaelE=;
- b=WEBghUheCYY9eeyPa44nieE+E45r/PFYlt6rhR2jW/tNETGoPsycBCK51CpQJRjX+d
- 6ga45xzgbB05q3vnzj3dD9xkUa0B7P980j/hq69btSQ4nwlrUXwL50IhmVCfOR0LMDp0
- GZAH8sST74YNxjdqcMhm1IZyJ/FCfOzhgJcy4=
+ d=konsulko.com; s=google; t=1765042830; x=1765647630; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/cZ+uzBDPkPAWe2B6Bwp2WSoqE7O2YZ1/zcj2+r+WeA=;
+ b=KWhlk86ebsa5zMpbrjSWmCK2YLNH1/ODTFRi/oMS7CdjvHARpPTBzJTSwoP1cYGRnl
+ neb2yNAKws6EdcETK2va9Fo3M+Nh9hwHEOokkjt81LEI0Bf6Vs/Lj8Wzd1nta1+PfwYz
+ EEypWOzRVe5DQot6pvn1FEAWfFQfsuD2ydZjk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765039837; x=1765644637;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HIjwa47F0U311i+SAPHb10UJajmJohT1FBuTRoyaelE=;
- b=kjA8vEsI/gX63f+m1wBWOXVVtvD5QtxkTZ7wXOqt0Oo6Itl8fiF7Q2ytFUqm/xrChN
- WXasvlPVmXORiOVry5s1dk19+4q3euyz2jUWG5CgLvNRpKUnbg/+4RBj2M/C658Ds7eK
- XWJJzZUH1XD+dR5KrbxujFQ+7xYNEFl4mdmGQ/1ELg0eexSH3iypQIxI3Gw1AbXMFIS6
- sZ5lZ2h221b7f6vGA+syiGYq4aPbPND+VqgC+maKWwlSPM5rXKG+phvTDS93mRvCp6Jv
- yFU/Yf7kgxwMc+Q2hip1Qn1cxXWK/BEFTY+K1uPHWhSEBW1DONtm5NvEadNhRqnerI07
- 1JlQ==
-X-Gm-Message-State: AOJu0YxUXJMHEhDDsGrEDPHhUmvPk99nwPBdjihuGXDqOx47QcHEhbe2
- hbaCManW2ySxlP22Hx95FmSykwzsRVjuKODz8KKQCpDDMDb6WC0ENdadFcNd03pC50INTQkGP8i
- wPIG988U=
-X-Gm-Gg: ASbGncuGCW6/VS8Nnihb2cWrNtDemu9Bofan+tWJx+MKSrCwYVYT9ZEiYpRAUS9eKCh
- o9hHjJ6g+59igq+VDA8o1KCgfMh7MELyGf8orLYPqfIpL7dgVXHcQGJzvFltrzAXWLxmmTR1Y7a
- VIbEcvc0IG8l/7qpl4qlGoD3rM4EzrxaLVu+TpUj+9+sgn/yhLzHQt4pRB31BoYblPbbGJ9hNeg
- xEENpFjLAxSzN2M/7STQ7zoYCUrQPugAyAsJiH5t86ofEnYK5kzMbzIBieqlZyyptQ0NPqux7fX
- CUj+byAmFKrbb9LcgTai5jT4Q041xGriFSUd9FSh8hEeRDYer4wROliELQEWtzxM2myoYnxoWgt
- ZE23H3FiiojhzgnmWWr0QpcgVMoktPpr6OISlNUuslHuSxPa15Kp7vrQyJdYLRDXrTVlsFK72Ci
- I3Qg5dTPZ+WZL40AitJoRcLBIsGmnZZMCkEQlOi6BqS4ouuZVBNqEI
-X-Google-Smtp-Source: AGHT+IGjQm1cCUSVOIkDvF6LDx0E426iv3tzwIMUJG4Y06sfYmJAyqvTfyv6H75ifMgyNFhXoyOCkw==
-X-Received: by 2002:a05:6820:2299:b0:659:9a49:8f54 with SMTP id
- 006d021491bc7-6599a905cfbmr1171456eaf.25.1765039837013; 
- Sat, 06 Dec 2025 08:50:37 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1765042830; x=1765647630;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/cZ+uzBDPkPAWe2B6Bwp2WSoqE7O2YZ1/zcj2+r+WeA=;
+ b=xIQ6VoxHb5y2rfc1bLATeJiPtZCJJuZw5nZ2f3FUm66ZQIuSOYgdNo1XRvL87kWVVR
+ 8vvsmqgXJpAI339cT0iVrtcJqVNQclofdpygUltWFR7XZVPIp53WJ4FGJQpGNETjdMZS
+ KN01TT2oycaPQUh22HRWp8rZmWLpcDMXvakeKopqDeWFmeiqShq01AuP6bRpI+ZZN1LM
+ 9j0BGsVszfnsUB8JVWWGr+C1Ju8hUxIM7JdhhwlOgK/MVPvoL9tMq5U7G0nLxDwltO8k
+ FqtzVgZ5LFDTxIcUySm6ELZSzXqT7+fpCo0nFW3fE4uuIugJSjhbL1h+gF3xKoBLJQnR
+ UEUg==
+X-Gm-Message-State: AOJu0Yxuj1bFjwutWQJTsbSc6oLsvhui3dzOIuHHElCG7VwfZyTureIu
+ zIjqkZQVC8W/Dfj6BcMTM/C8ga81GNIwz6rrduuVjrYarM1WuXl8sLrIha8UWlHnhUc=
+X-Gm-Gg: ASbGncuu/BUEZEy3rx+G65PQWWs5KQq3lQNNrkAzJsSWc700m5K6kGxnsughjQEtiRT
+ kzQ/V/3EK102hcS/rDxTA7GtGFxfcOwVanfewjTgPHktnaxBdiPb7EBNZ3mhvlsQYLpUHuUXF+y
+ jH+WLSe8ua7WEikNhRdOfGCQFabfLddmIeo+rE2N0qXibBu3k/2r4RxFy5mItdMVER4xNprPnE0
+ sG4BAE6nanPDUA81X5ZqjVsckHlAyRomq7Sv8kZL5+fJrhkTz7gKAC32Qqysf6bGRSJQeVIcCqC
+ lTwk5IqJbtGG92lH36yZgKkPKKxOWMG21thtcXISfXKj9Gl8/qK0ToR9KJp3W0ZzcPpCXGWsvE4
+ D0aa0Mg8nfC+mb3fArzP71osJET4WVSfUIANcbu1xNdTtj5gQdzG4wqAOqkMO1osEloIeG4TxPq
+ TPs7nQ2UlIDnlgDRB2ZQkDIYtzG0Vx91RvFjWfau/pSStPyIYrBZgkTBSRR2ZG
+X-Google-Smtp-Source: AGHT+IHw/PCQtfUZFCpP/fVDiuJMSVbx4RpAriBqmhMVdMHka4wD+McqMiYqBOkL/zJeLPKIGKqo8w==
+X-Received: by 2002:a05:6830:254b:b0:7c7:6e32:dc7f with SMTP id
+ 46e09a7af769-7c970696abcmr1931557a34.0.1765042830035; 
+ Sat, 06 Dec 2025 09:40:30 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6597ef31fcbsm3536661eaf.14.2025.12.06.08.50.35
+ 46e09a7af769-7c95ac85170sm6245180a34.15.2025.12.06.09.40.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Dec 2025 08:50:36 -0800 (PST)
+ Sat, 06 Dec 2025 09:40:29 -0800 (PST)
+Date: Sat, 6 Dec 2025 11:40:27 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH] doc: Update urllib3 version for building
-Date: Sat,  6 Dec 2025 10:50:34 -0600
-Message-ID: <20251206165034.2621363-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: yegorslists@googlemail.com
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] bus: ti-sysc: select CLK_TI_CTRL driver
+Message-ID: <20251206174027.GM303283@bill-the-cat>
+References: <20251117093954.1580394-1-yegorslists@googlemail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="oJ4zV3VlFhY5oz/0"
+Content-Disposition: inline
+In-Reply-To: <20251117093954.1580394-1-yegorslists@googlemail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,27 +96,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The GitHub dependabot tool has reported two "high" priority bugs with
-this package. Update to the patched version.
 
-Reported-by: GitHub dependabot
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
----
- doc/sphinx/requirements.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--oJ4zV3VlFhY5oz/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
-index 8572c15ef68f..dd433e2bb156 100644
---- a/doc/sphinx/requirements.txt
-+++ b/doc/sphinx/requirements.txt
-@@ -24,4 +24,4 @@ sphinxcontrib-jquery==4.1
- sphinxcontrib-jsmath==1.0.1
- sphinxcontrib-qthelp==2.0.0
- sphinxcontrib-serializinghtml==2.0.0
--urllib3==2.5.0
-+urllib3==2.6.0
--- 
-2.43.0
+On Mon, Nov 17, 2025 at 10:39:54AM +0100, yegorslists@googlemail.com wrote:
 
+> From: Yegor Yefremov <yegorslists@googlemail.com>
+>=20
+> The TI System Controller (TI_SYSC) driver utilizes clock management
+> functions provided by the TI Clock Controller (CLK_TI_CTRL) driver.
+>=20
+> Specifically, the TI_SYSC driver relies on the 'ti,syscon' support,
+> which is used to access system registers for tasks like reset control
+> and power management. These operations often involve manipulating
+> clock-gating or reset signals managed by the underlying clock hardware.
+>=20
+> Therefore, to ensure that the necessary register access and clock
+> manipulation functions are available for the System Controller
+> operations, CLK_TI_CTRL must be selected when TI_SYSC is enabled.
+>=20
+> Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+> ---
+>  drivers/bus/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/drivers/bus/Kconfig b/drivers/bus/Kconfig
+> index a786fe430e4..05492c63bf0 100644
+> --- a/drivers/bus/Kconfig
+> +++ b/drivers/bus/Kconfig
+> @@ -15,6 +15,7 @@ config TI_SYSC
+>  	bool "TI sysc interconnect target module driver"
+>  	depends on DM && ARCH_OMAP2PLUS
+>  	select CLK
+> +	select CLK_TI_CTRL
+>  	help
+>  	  Generic driver for Texas Instruments interconnect target module
+>  	  found on many TI SoCs.
+
+This leads to failure to build on:
+igep00x0 sniper am3517_evm omap35_logic omap35_logic_somlv omap3_logic
+omap3_logic_somlv omap3_evm devkit8000 am57xx_evm am57xx_hs_evm
+am57xx_hs_evm_usb dra7xx_evm dra7xx_hs_evm dra7xx_hs_evm_usb
+
+--=20
+Tom
+
+--oJ4zV3VlFhY5oz/0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaTRqiAAKCRAr4qD1Cr/k
+Cr3wAQD3hGbKZRQciC3fL+MF6X4UQoBHZuIicwNxMB87+zFRSQD/YNrfuR9cJRtg
+KHxaCia1pzakXuvy6SrFCJ7vpeQt6gk=
+=dLWJ
+-----END PGP SIGNATURE-----
+
+--oJ4zV3VlFhY5oz/0--
