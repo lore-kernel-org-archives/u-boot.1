@@ -4,61 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E629D2CE17
-	for <u-boot@archiver.kernel.org>; Sun,  7 Dec 2025 09:22:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C995ED2CE17
+	for <u-boot@archiver.kernel.org>; Sun,  7 Dec 2025 11:19:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4499D839AC;
-	Sun,  7 Dec 2025 10:22:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A97D3839D5;
+	Sun,  7 Dec 2025 12:19:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gfjTUKsb";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SKQDXFRA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28915839DF; Sun,  7 Dec 2025 10:22:00 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 7ED87839DD; Sun,  7 Dec 2025 12:19:14 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C62F8397D
- for <u-boot@lists.denx.de>; Sun,  7 Dec 2025 10:21:57 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ by phobos.denx.de (Postfix) with ESMTPS id 76417839B1
+ for <u-boot@lists.denx.de>; Sun,  7 Dec 2025 12:19:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4dPKPZ6DKCz9shw;
- Sun,  7 Dec 2025 10:21:54 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1765099315;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ra6tZ3tUt0y2aSadH5XHEnsWTYJpwG04gDrl1km/F2Q=;
- b=gfjTUKsbzPakSe1VU7Qpj8YTgYEom2dYTuBHIK3xGkFX1He7UAko/n6OXnTIiCdXuvRfXJ
- EUAoY8eWe+I3sFyddNGX9uIUBg4IAg1YKXp0LuCep2HmdjTXkzt//g/DqnbkoOL1JLqvSh
- zNzmHrpla/tstfCoMAmVNRpVN0Lv0W83WH/H1Ik11lxOJMrkd6CEW1o4X0FoQZZZTIiyZ8
- zEzrye/K6S7qW/XQQRxj8pQHjj9bieVP/MsYKaMb+Q2pKNfngG9KvN1foRC57prWjxlw/u
- b8Ku/k9yLLKR8wqi1e/DY0JJldD2JQN/b/xQOAqsjkOoVe1D1XcX8JFGV8dlEw==
-Message-ID: <cb9bcc7b-a59b-4800-8378-d664f82f50b2@mailbox.org>
-Date: Sun, 7 Dec 2025 09:21:38 +0100
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 605083F181
+ for <u-boot@lists.denx.de>; Sun,  7 Dec 2025 11:19:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1765106351;
+ bh=B4lwTdF4vzeCF76/BBbZOi77KUVHY9xkg1qopPPVkNQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=SKQDXFRAWq12aXsJchaxrICOYMzXA3gtfpSVt7DQp9OHayTtPDLRPW+UxLQu626UL
+ EiHxtGtXaTY/uaYr9ztjm8evzZO6w2hlii/lIurWPKGWw1iSbSdZTxtctaL837V4h2
+ 1MU1N5PW4FZNtDu7W05ivc+xTs5ZOmz+DZW1Wr1+BIfIrvAvqLUGHqkwGT01TuqVkv
+ VWJQlC/Me5RYHdSegVtxhZh+xHjiqq4ylbto5l+BwI9HPKgx/hKvJoQCyGgJcRgKYG
+ BKNyGh1LxhWVzHgwXUJYFG/AcMhLUOBCEl7KFHB7FaMPWDVjDcU8PMdQQkMQFTIp+G
+ ayVWxHnU5irc5JpSGWMIhG9cHVG3NFR6qT5X9K/2GHwuFkoWWEYRUdmpaftLbWx7US
+ fPPEiU6Uv1PR9D9wDnLuPt7l0BdkIEI/MeRIrJlwiZF8hL/CQ6Pb2d443IvUJTjq/X
+ aojwTYpen9YYFjsdKEYfVOFTTjhvzQVuHcAd3Bl/ROapFfN66GIqOGqarXcWpRKL3n
+ NDCdcR1GaLt9+FVNN4NXIm0JllsYOCUk61+WuCGMegn1UHnkWeoOCLMf3pNffa5NBh
+ FbEI8EjTOnIKP4KSjFss0Bzoz3pNOv2642stD7KJoh6sHzV4pEsfPoXEd2bVYI60qY
+ w/A50Te8qdiB648vvZUjoSx4=
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-b79fddf8e75so300874866b.3
+ for <u-boot@lists.denx.de>; Sun, 07 Dec 2025 03:19:11 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1765106351; x=1765711151;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B4lwTdF4vzeCF76/BBbZOi77KUVHY9xkg1qopPPVkNQ=;
+ b=CqDg1LLjvFzqeLvIbQNgqXMxJwABy82+rYsyXEpyhiOCz1RN1EWkxREpV+heWm1Hhs
+ THbMeesAIFe8DTXRBvB9irj5X6C1N4VZhGUAqPvPnELNJzxF1wY45PJtUzwtgkw3AxlR
+ +MAWr+aeQozXkkGxmJkybyetMj+JwLY9YFv76jDwx0KL2I9hOc30+/pXxBpRuzjq3Kxv
+ 0KmZWQF3gUv0dP4zA+nAoeiSQdI54eEDeISoBNHvoz07BV4BHKlzuOnuKEfupdQRCuR+
+ Z+bNYCwPchFOgEKL5pLgIkxOPRpOi2Pmv/FQY0GsQqBDeV5xZCK7debtmVBtFEJpzfeV
+ Yr5Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXFPl8sJzTUsJU8Bgnr7YAXy0Nd6a4QkHbsvsafS4w87Izt/VPazVWjuhk74OjJOdROl/R29R0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3th21jgAZQ8ix1yL3z2LisrJwyDmLbTzuY6MGy+upz8VT//AU
+ EW+mo1Ta4O392nvKihIMfASpJ0VS8ffhQytBQqWEuG2NHk5VgRIIe3VRmEpQ7yeAsk7sNONwGms
+ 9hzbr+Qd5Fvtel34Vmm2O+XcE/Zjt2cWtErLlGhdVRl4P59eFPI85I1Pz0gGMGXz/VpmItfw=
+X-Gm-Gg: ASbGncvhSkVbbdCzYuvSkfHF4vCXYfZTtQ96aoL7EBstK0begr2BREq5MB7lw4Wwym6
+ 6gVN5zqPc1K3mO1UPnAh0tk/x2locgm/e+t2c8gHVqbflqu3KNiFaGRki8GEmZ2lCwPKlfrRzQg
+ AXP7bpE9ETqpBZLDJGCAZ2Cb3t5du232uTWMRaQz7Ont7TA/nxuMSc4AqL3zg7/LUgfghYni+My
+ JKlYTSG1NNRes3LuMByP5h54CKb70g60jFHkh7Vcb5WHC1eAOIjjIzNTRLi65ZaBC/q4GGrgOKN
+ lD923CkZMbu0FtxhtHxKzDOoOXOwURT3B7Q1pxv7RP3KXJZZXbRTBGJaAttpeI3iDJvxMmXUVWJ
+ dRjA87wodgxZKiYL8eolTmWVxwNFKX7+YctPixudfb3D1HcqugVLXMYqI3F8jDf9EfOJjHwo2PN
+ Bd
+X-Received: by 2002:a17:907:3c96:b0:b72:6143:60c2 with SMTP id
+ a640c23a62f3a-b7a2455ea89mr487330866b.51.1765106350805; 
+ Sun, 07 Dec 2025 03:19:10 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHm4lTrW0hH7FzCxhpneWr/HNep+n1546m9QrS9Hq+jAlniBKG4VCVaRNLj78aaML7/WIzIFw==
+X-Received: by 2002:a17:907:3c96:b0:b72:6143:60c2 with SMTP id
+ a640c23a62f3a-b7a2455ea89mr487329166b.51.1765106350418; 
+ Sun, 07 Dec 2025 03:19:10 -0800 (PST)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b79f44595ecsm851349366b.2.2025.12.07.03.19.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Dec 2025 03:19:09 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] lib: uuid: add EFI_PARTITION_INFO_PROTOCOL_GUID
+ translation
+Date: Sun,  7 Dec 2025 12:18:45 +0100
+Message-ID: <20251207111845.172933-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Subject: Re: [PULL] Pull request for u-boot next / v2026.04 =
- u-boot-stm32-20251205
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>
-References: <24fc65d7-befb-4e8a-9bd6-46edbf87cfa0@foss.st.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <24fc65d7-befb-4e8a-9bd6-46edbf87cfa0@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 4doo4q3no5ht77ckb79pwchee5ik3w4z
-X-MBO-RS-ID: 6370d8f4b889c7d6b1e
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,13 +118,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/5/25 2:24 PM, Patrice CHOTARD wrote:
+Add support for translating the EFI_PARTITION_INFO_PROTOCOL_GUID
+to a text.
 
-Hi,
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/uuid.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
->        stm32mp: Fix handling of OPTEE in the middle of DRAM
->        ARM: dts: stm32: Fix 512 MiB DRAM settings for DH STM32MP13xx DHCOR SoM
->        ARM: dts: stm32: Add 1 GiB DRAM settings for DH STM32MP13xx DHCOR SoM
->        ARM: stm32: Add missing build of debug UART init code on DH STM32MP1 DHSOM
-Three of these patches are fixes, they should go into master. The 1 GiB 
-support can also go into master.
+diff --git a/lib/uuid.c b/lib/uuid.c
+index e0f8d55438b..0a166320e07 100644
+--- a/lib/uuid.c
++++ b/lib/uuid.c
+@@ -139,6 +139,10 @@ static const struct {
+ 		NULL, "Disk IO",
+ 		EFI_DISK_IO_PROTOCOL_GUID,
+ 	},
++	{
++		NULL, "Partition Info",
++		EFI_PARTITION_INFO_PROTOCOL_GUID,
++	},
+ 	{
+ 		NULL, "Simple File System",
+ 		EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
+-- 
+2.51.0
+
