@@ -4,82 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79EFBD1CDC6
-	for <u-boot@archiver.kernel.org>; Sun,  7 Dec 2025 22:20:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 312A6CEBF88
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 06:20:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A37D83AAD;
-	Sun,  7 Dec 2025 23:19:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1568083971;
+	Mon,  8 Dec 2025 07:20:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TomTW7wK";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65FBA83A5B; Sun,  7 Dec 2025 23:19:48 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A917083981; Mon,  8 Dec 2025 07:20:25 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AEFF8399B
- for <u-boot@lists.denx.de>; Sun,  7 Dec 2025 23:19:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8375E8006D
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 07:20:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7c7660192b0so3149942a34.0
- for <u-boot@lists.denx.de>; Sun, 07 Dec 2025 14:19:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1765145985; x=1765750785; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=/6KHGtZtzjBymZj1TTZ8UuvlwDAY0QyMsQdA/SeZCLw=;
- b=TomTW7wK0xSeuMknrH0mDG741GsJshuQ3xGYJlwjj+WOysn8ipmFA7oVAN951zK7i1
- 6t5+eFrtlhf30xHYA+CVimEgKX2pNidfzRg1xLZw6xrJuIDAmtsOxIJQWfQ1i2N6dt+8
- nUMQq36t7E64n14VDQGpG9C0rYE64mQ7IiRS0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765145985; x=1765750785;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=/6KHGtZtzjBymZj1TTZ8UuvlwDAY0QyMsQdA/SeZCLw=;
- b=Zrj+Dh1M6gKhrVpMtwfyaWf0K168O7TZyHRouB7vjSh/lqanOvNAsq0XJ1ECv3UvWM
- Hr+Syz+xeOwAwRrBc232FyeS82hsv+eXWJYahal6qaGAeBLvygp2QaSAb5guX61PUQF7
- IiP6bgMQDwPmQ7hQA5O0Le7HZRT4c4NO7U5/5YA+Hi+MYWzQXINXyE8yeOrMDFxv15hQ
- 02xFcm58uPbYqF/wcTGR2QuRRRY5yJxuuZ19yHnDrecVkm9mYI7KmlbGMCpZ4M895WaI
- XM6glv9KtPYEYKHsLKdd/ZWt2/YFMwrdoWd7NbQGLy8Vvi8abTqxqwWdihJuBSNQoiHT
- X/ZQ==
-X-Gm-Message-State: AOJu0Yx+RXlZdOdi10s8EI9EbgP75DPYLflStLJOoVsVzEsd1y9/bBAQ
- FLSetTRYp3JvvdBMhVZ4s+jv9Vn6Rl9d6pijKYYnFtC2Qh5OZ6yJDTUCIx/25r2/HsIaaIXhLzL
- KMpjhgtw=
-X-Gm-Gg: ASbGncsG3U6dyc//bpqMgujfu0vXuojUWLLk9Vt+IIVUPzqzo3Jz5C4aY7yNEz79iCG
- M4HWQ/iF+U9I+V74xOmuVXNDpTCxW6E/O9nl22Zb4QIJTXb190X0omRnuSk5N8+VuGc59EritsJ
- XuV6ohllxKMdGDQEPkBwKT5Z1vZY5U2/ImbSIw8zgThOl/13pIWqC78b9JQYEYkk5pk3xnxch8b
- 1IAntVwcFofQDVEDlrqY0rvzShE7o+Ra/2SdaLqCP0VkIMzNFSCigR1q8/OvOW0rXfKWjNdlYek
- vyEphcXa4f1YHnIQi7Z3xpfRPK4ZKFzHyf4Q+v7XTgsjTEaGgZRg5PKRLJIozEd4XsKaUvgHSTL
- EougDp2dZtzz07zhDwM6a9ZU7BYsMhGZCbCC3NdALjFMyMreBzIHSc+wfSuOZnYdzJuOLMxAlI/
- ZIX2I5IwU4nQAu1HsxlFV716fMXZKUpHnaRdC7M1UTE+V+D0+v
-X-Google-Smtp-Source: AGHT+IFFLW99i4N8cMau7M4PPJF+J2fmpQuiPeqWvXv24dxP4m9AsbGNirQ4iwgStst75PDgsWdiuw==
-X-Received: by 2002:a05:6830:4391:b0:7c7:6063:8e02 with SMTP id
- 46e09a7af769-7c97078c055mr2735250a34.6.1765145984974; 
- Sun, 07 Dec 2025 14:19:44 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c95acdb599sm8634803a34.28.2025.12.07.14.19.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Dec 2025 14:19:44 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251126234959.3909571-1-trini@konsulko.com>
-References: <20251126234959.3909571-1-trini@konsulko.com>
-Subject: Re: [for-next PATCH 1/2] Azure: Rework world build to directly use
- the container
-Message-Id: <176514598416.2987146.14484578273077405008.b4-ty@konsulko.com>
-Date: Sun, 07 Dec 2025 16:19:44 -0600
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 5B86JTaC017041
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Mon, 8 Dec 2025 14:19:29 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 8 Dec
+ 2025 14:19:28 +0800
+Date: Mon, 8 Dec 2025 14:19:25 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <ycliang@andestech.com>, <rick@andestech.com>, <conor@kernel.org>,
+ <e@freeshell.de>, <heinrich.schuchardt@canonical.com>
+Subject: [GIT PULL] u-boot-riscv/next
+Message-ID: <aTZt7Xzv6W2M3H8v@swlinux02>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 5B86JTaC017041
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,25 +65,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 26 Nov 2025 17:49:58 -0600, Tom Rini wrote:
+Hi Tom,
 
-> While we had problems historically using buildman inside of a container
-> when invoked directly via Azure, rather than calling docker in our
-> script, that is no longer the case. We can make the job a bit easier to
-> understand by running it more normally. The challenge here is that our
-> container normally runs with an unprivileged user that we have populated
-> tools for and Azure creates and uses a new unprivileged user. Copy what
-> we need over to the new user.
-> 
-> [...]
+The following changes since commit 8e12d6ccb3cfa84dd275a1b852b2a235de0162b0:
 
-Applied to u-boot/next, thanks!
+  Merge patch series "Azure: Rework world build to directly use the container" (2025-12-07 12:53:09 -0600)
 
-[1/2] Azure: Rework world build to directly use the container
-      commit: cf3d4da03f3a51615350f19094023947fd00d08a
-[2/2] Azure: Rework binman testsuite job to directly use the container
-      commit: 57753073c1965d907f1d0fdb22b4e9b55f3ceedf
--- 
-Tom
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
 
+for you to fetch changes up to 2da2c01cd1238e210009c4aea5d429bea431754d:
+
+  configs: starfive: enable wget https (2025-12-08 12:11:06 +0800)
+
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/28674
+----------------------------------------------------------------
+- riscv: Implement private GCC library
+- mpfs: Add MPFS CPU Implementation
+- andes: Stop disabling device tree relocation and some minor fixes
+- sifive: Stop disabling device tree relocation
+- starfive: Cleanup size types and typos
+----------------------------------------------------------------
+Che-Wei Chuang (1):
+      configs: Change default baud rate to 115200
+
+Conor Dooley (2):
+      riscv: create a custom CPU implementation for PolarFire SoC
+      riscv: mpfs: move SoC level options to the CPU Kconfig
+
+E Shattow (4):
+      ram: starfive: drop references to 16GB memory size
+      ram: starfive: use SZ_8G for 8GB memory size
+      ram: starfive: fix typo for unsupported DDR size
+      configs: starfive: enable wget https
+
+Heinrich Schuchardt (2):
+      RISC-V: implement private GCC library
+      test: provide unit tests for the RISC-V private GCC library
+
+Leo Yu-Chi Liang (1):
+      riscv: cpu: Beautify the warning message
+
+Randolph (1):
+      falcon: support booting linux from MMC/Parallel Flash
+
+Tom Rini (2):
+      ae350: Stop disabling device tree relocation
+      sifive-unleashed: Stop disabling device tree relocation
+
+ arch/Kconfig                            |   1 +
+ arch/riscv/Kconfig                      |   1 +
+ arch/riscv/cpu/cpu.c                    |   2 +-
+ arch/riscv/cpu/mpfs/Kconfig             |  33 ++++++++++
+ arch/riscv/cpu/mpfs/Makefile            |   5 ++
+ arch/riscv/cpu/mpfs/dram.c              |  38 ++++++++++++
+ arch/riscv/dts/ae350_32.dts             |   4 +-
+ arch/riscv/dts/ae350_64.dts             |   4 +-
+ arch/riscv/include/asm/arch-mpfs/clk.h  |   8 +++
+ arch/riscv/lib/Makefile                 |   2 +
+ arch/riscv/lib/clz.c                    | 105 ++++++++++++++++++++++++++++++++
+ arch/riscv/lib/ctz.c                    |  95 +++++++++++++++++++++++++++++
+ board/microchip/mpfs_generic/Kconfig    |  24 +-------
+ common/spl/Kconfig                      |   1 +
+ configs/ae350_rv32_defconfig            |   2 +-
+ configs/ae350_rv32_falcon_defconfig     |   2 +-
+ configs/ae350_rv32_falcon_xip_defconfig |   5 +-
+ configs/ae350_rv32_spl_defconfig        |   2 +-
+ configs/ae350_rv32_spl_xip_defconfig    |   2 +-
+ configs/ae350_rv32_xip_defconfig        |   2 +-
+ configs/ae350_rv64_defconfig            |   2 +-
+ configs/ae350_rv64_falcon_defconfig     |   2 +-
+ configs/ae350_rv64_falcon_xip_defconfig |   5 +-
+ configs/ae350_rv64_spl_defconfig        |   2 +-
+ configs/ae350_rv64_spl_xip_defconfig    |   2 +-
+ configs/ae350_rv64_xip_defconfig        |   2 +-
+ configs/starfive_visionfive2_defconfig  |   2 +
+ drivers/ram/starfive/ddrcsr_boot.c      |   3 -
+ drivers/ram/starfive/ddrphy_start.c     |   1 -
+ drivers/ram/starfive/starfive_ddr.c     |   5 +-
+ drivers/ram/starfive/starfive_ddr.h     |   1 -
+ include/configs/ae350.h                 |   1 -
+ include/configs/sifive-unleashed.h      |   1 -
+ lib/Kconfig                             |   2 +-
+ test/lib/Makefile                       |   4 ++
+ test/lib/test_clz.c                     |  53 ++++++++++++++++
+ test/lib/test_ctz.c                     |  53 ++++++++++++++++
+ 37 files changed, 427 insertions(+), 52 deletions(-)
+ create mode 100644 arch/riscv/cpu/mpfs/Kconfig
+ create mode 100644 arch/riscv/cpu/mpfs/Makefile
+ create mode 100644 arch/riscv/cpu/mpfs/dram.c
+ create mode 100644 arch/riscv/include/asm/arch-mpfs/clk.h
+ create mode 100644 arch/riscv/lib/clz.c
+ create mode 100644 arch/riscv/lib/ctz.c
+ create mode 100644 test/lib/test_clz.c
+ create mode 100644 test/lib/test_ctz.c
+
+ Best regards,
+ Leo
