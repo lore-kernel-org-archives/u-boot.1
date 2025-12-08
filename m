@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12159D3B7EA
-	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 19:07:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92E13D3B7E2
+	for <u-boot@archiver.kernel.org>; Mon,  8 Dec 2025 19:07:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ADDE83B4E;
-	Mon,  8 Dec 2025 20:06:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 729D383B86;
+	Mon,  8 Dec 2025 20:06:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QVQY0tjm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qs26e5Tx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B68C983AEE; Mon,  8 Dec 2025 20:06:53 +0100 (CET)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id 2C13983B64; Mon,  8 Dec 2025 20:06:54 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 792CD83A57
- for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 20:06:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B98783B07
+ for <u-boot@lists.denx.de>; Mon,  8 Dec 2025 20:06:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u9m4MA1SzJ+lio5DwFJwe68ddr+g7NopHDR6tssBiCHwX4npSDDZ5uC9rbYZqGiu5V2WHv9D5BSiUZjxiZ991pm7BRcMfcw+/2fl30ywrxFXIA+p9FJ2aoS4CRgNFzHhlMO55Yv7E73VWUq1MHV9ZMv2ImLEGoY2PTGuad2h0kEFwMiCkIb2tpSeuqwk47bLIJ1XpGtMtQvBTVXjXgv70bvbIB1yT/4jh8R3POgc0G7VWTKvnTv4ePv8j4fzXjuT8kgWyoLL0MTVpN//L/Sc0JWwJujSASAGkYpXPHKprozBIAXakvS2C73b1+cVNa7PMpkrtlyH38qMJiBwYjaFsg==
+ b=QrhQDdamTXdN0KFdZ1LFZyAu5Y72AwM940dCdojUlKSttnGu2hMki4xe7YODQMhnHKQUC48VFT1BKfXq8QXBuPcRzV7TC9Sq5Cb+ajGD8nUQDK9G7alRRTGbp3rt0oJxp4xkiGwq4VkPPSbmOiaf4mH/Hft+eayA4D6HUVS8IZhN3NTnNJWzzOQnlLvWqhivX14ZXQ5TE13aY6e7gXBwBl65R8seVeaV9Y3ZyQ5sBAysrUI6QEUEKXsFdGyjJ3vU3ZWdk65bUAbx/41anstwxv/Qr2asMBhkNWUQb8cbtELMrg6+X/zXnNwGcc9HiLh17kyy0Y1/7eFUMMddugxleA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XmVPpU0tLwfRnSkc8PoxmRhOje7RD9MzGU4AlGqvtD8=;
- b=h1n8z4KxC/JTizby8ZYV0nqct2su+6QR2mELm3Z6/fOjto3uaqeL3W+2vkZSR0/aPQNhrYxNLdm+jUtrgzHZgq6yty3fwQcXNqb6PG2UW5e/Cl93qsQVDepssitMR/nRpYTbABVY9uCYlV77S7aft0w92sGdAe27hqsCA0bUO/CIPEsC11C1eiBMgKqfkvS6as0wy41UIyNhkukD3lZtynrQZsXh0JfPRelyqeSo2ZVuI5ks/gc8Wd8iXZJWSAjlf9I/9rJEwtonOL46UhkXaxBn8/jEktwKcKxp8WYM+kni2UkNaGObaUqScgjVYApietk33VatK1cyHFgiw/FeTw==
+ bh=EDJMtNB5hXthR0Tjo0QBHJFiXIDwpddH5HgqaJzUV8U=;
+ b=mUzE/rLLwI3ShnV9DD/ciNtop2GqnPbT5nTf4RC+6S+H/NTA3Ex0D+K9YFPYJazdj4cR7ENeGuEAgHgyw+AkoVMHuCwMxti+FK0WEDQxcvb7QsljR+S5mCOZXZxOw12PSUjr536WIV4JXrhupPZlzfAdW6ih21ZUpkGJSyiRhqkJakLCGocvCgL/fMEYptysm6LIWJkbjACt7Cp5Idxh+aZ3JEdkaESVW5X98EoWhSA5qBd25uyMEc612xF20rpJJLOMOMTkw6VPPXxCQOLdt4S5lErX900mTHwVVqJghmYqM91q0wAu+SeqSiTcH44KvhjBDk8V/G0+ovSj0d+UOg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XmVPpU0tLwfRnSkc8PoxmRhOje7RD9MzGU4AlGqvtD8=;
- b=QVQY0tjmBvBafJbyvPYI1ZZA+Z5+7yeobzh6RJD1+uPOrvYtcgqxNXyAhXf/zj8msk8qDBzR3KQQccBt5U49awYc9bQnbE73arOKksHNnykHb+Par2cjRgku19N5yyYVCKVsdWULU1wZCvQiSYcx5CzjB2JukXEYd5Y5hHvmVt0=
-Received: from SN7PR04CA0031.namprd04.prod.outlook.com (2603:10b6:806:120::6)
- by CYXPR10MB7952.namprd10.prod.outlook.com (2603:10b6:930:d6::10)
+ bh=EDJMtNB5hXthR0Tjo0QBHJFiXIDwpddH5HgqaJzUV8U=;
+ b=qs26e5Tx3dBKsHejFDt2nNo/MATeSJb3QHnT+lBKDH9lcupaw5Lx4ZAaOSNyZJI2fS9K9Bo8+am1PyfZIyYsrv7eGr+vbJBXOb8CblFI2UBm7eCwnGEHv9nYY5af7d/NkCmFFpPa08/2R/mqXnR3JZO2pJnfZ4FAbxyPDIllpCY=
+Received: from SN7PR04CA0052.namprd04.prod.outlook.com (2603:10b6:806:120::27)
+ by DM3PPFF584262A5.namprd10.prod.outlook.com (2603:10b6:f:fc00::c58)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.14; Mon, 8 Dec
- 2025 19:06:43 +0000
+ 2025 19:06:45 +0000
 Received: from SA2PEPF00003AE7.namprd02.prod.outlook.com
- (2603:10b6:806:120:cafe::d0) by SN7PR04CA0031.outlook.office365.com
- (2603:10b6:806:120::6) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:806:120:cafe::c5) by SN7PR04CA0052.outlook.office365.com
+ (2603:10b6:806:120::27) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.14 via Frontend Transport; Mon,
- 8 Dec 2025 19:06:04 +0000
+ 8 Dec 2025 19:06:07 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -60,83 +60,86 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
 Received: from lewvzet200.ext.ti.com (198.47.23.194) by
  SA2PEPF00003AE7.mail.protection.outlook.com (10.167.248.7) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Mon, 8 Dec 2025 19:06:41 +0000
-Received: from DLEE209.ent.ti.com (157.170.170.98) by lewvzet200.ext.ti.com
+ 15.20.9412.4 via Frontend Transport; Mon, 8 Dec 2025 19:06:45 +0000
+Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet200.ext.ti.com
  (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 8 Dec
- 2025 13:06:38 -0600
-Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 13:06:39 -0600
+Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 8 Dec
- 2025 13:06:38 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE208.ent.ti.com
- (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 13:06:39 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 8 Dec 2025 13:06:38 -0600
+ Transport; Mon, 8 Dec 2025 13:06:39 -0600
 Received: from lelvem-mr05.itg.ti.com ([10.249.42.149])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B8J6crC4121137;
- Mon, 8 Dec 2025 13:06:38 -0600
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5B8J6crE4121137;
+ Mon, 8 Dec 2025 13:06:39 -0600
 From: Andrew Davis <afd@ti.com>
 To: Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>, "Simon
  Glass" <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
-Subject: [PATCH 1/4] configs: Remove default malloc length for K3 R5 SPL
-Date: Mon, 8 Dec 2025 13:06:32 -0600
-Message-ID: <20251208190635.2044082-1-afd@ti.com>
+Subject: [PATCH 3/4] spl: Kconfig: k3: Set common default for
+ CUSTOM_SYS_MALLOC items
+Date: Mon, 8 Dec 2025 13:06:34 -0600
+Message-ID: <20251208190635.2044082-3-afd@ti.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20251208190635.2044082-1-afd@ti.com>
+References: <20251208190635.2044082-1-afd@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE7:EE_|CYXPR10MB7952:EE_
-X-MS-Office365-Filtering-Correlation-Id: ed3e5672-bb05-451b-bfd2-08de368cec2f
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE7:EE_|DM3PPFF584262A5:EE_
+X-MS-Office365-Filtering-Correlation-Id: ccf122e6-f276-450e-d966-08de368cee32
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?hz7+XO+fgeq52VuDOfHbagf7bWl4HgtPIjceWsaEhAICdg3y3CXeiVxH7neX?=
- =?us-ascii?Q?QGHLuZS9c71qiRWDQICedCIGUek4RAAE5rXxvGA3aExCg/nZfWg/D7jxjCN9?=
- =?us-ascii?Q?WIUuAUMiWS0CHZ2rtpO8NKhhj3eqByiKqr0WSKNTBRdf8o+dnab6h345D+b1?=
- =?us-ascii?Q?lfuYYap6WgeMeDiuxXRhoM5wtDVdTBeLL8L7C+2S5oCsQekwGkIwl0lAjloi?=
- =?us-ascii?Q?eyOwTMekIR0c2fduLw5z2RfMAfjOURsO/97qS76nZdPfUxCqs4vazaplcT5v?=
- =?us-ascii?Q?LGPkdbC3veeu8n6v2l4798Cq2Ns7unyuv9k8ENF3bbeJXyLHwjLHpM62GbN2?=
- =?us-ascii?Q?SN9i7NhU8MhRjNOTxrmSjZf6nvDfAQWY9yt9Zs3zUjXCy14hZfy+jMmZcqao?=
- =?us-ascii?Q?S9acyoV9u++VsM2M+Iom/SzJtuQdEvFam2BCIlGaIyIaxrJkYCk3mHADXxnt?=
- =?us-ascii?Q?zG09aRLVzoqRH3AiD4EQdQ/GZkV1GRDXgcl8+Dtb5+iLgPL26qAIxkTf09lB?=
- =?us-ascii?Q?Y24sEZ/HQAa+ykdHzYIgbDVPTv2M/I7uNoH3LaLpZDTOEy/cv79DNmBjAzuD?=
- =?us-ascii?Q?f6fVRdviMxbDg51GHFSGfN9gbpD3rNzKTsV5nNvZw4hvHNTep9k6y27YpUpI?=
- =?us-ascii?Q?Weh+kH3rDlff8DbnJ/EeBXDeM8piD7O8TLUubr6QNIilMRtHzTKKxciyJrei?=
- =?us-ascii?Q?jGXVsTusIiBPN36GxCSqMwvngRsS+ZWLeSDGIn/OlXmYU/MGFgmGPbG+Gi9w?=
- =?us-ascii?Q?dHQJ0ZlBqBE3vUKo+yhBFeAuX8PwACi2BTBm38P9jer6W4geWOJxIGnbd83m?=
- =?us-ascii?Q?hzPsfvUZn/X7YngeQhgJ4HxaLOktmSH34fYAt6jU+E3+E8wburlbi6qiejXT?=
- =?us-ascii?Q?QlvMaYX4fnr9F0ETNIYjlP+Qi9BQFTFen3e8TnLZZTP8G7/ZOmuV6vXSVwYz?=
- =?us-ascii?Q?SU0C6jSxxZGy/ec1QvTNjNd7FxLvG8lVZD8XMEjKwliSngHZxr1ApahFFghE?=
- =?us-ascii?Q?VOGvmWG9HzWTiORRNMfoCg3DoA3fiIjZ4K0bwymOG2iMyBoc6KRey85fKMXP?=
- =?us-ascii?Q?fEswG0QXjWp1bHrFI2a6dBd2J2whgTO85jNSDiTcYkMfpdj4hw+v+VvZO1CP?=
- =?us-ascii?Q?5yayUS0gOiGr5EISMYendohO/fmMHFunDoyRrXZKytAzaKmOpsgjJsPnDv95?=
- =?us-ascii?Q?2rD6HYG/B4qTWNrqscI+whaHjMWjFevyM6RM8JA5ZMjUh8BBJ45zRA1qLJpl?=
- =?us-ascii?Q?migfBlvzMNnbhRt4AvOV6tLBNPc12ogyyDInxW8fUYerxDZzUV3MAhmHgAbs?=
- =?us-ascii?Q?5/X2KbjBs63upwOczebsEtLyZTgzptdOCx2uLcSdQVNcxklyBrsFu2ifj/Fx?=
- =?us-ascii?Q?I1kJCbCeS0Rq/+LAxHMR2Q0VT3STo+XatGtvTW+8h+3Vy/L6oOrwYo8aB9TS?=
- =?us-ascii?Q?fh3adgVDcoNXSK9epHOrMXoW68NqjES/168MFF/s0GtO2KHLhLuQbj8DJFA2?=
- =?us-ascii?Q?8l7MxPWK7aVZ2R4yFA2BiUl6fJWSjrvTgIhDY2POV+oeAot9vp8e8OcFQ6tE?=
- =?us-ascii?Q?7LsWvfCwlo+3BvKESgk=3D?=
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?RqtAHCsP5FJt+4L0Ch8vY8mk4+wR58Vm5CiFPGTTiZDlYQ7JYTC4cNcFK01k?=
+ =?us-ascii?Q?BV+zS2iSxUKfe4lQ3WWjHAdxLi23KWA3/Ya/uyuQLNIFujJ7+VQ6NOgHUA/6?=
+ =?us-ascii?Q?cnm0A1rQ2qClWGT6F/D3oXPNse3uURhla93vvV/FsBQLIixcQLVb+eMwbSd0?=
+ =?us-ascii?Q?8c96MAFzj2/ZlSoyPjc6alFgfPUW0gVZbI9ID7KJEnpcd5Aw1En2+SZlJJqS?=
+ =?us-ascii?Q?mEPWggtUR4lHWLzvE++Ww7YOS+0+K8Q1BhEEFc48r5e7cNAIO9B+nWKsMhlo?=
+ =?us-ascii?Q?cWlDX0j/w1afPmYj7QVcgC2GcN4230gsAP9d9wAqPGHj0qDyILeTyzdOQm6n?=
+ =?us-ascii?Q?F5uOLhu8fbd8KD3qa7FcFE81VsXzEcYBpNWjcn7IwXLIvnebFi5UWeC3BZ0x?=
+ =?us-ascii?Q?fgyfOURzJn9ZM/k/mJTQHR7IWItWzwMp4w6CcR0Shr/cL6wA8K0Z9ot+AqHu?=
+ =?us-ascii?Q?VdIYNxR0t6urMRclKZU1WOnkkd0rV0hIl+E+ca+yIuZ6b9mPJCeC8UfFqt2Y?=
+ =?us-ascii?Q?vMNAmfrsZ4Jqwrr6BcMyx1xMx+YTCEVn/22jkfpdQz4/Su+0jfcS68g1YB3H?=
+ =?us-ascii?Q?Jhya29ot7wv7GWqyPXk1THcl7daeqavoKuywmmVYL8d+PJy8nRwf88gU0BOK?=
+ =?us-ascii?Q?BllnkPa2cmjqx6L+zyvAlnGmwbOg29N3UlNkIzzmgkeMnfFtTq6P8fXKaPPd?=
+ =?us-ascii?Q?7rAdaWWoUb0gJL4dAqyrP+8JhNQ+OaLnevpAkui5Fuq3QRUEMkFlz2hIVVaO?=
+ =?us-ascii?Q?xL54TivqsWDrRXeMa6vm8IFR8Oq2K14BEM+8vsYbCNrMmdVJHo7+6AAiZlfK?=
+ =?us-ascii?Q?RPNqyL76lMDsWgAwjn9GNGEVTwrZqxCr8I6DjyIw1MEYabFwintZ1Jkv1q4S?=
+ =?us-ascii?Q?hZOlkTC9707XCWcG56Bez8MSvXMfKJjXcIIH81Ak7AMGDLVRgYBVr9qML+kd?=
+ =?us-ascii?Q?pIbXmKla8i9U3U3hjp/67rULLri81pj8paGqonXuE52uRs5xWxVEITBt+L5w?=
+ =?us-ascii?Q?NURpTlJApSNbxNCPWgP68hi74q+mEMKZeavUhSIFIZoAVJIPncPx/qjndTp3?=
+ =?us-ascii?Q?EHHHNT3J2kRZ4hgJa33Fz1Onxw6sVhcZQG0l25kAvDwYDKychAxraenVnGSu?=
+ =?us-ascii?Q?WO1+SZonO81+aMw+/rUjOjyMAHW6cSJh8+ZhTj63B6TFCUX1MHIQGDu7UQ6P?=
+ =?us-ascii?Q?3YBx0TjRI/qBhQpskyarb8szvexGrx9O/gzqHBEioFGunPy5lpqVyYvzWecQ?=
+ =?us-ascii?Q?IAtVB3f5WmHbdk9zKgNq6tZ9vWtktMQJ6Sit+UGJAng13LfDnqbHMa8TeGzC?=
+ =?us-ascii?Q?R1SJBX9WCk8oADdfkqA3iWzxnV/lhhDg1iAsZc5qJ9DXXChcIG9gtmdgUTeX?=
+ =?us-ascii?Q?lQLr1Uo00F7RETTCwMaf6sXp94Unt1d6tONQJDDP86/CmsKjlstIUMlAjjKF?=
+ =?us-ascii?Q?wiCTdpeeWpOipbpYXtrisgH/FibnZijnygMx3eDihg6vwU+7rSNNRtKc2jRv?=
+ =?us-ascii?Q?hGFQefXYqxL7uHImFX5VXCAyUJzKPwMlt0N5g3RbAX5OZ4HcD+lgxLd8qeiB?=
+ =?us-ascii?Q?SbT4p2ruvXN+uGHuT9k=3D?=
 X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024);
+ CAT:NONE; SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Dec 2025 19:06:41.8520 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ed3e5672-bb05-451b-bfd2-08de368cec2f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Dec 2025 19:06:45.2003 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ccf122e6-f276-450e-d966-08de368cee32
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
  Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE7.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR10MB7952
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPFF584262A5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,64 +156,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These values are already the default, remove them from these defconfigs.
+These are common for all K3 based boards. Add the common values as
+defaults and remove from each board defconfig.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- configs/am62x_evm_r5_ethboot_defconfig      | 1 -
- configs/j722s_evm_r5_ethboot_defconfig      | 1 -
- configs/phycore_am62ax_r5_ethboot_defconfig | 1 -
- configs/phycore_am62x_r5_ethboot_defconfig  | 1 -
- 4 files changed, 4 deletions(-)
+ common/spl/Kconfig                        | 3 +++
+ configs/am62ax_evm_r5_defconfig           | 2 --
+ configs/am62x_beagleplay_r5_defconfig     | 3 ---
+ configs/am62x_evm_r5_defconfig            | 3 ---
+ configs/am64x_evm_r5_defconfig            | 3 ---
+ configs/am65x_evm_r5_defconfig            | 3 ---
+ configs/am65x_evm_r5_usbmsc_defconfig     | 3 ---
+ configs/am69_sk_r5_ethboot_defconfig      | 2 --
+ configs/j7200_evm_r5_defconfig            | 3 ---
+ configs/j721e_beagleboneai64_r5_defconfig | 3 ---
+ configs/j721e_evm_r5_defconfig            | 3 ---
+ configs/j721s2_evm_r5_defconfig           | 3 ---
+ configs/phycore_am62ax_r5_defconfig       | 2 --
+ configs/phycore_am62x_r5_defconfig        | 3 ---
+ configs/phycore_am64x_r5_defconfig        | 3 ---
+ configs/verdin-am62_r5_defconfig          | 3 ---
+ configs/verdin-am62p_r5_defconfig         | 3 ---
+ 17 files changed, 3 insertions(+), 45 deletions(-)
 
-diff --git a/configs/am62x_evm_r5_ethboot_defconfig b/configs/am62x_evm_r5_ethboot_defconfig
-index 5ad4d3f0e5c..c97c4e28fbe 100644
---- a/configs/am62x_evm_r5_ethboot_defconfig
-+++ b/configs/am62x_evm_r5_ethboot_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICEC_TREE="k3-am625-r5-sk"
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_MMC=n
- CONFIG_SPL_BOARD_INIT=y
--CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
- CONFIG_SPL_BSS_MAX_SIZE=0x3100
- CONFIG_SPL_DMA=y
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/j722s_evm_r5_ethboot_defconfig b/configs/j722s_evm_r5_ethboot_defconfig
-index fd58485bff2..68237f7d8c3 100644
---- a/configs/j722s_evm_r5_ethboot_defconfig
-+++ b/configs/j722s_evm_r5_ethboot_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="k3-j722s-r5-evm"
- CONFIG_NET=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_BOARD_INIT=y
--CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
- CONFIG_SPL_DMA=y
- CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_ETH=y
-diff --git a/configs/phycore_am62ax_r5_ethboot_defconfig b/configs/phycore_am62ax_r5_ethboot_defconfig
-index 81a7f5b0784..526d15a0dc5 100644
---- a/configs/phycore_am62ax_r5_ethboot_defconfig
-+++ b/configs/phycore_am62ax_r5_ethboot_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="k3-am62a7-r5-phycore-som-2gb"
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 0411a5edc9f..8e9f88d8c7a 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -489,15 +489,18 @@ config SPL_SYS_MALLOC
+ config SPL_HAS_CUSTOM_MALLOC_START
+ 	bool "For the SPL malloc pool, define a custom starting address"
+ 	depends on SPL_SYS_MALLOC
++	default y if ARCH_K3 && CPU_V7R
  
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_BOARD_INIT=y
--CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
- CONFIG_SPL_BSS_MAX_SIZE=0x3100
- CONFIG_SPL_DMA=y
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/phycore_am62x_r5_ethboot_defconfig b/configs/phycore_am62x_r5_ethboot_defconfig
-index 3bc426821e9..92dd0be647e 100644
---- a/configs/phycore_am62x_r5_ethboot_defconfig
-+++ b/configs/phycore_am62x_r5_ethboot_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="k3-am625-r5-phycore-som-2gb"
+ config SPL_CUSTOM_SYS_MALLOC_ADDR
+ 	hex "SPL malloc addr"
+ 	depends on SPL_HAS_CUSTOM_MALLOC_START
++	default 0x84000000 if ARCH_K3 && CPU_V7R
  
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_BOARD_INIT=y
--CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
+ config SPL_SYS_MALLOC_SIZE
+ 	hex "Size of the SPL malloc pool"
+ 	depends on SPL_SYS_MALLOC
+ 	default 0x800000 if RISCV
++	default 0x1000000 if ARCH_K3 && CPU_V7R
+ 	default 0x100000
+ 
+ config SPL_READ_ONLY
+diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
+index 64886986c42..2586f6cd648 100644
+--- a/configs/am62ax_evm_r5_defconfig
++++ b/configs/am62ax_evm_r5_defconfig
+@@ -36,8 +36,6 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
+index ce503000e4c..223a4ab49e1 100644
+--- a/configs/am62x_beagleplay_r5_defconfig
++++ b/configs/am62x_beagleplay_r5_defconfig
+@@ -41,9 +41,6 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/am62x_evm_r5_defconfig b/configs/am62x_evm_r5_defconfig
+index d42bdf1f074..90be95fd889 100644
+--- a/configs/am62x_evm_r5_defconfig
++++ b/configs/am62x_evm_r5_defconfig
+@@ -43,9 +43,6 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/am64x_evm_r5_defconfig b/configs/am64x_evm_r5_defconfig
+index e1a748de5a9..860ce7bebc9 100644
+--- a/configs/am64x_evm_r5_defconfig
++++ b/configs/am64x_evm_r5_defconfig
+@@ -41,9 +41,6 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
+diff --git a/configs/am65x_evm_r5_defconfig b/configs/am65x_evm_r5_defconfig
+index 6733dcfdd85..510bf306d00 100644
+--- a/configs/am65x_evm_r5_defconfig
++++ b/configs/am65x_evm_r5_defconfig
+@@ -40,9 +40,6 @@ CONFIG_SPL_MAX_SIZE=0x58000
+ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/am65x_evm_r5_usbmsc_defconfig b/configs/am65x_evm_r5_usbmsc_defconfig
+index 37b5c6a43e7..64d528351af 100644
+--- a/configs/am65x_evm_r5_usbmsc_defconfig
++++ b/configs/am65x_evm_r5_usbmsc_defconfig
+@@ -36,9 +36,6 @@ CONFIG_SPL_MAX_SIZE=0x58000
+ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
  CONFIG_SPL_DMA=y
  CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_ETH=y
+diff --git a/configs/am69_sk_r5_ethboot_defconfig b/configs/am69_sk_r5_ethboot_defconfig
+index c85aa72cf04..62cd8f6cf84 100644
+--- a/configs/am69_sk_r5_ethboot_defconfig
++++ b/configs/am69_sk_r5_ethboot_defconfig
+@@ -11,5 +11,3 @@ CONFIG_SPL_NET_VCI_STRING="AM69 U-Boot R5 SPL"
+ CONFIG_TI_AM65_CPSW_NUSS=y
+ CONFIG_TI_I2C_BOARD_DETECT=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
+index 09784f300db..cb87c43311b 100644
+--- a/configs/j7200_evm_r5_defconfig
++++ b/configs/j7200_evm_r5_defconfig
+@@ -40,9 +40,6 @@ CONFIG_SPL_MAX_SIZE=0xc0000
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
+diff --git a/configs/j721e_beagleboneai64_r5_defconfig b/configs/j721e_beagleboneai64_r5_defconfig
+index 50a9d95d7bf..7d607469c59 100644
+--- a/configs/j721e_beagleboneai64_r5_defconfig
++++ b/configs/j721e_beagleboneai64_r5_defconfig
+@@ -38,9 +38,6 @@ CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
+ CONFIG_SPL_MAX_SIZE=0xf59f0
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
+index 52290722686..5ca742db90f 100644
+--- a/configs/j721e_evm_r5_defconfig
++++ b/configs/j721e_evm_r5_defconfig
+@@ -44,9 +44,6 @@ CONFIG_SPL_MAX_SIZE=0xf59f0
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
+index aaf8fd32879..6cf399ed67c 100644
+--- a/configs/j721s2_evm_r5_defconfig
++++ b/configs/j721s2_evm_r5_defconfig
+@@ -45,9 +45,6 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/phycore_am62ax_r5_defconfig b/configs/phycore_am62ax_r5_defconfig
+index 584a6415ca5..e310f247e74 100644
+--- a/configs/phycore_am62ax_r5_defconfig
++++ b/configs/phycore_am62ax_r5_defconfig
+@@ -39,8 +39,6 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/phycore_am62x_r5_defconfig b/configs/phycore_am62x_r5_defconfig
+index 0368d4ef474..2ff3c54f42b 100644
+--- a/configs/phycore_am62x_r5_defconfig
++++ b/configs/phycore_am62x_r5_defconfig
+@@ -44,9 +44,6 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/phycore_am64x_r5_defconfig b/configs/phycore_am64x_r5_defconfig
+index d8117b1c1ae..2f11947b02d 100644
+--- a/configs/phycore_am64x_r5_defconfig
++++ b/configs/phycore_am64x_r5_defconfig
+@@ -44,9 +44,6 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/verdin-am62_r5_defconfig b/configs/verdin-am62_r5_defconfig
+index efba857ad70..6194ab60693 100644
+--- a/configs/verdin-am62_r5_defconfig
++++ b/configs/verdin-am62_r5_defconfig
+@@ -37,9 +37,6 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+diff --git a/configs/verdin-am62p_r5_defconfig b/configs/verdin-am62p_r5_defconfig
+index a8b0e942b61..f5b093059ee 100644
+--- a/configs/verdin-am62p_r5_defconfig
++++ b/configs/verdin-am62p_r5_defconfig
+@@ -37,9 +37,6 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
 -- 
 2.39.2
 
